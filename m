@@ -1,76 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jGkuc-00044n-6B
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Mar 2020 10:52:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33309)
+	id 1jH9uF-0004KZ-U2
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Mar 2020 13:33:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60772)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1jGkua-000443-6M
- for qemu-riscv@nongnu.org; Tue, 24 Mar 2020 10:52:13 -0400
+ (envelope-from <alistair23@gmail.com>) id 1jH9uA-0004Gu-73
+ for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 13:33:27 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1jGkuY-0002b5-SF
- for qemu-riscv@nongnu.org; Tue, 24 Mar 2020 10:52:11 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:36620)
+ (envelope-from <alistair23@gmail.com>) id 1jH9u8-0003uc-It
+ for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 13:33:26 -0400
+Received: from mail-vs1-xe43.google.com ([2607:f8b0:4864:20::e43]:37562)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1jGkuY-0002aR-I6
- for qemu-riscv@nongnu.org; Tue, 24 Mar 2020 10:52:10 -0400
-Received: by mail-pf1-x444.google.com with SMTP id i13so9396635pfe.3
- for <qemu-riscv@nongnu.org>; Tue, 24 Mar 2020 07:52:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=BU+olHEDMA4SWXhPhSUdr47aT74Eb79xNS9MUGXxFYI=;
- b=FWyV2l4C0eRh0krBZFBqrAkVNLPgzkOuMeTQJlVI/JBG2xfQED4mcRbESUMK5yvxqL
- sVSjiMkHSRBK51T1v7rtp06Kmy+sjcPI1QZcDpkt23lVdr647Pwex/Q+bOJ6W9mGmei1
- i9jiwFZZnFE1spRJ7Fc+7b22KFqA3sf3w6CaTd2/4e1HZiMNwvuRQ5kSwaQBD2MepQE3
- MnedyGT8Im+v83aPG3hSNUUruNoe5u4RoilYi5g4EcVe58A5eE+9ISC/xipTnPpXzaUw
- Y2koIw3aB8DvzN9RvbRnZ+Zgkgxi7eixODwHC3Z7j7KpAwfStB8yTBC16+Ks7k3a58Zx
- XUvQ==
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1jH9u5-0003s7-8B; Wed, 25 Mar 2020 13:33:21 -0400
+Received: by mail-vs1-xe43.google.com with SMTP id o3so2051959vsd.4;
+ Wed, 25 Mar 2020 10:33:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ZsXBgE/nquR1hBGoo5Qt4VyuvM4wjz4doEF7+w9MZng=;
+ b=r5pyBb+1hQ9JQOF02T0V1JYOnbY0U7N5YzK4KBrO9GHZSK/hKsuZeiHoHtKbsaaObv
+ XT1+BvcOPYy9OKtDm+hFMaFEZ3ja4jCaeA6QVu6f4+T19zEfbFZn/JB4FGNQvKzDmyFx
+ O6bp1NG5GgYP7/IRb7oV2PVUMmHgVLZbdmV/qtrS1662r7JYtTNqFLL7noPNIiavcAAv
+ jhlitRwR05xcgJoUlVJajryk0JOptpAgtZFz/6/unElvLL/h+cmKJm2n47FULTQnhitJ
+ wVGzwFUmApUx5+v8fd6ZUH4DLxDCGJSaMGvGoT8pqMefw/kjjL7szoatbHScgrrihbrm
+ v0iQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=BU+olHEDMA4SWXhPhSUdr47aT74Eb79xNS9MUGXxFYI=;
- b=ZxHRd+60qSdhr8xGgyC5mLMEYqjyFL8QZiR7wsSR3CWzwNxRmaiC0BCE1VwA0QFRE2
- ELEqRyWnSFMWZmxjunjn9NUDq5FjDg9MWyVU4zhxm9Zv2LEP2PS9s/cXg91LaO+Uf3Br
- UTYKcO07QtddI4TZW1hSfTZeU78JKvpEey8RVcfJcpItZ68eOo4UDAdnPp99QtITxeo2
- J5io4DmBvyJVF4p0+XXu2G4qmNGhPla7ZFLq1H1mMZZqDXg5f+MRdyjZIkPgyzDSfv8/
- 7KdrCTl784/soVdEqfDkuSA9xT22+G3k6Q68/GMixtO8x/DK7vGZg5dDxyxJhVibhoBK
- U/Xw==
-X-Gm-Message-State: ANhLgQ24JkSAGZqwPiT57yeb/jjnh0xbCIkfgIaR7dR/muk+4G/1tlUK
- ozDC2Ngt9rPcyHM0Fo6iBfedOU7bv5c=
-X-Google-Smtp-Source: ADFU+vvG7YxfYdT+qEUqfiNPI2Z6eWyn6O7L/mghIYQYPkxj5MLW45sJhOdQAOyBMkFA4A20vTMLaQ==
-X-Received: by 2002:a05:6a00:8d:: with SMTP id
- c13mr31114563pfj.68.1585061528986; 
- Tue, 24 Mar 2020 07:52:08 -0700 (PDT)
-Received: from [192.168.1.11] (174-21-138-234.tukw.qwest.net. [174.21.138.234])
- by smtp.gmail.com with ESMTPSA id k1sm15182475pgg.56.2020.03.24.07.52.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Mar 2020 07:52:08 -0700 (PDT)
-Subject: Re: [PATCH v5 57/60] target/riscv: vector slide instructions
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
- chihmin.chao@sifive.com, palmer@dabbelt.com
-Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20200312145900.2054-1-zhiwei_liu@c-sky.com>
- <20200312145900.2054-58-zhiwei_liu@c-sky.com>
- <28063df7-bf38-d136-2d32-39651692c4c6@linaro.org>
- <88b87d58-5387-9d0d-b1a0-5705171f2e83@c-sky.com>
- <76b6c079-15b2-08f1-f8e2-570efb6cfae5@linaro.org>
- <a99c100f-4b32-810a-97d7-ee54f5f65cda@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <25b384a0-c1d7-ed5a-94a1-7912e020c8ed@linaro.org>
-Date: Tue, 24 Mar 2020 07:52:06 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ZsXBgE/nquR1hBGoo5Qt4VyuvM4wjz4doEF7+w9MZng=;
+ b=EjYUifd9EIFox4KO4v1zhi/3RT4VNv7QHgrmHm59qLco/ECaWRCDBW4M5NdK5C0Vf2
+ hDvnmIwjXPFZBbGVcC9Q1tr85Yc7yax3jExAApW7KiVo4jVHKpDip+b0HfLIVZ6T0cuw
+ T4MGrzGHrqRrgbFoJF/b1kzDUwsZISQ0J5afacLGMwPGcDCdeU81cPpcLFlCHOxka8SJ
+ dwECXwKdnt89TggVaXQVld/k6w8nzyn8qo5Zb2Wl2W2aJ5CJRVrYOWe4SpePGrHVcdMI
+ CoUG2sc9YDr89Ah9G0e9AztCvTSMv0u1POopIrf1SO1SpsG164KGysXx8tGJHaOpUTlq
+ PxAg==
+X-Gm-Message-State: ANhLgQ1mApU6xUmVseL4ouvBDkx/jolcTS/bpuIAHCGcrG8I50xtOvT+
+ V6wMh3O9f2mmH5JP0wWuvuwdQOQ6P++6Yf61VGo=
+X-Google-Smtp-Source: ADFU+vswEcMye2DlcJSLPEzTX+10tOHkbvDtJklNgZibIe8oBaomZofna3TOftft3VPwm2kO5LQTqy7sf6Vj3PUUwD4=
+X-Received: by 2002:a67:1b81:: with SMTP id b123mr3763523vsb.172.1585157600278; 
+ Wed, 25 Mar 2020 10:33:20 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <a99c100f-4b32-810a-97d7-ee54f5f65cda@c-sky.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
+ <20200317150653.9008-21-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200317150653.9008-21-zhiwei_liu@c-sky.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 25 Mar 2020 10:25:20 -0700
+Message-ID: <CAKmqyKMCtP=rKYgser0V5me6mFgyaFqf1jAHrU0MrF2-1X4Gdg@mail.gmail.com>
+Subject: Re: [PATCH v6 20/61] target/riscv: vector widening integer multiply
+ instructions
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Chih-Min Chao <chihmin.chao@sifive.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com,
+ wxy194768@alibaba-inc.com, guoren@linux.alibaba.com, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::444
+X-Received-From: 2607:f8b0:4864:20::e43
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -82,25 +70,151 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2020 14:52:13 -0000
+X-List-Received-Date: Wed, 25 Mar 2020 17:33:27 -0000
 
-On 3/24/20 3:51 AM, LIU Zhiwei wrote:
->> (3) It would be handy to have TCGv cpu_vl.
-> Do you mean I should define cpu_vl as a global TCG varible like cpu_pc?
-> So that I can check vl==0 in translation time.
+On Tue, Mar 17, 2020 at 8:47 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Yes.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
->> vslide1up.vx:
->>      Ho hum, I forgot about masking.  Some options:
->>      (1) Call a helper just as you did in your original patch.
->>      (2) Call a helper only for !vm, for vm as below.
-> 
-> Sorry, I don't get it why I need a helper for !vm.
-> I think I can  call vslideup w/1 whether !vm or vm, then a store to vd[0].
+Alistair
 
-That's right.  I didn't mean a helper specific to vslide1up, but any helper.
-
-
-r~
+> ---
+>  target/riscv/helper.h                   | 19 +++++++++
+>  target/riscv/insn32.decode              |  6 +++
+>  target/riscv/insn_trans/trans_rvv.inc.c |  8 ++++
+>  target/riscv/vector_helper.c            | 51 +++++++++++++++++++++++++
+>  4 files changed, 84 insertions(+)
+>
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 357f149198..1704b8c512 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -591,3 +591,22 @@ DEF_HELPER_6(vrem_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vrem_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vrem_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vrem_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+> +
+> +DEF_HELPER_6(vwmul_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwmul_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwmul_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwmulu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwmulu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwmulu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwmulsu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwmulsu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwmulsu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vwmul_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwmul_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwmul_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwmulu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwmulu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwmulu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwmulsu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwmulsu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vwmulsu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 7fb8f8fad8..ae7cfa3e28 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -379,6 +379,12 @@ vremu_vv        100010 . ..... ..... 010 ..... 1010111 @r_vm
+>  vremu_vx        100010 . ..... ..... 110 ..... 1010111 @r_vm
+>  vrem_vv         100011 . ..... ..... 010 ..... 1010111 @r_vm
+>  vrem_vx         100011 . ..... ..... 110 ..... 1010111 @r_vm
+> +vwmulu_vv       111000 . ..... ..... 010 ..... 1010111 @r_vm
+> +vwmulu_vx       111000 . ..... ..... 110 ..... 1010111 @r_vm
+> +vwmulsu_vv      111010 . ..... ..... 010 ..... 1010111 @r_vm
+> +vwmulsu_vx      111010 . ..... ..... 110 ..... 1010111 @r_vm
+> +vwmul_vv        111011 . ..... ..... 010 ..... 1010111 @r_vm
+> +vwmul_vx        111011 . ..... ..... 110 ..... 1010111 @r_vm
+>
+>  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+>  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+> diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+> index ed53eaaef5..98df7e2daa 100644
+> --- a/target/riscv/insn_trans/trans_rvv.inc.c
+> +++ b/target/riscv/insn_trans/trans_rvv.inc.c
+> @@ -1472,3 +1472,11 @@ GEN_OPIVX_TRANS(vdivu_vx, opivx_check)
+>  GEN_OPIVX_TRANS(vdiv_vx, opivx_check)
+>  GEN_OPIVX_TRANS(vremu_vx, opivx_check)
+>  GEN_OPIVX_TRANS(vrem_vx, opivx_check)
+> +
+> +/* Vector Widening Integer Multiply Instructions */
+> +GEN_OPIVV_WIDEN_TRANS(vwmul_vv, opivv_widen_check)
+> +GEN_OPIVV_WIDEN_TRANS(vwmulu_vv, opivv_widen_check)
+> +GEN_OPIVV_WIDEN_TRANS(vwmulsu_vv, opivv_widen_check)
+> +GEN_OPIVX_WIDEN_TRANS(vwmul_vx)
+> +GEN_OPIVX_WIDEN_TRANS(vwmulu_vx)
+> +GEN_OPIVX_WIDEN_TRANS(vwmulsu_vx)
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 4fc7a08954..35c6aa8494 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -856,6 +856,18 @@ GEN_VEXT_AMO(vamomaxuw_v_w, uint32_t, uint32_t, idx_w, clearl)
+>  #define OP_SUS_H int16_t, uint16_t, int16_t, uint16_t, int16_t
+>  #define OP_SUS_W int32_t, uint32_t, int32_t, uint32_t, int32_t
+>  #define OP_SUS_D int64_t, uint64_t, int64_t, uint64_t, int64_t
+> +#define WOP_UUU_B uint16_t, uint8_t, uint8_t, uint16_t, uint16_t
+> +#define WOP_UUU_H uint32_t, uint16_t, uint16_t, uint32_t, uint32_t
+> +#define WOP_UUU_W uint64_t, uint32_t, uint32_t, uint64_t, uint64_t
+> +#define WOP_SSS_B int16_t, int8_t, int8_t, int16_t, int16_t
+> +#define WOP_SSS_H int32_t, int16_t, int16_t, int32_t, int32_t
+> +#define WOP_SSS_W int64_t, int32_t, int32_t, int64_t, int64_t
+> +#define WOP_SUS_B int16_t, uint8_t, int8_t, uint16_t, int16_t
+> +#define WOP_SUS_H int32_t, uint16_t, int16_t, uint32_t, int32_t
+> +#define WOP_SUS_W int64_t, uint32_t, int32_t, uint64_t, int64_t
+> +#define WOP_SSU_B int16_t, int8_t, uint8_t, int16_t, uint16_t
+> +#define WOP_SSU_H int32_t, int16_t, uint16_t, int32_t, uint32_t
+> +#define WOP_SSU_W int64_t, int32_t, uint32_t, int64_t, uint64_t
+>
+>  /* operation of two vector elements */
+>  typedef void opivv2_fn(void *vd, void *vs1, void *vs2, int i);
+> @@ -1815,3 +1827,42 @@ GEN_VEXT_VX(vrem_vx_b, 1, 1, clearb)
+>  GEN_VEXT_VX(vrem_vx_h, 2, 2, clearh)
+>  GEN_VEXT_VX(vrem_vx_w, 4, 4, clearl)
+>  GEN_VEXT_VX(vrem_vx_d, 8, 8, clearq)
+> +
+> +/* Vector Widening Integer Multiply Instructions */
+> +RVVCALL(OPIVV2, vwmul_vv_b, WOP_SSS_B, H2, H1, H1, DO_MUL)
+> +RVVCALL(OPIVV2, vwmul_vv_h, WOP_SSS_H, H4, H2, H2, DO_MUL)
+> +RVVCALL(OPIVV2, vwmul_vv_w, WOP_SSS_W, H8, H4, H4, DO_MUL)
+> +RVVCALL(OPIVV2, vwmulu_vv_b, WOP_UUU_B, H2, H1, H1, DO_MUL)
+> +RVVCALL(OPIVV2, vwmulu_vv_h, WOP_UUU_H, H4, H2, H2, DO_MUL)
+> +RVVCALL(OPIVV2, vwmulu_vv_w, WOP_UUU_W, H8, H4, H4, DO_MUL)
+> +RVVCALL(OPIVV2, vwmulsu_vv_b, WOP_SUS_B, H2, H1, H1, DO_MUL)
+> +RVVCALL(OPIVV2, vwmulsu_vv_h, WOP_SUS_H, H4, H2, H2, DO_MUL)
+> +RVVCALL(OPIVV2, vwmulsu_vv_w, WOP_SUS_W, H8, H4, H4, DO_MUL)
+> +GEN_VEXT_VV(vwmul_vv_b, 1, 2, clearh)
+> +GEN_VEXT_VV(vwmul_vv_h, 2, 4, clearl)
+> +GEN_VEXT_VV(vwmul_vv_w, 4, 8, clearq)
+> +GEN_VEXT_VV(vwmulu_vv_b, 1, 2, clearh)
+> +GEN_VEXT_VV(vwmulu_vv_h, 2, 4, clearl)
+> +GEN_VEXT_VV(vwmulu_vv_w, 4, 8, clearq)
+> +GEN_VEXT_VV(vwmulsu_vv_b, 1, 2, clearh)
+> +GEN_VEXT_VV(vwmulsu_vv_h, 2, 4, clearl)
+> +GEN_VEXT_VV(vwmulsu_vv_w, 4, 8, clearq)
+> +
+> +RVVCALL(OPIVX2, vwmul_vx_b, WOP_SSS_B, H2, H1, DO_MUL)
+> +RVVCALL(OPIVX2, vwmul_vx_h, WOP_SSS_H, H4, H2, DO_MUL)
+> +RVVCALL(OPIVX2, vwmul_vx_w, WOP_SSS_W, H8, H4, DO_MUL)
+> +RVVCALL(OPIVX2, vwmulu_vx_b, WOP_UUU_B, H2, H1, DO_MUL)
+> +RVVCALL(OPIVX2, vwmulu_vx_h, WOP_UUU_H, H4, H2, DO_MUL)
+> +RVVCALL(OPIVX2, vwmulu_vx_w, WOP_UUU_W, H8, H4, DO_MUL)
+> +RVVCALL(OPIVX2, vwmulsu_vx_b, WOP_SUS_B, H2, H1, DO_MUL)
+> +RVVCALL(OPIVX2, vwmulsu_vx_h, WOP_SUS_H, H4, H2, DO_MUL)
+> +RVVCALL(OPIVX2, vwmulsu_vx_w, WOP_SUS_W, H8, H4, DO_MUL)
+> +GEN_VEXT_VX(vwmul_vx_b, 1, 2, clearh)
+> +GEN_VEXT_VX(vwmul_vx_h, 2, 4, clearl)
+> +GEN_VEXT_VX(vwmul_vx_w, 4, 8, clearq)
+> +GEN_VEXT_VX(vwmulu_vx_b, 1, 2, clearh)
+> +GEN_VEXT_VX(vwmulu_vx_h, 2, 4, clearl)
+> +GEN_VEXT_VX(vwmulu_vx_w, 4, 8, clearq)
+> +GEN_VEXT_VX(vwmulsu_vx_b, 1, 2, clearh)
+> +GEN_VEXT_VX(vwmulsu_vx_h, 2, 4, clearl)
+> +GEN_VEXT_VX(vwmulsu_vx_w, 4, 8, clearq)
+> --
+> 2.23.0
+>
 
