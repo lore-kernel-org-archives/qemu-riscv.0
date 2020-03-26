@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHaIF-0001uC-Dn
-	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 17:44:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39771)
+	id 1jHaJU-0002yD-7Z
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 17:45:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41839)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1jHaID-0001tn-7F
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:44:02 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1jHaJR-0002tu-Tv
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:45:18 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1jHaIC-0008F2-09
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:44:00 -0400
-Received: from mail-oi1-x241.google.com ([2607:f8b0:4864:20::241]:44578)
+ (envelope-from <peter.maydell@linaro.org>) id 1jHaJQ-0001HE-Qa
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:45:17 -0400
+Received: from mail-ot1-x335.google.com ([2607:f8b0:4864:20::335]:39792)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1jHaIB-0008DI-Pa
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:43:59 -0400
-Received: by mail-oi1-x241.google.com with SMTP id v134so6964392oie.11
- for <qemu-riscv@nongnu.org>; Thu, 26 Mar 2020 14:43:59 -0700 (PDT)
+ id 1jHaJQ-0001FN-Jb
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:45:16 -0400
+Received: by mail-ot1-x335.google.com with SMTP id x11so7629571otp.6
+ for <qemu-riscv@nongnu.org>; Thu, 26 Mar 2020 14:45:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=xvQuM1t+AMalZIyQmGqvVV5WcXOTpPBqjnsxou10UMI=;
- b=cIfWr7+79kzguSu2V3Sa46UNOBIRSKKuTOhRBj75G5/ncXWZgLWn6rHFUcm58jBz4n
- 1NgfoyHMCGsDexQfb4jItOz9nsObsYWhblDWparPVYqQKl7OW40U+KOKc1yqrDzf+hJ2
- U5tPvoCplXbW9n3qzpsn85YX8FM8cRmU3oTG/f5YI84XeUlq1MEJBUw5cAm92XMi5P4T
- FhNnoRWoYb1Ymu8x+uqT2FK0zBNkGv5kvME1PDCjRIsxoYtmPc+cT1lntrSTcjAMOkK+
- yuIyku7CJnusz9cm9VAO480Nr/G+M5MHIyzvIrmFJ//PQl0AtwWEKPXKeUAXB+8I3VvM
- tfWQ==
+ bh=iIJml/paGDft77iresLwu7OhLTxm+EOldnil3k1PySI=;
+ b=RsWHG52B29eyg8Pi3JaQftoGk+yqSXnN4SiIAjTlpSpVDEfJ3SiF03f4swlCr/tpvw
+ uIkPGoFOwrJXKE9wRopdMz+h9sefM3mG7nPP4DS+t77b4gbMkTxE0M1b6jL3kVJB26Wt
+ gImMG0M02OZ/pzbhyGN+RM8dvVydQnmmO0ELke6JSaccOE3TDU0BCLXko0FiWOB7SqQ+
+ So5T1eoEWBERec4c5kbSHY93O7XIVwOKS0Fuj8rdeOJHLeWYnbazADfWzGh7w3yLTjqk
+ kPDf9t9WoGRn1bbRJJ6gtemb7LLHYKvIWkljWaqaBO9I3lRVBWiyFiJKYdOFnJufvLHL
+ 8a8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=xvQuM1t+AMalZIyQmGqvVV5WcXOTpPBqjnsxou10UMI=;
- b=frJD3bacu//Q9iSwBgTE0YXaSPrp6KG5VblGGQcI35teYyS7A/B629MzXJ/84T3oYI
- igkNu9R55Xv4gfbb57E4OXljZy1R9ggVradb3lgpOjOpiTtRQ9LDrsU0uRC4bK00CCxH
- Y2DiBSClxu+8JwYetJIHXkMA+cmBX5Nwf5nxeBMYYd605ly8MRSWGuZszAeVjuOwIhoI
- z66HODB0OxWCTSXlbgr3PwJSyaDietsuXzHKt5BmWz9OLZ99hWQAiqiI5RTZhOJ4UtmH
- E7/nVyyhW2LW75Cr44tkQrcvBXac68B8i/572dVnIBRYg1x/srMSgmL0MvhZ8xAYD8AE
- 2wiw==
-X-Gm-Message-State: ANhLgQ3qTetfdRJQMppwl3lpMZF/zFNmXxROOuLm257reCaxevathkCF
- qIDadeiAM/ODSE0tqGqLKc+lgftzTJpokP9Qvz8qiQ==
-X-Google-Smtp-Source: ADFU+vvC6zBAgiyeYk9FkMwdMbaDEAxouIAgJE1HYNnwchfSRgte/24c0UTVvCmGcnafcpmvKf5O1XPda63WUNjX0GE=
-X-Received: by 2002:a05:6808:8cb:: with SMTP id
- k11mr1766287oij.48.1585259038796; 
- Thu, 26 Mar 2020 14:43:58 -0700 (PDT)
+ bh=iIJml/paGDft77iresLwu7OhLTxm+EOldnil3k1PySI=;
+ b=eaxgRg4IoPgwUlw0IVFNagoKWetcSfQcdL3ybZD2dzWS9v82QWG2flzuk8L/DKZhbD
+ m//dL6ukLcI80HvDuT0V6vuOTSWlJ/Wp2DlXc8KEHu2EBbgzixQZiX0fKj0/kuPx/ZvW
+ k23yIfFVphUanBn577utmLDhv24dQjzx9ms0YuAqTed/9y4nBNe5iEGH7HprYLEfWjy/
+ Ma20PeLBzn8oUoCP9Sz8kG5N1ia/eWrvjtAw7vvoocPoqlG7wSvMAm8UcG9syBkojWH6
+ 9PKzzO8oBjHlaa90iPVXZgWZXJ1WV5yTaEuKxRoblBUWXjJ9UmsjM43Tsl4MKH0MLKZW
+ AVlA==
+X-Gm-Message-State: ANhLgQ2FcPItrpGwSSU4NdPs2NKB0E5MPCvMWiU1fUZDNKKWBbTeBoyU
+ +/pFq5RZA3VqBBSF4ieCrir4OWzotmpo6ZDhZ8tk0w==
+X-Google-Smtp-Source: ADFU+vsZOKy89PpOxSXvQfJ28qeu8o83Grx1B9VLfGc9Splkvxu67PczFwZDjz23f/xm7P5Gha3y4W3uQsHKoV1hWxA=
+X-Received: by 2002:a05:6830:18f4:: with SMTP id
+ d20mr5418119otf.91.1585259115314; 
+ Thu, 26 Mar 2020 14:45:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200325191830.16553-1-f4bug@amsat.org>
- <20200325191830.16553-8-f4bug@amsat.org>
-In-Reply-To: <20200325191830.16553-8-f4bug@amsat.org>
+ <20200325191830.16553-5-f4bug@amsat.org>
+In-Reply-To: <20200325191830.16553-5-f4bug@amsat.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 26 Mar 2020 21:43:47 +0000
-Message-ID: <CAFEAcA8X5_9G8i31A17DxZDagyHoVYQ7Ctsf5n_9weHqGM6ksA@mail.gmail.com>
-Subject: Re: [PATCH-for-5.0 07/12] hw/mips/cps: Add missing error-propagation
- code
+Date: Thu, 26 Mar 2020 21:45:03 +0000
+Message-ID: <CAFEAcA9e8weisrD+2zHsOjGAP0UR513V1mN0RH5VJnd9m5hFqQ@mail.gmail.com>
+Subject: Re: [PATCH-for-5.0 04/12] hw/arm/stm32fx05_soc: Add missing
+ error-propagation code
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: QEMU Developers <qemu-devel@nongnu.org>,
  Alistair Francis <alistair@alistair23.me>, 
@@ -77,7 +77,7 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::241
+X-Received-From: 2607:f8b0:4864:20::335
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -89,7 +89,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2020 21:44:02 -0000
+X-List-Received-Date: Thu, 26 Mar 2020 21:45:19 -0000
 
 On Wed, 25 Mar 2020 at 19:18, Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>=
  wrote:
@@ -104,78 +104,11 @@ cocci \
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > ---
->  hw/mips/cps.c | 52 +++++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 52 insertions(+)
->
+>  hw/arm/stm32f205_soc.c | 4 ++++
+>  hw/arm/stm32f405_soc.c | 4 ++++
+>  2 files changed, 8 insertions(+)
 
->      /* Inter-Thread Communication Unit */
->      if (itu_present) {
->          sysbus_init_child_obj(OBJECT(dev), "itu", &s->itu, sizeof(s->itu=
-),
->                                TYPE_MIPS_ITU);
->          object_property_set_int(OBJECT(&s->itu), 16, "num-fifo", &err);
-> +        if (err) {
-> +            error_propagate(errp, err);
-> +            return;
-> +        }
->          object_property_set_int(OBJECT(&s->itu), 16, "num-semaphores", &=
-err);
-> +        if (err) {
-> +            error_propagate(errp, err);
-> +            return;
-> +        }
->          object_property_set_bool(OBJECT(&s->itu), saar_present, "saar-pr=
-esent",
->                                   &err);
-> +        if (err) {
-> +            error_propagate(errp, err);
-> +            return;
-> +        }
->          if (saar_present) {
->              s->itu.saar =3D &env->CP0_SAAR;
->          }
->          object_property_set_bool(OBJECT(&s->itu), true, "realized", &err=
-);
-> +        if (err) {
-> +            error_propagate(errp, err);
-> +            return;
-> +        }
->          if (err !=3D NULL) {
->              error_propagate(errp, err);
->              return;
->          }
-
-I think Coccinelle has been fooled here by the slightly non-idiomatic
-use of "err !=3D NULL" in the guard and has inserted a duplicate
-check...
-
->          memory_region_add_subregion(&s->container, 0,
->                             sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->itu=
-), 0));
->      }
->
->      /* Cluster Power Controller */
->      sysbus_init_child_obj(OBJECT(dev), "cpc", &s->cpc, sizeof(s->cpc),
->                            TYPE_MIPS_CPC);
->      object_property_set_int(OBJECT(&s->cpc), s->num_vp, "num-vp", &err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_int(OBJECT(&s->cpc), 1, "vp-start-running", &err=
-);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_bool(OBJECT(&s->cpc), true, "realized", &err);
->      if (err !=3D NULL) {
->          error_propagate(errp, err);
->          return;
->      }
-
-...but oddly it gets it right here and in a couple of other cases
-in this patch.
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
 thanks
 -- PMM
