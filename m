@@ -1,53 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHclx-0006RH-7J
-	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 20:22:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55390)
+	id 1jHcly-0006RP-FF
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 20:22:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58455)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <aleksandar.qemu.devel@gmail.com>) id 1jHbJP-00072D-7E
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 18:49:21 -0400
+ (envelope-from <aleksandar.qemu.devel@gmail.com>) id 1jHbLI-0000Sp-Nn
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 18:51:18 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <aleksandar.qemu.devel@gmail.com>) id 1jHbJL-0007Fh-GF
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 18:49:17 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:54679)
+ (envelope-from <aleksandar.qemu.devel@gmail.com>) id 1jHbLG-0000kC-Op
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 18:51:16 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332]:55010)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <aleksandar.qemu.devel@gmail.com>)
- id 1jHbJ7-000774-Qy; Thu, 26 Mar 2020 18:49:02 -0400
-Received: by mail-wm1-x344.google.com with SMTP id c81so9318427wmd.4;
- Thu, 26 Mar 2020 15:49:01 -0700 (PDT)
+ id 1jHbL2-0000TL-9B; Thu, 26 Mar 2020 18:51:00 -0400
+Received: by mail-wm1-x332.google.com with SMTP id c81so9328438wmd.4;
+ Thu, 26 Mar 2020 15:50:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=d1d7pdG/nXLLpqwfmCuYhtfvjUUGRAqtNLtV1+7kQ+s=;
- b=M3YGJ5bY+JzuA1Zw18qApXpuiNBxtk0YOtCdYXLJJMv4ZzFlwDVvR6nNvYfugwCfVk
- eJlg6+cwMP1obO9zmbX8Mu4wW2s2MXFa27IzUxpA+Ccvjfhzw8Jg0z/GJleOi303RNC5
- RH8V4xpAAKib2KkIwj48sJK5BocSKGsF4RnC+shr2+3VWT4wDpxG5DShdGFCngwcXPKW
- Ak2tBDxBGCIr2SCZNfAPc6SoSGXFHDn8h2bod/TBtS6gpuc6Q/vl616+sEdQgVwFTheh
- 0+rUk1V8OsDihv1of4qP/DIiLDAuKeWbdM6BPNvMCCqoC5Y0/NOUR7FRk6ZA0cLYLmmx
- FDDg==
+ :cc; bh=bhTcQqH9tF1B8Clb+MOxQ675dIzJZl4HSKXWL0fidL0=;
+ b=bv95TKr701jZE9PSPU/l1wScN+vW1d+bir4wHxHz1FZqsrP50zwgdq8rqeU1wu6Zz5
+ xECq3WB7FcUqis3UsQg/GbBX21GgpbShHRRYqlcxFjUH+htqzBR1jma2aLYeMyyxFvsh
+ H0MF0zTp/1ML/q+dQ96UY2cGtbXSE/3QO3cGvyAfPa2LLu3WxDlsYfybD1Ql4TsIm46g
+ 2XrA58Awt3NtpyGD9KecuYFiJ0ZOy9V+PhtVQujH/i4wHTbOHbsxN0Rkm6/LkYK3gdkx
+ 8KUTsI5LVxFOXT9COHa9KQ6xV5j2LRIrdsdJhMtNvbuI7P/0tgzvjRF/V1qoJ4w0bM1g
+ bDNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=d1d7pdG/nXLLpqwfmCuYhtfvjUUGRAqtNLtV1+7kQ+s=;
- b=P0slEU/2TbNNVBx2e42cwDPHWmxBny+liWB3QimyKU81TF1qZnG9GUyFLJI5rw1FTt
- 50JB12XxtXJfzVZLLbx7M4Fbwk2EcYU/f25UDy1DI9cwC5CfIlUq5F1wIAYuGjozbREG
- uYVndNQ8zFquVWCt79kdMBvglbJRAsU3/p5teRoGjM+n5laxJefRW27pPmcmiTS8t+YA
- GFvex9Ntt8B9DnPZT344uYmLhNiumJrSoJa2Qlc3L8Dhtu+iS1KHL84alrAT4bFA3++h
- b32E95V/h/e50x8aSYdLjlSkE97xOHVyHQXnLBB71UtrWTwwWH8HTNUMj1A0102YVWMT
- vlvg==
-X-Gm-Message-State: ANhLgQ2dYHLGvTum5FLrsNmBZXOgaZajjcG/VBn7PSY9HJOEyMqLOic7
- grLC6iYTytVEt06O6LMPYSgACYUH/IhxaXWHvPY=
-X-Google-Smtp-Source: ADFU+vuj/RGdzwi0v+5F2iuSe0OUNVguGAf4BgcJchGig3QZU98SreJT4dat8e6++uR6esUB/62MjuX4kRw3/k351NA=
-X-Received: by 2002:a1c:f407:: with SMTP id z7mr2188779wma.36.1585262940330;
- Thu, 26 Mar 2020 15:49:00 -0700 (PDT)
+ bh=bhTcQqH9tF1B8Clb+MOxQ675dIzJZl4HSKXWL0fidL0=;
+ b=lLSmq+pattOGXaGIPRr+s4jgPh8LUz+m2V2ZWBb3HLteAhVRR9GZn2jEbx1xJweLf2
+ ukWPI/ZH6fd5KrvWfHQxfOcebQ3GOVeOr3JSzRbAC+O9iqOJUCPajXpOzHUQy6U+z+Ls
+ Tx5iPY2Q2Rdu46oo5rLXhOhXo9PQMrOD7lxZ1MWVgzDPBeT409PQ0F7hI+9/hHOTcy4D
+ 7kC71xcw74Rd9u5i2XcufNO5EiIk3qRl91WW5GbSACcIZtbH83lNJ6VV8ApKKQ+jPfAU
+ 6yrdp0tUA4Px9oVmkV864fi0dlxUILfhbf9i+TOa0aOcRw4/4D9BN86QOUZeVigeNDOZ
+ EGmQ==
+X-Gm-Message-State: ANhLgQ3H4SAJmBz4ORBCCiVYWnAugHM6Jc8PCIOweQELvcyV+EKREicy
+ MEYcV7sgHGZOXYrqtOxNxXCqNG9aanSTDIUovZw=
+X-Google-Smtp-Source: ADFU+vukP335mXUnyTLUPay5BWNxcZVi6zTZr++/elPeQgti18549Q8/+lHhONcY0EjnoeupA9XmSns35m0VS5Etyms=
+X-Received: by 2002:a5d:65c4:: with SMTP id e4mr5281981wrw.147.1585263057127; 
+ Thu, 26 Mar 2020 15:50:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200325191830.16553-1-f4bug@amsat.org>
- <20200325191830.16553-8-f4bug@amsat.org>
-In-Reply-To: <20200325191830.16553-8-f4bug@amsat.org>
+ <20200325191830.16553-9-f4bug@amsat.org>
+In-Reply-To: <20200325191830.16553-9-f4bug@amsat.org>
 From: Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>
-Date: Fri, 27 Mar 2020 00:48:44 +0200
-Message-ID: <CAHiYmc7_WVkDRWvF8+H3zBrPen6OfTxrOEjjG4dT_PAOJiiM_g@mail.gmail.com>
-Subject: Re: [PATCH-for-5.0 07/12] hw/mips/cps: Add missing error-propagation
- code
+Date: Fri, 27 Mar 2020 00:50:41 +0200
+Message-ID: <CAHiYmc5WNE_044D0eTZnEbe-EfTBD1z0mH=RBOBpv265V7OOUQ@mail.gmail.com>
+Subject: Re: [PATCH-for-5.0 08/12] hw/mips/boston: Add missing
+ error-propagation code
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: QEMU Developers <qemu-devel@nongnu.org>,
  Alistair Francis <alistair@alistair23.me>, 
@@ -68,10 +68,10 @@ Cc: QEMU Developers <qemu-devel@nongnu.org>,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Content-Type: multipart/alternative; boundary="0000000000006f22f805a1c9cac4"
+Content-Type: multipart/alternative; boundary="000000000000654ec605a1c9d17d"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::344
+X-Received-From: 2a00:1450:4864:20::332
 X-Mailman-Approved-At: Thu, 26 Mar 2020 20:22:49 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,9 +84,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2020 22:49:21 -0000
+X-List-Received-Date: Thu, 26 Mar 2020 22:51:19 -0000
 
---0000000000006f22f805a1c9cac4
+--000000000000654ec605a1c9d17d
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -94,198 +94,179 @@ Content-Transfer-Encoding: quoted-printable
 =D0=B5
 =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BE/=D0=BB=D0=B0:
 >
-> Patch created mechanically by running:
+> Running the coccinelle script produced:
 >
 >   $ spatch \
 >     --macro-file scripts/cocci-macro-file.h --include-headers \
 >     --sp-file
 scripts/coccinelle/object_property_missing_error_propagate.cocci \
->     --keep-comments --smpl-spacing --in-place --dir hw
+>     --keep-comments --smpl-spacing --dir hw
+>
+>   [[manual check required: error_propagate() might be missing in
+object_property_set_int() hw/mips/boston.c:462:4]]
+>   [[manual check required: error_propagate() might be missing in
+object_property_set_str() hw/mips/boston.c:460:4]]
+>
+> Since the uses are inside a MachineClass::init() function,
+> directly use &error_fatal instead of error_propagate().
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > ---
->  hw/mips/cps.c | 52 +++++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 52 insertions(+)
+>  hw/mips/boston.c | 17 ++++++-----------
+>  1 file changed, 6 insertions(+), 11 deletions(-)
 >
-> diff --git a/hw/mips/cps.c b/hw/mips/cps.c
-> index 92b9b1a5f6..d682633401 100644
-> --- a/hw/mips/cps.c
-> +++ b/hw/mips/cps.c
-> @@ -68,100 +68,152 @@ static bool cpu_mips_itu_supported(CPUMIPSState
-*env)
->  static void mips_cps_realize(DeviceState *dev, Error **errp)
+> diff --git a/hw/mips/boston.c b/hw/mips/boston.c
+> index 98ecd25e8e..2e821ca7d6 100644
+> --- a/hw/mips/boston.c
+> +++ b/hw/mips/boston.c
+> @@ -425,121 +425,116 @@ xilinx_pcie_init(MemoryRegion *sys_mem, uint32_t
+bus_nr,
+>  static void boston_mach_init(MachineState *machine)
 >  {
->      MIPSCPSState *s =3D MIPS_CPS(dev);
->      CPUMIPSState *env;
->      MIPSCPU *cpu;
->      int i;
->      Error *err =3D NULL;
->      target_ulong gcr_base;
->      bool itu_present =3D false;
->      bool saar_present =3D false;
+>      DeviceState *dev;
+>      BostonState *s;
+> -    Error *err =3D NULL;
+>      MemoryRegion *flash, *ddr_low_alias, *lcd, *platreg;
+>      MemoryRegion *sys_mem =3D get_system_memory();
+>      XilinxPCIEHost *pcie2;
+>      PCIDevice *ahci;
+>      DriveInfo *hd[6];
+>      Chardev *chr;
+>      int fw_size, fit_err;
+>      bool is_64b;
 >
->      for (i =3D 0; i < s->num_vp; i++) {
->          cpu =3D MIPS_CPU(cpu_create(s->cpu_type));
->
->          /* Init internal devices */
->          cpu_mips_irq_init_cpu(cpu);
->          cpu_mips_clock_init(cpu);
->
->          env =3D &cpu->env;
->          if (cpu_mips_itu_supported(env)) {
->              itu_present =3D true;
->              /* Attach ITC Tag to the VP */
->              env->itc_tag =3D mips_itu_get_tag_region(&s->itu);
->              env->itu =3D &s->itu;
->          }
->          qemu_register_reset(main_cpu_reset, cpu);
+>      if ((machine->ram_size % GiB) ||
+>          (machine->ram_size > (2 * GiB))) {
+>          error_report("Memory size must be 1GB or 2GB");
+>          exit(1);
 >      }
 >
->      cpu =3D MIPS_CPU(first_cpu);
->      env =3D &cpu->env;
->      saar_present =3D (bool)env->saarp;
+>      dev =3D qdev_create(NULL, TYPE_MIPS_BOSTON);
+>      qdev_init_nofail(dev);
 >
->      /* Inter-Thread Communication Unit */
->      if (itu_present) {
->          sysbus_init_child_obj(OBJECT(dev), "itu", &s->itu,
-sizeof(s->itu),
->                                TYPE_MIPS_ITU);
->          object_property_set_int(OBJECT(&s->itu), 16, "num-fifo", &err);
-> +        if (err) {
-> +            error_propagate(errp, err);
-> +            return;
-> +        }
->          object_property_set_int(OBJECT(&s->itu), 16, "num-semaphores",
-&err);
-> +        if (err) {
-> +            error_propagate(errp, err);
-> +            return;
-> +        }
->          object_property_set_bool(OBJECT(&s->itu), saar_present,
-"saar-present",
->                                   &err);
-> +        if (err) {
-> +            error_propagate(errp, err);
-> +            return;
-> +        }
->          if (saar_present) {
->              s->itu.saar =3D &env->CP0_SAAR;
->          }
->          object_property_set_bool(OBJECT(&s->itu), true, "realized",
-&err);
-> +        if (err) {
-> +            error_propagate(errp, err);
-> +            return;
-> +        }
->          if (err !=3D NULL) {
->              error_propagate(errp, err);
->              return;
->          }
+>      s =3D BOSTON(dev);
+>      s->mach =3D machine;
 >
->          memory_region_add_subregion(&s->container, 0,
->
-sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->itu), 0));
+>      if (!cpu_supports_cps_smp(machine->cpu_type)) {
+>          error_report("Boston requires CPUs which support CPS");
+>          exit(1);
 >      }
 >
->      /* Cluster Power Controller */
->      sysbus_init_child_obj(OBJECT(dev), "cpc", &s->cpc, sizeof(s->cpc),
->                            TYPE_MIPS_CPC);
->      object_property_set_int(OBJECT(&s->cpc), s->num_vp, "num-vp", &err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_int(OBJECT(&s->cpc), 1, "vp-start-running",
-&err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_bool(OBJECT(&s->cpc), true, "realized", &err);
->      if (err !=3D NULL) {
->          error_propagate(errp, err);
->          return;
->      }
+>      is_64b =3D cpu_supports_isa(machine->cpu_type, ISA_MIPS64);
 >
->      memory_region_add_subregion(&s->container, 0,
+>      sysbus_init_child_obj(OBJECT(machine), "cps", OBJECT(&s->cps),
+>                            sizeof(s->cps), TYPE_MIPS_CPS);
+>      object_property_set_str(OBJECT(&s->cps), machine->cpu_type,
+"cpu-type",
+> -                            &err);
+> -    object_property_set_int(OBJECT(&s->cps), machine->smp.cpus,
+"num-vp", &err);
+> -    object_property_set_bool(OBJECT(&s->cps), true, "realized", &err);
+> -
+> -    if (err !=3D NULL) {
+> -        error_report("%s", error_get_pretty(err));
+> -        exit(1);
+> -    }
+> -
+> +                            &error_fatal);
+> +    object_property_set_int(OBJECT(&s->cps), machine->smp.cpus, "num-vp"=
+,
+> +                            &error_fatal);
+> +    object_property_set_bool(OBJECT(&s->cps), true, "realized",
+&error_fatal);
+>      sysbus_mmio_map_overlap(SYS_BUS_DEVICE(&s->cps), 0, 0, 1);
 >
- sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->cpc), 0));
->
->      /* Global Interrupt Controller */
->      sysbus_init_child_obj(OBJECT(dev), "gic", &s->gic, sizeof(s->gic),
->                            TYPE_MIPS_GIC);
->      object_property_set_int(OBJECT(&s->gic), s->num_vp, "num-vp", &err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_int(OBJECT(&s->gic), 128, "num-irq", &err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_bool(OBJECT(&s->gic), true, "realized", &err);
->      if (err !=3D NULL) {
->          error_propagate(errp, err);
->          return;
->      }
->
->      memory_region_add_subregion(&s->container, 0,
->
- sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->gic), 0));
->
->      /* Global Configuration Registers */
->      gcr_base =3D env->CP0_CMGCRBase << 4;
->
->      sysbus_init_child_obj(OBJECT(dev), "gcr", &s->gcr, sizeof(s->gcr),
->                            TYPE_MIPS_GCR);
->      object_property_set_int(OBJECT(&s->gcr), s->num_vp, "num-vp", &err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_int(OBJECT(&s->gcr), 0x800, "gcr-rev", &err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_int(OBJECT(&s->gcr), gcr_base, "gcr-base", &err)=
+>      flash =3D  g_new(MemoryRegion, 1);
+> -    memory_region_init_rom(flash, NULL, "boston.flash", 128 * MiB, &err)=
 ;
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_link(OBJECT(&s->gcr), OBJECT(&s->gic.mr), "gic",
-&err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_link(OBJECT(&s->gcr), OBJECT(&s->cpc.mr), "cpc",
-&err);
-> +    if (err) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
->      object_property_set_bool(OBJECT(&s->gcr), true, "realized", &err);
->      if (err !=3D NULL) {
->          error_propagate(errp, err);
->          return;
+> +    memory_region_init_rom(flash, NULL, "boston.flash", 128 * MiB,
+> +                           &error_fatal);
+>      memory_region_add_subregion_overlap(sys_mem, 0x18000000, flash, 0);
+>
+>      memory_region_add_subregion_overlap(sys_mem, 0x80000000,
+machine->ram, 0);
+>
+>      ddr_low_alias =3D g_new(MemoryRegion, 1);
+>      memory_region_init_alias(ddr_low_alias, NULL, "boston_low.ddr",
+>                               machine->ram, 0,
+>                               MIN(machine->ram_size, (256 * MiB)));
+>      memory_region_add_subregion_overlap(sys_mem, 0, ddr_low_alias, 0);
+>
+>      xilinx_pcie_init(sys_mem, 0,
+>                       0x10000000, 32 * MiB,
+>                       0x40000000, 1 * GiB,
+>                       get_cps_irq(&s->cps, 2), false);
+>
+>      xilinx_pcie_init(sys_mem, 1,
+>                       0x12000000, 32 * MiB,
+>                       0x20000000, 512 * MiB,
+>                       get_cps_irq(&s->cps, 1), false);
+>
+>      pcie2 =3D xilinx_pcie_init(sys_mem, 2,
+>                               0x14000000, 32 * MiB,
+>                               0x16000000, 1 * MiB,
+>                               get_cps_irq(&s->cps, 0), true);
+>
+>      platreg =3D g_new(MemoryRegion, 1);
+>      memory_region_init_io(platreg, NULL, &boston_platreg_ops, s,
+>                            "boston-platregs", 0x1000);
+>      memory_region_add_subregion_overlap(sys_mem, 0x17ffd000, platreg, 0)=
+;
+>
+>      s->uart =3D serial_mm_init(sys_mem, 0x17ffe000, 2,
+>                               get_cps_irq(&s->cps, 3), 10000000,
+>                               serial_hd(0), DEVICE_NATIVE_ENDIAN);
+>
+>      lcd =3D g_new(MemoryRegion, 1);
+>      memory_region_init_io(lcd, NULL, &boston_lcd_ops, s, "boston-lcd",
+0x8);
+>      memory_region_add_subregion_overlap(sys_mem, 0x17fff000, lcd, 0);
+>
+>      chr =3D qemu_chr_new("lcd", "vc:320x240", NULL);
+>      qemu_chr_fe_init(&s->lcd_display, chr, NULL);
+>      qemu_chr_fe_set_handlers(&s->lcd_display, NULL, NULL,
+>                               boston_lcd_event, NULL, s, NULL, true);
+>
+>      ahci =3D
+pci_create_simple_multifunction(&PCI_BRIDGE(&pcie2->root)->sec_bus,
+>                                             PCI_DEVFN(0, 0),
+>                                             true, TYPE_ICH9_AHCI);
+>      g_assert(ARRAY_SIZE(hd) =3D=3D ahci_get_num_ports(ahci));
+>      ide_drive_get(hd, ahci_get_num_ports(ahci));
+>      ahci_ide_create_devs(ahci, hd);
+>
+>      if (machine->firmware) {
+>          fw_size =3D load_image_targphys(machine->firmware,
+>                                        0x1fc00000, 4 * MiB);
+>          if (fw_size =3D=3D -1) {
+>              error_report("unable to load firmware image '%s'",
+>                            machine->firmware);
+>              exit(1);
+>          }
+>      } else if (machine->kernel_filename) {
+>          fit_err =3D load_fit(&boston_fit_loader, machine->kernel_filenam=
+e,
+s);
+>          if (fit_err) {
+>              error_report("unable to load FIT image");
+>              exit(1);
+>          }
+>
+>          gen_firmware(memory_region_get_ram_ptr(flash) + 0x7c00000,
+>                       s->kernel_entry, s->fdt_base, is_64b);
+>      } else if (!qtest_enabled()) {
+>          error_report("Please provide either a -kernel or -bios
+argument");
+>          exit(1);
 >      }
->
->      memory_region_add_subregion(&s->container, gcr_base,
->
- sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->gcr), 0));
 >  }
 > --
 > 2.21.1
 >
 
-If you remove the duplicate check that Peter spotted:
-
 Reviewed-by: Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>
 
---0000000000006f22f805a1c9cac4
+--000000000000654ec605a1c9d17d
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -294,238 +275,236 @@ Content-Transfer-Encoding: quoted-printable
 ef=3D"mailto:f4bug@amsat.org">f4bug@amsat.org</a>&gt; =D1=98=D0=B5 =D0=BD=
 =D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BE/=D0=BB=D0=B0:<br>
 &gt;<br>
-&gt; Patch created mechanically by running:<br>
+&gt; Running the coccinelle script produced:<br>
 &gt;<br>
 &gt; =C2=A0 $ spatch \<br>
 &gt; =C2=A0 =C2=A0 --macro-file scripts/cocci-macro-file.h --include-header=
 s \<br>
 &gt; =C2=A0 =C2=A0 --sp-file scripts/coccinelle/object_property_missing_err=
 or_propagate.cocci \<br>
-&gt; =C2=A0 =C2=A0 --keep-comments --smpl-spacing --in-place --dir hw<br>
+&gt; =C2=A0 =C2=A0 --keep-comments --smpl-spacing --dir hw<br>
+&gt;<br>
+&gt; =C2=A0 [[manual check required: error_propagate() might be missing in =
+object_property_set_int() hw/mips/boston.c:462:4]]<br>
+&gt; =C2=A0 [[manual check required: error_propagate() might be missing in =
+object_property_set_str() hw/mips/boston.c:460:4]]<br>
+&gt;<br>
+&gt; Since the uses are inside a MachineClass::init() function,<br>
+&gt; directly use &amp;error_fatal instead of error_propagate().<br>
 &gt;<br>
 &gt; Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:f4bug=
 @amsat.org">f4bug@amsat.org</a>&gt;<br>
 &gt; ---<br>
-&gt; =C2=A0hw/mips/cps.c | 52 +++++++++++++++++++++++++++++++++++++++++++++=
-++++++<br>
-&gt; =C2=A01 file changed, 52 insertions(+)<br>
+&gt; =C2=A0hw/mips/boston.c | 17 ++++++-----------<br>
+&gt; =C2=A01 file changed, 6 insertions(+), 11 deletions(-)<br>
 &gt;<br>
-&gt; diff --git a/hw/mips/cps.c b/hw/mips/cps.c<br>
-&gt; index 92b9b1a5f6..d682633401 100644<br>
-&gt; --- a/hw/mips/cps.c<br>
-&gt; +++ b/hw/mips/cps.c<br>
-&gt; @@ -68,100 +68,152 @@ static bool cpu_mips_itu_supported(CPUMIPSState =
-*env)<br>
-&gt; =C2=A0static void mips_cps_realize(DeviceState *dev, Error **errp)<br>
+&gt; diff --git a/hw/mips/boston.c b/hw/mips/boston.c<br>
+&gt; index 98ecd25e8e..2e821ca7d6 100644<br>
+&gt; --- a/hw/mips/boston.c<br>
+&gt; +++ b/hw/mips/boston.c<br>
+&gt; @@ -425,121 +425,116 @@ xilinx_pcie_init(MemoryRegion *sys_mem, uint32=
+_t bus_nr,<br>
+&gt; =C2=A0static void boston_mach_init(MachineState *machine)<br>
 &gt; =C2=A0{<br>
-&gt; =C2=A0 =C2=A0 =C2=A0MIPSCPSState *s =3D MIPS_CPS(dev);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0CPUMIPSState *env;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0MIPSCPU *cpu;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0int i;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0Error *err =3D NULL;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0target_ulong gcr_base;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0bool itu_present =3D false;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0bool saar_present =3D false;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0DeviceState *dev;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0BostonState *s;<br>
+&gt; -=C2=A0 =C2=A0 Error *err =3D NULL;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0MemoryRegion *flash, *ddr_low_alias, *lcd, *platre=
+g;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0MemoryRegion *sys_mem =3D get_system_memory();<br>
+&gt; =C2=A0 =C2=A0 =C2=A0XilinxPCIEHost *pcie2;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0PCIDevice *ahci;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0DriveInfo *hd[6];<br>
+&gt; =C2=A0 =C2=A0 =C2=A0Chardev *chr;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0int fw_size, fit_err;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0bool is_64b;<br>
 &gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0for (i =3D 0; i &lt; s-&gt;num_vp; i++) {<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu =3D MIPS_CPU(cpu_create(s-&gt;cp=
-u_type));<br>
+&gt; =C2=A0 =C2=A0 =C2=A0if ((machine-&gt;ram_size % GiB) ||<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(machine-&gt;ram_size &gt; (2 * GiB)=
+)) {<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_report(&quot;Memory size must =
+be 1GB or 2GB&quot;);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0exit(1);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0}<br>
 &gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Init internal devices */<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu_mips_irq_init_cpu(cpu);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu_mips_clock_init(cpu);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0dev =3D qdev_create(NULL, TYPE_MIPS_BOSTON);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0qdev_init_nofail(dev);<br>
 &gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0env =3D &amp;cpu-&gt;env;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (cpu_mips_itu_supported(env)) {<b=
+&gt; =C2=A0 =C2=A0 =C2=A0s =3D BOSTON(dev);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0s-&gt;mach =3D machine;<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0if (!cpu_supports_cps_smp(machine-&gt;cpu_type)) {=
+<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_report(&quot;Boston requires C=
+PUs which support CPS&quot;);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0exit(1);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0}<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0is_64b =3D cpu_supports_isa(machine-&gt;cpu_type, =
+ISA_MIPS64);<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0sysbus_init_child_obj(OBJECT(machine), &quot;cps&q=
+uot;, OBJECT(&amp;s-&gt;cps),<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0sizeof(s-&gt;cps), TYPE_MIPS_CPS);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_str(OBJECT(&amp;s-&gt;cps), ma=
+chine-&gt;cpu_type, &quot;cpu-type&quot;,<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;err);<br>
+&gt; -=C2=A0 =C2=A0 object_property_set_int(OBJECT(&amp;s-&gt;cps), machine=
+-&gt;smp.cpus, &quot;num-vp&quot;, &amp;err);<br>
+&gt; -=C2=A0 =C2=A0 object_property_set_bool(OBJECT(&amp;s-&gt;cps), true, =
+&quot;realized&quot;, &amp;err);<br>
+&gt; -<br>
+&gt; -=C2=A0 =C2=A0 if (err !=3D NULL) {<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_report(&quot;%s&quot;, error_get_pr=
+etty(err));<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 exit(1);<br>
+&gt; -=C2=A0 =C2=A0 }<br>
+&gt; -<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;error_fatal);<br>
+&gt; +=C2=A0 =C2=A0 object_property_set_int(OBJECT(&amp;s-&gt;cps), machine=
+-&gt;smp.cpus, &quot;num-vp&quot;,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;error_fatal);<br>
+&gt; +=C2=A0 =C2=A0 object_property_set_bool(OBJECT(&amp;s-&gt;cps), true, =
+&quot;realized&quot;, &amp;error_fatal);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0sysbus_mmio_map_overlap(SYS_BUS_DEVICE(&amp;s-&gt;=
+cps), 0, 0, 1);<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0flash =3D=C2=A0 g_new(MemoryRegion, 1);<br>
+&gt; -=C2=A0 =C2=A0 memory_region_init_rom(flash, NULL, &quot;boston.flash&=
+quot;, 128 * MiB, &amp;err);<br>
+&gt; +=C2=A0 =C2=A0 memory_region_init_rom(flash, NULL, &quot;boston.flash&=
+quot;, 128 * MiB,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0&amp;error_fatal);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion_overlap(sys_mem, 0x180=
+00000, flash, 0);<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion_overlap(sys_mem, 0x800=
+00000, machine-&gt;ram, 0);<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0ddr_low_alias =3D g_new(MemoryRegion, 1);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0memory_region_init_alias(ddr_low_alias, NULL, &quo=
+t;boston_low.ddr&quot;,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 machine-&gt;ram, 0,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MIN(machine-&gt;ram_size, (256 * MiB)));=
+<br>
+&gt; =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion_overlap(sys_mem, 0, dd=
+r_low_alias, 0);<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0xilinx_pcie_init(sys_mem, 0,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 0x10000000, 32 * MiB,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 0x40000000, 1 * GiB,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 get_cps_irq(&amp;s-&gt;cps, 2), false);<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0xilinx_pcie_init(sys_mem, 1,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 0x12000000, 32 * MiB,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 0x20000000, 512 * MiB,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 get_cps_irq(&amp;s-&gt;cps, 1), false);<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0pcie2 =3D xilinx_pcie_init(sys_mem, 2,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x14000000, 32 * MiB,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x16000000, 1 * MiB,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 get_cps_irq(&amp;s-&gt;cps, 0), true);<b=
 r>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0itu_present =3D true;<=
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0platreg =3D g_new(MemoryRegion, 1);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0memory_region_init_io(platreg, NULL, &amp;boston_p=
+latreg_ops, s,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;boston-platregs&quot;, 0x1000);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion_overlap(sys_mem, 0x17f=
+fd000, platreg, 0);<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0s-&gt;uart =3D serial_mm_init(sys_mem, 0x17ffe000,=
+ 2,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 get_cps_irq(&amp;s-&gt;cps, 3), 10000000=
+,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 serial_hd(0), DEVICE_NATIVE_ENDIAN);<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0lcd =3D g_new(MemoryRegion, 1);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0memory_region_init_io(lcd, NULL, &amp;boston_lcd_o=
+ps, s, &quot;boston-lcd&quot;, 0x8);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion_overlap(sys_mem, 0x17f=
+ff000, lcd, 0);<br>
+&gt;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0chr =3D qemu_chr_new(&quot;lcd&quot;, &quot;vc:320=
+x240&quot;, NULL);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0qemu_chr_fe_init(&amp;s-&gt;lcd_display, chr, NULL=
+);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0qemu_chr_fe_set_handlers(&amp;s-&gt;lcd_display, N=
+ULL, NULL,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 boston_lcd_event, NULL, s, NULL, true);<=
 br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Attach ITC Tag to t=
-he VP */<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;itc_tag =3D mi=
-ps_itu_get_tag_region(&amp;s-&gt;itu);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;itu =3D &amp;s=
--&gt;itu;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0qemu_register_reset(main_cpu_reset, =
-cpu);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0}<br>
 &gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0cpu =3D MIPS_CPU(first_cpu);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0env =3D &amp;cpu-&gt;env;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0saar_present =3D (bool)env-&gt;saarp;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0ahci =3D pci_create_simple_multifunction(&amp;PCI_=
+BRIDGE(&amp;pcie2-&gt;root)-&gt;sec_bus,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 PCI_DEVFN(0, 0),<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 true, TYPE_ICH9_AHCI);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0g_assert(ARRAY_SIZE(hd) =3D=3D ahci_get_num_ports(=
+ahci));<br>
+&gt; =C2=A0 =C2=A0 =C2=A0ide_drive_get(hd, ahci_get_num_ports(ahci));<br>
+&gt; =C2=A0 =C2=A0 =C2=A0ahci_ide_create_devs(ahci, hd);<br>
 &gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0/* Inter-Thread Communication Unit */<br>
-&gt; =C2=A0 =C2=A0 =C2=A0if (itu_present) {<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sysbus_init_child_obj(OBJECT(dev), &=
-quot;itu&quot;, &amp;s-&gt;itu, sizeof(s-&gt;itu),<br>
+&gt; =C2=A0 =C2=A0 =C2=A0if (machine-&gt;firmware) {<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fw_size =3D load_image_targphys(mach=
+ine-&gt;firmware,<br>
 &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0TYPE_MIPS_ITU);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0object_property_set_int(OBJECT(&amp;=
-s-&gt;itu), 16, &quot;num-fifo&quot;, &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);=
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0object_property_set_int(OBJECT(&amp;=
-s-&gt;itu), 16, &quot;num-semaphores&quot;, &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);=
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0object_property_set_bool(OBJECT(&amp=
-;s-&gt;itu), saar_present, &quot;saar-present&quot;,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x1fc0=
+0000, 4 * MiB);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (fw_size =3D=3D -1) {<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_report(&quot;una=
+ble to load firmware image &#39;%s&#39;&quot;,<br>
 &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);=
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (saar_present) {<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0s-&gt;itu.saar =3D &am=
-p;env-&gt;CP0_SAAR;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0machine-&gt;firmware);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0exit(1);<br>
 &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0object_property_set_bool(OBJECT(&amp=
-;s-&gt;itu), true, &quot;realized&quot;, &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);=
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (err !=3D NULL) {<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_propagate(errp, =
-err);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
+&gt; =C2=A0 =C2=A0 =C2=A0} else if (machine-&gt;kernel_filename) {<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fit_err =3D load_fit(&amp;boston_fit=
+_loader, machine-&gt;kernel_filename, s);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (fit_err) {<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_report(&quot;una=
+ble to load FIT image&quot;);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0exit(1);<br>
 &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
 &gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion(&amp;s-&=
-gt;container, 0,<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gen_firmware(memory_region_get_ram_p=
+tr(flash) + 0x7c00000,<br>
 &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 sysbus_mmio_get_region(SYS_BUS_DEVICE(&amp;s-&g=
-t;itu), 0));<br>
+=C2=A0 s-&gt;kernel_entry, s-&gt;fdt_base, is_64b);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0} else if (!qtest_enabled()) {<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_report(&quot;Please provide ei=
+ther a -kernel or -bios argument&quot;);<br>
+&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0exit(1);<br>
 &gt; =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0/* Cluster Power Controller */<br>
-&gt; =C2=A0 =C2=A0 =C2=A0sysbus_init_child_obj(OBJECT(dev), &quot;cpc&quot;=
-, &amp;s-&gt;cpc, sizeof(s-&gt;cpc),<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0TYPE_MIPS_CPC);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_int(OBJECT(&amp;s-&gt;cpc), s-=
-&gt;num_vp, &quot;num-vp&quot;, &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_int(OBJECT(&amp;s-&gt;cpc), 1,=
- &quot;vp-start-running&quot;, &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_bool(OBJECT(&amp;s-&gt;cpc), t=
-rue, &quot;realized&quot;, &amp;err);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0if (err !=3D NULL) {<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_propagate(errp, err);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion(&amp;s-&gt;container, =
-0,<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sysbus_mmio_get_region(SYS_BUS_DEVICE(&am=
-p;s-&gt;cpc), 0));<br>
-&gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0/* Global Interrupt Controller */<br>
-&gt; =C2=A0 =C2=A0 =C2=A0sysbus_init_child_obj(OBJECT(dev), &quot;gic&quot;=
-, &amp;s-&gt;gic, sizeof(s-&gt;gic),<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0TYPE_MIPS_GIC);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_int(OBJECT(&amp;s-&gt;gic), s-=
-&gt;num_vp, &quot;num-vp&quot;, &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_int(OBJECT(&amp;s-&gt;gic), 12=
-8, &quot;num-irq&quot;, &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_bool(OBJECT(&amp;s-&gt;gic), t=
-rue, &quot;realized&quot;, &amp;err);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0if (err !=3D NULL) {<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_propagate(errp, err);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion(&amp;s-&gt;container, =
-0,<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sysbus_mmio_get_region(SYS_BUS_DEVICE(&am=
-p;s-&gt;gic), 0));<br>
-&gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0/* Global Configuration Registers */<br>
-&gt; =C2=A0 =C2=A0 =C2=A0gcr_base =3D env-&gt;CP0_CMGCRBase &lt;&lt; 4;<br>
-&gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0sysbus_init_child_obj(OBJECT(dev), &quot;gcr&quot;=
-, &amp;s-&gt;gcr, sizeof(s-&gt;gcr),<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0TYPE_MIPS_GCR);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_int(OBJECT(&amp;s-&gt;gcr), s-=
-&gt;num_vp, &quot;num-vp&quot;, &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_int(OBJECT(&amp;s-&gt;gcr), 0x=
-800, &quot;gcr-rev&quot;, &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_int(OBJECT(&amp;s-&gt;gcr), gc=
-r_base, &quot;gcr-base&quot;, &amp;err);<br>
-&gt; +=C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_link(OBJECT(&amp;s-&gt;gcr), O=
-BJECT(&amp;s-&gt;<a href=3D"http://gic.mr">gic.mr</a>), &quot;gic&quot;, &a=
-mp;err);<br>
-&gt; +=C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_link(OBJECT(&amp;s-&gt;gcr), O=
-BJECT(&amp;s-&gt;<a href=3D"http://cpc.mr">cpc.mr</a>), &quot;cpc&quot;, &a=
-mp;err);<br>
-&gt; +=C2=A0 =C2=A0 if (err) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, err);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; =C2=A0 =C2=A0 =C2=A0object_property_set_bool(OBJECT(&amp;s-&gt;gcr), t=
-rue, &quot;realized&quot;, &amp;err);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0if (err !=3D NULL) {<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_propagate(errp, err);<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;<br>
-&gt; =C2=A0 =C2=A0 =C2=A0memory_region_add_subregion(&amp;s-&gt;container, =
-gcr_base,<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sysbus_mmio_get_region(SYS_BUS_DEVICE(&am=
-p;s-&gt;gcr), 0));<br>
 &gt; =C2=A0}<br>
 &gt; -- <br>
 &gt; 2.21.1<br>
 &gt;<br></p>
-<p dir=3D"ltr">If you remove the duplicate check that Peter spotted:</p>
 <p dir=3D"ltr">Reviewed-by: Aleksandar Markovic &lt;<a href=3D"mailto:aleks=
-andar.qemu.devel@gmail.com">aleksandar.qemu.devel@gmail.com</a>&gt;</p>
+andar.qemu.devel@gmail.com">aleksandar.qemu.devel@gmail.com</a>&gt;<br>
+</p>
 
---0000000000006f22f805a1c9cac4--
+--000000000000654ec605a1c9d17d--
 
