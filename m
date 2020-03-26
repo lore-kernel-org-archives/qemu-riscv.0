@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHaJU-0002yD-7Z
-	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 17:45:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41839)
+	id 1jHaKY-0004Gr-5K
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 17:46:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43429)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1jHaJR-0002tu-Tv
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:45:18 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1jHaKV-0004Bz-A2
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:46:24 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1jHaJQ-0001HE-Qa
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:45:17 -0400
-Received: from mail-ot1-x335.google.com ([2607:f8b0:4864:20::335]:39792)
+ (envelope-from <peter.maydell@linaro.org>) id 1jHaKU-0002Ym-1c
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:46:23 -0400
+Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:43229)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1jHaJQ-0001FN-Jb
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:45:16 -0400
-Received: by mail-ot1-x335.google.com with SMTP id x11so7629571otp.6
- for <qemu-riscv@nongnu.org>; Thu, 26 Mar 2020 14:45:16 -0700 (PDT)
+ id 1jHaKT-0002XB-Sv
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:46:21 -0400
+Received: by mail-ot1-x341.google.com with SMTP id a6so7606043otb.10
+ for <qemu-riscv@nongnu.org>; Thu, 26 Mar 2020 14:46:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=iIJml/paGDft77iresLwu7OhLTxm+EOldnil3k1PySI=;
- b=RsWHG52B29eyg8Pi3JaQftoGk+yqSXnN4SiIAjTlpSpVDEfJ3SiF03f4swlCr/tpvw
- uIkPGoFOwrJXKE9wRopdMz+h9sefM3mG7nPP4DS+t77b4gbMkTxE0M1b6jL3kVJB26Wt
- gImMG0M02OZ/pzbhyGN+RM8dvVydQnmmO0ELke6JSaccOE3TDU0BCLXko0FiWOB7SqQ+
- So5T1eoEWBERec4c5kbSHY93O7XIVwOKS0Fuj8rdeOJHLeWYnbazADfWzGh7w3yLTjqk
- kPDf9t9WoGRn1bbRJJ6gtemb7LLHYKvIWkljWaqaBO9I3lRVBWiyFiJKYdOFnJufvLHL
- 8a8g==
+ bh=rVZuRcHd0GmuI3bIUNO+YkcCkes9OHEppSpMgTRHnBY=;
+ b=sCJH995egRSBc3CgCREQwxEeTRMJ3e0A7kMk1Ocjtro1myFTiqLRSIiV0VDBIVW0Cf
+ rqr3luwSCcaabVUJp0Nd2VnAwmm3Bo+3y26s6RETM4BtB9k5IUsh4RhiBmROmrvQGbTk
+ KWpx3H8wjxJ/fnrr4wDZ1tBd0h6SdUlQSSnnw77dQaAgVFf/ygJhyxOWaKGxpX0Tgg0j
+ oSnhbwZDnyOw7WYP2AxsfGam11rH2TX6hQFhEKz13XBSF0v643xn/IHMFhnHefeKyO65
+ ahS4tGg0XGLVKU6J9TTAfrIFIKjC7vy5N+EhvCVwJPbA4bMoOumpfdWlpR4j0owfnhX3
+ z2UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=iIJml/paGDft77iresLwu7OhLTxm+EOldnil3k1PySI=;
- b=eaxgRg4IoPgwUlw0IVFNagoKWetcSfQcdL3ybZD2dzWS9v82QWG2flzuk8L/DKZhbD
- m//dL6ukLcI80HvDuT0V6vuOTSWlJ/Wp2DlXc8KEHu2EBbgzixQZiX0fKj0/kuPx/ZvW
- k23yIfFVphUanBn577utmLDhv24dQjzx9ms0YuAqTed/9y4nBNe5iEGH7HprYLEfWjy/
- Ma20PeLBzn8oUoCP9Sz8kG5N1ia/eWrvjtAw7vvoocPoqlG7wSvMAm8UcG9syBkojWH6
- 9PKzzO8oBjHlaa90iPVXZgWZXJ1WV5yTaEuKxRoblBUWXjJ9UmsjM43Tsl4MKH0MLKZW
- AVlA==
-X-Gm-Message-State: ANhLgQ2FcPItrpGwSSU4NdPs2NKB0E5MPCvMWiU1fUZDNKKWBbTeBoyU
- +/pFq5RZA3VqBBSF4ieCrir4OWzotmpo6ZDhZ8tk0w==
-X-Google-Smtp-Source: ADFU+vsZOKy89PpOxSXvQfJ28qeu8o83Grx1B9VLfGc9Splkvxu67PczFwZDjz23f/xm7P5Gha3y4W3uQsHKoV1hWxA=
-X-Received: by 2002:a05:6830:18f4:: with SMTP id
- d20mr5418119otf.91.1585259115314; 
- Thu, 26 Mar 2020 14:45:15 -0700 (PDT)
+ bh=rVZuRcHd0GmuI3bIUNO+YkcCkes9OHEppSpMgTRHnBY=;
+ b=BxVT8W/6It7/H9HRcv5OSOSGhUmJPL0GGbVEpj0RU7eMSEWQyMdBy30+0VRMgr+1+L
+ 7G6xttMLy9D5mKixbV2abOXVpxY8Iw5w9Z/6+MP429nUNTTUW3JjGE5c/V5/ZQBhhtn8
+ nuDM3uhPfnRccS8eaUIiUTN397tRNoIEWqp1QIszikFPbiZwELODg6k1V0/XbZyIlYZE
+ 7KOdurlkdPEuQUzyflFjvbJAjCB66MOzo4KnDJPh6UvyTf+I5zEgiiMu/K3T9kSbLgyP
+ QHXmiyfalfNwLmEM2iYT5PPKE7sQiCUSufoiQ+ZF1izgDmK9Z6KmqEt7k838LmZc8GVi
+ XpfQ==
+X-Gm-Message-State: ANhLgQ204KDeuiybpAadpv17fItx7lmkIFn6hKDyKhvS6egAp2Haa4/7
+ BPNTsCI6oZdDQ7p7UheVSPV+AHWEK09TqKzgFnut8A==
+X-Google-Smtp-Source: ADFU+vtsnowzu7TJWuapTCqru0b80QfmWi1zJfj2KLVnmfyKS1vjNS4GUYBAgZtd2s0VDThZWfTEJXgVR5zjiSSwEUY=
+X-Received: by 2002:a05:6830:1f39:: with SMTP id
+ e25mr8142040oth.135.1585259180913; 
+ Thu, 26 Mar 2020 14:46:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200325191830.16553-1-f4bug@amsat.org>
- <20200325191830.16553-5-f4bug@amsat.org>
-In-Reply-To: <20200325191830.16553-5-f4bug@amsat.org>
+ <20200325191830.16553-7-f4bug@amsat.org>
+In-Reply-To: <20200325191830.16553-7-f4bug@amsat.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 26 Mar 2020 21:45:03 +0000
-Message-ID: <CAFEAcA9e8weisrD+2zHsOjGAP0UR513V1mN0RH5VJnd9m5hFqQ@mail.gmail.com>
-Subject: Re: [PATCH-for-5.0 04/12] hw/arm/stm32fx05_soc: Add missing
+Date: Thu, 26 Mar 2020 21:46:09 +0000
+Message-ID: <CAFEAcA8Bb8r-vSWmh97tjnydG9CHS-Kh4qCnU1rAGYF689BEYQ@mail.gmail.com>
+Subject: Re: [PATCH-for-5.0 06/12] hw/dma/xilinx_axidma: Add missing
  error-propagation code
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: QEMU Developers <qemu-devel@nongnu.org>,
@@ -77,7 +77,7 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::335
+X-Received-From: 2607:f8b0:4864:20::341
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -89,26 +89,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2020 21:45:19 -0000
+X-List-Received-Date: Thu, 26 Mar 2020 21:46:24 -0000
 
 On Wed, 25 Mar 2020 at 19:18, Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>=
  wrote:
 >
-> Patch created mechanically by running:
+> Running the coccinelle script produced:
 >
 >   $ spatch \
 >     --macro-file scripts/cocci-macro-file.h --include-headers \
 >     --sp-file scripts/coccinelle/object_property_missing_error_propagate.=
 cocci \
->     --keep-comments --smpl-spacing --in-place --dir hw
+>     --keep-comments --smpl-spacing --dir hw
+>
+>   [[manual check required: error_propagate() might be missing in object_p=
+roperty_set_link() hw//dma/xilinx_axidma.c:542:4]]
+>
+> Add the missing error_propagate() after manual review.
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > ---
->  hw/arm/stm32f205_soc.c | 4 ++++
->  hw/arm/stm32f405_soc.c | 4 ++++
->  2 files changed, 8 insertions(+)
+>  hw/dma/xilinx_axidma.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c
+> index 018f36991b..6e3406321c 100644
+> --- a/hw/dma/xilinx_axidma.c
+> +++ b/hw/dma/xilinx_axidma.c
+> @@ -521,39 +521,42 @@ static const MemoryRegionOps axidma_ops =3D {
+>  static void xilinx_axidma_realize(DeviceState *dev, Error **errp)
+>  {
+>      XilinxAXIDMA *s =3D XILINX_AXI_DMA(dev);
+>      XilinxAXIDMAStreamSlave *ds =3D XILINX_AXI_DMA_DATA_STREAM(&s->rx_da=
+ta_dev);
+>      XilinxAXIDMAStreamSlave *cs =3D XILINX_AXI_DMA_CONTROL_STREAM(
+>                                                              &s->rx_contr=
+ol_dev);
+>      Error *local_err =3D NULL;
+>
+>      object_property_add_link(OBJECT(ds), "dma", TYPE_XILINX_AXI_DMA,
+>                               (Object **)&ds->dma,
+>                               object_property_allow_set_link,
+>                               OBJ_PROP_LINK_STRONG,
+>                               &local_err);
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Isn't there also a check on local_err missing here ?
+
+>      object_property_add_link(OBJECT(cs), "dma", TYPE_XILINX_AXI_DMA,
+>                               (Object **)&cs->dma,
+>                               object_property_allow_set_link,
+>                               OBJ_PROP_LINK_STRONG,
+>                               &local_err);
+>      if (local_err) {
+>          goto xilinx_axidma_realize_fail;
+>      }
+>      object_property_set_link(OBJECT(ds), OBJECT(s), "dma", &local_err);
+> +    if (local_err) {
+> +        goto xilinx_axidma_realize_fail;
+> +    }
+>      object_property_set_link(OBJECT(cs), OBJECT(s), "dma", &local_err);
+>      if (local_err) {
+>          goto xilinx_axidma_realize_fail;
+>      }
 
 thanks
 -- PMM
