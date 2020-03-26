@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHa7R-0006yY-WC
-	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 17:32:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52217)
+	id 1jHa96-0000X6-G1
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 17:34:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54195)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1jHa7P-0006y7-Pl
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:32:53 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1jHa93-0000RX-DG
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:34:34 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1jHa7O-0005Kp-EZ
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:32:51 -0400
-Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:40565)
+ (envelope-from <peter.maydell@linaro.org>) id 1jHa92-0006tO-8d
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:34:33 -0400
+Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:45399)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1jHa7O-0005Jj-9z
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:32:50 -0400
-Received: by mail-oi1-x243.google.com with SMTP id y71so6954410oia.7
- for <qemu-riscv@nongnu.org>; Thu, 26 Mar 2020 14:32:49 -0700 (PDT)
+ id 1jHa92-0006sG-2u
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:34:32 -0400
+Received: by mail-oi1-x243.google.com with SMTP id l22so6931950oii.12
+ for <qemu-riscv@nongnu.org>; Thu, 26 Mar 2020 14:34:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=4bQJElQtxExdNClri0m5sgcXCnjLo99SHgCzJWX7tCU=;
- b=r4wtG65F0C2G/xy8cnOso46Q1Kq9XK70ovOONPapRMhNsSTuv8jehWPG+LVe/Ur5XM
- WKXO94T1RtNgqdsNJe6O4LV5kApbV90934Vdxwu+tQKu2+PtJJGYHS+Ak+WFEtTaBZ+q
- f0bXdqljRCWtsNrJTyAvVqyqYWKE4cbCK/ODpn2ZDRivd5bWzbuQgNqJWDCpVgfOz5IS
- i0lDaz5iDOjoyMnjN+kRfRpAlFcjCyHpZo6rChP7yq5mnwsq4B4RkMuvTyBO/zYYiQdt
- vvF9U2Gcfcu8z5DKVhxyWCKWyfGiGzxISq013pYrAGpzAOZxGFG0lIZj57dUOIjWgulU
- WjYA==
+ bh=HknmFa0YRfLIIhNE8hZfw18tHx3/w1ozQbxIJrAl5oo=;
+ b=Omqd3PtI3mQcyJ2xNWeF8z6p7opwItOYl20pCfmWzCAM+LvMi89Vlswey280wQt5WR
+ YJX6lazpkF788P6Y6pGPVhGhG/6DoFVW5WpA7ssWLoEg65kNg2B2gbXTUFwgjNssiq7p
+ 4DLU8B4vqmYHwv4XiL0s28x7s4bAjpYWa+ac0dRv4YXW+p3fzl82VNrtJYQrUcASrhv7
+ XOXnAvMcXyou9um4tam7aFT4U24EMudcETK7q3uEPKNHF+zoH+ppVO7KcjsnV2uyAE83
+ k+EmbYZOBduKa0OmaIJYq4pwzQg0wJ7RX4RG1XjtoyYIWj7/QeJvAhdvMZdHxDV9ptHm
+ D73g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=4bQJElQtxExdNClri0m5sgcXCnjLo99SHgCzJWX7tCU=;
- b=YugKpaFdLeUp6fikDtTovOjLwlvAANrx1Wt8ypDhcl7GncvdKGTimw6lUbYr/rr/t/
- tF4kSjmlUJI3axLX/YztsRulwjGu30oKa8Bz4bFkIWpBs26SK4i0d9S8IWegwPVEVHDy
- KOJSSHOG4+0hn0PKN1wm46G1rBD2tAic/d7J3kUqLCbMjY2HnGmkwSXl0jfwHtpuzVUD
- GDvaUa/3Sv6BUWj8HmzyBrVpb756KrfaeQkkIJajDjvqR/UfqtqvY7vYQq5wS16c27QO
- 5FVUt313rbTfL6rJuBFKj6GqYZ852WChVw3Wa2GX/yHbUGnrozYjh7B3IawBBl59PhKB
- 7p4w==
-X-Gm-Message-State: ANhLgQ2NzsQglM4pB8fgI6dJvqiE0yicVPpZXhH0Zavbpr1QaAz6ADWW
- gIDOPgkES/ztBe2Ma8+UEYzgys3tFd77Mvvg0zH3kg==
-X-Google-Smtp-Source: ADFU+vvf9kTUVpIi/Ws1MPcDpRPXqP2YiW6XL3c5jo14iT1qdSeGyaKyAFE+hAaYg+sm1UnThkUV9gbDgfNnMCGGA6w=
+ bh=HknmFa0YRfLIIhNE8hZfw18tHx3/w1ozQbxIJrAl5oo=;
+ b=aRA0NJz6ehZqlUeedfvkzEk9Unaf1wwdx6B/HO55ttUIDJX/hdoKcSiFTW/wJMIUdS
+ WQUzCDYHMUoTpFlOoboIoSnWS+eNvoGNYsUxRSZ84CNJFTnnidB4Yp/WR3PAnC6a3gby
+ DLzwSHvXyZVhlQKlnN38s0303xuD7bAwLxGW/Uno3OOu9LfBU0hBgzCXeE7nM3wiLnHS
+ nOcToMw+s1QFnXlfuflPaOvqkIvyezkzUCYsc7Txhklr0Hnx7s28JvoMFow9NMdzPUBL
+ 4BwA94I3q+KPNDXiPMZmk9QrY9m8vgBLT7Y9cDKsMzenfKBeUdVHBol85eZXJTV6SbqW
+ /bYw==
+X-Gm-Message-State: ANhLgQ11aUNRXetAZ4+B2QV6JnZp/PHw41Y8z3bQCHvLpX0rtxSB4FPB
+ UrKsEhAR6XRP2ziENeaBACbOO760/KHkLkViMYoPmQ==
+X-Google-Smtp-Source: ADFU+vsgRovvewGBXHI8bmJ2ustTblZuXorArefOaFYkd3VI8GTLZIl4nSsn0KASmn+awk7Oz0w7SFU1T83lbPgpTEY=
 X-Received: by 2002:a05:6808:64c:: with SMTP id
- z12mr1790415oih.146.1585258368267; 
- Thu, 26 Mar 2020 14:32:48 -0700 (PDT)
+ z12mr1795744oih.146.1585258471238; 
+ Thu, 26 Mar 2020 14:34:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200325191830.16553-1-f4bug@amsat.org>
- <20200325191830.16553-2-f4bug@amsat.org>
-In-Reply-To: <20200325191830.16553-2-f4bug@amsat.org>
+ <20200325191830.16553-3-f4bug@amsat.org>
+In-Reply-To: <20200325191830.16553-3-f4bug@amsat.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 26 Mar 2020 21:32:36 +0000
-Message-ID: <CAFEAcA9qmwCmu-0OmNF-TkXzdd3qrhPxQRO6DS36X=Up2g4QoQ@mail.gmail.com>
-Subject: Re: [PATCH-for-5.0 01/12] scripts/coccinelle: Add script to catch
- missing error_propagate() calls
+Date: Thu, 26 Mar 2020 21:34:19 +0000
+Message-ID: <CAFEAcA-9w4GRLv=gFUAkNryhDR+8JNTS-=UAe6oh7eso5Uyhag@mail.gmail.com>
+Subject: Re: [PATCH-for-5.0 02/12] hw/arm/bcm2835_peripherals: Add missing
+ error-propagation code
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: QEMU Developers <qemu-devel@nongnu.org>,
  Alistair Francis <alistair@alistair23.me>, 
@@ -89,97 +89,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2020 21:32:53 -0000
+X-List-Received-Date: Thu, 26 Mar 2020 21:34:34 -0000
 
 On Wed, 25 Mar 2020 at 19:18, Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>=
  wrote:
 >
-> In some places in we put an error into a local Error*, but forget
-> to check for failure and pass it back to the caller.
-> Add a Coccinelle patch to catch automatically add the missing code.
+> Patch created mechanically by running:
 >
-> Inspired-by: Peter Maydell <peter.maydell@linaro.org>
+>   $ spatch \
+>     --macro-file scripts/cocci-macro-file.h --include-headers \
+>     --sp-file scripts/coccinelle/object_property_missing_error_propagate.=
+cocci \
+>     --keep-comments --smpl-spacing --in-place --dir hw
+>
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > ---
+>  hw/arm/bcm2835_peripherals.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/hw/arm/bcm2835_peripherals.c b/hw/arm/bcm2835_peripherals.c
+> index edcaa4916d..a111e91069 100644
+> --- a/hw/arm/bcm2835_peripherals.c
+> +++ b/hw/arm/bcm2835_peripherals.c
+> @@ -133,254 +133,262 @@ static void bcm2835_peripherals_init(Object *obj)
+>  static void bcm2835_peripherals_realize(DeviceState *dev, Error **errp)
+>  {
+>      BCM2835PeripheralState *s =3D BCM2835_PERIPHERALS(dev);
+>      Object *obj;
+>      MemoryRegion *ram;
+>      Error *err =3D NULL;
+>      uint64_t ram_size, vcram_size;
+>      int n;
 
-This coccinelle script is impressively deep magic...
-My general rule with cocci scripts is that if they serve
-the purpose they're written for then that's sufficient
-and they're not worth trying to polish further, but just
-for my own education I have some questions below about how
-this one works.
+Is there a reason this patch has such an enormous amount of
+context around the changes it's making ? It looks like it's
+quoting the entire function.
 
-> +@match exists@
-> +typedef Error;
-> +Error *err;
-
-I didn't realize you could do this kind of "this thing
-must be this type" stuff in the metavariable declaration
-section...
-
-> +identifier func, errp;
-> +identifier object_property_set_type1 =3D~ "^object_property_set_.*";
-> +identifier object_property_set_type2 =3D~ "^object_property_set_.*";
-
-If we relax this so that we just look for "anything that takes
-an &err as its final argument" do we hit way too many false
-positives ?
-
-> +expression obj;
-> +@@
-> +void func(..., Error **errp)
-> +{
-> + <+...
-> + object_property_set_type1(obj, ..., &err);
-> + ... when !=3D err
-
-This 'when' clause means "match only when the code doesn't
-touch 'err' anywhere between the two calls", right?
-
-> + object_property_set_type2(obj, ..., &err);
-> + ...+>
-> +}
-> +
-> +@@
-> +Error *match.err;
-> +identifier match.errp;
-> +identifier match.object_property_set_type1;
-> +expression match.obj;
-> +@@
-> + object_property_set_type1(obj, ..., &err);
-> ++if (err) {
-> ++    error_propagate(errp, err);
-> ++    return;
-> ++}
-
-Is there a reason we can't do the substitution
-in the same rule we were using to find the match,
-or was it just easier this way/done this way in
-some other example you were following ?
-
-> +
-> +@manual depends on never match@
-> +Error *err;
-> +identifier object_property_set_type1 =3D~ "^object_property_set_.*";
-> +identifier object_property_set_type2 =3D~ "^object_property_set_.*";
-> +position p;
-> +@@
-> + object_property_set_type1@p(..., &err);
-> + ... when !=3D err
-> + object_property_set_type2(..., &err);
-> +
-> +@script:python@
-> +f << manual.object_property_set_type1;
-> +p << manual.p;
-> +@@
-> +print("[[manual check required: "
-> +      "error_propagate() might be missing in {}() {}:{}:{}]]".format(
-> +            f, p[0].file, p[0].line, p[0].column))
-
-Nice to have an example of how to do a "find these things
-and print a diagnostic". This 'manual' match is handling
-the cases where we got two consecutive uses of &err but
-not in a function that took "Error *errp", yes?
+Anyway
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
 thanks
 -- PMM
