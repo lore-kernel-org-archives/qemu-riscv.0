@@ -1,64 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHWtU-0003ZB-9E
-	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 14:06:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46790)
+	id 1jHa7R-0006yY-WC
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 17:32:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52217)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jHWtQ-0003Sy-T3
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 14:06:14 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1jHa7P-0006y7-Pl
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:32:53 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jHWtO-0007ZF-TU
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 14:06:12 -0400
-Received: from mail-vk1-xa44.google.com ([2607:f8b0:4864:20::a44]:37049)
+ (envelope-from <peter.maydell@linaro.org>) id 1jHa7O-0005Kp-EZ
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:32:51 -0400
+Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243]:40565)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jHWtJ-0007Ue-Ii; Thu, 26 Mar 2020 14:06:05 -0400
-Received: by mail-vk1-xa44.google.com with SMTP id o124so1960099vkc.4;
- Thu, 26 Mar 2020 11:06:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
+ id 1jHa7O-0005Jj-9z
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:32:50 -0400
+Received: by mail-oi1-x243.google.com with SMTP id y71so6954410oia.7
+ for <qemu-riscv@nongnu.org>; Thu, 26 Mar 2020 14:32:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gECNYAxa2t9o7yJVZPGdmniCllG8vth+yJfBO3HZUHk=;
- b=iDiaqvs9yJtruE5tAuRwZe2iB+IfsMcJ8FGdkq7LZgQ5lj/Pjq7gF7BViinxeP3SWA
- krFHK4cUOKw9A1aOdi5fv12/3rZBA6Y6ioS/tB5sK6Vt1v+/yBqVuUQy/Ee2ocB0Y1DZ
- GPWJCr+4arGsbicnmb/0ZYWzrh61A2Ah2AvlY50lCDpLgFzbBPzsgY3IL63X5NAFMAWa
- AXj23eOdN6y9Uoxc+xkfz+RKU1AJ5K+6+oWErBiWZ0huZVrQxdjMkqXTF4O/UHD/IQlD
- JdDJGsSa3+3RGcXEoHXRvCQY7yYGGFA9GOmoeskdm0LgesHwWnhsHnY+EnNWQMNckL44
- ey+Q==
+ :cc:content-transfer-encoding;
+ bh=4bQJElQtxExdNClri0m5sgcXCnjLo99SHgCzJWX7tCU=;
+ b=r4wtG65F0C2G/xy8cnOso46Q1Kq9XK70ovOONPapRMhNsSTuv8jehWPG+LVe/Ur5XM
+ WKXO94T1RtNgqdsNJe6O4LV5kApbV90934Vdxwu+tQKu2+PtJJGYHS+Ak+WFEtTaBZ+q
+ f0bXdqljRCWtsNrJTyAvVqyqYWKE4cbCK/ODpn2ZDRivd5bWzbuQgNqJWDCpVgfOz5IS
+ i0lDaz5iDOjoyMnjN+kRfRpAlFcjCyHpZo6rChP7yq5mnwsq4B4RkMuvTyBO/zYYiQdt
+ vvF9U2Gcfcu8z5DKVhxyWCKWyfGiGzxISq013pYrAGpzAOZxGFG0lIZj57dUOIjWgulU
+ WjYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=gECNYAxa2t9o7yJVZPGdmniCllG8vth+yJfBO3HZUHk=;
- b=BZahBJBSCbb2ronBb9tymV5XQ8wJMBx6Vx9ODZMwkhUQD37RGQVj7X2xQoaP6rjiqd
- +wrr2XUfCgm98B3yK/kaVuQs+lOf09xrN2gNfoXHI+wl/nrmH+alD32zCqr4f4gxrELF
- a7Bd5ScjFaiJIidi5G0YrIbCh9sUsXpf6xQ4382wIjbbr2+tJneekD/ngbnXdQocCyBx
- k1vuKpeAdi621dop309vG0aWNc5cm2SCYpN9n1CmO1JRpD+D2N3He9KaLv7Y8q5u3QEh
- zoW4s9BG73tmZ6IqSZsgRSx6hXOe2DKXIPynjkNatSNi8nYAn9fhZNIe4s95PXzyAhkx
- XjWw==
-X-Gm-Message-State: ANhLgQ1ZvnD9FDcZA1EqI/yvHptM8hWSvIYtBf7fMOXorrWsVck4HQce
- 3RQIJrwRUbPzV2V0GWkxr320qthq+bd9r2WKebs=
-X-Google-Smtp-Source: ADFU+vt8EJoydv4TgW390iL2vAnrINQ6i/xT+hB9snijZ7E5FglbfSyekDrZqDHZIqNsxqiKsQOMC/46oVbX2w/QzTg=
-X-Received: by 2002:a1f:eb04:: with SMTP id j4mr6281196vkh.16.1585245964276;
- Thu, 26 Mar 2020 11:06:04 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=4bQJElQtxExdNClri0m5sgcXCnjLo99SHgCzJWX7tCU=;
+ b=YugKpaFdLeUp6fikDtTovOjLwlvAANrx1Wt8ypDhcl7GncvdKGTimw6lUbYr/rr/t/
+ tF4kSjmlUJI3axLX/YztsRulwjGu30oKa8Bz4bFkIWpBs26SK4i0d9S8IWegwPVEVHDy
+ KOJSSHOG4+0hn0PKN1wm46G1rBD2tAic/d7J3kUqLCbMjY2HnGmkwSXl0jfwHtpuzVUD
+ GDvaUa/3Sv6BUWj8HmzyBrVpb756KrfaeQkkIJajDjvqR/UfqtqvY7vYQq5wS16c27QO
+ 5FVUt313rbTfL6rJuBFKj6GqYZ852WChVw3Wa2GX/yHbUGnrozYjh7B3IawBBl59PhKB
+ 7p4w==
+X-Gm-Message-State: ANhLgQ2NzsQglM4pB8fgI6dJvqiE0yicVPpZXhH0Zavbpr1QaAz6ADWW
+ gIDOPgkES/ztBe2Ma8+UEYzgys3tFd77Mvvg0zH3kg==
+X-Google-Smtp-Source: ADFU+vvf9kTUVpIi/Ws1MPcDpRPXqP2YiW6XL3c5jo14iT1qdSeGyaKyAFE+hAaYg+sm1UnThkUV9gbDgfNnMCGGA6w=
+X-Received: by 2002:a05:6808:64c:: with SMTP id
+ z12mr1790415oih.146.1585258368267; 
+ Thu, 26 Mar 2020 14:32:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-24-zhiwei_liu@c-sky.com>
-In-Reply-To: <20200317150653.9008-24-zhiwei_liu@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 26 Mar 2020 10:57:47 -0700
-Message-ID: <CAKmqyKMmsEm7V-pqp3Y++0FQ3p-Hq-F8ykfSmw+zTzEjSpNuLA@mail.gmail.com>
-Subject: Re: [PATCH v6 23/61] target/riscv: vector integer merge and move
- instructions
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Chih-Min Chao <chihmin.chao@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com, guoren@linux.alibaba.com, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+References: <20200325191830.16553-1-f4bug@amsat.org>
+ <20200325191830.16553-2-f4bug@amsat.org>
+In-Reply-To: <20200325191830.16553-2-f4bug@amsat.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 26 Mar 2020 21:32:36 +0000
+Message-ID: <CAFEAcA9qmwCmu-0OmNF-TkXzdd3qrhPxQRO6DS36X=Up2g4QoQ@mail.gmail.com>
+Subject: Re: [PATCH-for-5.0 01/12] scripts/coccinelle: Add script to catch
+ missing error_propagate() calls
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair@alistair23.me>, 
+ Paul Burton <pburton@wavecomp.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, qemu-ppc <qemu-ppc@nongnu.org>,
+ Jason Wang <jasowang@redhat.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Richard Henderson <rth@twiddle.net>, Eduardo Habkost <ehabkost@redhat.com>, 
+ David Gibson <david@gibson.dropbear.id.au>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-arm <qemu-arm@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Andrew Baumann <Andrew.Baumann@microsoft.com>, 
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>, 
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>, 
+ Markus Armbruster <armbru@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>, 
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::a44
+X-Received-From: 2607:f8b0:4864:20::243
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,311 +89,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2020 18:06:14 -0000
+X-List-Received-Date: Thu, 26 Mar 2020 21:32:53 -0000
 
-On Tue, Mar 17, 2020 at 8:53 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Wed, 25 Mar 2020 at 19:18, Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>=
+ wrote:
 >
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+> In some places in we put an error into a local Error*, but forget
+> to check for failure and pass it back to the caller.
+> Add a Coccinelle patch to catch automatically add the missing code.
+>
+> Inspired-by: Peter Maydell <peter.maydell@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > ---
->  target/riscv/helper.h                   |  17 ++++
->  target/riscv/insn32.decode              |   7 ++
->  target/riscv/insn_trans/trans_rvv.inc.c | 121 ++++++++++++++++++++++++
->  target/riscv/vector_helper.c            | 100 ++++++++++++++++++++
->  4 files changed, 245 insertions(+)
->
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 1f0d3d60e3..f378db9cbf 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -665,3 +665,20 @@ DEF_HELPER_6(vwmaccsu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
->  DEF_HELPER_6(vwmaccus_vx_b, void, ptr, ptr, tl, ptr, env, i32)
->  DEF_HELPER_6(vwmaccus_vx_h, void, ptr, ptr, tl, ptr, env, i32)
->  DEF_HELPER_6(vwmaccus_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-> +
-> +DEF_HELPER_6(vmerge_vvm_b, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmerge_vvm_h, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmerge_vvm_w, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmerge_vvm_d, void, ptr, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_6(vmerge_vxm_b, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmerge_vxm_h, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmerge_vxm_w, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_6(vmerge_vxm_d, void, ptr, ptr, tl, ptr, env, i32)
-> +DEF_HELPER_4(vmv_v_v_b, void, ptr, ptr, env, i32)
-> +DEF_HELPER_4(vmv_v_v_h, void, ptr, ptr, env, i32)
-> +DEF_HELPER_4(vmv_v_v_w, void, ptr, ptr, env, i32)
-> +DEF_HELPER_4(vmv_v_v_d, void, ptr, ptr, env, i32)
-> +DEF_HELPER_4(vmv_v_x_b, void, ptr, i64, env, i32)
-> +DEF_HELPER_4(vmv_v_x_h, void, ptr, i64, env, i32)
-> +DEF_HELPER_4(vmv_v_x_w, void, ptr, i64, env, i32)
-> +DEF_HELPER_4(vmv_v_x_d, void, ptr, i64, env, i32)
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 9735ac3565..adb76956c9 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -71,6 +71,7 @@
->  @r_nfvm  ... ... vm:1 ..... ..... ... ..... ....... &rnfvm %nf %rs2 %rs1 %rd
->  @r_vm    ...... vm:1 ..... ..... ... ..... ....... &rmrr %rs2 %rs1 %rd
->  @r_vm_1  ...... . ..... ..... ... ..... .......    &rmrr vm=1 %rs2 %rs1 %rd
-> +@r_vm_0  ...... . ..... ..... ... ..... .......    &rmrr vm=0 %rs2 %rs1 %rd
->  @r_wdvm  ..... wd:1 vm:1 ..... ..... ... ..... ....... &rwdvm %rs2 %rs1 %rd
->  @r2_zimm . zimm:11  ..... ... ..... ....... %rs1 %rd
->
-> @@ -400,6 +401,12 @@ vwmacc_vx       111101 . ..... ..... 110 ..... 1010111 @r_vm
->  vwmaccsu_vv     111110 . ..... ..... 010 ..... 1010111 @r_vm
->  vwmaccsu_vx     111110 . ..... ..... 110 ..... 1010111 @r_vm
->  vwmaccus_vx     111111 . ..... ..... 110 ..... 1010111 @r_vm
-> +vmv_v_v         010111 1 00000 ..... 000 ..... 1010111 @r2
-> +vmv_v_x         010111 1 00000 ..... 100 ..... 1010111 @r2
-> +vmv_v_i         010111 1 00000 ..... 011 ..... 1010111 @r2
-> +vmerge_vvm      010111 0 ..... ..... 000 ..... 1010111 @r_vm_0
-> +vmerge_vxm      010111 0 ..... ..... 100 ..... 1010111 @r_vm_0
-> +vmerge_vim      010111 0 ..... ..... 011 ..... 1010111 @r_vm_0
->
->  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
->  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
-> diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-> index 269d04c7fb..42ef59364f 100644
-> --- a/target/riscv/insn_trans/trans_rvv.inc.c
-> +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-> @@ -1499,3 +1499,124 @@ GEN_OPIVX_WIDEN_TRANS(vwmaccu_vx)
->  GEN_OPIVX_WIDEN_TRANS(vwmacc_vx)
->  GEN_OPIVX_WIDEN_TRANS(vwmaccsu_vx)
->  GEN_OPIVX_WIDEN_TRANS(vwmaccus_vx)
-> +
-> +/* Vector Integer Merge and Move Instructions */
-> +static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v *a)
+
+This coccinelle script is impressively deep magic...
+My general rule with cocci scripts is that if they serve
+the purpose they're written for then that's sufficient
+and they're not worth trying to polish further, but just
+for my own education I have some questions below about how
+this one works.
+
+> +@match exists@
+> +typedef Error;
+> +Error *err;
+
+I didn't realize you could do this kind of "this thing
+must be this type" stuff in the metavariable declaration
+section...
+
+> +identifier func, errp;
+> +identifier object_property_set_type1 =3D~ "^object_property_set_.*";
+> +identifier object_property_set_type2 =3D~ "^object_property_set_.*";
+
+If we relax this so that we just look for "anything that takes
+an &err as its final argument" do we hit way too many false
+positives ?
+
+> +expression obj;
+> +@@
+> +void func(..., Error **errp)
 > +{
-> +    if (vext_check_isa_ill(s) &&
-> +        vext_check_reg(s, a->rd, false) &&
-> +        vext_check_reg(s, a->rs1, false)) {
-> +
-> +        if (s->vl_eq_vlmax) {
-> +            tcg_gen_gvec_mov(s->sew, vreg_ofs(s, a->rd),
-> +                             vreg_ofs(s, a->rs1),
-> +                             MAXSZ(s), MAXSZ(s));
-> +        } else {
-> +            uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
-> +            static gen_helper_gvec_2_ptr * const fns[4] = {
-> +                gen_helper_vmv_v_v_b, gen_helper_vmv_v_v_h,
-> +                gen_helper_vmv_v_v_w, gen_helper_vmv_v_v_d,
-> +            };
-> +
-> +            tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs1),
-> +                               cpu_env, 0, s->vlen / 8, data, fns[s->sew]);
-> +        }
-> +        return true;
-> +    }
-> +    return false;
+> + <+...
+> + object_property_set_type1(obj, ..., &err);
+> + ... when !=3D err
+
+This 'when' clause means "match only when the code doesn't
+touch 'err' anywhere between the two calls", right?
+
+> + object_property_set_type2(obj, ..., &err);
+> + ...+>
 > +}
 > +
-> +typedef void gen_helper_vmv_vx(TCGv_ptr, TCGv_i64, TCGv_env, TCGv_i32);
-> +static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
-> +{
-> +    if (vext_check_isa_ill(s) &&
-> +        vext_check_reg(s, a->rd, false)) {
+> +@@
+> +Error *match.err;
+> +identifier match.errp;
+> +identifier match.object_property_set_type1;
+> +expression match.obj;
+> +@@
+> + object_property_set_type1(obj, ..., &err);
+> ++if (err) {
+> ++    error_propagate(errp, err);
+> ++    return;
+> ++}
+
+Is there a reason we can't do the substitution
+in the same rule we were using to find the match,
+or was it just easier this way/done this way in
+some other example you were following ?
+
 > +
-> +        TCGv s1 = tcg_temp_new();
-> +        gen_get_gpr(s1, a->rs1);
+> +@manual depends on never match@
+> +Error *err;
+> +identifier object_property_set_type1 =3D~ "^object_property_set_.*";
+> +identifier object_property_set_type2 =3D~ "^object_property_set_.*";
+> +position p;
+> +@@
+> + object_property_set_type1@p(..., &err);
+> + ... when !=3D err
+> + object_property_set_type2(..., &err);
 > +
-> +        if (s->vl_eq_vlmax) {
-> +#ifdef TARGET_RISCV64
-> +            tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
-> +                                 MAXSZ(s), MAXSZ(s), s1);
-> +#else
-> +            tcg_gen_gvec_dup_i32(s->sew, vreg_ofs(s, a->rd),
-> +                                 MAXSZ(s), MAXSZ(s), s1);
-> +#endif
-> +        } else {
-> +            TCGv_i32 desc;
-> +            TCGv_i64 s1_i64 = tcg_temp_new_i64();
-> +            TCGv_ptr dest = tcg_temp_new_ptr();
-> +            uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
-> +            static gen_helper_vmv_vx * const fns[4] = {
-> +                gen_helper_vmv_v_x_b, gen_helper_vmv_v_x_h,
-> +                gen_helper_vmv_v_x_w, gen_helper_vmv_v_x_d,
-> +            };
-> +
-> +            tcg_gen_ext_tl_i64(s1_i64, s1);
-> +            desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
-> +            tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, a->rd));
-> +            fns[s->sew](dest, s1_i64, cpu_env, desc);
-> +
-> +            tcg_temp_free_ptr(dest);
-> +            tcg_temp_free_i32(desc);
-> +            tcg_temp_free_i64(s1_i64);
-> +        }
-> +
-> +        tcg_temp_free(s1);
-> +        return true;
-> +    }
-> +    return false;
-> +}
-> +
-> +static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
-> +{
-> +    if (vext_check_isa_ill(s) &&
-> +        vext_check_reg(s, a->rd, false)) {
-> +
-> +        int64_t simm = sextract64(a->rs1, 0, 5);
-> +        if (s->vl_eq_vlmax) {
-> +            switch (s->sew) {
-> +            case 0:
-> +                tcg_gen_gvec_dup8i(vreg_ofs(s, a->rd),
-> +                                   MAXSZ(s), MAXSZ(s), simm);
-> +                break;
-> +            case 1:
-> +                tcg_gen_gvec_dup16i(vreg_ofs(s, a->rd),
-> +                                    MAXSZ(s), MAXSZ(s), simm);
-> +                break;
-> +            case 2:
-> +                tcg_gen_gvec_dup32i(vreg_ofs(s, a->rd),
-> +                                    MAXSZ(s), MAXSZ(s), simm);
-> +                break;
-> +            default:
-> +                tcg_gen_gvec_dup64i(vreg_ofs(s, a->rd),
-> +                                    MAXSZ(s), MAXSZ(s), simm);
-> +                break;
-> +            }
-> +        } else {
-> +            TCGv_i32 desc;
-> +            TCGv_i64 s1 = tcg_const_i64(simm);
-> +            TCGv_ptr dest = tcg_temp_new_ptr();
-> +            uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
-> +            static gen_helper_vmv_vx * const fns[4] = {
-> +                gen_helper_vmv_v_x_b, gen_helper_vmv_v_x_h,
-> +                gen_helper_vmv_v_x_w, gen_helper_vmv_v_x_d,
-> +            };
-> +
-> +            desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
-> +            tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, a->rd));
-> +            fns[s->sew](dest, s1, cpu_env, desc);
-> +
-> +            tcg_temp_free_ptr(dest);
-> +            tcg_temp_free_i32(desc);
-> +            tcg_temp_free_i64(s1);
-> +        }
-> +        return true;
-> +    }
-> +    return false;
-> +}
-> +
-> +GEN_OPIVV_TRANS(vmerge_vvm, opivv_vadc_check)
-> +GEN_OPIVX_TRANS(vmerge_vxm, opivx_vadc_check)
-> +GEN_OPIVI_TRANS(vmerge_vim, 0, vmerge_vxm, opivx_vadc_check)
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 5adce9e0a3..e52a556484 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -1999,3 +1999,103 @@ GEN_VEXT_VX(vwmaccsu_vx_w, 4, 8, clearq)
->  GEN_VEXT_VX(vwmaccus_vx_b, 1, 2, clearh)
->  GEN_VEXT_VX(vwmaccus_vx_h, 2, 4, clearl)
->  GEN_VEXT_VX(vwmaccus_vx_w, 4, 8, clearq)
-> +
-> +/* Vector Integer Merge and Move Instructions */
-> +#define GEN_VEXT_VMV_VV(NAME, ETYPE, H, CLEAR_FN)                    \
-> +void HELPER(NAME)(void *vd, void *vs1, CPURISCVState *env,           \
-> +                  uint32_t desc)                                     \
-> +{                                                                    \
-> +    uint32_t vl = env->vl;                                           \
-> +    uint32_t esz = sizeof(ETYPE);                                    \
-> +    uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-> +    uint32_t i;                                                      \
-> +                                                                     \
-> +    if (vl == 0) {                                                   \
-> +        return;                                                      \
-> +    }                                                                \
-> +    for (i = 0; i < vl; i++) {                                       \
-> +        ETYPE s1 = *((ETYPE *)vs1 + H(i));                           \
-> +        *((ETYPE *)vd + H(i)) = s1;                                  \
-> +    }                                                                \
-> +    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                         \
-> +}
-> +
-> +GEN_VEXT_VMV_VV(vmv_v_v_b, int8_t,  H1, clearb)
-> +GEN_VEXT_VMV_VV(vmv_v_v_h, int16_t, H2, clearh)
-> +GEN_VEXT_VMV_VV(vmv_v_v_w, int32_t, H4, clearl)
-> +GEN_VEXT_VMV_VV(vmv_v_v_d, int64_t, H8, clearq)
-> +
-> +#define GEN_VEXT_VMV_VX(NAME, ETYPE, H, CLEAR_FN)                    \
-> +void HELPER(NAME)(void *vd, uint64_t s1, CPURISCVState *env,         \
-> +                  uint32_t desc)                                     \
-> +{                                                                    \
-> +    uint32_t vl = env->vl;                                           \
-> +    uint32_t esz = sizeof(ETYPE);                                    \
-> +    uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-> +    uint32_t i;                                                      \
-> +                                                                     \
-> +    if (vl == 0) {                                                   \
-> +        return;                                                      \
-> +    }                                                                \
-> +    for (i = 0; i < vl; i++) {                                       \
-> +        *((ETYPE *)vd + H(i)) = (ETYPE)s1;                           \
-> +    }                                                                \
-> +    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                         \
-> +}
-> +
-> +GEN_VEXT_VMV_VX(vmv_v_x_b, int8_t,  H1, clearb)
-> +GEN_VEXT_VMV_VX(vmv_v_x_h, int16_t, H2, clearh)
-> +GEN_VEXT_VMV_VX(vmv_v_x_w, int32_t, H4, clearl)
-> +GEN_VEXT_VMV_VX(vmv_v_x_d, int64_t, H8, clearq)
-> +
-> +#define GEN_VEXT_VMERGE_VV(NAME, ETYPE, H, CLEAR_FN)                 \
-> +void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,          \
-> +                  CPURISCVState *env, uint32_t desc)                 \
-> +{                                                                    \
-> +    uint32_t mlen = vext_mlen(desc);                                 \
-> +    uint32_t vl = env->vl;                                           \
-> +    uint32_t esz = sizeof(ETYPE);                                    \
-> +    uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-> +    uint32_t i;                                                      \
-> +                                                                     \
-> +    if (vl == 0) {                                                   \
-> +        return;                                                      \
-> +    }                                                                \
-> +    for (i = 0; i < vl; i++) {                                       \
-> +        ETYPE *vt = (!vext_elem_mask(v0, mlen, i) ? vs2 : vs1);      \
-> +        *((ETYPE *)vd + H(i)) = *(vt + H(i));                        \
-> +    }                                                                \
-> +    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                         \
-> +}
-> +
-> +GEN_VEXT_VMERGE_VV(vmerge_vvm_b, int8_t,  H1, clearb)
-> +GEN_VEXT_VMERGE_VV(vmerge_vvm_h, int16_t, H2, clearh)
-> +GEN_VEXT_VMERGE_VV(vmerge_vvm_w, int32_t, H4, clearl)
-> +GEN_VEXT_VMERGE_VV(vmerge_vvm_d, int64_t, H8, clearq)
-> +
-> +#define GEN_VEXT_VMERGE_VX(NAME, ETYPE, H, CLEAR_FN)                 \
-> +void HELPER(NAME)(void *vd, void *v0, target_ulong s1,               \
-> +                  void *vs2, CPURISCVState *env, uint32_t desc)      \
-> +{                                                                    \
-> +    uint32_t mlen = vext_mlen(desc);                                 \
-> +    uint32_t vl = env->vl;                                           \
-> +    uint32_t esz = sizeof(ETYPE);                                    \
-> +    uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-> +    uint32_t i;                                                      \
-> +                                                                     \
-> +    if (vl == 0) {                                                   \
-> +        return;                                                      \
-> +    }                                                                \
-> +    for (i = 0; i < vl; i++) {                                       \
-> +        ETYPE s2 = *((ETYPE *)vs2 + H(i));                           \
-> +        ETYPE d = (!vext_elem_mask(v0, mlen, i) ? s2 :               \
-> +                   (ETYPE)(target_long)s1);                          \
-> +        *((ETYPE *)vd + H(i)) = d;                                   \
-> +    }                                                                \
-> +    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                         \
-> +}
-> +
-> +GEN_VEXT_VMERGE_VX(vmerge_vxm_b, int8_t,  H1, clearb)
-> +GEN_VEXT_VMERGE_VX(vmerge_vxm_h, int16_t, H2, clearh)
-> +GEN_VEXT_VMERGE_VX(vmerge_vxm_w, int32_t, H4, clearl)
-> +GEN_VEXT_VMERGE_VX(vmerge_vxm_d, int64_t, H8, clearq)
-> --
-> 2.23.0
->
+> +@script:python@
+> +f << manual.object_property_set_type1;
+> +p << manual.p;
+> +@@
+> +print("[[manual check required: "
+> +      "error_propagate() might be missing in {}() {}:{}:{}]]".format(
+> +            f, p[0].file, p[0].line, p[0].column))
+
+Nice to have an example of how to do a "find these things
+and print a diagnostic". This 'manual' match is handling
+the cases where we got two consecutive uses of &err but
+not in a function that took "Error *errp", yes?
+
+thanks
+-- PMM
 
