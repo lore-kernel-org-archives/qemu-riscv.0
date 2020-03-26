@@ -1,54 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHaM6-0006bF-DI
-	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 17:48:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46259)
+	id 1jHaO5-00083m-US
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 17:50:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50582)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1jHaM3-0006Vt-FU
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:48:00 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1jHaO3-000839-Uy
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:50:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1jHaM1-0004TR-K0
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:47:58 -0400
-Received: from mail-ot1-x32a.google.com ([2607:f8b0:4864:20::32a]:41483)
+ (envelope-from <peter.maydell@linaro.org>) id 1jHaO2-0007Gf-UI
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:50:03 -0400
+Received: from mail-ot1-x330.google.com ([2607:f8b0:4864:20::330]:42307)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1jHaM0-0004RE-Rx
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:47:57 -0400
-Received: by mail-ot1-x32a.google.com with SMTP id f52so7623605otf.8
- for <qemu-riscv@nongnu.org>; Thu, 26 Mar 2020 14:47:56 -0700 (PDT)
+ id 1jHaO2-0007Ey-Kv
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 17:50:02 -0400
+Received: by mail-ot1-x330.google.com with SMTP id z5so7377833oth.9
+ for <qemu-riscv@nongnu.org>; Thu, 26 Mar 2020 14:50:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=ZFaXxcTV2mZj7ztpP7Zlz24D0mXHTvj4xwbEqB7WPNI=;
- b=juYgvXXDriG1rpjoe2C4H/Ugr3UC3p3gEye4w7GtZyXIYu+Zo+0ki3p4CAgIX15+oQ
- 13h5mATdRjtEkuGPVFaxzfcsaweHEuIOXKQCjsIO+enfgSKWiu27x20N8d8AvGiHsxM/
- e4Ce1RNfFU37xU1Ue2YfH/qxSfQCfB7j7QP3+5DySd4yt8Z9JU4wQedhPF4knWQXN7A8
- NaHe8ZVDSrPQDxueQqrQlU9JVviih8K/d0bu9p7aXRExllyFV1dgv1wI0wxlqgdmypgG
- z9RsRkYOfs/e1fquBEPFlNxCbd3k6gbJwwwZ7QWHtMIzm0RlqS/PJ+udzu/7twiznYtH
- rsKg==
+ bh=vmLYY/rJrxioBTJ6A3rg5gqalSw/omoc/qj0U0fRPSE=;
+ b=yQEU2NIUaXHDdBFNz4pgJz1tMyrv9l34vb3Y0c+nuVoIB8ExwwDNBGsdtn7yywEcQ0
+ l4vCc+i0qgYX13ySmSuu65Jq5cAbOdxybDYd+5u39WLfd1UH70wwU4rDHyFoyGwA3/42
+ CTew5CcCEVqDh6eWLETY+5yoNv1cHj1HSLExV7XFbWt70WbXLXG5h9OQKCYohoApY2aO
+ cO0S4hzl1jI8K+hx5O7wkZAIfE/4vVF+hbPQuJbRPuOdPa3zoF1zC5o4eOHSqDRZymTD
+ F50uKR8yfaIyuk+dYy9VoGj+j9NmGNb/w/X6B4wUpJfysTCgwGeLMRaTVUKXYTPGp9t1
+ ngvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=ZFaXxcTV2mZj7ztpP7Zlz24D0mXHTvj4xwbEqB7WPNI=;
- b=HYhgb2bkvvEp8dJMrPzqsCPEtIg420VSNfHJtNLreEn47oStYDpRD5025RHOpHc3qE
- giXiPfBRo3LSe5HmlVm8uVi7mQDGfirOiKqcTFlo142wFXZXw3xKX5ZZ5g35plm5iyin
- RwODcvynYOt6tBK9NV1x4iltGc24LwKEFjRz0BXl+OB2lzZmiqPIrkYY8rwRppOSr2tp
- DP6zz9QbRyoq4Vni9Pv7UCJG3Zl0Moa+vrY+mk2IklilMVhA/ydGAwBUYEfnQx/LUX/i
- zE6WJ00zBfA5el/3IShLrHE6QrmdtCk7rTkie2p/gQu8/DgPDQPCZkaErzQNVyHhvu+G
- Rnjw==
-X-Gm-Message-State: ANhLgQ0iRT/nVUuGu7JKFxzgpo3wKEbWUb1xPnu8+3lrpWWrosHq5SD2
- fAYQt9f5++YqZkcC57pXhx5VmBObNA824dFxZF79pQ==
-X-Google-Smtp-Source: ADFU+vs/DYQLrg+PY3A6R5Ck0seQHQa0rq5Ma6p3xVb/cN+6b9+7Ko2apbr98hdWTJWqo29ykVhVtUleBkYzpxXs/dQ=
-X-Received: by 2002:a4a:d1a5:: with SMTP id z5mr6961361oor.63.1585259275554;
- Thu, 26 Mar 2020 14:47:55 -0700 (PDT)
+ bh=vmLYY/rJrxioBTJ6A3rg5gqalSw/omoc/qj0U0fRPSE=;
+ b=bGf01b4gTEt2U7ZemP7RVQMjyedTKBzqDesfxtPqfdfHWGPk8w0VQOb6KSCNC0V5tW
+ zC6y2OFCzLI/RsZ+3rNPWg5Uu7wyF+6K0lAnnrfbwdel/+Iky4tPSvzMoKIXOR5Dv379
+ SAgRnjBxHbIdk1v2lrWoGM8PipYsAMVX0Ru5Hs9Fzx9xXRtnXos825GY62eNq+E50PsD
+ NVRwhpmJX2H1gt6Bo7RpjN4dsbFam431KasjLkoo5rQvalzHarC4+v15UtU9YJqkk9gf
+ +FCwEnaM24GOhCWQhqEKDMmibtutq+Y5PhBNiUQxKrrYWk7q9okZM7VsqVD3ga3VgMm8
+ gEig==
+X-Gm-Message-State: ANhLgQ021uHaRYEHqrdmVkrxcMBliWzs3YKI680dSZltzurt2KrnCZYU
+ GIsxnDCioohMctrwvE1pZ7/VjL01+wo9hWw2Z71KVw==
+X-Google-Smtp-Source: ADFU+vvd8j43oFEZ/E67eihVOeE7Xj+C4BcmTyGRpJ+MwNVrcYS6RfZXUAY/ZqJt3I7OjcuVqt+kEp/MeeMIgiWxtr0=
+X-Received: by 2002:a05:6830:1f39:: with SMTP id
+ e25mr8151827oth.135.1585259401764; 
+ Thu, 26 Mar 2020 14:50:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200325191830.16553-1-f4bug@amsat.org>
- <20200325191830.16553-9-f4bug@amsat.org>
-In-Reply-To: <20200325191830.16553-9-f4bug@amsat.org>
+ <20200325191830.16553-10-f4bug@amsat.org>
+In-Reply-To: <20200325191830.16553-10-f4bug@amsat.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 26 Mar 2020 21:47:44 +0000
-Message-ID: <CAFEAcA-SJSTP==JM9xWJbSYOb-ZM=UyYtHP=2iQGq979SYvjyw@mail.gmail.com>
-Subject: Re: [PATCH-for-5.0 08/12] hw/mips/boston: Add missing
+Date: Thu, 26 Mar 2020 21:49:50 +0000
+Message-ID: <CAFEAcA-2FNSxHaZUuogdmFXSc7DqKHPSVD6f-Vkpnh_pTmXHQg@mail.gmail.com>
+Subject: Re: [PATCH-for-5.0 09/12] hw/mips/mips_malta: Add missing
  error-propagation code
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: QEMU Developers <qemu-devel@nongnu.org>,
@@ -76,7 +77,7 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::32a
+X-Received-From: 2607:f8b0:4864:20::330
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -88,9 +89,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2020 21:48:00 -0000
+X-List-Received-Date: Thu, 26 Mar 2020 21:50:05 -0000
 
-On Wed, 25 Mar 2020 at 19:18, Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>=
+On Wed, 25 Mar 2020 at 19:19, Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>=
  wrote:
 >
 > Running the coccinelle script produced:
@@ -102,14 +103,18 @@ cocci \
 >     --keep-comments --smpl-spacing --dir hw
 >
 >   [[manual check required: error_propagate() might be missing in object_p=
-roperty_set_int() hw/mips/boston.c:462:4]]
+roperty_set_int() hw/mips/mips_malta.c:1193:4]]
 >   [[manual check required: error_propagate() might be missing in object_p=
-roperty_set_str() hw/mips/boston.c:460:4]]
+roperty_set_str() hw/mips/mips_malta.c:1192:4]]
 >
-> Since the uses are inside a MachineClass::init() function,
-> directly use &error_fatal instead of error_propagate().
+> Add the missing error_propagate() after manual review by adding
+> a Error* parameter to create_cps().
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> ---
+>  hw/mips/mips_malta.c | 19 ++++++++++++++-----
+>  1 file changed, 14 insertions(+), 5 deletions(-)
+
 
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
