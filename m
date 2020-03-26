@@ -1,73 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHbLs-0001Mc-6o
-	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 18:51:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59524)
+	id 1jHbyy-0002TV-82
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 19:32:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37101)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <prvs=3472fa30f=alistair.francis@wdc.com>)
- id 1jHbLq-0001I5-09
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 18:51:50 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jHbyv-0002RT-7R
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 19:32:14 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <prvs=3472fa30f=alistair.francis@wdc.com>)
- id 1jHbLo-0001Pn-Tb
- for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 18:51:49 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:23243)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <prvs=3472fa30f=alistair.francis@wdc.com>)
- id 1jHbLm-0001L2-GS; Thu, 26 Mar 2020 18:51:46 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1585263122; x=1616799122;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=nu1k2YInD1z4OmhzuT9vF/dekBAG0pZjrUjpjyIB2mY=;
- b=Eqp9KWGJuBYNvSAd8Hce5eDGIPcINlnwpiwTESaVSv29HHVxd6ASJTxe
- gWtrK6mYtrsA1ge+ArAok5IbDBQdePBa8RJTOyjgMH8euSITm+RYM3AYM
- J03cZ+h5cQQKB3pukFnmZM2WhZiWubE1NrK9P9eSbW/WcRW8PBFM8Y8QD
- RChidVIdfsqdYRhhsGL1Fa0cn+JJThqsfo9JNoE0lVR1FDOY8d9dZAU4J
- 1IL0lnwxd2a/POM0sFmDuUHNIuusZQKIbmMbFL+X5nMluLLQh4Xzzf2Bf
- vNyIE5eu2NauyGclfSy6VTv/nR9vIZhKUXbKtEPLHxKw7UoZWqP02hncx g==;
-IronPort-SDR: Zd6M6TVWNoaTEOz+zH+ZPgbocRJFqeyy3KIbJgddv0EjODR9tCMBEN8dgXkBoi4gjm643470jH
- cWsG0DykkBKRwW/2l4psMyIozvYv8fdTONB6rSx1Kf5E9ZtFLgOCKgYJc0nG7zHYBHis3JDu52
- hCUjUZykdy8GOOGfw+PyQ70u4PGkZi3uKfZH7vb26qLD6fI+adfNldx+GVRosho8xNoLse0QSB
- q3BiZL4rY/5MqOTaTDIyntortfQRIgeGXjIA8EMiK5lbilG/OZPtP1qSFU5Sh6/kj2PVERduUo
- CyU=
-X-IronPort-AV: E=Sophos;i="5.72,310,1580745600"; d="scan'208";a="235858180"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 27 Mar 2020 06:52:01 +0800
-IronPort-SDR: Gl8/aWlWVWvUq5YR6iPwTzWhM6y6Q1iQy/emjgdRNi7P73uTLivSPWfJNL3iuDINdmEvFF07Fh
- 6fDB/bGhrn5HrfMLPAFWP7A8BFETFiDaCz85FAgWB0ABtJRii01IAOXFjwfz2aJr95hBgwze2Y
- evHno/l4F/tIjb+7hKmCJcEdapOYkQo3P5bNEduB5iHp50rshD1KHfDlppJZSRVfdeMjfU6fta
- 09s2bziHxHXfk6WophjSQaji9/G+/4XIsPeq+bSSpYrqzQU62Ia86BkWDtjmD7cSY4JsPdTV1T
- uTarp3oirRjBa2WCW0+punhL
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Mar 2020 15:42:47 -0700
-IronPort-SDR: ys1GDTncR0JUslY5A5g6yJhRUHtj0+XpIwuJZI9ypaIYkGFHOGdV8BVhBKKJS5nqiC3XHUcXy0
- 9ffQCn/ljgGeHdMjsuO+LhC2vZltnb/Y+gW8K4nyzWzVY5/rAXf9STHWb9qRDXqEL4DHLE03EJ
- TSCCTw0chhkIJM3xvKQoFO2k0w2pyZOvhWda8VJBbqewntvzEW/6UxSMG2uglW+Q29c3nnQNdu
- YPYKZOsEvgmo/iKSBsHabU3ofWbLbry4MiLKSqRl9BiahRum1oTHyHAAK03gX1iKQTkKKfIpBt
- ULg=
-WDCIronportException: Internal
-Received: from 2j0d3g2.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.54.250])
- by uls-op-cesaip01.wdc.com with ESMTP; 26 Mar 2020 15:51:45 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Subject: [PATCH for 5.0 v1 2/2] riscv: AND stage-1 and stage-2 protection flags
-Date: Thu, 26 Mar 2020 15:44:09 -0700
-Message-Id: <846f1e18f5922d818bc464ec32c144ef314ec724.1585262586.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.26.0
-In-Reply-To: <cover.1585262586.git.alistair.francis@wdc.com>
+ (envelope-from <richard.henderson@linaro.org>) id 1jHbyt-00085y-Ru
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 19:32:12 -0400
+Received: from mail-pj1-x1041.google.com ([2607:f8b0:4864:20::1041]:34585)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1jHbyt-000842-Mb
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 19:32:11 -0400
+Received: by mail-pj1-x1041.google.com with SMTP id q16so3768818pje.1
+ for <qemu-riscv@nongnu.org>; Thu, 26 Mar 2020 16:32:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=pU1lNeZmeol/IzGK+YUex2ZmlBph/TYtG4Nj8RjZ7Bo=;
+ b=c5uzQ7r2xn431cJPDfv9yS8fjWFpAiWJhoxbRhvlg/2AWVIPDa4KrumdYHVPTVcAzp
+ CapAgRGasyZc3Pr/HZKbv4bwPF8zxFIWEut6Z3Wx8VAxIxMOnOGOG5KihBplgUvEmiq7
+ VY0mNUVrQ/5XKoKsh9gr41lG6bhmSBbMhy0nhDIrOJnel4+T8ckiFPsKX4SF982mFntV
+ zWAtcwKixqGJdzVJx2n3c2RwLinuDQJ1EiEQTpN9pWpW9z0yTbhPw8Oax4fXnIvHFzRj
+ 2e9RPrDmOePuJPPxJ0IzajZ8a/N3F1shgMxrTGXIWrvwzo5Xm/8eBR7a92g2H5nZx4p5
+ L8Mw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=pU1lNeZmeol/IzGK+YUex2ZmlBph/TYtG4Nj8RjZ7Bo=;
+ b=TjL0EWPvd4YEpIkHjvv8oWtcW6FO2eWsmnH/6dmNEjKMnO00v8P3pHq7cceXtndqaZ
+ IugwLy/qPqFB1QBSESg3zOVHSodaSwclrwNWDUqERAOOqdBoMdeZTaT2V685/onSk4ZW
+ qLJR7uCnWCLzcL9d9zwrES5PW4vhK+p6XVfWUl1BSO1XnB7iwA3vo3bdygL/dKjRQfDo
+ bMPd4d21Ra2Zi9Ct9ZZN9oXjk6Snu+9RIaYMGm27+0bYkhem/D/f4pjyADZ794fuh+br
+ F1acDV5h4GT3K74uOgG/c2t2rpC5262r40QN/YaQsuJrIh63XhYSQkaAKLrKwoP9zhRn
+ thzA==
+X-Gm-Message-State: ANhLgQ2iVt0zRO/gV0tKv3nd5aOUEmcvbdKgKWs2q9XFVij6muEx1ghR
+ QAMmOAcwj58BVGy9mdSrGV+OPw==
+X-Google-Smtp-Source: ADFU+vsPtNs7SJAT2UJjddGUB4AepNhTtjsjFxdxJMQitLf7ogn1lTAyBDC5YieWWkvSesGnaE8qog==
+X-Received: by 2002:a17:902:4b:: with SMTP id 69mr9903224pla.97.1585265530319; 
+ Thu, 26 Mar 2020 16:32:10 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-138-234.tukw.qwest.net. [174.21.138.234])
+ by smtp.gmail.com with ESMTPSA id d71sm2616691pfd.46.2020.03.26.16.32.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 26 Mar 2020 16:32:09 -0700 (PDT)
+Subject: Re: [PATCH for 5.0 v1 2/2] riscv: AND stage-1 and stage-2 protection
+ flags
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair23@gmail.com
 References: <cover.1585262586.git.alistair.francis@wdc.com>
+ <846f1e18f5922d818bc464ec32c144ef314ec724.1585262586.git.alistair.francis@wdc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <c835ef40-6e7a-7639-236c-5fb939bf7fc2@linaro.org>
+Date: Thu, 26 Mar 2020 16:32:07 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
-X-Received-From: 68.232.143.124
+In-Reply-To: <846f1e18f5922d818bc464ec32c144ef314ec724.1585262586.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::1041
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,49 +77,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2020 22:51:51 -0000
+X-List-Received-Date: Thu, 26 Mar 2020 23:32:14 -0000
 
-Take the result of stage-1 and stage-2 page table walks and AND the two
-protection flags together. This way we require both to set permissions
-instead of just stage-2.
+On 3/26/20 3:44 PM, Alistair Francis wrote:
+> Take the result of stage-1 and stage-2 page table walks and AND the two
+> protection flags together. This way we require both to set permissions
+> instead of just stage-2.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu_helper.c | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+> 
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index f36d184b7b..50e13a064f 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -707,7 +707,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>  #ifndef CONFIG_USER_ONLY
+>      vaddr im_address;
+>      hwaddr pa = 0;
+> -    int prot;
+> +    int prot, prot2;
+>      bool pmp_violation = false;
+>      bool m_mode_two_stage = false;
+>      bool hs_mode_two_stage = false;
+> @@ -757,13 +757,15 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>              /* Second stage lookup */
+>              im_address = pa;
+>  
+> -            ret = get_physical_address(env, &pa, &prot, im_address,
+> +            ret = get_physical_address(env, &pa, &prot2, im_address,
+>                                         access_type, mmu_idx, false, true);
+>  
+>              qemu_log_mask(CPU_LOG_MMU,
+>                      "%s 2nd-stage address=%" VADDR_PRIx " ret %d physical "
+>                      TARGET_FMT_plx " prot %d\n",
+> -                    __func__, im_address, ret, pa, prot);
+> +                    __func__, im_address, ret, pa, prot2);
+> +
+> +            prot &= prot2;
+>  
+>              if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+>                  (ret == TRANSLATE_SUCCESS) &&
+> 
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu_helper.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+Whee!  Yes, I think this is what you've been looking for.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index f36d184b7b..50e13a064f 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -707,7 +707,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
- #ifndef CONFIG_USER_ONLY
-     vaddr im_address;
-     hwaddr pa = 0;
--    int prot;
-+    int prot, prot2;
-     bool pmp_violation = false;
-     bool m_mode_two_stage = false;
-     bool hs_mode_two_stage = false;
-@@ -757,13 +757,15 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-             /* Second stage lookup */
-             im_address = pa;
- 
--            ret = get_physical_address(env, &pa, &prot, im_address,
-+            ret = get_physical_address(env, &pa, &prot2, im_address,
-                                        access_type, mmu_idx, false, true);
- 
-             qemu_log_mask(CPU_LOG_MMU,
-                     "%s 2nd-stage address=%" VADDR_PRIx " ret %d physical "
-                     TARGET_FMT_plx " prot %d\n",
--                    __func__, im_address, ret, pa, prot);
-+                    __func__, im_address, ret, pa, prot2);
-+
-+            prot &= prot2;
- 
-             if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-                 (ret == TRANSLATE_SUCCESS) &&
--- 
-2.26.0
 
+r~
 
