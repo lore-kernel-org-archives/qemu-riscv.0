@@ -1,64 +1,100 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHGXY-0004Cu-17
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Mar 2020 20:38:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43910)
+	id 1jHLuw-0005nY-NI
+	for mharc-qemu-riscv@gnu.org; Thu, 26 Mar 2020 02:23:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50597)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <dgibson@ozlabs.org>) id 1jHGXT-00041T-Ul
- for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 20:38:29 -0400
+ (envelope-from <laurent@vivier.eu>) id 1jHLuu-0005l6-I7
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 02:23:01 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <dgibson@ozlabs.org>) id 1jHGXS-0002Ul-Fk
- for qemu-riscv@nongnu.org; Wed, 25 Mar 2020 20:38:27 -0400
-Received: from ozlabs.org ([203.11.71.1]:47609)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <dgibson@ozlabs.org>)
- id 1jHGXI-0002AZ-1q; Wed, 25 Mar 2020 20:38:17 -0400
-Received: by ozlabs.org (Postfix, from userid 1007)
- id 48nmL764zfz9sSJ; Thu, 26 Mar 2020 11:38:07 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=gibson.dropbear.id.au; s=201602; t=1585183087;
- bh=rnbisUE0+51ZDSwwrAFBRyx55pg8YOyD7931PC3jY+M=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=L7RyjwFuRdBd5mV/IcT43yhdylnT1POOaqXGQNRULPIx0mWazJMZ9oZPelM7MAodw
- zufWfEgzmO4aWK1f0mhVKuSlrpi6juYWoZM6JIafmlyke+rZQ17v5PPs6E1m47Axx3
- dkQSpgL2vk++0ODRqx+88TKFtUCN0OQsbaKpg4tk=
-Date: Thu, 26 Mar 2020 10:55:16 +1100
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair@alistair23.me>,
- Paul Burton <pburton@wavecomp.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, qemu-ppc@nongnu.org,
- Jason Wang <jasowang@redhat.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Richard Henderson <rth@twiddle.net>,
- Peter Maydell <peter.maydell@linaro.org>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Andrew Baumann <Andrew.Baumann@microsoft.com>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Subject: Re: [PATCH-for-5.0 10/12] hw/misc/macio/macio: Add missing
- error-propagation code
-Message-ID: <20200325235516.GG36889@umbus.fritz.box>
-References: <20200325191830.16553-1-f4bug@amsat.org>
- <20200325191830.16553-11-f4bug@amsat.org>
+ (envelope-from <laurent@vivier.eu>) id 1jHLut-0001mD-Ib
+ for qemu-riscv@nongnu.org; Thu, 26 Mar 2020 02:23:00 -0400
+Received: from mout.kundenserver.de ([217.72.192.74]:35945)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <laurent@vivier.eu>)
+ id 1jHLur-0001iY-6Q; Thu, 26 Mar 2020 02:22:57 -0400
+Received: from [192.168.100.1] ([82.252.135.106]) by mrelayeu.kundenserver.de
+ (mreue106 [213.165.67.119]) with ESMTPSA (Nemesis) id
+ 1N5n81-1jKULY2DFr-017BP2; Thu, 26 Mar 2020 07:22:51 +0100
+Subject: Re: [PATCH v9 3/4] linux-user: Support futex_time64
+To: Alistair Francis <alistair23@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <cover.1584571250.git.alistair.francis@wdc.com>
+ <d9390e368a9a1fd32d52aa771815e6e3d40cb1d4.1584571250.git.alistair.francis@wdc.com>
+ <CAKmqyKNTpfDvWx85eAK2YNRgzxHRMA8NBvJJf081X3O76B=ekQ@mail.gmail.com>
+From: Laurent Vivier <laurent@vivier.eu>
+Autocrypt: addr=laurent@vivier.eu; prefer-encrypt=mutual; keydata=
+ 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
+Message-ID: <9d1ce19f-86ba-3247-c3fc-0ba8d0bc7760@vivier.eu>
+Date: Thu, 26 Mar 2020 07:22:50 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="cz6wLo+OExbGG7q/"
-Content-Disposition: inline
-In-Reply-To: <20200325191830.16553-11-f4bug@amsat.org>
+In-Reply-To: <CAKmqyKNTpfDvWx85eAK2YNRgzxHRMA8NBvJJf081X3O76B=ekQ@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: fr
+Content-Transfer-Encoding: 8bit
+X-Provags-ID: V03:K1:adBpIiLGRW6NGSzBYEeIj7Rmc5uEMauKCsOpPajuxXHVUuUfXvb
+ r4/YpFbM1sSK61NssSL/djAYoznbQV/TJR1O9wS/1BUd6q2XfQM82LcfYWz1RCvcHDV9Vsf
+ noubRnxklUi+yTQ9eg4vrYebVIvPEv9tLX66gKmq23akmOQKR1quGmg+VKEslBVdemjrouT
+ FaEaDHTrN4QTHaVlHaX1w==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:fqopX+e9Dww=:37GjQL9u+XLN7eUiPxkdOG
+ 7ZfQ/cUmoUXf37KisO/wuIqe9Z5JSsq8B462G5SWlueXOAGmgcnKgT97PcGm8F9Zp9nMzNiwR
+ Dgi5xzO1p5p7rzbgR4vx0Aqdt1ea+VOyV8O+98XMF3TM9mYYQ+Ys1KttXoUNmR49U+yEp/cIr
+ mVAyGfEsOzzJV7NXrZjwaf7W/QRUp3h+yJj1CLxyuHiJEfLfgbXryOffrfhjUGmj1QNA8PSTt
+ m1CV+TDsgI1jvb0tseD0L/pq/bzig1crqoMR51K+soFRs/gWvCChXiKsY30qSmKB4U4kSXent
+ iM1RabEzl3o4wksfcqIvKgNQE4dBOfsar2OeaTXHM1NJW6rvQsfbqodYo9rcvwaUmZeTfpq9X
+ Rcw0RCjBvfM2VkFPFGHAQuYL8YnVNzjFAUFjYRisp3CCxbj2jrlvA0kv2tFGpzsuQSq9YImA0
+ I8g4oR6RkHCyY3W6eNwzf44pITPSLoJiAJoQUnzyxFhnORiqBOhHnizeBSix4HvuLBu93DMJs
+ KdwyVZHjDSeA9WN1G2WJE3PdmowvIwuhNh6kjqCnS1MvNqSBo0IwfeZdciTypj15aJoa5sFcS
+ PohHKXpfVMaWUYhRAImIuZDwUKR5viE7uvim3DKVKDeZlf/u3P/GBbkBviS1ffCQxZ7NHs34G
+ m3RZGU3WC7RwN38vWJF4wO+PGgCYAWj+wOwloDjKN3GkeB0AXmZes878vpJxSW+UiosDdn22B
+ mKB7rNV0qahyVL43+XrAJo5X/FOUSfvYqD9d1Z3WdJyEuh4aXUgbq5fiFoXWn93BOde7scEJr
+ Yu7SuMo+Xe0RUA3KxV2OicRKbD9cOcK4VV8OXVItC2ddTFb1aV8n0VbvBHbyuzWlV5FnVAN
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 203.11.71.1
+X-Received-From: 217.72.192.74
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,185 +106,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2020 00:38:29 -0000
+X-List-Received-Date: Thu, 26 Mar 2020 06:23:01 -0000
 
+Le 25/03/2020 à 18:41, Alistair Francis a écrit :
+> On Wed, Mar 18, 2020 at 3:54 PM Alistair Francis
+> <alistair.francis@wdc.com> wrote:
+>>
+>> Add support for host and target futex_time64. If futex_time64 exists on
+>> the host we try that first before falling back to the standard futux
+>> syscall.
+>>
+>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> 
+> @Laurent did you see this?
+> 
+> I guess it's a little late for 5.0 but it would be nice to support.
 
---cz6wLo+OExbGG7q/
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yes, I've seen your patch.
 
-On Wed, Mar 25, 2020 at 08:18:28PM +0100, Philippe Mathieu-Daud=E9 wrote:
-> Running the coccinelle script produced:
->=20
->   $ spatch \
->     --macro-file scripts/cocci-macro-file.h --include-headers \
->     --sp-file scripts/coccinelle/object_property_missing_error_propagate.=
-cocci \
->     --keep-comments --smpl-spacing --dir hw
->=20
->   [[manual check required: error_propagate() might be missing in object_p=
-roperty_set_bool() hw/misc/macio/macio.c:350:8]]
->=20
-> Add the missing error_propagate() after manual review.
->=20
-> Signed-off-by: Philippe Mathieu-Daud=E9 <f4bug@amsat.org>
+I think it can go into 5.0 RC because it's a bug fix and it is really
+needed because the 32bit futex will be broken if host timespec uses
+64bit field.
 
-Reviewed-by: David Gibson <david@gibson.dropbear.id.au>
-Acked-by: David Gibson <david@gibson.dropbear.id.au>
+But I need to review and test before.
 
-> ---
->  hw/misc/macio/macio.c | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/hw/misc/macio/macio.c b/hw/misc/macio/macio.c
-> index 79222192e8..fffb64a7d5 100644
-> --- a/hw/misc/macio/macio.c
-> +++ b/hw/misc/macio/macio.c
-> @@ -292,98 +292,102 @@ static const MemoryRegionOps timer_ops =3D {
->  static void macio_newworld_realize(PCIDevice *d, Error **errp)
->  {
->      MacIOState *s =3D MACIO(d);
->      NewWorldMacIOState *ns =3D NEWWORLD_MACIO(d);
->      DeviceState *pic_dev =3D DEVICE(ns->pic);
->      Error *err =3D NULL;
->      SysBusDevice *sysbus_dev;
->      MemoryRegion *timer_memory =3D NULL;
-> =20
->      macio_common_realize(d, &err);
->      if (err) {
->          error_propagate(errp, err);
->          return;
->      }
-> =20
->      sysbus_dev =3D SYS_BUS_DEVICE(&s->escc);
->      sysbus_connect_irq(sysbus_dev, 0, qdev_get_gpio_in(pic_dev,
->                                                         NEWWORLD_ESCCB_IR=
-Q));
->      sysbus_connect_irq(sysbus_dev, 1, qdev_get_gpio_in(pic_dev,
->                                                         NEWWORLD_ESCCA_IR=
-Q));
-> =20
->      /* OpenPIC */
->      sysbus_dev =3D SYS_BUS_DEVICE(ns->pic);
->      memory_region_add_subregion(&s->bar, 0x40000,
->                                  sysbus_mmio_get_region(sysbus_dev, 0));
-> =20
->      /* IDE buses */
->      macio_realize_ide(s, &ns->ide[0],
->                        qdev_get_gpio_in(pic_dev, NEWWORLD_IDE0_IRQ),
->                        qdev_get_gpio_in(pic_dev, NEWWORLD_IDE0_DMA_IRQ),
->                        0x16, &err);
->      if (err) {
->          error_propagate(errp, err);
->          return;
->      }
-> =20
->      macio_realize_ide(s, &ns->ide[1],
->                        qdev_get_gpio_in(pic_dev, NEWWORLD_IDE1_IRQ),
->                        qdev_get_gpio_in(pic_dev, NEWWORLD_IDE1_DMA_IRQ),
->                        0x1a, &err);
->      if (err) {
->          error_propagate(errp, err);
->          return;
->      }
-> =20
->      /* Timer */
->      timer_memory =3D g_new(MemoryRegion, 1);
->      memory_region_init_io(timer_memory, OBJECT(s), &timer_ops, NULL, "ti=
-mer",
->                            0x1000);
->      memory_region_add_subregion(&s->bar, 0x15000, timer_memory);
-> =20
->      if (ns->has_pmu) {
->          /* GPIOs */
->          sysbus_dev =3D SYS_BUS_DEVICE(&ns->gpio);
->          object_property_set_link(OBJECT(&ns->gpio), OBJECT(pic_dev), "pi=
-c",
->                                   &error_abort);
->          memory_region_add_subregion(&s->bar, 0x50,
->                                      sysbus_mmio_get_region(sysbus_dev, 0=
-));
->          object_property_set_bool(OBJECT(&ns->gpio), true, "realized", &e=
-rr);
-> +        if (err) {
-> +            error_propagate(errp, err);
-> +            return;
-> +        }
-> =20
->          /* PMU */
->          object_initialize_child(OBJECT(s), "pmu", &s->pmu, sizeof(s->pmu=
-),
->                                  TYPE_VIA_PMU, &error_abort, NULL);
->          object_property_set_link(OBJECT(&s->pmu), OBJECT(sysbus_dev), "g=
-pio",
->                                   &error_abort);
->          qdev_prop_set_bit(DEVICE(&s->pmu), "has-adb", ns->has_adb);
->          qdev_set_parent_bus(DEVICE(&s->pmu), BUS(&s->macio_bus));
-> =20
->          object_property_set_bool(OBJECT(&s->pmu), true, "realized", &err=
-);
->          if (err) {
->              error_propagate(errp, err);
->              return;
->          }
->          sysbus_dev =3D SYS_BUS_DEVICE(&s->pmu);
->          sysbus_connect_irq(sysbus_dev, 0, qdev_get_gpio_in(pic_dev,
->                                                             NEWWORLD_PMU_=
-IRQ));
->          memory_region_add_subregion(&s->bar, 0x16000,
->                                      sysbus_mmio_get_region(sysbus_dev, 0=
-));
->      } else {
->          /* CUDA */
->          object_initialize_child(OBJECT(s), "cuda", &s->cuda, sizeof(s->c=
-uda),
->                                  TYPE_CUDA, &error_abort, NULL);
->          qdev_set_parent_bus(DEVICE(&s->cuda), BUS(&s->macio_bus));
->          qdev_prop_set_uint64(DEVICE(&s->cuda), "timebase-frequency",
->                               s->frequency);
-> =20
->          object_property_set_bool(OBJECT(&s->cuda), true, "realized", &er=
-r);
->          if (err) {
->              error_propagate(errp, err);
->              return;
->          }
->          sysbus_dev =3D SYS_BUS_DEVICE(&s->cuda);
->          sysbus_connect_irq(sysbus_dev, 0, qdev_get_gpio_in(pic_dev,
->                                                             NEWWORLD_CUDA=
-_IRQ));
->          memory_region_add_subregion(&s->bar, 0x16000,
->                                      sysbus_mmio_get_region(sysbus_dev, 0=
-));
->      }
->  }
-
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
-
---cz6wLo+OExbGG7q/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAl5772QACgkQbDjKyiDZ
-s5KdnA//Yc0jQHpDJOUKajuu0KFnO7KibNeOn6+mg8yZLdMu2aGV7QNeZeMpDli8
-dhrVLhk5I3dKtaIB/08e0HquG7bknaHlBMd4ioljg8FBvprdR5th/GBnCxzWvHDI
-/GCZ7B3jLPXLIldXphoiVDSWHs2BN9Du2ds1DqngsXxk7smBHLOY9OyCnZ1kONH4
-7YUo0hvJQp+73M5YZf4xzLEAb7qhHQ/jtNoaXaDiXEXJUzEdN7szRPeQrW1PJhyR
-yb4wwkEYVrS0AmoQN4nJ8sAK40PEnSPo/pgbdrg6sJ8Gn2IsgHOYDeOi/bgC+8OT
-Ukmv2ZIPY8YGV+0mpuhKq9pDpOu4F4vP/Q50L46eFJfNqF/dYDUmJq2E2OVVCGIi
-Uso2fNChSMzP0OYWjfJ5Vbh4ydcrf+JptBdf7dcxxsZYX8/4qXorjYHVz6R+cY08
-N19r5T51hVQqkf65nKgeJiJiodo1wsjS5Z7TNPXUcQhiAwhdUPeL+oouIT3DqHyc
-uce+iPPdatSwpFkW2CM6mzJwrPE1PP1dFdCAqSft+PHhHuxyjjPoiExS1Lw60KUX
-wP68051Ma54P46KBkMlBxowbMgUm7mZdYElEUXam26LWNP5NboQpdqB9gwMBvr6q
-UhRa8/VIc9P6VxtIF0EsS0o0Ct0XMoFMlQiBS9btmw3NeC33ZOM=
-=O4J9
------END PGP SIGNATURE-----
-
---cz6wLo+OExbGG7q/--
+Thanks,
+Laurent
 
