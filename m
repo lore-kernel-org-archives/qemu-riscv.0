@@ -1,72 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jI0rn-0007TH-9h
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Mar 2020 22:06:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49478)
+	id 1jI24N-0000iL-Lm
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Mar 2020 23:23:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58193)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1jI0rl-0007Se-5T
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 22:06:30 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jI24L-0000he-AY
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 23:23:34 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1jI0rk-0001Yi-39
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 22:06:28 -0400
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:34801)
+ (envelope-from <richard.henderson@linaro.org>) id 1jI24J-0001kA-Vl
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 23:23:32 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:36342)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1jI0rj-0001XM-Lz
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 22:06:28 -0400
-Received: by mail-pg1-x542.google.com with SMTP id d37so5012598pgl.1
- for <qemu-riscv@nongnu.org>; Fri, 27 Mar 2020 19:06:27 -0700 (PDT)
+ id 1jI24J-0001ju-PP
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 23:23:31 -0400
+Received: by mail-pl1-x641.google.com with SMTP id g2so4235253plo.3
+ for <qemu-riscv@nongnu.org>; Fri, 27 Mar 2020 20:23:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=FmLAljmekYVZCwDl3aOlnyPdywDPCiVnaPAEy0My6YA=;
- b=Ey4UwKwku5tUBhXSdxgBymgtHPNaEEllmkSKxdTqGCvpQPQujaTSqGvOC9jLfem2fn
- YNWvG+dt1vWXXWl7pOdm0JLtP0Kmc6v6isQNlQOcJ+9TimjnuVIptKGlv1v5aq+t5DOA
- Mo+DKjed+E0xTkPqDEqZGCM1os1XTBkNykgLYKeU5+HF5OGoJBlXvpEfuCI46UzSSAz1
- gdXPMTUpAuUph6M1SCkLrlXQqEqKufVMAeT+S2rvfb/MluMtsWDHwzvPdDYKu15Ilhs7
- qEUNaZPxQ6j8704Gti6ti8CbXGDNd1gDO00ML8J0HCLi7CsIsh4kBuczVhnWbnZZ5xFu
- sw0A==
+ bh=xqS5xXKI/hCKceagn++9iVyTAvEWIV2FzcPrX6crXZo=;
+ b=qMGJ3Cv4+l1ohNI0g+56NAffWvN+SZo7+8Jq3i2zmntS52fH80xXHD8gLY+OEdbwLi
+ P6JwYNOyY+63C1yTJ/lhG0CLXaiilvpvkjkzqMEBS22Jwf9YIw1NAWpsNqPDspw/8ewA
+ 4lBLgcU0+bxFQEc5ZJ0Jd2NI77fFNjMfm4mDZCRTCsaPANaA8TlJUXFZfM4XsxZiaJWY
+ /EVODTuVFNPBXpePJ1/S53nJkZ/9Ti+CLUvY9OB5tO5GAulwM4+kfaoHV1GhoMH0PGck
+ uCOxtdh54TJ46omrAAiEPXSYDxDrLPYsETCW6fI/ugJxYe7w9oL1yk+47fYdJdmYpcdE
+ NgWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=FmLAljmekYVZCwDl3aOlnyPdywDPCiVnaPAEy0My6YA=;
- b=QwnyDRQw5g/jrUBXLgoeFCNwVAKYRu3Knp4Ia59lMm4KwAM4XxrFQILNj1rbuFFvu8
- iaMkcpjClsmwkiJLbC36CA9yZHWrPqk4QfsWOLGH/ZAD/jPUMkk5yMZniv3jr0GWdNHS
- giWAqCkVOswhzetMX3izHGCtjHWt3EXoY3gD4Zksi2zAr1tMOlezUVu5/GAA65kCLJtZ
- 6Ceqs3Bo9ZjN1yJB8hS7c5GQEGLSCJVpLoWRMFhMNgulZ5tikT5JGIJ8T4xrXkWAlaKz
- Wf+xIEmLY8lX9iXWFViDLpj/HRsZhXdjgmI2SDdSwy5aSj82dYPrfuwPfKptl/+YFSUk
- dz1A==
-X-Gm-Message-State: ANhLgQ0sdjoVoVsnyNlNLg7B1uoV3aas6LtaJknOSK/5ymo+uJKKp3Yv
- 6CZXgdgQW/9HyB0qLWxWiGfkIJ8CyNM=
-X-Google-Smtp-Source: ADFU+vuLtak0pQ0UE0lwDWTyv21r1tdUMPvb4Kg8Npu3zqtWG44V6FFYvn7fYG3pvwtE0fEq9c8RJA==
-X-Received: by 2002:a65:49cf:: with SMTP id t15mr2191566pgs.375.1585361186269; 
- Fri, 27 Mar 2020 19:06:26 -0700 (PDT)
+ bh=xqS5xXKI/hCKceagn++9iVyTAvEWIV2FzcPrX6crXZo=;
+ b=m9tfopEAQGGMYD2E+ji/F9xM1NBLi790VVHp8Tg+hzZejYWYbGljTppj584JshMLqg
+ YqWf3uR8kmOQvBlHI0ZTiUcUwgoFqSSgKLsJsZXsOL2cV6iO6Nahun06CyH1BX9Ja9LL
+ XXtHKWBHSPctkKzhETq4a92K0irDgIt5fXQx0SRnKoef/5Ot9e3aYnSLoaiU0fpDlF6u
+ WMoydQMGIKGpnutaQ0rBqZpoz70KMqDig2Hd1KN92CRNqw3v6+UZ5nIXPqsTDG/rIRiI
+ WcWo2YOoqUTZbhrnOKimbPtUXWEVAIN5Gl53RkrywOVqhUCqTWv7Ia2BApWlUwDLRovu
+ lF/g==
+X-Gm-Message-State: ANhLgQ2wZBZKgy5KEA6ftwVYtR0+lsytUhra5hSIhZbq9+shTyB7wfr1
+ MNF8BNCHK7Xeq86W8A/gfBCWOY4cu3U=
+X-Google-Smtp-Source: ADFU+vsdIuiwW0hYzxehjnj8SEonUninEKuYDCkFn2VAMLAxJ/OcegFgWionZAu38qk44yrN2X0R4g==
+X-Received: by 2002:a17:90a:5205:: with SMTP id v5mr2840210pjh.0.1585365810319; 
+ Fri, 27 Mar 2020 20:23:30 -0700 (PDT)
 Received: from [192.168.1.11] (174-21-138-234.tukw.qwest.net. [174.21.138.234])
- by smtp.gmail.com with ESMTPSA id b198sm2664738pga.71.2020.03.27.19.06.25
+ by smtp.gmail.com with ESMTPSA id d26sm5174511pfo.37.2020.03.27.20.23.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Mar 2020 19:06:25 -0700 (PDT)
-Subject: Re: [PATCH v6 40/61] target/riscv: vector floating-point classify
+ Fri, 27 Mar 2020 20:23:29 -0700 (PDT)
+Subject: Re: [PATCH v6 41/61] target/riscv: vector floating-point merge
  instructions
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-41-zhiwei_liu@c-sky.com>
+ <20200317150653.9008-42-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <73d2e780-6121-5180-836c-00542d8ca522@linaro.org>
-Date: Fri, 27 Mar 2020 19:06:23 -0700
+Message-ID: <e0d4678b-1a24-3e90-768a-efd0f0311b68@linaro.org>
+Date: Fri, 27 Mar 2020 20:23:27 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200317150653.9008-41-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200317150653.9008-42-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::542
+X-Received-From: 2607:f8b0:4864:20::641
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -78,20 +78,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2020 02:06:30 -0000
+X-List-Received-Date: Sat, 28 Mar 2020 03:23:34 -0000
 
 On 3/17/20 8:06 AM, LIU Zhiwei wrote:
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> ---
->  target/riscv/fpu_helper.c               | 33 +--------
->  target/riscv/helper.h                   |  4 ++
->  target/riscv/insn32.decode              |  1 +
->  target/riscv/insn_trans/trans_rvv.inc.c |  3 +
->  target/riscv/internals.h                |  5 ++
->  target/riscv/vector_helper.c            | 93 +++++++++++++++++++++++++
->  6 files changed, 109 insertions(+), 30 deletions(-)
+> +    for (i = 0; i < vl; i++) {                            \
+> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {        \
+> +            ETYPE s2 = *((ETYPE *)vs2 + H(i));            \
+> +            *((ETYPE *)vd + H1(i)) = s2;                  \
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+H1 should be H.
+
+> +        } else {                                          \
+> +            *((ETYPE *)vd + H(i)) = (ETYPE)s1;            \
+> +        }                                                 \
+
+You can also hoist the s2 dereference out of the IF, and let the assignment be
+unconditional.
+
+  *((ETYPE *)vd + H(i))
+    = (!vm && !vext_elem_mask(v0, mlen, i) ? s2 : s1);
 
 
 r~
