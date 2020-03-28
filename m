@@ -1,72 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jI24N-0000iL-Lm
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Mar 2020 23:23:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58193)
+	id 1jI2H7-0003He-BP
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Mar 2020 23:36:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59377)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1jI24L-0000he-AY
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 23:23:34 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jI2H4-0003FD-9t
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 23:36:43 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1jI24J-0001kA-Vl
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 23:23:32 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:36342)
+ (envelope-from <richard.henderson@linaro.org>) id 1jI2H3-00060B-6J
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 23:36:42 -0400
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:39484)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1jI24J-0001ju-PP
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 23:23:31 -0400
-Received: by mail-pl1-x641.google.com with SMTP id g2so4235253plo.3
- for <qemu-riscv@nongnu.org>; Fri, 27 Mar 2020 20:23:31 -0700 (PDT)
+ id 1jI2H3-0005za-1V
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 23:36:41 -0400
+Received: by mail-pj1-x1042.google.com with SMTP id z3so4086893pjr.4
+ for <qemu-riscv@nongnu.org>; Fri, 27 Mar 2020 20:36:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=xqS5xXKI/hCKceagn++9iVyTAvEWIV2FzcPrX6crXZo=;
- b=qMGJ3Cv4+l1ohNI0g+56NAffWvN+SZo7+8Jq3i2zmntS52fH80xXHD8gLY+OEdbwLi
- P6JwYNOyY+63C1yTJ/lhG0CLXaiilvpvkjkzqMEBS22Jwf9YIw1NAWpsNqPDspw/8ewA
- 4lBLgcU0+bxFQEc5ZJ0Jd2NI77fFNjMfm4mDZCRTCsaPANaA8TlJUXFZfM4XsxZiaJWY
- /EVODTuVFNPBXpePJ1/S53nJkZ/9Ti+CLUvY9OB5tO5GAulwM4+kfaoHV1GhoMH0PGck
- uCOxtdh54TJ46omrAAiEPXSYDxDrLPYsETCW6fI/ugJxYe7w9oL1yk+47fYdJdmYpcdE
- NgWw==
+ bh=uKI2J2kmXTKnljWu7KUTcOr+8EW8JlgRdnzNGpaw77E=;
+ b=pghbGcmKrTJW16FKo5OlUOElj4OjjPCAHZvfrSGNlfVg7p07H7MQxN5IK2xgM6E0oP
+ JceOX1zAOJjRFIOKzfaczjgBJfERdjq42EJPJJQBfNeKHA74WWK+562ZN2PU0q4yxROE
+ +Lz+zPLkRlJesqJOyiQOOpeXRqHv24zq6IMU3DlQGNy9Ab0U27wFDxDZa5rAn9N/wxGP
+ Fd8sV2zP/HaioItsmOgBZ59/2uPq9oNYaYsToUiDkk8z5dSP6+YKteKPjfAPv82U6Gc1
+ HSV3PEG+f1YI1gehLaEqUXN83/mFGMvDKu6CJaEdL3XEAzNIe0MHLw8hvyOnKkDE2ELP
+ xD7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=xqS5xXKI/hCKceagn++9iVyTAvEWIV2FzcPrX6crXZo=;
- b=m9tfopEAQGGMYD2E+ji/F9xM1NBLi790VVHp8Tg+hzZejYWYbGljTppj584JshMLqg
- YqWf3uR8kmOQvBlHI0ZTiUcUwgoFqSSgKLsJsZXsOL2cV6iO6Nahun06CyH1BX9Ja9LL
- XXtHKWBHSPctkKzhETq4a92K0irDgIt5fXQx0SRnKoef/5Ot9e3aYnSLoaiU0fpDlF6u
- WMoydQMGIKGpnutaQ0rBqZpoz70KMqDig2Hd1KN92CRNqw3v6+UZ5nIXPqsTDG/rIRiI
- WcWo2YOoqUTZbhrnOKimbPtUXWEVAIN5Gl53RkrywOVqhUCqTWv7Ia2BApWlUwDLRovu
- lF/g==
-X-Gm-Message-State: ANhLgQ2wZBZKgy5KEA6ftwVYtR0+lsytUhra5hSIhZbq9+shTyB7wfr1
- MNF8BNCHK7Xeq86W8A/gfBCWOY4cu3U=
-X-Google-Smtp-Source: ADFU+vsdIuiwW0hYzxehjnj8SEonUninEKuYDCkFn2VAMLAxJ/OcegFgWionZAu38qk44yrN2X0R4g==
-X-Received: by 2002:a17:90a:5205:: with SMTP id v5mr2840210pjh.0.1585365810319; 
- Fri, 27 Mar 2020 20:23:30 -0700 (PDT)
+ bh=uKI2J2kmXTKnljWu7KUTcOr+8EW8JlgRdnzNGpaw77E=;
+ b=dEWBGxbIFocqHjB5K5rVne17ajIZyEF7W8jpX+0/L/shkHsAUpd/0Y+o7IlWYhFr/1
+ HLufTTrpeP0K5vpAn7g0blk3u/V2zBy4kM1ay2pD1mxhduqNMMXcXLFzV5wcF4NQESQg
+ 3PE1FZahiCYwsG7v+u9abU0otDlSPS+fzXLQ+iazCQck4CkDR2L0TXpoArGHkpiJEd6v
+ iHhb9SmRU7aae8Vz+X6KsInEqDOWxAp641MJq5gfCi0NGMJaLOVYDMlXFOv3kIhFoquz
+ 6Y/HFe4sjymYqCn8i3v34blOYBFVkcauz0HnZBvjWVG2EdchdMxDP5DC+yMFwJYz75pC
+ 1ldQ==
+X-Gm-Message-State: ANhLgQ1NOJlh9OJ7z5dwewmLTfqaF9WWK3vOByD7185eOLMsXpC8ZwHS
+ av5ZJ1IjsrgA/qaGZDzuzgtdYiB7YE8=
+X-Google-Smtp-Source: ADFU+vvKyUF24NKwtUCJb0e/3yn3Ei3h9C7Axudc8EL5MneM3UHJWKV9fqyxp+m7M7LclT+nRTN0+A==
+X-Received: by 2002:a17:90a:cb0e:: with SMTP id
+ z14mr2750126pjt.156.1585366599600; 
+ Fri, 27 Mar 2020 20:36:39 -0700 (PDT)
 Received: from [192.168.1.11] (174-21-138-234.tukw.qwest.net. [174.21.138.234])
- by smtp.gmail.com with ESMTPSA id d26sm5174511pfo.37.2020.03.27.20.23.29
+ by smtp.gmail.com with ESMTPSA id b198sm2768647pga.71.2020.03.27.20.36.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Mar 2020 20:23:29 -0700 (PDT)
-Subject: Re: [PATCH v6 41/61] target/riscv: vector floating-point merge
- instructions
+ Fri, 27 Mar 2020 20:36:38 -0700 (PDT)
+Subject: Re: [PATCH v6 55/61] target/riscv: integer extract instruction
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-42-zhiwei_liu@c-sky.com>
+ <20200317150653.9008-56-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <e0d4678b-1a24-3e90-768a-efd0f0311b68@linaro.org>
-Date: Fri, 27 Mar 2020 20:23:27 -0700
+Message-ID: <07501722-9afa-0a47-bba5-434631335372@linaro.org>
+Date: Fri, 27 Mar 2020 20:36:37 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200317150653.9008-42-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200317150653.9008-56-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::641
+X-Received-From: 2607:f8b0:4864:20::1042
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -78,25 +78,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2020 03:23:34 -0000
+X-List-Received-Date: Sat, 28 Mar 2020 03:36:43 -0000
 
 On 3/17/20 8:06 AM, LIU Zhiwei wrote:
-> +    for (i = 0; i < vl; i++) {                            \
-> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {        \
-> +            ETYPE s2 = *((ETYPE *)vs2 + H(i));            \
-> +            *((ETYPE *)vd + H1(i)) = s2;                  \
+> +/* Integer Extract Instruction */
+> +static void extract_element(TCGv dest, TCGv_ptr base,
+> +                            int ofs, int sew)
+> +{
+> +    switch (sew) {
+> +    case MO_8:
+> +        tcg_gen_ld8u_tl(dest, base, ofs);
+> +        break;
+> +    case MO_16:
+> +        tcg_gen_ld16u_tl(dest, base, ofs);
+> +        break;
+> +    default:
+> +        tcg_gen_ld32u_tl(dest, base, ofs);
+> +        break;
+> +#if TARGET_LONG_BITS == 64
+> +    case MO_64:
+> +        tcg_gen_ld_i64(dest, base, ofs);
+> +        break;
+> +#endif
+> +    }
+> +}
 
-H1 should be H.
+I just remembered that this doesn't handle HOST_WORDS_BIGENDIAN properly -- the
+MO_64 case for TARGET_LONG_BITS == 32.
 
-> +        } else {                                          \
-> +            *((ETYPE *)vd + H(i)) = (ETYPE)s1;            \
-> +        }                                                 \
+Because we computed the offset for MO_64, not MO_32, we need
 
-You can also hoist the s2 dereference out of the IF, and let the assignment be
-unconditional.
-
-  *((ETYPE *)vd + H(i))
-    = (!vm && !vext_elem_mask(v0, mlen, i) ? s2 : s1);
+    case MO_64:
+        if (TARGET_LONG_BITS == 64) {
+            tcg_gen_ld_i64(dest, base, ofs);
+            break;
+        }
+#ifdef HOST_WORDS_BIGENDIAN
+        ofs += 4;
+#endif
+        /* fall through */
+    case MO_32:
+        tcg_gen_ld32u_tl(dest, base, ofs);
+        break;
+    default:
+        g_assert_not_reached();
 
 
 r~
