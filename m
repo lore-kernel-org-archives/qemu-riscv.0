@@ -1,73 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHytt-00005B-Uz
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Mar 2020 20:00:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34990)
+	id 1jHz04-0001Yk-KQ
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Mar 2020 20:06:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35917)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <richard.henderson@linaro.org>) id 1jHytr-0008V1-4z
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 20:00:32 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jHz02-0001YV-0z
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 20:06:54 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <richard.henderson@linaro.org>) id 1jHytp-0005af-QR
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 20:00:30 -0400
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:35437)
+ (envelope-from <richard.henderson@linaro.org>) id 1jHz01-0004WI-0a
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 20:06:53 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:40518)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
- id 1jHytp-0005YY-JI
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 20:00:29 -0400
-Received: by mail-pl1-x643.google.com with SMTP id c12so1229502plz.2
- for <qemu-riscv@nongnu.org>; Fri, 27 Mar 2020 17:00:29 -0700 (PDT)
+ id 1jHz00-0004VQ-PV
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 20:06:52 -0400
+Received: by mail-pf1-x444.google.com with SMTP id c20so2744786pfi.7
+ for <qemu-riscv@nongnu.org>; Fri, 27 Mar 2020 17:06:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=OIVlgF2aOTZVzVjS7x77/prtT7TLJr1WO0porHWWGV0=;
- b=ZLaEBIVHhJ5tkeGo1EkwTv45k1YpYTSXts9pvq/1gvMqnOr0318qoddEOMaqaPi8Yy
- 8AdUn/7KjpBPKsWE9+hHQsZfq1B9GmwlTvhj6nK8RAoELgZ+YnOJrpm14l866wMlVHvp
- SbXwgXYJnRoSLcYUv2KBjWAMXBNRxr6bmXD5rfH1EZkm1wdqR7domO91shRmCxiLxqQp
- 7V+9smZGpyZRkoi8bKUN178UkjjY6zKPbR4YW2bDl7Yy1jcyev9QJMotuPTTdJ3B6YcM
- O3eGTKXv+2VFI+1FrC9aCgZkqzmJKqxoCrlzEnhe/THWCrV0LymYv+t+tQU4yxv6Bkj2
- 47GA==
+ bh=nyxUatUmri+viMWm0r2f0sQPHURgC/4b9MqoNbg8y0s=;
+ b=aHDj5P/3jNH/z06nDrj7W5nM8MEF8+x4VHsSN+yqirKHuawfr67Uc3yTB6D8MDnvdv
+ sAYhQWrMGF8bAq7uTULdwdMOG4Ags7JNg5CtTRXTx9HoY2bJ2JroL/JcM1sBtjbxCIQu
+ 7pYATaSXUPopSLq8hZFHo8ZPDYZ0LEEtQ+++UTCLS3LxZM/smhlVq+PCsahlRqYqL1DS
+ ipd1Gghwdv21oK+s/lAa0WWe2PFgvEyN9NI38XgeOsd/mw4icoFpI95AKlAm7O2+gAPO
+ bSdBInHKpMZo9h8kTtJiMBJqY8MAssEWHMkrGNs79m2LEPKq743XEKggs/DTe++RORND
+ T0xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=OIVlgF2aOTZVzVjS7x77/prtT7TLJr1WO0porHWWGV0=;
- b=ZDdgcfhvNUjwG6nAFi3n+d71WKSkUVVyLPhMwga1SOSt7Q29GFrSRTPXqrouu3dMr6
- BHHfhvET4WaJMfIdjXAjoQuLOcwjzZw8saWQkWb8xfs/6MUwGr3AGNwvnVpJ/wGwfVn9
- Gaa9rNXkWcnrmw3vro5wDq3T2D8StlxK+b47Nn9jGVzdLLFGSgR7X0f8gGAvGWcxsKee
- BPBCZRw2CHo0s0YgTIban9VpvN6o+GfIGGmYZzwIT9v77tuE+HE9tO+A9mvSexeNSCEj
- HgMRAfbR3L5Y8KW2iFJqhW7QVdixxrZgK9Siytob+zul1E0gNOj7Mi98tTNOttMbBg7J
- hj+Q==
-X-Gm-Message-State: ANhLgQ1O/+zpu97alN+k+l2UL6LZA50EWXOQfv20u7GmzSmoN6hIQm/i
- f7TJdrA/iyGkLlVL2/9pXbwNEkYOHIA=
-X-Google-Smtp-Source: ADFU+vummvhKYdnybCJrjAJIKkKp+b7+xixV+p428jehjedJle9+SyPRm+Hn4DlHMuOWR72OvAuOvQ==
-X-Received: by 2002:a17:90b:4c84:: with SMTP id
- my4mr2010002pjb.3.1585353628166; 
- Fri, 27 Mar 2020 17:00:28 -0700 (PDT)
+ bh=nyxUatUmri+viMWm0r2f0sQPHURgC/4b9MqoNbg8y0s=;
+ b=gZKwUJCb4W8TZ6HD5UP2/2AGRqU8a3hBVToGjCUX7+Q1G+ZnjVvoVIz2cTTscRHWAe
+ BSU5k3YZyEu6/nbH7Gn6QXLD7teI0u4rDzY2YQzCese3/DyjL4pRB/Bli59v+ClohmFb
+ WQQHuafPstfT7vycpdtmmc4oiAV1nXUJKQ6qooEHD1J0yPjdA9i9hDnprDXUyLi0X/J1
+ ZWRk3bnqlSBQXY3vK32xF0+gakpJnpRYgX9KNdDwgk586vTHTmHiQtSU0BSkdj5y2Yf8
+ MJBcZTdHjx6e+KmIJcqloNtnuIURCQnm/z2Y2+s7Z1G3D0vJWfdcvuRkermGRLA9Yz2t
+ /EwQ==
+X-Gm-Message-State: ANhLgQ1ShXO+ZI61/Q/fMObMBNBXeMffeqGlVXztwWY3dB+3bZlDmyPi
+ qt3ffP0XaXq+F20png3N81o6fh95EhQ=
+X-Google-Smtp-Source: ADFU+vuhDh3MmhzFUhejTCYPiCxmLH/MDJG0IX1PD+8nAOkfCX2qVpWSMwvPYd01U7oaatNOUR0gIg==
+X-Received: by 2002:a63:2b8d:: with SMTP id r135mr1820426pgr.329.1585354011295; 
+ Fri, 27 Mar 2020 17:06:51 -0700 (PDT)
 Received: from [192.168.1.11] (174-21-138-234.tukw.qwest.net. [174.21.138.234])
- by smtp.gmail.com with ESMTPSA id y15sm4859058pfc.206.2020.03.27.17.00.26
+ by smtp.gmail.com with ESMTPSA id e26sm4991373pfj.61.2020.03.27.17.06.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Mar 2020 17:00:27 -0700 (PDT)
-Subject: Re: [PATCH v6 12/61] target/riscv: vector integer add-with-carry /
- subtract-with-borrow instructions
+ Fri, 27 Mar 2020 17:06:50 -0700 (PDT)
+Subject: Re: [PATCH v6 18/61] target/riscv: vector single-width integer
+ multiply instructions
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-13-zhiwei_liu@c-sky.com>
+ <20200317150653.9008-19-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <8050c7c5-8d8e-a622-60a3-9c9ee0caab82@linaro.org>
-Date: Fri, 27 Mar 2020 17:00:25 -0700
+Message-ID: <1a5900d9-dc26-04f2-74b2-0bada246a0e7@linaro.org>
+Date: Fri, 27 Mar 2020 17:06:48 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200317150653.9008-13-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200317150653.9008-19-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::643
+X-Received-From: 2607:f8b0:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,17 +78,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2020 00:00:32 -0000
+X-List-Received-Date: Sat, 28 Mar 2020 00:06:55 -0000
 
 On 3/17/20 8:06 AM, LIU Zhiwei wrote:
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> ---
->  target/riscv/helper.h                   |  33 ++++++
->  target/riscv/insn32.decode              |  11 ++
->  target/riscv/insn_trans/trans_rvv.inc.c |  78 +++++++++++++
->  target/riscv/vector_helper.c            | 148 ++++++++++++++++++++++++
->  4 files changed, 270 insertions(+)
+> +static int64_t do_mulhsu_d(int64_t s2, uint64_t s1)
+> +{
+> +    uint64_t hi_64, lo_64, abs_s2 = s2;
+> +
+> +    if (s2 < 0) {
+> +        abs_s2 = -s2;
+> +    }
+> +    mulu64(&lo_64, &hi_64, abs_s2, s1);
+> +    if (s2 < 0) {
+> +        lo_64 = ~lo_64;
+> +        hi_64 = ~hi_64;
+> +        if (lo_64 == UINT64_MAX) {
+> +            lo_64 = 0;
+> +            hi_64 += 1;
+> +        } else {
+> +            lo_64 += 1;
+> +        }
+> +    }
+> +
+> +    return hi_64;
+> +}
 
+Missed the improvement here.  See tcg_gen_mulsu2_i64.
+
+Otherwise,
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
