@@ -1,43 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jIDh1-0003wh-S4
-	for mharc-qemu-riscv@gnu.org; Sat, 28 Mar 2020 11:48:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42051)
+	id 1jIE63-0000RW-4c
+	for mharc-qemu-riscv@gnu.org; Sat, 28 Mar 2020 12:14:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44576)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jIDgy-0003rR-PG
- for qemu-riscv@nongnu.org; Sat, 28 Mar 2020 11:48:13 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jIE5x-0000PZ-NV
+ for qemu-riscv@nongnu.org; Sat, 28 Mar 2020 12:14:06 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jIDgx-0006ZC-HC
- for qemu-riscv@nongnu.org; Sat, 28 Mar 2020 11:48:12 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:37105)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jIE5w-0002zl-Mf
+ for qemu-riscv@nongnu.org; Sat, 28 Mar 2020 12:14:01 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:60513)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jIDgu-0006Ep-28; Sat, 28 Mar 2020 11:48:08 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.4277855|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0154129-9.47399e-05-0.984492;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01a16370; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.H6jJXbl_1585410477; 
+ id 1jIE5s-0002rb-Vp; Sat, 28 Mar 2020 12:13:57 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.2579638|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_regular_dialog|0.0190046-0.000301582-0.980694;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03312; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.H6ju01._1585412024; 
 Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H6jJXbl_1585410477)
- by smtp.aliyun-inc.com(10.147.41.199);
- Sat, 28 Mar 2020 23:47:58 +0800
-Subject: Re: [PATCH v6 41/61] target/riscv: vector floating-point merge
- instructions
+ fp:SMTPD_---.H6ju01._1585412024)
+ by smtp.aliyun-inc.com(10.147.42.253);
+ Sun, 29 Mar 2020 00:13:45 +0800
+Subject: Re: [PATCH v6 18/61] target/riscv: vector single-width integer
+ multiply instructions
 To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-42-zhiwei_liu@c-sky.com>
- <e0d4678b-1a24-3e90-768a-efd0f0311b68@linaro.org>
+ <20200317150653.9008-19-zhiwei_liu@c-sky.com>
+ <1a5900d9-dc26-04f2-74b2-0bada246a0e7@linaro.org>
+ <8be612c0-4345-c1f2-3b82-73a9a1ea4133@c-sky.com>
+ <53209745-9b54-00b3-2b1f-1271f0843021@linaro.org>
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <623a1ba2-04f0-7e63-dfbd-ff02ed0acc9d@c-sky.com>
-Date: Sat, 28 Mar 2020 23:47:57 +0800
+Message-ID: <5dabf936-6a4f-5d76-0d16-ff357d1ee376@c-sky.com>
+Date: Sun, 29 Mar 2020 00:13:44 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <e0d4678b-1a24-3e90-768a-efd0f0311b68@linaro.org>
+In-Reply-To: <53209745-9b54-00b3-2b1f-1271f0843021@linaro.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
 X-Received-From: 121.197.200.217
@@ -52,31 +54,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2020 15:48:13 -0000
+X-List-Received-Date: Sat, 28 Mar 2020 16:14:06 -0000
 
 
 
-On 2020/3/28 11:23, Richard Henderson wrote:
-> On 3/17/20 8:06 AM, LIU Zhiwei wrote:
->> +    for (i = 0; i < vl; i++) {                            \
->> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {        \
->> +            ETYPE s2 = *((ETYPE *)vs2 + H(i));            \
->> +            *((ETYPE *)vd + H1(i)) = s2;                  \
-> H1 should be H.
-Yes.
+On 2020/3/28 23:47, Richard Henderson wrote:
+> On 3/28/20 8:17 AM, LIU Zhiwei wrote:
+>>> Missed the improvement here.  See tcg_gen_mulsu2_i64.
+>> Though I have not gotten the principle, the code in tcg_gen_mulsu2_i64 is much
+>> tidier.
+> Let A = signed operand,
+>      B = unsigned operand
+>      P = unsigned product
 >
->> +        } else {                                          \
->> +            *((ETYPE *)vd + H(i)) = (ETYPE)s1;            \
->> +        }                                                 \
-> You can also hoist the s2 dereference out of the IF, and let the assignment be
-> unconditional.
+> If the sign bit A is set, then P is too large.
+> In that case we subtract 2**64 * B to fix that:
 >
->    *((ETYPE *)vd + H(i))
->      = (!vm && !vext_elem_mask(v0, mlen, i) ? s2 : s1);
-Yes, it's much better.
+>      HI_P -= (A < 0 ? B : 0)
+>
+> where the conditional is computed as (A >> 63) & B.
+
+I think I get it.
+
+LET  A = 2 ** 64  - X
+
+THEN
+
+X = 2 ** 64 - A
+SIGNED_P = -X * B
+
+if (A * B == P) then
+
+(2 ** 64  - X) * B == P
+2 **64 * B - X * B == P
+
+-X *B == P - 2**64*B
+
+HI_P -= (A < 0 ? B ：0）
 
 Zhiwei
->
 >
 > r~
 
