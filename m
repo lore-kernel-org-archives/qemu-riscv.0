@@ -1,48 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jHzww-0001cZ-3b
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Mar 2020 21:07:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44866)
+	id 1jHzyC-0002bT-O8
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Mar 2020 21:09:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44965)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jHzwt-0001aN-AH
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 21:07:44 -0400
+ (envelope-from <richard.henderson@linaro.org>) id 1jHzyA-0002YT-Cq
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 21:09:03 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jHzws-0005Hk-6z
- for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 21:07:43 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:52507)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jHzwn-0004wt-UZ; Fri, 27 Mar 2020 21:07:38 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.09653191|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.317416-0.000351267-0.682232;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03293; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.H6R90oC_1585357647; 
-Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H6R90oC_1585357647)
- by smtp.aliyun-inc.com(10.147.41.187);
- Sat, 28 Mar 2020 09:07:28 +0800
-Subject: Re: [PATCH v6 25/61] target/riscv: vector single-width averaging add
- and subtract
-To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
+ (envelope-from <richard.henderson@linaro.org>) id 1jHzy9-0006fo-0q
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 21:09:01 -0400
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:40891)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <richard.henderson@linaro.org>)
+ id 1jHzy8-0006et-R8
+ for qemu-riscv@nongnu.org; Fri, 27 Mar 2020 21:09:00 -0400
+Received: by mail-pf1-x441.google.com with SMTP id c20so2827899pfi.7
+ for <qemu-riscv@nongnu.org>; Fri, 27 Mar 2020 18:09:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=MlrU39JFmvSLKpFknjZBRcdhWX+jJ8k81TrxhR433Vo=;
+ b=jJufVgUZ4m+1ERwU2sZAiayF2IHkiQ0pKuDfRfzDBZg0UanAIps5+CLIRWG5bSHbY8
+ vuw+3oKueHqPTH3wux3l53Fb9/1+iGz9V8I8GDHE4qu7gybAL8JzC2Jt4jWpWNHvZ3Uj
+ gXoY6KQIR3ez0OReEr7yF2KX2RTfOPDKrLmlGXzM7YA5RUaZwc5UKCLq+IhUtW71jtVF
+ uv86TUAvjnToG02K5opLAjHox53ORXwTrRHmP7UJ5rBqi29OV/tt92Li2w057vlhfgk5
+ sq+5s1b4wnmIbJxMOqQU7P85TnZlBuaPPNSuCQfn9eWzTNCiGJTqGk+YOi1CkTA3lCt6
+ 0K/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=MlrU39JFmvSLKpFknjZBRcdhWX+jJ8k81TrxhR433Vo=;
+ b=aXyiVYmT1+AA6xboebrzFXb+qCG5WJy8SkM1+3LeVIlTLl+pvnoi0A311PpypuFb+I
+ A69U5vWcS1lyAAvFCnJmdiF1snvD6rA1ifSc3Ue3H0LlmtT80hRaQJGz/iC7ehml4ZV4
+ VlK+c6tGwEUHWEJpjwCoYk8hT6R0w3Igvw8BY7I+QiU4d8ej+x0C3C463kvbETPJr4ZZ
+ Mll47hVBiPPIoCllrV53tdTl59XoeiSCBC9qr+JaOPGPzs0blcUCkOsQdlbA37x7Wa6j
+ UtuE98guc3oyCzDrbZIzpFGUHaL1V0jERVXgyvWPgwIxH/wCp1H+g2wK8KFRGFqtr4NQ
+ 9heg==
+X-Gm-Message-State: ANhLgQ3AJU4sR5NQENt9G1q7Ptd2coLWV4FmleiDjU7DDVw88/uyG9o8
+ 2Az3wTMLuLd6/tdx55FN7wEJSJO5WRQ=
+X-Google-Smtp-Source: ADFU+vuyuWpwSRlfbpe1Fvd4/bQwRfuroaLnZgiTgUoSuorAgk/1YDX6SPySe8ZQnYewX4DHAjDq+w==
+X-Received: by 2002:a65:494f:: with SMTP id q15mr2045593pgs.383.1585357739038; 
+ Fri, 27 Mar 2020 18:08:59 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-138-234.tukw.qwest.net. [174.21.138.234])
+ by smtp.gmail.com with ESMTPSA id p22sm4766006pgn.73.2020.03.27.18.08.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 27 Mar 2020 18:08:58 -0700 (PDT)
+Subject: Re: [PATCH v6 26/61] target/riscv: vector single-width fractional
+ multiply with rounding and saturation
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-26-zhiwei_liu@c-sky.com>
- <0cdf21fd-b1f1-36bf-f156-5a673199fa1f@c-sky.com>
- <5c2f0b77-32fa-76bd-0b0e-4ca91d87f3b6@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <f50a4a63-c5cf-4322-9663-98fb15dde715@c-sky.com>
-Date: Sat, 28 Mar 2020 09:07:26 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ <20200317150653.9008-27-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <9f5fd1a3-f32f-9779-6d5c-abdedc10fd2d@linaro.org>
+Date: Fri, 27 Mar 2020 18:08:56 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <5c2f0b77-32fa-76bd-0b0e-4ca91d87f3b6@linaro.org>
-Content-Type: multipart/alternative;
- boundary="------------5A83C80D56DB97055FCF7B27"
+In-Reply-To: <20200317150653.9008-27-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
-X-Received-From: 121.197.200.217
+Content-Transfer-Encoding: 7bit
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::441
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -54,186 +78,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2020 01:07:44 -0000
+X-List-Received-Date: Sat, 28 Mar 2020 01:09:03 -0000
 
-This is a multi-part message in MIME format.
---------------5A83C80D56DB97055FCF7B27
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+On 3/17/20 8:06 AM, LIU Zhiwei wrote:
+> +static int64_t vsmul64(CPURISCVState *env, int vxrm, int64_t a, int64_t b)
+> +{
+> +    uint8_t round;
+> +    uint64_t hi_64, lo_64, Hi62;
+> +    uint8_t hi62, hi63, lo63;
+> +
+> +    muls64(&lo_64, &hi_64, a, b);
+> +    hi62 = extract64(hi_64, 62, 1);
+> +    lo63 = extract64(lo_64, 63, 1);
+> +    hi63 = extract64(hi_64, 63, 1);
+> +    Hi62 = extract64(hi_64, 0, 62);
 
+This seems like way more work than necessary.
 
+> +    if (hi62 != hi63) {
+> +        env->vxsat = 0x1;
+> +        return INT64_MAX;
+> +    }
 
-On 2020/3/28 8:32, Richard Henderson wrote:
-> On 3/18/20 8:46 PM, LIU Zhiwei wrote:
->> +static inline int32_t asub32(CPURISCVState *env, int vxrm, int32_t a, int32_t b)
->> +{
->> +    int64_t res = (int64_t)a - b;
->> +    uint8_t round = get_round(vxrm, res, 1);
->> +
->> +    return (res >> 1) + round;
->> +}
->> +
->>
->> I find a corner case here.  As the spec said in Section 13.2
->>
->>    "There can be no overflow in the result".
->>
->> If the a is 0x7fffffff,  b is 0x80000000, and the round mode is round to up(rnu),
->> then the result is (0x7fffffff - 0x80000000 + 1) >> 1, equals 0x80000000,
->> according the v0.7.1
-> That's why we used int64_t as the intermediate type:
->
->    0x000000007fffffff - 0xffffffff80000000 + 1
-> = 0x000000007fffffff + 0x0000000080000000 + 1
-> = 0x00000000ffffffff + 1
-> = 0x0000000100000000
->
-> Shift that right by 1 and you do indeed get 0x80000000.
-> There's no saturation involved.
+This can only happen for a == b == INT64_MIN.
+Perhaps just test exactly that and move it above the multiply?
 
-The minuend 0x7fffffff is INT32_MAX, and the subtrahend 0x80000000 is 
-INT32_MIN.
+> +    round = get_round(vxrm, lo_64, 63);
+> +    if (round && (Hi62 == 0x3fffffff) && lo63) {
+> +        env->vxsat = 0x1;
+> +        return hi62 ? INT64_MIN : INT64_MAX;
+> +    } else {
+> +        if (lo63 && round) {
+> +            return (hi_64 + 1) << 1;
+> +        } else {
+> +            return (hi_64 << 1) | lo63 | round;
+> +        }
+> +    }
 
-The difference between the minuendand the subtrahend should be a 
-positive number. But the result here is 0x80000000.
+  /* Cannot overflow, as there are always
+     2 sign bits after multiply. */
+  ret = (hi_64 << 1) | (lo_64 >> 63);
+  if (round) {
+      if (ret == INT64_MAX) {
+          env->vxsat = 1;
+      } else {
+          ret += 1;
+      }
+  }
+  return ret;
 
-So it is overflow.  However, according to the spec, it should not overflow.
-
-I think a special process for (INT*_MAX -  INT*_MIN)  is needed.
-
-Zhiwei
-
-> For int64_t we computed signed overflow to do the same thing.
->
-> r~
-
-
---------------5A83C80D56DB97055FCF7B27
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <br>
-    <br>
-    <div class="moz-cite-prefix">On 2020/3/28 8:32, Richard Henderson
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:5c2f0b77-32fa-76bd-0b0e-4ca91d87f3b6@linaro.org">
-      <pre class="moz-quote-pre" wrap="">On 3/18/20 8:46 PM, LIU Zhiwei wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+static inline int32_t asub32(CPURISCVState *env, int vxrm, int32_t a, int32_t b)
-+{
-+    int64_t res = (int64_t)a - b;
-+    uint8_t round = get_round(vxrm, res, 1);
-+
-+    return (res &gt;&gt; 1) + round;
-+}
-+
-
-I find a corner case here.  As the spec said in Section 13.2
-
-  "There can be no overflow in the result".
-
-If the a is 0x7fffffff,  b is 0x80000000, and the round mode is round to up(rnu),
-then the result is (0x7fffffff - 0x80000000 + 1) &gt;&gt; 1, equals 0x80000000,
-according the v0.7.1
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-That's why we used int64_t as the intermediate type:
-
-  0x000000007fffffff - 0xffffffff80000000 + 1
-= 0x000000007fffffff + 0x0000000080000000 + 1
-= 0x00000000ffffffff + 1
-= 0x0000000100000000
-
-Shift that right by 1 and you do indeed get 0x80000000.
-There's no saturation involved.
-</pre>
-    </blockquote>
-    <br>
-    The minuend 0x7fffffff is INT32_MAX, and the subtrahend 0x80000000
-    is INT32_MIN. <span style="color: rgb(51, 51, 51); font-family:
-      arial; font-size: 18px; font-style: normal;
-      font-variant-ligatures: normal; font-variant-caps: normal;
-      font-weight: 400; letter-spacing: normal; orphans: 2; text-align:
-      start; text-indent: 0px; text-transform: none; white-space:
-      normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width:
-      0px; background-color: rgb(255, 255, 255); text-decoration-style:
-      initial; text-decoration-color: initial; display: inline
-      !important; float: none;"><br>
-      <br>
-      The difference between the </span><span style="color: rgb(51, 51,
-      51); font-family: arial; font-size: 18px; font-style: normal;
-      font-variant-ligatures: normal; font-variant-caps: normal;
-      font-weight: 400; letter-spacing: normal; orphans: 2; text-align:
-      start; text-indent: 0px; text-transform: none; white-space:
-      normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width:
-      0px; background-color: rgb(255, 255, 255); text-decoration-style:
-      initial; text-decoration-color: initial; display: inline
-      !important; float: none;"><span style="color: rgb(51, 51, 51);
-        font-family: &quot;PingFang SC&quot;, &quot;Lantinghei SC&quot;,
-        &quot;Microsoft YaHei&quot;, arial, 宋体, sans-serif, tahoma;
-        font-size: 16px; font-style: normal; font-variant-ligatures:
-        normal; font-variant-caps: normal; font-weight: 400;
-        letter-spacing: normal; orphans: 2; text-align: start;
-        text-indent: 0px; text-transform: none; white-space: normal;
-        widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;
-        background-color: rgb(255, 255, 255); text-decoration-style:
-        initial; text-decoration-color: initial; display: inline
-        !important; float: none;">minuend<span> </span></span> and </span><span
-      style="color: rgb(51, 51, 51); font-family: arial; font-size:
-      18px; font-style: normal; font-variant-ligatures: normal;
-      font-variant-caps: normal; font-weight: 400; letter-spacing:
-      normal; orphans: 2; text-align: start; text-indent: 0px;
-      text-transform: none; white-space: normal; widows: 2;
-      word-spacing: 0px; -webkit-text-stroke-width: 0px;
-      background-color: rgb(255, 255, 255); text-decoration-style:
-      initial; text-decoration-color: initial; display: inline
-      !important; float: none;"><span style="color: rgb(51, 51, 51);
-        font-family: &quot;PingFang SC&quot;, &quot;Lantinghei SC&quot;,
-        &quot;Microsoft YaHei&quot;, arial, 宋体, sans-serif, tahoma;
-        font-size: 16px; font-style: normal; font-variant-ligatures:
-        normal; font-variant-caps: normal; font-weight: 400;
-        letter-spacing: normal; orphans: 2; text-align: start;
-        text-indent: 0px; text-transform: none; white-space: normal;
-        widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;
-        background-color: rgb(255, 255, 255); text-decoration-style:
-        initial; text-decoration-color: initial; display: inline
-        !important; float: none;">the subtrahend should be a positive
-        number. But the result here is 0x80000000.<br>
-        <br>
-        So it is overflow.  However, according to the spec, it should
-        not overflow.<br>
-        <br>
-        I think a special process for (INT*_MAX -  INT*_MIN)  is needed.
-        <br>
-        <br>
-        Zhiwei<br>
-        <br>
-      </span></span>
-    <blockquote type="cite"
-      cite="mid:5c2f0b77-32fa-76bd-0b0e-4ca91d87f3b6@linaro.org">
-      <pre class="moz-quote-pre" wrap="">
-For int64_t we computed signed overflow to do the same thing.
-</pre>
-    </blockquote>
-    <blockquote type="cite"
-      cite="mid:5c2f0b77-32fa-76bd-0b0e-4ca91d87f3b6@linaro.org">
-      <pre class="moz-quote-pre" wrap="">
 
 r~
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------5A83C80D56DB97055FCF7B27--
 
