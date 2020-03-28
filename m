@@ -1,43 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jIE63-0000RW-4c
-	for mharc-qemu-riscv@gnu.org; Sat, 28 Mar 2020 12:14:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44576)
+	id 1jIEFR-0005H5-AP
+	for mharc-qemu-riscv@gnu.org; Sat, 28 Mar 2020 12:23:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52400)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jIE5x-0000PZ-NV
- for qemu-riscv@nongnu.org; Sat, 28 Mar 2020 12:14:06 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jIEFO-0005DM-59
+ for qemu-riscv@nongnu.org; Sat, 28 Mar 2020 12:23:47 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jIE5w-0002zl-Mf
- for qemu-riscv@nongnu.org; Sat, 28 Mar 2020 12:14:01 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:60513)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jIEFN-0003H2-7V
+ for qemu-riscv@nongnu.org; Sat, 28 Mar 2020 12:23:46 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:36392)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jIE5s-0002rb-Vp; Sat, 28 Mar 2020 12:13:57 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.2579638|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.0190046-0.000301582-0.980694;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03312; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.H6ju01._1585412024; 
+ id 1jIEFK-0003BW-Gn; Sat, 28 Mar 2020 12:23:42 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08911659|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_system_inform|0.139685-0.000514931-0.8598;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03297; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.H6jfVbC_1585412611; 
 Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H6ju01._1585412024)
- by smtp.aliyun-inc.com(10.147.42.253);
- Sun, 29 Mar 2020 00:13:45 +0800
-Subject: Re: [PATCH v6 18/61] target/riscv: vector single-width integer
- multiply instructions
+ fp:SMTPD_---.H6jfVbC_1585412611)
+ by smtp.aliyun-inc.com(10.147.42.135);
+ Sun, 29 Mar 2020 00:23:32 +0800
+Subject: Re: [PATCH v6 55/61] target/riscv: integer extract instruction
 To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-19-zhiwei_liu@c-sky.com>
- <1a5900d9-dc26-04f2-74b2-0bada246a0e7@linaro.org>
- <8be612c0-4345-c1f2-3b82-73a9a1ea4133@c-sky.com>
- <53209745-9b54-00b3-2b1f-1271f0843021@linaro.org>
+ <20200317150653.9008-56-zhiwei_liu@c-sky.com>
+ <07501722-9afa-0a47-bba5-434631335372@linaro.org>
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <5dabf936-6a4f-5d76-0d16-ff357d1ee376@c-sky.com>
-Date: Sun, 29 Mar 2020 00:13:44 +0800
+Message-ID: <d9001356-0d1f-3b0d-7a5d-a1c86e72ccf6@c-sky.com>
+Date: Sun, 29 Mar 2020 00:23:31 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <53209745-9b54-00b3-2b1f-1271f0843021@linaro.org>
+In-Reply-To: <07501722-9afa-0a47-bba5-434631335372@linaro.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
@@ -54,43 +51,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2020 16:14:06 -0000
+X-List-Received-Date: Sat, 28 Mar 2020 16:23:47 -0000
 
 
 
-On 2020/3/28 23:47, Richard Henderson wrote:
-> On 3/28/20 8:17 AM, LIU Zhiwei wrote:
->>> Missed the improvement here.  See tcg_gen_mulsu2_i64.
->> Though I have not gotten the principle, the code in tcg_gen_mulsu2_i64 is much
->> tidier.
-> Let A = signed operand,
->      B = unsigned operand
->      P = unsigned product
+On 2020/3/28 11:36, Richard Henderson wrote:
+> On 3/17/20 8:06 AM, LIU Zhiwei wrote:
+>> +/* Integer Extract Instruction */
+>> +static void extract_element(TCGv dest, TCGv_ptr base,
+>> +                            int ofs, int sew)
+>> +{
+>> +    switch (sew) {
+>> +    case MO_8:
+>> +        tcg_gen_ld8u_tl(dest, base, ofs);
+>> +        break;
+>> +    case MO_16:
+>> +        tcg_gen_ld16u_tl(dest, base, ofs);
+>> +        break;
+>> +    default:
+>> +        tcg_gen_ld32u_tl(dest, base, ofs);
+>> +        break;
+>> +#if TARGET_LONG_BITS == 64
+>> +    case MO_64:
+>> +        tcg_gen_ld_i64(dest, base, ofs);
+>> +        break;
+>> +#endif
+>> +    }
+>> +}
+> I just remembered that this doesn't handle HOST_WORDS_BIGENDIAN properly -- the
+> MO_64 case for TARGET_LONG_BITS == 32.
 >
-> If the sign bit A is set, then P is too large.
-> In that case we subtract 2**64 * B to fix that:
+> Because we computed the offset for MO_64, not MO_32, we need
 >
->      HI_P -= (A < 0 ? B : 0)
->
-> where the conditional is computed as (A >> 63) & B.
+>      case MO_64:
+>          if (TARGET_LONG_BITS == 64) {
+>              tcg_gen_ld_i64(dest, base, ofs);
+>              break;
+>          }
+> #ifdef HOST_WORDS_BIGENDIAN
+>          ofs += 4;
+> #endif
+>          /* fall through */
+>      case MO_32:
+>          tcg_gen_ld32u_tl(dest, base, ofs);
+>          break;
+>      default:
+>          g_assert_not_reached();
+Yes, it should be.
 
-I think I get it.
-
-LET  A = 2 ** 64  - X
-
-THEN
-
-X = 2 ** 64 - A
-SIGNED_P = -X * B
-
-if (A * B == P) then
-
-(2 ** 64  - X) * B == P
-2 **64 * B - X * B == P
-
--X *B == P - 2**64*B
-
-HI_P -= (A < 0 ? B ：0）
+As extract_element and gather_element are very similar . I
+will merge them to  load_element in v7.
 
 Zhiwei
 >
