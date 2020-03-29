@@ -1,43 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jIEMp-0008S4-Iw
-	for mharc-qemu-riscv@gnu.org; Sat, 28 Mar 2020 12:31:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54853)
+	id 1jIP82-0002Jw-QM
+	for mharc-qemu-riscv@gnu.org; Sun, 29 Mar 2020 00:00:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37461)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jIEMm-0008P9-ST
- for qemu-riscv@nongnu.org; Sat, 28 Mar 2020 12:31:25 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jIP80-0002IE-0d
+ for qemu-riscv@nongnu.org; Sun, 29 Mar 2020 00:00:53 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jIEMl-0000KS-PA
- for qemu-riscv@nongnu.org; Sat, 28 Mar 2020 12:31:24 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:33010)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jIP7y-00059F-SZ
+ for qemu-riscv@nongnu.org; Sun, 29 Mar 2020 00:00:51 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:54218)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jIEMi-000075-UE; Sat, 28 Mar 2020 12:31:21 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07656042|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.183342-0.000380833-0.816277;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03311; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.H6k3Dvn_1585413065; 
+ id 1jIP7v-0004vn-Py; Sun, 29 Mar 2020 00:00:48 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1311125|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_regular_dialog|0.345928-0.000373953-0.653698;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03305; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.H6x3BXQ_1585454437; 
 Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H6k3Dvn_1585413065) by smtp.aliyun-inc.com(10.147.40.2);
- Sun, 29 Mar 2020 00:31:06 +0800
-Subject: Re: [PATCH v6 57/61] target/riscv: floating-point scalar move
- instructions
+ fp:SMTPD_---.H6x3BXQ_1585454437)
+ by smtp.aliyun-inc.com(10.147.42.198);
+ Sun, 29 Mar 2020 12:00:39 +0800
+Subject: Re: [PATCH v6 18/61] target/riscv: vector single-width integer
+ multiply instructions
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-58-zhiwei_liu@c-sky.com>
- <b3505142-78fb-4142-1fb0-aafc20c1788f@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <c388808c-5c5f-872d-24ec-c41417a229f3@c-sky.com>
-Date: Sun, 29 Mar 2020 00:31:05 +0800
+ <20200317150653.9008-19-zhiwei_liu@c-sky.com>
+ <1a5900d9-dc26-04f2-74b2-0bada246a0e7@linaro.org>
+ <8be612c0-4345-c1f2-3b82-73a9a1ea4133@c-sky.com>
+ <53209745-9b54-00b3-2b1f-1271f0843021@linaro.org>
+ <5dabf936-6a4f-5d76-0d16-ff357d1ee376@c-sky.com>
+Message-ID: <764066b7-c083-1b4e-32c4-616aec3bd9be@c-sky.com>
+Date: Sun, 29 Mar 2020 12:00:37 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <b3505142-78fb-4142-1fb0-aafc20c1788f@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <5dabf936-6a4f-5d76-0d16-ff357d1ee376@c-sky.com>
+Content-Type: multipart/alternative;
+ boundary="------------37E6D960588C56DB2585DEDA"
 Content-Language: en-US
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
 X-Received-From: 121.197.200.217
@@ -52,69 +55,216 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2020 16:31:26 -0000
+X-List-Received-Date: Sun, 29 Mar 2020 04:00:53 -0000
+
+This is a multi-part message in MIME format.
+--------------37E6D960588C56DB2585DEDA
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
 
 
-On 2020/3/28 11:44, Richard Henderson wrote:
-> On 3/17/20 8:06 AM, LIU Zhiwei wrote:
->> +/* Floating-Point Scalar Move Instructions */
->> +static bool trans_vfmv_f_s(DisasContext *s, arg_vfmv_f_s *a)
->> +{
->> +    if (!s->vill && has_ext(s, RVF) &&
->> +        (s->mstatus_fs != 0) && (s->sew != 0)) {
->> +#ifdef HOST_WORDS_BIGENDIAN
->> +        int ofs = vreg_ofs(s, a->rs2) + ((7 >> s->sew) << s->sew);
->> +#else
->> +        int ofs = vreg_ofs(s, a->rs2);
->> +#endif
-> Use endian_ofs from patch 55.
-Yes, I forgot it.
+On 2020/3/29 0:13, LIU Zhiwei wrote:
 >
->> +        switch (s->sew) {
->> +        case MO_8:
->> +            tcg_gen_ld8u_i64(cpu_fpr[a->rd], cpu_env, ofs);
->> +            tcg_gen_ori_i64(cpu_fpr[a->rd], cpu_fpr[a->rd],
->> +                            0xffffffffffffff00ULL);
->> +            break;
-> MO_8 should be illegal.
-Yes, it has been checked in s->sew != 0.
 >
->> +        case MO_16:
->> +            tcg_gen_ld16u_i64(cpu_fpr[a->rd], cpu_env, ofs);
->> +            tcg_gen_ori_i64(cpu_fpr[a->rd], cpu_fpr[a->rd],
->> +                            0xffffffffffff0000ULL);
->> +            break;
->> +        case MO_32:
->> +            tcg_gen_ld32u_i64(cpu_fpr[a->rd], cpu_env, ofs);
->> +            tcg_gen_ori_i64(cpu_fpr[a->rd], cpu_fpr[a->rd],
->> +                            0xffffffff00000000ULL);
->> +            break;
->> +        default:
->> +            if (has_ext(s, RVD)) {
->> +                tcg_gen_ld_i64(cpu_fpr[a->rd], cpu_env, ofs);
->> +            } else {
->> +                tcg_gen_ld32u_i64(cpu_fpr[a->rd], cpu_env, ofs);
->> +                tcg_gen_ori_i64(cpu_fpr[a->rd], cpu_fpr[a->rd],
->> +                                0xffffffff00000000ULL);
->> +            }
->> +            break;
-> Maybe better with MO_64 and default: g_assert_not_reached().
+> On 2020/3/28 23:47, Richard Henderson wrote:
+>> On 3/28/20 8:17 AM, LIU Zhiwei wrote:
+>>>> Missed the improvement here.  See tcg_gen_mulsu2_i64.
+>>> Though I have not gotten the principle, the code in 
+>>> tcg_gen_mulsu2_i64 is much
+>>> tidier.
+>> Let A = signed operand,
+>>      B = unsigned operand
+>>      P = unsigned product
+>>
+>> If the sign bit A is set, then P is too large.
+>> In that case we subtract 2**64 * B to fix that:
+>>
+>>      HI_P -= (A < 0 ? B : 0)
+>>
+>> where the conditional is computed as (A >> 63) & B.
 >
->> +static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
->> +{
->> +    if (!s->vill && has_ext(s, RVF) && (s->sew != 0)) {
->> +        TCGv_ptr dest;
->> +        TCGv_i64 src1;
->> +        static gen_helper_vfmv_s_f * const fns[3] = {
->> +            gen_helper_vfmv_s_f_h,
->> +            gen_helper_vfmv_s_f_w,
->> +            gen_helper_vfmv_s_f_d
-> You shouldn't need to duplicate the vmv_s_x_* helpers.
-All these helpers will be away in v7.
+> I think I get it.
+>
+> LET  A = 2 ** 64  - X
+>
+> THEN
+>
+> X = 2 ** 64 - A
+> SIGNED_P = -X * B
+>
+> if (A * B == P) then
+>
+> (2 ** 64  - X) * B == P
+> 2 **64 * B - X * B == P
+>
+> -X *B == P - 2**64*B
+>
+> HI_P -= (A < 0 ? B ：0）
+>
+It's confusing here. I paste the clearer code.
+
+/*
+  * Let  A = signed operand,
+  *      B = unsigned operand
+  *      P = mulu64(A, B), unsigned product
+  *
+  * LET  X = 2 ** 64  - A, 2's complement of A
+  *      SP = signed product
+  * THEN
+  *      IF A < 0
+  *          SP = -X * B
+  *             = -(2 ** 64 - A) * B
+  *             = A * B - 2 ** 64 * B
+  *             = P - 2 ** 64 * B
+  *      ELSE
+  *          SP = P
+  * THEN
+  *      HI_P -= (A < 0 ? B : 0）
+  */
+
+static int64_t do_mulhsu_d(int64_t s2, uint64_t s1)
+{
+     uint64_t hi_64, lo_64;
+
+     mulu64(&lo_64, &hi_64, s2, s1);
+
+     hi_64 -= s2 < 0 ? s1 : 0;
+     return hi_64;
+}
 
 Zhiwei
+> Zhiwei
+>>
+>> r~
 >
-> r~
 
+
+--------------37E6D960588C56DB2585DEDA
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <br>
+    <br>
+    <div class="moz-cite-prefix">On 2020/3/29 0:13, LIU Zhiwei wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:5dabf936-6a4f-5d76-0d16-ff357d1ee376@c-sky.com">
+      <br>
+      <br>
+      On 2020/3/28 23:47, Richard Henderson wrote:
+      <br>
+      <blockquote type="cite">On 3/28/20 8:17 AM, LIU Zhiwei wrote:
+        <br>
+        <blockquote type="cite">
+          <blockquote type="cite">Missed the improvement here.  See
+            tcg_gen_mulsu2_i64.
+            <br>
+          </blockquote>
+          Though I have not gotten the principle, the code in
+          tcg_gen_mulsu2_i64 is much
+          <br>
+          tidier.
+          <br>
+        </blockquote>
+        Let A = signed operand,
+        <br>
+             B = unsigned operand
+        <br>
+             P = unsigned product
+        <br>
+        <br>
+        If the sign bit A is set, then P is too large.
+        <br>
+        In that case we subtract 2**64 * B to fix that:
+        <br>
+        <br>
+             HI_P -= (A &lt; 0 ? B : 0)
+        <br>
+        <br>
+        where the conditional is computed as (A &gt;&gt; 63) &amp; B.
+        <br>
+      </blockquote>
+      <br>
+      I think I get it.
+      <br>
+      <br>
+      LET  A = 2 ** 64  - X
+      <br>
+      <br>
+      THEN
+      <br>
+      <br>
+      X = 2 ** 64 - A
+      <br>
+      SIGNED_P = -X * B
+      <br>
+      <br>
+      if (A * B == P) then
+      <br>
+      <br>
+      (2 ** 64  - X) * B == P
+      <br>
+      2 **64 * B - X * B == P
+      <br>
+      <br>
+      -X *B == P - 2**64*B
+      <br>
+      <br>
+      HI_P -= (A &lt; 0 ? B ：0）
+      <br>
+      <br>
+    </blockquote>
+    It's confusing here. I paste the clearer code.<br>
+    <pre>/*
+ * Let  A = signed operand,
+ *      B = unsigned operand
+ *      P = mulu64(A, B), unsigned product
+ *
+ * LET  X = 2 ** 64  - A, 2's complement of A
+ *      SP = signed product
+ * THEN
+ *      IF A &lt; 0
+ *          SP = -X * B
+ *             = -(2 ** 64 - A) * B
+ *             = A * B - 2 ** 64 * B
+ *             = P - 2 ** 64 * B
+ *      ELSE
+ *          SP = P
+ * THEN
+ *      HI_P -= (A &lt; 0 ? B : 0）
+ */
+
+static int64_t do_mulhsu_d(int64_t s2, uint64_t s1)
+{
+    uint64_t hi_64, lo_64;
+
+    mulu64(&amp;lo_64, &amp;hi_64, s2, s1);
+
+    hi_64 -= s2 &lt; 0 ? s1 : 0;
+    return hi_64;
+}
+
+</pre>
+    Zhiwei<br>
+    <blockquote type="cite"
+      cite="mid:5dabf936-6a4f-5d76-0d16-ff357d1ee376@c-sky.com">Zhiwei
+      <br>
+      <blockquote type="cite">
+        <br>
+        r~
+        <br>
+      </blockquote>
+      <br>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------37E6D960588C56DB2585DEDA--
 
