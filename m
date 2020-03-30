@@ -1,62 +1,117 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jIlxk-0000Wf-A2
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Mar 2020 00:23:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38240)
+	id 1jIpm7-0001KH-OE
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Mar 2020 04:28:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60217)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <anup@brainfault.org>) id 1jIlxh-0000PZ-Mc
- for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 00:23:46 -0400
+ (envelope-from <prvs=3512bc3a9=Anup.Patel@wdc.com>)
+ id 1jIpm5-0001E0-5j
+ for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 04:28:02 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <anup@brainfault.org>) id 1jIlxg-0003oe-LV
- for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 00:23:45 -0400
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:45633)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <anup@brainfault.org>) id 1jIlxg-0003mQ-Ck
- for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 00:23:44 -0400
-Received: by mail-wr1-x441.google.com with SMTP id t7so19778354wrw.12
- for <qemu-riscv@nongnu.org>; Sun, 29 Mar 2020 21:23:43 -0700 (PDT)
+ (envelope-from <prvs=3512bc3a9=Anup.Patel@wdc.com>)
+ id 1jIpm3-0006V3-F6
+ for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 04:28:00 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:3423)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <prvs=3512bc3a9=Anup.Patel@wdc.com>)
+ id 1jIpm2-0006Su-NM; Mon, 30 Mar 2020 04:27:59 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1585556879; x=1617092879;
+ h=from:to:cc:subject:date:message-id:mime-version;
+ bh=TeDob4jTooTQ0SaI+srBUGEft7j0B2PAftK+2fEn1nA=;
+ b=FPrmqpmWqNBc4mp5/cc5IN/6oF95EkEBOvcinf8T/1q8OOJRJXcHj65w
+ M14The+Uhs+Bv/ra2/uq2OgOy/U7OB9OdY1DCwyBfpP15pMrjzGdgFlai
+ +IXeiTaIh3UB5tagDoYg6+IJKVppeaXMa2kTJF5ijAP8Z5kZYQ5/AnQ2y
+ 7bog8EPhNhcbeXtRBVT0LVMgPVYNnvxCxu7nYx4wFal8TcDqaCSEvXhYg
+ HfAvTeyHgg6KfWYAWdieMoFCqBBkiG2M51LKl1bBCeFK63wswL+7+n4ZO
+ e176yczhL+QakBHp568j7ig4pAGidLC9EOJ2WcxJdG/4sOm7CxWowu2or A==;
+IronPort-SDR: RypFr00kZ3qsWvfLo9VmyEJP2CMcVT8v+ImCp3Vn1QclTt/jIazhzzCX62TCpidJAvZ8ilKxQo
+ jecRGm0xKumhUlpikGBwGL8zZ4bqZ04r8O9Tr5/SOokq0U4+BNFb6nXNL6yBM78Hb5cb19Nfvh
+ yZQRAwPx6AFwRNDdYtxhlU2BKHK2b5pnlzufy9Pmp8UDVfvFBXIPFBs1+aBJSS2Z0iMDf2+CFp
+ PUWhXNg2RumJYXPDNLCX1+QrtFtPaNu9LI6F5SXkJPrdN3yaJOvJmpDo5yGMu/345iQD7zoBF7
+ v5k=
+X-IronPort-AV: E=Sophos;i="5.72,323,1580745600"; d="scan'208";a="134290859"
+Received: from mail-bn8nam11lp2171.outbound.protection.outlook.com (HELO
+ NAM11-BN8-obe.outbound.protection.outlook.com) ([104.47.58.171])
+ by ob1.hgst.iphmx.com with ESMTP; 30 Mar 2020 16:27:55 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lt23xUbKowJyUsdapRXF28LyymvepF1BVDWhC9+bMcnE3zqWqCExS9ePYFWB2hCglTcIhFb61r8Tsx22kksrIkRBwAxiZ8qAxcVkx+eC6x7gzC1eLqm/vA8Q1uZCe2GkYePEmW7pzVXndj6OR5IjhjHt8yTUtmcvn940YH9BmmLRFWEGKlBIFbB3gJZCB/r8Abc91ZemrvNX1yiGYjOGwn7T0nwg9RYJPUgMtuQnghqa1gnxez5BFAGmpya8ZSQKh8d/HJwgmq3YE6YpsYjwCZEvJytFrrqje1RmUE6k1fttwJKsKUa/44CPgcQ86NtHHobQXnKPxDKfLPODkcm2WQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=c6i2oKT4RVte8HXAFfgwGoSV73wDWEFj6pZMb4b7Pd4=;
+ b=LTXO5E7Mc+fggJxMAKOquEX3hJQ1cHEjmIO+aCMKz2VhU/LAol83OHvaEB/lBNh5F68HSd8L/w0lFJTLpq5UgO9oX/NrpoqeaCuvu81u78OdSBnLdlyQ2gTEgUOVZG6FOK81PaqnqQaBWOOtGRQ3Hj1HCAm6Y/BefuXU3eSsjPp9q0s/pDYB89mARqTZbFa1OKpB9B2PN+mapUwUjDPBgwtIjV4Qu5TigPvtayoFGO5AJ9nt9OCcVMOrIZ9JFbLCWkiArrM0CNwjWYGT3BNJ3TOFmUJUdGJbJqfZ185QwTzrkxkmVa9uAgu3DHZgC1fdnDVcEBbzu+nxZ3p4iUGJwA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=HzG7oyXt/nsBgTi6zmit0T++IzWCAHZ7qmuGbPyQKFo=;
- b=Oaz6u8lJqj2lr0brqtHiA/sBxIkaIKveNonoyhGZWwOBo1q0ZSntJE/7YX7uxL8D0p
- TkccxD5+PflOPfefCd0T76a5e3kfoLxQdr6FI2T+zfYVrACB21rhDyi/pQFAV/XCZyou
- ONwPZwZ5c+dM8OW9GqAgXa6URTx/sAQtG9s82QkSn0aCqH0Wz/EQL8ePv12yp+TdK8tj
- hwcumrjQI71pSyEUnmIUpIA1EL6reJi2XE0A4zJmncQBLS+CtOn8aQpZmOqDvwVbbT6v
- h+EfBl7zpLfBvWlBmW86Eo5eVVNcUBiQl14nPnjeMFvtoKIH0RbgW7rtb3J2dFXLeYXM
- jNRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=HzG7oyXt/nsBgTi6zmit0T++IzWCAHZ7qmuGbPyQKFo=;
- b=E2jd8GJjJtlRHCT5T6tkAYpDWX/mWkw09l+VgBxYtip4yMtrb/uv6KeWyN9Q+YX58D
- 1Sl4/5dTR8YV+8yoacZW+gLRyrDNfILAYQsvSTiIvn2/uRYUwoMLSD3tJsgzoLZ92gJv
- UiG7umq7ceAg3uvtXC0FnFkdDNyKbJXgdnvminNV+RXnV//h2bd8A4X9hr6M31utdNBY
- 7GrhNYNAi7qyHcjraYA2tuCgJ/kNCNKx6ERYppExLacMfbz62OYFPc6twc8cXBsHrLH4
- dFTZ+m64aQH6P700aPXRJhxXKjLs3xuq84D0sNYbTA419kg3TYlmekwjzAq5z7sn913L
- grvA==
-X-Gm-Message-State: ANhLgQ3p96Tlwav9w7z5EChV76V+/sOIL/yx742NBErLTmTM8TcMjat2
- jFpZctiDJpwDfc8J4ia3OSu3dptF28iE8BSjSSbjGA==
-X-Google-Smtp-Source: ADFU+vshWyqLWpOrJ9xdCfB6ck/+0gAWWbuyILfFoD+Z2kMBSFsFceasLZxT529BjjoapKRl6E/1UmsBmrDgBmgHztI=
-X-Received: by 2002:adf:8187:: with SMTP id 7mr13325645wra.358.1585542222325; 
- Sun, 29 Mar 2020 21:23:42 -0700 (PDT)
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=c6i2oKT4RVte8HXAFfgwGoSV73wDWEFj6pZMb4b7Pd4=;
+ b=yqrstLWq9NAAqeA7oxsCoFvNp0GrqQV64jiETzHsFxY+HkILcEc1f1RoxYKNNyTJoT4ZxRcC7OXArgcU0WHmT9mb+tm2WsbxY8VMmdHr/S0LPWf99Up/cuU9vujb93IB8u4SQNOxYuNdo5dbQIPhZc0yWcUimfmJuj8/z3avd7M=
+Authentication-Results: spf=none (sender IP is )
+ smtp.mailfrom=Anup.Patel@wdc.com; 
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com (2603:10b6:208:d8::15)
+ by MN2PR04MB6656.namprd04.prod.outlook.com (2603:10b6:208:1ed::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2856.19; Mon, 30 Mar
+ 2020 08:27:53 +0000
+Received: from MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::159d:10c9:f6df:64c8]) by MN2PR04MB6061.namprd04.prod.outlook.com
+ ([fe80::159d:10c9:f6df:64c8%6]) with mapi id 15.20.2856.019; Mon, 30 Mar 2020
+ 08:27:53 +0000
+From: Anup Patel <anup.patel@wdc.com>
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Anup Patel <anup.patel@wdc.com>
+Subject: [PATCH] riscv: Fix Stage2 SV32 page table walk
+Date: Mon, 30 Mar 2020 13:57:24 +0530
+Message-Id: <20200330082724.120444-1-anup.patel@wdc.com>
+X-Mailer: git-send-email 2.17.1
+Content-Type: text/plain
+X-ClientProxiedBy: PN1PR01CA0074.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c00:1::14) To MN2PR04MB6061.namprd04.prod.outlook.com
+ (2603:10b6:208:d8::15)
 MIME-Version: 1.0
-References: <cover.1585262586.git.alistair.francis@wdc.com>
- <mhng-f7361188-1bb2-4ea3-bc25-3076f877aa64@palmerdabbelt-glaptop1>
-In-Reply-To: <mhng-f7361188-1bb2-4ea3-bc25-3076f877aa64@palmerdabbelt-glaptop1>
-From: Anup Patel <anup@brainfault.org>
-Date: Mon, 30 Mar 2020 09:53:30 +0530
-Message-ID: <CAAhSdy2PNi-XE94kzSVRZLc_iJOKkBvwB6eo8qu=byBOUH9DDw@mail.gmail.com>
-Subject: Re: [PATCH for 5.0 v1 0/2] RISC-V: Fix Hypervisor guest user space
-To: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- QEMU Developers <qemu-devel@nongnu.org>,
- Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::441
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from wdc.com (106.51.27.68) by
+ PN1PR01CA0074.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c00:1::14) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2856.19 via Frontend Transport; Mon, 30 Mar 2020 08:27:48 +0000
+X-Mailer: git-send-email 2.17.1
+X-Originating-IP: [106.51.27.68]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 87de9aa5-73d7-48f4-8f0f-08d7d4843d24
+X-MS-TrafficTypeDiagnostic: MN2PR04MB6656:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <MN2PR04MB6656B4449CC60F9FE777E2568DCB0@MN2PR04MB6656.namprd04.prod.outlook.com>
+WDCIPOUTBOUND: EOP-TRUE
+X-MS-Oob-TLC-OOBClassifiers: OLM:3513;
+X-Forefront-PRVS: 0358535363
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN2PR04MB6061.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(10019020)(4636009)(366004)(376002)(346002)(136003)(396003)(39860400002)(186003)(8676002)(36756003)(316002)(26005)(2616005)(16526019)(110136005)(5660300002)(44832011)(54906003)(81166006)(4326008)(66476007)(8936002)(478600001)(956004)(81156014)(52116002)(55236004)(8886007)(66946007)(2906002)(55016002)(1006002)(6666004)(1076003)(7696005)(66556008)(86362001);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: RkNFZyQ9ccwKTxxWlpOvyDeOfGgAg5k+zc5aVczDBe3w3zGON+xe83DWrmDzHkbI9ola83zZ9YsxM+7FvUaOb9kmi+B32hDE5wF6AliCH3Mm+UN0diBgIlSGhpXg2xSmZW2BZWLgIHslwZecs+hg1tn2swxJ7nziXNIOoeo2dxlKh4S1XSBtw6Wni6CXr0flVcc7OFxWS5+McTWsqhwTAlM1V+JniKe0VJNQWlQ3/4sItRn1KvReU+ULSP5NjodX0fdjk8QmYlntY5uM3OiwCN2V2Dr9Y0XvWLXn/0Tyuq1nplF+4YvfOS++ctgC/6jfImh28KcyoC2iXyWow5dQnImHQ4Bc8Dxx8fBKGwyPnG+Xr6rxj+Aemrdhrx2jUmDXT1WFwGYCBJDn6ZnFpklAZT0uhoEY5RJchkA/s409/1mSHgZXR/jyMbdyEvdHjVRK
+X-MS-Exchange-AntiSpam-MessageData: rlTY0iIiobIJl23qVzgkijOaE/ZoXN3kDqi8NOaLTklM89OoOxHbGzZktqJfRXulkjGPGRWJcbYBxMGUd3ZqiEWxu1lesbiYFe9kDBdb6gRbU8I+iqbVY6x8EMNVTiETpKiLsRuD67eEJUHoe8AIDg==
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 87de9aa5-73d7-48f4-8f0f-08d7d4843d24
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2020 08:27:53.3316 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: aq8M7IU43JdXX81W39OheLphZfqMNk30+YsJc3IJ69V7FrS76H546mXMreNhR4RwZ8I8h3oWqJtVKggGKfUAMA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR04MB6656
+X-detected-operating-system: by eggs.gnu.org: FreeBSD 9.x [fuzzy]
+X-Received-From: 216.71.153.144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,35 +123,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2020 04:23:46 -0000
+X-List-Received-Date: Mon, 30 Mar 2020 08:28:02 -0000
 
-Hi Palmer,
+As-per RISC-V H-Extension v0.5 draft, the Stage2 SV32 page table has
+12bits of VPN[1] and 10bits of VPN[0]. The additional 2bits in VPN[1]
+is required to handle the 34bit intermediate physical address coming
+from Stage1 SV32 page table. The 12bits of VPN[1] implies that Stage2
+SV32 level-0 page table will be 16KB in size with total 4096 enteries
+where each entry maps 4MB of memory (same as Stage1 SV32 page table).
 
-On Fri, Mar 27, 2020 at 5:30 AM Palmer Dabbelt <palmer@dabbelt.com> wrote:
->
-> On Thu, 26 Mar 2020 15:44:04 PDT (-0700), Alistair Francis wrote:
-> > This series fixes two bugs in the RISC-V two stage lookup
-> > implementation. This fixes the Hypervisor userspace failing to start.
-> >
-> > Alistair Francis (2):
-> >   riscv: Don't use stage-2 PTE lookup protection flags
-> >   riscv: AND stage-1 and stage-2 protection flags
-> >
-> >  target/riscv/cpu_helper.c | 11 +++++++----
-> >  1 file changed, 7 insertions(+), 4 deletions(-)
->
-> Thanks, these are in the queue.
->
+The get_physical_address() function is broken for Stage2 SV32 level-0
+page table because it incorrectly computes output physical address for
+Stage2 SV32 level-0 page table entry.
 
-I have tested this patch series on latest QEMU master without
-"target/riscv: Don't set write permissions on dirty PTEs" workaround
-patch. It works fine now.
+The root cause of the issue is that get_physical_address() uses the
+"widened" variable to compute level-0 physical address mapping which
+changes level-0 mapping size (instead of 4MB). We should use the
+"widened" variable only for computing index of Stage2 SV32 level-0
+page table.
 
-Tested-by: Anup Patel <anup@brainfault.org>
+Signed-off-by: Anup Patel <anup.patel@wdc.com>
+---
+ target/riscv/cpu_helper.c | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
-Please drop the work-around patch  "target/riscv: Don't set write
-permissions on dirty PTEs" from your for-next.
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 50e13a064f..bc80aa87cf 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -559,12 +559,7 @@ restart:
+             /* for superpage mappings, make a fake leaf PTE for the TLB's
+                benefit. */
+             target_ulong vpn = addr >> PGSHIFT;
+-            if (i == 0) {
+-                *physical = (ppn | (vpn & ((1L << (ptshift + widened)) - 1))) <<
+-                             PGSHIFT;
+-            } else {
+-                *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
+-            }
++            *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
+ 
+             /* set permissions on the TLB entry */
+             if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
+-- 
+2.17.1
 
-Regards,
-Anup
 
