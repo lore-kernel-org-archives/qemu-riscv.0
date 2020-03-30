@@ -1,34 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jIyIU-00014h-0y
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Mar 2020 13:34:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34613)
+	id 1jIyKM-0004f9-R9
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Mar 2020 13:35:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34981)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jIyIQ-0000wu-Dv
- for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 13:34:00 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jIyKJ-0004VS-7L
+ for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 13:35:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jIyIO-0000KU-Kl
- for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 13:33:58 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:42139)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jIyKH-0003aT-FM
+ for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 13:35:55 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:50869)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jIyIK-00009l-CT; Mon, 30 Mar 2020 13:33:53 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07608351|-1;
- BR=01201311R361S83ruler364_34042_170522; CH=green; DM=|OVERLOAD|false|;
- DS=SPAM|spam_ad|0.801865-0.000159662-0.197975; FP=0|0|0|0|0|-1|-1|-1;
- HT=e02c03307; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=10; RT=10; SR=0;
- TI=SMTPD_---.H7m2yKO_1585589620; 
+ id 1jIyKD-00036L-K2; Mon, 30 Mar 2020 13:35:50 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07625075|-1; CH=blue; DM=|OVERLOAD|false|;
+ DS=CONTINUE|ham_system_inform|0.664654-0.00204451-0.333301;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e01a16367; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=10; RT=10; SR=0; TI=SMTPD_---.H7m0kKk_1585589740; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H7m2yKO_1585589620)
- by smtp.aliyun-inc.com(10.147.40.44); Tue, 31 Mar 2020 01:33:40 +0800
+ fp:SMTPD_---.H7m0kKk_1585589740)
+ by smtp.aliyun-inc.com(10.147.44.118);
+ Tue, 31 Mar 2020 01:35:41 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: richard.henderson@linaro.org, alistair23@gmail.com,
  chihmin.chao@sifive.com, palmer@dabbelt.com
 Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v7 58/61] target/riscv: vector slide instructions
-Date: Mon, 30 Mar 2020 23:36:30 +0800
-Message-Id: <20200330153633.15298-59-zhiwei_liu@c-sky.com>
+Subject: [PATCH v7 59/61] target/riscv: vector register gather instruction
+Date: Mon, 30 Mar 2020 23:36:31 +0800
+Message-Id: <20200330153633.15298-60-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200330153633.15298-1-zhiwei_liu@c-sky.com>
 References: <20200330153633.15298-1-zhiwei_liu@c-sky.com>
@@ -47,78 +47,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2020 17:34:00 -0000
+X-List-Received-Date: Mon, 30 Mar 2020 17:35:57 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/helper.h                   |  17 ++++
- target/riscv/insn32.decode              |   7 ++
- target/riscv/insn_trans/trans_rvv.inc.c |  18 ++++
- target/riscv/vector_helper.c            | 114 ++++++++++++++++++++++++
- 4 files changed, 156 insertions(+)
+ target/riscv/helper.h                   |  9 +++
+ target/riscv/insn32.decode              |  3 +
+ target/riscv/insn_trans/trans_rvv.inc.c | 77 +++++++++++++++++++++++++
+ target/riscv/vector_helper.c            | 60 +++++++++++++++++++
+ 4 files changed, 149 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 9e80e4ca23..6a5e32d1e4 100644
+index 6a5e32d1e4..3da863ac13 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1113,3 +1113,20 @@ DEF_HELPER_4(vid_v_b, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vid_v_h, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vid_v_w, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vid_v_d, void, ptr, ptr, env, i32)
+@@ -1130,3 +1130,12 @@ DEF_HELPER_6(vslide1down_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vslide1down_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vslide1down_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vslide1down_vx_d, void, ptr, ptr, tl, ptr, env, i32)
 +
-+DEF_HELPER_6(vslideup_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslideup_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslideup_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslideup_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslidedown_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslidedown_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslidedown_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslidedown_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslide1up_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslide1up_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslide1up_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslide1up_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslide1down_vx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslide1down_vx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslide1down_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslide1down_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vrgather_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vrgather_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vrgather_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vrgather_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vrgather_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vrgather_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vrgather_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vrgather_vx_d, void, ptr, ptr, tl, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 79f9b37b29..34ccad53a9 100644
+index 34ccad53a9..e07ff7eff6 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -72,6 +72,7 @@
- @r2_vm   ...... vm:1 ..... ..... ... ..... ....... &rmr %rs2 %rd
- @r1_vm   ...... vm:1 ..... ..... ... ..... ....... %rd
- @r_nfvm  ... ... vm:1 ..... ..... ... ..... ....... &rnfvm %nf %rs2 %rs1 %rd
-+@r2rd    .......   ..... ..... ... ..... ....... %rs2 %rd
- @r_vm    ...... vm:1 ..... ..... ... ..... ....... &rmrr %rs2 %rs1 %rd
- @r_vm_1  ...... . ..... ..... ... ..... .......    &rmrr vm=1 %rs2 %rs1 %rd
- @r_vm_0  ...... . ..... ..... ... ..... .......    &rmrr vm=0 %rs2 %rs1 %rd
-@@ -565,6 +566,12 @@ vext_x_v        001100 1 ..... ..... 010 ..... 1010111 @r
- vmv_s_x         001101 1 00000 ..... 110 ..... 1010111 @r2
- vfmv_f_s        001100 1 ..... 00000 001 ..... 1010111 @r2rd
- vfmv_s_f        001101 1 00000 ..... 101 ..... 1010111 @r2
-+vslideup_vx     001110 . ..... ..... 100 ..... 1010111 @r_vm
-+vslideup_vi     001110 . ..... ..... 011 ..... 1010111 @r_vm
-+vslide1up_vx    001110 . ..... ..... 110 ..... 1010111 @r_vm
-+vslidedown_vx   001111 . ..... ..... 100 ..... 1010111 @r_vm
-+vslidedown_vi   001111 . ..... ..... 011 ..... 1010111 @r_vm
-+vslide1down_vx  001111 . ..... ..... 110 ..... 1010111 @r_vm
+@@ -572,6 +572,9 @@ vslide1up_vx    001110 . ..... ..... 110 ..... 1010111 @r_vm
+ vslidedown_vx   001111 . ..... ..... 100 ..... 1010111 @r_vm
+ vslidedown_vi   001111 . ..... ..... 011 ..... 1010111 @r_vm
+ vslide1down_vx  001111 . ..... ..... 110 ..... 1010111 @r_vm
++vrgather_vv     001100 . ..... ..... 000 ..... 1010111 @r_vm
++vrgather_vx     001100 . ..... ..... 100 ..... 1010111 @r_vm
++vrgather_vi     001100 . ..... ..... 011 ..... 1010111 @r_vm
  
  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index dff61acca8..540aa17e39 100644
+index 540aa17e39..3b30e27c52 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -2778,3 +2778,21 @@ static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
-     }
-     return false;
- }
+@@ -2796,3 +2796,80 @@ GEN_OPIVI_TRANS(vslideup_vi, 1, vslideup_vx, slideup_check)
+ GEN_OPIVX_TRANS(vslidedown_vx, opivx_check)
+ GEN_OPIVX_TRANS(vslide1down_vx, opivx_check)
+ GEN_OPIVI_TRANS(vslidedown_vi, 1, vslidedown_vx, opivx_check)
 +
-+/* Vector Slide Instructions */
-+static bool slideup_check(DisasContext *s, arg_rmrr *a)
++/* Vector Register Gather Instruction */
++static bool vrgather_vv_check(DisasContext *s, arg_rmrr *a)
++{
++    return (vext_check_isa_ill(s) &&
++            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
++            vext_check_reg(s, a->rd, false) &&
++            vext_check_reg(s, a->rs1, false) &&
++            vext_check_reg(s, a->rs2, false) &&
++            (a->rd != a->rs2) && (a->rd != a->rs1));
++}
++
++GEN_OPIVV_TRANS(vrgather_vv, vrgather_vv_check)
++
++static bool vrgather_vx_check(DisasContext *s, arg_rmrr *a)
 +{
 +    return (vext_check_isa_ill(s) &&
 +            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
@@ -127,108 +120,101 @@ index dff61acca8..540aa17e39 100644
 +            (a->rd != a->rs2));
 +}
 +
-+GEN_OPIVX_TRANS(vslideup_vx, slideup_check)
-+GEN_OPIVX_TRANS(vslide1up_vx, slideup_check)
-+GEN_OPIVI_TRANS(vslideup_vi, 1, vslideup_vx, slideup_check)
++/* vrgather.vx vd, vs2, rs1, vm # vd[i] = (x[rs1] >= VLMAX) ? 0 : vs2[rs1] */
++static bool trans_vrgather_vx(DisasContext *s, arg_rmrr *a)
++{
++    if (!vrgather_vx_check(s, a)) {
++        return false;
++    }
 +
-+GEN_OPIVX_TRANS(vslidedown_vx, opivx_check)
-+GEN_OPIVX_TRANS(vslide1down_vx, opivx_check)
-+GEN_OPIVI_TRANS(vslidedown_vi, 1, vslidedown_vx, opivx_check)
++    if (a->vm && s->vl_eq_vlmax) {
++        int vlmax = s->vlen / s->mlen;
++        TCGv_i64 dest = tcg_temp_new_i64();
++
++        if (a->rs1 == 0) {
++            vec_element_loadi(s, dest, a->rs2, 0);
++        } else {
++            vec_element_loadx(s, dest, a->rs2, cpu_gpr[a->rs1], vlmax);
++        }
++
++        tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
++                             MAXSZ(s), MAXSZ(s), dest);
++        tcg_temp_free_i64(dest);
++    } else {
++        static gen_helper_opivx * const fns[4] = {
++            gen_helper_vrgather_vx_b, gen_helper_vrgather_vx_h,
++            gen_helper_vrgather_vx_w, gen_helper_vrgather_vx_d
++        };
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s);
++    }
++    return true;
++}
++
++/* vrgather.vi vd, vs2, imm, vm # vd[i] = (imm >= VLMAX) ? 0 : vs2[imm] */
++static bool trans_vrgather_vi(DisasContext *s, arg_rmrr *a)
++{
++    if (!vrgather_vx_check(s, a)) {
++        return false;
++    }
++
++    if (a->vm && s->vl_eq_vlmax) {
++        if (a->rs1 >= s->vlen / s->mlen) {
++            tcg_gen_gvec_dup64i(vreg_ofs(s, a->rd), MAXSZ(s), MAXSZ(s), 0);
++        } else {
++            tcg_gen_gvec_dup_mem(s->sew, vreg_ofs(s, a->rd),
++                                 endian_ofs(s, a->rs2, a->rs1),
++                                 MAXSZ(s), MAXSZ(s));
++        }
++    } else {
++        static gen_helper_opivx * const fns[4] = {
++            gen_helper_vrgather_vx_b, gen_helper_vrgather_vx_h,
++            gen_helper_vrgather_vx_w, gen_helper_vrgather_vx_d
++        };
++        return opivi_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s, 1);
++    }
++    return true;
++}
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 3e1f286b50..377f919d7c 100644
+index 377f919d7c..15fc4a74e5 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -4696,3 +4696,117 @@ GEN_VEXT_VID_V(vid_v_b, uint8_t, H1, clearb)
- GEN_VEXT_VID_V(vid_v_h, uint16_t, H2, clearh)
- GEN_VEXT_VID_V(vid_v_w, uint32_t, H4, clearl)
- GEN_VEXT_VID_V(vid_v_d, uint64_t, H8, clearq)
+@@ -4810,3 +4810,63 @@ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_b, uint8_t, H1, clearb)
+ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_h, uint16_t, H2, clearh)
+ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_w, uint32_t, H4, clearl)
+ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_d, uint64_t, H8, clearq)
 +
-+/*
-+ *** Vector Permutation Instructions
-+ */
-+
-+/* Vector Slide Instructions */
-+#define GEN_VEXT_VSLIDEUP_VX(NAME, ETYPE, H, CLEAR_FN)                    \
-+void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
++/* Vector Register Gather Instruction */
++#define GEN_VEXT_VRGATHER_VV(NAME, ETYPE, H, CLEAR_FN)                    \
++void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
 +                  CPURISCVState *env, uint32_t desc)                      \
 +{                                                                         \
 +    uint32_t mlen = vext_mlen(desc);                                      \
 +    uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
 +    uint32_t vm = vext_vm(desc);                                          \
 +    uint32_t vl = env->vl;                                                \
-+    target_ulong offset = s1, i;                                          \
-+                                                                          \
-+    for (i = offset; i < vl; i++) {                                       \
-+        if (!vm && !vext_elem_mask(v0, mlen, i)) {                        \
-+            continue;                                                     \
-+        }                                                                 \
-+        *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - offset));          \
-+    }                                                                     \
-+    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
-+}
-+
-+/* vslideup.vx vd, vs2, rs1, vm # vd[i+rs1] = vs2[i] */
-+GEN_VEXT_VSLIDEUP_VX(vslideup_vx_b, uint8_t, H1, clearb)
-+GEN_VEXT_VSLIDEUP_VX(vslideup_vx_h, uint16_t, H2, clearh)
-+GEN_VEXT_VSLIDEUP_VX(vslideup_vx_w, uint32_t, H4, clearl)
-+GEN_VEXT_VSLIDEUP_VX(vslideup_vx_d, uint64_t, H8, clearq)
-+
-+#define GEN_VEXT_VSLIDEDOWN_VX(NAME, ETYPE, H, CLEAR_FN)                  \
-+void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-+                  CPURISCVState *env, uint32_t desc)                      \
-+{                                                                         \
-+    uint32_t mlen = vext_mlen(desc);                                      \
-+    uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
-+    uint32_t vm = vext_vm(desc);                                          \
-+    uint32_t vl = env->vl;                                                \
-+    target_ulong offset = s1, i;                                          \
-+                                                                          \
-+    for (i = 0; i < vl; ++i) {                                            \
-+        target_ulong j = i + offset;                                      \
-+        if (!vm && !vext_elem_mask(v0, mlen, i)) {                        \
-+            continue;                                                     \
-+        }                                                                 \
-+        *((ETYPE *)vd + H(i)) = j >= vlmax ? 0 : *((ETYPE *)vs2 + H(j));  \
-+    }                                                                     \
-+    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
-+}
-+
-+/* vslidedown.vx vd, vs2, rs1, vm # vd[i] = vs2[i+rs1] */
-+GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_b, uint8_t, H1, clearb)
-+GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_h, uint16_t, H2, clearh)
-+GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_w, uint32_t, H4, clearl)
-+GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_d, uint64_t, H8, clearq)
-+
-+#define GEN_VEXT_VSLIDE1UP_VX(NAME, ETYPE, H, CLEAR_FN)                   \
-+void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-+                  CPURISCVState *env, uint32_t desc)                      \
-+{                                                                         \
-+    uint32_t mlen = vext_mlen(desc);                                      \
-+    uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
-+    uint32_t vm = vext_vm(desc);                                          \
-+    uint32_t vl = env->vl;                                                \
-+    uint32_t i;                                                           \
++    uint32_t index, i;                                                    \
 +                                                                          \
 +    for (i = 0; i < vl; i++) {                                            \
 +        if (!vm && !vext_elem_mask(v0, mlen, i)) {                        \
 +            continue;                                                     \
 +        }                                                                 \
-+        if (i == 0) {                                                     \
-+            *((ETYPE *)vd + H(i)) = s1;                                   \
++        index = *((ETYPE *)vs1 + H(i));                                   \
++        if (index >= vlmax) {                                             \
++            *((ETYPE *)vd + H(i)) = 0;                                    \
 +        } else {                                                          \
-+            *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - 1));           \
++            *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(index));           \
 +        }                                                                 \
 +    }                                                                     \
 +    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
 +}
 +
-+/* vslide1up.vx vd, vs2, rs1, vm # vd[0]=x[rs1], vd[i+1] = vs2[i] */
-+GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_b, uint8_t, H1, clearb)
-+GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_h, uint16_t, H2, clearh)
-+GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_w, uint32_t, H4, clearl)
-+GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_d, uint64_t, H8, clearq)
++/* vd[i] = (vs1[i] >= VLMAX) ? 0 : vs2[vs1[i]]; */
++GEN_VEXT_VRGATHER_VV(vrgather_vv_b, uint8_t, H1, clearb)
++GEN_VEXT_VRGATHER_VV(vrgather_vv_h, uint16_t, H2, clearh)
++GEN_VEXT_VRGATHER_VV(vrgather_vv_w, uint32_t, H4, clearl)
++GEN_VEXT_VRGATHER_VV(vrgather_vv_d, uint64_t, H8, clearq)
 +
-+#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, ETYPE, H, CLEAR_FN)                 \
++#define GEN_VEXT_VRGATHER_VX(NAME, ETYPE, H, CLEAR_FN)                    \
 +void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
 +                  CPURISCVState *env, uint32_t desc)                      \
 +{                                                                         \
@@ -236,26 +222,26 @@ index 3e1f286b50..377f919d7c 100644
 +    uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
 +    uint32_t vm = vext_vm(desc);                                          \
 +    uint32_t vl = env->vl;                                                \
-+    uint32_t i;                                                           \
++    uint32_t index = s1, i;                                               \
 +                                                                          \
 +    for (i = 0; i < vl; i++) {                                            \
 +        if (!vm && !vext_elem_mask(v0, mlen, i)) {                        \
 +            continue;                                                     \
 +        }                                                                 \
-+        if (i == vl - 1) {                                                \
-+            *((ETYPE *)vd + H(i)) = s1;                                   \
++        if (index >= vlmax) {                                             \
++            *((ETYPE *)vd + H(i)) = 0;                                    \
 +        } else {                                                          \
-+            *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i + 1));           \
++            *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(index));           \
 +        }                                                                 \
 +    }                                                                     \
 +    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
 +}
 +
-+/* vslide1down.vx vd, vs2, rs1, vm # vd[i] = vs2[i+1], vd[vl-1]=x[rs1] */
-+GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_b, uint8_t, H1, clearb)
-+GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_h, uint16_t, H2, clearh)
-+GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_w, uint32_t, H4, clearl)
-+GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_d, uint64_t, H8, clearq)
++/* vd[i] = (x[rs1] >= VLMAX) ? 0 : vs2[rs1] */
++GEN_VEXT_VRGATHER_VX(vrgather_vx_b, uint8_t, H1, clearb)
++GEN_VEXT_VRGATHER_VX(vrgather_vx_h, uint16_t, H2, clearh)
++GEN_VEXT_VRGATHER_VX(vrgather_vx_w, uint32_t, H4, clearl)
++GEN_VEXT_VRGATHER_VX(vrgather_vx_d, uint64_t, H8, clearq)
 -- 
 2.23.0
 
