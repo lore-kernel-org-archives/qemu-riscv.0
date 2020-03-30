@@ -1,49 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jIP82-0002Jw-QM
-	for mharc-qemu-riscv@gnu.org; Sun, 29 Mar 2020 00:00:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37461)
+	id 1jIlxk-0000Wf-A2
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Mar 2020 00:23:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38240)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jIP80-0002IE-0d
- for qemu-riscv@nongnu.org; Sun, 29 Mar 2020 00:00:53 -0400
+ (envelope-from <anup@brainfault.org>) id 1jIlxh-0000PZ-Mc
+ for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 00:23:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jIP7y-00059F-SZ
- for qemu-riscv@nongnu.org; Sun, 29 Mar 2020 00:00:51 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:54218)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jIP7v-0004vn-Py; Sun, 29 Mar 2020 00:00:48 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1311125|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.345928-0.000373953-0.653698;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03305; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.H6x3BXQ_1585454437; 
-Received: from 192.168.3.18(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.H6x3BXQ_1585454437)
- by smtp.aliyun-inc.com(10.147.42.198);
- Sun, 29 Mar 2020 12:00:39 +0800
-Subject: Re: [PATCH v6 18/61] target/riscv: vector single-width integer
- multiply instructions
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-To: Richard Henderson <richard.henderson@linaro.org>, alistair23@gmail.com,
- chihmin.chao@sifive.com, palmer@dabbelt.com
-Cc: wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- guoren@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20200317150653.9008-1-zhiwei_liu@c-sky.com>
- <20200317150653.9008-19-zhiwei_liu@c-sky.com>
- <1a5900d9-dc26-04f2-74b2-0bada246a0e7@linaro.org>
- <8be612c0-4345-c1f2-3b82-73a9a1ea4133@c-sky.com>
- <53209745-9b54-00b3-2b1f-1271f0843021@linaro.org>
- <5dabf936-6a4f-5d76-0d16-ff357d1ee376@c-sky.com>
-Message-ID: <764066b7-c083-1b4e-32c4-616aec3bd9be@c-sky.com>
-Date: Sun, 29 Mar 2020 12:00:37 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ (envelope-from <anup@brainfault.org>) id 1jIlxg-0003oe-LV
+ for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 00:23:45 -0400
+Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:45633)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <anup@brainfault.org>) id 1jIlxg-0003mQ-Ck
+ for qemu-riscv@nongnu.org; Mon, 30 Mar 2020 00:23:44 -0400
+Received: by mail-wr1-x441.google.com with SMTP id t7so19778354wrw.12
+ for <qemu-riscv@nongnu.org>; Sun, 29 Mar 2020 21:23:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=HzG7oyXt/nsBgTi6zmit0T++IzWCAHZ7qmuGbPyQKFo=;
+ b=Oaz6u8lJqj2lr0brqtHiA/sBxIkaIKveNonoyhGZWwOBo1q0ZSntJE/7YX7uxL8D0p
+ TkccxD5+PflOPfefCd0T76a5e3kfoLxQdr6FI2T+zfYVrACB21rhDyi/pQFAV/XCZyou
+ ONwPZwZ5c+dM8OW9GqAgXa6URTx/sAQtG9s82QkSn0aCqH0Wz/EQL8ePv12yp+TdK8tj
+ hwcumrjQI71pSyEUnmIUpIA1EL6reJi2XE0A4zJmncQBLS+CtOn8aQpZmOqDvwVbbT6v
+ h+EfBl7zpLfBvWlBmW86Eo5eVVNcUBiQl14nPnjeMFvtoKIH0RbgW7rtb3J2dFXLeYXM
+ jNRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=HzG7oyXt/nsBgTi6zmit0T++IzWCAHZ7qmuGbPyQKFo=;
+ b=E2jd8GJjJtlRHCT5T6tkAYpDWX/mWkw09l+VgBxYtip4yMtrb/uv6KeWyN9Q+YX58D
+ 1Sl4/5dTR8YV+8yoacZW+gLRyrDNfILAYQsvSTiIvn2/uRYUwoMLSD3tJsgzoLZ92gJv
+ UiG7umq7ceAg3uvtXC0FnFkdDNyKbJXgdnvminNV+RXnV//h2bd8A4X9hr6M31utdNBY
+ 7GrhNYNAi7qyHcjraYA2tuCgJ/kNCNKx6ERYppExLacMfbz62OYFPc6twc8cXBsHrLH4
+ dFTZ+m64aQH6P700aPXRJhxXKjLs3xuq84D0sNYbTA419kg3TYlmekwjzAq5z7sn913L
+ grvA==
+X-Gm-Message-State: ANhLgQ3p96Tlwav9w7z5EChV76V+/sOIL/yx742NBErLTmTM8TcMjat2
+ jFpZctiDJpwDfc8J4ia3OSu3dptF28iE8BSjSSbjGA==
+X-Google-Smtp-Source: ADFU+vshWyqLWpOrJ9xdCfB6ck/+0gAWWbuyILfFoD+Z2kMBSFsFceasLZxT529BjjoapKRl6E/1UmsBmrDgBmgHztI=
+X-Received: by 2002:adf:8187:: with SMTP id 7mr13325645wra.358.1585542222325; 
+ Sun, 29 Mar 2020 21:23:42 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <5dabf936-6a4f-5d76-0d16-ff357d1ee376@c-sky.com>
-Content-Type: multipart/alternative;
- boundary="------------37E6D960588C56DB2585DEDA"
-Content-Language: en-US
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 3.x [generic] [fuzzy]
-X-Received-From: 121.197.200.217
+References: <cover.1585262586.git.alistair.francis@wdc.com>
+ <mhng-f7361188-1bb2-4ea3-bc25-3076f877aa64@palmerdabbelt-glaptop1>
+In-Reply-To: <mhng-f7361188-1bb2-4ea3-bc25-3076f877aa64@palmerdabbelt-glaptop1>
+From: Anup Patel <anup@brainfault.org>
+Date: Mon, 30 Mar 2020 09:53:30 +0530
+Message-ID: <CAAhSdy2PNi-XE94kzSVRZLc_iJOKkBvwB6eo8qu=byBOUH9DDw@mail.gmail.com>
+Subject: Re: [PATCH for 5.0 v1 0/2] RISC-V: Fix Hypervisor guest user space
+To: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ QEMU Developers <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair23@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2a00:1450:4864:20::441
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -55,216 +68,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Mar 2020 04:00:53 -0000
+X-List-Received-Date: Mon, 30 Mar 2020 04:23:46 -0000
 
-This is a multi-part message in MIME format.
---------------37E6D960588C56DB2585DEDA
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Hi Palmer,
 
-
-
-On 2020/3/29 0:13, LIU Zhiwei wrote:
+On Fri, Mar 27, 2020 at 5:30 AM Palmer Dabbelt <palmer@dabbelt.com> wrote:
 >
+> On Thu, 26 Mar 2020 15:44:04 PDT (-0700), Alistair Francis wrote:
+> > This series fixes two bugs in the RISC-V two stage lookup
+> > implementation. This fixes the Hypervisor userspace failing to start.
+> >
+> > Alistair Francis (2):
+> >   riscv: Don't use stage-2 PTE lookup protection flags
+> >   riscv: AND stage-1 and stage-2 protection flags
+> >
+> >  target/riscv/cpu_helper.c | 11 +++++++----
+> >  1 file changed, 7 insertions(+), 4 deletions(-)
 >
-> On 2020/3/28 23:47, Richard Henderson wrote:
->> On 3/28/20 8:17 AM, LIU Zhiwei wrote:
->>>> Missed the improvement here.  See tcg_gen_mulsu2_i64.
->>> Though I have not gotten the principle, the code in 
->>> tcg_gen_mulsu2_i64 is much
->>> tidier.
->> Let A = signed operand,
->>      B = unsigned operand
->>      P = unsigned product
->>
->> If the sign bit A is set, then P is too large.
->> In that case we subtract 2**64 * B to fix that:
->>
->>      HI_P -= (A < 0 ? B : 0)
->>
->> where the conditional is computed as (A >> 63) & B.
->
-> I think I get it.
->
-> LET  A = 2 ** 64  - X
->
-> THEN
->
-> X = 2 ** 64 - A
-> SIGNED_P = -X * B
->
-> if (A * B == P) then
->
-> (2 ** 64  - X) * B == P
-> 2 **64 * B - X * B == P
->
-> -X *B == P - 2**64*B
->
-> HI_P -= (A < 0 ? B ：0）
->
-It's confusing here. I paste the clearer code.
-
-/*
-  * Let  A = signed operand,
-  *      B = unsigned operand
-  *      P = mulu64(A, B), unsigned product
-  *
-  * LET  X = 2 ** 64  - A, 2's complement of A
-  *      SP = signed product
-  * THEN
-  *      IF A < 0
-  *          SP = -X * B
-  *             = -(2 ** 64 - A) * B
-  *             = A * B - 2 ** 64 * B
-  *             = P - 2 ** 64 * B
-  *      ELSE
-  *          SP = P
-  * THEN
-  *      HI_P -= (A < 0 ? B : 0）
-  */
-
-static int64_t do_mulhsu_d(int64_t s2, uint64_t s1)
-{
-     uint64_t hi_64, lo_64;
-
-     mulu64(&lo_64, &hi_64, s2, s1);
-
-     hi_64 -= s2 < 0 ? s1 : 0;
-     return hi_64;
-}
-
-Zhiwei
-> Zhiwei
->>
->> r~
+> Thanks, these are in the queue.
 >
 
+I have tested this patch series on latest QEMU master without
+"target/riscv: Don't set write permissions on dirty PTEs" workaround
+patch. It works fine now.
 
---------------37E6D960588C56DB2585DEDA
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Tested-by: Anup Patel <anup@brainfault.org>
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <br>
-    <br>
-    <div class="moz-cite-prefix">On 2020/3/29 0:13, LIU Zhiwei wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:5dabf936-6a4f-5d76-0d16-ff357d1ee376@c-sky.com">
-      <br>
-      <br>
-      On 2020/3/28 23:47, Richard Henderson wrote:
-      <br>
-      <blockquote type="cite">On 3/28/20 8:17 AM, LIU Zhiwei wrote:
-        <br>
-        <blockquote type="cite">
-          <blockquote type="cite">Missed the improvement here.  See
-            tcg_gen_mulsu2_i64.
-            <br>
-          </blockquote>
-          Though I have not gotten the principle, the code in
-          tcg_gen_mulsu2_i64 is much
-          <br>
-          tidier.
-          <br>
-        </blockquote>
-        Let A = signed operand,
-        <br>
-             B = unsigned operand
-        <br>
-             P = unsigned product
-        <br>
-        <br>
-        If the sign bit A is set, then P is too large.
-        <br>
-        In that case we subtract 2**64 * B to fix that:
-        <br>
-        <br>
-             HI_P -= (A &lt; 0 ? B : 0)
-        <br>
-        <br>
-        where the conditional is computed as (A &gt;&gt; 63) &amp; B.
-        <br>
-      </blockquote>
-      <br>
-      I think I get it.
-      <br>
-      <br>
-      LET  A = 2 ** 64  - X
-      <br>
-      <br>
-      THEN
-      <br>
-      <br>
-      X = 2 ** 64 - A
-      <br>
-      SIGNED_P = -X * B
-      <br>
-      <br>
-      if (A * B == P) then
-      <br>
-      <br>
-      (2 ** 64  - X) * B == P
-      <br>
-      2 **64 * B - X * B == P
-      <br>
-      <br>
-      -X *B == P - 2**64*B
-      <br>
-      <br>
-      HI_P -= (A &lt; 0 ? B ：0）
-      <br>
-      <br>
-    </blockquote>
-    It's confusing here. I paste the clearer code.<br>
-    <pre>/*
- * Let  A = signed operand,
- *      B = unsigned operand
- *      P = mulu64(A, B), unsigned product
- *
- * LET  X = 2 ** 64  - A, 2's complement of A
- *      SP = signed product
- * THEN
- *      IF A &lt; 0
- *          SP = -X * B
- *             = -(2 ** 64 - A) * B
- *             = A * B - 2 ** 64 * B
- *             = P - 2 ** 64 * B
- *      ELSE
- *          SP = P
- * THEN
- *      HI_P -= (A &lt; 0 ? B : 0）
- */
+Please drop the work-around patch  "target/riscv: Don't set write
+permissions on dirty PTEs" from your for-next.
 
-static int64_t do_mulhsu_d(int64_t s2, uint64_t s1)
-{
-    uint64_t hi_64, lo_64;
-
-    mulu64(&amp;lo_64, &amp;hi_64, s2, s1);
-
-    hi_64 -= s2 &lt; 0 ? s1 : 0;
-    return hi_64;
-}
-
-</pre>
-    Zhiwei<br>
-    <blockquote type="cite"
-      cite="mid:5dabf936-6a4f-5d76-0d16-ff357d1ee376@c-sky.com">Zhiwei
-      <br>
-      <blockquote type="cite">
-        <br>
-        r~
-        <br>
-      </blockquote>
-      <br>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------37E6D960588C56DB2585DEDA--
+Regards,
+Anup
 
