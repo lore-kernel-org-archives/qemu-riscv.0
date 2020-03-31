@@ -1,67 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jJCy6-00034f-A7
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Mar 2020 05:13:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35166)
+	id 1jJDAo-0003V6-3f
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Mar 2020 05:27:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37080)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <anup@brainfault.org>) id 1jJCy3-000347-CK
- for qemu-riscv@nongnu.org; Tue, 31 Mar 2020 05:13:56 -0400
+ (envelope-from <jiangyifei@huawei.com>) id 1jJDAh-0003Pr-Q9
+ for qemu-riscv@nongnu.org; Tue, 31 Mar 2020 05:27:05 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <anup@brainfault.org>) id 1jJCy1-0005M9-G2
- for qemu-riscv@nongnu.org; Tue, 31 Mar 2020 05:13:55 -0400
-Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:33054)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <anup@brainfault.org>) id 1jJCxz-0005Ji-Nq
- for qemu-riscv@nongnu.org; Tue, 31 Mar 2020 05:13:52 -0400
-Received: by mail-wr1-x444.google.com with SMTP id a25so24987126wrd.0
- for <qemu-riscv@nongnu.org>; Tue, 31 Mar 2020 02:13:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3tq/6HeYUoF8j3n70MM+g+9+/xFe3z7G+cZK/eJ2q5g=;
- b=J09CSdcGSNl7cbS7uQxXgXgSJaxn23v2zoFmJzpEugAfNeviwpYjs8ZjappRbk/Lke
- tfa+Mbq/VAy2HRxIuAL+gge0D4x/HnkAlYlA4pCNa63LgrOViAUgMtPGn7OR5Y3wDCHk
- Ur7Ojcy0FTVcFJHOedTXJOBQFe3isJEjFu8JMn3SeIn5zfvuUgUS+RnAoSSn9cZJ+DnD
- NLC97szwXDCs90As/zojzDMEcKwWZLckxM36haxXlYAkWqJkwViddzdr0l2dd7tuVZEp
- 7fXxCVx0xradVBaApRtFm2FJ7Q08LaSLXgYxHtSnjGf+aguawNLrazDhJTLK/pWiKWO3
- DuBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3tq/6HeYUoF8j3n70MM+g+9+/xFe3z7G+cZK/eJ2q5g=;
- b=lH9FkSb0Xk5B3rTEq86ffSU5aaS+s8Cyeqx7Soi/RhzrnOPDnz2WHIWz5DKqaEWug9
- sCbA28ObK4BFrYfaCBUTXFzQ9LDMuFh+vMQdeyr/9mJEnpXeubK2DQyn2S5wydGYdYSj
- bIHTm8Z1NwPPiV1/pZ/W91zVZHW5dunKremnlDz77MbDYBblKj0zsZQJ+BTBtYSCqkCc
- daoRtXLSxMUA2ZD5FuqGlLdyMPKT3uiUAZCo3CYXazFOwwdzRFLdL1Jzvgivfai6hNFe
- Gid9mfAc90EXhgPgYowP2gdu57DJFZsd9J1bfBss9auLC1DBYLvISCrcmTfNCWHxkbhz
- YhpQ==
-X-Gm-Message-State: ANhLgQ3owMeqviPXNw87I59XG7P9P7PHL1rJFq7lf8V0EeQ0eOCdwSGN
- jDcKllWoQmXd0bHl8+lNVDGLVEz7x0SM2czPeQVysw==
-X-Google-Smtp-Source: ADFU+vsxoSCtYI4z+f08EL/kUMqgiURTQebAI+G2f2MWF/iqLlYJy50TunhMefcjvO2kieLjtKbLd5/rDrnmmKmViSg=
-X-Received: by 2002:a5d:4acd:: with SMTP id y13mr19367932wrs.61.1585646028592; 
- Tue, 31 Mar 2020 02:13:48 -0700 (PDT)
-MIME-Version: 1.0
+ (envelope-from <jiangyifei@huawei.com>) id 1jJDAg-0005VO-EE
+ for qemu-riscv@nongnu.org; Tue, 31 Mar 2020 05:26:59 -0400
+Received: from szxga01-in.huawei.com ([45.249.212.187]:2460 helo=huawei.com)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <jiangyifei@huawei.com>)
+ id 1jJDAc-0005RM-La; Tue, 31 Mar 2020 05:26:55 -0400
+Received: from DGGEMM403-HUB.china.huawei.com (unknown [172.30.72.55])
+ by Forcepoint Email with ESMTP id 832E5A78C32A090C756E;
+ Tue, 31 Mar 2020 17:26:45 +0800 (CST)
+Received: from DGGEMM525-MBS.china.huawei.com ([169.254.5.177]) by
+ DGGEMM403-HUB.china.huawei.com ([10.3.20.211]) with mapi id 14.03.0487.000;
+ Tue, 31 Mar 2020 17:26:39 +0800
+From: Jiangyifei <jiangyifei@huawei.com>
+To: Anup Patel <anup@brainfault.org>
+CC: QEMU Developers <qemu-devel@nongnu.org>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>, Anup Patel <anup.patel@wdc.com>, Zhanghailiang
+ <zhang.zhanghailiang@huawei.com>, Sagar Karandikar
+ <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, "Zhangxiaofeng (F)"
+ <victor.zhangxiaofeng@huawei.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, yinyipeng <yinyipeng1@huawei.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, "dengkai (A)" <dengkai1@huawei.com>
+Subject: RE: [PATCH RFC 8/9] target/riscv: Handler KVM_EXIT_RISCV_SBI exit
+Thread-Topic: [PATCH RFC 8/9] target/riscv: Handler KVM_EXIT_RISCV_SBI exit
+Thread-Index: AQHV+OqvoUZxcqUDbESQQ6g4WnAHaKhhvyIAgADJQ+A=
+Date: Tue, 31 Mar 2020 09:26:39 +0000
+Message-ID: <3915816D913D8241BB43E932213F57D4ADC75680@dggemm525-mbs.china.huawei.com>
 References: <20200313034949.3028-1-jiangyifei@huawei.com>
- <20200313034949.3028-3-jiangyifei@huawei.com>
-In-Reply-To: <20200313034949.3028-3-jiangyifei@huawei.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Tue, 31 Mar 2020 14:43:36 +0530
-Message-ID: <CAAhSdy3_BO7pRwvLiS9qd3NLXUCj_MnsxT8JtD0833AnY1DOZQ@mail.gmail.com>
-Subject: Re: [PATCH RFC 2/9] target/riscv: Add target/riscv/kvm.c to place the
- public kvm interface
-To: Yifei Jiang <jiangyifei@huawei.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Anup Patel <anup.patel@wdc.com>, zhang.zhanghailiang@huawei.com, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- victor.zhangxiaofeng@huawei.com, 
- Alistair Francis <Alistair.Francis@wdc.com>, yinyipeng1@huawei.com, 
- Palmer Dabbelt <palmer@dabbelt.com>, dengkai1@huawei.com
-Content-Type: text/plain; charset="UTF-8"
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::444
+ <20200313034949.3028-9-jiangyifei@huawei.com>
+ <CAAhSdy3EE+2V+e0po7kmdEau_88CEJ-D9yu7=PQ4ZJQ=zWr9YA@mail.gmail.com>
+In-Reply-To: <CAAhSdy3EE+2V+e0po7kmdEau_88CEJ-D9yu7=PQ4ZJQ=zWr9YA@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.133.201.158]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-CFilter-Loop: Reflected
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+ [fuzzy]
+X-Received-From: 45.249.212.187
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,191 +60,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2020 09:13:57 -0000
+X-List-Received-Date: Tue, 31 Mar 2020 09:27:05 -0000
 
-On Fri, Mar 13, 2020 at 9:23 AM Yifei Jiang <jiangyifei@huawei.com> wrote:
->
-> Add target/riscv/kvm.c to place kvm_arch_* function needed by kvm/kvm-all.c.
-> Meanwhile, add riscv64 kvm support to configure.
-
-This should be for both riscv64 and riscv32. The KVMTOOL compiles perfectly
-fine for riscv32 (although not tested much) so there is no harm is supporting
-both riscv64 and riscv32 from start itself.
-
-Regards,
-Anup
-
-
->
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-> Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
-> ---
->  configure                  |   1 +
->  target/riscv/Makefile.objs |   1 +
->  target/riscv/kvm.c         | 128 +++++++++++++++++++++++++++++++++++++
->  3 files changed, 130 insertions(+)
->  create mode 100644 target/riscv/kvm.c
->
-> diff --git a/configure b/configure
-> index 3c7470096f..30024a8aef 100755
-> --- a/configure
-> +++ b/configure
-> @@ -200,6 +200,7 @@ supported_kvm_target() {
->          x86_64:i386 | x86_64:x86_64 | x86_64:x32 | \
->          mips:mips | mipsel:mips | \
->          ppc:ppc | ppc64:ppc | ppc:ppc64 | ppc64:ppc64 | ppc64:ppc64le | \
-> +        riscv64:riscv64 | \
->          s390x:s390x)
->              return 0
->          ;;
-> diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-> index ff651f69f6..7ea8f4c3da 100644
-> --- a/target/riscv/Makefile.objs
-> +++ b/target/riscv/Makefile.objs
-> @@ -1,5 +1,6 @@
->  obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o
->  obj-$(CONFIG_SOFTMMU) += pmp.o
-> +obj-$(CONFIG_KVM) += kvm.o
->
->  ifeq ($(CONFIG_SOFTMMU),y)
->  obj-y += monitor.o
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> new file mode 100644
-> index 0000000000..8c386d9acf
-> --- /dev/null
-> +++ b/target/riscv/kvm.c
-> @@ -0,0 +1,128 @@
-> +/*
-> + * RISC-V implementation of KVM hooks
-> + *
-> + * Copyright (c) 2020 Huawei Technologies Co., Ltd
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include <sys/ioctl.h>
-> +
-> +#include <linux/kvm.h>
-> +
-> +#include "qemu-common.h"
-> +#include "qemu/timer.h"
-> +#include "qemu/error-report.h"
-> +#include "qemu/main-loop.h"
-> +#include "sysemu/sysemu.h"
-> +#include "sysemu/kvm.h"
-> +#include "sysemu/kvm_int.h"
-> +#include "cpu.h"
-> +#include "trace.h"
-> +#include "hw/pci/pci.h"
-> +#include "exec/memattrs.h"
-> +#include "exec/address-spaces.h"
-> +#include "hw/boards.h"
-> +#include "hw/irq.h"
-> +#include "qemu/log.h"
-> +#include "hw/loader.h"
-> +
-> +const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
-> +    KVM_CAP_LAST_INFO
-> +};
-> +
-> +int kvm_arch_get_registers(CPUState *cs)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_put_registers(CPUState *cs, int level)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_release_virq_post(int virq)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_fixup_msi_route(struct kvm_irq_routing_entry *route,
-> +                             uint64_t address, uint32_t data, PCIDevice *dev)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_destroy_vcpu(CPUState *cs)
-> +{
-> +    return 0;
-> +}
-> +
-> +unsigned long kvm_arch_vcpu_id(CPUState *cpu)
-> +{
-> +    return cpu->cpu_index;
-> +}
-> +
-> +void kvm_arch_init_irq_routing(KVMState *s)
-> +{
-> +}
-> +
-> +int kvm_arch_init_vcpu(CPUState *cs)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_msi_data_to_gsi(uint32_t data)
-> +{
-> +    abort();
-> +}
-> +
-> +int kvm_arch_add_msi_route_post(struct kvm_irq_routing_entry *route,
-> +                                int vector, PCIDevice *dev)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_init(MachineState *ms, KVMState *s)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_irqchip_create(KVMState *s)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_process_async_events(CPUState *cs)
-> +{
-> +    return 0;
-> +}
-> +
-> +void kvm_arch_pre_run(CPUState *cs, struct kvm_run *run)
-> +{
-> +}
-> +
-> +MemTxAttrs kvm_arch_post_run(CPUState *cs, struct kvm_run *run)
-> +{
-> +    return MEMTXATTRS_UNSPECIFIED;
-> +}
-> +
-> +bool kvm_arch_stop_on_emulation_error(CPUState *cs)
-> +{
-> +    return true;
-> +}
-> +
-> +int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
-> +{
-> +    return 0;
-> +}
-> --
-> 2.19.1
->
->
->
+DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEFudXAgUGF0ZWwgW21haWx0
+bzphbnVwQGJyYWluZmF1bHQub3JnXQ0KPiBTZW50OiBUdWVzZGF5LCBNYXJjaCAzMSwgMjAyMCAx
+OjE3IFBNDQo+IFRvOiBKaWFuZ3lpZmVpIDxqaWFuZ3lpZmVpQGh1YXdlaS5jb20+DQo+IENjOiBR
+RU1VIERldmVsb3BlcnMgPHFlbXUtZGV2ZWxAbm9uZ251Lm9yZz47IG9wZW4gbGlzdDpSSVNDLVYg
+PHFlbXUtDQo+IHJpc2N2QG5vbmdudS5vcmc+OyBBbnVwIFBhdGVsIDxhbnVwLnBhdGVsQHdkYy5j
+b20+OyBaaGFuZ2hhaWxpYW5nDQo+IDx6aGFuZy56aGFuZ2hhaWxpYW5nQGh1YXdlaS5jb20+OyBT
+YWdhciBLYXJhbmRpa2FyDQo+IDxzYWdhcmtAZWVjcy5iZXJrZWxleS5lZHU+OyBCYXN0aWFuIEtv
+cHBlbG1hbm4gPGtiYXN0aWFuQG1haWwudW5pLQ0KPiBwYWRlcmJvcm4uZGU+OyBaaGFuZ3hpYW9m
+ZW5nIChGKSA8dmljdG9yLnpoYW5neGlhb2ZlbmdAaHVhd2VpLmNvbT47DQo+IEFsaXN0YWlyIEZy
+YW5jaXMgPEFsaXN0YWlyLkZyYW5jaXNAd2RjLmNvbT47IHlpbnlpcGVuZw0KPiA8eWlueWlwZW5n
+MUBodWF3ZWkuY29tPjsgUGFsbWVyIERhYmJlbHQgPHBhbG1lckBkYWJiZWx0LmNvbT47DQo+IGRl
+bmdrYWkgKEEpIDxkZW5na2FpMUBodWF3ZWkuY29tPg0KPiBTdWJqZWN0OiBSZTogW1BBVENIIFJG
+QyA4LzldIHRhcmdldC9yaXNjdjogSGFuZGxlciBLVk1fRVhJVF9SSVNDVl9TQkkgZXhpdA0KPiAN
+Cj4gT24gRnJpLCBNYXIgMTMsIDIwMjAgYXQgOToyMyBBTSBZaWZlaSBKaWFuZyA8amlhbmd5aWZl
+aUBodWF3ZWkuY29tPiB3cm90ZToNCj4gPg0KPiA+IFVzZSBjaGFyLWZlIGhhbmRsZXIgY29uc29s
+ZSBzYmkgY2FsbCwgd2hpY2ggaW1wbGVtZW50IGVhcmx5IGNvbnNvbGUgaW8NCj4gPiB3aGlsZSBh
+cHBseSAnZWFybHljb249c2JpJyBpbnRvIGtlcm5lbCBwYXJhbWV0ZXJzLg0KPiA+DQo+ID4gU2ln
+bmVkLW9mZi1ieTogWWlmZWkgSmlhbmcgPGppYW5neWlmZWlAaHVhd2VpLmNvbT4NCj4gPiBTaWdu
+ZWQtb2ZmLWJ5OiBZaXBlbmcgWWluIDx5aW55aXBlbmcxQGh1YXdlaS5jb20+DQo+ID4gLS0tDQo+
+ID4gIHRhcmdldC9yaXNjdi9rdm0uYyB8IDU0DQo+ID4gKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrLQ0KPiA+ICAxIGZpbGUgY2hhbmdlZCwgNTMgaW5zZXJ0aW9u
+cygrKSwgMSBkZWxldGlvbigtKQ0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi9r
+dm0uYyBiL3RhcmdldC9yaXNjdi9rdm0uYyBpbmRleA0KPiA+IDBmNDI5ZmQ4MDIuLjFkZjcwZmJi
+MjkgMTAwNjQ0DQo+ID4gLS0tIGEvdGFyZ2V0L3Jpc2N2L2t2bS5jDQo+ID4gKysrIGIvdGFyZ2V0
+L3Jpc2N2L2t2bS5jDQo+ID4gQEAgLTM4LDYgKzM4LDcgQEANCj4gPiAgI2luY2x1ZGUgInFlbXUv
+bG9nLmgiDQo+ID4gICNpbmNsdWRlICJody9sb2FkZXIuaCINCj4gPiAgI2luY2x1ZGUgImt2bV9y
+aXNjdi5oIg0KPiA+ICsjaW5jbHVkZSAiY2hhcmRldi9jaGFyLWZlLmgiDQo+ID4NCj4gPiAgc3Rh
+dGljIF9fdTY0IGt2bV9yaXNjdl9yZWdfaWQoX191NjQgdHlwZSwgX191NjQgaWR4KSAgeyBAQCAt
+NjEsNg0KPiA+ICs2MiwxOSBAQCBzdGF0aWMgX191NjQga3ZtX3Jpc2N2X3JlZ19pZChfX3U2NCB0
+eXBlLCBfX3U2NCBpZHgpDQo+ID4NCj4gPiAgI2RlZmluZSBSSVNDVl9GUF9EX1JFRyhpZHgpICBr
+dm1fcmlzY3ZfcmVnX2lkKEtWTV9SRUdfUklTQ1ZfRlBfRCwNCj4gPiBpZHgpDQo+ID4NCj4gPiAr
+ZW51bSBzYmlfZXh0X2lkIHsNCj4gPiArICAgIFNCSV9FWFRfMF8xX1NFVF9USU1FUiA9IDB4MCwN
+Cj4gPiArICAgIFNCSV9FWFRfMF8xX0NPTlNPTEVfUFVUQ0hBUiA9IDB4MSwNCj4gPiArICAgIFNC
+SV9FWFRfMF8xX0NPTlNPTEVfR0VUQ0hBUiA9IDB4MiwNCj4gPiArICAgIFNCSV9FWFRfMF8xX0NM
+RUFSX0lQSSA9IDB4MywNCj4gPiArICAgIFNCSV9FWFRfMF8xX1NFTkRfSVBJID0gMHg0LA0KPiA+
+ICsgICAgU0JJX0VYVF8wXzFfUkVNT1RFX0ZFTkNFX0kgPSAweDUsDQo+ID4gKyAgICBTQklfRVhU
+XzBfMV9SRU1PVEVfU0ZFTkNFX1ZNQSA9IDB4NiwNCj4gPiArICAgIFNCSV9FWFRfMF8xX1JFTU9U
+RV9TRkVOQ0VfVk1BX0FTSUQgPSAweDcsDQo+ID4gKyAgICBTQklfRVhUXzBfMV9TSFVURE9XTiA9
+IDB4OCwNCj4gPiArICAgIFNCSV9FWFRfQkFTRSA9IDB4MTAsDQo+ID4gK307DQo+ID4gKw0KPiAN
+Cj4gUGxlYXNlIGFkZCBzZXBhcmF0ZSBTQkkgZWNhbGwgaW50ZXJmYWNlIGhlYWRlciAoc2ltaWxh
+ciB0byBPcGVuU0JJKS4NCj4gVGhpcyBoZWFkZXIgd2lsbCBvbmx5IGhhdmUgU0JJIHNwZWMgcmVs
+YXRlZCBkZWZpbmVzLg0KPiANCj4gUmVmZXIsDQo+IGh0dHBzOi8vZ2l0aHViLmNvbS9yaXNjdi9v
+cGVuc2JpL2Jsb2IvbWFzdGVyL2luY2x1ZGUvc2JpL3NiaV9lY2FsbF9pbnRlcmZhDQo+IGNlLmgN
+Cg0KWWVzLCB0aGFua3MgZm9yIHlvdXIgcmV2aWV3LiBJJ2xsIHVwZGF0ZSBpdCBhdCBuZXh0IHNl
+cmllcyBhZnRlciB5b3UgcmV2aWV3IHRoaXMgc2VyaWVzIGFsbC4NCg0KPiANCj4gPiAgc3RhdGlj
+IGludCBrdm1fcmlzY3ZfZ2V0X3JlZ3NfY29yZShDUFVTdGF0ZSAqY3MpICB7DQo+ID4gICAgICBp
+bnQgcmV0ID0gMDsNCj4gPiBAQCAtNDIzLDkgKzQzNyw0NyBAQCBib29sDQo+IGt2bV9hcmNoX3N0
+b3Bfb25fZW11bGF0aW9uX2Vycm9yKENQVVN0YXRlICpjcykNCj4gPiAgICAgIHJldHVybiB0cnVl
+Ow0KPiA+ICB9DQo+ID4NCj4gPiArc3RhdGljIGludCBrdm1fcmlzY3ZfaGFuZGxlX3NiaShzdHJ1
+Y3Qga3ZtX3J1biAqcnVuKSB7DQo+ID4gKyAgICBpbnQgcmV0ID0gMDsNCj4gPiArICAgIHVuc2ln
+bmVkIGNoYXIgY2g7DQo+ID4gKyAgICBzd2l0Y2ggKHJ1bi0+cmlzY3Zfc2JpLmV4dGVuc2lvbl9p
+ZCkgew0KPiA+ICsgICAgY2FzZSBTQklfRVhUXzBfMV9DT05TT0xFX1BVVENIQVI6DQo+ID4gKyAg
+ICAgICAgY2ggPSBydW4tPnJpc2N2X3NiaS5hcmdzWzBdOw0KPiA+ICsgICAgICAgIHFlbXVfY2hy
+X2ZlX3dyaXRlKHNlcmlhbF9oZCgwKS0+YmUsICZjaCwgc2l6ZW9mKGNoKSk7DQo+ID4gKyAgICAg
+ICAgYnJlYWs7DQo+ID4gKyAgICBjYXNlIFNCSV9FWFRfMF8xX0NPTlNPTEVfR0VUQ0hBUjoNCj4g
+PiArICAgICAgICByZXQgPSBxZW11X2Nocl9mZV9yZWFkX2FsbChzZXJpYWxfaGQoMCktPmJlLCAm
+Y2gsIHNpemVvZihjaCkpOw0KPiA+ICsgICAgICAgIGlmIChyZXQgPT0gc2l6ZW9mKGNoKSkgew0K
+PiA+ICsgICAgICAgICAgICBydW4tPnJpc2N2X3NiaS5hcmdzWzBdID0gY2g7DQo+ID4gKyAgICAg
+ICAgfSBlbHNlIHsNCj4gPiArICAgICAgICAgICAgcnVuLT5yaXNjdl9zYmkuYXJnc1swXSA9IC0x
+Ow0KPiA+ICsgICAgICAgIH0NCj4gPiArICAgICAgICBicmVhazsNCj4gDQo+IFBsZWFzZSBlbXVs
+YXRlIFNCSSB2MC4xIFNodXRkb3duIGNhbGwgYXMgd2VsbC4NCg0KSXQgc2VlbXMgdGhhdCB0aGVy
+ZSBpcyBubyBuZWVkIGZvciBlbXVsYXRpbmcgU0hVVERPV04gY2FsbCBhdCBRRU1VLg0KU0JJX0VY
+VF8wXzFfU0hVVERPV04gaXMgcmVkaXJlY3QgdG8gS1ZNX1NZU1RFTV9FVkVOVF9TSFVURE9XTiBp
+biBLVk0sDQp3aGljaCBpcyBoYW5kbGVkIGJ5IGNvbW1vbiBrdm0tZXhpdCBoYW5kbGVyIGluIFFF
+TVUuDQpBbmQsIEl0IGlzIG5vcm1hbCB0byBwZXJmb3JtIGBwb3dlcm9mZmAgaW4gdGhlIHZpcnR1
+YWwgbWFjaGluZS4NCg0KPiANCj4gPiArICAgIGRlZmF1bHQ6DQo+ID4gKyAgICAgICAgcWVtdV9s
+b2dfbWFzayhMT0dfVU5JTVAsDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAiJXM6IHVuLWhh
+bmRsZWQgU0JJIEVYSVQsIHNwZWNpZmljIHJlYXNvbnMgaXMgJWx1XG4iLA0KPiA+ICsgICAgICAg
+ICAgICAgICAgICAgICAgX19mdW5jX18sIHJ1bi0+cmlzY3Zfc2JpLmV4dGVuc2lvbl9pZCk7DQo+
+ID4gKyAgICAgICAgcmV0ID0gLTE7DQo+ID4gKyAgICAgICAgYnJlYWs7DQo+ID4gKyAgICB9DQo+
+ID4gKyAgICByZXR1cm4gcmV0Ow0KPiA+ICt9DQo+ID4gKw0KPiA+ICBpbnQga3ZtX2FyY2hfaGFu
+ZGxlX2V4aXQoQ1BVU3RhdGUgKmNzLCBzdHJ1Y3Qga3ZtX3J1biAqcnVuKSAgew0KPiA+IC0gICAg
+cmV0dXJuIDA7DQo+ID4gKyAgICBpbnQgcmV0ID0gMDsNCj4gPiArICAgIHN3aXRjaCAocnVuLT5l
+eGl0X3JlYXNvbikgew0KPiA+ICsgICAgY2FzZSBLVk1fRVhJVF9SSVNDVl9TQkk6DQo+ID4gKyAg
+ICAgICAgcmV0ID0ga3ZtX3Jpc2N2X2hhbmRsZV9zYmkocnVuKTsNCj4gPiArICAgICAgICBicmVh
+azsNCj4gPiArICAgIGRlZmF1bHQ6DQo+ID4gKyAgICAgICAgcWVtdV9sb2dfbWFzayhMT0dfVU5J
+TVAsICIlczogdW4taGFuZGxlZCBleGl0IHJlYXNvbiAlZFxuIiwNCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgIF9fZnVuY19fLCBydW4tPmV4aXRfcmVhc29uKTsNCj4gPiArICAgICAgICByZXQg
+PSAtMTsNCj4gPiArICAgICAgICBicmVhazsNCj4gPiArICAgIH0NCj4gPiArICAgIHJldHVybiBy
+ZXQ7DQo+ID4gIH0NCj4gPg0KPiA+ICB2b2lkIGt2bV9yaXNjdl9yZXNldF92Y3B1KFJJU0NWQ1BV
+ICpjcHUpDQo+ID4gLS0NCj4gPiAyLjE5LjENCj4gPg0KPiA+DQo+ID4NCj4gDQo+IFJlZ2FyZHMs
+DQo+IEFudXANCg0KQmVzdCByZWdhcmRzLA0KWWlmZWkgSmlhbmcNCg==
 
