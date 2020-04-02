@@ -1,85 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jJKIo-0002SJ-Ug
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Mar 2020 13:03:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47017)
+	id 1jJsZU-0005Wy-9Z
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Apr 2020 01:39:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39895)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <peter.maydell@linaro.org>) id 1jJKIl-0002Nc-UG
- for qemu-riscv@nongnu.org; Tue, 31 Mar 2020 13:03:49 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1jJsZP-0005Tw-Ln
+ for qemu-riscv@nongnu.org; Thu, 02 Apr 2020 01:39:18 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <peter.maydell@linaro.org>) id 1jJKIk-00004v-Eq
- for qemu-riscv@nongnu.org; Tue, 31 Mar 2020 13:03:47 -0400
-Received: from mail-oi1-x22b.google.com ([2607:f8b0:4864:20::22b]:39014)
+ (envelope-from <bmeng.cn@gmail.com>) id 1jJsZO-0000c6-On
+ for qemu-riscv@nongnu.org; Thu, 02 Apr 2020 01:39:15 -0400
+Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:38477)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <peter.maydell@linaro.org>)
- id 1jJKIj-0008VK-DL
- for qemu-riscv@nongnu.org; Tue, 31 Mar 2020 13:03:45 -0400
-Received: by mail-oi1-x22b.google.com with SMTP id d63so19543170oig.6
- for <qemu-riscv@nongnu.org>; Tue, 31 Mar 2020 10:03:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jJsZM-0000Y9-MS; Thu, 02 Apr 2020 01:39:12 -0400
+Received: by mail-yb1-xb41.google.com with SMTP id 204so1449634ybw.5;
+ Wed, 01 Apr 2020 22:39:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=9blV1H9Js4on1Ru4pm7hErJIva7kNEymOz2IOkz5vus=;
- b=SLv0dQ7u1fEVRXqkzrOdwk8U3oIebC2JYOFyn5H3Ap9UMGXug+Ki2LmB7tMf5dalMM
- ZVCDWaE8AMUENE4AAGM9ra/L6etUNOIO0ErUUIZBw2fED6xgcVUj4n0J8njSKMLiHhDq
- 3RSDUZLhG7dELbTj5yEBthasUqochW4FQpYHaE7A4DDZISu4NzoO7YCDvjyVHh/+0kez
- Q/9AxIKsRcAG6T9teNyd22CpINizKC3dGf0SNqEE+HV2c5jGdtnYolw6HhbMAQXhnNos
- dhUmpaWaiEkUvMXdA6UTMErbxRxVVW94eEBCxXzuU2panAyvzOg+/s0oQLr4YBUmYge/
- OXLw==
+ :cc; bh=t2EG+cIlPj5vy+M3PVYxO9zR6V+LgfrjP4Y2mgyuC2U=;
+ b=oti2Drf4BvXVIrw4rFu52E5GNQT4/KXS1loSUroQ7Qg5olnS0sQB64MTqYzEJe5JtY
+ eYxfE+ZDq4yXvmSpOZTiW6KhBn75I9uFzIGarzuwbYig5jQRreXaI6bjUTEl8C4DU7F5
+ Tg4be6nxh4p+Bu6G1S6BK2QdsDzec2pPWH99j4WDKe5JymjxYtR8az5OlfzmsgiZOlmb
+ T08rPgGUGoJHlqYG0cPO7UOPGzXL/UqSbYp5GcUDYZJ4BlAe+cyNUsJQZQszwhInHenq
+ 6VLlBT6PhMrNSnpyTVl1g6wWvPAmpbkPRv5mAAVUP8puFIDeCa/G7W4s7MnHNcCb35Wo
+ 7uhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=9blV1H9Js4on1Ru4pm7hErJIva7kNEymOz2IOkz5vus=;
- b=TZAV6nTznqVE0I8r9V03nc1RA62B11YpH5bxMyTDpZXsun0unIByC+uvNRvfqmrn1r
- KpbxX7J7fSfqFUI4iI3UV0PgCETEZJfYXjLjcSumC8H4JTqkC5RDagmRPhJM8lMjHCoL
- HZ6RaojtMXHVA7OHaCB4UUlDMe8T9baL4RCZNEQz1TSLMuhiKDbHPvFzVZWKwuYmHIcW
- cWGuMTWAVypLv/FJFujqppzQ+0UpgdAB7GEkoQ76RYoRGPhe8zvqWBPOQfpjdcDvN4gJ
- mAYJRSSrs9f2fyy0nYhkf+enSK72AQudPXcJYVUkx1cL593rXHBBDTbJtMVHUY0x2x8P
- uUBg==
-X-Gm-Message-State: ANhLgQ3/riJmLFg3qD4eIkunLbK3Oc1jqgrW6JLue7qEtl6D772jjeEO
- hSrYpqGvmacSJxqsLkOOMvojVfarRPSnah25JLW3Aw==
-X-Google-Smtp-Source: ADFU+vukaA/yWKn49R6q5KefPeW7YOl72sG3FHyafQT6fGH4fTrRy/6qZjVmQqrm5Iuva8UOjqwXVAuPJ2XknyT1hPQ=
-X-Received: by 2002:a05:6808:8cb:: with SMTP id
- k11mr2652699oij.48.1585674223782; 
- Tue, 31 Mar 2020 10:03:43 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=t2EG+cIlPj5vy+M3PVYxO9zR6V+LgfrjP4Y2mgyuC2U=;
+ b=R/xangcacdH4UBRi7hLSdZd8SrToEe5uwQW+a7LkvpSKYZfohcgJ5mM/AHkYDR8g7X
+ +4OulYM2YwFgL2lKPDEgdX/fCQPuvdmrEynXzAIxZO91FQRUZwqvqDKJw13PbEpga6DW
+ b4gJ+1t4LhSknMrVUeb4iUjMwX4AoMnXj1rTdgJDqPiK1wlnwzUYn11b3b8a9VbYCYq8
+ 1cfZ+YuYGtCEfq45/Cpd5INq0G9ntKEM7c8S3pdjRcdv9f0V6P0QoNffeGUAAJIkPXpL
+ vihm60ukQKmTCgmP96MuBSlSIOhyQhxH2lI5jkhyWp7qVaTNZw0oMTp8d8Qrlqr/T6i6
+ tNhQ==
+X-Gm-Message-State: AGi0PuZxpBqOruW7WmBPJ2Dodp3PVIKlrNWOnWNSAHQ/olo0MQUcdzp9
+ 5KPCtSkMOuoL48nc3L4J8/dTb56C1slNzUVeX+I=
+X-Google-Smtp-Source: APiQypL6NRVjBDXPh8bQ/FWSlgjNoc9fkrA2/njOryJYnewMrKkINsj6/HvKF1a/Pp8Dyl86shzsDTbmxp7hGFHJf1k=
+X-Received: by 2002:a25:ae8c:: with SMTP id b12mr2620036ybj.392.1585805951703; 
+ Wed, 01 Apr 2020 22:39:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200325191830.16553-1-f4bug@amsat.org>
- <20200325191830.16553-13-f4bug@amsat.org>
- <CAFEAcA-26fHbOp5saM+XBCz72fzfz+=+xtiXGRtWnc6CMoiakA@mail.gmail.com>
- <e293f19c-7005-16f0-57df-55ce953fe0a4@redhat.com>
-In-Reply-To: <e293f19c-7005-16f0-57df-55ce953fe0a4@redhat.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 31 Mar 2020 18:03:32 +0100
-Message-ID: <CAFEAcA-W9V_GvA0yKXY+tsZNSe_DnSbYsd33wNnAP4WWivi-og@mail.gmail.com>
-Subject: Re: [PATCH-for-5.0 12/12] hw/riscv/sifive_u: Add missing
- error-propagation code
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- QEMU Developers <qemu-devel@nongnu.org>,
- Alistair Francis <alistair@alistair23.me>, 
- Paul Burton <pburton@wavecomp.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, qemu-ppc <qemu-ppc@nongnu.org>,
- Jason Wang <jasowang@redhat.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Richard Henderson <rth@twiddle.net>, Eduardo Habkost <ehabkost@redhat.com>, 
- David Gibson <david@gibson.dropbear.id.au>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-arm <qemu-arm@nongnu.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Andrew Baumann <Andrew.Baumann@microsoft.com>, 
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>, 
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- "Michael S. Tsirkin" <mst@redhat.com>, 
- Markus Armbruster <armbru@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+References: <cover.1583530528.git.alistair.francis@wdc.com>
+ <CAEUhbmUHNLYoJutr3dg0hpEPehuzRD4r6eux1EStZxCknMst0w@mail.gmail.com>
+In-Reply-To: <CAEUhbmUHNLYoJutr3dg0hpEPehuzRD4r6eux1EStZxCknMst0w@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 2 Apr 2020 13:39:00 +0800
+Message-ID: <CAEUhbmWEEBJ67R=kktq=93a2h_ROA0C45Baj+Za73jg251W=WQ@mail.gmail.com>
+Subject: Re: [PATCH v3 0/3] hw/riscv: Add a serial property to sifive_u
+To: Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::22b
+X-Received-From: 2607:f8b0:4864:20::b41
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -91,14 +67,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2020 17:03:50 -0000
+X-List-Received-Date: Thu, 02 Apr 2020 05:39:18 -0000
 
-On Tue, 31 Mar 2020 at 18:02, Philippe Mathieu-Daud=C3=A9 <philmd@redhat.co=
-m> wrote
-> What about this memory_region_init_rom() call (and later
-> memory_region_init_ram) using error_fatal, same reasoning right?
+On Tue, Mar 24, 2020 at 10:08 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> Hi Palmer,
+>
+> On Sat, Mar 7, 2020 at 5:45 AM Alistair Francis
+> <alistair.francis@wdc.com> wrote:
+> >
+> > At present the board serial number is hard-coded to 1, and passed
+> > to OTP model during initialization. Firmware (FSBL, U-Boot) uses
+> > the serial number to generate a unique MAC address for the on-chip
+> > ethernet controller. When multiple QEMU 'sifive_u' instances are
+> > created and connected to the same subnet, they all have the same
+> > MAC address hence it creates a unusable network.
+> >
+> > A new "serial" property is introduced to specify the board serial
+> > number. When not given, the default serial number 1 is used.
+> >
+>
+> Could you please take this for v5.0.0?
 
-Yes.
-
--- PMM
+Ping?
 
