@@ -1,61 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jJsZU-0005Wy-9Z
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Apr 2020 01:39:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39895)
+	id 1jK3gh-0003GP-JR
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Apr 2020 13:31:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47622)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <bmeng.cn@gmail.com>) id 1jJsZP-0005Tw-Ln
- for qemu-riscv@nongnu.org; Thu, 02 Apr 2020 01:39:18 -0400
+ (envelope-from <alistair23@gmail.com>) id 1jK3ge-0003Ac-JT
+ for qemu-riscv@nongnu.org; Thu, 02 Apr 2020 13:31:30 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <bmeng.cn@gmail.com>) id 1jJsZO-0000c6-On
- for qemu-riscv@nongnu.org; Thu, 02 Apr 2020 01:39:15 -0400
-Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:38477)
+ (envelope-from <alistair23@gmail.com>) id 1jK3gc-00076u-Vx
+ for qemu-riscv@nongnu.org; Thu, 02 Apr 2020 13:31:28 -0400
+Received: from mail-ua1-x943.google.com ([2607:f8b0:4864:20::943]:43822)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <bmeng.cn@gmail.com>)
- id 1jJsZM-0000Y9-MS; Thu, 02 Apr 2020 01:39:12 -0400
-Received: by mail-yb1-xb41.google.com with SMTP id 204so1449634ybw.5;
- Wed, 01 Apr 2020 22:39:12 -0700 (PDT)
+ (Exim 4.71) (envelope-from <alistair23@gmail.com>)
+ id 1jK3gZ-00073q-Hr; Thu, 02 Apr 2020 13:31:23 -0400
+Received: by mail-ua1-x943.google.com with SMTP id g24so1540827uan.10;
+ Thu, 02 Apr 2020 10:31:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=t2EG+cIlPj5vy+M3PVYxO9zR6V+LgfrjP4Y2mgyuC2U=;
- b=oti2Drf4BvXVIrw4rFu52E5GNQT4/KXS1loSUroQ7Qg5olnS0sQB64MTqYzEJe5JtY
- eYxfE+ZDq4yXvmSpOZTiW6KhBn75I9uFzIGarzuwbYig5jQRreXaI6bjUTEl8C4DU7F5
- Tg4be6nxh4p+Bu6G1S6BK2QdsDzec2pPWH99j4WDKe5JymjxYtR8az5OlfzmsgiZOlmb
- T08rPgGUGoJHlqYG0cPO7UOPGzXL/UqSbYp5GcUDYZJ4BlAe+cyNUsJQZQszwhInHenq
- 6VLlBT6PhMrNSnpyTVl1g6wWvPAmpbkPRv5mAAVUP8puFIDeCa/G7W4s7MnHNcCb35Wo
- 7uhw==
+ :cc; bh=d6sNGOf7zhVwXJm9O9+zOAPhluGA9ST7ObWtc87JvDY=;
+ b=HoGgElfk9GxKehfs8tpVwXHgFcT3lbRz4h38BxOT58q6FK05hbyQXyKaH7vqn4tvvQ
+ TkYhuMf/utJUWyIyrlR1QK6QDPwa5zZprzpkL7Y92rhSiuQPx+aLG+7q2OHv/o1rtSLL
+ 3b4F/E4nozTZ/jujwlqX0ViPWxT/9H/iuw3XtMSgxQ0kfvJRYpABQwlABzZmu+5txjOV
+ flr3lFJbHybEVS3dCJrXCRAKviogp7wU0ernVLWJj7m594kFTuLq5AU9jqUVAT2pbuLA
+ sH26B+H8Ffs4+1z/Z4qKZL3WYgpoaho7cBVUwXN6LRDus+NB7kG1tE2sqGiGAIWL+sWb
+ XCMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=t2EG+cIlPj5vy+M3PVYxO9zR6V+LgfrjP4Y2mgyuC2U=;
- b=R/xangcacdH4UBRi7hLSdZd8SrToEe5uwQW+a7LkvpSKYZfohcgJ5mM/AHkYDR8g7X
- +4OulYM2YwFgL2lKPDEgdX/fCQPuvdmrEynXzAIxZO91FQRUZwqvqDKJw13PbEpga6DW
- b4gJ+1t4LhSknMrVUeb4iUjMwX4AoMnXj1rTdgJDqPiK1wlnwzUYn11b3b8a9VbYCYq8
- 1cfZ+YuYGtCEfq45/Cpd5INq0G9ntKEM7c8S3pdjRcdv9f0V6P0QoNffeGUAAJIkPXpL
- vihm60ukQKmTCgmP96MuBSlSIOhyQhxH2lI5jkhyWp7qVaTNZw0oMTp8d8Qrlqr/T6i6
- tNhQ==
-X-Gm-Message-State: AGi0PuZxpBqOruW7WmBPJ2Dodp3PVIKlrNWOnWNSAHQ/olo0MQUcdzp9
- 5KPCtSkMOuoL48nc3L4J8/dTb56C1slNzUVeX+I=
-X-Google-Smtp-Source: APiQypL6NRVjBDXPh8bQ/FWSlgjNoc9fkrA2/njOryJYnewMrKkINsj6/HvKF1a/Pp8Dyl86shzsDTbmxp7hGFHJf1k=
-X-Received: by 2002:a25:ae8c:: with SMTP id b12mr2620036ybj.392.1585805951703; 
- Wed, 01 Apr 2020 22:39:11 -0700 (PDT)
+ bh=d6sNGOf7zhVwXJm9O9+zOAPhluGA9ST7ObWtc87JvDY=;
+ b=LujRC4Tc8BYuPNzINS+cnA5/MQAxlqFRxtqTvsEKEoodkcTj8f8leusKq0g9a3Y5ud
+ wSgDFQtPckmCQraIPQAOa/x02PqdBRdiJCh+eLCPbLWqWBoxQKI+9B8+8cD8JKvjUGAz
+ 8TTiHaOWCoG1uebAlVFG6bS8jUF9XRn5/5CBs/0iTjgktNxSeADMeZpgF3/D3O99wyWo
+ G4L7jeRoULuH3Uf2Wz0Cs9Ket4KTpXth+Wg6g3VD++xBhUDL3jW0gdq8PKLrGFMgBko1
+ ks/bbetY+n1uKRfb44Vsd4NEm850CGWq3+n/VlSW7kbrCyzpRS1UAV87wJ013xQVr4eV
+ N+1A==
+X-Gm-Message-State: AGi0PuZRq14Qqxvspontr1GK++fjgwxTKdbESfy0wLLOmH33/lcT7EZA
+ Zs186PtPVO430c8OXoNInX2D1Psvi8AM4Duucyo=
+X-Google-Smtp-Source: APiQypJLPkJ2xcVo7EqSeDWGuW2jc8UVg9zEa4RjkpZnmVcIow3uGxNi8ZEuj1m4uU6ymeGChfb7sKT6xL5drcFSWFE=
+X-Received: by 2002:a9f:21b8:: with SMTP id 53mr3648552uac.8.1585848681871;
+ Thu, 02 Apr 2020 10:31:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1583530528.git.alistair.francis@wdc.com>
- <CAEUhbmUHNLYoJutr3dg0hpEPehuzRD4r6eux1EStZxCknMst0w@mail.gmail.com>
-In-Reply-To: <CAEUhbmUHNLYoJutr3dg0hpEPehuzRD4r6eux1EStZxCknMst0w@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 2 Apr 2020 13:39:00 +0800
-Message-ID: <CAEUhbmWEEBJ67R=kktq=93a2h_ROA0C45Baj+Za73jg251W=WQ@mail.gmail.com>
-Subject: Re: [PATCH v3 0/3] hw/riscv: Add a serial property to sifive_u
-To: Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair23@gmail.com>
+References: <20200330153633.15298-1-zhiwei_liu@c-sky.com>
+ <20200330153633.15298-26-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200330153633.15298-26-zhiwei_liu@c-sky.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 2 Apr 2020 10:23:09 -0700
+Message-ID: <CAKmqyKNdjP1wFgTtskjdzkjBOyZNw4MwQwahuy4E5c87P21eBw@mail.gmail.com>
+Subject: Re: [PATCH v7 25/61] target/riscv: vector single-width averaging add
+ and subtract
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Chih-Min Chao <chihmin.chao@sifive.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, wenmeng_zhang@c-sky.com,
+ wxy194768@alibaba-inc.com, guoren@linux.alibaba.com, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::b41
+X-Received-From: 2607:f8b0:4864:20::943
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,27 +70,188 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2020 05:39:18 -0000
+X-List-Received-Date: Thu, 02 Apr 2020 17:31:30 -0000
 
-On Tue, Mar 24, 2020 at 10:08 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Mar 30, 2020 at 9:27 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> Hi Palmer,
->
-> On Sat, Mar 7, 2020 at 5:45 AM Alistair Francis
-> <alistair.francis@wdc.com> wrote:
-> >
-> > At present the board serial number is hard-coded to 1, and passed
-> > to OTP model during initialization. Firmware (FSBL, U-Boot) uses
-> > the serial number to generate a unique MAC address for the on-chip
-> > ethernet controller. When multiple QEMU 'sifive_u' instances are
-> > created and connected to the same subnet, they all have the same
-> > MAC address hence it creates a unusable network.
-> >
-> > A new "serial" property is introduced to specify the board serial
-> > number. When not given, the default serial number 1 is used.
-> >
->
-> Could you please take this for v5.0.0?
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 
-Ping?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+>  target/riscv/helper.h                   |  17 ++++
+>  target/riscv/insn32.decode              |   5 ++
+>  target/riscv/insn_trans/trans_rvv.inc.c |   7 ++
+>  target/riscv/vector_helper.c            | 100 ++++++++++++++++++++++++
+>  4 files changed, 129 insertions(+)
+>
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 9416ebb090..32d549ce36 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -719,3 +719,20 @@ DEF_HELPER_6(vssub_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vssub_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vssub_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vssub_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+> +
+> +DEF_HELPER_6(vaadd_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vaadd_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vaadd_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vaadd_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vasub_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vasub_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vasub_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vasub_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_6(vaadd_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vaadd_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vaadd_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vaadd_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vasub_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vasub_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vasub_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+> +DEF_HELPER_6(vasub_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index c9a4050adc..e617d7bd60 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -417,6 +417,11 @@ vssubu_vv       100010 . ..... ..... 000 ..... 1010111 @r_vm
+>  vssubu_vx       100010 . ..... ..... 100 ..... 1010111 @r_vm
+>  vssub_vv        100011 . ..... ..... 000 ..... 1010111 @r_vm
+>  vssub_vx        100011 . ..... ..... 100 ..... 1010111 @r_vm
+> +vaadd_vv        100100 . ..... ..... 000 ..... 1010111 @r_vm
+> +vaadd_vx        100100 . ..... ..... 100 ..... 1010111 @r_vm
+> +vaadd_vi        100100 . ..... ..... 011 ..... 1010111 @r_vm
+> +vasub_vv        100110 . ..... ..... 000 ..... 1010111 @r_vm
+> +vasub_vx        100110 . ..... ..... 100 ..... 1010111 @r_vm
+>
+>  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+>  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+> diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+> index 7f9ab4b8b7..a7cf4f4614 100644
+> --- a/target/riscv/insn_trans/trans_rvv.inc.c
+> +++ b/target/riscv/insn_trans/trans_rvv.inc.c
+> @@ -1771,3 +1771,10 @@ GEN_OPIVX_TRANS(vssubu_vx,  opivx_check)
+>  GEN_OPIVX_TRANS(vssub_vx,  opivx_check)
+>  GEN_OPIVI_TRANS(vsaddu_vi, 1, vsaddu_vx, opivx_check)
+>  GEN_OPIVI_TRANS(vsadd_vi, 0, vsadd_vx, opivx_check)
+> +
+> +/* Vector Single-Width Averaging Add and Subtract */
+> +GEN_OPIVV_TRANS(vaadd_vv, opivv_check)
+> +GEN_OPIVV_TRANS(vasub_vv, opivv_check)
+> +GEN_OPIVX_TRANS(vaadd_vx,  opivx_check)
+> +GEN_OPIVX_TRANS(vasub_vx,  opivx_check)
+> +GEN_OPIVI_TRANS(vaadd_vi, 0, vaadd_vx, opivx_check)
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 7f34fcccce..784993b5f6 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -2496,3 +2496,103 @@ GEN_VEXT_VX_RM(vssub_vx_b, 1, 1, clearb)
+>  GEN_VEXT_VX_RM(vssub_vx_h, 2, 2, clearh)
+>  GEN_VEXT_VX_RM(vssub_vx_w, 4, 4, clearl)
+>  GEN_VEXT_VX_RM(vssub_vx_d, 8, 8, clearq)
+> +
+> +/* Vector Single-Width Averaging Add and Subtract */
+> +static inline uint8_t get_round(int vxrm, uint64_t v, uint8_t shift)
+> +{
+> +    uint8_t d = extract64(v, shift, 1);
+> +    uint8_t d1;
+> +    uint64_t D1, D2;
+> +
+> +    if (shift == 0 || shift > 64) {
+> +        return 0;
+> +    }
+> +
+> +    d1 = extract64(v, shift - 1, 1);
+> +    D1 = extract64(v, 0, shift);
+> +    if (vxrm == 0) { /* round-to-nearest-up (add +0.5 LSB) */
+> +        return d1;
+> +    } else if (vxrm == 1) { /* round-to-nearest-even */
+> +        if (shift > 1) {
+> +            D2 = extract64(v, 0, shift - 1);
+> +            return d1 & ((D2 != 0) | d);
+> +        } else {
+> +            return d1 & d;
+> +        }
+> +    } else if (vxrm == 3) { /* round-to-odd (OR bits into LSB, aka "jam") */
+> +        return !d & (D1 != 0);
+> +    }
+> +    return 0; /* round-down (truncate) */
+> +}
+> +
+> +static inline int32_t aadd32(CPURISCVState *env, int vxrm, int32_t a, int32_t b)
+> +{
+> +    int64_t res = (int64_t)a + b;
+> +    uint8_t round = get_round(vxrm, res, 1);
+> +
+> +    return (res >> 1) + round;
+> +}
+> +
+> +static inline int64_t aadd64(CPURISCVState *env, int vxrm, int64_t a, int64_t b)
+> +{
+> +    int64_t res = a + b;
+> +    uint8_t round = get_round(vxrm, res, 1);
+> +    int64_t over = (res ^ a) & (res ^ b) & INT64_MIN;
+> +
+> +    /* With signed overflow, bit 64 is inverse of bit 63. */
+> +    return ((res >> 1) ^ over) + round;
+> +}
+> +
+> +RVVCALL(OPIVV2_RM, vaadd_vv_b, OP_SSS_B, H1, H1, H1, aadd32)
+> +RVVCALL(OPIVV2_RM, vaadd_vv_h, OP_SSS_H, H2, H2, H2, aadd32)
+> +RVVCALL(OPIVV2_RM, vaadd_vv_w, OP_SSS_W, H4, H4, H4, aadd32)
+> +RVVCALL(OPIVV2_RM, vaadd_vv_d, OP_SSS_D, H8, H8, H8, aadd64)
+> +GEN_VEXT_VV_RM(vaadd_vv_b, 1, 1, clearb)
+> +GEN_VEXT_VV_RM(vaadd_vv_h, 2, 2, clearh)
+> +GEN_VEXT_VV_RM(vaadd_vv_w, 4, 4, clearl)
+> +GEN_VEXT_VV_RM(vaadd_vv_d, 8, 8, clearq)
+> +
+> +RVVCALL(OPIVX2_RM, vaadd_vx_b, OP_SSS_B, H1, H1, aadd32)
+> +RVVCALL(OPIVX2_RM, vaadd_vx_h, OP_SSS_H, H2, H2, aadd32)
+> +RVVCALL(OPIVX2_RM, vaadd_vx_w, OP_SSS_W, H4, H4, aadd32)
+> +RVVCALL(OPIVX2_RM, vaadd_vx_d, OP_SSS_D, H8, H8, aadd64)
+> +GEN_VEXT_VX_RM(vaadd_vx_b, 1, 1, clearb)
+> +GEN_VEXT_VX_RM(vaadd_vx_h, 2, 2, clearh)
+> +GEN_VEXT_VX_RM(vaadd_vx_w, 4, 4, clearl)
+> +GEN_VEXT_VX_RM(vaadd_vx_d, 8, 8, clearq)
+> +
+> +static inline int32_t asub32(CPURISCVState *env, int vxrm, int32_t a, int32_t b)
+> +{
+> +    int64_t res = (int64_t)a - b;
+> +    uint8_t round = get_round(vxrm, res, 1);
+> +
+> +    return (res >> 1) + round;
+> +}
+> +
+> +static inline int64_t asub64(CPURISCVState *env, int vxrm, int64_t a, int64_t b)
+> +{
+> +    int64_t res = (int64_t)a - b;
+> +    uint8_t round = get_round(vxrm, res, 1);
+> +    int64_t over = (res ^ a) & (a ^ b) & INT64_MIN;
+> +
+> +    /* With signed overflow, bit 64 is inverse of bit 63. */
+> +    return ((res >> 1) ^ over) + round;
+> +}
+> +
+> +RVVCALL(OPIVV2_RM, vasub_vv_b, OP_SSS_B, H1, H1, H1, asub32)
+> +RVVCALL(OPIVV2_RM, vasub_vv_h, OP_SSS_H, H2, H2, H2, asub32)
+> +RVVCALL(OPIVV2_RM, vasub_vv_w, OP_SSS_W, H4, H4, H4, asub32)
+> +RVVCALL(OPIVV2_RM, vasub_vv_d, OP_SSS_D, H8, H8, H8, asub64)
+> +GEN_VEXT_VV_RM(vasub_vv_b, 1, 1, clearb)
+> +GEN_VEXT_VV_RM(vasub_vv_h, 2, 2, clearh)
+> +GEN_VEXT_VV_RM(vasub_vv_w, 4, 4, clearl)
+> +GEN_VEXT_VV_RM(vasub_vv_d, 8, 8, clearq)
+> +
+> +RVVCALL(OPIVX2_RM, vasub_vx_b, OP_SSS_B, H1, H1, asub32)
+> +RVVCALL(OPIVX2_RM, vasub_vx_h, OP_SSS_H, H2, H2, asub32)
+> +RVVCALL(OPIVX2_RM, vasub_vx_w, OP_SSS_W, H4, H4, asub32)
+> +RVVCALL(OPIVX2_RM, vasub_vx_d, OP_SSS_D, H8, H8, asub64)
+> +GEN_VEXT_VX_RM(vasub_vx_b, 1, 1, clearb)
+> +GEN_VEXT_VX_RM(vasub_vx_h, 2, 2, clearh)
+> +GEN_VEXT_VX_RM(vasub_vx_w, 4, 4, clearl)
+> +GEN_VEXT_VX_RM(vasub_vx_d, 8, 8, clearq)
+> --
+> 2.23.0
+>
 
