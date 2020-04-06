@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jLVrC-0002EJ-DU
+	id 1jLVrD-0002Em-PE
 	for mharc-qemu-riscv@gnu.org; Mon, 06 Apr 2020 13:48:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36302)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36298)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jLVr9-00029M-DA
+ id 1jLVr9-00029D-AL
  for qemu-riscv@nongnu.org; Mon, 06 Apr 2020 13:48:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jLVr8-00030b-A5
+ id 1jLVr7-0002ws-1Q
  for qemu-riscv@nongnu.org; Mon, 06 Apr 2020 13:48:19 -0400
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:39147)
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:37329)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jLVr5-0002re-TB; Mon, 06 Apr 2020 13:48:16 -0400
-Received: by mail-wr1-x441.google.com with SMTP id p10so494113wrt.6;
- Mon, 06 Apr 2020 10:48:15 -0700 (PDT)
+ id 1jLVr3-0002mY-45; Mon, 06 Apr 2020 13:48:14 -0400
+Received: by mail-wr1-x444.google.com with SMTP id w10so514751wrm.4;
+ Mon, 06 Apr 2020 10:48:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=/+xpnZXxL3cFhRkJssEMl59sGjVJ9aCTEzd20s6bUS4=;
- b=eaq++UwGu8KUgl3mySdioEdAD0mg2PTD9IARIan+xzjwoJRkYjfin6NhIH/9wyXsMc
- Re9o2e437QZftUY+ur5i683wW6Hv34giVjvjpOgejbPMVX9G2rvTDTWAMAG69y2OTJfx
- LGnu66vWsWXzpoZ3YVqH8U4xHt2znQxCs2XChWLpf1uZNEBcZ9xEUNzOo+g2PnPXsy6K
- SMcxJGLScTW/jQTYe9jQE21to0ZrIh10QgCkNS6BwLEQyn+BR0MORufceAnWFuqcxYsJ
- QGyveLzdl8UtEN5lXzzYbvdIgM/Wg+O0V0oMjsntpxIpv1lI1OfDqYh1tmNDzwpwWEQ0
- ugmA==
+ bh=anzYFovrf/fQYvmPVuqZgz1Z6ltPtlVuwPCGWfaH9jY=;
+ b=mAFhqfNNg59X7mdoE03bX7DAKyePJqDA0krRHJG80hkUw/stGjMxe3Dy202es0RyMh
+ uzazu14ygaIPIAJi9Z13WQ39AN/4IgdONGpIaS1kLFMyyhVkAs80M66DB+VWi+eFoFMh
+ 879PFXH/cqPkOqEV2q47EpTcVfSOItFOtRO/71tcxEVetAXCz+klIeqi9lCziiK8LEb+
+ /nroYsoY0/jp1y8kSyZI7zsIxY8fb6GPnBssV3CZLItPLgmUiJSVwYQD551feT66DHzH
+ xzq7aoJthGwra+5OAEyr3ypzy9K/HL3IDCHzOfKmyDjK0uiF2ZKX4kQpWbaMJz1KK6M4
+ 2FmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=/+xpnZXxL3cFhRkJssEMl59sGjVJ9aCTEzd20s6bUS4=;
- b=INQ2buCoCEDWPGyoPP4tVjRZKZwBEP4QPZzR5mj3nV5A7mLDjXm8jvLGeHVyUpdDp1
- nyj9xtwaFEvOSBkqajAxpq/+hpYQVSNiHiAOsj8an6lUSQUy1RSIET5t03aU30NfsMlz
- gOUqVLOwvJmjlqykMa70QIbZnj65UrHXVXJJM9tYlTfdHCXltDHTuZghjaHAveoTACL3
- TLqa8VMBqzc6ObAc7KbLxxcIUysWrdCG7CrPKWJtCsypYadSTcIT7kDKgNWJEdoGN9EV
- A8+fjyxqQoAUKyBtJ1ElXgmxDmL2u24cPIZoquxo+E8GefPZ3APQT4AfluYW6KgX1KMm
- aLEg==
-X-Gm-Message-State: AGi0Pua7Zt/ve/e/7HG3Odull+k+IQrCxB7+aWvqFCi93+hTXVIDzXVP
- G+76f+yniW91Ak8tI2XhxZQbTV8/B68=
-X-Google-Smtp-Source: APiQypJr9DjAZxFDFzGBUYfzBedN9ES/AYALPRnFRLr8XWHw8mhrUxXjH0Ezu90khHWvlxInSofGWQ==
-X-Received: by 2002:adf:f68b:: with SMTP id v11mr354132wrp.270.1586195294649; 
- Mon, 06 Apr 2020 10:48:14 -0700 (PDT)
+ bh=anzYFovrf/fQYvmPVuqZgz1Z6ltPtlVuwPCGWfaH9jY=;
+ b=ZuqRhs05YNohpKma0CK7HgVW6CpJ+GOH+85Sv7mJpkIyWz+WF4Av8Bo6F9G4Mj2rrj
+ Q8f5h88hY6azq/Z0p9mHy+Zzcqa7EwFIrhHSoknsK69OTUiTOYjYXpp8fy1wyPC17T3J
+ YL6mtvrzSioNtVLnp6rZRm4arAZL3ue3yGNP2z8f/prrRL5mgvwwAdUy4l6W7fJjKHSi
+ jbFKe6n41D6cFBk1Le3u0aUX7fP27xcUsPBDCJ4i0rWUUhaWE+he1NiKMeTDQCsoqV5t
+ GNDv3IKWUZjsNcdkYZSKOVcpJ8f8hPp6wbUCEWVeu/QY5yQPnjgszsqFJRgX3L3VufZv
+ rqkA==
+X-Gm-Message-State: AGi0PuatAwz3s8CiesDVAwXOXQspLvMgOPq/CLE65AwJOEZ/aKTIGjwi
+ AjYqbrRbBvWFtWJPeAjaYrq/dR0qfC4=
+X-Google-Smtp-Source: APiQypKi6aG6bA6P3T7tqfAqg6zAQLsvDDeNtIERo6QTnyEUERNCOMOzsQy4rkF3X972/WXhrsG4bw==
+X-Received: by 2002:a5d:4e03:: with SMTP id p3mr347886wrt.408.1586195291974;
+ Mon, 06 Apr 2020 10:48:11 -0700 (PDT)
 Received: from x1w.redhat.com (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id a67sm364880wmc.30.2020.04.06.10.48.13
+ by smtp.gmail.com with ESMTPSA id a67sm364880wmc.30.2020.04.06.10.48.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2020 10:48:14 -0700 (PDT)
+ Mon, 06 Apr 2020 10:48:11 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -60,10 +60,10 @@ Cc: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH-for-5.1 v2 21/54] hw/riscv/sifive_u: Move some code from
+Subject: [PATCH-for-5.1 v2 19/54] hw/riscv/sifive_e: Move some code from
  realize() to init()
-Date: Mon,  6 Apr 2020 19:47:10 +0200
-Message-Id: <20200406174743.16956-22-f4bug@amsat.org>
+Date: Mon,  6 Apr 2020 19:47:08 +0200
+Message-Id: <20200406174743.16956-20-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200406174743.16956-1-f4bug@amsat.org>
 References: <20200406174743.16956-1-f4bug@amsat.org>
@@ -73,7 +73,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::441
+X-Received-From: 2a00:1450:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -91,39 +91,76 @@ Coccinelle reported:
 
   $ spatch ... --timeout 60 --sp-file \
     scripts/coccinelle/simplify-init-realize-error_propagate.cocci
-  HANDLING: ./hw/riscv/sifive_u.c
-  >>> possible moves from riscv_sifive_u_soc_init() to riscv_sifive_u_soc_realize() in ./hw/riscv/sifive_u.c:473
+  HANDLING: ./hw/riscv/sifive_e.c
+  >>> possible moves from riscv_sifive_e_soc_init() to riscv_sifive_e_soc_realize() in ./hw/riscv/sifive_e.c:135
 
-Move the calls using &error_abort which don't depend of input
+Move the calls using &error_fatal which don't depend of input
 updated before realize() to init().
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/riscv/sifive_u.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ hw/riscv/sifive_e.c | 26 ++++++++++++++------------
+ 1 file changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 9c90c94c33..754af19eef 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -441,6 +441,8 @@ static void riscv_sifive_u_soc_init(Object *obj)
-     qdev_prop_set_uint32(DEVICE(&s->otp), "serial", OTP_SERIAL);
-     sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
-                           TYPE_CADENCE_GEM);
-+    object_property_set_int(OBJECT(&s->gem), GEM_REVISION, "revision",
-+                            &error_abort);
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 646553a7c3..0be8b52147 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -118,7 +118,9 @@ static void riscv_sifive_e_init(MachineState *machine)
+ static void riscv_sifive_e_soc_init(Object *obj)
+ {
+     MachineState *ms = MACHINE(qdev_get_machine());
++    const struct MemmapEntry *memmap = sifive_e_memmap;
+     SiFiveESoCState *s = RISCV_E_SOC(obj);
++    MemoryRegion *sys_mem = get_system_memory();
+ 
+     object_initialize_child(obj, "cpus", &s->cpus,
+                             sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
+@@ -130,6 +132,18 @@ static void riscv_sifive_e_soc_init(Object *obj)
+     sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
+                           &s->gpio, sizeof(s->gpio),
+                           TYPE_SIFIVE_GPIO);
++
++    /* Mask ROM */
++    memory_region_init_rom(&s->mask_rom, obj, "riscv.sifive.e.mrom",
++                           memmap[SIFIVE_E_MROM].size, &error_fatal);
++    memory_region_add_subregion(sys_mem,
++        memmap[SIFIVE_E_MROM].base, &s->mask_rom);
++
++    /* Flash memory */
++    memory_region_init_rom(&s->xip_mem, obj, "riscv.sifive.e.xip",
++                           memmap[SIFIVE_E_XIP].size, &error_fatal);
++    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
++        &s->xip_mem);
  }
  
- static bool sifive_u_get_start_in_flash(Object *obj, Error **errp)
-@@ -569,8 +571,6 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-         qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
-         qdev_set_nic_properties(DEVICE(&s->gem), nd);
-     }
--    object_property_set_int(OBJECT(&s->gem), GEM_REVISION, "revision",
--                            &error_abort);
-     object_property_set_bool(OBJECT(&s->gem), true, "realized", &err);
-     if (err) {
-         error_propagate(errp, err);
+ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+@@ -144,12 +158,6 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+     object_property_set_bool(OBJECT(&s->cpus), true, "realized",
+                             &error_abort);
+ 
+-    /* Mask ROM */
+-    memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom",
+-                           memmap[SIFIVE_E_MROM].size, &error_fatal);
+-    memory_region_add_subregion(sys_mem,
+-        memmap[SIFIVE_E_MROM].base, &s->mask_rom);
+-
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
+         (char *)SIFIVE_E_PLIC_HART_CONFIG,
+@@ -206,12 +214,6 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+         memmap[SIFIVE_E_QSPI2].base, memmap[SIFIVE_E_QSPI2].size);
+     create_unimplemented_device("riscv.sifive.e.pwm2",
+         memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
+-
+-    /* Flash memory */
+-    memory_region_init_rom(&s->xip_mem, OBJECT(dev), "riscv.sifive.e.xip",
+-                           memmap[SIFIVE_E_XIP].size, &error_fatal);
+-    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
+-        &s->xip_mem);
+ }
+ 
+ static void riscv_sifive_e_machine_init(MachineClass *mc)
 -- 
 2.21.1
 
