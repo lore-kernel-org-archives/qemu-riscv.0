@@ -1,86 +1,114 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jLW0m-0004ke-I7
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Apr 2020 13:58:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39165)
+	id 1jLWLo-0006ra-DD
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Apr 2020 14:20:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43663)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <mlureau@redhat.com>) id 1jLW0j-0004bj-1F
- for qemu-riscv@nongnu.org; Mon, 06 Apr 2020 13:58:14 -0400
+ (envelope-from <philmd@redhat.com>) id 1jLWLk-0006nx-RS
+ for qemu-riscv@nongnu.org; Mon, 06 Apr 2020 14:19:58 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <mlureau@redhat.com>) id 1jLW0h-0000Tc-5P
- for qemu-riscv@nongnu.org; Mon, 06 Apr 2020 13:58:12 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:29770
+ (envelope-from <philmd@redhat.com>) id 1jLWLj-0000eX-Dr
+ for qemu-riscv@nongnu.org; Mon, 06 Apr 2020 14:19:56 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:40300
  helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <mlureau@redhat.com>) id 1jLW0h-0000TC-0S
- for qemu-riscv@nongnu.org; Mon, 06 Apr 2020 13:58:11 -0400
+ (Exim 4.71) (envelope-from <philmd@redhat.com>) id 1jLWLj-0000dx-9f
+ for qemu-riscv@nongnu.org; Mon, 06 Apr 2020 14:19:55 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586195890;
+ s=mimecast20190719; t=1586197194;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=b7cOAkKcN4k2vz/QopbMvJ4uyhNWqnv+SYIQCVgSZ6c=;
- b=KJm0tv7hKE0pFbGYHYtot62TcSC4j4c5KUj7ldkEO6flEw+ts/oBS8RT2K3sYw4VSu4fb/
- S4UpB07LpTtS8EC2OMdWumQIM58cXskVcsibHsM1JCMpsv1Dkkd+yVtmVCA9fFGWsC4E1k
- ORWFnUQMwhiTYLC3aMN0kMaawDtecdQ=
-Received: from mail-io1-f71.google.com (mail-io1-f71.google.com
- [209.85.166.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-185-PeB4y-ILOlm7KLaTZElzCQ-1; Mon, 06 Apr 2020 13:58:09 -0400
-X-MC-Unique: PeB4y-ILOlm7KLaTZElzCQ-1
-Received: by mail-io1-f71.google.com with SMTP id w10so526315iod.15
- for <qemu-riscv@nongnu.org>; Mon, 06 Apr 2020 10:58:08 -0700 (PDT)
+ bh=/b0HIUQU65gI+YnkCYIXNAIGNM5Xcw+ma5CdERAy9FI=;
+ b=AzcPmOYPG/FnJ6t3hkyWAq9gU7C4Kr6rqKCnasNmYeAkyGc0iL0N+JAxFpxXWzIw81RJke
+ At06L/w7r24ZdQv6SVWasiESFDXfK1zP/H9aTfUoNWcSqf4D4e64F1Cx9yCW1GGmXeW/Me
+ BURUuPb9ttdOKCeRoxufk9CFeN7y3JI=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-429-GilxslzzOH6j-phoENP9aQ-1; Mon, 06 Apr 2020 14:19:53 -0400
+X-MC-Unique: GilxslzzOH6j-phoENP9aQ-1
+Received: by mail-wr1-f69.google.com with SMTP id q9so213677wrw.22
+ for <qemu-riscv@nongnu.org>; Mon, 06 Apr 2020 11:19:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=b7cOAkKcN4k2vz/QopbMvJ4uyhNWqnv+SYIQCVgSZ6c=;
- b=XJ091bkYB+FqcQVOE2cRPDZQ0gTU51W218xV3TEND4fJv4Ogaq0/q0QmYA4upwZscc
- GnHjTBrlUf7yjiZXwndE7EWZ7yEUPRk9VbTsECC6ghJXjvIt1a5NOW+uRt5DknuOKmSz
- I7SP/AS1WXAiJqa0m/sgiFkTDIpOoIHLhDeSZBUeZs0ReDquixKnGLSH0XCN05EKOXWZ
- fhW3KfVy1RMJeSQnCu6B5yNTjhjKV0haFSDM2fZYKFk5ZaaJ+wyLWJJUHDdwEkDBnamP
- f8zbOVqy8xmkXUDDh/1iyeApAZqLiE2d8R44b4fTQvhIhuci5RnLl92qJy2VDslvo+qu
- L1Aw==
-X-Gm-Message-State: AGi0PuaQ5doX+m7IodYJsY1PTfKIUs5PhrgWO9EbOx4QCltJ/nI28Flp
- XITHhXa5yqP+JLVfCOaCSC6ruBKaSvCfwokNN6exNo32G2KsUT6FeA0+y5Pc6MvvIsWzAVYb7pC
- RUydUJZtYOsrKIWVYI5L/5ySjbRv599c=
-X-Received: by 2002:a92:41c7:: with SMTP id o190mr516209ila.11.1586195888192; 
- Mon, 06 Apr 2020 10:58:08 -0700 (PDT)
-X-Google-Smtp-Source: APiQypIIXHAkJGXbWejWoaUUTdlXCEg38VNjXePuofQOyMqNZu6dWGPxdH82EDM9l2xBpGlqP0upNW0iQpgGY66G7AQ=
-X-Received: by 2002:a92:41c7:: with SMTP id o190mr516154ila.11.1586195887833; 
- Mon, 06 Apr 2020 10:58:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200406174743.16956-1-f4bug@amsat.org>
- <20200406174743.16956-2-f4bug@amsat.org>
-In-Reply-To: <20200406174743.16956-2-f4bug@amsat.org>
-From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
-Date: Mon, 6 Apr 2020 19:57:56 +0200
-Message-ID: <CAMxuvaxrGYUT3+0addh3wr4vMBiZ9Qa7eaguw5VcUdjE7F-xtQ@mail.gmail.com>
-Subject: Re: [PATCH-for-5.1 v2 01/54] various: Remove suspicious '\' character
- outside of #define in C code
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
-Cc: qemu-devel <qemu-devel@nongnu.org>, Markus Armbruster <armbru@redhat.com>, 
- Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Wen Congyang <wencongyang2@huawei.com>,
- Xie Changlong <xiechanglong.d@gmail.com>, 
- Kevin Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>,
- Jeff Cody <codyprime@gmail.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=JtzyrZgTvqbPdoez1uPhq1mRgqO12OBtkfBDfyx+LuM=;
+ b=HfE9f+Wwp3grdvCIUlSSJ9GVgHjAVJBTFlAzF6ESlc+H2QjuJeIOHqYfQkp42zySo0
+ BIB3LxkW0XpSgrJAFpCcGqDnI9UA8TR0/AKfAMII1V6kDDIZ/Xq0eSTbMI1A0RC0dJFt
+ QKpTpMPbv9bZ8wH8nW1TFmIWKAHxyI0FZDCddJZXNinaDPz1QYfil5tDQpJaIzotkkzE
+ kAEgJ6dfFzIU09vdtSS+cdVBSc7nDTtq1j7Tk7eTCHozO5xwIWssxSfekr5j47lCWuob
+ +HVjV/Cd0CvzfRdogqvGSRfWQCtbjUD5xnThLiUwR2cKVdJxFRvMxZ8Wbds4BMZwdwNa
+ t1ag==
+X-Gm-Message-State: AGi0PuYQJQWw9+BcK70tV3KYyd/syHTtHkch8UtlSUpBryour30rXvWn
+ 2nYQRWDpjnrgczIe8CIFXIyzVrrML5i/RF4wJGhHdaU8bs+3xhKKB+qC+1UTvax/12KDctz/wpC
+ UgiIJ7RcGJMnOs84=
+X-Received: by 2002:a05:600c:204b:: with SMTP id
+ p11mr328523wmg.92.1586197192459; 
+ Mon, 06 Apr 2020 11:19:52 -0700 (PDT)
+X-Google-Smtp-Source: APiQypJ0TIYdnu+zc1xBv3Mm9DzlVGrPCNX9GwuntrSRlonkUZ5TmKDHWGl0GpthcLQM+LYjOfyHzw==
+X-Received: by 2002:a05:600c:204b:: with SMTP id
+ p11mr328440wmg.92.1586197192099; 
+ Mon, 06 Apr 2020 11:19:52 -0700 (PDT)
+Received: from [192.168.1.39] (116.red-83-42-57.dynamicip.rima-tde.net.
+ [83.42.57.116])
+ by smtp.gmail.com with ESMTPSA id d13sm243441wrg.21.2020.04.06.11.19.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 06 Apr 2020 11:19:50 -0700 (PDT)
+Subject: Re: [PATCH-for-5.1 v2 49/54] various: Use &error_abort in
+ instance_init()
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>
+Cc: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ "Gonglei (Arei)" <arei.gonglei@huawei.com>,
+ Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Andrew Baumann <Andrew.Baumann@microsoft.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, John Snow
+ <jsnow@redhat.com>, Kevin Wolf <kwolf@redhat.com>,
+ Max Reitz <mreitz@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
+ Andrew Jeffery <andrew@aj.id.au>, Joel Stanley <joel@jms.id.au>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
+ Igor Mammedov <imammedo@redhat.com>, Jiri Slaby <jslaby@suse.cz>,
+ David Gibson <david@gibson.dropbear.id.au>, Jason Wang
+ <jasowang@redhat.com>, Richard Henderson <rth@twiddle.net>,
+ =?UTF-8?Q?Herv=c3=a9_Poussineau?= <hpoussin@reactos.org>,
+ Andrzej Zaborowski <balrogg@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Paolo Bonzini <pbonzini@redhat.com>, Fam Zheng <fam@euphon.net>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Richard Henderson <rth@twiddle.net>, Eduardo Habkost <ehabkost@redhat.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>, 
- "open list:Block layer core" <qemu-block@nongnu.org>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>, 
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>
+ Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ David Hildenbrand <david@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+ Fam Zheng <fam@euphon.net>, Zhang Chen <chen.zhang@intel.com>,
+ Li Zhijian <lizhijian@cn.fujitsu.com>,
+ =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ "open list:Raspberry Pi" <qemu-arm@nongnu.org>,
+ "open list:Floppy" <qemu-block@nongnu.org>,
+ "open list:Old World (g3beige)" <qemu-ppc@nongnu.org>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ "open list:S390 Virtio-ccw" <qemu-s390x@nongnu.org>
+References: <20200406174743.16956-1-f4bug@amsat.org>
+ <20200406174743.16956-50-f4bug@amsat.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Message-ID: <0c907c26-1d12-e769-7f52-4cfb407627ff@redhat.com>
+Date: Mon, 6 Apr 2020 20:19:46 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
+MIME-Version: 1.0
+In-Reply-To: <20200406174743.16956-50-f4bug@amsat.org>
+Content-Language: en-US
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
@@ -96,332 +124,119 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2020 17:58:15 -0000
+X-List-Received-Date: Mon, 06 Apr 2020 18:19:58 -0000
 
-Hi
-
-On Mon, Apr 6, 2020 at 7:48 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org=
-> wrote:
->
-> Fixes the following coccinelle warnings:
->
->   $ spatch --sp-file --verbose-parsing  ... \
->       scripts/coccinelle/remove_local_err.cocci
->   ...
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/ppc/=
-translate_init.inc.c:5213
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/ppc/=
-translate_init.inc.c:5261
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/micr=
-oblaze/cpu.c:166
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/micr=
-oblaze/cpu.c:167
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/micr=
-oblaze/cpu.c:169
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/micr=
-oblaze/cpu.c:170
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/micr=
-oblaze/cpu.c:171
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/micr=
-oblaze/cpu.c:172
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/micr=
-oblaze/cpu.c:173
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/i386=
-/cpu.c:5787
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/i386=
-/cpu.c:5789
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/i386=
-/cpu.c:5800
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/i386=
-/cpu.c:5801
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/i386=
-/cpu.c:5802
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/i386=
-/cpu.c:5804
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/i386=
-/cpu.c:5805
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/i386=
-/cpu.c:5806
->   SUSPICIOUS: a \ character appears outside of a #define at ./target/i386=
-/cpu.c:6329
->   SUSPICIOUS: a \ character appears outside of a #define at ./hw/sd/sdhci=
-.c:1133
->   SUSPICIOUS: a \ character appears outside of a #define at ./hw/scsi/scs=
-i-disk.c:3081
->   SUSPICIOUS: a \ character appears outside of a #define at ./hw/net/virt=
-io-net.c:1529
->   SUSPICIOUS: a \ character appears outside of a #define at ./hw/riscv/si=
-five_u.c:468
->   SUSPICIOUS: a \ character appears outside of a #define at ./dump/dump.c=
-:1895
->   SUSPICIOUS: a \ character appears outside of a #define at ./block/vhdx.=
-c:2209
->   SUSPICIOUS: a \ character appears outside of a #define at ./block/vhdx.=
-c:2215
->   SUSPICIOUS: a \ character appears outside of a #define at ./block/vhdx.=
-c:2221
->   SUSPICIOUS: a \ character appears outside of a #define at ./block/vhdx.=
-c:2222
->   SUSPICIOUS: a \ character appears outside of a #define at ./block/repli=
-cation.c:172
->   SUSPICIOUS: a \ character appears outside of a #define at ./block/repli=
-cation.c:173
->
+On 4/6/20 7:47 PM, Philippe Mathieu-Daud=C3=A9 wrote:
+> Patch created mechanically by running:
+>=20
+>    $ spatch \
+>      --macro-file scripts/cocci-macro-file.h \
+>      --include-headers --keep-comments --in-place \
+>      --sp-file \
+>        scripts/coccinelle/use-error_abort-in-instance_init.cocci
+>=20
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > ---
->  block/replication.c             |  4 ++--
->  block/vhdx.c                    |  8 ++++----
->  dump/dump.c                     |  2 +-
->  hw/net/virtio-net.c             |  2 +-
->  hw/riscv/sifive_u.c             |  2 +-
->  hw/scsi/scsi-disk.c             |  2 +-
->  hw/sd/sdhci.c                   |  2 +-
->  target/i386/cpu.c               | 18 +++++++++---------
->  target/microblaze/cpu.c         | 14 +++++++-------
->  target/ppc/translate_init.inc.c |  4 ++--
->  10 files changed, 29 insertions(+), 29 deletions(-)
->
-> diff --git a/block/replication.c b/block/replication.c
-> index 413d95407d..5e09951c6b 100644
-> --- a/block/replication.c
-> +++ b/block/replication.c
-> @@ -169,8 +169,8 @@ static void replication_child_perm(BlockDriverState *=
-bs, BdrvChild *c,
->      if ((bs->open_flags & (BDRV_O_INACTIVE | BDRV_O_RDWR)) =3D=3D BDRV_O=
-_RDWR) {
->          *nperm |=3D BLK_PERM_WRITE;
->      }
-> -    *nshared =3D BLK_PERM_CONSISTENT_READ \
-> -               | BLK_PERM_WRITE \
-> +    *nshared =3D BLK_PERM_CONSISTENT_READ
-> +               | BLK_PERM_WRITE
->                 | BLK_PERM_WRITE_UNCHANGED;
->      return;
->  }
-> diff --git a/block/vhdx.c b/block/vhdx.c
-> index 33e57cd656..e16fdc2f2d 100644
-> --- a/block/vhdx.c
-> +++ b/block/vhdx.c
-> @@ -2206,20 +2206,20 @@ static QemuOptsList vhdx_create_opts =3D {
->             .name =3D VHDX_BLOCK_OPT_BLOCK_SIZE,
->             .type =3D QEMU_OPT_SIZE,
->             .def_value_str =3D stringify(0),
-> -           .help =3D "Block Size; min 1MB, max 256MB. " \
-> +           .help =3D "Block Size; min 1MB, max 256MB. "
->                     "0 means auto-calculate based on image size."
->         },
->         {
->             .name =3D BLOCK_OPT_SUBFMT,
->             .type =3D QEMU_OPT_STRING,
-> -           .help =3D "VHDX format type, can be either 'dynamic' or 'fixe=
-d'. "\
-> +           .help =3D "VHDX format type, can be either 'dynamic' or 'fixe=
-d'. "
->                     "Default is 'dynamic'."
->         },
->         {
->             .name =3D VHDX_BLOCK_OPT_ZERO,
->             .type =3D QEMU_OPT_BOOL,
-> -           .help =3D "Force use of payload blocks of type 'ZERO'. "\
-> -                   "Non-standard, but default.  Do not set to 'off' when=
- "\
-> +           .help =3D "Force use of payload blocks of type 'ZERO'. "
-> +                   "Non-standard, but default.  Do not set to 'off' when=
- "
->                     "using 'qemu-img convert' with subformat=3Ddynamic."
->         },
->         { NULL }
-> diff --git a/dump/dump.c b/dump/dump.c
-> index 22ed1d3b0d..248ea06370 100644
-> --- a/dump/dump.c
-> +++ b/dump/dump.c
-> @@ -1892,7 +1892,7 @@ static void dump_process(DumpState *s, Error **errp=
-)
->      result =3D qmp_query_dump(NULL);
->      /* should never fail */
->      assert(result);
-> -    qapi_event_send_dump_completed(result, !!local_err, (local_err ? \
-> +    qapi_event_send_dump_completed(result, !!local_err, (local_err ?
->                                     error_get_pretty(local_err) : NULL));
->      qapi_free_DumpQueryResult(result);
->
-> diff --git a/hw/net/virtio-net.c b/hw/net/virtio-net.c
-> index a46e3b37a7..eddfa7f923 100644
-> --- a/hw/net/virtio-net.c
-> +++ b/hw/net/virtio-net.c
-> @@ -1526,7 +1526,7 @@ static void virtio_net_rsc_extract_unit6(VirtioNetR=
-scChain *chain,
->                                   + sizeof(struct eth_header));
->      unit->ip =3D ip6;
->      unit->ip_plen =3D &(ip6->ip6_ctlun.ip6_un1.ip6_un1_plen);
-> -    unit->tcp =3D (struct tcp_header *)(((uint8_t *)unit->ip)\
-> +    unit->tcp =3D (struct tcp_header *)(((uint8_t *)unit->ip)
->                                          + sizeof(struct ip6_header));
->      unit->tcp_hdrlen =3D (htons(unit->tcp->th_offset_flags) & 0xF000) >>=
- 10;
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 56351c4faa..998666c91f 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -465,7 +465,7 @@ static void riscv_sifive_u_machine_instance_init(Obje=
-ct *obj)
->      object_property_add_bool(obj, "start-in-flash", sifive_u_get_start_i=
-n_flash,
->                               sifive_u_set_start_in_flash, NULL);
->      object_property_set_description(obj, "start-in-flash",
-> -                                    "Set on to tell QEMU's ROM to jump t=
-o " \
-> +                                    "Set on to tell QEMU's ROM to jump t=
-o "
->                                      "flash. Otherwise QEMU will jump to =
-DRAM",
->                                      NULL);
->  }
-> diff --git a/hw/scsi/scsi-disk.c b/hw/scsi/scsi-disk.c
-> index 1c0cb63a6f..e5bcd0baf8 100644
-> --- a/hw/scsi/scsi-disk.c
-> +++ b/hw/scsi/scsi-disk.c
-> @@ -3078,7 +3078,7 @@ static const TypeInfo scsi_cd_info =3D {
->
->  #ifdef __linux__
->  static Property scsi_block_properties[] =3D {
-> -    DEFINE_BLOCK_ERROR_PROPERTIES(SCSIDiskState, qdev.conf),         \
-> +    DEFINE_BLOCK_ERROR_PROPERTIES(SCSIDiskState, qdev.conf),
->      DEFINE_PROP_DRIVE("drive", SCSIDiskState, qdev.conf.blk),
->      DEFINE_PROP_BOOL("share-rw", SCSIDiskState, qdev.conf.share_rw, fals=
-e),
->      DEFINE_PROP_UINT16("rotation_rate", SCSIDiskState, rotation_rate, 0)=
-,
-> diff --git a/hw/sd/sdhci.c b/hw/sd/sdhci.c
-> index de63ffb037..70531ad360 100644
-> --- a/hw/sd/sdhci.c
-> +++ b/hw/sd/sdhci.c
-> @@ -1130,7 +1130,7 @@ sdhci_write(void *opaque, hwaddr offset, uint64_t v=
-al, unsigned size)
->
->          /* Limit block size to the maximum buffer size */
->          if (extract32(s->blksize, 0, 12) > s->buf_maxsz) {
-> -            qemu_log_mask(LOG_GUEST_ERROR, "%s: Size 0x%x is larger than=
- " \
-> +            qemu_log_mask(LOG_GUEST_ERROR, "%s: Size 0x%x is larger than=
- "
->                            "the maximum buffer 0x%x", __func__, s->blksiz=
-e,
->                            s->buf_maxsz);
->
-> diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-> index 90ffc5f3b1..9c256ab159 100644
-> --- a/target/i386/cpu.c
-> +++ b/target/i386/cpu.c
-> @@ -5784,9 +5784,9 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t index=
-, uint32_t count,
->              host_cpuid(index, 0, eax, ebx, ecx, edx);
->              break;
->          }
-> -        *eax =3D (L1_DTLB_2M_ASSOC << 24) | (L1_DTLB_2M_ENTRIES << 16) |=
- \
-> +        *eax =3D (L1_DTLB_2M_ASSOC << 24) | (L1_DTLB_2M_ENTRIES << 16) |
->                 (L1_ITLB_2M_ASSOC <<  8) | (L1_ITLB_2M_ENTRIES);
-> -        *ebx =3D (L1_DTLB_4K_ASSOC << 24) | (L1_DTLB_4K_ENTRIES << 16) |=
- \
-> +        *ebx =3D (L1_DTLB_4K_ASSOC << 24) | (L1_DTLB_4K_ENTRIES << 16) |
->                 (L1_ITLB_4K_ASSOC <<  8) | (L1_ITLB_4K_ENTRIES);
->          *ecx =3D encode_cache_cpuid80000005(env->cache_info_amd.l1d_cach=
-e);
->          *edx =3D encode_cache_cpuid80000005(env->cache_info_amd.l1i_cach=
-e);
-> @@ -5797,13 +5797,13 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t ind=
-ex, uint32_t count,
->              host_cpuid(index, 0, eax, ebx, ecx, edx);
->              break;
->          }
-> -        *eax =3D (AMD_ENC_ASSOC(L2_DTLB_2M_ASSOC) << 28) | \
-> -               (L2_DTLB_2M_ENTRIES << 16) | \
-> -               (AMD_ENC_ASSOC(L2_ITLB_2M_ASSOC) << 12) | \
-> +        *eax =3D (AMD_ENC_ASSOC(L2_DTLB_2M_ASSOC) << 28) |
-> +               (L2_DTLB_2M_ENTRIES << 16) |
-> +               (AMD_ENC_ASSOC(L2_ITLB_2M_ASSOC) << 12) |
->                 (L2_ITLB_2M_ENTRIES);
-> -        *ebx =3D (AMD_ENC_ASSOC(L2_DTLB_4K_ASSOC) << 28) | \
-> -               (L2_DTLB_4K_ENTRIES << 16) | \
-> -               (AMD_ENC_ASSOC(L2_ITLB_4K_ASSOC) << 12) | \
-> +        *ebx =3D (AMD_ENC_ASSOC(L2_DTLB_4K_ASSOC) << 28) |
-> +               (L2_DTLB_4K_ENTRIES << 16) |
-> +               (AMD_ENC_ASSOC(L2_ITLB_4K_ASSOC) << 12) |
->                 (L2_ITLB_4K_ENTRIES);
->          encode_cache_cpuid80000006(env->cache_info_amd.l2_cache,
->                                     cpu->enable_l3_cache ?
-> @@ -6326,7 +6326,7 @@ static void x86_cpu_expand_features(X86CPU *cpu, Er=
-ror **errp)
->               */
->              env->features[w] |=3D
->                  x86_cpu_get_supported_feature_word(w, cpu->migratable) &
-> -                ~env->user_features[w] & \
-> +                ~env->user_features[w] &
->                  ~feature_word_info[w].no_autoenable_flags;
->          }
->      }
-> diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-> index a2c2f271df..c9cf2364ca 100644
-> --- a/target/microblaze/cpu.c
-> +++ b/target/microblaze/cpu.c
-> @@ -163,14 +163,14 @@ static void mb_cpu_realizefn(DeviceState *dev, Erro=
-r **errp)
->
->      qemu_init_vcpu(cs);
->
-> -    env->pvr.regs[0] =3D PVR0_USE_EXC_MASK \
-> -                       | PVR0_USE_ICACHE_MASK \
-> +    env->pvr.regs[0] =3D PVR0_USE_EXC_MASK
-> +                       | PVR0_USE_ICACHE_MASK
->                         | PVR0_USE_DCACHE_MASK;
-> -    env->pvr.regs[2] =3D PVR2_D_OPB_MASK \
-> -                        | PVR2_D_LMB_MASK \
-> -                        | PVR2_I_OPB_MASK \
-> -                        | PVR2_I_LMB_MASK \
-> -                        | PVR2_FPU_EXC_MASK \
-> +    env->pvr.regs[2] =3D PVR2_D_OPB_MASK
-> +                        | PVR2_D_LMB_MASK
-> +                        | PVR2_I_OPB_MASK
-> +                        | PVR2_I_LMB_MASK
-> +                        | PVR2_FPU_EXC_MASK
->                          | 0;
->
->      version =3D cpu->cfg.version ? cpu->cfg.version : DEFAULT_CPU_VERSIO=
-N;
-> diff --git a/target/ppc/translate_init.inc.c b/target/ppc/translate_init.=
-inc.c
-> index e853164a86..fd763e588e 100644
-> --- a/target/ppc/translate_init.inc.c
-> +++ b/target/ppc/translate_init.inc.c
-> @@ -5210,7 +5210,7 @@ POWERPC_FAMILY(e5500)(ObjectClass *oc, void *data)
->                         PPC_FLOAT_STFIWX | PPC_WAIT |
->                         PPC_MEM_TLBSYNC | PPC_TLBIVAX | PPC_MEM_SYNC |
->                         PPC_64B | PPC_POPCNTB | PPC_POPCNTWD;
-> -    pcc->insns_flags2 =3D PPC2_BOOKE206 | PPC2_PRCNTL | PPC2_PERM_ISA206=
- | \
-> +    pcc->insns_flags2 =3D PPC2_BOOKE206 | PPC2_PRCNTL | PPC2_PERM_ISA206=
- |
->                          PPC2_FP_CVT_S64;
->      pcc->msr_mask =3D (1ull << MSR_CM) |
->                      (1ull << MSR_GS) |
-> @@ -5258,7 +5258,7 @@ POWERPC_FAMILY(e6500)(ObjectClass *oc, void *data)
->                         PPC_FLOAT_STFIWX | PPC_WAIT |
->                         PPC_MEM_TLBSYNC | PPC_TLBIVAX | PPC_MEM_SYNC |
->                         PPC_64B | PPC_POPCNTB | PPC_POPCNTWD | PPC_ALTIVE=
-C;
-> -    pcc->insns_flags2 =3D PPC2_BOOKE206 | PPC2_PRCNTL | PPC2_PERM_ISA206=
- | \
-> +    pcc->insns_flags2 =3D PPC2_BOOKE206 | PPC2_PRCNTL | PPC2_PERM_ISA206=
- |
->                          PPC2_FP_CVT_S64 | PPC2_ATOMIC_ISA206;
->      pcc->msr_mask =3D (1ull << MSR_CM) |
->                      (1ull << MSR_GS) |
-> --
-> 2.21.1
->
+>   backends/cryptodev-vhost-user.c |  2 +-
+>   backends/rng-egd.c              |  2 +-
+>   backends/rng-random.c           |  2 +-
+>   backends/vhost-user.c           |  3 ++-
+>   hw/arm/bcm2835_peripherals.c    |  6 ++++--
+>   hw/arm/vexpress.c               |  8 ++++----
+>   hw/arm/xlnx-zcu102.c            |  8 ++++----
+>   hw/block/fdc.c                  |  4 ++--
+>   hw/block/vhost-user-blk.c       |  2 +-
+>   hw/block/virtio-blk.c           |  2 +-
+>   hw/core/machine.c               |  6 +++---
+>   hw/cpu/core.c                   |  4 ++--
+>   hw/display/vga-pci.c            |  7 +++++--
+>   hw/display/xlnx_dp.c            |  4 ++--
+>   hw/dma/sparc32_dma.c            |  2 +-
+>   hw/gpio/aspeed_gpio.c           |  2 +-
+>   hw/ide/macio.c                  |  4 +++-
+>   hw/ide/qdev.c                   |  4 ++--
+>   hw/intc/apic_common.c           |  2 +-
+>   hw/mem/nvdimm.c                 |  4 ++--
+>   hw/misc/aspeed_sdmc.c           |  2 +-
+>   hw/misc/edu.c                   |  3 ++-
+>   hw/misc/macio/macio.c           |  4 ++--
+>   hw/misc/macio/pmu.c             |  3 ++-
+>   hw/misc/pca9552.c               |  2 +-
+>   hw/misc/tmp105.c                |  2 +-
+>   hw/misc/tmp421.c                |  8 ++++----
+>   hw/net/e1000.c                  |  3 ++-
+>   hw/net/lance.c                  |  3 ++-
+>   hw/net/lasi_i82596.c            |  3 ++-
+>   hw/net/ne2000-isa.c             |  4 ++--
+>   hw/net/spapr_llan.c             |  2 +-
+>   hw/net/virtio-net.c             |  2 +-
+>   hw/pci-host/grackle.c           |  2 +-
+>   hw/pci-host/i440fx.c            |  8 ++++----
+>   hw/pci-host/prep.c              |  2 +-
+>   hw/pci-host/q35.c               | 23 ++++++++++++++---------
+>   hw/pci-host/sabre.c             |  3 ++-
+>   hw/pci-host/uninorth.c          |  9 +++++----
+>   hw/pcmcia/pxa2xx.c              |  3 ++-
+>   hw/ppc/spapr_drc.c              |  6 +++---
+>   hw/ppc/spapr_rng.c              |  2 +-
+>   hw/riscv/sifive_u.c             |  4 ++--
+>   hw/s390x/event-facility.c       |  6 +++---
+>   hw/s390x/s390-ccw.c             |  2 +-
+>   hw/s390x/s390-skeys.c           |  4 ++--
+>   hw/s390x/s390-stattrib.c        |  4 ++--
+>   hw/s390x/sclp.c                 |  2 +-
+>   hw/scsi/scsi-bus.c              |  2 +-
+>   hw/ssi/xilinx_spips.c           |  2 +-
+>   hw/usb/bus.c                    |  4 ++--
+>   hw/usb/dev-network.c            |  2 +-
+>   hw/usb/dev-storage.c            |  4 ++--
+>   hw/usb/host-libusb.c            |  2 +-
+>   hw/usb/redirect.c               |  2 +-
+>   hw/virtio/virtio-balloon.c      |  4 ++--
+>   net/dump.c                      |  4 ++--
+>   net/filter-buffer.c             |  2 +-
+>   net/filter-mirror.c             | 10 +++++-----
+>   net/filter-rewriter.c           |  3 ++-
+>   target/arm/cpu64.c              |  4 ++--
+>   target/i386/cpu.c               | 23 ++++++++++++++---------
+>   target/s390x/cpu.c              |  3 ++-
+>   tests/check-qom-proplist.c      |  7 ++++---
+>   tests/test-qdev-global-props.c  |  4 ++--
+>   65 files changed, 155 insertions(+), 126 deletions(-)
+>=20
+[...]
+> diff --git a/tests/test-qdev-global-props.c b/tests/test-qdev-global-prop=
+s.c
+> index 270c690479..09315f412c 100644
+> --- a/tests/test-qdev-global-props.c
+> +++ b/tests/test-qdev-global-props.c
 
-Reviewed-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+Oops I forgot to commit this hunk:
+
+@@ -27,6 +27,7 @@
+  #include "hw/qdev-properties.h"
+  #include "qom/object.h"
+  #include "qapi/visitor.h"
++#include "qapi/error.h"
+
+
+  #define TYPE_STATIC_PROPS "static_prop_type"
+
+> @@ -151,9 +151,9 @@ static void prop2_accessor(Object *obj, Visitor *v, c=
+onst char *name,
+>   static void dynamic_instance_init(Object *obj)
+>   {
+>       object_property_add(obj, "prop1", "uint32", prop1_accessor, prop1_a=
+ccessor,
+> -                        NULL, NULL, NULL);
+> +                        NULL, NULL, &error_abort);
+>       object_property_add(obj, "prop2", "uint32", prop2_accessor, prop2_a=
+ccessor,
+> -                        NULL, NULL, NULL);
+> +                        NULL, NULL, &error_abort);
+>   }
+>  =20
+>   static void dynamic_class_init(ObjectClass *oc, void *data)
+>=20
 
 
