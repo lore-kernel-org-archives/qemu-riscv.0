@@ -1,23 +1,23 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jN7Zk-0000cR-87
+	id 1jN7Zk-0000eV-Rs
 	for mharc-qemu-riscv@gnu.org; Sat, 11 Apr 2020 00:17:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47251)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47257)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <jiangyifei@huawei.com>) id 1jN7Zg-0000T6-Od
- for qemu-riscv@nongnu.org; Sat, 11 Apr 2020 00:16:58 -0400
+ (envelope-from <jiangyifei@huawei.com>) id 1jN7Zi-0000VY-62
+ for qemu-riscv@nongnu.org; Sat, 11 Apr 2020 00:16:59 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <jiangyifei@huawei.com>) id 1jN7Zf-0006fJ-N9
- for qemu-riscv@nongnu.org; Sat, 11 Apr 2020 00:16:56 -0400
-Received: from szxga05-in.huawei.com ([45.249.212.191]:3739 helo=huawei.com)
+ (envelope-from <jiangyifei@huawei.com>) id 1jN7Zg-0006fU-4o
+ for qemu-riscv@nongnu.org; Sat, 11 Apr 2020 00:16:58 -0400
+Received: from szxga05-in.huawei.com ([45.249.212.191]:3741 helo=huawei.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
  (Exim 4.71) (envelope-from <jiangyifei@huawei.com>)
- id 1jN7ZT-0006L7-L6; Sat, 11 Apr 2020 00:16:43 -0400
+ id 1jN7ZT-0006L6-MO; Sat, 11 Apr 2020 00:16:43 -0400
 Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 74309DF672F0D1670750;
+ by Forcepoint Email with ESMTP id 684BDB5DED9E6ACACEC5;
  Sat, 11 Apr 2020 12:16:40 +0800 (CST)
 Received: from huawei.com (10.173.222.107) by DGGEMS408-HUB.china.huawei.com
  (10.3.19.208) with Microsoft SMTP Server id 14.3.487.0; Sat, 11 Apr 2020
- 12:16:33 +0800
+ 12:16:34 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <anup.patel@wdc.com>,
@@ -25,9 +25,9 @@ CC: <kvm-riscv@lists.infradead.org>, <anup.patel@wdc.com>,
  <kbastian@mail.uni-paderborn.de>, <victor.zhangxiaofeng@huawei.com>,
  <zhang.zhanghailiang@huawei.com>, <dengkai1@huawei.com>,
  <yinyipeng1@huawei.com>, Yifei Jiang <jiangyifei@huawei.com>
-Subject: [PATCH RFC v2 1/9] linux-header: Update linux/kvm.h
-Date: Sat, 11 Apr 2020 12:14:19 +0800
-Message-ID: <20200411041427.14828-2-jiangyifei@huawei.com>
+Subject: [PATCH RFC v2 3/9] target/riscv: Implement function kvm_arch_init_vcpu
+Date: Sat, 11 Apr 2020 12:14:21 +0800
+Message-ID: <20200411041427.14828-4-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.14.1.windows.1
 In-Reply-To: <20200411041427.14828-1-jiangyifei@huawei.com>
 References: <20200411041427.14828-1-jiangyifei@huawei.com>
@@ -51,41 +51,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sat, 11 Apr 2020 04:16:59 -0000
 
-Update linux/kvm.h to commit b9a6e4cd9 on https://github.com/kvm-riscv/linux.
-Only use this header file, so do not update all linux headers.
+Get isa info from kvm while kvm init.
 
 Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
 ---
- linux-headers/linux/kvm.h | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ target/riscv/kvm.c | 26 +++++++++++++++++++++++++-
+ 1 file changed, 25 insertions(+), 1 deletion(-)
 
-diff --git a/linux-headers/linux/kvm.h b/linux-headers/linux/kvm.h
-index 265099100e..7cfc111af5 100644
---- a/linux-headers/linux/kvm.h
-+++ b/linux-headers/linux/kvm.h
-@@ -236,6 +236,7 @@ struct kvm_hyperv_exit {
- #define KVM_EXIT_IOAPIC_EOI       26
- #define KVM_EXIT_HYPERV           27
- #define KVM_EXIT_ARM_NISV         28
-+#define KVM_EXIT_RISCV_SBI        28
+diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+index 8c386d9acf..3e8f8e7185 100644
+--- a/target/riscv/kvm.c
++++ b/target/riscv/kvm.c
+@@ -38,6 +38,18 @@
+ #include "qemu/log.h"
+ #include "hw/loader.h"
  
- /* For KVM_EXIT_INTERNAL_ERROR */
- /* Emulate instruction failed. */
-@@ -400,6 +401,13 @@ struct kvm_run {
- 			__u64 esr_iss;
- 			__u64 fault_ipa;
- 		} arm_nisv;
-+		/* KVM_EXIT_RISCV_SBI */
-+		struct {
-+			unsigned long extension_id;
-+			unsigned long function_id;
-+			unsigned long args[6];
-+			unsigned long ret[2];
-+		} riscv_sbi;
- 		/* Fix the size of the union. */
- 		char padding[256];
- 	};
++static __u64 kvm_riscv_reg_id(__u64 type, __u64 idx)
++{
++    __u64 id = KVM_REG_RISCV | type | idx;
++
++#if defined(TARGET_RISCV32)
++    id |= KVM_REG_SIZE_U32;
++#elif defined(TARGET_RISCV64)
++    id |= KVM_REG_SIZE_U64;
++#endif
++    return id;
++}
++
+ const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
+     KVM_CAP_LAST_INFO
+ };
+@@ -79,7 +91,19 @@ void kvm_arch_init_irq_routing(KVMState *s)
+ 
+ int kvm_arch_init_vcpu(CPUState *cs)
+ {
+-    return 0;
++    int ret = 0;
++    uint64_t isa;
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    __u64 id;
++
++    id = kvm_riscv_reg_id(KVM_REG_RISCV_CONFIG, KVM_REG_RISCV_CONFIG_REG(isa));
++    ret = kvm_get_one_reg(cs, id, &isa);
++    if (ret) {
++        return ret;
++    }
++    cpu->env.misa = isa;
++
++    return ret;
+ }
+ 
+ int kvm_arch_msi_data_to_gsi(uint32_t data)
 -- 
 2.19.1
 
