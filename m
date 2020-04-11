@@ -1,89 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jLoHf-0002MS-TJ
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Apr 2020 09:28:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44980)
+	id 1jN7Uj-0006rK-8S
+	for mharc-qemu-riscv@gnu.org; Sat, 11 Apr 2020 00:11:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46543)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <cohuck@redhat.com>) id 1jLoHd-0002Jg-Di
- for qemu-riscv@nongnu.org; Tue, 07 Apr 2020 09:28:54 -0400
+ (envelope-from <jiangyifei@huawei.com>) id 1jN7Ug-0006q8-7b
+ for qemu-riscv@nongnu.org; Sat, 11 Apr 2020 00:11:47 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <cohuck@redhat.com>) id 1jLoHa-00019d-Ul
- for qemu-riscv@nongnu.org; Tue, 07 Apr 2020 09:28:53 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:54540
- helo=us-smtp-1.mimecast.com)
+ (envelope-from <jiangyifei@huawei.com>) id 1jN7Ue-0001wD-Q6
+ for qemu-riscv@nongnu.org; Sat, 11 Apr 2020 00:11:46 -0400
+Received: from szxga08-in.huawei.com ([45.249.212.255]:48916 helo=huawei.com)
  by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <cohuck@redhat.com>) id 1jLoHa-00017e-RT
- for qemu-riscv@nongnu.org; Tue, 07 Apr 2020 09:28:50 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1586266129;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ocp6EFI20MUtjHSglurSSfhDC1bsCpIKAKWMCb27vzI=;
- b=C8wmc/ApfSPTDQMeecRBpm24CcDpxKJs6lYevHzo++gu9KQE7zxCh5+0F23yjGu0upyTbp
- ApbRaHAyRZNuB1u/rgzV6R/NsSh0s/PhXSAH+XjuSVTgjQqsbwPtJSR7Y1k/Q6UVG+aX32
- lYqlLsK6LKaGuvpS9YrtkTszqdOxwQM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-163-98bDI2EnMXS9kxLZ7dlJew-1; Tue, 07 Apr 2020 09:28:48 -0400
-X-MC-Unique: 98bDI2EnMXS9kxLZ7dlJew-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3A002801E66;
- Tue,  7 Apr 2020 13:28:42 +0000 (UTC)
-Received: from gondolin (ovpn-112-38.ams2.redhat.com [10.36.112.38])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2CF6C7E303;
- Tue,  7 Apr 2020 13:28:00 +0000 (UTC)
-Date: Tue, 7 Apr 2020 15:27:58 +0200
-From: Cornelia Huck <cohuck@redhat.com>
-To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <f4bug@amsat.org>
-Cc: qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>, Vladimir
- Sementsov-Ogievskiy <vsementsov@virtuozzo.com>, Peter Maydell
- <peter.maydell@linaro.org>, "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>, "Michael
- S. Tsirkin" <mst@redhat.com>, Andrew Baumann
- <Andrew.Baumann@microsoft.com>, Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?=
- <philmd@redhat.com>, Alistair Francis <alistair@alistair23.me>, "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>, John Snow <jsnow@redhat.com>, Kevin
- Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>, Stefan Hajnoczi
- <stefanha@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>, Marcel
- Apfelbaum <marcel.apfelbaum@gmail.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, =?UTF-8?B?Q8OpZHJpYw==?=
- Le Goater <clg@kaod.org>, Andrew Jeffery <andrew@aj.id.au>, Joel Stanley
- <joel@jms.id.au>, Paolo Bonzini <pbonzini@redhat.com>, Xiao Guangrong
- <xiaoguangrong.eric@gmail.com>, Igor Mammedov <imammedo@redhat.com>, Jiri
- Slaby <jslaby@suse.cz>, David Gibson <david@gibson.dropbear.id.au>, Jason
- Wang <jasowang@redhat.com>, Richard Henderson <rth@twiddle.net>,
- =?UTF-8?B?SGVydsOp?= Poussineau <hpoussin@reactos.org>, Andrzej Zaborowski
- <balrogg@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, Sagar Karandikar
+ (Exim 4.71) (envelope-from <jiangyifei@huawei.com>)
+ id 1jN7Ub-0001rD-10; Sat, 11 Apr 2020 00:11:41 -0400
+Received: from DGGEMM401-HUB.china.huawei.com (unknown [172.30.72.57])
+ by Forcepoint Email with ESMTP id 5279C9DEE4AF0A674EE4;
+ Sat, 11 Apr 2020 12:11:33 +0800 (CST)
+Received: from DGGEMM525-MBS.china.huawei.com ([169.254.5.82]) by
+ DGGEMM401-HUB.china.huawei.com ([10.3.20.209]) with mapi id 14.03.0487.000;
+ Sat, 11 Apr 2020 12:11:27 +0800
+From: Jiangyifei <jiangyifei@huawei.com>
+To: Anup Patel <anup@brainfault.org>
+CC: QEMU Developers <qemu-devel@nongnu.org>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>, Anup Patel <anup.patel@wdc.com>, Zhanghailiang
+ <zhang.zhanghailiang@huawei.com>, Sagar Karandikar
  <sagark@eecs.berkeley.edu>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>, David Hildenbrand
- <david@redhat.com>, Eric Farman <farman@linux.ibm.com>, Fam Zheng
- <fam@euphon.net>, Zhang Chen <chen.zhang@intel.com>, Li Zhijian
- <lizhijian@cn.fujitsu.com>, "Daniel P. =?UTF-8?B?QmVycmFuZ8Op?="
- <berrange@redhat.com>, qemu-arm@nongnu.org (open list:Raspberry Pi),
- qemu-block@nongnu.org (open list:Floppy), qemu-ppc@nongnu.org (open
- list:Old World (g3beige)), qemu-riscv@nongnu.org (open list:RISC-V TCG
- CPUs), qemu-s390x@nongnu.org (open list:S390 Virtio-ccw)
-Subject: Re: [PATCH-for-5.1 v2 49/54] various: Use &error_abort in
- instance_init()
-Message-ID: <20200407152758.1cf47130.cohuck@redhat.com>
-In-Reply-To: <20200406174743.16956-50-f4bug@amsat.org>
-References: <20200406174743.16956-1-f4bug@amsat.org>
- <20200406174743.16956-50-f4bug@amsat.org>
-Organization: Red Hat GmbH
+ <kbastian@mail.uni-paderborn.de>, "Zhangxiaofeng (F)"
+ <victor.zhangxiaofeng@huawei.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, yinyipeng <yinyipeng1@huawei.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, "dengkai (A)" <dengkai1@huawei.com>
+Subject: RE: [PATCH RFC 2/9] target/riscv: Add target/riscv/kvm.c to place
+ the public kvm interface
+Thread-Topic: [PATCH RFC 2/9] target/riscv: Add target/riscv/kvm.c to place
+ the public kvm interface
+Thread-Index: AQHV+OqsnOkX+bVvQEiYhF3Oc/5rwahiAV8AgAAjKYCAEVYS0A==
+Date: Sat, 11 Apr 2020 04:11:26 +0000
+Message-ID: <3915816D913D8241BB43E932213F57D4ADC89514@dggemm525-mbs.china.huawei.com>
+References: <20200313034949.3028-1-jiangyifei@huawei.com>
+ <20200313034949.3028-3-jiangyifei@huawei.com>
+ <CAAhSdy3_BO7pRwvLiS9qd3NLXUCj_MnsxT8JtD0833AnY1DOZQ@mail.gmail.com>
+ <CAAhSdy24zBmuJ=BZFMXsHRJr-tLTEZs=C92QsE26KLGxPxd88Q@mail.gmail.com>
+In-Reply-To: <CAAhSdy24zBmuJ=BZFMXsHRJr-tLTEZs=C92QsE26KLGxPxd88Q@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.173.222.107]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-CFilter-Loop: Reflected
 X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
  [fuzzy]
-X-Received-From: 207.211.31.120
+X-Received-From: 45.249.212.255
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -95,90 +63,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2020 13:28:54 -0000
+X-List-Received-Date: Sat, 11 Apr 2020 04:11:47 -0000
 
-On Mon,  6 Apr 2020 19:47:38 +0200
-Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> wrote:
-
-> Patch created mechanically by running:
->=20
->   $ spatch \
->     --macro-file scripts/cocci-macro-file.h \
->     --include-headers --keep-comments --in-place \
->     --sp-file \
->       scripts/coccinelle/use-error_abort-in-instance_init.cocci
->=20
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
-> ---
->  backends/cryptodev-vhost-user.c |  2 +-
->  backends/rng-egd.c              |  2 +-
->  backends/rng-random.c           |  2 +-
->  backends/vhost-user.c           |  3 ++-
->  hw/arm/bcm2835_peripherals.c    |  6 ++++--
->  hw/arm/vexpress.c               |  8 ++++----
->  hw/arm/xlnx-zcu102.c            |  8 ++++----
->  hw/block/fdc.c                  |  4 ++--
->  hw/block/vhost-user-blk.c       |  2 +-
->  hw/block/virtio-blk.c           |  2 +-
->  hw/core/machine.c               |  6 +++---
->  hw/cpu/core.c                   |  4 ++--
->  hw/display/vga-pci.c            |  7 +++++--
->  hw/display/xlnx_dp.c            |  4 ++--
->  hw/dma/sparc32_dma.c            |  2 +-
->  hw/gpio/aspeed_gpio.c           |  2 +-
->  hw/ide/macio.c                  |  4 +++-
->  hw/ide/qdev.c                   |  4 ++--
->  hw/intc/apic_common.c           |  2 +-
->  hw/mem/nvdimm.c                 |  4 ++--
->  hw/misc/aspeed_sdmc.c           |  2 +-
->  hw/misc/edu.c                   |  3 ++-
->  hw/misc/macio/macio.c           |  4 ++--
->  hw/misc/macio/pmu.c             |  3 ++-
->  hw/misc/pca9552.c               |  2 +-
->  hw/misc/tmp105.c                |  2 +-
->  hw/misc/tmp421.c                |  8 ++++----
->  hw/net/e1000.c                  |  3 ++-
->  hw/net/lance.c                  |  3 ++-
->  hw/net/lasi_i82596.c            |  3 ++-
->  hw/net/ne2000-isa.c             |  4 ++--
->  hw/net/spapr_llan.c             |  2 +-
->  hw/net/virtio-net.c             |  2 +-
->  hw/pci-host/grackle.c           |  2 +-
->  hw/pci-host/i440fx.c            |  8 ++++----
->  hw/pci-host/prep.c              |  2 +-
->  hw/pci-host/q35.c               | 23 ++++++++++++++---------
->  hw/pci-host/sabre.c             |  3 ++-
->  hw/pci-host/uninorth.c          |  9 +++++----
->  hw/pcmcia/pxa2xx.c              |  3 ++-
->  hw/ppc/spapr_drc.c              |  6 +++---
->  hw/ppc/spapr_rng.c              |  2 +-
->  hw/riscv/sifive_u.c             |  4 ++--
->  hw/s390x/event-facility.c       |  6 +++---
->  hw/s390x/s390-ccw.c             |  2 +-
->  hw/s390x/s390-skeys.c           |  4 ++--
->  hw/s390x/s390-stattrib.c        |  4 ++--
->  hw/s390x/sclp.c                 |  2 +-
->  hw/scsi/scsi-bus.c              |  2 +-
->  hw/ssi/xilinx_spips.c           |  2 +-
->  hw/usb/bus.c                    |  4 ++--
->  hw/usb/dev-network.c            |  2 +-
->  hw/usb/dev-storage.c            |  4 ++--
->  hw/usb/host-libusb.c            |  2 +-
->  hw/usb/redirect.c               |  2 +-
->  hw/virtio/virtio-balloon.c      |  4 ++--
->  net/dump.c                      |  4 ++--
->  net/filter-buffer.c             |  2 +-
->  net/filter-mirror.c             | 10 +++++-----
->  net/filter-rewriter.c           |  3 ++-
->  target/arm/cpu64.c              |  4 ++--
->  target/i386/cpu.c               | 23 ++++++++++++++---------
->  target/s390x/cpu.c              |  3 ++-
->  tests/check-qom-proplist.c      |  7 ++++---
->  tests/test-qdev-global-props.c  |  4 ++--
->  65 files changed, 155 insertions(+), 126 deletions(-)
->=20
-
-s390 parts:
-Acked-by: Cornelia Huck <cohuck@redhat.com>
-
+DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEFudXAgUGF0ZWwgW21haWx0
+bzphbnVwQGJyYWluZmF1bHQub3JnXQ0KPiBTZW50OiBUdWVzZGF5LCBNYXJjaCAzMSwgMjAyMCA3
+OjE5IFBNDQo+IFRvOiBKaWFuZ3lpZmVpIDxqaWFuZ3lpZmVpQGh1YXdlaS5jb20+DQo+IENjOiBR
+RU1VIERldmVsb3BlcnMgPHFlbXUtZGV2ZWxAbm9uZ251Lm9yZz47IG9wZW4gbGlzdDpSSVNDLVYN
+Cj4gPHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz47IEFudXAgUGF0ZWwgPGFudXAucGF0ZWxAd2RjLmNv
+bT47DQo+IFpoYW5naGFpbGlhbmcgPHpoYW5nLnpoYW5naGFpbGlhbmdAaHVhd2VpLmNvbT47IFNh
+Z2FyIEthcmFuZGlrYXINCj4gPHNhZ2Fya0BlZWNzLmJlcmtlbGV5LmVkdT47IEJhc3RpYW4gS29w
+cGVsbWFubg0KPiA8a2Jhc3RpYW5AbWFpbC51bmktcGFkZXJib3JuLmRlPjsgWmhhbmd4aWFvZmVu
+ZyAoRikNCj4gPHZpY3Rvci56aGFuZ3hpYW9mZW5nQGh1YXdlaS5jb20+OyBBbGlzdGFpciBGcmFu
+Y2lzDQo+IDxBbGlzdGFpci5GcmFuY2lzQHdkYy5jb20+OyB5aW55aXBlbmcgPHlpbnlpcGVuZzFA
+aHVhd2VpLmNvbT47IFBhbG1lcg0KPiBEYWJiZWx0IDxwYWxtZXJAZGFiYmVsdC5jb20+OyBkZW5n
+a2FpIChBKSA8ZGVuZ2thaTFAaHVhd2VpLmNvbT4NCj4gU3ViamVjdDogUmU6IFtQQVRDSCBSRkMg
+Mi85XSB0YXJnZXQvcmlzY3Y6IEFkZCB0YXJnZXQvcmlzY3Yva3ZtLmMgdG8gcGxhY2UgdGhlDQo+
+IHB1YmxpYyBrdm0gaW50ZXJmYWNlDQo+IA0KPiBPbiBUdWUsIE1hciAzMSwgMjAyMCBhdCAyOjQz
+IFBNIEFudXAgUGF0ZWwgPGFudXBAYnJhaW5mYXVsdC5vcmc+IHdyb3RlOg0KPiA+DQo+ID4gT24g
+RnJpLCBNYXIgMTMsIDIwMjAgYXQgOToyMyBBTSBZaWZlaSBKaWFuZyA8amlhbmd5aWZlaUBodWF3
+ZWkuY29tPiB3cm90ZToNCj4gPiA+DQo+ID4gPiBBZGQgdGFyZ2V0L3Jpc2N2L2t2bS5jIHRvIHBs
+YWNlIGt2bV9hcmNoXyogZnVuY3Rpb24gbmVlZGVkIGJ5DQo+IGt2bS9rdm0tYWxsLmMuDQo+ID4g
+PiBNZWFud2hpbGUsIGFkZCByaXNjdjY0IGt2bSBzdXBwb3J0IHRvIGNvbmZpZ3VyZS4NCj4gPg0K
+PiA+IFRoaXMgc2hvdWxkIGJlIGZvciBib3RoIHJpc2N2NjQgYW5kIHJpc2N2MzIuIFRoZSBLVk1U
+T09MIGNvbXBpbGVzDQo+ID4gcGVyZmVjdGx5IGZpbmUgZm9yIHJpc2N2MzIgKGFsdGhvdWdoIG5v
+dCB0ZXN0ZWQgbXVjaCkgc28gdGhlcmUgaXMgbm8NCj4gPiBoYXJtIGlzIHN1cHBvcnRpbmcgYm90
+aCByaXNjdjY0IGFuZCByaXNjdjMyIGZyb20gc3RhcnQgaXRzZWxmLg0KPiANCj4gRm9yIHlvdXIg
+cmVmZXJlbmNlLCBJIGhhdmUgdXBkYXRlZCBLVk0gUklTQy1WIGFuZCBLVk1UT09MIFJJU0MtViBy
+ZXBvcw0KPiBhdDoNCj4gaHR0cHM6Ly9naXRodWIuY29tL2t2bS1yaXNjdi9saW51eC5naXQgKHJp
+c2N2X2t2bV9tYXN0ZXIgYnJhbmNoKQ0KPiBodHRwczovL2dpdGh1Yi5jb20va3ZtLXJpc2N2L2t2
+bXRvb2wuZ2l0IChyaXNjdl9tYXN0ZXIgYnJhbmNoKQ0KPiANCj4gQWJvdmUgcmVwb3Mgd29yayBm
+b3IgYm90aCBSVjMyIGFuZCBSVjY0IHN5c3RlbXMuDQo+IA0KPiBSZWdhcmRzLA0KPiBBbnVwDQoN
+CkhpLA0KDQpJIHdpbGwgYWRkIHJpc2N2MzIgc3VwcG9ydCBhbmQgc2VuZCB2MiBzZXJpZXMuIEJ1
+dCBJIGRvbid0IHRlc3QgY29tcGxldGVseSwgYmVjYXVzZSBpdCBuZWVkIHRpbWUgdG8gYnVpbGQg
+cmlzY3YzMiBRRU1VIGFuZCBpdHMgZGVwZW5kZW50IGxpYnJhcmllcy4NCkFueXdheSwgSSB3aWxs
+IGNvbnRpbnVlIHRvIGJ1aWxkIGFuZCB0ZXN0IHJpc2N2MzIgUUVNVS4NCg0KQnkgdGhlIHdheSwg
+SSBoYWQgYSBwcm9ibGVtIHdpdGggc3RhcnQgcmlzY3Y2NCB2bSBhdCBsYXRlc3Qga3ZtLXJpc2N2
+IHZlcnNpb24uDQpsYXN0ZXN0IHZlcnNpb246DQp0Y2cgcWVtdTogaHR0cHM6Ly9naXRodWIuY29t
+L3FlbXUvcWVtdQ0KbGludXg6IGh0dHBzOi8vZ2l0aHViLmNvbS9rdm0tcmlzY3YvbGludXgNCm9w
+ZW5zYmk6IGh0dHBzOi8vZ2l0aHViLmNvbS9yaXNjdi9vcGVuc2JpDQprdm10b29sOiBodHRwczov
+L2dpdGh1Yi5jb20va3ZtLXJpc2N2L2t2bXRvb2wNCndoZW4gc3RhcnQgdm0gd2l0aCBrdm10b29s
+cyBvciB0aGlzIHFlbXUgc2VyaWVzLCBJIHJlY2VpdmVkIGtlcm5lbCBwYW5pYy4NCkRvIHlvdSBo
+YXZlIHRoaXMgcHJvYmxlbSA/DQoNClsgICAgMy41ODM5NjNdIFJ1biAvc2Jpbi9pbml0IGFzIGlu
+aXQgcHJvY2Vzcw0KWyAgICAzLjk3MjI2NF0gcmNTWzQ0XTogdW5oYW5kbGVkIHNpZ25hbCAxMSBj
+b2RlIDB4MSBhdCAweDAwMDAwMDNmYzhkNjcxNzANClsgICAgMy45OTczOThdIENQVTogMCBQSUQ6
+IDQ0IENvbW06IHJjUyBOb3QgdGFpbnRlZCA1LjYuMC1yYzUtMTQwMzYtZzZlMWU5ZmNmNWYzMCAj
+Mg0KWyAgICA0LjAyNTE0M10gZXBjOiAwMDAwMDAzZmM4ZDY3MTcwIHJhIDogMDAwMDAwMDAwMDAx
+OGMxYyBzcCA6IDAwMDAwMDNmZmZiODRlMDANClsgICAgNC4wNTE2MTFdICBncCA6IDAwMDAwMDAw
+MDAxMzY2NDggdHAgOiAwMDAwMDAzZmQ2MDg2NzEwIHQwIDogMDAwMDAwMDAwMDAwMDAwMw0KWyAg
+ICA0LjA3ODIyM10gIHQxIDogMDAwMDAwMDAwMDAxNzkyYyB0MiA6IDAwMDAwMDAwMDAwMDAwMGIg
+czAgOiAwMDAwMDAwMDAwMDE4YmYwDQpbICAgIDQuMTA1MDgyXSAgczEgOiAwMDAwMDAzZmZmYTJm
+YTcwIGEwIDogMDAwMDAwMDAwMDAxOTg2OCBhMSA6IDAwMDAwMDAwMDAwMDAwMDINClsgICAgNC4x
+MzE4MjRdICBhMiA6IDAwMDAwMDNmZmZiODRlMDggYTMgOiAwMDAwMDAwMDAwMTA0OTg0IGE0IDog
+MDAwMDAwMDAwMDEwNDlkYw0KWyAgICA0LjE1ODIwOV0gIGE1IDogMDAwMDAwM2ZkNjI4ZTcxMCBh
+NiA6IDAwMDAwMDNmZmZiODRlMDAgYTcgOiAwMDAwMDAwMDAwMDAwMDAwDQpbICAgIDQuMTg0NzU2
+XSAgczIgOiAwMDAwMDAzZmZmYTJmYTEwIHMzIDogMDAwMDAwMDAwMDEzNzAxMCBzNCA6IDAwMDAw
+MDAwMDAwMDAwMDENClsgICAgNC4yMTE0NDhdICBzNSA6IDAwMDAwMDNmYzhkNjU5MTggczYgOiAw
+MDAwMDAwMDAwMDAwMDAxIHM3IDogMDAwMDAwMDAwMDExMjAwMA0KWyAgICA0LjIzODIzOF0gIHM4
+IDogMDAwMDAwMDAwMDEzNjE0MCBzOSA6IDAwMDAwMDAwMDAwMDAwMDAgczEwOiAwMDAwMDAwMDAw
+MDAwMDAwDQpbICAgIDQuMjY0ODgwXSAgczExOiAwMDAwMDAwMDAwMDAwMDAwIHQzIDogMDAwMDAw
+M2ZjOGQ2NzE3MCB0NCA6IDAwMDAwMDAwMDAwMDAwMDINClsgICAgNC4yOTE1NDNdICB0NSA6IDAw
+MDAwMDNmZDYyODIxODAgdDYgOiAwMDAwMDAwMDAwMDAwMDAwDQpbICAgIDQuMzExMTk2XSBzdGF0
+dXM6IDAwMDAwMDAwMDAwMDQwMjAgYmFkYWRkcjogMDAwMDAwM2ZjOGQ2NzE3MCBjYXVzZTogMDAw
+MDAwMDAwMDAwMDAwYw0KWyAgICA0LjM0ODgzNV0gaW5pdFsxXTogdW5oYW5kbGVkIHNpZ25hbCAx
+MSBjb2RlIDB4MSBhdCAweDAwMDAwMDNmZDYyOTI0NjgNClsgICAgNC4zNzM3MThdIENQVTogMCBQ
+SUQ6IDEgQ29tbTogaW5pdCBOb3QgdGFpbnRlZCA1LjYuMC1yYzUtMTQwMzYtZzZlMWU5ZmNmNWYz
+MCAjMg0KWyAgICA0LjQwMTM0NF0gZXBjOiAwMDAwMDAzZmQ2MjkyNDY4IHJhIDogMDAwMDAwMDAw
+MDEwMmY4OCBzcCA6IDAwMDAwMDNmZmZhMmY5NjANClsgICAgNC40Mjc4MTRdICBncCA6IDAwMDAw
+MDAwMDAxMzY2NDggdHAgOiAwMDAwMDAzZmM4YjUwNzEwIHQwIDogMDAwMDAwM2ZkNjI5ZDE3MA0K
+WyAgICA0LjQ1NDE5OV0gIHQxIDogMDAwMDAwMDAwMDAwMDIzOCB0MiA6IDAwMDAwMDAwMDAxMzUz
+ZjAgczAgOiAwMDAwMDAwMDAwMTI0MDAwDQpbICAgIDQuNDgwNjk5XSAgczEgOiAwMDAwMDAwMDAw
+MDAwMDA4IGEwIDogMDAwMDAwMDAwMDEyM2FhOCBhMSA6IDAwMDAwMDAwMDAwMDAwMDYNClsgICAg
+NC41MDczNTJdICBhMiA6IDAwMDAwMDAwMDAwMDAwMDAgYTMgOiAwMDAwMDAwMDAwMDAwMDAwIGE0
+IDogMDAwMDAwMDAwMDAwMDAwMA0KWyAgICA0LjUzMzgxOF0gIGE1IDogZmZmZmZmZmZmZmZmZjAw
+MCBhNiA6IDAwMDAwMDNmYzhkNjU5MTggYTcgOiAwMDAwMDAwMDAwMDAwMTA0DQpbICAgIDQuNTYw
+NDA4XSAgczIgOiAwMDAwMDAwMDAwMDAwMDAwIHMzIDogMDAwMDAwMDAwMDAwMDAwMCBzNCA6IDAw
+MDAwMDAwMDAwMDAwMDANClsgICAgNC41ODY5NjZdICBzNSA6IDAwMDAwMDAwMDAwMDAwMmMgczYg
+OiAwMDAwMDAwMDAwMDAwMDAzIHM3IDogMDAwMDAwMDAwMDAwMDAwMA0KWyAgICA0LjYxMzMzMV0g
+IHM4IDogMDAwMDAwMDAwMDEzNjE0MCBzOSA6IDAwMDAwMDAwMDAwMDAwMDAgczEwOiAwMDAwMDAw
+MDAwMDAwMDAwDQpbICAgIDQuNjQwMDA2XSAgczExOiAwMDAwMDAwMDAwMDAwMDAwIHQzIDogMDAw
+MDAwM2ZkNjI5MjQ2OCB0NCA6IDAwMDAwMDAwMDAwMDAwMDINClsgICAgNC42NjYzNzJdICB0NSA6
+IDAwMDAwMDNmYzhiNTNkYzggdDYgOiAwMDAwMDAwMDAwMDAwMDAwDQpbICAgIDQuNjg2MTI0XSBz
+dGF0dXM6IDAwMDAwMDAwMDAwMDQwMjAgYmFkYWRkcjogMDAwMDAwM2ZkNjI5MjQ2OCBjYXVzZTog
+MDAwMDAwMDAwMDAwMDAwYw0KWyAgICA0LjcxNTYxMl0gS2VybmVsIHBhbmljIC0gbm90IHN5bmNp
+bmc6IEF0dGVtcHRlZCB0byBraWxsIGluaXQhIGV4aXRjb2RlPTB4MDAwMDAwMGINCg0KQmVzdCBS
+ZWdhcmRzLA0KWWlmZWkgSmlhbmcNCg==
 
