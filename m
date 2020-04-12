@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlJV-00021H-3N
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:42:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50011)
+	id 1jNlJX-00029i-RU
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:42:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50103)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlJQ-0001qK-MD
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:50 -0400
+ id 1jNlJU-0001za-F3
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:53 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlJP-0006Da-N6
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:48 -0400
-Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:44377)
+ id 1jNlJT-0006HJ-4M
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:52 -0400
+Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:41677)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlJD-000686-9L; Sun, 12 Apr 2020 18:42:35 -0400
-Received: by mail-wr1-x444.google.com with SMTP id d17so1634792wrg.11;
- Sun, 12 Apr 2020 15:42:34 -0700 (PDT)
+ id 1jNlJH-00069Z-8E; Sun, 12 Apr 2020 18:42:39 -0400
+Received: by mail-wr1-x443.google.com with SMTP id h9so8536377wrc.8;
+ Sun, 12 Apr 2020 15:42:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=74G8KHhadiGPyGitkFydcSDSAs1meyukZBFpYk9pD6I=;
- b=dPCfqUi+fQcBEG3K/WPUk56J0LAaObHIxDG46h8wY4ZNxJLUwgj0NWwAwtUyFExGA5
- r5+4rSPzbfX1aAnLWCYcyKaohy7boPLvXOAepLJ662xZIblElg2FuJbH9ri897tTWZt6
- 6dX5pQ1pFJrNZCtU/FRBwVhqd3WEKQzg34n135qBqGR6o/WT66bm/AhG31Mp2g7nVTy1
- SFvZGg+UwXBXaJM28hgts6+00mKiW6O1ivAvRJWYTbL2x/xGQq/FTarhAjFQggLC9JcG
- E1hW5iuN9t/c0S+zX8j1T48TCU8lERf/8j3iJAPh68RiIHQKW1o0OtQD+wO7zRQZOinH
- ipyw==
+ bh=NTYH+s0TzLC/P3q6ndIJmCyp+nySJM10cWkO/ozqO2g=;
+ b=c6fZuN0aKL58br/hJwvDJuphF3l2RPJk0wiLzBKLGEwTvDB607f/gBfIhE7YvBDI9V
+ /kRCtVdi3VCSa6eiVhvBD+oGJ5RUEpBeqEbmH611YZBjGXDoKqykyGqf3a/MA5rM5nbF
+ NmVrybcT7k2ay92MhFezTNfqo5S6VMrs/PbXIQfG3wVPRw+AOI8YcykhUCsG4fOYgWeL
+ ZQeBgltyW1kEqQMO4haddZRmUU4/VrfdfLzObWjIJ/AAhiA1YbU4F+fQ/zT3ISzIUvO8
+ YHhf8bOeQ5TAxSkP3Pm9o8hAbYu6aV5dhZnSv/Jm+zE5SaoPF+gYABJ0j7WPcuPkvhel
+ 0H3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=74G8KHhadiGPyGitkFydcSDSAs1meyukZBFpYk9pD6I=;
- b=f772oGezS01RVlhSF2S1PMy8ic33QAldzotRBNvP+GFoFMN+ozuJrnXwSj3nVmHTr7
- ZnBFtSRCaGs08sJRJFW2z6jpHeQSIjKcyTE+8ZU1CYN2WccB0jsHElf2L4Bi0oqczUrx
- agOXqU77uLNMW/9NUAYdJPkNyaxZzufHCPLBlmDTgZ3LjTFCgWo5rnotOtLRgj0q2aD4
- 3HMl2JpS36Lr7h7MbqniK1Uow47OkDLszbio4AO8uTiijP0lKUqd1j+6pjTjMUTuDD5W
- 3ommnp8/IJ84YS7y7PqLrB6zlqDo+q1AzUwxd1A6M1nTHG/dRIsAST7On7O0wS7F+G6d
- bNIQ==
-X-Gm-Message-State: AGi0PuZ+kFCw8pkKLWlEwrYmVYxBu40oG60WuzXIZWQrfFbX8TxEWGGI
- UviXaCoHSmmY80ID6CC/wUGR0S7qxqFj1g==
-X-Google-Smtp-Source: APiQypKKinuxHdn5Rjo88Tjskg/kBYuSqrEjj1TM/hyqysUwAmGJpRRx5J4iHdFvz55iPD19d4CKUA==
-X-Received: by 2002:adf:9441:: with SMTP id 59mr15577538wrq.211.1586731353887; 
- Sun, 12 Apr 2020 15:42:33 -0700 (PDT)
+ bh=NTYH+s0TzLC/P3q6ndIJmCyp+nySJM10cWkO/ozqO2g=;
+ b=g7yQRxuPp+7M1LeoT7M+tHuSqpI/KiMyCANsPgxwVUhtGY9KTrtwIvMUKKKAv7Hhhu
+ tq9nVj7//7m86d+gV1fADBgrzT5qihiFQpc4yB4Ly6Nk0mrmN/GfXZL8nysGPsIIhAg6
+ KoKbfICwcGhCwwNk0BcAqC6pmNHV96Uk53ay+nf77wlmkIsxD7p5ohoolVGH/tPsidCJ
+ u2C47+LZoQiS2u2/Vuuta3KAgGdFpAbm7R7BmU87ZSTvYTVKuhb/38Okdk2YYQzgsrLS
+ ifnJ177peUaADBDB9QP2BKRDc38h2CBpnC+ml9cRtdqPXeIHjgeDqmrx0PmrXxIvSKeb
+ 8/fw==
+X-Gm-Message-State: AGi0PuZD011pqzqhmXWy5WbR+Ky8XMmlcXR6SSMNHcac4yJaaZZUzTuR
+ dqpOcEW9qQHQWZXV7rc2vo8olJsZCUN+0Q==
+X-Google-Smtp-Source: APiQypItav/v6t5lS6P4Dm/fa3Z7WzEtpjzkEhjOdvhhw5s5FPk8R5dmmJ9o0MthD0JaR9OhUFdBMQ==
+X-Received: by 2002:adf:f881:: with SMTP id u1mr10583380wrp.348.1586731357841; 
+ Sun, 12 Apr 2020 15:42:37 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id f63sm12083825wma.47.2020.04.12.15.42.26
+ by smtp.gmail.com with ESMTPSA id f63sm12083825wma.47.2020.04.12.15.42.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:42:33 -0700 (PDT)
+ Sun, 12 Apr 2020 15:42:37 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -79,10 +79,10 @@ Cc: qemu-block@nongnu.org, Richard Henderson <rth@twiddle.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 12/23] hw/block/onenand: Add missing
- error-propagation code
-Date: Mon, 13 Apr 2020 00:41:33 +0200
-Message-Id: <20200412224144.12205-13-f4bug@amsat.org>
+Subject: [PATCH-for-5.1 v3 13/23] scripts/coccinelle: Add script to catch
+ missing error_propagate() calls
+Date: Mon, 13 Apr 2020 00:41:34 +0200
+Message-Id: <20200412224144.12205-14-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412224144.12205-1-f4bug@amsat.org>
 References: <20200412224144.12205-1-f4bug@amsat.org>
@@ -92,7 +92,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::444
+X-Received-From: 2a00:1450:4864:20::443
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,37 +104,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:42:51 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:42:54 -0000
 
-Patch created mechanically by running:
+In some places in we put an error into a local Error*, but forget
+to check for failure and pass it back to the caller.
+Add a Coccinelle patch to catch and automatically add the missing
+code.
 
-  $ spatch \
-    --macro-file scripts/cocci-macro-file.h --include-headers \
-    --sp-file scripts/coccinelle/use-error_propagate-in-realize.cocci \
-    --keep-comments --smpl-spacing --in-place --dir hw
-
+Inspired-by: Peter Maydell <peter.maydell@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/block/onenand.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+v3: Fixed typo 'provides', let prototype return 'void' (eblake)
+---
+ .../add-missing-error_propagate.cocci         | 30 +++++++++++++++++++
+ MAINTAINERS                                   |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 scripts/coccinelle/add-missing-error_propagate.cocci
 
-diff --git a/hw/block/onenand.c b/hw/block/onenand.c
-index 898ac563a3..1f68dba28b 100644
---- a/hw/block/onenand.c
-+++ b/hw/block/onenand.c
-@@ -810,7 +810,11 @@ static void onenand_realize(DeviceState *dev, Error **errp)
-     s->otp = memset(g_malloc((64 + 2) << PAGE_SHIFT),
-                     0xff, (64 + 2) << PAGE_SHIFT);
-     memory_region_init_ram_nomigrate(&s->ram, OBJECT(s), "onenand.ram",
--                           0xc000 << s->shift, &error_fatal);
-+                           0xc000 << s->shift, &local_err);
-+    if (local_err) {
-+        error_propagate(errp, local_err);
-+        return;
-+    }
-     vmstate_register_ram_global(&s->ram);
-     ram = memory_region_get_ram_ptr(&s->ram);
-     s->boot[0] = ram + (0x0000 << s->shift);
+diff --git a/scripts/coccinelle/add-missing-error_propagate.cocci b/scripts/coccinelle/add-missing-error_propagate.cocci
+new file mode 100644
+index 0000000000..4b82e40418
+--- /dev/null
++++ b/scripts/coccinelle/add-missing-error_propagate.cocci
+@@ -0,0 +1,30 @@
++// Add missing error-propagation code where caller provides a Error* argument
++//
++// Copyright: (C) 2020 Philippe Mathieu-Daudé
++// This work is licensed under the terms of the GNU GPLv2 or later.
++//
++// spatch \
++//  --macro-file scripts/cocci-macro-file.h --include-headers \
++//  --sp-file scripts/coccinelle/add-missing-error_propagate.cocci \
++//  --keep-comments --in-place
++//
++// Inspired by https://www.mail-archive.com/qemu-devel@nongnu.org/msg691638.html
++
++
++@ add_missing_error_propagate @
++typedef Error;
++Error *local_err;
++identifier func, errp, errfunc1, errfunc2;
++@@
++void func(..., Error **errp)
++{
++    <...
++    errfunc1(..., &local_err);
+++   if (local_err) {
+++       error_propagate(errp, local_err);
+++       return;
+++   }
++    ... when != local_err
++    errfunc2(..., &local_err);
++    ...>
++}
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 54e05ecbdf..f996e72780 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -2054,6 +2054,7 @@ F: include/qemu/error-report.h
+ F: qapi/error.json
+ F: util/error.c
+ F: util/qemu-error.c
++F: scripts/coccinelle/add-missing-error_propagate.cocci
+ F: scripts/coccinelle/err-bad-newline.cocci
+ F: scripts/coccinelle/error-use-after-free.cocci
+ F: scripts/coccinelle/error_propagate_null.cocci
 -- 
 2.21.1
 
