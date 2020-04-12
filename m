@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlJ1-0001JL-QO
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:42:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49630)
+	id 1jNlJ5-0001U7-I5
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:42:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49703)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlIy-00018a-9z
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:21 -0400
+ id 1jNlJ2-0001KB-0e
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:26 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlIx-000609-6y
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:20 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:36958)
+ id 1jNlJ0-00062I-VR
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:23 -0400
+Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:40840)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlIo-0005rq-TR; Sun, 12 Apr 2020 18:42:11 -0400
-Received: by mail-wm1-x344.google.com with SMTP id z6so8411628wml.2;
- Sun, 12 Apr 2020 15:42:10 -0700 (PDT)
+ id 1jNlIu-0005uF-8M; Sun, 12 Apr 2020 18:42:16 -0400
+Received: by mail-wm1-x344.google.com with SMTP id a81so8367843wmf.5;
+ Sun, 12 Apr 2020 15:42:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=YIEKjYaSehnFfLSFKx18jrIeGBK5qNFrnpqQGnepkJE=;
- b=HkWHmv9gZdAw6lY5Jeo+ZU3aN9GLylM+Ya9qK82xklS8Tekd0/puSmBaHntEalEqRh
- r/tq6JZBZVDWbw3wOcrZrYiS9T/YZiUw4KY+PBSUXHDuW4SaosMbDi4zVYJi2ZgypIR4
- TvQzH/tDSunadtLYjDoXD1iKM2tnkf4RQNWWa3yzE6IlX3pHmCI2lh0pPix5seBiDajS
- Y2lhGPddSPRMzl7f1NCSzaQeygFAqn5vGbLWe9wGdP3ICo7ExwPHsl7PmfydNmAngHf3
- k617tTbMhtc7ZGbPTuT/OJwDfbcqrb443fJT6y3VKWeoPG08VkRDP4DfO0TXsOXLN+GX
- bH0w==
+ bh=7dngg6q086SdAwClXoi/Rsl8HHPolX2hkbDutRMMkyU=;
+ b=pNAolLhFwovIx8wy2XfNJdAfOikbLSS9WvAaniqx00H72xuF3mUuRBb/rFqJSU88RV
+ oToqDKR4CivuaQRLHjVg2/dcMuFc7gdDw5C2Y2v6qPHT2itSnC4lEq/7/Bk/mQnK8US3
+ epjnXNaWy073XrwjDBYSI9hmVHYGGfOL89OqrHh1FwpZDZto4XaobvSdOGN6SwUsl2tA
+ qzkQ46eE24Bpe7LN9MNebWmQCYADh+ENmq+D79hdH1E9mn00/VtbFGCg9Hqovb8s/cR1
+ WRxqD9NcOMGKLx5zmtxSb1Ryid41/WdGmzMJOVZyYp48aiYacVZDVbzOtWiJSDmEdWVI
+ TDww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=YIEKjYaSehnFfLSFKx18jrIeGBK5qNFrnpqQGnepkJE=;
- b=Jwh3MrCxYiNs+GIlX+YarcEFArAZm3pPlI78igal4M6beRuJU+iIDfi2Zbnx43kAMB
- /JDX+gF/e3b9T0+Oc0xr7edHKO5gx18KqpK6Ymfr5PyMhhP5H50Jz9dYmYTh2fBMfNyI
- jmvR03r6IhVtfLo6H2k5773vxWaFwClZYAenqUtyxKCFfIyVf1r/AcBbBqls9wpciBbL
- yf5csNdoA9A7UnIeMZFSkYpfOW+TEhe289KQmjzJvKw9T4FAE1nPV02M3bk6OWSWc4mm
- VFzGTrvmTrS2CYCGTaa7H+FWoF4HWXBB4i/VW+tW5ebvot/s+4qirII3aHFfw7oP6iea
- 139A==
-X-Gm-Message-State: AGi0PuZu6qClR43MvLpWfEaOnGs3jfqEJiaTndJkbuHEQDxsqPGsTINI
- 0rjossj0iW0pib54/r4cj09OHYrcsf+FIg==
-X-Google-Smtp-Source: APiQypKrQPv+6xzEvjFq4PzgYagIvOcnW/FwDVO+CfV6DACkMAlfP8FqxaQe3tP5DL8tOMtxcAuwKA==
-X-Received: by 2002:a1c:5448:: with SMTP id p8mr15519826wmi.173.1586731329787; 
- Sun, 12 Apr 2020 15:42:09 -0700 (PDT)
+ bh=7dngg6q086SdAwClXoi/Rsl8HHPolX2hkbDutRMMkyU=;
+ b=GHf+gH2KIlHTn4tlqRpWcuGvGTkx7x3vsWW3XLb/iGcimLwWGU3f85olVKvHOQo8hw
+ TfkYL59VfFBmRQO3J7akEG8DftFh0/hYSijc39o43AnjU35ifGOFzQW1BqGIexYweaUE
+ wmc5EMt8876mjxDQLg6Y+4r9Emj7nSy1lR3b4DkjnL0Q7v4ltKxrPgODC1FNzU5MwBI7
+ N+aNMzTWiQKtG1sLtEBDiBw4R33muw9bGsSz7Q5ziCKJ61GQkOuJQVQNCtNVP2EcMIvk
+ f8hRnuLCWC67X89Ivs5YQjOHt6zT6OxXvrRGbN1xsU5pev+/6wJ22cHyyo/SL0bHgf0g
+ tZRg==
+X-Gm-Message-State: AGi0PuYRqNmPHU2jkrhUeVNMBnaeG6gZoFy5FWyIcMaTwfVO6Lu8a4BR
+ UKv5PX5x/Ldz6jlWq9wvhfeFyj8HU7ZEGg==
+X-Google-Smtp-Source: APiQypJ8Wo6qoxPfL8RsirvEdWnfO+z95ibGHx+M3jGfAcPB/5YoGtBhNnTcIStf6KAXWgp17zdEJw==
+X-Received: by 2002:a1c:a7d7:: with SMTP id q206mr15060615wme.45.1586731333155; 
+ Sun, 12 Apr 2020 15:42:13 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id f63sm12083825wma.47.2020.04.12.15.42.06
+ by smtp.gmail.com with ESMTPSA id f63sm12083825wma.47.2020.04.12.15.42.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:42:09 -0700 (PDT)
+ Sun, 12 Apr 2020 15:42:12 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -79,10 +79,10 @@ Cc: qemu-block@nongnu.org, Richard Henderson <rth@twiddle.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 06/23] hw/arm/msf2-soc: Add missing
+Subject: [PATCH-for-5.1 v3 07/23] hw/riscv/sifive: Add missing
  error-propagation code
-Date: Mon, 13 Apr 2020 00:41:27 +0200
-Message-Id: <20200412224144.12205-7-f4bug@amsat.org>
+Date: Mon, 13 Apr 2020 00:41:28 +0200
+Message-Id: <20200412224144.12205-8-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412224144.12205-1-f4bug@amsat.org>
 References: <20200412224144.12205-1-f4bug@amsat.org>
@@ -104,7 +104,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:42:21 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:42:26 -0000
 
 Patch created mechanically by running:
 
@@ -115,66 +115,71 @@ Patch created mechanically by running:
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/arm/msf2-soc.c | 24 ++++++++++++++++++++----
- 1 file changed, 20 insertions(+), 4 deletions(-)
+ hw/riscv/sifive_e.c |  6 +++++-
+ hw/riscv/sifive_u.c | 24 ++++++++++++++++++++----
+ 2 files changed, 25 insertions(+), 5 deletions(-)
 
-diff --git a/hw/arm/msf2-soc.c b/hw/arm/msf2-soc.c
-index e448b0ab74..7619e71cfa 100644
---- a/hw/arm/msf2-soc.c
-+++ b/hw/arm/msf2-soc.c
-@@ -93,7 +93,11 @@ static void m2sxxx_soc_realize(DeviceState *dev_soc, Error **errp)
-     MemoryRegion *system_memory = get_system_memory();
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 0be8b52147..6d4e141ff7 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -156,7 +156,11 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+     MemoryRegion *sys_mem = get_system_memory();
  
-     memory_region_init_rom(&s->nvm, OBJECT(dev_soc), "MSF2.eNVM", s->envm_size,
--                           &error_fatal);
-+                           &err);
+     object_property_set_bool(OBJECT(&s->cpus), true, "realized",
+-                            &error_abort);
++                            &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+ 
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index e13ab34de4..b07526aba1 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -508,9 +508,17 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     NICInfo *nd = &nd_table[0];
+ 
+     object_property_set_bool(OBJECT(&s->e_cpus), true, "realized",
+-                             &error_abort);
++                             &err);
++    if (err) {
++        error_propagate(errp, err);
++        return;
++    }
+     object_property_set_bool(OBJECT(&s->u_cpus), true, "realized",
+-                             &error_abort);
++                             &err);
 +    if (err) {
 +        error_propagate(errp, err);
 +        return;
 +    }
      /*
-      * On power-on, the eNVM region 0x60000000 is automatically
-      * remapped to the Cortex-M3 processor executable region
-@@ -107,7 +111,11 @@ static void m2sxxx_soc_realize(DeviceState *dev_soc, Error **errp)
-     memory_region_add_subregion(system_memory, 0, &s->nvm_alias);
- 
-     memory_region_init_ram(&s->sram, NULL, "MSF2.eSRAM", s->esram_size,
--                           &error_fatal);
-+                           &err);
+      * The cluster must be realized after the RISC-V hart array container,
+      * as the container's CPU object is only created on realize, and the
+@@ -518,9 +526,17 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+      * cluster is realized.
+      */
+     object_property_set_bool(OBJECT(&s->e_cluster), true, "realized",
+-                             &error_abort);
++                             &err);
 +    if (err) {
 +        error_propagate(errp, err);
 +        return;
 +    }
-     memory_region_add_subregion(system_memory, SRAM_BASE_ADDRESS, &s->sram);
- 
-     armv7m = DEVICE(&s->armv7m);
-@@ -115,7 +123,11 @@ static void m2sxxx_soc_realize(DeviceState *dev_soc, Error **errp)
-     qdev_prop_set_string(armv7m, "cpu-type", s->cpu_type);
-     qdev_prop_set_bit(armv7m, "enable-bitband", true);
-     object_property_set_link(OBJECT(&s->armv7m), OBJECT(get_system_memory()),
--                                     "memory", &error_abort);
-+                                     "memory", &err);
+     object_property_set_bool(OBJECT(&s->u_cluster), true, "realized",
+-                             &error_abort);
++                             &err);
 +    if (err) {
 +        error_propagate(errp, err);
 +        return;
 +    }
-     object_property_set_bool(OBJECT(&s->armv7m), true, "realized", &err);
-     if (err != NULL) {
-         error_propagate(errp, err);
-@@ -184,8 +196,12 @@ static void m2sxxx_soc_realize(DeviceState *dev_soc, Error **errp)
-         bus_name = g_strdup_printf("spi%d", i);
-         object_property_add_alias(OBJECT(s), bus_name,
-                                   OBJECT(&s->spi[i]), "spi",
--                                  &error_abort);
-+                                  &err);
-         g_free(bus_name);
-+        if (err) {
-+            error_propagate(errp, err);
-+            return;
-+        }
-     }
  
-     /* Below devices are not modelled yet. */
+     /* create PLIC hart topology configuration string */
+     plic_hart_config_len = (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) *
 -- 
 2.21.1
 
