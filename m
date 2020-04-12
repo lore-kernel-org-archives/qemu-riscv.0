@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlEg-0008Ty-HT
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48562)
+	id 1jNlEi-00006m-Dm
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48588)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlEe-0008O8-5H
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:53 -0400
+ id 1jNlEf-0008T7-Q5
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:54 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlEc-0003Gv-TZ
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:52 -0400
-Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:39450)
+ id 1jNlEe-0003Hz-Qa
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:53 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:45197)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlEV-0003Ag-3y; Sun, 12 Apr 2020 18:37:43 -0400
-Received: by mail-wr1-x444.google.com with SMTP id p10so8518564wrt.6;
- Sun, 12 Apr 2020 15:37:43 -0700 (PDT)
+ id 1jNlEY-0003Ca-A4; Sun, 12 Apr 2020 18:37:46 -0400
+Received: by mail-wr1-x444.google.com with SMTP id v5so8500176wrp.12;
+ Sun, 12 Apr 2020 15:37:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=p12zY90y1Bd/6q5GYHr9+QcqvAZOBpOvraHjQFK6FGo=;
- b=dQbz9LWP4CUHYwL9IsAzCeLPJ2Jnbwt3fEzV4t7GEE9SZjZ5dQ0dloPLYFDP81kDqO
- TPhuf/RRZL/VpaFz86QS5UAVBZVaThqxYy3jbnIeJ915sjz79HVXmwMlSIRLUMafZd82
- clRYp2SAQj2cEMSaHIwS/RVdMqHAkWYVRGA2L5TIHWsTVBzmHDJhgl6hFJowOW0sZxo/
- um7AcAEQ67ZUasBnJRxmnua9ZoEJ2H0MxfuA8G8yJgxSSkdekNA8A9Lo45bT7Cb0BNU0
- oOejyPdVtCRDaPolK3dqj1UzwqY7rTvU/uJfc5RlK5Pwby/Q/6QOhtVNHOtZKatObS9e
- 8gmw==
+ bh=n53pt0qup4Bja42ysNmHw44EY6rNqSSO2uSNuR4e+2E=;
+ b=FY3kR1dpch1nGcofNA83QihfuToa/EFDePyLaqSTHp32sQ28Xuu22WT6DAH+BOu5bo
+ I4Ha2cII2EUA0T3FsebpB72+BNdO/hivTe2uPjWyhxdWjGbH2fgRmauR9QssXpCFUWTZ
+ VeZ7ea7Ps4N8Zdh1D1F0z4aa52JzExnDoztz9TovGOlAhkQxEDyf9+gxsYQ9WhxxD6GQ
+ sQmUdsrarFsY7XFcHosyw6DuCArLYQiogq05A+kYu3IgSYejwWTeNSM3JhhW2wM872Ft
+ Oi/4dyEOtIzEBrX4b4hqmR5WPqzB/H0SAtWva3rl+VT1o890Wr1EU6bCkPchTVglSFrX
+ aScg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=p12zY90y1Bd/6q5GYHr9+QcqvAZOBpOvraHjQFK6FGo=;
- b=QoVdnERrIGoeMM2uG8hp7ZZAKfCDAFQjybkC/oaQMjNmtSsHmY6KJuup8TmwFqBwQP
- J/kFEcIIUazCN4DnVZfpNioHPBI0tmEmh38tnUlC4yAKPV/Qi2Jp+yl8v1CqQl/J8mWY
- mWk2euxZ9I+/w/wFsFreyEx4867uHdICE6nAeYYtwPeDgaB6GPrqvFkMaSNEEfgQdCYD
- 9OsquUEJPGeraf1csV057L1ex/3tIwscwMd0fs9P257Clf7B6GP994NXGUB+Q/ddojSF
- /VBl9tWZYVY9c2q6y39e1BXh2tXc9WSZt69K7Y9lkgi84x1ltDyFM3r8xaHLBfwLzz5L
- r66Q==
-X-Gm-Message-State: AGi0PuakwNbOhHMh8y3ro7oo45CIclZMF3tBQq7YiP+2IjhySHlINYuE
- 4t0aYz+VY8vMKdO9sljoHtzoLVtTT9kxog==
-X-Google-Smtp-Source: APiQypIdtklaWgF7eJbTP4PpyDPoa6GPetn8GiVPl4PwWG1TGQaRAKzqYHcgcV/+VC20LcQMgEGTsg==
-X-Received: by 2002:a5d:45cf:: with SMTP id b15mr15479621wrs.274.1586731061947; 
- Sun, 12 Apr 2020 15:37:41 -0700 (PDT)
+ bh=n53pt0qup4Bja42ysNmHw44EY6rNqSSO2uSNuR4e+2E=;
+ b=HKa9smBdE6ofo2fALcKiUOiX/M8k2S5cY8W1JT/0vt3TaeZ+Fmnt6PTVRrcCnhULpw
+ pf00wfLq4onQPjoOGwI/3cZwJ6d+9T7cmaVZEGjNHi4M1u/6WrWKnGuzaxmkluXuTzi/
+ JINm+ZjLMQdKO4P9xFv799moxh9anbs8qqXr6UkyBgzJ3OQyMCO5Y0rt+4cHjOFYEm2I
+ jA2wXcFr0N+oa6+kl+q95qzCfD3euhS46sQC1qKlLo/FWWgSepUyfK5uXfhF3Lfj4xWT
+ fJ33m8UbwmZmd18MUv/FXhR2V9VG+QxOOworA918HEnvkIy3UV3bhG3Kac1vrmjHaqrH
+ Rb0g==
+X-Gm-Message-State: AGi0PubYttcUcibSnGDQM44QZhjCkAPlTkUm4yrbrSqHUM8MjV7XWmh8
+ isbpLB80N/jQ0g08eudessdOEQ7Z/P5BgA==
+X-Google-Smtp-Source: APiQypK0QAZuqTAbvbcPnmAsYwCoAbv+vcG/8+s83QanTDeyVYBqZfjXhnTL+gubnA+ExKPvjDxz+A==
+X-Received: by 2002:adf:cd12:: with SMTP id w18mr15624824wrm.311.1586731065164; 
+ Sun, 12 Apr 2020 15:37:45 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.37.38
+ by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.37.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:37:41 -0700 (PDT)
+ Sun, 12 Apr 2020 15:37:44 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -76,10 +76,10 @@ Cc: Joel Stanley <joel@jms.id.au>,
  Andrew Jeffery <andrew@aj.id.au>, "Michael S. Tsirkin" <mst@redhat.com>,
  Richard Henderson <rth@twiddle.net>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 23/24] hw/riscv/sifive_u: Move some code from
- realize() to init()
-Date: Mon, 13 Apr 2020 00:36:18 +0200
-Message-Id: <20200412223619.11284-24-f4bug@amsat.org>
+Subject: [PATCH-for-5.1 v3 24/24] hw/riscv/sifive_u: Rename
+ MachineClass::init()
+Date: Mon, 13 Apr 2020 00:36:19 +0200
+Message-Id: <20200412223619.11284-25-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412223619.11284-1-f4bug@amsat.org>
 References: <20200412223619.11284-1-f4bug@amsat.org>
@@ -101,92 +101,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:37:53 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:37:54 -0000
 
-Coccinelle reported:
-
-  $ spatch ... --timeout 60 --sp-file \
-    scripts/coccinelle/simplify-init-realize-error_propagate.cocci
-  HANDLING: ./hw/riscv/sifive_u.c
-  >>> possible moves from riscv_sifive_u_soc_init() to riscv_sifive_u_soc_realize() in ./hw/riscv/sifive_u.c:473
-
-Move the calls using &error_abort which don't depend on input
-updated before realize() to init().
+As there already is the riscv_sifive_u_soc_init() method,
+rename riscv_sifive_u_init() as riscv_sifive_u_machine_init().
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
-v3: Typo 'depend of' -> 'depend on' (eblake)
----
- hw/riscv/sifive_u.c | 42 ++++++++++++++++++++++--------------------
- 1 file changed, 22 insertions(+), 20 deletions(-)
+ hw/riscv/sifive_u.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 96177c1977..7bf1f30a35 100644
+index 7bf1f30a35..e13ab34de4 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -406,6 +406,8 @@ static void riscv_sifive_u_init(MachineState *machine)
- static void riscv_sifive_u_soc_init(Object *obj)
- {
-     MachineState *ms = MACHINE(qdev_get_machine());
-+    const struct MemmapEntry *memmap = sifive_u_memmap;
-+    MemoryRegion *system_memory = get_system_memory();
-     SiFiveUSoCState *s = RISCV_U_SOC(obj);
- 
-     object_initialize_child(obj, "e-cluster", &s->e_cluster,
-@@ -443,6 +445,26 @@ static void riscv_sifive_u_soc_init(Object *obj)
-                           TYPE_CADENCE_GEM);
-     object_property_set_int(OBJECT(&s->gem), GEM_REVISION, "revision",
-                             &error_abort);
-+
-+    /* boot rom */
-+    memory_region_init_rom(&s->mask_rom, obj, "riscv.sifive.u.mrom",
-+                           memmap[SIFIVE_U_MROM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory, memmap[SIFIVE_U_MROM].base,
-+                                &s->mask_rom);
-+
-+    /*
-+     * Add L2-LIM at reset size.
-+     * This should be reduced in size as the L2 Cache Controller WayEnable
-+     * register is incremented. Unfortunately I don't see a nice (or any) way
-+     * to handle reducing or blocking out the L2 LIM while still allowing it
-+     * be re returned to all enabled after a reset. For the time being, just
-+     * leave it enabled all the time. This won't break anything, but will be
-+     * too generous to misbehaving guests.
-+     */
-+    memory_region_init_ram(&s->l2lim_mem, NULL, "riscv.sifive.u.l2lim",
-+                           memmap[SIFIVE_U_L2LIM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory, memmap[SIFIVE_U_L2LIM].base,
-+                                &s->l2lim_mem);
+@@ -312,7 +312,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     g_free(nodename);
  }
  
- static bool sifive_u_get_start_in_flash(Object *obj, Error **errp)
-@@ -500,26 +522,6 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     object_property_set_bool(OBJECT(&s->u_cluster), true, "realized",
-                              &error_abort);
+-static void riscv_sifive_u_init(MachineState *machine)
++static void riscv_sifive_u_machine_init(MachineState *machine)
+ {
+     const struct MemmapEntry *memmap = sifive_u_memmap;
+     SiFiveUState *s = RISCV_U_MACHINE(machine);
+@@ -606,7 +606,7 @@ static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
+     MachineClass *mc = MACHINE_CLASS(oc);
  
--    /* boot rom */
--    memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.u.mrom",
--                           memmap[SIFIVE_U_MROM].size, &error_fatal);
--    memory_region_add_subregion(system_memory, memmap[SIFIVE_U_MROM].base,
--                                &s->mask_rom);
--
--    /*
--     * Add L2-LIM at reset size.
--     * This should be reduced in size as the L2 Cache Controller WayEnable
--     * register is incremented. Unfortunately I don't see a nice (or any) way
--     * to handle reducing or blocking out the L2 LIM while still allowing it
--     * be re returned to all enabled after a reset. For the time being, just
--     * leave it enabled all the time. This won't break anything, but will be
--     * too generous to misbehaving guests.
--     */
--    memory_region_init_ram(&s->l2lim_mem, NULL, "riscv.sifive.u.l2lim",
--                           memmap[SIFIVE_U_L2LIM].size, &error_fatal);
--    memory_region_add_subregion(system_memory, memmap[SIFIVE_U_L2LIM].base,
--                                &s->l2lim_mem);
--
-     /* create PLIC hart topology configuration string */
-     plic_hart_config_len = (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) *
-                            ms->smp.cpus;
+     mc->desc = "RISC-V Board compatible with SiFive U SDK";
+-    mc->init = riscv_sifive_u_init;
++    mc->init = riscv_sifive_u_machine_init;
+     mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
+     mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+     mc->default_cpus = mc->min_cpus;
 -- 
 2.21.1
 
