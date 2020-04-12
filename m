@@ -1,53 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlEO-0007fK-QR
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48249)
+	id 1jNlET-0007sC-QC
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48333)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlEM-0007Y8-D4
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:35 -0400
+ id 1jNlEQ-0007l1-KN
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:39 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlEL-00035E-Bx
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:34 -0400
-Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:38751)
+ id 1jNlEP-00037l-GF
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:38 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:46748)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlEE-00030C-Kp; Sun, 12 Apr 2020 18:37:26 -0400
-Received: by mail-wm1-x342.google.com with SMTP id g12so530137wmh.3;
- Sun, 12 Apr 2020 15:37:26 -0700 (PDT)
+ id 1jNlEI-00032n-EP; Sun, 12 Apr 2020 18:37:30 -0400
+Received: by mail-wr1-x444.google.com with SMTP id f13so8492739wrm.13;
+ Sun, 12 Apr 2020 15:37:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=6EG1vhq7sjTB9ZSXWfgY7jLuzjsnK7wuhdMzV+BgTOM=;
- b=MsQvQjdOJctQaymMWzuHiIEE+lE19kYquiqYVPI8ArMQyMfUER4XHw9x6BuSyOtNKf
- lA/5a8DhdoV5UNUtzgCep+8KE8mnzFH9fThKoND+pqiF7rRm9vc0Emwo62vxbEmp4qkv
- Jk6v8A6jQHxVB0IseXpPtlnCeqj8194nNLq4BMLAVJ7XIR8RAOh0ZNgmi/NYXfQ5RVu5
- WQbnkElC2a4G+SJ2xRVbwKuokBS06ka+XYcwMunG53+1xCIM8EluyfK11rvsgbD7rmgj
- OJtcJxK6F9aKsAAA5PCU9ov1lOHTmUfxBulafyYFH06Xgvq60924wzckwO22Rt9vgUmQ
- ASdw==
+ bh=BasB+g8nzHU9NqlorXFhvA0RjIUcriXJQANOu1FTC+I=;
+ b=JvMtQoy5jGVm+8GTmlMuiC1ueHzc7rwT5p0KjyN+hsDtCP4Cn/JcNRjyihyWdj1Xss
+ dtTI7Fv3AEEkUCxM+MBsr8py6lEmOfl88MiFeO/9zQb/EyYfaYfoCy6GWOS1uPW4/k7Y
+ ytJwyS6D3FPLDQoAuwh+9v1qQjJEv+RlWs6ZB3SigBk8RzVjtqOYmZzrGu/5PW1uyLWB
+ 8oEd5a2rHSAe48/FO0M0iiZchZXc20+ui+IDOBXDnkBiARaT4gt5hXqcgdCwCBac3SVL
+ JZ2STQPPOH3UJiG8R3nbAuw90HN5yYwEBUy9ARd1rv71Sg3xu0pVpJzxlcPyhOGL9pmp
+ 91Vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=6EG1vhq7sjTB9ZSXWfgY7jLuzjsnK7wuhdMzV+BgTOM=;
- b=TU1a1j5JI2JI1hO5NRdZ/jwAX9XSxcOGlwea1xc7vtr9sdnsfVDrISh6KqGufB6Y67
- BtH8H/1d+Tv2P85XwIWCU5ewlk5qGdV5w0ZKPaRJ5gPJ9qAKrEJGJ9XJyazFsLjUtPEE
- haZOqcwBeWLe3gIft9jMcrYDPr+ygqAMoas1K3clS6shiOMN7TX+T9OSyk6O2GAvFsfe
- pYqu2Bg2muRM3eBdGRqGNag647/wD83QWp3uTeTmcgFUN1PKPRh83zLCEaAW764fxvR6
- JShFOvEAPnn0QLBchJiYPkjRHUURXuACEa/BPYpDxt4rgQ2hT8YuWB3KbM8luK3QPfvf
- xFYw==
-X-Gm-Message-State: AGi0PuYBjH/mBsCdf2uc/Xp9Wfaz7edKJD3axFJ560p12z5NmB6TfGTV
- dsH7yAgOOWejcnTmtEE04lQnLsxh7W+r8Q==
-X-Google-Smtp-Source: APiQypJlLltEQFNE2vqF8ExiHlmy6ahTplWoe0ijPErKx9YJP0u0OJAAKYllEE0ddjztCeFBlLUyaA==
-X-Received: by 2002:a1c:43c6:: with SMTP id
- q189mr15130503wma.115.1586731045453; 
- Sun, 12 Apr 2020 15:37:25 -0700 (PDT)
+ bh=BasB+g8nzHU9NqlorXFhvA0RjIUcriXJQANOu1FTC+I=;
+ b=YyzVNNnS+e9uLAiKw9pXEB9e+K0RjnW8ZbKsiLNJ9TiBvUrC+IwGx9vheAyngQTJgX
+ MOZpM5oWD5m+rbEy0xLPK5i1dKdfzsLh7m03lxe7oo49uFHNqzBcnS+YvhdFX/VgyBB3
+ 5BRf1g1Q1vhiLl0B2sAF5pFruIdEmUbtLts7L4BYy0GonX0P4aLq+s2Ki1aMxdGeyWsL
+ h6ukY8phJDqgKjttlMcQIM6i9JKSDzii2Sb1bl+5PX6OwVow5XJIW7c981M3yL1vm2mz
+ gD/OnC1hP8iFlKGBtXKogprputafQzcULwsvydFaQG1HcCDkkJn5KEwLRXEMt+suOIpX
+ ucCA==
+X-Gm-Message-State: AGi0Puaa7CY8uWUPXwxBqTxkGQ6CloHONXt2urQYs2aD539viAg2UPtf
+ /0Mg94zWmzCr9AiZy90nfOp4yg/RhcuDmg==
+X-Google-Smtp-Source: APiQypLA5twQlR1QLyc7VGDBinqgnLuFOZKnSZQ7eellH4Zuc9qupRB7hrNAyIMdmkRXKazdyeiW8A==
+X-Received: by 2002:a5d:4b49:: with SMTP id w9mr15981211wrs.359.1586731049029; 
+ Sun, 12 Apr 2020 15:37:29 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.37.22
+ by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.37.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:37:24 -0700 (PDT)
+ Sun, 12 Apr 2020 15:37:28 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -77,10 +76,10 @@ Cc: Joel Stanley <joel@jms.id.au>,
  Andrew Jeffery <andrew@aj.id.au>, "Michael S. Tsirkin" <mst@redhat.com>,
  Richard Henderson <rth@twiddle.net>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 18/24] hw/pci-host/pnv_phb3: Move some code from
+Subject: [PATCH-for-5.1 v3 19/24] hw/riscv/sifive_e: Move some code from
  realize() to init()
-Date: Mon, 13 Apr 2020 00:36:13 +0200
-Message-Id: <20200412223619.11284-19-f4bug@amsat.org>
+Date: Mon, 13 Apr 2020 00:36:14 +0200
+Message-Id: <20200412223619.11284-20-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412223619.11284-1-f4bug@amsat.org>
 References: <20200412223619.11284-1-f4bug@amsat.org>
@@ -90,7 +89,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::342
+X-Received-From: 2a00:1450:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -102,65 +101,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:37:35 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:37:40 -0000
 
 Coccinelle reported:
 
   $ spatch ... --timeout 60 --sp-file \
     scripts/coccinelle/simplify-init-realize-error_propagate.cocci
-  HANDLING: ./hw/pci-host/pnv_phb3.c
-  >>> possible moves from pnv_phb3_instance_init() to pnv_phb3_realize() in ./hw/pci-host/pnv_phb3.c:992
+  HANDLING: ./hw/riscv/sifive_e.c
+  >>> possible moves from riscv_sifive_e_soc_init() to riscv_sifive_e_soc_realize() in ./hw/riscv/sifive_e.c:135
 
-Move the calls using &error_abort which don't depend on input
+Move the calls using &error_fatal which don't depend on input
 updated before realize() to init().
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
 v3: Typo 'depend of' -> 'depend on' (eblake)
 ---
- hw/pci-host/pnv_phb3.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ hw/riscv/sifive_e.c | 26 ++++++++++++++------------
+ 1 file changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/hw/pci-host/pnv_phb3.c b/hw/pci-host/pnv_phb3.c
-index 74618fadf0..57d717ed23 100644
---- a/hw/pci-host/pnv_phb3.c
-+++ b/hw/pci-host/pnv_phb3.c
-@@ -970,6 +970,8 @@ static void pnv_phb3_instance_init(Object *obj)
-     /* LSI sources */
-     object_initialize_child(obj, "lsi", &phb->lsis, sizeof(phb->lsis),
-                              TYPE_ICS, &error_abort, NULL);
-+    object_property_set_int(OBJECT(&phb->lsis), PNV_PHB3_NUM_LSI, "nr-irqs",
-+                            &error_abort);
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 646553a7c3..0be8b52147 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -118,7 +118,9 @@ static void riscv_sifive_e_init(MachineState *machine)
+ static void riscv_sifive_e_soc_init(Object *obj)
+ {
+     MachineState *ms = MACHINE(qdev_get_machine());
++    const struct MemmapEntry *memmap = sifive_e_memmap;
+     SiFiveESoCState *s = RISCV_E_SOC(obj);
++    MemoryRegion *sys_mem = get_system_memory();
  
-     /* Default init ... will be fixed by HW inits */
-     phb->lsis.offset = 0;
-@@ -977,6 +979,8 @@ static void pnv_phb3_instance_init(Object *obj)
-     /* MSI sources */
-     object_initialize_child(obj, "msi", &phb->msis, sizeof(phb->msis),
-                             TYPE_PHB3_MSI, &error_abort, NULL);
-+    object_property_set_int(OBJECT(&phb->msis), PHB3_MAX_MSI, "nr-irqs",
-+                            &error_abort);
+     object_initialize_child(obj, "cpus", &s->cpus,
+                             sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
+@@ -130,6 +132,18 @@ static void riscv_sifive_e_soc_init(Object *obj)
+     sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
+                           &s->gpio, sizeof(s->gpio),
+                           TYPE_SIFIVE_GPIO);
++
++    /* Mask ROM */
++    memory_region_init_rom(&s->mask_rom, obj, "riscv.sifive.e.mrom",
++                           memmap[SIFIVE_E_MROM].size, &error_fatal);
++    memory_region_add_subregion(sys_mem,
++        memmap[SIFIVE_E_MROM].base, &s->mask_rom);
++
++    /* Flash memory */
++    memory_region_init_rom(&s->xip_mem, obj, "riscv.sifive.e.xip",
++                           memmap[SIFIVE_E_XIP].size, &error_fatal);
++    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
++        &s->xip_mem);
+ }
  
-     /* Power Bus Common Queue */
-     object_initialize_child(obj, "pbcq", &phb->pbcq, sizeof(phb->pbcq),
-@@ -1005,8 +1009,6 @@ static void pnv_phb3_realize(DeviceState *dev, Error **errp)
-     /* LSI sources */
-     object_property_set_link(OBJECT(&phb->lsis), OBJECT(pnv), "xics",
-                                    &error_abort);
--    object_property_set_int(OBJECT(&phb->lsis), PNV_PHB3_NUM_LSI, "nr-irqs",
--                            &error_abort);
-     object_property_set_bool(OBJECT(&phb->lsis), true, "realized", &local_err);
-     if (local_err) {
-         error_propagate(errp, local_err);
-@@ -1024,8 +1026,6 @@ static void pnv_phb3_realize(DeviceState *dev, Error **errp)
-                                    &error_abort);
-     object_property_set_link(OBJECT(&phb->msis), OBJECT(pnv), "xics",
-                                    &error_abort);
--    object_property_set_int(OBJECT(&phb->msis), PHB3_MAX_MSI, "nr-irqs",
--                            &error_abort);
-     object_property_set_bool(OBJECT(&phb->msis), true, "realized", &local_err);
-     if (local_err) {
-         error_propagate(errp, local_err);
+ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+@@ -144,12 +158,6 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+     object_property_set_bool(OBJECT(&s->cpus), true, "realized",
+                             &error_abort);
+ 
+-    /* Mask ROM */
+-    memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom",
+-                           memmap[SIFIVE_E_MROM].size, &error_fatal);
+-    memory_region_add_subregion(sys_mem,
+-        memmap[SIFIVE_E_MROM].base, &s->mask_rom);
+-
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
+         (char *)SIFIVE_E_PLIC_HART_CONFIG,
+@@ -206,12 +214,6 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+         memmap[SIFIVE_E_QSPI2].base, memmap[SIFIVE_E_QSPI2].size);
+     create_unimplemented_device("riscv.sifive.e.pwm2",
+         memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
+-
+-    /* Flash memory */
+-    memory_region_init_rom(&s->xip_mem, OBJECT(dev), "riscv.sifive.e.xip",
+-                           memmap[SIFIVE_E_XIP].size, &error_fatal);
+-    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
+-        &s->xip_mem);
+ }
+ 
+ static void riscv_sifive_e_machine_init(MachineClass *mc)
 -- 
 2.21.1
 
