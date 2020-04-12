@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlDx-0006XH-LM
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47719)
+	id 1jNlE3-0006kG-CA
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47799)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlDv-0006Rx-8j
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:08 -0400
+ id 1jNlE0-0006c4-8V
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlDu-0002nP-8j
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:07 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:36717)
+ id 1jNlDz-0002qA-40
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:12 -0400
+Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:39444)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlDn-0002fI-Qo; Sun, 12 Apr 2020 18:36:59 -0400
-Received: by mail-wr1-x443.google.com with SMTP id u13so8049446wrp.3;
- Sun, 12 Apr 2020 15:36:59 -0700 (PDT)
+ id 1jNlDr-0002id-4d; Sun, 12 Apr 2020 18:37:03 -0400
+Received: by mail-wr1-x441.google.com with SMTP id p10so8517155wrt.6;
+ Sun, 12 Apr 2020 15:37:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=s0AvIH4tmhY8dJIWOooS3DYC6YTsxY1MNRofHTiR85M=;
- b=sJ/YqrK5TugYkQl5sc0s15+oijPE5rmDui2mmm426O3nS20g7Iqp2ltIuK0f0PBihj
- zN6rI0IbarDeMJvzhgzN9dAl5a89IN8iFLiBum11DWPxCw34nwRQPRZzxNHaNfKXKlW2
- 3taNV/vYtbmHh/XkeiuNMqVZjraJ3zIsdVqLGCmZTcQyZKjdTiOL9h1wbUaVF+0ZIM/L
- DGJBtNsbKlG1iR82A/FsRGmUt7tk4ZuyMSaghR9c+hSJ9RlLPWMs8rR5eKpmHlnr17Qc
- Ivmo5Ie0zkDMFGMzDIuZpSKSnvsu/cAiaozPT7HkKGLTxUzqrHA8VBE9EqiE6ToGqcz2
- mB8Q==
+ bh=rNOvzQC0gAZiW9IjgvdXICw1FeldG6faD6QdyriSpSA=;
+ b=Yms+dVnobgL/uTyskm/CPmGVpuY5K7rRdl/y/Xcw36vwxQ4cXdVkaf3wqlD8Za79ok
+ U/eQ0KdvGCCuYFZ6RYlgmadQw237gtmd5zOSr/E+aphrQk0rOZiAm1wPzlXJDvs9JINY
+ 8VnhhvZP4diyOC0umPSzp9tvtLp/ucbCoD6izhWzKJqtl71n/GtUO9MS/z+54RzS5EuG
+ TpszyNIilI0JzZmpURO6BKGFuZItPz4l9BMi0zWjeYqESlxn0f+uC1hL/8ZpSj+eM+4R
+ oE/CzP/7uRejFlskPIu9dMheg0X2Cma9G7Y8Fnm3Aj7SCBA5yxD6SJn6AeZN8ankWpGb
+ Xe7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=s0AvIH4tmhY8dJIWOooS3DYC6YTsxY1MNRofHTiR85M=;
- b=ikRldUAQPJNeIMPDLYBR9S+CYksDluwOWCm0HWTT9e+OTuxe7vxJAOixuElaU61a+i
- tgAd0Zk3YVWbxV7Q7qkWdgTmQmgQtuk3X1NZ/yQRPSpoSH+h9bajhxCkGPnv5q8QRddU
- H5KUNFjGwxTNCxsRCekD4caVqRAsbGMiUc3PUUkcDYfNz0ruXTn2i/ZiqjYKZJTEDJSz
- ypfOGPSjTPOZ4ZxEW67pJxu7xGhNHeOi9kDEGJVC7W/T8Yyt9Rp92jcsxjECszzo1mJS
- tKAMkrhN8Z2CbFeg/wTle6MuL3/NPIQKj+U2GZK9i3JJmjgfWsw5om5DJj9hfiibEftM
- Nw6w==
-X-Gm-Message-State: AGi0PuZAcdWTnR6YwJ5TYAlekcq7UeW6/dzqkm01oSkm3WFMB1kLJNci
- OTtOIxHOs3DY26EKrsBkweKVyfYGmTZNTA==
-X-Google-Smtp-Source: APiQypLXH/6sQRIVIVNKxcaxLPq1HWiNj+xu9u69ExZwdmp1hQGbfDARpX36GS/jz/BXjj5w6OycLg==
-X-Received: by 2002:adf:ee12:: with SMTP id y18mr15131900wrn.289.1586731018704; 
- Sun, 12 Apr 2020 15:36:58 -0700 (PDT)
+ bh=rNOvzQC0gAZiW9IjgvdXICw1FeldG6faD6QdyriSpSA=;
+ b=gSGniEl22W1ter74CjmVc3KYe9zSvzn8Ksi3aFaV5/Bj9NbFZBVj4lUEews8eICEzw
+ bIHSRWnDtViC0op4xQRxiZX0Y2qBn9NXqsnF7UddayAQtfmHCYaibWOdyhbzpaz7BnDk
+ /GL5iBb4NVq6U+499SblbENep/l9adNiw92XjTYxekSEnsBMHTG46NhztrmY4FUNMXnx
+ b8iCy0eRlC/x824tz4yMgqyBj38KW3qYT6oJOqCoRJFySFcLPrE6Y+vjMGbv6LtdyNiJ
+ gUuyE6kCqovhaCSxs39AZEtjrexBg2XRcuEtNs9MFL204NN5yO36uiv36FgkRhRqo1rM
+ fmbw==
+X-Gm-Message-State: AGi0PuZN0OCL7fDqB3ZhxvdLvqenrfR84NwbpIGko/tH9H3jirCw5Utn
+ VDOaTMxoZ1AlPcPEA10N0VGyAbnQaGGP/w==
+X-Google-Smtp-Source: APiQypLDnd72DBOXRbnDuWWsEfUNONBBfh/ms5TeKXv3Kg76nSxYgcVFqpN2VUF98/bEvc0lFqt5UQ==
+X-Received: by 2002:adf:ee06:: with SMTP id y6mr16579217wrn.187.1586731021977; 
+ Sun, 12 Apr 2020 15:37:01 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.36.55
+ by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.36.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:36:58 -0700 (PDT)
+ Sun, 12 Apr 2020 15:37:01 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -76,10 +76,10 @@ Cc: Joel Stanley <joel@jms.id.au>,
  Andrew Jeffery <andrew@aj.id.au>, "Michael S. Tsirkin" <mst@redhat.com>,
  Richard Henderson <rth@twiddle.net>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 10/24] hw/arm/fsl-imx31: Move some code from
- realize() to init()
-Date: Mon, 13 Apr 2020 00:36:05 +0200
-Message-Id: <20200412223619.11284-11-f4bug@amsat.org>
+Subject: [PATCH-for-5.1 v3 11/24] hw/arm/msf2-soc: Store MemoryRegion in
+ MSF2State
+Date: Mon, 13 Apr 2020 00:36:06 +0200
+Message-Id: <20200412223619.11284-12-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412223619.11284-1-f4bug@amsat.org>
 References: <20200412223619.11284-1-f4bug@amsat.org>
@@ -89,7 +89,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::443
+X-Received-From: 2a00:1450:4864:20::441
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -101,47 +101,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:37:08 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:37:13 -0000
 
 Coccinelle reported:
 
   $ spatch ... --timeout 60 --sp-file \
     scripts/coccinelle/simplify-init-realize-error_propagate.cocci
-  HANDLING: hw/arm/fsl-imx31.c
-  >>> possible moves from fsl_imx31_init() to fsl_imx31_realize() in hw/arm/fsl-imx31.c:68
+  HANDLING: ./hw/arm/msf2-soc.c
+  >>> possible moves from m2sxxx_soc_initfn() to m2sxxx_soc_realize() in ./hw/arm/msf2-soc.c:86
 
-Move the calls using &error_abort which don't depend on input
-updated before realize() to init().
+While reviewing we notice storing the MemoryRegion in the device
+state, we'll be able to later automatically simplify the error
+propagation calls.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
-v3: Typo 'depend of' -> 'depend on' (eblake)
----
- hw/arm/fsl-imx31.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/hw/arm/msf2-soc.h |  4 ++++
+ hw/arm/msf2-soc.c         | 18 +++++++-----------
+ 2 files changed, 11 insertions(+), 11 deletions(-)
 
-diff --git a/hw/arm/fsl-imx31.c b/hw/arm/fsl-imx31.c
-index 8472d2e911..61287e24f6 100644
---- a/hw/arm/fsl-imx31.c
-+++ b/hw/arm/fsl-imx31.c
-@@ -62,6 +62,8 @@ static void fsl_imx31_init(Object *obj)
-     for (i = 0; i < FSL_IMX31_NUM_GPIOS; i++) {
-         sysbus_init_child_obj(obj, "gpio[*]", &s->gpio[i], sizeof(s->gpio[i]),
-                               TYPE_IMX_GPIO);
-+        object_property_set_bool(OBJECT(&s->gpio[i]), false, "has-edge-sel",
-+                                 &error_abort);
-     }
- }
+diff --git a/include/hw/arm/msf2-soc.h b/include/hw/arm/msf2-soc.h
+index 3cfe5c76ee..e4c5110036 100644
+--- a/include/hw/arm/msf2-soc.h
++++ b/include/hw/arm/msf2-soc.h
+@@ -50,6 +50,10 @@ typedef struct MSF2State {
  
-@@ -191,8 +193,6 @@ static void fsl_imx31_realize(DeviceState *dev, Error **errp)
-             { FSL_IMX31_GPIO3_ADDR, FSL_IMX31_GPIO3_IRQ }
-         };
+     ARMv7MState armv7m;
  
--        object_property_set_bool(OBJECT(&s->gpio[i]), false, "has-edge-sel",
--                                 &error_abort);
-         object_property_set_bool(OBJECT(&s->gpio[i]), true, "realized", &err);
-         if (err) {
-             error_propagate(errp, err);
++    MemoryRegion sram;
++    MemoryRegion nvm;
++    MemoryRegion nvm_alias;
++
+     char *cpu_type;
+     char *part_name;
+     uint64_t envm_size;
+diff --git a/hw/arm/msf2-soc.c b/hw/arm/msf2-soc.c
+index 588d643b8d..e448b0ab74 100644
+--- a/hw/arm/msf2-soc.c
++++ b/hw/arm/msf2-soc.c
+@@ -90,13 +90,9 @@ static void m2sxxx_soc_realize(DeviceState *dev_soc, Error **errp)
+     SysBusDevice *busdev;
+     Error *err = NULL;
+     int i;
+-
+     MemoryRegion *system_memory = get_system_memory();
+-    MemoryRegion *nvm = g_new(MemoryRegion, 1);
+-    MemoryRegion *nvm_alias = g_new(MemoryRegion, 1);
+-    MemoryRegion *sram = g_new(MemoryRegion, 1);
+ 
+-    memory_region_init_rom(nvm, OBJECT(dev_soc), "MSF2.eNVM", s->envm_size,
++    memory_region_init_rom(&s->nvm, OBJECT(dev_soc), "MSF2.eNVM", s->envm_size,
+                            &error_fatal);
+     /*
+      * On power-on, the eNVM region 0x60000000 is automatically
+@@ -104,15 +100,15 @@ static void m2sxxx_soc_realize(DeviceState *dev_soc, Error **errp)
+      * start address (0x0). We do not support remapping other eNVM,
+      * eSRAM and DDR regions by guest(via Sysreg) currently.
+      */
+-    memory_region_init_alias(nvm_alias, OBJECT(dev_soc), "MSF2.eNVM", nvm, 0,
+-                             s->envm_size);
++    memory_region_init_alias(&s->nvm_alias, OBJECT(dev_soc), "MSF2.eNVM",
++                             &s->nvm, 0, s->envm_size);
+ 
+-    memory_region_add_subregion(system_memory, ENVM_BASE_ADDRESS, nvm);
+-    memory_region_add_subregion(system_memory, 0, nvm_alias);
++    memory_region_add_subregion(system_memory, ENVM_BASE_ADDRESS, &s->nvm);
++    memory_region_add_subregion(system_memory, 0, &s->nvm_alias);
+ 
+-    memory_region_init_ram(sram, NULL, "MSF2.eSRAM", s->esram_size,
++    memory_region_init_ram(&s->sram, NULL, "MSF2.eSRAM", s->esram_size,
+                            &error_fatal);
+-    memory_region_add_subregion(system_memory, SRAM_BASE_ADDRESS, sram);
++    memory_region_add_subregion(system_memory, SRAM_BASE_ADDRESS, &s->sram);
+ 
+     armv7m = DEVICE(&s->armv7m);
+     qdev_prop_set_uint32(armv7m, "num-irq", 81);
 -- 
 2.21.1
 
