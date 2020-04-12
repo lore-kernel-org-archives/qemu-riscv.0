@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlE5-0006ro-Ul
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47872)
+	id 1jNlEA-00071K-9d
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47949)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlE3-0006kD-8Y
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:16 -0400
+ id 1jNlE7-0006vX-EM
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:20 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlE2-0002sM-5C
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:15 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:39096)
+ id 1jNlE5-0002vR-BY
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:19 -0400
+Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:40811)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlDv-0002nZ-28; Sun, 12 Apr 2020 18:37:07 -0400
-Received: by mail-wm1-x344.google.com with SMTP id y24so8373979wma.4;
- Sun, 12 Apr 2020 15:37:06 -0700 (PDT)
+ id 1jNlDy-0002pc-Ak; Sun, 12 Apr 2020 18:37:10 -0400
+Received: by mail-wm1-x344.google.com with SMTP id a81so8355795wmf.5;
+ Sun, 12 Apr 2020 15:37:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=ACqwWM6q3w6eeeLf6eS/r0Fpb4qEkaBMb1O9yAVXZQo=;
- b=Eav2ieLzABrzdmyoyQLXT0s+gUm8FmjTYgeO1M9o97/Eye7qBD+gvSslPT2P3Pc+Ud
- ggZsT5Idy3aq0F6f7iMv6LebW8kajzKG3N/SlidMBZswf32BI6fW0kJaIQDGS143rcGj
- zZ6bzwJ0+d8QdTt75WYP1CmcW7bEo7TimspI9bI9niKWcTGEvwF95gYWNQKngztxv3FU
- jPoK5/Rvzhk+zVpLplUk9WfD71g8IeIEO9JbPifkaZRzTLWLJK1VWjR9cRnqnuZDatIs
- q/TcdZtepwLzIDJkt7aukefK6IWzO+SE9YK9qAAJnLD43cAzvWczyhcMFsqogOTrDqtE
- FqOg==
+ bh=03MmkCIzrXFk47EffNUcQSBR3zXYGz9X21Cp/fIhcLE=;
+ b=iGEKLlQArYa83S7I9arl1DJbwIwAdHBaLioZNrYS/3FDqyukGXGl/TTBgepyGBIbGj
+ E6q7tcniVvnUOO4fyRzL2OjNM9pryPhNjpWPUeKhPt3ZGKfylBYZla04/Ojo3dEntlkj
+ 7VfnRkcV4QXCP2TROvJyuvlSi2qWmoJoaJHU5YFBWfvg7ZJ4JuyVy3LaaTinyglqFKMm
+ lcmk6RjXz2WbDnt45QBVHxJU1ZfFwzeuseyBfi6r84AqtWa+COmzT9w27rXqmpI6wdFy
+ qI2SoIcHLMqhVZ2cz+HV+JUm/qercaprVo84UB1yV3h3EBwimyg1x7N9YP1w50tDKpzk
+ A8ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=ACqwWM6q3w6eeeLf6eS/r0Fpb4qEkaBMb1O9yAVXZQo=;
- b=qDP5Bl8a4gk8Gep+Hq6k/IsmmbrG9+8Hry8cght345lS0ft9aOhvyf5bUmIkjFmdRF
- /qNcSR1fiWpwj9NUNAMOjNhN+nW9vt5CnMUvySFoA1/Q+gFD7AcDTT1+nbe65oGeBoCh
- K4aND3VnrFvwtRhVliiL9knFbsPQremeQv0+sP1YqYPPw5RnM420PNtl/kEVAkV425HQ
- 6AGXHG8+Pe35OOCqDriorjnlOB0qvekg0g3dkkyeVCTLTuoXUSONChXngny9oTkTQz8y
- F3/kHqFBGxigOfJY6/4dpjMl0WIfQaCifErTmTxuFNA4XZXS1xt41eRcliJakL3aneC8
- TSvA==
-X-Gm-Message-State: AGi0PuY7p0jJ6tIuEjVKM04MEh2ZEfA4gp/wV7skZyhyKmVD5YsyNqb0
- SdZWAF/P51SSBDvUkvbqMu4ZjgocEMLpRg==
-X-Google-Smtp-Source: APiQypKttr4FiVT/PS0gYMZsNpgDa0+VuPdUBSHMQiO3U4JSk6VmIIPcdbAkXJDkJo202g4v3HoamA==
-X-Received: by 2002:a7b:cc01:: with SMTP id f1mr16694131wmh.39.1586731025908; 
- Sun, 12 Apr 2020 15:37:05 -0700 (PDT)
+ bh=03MmkCIzrXFk47EffNUcQSBR3zXYGz9X21Cp/fIhcLE=;
+ b=qEtF57XxPDAq4sJG9BAj8AdiO3P6v74NeetedQz0USyX5dOYz848n0wSTx6K2+No9n
+ oreDatyvZv/ryqBjAaaqeyPT+t4szSDlD2zF0qx3mZYmL29fQd9FF99fopJgPctmFhd5
+ Uf0RDQQ2BYmsHmkppV7rykQnTt3XkD2ZrYrwFr9SW6NcP3pciKeZBklKEuHeIfUiNXo0
+ LmxO8XPhAEPqgT4e0cO1zsX75z1SURznQDRGUBG9lULCv1xuaqlCuAHD52KCUpr7qLoV
+ XvluyBUg3HIDxgdGvluT/zh4h+uCA47yne/xyfhnF38BM2UP5TTqfGjPQHtW8/vULhbm
+ yypg==
+X-Gm-Message-State: AGi0PuYiIRix7BxDZws5omroPeKltkUKg/iy6ySAnJrkYgNhfW0YXtBg
+ b9sQWYhj/y5eIx/YqCZHoggVcZsrceBrNg==
+X-Google-Smtp-Source: APiQypI9LAKr+0Ga6TN/qeZAVtFecKvPUhSqxUrX6VIooxdBhL55/QuAsxg4P51twKNS1LVmOGmL7w==
+X-Received: by 2002:a1c:7ed7:: with SMTP id z206mr14927358wmc.64.1586731029197; 
+ Sun, 12 Apr 2020 15:37:09 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.37.02
+ by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.37.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:37:05 -0700 (PDT)
+ Sun, 12 Apr 2020 15:37:08 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -76,10 +76,10 @@ Cc: Joel Stanley <joel@jms.id.au>,
  Andrew Jeffery <andrew@aj.id.au>, "Michael S. Tsirkin" <mst@redhat.com>,
  Richard Henderson <rth@twiddle.net>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 12/24] hw/arm/stm32f205_soc: Store MemoryRegion in
- STM32F205State
-Date: Mon, 13 Apr 2020 00:36:07 +0200
-Message-Id: <20200412223619.11284-13-f4bug@amsat.org>
+Subject: [PATCH-for-5.1 v3 13/24] hw/arm/stm32f205_soc: Move some code from
+ realize() to init()
+Date: Mon, 13 Apr 2020 00:36:08 +0200
+Message-Id: <20200412223619.11284-14-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412223619.11284-1-f4bug@amsat.org>
 References: <20200412223619.11284-1-f4bug@amsat.org>
@@ -101,7 +101,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:37:16 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:37:20 -0000
 
 Coccinelle reported:
 
@@ -110,63 +110,61 @@ Coccinelle reported:
   HANDLING: ./hw/arm/stm32f205_soc.c
   >>> possible moves from stm32f205_soc_initfn() to stm32f205_soc_realize() in ./hw/arm/stm32f205_soc.c:83
 
-While reviewing we notice storing the MemoryRegion in the device
-state, we'll be able to later automatically simplify the error
-propagation calls.
+Move the calls using &error_fatal which don't depend on input
+updated before realize() to init().
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/hw/arm/stm32f205_soc.h |  4 ++++
- hw/arm/stm32f205_soc.c         | 18 +++++++-----------
- 2 files changed, 11 insertions(+), 11 deletions(-)
+v3: Typo 'depend of' -> 'depend on' (eblake)
+---
+ hw/arm/stm32f205_soc.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/include/hw/arm/stm32f205_soc.h b/include/hw/arm/stm32f205_soc.h
-index 922a733f88..63e7e7c825 100644
---- a/include/hw/arm/stm32f205_soc.h
-+++ b/include/hw/arm/stm32f205_soc.h
-@@ -56,6 +56,10 @@ typedef struct STM32F205State {
- 
-     ARMv7MState armv7m;
- 
-+    MemoryRegion sram;
-+    MemoryRegion flash;
-+    MemoryRegion flash_alias;
-+
-     STM32F2XXSyscfgState syscfg;
-     STM32F2XXUsartState usart[STM_NUM_USARTS];
-     STM32F2XXTimerState timer[STM_NUM_TIMERS];
 diff --git a/hw/arm/stm32f205_soc.c b/hw/arm/stm32f205_soc.c
-index 118c342559..42f4e44134 100644
+index 42f4e44134..76b0b0e9be 100644
 --- a/hw/arm/stm32f205_soc.c
 +++ b/hw/arm/stm32f205_soc.c
-@@ -87,23 +87,19 @@ static void stm32f205_soc_realize(DeviceState *dev_soc, Error **errp)
+@@ -49,6 +49,7 @@ static const int spi_irq[STM_NUM_SPIS] = {35, 36, 51};
+ static void stm32f205_soc_initfn(Object *obj)
+ {
+     STM32F205State *s = STM32F205_SOC(obj);
++    MemoryRegion *system_memory = get_system_memory();
+     int i;
+ 
+     sysbus_init_child_obj(obj, "armv7m", &s->armv7m, sizeof(s->armv7m),
+@@ -78,6 +79,14 @@ static void stm32f205_soc_initfn(Object *obj)
+         sysbus_init_child_obj(obj, "spi[*]", &s->spi[i], sizeof(s->spi[i]),
+                               TYPE_STM32F2XX_SPI);
+     }
++
++    memory_region_init_ram(&s->sram, NULL, "STM32F205.sram", SRAM_SIZE,
++                           &error_fatal);
++    memory_region_add_subregion(system_memory, SRAM_BASE_ADDRESS, &s->sram);
++
++    memory_region_init_rom(&s->flash, obj, "STM32F205.flash",
++                           FLASH_SIZE, &error_fatal);
++    memory_region_add_subregion(system_memory, FLASH_BASE_ADDRESS, &s->flash);
+ }
+ 
+ static void stm32f205_soc_realize(DeviceState *dev_soc, Error **errp)
+@@ -87,19 +96,10 @@ static void stm32f205_soc_realize(DeviceState *dev_soc, Error **errp)
      SysBusDevice *busdev;
      Error *err = NULL;
      int i;
+-    MemoryRegion *system_memory = get_system_memory();
+ 
+-    memory_region_init_rom(&s->flash, OBJECT(dev_soc), "STM32F205.flash",
+-                           FLASH_SIZE, &error_fatal);
+     memory_region_init_alias(&s->flash_alias, OBJECT(dev_soc),
+                              "STM32F205.flash.alias", &s->flash, 0, FLASH_SIZE);
 -
-     MemoryRegion *system_memory = get_system_memory();
--    MemoryRegion *sram = g_new(MemoryRegion, 1);
--    MemoryRegion *flash = g_new(MemoryRegion, 1);
--    MemoryRegion *flash_alias = g_new(MemoryRegion, 1);
- 
--    memory_region_init_rom(flash, OBJECT(dev_soc), "STM32F205.flash",
-+    memory_region_init_rom(&s->flash, OBJECT(dev_soc), "STM32F205.flash",
-                            FLASH_SIZE, &error_fatal);
--    memory_region_init_alias(flash_alias, OBJECT(dev_soc),
--                             "STM32F205.flash.alias", flash, 0, FLASH_SIZE);
-+    memory_region_init_alias(&s->flash_alias, OBJECT(dev_soc),
-+                             "STM32F205.flash.alias", &s->flash, 0, FLASH_SIZE);
- 
--    memory_region_add_subregion(system_memory, FLASH_BASE_ADDRESS, flash);
--    memory_region_add_subregion(system_memory, 0, flash_alias);
-+    memory_region_add_subregion(system_memory, FLASH_BASE_ADDRESS, &s->flash);
-+    memory_region_add_subregion(system_memory, 0, &s->flash_alias);
- 
--    memory_region_init_ram(sram, NULL, "STM32F205.sram", SRAM_SIZE,
-+    memory_region_init_ram(&s->sram, NULL, "STM32F205.sram", SRAM_SIZE,
-                            &error_fatal);
--    memory_region_add_subregion(system_memory, SRAM_BASE_ADDRESS, sram);
-+    memory_region_add_subregion(system_memory, SRAM_BASE_ADDRESS, &s->sram);
+-    memory_region_add_subregion(system_memory, FLASH_BASE_ADDRESS, &s->flash);
+-    memory_region_add_subregion(system_memory, 0, &s->flash_alias);
+-
+-    memory_region_init_ram(&s->sram, NULL, "STM32F205.sram", SRAM_SIZE,
+-                           &error_fatal);
+-    memory_region_add_subregion(system_memory, SRAM_BASE_ADDRESS, &s->sram);
++    memory_region_add_subregion(get_system_memory(), 0, &s->flash_alias);
  
      armv7m = DEVICE(&s->armv7m);
      qdev_prop_set_uint32(armv7m, "num-irq", 96);
