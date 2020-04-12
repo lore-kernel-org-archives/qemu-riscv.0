@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlJS-0001tE-GD
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:42:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49961)
+	id 1jNlJV-00021H-3N
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:42:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50011)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlJP-0001kM-2S
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:48 -0400
+ id 1jNlJQ-0001qK-MD
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:50 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlJO-0006CC-1r
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:46 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:36437)
+ id 1jNlJP-0006Da-N6
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:48 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:44377)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlJ8-00062j-Fm; Sun, 12 Apr 2020 18:42:30 -0400
-Received: by mail-wm1-x344.google.com with SMTP id a201so8023330wme.1;
- Sun, 12 Apr 2020 15:42:25 -0700 (PDT)
+ id 1jNlJD-000686-9L; Sun, 12 Apr 2020 18:42:35 -0400
+Received: by mail-wr1-x444.google.com with SMTP id d17so1634792wrg.11;
+ Sun, 12 Apr 2020 15:42:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=z9KZ6eY6DRrXTHj5N0HrtI0MTUlERzvy0/HLB/IrQH4=;
- b=bGgzjIEqniohf+mlvT6SPL2WUceu7HTqs+DBMzLs+vU9gSIDrdVjfTd8xcrgOCAky5
- TDh2vRuFihmMGB462TBdOQPKih5ksBuXcT+29C0YsOitDdaimi9uo5kpTY3XUszml15P
- fZinBnJCt+z9YaYN0iIH2+V+uqlAHzQaeWvGuCQoeTNPPLyFu68op8CfwQeEbN+Csh5A
- w2Ku3l/giqijPu5Ixf88DXrRo+hF7edx7sdWJC/7eRqGTWT6tNwng5+26SxcXf21o4pi
- fbssSyzOVeYjVLMjSV9OT3CBM/9zFMIyz5VD0NDH9aZNmY9PSR78I6K1mLwfwl598XW6
- frtw==
+ bh=74G8KHhadiGPyGitkFydcSDSAs1meyukZBFpYk9pD6I=;
+ b=dPCfqUi+fQcBEG3K/WPUk56J0LAaObHIxDG46h8wY4ZNxJLUwgj0NWwAwtUyFExGA5
+ r5+4rSPzbfX1aAnLWCYcyKaohy7boPLvXOAepLJ662xZIblElg2FuJbH9ri897tTWZt6
+ 6dX5pQ1pFJrNZCtU/FRBwVhqd3WEKQzg34n135qBqGR6o/WT66bm/AhG31Mp2g7nVTy1
+ SFvZGg+UwXBXaJM28hgts6+00mKiW6O1ivAvRJWYTbL2x/xGQq/FTarhAjFQggLC9JcG
+ E1hW5iuN9t/c0S+zX8j1T48TCU8lERf/8j3iJAPh68RiIHQKW1o0OtQD+wO7zRQZOinH
+ ipyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=z9KZ6eY6DRrXTHj5N0HrtI0MTUlERzvy0/HLB/IrQH4=;
- b=RDny59dSGRgqiLldr71XbD0qcb6Ijr4VflxnpRd7zWB8wt8QBK8fAMBGE1a0EmYny6
- SvQuNXm76xCfSJl93jWMcOa6q1CuXpLVSptQI1/MPrvNo/f2Ve8H2EBr2eHLkwOdVtnv
- IuB7aksVA+oT1WYMffQK5VglHiqtgOlwoOz6Cj0TlFO+PLFDmEyThtCvfCXs32CkqOYX
- Cjr2EBKekzxNTh0UArVgDMx2JBnDtinm7PGm8Oe4CEbeQZsYPHygf03ahURBP5veENGK
- lLgbiZYT/pe93GtRlaykIW/g9+A2tUyK3ubB34dbWrETE0103pIXGfW5arEy+jl6qL0M
- 0jfw==
-X-Gm-Message-State: AGi0Pub4k0MVvTRFbdRtRNASUx3XgInYl/NaA5nCgFjQNuoDE1dABNMd
- Ku3jHU2giYku297I/ENIIYhRjEhgAUEX4w==
-X-Google-Smtp-Source: APiQypLM5eyX9dZ+2OjFqysoVLHTT2ZiaOcl9zPGes7IMRWLxf7/1Fhiyo1+f+ujdIQ/6fOLwJNckw==
-X-Received: by 2002:a05:600c:c9:: with SMTP id u9mr8334867wmm.15.1586731343376; 
- Sun, 12 Apr 2020 15:42:23 -0700 (PDT)
+ bh=74G8KHhadiGPyGitkFydcSDSAs1meyukZBFpYk9pD6I=;
+ b=f772oGezS01RVlhSF2S1PMy8ic33QAldzotRBNvP+GFoFMN+ozuJrnXwSj3nVmHTr7
+ ZnBFtSRCaGs08sJRJFW2z6jpHeQSIjKcyTE+8ZU1CYN2WccB0jsHElf2L4Bi0oqczUrx
+ agOXqU77uLNMW/9NUAYdJPkNyaxZzufHCPLBlmDTgZ3LjTFCgWo5rnotOtLRgj0q2aD4
+ 3HMl2JpS36Lr7h7MbqniK1Uow47OkDLszbio4AO8uTiijP0lKUqd1j+6pjTjMUTuDD5W
+ 3ommnp8/IJ84YS7y7PqLrB6zlqDo+q1AzUwxd1A6M1nTHG/dRIsAST7On7O0wS7F+G6d
+ bNIQ==
+X-Gm-Message-State: AGi0PuZ+kFCw8pkKLWlEwrYmVYxBu40oG60WuzXIZWQrfFbX8TxEWGGI
+ UviXaCoHSmmY80ID6CC/wUGR0S7qxqFj1g==
+X-Google-Smtp-Source: APiQypKKinuxHdn5Rjo88Tjskg/kBYuSqrEjj1TM/hyqysUwAmGJpRRx5J4iHdFvz55iPD19d4CKUA==
+X-Received: by 2002:adf:9441:: with SMTP id 59mr15577538wrq.211.1586731353887; 
+ Sun, 12 Apr 2020 15:42:33 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id f63sm12083825wma.47.2020.04.12.15.42.20
+ by smtp.gmail.com with ESMTPSA id f63sm12083825wma.47.2020.04.12.15.42.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:42:22 -0700 (PDT)
+ Sun, 12 Apr 2020 15:42:33 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -79,10 +79,10 @@ Cc: qemu-block@nongnu.org, Richard Henderson <rth@twiddle.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 10/23] hw/microblaze/xlnx-zynqmp-pmu: Add missing
+Subject: [PATCH-for-5.1 v3 12/23] hw/block/onenand: Add missing
  error-propagation code
-Date: Mon, 13 Apr 2020 00:41:31 +0200
-Message-Id: <20200412224144.12205-11-f4bug@amsat.org>
+Date: Mon, 13 Apr 2020 00:41:33 +0200
+Message-Id: <20200412224144.12205-13-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412224144.12205-1-f4bug@amsat.org>
 References: <20200412224144.12205-1-f4bug@amsat.org>
@@ -92,7 +92,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::344
+X-Received-From: 2a00:1450:4864:20::444
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,7 +104,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:42:48 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:42:51 -0000
 
 Patch created mechanically by running:
 
@@ -115,26 +115,26 @@ Patch created mechanically by running:
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/microblaze/xlnx-zynqmp-pmu.c | 6 +++++-
+ hw/block/onenand.c | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/hw/microblaze/xlnx-zynqmp-pmu.c b/hw/microblaze/xlnx-zynqmp-pmu.c
-index 2aa602cf85..4ecbea7fdc 100644
---- a/hw/microblaze/xlnx-zynqmp-pmu.c
-+++ b/hw/microblaze/xlnx-zynqmp-pmu.c
-@@ -123,7 +123,11 @@ static void xlnx_zynqmp_pmu_soc_realize(DeviceState *dev, Error **errp)
-     /* Connect the IPI device */
-     for (int i = 0; i < XLNX_ZYNQMP_PMU_NUM_IPIS; i++) {
-         object_property_set_bool(OBJECT(&s->ipi[i]), true, "realized",
--                                 &error_abort);
-+                                 &err);
-+        if (err) {
-+            error_propagate(errp, err);
-+            return;
-+        }
-         sysbus_mmio_map(SYS_BUS_DEVICE(&s->ipi[i]), 0, ipi_addr[i]);
-         sysbus_connect_irq(SYS_BUS_DEVICE(&s->ipi[i]), 0,
-                            qdev_get_gpio_in(DEVICE(&s->intc), ipi_irq[i]));
+diff --git a/hw/block/onenand.c b/hw/block/onenand.c
+index 898ac563a3..1f68dba28b 100644
+--- a/hw/block/onenand.c
++++ b/hw/block/onenand.c
+@@ -810,7 +810,11 @@ static void onenand_realize(DeviceState *dev, Error **errp)
+     s->otp = memset(g_malloc((64 + 2) << PAGE_SHIFT),
+                     0xff, (64 + 2) << PAGE_SHIFT);
+     memory_region_init_ram_nomigrate(&s->ram, OBJECT(s), "onenand.ram",
+-                           0xc000 << s->shift, &error_fatal);
++                           0xc000 << s->shift, &local_err);
++    if (local_err) {
++        error_propagate(errp, local_err);
++        return;
++    }
+     vmstate_register_ram_global(&s->ram);
+     ram = memory_region_get_ram_ptr(&s->ram);
+     s->boot[0] = ram + (0x0000 << s->shift);
 -- 
 2.21.1
 
