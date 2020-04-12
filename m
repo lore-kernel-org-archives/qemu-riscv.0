@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlET-0007sC-QC
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48333)
+	id 1jNlEW-00080o-N7
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48371)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlEQ-0007l1-KN
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:39 -0400
+ id 1jNlES-0007qo-K1
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:42 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlEP-00037l-GF
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:38 -0400
-Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:46748)
+ id 1jNlER-00038x-Fu
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:40 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:34244)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlEI-00032n-EP; Sun, 12 Apr 2020 18:37:30 -0400
-Received: by mail-wr1-x444.google.com with SMTP id f13so8492739wrm.13;
- Sun, 12 Apr 2020 15:37:30 -0700 (PDT)
+ id 1jNlEL-00034z-Dw; Sun, 12 Apr 2020 18:37:33 -0400
+Received: by mail-wr1-x444.google.com with SMTP id 65so8551368wrl.1;
+ Sun, 12 Apr 2020 15:37:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=BasB+g8nzHU9NqlorXFhvA0RjIUcriXJQANOu1FTC+I=;
- b=JvMtQoy5jGVm+8GTmlMuiC1ueHzc7rwT5p0KjyN+hsDtCP4Cn/JcNRjyihyWdj1Xss
- dtTI7Fv3AEEkUCxM+MBsr8py6lEmOfl88MiFeO/9zQb/EyYfaYfoCy6GWOS1uPW4/k7Y
- ytJwyS6D3FPLDQoAuwh+9v1qQjJEv+RlWs6ZB3SigBk8RzVjtqOYmZzrGu/5PW1uyLWB
- 8oEd5a2rHSAe48/FO0M0iiZchZXc20+ui+IDOBXDnkBiARaT4gt5hXqcgdCwCBac3SVL
- JZ2STQPPOH3UJiG8R3nbAuw90HN5yYwEBUy9ARd1rv71Sg3xu0pVpJzxlcPyhOGL9pmp
- 91Vw==
+ bh=f8mojAlRUdlR/2NknA9ZDyMqw2xlNW4cv+f7vBTxHaE=;
+ b=eziZT5VRpWIAND8SYyKHzijX/5xYTrfYTlPUcRQYAPxRa668XdW0jOPhlDojMaEV7p
+ 2SP40m65aD/PN6dmSemcJ7snSHqvPG9wmFxqxY8hyI5zgQ4k72U2AeornVZbDxNouSXv
+ 9xdN8ssu/gHRojGMjx8NOoCJBpooHyRNeJqiteQGn/Eod7g0lVyZPIM4yHq+JuX7OBfQ
+ UV/PEndKzXUXZ7dV+b3VbzDM3h4pkRHPES4yayiu+nHUXwXP8Az/e7+dvpQtYLNc4W+H
+ Xj3j1Bk9tLBdrhBoI7fUtJ1OAw9khMjV+azIuUu+HM+x4Pby7/hWOLjdLX5iVE0RkN90
+ JtwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=BasB+g8nzHU9NqlorXFhvA0RjIUcriXJQANOu1FTC+I=;
- b=YyzVNNnS+e9uLAiKw9pXEB9e+K0RjnW8ZbKsiLNJ9TiBvUrC+IwGx9vheAyngQTJgX
- MOZpM5oWD5m+rbEy0xLPK5i1dKdfzsLh7m03lxe7oo49uFHNqzBcnS+YvhdFX/VgyBB3
- 5BRf1g1Q1vhiLl0B2sAF5pFruIdEmUbtLts7L4BYy0GonX0P4aLq+s2Ki1aMxdGeyWsL
- h6ukY8phJDqgKjttlMcQIM6i9JKSDzii2Sb1bl+5PX6OwVow5XJIW7c981M3yL1vm2mz
- gD/OnC1hP8iFlKGBtXKogprputafQzcULwsvydFaQG1HcCDkkJn5KEwLRXEMt+suOIpX
- ucCA==
-X-Gm-Message-State: AGi0Puaa7CY8uWUPXwxBqTxkGQ6CloHONXt2urQYs2aD539viAg2UPtf
- /0Mg94zWmzCr9AiZy90nfOp4yg/RhcuDmg==
-X-Google-Smtp-Source: APiQypLA5twQlR1QLyc7VGDBinqgnLuFOZKnSZQ7eellH4Zuc9qupRB7hrNAyIMdmkRXKazdyeiW8A==
-X-Received: by 2002:a5d:4b49:: with SMTP id w9mr15981211wrs.359.1586731049029; 
- Sun, 12 Apr 2020 15:37:29 -0700 (PDT)
+ bh=f8mojAlRUdlR/2NknA9ZDyMqw2xlNW4cv+f7vBTxHaE=;
+ b=UikYRy83umpNf4liS/lKHGa8vzkg1YjHPm0UkqGSbUDSWsigDlOSu2JQEogmZvKA9d
+ DsAHwEahXPNZ+yrSeJa3Pi+n8lYPkHSU0McD2NyyrF8MRldN1IdFCX+3ovBiL1LecFXU
+ PlGZEgA9+MX/kFr76efk+vLf7UGMysOP8C6rjObmS6x3kpa8qBxQVSUsvqsg07+JU2J2
+ bTSUdVObLoNPWKISkrHJ7kP5WxO9NEHBAWUZdEti7BvhnwY3KtvQiUWu/03APQpHDiDe
+ aTwz/7GA71F/rIYuy0t2uqHidFI4eemM8dvvdD5XY1dYB8Ct49dXFw5tKGGo2ppDKuoP
+ 6kYA==
+X-Gm-Message-State: AGi0Pua33YqZbxZi/gsZIW/j31h4sAdL/uGHXg84Wx91HE9clL8GFvNJ
+ xGEtdJVnnTX/2U1tfCirnzF8I8O3Vm0tig==
+X-Google-Smtp-Source: APiQypKhADx8IsEhdzPX+miCokTZ08hDMUeYWbAJvUHG+uHvi03tXxbe6BnsWTdx9nq8xzvRWtrlww==
+X-Received: by 2002:adf:a345:: with SMTP id d5mr12993154wrb.23.1586731052287; 
+ Sun, 12 Apr 2020 15:37:32 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.37.25
+ by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.37.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:37:28 -0700 (PDT)
+ Sun, 12 Apr 2020 15:37:31 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -76,10 +76,9 @@ Cc: Joel Stanley <joel@jms.id.au>,
  Andrew Jeffery <andrew@aj.id.au>, "Michael S. Tsirkin" <mst@redhat.com>,
  Richard Henderson <rth@twiddle.net>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 19/24] hw/riscv/sifive_e: Move some code from
- realize() to init()
-Date: Mon, 13 Apr 2020 00:36:14 +0200
-Message-Id: <20200412223619.11284-20-f4bug@amsat.org>
+Subject: [PATCH-for-5.1 v3 20/24] hw/riscv/sifive_u: Use single type_init()
+Date: Mon, 13 Apr 2020 00:36:15 +0200
+Message-Id: <20200412223619.11284-21-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412223619.11284-1-f4bug@amsat.org>
 References: <20200412223619.11284-1-f4bug@amsat.org>
@@ -101,84 +100,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:37:40 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:37:42 -0000
 
-Coccinelle reported:
-
-  $ spatch ... --timeout 60 --sp-file \
-    scripts/coccinelle/simplify-init-realize-error_propagate.cocci
-  HANDLING: ./hw/riscv/sifive_e.c
-  >>> possible moves from riscv_sifive_e_soc_init() to riscv_sifive_e_soc_realize() in ./hw/riscv/sifive_e.c:135
-
-Move the calls using &error_fatal which don't depend on input
-updated before realize() to init().
+We can use a single type_init() to call multiple type_register*().
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
-v3: Typo 'depend of' -> 'depend on' (eblake)
----
- hw/riscv/sifive_e.c | 26 ++++++++++++++------------
- 1 file changed, 14 insertions(+), 12 deletions(-)
+ hw/riscv/sifive_u.c | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
 
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 646553a7c3..0be8b52147 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -118,7 +118,9 @@ static void riscv_sifive_e_init(MachineState *machine)
- static void riscv_sifive_e_soc_init(Object *obj)
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 998666c91f..9c90c94c33 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -601,13 +601,6 @@ static const TypeInfo riscv_sifive_u_soc_type_info = {
+     .class_init = riscv_sifive_u_soc_class_init,
+ };
+ 
+-static void riscv_sifive_u_soc_register_types(void)
+-{
+-    type_register_static(&riscv_sifive_u_soc_type_info);
+-}
+-
+-type_init(riscv_sifive_u_soc_register_types)
+-
+ static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
  {
-     MachineState *ms = MACHINE(qdev_get_machine());
-+    const struct MemmapEntry *memmap = sifive_e_memmap;
-     SiFiveESoCState *s = RISCV_E_SOC(obj);
-+    MemoryRegion *sys_mem = get_system_memory();
+     MachineClass *mc = MACHINE_CLASS(oc);
+@@ -627,9 +620,10 @@ static const TypeInfo riscv_sifive_u_machine_typeinfo = {
+     .instance_size = sizeof(SiFiveUState),
+ };
  
-     object_initialize_child(obj, "cpus", &s->cpus,
-                             sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
-@@ -130,6 +132,18 @@ static void riscv_sifive_e_soc_init(Object *obj)
-     sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
-                           &s->gpio, sizeof(s->gpio),
-                           TYPE_SIFIVE_GPIO);
-+
-+    /* Mask ROM */
-+    memory_region_init_rom(&s->mask_rom, obj, "riscv.sifive.e.mrom",
-+                           memmap[SIFIVE_E_MROM].size, &error_fatal);
-+    memory_region_add_subregion(sys_mem,
-+        memmap[SIFIVE_E_MROM].base, &s->mask_rom);
-+
-+    /* Flash memory */
-+    memory_region_init_rom(&s->xip_mem, obj, "riscv.sifive.e.xip",
-+                           memmap[SIFIVE_E_XIP].size, &error_fatal);
-+    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
-+        &s->xip_mem);
+-static void riscv_sifive_u_machine_init_register_types(void)
++static void riscv_sifive_u_register_types(void)
+ {
++    type_register_static(&riscv_sifive_u_soc_type_info);
+     type_register_static(&riscv_sifive_u_machine_typeinfo);
  }
  
- static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
-@@ -144,12 +158,6 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
-     object_property_set_bool(OBJECT(&s->cpus), true, "realized",
-                             &error_abort);
- 
--    /* Mask ROM */
--    memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom",
--                           memmap[SIFIVE_E_MROM].size, &error_fatal);
--    memory_region_add_subregion(sys_mem,
--        memmap[SIFIVE_E_MROM].base, &s->mask_rom);
--
-     /* MMIO */
-     s->plic = sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
-         (char *)SIFIVE_E_PLIC_HART_CONFIG,
-@@ -206,12 +214,6 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
-         memmap[SIFIVE_E_QSPI2].base, memmap[SIFIVE_E_QSPI2].size);
-     create_unimplemented_device("riscv.sifive.e.pwm2",
-         memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
--
--    /* Flash memory */
--    memory_region_init_rom(&s->xip_mem, OBJECT(dev), "riscv.sifive.e.xip",
--                           memmap[SIFIVE_E_XIP].size, &error_fatal);
--    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
--        &s->xip_mem);
- }
- 
- static void riscv_sifive_e_machine_init(MachineClass *mc)
+-type_init(riscv_sifive_u_machine_init_register_types)
++type_init(riscv_sifive_u_register_types)
 -- 
 2.21.1
 
