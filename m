@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlJ5-0001U7-I5
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:42:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49703)
+	id 1jNlJ6-0001Ww-Nw
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:42:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49731)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlJ2-0001KB-0e
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:26 -0400
+ id 1jNlJ3-0001Pk-UW
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:27 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlJ0-00062I-VR
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:23 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:40840)
+ id 1jNlJ3-00063G-0k
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:25 -0400
+Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:44375)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlIu-0005uF-8M; Sun, 12 Apr 2020 18:42:16 -0400
-Received: by mail-wm1-x344.google.com with SMTP id a81so8367843wmf.5;
- Sun, 12 Apr 2020 15:42:14 -0700 (PDT)
+ id 1jNlIw-0005yo-Pd; Sun, 12 Apr 2020 18:42:18 -0400
+Received: by mail-wr1-x443.google.com with SMTP id d17so1634141wrg.11;
+ Sun, 12 Apr 2020 15:42:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=7dngg6q086SdAwClXoi/Rsl8HHPolX2hkbDutRMMkyU=;
- b=pNAolLhFwovIx8wy2XfNJdAfOikbLSS9WvAaniqx00H72xuF3mUuRBb/rFqJSU88RV
- oToqDKR4CivuaQRLHjVg2/dcMuFc7gdDw5C2Y2v6qPHT2itSnC4lEq/7/Bk/mQnK8US3
- epjnXNaWy073XrwjDBYSI9hmVHYGGfOL89OqrHh1FwpZDZto4XaobvSdOGN6SwUsl2tA
- qzkQ46eE24Bpe7LN9MNebWmQCYADh+ENmq+D79hdH1E9mn00/VtbFGCg9Hqovb8s/cR1
- WRxqD9NcOMGKLx5zmtxSb1Ryid41/WdGmzMJOVZyYp48aiYacVZDVbzOtWiJSDmEdWVI
- TDww==
+ bh=m8ZDXiD3nFiP7GdGwQTV0ex2VskQyj/RhxvXu9V538w=;
+ b=siCEjIHDD7HMxh4IxS5LlIjGg2cHeis4GeHzcv0NZEd05t+44glLDFXzjnhEgGdKrK
+ QNFLZuYqlDaOYEAwR8wPyuaQ/MzSzcAvI1MK4eODswr/M1mFJOqJcrcig2XYb3EqsD7/
+ XNGH5dq8cxwQUkrGO39iUEmIzGNpZtIjTlkGzQD90aigcGn+AniKHUmTsCFY4/mm+9vl
+ l6dWLyhK+3sjpBVLN2MDBwv/mu/sQv0DM441GyRbWnlvbsrf61jm85H8n/TIZYGYHQ4t
+ DJG5dtAWoZgx1h4M+vwYr27SMW3LTCAZLxfRzVLVcceL4vtv7LM9mQyZqznXrdT0a9R8
+ KfBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=7dngg6q086SdAwClXoi/Rsl8HHPolX2hkbDutRMMkyU=;
- b=GHf+gH2KIlHTn4tlqRpWcuGvGTkx7x3vsWW3XLb/iGcimLwWGU3f85olVKvHOQo8hw
- TfkYL59VfFBmRQO3J7akEG8DftFh0/hYSijc39o43AnjU35ifGOFzQW1BqGIexYweaUE
- wmc5EMt8876mjxDQLg6Y+4r9Emj7nSy1lR3b4DkjnL0Q7v4ltKxrPgODC1FNzU5MwBI7
- N+aNMzTWiQKtG1sLtEBDiBw4R33muw9bGsSz7Q5ziCKJ61GQkOuJQVQNCtNVP2EcMIvk
- f8hRnuLCWC67X89Ivs5YQjOHt6zT6OxXvrRGbN1xsU5pev+/6wJ22cHyyo/SL0bHgf0g
- tZRg==
-X-Gm-Message-State: AGi0PuYRqNmPHU2jkrhUeVNMBnaeG6gZoFy5FWyIcMaTwfVO6Lu8a4BR
- UKv5PX5x/Ldz6jlWq9wvhfeFyj8HU7ZEGg==
-X-Google-Smtp-Source: APiQypJ8Wo6qoxPfL8RsirvEdWnfO+z95ibGHx+M3jGfAcPB/5YoGtBhNnTcIStf6KAXWgp17zdEJw==
-X-Received: by 2002:a1c:a7d7:: with SMTP id q206mr15060615wme.45.1586731333155; 
- Sun, 12 Apr 2020 15:42:13 -0700 (PDT)
+ bh=m8ZDXiD3nFiP7GdGwQTV0ex2VskQyj/RhxvXu9V538w=;
+ b=WZNW50qhgNXh0JEVBldTQpQ1u1j/i30mG85DPCvQrkUn69H75fZT9hAXGt7BjNw6B1
+ 9F1QcbkWE+fqE5itrsafU2TL2HLDEcGZFT08HCY4SU5mTWw3d1YUAAFEAh4J/fgVfqIF
+ tkZ2qaQfLDiAoFoPUFTNiwLSn8bPd10pq63AtV017Hckc9AuGnbwMLh967o2XAn9J45r
+ DhjzFuAmJzM8kGVNqZbdga9FMUTr8ywi/t9j3ahFpuw4KXGHEm+iTxFr8WObCFuy7ofO
+ Mpll3Ex5Gizte+vyI1HypWbSbovx+1wIasJGQsua5sgJAuIqSKeKEWVQoX2+r0FXAKWd
+ hH0g==
+X-Gm-Message-State: AGi0PuZ/APNgr7i6II4vMgoFsSZdMUm08D6d8olwfQWuxCCLVHqFHX1S
+ KDAk0nTJxxdauhrNLwN3hcnlJLXMV1gdgA==
+X-Google-Smtp-Source: APiQypJNvCx3ya+uEetc5CRWYwAwiOiz9uC7PQFTCGgsNZU5737WZHFoI+MEnhxwKZmpOYdbKKrg8w==
+X-Received: by 2002:adf:f986:: with SMTP id f6mr157751wrr.221.1586731336548;
+ Sun, 12 Apr 2020 15:42:16 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id f63sm12083825wma.47.2020.04.12.15.42.09
+ by smtp.gmail.com with ESMTPSA id f63sm12083825wma.47.2020.04.12.15.42.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:42:12 -0700 (PDT)
+ Sun, 12 Apr 2020 15:42:15 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -79,10 +79,10 @@ Cc: qemu-block@nongnu.org, Richard Henderson <rth@twiddle.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 07/23] hw/riscv/sifive: Add missing
- error-propagation code
-Date: Mon, 13 Apr 2020 00:41:28 +0200
-Message-Id: <20200412224144.12205-8-f4bug@amsat.org>
+Subject: [PATCH-for-5.1 v3 08/23] hw/arm/armv7m: Add missing error-propagation
+ code
+Date: Mon, 13 Apr 2020 00:41:29 +0200
+Message-Id: <20200412224144.12205-9-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412224144.12205-1-f4bug@amsat.org>
 References: <20200412224144.12205-1-f4bug@amsat.org>
@@ -92,7 +92,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::344
+X-Received-From: 2a00:1450:4864:20::443
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,7 +104,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:42:26 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:42:27 -0000
 
 Patch created mechanically by running:
 
@@ -115,71 +115,39 @@ Patch created mechanically by running:
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/riscv/sifive_e.c |  6 +++++-
- hw/riscv/sifive_u.c | 24 ++++++++++++++++++++----
- 2 files changed, 25 insertions(+), 5 deletions(-)
+ hw/arm/armv7m.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 0be8b52147..6d4e141ff7 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -156,7 +156,11 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
-     MemoryRegion *sys_mem = get_system_memory();
+diff --git a/hw/arm/armv7m.c b/hw/arm/armv7m.c
+index 7531b97ccd..249a7605f6 100644
+--- a/hw/arm/armv7m.c
++++ b/hw/arm/armv7m.c
+@@ -168,7 +168,11 @@ static void armv7m_realize(DeviceState *dev, Error **errp)
+     }
  
-     object_property_set_bool(OBJECT(&s->cpus), true, "realized",
--                            &error_abort);
-+                            &err);
-+    if (err) {
-+        error_propagate(errp, err);
-+        return;
-+    }
- 
-     /* MMIO */
-     s->plic = sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index e13ab34de4..b07526aba1 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -508,9 +508,17 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     NICInfo *nd = &nd_table[0];
- 
-     object_property_set_bool(OBJECT(&s->e_cpus), true, "realized",
+     object_property_set_link(OBJECT(s->cpu), OBJECT(&s->container), "memory",
 -                             &error_abort);
 +                             &err);
 +    if (err) {
 +        error_propagate(errp, err);
 +        return;
 +    }
-     object_property_set_bool(OBJECT(&s->u_cpus), true, "realized",
--                             &error_abort);
-+                             &err);
-+    if (err) {
-+        error_propagate(errp, err);
-+        return;
-+    }
-     /*
-      * The cluster must be realized after the RISC-V hart array container,
-      * as the container's CPU object is only created on realize, and the
-@@ -518,9 +526,17 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-      * cluster is realized.
-      */
-     object_property_set_bool(OBJECT(&s->e_cluster), true, "realized",
--                             &error_abort);
-+                             &err);
-+    if (err) {
-+        error_propagate(errp, err);
-+        return;
-+    }
-     object_property_set_bool(OBJECT(&s->u_cluster), true, "realized",
--                             &error_abort);
-+                             &err);
-+    if (err) {
-+        error_propagate(errp, err);
-+        return;
-+    }
- 
-     /* create PLIC hart topology configuration string */
-     plic_hart_config_len = (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) *
+     if (object_property_find(OBJECT(s->cpu), "idau", NULL)) {
+         object_property_set_link(OBJECT(s->cpu), s->idau, "idau", &err);
+         if (err != NULL) {
+@@ -256,7 +260,11 @@ static void armv7m_realize(DeviceState *dev, Error **errp)
+                 return;
+             }
+             object_property_set_link(obj, OBJECT(s->board_memory),
+-                                     "source-memory", &error_abort);
++                                     "source-memory", &err);
++            if (err) {
++                error_propagate(errp, err);
++                return;
++            }
+             object_property_set_bool(obj, true, "realized", &err);
+             if (err != NULL) {
+                 error_propagate(errp, err);
 -- 
 2.21.1
 
