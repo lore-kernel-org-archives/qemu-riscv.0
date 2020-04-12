@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlEW-00080o-N7
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48371)
+	id 1jNlEa-0008Ag-6l
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:37:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48451)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlES-0007qo-K1
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:42 -0400
+ id 1jNlEX-000827-0w
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlER-00038x-Fu
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:40 -0400
-Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:34244)
+ id 1jNlEV-0003Bh-WC
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:37:44 -0400
+Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:40811)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlEL-00034z-Dw; Sun, 12 Apr 2020 18:37:33 -0400
-Received: by mail-wr1-x444.google.com with SMTP id 65so8551368wrl.1;
- Sun, 12 Apr 2020 15:37:33 -0700 (PDT)
+ id 1jNlEO-00036r-L8; Sun, 12 Apr 2020 18:37:36 -0400
+Received: by mail-wm1-x341.google.com with SMTP id a81so8356808wmf.5;
+ Sun, 12 Apr 2020 15:37:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=f8mojAlRUdlR/2NknA9ZDyMqw2xlNW4cv+f7vBTxHaE=;
- b=eziZT5VRpWIAND8SYyKHzijX/5xYTrfYTlPUcRQYAPxRa668XdW0jOPhlDojMaEV7p
- 2SP40m65aD/PN6dmSemcJ7snSHqvPG9wmFxqxY8hyI5zgQ4k72U2AeornVZbDxNouSXv
- 9xdN8ssu/gHRojGMjx8NOoCJBpooHyRNeJqiteQGn/Eod7g0lVyZPIM4yHq+JuX7OBfQ
- UV/PEndKzXUXZ7dV+b3VbzDM3h4pkRHPES4yayiu+nHUXwXP8Az/e7+dvpQtYLNc4W+H
- Xj3j1Bk9tLBdrhBoI7fUtJ1OAw9khMjV+azIuUu+HM+x4Pby7/hWOLjdLX5iVE0RkN90
- JtwQ==
+ bh=hYB5vJlsKA+XSoc5iK2InUvEzWA5ZYFw0I+M2ardO5E=;
+ b=BYyCk3ysLTDOxvtJ73/q5WWa8lxptRXaEql9KyX9gVYciRP/cpSDx11z3VBLqHevGi
+ ykC7mEJ03yLE/tNA/itYzDSffQy6jbRPpseuo4UqzJ1uwsRXkn18iaqw/MgWpta6rCaT
+ Vf1xxjmga+cOmGjRjidRgWAANClD4FNUO7tM8ku5pWUsQgEUGow0aQYZLEoTR2w68m3q
+ HKsUCKIUSPXFhNMA6/3dH1nAmCg56ltQs5nmbsUpxZuOsveyypf7KtCiqet1I8wUDQ45
+ Rfxiy1kXt4i6mFRQRkSwWLB7gmGiq1RQeinPvKQFwAcfef+hzWeAFiyqMP0WeCAZKQuX
+ bfWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=f8mojAlRUdlR/2NknA9ZDyMqw2xlNW4cv+f7vBTxHaE=;
- b=UikYRy83umpNf4liS/lKHGa8vzkg1YjHPm0UkqGSbUDSWsigDlOSu2JQEogmZvKA9d
- DsAHwEahXPNZ+yrSeJa3Pi+n8lYPkHSU0McD2NyyrF8MRldN1IdFCX+3ovBiL1LecFXU
- PlGZEgA9+MX/kFr76efk+vLf7UGMysOP8C6rjObmS6x3kpa8qBxQVSUsvqsg07+JU2J2
- bTSUdVObLoNPWKISkrHJ7kP5WxO9NEHBAWUZdEti7BvhnwY3KtvQiUWu/03APQpHDiDe
- aTwz/7GA71F/rIYuy0t2uqHidFI4eemM8dvvdD5XY1dYB8Ct49dXFw5tKGGo2ppDKuoP
- 6kYA==
-X-Gm-Message-State: AGi0Pua33YqZbxZi/gsZIW/j31h4sAdL/uGHXg84Wx91HE9clL8GFvNJ
- xGEtdJVnnTX/2U1tfCirnzF8I8O3Vm0tig==
-X-Google-Smtp-Source: APiQypKhADx8IsEhdzPX+miCokTZ08hDMUeYWbAJvUHG+uHvi03tXxbe6BnsWTdx9nq8xzvRWtrlww==
-X-Received: by 2002:adf:a345:: with SMTP id d5mr12993154wrb.23.1586731052287; 
- Sun, 12 Apr 2020 15:37:32 -0700 (PDT)
+ bh=hYB5vJlsKA+XSoc5iK2InUvEzWA5ZYFw0I+M2ardO5E=;
+ b=BhfuFYmKdKk7xTqNzY/0sF5KxbdjTul577k9LuCiZMAG0Mlv+fZ1ZItBEgy1FZ6zUg
+ m6Hz/Hf+MkODf9BA0sUFv+uEfq/6uintFPhJaLdmX9X0hQurFygsiGSLs69katCwmMD5
+ d5dqRW16L2eve7NqiR5SzeoUvP29U+os9AmZxrmwvMUXSu4u8hcHaSKHkKXkH6++WWEe
+ gCuv6nM5TruwbAnkGakg2W81McT62a1lWg3RXX5F9OCrySGqLQxZ+29Q1OkHHQ6lz1N4
+ i5Sd3XSVB2ITAy2oFGvZa3ScJpnl9blEvT8NxDIKQvQa13QZi7km4ihaXymJEcjIZ+56
+ qVGg==
+X-Gm-Message-State: AGi0PuZwRNVBDikrKfx48MNd8ye6KK6obBExxz5mXJuqwgS47CRXGMqs
+ utMovFcnFCVRxiN0ZVz8Nqsfe5hnG28yKg==
+X-Google-Smtp-Source: APiQypKljnwa59JiW3WSGCMMentFT30+ckG5mxUcJQUjQFWIdEJUCrFL68+FcSlCzYIkbBjcw+shKw==
+X-Received: by 2002:a7b:c959:: with SMTP id i25mr15552087wml.20.1586731055515; 
+ Sun, 12 Apr 2020 15:37:35 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.37.29
+ by smtp.gmail.com with ESMTPSA id d13sm12563559wrv.34.2020.04.12.15.37.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:37:31 -0700 (PDT)
+ Sun, 12 Apr 2020 15:37:35 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -76,9 +76,10 @@ Cc: Joel Stanley <joel@jms.id.au>,
  Andrew Jeffery <andrew@aj.id.au>, "Michael S. Tsirkin" <mst@redhat.com>,
  Richard Henderson <rth@twiddle.net>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 20/24] hw/riscv/sifive_u: Use single type_init()
-Date: Mon, 13 Apr 2020 00:36:15 +0200
-Message-Id: <20200412223619.11284-21-f4bug@amsat.org>
+Subject: [PATCH-for-5.1 v3 21/24] hw/riscv/sifive_u: Move some code from
+ realize() to init()
+Date: Mon, 13 Apr 2020 00:36:16 +0200
+Message-Id: <20200412223619.11284-22-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412223619.11284-1-f4bug@amsat.org>
 References: <20200412223619.11284-1-f4bug@amsat.org>
@@ -88,7 +89,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::444
+X-Received-From: 2a00:1450:4864:20::341
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -100,46 +101,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:37:42 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:37:46 -0000
 
-We can use a single type_init() to call multiple type_register*().
+Coccinelle reported:
+
+  $ spatch ... --timeout 60 --sp-file \
+    scripts/coccinelle/simplify-init-realize-error_propagate.cocci
+  HANDLING: ./hw/riscv/sifive_u.c
+  >>> possible moves from riscv_sifive_u_soc_init() to riscv_sifive_u_soc_realize() in ./hw/riscv/sifive_u.c:473
+
+Move the calls using &error_abort which don't depend on input
+updated before realize() to init().
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/riscv/sifive_u.c | 12 +++---------
- 1 file changed, 3 insertions(+), 9 deletions(-)
+v3: Typo 'depend of' -> 'depend on' (eblake)
+---
+ hw/riscv/sifive_u.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 998666c91f..9c90c94c33 100644
+index 9c90c94c33..754af19eef 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -601,13 +601,6 @@ static const TypeInfo riscv_sifive_u_soc_type_info = {
-     .class_init = riscv_sifive_u_soc_class_init,
- };
- 
--static void riscv_sifive_u_soc_register_types(void)
--{
--    type_register_static(&riscv_sifive_u_soc_type_info);
--}
--
--type_init(riscv_sifive_u_soc_register_types)
--
- static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
- {
-     MachineClass *mc = MACHINE_CLASS(oc);
-@@ -627,9 +620,10 @@ static const TypeInfo riscv_sifive_u_machine_typeinfo = {
-     .instance_size = sizeof(SiFiveUState),
- };
- 
--static void riscv_sifive_u_machine_init_register_types(void)
-+static void riscv_sifive_u_register_types(void)
- {
-+    type_register_static(&riscv_sifive_u_soc_type_info);
-     type_register_static(&riscv_sifive_u_machine_typeinfo);
+@@ -441,6 +441,8 @@ static void riscv_sifive_u_soc_init(Object *obj)
+     qdev_prop_set_uint32(DEVICE(&s->otp), "serial", OTP_SERIAL);
+     sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
+                           TYPE_CADENCE_GEM);
++    object_property_set_int(OBJECT(&s->gem), GEM_REVISION, "revision",
++                            &error_abort);
  }
  
--type_init(riscv_sifive_u_machine_init_register_types)
-+type_init(riscv_sifive_u_register_types)
+ static bool sifive_u_get_start_in_flash(Object *obj, Error **errp)
+@@ -569,8 +571,6 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+         qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+         qdev_set_nic_properties(DEVICE(&s->gem), nd);
+     }
+-    object_property_set_int(OBJECT(&s->gem), GEM_REVISION, "revision",
+-                            &error_abort);
+     object_property_set_bool(OBJECT(&s->gem), true, "realized", &err);
+     if (err) {
+         error_propagate(errp, err);
 -- 
 2.21.1
 
