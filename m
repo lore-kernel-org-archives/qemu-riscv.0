@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNlIm-0000bi-CU
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:42:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49302)
+	id 1jNlIo-0000jd-Rg
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 18:42:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49349)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlIj-0000VF-4d
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:06 -0400
+ id 1jNlIl-0000aK-T3
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:08 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
  (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlIh-0005h7-St
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:05 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:36756)
+ id 1jNlIj-0005lA-PX
+ for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 18:42:07 -0400
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b]:36266)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jNlIY-0005ZA-QU; Sun, 12 Apr 2020 18:41:54 -0400
-Received: by mail-wr1-x443.google.com with SMTP id u13so8060526wrp.3;
- Sun, 12 Apr 2020 15:41:53 -0700 (PDT)
+ id 1jNlIb-0005ag-LN; Sun, 12 Apr 2020 18:41:57 -0400
+Received: by mail-wm1-x32b.google.com with SMTP id a201so8022464wme.1;
+ Sun, 12 Apr 2020 15:41:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=s26/jKdIQzWfIjPpMeEX8djoa/1k1238nClydsEcBV4=;
- b=AZSVZJyZk25y88lxeUuPjcWgORS5v/XkotN1qAfbMA4CwV/+r55keJwTWj2YqRqkLT
- 2TMuCNDdMbYOtExjTCdAJ19siFQ3Gl0M7b7CJumolRMDb7Jb9NXQfatFazAAMNVHix6D
- g+PxMaImmiaw8SqOikrlNOjCdKTw7+RG1ua+cE/CNLT1u1a5aX9SCXOhymxatxEX/7Gt
- OWXf0JxQA+/ywVm89PrgDGHNQIb5kyyVM01kSd2ZVYHks9/w/5IUvl2bn7ta/eDucnjA
- B0enZCh2MMSBtpUl3NaqtBmeZ5WG2X3oCtW84HwaxAPdHoYDPjS2y4TboZKIWfuq5wWB
- 7DVQ==
+ bh=LZt0wKgOcXbd9J2Y1x7+Xq5w37mnJzb6ovGxsczGG64=;
+ b=Ff51tXSFzMGTVB6OFe8osL8ONzouppYDRkA2PIv3gsEFbZbh7q8ABs7ytxaJIG5bbl
+ SaeJtifskcrkTRvldi2nu7JOj/G4UcSLaf9/ndJ1pJfvdSERV6BQfA75byp+mF6y7ASz
+ gCTdoWdE686ZrX05sirXkyRY3oos7DODVumfnk8QpvNUGUXQRLrb6NYO9McQKJXnymy2
+ f52qr55WLRuifIiwUdlcd1pq7FwLSH15YMqbRtbBdqzlBN5fFhP2pTRiTGry+FUQVQEQ
+ eef+vFNbz+swgk4Mz7sg/TXs4q+tKZ6oCpJ62G7WbY8Y1YDssqlqMgpZX9hd9tkLQ3Ja
+ 3GfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=s26/jKdIQzWfIjPpMeEX8djoa/1k1238nClydsEcBV4=;
- b=a6xU/GewKFg2EPifaB3zdBuCn4FaZ3775gEXpbqEKowLZ2zEnBU6C+mF48Q+ApHYkY
- cG6x+M4pbOtHhmbwJpTpwA2RQNHNa5QvxfmxvDeDhYwWP5jCIX2W3065cXLXlK5s/75/
- HuXQ/Qk6tVoFTlG5u10Bx/FEGkkDXwjonHzYF3VjjURWVrmP3B3GqB/YitOloCTEq9Ea
- w1ZIB76K9jb9WmECieVURnzoj6CqAU15vESMuoViede73KQ12avgrxYytUoG0qsOdOx+
- 4F2n1ynK5ET+tRCpucKIf7bdT0RkM+ARBX//y8ZcoHLWBjPMHhQnKClcB6W6LdoFLXsM
- +J6w==
-X-Gm-Message-State: AGi0Pubidx5gSNzFowNBaciVG7HYDyiMr1QbuHpqXPfwb31eT3YD+8bj
- 2GxcV477T4Twe/92RxqPAI4TRK43i3aezg==
-X-Google-Smtp-Source: APiQypJNQES3STaFE/iPFedjPGLNxfz6ri/LuDTUxjeLso8JVqGqV9QntKhVhXvAqIl1LhKIg3mPxw==
-X-Received: by 2002:a5d:480b:: with SMTP id l11mr17215356wrq.25.1586731312594; 
- Sun, 12 Apr 2020 15:41:52 -0700 (PDT)
+ bh=LZt0wKgOcXbd9J2Y1x7+Xq5w37mnJzb6ovGxsczGG64=;
+ b=Tk7Gm0L16z/EsYGQHEIEL66TYQg3iSFoOiXPwus5jKz+RcUuxYSw5FhDrt5ljcpjXe
+ 9jk1PDBwPq6jOaW2J/wT0URj1OaHg3P7pyj7QOU5hoWKEtzzLvhCAt61hzIE6oIh1lB9
+ EXfi4+T3t9ZuzGt1NjKbu0H3r9EJjWb3k+7nW46BGgfJp3CaZ58z+004AyWI1QXph/rF
+ prLbxFL3fhFjqCRwIt9QbI2N59AvIbf4IMlPRQYRL12VJHUd+sMasNEe0Uyd2t8AjOxH
+ gDLMfbEte16aBSGoRRIzIuljmtkZE4ElN3H97INFFmydp/PuuqPojP0VGMs5hUyCFKbo
+ TOXg==
+X-Gm-Message-State: AGi0PubCiH1PKtgA6zKfIsgXXQcfFsWgd1CHrURFVTiNhOcpYImzfDDG
+ i6XCNankBCAN/58+A1/wOT4vyyNJ/T5nSw==
+X-Google-Smtp-Source: APiQypL/eTMuhBIW7cJJft81oZJNUAucSomY9Qu5NwW35Awp1q6yAaZ8cPQZMSNMkHpIPuRZhpyEJA==
+X-Received: by 2002:a05:600c:224a:: with SMTP id
+ a10mr16506355wmm.174.1586731316198; 
+ Sun, 12 Apr 2020 15:41:56 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id f63sm12083825wma.47.2020.04.12.15.41.49
+ by smtp.gmail.com with ESMTPSA id f63sm12083825wma.47.2020.04.12.15.41.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:41:51 -0700 (PDT)
+ Sun, 12 Apr 2020 15:41:55 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -79,10 +80,10 @@ Cc: qemu-block@nongnu.org, Richard Henderson <rth@twiddle.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH-for-5.1 v3 01/23] scripts/coccinelle: Catch missing
- error_propagate() calls in realize()
-Date: Mon, 13 Apr 2020 00:41:22 +0200
-Message-Id: <20200412224144.12205-2-f4bug@amsat.org>
+Subject: [PATCH-for-5.1 v3 02/23] hw/arm/fsl-imx: Add missing
+ error-propagation code
+Date: Mon, 13 Apr 2020 00:41:23 +0200
+Message-Id: <20200412224144.12205-3-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200412224144.12205-1-f4bug@amsat.org>
 References: <20200412224144.12205-1-f4bug@amsat.org>
@@ -92,7 +93,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2a00:1450:4864:20::443
+X-Received-From: 2a00:1450:4864:20::32b
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,92 +105,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Apr 2020 22:42:06 -0000
+X-List-Received-Date: Sun, 12 Apr 2020 22:42:09 -0000
 
-In some DeviceClass::realize() while we can propagate errors
-to the caller, we forgot to do so. Add a Coccinelle patch to
-automatically add the missing code.
+Patch created mechanically by running:
 
-Inspired-by: Peter Maydell <peter.maydell@linaro.org>
+  $ spatch \
+    --macro-file scripts/cocci-macro-file.h --include-headers \
+    --sp-file scripts/coccinelle/use-error_propagate-in-realize.cocci \
+    --keep-comments --smpl-spacing --in-place --dir hw
+
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- .../use-error_propagate-in-realize.cocci      | 54 +++++++++++++++++++
- MAINTAINERS                                   |  1 +
- 2 files changed, 55 insertions(+)
- create mode 100644 scripts/coccinelle/use-error_propagate-in-realize.cocci
+ hw/arm/fsl-imx25.c |  6 +++++-
+ hw/arm/fsl-imx6.c  | 18 +++++++++++++++---
+ 2 files changed, 20 insertions(+), 4 deletions(-)
 
-diff --git a/scripts/coccinelle/use-error_propagate-in-realize.cocci b/scripts/coccinelle/use-error_propagate-in-realize.cocci
-new file mode 100644
-index 0000000000..7b59277a50
---- /dev/null
-+++ b/scripts/coccinelle/use-error_propagate-in-realize.cocci
-@@ -0,0 +1,54 @@
-+// Add missing error-propagation code in DeviceClass::realize()
-+//
-+// Copyright: (C) 2020 Philippe Mathieu-Daudé
-+// This work is licensed under the terms of the GNU GPLv2 or later.
-+//
-+// spatch \
-+//  --macro-file scripts/cocci-macro-file.h --include-headers \
-+//  --sp-file scripts/coccinelle/use-error_abort-in-instance_init.cocci \
-+//  --keep-comments --timeout 60 --in-place
-+//
-+// Inspired by https://www.mail-archive.com/qemu-devel@nongnu.org/msg691638.html
-+
-+
-+@ match_class_init @
-+TypeInfo info;
-+identifier class_initfn;
-+@@
-+    info.class_init = class_initfn;
-+
-+
-+@ match_realize @
-+identifier match_class_init.class_initfn;
-+DeviceClass *dc;
-+identifier realizefn;
-+@@
-+void class_initfn(...)
-+{
-+    ...
-+    dc->realize = realizefn;
-+    ...
-+}
-+
-+
-+@ propagate_in_realize @
-+identifier match_realize.realizefn;
-+identifier err;
-+identifier errp;
-+identifier func_with_errp;
-+symbol error_abort, error_fatal;
-+@@
-+void realizefn(..., Error **errp)
-+{
-+    ...
-+    Error *err = NULL;
-+    <+...
-+    func_with_errp(...,
-+-                      \(&error_abort\|&error_fatal\));
-++                      &err);
-++   if (err) {
-++       error_propagate(errp, err);
-++       return;
-++   }
-+    ...+>
-+}
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 6203543ec0..54e05ecbdf 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2060,6 +2060,7 @@ F: scripts/coccinelle/error_propagate_null.cocci
- F: scripts/coccinelle/remove_local_err.cocci
- F: scripts/coccinelle/simplify-init-realize-error_propagate.cocci
- F: scripts/coccinelle/use-error_fatal.cocci
-+F: scripts/coccinelle/use-error_propagate-in-realize.cocci
+diff --git a/hw/arm/fsl-imx25.c b/hw/arm/fsl-imx25.c
+index 6f1a82ce3d..3d87fe867e 100644
+--- a/hw/arm/fsl-imx25.c
++++ b/hw/arm/fsl-imx25.c
+@@ -295,7 +295,11 @@ static void fsl_imx25_realize(DeviceState *dev, Error **errp)
+         };
  
- GDB stub
- M: Alex Bennée <alex.bennee@linaro.org>
+         object_property_set_bool(OBJECT(&s->usb[i]), true, "realized",
+-                                 &error_abort);
++                                 &err);
++        if (err) {
++            error_propagate(errp, err);
++            return;
++        }
+         sysbus_mmio_map(SYS_BUS_DEVICE(&s->usb[i]), 0, usb_table[i].addr);
+         sysbus_connect_irq(SYS_BUS_DEVICE(&s->usb[i]), 0,
+                            qdev_get_gpio_in(DEVICE(&s->avic),
+diff --git a/hw/arm/fsl-imx6.c b/hw/arm/fsl-imx6.c
+index 6bf8aa0404..b3cef5bb57 100644
+--- a/hw/arm/fsl-imx6.c
++++ b/hw/arm/fsl-imx6.c
+@@ -359,7 +359,11 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
+     /* USB */
+     for (i = 0; i < FSL_IMX6_NUM_USB_PHYS; i++) {
+         object_property_set_bool(OBJECT(&s->usbphy[i]), true, "realized",
+-                                 &error_abort);
++                                 &err);
++        if (err) {
++            error_propagate(errp, err);
++            return;
++        }
+         sysbus_mmio_map(SYS_BUS_DEVICE(&s->usbphy[i]), 0,
+                         FSL_IMX6_USBPHY1_ADDR + i * 0x1000);
+     }
+@@ -372,7 +376,11 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
+         };
+ 
+         object_property_set_bool(OBJECT(&s->usb[i]), true, "realized",
+-                                 &error_abort);
++                                 &err);
++        if (err) {
++            error_propagate(errp, err);
++            return;
++        }
+         sysbus_mmio_map(SYS_BUS_DEVICE(&s->usb[i]), 0,
+                         FSL_IMX6_USBOH3_USB_ADDR + i * 0x200);
+         sysbus_connect_irq(SYS_BUS_DEVICE(&s->usb[i]), 0,
+@@ -430,7 +438,11 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
+         };
+ 
+         object_property_set_bool(OBJECT(&s->wdt[i]), true, "realized",
+-                                 &error_abort);
++                                 &err);
++        if (err) {
++            error_propagate(errp, err);
++            return;
++        }
+ 
+         sysbus_mmio_map(SYS_BUS_DEVICE(&s->wdt[i]), 0, FSL_IMX6_WDOGn_ADDR[i]);
+     }
 -- 
 2.21.1
 
