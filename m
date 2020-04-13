@@ -1,86 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jO7Sx-0007wH-1T
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Apr 2020 18:22:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46173)
+	id 1jO7TX-0000e9-Ju
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Apr 2020 18:22:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46254)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jO7Su-0007oo-7P
- for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 18:22:05 -0400
+ (envelope-from <alistair23@gmail.com>) id 1jO7TU-0000W5-JC
+ for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 18:22:41 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jO7St-0005xe-7m
- for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 18:22:04 -0400
-Received: from mail-vs1-xe43.google.com ([2607:f8b0:4864:20::e43]:37486)
+ (envelope-from <alistair23@gmail.com>) id 1jO7TT-00063l-Jp
+ for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 18:22:40 -0400
+Received: from mail-ua1-x941.google.com ([2607:f8b0:4864:20::941]:36451)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
  (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jO7Sl-0005vo-N4; Mon, 13 Apr 2020 18:21:55 -0400
-Received: by mail-vs1-xe43.google.com with SMTP id o3so6492710vsd.4;
- Mon, 13 Apr 2020 15:21:54 -0700 (PDT)
+ id 1jO7TN-00062c-9p; Mon, 13 Apr 2020 18:22:33 -0400
+Received: by mail-ua1-x941.google.com with SMTP id m15so3732258uao.3;
+ Mon, 13 Apr 2020 15:22:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=v0jThFdD3YVZ/w6qPk+uCkOCoUfxMusuJ3Be9Jn1344=;
- b=Cm5P/KbzbJd7oqOLaztSdQIm99FCsdFv8TiABQDJ0oUFnDYLg4Kyiy42JquV/P86Fr
- 64eTJYO9Y7ms0PuHrq0LJfcMZ2DGScEVH5wEgxp7VkFuFPF8uFUiIA0Ap51Qto1Ahvr6
- KSy8/TzOPfxFeGr6Fb18+1mgMnsLfHSFNDnmQeBf6ID4c4ZFqE+CJAqiRygGYJ+rB5MC
- N1OLF82tGDOF+FaR9jUwLUNvo8CPIq0hkR4FZTfufQajBcK7bS6EDfDfJCVEcegXMEfe
- cTl+otnt4zjQYxoHdGPhFb9yW36SQmwrn5wtMhHYg2efSv1xp6UlfI+3T4HfAoclKJ9q
- sFWQ==
+ bh=YzMwyUxjG9VjYUhzYdWXMKxuI7FUnl5tFZL2IUdOTm8=;
+ b=dpignNU7ncFb7s4gJxsqDp964C4u1fm8PFQTs7wsS/Ko6GVjwhgPPIW3qLZca7/c1l
+ oxVdZEl3ZPQKyv8VPVYF6YSClTiReCv6v0oGjEEQ7exzKtfIOaMnvIHxfgBPu4eTSX30
+ KXenLuN8g6q2QmHLMgbYvQIteKyhdqhKE9fvfP5t3P73AjQMtsPMDo/AgLijqij2c0ES
+ 2vBxww5h+3O5V/Ie7oh/UD9k9nIFMr82/B+wlNRYReJM8c28lPI8LcE9dNwfqwH9+4f+
+ P+P+0uKat6NvQRAmZv886vWTe4bx5TjkTVNoMgJYyUwZZSKYdZjUVlf+9dyW8okqShvE
+ 2VBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=v0jThFdD3YVZ/w6qPk+uCkOCoUfxMusuJ3Be9Jn1344=;
- b=q6JihgV4viyZqDGFhicefQFkAfEaZZ1AfEPmlkmgtJYG9KKbX0abHZ43yTqYNOmhG7
- Lmlg4ExX61Jzbz28+Q7hMyvG4wz2Dq8nTR84OFWt/6rJcR6BaVhOQfBAYqqAV/1zNdzN
- CoiY7gYGyv74xrWOPYaTJRD3y6oO6EYD7SPEdP9PXijstLIgjOCMPh4QBRflmGnUN9gK
- BN1Tb9FybzGs+TSn9feuOJcPbncb4VulKCXDLLbhgsY6/zjgFUqJrldnBZPVrOQcMjej
- VqpOe8tNgwZEyGL7wau/xLfJr+w+03ePqtFydqbthQU3d4pYEOLCe6DzVYJbW+Nv3BRl
- Lv7Q==
-X-Gm-Message-State: AGi0PuZNVlbnU+3g45nOvjMPM85/3BKRyucIipYVZcPDxEMBrhVT5DPL
- dZbA/mAmkEXXjcB9nI1kKsQwLbcvE40PF1mK8z8=
-X-Google-Smtp-Source: APiQypJEDRlNQT/C43oFGRNuua/kx8l092CfOoAQa9HHRf7qUUlUMYp1enTXj7oKdDgmdsEHCTQTZIuxEsqXx4b+y7E=
-X-Received: by 2002:a67:e2d5:: with SMTP id i21mr4717956vsm.151.1586816513982; 
- Mon, 13 Apr 2020 15:21:53 -0700 (PDT)
+ bh=YzMwyUxjG9VjYUhzYdWXMKxuI7FUnl5tFZL2IUdOTm8=;
+ b=UqSjcG8accLMrXDcuSG4ffYC0gB7mx/QXW19DMjMuA+1q922bVj0mygWQS4VZ/IL6b
+ UZMoZGjsOuYmXIKOuTumqcfQjacGNXuh4QYQu4Jsi9yvWcNyvvGsqMN1gdp7jplX1XZK
+ JvAIFpnK6Bb9xhbOxFtkT9v86TTgVCHXVLgukzgq9Cpi8P26T/V5zDCbbze4oUEl9jIj
+ JCf/P2vwPDQEkzfml+L44VUOONSt2JS4lYipWozVTjWmn9q4gAo9yZSRmCQNbR+0vso8
+ opJC3JUHXr5NiZwN1w0QoEdxJYtYCjJ1Rcoo1CAZV7voxJMIY+K9A1qrcDXMtJpU/f0V
+ 8f7Q==
+X-Gm-Message-State: AGi0PuaZ5+SGEixCLLSPefRUb76i+VHKUbIgEjNwiF6wSQrxZeAyl2Mq
+ R0SV9oiHqXJPAYikhjjjdvBs3hHOUq5frG30MDk=
+X-Google-Smtp-Source: APiQypIqN5k/MQVlOi3FgEymp/5vB6DR/mb7e8jW0DqPuw2/0Xu2EeD+mIEn4zRoJsYVz7l14DRluQDMZGhLV4MDEP0=
+X-Received: by 2002:a9f:2964:: with SMTP id t91mr12504390uat.21.1586816552774; 
+ Mon, 13 Apr 2020 15:22:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200412224144.12205-1-f4bug@amsat.org>
- <20200412224144.12205-11-f4bug@amsat.org>
-In-Reply-To: <20200412224144.12205-11-f4bug@amsat.org>
+References: <20200412223619.11284-1-f4bug@amsat.org>
+ <20200412223619.11284-25-f4bug@amsat.org>
+In-Reply-To: <20200412223619.11284-25-f4bug@amsat.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 13 Apr 2020 15:13:37 -0700
-Message-ID: <CAKmqyKMzVTexQcri0t62fdZnU-cxYPNH-vN1xDT5T4CN+3Y64Q@mail.gmail.com>
-Subject: Re: [PATCH-for-5.1 v3 10/23] hw/microblaze/xlnx-zynqmp-pmu: Add
- missing error-propagation code
+Date: Mon, 13 Apr 2020 15:14:16 -0700
+Message-ID: <CAKmqyKPV-BLHoic+y7W_j4E2WWkmgtOxiTS68z4G_34DtcTXpQ@mail.gmail.com>
+Subject: Re: [PATCH-for-5.1 v3 24/24] hw/riscv/sifive_u: Rename
+ MachineClass::init()
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ Fam Zheng <fam@euphon.net>, Peter Maydell <peter.maydell@linaro.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Jeff Cody <codyprime@gmail.com>,
+ Jason Wang <jasowang@redhat.com>, 
  Alistair Francis <Alistair.Francis@wdc.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
  Subbaraya Sundeep <sundeep.lkml@gmail.com>, Qemu-block <qemu-block@nongnu.org>,
- Markus Armbruster <armbru@redhat.com>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>, 
- Max Reitz <mreitz@redhat.com>, Joel Stanley <joel@jms.id.au>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- David Gibson <david@gibson.dropbear.id.au>, 
+ Markus Armbruster <armbru@redhat.com>, Max Reitz <mreitz@redhat.com>,
+ Joel Stanley <joel@jms.id.au>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Richard Henderson <rth@twiddle.net>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Eduardo Habkost <ehabkost@redhat.com>,
- Alistair Francis <alistair@alistair23.me>, 
- Beniamino Galvani <b.galvani@gmail.com>, qemu-arm <qemu-arm@nongnu.org>, 
+ Eduardo Habkost <ehabkost@redhat.com>, Xie Changlong <xiechanglong.d@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Beniamino Galvani <b.galvani@gmail.com>, 
+ qemu-arm <qemu-arm@nongnu.org>, Peter Chubb <peter.chubb@nicta.com.au>, 
  =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Richard Henderson <rth@twiddle.net>, Kevin Wolf <kwolf@redhat.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Andrew Jeffery <andrew@aj.id.au>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Andrew Baumann <Andrew.Baumann@microsoft.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>, 
- Michael Walle <michael@walle.cc>, "open list:New World" <qemu-ppc@nongnu.org>, 
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
+ Palmer Dabbelt <palmer@dabbelt.com>, David Gibson <david@gibson.dropbear.id.au>,
+ Kevin Wolf <kwolf@redhat.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Andrew Jeffery <andrew@aj.id.au>, Wen Congyang <wencongyang2@huawei.com>, 
+ Jean-Christophe Dubois <jcd@tribudubois.net>,
+ "open list:New World" <qemu-ppc@nongnu.org>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Paolo Bonzini <pbonzini@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::e43
+X-Received-From: 2607:f8b0:4864:20::941
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -92,17 +91,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Apr 2020 22:22:05 -0000
+X-List-Received-Date: Mon, 13 Apr 2020 22:22:41 -0000
 
-On Sun, Apr 12, 2020 at 3:58 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
+On Sun, Apr 12, 2020 at 3:54 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
 g> wrote:
 >
-> Patch created mechanically by running:
->
->   $ spatch \
->     --macro-file scripts/cocci-macro-file.h --include-headers \
->     --sp-file scripts/coccinelle/use-error_propagate-in-realize.cocci \
->     --keep-comments --smpl-spacing --in-place --dir hw
+> As there already is the riscv_sifive_u_soc_init() method,
+> rename riscv_sifive_u_init() as riscv_sifive_u_machine_init().
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 
@@ -111,29 +106,34 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/microblaze/xlnx-zynqmp-pmu.c | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
+>  hw/riscv/sifive_u.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/hw/microblaze/xlnx-zynqmp-pmu.c b/hw/microblaze/xlnx-zynqmp-=
-pmu.c
-> index 2aa602cf85..4ecbea7fdc 100644
-> --- a/hw/microblaze/xlnx-zynqmp-pmu.c
-> +++ b/hw/microblaze/xlnx-zynqmp-pmu.c
-> @@ -123,7 +123,11 @@ static void xlnx_zynqmp_pmu_soc_realize(DeviceState =
-*dev, Error **errp)
->      /* Connect the IPI device */
->      for (int i =3D 0; i < XLNX_ZYNQMP_PMU_NUM_IPIS; i++) {
->          object_property_set_bool(OBJECT(&s->ipi[i]), true, "realized",
-> -                                 &error_abort);
-> +                                 &err);
-> +        if (err) {
-> +            error_propagate(errp, err);
-> +            return;
-> +        }
->          sysbus_mmio_map(SYS_BUS_DEVICE(&s->ipi[i]), 0, ipi_addr[i]);
->          sysbus_connect_irq(SYS_BUS_DEVICE(&s->ipi[i]), 0,
->                             qdev_get_gpio_in(DEVICE(&s->intc), ipi_irq[i]=
-));
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 7bf1f30a35..e13ab34de4 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -312,7 +312,7 @@ static void create_fdt(SiFiveUState *s, const struct =
+MemmapEntry *memmap,
+>      g_free(nodename);
+>  }
+>
+> -static void riscv_sifive_u_init(MachineState *machine)
+> +static void riscv_sifive_u_machine_init(MachineState *machine)
+>  {
+>      const struct MemmapEntry *memmap =3D sifive_u_memmap;
+>      SiFiveUState *s =3D RISCV_U_MACHINE(machine);
+> @@ -606,7 +606,7 @@ static void riscv_sifive_u_machine_class_init(ObjectC=
+lass *oc, void *data)
+>      MachineClass *mc =3D MACHINE_CLASS(oc);
+>
+>      mc->desc =3D "RISC-V Board compatible with SiFive U SDK";
+> -    mc->init =3D riscv_sifive_u_init;
+> +    mc->init =3D riscv_sifive_u_machine_init;
+>      mc->max_cpus =3D SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CP=
+U_COUNT;
+>      mc->min_cpus =3D SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+>      mc->default_cpus =3D mc->min_cpus;
 > --
 > 2.21.1
 >
