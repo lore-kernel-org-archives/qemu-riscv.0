@@ -1,62 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jNnxE-0006hV-AO
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Apr 2020 21:32:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36087)
+	id 1jO13i-0001Od-DN
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Apr 2020 11:31:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55158)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <no-reply@patchew.org>) id 1jNnxB-0006ZH-0R
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 21:32:03 -0400
+ (envelope-from <josemartins90@gmail.com>) id 1jO13g-0001OJ-7e
+ for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 11:31:37 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <no-reply@patchew.org>) id 1jNnx9-0002rv-RG
- for qemu-riscv@nongnu.org; Sun, 12 Apr 2020 21:32:00 -0400
-Resent-Date: Sun, 12 Apr 2020 21:32:00 -0400
-Resent-Message-Id: <E1jNnx9-0002rv-RG@eggs.gnu.org>
-Received: from sender4-of-o53.zoho.com ([136.143.188.53]:21390)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <no-reply@patchew.org>)
- id 1jNnwz-0002dl-QO; Sun, 12 Apr 2020 21:31:50 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1586741409; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=G3wDKTZtvh6mLs8WTe1FPQ47spBioyPgehatm5mzZpGLAGVIrPgaIO3mM3iVipF4oMsbe6nqCAThull5HdUSNxLN8NuPQIIQM2D+RiyCvo1CQRm8H/WZVedkaPG3GtQY6jUUE3ReSRS0kLfWexFpw8oNeT1fXQlv/T7qCRhlNBs=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1586741409;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=DXA8ROflQaKr4S/rbswC1itG5CejlDkW2QEiSUsR/5U=; 
- b=ey3Uai/yjI0xltaIIlsp8pDejsNjswbQCnFtb/SCnkMFGC94BrjaBnUbJd4Urf8/4ZE3trkKyB8xI1zNUFFWFTpdVMmDXkcjXQvWyGWRF5f68g5FotylrVC9DCUd1aAsgRK3pzGEx67XvAOKclIGMtqBM5/IL4VhJfSy3EUsEyE=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1586741406599264.8925429120661;
- Sun, 12 Apr 2020 18:30:06 -0700 (PDT)
-In-Reply-To: <20200412224144.12205-1-f4bug@amsat.org>
-Subject: Re: [PATCH-for-5.1 v3 00/23] various: Fix error-propagation with
- Coccinelle scripts (part 2)
-Reply-To: <qemu-devel@nongnu.org>
-Message-ID: <158674140284.24582.4738303734545201273@39012742ff91>
+ (envelope-from <josemartins90@gmail.com>) id 1jO13f-0005aY-F3
+ for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 11:31:36 -0400
+Received: from mail-io1-xd2e.google.com ([2607:f8b0:4864:20::d2e]:46228)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <josemartins90@gmail.com>)
+ id 1jO13f-0005a1-BG
+ for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 11:31:35 -0400
+Received: by mail-io1-xd2e.google.com with SMTP id i3so9669875ioo.13
+ for <qemu-riscv@nongnu.org>; Mon, 13 Apr 2020 08:31:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=MUmblb9c1CNe5xBbMiKwl0KEMfq+O1gLyIrddM1vHJc=;
+ b=oLRj4Z8tUbgH5cxB0Yoi+opmeWkPKZAdY7FKoFdTaYOqWvrqJCgSs3CcKQY6xDSCqv
+ gqjtTb8FEzb718il0J1X/39FOZ/x9XhB49GksBMTe9iiJ0hJ2somZWBl49zachxKuYHh
+ ea/zI7A0qpH4sf06IzVwCwgynvV1IsnXVIuoIjgMrOGmpuO598hMQTEpFU6qmnc3IySq
+ 8j3Drasmc+R/udi4/uwKghtqEUlk8+IkhZcne5N5L1wJ1ZjgJfnfP0+kmZNtcxOF/yEK
+ SrdBM32RwPhE6J4BXHmRKK8TUTFZY11ugBTUfkitg6rmkWdvGpqq9E631rsTORo75/ly
+ Txqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=MUmblb9c1CNe5xBbMiKwl0KEMfq+O1gLyIrddM1vHJc=;
+ b=gY5DwkKvUKMq66B+AfU0UavAu1+qGdov6qCXp9w91Ot7nn8N2gxWYGD9AZmADbXOLW
+ Wiq5gY+bIkmiOOGd1WVXuA04XItQIYYR7C5bpEOFH9r3d7V4LlmKFYzprU6a4sisimLt
+ rQwa6wv1W2vwkAVPxVTWMoZHMRspi4xHnzTjgdXUCOqFk5N6gLfzgz8EWiljd38kQkYC
+ DHB6xaAgMeS2KETsI4N6rK7CWDJvcRASUgyzEDFClriuOauj4tp1Z5lmX8mGOuuYXj9P
+ wsa/1+tNOjr+wx+Dwtz0wkEcgz6kgSYjL7Qv0UOn1eRV/zgmcAz9S0XKcSxAXD19gH6O
+ bJLg==
+X-Gm-Message-State: AGi0PubooOIT3A2CLrwZsPdUvHE4FlXy7RsZQv2I/Uf/oV7lkzJdrjrY
+ o1ta0c+uCEhjazDMjnNB/bdR4c7BgXhFMfQSnW1oCCTl
+X-Google-Smtp-Source: APiQypJad8awirmOAsRBkSYRGvanKJdsVZgcUq6AMGJkTPXV8pPtDEZJJD7wf9ClUcKuyyfjlG1qi1oeM2cacUJlUtc=
+X-Received: by 2002:a5d:8d90:: with SMTP id b16mr17010372ioj.9.1586791892927; 
+ Mon, 13 Apr 2020 08:31:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: f4bug@amsat.org
-Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, sagark@eecs.berkeley.edu,
- mst@redhat.com, jasowang@redhat.com, mark.cave-ayland@ilande.co.uk,
- Alistair.Francis@wdc.com, edgar.iglesias@gmail.com, sundeep.lkml@gmail.com,
- qemu-block@nongnu.org, armbru@redhat.com, aleksandar.qemu.devel@gmail.com,
- mreitz@redhat.com, joel@jms.id.au, palmer@dabbelt.com,
- aleksandar.rikalo@rt-rk.com, david@gibson.dropbear.id.au, philmd@redhat.com,
- ehabkost@redhat.com, alistair@alistair23.me, b.galvani@gmail.com,
- qemu-arm@nongnu.org, clg@kaod.org, rth@twiddle.net, kwolf@redhat.com,
- qemu-riscv@nongnu.org, andrew@aj.id.au, kbastian@mail.uni-paderborn.de,
- f4bug@amsat.org, Andrew.Baumann@microsoft.com, jcd@tribudubois.net,
- michael@walle.cc, qemu-ppc@nongnu.org, pbonzini@redhat.com,
- aurelien@aurel32.net
-Date: Sun, 12 Apr 2020 18:30:06 -0700 (PDT)
-X-ZohoMailClient: External
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
- [fuzzy]
-X-Received-From: 136.143.188.53
+From: Jose Martins <josemartins90@gmail.com>
+Date: Mon, 13 Apr 2020 16:31:21 +0100
+Message-ID: <CAC41xo1YDkehHariEcUJh13oYf1dx_QVBSj2Frr=kYK_Lsqkzw@mail.gmail.com>
+Subject: hyp v0.6 work?
+To: qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
+ recognized.
+X-Received-From: 2607:f8b0:4864:20::d2e
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,41 +60,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Apr 2020 01:32:03 -0000
+X-List-Received-Date: Mon, 13 Apr 2020 15:31:37 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDQxMjIyNDE0NC4xMjIw
-NS0xLWY0YnVnQGFtc2F0Lm9yZy8KCgoKSGksCgpUaGlzIHNlcmllcyBmYWlsZWQgdGhlIGRvY2tl
-ci1xdWlja0BjZW50b3M3IGJ1aWxkIHRlc3QuIFBsZWFzZSBmaW5kIHRoZSB0ZXN0aW5nIGNvbW1h
-bmRzIGFuZAp0aGVpciBvdXRwdXQgYmVsb3cuIElmIHlvdSBoYXZlIERvY2tlciBpbnN0YWxsZWQs
-IHlvdSBjYW4gcHJvYmFibHkgcmVwcm9kdWNlIGl0CmxvY2FsbHkuCgo9PT0gVEVTVCBTQ1JJUFQg
-QkVHSU4gPT09CiMhL2Jpbi9iYXNoCm1ha2UgZG9ja2VyLWltYWdlLWNlbnRvczcgVj0xIE5FVFdP
-Uks9MQp0aW1lIG1ha2UgZG9ja2VyLXRlc3QtcXVpY2tAY2VudG9zNyBTSE9XX0VOVj0xIEo9MTQg
-TkVUV09SSz0xCj09PSBURVNUIFNDUklQVCBFTkQgPT09CgpSQU1CbG9jayAic3JhbSBBIiBhbHJl
-YWR5IHJlZ2lzdGVyZWQsIGFib3J0IQpCcm9rZW4gcGlwZQovdG1wL3FlbXUtdGVzdC9zcmMvdGVz
-dHMvcXRlc3QvbGlicXRlc3QuYzoxNzU6IGtpbGxfcWVtdSgpIGRldGVjdGVkIFFFTVUgZGVhdGgg
-ZnJvbSBzaWduYWwgNiAoQWJvcnRlZCkgKGNvcmUgZHVtcGVkKQpFUlJPUiAtIHRvbyBmZXcgdGVz
-dHMgcnVuIChleHBlY3RlZCA2LCBnb3QgNSkKbWFrZTogKioqIFtjaGVjay1xdGVzdC1hYXJjaDY0
-XSBFcnJvciAxCm1ha2U6ICoqKiBXYWl0aW5nIGZvciB1bmZpbmlzaGVkIGpvYnMuLi4uCiAgVEVT
-VCAgICBpb3Rlc3QtcWNvdzI6IDE1NAogIFRFU1QgICAgaW90ZXN0LXFjb3cyOiAxNTYKLS0tCiAg
-ICByYWlzZSBDYWxsZWRQcm9jZXNzRXJyb3IocmV0Y29kZSwgY21kKQpzdWJwcm9jZXNzLkNhbGxl
-ZFByb2Nlc3NFcnJvcjogQ29tbWFuZCAnWydzdWRvJywgJy1uJywgJ2RvY2tlcicsICdydW4nLCAn
-LS1sYWJlbCcsICdjb20ucWVtdS5pbnN0YW5jZS51dWlkPWJiYmI5ZDI5YjRlNDQ3N2Y5YTNlMGRm
-YmUxYmY2OWRiJywgJy11JywgJzEwMDMnLCAnLS1zZWN1cml0eS1vcHQnLCAnc2VjY29tcD11bmNv
-bmZpbmVkJywgJy0tcm0nLCAnLWUnLCAnVEFSR0VUX0xJU1Q9JywgJy1lJywgJ0VYVFJBX0NPTkZJ
-R1VSRV9PUFRTPScsICctZScsICdWPScsICctZScsICdKPTE0JywgJy1lJywgJ0RFQlVHPScsICct
-ZScsICdTSE9XX0VOVj0xJywgJy1lJywgJ0NDQUNIRV9ESVI9L3Zhci90bXAvY2NhY2hlJywgJy12
-JywgJy9ob21lL3BhdGNoZXcyLy5jYWNoZS9xZW11LWRvY2tlci1jY2FjaGU6L3Zhci90bXAvY2Nh
-Y2hlOnonLCAnLXYnLCAnL3Zhci90bXAvcGF0Y2hldy10ZXN0ZXItdG1wLTc0NHZyNnc2L3NyYy9k
-b2NrZXItc3JjLjIwMjAtMDQtMTItMjEuMTYuMzAuOTI4OTovdmFyL3RtcC9xZW11Onoscm8nLCAn
-cWVtdTpjZW50b3M3JywgJy92YXIvdG1wL3FlbXUvcnVuJywgJ3Rlc3QtcXVpY2snXScgcmV0dXJu
-ZWQgbm9uLXplcm8gZXhpdCBzdGF0dXMgMi4KZmlsdGVyPS0tZmlsdGVyPWxhYmVsPWNvbS5xZW11
-Lmluc3RhbmNlLnV1aWQ9YmJiYjlkMjliNGU0NDc3ZjlhM2UwZGZiZTFiZjY5ZGIKbWFrZVsxXTog
-KioqIFtkb2NrZXItcnVuXSBFcnJvciAxCm1ha2VbMV06IExlYXZpbmcgZGlyZWN0b3J5IGAvdmFy
-L3RtcC9wYXRjaGV3LXRlc3Rlci10bXAtNzQ0dnI2dzYvc3JjJwptYWtlOiAqKiogW2RvY2tlci1y
-dW4tdGVzdC1xdWlja0BjZW50b3M3XSBFcnJvciAyCgpyZWFsICAgIDEzbTMzLjE5NHMKdXNlciAg
-ICAwbTkuMDYwcwoKClRoZSBmdWxsIGxvZyBpcyBhdmFpbGFibGUgYXQKaHR0cDovL3BhdGNoZXcu
-b3JnL2xvZ3MvMjAyMDA0MTIyMjQxNDQuMTIyMDUtMS1mNGJ1Z0BhbXNhdC5vcmcvdGVzdGluZy5k
-b2NrZXItcXVpY2tAY2VudG9zNy8/dHlwZT1tZXNzYWdlLgotLS0KRW1haWwgZ2VuZXJhdGVkIGF1
-dG9tYXRpY2FsbHkgYnkgUGF0Y2hldyBbaHR0cHM6Ly9wYXRjaGV3Lm9yZy9dLgpQbGVhc2Ugc2Vu
-ZCB5b3VyIGZlZWRiYWNrIHRvIHBhdGNoZXctZGV2ZWxAcmVkaGF0LmNvbQ==
+hey guys, I'd like to know if there is any ongoing work on the latest
+version of the hypervisor spec (v0.6) and if there is any scheduled
+timeline regarding its implementation or timeframe for when v0.6
+support to be available?
+
+thanks, Jose
 
