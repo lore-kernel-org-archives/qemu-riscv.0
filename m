@@ -1,70 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jOBNE-0003IZ-JM
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Apr 2020 22:32:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46868)
+	id 1jOCdy-0006iB-Fp
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Apr 2020 23:53:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54372)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <dgibson@ozlabs.org>) id 1jOBNB-0003E2-96
- for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 22:32:26 -0400
+ (envelope-from <anup@brainfault.org>) id 1jOCdw-0006i4-Q8
+ for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 23:53:49 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <dgibson@ozlabs.org>) id 1jOBN9-0003by-Sa
- for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 22:32:25 -0400
-Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:45881 helo=ozlabs.org)
- by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
- (Exim 4.71) (envelope-from <dgibson@ozlabs.org>)
- id 1jOBMw-0003RC-9w; Mon, 13 Apr 2020 22:32:10 -0400
-Received: by ozlabs.org (Postfix, from userid 1007)
- id 491TxN29T5z9sT5; Tue, 14 Apr 2020 12:26:46 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=gibson.dropbear.id.au; s=201602; t=1586831448;
- bh=3/Xw54vw/w/PtyLjYDuN8rCsI7SEMGcyTcOiWJniLyk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=KmAr/GdXzjCuTn57fzRzIBAEojD+Z8/hJlqKJyA0EfGjbWey8S3NESFLek9Q1JhiU
- M62OWCo0xl/O2s1msbGU1tAzKGcddGGX7CxT8bl4joMZL+ImnUrTut/r7n0SQmTGR2
- DRH3YtzNBzyzqeV/sEKyvT63TgdymX0dlckpPmEI=
-Date: Tue, 14 Apr 2020 12:12:03 +1000
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>
-Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org,
- Richard Henderson <rth@twiddle.net>,
- "Michael S. Tsirkin" <mst@redhat.com>, qemu-ppc@nongnu.org,
- Beniamino Galvani <b.galvani@gmail.com>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Andrew Jeffery <andrew@aj.id.au>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Andrew Baumann <Andrew.Baumann@microsoft.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- qemu-riscv@nongnu.org, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Alistair Francis <alistair@alistair23.me>,
- Jason Wang <jasowang@redhat.com>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Kevin Wolf <kwolf@redhat.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- qemu-arm@nongnu.org, Michael Walle <michael@walle.cc>,
- Joel Stanley <joel@jms.id.au>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Markus Armbruster <armbru@redhat.com>, Max Reitz <mreitz@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>
-Subject: Re: [PATCH-for-5.1 v3 11/23] hw/pci-host/pnv_phb3: Add missing
- error-propagation code
-Message-ID: <20200414021203.GI48061@umbus.fritz.box>
-References: <20200412224144.12205-1-f4bug@amsat.org>
- <20200412224144.12205-12-f4bug@amsat.org>
+ (envelope-from <anup@brainfault.org>) id 1jOCdw-0000l4-0F
+ for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 23:53:48 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336]:50224)
+ by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+ (Exim 4.71) (envelope-from <anup@brainfault.org>) id 1jOCdv-0000kM-K2
+ for qemu-riscv@nongnu.org; Mon, 13 Apr 2020 23:53:47 -0400
+Received: by mail-wm1-x336.google.com with SMTP id x25so11499465wmc.0
+ for <qemu-riscv@nongnu.org>; Mon, 13 Apr 2020 20:53:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=FDYRxaPDjo7A545caXT5dQgBQnmG0mpt+y1hUTQMkt4=;
+ b=ulgxfQj9ttiesunoqggzjRqfhVYUP8vUKWMx7G4sOnOF6XyaXRrjYr270Y9xWNS5Bh
+ H7awXGQePL6S3vvC2xoHrHQL7edwLQe2Y5Rlprg4tAZmNM06qEQNAC988CvnFUWJtiSd
+ cIITMZrTw6GNaB2B4FnPbF9QdWMqno2qAriU4E90lJjwdJSp8z8ghAuRJBDGdDuaxMXi
+ Qo4zpV3zvf8f4R2KJKojZoi+BkkOIZxP4GWyY41seEx5TPCVWa/5/G3EqYiXG4MFdsCi
+ HC2iAhxf4DHVSGx7ozKRMjugNLPdbaLlQm9HllseehCNNUNUrOK35brr5AVoCZN0+uB+
+ 1LFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=FDYRxaPDjo7A545caXT5dQgBQnmG0mpt+y1hUTQMkt4=;
+ b=R3r1rEk0XmrN9cl1MW5AeJDVF55SrisVQ27jHjNYeWLBJgh0OyaaoBX5dqTjjVi9l0
+ FisM0pPi60vmVpheT1BtwgJgNxIzAw0kA4LrzvHGLMPXLv5vCwDxBHWnvv4TEw/rm+Cd
+ J8RuFDVgTHoyCr2CBZY9M0oVzCUd+7Rv1mKjMSdtMDiPzXjTFTpmfnJeXl/vTI0EegnC
+ nF4H+EXpRej084EahMYeU+QLj3l1DMipHpe2mpnHmeHe1CURsOGXIa5/2FmHeWr6t4oE
+ xoWfWXXtIgOXpDB3nN0KGppZichYAzQmN9m/avL8OeMakwNFRa92FjloA1NQtlVSlDJ5
+ rI2A==
+X-Gm-Message-State: AGi0PuZpYLRBcJCVN4y4j/QZe+GKZP7K+yPJtrQmZ1c3eDGnEVCAXSA7
+ /GKubUGwkxLsxl0YbHENltUCoSSGOb1akGOfoT+MOg==
+X-Google-Smtp-Source: APiQypIhaANxdDHfag+9KNyk+sZZlvwAfCJ1ximwEaeleObV1+KuyQlqQ7/as3jl0b8vR9gd1NN8NrMls2ovV9PVDQ8=
+X-Received: by 2002:a1c:9d0d:: with SMTP id g13mr17569203wme.102.1586836426025; 
+ Mon, 13 Apr 2020 20:53:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="BOmey7/79ja+7F5w"
-Content-Disposition: inline
-In-Reply-To: <20200412224144.12205-12-f4bug@amsat.org>
+References: <CAC41xo1YDkehHariEcUJh13oYf1dx_QVBSj2Frr=kYK_Lsqkzw@mail.gmail.com>
+In-Reply-To: <CAC41xo1YDkehHariEcUJh13oYf1dx_QVBSj2Frr=kYK_Lsqkzw@mail.gmail.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Tue, 14 Apr 2020 09:23:33 +0530
+Message-ID: <CAAhSdy0+zXrkPekin5pxDD0xbYSCOHj+VhTJyM1oZUqWtc9UHg@mail.gmail.com>
+Subject: Re: hyp v0.6 work?
+To: Jose Martins <josemartins90@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2401:3900:2:1::2
+X-Received-From: 2a00:1450:4864:20::336
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -76,112 +64,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Apr 2020 02:32:26 -0000
+X-List-Received-Date: Tue, 14 Apr 2020 03:53:50 -0000
 
+On Mon, Apr 13, 2020 at 9:01 PM Jose Martins <josemartins90@gmail.com> wrote:
+>
+> hey guys, I'd like to know if there is any ongoing work on the latest
+> version of the hypervisor spec (v0.6) and if there is any scheduled
+> timeline regarding its implementation or timeframe for when v0.6
+> support to be available?
 
---BOmey7/79ja+7F5w
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yes, it is work-in-progress. stay tuned ...
 
-On Mon, Apr 13, 2020 at 12:41:32AM +0200, Philippe Mathieu-Daud=E9 wrote:
-> Patch created mechanically by running:
->=20
->   $ spatch \
->     --macro-file scripts/cocci-macro-file.h --include-headers \
->     --sp-file scripts/coccinelle/use-error_propagate-in-realize.cocci \
->     --keep-comments --smpl-spacing --in-place --dir hw
->=20
-> Signed-off-by: Philippe Mathieu-Daud=E9 <f4bug@amsat.org>
-
-Acked-by: David Gibson <david@gibson.dropbear.id.au>
-
-> ---
->  hw/pci-host/pnv_phb3.c | 24 ++++++++++++++++++++----
->  1 file changed, 20 insertions(+), 4 deletions(-)
->=20
-> diff --git a/hw/pci-host/pnv_phb3.c b/hw/pci-host/pnv_phb3.c
-> index 57d717ed23..a9029f5a02 100644
-> --- a/hw/pci-host/pnv_phb3.c
-> +++ b/hw/pci-host/pnv_phb3.c
-> @@ -1008,7 +1008,11 @@ static void pnv_phb3_realize(DeviceState *dev, Err=
-or **errp)
-> =20
->      /* LSI sources */
->      object_property_set_link(OBJECT(&phb->lsis), OBJECT(pnv), "xics",
-> -                                   &error_abort);
-> +                                   &local_err);
-> +    if (local_err) {
-> +        error_propagate(errp, local_err);
-> +        return;
-> +    }
->      object_property_set_bool(OBJECT(&phb->lsis), true, "realized", &loca=
-l_err);
->      if (local_err) {
->          error_propagate(errp, local_err);
-> @@ -1023,9 +1027,17 @@ static void pnv_phb3_realize(DeviceState *dev, Err=
-or **errp)
-> =20
->      /* MSI sources */
->      object_property_set_link(OBJECT(&phb->msis), OBJECT(phb), "phb",
-> -                                   &error_abort);
-> +                                   &local_err);
-> +    if (local_err) {
-> +        error_propagate(errp, local_err);
-> +        return;
-> +    }
->      object_property_set_link(OBJECT(&phb->msis), OBJECT(pnv), "xics",
-> -                                   &error_abort);
-> +                                   &local_err);
-> +    if (local_err) {
-> +        error_propagate(errp, local_err);
-> +        return;
-> +    }
->      object_property_set_bool(OBJECT(&phb->msis), true, "realized", &loca=
-l_err);
->      if (local_err) {
->          error_propagate(errp, local_err);
-> @@ -1034,7 +1046,11 @@ static void pnv_phb3_realize(DeviceState *dev, Err=
-or **errp)
-> =20
->      /* Power Bus Common Queue */
->      object_property_set_link(OBJECT(&phb->pbcq), OBJECT(phb), "phb",
-> -                                   &error_abort);
-> +                                   &local_err);
-> +    if (local_err) {
-> +        error_propagate(errp, local_err);
-> +        return;
-> +    }
->      object_property_set_bool(OBJECT(&phb->pbcq), true, "realized", &loca=
-l_err);
->      if (local_err) {
->          error_propagate(errp, local_err);
-
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
-
---BOmey7/79ja+7F5w
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAl6VG/MACgkQbDjKyiDZ
-s5Kj5A//flfCOAGrQZ4AQGWz+ImUTGrwmNeULxS4KBuYciYvnReneGKdVyjLIVAM
-knHQZ+iRkW0ceFNvxIsAkfPINl3UHedgkQPAVK0atpWRWdl0T5HFGiBR66OOO5O8
-YVi1+hL3bV5MAyHnZg/J7YdswPuJoJnZdeIQcFqen+5aO6xa+iVNWLi9aM7HwU8E
-ynzoe+ZbxNHzDTxwK+pX6st0eEOzn6+FOlyJLSrbc6lwGVr07ZdBc/aH/eNLgM1C
-lTNLOXiwqAij5U9l3QBfR52WFy/7RepWz+5dHkzgFYRZCF/EeTYNxXwwdRD7aLxR
-O0YFI2VxAXffHEGf9OYELNbYoUO6+IK1YY3Q7U/l2f/MrsTFI0PULQL1LRXKEmsF
-jT5KbYjtgqeezz8Qp9cqWOxVBUUyumXVjZiz7R5J0/OoF8SPidnunDroORf1Q6po
-/1U+DWT8wi/+Z1z+04cW2VwNRbWmbaQgLAPPB3/SL7wvGCTWa7mbdapaVkyEJfHe
-+4q88351waRSlmwFo6YDNTlbiVUdkwZQB3BuBI69OC5wXwWkRcl+bG/M4w09yre/
-MgJWkIi9G1jxVMBVfGB63hfc8D+UiHkf4bUfZONwPFnxXp2gamBBvI7ZkuSzj31t
-SvJD80PaT341DXvDvX30nQ8w3MdWFOwKxn2cBye13CeOLlfVF54=
-=xhgF
------END PGP SIGNATURE-----
-
---BOmey7/79ja+7F5w--
+Regards,
+Anup
 
