@@ -1,122 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jObM8-0004mO-4J
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Apr 2020 02:17:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38897)
+	id 1jOcpx-0003Gk-KK
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Apr 2020 03:51:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51654)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jObM3-0004bF-QA
- for qemu-riscv@nongnu.org; Wed, 15 Apr 2020 02:17:02 -0400
+ (envelope-from <clg@kaod.org>) id 1jOcpv-0003B6-Gh
+ for qemu-riscv@nongnu.org; Wed, 15 Apr 2020 03:51:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jObM2-00083W-DN
- for qemu-riscv@nongnu.org; Wed, 15 Apr 2020 02:16:59 -0400
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:53866)
- by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jObM2-000838-6u; Wed, 15 Apr 2020 02:16:58 -0400
-Received: by mail-wm1-x343.google.com with SMTP id d77so15935487wmd.3;
- Tue, 14 Apr 2020 23:16:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:autocrypt:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=0HpAA/yPCHUHpxQzs3SbNfMD74dBQ85M+x8zVY5gA9E=;
- b=ZSf8sKd38Za5DbhnV4BmuKAAh2/1FiT7njp8u+N9mUwTXP0/B2MjDgP6/FEG8jPAJF
- gPo2Fj7F3b1eUtDvqhYr4q4Lu3nGrYQkiTLpG3xCD4DwE2vGL1c1cG99PsWd2/6uf8RS
- s8X8eVGajzn18KgEomlDYxAoDGm7Ft0XNBZ0qkclZRS4Y/gr1d4PLXctDA/g5msakG0C
- PzOh6ME1e2oH7AfbOTTNc3k7gimpDwkRZvWy0wAajyz6znR5nTp/zcClVA7qQFU7rpDl
- eMklJQsYIBzba9uYbeMZ2Ll023qcdwtcQeq9nEJNrWemHlSbcTUPROnQpd/QH4luoQI7
- LdfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:autocrypt
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-language:content-transfer-encoding;
- bh=0HpAA/yPCHUHpxQzs3SbNfMD74dBQ85M+x8zVY5gA9E=;
- b=ofSHYOoc9FaCxLbOYG2TC8XzNcPOFVQ7aYD29zl5SqdNCD+LIz6d0ToRwM0E0LqNWy
- 7LiTIJ77LQ6qLRuAyEtuGvLZNm0Ehx0j9c9J0OyyQDJ2NHvkrd6hvsNrgQQfMxuFrkm/
- 9/hWJFNntSbjhFBq0TFVaKUo8wkUbZ+dYFP3PyiTFhqs0t5yXGPb/EsOqLlmV4Iqc4T/
- 9DFHU+iHNr3Heab5EarspZ+D0ud2wBN23Lt6EBL4zFp6qDoAvVJx/Hjog5NlNR/0h6Dh
- f3tkPZWqCJo1vqj1R0oPWITyVNyRsJEiRvmIUPlUFx+tziFfr6/GhYEcBb0TrEG3z3y4
- 3Fkw==
-X-Gm-Message-State: AGi0PuaqBuJ0kA3MNx38WpmFiPZpKGAOcgZf5AFBS3alX6W8JiThVwbF
- S0x/meX9DBpJgHXqvIoosmg=
-X-Google-Smtp-Source: APiQypIbpLgJpdbpeYWo9ZAUxgCZWkG9tUrGULixnigRrb29PE2oLJLRqMxndIz35mYPDkr5aIwcKw==
-X-Received: by 2002:a1c:4409:: with SMTP id r9mr3558645wma.165.1586931416766; 
- Tue, 14 Apr 2020 23:16:56 -0700 (PDT)
-Received: from [192.168.1.39] (116.red-83-42-57.dynamicip.rima-tde.net.
- [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id q4sm22814647wmj.1.2020.04.14.23.16.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Apr 2020 23:16:55 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH-for-5.1 v3 02/24] scripts/coccinelle: Script to simplify
- DeviceClass error propagation
-To: Markus Armbruster <armbru@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Cc: Fam Zheng <fam@euphon.net>, Peter Maydell <peter.maydell@linaro.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>, Jeff Cody <codyprime@gmail.com>,
- Jason Wang <jasowang@redhat.com>, qemu-devel@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Max Reitz
- <mreitz@redhat.com>, qemu-block@nongnu.org, Joel Stanley <joel@jms.id.au>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Eduardo Habkost <ehabkost@redhat.com>,
+ (envelope-from <clg@kaod.org>) id 1jOcpt-0008Eu-Vx
+ for qemu-riscv@nongnu.org; Wed, 15 Apr 2020 03:51:55 -0400
+Received: from 4.mo177.mail-out.ovh.net ([46.105.37.72]:40151)
+ by eggs.gnu.org with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+ (Exim 4.71) (envelope-from <clg@kaod.org>) id 1jOcpt-0008E0-PL
+ for qemu-riscv@nongnu.org; Wed, 15 Apr 2020 03:51:53 -0400
+Received: from player718.ha.ovh.net (unknown [10.108.54.34])
+ by mo177.mail-out.ovh.net (Postfix) with ESMTP id 95E5B12A1CD
+ for <qemu-riscv@nongnu.org>; Wed, 15 Apr 2020 09:51:52 +0200 (CEST)
+Received: from kaod.org (82-64-250-170.subs.proxad.net [82.64.250.170])
+ (Authenticated sender: clg@kaod.org)
+ by player718.ha.ovh.net (Postfix) with ESMTPSA id D0D5411513851;
+ Wed, 15 Apr 2020 07:51:00 +0000 (UTC)
+Subject: Re: [PATCH-for-5.1 v3 05/24] hw/arm/aspeed_ast2600: Move some code
+ from realize() to init()
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ qemu-devel@nongnu.org
+Cc: Joel Stanley <joel@jms.id.au>,
  Jean-Christophe Dubois <jcd@tribudubois.net>,
- Xie Changlong <xiechanglong.d@gmail.com>,
- Alistair Francis <alistair@alistair23.me>,
- Beniamino Galvani <b.galvani@gmail.com>, qemu-arm@nongnu.org,
- Peter Chubb <peter.chubb@nicta.com.au>, =?UTF-8?Q?C=c3=a9dric_Le_Goater?=
- <clg@kaod.org>, qemu-ppc@nongnu.org, Richard Henderson <rth@twiddle.net>,
- Kevin Wolf <kwolf@redhat.com>, qemu-riscv@nongnu.org,
- Andrew Jeffery <andrew@aj.id.au>, Wen Congyang <wencongyang2@huawei.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>, Max Reitz <mreitz@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-ppc@nongnu.org,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Markus Armbruster <armbru@redhat.com>, Jeff Cody <codyprime@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Xie Changlong <xiechanglong.d@gmail.com>, Fam Zheng <fam@euphon.net>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, qemu-arm@nongnu.org,
+ Wen Congyang <wencongyang2@huawei.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Paolo Bonzini <pbonzini@redhat.com>
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Kevin Wolf
+ <kwolf@redhat.com>, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
+ <marcandre.lureau@redhat.com>, David Gibson <david@gibson.dropbear.id.au>,
+ Jason Wang <jasowang@redhat.com>, Peter Chubb <peter.chubb@nicta.com.au>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>, qemu-riscv@nongnu.org,
+ qemu-block@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+ Andrew Jeffery <andrew@aj.id.au>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Richard Henderson <rth@twiddle.net>
 References: <20200412223619.11284-1-f4bug@amsat.org>
- <20200412223619.11284-3-f4bug@amsat.org> <875ze2tfvc.fsf@dusky.pond.sub.org>
- <23ad6d04-1f42-29b8-caa6-6506cf1b7422@redhat.com>
- <87k12iqk9x.fsf@dusky.pond.sub.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Autocrypt: addr=f4bug@amsat.org; keydata=
- mQINBDU8rLoBEADb5b5dyglKgWF9uDbIjFXU4gDtcwiga9wJ/wX6xdhBqU8tlQ4BroH7AeRl
- u4zXP0QnBDAG7EetxlQzcfYbPmxFISWjckDBFvDbFsojrZmwF2/LkFSzlvKiN5KLghzzJhLO
- HhjGlF8deEZz/d/G8qzO9mIw8GIBS8uuWh6SIcG/qq7+y+2+aifaj92EdwU79apZepT/U3vN
- YrfcAuo1Ycy7/u0hJ7rlaFUn2Fu5KIgV2O++hHYtCCQfdPBg/+ujTL+U+sCDawCyq+9M5+LJ
- ojCzP9rViLZDd/gS6jX8T48hhidtbtsFRj/e9QpdZgDZfowRMVsRx+TB9yzjFdMO0YaYybXp
- dg/wCUepX5xmDBrle6cZ8VEe00+UQCAU1TY5Hs7QFfBbjgR3k9pgJzVXNUKcJ9DYQP0OBH9P
- ZbZvM0Ut2Bk6bLBO5iCVDOco0alrPkX7iJul2QWBy3Iy9j02GnA5jZ1Xtjr9kpCqQT+sRXso
- Vpm5TPGWaWljIeLWy/qL8drX1eyJzwTB3A36Ck4r3YmjMjfmvltSZB1uAdo1elHTlFEULpU/
- HiwvvqXQ9koB15U154VCuguvx/Qnboz8GFb9Uw8VyawzVxYVNME7xw7CQF8FYxzj6eI7rBf2
- Dj/II6wxWPgDEy3oUzuNOxTB7sT3b/Ym76yOJzWX5BylXQIJ5wARAQABtDFQaGlsaXBwZSBN
- YXRoaWV1LURhdWTDqSAoRjRCVUcpIDxmNGJ1Z0BhbXNhdC5vcmc+iQJVBBMBCAA/AhsPBgsJ
- CAcDAgYVCAIJCgsEFgIDAQIeAQIXgBYhBPqr514SkXIh3P1rsuPjLCzercDeBQJd660aBQks
- klzgAAoJEOPjLCzercDe2iMP+gMG2dUf+qHz2uG8nTBGMjgK0aEJrKVPodFA+iedQ5Kp3BMo
- jrTg3/DG1HMYdcvQu/NFLYwamUfUasyor1k+3dB23hY09O4xOsYJBWdilkBGsJTKErUmkUO2
- 3J/kawosvYtJJSHUpw3N6mwz/iWnjkT8BPp7fFXSujV63aZWZINueTbK7Y8skFHI0zpype9s
- loU8xc4JBrieGccy3n4E/kogGrTG5jcMTNHZ106DsQkhFnjhWETp6g9xOKrzZQbETeRBOe4P
- sRsY9YSG2Sj+ZqmZePvO8LyzGRjYU7T6Z80S1xV0lH6KTMvq7vvz5rd92f3pL4YrXq+e//HZ
- JsiLen8LH/FRhTsWRgBtNYkOsd5F9NvfJtSM0qbX32cSXMAStDVnS4U+H2vCVCWnfNug2TdY
- 7v4NtdpaCi4CBBa3ZtqYVOU05IoLnlx0miKTBMqmI05kpgX98pi2QUPJBYi/+yNu3fjjcuS9
- K5WmpNFTNi6yiBbNjJA5E2qUKbIT/RwQFQvhrxBUcRCuK4x/5uOZrysjFvhtR8YGm08h+8vS
- n0JCnJD5aBhiVdkohEFAz7e5YNrAg6kOA5IVRHB44lTBOatLqz7ntwdGD0rteKuHaUuXpTYy
- CRqCVAKqFJtxhvJvaX0vLS1Z2dwtDwhjfIdgPiKEGOgCNGH7R8l+aaM4OPOd
-Message-ID: <a7d6f3be-3e27-82e6-2828-7afc44aa3b52@amsat.org>
-Date: Wed, 15 Apr 2020 08:16:52 +0200
+ <20200412223619.11284-6-f4bug@amsat.org>
+From: =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>
+Message-ID: <7407eb89-2f66-aa01-e1d2-dba410926aca@kaod.org>
+Date: Wed, 15 Apr 2020 09:50:54 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <87k12iqk9x.fsf@dusky.pond.sub.org>
+In-Reply-To: <20200412223619.11284-6-f4bug@amsat.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
- recognized.
-X-Received-From: 2a00:1450:4864:20::343
+X-Ovh-Tracer-Id: 13625640676116368304
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduhedrfedvgdduvdefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepuffvfhfhkffffgggjggtgfesthekredttdefjeenucfhrhhomhepveorughrihgtpgfnvggpifhorghtvghruceotghlgheskhgrohgurdhorhhgqeenucffohhmrghinheprghrmhdrtghomhenucfkpheptddrtddrtddrtddpkedvrdeigedrvdehtddrudejtdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejudekrdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomheptghlgheskhgrohgurdhorhhgpdhrtghpthhtohepqhgvmhhuqdhrihhstghvsehnohhnghhnuhdrohhrgh
+Content-Transfer-Encoding: quoted-printable
+X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+X-Received-From: 46.105.37.72
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -128,125 +74,136 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2020 06:17:02 -0000
+X-List-Received-Date: Wed, 15 Apr 2020 07:51:57 -0000
 
-On 4/14/20 3:17 PM, Markus Armbruster wrote:
-> Philippe Mathieu-Daudé <philmd@redhat.com> writes:
-> 
->> On 4/14/20 2:24 PM, Markus Armbruster wrote:
->>> Philippe Mathieu-Daudé <f4bug@amsat.org> writes:
->>>
->>>> When a device uses an Error* with data not modified before realize(),
->>>> this call can be moved to init(). Add a Coccinelle patch to find such
->>>> uses.
->>>>
->>>> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
->>>> ---
->>>>   ...implify-init-realize-error_propagate.cocci | 69 +++++++++++++++++++
->>>>   MAINTAINERS                                   |  1 +
->>>>   2 files changed, 70 insertions(+)
->>>>   create mode 100644 scripts/coccinelle/simplify-init-realize-error_propagate.cocci
->>>>
->>>> diff --git a/scripts/coccinelle/simplify-init-realize-error_propagate.cocci b/scripts/coccinelle/simplify-init-realize-error_propagate.cocci
->>>> new file mode 100644
->>>> index 0000000000..2e3ec4d98a
->>>> --- /dev/null
->>>> +++ b/scripts/coccinelle/simplify-init-realize-error_propagate.cocci
->>>> @@ -0,0 +1,69 @@
->>>> +// Find error-propagation calls that don't need to be in DeviceClass::realize()
->>>> +// because they don't use information user can change before calling realize(),
->>>> +// so they can be moved to DeviceClass:initfn() where error propagation is not
->>>> +// needed.
->>>> +//
->>>> +// Copyright: (C) 2020 Philippe Mathieu-Daudé
->>>> +// This work is licensed under the terms of the GNU GPLv2 or later.
->>>> +//
->>>> +// spatch \
->>>> +//  --macro-file scripts/cocci-macro-file.h \
->>>> +//  --sp-file \
->>>> +//    scripts/coccinelle/simplify-init-realize-error_propagate.cocci \
->>>> +//  --timeout 60
->>>> +//
->>>> +// Inspired by https://www.mail-archive.com/qemu-devel@nongnu.org/msg692500.html
->>>> +
->>>> +
->>>> +@ match_class_init @
->>>> +TypeInfo info;
->>>> +identifier class_initfn;
->>>> +@@
->>>> +    info.class_init = class_initfn;
->>>> +
->>>> +
->>>> +@ match_instance_init @
->>>> +TypeInfo info;
->>>> +identifier instance_initfn;
->>>> +@@
->>>> +    info.instance_init = instance_initfn;
->>>> +
->>>> +
->>>> +@ match_realize @
->>>> +identifier match_class_init.class_initfn;
->>>> +DeviceClass *dc;
->>>> +identifier realizefn;
->>>> +@@
->>>> +void class_initfn(...)
->>>> +{
->>>> +    ...
->>>> +    dc->realize = realizefn;
->>>> +    ...
->>>> +}
->>>
->>> I'm afraid this misses realize() methods of DeviceClass subclasses.
->>> Consider PCI device "i6300esb" (picked just because it's simple).
->>>
->>> pci_device_class_init() sets DeviceClass method realize() to
->>> pci_qdev_realize().  pci_qdev_realize() does the work common to all PCI
->>> devices, and calls PCIDeviceClass method realize() for the work specific
->>> to the PCI device at hand.
->>>
->>> i6300esb_class_init() sets PCIDeviceClass method realize() to
->>> i6300esb_realize().
->>>
->>> Your first rule should match i6300esb_info alright, and thus identify
->>> i6300esb_class_init() as a class_init() method.
->>>
->>> But your third rule can't match i6300esb_class_init()'s
->>>
->>>      k->realize = i6300esb_realize;
->>>
->>> because @k is a PCIDeviceClass, not a DeviceClass.
->>>
->>> I think it also misses cases that have a realize(), but no
->>> instance_init().
->>>
->>> Finding only some instances of an anti-pattern can still be useful.  But
->>> you should explain the script's limitations then, both in the script and
->>> the commit message.
->>
->> OK.
->>
->>>
->>>> +
->>>> +
->>>> +@ propagate_in_realize @
->>>> +identifier match_realize.realizefn;
->>>> +identifier err;
->>>> +identifier errp;
->>>> +identifier func_with_errp =~ "(?!object_property_set_link)";
->>>
->>> What are you trying to accomplish with this lookahead assertion?
->>
->> "match all func_with_errp() except object_property_set_link()"?
-> 
-> What's wrong with
-> 
->     identifier func_with_errp != object_property_set_link
+On 4/13/20 12:36 AM, Philippe Mathieu-Daud=C3=A9 wrote:
+> Coccinelle reported:
+>=20
+>   $ spatch ... --timeout 60 --sp-file \
+>     scripts/coccinelle/simplify-init-realize-error_propagate.cocci
+>   HANDLING: ./hw/arm/aspeed_ast2600.c
+>   >>> possible moves from aspeed_soc_ast2600_init() to aspeed_soc_ast26=
+00_realize() in ./hw/arm/aspeed_ast2600.c:243
+>=20
+> Move the calls using &error_fatal which don't depend on input
+> updated before realize() to init().
+>=20
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 
-Nothing wrong, I didn't know this form by the time I wrote this script.
 
-> 
-> ?
-> 
-> [...]
-> 
+
+Reviewed-by: C=C3=A9dric Le Goater <clg@kaod.org>
+
+> ---
+> v3: Typo 'depend of' -> 'depend on' (eblake)
+> ---
+>  hw/arm/aspeed_ast2600.c | 41 ++++++++++++++++++++---------------------
+>  1 file changed, 20 insertions(+), 21 deletions(-)
+>=20
+> diff --git a/hw/arm/aspeed_ast2600.c b/hw/arm/aspeed_ast2600.c
+> index a860ab6a35..64512f95c9 100644
+> --- a/hw/arm/aspeed_ast2600.c
+> +++ b/hw/arm/aspeed_ast2600.c
+> @@ -114,6 +114,16 @@ static qemu_irq aspeed_soc_get_irq(AspeedSoCState =
+*s, int ctrl)
+>      return qdev_get_gpio_in(DEVICE(&s->a7mpcore), sc->irqmap[ctrl]);
+>  }
+> =20
+> +/*
+> + * ASPEED ast2600 has 0xf as cluster ID
+> + *
+> + * http://infocenter.arm.com/help/index.jsp?topic=3D/com.arm.doc.ddi03=
+88e/CIHEBGFG.html
+> + */
+> +static uint64_t aspeed_calc_affinity(int cpu)
+> +{
+> +    return (0xf << ARM_AFF1_SHIFT) | cpu;
+> +}
+> +
+>  static void aspeed_soc_ast2600_init(Object *obj)
+>  {
+>      AspeedSoCState *s =3D ASPEED_SOC(obj);
+> @@ -130,6 +140,13 @@ static void aspeed_soc_ast2600_init(Object *obj)
+>          object_initialize_child(obj, "cpu[*]", OBJECT(&s->cpu[i]),
+>                                  sizeof(s->cpu[i]), sc->cpu_type,
+>                                  &error_abort, NULL);
+> +        object_property_set_int(OBJECT(&s->cpu[i]), QEMU_PSCI_CONDUIT_=
+SMC,
+> +                                "psci-conduit", &error_abort);
+> +        object_property_set_int(OBJECT(&s->cpu[i]), aspeed_calc_affini=
+ty(i),
+> +                                "mp-affinity", &error_abort);
+> +
+> +        object_property_set_int(OBJECT(&s->cpu[i]), 1125000000, "cntfr=
+q",
+> +                                &error_abort);
+>      }
+> =20
+>      snprintf(typename, sizeof(typename), "aspeed.scu-%s", socname);
+> @@ -146,6 +163,9 @@ static void aspeed_soc_ast2600_init(Object *obj)
+> =20
+>      sysbus_init_child_obj(obj, "a7mpcore", &s->a7mpcore,
+>                            sizeof(s->a7mpcore), TYPE_A15MPCORE_PRIV);
+> +    object_property_set_int(OBJECT(&s->a7mpcore),
+> +                            ASPEED_SOC_AST2600_MAX_IRQ + GIC_INTERNAL,
+> +                            "num-irq", &error_abort);
+> =20
+>      sysbus_init_child_obj(obj, "rtc", OBJECT(&s->rtc), sizeof(s->rtc),
+>                            TYPE_ASPEED_RTC);
+> @@ -230,16 +250,6 @@ static void aspeed_soc_ast2600_init(Object *obj)
+>                            TYPE_SYSBUS_SDHCI);
+>  }
+> =20
+> -/*
+> - * ASPEED ast2600 has 0xf as cluster ID
+> - *
+> - * http://infocenter.arm.com/help/index.jsp?topic=3D/com.arm.doc.ddi03=
+88e/CIHEBGFG.html
+> - */
+> -static uint64_t aspeed_calc_affinity(int cpu)
+> -{
+> -    return (0xf << ARM_AFF1_SHIFT) | cpu;
+> -}
+> -
+>  static void aspeed_soc_ast2600_realize(DeviceState *dev, Error **errp)
+>  {
+>      int i;
+> @@ -264,19 +274,11 @@ static void aspeed_soc_ast2600_realize(DeviceStat=
+e *dev, Error **errp)
+> =20
+>      /* CPU */
+>      for (i =3D 0; i < s->num_cpus; i++) {
+> -        object_property_set_int(OBJECT(&s->cpu[i]), QEMU_PSCI_CONDUIT_=
+SMC,
+> -                                "psci-conduit", &error_abort);
+>          if (s->num_cpus > 1) {
+>              object_property_set_int(OBJECT(&s->cpu[i]),
+>                                      ASPEED_A7MPCORE_ADDR,
+>                                      "reset-cbar", &error_abort);
+>          }
+> -        object_property_set_int(OBJECT(&s->cpu[i]), aspeed_calc_affini=
+ty(i),
+> -                                "mp-affinity", &error_abort);
+> -
+> -        object_property_set_int(OBJECT(&s->cpu[i]), 1125000000, "cntfr=
+q",
+> -                                &error_abort);
+> -
+>          /*
+>           * TODO: the secondary CPUs are started and a boot helper
+>           * is needed when using -kernel
+> @@ -292,9 +294,6 @@ static void aspeed_soc_ast2600_realize(DeviceState =
+*dev, Error **errp)
+>      /* A7MPCORE */
+>      object_property_set_int(OBJECT(&s->a7mpcore), s->num_cpus, "num-cp=
+u",
+>                              &error_abort);
+> -    object_property_set_int(OBJECT(&s->a7mpcore),
+> -                            ASPEED_SOC_AST2600_MAX_IRQ + GIC_INTERNAL,
+> -                            "num-irq", &error_abort);
+> =20
+>      object_property_set_bool(OBJECT(&s->a7mpcore), true, "realized",
+>                               &error_abort);
+>=20
+
 
