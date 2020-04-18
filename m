@@ -1,66 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jPZhP-0001Sb-Ba
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Apr 2020 18:43:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54059)
+	id 1jPrmm-0007gQ-Ja
+	for mharc-qemu-riscv@gnu.org; Sat, 18 Apr 2020 14:01:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36959)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jPZhL-0001Mb-R2
- for qemu-riscv@nongnu.org; Fri, 17 Apr 2020 18:43:01 -0400
+ (envelope-from <josemartins90@gmail.com>) id 1jPrmk-0007eU-4t
+ for qemu-riscv@nongnu.org; Sat, 18 Apr 2020 14:01:47 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.71)
- (envelope-from <alistair23@gmail.com>) id 1jPZhK-0006DM-8k
- for qemu-riscv@nongnu.org; Fri, 17 Apr 2020 18:42:59 -0400
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:44229)
+ (envelope-from <josemartins90@gmail.com>) id 1jPrmi-0006Me-RD
+ for qemu-riscv@nongnu.org; Sat, 18 Apr 2020 14:01:46 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:39648)
  by eggs.gnu.org with esmtps (TLS1.0:RSA_AES_128_CBC_SHA1:16)
- (Exim 4.71) (envelope-from <alistair23@gmail.com>)
- id 1jPZhH-00060z-1V; Fri, 17 Apr 2020 18:42:55 -0400
-Received: by mail-io1-xd44.google.com with SMTP id h6so4098092iok.11;
- Fri, 17 Apr 2020 15:42:54 -0700 (PDT)
+ (Exim 4.71) (envelope-from <josemartins90@gmail.com>)
+ id 1jPrmi-0006MG-Md; Sat, 18 Apr 2020 14:01:44 -0400
+Received: by mail-io1-xd43.google.com with SMTP id e127so6133803iof.6;
+ Sat, 18 Apr 2020 11:01:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Sy/88jthBUW9INdoLUgFavxhraz0ghOJNjOgNrh94Vw=;
- b=iI9vE3HpJKeDUJ988SlWt0u2595k6I2mb706viVZU6vqf2vDOFdqAz20oxLk0nHufj
- gN3EWtNzBnzcuCEaWHieNhvLFMcYhCKL8llK/y9fmYvm7LJH+9QX14mJX3vXUTThEnME
- CvGV7wDK5wPTK4d7CUQGaKHtQqrME/E9QvQg8odNHf8fImmJE3PJ2fmiWGJqBwwuWfh8
- /ldlJ9OFwYT8rHXCUJyiT6EmHUxsR7QUoDq0D/OZy9xMjmbu0Er0/6CIdSVr0JvN1abQ
- 0dWqkXiDbkPiQNh3ctdbWmUZ6lyrQD9IeHSksoM9HT1gEyy0LFZlrC7/BVPubSYB7Mks
- S45g==
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=WohNrsQPuTHTAitkS+Hsv10fCQyuOe669Z2kncG5j4w=;
+ b=kSgOVNvzJa7QXhH3jSVmmDt1R6Q6gEzRiUA5JS0iqhS3xt0nftZE1S2uapMM0AKwwS
+ Zw9Q7atE+G+Edz9DTi1rD8dG755FRm8s2ze4tQNpZtsa8dZV9H6KMmqd19+fbSUSMsjk
+ bvHkGMx3pNosnQK0Qi7i7497Y6zhxsp2qifm58dIbRJ8FFbauYHA/7+GXVTBurqjrqem
+ uUNFSrP/hRgnfmAIkfeFMVmKNQS+unVAqJTEefEl2jW3kxS+rc7cfWvq/lU91W1W3Bmw
+ GjLsj62iFI7A37L9Y1iip4cxZd5s8nkVEcDxSwRHPHFZp/34m4Y/te2pgvPrtc2f5T4h
+ LM/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Sy/88jthBUW9INdoLUgFavxhraz0ghOJNjOgNrh94Vw=;
- b=oWCSjctZ9tVLVZRj+yuC7sYKK9ZQdl4o7Zb+sMhoQ8QT7i6ATN1bP0Nmx6L5HvJiPs
- UAp1F1hK3M+1+aut0J65W3HTYjzABql9HKjo8CMKNMkxRVsJGV5r/+CfUBTZmWMmEane
- 9YCNJtsyfDtz3k3w8wBgHfCL+nhnLozRfneU4r6qjNK8Lhc//SxmtCKrgVfIzDUFAyQQ
- wd3fzqJYEHaAB0Pj/9Z3o46VryS4azwdRpcJ7Sf4WsgyI5wbrfZGhleCtQYx2R2HrU93
- DIMxORootsG13QBG9WUZf905oUxf1laaRhGUSpYOZRA/vDE8oOTdq6u+60g8s0mW9xaL
- UZYg==
-X-Gm-Message-State: AGi0Pua0U91RC/SuloT6ZvvHpxgFEwuMjA8aUGKtuTKrVsUMlxaYeIL3
- URe97lo9nWd9vZ1NsayIZz04HsVDC4luwwVXbQU=
-X-Google-Smtp-Source: APiQypKmvyR+hOnLuLLZj9C1Mc8pC8nwwn19bomBcxzO8HBzXlQRng95uSbx68Smfafx6TnsuxP77hEk08opvmt7AE8=
-X-Received: by 2002:a5e:880b:: with SMTP id l11mr5513871ioj.42.1587163374220; 
- Fri, 17 Apr 2020 15:42:54 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=WohNrsQPuTHTAitkS+Hsv10fCQyuOe669Z2kncG5j4w=;
+ b=GsrAjAuKdaLSL3cbLeSS1a/tyouC4x0mGnmu9QXAnuZOx2SoVXygpFC+Fh2L5O/Tfa
+ S57ok7u1nrfwQ9apN3psGKV6GFmfRQZrQ8yh6BLKO841HQCGPCx+cLLQEs47ATJozKaS
+ vItfPdLvY2nOgYNVZzp7zKy+g28t9WvwMYeOKCVWlr90/1CtCMT44T5cSrDYRLnv27jY
+ CZdXCvOawY0l2VFSIR6kiKAPU3DP5iCyXAsRKLQvCwDr+xTH75p0CpL0e+T47uLjXTNP
+ HPbkekOh0azTcVo+oslXVQZqyfuVvPZq8FgcplALOtHijutE0CalOB1H0WH9wIfAMtCt
+ OqEA==
+X-Gm-Message-State: AGi0PuZ8FqKrreUKiwENLTCiEPMZmaj96ZhfrWBLsyF6nofAQxN0vwlT
+ AA9giZqe93fPzZup8FFJ60JJ110trorCEHTvzP6go394UUE=
+X-Google-Smtp-Source: APiQypIABaBDgfJtQPhqVvjW8r/IrIvpJTEI+W6uqggnU4+TZqecXHnpiQGyHas8d8NtmG5FWZY4m92kti0V3aep/Aw=
+X-Received: by 2002:a05:6638:11a:: with SMTP id
+ x26mr2059966jao.89.1587232902698; 
+ Sat, 18 Apr 2020 11:01:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200411041427.14828-1-jiangyifei@huawei.com>
- <20200411041427.14828-3-jiangyifei@huawei.com>
-In-Reply-To: <20200411041427.14828-3-jiangyifei@huawei.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 17 Apr 2020 15:34:30 -0700
-Message-ID: <CAKmqyKOJCDHNma9Wx3Vygwe7w+jwEo6U7Z_=TSnET_Nm3Lps3A@mail.gmail.com>
-Subject: Re: [PATCH RFC v2 2/9] target/riscv: Add target/riscv/kvm.c to place
- the public kvm interface
-To: Yifei Jiang <jiangyifei@huawei.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- victor.zhangxiaofeng@huawei.com, zhang.zhanghailiang@huawei.com, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, yinyipeng1@huawei.com, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Anup Patel <anup.patel@wdc.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, kvm-riscv@lists.infradead.org, 
- Palmer Dabbelt <palmer@dabbelt.com>, "dengkai (A)" <dengkai1@huawei.com>
+From: Jose Martins <josemartins90@gmail.com>
+Date: Sat, 18 Apr 2020 19:01:31 +0100
+Message-ID: <CAC41xo2O1k+cn7EO3Zu3U70qefFwGa5B1iNRNgRwLk7SGX=-Aw@mail.gmail.com>
+Subject: [PATCH 1/1] target/riscv: fix VS interrupts forwarding to HS
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
 X-detected-operating-system: by eggs.gnu.org: Genre and OS details not
  recognized.
-X-Received-From: 2607:f8b0:4864:20::d44
+X-Received-From: 2607:f8b0:4864:20::d43
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,187 +61,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2020 22:43:01 -0000
+X-List-Received-Date: Sat, 18 Apr 2020 18:01:47 -0000
 
-On Fri, Apr 10, 2020 at 9:16 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
->
-> Add target/riscv/kvm.c to place kvm_arch_* function needed by kvm/kvm-all.c.
-> Meanwhile, add kvm support in configure file.
->
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-> Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+When vs interrupts (2, 6, 10) are enabled, pending and not delegated
+in hideleg, they are not always forwarded to hs mode after a return to
+vs mode. This happens independently of the state of spie and sie on
+the hs-level sstatus before the return. Instead, the vs-level status
+sie state seems to be controlling if the interrupt is forward to hs or
+not. This is both because, in riscv_cpu_local_irq_pending, vs
+interrupts are ignored when checking for hs pending interrupts and
+also because hs interrupts might not be considered enabled after
+jumping to vs mode if the spie (which implicitly is copied to sie) is
+not set when sret is executed. From what I could gather, the spec does
+not preclude hs mode from receiving vs interrupts if they are not
+delegated in hideleg (although this is true for m mode, but guaranteed
+by hardwiring the corresponding bits in mideleg). Also, it clearly
+states that: "Interrupts for higher-privilege modes, y>x, are always
+globally enabled regardless of the setting of the global yIE bit for
+the higher-privilege mode.", so hs_mstatus_sie must be set whenever
+virt is enabled. After solving the previous issue, the problem remains
+that when such interrupts are delegated in hideleg, there is still the
+need to check it when calculating pending_hs_irq, otherwise, we're
+still "forcing an hs except" when the interrupt should be forwarded to
+vs. I believe the following patch will fix this issue:
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Jose Martins <josemartins90@gmail.com>
+---
+ target/riscv/cpu_helper.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-Alistair
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index d3ba9efb02..9962ee4690 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -43,8 +43,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+     target_ulong mstatus_sie = get_field(env->mstatus, MSTATUS_SIE);
+     target_ulong hs_mstatus_sie = get_field(env->mstatus_hs, MSTATUS_SIE);
 
-> ---
->  configure                  |   1 +
->  target/riscv/Makefile.objs |   1 +
->  target/riscv/kvm.c         | 128 +++++++++++++++++++++++++++++++++++++
->  3 files changed, 130 insertions(+)
->  create mode 100644 target/riscv/kvm.c
->
-> diff --git a/configure b/configure
-> index 233c671aaa..7114a1c64d 100755
-> --- a/configure
-> +++ b/configure
-> @@ -200,6 +200,7 @@ supported_kvm_target() {
->          x86_64:i386 | x86_64:x86_64 | x86_64:x32 | \
->          mips:mips | mipsel:mips | \
->          ppc:ppc | ppc64:ppc | ppc:ppc64 | ppc64:ppc64 | ppc64:ppc64le | \
-> +        riscv32:riscv32 | riscv64:riscv64 | \
->          s390x:s390x)
->              return 0
->          ;;
-> diff --git a/target/riscv/Makefile.objs b/target/riscv/Makefile.objs
-> index ff651f69f6..7ea8f4c3da 100644
-> --- a/target/riscv/Makefile.objs
-> +++ b/target/riscv/Makefile.objs
-> @@ -1,5 +1,6 @@
->  obj-y += translate.o op_helper.o cpu_helper.o cpu.o csr.o fpu_helper.o gdbstub.o
->  obj-$(CONFIG_SOFTMMU) += pmp.o
-> +obj-$(CONFIG_KVM) += kvm.o
->
->  ifeq ($(CONFIG_SOFTMMU),y)
->  obj-y += monitor.o
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> new file mode 100644
-> index 0000000000..8c386d9acf
-> --- /dev/null
-> +++ b/target/riscv/kvm.c
-> @@ -0,0 +1,128 @@
-> +/*
-> + * RISC-V implementation of KVM hooks
-> + *
-> + * Copyright (c) 2020 Huawei Technologies Co., Ltd
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include <sys/ioctl.h>
-> +
-> +#include <linux/kvm.h>
-> +
-> +#include "qemu-common.h"
-> +#include "qemu/timer.h"
-> +#include "qemu/error-report.h"
-> +#include "qemu/main-loop.h"
-> +#include "sysemu/sysemu.h"
-> +#include "sysemu/kvm.h"
-> +#include "sysemu/kvm_int.h"
-> +#include "cpu.h"
-> +#include "trace.h"
-> +#include "hw/pci/pci.h"
-> +#include "exec/memattrs.h"
-> +#include "exec/address-spaces.h"
-> +#include "hw/boards.h"
-> +#include "hw/irq.h"
-> +#include "qemu/log.h"
-> +#include "hw/loader.h"
-> +
-> +const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
-> +    KVM_CAP_LAST_INFO
-> +};
-> +
-> +int kvm_arch_get_registers(CPUState *cs)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_put_registers(CPUState *cs, int level)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_release_virq_post(int virq)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_fixup_msi_route(struct kvm_irq_routing_entry *route,
-> +                             uint64_t address, uint32_t data, PCIDevice *dev)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_destroy_vcpu(CPUState *cs)
-> +{
-> +    return 0;
-> +}
-> +
-> +unsigned long kvm_arch_vcpu_id(CPUState *cpu)
-> +{
-> +    return cpu->cpu_index;
-> +}
-> +
-> +void kvm_arch_init_irq_routing(KVMState *s)
-> +{
-> +}
-> +
-> +int kvm_arch_init_vcpu(CPUState *cs)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_msi_data_to_gsi(uint32_t data)
-> +{
-> +    abort();
-> +}
-> +
-> +int kvm_arch_add_msi_route_post(struct kvm_irq_routing_entry *route,
-> +                                int vector, PCIDevice *dev)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_init(MachineState *ms, KVMState *s)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_irqchip_create(KVMState *s)
-> +{
-> +    return 0;
-> +}
-> +
-> +int kvm_arch_process_async_events(CPUState *cs)
-> +{
-> +    return 0;
-> +}
-> +
-> +void kvm_arch_pre_run(CPUState *cs, struct kvm_run *run)
-> +{
-> +}
-> +
-> +MemTxAttrs kvm_arch_post_run(CPUState *cs, struct kvm_run *run)
-> +{
-> +    return MEMTXATTRS_UNSPECIFIED;
-> +}
-> +
-> +bool kvm_arch_stop_on_emulation_error(CPUState *cs)
-> +{
-> +    return true;
-> +}
-> +
-> +int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
-> +{
-> +    return 0;
-> +}
-> --
-> 2.19.1
->
->
->
+-    target_ulong pending = env->mip & env->mie &
+-                               ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
++    target_ulong pending = env->mip & env->mie;
+     target_ulong vspending = (env->mip & env->mie &
+                               (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
+
+@@ -52,11 +51,11 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+                           (env->priv == PRV_M && mstatus_mie);
+     target_ulong sie    = env->priv < PRV_S ||
+                           (env->priv == PRV_S && mstatus_sie);
+-    target_ulong hs_sie = env->priv < PRV_S ||
++    target_ulong hs_sie = riscv_cpu_virt_enabled(env) || env->priv < PRV_S ||
+                           (env->priv == PRV_S && hs_mstatus_sie);
+
+     if (riscv_cpu_virt_enabled(env)) {
+-        target_ulong pending_hs_irq = pending & -hs_sie;
++        target_ulong pending_hs_irq = pending & ~env->hideleg & -hs_sie;
+
+         if (pending_hs_irq) {
+             riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
+-- 
+2.17.1
 
