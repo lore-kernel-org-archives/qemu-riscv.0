@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jQc5J-0005Bm-Ai
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Apr 2020 15:28:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54316)
+	id 1jQc8F-0008QC-Vb
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Apr 2020 15:31:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54742)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jQc5F-00059X-2Z
- for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 15:27:58 -0400
+ (envelope-from <alistair23@gmail.com>) id 1jQc8E-0008OT-3O
+ for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 15:31:02 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jQc55-0001sq-3t
- for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 15:27:56 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:41245)
+ (envelope-from <alistair23@gmail.com>) id 1jQc8D-0005XY-Ps
+ for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 15:31:01 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:38421)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jQc4y-0001hj-Ji; Mon, 20 Apr 2020 15:27:40 -0400
-Received: by mail-io1-xd41.google.com with SMTP id b12so12364689ion.8;
- Mon, 20 Apr 2020 12:27:39 -0700 (PDT)
+ id 1jQc7x-000535-SI; Mon, 20 Apr 2020 15:30:46 -0400
+Received: by mail-io1-xd41.google.com with SMTP id f19so12400126iog.5;
+ Mon, 20 Apr 2020 12:30:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=F5ZSCC3CcIMAv8iVmzGMsndOutHrsQnmUxVOd4frLwE=;
- b=BKCmbhMvB4BIyTx5EfzpHmmhPs3crxcYOpULrnGowUGFr3CYC8pcnQhWJirvGlxHXN
- Fyzw6CmvBCkxBd6H14QWyJuFIHd30PbF5RPwPFppvXFu/vbOujDbiqUK6lHq9kjLjAkm
- xu03MtLMkA/EDUb0XtfnYah5wDWozf5aGTx838sQgtcqiLGkiNEaV0HI3ApNXcul8cjj
- H/u3nz5qxy/vamtQh2Q/rS1m0RrDQUmL4co+ea/c3Jx2eD3LNsGoRAYRRvyDvjz3qmR+
- Ojwppx7Va/zokoyCMAP37NhJd4a8V4/G6xSuKaXcaQ186l+17ii2AgEsCCbVGQqj389+
- 94Mw==
+ :cc; bh=8reeFoMDhrBHkyh2+PUxpeJZje9eT2v6qsPaitY5no8=;
+ b=mrd9u2NGaev9/qQBvl/IAHONu2CfgR9IjrvXvKwbv0eNkJqqm27Y9v7X0x1sWewQ5Z
+ 7HfZJnOgjeVj2TwLvGhi7+z/7VE4hlfk61+CslmRJFlB8/QZaIIfDSBvI5To4Wu3cpnj
+ 4PU0rTckejiVN1PTT8xyFzluWdJdHnpBSVlSuGWwiRxIqzBTk0UkaFyEnPxW+MaDdrbR
+ DnOu/KlWsytpltxqD/mpcb57f8GPRWt74fpE8SMf6CDH97P/fmN50yRgivC/edpeMrsC
+ F8z0kxuM3ojKhOCHWlT5xv06jNzz7eo7fdgkOUHnzIwjAsdsw2KXATptLkMW7QLje8K0
+ XeEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=F5ZSCC3CcIMAv8iVmzGMsndOutHrsQnmUxVOd4frLwE=;
- b=GctIn5D1utDoYyYFCEbkuQ3UGdRQI/GrJvGCKXnTCWdR1GSS00oIg15Mj/rd9QBTiO
- iTOQ78Jc0jFwdLyL3gUABzwD9Qyip5KkXQTd5XFLOWVfvI22UPcjLQ1uA1+7b5M0ofFZ
- IEeY592srqIkb0oE50anh68fiEjA4t7BM5HC99P08vYkf2cWUIiFY5XmZR+5vzPAevJU
- /9zJFIJnxacNS4OiWH1fJ2amqpwyvhJUaU0S1Qp5mytp6snF38MwrHmLRNtYw+E/6x4G
- wwj0JImXOv+uXt9vMV+gNGn0s9BjdlAOwRjlShBd+mhJQrq2A9bauJX+vhRw/Am/58/l
- frPw==
-X-Gm-Message-State: AGi0PubHiygcDkpvMNfmclkFMGHNmBN4afZ8LJ9n+GySj1LLCi0Pntmw
- pS/z17WpguT5DO8PCxzTh/NN5ThmZrx/2sEcq97eJ8E4S5U=
-X-Google-Smtp-Source: APiQypKNmUVpPa3HCl81ND0ZEM8wBTTSaYZ2UjD2WnV0aSoJ8GW1LhR15SO5kwTcCZozLPyoSAVG2Odv6zNtwRTeNoo=
+ bh=8reeFoMDhrBHkyh2+PUxpeJZje9eT2v6qsPaitY5no8=;
+ b=sI29osU8Ys/rZ51+vagTHqW3DrZU6uO2OB8x53gNZPA985FQdbZz3WhwqcgLV7UHYa
+ zK6x4BjFjxmMLvmikNwjaV1j4gJdUta4VbeK9SPlO3GNm+d31CD8zunBVE/dy800D1mB
+ iIgBFKXwfDluPOUF20s79yRi0iRR1ZHnGNn/nug7DsPhyOD1lYFQbDQJJ+nwpNdYGTPH
+ LOPUpMexx2SshIPfcVDSD2wSO7QrOmPxppiipMQZXWHHz0cytJjgfBbmrZCpv55T2o3u
+ 4SVFj8s/t80yAENIpoDQBOI/j3qWDMEL5O6v+hfxXSELUPjJ+76jSwizZIKCoyA5efsa
+ 4tCg==
+X-Gm-Message-State: AGi0PuaDrJbNCbJAUdHObKoCk3yMu3iqPi97fo2slVWdRSXWxWR3Ld47
+ sa5HP7cFbTVpJ1YKEhMO6J083jQ94ZBpFeLWucA=
+X-Google-Smtp-Source: APiQypJzflNPwn7XVKT4A4s9VquVZPoV5123ejfcBBH0LhqeXLVH53ETk/el77p03Dd4s1Xq8UuaAP7G54NJFXAvf28=
 X-Received: by 2002:a05:6602:d:: with SMTP id
- b13mr17306741ioa.176.1587410858790; 
- Mon, 20 Apr 2020 12:27:38 -0700 (PDT)
+ b13mr17318369ioa.176.1587411044585; 
+ Mon, 20 Apr 2020 12:30:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <1583585319-26603-1-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKPEptmsw222Tt1T1qvoSvfhgMMznypEM+wr8hWYkcW0qg@mail.gmail.com>
- <CAEUhbmU+w___MiNS7kCd-b9C4rKz_OMUCMFFeroo9ew5bayYrw@mail.gmail.com>
-In-Reply-To: <CAEUhbmU+w___MiNS7kCd-b9C4rKz_OMUCMFFeroo9ew5bayYrw@mail.gmail.com>
+References: <20200313193429.8035-1-coreyw7@fb.com>
+In-Reply-To: <20200313193429.8035-1-coreyw7@fb.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 20 Apr 2020 12:19:11 -0700
-Message-ID: <CAKmqyKMU1485WcBsaaW2EhNyNmTaK+QCSiSDQg9JkD6CxmBwGw@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: Generate correct "mmu-type" for 32-bit machines
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
+Date: Mon, 20 Apr 2020 12:22:16 -0700
+Message-ID: <CAKmqyKNVKMc8o3b3xNnv9g8T_2ihmvHhAHrVzsm6KpE4FEsHsA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] Support different CPU types for the sifive_e
+ machine
+To: Corey Wharton <coreyw7@fb.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
  envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
@@ -74,30 +73,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2020 19:27:58 -0000
+X-List-Received-Date: Mon, 20 Apr 2020 19:31:02 -0000
 
-On Sun, Apr 5, 2020 at 6:28 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Fri, Mar 13, 2020 at 12:36 PM Corey Wharton <coreyw7@fb.com> wrote:
 >
-> Hi Palmer,
+> The purpose of this patch set is to allow the sifive_e machine to run
+> with different CPU targets to enable different ISA entensions. To that
+> end it also introduces a new sifive-e34 CPU type which provides the
+> same ISA as sifive-e31, with the addition of the single precision
+> floating-point extension (f). The default CPU for the sifive_e machine
+> is unchanged.
 >
-> On Tue, Mar 10, 2020 at 1:22 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Sat, Mar 7, 2020 at 4:49 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > 32-bit machine should have its CPU's "mmu-type" set to "riscv,sv32".
-> > >
-> > > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> >
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> >
->
-> Ping? Could you please take this for v5.0.0?
+> v2: Added missing RVU flag
 
 Applied to the RISC-V tree for 5.1
 
 Alistair
 
 >
-> Regards,
-> Bin
+> Corey Wharton (2):
+>   riscv: sifive_e: Support changing CPU type
+>   target/riscv: Add a sifive-e34 cpu type
+>
+>  hw/riscv/sifive_e.c |  3 ++-
+>  target/riscv/cpu.c  | 10 ++++++++++
+>  target/riscv/cpu.h  |  1 +
+>  3 files changed, 13 insertions(+), 1 deletion(-)
+>
+> --
+> 2.21.1
+>
+>
 
