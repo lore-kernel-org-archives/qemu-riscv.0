@@ -1,62 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jQc2Y-0002xo-R2
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Apr 2020 15:25:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53784)
+	id 1jQc2r-0003IV-1P
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Apr 2020 15:25:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53886)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jQc2W-0002v4-LN
- for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 15:25:08 -0400
+ (envelope-from <alistair23@gmail.com>) id 1jQc2p-0003GZ-HD
+ for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 15:25:27 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jQc2W-0008TV-9J
- for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 15:25:08 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:46741)
+ (envelope-from <alistair23@gmail.com>) id 1jQc2m-0000H8-TG
+ for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 15:25:25 -0400
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:38360)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jQc2Q-0008Ms-Qu; Mon, 20 Apr 2020 15:25:02 -0400
-Received: by mail-io1-xd41.google.com with SMTP id i3so12332776ioo.13;
- Mon, 20 Apr 2020 12:25:02 -0700 (PDT)
+ id 1jQc2m-0000GF-GQ; Mon, 20 Apr 2020 15:25:24 -0400
+Received: by mail-io1-xd44.google.com with SMTP id f19so12378358iog.5;
+ Mon, 20 Apr 2020 12:25:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Z/z6tWvsAAr6WJjgZ7JK6HDrhITes5+RAY4FbMVRoTc=;
- b=BDeWwsdV+FeQVWY+UPtM2e2Q8MN+aYPRGDxJTYhekgLicIbFBuNk+RfMmH+Ka9fugh
- AkSSdu7Xgponom4yl4bvjiZAl0tjkm1Eh8yAGuAf0Joyx4o1aoQSgJgSUP8rPSDX1GL8
- 1mhNKFA2XwKe4tnRlFH0FDrBlCst1KWjvP4fW4tgWajQdrQjPyPV+IxVB+6OSI5ZoI6J
- trbhOEQeRbU8Cm+zFGDy/Bdh3SnqdlF3qHzVhTNdSNm1St1oBWFURD3nZNwa6b0/J8AH
- g7yWSqnFgIvttUmyBh5m+VPgh+hKkqGidwHDboPvi4/bUURfW+gdg5Am4b48ANzs+QHu
- qWbw==
+ :cc; bh=cn1+441SJgj6F7h5yPCegbnHuFnhd5lmWLOXJ3+cwRQ=;
+ b=JoSCxBgWaZJ5zEIThzWY9f287y4tEXxn9mUX8C+8su/WDipY06nd1oByR49izUHy/b
+ obl0I1+ueAvNMFumpKbjMY7lof+mLl00rDgzs7WGwwG8gshJKvTnhY3PYUDjFUm35ELa
+ PxlJ+wTVMBzUH10AIVSvtbkbpnIlUz5uMIW1Rj4E2CqUte0QPC7FHpkSEVdtlG7ICuwR
+ k6sggcs11RvkhNWkLCtTwuPrgaonMIX3FOsJQG95akQmOYhf+tG1fbm7gMrH6HP3UqJ9
+ SVXka7Ai9Y/cGGzrwPRSW+PZW0Z5X4PzZ7/6XwfAHdA2xoZr/KNAhrLjAP2ybmWs6uyW
+ 405Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Z/z6tWvsAAr6WJjgZ7JK6HDrhITes5+RAY4FbMVRoTc=;
- b=ebgodjI84Sor9tNF3JLYZCJutKbYim45Q5O2Okd4CAqzjzCuus7FU2/kD0ow6Sx3W7
- N4/rthpt5byk7YGccbrEiusfGvKO/Csguk7UO5tkYD4qE/vAV+mrI9RTtfKxlDTIcvz1
- aZcy+Rr/VAfQyyAkyYQPY8uE4+WgGirm3ZExqZqGWZXvJWZ+yultWdoQ9yJGA84Nc/Cw
- oTQc+Z40KnOPjJjzYzkMEMbXwS51REY/LTskWmG+4W84D6QtmHvL3xPLTbZo2UpiSeea
- Y8W+kFE+AeB3docVPZI/KwC8lkS5u2Xw8cGHhaICigqFGbbAXpOEhxb5/oYb3BP/4zK2
- Tj6A==
-X-Gm-Message-State: AGi0PuYgLlCzwNEe/12oV962Of5jRqtp2SjCJmpOiLV2LH/G2QmIOWNe
- TpTwhqblIUSWZ7XXEHjbucwtRBbOGa3USuhBe9I=
-X-Google-Smtp-Source: APiQypK66Tc0rKPBj5GD74IrcA2UDxNqOxn/vGyxHjlH/gyInVm1JWSAI9HmjQpcuL5X1rQSLhLRtcJigYcAea8QpzE=
-X-Received: by 2002:a02:6414:: with SMTP id t20mr17511792jac.8.1587410701122; 
- Mon, 20 Apr 2020 12:25:01 -0700 (PDT)
+ bh=cn1+441SJgj6F7h5yPCegbnHuFnhd5lmWLOXJ3+cwRQ=;
+ b=plQfAM2+tp57WAKND1El3xaX2hmr3QfuD3V7bQP0LkKBZD+8UKjMib7a4INfVvxtrH
+ TebE19xzan/Q/yuvukRsg/9z6HsF2dzL5pG6cJLwEmN9QRIc66GcwRbldSxAqJe+NOQV
+ VXqmgRIgOmTY8MnVh7xF/KEfY5qaYGAXsqNirZjZSBhpXU1UFEdx4tz770+r+CdB5skI
+ kXc/RLSbAV1TTtoGQLvYaYazGqj16WKtheUgDO6dkjUQil3dkPe6bKLYTUA/zwFmemc5
+ 32ehTkRK7ou0hx/N6zHlrtjhvauMOWo/KnJBiF86YV9xH1GHK3enq2sMh7VYZCkuUC/w
+ vHwg==
+X-Gm-Message-State: AGi0PubuE10W359wl59bSMRYzR4C3dKtainF8wTJPpgxvbcM2HklqMHg
+ q4m0+CylxnoFH4ALL11iWRBo1EyyZI6el7KG3zk=
+X-Google-Smtp-Source: APiQypISBJHmcnVyi3PFKazNjnVnJzwMpNOAEPHlB9LEcJU1qL/Ssjbz76+hUl1ZccXMVj0v5dbLBRPfaoPzjns7xmQ=
+X-Received: by 2002:a6b:bf83:: with SMTP id
+ p125mr10828244iof.118.1587410722508; 
+ Mon, 20 Apr 2020 12:25:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1585262586.git.alistair.francis@wdc.com>
-In-Reply-To: <cover.1585262586.git.alistair.francis@wdc.com>
+References: <20200330082724.120444-1-anup.patel@wdc.com>
+ <CAKmqyKMwso5-O3kZVt2oBA9y1BAGNYttzKqWkoU2V5VXi63uHg@mail.gmail.com>
+In-Reply-To: <CAKmqyKMwso5-O3kZVt2oBA9y1BAGNYttzKqWkoU2V5VXi63uHg@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 20 Apr 2020 12:16:33 -0700
-Message-ID: <CAKmqyKO8otTL+r9z6Jko_QBXy_mCo4+W8C5E7J2SHb-+ac7bHg@mail.gmail.com>
-Subject: Re: [PATCH for 5.0 v1 0/2] RISC-V: Fix Hypervisor guest user space
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+Date: Mon, 20 Apr 2020 12:16:55 -0700
+Message-ID: <CAKmqyKOBz2=asvtgZ9skwC1CWxrU2Oj30j6RqJPj5N6Ms9R9Pw@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Fix Stage2 SV32 page table walk
+To: Anup Patel <anup.patel@wdc.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Atish Patra <atish.patra@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Anup Patel <anup@brainfault.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
 X-detected-operating-system: by eggs.gnu.org: Error: [-] PROGRAM ABORT :
  Malformed IPv6 address (bad octet value).
  Location : parse_addr6(), p0f-client.c:67
-X-Received-From: 2607:f8b0:4864:20::d41
+X-Received-From: 2607:f8b0:4864:20::d44
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,27 +74,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2020 19:25:09 -0000
+X-List-Received-Date: Mon, 20 Apr 2020 19:25:28 -0000
 
-On Thu, Mar 26, 2020 at 3:51 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+On Mon, Mar 30, 2020 at 9:25 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> This series fixes two bugs in the RISC-V two stage lookup
-> implementation. This fixes the Hypervisor userspace failing to start.
+> On Mon, Mar 30, 2020 at 1:28 AM Anup Patel <anup.patel@wdc.com> wrote:
+> >
+> > As-per RISC-V H-Extension v0.5 draft, the Stage2 SV32 page table has
+> > 12bits of VPN[1] and 10bits of VPN[0]. The additional 2bits in VPN[1]
+> > is required to handle the 34bit intermediate physical address coming
+> > from Stage1 SV32 page table. The 12bits of VPN[1] implies that Stage2
+> > SV32 level-0 page table will be 16KB in size with total 4096 enteries
+> > where each entry maps 4MB of memory (same as Stage1 SV32 page table).
+> >
+> > The get_physical_address() function is broken for Stage2 SV32 level-0
+> > page table because it incorrectly computes output physical address for
+> > Stage2 SV32 level-0 page table entry.
+> >
+> > The root cause of the issue is that get_physical_address() uses the
+> > "widened" variable to compute level-0 physical address mapping which
+> > changes level-0 mapping size (instead of 4MB). We should use the
+> > "widened" variable only for computing index of Stage2 SV32 level-0
+> > page table.
+> >
+> > Signed-off-by: Anup Patel <anup.patel@wdc.com>
 >
-> Alistair Francis (2):
->   riscv: Don't use stage-2 PTE lookup protection flags
->   riscv: AND stage-1 and stage-2 protection flags
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Applied to the RISC-V tree for 5.1
 
 Alistair
 
 >
->  target/riscv/cpu_helper.c | 11 +++++++----
->  1 file changed, 7 insertions(+), 4 deletions(-)
+> Alistair
 >
-> --
-> 2.26.0
->
+> > ---
+> >  target/riscv/cpu_helper.c | 7 +------
+> >  1 file changed, 1 insertion(+), 6 deletions(-)
+> >
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 50e13a064f..bc80aa87cf 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -559,12 +559,7 @@ restart:
+> >              /* for superpage mappings, make a fake leaf PTE for the TLB's
+> >                 benefit. */
+> >              target_ulong vpn = addr >> PGSHIFT;
+> > -            if (i == 0) {
+> > -                *physical = (ppn | (vpn & ((1L << (ptshift + widened)) - 1))) <<
+> > -                             PGSHIFT;
+> > -            } else {
+> > -                *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
+> > -            }
+> > +            *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
+> >
+> >              /* set permissions on the TLB entry */
+> >              if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
+> > --
+> > 2.17.1
+> >
+> >
 
