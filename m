@@ -1,71 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jQyQq-00088N-Ko
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Apr 2020 15:19:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52182)
+	id 1jQyZ2-0001wb-Q1
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Apr 2020 15:28:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53802)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1jQyQo-00083b-H1
- for qemu-riscv@nongnu.org; Tue, 21 Apr 2020 15:19:42 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1jQyZ1-0001vu-CY
+ for qemu-riscv@nongnu.org; Tue, 21 Apr 2020 15:28:11 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <palmerdabbelt@google.com>) id 1jQyQf-0007kl-JT
- for qemu-riscv@nongnu.org; Tue, 21 Apr 2020 15:19:42 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034]:55402)
+ (envelope-from <peter.maydell@linaro.org>) id 1jQyYt-0007lq-Iu
+ for qemu-riscv@nongnu.org; Tue, 21 Apr 2020 15:28:11 -0400
+Received: from mail-oi1-x232.google.com ([2607:f8b0:4864:20::232]:42694)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmerdabbelt@google.com>)
- id 1jQyQf-0007kS-6J
- for qemu-riscv@nongnu.org; Tue, 21 Apr 2020 15:19:33 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id a32so1777946pje.5
- for <qemu-riscv@nongnu.org>; Tue, 21 Apr 2020 12:19:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=subject:date:message-id:in-reply-to:references:mime-version
- :content-transfer-encoding:cc:from:to;
- bh=GWbJbZaJ6u3f69H5B2fCYzb09uZ3Zh4y+AP4E7eeq8A=;
- b=hS7UHBVlP8RZI22J5SXLuHyTa0HORbMZP+ttCabO2TjSgBJSs8pvn+SlGMx9pyeA9K
- f64t7Q7iEOmSfVxXoPPt9iQbGYFRy4QLcuaxPrzVqivMP5xq6uGX31u8rhc85hciJJd7
- od4JTP6c55fNH4Pgy3VTn/+cQX2DzrG/yuPLwrZxfEbvtCO/YB0UgiC0IerIhomL/AyV
- JKOUFVGh6VRYg0WUWhnfZDGf2AC+g3+hiQKJtF+pX9eWE2WUr4uzfBngEbrBZ2GiBGt0
- XW1lOSnW4f74ScxZcDc9Au22pjtRVi2zsQUv1t/7x3Bx0a8vjD8rdy7WKmuR68CrC6zb
- SMtQ==
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1jQyYt-0007lJ-2K
+ for qemu-riscv@nongnu.org; Tue, 21 Apr 2020 15:28:03 -0400
+Received: by mail-oi1-x232.google.com with SMTP id d7so13024290oif.9
+ for <qemu-riscv@nongnu.org>; Tue, 21 Apr 2020 12:28:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=UJOOxmMinqSKKEku91FQG3H/5a98axsYeH+hGvR5NGo=;
+ b=hlNBCi3IlYyNBYQ/nI0+8yOP8nNGUVkb9RCoGzdQ9L4SKghcDE48hz4PsJpQNyDQvw
+ fFbzP4WEzMGOPBoqSGWb7h0uRxPtLfNU0Beie7Q4nhTyv2ONmmKubtQJ8s+pTLdAU9ly
+ 3VOvCUzI4eDfGZ4kcqx1OzZ+TJM6wPNS1hzvrSeLGmGJlnjLqGzejBgcQaWK9ZKWDT7F
+ M2ksu/4WmYW2haz5wYlhA0DV0eMBsyRtBjrxj29DcrWZzwktsTkqSfAwg3lDbprKgsdT
+ 2W0+nSwI9B27N7CGsuCjewVP5dtX5ErwR4PwXV2aws6Q6H0OvC0RGi8AZNyOLTMOagMO
+ D8ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding:cc:from:to;
- bh=GWbJbZaJ6u3f69H5B2fCYzb09uZ3Zh4y+AP4E7eeq8A=;
- b=hjLNg7ZX3rneKG7oE3afvkfP0crqBR9N6qyiytFwlSpwbdA4vg0ap4e13ATgCcvz2r
- 2RZxgNCxV2/A/s6X65thCA3E/mjz3xgtZ3ENhWRMsjLTNZzdgj+XRTU2hRM5/0U0R9KP
- Cmi/Z8UVeHH/D8W2C9JQojb/KYLRPY0T3CnXVU8nTC0RhKmqI+/lbDxzOeVJpGEP1Gph
- W7KMoGgszrd2aVTuS0pcH2zf+YJPX/NBLWeBBS1wbMTlmNy3Eie3jYDeirE9Sp3PxpsF
- 3W47CvSxyxzc2bW9z9fAZ1c0KtSjYh/dqaa3Z2qE/r2PWunfo8VwuZzFmA4YxHO8R9/G
- Pyzg==
-X-Gm-Message-State: AGi0PubH4+pERt9WBhwTijAx+rkr3gYfkKWGE5Wis99Jn+HEsBjDinOP
- C5crdpHHw/mRIVX3dOXeiU5U7+1I5a8=
-X-Google-Smtp-Source: APiQypKNoDz6BP1RI9M0YPl9pcWqGxIrOVYsfjmoWi9nuctOhjmahygNaaTZyVnyzsVeN84KubdnJQ==
-X-Received: by 2002:a17:90a:d56:: with SMTP id
- 22mr6952803pju.187.1587496771311; 
- Tue, 21 Apr 2020 12:19:31 -0700 (PDT)
-Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
- [76.210.143.223])
- by smtp.gmail.com with ESMTPSA id z25sm692257pfa.213.2020.04.21.12.19.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2020 12:19:30 -0700 (PDT)
-Subject: [PULL 4/6] riscv/sifive_u: Fix up file ordering
-Date: Tue, 21 Apr 2020 12:09:59 -0700
-Message-Id: <20200421191001.92644-5-palmerdabbelt@google.com>
-X-Mailer: git-send-email 2.26.1.301.g55bc3eb7cb9-goog
-In-Reply-To: <20200421191001.92644-1-palmerdabbelt@google.com>
-References: <20200421191001.92644-1-palmerdabbelt@google.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=UJOOxmMinqSKKEku91FQG3H/5a98axsYeH+hGvR5NGo=;
+ b=HYgRDPR/eW2FIF8Zj0cg2PH3Cc3IpHsO5PKVCEROwUBbAFWsniUqHIzztPsc5owhKs
+ 87tJcMaisn171x+DqPF+2+1T6GXy/KvwLkR6++OviUUQuKeN01ytUzOyje/84mPXqNm/
+ e6SbT3bbLeUJ8pBa2Hga4OhW1V84pSTUzUUNg1FA9uA1AYl1XoL703Kdg7aOMU2iVoQj
+ CA1nt5lTpR9GZVKTkkSJMlilXrlM8N1RciZqWGemg88ppIhiuv+D4rHBvQKRzvDyzPzI
+ fmFpMWunEQ2425IHiusrn+aJWruKjo/fmAimdVI34MTH05VJC++PjEVY+WX7m0OHb5vr
+ nBvQ==
+X-Gm-Message-State: AGi0PuaRxn7LobqCjuq7mxfRmbXalrFRE8GxHLwWYqaGIR4gmGFcGIOY
+ jbRNLq3JstIww+aa+S0liDSi/sHsy27NykZmwGBOGA==
+X-Google-Smtp-Source: APiQypLfG330WBSuCDCtJMZ0fJBsu2WCRznwAWnWvfkEg5PrfpiCeWRxLOi9NVae/yYDSxWbue2FY/XEZBiyYppOwS8=
+X-Received: by 2002:aca:3a8a:: with SMTP id h132mr4153815oia.146.1587497281614; 
+ Tue, 21 Apr 2020 12:28:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Palmer Dabbelt <palmerdabbelt@google.com>
-From: Palmer Dabbelt <palmerdabbelt@google.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=palmerdabbelt@google.com; helo=mail-pj1-x1034.google.com
+References: <20200421191001.92644-1-palmerdabbelt@google.com>
+In-Reply-To: <20200421191001.92644-1-palmerdabbelt@google.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 21 Apr 2020 20:27:50 +0100
+Message-ID: <CAFEAcA9ZrLDnU1KLmoPBqhS1fYVG05TzN3bojEGherL7PRhwFg@mail.gmail.com>
+Subject: Re: [PULL] RISC-V Patches for 5.0-rc4
+To: Palmer Dabbelt <palmerdabbelt@google.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>, 
+ Alistair Francis <alistair.francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::232;
+ envelope-from=peter.maydell@linaro.org; helo=mail-oi1-x232.google.com
 X-detected-operating-system: by eggs.gnu.org: Error: [-] PROGRAM ABORT :
  Malformed IPv6 address (bad octet value).
  Location : parse_addr6(), p0f-client.c:67
-X-Received-From: 2607:f8b0:4864:20::1034
+X-Received-From: 2607:f8b0:4864:20::232
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,158 +69,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2020 19:19:43 -0000
+X-List-Received-Date: Tue, 21 Apr 2020 19:28:11 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>
+On Tue, 21 Apr 2020 at 20:19, Palmer Dabbelt <palmerdabbelt@google.com> wrote:
+> ----------------------------------------------------------------
+> RISC-V Patches for 5.0-rc4
+>
+> This contains handful of patches that I'd like to target for 5.0.  I know it's
+> a bit late, I thought I'd already sent these out but must have managed to miss
+> doing so.  The patches include:
+>
+> * A handful of fixes to PTE lookups related to H-mode support.
+> * The addition of a serial number fo the SiFive U implementetaion, which allows
+>   bootloaders to generate a sane MAC address.
+>
+> These pass "make check" and boot Linux for me.
+>
+> ----------------------------------------------------------------
+> Peter: Sorry I dropped the ball here.  I can understand if it's too late for
+> 5.0, but if there's still going to be an rc4 then I'd love to have these
+> included.
+> ----------------------------------------------------------------
 
-Split the file into clear machine and SoC sections.
+Nope, sorry. rc4 has technically not been tagged yet, but especially
+the serial-property stuff is too big a code change at this point
+(it includes one "let's just refactor and rearrange some code"
+patch which is really not rc4 material.)
+Also these patches have been on the list for over a month -- if
+they were 5.0-worthy there's been plenty of time for them to be
+put in.
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
----
- hw/riscv/sifive_u.c | 109 ++++++++++++++++++++++----------------------
- 1 file changed, 55 insertions(+), 54 deletions(-)
+Plus the last email from Alistair on the "target/riscv: Don't set
+write permissions on dirty PTEs" patch thread is a note saying
+it shouldn't be applied, unless I've got confused.
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 56351c4faa..d0ea6803db 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -312,7 +312,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     g_free(nodename);
- }
- 
--static void riscv_sifive_u_init(MachineState *machine)
-+static void sifive_u_machine_init(MachineState *machine)
- {
-     const struct MemmapEntry *memmap = sifive_u_memmap;
-     SiFiveUState *s = RISCV_U_MACHINE(machine);
-@@ -403,6 +403,60 @@ static void riscv_sifive_u_init(MachineState *machine)
-                           &address_space_memory);
- }
- 
-+static bool sifive_u_machine_get_start_in_flash(Object *obj, Error **errp)
-+{
-+    SiFiveUState *s = RISCV_U_MACHINE(obj);
-+
-+    return s->start_in_flash;
-+}
-+
-+static void sifive_u_machine_set_start_in_flash(Object *obj, bool value, Error **errp)
-+{
-+    SiFiveUState *s = RISCV_U_MACHINE(obj);
-+
-+    s->start_in_flash = value;
-+}
-+
-+static void sifive_u_machine_instance_init(Object *obj)
-+{
-+    SiFiveUState *s = RISCV_U_MACHINE(obj);
-+
-+    s->start_in_flash = false;
-+    object_property_add_bool(obj, "start-in-flash", sifive_u_machine_get_start_in_flash,
-+                             sifive_u_machine_set_start_in_flash, NULL);
-+    object_property_set_description(obj, "start-in-flash",
-+                                    "Set on to tell QEMU's ROM to jump to " \
-+                                    "flash. Otherwise QEMU will jump to DRAM",
-+                                    NULL);
-+}
-+
-+
-+static void sifive_u_machine_class_init(ObjectClass *oc, void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-+    mc->desc = "RISC-V Board compatible with SiFive U SDK";
-+    mc->init = sifive_u_machine_init;
-+    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
-+    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
-+    mc->default_cpus = mc->min_cpus;
-+}
-+
-+static const TypeInfo sifive_u_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("sifive_u"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = sifive_u_machine_class_init,
-+    .instance_init = sifive_u_machine_instance_init,
-+    .instance_size = sizeof(SiFiveUState),
-+};
-+
-+static void sifive_u_machine_init_register_types(void)
-+{
-+    type_register_static(&sifive_u_machine_typeinfo);
-+}
-+
-+type_init(sifive_u_machine_init_register_types)
-+
- static void riscv_sifive_u_soc_init(Object *obj)
- {
-     MachineState *ms = MACHINE(qdev_get_machine());
-@@ -443,33 +497,6 @@ static void riscv_sifive_u_soc_init(Object *obj)
-                           TYPE_CADENCE_GEM);
- }
- 
--static bool sifive_u_get_start_in_flash(Object *obj, Error **errp)
--{
--    SiFiveUState *s = RISCV_U_MACHINE(obj);
--
--    return s->start_in_flash;
--}
--
--static void sifive_u_set_start_in_flash(Object *obj, bool value, Error **errp)
--{
--    SiFiveUState *s = RISCV_U_MACHINE(obj);
--
--    s->start_in_flash = value;
--}
--
--static void riscv_sifive_u_machine_instance_init(Object *obj)
--{
--    SiFiveUState *s = RISCV_U_MACHINE(obj);
--
--    s->start_in_flash = false;
--    object_property_add_bool(obj, "start-in-flash", sifive_u_get_start_in_flash,
--                             sifive_u_set_start_in_flash, NULL);
--    object_property_set_description(obj, "start-in-flash",
--                                    "Set on to tell QEMU's ROM to jump to " \
--                                    "flash. Otherwise QEMU will jump to DRAM",
--                                    NULL);
--}
--
- static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
- {
-     MachineState *ms = MACHINE(qdev_get_machine());
-@@ -607,29 +634,3 @@ static void riscv_sifive_u_soc_register_types(void)
- }
- 
- type_init(riscv_sifive_u_soc_register_types)
--
--static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
--{
--    MachineClass *mc = MACHINE_CLASS(oc);
--
--    mc->desc = "RISC-V Board compatible with SiFive U SDK";
--    mc->init = riscv_sifive_u_init;
--    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
--    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
--    mc->default_cpus = mc->min_cpus;
--}
--
--static const TypeInfo riscv_sifive_u_machine_typeinfo = {
--    .name       = MACHINE_TYPE_NAME("sifive_u"),
--    .parent     = TYPE_MACHINE,
--    .class_init = riscv_sifive_u_machine_class_init,
--    .instance_init = riscv_sifive_u_machine_instance_init,
--    .instance_size = sizeof(SiFiveUState),
--};
--
--static void riscv_sifive_u_machine_init_register_types(void)
--{
--    type_register_static(&riscv_sifive_u_machine_typeinfo);
--}
--
--type_init(riscv_sifive_u_machine_init_register_types)
--- 
-2.26.1.301.g55bc3eb7cb9-goog
-
+thanks
+-- PMM
 
