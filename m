@@ -1,67 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jQc8F-0008QC-Vb
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Apr 2020 15:31:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54742)
+	id 1jQho4-0001a9-Ic
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Apr 2020 21:34:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60366)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jQc8E-0008OT-3O
- for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 15:31:02 -0400
+ (envelope-from <bmeng.cn@gmail.com>) id 1jQho3-0001XI-6e
+ for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 21:34:35 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jQc8D-0005XY-Ps
- for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 15:31:01 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:38421)
+ (envelope-from <bmeng.cn@gmail.com>) id 1jQho2-0001Si-HX
+ for qemu-riscv@nongnu.org; Mon, 20 Apr 2020 21:34:35 -0400
+Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:33445)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jQc7x-000535-SI; Mon, 20 Apr 2020 15:30:46 -0400
-Received: by mail-io1-xd41.google.com with SMTP id f19so12400126iog.5;
- Mon, 20 Apr 2020 12:30:45 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jQhni-0000vF-5b; Mon, 20 Apr 2020 21:34:14 -0400
+Received: by mail-yb1-xb43.google.com with SMTP id e17so6524299ybq.0;
+ Mon, 20 Apr 2020 18:34:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=8reeFoMDhrBHkyh2+PUxpeJZje9eT2v6qsPaitY5no8=;
- b=mrd9u2NGaev9/qQBvl/IAHONu2CfgR9IjrvXvKwbv0eNkJqqm27Y9v7X0x1sWewQ5Z
- 7HfZJnOgjeVj2TwLvGhi7+z/7VE4hlfk61+CslmRJFlB8/QZaIIfDSBvI5To4Wu3cpnj
- 4PU0rTckejiVN1PTT8xyFzluWdJdHnpBSVlSuGWwiRxIqzBTk0UkaFyEnPxW+MaDdrbR
- DnOu/KlWsytpltxqD/mpcb57f8GPRWt74fpE8SMf6CDH97P/fmN50yRgivC/edpeMrsC
- F8z0kxuM3ojKhOCHWlT5xv06jNzz7eo7fdgkOUHnzIwjAsdsw2KXATptLkMW7QLje8K0
- XeEw==
+ :cc; bh=W8ZFHS9omzGT3JRqbPGa8jzkw69mxVTDGVTWbskdKDA=;
+ b=kp0Jto/+Ou7WIQkWOWMghZVaPeJPdj84l0IYL8QaPoA84mYU6YTlXW/qppy2Vg/1PK
+ YN/H730P1e9yLW8060f1odiPTubMbOvT7l4UJ6z8NDPzob+h0M5XGb3mv7sgzF+Z6Feu
+ Vvx/rcdbB3Ar+4C295gyiMrP0NtumX6Ui9vn4zXfZjmYndp952Zes/uUBOIhozY3X/A6
+ 15wkkZrsdcMbW0oJ/ewqOpaL+GIHq8HcuSge0fkN7Dpfs84/Vq+fy5ExKh1EZJ5pFZLn
+ CatXi+yNXaUhQNdcFcEzv32D4kb1/ZVT7iW9rniUJW7w/BTpDTDJyfT3r31pvl7m4xWk
+ yRZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=8reeFoMDhrBHkyh2+PUxpeJZje9eT2v6qsPaitY5no8=;
- b=sI29osU8Ys/rZ51+vagTHqW3DrZU6uO2OB8x53gNZPA985FQdbZz3WhwqcgLV7UHYa
- zK6x4BjFjxmMLvmikNwjaV1j4gJdUta4VbeK9SPlO3GNm+d31CD8zunBVE/dy800D1mB
- iIgBFKXwfDluPOUF20s79yRi0iRR1ZHnGNn/nug7DsPhyOD1lYFQbDQJJ+nwpNdYGTPH
- LOPUpMexx2SshIPfcVDSD2wSO7QrOmPxppiipMQZXWHHz0cytJjgfBbmrZCpv55T2o3u
- 4SVFj8s/t80yAENIpoDQBOI/j3qWDMEL5O6v+hfxXSELUPjJ+76jSwizZIKCoyA5efsa
- 4tCg==
-X-Gm-Message-State: AGi0PuaDrJbNCbJAUdHObKoCk3yMu3iqPi97fo2slVWdRSXWxWR3Ld47
- sa5HP7cFbTVpJ1YKEhMO6J083jQ94ZBpFeLWucA=
-X-Google-Smtp-Source: APiQypJzflNPwn7XVKT4A4s9VquVZPoV5123ejfcBBH0LhqeXLVH53ETk/el77p03Dd4s1Xq8UuaAP7G54NJFXAvf28=
-X-Received: by 2002:a05:6602:d:: with SMTP id
- b13mr17318369ioa.176.1587411044585; 
- Mon, 20 Apr 2020 12:30:44 -0700 (PDT)
+ bh=W8ZFHS9omzGT3JRqbPGa8jzkw69mxVTDGVTWbskdKDA=;
+ b=s+UQlij8jry+razftrA5YMTa/cSkAQzCD43dC9qxZAb1Nbgt7ezhN5x40sNjPpaQou
+ 22Q38H3hd1Z+PRShZvm0MCr46/A+RVtdV5oNi1olw3iAbQVHCiMXGmmuyPl2BonIzUwi
+ MLm17dsSH4cZ1UdaaRgGE653JzMlc9uGJpcRxS+t6sUm50EqsufNnXVYmt4hmW639hQ7
+ kfb2rQ9zAh58bNwiRMV8k0RVTJ+qV0maLFTqc0NkRN92OrW5WxoNgBxbNAuuVF+oQoiF
+ VsFdoDQzhbroJV/E+IqlOzEBE4nKv6Pxec/6wmIOnnZonQCJjupVOtEXKkcMKjwndbLU
+ hz8g==
+X-Gm-Message-State: AGi0PuZ/xs0F0rziPLs1rIyGnjTah27XizKuO/vbBn5fb7JqTC2Louhx
+ tR1t0H9DmgObhYe6gQT8AIrNST58HMOoZxftgzE=
+X-Google-Smtp-Source: APiQypJq/8MyY9XupCRTIAHjzB4KMbssSiT2I1rvLuiBLHTNGw8nhL5vUBbvQJMnoKqZbLOxwB0Enr3AJaOp3j2sSb4=
+X-Received: by 2002:a05:6902:686:: with SMTP id
+ i6mr21502902ybt.56.1587432852162; 
+ Mon, 20 Apr 2020 18:34:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200313193429.8035-1-coreyw7@fb.com>
-In-Reply-To: <20200313193429.8035-1-coreyw7@fb.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 20 Apr 2020 12:22:16 -0700
-Message-ID: <CAKmqyKNVKMc8o3b3xNnv9g8T_2ihmvHhAHrVzsm6KpE4FEsHsA@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] Support different CPU types for the sifive_e
- machine
-To: Corey Wharton <coreyw7@fb.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+References: <1587389038-1549-1-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKMzUzHC1FhV6ccjswjRvQH_h6DuUwEWjte4CAEmxPOKDg@mail.gmail.com>
+In-Reply-To: <CAKmqyKMzUzHC1FhV6ccjswjRvQH_h6DuUwEWjte4CAEmxPOKDg@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 21 Apr 2020 09:34:01 +0800
+Message-ID: <CAEUhbmUTEVPF6f91SqrXL-_M-G_Jg2D29cBjbCs1YBGm2fk6QA@mail.gmail.com>
+Subject: Re: [PATCH] roms: opensbi: Upgrade from v0.6 to v0.7
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
 X-detected-operating-system: by eggs.gnu.org: Error: [-] PROGRAM ABORT :
  Malformed IPv6 address (bad octet value).
  Location : parse_addr6(), p0f-client.c:67
-X-Received-From: 2607:f8b0:4864:20::d41
+X-Received-From: 2607:f8b0:4864:20::b43
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,35 +73,137 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2020 19:31:02 -0000
+X-List-Received-Date: Tue, 21 Apr 2020 01:34:36 -0000
 
-On Fri, Mar 13, 2020 at 12:36 PM Corey Wharton <coreyw7@fb.com> wrote:
->
-> The purpose of this patch set is to allow the sifive_e machine to run
-> with different CPU targets to enable different ISA entensions. To that
-> end it also introduces a new sifive-e34 CPU type which provides the
-> same ISA as sifive-e31, with the addition of the single precision
-> floating-point extension (f). The default CPU for the sifive_e machine
-> is unchanged.
->
-> v2: Added missing RVU flag
+Hi Alistair,
 
-Applied to the RISC-V tree for 5.1
+On Tue, Apr 21, 2020 at 2:41 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Mon, Apr 20, 2020 at 6:25 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > Upgrade OpenSBI from v0.6 to v0.7 and the pre-built bios images.
+> >
+> > The v0.7 release includes the following commits:
+> >
+> > f64f4b9 lib: Add a new platform feature to bringup secondary harts
+> > b677a9b lib: Implement hart hotplug
+> > 5b48240 lib: Add possible hart status values
+> > e3f69fc lib: Implement Hart State Management (HSM) SBI extension
+> > 6704216 lib: Check MSIP bit after returning from WFI
+> > 82ae8e8 makefile: Do setup of the install target more flexible
+> > e1a5b73 platform: sifive: fu540: allow sv32 as an mmu-type
+> > 8c83fb2 lib: Fix return type of sbi_hsm_hart_started()
+> > 00d332b include: Move bits related defines and macros to sbi_bitops.h
+> > a148996 include: sbi_bitops: More useful bit operations
+> > 4a603eb platform: kendryte/k210: Set per-HART stack size to 8KB
+> > 678c3c3 include: sbi_scratch: Set per-HART scratch size to 4KB
+> > 2abc55b lib: Sort build objects in alphabetical order
+> > 6e87507 platform: ae350: Sort build objects in alphabetical order
+> > 650c0e5 lib: sbi: Fix coding style issues
+> > 078686d lib: serial: Fix coding style issues
+> > 3226bd9 lib: Simple bitmap library
+> > c741abc include: Simple hartmask library
+> > d6d7e18 lib: sbi_init: Don't allow HARTID greater than SBI_HARTMASK_MAX_BITS
+> > a4a6a81 lib: Introduce SBI_TLB_INFO_INIT() helper macro
+> > d963164 lib: sbi_tlb: Use sbi_hartmask in sbi_tlb_info
+> > 71d2b83 lib: Move all coldboot wait APIs to sbi_init.c
+> > 2b945fc lib: sbi_init: Use hartmask for coldboot wait
+> > 44ce5b9 include: Remove disabled_hart_mask from sbi_platform
+> > 2db381f lib: Introduce sbi_hsm_hart_started_mask() API
+> > 61f7768 lib: sbi_ecall_legacy: Use sbi_hsm_hart_started_mask() API
+> > 466fecb lib: sbi_system: Use sbi_hsm_hart_started_mask() API
+> > 9aad831 lib: sbi_ipi: Use sbi_hsm_hart_started_mask() API
+> > eede1aa lib: sbi_hart: Remove HART available mask and related APIs
+> > 757bb44 docs: Remove out-of-date documentation
+> > 86d37bb lib: sbi: Fix misaligned trap handling
+> > ffdc858 platform: ariane-fpga: Change license for ariane-fpga from GPL-2.0 to BSD-2
+> > 4b2f594 sbi: Add definitions for true/false
+> > 0cfe49a libfdt: Add INT32_MAX and UINT32_MAX in libfdt_env.h
+> > baac7e0 libfdt: Upgrade to v1.5.1 release
+> > f92147c include: Make sbi_hart_id_to_scratch() as macro
+> > eeae3d9 firmware: fw_base: Optimize _hartid_to_scratch() implementation
+> > 16e7071 lib: sbi_hsm: Optimize sbi_hsm_hart_get_state() implementation
+> > 823345e include: Make sbi_current_hartid() as macro in riscv_asm.h
+> > 9aabba2 Makefile: Fix distclean make target
+> > 9275ed3 platform: ariane-fpga: Set per-HART stack size to 8KB
+> > 2343efd platform: Set per-HART stack size to 8KB in the template platform codes
+> > 72a0628 platform: Use one unified per-HART stack size macro for all platforms
+> > 327ba36 scripts: Cover sifive/fu540 in the 32-bit build
+> > 5fbcd62 lib: sbi: Update pmp_get() to return decoded size directly
+> > dce8846 libfdt: Compile fdt_addresses.c
+> > fcb1ded lib: utils: Add a fdt_reserved_memory_fixup() helper
+> > 666be6d platform: Clean up include header files
+> > 6af5576 lib: utils: Move PLIC DT fix up codes to fdt_helper.c
+> > e846ce1 platform: andes/ae350: Fix up DT for reserved memory
+> > 8135520 platform: ariane-fpga: Fix up DT for reserved memory
+> > c9a5268 platform: qemu/virt: Fix up DT for reserved memory
+> > 6f9bb83 platform: sifive/fu540: Fix up DT for reserved memory
+> > 1071f05 platform: sifive/fu540: Remove "stdout-path" fix-up
+> > dd9439f lib: utils: Add a fdt_cpu_fixup() helper
+> > 3f1c847 platform: sifive/fu540: Replace cpu0 node fix-up with the new helper
+> > db6a2b5 lib: utils: Add a general device tree fix-up helper
+> > 3f8d754 platform: Update to call general DT fix-up helper
+> > 87a7ef7 lib: sbi_scratch: Introduce HART id to scratch table
+> > e23d3ba include: Simplify HART id to scratch macro
+> > 19bd531 lib: sbi_hsm: Simplify hart_get_state() and hart_started() APIs
+> > 3ebfe0e lib: sbi_tlb: Simplify sbi_tlb_entry_process() function
+> > 209134d lib: Handle failure of sbi_hartid_to_scratch() API
+> > bd6ef02 include: sbi_platform: Improve sbi_platform_hart_disabled() API
+> > c9f60fc lib: sbi_scratch: Don't set hartid_to_scratch table for disabled HART
+> > 680b098 lib: sbi_hsm: Don't use sbi_platform_hart_count() API
+> > db187d6 lib: sbi_hsm: Remove scratch parameter from hart_started_mask() API
+> > 814f38d lib: sbi_hsm: Don't use sbi_platform_hart_disabled() API
+> > 75eec9d lib: Don't use sbi_platform_hart_count() API
+> > c51f02c include: sbi_platform: Introduce HART index to HART id table
+> > 315a877 platform: sifive/fu540: Remove FU540_ENABLED_HART_MASK option
+> > a0c88dd lib: Fix sbi_ecall_register_extension to prevent extension IDs overlap
+> > 9a74a64 lib: Check MSIP bit after returning from WFI
+> > 5968894 platform: Move ariane standalone fpga project to its own project
+> > ed265b4 platform: fpga/ariane: Remove redundant plic address macros
+> > fb84879 platform: Add OpenPiton platform support
+> > d1d6560 platform: fpga/common: Add a fdt parsing helper functions
+> > 040e4e2 lib: utils: Move fdt fixup helper routines to a different file
+> > 4c37451 platform: openpiton: Read the device configurations from device tree
+> > 4d93586 lib: prevent coldboot_lottery from overflowing
+> > 550ba88 scripts: Extend create-binary-archive.sh for unified binary tar ball
+> > 160c885 lib: utils: Improve fdt_cpu_fixup() implementation
+> > 1de66d1 lib: Optimize unpriv load/store implementation
+> > 626467c lib: Remove scratch parameter from unpriv load/store functions
+> > cb78a48 lib: sbi_trap: Remove scratch parameter from sbi_trap_redirect()
+> > d11c79c lib: sbi_emulate_csr: Remove scratch and hartid parameter
+> > 5a7bd0c lib: sbi_illegal_insn: Remove mcause, scratch and hartid parameters
+> > fe37d7d lib: sbi_misaligned_ldst: Remove mcause, scratch and hartid parameters
+> > 7487116 lib: sbi_ecall: Remove mcause, scratch and hartid parameters
+> > 40b221b lib: sbi_trap: Simplify sbi_trap_handler() API
+> > 7b211ff include: sbi_platform: Remove priv parameter from hart_start() callback
+> > 5b6957e include: Use more consistent name for atomic xchg() and cmpxchg()
+> > dd0f21c lib: sbi_scratch: Introduce sbi_scratch_last_hartid() API
+> > 54b2779 include: sbi_tlb: Remove scratch parameter from sbi_tlb_request()
+> > 9e52a45 include: sbi_ipi: Remove scratch parameter from most functions
+> > ec0d80f include: sbi_system: Remove scratch parameter and redundant functions
+> > 0a28ea5 include: sbi_timer: Remove scratch parameter from most funcitons
+> > 648507a include: sbi_console: Remove scratch parameter from sbi_dprintf()
+> > e5a7f55 platform: thead/c910: Use HSM extension to boot secondary cores
+> > f281de8 lib: irqchip/plic: Fix maximum priority threshold value
+> > 6c7922e lib: Support vector extension
+> > 615587c docs: Update README about supported SBI versions
+> > 66d0184 lib: Allow overriding SBI implementation ID
+> > 9f1b72c include: Bump-up version to 0.7
+> >
+> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>
+> Can you share a git branch with this patch? From memory these binary
+> patches don't apply well from emails.
 
-Alistair
+Sure. Please grab the bits from http://github.com/lbmeng/qemu opensbi branch.
 
->
-> Corey Wharton (2):
->   riscv: sifive_e: Support changing CPU type
->   target/riscv: Add a sifive-e34 cpu type
->
->  hw/riscv/sifive_e.c |  3 ++-
->  target/riscv/cpu.c  | 10 ++++++++++
->  target/riscv/cpu.h  |  1 +
->  3 files changed, 13 insertions(+), 1 deletion(-)
->
-> --
-> 2.21.1
->
->
+You can also use patchwork to help with your custodian work.
+http://patchwork.ozlabs.org/project/qemu-devel/patch/1587389038-1549-1-git-send-email-bmeng.cn@gmail.com/
+
+Click on the "mbox" button to download the patch and apply it.
+
+Regards,
+Bin
 
