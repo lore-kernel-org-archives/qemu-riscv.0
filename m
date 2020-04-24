@@ -1,57 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jRzxC-0001RV-HX
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Apr 2020 11:09:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46838)
+	id 1jS0wB-0002AA-S1
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Apr 2020 12:12:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40956)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <josemartins90@gmail.com>) id 1jRzxA-0001Pa-Vb
- for qemu-riscv@nongnu.org; Fri, 24 Apr 2020 11:09:21 -0400
+ (envelope-from <alistair23@gmail.com>) id 1jS0wA-000293-TA
+ for qemu-riscv@nongnu.org; Fri, 24 Apr 2020 12:12:23 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <josemartins90@gmail.com>) id 1jRzxA-0005Te-GF
- for qemu-riscv@nongnu.org; Fri, 24 Apr 2020 11:09:20 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:33529)
+ (envelope-from <alistair23@gmail.com>) id 1jS0wA-0002g8-EX
+ for qemu-riscv@nongnu.org; Fri, 24 Apr 2020 12:12:22 -0400
+Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:38351)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1jRzx9-0005Nh-26; Fri, 24 Apr 2020 11:09:20 -0400
-Received: by mail-il1-x141.google.com with SMTP id q10so9576576ile.0;
- Fri, 24 Apr 2020 08:09:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jS0w5-0002Mf-6h; Fri, 24 Apr 2020 12:12:17 -0400
+Received: by mail-il1-x144.google.com with SMTP id u5so9792369ilb.5;
+ Fri, 24 Apr 2020 09:12:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to:cc;
- bh=uSkPVDChwZc8xxyCwwHERfg3imtvy6OvSKH/C59zyPg=;
- b=QdXvDE0PdpQa0Ug6WIDVv3I44GCMxubGTJNph4O9Y6sQMMC6QA1vNJUiIALgkY/nnt
- iC6NQFPOkK58H71MYs8rORCJ+oVjlQz0A5lYQHmvQZWqopPKdBqiIltRP1+TKT9PsSGL
- /IV4J1RwD/+jQo4B5anZJ+mzhH6p3Xa3zOc20QG/7E5ohr5h2if2zhvAuY2vAlFyWvdB
- 6zYjb3IArmiNe0ah4SOEIHjoYmbt0Vz9tT+Nsno+SPBkCkXkbsjgGGXlQ0OoU8plUZZa
- rwLJ6F1CSVGoc7FXTZtmC7eNBPO2sZPSlCCTstxVX8G4k18s4vm7LKvlwM2hTihsZD4b
- 5CJA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=vnS1xMxlQ4q45LRVxXqTXJ2TAoqMdjMxBJhULLriIWI=;
+ b=Fh2OMCo7bNBNrNHOPzJwUF7JJZS2kiAWhCCPBSbQy4501QHAu8qUhnJCzkOySj0q9m
+ TWVL/1WM1RbwPsipP6SFzz4sTLE3hukTrCN280dFyR5zRPZaN68VHYVzD+bmBMrb5QF5
+ qjVUVguRVYOUa+AkD+u98swyQpNHDpSSmvCPlw3L9ErlBQ3JMxoTXr0G6yHGKNQ48XTj
+ eskOMs6IjRgCij3E4AjbrD87DJROu7uPGiyOkj/Art+IN23F70u8bd2UVgilwImmMZr2
+ KoWb735Z/EwvyQ2bYQ2Pu1stxH3LnWy/H1/BQojseQ7pHc0JPeaFuqH0jDmDxtjys0dc
+ yUrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=uSkPVDChwZc8xxyCwwHERfg3imtvy6OvSKH/C59zyPg=;
- b=lvRgOG6/iZkedOkKsxoRmbnqbqpE9BI9N0962QVzbgYFvusKpCDwkYHQvLeDaznLu9
- MH8q2j7misOKtoYuXJ3WqyION+d1dmkjMH7XFQjjnF9lBmUAfPJilanPYGMQtozB1LEs
- CEMjHCPX5PfSjSkjePZDIunXdDPfby8uTwBvExY2SVjZ7HGObRDfba4DpMQe31LZnrxj
- xNcVAuI4ldKQcT57+HJSpvLP+RlmZRKdvum143JCp/EOJm4B74TI2J37Ut6B3xTP8Cm6
- MEJTeW1e2h75TxkqkGtzlqRoYbFUZ+zJg5cz3owiJyWc6wQsF9bhcph1lXI+OzhJrHkO
- v0Vg==
-X-Gm-Message-State: AGi0PuY6FmDaTY6q9O7erXsyf/a5UHhqqhjeikuwEMy1Szoj35jkN6Nm
- /3NQTGpIw6w5+c5bpXpQBb+X+zvKEKxg+iRuiW4DdMHHdvw=
-X-Google-Smtp-Source: APiQypLdIGRc1Yep6wQI72lRKBR/RorX+6dMSvKQJDFIUvCm24ZEyYrci3TcPwUfqJpwFi+jTOs3Esx2G68f5BA+OeI=
-X-Received: by 2002:a92:985d:: with SMTP id l90mr9346296ili.108.1587740956159; 
- Fri, 24 Apr 2020 08:09:16 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=vnS1xMxlQ4q45LRVxXqTXJ2TAoqMdjMxBJhULLriIWI=;
+ b=Gjf9Yu0wzCll6HwGSu3q1B7poXpeZxamcwjaCy05woiKFjhADquroKs09lWamMFmWE
+ K+OQgHI+tPX/1WlNPXnrD+720JCZCBs2DkflT3dZeGKp6uKT3SSSQPckMXKAAfd6jn67
+ XBZLgV8B9dXc8U77KsWo53aePq0Fjsv5U9UQFYqFFbvvRqzhTaayYGlBHORUSbV/lgki
+ fPkMlInsTYUxmjjjXdlEnp23cOZ8b2sJotMyxwMlHRn7hIScexBvsZY7gGXZN+fJIHqJ
+ e7GBRF5W4E30buwNle1G6KGTk/PNh5wtbaWUe/BPC1VbE5/D7PUYF+6PlibD0SLAjvLF
+ hb5g==
+X-Gm-Message-State: AGi0PubK2tA2NzZCSD5D+2lYgAAD+NR10EKCmslugKv51lZ1hHHm4JsM
+ Uc+fScu9+gWWZeBvb4i2QA03x5JbepozNNko4as=
+X-Google-Smtp-Source: APiQypJqbIiKXLG7j6zoCJkgktVpkmZGCfcIcWqg4HMQ73fC/UwJqgipBdKCPkGMB7FG2tQs+2MbQMbs5J9qJyrnNCU=
+X-Received: by 2002:a92:ad09:: with SMTP id w9mr9761771ilh.177.1587744735084; 
+ Fri, 24 Apr 2020 09:12:15 -0700 (PDT)
 MIME-Version: 1.0
-From: Jose Martins <josemartins90@gmail.com>
-Date: Fri, 24 Apr 2020 16:09:04 +0100
-Message-ID: <CAC41xo2LfTQZnor5haAgBg=h34qv50xf8Bs1bgSeGESfr-E2ng@mail.gmail.com>
-Subject: [PATCH] target/riscv: fix check of guest pa top bits
-To: qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com
+References: <20200313193429.8035-1-coreyw7@fb.com>
+ <20200313193429.8035-2-coreyw7@fb.com>
+In-Reply-To: <20200313193429.8035-2-coreyw7@fb.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 24 Apr 2020 09:03:41 -0700
+Message-ID: <CAKmqyKNGLOE_UKWVuJzrBDRkRXj74XfOace+K5ab4-5HTWg_KA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] riscv: sifive_e: Support changing CPU type
+To: Corey Wharton <coreyw7@fb.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=josemartins90@gmail.com; helo=mail-il1-x141.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
 X-detected-operating-system: by eggs.gnu.org: Error: [-] PROGRAM ABORT :
  Malformed IPv6 address (bad octet value).
  Location : parse_addr6(), p0f-client.c:67
-X-Received-From: 2607:f8b0:4864:20::141
+X-Received-From: 2607:f8b0:4864:20::144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,57 +72,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2020 15:09:21 -0000
+X-List-Received-Date: Fri, 24 Apr 2020 16:12:23 -0000
 
-The spec states that on sv39x4 guest physical  "address bits 63:41
-must all be zeros, or else a guest-page-fault exception occurs.".
-However, the check performed for these top bits of the virtual address
-on the second stage is the same as the one performed for virtual
-addresses on the first stage except with the 2-bit extension,
-effectively creating the same kind of "hole" in the guest's physical
-address space. I believe the following patch fixes this issue:
+On Fri, Mar 13, 2020 at 12:35 PM Corey Wharton <coreyw7@fb.com> wrote:
+>
+> Allows the CPU to be changed from the default via the -cpu command
+> line option.
+>
+> Signed-off-by: Corey Wharton <coreyw7@fb.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Signed-off-by: Jose Martins <josemartins90@gmail.com>
----
- target/riscv/cpu_helper.c | 20 +++++++++++++-------
- 1 file changed, 13 insertions(+), 7 deletions(-)
+Thanks for the patch.
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d3ba9efb02..da879f5656 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -421,15 +421,21 @@ static int get_physical_address(CPURISCVState
-*env, hwaddr *physical,
-     int va_bits = PGSHIFT + levels * ptidxbits + widened;
-     target_ulong mask, masked_msbs;
+Unfortunately this fails `make check`.
 
--    if (TARGET_LONG_BITS > (va_bits - 1)) {
--        mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-+    if(!first_stage){
-+        if ((addr >> va_bits) != 0) {
-+            return TRANSLATE_FAIL;
-+        }
-     } else {
--        mask = 0;
--    }
--    masked_msbs = (addr >> (va_bits - 1)) & mask;
-+        if (TARGET_LONG_BITS > (va_bits - 1)) {
-+            mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-+        } else {
-+            mask = 0;
-+        }
-+        masked_msbs = (addr >> (va_bits - 1)) & mask;
+The problem is that the machine has the `default_cpu_type` set but
+then you set "cpu-type" from the SoC.
 
--    if (masked_msbs != 0 && masked_msbs != mask) {
--        return TRANSLATE_FAIL;
-+        if (masked_msbs != 0 && masked_msbs != mask) {
-+            return TRANSLATE_FAIL;
-+        }
-     }
+This diff fixes the make check failure for me:
 
-     int ptshift = (levels - 1) * ptidxbits;
--- 
-2.17.1
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 1fd08f325c..b53109521e 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -123,8 +123,6 @@ static void riscv_sifive_e_soc_init(Object *obj)
+     object_initialize_child(obj, "cpus", &s->cpus,
+                             sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
+                             &error_abort, NULL);
+-    object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
+-                            &error_abort);
+     object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
+                             &error_abort);
+     sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
+@@ -141,6 +139,8 @@ static void riscv_sifive_e_soc_realize(DeviceState
+*dev, Error **errp)
+     SiFiveESoCState *s = RISCV_E_SOC(dev);
+     MemoryRegion *sys_mem = get_system_memory();
 
-Jose
++    object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
++                            &error_abort);
+     object_property_set_bool(OBJECT(&s->cpus), true, "realized",
+                             &error_abort);
+
+
+I'm happy to just squash that into the patch. Let me know if you don't
+want me to do that and I'll drop these patches and let you re-send
+them.
+
+Alistair
+
+> ---
+>  hw/riscv/sifive_e.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index a254cad489..b0a611adb9 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -123,7 +123,7 @@ static void riscv_sifive_e_soc_init(Object *obj)
+>      object_initialize_child(obj, "cpus", &s->cpus,
+>                              sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
+>                              &error_abort, NULL);
+> -    object_property_set_str(OBJECT(&s->cpus), SIFIVE_E_CPU, "cpu-type",
+> +    object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
+>                              &error_abort);
+>      object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
+>                              &error_abort);
+> @@ -220,6 +220,7 @@ static void riscv_sifive_e_machine_init(MachineClass *mc)
+>      mc->desc = "RISC-V Board compatible with SiFive E SDK";
+>      mc->init = riscv_sifive_e_init;
+>      mc->max_cpus = 1;
+> +    mc->default_cpu_type = SIFIVE_E_CPU;
+>  }
+>
+>  DEFINE_MACHINE("sifive_e", riscv_sifive_e_machine_init)
+> --
+> 2.21.1
+>
+>
 
