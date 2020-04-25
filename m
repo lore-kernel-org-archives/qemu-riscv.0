@@ -1,79 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jSl2S-00048n-A5
-	for mharc-qemu-riscv@gnu.org; Sun, 26 Apr 2020 13:25:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57756)
+	id 1jSlc7-0007b1-Am
+	for mharc-qemu-riscv@gnu.org; Sun, 26 Apr 2020 14:02:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33572)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair@alistair23.me>) id 1jSl1F-0002f5-SE
- for qemu-riscv@nongnu.org; Sun, 26 Apr 2020 13:24:42 -0400
+ (envelope-from <alistair@alistair23.me>) id 1jSlc5-0007ZH-Lj
+ for qemu-riscv@nongnu.org; Sun, 26 Apr 2020 14:02:46 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <alistair@alistair23.me>) id 1jSl1F-0004Zu-D9
- for qemu-riscv@nongnu.org; Sun, 26 Apr 2020 13:24:41 -0400
-Received: from wout4-smtp.messagingengine.com ([64.147.123.20]:44229)
+ (envelope-from <alistair@alistair23.me>) id 1jSlc2-0007di-7B
+ for qemu-riscv@nongnu.org; Sun, 26 Apr 2020 14:02:45 -0400
+Received: from out5-smtp.messagingengine.com ([66.111.4.29]:46781)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1jSl1C-0004ZI-Nz; Sun, 26 Apr 2020 13:24:39 -0400
+ id 1jSlbz-0007W6-AU; Sun, 26 Apr 2020 14:02:39 -0400
 Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.west.internal (Postfix) with ESMTP id DA2C448F;
- Sun, 26 Apr 2020 13:24:34 -0400 (EDT)
+ by mailout.nyi.internal (Postfix) with ESMTP id 28E0C5C00E3;
+ Sun, 26 Apr 2020 14:02:38 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Sun, 26 Apr 2020 13:24:35 -0400
+ by compute3.internal (MEProxy); Sun, 26 Apr 2020 14:02:38 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding; s=fm3; bh=hwtx02kkvPK5B
- V7M6kav5ZTdZRn0A1eYTzwE3O+v0ss=; b=L+YEJbTV0jO0Jb49SWJJxIUNulhGv
- h3nwAAyQnWWkllty8a9p9j2t6Ywi1QaLrmJO3wuwVZO2BQcK00jGE3Cjzqi+5Yoe
- 0BTkg+PNH2LK3WjdZhhbWLFG9TCkn10psHNHyrLpWq6+VdxAEUbjsRwQjtR4AlN2
- XnjsORj70cJHexN1fBiTKIYb4Dx2HTSR12px50QElVt3HYTYY3cXARPiou2V0sEi
- ImXI8+pbx2cXJSeIjJ6PRKvBMaKN6zjuUZKjfF9yk8PXlxP4Lf4kzXUCHPclrq/H
- s4kvgvLsTQ2Pyt0DsXpd8yAYor73/roTiUXHchVNOpILz+RObhV0mp0wQ==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding; s=fm3; bh=S65C8AGToF/dNNOvMyyM+fwvZj
+ 8b5XGM2SrQ2cG8EFY=; b=WG5GLO/KTcD6IsMcLglaEpIyyvM77g8NCwFfiQKCPT
+ rPdhMSWNFMUT635TZXy/JHOKKaAhefShuDVQ+s72echpr2ZCHC8SxqrksH1Vn2aU
+ kuCoYqNznwDVz/ATR0hAJ+hI/9sWSzBvjaqlujmNlxptNT3MweXMIBeEk0gnefWa
+ Lmm7fKf1lyZ5Frx+yaIK4e75n6XU8L4weocuzXc8iLJ1y1bvOktPDl38dlrvgRzW
+ QWW8HHCKxpe4g8Ja9NhpbMbn/QlxexWTZ7oNbDYlah7/wGyynjloT5lT+cfc59zb
+ e88CGSvreBjPQ0Y8ZkZD66SsRSOZ+vsKxH8W5lPRE1XQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:content-transfer-encoding:date:from
- :in-reply-to:message-id:mime-version:references:subject:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; bh=hwtx02kkvPK5BV7M6kav5ZTdZRn0A1eYTzwE3O+v0ss=; b=L56BvZTh
- avDSt/hO8B/r9eGHQDX5s9BRBDOWLJ2y1CEYXo27xydc8xdybLco410UxfJ8/HY0
- eVVYmuipC8f2C7ZNupc2Ai4y86fi1cI/Ol5lZYhoKeNFRZ1NsObfwWuCdjw0tFo+
- B1uj1hsmsxTi5OTQGaWpDANrcIoiZWmb4z/9vdyDsObrBT0JPB2jDz2hP3f7cUIF
- X8wLjNWWkXRJqJGhBl83n8JV6XXa+vaLXtCUVTbbpupOKapr0CkFPTo47cvlwo3C
- oUUB/n5SedkXIZ1HhHaGvoZWit3juua1o/mlWHEfWlX7yA6UV0RNjVOjBzibFkw2
- xxTLqxSb9o9WzA==
-X-ME-Sender: <xms:0cOlXtSENYYoBAXGEVnp-yS4zpeR_TQPTSudew-GiThJWvFYso8vsQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduhedrheejgdduudefucetufdoteggodetrfdotf
+ :message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=S65C8AGToF/dNNOvM
+ yyM+fwvZj8b5XGM2SrQ2cG8EFY=; b=vWKzfFFnLdW33gbzP6eH2vlykWk7chwTN
+ vNC7RS4QkS9MbxLFow/InWUYJlKzBIbOZG0LTncPrJbHjihyIcXS5U6/x33iHnc0
+ akb93G+LocwxV84xckgKys4J1FWw1OWhfKKJ4N2qwveErWKtjkvbErm1ZqOBQ30R
+ UpUim6daHtnEAV+tkubg5T7zhO8Qc0BywWAjGsQsDTn+Xs0P/cf0YkFPKbIz+oug
+ aWflEeKf3xsNhOKyAxv5zKvdBjKtZHy3Uuqr8JgUvkNprtuWSOFYEoQRfakIFDI0
+ cz+TszLIiy//FM/LY5qZNEv3t7I+h/ewtlRtYK5hFDE5Ud6tLmgpA==
+X-ME-Sender: <xms:vcylXm8gHj6siDym8e2XE_l8fznGB0RIFgwx8cI4wLg1-HEjI_r6ZQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduhedrheejgdduvdduucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgjfhgggfestdekre
- dtredttdenucfhrhhomheptehlihhsthgrihhrucfhrhgrnhgtihhsuceorghlihhsthgr
- ihhrsegrlhhishhtrghirhdvfedrmhgvqeenucfkphepjeefrdelfedrkeegrddvtdekne
- cuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprghlihhs
- thgrihhrsegrlhhishhtrghirhdvfedrmhgv
-X-ME-Proxy: <xmx:0cOlXnW6QJgztDHZ_I5NGJSTuTZiXTKywBzba0SK11qOmqdTTzHVpQ>
- <xmx:0cOlXuOUAsCjFdP59I1Vjoxwt16vrfrMVcglb2kTNEDBNTurFTDwqA>
- <xmx:0cOlXnpju243zG2XUnCkMOf8RSmvH2Uz276wxMMkynOkOXAlw68YEQ>
- <xmx:0sOlXtmvdu2y9htjjWZ_9yAyhq_ayCPsKX0qKdlFlbvSAxSDHofdWQ>
+ uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgggfestdekredtre
+ dttdenucfhrhhomheptehlihhsthgrihhrucfhrhgrnhgtihhsuceorghlihhsthgrihhr
+ segrlhhishhtrghirhdvfedrmhgvqeenucffohhmrghinhepohhpvghnthhithgrnhdroh
+ hrghenucfkphepjeefrdelfedrkeegrddvtdeknecuvehluhhsthgvrhfuihiivgeptden
+ ucfrrghrrghmpehmrghilhhfrhhomheprghlihhsthgrihhrsegrlhhishhtrghirhdvfe
+ drmhgv
+X-ME-Proxy: <xmx:vcylXqZD6kKw7tJ2IWtQTk673w8vx_yTs6TRHM2ZopRkiyCSeXhXjA>
+ <xmx:vcylXnH_3z2gp4eTpTr1GVExjvI3By5zmF5NYRbtacppyvWvFP3xLg>
+ <xmx:vcylXr4ohM3JE6nV4sBuUW6tFfYm5J4Jxds2sDtF_aAHOnn5REvIiw>
+ <xmx:vsylXpg5d9F-K4BDeEwesph_p7oDf0LjSg1uI20JhF4f5Vi1ndt8SQ>
 Received: from ThinkpadX1Yoga3.localdomain (c-73-93-84-208.hsd1.ca.comcast.net
  [73.93.84.208])
- by mail.messagingengine.com (Postfix) with ESMTPA id 25C4A3065E2B;
- Sun, 26 Apr 2020 13:24:33 -0400 (EDT)
+ by mail.messagingengine.com (Postfix) with ESMTPA id 2D5BD3065E36;
+ Sun, 26 Apr 2020 14:02:37 -0400 (EDT)
 From: Alistair Francis <alistair@alistair23.me>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v1 15/15] target/riscv: Support the v0.6 Hypervisor extension
- CRSs
-Date: Sat, 25 Apr 2020 03:50:52 -0700
-Message-Id: <9ff1ce7ccc2b257bec95152fea3ebf1d66e2e43f.1587918096.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 0/9]  RISC-V Add the OpenTitan Machine
+Date: Sat, 25 Apr 2020 04:28:57 -0700
+Message-Id: <cover.1587920572.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.1587918096.git.alistair.francis@wdc.com>
-References: <cover.1587918096.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=64.147.123.20;
- envelope-from=alistair@alistair23.me; helo=wout4-smtp.messagingengine.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/04/26 13:24:35
+Received-SPF: none client-ip=66.111.4.29; envelope-from=alistair@alistair23.me;
+ helo=out5-smtp.messagingengine.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/04/26 14:02:38
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Received-From: 64.147.123.20
-X-Mailman-Approved-At: Sun, 26 Apr 2020 13:25:53 -0400
+X-Received-From: 66.111.4.29
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -85,116 +81,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Apr 2020 17:24:42 -0000
+X-List-Received-Date: Sun, 26 Apr 2020 18:02:46 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu_bits.h |  3 +++
- target/riscv/csr.c      | 40 ++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 43 insertions(+)
+OpenTitan is an open source silicon Root of Trust (RoT) project. This
+series adds initial support for the OpenTitan machine to QEMU.
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 8a145e0a32..690f327828 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -182,9 +182,12 @@
- #define CSR_HIDELEG         0x603
- #define CSR_HIE             0x604
- #define CSR_HCOUNTEREN      0x606
-+#define CSR_HGEIE           0x607
- #define CSR_HTVAL           0x643
-+#define CSR_HVIP            0x645
- #define CSR_HIP             0x644
- #define CSR_HTINST          0x64A
-+#define CSR_HGEIP           0xE12
- #define CSR_HGATP           0x680
- #define CSR_HTIMEDELTA      0x605
- #define CSR_HTIMEDELTAH     0x615
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 04f3471f2e..3eb6ddd061 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -901,12 +901,25 @@ static int write_hideleg(CPURISCVState *env, int csrno, target_ulong val)
-     return 0;
- }
- 
-+static int rmw_hvip(CPURISCVState *env, int csrno, target_ulong *ret_value,
-+                   target_ulong new_value, target_ulong write_mask)
-+{
-+    int ret = rmw_mip(env, 0, ret_value, new_value,
-+                      write_mask & hip_writable_mask);
-+
-+    *ret_value &= hip_writable_mask;
-+
-+    return ret;
-+}
-+
- static int rmw_hip(CPURISCVState *env, int csrno, target_ulong *ret_value,
-                    target_ulong new_value, target_ulong write_mask)
- {
-     int ret = rmw_mip(env, 0, ret_value, new_value,
-                       write_mask & hip_writable_mask);
- 
-+    *ret_value &= hip_writable_mask;
-+
-     return ret;
- }
- 
-@@ -934,6 +947,18 @@ static int write_hcounteren(CPURISCVState *env, int csrno, target_ulong val)
-     return 0;
- }
- 
-+static int read_hgeie(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    qemu_log_mask(LOG_UNIMP, "No support for a non-zero GEILEN.");
-+    return 0;
-+}
-+
-+static int write_hgeie(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    qemu_log_mask(LOG_UNIMP, "No support for a non-zero GEILEN.");
-+    return 0;
-+}
-+
- static int read_htval(CPURISCVState *env, int csrno, target_ulong *val)
- {
-     *val = env->htval;
-@@ -957,6 +982,18 @@ static int write_htinst(CPURISCVState *env, int csrno, target_ulong val)
-     return 0;
- }
- 
-+static int read_hgeip(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    qemu_log_mask(LOG_UNIMP, "No support for a non-zero GEILEN.");
-+    return 0;
-+}
-+
-+static int write_hgeip(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    qemu_log_mask(LOG_UNIMP, "No support for a non-zero GEILEN.");
-+    return 0;
-+}
-+
- static int read_hgatp(CPURISCVState *env, int csrno, target_ulong *val)
- {
-     *val = env->hgatp;
-@@ -1356,11 +1393,14 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_HSTATUS] =             { hmode,   read_hstatus,     write_hstatus    },
-     [CSR_HEDELEG] =             { hmode,   read_hedeleg,     write_hedeleg    },
-     [CSR_HIDELEG] =             { hmode,   read_hideleg,     write_hideleg    },
-+    [CSR_HVIP] =                { hmode,   NULL,     NULL,     rmw_hvip       },
-     [CSR_HIP] =                 { hmode,   NULL,     NULL,     rmw_hip        },
-     [CSR_HIE] =                 { hmode,   read_hie,         write_hie        },
-     [CSR_HCOUNTEREN] =          { hmode,   read_hcounteren,  write_hcounteren },
-+    [CSR_HGEIE] =               { hmode,   read_hgeie,       write_hgeie      },
-     [CSR_HTVAL] =               { hmode,   read_htval,       write_htval      },
-     [CSR_HTINST] =              { hmode,   read_htinst,      write_htinst     },
-+    [CSR_HGEIP] =               { hmode,   read_hgeip,       write_hgeip      },
-     [CSR_HGATP] =               { hmode,   read_hgatp,       write_hgatp      },
-     [CSR_HTIMEDELTA] =          { hmode,   read_htimedelta,  write_htimedelta },
- #if defined(TARGET_RISCV32)
+This series add the Ibex CPU to the QEMU RISC-V target. It then adds the
+OpenTitan machine, the Ibex UART and the Ibex PLIC.
+
+The UART has been tested sending data, but not receiving as there is
+currently no UART receiving support in Tock.
+
+With this series QEMU can boot the OpenTitan ROM, Tock OS and a Tock
+userspace app.
+
+The Ibex PLIC is similar to the RISC-V PLIC (and is based on the QEMU
+implementation) with some differences. The hope is that the Ibex PLIC
+will converge to follow the RISC-V spec. As that happens I want to
+update the QEMU Ibex PLIC and hopefully eventually replace the current
+PLIC as the implementation is a little overlay complex.
+
+For more details on OpenTitan, see here: https://docs.opentitan.org/
+
+
+
+Alistair Francis (9):
+  riscv/boot: Add a missing header include
+  target/riscv: Don't overwrite the reset vector
+  target/riscv: Add the lowRISC Ibex CPU
+  riscv: Initial commit of OpenTitan machine
+  hw/char: Initial commit of Ibex UART
+  hw/intc: Initial commit of lowRISC Ibex PLIC
+  riscv/opentitan: Connect the PLIC device
+  riscv/opentitan: Connect the UART device
+  target/riscv: Use a smaller guess size for no-MMU PMP
+
+ MAINTAINERS                         |  14 +
+ default-configs/riscv32-softmmu.mak |   1 +
+ default-configs/riscv64-softmmu.mak |  11 +-
+ hw/char/Makefile.objs               |   1 +
+ hw/char/ibex_uart.c                 | 487 ++++++++++++++++++++++++++++
+ hw/intc/Makefile.objs               |   1 +
+ hw/intc/ibex_plic.c                 | 261 +++++++++++++++
+ hw/riscv/Kconfig                    |   9 +
+ hw/riscv/Makefile.objs              |   1 +
+ hw/riscv/opentitan.c                | 204 ++++++++++++
+ include/hw/char/ibex_uart.h         | 110 +++++++
+ include/hw/intc/ibex_plic.h         |  63 ++++
+ include/hw/riscv/boot.h             |   1 +
+ include/hw/riscv/opentitan.h        |  79 +++++
+ target/riscv/cpu.c                  |  30 +-
+ target/riscv/cpu.h                  |   1 +
+ target/riscv/pmp.c                  |  19 +-
+ 17 files changed, 1278 insertions(+), 15 deletions(-)
+ create mode 100644 hw/char/ibex_uart.c
+ create mode 100644 hw/intc/ibex_plic.c
+ create mode 100644 hw/riscv/opentitan.c
+ create mode 100644 include/hw/char/ibex_uart.h
+ create mode 100644 include/hw/intc/ibex_plic.h
+ create mode 100644 include/hw/riscv/opentitan.h
+
 -- 
 2.26.2
 
