@@ -1,62 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jSk86-0004oB-2Q
+	id 1jSk86-0004or-BG
 	for mharc-qemu-riscv@gnu.org; Sun, 26 Apr 2020 12:27:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44392)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44396)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=378a396a1=alistair.francis@wdc.com>)
- id 1jSk83-0004iw-Vu
+ id 1jSk84-0004jd-7q
  for qemu-riscv@nongnu.org; Sun, 26 Apr 2020 12:27:40 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
  (envelope-from <prvs=378a396a1=alistair.francis@wdc.com>)
- id 1jSk83-0004YL-Di
+ id 1jSk82-0004Wr-AP
  for qemu-riscv@nongnu.org; Sun, 26 Apr 2020 12:27:39 -0400
 Received: from esa6.hgst.iphmx.com ([216.71.154.45]:33799)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=378a396a1=alistair.francis@wdc.com>)
- id 1jSk81-0004Lu-MJ; Sun, 26 Apr 2020 12:27:37 -0400
+ id 1jSk80-0004Lu-Bv; Sun, 26 Apr 2020 12:27:36 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1587918458; x=1619454458;
+ t=1587918457; x=1619454457;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=SNPqdx+w5gimlKtZRUjlEdolMCX+BsbkFGAwV2LHuFU=;
- b=KwgK+91WdTZbnQcblzsW+oPbAONtD9OleuPyCiMOntLQ921nEjHFTmjy
- k8n3m2St56d/0DLNUUMymGMAqHHNALpbeuejHFlqEpWMj9LDlVouHiq9d
- pUGN4wBicqeuLC57+VfWQ3oVLc/OIEtxOHIVLLWBUrUr2tEIRG1/L9T0X
- +lma3Ctb4OUI03HNvUQ1VqUt/AfX2Oypg1BuJklKuzeoRYPDakqF1gAxi
- dTARkEm3PtEjWVrywJvuz5X4pVA9e99NIhFFr0o5YigPtgQCxJMZaWyNs
- 3qB2pDOjb9QTS7GVHhCjEPabxXZR4UOXKldgmcTh/1HZ1fmW/ZZn27gvj w==;
-IronPort-SDR: +FOOvhuv3rJ2gEnE0iFrolOY1mW7jkXjeMqD+49Y/xrQeGoc+ghIWD7u1xNWiWHgQXjEjwfGF2
- 4H0UoBEDYzh97mrrs8CsMm5WUdfXpi2hXqE3qLObkxWlbbF4BuIrTvi/jARGGugviSAswnRXHw
- pNCQY1sP3LhsMQWW9LicU9VPCuapAjhjczA/EeaykF9fHA9SSMZxwpV7pA1OdNoEuMvHBFelPH
- 2Ni3PaXqGbROei8DOtjlNudZ6OYAlafoECFxmise4NJOdy9mZbWQKrfclf3wJQ/DUSHaioMZVM
- HAM=
-X-IronPort-AV: E=Sophos;i="5.73,320,1583164800"; d="scan'208";a="137626674"
+ bh=dQeeIMGAZlib2Uc13aenLwtbzbd6jRXzSxN4B2l5zLw=;
+ b=ERk39boOJUlwHlE6/ALpnOrONBzWy4X3UE5k3g1RrfGIjDZH+abthQeF
+ 9D2dmuWIf+Dk8zBez9QNEqR+Au20nqnYHfrf032y9yMVyjSp2aFcwR1ng
+ kggHf0QXUrzCV2OlTAgkfmOCjbabp8bCaWqXjvtjDuzLbbf2nbQ8yjIrL
+ d4W4BkBBYf23gq8ZiN5Q4LMJxrJ3oaO03TPfuZy+SQmDkJPbhjc9fI4EL
+ 7OHuAUWxvAfu36rG9HsctWdHMhDbXHjuWTiI7zErn35anmH0XPsgPG0tI
+ 5DGLt4WSSPE/vqMcogkw+wP0l7LO70Ra2Cc+6+KAMpDZIvZg3HQkECh9b A==;
+IronPort-SDR: ELT0y5bW3gDIFvIUECesRt47fa7YwReWCBg0QviDN/BFwznMVpAJ+O+Ga5N9xMCN5MXqR4IbNS
+ pWdlUMD+GzGxmHVaFAywxQePIbtuU7rlHFWB7qXCI2qk9A220M8XvGXDM3pXGdCGPMcpj0qYVg
+ +ky9bNRvREy8ttfXBsnUZcLc30Zbi09Wln9QWAAeeg03Tjo5kWqfZ8qTGV/bdLjZRENP19yH6+
+ xJ12ursUiFlYwklfxTJwnSUWMyiCD1Olo8WFs7r+E+UBkYH8jFbqdtcBPK7+ztUdBcCAb/KAtA
+ OIM=
+X-IronPort-AV: E=Sophos;i="5.73,320,1583164800"; d="scan'208";a="137626673"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 27 Apr 2020 00:27:37 +0800
-IronPort-SDR: D6GXHfKLaAGKe68MTHqU8wGILDqrRCuuiCr8rI1e98LAR1xoOWEGAiThQDXivKaRE3aj3JRJtb
- vJZ9gGgRUTTCa/YDbkfDipmt8/DmYyRj8=
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by ob1.hgst.iphmx.com with ESMTP; 27 Apr 2020 00:27:34 +0800
+IronPort-SDR: pzqPu2ytwLtSMYdEICat4gGWkbodTRb4T4yFJ6eO7Fqh0Xs4HNuN+6vaBNZa7ERx/MdPxW7+bi
+ +mxxgUdgd6tF+5pmbuDRmEeUUR1mVZQWM=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Apr 2020 09:18:19 -0700
-IronPort-SDR: OS9xMFmjjTKnWZ2rO50f8f+DXqMsu88rHKweqKfW/xjy5uC9tkXzx2tPTKvA45iXHHaU1rPM53
- vQoPawoCLe8w==
+ 26 Apr 2020 09:18:16 -0700
+IronPort-SDR: PevcmigpQuhrgo6v5/Z0rvAWuFBAVPP48f03m6yaC5QPb96BD5Elp4bKAEcV2mJ/naJdqfpHtm
+ 4rISbmlqRawQ==
 WDCIronportException: Internal
 Received: from wdthnc17-0189.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.56.50])
- by uls-op-cesaip02.wdc.com with ESMTP; 26 Apr 2020 09:27:36 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 26 Apr 2020 09:27:33 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v1 05/15] target/riscv: Allow setting a two-stage lookup in
- the virt status
-Date: Sun, 26 Apr 2020 09:19:26 -0700
-Message-Id: <ad426660833205907c521eaa5cf1680c0fb69ebe.1587917657.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 04/15] target/riscv: Implement checks for hfence
+Date: Sun, 26 Apr 2020 09:19:23 -0700
+Message-Id: <00639bbec729905cd9ac785447b78b8e2e05b275.1587917657.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1587917657.git.alistair.francis@wdc.com>
 References: <cover.1587917657.git.alistair.francis@wdc.com>
@@ -79,69 +78,105 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Apr 2020 16:27:40 -0000
+X-List-Received-Date: Sun, 26 Apr 2020 16:27:41 -0000
+
+Call the helper_hyp_tlb_flush() function on hfence instructions which
+will generate an illegal insruction execption if we don't have
+permission to flush the Hypervisor level TLBs.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.h        |  2 ++
- target/riscv/cpu_bits.h   |  1 +
- target/riscv/cpu_helper.c | 18 ++++++++++++++++++
- 3 files changed, 21 insertions(+)
+ target/riscv/helper.h                   |  5 ++++
+ target/riscv/insn_trans/trans_rvh.inc.c | 32 +++++--------------------
+ target/riscv/op_helper.c                | 13 ++++++++++
+ 3 files changed, 24 insertions(+), 26 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index d0e7f5b9c5..e44a7a91e4 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -302,6 +302,8 @@ bool riscv_cpu_virt_enabled(CPURISCVState *env);
- void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
- bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
- void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable);
-+bool riscv_cpu_two_stage_lookup(CPURISCVState *env);
-+void riscv_cpu_set_two_stage_lookup(CPURISCVState *env, bool enable);
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
- hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 7f64ee1174..f52711ac32 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -452,6 +452,7 @@
-  * page table fault.
-  */
- #define FORCE_HS_EXCEP      2
-+#define HS_TWO_STAGE        4
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index debb22a480..b36be978d5 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -76,3 +76,8 @@ DEF_HELPER_2(mret, tl, env, tl)
+ DEF_HELPER_1(wfi, void, env)
+ DEF_HELPER_1(tlb_flush, void, env)
+ #endif
++
++/* Hypervisor functions */
++#ifndef CONFIG_USER_ONLY
++DEF_HELPER_1(hyp_tlb_flush, void, env)
++#endif
+diff --git a/target/riscv/insn_trans/trans_rvh.inc.c b/target/riscv/insn_trans/trans_rvh.inc.c
+index 2e91d6ae57..60978f2fa5 100644
+--- a/target/riscv/insn_trans/trans_rvh.inc.c
++++ b/target/riscv/insn_trans/trans_rvh.inc.c
+@@ -18,40 +18,20 @@
  
- /* RV32 satp CSR field masks */
- #define SATP32_MODE         0x80000000
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 0d4a7b752d..075675c59c 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -220,6 +220,24 @@ void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable)
-     env->virt = set_field(env->virt, FORCE_HS_EXCEP, enable);
+ static bool trans_hfence_gvma(DisasContext *ctx, arg_sfence_vma *a)
+ {
++    REQUIRE_EXT(ctx, RVH);
+ #ifndef CONFIG_USER_ONLY
+-    if (ctx->priv_ver >= PRIV_VERSION_1_10_0 &&
+-        has_ext(ctx, RVH)) {
+-        /* Hpervisor extensions exist */
+-        /*
+-         * if (env->priv == PRV_M ||
+-         *   (env->priv == PRV_S &&
+-         *    !riscv_cpu_virt_enabled(env) &&
+-         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
+-         */
+-            gen_helper_tlb_flush(cpu_env);
+-            return true;
+-        /* } */
+-    }
++    gen_helper_hyp_tlb_flush(cpu_env);
++    return true;
+ #endif
+     return false;
  }
  
-+bool riscv_cpu_two_stage_lookup(CPURISCVState *env)
+ static bool trans_hfence_bvma(DisasContext *ctx, arg_sfence_vma *a)
+ {
++    REQUIRE_EXT(ctx, RVH);
+ #ifndef CONFIG_USER_ONLY
+-    if (ctx->priv_ver >= PRIV_VERSION_1_10_0 &&
+-        has_ext(ctx, RVH)) {
+-        /* Hpervisor extensions exist */
+-        /*
+-         * if (env->priv == PRV_M ||
+-         *   (env->priv == PRV_S &&
+-         *    !riscv_cpu_virt_enabled(env) &&
+-         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
+-         */
+-            gen_helper_tlb_flush(cpu_env);
+-            return true;
+-        /* } */
+-    }
++    gen_helper_hyp_tlb_flush(cpu_env);
++    return true;
+ #endif
+     return false;
+ }
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index c6412f680c..53dca7128d 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -201,4 +201,17 @@ void helper_tlb_flush(CPURISCVState *env)
+     }
+ }
+ 
++void helper_hyp_tlb_flush(CPURISCVState *env)
 +{
-+    if (!riscv_has_ext(env, RVH)) {
-+        return false;
-+    }
++    CPUState *cs = env_cpu(env);
 +
-+    return get_field(env->virt, HS_TWO_STAGE);
-+}
-+
-+void riscv_cpu_set_two_stage_lookup(CPURISCVState *env, bool enable)
-+{
-+    if (!riscv_has_ext(env, RVH)) {
++    if (env->priv == PRV_M ||
++        (env->priv == PRV_S && !riscv_cpu_virt_enabled(env))) {
++        tlb_flush(cs);
 +        return;
 +    }
 +
-+    env->virt = set_field(env->virt, HS_TWO_STAGE, enable);
++    riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
 +}
 +
- int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
- {
-     CPURISCVState *env = &cpu->env;
+ #endif /* !CONFIG_USER_ONLY */
 -- 
 2.26.2
 
