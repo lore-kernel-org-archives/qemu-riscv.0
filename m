@@ -1,69 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jS4Js-0006NG-JZ
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Apr 2020 15:49:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59196)
+	id 1jSk7w-0004PK-C9
+	for mharc-qemu-riscv@gnu.org; Sun, 26 Apr 2020 12:27:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44336)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jS4Jn-0006HS-Le
- for qemu-riscv@nongnu.org; Fri, 24 Apr 2020 15:49:03 -0400
+ (envelope-from <prvs=378a396a1=alistair.francis@wdc.com>)
+ id 1jSk7u-0004Mb-EL
+ for qemu-riscv@nongnu.org; Sun, 26 Apr 2020 12:27:30 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jS4Jn-0006OS-1L
- for qemu-riscv@nongnu.org; Fri, 24 Apr 2020 15:48:59 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:37968)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jS4Jl-00063Z-4c; Fri, 24 Apr 2020 15:48:57 -0400
-Received: by mail-io1-xd41.google.com with SMTP id f19so11674161iog.5;
- Fri, 24 Apr 2020 12:48:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=8oWQyn3T8uEIiBympa2dHQYjh07eo0K68oyO4QJfaVM=;
- b=vcPD7yXaEPztQX2DZvG8c6S2YSdzTAOfrTdJroe9EfLav2kHFhE/SCcSiJmR6aR7m2
- 9G76usSbsvg8QK3+BLp2D6QJJCekXKRLIY0ScIVrOVImFw8VLQfXTMoeR+1cIs87aVgC
- +mZqvGKirDr3R2gaKZ5zkr0v61mQi6Eubx3rNGyI6dAHbtr5HNl3Sy3O2hDQMNRtiqZk
- sGhztI/1scxPdx3lywFZz6gqp39yqlvp9SRrxpRIHoUlaQjzvkjGnWpiJkOnLrdnliQ/
- dPrCVvHivm1AFPPLGZ+mMA/KpMBzh/Gveld5FiqwghJPPYz69j8ShStZnpYeh1pcP3gW
- Oz+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=8oWQyn3T8uEIiBympa2dHQYjh07eo0K68oyO4QJfaVM=;
- b=g3RoV6XVuIvHj7tsKXKd8oKjTKbwi3FSwaGnl1QI50u8d9SnmqPv+4GNWX860Y5BZe
- K6bCAasF9yvdBkl1bblxkHuu+rmxk4EZ2wr25kjC2jU6zEL2KEuv97ESzjesl2UxdvCc
- cy4h+zfxJtUZOl5+fvDTsQoa00KyS8ns70U84SQvBhl60J7X2M9Mnb6QaR1HKIlcsMD4
- DqgvhdnTCco7WCK1egXTClOvtl1ScnLbpOlLN2AgN2lWJh5amvvIgkKmf71CE96FzGEo
- UckUhQSXYNE6szuud6ojt75N4JdmRJzOM7UEHL+yzda6jwwQFfBHWnZUboYQpbfEapGS
- frYA==
-X-Gm-Message-State: AGi0PuZw1XpO9lbnBZFfTgTOuWSQtf5XzK02qQxUPVP6Wz+UQ4ZbpdMr
- 7eTNGZRdw0aaAcT+wxbFNlZuita3Iel6JWJYqow=
-X-Google-Smtp-Source: APiQypKjY0OtyR7z55PcjV3bDv3PGzO/jJNIvt8HiYR+rptil40T2kEllT9huF0+BXVmE0T1JD2v6ihiXK9fQV4Pr+Q=
-X-Received: by 2002:a6b:bf83:: with SMTP id
- p125mr10212817iof.118.1587757735627; 
- Fri, 24 Apr 2020 12:48:55 -0700 (PDT)
+ (envelope-from <prvs=378a396a1=alistair.francis@wdc.com>)
+ id 1jSk7u-0004I1-2M
+ for qemu-riscv@nongnu.org; Sun, 26 Apr 2020 12:27:30 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:30869)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=378a396a1=alistair.francis@wdc.com>)
+ id 1jSk7r-00044P-5H; Sun, 26 Apr 2020 12:27:27 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1587918447; x=1619454447;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=CzMEq7wJwKeWlJSDtGSqQMMtu2h3E4OJwzh8OjO7gWU=;
+ b=LFu64r3KOxf6FmS5jHVt1WhKwTeVsKqLHZvFP+vVxbMVtKLVmAS2Bj7s
+ bLVsjWNPSJC4zFzFvCQZyEZagc/NEvqENt5cUokoOGSaRkthfMzDdE4D8
+ sqa4kA8CbooRk64iTcKJ8BqqXp/gz4eUX7l8SVRLwj7qOuhVlZZNTESLo
+ e3Rb/KJqyMiBu38GG/61ppGm4xfgTnGL4EezpSo7woAGn6TR8POTrmOPV
+ UFMyzH/Tfwl+Ulz8N+Oxm/2bziUsYWjZat3jcI2WX9IqJezaHo+/nla35
+ sEjySMFF1dCFa+efXviqovC7FCuy262/yvZjQpVDOhK8PLHAq3ZAy3OFo Q==;
+IronPort-SDR: IXurWE4fPpqiBuH2cpDjKKN/bJn8/tHz6/XE2UuU3EKxJzRVlWWdN0hyNnlNROdcBd/v428mv9
+ DxC9dDPldDNW83HLrXG390W9N8CXrOxX82r9RZJQS3yVyF8+kP9BEIjOENxzSpRK8Lm5amKUtO
+ vFquwafmSGamWoO+Ny+djOQMs8Whoel/egbe8WOSZjNuSNTsqweeLAFp4X/mzOUMJEzFcWgJtf
+ SjhyarRYU1HVSp+arLg43IOMQ9bULLzd7UFjaGTdfKgyVYBMbD4xCiq9dT2BEzdoiFOfmAONLu
+ yfc=
+X-IronPort-AV: E=Sophos;i="5.73,320,1583164800"; d="scan'208";a="136193234"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 27 Apr 2020 00:27:21 +0800
+IronPort-SDR: TXVfx+/fCAsIygIgYsyvOOm8JNPR9/aO/3Ea126Gz1riU8MGH3yWUOfO2TO6y7IFtc4nVGI3XT
+ cEVY0bWJ14R9RXVszAnNb7wGzBY1UEgAg=
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 26 Apr 2020 09:17:31 -0700
+IronPort-SDR: nPxOJ6r3/EbNZYpQcSkjxovvS2+BcaNU3/4NhW+caaXqDp4rRlZYnaCMPb7hMyetMZnZHEuG8B
+ Fa5xqEe65Clw==
+WDCIronportException: Internal
+Received: from wdthnc17-0189.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.56.50])
+ by uls-op-cesaip02.wdc.com with ESMTP; 26 Apr 2020 09:27:21 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v1 00/15]  RISC-V: Update the Hypervisor spec to v0.6
+Date: Sun, 26 Apr 2020 09:19:11 -0700
+Message-Id: <cover.1587917657.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <20200313193429.8035-1-coreyw7@fb.com>
- <20200313193429.8035-2-coreyw7@fb.com>
- <CAKmqyKNGLOE_UKWVuJzrBDRkRXj74XfOace+K5ab4-5HTWg_KA@mail.gmail.com>
- <MW3PR15MB4041DC49872DE4C92E982FE993D00@MW3PR15MB4041.namprd15.prod.outlook.com>
-In-Reply-To: <MW3PR15MB4041DC49872DE4C92E982FE993D00@MW3PR15MB4041.namprd15.prod.outlook.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 24 Apr 2020 12:40:22 -0700
-Message-ID: <CAKmqyKPvt7ae7T0VLnriwk4HYxiCTsuDp2yTHPQ5p16oQtL6Hw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] riscv: sifive_e: Support changing CPU type
-To: Corey Wharton <coreyw7@fb.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
-X-detected-operating-system: by eggs.gnu.org: Error: [-] PROGRAM ABORT :
- Malformed IPv6 address (bad octet value).
- Location : parse_addr6(), p0f-client.c:67
-X-Received-From: 2607:f8b0:4864:20::d41
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.154.42;
+ envelope-from=prvs=378a396a1=alistair.francis@wdc.com;
+ helo=esa4.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/04/26 12:27:21
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Received-From: 216.71.154.42
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,115 +76,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2020 19:49:03 -0000
+X-List-Received-Date: Sun, 26 Apr 2020 16:27:30 -0000
 
-On Fri, Apr 24, 2020 at 12:12 PM Corey Wharton <coreyw7@fb.com> wrote:
->
->
->
-> > -----Original Message-----
-> > From: Alistair Francis <alistair23@gmail.com>
-> > Sent: Friday, April 24, 2020 9:04 AM
-> > To: Corey Wharton <coreyw7@fb.com>
-> > Cc: qemu-devel@nongnu.org Developers <qemu-devel@nongnu.org>; open
-> > list:RISC-V <qemu-riscv@nongnu.org>; Sagar Karandikar
-> > <sagark@eecs.berkeley.edu>; Bastian Koppelmann <kbastian@mail.uni-
-> > paderborn.de>; Alistair Francis <alistair.francis@wdc.com>; Palmer Dabbelt
-> > <palmer@dabbelt.com>; Bin Meng <bmeng.cn@gmail.com>
-> > Subject: Re: [PATCH v2 1/2] riscv: sifive_e: Support changing CPU type
-> >
-> > On Fri, Mar 13, 2020 at 12:35 PM Corey Wharton <coreyw7@fb.com> wrote:
-> > >
-> > > Allows the CPU to be changed from the default via the -cpu command
-> > > line option.
-> > >
-> > > Signed-off-by: Corey Wharton <coreyw7@fb.com>
-> > > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> >
-> > Thanks for the patch.
-> >
-> > Unfortunately this fails `make check`.
-> >
-> > The problem is that the machine has the `default_cpu_type` set but then you
-> > set "cpu-type" from the SoC.
-> >
-> > This diff fixes the make check failure for me:
-> >
-> > diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c index
-> > 1fd08f325c..b53109521e 100644
-> > --- a/hw/riscv/sifive_e.c
-> > +++ b/hw/riscv/sifive_e.c
-> > @@ -123,8 +123,6 @@ static void riscv_sifive_e_soc_init(Object *obj)
-> >      object_initialize_child(obj, "cpus", &s->cpus,
-> >                              sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
-> >                              &error_abort, NULL);
-> > -    object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
-> > -                            &error_abort);
-> >      object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
-> >                              &error_abort);
-> >      sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0", @@ -141,6 +139,8 @@
-> > static void riscv_sifive_e_soc_realize(DeviceState
-> > *dev, Error **errp)
-> >      SiFiveESoCState *s = RISCV_E_SOC(dev);
-> >      MemoryRegion *sys_mem = get_system_memory();
-> >
-> > +    object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
-> > +                            &error_abort);
-> >      object_property_set_bool(OBJECT(&s->cpus), true, "realized",
-> >                              &error_abort);
-> >
-> >
-> > I'm happy to just squash that into the patch. Let me know if you don't want
-> > me to do that and I'll drop these patches and let you re-send them.
-> >
-> > Alistair
-> >
->
-> Thanks for fixing this issue. I tested your patch and it seems to work as
-> Intended and  I'm fine with you squashing it into the patch.
+This series updates the experimental QEMU RISC-V Hypervisor spec to the
+v0.6 draft implementation.
 
-Great!
+THis includes support for the new 2-stage lookup instructions and the new
+CSRs.
 
-I'll send this patch as part of the PR after 5.0 then.
+This was tested by running 32-bit and 64-bit Xvisor on QEMU and starting
+Linux guests.
 
-I also realised that my justification was wrong. It's not because of
-the machine/SoC split, but because of the order between init/realise.
 
-Alistair
 
->
-> Corey
->
-> > > ---
-> > >  hw/riscv/sifive_e.c | 3 ++-
-> > >  1 file changed, 2 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c index
-> > > a254cad489..b0a611adb9 100644
-> > > --- a/hw/riscv/sifive_e.c
-> > > +++ b/hw/riscv/sifive_e.c
-> > > @@ -123,7 +123,7 @@ static void riscv_sifive_e_soc_init(Object *obj)
-> > >      object_initialize_child(obj, "cpus", &s->cpus,
-> > >                              sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
-> > >                              &error_abort, NULL);
-> > > -    object_property_set_str(OBJECT(&s->cpus), SIFIVE_E_CPU, "cpu-type",
-> > > +    object_property_set_str(OBJECT(&s->cpus), ms->cpu_type,
-> > > + "cpu-type",
-> > >                              &error_abort);
-> > >      object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-
-> > harts",
-> > >                              &error_abort); @@ -220,6 +220,7 @@ static
-> > > void riscv_sifive_e_machine_init(MachineClass *mc)
-> > >      mc->desc = "RISC-V Board compatible with SiFive E SDK";
-> > >      mc->init = riscv_sifive_e_init;
-> > >      mc->max_cpus = 1;
-> > > +    mc->default_cpu_type = SIFIVE_E_CPU;
-> > >  }
-> > >
-> > >  DEFINE_MACHINE("sifive_e", riscv_sifive_e_machine_init)
-> > > --
-> > > 2.21.1
-> > >
-> > >
+Alistair Francis (15):
+  target/riscv: Set access as data_load when validating stage-2 PTEs
+  target/riscv: Report errors validating 2nd-stage PTEs
+  target/riscv: Move the hfence instructions to the rvh decode
+  target/riscv: Implement checks for hfence
+  target/riscv: Allow setting a two-stage lookup in the virt status
+  target/riscv: Allow generating hlv/hlvx/hsv instructions
+  target/riscv: Do two-stage lookups on hlv/hlvx/hsv instructions
+  target/riscv: Don't allow guest to write to htinst
+  target/riscv: Convert MSTATUS MTL to GVA
+  target/riscv: Fix the interrupt cause code
+  target/riscv: Update the Hypervisor trap return/entry
+  target/riscv: Update the CSRs to the v0.6 Hyp extension
+  target/riscv: Only support a single VSXL length
+  target/riscv: Only support little endian guests
+  target/riscv: Support the v0.6 Hypervisor extension CRSs
+
+ target/riscv/cpu.h                            |   2 +
+ target/riscv/cpu_bits.h                       |  19 +-
+ target/riscv/cpu_helper.c                     | 114 +++---
+ target/riscv/csr.c                            |  61 ++-
+ target/riscv/helper.h                         |   8 +
+ target/riscv/insn32-64.decode                 |   5 +
+ target/riscv/insn32.decode                    |  17 +-
+ .../riscv/insn_trans/trans_privileged.inc.c   |  40 --
+ target/riscv/insn_trans/trans_rvh.inc.c       | 377 ++++++++++++++++++
+ target/riscv/op_helper.c                      | 135 ++++++-
+ target/riscv/translate.c                      |  11 +-
+ 11 files changed, 674 insertions(+), 115 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvh.inc.c
+
+-- 
+2.26.2
+
 
