@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jTraW-0000dK-Mv
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37574)
+	id 1jTraX-0000fS-Ui
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37582)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTraT-0000X8-KG
+ id 1jTraU-0000Y9-8K
  for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:39 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTraS-0003tS-L0
+ id 1jTraS-0003ul-Ve
  for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:37 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:2041)
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:2049)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTraR-0003PZ-UK; Wed, 29 Apr 2020 14:37:36 -0400
+ id 1jTraS-0003Ps-4A; Wed, 29 Apr 2020 14:37:36 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1588185456; x=1619721456;
+ t=1588185457; x=1619721457;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=y2PxtJkBDcgg6/2XLAnv6fsOHXzs6BDrOSXRANlXYzY=;
- b=mn5GPnWahF0SSYMB+KJTYX+Bz0X6KTpe6P23EaK/wLRQ9XjhTPoYbeTI
- cwzsqmGJ+lMYcn8oKQyusgF0AZovfP1CwXBVipCdJId9ER4NHzQYp2Qm3
- G6B9bHHqxcj8YxmhjtsUYN1JJNghpzDenzsF6YSupnbBueDb/6B6Auyb9
- BCJYXPW3E8f1i5ZDQCXBe/I2I3/BADU8fQvm6YZEjVj3YDdGuzZDkLxE4
- nyVRefoHyFQSWQsP4PeIa6bN/tSWx9lxZkCLPlP/4w/W4lZafKUxJm0Su
- f8rWdqeKHjZ+fra43KN3AN+T8X2lWZhd0/+NZSo0xHA7d9Ddky5vFlPMQ Q==;
-IronPort-SDR: rb87Y5vK68j6vVbTXfNhyxM8FSo2lCNhZCQObX3qgm7s0cqktVNCICRFvreHalMz0L+YPSgsZ+
- tvD8uKJnDT6feR4xfgRRph7KnCnJvqYuHj2NWUYqxZtH6dGfCt6UHesa2lOsESjWwIVmeXhvRx
- mS3+TALbOgbToTQM2zr58p6aItFmyCbrfWzmz15Z4vRkxyM2uQQoUX/BqvT2KiJ+/2uIv0FWnp
- o1CcQWZjHngowoQP6o9qxDU7p4I4W1WYAnNldaIUB3uLJK76RuVel9xmWVWGM7hHMfAZbw+fT5
- 928=
-X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935156"
+ bh=BPQHeYhW0+8Gd1YdWGKpS99M5X8zYqkIAis4E32nD/c=;
+ b=IxgYORL3KyGsN0K/ihrs2qGaHknkEGe0dP7w7abO7o0yaiVZe0P3To5v
+ NFaUvFqaC/CyA/enLBp/sluW/iEW4aUv7qa7SfMP8Qh69nWgMByovAzeL
+ rBFCReqgvXOBqcO2dld1EXKbUj5HZ/wVBChHda5PAxY48hLXIgLt+fwln
+ ysvw7c4v6bOps3pzR7t4BECjBmaaiUKgreVeeMpyVmMsF4mitRJGISN1d
+ yAYuvJwLPZNy2Ry4ChysZndr+/VdmuAAkPtpB+F6wmObmF86HjBFjWbta
+ nAv8PU2LqmYyQD9NXfMNSpFpmMQoGhNqfSUAfCnsFLGsdEgHTp+tUFaM2 A==;
+IronPort-SDR: GD+kiaHD9TiISXimsKslZgu2Z4rejFwPZRsZrg+EiHqvFkgB/5QSMYi/xzR5qyGjVSCYxhk8LB
+ sR6xsl0QStmtW3LEXaTkehKXPvDPNZkl7BRchDSqQoWnXGiGjjD9p73LbEs3azwhpWC20RS1Ev
+ vztnfsFmNGt8ovM9T5neAOYMxnbe9I6KMzYRk+NIyhOPIqOxfLVBntO2mlfgsg2buTbKMqFNZo
+ /N+P1LboaFRGNsw7vfG9rLv5XMdEWlDNbaDLL/x9JWc53W6f/yjo6O8+phglgwn1huanVFEIrV
+ N+Y=
+X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935158"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
  by ob1.hgst.iphmx.com with ESMTP; 30 Apr 2020 02:37:08 +0800
-IronPort-SDR: /pKT4rYuVgi5xIK10DKDcNZPHR/dCwUuVmf0o25JXK2MOCCc5JgT8OCJTZDx0DUqqvjA5n5v3w
- S1ObzZGN+4DTSfS9a6nfQ1Q5nucr/T/y8=
+IronPort-SDR: yz62U3AD2XWTbk+d303+HyUwcVxT6MrpFTZg0pQAvK75bmKvIO17nsqy1j4po1JwYUehj6Oh++
+ +xhWvKQeOaP5/9615QUWGdGZD5ANzKgp4=
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  29 Apr 2020 11:27:12 -0700
-IronPort-SDR: /ylXJcU/lduVDPmJK/b0Zxt1cLPHkpVDjXJR40jSeY39WHzTbIJh/pC+gljo5TJm2gUHCOfCZA
- wwQ7imovOTLw==
+IronPort-SDR: 17OGOyw7LHB3vRJc40YxRHVDy/e+uUBcGlwJkMNaRsIWJ7F4609RoBvV/h/E0VNOgJOmIy2hx6
+ ZiXrP6+EFZTg==
 WDCIronportException: Internal
 Received: from cnf007834.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.55.253])
@@ -52,10 +52,10 @@ To: peter.maydell@linaro.org
 Cc: palmerdabbelt@google.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Anup Patel <anup.patel@wdc.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PULL 12/14] hw/riscv: Add optional symbol callback ptr to
- riscv_load_firmware()
-Date: Wed, 29 Apr 2020 11:28:54 -0700
-Message-Id: <20200429182856.2588202-13-alistair.francis@wdc.com>
+Subject: [PULL 13/14] hw/riscv/spike: Allow loading firmware separately using
+ -bios option
+Date: Wed, 29 Apr 2020 11:28:55 -0700
+Message-Id: <20200429182856.2588202-14-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200429182856.2588202-1-alistair.francis@wdc.com>
 References: <20200429182856.2588202-1-alistair.francis@wdc.com>
@@ -78,117 +78,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2020 18:37:39 -0000
+X-List-Received-Date: Wed, 29 Apr 2020 18:37:40 -0000
 
 From: Anup Patel <anup.patel@wdc.com>
 
-This patch adds an optional function pointer, "sym_cb", to
-riscv_load_firmware() which provides the possibility to access
-the symbol table during kernel loading.
-
-The pointer is ignored, if supplied with flat (non-elf) firmware image.
-
-The Spike board requires it locate the HTIF symbols from firmware ELF
-passed via "-bios" option.
+This patch extends Spike machine support to allow loading OpenSBI
+firmware (fw_jump.elf) separately using -bios option.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Message-id: 20200427080644.168461-2-anup.patel@wdc.com
-Message-Id: <20200427080644.168461-2-anup.patel@wdc.com>
+Message-id: 20200427080644.168461-3-anup.patel@wdc.com
+Message-Id: <20200427080644.168461-3-anup.patel@wdc.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/boot.c         | 13 ++++++++-----
- hw/riscv/sifive_u.c     |  2 +-
- hw/riscv/virt.c         |  2 +-
- include/hw/riscv/boot.h |  6 ++++--
- 4 files changed, 14 insertions(+), 9 deletions(-)
+ hw/riscv/spike.c | 24 +++++++++++++++++++++++-
+ 1 file changed, 23 insertions(+), 1 deletion(-)
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index b8e765277d..726300a171 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -36,7 +36,8 @@
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 98697a244e..e7908b88fe 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -45,6 +45,12 @@
  
- void riscv_find_and_load_firmware(MachineState *machine,
-                                   const char *default_machine_firmware,
--                                  hwaddr firmware_load_addr)
-+                                  hwaddr firmware_load_addr,
-+                                  symbol_fn_t sym_cb)
- {
-     char *firmware_filename = NULL;
+ #include <libfdt.h>
  
-@@ -76,7 +77,7 @@ void riscv_find_and_load_firmware(MachineState *machine,
- 
-     if (firmware_filename) {
-         /* If not "none" load the firmware */
--        riscv_load_firmware(firmware_filename, firmware_load_addr);
-+        riscv_load_firmware(firmware_filename, firmware_load_addr, sym_cb);
-         g_free(firmware_filename);
-     }
- }
-@@ -96,12 +97,14 @@ char *riscv_find_firmware(const char *firmware_filename)
- }
- 
- target_ulong riscv_load_firmware(const char *firmware_filename,
--                                 hwaddr firmware_load_addr)
-+                                 hwaddr firmware_load_addr,
-+                                 symbol_fn_t sym_cb)
- {
-     uint64_t firmware_entry, firmware_start, firmware_end;
- 
--    if (load_elf(firmware_filename, NULL, NULL, NULL, &firmware_entry,
--                 &firmware_start, &firmware_end, NULL, 0, EM_RISCV, 1, 0) > 0) {
-+    if (load_elf_ram_sym(firmware_filename, NULL, NULL, NULL,
-+                         &firmware_entry, &firmware_start, &firmware_end, NULL,
-+                         0, EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
-         return firmware_entry;
-     }
- 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 0dd0efaa68..cfd6416b19 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -352,7 +352,7 @@ static void sifive_u_machine_init(MachineState *machine)
-     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
- 
-     riscv_find_and_load_firmware(machine, BIOS_FILENAME,
--                                 memmap[SIFIVE_U_DRAM].base);
-+                                 memmap[SIFIVE_U_DRAM].base, NULL);
- 
-     if (machine->kernel_filename) {
-         uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index c621a970aa..daae3ebdbb 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -511,7 +511,7 @@ static void riscv_virt_board_init(MachineState *machine)
++#if defined(TARGET_RISCV32)
++# define BIOS_FILENAME "opensbi-riscv32-spike-fw_jump.elf"
++#else
++# define BIOS_FILENAME "opensbi-riscv64-spike-fw_jump.elf"
++#endif
++
+ static const struct MemmapEntry {
+     hwaddr base;
+     hwaddr size;
+@@ -187,8 +193,24 @@ static void spike_board_init(MachineState *machine)
+     memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
                                  mask_rom);
  
-     riscv_find_and_load_firmware(machine, BIOS_FILENAME,
--                                 memmap[VIRT_DRAM].base);
-+                                 memmap[VIRT_DRAM].base, NULL);
- 
++    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
++                                 memmap[SPIKE_DRAM].base,
++                                 htif_symbol_callback);
++
      if (machine->kernel_filename) {
-         uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index df80051fbc..474a940ad5 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -24,10 +24,12 @@
+-        riscv_load_kernel(machine->kernel_filename, htif_symbol_callback);
++        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
++                                                  htif_symbol_callback);
++
++        if (machine->initrd_filename) {
++            hwaddr start;
++            hwaddr end = riscv_load_initrd(machine->initrd_filename,
++                                           machine->ram_size, kernel_entry,
++                                           &start);
++            qemu_fdt_setprop_cell(s->fdt, "/chosen",
++                                  "linux,initrd-start", start);
++            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
++                                  end);
++        }
+     }
  
- void riscv_find_and_load_firmware(MachineState *machine,
-                                   const char *default_machine_firmware,
--                                  hwaddr firmware_load_addr);
-+                                  hwaddr firmware_load_addr,
-+                                  symbol_fn_t sym_cb);
- char *riscv_find_firmware(const char *firmware_filename);
- target_ulong riscv_load_firmware(const char *firmware_filename,
--                                 hwaddr firmware_load_addr);
-+                                 hwaddr firmware_load_addr,
-+                                 symbol_fn_t sym_cb);
- target_ulong riscv_load_kernel(const char *kernel_filename,
-                                symbol_fn_t sym_cb);
- hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+     /* reset vector */
 -- 
 2.26.2
 
