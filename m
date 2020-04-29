@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jTroR-0005YV-9k
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:52:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39532)
+	id 1jTswG-0005K6-1D
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 16:04:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50578)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jTroP-0005Uf-Hj
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:52:01 -0400
+ (envelope-from <peter.maydell@linaro.org>) id 1jTswE-0005Jl-C8
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 16:04:10 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <alistair23@gmail.com>) id 1jTroO-0002hc-Ml
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:52:01 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:44664)
+ (envelope-from <peter.maydell@linaro.org>) id 1jTswD-0007qt-NL
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 16:04:09 -0400
+Received: from mail-oi1-x230.google.com ([2607:f8b0:4864:20::230]:38735)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jTroO-0002h2-9N; Wed, 29 Apr 2020 14:52:00 -0400
-Received: by mail-il1-x141.google.com with SMTP id s10so3449023iln.11;
- Wed, 29 Apr 2020 11:51:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1jTswD-0007qX-2M
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 16:04:09 -0400
+Received: by mail-oi1-x230.google.com with SMTP id r66so3006162oie.5
+ for <qemu-riscv@nongnu.org>; Wed, 29 Apr 2020 13:04:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=IsBLFWc6fdYBfIh5gE4fLMG8y9tfNXkYmnIVynU01FY=;
- b=DdhS+6WtTnftHsy/F/mhAimFsoq9r8rSmgxkxwm7MxIDA31MvCmVVe3u5DfOQRs36y
- UbdWuRkYyeeep72DlFT8sREMmjCjs//4aRt/g9e9Fs35zPYRlCr6YNJ+e9orafiOwm/3
- lwVZWzgA4Yjkm6ZvU4MAI5L8NFi1Ish7iWFdfwI5DwDq4w4hyrOXMNLV1sYkV77LyWdu
- qa2XcDfgTMkPcIUwRy8NG0mmHILG95FPsn+vJVfOzr2MCc2PTY6jLrlm5TFeiiriJq/Z
- HfJ02adxftXwvyoV9W3QjIonU1g4IKDrJSa9cZs+NJXTwd6al7DEhhUoihDS00bdYU5/
- GdZQ==
+ :cc; bh=Pc6uCheg5bSUEvPzOOBqyBuV/BB4vFhQg6Zv0nEjVmg=;
+ b=dV67b3At6N479/JxbeEs57SY7oeTlEOpZVjZQMUAwTOo+tg5U19yiQhgh1wKkxSQSz
+ VmVEmAllSWC/0AfRPJ4LKo/y3q38FU779Z1tIs6akc/j2O12NovclDrihLCzUmSgGMiH
+ ZxK9mhhzGPy9kFKj1qaYBirYBN4XlK/wgPyDstmA9QrU0bb6jAg30OvowQPp+rFKxhBq
+ mSRVm0XOEeAvEI5BKlAv+t4qTDcH5/I07LApPGPYBL4CevuYWUweNLaShY9G5x7qBwql
+ K7zA640priY1O7ys9fzf2K1bS4m+PhTlj1Wz8LEDrrubvPrXKJu6UoBlivPOF0CY7GYx
+ yZ+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=IsBLFWc6fdYBfIh5gE4fLMG8y9tfNXkYmnIVynU01FY=;
- b=hpfYACv3AsXPsoUt53e/lkf0ZoQF7Xd8fI61EKKGqVhqJfL6LxG42+igcxO7DOiwY9
- 5uE+V6/YRT0qrCKpDAb4nG5QU4OU7QE96RjKmkF7APhfiltMxLBFe74Fms9N3el+/kX3
- oXGzO1ajzYGunzLe1WonwKzvhZEnpfKjHRMdonFWAEPUAu/vq8472if/+aeJE4Swjidw
- bl4Kuyjtix1QjpF+tZxpIConw+UFPTwXeeVVrSkAKaSNPNq8sv1dKrfuGbqBcWUvgcbp
- B8Oy+As9/pOIBkM3KBAh7LsUcZ0ihGO2x+dyerAmBdgGHDXRUoOO91+4qaBOBOwkjbZe
- cJIw==
-X-Gm-Message-State: AGi0Puadn4c+lFWpsNKrbA2M28lImVrLxYZusXWw4zvjUpHJ3LkPqL71
- 0OYEGzUbFfuaW+q2YWQKtXtlU2s1wFSUMWI2OpQ=
-X-Google-Smtp-Source: APiQypLwVrvR+WvgigohLXSLZNiIxNYJGw7lK7o4zFozQ+AT0n5X1mi+ooyWlTfN3FoWyH8JMk6/6W/gGRFm4l1w0iU=
-X-Received: by 2002:a92:d0c6:: with SMTP id y6mr34619061ila.227.1588186317519; 
- Wed, 29 Apr 2020 11:51:57 -0700 (PDT)
+ bh=Pc6uCheg5bSUEvPzOOBqyBuV/BB4vFhQg6Zv0nEjVmg=;
+ b=okDvf6zLWSwgiG42xbsMj81U2USoxMjrCCFimlb51wYtIetegh+JPHWxfwY8/HalhG
+ BAouMRT6i+QvBU8q9DR6pBVHIVMOLn2t+u/C5lpykE0De6MQRexLwAWcs1Ns3VvmfwSc
+ kNI/Kqf1qyXQNcXJURMFuUw9KEMGwaILCBE6pP14cjEcswEEW80B++bd/GfskGw6ABWs
+ bbWMr0F3iTWqR1XnsiJc1yrzJaEzsiylkS6NbEa46mEXpxrjRTvrGF4EnvbWtuH059I6
+ NiMANR7PEP6CGMXGEe6vAO648GnA9Dy4jhIjNuULv7F7Z2wFY8gCV9YYrRpD/eQuKQW5
+ SLZg==
+X-Gm-Message-State: AGi0PuZCFBz5qBHeg8PVVHPkhDySFXrBt/5YQoI+stctBCDSn6aQtxeC
+ 4yKJEe78twBdHIMC00ndmivYF1h4yVxMv7Ib1KgdCw==
+X-Google-Smtp-Source: APiQypLjlg31JL2vWmJcHt2cV9/x5v0DYBI8ckZ36ssXbKqtO9zjftBu40w6jRvHeadXMePaCCfN8nXZe//J2flKpeA=
+X-Received: by 2002:aca:3441:: with SMTP id b62mr2854732oia.146.1588190647622; 
+ Wed, 29 Apr 2020 13:04:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAC41xo2O1k+cn7EO3Zu3U70qefFwGa5B1iNRNgRwLk7SGX=-Aw@mail.gmail.com>
- <CAKmqyKPDzusVqzCFwCJ+2gY0qchguhR57zHNkE-0MTeffKs_OA@mail.gmail.com>
- <CAC41xo3qeQZ+i8XoQq3j80_JDEoL2yMA__arpmE+GXyjX4c1sg@mail.gmail.com>
-In-Reply-To: <CAC41xo3qeQZ+i8XoQq3j80_JDEoL2yMA__arpmE+GXyjX4c1sg@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 29 Apr 2020 11:43:18 -0700
-Message-ID: <CAKmqyKPJ6QqUULrDj9NX_bLdnjsjzPOGcCBH5q23fG=ScT_NzA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] target/riscv: fix VS interrupts forwarding to HS
-To: Jose Martins <josemartins90@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+References: <20200429182856.2588202-1-alistair.francis@wdc.com>
+In-Reply-To: <20200429182856.2588202-1-alistair.francis@wdc.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Wed, 29 Apr 2020 21:03:56 +0100
+Message-ID: <CAFEAcA-ZqDFo=D3YZgqLpvhzW+Jq8h-JNynDS05E2bSa6FOLEg@mail.gmail.com>
+Subject: Re: [PULL 00/14] RISC-V Patch Queue for 5.1
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: Palmer Dabbelt <palmerdabbelt@google.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ QEMU Developers <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::230;
+ envelope-from=peter.maydell@linaro.org; helo=mail-oi1-x230.google.com
 X-detected-operating-system: by eggs.gnu.org: Error: [-] PROGRAM ABORT :
  Malformed IPv6 address (bad octet value).
  Location : parse_addr6(), p0f-client.c:67
-X-Received-From: 2607:f8b0:4864:20::141
+X-Received-From: 2607:f8b0:4864:20::230
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,95 +69,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2020 18:52:02 -0000
+X-List-Received-Date: Wed, 29 Apr 2020 20:04:10 -0000
 
- On Wed, Apr 29, 2020 at 9:07 AM Jose Martins <josemartins90@gmail.com> wrote:
+On Wed, 29 Apr 2020 at 19:37, Alistair Francis <alistair.francis@wdc.com> wrote:
 >
-> > If the Hypervisor sets the V* interrupts why does it then want to
-> > receive the interrupt itself?
+> The following changes since commit a7922a3c81f34f45b1ebc9670a7769edc4c42a43:
 >
-> I don't think this is a question of whether there is a use case for it
-> or not (I agree with you, of the top of my head I don't see why would
-> you forward v* interrupts to the hypervisor). However,  from what I
-> can understand,  the spec allows for it. If you don't set the
-> corresponding bits in hideleg, v* interrupts should be forwarded to HS
-> (as I said, they are guaranteed not to be forwarded to m mode because
-> these bits must be hardwired in mideleg). Otherwise, there would be no
-> purpose for the hideleg register, as v* interrupts bits are the only
-> ones that can be written in it (am I missing something?).
-
-I think you are right.
-
-"Among bits 15:0 of hideleg, only bits 10, 6, and 2 (corresponding to
-the standard VS-level interrupts) shall be writable, and the others
-shall be hardwired to zero."
-
-Which means that it only controls the V* interrupts.
-
+>   Open 5.1 development tree (2020-04-29 15:07:10 +0100)
 >
-> > Isn't hs_sie only ever accessed if riscv_cpu_virt_enabled(env)?
-> > Doesn't this just set hs_sie to always be 1?
+> are available in the Git repository at:
 >
-> I don't understand if you don't agree that hs_sie should be always set
-> when riscv_cpu_virt_enabled(env), or if you agree with it and don't
-> see the need for the hs_sie variable at all. If it is the latter, I
-> agree with you. So the patch would become:
-
-Currently hs_sie is set:
- - When we are in U-Mode
- - If we are in S-Mode and hs_mstatus_sie is true
-
-Then hs_sie is only accessed if virtulisation is enabled.
-
-Your change just made it true for whenever virtulisation is enabled
-(in which case we don't need it).
-
+>   git@github.com:alistair23/qemu.git tags/pull-riscv-to-apply-20200429-1
 >
-> Signed-off-by: Jose Martins <josemartins90@gmail.com>
-> ---
->  target/riscv/cpu_helper.c | 8 ++------
->  1 file changed, 2 insertions(+), 6 deletions(-)
+> for you to fetch changes up to 23766b6a35d5b1664ab782c02624bf2435c4ed5d:
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index d3ba9efb02..a85eadb4fb 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -41,10 +41,8 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+>   hw/riscv/spike: Allow more than one CPUs (2020-04-29 11:23:44 -0700)
 >
->      target_ulong mstatus_mie = get_field(env->mstatus, MSTATUS_MIE);
->      target_ulong mstatus_sie = get_field(env->mstatus, MSTATUS_SIE);
-> -    target_ulong hs_mstatus_sie = get_field(env->mstatus_hs, MSTATUS_SIE);
+> ----------------------------------------------------------------
+> RISC-V pull request for 5.1
 >
-> -    target_ulong pending = env->mip & env->mie &
-> -                               ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-> +    target_ulong pending = env->mip & env->mie;
+> This is the first pull request for the 5.1 development period. It
+> contains all of the patches that were sent during the 5.0 timeframe.
+>
+> This is an assortment of fixes for RISC-V, including fixes for the
+> Hypervisor extension, the Spike machine and an update to OpenSBI.
+>
+> --------------------------------------------------------------
 
-This looks good
+Hi; this doesn't apply to current master. The conflict looks like
+it's probably pretty easy to fix up, but could you fix it and resend,
+please?
 
->      target_ulong vspending = (env->mip & env->mie &
->                                (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
->
-> @@ -52,11 +50,9 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
->                            (env->priv == PRV_M && mstatus_mie);
->      target_ulong sie    = env->priv < PRV_S ||
->                            (env->priv == PRV_S && mstatus_sie);
-> -    target_ulong hs_sie = env->priv < PRV_S ||
-> -                          (env->priv == PRV_S && hs_mstatus_sie);
->
->      if (riscv_cpu_virt_enabled(env)) {
-> -        target_ulong pending_hs_irq = pending & -hs_sie;
-> +        target_ulong pending_hs_irq = pending & ~env->hideleg;
-
-I don't see why we don't need to check the HS version of MSTATUS_SIE.
-I think hs_sie should stay shouldn't it?
-
-Alistair
-
->
->          if (pending_hs_irq) {
->              riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
-> --
-> 2.17.1
->
-> Jose
+thanks
+-- PMM
 
