@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jTra6-0008A6-Sr
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37302)
+	id 1jTra9-0008Ex-4G
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37334)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTra3-00083v-U6
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:13 -0400
+ id 1jTra5-00087R-Ep
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:15 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTra2-0003QR-7i
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:11 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:2035)
+ id 1jTra2-0003QK-7F
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:13 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:2041)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTra1-0003PL-3o; Wed, 29 Apr 2020 14:37:09 -0400
+ id 1jTra1-0003PZ-9U; Wed, 29 Apr 2020 14:37:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
  t=1588185430; x=1619721430;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=1XgLDz26nHEpu0y9cchduMq7HttvXlRu1DO0Cxc980c=;
- b=gHaxnY0ahJrOgO2//M8kwml7XFL2JjaxtpJDBOMeCDUVH+hV9cy5ksih
- BAffZL9iuILzN3oeEeucGY0U2GZHYY7a3D7xBT/O7vjQ+UQG8rPC/1yNF
- sdg/IUN1zr6eXrn5d2/7BPGWiZ+D8lmhuf/zoxBnMeFY3ew5B3S2UIkB1
- nSl2+71nkw5PMy9W6EodzcTtp3wSAJUYe6c52MqG76N03Lf0DxH2cvd6j
- 0hADduEunGZp1R6P1OKrT3kJQLP17OaCVRVn/WwafxuArZc8K/X92dv2X
- XVfKXAm0VQ4G7VTnKb/AECrxuv2iQaLFAoMOqRZC8bnCRzlalyi88upa+ A==;
-IronPort-SDR: ttwrcDOhqC7HG77Q3N01ltTOz6dawUJBo7SLwzsguXB33u8rrF2LYEB0MuVDV+ssA5IY3BMfe0
- u9Rx9+mUsfePhHXWs72agolRwe+19YB0ToPP6SVQoijWCmnuHcaqaVURfMN24mTeXzP2jqhQuW
- ExpPX9Qf+8ENFyobsgJ7fD8rJRiK/JiQN8w4PSJ5EEErCB3dZ/npcQEZR6f6iWvZxlljYfPbU9
- /2RhvVInz5e/jvmP2UVmdvY5q2uEtP7vpHllck88FVfu7+/bOqh5NN+tiUxOKWTqZPaETwr2mk
- 4FM=
-X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935126"
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=dQnv0AWXrAZvSlmsbH49Gt2Jsse2jUj501EULWstkYo=;
+ b=qGe4F+GyK7Ysl6iie/4c7WBlrw+lKLZ/hD8QcFIUBjh0jGdv06NEQVDA
+ trlrI3Jio5mgv4MkYdBAq5Yuw3Z+4cTyAvuah0VyUTe3faFsIuDtM0kMC
+ t9fDjpfR3cvR4u/OOEXTc0HuS+lVPRBmZZIaFL8dqK2g6HeFajh2gLMAe
+ 55728gh+G9NQQKwCzE69OnwgewCFGzHzAP7gFTnaUBXGKP+RULVvZTQbh
+ VR2o1/G/hkc7rkAiH+/GyKIgRuRbWvP7+zvWNlT7Vr+LMoYkslex+sSOW
+ /Q0DZeCfxIv1gg3W8ubS6BIe9/NB561uQCozlHSPW7d2PbNcqqFBt+Lk1 g==;
+IronPort-SDR: rgSO3F5miD5lHbbtOap8JOCl9P1g2Qzf+Tsxx8mGARNuKE6D0drlrdD/hFNs71i+VJrVVmsWY6
+ +P9aa+8ucpoYTpIwbCeby82TrkWx/26gDgWDSmCWnKMpdpgCe0CQYQ2Q/WD1JbFvUyxm5VywBe
+ QaJxdCfoF7n2YG+MSNyUHown9DGr0pr3Jqf821JkwVztEbqoocbxRYZVde5hwGCmKqO00lBpgh
+ CfzkaVtYvlvNh5QcabhvWRY7W0bmAzrm7yJUQc0+3pSQNZm86vFogQknRc0G14b/yohYfBx1fY
+ qgQ=
+X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935128"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
  by ob1.hgst.iphmx.com with ESMTP; 30 Apr 2020 02:37:04 +0800
-IronPort-SDR: 62ykwJIudIHRRjtow64sxiI8BA0AYD2N91pP12yWlaeIzbeUlFTXe4noKO0Qw9SshMrpNcK0U3
- 4pdSBbrpBFjnFu21KbDsjpgGYWGmHXlXo=
+IronPort-SDR: jKBlkO6P8KnylH+UIbawlj6puiY1AipcedR8Yk5cavsNpiSxcb5fy1ekEfJRgu7loBXjdYi/Nb
+ MovGAQtj5I3KKWnL0GqMUc+0QEjUJpK/M=
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  29 Apr 2020 11:27:08 -0700
-IronPort-SDR: t3qSngCryoWVlFS84BFNntMO/IxERhDyrcbbdq/91Z0rqEFe5vKzzDqZqZIFvGKnjqusWGXeoc
- vRnfN8Fvvx1A==
+IronPort-SDR: yjz7qovcvUwPLULOV6wltPLDIu1SWFJV1B3/coKpv4Of/XYY2N71+EE2+XC2IZryS37RKs0xET
+ TH2pU2iUsEMA==
 WDCIronportException: Internal
 Received: from cnf007834.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.55.253])
@@ -50,13 +50,14 @@ Received: from cnf007834.ad.shared (HELO risc6-mainframe.hgst.com)
 From: Alistair Francis <alistair.francis@wdc.com>
 To: peter.maydell@linaro.org
 Cc: palmerdabbelt@google.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PULL 00/14] RISC-V Patch Queue for 5.1
-Date: Wed, 29 Apr 2020 11:28:42 -0700
-Message-Id: <20200429182856.2588202-1-alistair.francis@wdc.com>
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [PULL 01/14] riscv/sifive_u: Fix up file ordering
+Date: Wed, 29 Apr 2020 11:28:43 -0700
+Message-Id: <20200429182856.2588202-2-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200429182856.2588202-1-alistair.francis@wdc.com>
+References: <20200429182856.2588202-1-alistair.francis@wdc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=216.71.154.45;
  envelope-from=prvs=381fbd49e=alistair.francis@wdc.com;
@@ -75,69 +76,155 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2020 18:37:13 -0000
+X-List-Received-Date: Wed, 29 Apr 2020 18:37:16 -0000
 
-The following changes since commit a7922a3c81f34f45b1ebc9670a7769edc4c42a43:
+Split the file into clear machine and SoC sections.
 
-  Open 5.1 development tree (2020-04-29 15:07:10 +0100)
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+---
+ hw/riscv/sifive_u.c | 109 ++++++++++++++++++++++----------------------
+ 1 file changed, 55 insertions(+), 54 deletions(-)
 
-are available in the Git repository at:
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 56351c4faa..d0ea6803db 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -312,7 +312,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     g_free(nodename);
+ }
+ 
+-static void riscv_sifive_u_init(MachineState *machine)
++static void sifive_u_machine_init(MachineState *machine)
+ {
+     const struct MemmapEntry *memmap = sifive_u_memmap;
+     SiFiveUState *s = RISCV_U_MACHINE(machine);
+@@ -403,6 +403,60 @@ static void riscv_sifive_u_init(MachineState *machine)
+                           &address_space_memory);
+ }
+ 
++static bool sifive_u_machine_get_start_in_flash(Object *obj, Error **errp)
++{
++    SiFiveUState *s = RISCV_U_MACHINE(obj);
++
++    return s->start_in_flash;
++}
++
++static void sifive_u_machine_set_start_in_flash(Object *obj, bool value, Error **errp)
++{
++    SiFiveUState *s = RISCV_U_MACHINE(obj);
++
++    s->start_in_flash = value;
++}
++
++static void sifive_u_machine_instance_init(Object *obj)
++{
++    SiFiveUState *s = RISCV_U_MACHINE(obj);
++
++    s->start_in_flash = false;
++    object_property_add_bool(obj, "start-in-flash", sifive_u_machine_get_start_in_flash,
++                             sifive_u_machine_set_start_in_flash, NULL);
++    object_property_set_description(obj, "start-in-flash",
++                                    "Set on to tell QEMU's ROM to jump to " \
++                                    "flash. Otherwise QEMU will jump to DRAM",
++                                    NULL);
++}
++
++
++static void sifive_u_machine_class_init(ObjectClass *oc, void *data)
++{
++    MachineClass *mc = MACHINE_CLASS(oc);
++
++    mc->desc = "RISC-V Board compatible with SiFive U SDK";
++    mc->init = sifive_u_machine_init;
++    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
++    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
++    mc->default_cpus = mc->min_cpus;
++}
++
++static const TypeInfo sifive_u_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("sifive_u"),
++    .parent     = TYPE_MACHINE,
++    .class_init = sifive_u_machine_class_init,
++    .instance_init = sifive_u_machine_instance_init,
++    .instance_size = sizeof(SiFiveUState),
++};
++
++static void sifive_u_machine_init_register_types(void)
++{
++    type_register_static(&sifive_u_machine_typeinfo);
++}
++
++type_init(sifive_u_machine_init_register_types)
++
+ static void riscv_sifive_u_soc_init(Object *obj)
+ {
+     MachineState *ms = MACHINE(qdev_get_machine());
+@@ -443,33 +497,6 @@ static void riscv_sifive_u_soc_init(Object *obj)
+                           TYPE_CADENCE_GEM);
+ }
+ 
+-static bool sifive_u_get_start_in_flash(Object *obj, Error **errp)
+-{
+-    SiFiveUState *s = RISCV_U_MACHINE(obj);
+-
+-    return s->start_in_flash;
+-}
+-
+-static void sifive_u_set_start_in_flash(Object *obj, bool value, Error **errp)
+-{
+-    SiFiveUState *s = RISCV_U_MACHINE(obj);
+-
+-    s->start_in_flash = value;
+-}
+-
+-static void riscv_sifive_u_machine_instance_init(Object *obj)
+-{
+-    SiFiveUState *s = RISCV_U_MACHINE(obj);
+-
+-    s->start_in_flash = false;
+-    object_property_add_bool(obj, "start-in-flash", sifive_u_get_start_in_flash,
+-                             sifive_u_set_start_in_flash, NULL);
+-    object_property_set_description(obj, "start-in-flash",
+-                                    "Set on to tell QEMU's ROM to jump to " \
+-                                    "flash. Otherwise QEMU will jump to DRAM",
+-                                    NULL);
+-}
+-
+ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+ {
+     MachineState *ms = MACHINE(qdev_get_machine());
+@@ -607,29 +634,3 @@ static void riscv_sifive_u_soc_register_types(void)
+ }
+ 
+ type_init(riscv_sifive_u_soc_register_types)
+-
+-static void riscv_sifive_u_machine_class_init(ObjectClass *oc, void *data)
+-{
+-    MachineClass *mc = MACHINE_CLASS(oc);
+-
+-    mc->desc = "RISC-V Board compatible with SiFive U SDK";
+-    mc->init = riscv_sifive_u_init;
+-    mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
+-    mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+-    mc->default_cpus = mc->min_cpus;
+-}
+-
+-static const TypeInfo riscv_sifive_u_machine_typeinfo = {
+-    .name       = MACHINE_TYPE_NAME("sifive_u"),
+-    .parent     = TYPE_MACHINE,
+-    .class_init = riscv_sifive_u_machine_class_init,
+-    .instance_init = riscv_sifive_u_machine_instance_init,
+-    .instance_size = sizeof(SiFiveUState),
+-};
+-
+-static void riscv_sifive_u_machine_init_register_types(void)
+-{
+-    type_register_static(&riscv_sifive_u_machine_typeinfo);
+-}
+-
+-type_init(riscv_sifive_u_machine_init_register_types)
+-- 
+2.26.2
 
-  git@github.com:alistair23/qemu.git tags/pull-riscv-to-apply-20200429-1
-
-for you to fetch changes up to 23766b6a35d5b1664ab782c02624bf2435c4ed5d:
-
-  hw/riscv/spike: Allow more than one CPUs (2020-04-29 11:23:44 -0700)
-
-----------------------------------------------------------------
-RISC-V pull request for 5.1
-
-This is the first pull request for the 5.1 development period. It
-contains all of the patches that were sent during the 5.0 timeframe.
-
-This is an assortment of fixes for RISC-V, including fixes for the
-Hypervisor extension, the Spike machine and an update to OpenSBI.
-
-----------------------------------------------------------------
-Alistair Francis (4):
-      riscv/sifive_u: Fix up file ordering
-      riscv/sifive_u: Add a serial property to the sifive_u SoC
-      riscv: Don't use stage-2 PTE lookup protection flags
-      riscv: AND stage-1 and stage-2 protection flags
-
-Anup Patel (4):
-      riscv: Fix Stage2 SV32 page table walk
-      hw/riscv: Add optional symbol callback ptr to riscv_load_firmware()
-      hw/riscv/spike: Allow loading firmware separately using -bios option
-      hw/riscv/spike: Allow more than one CPUs
-
-Bin Meng (3):
-      riscv/sifive_u: Add a serial property to the sifive_u machine
-      hw/riscv: Generate correct "mmu-type" for 32-bit machines
-      roms: opensbi: Upgrade from v0.6 to v0.7
-
-Corey Wharton (2):
-      riscv: sifive_e: Support changing CPU type
-      target/riscv: Add a sifive-e34 cpu type
-
-LIU Zhiwei (1):
-      linux-user/riscv: fix up struct target_ucontext definition
-
- hw/riscv/boot.c                              |  13 ++-
- hw/riscv/sifive_e.c                          |   5 +-
- hw/riscv/sifive_u.c                          | 143 ++++++++++++++++-----------
- hw/riscv/spike.c                             |  30 +++++-
- hw/riscv/virt.c                              |   6 +-
- include/hw/riscv/boot.h                      |   6 +-
- include/hw/riscv/sifive_u.h                  |   3 +
- linux-user/riscv/signal.c                    |   3 +-
- pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin | Bin 49472 -> 49520 bytes
- pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 41280 -> 49504 bytes
- pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 53760 -> 57936 bytes
- pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 49664 -> 57920 bytes
- roms/opensbi                                 |   2 +-
- target/riscv/cpu.c                           |  10 ++
- target/riscv/cpu.h                           |   1 +
- target/riscv/cpu_helper.c                    |  18 ++--
- 16 files changed, 160 insertions(+), 80 deletions(-)
 
