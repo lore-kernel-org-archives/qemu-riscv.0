@@ -1,64 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jTpEq-0005q8-MQ
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 12:07:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42484)
+	id 1jTra6-0008A6-Sr
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37302)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <josemartins90@gmail.com>) id 1jTpEn-0005n2-VD
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 12:07:06 -0400
+ (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
+ id 1jTra3-00083v-U6
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:13 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <josemartins90@gmail.com>) id 1jTpEn-00029o-Ce
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 12:07:05 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:34690)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1jTpEm-00028t-Vk; Wed, 29 Apr 2020 12:07:05 -0400
-Received: by mail-il1-x142.google.com with SMTP id w6so2972200ilg.1;
- Wed, 29 Apr 2020 09:07:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=By8vJ3Se9uJnG/uF04QE1RtDo2xNPt4ah4xNj06+pUM=;
- b=BbZwAzTPocYmzps8Zbm/6XCqg0dFTGl58Set36poQl1l6LMOfgvNXsPu0eHyd8l+kL
- 6JEO8CMpB9mb7kE4H2z9QUTgzBl827IoFmoLLgEEojSKEBVxs+5/7kt8UsEvlNim3aut
- 0JosHRInaCxuPOWm6htRDiG0TdGCrRXwT+peDYO4g1bC30u4bvh/ldWPrV6gNO6jiQaQ
- Reu5c0N0wxo8KSGRQDJzLX3XM7rb9HP1d9so5FALC84V246Vy3vN46pXpbownqe05B7S
- SlyivIPe09K53W1qHtlm5qs9ctuV8ljUasZ5Ji+tpbeI1EeULuwRhqEjjpWTnI+QglU3
- SWPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=By8vJ3Se9uJnG/uF04QE1RtDo2xNPt4ah4xNj06+pUM=;
- b=dpIZ//rEzdylI9RdxrP2PoA3dGGnzb4jkqztoJJbNopBvh7FjKv8F12mAz62Unbdqx
- +sGpPv3dO2Ug4BiAwmwCa6qaiB2NH/5A8/+WtogDS1JQ5FNAlBWWZ/TzGcZu2ffkTRuR
- rg37PJSPntlwfeIYWxxEc2nckcwUCcDaK90OFxF+FyDLffpOhxu2MNjy7ohBupgoiayQ
- tj25XXX8E3kDgRT9eq+TZTU46OOJNiBRSSn7CZ+IUROdVbVV7DHPEZcJ0ckahJvpHV9u
- cUDlTVA++Zl8B2X9X346mI6QNjfrqoxtruCQIJdRHzQCbmGvOzOWdG9RJ2r5rZm5mXNU
- EAvw==
-X-Gm-Message-State: AGi0PuYZ8hmEw3k0y/wSX6UYuwG0JPhrCit2kR3nMGp1PoG6dcqRyNbT
- Yk1mXVfRn358pNWU/KAzMA3zt7va/Bxli4TbV8Y=
-X-Google-Smtp-Source: APiQypLmANJ3mNBSvp7P/ValGWdY4qorLYAFYeQt7nET4Gu6OjkSshysJCOX9i7ITHRGfE+26mjbOh4PhUv8B2f8o00=
-X-Received: by 2002:a05:6e02:66c:: with SMTP id
- l12mr19481532ilt.289.1588176422073; 
- Wed, 29 Apr 2020 09:07:02 -0700 (PDT)
+ (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
+ id 1jTra2-0003QR-7i
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:11 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:2035)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
+ id 1jTra1-0003PL-3o; Wed, 29 Apr 2020 14:37:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1588185430; x=1619721430;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=1XgLDz26nHEpu0y9cchduMq7HttvXlRu1DO0Cxc980c=;
+ b=gHaxnY0ahJrOgO2//M8kwml7XFL2JjaxtpJDBOMeCDUVH+hV9cy5ksih
+ BAffZL9iuILzN3oeEeucGY0U2GZHYY7a3D7xBT/O7vjQ+UQG8rPC/1yNF
+ sdg/IUN1zr6eXrn5d2/7BPGWiZ+D8lmhuf/zoxBnMeFY3ew5B3S2UIkB1
+ nSl2+71nkw5PMy9W6EodzcTtp3wSAJUYe6c52MqG76N03Lf0DxH2cvd6j
+ 0hADduEunGZp1R6P1OKrT3kJQLP17OaCVRVn/WwafxuArZc8K/X92dv2X
+ XVfKXAm0VQ4G7VTnKb/AECrxuv2iQaLFAoMOqRZC8bnCRzlalyi88upa+ A==;
+IronPort-SDR: ttwrcDOhqC7HG77Q3N01ltTOz6dawUJBo7SLwzsguXB33u8rrF2LYEB0MuVDV+ssA5IY3BMfe0
+ u9Rx9+mUsfePhHXWs72agolRwe+19YB0ToPP6SVQoijWCmnuHcaqaVURfMN24mTeXzP2jqhQuW
+ ExpPX9Qf+8ENFyobsgJ7fD8rJRiK/JiQN8w4PSJ5EEErCB3dZ/npcQEZR6f6iWvZxlljYfPbU9
+ /2RhvVInz5e/jvmP2UVmdvY5q2uEtP7vpHllck88FVfu7+/bOqh5NN+tiUxOKWTqZPaETwr2mk
+ 4FM=
+X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935126"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 30 Apr 2020 02:37:04 +0800
+IronPort-SDR: 62ykwJIudIHRRjtow64sxiI8BA0AYD2N91pP12yWlaeIzbeUlFTXe4noKO0Qw9SshMrpNcK0U3
+ 4pdSBbrpBFjnFu21KbDsjpgGYWGmHXlXo=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 29 Apr 2020 11:27:08 -0700
+IronPort-SDR: t3qSngCryoWVlFS84BFNntMO/IxERhDyrcbbdq/91Z0rqEFe5vKzzDqZqZIFvGKnjqusWGXeoc
+ vRnfN8Fvvx1A==
+WDCIronportException: Internal
+Received: from cnf007834.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.55.253])
+ by uls-op-cesaip01.wdc.com with ESMTP; 29 Apr 2020 11:37:02 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: peter.maydell@linaro.org
+Cc: palmerdabbelt@google.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PULL 00/14] RISC-V Patch Queue for 5.1
+Date: Wed, 29 Apr 2020 11:28:42 -0700
+Message-Id: <20200429182856.2588202-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <CAC41xo2O1k+cn7EO3Zu3U70qefFwGa5B1iNRNgRwLk7SGX=-Aw@mail.gmail.com>
- <CAKmqyKPDzusVqzCFwCJ+2gY0qchguhR57zHNkE-0MTeffKs_OA@mail.gmail.com>
-In-Reply-To: <CAKmqyKPDzusVqzCFwCJ+2gY0qchguhR57zHNkE-0MTeffKs_OA@mail.gmail.com>
-From: Jose Martins <josemartins90@gmail.com>
-Date: Wed, 29 Apr 2020 17:06:50 +0100
-Message-ID: <CAC41xo3qeQZ+i8XoQq3j80_JDEoL2yMA__arpmE+GXyjX4c1sg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] target/riscv: fix VS interrupts forwarding to HS
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=josemartins90@gmail.com; helo=mail-il1-x142.google.com
-X-detected-operating-system: by eggs.gnu.org: Error: [-] PROGRAM ABORT :
- Malformed IPv6 address (bad octet value).
- Location : parse_addr6(), p0f-client.c:67
-X-Received-From: 2607:f8b0:4864:20::142
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.154.45;
+ envelope-from=prvs=381fbd49e=alistair.francis@wdc.com;
+ helo=esa6.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/04/29 14:37:03
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Received-From: 216.71.154.45
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,65 +75,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2020 16:07:07 -0000
+X-List-Received-Date: Wed, 29 Apr 2020 18:37:13 -0000
 
-> If the Hypervisor sets the V* interrupts why does it then want to
-> receive the interrupt itself?
+The following changes since commit a7922a3c81f34f45b1ebc9670a7769edc4c42a43:
 
-I don't think this is a question of whether there is a use case for it
-or not (I agree with you, of the top of my head I don't see why would
-you forward v* interrupts to the hypervisor). However,  from what I
-can understand,  the spec allows for it. If you don't set the
-corresponding bits in hideleg, v* interrupts should be forwarded to HS
-(as I said, they are guaranteed not to be forwarded to m mode because
-these bits must be hardwired in mideleg). Otherwise, there would be no
-purpose for the hideleg register, as v* interrupts bits are the only
-ones that can be written in it (am I missing something?).
+  Open 5.1 development tree (2020-04-29 15:07:10 +0100)
 
-> Isn't hs_sie only ever accessed if riscv_cpu_virt_enabled(env)?
-> Doesn't this just set hs_sie to always be 1?
+are available in the Git repository at:
 
-I don't understand if you don't agree that hs_sie should be always set
-when riscv_cpu_virt_enabled(env), or if you agree with it and don't
-see the need for the hs_sie variable at all. If it is the latter, I
-agree with you. So the patch would become:
+  git@github.com:alistair23/qemu.git tags/pull-riscv-to-apply-20200429-1
 
-Signed-off-by: Jose Martins <josemartins90@gmail.com>
----
- target/riscv/cpu_helper.c | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+for you to fetch changes up to 23766b6a35d5b1664ab782c02624bf2435c4ed5d:
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d3ba9efb02..a85eadb4fb 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -41,10 +41,8 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+  hw/riscv/spike: Allow more than one CPUs (2020-04-29 11:23:44 -0700)
 
-     target_ulong mstatus_mie = get_field(env->mstatus, MSTATUS_MIE);
-     target_ulong mstatus_sie = get_field(env->mstatus, MSTATUS_SIE);
--    target_ulong hs_mstatus_sie = get_field(env->mstatus_hs, MSTATUS_SIE);
+----------------------------------------------------------------
+RISC-V pull request for 5.1
 
--    target_ulong pending = env->mip & env->mie &
--                               ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-+    target_ulong pending = env->mip & env->mie;
-     target_ulong vspending = (env->mip & env->mie &
-                               (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
+This is the first pull request for the 5.1 development period. It
+contains all of the patches that were sent during the 5.0 timeframe.
 
-@@ -52,11 +50,9 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
-                           (env->priv == PRV_M && mstatus_mie);
-     target_ulong sie    = env->priv < PRV_S ||
-                           (env->priv == PRV_S && mstatus_sie);
--    target_ulong hs_sie = env->priv < PRV_S ||
--                          (env->priv == PRV_S && hs_mstatus_sie);
+This is an assortment of fixes for RISC-V, including fixes for the
+Hypervisor extension, the Spike machine and an update to OpenSBI.
 
-     if (riscv_cpu_virt_enabled(env)) {
--        target_ulong pending_hs_irq = pending & -hs_sie;
-+        target_ulong pending_hs_irq = pending & ~env->hideleg;
+----------------------------------------------------------------
+Alistair Francis (4):
+      riscv/sifive_u: Fix up file ordering
+      riscv/sifive_u: Add a serial property to the sifive_u SoC
+      riscv: Don't use stage-2 PTE lookup protection flags
+      riscv: AND stage-1 and stage-2 protection flags
 
-         if (pending_hs_irq) {
-             riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
--- 
-2.17.1
+Anup Patel (4):
+      riscv: Fix Stage2 SV32 page table walk
+      hw/riscv: Add optional symbol callback ptr to riscv_load_firmware()
+      hw/riscv/spike: Allow loading firmware separately using -bios option
+      hw/riscv/spike: Allow more than one CPUs
 
-Jose
+Bin Meng (3):
+      riscv/sifive_u: Add a serial property to the sifive_u machine
+      hw/riscv: Generate correct "mmu-type" for 32-bit machines
+      roms: opensbi: Upgrade from v0.6 to v0.7
+
+Corey Wharton (2):
+      riscv: sifive_e: Support changing CPU type
+      target/riscv: Add a sifive-e34 cpu type
+
+LIU Zhiwei (1):
+      linux-user/riscv: fix up struct target_ucontext definition
+
+ hw/riscv/boot.c                              |  13 ++-
+ hw/riscv/sifive_e.c                          |   5 +-
+ hw/riscv/sifive_u.c                          | 143 ++++++++++++++++-----------
+ hw/riscv/spike.c                             |  30 +++++-
+ hw/riscv/virt.c                              |   6 +-
+ include/hw/riscv/boot.h                      |   6 +-
+ include/hw/riscv/sifive_u.h                  |   3 +
+ linux-user/riscv/signal.c                    |   3 +-
+ pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin | Bin 49472 -> 49520 bytes
+ pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 41280 -> 49504 bytes
+ pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 53760 -> 57936 bytes
+ pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 49664 -> 57920 bytes
+ roms/opensbi                                 |   2 +-
+ target/riscv/cpu.c                           |  10 ++
+ target/riscv/cpu.h                           |   1 +
+ target/riscv/cpu_helper.c                    |  18 ++--
+ 16 files changed, 160 insertions(+), 80 deletions(-)
 
