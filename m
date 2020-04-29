@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jTtO4-0006xg-V5
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 16:32:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53396)
+	id 1jTtO5-0006y2-51
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 16:32:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53392)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTtNM-0006MG-5l
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 16:32:54 -0400
+ id 1jTtNM-0006MD-6I
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 16:32:56 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTtJy-00066R-B0
+ id 1jTtJy-00066b-Iw
  for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 16:32:11 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:7545)
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:7550)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTtJx-00065g-CN; Wed, 29 Apr 2020 16:28:42 -0400
+ id 1jTtJy-000664-15; Wed, 29 Apr 2020 16:28:42 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1588192121; x=1619728121;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=FJkl9Hbgys0eb3sfQF3l+EdkuBfAEQQRKAr1946F++g=;
- b=nFGYIp7bWEdBHWtKdZdRap2fTop/MnzGhlDSC7YgajmeeyJsSVY4VTsD
- bGGHyZqiHakvTqiZl+SY6m9AiQOMTP/JfkDweyt5zI2H5ae3JZ3Z2cVe8
- nZ2RFVmpf0HIrdFw9c15/NG/7H9IKO5ZjPtNRsXtqhPNHlgY8BIY2/Tsb
- oggOJvBRlEIJ1yFOFF/p1NEpkQXk5Hyz+3h2OwAHkp2TGmgDQNah6oOqQ
- dQvFFSPkVktLxTc3+mwJaX7O1T+HZLkVhd8YjAG2bCH2wAkU3vzOtzOsH
- 6qqpczKe9/JQ2WQi0skzTBoOfDtNRFMwB7WFTLZXyGOvcWhNs2tWiMXIl g==;
-IronPort-SDR: ulywGUWNMtt3LY1f47kLUIn5PFpzxw/gx05FLJXmhy6S5kTO38uOxC5RICpSThfK8Y41WoP2m1
- 0n/0ChWyhLSBt8NDjJZyFCrWLDcOYElQPpn8lJDljvZduvMgzQpg8LzqNFPbf6YEl9UIPn9hR7
- WurZT4J71VfLGl144VkMVFQryjceVeOAOs4OT44ft/6qcksvD8dC+bZquJOOvSUSoqP8FeCXgq
- Ggpx+/jYrdiHre0iBX9n39v1QnaJSqMse/xgBVqViKRKs5uHSigPWb7zbexyuZXsS76IBUpxvY
- htY=
-X-IronPort-AV: E=Sophos;i="5.73,333,1583164800"; d="scan'208";a="136507030"
+ t=1588192122; x=1619728122;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=u0/1dXGgwQ8mtcl3kAqTg0Ybp0sJLP5Vvk/UWSFnOoE=;
+ b=dn3Z6Z7ftO9KExM9Zok1l8Vsnd90eYzoKDYPWVysAzRDFjN2eCN0KZX/
+ 8+W0KhK5t4Cci2GYkbYTUKbXToiAy3LzJi974M9whb5aAlcl/s5S5o1/5
+ QIBTDW6kYYoCDJKPraVc4zbXiXA4yPBJ+j9JGlE2WgoHuPxZ6Gmuw6nsm
+ OKrXxj9rntWqpfMGg3MV6wmctIyNilmHGTjMINsQ3OEM1izJ4DWIDkw9d
+ 6cz+OCUotCHPcKzBssfi74+VN3MoUR4Z2GPR45Y8zOCo/piAnxJzSRa/X
+ qlNWPFJGmCA/H12572huSqALQqeyIYbcMqQcye8xX1tg4OE6nButrXoQy Q==;
+IronPort-SDR: kJV+q8TQPi/zRrBvEkHQrmpDMaTHczUxh2b1CGAiwaJ7adw1O1vmEM3DXCKTdG5k02NxQrMsF0
+ xjoqGSSSUUPq7+lpst0jLkbYlOU1p4RKLAsAO6G0nZ1mLM/qDlVFVaoZ8yvCEGakLM3SvCS57J
+ yTZ1fgLVeYNy64/qWE8gZO8quO2pNF+uacOOo6DRXxU57Gnb1XzGeHGpJN7hh4CuvuVK9KtyNf
+ LSc/qEmg/5DWhIGz4GXWLgGOnb2+MO+bhuQmM9KQp8SGSTetW1XY96PhMkiIj+lHG9gci2fS/f
+ dFE=
+X-IronPort-AV: E=Sophos;i="5.73,333,1583164800"; d="scan'208";a="136507032"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
  by ob1.hgst.iphmx.com with ESMTP; 30 Apr 2020 04:28:37 +0800
-IronPort-SDR: ivRKSTrY6I7XGiDAq91CPMHX0OgXLIuf3U/4lmXDo+KAvUsaMM44g5c6k8IwFelOfqnGUtTzaH
- dsO97CyM+7bqrFQsZ4qK0y5ALaVldjmOY=
+IronPort-SDR: fg8UYdKrF/sFsO573rKXxJ6u6BGgZQuHzP8E/gx2EJOINz0dThKqGQopGCGx8dXbL0kjsTQzN0
+ jx7nfnl/ib1jGlFUZC1H4qPvpNbucCX88=
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 29 Apr 2020 13:18:41 -0700
-IronPort-SDR: WJ1PtoS4mKBWGJn3kA25ZUO4apDazX6Zkh23QLFXAZQ1fcUSRftFVLLwdHuFiQYe2KsSEDjUIE
- PoN4EypCzPrA==
+ 29 Apr 2020 13:18:42 -0700
+IronPort-SDR: P44cC5bmEGK/xynHV2iLMGKZqKgzb/xNkOme/Pi7e83PKgjnoRDDutvlQb572cJuXVbmNVBue8
+ EiXqHHuyU/1w==
 WDCIronportException: Internal
 Received: from usa004631.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.56.145])
@@ -50,13 +50,15 @@ Received: from usa004631.ad.shared (HELO risc6-mainframe.hgst.com)
 From: Alistair Francis <alistair.francis@wdc.com>
 To: peter.maydell@linaro.org
 Cc: palmerdabbelt@google.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PULL v2 00/14] RISC-V Patch Queue for 5.1
-Date: Wed, 29 Apr 2020 13:19:52 -0700
-Message-Id: <20200429202006.775322-1-alistair.francis@wdc.com>
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [PULL v2 02/14] riscv/sifive_u: Add a serial property to the sifive_u
+ SoC
+Date: Wed, 29 Apr 2020 13:19:54 -0700
+Message-Id: <20200429202006.775322-3-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200429202006.775322-1-alistair.francis@wdc.com>
+References: <20200429202006.775322-1-alistair.francis@wdc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=216.71.154.42;
  envelope-from=prvs=381fbd49e=alistair.francis@wdc.com;
@@ -75,69 +77,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2020 20:32:55 -0000
+X-List-Received-Date: Wed, 29 Apr 2020 20:32:56 -0000
 
-The following changes since commit 648db19685b7030aa558a4ddbd3a8e53d8c9a062:
+At present the board serial number is hard-coded to 1, and passed
+to OTP model during initialization. Firmware (FSBL, U-Boot) uses
+the serial number to generate a unique MAC address for the on-chip
+ethernet controller. When multiple QEMU 'sifive_u' instances are
+created and connected to the same subnet, they all have the same
+MAC address hence it creates a unusable network.
 
-  Merge remote-tracking branch 'remotes/armbru/tags/pull-misc-2020-04-29' into staging (2020-04-29 15:07:33 +0100)
+A new "serial" property is introduced to the sifive_u SoC to specify
+the board serial number. When not given, the default serial number
+1 is used.
 
-are available in the Git repository at:
+Suggested-by: Bin Meng <bmeng.cn@gmail.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
+---
+ hw/riscv/sifive_u.c         | 8 +++++++-
+ include/hw/riscv/sifive_u.h | 2 ++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-  git@github.com:alistair23/qemu.git tags/pull-riscv-to-apply-20200429-2
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 7f6a3c6c15..6e659e986f 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -491,7 +491,6 @@ static void riscv_sifive_u_soc_init(Object *obj)
+                           TYPE_SIFIVE_U_PRCI);
+     sysbus_init_child_obj(obj, "otp", &s->otp, sizeof(s->otp),
+                           TYPE_SIFIVE_U_OTP);
+-    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", OTP_SERIAL);
+     sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
+                           TYPE_CADENCE_GEM);
+ }
+@@ -584,6 +583,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     object_property_set_bool(OBJECT(&s->prci), true, "realized", &err);
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->prci), 0, memmap[SIFIVE_U_PRCI].base);
+ 
++    qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
+     object_property_set_bool(OBJECT(&s->otp), true, "realized", &err);
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_OTP].base);
+ 
+@@ -610,10 +610,16 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
+         memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
+ }
+ 
++static Property riscv_sifive_u_soc_props[] = {
++    DEFINE_PROP_UINT32("serial", SiFiveUSoCState, serial, OTP_SERIAL),
++    DEFINE_PROP_END_OF_LIST()
++};
++
+ static void riscv_sifive_u_soc_class_init(ObjectClass *oc, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(oc);
+ 
++    device_class_set_props(dc, riscv_sifive_u_soc_props);
+     dc->realize = riscv_sifive_u_soc_realize;
+     /* Reason: Uses serial_hds in realize function, thus can't be used twice */
+     dc->user_creatable = false;
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index 82667b5746..a2baa1de5f 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -42,6 +42,8 @@ typedef struct SiFiveUSoCState {
+     SiFiveUPRCIState prci;
+     SiFiveUOTPState otp;
+     CadenceGEMState gem;
++
++    uint32_t serial;
+ } SiFiveUSoCState;
+ 
+ #define TYPE_RISCV_U_MACHINE MACHINE_TYPE_NAME("sifive_u")
+-- 
+2.26.2
 
-for you to fetch changes up to 31e6d70485b1a719ca27e9a2d21f2a61ac497cdf:
-
-  hw/riscv/spike: Allow more than one CPUs (2020-04-29 13:16:38 -0700)
-
-----------------------------------------------------------------
-RISC-V pull request for 5.1
-
-This is the first pull request for the 5.1 development period. It
-contains all of the patches that were sent during the 5.0 timeframe.
-
-This is an assortment of fixes for RISC-V, including fixes for the
-Hypervisor extension, the Spike machine and an update to OpenSBI.
-
-----------------------------------------------------------------
-Alistair Francis (4):
-      riscv/sifive_u: Fix up file ordering
-      riscv/sifive_u: Add a serial property to the sifive_u SoC
-      riscv: Don't use stage-2 PTE lookup protection flags
-      riscv: AND stage-1 and stage-2 protection flags
-
-Anup Patel (4):
-      riscv: Fix Stage2 SV32 page table walk
-      hw/riscv: Add optional symbol callback ptr to riscv_load_firmware()
-      hw/riscv/spike: Allow loading firmware separately using -bios option
-      hw/riscv/spike: Allow more than one CPUs
-
-Bin Meng (3):
-      riscv/sifive_u: Add a serial property to the sifive_u machine
-      hw/riscv: Generate correct "mmu-type" for 32-bit machines
-      roms: opensbi: Upgrade from v0.6 to v0.7
-
-Corey Wharton (2):
-      riscv: sifive_e: Support changing CPU type
-      target/riscv: Add a sifive-e34 cpu type
-
-LIU Zhiwei (1):
-      linux-user/riscv: fix up struct target_ucontext definition
-
- hw/riscv/boot.c                              |  13 ++-
- hw/riscv/sifive_e.c                          |   5 +-
- hw/riscv/sifive_u.c                          | 142 ++++++++++++++++-----------
- hw/riscv/spike.c                             |  30 +++++-
- hw/riscv/virt.c                              |   6 +-
- include/hw/riscv/boot.h                      |   6 +-
- include/hw/riscv/sifive_u.h                  |   3 +
- linux-user/riscv/signal.c                    |   3 +-
- pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin | Bin 49472 -> 49520 bytes
- pc-bios/opensbi-riscv32-virt-fw_jump.bin     | Bin 41280 -> 49504 bytes
- pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin | Bin 53760 -> 57936 bytes
- pc-bios/opensbi-riscv64-virt-fw_jump.bin     | Bin 49664 -> 57920 bytes
- roms/opensbi                                 |   2 +-
- target/riscv/cpu.c                           |  10 ++
- target/riscv/cpu.h                           |   1 +
- target/riscv/cpu_helper.c                    |  18 ++--
- 16 files changed, 159 insertions(+), 80 deletions(-)
 
