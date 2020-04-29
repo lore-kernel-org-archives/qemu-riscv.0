@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jTraE-0008PT-1R
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37384)
+	id 1jTraF-0008SU-7O
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37390)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTra8-0008E0-Id
+ id 1jTra8-0008Ef-UL
  for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:19 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTra5-0003Sl-Ut
+ id 1jTra6-0003Sy-5Y
  for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:16 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:2041)
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:2035)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTra5-0003PZ-AX; Wed, 29 Apr 2020 14:37:13 -0400
+ id 1jTra5-0003PL-F1; Wed, 29 Apr 2020 14:37:13 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
  t=1588185434; x=1619721434;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=O7jL6iWlSIEmOeLlTVLecE6kMsdHolcxkpW6c3HjIWE=;
- b=APeewc8SLinXzReE31C3ZVzUmdbDlZ/WSVbV/Ub/ctjt515duKD5o+PB
- L7AW0iZuiw3vWcE2UIBoNUIIHJ+gD81HMG7lVzl6WJYP1MVVEeUjb4drD
- i5JihxrG6OA2NeNzPhYp7cOId4b6O/b4fwdbRdi/h6z5C93gzpb1dxO7N
- Mb9r7lAX33iC62SuKLTIP/6crOlLX6vIM0iivsSNUc1W2IJGlcJov250W
- KSX6Wry5Eo2MEzK3HPGOLvq5wY5fMnKSIGfR/mbMi2CIn8N3rrm73uhPT
- Fa/5ogfnXgvtW4oAgq3RW81IY4cVSltyrhC4Exgkw1AqnXPpbZ2CDYPxN Q==;
-IronPort-SDR: LOCm9Not8pjUFJhyBPd+z89woasG4fV87YetsjEVZ98CSClOLamz8nbnBQSLicC7/fktn0Td1e
- TTSOMUcRZnyxBlRP4sZP+ttZ1Ly+g+MfqgWu8Sm3vxnM4yNfoPkgxNef2K5UrYxNLbXc5kFWTE
- D/oL6Oo35M7KP2GbBtKndGMtSaAypB2lZeVY3HfnR17/SAByRJyc+Xi7+XJWwFWSay9/GiiTVK
- 0/OdvV03tqFgXL/OAmtRyiPdD6S4r3TU+JLwbGaOIbP6t5cF8/923bFK1EHJvIhJV4KW+2YLDJ
- lfY=
-X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935144"
+ bh=uth3SOy7J70UXYgMlMkEumsDQFWDBmDIt0wImRmilQQ=;
+ b=UY4GTyPgobkdf/2b5gmBg+q9tLK/Nz5thcHTOmObrWNCZoNAGx/5W7uI
+ srVeR/BxkxoLFfiqalF7XHLBlacF1w2YfNeTklVLSCSN0MUVOCw4ANmhY
+ NPBB3HNTh6hOg16XYjQQ+7xOvgjsU6Nr7gOX/ryC9pde27/JR+ESU7V6g
+ LI4lHqfPtA/lMo6WQJH8gvMjk2WrdvVtW5LnGWT/Got4TUna2MBjN+FaL
+ FTxwP0J06ua6OG94ufzX0K5XBzQvppM6EJNniHljpWS5UGyAN/06o9BZ/
+ 5P25jzY1luPcbFrgxs68b+nOhFYwu9aiQZJiR3YqK7yAIwZSwmI0kB9Jg w==;
+IronPort-SDR: 7wVa8qGSN35GJJM8a2kecfPF8uTylSr/EQX3+hGY4r19IUnabMXPS4rwFMQg+FWXkk6T4EmXG5
+ AJz30k31fN81ExhxcV7bvL6tuqDKHn/6DckS+PtMYO3QCPzwscQTK6GwO6sCr6y5/IPt16pwlx
+ G7RnVgwKuVtGl6uISmQxwHtP9l43KShLaepbf0ECatpo9FvOvT56TXlvuxQsqoN8mU/wHpHlfd
+ FzRlGutB32RiYx9aDH1GJMrFbHv/G2MJchyWOKD6kXW0EwjI7NIwnuFJIeNad/0cYPPHsV/1ZE
+ YrY=
+X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935146"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
  by ob1.hgst.iphmx.com with ESMTP; 30 Apr 2020 02:37:06 +0800
-IronPort-SDR: 79Gem3mkFByogtgz/CvaPvjnpmN3c6MBM7Yi61e5YUcQ6N+Hb3JVGRxunVa7ZNAdYAAop5Iyi9
- 1wfE3aRsWh4QzISv4kw3MxCbn9eCLndZs=
+IronPort-SDR: /zRL849gXteY/znLM78iVERjyJ5BR84DK/W9wRnq3LELcMgxIxfO8LtIPQv4JIlE0V/ZePf4kn
+ adjDSV2vD9bqJ9NwkrWOCcTLEYXMk68ac=
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  29 Apr 2020 11:27:10 -0700
-IronPort-SDR: v8gHI1QJExYs2uLQ0iBbeX557HXKLtOlZnxdDaJjhApS1nqkNXXPQfFwZB+NcqbFvcj4o+Odg7
- S0XcFGsyZKqQ==
+IronPort-SDR: 1dgaDGiAqqODlBTSFMFfNB6jSrEMkMF4WYn3AsXp+NkSV89OQFg9rGumJ1YBXM/8YaELiHUgFv
+ ewwHpgjFyMuQ==
 WDCIronportException: Internal
 Received: from cnf007834.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.55.253])
@@ -50,14 +50,17 @@ Received: from cnf007834.ad.shared (HELO risc6-mainframe.hgst.com)
 From: Alistair Francis <alistair.francis@wdc.com>
 To: peter.maydell@linaro.org
 Cc: palmerdabbelt@google.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>
-Subject: [PULL 07/14] hw/riscv: Generate correct "mmu-type" for 32-bit machines
-Date: Wed, 29 Apr 2020 11:28:49 -0700
-Message-Id: <20200429182856.2588202-8-alistair.francis@wdc.com>
+ Corey Wharton <coreyw7@fb.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Subject: [PULL 08/14] riscv: sifive_e: Support changing CPU type
+Date: Wed, 29 Apr 2020 11:28:50 -0700
+Message-Id: <20200429182856.2588202-9-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200429182856.2588202-1-alistair.francis@wdc.com>
 References: <20200429182856.2588202-1-alistair.francis@wdc.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=216.71.154.45;
  envelope-from=prvs=381fbd49e=alistair.francis@wdc.com;
@@ -78,69 +81,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 29 Apr 2020 18:37:19 -0000
 
-From: Bin Meng <bmeng.cn@gmail.com>
+From: Corey Wharton <coreyw7@fb.com>
 
-32-bit machine should have its CPU's "mmu-type" set to "riscv,sv32".
+Allows the CPU to be changed from the default via the -cpu command
+line option.
 
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Signed-off-by: Corey Wharton <coreyw7@fb.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Message-id: 1583585319-26603-1-git-send-email-bmeng.cn@gmail.com
-Message-Id: <1583585319-26603-1-git-send-email-bmeng.cn@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Message-id: 20200313193429.8035-2-coreyw7@fb.com
+Message-Id: <20200313193429.8035-2-coreyw7@fb.com>
+[ Changes by AF:
+ - Set "cpu-type" from the machine and not SoC
+]
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/sifive_u.c | 4 ++++
- hw/riscv/spike.c    | 4 ++++
- hw/riscv/virt.c     | 4 ++++
- 3 files changed, 12 insertions(+)
+ hw/riscv/sifive_e.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index eb0abcae89..0dd0efaa68 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -160,7 +160,11 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-         qemu_fdt_add_subnode(fdt, nodename);
-         /* cpu 0 is the management hart that does not have mmu */
-         if (cpu != 0) {
-+#if defined(TARGET_RISCV32)
-+            qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
-+#else
-             qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
-+#endif
-             isa = riscv_isa_string(&s->soc.u_cpus.harts[cpu - 1]);
-         } else {
-             isa = riscv_isa_string(&s->soc.e_cpus.harts[0]);
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 5053fe4590..98697a244e 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -102,7 +102,11 @@ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
-         char *intc = g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
-         char *isa = riscv_isa_string(&s->soc.harts[cpu]);
-         qemu_fdt_add_subnode(fdt, nodename);
-+#if defined(TARGET_RISCV32)
-+        qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
-+#else
-         qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
-+#endif
-         qemu_fdt_setprop_string(fdt, nodename, "riscv,isa", isa);
-         qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv");
-         qemu_fdt_setprop_string(fdt, nodename, "status", "okay");
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 85ec9e22aa..c621a970aa 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -229,7 +229,11 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-         char *intc = g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
-         char *isa = riscv_isa_string(&s->soc.harts[cpu]);
-         qemu_fdt_add_subnode(fdt, nodename);
-+#if defined(TARGET_RISCV32)
-+        qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
-+#else
-         qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
-+#endif
-         qemu_fdt_setprop_string(fdt, nodename, "riscv,isa", isa);
-         qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv");
-         qemu_fdt_setprop_string(fdt, nodename, "status", "okay");
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 646553a7c3..b53109521e 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -123,8 +123,6 @@ static void riscv_sifive_e_soc_init(Object *obj)
+     object_initialize_child(obj, "cpus", &s->cpus,
+                             sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
+                             &error_abort, NULL);
+-    object_property_set_str(OBJECT(&s->cpus), SIFIVE_E_CPU, "cpu-type",
+-                            &error_abort);
+     object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
+                             &error_abort);
+     sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
+@@ -141,6 +139,8 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+     SiFiveESoCState *s = RISCV_E_SOC(dev);
+     MemoryRegion *sys_mem = get_system_memory();
+ 
++    object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
++                            &error_abort);
+     object_property_set_bool(OBJECT(&s->cpus), true, "realized",
+                             &error_abort);
+ 
+@@ -219,6 +219,7 @@ static void riscv_sifive_e_machine_init(MachineClass *mc)
+     mc->desc = "RISC-V Board compatible with SiFive E SDK";
+     mc->init = riscv_sifive_e_init;
+     mc->max_cpus = 1;
++    mc->default_cpu_type = SIFIVE_E_CPU;
+ }
+ 
+ DEFINE_MACHINE("sifive_e", riscv_sifive_e_machine_init)
 -- 
 2.26.2
 
