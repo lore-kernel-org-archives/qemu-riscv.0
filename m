@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jTraU-0000YY-Gp
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37552)
+	id 1jTraW-0000dK-Mv
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37574)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTraS-0000U8-2A
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:36 -0400
+ id 1jTraT-0000X8-KG
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:39 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTraR-0003oN-C7
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:35 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:2049)
+ id 1jTraS-0003tS-L0
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:37 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:2041)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTraQ-0003Ps-M7; Wed, 29 Apr 2020 14:37:34 -0400
+ id 1jTraR-0003PZ-UK; Wed, 29 Apr 2020 14:37:36 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1588185455; x=1619721455;
+ t=1588185456; x=1619721456;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=tbkmc57R+L0aN9VLZbhIXSvamug7nnx7kvOn3zmvZfk=;
- b=mz31XhIY5E/vWsgAFLOomn2VzqjWolHd362+qrIAmoGibhJUQjuN07SQ
- c+wkQzcF1IbPJKL/kqYuKedH1xPkpHArgIDWecADwuU3uAa+ydmA7jzl+
- +xL/5zXjXDCz39Guia2jPwPZ9UeWC16hwsA6sKpgjoL2O8iRh+HvIwkYZ
- xWZqGK2eMFW+2o7Eucel9Gyh55T/iY/lMefW4DRrdF/VprnsnrD1QN/U4
- BJK2FUFZF0In0IxBAwIWnLD3rGqigwIQ8LSJFh7irhkKJNx4gmxJZcPl+
- yDqBNe+zMriy8f7QronHvSiRDEj1aQIlYAICjq+qaZFsBvAf/RSHITvxt Q==;
-IronPort-SDR: tAFnAgZBtRfSAbsQHi7cpkZ5W1Xfoto/qyqkl75xVRx/lrfCoFil2Vv7twW4vb/qhF7bruV4qk
- 3a+CuSCAz0e3urcruwrOyzcAjnKZ0trye7gs8gBzPfYbsv/aFDpehpnMki5ZPl+JGl4Evs9uYa
- r1g7lJHFm4NcyX2ozzdyEhMrUU1SUrTCN+P1ZTnhbBlWk+URUIbH3eVr9ryseoa4lQ8v4VdB+N
- aGCy32SZGopSGbzdA/xioPEg6Ak1ZF0YO1IAPxWsAQSea8j91DA6/8kVMRvBz9oXFUrna7aWxz
- erk=
-X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935149"
+ bh=y2PxtJkBDcgg6/2XLAnv6fsOHXzs6BDrOSXRANlXYzY=;
+ b=mn5GPnWahF0SSYMB+KJTYX+Bz0X6KTpe6P23EaK/wLRQ9XjhTPoYbeTI
+ cwzsqmGJ+lMYcn8oKQyusgF0AZovfP1CwXBVipCdJId9ER4NHzQYp2Qm3
+ G6B9bHHqxcj8YxmhjtsUYN1JJNghpzDenzsF6YSupnbBueDb/6B6Auyb9
+ BCJYXPW3E8f1i5ZDQCXBe/I2I3/BADU8fQvm6YZEjVj3YDdGuzZDkLxE4
+ nyVRefoHyFQSWQsP4PeIa6bN/tSWx9lxZkCLPlP/4w/W4lZafKUxJm0Su
+ f8rWdqeKHjZ+fra43KN3AN+T8X2lWZhd0/+NZSo0xHA7d9Ddky5vFlPMQ Q==;
+IronPort-SDR: rb87Y5vK68j6vVbTXfNhyxM8FSo2lCNhZCQObX3qgm7s0cqktVNCICRFvreHalMz0L+YPSgsZ+
+ tvD8uKJnDT6feR4xfgRRph7KnCnJvqYuHj2NWUYqxZtH6dGfCt6UHesa2lOsESjWwIVmeXhvRx
+ mS3+TALbOgbToTQM2zr58p6aItFmyCbrfWzmz15Z4vRkxyM2uQQoUX/BqvT2KiJ+/2uIv0FWnp
+ o1CcQWZjHngowoQP6o9qxDU7p4I4W1WYAnNldaIUB3uLJK76RuVel9xmWVWGM7hHMfAZbw+fT5
+ 928=
+X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935156"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 30 Apr 2020 02:37:07 +0800
-IronPort-SDR: imqoSWRzhUVgNpwXzrNF/djgQwWMqMKJ6YFMbbQLRSSfd226rRzpzMJe+Uc8mmp8T4wEOaps3j
- toD5e0A6fGLC6LREiSru3mKce0QZjUkUg=
+ by ob1.hgst.iphmx.com with ESMTP; 30 Apr 2020 02:37:08 +0800
+IronPort-SDR: /pKT4rYuVgi5xIK10DKDcNZPHR/dCwUuVmf0o25JXK2MOCCc5JgT8OCJTZDx0DUqqvjA5n5v3w
+ S1ObzZGN+4DTSfS9a6nfQ1Q5nucr/T/y8=
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 29 Apr 2020 11:27:11 -0700
-IronPort-SDR: 7wl+mEfBXH9Bh9GC/LqFxh6jl3RugCiQg0KxEwWpjGnY62k6F0CShiq9cbp31kpsME+nkrNdMa
- 2q0T6OOpH/Lw==
+ 29 Apr 2020 11:27:12 -0700
+IronPort-SDR: /ylXJcU/lduVDPmJK/b0Zxt1cLPHkpVDjXJR40jSeY39WHzTbIJh/pC+gljo5TJm2gUHCOfCZA
+ wwQ7imovOTLw==
 WDCIronportException: Internal
 Received: from cnf007834.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.55.253])
- by uls-op-cesaip01.wdc.com with ESMTP; 29 Apr 2020 11:37:04 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 29 Apr 2020 11:37:06 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: peter.maydell@linaro.org
 Cc: palmerdabbelt@google.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Corey Wharton <coreyw7@fb.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [PULL 09/14] target/riscv: Add a sifive-e34 cpu type
-Date: Wed, 29 Apr 2020 11:28:51 -0700
-Message-Id: <20200429182856.2588202-10-alistair.francis@wdc.com>
+ Anup Patel <anup.patel@wdc.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PULL 12/14] hw/riscv: Add optional symbol callback ptr to
+ riscv_load_firmware()
+Date: Wed, 29 Apr 2020 11:28:54 -0700
+Message-Id: <20200429182856.2588202-13-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200429182856.2588202-1-alistair.francis@wdc.com>
 References: <20200429182856.2588202-1-alistair.francis@wdc.com>
@@ -77,64 +78,117 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2020 18:37:36 -0000
+X-List-Received-Date: Wed, 29 Apr 2020 18:37:39 -0000
 
-From: Corey Wharton <coreyw7@fb.com>
+From: Anup Patel <anup.patel@wdc.com>
 
-The sifive-e34 cpu type is the same as the sifive-e31 with the
-single precision floating-point extension enabled.
+This patch adds an optional function pointer, "sym_cb", to
+riscv_load_firmware() which provides the possibility to access
+the symbol table during kernel loading.
 
-Signed-off-by: Corey Wharton <coreyw7@fb.com>
+The pointer is ignored, if supplied with flat (non-elf) firmware image.
+
+The Spike board requires it locate the HTIF symbols from firmware ELF
+passed via "-bios" option.
+
+Signed-off-by: Anup Patel <anup.patel@wdc.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Message-id: 20200313193429.8035-3-coreyw7@fb.com
-Message-Id: <20200313193429.8035-3-coreyw7@fb.com>
+Message-id: 20200427080644.168461-2-anup.patel@wdc.com
+Message-Id: <20200427080644.168461-2-anup.patel@wdc.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 10 ++++++++++
- target/riscv/cpu.h |  1 +
- 2 files changed, 11 insertions(+)
+ hw/riscv/boot.c         | 13 ++++++++-----
+ hw/riscv/sifive_u.c     |  2 +-
+ hw/riscv/virt.c         |  2 +-
+ include/hw/riscv/boot.h |  6 ++++--
+ 4 files changed, 14 insertions(+), 9 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 4e578239d3..059d71f2c7 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -164,6 +164,15 @@ static void rv32imacu_nommu_cpu_init(Object *obj)
-     set_feature(env, RISCV_FEATURE_PMP);
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index b8e765277d..726300a171 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -36,7 +36,8 @@
+ 
+ void riscv_find_and_load_firmware(MachineState *machine,
+                                   const char *default_machine_firmware,
+-                                  hwaddr firmware_load_addr)
++                                  hwaddr firmware_load_addr,
++                                  symbol_fn_t sym_cb)
+ {
+     char *firmware_filename = NULL;
+ 
+@@ -76,7 +77,7 @@ void riscv_find_and_load_firmware(MachineState *machine,
+ 
+     if (firmware_filename) {
+         /* If not "none" load the firmware */
+-        riscv_load_firmware(firmware_filename, firmware_load_addr);
++        riscv_load_firmware(firmware_filename, firmware_load_addr, sym_cb);
+         g_free(firmware_filename);
+     }
+ }
+@@ -96,12 +97,14 @@ char *riscv_find_firmware(const char *firmware_filename)
  }
  
-+static void rv32imafcu_nommu_cpu_init(Object *obj)
-+{
-+    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVC | RVU);
-+    set_priv_version(env, PRIV_VERSION_1_10_0);
-+    set_resetvec(env, DEFAULT_RSTVEC);
-+    set_feature(env, RISCV_FEATURE_PMP);
-+}
-+
- #elif defined(TARGET_RISCV64)
+ target_ulong riscv_load_firmware(const char *firmware_filename,
+-                                 hwaddr firmware_load_addr)
++                                 hwaddr firmware_load_addr,
++                                 symbol_fn_t sym_cb)
+ {
+     uint64_t firmware_entry, firmware_start, firmware_end;
  
- static void riscv_base64_cpu_init(Object *obj)
-@@ -610,6 +619,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
- #if defined(TARGET_RISCV32)
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           riscv_base32_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32imacu_nommu_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32imafcu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32gcsu_priv1_10_0_cpu_init),
-     /* Depreacted */
-     DEFINE_CPU(TYPE_RISCV_CPU_RV32IMACU_NOMMU,  rv32imacu_nommu_cpu_init),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7d21addbab..d0e7f5b9c5 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -36,6 +36,7 @@
- #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
- #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
- #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
-+#define TYPE_RISCV_CPU_SIFIVE_E34       RISCV_CPU_TYPE_NAME("sifive-e34")
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
- #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
+-    if (load_elf(firmware_filename, NULL, NULL, NULL, &firmware_entry,
+-                 &firmware_start, &firmware_end, NULL, 0, EM_RISCV, 1, 0) > 0) {
++    if (load_elf_ram_sym(firmware_filename, NULL, NULL, NULL,
++                         &firmware_entry, &firmware_start, &firmware_end, NULL,
++                         0, EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
+         return firmware_entry;
+     }
+ 
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 0dd0efaa68..cfd6416b19 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -352,7 +352,7 @@ static void sifive_u_machine_init(MachineState *machine)
+     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+ 
+     riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+-                                 memmap[SIFIVE_U_DRAM].base);
++                                 memmap[SIFIVE_U_DRAM].base, NULL);
+ 
+     if (machine->kernel_filename) {
+         uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index c621a970aa..daae3ebdbb 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -511,7 +511,7 @@ static void riscv_virt_board_init(MachineState *machine)
+                                 mask_rom);
+ 
+     riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+-                                 memmap[VIRT_DRAM].base);
++                                 memmap[VIRT_DRAM].base, NULL);
+ 
+     if (machine->kernel_filename) {
+         uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index df80051fbc..474a940ad5 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -24,10 +24,12 @@
+ 
+ void riscv_find_and_load_firmware(MachineState *machine,
+                                   const char *default_machine_firmware,
+-                                  hwaddr firmware_load_addr);
++                                  hwaddr firmware_load_addr,
++                                  symbol_fn_t sym_cb);
+ char *riscv_find_firmware(const char *firmware_filename);
+ target_ulong riscv_load_firmware(const char *firmware_filename,
+-                                 hwaddr firmware_load_addr);
++                                 hwaddr firmware_load_addr,
++                                 symbol_fn_t sym_cb);
+ target_ulong riscv_load_kernel(const char *kernel_filename,
+                                symbol_fn_t sym_cb);
+ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
 -- 
 2.26.2
 
