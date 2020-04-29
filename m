@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jTraC-0008LU-BQ
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37380)
+	id 1jTraD-0008Mz-3C
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Apr 2020 14:37:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37354)
  by lists.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTra8-0008DR-B6
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:18 -0400
+ id 1jTra6-00088u-7h
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:16 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTra5-0003Se-V2
- for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:16 -0400
+ id 1jTra4-0003Rc-KV
+ for qemu-riscv@nongnu.org; Wed, 29 Apr 2020 14:37:13 -0400
 Received: from esa6.hgst.iphmx.com ([216.71.154.45]:2049)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=381fbd49e=alistair.francis@wdc.com>)
- id 1jTra5-0003Ps-8D; Wed, 29 Apr 2020 14:37:13 -0400
+ id 1jTra4-0003Ps-08; Wed, 29 Apr 2020 14:37:12 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1588185434; x=1619721434;
+ t=1588185432; x=1619721432;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=H3Rf0GK2uIFQ8+W/s2BSGxfdGYDmRN5HO2AJN6YT9+s=;
- b=gLvfl+mUoF6QViAfi0TQRNW9BxVhhhwwSqTPVcl7QXNxoZNkT+Ds6MFO
- AHon52DbrAeS9OURcv+oHsZXBheX6BSGut2JHMZ3ocIPgSg/Cji/nlkrI
- V079Z/iKZ2LshAIuawMD2TGAbeVwIowSRDpx2WLWjjDvnypAK7Z0yYYpB
- JCtbpW46mAJv6jepSj9ycaIodfeRHWnpZJdUEJyOWX5LA2k/6oojHmhN2
- lTrA23zJDsydjKcPatVZNGZiY/7ZsWTFQ3v5u0gYazizCqYLacdbKRPWq
- b2MQUMrdBRJue6QRQt4m4M1mgozIJLDrhie6xp7HKwKUUBguQGzZO/Kvb Q==;
-IronPort-SDR: Odtz9RtK4yukYFjLkl7PPCBAXAcQYRKgeiGfVWnvO4Btfsl+ZeIhicSJ3OrJfEwkFTWUtijMAP
- gXXY2OWGcEmrWRBN/CZbZJd8Ma0ZEekr8y4MRaCbWP99Y/QKhqaBFQolPoKetc3fpv3S5wJ+bB
- 8Cf2iUjk5EjRW+5OB6YGzE9IAu8fhAF8lsM9nRZd8+1Bsqqb6817T0ZgnvQVA265We2uaF20B+
- tVObTrLV9m5MhAqVee5Rbjl5qYmL4FraOYxz2KsbBnuDyfpBKqOXmfOXWz6dYtUsKulyUATwJ9
- qZ8=
-X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935142"
+ bh=V4JMB03R57xU/l231U+ZmY2qS+gGKlGPiocloP9j6yI=;
+ b=XF99wHMhgFy1GmHhQTWWFEUPa8TH/Vz1/CvEnDGcZq4wDnzlNM6YInVS
+ u234OMWd3IkWLrK13Kn5ZLeCDz7noPInu4kqB6dbH/q6doaQiGarZlNt9
+ JLh0NR2Q/dmjOTBMwR96hUmr29bj0citxP2Wt64yUrtH83MDQMHErBekt
+ 4UQI4UMPcVI6ebcPtSfhTKBmKOA+gS+88qQbp0x1dTCw7X/uxsogLRpLZ
+ EJe4zuNJnB/taoo3pQJ3PAX7hC3Nk74X6Wkd2mrs61cXe/2eNZLU0Hui3
+ HNTI3a06ekJ0Nnf4uQwT0GC1oiwT5Wfr34iUzVvgByTVDMWR/DI6saJG9 g==;
+IronPort-SDR: SfMcyCMQkKxBjHuYR6Acg08w8qIZMLWcsbgJSQBpXfMPEtk3bE6hNrpnVowOg9uDEV+vQ8M1nM
+ hd5cKECxRi9917A6AaKypxGp2wx1Rkil8hr3Ivtn9ayW3iaa7y9qDHMf6PDSEXQ4ZgfZQhZXVy
+ KudC48TxhD7v352M2tsQ5qKc8mU66p/UZzVcb0oRMj/QcBiBUzqSsNnU+Pf0R/0yZeiOvwdxtz
+ Ag9KAKrJjDL13obt3Wsdlxmr2aj9Fclq+U5Ms6y6QzLUR7XBSzumALe6P6KeTx3C0vAQ5Gx+Td
+ CWQ=
+X-IronPort-AV: E=Sophos;i="5.73,332,1583164800"; d="scan'208";a="137935140"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 30 Apr 2020 02:37:06 +0800
-IronPort-SDR: UXb1/ASlPfPPHstv3Tk3GT+kdTbkLEcq10ZQkC4eQsFmPBN1sntJkXq0PNg9UNJ33lzVeF9Pm4
- wR0F6HqOKrP4pRLB4oEJffI/oUOY96uSw=
+ by ob1.hgst.iphmx.com with ESMTP; 30 Apr 2020 02:37:05 +0800
+IronPort-SDR: SgFEKWjHZ5FwDFTOdjRF/MKvSTsnfSrGgZiyuYYLbKfL99E5DKUOs31tt7i2nr/4UpfwJdgPcU
+ c3k9GtoerLkjZdU/w7qXyN/pYIA1fhMOM=
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 29 Apr 2020 11:27:10 -0700
-IronPort-SDR: oacbIocZ4C1rRt/d5AjOi+jHqCXiVXYBwKJrxI1Y2JpdI9i3/LTVFOhvRzjRQM8jQQvhX+Kbke
- MNy5oH+WvOiA==
+ 29 Apr 2020 11:27:09 -0700
+IronPort-SDR: fETdQyidHjnMHYlUrkY61gFLkGOW8y0zGJIF4cSrpIpK1ArQaC7GFNiEBuxZpB9/jdGgVsWT7p
+ 06eSB16oKD4Q==
 WDCIronportException: Internal
 Received: from cnf007834.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.55.253])
- by uls-op-cesaip01.wdc.com with ESMTP; 29 Apr 2020 11:37:04 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 29 Apr 2020 11:37:03 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: peter.maydell@linaro.org
 Cc: palmerdabbelt@google.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Anup Patel <anup.patel@wdc.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PULL 06/14] riscv: Fix Stage2 SV32 page table walk
-Date: Wed, 29 Apr 2020 11:28:48 -0700
-Message-Id: <20200429182856.2588202-7-alistair.francis@wdc.com>
+ Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Anup Patel <anup@brainfault.org>
+Subject: [PULL 05/14] riscv: AND stage-1 and stage-2 protection flags
+Date: Wed, 29 Apr 2020 11:28:47 -0700
+Message-Id: <20200429182856.2588202-6-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200429182856.2588202-1-alistair.francis@wdc.com>
 References: <20200429182856.2588202-1-alistair.francis@wdc.com>
@@ -77,54 +78,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2020 18:37:19 -0000
+X-List-Received-Date: Wed, 29 Apr 2020 18:37:17 -0000
 
-From: Anup Patel <anup.patel@wdc.com>
+Take the result of stage-1 and stage-2 page table walks and AND the two
+protection flags together. This way we require both to set permissions
+instead of just stage-2.
 
-As-per RISC-V H-Extension v0.5 draft, the Stage2 SV32 page table has
-12bits of VPN[1] and 10bits of VPN[0]. The additional 2bits in VPN[1]
-is required to handle the 34bit intermediate physical address coming
-from Stage1 SV32 page table. The 12bits of VPN[1] implies that Stage2
-SV32 level-0 page table will be 16KB in size with total 4096 enteries
-where each entry maps 4MB of memory (same as Stage1 SV32 page table).
-
-The get_physical_address() function is broken for Stage2 SV32 level-0
-page table because it incorrectly computes output physical address for
-Stage2 SV32 level-0 page table entry.
-
-The root cause of the issue is that get_physical_address() uses the
-"widened" variable to compute level-0 physical address mapping which
-changes level-0 mapping size (instead of 4MB). We should use the
-"widened" variable only for computing index of Stage2 SV32 level-0
-page table.
-
-Signed-off-by: Anup Patel <anup.patel@wdc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Message-id: 20200330082724.120444-1-anup.patel@wdc.com
-Message-Id: <20200330082724.120444-1-anup.patel@wdc.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Tested-by: Anup Patel <anup@brainfault.org>
+Message-id: 846f1e18f5922d818bc464ec32c144ef314ec724.1585262586.git.alistair.francis@wdc.com
+Message-Id: <846f1e18f5922d818bc464ec32c144ef314ec724.1585262586.git.alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ target/riscv/cpu_helper.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 50e13a064f..bc80aa87cf 100644
+index f36d184b7b..50e13a064f 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -559,12 +559,7 @@ restart:
-             /* for superpage mappings, make a fake leaf PTE for the TLB's
-                benefit. */
-             target_ulong vpn = addr >> PGSHIFT;
--            if (i == 0) {
--                *physical = (ppn | (vpn & ((1L << (ptshift + widened)) - 1))) <<
--                             PGSHIFT;
--            } else {
--                *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
--            }
-+            *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
+@@ -707,7 +707,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+ #ifndef CONFIG_USER_ONLY
+     vaddr im_address;
+     hwaddr pa = 0;
+-    int prot;
++    int prot, prot2;
+     bool pmp_violation = false;
+     bool m_mode_two_stage = false;
+     bool hs_mode_two_stage = false;
+@@ -757,13 +757,15 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+             /* Second stage lookup */
+             im_address = pa;
  
-             /* set permissions on the TLB entry */
-             if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
+-            ret = get_physical_address(env, &pa, &prot, im_address,
++            ret = get_physical_address(env, &pa, &prot2, im_address,
+                                        access_type, mmu_idx, false, true);
+ 
+             qemu_log_mask(CPU_LOG_MMU,
+                     "%s 2nd-stage address=%" VADDR_PRIx " ret %d physical "
+                     TARGET_FMT_plx " prot %d\n",
+-                    __func__, im_address, ret, pa, prot);
++                    __func__, im_address, ret, pa, prot2);
++
++            prot &= prot2;
+ 
+             if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+                 (ret == TRANSLATE_SUCCESS) &&
 -- 
 2.26.2
 
