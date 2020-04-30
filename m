@@ -1,34 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jU3YE-0005bt-6J
+	id 1jU3YE-0005cX-Cf
 	for mharc-qemu-riscv@gnu.org; Thu, 30 Apr 2020 03:24:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34424)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34432)
  by lists.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jU3Y4-0005Dq-KU
- for qemu-riscv@nongnu.org; Thu, 30 Apr 2020 03:24:02 -0400
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jU3Y6-0005EA-0F
+ for qemu-riscv@nongnu.org; Thu, 30 Apr 2020 03:24:04 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <zhiwei_liu@c-sky.com>) id 1jU3Xx-0001fN-LV
- for qemu-riscv@nongnu.org; Thu, 30 Apr 2020 03:23:56 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:46144)
+ (envelope-from <zhiwei_liu@c-sky.com>) id 1jU3Xy-0001fZ-7w
+ for qemu-riscv@nongnu.org; Thu, 30 Apr 2020 03:23:57 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:33340)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jU3W6-0006WW-Pu; Thu, 30 Apr 2020 03:21:55 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green;
+ id 1jU3W7-0006Wl-8B; Thu, 30 Apr 2020 03:21:55 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436297|-1; CH=green;
  DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.704462-0.000721421-0.294816;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01l07447; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ DS=CONTINUE|ham_system_inform|0.00411137-0.00097916-0.994909;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03308; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
  RN=10; RT=10; SR=0; TI=SMTPD_---.HQfovas_1588231302; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.HQfovas_1588231302) by smtp.aliyun-inc.com(10.147.40.7);
- Thu, 30 Apr 2020 15:21:43 +0800
+ Thu, 30 Apr 2020 15:21:46 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: peter.maydell@linaro.org
 Cc: richard.henderson@linaro.org, alistair23@gmail.com, palmer@dabbelt.com,
  wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com, qemu-devel@nongnu.org,
  alex.bennee@linaro.org, qemu-riscv@nongnu.org,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [RFC PATCH 1/8] riscv: Add RV64I instructions description
-Date: Thu, 30 Apr 2020 15:21:32 +0800
-Message-Id: <20200430072139.4602-2-zhiwei_liu@c-sky.com>
+Subject: [RFC PATCH 8/8] riscv: Add RV64F instructions description
+Date: Thu, 30 Apr 2020 15:21:39 +0800
+Message-Id: <20200430072139.4602-9-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200430072139.4602-1-zhiwei_liu@c-sky.com>
 References: <20200430072139.4602-1-zhiwei_liu@c-sky.com>
@@ -50,161 +50,100 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Apr 2020 07:24:03 -0000
+X-List-Received-Date: Thu, 30 Apr 2020 07:24:04 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- riscv64.risu | 141 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 141 insertions(+)
- create mode 100644 riscv64.risu
+ riscv64.risu | 78 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 78 insertions(+)
 
 diff --git a/riscv64.risu b/riscv64.risu
-new file mode 100644
-index 0000000..98141ab
---- /dev/null
+index f006dc8..0b81dfb 100644
+--- a/riscv64.risu
 +++ b/riscv64.risu
-@@ -0,0 +1,141 @@
-+# Input file for risugen defining RISC-V instructions
-+.mode riscv
-+@RV64I
-+
-+# x2 stack pointer, x3 global pointer, x4 thread pointer
-+# These registers should be reserved for signal handler.
-+
-+LUI RISCV imm:20 rd:5 0110111 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 }
-+
-+AUIPC RISCV imm:20 rd:5 0110111 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 }
-+
-+# Limit to current implementation, the base address register will be overide
-+LB RISCV imm:12 rs1:5 000 rd:5 0000011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 0 && $rs1 != 2 && $rs1 != 3 && $rs1 != 4 } \
-+!memory { align(1); reg_plus_imm($rs1, sextract($imm, 12)); }
-+
-+LH RISCV imm:12 rs1:5 001 rd:5 0000011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 0 && $rs1 != 2 && $rs1 != 3 && $rs1 != 4 } \
-+!memory { align(2); reg_plus_imm($rs1, sextract($imm, 12)); }
-+
-+LW RISCV imm:12 rs1:5 010 rd:5 0000011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 0 && $rs1 != 2 && $rs1 != 3 && $rs1 != 4 } \
+@@ -181,4 +181,82 @@ REMW RISCV 0000001 rs2:5 rs1:5 110 rd:5 0111011 \
+ REMUW RISCV 0000001 rs2:5 rs1:5 111 rd:5 0111011 \
+ !constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
+ 
++@RV64F
+ 
++FLW RISCV imm:12 rs1:5 010 rd:5 0000111 \
++!constraints { $rs1 != 0 && $rs1 != 2 && $rs1 !=3 && $rs1 != 4 } \
 +!memory { align(4); reg_plus_imm($rs1, sextract($imm, 12)); }
 +
-+LBU RISCV imm:12 rs1:5 100 rd:5 0000011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 0 && $rs1 != 2 && $rs1 != 3 && $rs1 != 4 } \
-+!memory { align(1); reg_plus_imm($rs1, sextract($imm, 12)); }
-+
-+LHU RISCV imm:12 rs1:5 101 rd:5 0000011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 0 && $rs1 != 2 && $rs1 != 3 && $rs1 != 4 } \
-+!memory { align(2); reg_plus_imm($rs1, sextract($imm, 12)); }
-+
-+SB RISCV imm5:7 rs2:5 rs1:5 000 imm:5 0100011 \
-+!constraints { $rs1 != 0 && $rs1 != 2 && $rs1 !=3 && $rs1 != 4 && $rs2 != 2 } \
-+!memory { align(1); reg_plus_imm($rs1, sextract($imm5 << 5 | $imm, 12)); }
-+
-+SH RISCV imm5:7 rs2:5 rs1:5 001 imm:5 0100011 \
-+!constraints { $rs1 != 0 && $rs1 != 2 && $rs1 !=3 && $rs1 != 4 && $rs2 != 2 } \
-+!memory { align(2); reg_plus_imm($rs1, sextract($imm5 << 5 | $imm, 12)); }
-+
-+SW RISCV imm5:7 rs2:5 rs1:5 010 imm:5 0100011 \
-+!constraints { $rs1 != 0 && $rs1 != 2 && $rs1 !=3 && $rs1 != 4 && $rs2 != 2 } \
++FSW RISCV imm5:7 rs2:5 rs1:5 010 imm:5 0000111 \
++!constraints { $rs1 != 0 && $rs1 != 2 && $rs1 !=3 && $rs1 != 4 && $rs2 != 2} \
 +!memory { align(4); reg_plus_imm($rs1, sextract($imm5 << 5 | $imm, 12)); }
 +
-+ADDI RISCV imm:12 rs1:5 000 rd:5 0010011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FMADD_S RISCV rs3:5 00 rs2:5 rs1:5 rm:3 rd:5 1000011
 +
-+SLTI RISCV imm:12 rs1:5 010 rd:5 0010011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FMSUB_S RISCV rs3:5 00 rs2:5 rs1:5 rm:3 rd:5 1000111
 +
-+SLTIU RISCV imm:12 rs1:5 011 rd:5 0010011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FNMSUB_S RISCV rs3:5 00 rs2:5 rs1:5 rm:3 rd:5 1001011
 +
-+XORI RISCV imm:12 rs1:5 100 rd:5 0010011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FNMADD_S RISCV rs3:5 00 rs2:5 rs1:5 rm:3 rd:5 1001111
 +
-+ORI RISCV imm:12 rs1:5 110 rd:5 0010011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FADD_S RISCV 0000000 rs2:5 rs1:5 rm:3 rd:5 1010011
 +
-+ANDI RISCV imm:12 rs1:5 111 rd:5 0010011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FSUB_S RISCV 0000100 rs2:5 rs1:5 rm:3 rd:5 1010011
 +
-+ADD RISCV 0000000 rs2:5 rs1:5 000 rd:5 0110011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
++FMUL_S RISCV 0001000 rs2:5 rs1:5 rm:3 rd:5 1010011
 +
-+SUB RISCV 0100000 rs2:5 rs1:5 000 rd:5 0110011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
++FDIV_S RISCV 0001100 rs2:5 rs1:5 rm:3 rd:5 1010011
 +
-+SLL RISCV 0000000 rs2:5 rs1:5 001 rd:5 0110011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
++FSQRT_S RISCV 0101100 00000  rs1:5 rm:3 rd:5 1010011
 +
-+SLT RISCV 0000000 rs2:5 rs1:5 010 rd:5 0110011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
++FSGNJ_S RISCV 0010000 rs2:5  rs1:5 000 rd:5 1010011
 +
-+SLTU  RISCV 0000000 rs2:5 rs1:5 011 rd:5 0110011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
++FSGNJN_S RISCV 0010000 rs2:5  rs1:5 001 rd:5 1010011
 +
-+XOR RISCV 0000000 rs2:5 rs1:5 100 rd:5 0110011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
++FSGNJX_S RISCV 0010000 rs2:5  rs1:5 010 rd:5 1010011
 +
-+SRL RISCV 0000000 rs2:5 rs1:5 101 rd:5 0110011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
++FMIN_S RISCV 0010100 rs2:5  rs1:5 000 rd:5 1010011
 +
-+SRA RISCV 0100000 rs2:5 rs1:5 101 rd:5 0110011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
++FMAX_S RISCV 0010100 rs2:5  rs1:5 001 rd:5 1010011
 +
-+OR RISCV 0000000 rs2:5 rs1:5 110 rd:5 0110011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
++FCVT_W_S RISCV 1100000 00000 rs1:5 rm:3 rd:5 1010011 \
++!constraints { $rd != 2 && $rd != 3 && $rd != 4 }
 +
-+AND RISCV 0000000 rs2:5 rs1:5 111 rd:5 0110011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 && $rs2 != 2 }
++FCVT_WU_S RISCV 1100000 00001 rs1:5 rm:3 rd:5 1010011 \
++!constraints { $rd != 2 && $rd != 3 && $rd != 4 }
 +
-+LWU RISCV imm:12 rs1:5 110 rd:5 0000011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 0 && $rs1 != 2 && $rs1 != 3 && $rs1 != 4 } \
-+!memory { align(4); reg_plus_imm($rs1, sextract($imm, 12)); }
++FMV_X_W RISCV 1110000 00000 rs1:5 rm:3 rd:5 1010011 \
++!constraints { $rd != 2 && $rd != 3 && $rd != 4 }
 +
-+LD RISCV imm:12 rs1:5 011 rd:5 0000011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 0 && $rs1 != 2 && $rs1 != 3 && $rs1 != 4 } \
-+!memory { align(8); reg_plus_imm($rs1, sextract($imm, 12)); }
++FEQ_S RISCV 1010000 rs2:5 rs1:5 010 rd:5 1010011 \
++!constraints { $rd != 2 && $rd != 3 && $rd != 4 }
 +
-+SD RISCV imm5:7 rs2:5 rs1:5 011 imm:5 0100011 \
-+!constraints { $rs1 != 0 && $rs1 != 2 && $rs1 !=3 && $rs1 != 4 && $rs2 != 2} \
-+!memory { align(8); reg_plus_imm($rs1, sextract($imm5 << 5 | $imm, 12)); }
++FLT_S RISCV 1010000 rs2:5 rs1:5 001 rd:5 1010011 \
++!constraints { $rd != 2 && $rd != 3 && $rd != 4 }
 +
-+SLLI RISCV 00000 sham5:7 rs1:5 001 rd:5 0010011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FLE_S RISCV 1010000 rs2:5 rs1:5 000 rd:5 1010011 \
++!constraints { $rd != 2 && $rd != 3 && $rd != 4 }
 +
-+SRLI RISCV 00000 sham5:7 rs1:5 101 rd:5 0010011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FCLASS_S RISCV 1110000 00000 rs1:5 001 rd:5 1010011 \
++!constraints { $rd != 2 && $rd != 3 && $rd != 4 }
 +
-+SRAI RISCV 01000 sham5:7 rs1:5 101 rd:5 0010011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FCVT_S_W RISCV 1101000 00000 rs1:5 rm:3 rd:5 1010011 \
++!constraints { $rs1 != 2 }
 +
-+ADDIW RISCV imm:12 rs1:5 000 rd:5 0011011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FCVT_S_WU RISCV 1101000 00001 rs1:5 rm:3 rd:5 1010011 \
++!constraints { $rs1 != 2 }
 +
-+SLLIW RISCV 0000000 shamt:5 rs1:5 001 rd:5 0011011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FMV_W_X RISCV 1111000 00000 rs1:5 000 rd:5 1010011 \
++!constraints { $rs1 != 2 }
 +
-+SRLIW RISCV 0000000 shamt:5 rs1:5 101 rd:5 0011011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FCVT_L_S RISCV 1100000 00010 rs1:5 rm:3 rd:5 1010011 \
++!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rm != 6 && $rm != 5 }
 +
-+SRAIW RISCV 0100000 shamt:5 rs1:5 101 rd:5 0011011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FCVT_LU_S RISCV 1100000 00011 rs1:5 rm:3 rd:5 1010011 \
++!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rm != 6 && $rm != 5 }
 +
-+ADDW RISCV 0000000 rs2:5 rs1:5 000 rd:5 0011011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FCVT_S_L RISCV 1101000 00010 rs1:5 rm:3 rd:5 1010011 \
++!constraints { $rs1 != 2 && $rm != 6 && $rm != 5 }
 +
-+SUBW RISCV 0100000 rs2:5 rs1:5 000 rd:5 0011011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
-+
-+SLLW RISCV 0000000 rs2:5 rs1:5 001 rd:5 0011011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
-+
-+SRLW RISCV 0000000 rs2:5 rs1:5 101 rd:5 0011011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
-+
-+SRAW RISCV 0100000 rs2:5 rs1:5 101 rd:5 0011011 \
-+!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rs1 != 2 }
++FCVT_S_LU RISCV 1101000 00011 rs1:5 rm:3 rd:5 1010011 \
++!constraints { $rs1 != 2 && $rm != 6 && $rm != 5 }
 -- 
 2.23.0
 
