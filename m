@@ -1,69 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jUaqO-0004Ev-2F
-	for mharc-qemu-riscv@gnu.org; Fri, 01 May 2020 14:57:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57238)
+	id 1jUb82-0006Vd-Ad
+	for mharc-qemu-riscv@gnu.org; Fri, 01 May 2020 15:15:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33338)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1jUaqM-0004DK-D8
- for qemu-riscv@nongnu.org; Fri, 01 May 2020 14:57:02 -0400
+ (Exim 4.90_1) (envelope-from <fintelia@gmail.com>)
+ id 1jUb80-0006TT-O1
+ for qemu-riscv@nongnu.org; Fri, 01 May 2020 15:15:17 -0400
 Received: from Debian-exim by eggs.gnu.org with spam-scanned (Exim 4.90_1)
- (envelope-from <josemartins90@gmail.com>) id 1jUaqL-0002so-ON
- for qemu-riscv@nongnu.org; Fri, 01 May 2020 14:57:02 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:44488)
+ (envelope-from <fintelia@gmail.com>) id 1jUb7z-0008Rh-Ki
+ for qemu-riscv@nongnu.org; Fri, 01 May 2020 15:15:16 -0400
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:43233)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1jUaqL-0002pp-Az; Fri, 01 May 2020 14:57:01 -0400
-Received: by mail-io1-xd43.google.com with SMTP id z2so5780302iol.11;
- Fri, 01 May 2020 11:57:00 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <fintelia@gmail.com>)
+ id 1jUb7z-0008NQ-68; Fri, 01 May 2020 15:15:15 -0400
+Received: by mail-lf1-x144.google.com with SMTP id 188so4608415lfa.10;
+ Fri, 01 May 2020 12:15:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=sU5uH15MdvMu+SnhYfxfwwijaJdjT9gBVaZU8wBtNfg=;
- b=cK85qlzc9AE/O5FU9zzrT9xXJCOliRYLkr+uHopXN+vSiEv/4T/3aSl+Q1adQ6auRO
- ts1DpcZmpanqq1GRH0C2JYBP6Yzbb5ZuCQIxpyX936YO/HkiI1etIup3US+9krjJxL8x
- 95w4GZ3/Ppzpyj7bR1slYcQTLC1wH8qWaGH5k1YFksxeDCcT0w8RwjTJzslQjhFqfEkQ
- XNHV/ayL9c3xhnYzC6ebV/2YSkCckQPRY+XO3IOCMbuganqs09xujfIxF80aEQWvNZML
- tQOiWpAA6LN4AhbMOlrab8WA09xMMCpBW6ajYtKyg075h9HK+9GX9wvs9/pPYu5DV1nH
- 1VsQ==
+ :cc; bh=LYYG92cKXWRRdl6FS0Vnbmu0dttY95JWQ9/RSNjFx8Y=;
+ b=csXjXs89ng6BkbHUq4BHcAxs2eqGYs5t70ze8/Rsi67YHSXTiq5vCJe1ZLAdrW45Ti
+ eUXIIYyCCwJq7dRjlhbAGYLttTNAyFKcpc09/sZyODZgWNhrHOMD14AwAWzmXC+rWEQA
+ luv2KM0FUX3FOJXeiGMp6rfOsobuIVpZD6D02PHXyu1xgSEVQg4oJnnQYbst5JsAkbFj
+ HjAOF8YXM1KzmRELfXWe6amC77hsR68H8d2cZhvKnC5KH57HzYRzRinKAjt9oGaCeObn
+ wQMdllXQKaKTV1N8GDG8oyzeLDDRDQEUNP70fb4B189mknXLKTdNGS4A07/aZ0Y4FkQU
+ VarA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=sU5uH15MdvMu+SnhYfxfwwijaJdjT9gBVaZU8wBtNfg=;
- b=VyhliYkGQHCNmRz39Z6Qr6mN/uJajtDN9k2+MwaUtXstCQ88A+BYpGN1EOfI+iTbgu
- yKuBfNuRtk80q1UQ7mCJEeT9u+AsPPz99h2Wofr9udYBXYP+Zh+JS3kNtCuV+vMETBdv
- F9Qrbt5+p0RqEBgCPjesKwGCTayBSyScEzO31r1Tz2/2rJc1nVQE5NGt3gmRDTPaMTe3
- iFlBaWMgZC5pBK1OLBFbYB4WDt4zIeEZA3WO8vX076aC6N7RC8kS22tjLDnzW+8VIZM5
- QxsiOkQMtt6zZ3GWPJm2xsht1h4adZkenBWihFue+nbpRZODrQEZ1QF43IpXcao8QHgy
- Up5Q==
-X-Gm-Message-State: AGi0PuaKVeTu7kGXzuf3fHTISKI2/2DIM0IJHmGL1uiSqrZYp96Rj5tH
- AJjijXqLJV+8dOM/S0HCqI/ZR8ZU9qJPRg4wdyc=
-X-Google-Smtp-Source: APiQypIP8+MJmD4JgAiOUYgeej7d4iUHUoWqxpGWm8PR+wT27Wr1r0nanof8jtUWD8mMGYe11YMmhJPSCE/PDsMaJm8=
-X-Received: by 2002:a5e:9703:: with SMTP id w3mr5220346ioj.111.1588359419774; 
- Fri, 01 May 2020 11:56:59 -0700 (PDT)
+ bh=LYYG92cKXWRRdl6FS0Vnbmu0dttY95JWQ9/RSNjFx8Y=;
+ b=JYg4WthtskbViMa4WzB/D2UVh1ufo7VTRAOIa08MGNEGHTbfslhqRE9BogyrRfiwuS
+ RzNuD4aTllmy/XmFT6MoEXTC3eaPPRdyBpm14BT5RiBPtrvrgHaxwj07Bs4OrsT7hnL5
+ 7OBnXvqh6HdB6XO3OvZjIG94/QDAzGYxi3U/CNKHLp4NRjMoGL9sWHoXZjUK5IQ9Chow
+ JF40uTHtbFiAtJn+82WMPMpWnxoqp0t03/biQEeeyNSMDj4dLy6oliHe4wUTCsm3eyt7
+ oxxZBFRLBJE6hm/nWFN3ovvyy8PXYWfce+q1m02C1JGO25H/Ds8uM4BYR8o/Hpejr1MN
+ gHdw==
+X-Gm-Message-State: AGi0PubtEc0P4+nXjiNlbYilT5mkH4H5VgJL/+v9Su+hwCml9KwVlhYc
+ 899/1zEJ1agdeuT6cKLElas7u/j3aQU5qPxrVVI=
+X-Google-Smtp-Source: APiQypIwG5GQMbIbiF2QyoH0SocC4oZGXOOGPu2uH3OndI0/KwM1pjQGxpKnRHmr/abbpQywwHtO5CAOBbsDLAI/l8k=
+X-Received: by 2002:a19:84b:: with SMTP id 72mr2938984lfi.133.1588360512407;
+ Fri, 01 May 2020 12:15:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAC41xo2O1k+cn7EO3Zu3U70qefFwGa5B1iNRNgRwLk7SGX=-Aw@mail.gmail.com>
- <CAKmqyKPDzusVqzCFwCJ+2gY0qchguhR57zHNkE-0MTeffKs_OA@mail.gmail.com>
- <CAC41xo3qeQZ+i8XoQq3j80_JDEoL2yMA__arpmE+GXyjX4c1sg@mail.gmail.com>
- <CAKmqyKPJ6QqUULrDj9NX_bLdnjsjzPOGcCBH5q23fG=ScT_NzA@mail.gmail.com>
- <CAC41xo32aWNZteKP-95AtFXQo3w_Ey-7MA0-dL_uJmEMScAuhg@mail.gmail.com>
- <CAKmqyKOnpJQUHVnzGVBjPkib-Z1vfdWqLx1HmfbGascFFG4DVQ@mail.gmail.com>
- <CAC41xo2-knUMRVALdftzu4cNz5u5UmBf1aK=mAt9YKzvOcCjpg@mail.gmail.com>
-In-Reply-To: <CAC41xo2-knUMRVALdftzu4cNz5u5UmBf1aK=mAt9YKzvOcCjpg@mail.gmail.com>
-From: Jose Martins <josemartins90@gmail.com>
-Date: Fri, 1 May 2020 19:56:48 +0100
-Message-ID: <CAC41xo0BMA93jv_aqzmuaB553kxM8zCZms1M89uybxyhdjxiXg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] target/riscv: fix VS interrupts forwarding to HS
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+References: <CAC41xo2LfTQZnor5haAgBg=h34qv50xf8Bs1bgSeGESfr-E2ng@mail.gmail.com>
+ <CAKmqyKNMiD6VJ1D-ty-q_HMyiZ7oj7F0XraKTaYy78-xjhAN4A@mail.gmail.com>
+ <CAKmqyKO=edmrotcVa_tMO-VcTpdWEq7=0=EYiQquVhqwkS2F=g@mail.gmail.com>
+ <CAC41xo1uOy4XVtZqfjAohNHJUfNfDcMKaxGv7dD5uDediQjxiw@mail.gmail.com>
+In-Reply-To: <CAC41xo1uOy4XVtZqfjAohNHJUfNfDcMKaxGv7dD5uDediQjxiw@mail.gmail.com>
+From: Jonathan Behrens <fintelia@gmail.com>
+Date: Fri, 1 May 2020 15:14:46 -0400
+Message-ID: <CANnJOVFOpnP5j79G39ku+0sUng1VdqqvfWF=uDn2+BtfdVWAnw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: fix check of guest pa top bits
+To: Jose Martins <josemartins90@gmail.com>
+Cc: Alistair Francis <alistair23@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=josemartins90@gmail.com; helo=mail-io1-xd43.google.com
+Content-Type: multipart/alternative; boundary="0000000000001e0c0105a49b00c4"
+Received-SPF: pass client-ip=2a00:1450:4864:20::144;
+ envelope-from=fintelia@gmail.com; helo=mail-lf1-x144.google.com
 X-detected-operating-system: by eggs.gnu.org: Error: [-] PROGRAM ABORT :
  Malformed IPv6 address (bad octet value).
  Location : parse_addr6(), p0f-client.c:67
-X-Received-From: 2607:f8b0:4864:20::d43
+X-Received-From: 2a00:1450:4864:20::144
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,31 +73,246 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 May 2020 18:57:02 -0000
+X-List-Received-Date: Fri, 01 May 2020 19:15:17 -0000
 
-Reached out to Andrew Waterman. This was his response:
+--0000000000001e0c0105a49b00c4
+Content-Type: text/plain; charset="UTF-8"
 
-"I think the encoding of the privileged modes is a red herring.  HS is
-inherently more privileged than VS, since it controls memory
-protection and interrupt delegation for VS.
-Certainly the intent is that HS-mode interrupts are always enabled
-while executing in VS-mode.  Otherwise, badly behaved VS-mode software
-could starve HS-mode of interrupts."
+Yeah, I've run into the same issue. Even if you ask Gmail to treat the
+email as plain text it still takes the liberty of hard wrapping lines
+without asking you. It really is a shame that there isn't a good way to
+submit patches via a web UI, the art of git send-email + manual SMTP isn't
+as widespread as it once was.
 
-So my assumption was correct.
+Jonathan
 
-Jose
+On Fri, May 1, 2020 at 2:54 PM Jose Martins <josemartins90@gmail.com> wrote:
 
-On Thu, 30 Apr 2020 at 22:47, Jose Martins <josemartins90@gmail.com> wrote:
->
-> > I'm not sure HS is a higher privilege mode.
-> >
-> > HS is privilege encoding 1, which is the same as VS (VU is obviously lower).
->
-> I just checked the spec and it doesn't actually, explicitly state that
-> HS is a higher-privilege mode than VS. I thought this was something
-> implicit, but you might be right. I'll try to reach out to the spec
-> authors to clarify this.
+> Just resubmitted version 2. Sorry. Not really used to this. I actually
+> wasn't using git send-email. I was copying the patch to my email
+> client which was causing the weird wrapping. I think I also fixed the
+> issues raised by checkpatch. Hope everything is correct now.
 >
 > Jose
+>
+> On Thu, 30 Apr 2020 at 22:36, Alistair Francis <alistair23@gmail.com>
+> wrote:
+> >
+> > On Thu, Apr 30, 2020 at 12:45 PM Alistair Francis <alistair23@gmail.com>
+> wrote:
+> > >
+> > > On Fri, Apr 24, 2020 at 8:10 AM Jose Martins <josemartins90@gmail.com>
+> wrote:
+> > > >
+> > > > The spec states that on sv39x4 guest physical  "address bits 63:41
+> > > > must all be zeros, or else a guest-page-fault exception occurs.".
+> > > > However, the check performed for these top bits of the virtual
+> address
+> > > > on the second stage is the same as the one performed for virtual
+> > > > addresses on the first stage except with the 2-bit extension,
+> > > > effectively creating the same kind of "hole" in the guest's physical
+> > > > address space. I believe the following patch fixes this issue:
+> > > >
+> > > > Signed-off-by: Jose Martins <josemartins90@gmail.com>
+> > >
+> > > Thanks for the patch.
+> > >
+> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > >
+> > > > ---
+> > > >  target/riscv/cpu_helper.c | 20 +++++++++++++-------
+> > > >  1 file changed, 13 insertions(+), 7 deletions(-)
+> > > >
+> > > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > > > index d3ba9efb02..da879f5656 100644
+> > > > --- a/target/riscv/cpu_helper.c
+> > > > +++ b/target/riscv/cpu_helper.c
+> > > > @@ -421,15 +421,21 @@ static int get_physical_address(CPURISCVState
+> > > > *env, hwaddr *physical,
+> > >
+> > > There seems to be a strange wrapping here, that corrupts the patch.
+> > > For future patches can you please check your git send-email setup?
+> > >
+> > > Applied to the RISC-V tree with the above line fixed up.
+> >
+> > This patch also fails checkpatch.
+> >
+> > Do you mind resending a v2 with the check patch issues fixed?
+> >
+> > Alistair
+> >
+> > >
+> > > Alistair
+> > >
+> > > >      int va_bits = PGSHIFT + levels * ptidxbits + widened;
+> > > >      target_ulong mask, masked_msbs;
+> > > >
+> > > > -    if (TARGET_LONG_BITS > (va_bits - 1)) {
+> > > > -        mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> > > > +    if(!first_stage){
+> > > > +        if ((addr >> va_bits) != 0) {
+> > > > +            return TRANSLATE_FAIL;
+> > > > +        }
+> > > >      } else {
+> > > > -        mask = 0;
+> > > > -    }
+> > > > -    masked_msbs = (addr >> (va_bits - 1)) & mask;
+> > > > +        if (TARGET_LONG_BITS > (va_bits - 1)) {
+> > > > +            mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> > > > +        } else {
+> > > > +            mask = 0;
+> > > > +        }
+> > > > +        masked_msbs = (addr >> (va_bits - 1)) & mask;
+> > > >
+> > > > -    if (masked_msbs != 0 && masked_msbs != mask) {
+> > > > -        return TRANSLATE_FAIL;
+> > > > +        if (masked_msbs != 0 && masked_msbs != mask) {
+> > > > +            return TRANSLATE_FAIL;
+> > > > +        }
+> > > >      }
+> > > >
+> > > >      int ptshift = (levels - 1) * ptidxbits;
+> > > > --
+> > > > 2.17.1
+> > > >
+> > > > Jose
+> > > >
+>
+>
+
+--0000000000001e0c0105a49b00c4
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Yeah, I&#39;ve run into the same issue. Even if you a=
+sk Gmail to treat the email as plain text it still takes the liberty of har=
+d wrapping lines without asking you. It really is a shame that there isn&#3=
+9;t a good way to submit patches via a web UI, the art of git send-email + =
+manual SMTP isn&#39;t as widespread as it once was.</div><div><br></div><di=
+v>Jonathan<br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" c=
+lass=3D"gmail_attr">On Fri, May 1, 2020 at 2:54 PM Jose Martins &lt;<a href=
+=3D"mailto:josemartins90@gmail.com">josemartins90@gmail.com</a>&gt; wrote:<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">Just resubmitted=
+ version 2. Sorry. Not really used to this. I actually<br>
+wasn&#39;t using git send-email. I was copying the patch to my email<br>
+client which was causing the weird wrapping. I think I also fixed the<br>
+issues raised by checkpatch. Hope everything is correct now.<br>
+<br>
+Jose<br>
+<br>
+On Thu, 30 Apr 2020 at 22:36, Alistair Francis &lt;<a href=3D"mailto:alista=
+ir23@gmail.com" target=3D"_blank">alistair23@gmail.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; On Thu, Apr 30, 2020 at 12:45 PM Alistair Francis &lt;<a href=3D"mailt=
+o:alistair23@gmail.com" target=3D"_blank">alistair23@gmail.com</a>&gt; wrot=
+e:<br>
+&gt; &gt;<br>
+&gt; &gt; On Fri, Apr 24, 2020 at 8:10 AM Jose Martins &lt;<a href=3D"mailt=
+o:josemartins90@gmail.com" target=3D"_blank">josemartins90@gmail.com</a>&gt=
+; wrote:<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; The spec states that on sv39x4 guest physical=C2=A0 &quot;ad=
+dress bits 63:41<br>
+&gt; &gt; &gt; must all be zeros, or else a guest-page-fault exception occu=
+rs.&quot;.<br>
+&gt; &gt; &gt; However, the check performed for these top bits of the virtu=
+al address<br>
+&gt; &gt; &gt; on the second stage is the same as the one performed for vir=
+tual<br>
+&gt; &gt; &gt; addresses on the first stage except with the 2-bit extension=
+,<br>
+&gt; &gt; &gt; effectively creating the same kind of &quot;hole&quot; in th=
+e guest&#39;s physical<br>
+&gt; &gt; &gt; address space. I believe the following patch fixes this issu=
+e:<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; Signed-off-by: Jose Martins &lt;<a href=3D"mailto:josemartin=
+s90@gmail.com" target=3D"_blank">josemartins90@gmail.com</a>&gt;<br>
+&gt; &gt;<br>
+&gt; &gt; Thanks for the patch.<br>
+&gt; &gt;<br>
+&gt; &gt; Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.fran=
+cis@wdc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+&gt; &gt;<br>
+&gt; &gt; &gt; ---<br>
+&gt; &gt; &gt;=C2=A0 target/riscv/cpu_helper.c | 20 +++++++++++++-------<br=
+>
+&gt; &gt; &gt;=C2=A0 1 file changed, 13 insertions(+), 7 deletions(-)<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_he=
+lper.c<br>
+&gt; &gt; &gt; index d3ba9efb02..da879f5656 100644<br>
+&gt; &gt; &gt; --- a/target/riscv/cpu_helper.c<br>
+&gt; &gt; &gt; +++ b/target/riscv/cpu_helper.c<br>
+&gt; &gt; &gt; @@ -421,15 +421,21 @@ static int get_physical_address(CPURIS=
+CVState<br>
+&gt; &gt; &gt; *env, hwaddr *physical,<br>
+&gt; &gt;<br>
+&gt; &gt; There seems to be a strange wrapping here, that corrupts the patc=
+h.<br>
+&gt; &gt; For future patches can you please check your git send-email setup=
+?<br>
+&gt; &gt;<br>
+&gt; &gt; Applied to the RISC-V tree with the above line fixed up.<br>
+&gt;<br>
+&gt; This patch also fails checkpatch.<br>
+&gt;<br>
+&gt; Do you mind resending a v2 with the check patch issues fixed?<br>
+&gt;<br>
+&gt; Alistair<br>
+&gt;<br>
+&gt; &gt;<br>
+&gt; &gt; Alistair<br>
+&gt; &gt;<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 int va_bits =3D PGSHIFT + levels * ptidx=
+bits + widened;<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mask, masked_msbs;<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; -=C2=A0 =C2=A0 if (TARGET_LONG_BITS &gt; (va_bits - 1)) {<br=
+>
+&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 mask =3D (1L &lt;&lt; (TARGET_L=
+ONG_BITS - (va_bits - 1))) - 1;<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 if(!first_stage){<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if ((addr &gt;&gt; va_bits) !=
+=3D 0) {<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return TRANSLATE_=
+FAIL;<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 } else {<br>
+&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 mask =3D 0;<br>
+&gt; &gt; &gt; -=C2=A0 =C2=A0 }<br>
+&gt; &gt; &gt; -=C2=A0 =C2=A0 masked_msbs =3D (addr &gt;&gt; (va_bits - 1))=
+ &amp; mask;<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (TARGET_LONG_BITS &gt; (va_b=
+its - 1)) {<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 mask =3D (1L &lt;=
+&lt; (TARGET_LONG_BITS - (va_bits - 1))) - 1;<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 mask =3D 0;<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 masked_msbs =3D (addr &gt;&gt; =
+(va_bits - 1)) &amp; mask;<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; -=C2=A0 =C2=A0 if (masked_msbs !=3D 0 &amp;&amp; masked_msbs=
+ !=3D mask) {<br>
+&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 return TRANSLATE_FAIL;<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (masked_msbs !=3D 0 &amp;&am=
+p; masked_msbs !=3D mask) {<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return TRANSLATE_=
+FAIL;<br>
+&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 int ptshift =3D (levels - 1) * ptidxbits=
+;<br>
+&gt; &gt; &gt; --<br>
+&gt; &gt; &gt; 2.17.1<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; Jose<br>
+&gt; &gt; &gt;<br>
+<br>
+</blockquote></div>
+
+--0000000000001e0c0105a49b00c4--
 
