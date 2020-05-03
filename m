@@ -1,53 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jV6R4-0007Tk-6w
-	for mharc-qemu-riscv@gnu.org; Sun, 03 May 2020 00:41:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48756)
+	id 1jV6S9-0008QX-M9
+	for mharc-qemu-riscv@gnu.org; Sun, 03 May 2020 00:42:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48984)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1jV6R2-0007Ro-HE
- for qemu-riscv@nongnu.org; Sun, 03 May 2020 00:41:00 -0400
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:50215)
+ id 1jV6S8-0008Oq-LZ
+ for qemu-riscv@nongnu.org; Sun, 03 May 2020 00:42:08 -0400
+Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:38928)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1jV6R0-0006sa-Si
- for qemu-riscv@nongnu.org; Sun, 03 May 2020 00:41:00 -0400
-Received: by mail-wm1-x343.google.com with SMTP id x25so4606195wmc.0
- for <qemu-riscv@nongnu.org>; Sat, 02 May 2020 21:40:58 -0700 (PDT)
+ id 1jV6S6-0000Da-2u
+ for qemu-riscv@nongnu.org; Sun, 03 May 2020 00:42:08 -0400
+Received: by mail-wm1-x342.google.com with SMTP id y24so4924192wma.4
+ for <qemu-riscv@nongnu.org>; Sat, 02 May 2020 21:42:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20150623.gappssmtp.com; s=20150623;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=RimjZ7WkFfKRUws7pVSN5jCnQogAheTvnqGcbUpcMD8=;
- b=ebDrmoyvEDObS8rmCedj/G+r7Wfc9AGGy2Bbo3lQlthh5YqsFXptNK7UgmQwpOl0rX
- BrOvTJVnX7GTs3veu27kdoaeSYRaALeb6to8CZ76/1q9V3XqelU16o29mTXJQZKYSSns
- RdLjBsLUx40v29nd2fpQPLEChIdUyNNWFLw5CDXU/zo+eaHVtg4NU0ZDVunF85ADIQok
- RNyX7q+O+mFV8GB30BxYWYrNxz66ik4uk4LamH5jKyV6AE59aHvBo/Mh4fWzvDmvnC+l
- LYv/rWOp7Z2aw/1niSquUmhyhiRa3wzz+qaOk2BwQ3Wyh90G2tnGoTTZgMTQwWdu8DvL
- NLwQ==
+ :cc; bh=vF8VFq5Qsbt5WQdDilLmnB4xmsmF+yCtyKsS/XLhhkU=;
+ b=T50JLXcxGwNnDsKbtrfHZeqKE9qtWPTj/ZvaUsGiLsYp00jqQ8VKfd1PT+LfdseQKa
+ rEXtg0U18gOlKUhlYZVhG4VnWWp56n40/EsZldfWqdBSbKe0++v0l3RpKLpUAZo0HT4P
+ eah7eRYIFjJJV7pPORJYyNZKX9f4kA/Zj5l17dXNNEjMcNy/x0vt4fpb0Yjkx3vCITCM
+ /U3GlXxhT0/o0j3erF+A/tq/8dkXIWbJS6jv1B1gIsanYFcAE1oL6IQe0d6jwxnVCmNj
+ 5f7lsEDxcMNE2cNmGNyWoOGMi9dJWCr6fxqYaFFQM+yNhm8B5Nrn7kvBae4vXT+r2j1x
+ HaaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=RimjZ7WkFfKRUws7pVSN5jCnQogAheTvnqGcbUpcMD8=;
- b=JFye7dNtew/+TV3iTYlApW/uhzgjTaP8vG2OwogfavpvG+79TM+oodm7jUTY9tu0m/
- D/F+gUjWkB5Mao85nm1FzCfenEmgVaaj5FQ8uuxxxywBw/xrAkas1/qWLMRj2f9eNQCY
- DWL3yEptktBSOTIUzH5P3ZDnxDB/OxJl83VdTjlyYnklVSHEax0fwUEnnhqTft7/K1eT
- QDUGVw4jTiMeJMnbFI/95IY7h+BXx+rH4GgQ+wcpTwTwRZfmA7w03M8uaH2AvQSXjzAu
- Cohw8nKxeO1GawbMvgOKQMgQfv9ZQD2HtG4k/Wx8zxW81Uu26sa27YnH39Vz4S857uC4
- 5y3Q==
-X-Gm-Message-State: AGi0Pua/GYslwou8EF2IWltgZr5c9SLqecJT3t7Wvm82CqhOrEl6eaXH
- WGjl95m2/rLug4JN/JF4/507Q149ipY5/EWmEUKbmA==
-X-Google-Smtp-Source: APiQypK7QI5xRIXqLKxTvAFX6S4zUSPFRjZlcu3CA23SQFqVxI0HgK7fVnTnYxSqWlaquYG10ALjUJg+Rn7C3aB21kQ=
-X-Received: by 2002:a7b:cc92:: with SMTP id p18mr8115154wma.26.1588480857385; 
- Sat, 02 May 2020 21:40:57 -0700 (PDT)
+ bh=vF8VFq5Qsbt5WQdDilLmnB4xmsmF+yCtyKsS/XLhhkU=;
+ b=R/SHuvggg7fzomjqtfOilIkcAYhIlcF2xsTNQcF/TMOnBq4zSRp8Ew5387ygXUJS3F
+ umNBXXX4Sulf/c7lPL1KaISnkeaQ+0odKPnzs7f7ejmnAYdsJo/v/dxiEtHEwW5x31+S
+ Gv0S9UawUN3CAe/75finDpabdRH4EpyuV5O8ea7TrmJbmCXDY0fuVrxmNvjAKTQ+8RYV
+ k44xQkwy+h7SbU+OSyIUNQ5DDgTkUyCdUqyyBjFekRwCuLsP/j9lXEceiZjvbdXwDn2Z
+ GTMBeAJOhmm9wIbLkKbDmU29EMCjczbtYp5PVDGxw7XbbeamT4cIu+3aRworQCAtR1NS
+ AYJw==
+X-Gm-Message-State: AGi0PuYDej1NsxrlrGgcjUC12JIWewVOhEtathE2wszcuFXm+XQopp3K
+ MVeLvBP9xXfNfHotO0StGCd/z0xAJHTE+p/fVH1FCQ==
+X-Google-Smtp-Source: APiQypL7aDOQPD6rYKPBuM+O/gupsel4rX1e8pOKNCAo3NLGbju02VgLLqkuZ25x9rNhEwjlm/wQI42se+rngzzXsrA=
+X-Received: by 2002:a1c:4144:: with SMTP id o65mr8044675wma.78.1588480924523; 
+ Sat, 02 May 2020 21:42:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <1588348254-7241-1-git-send-email-bmeng.cn@gmail.com>
- <1588348254-7241-3-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1588348254-7241-3-git-send-email-bmeng.cn@gmail.com>
+ <1588348254-7241-5-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1588348254-7241-5-git-send-email-bmeng.cn@gmail.com>
 From: Anup Patel <anup@brainfault.org>
-Date: Sun, 3 May 2020 10:10:44 +0530
-Message-ID: <CAAhSdy3z8ezUx+ozdupR5c5AKLhsfonSFHgrk_Yco2ZH4JubFQ@mail.gmail.com>
-Subject: Re: [PATCH 2/5] gitlab-ci/opensbi: Update GitLab CI to build generic
- platform
+Date: Sun, 3 May 2020 10:11:53 +0530
+Message-ID: <CAAhSdy3hfktuhOg36=8dOM06VLURefcf1gVxw_bKrWzmAwpGnA@mail.gmail.com>
+Subject: Re: [PATCH 4/5] riscv/spike: Change the default bios to use generic
+ platform image
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -57,8 +57,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bin.meng@windriver.com>, 
  Anup Patel <Anup.Patel@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::343;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x343.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::342;
+ envelope-from=anup@brainfault.org; helo=mail-wm1-x342.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -18
@@ -79,74 +79,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 May 2020 04:41:00 -0000
+X-List-Received-Date: Sun, 03 May 2020 04:42:08 -0000
 
-On Fri, May 1, 2020 at 9:24 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Fri, May 1, 2020 at 9:25 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> This updates the GitLab CI opensbi job to build opensbi bios images
-> for the generic platform.
+> To keep sync with other RISC-V machines, change the default bios
+> to use generic platform image.
+>
+> While we are here, add some comments to mention that keeping ELF
+> files here was intentional.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 > ---
 >
->  .gitlab-ci-opensbi.yml | 26 ++++++++------------------
->  1 file changed, 8 insertions(+), 18 deletions(-)
+>  hw/riscv/spike.c | 9 +++++++--
+>  1 file changed, 7 insertions(+), 2 deletions(-)
 >
-> diff --git a/.gitlab-ci-opensbi.yml b/.gitlab-ci-opensbi.yml
-> index dd051c0..26092bb 100644
-> --- a/.gitlab-ci-opensbi.yml
-> +++ b/.gitlab-ci-opensbi.yml
-> @@ -34,18 +34,12 @@ build-opensbi:
->     when: always
->   artifacts:
->     paths: # 'artifacts.zip' will contains the following files:
-> -   - pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
-> -   - pc-bios/opensbi-riscv32-virt-fw_jump.bin
-> -   - pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
-> -   - pc-bios/opensbi-riscv64-virt-fw_jump.bin
-> -   - opensbi32-virt-stdout.log
-> -   - opensbi32-virt-stderr.log
-> -   - opensbi64-virt-stdout.log
-> -   - opensbi64-virt-stderr.log
-> -   - opensbi32-sifive_u-stdout.log
-> -   - opensbi32-sifive_u-stderr.log
-> -   - opensbi64-sifive_u-stdout.log
-> -   - opensbi64-sifive_u-stderr.log
-> +   - pc-bios/opensbi-riscv32-generic-fw_jump.bin
-> +   - pc-bios/opensbi-riscv64-generic-fw_jump.bin
-
-Same comment as PATCH1
-
-We should add generic-fw_jump.elf here as well.
-
-> +   - opensbi32-generic-stdout.log
-> +   - opensbi32-generic-stderr.log
-> +   - opensbi64-generic-stdout.log
-> +   - opensbi64-generic-stderr.log
->   image: $CI_REGISTRY_IMAGE:opensbi-cross-build
->   variables:
->     GIT_DEPTH: 3
-> @@ -54,10 +48,6 @@ build-opensbi:
->   - export JOBS=$(($(getconf _NPROCESSORS_ONLN) + 1))
->   - echo "=== Using ${JOBS} simultaneous jobs ==="
->   - make -j${JOBS} -C roms/opensbi clean
-> - - make -j${JOBS} -C roms opensbi32-virt 2>&1 1>opensbi32-virt-stdout.log | tee -a opensbi32-virt-stderr.log >&2
-> + - make -j${JOBS} -C roms opensbi32-generic 2>&1 1>opensbi32-generic-stdout.log | tee -a opensbi32-generic-stderr.log >&2
->   - make -j${JOBS} -C roms/opensbi clean
-> - - make -j${JOBS} -C roms opensbi64-virt 2>&1 1>opensbi64-virt-stdout.log | tee -a opensbi64-virt-stderr.log >&2
-> - - make -j${JOBS} -C roms/opensbi clean
-> - - make -j${JOBS} -C roms opensbi32-sifive_u 2>&1 1>opensbi32-sifive_u-stdout.log | tee -a opensbi32-sifive_u-stderr.log >&2
-> - - make -j${JOBS} -C roms/opensbi clean
-> - - make -j${JOBS} -C roms opensbi64-sifive_u 2>&1 1>opensbi64-sifive_u-stdout.log | tee -a opensbi64-sifive_u-stderr.log >&2
-> + - make -j${JOBS} -C roms opensbi64-generic 2>&1 1>opensbi64-generic-stdout.log | tee -a opensbi64-generic-stderr.log >&2
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index d0c4843..6f26fcf 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -45,10 +45,15 @@
+>
+>  #include <libfdt.h>
+>
+> +/*
+> + * Not like other RISC-V machines that use plain binary bios images,
+> + * keeping ELF files here was intentional because BIN files don't work
+> + * for the Spike machine as HTIF emulation depends on ELF parsing.
+> + */
+>  #if defined(TARGET_RISCV32)
+> -# define BIOS_FILENAME "opensbi-riscv32-spike-fw_jump.elf"
+> +# define BIOS_FILENAME "opensbi-riscv32-generic-fw_jump.elf"
+>  #else
+> -# define BIOS_FILENAME "opensbi-riscv64-spike-fw_jump.elf"
+> +# define BIOS_FILENAME "opensbi-riscv64-generic-fw_jump.elf"
+>  #endif
+>
+>  static const struct MemmapEntry {
 > --
 > 2.7.4
 >
 >
 
-Otherwise looks good to me.
+Looks good to me.
 
 Reviewed-by: Anup Patel <anup@brainfault.org>
 
