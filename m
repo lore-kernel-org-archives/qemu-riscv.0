@@ -1,77 +1,87 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jVWHs-0005d7-2j
-	for mharc-qemu-riscv@gnu.org; Mon, 04 May 2020 04:17:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37792)
+	id 1jVd2D-0003pH-8t
+	for mharc-qemu-riscv@gnu.org; Mon, 04 May 2020 11:29:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60080)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1jVWHq-0005XZ-BG
- for qemu-riscv@nongnu.org; Mon, 04 May 2020 04:17:14 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:53450)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1jVWHo-0001Lh-2U
- for qemu-riscv@nongnu.org; Mon, 04 May 2020 04:17:14 -0400
-Received: by mail-wm1-x344.google.com with SMTP id k12so7356562wmj.3
- for <qemu-riscv@nongnu.org>; Mon, 04 May 2020 01:17:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=n0CV4M0fC3At38gNfQP9r3hs8pChcXMWBv3hvNFAMUk=;
- b=Er8v3Ldql/t9DPVnGG6KYYGpIYgd4iQCycubya1KZSm/Vx2T7ctouz9j3tlmLhyDiy
- 1Mta0l592PF+5fPcLixvV5se1JVTvrq6+1KN4x9eRd238ozNl4HVy0dOK0A97eWY+3H7
- 1jYNH7NbGVsFpI8q4I+Bkv27/bbczOKoROW1y2Xdu8+wLHaetXA+HBHw+uDEfIMBV63k
- pEVLM0BZQgmdDxV2hxOuHgK7Qy0DRynOvLKb0MXRf2Nuy2jHjQuDu9nJY0htYFxXvO7c
- aDlRPmSXOXSMPhN1SlwUQ8jp3w0EdI+JFsuQGdoqfl0SiL6HX612m+rHnngJkop5vVVQ
- sZUA==
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jVd2B-0003m0-TD
+ for qemu-riscv@nongnu.org; Mon, 04 May 2020 11:29:31 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:56713
+ helo=us-smtp-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jVd29-0003rf-EA
+ for qemu-riscv@nongnu.org; Mon, 04 May 2020 11:29:31 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1588606168;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=0dDwkE6p8SsMPnxAPkn333jCRizbTYLoA4qGzMJg5yE=;
+ b=NoXcMCtXsgWYcEWGC2DkT32qnSv28yVE73gRE/1h4e42AFTpIZDKcc0kR5oAzEMHHoo0Pm
+ XanNDJ0D0CMXWg9Om7wJFqO94MD+3HCV2sTCEcq2EMcBX0IGdPUgJ+Dr27sExGsNBuc8ZL
+ 9fPIha0gz1ur0LMa4jT/FDHzj4FUUic=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-146-dFs0ssiyMlWaAHYSv4F85w-1; Mon, 04 May 2020 11:29:26 -0400
+X-MC-Unique: dFs0ssiyMlWaAHYSv4F85w-1
+Received: by mail-wm1-f72.google.com with SMTP id s12so5103898wmj.6
+ for <qemu-riscv@nongnu.org>; Mon, 04 May 2020 08:29:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=n0CV4M0fC3At38gNfQP9r3hs8pChcXMWBv3hvNFAMUk=;
- b=VlPgQqMogzNllTVMnVZwCDN7t/c2IkOVRyxpbp5tva3QbnQuL1F6xczvcGL8zyNUEn
- +UX5JLoI36Hk7P2OLDteonkAreHcin9lGmrktZn/uoJbJt8V2DLgG9AdnwFA7igVw2Yp
- 7HeUMpT1Ajtdlt6aU0/4fRUj7a+QjbH4trLtzPYRbCaXNoQaDAKXNNWBr7w/iCZB7lzc
- gPBE5Nz58n2s0EKPBbVJbx+F9tyxa1Pzan22cTi6Q8VoXQjBV/jc9QftnB/rcWlm4jFV
- JeKiygz+N4qXM2SoPMAH1vap4yY82eX0LyT6obKJY5wXV5P4/lF8Q3dPV8Rgsp37MtMO
- W/3g==
-X-Gm-Message-State: AGi0PuYWi7Ru8UewuOmBQ9mrV7SD5QqAQ9r3IcNYA4VyI8IQeSixte64
- qExR3p32kBr2AFXxDoKXQ78GE/2X1xUfzQ9ay0EIag==
-X-Google-Smtp-Source: APiQypLxyxyX8DUUcCln0bv4BJk8h9q8NDNst5LFgX1p1Av3vZw9Rejr/dHqQcPDBj9ZnEPSenV9fFoBuGwv6b19qqI=
-X-Received: by 2002:a1c:9d0d:: with SMTP id g13mr13884913wme.102.1588580230415; 
- Mon, 04 May 2020 01:17:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <1588348254-7241-1-git-send-email-bmeng.cn@gmail.com>
- <1588348254-7241-2-git-send-email-bmeng.cn@gmail.com>
- <CAAhSdy06i1zb6_aedLn41rWDzrjyTcJ_T954DcwX7k2bM_VcVw@mail.gmail.com>
- <CAEUhbmXMcxZqk4RUjcWMG-5MCd-Z3wPn=ktQnHLA3Rvn01iq+g@mail.gmail.com>
- <CAAhSdy1kWxW6kyQiMd+-9ZkwMr9xFcZurU7HHoRTE0ST9rnq0Q@mail.gmail.com>
- <CAEUhbmUzPNxHXgNU=nM3C3AdyqwNh4sS9pq02F9vLwipRRWwDA@mail.gmail.com>
- <CAEUhbmWD_L_dJZ3hVZrw08ycCaLr3UDTRRA9JreJfqZHpPntmQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmWD_L_dJZ3hVZrw08ycCaLr3UDTRRA9JreJfqZHpPntmQ@mail.gmail.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Mon, 4 May 2020 13:46:58 +0530
-Message-ID: <CAAhSdy3=uhOvwfDZTW-7GDMss1wNeuVVWs-1iw2xZ+Af1V=8Nw@mail.gmail.com>
-Subject: Re: [PATCH 1/5] roms/opensbi: Update to support building bios images
- for generic platform
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=qUA+L4wC7Y/HEYRNDubgMlJGc6s5bp4bBZMbUfsNJrk=;
+ b=QpAalo9YjOoafQp4mtM4B3WFvQKLoumzIx6VPiWlehjBjvoUloh9dGNmpX/yYj+684
+ mOpmlqoSoPzGQKjTapqACAu9AfHf936/v8E1BtaLQ2TLgGyn09KdD5j9yNsdRUWufHl6
+ ZOzIA3fVKBri2H7iPi6C8Zw1cAeyWCIPITkYeW/r5i1M1SPLnjoALnczd2XjhWuoYf5C
+ yqpqEMje87ARKOaCDHTmq7tT9gkt6bcoSzS7Hri3r9M2m7mBk6TZucm1V0RDktvPXHnR
+ mHs1b5TsX0otZU1VUVXf1rt/5xS60NF7/Gbzj/ectEOq70Vpy6+CpKfy88+1VVxTdzU7
+ UZoA==
+X-Gm-Message-State: AGi0PuZqumnRkLRR8T6JS+2pIFNqRdEDkFFKExsuQqplqPab8Zq3h9z5
+ +wAiKGsvAycDh3vMgTv8Ljjz3DHi70tb8iHzTqQUjZowxnM+QH/e9ty57CWwt4/nxorB6J7Hzef
+ FLYRMvKVFMHsBuoE=
+X-Received: by 2002:a7b:c0d5:: with SMTP id s21mr15170762wmh.107.1588606165067; 
+ Mon, 04 May 2020 08:29:25 -0700 (PDT)
+X-Google-Smtp-Source: APiQypIq2QWQaCbGOj3Z7IwnTK7lXrQAhrMqXCntIn0TWYJZSO5HjLt49L/E9tbTZiIA8hEffVUcjw==
+X-Received: by 2002:a7b:c0d5:: with SMTP id s21mr15170665wmh.107.1588606163927; 
+ Mon, 04 May 2020 08:29:23 -0700 (PDT)
+Received: from x1w.redhat.com (26.red-88-21-207.staticip.rima-tde.net.
+ [88.21.207.26])
+ by smtp.gmail.com with ESMTPSA id a13sm12076658wrv.67.2020.05.04.08.29.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 May 2020 08:29:23 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, Cornelia Huck <cohuck@redhat.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, Richard Henderson <rth@twiddle.net>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- QEMU Developers <qemu-devel@nongnu.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bin.meng@windriver.com>, 
- Anup Patel <Anup.Patel@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::344;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x344.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ David Hildenbrand <david@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Subject: [PATCH v3 00/12] user-mode: Prune build dependencies (part 1)
+Date: Mon,  4 May 2020 17:29:10 +0200
+Message-Id: <20200504152922.21365-1-philmd@redhat.com>
+X-Mailer: git-send-email 2.21.3
+MIME-Version: 1.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8;
+	text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=205.139.110.120; envelope-from=philmd@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/04 04:24:57
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic]
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,148 +94,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 May 2020 08:17:14 -0000
+X-List-Received-Date: Mon, 04 May 2020 15:29:32 -0000
 
-On Mon, May 4, 2020 at 1:35 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> On Mon, May 4, 2020 at 4:00 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > Hi Anup,
-> >
-> > On Mon, May 4, 2020 at 3:52 PM Anup Patel <anup@brainfault.org> wrote:
-> > >
-> > > On Mon, May 4, 2020 at 12:46 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > >
-> > > > Hi Anup,
-> > > >
-> > > > On Sun, May 3, 2020 at 12:38 PM Anup Patel <anup@brainfault.org> wrote:
-> > > > >
-> > > > > On Fri, May 1, 2020 at 9:26 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > > >
-> > > > > > From: Bin Meng <bin.meng@windriver.com>
-> > > > > >
-> > > > > > The RISC-V generic platform is a flattened device tree (FDT) based
-> > > > > > platform where all platform specific functionality is provided based
-> > > > > > on FDT passed by previous booting stage. The support was added in
-> > > > > > upstream opensbi recently.
-> > > > > >
-> > > > > > Bring the QEMU roms/opensbi submodule to the upstream opensbi commit:
-> > > > > > commit 4f18c6e55049 ("platform: generic: Add Sifive FU540 TLB flush range limit override")
-> > > > > > with the following changes since v0.7 release:
-> > > > > >
-> > > > > >   1bb00ab lib: No need to provide default PMP region using platform callbacks
-> > > > > >   a9eac67 include: sbi_platform: Combine reboot and shutdown into one callback
-> > > > > >   6585fab lib: utils: Add SiFive test device
-> > > > > >   4781545 platform: Add Nuclei UX600 platform
-> > > > > >   3a326af scripts: adapt binary archive script for Nuclei UX600
-> > > > > >   5bdf022 firmware: fw_base: Remove CSR_MTVEC update check
-> > > > > >   e6c1345 lib: utils/serial: Skip baudrate config if input frequency is zero
-> > > > > >   01a8c8e lib: utils: Improve fdt_parse_uart8250() API
-> > > > > >   0a0093b lib: utils: Add fdt_parse_uart8250_node() function
-> > > > > >   243b0d0 lib: utils: Remove redundant clint_ipi_sync() declaration
-> > > > > >   e3ad7c1 lib: utils: Rename fdt_parse_clint() to fdt_parse_compat_addr()
-> > > > > >   a39cd6f lib: utils: Add FDT match table based node lookup
-> > > > > >   dd33b9e lib: utils: Make fdt_get_node_addr_size() public function
-> > > > > >   66185b3 lib: utils: Add fdt_parse_sifive_uart_node() function
-> > > > > >   19e966b lib: utils: Add fdt_parse_hart_id() function
-> > > > > >   44dd7be lib: utils: Add fdt_parse_max_hart_id() API
-> > > > > >   f0eb503 lib: utils: Add fdt_parse_plic_node() function
-> > > > > >   1ac794c include: Add array_size() macro
-> > > > > >   8ff2b94 lib: utils: Add simple FDT timer framework
-> > > > > >   76f0f81 lib: utils: Add simple FDT ipi framework
-> > > > > >   75322a6 lib: utils: Add simple FDT irqchip framework
-> > > > > >   76a8940 lib: utils: Add simple FDT serial framework
-> > > > > >   7cc6fa4 lib: utils: Add simple FDT reset framework
-> > > > > >   4d06353 firmware: fw_base: Introduce optional fw_platform_init()
-> > > > > >   f1aa9e5 platform: Add generic FDT based platform support
-> > > > > >   1f21b99 lib: sbi: Print platform hart count at boot time
-> > > > > >   2ba7087 scripts: Add generic platform to create-binary-archive.sh
-> > > > > >   4f18c6e platform: generic: Add Sifive FU540 TLB flush range limit override
-> > > > > >
-> > > > > > Update our Makefile to build the generic platform instead of building
-> > > > > > virt and sifive_u separately.
-> > > > > >
-> > > > > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> > > > > > ---
-> > > > > >
-> > > > > >  roms/Makefile | 30 ++++++++----------------------
-> > > > > >  roms/opensbi  |  2 +-
-> > > > > >  2 files changed, 9 insertions(+), 23 deletions(-)
-> > > > > >
-> > > > > > diff --git a/roms/Makefile b/roms/Makefile
-> > > > > > index f9acf39..cb00628 100644
-> > > > > > --- a/roms/Makefile
-> > > > > > +++ b/roms/Makefile
-> > > > > > @@ -64,10 +64,8 @@ default help:
-> > > > > >         @echo "  u-boot.e500        -- update u-boot.e500"
-> > > > > >         @echo "  u-boot.sam460      -- update u-boot.sam460"
-> > > > > >         @echo "  efi                -- update UEFI (edk2) platform firmware"
-> > > > > > -       @echo "  opensbi32-virt     -- update OpenSBI for 32-bit virt machine"
-> > > > > > -       @echo "  opensbi64-virt     -- update OpenSBI for 64-bit virt machine"
-> > > > > > -       @echo "  opensbi32-sifive_u -- update OpenSBI for 32-bit sifive_u machine"
-> > > > > > -       @echo "  opensbi64-sifive_u -- update OpenSBI for 64-bit sifive_u machine"
-> > > > > > +       @echo "  opensbi32-generic  -- update OpenSBI for 32-bit generic machine"
-> > > > > > +       @echo "  opensbi64-generic  -- update OpenSBI for 64-bit generic machine"
-> > > > > >         @echo "  bios-microvm       -- update bios-microvm.bin (qboot)"
-> > > > > >         @echo "  clean              -- delete the files generated by the previous" \
-> > > > > >                                       "build targets"
-> > > > > > @@ -170,29 +168,17 @@ skiboot:
-> > > > > >  efi: edk2-basetools
-> > > > > >         $(MAKE) -f Makefile.edk2
-> > > > > >
-> > > > > > -opensbi32-virt:
-> > > > > > +opensbi32-generic:
-> > > > > >         $(MAKE) -C opensbi \
-> > > > > >                 CROSS_COMPILE=$(riscv32_cross_prefix) \
-> > > > > > -               PLATFORM="qemu/virt"
-> > > > > > -       cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-virt-fw_jump.bin
-> > > > > > +               PLATFORM="generic"
-> > > > > > +       cp opensbi/build/platform/generic/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-generic-fw_jump.bin
-> > > > >
-> > > > > I think you should copy fw_jump.elf as well because QEMU Spike
-> > > > > platform needs it.
-> > > > >
-> > > >
-> > > > I believe we intended only to ship default bios images for virt and
-> > > > sifive_u. Spike bios image was not shipped in previous QEMU version
-> > > > too.
-> > >
-> > > Is there a specific reason for not shipping bios image for Spike machine ?
-> > >
-> >
-> > That's only my guess.  Based on what I see from git history, adding
-> > "-bios" support was added via:
-> >
-> > commit 5b8a986350a9 ("hw/riscv/spike: Allow loading firmware
-> > separately using -bios option")
-> >
-> > with bios image as opensbi-riscv{32,64}-spike-fw_jump.elf, but the
-> > images were not added to QEMU repo.
-> >
-> > > There were issues booting Linux on QEMU spike machine which are
-> > > now fixed and available in QEMU master. I think we should certainly
-> > > ship fw_jump.elf for Spike machine. This way we have OpenSBI generic
-> > > firmware available as a bios image for three QEMU machines(virt, sifive_u,
-> > > and spike).
-> > >
-> >
-> > If everyone thinks shipping the ELF image is OK, I can do that in v2.
->
-> One additional note, that's why patch 5 in this series for. Without
-> the default bios image being shipped in QEMU, QEMU testing will
-> complain.
->
-> So in the future, when we have more QEMU RISC-V machines added, if
-> they are not using the generic firmware, do we want to ship all of
-> these different firmware images in QEMU?
+This is the first part of a series reducing user-mode
+dependencies. By stripping out unused code, the build
+and testing time is reduced (as is space used by objects).
 
-This would be a QEMU RISC-V policy decision which Palmer or Alistair
-can decide.
+Part 1 (generic):
+- reduce user-mode object list
+- remove some migration code from user-mode
+- remove cpu_get_crash_info()
 
-IMHO, we can insist that newer QEMU RISC-V machines work fine with
-OpenSBI generic firmwares so that we don't increase the number of bios
-images shipped for QEMU RISC-V.
+This series is fully reviewed.
 
-Regards,
-Anup
+Since v2:
+- Rebased due to conflict when applying patch:
+  "util/Makefile: Reduce the user-mode object list"
+  because commit 01ef6b9e4e modified util/Makefile.objs:
+  "linux-user: factor out reading of /proc/self/maps"
+
+Since v1:
+- Addressed Laurent/Richard review comments
+- Removed 'exec: Drop redundant #ifdeffery'
+- Removed 'target: Restrict write_elfXX_note() handlers to system-mode'
+
+$ git backport-diff -u v1 -r v2
+Key:
+[----] : patches are identical
+[####] : number of functional differences between upstream/downstream patch
+[down] : patch is downstream-only
+The flags [FC] indicate (F)unctional and (C)ontextual differences, respecti=
+vely
+
+001/12:[----] [--] 'Makefile: Only build virtiofsd if system-mode is enable=
+d'
+002/12:[----] [--] 'configure: Avoid building TCG when not needed'
+003/12:[----] [--] 'tests/Makefile: Only display TCG-related tests when TCG=
+ is available'
+004/12:[----] [--] 'tests/Makefile: Restrict some softmmu-only tests'
+005/12:[----] [-C] 'util/Makefile: Reduce the user-mode object list'
+006/12:[----] [--] 'stubs/Makefile: Reduce the user-mode object list'
+007/12:[----] [--] 'target/riscv/cpu: Restrict CPU migration to system-mode=
+'
+008/12:[----] [--] 'exec: Assert CPU migration is not used on user-only bui=
+ld'
+009/12:[----] [--] 'arch_init: Remove unused 'qapi-commands-misc.h' include=
+'
+010/12:[----] [--] 'target/i386: Restrict CpuClass::get_crash_info() to sys=
+tem-mode'
+011/12:[----] [--] 'target/s390x: Restrict CpuClass::get_crash_info() to sy=
+stem-mode'
+012/12:[----] [--] 'hw/core: Restrict CpuClass::get_crash_info() to system-=
+mode'
+
+Philippe Mathieu-Daud=C3=A9 (12):
+  Makefile: Only build virtiofsd if system-mode is enabled
+  configure: Avoid building TCG when not needed
+  tests/Makefile: Only display TCG-related tests when TCG is available
+  tests/Makefile: Restrict some softmmu-only tests
+  util/Makefile: Reduce the user-mode object list
+  stubs/Makefile: Reduce the user-mode object list
+  target/riscv/cpu: Restrict CPU migration to system-mode
+  exec: Assert CPU migration is not used on user-only build
+  arch_init: Remove unused 'qapi-commands-misc.h' include
+  target/i386: Restrict CpuClass::get_crash_info() to system-mode
+  target/s390x: Restrict CpuClass::get_crash_info() to system-mode
+  hw/core: Restrict CpuClass::get_crash_info() to system-mode
+
+ configure              |  4 +++
+ Makefile               |  2 +-
+ include/hw/core/cpu.h  |  7 ++++-
+ arch_init.c            |  1 -
+ exec.c                 |  4 ++-
+ hw/core/cpu.c          |  2 ++
+ target/i386/cpu.c      |  6 ++++-
+ target/riscv/cpu.c     |  6 +++--
+ target/s390x/cpu.c     | 12 ++++-----
+ stubs/Makefile.objs    | 52 +++++++++++++++++++++----------------
+ tests/Makefile.include | 18 +++++++------
+ util/Makefile.objs     | 59 +++++++++++++++++++++++++++---------------
+ 12 files changed, 108 insertions(+), 65 deletions(-)
+
+--=20
+2.21.3
+
 
