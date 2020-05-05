@@ -1,73 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jVwKA-0003lB-SK
-	for mharc-qemu-riscv@gnu.org; Tue, 05 May 2020 08:05:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55092)
+	id 1jW3mX-00051D-Tw
+	for mharc-qemu-riscv@gnu.org; Tue, 05 May 2020 16:03:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41116)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jVwK9-0003j6-Ap
- for qemu-riscv@nongnu.org; Tue, 05 May 2020 08:05:21 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:40198
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jVwK8-0006Wh-ME
- for qemu-riscv@nongnu.org; Tue, 05 May 2020 08:05:21 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588680320;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1ZRMwJ0l3pA4bkiIht/Igryh6u3Owd0J32A4vjL/9UA=;
- b=XnPAorvHAG+czAMMza16/luLHbsSRlzdSHpKgB+wXgMcET7QR/PMc3RXT5lWQrIaipVJ8e
- E9XoJoZwcWySjoIV1N66IwrzRFFrjqbyxPG9X0vqWZPih3J1JutfhlDFFIm0A7seeTWL+6
- CFvqf6MEZYEPi1XYkYWSculan0NXCr0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-433-sSC1G_5aPW-V_m9GQvYNXw-1; Tue, 05 May 2020 08:05:18 -0400
-X-MC-Unique: sSC1G_5aPW-V_m9GQvYNXw-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C939D107ACCA;
- Tue,  5 May 2020 12:05:15 +0000 (UTC)
-Received: from gondolin (ovpn-112-219.ams2.redhat.com [10.36.112.219])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B8D506295B;
- Tue,  5 May 2020 12:05:05 +0000 (UTC)
-Date: Tue, 5 May 2020 14:05:03 +0200
-From: Cornelia Huck <cohuck@redhat.com>
-To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@redhat.com>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, Bastian
- Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, Richard Henderson <rth@twiddle.net>, Paolo Bonzini
- <pbonzini@redhat.com>, Alistair Francis <Alistair.Francis@wdc.com>, Sagar
- Karandikar <sagark@eecs.berkeley.edu>, Eduardo Habkost
- <ehabkost@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, David
- Hildenbrand <david@redhat.com>, Richard Henderson
- <richard.henderson@linaro.org>
-Subject: Re: [PATCH v3 11/12] target/s390x: Restrict
- CpuClass::get_crash_info() to system-mode
-Message-ID: <20200505140503.2adb9a8e.cohuck@redhat.com>
-In-Reply-To: <20200504152922.21365-12-philmd@redhat.com>
-References: <20200504152922.21365-1-philmd@redhat.com>
- <20200504152922.21365-12-philmd@redhat.com>
-Organization: Red Hat GmbH
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jW3mW-000511-KY; Tue, 05 May 2020 16:03:08 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:37548)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jW3mV-0004Hy-Rp; Tue, 05 May 2020 16:03:08 -0400
+Received: by mail-il1-x143.google.com with SMTP id n11so11293ilj.4;
+ Tue, 05 May 2020 13:03:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=mg6aRzAs1PiRXeP8N6F3+uzviD7Pj5yIv4OQsIs2Ds0=;
+ b=GfaqKQfs/Hk+rJEa399uKn2PvjeDut1a/hA/Ez9VuN8VOY4fMlroE33HL+Ax1RPNaa
+ AXKYWiws9Av4nzU866I1kGcjee9O8xcm1OAhY+Y7Lo16b7P8+Qc1x1HM5bB4Tg0k5pFA
+ snSwIUvLugfMer6JyFYRNdr2FRVsSGwlg4e9eaG0rZTj/Vyg5VB3XB21xiXHhGc7WWJI
+ buoa0jHPF0KAiky9XmRJwuGxUCFd3EV8GxFvdab4SEpU9Doh2J3J8hMhfca+dHnf8XMM
+ kET8oDinJTNvMQPAlYo+v2FieXvjmX0B3IkaGutxaTpozox0TNknGPsoLfL29d3IBv0s
+ 73Xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=mg6aRzAs1PiRXeP8N6F3+uzviD7Pj5yIv4OQsIs2Ds0=;
+ b=irz+sDiFgap6jujvxW1v+ZyvljdValeqQNNPTWu4Xq4IG3+39lXnbd5PK9EK7sM/2C
+ AoIFyE2eDM3ifD8//ZsJ+yE9mLqpf2rog3lmQXajEXxCtCwkKzo0D2FEUhLWUzLvih6w
+ KlySouk1s3mqS5Y4e+y+v7PuJvuZoCDmYNgr+Syb5FsTItkAJg7nuOtt1wuXyCJQNuDb
+ NhCBzs9DTC6XZoegHwHad+bmXhi551hiFzM2eg70Qpyfj0rgx1hEXBQvyqnanAF2N1lh
+ e+TSKu+F5V6YOi+vbSInaeVWVotDGx39HslLfGNCY+wUTFkJiPUtIwDZShEL68qRf0br
+ v/Ug==
+X-Gm-Message-State: AGi0Puboz/J/JqWMagiA6lXKkrP1zF9Zru9i7ZkzXjavicrmF5fa4R2f
+ A24KXbvD3OCq6BkNYGV2Y4WASU37WnLZItP9IqE=
+X-Google-Smtp-Source: APiQypLR1dOBTbGl2x7Yk8gv6q24isesGTq4oPgqkd8yorcJgItTUwE6HRSg9sOCNRUcm4z0bu9n6nrx0ZddNM/ULkg=
+X-Received: by 2002:a92:ad09:: with SMTP id w9mr5738083ilh.177.1588708985039; 
+ Tue, 05 May 2020 13:03:05 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=207.211.31.120; envelope-from=cohuck@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/05 00:37:38
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+References: <CAC41xo2O1k+cn7EO3Zu3U70qefFwGa5B1iNRNgRwLk7SGX=-Aw@mail.gmail.com>
+ <CAKmqyKPDzusVqzCFwCJ+2gY0qchguhR57zHNkE-0MTeffKs_OA@mail.gmail.com>
+ <CAC41xo3qeQZ+i8XoQq3j80_JDEoL2yMA__arpmE+GXyjX4c1sg@mail.gmail.com>
+ <CAKmqyKPJ6QqUULrDj9NX_bLdnjsjzPOGcCBH5q23fG=ScT_NzA@mail.gmail.com>
+ <CAC41xo32aWNZteKP-95AtFXQo3w_Ey-7MA0-dL_uJmEMScAuhg@mail.gmail.com>
+ <CAKmqyKOnpJQUHVnzGVBjPkib-Z1vfdWqLx1HmfbGascFFG4DVQ@mail.gmail.com>
+ <CAC41xo2-knUMRVALdftzu4cNz5u5UmBf1aK=mAt9YKzvOcCjpg@mail.gmail.com>
+ <CAC41xo0BMA93jv_aqzmuaB553kxM8zCZms1M89uybxyhdjxiXg@mail.gmail.com>
+In-Reply-To: <CAC41xo0BMA93jv_aqzmuaB553kxM8zCZms1M89uybxyhdjxiXg@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 5 May 2020 12:54:22 -0700
+Message-ID: <CAKmqyKO5nJwN_JyvZ4vMc4rcuJD3j3uPVkBZU+uB4dEyiYUDDw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] target/riscv: fix VS interrupts forwarding to HS
+To: Jose Martins <josemartins90@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,18 +78,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2020 12:05:21 -0000
+X-List-Received-Date: Tue, 05 May 2020 20:03:08 -0000
 
-On Mon,  4 May 2020 17:29:21 +0200
-Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com> wrote:
+On Fri, May 1, 2020 at 11:57 AM Jose Martins <josemartins90@gmail.com> wrote:
+>
+> Reached out to Andrew Waterman. This was his response:
+>
+> "I think the encoding of the privileged modes is a red herring.  HS is
+> inherently more privileged than VS, since it controls memory
+> protection and interrupt delegation for VS.
+> Certainly the intent is that HS-mode interrupts are always enabled
+> while executing in VS-mode.  Otherwise, badly behaved VS-mode software
+> could starve HS-mode of interrupts."
 
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> ---
->  target/s390x/cpu.c | 12 +++++-------
->  1 file changed, 5 insertions(+), 7 deletions(-)
->=20
+Ok, so in which case the hs_sie variable should be removed.
 
-Reviewed-by: Cornelia Huck <cohuck@redhat.com>
+Alistair
 
+>
+> So my assumption was correct.
+>
+> Jose
+>
+> On Thu, 30 Apr 2020 at 22:47, Jose Martins <josemartins90@gmail.com> wrote:
+> >
+> > > I'm not sure HS is a higher privilege mode.
+> > >
+> > > HS is privilege encoding 1, which is the same as VS (VU is obviously lower).
+> >
+> > I just checked the spec and it doesn't actually, explicitly state that
+> > HS is a higher-privilege mode than VS. I thought this was something
+> > implicit, but you might be right. I'll try to reach out to the spec
+> > authors to clarify this.
+> >
+> > Jose
 
