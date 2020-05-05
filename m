@@ -1,70 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jVdYe-0005CI-7V
-	for mharc-qemu-riscv@gnu.org; Mon, 04 May 2020 12:03:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38798)
+	id 1jVt12-0004V0-Uf
+	for mharc-qemu-riscv@gnu.org; Tue, 05 May 2020 04:33:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36490)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jVdYb-00055c-5s; Mon, 04 May 2020 12:03:01 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:44032)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jVdYa-0006sL-80; Mon, 04 May 2020 12:03:00 -0400
-Received: by mail-il1-x144.google.com with SMTP id s10so11717092iln.11;
- Mon, 04 May 2020 09:02:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9iW+ohN/8VaKTtFNKkF+ADG5q3Qu3gUEbTJUatSDWug=;
- b=aPYC3k3I7SSEr5lpgcPd1AmFeX9yzhDw+44rFWvUXxJSTMEIC2xkiCjuy0jZs3qXkt
- rJqRwOwiHYvdJT+QyX2mMazbzHkDRTLqCqZHLSeoBv3Pw0AC8mA8pRi/yu+EjILE+9Ol
- HFcMV1mUGkLQ3IdxZYeui/Zmjs+EuvjpHH+O7E4LJ+L27Sts2H5CxmqzauXR40L3KpDB
- A0LcYWWMTb/ve112YKi5KlSEZ70+mWO/4ES0L4RMK0jzK+RrhJPbUjoYLPISU4t+M+2+
- Nvrc4VO1qCONOW2ggibQobytdkivUZzccx2XLm1KLyic19DjjbG0sT3Vo9ygocWazK7D
- +JQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=9iW+ohN/8VaKTtFNKkF+ADG5q3Qu3gUEbTJUatSDWug=;
- b=eUHqf4j9p/0epyCbyjWAmgae8C391STEQIoAehHQYwAP7ey+nuUTmRsOZ3JYB3f2Qa
- XPG983eQiqdM3WF5fD1fNnvFspIuX7uWniZu4j815K2Z4mRzwKA2bFEAHSGxpm785Dor
- o8US3sBK+0Krf5CFkWk/Ib344ZwmCxjYQ4VN+dGXd4XNukyDduHkC2WAYq5tl4v80HLH
- xWGNAaS0/DIDMxc9Bu4HcuAUByfhiO6DCc7dqlZ+hoEzWtI/37pAENuDKNM9/ZJb9a89
- JMZxFYXxzn4o2+kwWjmGdUw50SFw1ct8GElIkc6I8BLMHWrnSpJRG+QvfOLDf9pxLkIO
- wI4A==
-X-Gm-Message-State: AGi0Puagwt0rLFUGzFL35XuxJjDinftSREiDYzJ4otFkgyA8WsXml2c0
- P4tAWpftGrsHUPGPW5dR+h6VbS2qcNVctk61eWU=
-X-Google-Smtp-Source: APiQypJCab4JzwbpRy1i8hdaPdLClJTkpUgMCA/sCJZ4eFYv6AibLO2434MRFZJPxBZeWfekSTZ/4iQrP5YN1HIZgQo=
-X-Received: by 2002:a92:d0c6:: with SMTP id y6mr17917960ila.227.1588608178965; 
- Mon, 04 May 2020 09:02:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1jVt0z-0004NX-Ht; Tue, 05 May 2020 04:33:22 -0400
+Resent-Date: Tue, 05 May 2020 04:33:21 -0400
+Resent-Message-Id: <E1jVt0z-0004NX-Ht@lists.gnu.org>
+Received: from sender4-of-o53.zoho.com ([136.143.188.53]:21301)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1jVt0j-0001dQ-HQ; Tue, 05 May 2020 04:33:06 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1588667563; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=LGkKkTsKOsDNfoWDd0WnfC0FOBUzgX9MfAPBSnRe6t7IPnJ1SZ9t1BKAiIxQMFbTeZWRFjoiSXYivGVf2bMHZw1umeIcR1yT/W94N9uItaWtt733wUvutRds2KzxUORdZXV4ZnCowcnRxWeHmPr2Euw81Jdkm2eprXW6kDOO2dE=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1588667563;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
+ bh=Hjvw6NJvYofYO6bZKLN4BKx545jpO693CGT3ySL/+zE=; 
+ b=N/IepVrn8sGGFxhLtRFWfDm1CreakPUW2adzf2DezOM2OZqanJZ5m2N0L90utSQjOw6/wj5ESEcCoTcjxj6V/aH81D1ANJRcZ0N/5q4/nf9tSvNWW08wMjda9hKgCykX5oCQ/3OxWB+0cCn7sX0CWF4jlA1Uslqed6M7darnkVg=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 1588667562257715.0200390202127;
+ Tue, 5 May 2020 01:32:42 -0700 (PDT)
+Message-ID: <158866756022.24779.15250571115216532173@45ef0f9c86ae>
+In-Reply-To: <20200504152922.21365-1-philmd@redhat.com>
+Subject: Re: [PATCH v3 00/12] user-mode: Prune build dependencies (part 1)
+Reply-To: <qemu-devel@nongnu.org>
 MIME-Version: 1.0
-References: <1588348254-7241-1-git-send-email-bmeng.cn@gmail.com>
- <1588348254-7241-5-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1588348254-7241-5-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 4 May 2020 08:54:18 -0700
-Message-ID: <CAKmqyKP-+ns6UC=QxaNJfisjjYq++CyW86h8pPwhJhaeH5Jc=w@mail.gmail.com>
-Subject: Re: [PATCH 4/5] riscv/spike: Change the default bios to use generic
- platform image
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Anup Patel <Anup.Patel@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: philmd@redhat.com
+Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, qemu-riscv@nongnu.org,
+ ehabkost@redhat.com, sagark@eecs.berkeley.edu, david@redhat.com,
+ kbastian@mail.uni-paderborn.de, cohuck@redhat.com, qemu-s390x@nongnu.org,
+ palmer@dabbelt.com, pbonzini@redhat.com, philmd@redhat.com, rth@twiddle.net
+Date: Tue, 5 May 2020 01:32:42 -0700 (PDT)
+X-ZohoMailClient: External
+Received-SPF: pass client-ip=136.143.188.53; envelope-from=no-reply@patchew.org;
+ helo=sender4-of-o53.zoho.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/05 04:16:46
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -78,53 +64,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 May 2020 16:03:02 -0000
+X-List-Received-Date: Tue, 05 May 2020 08:33:23 -0000
 
-On Fri, May 1, 2020 at 8:51 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> To keep sync with other RISC-V machines, change the default bios
-> to use generic platform image.
->
-> While we are here, add some comments to mention that keeping ELF
-> files here was intentional.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
-> ---
->
->  hw/riscv/spike.c | 9 +++++++--
->  1 file changed, 7 insertions(+), 2 deletions(-)
->
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index d0c4843..6f26fcf 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -45,10 +45,15 @@
->
->  #include <libfdt.h>
->
-> +/*
-> + * Not like other RISC-V machines that use plain binary bios images,
-> + * keeping ELF files here was intentional because BIN files don't work
-> + * for the Spike machine as HTIF emulation depends on ELF parsing.
-> + */
->  #if defined(TARGET_RISCV32)
-> -# define BIOS_FILENAME "opensbi-riscv32-spike-fw_jump.elf"
-> +# define BIOS_FILENAME "opensbi-riscv32-generic-fw_jump.elf"
->  #else
-> -# define BIOS_FILENAME "opensbi-riscv64-spike-fw_jump.elf"
-> +# define BIOS_FILENAME "opensbi-riscv64-generic-fw_jump.elf"
->  #endif
->
->  static const struct MemmapEntry {
-> --
-> 2.7.4
->
->
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDUwNDE1MjkyMi4yMTM2
+NS0xLXBoaWxtZEByZWRoYXQuY29tLwoKCgpIaSwKClRoaXMgc2VyaWVzIGZhaWxlZCB0aGUgYXNh
+biBidWlsZCB0ZXN0LiBQbGVhc2UgZmluZCB0aGUgdGVzdGluZyBjb21tYW5kcyBhbmQKdGhlaXIg
+b3V0cHV0IGJlbG93LiBJZiB5b3UgaGF2ZSBEb2NrZXIgaW5zdGFsbGVkLCB5b3UgY2FuIHByb2Jh
+Ymx5IHJlcHJvZHVjZSBpdApsb2NhbGx5LgoKPT09IFRFU1QgU0NSSVBUIEJFR0lOID09PQojIS9i
+aW4vYmFzaApleHBvcnQgQVJDSD14ODZfNjQKbWFrZSBkb2NrZXItaW1hZ2UtZmVkb3JhIFY9MSBO
+RVRXT1JLPTEKdGltZSBtYWtlIGRvY2tlci10ZXN0LWRlYnVnQGZlZG9yYSBUQVJHRVRfTElTVD14
+ODZfNjQtc29mdG1tdSBKPTE0IE5FVFdPUks9MQo9PT0gVEVTVCBTQ1JJUFQgRU5EID09PQoKCgoK
+VGhlIGZ1bGwgbG9nIGlzIGF2YWlsYWJsZSBhdApodHRwOi8vcGF0Y2hldy5vcmcvbG9ncy8yMDIw
+MDUwNDE1MjkyMi4yMTM2NS0xLXBoaWxtZEByZWRoYXQuY29tL3Rlc3RpbmcuYXNhbi8/dHlwZT1t
+ZXNzYWdlLgotLS0KRW1haWwgZ2VuZXJhdGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0Y2hldyBbaHR0
+cHM6Ly9wYXRjaGV3Lm9yZy9dLgpQbGVhc2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRvIHBhdGNoZXct
+ZGV2ZWxAcmVkaGF0LmNvbQ==
 
