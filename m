@@ -1,53 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jW4Ux-0003vp-Nw
-	for mharc-qemu-riscv@gnu.org; Tue, 05 May 2020 16:49:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49492)
+	id 1jW6Bl-00030l-Mh
+	for mharc-qemu-riscv@gnu.org; Tue, 05 May 2020 18:37:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41206)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jW4Uw-0003vI-Bv; Tue, 05 May 2020 16:49:02 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:45880)
+ id 1jW6Bj-0002zz-Q2; Tue, 05 May 2020 18:37:19 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:33540)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jW4Uv-0003Un-9c; Tue, 05 May 2020 16:49:02 -0400
-Received: by mail-io1-xd43.google.com with SMTP id i19so3454313ioh.12;
- Tue, 05 May 2020 13:49:00 -0700 (PDT)
+ id 1jW6Bi-0003PW-Si; Tue, 05 May 2020 18:37:19 -0400
+Received: by mail-io1-xd43.google.com with SMTP id k18so228839ion.0;
+ Tue, 05 May 2020 15:37:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=406+i9PL1ZVKL0dmCOj9r81iVcvZ1bsf/5hn7k5deQQ=;
- b=bAMU5Jx1lV95o3TBKOJdqgY6orV29t6D74TCUnB8aNkUrfFUOnZENjmd+24udXJQ2m
- snqf+FI4hfQg9KcpHXamxOT88aKC4K4mIc6xaeFQ6nhkNMC/T4Kxb5VhZlDOvyp4xDfw
- +sk2Ptl+ERKpsFTnWL7sx+mTRTM7jpdUy9WupuURJPmBBQjGOupCwf+KlngPIB+mvyhe
- IKa4PGyG6ok+jImx5sW6GMLpd28g3topNXR7ls46zdi1GIIJxzC3Zdjep+QbFCC5pqXb
- Em+Eb/1banerwjv0pFcfApAiF2rcXCEpNCKHZLoyRtN/GJ/xouc73lnl7H2NoTaKy0r3
- v6wQ==
+ :cc; bh=mWlQvx7wo4D3bZ2BocGQGaMJLbGsn45Z7hf18L0JGQk=;
+ b=T1BSKcMhkcsvyZpWkSVjYBdmwBGdLJ0aUbxT32O8yG5jlLlOiWGCxG83QwkGKRslqM
+ Skdur5pokRRn4g2fv8caHtnmXbfBQ+qiYdjGU9Rv84JQsqRwmLSEWPB5/qC/uzvr9qR4
+ /NJvz+/pIFWQP4rkCA8Rzlj5dhgFEdxzulGEum5APlodROTcKhoKiPKom12ABjoMdpgu
+ t4bW9+DjcMl03bzViT5/pVQqb90+TCIXEX11A6VhnKWkB3J2oi7ki1B+mG662SaQlb8p
+ zbksYGKevmagW7VIRwcghF+FyHxzJ7Z3VNcOM+sDV+cnZSaagxmmXxTxhA0+LWemj+z2
+ cjig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=406+i9PL1ZVKL0dmCOj9r81iVcvZ1bsf/5hn7k5deQQ=;
- b=UXnfpBty7x3FPYUMjyMKQWvKSlbuCmAYjHELwMMbSiVzQ367WzfJin5Nc/k7aM/iea
- zW3Jg93a15sOxlmWX+lmDV8nheVnHOF1bEUB25N2vV3D/0UkCiPDeLuY/xMWgBYW5S0l
- r4R/JQSqfyugHYO2/aGvWR/V+pIJr7GratO7sDyF5Zqoe0gxMFhiY6wnUmxl6xBefPpZ
- R0LwtTyIQXCIBE1zxktoyGmPXN3QSR03ZZZs0XC00C/gUjFTDHyAGu9Y9WWRjf4ZMzoC
- F6XYh7yyHK8+Q/An+yggZE6GlQHhjL4KCLLAACBknirQEW5bmuX8zqaySu5B9zNOXqQk
- YivA==
-X-Gm-Message-State: AGi0PuaNJc7Qry+k0UtdEIeyTy1/YKDzebuiwHVzBysxi3iilHWxFYkJ
- pN2XWV3X1gllPJ6Pnsyx4wJiLRAwZmKgZCGpprA=
-X-Google-Smtp-Source: APiQypJ1VWmWo26yAvxS0jJSbsg9zTq3xtqqXsWQd/wySmM6ZJdreXv2lIrWscA0GZ5UEmDoadV8Q20kOdElyHmh+R0=
-X-Received: by 2002:a02:6243:: with SMTP id d64mr5249560jac.135.1588711739887; 
- Tue, 05 May 2020 13:48:59 -0700 (PDT)
+ bh=mWlQvx7wo4D3bZ2BocGQGaMJLbGsn45Z7hf18L0JGQk=;
+ b=T3u9hqzuyBqp4nM49pNktShinfA64EbyJRuzC2Aq+bozC6DC+3Vz9jUVeBQXYJ1dFG
+ hBK67NMNuArynLadFOYLzU+Px5oQj43NYGagARX8kgtFZdfO0cPxK5igHANRUAqOTPLv
+ lBkVUrCrrV6/5iSwQCGnbadafq0Hbai3tbuGjRzXKMLQoQ+xiSqmZzZZkr4TD8Dpwngi
+ aUb0V35PsFKXN45oTOazoXyC+miB+9OHOC71fq2Rc8xRYvS1mxiepi0AWyHtN8h0fTn2
+ VjqXS47dSkhJuxgzWEtSoktgYcS69AqGKROdgk874WDlcNipvG6pHnsHFhehDKTJFu74
+ HvwA==
+X-Gm-Message-State: AGi0PuYmzpXTNn9jA8hfVeV3uUOuW+98nNCD0L3M9af7veQ/itdzUHU4
+ JYyd1DFffGSGI1xOcQCbr+Dz5gQO9Wr+oSHB6T8=
+X-Google-Smtp-Source: APiQypJsQgckhP7fOsqe62f8WCr/SrwI/FoBOzazOdXsqxRBLey/kTsbCWuT1xjdkFoWrzM9Z9npAmQSLIEEOjwsA1g=
+X-Received: by 2002:a5e:880b:: with SMTP id l11mr5839491ioj.42.1588718237206; 
+ Tue, 05 May 2020 15:37:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200501185106.88767-1-josemartins90@gmail.com>
-In-Reply-To: <20200501185106.88767-1-josemartins90@gmail.com>
+References: <1588335545-649-1-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKMdmVrvYDNVtm6_iviDT_mofGZO9DC2vtZdZaHN31T07A@mail.gmail.com>
+In-Reply-To: <CAKmqyKMdmVrvYDNVtm6_iviDT_mofGZO9DC2vtZdZaHN31T07A@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 5 May 2020 13:40:14 -0700
-Message-ID: <CAKmqyKPwcUWor2jn_fED8o8+aNOqVm11-q0ijAVWFakwp1CfkQ@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: fix check of guest pa top bits
-To: Jose Martins <josemartins90@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Date: Tue, 5 May 2020 15:28:35 -0700
+Message-ID: <CAKmqyKO6HGQrMxsNovPkoB4TncEmeD=uFV_oXEpQ0t+=g20Wfw@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Change the default behavior if no -bios option is
+ specified
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
 Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
  envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
@@ -73,65 +78,100 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2020 20:49:02 -0000
+X-List-Received-Date: Tue, 05 May 2020 22:37:20 -0000
 
-On Fri, May 1, 2020 at 11:51 AM Jose Martins <josemartins90@gmail.com> wrote:
+On Tue, May 5, 2020 at 1:34 PM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> The spec states that on sv39x4 guest physical  "address bits 63:41 must
-> all be zeros, or else a guest-page-fault exception occurs.".  However,
-> the check performed for these top bits of the virtual address on the
-> second stage is the same as the one performed for virtual addresses on
-> the first stage except with the 2-bit extension, effectively creating
-> the same kind of "hole" in the guest's physical address space. I believe
-> the following patch fixes this issue:
+> On Fri, May 1, 2020 at 5:21 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > From: Bin Meng <bin.meng@windriver.com>
+> >
+> > Per QEMU deprecated doc, QEMU 4.1 introduced support for the -bios
+> > option in QEMU for RISC-V for the virt machine and sifive_u machine.
+> > The default behavior has been that QEMU does not automatically load
+> > any firmware if no -bios option is included.
+> >
+> > Now 2 releases passed, it's time to change the default behavior to
+> > load the default OpenSBI firmware automatically. The firmware is
+> > included with the QEMU release and no user interaction is required.
+> > All a user needs to do is specify the kernel they want to boot with
+> > the -kernel option.
+> >
+> > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 >
-> Signed-off-by: Jose Martins <josemartins90@gmail.com>
+> Thanks!
+>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>
+> Applied to the RISC-V tree.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This fails `make check`
 
-Applied to RISC-V tree.
+qemu-system-riscv64: Unable to load the RISC-V firmware
+"opensbi-riscv64-spike-fw_jump.elf"
+Broken pipe
+/scratch/alistair/software/qemu/tests/qtest/libqtest.c:166:
+kill_qemu() tried to terminate QEMU process but encountered exit
+status 1 (expected 0)
+ERROR - too few tests run (expected 7, got 2)
+make: *** [/scratch/alistair/software/qemu/tests/Makefile.include:637:
+check-qtest-riscv64] Error 1
 
 Alistair
 
-> ---
->  target/riscv/cpu_helper.c | 20 +++++++++++++-------
->  1 file changed, 13 insertions(+), 7 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 247304d850..ae22c30bdd 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -426,15 +426,21 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->      int va_bits = PGSHIFT + levels * ptidxbits + widened;
->      target_ulong mask, masked_msbs;
+> Alistair
 >
-> -    if (TARGET_LONG_BITS > (va_bits - 1)) {
-> -        mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-> +    if (!first_stage) {
-> +        if ((addr >> va_bits) != 0) {
-> +            return TRANSLATE_FAIL;
-> +        }
->      } else {
-> -        mask = 0;
-> -    }
-> -    masked_msbs = (addr >> (va_bits - 1)) & mask;
-> +        if (TARGET_LONG_BITS > (va_bits - 1)) {
-> +            mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-> +        } else {
-> +            mask = 0;
-> +        }
-> +        masked_msbs = (addr >> (va_bits - 1)) & mask;
->
-> -    if (masked_msbs != 0 && masked_msbs != mask) {
-> -        return TRANSLATE_FAIL;
-> +        if (masked_msbs != 0 && masked_msbs != mask) {
-> +            return TRANSLATE_FAIL;
-> +        }
->      }
->
->      int ptshift = (levels - 1) * ptidxbits;
-> --
-> 2.25.1
->
->
+> > ---
+> >
+> >  hw/riscv/boot.c | 31 ++++---------------------------
+> >  1 file changed, 4 insertions(+), 27 deletions(-)
+> >
+> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> > index 726300a..b76b2f3 100644
+> > --- a/hw/riscv/boot.c
+> > +++ b/hw/riscv/boot.c
+> > @@ -41,34 +41,11 @@ void riscv_find_and_load_firmware(MachineState *machine,
+> >  {
+> >      char *firmware_filename = NULL;
+> >
+> > -    if (!machine->firmware) {
+> > +    if ((!machine->firmware) || (!strcmp(machine->firmware, "default"))) {
+> >          /*
+> > -         * The user didn't specify -bios.
+> > -         * At the moment we default to loading nothing when this hapens.
+> > -         * In the future this defaul will change to loading the prebuilt
+> > -         * OpenSBI firmware. Let's warn the user and then continue.
+> > -        */
+> > -        if (!qtest_enabled()) {
+> > -            warn_report("No -bios option specified. Not loading a firmware.");
+> > -            warn_report("This default will change in a future QEMU release. " \
+> > -                        "Please use the -bios option to avoid breakages when "\
+> > -                        "this happens.");
+> > -            warn_report("See QEMU's deprecation documentation for details.");
+> > -        }
+> > -        return;
+> > -    }
+> > -
+> > -    if (!strcmp(machine->firmware, "default")) {
+> > -        /*
+> > -         * The user has specified "-bios default". That means we are going to
+> > -         * load the OpenSBI binary included in the QEMU source.
+> > -         *
+> > -         * We can't load the binary by default as it will break existing users
+> > -         * as users are already loading their own firmware.
+> > -         *
+> > -         * Let's try to get everyone to specify the -bios option at all times,
+> > -         * so then in the future we can make "-bios default" the default option
+> > -         * if no -bios option is set without breaking anything.
+> > +         * The user didn't specify -bios, or has specified "-bios default".
+> > +         * That means we are going to load the OpenSBI binary included in
+> > +         * the QEMU source.
+> >           */
+> >          firmware_filename = riscv_find_firmware(default_machine_firmware);
+> >      } else if (strcmp(machine->firmware, "none")) {
+> > --
+> > 2.7.4
+> >
+> >
 
