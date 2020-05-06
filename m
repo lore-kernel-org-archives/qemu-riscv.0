@@ -1,60 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jWRBL-00077e-M7
-	for mharc-qemu-riscv@gnu.org; Wed, 06 May 2020 17:02:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40336)
+	id 1jWRPP-0004Hq-Mf
+	for mharc-qemu-riscv@gnu.org; Wed, 06 May 2020 17:16:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45676)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jWRBJ-00077P-Tg; Wed, 06 May 2020 17:02:18 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:44537)
+ id 1jWRPC-0004GS-Mp; Wed, 06 May 2020 17:16:39 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:35207)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jWRBI-0002aP-OY; Wed, 06 May 2020 17:02:17 -0400
-Received: by mail-il1-x142.google.com with SMTP id s10so595485iln.11;
- Wed, 06 May 2020 14:02:15 -0700 (PDT)
+ id 1jWRPB-00033Q-Ka; Wed, 06 May 2020 17:16:38 -0400
+Received: by mail-il1-x142.google.com with SMTP id b18so9629ilf.2;
+ Wed, 06 May 2020 14:16:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=m/VcMjoyLBrv3KMvD0BpDh3FiQ3MRQzBtiCoTsP9dKc=;
- b=sH73flY9b4G4DysDFMsKo0CqhRUaspMkF6zimoclRBNEdaFoVmaBCt+db7Rj76iaNs
- KNg+dPlk27W0wiQmEjabGi2SrFpPr4IfdOhUzXMHf8yE5RrSf8XyAhK9txxmTt742qxE
- 59X1KJL2ihMVWPem4+qCzvmQqml+fkho/xNHTis1MW6vM0ttg40/FS1REGMxpPh5LBSA
- QDX40fZEDZH4b86IL4FnPbIXQp0tX2U7O7dIv8rZLnSWc9dsbdOMSyB/1aMfC9m9+Flm
- TOcpHTCJ1Ln6xZcTQBhWQ4Lwo9G1CFoRfLxgRyKVL5cZOfMeC5WTSp+uUsVcV9VuGHlx
- iquA==
+ :cc; bh=tn5+shFmeKu3NARcqqHb9rFqOkEIjUrR0Kf4TR2vk1w=;
+ b=Gc2K+NcLe5NKZIUBkAJyMa8+4+z71BJUtSdSnpCWvf3SWcHAuvo2IB5DcxL0A6XEOS
+ y4I0oojPBGNWd/gx6bGCMVUyS0y18ao/0eflpakUNMexeUE1jsFet0Jb6dFN+QzRe5Y6
+ sCdGoHCBuPZdMDo6KcyMo+wu0pIDoHbmmN9NJCa2ILFIgkU6eG3wvezSsZol7R4Ludb3
+ cD2Wxpu0WzODYOd7Bmu2TIeLKzLxHItkbzgBiNv/CtGkOSCEfK+sOGK5b+jOCAzg5Wfg
+ 1mSzewu11Ahx1ETa65uH6xyo4I33F27Ju2jtbhXrUWrrn5CgbJFw28r1Y/lvJbUA2Se6
+ Zlig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=m/VcMjoyLBrv3KMvD0BpDh3FiQ3MRQzBtiCoTsP9dKc=;
- b=G44L/MfSfUP/06CQqzrkKN2U1zZod9MqwIzTvcY1WjCSlSz2A0sGKVH53n+985RcJh
- /Y7q7gDPNSHpdD9QtBYX97IFwMydM406WIWXk2JNUpEapBWCT37q4Jg4HJGNcFnQ/Ne8
- 39jYwg9bmrQQiXTzR6dVUQyusvnlZph/5LezRWX08ZHG79GcuPp74K0KXwIi7OKWCMcC
- T2H3Hp9IUr4tagllNpvjXXq0sVR7+pYQ1idnsJ5NEH7VVQ9vX0+g674bHThnoJl0B5p1
- sGI6+Vs+SFVZd6AW4uPYPQVA+7p6lDXNeWtSsKPWYwv+pn43Zip/Mn1wlCB+CegZ5CX6
- mZOQ==
-X-Gm-Message-State: AGi0PuZ/8A3lAEk1A+WKm6HP7M317yenTmnZF6SJl05Cpi+cqspQwGgX
- t8hODVqtP2YRf0uTEhYwV76QO/EVgsAfSyZrFEXuSpIo
-X-Google-Smtp-Source: APiQypJe97WVQUHU3eLDsc9TfsC9+9xavHMpIYbmLgiI/H0VuYhwaDvXCT6V/cR3x2cHSgKMoAjyy1fgQRBPmE0wtIs=
-X-Received: by 2002:a92:aa07:: with SMTP id j7mr11291956ili.40.1588798934917; 
- Wed, 06 May 2020 14:02:14 -0700 (PDT)
+ bh=tn5+shFmeKu3NARcqqHb9rFqOkEIjUrR0Kf4TR2vk1w=;
+ b=BMVPeiGLdS5tSbS7r7f2Cl+2f8F09WJRcNMYn5Ua2Ucf8B69aOwFx2taWczal4o7CJ
+ 4Q7+zlawNgkzjjwEERiFKoqeDijXigZONzkYalU2785p1fuPM+65i6RQQWz5dUindsEK
+ xawTgNZgEZ/rwYMrZ0dfwtJozcoTX1DajjgXCjy02mULJGwQEaCyUO5Y4k8brEW0n3Va
+ dEdgAvzBg+LItJRA/Klc7ZnxZpX4LBp9YyPG9fj7Mq06OS4FbbSXOUxFvarK8F2I26zL
+ JXk+1nlJqnjKX/yedkeh3oWMW07ZqXkuA6C+oZ3MV6fcUjWVjtvUQnobvXAw5ZzJoJgQ
+ F07g==
+X-Gm-Message-State: AGi0PuanmwYHO/FRsnm0WFSTU1g1NlqqPJYzDcoXwnp3UZhdAo1szuzo
+ nJOasfruL3ZpWvw6LIXn3wrbvna9J8bjl3G24Ag=
+X-Google-Smtp-Source: APiQypLRHeYUh+yGfSqbliQTdjCIEM/DjQOp85/EX/rUEEd4WBcUaCyYHOhkoSGUaZ+/QB+OGbxwI9+P2PyWNECXD2o=
+X-Received: by 2002:a92:ad09:: with SMTP id w9mr11556795ilh.177.1588799795862; 
+ Wed, 06 May 2020 14:16:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <1588335545-649-1-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKMdmVrvYDNVtm6_iviDT_mofGZO9DC2vtZdZaHN31T07A@mail.gmail.com>
- <CAKmqyKO6HGQrMxsNovPkoB4TncEmeD=uFV_oXEpQ0t+=g20Wfw@mail.gmail.com>
- <CAEUhbmVTg+521EHutukOod_PKx0RQ-s=EgnKu=JM-vduMn4mNA@mail.gmail.com>
-In-Reply-To: <CAEUhbmVTg+521EHutukOod_PKx0RQ-s=EgnKu=JM-vduMn4mNA@mail.gmail.com>
+References: <20200501185106.88767-1-josemartins90@gmail.com>
+ <CAKmqyKPwcUWor2jn_fED8o8+aNOqVm11-q0ijAVWFakwp1CfkQ@mail.gmail.com>
+In-Reply-To: <CAKmqyKPwcUWor2jn_fED8o8+aNOqVm11-q0ijAVWFakwp1CfkQ@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 6 May 2020 13:53:31 -0700
-Message-ID: <CAKmqyKPdjBFmPcQY+O4zsaTHYeLVC9zanXhS5CBovfn4LLRdJg@mail.gmail.com>
-Subject: Re: [PATCH] riscv: Change the default behavior if no -bios option is
- specified
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
+Date: Wed, 6 May 2020 14:07:52 -0700
+Message-ID: <CAKmqyKNrrb6rkxpNFFyNhZtjxe5aYzDN9v2yX6NsXgyy2CcODA@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: fix check of guest pa top bits
+To: Jose Martins <josemartins90@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
  envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
@@ -80,65 +74,72 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2020 21:02:18 -0000
+X-List-Received-Date: Wed, 06 May 2020 21:16:39 -0000
 
-On Tue, May 5, 2020 at 6:34 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, May 5, 2020 at 1:40 PM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> Hi Alistair,
+> On Fri, May 1, 2020 at 11:51 AM Jose Martins <josemartins90@gmail.com> wrote:
+> >
+> > The spec states that on sv39x4 guest physical  "address bits 63:41 must
+> > all be zeros, or else a guest-page-fault exception occurs.".  However,
+> > the check performed for these top bits of the virtual address on the
+> > second stage is the same as the one performed for virtual addresses on
+> > the first stage except with the 2-bit extension, effectively creating
+> > the same kind of "hole" in the guest's physical address space. I believe
+> > the following patch fixes this issue:
+> >
+> > Signed-off-by: Jose Martins <josemartins90@gmail.com>
 >
-> On Wed, May 6, 2020 at 6:37 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Tue, May 5, 2020 at 1:34 PM Alistair Francis <alistair23@gmail.com> wrote:
-> > >
-> > > On Fri, May 1, 2020 at 5:21 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > >
-> > > > From: Bin Meng <bin.meng@windriver.com>
-> > > >
-> > > > Per QEMU deprecated doc, QEMU 4.1 introduced support for the -bios
-> > > > option in QEMU for RISC-V for the virt machine and sifive_u machine.
-> > > > The default behavior has been that QEMU does not automatically load
-> > > > any firmware if no -bios option is included.
-> > > >
-> > > > Now 2 releases passed, it's time to change the default behavior to
-> > > > load the default OpenSBI firmware automatically. The firmware is
-> > > > included with the QEMU release and no user interaction is required.
-> > > > All a user needs to do is specify the kernel they want to boot with
-> > > > the -kernel option.
-> > > >
-> > > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> > >
-> > > Thanks!
-> > >
-> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > >
-> > > Applied to the RISC-V tree.
-> >
-> > This fails `make check`
-> >
-> > qemu-system-riscv64: Unable to load the RISC-V firmware
-> > "opensbi-riscv64-spike-fw_jump.elf"
-> > Broken pipe
-> > /scratch/alistair/software/qemu/tests/qtest/libqtest.c:166:
-> > kill_qemu() tried to terminate QEMU process but encountered exit
-> > status 1 (expected 0)
-> > ERROR - too few tests run (expected 7, got 2)
-> > make: *** [/scratch/alistair/software/qemu/tests/Makefile.include:637:
-> > check-qtest-riscv64] Error 1
-> >
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 >
-> Please apply this patch to fix the "make check" as well.
->
-> [5/5] riscv: Suppress the error report for QEMU testing with
-> riscv_find_firmware()
-> http://patchwork.ozlabs.org/project/qemu-devel/patch/1588348254-7241-6-git-send-email-bmeng.cn@gmail.com/
+> Applied to RISC-V tree.
 
-In future please send all related patches in a single series.
-
-I have applied those two patches.
+This breaks 32-bit Hypervisors, can you look into it?
 
 Alistair
 
 >
-> Regards,
-> Bin
+> Alistair
+>
+> > ---
+> >  target/riscv/cpu_helper.c | 20 +++++++++++++-------
+> >  1 file changed, 13 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 247304d850..ae22c30bdd 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -426,15 +426,21 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+> >      int va_bits = PGSHIFT + levels * ptidxbits + widened;
+> >      target_ulong mask, masked_msbs;
+> >
+> > -    if (TARGET_LONG_BITS > (va_bits - 1)) {
+> > -        mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> > +    if (!first_stage) {
+> > +        if ((addr >> va_bits) != 0) {
+> > +            return TRANSLATE_FAIL;
+> > +        }
+> >      } else {
+> > -        mask = 0;
+> > -    }
+> > -    masked_msbs = (addr >> (va_bits - 1)) & mask;
+> > +        if (TARGET_LONG_BITS > (va_bits - 1)) {
+> > +            mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> > +        } else {
+> > +            mask = 0;
+> > +        }
+> > +        masked_msbs = (addr >> (va_bits - 1)) & mask;
+> >
+> > -    if (masked_msbs != 0 && masked_msbs != mask) {
+> > -        return TRANSLATE_FAIL;
+> > +        if (masked_msbs != 0 && masked_msbs != mask) {
+> > +            return TRANSLATE_FAIL;
+> > +        }
+> >      }
+> >
+> >      int ptshift = (levels - 1) * ptidxbits;
+> > --
+> > 2.25.1
+> >
+> >
 
