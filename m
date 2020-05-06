@@ -1,85 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jWIu5-0001vf-As
-	for mharc-qemu-riscv@gnu.org; Wed, 06 May 2020 08:11:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57400)
+	id 1jWRBL-00077e-M7
+	for mharc-qemu-riscv@gnu.org; Wed, 06 May 2020 17:02:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40336)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jWIu3-0001sV-4N
- for qemu-riscv@nongnu.org; Wed, 06 May 2020 08:11:55 -0400
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:56604
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jWIu1-0000UH-91
- for qemu-riscv@nongnu.org; Wed, 06 May 2020 08:11:54 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588767112;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Vt9SliqM2j8xkrP1xGFxSvvkfmqNLfEXM6C9njeT6k0=;
- b=ZDFUxsM4brRtg9tYK+WZgU1158zBXNDcpfiF+oxbQ20xxfCpyrXMBKVjUwmoMBoe3kjTwE
- kWmNjOrV74hcgOTFoIHwJS2neTysKCWaECLQwVirDN7R2nKYg7jTD4N2Byb0x0mp0fZ0Op
- TbqtZEWTEZMkIy0CIU/nfZQAtpAdiuw=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-461-I-HkTmYhNRifAUpsEDKHvA-1; Wed, 06 May 2020 08:11:50 -0400
-X-MC-Unique: I-HkTmYhNRifAUpsEDKHvA-1
-Received: by mail-wr1-f69.google.com with SMTP id z8so1206414wrp.7
- for <qemu-riscv@nongnu.org>; Wed, 06 May 2020 05:11:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jWRBJ-00077P-Tg; Wed, 06 May 2020 17:02:18 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:44537)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jWRBI-0002aP-OY; Wed, 06 May 2020 17:02:17 -0400
+Received: by mail-il1-x142.google.com with SMTP id s10so595485iln.11;
+ Wed, 06 May 2020 14:02:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=m/VcMjoyLBrv3KMvD0BpDh3FiQ3MRQzBtiCoTsP9dKc=;
+ b=sH73flY9b4G4DysDFMsKo0CqhRUaspMkF6zimoclRBNEdaFoVmaBCt+db7Rj76iaNs
+ KNg+dPlk27W0wiQmEjabGi2SrFpPr4IfdOhUzXMHf8yE5RrSf8XyAhK9txxmTt742qxE
+ 59X1KJL2ihMVWPem4+qCzvmQqml+fkho/xNHTis1MW6vM0ttg40/FS1REGMxpPh5LBSA
+ QDX40fZEDZH4b86IL4FnPbIXQp0tX2U7O7dIv8rZLnSWc9dsbdOMSyB/1aMfC9m9+Flm
+ TOcpHTCJ1Ln6xZcTQBhWQ4Lwo9G1CFoRfLxgRyKVL5cZOfMeC5WTSp+uUsVcV9VuGHlx
+ iquA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=Vt9SliqM2j8xkrP1xGFxSvvkfmqNLfEXM6C9njeT6k0=;
- b=ZG5HX8V/Fq7ZE9J9BOMfibKQ1j2NRwpOioN4L1qFSOfVJrwdX1slPRv+DP1IBfaOYr
- CV8SEcwHvf/OUuBKHJIIoYdJfgfFbg5cnpWsKMoDheXYYpwU1tdbzs5iLiVylJUd/rjj
- HsMeyEU/Fbqiyj32PUzOQJgAASUygvEqBkWERwAHgPzpFtmhr2unjHF3iBIcNaV5pXex
- reanJIesDIqVDhl1tYvV1ufsZL67rGE3bVTgSoGnrTSKBMon8CJfcCzkfyhuPCigprt4
- L8poXOY++gAKoe4rZy8Kpw9sY3+RxEZbbT6/byAec2rT/ti/C2MdFDbn6KihLD+SddEd
- EKSg==
-X-Gm-Message-State: AGi0PubU1J39CieytJcIBLLqEE3aFrsCm2UIflnWAEXrMF/7zKzPsYte
- lOy1asmQ6Ug5HaNsOXAEW88P8D5k3jWU5ZtJTSiQ1Uo6XxXS0uemxQUs2EogNoCio3o6cVRKdmX
- TXJK36GBYSd7ZI5s=
-X-Received: by 2002:a5d:6b8c:: with SMTP id n12mr7209862wrx.107.1588767108764; 
- Wed, 06 May 2020 05:11:48 -0700 (PDT)
-X-Google-Smtp-Source: APiQypITkwYuWilC7he8r6kz3Ay7y1MhvlvXtclL+VvPjE0cooz5s8R+0HG/KsnWZ13/Y/LPi7HdoQ==
-X-Received: by 2002:a5d:6b8c:: with SMTP id n12mr7209816wrx.107.1588767108346; 
- Wed, 06 May 2020 05:11:48 -0700 (PDT)
-Received: from [192.168.1.37] (26.red-88-21-207.staticip.rima-tde.net.
- [88.21.207.26])
- by smtp.gmail.com with ESMTPSA id w4sm2459947wro.28.2020.05.06.05.11.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 May 2020 05:11:47 -0700 (PDT)
-Subject: Re: [PATCH v1 2/2] target/riscv: Drop support for ISA spec version
- 1.09.1
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair23@gmail.com
-References: <cover.1588727508.git.alistair.francis@wdc.com>
- <31e61b6cd45bbfa91ce924cdb19ca9844f0907b9.1588727508.git.alistair.francis@wdc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <59587535-3780-fc3a-3c28-869c495cf739@redhat.com>
-Date: Wed, 6 May 2020 14:11:46 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=m/VcMjoyLBrv3KMvD0BpDh3FiQ3MRQzBtiCoTsP9dKc=;
+ b=G44L/MfSfUP/06CQqzrkKN2U1zZod9MqwIzTvcY1WjCSlSz2A0sGKVH53n+985RcJh
+ /Y7q7gDPNSHpdD9QtBYX97IFwMydM406WIWXk2JNUpEapBWCT37q4Jg4HJGNcFnQ/Ne8
+ 39jYwg9bmrQQiXTzR6dVUQyusvnlZph/5LezRWX08ZHG79GcuPp74K0KXwIi7OKWCMcC
+ T2H3Hp9IUr4tagllNpvjXXq0sVR7+pYQ1idnsJ5NEH7VVQ9vX0+g674bHThnoJl0B5p1
+ sGI6+Vs+SFVZd6AW4uPYPQVA+7p6lDXNeWtSsKPWYwv+pn43Zip/Mn1wlCB+CegZ5CX6
+ mZOQ==
+X-Gm-Message-State: AGi0PuZ/8A3lAEk1A+WKm6HP7M317yenTmnZF6SJl05Cpi+cqspQwGgX
+ t8hODVqtP2YRf0uTEhYwV76QO/EVgsAfSyZrFEXuSpIo
+X-Google-Smtp-Source: APiQypJe97WVQUHU3eLDsc9TfsC9+9xavHMpIYbmLgiI/H0VuYhwaDvXCT6V/cR3x2cHSgKMoAjyy1fgQRBPmE0wtIs=
+X-Received: by 2002:a92:aa07:: with SMTP id j7mr11291956ili.40.1588798934917; 
+ Wed, 06 May 2020 14:02:14 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <31e61b6cd45bbfa91ce924cdb19ca9844f0907b9.1588727508.git.alistair.francis@wdc.com>
-Content-Language: en-US
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=207.211.31.81; envelope-from=philmd@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/06 02:39:40
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_PASS=-0.001,
+References: <1588335545-649-1-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKMdmVrvYDNVtm6_iviDT_mofGZO9DC2vtZdZaHN31T07A@mail.gmail.com>
+ <CAKmqyKO6HGQrMxsNovPkoB4TncEmeD=uFV_oXEpQ0t+=g20Wfw@mail.gmail.com>
+ <CAEUhbmVTg+521EHutukOod_PKx0RQ-s=EgnKu=JM-vduMn4mNA@mail.gmail.com>
+In-Reply-To: <CAEUhbmVTg+521EHutukOod_PKx0RQ-s=EgnKu=JM-vduMn4mNA@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 6 May 2020 13:53:31 -0700
+Message-ID: <CAKmqyKPdjBFmPcQY+O4zsaTHYeLVC9zanXhS5CBovfn4LLRdJg@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Change the default behavior if no -bios option is
+ specified
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -93,304 +80,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2020 12:11:55 -0000
+X-List-Received-Date: Wed, 06 May 2020 21:02:18 -0000
 
-Hi Alistair,
+On Tue, May 5, 2020 at 6:34 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> Hi Alistair,
+>
+> On Wed, May 6, 2020 at 6:37 AM Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Tue, May 5, 2020 at 1:34 PM Alistair Francis <alistair23@gmail.com> wrote:
+> > >
+> > > On Fri, May 1, 2020 at 5:21 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > >
+> > > > From: Bin Meng <bin.meng@windriver.com>
+> > > >
+> > > > Per QEMU deprecated doc, QEMU 4.1 introduced support for the -bios
+> > > > option in QEMU for RISC-V for the virt machine and sifive_u machine.
+> > > > The default behavior has been that QEMU does not automatically load
+> > > > any firmware if no -bios option is included.
+> > > >
+> > > > Now 2 releases passed, it's time to change the default behavior to
+> > > > load the default OpenSBI firmware automatically. The firmware is
+> > > > included with the QEMU release and no user interaction is required.
+> > > > All a user needs to do is specify the kernel they want to boot with
+> > > > the -kernel option.
+> > > >
+> > > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> > >
+> > > Thanks!
+> > >
+> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > >
+> > > Applied to the RISC-V tree.
+> >
+> > This fails `make check`
+> >
+> > qemu-system-riscv64: Unable to load the RISC-V firmware
+> > "opensbi-riscv64-spike-fw_jump.elf"
+> > Broken pipe
+> > /scratch/alistair/software/qemu/tests/qtest/libqtest.c:166:
+> > kill_qemu() tried to terminate QEMU process but encountered exit
+> > status 1 (expected 0)
+> > ERROR - too few tests run (expected 7, got 2)
+> > make: *** [/scratch/alistair/software/qemu/tests/Makefile.include:637:
+> > check-qtest-riscv64] Error 1
+> >
+>
+> Please apply this patch to fix the "make check" as well.
+>
+> [5/5] riscv: Suppress the error report for QEMU testing with
+> riscv_find_firmware()
+> http://patchwork.ozlabs.org/project/qemu-devel/patch/1588348254-7241-6-git-send-email-bmeng.cn@gmail.com/
 
-On 5/6/20 3:12 AM, Alistair Francis wrote:
-> The RISC-V ISA spec version 1.09.1 has been deprecated in QEMU since
-> 4.1. It's not commonly used so let's remove support for it.
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   target/riscv/cpu.c                            | 30 -------
->   target/riscv/cpu.h                            |  8 --
->   target/riscv/csr.c                            | 82 ++++---------------
->   .../riscv/insn_trans/trans_privileged.inc.c   |  6 --
->   tests/qtest/machine-none-test.c               |  4 +-
->   5 files changed, 19 insertions(+), 111 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 059d71f2c7..eeb91f8513 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -135,16 +135,6 @@ static void riscv_base32_cpu_init(Object *obj)
->       set_misa(env, 0);
->   }
->   
-> -static void rv32gcsu_priv1_09_1_cpu_init(Object *obj)
-> -{
-> -    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> -    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-> -    set_priv_version(env, PRIV_VERSION_1_09_1);
-> -    set_resetvec(env, DEFAULT_RSTVEC);
-> -    set_feature(env, RISCV_FEATURE_MMU);
-> -    set_feature(env, RISCV_FEATURE_PMP);
-> -}
-> -
->   static void rv32gcsu_priv1_10_0_cpu_init(Object *obj)
->   {
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
-> @@ -182,16 +172,6 @@ static void riscv_base64_cpu_init(Object *obj)
->       set_misa(env, 0);
->   }
->   
-> -static void rv64gcsu_priv1_09_1_cpu_init(Object *obj)
-> -{
-> -    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> -    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-> -    set_priv_version(env, PRIV_VERSION_1_09_1);
-> -    set_resetvec(env, DEFAULT_RSTVEC);
-> -    set_feature(env, RISCV_FEATURE_MMU);
-> -    set_feature(env, RISCV_FEATURE_PMP);
-> -}
-> -
->   static void rv64gcsu_priv1_10_0_cpu_init(Object *obj)
->   {
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
-> @@ -388,8 +368,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->               priv_version = PRIV_VERSION_1_11_0;
->           } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
->               priv_version = PRIV_VERSION_1_10_0;
-> -        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.9.1")) {
-> -            priv_version = PRIV_VERSION_1_09_1;
->           } else {
->               error_setg(errp,
->                          "Unsupported privilege spec version '%s'",
-> @@ -621,18 +599,10 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32imacu_nommu_cpu_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32imafcu_nommu_cpu_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32gcsu_priv1_10_0_cpu_init),
-> -    /* Depreacted */
-> -    DEFINE_CPU(TYPE_RISCV_CPU_RV32IMACU_NOMMU,  rv32imacu_nommu_cpu_init),
-> -    DEFINE_CPU(TYPE_RISCV_CPU_RV32GCSU_V1_09_1, rv32gcsu_priv1_09_1_cpu_init),
-> -    DEFINE_CPU(TYPE_RISCV_CPU_RV32GCSU_V1_10_0, rv32gcsu_priv1_10_0_cpu_init)
+In future please send all related patches in a single series.
 
-Shouldn't you let TYPE_RISCV_CPU_RV32GCSU_V1_10_0 until you remove v1.10.0?
+I have applied those two patches.
 
-Or remove TYPE_RISCV_CPU_RV32GCSU_V1_10_0 & 
-TYPE_RISCV_CPU_RV64GCSU_V1_10_0 in another patch after this one 
-(restricted to 1.09.1).
+Alistair
 
->   #elif defined(TARGET_RISCV64)
->       DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           riscv_base64_cpu_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64imacu_nommu_cpu_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64gcsu_priv1_10_0_cpu_init),
-> -    /* Deprecated */
-> -    DEFINE_CPU(TYPE_RISCV_CPU_RV64IMACU_NOMMU,  rv64imacu_nommu_cpu_init),
-> -    DEFINE_CPU(TYPE_RISCV_CPU_RV64GCSU_V1_09_1, rv64gcsu_priv1_09_1_cpu_init),
-> -    DEFINE_CPU(TYPE_RISCV_CPU_RV64GCSU_V1_10_0, rv64gcsu_priv1_10_0_cpu_init)
-
-Ditto.
-
->   #endif
->   };
->   
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index d0e7f5b9c5..c022539012 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -40,13 +40,6 @@
->   #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
->   #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
->   #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
-> -/* Deprecated */
-> -#define TYPE_RISCV_CPU_RV32IMACU_NOMMU  RISCV_CPU_TYPE_NAME("rv32imacu-nommu")
-> -#define TYPE_RISCV_CPU_RV32GCSU_V1_09_1 RISCV_CPU_TYPE_NAME("rv32gcsu-v1.9.1")
-> -#define TYPE_RISCV_CPU_RV32GCSU_V1_10_0 RISCV_CPU_TYPE_NAME("rv32gcsu-v1.10.0")
-
-Ditto.
-
-> -#define TYPE_RISCV_CPU_RV64IMACU_NOMMU  RISCV_CPU_TYPE_NAME("rv64imacu-nommu")
-> -#define TYPE_RISCV_CPU_RV64GCSU_V1_09_1 RISCV_CPU_TYPE_NAME("rv64gcsu-v1.9.1")
-> -#define TYPE_RISCV_CPU_RV64GCSU_V1_10_0 RISCV_CPU_TYPE_NAME("rv64gcsu-v1.10.0")
-
-Ditto.
-
->   
->   #define RV32 ((target_ulong)1 << (TARGET_LONG_BITS - 2))
->   #define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
-> @@ -80,7 +73,6 @@ enum {
->       RISCV_FEATURE_MISA
->   };
->   
-> -#define PRIV_VERSION_1_09_1 0x00010901
->   #define PRIV_VERSION_1_10_0 0x00011000
->   #define PRIV_VERSION_1_11_0 0x00011100
->   
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 11d184cd16..df3498b24f 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -58,31 +58,11 @@ static int ctr(CPURISCVState *env, int csrno)
->   #if !defined(CONFIG_USER_ONLY)
->       CPUState *cs = env_cpu(env);
->       RISCVCPU *cpu = RISCV_CPU(cs);
-> -    uint32_t ctr_en = ~0u;
->   
->       if (!cpu->cfg.ext_counters) {
->           /* The Counters extensions is not enabled */
->           return -1;
->       }
-> -
-> -    /*
-> -     * The counters are always enabled at run time on newer priv specs, as the
-> -     * CSR has changed from controlling that the counters can be read to
-> -     * controlling that the counters increment.
-> -     */
-> -    if (env->priv_ver > PRIV_VERSION_1_09_1) {
-> -        return 0;
-> -    }
-> -
-> -    if (env->priv < PRV_M) {
-> -        ctr_en &= env->mcounteren;
-> -    }
-> -    if (env->priv < PRV_S) {
-> -        ctr_en &= env->scounteren;
-> -    }
-> -    if (!(ctr_en & (1u << (csrno & 31)))) {
-> -        return -1;
-> -    }
->   #endif
->       return 0;
->   }
-> @@ -358,34 +338,21 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
->       int dirty;
->   
->       /* flush tlb on mstatus fields that affect VM */
-> -    if (env->priv_ver <= PRIV_VERSION_1_09_1) {
-> -        if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP |
-> -                MSTATUS_MPRV | MSTATUS_SUM | MSTATUS_VM)) {
-> -            tlb_flush(env_cpu(env));
-> -        }
-> -        mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
-> -            MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
-> -            MSTATUS_MPP | MSTATUS_MXR |
-> -            (validate_vm(env, get_field(val, MSTATUS_VM)) ?
-> -                MSTATUS_VM : 0);
-> +    if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
-> +            MSTATUS_MPRV | MSTATUS_SUM)) {
-> +        tlb_flush(env_cpu(env));
->       }
-> -    if (env->priv_ver >= PRIV_VERSION_1_10_0) {
-> -        if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
-> -                MSTATUS_MPRV | MSTATUS_SUM)) {
-> -            tlb_flush(env_cpu(env));
-> -        }
-> -        mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
-> -            MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
-> -            MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
-> -            MSTATUS_TW;
-> +    mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
-> +        MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
-> +        MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
-> +        MSTATUS_TW;
->   #if defined(TARGET_RISCV64)
-> -            /*
-> -             * RV32: MPV and MTL are not in mstatus. The current plan is to
-> -             * add them to mstatush. For now, we just don't support it.
-> -             */
-> -            mask |= MSTATUS_MTL | MSTATUS_MPV;
-> +        /*
-> +         * RV32: MPV and MTL are not in mstatus. The current plan is to
-> +         * add them to mstatush. For now, we just don't support it.
-> +         */
-> +        mask |= MSTATUS_MTL | MSTATUS_MPV;
->   #endif
-> -    }
->   
->       mstatus = (mstatus & ~mask) | (val & mask);
->   
-> @@ -553,8 +520,7 @@ static int write_mcounteren(CPURISCVState *env, int csrno, target_ulong val)
->   /* This regiser is replaced with CSR_MCOUNTINHIBIT in 1.11.0 */
->   static int read_mscounteren(CPURISCVState *env, int csrno, target_ulong *val)
->   {
-> -    if (env->priv_ver > PRIV_VERSION_1_09_1
-> -        && env->priv_ver < PRIV_VERSION_1_11_0) {
-> +    if (env->priv_ver < PRIV_VERSION_1_11_0) {
->           return -1;
->       }
->       *val = env->mcounteren;
-> @@ -564,8 +530,7 @@ static int read_mscounteren(CPURISCVState *env, int csrno, target_ulong *val)
->   /* This regiser is replaced with CSR_MCOUNTINHIBIT in 1.11.0 */
->   static int write_mscounteren(CPURISCVState *env, int csrno, target_ulong val)
->   {
-> -    if (env->priv_ver > PRIV_VERSION_1_09_1
-> -        && env->priv_ver < PRIV_VERSION_1_11_0) {
-> +    if (env->priv_ver < PRIV_VERSION_1_11_0) {
->           return -1;
->       }
->       env->mcounteren = val;
-> @@ -574,20 +539,13 @@ static int write_mscounteren(CPURISCVState *env, int csrno, target_ulong val)
->   
->   static int read_mucounteren(CPURISCVState *env, int csrno, target_ulong *val)
->   {
-> -    if (env->priv_ver > PRIV_VERSION_1_09_1) {
-> -        return -1;
-> -    }
-> -    *val = env->scounteren;
-> +    return -1;
->       return 0;
->   }
->   
->   static int write_mucounteren(CPURISCVState *env, int csrno, target_ulong val)
->   {
-> -    if (env->priv_ver > PRIV_VERSION_1_09_1) {
-> -        return -1;
-> -    }
-> -    env->scounteren = val;
-> -    return 0;
-> +    return -1;
->   }
->   
->   /* Machine Trap Handling */
-> @@ -829,13 +787,7 @@ static int write_satp(CPURISCVState *env, int csrno, target_ulong val)
->       if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
->           return 0;
->       }
-> -    if (env->priv_ver <= PRIV_VERSION_1_09_1 && (val ^ env->sptbr)) {
-> -        tlb_flush(env_cpu(env));
-> -        env->sptbr = val & (((target_ulong)
-> -            1 << (TARGET_PHYS_ADDR_SPACE_BITS - PGSHIFT)) - 1);
-> -    }
-> -    if (env->priv_ver >= PRIV_VERSION_1_10_0 &&
-> -        validate_vm(env, get_field(val, SATP_MODE)) &&
-> +    if (validate_vm(env, get_field(val, SATP_MODE)) &&
->           ((val ^ env->satp) & (SATP_MODE | SATP_ASID | SATP_PPN)))
->       {
->           if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-> diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
-> index 76c2fad71c..1af9fa7df8 100644
-> --- a/target/riscv/insn_trans/trans_privileged.inc.c
-> +++ b/target/riscv/insn_trans/trans_privileged.inc.c
-> @@ -95,12 +95,6 @@ static bool trans_sfence_vma(DisasContext *ctx, arg_sfence_vma *a)
->   
->   static bool trans_sfence_vm(DisasContext *ctx, arg_sfence_vm *a)
->   {
-> -#ifndef CONFIG_USER_ONLY
-> -    if (ctx->priv_ver <= PRIV_VERSION_1_09_1) {
-> -        gen_helper_tlb_flush(cpu_env);
-> -        return true;
-> -    }
-> -#endif
->       return false;
->   }
->   
-> diff --git a/tests/qtest/machine-none-test.c b/tests/qtest/machine-none-test.c
-> index 8bb54a6360..b52311ec2e 100644
-> --- a/tests/qtest/machine-none-test.c
-> +++ b/tests/qtest/machine-none-test.c
-> @@ -54,8 +54,8 @@ static struct arch2cpu cpus_map[] = {
->       { "xtensa", "dc233c" },
->       { "xtensaeb", "fsf" },
->       { "hppa", "hppa" },
-> -    { "riscv64", "rv64gcsu-v1.10.0" },
-> -    { "riscv32", "rv32gcsu-v1.9.1" },
-> +    { "riscv64", "sifive-u54" },
-> +    { "riscv32", "sifive-u34" },
->       { "rx", "rx62n" },
->   };
->   
-> 
-
+>
+> Regards,
+> Bin
 
