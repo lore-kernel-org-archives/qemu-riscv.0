@@ -1,70 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jW6Bl-00030l-Mh
-	for mharc-qemu-riscv@gnu.org; Tue, 05 May 2020 18:37:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41206)
+	id 1jW8ji-0007x6-FS
+	for mharc-qemu-riscv@gnu.org; Tue, 05 May 2020 21:20:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40382)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jW6Bj-0002zz-Q2; Tue, 05 May 2020 18:37:19 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:33540)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jW6Bi-0003PW-Si; Tue, 05 May 2020 18:37:19 -0400
-Received: by mail-io1-xd43.google.com with SMTP id k18so228839ion.0;
- Tue, 05 May 2020 15:37:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=mWlQvx7wo4D3bZ2BocGQGaMJLbGsn45Z7hf18L0JGQk=;
- b=T1BSKcMhkcsvyZpWkSVjYBdmwBGdLJ0aUbxT32O8yG5jlLlOiWGCxG83QwkGKRslqM
- Skdur5pokRRn4g2fv8caHtnmXbfBQ+qiYdjGU9Rv84JQsqRwmLSEWPB5/qC/uzvr9qR4
- /NJvz+/pIFWQP4rkCA8Rzlj5dhgFEdxzulGEum5APlodROTcKhoKiPKom12ABjoMdpgu
- t4bW9+DjcMl03bzViT5/pVQqb90+TCIXEX11A6VhnKWkB3J2oi7ki1B+mG662SaQlb8p
- zbksYGKevmagW7VIRwcghF+FyHxzJ7Z3VNcOM+sDV+cnZSaagxmmXxTxhA0+LWemj+z2
- cjig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=mWlQvx7wo4D3bZ2BocGQGaMJLbGsn45Z7hf18L0JGQk=;
- b=T3u9hqzuyBqp4nM49pNktShinfA64EbyJRuzC2Aq+bozC6DC+3Vz9jUVeBQXYJ1dFG
- hBK67NMNuArynLadFOYLzU+Px5oQj43NYGagARX8kgtFZdfO0cPxK5igHANRUAqOTPLv
- lBkVUrCrrV6/5iSwQCGnbadafq0Hbai3tbuGjRzXKMLQoQ+xiSqmZzZZkr4TD8Dpwngi
- aUb0V35PsFKXN45oTOazoXyC+miB+9OHOC71fq2Rc8xRYvS1mxiepi0AWyHtN8h0fTn2
- VjqXS47dSkhJuxgzWEtSoktgYcS69AqGKROdgk874WDlcNipvG6pHnsHFhehDKTJFu74
- HvwA==
-X-Gm-Message-State: AGi0PuYmzpXTNn9jA8hfVeV3uUOuW+98nNCD0L3M9af7veQ/itdzUHU4
- JYyd1DFffGSGI1xOcQCbr+Dz5gQO9Wr+oSHB6T8=
-X-Google-Smtp-Source: APiQypJsQgckhP7fOsqe62f8WCr/SrwI/FoBOzazOdXsqxRBLey/kTsbCWuT1xjdkFoWrzM9Z9npAmQSLIEEOjwsA1g=
-X-Received: by 2002:a5e:880b:: with SMTP id l11mr5839491ioj.42.1588718237206; 
- Tue, 05 May 2020 15:37:17 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=3884e71da=alistair.francis@wdc.com>)
+ id 1jW8jg-0007vS-Nh; Tue, 05 May 2020 21:20:32 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:1664)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=3884e71da=alistair.francis@wdc.com>)
+ id 1jW8je-0005Jn-AF; Tue, 05 May 2020 21:20:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1588728030; x=1620264030;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=KMxmBEbSZynkpArTbvRdkFdC80SeLC+6DRCdSQgTjkc=;
+ b=AtZHOQro3BqZJmx0CszL3h5d50WFk3SgQSv3GqXq3O7x1D6mx8rUEKq+
+ HGPb9Lms9ru2d3BOhcpTZ1N+sGu5UAkkBuicoK+mqEUpoD4/KSx8y1u/F
+ FCCUVpYSlwr+M5tUFCVle1vxF2gjHtok3SJ8swVHwhw7y4TN6a98oWrwp
+ 4USWE2WKMGciEDvrww+aalCy53hfv4JJAFRRTcuVrd82UtHxvrimgOB2i
+ J7+K2gLSfSU07jK6SFd0isPyL+cNVRxg2yBLeJ8k3zVRHmw2F/6idR6Mj
+ qW1JuCKaW8nfCIhzwr2B87vj1HPF6jFtWAkLQyXLQUi+bc8AIVYmcg8ZZ w==;
+IronPort-SDR: hK8u2hk9PmSaZ0TpFmee1ynuuhOH5tTtJ1HD11UJnoKNt44B6zUQFcOXS6mlTHUbjj/XA3Gk4D
+ g6wNIbv30uYAK0Qt4ucDuegBBBmKnyFeAaZ+FXhcgfv7Zf8KJ7DVxcOU+OsVNRM8E03tTPBoFP
+ neGzojXh8VhsgxfKamqPV2Vy3ND3ELMEodxSvjLK08w25IrPi4FFezW8tzEWScn2PoPCM3uWXv
+ G7PzbnQtsvz0gWQ8fy8zcfnd0m6BxoGOCxfISl9NR50XvZCtxcdOw82h8U1FnJ5Cr+T91b4jAb
+ k0g=
+X-IronPort-AV: E=Sophos;i="5.73,357,1583164800"; d="scan'208";a="138433825"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 06 May 2020 09:20:22 +0800
+IronPort-SDR: 69kOihnE/7QQMzhXP6Q5Y4aApzaX+wFUNxELZnUnqKyXSf3KmUlcZmTaKrJBVAvSMzEBMlyAhX
+ nKJF1D7WbIYt8y+FyAl2kOsDjHr2/jqR8=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 05 May 2020 18:10:48 -0700
+IronPort-SDR: DAqbYknlFXmVUGZuwkzPpUlZXgmE5iHYBHj63Kj3nN6bD4f/gUcmW/ihf5hi0MuF+lYrWRXi2l
+ kWf2YEUGODgg==
+WDCIronportException: Internal
+Received: from use204286.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.56.224])
+ by uls-op-cesaip01.wdc.com with ESMTP; 05 May 2020 18:20:21 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v1 0/2]  RTISC-V: Remove deprecated ISA, CPUs and machines
+Date: Tue,  5 May 2020 18:12:04 -0700
+Message-Id: <cover.1588727508.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <1588335545-649-1-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKMdmVrvYDNVtm6_iviDT_mofGZO9DC2vtZdZaHN31T07A@mail.gmail.com>
-In-Reply-To: <CAKmqyKMdmVrvYDNVtm6_iviDT_mofGZO9DC2vtZdZaHN31T07A@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 5 May 2020 15:28:35 -0700
-Message-ID: <CAKmqyKO6HGQrMxsNovPkoB4TncEmeD=uFV_oXEpQ0t+=g20Wfw@mail.gmail.com>
-Subject: Re: [PATCH] riscv: Change the default behavior if no -bios option is
- specified
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.154.45;
+ envelope-from=prvs=3884e71da=alistair.francis@wdc.com;
+ helo=esa6.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/05 21:20:25
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -78,100 +79,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2020 22:37:20 -0000
+X-List-Received-Date: Wed, 06 May 2020 01:20:33 -0000
 
-On Tue, May 5, 2020 at 1:34 PM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Fri, May 1, 2020 at 5:21 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > From: Bin Meng <bin.meng@windriver.com>
-> >
-> > Per QEMU deprecated doc, QEMU 4.1 introduced support for the -bios
-> > option in QEMU for RISC-V for the virt machine and sifive_u machine.
-> > The default behavior has been that QEMU does not automatically load
-> > any firmware if no -bios option is included.
-> >
-> > Now 2 releases passed, it's time to change the default behavior to
-> > load the default OpenSBI firmware automatically. The firmware is
-> > included with the QEMU release and no user interaction is required.
-> > All a user needs to do is specify the kernel they want to boot with
-> > the -kernel option.
-> >
-> > Signed-off-by: Bin Meng <bin.meng@windriver.com>
->
-> Thanks!
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->
-> Applied to the RISC-V tree.
 
-This fails `make check`
+Alistair Francis (2):
+  hw/riscv: spike: Remove deprecated ISA specific machines
+  target/riscv: Drop support for ISA spec version 1.09.1
 
-qemu-system-riscv64: Unable to load the RISC-V firmware
-"opensbi-riscv64-spike-fw_jump.elf"
-Broken pipe
-/scratch/alistair/software/qemu/tests/qtest/libqtest.c:166:
-kill_qemu() tried to terminate QEMU process but encountered exit
-status 1 (expected 0)
-ERROR - too few tests run (expected 7, got 2)
-make: *** [/scratch/alistair/software/qemu/tests/Makefile.include:637:
-check-qtest-riscv64] Error 1
+ hw/riscv/spike.c                              | 217 ------------------
+ include/hw/riscv/spike.h                      |   6 +-
+ target/riscv/cpu.c                            |  30 ---
+ target/riscv/cpu.h                            |   8 -
+ target/riscv/csr.c                            |  82 ++-----
+ .../riscv/insn_trans/trans_privileged.inc.c   |   6 -
+ tests/qtest/machine-none-test.c               |   4 +-
+ 7 files changed, 21 insertions(+), 332 deletions(-)
 
-Alistair
+-- 
+2.26.2
 
->
-> Alistair
->
-> > ---
-> >
-> >  hw/riscv/boot.c | 31 ++++---------------------------
-> >  1 file changed, 4 insertions(+), 27 deletions(-)
-> >
-> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> > index 726300a..b76b2f3 100644
-> > --- a/hw/riscv/boot.c
-> > +++ b/hw/riscv/boot.c
-> > @@ -41,34 +41,11 @@ void riscv_find_and_load_firmware(MachineState *machine,
-> >  {
-> >      char *firmware_filename = NULL;
-> >
-> > -    if (!machine->firmware) {
-> > +    if ((!machine->firmware) || (!strcmp(machine->firmware, "default"))) {
-> >          /*
-> > -         * The user didn't specify -bios.
-> > -         * At the moment we default to loading nothing when this hapens.
-> > -         * In the future this defaul will change to loading the prebuilt
-> > -         * OpenSBI firmware. Let's warn the user and then continue.
-> > -        */
-> > -        if (!qtest_enabled()) {
-> > -            warn_report("No -bios option specified. Not loading a firmware.");
-> > -            warn_report("This default will change in a future QEMU release. " \
-> > -                        "Please use the -bios option to avoid breakages when "\
-> > -                        "this happens.");
-> > -            warn_report("See QEMU's deprecation documentation for details.");
-> > -        }
-> > -        return;
-> > -    }
-> > -
-> > -    if (!strcmp(machine->firmware, "default")) {
-> > -        /*
-> > -         * The user has specified "-bios default". That means we are going to
-> > -         * load the OpenSBI binary included in the QEMU source.
-> > -         *
-> > -         * We can't load the binary by default as it will break existing users
-> > -         * as users are already loading their own firmware.
-> > -         *
-> > -         * Let's try to get everyone to specify the -bios option at all times,
-> > -         * so then in the future we can make "-bios default" the default option
-> > -         * if no -bios option is set without breaking anything.
-> > +         * The user didn't specify -bios, or has specified "-bios default".
-> > +         * That means we are going to load the OpenSBI binary included in
-> > +         * the QEMU source.
-> >           */
-> >          firmware_filename = riscv_find_firmware(default_machine_firmware);
-> >      } else if (strcmp(machine->firmware, "none")) {
-> > --
-> > 2.7.4
-> >
-> >
 
