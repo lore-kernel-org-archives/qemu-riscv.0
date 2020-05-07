@@ -1,58 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jWm5D-00088M-RS
-	for mharc-qemu-riscv@gnu.org; Thu, 07 May 2020 15:21:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56780)
+	id 1jWm5G-0008Ec-1E
+	for mharc-qemu-riscv@gnu.org; Thu, 07 May 2020 15:21:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56786)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=38990af3b=alistair.francis@wdc.com>)
- id 1jWm5C-00083p-77; Thu, 07 May 2020 15:21:22 -0400
+ id 1jWm5D-00088B-OR; Thu, 07 May 2020 15:21:23 -0400
 Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47480)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=38990af3b=alistair.francis@wdc.com>)
- id 1jWm5B-0005FG-2i; Thu, 07 May 2020 15:21:21 -0400
+ id 1jWm5C-0005FG-SZ; Thu, 07 May 2020 15:21:23 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1588879280; x=1620415280;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=D75QxEi0d3XWdQeTdloAyfN+Ms3lwSlbQzyDFV+7mpU=;
- b=X4dEXe+nVOmbAGwpY6Diq61hzqyOaqVkseO38Btr7DHfyE37Lg+i9nJn
- qpn3zgwgy7zMDMKGCU9DMk6aqGnAuKCAJ8iXFFrjamY/Kz8g712RcuIgW
- H7jYh6IOmCZOyTV7IRdaR+ijzhloqlPz7e7nt1DPqWaMhqcMVY2sr8KzV
- f+7qesYymQvXVKcKfuiG/5VVYDBIanLTbyT0UCWvZODj98X52cCO9+AnD
- 0RJ50yJa5uVg7RvdeV1BeCpJowZKY56bElN6gUWg/Igvs9SKAplHUU3BU
- T3AFwk5WagXJQFw8H8Rd7Cp5+GTJYvvWa69RJfobMZxd7X1S2RUss7b/S w==;
-IronPort-SDR: UbjpH4Ea7fZ+d04yNiH9IlUUbZsYyV10B0TTypbnprp7RbWAhNf/Cn7YDqRGvREgTqbcTrR+tj
- 8H9N7eKLowIW/rbvIRbcuNO8tFv3saMBOkVITTKsHrIztBKzXf/6eqWHfiIfI5SNvcj3NRJ/7g
- EFgo5A4dDzDrOG/xZeMxpA++EsJSynKj69GgDmvL3PFLcqDWLTPRjqb6+UiWLionFY3IHjCcmU
- nBDQomMJ27P/0CPdXa6vvTKOGwaK27zSSjqXwzG8+smf7UrTSynswrlxZV4t/cxzX6j7YTWviQ
- Bf4=
-X-IronPort-AV: E=Sophos;i="5.73,364,1583164800"; d="scan'208";a="246038021"
+ t=1588879282; x=1620415282;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=Cs2msFudz/GDP6Z+alIv+E1wTpJvl8biJfFKRWtgCbk=;
+ b=AIU9dAEIOLOXNdJnsI1ZGXt7N6/PlBZdqS4BKX8/A5y9nvGQlYCdywXR
+ +v13vWZ8fjluwIM230rsSH10OYS/TlkpC89AcFZV5nILxILGoT88LTkbW
+ g9YCQ3hTYIMI8hTgw0AxPwZoWZYaH9GOQAQiYxG7JTeNGtf/ec1nmnSYM
+ rgyjJmUVxN2G+PVrgcMU3Z83IARb6wmlYmzjycLztumJadZ4odrE5F/nM
+ fGyRURaAHSLzUazcB8NPT/Uq/aYZUqyFJGiL2JkAT2v+MVOoM4veSSQs6
+ G/d6QepZPxZx/rLkkhcob7zL0EVLnGoyyC84nSCwkjgT+QCCcUrpQyp2E Q==;
+IronPort-SDR: nqTiZ78VutqA5zZkhy0tt/uRYnD2sB9gVLDKXxX80lU2UroAuQ2MgdJIrJi885X3lvghOI6Fa4
+ KTZpIz1WLp/Pm7XM7/gr5D6xL/6zJScbLxzkhZbdI3H21d+DWMK4TbMywJUpM20D0nsfGSkZ/l
+ zJBtBOJpJ5RQecmXW6ADUJyd4NiS51hKR2YZT3xYnfNYIYZXHv0uF+B0oY6Fs9Iad53EX0Y1XT
+ iPYkJiWvhS2Csinl0xGmnUiR5o0Q01xEPWeKNACIOw00HOet2E7xDfUiRZ0TljAHcUGHrc0AmB
+ wtQ=
+X-IronPort-AV: E=Sophos;i="5.73,364,1583164800"; d="scan'208";a="246038025"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 08 May 2020 03:21:18 +0800
-IronPort-SDR: /8DZivhKk7EoGeab/ioKdT6t/PcyeZiq6E+iDvT/pkD1Kb/ugPnF5lNmdZkqmETtKojHc5lj7g
- jUy9N4DFpJoY9otjtU9Wvj8F0mOy3q6lo=
+ by ob1.hgst.iphmx.com with ESMTP; 08 May 2020 03:21:20 +0800
+IronPort-SDR: NJJ71/SYdlc0/GfEQF1JOiQAa60qSkrSmxmJVuIPK0SkLBdi/OXKuQyvS2yy6JMPW+5oVQdv7X
+ emwoyl7UBY7vxZS3d3ldiZioS70sUmDNI=
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 May 2020 12:11:42 -0700
-IronPort-SDR: rylsPYgf9OJhePJvqeBEsBgRSw+25JZBde5ADsIynAnxEMk5vjKsoqFfHs+Q+eQ4uoKCs4VLnl
- a6FUEuzIWQdQ==
+ 07 May 2020 12:11:45 -0700
+IronPort-SDR: 43CXw0rJhfRtm3DyWsS25lrTVG/5eNBQwuOFrdv/5pxNCuM6neNAHg2Z3wbtpbwlUoRgxdJ3rf
+ plxUpcGxMm7Q==
 WDCIronportException: Internal
 Received: from uscxm6l72.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.57.6])
- by uls-op-cesaip02.wdc.com with ESMTP; 07 May 2020 12:21:18 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 07 May 2020 12:21:20 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 0/9]  RISC-V Add the OpenTitan Machine
-Date: Thu,  7 May 2020 12:12:59 -0700
-Message-Id: <cover.1588878756.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 1/9] riscv/boot: Add a missing header include
+Date: Thu,  7 May 2020 12:13:01 -0700
+Message-Id: <dc10c6b220154fd448630ef7a790e5d7e59ab45a.1588878756.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <cover.1588878756.git.alistair.francis@wdc.com>
+References: <cover.1588878756.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=68.232.141.245;
@@ -79,67 +81,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2020 19:21:22 -0000
+X-List-Received-Date: Thu, 07 May 2020 19:21:24 -0000
 
-OpenTitan is an open source silicon Root of Trust (RoT) project. This
-series adds initial support for the OpenTitan machine to QEMU.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ include/hw/riscv/boot.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-This series add the Ibex CPU to the QEMU RISC-V target. It then adds the
-OpenTitan machine, the Ibex UART and the Ibex PLIC.
-
-The UART has been tested sending and receiving data.
-
-With this series QEMU can boot the OpenTitan ROM, Tock OS and a Tock
-userspace app.
-
-The Ibex PLIC is similar to the RISC-V PLIC (and is based on the QEMU
-implementation) with some differences. The hope is that the Ibex PLIC
-will converge to follow the RISC-V spec. As that happens I want to
-update the QEMU Ibex PLIC and hopefully eventually replace the current
-PLIC as the implementation is a little overlay complex.
-
-For more details on OpenTitan, see here: https://docs.opentitan.org/
-
-v2:
- - Rebase on master
- - Get uart receive working
-
-Alistair Francis (9):
-  riscv/boot: Add a missing header include
-  target/riscv: Don't overwrite the reset vector
-  target/riscv: Add the lowRISC Ibex CPU
-  riscv: Initial commit of OpenTitan machine
-  hw/char: Initial commit of Ibex UART
-  hw/intc: Initial commit of lowRISC Ibex PLIC
-  riscv/opentitan: Connect the PLIC device
-  riscv/opentitan: Connect the UART device
-  target/riscv: Use a smaller guess size for no-MMU PMP
-
- MAINTAINERS                         |  14 +
- default-configs/riscv32-softmmu.mak |   1 +
- default-configs/riscv64-softmmu.mak |  11 +-
- hw/char/Makefile.objs               |   1 +
- hw/char/ibex_uart.c                 | 490 ++++++++++++++++++++++++++++
- hw/intc/Makefile.objs               |   1 +
- hw/intc/ibex_plic.c                 | 261 +++++++++++++++
- hw/riscv/Kconfig                    |   9 +
- hw/riscv/Makefile.objs              |   1 +
- hw/riscv/opentitan.c                | 204 ++++++++++++
- include/hw/char/ibex_uart.h         | 110 +++++++
- include/hw/intc/ibex_plic.h         |  63 ++++
- include/hw/riscv/boot.h             |   1 +
- include/hw/riscv/opentitan.h        |  79 +++++
- target/riscv/cpu.c                  |  30 +-
- target/riscv/cpu.h                  |   1 +
- target/riscv/pmp.c                  |  19 +-
- 17 files changed, 1281 insertions(+), 15 deletions(-)
- create mode 100644 hw/char/ibex_uart.c
- create mode 100644 hw/intc/ibex_plic.c
- create mode 100644 hw/riscv/opentitan.c
- create mode 100644 include/hw/char/ibex_uart.h
- create mode 100644 include/hw/intc/ibex_plic.h
- create mode 100644 include/hw/riscv/opentitan.h
-
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index 474a940ad5..9daa98da08 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -21,6 +21,7 @@
+ #define RISCV_BOOT_H
+ 
+ #include "exec/cpu-defs.h"
++#include "hw/loader.h"
+ 
+ void riscv_find_and_load_firmware(MachineState *machine,
+                                   const char *default_machine_firmware,
 -- 
 2.26.2
 
