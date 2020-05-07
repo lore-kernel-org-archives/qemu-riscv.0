@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jWm5L-0008Sd-3G
-	for mharc-qemu-riscv@gnu.org; Thu, 07 May 2020 15:21:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56802)
+	id 1jWm5O-00009M-AO
+	for mharc-qemu-riscv@gnu.org; Thu, 07 May 2020 15:21:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56810)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=38990af3b=alistair.francis@wdc.com>)
- id 1jWm5I-0008Ld-Iv; Thu, 07 May 2020 15:21:28 -0400
+ id 1jWm5M-0008VE-3p; Thu, 07 May 2020 15:21:32 -0400
 Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47486)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=38990af3b=alistair.francis@wdc.com>)
- id 1jWm5H-0005Fm-Jh; Thu, 07 May 2020 15:21:28 -0400
+ id 1jWm5K-0005Fm-Bo; Thu, 07 May 2020 15:21:31 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1588879287; x=1620415287;
+ t=1588879290; x=1620415290;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=4db+S1XkotG6283uNgU5sGMLdhtVpqVPC8SsI8fhk0M=;
- b=pOn7tCC712DderlCKG1Kg2I4vwtL9cyX+dTsZQvMdMeAk8Mjl5N07D0J
- EqxO5o5hTikjqNARss/SBj9o4A/Z27jCeb+2P5zYDMo3ij38y95zznn8a
- D0whPgFocSLDPlSzYTy1RIyMsMl706xI0fNCM4qctyp5h2cOEnibQ/XzV
- XD1CD1eACCC2/dRwU/FS1SzVLoNGXFnuGwgY+wlLOhI2rC8XCa4lcyPVa
- gTfmynp/xjtcz87/FOn3r+FdIKRjpqcSbStj5etdXs+sjH3ztmOFDwy+0
- MI/vBs5Bxk5XBavIvNQGhWh7UlSo5YCwFPGitngjOZpw6Ho80gEaujx/f A==;
-IronPort-SDR: hGca6WVfoALvJUYp8gf13N/tscn+nnOfa8fRFchpln/pLG5AzWXls+/z66M4VKc/Q969HHjvPq
- 65WPV9UQWmdJEzVNN60h2YqO4UAaYaaBkDOYE8XIBJAXYjj9RsH2WzYuaa9f9oDDC8zDKUVFs4
- AXJhMCZn50t+irf5SqG5iEkArMFy6g8NrMUNoNU0u0vPjaleP9oJgh1U1uxRZmxFeg7uh2nYd0
- ApX2N5XV3fSeEqua+YX1Nb0Y/4WzFGFfW4/3gGhaVA3hZIAr9T/+Yb6RWozH3P7VdAt5kL08Qs
- E1c=
-X-IronPort-AV: E=Sophos;i="5.73,364,1583164800"; d="scan'208";a="246038033"
+ bh=bhnYHNwxl1Qg5YP2T1tLXS0SS3DJ9kGCVAl3Q6D9r3A=;
+ b=VlXviJeOvUnxkViible1S74bko/ewlNHRTiONXFVqV572dUt/+Pk/3T5
+ ucsWe6kqu2vxPagnYy8vcXJBF3FLLbtogYIetbmv8xxDr3WwDBnB/Eq2J
+ TifxWfur217KUwOLsWvcMGqv9MvHws+o+1YvS9xs0Nw/tK85JuD8Pgr7K
+ MmY3TCty6dctSVgUbH0YwzCpS2gs0LpxdXDS991DqqBQK8MpbdAiocH+w
+ mWanfc35ud36XqZMtx6RMEzy4ijBZHyiRf6p9ZsMyvJsYQw3p0BVB+hZc
+ /WEVoajEE7WoOkVI1esErUgWjBvmknQpOsEziePFdnv3UnH3KaPXeEpiT w==;
+IronPort-SDR: QKLXSvDoqHPCia2Xh39Nqfm+ErrDLeAjTVPM2BrJwDPNKG3FtVISKA2idh+4Tt18xg5VkDUoP1
+ sPqwMqKKumWNl17boX8MR6aE7N7bQI5aJF3l3t+BBKZ8AURwhbHSYYjLZWOh/OFd/pdOYgoIZv
+ mxx31hKo34F6iM9vkERhRyOgpuWoxNX8PLbebwWfHMSjWR3qameRDV9hWE+FfdGdqAHjqXlLp0
+ cM0+YO4YfGV1tPWCQ/l2DYY9/xK3K3V7W2tiUvZ9sPgORaPrK2sgZdk+o42T+eiVr34JG/Bvmj
+ SlM=
+X-IronPort-AV: E=Sophos;i="5.73,364,1583164800"; d="scan'208";a="246038038"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 08 May 2020 03:21:26 +0800
-IronPort-SDR: gTIHFg1h7CFsdTSJRh858F9Mppp4UJPcjPvTDYXCKUTKyCePeUjxltWUiw48x+c9qznnln/nv8
- NVFByVrEcKb7Ni7H5NfcX9da0btuUh+Jo=
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by ob1.hgst.iphmx.com with ESMTP; 08 May 2020 03:21:29 +0800
+IronPort-SDR: n28YMEx6bvHhe3WA5aqhgHdxdAjMF6YtDwi5CRJcZjsDr87lqxtatWs4emWQm+3VL80Hm/FVAN
+ m1wmoseB5JfJ96h56JrkZwGNxqWgmIorg=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 May 2020 12:11:50 -0700
-IronPort-SDR: AnDCt2RpFr+0t0367F5O2ayTD7ouXBQ3cwfc34C3CStanE8L1T7luD+2cqLEe+8JmgYtjrnNyG
- wrgIk4kUyEfg==
+ 07 May 2020 12:11:53 -0700
+IronPort-SDR: DRkuGqrtrhrRSVOgQ5TNIVDIf5A/xwZSnmvvxC5S5r6Dj16jeZbdYG6IK2lvFqH8VDB7E1mAhc
+ 6Zx1ys7Ub+gg==
 WDCIronportException: Internal
 Received: from uscxm6l72.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.57.6])
- by uls-op-cesaip02.wdc.com with ESMTP; 07 May 2020 12:21:26 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 07 May 2020 12:21:29 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 3/9] target/riscv: Add the lowRISC Ibex CPU
-Date: Thu,  7 May 2020 12:13:07 -0700
-Message-Id: <698e2a1723bbf04ffa941450f7a351397bcec789.1588878756.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 4/9] riscv: Initial commit of OpenTitan machine
+Date: Thu,  7 May 2020 12:13:09 -0700
+Message-Id: <b82d053d376f3540a38e60b8fec189b7a45f224d.1588878756.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1588878756.git.alistair.francis@wdc.com>
 References: <cover.1588878756.git.alistair.francis@wdc.com>
@@ -81,54 +81,343 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2020 19:21:29 -0000
+X-List-Received-Date: Thu, 07 May 2020 19:21:32 -0000
+
+This adds a barebone OpenTitan machine to QEMU.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 10 ++++++++++
- target/riscv/cpu.h |  1 +
- 2 files changed, 11 insertions(+)
+ MAINTAINERS                         |  10 ++
+ default-configs/riscv32-softmmu.mak |   1 +
+ default-configs/riscv64-softmmu.mak |  11 +-
+ hw/riscv/Kconfig                    |   5 +
+ hw/riscv/Makefile.objs              |   1 +
+ hw/riscv/opentitan.c                | 169 ++++++++++++++++++++++++++++
+ include/hw/riscv/opentitan.h        |  63 +++++++++++
+ 7 files changed, 259 insertions(+), 1 deletion(-)
+ create mode 100644 hw/riscv/opentitan.c
+ create mode 100644 include/hw/riscv/opentitan.h
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 8f837edf8d..235101f685 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -160,6 +160,15 @@ static void rv32gcsu_priv1_10_0_cpu_init(Object *obj)
-     set_feature(env, RISCV_FEATURE_PMP);
- }
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 1f84e3ae2c..c3d77f0861 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1229,6 +1229,16 @@ F: pc-bios/canyonlands.dt[sb]
+ F: pc-bios/u-boot-sam460ex-20100605.bin
+ F: roms/u-boot-sam460ex
  
-+static void rv32imcu_nommu_cpu_init(Object *obj)
++RISC-V Machines
++-----------------
++OpenTitan
++M: Alistair Francis <Alistair.Francis@wdc.com>
++L: qemu-riscv@nongnu.org
++S: Supported
++F: hw/riscv/opentitan.c
++F: include/hw/riscv/opentitan.h
++
++
+ SH4 Machines
+ ------------
+ R2D
+diff --git a/default-configs/riscv32-softmmu.mak b/default-configs/riscv32-softmmu.mak
+index 1ae077ed87..94a236c9c2 100644
+--- a/default-configs/riscv32-softmmu.mak
++++ b/default-configs/riscv32-softmmu.mak
+@@ -10,3 +10,4 @@ CONFIG_SPIKE=y
+ CONFIG_SIFIVE_E=y
+ CONFIG_SIFIVE_U=y
+ CONFIG_RISCV_VIRT=y
++CONFIG_OPENTITAN=y
+diff --git a/default-configs/riscv64-softmmu.mak b/default-configs/riscv64-softmmu.mak
+index 235c6f473f..aaf6d735bb 100644
+--- a/default-configs/riscv64-softmmu.mak
++++ b/default-configs/riscv64-softmmu.mak
+@@ -1,3 +1,12 @@
+ # Default configuration for riscv64-softmmu
+ 
+-include riscv32-softmmu.mak
++# Uncomment the following lines to disable these optional devices:
++#
++#CONFIG_PCI_DEVICES=n
++
++# Boards:
++#
++CONFIG_SPIKE=y
++CONFIG_SIFIVE_E=y
++CONFIG_SIFIVE_U=y
++CONFIG_RISCV_VIRT=y
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index ff9fbe958a..94d19571f7 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -27,6 +27,11 @@ config SPIKE
+     select HTIF
+     select SIFIVE
+ 
++config OPENTITAN
++    bool
++    select HART
++    select UNIMP
++
+ config RISCV_VIRT
+     bool
+     imply PCI_DEVICES
+diff --git a/hw/riscv/Makefile.objs b/hw/riscv/Makefile.objs
+index fc3c6dd7c8..57cc708f5d 100644
+--- a/hw/riscv/Makefile.objs
++++ b/hw/riscv/Makefile.objs
+@@ -1,6 +1,7 @@
+ obj-y += boot.o
+ obj-$(CONFIG_SPIKE) += riscv_htif.o
+ obj-$(CONFIG_HART) += riscv_hart.o
++obj-$(CONFIG_OPENTITAN) += opentitan.o
+ obj-$(CONFIG_SIFIVE_E) += sifive_e.o
+ obj-$(CONFIG_SIFIVE_E) += sifive_e_prci.o
+ obj-$(CONFIG_SIFIVE) += sifive_clint.o
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+new file mode 100644
+index 0000000000..c00f0720ab
+--- /dev/null
++++ b/hw/riscv/opentitan.c
+@@ -0,0 +1,169 @@
++/*
++ * QEMU RISC-V Board Compatible with OpenTitan FPGA platform
++ *
++ * Copyright (c) 2020 Western Digital
++ *
++ * Provides a board compatible with the OpenTitan FPGA platform:
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "qemu/osdep.h"
++#include "hw/riscv/opentitan.h"
++#include "qapi/error.h"
++#include "hw/boards.h"
++#include "hw/misc/unimp.h"
++#include "hw/riscv/boot.h"
++#include "exec/address-spaces.h"
++
++static const struct MemmapEntry {
++    hwaddr base;
++    hwaddr size;
++} ibex_memmap[] = {
++    [IBEX_ROM] =            {  0x00008000,   0xc000 },
++    [IBEX_RAM] =            {  0x10000000,  0x10000 },
++    [IBEX_FLASH] =          {  0x20000000,  0x80000 },
++    [IBEX_UART] =           {  0x40000000,  0x10000 },
++    [IBEX_GPIO] =           {  0x40010000,  0x10000 },
++    [IBEX_SPI] =            {  0x40020000,  0x10000 },
++    [IBEX_FLASH_CTRL] =     {  0x40030000,  0x10000 },
++    [IBEX_PINMUX] =         {  0x40070000,  0x10000 },
++    [IBEX_RV_TIMER] =       {  0x40080000,  0x10000 },
++    [IBEX_PLIC] =           {  0x40090000,  0x10000 },
++    [IBEX_AES] =            {  0x40110000,  0x10000 },
++    [IBEX_HMAC] =           {  0x40120000,  0x10000 },
++    [IBEX_ALERT_HANDLER] =  {  0x40130000,  0x10000 },
++    [IBEX_USBDEV] =         {  0x40150000,  0x10000 }
++};
++
++static void riscv_opentitan_init(MachineState *machine)
 +{
-+    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    set_misa(env, RV32 | RVI | RVM | RVC | RVU);
-+    set_priv_version(env, PRIV_VERSION_1_10_0);
-+    set_resetvec(env, 0x8088);
-+    set_feature(env, RISCV_FEATURE_PMP);
++    const struct MemmapEntry *memmap = ibex_memmap;
++    OpenTitanState *s = g_new0(OpenTitanState, 1);
++    MemoryRegion *sys_mem = get_system_memory();
++    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
++
++    /* Initialize SoC */
++    object_initialize_child(OBJECT(machine), "soc", &s->soc,
++                            sizeof(s->soc), TYPE_RISCV_IBEX_SOC,
++                            &error_abort, NULL);
++    object_property_set_bool(OBJECT(&s->soc), true, "realized",
++                            &error_abort);
++
++    memory_region_init_ram(main_mem, NULL, "riscv.lowrisc.ibex.ram",
++        memmap[IBEX_RAM].size, &error_fatal);
++    memory_region_add_subregion(sys_mem,
++        memmap[IBEX_RAM].base, main_mem);
++
++
++    if (machine->firmware) {
++        riscv_load_firmware(machine->firmware, memmap[IBEX_RAM].base, NULL);
++    }
++
++    if (machine->kernel_filename) {
++        riscv_load_kernel(machine->kernel_filename, NULL);
++    }
 +}
 +
- static void rv32imacu_nommu_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-@@ -620,6 +629,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
- #if defined(TARGET_RISCV32)
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           riscv_base32_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32imcu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32imacu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32imafcu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32gcsu_priv1_10_0_cpu_init),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index d0e7f5b9c5..8733d7467f 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -35,6 +35,7 @@
- #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
- #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
- #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
-+#define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
- #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
- #define TYPE_RISCV_CPU_SIFIVE_E34       RISCV_CPU_TYPE_NAME("sifive-e34")
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
++static void riscv_opentitan_machine_init(MachineClass *mc)
++{
++    mc->desc = "RISC-V Board compatible with OpenTitan";
++    mc->init = riscv_opentitan_init;
++    mc->max_cpus = 1;
++    mc->default_cpu_type = TYPE_RISCV_CPU_IBEX;
++}
++
++DEFINE_MACHINE("opentitan", riscv_opentitan_machine_init)
++
++static void riscv_lowrisc_ibex_soc_init(Object *obj)
++{
++    LowRISCIbexSoCState *s = RISCV_IBEX_SOC(obj);
++
++    object_initialize_child(obj, "cpus", &s->cpus,
++                            sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
++                            &error_abort, NULL);
++}
++
++static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
++{
++    const struct MemmapEntry *memmap = ibex_memmap;
++    MachineState *ms = MACHINE(qdev_get_machine());
++    LowRISCIbexSoCState *s = RISCV_IBEX_SOC(dev_soc);
++    MemoryRegion *sys_mem = get_system_memory();
++
++    object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
++                            &error_abort);
++    object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
++                            &error_abort);
++    object_property_set_bool(OBJECT(&s->cpus), true, "realized",
++                            &error_abort);
++
++    /* Boot ROM */
++    memory_region_init_rom(&s->rom, OBJECT(dev_soc), "riscv.lowrisc.ibex.rom",
++                           memmap[IBEX_ROM].size, &error_fatal);
++    memory_region_add_subregion(sys_mem,
++        memmap[IBEX_ROM].base, &s->rom);
++
++    /* Flash memory */
++    memory_region_init_rom(&s->flash_mem, OBJECT(dev_soc), "riscv.lowrisc.ibex.flash",
++                           memmap[IBEX_FLASH].size, &error_fatal);
++    memory_region_add_subregion(sys_mem, memmap[IBEX_FLASH].base,
++                                &s->flash_mem);
++
++    create_unimplemented_device("riscv.lowrisc.ibex.uart",
++        memmap[IBEX_UART].base, memmap[IBEX_UART].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.gpio",
++        memmap[IBEX_GPIO].base, memmap[IBEX_GPIO].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.spi",
++        memmap[IBEX_SPI].base, memmap[IBEX_SPI].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.flash_ctrl",
++        memmap[IBEX_FLASH_CTRL].base, memmap[IBEX_FLASH_CTRL].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.rv_timer",
++        memmap[IBEX_RV_TIMER].base, memmap[IBEX_RV_TIMER].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.aes",
++        memmap[IBEX_AES].base, memmap[IBEX_AES].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.hmac",
++        memmap[IBEX_HMAC].base, memmap[IBEX_HMAC].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.plic",
++        memmap[IBEX_PLIC].base, memmap[IBEX_PLIC].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.pinmux",
++        memmap[IBEX_PINMUX].base, memmap[IBEX_PINMUX].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.alert_handler",
++        memmap[IBEX_ALERT_HANDLER].base, memmap[IBEX_ALERT_HANDLER].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.USBDEV",
++        memmap[IBEX_USBDEV].base, memmap[IBEX_USBDEV].size);
++}
++
++static void riscv_lowrisc_ibex_soc_class_init(ObjectClass *oc, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(oc);
++
++    dc->realize = riscv_lowrisc_ibex_soc_realize;
++    /* Reason: Uses serial_hds in realize function, thus can't be used twice */
++    dc->user_creatable = false;
++}
++
++static const TypeInfo riscv_lowrisc_ibex_soc_type_info = {
++    .name = TYPE_RISCV_IBEX_SOC,
++    .parent = TYPE_DEVICE,
++    .instance_size = sizeof(LowRISCIbexSoCState),
++    .instance_init = riscv_lowrisc_ibex_soc_init,
++    .class_init = riscv_lowrisc_ibex_soc_class_init,
++};
++
++static void riscv_lowrisc_ibex_soc_register_types(void)
++{
++    type_register_static(&riscv_lowrisc_ibex_soc_type_info);
++}
++
++type_init(riscv_lowrisc_ibex_soc_register_types)
+diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+new file mode 100644
+index 0000000000..15a3d87ed0
+--- /dev/null
++++ b/include/hw/riscv/opentitan.h
+@@ -0,0 +1,63 @@
++/*
++ * QEMU RISC-V Board Compatible with OpenTitan FPGA platform
++ *
++ * Copyright (c) 2020 Western Digital
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef HW_OPENTITAN_H
++#define HW_OPENTITAN_H
++
++#include "hw/riscv/riscv_hart.h"
++
++#define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
++#define RISCV_IBEX_SOC(obj) \
++    OBJECT_CHECK(LowRISCIbexSoCState, (obj), TYPE_RISCV_IBEX_SOC)
++
++typedef struct LowRISCIbexSoCState {
++    /*< private >*/
++    SysBusDevice parent_obj;
++
++    /*< public >*/
++    RISCVHartArrayState cpus;
++    MemoryRegion flash_mem;
++    MemoryRegion rom;
++} LowRISCIbexSoCState;
++
++typedef struct OpenTitanState {
++    /*< private >*/
++    SysBusDevice parent_obj;
++
++    /*< public >*/
++    LowRISCIbexSoCState soc;
++} OpenTitanState;
++
++enum {
++    IBEX_ROM,
++    IBEX_RAM,
++    IBEX_FLASH,
++    IBEX_UART,
++    IBEX_GPIO,
++    IBEX_SPI,
++    IBEX_FLASH_CTRL,
++    IBEX_RV_TIMER,
++    IBEX_AES,
++    IBEX_HMAC,
++    IBEX_PLIC,
++    IBEX_PINMUX,
++    IBEX_ALERT_HANDLER,
++    IBEX_USBDEV,
++};
++
++#endif
 -- 
 2.26.2
 
