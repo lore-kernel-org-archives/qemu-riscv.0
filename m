@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jWm5G-0008Ec-1E
-	for mharc-qemu-riscv@gnu.org; Thu, 07 May 2020 15:21:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56786)
+	id 1jWm5I-0008Lv-Lr
+	for mharc-qemu-riscv@gnu.org; Thu, 07 May 2020 15:21:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56794)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=38990af3b=alistair.francis@wdc.com>)
- id 1jWm5D-00088B-OR; Thu, 07 May 2020 15:21:23 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47480)
+ id 1jWm5G-0008H9-Tu; Thu, 07 May 2020 15:21:26 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47486)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=38990af3b=alistair.francis@wdc.com>)
- id 1jWm5C-0005FG-SZ; Thu, 07 May 2020 15:21:23 -0400
+ id 1jWm5F-0005Fm-EP; Thu, 07 May 2020 15:21:26 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1588879282; x=1620415282;
+ t=1588879285; x=1620415285;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=Cs2msFudz/GDP6Z+alIv+E1wTpJvl8biJfFKRWtgCbk=;
- b=AIU9dAEIOLOXNdJnsI1ZGXt7N6/PlBZdqS4BKX8/A5y9nvGQlYCdywXR
- +v13vWZ8fjluwIM230rsSH10OYS/TlkpC89AcFZV5nILxILGoT88LTkbW
- g9YCQ3hTYIMI8hTgw0AxPwZoWZYaH9GOQAQiYxG7JTeNGtf/ec1nmnSYM
- rgyjJmUVxN2G+PVrgcMU3Z83IARb6wmlYmzjycLztumJadZ4odrE5F/nM
- fGyRURaAHSLzUazcB8NPT/Uq/aYZUqyFJGiL2JkAT2v+MVOoM4veSSQs6
- G/d6QepZPxZx/rLkkhcob7zL0EVLnGoyyC84nSCwkjgT+QCCcUrpQyp2E Q==;
-IronPort-SDR: nqTiZ78VutqA5zZkhy0tt/uRYnD2sB9gVLDKXxX80lU2UroAuQ2MgdJIrJi885X3lvghOI6Fa4
- KTZpIz1WLp/Pm7XM7/gr5D6xL/6zJScbLxzkhZbdI3H21d+DWMK4TbMywJUpM20D0nsfGSkZ/l
- zJBtBOJpJ5RQecmXW6ADUJyd4NiS51hKR2YZT3xYnfNYIYZXHv0uF+B0oY6Fs9Iad53EX0Y1XT
- iPYkJiWvhS2Csinl0xGmnUiR5o0Q01xEPWeKNACIOw00HOet2E7xDfUiRZ0TljAHcUGHrc0AmB
- wtQ=
-X-IronPort-AV: E=Sophos;i="5.73,364,1583164800"; d="scan'208";a="246038025"
+ bh=HDwpI1ZBgoBG5sf6JxVLH4eCU3Xk+K2XSpXrxjhVjuE=;
+ b=hb6OUR3gr+RTFAqbjNzJmrHZBX7ZI5RN1PICU+CLUjAP9qplXfflb2N5
+ ZANhgAI44qbMjdPZPVUboc2mBA2NrG/T4hfIgFlMyrFVOjZmehzfyhmcg
+ GCgLHAcNI5CxVsEvIliHdDizzpM6MLgvyWUEGZ6cbv9nOwUVdmuJ4JSyT
+ TaHWYvyhBQgggD0Ma8frtaFMR5LgTaslyJ4YrBPY0eS6H6k7DaiOUioRW
+ lMjci2PqZSaqU0bEBsHCUzTtbPVWpj1uWr3xVbDR/tV3KiYzUnImPgrZ+
+ VGonPtFtLS3hey343QGgjvGcerRItxG+aYupt5MZ9PhPS45C98dZ12Qvc g==;
+IronPort-SDR: NchaAMtseJ08nP99U8SFHP1u89SoIghgG+cq9fhlh2qjTUOpWLwDkeWadj57divYPEwVpfJ5o5
+ PYJfBFDLspUZp7jMPD75cO7S6AcHGNFNSbKtNwY1PiQAVTAdZkRqtpa83SW2C/0x+tCvIqtx6y
+ CUslGK+NkFiSdSzXJs0uKJB79kAc2Pd7clWmYDMhjK0Ql+ETx3g9ytQZKw7OAMFTUf+Cp6utjV
+ logq836Pfahqhn5lifebSRgNOoh9UtRRe1hw2nQHcIHs/ttqoIHyAFXTl2JDTpj1re+alTy00M
+ +ZE=
+X-IronPort-AV: E=Sophos;i="5.73,364,1583164800"; d="scan'208";a="246038030"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 08 May 2020 03:21:20 +0800
-IronPort-SDR: NJJ71/SYdlc0/GfEQF1JOiQAa60qSkrSmxmJVuIPK0SkLBdi/OXKuQyvS2yy6JMPW+5oVQdv7X
- emwoyl7UBY7vxZS3d3ldiZioS70sUmDNI=
+ by ob1.hgst.iphmx.com with ESMTP; 08 May 2020 03:21:23 +0800
+IronPort-SDR: PUFTbpf8ShzcS0UbLCX4/ci24R8Uvh9GEzrNAN4bUzmLEyLq3uLkGb2Dg4j+4ZaKRdhVP1xtDX
+ 1hzS+LmjQuAWttJ7ae4MUT4HET0oqY+84=
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 May 2020 12:11:45 -0700
-IronPort-SDR: 43CXw0rJhfRtm3DyWsS25lrTVG/5eNBQwuOFrdv/5pxNCuM6neNAHg2Z3wbtpbwlUoRgxdJ3rf
- plxUpcGxMm7Q==
+ 07 May 2020 12:11:47 -0700
+IronPort-SDR: hR3WibeMobT1jylY2wkPdxRNFQBMon+X4G4nzWF1JkrpJ7eJWDNDLJTtOYSdaWWyxS5yNaYQmN
+ moDv8HyshOGg==
 WDCIronportException: Internal
 Received: from uscxm6l72.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.57.6])
- by uls-op-cesaip02.wdc.com with ESMTP; 07 May 2020 12:21:20 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 07 May 2020 12:21:23 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 1/9] riscv/boot: Add a missing header include
-Date: Thu,  7 May 2020 12:13:01 -0700
-Message-Id: <dc10c6b220154fd448630ef7a790e5d7e59ab45a.1588878756.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 2/9] target/riscv: Don't overwrite the reset vector
+Date: Thu,  7 May 2020 12:13:04 -0700
+Message-Id: <44d0486b0fd156a756af544866dd7d19609b1aa6.1588878756.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1588878756.git.alistair.francis@wdc.com>
 References: <cover.1588878756.git.alistair.francis@wdc.com>
@@ -81,25 +81,110 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2020 19:21:24 -0000
+X-List-Received-Date: Thu, 07 May 2020 19:21:27 -0000
+
+If the reset vector is set in the init function don't set it again in
+realise.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- include/hw/riscv/boot.h | 1 +
- 1 file changed, 1 insertion(+)
+ target/riscv/cpu.c | 20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
 
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index 474a940ad5..9daa98da08 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -21,6 +21,7 @@
- #define RISCV_BOOT_H
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 059d71f2c7..8f837edf8d 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -111,6 +111,14 @@ static void set_feature(CPURISCVState *env, int feature)
+     env->features |= (1ULL << feature);
+ }
  
- #include "exec/cpu-defs.h"
-+#include "hw/loader.h"
++static int get_resetvec(CPURISCVState *env)
++{
++#ifndef CONFIG_USER_ONLY
++    return env->resetvec;
++#endif
++    return 0;
++}
++
+ static void set_resetvec(CPURISCVState *env, int resetvec)
+ {
+ #ifndef CONFIG_USER_ONLY
+@@ -123,7 +131,6 @@ static void riscv_any_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+     set_priv_version(env, PRIV_VERSION_1_11_0);
+-    set_resetvec(env, DEFAULT_RSTVEC);
+ }
  
- void riscv_find_and_load_firmware(MachineState *machine,
-                                   const char *default_machine_firmware,
+ #if defined(TARGET_RISCV32)
+@@ -140,7 +147,6 @@ static void rv32gcsu_priv1_09_1_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+     set_priv_version(env, PRIV_VERSION_1_09_1);
+-    set_resetvec(env, DEFAULT_RSTVEC);
+     set_feature(env, RISCV_FEATURE_MMU);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
+@@ -150,7 +156,6 @@ static void rv32gcsu_priv1_10_0_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+-    set_resetvec(env, DEFAULT_RSTVEC);
+     set_feature(env, RISCV_FEATURE_MMU);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
+@@ -160,7 +165,6 @@ static void rv32imacu_nommu_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, RV32 | RVI | RVM | RVA | RVC | RVU);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+-    set_resetvec(env, DEFAULT_RSTVEC);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
+ 
+@@ -169,7 +173,6 @@ static void rv32imafcu_nommu_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVC | RVU);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+-    set_resetvec(env, DEFAULT_RSTVEC);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
+ 
+@@ -187,7 +190,6 @@ static void rv64gcsu_priv1_09_1_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+     set_priv_version(env, PRIV_VERSION_1_09_1);
+-    set_resetvec(env, DEFAULT_RSTVEC);
+     set_feature(env, RISCV_FEATURE_MMU);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
+@@ -197,7 +199,6 @@ static void rv64gcsu_priv1_10_0_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+-    set_resetvec(env, DEFAULT_RSTVEC);
+     set_feature(env, RISCV_FEATURE_MMU);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
+@@ -207,7 +208,6 @@ static void rv64imacu_nommu_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, RV64 | RVI | RVM | RVA | RVC | RVU);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+-    set_resetvec(env, DEFAULT_RSTVEC);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
+ 
+@@ -399,7 +399,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     }
+ 
+     set_priv_version(env, priv_version);
+-    set_resetvec(env, DEFAULT_RSTVEC);
++    if (!get_resetvec(env)) {
++        set_resetvec(env, DEFAULT_RSTVEC);
++    }
+ 
+     if (cpu->cfg.mmu) {
+         set_feature(env, RISCV_FEATURE_MMU);
 -- 
 2.26.2
 
