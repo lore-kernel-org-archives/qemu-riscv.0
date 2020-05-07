@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jWm3e-0005OH-Kz
-	for mharc-qemu-riscv@gnu.org; Thu, 07 May 2020 15:19:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56464)
+	id 1jWm3h-0005SA-BP
+	for mharc-qemu-riscv@gnu.org; Thu, 07 May 2020 15:19:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56482)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=38990af3b=alistair.francis@wdc.com>)
- id 1jWm3b-0005KV-JW; Thu, 07 May 2020 15:19:43 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:58639)
+ id 1jWm3d-0005MO-Cg; Thu, 07 May 2020 15:19:45 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:9576)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=38990af3b=alistair.francis@wdc.com>)
- id 1jWm3a-0001c1-GS; Thu, 07 May 2020 15:19:43 -0400
+ id 1jWm3b-0000wE-Nf; Thu, 07 May 2020 15:19:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1588879225; x=1620415225;
+ t=1588879183; x=1620415183;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=JD/vYyr6oWYsn/kZY6r2A/nm1zGVZ8t2uZ3IwlLhVTQ=;
- b=IdIf0P898RKxE0PyjGCF0YuzWUmig1pS7UZsdRWb700orR8ZbCpr14Dd
- JDmLIjIi8EkHlPEe9sF+LHXwsyKVBQHfq/poi+N5EPWI86pchPoCWSvJy
- q+7Puk2f9WwPSO2E8BulgHm+tYmtOabKiRCoH4yfC46VvPLKtAdSsnhQ1
- vqOxtes9CpOXrd2tmfnwLe2At1cMVeDYQuBzwPPmKW3FtqzenyUgI1OjY
- nP0PmX1/X3jSES+MCYQ5uLHdpv13LK+ChvPFJEkPkSuH9/Fm52RzpiO4R
- fBIK0rdOpbwpeByf34/9rsMJ11IMXxB2HLEC/bNmMr0ASgoMDlNEp9ADv A==;
-IronPort-SDR: tREH/1hbldzlUQvTh9fg4fzQ1OfPBNeCHNFXo9ERL/Kv0Zy0Bf/ibAmjEUp++T8RP1W25ZYnKx
- B8nZabETFw+c9gM7HZAkZDY/Speobx1eLw87ulU2hPr8Wbab8wAAxAMuG13P9zNeoU6eUL9nkL
- rVyXQnzf3troKBBW1Lm2ZcOOFqbwK4BiI9IMIhyQDMr5BsjprwCXgVVDQEBat5m8PayaJuYFUV
- hfa8HwaKfjvTRAzyLeA6ZcKP3hJBYQuVIEWasj6A/oOVQs2h1mosTyvO+sAaGaTBsmQ7oFLCAv
- fqA=
-X-IronPort-AV: E=Sophos;i="5.73,364,1583164800"; d="scan'208";a="239807073"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 08 May 2020 03:20:22 +0800
-IronPort-SDR: 7VyVC5O2leQkr1QkdOAUyqL0T0I6DoYwOFWQE/mOr1GodCUGvXGZPSR8Xzu4Mzyj1vGoU2dfhg
- scyE4apIqlqkunS1CgwoXfR3fUOHHcFn4=
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 May 2020 12:10:03 -0700
-IronPort-SDR: Vb22lpVCJ5CnPJGulxuwmP7EeYWhcIiuSWM1sM6itgWcZ9dfI1LzxnSbxCr1U8lKqrMPlf+CzN
- +aMQYrIfrQrA==
+ bh=X7f6BLu7XPQ5Nlou8nPG0/ptu1lZX5ZnYkrfQRviITE=;
+ b=TVPtbzq4k6ux8IO+yUXAKAckNoNHNyFY9r/c7/YPwhtoHnUjzRAwq1Dk
+ 2zL2YaUMSFveMHgRscVXL4HMSSk6a6ooPyGnhWmE3sbvVnRVHXSIea46o
+ 6ishD5ZObUVYwzEnCVUI5QSMayITf7SD29p++yaQY0y2kimvRI68SOtz4
+ +L9Xx/UAdoyID8a6DuAdrDw6lJ0O9JPYjqu6WZpNHMc+2XThEW04X7kRn
+ 6dFWVzOkqVXzIwNRO8YSBlVUBdf9CwtUH5ZkO9LeOK/FNOkg2aOdAAgoz
+ CSeWHpBa83F0MR1TTg9fw0ArO/R1ClBlRtF24r26IZMrs66Ykb4uvbu5R g==;
+IronPort-SDR: Nu+6GLEgx23NL/wMyOyQbvipVm2hjXJmJwoYB/LiLXV300ikzoQypxNQ3uSODjmhedfDA3yfEg
+ XYYsbu63cvepuGUixxbo6z37b12F+KnsAN0m964QzhHKakMqRj7MK9Y8kUE1CTmRbINzKUm0gp
+ aFAjQGwPmy7J8EvRtefzYD3snImXyYGPBrEWZetx/EL8T3WYzUeyGxDdWVarbqaInHvNPH8wV8
+ RE/6t+b1btWIKRUG0obOHu21kPUb6C6w287KcpAN0Voyw7S2q3L9gitebxo+2SmhqqFf6tfmLw
+ jsM=
+X-IronPort-AV: E=Sophos;i="5.73,364,1583164800"; d="scan'208";a="137166259"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 08 May 2020 03:19:42 +0800
+IronPort-SDR: 7QSgY4/XYhm1hmmy34iHWRA7I+xZxSGmlhYCPLtO6CRprjHeUAbG7pzTaAVCk1eW+C1SpSFy+S
+ eLxxqRd46KV6MN3uGnF7GpRayOIXYY2ig=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 07 May 2020 12:09:33 -0700
+IronPort-SDR: usz5hogJk5ReFpGrUhdC0wS1ANngsk766eDezQeiHVW+WhvEzWHK1yzfUvS0dW8YPb5o/g+4Lz
+ TUemdJtm1L2w==
 WDCIronportException: Internal
 Received: from uscxm6l72.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.57.6])
- by uls-op-cesaip02.wdc.com with ESMTP; 07 May 2020 12:19:39 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 07 May 2020 12:19:43 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v2 2/3] target/riscv: Remove the deprecated CPUs
-Date: Thu,  7 May 2020 12:11:20 -0700
-Message-Id: <7316f5f5fef7314dfef662862eba93cdbed4ddb9.1588878640.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 3/3] target/riscv: Drop support for ISA spec version 1.09.1
+Date: Thu,  7 May 2020 12:11:23 -0700
+Message-Id: <341f49712f36d53b9d8588da8c7bac712fa7bfcc.1588878640.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1588878640.git.alistair.francis@wdc.com>
 References: <cover.1588878640.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.143.124;
+Received-SPF: pass client-ip=216.71.154.42;
  envelope-from=prvs=38990af3b=alistair.francis@wdc.com;
- helo=esa2.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/07 15:19:37
+ helo=esa4.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/07 15:19:34
 X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
 X-Spam_score_int: -43
 X-Spam_score: -4.4
@@ -81,104 +81,201 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2020 19:19:44 -0000
+X-List-Received-Date: Thu, 07 May 2020 19:19:45 -0000
+
+The RISC-V ISA spec version 1.09.1 has been deprecated in QEMU since
+4.1. It's not commonly used so let's remove support for it.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c              | 28 ----------------------------
- target/riscv/cpu.h              |  7 -------
- tests/qtest/machine-none-test.c |  4 ++--
- 3 files changed, 2 insertions(+), 37 deletions(-)
+ target/riscv/cpu.c                            |  2 -
+ target/riscv/cpu.h                            |  1 -
+ target/riscv/csr.c                            | 82 ++++---------------
+ .../riscv/insn_trans/trans_privileged.inc.c   |  6 --
+ 4 files changed, 17 insertions(+), 74 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 059d71f2c7..112f2e3a2f 100644
+index 112f2e3a2f..eeb91f8513 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -135,16 +135,6 @@ static void riscv_base32_cpu_init(Object *obj)
-     set_misa(env, 0);
- }
- 
--static void rv32gcsu_priv1_09_1_cpu_init(Object *obj)
--{
--    CPURISCVState *env = &RISCV_CPU(obj)->env;
--    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
--    set_priv_version(env, PRIV_VERSION_1_09_1);
--    set_resetvec(env, DEFAULT_RSTVEC);
--    set_feature(env, RISCV_FEATURE_MMU);
--    set_feature(env, RISCV_FEATURE_PMP);
--}
--
- static void rv32gcsu_priv1_10_0_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-@@ -182,16 +172,6 @@ static void riscv_base64_cpu_init(Object *obj)
-     set_misa(env, 0);
- }
- 
--static void rv64gcsu_priv1_09_1_cpu_init(Object *obj)
--{
--    CPURISCVState *env = &RISCV_CPU(obj)->env;
--    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
--    set_priv_version(env, PRIV_VERSION_1_09_1);
--    set_resetvec(env, DEFAULT_RSTVEC);
--    set_feature(env, RISCV_FEATURE_MMU);
--    set_feature(env, RISCV_FEATURE_PMP);
--}
--
- static void rv64gcsu_priv1_10_0_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-@@ -621,18 +601,10 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32imacu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32imafcu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32gcsu_priv1_10_0_cpu_init),
--    /* Depreacted */
--    DEFINE_CPU(TYPE_RISCV_CPU_RV32IMACU_NOMMU,  rv32imacu_nommu_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_RV32GCSU_V1_09_1, rv32gcsu_priv1_09_1_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_RV32GCSU_V1_10_0, rv32gcsu_priv1_10_0_cpu_init)
- #elif defined(TARGET_RISCV64)
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           riscv_base64_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64imacu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64gcsu_priv1_10_0_cpu_init),
--    /* Deprecated */
--    DEFINE_CPU(TYPE_RISCV_CPU_RV64IMACU_NOMMU,  rv64imacu_nommu_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_RV64GCSU_V1_09_1, rv64gcsu_priv1_09_1_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_RV64GCSU_V1_10_0, rv64gcsu_priv1_10_0_cpu_init)
- #endif
- };
- 
+@@ -368,8 +368,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             priv_version = PRIV_VERSION_1_11_0;
+         } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
+             priv_version = PRIV_VERSION_1_10_0;
+-        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.9.1")) {
+-            priv_version = PRIV_VERSION_1_09_1;
+         } else {
+             error_setg(errp,
+                        "Unsupported privilege spec version '%s'",
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index d0e7f5b9c5..76b98d7a33 100644
+index 76b98d7a33..c022539012 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -40,13 +40,6 @@
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
- #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
--/* Deprecated */
--#define TYPE_RISCV_CPU_RV32IMACU_NOMMU  RISCV_CPU_TYPE_NAME("rv32imacu-nommu")
--#define TYPE_RISCV_CPU_RV32GCSU_V1_09_1 RISCV_CPU_TYPE_NAME("rv32gcsu-v1.9.1")
--#define TYPE_RISCV_CPU_RV32GCSU_V1_10_0 RISCV_CPU_TYPE_NAME("rv32gcsu-v1.10.0")
--#define TYPE_RISCV_CPU_RV64IMACU_NOMMU  RISCV_CPU_TYPE_NAME("rv64imacu-nommu")
--#define TYPE_RISCV_CPU_RV64GCSU_V1_09_1 RISCV_CPU_TYPE_NAME("rv64gcsu-v1.9.1")
--#define TYPE_RISCV_CPU_RV64GCSU_V1_10_0 RISCV_CPU_TYPE_NAME("rv64gcsu-v1.10.0")
- 
- #define RV32 ((target_ulong)1 << (TARGET_LONG_BITS - 2))
- #define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
-diff --git a/tests/qtest/machine-none-test.c b/tests/qtest/machine-none-test.c
-index 8bb54a6360..b52311ec2e 100644
---- a/tests/qtest/machine-none-test.c
-+++ b/tests/qtest/machine-none-test.c
-@@ -54,8 +54,8 @@ static struct arch2cpu cpus_map[] = {
-     { "xtensa", "dc233c" },
-     { "xtensaeb", "fsf" },
-     { "hppa", "hppa" },
--    { "riscv64", "rv64gcsu-v1.10.0" },
--    { "riscv32", "rv32gcsu-v1.9.1" },
-+    { "riscv64", "sifive-u54" },
-+    { "riscv32", "sifive-u34" },
-     { "rx", "rx62n" },
+@@ -73,7 +73,6 @@ enum {
+     RISCV_FEATURE_MISA
  };
+ 
+-#define PRIV_VERSION_1_09_1 0x00010901
+ #define PRIV_VERSION_1_10_0 0x00011000
+ #define PRIV_VERSION_1_11_0 0x00011100
+ 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 11d184cd16..df3498b24f 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -58,31 +58,11 @@ static int ctr(CPURISCVState *env, int csrno)
+ #if !defined(CONFIG_USER_ONLY)
+     CPUState *cs = env_cpu(env);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+-    uint32_t ctr_en = ~0u;
+ 
+     if (!cpu->cfg.ext_counters) {
+         /* The Counters extensions is not enabled */
+         return -1;
+     }
+-
+-    /*
+-     * The counters are always enabled at run time on newer priv specs, as the
+-     * CSR has changed from controlling that the counters can be read to
+-     * controlling that the counters increment.
+-     */
+-    if (env->priv_ver > PRIV_VERSION_1_09_1) {
+-        return 0;
+-    }
+-
+-    if (env->priv < PRV_M) {
+-        ctr_en &= env->mcounteren;
+-    }
+-    if (env->priv < PRV_S) {
+-        ctr_en &= env->scounteren;
+-    }
+-    if (!(ctr_en & (1u << (csrno & 31)))) {
+-        return -1;
+-    }
+ #endif
+     return 0;
+ }
+@@ -358,34 +338,21 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+     int dirty;
+ 
+     /* flush tlb on mstatus fields that affect VM */
+-    if (env->priv_ver <= PRIV_VERSION_1_09_1) {
+-        if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP |
+-                MSTATUS_MPRV | MSTATUS_SUM | MSTATUS_VM)) {
+-            tlb_flush(env_cpu(env));
+-        }
+-        mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
+-            MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
+-            MSTATUS_MPP | MSTATUS_MXR |
+-            (validate_vm(env, get_field(val, MSTATUS_VM)) ?
+-                MSTATUS_VM : 0);
++    if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
++            MSTATUS_MPRV | MSTATUS_SUM)) {
++        tlb_flush(env_cpu(env));
+     }
+-    if (env->priv_ver >= PRIV_VERSION_1_10_0) {
+-        if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
+-                MSTATUS_MPRV | MSTATUS_SUM)) {
+-            tlb_flush(env_cpu(env));
+-        }
+-        mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
+-            MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
+-            MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
+-            MSTATUS_TW;
++    mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
++        MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
++        MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
++        MSTATUS_TW;
+ #if defined(TARGET_RISCV64)
+-            /*
+-             * RV32: MPV and MTL are not in mstatus. The current plan is to
+-             * add them to mstatush. For now, we just don't support it.
+-             */
+-            mask |= MSTATUS_MTL | MSTATUS_MPV;
++        /*
++         * RV32: MPV and MTL are not in mstatus. The current plan is to
++         * add them to mstatush. For now, we just don't support it.
++         */
++        mask |= MSTATUS_MTL | MSTATUS_MPV;
+ #endif
+-    }
+ 
+     mstatus = (mstatus & ~mask) | (val & mask);
+ 
+@@ -553,8 +520,7 @@ static int write_mcounteren(CPURISCVState *env, int csrno, target_ulong val)
+ /* This regiser is replaced with CSR_MCOUNTINHIBIT in 1.11.0 */
+ static int read_mscounteren(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+-    if (env->priv_ver > PRIV_VERSION_1_09_1
+-        && env->priv_ver < PRIV_VERSION_1_11_0) {
++    if (env->priv_ver < PRIV_VERSION_1_11_0) {
+         return -1;
+     }
+     *val = env->mcounteren;
+@@ -564,8 +530,7 @@ static int read_mscounteren(CPURISCVState *env, int csrno, target_ulong *val)
+ /* This regiser is replaced with CSR_MCOUNTINHIBIT in 1.11.0 */
+ static int write_mscounteren(CPURISCVState *env, int csrno, target_ulong val)
+ {
+-    if (env->priv_ver > PRIV_VERSION_1_09_1
+-        && env->priv_ver < PRIV_VERSION_1_11_0) {
++    if (env->priv_ver < PRIV_VERSION_1_11_0) {
+         return -1;
+     }
+     env->mcounteren = val;
+@@ -574,20 +539,13 @@ static int write_mscounteren(CPURISCVState *env, int csrno, target_ulong val)
+ 
+ static int read_mucounteren(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+-    if (env->priv_ver > PRIV_VERSION_1_09_1) {
+-        return -1;
+-    }
+-    *val = env->scounteren;
++    return -1;
+     return 0;
+ }
+ 
+ static int write_mucounteren(CPURISCVState *env, int csrno, target_ulong val)
+ {
+-    if (env->priv_ver > PRIV_VERSION_1_09_1) {
+-        return -1;
+-    }
+-    env->scounteren = val;
+-    return 0;
++    return -1;
+ }
+ 
+ /* Machine Trap Handling */
+@@ -829,13 +787,7 @@ static int write_satp(CPURISCVState *env, int csrno, target_ulong val)
+     if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
+         return 0;
+     }
+-    if (env->priv_ver <= PRIV_VERSION_1_09_1 && (val ^ env->sptbr)) {
+-        tlb_flush(env_cpu(env));
+-        env->sptbr = val & (((target_ulong)
+-            1 << (TARGET_PHYS_ADDR_SPACE_BITS - PGSHIFT)) - 1);
+-    }
+-    if (env->priv_ver >= PRIV_VERSION_1_10_0 &&
+-        validate_vm(env, get_field(val, SATP_MODE)) &&
++    if (validate_vm(env, get_field(val, SATP_MODE)) &&
+         ((val ^ env->satp) & (SATP_MODE | SATP_ASID | SATP_PPN)))
+     {
+         if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
+index 76c2fad71c..1af9fa7df8 100644
+--- a/target/riscv/insn_trans/trans_privileged.inc.c
++++ b/target/riscv/insn_trans/trans_privileged.inc.c
+@@ -95,12 +95,6 @@ static bool trans_sfence_vma(DisasContext *ctx, arg_sfence_vma *a)
+ 
+ static bool trans_sfence_vm(DisasContext *ctx, arg_sfence_vm *a)
+ {
+-#ifndef CONFIG_USER_ONLY
+-    if (ctx->priv_ver <= PRIV_VERSION_1_09_1) {
+-        gen_helper_tlb_flush(cpu_env);
+-        return true;
+-    }
+-#endif
+     return false;
+ }
  
 -- 
 2.26.2
