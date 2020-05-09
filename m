@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jXPEb-0004XY-Jp
-	for mharc-qemu-riscv@gnu.org; Sat, 09 May 2020 09:09:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44656)
+	id 1jXPEe-0004iS-PH
+	for mharc-qemu-riscv@gnu.org; Sat, 09 May 2020 09:09:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44688)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jXPEZ-0004S0-Ex; Sat, 09 May 2020 09:09:39 -0400
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:36715)
+ id 1jXPEc-0004aQ-9s; Sat, 09 May 2020 09:09:42 -0400
+Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:52926)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jXPEY-0004jo-J3; Sat, 09 May 2020 09:09:39 -0400
-Received: by mail-wr1-x441.google.com with SMTP id z8so5142038wrw.3;
- Sat, 09 May 2020 06:09:36 -0700 (PDT)
+ id 1jXPEb-0005Q0-HU; Sat, 09 May 2020 09:09:41 -0400
+Received: by mail-wm1-x341.google.com with SMTP id m24so3357702wml.2;
+ Sat, 09 May 2020 06:09:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=dOtABLpYucdkmo0UeAZ60MKjOPNkZbYs54q0kVYNjc4=;
- b=HQK3okQo3XgNVWABTcc/YPdQSiaGJ3DfZD6sUUm77Yk8M91/zHxprIHjBdeBsmNIdg
- Bn3+sNvRRbzvzyVK7o+vMnT7F6lWE1Iz3Dc5pZD8yA9Su/M/W/MQvv9soEeS1saLjcTe
- 1nsJCoI4Dt3gaLZtddO2soy9KlYTqguUaHTrFAwy1FsijxkmQEF8Ye47gY/UgB+Ingrx
- MXCjshWY7FIM1TOUdJ8OPNMRLvDuykIdDhp0rhL65CbYVOl8DVPRp2ITd3RjPSV48+KN
- dvEWFWdZoycY7hiqyy+y32YfKU0m1Agt5JeQFR0A3mdwVcz9WhrfrydHnlsV1s0wWDZY
- JRWQ==
+ bh=IIEEHUjsrjg149IdCnCJKS5PWD554RDC6FHVKmSpxnE=;
+ b=Nl0CXBPpXNxQ0v8jKUxF1Se16t8u56AbbYFOXIfPtb3ZUkfj0ZUg/dU3Thk8Lr1Q7t
+ kabpZj03s+ZUNpvujY4Zy+nYe12FYxm2JYH0Sat58Kz7SFKvyQ3iMSG3y1MYqATHFUve
+ XyfFNfP52J7d35j7A/kxh/ByzGKFK/Wgnz3+tTUgFcDTmF7jMtKEdpgxQ5PP4ZMZjUd+
+ EH1224KiMOCijg6RGClqqyea+dKpk/2QfqW51WcpNx9UN98xYL+BD6Ueqm040CnlBCEx
+ dKrqgMaikR6NN+CpCvHMTBA3/73OgPdGOl6ZD8FHNRWIL1RhGB+33Jxa+5cdqfwouDCs
+ SHQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=dOtABLpYucdkmo0UeAZ60MKjOPNkZbYs54q0kVYNjc4=;
- b=ox6lqT3O/fT4moBwL2DnU4lLErqkAbpAO+PSL1bptqMKlRBUcqSXBYlUKxU7nLNC1a
- ddYvLux7TrAsmy6Ikhjp2+tCPHHF+AQQCiuvBw7SLoqgJzuLmSzxI99ScYuR0jFAbJuk
- 9AlY93tcqi8/WGX3ZU05YbKEpj4gmtBBcA8YTvoqfLMry0vYDqPKqYwHQUdpogrhoyYW
- s2yy9WH1jO1zCo5tWBa+7vViw7UhuQpCEwJ/vey2f+HmdC287/NjlitCCLChF3NXuQJM
- DVDeD1OUzXErY0q4CXq4/7oFWD6emPiYZ2+dL/dZadp/MxCdMizF5Q8PnjyImsxygMcN
- f7nw==
-X-Gm-Message-State: AGi0PuZOswPyeF8gui4PkdGhfXUTlbdIFnwaUz0sB2OlWZIygIvVp181
- IqFcCIlQRN2oIJ9SaWgaclVYgmq2rnk=
-X-Google-Smtp-Source: APiQypIV8V4JDCd+NtoSYkuzj8e2yB4xHjwhOrS9F9Bxn7DYiVKkt3jysGRG12LFj+3ejc82YWxp8A==
-X-Received: by 2002:adf:d841:: with SMTP id k1mr8240629wrl.129.1589029775565; 
- Sat, 09 May 2020 06:09:35 -0700 (PDT)
+ bh=IIEEHUjsrjg149IdCnCJKS5PWD554RDC6FHVKmSpxnE=;
+ b=H6cMrgyIKSxWy1xD7Wz0qKFu3NyPRonjAiTJ0O4HKfWwD4ofhhzIeChYouFjSpFXnI
+ 07hm98z4p+YsEu8g++pBlSOLgT8iLuHb0fh2pXmDJokf8XgW1A6rG/qNjunvoloq435e
+ tOzAH4OhCxxks+K/YM5YbFtIuMlTxTfC9uX5KyM6j4wX9PndNOYWozXhkxRZ/88IzlQc
+ exP92mp6vz89XNfshuJduvN+sEMLejDdzafVyv/iSa0EvQ/kpGZe2Z3mO2KKoL2nj2HU
+ bD9nS2QeC5m/XBa8cnORvPY1FbyK7gxIYv83vCyyr5jtRs+TOtGYUYhgOcneNS/6yF2k
+ pcXw==
+X-Gm-Message-State: AGi0PuYOIiBwJlGjWSZBCfomI7eS8VGeO85WtFoV3XJiDAfbKKLNmp9d
+ fDiq5oiVLaqqffcB1JApYkAykf2WlQk=
+X-Google-Smtp-Source: APiQypIQv5dktkJhLCJa+f5nseiL+K4OPMQciaBIjnNe4IrHVAf2DQjQGyL8101k14juuCgRuJvDfA==
+X-Received: by 2002:a1c:2e4d:: with SMTP id u74mr22275473wmu.145.1589029778450; 
+ Sat, 09 May 2020 06:09:38 -0700 (PDT)
 Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id m65sm1411410wmm.17.2020.05.09.06.09.32
+ by smtp.gmail.com with ESMTPSA id m65sm1411410wmm.17.2020.05.09.06.09.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 May 2020 06:09:34 -0700 (PDT)
+ Sat, 09 May 2020 06:09:37 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -69,9 +69,9 @@ Cc: Laurent Vivier <laurent@vivier.eu>,
  David Hildenbrand <david@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH 07/11] target/s390x/helper: Clean ifdef'ry
-Date: Sat,  9 May 2020 15:09:06 +0200
-Message-Id: <20200509130910.26335-8-f4bug@amsat.org>
+Subject: [PATCH 08/11] target/s390x: Restrict system-mode declarations
+Date: Sat,  9 May 2020 15:09:07 +0200
+Message-Id: <20200509130910.26335-9-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200509130910.26335-1-f4bug@amsat.org>
 References: <20200509130910.26335-1-f4bug@amsat.org>
@@ -79,8 +79,8 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::441;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x441.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::341;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x341.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -16
@@ -103,63 +103,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 May 2020 13:09:40 -0000
+X-List-Received-Date: Sat, 09 May 2020 13:09:43 -0000
 
-All this code is guarded checking CONFIG_USER_ONLY definition.
-Drop the duplicated checks.
+As these declarations are restricted to !CONFIG_USER_ONLY in
+helper.c, only declare them when system-mode emulation is used.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
-Suspicious ifdef'ry in s390_handle_wait() from commit 83f7f32901c.
----
- target/s390x/helper.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ target/s390x/internal.h | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/target/s390x/helper.c b/target/s390x/helper.c
-index 09f60406aa..26e3b366e8 100644
---- a/target/s390x/helper.c
-+++ b/target/s390x/helper.c
-@@ -33,6 +33,7 @@
- #endif
+diff --git a/target/s390x/internal.h b/target/s390x/internal.h
+index c1678dc6bc..ddc276cdf4 100644
+--- a/target/s390x/internal.h
++++ b/target/s390x/internal.h
+@@ -236,7 +236,6 @@ int s390_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
  
- #ifndef CONFIG_USER_ONLY
+ /* cc_helper.c */
+ const char *cc_name(enum cc_op cc_op);
+-void load_psw(CPUS390XState *env, uint64_t mask, uint64_t addr);
+ uint32_t calc_cc(CPUS390XState *env, uint32_t cc_op, uint64_t src, uint64_t dst,
+                  uint64_t vr);
+ 
+@@ -303,18 +302,20 @@ void s390_cpu_gdb_init(CPUState *cs);
+ 
+ /* helper.c */
+ void s390_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+-hwaddr s390_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+-hwaddr s390_cpu_get_phys_addr_debug(CPUState *cpu, vaddr addr);
++void do_restart_interrupt(CPUS390XState *env);
 +
- void s390x_tod_timer(void *opaque)
- {
-     cpu_inject_clock_comparator((S390CPU *) opaque);
-@@ -42,9 +43,6 @@ void s390x_cpu_timer(void *opaque)
- {
-     cpu_inject_cpu_timer((S390CPU *) opaque);
- }
--#endif
--
++#ifndef CONFIG_USER_ONLY
++void load_psw(CPUS390XState *env, uint64_t mask, uint64_t addr);
+ uint64_t get_psw_mask(CPUS390XState *env);
+ void s390_cpu_recompute_watchpoints(CPUState *cs);
+ void s390x_tod_timer(void *opaque);
+ void s390x_cpu_timer(void *opaque);
+-void do_restart_interrupt(CPUS390XState *env);
+ void s390_handle_wait(S390CPU *cpu);
++hwaddr s390_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
++hwaddr s390_cpu_get_phys_addr_debug(CPUState *cpu, vaddr addr);
+ #define S390_STORE_STATUS_DEF_ADDR offsetof(LowCore, floating_pt_save_area)
+ int s390_store_status(S390CPU *cpu, hwaddr addr, bool store_arch);
+ int s390_store_adtl_status(S390CPU *cpu, hwaddr addr, hwaddr len);
 -#ifndef CONFIG_USER_ONLY
- 
- hwaddr s390_cpu_get_phys_page_debug(CPUState *cs, vaddr vaddr)
- {
-@@ -98,14 +96,12 @@ void s390_handle_wait(S390CPU *cpu)
-     CPUState *cs = CPU(cpu);
- 
-     if (s390_cpu_halt(cpu) == 0) {
--#ifndef CONFIG_USER_ONLY
-         if (is_special_wait_psw(cpu->env.psw.addr)) {
-             qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
-         } else {
-             cpu->env.crash_reason = S390_CRASH_REASON_DISABLED_WAIT;
-             qemu_system_guest_panicked(cpu_get_crash_info(cs));
-         }
--#endif
-     }
- }
- 
-@@ -328,6 +324,7 @@ int s390_store_adtl_status(S390CPU *cpu, hwaddr addr, hwaddr len)
-     cpu_physical_memory_unmap(sa, len, 1, len);
-     return 0;
- }
-+
+ LowCore *cpu_map_lowcore(CPUS390XState *env);
+ void cpu_unmap_lowcore(LowCore *lowcore);
  #endif /* CONFIG_USER_ONLY */
- 
- void s390_cpu_dump_state(CPUState *cs, FILE *f, int flags)
 -- 
 2.21.3
 
