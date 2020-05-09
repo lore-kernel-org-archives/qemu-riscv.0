@@ -1,91 +1,93 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jX5nz-0007QN-Kf
-	for mharc-qemu-riscv@gnu.org; Fri, 08 May 2020 12:24:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57522)
+	id 1jXPEH-0003aI-BM
+	for mharc-qemu-riscv@gnu.org; Sat, 09 May 2020 09:09:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44552)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jX5ny-0007Ow-AM
- for qemu-riscv@nongnu.org; Fri, 08 May 2020 12:24:54 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:33502
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jX5nq-0003mN-Eo
- for qemu-riscv@nongnu.org; Fri, 08 May 2020 12:24:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588955085;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=N16PM56c20HjCHU6EZjPv7GwWM6Oo3yOuvlJmbCHhxw=;
- b=QVoHodmbPOAz0tUIrhsus1P/dTvdgnVpcD2N7FgcBLkHjvq8EgmdAY11TxYt7mZLOzIHLe
- J9Ftm+cznebw6ABLy+dqbysSwI9sKpNOV4CNwdFEIn5fwdrfTsq1iU1eJbPXHf0oFDSx2x
- CM8wq+UfBTtrUQ5Qy10bae82rRx2VlU=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-189-h4oL7EwLPi-Vq_VY7Ja5dA-1; Fri, 08 May 2020 12:24:39 -0400
-X-MC-Unique: h4oL7EwLPi-Vq_VY7Ja5dA-1
-Received: by mail-wr1-f72.google.com with SMTP id z5so1112798wrt.17
- for <qemu-riscv@nongnu.org>; Fri, 08 May 2020 09:24:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1jXPEF-0003Z9-KL; Sat, 09 May 2020 09:09:19 -0400
+Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:36305)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1jXPEE-0002qc-NB; Sat, 09 May 2020 09:09:19 -0400
+Received: by mail-wm1-x344.google.com with SMTP id u127so13582294wmg.1;
+ Sat, 09 May 2020 06:09:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=iE1+mJklc9qKRY36HjqMYuwaM8rzjkNP3yQiEBI2qQE=;
+ b=Gfp9lMbRlEqlUHuwAcIsNoFH99uSEOdkZZhVlXMQ7cyBLO1xcqqhkPG1yDHH82cj3i
+ QYYh2RjNRr0wzlukYDiCw8B1S77cQQYGby3dna5vxspS+rXNGxHMzme+dtjlteb3F2WQ
+ kckjhnnHULfUeGJMtBSWqTyrLYh/UcxdwT7+MFsTHUrh0Fz0OVujeNPZib/OIvuLpEDE
+ IVwy7MuAjCAbEYfUfUMJHCxXpNAKEfOd8GL6nL+396vTBmPyr4uxBpp0KB34h7owFKNe
+ DtbaRAp67mLJYmQay+4r6DKx6KNXJKYJz6suluGN5ZmDT9abA6HAtwjxjgLonrCHy9Z0
+ Ok0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=N16PM56c20HjCHU6EZjPv7GwWM6Oo3yOuvlJmbCHhxw=;
- b=sIJTEvMRSCCZIJYIxr6YQv5RF+MXUxMpWGmQChRr6ze1gWPtFEcq4DpJ2mOZ3YUL9v
- /zSp7ITtEOrhsygURlkvrdyzjyFmBbkFaZaFyUjhDL9oKFUbaiOo4QMCKvJ/zoHtACTz
- K+yYhTL9bA6svl9nJHqIpH4l/KffBylcgXdVwezHLRPQvlPh4DkAMCVhPal2efnbVyaW
- eF4zB+0wG+P55TdezGpoBJNGckCJ2g54+9wKDz4xlx64xGgVVqHM02LJfO43MHrcuX3N
- 6lSHhyfkG+eT6oItW5z5ufXVNhrGFdzWIx40Pe24dQPIbnUEs4m+iGrbZqBNkQkJqpmn
- p84A==
-X-Gm-Message-State: AGi0PuYOwkGLYu9oIlKBegplF6EuSkIql4oYva7sM3Tyyyon6iT9Oz0Y
- v8TeRiRThQwdUOXTeE/QD75cklmieJAhDuHjuANhj2sBTmDWnw8i7Vu0Xyw6zXghsZYZhmdV49f
- HvCXHJqaHaP/nLhM=
-X-Received: by 2002:a1c:5f46:: with SMTP id t67mr18112733wmb.156.1588955077782; 
- Fri, 08 May 2020 09:24:37 -0700 (PDT)
-X-Google-Smtp-Source: APiQypKAp90iCgoFfDb77/IePwZh6jVXnTtXgZSwrIbiGSq2NaoUT9Y1Pzpt+rmCaRKfutfkjwU/FA==
-X-Received: by 2002:a1c:5f46:: with SMTP id t67mr18112700wmb.156.1588955077442; 
- Fri, 08 May 2020 09:24:37 -0700 (PDT)
-Received: from [192.168.1.38] (17.red-88-21-202.staticip.rima-tde.net.
+ h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+ :mime-version:content-transfer-encoding;
+ bh=iE1+mJklc9qKRY36HjqMYuwaM8rzjkNP3yQiEBI2qQE=;
+ b=K17CqlDD0zCK+v4z4TuqvXiQY228i8jdfkcW7FOy9kkzsjfOI9y+jbgwJLHyy1XrNt
+ GEVUN8eHQi6xNtwAZXLkG9i6+fnmuy6si/7TpXliBXIX+VQ7rGiQGOBL5H/tNSezVgEE
+ YvS54/SqKUDSgGvaaw2ZkVf1C+dL492xz/3WQAN7e9SX3Dlum1zh8V0uupTNxgPTu9PH
+ F02DxHRE9W6oJWd6LRKHkaEp8s6R+o19uy7qtOwBAvkIIY5edM86pTKDOHqDpR05U0kf
+ sg5EBQUpML7VKRj1HqaJqMOnQRr1J1puiSPeRTFMohJ3ePw5Ebd8AROaT1IzPACA82Ry
+ Ucmw==
+X-Gm-Message-State: AGi0PuZ+tD/V5hhMSP2hIZ1UK/dHmdXmhg9JKtL3HyvsLzErg8fGdQij
+ 1BuLlBBbjCtrZ068ITpq+zBwMA2IMV8=
+X-Google-Smtp-Source: APiQypIxSoJQrCineHduqmVzQFO86f/7GWszhtwChBJzs41MjCoAXBeO4O9AtUOwuPvrK3uUqfQyaA==
+X-Received: by 2002:a7b:ce0b:: with SMTP id m11mr21875192wmc.67.1589029755117; 
+ Sat, 09 May 2020 06:09:15 -0700 (PDT)
+Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id h137sm23015935wme.0.2020.05.08.09.24.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 08 May 2020 09:24:36 -0700 (PDT)
-Subject: Re: [PATCH v3 00/12] user-mode: Prune build dependencies (part 1)
-To: Laurent Vivier <laurent@vivier.eu>, qemu-devel@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org,
- Eduardo Habkost <ehabkost@redhat.com>,
+ by smtp.gmail.com with ESMTPSA id m65sm1411410wmm.17.2020.05.09.06.09.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 09 May 2020 06:09:14 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+To: qemu-devel@nongnu.org
+Cc: Laurent Vivier <laurent@vivier.eu>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Stafford Horne <shorne@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
+ Roman Bolshakov <r.bolshakov@yadro.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Eduardo Habkost <ehabkost@redhat.com>, qemu-s390x@nongnu.org,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Marek Vasut <marex@denx.de>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-ppc@nongnu.org,
+ qemu-arm@nongnu.org, Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Chris Wulff <crwulff@gmail.com>,
+ Richard Henderson <rth@twiddle.net>,
+ David Gibson <david@gibson.dropbear.id.au>,
  David Hildenbrand <david@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, qemu-s390x@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>, Richard Henderson <rth@twiddle.net>
-References: <20200504152922.21365-1-philmd@redhat.com>
- <7f19b263-5493-779b-cf86-b0499c7dc80d@vivier.eu>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <ecac9003-ef59-8cca-3aec-6aa26a9e092b@redhat.com>
-Date: Fri, 8 May 2020 18:24:35 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Subject: [PATCH 00/11] exec/cpu: Poison 'hwaddr' type in user-mode emulation
+Date: Sat,  9 May 2020 15:08:59 +0200
+Message-Id: <20200509130910.26335-1-f4bug@amsat.org>
+X-Mailer: git-send-email 2.21.3
 MIME-Version: 1.0
-In-Reply-To: <7f19b263-5493-779b-cf86-b0499c7dc80d@vivier.eu>
-Content-Language: en-US
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=207.211.31.120; envelope-from=philmd@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/08 11:31:41
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+Received-SPF: pass client-ip=2a00:1450:4864:20::344;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x344.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -98,93 +100,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2020 16:24:54 -0000
+X-List-Received-Date: Sat, 09 May 2020 13:09:20 -0000
 
-On 5/5/20 10:33 AM, Laurent Vivier wrote:
-> Le 04/05/2020 à 17:29, Philippe Mathieu-Daudé a écrit :
->> This is the first part of a series reducing user-mode
->> dependencies. By stripping out unused code, the build
->> and testing time is reduced (as is space used by objects).
->>
->> Part 1 (generic):
->> - reduce user-mode object list
->> - remove some migration code from user-mode
->> - remove cpu_get_crash_info()
->>
->> This series is fully reviewed.
->>
->> Since v2:
->> - Rebased due to conflict when applying patch:
->>    "util/Makefile: Reduce the user-mode object list"
->>    because commit 01ef6b9e4e modified util/Makefile.objs:
->>    "linux-user: factor out reading of /proc/self/maps"
->>
->> Since v1:
->> - Addressed Laurent/Richard review comments
->> - Removed 'exec: Drop redundant #ifdeffery'
->> - Removed 'target: Restrict write_elfXX_note() handlers to system-mode'
->>
->> $ git backport-diff -u v1 -r v2
->> Key:
->> [----] : patches are identical
->> [####] : number of functional differences between upstream/downstream patch
->> [down] : patch is downstream-only
->> The flags [FC] indicate (F)unctional and (C)ontextual differences, respectively
->>
->> 001/12:[----] [--] 'Makefile: Only build virtiofsd if system-mode is enabled'
->> 002/12:[----] [--] 'configure: Avoid building TCG when not needed'
->> 003/12:[----] [--] 'tests/Makefile: Only display TCG-related tests when TCG is available'
->> 004/12:[----] [--] 'tests/Makefile: Restrict some softmmu-only tests'
->> 005/12:[----] [-C] 'util/Makefile: Reduce the user-mode object list'
->> 006/12:[----] [--] 'stubs/Makefile: Reduce the user-mode object list'
->> 007/12:[----] [--] 'target/riscv/cpu: Restrict CPU migration to system-mode'
->> 008/12:[----] [--] 'exec: Assert CPU migration is not used on user-only build'
->> 009/12:[----] [--] 'arch_init: Remove unused 'qapi-commands-misc.h' include'
->> 010/12:[----] [--] 'target/i386: Restrict CpuClass::get_crash_info() to system-mode'
->> 011/12:[----] [--] 'target/s390x: Restrict CpuClass::get_crash_info() to system-mode'
->> 012/12:[----] [--] 'hw/core: Restrict CpuClass::get_crash_info() to system-mode'
->>
->> Philippe Mathieu-Daudé (12):
->>    Makefile: Only build virtiofsd if system-mode is enabled
->>    configure: Avoid building TCG when not needed
->>    tests/Makefile: Only display TCG-related tests when TCG is available
->>    tests/Makefile: Restrict some softmmu-only tests
->>    util/Makefile: Reduce the user-mode object list
->>    stubs/Makefile: Reduce the user-mode object list
->>    target/riscv/cpu: Restrict CPU migration to system-mode
->>    exec: Assert CPU migration is not used on user-only build
->>    arch_init: Remove unused 'qapi-commands-misc.h' include
->>    target/i386: Restrict CpuClass::get_crash_info() to system-mode
->>    target/s390x: Restrict CpuClass::get_crash_info() to system-mode
->>    hw/core: Restrict CpuClass::get_crash_info() to system-mode
->>
->>   configure              |  4 +++
->>   Makefile               |  2 +-
->>   include/hw/core/cpu.h  |  7 ++++-
->>   arch_init.c            |  1 -
->>   exec.c                 |  4 ++-
->>   hw/core/cpu.c          |  2 ++
->>   target/i386/cpu.c      |  6 ++++-
->>   target/riscv/cpu.c     |  6 +++--
->>   target/s390x/cpu.c     | 12 ++++-----
->>   stubs/Makefile.objs    | 52 +++++++++++++++++++++----------------
->>   tests/Makefile.include | 18 +++++++------
->>   util/Makefile.objs     | 59 +++++++++++++++++++++++++++---------------
->>   12 files changed, 108 insertions(+), 65 deletions(-)
->>
-> 
-> Reviewed-by: Laurent Vivier <laurent@vivier.eu>
-> Tested-by: Laurent Vivier <laurent@vivier.eu>
+The 'hwaddr' type declared in "exec/hwaddr.h" is meant for
+system-mode emulation only. Poison it in user-mode code.
 
-Thanks!
+Philippe Mathieu-Daudé (11):
+  plugins: Restrict functions handling hwaddr to system-mode
+  sysemu/accel: Restrict machine methods to system-mode
+  sysemu/tcg: Only declare tcg_allowed when TCG is available
+  sysemu/hvf: Only declare hvf_allowed when HVF is available
+  target/ppc: Restrict PPCVirtualHypervisorClass to system-mode
+  target/s390x: Only compile decode_basedisp() on system-mode
+  target/s390x/helper: Clean ifdef'ry
+  target/s390x: Restrict system-mode declarations
+  target/cpu: Restrict handlers using hwaddr type to system-mode
+  exec: Use 'cpu-common.h' instead of system-mode specific 'hwaddr.h'
+  exec/cpu-common: Poison hwaddr type in user-mode emulation
 
-Paolo, since it is a bit of everything, do you mind taking this series?
-For your convenience, you can use this link with all the patches and the 
-tags already applied at once! :p
-https://patchew.org/QEMU/20200504152922.21365-1-philmd@redhat.com/mbox
+ include/disas/disas.h           |  2 +-
+ include/exec/cpu-common.h       |  8 ++++++--
+ include/hw/core/cpu.h           | 10 ++++++----
+ include/qemu/qemu-plugin.h      |  2 ++
+ include/sysemu/accel.h          |  4 +++-
+ include/sysemu/hvf.h            |  6 +++---
+ include/sysemu/tcg.h            |  2 +-
+ target/alpha/cpu.h              |  4 +++-
+ target/arm/cpu.h                |  6 +++---
+ target/arm/internals.h          |  4 ++++
+ target/cris/cpu.h               |  2 ++
+ target/hppa/cpu.h               |  2 +-
+ target/i386/cpu.h               |  2 ++
+ target/m68k/cpu.h               |  7 ++++++-
+ target/microblaze/cpu.h         |  5 ++++-
+ target/mips/internal.h          |  2 +-
+ target/nios2/cpu.h              |  5 ++++-
+ target/openrisc/cpu.h           |  3 ++-
+ target/ppc/cpu.h                |  6 +++---
+ target/ppc/kvm_ppc.h            | 22 +++++++++++-----------
+ target/riscv/cpu.h              | 20 ++++++++++----------
+ target/s390x/internal.h         | 15 ++++++++++-----
+ target/sh4/cpu.h                |  2 +-
+ target/sparc/cpu.h              |  2 ++
+ target/xtensa/cpu.h             | 12 +++++++-----
+ plugins/api.c                   | 17 ++---------------
+ target/hppa/cpu.c               |  4 +++-
+ target/ppc/translate_init.inc.c |  6 +++++-
+ target/s390x/helper.c           |  7 ++-----
+ 29 files changed, 110 insertions(+), 79 deletions(-)
 
-Regards,
-
-Phil.
+-- 
+2.21.3
 
 
