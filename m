@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jXPEH-0003aI-BM
-	for mharc-qemu-riscv@gnu.org; Sat, 09 May 2020 09:09:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44552)
+	id 1jXPEK-0003iC-0d
+	for mharc-qemu-riscv@gnu.org; Sat, 09 May 2020 09:09:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44560)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jXPEF-0003Z9-KL; Sat, 09 May 2020 09:09:19 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:36305)
+ id 1jXPEH-0003c9-UU; Sat, 09 May 2020 09:09:21 -0400
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:36305)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jXPEE-0002qc-NB; Sat, 09 May 2020 09:09:19 -0400
-Received: by mail-wm1-x344.google.com with SMTP id u127so13582294wmg.1;
- Sat, 09 May 2020 06:09:16 -0700 (PDT)
+ id 1jXPEH-0002qr-3W; Sat, 09 May 2020 09:09:21 -0400
+Received: by mail-wm1-x343.google.com with SMTP id u127so13582409wmg.1;
+ Sat, 09 May 2020 06:09:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=iE1+mJklc9qKRY36HjqMYuwaM8rzjkNP3yQiEBI2qQE=;
- b=Gfp9lMbRlEqlUHuwAcIsNoFH99uSEOdkZZhVlXMQ7cyBLO1xcqqhkPG1yDHH82cj3i
- QYYh2RjNRr0wzlukYDiCw8B1S77cQQYGby3dna5vxspS+rXNGxHMzme+dtjlteb3F2WQ
- kckjhnnHULfUeGJMtBSWqTyrLYh/UcxdwT7+MFsTHUrh0Fz0OVujeNPZib/OIvuLpEDE
- IVwy7MuAjCAbEYfUfUMJHCxXpNAKEfOd8GL6nL+396vTBmPyr4uxBpp0KB34h7owFKNe
- DtbaRAp67mLJYmQay+4r6DKx6KNXJKYJz6suluGN5ZmDT9abA6HAtwjxjgLonrCHy9Z0
- Ok0w==
+ h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=TeWtSAei3ep1DJcrXDtpu+82w6foJlJk1rjchgbdgfo=;
+ b=FVDqgvQ0ukrRJhtKvI+c9JPloXHMWIoy4AmFxurl2ULEWeMwOVaSrI1H5mBNVyd+H1
+ Ed95DK3yvQ4R/SlqX2RCwHGKz/P19lTQd0mUepd5K91LqBkDxhjIlkXh//7fOecLtnL/
+ r58B6l/H4/FQ2PUD2TtH87WSEDAle4hkIVJRdXeRybIVjl21R8MIuCc4yRUQUPToZ6lG
+ SRAuTKsLgWJdL4s5CCiNuuX546BqvIFtJkUUu5YwAancGKkw+JLUcHNgt5tWiS/gndED
+ D5+gmz1DkoKQfL1Dy+dft260i0kfLg6ar12XmZgV7hqsRhdfAF0HqCC2Z1QqjN+bVGtH
+ D44w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :mime-version:content-transfer-encoding;
- bh=iE1+mJklc9qKRY36HjqMYuwaM8rzjkNP3yQiEBI2qQE=;
- b=K17CqlDD0zCK+v4z4TuqvXiQY228i8jdfkcW7FOy9kkzsjfOI9y+jbgwJLHyy1XrNt
- GEVUN8eHQi6xNtwAZXLkG9i6+fnmuy6si/7TpXliBXIX+VQ7rGiQGOBL5H/tNSezVgEE
- YvS54/SqKUDSgGvaaw2ZkVf1C+dL492xz/3WQAN7e9SX3Dlum1zh8V0uupTNxgPTu9PH
- F02DxHRE9W6oJWd6LRKHkaEp8s6R+o19uy7qtOwBAvkIIY5edM86pTKDOHqDpR05U0kf
- sg5EBQUpML7VKRj1HqaJqMOnQRr1J1puiSPeRTFMohJ3ePw5Ebd8AROaT1IzPACA82Ry
- Ucmw==
-X-Gm-Message-State: AGi0PuZ+tD/V5hhMSP2hIZ1UK/dHmdXmhg9JKtL3HyvsLzErg8fGdQij
- 1BuLlBBbjCtrZ068ITpq+zBwMA2IMV8=
-X-Google-Smtp-Source: APiQypIxSoJQrCineHduqmVzQFO86f/7GWszhtwChBJzs41MjCoAXBeO4O9AtUOwuPvrK3uUqfQyaA==
-X-Received: by 2002:a7b:ce0b:: with SMTP id m11mr21875192wmc.67.1589029755117; 
- Sat, 09 May 2020 06:09:15 -0700 (PDT)
+ :in-reply-to:references:mime-version:content-transfer-encoding;
+ bh=TeWtSAei3ep1DJcrXDtpu+82w6foJlJk1rjchgbdgfo=;
+ b=culRO1TUFFoXO5qduN58a1tWZ0n+ZqdVAD0yqi6x88Z+6uUJyLlqcSEjFupChAtK6j
+ UsbUzlVfv3/9LXUbjC2IpSPM43JTRaYG59oFeO2eCbIug/INWD8JtaYPJ/DoGmlCevM1
+ YEh0FetCeKmbnvkAisaek8CRGhCIPwBxnfrUCequI3cIbr87uFLaJpi19Q6XqqQGCRLr
+ cElP58HhxnoZ0iWIHl3C3sb6JFNg0oGTWNdL2QcwzpashKQDKf2syb1dfc7YoxWj5YNu
+ h6InouU6K3tXP9o8sc7b9KtTJhRyZ06COXJ2jaOem3/+Jyo/Oj8Yck1OKKLkjjDhX7EZ
+ k5JQ==
+X-Gm-Message-State: AGi0PuZ3qnzqt6v3c0OiZR0lh44XZxlYMbAie5o2B4hMjOZ8IVOq/dX7
+ kPVRqMMLQin/khyvt9ksqxZjQVIQ+uY=
+X-Google-Smtp-Source: APiQypK3virEnIkWexu8Mf8qsHDhzVfpImcldIBfa3jsD5SK4vyes6cGvXjwqv8wQQgx4WnoNRS06g==
+X-Received: by 2002:a1c:f306:: with SMTP id q6mr21073205wmq.169.1589029758217; 
+ Sat, 09 May 2020 06:09:18 -0700 (PDT)
 Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id m65sm1411410wmm.17.2020.05.09.06.09.12
+ by smtp.gmail.com with ESMTPSA id m65sm1411410wmm.17.2020.05.09.06.09.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 May 2020 06:09:14 -0700 (PDT)
+ Sat, 09 May 2020 06:09:17 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -69,25 +69,29 @@ Cc: Laurent Vivier <laurent@vivier.eu>,
  David Hildenbrand <david@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH 00/11] exec/cpu: Poison 'hwaddr' type in user-mode emulation
-Date: Sat,  9 May 2020 15:08:59 +0200
-Message-Id: <20200509130910.26335-1-f4bug@amsat.org>
+Subject: [PATCH 01/11] plugins: Restrict functions handling hwaddr to
+ system-mode
+Date: Sat,  9 May 2020 15:09:00 +0200
+Message-Id: <20200509130910.26335-2-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
+In-Reply-To: <20200509130910.26335-1-f4bug@amsat.org>
+References: <20200509130910.26335-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::344;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x344.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::343;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x343.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+X-Spam_score_int: -16
+X-Spam_score: -1.7
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
  FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001 autolearn=_AUTOLEARN
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -100,55 +104,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 May 2020 13:09:20 -0000
+X-List-Received-Date: Sat, 09 May 2020 13:09:22 -0000
 
-The 'hwaddr' type declared in "exec/hwaddr.h" is meant for
-system-mode emulation only. Poison it in user-mode code.
+Restrict qemu_plugin_hwaddr_is_io() and
+qemu_plugin_hwaddr_device_offset() to system-mode.
 
-Philippe Mathieu-Daudé (11):
-  plugins: Restrict functions handling hwaddr to system-mode
-  sysemu/accel: Restrict machine methods to system-mode
-  sysemu/tcg: Only declare tcg_allowed when TCG is available
-  sysemu/hvf: Only declare hvf_allowed when HVF is available
-  target/ppc: Restrict PPCVirtualHypervisorClass to system-mode
-  target/s390x: Only compile decode_basedisp() on system-mode
-  target/s390x/helper: Clean ifdef'ry
-  target/s390x: Restrict system-mode declarations
-  target/cpu: Restrict handlers using hwaddr type to system-mode
-  exec: Use 'cpu-common.h' instead of system-mode specific 'hwaddr.h'
-  exec/cpu-common: Poison hwaddr type in user-mode emulation
+Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+---
+ include/qemu/qemu-plugin.h |  2 ++
+ plugins/api.c              | 17 ++---------------
+ 2 files changed, 4 insertions(+), 15 deletions(-)
 
- include/disas/disas.h           |  2 +-
- include/exec/cpu-common.h       |  8 ++++++--
- include/hw/core/cpu.h           | 10 ++++++----
- include/qemu/qemu-plugin.h      |  2 ++
- include/sysemu/accel.h          |  4 +++-
- include/sysemu/hvf.h            |  6 +++---
- include/sysemu/tcg.h            |  2 +-
- target/alpha/cpu.h              |  4 +++-
- target/arm/cpu.h                |  6 +++---
- target/arm/internals.h          |  4 ++++
- target/cris/cpu.h               |  2 ++
- target/hppa/cpu.h               |  2 +-
- target/i386/cpu.h               |  2 ++
- target/m68k/cpu.h               |  7 ++++++-
- target/microblaze/cpu.h         |  5 ++++-
- target/mips/internal.h          |  2 +-
- target/nios2/cpu.h              |  5 ++++-
- target/openrisc/cpu.h           |  3 ++-
- target/ppc/cpu.h                |  6 +++---
- target/ppc/kvm_ppc.h            | 22 +++++++++++-----------
- target/riscv/cpu.h              | 20 ++++++++++----------
- target/s390x/internal.h         | 15 ++++++++++-----
- target/sh4/cpu.h                |  2 +-
- target/sparc/cpu.h              |  2 ++
- target/xtensa/cpu.h             | 12 +++++++-----
- plugins/api.c                   | 17 ++---------------
- target/hppa/cpu.c               |  4 +++-
- target/ppc/translate_init.inc.c |  6 +++++-
- target/s390x/helper.c           |  7 ++-----
- 29 files changed, 110 insertions(+), 79 deletions(-)
-
+diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
+index 5502e112c8..06c271a107 100644
+--- a/include/qemu/qemu-plugin.h
++++ b/include/qemu/qemu-plugin.h
+@@ -326,6 +326,7 @@ bool qemu_plugin_mem_is_store(qemu_plugin_meminfo_t info);
+ struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
+                                                   uint64_t vaddr);
+ 
++#ifndef CONFIG_USER_ONLY
+ /*
+  * The following additional queries can be run on the hwaddr structure
+  * to return information about it. For non-IO accesses the device
+@@ -333,6 +334,7 @@ struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
+  */
+ bool qemu_plugin_hwaddr_is_io(struct qemu_plugin_hwaddr *hwaddr);
+ uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr);
++#endif /* CONFIG_USER_ONLY */
+ 
+ typedef void
+ (*qemu_plugin_vcpu_mem_cb_t)(unsigned int vcpu_index,
+diff --git a/plugins/api.c b/plugins/api.c
+index 53c8a73582..785ad2e45e 100644
+--- a/plugins/api.c
++++ b/plugins/api.c
+@@ -249,7 +249,8 @@ bool qemu_plugin_mem_is_store(qemu_plugin_meminfo_t info)
+  * Virtual Memory queries
+  */
+ 
+-#ifdef CONFIG_SOFTMMU
++#ifndef CONFIG_USER_ONLY
++
+ static __thread struct qemu_plugin_hwaddr hwaddr_info;
+ 
+ struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
+@@ -267,26 +268,14 @@ struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
+ 
+     return &hwaddr_info;
+ }
+-#else
+-struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
+-                                                  uint64_t vaddr)
+-{
+-    return NULL;
+-}
+-#endif
+ 
+ bool qemu_plugin_hwaddr_is_io(struct qemu_plugin_hwaddr *hwaddr)
+ {
+-#ifdef CONFIG_SOFTMMU
+     return hwaddr->is_io;
+-#else
+-    return false;
+-#endif
+ }
+ 
+ uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr)
+ {
+-#ifdef CONFIG_SOFTMMU
+     if (haddr) {
+         if (!haddr->is_io) {
+             ram_addr_t ram_addr = qemu_ram_addr_from_host((void *) haddr->v.ram.hostaddr);
+@@ -299,7 +288,6 @@ uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr
+             return haddr->v.io.offset;
+         }
+     }
+-#endif
+     return 0;
+ }
+ 
+@@ -308,7 +296,6 @@ uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr
+  * will be. This helps the plugin dimension per-vcpu arrays.
+  */
+ 
+-#ifndef CONFIG_USER_ONLY
+ static MachineState * get_ms(void)
+ {
+     return MACHINE(qdev_get_machine());
 -- 
 2.21.3
 
