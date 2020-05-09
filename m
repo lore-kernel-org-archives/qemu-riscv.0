@@ -1,87 +1,86 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jXPEn-0005A2-BC
-	for mharc-qemu-riscv@gnu.org; Sat, 09 May 2020 09:09:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44770)
+	id 1jXS1V-0008RX-ET
+	for mharc-qemu-riscv@gnu.org; Sat, 09 May 2020 12:08:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49932)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jXPEk-00052e-SO; Sat, 09 May 2020 09:09:50 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:33571)
+ id 1jXS1U-0008QJ-E1; Sat, 09 May 2020 12:08:20 -0400
+Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442]:46634)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jXPEk-0007KQ-2k; Sat, 09 May 2020 09:09:50 -0400
-Received: by mail-wm1-x344.google.com with SMTP id d207so184525wmd.0;
- Sat, 09 May 2020 06:09:48 -0700 (PDT)
+ id 1jXS1T-0006sj-Io; Sat, 09 May 2020 12:08:20 -0400
+Received: by mail-wr1-x442.google.com with SMTP id w7so5478114wre.13;
+ Sat, 09 May 2020 09:08:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=FhXzEDZMFN7nI/HcObjzYIjU52XHskJ+5ArXsA4s8n0=;
- b=tMA+dOHPorUcef3Ii8plnVwx5/I0le3h8ZG+eca+U8AHmyZPa1SS3f3WuI15TwaqMj
- dp9D1WaZwrnsb5FDXqtTKtmj9ql7Ri9+E8lUya6BaANZi94a9jnQGJI6G4UF9TPdagy3
- OgmgfqIWppS9Pv6g6oO0G49S6T5H9O2kFz53VTuxNlRRSqGgB2PYtlmYAhUAAIgl/CYG
- HU4xvfI3vTtrbHl3Tih+sk24b+RCb6pHPSaM+TNWHXOX0xGVdE/7Gx1IYmx3SoM0UFHV
- VJQOMdVbuLbFyNLdR4Iii9ly1xsgPL8IN+1T7566Y3evQ9HqdPdME6aN9M/UwH5+GcKH
- jFEQ==
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=KKufh5BT6a1UYTGLsqZj6CC3M1OVbx8BNKL5Xs7X+qc=;
+ b=YJv7bFlARZfY+zeDPXp4vT1yQrfZ9jBFJ+oQvJAHmVeafJQt0k2qakBRUYRUHdqfci
+ GdgI3cpAfIYOm97zQJiMFIMFWE9wk9ChRM2oq5kW7Jr9cUuRyTO8NYumFLg8Lz5Wms+j
+ yTaz2Ui/y/8F1PFglv90J1pqxBud/dp2B1WgljZ4SUevn17dXUj43wBLuGBuEplbUgBg
+ frRewC6i3lBIo7jbLUZUpZW9XHvKNcXbjijhJ7iUlS+O47BA2ihLknQsCu+U58tPUdKf
+ YvxMJtnMUyW04d3c0xbX9G9epOjN7BgKFlOhbJEf/6VMu5Jc4XQW2TQXobuC+oItcU0m
+ 7edA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=FhXzEDZMFN7nI/HcObjzYIjU52XHskJ+5ArXsA4s8n0=;
- b=O8iCxlCsqFws6bOvjOGDWHIrBjkPezLF/ik5kl+ewBKajosPnOhoZl2VZio1cK3YHL
- SYdR+xH5DEbXRjRlw+M714JqNuq1U9oNnfb9DGeKJiFPPy0A1yJxN8W7s9LTbE47NlPm
- zVmnNrLvifzh56Ao08sCsHo1pb61caUbaGWJjBCAT3jphIks3lMWZqRDlQQr9bKkYJBB
- 9ns5v0OEQQ+fDAp9CMG6a4eOfNWxkWG+RhfzxPu25tNQN8sNz4lr31fvgRdlJl3mixhT
- RncLJM+N45goXFyL6WS+X5fDqHPRPOtTDn2fcbyX5+iOpO5glCi+2Gkhg7G5QHn6EG0v
- Fvwg==
-X-Gm-Message-State: AGi0PubTgWopvLKhMmaA023Mfz/tcC7EXemDXMOS85J48Ssm24UGA7l7
- i4xnqGNXOtk7vVJLTLb05OVQoYL3n0Y=
-X-Google-Smtp-Source: APiQypIPiOQOoy1QDhlipK4I1Af7DTsG6G0dwlgqBHdFcvssaN5XNM/0LHVECJmyi5GMwxGZeM77rg==
-X-Received: by 2002:a7b:c118:: with SMTP id w24mr20571336wmi.173.1589029787021; 
- Sat, 09 May 2020 06:09:47 -0700 (PDT)
-Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=KKufh5BT6a1UYTGLsqZj6CC3M1OVbx8BNKL5Xs7X+qc=;
+ b=WHm3QsgYU+685iDWDGexe09HH4Pdsihk8Nh3dRK52QGdM8mpS+K8s0+yqGo7z7JZZ0
+ Wbm5Kxd1cAHKGL4fgVLTNsHjbjoOV9+m+1EQF6Fb+4+tmw3p7RuCWWqlHqeOfO+7M0jX
+ FgJXYH30X943Oop7Drl3uXK8ZKgHlHB0rqGGQXhqhzcSG92/zEjwm5cSci4ULlyautM0
+ Nt6hkkIkQPLAsTmMI/7DHpAMq3zN4khGMjXjBtJd2G2bzsZxt3Qsq9jsPDFuVpCp7TO7
+ HOXfVmalSWMaMbVvpXdYB7g7fSnI9WvWajDJqXtBVgQWLoEvf+1LW+XRtHrKywC66tXv
+ PcKA==
+X-Gm-Message-State: AGi0PuZgVDtPIsSWmqF8+lhurj3hIR/8pqiuxTzUuC/LrWKm2TD2ncl/
+ uGMbbDbFagFuJkQffvqB1PY=
+X-Google-Smtp-Source: APiQypJM8xAG79sIeKgcs9BdP6pxuviaphd3M6rHZ398H22ZOU7gakAJvDiC43fvmPm+hTtadVbywg==
+X-Received: by 2002:a5d:4e8f:: with SMTP id e15mr8965515wru.91.1589040496463; 
+ Sat, 09 May 2020 09:08:16 -0700 (PDT)
+Received: from [192.168.1.37] (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id m65sm1411410wmm.17.2020.05.09.06.09.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 May 2020 06:09:46 -0700 (PDT)
+ by smtp.gmail.com with ESMTPSA id z11sm8476488wro.48.2020.05.09.09.08.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 09 May 2020 09:08:15 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-To: qemu-devel@nongnu.org
-Cc: Laurent Vivier <laurent@vivier.eu>,
+Subject: Re: [PATCH 09/11] target/cpu: Restrict handlers using hwaddr type to
+ system-mode
+To: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ Eduardo Habkost <ehabkost@redhat.com>
+Cc: Chris Wulff <crwulff@gmail.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ David Hildenbrand <david@redhat.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Max Filippov <jcmvbkbc@gmail.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Stafford Horne <shorne@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
- Roman Bolshakov <r.bolshakov@yadro.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Eduardo Habkost <ehabkost@redhat.com>, qemu-s390x@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Marek Vasut <marex@denx.de>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>, qemu-ppc@nongnu.org,
  Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Marek Vasut <marex@denx.de>, Alistair Francis <Alistair.Francis@wdc.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
- Aurelien Jarno <aurelien@aurel32.net>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-ppc@nongnu.org,
- qemu-arm@nongnu.org, Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Chris Wulff <crwulff@gmail.com>,
- Richard Henderson <rth@twiddle.net>,
  David Gibson <david@gibson.dropbear.id.au>,
- David Hildenbrand <david@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH 11/11] exec/cpu-common: Poison hwaddr type in user-mode
- emulation
-Date: Sat,  9 May 2020 15:09:10 +0200
-Message-Id: <20200509130910.26335-12-f4bug@amsat.org>
-X-Mailer: git-send-email 2.21.3
-In-Reply-To: <20200509130910.26335-1-f4bug@amsat.org>
+ Artyom Tarasenko <atar4qemu@gmail.com>, qemu-s390x@nongnu.org,
+ qemu-arm@nongnu.org, Stafford Horne <shorne@gmail.com>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
+ Richard Henderson <rth@twiddle.net>, qemu-riscv@nongnu.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Cornelia Huck <cohuck@redhat.com>, Roman Bolshakov <r.bolshakov@yadro.com>,
+ Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
 References: <20200509130910.26335-1-f4bug@amsat.org>
+ <20200509130910.26335-10-f4bug@amsat.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <ba3d3ba1-09bf-17a0-2116-549fa92e1ed6@amsat.org>
+Date: Sat, 9 May 2020 18:08:12 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20200509130910.26335-10-f4bug@amsat.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::344;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x344.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::442;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x442.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -16
@@ -104,43 +103,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 May 2020 13:09:51 -0000
+X-List-Received-Date: Sat, 09 May 2020 16:08:20 -0000
 
-The 'hwaddr' type is restricted to system-mode.
-Declare it poisoned on user-mode emulation.
+On 5/9/20 3:09 PM, Philippe Mathieu-Daudé wrote:
+> Restrict the following handlers to system-mode:
+> - do_unaligned_access
+> - do_transaction_failed
+> - get_phys_page_debug
+> - get_phys_page_attrs_debug
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+> ---
+>   include/hw/core/cpu.h           |  8 +++++---
+>   target/alpha/cpu.h              |  4 +++-
+>   target/arm/cpu.h                |  6 +++---
+>   target/arm/internals.h          |  4 ++++
+>   target/cris/cpu.h               |  2 ++
+>   target/hppa/cpu.h               |  2 +-
+>   target/i386/cpu.h               |  2 ++
+>   target/m68k/cpu.h               |  7 ++++++-
+>   target/microblaze/cpu.h         |  5 ++++-
+>   target/mips/internal.h          |  2 +-
+>   target/nios2/cpu.h              |  5 ++++-
+>   target/openrisc/cpu.h           |  3 ++-
+>   target/ppc/cpu.h                |  2 +-
+>   target/riscv/cpu.h              | 20 ++++++++++----------
+>   target/sh4/cpu.h                |  2 +-
+>   target/sparc/cpu.h              |  2 ++
+>   target/xtensa/cpu.h             | 12 +++++++-----
+>   target/hppa/cpu.c               |  4 +++-
+>   target/ppc/translate_init.inc.c |  2 +-
+>   19 files changed, 62 insertions(+), 32 deletions(-)
+> 
+> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+> index 5bf94d28cf..ed09d056d1 100644
+> --- a/include/hw/core/cpu.h
+> +++ b/include/hw/core/cpu.h
+> @@ -167,6 +167,7 @@ typedef struct CPUClass {
+>       int reset_dump_flags;
+>       bool (*has_work)(CPUState *cpu);
+>       void (*do_interrupt)(CPUState *cpu);
+> +#ifndef CONFIG_USER_ONLY
 
-Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
----
-Checkpatch complains:
+I forgot once Peter Maydell told me we can't do that for some reason I 
+don't remember.
 
- WARNING: architecture specific defines should be avoided
- #10: FILE: include/exec/cpu-common.h:7:
- +#ifdef __GNUC__
----
- include/exec/cpu-common.h | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+At least this changes the sizeof(CPUClass), so we get:
 
-diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
-index b47e5630e7..56cfce8153 100644
---- a/include/exec/cpu-common.h
-+++ b/include/exec/cpu-common.h
-@@ -3,9 +3,13 @@
- 
- /* CPU interfaces that are target independent.  */
- 
--#ifndef CONFIG_USER_ONLY
-+#ifdef CONFIG_USER_ONLY
-+#ifdef __GNUC__
-+#pragma GCC poison hwaddr
-+#endif /* __GNUC__ */
-+#else
- #include "exec/hwaddr.h"
--#endif
-+#endif /* CONFIG_USER_ONLY */
- 
- /* The CPU list lock nests outside page_(un)lock or mmap_(un)lock */
- void qemu_init_cpu_list(void);
--- 
-2.21.3
+qom/object.c:315:type_initialize: assertion failed: (parent->class_size 
+<= ti->class_size)
 
+So we can't poison the hwaddr type? (final patch of this series).
+
+>       void (*do_unaligned_access)(CPUState *cpu, vaddr addr,
+>                                   MMUAccessType access_type,
+>                                   int mmu_idx, uintptr_t retaddr);
+> @@ -174,6 +175,10 @@ typedef struct CPUClass {
+>                                     unsigned size, MMUAccessType access_type,
+>                                     int mmu_idx, MemTxAttrs attrs,
+>                                     MemTxResult response, uintptr_t retaddr);
+> +    hwaddr (*get_phys_page_debug)(CPUState *cpu, vaddr addr);
+> +    hwaddr (*get_phys_page_attrs_debug)(CPUState *cpu, vaddr addr,
+> +                                        MemTxAttrs *attrs);
+> +#endif /* CONFIG_USER_ONLY */
+>       bool (*virtio_is_big_endian)(CPUState *cpu);
+>       int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
+>                              uint8_t *buf, int len, bool is_write);
+> @@ -189,9 +194,6 @@ typedef struct CPUClass {
+>       bool (*tlb_fill)(CPUState *cpu, vaddr address, int size,
+>                        MMUAccessType access_type, int mmu_idx,
+>                        bool probe, uintptr_t retaddr);
+> -    hwaddr (*get_phys_page_debug)(CPUState *cpu, vaddr addr);
+> -    hwaddr (*get_phys_page_attrs_debug)(CPUState *cpu, vaddr addr,
+> -                                        MemTxAttrs *attrs);
+>       int (*asidx_from_attrs)(CPUState *cpu, MemTxAttrs attrs);
+>       int (*gdb_read_register)(CPUState *cpu, GByteArray *buf, int reg);
+>       int (*gdb_write_register)(CPUState *cpu, uint8_t *buf, int reg);
+[...]
 
