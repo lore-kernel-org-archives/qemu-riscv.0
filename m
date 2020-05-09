@@ -1,47 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jXPEP-0003vt-4c
-	for mharc-qemu-riscv@gnu.org; Sat, 09 May 2020 09:09:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44580)
+	id 1jXPET-00048t-0N
+	for mharc-qemu-riscv@gnu.org; Sat, 09 May 2020 09:09:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44600)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jXPEN-0003rD-GJ; Sat, 09 May 2020 09:09:27 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:55746)
+ id 1jXPEQ-00041Y-PY; Sat, 09 May 2020 09:09:30 -0400
+Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:52927)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jXPEM-00030E-Nv; Sat, 09 May 2020 09:09:27 -0400
-Received: by mail-wm1-x344.google.com with SMTP id e26so12984366wmk.5;
- Sat, 09 May 2020 06:09:24 -0700 (PDT)
+ id 1jXPEP-0003L7-UG; Sat, 09 May 2020 09:09:30 -0400
+Received: by mail-wm1-x344.google.com with SMTP id m24so3357416wml.2;
+ Sat, 09 May 2020 06:09:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=q8Yj7Svj+riGcka/Uh3qsXECOKShvQfR2c9eaJKoO3w=;
- b=hgE12GnE7B03Rf0Li5UMoMVIpZwMF5xdaHeVTULpTEAeAyfTIxU/73x0FkzMTfwU1G
- j18eIGtDShw1NpPuIcibyAKGBEv8Z+jV2kfFqO00+zmXDW3YeHpN1wFTTPAlEXSvevsN
- GTt8SqYZGq2Fz6QJYhaCWQZRqUoF3WMNhNvcgcmVb+1w917mRa4ESy502W8DLWAScJrO
- 6SyLHzlIeiDPyjJBWJnhTPBdv1EUZgShPkZ3nvVULre8KMn44FOQVM30REYOpSZUpkFZ
- acaIk8sfbkQh1N7LKB7gZJovLowPsd+E2L/X4weuyf+xaIZdReBPyPHRiuq+l8li+feS
- 3W5Q==
+ bh=/deFlLfSBeeZSBPphjSFXwpz9fqQ8rThdLclvTAwgLE=;
+ b=GXc5WD/jotqsaemJao8jVSg1pXJuzyf3A6lWcUqvDc3kiEcIAE+1c7w8dft4D3P4PQ
+ 8933I0NI8h47a5aOH3PEbvKagCUFu7KMOMW/e6+ZgFYN09dkTIUFYz0DGi/pNWSL/Idm
+ bW1Y+JkBDZBPP/47h0/q5kq3uBxu4HCBqYD2GzQrV7vp1pVMgmDVEEu5TGis/ayRRhwO
+ 3BPIs9U0+X6XuHls3MMhYQHiz0RwtmcuL/J4tdaSIQVfdtX9kglYaQ6u7TbqNX6m607Z
+ zy4D0ShG0JNc1PFYtgHeKfGtulBzHHIbVDJouBXhPdd3uBzxhR9LAM59/TYbj5vPjSmg
+ L3uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=q8Yj7Svj+riGcka/Uh3qsXECOKShvQfR2c9eaJKoO3w=;
- b=U4Q/uqNWPpsHn5dxakZ1k9Vtl+uIxwfG/ISIfYqVpZH1ALStz8QK0u1T76VOKMNOwF
- zd2z3HjpRkDwxvI+E/8GEIpI2cRUTMBciT6wyU5Yh9Pt5aSFGZcJhUNBD483NHHimBib
- ZaJSr329IKEbdyCBptSDIFZ9n7r/XUytnbQ4A/QjMULqox8pELsQSOkSCJsYIvv8xWl+
- WiNOBW87oBinLHfVIKMmxxxxLqDCSdvKk+Mfh5yRD/fUEPZMmur+bA3J85zAvB1rcjrX
- 6vWuv1F89p2vdovcV/dJsmlWRc9iUWi4OBM6z2pkk7RnBWMTx1ZTdfs7TwOLrmtDt0WA
- tvCw==
-X-Gm-Message-State: AGi0PuZIxJFW3RK97kjqUmKce+7h9GdonjOaa6eU5MmbDsZTgzmPnh72
- +hpN01mhIYXAUIP+VjLSFOr9Br7OKbw=
-X-Google-Smtp-Source: APiQypL0YdzBqET4iF7tG3bgS7EpeWyVFfBof8z1hou5dM1nUjXm3UvbLE6X0Jtl9HSfA7evL3JbLw==
-X-Received: by 2002:a7b:c390:: with SMTP id s16mr20375629wmj.14.1589029764010; 
- Sat, 09 May 2020 06:09:24 -0700 (PDT)
+ bh=/deFlLfSBeeZSBPphjSFXwpz9fqQ8rThdLclvTAwgLE=;
+ b=ZgW7AM+TUTEGUjVIpQnYXThNrfVeXmKWRSVHR743Oiga0d04Yt6imMx/Rl/6bb9miD
+ t4OLnEbBUSTZns01ll7/7aRecCLutTBkfSzg1pYfKtOSLtNMz00JKl8Ux65GvrZ0OAeA
+ n2zBnzfST14JTj6TjXog/eULExXcyXRyF5zBbCc7vbfq8P6OO/8yBpGZe3+SHwqDvEO8
+ BoYa+y4YDRHS4YsdpXw8+elIH7u2iLrVmUzbxWUdn64YWKYuvQJFO2HpyKvU0H1129KL
+ c/udDnu6Ll1Vb0m9GGx/XPXx2kDC4MdxMtwslld86YexYeV5FKAuTtjxr3JbLScNv5NF
+ NPaA==
+X-Gm-Message-State: AGi0Pua91mmY7yvMapsXT/qt+lbJyJsTuryINUv1KneZ30Cf6/fxJ/O2
+ Ff/ykQpQvilcoNes64hGEn8JD4kqU0s=
+X-Google-Smtp-Source: APiQypIVCdAFyRkc2ubH7ow2MRfiq0XjMLNU48lJ+FFzNlFhFUf46VOfeXAxA1DxSFAhNQrANi6jWw==
+X-Received: by 2002:a05:600c:14d4:: with SMTP id
+ i20mr22378257wmh.118.1589029766837; 
+ Sat, 09 May 2020 06:09:26 -0700 (PDT)
 Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id m65sm1411410wmm.17.2020.05.09.06.09.21
+ by smtp.gmail.com with ESMTPSA id m65sm1411410wmm.17.2020.05.09.06.09.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 May 2020 06:09:23 -0700 (PDT)
+ Sat, 09 May 2020 06:09:26 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -69,10 +70,10 @@ Cc: Laurent Vivier <laurent@vivier.eu>,
  David Hildenbrand <david@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH 03/11] sysemu/tcg: Only declare tcg_allowed when TCG is
+Subject: [PATCH 04/11] sysemu/hvf: Only declare hvf_allowed when HVF is
  available
-Date: Sat,  9 May 2020 15:09:02 +0200
-Message-Id: <20200509130910.26335-4-f4bug@amsat.org>
+Date: Sat,  9 May 2020 15:09:03 +0200
+Message-Id: <20200509130910.26335-5-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200509130910.26335-1-f4bug@amsat.org>
 References: <20200509130910.26335-1-f4bug@amsat.org>
@@ -104,30 +105,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 May 2020 13:09:28 -0000
+X-List-Received-Date: Sat, 09 May 2020 13:09:31 -0000
 
-When TCG is not available, the tcg_allowed variable does not exist.
+When HVF is not available, the tcg_allowed variable does not exist.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/sysemu/tcg.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/sysemu/hvf.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/include/sysemu/tcg.h b/include/sysemu/tcg.h
-index 7d116d2e80..d9d3ca8559 100644
---- a/include/sysemu/tcg.h
-+++ b/include/sysemu/tcg.h
-@@ -8,9 +8,9 @@
- #ifndef SYSEMU_TCG_H
- #define SYSEMU_TCG_H
+diff --git a/include/sysemu/hvf.h b/include/sysemu/hvf.h
+index d211e808e9..fe95743124 100644
+--- a/include/sysemu/hvf.h
++++ b/include/sysemu/hvf.h
+@@ -18,7 +18,6 @@
+ #include "exec/memory.h"
+ #include "sysemu/accel.h"
  
--extern bool tcg_allowed;
- void tcg_exec_init(unsigned long tb_size);
- #ifdef CONFIG_TCG
-+extern bool tcg_allowed;
- #define tcg_enabled() (tcg_allowed)
- #else
- #define tcg_enabled() 0
+-extern bool hvf_allowed;
+ #ifdef CONFIG_HVF
+ #include <Hypervisor/hv.h>
+ #include <Hypervisor/hv_vmx.h>
+@@ -26,11 +25,12 @@ extern bool hvf_allowed;
+ #include "target/i386/cpu.h"
+ uint32_t hvf_get_supported_cpuid(uint32_t func, uint32_t idx,
+                                  int reg);
++extern bool hvf_allowed;
+ #define hvf_enabled() (hvf_allowed)
+-#else
++#else /* !CONFIG_HVF */
+ #define hvf_enabled() 0
+ #define hvf_get_supported_cpuid(func, idx, reg) 0
+-#endif
++#endif /* !CONFIG_HVF */
+ 
+ /* hvf_slot flags */
+ #define HVF_SLOT_LOG (1 << 0)
 -- 
 2.21.3
 
