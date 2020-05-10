@@ -1,103 +1,93 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jXWdN-0004P8-Iz
-	for mharc-qemu-riscv@gnu.org; Sat, 09 May 2020 17:03:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59820)
+	id 1jXjRT-0003Pr-Ig
+	for mharc-qemu-riscv@gnu.org; Sun, 10 May 2020 06:44:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52118)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1jXWdM-0004NQ-C5
- for qemu-riscv@nongnu.org; Sat, 09 May 2020 17:03:44 -0400
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:55795
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1jXWdK-0003fP-9d
- for qemu-riscv@nongnu.org; Sat, 09 May 2020 17:03:44 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589058220;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=eWQ7oRRRzgy+2UB7pbmKBWhbVt318EdO1qW0dY5SxA4=;
- b=OgDLR+mbgM4RCBubyyLP1A5kSuC9drl4K32B3JdBK56wcFFC2eDZTeXqJ0XGsiGuZslCle
- j3JFs67ZI+bpClHiMXdYnWOgnN+MxHti47aQfA9lAls3ucodi3ag2rvkY2+l7UTuy21UeG
- f6MFC8sd2saVgFlwVcGl16JsLD+6FHQ=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-471-nnmLxkpIPHCpQeobP6Ym1Q-1; Sat, 09 May 2020 17:03:38 -0400
-X-MC-Unique: nnmLxkpIPHCpQeobP6Ym1Q-1
-Received: by mail-ej1-f70.google.com with SMTP id c17so2177320eja.17
- for <qemu-riscv@nongnu.org>; Sat, 09 May 2020 14:03:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1jXjRS-0003PQ-0F; Sun, 10 May 2020 06:44:18 -0400
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:35693)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1jXjRR-0001HI-54; Sun, 10 May 2020 06:44:17 -0400
+Received: by mail-wm1-x343.google.com with SMTP id n5so505429wmd.0;
+ Sun, 10 May 2020 03:44:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=xxXonWqCVMIv8e8r2cY6NrxuihM3z3kRcazrSTkm8RA=;
+ b=Hhxvu4ngq1uQsJWy0byeouIa/qmUw2lyg24hbkE9XpcSbAMSU5HfFfluJ7SjABkkNK
+ 3O3dpPopbQM7lUU2l+AvC3X2oGN+EEnO3boAmQENZJvAU3/MTDkUVea3vXUdZtHbrjgi
+ 8jSRSf2NtrO45j3eJVBKHFrPj9wN/t7uCp5zT5p/JT1Hv8YlsvyD47/HlKK+LiZiEbZN
+ X7c/+SUZXfoydFGjO9c/Zw8x9X+zEfJFzRptu/cQ0nynkxaUfaCHZ1OUs+rZTjYQjgbM
+ mkOsbSz46gch9r/Ego7ug8KhJmT7TcifguGVdwodDaDDgruspw9uBerdpEb6L/fPuWmS
+ U40w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=eWQ7oRRRzgy+2UB7pbmKBWhbVt318EdO1qW0dY5SxA4=;
- b=PyNX8btGX3Au37MhxFreGxW+CFdZF9sr9UmerZT5j+VkzuesWQKtGfLk6FPmuv44hs
- ZcTF+zdyEgGBKMuAMs4N3eeI9p4dDpZvsk066c53vW7yG9EEkGXx2x4VUD57maIURfy8
- rKzV09pVXX6Ijwy4zCvaVnt5xP5Jx/d/vzf/3o9cYV7wTVa4Ioe1MMltFavLTEd18hLx
- MrSMXVaCZEOxDUFt2Ucx4kSD3b4cctXaxwKkhLXcpv/c9Z9M3aNf0mmK9xYIgmOkepaQ
- 1lGSjb9YhztH3eiaE+DV4tYTXG7zxaV3WvpL15qiT4axSOdayjf2m5AOCFtzbJw9itQG
- 5tPw==
-X-Gm-Message-State: AGi0PuaF3xNMwNtl4Y7b9QaawNHeIDW/9BOcktTWuxiqChiYleEQO0o6
- wKgEM2tUDUvhl6QeufPtT4vF8ZZ7yqeFacTZ5iXH0bVfd28GNwWKu+hLlL7vBhvXvXnzPzgYXtv
- O9mdiy+3pKFy56L7dtoWHCr7R31Iybqw=
-X-Received: by 2002:a05:6402:297:: with SMTP id
- l23mr7826938edv.57.1589058217186; 
- Sat, 09 May 2020 14:03:37 -0700 (PDT)
-X-Google-Smtp-Source: APiQypJljXkkW4jro+DvOcRbZr0X5qyoAZl+Xz1H8KzzCfxpXZcLjGVU7yxuAkOFgguGAJHPpe6OAz00/u5WEWYCrec=
-X-Received: by 2002:a05:6402:297:: with SMTP id
- l23mr7826897edv.57.1589058216890; 
- Sat, 09 May 2020 14:03:36 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200509130910.26335-1-f4bug@amsat.org>
- <20200509130910.26335-10-f4bug@amsat.org>
- <ba3d3ba1-09bf-17a0-2116-549fa92e1ed6@amsat.org>
- <CAAdtpL5KT0H3+yVRgzCwVaLYUUSCBW8vK4X3cHX_N91NPkUFBg@mail.gmail.com>
-In-Reply-To: <CAAdtpL5KT0H3+yVRgzCwVaLYUUSCBW8vK4X3cHX_N91NPkUFBg@mail.gmail.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Date: Sat, 9 May 2020 23:03:24 +0200
-Message-ID: <CABgObfZ78q9Eaik63DM-Oy60MKpoqbmtq6QZE8tazrjwqTrhgg@mail.gmail.com>
-Subject: Re: [PATCH 09/11] target/cpu: Restrict handlers using hwaddr type to
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=xxXonWqCVMIv8e8r2cY6NrxuihM3z3kRcazrSTkm8RA=;
+ b=p6/f2mdG3afj5HkEuHAA4b/+ixW3fLGMc29xOyfajpcK6ybEpJJhQhNeg8Vj2YGddM
+ xrcCwHyJnOjCKgfEBUagyfh8vvg/VXirvfgabbBilGkvaZAg2HAdDX8qbtdb1J7WtsjA
+ hnnaZznBfacjQ22J8TzLCXC9DG4CSdr6QsJBvsCRj/70wBJgRNLIVmWdqnELlmPZU0pL
+ V//37uJZQrxHdKYJ3TCiQDAimrLp+c8H4Lx6KsVT/T6cMmliM66hdx6hlxuqcO1vMsjg
+ n3/IZ6Y7CJhngDxYocKzMzUWV/i5uwWT/uHFmQ7mPcb+hEKw5a9DK5PjPa4WgmZO/gE5
+ 3OJg==
+X-Gm-Message-State: AGi0PuZ37R8+Oapc+c13jUPeWHqWK6M9F2eWq5lA0l0i9U36YTKA6qzV
+ 8ITTW81MgCpBkc/36ZdLyPk=
+X-Google-Smtp-Source: APiQypJiwnxEXhMEbmmFGHZaEt/WgZLbUwFcEBuqFqfKorCcdf78+iaRtlzsNsWdch082EqCfjiPIQ==
+X-Received: by 2002:a7b:c4c9:: with SMTP id g9mr25481489wmk.171.1589107453896; 
+ Sun, 10 May 2020 03:44:13 -0700 (PDT)
+Received: from [192.168.1.37] (17.red-88-21-202.staticip.rima-tde.net.
+ [88.21.202.17])
+ by smtp.gmail.com with ESMTPSA id g15sm12287672wrp.96.2020.05.10.03.44.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 10 May 2020 03:44:13 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH 01/11] plugins: Restrict functions handling hwaddr to
  system-mode
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Eduardo Habkost <ehabkost@redhat.com>, Chris Wulff <crwulff@gmail.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- David Hildenbrand <david@redhat.com>, 
+To: qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
+ <crwulff@gmail.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ David Hildenbrand <david@redhat.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Max Filippov <jcmvbkbc@gmail.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Marek Vasut <marex@denx.de>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>, 
- "qemu-ppc@nongnu.org list:PowerPC" <qemu-ppc@nongnu.org>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, Marek Vasut <marex@denx.de>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-ppc@nongnu.org,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
  David Gibson <david@gibson.dropbear.id.au>,
- Artyom Tarasenko <atar4qemu@gmail.com>, 
- "open list:vfio-ccw" <qemu-s390x@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>, 
- Stafford Horne <shorne@gmail.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Richard Henderson <rth@twiddle.net>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, 
- Roman Bolshakov <r.bolshakov@yadro.com>, Laurent Vivier <laurent@vivier.eu>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Aurelien Jarno <aurelien@aurel32.net>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="0000000000008bad0f05a53d7211"
-Received-SPF: pass client-ip=207.211.31.81; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/09 17:03:40
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
- RCVD_IN_MSPIKE_WL=0.001, SPF_PASS=-0.001,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost
+ <ehabkost@redhat.com>, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
+ Stafford Horne <shorne@gmail.com>, Richard Henderson <rth@twiddle.net>,
+ qemu-riscv@nongnu.org, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Cornelia Huck <cohuck@redhat.com>, Roman Bolshakov <r.bolshakov@yadro.com>,
+ Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
+References: <20200509130910.26335-1-f4bug@amsat.org>
+ <20200509130910.26335-2-f4bug@amsat.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <eb0d835e-0603-9f76-836c-aca7fb9be525@amsat.org>
+Date: Sun, 10 May 2020 12:44:10 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
+MIME-Version: 1.0
+In-Reply-To: <20200509130910.26335-2-f4bug@amsat.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::343;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x343.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -111,262 +101,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 May 2020 21:03:44 -0000
+X-List-Received-Date: Sun, 10 May 2020 10:44:18 -0000
 
---0000000000008bad0f05a53d7211
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Il sab 9 mag 2020, 22:01 Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> ha
-scritto:
-
-> > I forgot once Peter Maydell told me we can't do that for some reason I
-> > don't remember.
-> >
-> > At least this changes the sizeof(CPUClass), so we get:
-> >
-> > qom/object.c:315:type_initialize: assertion failed: (parent->class_size
-> > <=3D ti->class_size)
-> >
-> > So we can't poison the hwaddr type? (final patch of this series).
->
-> Well, this works...:
->
-> -- >8 --
-> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> --- a/include/hw/core/cpu.h
-> +++ b/include/hw/core/cpu.h
-> @@ -167,6 +167,7 @@ typedef struct CPUClass {
->      int reset_dump_flags;
->      bool (*has_work)(CPUState *cpu);
->      void (*do_interrupt)(CPUState *cpu);
-> +#ifndef CONFIG_USER_ONLY
->      void (*do_unaligned_access)(CPUState *cpu, vaddr addr,
->                                  MMUAccessType access_type,
->                                  int mmu_idx, uintptr_t retaddr);
-> @@ -174,6 +175,12 @@ typedef struct CPUClass {
->                                    unsigned size, MMUAccessType
-> access_type,
->                                    int mmu_idx, MemTxAttrs attrs,
->                                    MemTxResult response, uintptr_t
-> retaddr);
-> +    hwaddr (*get_phys_page_debug)(CPUState *cpu, vaddr addr);
-> +    hwaddr (*get_phys_page_attrs_debug)(CPUState *cpu, vaddr addr,
-> +                                        MemTxAttrs *attrs);
-> +#else
-> +    void (*reserved[4])(CPUState *cpu, ...);
-> +#endif /* CONFIG_USER_ONLY */
->      bool (*virtio_is_big_endian)(CPUState *cpu);
->      int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
->                             uint8_t *buf, int len, bool is_write);
-> @@ -189,9 +196,6 @@ typedef struct CPUClass {
->      bool (*tlb_fill)(CPUState *cpu, vaddr address, int size,
->                       MMUAccessType access_type, int mmu_idx,
->                       bool probe, uintptr_t retaddr);
-> -    hwaddr (*get_phys_page_debug)(CPUState *cpu, vaddr addr);
-> -    hwaddr (*get_phys_page_attrs_debug)(CPUState *cpu, vaddr addr,
-> -                                        MemTxAttrs *attrs);
->      int (*asidx_from_attrs)(CPUState *cpu, MemTxAttrs attrs);
->      int (*gdb_read_register)(CPUState *cpu, GByteArray *buf, int reg);
->      int (*gdb_write_register)(CPUState *cpu, uint8_t *buf, int reg);
+On 5/9/20 3:09 PM, Philippe Mathieu-Daudé wrote:
+> Restrict qemu_plugin_hwaddr_is_io() and
+> qemu_plugin_hwaddr_device_offset() to system-mode.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 > ---
->
-> Ugly?
->
+>   include/qemu/qemu-plugin.h |  2 ++
+>   plugins/api.c              | 17 ++---------------
+>   2 files changed, 4 insertions(+), 15 deletions(-)
+> 
+> diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
+> index 5502e112c8..06c271a107 100644
+> --- a/include/qemu/qemu-plugin.h
+> +++ b/include/qemu/qemu-plugin.h
+> @@ -326,6 +326,7 @@ bool qemu_plugin_mem_is_store(qemu_plugin_meminfo_t info);
+>   struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
+>                                                     uint64_t vaddr);
+>   
+> +#ifndef CONFIG_USER_ONLY
+>   /*
+>    * The following additional queries can be run on the hwaddr structure
+>    * to return information about it. For non-IO accesses the device
+> @@ -333,6 +334,7 @@ struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
+>    */
+>   bool qemu_plugin_hwaddr_is_io(struct qemu_plugin_hwaddr *hwaddr);
+>   uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr);
+> +#endif /* CONFIG_USER_ONLY */
+>   
+>   typedef void
+>   (*qemu_plugin_vcpu_mem_cb_t)(unsigned int vcpu_index,
+> diff --git a/plugins/api.c b/plugins/api.c
+> index 53c8a73582..785ad2e45e 100644
+> --- a/plugins/api.c
+> +++ b/plugins/api.c
+> @@ -249,7 +249,8 @@ bool qemu_plugin_mem_is_store(qemu_plugin_meminfo_t info)
+>    * Virtual Memory queries
+>    */
+>   
+> -#ifdef CONFIG_SOFTMMU
+> +#ifndef CONFIG_USER_ONLY
+> +
+>   static __thread struct qemu_plugin_hwaddr hwaddr_info;
+>   
+>   struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
+> @@ -267,26 +268,14 @@ struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
+>   
+>       return &hwaddr_info;
+>   }
+> -#else
+> -struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
+> -                                                  uint64_t vaddr)
+> -{
+> -    return NULL;
+> -}
+> -#endif
+>   
+>   bool qemu_plugin_hwaddr_is_io(struct qemu_plugin_hwaddr *hwaddr)
 
-More. :-) And hwaddr is only a small part, there are several other methods
-that only make sense for system emulation. Let me review the rest of the
-series, it may not be good enough to stop here while we figure out a way.
+Please disregard this patch, I misinterpreted the variable name with the 
+hwaddr type.
 
-Paolo
-
-
-> >
-> > >       void (*do_unaligned_access)(CPUState *cpu, vaddr addr,
-> > >                                   MMUAccessType access_type,
-> > >                                   int mmu_idx, uintptr_t retaddr);
-> > > @@ -174,6 +175,10 @@ typedef struct CPUClass {
-> > >                                     unsigned size, MMUAccessType
-> access_type,
-> > >                                     int mmu_idx, MemTxAttrs attrs,
-> > >                                     MemTxResult response, uintptr_t
-> retaddr);
-> > > +    hwaddr (*get_phys_page_debug)(CPUState *cpu, vaddr addr);
-> > > +    hwaddr (*get_phys_page_attrs_debug)(CPUState *cpu, vaddr addr,
-> > > +                                        MemTxAttrs *attrs);
-> > > +#endif /* CONFIG_USER_ONLY */
-> > >       bool (*virtio_is_big_endian)(CPUState *cpu);
-> > >       int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
-> > >                              uint8_t *buf, int len, bool is_write);
-> > > @@ -189,9 +194,6 @@ typedef struct CPUClass {
-> > >       bool (*tlb_fill)(CPUState *cpu, vaddr address, int size,
-> > >                        MMUAccessType access_type, int mmu_idx,
-> > >                        bool probe, uintptr_t retaddr);
-> > > -    hwaddr (*get_phys_page_debug)(CPUState *cpu, vaddr addr);
-> > > -    hwaddr (*get_phys_page_attrs_debug)(CPUState *cpu, vaddr addr,
-> > > -                                        MemTxAttrs *attrs);
-> > >       int (*asidx_from_attrs)(CPUState *cpu, MemTxAttrs attrs);
-> > >       int (*gdb_read_register)(CPUState *cpu, GByteArray *buf, int
-> reg);
-> > >       int (*gdb_write_register)(CPUState *cpu, uint8_t *buf, int reg)=
-;
-> > [...]
->
->
-
---0000000000008bad0f05a53d7211
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">Il sab 9 mag 2020, 22:01 Philippe Mathieu-Daud=C3=A9 &=
-lt;<a href=3D"mailto:f4bug@amsat.org" target=3D"_blank" rel=3D"noreferrer">=
-f4bug@amsat.org</a>&gt; ha scritto:<br></div><blockquote class=3D"gmail_quo=
-te" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"=
->&gt; I forgot once Peter Maydell told me we can&#39;t do that for some rea=
-son I<br>
-&gt; don&#39;t remember.<br>
-&gt;<br>
-&gt; At least this changes the sizeof(CPUClass), so we get:<br>
-&gt;<br>
-&gt; qom/object.c:315:type_initialize: assertion failed: (parent-&gt;class_=
-size<br>
-&gt; &lt;=3D ti-&gt;class_size)<br>
-&gt;<br>
-&gt; So we can&#39;t poison the hwaddr type? (final patch of this series).<=
-br>
-<br>
-Well, this works...:<br>
-<br>
--- &gt;8 --<br>
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h<br>
---- a/include/hw/core/cpu.h<br>
-+++ b/include/hw/core/cpu.h<br>
-@@ -167,6 +167,7 @@ typedef struct CPUClass {<br>
-=C2=A0 =C2=A0 =C2=A0int reset_dump_flags;<br>
-=C2=A0 =C2=A0 =C2=A0bool (*has_work)(CPUState *cpu);<br>
-=C2=A0 =C2=A0 =C2=A0void (*do_interrupt)(CPUState *cpu);<br>
-+#ifndef CONFIG_USER_ONLY<br>
-=C2=A0 =C2=A0 =C2=A0void (*do_unaligned_access)(CPUState *cpu, vaddr addr,<=
-br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0MMUAccessType access_type,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int mmu_idx, uintptr_t retaddr=
-);<br>
-@@ -174,6 +175,12 @@ typedef struct CPUClass {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned size, MMUAcces=
-sType access_type,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int mmu_idx, MemTxAttrs=
- attrs,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0MemTxResult response, u=
-intptr_t retaddr);<br>
-+=C2=A0 =C2=A0 hwaddr (*get_phys_page_debug)(CPUState *cpu, vaddr addr);<br=
->
-+=C2=A0 =C2=A0 hwaddr (*get_phys_page_attrs_debug)(CPUState *cpu, vaddr add=
-r,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MemTxAtt=
-rs *attrs);<br>
-+#else<br>
-+=C2=A0 =C2=A0 void (*reserved[4])(CPUState *cpu, ...);<br>
-+#endif /* CONFIG_USER_ONLY */<br>
-=C2=A0 =C2=A0 =C2=A0bool (*virtio_is_big_endian)(CPUState *cpu);<br>
-=C2=A0 =C2=A0 =C2=A0int (*memory_rw_debug)(CPUState *cpu, vaddr addr,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 uint8_t *buf, int len, bool is_write);<br>
-@@ -189,9 +196,6 @@ typedef struct CPUClass {<br>
-=C2=A0 =C2=A0 =C2=A0bool (*tlb_fill)(CPUState *cpu, vaddr address, int size=
-,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 MMUAccessType access_type, int mmu_idx,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 bool probe, uintptr_t retaddr);<br>
--=C2=A0 =C2=A0 hwaddr (*get_phys_page_debug)(CPUState *cpu, vaddr addr);<br=
->
--=C2=A0 =C2=A0 hwaddr (*get_phys_page_attrs_debug)(CPUState *cpu, vaddr add=
-r,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MemTxAtt=
-rs *attrs);<br>
-=C2=A0 =C2=A0 =C2=A0int (*asidx_from_attrs)(CPUState *cpu, MemTxAttrs attrs=
-);<br>
-=C2=A0 =C2=A0 =C2=A0int (*gdb_read_register)(CPUState *cpu, GByteArray *buf=
-, int reg);<br>
-=C2=A0 =C2=A0 =C2=A0int (*gdb_write_register)(CPUState *cpu, uint8_t *buf, =
-int reg);<br>
----<br>
-<br>
-Ugly?<br></blockquote></div></div><div dir=3D"auto"><br></div><div dir=3D"a=
-uto">More. :-) And hwaddr is only a small part, there are several other met=
-hods that only make sense for system emulation. Let me review the rest of t=
-he series, it may not be good enough to stop here while we figure out a way=
-.</div><div dir=3D"auto"><br></div><div dir=3D"auto">Paolo</div><div dir=3D=
-"auto"><br></div><div dir=3D"auto"><div class=3D"gmail_quote"><blockquote c=
-lass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;=
-padding-left:1ex">
-<br>
-&gt;<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0void (*do_unaligned_access)(CPUState *c=
-pu, vaddr addr,<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0MMUAccessType ac=
-cess_type,<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int mmu_idx, uin=
-tptr_t retaddr);<br>
-&gt; &gt; @@ -174,6 +175,10 @@ typedef struct CPUClass {<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned =
-size, MMUAccessType access_type,<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int mmu_i=
-dx, MemTxAttrs attrs,<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0MemTxResu=
-lt response, uintptr_t retaddr);<br>
-&gt; &gt; +=C2=A0 =C2=A0 hwaddr (*get_phys_page_debug)(CPUState *cpu, vaddr=
- addr);<br>
-&gt; &gt; +=C2=A0 =C2=A0 hwaddr (*get_phys_page_attrs_debug)(CPUState *cpu,=
- vaddr addr,<br>
-&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 MemTxAttrs *attrs);<br>
-&gt; &gt; +#endif /* CONFIG_USER_ONLY */<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool (*virtio_is_big_endian)(CPUState *=
-cpu);<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0int (*memory_rw_debug)(CPUState *cpu, v=
-addr addr,<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint8_t *buf, int len, bool is_write=
-);<br>
-&gt; &gt; @@ -189,9 +194,6 @@ typedef struct CPUClass {<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool (*tlb_fill)(CPUState *cpu, vaddr a=
-ddress, int size,<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 MMUAccessType access_type, int mmu_idx,<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 bool probe, uintptr_t retaddr);<br>
-&gt; &gt; -=C2=A0 =C2=A0 hwaddr (*get_phys_page_debug)(CPUState *cpu, vaddr=
- addr);<br>
-&gt; &gt; -=C2=A0 =C2=A0 hwaddr (*get_phys_page_attrs_debug)(CPUState *cpu,=
- vaddr addr,<br>
-&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 MemTxAttrs *attrs);<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0int (*asidx_from_attrs)(CPUState *cpu, =
-MemTxAttrs attrs);<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0int (*gdb_read_register)(CPUState *cpu,=
- GByteArray *buf, int reg);<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0int (*gdb_write_register)(CPUState *cpu=
-, uint8_t *buf, int reg);<br>
-&gt; [...]<br>
-<br>
-</blockquote></div></div></div>
-
---0000000000008bad0f05a53d7211--
-
+>   {
+> -#ifdef CONFIG_SOFTMMU
+>       return hwaddr->is_io;
+> -#else
+> -    return false;
+> -#endif
+>   }
+>   
+>   uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr)
+>   {
+> -#ifdef CONFIG_SOFTMMU
+>       if (haddr) {
+>           if (!haddr->is_io) {
+>               ram_addr_t ram_addr = qemu_ram_addr_from_host((void *) haddr->v.ram.hostaddr);
+> @@ -299,7 +288,6 @@ uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr
+>               return haddr->v.io.offset;
+>           }
+>       }
+> -#endif
+>       return 0;
+>   }
+>   
+> @@ -308,7 +296,6 @@ uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr
+>    * will be. This helps the plugin dimension per-vcpu arrays.
+>    */
+>   
+> -#ifndef CONFIG_USER_ONLY
+>   static MachineState * get_ms(void)
+>   {
+>       return MACHINE(qdev_get_machine());
+> 
 
