@@ -1,93 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jXjRT-0003Pr-Ig
-	for mharc-qemu-riscv@gnu.org; Sun, 10 May 2020 06:44:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52118)
+	id 1jXx5B-0004HD-3R
+	for mharc-qemu-riscv@gnu.org; Sun, 10 May 2020 21:18:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58012)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jXjRS-0003PQ-0F; Sun, 10 May 2020 06:44:18 -0400
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:35693)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jXjRR-0001HI-54; Sun, 10 May 2020 06:44:17 -0400
-Received: by mail-wm1-x343.google.com with SMTP id n5so505429wmd.0;
- Sun, 10 May 2020 03:44:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=xxXonWqCVMIv8e8r2cY6NrxuihM3z3kRcazrSTkm8RA=;
- b=Hhxvu4ngq1uQsJWy0byeouIa/qmUw2lyg24hbkE9XpcSbAMSU5HfFfluJ7SjABkkNK
- 3O3dpPopbQM7lUU2l+AvC3X2oGN+EEnO3boAmQENZJvAU3/MTDkUVea3vXUdZtHbrjgi
- 8jSRSf2NtrO45j3eJVBKHFrPj9wN/t7uCp5zT5p/JT1Hv8YlsvyD47/HlKK+LiZiEbZN
- X7c/+SUZXfoydFGjO9c/Zw8x9X+zEfJFzRptu/cQ0nynkxaUfaCHZ1OUs+rZTjYQjgbM
- mkOsbSz46gch9r/Ego7ug8KhJmT7TcifguGVdwodDaDDgruspw9uBerdpEb6L/fPuWmS
- U40w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=xxXonWqCVMIv8e8r2cY6NrxuihM3z3kRcazrSTkm8RA=;
- b=p6/f2mdG3afj5HkEuHAA4b/+ixW3fLGMc29xOyfajpcK6ybEpJJhQhNeg8Vj2YGddM
- xrcCwHyJnOjCKgfEBUagyfh8vvg/VXirvfgabbBilGkvaZAg2HAdDX8qbtdb1J7WtsjA
- hnnaZznBfacjQ22J8TzLCXC9DG4CSdr6QsJBvsCRj/70wBJgRNLIVmWdqnELlmPZU0pL
- V//37uJZQrxHdKYJ3TCiQDAimrLp+c8H4Lx6KsVT/T6cMmliM66hdx6hlxuqcO1vMsjg
- n3/IZ6Y7CJhngDxYocKzMzUWV/i5uwWT/uHFmQ7mPcb+hEKw5a9DK5PjPa4WgmZO/gE5
- 3OJg==
-X-Gm-Message-State: AGi0PuZ37R8+Oapc+c13jUPeWHqWK6M9F2eWq5lA0l0i9U36YTKA6qzV
- 8ITTW81MgCpBkc/36ZdLyPk=
-X-Google-Smtp-Source: APiQypJiwnxEXhMEbmmFGHZaEt/WgZLbUwFcEBuqFqfKorCcdf78+iaRtlzsNsWdch082EqCfjiPIQ==
-X-Received: by 2002:a7b:c4c9:: with SMTP id g9mr25481489wmk.171.1589107453896; 
- Sun, 10 May 2020 03:44:13 -0700 (PDT)
-Received: from [192.168.1.37] (17.red-88-21-202.staticip.rima-tde.net.
- [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id g15sm12287672wrp.96.2020.05.10.03.44.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 10 May 2020 03:44:13 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 01/11] plugins: Restrict functions handling hwaddr to
- system-mode
-To: qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
- <crwulff@gmail.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- David Hildenbrand <david@redhat.com>,
+ (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
+ id 1jXx55-0004Ew-Ra; Sun, 10 May 2020 21:18:07 -0400
+Received: from ozlabs.org ([203.11.71.1]:60007)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
+ id 1jXx53-0000DZ-RG; Sun, 10 May 2020 21:18:07 -0400
+Received: by ozlabs.org (Postfix, from userid 1007)
+ id 49L32n5cn2z9sSF; Mon, 11 May 2020 11:17:53 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=gibson.dropbear.id.au; s=201602; t=1589159873;
+ bh=+IrjQfg3GKjaOpivn8ZKEZOB3swFULWWJ/xB7rXODPo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=CuDtRFTySDYES1kYEEZAurGCWHf6U6SF0Z1y60IU0cp7kHVNB7uXRONBDFxJ0S8BF
+ QdlPgXyxjMDMCc4u0ozIgXRJ5FBp0rteKVaLpVX+wc7jGhOUD1Y23ESGmJGAr50pNQ
+ Eo/iWWn6O3RX43DOXV5MF4jJ9OeU3z7wa8PP473g=
+Date: Mon, 11 May 2020 11:15:27 +1000
+From: David Gibson <david@gibson.dropbear.id.au>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>
+Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Max Filippov <jcmvbkbc@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, Marek Vasut <marex@denx.de>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-ppc@nongnu.org,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Stafford Horne <shorne@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
+ Roman Bolshakov <r.bolshakov@yadro.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Eduardo Habkost <ehabkost@redhat.com>, qemu-s390x@nongnu.org,
  Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost
- <ehabkost@redhat.com>, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- Stafford Horne <shorne@gmail.com>, Richard Henderson <rth@twiddle.net>,
- qemu-riscv@nongnu.org, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, Roman Bolshakov <r.bolshakov@yadro.com>,
- Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
+ Marek Vasut <marex@denx.de>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Chris Wulff <crwulff@gmail.com>,
+ Richard Henderson <rth@twiddle.net>, David Hildenbrand <david@redhat.com>,
+ Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>
+Subject: Re: [PATCH 05/11] target/ppc: Restrict PPCVirtualHypervisorClass to
+ system-mode
+Message-ID: <20200511011527.GC2183@umbus.fritz.box>
 References: <20200509130910.26335-1-f4bug@amsat.org>
- <20200509130910.26335-2-f4bug@amsat.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <eb0d835e-0603-9f76-836c-aca7fb9be525@amsat.org>
-Date: Sun, 10 May 2020 12:44:10 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ <20200509130910.26335-6-f4bug@amsat.org>
 MIME-Version: 1.0
-In-Reply-To: <20200509130910.26335-2-f4bug@amsat.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::343;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x343.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="RIYY1s2vRbPFwWeW"
+Content-Disposition: inline
+In-Reply-To: <20200509130910.26335-6-f4bug@amsat.org>
+Received-SPF: pass client-ip=203.11.71.1; envelope-from=dgibson@ozlabs.org;
+ helo=ozlabs.org
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/10 21:17:54
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic]
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -101,98 +75,154 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 May 2020 10:44:18 -0000
+X-List-Received-Date: Mon, 11 May 2020 01:18:09 -0000
 
-On 5/9/20 3:09 PM, Philippe Mathieu-Daudé wrote:
-> Restrict qemu_plugin_hwaddr_is_io() and
-> qemu_plugin_hwaddr_device_offset() to system-mode.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+
+--RIYY1s2vRbPFwWeW
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, May 09, 2020 at 03:09:04PM +0200, Philippe Mathieu-Daud=E9 wrote:
+> The code related to PPC Virtual Hypervisor is pointless in user-mode.
+>=20
+> Signed-off-by: Philippe Mathieu-Daud=E9 <f4bug@amsat.org>
+
+Acked-by: David Gibson <david@gibson.dropbear.id.au>
+
 > ---
->   include/qemu/qemu-plugin.h |  2 ++
->   plugins/api.c              | 17 ++---------------
->   2 files changed, 4 insertions(+), 15 deletions(-)
-> 
-> diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
-> index 5502e112c8..06c271a107 100644
-> --- a/include/qemu/qemu-plugin.h
-> +++ b/include/qemu/qemu-plugin.h
-> @@ -326,6 +326,7 @@ bool qemu_plugin_mem_is_store(qemu_plugin_meminfo_t info);
->   struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
->                                                     uint64_t vaddr);
->   
+>  target/ppc/cpu.h                |  4 ++--
+>  target/ppc/kvm_ppc.h            | 22 +++++++++++-----------
+>  target/ppc/translate_init.inc.c |  4 ++++
+>  3 files changed, 17 insertions(+), 13 deletions(-)
+>=20
+> diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
+> index 6b6dd7e483..73920a9cac 100644
+> --- a/target/ppc/cpu.h
+> +++ b/target/ppc/cpu.h
+> @@ -1176,6 +1176,7 @@ PowerPCCPUClass *ppc_cpu_class_by_pvr(uint32_t pvr);
+>  PowerPCCPUClass *ppc_cpu_class_by_pvr_mask(uint32_t pvr);
+>  PowerPCCPUClass *ppc_cpu_get_family_class(PowerPCCPUClass *pcc);
+> =20
 > +#ifndef CONFIG_USER_ONLY
->   /*
->    * The following additional queries can be run on the hwaddr structure
->    * to return information about it. For non-IO accesses the device
-> @@ -333,6 +334,7 @@ struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
->    */
->   bool qemu_plugin_hwaddr_is_io(struct qemu_plugin_hwaddr *hwaddr);
->   uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr);
-> +#endif /* CONFIG_USER_ONLY */
->   
->   typedef void
->   (*qemu_plugin_vcpu_mem_cb_t)(unsigned int vcpu_index,
-> diff --git a/plugins/api.c b/plugins/api.c
-> index 53c8a73582..785ad2e45e 100644
-> --- a/plugins/api.c
-> +++ b/plugins/api.c
-> @@ -249,7 +249,8 @@ bool qemu_plugin_mem_is_store(qemu_plugin_meminfo_t info)
->    * Virtual Memory queries
->    */
->   
-> -#ifdef CONFIG_SOFTMMU
-> +#ifndef CONFIG_USER_ONLY
-> +
->   static __thread struct qemu_plugin_hwaddr hwaddr_info;
->   
->   struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
-> @@ -267,26 +268,14 @@ struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
->   
->       return &hwaddr_info;
->   }
-> -#else
-> -struct qemu_plugin_hwaddr *qemu_plugin_get_hwaddr(qemu_plugin_meminfo_t info,
-> -                                                  uint64_t vaddr)
-> -{
-> -    return NULL;
-> -}
-> -#endif
->   
->   bool qemu_plugin_hwaddr_is_io(struct qemu_plugin_hwaddr *hwaddr)
-
-Please disregard this patch, I misinterpreted the variable name with the 
-hwaddr type.
-
->   {
-> -#ifdef CONFIG_SOFTMMU
->       return hwaddr->is_io;
-> -#else
-> -    return false;
-> -#endif
->   }
->   
->   uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr)
->   {
-> -#ifdef CONFIG_SOFTMMU
->       if (haddr) {
->           if (!haddr->is_io) {
->               ram_addr_t ram_addr = qemu_ram_addr_from_host((void *) haddr->v.ram.hostaddr);
-> @@ -299,7 +288,6 @@ uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr
->               return haddr->v.io.offset;
->           }
->       }
-> -#endif
->       return 0;
->   }
->   
-> @@ -308,7 +296,6 @@ uint64_t qemu_plugin_hwaddr_device_offset(const struct qemu_plugin_hwaddr *haddr
->    * will be. This helps the plugin dimension per-vcpu arrays.
->    */
->   
+>  struct PPCVirtualHypervisorClass {
+>      InterfaceClass parent;
+>      void (*hypercall)(PPCVirtualHypervisor *vhyp, PowerPCCPU *cpu);
+> @@ -1189,10 +1190,8 @@ struct PPCVirtualHypervisorClass {
+>      void (*hpte_set_r)(PPCVirtualHypervisor *vhyp, hwaddr ptex, uint64_t=
+ pte1);
+>      void (*get_pate)(PPCVirtualHypervisor *vhyp, ppc_v3_pate_t *entry);
+>      target_ulong (*encode_hpt_for_kvm_pr)(PPCVirtualHypervisor *vhyp);
 > -#ifndef CONFIG_USER_ONLY
->   static MachineState * get_ms(void)
->   {
->       return MACHINE(qdev_get_machine());
-> 
+>      void (*cpu_exec_enter)(PPCVirtualHypervisor *vhyp, PowerPCCPU *cpu);
+>      void (*cpu_exec_exit)(PPCVirtualHypervisor *vhyp, PowerPCCPU *cpu);
+> -#endif
+>  };
+> =20
+>  #define TYPE_PPC_VIRTUAL_HYPERVISOR "ppc-virtual-hypervisor"
+> @@ -1204,6 +1203,7 @@ struct PPCVirtualHypervisorClass {
+>  #define PPC_VIRTUAL_HYPERVISOR_GET_CLASS(obj) \
+>      OBJECT_GET_CLASS(PPCVirtualHypervisorClass, (obj), \
+>                       TYPE_PPC_VIRTUAL_HYPERVISOR)
+> +#endif /* CONFIG_USER_ONLY */
+> =20
+>  void ppc_cpu_do_interrupt(CPUState *cpu);
+>  bool ppc_cpu_exec_interrupt(CPUState *cpu, int int_req);
+> diff --git a/target/ppc/kvm_ppc.h b/target/ppc/kvm_ppc.h
+> index fcaf745516..701c0c262b 100644
+> --- a/target/ppc/kvm_ppc.h
+> +++ b/target/ppc/kvm_ppc.h
+> @@ -280,6 +280,17 @@ static inline bool kvmppc_has_cap_spapr_vfio(void)
+>      return false;
+>  }
+> =20
+> +static inline void kvmppc_read_hptes(ppc_hash_pte64_t *hptes,
+> +                                     hwaddr ptex, int n)
+> +{
+> +    abort();
+> +}
+> +
+> +static inline void kvmppc_write_hpte(hwaddr ptex, uint64_t pte0, uint64_=
+t pte1)
+> +{
+> +    abort();
+> +}
+> +
+>  #endif /* !CONFIG_USER_ONLY */
+> =20
+>  static inline bool kvmppc_has_cap_epr(void)
+> @@ -310,17 +321,6 @@ static inline int kvmppc_load_htab_chunk(QEMUFile *f=
+, int fd, uint32_t index,
+>      abort();
+>  }
+> =20
+> -static inline void kvmppc_read_hptes(ppc_hash_pte64_t *hptes,
+> -                                     hwaddr ptex, int n)
+> -{
+> -    abort();
+> -}
+> -
+> -static inline void kvmppc_write_hpte(hwaddr ptex, uint64_t pte0, uint64_=
+t pte1)
+> -{
+> -    abort();
+> -}
+> -
+>  static inline bool kvmppc_has_cap_fixup_hcalls(void)
+>  {
+>      abort();
+> diff --git a/target/ppc/translate_init.inc.c b/target/ppc/translate_init.=
+inc.c
+> index 2b6e832c4c..4ea0cc501b 100644
+> --- a/target/ppc/translate_init.inc.c
+> +++ b/target/ppc/translate_init.inc.c
+> @@ -10946,16 +10946,20 @@ static const TypeInfo ppc_cpu_type_info =3D {
+>      .class_init =3D ppc_cpu_class_init,
+>  };
+> =20
+> +#ifndef CONFIG_USER_ONLY
+>  static const TypeInfo ppc_vhyp_type_info =3D {
+>      .name =3D TYPE_PPC_VIRTUAL_HYPERVISOR,
+>      .parent =3D TYPE_INTERFACE,
+>      .class_size =3D sizeof(PPCVirtualHypervisorClass),
+>  };
+> +#endif
+> =20
+>  static void ppc_cpu_register_types(void)
+>  {
+>      type_register_static(&ppc_cpu_type_info);
+> +#ifndef CONFIG_USER_ONLY
+>      type_register_static(&ppc_vhyp_type_info);
+> +#endif
+>  }
+> =20
+>  type_init(ppc_cpu_register_types)
+
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
+
+--RIYY1s2vRbPFwWeW
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAl64py8ACgkQbDjKyiDZ
+s5KPpBAA5bxjqRBzOm3Urkc2h2bO+rwKrnVMha5YhWCCdA1YQEbRWTCrIEg/WRZF
+w493kB3qwZ32Zx2kAA07QxMV7OXpklh1ORtIniK/uSwyrZpatOZ2LxaZEsS8eHwB
+qLNnvIcOWz9v3HLeyWfM3tSI0I038PhTeJe0GKud4LyJXJt/Zhs+30WEfMUvt7Ep
+Bjnpvnl/XPJ7O7VB0Cg3sOOK64mILGzIfFY09dr/1/mImORuU4Wn1eODcSEIKl5N
+PPIhjGe0QJf0ei4hKTmYOVmd0lKWME1LTIUR/7xR0P16m96C3yQsW5dwgdZs5a+b
+2uCzoZjzOk8UAYS8XNsFP2MGquBrmuSuRBqyDar1YdObjdvYIOvhApkNR7IUieyt
+trj+dE0LO1y9Nl5O/EZ3+bBhNp0zfF/2c3j5GkSolvoyabmndBFHfzyDjtzfyXHd
+JcAvwFSzCvZYV07IBFYqdCVmTMjBCXMI6n71Xu1vN8IahzlcEmhfoa4xJJ6JRHy1
+7BKNZWwiiOVvrK80I9k9zv2pZLixP5EB4MWQ4HO/Ntgs8Uwf6qJ6ZEWU3MdqEiEF
+qjOIHNZRfFLiboi/bFSrolBb5HsVj7V2/ng2BZOStktEtsjSYQqExVvs1+S10biZ
+Owy8SXiV6S0Hc4ypwHIupsEH/ylN71ZFlZ6XzollvzBsUvLojrA=
+=pbhG
+-----END PGP SIGNATURE-----
+
+--RIYY1s2vRbPFwWeW--
 
