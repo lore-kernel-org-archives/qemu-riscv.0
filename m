@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jY5aa-0004UE-TV
-	for mharc-qemu-riscv@gnu.org; Mon, 11 May 2020 06:23:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48622)
+	id 1jY5qo-0000BD-94
+	for mharc-qemu-riscv@gnu.org; Mon, 11 May 2020 06:39:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50538)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jY5aZ-0004TV-Bk
- for qemu-riscv@nongnu.org; Mon, 11 May 2020 06:23:11 -0400
-Received: from us-smtp-2.mimecast.com ([205.139.110.61]:42809
- helo=us-smtp-delivery-1.mimecast.com)
+ (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jY5qn-00008f-0Q
+ for qemu-riscv@nongnu.org; Mon, 11 May 2020 06:39:57 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:55169
+ helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jY5aY-00041R-Lj
- for qemu-riscv@nongnu.org; Mon, 11 May 2020 06:23:11 -0400
+ (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jY5qm-0007TA-Br
+ for qemu-riscv@nongnu.org; Mon, 11 May 2020 06:39:56 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589192589;
+ s=mimecast20190719; t=1589193595;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fjwqSxqwfRj484Q2fFsCL+k+aOfgW88Vo9dsKivk/WM=;
- b=a84U+NTYoyx9rxRc7q3R3V52xunouhQrN4U1hzC3DFrw0hpJmZqdmihV9PWW+JRCjkf/d7
- xsgv6vKLrfbLAXI/1Hda7bueFJpTTvdoQY4ALDxyRPPij5a0YYMbPjNdSy5vmgLLKoc8QV
- Pl8TjdwaGHjIIh6+2Bnsn4i/bKSicG8=
+ bh=iNZ95QBBgOhPlpv2+m1T3JOLKUsjDBZXx4buFuBqv10=;
+ b=LrKx5FctdsJjICUcdkLgpGJ2TCaN9xh2uKHfjFi+CSt1yv3dffhRwzaLr7DMW0J19L3yoL
+ G2yv8F8Ru0bchq9rW/7NIFqirQuECae+EB3Ao4XPoS9L/CM7DNmCTfuNDP5Qms6QDs7Z2L
+ dII9HuS0nfs3DbimDDAdt4KEI3EIYLo=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-218-Vbgy9PrXPw--Kja-ugNE5A-1; Mon, 11 May 2020 06:23:06 -0400
-X-MC-Unique: Vbgy9PrXPw--Kja-ugNE5A-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-341-KZmoN46UMAu4kHtyaRNbYA-1; Mon, 11 May 2020 06:39:52 -0400
+X-MC-Unique: KZmoN46UMAu4kHtyaRNbYA-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D13BA107ACF4;
- Mon, 11 May 2020 10:23:02 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 99D20A0BD8;
+ Mon, 11 May 2020 10:39:48 +0000 (UTC)
 Received: from gondolin (ovpn-112-254.ams2.redhat.com [10.36.112.254])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 567CD6C76B;
- Mon, 11 May 2020 10:22:54 +0000 (UTC)
-Date: Mon, 11 May 2020 12:22:51 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 3E1B31001DC2;
+ Mon, 11 May 2020 10:39:39 +0000 (UTC)
+Date: Mon, 11 May 2020 12:39:36 +0200
 From: Cornelia Huck <cohuck@redhat.com>
 To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <f4bug@amsat.org>
 Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>, Mark
@@ -54,23 +54,23 @@ Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>, Mark
  <rth@twiddle.net>, David Gibson <david@gibson.dropbear.id.au>, David
  Hildenbrand <david@redhat.com>, Alex =?UTF-8?B?QmVubsOpZQ==?=
  <alex.bennee@linaro.org>
-Subject: Re: [PATCH 04/11] sysemu/hvf: Only declare hvf_allowed when HVF is
- available
-Message-ID: <20200511122251.6b2975fb.cohuck@redhat.com>
-In-Reply-To: <20200509130910.26335-5-f4bug@amsat.org>
+Subject: Re: [PATCH 06/11] target/s390x: Only compile decode_basedisp() on
+ system-mode
+Message-ID: <20200511123936.057dd414.cohuck@redhat.com>
+In-Reply-To: <20200509130910.26335-7-f4bug@amsat.org>
 References: <20200509130910.26335-1-f4bug@amsat.org>
- <20200509130910.26335-5-f4bug@amsat.org>
+ <20200509130910.26335-7-f4bug@amsat.org>
 Organization: Red Hat GmbH
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=205.139.110.61; envelope-from=cohuck@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/11 03:10:56
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic]
+Received-SPF: pass client-ip=207.211.31.120; envelope-from=cohuck@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/11 02:55:57
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -90,20 +90,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2020 10:23:11 -0000
+X-List-Received-Date: Mon, 11 May 2020 10:39:57 -0000
 
-On Sat,  9 May 2020 15:09:03 +0200
+On Sat,  9 May 2020 15:09:05 +0200
 Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> wrote:
 
-> When HVF is not available, the tcg_allowed variable does not exist.
+> The decode_basedisp*() methods are only used in ioinst.c,
+> which is only build in system-mode emulation.
 
-s/tcg_allowed/hvf_allowed/
+I/O instructions are privileged, and other S instructions are decoded
+elsewhere.
 
 >=20
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > ---
->  include/sysemu/hvf.h | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  target/s390x/internal.h | 4 ++++
+>  1 file changed, 4 insertions(+)
 
 Reviewed-by: Cornelia Huck <cohuck@redhat.com>
 
