@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jY5Vg-0006e0-M9
-	for mharc-qemu-riscv@gnu.org; Mon, 11 May 2020 06:18:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47882)
+	id 1jY5YD-0001Fr-Jq
+	for mharc-qemu-riscv@gnu.org; Mon, 11 May 2020 06:20:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48206)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jY5Ve-0006Z1-Fs
- for qemu-riscv@nongnu.org; Mon, 11 May 2020 06:18:06 -0400
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:36534
+ (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jY5YC-0001El-Mp
+ for qemu-riscv@nongnu.org; Mon, 11 May 2020 06:20:44 -0400
+Received: from us-smtp-2.mimecast.com ([207.211.31.81]:50673
  helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jY5Vd-0002O8-K2
- for qemu-riscv@nongnu.org; Mon, 11 May 2020 06:18:06 -0400
+ (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jY5YB-0003Lm-7e
+ for qemu-riscv@nongnu.org; Mon, 11 May 2020 06:20:44 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589192284;
+ s=mimecast20190719; t=1589192441;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=0uohFe/CHE9N14X4nOXOgWiZ9U3xHrL7OAGJhDPnCVU=;
- b=N4B2iYwFcf+RcSlnps3ybMcfL0i2GaTg6MVueHpeUA+fIQa7Y+eFW9A28plfn5PWC5obwG
- TJ6q52U+pmWBBvHaElKR6fqMBlyRbr0SsPsGQLLmYNLolbUBV7jFceIfuRfhPBSBpLVB3o
- qGFMZwyZX1tyNrtLg3L7HA4YfcjGSNU=
+ bh=6K7Jb9KxhJ0Z3M7+jg0dXDkWcgyqfOLfhefCZZo0kM4=;
+ b=JD1jxiiz2f2/YE1d2P4qkbZUkH3QsBRhbG63HCQGBdyak3tDFRWus64vDlkE3fiYPSyCSF
+ 0HztYeixura4nePe+hhREm0hOdxsbwfQPehn5XEYWn6F4gJoFDVK0/gsHe1qdEJ12CdcnL
+ sLr0j6vSWZeXozXWOFJU33bdVCwNnko=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-115-IfgDxwMvOJmNuH2c8r3lzQ-1; Mon, 11 May 2020 06:18:01 -0400
-X-MC-Unique: IfgDxwMvOJmNuH2c8r3lzQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ us-mta-85-s32iGES-OYWOk8FgG4pPwA-1; Mon, 11 May 2020 06:20:38 -0400
+X-MC-Unique: s32iGES-OYWOk8FgG4pPwA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 57B6B18FE860;
- Mon, 11 May 2020 10:17:57 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1407CEC1B3;
+ Mon, 11 May 2020 10:20:35 +0000 (UTC)
 Received: from gondolin (ovpn-112-254.ams2.redhat.com [10.36.112.254])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 036769323;
- Mon, 11 May 2020 10:17:47 +0000 (UTC)
-Date: Mon, 11 May 2020 12:17:45 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A7AD85D9DA;
+ Mon, 11 May 2020 10:20:26 +0000 (UTC)
+Date: Mon, 11 May 2020 12:20:24 +0200
 From: Cornelia Huck <cohuck@redhat.com>
 To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <f4bug@amsat.org>
 Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>, Mark
@@ -54,15 +54,15 @@ Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>, Mark
  <rth@twiddle.net>, David Gibson <david@gibson.dropbear.id.au>, David
  Hildenbrand <david@redhat.com>, Alex =?UTF-8?B?QmVubsOpZQ==?=
  <alex.bennee@linaro.org>
-Subject: Re: [PATCH 02/11] sysemu/accel: Restrict machine methods to
- system-mode
-Message-ID: <20200511121745.42cea0ab.cohuck@redhat.com>
-In-Reply-To: <20200509130910.26335-3-f4bug@amsat.org>
+Subject: Re: [PATCH 03/11] sysemu/tcg: Only declare tcg_allowed when TCG is
+ available
+Message-ID: <20200511122024.1f684a63.cohuck@redhat.com>
+In-Reply-To: <20200509130910.26335-4-f4bug@amsat.org>
 References: <20200509130910.26335-1-f4bug@amsat.org>
- <20200509130910.26335-3-f4bug@amsat.org>
+ <20200509130910.26335-4-f4bug@amsat.org>
 Organization: Red Hat GmbH
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
@@ -90,18 +90,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2020 10:18:06 -0000
+X-List-Received-Date: Mon, 11 May 2020 10:20:45 -0000
 
-On Sat,  9 May 2020 15:09:01 +0200
+On Sat,  9 May 2020 15:09:02 +0200
 Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> wrote:
 
-> Restrict init_machine(), setup_post() and has_memory()
-> to system-mode.
+> When TCG is not available, the tcg_allowed variable does not exist.
 >=20
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > ---
->  include/sysemu/accel.h | 2 ++
->  1 file changed, 2 insertions(+)
+>  include/sysemu/tcg.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Cornelia Huck <cohuck@redhat.com>
 
