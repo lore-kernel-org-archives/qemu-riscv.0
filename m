@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jY52V-0001Ax-9k
-	for mharc-qemu-riscv@gnu.org; Mon, 11 May 2020 05:47:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42426)
+	id 1jY58u-000249-Mw
+	for mharc-qemu-riscv@gnu.org; Mon, 11 May 2020 05:54:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43450)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
- id 1jY52T-00016F-1E; Mon, 11 May 2020 05:47:57 -0400
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:34465)
+ id 1jY58t-00022q-Jr; Mon, 11 May 2020 05:54:35 -0400
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:38728)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
- id 1jY52S-0003Oz-4M; Mon, 11 May 2020 05:47:56 -0400
-Received: by mail-lj1-x243.google.com with SMTP id f11so8751386ljp.1;
- Mon, 11 May 2020 02:47:54 -0700 (PDT)
+ id 1jY58s-00057Q-Aw; Mon, 11 May 2020 05:54:35 -0400
+Received: by mail-lj1-x243.google.com with SMTP id e25so8757572ljg.5;
+ Mon, 11 May 2020 02:54:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:content-transfer-encoding:in-reply-to
- :user-agent; bh=LLpJhfY06EKF+oBDQZd0EOAQxJmdqFBtBjBb9Q83wyQ=;
- b=dUMWPGtFKW6rfx1FUyj6/UlWhOOJJ8G4+tG7JANPNzAaQhFgWx/rOvTZeiNafCTOcN
- Iazj2I9S83+BU11LF6gkqmvKmlCZeX9TcXBymElrfGdsW/px7YFloQ0scppSTRkCR2Lr
- TFZT8jq/Gi1hiNimejQ7nJ5qG277mVE0w5p+WfAxuD2KetciOvfNwZMau3pqU7FvqoSG
- 9m7NKy4gJbZWd6r9mAmdjByfP/hjL0NvXiZnkEQqxcrWzZQb7k3N4CdoYLg2GlP9lVR5
- OKVfA+kgyIpiubCPlqTP183NUYpU4btkqwNnJ3pwTJ+NcX2LorVy4tHvlr2tzmM4wwJw
- +ZHg==
+ :user-agent; bh=tiyyfkVX+Vv+hcjnSdTeDu1LOtGQ32sOhl+9tc0AzN0=;
+ b=fMKMwzHKAL+cC6GYL7w6Jo1hhb5zYEWOu+Hm1gsRT7aE0QuTlXpXlcee6I1vIfHTZC
+ Vo9VeSvSNJboZSAY84hXz1eBveXwKvejjHIovRw4E9UfTyYUg71VuDjwlGLgEGTSpzey
+ gcCq7dQYd/ajywcWswVmaM5wJQSPlaC4vZTjAmuEVpU5L83wA3QvdbZMz8izaqS5NSTm
+ oofor2fr+mK8xGjfS7pD7W4SNCyqQdNEB4eWGL+hLA7IQg4UbP2qqb7gMdvDlICBAqFs
+ zW7MSa0A1LOrKMzwxLhYfNPT4H0V3Gf4h4sUii3tJFgofR40LLf6Q3o+UA9GeDOw8op9
+ sqUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:content-transfer-encoding
  :in-reply-to:user-agent;
- bh=LLpJhfY06EKF+oBDQZd0EOAQxJmdqFBtBjBb9Q83wyQ=;
- b=XMedJKmryukFFEMfQ4v8YCS+EpmOBOYTCQd+GHdmB9qkZ+iWqtmEE/ilGMDPnJl1dP
- tORTXl1RgqS1lSkWUmWJ+Xg4rvhGJjiK4W7VLZNF7rctbtxnSrrvk7NEJtIqLncHWm/C
- JC7O8MY8BfIJoa17B5sLoiO2hJpJdG/CPu3nC0XhltcCduyugfD30JKZ5PqbEX9WCC0t
- kNUhp2YbukUFJJUKwabgw1qN3wdCqOOxBesGnhiEbTMKt685O1RrNNFpY3sQMN5e5YRT
- EnUd816PWoYjS9pK76/LMflGMV2ERLmLK/yHMy5UUciizUD/c2Ecudc5qmRLQDSCp/8+
- Pp5A==
-X-Gm-Message-State: AOAM531olB1WClbNEN6/a8w8FguiD4KAl1OWXFSO67mcEtilzzEK99sj
- xgWWItYEUhwaDkFvtc3dm1Y=
-X-Google-Smtp-Source: ABdhPJwLcg+uXF0jvSmlx/FD+/OzvbjV1vXuoRWwrq5i5XkGfM+aIGwidcM3ywJk6CJLLncUZJjS3g==
-X-Received: by 2002:a2e:a169:: with SMTP id u9mr9793594ljl.144.1589190473033; 
- Mon, 11 May 2020 02:47:53 -0700 (PDT)
+ bh=tiyyfkVX+Vv+hcjnSdTeDu1LOtGQ32sOhl+9tc0AzN0=;
+ b=WEPW0aSCwLU83LGS3fa2z9m74sg/lmQSoYb/v6UHHZwODAW59gGPDM0phRW4tikb8e
+ yxN65x9cMhIXE+vsZvA7ovCupP6pdLYmbxeKlO0/CoUqhASEYqtB385GckZbp/TJFLrK
+ FZ7uyhhVhQiqMwGXDF9V/5lHaCH8fUdAnRo6Z1sPOrzPZigh/ksVRnTnKmCKGHtmNm2J
+ T2O2a+ZhaEtyRk2LgnYaQQM+o4ZYCKLrNLh5SwTuVcmtXASd4tDA0MqUyveY49c5WRXC
+ MiP+jvqOy1+jCfc/vIfin9DMxm0rXu82K+DDv7LRmXfJcYdf7oP9pNeQNlKSyIR5rCk8
+ 9PJw==
+X-Gm-Message-State: AOAM532o4zcFMw/qreivL4hVqtq8c1i0Moq3VmnhebzE5nargEAuVRqt
+ 9k2T008lN7OogSe14m0Lahg=
+X-Google-Smtp-Source: ABdhPJz+MtRuntfrRkEMQVanEs2Ehicxuu4xy5lCw5aWu+zWimC9nOZPengQVdTQtuxI9wjfgHFNyQ==
+X-Received: by 2002:a2e:6e13:: with SMTP id j19mr9855811ljc.292.1589190871093; 
+ Mon, 11 May 2020 02:54:31 -0700 (PDT)
 Received: from localhost (81-231-232-130-no39.tbcn.telia.com. [81.231.232.130])
- by smtp.gmail.com with ESMTPSA id w9sm9420258ljj.88.2020.05.11.02.47.52
+ by smtp.gmail.com with ESMTPSA id s7sm10412923lfb.40.2020.05.11.02.54.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 May 2020 02:47:52 -0700 (PDT)
-Date: Mon, 11 May 2020 11:47:36 +0200
+ Mon, 11 May 2020 02:54:29 -0700 (PDT)
+Date: Mon, 11 May 2020 11:54:13 +0200
 From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
 To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>
 Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
@@ -66,16 +66,16 @@ Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
  David Gibson <david@gibson.dropbear.id.au>,
  David Hildenbrand <david@redhat.com>,
  Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>
-Subject: Re: [PATCH 04/11] sysemu/hvf: Only declare hvf_allowed when HVF is
- available
-Message-ID: <20200511094736.GR5519@toto>
+Subject: Re: [PATCH 02/11] sysemu/accel: Restrict machine methods to
+ system-mode
+Message-ID: <20200511095413.GS5519@toto>
 References: <20200509130910.26335-1-f4bug@amsat.org>
- <20200509130910.26335-5-f4bug@amsat.org>
+ <20200509130910.26335-3-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200509130910.26335-5-f4bug@amsat.org>
+In-Reply-To: <20200509130910.26335-3-f4bug@amsat.org>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Received-SPF: pass client-ip=2a00:1450:4864:20::243;
  envelope-from=edgar.iglesias@gmail.com; helo=mail-lj1-x243.google.com
@@ -100,50 +100,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2020 09:47:57 -0000
+X-List-Received-Date: Mon, 11 May 2020 09:54:36 -0000
 
-On Sat, May 09, 2020 at 03:09:03PM +0200, Philippe Mathieu-Daudé wrote:
-> When HVF is not available, the tcg_allowed variable does not exist.
+On Sat, May 09, 2020 at 03:09:01PM +0200, Philippe Mathieu-Daudé wrote:
+> Restrict init_machine(), setup_post() and has_memory()
+> to system-mode.
 
-Typo in commit message tcg_allowed -> hvf_allowed.
-
-With that fixed:
 Reviewed-by: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
 
 
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 > ---
->  include/sysemu/hvf.h | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  include/sysemu/accel.h | 2 ++
+>  1 file changed, 2 insertions(+)
 > 
-> diff --git a/include/sysemu/hvf.h b/include/sysemu/hvf.h
-> index d211e808e9..fe95743124 100644
-> --- a/include/sysemu/hvf.h
-> +++ b/include/sysemu/hvf.h
-> @@ -18,7 +18,6 @@
->  #include "exec/memory.h"
->  #include "sysemu/accel.h"
+> diff --git a/include/sysemu/accel.h b/include/sysemu/accel.h
+> index 47e5788530..e08b8ab8fa 100644
+> --- a/include/sysemu/accel.h
+> +++ b/include/sysemu/accel.h
+> @@ -37,10 +37,12 @@ typedef struct AccelClass {
+>      /*< public >*/
 >  
-> -extern bool hvf_allowed;
->  #ifdef CONFIG_HVF
->  #include <Hypervisor/hv.h>
->  #include <Hypervisor/hv_vmx.h>
-> @@ -26,11 +25,12 @@ extern bool hvf_allowed;
->  #include "target/i386/cpu.h"
->  uint32_t hvf_get_supported_cpuid(uint32_t func, uint32_t idx,
->                                   int reg);
-> +extern bool hvf_allowed;
->  #define hvf_enabled() (hvf_allowed)
-> -#else
-> +#else /* !CONFIG_HVF */
->  #define hvf_enabled() 0
->  #define hvf_get_supported_cpuid(func, idx, reg) 0
-> -#endif
-> +#endif /* !CONFIG_HVF */
->  
->  /* hvf_slot flags */
->  #define HVF_SLOT_LOG (1 << 0)
+>      const char *name;
+> +#ifndef CONFIG_USER_ONLY
+>      int (*init_machine)(MachineState *ms);
+>      void (*setup_post)(MachineState *ms, AccelState *accel);
+>      bool (*has_memory)(MachineState *ms, AddressSpace *as,
+>                         hwaddr start_addr, hwaddr size);
+> +#endif
+>      bool *allowed;
+>      /*
+>       * Array of global properties that would be applied when specific
 > -- 
 > 2.21.3
 > 
