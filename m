@@ -1,91 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jYFQk-0001Tb-Dh
-	for mharc-qemu-riscv@gnu.org; Mon, 11 May 2020 16:53:42 -0400
-Received: from [2001:470:142:3::10] (port=35524 helo=eggs.gnu.org)
+	id 1jYNzW-0001pG-IJ
+	for mharc-qemu-riscv@gnu.org; Tue, 12 May 2020 02:02:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46806)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jYFQh-0001Qh-Gv
- for qemu-riscv@nongnu.org; Mon, 11 May 2020 16:53:41 -0400
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:41054
- helo=us-smtp-delivery-1.mimecast.com)
+ (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jYNzU-0001ko-N5
+ for qemu-riscv@nongnu.org; Tue, 12 May 2020 02:02:08 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:39080
+ helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jYFQC-0005Nc-OR
- for qemu-riscv@nongnu.org; Mon, 11 May 2020 16:53:27 -0400
+ (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1jYNzR-0006m2-J2
+ for qemu-riscv@nongnu.org; Tue, 12 May 2020 02:02:06 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589230374;
+ s=mimecast20190719; t=1589263324;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=ApfKdlbM1fYSPPea3LqjcLYgAh8qqScfosbbY+F3O8c=;
- b=aXYjzkXOYTGtbqOrdWP4y99d0YqaLrcDIWLHvrMArJrMrgVpdcA7E2k6eTgcDftxINufF5
- /TGtHSyo10vveTotVwyHz2IwU/SvmMQ/0k/7Ve+ioa/bEMQyASBCL9UkY3PNrJOlWdrZij
- NjIk5JBoTmiHf30CC/ehnLCzWO6EvQo=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-443-Wr3Kq-HcM4m1UcR8SdYmYQ-1; Mon, 11 May 2020 16:52:51 -0400
-X-MC-Unique: Wr3Kq-HcM4m1UcR8SdYmYQ-1
-Received: by mail-wr1-f70.google.com with SMTP id g10so5805929wrr.10
- for <qemu-riscv@nongnu.org>; Mon, 11 May 2020 13:52:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ApfKdlbM1fYSPPea3LqjcLYgAh8qqScfosbbY+F3O8c=;
- b=suRjenqoVVbQZHclnqyvv3B6eJ0xhQUHUC/Wz21HD/XhYH/PR2EsASV7mC72PtjNjz
- uSOmJ0ArRjz9Ak713EqLkadV0bjGQv5NwVGF+SEzf/0+IPsq5+IycDtMDZAPVvwTLrxq
- F4Bl3p6xvPDp6D0II9qsaznthwPFRF+qeuH36UuGaY+R2RCieDJDcmhHsVanpx7m1dRu
- UkMa8c5wKhARlG9CwyueM1hUvqbKy92+ZRUndhkD5ZP2o4GkVFZ0r9djWnRAXQW94hGy
- QvORDXFvgDp8C/ABBQvu58FpgeHas/E50bFK7XxacRgOkFFyW55hbKd6CxhYF6lKdP8X
- roag==
-X-Gm-Message-State: AGi0PuZTw6RKQ6pr6w+hG7YMC9Fee6FkDX/g5pMPXX0ns4PQb6n6BMi4
- cQXf7ccmmkoI5AEQCVXpXdOjLMox5cojn1pvbtzuYB8NLQR/2ZQ2YYstTZ5TqMDgVy+UtvLG4Fn
- Q/tXubO7TlPR1b8Y=
-X-Received: by 2002:a05:600c:2284:: with SMTP id
- 4mr31952887wmf.97.1589230370219; 
- Mon, 11 May 2020 13:52:50 -0700 (PDT)
-X-Google-Smtp-Source: APiQypLxklPLpuZTPVF0u2g4c+16ffWLe2GRQPom07O+sxDhg3Ms4hzoQL1zsAT6ViIYBBObWOom9w==
-X-Received: by 2002:a05:600c:2284:: with SMTP id
- 4mr31952847wmf.97.1589230369854; 
- Mon, 11 May 2020 13:52:49 -0700 (PDT)
-Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
- [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id k5sm18146092wrx.16.2020.05.11.13.52.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 May 2020 13:52:49 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-riscv@nongnu.org,
- Leif Lindholm <leif@nuviainc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Radoslaw Biernacki <radoslaw.biernacki@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, qemu-arm@nongnu.org,
- Richard Henderson <rth@twiddle.net>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Max Reitz <mreitz@redhat.com>, qemu-block@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>, Kevin Wolf <kwolf@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>
-Subject: [PATCH] hw: Use QEMU_IS_ALIGNED() on parallel flash block size
-Date: Mon, 11 May 2020 22:52:46 +0200
-Message-Id: <20200511205246.24621-1-philmd@redhat.com>
-X-Mailer: git-send-email 2.21.3
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nugp8cv/l75vGPOWqJLtFmJBdhcRZ01YnyHn34TCwiE=;
+ b=T6j//SLgSk3E2WBdBnK8s+5kaDKQjAzhay6QNXg15DAKEkC8mDw3YuVUE3MUIESGOxdE40
+ reAHY452xWX7WF3R/cdkvqzFWpTuK24EPRbTEJMdlCeAT5DOMo4uLZyzkyTWm/A93kPoJU
+ sa+w083FIJou6cdx+DytEVOOYSlZyQQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-226-9kTSJPCUNjuQd4HWHxIfhA-1; Tue, 12 May 2020 02:02:02 -0400
+X-MC-Unique: 9kTSJPCUNjuQd4HWHxIfhA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 26EA38015CE;
+ Tue, 12 May 2020 06:01:58 +0000 (UTC)
+Received: from gondolin (ovpn-112-176.ams2.redhat.com [10.36.112.176])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 9FACB5D9DD;
+ Tue, 12 May 2020 06:01:48 +0000 (UTC)
+Date: Tue, 12 May 2020 08:01:46 +0200
+From: Cornelia Huck <cohuck@redhat.com>
+To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <f4bug@amsat.org>
+Cc: Peter Maydell <peter.maydell@linaro.org>, Sagar Karandikar
+ <sagark@eecs.berkeley.edu>, David Hildenbrand <david@redhat.com>, Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-devel@nongnu.org, Max
+ Filippov <jcmvbkbc@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Marek Vasut <marex@denx.de>, Aleksandar Markovic
+ <aleksandar.qemu.devel@gmail.com>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, qemu-ppc@nongnu.org, Aleksandar Rikalo
+ <aleksandar.rikalo@rt-rk.com>, David Gibson <david@gibson.dropbear.id.au>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Eduardo Habkost
+ <ehabkost@redhat.com>, qemu-s390x@nongnu.org, qemu-arm@nongnu.org, Stafford
+ Horne <shorne@gmail.com>, Richard Henderson <rth@twiddle.net>,
+ qemu-riscv@nongnu.org, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Chris Wulff <crwulff@gmail.com>, Roman Bolshakov <r.bolshakov@yadro.com>,
+ Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
+Subject: Re: [PATCH 08/11] target/s390x: Restrict system-mode declarations
+Message-ID: <20200512080146.7d0f4ae2.cohuck@redhat.com>
+In-Reply-To: <2bb91290-32c5-997d-c689-4d651836c7fc@amsat.org>
+References: <20200509130910.26335-1-f4bug@amsat.org>
+ <20200509130910.26335-9-f4bug@amsat.org>
+ <20200511124804.1a7a43aa.cohuck@redhat.com>
+ <2bb91290-32c5-997d-c689-4d651836c7fc@amsat.org>
+Organization: Red Hat GmbH
 MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8;
-	text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=207.211.31.81; envelope-from=philmd@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/11 01:43:51
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- T_DKIM_INVALID=0.01, T_SPF_HELO_TEMPERROR=0.01,
- T_SPF_TEMPERROR=0.01 autolearn=_AUTOLEARN
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=205.139.110.120; envelope-from=cohuck@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/12 02:02:04
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic]
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -98,100 +88,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2020 20:53:41 -0000
+X-List-Received-Date: Tue, 12 May 2020 06:02:08 -0000
 
-Use the QEMU_IS_ALIGNED() macro to verify the flash block size
-is properly aligned. It is quicker to process when reviewing.
+On Mon, 11 May 2020 14:21:27 +0200
+Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> wrote:
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
----
- hw/arm/sbsa-ref.c       | 2 +-
- hw/arm/virt.c           | 2 +-
- hw/block/pflash_cfi01.c | 2 +-
- hw/block/pflash_cfi02.c | 2 +-
- hw/i386/pc_sysfw.c      | 2 +-
- hw/riscv/virt.c         | 2 +-
- 6 files changed, 6 insertions(+), 6 deletions(-)
+> On 5/11/20 12:48 PM, Cornelia Huck wrote:
+> > On Sat,  9 May 2020 15:09:07 +0200
+> > Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> wrote:
+> >  =20
+> >> As these declarations are restricted to !CONFIG_USER_ONLY in
+> >> helper.c, only declare them when system-mode emulation is used.
+> >>
+> >> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> >> ---
+> >>   target/s390x/internal.h | 11 ++++++-----
+> >>   1 file changed, 6 insertions(+), 5 deletions(-)
+> >>
+> >> diff --git a/target/s390x/internal.h b/target/s390x/internal.h
+> >> index c1678dc6bc..ddc276cdf4 100644
+> >> --- a/target/s390x/internal.h
+> >> +++ b/target/s390x/internal.h
+> >> @@ -236,7 +236,6 @@ int s390_cpu_write_elf64_note(WriteCoreDumpFunctio=
+n f, CPUState *cs,
+> >>  =20
+> >>   /* cc_helper.c */
+> >>   const char *cc_name(enum cc_op cc_op);
+> >> -void load_psw(CPUS390XState *env, uint64_t mask, uint64_t addr);
+> >>   uint32_t calc_cc(CPUS390XState *env, uint32_t cc_op, uint64_t src, u=
+int64_t dst,
+> >>                    uint64_t vr);
+> >>  =20
+> >> @@ -303,18 +302,20 @@ void s390_cpu_gdb_init(CPUState *cs);
+> >>  =20
+> >>   /* helper.c */
+> >>   void s390_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+> >> -hwaddr s390_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+> >> -hwaddr s390_cpu_get_phys_addr_debug(CPUState *cpu, vaddr addr);
+> >> +void do_restart_interrupt(CPUS390XState *env);
+> >> +
+> >> +#ifndef CONFIG_USER_ONLY
+> >> +void load_psw(CPUS390XState *env, uint64_t mask, uint64_t addr); =20
+> >=20
+> > load_psw() is in cc_helper.c (and not in helper.c). Rather add the
+> > #ifndef above, even if it is a bit awkward? Otherwise, the wrong
+> > comment makes it confusing. =20
+>=20
+> I've been tempted to remove the kinda outdated /* helper.c */ comment...
 
-diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-index 8409ba853d..b379e4a76a 100644
---- a/hw/arm/sbsa-ref.c
-+++ b/hw/arm/sbsa-ref.c
-@@ -241,7 +241,7 @@ static void sbsa_flash_map1(PFlashCFI01 *flash,
- {
-     DeviceState *dev = DEVICE(flash);
- 
--    assert(size % SBSA_FLASH_SECTOR_SIZE == 0);
-+    assert(QEMU_IS_ALIGNED(size, SBSA_FLASH_SECTOR_SIZE));
-     assert(size / SBSA_FLASH_SECTOR_SIZE <= UINT32_MAX);
-     qdev_prop_set_uint32(dev, "num-blocks", size / SBSA_FLASH_SECTOR_SIZE);
-     qdev_init_nofail(dev);
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index 634db0cfe9..0a99fddb3d 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -978,7 +978,7 @@ static void virt_flash_map1(PFlashCFI01 *flash,
- {
-     DeviceState *dev = DEVICE(flash);
- 
--    assert(size % VIRT_FLASH_SECTOR_SIZE == 0);
-+    assert(QEMU_IS_ALIGNED(size, VIRT_FLASH_SECTOR_SIZE));
-     assert(size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
-     qdev_prop_set_uint32(dev, "num-blocks", size / VIRT_FLASH_SECTOR_SIZE);
-     qdev_init_nofail(dev);
-diff --git a/hw/block/pflash_cfi01.c b/hw/block/pflash_cfi01.c
-index f586bac269..11922c0f96 100644
---- a/hw/block/pflash_cfi01.c
-+++ b/hw/block/pflash_cfi01.c
-@@ -964,7 +964,7 @@ PFlashCFI01 *pflash_cfi01_register(hwaddr base,
-     if (blk) {
-         qdev_prop_set_drive(dev, "drive", blk, &error_abort);
-     }
--    assert(size % sector_len == 0);
-+    assert(QEMU_IS_ALIGNED(size, sector_len));
-     qdev_prop_set_uint32(dev, "num-blocks", size / sector_len);
-     qdev_prop_set_uint64(dev, "sector-length", sector_len);
-     qdev_prop_set_uint8(dev, "width", bank_width);
-diff --git a/hw/block/pflash_cfi02.c b/hw/block/pflash_cfi02.c
-index c6b6f2d082..895f7daee3 100644
---- a/hw/block/pflash_cfi02.c
-+++ b/hw/block/pflash_cfi02.c
-@@ -1003,7 +1003,7 @@ PFlashCFI02 *pflash_cfi02_register(hwaddr base,
-     if (blk) {
-         qdev_prop_set_drive(dev, "drive", blk, &error_abort);
-     }
--    assert(size % sector_len == 0);
-+    assert(QEMU_IS_ALIGNED(size, sector_len));
-     qdev_prop_set_uint32(dev, "num-blocks", size / sector_len);
-     qdev_prop_set_uint32(dev, "sector-length", sector_len);
-     qdev_prop_set_uint8(dev, "width", width);
-diff --git a/hw/i386/pc_sysfw.c b/hw/i386/pc_sysfw.c
-index f5f3f466b0..fad41f0e73 100644
---- a/hw/i386/pc_sysfw.c
-+++ b/hw/i386/pc_sysfw.c
-@@ -168,7 +168,7 @@ static void pc_system_flash_map(PCMachineState *pcms,
-                          blk_name(blk), strerror(-size));
-             exit(1);
-         }
--        if (size == 0 || size % FLASH_SECTOR_SIZE != 0) {
-+        if (size == 0 || !QEMU_IS_ALIGNED(size, FLASH_SECTOR_SIZE)) {
-             error_report("system firmware block device %s has invalid size "
-                          "%" PRId64,
-                          blk_name(blk), size);
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index daae3ebdbb..71481d59c2 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -112,7 +112,7 @@ static void virt_flash_map1(PFlashCFI01 *flash,
- {
-     DeviceState *dev = DEVICE(flash);
- 
--    assert(size % VIRT_FLASH_SECTOR_SIZE == 0);
-+    assert(QEMU_IS_ALIGNED(size, VIRT_FLASH_SECTOR_SIZE));
-     assert(size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
-     qdev_prop_set_uint32(dev, "num-blocks", size / VIRT_FLASH_SECTOR_SIZE);
-     qdev_init_nofail(dev);
--- 
-2.21.3
+I don't think they're really outdated, but not sure how useful they are
+to people. I'm not personally attached to them, other opinions?
+
+>=20
+> >  =20
+> >>   uint64_t get_psw_mask(CPUS390XState *env);
+> >>   void s390_cpu_recompute_watchpoints(CPUState *cs);
+> >>   void s390x_tod_timer(void *opaque);
+> >>   void s390x_cpu_timer(void *opaque);
+> >> -void do_restart_interrupt(CPUS390XState *env);
+> >>   void s390_handle_wait(S390CPU *cpu);
+> >> +hwaddr s390_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+> >> +hwaddr s390_cpu_get_phys_addr_debug(CPUState *cpu, vaddr addr);
+> >>   #define S390_STORE_STATUS_DEF_ADDR offsetof(LowCore, floating_pt_sav=
+e_area)
+> >>   int s390_store_status(S390CPU *cpu, hwaddr addr, bool store_arch);
+> >>   int s390_store_adtl_status(S390CPU *cpu, hwaddr addr, hwaddr len);
+> >> -#ifndef CONFIG_USER_ONLY
+> >>   LowCore *cpu_map_lowcore(CPUS390XState *env);
+> >>   void cpu_unmap_lowcore(LowCore *lowcore);
+> >>   #endif /* CONFIG_USER_ONLY */ =20
+> >=20
+> >  =20
+>=20
 
 
