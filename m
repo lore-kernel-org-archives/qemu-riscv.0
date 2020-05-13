@@ -1,65 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jYWQu-0006YZ-3q
-	for mharc-qemu-riscv@gnu.org; Tue, 12 May 2020 11:03:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34964)
+	id 1jYw6O-0004WY-MR
+	for mharc-qemu-riscv@gnu.org; Wed, 13 May 2020 14:27:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38858)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jYWQs-0006VV-Eg; Tue, 12 May 2020 11:02:58 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:36715)
+ id 1jYw6M-0004W2-Hx; Wed, 13 May 2020 14:27:30 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:37239)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jYWQr-00023j-DD; Tue, 12 May 2020 11:02:58 -0400
-Received: by mail-io1-xd42.google.com with SMTP id k6so14271082iob.3;
- Tue, 12 May 2020 08:02:55 -0700 (PDT)
+ id 1jYw6L-0004BU-Id; Wed, 13 May 2020 14:27:30 -0400
+Received: by mail-io1-xd42.google.com with SMTP id u11so116639iow.4;
+ Wed, 13 May 2020 11:27:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=CfDQNyiETGNBtCmjx4EXW+SurAQLFwlDq8FpjGI7evc=;
- b=hMLDC0uprZy4vUP6itTSCJrfzbKBDjKuk6O57DtoA2KLdzvpZezKkQwB7u5WuYy81G
- bw/kxCNMKHo4cEGrHVkQkOIZlBsn2puIS8njmxzF+TPbHYou8PeL5RYEr8FCrl11b3x6
- XymvI6OKPFBdY8DyRpqhn0D1okvkRuglbIGzNdnoI+XpR6N4SQ01PV0Qzc9IGtWrlpjA
- Rd50yS3z6yIPYSDJ+A6gw+edLxv0UCkJxtOQ12ir9PZmqqgl8dnSCoPPU2GwReAWydKg
- ArEPPZEmTOxtn76WZu6pMkTz/nW6QaBMK+/gYY9jndXTPcI41unpnO28U/HwBPzNTJL1
- Bqiw==
+ :cc; bh=nR7TRlGZlczMjxePx9kVhUNZSjisCs5/kvp3RzWY+WE=;
+ b=qGr3W9iHugFcL+p3nQS4eGtU/ql5PNU1rdIE32oyCofdJYuAAXPcxXsUExIMFBGunn
+ uniavoczhTnEg75am9NmwSMKHh11UU7LGkOPpndv9PnD06Kz7QCgYz9RmCMPxQ7YaIp/
+ h6AtPj9ABdg6VpGEkFGD4fsyuuIgxMdw2mlLNaHWMyBO8AJPewC+U8H7CYZXmWuMeOsV
+ JkOcxnfV38HQajpygwl3t0VmJ8oALAJoivlwBxJr8VV53SwiKLmi9LbuC1MB4oawl3yD
+ JoPyO9iJMznaj6we9FmLUeECCEXt8CuWBaiT5vkV1kMhb2TLS9aYNmBIS+X2BOT13F2/
+ NNIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=CfDQNyiETGNBtCmjx4EXW+SurAQLFwlDq8FpjGI7evc=;
- b=cBwR9x1jBvDLlfyyMguH3F4lmHozDMoJWNLyT5+2n64lHsgZwIXbM4T6z4+rfiwig8
- ZDWLAEeHyZfFpwwlV2ywoRRkWuuxOJ6j4EJ8AqZ0WwWtXql4Q0KKm1uW7+py3cYNGcbh
- nsvSdYGw+X5KW9ve48evQY0XERsiTxUWnQ9CSgB+w/7ouJQwFZ7GDDtGSYN37Moxhv3w
- GLLkI6/nOEmX5aiixEpI2xWxPoWP9v9Yly6eSugE/1Co/jLd/9r1Ynmikol+B+/U2+Sq
- 5GAw81PYHdtleZsAVm7gF9FuI4I3O2pQO1TYm/K4X0R29M9LJH5klKspWcBROb4HDITM
- G3gw==
-X-Gm-Message-State: AGi0PuYOx/4RA6zsVQ5Thdi/pTJpX2bqsk3ul5X2uwpoofA7ZKRiHR/q
- QibsldMRynyy2ql3LtjbWWAJvL9zN21d8gjCr5w=
-X-Google-Smtp-Source: APiQypLoSNWK+kYjVmQwJn8gYtSeeFI1GgCQDngSgP0mGsh452kuplj23NK56Sx1OEkqzfpVxsGz8ahxGMGUpshN1E4=
-X-Received: by 2002:a5d:9604:: with SMTP id w4mr21396125iol.105.1589295774659; 
- Tue, 12 May 2020 08:02:54 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=nR7TRlGZlczMjxePx9kVhUNZSjisCs5/kvp3RzWY+WE=;
+ b=NHrBc8fpEWetB0WCLzGZamTGVFSHFALiPbhNdagetZyvzbplYPUaSuXkB+6CFObyYe
+ UvCMwh1bK6sAMYxWQLciVJqoXfiNm9gOqWSReLpxlpVuVZhh53CHcX2fOCai3FmhZI0H
+ jdjxd3fGXvnOhqVHSwG3AZLTFohfbXkYh1qBdbcbTfP7kch/XU4KQ8FeewLC5Jm/iJ/j
+ bkhhI4BFMBxqutyLFau4j2513+/zy4YBJCYSXllLYoUpx/95A+rQeUX/MHRaBbQIxJEv
+ fnRNCkLT4RbdJcZWUQqBgip4IjizEYXbHDQO9Q1PszAv2uMdIV/j709GO2trXlXGHbDt
+ hV4g==
+X-Gm-Message-State: AGi0PuY0/1BLu7a4NGVEqB4HPpUzqR5IbDyZDDPPti7cZxIhLX9CWs/t
+ FEEdGt46UQ9QaQGRYzdFkASiWgJVgNr1LOmPufg=
+X-Google-Smtp-Source: APiQypKVjBczwQNkp2UndcF5QIZapeVDIunMaBx8KEupdg3trjJkKbjzibAYd6ksv2gwkoWaHO7xor/Zsw+p01ttEz8=
+X-Received: by 2002:a02:a887:: with SMTP id l7mr786093jam.91.1589394447638;
+ Wed, 13 May 2020 11:27:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200511205246.24621-1-philmd@redhat.com>
-In-Reply-To: <20200511205246.24621-1-philmd@redhat.com>
+References: <cover.1588878756.git.alistair.francis@wdc.com>
+In-Reply-To: <cover.1588878756.git.alistair.francis@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 12 May 2020 07:54:08 -0700
-Message-ID: <CAKmqyKNoMtXp5ApsA3GVsjWbg5R1-Yz3MvdDWTbq4c7j9ivd=A@mail.gmail.com>
-Subject: Re: [PATCH] hw: Use QEMU_IS_ALIGNED() on parallel flash block size
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Date: Wed, 13 May 2020 11:18:41 -0700
+Message-ID: <CAKmqyKNaVRi3u6qe4Obui5NktjemZYHFEbNz6PmsYk+Kf=hOfw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/9] RISC-V Add the OpenTitan Machine
+To: Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Kevin Wolf <kwolf@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, 
- Radoslaw Biernacki <radoslaw.biernacki@linaro.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Qemu-block <qemu-block@nongnu.org>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Eduardo Habkost <ehabkost@redhat.com>, Max Reitz <mreitz@redhat.com>,
- qemu-arm <qemu-arm@nongnu.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Leif Lindholm <leif@nuviainc.com>, 
- Richard Henderson <rth@twiddle.net>
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
  envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
@@ -84,114 +73,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2020 15:02:59 -0000
+X-List-Received-Date: Wed, 13 May 2020 18:27:30 -0000
 
-On Mon, May 11, 2020 at 1:54 PM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
+On Thu, May 7, 2020 at 12:21 PM Alistair Francis
+<alistair.francis@wdc.com> wrote:
 >
-> Use the QEMU_IS_ALIGNED() macro to verify the flash block size
-> is properly aligned. It is quicker to process when reviewing.
+> OpenTitan is an open source silicon Root of Trust (RoT) project. This
+> series adds initial support for the OpenTitan machine to QEMU.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> This series add the Ibex CPU to the QEMU RISC-V target. It then adds the
+> OpenTitan machine, the Ibex UART and the Ibex PLIC.
+>
+> The UART has been tested sending and receiving data.
+>
+> With this series QEMU can boot the OpenTitan ROM, Tock OS and a Tock
+> userspace app.
+>
+> The Ibex PLIC is similar to the RISC-V PLIC (and is based on the QEMU
+> implementation) with some differences. The hope is that the Ibex PLIC
+> will converge to follow the RISC-V spec. As that happens I want to
+> update the QEMU Ibex PLIC and hopefully eventually replace the current
+> PLIC as the implementation is a little overlay complex.
+>
+> For more details on OpenTitan, see here: https://docs.opentitan.org/
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Ping!
+
++ Some people who might be able to review this series (or at least ack).
+
+I'll give it another week and if I don't hear anything I'll merge it.
 
 Alistair
 
-> ---
->  hw/arm/sbsa-ref.c       | 2 +-
->  hw/arm/virt.c           | 2 +-
->  hw/block/pflash_cfi01.c | 2 +-
->  hw/block/pflash_cfi02.c | 2 +-
->  hw/i386/pc_sysfw.c      | 2 +-
->  hw/riscv/virt.c         | 2 +-
->  6 files changed, 6 insertions(+), 6 deletions(-)
 >
-> diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-> index 8409ba853d..b379e4a76a 100644
-> --- a/hw/arm/sbsa-ref.c
-> +++ b/hw/arm/sbsa-ref.c
-> @@ -241,7 +241,7 @@ static void sbsa_flash_map1(PFlashCFI01 *flash,
->  {
->      DeviceState *dev =3D DEVICE(flash);
+> v2:
+>  - Rebase on master
+>  - Get uart receive working
 >
-> -    assert(size % SBSA_FLASH_SECTOR_SIZE =3D=3D 0);
-> +    assert(QEMU_IS_ALIGNED(size, SBSA_FLASH_SECTOR_SIZE));
->      assert(size / SBSA_FLASH_SECTOR_SIZE <=3D UINT32_MAX);
->      qdev_prop_set_uint32(dev, "num-blocks", size / SBSA_FLASH_SECTOR_SIZ=
-E);
->      qdev_init_nofail(dev);
-> diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-> index 634db0cfe9..0a99fddb3d 100644
-> --- a/hw/arm/virt.c
-> +++ b/hw/arm/virt.c
-> @@ -978,7 +978,7 @@ static void virt_flash_map1(PFlashCFI01 *flash,
->  {
->      DeviceState *dev =3D DEVICE(flash);
+> Alistair Francis (9):
+>   riscv/boot: Add a missing header include
+>   target/riscv: Don't overwrite the reset vector
+>   target/riscv: Add the lowRISC Ibex CPU
+>   riscv: Initial commit of OpenTitan machine
+>   hw/char: Initial commit of Ibex UART
+>   hw/intc: Initial commit of lowRISC Ibex PLIC
+>   riscv/opentitan: Connect the PLIC device
+>   riscv/opentitan: Connect the UART device
+>   target/riscv: Use a smaller guess size for no-MMU PMP
 >
-> -    assert(size % VIRT_FLASH_SECTOR_SIZE =3D=3D 0);
-> +    assert(QEMU_IS_ALIGNED(size, VIRT_FLASH_SECTOR_SIZE));
->      assert(size / VIRT_FLASH_SECTOR_SIZE <=3D UINT32_MAX);
->      qdev_prop_set_uint32(dev, "num-blocks", size / VIRT_FLASH_SECTOR_SIZ=
-E);
->      qdev_init_nofail(dev);
-> diff --git a/hw/block/pflash_cfi01.c b/hw/block/pflash_cfi01.c
-> index f586bac269..11922c0f96 100644
-> --- a/hw/block/pflash_cfi01.c
-> +++ b/hw/block/pflash_cfi01.c
-> @@ -964,7 +964,7 @@ PFlashCFI01 *pflash_cfi01_register(hwaddr base,
->      if (blk) {
->          qdev_prop_set_drive(dev, "drive", blk, &error_abort);
->      }
-> -    assert(size % sector_len =3D=3D 0);
-> +    assert(QEMU_IS_ALIGNED(size, sector_len));
->      qdev_prop_set_uint32(dev, "num-blocks", size / sector_len);
->      qdev_prop_set_uint64(dev, "sector-length", sector_len);
->      qdev_prop_set_uint8(dev, "width", bank_width);
-> diff --git a/hw/block/pflash_cfi02.c b/hw/block/pflash_cfi02.c
-> index c6b6f2d082..895f7daee3 100644
-> --- a/hw/block/pflash_cfi02.c
-> +++ b/hw/block/pflash_cfi02.c
-> @@ -1003,7 +1003,7 @@ PFlashCFI02 *pflash_cfi02_register(hwaddr base,
->      if (blk) {
->          qdev_prop_set_drive(dev, "drive", blk, &error_abort);
->      }
-> -    assert(size % sector_len =3D=3D 0);
-> +    assert(QEMU_IS_ALIGNED(size, sector_len));
->      qdev_prop_set_uint32(dev, "num-blocks", size / sector_len);
->      qdev_prop_set_uint32(dev, "sector-length", sector_len);
->      qdev_prop_set_uint8(dev, "width", width);
-> diff --git a/hw/i386/pc_sysfw.c b/hw/i386/pc_sysfw.c
-> index f5f3f466b0..fad41f0e73 100644
-> --- a/hw/i386/pc_sysfw.c
-> +++ b/hw/i386/pc_sysfw.c
-> @@ -168,7 +168,7 @@ static void pc_system_flash_map(PCMachineState *pcms,
->                           blk_name(blk), strerror(-size));
->              exit(1);
->          }
-> -        if (size =3D=3D 0 || size % FLASH_SECTOR_SIZE !=3D 0) {
-> +        if (size =3D=3D 0 || !QEMU_IS_ALIGNED(size, FLASH_SECTOR_SIZE)) =
-{
->              error_report("system firmware block device %s has invalid si=
-ze "
->                           "%" PRId64,
->                           blk_name(blk), size);
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index daae3ebdbb..71481d59c2 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -112,7 +112,7 @@ static void virt_flash_map1(PFlashCFI01 *flash,
->  {
->      DeviceState *dev =3D DEVICE(flash);
+>  MAINTAINERS                         |  14 +
+>  default-configs/riscv32-softmmu.mak |   1 +
+>  default-configs/riscv64-softmmu.mak |  11 +-
+>  hw/char/Makefile.objs               |   1 +
+>  hw/char/ibex_uart.c                 | 490 ++++++++++++++++++++++++++++
+>  hw/intc/Makefile.objs               |   1 +
+>  hw/intc/ibex_plic.c                 | 261 +++++++++++++++
+>  hw/riscv/Kconfig                    |   9 +
+>  hw/riscv/Makefile.objs              |   1 +
+>  hw/riscv/opentitan.c                | 204 ++++++++++++
+>  include/hw/char/ibex_uart.h         | 110 +++++++
+>  include/hw/intc/ibex_plic.h         |  63 ++++
+>  include/hw/riscv/boot.h             |   1 +
+>  include/hw/riscv/opentitan.h        |  79 +++++
+>  target/riscv/cpu.c                  |  30 +-
+>  target/riscv/cpu.h                  |   1 +
+>  target/riscv/pmp.c                  |  19 +-
+>  17 files changed, 1281 insertions(+), 15 deletions(-)
+>  create mode 100644 hw/char/ibex_uart.c
+>  create mode 100644 hw/intc/ibex_plic.c
+>  create mode 100644 hw/riscv/opentitan.c
+>  create mode 100644 include/hw/char/ibex_uart.h
+>  create mode 100644 include/hw/intc/ibex_plic.h
+>  create mode 100644 include/hw/riscv/opentitan.h
 >
-> -    assert(size % VIRT_FLASH_SECTOR_SIZE =3D=3D 0);
-> +    assert(QEMU_IS_ALIGNED(size, VIRT_FLASH_SECTOR_SIZE));
->      assert(size / VIRT_FLASH_SECTOR_SIZE <=3D UINT32_MAX);
->      qdev_prop_set_uint32(dev, "num-blocks", size / VIRT_FLASH_SECTOR_SIZ=
-E);
->      qdev_init_nofail(dev);
 > --
-> 2.21.3
->
+> 2.26.2
 >
 
