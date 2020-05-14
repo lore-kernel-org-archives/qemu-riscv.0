@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jZLvS-0001kc-Nb
-	for mharc-qemu-riscv@gnu.org; Thu, 14 May 2020 18:01:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59436)
+	id 1jZM1Q-0005PJ-GD
+	for mharc-qemu-riscv@gnu.org; Thu, 14 May 2020 18:08:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39008)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jZLvR-0001kQ-Kj; Thu, 14 May 2020 18:01:57 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:36742)
+ id 1jZM1O-0005ON-SL; Thu, 14 May 2020 18:08:06 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:37817)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jZLvQ-0006V5-Iy; Thu, 14 May 2020 18:01:57 -0400
-Received: by mail-il1-x142.google.com with SMTP id 17so449617ilj.3;
- Thu, 14 May 2020 15:01:55 -0700 (PDT)
+ id 1jZM1N-0003md-Qh; Thu, 14 May 2020 18:08:06 -0400
+Received: by mail-il1-x142.google.com with SMTP id n11so459715ilj.4;
+ Thu, 14 May 2020 15:08:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=Ya1IodZ6PLMHH//lThMrCWMkmCqVM1gzMGaR4JqPxDI=;
- b=fgHM3vepvc7aicVDbbLglqs3bbGYjx5bCmDCwtFfoKV6g/09wgdxlftuqvrS+ZFxhg
- Ld+E9SUF8oPa4weoQ0TY/pSG2p/uhGPXdZdMqysX6w+F2Uew73BzgDImJpJaKGEa3xbI
- FzsC9A7WgPM6IzxaAuaQltVhhOPChFR01zaIVkwP8H0fiq2xv9f4wAwEwDMePU6XoryR
- KULoMFJ/oYY5n0kUeQK3T1OCXfBFwMOC5Cb7L+KAM/rnJGYg2iK/mH/yu0bbQtqCtlPd
- FzRuBMqygOx2jI1YwhD69CxO6QNE6GjpLYExjcebz1I3LQgM6gahpDcUqlC+giicmhRK
- FXNg==
+ bh=iZeAqpbW47Gesb2jwakRkz0J2mHYBvwMNg2UWjEe/oU=;
+ b=ep02vZlRADUkzoBno4CmhJhLqmSITM7v7eQq6s/I2O8pMwZ1mp/7K3zd/JwHIJvtHr
+ Ur3Q8mMl4H+AJWklZYXQHrBvXeJK+WShAj3RCs3oMYZxOHT1ZHrMll5Yp52qmmUSTB0l
+ zZeIrr3sGWzvAygT6l+pHZ557tuALYbQXDSGVMfkYdAhfmAXIA6FKQDRzJs/KVgCfLjO
+ x2CmILYvfb/byEPqRaQtlreARrN8bk0U/foqj/t4vdqTgmBkRs0tUdnOblR/QezkjSCu
+ lXNVoMAgm5DZ6lTdbqmmNbYZ5R4SsZx5cX/PIufjRbG0zKaKFozzygGBCbTqNW1cMgcb
+ 2+8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=Ya1IodZ6PLMHH//lThMrCWMkmCqVM1gzMGaR4JqPxDI=;
- b=HTQ+yA9UuUt9S0nJLlDJfzEMhBG0QE6rOsejw65rR8AvTakt6TvffZLyPBY2p/5+sN
- QnBEe4sjlwFzUYPtTg4Bq82J3XqWXw0xOR+nXF6TvrTdvedsAhlnfmHHIsbMTs0iPNK8
- DK2WTPwnFg0Q954edgKVnG5Lt27kPqR00bJgLgjK2qrnY9o6ywl3DvjpkBel8i4uMvvq
- 0pLuAy+GLze7j37py9V4tePn82rgGjkC4wJUh19vI5Ka6VCNVPxFEoL74JMjC6dfCy7+
- QyQo55X8pzp8oVq8uEIgJZG8DeG3bxNdxU40xh9Yv7J7gxQP7+09RgNCNIZEFYGayOEC
- ehPg==
-X-Gm-Message-State: AOAM530PqtpufvbSslDRLgry1FC1vDFfGqpxmum6jBKb90tf96v/+DCC
- A0K4WvNwCLccRVvrX46K3eaj6jeglKOwT1raYQA=
-X-Google-Smtp-Source: ABdhPJxjrXnuXNhSab8CzX3TPK/0pBiS4F6Oc0wodh547OzZRGRGpNWOHU1kRjiv/YUVdBt+JSTqD+QprSbRk98cP+U=
-X-Received: by 2002:a92:ad09:: with SMTP id w9mr305515ilh.177.1589493715046;
- Thu, 14 May 2020 15:01:55 -0700 (PDT)
+ bh=iZeAqpbW47Gesb2jwakRkz0J2mHYBvwMNg2UWjEe/oU=;
+ b=O7TexjW09gF0nok45B+WFz9asEVh/+TVr/dDUveGoO6xDJeWE4l+/R26nf5sNWSDI+
+ EJNu742nxj+BHXWAKdG2FeS/dYc68KSHPlMv2Q8TFoWxozw0v6v1bWYPX/bwxxhGahex
+ V8yh3LfYwljxDh3wMyYMChBIuBFk6AWmn80JDGZBx3VCieGUoRr7yG4zjufn8oYvm9h+
+ ++V03BE6GZ4auupA/BEQNv2QXm6uZPNOeuGY8OqU21cijldQSWG5jUd+6qn7CbvERbZt
+ 4BkR+hb9aIT9+7SnIy3QcPa5IhckqStCY9e0eXwDj9VJD9rHWX0avWkKdiBj+nh0NZQl
+ KcaA==
+X-Gm-Message-State: AOAM533CvmbbSgI7b4C/uene0ynu/5lpLhjFM2VVwiSxkVCHry/ll66k
+ meeEF+prDof3BZOJItB1oOfjRrdCaO364shrAqI=
+X-Google-Smtp-Source: ABdhPJzFfbmPTzpoKPeyztB+cRThAcoe0mz/JGSOnBjuPrq8kE1kSe9yY3uabnklpv66RzwAotNG+lmPOGQJQE69gYg=
+X-Received: by 2002:a92:d0c6:: with SMTP id y6mr340672ila.227.1589494084046;
+ Thu, 14 May 2020 15:08:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1588878756.git.alistair.francis@wdc.com>
- <27436e8864997f4d67d9562f1db41da2db05f4cf.1588878756.git.alistair.francis@wdc.com>
- <50effad3-3f41-2d36-e4dd-d14c05e6ea8c@redhat.com>
-In-Reply-To: <50effad3-3f41-2d36-e4dd-d14c05e6ea8c@redhat.com>
+ <11b8f3cd28fd52b10caefe21a7b70444b85792f8.1588878756.git.alistair.francis@wdc.com>
+ <44285916-1542-5ba3-eb39-48f9728c1e8d@redhat.com>
+In-Reply-To: <44285916-1542-5ba3-eb39-48f9728c1e8d@redhat.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 14 May 2020 14:53:07 -0700
-Message-ID: <CAKmqyKOhoMG+Gc1FwJBRJe1DC5TEHFBDN1pdtR-YtHLEEc3EEw@mail.gmail.com>
-Subject: Re: [PATCH v2 6/9] hw/intc: Initial commit of lowRISC Ibex PLIC
+Date: Thu, 14 May 2020 14:59:16 -0700
+Message-ID: <CAKmqyKPuv=jFOfO-Vgub1x1ddoLkmkZTgd2ZbSxNKMv7ySMBFQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/9] hw/char: Initial commit of Ibex UART
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -77,177 +77,154 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2020 22:01:58 -0000
+X-List-Received-Date: Thu, 14 May 2020 22:08:07 -0000
 
-On Thu, May 14, 2020 at 11:40 AM Philippe Mathieu-Daud=C3=A9
+On Thu, May 14, 2020 at 11:00 AM Philippe Mathieu-Daud=C3=A9
 <philmd@redhat.com> wrote:
 >
+> Hi Alistair,
+>
 > On 5/7/20 9:13 PM, Alistair Francis wrote:
-> > The Ibex core contains a PLIC that although similar to the RISC-V spec
-> > is not RISC-V spec compliant.
+> > This is the initial commit of the Ibex UART device. Serial TX is
+> > working, while RX has been implemeneted but untested.
 > >
-> > This patch implements a Ibex PLIC in a somewhat generic way.
-> >
-> > As the current RISC-V PLIC needs tidying up, my hope is that as the Ibe=
-x
-> > PLIC move towards spec compliance this PLIC implementation can be
-> > updated until it can replace the current PLIC.
+> > This is based on the documentation from:
+> > https://docs.opentitan.org/hw/ip/uart/doc/
 > >
 > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > > ---
 > >   MAINTAINERS                 |   2 +
-> >   hw/intc/Makefile.objs       |   1 +
-> >   hw/intc/ibex_plic.c         | 261 +++++++++++++++++++++++++++++++++++=
+> >   hw/char/Makefile.objs       |   1 +
+> >   hw/char/ibex_uart.c         | 490 +++++++++++++++++++++++++++++++++++=
 +
-> >   include/hw/intc/ibex_plic.h |  63 +++++++++
-> >   4 files changed, 327 insertions(+)
-> >   create mode 100644 hw/intc/ibex_plic.c
-> >   create mode 100644 include/hw/intc/ibex_plic.h
+> >   hw/riscv/Kconfig            |   4 +
+> >   include/hw/char/ibex_uart.h | 110 ++++++++
+> >   5 files changed, 607 insertions(+)
+> >   create mode 100644 hw/char/ibex_uart.c
+> >   create mode 100644 include/hw/char/ibex_uart.h
 > >
 > > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index d3d47564ce..f8c3cf6182 100644
+> > index c3d77f0861..d3d47564ce 100644
 > > --- a/MAINTAINERS
 > > +++ b/MAINTAINERS
-> > @@ -1237,8 +1237,10 @@ L: qemu-riscv@nongnu.org
+> > @@ -1236,7 +1236,9 @@ M: Alistair Francis <Alistair.Francis@wdc.com>
+> >   L: qemu-riscv@nongnu.org
 > >   S: Supported
 > >   F: hw/riscv/opentitan.c
-> >   F: hw/char/ibex_uart.c
-> > +F: hw/intc/ibex_plic.c
+> > +F: hw/char/ibex_uart.c
 > >   F: include/hw/riscv/opentitan.h
-> >   F: include/hw/char/ibex_uart.h
-> > +F: include/hw/intc/ibex_plic.h
+> > +F: include/hw/char/ibex_uart.h
 > >
 > >
 > >   SH4 Machines
-> > diff --git a/hw/intc/Makefile.objs b/hw/intc/Makefile.objs
-> > index f726d87532..a61e6728fe 100644
-> > --- a/hw/intc/Makefile.objs
-> > +++ b/hw/intc/Makefile.objs
-> > @@ -49,3 +49,4 @@ obj-$(CONFIG_ARM_GIC) +=3D arm_gicv3_cpuif.o
-> >   obj-$(CONFIG_MIPS_CPS) +=3D mips_gic.o
-> >   obj-$(CONFIG_NIOS2) +=3D nios2_iic.o
-> >   obj-$(CONFIG_OMPIC) +=3D ompic.o
-> > +obj-$(CONFIG_IBEX) +=3D ibex_plic.o
-> > diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
+> > diff --git a/hw/char/Makefile.objs b/hw/char/Makefile.objs
+> > index 9e9a6c1aff..633996be5b 100644
+> > --- a/hw/char/Makefile.objs
+> > +++ b/hw/char/Makefile.objs
+> > @@ -12,6 +12,7 @@ common-obj-$(CONFIG_VIRTIO_SERIAL) +=3D virtio-consol=
+e.o
+> >   common-obj-$(CONFIG_XILINX) +=3D xilinx_uartlite.o
+> >   common-obj-$(CONFIG_XEN) +=3D xen_console.o
+> >   common-obj-$(CONFIG_CADENCE) +=3D cadence_uart.o
+> > +common-obj-$(CONFIG_IBEX) +=3D ibex_uart.o
+> >
+> >   common-obj-$(CONFIG_EXYNOS4) +=3D exynos4210_uart.o
+> >   common-obj-$(CONFIG_COLDFIRE) +=3D mcf_uart.o
+> > diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
 > > new file mode 100644
-> > index 0000000000..35c52d9d16
+> > index 0000000000..f6215ae23d
 > > --- /dev/null
-> > +++ b/hw/intc/ibex_plic.c
-> > @@ -0,0 +1,261 @@
+> > +++ b/hw/char/ibex_uart.c
+> > @@ -0,0 +1,490 @@
 > > +/*
-> > + * QEMU RISC-V lowRISC Ibex PLIC
+> > + * QEMU lowRISC Ibex UART device
 > > + *
 > > + * Copyright (c) 2020 Western Digital
 > > + *
-> > + * Documentation avaliable: https://docs.opentitan.org/hw/ip/rv_plic/d=
-oc/
+> > + * For details check the documentation here:
+> > + *    https://docs.opentitan.org/hw/ip/uart/doc/
 > > + *
-> > + * This program is free software; you can redistribute it and/or modif=
-y it
-> > + * under the terms and conditions of the GNU General Public License,
-> > + * version 2 or later, as published by the Free Software Foundation.
+> > + * Permission is hereby granted, free of charge, to any person obtaini=
+ng a copy
+> > + * of this software and associated documentation files (the "Software"=
+), to deal
+> > + * in the Software without restriction, including without limitation t=
+he rights
+> > + * to use, copy, modify, merge, publish, distribute, sublicense, and/o=
+r sell
+> > + * copies of the Software, and to permit persons to whom the Software =
+is
+> > + * furnished to do so, subject to the following conditions:
 > > + *
-> > + * This program is distributed in the hope it will be useful, but WITH=
-OUT
-> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY =
-or
-> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public Licen=
-se for
-> > + * more details.
+> > + * The above copyright notice and this permission notice shall be incl=
+uded in
+> > + * all copies or substantial portions of the Software.
 > > + *
-> > + * You should have received a copy of the GNU General Public License a=
-long with
-> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> > + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXP=
+RESS OR
+> > + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABI=
+LITY,
+> > + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT S=
+HALL
+> > + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES O=
+R OTHER
+> > + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARI=
+SING FROM,
+> > + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI=
+NGS IN
+> > + * THE SOFTWARE.
 > > + */
 > > +
 > > +#include "qemu/osdep.h"
-> > +#include "qemu/log.h"
+> > +#include "hw/char/ibex_uart.h"
+> > +#include "hw/irq.h"
 > > +#include "hw/qdev-properties.h"
-> > +#include "hw/core/cpu.h"
-> > +#include "hw/boards.h"
-> > +#include "hw/pci/msi.h"
-> > +#include "target/riscv/cpu_bits.h"
-> > +#include "target/riscv/cpu.h"
-> > +#include "hw/intc/ibex_plic.h"
+> > +#include "migration/vmstate.h"
+> > +#include "qemu/log.h"
+> > +#include "qemu/module.h"
 > > +
-> > +static bool addr_between(uint32_t addr, uint32_t base, uint32_t num)
+> > +static void ibex_uart_update_irqs(IbexUartState *s)
 > > +{
-> > +    uint32_t end =3D base + (num * 0x04);
-> > +
-> > +    if (addr >=3D base && addr < end) {
-> > +        return true;
+> > +    if (s->uart_intr_state & s->uart_intr_enable & INTR_STATE_TX_WATER=
+MARK) {
+> > +        qemu_set_irq(s->tx_watermark, 1);
+> > +    } else {
+> > +        qemu_set_irq(s->tx_watermark, 0);
 > > +    }
 > > +
-> > +    return false;
-> > +}
-> > +
-> > +static void ibex_plic_irqs_set_pending(IbexPlicState *s, int irq, bool=
- level)
-> > +{
-> > +    int pending_num =3D irq / 32;
-> > +
-> > +    s->pending[pending_num] |=3D level << (irq % 32);
-> > +}
-> > +
-> > +static bool ibex_plic_irqs_pending(IbexPlicState *s, uint32_t context)
-> > +{
-> > +    int i;
-> > +
-> > +    for (i =3D 0; i < s->pending_num; i++) {
-> > +        uint32_t irq_num =3D ctz64(s->pending[i]) + (i * 32);
-> > +
-> > +        if (!(s->pending[i] & s->enable[i])) {
-> > +            /* No pending and enabled IRQ */
-> > +            continue;
-> > +        }
-> > +
-> > +        if (s->priority[irq_num] > s->threshold) {
-> > +            if (!s->claim) {
-> > +                s->claim =3D irq_num;
-> > +            }
-> > +            return true;
-> > +        }
-> > +    }
-> > +
-> > +    return 0;
+> > +    if (s->uart_intr_state & s->uart_intr_enable & INTR_STATE_RX_WATER=
+MARK) {
+> > +        qemu_set_irq(s->rx_watermark, 1);
+> > +    } else {
+> > +        qemu_set_irq(s->rx_watermark, 0);
 >
-> return 'false'.
+> I wonder if having both bit separate can't lead to odd pulse behavior
+> (this function should have the same result if you invert the RX/TX
+> processing here). I'd be safer using a local 'raise_watermark' boolean
+> variable, then call qemu_set_irq() once.
 
-Fixed.
-
->
-> > +}
-> > +
-> > +static void ibex_plic_update(IbexPlicState *s)
-> > +{
-> > +    CPUState *cpu;
-> > +    int level, i;
-> > +
-> > +    for (i =3D 0; i < s->num_cpus; i++) {
-> > +        cpu =3D qemu_get_cpu(i);
-> > +
-> > +        if (!cpu) {
-> > +            continue;
-> > +        }
-> > +
-> > +        level =3D ibex_plic_irqs_pending(s, 0);
-> > +
-> > +        riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MEIP, BOOL_TO_MASK(le=
-vel));
-> > +    }
-> > +}
-> > +
-> > +static void ibex_plic_reset(DeviceState *dev)
-> > +{
-> > +    IbexPlicState *s =3D IBEX_PLIC(dev);
-> > +
-> > +    s->threshold =3D 0x00000000;
-> > +    s->claim =3D 0x00000000;
->
-> I haven't check the datasheet reset values, for the rest:
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-
-Thanks for reviewing these :)
+I'm not sure what you mean. Are you worried that TX and RX will both
+go high/low at the same time?
 
 Alistair
+
+>
+> > +    }
+> > +
+> > +    if (s->uart_intr_state & s->uart_intr_enable & INTR_STATE_TX_EMPTY=
+) {
+> > +        qemu_set_irq(s->tx_empty, 1);
+> > +    } else {
+> > +        qemu_set_irq(s->tx_empty, 0);
+> > +    }
+> > +
+> > +    if (s->uart_intr_state & s->uart_intr_enable & INTR_STATE_RX_OVERF=
+LOW) {
+> > +        qemu_set_irq(s->rx_overflow, 1);
+> > +    } else {
+> > +        qemu_set_irq(s->rx_overflow, 0);
+> > +    }
+> > +}
+> [...]
+>
 
