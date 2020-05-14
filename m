@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jZLlC-0003RG-UC
-	for mharc-qemu-riscv@gnu.org; Thu, 14 May 2020 17:51:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51720)
+	id 1jZLvS-0001kc-Nb
+	for mharc-qemu-riscv@gnu.org; Thu, 14 May 2020 18:01:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59436)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jZLlB-0003R3-Vf; Thu, 14 May 2020 17:51:22 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:35536)
+ id 1jZLvR-0001kQ-Kj; Thu, 14 May 2020 18:01:57 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:36742)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jZLlA-00012y-Fg; Thu, 14 May 2020 17:51:21 -0400
-Received: by mail-io1-xd42.google.com with SMTP id 79so481244iou.2;
- Thu, 14 May 2020 14:51:19 -0700 (PDT)
+ id 1jZLvQ-0006V5-Iy; Thu, 14 May 2020 18:01:57 -0400
+Received: by mail-il1-x142.google.com with SMTP id 17so449617ilj.3;
+ Thu, 14 May 2020 15:01:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=+gZDRP/bkN7Co3PRwX6yJSfgEfdx93yxybVMDdovytw=;
- b=ZwnxbMs87r35bEvXSv7DP/kijyI4k+rpaufRUNpWUWTTFRxWZVOij65xnm3sBMv8BM
- IJ6xJTNlsKpXut7HQs8yznDYWAYsfc/WRNQFGiSHo/7T0YnJzpz5tRaJO3yM4YUwV2ES
- Bu6sAW9rk+GmWRERJzVNlOfoPTcWhb00pyVRR6lk7UDtGgVFFENgUVreImoNW9SxZFkM
- M178J8kJrOJeCXGCh/6fUJljwjMDksCQavZECoQ0RFNGwV0vbHWWLwD/P56BbdkB4fGj
- yhtzrxkvth9wXoV7bmkI9sPQcTgVv/GKuJywnTBhLgHSrRcRQVr8bgYrWohBp7Xz2FDh
- tddA==
+ bh=Ya1IodZ6PLMHH//lThMrCWMkmCqVM1gzMGaR4JqPxDI=;
+ b=fgHM3vepvc7aicVDbbLglqs3bbGYjx5bCmDCwtFfoKV6g/09wgdxlftuqvrS+ZFxhg
+ Ld+E9SUF8oPa4weoQ0TY/pSG2p/uhGPXdZdMqysX6w+F2Uew73BzgDImJpJaKGEa3xbI
+ FzsC9A7WgPM6IzxaAuaQltVhhOPChFR01zaIVkwP8H0fiq2xv9f4wAwEwDMePU6XoryR
+ KULoMFJ/oYY5n0kUeQK3T1OCXfBFwMOC5Cb7L+KAM/rnJGYg2iK/mH/yu0bbQtqCtlPd
+ FzRuBMqygOx2jI1YwhD69CxO6QNE6GjpLYExjcebz1I3LQgM6gahpDcUqlC+giicmhRK
+ FXNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=+gZDRP/bkN7Co3PRwX6yJSfgEfdx93yxybVMDdovytw=;
- b=no/fhPJ56uF89JabdSsSxgpjzbC6fccGQrLBdRMhwtEd96Z99e7QuEcZN0mIJQLS5a
- osEr8zvs0DdjvAevQOKI3O00+2aqQpVOTyOMn039i/Y7IOh6XZvbRyezUunMeD10HR2N
- NkYVYy4k9I77nSiAmudmN4emi8Dpn+O4ZCndUG/iu0Gw/rvvajE6MFGh7hKRaMvVjFlv
- 7idq9xIEOgKSct6OU+Wy+YO41RHm47kJUrfmNX22s9kX86N4doCjDgo+TQfwZGzTh5nP
- Ts5KWv483IoQNnI+/uoUdWgZ6m7Wd0Wl1p9AI107ODqWXN+KvDADjtutmUEMxES6bISu
- 2/Bg==
-X-Gm-Message-State: AOAM5332etAkC5m1ufk2lRWsbqE75IfeoDqi/0XfArczJB+yRacn/iC0
- 8CW+1RA4wPFBRMQJYyRqFC6GT0QxW7cJx56TM44=
-X-Google-Smtp-Source: ABdhPJw3AdCCoLCVGlISoT2O7EwrkMoRcBa9cVT4Yq2RXNoa5OMESMAfBa6Zl9px3z0RnpkDq9LhixmiD/iYc7p6tWQ=
-X-Received: by 2002:a02:54ca:: with SMTP id t193mr371909jaa.26.1589493078712; 
- Thu, 14 May 2020 14:51:18 -0700 (PDT)
+ bh=Ya1IodZ6PLMHH//lThMrCWMkmCqVM1gzMGaR4JqPxDI=;
+ b=HTQ+yA9UuUt9S0nJLlDJfzEMhBG0QE6rOsejw65rR8AvTakt6TvffZLyPBY2p/5+sN
+ QnBEe4sjlwFzUYPtTg4Bq82J3XqWXw0xOR+nXF6TvrTdvedsAhlnfmHHIsbMTs0iPNK8
+ DK2WTPwnFg0Q954edgKVnG5Lt27kPqR00bJgLgjK2qrnY9o6ywl3DvjpkBel8i4uMvvq
+ 0pLuAy+GLze7j37py9V4tePn82rgGjkC4wJUh19vI5Ka6VCNVPxFEoL74JMjC6dfCy7+
+ QyQo55X8pzp8oVq8uEIgJZG8DeG3bxNdxU40xh9Yv7J7gxQP7+09RgNCNIZEFYGayOEC
+ ehPg==
+X-Gm-Message-State: AOAM530PqtpufvbSslDRLgry1FC1vDFfGqpxmum6jBKb90tf96v/+DCC
+ A0K4WvNwCLccRVvrX46K3eaj6jeglKOwT1raYQA=
+X-Google-Smtp-Source: ABdhPJxjrXnuXNhSab8CzX3TPK/0pBiS4F6Oc0wodh547OzZRGRGpNWOHU1kRjiv/YUVdBt+JSTqD+QprSbRk98cP+U=
+X-Received: by 2002:a92:ad09:: with SMTP id w9mr305515ilh.177.1589493715046;
+ Thu, 14 May 2020 15:01:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1588878756.git.alistair.francis@wdc.com>
- <44d0486b0fd156a756af544866dd7d19609b1aa6.1588878756.git.alistair.francis@wdc.com>
- <01168f32-c21c-b9fd-cb9c-06511e28bd20@redhat.com>
-In-Reply-To: <01168f32-c21c-b9fd-cb9c-06511e28bd20@redhat.com>
+ <27436e8864997f4d67d9562f1db41da2db05f4cf.1588878756.git.alistair.francis@wdc.com>
+ <50effad3-3f41-2d36-e4dd-d14c05e6ea8c@redhat.com>
+In-Reply-To: <50effad3-3f41-2d36-e4dd-d14c05e6ea8c@redhat.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 14 May 2020 14:42:30 -0700
-Message-ID: <CAKmqyKMwdBmZ8kdi0xp0kJ1sPrWSGYZ304ZY8G+4xK9yYQ3VKg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/9] target/riscv: Don't overwrite the reset vector
+Date: Thu, 14 May 2020 14:53:07 -0700
+Message-ID: <CAKmqyKOhoMG+Gc1FwJBRJe1DC5TEHFBDN1pdtR-YtHLEEc3EEw@mail.gmail.com>
+Subject: Re: [PATCH v2 6/9] hw/intc: Initial commit of lowRISC Ibex PLIC
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -53,8 +53,8 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -77,140 +77,177 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2020 21:51:22 -0000
+X-List-Received-Date: Thu, 14 May 2020 22:01:58 -0000
 
-On Thu, May 14, 2020 at 10:54 AM Philippe Mathieu-Daud=C3=A9
+On Thu, May 14, 2020 at 11:40 AM Philippe Mathieu-Daud=C3=A9
 <philmd@redhat.com> wrote:
 >
 > On 5/7/20 9:13 PM, Alistair Francis wrote:
-> > If the reset vector is set in the init function don't set it again in
-> > realise.
->
-> typo "realize".
-
-It's not a typo, just correct English :)
-
-I have changed it.
-
->
+> > The Ibex core contains a PLIC that although similar to the RISC-V spec
+> > is not RISC-V spec compliant.
+> >
+> > This patch implements a Ibex PLIC in a somewhat generic way.
+> >
+> > As the current RISC-V PLIC needs tidying up, my hope is that as the Ibe=
+x
+> > PLIC move towards spec compliance this PLIC implementation can be
+> > updated until it can replace the current PLIC.
 > >
 > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > > ---
-> >   target/riscv/cpu.c | 20 +++++++++++---------
-> >   1 file changed, 11 insertions(+), 9 deletions(-)
+> >   MAINTAINERS                 |   2 +
+> >   hw/intc/Makefile.objs       |   1 +
+> >   hw/intc/ibex_plic.c         | 261 +++++++++++++++++++++++++++++++++++=
++
+> >   include/hw/intc/ibex_plic.h |  63 +++++++++
+> >   4 files changed, 327 insertions(+)
+> >   create mode 100644 hw/intc/ibex_plic.c
+> >   create mode 100644 include/hw/intc/ibex_plic.h
 > >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 059d71f2c7..8f837edf8d 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -111,6 +111,14 @@ static void set_feature(CPURISCVState *env, int fe=
-ature)
-> >       env->features |=3D (1ULL << feature);
-> >   }
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index d3d47564ce..f8c3cf6182 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -1237,8 +1237,10 @@ L: qemu-riscv@nongnu.org
+> >   S: Supported
+> >   F: hw/riscv/opentitan.c
+> >   F: hw/char/ibex_uart.c
+> > +F: hw/intc/ibex_plic.c
+> >   F: include/hw/riscv/opentitan.h
+> >   F: include/hw/char/ibex_uart.h
+> > +F: include/hw/intc/ibex_plic.h
 > >
-> > +static int get_resetvec(CPURISCVState *env)
+> >
+> >   SH4 Machines
+> > diff --git a/hw/intc/Makefile.objs b/hw/intc/Makefile.objs
+> > index f726d87532..a61e6728fe 100644
+> > --- a/hw/intc/Makefile.objs
+> > +++ b/hw/intc/Makefile.objs
+> > @@ -49,3 +49,4 @@ obj-$(CONFIG_ARM_GIC) +=3D arm_gicv3_cpuif.o
+> >   obj-$(CONFIG_MIPS_CPS) +=3D mips_gic.o
+> >   obj-$(CONFIG_NIOS2) +=3D nios2_iic.o
+> >   obj-$(CONFIG_OMPIC) +=3D ompic.o
+> > +obj-$(CONFIG_IBEX) +=3D ibex_plic.o
+> > diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
+> > new file mode 100644
+> > index 0000000000..35c52d9d16
+> > --- /dev/null
+> > +++ b/hw/intc/ibex_plic.c
+> > @@ -0,0 +1,261 @@
+> > +/*
+> > + * QEMU RISC-V lowRISC Ibex PLIC
+> > + *
+> > + * Copyright (c) 2020 Western Digital
+> > + *
+> > + * Documentation avaliable: https://docs.opentitan.org/hw/ip/rv_plic/d=
+oc/
+> > + *
+> > + * This program is free software; you can redistribute it and/or modif=
+y it
+> > + * under the terms and conditions of the GNU General Public License,
+> > + * version 2 or later, as published by the Free Software Foundation.
+> > + *
+> > + * This program is distributed in the hope it will be useful, but WITH=
+OUT
+> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY =
+or
+> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public Licen=
+se for
+> > + * more details.
+> > + *
+> > + * You should have received a copy of the GNU General Public License a=
+long with
+> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> > + */
+> > +
+> > +#include "qemu/osdep.h"
+> > +#include "qemu/log.h"
+> > +#include "hw/qdev-properties.h"
+> > +#include "hw/core/cpu.h"
+> > +#include "hw/boards.h"
+> > +#include "hw/pci/msi.h"
+> > +#include "target/riscv/cpu_bits.h"
+> > +#include "target/riscv/cpu.h"
+> > +#include "hw/intc/ibex_plic.h"
+> > +
+> > +static bool addr_between(uint32_t addr, uint32_t base, uint32_t num)
 > > +{
-> > +#ifndef CONFIG_USER_ONLY
-> > +    return env->resetvec;
-> > +#endif
+> > +    uint32_t end =3D base + (num * 0x04);
+> > +
+> > +    if (addr >=3D base && addr < end) {
+> > +        return true;
+> > +    }
+> > +
+> > +    return false;
+> > +}
+> > +
+> > +static void ibex_plic_irqs_set_pending(IbexPlicState *s, int irq, bool=
+ level)
+> > +{
+> > +    int pending_num =3D irq / 32;
+> > +
+> > +    s->pending[pending_num] |=3D level << (irq % 32);
+> > +}
+> > +
+> > +static bool ibex_plic_irqs_pending(IbexPlicState *s, uint32_t context)
+> > +{
+> > +    int i;
+> > +
+> > +    for (i =3D 0; i < s->pending_num; i++) {
+> > +        uint32_t irq_num =3D ctz64(s->pending[i]) + (i * 32);
+> > +
+> > +        if (!(s->pending[i] & s->enable[i])) {
+> > +            /* No pending and enabled IRQ */
+> > +            continue;
+> > +        }
+> > +
+> > +        if (s->priority[irq_num] > s->threshold) {
+> > +            if (!s->claim) {
+> > +                s->claim =3D irq_num;
+> > +            }
+> > +            return true;
+> > +        }
+> > +    }
+> > +
 > > +    return 0;
 >
-> Don't you get an error about double return? Maybe use #else?
+> return 'false'.
 
-Apparently not, I have changed it though.
-
-Alistair
+Fixed.
 
 >
 > > +}
 > > +
-> >   static void set_resetvec(CPURISCVState *env, int resetvec)
-> >   {
-> >   #ifndef CONFIG_USER_ONLY
-> > @@ -123,7 +131,6 @@ static void riscv_any_cpu_init(Object *obj)
-> >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >       set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
-> >       set_priv_version(env, PRIV_VERSION_1_11_0);
-> > -    set_resetvec(env, DEFAULT_RSTVEC);
-> >   }
-> >
-> >   #if defined(TARGET_RISCV32)
-> > @@ -140,7 +147,6 @@ static void rv32gcsu_priv1_09_1_cpu_init(Object *ob=
-j)
-> >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RV=
-U);
-> >       set_priv_version(env, PRIV_VERSION_1_09_1);
-> > -    set_resetvec(env, DEFAULT_RSTVEC);
-> >       set_feature(env, RISCV_FEATURE_MMU);
-> >       set_feature(env, RISCV_FEATURE_PMP);
-> >   }
-> > @@ -150,7 +156,6 @@ static void rv32gcsu_priv1_10_0_cpu_init(Object *ob=
-j)
-> >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RV=
-U);
-> >       set_priv_version(env, PRIV_VERSION_1_10_0);
-> > -    set_resetvec(env, DEFAULT_RSTVEC);
-> >       set_feature(env, RISCV_FEATURE_MMU);
-> >       set_feature(env, RISCV_FEATURE_PMP);
-> >   }
-> > @@ -160,7 +165,6 @@ static void rv32imacu_nommu_cpu_init(Object *obj)
-> >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >       set_misa(env, RV32 | RVI | RVM | RVA | RVC | RVU);
-> >       set_priv_version(env, PRIV_VERSION_1_10_0);
-> > -    set_resetvec(env, DEFAULT_RSTVEC);
-> >       set_feature(env, RISCV_FEATURE_PMP);
-> >   }
-> >
-> > @@ -169,7 +173,6 @@ static void rv32imafcu_nommu_cpu_init(Object *obj)
-> >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVC | RVU);
-> >       set_priv_version(env, PRIV_VERSION_1_10_0);
-> > -    set_resetvec(env, DEFAULT_RSTVEC);
-> >       set_feature(env, RISCV_FEATURE_PMP);
-> >   }
-> >
-> > @@ -187,7 +190,6 @@ static void rv64gcsu_priv1_09_1_cpu_init(Object *ob=
-j)
-> >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >       set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RV=
-U);
-> >       set_priv_version(env, PRIV_VERSION_1_09_1);
-> > -    set_resetvec(env, DEFAULT_RSTVEC);
-> >       set_feature(env, RISCV_FEATURE_MMU);
-> >       set_feature(env, RISCV_FEATURE_PMP);
-> >   }
-> > @@ -197,7 +199,6 @@ static void rv64gcsu_priv1_10_0_cpu_init(Object *ob=
-j)
-> >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >       set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RV=
-U);
-> >       set_priv_version(env, PRIV_VERSION_1_10_0);
-> > -    set_resetvec(env, DEFAULT_RSTVEC);
-> >       set_feature(env, RISCV_FEATURE_MMU);
-> >       set_feature(env, RISCV_FEATURE_PMP);
-> >   }
-> > @@ -207,7 +208,6 @@ static void rv64imacu_nommu_cpu_init(Object *obj)
-> >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >       set_misa(env, RV64 | RVI | RVM | RVA | RVC | RVU);
-> >       set_priv_version(env, PRIV_VERSION_1_10_0);
-> > -    set_resetvec(env, DEFAULT_RSTVEC);
-> >       set_feature(env, RISCV_FEATURE_PMP);
-> >   }
-> >
-> > @@ -399,7 +399,9 @@ static void riscv_cpu_realize(DeviceState *dev, Err=
-or **errp)
-> >       }
-> >
-> >       set_priv_version(env, priv_version);
-> > -    set_resetvec(env, DEFAULT_RSTVEC);
-> > +    if (!get_resetvec(env)) {
-> > +        set_resetvec(env, DEFAULT_RSTVEC);
+> > +static void ibex_plic_update(IbexPlicState *s)
+> > +{
+> > +    CPUState *cpu;
+> > +    int level, i;
+> > +
+> > +    for (i =3D 0; i < s->num_cpus; i++) {
+> > +        cpu =3D qemu_get_cpu(i);
+> > +
+> > +        if (!cpu) {
+> > +            continue;
+> > +        }
+> > +
+> > +        level =3D ibex_plic_irqs_pending(s, 0);
+> > +
+> > +        riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MEIP, BOOL_TO_MASK(le=
+vel));
 > > +    }
-> >
-> >       if (cpu->cfg.mmu) {
-> >           set_feature(env, RISCV_FEATURE_MMU);
-> >
+> > +}
+> > +
+> > +static void ibex_plic_reset(DeviceState *dev)
+> > +{
+> > +    IbexPlicState *s =3D IBEX_PLIC(dev);
+> > +
+> > +    s->threshold =3D 0x00000000;
+> > +    s->claim =3D 0x00000000;
 >
+> I haven't check the datasheet reset values, for the rest:
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+
+Thanks for reviewing these :)
+
+Alistair
 
