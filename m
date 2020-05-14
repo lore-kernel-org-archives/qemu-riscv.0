@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jYw6O-0004WY-MR
-	for mharc-qemu-riscv@gnu.org; Wed, 13 May 2020 14:27:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38858)
+	id 1jZFs8-0004Bz-Hw
+	for mharc-qemu-riscv@gnu.org; Thu, 14 May 2020 11:34:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52506)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jYw6M-0004W2-Hx; Wed, 13 May 2020 14:27:30 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:37239)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jZFs5-0004BK-4w; Thu, 14 May 2020 11:34:05 -0400
+Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:35762)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jYw6L-0004BU-Id; Wed, 13 May 2020 14:27:30 -0400
-Received: by mail-io1-xd42.google.com with SMTP id u11so116639iow.4;
- Wed, 13 May 2020 11:27:28 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jZFs4-00039a-9w; Thu, 14 May 2020 11:34:04 -0400
+Received: by mail-yb1-xb41.google.com with SMTP id o134so1765727ybg.2;
+ Thu, 14 May 2020 08:34:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=nR7TRlGZlczMjxePx9kVhUNZSjisCs5/kvp3RzWY+WE=;
- b=qGr3W9iHugFcL+p3nQS4eGtU/ql5PNU1rdIE32oyCofdJYuAAXPcxXsUExIMFBGunn
- uniavoczhTnEg75am9NmwSMKHh11UU7LGkOPpndv9PnD06Kz7QCgYz9RmCMPxQ7YaIp/
- h6AtPj9ABdg6VpGEkFGD4fsyuuIgxMdw2mlLNaHWMyBO8AJPewC+U8H7CYZXmWuMeOsV
- JkOcxnfV38HQajpygwl3t0VmJ8oALAJoivlwBxJr8VV53SwiKLmi9LbuC1MB4oawl3yD
- JoPyO9iJMznaj6we9FmLUeECCEXt8CuWBaiT5vkV1kMhb2TLS9aYNmBIS+X2BOT13F2/
- NNIw==
+ :cc; bh=TEDrXDf+KI3VG7KocfZ6F0NF5hM/HBsEz+ZxvfQYBoE=;
+ b=gPBof4Itgj6H2zc6/5e0I4l2ZEeI0GrLRQPOYhcMLGbGBJYze3GUG2DMmsidnLToTA
+ ONdqPV6rWHUdB8aemVEmpDpFcy01Gsq2LQbLov7VX4sX+M9W2aXcwlQ/a5flxe9YQ+eB
+ 65CUeD3txQu3kbITQB2qJPxICG5pO7+dan95MgHmsw3DvJF41gnRnFPrmvu8sO5wUKLs
+ 1Pjwpm5sLhIR0b9XsqfmlhMtyZWSsHClMzS06KYAy8Q/x270CswlM4GVkE+0PlSiu9zW
+ rEgTXZnIWoFrGWOJsMmQZaBLZyVBnDrO/oEghJZHoce8eyQRNqy0baKGh5wlbA4XHi1b
+ 7y7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=nR7TRlGZlczMjxePx9kVhUNZSjisCs5/kvp3RzWY+WE=;
- b=NHrBc8fpEWetB0WCLzGZamTGVFSHFALiPbhNdagetZyvzbplYPUaSuXkB+6CFObyYe
- UvCMwh1bK6sAMYxWQLciVJqoXfiNm9gOqWSReLpxlpVuVZhh53CHcX2fOCai3FmhZI0H
- jdjxd3fGXvnOhqVHSwG3AZLTFohfbXkYh1qBdbcbTfP7kch/XU4KQ8FeewLC5Jm/iJ/j
- bkhhI4BFMBxqutyLFau4j2513+/zy4YBJCYSXllLYoUpx/95A+rQeUX/MHRaBbQIxJEv
- fnRNCkLT4RbdJcZWUQqBgip4IjizEYXbHDQO9Q1PszAv2uMdIV/j709GO2trXlXGHbDt
- hV4g==
-X-Gm-Message-State: AGi0PuY0/1BLu7a4NGVEqB4HPpUzqR5IbDyZDDPPti7cZxIhLX9CWs/t
- FEEdGt46UQ9QaQGRYzdFkASiWgJVgNr1LOmPufg=
-X-Google-Smtp-Source: APiQypKVjBczwQNkp2UndcF5QIZapeVDIunMaBx8KEupdg3trjJkKbjzibAYd6ksv2gwkoWaHO7xor/Zsw+p01ttEz8=
-X-Received: by 2002:a02:a887:: with SMTP id l7mr786093jam.91.1589394447638;
- Wed, 13 May 2020 11:27:27 -0700 (PDT)
+ bh=TEDrXDf+KI3VG7KocfZ6F0NF5hM/HBsEz+ZxvfQYBoE=;
+ b=ktFw1xXUZDsgPPa4D1g1X1sFDvIk9DXuiphT5+OOP8TNmNsPw+vBQkP+Y2Zoe0Pxp9
+ x95Y7X+3ARRAwHS1adgQbUUMLVfciA0i54R+82WPr7IqxQBrPeJEufv4JuHYD9j86P1B
+ 9WE/FM+FJOM0HVQa+H38sMwZ+OGxkunSwD1Op4qQ5E5lX6c61szZ/BBzFX5Ze82PW9nV
+ CzWtsmdwPVylAcRRW/TxMbrLFj9YN1CzfG/Cm8R0t9oTaz5GbOS8txxt3/8gUdGd2mSq
+ xKJn2y6Ay9vkhCC0aYr+u6tqNbY72IgJ6pb3qL3rqG6G5gri+HVSABxs7UaHEnHmlwX5
+ wYNg==
+X-Gm-Message-State: AOAM530W/H42x0oO56P0wjV0NBPgbTEo4FziT/qV5T4hoGN6kAXdN9Aj
+ azQMdS0iiQabRjGco1TkWUkT+Ft24sxQ6+ndFNk=
+X-Google-Smtp-Source: ABdhPJx65JV9LlwBajQK50ZV9ZvYTClo5+TCL9FQNfBx53dHtV7GBU2mc4GXPEPJH20acibFo97yWeC5HOajiQPBgJY=
+X-Received: by 2002:a25:d2d8:: with SMTP id j207mr7569586ybg.517.1589470442665; 
+ Thu, 14 May 2020 08:34:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1588878756.git.alistair.francis@wdc.com>
-In-Reply-To: <cover.1588878756.git.alistair.francis@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 13 May 2020 11:18:41 -0700
-Message-ID: <CAKmqyKNaVRi3u6qe4Obui5NktjemZYHFEbNz6PmsYk+Kf=hOfw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/9] RISC-V Add the OpenTitan Machine
-To: Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+ <dc10c6b220154fd448630ef7a790e5d7e59ab45a.1588878756.git.alistair.francis@wdc.com>
+In-Reply-To: <dc10c6b220154fd448630ef7a790e5d7e59ab45a.1588878756.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 14 May 2020 23:33:51 +0800
+Message-ID: <CAEUhbmVMu4hov1WxafL9+8kET_Q_Q2hMi8JTnbKE78EhU4kaHQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/9] riscv/boot: Add a missing header include
+To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
@@ -73,80 +72,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2020 18:27:30 -0000
+X-List-Received-Date: Thu, 14 May 2020 15:34:05 -0000
 
-On Thu, May 7, 2020 at 12:21 PM Alistair Francis
+On Fri, May 8, 2020 at 3:24 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
-> OpenTitan is an open source silicon Root of Trust (RoT) project. This
-> series adds initial support for the OpenTitan machine to QEMU.
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  include/hw/riscv/boot.h | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> This series add the Ibex CPU to the QEMU RISC-V target. It then adds the
-> OpenTitan machine, the Ibex UART and the Ibex PLIC.
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index 474a940ad5..9daa98da08 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -21,6 +21,7 @@
+>  #define RISCV_BOOT_H
 >
-> The UART has been tested sending and receiving data.
->
-> With this series QEMU can boot the OpenTitan ROM, Tock OS and a Tock
-> userspace app.
->
-> The Ibex PLIC is similar to the RISC-V PLIC (and is based on the QEMU
-> implementation) with some differences. The hope is that the Ibex PLIC
-> will converge to follow the RISC-V spec. As that happens I want to
-> update the QEMU Ibex PLIC and hopefully eventually replace the current
-> PLIC as the implementation is a little overlay complex.
->
-> For more details on OpenTitan, see here: https://docs.opentitan.org/
+>  #include "exec/cpu-defs.h"
+> +#include "hw/loader.h"
 
-Ping!
-
-+ Some people who might be able to review this series (or at least ack).
-
-I'll give it another week and if I don't hear anything I'll merge it.
-
-Alistair
+Why is this needed? Currently this does not break build.
 
 >
-> v2:
->  - Rebase on master
->  - Get uart receive working
->
-> Alistair Francis (9):
->   riscv/boot: Add a missing header include
->   target/riscv: Don't overwrite the reset vector
->   target/riscv: Add the lowRISC Ibex CPU
->   riscv: Initial commit of OpenTitan machine
->   hw/char: Initial commit of Ibex UART
->   hw/intc: Initial commit of lowRISC Ibex PLIC
->   riscv/opentitan: Connect the PLIC device
->   riscv/opentitan: Connect the UART device
->   target/riscv: Use a smaller guess size for no-MMU PMP
->
->  MAINTAINERS                         |  14 +
->  default-configs/riscv32-softmmu.mak |   1 +
->  default-configs/riscv64-softmmu.mak |  11 +-
->  hw/char/Makefile.objs               |   1 +
->  hw/char/ibex_uart.c                 | 490 ++++++++++++++++++++++++++++
->  hw/intc/Makefile.objs               |   1 +
->  hw/intc/ibex_plic.c                 | 261 +++++++++++++++
->  hw/riscv/Kconfig                    |   9 +
->  hw/riscv/Makefile.objs              |   1 +
->  hw/riscv/opentitan.c                | 204 ++++++++++++
->  include/hw/char/ibex_uart.h         | 110 +++++++
->  include/hw/intc/ibex_plic.h         |  63 ++++
->  include/hw/riscv/boot.h             |   1 +
->  include/hw/riscv/opentitan.h        |  79 +++++
->  target/riscv/cpu.c                  |  30 +-
->  target/riscv/cpu.h                  |   1 +
->  target/riscv/pmp.c                  |  19 +-
->  17 files changed, 1281 insertions(+), 15 deletions(-)
->  create mode 100644 hw/char/ibex_uart.c
->  create mode 100644 hw/intc/ibex_plic.c
->  create mode 100644 hw/riscv/opentitan.c
->  create mode 100644 include/hw/char/ibex_uart.h
->  create mode 100644 include/hw/intc/ibex_plic.h
->  create mode 100644 include/hw/riscv/opentitan.h
->
-> --
-> 2.26.2
->
+>  void riscv_find_and_load_firmware(MachineState *machine,
+>                                    const char *default_machine_firmware,
+
+Regards,
+Bin
 
