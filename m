@@ -1,54 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jZdoq-0007C2-Cp
+	id 1jZdoq-0007Ca-Iu
 	for mharc-qemu-riscv@gnu.org; Fri, 15 May 2020 13:08:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42774)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42778)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jZdoo-0007AA-Cf
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jZdoo-0007AI-Iq
  for qemu-riscv@nongnu.org; Fri, 15 May 2020 13:08:18 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:22606
- helo=us-smtp-1.mimecast.com)
+Received: from us-smtp-2.mimecast.com ([205.139.110.61]:54352
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jZdom-0002se-P3
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jZdom-0002sh-Uw
  for qemu-riscv@nongnu.org; Fri, 15 May 2020 13:08:18 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1589562495;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=26OkB+i/ad5joz/5qpHRwJv+k150oIYD4QiuOyitRcA=;
- b=E58pYU58QKzIjktgFcJcgcuRHByJ3jh53jQs6ZoUwUNW97BoOtF7BleLugEX6/vxsSyF7K
- LB3NIW4VshK2gif0AZGsqCxwTZNPXgK4TM/f1p5hXFdIk7jC8p3TC3xFmvL2xbjDbKfVSg
- 69oCMZjpv1tjW3oOKsYC9AMX15zNLD4=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-82-bJCxMX2XPQe5ddfiuOLOzw-1; Fri, 15 May 2020 13:08:08 -0400
-X-MC-Unique: bJCxMX2XPQe5ddfiuOLOzw-1
-Received: by mail-wr1-f72.google.com with SMTP id i9so1496316wrx.0
- for <qemu-riscv@nongnu.org>; Fri, 15 May 2020 10:08:08 -0700 (PDT)
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1LWNrIr5sPkmnUIPfYOIlIROnAtcVQlofpnnefmhg9k=;
+ b=RFyCVLbqlZkQeDOd3tc5rnSt1k486o35iBuDbBj+LBwdCRF7n4KFesisEiAClrSjclkX8D
+ oKbR8bGFBTLG0jz9+gkKMxBV4L+jecYS8wZlIUEZHWtIj0Dzar91/TFHrNdVOybrgqKktb
+ iVfKGhIIAhQ2J3eRIS7SNMn/SExwIV8=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-132-7WnrLL4GNfqUdXpW43DrtA-1; Fri, 15 May 2020 13:08:14 -0400
+X-MC-Unique: 7WnrLL4GNfqUdXpW43DrtA-1
+Received: by mail-wm1-f72.google.com with SMTP id a67so1465594wme.6
+ for <qemu-riscv@nongnu.org>; Fri, 15 May 2020 10:08:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=26OkB+i/ad5joz/5qpHRwJv+k150oIYD4QiuOyitRcA=;
- b=NYvLTFd/Y6P1l/a/y2et/pnR02IIXoy+BPhPzz0cDTF4wqRj2c8QLoZt4ygOukJRIG
- XdR2PJdScGFkGEgul669Gj7XoOuwrSAZrj9MlOK9hmwmYJuvAWSWhyX2laZjA/1UsLT9
- F6AZ0jELqZaS65BGqGC7mvPCbpAbe7fPK+B4MOslftNaKpu32/k9chDTgqZ/IWf1cf7W
- HIk3LEmMyuTDUkbgQwFNL/LwPKvuFid4iQ7K0dQXJPCEiOt7esVJ8Ka7csh08/2+bk/X
- VHcQdjGHzUveubx8A4lFQ9Q2n8BnKlCX6NKbe6SwiDT89CIE8f08aRIq12sKd5CUFyT6
- dySg==
-X-Gm-Message-State: AOAM531Wx/j2A4rKbS3Jpjt6D5hbzz/emTfaxwbShMCY6mghsqTOSb3M
- T4ooi4Xh7Us5Duqgj0UwpaH5sGBPHQEQDNFlqQHGkzUl9/arAJr2Th0hu187rkgm0I5NMiFWRXL
- nSFYgDUzu+xCQEBo=
-X-Received: by 2002:adf:f3c5:: with SMTP id g5mr5184236wrp.163.1589562487179; 
- Fri, 15 May 2020 10:08:07 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxmryfUMk6ADmORi3lXVAD0PX080iwYHmI+TSMJgDPYWDKRZqTqv4yQhjfdJ0nFKuALcQFsCw==
-X-Received: by 2002:adf:f3c5:: with SMTP id g5mr5184202wrp.163.1589562486916; 
- Fri, 15 May 2020 10:08:06 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=1LWNrIr5sPkmnUIPfYOIlIROnAtcVQlofpnnefmhg9k=;
+ b=hL2s3DczSTwP7e6JhXIqoNoz0nIb7RTOY0slC2mNffCsu45+v/OdQUk/51qt5IVfrm
+ xtkOfqOAtHk/bGZj58+YEtFUkSDYz5N0BDgL+RZdKbs786H07XHatpo0Vgn2mMqadrEv
+ dA/PMsTDJUpWgEo2ieJHv0dQ9YoM16HRvyDh581kofVkvC4W1Y4KLSMdIXW3AZwHG1TX
+ rSDAUnnEgUFdzJEV9s66WXvSKJ2NVfGb1P0YDYTfjcMLIXQBXM4a1PV7pWr1kMI/K/fA
+ 50WzbTRMiiNJvkBqdMe5CgqHGXQbeKX1CfMxPjkHEl7kCVo2NNdkGuHky3/WDRSAmyaL
+ /jag==
+X-Gm-Message-State: AOAM530ycyfPyWPR5g5H/SjpOpkegmO5+LLVPAyXKJdvzc3vsArPkKNO
+ 0kG9ocfqA6goEW+JQGtRMa/lX3ZDAUKkXLoN0FoK9GhEg2avGImEIxBBZ8LEA5U8ti8Rn3SVY7S
+ ptyDNasH8S48ubrA=
+X-Received: by 2002:adf:94c2:: with SMTP id 60mr5228999wrr.366.1589562492974; 
+ Fri, 15 May 2020 10:08:12 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwQhEuJujjCxs1d9TdgDo4NpobJlCQ7OImNf+tSww2HIeI5aBGI6yByw8T+d0XBO6uWfNsFqA==
+X-Received: by 2002:adf:94c2:: with SMTP id 60mr5228966wrr.366.1589562492758; 
+ Fri, 15 May 2020 10:08:12 -0700 (PDT)
 Received: from x1w.redhat.com (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id g24sm4763681wrb.35.2020.05.15.10.08.05
+ by smtp.gmail.com with ESMTPSA id e22sm4742390wrc.41.2020.05.15.10.08.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2020 10:08:06 -0700 (PDT)
+ Fri, 15 May 2020 10:08:12 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Max Filippov <jcmvbkbc@gmail.com>,
@@ -65,21 +66,23 @@ Cc: Max Filippov <jcmvbkbc@gmail.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Marek Vasut <marex@denx.de>, Michael Walle <michael@walle.cc>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH v2 00/10] accel: Allow targets to use Kconfig,
- disable semihosting by default
-Date: Fri, 15 May 2020 19:07:54 +0200
-Message-Id: <20200515170804.5707-1-philmd@redhat.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH v2 01/10] MAINTAINERS: Fix KVM path expansion glob
+Date: Fri, 15 May 2020 19:07:55 +0200
+Message-Id: <20200515170804.5707-2-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
+In-Reply-To: <20200515170804.5707-1-philmd@redhat.com>
+References: <20200515170804.5707-1-philmd@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8;
 	text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=205.139.110.120; envelope-from=philmd@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/14 23:27:07
+Received-SPF: pass client-ip=205.139.110.61; envelope-from=philmd@redhat.com;
+ helo=us-smtp-delivery-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/15 00:07:24
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -102,87 +105,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 15 May 2020 17:08:18 -0000
 
-This series include generic patches I took of the KVM/ARM
-specific series which will follow.
+The KVM files has been moved from target-ARCH to the target/ARCH/
+folder in commit fcf5ef2a. Fix the pathname expansion.
 
-- List orphan accelerators in MAINTAINERS
-- Add accel/Kconfig
-- Allow targets to use their how Kconfig
-- Enforce semihosting on architecture where required,
-  disable it elsewhere
+Fixes: fcf5ef2a ("Move target-* CPU file into a target/ folder")
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+---
+ MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Since v1:
-https://www.mail-archive.com/qemu-devel@nongnu.org/msg689024.html
-- Drop HVF MAINTAINERS patch (merged elsewhere)
-- Kconfig-select SEMIHOSTING (bonzini)
-- Drop user-mode selection patches
-- consider m68k/nios2/xtensa/riscv (pm215)
-- reword Kconfig SEMIHOSTING description (pm215)
-- reset some of rth R-b tags
-
-Previous RFC for semihosting posted earlier:
-https://www.mail-archive.com/qemu-devel@nongnu.org/msg631218.html
-
-$ git backport-diff -u v1 -r v2
-Key:
-[----] : patches are identical
-[####] : number of functional differences between upstream/downstream patch
-[down] : patch is downstream-only
-The flags [FC] indicate (F)unctional and (C)ontextual differences, respectively
-
-001/10:[----] [--] 'MAINTAINERS: Fix KVM path expansion glob'
-002/10:[----] [-C] 'MAINTAINERS: Add an 'overall' entry for accelerators'
-003/10:[----] [-C] 'MAINTAINERS: Add an entry for the HAX accelerator'
-004/10:[down] 'accel/tcg: Add stub for probe_access()'
-005/10:[down] 'Makefile: Remove dangerous EOL trailing backslash'
-006/10:[0003] [FC] 'Makefile: Write MINIKCONF variables as one entry per line'
-007/10:[----] [--] 'accel/Kconfig: Extract accel selectors into their own config'
-008/10:[----] [--] 'accel/Kconfig: Add the TCG selector'
-009/10:[down] 'Makefile: Allow target-specific optional Kconfig'
-010/10:[0028] [FC] 'hw/semihosting: Make the feature depend of TCG, and allow to disable it'
-
-Philippe Mathieu-Daudé (10):
-  MAINTAINERS: Fix KVM path expansion glob
-  MAINTAINERS: Add an 'overall' entry for accelerators
-  MAINTAINERS: Add an entry for the HAX accelerator
-  accel/tcg: Add stub for probe_access()
-  Makefile: Remove dangerous EOL trailing backslash
-  Makefile: Write MINIKCONF variables as one entry per line
-  accel/Kconfig: Extract accel selectors into their own config
-  accel/Kconfig: Add the TCG selector
-  Makefile: Allow target-specific optional Kconfig
-  hw/semihosting: Make the feature depend of TCG, and allow to disable
-    it
-
- Makefile                                | 15 +++++++++++----
- default-configs/arm-softmmu.mak         |  1 -
- default-configs/lm32-softmmu.mak        |  2 --
- default-configs/m68k-softmmu.mak        |  2 --
- default-configs/mips-softmmu-common.mak |  3 ---
- default-configs/nios2-softmmu.mak       |  2 --
- default-configs/xtensa-softmmu.mak      |  2 --
- accel/stubs/tcg-stub.c                  |  7 +++++++
- Kconfig.host                            |  7 -------
- MAINTAINERS                             | 17 ++++++++++++++++-
- accel/Kconfig                           |  9 +++++++++
- hw/semihosting/Kconfig                  |  4 +++-
- target/arm/Kconfig                      |  2 ++
- target/lm32/Kconfig                     |  2 ++
- target/m68k/Kconfig                     |  2 ++
- target/mips/Kconfig                     |  2 ++
- target/nios2/Kconfig                    |  2 ++
- target/riscv/Kconfig                    |  2 ++
- target/xtensa/Kconfig                   |  2 ++
- 19 files changed, 60 insertions(+), 25 deletions(-)
- create mode 100644 accel/Kconfig
- create mode 100644 target/arm/Kconfig
- create mode 100644 target/lm32/Kconfig
- create mode 100644 target/m68k/Kconfig
- create mode 100644 target/mips/Kconfig
- create mode 100644 target/nios2/Kconfig
- create mode 100644 target/riscv/Kconfig
- create mode 100644 target/xtensa/Kconfig
-
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 47ef3139e6..fd88a3de49 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -361,7 +361,7 @@ Overall KVM CPUs
+ M: Paolo Bonzini <pbonzini@redhat.com>
+ L: kvm@vger.kernel.org
+ S: Supported
+-F: */kvm.*
++F: */*/kvm*
+ F: accel/kvm/
+ F: accel/stubs/kvm-stub.c
+ F: include/hw/kvm/
 -- 
 2.21.3
 
