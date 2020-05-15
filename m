@@ -1,68 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jZM1Q-0005PJ-GD
-	for mharc-qemu-riscv@gnu.org; Thu, 14 May 2020 18:08:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39008)
+	id 1jZSMk-0008Uz-CK
+	for mharc-qemu-riscv@gnu.org; Fri, 15 May 2020 00:54:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44294)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jZM1O-0005ON-SL; Thu, 14 May 2020 18:08:06 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:37817)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jZSMi-0008Tw-Jz; Fri, 15 May 2020 00:54:32 -0400
+Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:44370)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jZM1N-0003md-Qh; Thu, 14 May 2020 18:08:06 -0400
-Received: by mail-il1-x142.google.com with SMTP id n11so459715ilj.4;
- Thu, 14 May 2020 15:08:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jZSMf-0003uT-S7; Fri, 15 May 2020 00:54:32 -0400
+Received: by mail-yb1-xb44.google.com with SMTP id o8so468580ybc.11;
+ Thu, 14 May 2020 21:54:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=iZeAqpbW47Gesb2jwakRkz0J2mHYBvwMNg2UWjEe/oU=;
- b=ep02vZlRADUkzoBno4CmhJhLqmSITM7v7eQq6s/I2O8pMwZ1mp/7K3zd/JwHIJvtHr
- Ur3Q8mMl4H+AJWklZYXQHrBvXeJK+WShAj3RCs3oMYZxOHT1ZHrMll5Yp52qmmUSTB0l
- zZeIrr3sGWzvAygT6l+pHZ557tuALYbQXDSGVMfkYdAhfmAXIA6FKQDRzJs/KVgCfLjO
- x2CmILYvfb/byEPqRaQtlreARrN8bk0U/foqj/t4vdqTgmBkRs0tUdnOblR/QezkjSCu
- lXNVoMAgm5DZ6lTdbqmmNbYZ5R4SsZx5cX/PIufjRbG0zKaKFozzygGBCbTqNW1cMgcb
- 2+8A==
+ bh=SD7o7U8HqfVKgwLHVAmgbyTHSbcH1rfyg+2OL0gKPBA=;
+ b=sQUf3pKUotkzVJ+JQeNNazmLENU4LSdEHCK8yNfL/fk5vVz/RmB06+X38yvmW9Fsx4
+ zAIe30XYx0zTlFhOQiNHfYNArLqrn+vO9UFf6JXzPvDynifl+lFNtX0DbiTuHn4v5sUp
+ dHhnIINc0XfVkEXRfIHe+VoCBdeFAfcbHvExMD87awOt1rmCIvvbWsTMpDKFO0kQv6+F
+ +TxIQmeWLlqYmN/HjqPzeNSvAPZoiLzCRhqvT/XHD3ZSDBf32+dl7NBVuSxLrjghLGIF
+ EhS/KLpAcjxAspJfTwB0sr24KFNeA7bx4CxRT3KiK5kaWax3LC1YS2Uqmy4BzTdQRJ9A
+ yUNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=iZeAqpbW47Gesb2jwakRkz0J2mHYBvwMNg2UWjEe/oU=;
- b=O7TexjW09gF0nok45B+WFz9asEVh/+TVr/dDUveGoO6xDJeWE4l+/R26nf5sNWSDI+
- EJNu742nxj+BHXWAKdG2FeS/dYc68KSHPlMv2Q8TFoWxozw0v6v1bWYPX/bwxxhGahex
- V8yh3LfYwljxDh3wMyYMChBIuBFk6AWmn80JDGZBx3VCieGUoRr7yG4zjufn8oYvm9h+
- ++V03BE6GZ4auupA/BEQNv2QXm6uZPNOeuGY8OqU21cijldQSWG5jUd+6qn7CbvERbZt
- 4BkR+hb9aIT9+7SnIy3QcPa5IhckqStCY9e0eXwDj9VJD9rHWX0avWkKdiBj+nh0NZQl
- KcaA==
-X-Gm-Message-State: AOAM533CvmbbSgI7b4C/uene0ynu/5lpLhjFM2VVwiSxkVCHry/ll66k
- meeEF+prDof3BZOJItB1oOfjRrdCaO364shrAqI=
-X-Google-Smtp-Source: ABdhPJzFfbmPTzpoKPeyztB+cRThAcoe0mz/JGSOnBjuPrq8kE1kSe9yY3uabnklpv66RzwAotNG+lmPOGQJQE69gYg=
-X-Received: by 2002:a92:d0c6:: with SMTP id y6mr340672ila.227.1589494084046;
- Thu, 14 May 2020 15:08:04 -0700 (PDT)
+ bh=SD7o7U8HqfVKgwLHVAmgbyTHSbcH1rfyg+2OL0gKPBA=;
+ b=lkVhpzbsy00jdI2JIJ+ZmVZBf3CKL2Tjxia7qj8trijTH+7c958G5RX2TpLSNS12Ro
+ uye9HpVCUYzLcw4uRpN+lF/zKCJrCRaMQx3QLjwZzLnJE11T6CNxx4DXT4gjVnFPAGnB
+ 2gTZOCdJmz7Klx+34r/B0mgb0tYofAeR2111Cn6BC1sF3CQnZX+QAPK2IQXPvVOQImFA
+ n6an2eRQMVP7m6+osEYoBPkCWeSN+yPG3hV7aImy0ZR5BGf3OprXQgGI8Dq1w07yVK6c
+ LlwutsehGiEafiC29UPIaON3ZE7OirpkYIVneC7UCL+sBK4gsl4vVzX/TVLTM+f8WB76
+ 38aw==
+X-Gm-Message-State: AOAM5315kTXZ4mf4rYisfuPcIR4bfGtoRM209qdoAQi51WL2DkKhT41Z
+ OWWIFeWa45TY0YcLR38b1J69Q5XDo/B8oHPK4bQ=
+X-Google-Smtp-Source: ABdhPJy4FrMTgUZOgVi22K48SVlfsJCdMVN1l4UcEO0YVyAkxR9LU4zUgyoByXgd643sRevx6lg+o+pHpGWQxzynsR4=
+X-Received: by 2002:a25:c68e:: with SMTP id k136mr589428ybf.517.1589518467329; 
+ Thu, 14 May 2020 21:54:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1588878756.git.alistair.francis@wdc.com>
- <11b8f3cd28fd52b10caefe21a7b70444b85792f8.1588878756.git.alistair.francis@wdc.com>
- <44285916-1542-5ba3-eb39-48f9728c1e8d@redhat.com>
-In-Reply-To: <44285916-1542-5ba3-eb39-48f9728c1e8d@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 14 May 2020 14:59:16 -0700
-Message-ID: <CAKmqyKPuv=jFOfO-Vgub1x1ddoLkmkZTgd2ZbSxNKMv7ySMBFQ@mail.gmail.com>
-Subject: Re: [PATCH v2 5/9] hw/char: Initial commit of Ibex UART
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+ <44d0486b0fd156a756af544866dd7d19609b1aa6.1588878756.git.alistair.francis@wdc.com>
+ <01168f32-c21c-b9fd-cb9c-06511e28bd20@redhat.com>
+ <CAKmqyKMwdBmZ8kdi0xp0kJ1sPrWSGYZ304ZY8G+4xK9yYQ3VKg@mail.gmail.com>
+In-Reply-To: <CAKmqyKMwdBmZ8kdi0xp0kJ1sPrWSGYZ304ZY8G+4xK9yYQ3VKg@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 15 May 2020 12:54:14 +0800
+Message-ID: <CAEUhbmWWdDQfj8XBkWzDXkNdvcvEic8K23NuCpNyQdfxM4TxOg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/9] target/riscv: Don't overwrite the reset vector
+To: Alistair Francis <alistair23@gmail.com>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b44;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb44.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
@@ -77,154 +77,150 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2020 22:08:07 -0000
+X-List-Received-Date: Fri, 15 May 2020 04:54:32 -0000
 
-On Thu, May 14, 2020 at 11:00 AM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
+On Fri, May 15, 2020 at 5:51 AM Alistair Francis <alistair23@gmail.com> wro=
+te:
 >
-> Hi Alistair,
+> On Thu, May 14, 2020 at 10:54 AM Philippe Mathieu-Daud=C3=A9
+> <philmd@redhat.com> wrote:
+> >
+> > On 5/7/20 9:13 PM, Alistair Francis wrote:
+> > > If the reset vector is set in the init function don't set it again in
+> > > realise.
+> >
+> > typo "realize".
 >
-> On 5/7/20 9:13 PM, Alistair Francis wrote:
-> > This is the initial commit of the Ibex UART device. Serial TX is
-> > working, while RX has been implemeneted but untested.
-> >
-> > This is based on the documentation from:
-> > https://docs.opentitan.org/hw/ip/uart/doc/
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >   MAINTAINERS                 |   2 +
-> >   hw/char/Makefile.objs       |   1 +
-> >   hw/char/ibex_uart.c         | 490 +++++++++++++++++++++++++++++++++++=
-+
-> >   hw/riscv/Kconfig            |   4 +
-> >   include/hw/char/ibex_uart.h | 110 ++++++++
-> >   5 files changed, 607 insertions(+)
-> >   create mode 100644 hw/char/ibex_uart.c
-> >   create mode 100644 include/hw/char/ibex_uart.h
-> >
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index c3d77f0861..d3d47564ce 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -1236,7 +1236,9 @@ M: Alistair Francis <Alistair.Francis@wdc.com>
-> >   L: qemu-riscv@nongnu.org
-> >   S: Supported
-> >   F: hw/riscv/opentitan.c
-> > +F: hw/char/ibex_uart.c
-> >   F: include/hw/riscv/opentitan.h
-> > +F: include/hw/char/ibex_uart.h
-> >
-> >
-> >   SH4 Machines
-> > diff --git a/hw/char/Makefile.objs b/hw/char/Makefile.objs
-> > index 9e9a6c1aff..633996be5b 100644
-> > --- a/hw/char/Makefile.objs
-> > +++ b/hw/char/Makefile.objs
-> > @@ -12,6 +12,7 @@ common-obj-$(CONFIG_VIRTIO_SERIAL) +=3D virtio-consol=
-e.o
-> >   common-obj-$(CONFIG_XILINX) +=3D xilinx_uartlite.o
-> >   common-obj-$(CONFIG_XEN) +=3D xen_console.o
-> >   common-obj-$(CONFIG_CADENCE) +=3D cadence_uart.o
-> > +common-obj-$(CONFIG_IBEX) +=3D ibex_uart.o
-> >
-> >   common-obj-$(CONFIG_EXYNOS4) +=3D exynos4210_uart.o
-> >   common-obj-$(CONFIG_COLDFIRE) +=3D mcf_uart.o
-> > diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
-> > new file mode 100644
-> > index 0000000000..f6215ae23d
-> > --- /dev/null
-> > +++ b/hw/char/ibex_uart.c
-> > @@ -0,0 +1,490 @@
-> > +/*
-> > + * QEMU lowRISC Ibex UART device
-> > + *
-> > + * Copyright (c) 2020 Western Digital
-> > + *
-> > + * For details check the documentation here:
-> > + *    https://docs.opentitan.org/hw/ip/uart/doc/
-> > + *
-> > + * Permission is hereby granted, free of charge, to any person obtaini=
-ng a copy
-> > + * of this software and associated documentation files (the "Software"=
-), to deal
-> > + * in the Software without restriction, including without limitation t=
-he rights
-> > + * to use, copy, modify, merge, publish, distribute, sublicense, and/o=
-r sell
-> > + * copies of the Software, and to permit persons to whom the Software =
-is
-> > + * furnished to do so, subject to the following conditions:
-> > + *
-> > + * The above copyright notice and this permission notice shall be incl=
-uded in
-> > + * all copies or substantial portions of the Software.
-> > + *
-> > + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXP=
-RESS OR
-> > + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABI=
-LITY,
-> > + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT S=
-HALL
-> > + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES O=
-R OTHER
-> > + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARI=
-SING FROM,
-> > + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI=
-NGS IN
-> > + * THE SOFTWARE.
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +#include "hw/char/ibex_uart.h"
-> > +#include "hw/irq.h"
-> > +#include "hw/qdev-properties.h"
-> > +#include "migration/vmstate.h"
-> > +#include "qemu/log.h"
-> > +#include "qemu/module.h"
-> > +
-> > +static void ibex_uart_update_irqs(IbexUartState *s)
-> > +{
-> > +    if (s->uart_intr_state & s->uart_intr_enable & INTR_STATE_TX_WATER=
-MARK) {
-> > +        qemu_set_irq(s->tx_watermark, 1);
-> > +    } else {
-> > +        qemu_set_irq(s->tx_watermark, 0);
-> > +    }
-> > +
-> > +    if (s->uart_intr_state & s->uart_intr_enable & INTR_STATE_RX_WATER=
-MARK) {
-> > +        qemu_set_irq(s->rx_watermark, 1);
-> > +    } else {
-> > +        qemu_set_irq(s->rx_watermark, 0);
+> It's not a typo, just correct English :)
 >
-> I wonder if having both bit separate can't lead to odd pulse behavior
-> (this function should have the same result if you invert the RX/TX
-> processing here). I'd be safer using a local 'raise_watermark' boolean
-> variable, then call qemu_set_irq() once.
+> I have changed it.
+>
+> >
+> > >
+> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > > ---
+> > >   target/riscv/cpu.c | 20 +++++++++++---------
+> > >   1 file changed, 11 insertions(+), 9 deletions(-)
+> > >
+> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > index 059d71f2c7..8f837edf8d 100644
+> > > --- a/target/riscv/cpu.c
+> > > +++ b/target/riscv/cpu.c
+> > > @@ -111,6 +111,14 @@ static void set_feature(CPURISCVState *env, int =
+feature)
+> > >       env->features |=3D (1ULL << feature);
+> > >   }
+> > >
+> > > +static int get_resetvec(CPURISCVState *env)
+> > > +{
+> > > +#ifndef CONFIG_USER_ONLY
+> > > +    return env->resetvec;
+> > > +#endif
+> > > +    return 0;
+> >
+> > Don't you get an error about double return? Maybe use #else?
+>
+> Apparently not, I have changed it though.
+>
+> Alistair
+>
+> >
+> > > +}
+> > > +
+> > >   static void set_resetvec(CPURISCVState *env, int resetvec)
+> > >   {
+> > >   #ifndef CONFIG_USER_ONLY
+> > > @@ -123,7 +131,6 @@ static void riscv_any_cpu_init(Object *obj)
+> > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > >       set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVU)=
+;
+> > >       set_priv_version(env, PRIV_VERSION_1_11_0);
+> > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > >   }
+> > >
+> > >   #if defined(TARGET_RISCV32)
+> > > @@ -140,7 +147,6 @@ static void rv32gcsu_priv1_09_1_cpu_init(Object *=
+obj)
+> > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | =
+RVU);
+> > >       set_priv_version(env, PRIV_VERSION_1_09_1);
+> > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > >       set_feature(env, RISCV_FEATURE_MMU);
+> > >       set_feature(env, RISCV_FEATURE_PMP);
+> > >   }
+> > > @@ -150,7 +156,6 @@ static void rv32gcsu_priv1_10_0_cpu_init(Object *=
+obj)
+> > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | =
+RVU);
+> > >       set_priv_version(env, PRIV_VERSION_1_10_0);
+> > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > >       set_feature(env, RISCV_FEATURE_MMU);
+> > >       set_feature(env, RISCV_FEATURE_PMP);
+> > >   }
+> > > @@ -160,7 +165,6 @@ static void rv32imacu_nommu_cpu_init(Object *obj)
+> > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > >       set_misa(env, RV32 | RVI | RVM | RVA | RVC | RVU);
+> > >       set_priv_version(env, PRIV_VERSION_1_10_0);
+> > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > >       set_feature(env, RISCV_FEATURE_PMP);
+> > >   }
+> > >
+> > > @@ -169,7 +173,6 @@ static void rv32imafcu_nommu_cpu_init(Object *obj=
+)
+> > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVC | RVU);
+> > >       set_priv_version(env, PRIV_VERSION_1_10_0);
+> > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > >       set_feature(env, RISCV_FEATURE_PMP);
+> > >   }
+> > >
+> > > @@ -187,7 +190,6 @@ static void rv64gcsu_priv1_09_1_cpu_init(Object *=
+obj)
+> > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > >       set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | =
+RVU);
+> > >       set_priv_version(env, PRIV_VERSION_1_09_1);
+> > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > >       set_feature(env, RISCV_FEATURE_MMU);
+> > >       set_feature(env, RISCV_FEATURE_PMP);
+> > >   }
+> > > @@ -197,7 +199,6 @@ static void rv64gcsu_priv1_10_0_cpu_init(Object *=
+obj)
+> > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > >       set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | =
+RVU);
+> > >       set_priv_version(env, PRIV_VERSION_1_10_0);
+> > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > >       set_feature(env, RISCV_FEATURE_MMU);
+> > >       set_feature(env, RISCV_FEATURE_PMP);
+> > >   }
+> > > @@ -207,7 +208,6 @@ static void rv64imacu_nommu_cpu_init(Object *obj)
+> > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > >       set_misa(env, RV64 | RVI | RVM | RVA | RVC | RVU);
+> > >       set_priv_version(env, PRIV_VERSION_1_10_0);
+> > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > >       set_feature(env, RISCV_FEATURE_PMP);
+> > >   }
+> > >
+> > > @@ -399,7 +399,9 @@ static void riscv_cpu_realize(DeviceState *dev, E=
+rror **errp)
+> > >       }
+> > >
+> > >       set_priv_version(env, priv_version);
+> > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > > +    if (!get_resetvec(env)) {
 
-I'm not sure what you mean. Are you worried that TX and RX will both
-go high/low at the same time?
+What if we have a RISC-V CPU whose reset vector is at address 0?
 
-Alistair
+> > > +        set_resetvec(env, DEFAULT_RSTVEC);
+> > > +    }
+> > >
+> > >       if (cpu->cfg.mmu) {
+> > >           set_feature(env, RISCV_FEATURE_MMU);
+> > >
 
->
-> > +    }
-> > +
-> > +    if (s->uart_intr_state & s->uart_intr_enable & INTR_STATE_TX_EMPTY=
-) {
-> > +        qemu_set_irq(s->tx_empty, 1);
-> > +    } else {
-> > +        qemu_set_irq(s->tx_empty, 0);
-> > +    }
-> > +
-> > +    if (s->uart_intr_state & s->uart_intr_enable & INTR_STATE_RX_OVERF=
-LOW) {
-> > +        qemu_set_irq(s->rx_overflow, 1);
-> > +    } else {
-> > +        qemu_set_irq(s->rx_overflow, 0);
-> > +    }
-> > +}
-> [...]
->
+Regards,
+Bin
 
