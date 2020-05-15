@@ -1,74 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jZUlU-0003DE-L3
-	for mharc-qemu-riscv@gnu.org; Fri, 15 May 2020 03:28:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41642)
+	id 1jZdoq-0007C2-Cp
+	for mharc-qemu-riscv@gnu.org; Fri, 15 May 2020 13:08:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42774)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jZUlR-0003BN-Uh
- for qemu-riscv@nongnu.org; Fri, 15 May 2020 03:28:13 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:56227
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jZdoo-0007AA-Cf
+ for qemu-riscv@nongnu.org; Fri, 15 May 2020 13:08:18 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:22606
  helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jZUlP-0001Ut-3W
- for qemu-riscv@nongnu.org; Fri, 15 May 2020 03:28:13 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jZdom-0002se-P3
+ for qemu-riscv@nongnu.org; Fri, 15 May 2020 13:08:18 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589527690;
+ s=mimecast20190719; t=1589562495;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qwGp930KlXtSfC5ixSvIYg1PEUrPhwOEn10FnTfe2JY=;
- b=WMfXCVztVhQ/Vz57Qba8dhe6OsisTGSOwcr/rJRKNQ+cqIUeSI4+3NWcVMj1SOoKxSbGYX
- Z7c5kXynGg/sapdcY3xbgt6TfwP8pY81lzDLRbyIZ68Z8bT5bWbkmsaD8EzXV4J3CrixAb
- MB7mvsiZzTr/Q+HuXu8nRK8JQ0KJ2FE=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-258-B91zFqJ5N8GsSy_Qk-iKYQ-1; Fri, 15 May 2020 03:28:08 -0400
-X-MC-Unique: B91zFqJ5N8GsSy_Qk-iKYQ-1
-Received: by mail-wr1-f70.google.com with SMTP id i9so750107wrx.0
- for <qemu-riscv@nongnu.org>; Fri, 15 May 2020 00:28:07 -0700 (PDT)
+ content-transfer-encoding:content-transfer-encoding;
+ bh=26OkB+i/ad5joz/5qpHRwJv+k150oIYD4QiuOyitRcA=;
+ b=E58pYU58QKzIjktgFcJcgcuRHByJ3jh53jQs6ZoUwUNW97BoOtF7BleLugEX6/vxsSyF7K
+ LB3NIW4VshK2gif0AZGsqCxwTZNPXgK4TM/f1p5hXFdIk7jC8p3TC3xFmvL2xbjDbKfVSg
+ 69oCMZjpv1tjW3oOKsYC9AMX15zNLD4=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-82-bJCxMX2XPQe5ddfiuOLOzw-1; Fri, 15 May 2020 13:08:08 -0400
+X-MC-Unique: bJCxMX2XPQe5ddfiuOLOzw-1
+Received: by mail-wr1-f72.google.com with SMTP id i9so1496316wrx.0
+ for <qemu-riscv@nongnu.org>; Fri, 15 May 2020 10:08:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=qwGp930KlXtSfC5ixSvIYg1PEUrPhwOEn10FnTfe2JY=;
- b=AgbZXBrusrLdTZzAyPmmn9XnzLoFsMI29773IE9hknYVfM660DwQahEHtYxoBBWoan
- Rbmiiv3nkvqmw/leVkS0tl2yjbU0Spas2NtrCPYNDxlHmcPxTQwxemHqj9VGR2iUz9SO
- 3N+AAo7xNH5QYwcUUQdPnXpWsM7I/zSGEBwMLkJkSNznzguHaUlfQkeAb3u6pRQ8fW8j
- N4fx6J0NDqOQfelR2nADZmtDJkz8OKuBPPwfekpubLomJMaUSLs0pSO3tPE3TerLz7H5
- 11+Zvdo75f1QoF/1HBmDk7adclVYVsyXfiNw+YCdai42f4Ev6rGAKL+b9BcH7Ni18hhA
- gvKA==
-X-Gm-Message-State: AOAM531wdV/NCHColFMVIhZc3hi0vVIlSu5lGY9ZrqsgR0/Cy/NTSTW5
- C5l67DEbRy5azNl8XWkTPBLb17iunb1f1qRlaDUxoVmD+pcyr3T12ZltIMRGiTFqPctINtl2++M
- +zU4daL+1JUZkUOo=
-X-Received: by 2002:adf:a3c5:: with SMTP id m5mr2839979wrb.390.1589527686851; 
- Fri, 15 May 2020 00:28:06 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxAligpPtVrcSC1fMU+5XUUL2faNetrxN96QYmnO2dWvpi5v1xtZZbzkNXtM+veBHQdinrLKQ==
-X-Received: by 2002:adf:a3c5:: with SMTP id m5mr2839908wrb.390.1589527686021; 
- Fri, 15 May 2020 00:28:06 -0700 (PDT)
-Received: from [192.168.1.39] (17.red-88-21-202.staticip.rima-tde.net.
+ bh=26OkB+i/ad5joz/5qpHRwJv+k150oIYD4QiuOyitRcA=;
+ b=NYvLTFd/Y6P1l/a/y2et/pnR02IIXoy+BPhPzz0cDTF4wqRj2c8QLoZt4ygOukJRIG
+ XdR2PJdScGFkGEgul669Gj7XoOuwrSAZrj9MlOK9hmwmYJuvAWSWhyX2laZjA/1UsLT9
+ F6AZ0jELqZaS65BGqGC7mvPCbpAbe7fPK+B4MOslftNaKpu32/k9chDTgqZ/IWf1cf7W
+ HIk3LEmMyuTDUkbgQwFNL/LwPKvuFid4iQ7K0dQXJPCEiOt7esVJ8Ka7csh08/2+bk/X
+ VHcQdjGHzUveubx8A4lFQ9Q2n8BnKlCX6NKbe6SwiDT89CIE8f08aRIq12sKd5CUFyT6
+ dySg==
+X-Gm-Message-State: AOAM531Wx/j2A4rKbS3Jpjt6D5hbzz/emTfaxwbShMCY6mghsqTOSb3M
+ T4ooi4Xh7Us5Duqgj0UwpaH5sGBPHQEQDNFlqQHGkzUl9/arAJr2Th0hu187rkgm0I5NMiFWRXL
+ nSFYgDUzu+xCQEBo=
+X-Received: by 2002:adf:f3c5:: with SMTP id g5mr5184236wrp.163.1589562487179; 
+ Fri, 15 May 2020 10:08:07 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxmryfUMk6ADmORi3lXVAD0PX080iwYHmI+TSMJgDPYWDKRZqTqv4yQhjfdJ0nFKuALcQFsCw==
+X-Received: by 2002:adf:f3c5:: with SMTP id g5mr5184202wrp.163.1589562486916; 
+ Fri, 15 May 2020 10:08:06 -0700 (PDT)
+Received: from x1w.redhat.com (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id g6sm2211223wrp.75.2020.05.15.00.28.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 May 2020 00:28:05 -0700 (PDT)
-Subject: Re: [PATCH v2 5/9] hw/char: Initial commit of Ibex UART
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair23@gmail.com
-References: <cover.1588878756.git.alistair.francis@wdc.com>
- <11b8f3cd28fd52b10caefe21a7b70444b85792f8.1588878756.git.alistair.francis@wdc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <eddc757b-db7f-f658-4417-f3ad65e52b13@redhat.com>
-Date: Fri, 15 May 2020 09:28:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ by smtp.gmail.com with ESMTPSA id g24sm4763681wrb.35.2020.05.15.10.08.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 May 2020 10:08:06 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Max Filippov <jcmvbkbc@gmail.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Richard Henderson <rth@twiddle.net>, qemu-arm@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Chris Wulff <crwulff@gmail.com>, qemu-riscv@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>, Thomas Huth <thuth@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Marek Vasut <marex@denx.de>, Michael Walle <michael@walle.cc>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Subject: [PATCH v2 00/10] accel: Allow targets to use Kconfig,
+ disable semihosting by default
+Date: Fri, 15 May 2020 19:07:54 +0200
+Message-Id: <20200515170804.5707-1-philmd@redhat.com>
+X-Mailer: git-send-email 2.21.3
 MIME-Version: 1.0
-In-Reply-To: <11b8f3cd28fd52b10caefe21a7b70444b85792f8.1588878756.git.alistair.francis@wdc.com>
-Content-Language: en-US
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8;
+	text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=205.139.110.120; envelope-from=philmd@redhat.com;
  helo=us-smtp-1.mimecast.com
 X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/14 23:27:07
@@ -92,274 +100,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2020 07:28:14 -0000
+X-List-Received-Date: Fri, 15 May 2020 17:08:18 -0000
 
-On 5/7/20 9:13 PM, Alistair Francis wrote:
-> This is the initial commit of the Ibex UART device. Serial TX is
-> working, while RX has been implemeneted but untested.
-> 
-> This is based on the documentation from:
-> https://docs.opentitan.org/hw/ip/uart/doc/
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   MAINTAINERS                 |   2 +
->   hw/char/Makefile.objs       |   1 +
->   hw/char/ibex_uart.c         | 490 ++++++++++++++++++++++++++++++++++++
->   hw/riscv/Kconfig            |   4 +
->   include/hw/char/ibex_uart.h | 110 ++++++++
+This series include generic patches I took of the KVM/ARM
+specific series which will follow.
 
-If possible setup scripts/git.orderfile to ease review (avoid scrolling).
+- List orphan accelerators in MAINTAINERS
+- Add accel/Kconfig
+- Allow targets to use their how Kconfig
+- Enforce semihosting on architecture where required,
+  disable it elsewhere
 
->   5 files changed, 607 insertions(+)
->   create mode 100644 hw/char/ibex_uart.c
->   create mode 100644 include/hw/char/ibex_uart.h
-> 
-[...]
-> +static void ibex_uart_write(void *opaque, hwaddr addr,
-> +                                  uint64_t val64, unsigned int size)
-> +{
-> +    IbexUartState *s = opaque;
-> +    uint32_t value = val64;
-> +
-> +    switch (addr) {
-> +    case IBEX_UART_INTR_STATE:
-> +        /* Write 1 clear */
-> +        s->uart_intr_state &= ~value;
-> +        ibex_uart_update_irqs(s);
-> +        break;
-> +    case IBEX_UART_INTR_ENABLE:
-> +        s->uart_intr_enable = value;
-> +        ibex_uart_update_irqs(s);
-> +        break;
-> +    case IBEX_UART_INTR_TEST:
-> +        s->uart_intr_state |= value;
-> +        ibex_uart_update_irqs(s);
-> +        break;
-> +
-> +    case IBEX_UART_CTRL:
-> +        s->uart_ctrl = value;
-> +
-> +        if (value & UART_CTRL_NF) {
-> +            qemu_log_mask(LOG_UNIMP,
-> +                          "%s: UART_CTRL_NF is not supported\n", __func__);
-> +        }
-> +        if (value & UART_CTRL_SLPBK) {
-> +            qemu_log_mask(LOG_UNIMP,
-> +                          "%s: UART_CTRL_SLPBK is not supported\n", __func__);
-> +        }
-> +        if (value & UART_CTRL_LLPBK) {
-> +            qemu_log_mask(LOG_UNIMP,
-> +                          "%s: UART_CTRL_LLPBK is not supported\n", __func__);
-> +        }
-> +        if (value & UART_CTRL_PARITY_EN) {
-> +            qemu_log_mask(LOG_UNIMP,
-> +                          "%s: UART_CTRL_PARITY_EN is not supported\n",
-> +                          __func__);
-> +        }
-> +        if (value & UART_CTRL_PARITY_ODD) {
-> +            qemu_log_mask(LOG_UNIMP,
-> +                          "%s: UART_CTRL_PARITY_ODD is not supported\n",
-> +                          __func__);
-> +        }
-> +        if (value & UART_CTRL_RXBLVL) {
-> +            qemu_log_mask(LOG_UNIMP,
-> +                          "%s: UART_CTRL_RXBLVL is not supported\n", __func__);
-> +        }
-> +        if (value & UART_CTRL_NCO) {
-> +            uint64_t baud = ((value & UART_CTRL_NCO) >> 16);
-> +            baud *= 1000;
-> +            baud /= 2 ^ 20;
-> +
-> +            s->char_tx_time = (NANOSECONDS_PER_SECOND / baud) * 10;
-> +        }
-> +        break;
-> +    case IBEX_UART_STATUS:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: status is read only\n", __func__);
-> +        break;
-> +
-> +    case IBEX_UART_RDATA:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: rdata is read only\n", __func__);
-> +        break;
-> +    case IBEX_UART_WDATA:
-> +        uart_write_tx_fifo(s, (uint8_t *) &value, 1);
-> +        break;
-> +
-> +    case IBEX_UART_FIFO_CTRL:
-> +        s->uart_fifo_ctrl = value;
-> +
-> +        if (value & FIFO_CTRL_RXRST) {
-> +            qemu_log_mask(LOG_UNIMP,
-> +                          "%s: RX fifos are not supported\n", __func__);
-> +        }
-> +        if (value & FIFO_CTRL_TXRST) {
-> +            s->tx_level = 0;
-> +        }
-> +        break;
-> +    case IBEX_UART_FIFO_STATUS:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: fifo_status is read only\n", __func__);
-> +        break;
-> +
-> +    case IBEX_UART_OVRD:
-> +        s->uart_ovrd = value;
-> +        qemu_log_mask(LOG_UNIMP,
-> +                      "%s: ovrd is not supported\n", __func__);
-> +        break;
-> +    case IBEX_UART_VAL:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: val is read only\n", __func__);
-> +        break;
-> +    case IBEX_UART_TIMEOUT_CTRL:
-> +        s->uart_timeout_ctrl = value;
-> +        qemu_log_mask(LOG_UNIMP,
-> +                      "%s: timeout_ctrl is not supported\n", __func__);
-> +        break;
-> +    default:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: Bad offset 0x%"HWADDR_PRIx"\n", __func__, addr);
-> +    }
-> +}
-> +
-> +static void fifo_trigger_update(void *opaque)
-> +{
-> +    IbexUartState *s = opaque;
-> +
-> +    if (s->uart_ctrl & UART_CTRL_TX_ENABLE) {
-> +        ibex_uart_xmit(NULL, G_IO_OUT, s);
-> +    }
-> +}
-> +
-> +static const MemoryRegionOps ibex_uart_ops = {
-> +    .read = ibex_uart_read,
-> +    .write = ibex_uart_write,
+Since v1:
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg689024.html
+- Drop HVF MAINTAINERS patch (merged elsewhere)
+- Kconfig-select SEMIHOSTING (bonzini)
+- Drop user-mode selection patches
+- consider m68k/nios2/xtensa/riscv (pm215)
+- reword Kconfig SEMIHOSTING description (pm215)
+- reset some of rth R-b tags
 
-As all registers are 32-bit, you want .impl min/max = 4 here.
+Previous RFC for semihosting posted earlier:
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg631218.html
 
-Otherwise patch looks good.
+$ git backport-diff -u v1 -r v2
+Key:
+[----] : patches are identical
+[####] : number of functional differences between upstream/downstream patch
+[down] : patch is downstream-only
+The flags [FC] indicate (F)unctional and (C)ontextual differences, respectively
 
-> +    .endianness = DEVICE_NATIVE_ENDIAN,
-> +};
-> +
-[...]
-> diff --git a/include/hw/char/ibex_uart.h b/include/hw/char/ibex_uart.h
-> new file mode 100644
-> index 0000000000..2bec772615
-> --- /dev/null
-> +++ b/include/hw/char/ibex_uart.h
-> @@ -0,0 +1,110 @@
-> +/*
-> + * QEMU lowRISC Ibex UART device
-> + *
-> + * Copyright (c) 2020 Western Digital
-> + *
-> + * Permission is hereby granted, free of charge, to any person obtaining a copy
-> + * of this software and associated documentation files (the "Software"), to deal
-> + * in the Software without restriction, including without limitation the rights
-> + * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-> + * copies of the Software, and to permit persons to whom the Software is
-> + * furnished to do so, subject to the following conditions:
-> + *
-> + * The above copyright notice and this permission notice shall be included in
-> + * all copies or substantial portions of the Software.
-> + *
-> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-> + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-> + * THE SOFTWARE.
-> + */
-> +
-> +#ifndef HW_IBEX_UART_H
-> +#define HW_IBEX_UART_H
-> +
-> +#include "hw/sysbus.h"
-> +#include "chardev/char-fe.h"
-> +#include "qemu/timer.h"
-> +
-> +#define IBEX_UART_INTR_STATE   0x00
-> +    #define INTR_STATE_TX_WATERMARK (1 << 0)
-> +    #define INTR_STATE_RX_WATERMARK (1 << 1)
-> +    #define INTR_STATE_TX_EMPTY     (1 << 2)
-> +    #define INTR_STATE_RX_OVERFLOW  (1 << 3)
-> +#define IBEX_UART_INTR_ENABLE  0x04
-> +#define IBEX_UART_INTR_TEST    0x08
-> +
-> +#define IBEX_UART_CTRL         0x0c
-> +    #define UART_CTRL_TX_ENABLE     (1 << 0)
-> +    #define UART_CTRL_RX_ENABLE     (1 << 1)
-> +    #define UART_CTRL_NF            (1 << 2)
-> +    #define UART_CTRL_SLPBK         (1 << 4)
-> +    #define UART_CTRL_LLPBK         (1 << 5)
-> +    #define UART_CTRL_PARITY_EN     (1 << 6)
-> +    #define UART_CTRL_PARITY_ODD    (1 << 7)
-> +    #define UART_CTRL_RXBLVL        (3 << 8)
-> +    #define UART_CTRL_NCO           (0xFFFF << 16)
-> +
-> +#define IBEX_UART_STATUS       0x10
-> +    #define UART_STATUS_TXFULL  (1 << 0)
-> +    #define UART_STATUS_RXFULL  (1 << 1)
-> +    #define UART_STATUS_TXEMPTY (1 << 2)
-> +    #define UART_STATUS_RXIDLE  (1 << 4)
-> +    #define UART_STATUS_RXEMPTY (1 << 5)
-> +
-> +#define IBEX_UART_RDATA        0x14
-> +#define IBEX_UART_WDATA        0x18
-> +
-> +#define IBEX_UART_FIFO_CTRL    0x1c
-> +    #define FIFO_CTRL_RXRST          (1 << 0)
-> +    #define FIFO_CTRL_TXRST          (1 << 1)
-> +    #define FIFO_CTRL_RXILVL         (7 << 2)
-> +    #define FIFO_CTRL_RXILVL_SHIFT   (2)
-> +    #define FIFO_CTRL_TXILVL         (3 << 5)
-> +    #define FIFO_CTRL_TXILVL_SHIFT   (5)
-> +
-> +#define IBEX_UART_FIFO_STATUS  0x20
-> +#define IBEX_UART_OVRD         0x24
-> +#define IBEX_UART_VAL          0x28
-> +#define IBEX_UART_TIMEOUT_CTRL 0x2c
-> +
-> +#define IBEX_UART_TX_FIFO_SIZE 16
-> +
-> +#define TYPE_IBEX_UART "ibex-uart"
-> +#define IBEX_UART(obj) \
-> +    OBJECT_CHECK(IbexUartState, (obj), TYPE_IBEX_UART)
-> +
-> +typedef struct {
-> +    /* <private> */
-> +    SysBusDevice parent_obj;
-> +
-> +    /* <public> */
-> +    MemoryRegion mmio;
-> +
-> +    uint8_t tx_fifo[IBEX_UART_TX_FIFO_SIZE];
-> +    uint32_t tx_level;
-> +
-> +    QEMUTimer *fifo_trigger_handle;
-> +    uint64_t char_tx_time;
-> +
-> +    uint32_t uart_intr_state;
-> +    uint32_t uart_intr_enable;
-> +    uint32_t uart_ctrl;
-> +    uint32_t uart_status;
-> +    uint32_t uart_rdata;
-> +    uint32_t uart_fifo_ctrl;
-> +    uint32_t uart_fifo_status;
-> +    uint32_t uart_ovrd;
-> +    uint32_t uart_val;
-> +    uint32_t uart_timeout_ctrl;
-> +
-> +    CharBackend chr;
-> +    qemu_irq tx_watermark;
-> +    qemu_irq rx_watermark;
-> +    qemu_irq tx_empty;
-> +    qemu_irq rx_overflow;
-> +} IbexUartState;
-> +#endif /* HW_IBEX_UART_H */
-> 
+001/10:[----] [--] 'MAINTAINERS: Fix KVM path expansion glob'
+002/10:[----] [-C] 'MAINTAINERS: Add an 'overall' entry for accelerators'
+003/10:[----] [-C] 'MAINTAINERS: Add an entry for the HAX accelerator'
+004/10:[down] 'accel/tcg: Add stub for probe_access()'
+005/10:[down] 'Makefile: Remove dangerous EOL trailing backslash'
+006/10:[0003] [FC] 'Makefile: Write MINIKCONF variables as one entry per line'
+007/10:[----] [--] 'accel/Kconfig: Extract accel selectors into their own config'
+008/10:[----] [--] 'accel/Kconfig: Add the TCG selector'
+009/10:[down] 'Makefile: Allow target-specific optional Kconfig'
+010/10:[0028] [FC] 'hw/semihosting: Make the feature depend of TCG, and allow to disable it'
+
+Philippe Mathieu-Daudé (10):
+  MAINTAINERS: Fix KVM path expansion glob
+  MAINTAINERS: Add an 'overall' entry for accelerators
+  MAINTAINERS: Add an entry for the HAX accelerator
+  accel/tcg: Add stub for probe_access()
+  Makefile: Remove dangerous EOL trailing backslash
+  Makefile: Write MINIKCONF variables as one entry per line
+  accel/Kconfig: Extract accel selectors into their own config
+  accel/Kconfig: Add the TCG selector
+  Makefile: Allow target-specific optional Kconfig
+  hw/semihosting: Make the feature depend of TCG, and allow to disable
+    it
+
+ Makefile                                | 15 +++++++++++----
+ default-configs/arm-softmmu.mak         |  1 -
+ default-configs/lm32-softmmu.mak        |  2 --
+ default-configs/m68k-softmmu.mak        |  2 --
+ default-configs/mips-softmmu-common.mak |  3 ---
+ default-configs/nios2-softmmu.mak       |  2 --
+ default-configs/xtensa-softmmu.mak      |  2 --
+ accel/stubs/tcg-stub.c                  |  7 +++++++
+ Kconfig.host                            |  7 -------
+ MAINTAINERS                             | 17 ++++++++++++++++-
+ accel/Kconfig                           |  9 +++++++++
+ hw/semihosting/Kconfig                  |  4 +++-
+ target/arm/Kconfig                      |  2 ++
+ target/lm32/Kconfig                     |  2 ++
+ target/m68k/Kconfig                     |  2 ++
+ target/mips/Kconfig                     |  2 ++
+ target/nios2/Kconfig                    |  2 ++
+ target/riscv/Kconfig                    |  2 ++
+ target/xtensa/Kconfig                   |  2 ++
+ 19 files changed, 60 insertions(+), 25 deletions(-)
+ create mode 100644 accel/Kconfig
+ create mode 100644 target/arm/Kconfig
+ create mode 100644 target/lm32/Kconfig
+ create mode 100644 target/m68k/Kconfig
+ create mode 100644 target/mips/Kconfig
+ create mode 100644 target/nios2/Kconfig
+ create mode 100644 target/riscv/Kconfig
+ create mode 100644 target/xtensa/Kconfig
+
+-- 
+2.21.3
 
 
