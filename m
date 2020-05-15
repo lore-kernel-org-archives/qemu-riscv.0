@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jZTqa-0003jc-Gp
-	for mharc-qemu-riscv@gnu.org; Fri, 15 May 2020 02:29:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60398)
+	id 1jZTqd-0003sI-Jk
+	for mharc-qemu-riscv@gnu.org; Fri, 15 May 2020 02:29:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60430)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jZTqY-0003gC-Jg; Fri, 15 May 2020 02:29:26 -0400
-Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:43685)
+ id 1jZTqb-0003nH-Tk; Fri, 15 May 2020 02:29:29 -0400
+Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:38390)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jZTqX-0000ny-PF; Fri, 15 May 2020 02:29:26 -0400
-Received: by mail-yb1-xb41.google.com with SMTP id x15so564945ybr.10;
- Thu, 14 May 2020 23:29:25 -0700 (PDT)
+ id 1jZTqb-0000px-6W; Fri, 15 May 2020 02:29:29 -0400
+Received: by mail-yb1-xb44.google.com with SMTP id m10so576919ybf.5;
+ Thu, 14 May 2020 23:29:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=xczrdqwIAlrjpMR2PqQaM5/RVhHQoJnWbvY7Au9+RnQ=;
- b=fkAvkm33WY79kgWkyQ7iK6EB+MHg/IT6SC8nNz1vCfXS15+TGPV2P84eulYb+PoQ1G
- panJcdtGtsVQUgqKGeA2/ZQ2sPeaL78eW9amr1CvnvIAx5yg4KB3feUaMFRZCXtdA4jz
- JUcFCdp6cMFIgi2m0a2CvyYJ7+s+98po/7vm2m8O5oz++Y1yRCDpLvo2IbVselsryrCA
- MMNhprB7dx8wkbXnbMubqXNDM8NATn8BIl4sv2V9YuYEdD6DcQOUorw6Xj51IbIJydDG
- o4G8RzXQe8nEr6ZXAcxPXhbgCmrzHsOEqtJLF5JRpRx2M0mbAOx6U0kLUtksYzB9ACQO
- 5q0g==
+ :cc; bh=qcklaDwwDezZ5j34inhDX3YDAcvH2nd4C8UsHQ6VlcY=;
+ b=I7+ULXrTE9SY6f2OqkOCYHJuKLAfdRZO7rBx8ZGL+MtgjWgmDlINtXbkwI62vIi+mx
+ kjRq60FTTAaPUHAKWpIZuwItQwefUo0uYNyG5mds5sdeuvZj9AaTynBXNv4OHhOO26o6
+ L4NGqF83rhNaUJadO1xtBX2lkjPJFhP7YhKKlqiD3+1gelICidbLONnShzuv/8TlxEXh
+ PtRTonVXbo3OCCj8Efn7UESTM5jfKokPTT9hWLVCFcAgyXi5kfL9V0nv4v8hzUl6H60r
+ CxYAJwMTLza3NE9u6+1gKVcQG7i5ZF4lehPMhmc11Xv1BqWgbna1ovP+G0GkzIR4STxU
+ Te1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=xczrdqwIAlrjpMR2PqQaM5/RVhHQoJnWbvY7Au9+RnQ=;
- b=lD5o6hxnsl377MDaaWv4rme53bpbTzVJTcie7lM2+NbejZcjWemMbTudgSmz0ZG5P5
- pj8LB5Ps6qxHwhBf0Dy6hNAzGnqJFHfE6yBTVdLgrUVflG54duxbRB7D6mTcSekIcag7
- 057gAeFfA8Mf6Ly/DWCwWmjj2NogX852R/YPnmYTOvqEIHnT7tN+XL2qpcuXHXQ9YDJl
- 97SvAdiMFLOVzY/pULLbeHKQVOKlN9a3G+ocXl/dCf/Co6Xgr7DcExYbpt7qa/MIe0BN
- zsX9WqgQXBWlNA9yf0oN4TtW5rM4J7LKOgI2UqBFkHKkGSAN43qx74WTekWB+um6Z2uT
- Sz3g==
-X-Gm-Message-State: AOAM530G3+5DbsRHizruFqzCMWT9oUHbvUbD3J9UXNPXiwWx8hszxeDD
- 9masCbne0pGJY1puFxO+gHxJdBR/+2fs8jTl/zs=
-X-Google-Smtp-Source: ABdhPJwvV4NOyCUkWPdB0acVyI3ryS5jEFz23OrjCkogAz25FpouFYEtifz67XJ7NG8eqYwcqKgwHCWJNzLd1EWzMZs=
-X-Received: by 2002:a25:bdc8:: with SMTP id g8mr3051045ybk.122.1589524164506; 
- Thu, 14 May 2020 23:29:24 -0700 (PDT)
+ bh=qcklaDwwDezZ5j34inhDX3YDAcvH2nd4C8UsHQ6VlcY=;
+ b=maxViPMulH7FzmEfHFHSmilXrgVcmUUZRLnDai8p9r6i+KJBXUoEogV12/cmFe1A9A
+ OAxpAoAEnjcnHnB3X/rFAF9woVJ3w2n7BT2nCj8C6jo84SXEAWGAqAVt6qomt5kLFybS
+ wofBexGM8ioYrFw1SSztVmVPg0vqtOTLcBCU0/AUJIqTMx7pDlVIBqbk+a0qqvWvIRyp
+ fpmRVmiUzkLmdh5JXQu804AmMMI18EqlVPd1M0DpOp10jqSrRu/iHA9DxboGtlrJlecb
+ v97HRbCvWALWuUudodO7dSUBKMLOjMP/BPyk8ykyn/K0e+Jx3h+7Kw1ID4pCWUnhhnty
+ FMsQ==
+X-Gm-Message-State: AOAM530WaP1/5HMxk06e6aUu88I5bk491gWQUkXwltDdeJbKx8f59rcv
+ T0Ok1l2cxyD5aspSXCOvHO/MFMDEqK6MDpzLdgc=
+X-Google-Smtp-Source: ABdhPJzO6EviC1yVtlVGkVKU398QIxxhBG9MUV/WP7mfATUALdA6CW49P6l3yujz6X4Nsct8tNJm42uhdextTKk0j70=
+X-Received: by 2002:a25:ab89:: with SMTP id v9mr3118246ybi.306.1589524167793; 
+ Thu, 14 May 2020 23:29:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1588878756.git.alistair.francis@wdc.com>
- <12f00eacda584976c310b55f426b2960969231a6.1588878756.git.alistair.francis@wdc.com>
-In-Reply-To: <12f00eacda584976c310b55f426b2960969231a6.1588878756.git.alistair.francis@wdc.com>
+ <786141c80bd14a93395d68e693060d89530d9d3d.1588878756.git.alistair.francis@wdc.com>
+In-Reply-To: <786141c80bd14a93395d68e693060d89530d9d3d.1588878756.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 15 May 2020 14:29:13 +0800
-Message-ID: <CAEUhbmVboOM+PSsAuddM=CxcHfkOBA-bbUp1pRTrRdi5eS4ypA@mail.gmail.com>
-Subject: Re: [PATCH v2 7/9] riscv/opentitan: Connect the PLIC device
+Date: Fri, 15 May 2020 14:29:16 +0800
+Message-ID: <CAEUhbmWCXuvDP_EQDQ8Opmr0joKkYqmEmAtUObO_MyGN0Q=c5g@mail.gmail.com>
+Subject: Re: [PATCH v2 8/9] riscv/opentitan: Connect the UART device
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b44;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb44.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -72,16 +72,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2020 06:29:27 -0000
+X-List-Received-Date: Fri, 15 May 2020 06:29:30 -0000
 
-On Fri, May 8, 2020 at 3:22 AM Alistair Francis
+On Fri, May 8, 2020 at 3:24 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/riscv/opentitan.c         | 19 +++++++++++++++++--
->  include/hw/riscv/opentitan.h |  3 +++
->  2 files changed, 20 insertions(+), 2 deletions(-)
+>  hw/riscv/opentitan.c         | 24 ++++++++++++++++++++++--
+>  include/hw/riscv/opentitan.h | 13 +++++++++++++
+>  2 files changed, 35 insertions(+), 2 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bin.meng@windriver.com>
