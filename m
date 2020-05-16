@@ -1,60 +1,122 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jZnyl-0005BY-6N
-	for mharc-qemu-riscv@gnu.org; Fri, 15 May 2020 23:59:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52336)
+	id 1jZqSl-0000O5-Jc
+	for mharc-qemu-riscv@gnu.org; Sat, 16 May 2020 02:38:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41088)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1jZnyh-0005B3-GP; Fri, 15 May 2020 23:59:12 -0400
-Resent-Date: Fri, 15 May 2020 23:59:11 -0400
-Resent-Message-Id: <E1jZnyh-0005B3-GP@lists.gnu.org>
-Received: from sender4-of-o53.zoho.com ([136.143.188.53]:21385)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1jZnyf-0000qk-37; Fri, 15 May 2020 23:59:10 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1589601481; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=hA2Yc27+zB8ytjMK7VmigshdA2ZZc9w+y5YDHGU1+FogR9sg3SPebgTa8e3twtqOE+p9LsPKUVk9Q0Uu/l1kDIvV1v6Li+bDSDyuK/SmONOGrROGHgqD3rYjKGBeew+osQ7+bYK3sLaHRvNh9ab8UuYmvfxED9C5zQ9dAO8Z0XY=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1589601481;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=KxNKKVvAkleKYfMp3l2aKai9BJO3MMKsfQxWyCf+QsU=; 
- b=NowJ9QZnVXzcgPXJd+NfeYPPRuwRTEhgbf2ANtAQR7JNSyzUNDrcQBTQRvWetDqIoO7fCEqC5S7392CvzflNg9dqBthnpx5uGeWjWjjdp9PWVLTYoaGIp52zXM3OaclRPnQnIKBZfQ3A2YDyld8UGskRlvIgBm2Z8OXmjwtpIFo=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1589601479525633.7390382918733;
- Fri, 15 May 2020 20:57:59 -0700 (PDT)
-Message-ID: <158960147692.9380.14776583689831521814@45ef0f9c86ae>
-In-Reply-To: <20200515170804.5707-1-philmd@redhat.com>
-Subject: Re: [PATCH v2 00/10] accel: Allow targets to use Kconfig,
- disable semihosting by default
-Reply-To: <qemu-devel@nongnu.org>
+ (Exim 4.90_1) (envelope-from <prvs=398f0481b=Anup.Patel@wdc.com>)
+ id 1jZqSh-0000Ki-Of; Sat, 16 May 2020 02:38:19 -0400
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:22597)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <prvs=398f0481b=Anup.Patel@wdc.com>)
+ id 1jZqSf-0001Um-Ig; Sat, 16 May 2020 02:38:19 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1589611098; x=1621147098;
+ h=from:to:cc:subject:date:message-id:
+ content-transfer-encoding:mime-version;
+ bh=/wgu4JZlHzbbok9+1Rjpt1sEYUrRqwuvEf+j4Dsb9+c=;
+ b=Qn7/oPN/SksmQNLABhpvgbwBoStCQYtJNN55HXQrtYme9sxyGnXDFFTz
+ 83qxdRDcusJQPaZW6s3Z3ZrdrUhNI3Eb55cx8brVdbgQU7mPNV7p3drHW
+ lSSWSyeV9DEqoElBQO4FNpOQpFK/hBBYSfTkG7yMaMZ1ciE/NRFjIHcqX
+ ysv+YvnB7QJAiixebENQadFvO7MssMPSZujWVcWQZ3XJLp8fxQVdmVFO0
+ tqlw19rncIRTRB20ENmZUqBi1Rrj4nJh6zEfpKKo5QQsEGY5KRVb3p0NM
+ 43n2qv8KVVevC25YGmPsyLeQkMADbdaXCGqa9A02xNPoD9nz/MV/fbAaG A==;
+IronPort-SDR: uK0kUY8ECj9fPn82PHMq8DBfMevXaJagbGTDcVGNWdQhBchTjrw4Jkvx/iQrrQR+5hp3PJWV0p
+ zKJSel+xGj2WJSHhjGV4ufYjh82H28Z4RG4vxWSVZG7YWjNS05pVijf+JE3R/8a9ElwO1qAfNG
+ NVM4MYQjgZj31M0ujvZyKBQOLEkM4ch05/7C7lXYkhpqJIty3IH0P8hL6zHY0x10DCdPNBGmKl
+ icJEYEDvFfbj8sMbkFEj9K7fKqtrtn79R7C5vGiMR9V7mbC8w4IR9tT1LvgP63AMRFrlNoa/q7
+ oWM=
+X-IronPort-AV: E=Sophos;i="5.73,398,1583164800"; d="scan'208";a="240555168"
+Received: from mail-sn1nam04lp2053.outbound.protection.outlook.com (HELO
+ NAM04-SN1-obe.outbound.protection.outlook.com) ([104.47.44.53])
+ by ob1.hgst.iphmx.com with ESMTP; 16 May 2020 14:38:12 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RhQzHyIsnPafYgXTac3PZBklys2Vi0ESWP84rEJz8UAvCtoBtTogI1yqbTV6UyLfXycjUFYX9bwWMQWY4wTSkAcLVJ/Pn+s/SmU4TWEHAmsFomQfA98gILfNlE/giG9BTwI2qfYgSEsvxv9FVp9VewRug/jDEQmH4IwPacskdIV5954usbQfB1qtbMYMuRql6ZWLaLaHKMVS+6REOlI9z/Fc3ZOWCioq+tuHL8cFS3sSBegnaQhi6X7Wdb0GVNhqjyNbVacfnmCqriGvwEcd6HBcWp2JY1pWZ6DMcs0EIDm8J0MJnJIiPW9ZMrQZIykYoVnZcWEh6PesSd9tJCPFzA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JKijAsFdMppQE2eeB0wGxXujYQP743duev/UvZu2hNw=;
+ b=PTVAl2Qmep67Z0xiM7oJtFjGHTfYL+HTa061Y1hugXcUvNJ7uD9netG3PQ8Ws88Zm1g+rqf8lL3AFLJB/+knfkfQU7qnpfQBUTdxRbzBaJScnZj3Xv75dHdCpgPQEmOY7WbG5rwy3uWAegoxjzf02ANC1aqSM0RwUR1kN9ownpB4bbt63ncGRAWILRprnnLA1nTzVMU7C3ehZo79QsR0AjL1TFc93bfpz+JD1n6dnFl5cFUdTX/AdG7e1CW2LoF7EIHmp9jCFix8AA+j1e19L2t79SM4WQW+4kooCtH2BdQOb+WC70hHALdOxLVqUyFajDdrdF2elilDOsZ0Sf8xfQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JKijAsFdMppQE2eeB0wGxXujYQP743duev/UvZu2hNw=;
+ b=yAee/jsiBLXQRVtccMxZu/8As2/7GnwpoBKN+V2GP59sycz8jKCAnkh1v3jYV/vWguY0Nn9njhHz6PpCw3BOkX4gimVhJEt64nrk3FI53+nVPmg1kGVCEmxqRujVXHxtwy0xa4GF4fqky4F6UyaAODps9hp1NmpnCA18NELFaCQ=
+Authentication-Results: linaro.org; dkim=none (message not signed)
+ header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
+Received: from DM6PR04MB6201.namprd04.prod.outlook.com (2603:10b6:5:127::32)
+ by DM6PR04MB4539.namprd04.prod.outlook.com (2603:10b6:5:2c::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3000.26; Sat, 16 May
+ 2020 06:38:09 +0000
+Received: from DM6PR04MB6201.namprd04.prod.outlook.com
+ ([fe80::f8b3:c124:482b:52e0]) by DM6PR04MB6201.namprd04.prod.outlook.com
+ ([fe80::f8b3:c124:482b:52e0%5]) with mapi id 15.20.2979.033; Sat, 16 May 2020
+ 06:38:09 +0000
+From: Anup Patel <anup.patel@wdc.com>
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Anup Patel <anup.patel@wdc.com>
+Subject: [PATCH 0/4] RISC-V multi-socket support
+Date: Sat, 16 May 2020 12:07:42 +0530
+Message-Id: <20200516063746.18296-1-anup.patel@wdc.com>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MAXPR01CA0109.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a00:5d::27) To DM6PR04MB6201.namprd04.prod.outlook.com
+ (2603:10b6:5:127::32)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: philmd@redhat.com
-Cc: qemu-devel@nongnu.org, marex@denx.de, peter.maydell@linaro.org,
- thuth@redhat.com, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, crwulff@gmail.com, laurent@vivier.eu,
- philmd@redhat.com, jcmvbkbc@gmail.com, aleksandar.qemu.devel@gmail.com,
- qemu-arm@nongnu.org, palmer@dabbelt.com, michael@walle.cc, pbonzini@redhat.com,
- Alistair.Francis@wdc.com, aleksandar.rikalo@rt-rk.com, alex.bennee@linaro.org,
- aurelien@aurel32.net, rth@twiddle.net
-Date: Fri, 15 May 2020 20:57:59 -0700 (PDT)
-X-ZohoMailClient: External
-Received-SPF: pass client-ip=136.143.188.53; envelope-from=no-reply@patchew.org;
- helo=sender4-of-o53.zoho.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/15 23:45:34
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_PASS=-0.001,
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from wdc.com (49.207.60.36) by
+ MAXPR01CA0109.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:5d::27) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3000.25 via Frontend Transport; Sat, 16 May 2020 06:38:05 +0000
+X-Mailer: git-send-email 2.25.1
+X-Originating-IP: [49.207.60.36]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: b2a62b2b-fc6b-4166-c74c-08d7f963b2d3
+X-MS-TrafficTypeDiagnostic: DM6PR04MB4539:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM6PR04MB4539B87498BF4A1D1D04E8DE8DBA0@DM6PR04MB4539.namprd04.prod.outlook.com>
+WDCIPOUTBOUND: EOP-TRUE
+X-MS-Oob-TLC-OOBClassifiers: OLM:2201;
+X-Forefront-PRVS: 040513D301
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Lcgbk5T/57UuR0XKJz/9wgOADO7DAwEDuwacUMdG/eDut4vvihCWdG2s6mKYnXHAjgeangD8XyahrWhYVGfqkUP4BK9Ixi1ZCYaW0mK2mVhuW8kcc3zJrn5GCgFNR1e2fHsWhs6g5ElUQRhsnXjQ0s9M5mOUxDPn3Z3ky3Ayobo2QXRajPkWoQ7kMLmY+N30po2XMPv5fspbL4XUbZHCKAkdEqVOKKb5FLO16r9i86fPIMam0BBwW9RuUXczdYFQA4k5M9v1B9ko6InVx+3W81LqEl/CT+4sF/FECXURfaKxC1rEd/gdf0FGZZ1w+gIe0so32oIxUzHdNtUopzisE/PKcYTuG6LopCM6v7AornAAqS1V5OL2nKYtM9o8Xp+amqcUZorsNEJgvQb6GQ9FZJJ+vAiuUKbthLP2GeAbvfuft7AZRk6KQd8uMb9UspA97sKLFC97jdF4FtVlCyo1Scac+XNsficSmZ0QmPPYCxAx/SeMJQqbaD4ly+GQoOHmrBzyloATgA7L42SHsx4z/Q==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR04MB6201.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(396003)(346002)(376002)(366004)(39860400002)(136003)(6666004)(1006002)(2906002)(8676002)(36756003)(8936002)(966005)(44832011)(26005)(54906003)(86362001)(7696005)(52116002)(55236004)(110136005)(1076003)(16526019)(186003)(316002)(5660300002)(66946007)(8886007)(55016002)(66476007)(66556008)(478600001)(956004)(4326008)(2616005);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData: cM6lSpGgNUfzlWmErxsaJ3yIjQn9mUvR5KENMrpMGA3a4sz6FsdNWcMe+auv+TjXbMBJBBzRf66Iz+UkJ+sSLPFcLPIko67IpSeXDcVdLBAFBUHYCoJu3od8Qc6NpJo2hI+RAGRrSk3gFnCoCV1pkGd64C1z1gSinCxFT6naVYDL+mb0DqfGIECpOw8e1IIroBRdUFq9/lJLQy5Vu2IJ39zLz7oUyb6nCsYRxrGhDDYqyRs9igGrHgVvfYmW58MwhNeMhToQ8OJC1ILcFBFBdcxJOeIKDrXG8H2BC6+EhKSMEqf4KgPnO0uskiYmgTXDi6s3RUU5mZND2B3tgr7QCtUKO0nfzqzSMryMFNumS1Xc6EnHC2skznDqNfaDUV8+K/SdrY7tPIM61Y9Gnvv3LWpFkQ9kLhie7Uo3du7K7p5apMjha20ZiOlReQL0if33/PmMrNxrT4Fn+NcuUvrYAdabbJoWrrZxf+JwHojIr6M=
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b2a62b2b-fc6b-4166-c74c-08d7f963b2d3
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2020 06:38:09.5065 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: g6Qw4yamhFBrypEdB4wat3bTWG9WSssZpXLCjsVCJxMWnBpqhZlULbWCGIC/EqIUjzF6qpWynzlNk2FtQ6BKOg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB4539
+Received-SPF: pass client-ip=68.232.143.124;
+ envelope-from=prvs=398f0481b=Anup.Patel@wdc.com; helo=esa2.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/16 02:38:11
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ MSGID_FROM_MTA_HEADER=0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -68,45 +130,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 May 2020 03:59:12 -0000
+X-List-Received-Date: Sat, 16 May 2020 06:38:20 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDUxNTE3MDgwNC41NzA3
-LTEtcGhpbG1kQHJlZGhhdC5jb20vCgoKCkhpLAoKVGhpcyBzZXJpZXMgZmFpbGVkIHRoZSBkb2Nr
-ZXItbWluZ3dAZmVkb3JhIGJ1aWxkIHRlc3QuIFBsZWFzZSBmaW5kIHRoZSB0ZXN0aW5nIGNvbW1h
-bmRzIGFuZAp0aGVpciBvdXRwdXQgYmVsb3cuIElmIHlvdSBoYXZlIERvY2tlciBpbnN0YWxsZWQs
-IHlvdSBjYW4gcHJvYmFibHkgcmVwcm9kdWNlIGl0CmxvY2FsbHkuCgo9PT0gVEVTVCBTQ1JJUFQg
-QkVHSU4gPT09CiMhIC9iaW4vYmFzaApleHBvcnQgQVJDSD14ODZfNjQKbWFrZSBkb2NrZXItaW1h
-Z2UtZmVkb3JhIFY9MSBORVRXT1JLPTEKdGltZSBtYWtlIGRvY2tlci10ZXN0LW1pbmd3QGZlZG9y
-YSBKPTE0IE5FVFdPUks9MQo9PT0gVEVTVCBTQ1JJUFQgRU5EID09PQoKL3RtcC9xZW11LXRlc3Qv
-c3JjL3RhcmdldC9hcm0vYXJtLXNlbWkuYzo4MTU6IHVuZGVmaW5lZCByZWZlcmVuY2UgdG8gYHFl
-bXVfc2VtaWhvc3RpbmdfY29uc29sZV9pbmMnCi90bXAvcWVtdS10ZXN0L3NyYy90YXJnZXQvYXJt
-L2FybS1zZW1pLmM6Nzg3OiB1bmRlZmluZWQgcmVmZXJlbmNlIHRvIGBxZW11X3NlbWlob3N0aW5n
-X2NvbnNvbGVfb3V0cycKL3RtcC9xZW11LXRlc3Qvc3JjL3RhcmdldC9hcm0vYXJtLXNlbWkuYzo3
-ODQ6IHVuZGVmaW5lZCByZWZlcmVuY2UgdG8gYHFlbXVfc2VtaWhvc3RpbmdfY29uc29sZV9vdXRj
-Jwpjb2xsZWN0MjogZXJyb3I6IGxkIHJldHVybmVkIDEgZXhpdCBzdGF0dXMKbWFrZVsxXTogKioq
-IFtNYWtlZmlsZToyMDg6IHFlbXUtc3lzdGVtLWFhcmNoNjR3LmV4ZV0gRXJyb3IgMQptYWtlOiAq
-KiogW01ha2VmaWxlOjUzNDogYWFyY2g2NC1zb2Z0bW11L2FsbF0gRXJyb3IgMgptYWtlOiAqKiog
-V2FpdGluZyBmb3IgdW5maW5pc2hlZCBqb2JzLi4uLgpUcmFjZWJhY2sgKG1vc3QgcmVjZW50IGNh
-bGwgbGFzdCk6CiAgRmlsZSAiLi90ZXN0cy9kb2NrZXIvZG9ja2VyLnB5IiwgbGluZSA2NjQsIGlu
-IDxtb2R1bGU+Ci0tLQogICAgcmFpc2UgQ2FsbGVkUHJvY2Vzc0Vycm9yKHJldGNvZGUsIGNtZCkK
-c3VicHJvY2Vzcy5DYWxsZWRQcm9jZXNzRXJyb3I6IENvbW1hbmQgJ1snc3VkbycsICctbicsICdk
-b2NrZXInLCAncnVuJywgJy0tbGFiZWwnLCAnY29tLnFlbXUuaW5zdGFuY2UudXVpZD1lNDMwMGI1
-MGI3NGY0Y2Y2YTQzNDJiZWJiMGRiM2U1YicsICctdScsICcxMDAxJywgJy0tc2VjdXJpdHktb3B0
-JywgJ3NlY2NvbXA9dW5jb25maW5lZCcsICctLXJtJywgJy1lJywgJ1RBUkdFVF9MSVNUPScsICct
-ZScsICdFWFRSQV9DT05GSUdVUkVfT1BUUz0nLCAnLWUnLCAnVj0nLCAnLWUnLCAnSj0xNCcsICct
-ZScsICdERUJVRz0nLCAnLWUnLCAnU0hPV19FTlY9JywgJy1lJywgJ0NDQUNIRV9ESVI9L3Zhci90
-bXAvY2NhY2hlJywgJy12JywgJy9ob21lL3BhdGNoZXcvLmNhY2hlL3FlbXUtZG9ja2VyLWNjYWNo
-ZTovdmFyL3RtcC9jY2FjaGU6eicsICctdicsICcvdmFyL3RtcC9wYXRjaGV3LXRlc3Rlci10bXAt
-ZF9zdTdrZl8vc3JjL2RvY2tlci1zcmMuMjAyMC0wNS0xNS0yMy41NS4zNi4xMDY2MjovdmFyL3Rt
-cC9xZW11Onoscm8nLCAncWVtdTpmZWRvcmEnLCAnL3Zhci90bXAvcWVtdS9ydW4nLCAndGVzdC1t
-aW5ndyddJyByZXR1cm5lZCBub24temVybyBleGl0IHN0YXR1cyAyLgpmaWx0ZXI9LS1maWx0ZXI9
-bGFiZWw9Y29tLnFlbXUuaW5zdGFuY2UudXVpZD1lNDMwMGI1MGI3NGY0Y2Y2YTQzNDJiZWJiMGRi
-M2U1YgptYWtlWzFdOiAqKiogW2RvY2tlci1ydW5dIEVycm9yIDEKbWFrZVsxXTogTGVhdmluZyBk
-aXJlY3RvcnkgYC92YXIvdG1wL3BhdGNoZXctdGVzdGVyLXRtcC1kX3N1N2tmXy9zcmMnCm1ha2U6
-ICoqKiBbZG9ja2VyLXJ1bi10ZXN0LW1pbmd3QGZlZG9yYV0gRXJyb3IgMgoKcmVhbCAgICAybTIw
-Ljk0MXMKdXNlciAgICAwbTguNDg5cwoKClRoZSBmdWxsIGxvZyBpcyBhdmFpbGFibGUgYXQKaHR0
-cDovL3BhdGNoZXcub3JnL2xvZ3MvMjAyMDA1MTUxNzA4MDQuNTcwNy0xLXBoaWxtZEByZWRoYXQu
-Y29tL3Rlc3RpbmcuZG9ja2VyLW1pbmd3QGZlZG9yYS8/dHlwZT1tZXNzYWdlLgotLS0KRW1haWwg
-Z2VuZXJhdGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0Y2hldyBbaHR0cHM6Ly9wYXRjaGV3Lm9yZy9d
-LgpQbGVhc2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRvIHBhdGNoZXctZGV2ZWxAcmVkaGF0LmNvbQ==
+This series adds multi-socket support for RISC-V virt machine and
+RISC-V spike machine. The multi-socket support will help us improve
+various RISC-V operating systems, firmwares, and bootloader to
+support RISC-V NUMA systems.
+
+These patch can be found in riscv_multi_socket_v1 branch at:
+https://github.com/avpatel/qemu.git
+
+To try this patches, we will need:
+1. OpenSBI multi-PLIC and multi-CLINT support which can be found in
+   multi_plic_clint_v1 branch at:
+   https://github.com/avpatel/opensbi.git
+2. Linux multi-PLIC improvements support which can be found in
+   plic_imp_v1 branch at:
+   https://github.com/avpatel/linux.git
+
+Anup Patel (4):
+  hw/riscv: Allow creating multiple instances of CLINT
+  hw/riscv: spike: Allow creating multiple sockets
+  hw/riscv: Allow creating multiple instances of PLIC
+  hw/riscv: virt: Allow creating multiple sockets
+
+ hw/riscv/sifive_clint.c         |  20 +-
+ hw/riscv/sifive_e.c             |   4 +-
+ hw/riscv/sifive_plic.c          |  24 +-
+ hw/riscv/sifive_u.c             |   4 +-
+ hw/riscv/spike.c                | 210 ++++++++------
+ hw/riscv/virt.c                 | 495 ++++++++++++++++++--------------
+ include/hw/riscv/sifive_clint.h |   7 +-
+ include/hw/riscv/sifive_plic.h  |  12 +-
+ include/hw/riscv/spike.h        |   8 +-
+ include/hw/riscv/virt.h         |  12 +-
+ 10 files changed, 458 insertions(+), 338 deletions(-)
+
+-- 
+2.25.1
+
 
