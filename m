@@ -1,69 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jZgQo-0000eL-15
-	for mharc-qemu-riscv@gnu.org; Fri, 15 May 2020 15:55:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33894)
+	id 1jZnle-00015b-CF
+	for mharc-qemu-riscv@gnu.org; Fri, 15 May 2020 23:45:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50860)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jZgQm-0000dY-AJ; Fri, 15 May 2020 15:55:40 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:45523)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jZgQk-0007r1-V1; Fri, 15 May 2020 15:55:40 -0400
-Received: by mail-io1-xd41.google.com with SMTP id w25so3978743iol.12;
- Fri, 15 May 2020 12:55:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=glBjWxTO+LzErp3EZk5U3CUS+MU9Ypjf8rUnj2dHV88=;
- b=P5gkNos0mQ1rymRacC6LMKnukf2DCnDp0hWkU5rwcvYiKHWojkDkBz4W3J7731Bn9w
- SpvuwW4ci0suKnBfeWjK/ZsczYz3Ih8tFcIZlUE41HK1VCnAHjcrLd6pQCdN6xD2hDZ9
- 2vuGVRuKBNHnUdpYI4NGBY9fyZCVuJlEQvfZkDewzZxCJqwUVukO5nG8x6610GBdkooM
- ZYa9hxH2YjINmBGQkiE4rSifG4PloqqCbDkbBGGUTRZjCZyiCidbdgKx/Rpr1oG+nb3C
- l6ShEh6F9Tm3qiEPL2KWn52dDRokgnUxh4+CUSizitTm1AgIkz1bVh4HUolrpvyReQ8t
- PYrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=glBjWxTO+LzErp3EZk5U3CUS+MU9Ypjf8rUnj2dHV88=;
- b=UO9sVYIvqWbeZRElYqbLjJI67/haoFSTnEF48aAwpSLvJSGyxijWkvP4SynoYRUIbo
- 2aFZDz34t7d4Pe2kQq8TLhodLMlylOF/LXkaftKzSncE8dfS6UDW6b6BrdMAlAQuFn1p
- Laj51844EfMrC6rjukeacmEe0fbsHIW8IHZggoiMQiDllLheLCho+nqJHkUVDiZxrXFH
- 2S+jf3lPdBpqaZvjija4dPx+qmUxixAiLINkWkx2VOuA3kQgNtC6ki9RTtl+4fqw5nUa
- uAv8ppwSPSsZmUzN8BUATIOgZIUXOlRzfBgMOhZZZA39zgVY2AeWaCRRpiJG0OXyM8QM
- 2UTA==
-X-Gm-Message-State: AOAM530phoLjpQfuoEsUqGeRHgoLMiplorXIl9zbNEDDR+T4zi4ahXDu
- sYDtbW5QAWr9i+5XPY/2rB4jIzPOqOyOWa2iJGoYw6WZ
-X-Google-Smtp-Source: ABdhPJxbn7BlC1gbk3mwJBOnYBOB9REm7pIoqOS7/yP77NT/NoZa9fqWNbO8TrvoxcjuwodPthEKUZQEhjyESnY3oiw=
-X-Received: by 2002:a02:a887:: with SMTP id l7mr4744918jam.91.1589572537454;
- Fri, 15 May 2020 12:55:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1jZnlb-00014g-Rb; Fri, 15 May 2020 23:45:39 -0400
+Resent-Date: Fri, 15 May 2020 23:45:39 -0400
+Resent-Message-Id: <E1jZnlb-00014g-Rb@lists.gnu.org>
+Received: from sender4-of-o53.zoho.com ([136.143.188.53]:21306)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1jZnlZ-0006SO-VO; Fri, 15 May 2020 23:45:39 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1589600671; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=UPNJRF4uhkEN4Ez+XRgxcqrCsLCqdIxl30hIvAMeQi0qBP/V7e68cCtOZLuBtIqLfi1+akYVt8oxbvCp6LMFmoBSmbUYm9w9p69zCbQVo40SAY+X7IrEzvNN199GC/DL6ci3eayWPf0c6+SPMgdZL56XcZCK6z8NpO++aHnWVxk=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1589600671;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
+ bh=r9DbX6QuYHi9v2VdRPD4Oy7Sn9ES4IxIe8CIg7iIcqA=; 
+ b=JcvWKi21LSnXm/XtIF8pd+0J9rALc/DZarvhqOoInvBGajwiHAPTvhaR7sbjx0JQ+dCGQytJkk9f9bcdPwPwZIklbQ8t0n9ye3XAUd9b94wd0boZ/b60JUsjirAX+LrIO3o9Fs5vOHT2WiBilLogI3yJ9TiQ0W2sEdoMJUyBpTI=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 1589600669937532.6377436954517;
+ Fri, 15 May 2020 20:44:29 -0700 (PDT)
+Message-ID: <158960066736.9380.1957181284132319006@45ef0f9c86ae>
+In-Reply-To: <20200515170804.5707-1-philmd@redhat.com>
+Subject: Re: [PATCH v2 00/10] accel: Allow targets to use Kconfig,
+ disable semihosting by default
+Reply-To: <qemu-devel@nongnu.org>
 MIME-Version: 1.0
-References: <cover.1588878756.git.alistair.francis@wdc.com>
- <11b8f3cd28fd52b10caefe21a7b70444b85792f8.1588878756.git.alistair.francis@wdc.com>
- <eddc757b-db7f-f658-4417-f3ad65e52b13@redhat.com>
-In-Reply-To: <eddc757b-db7f-f658-4417-f3ad65e52b13@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 15 May 2020 12:46:48 -0700
-Message-ID: <CAKmqyKO0XLkO2+kQQi35X8Jh65Oj2XMqcZbM69zQJC5jNi07uw@mail.gmail.com>
-Subject: Re: [PATCH v2 5/9] hw/char: Initial commit of Ibex UART
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: philmd@redhat.com
+Cc: qemu-devel@nongnu.org, marex@denx.de, peter.maydell@linaro.org,
+ thuth@redhat.com, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, crwulff@gmail.com, laurent@vivier.eu,
+ philmd@redhat.com, jcmvbkbc@gmail.com, aleksandar.qemu.devel@gmail.com,
+ qemu-arm@nongnu.org, palmer@dabbelt.com, michael@walle.cc, pbonzini@redhat.com,
+ Alistair.Francis@wdc.com, aleksandar.rikalo@rt-rk.com, alex.bennee@linaro.org,
+ aurelien@aurel32.net, rth@twiddle.net
+Date: Fri, 15 May 2020 20:44:29 -0700 (PDT)
+X-ZohoMailClient: External
+Received-SPF: pass client-ip=136.143.188.53; envelope-from=no-reply@patchew.org;
+ helo=sender4-of-o53.zoho.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/15 23:45:34
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -77,310 +68,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2020 19:55:40 -0000
+X-List-Received-Date: Sat, 16 May 2020 03:45:40 -0000
 
-On Fri, May 15, 2020 at 12:28 AM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
->
-> On 5/7/20 9:13 PM, Alistair Francis wrote:
-> > This is the initial commit of the Ibex UART device. Serial TX is
-> > working, while RX has been implemeneted but untested.
-> >
-> > This is based on the documentation from:
-> > https://docs.opentitan.org/hw/ip/uart/doc/
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >   MAINTAINERS                 |   2 +
-> >   hw/char/Makefile.objs       |   1 +
-> >   hw/char/ibex_uart.c         | 490 +++++++++++++++++++++++++++++++++++=
-+
-> >   hw/riscv/Kconfig            |   4 +
-> >   include/hw/char/ibex_uart.h | 110 ++++++++
->
-> If possible setup scripts/git.orderfile to ease review (avoid scrolling).
-
-I have set this up.
-
->
-> >   5 files changed, 607 insertions(+)
-> >   create mode 100644 hw/char/ibex_uart.c
-> >   create mode 100644 include/hw/char/ibex_uart.h
-> >
-> [...]
-> > +static void ibex_uart_write(void *opaque, hwaddr addr,
-> > +                                  uint64_t val64, unsigned int size)
-> > +{
-> > +    IbexUartState *s =3D opaque;
-> > +    uint32_t value =3D val64;
-> > +
-> > +    switch (addr) {
-> > +    case IBEX_UART_INTR_STATE:
-> > +        /* Write 1 clear */
-> > +        s->uart_intr_state &=3D ~value;
-> > +        ibex_uart_update_irqs(s);
-> > +        break;
-> > +    case IBEX_UART_INTR_ENABLE:
-> > +        s->uart_intr_enable =3D value;
-> > +        ibex_uart_update_irqs(s);
-> > +        break;
-> > +    case IBEX_UART_INTR_TEST:
-> > +        s->uart_intr_state |=3D value;
-> > +        ibex_uart_update_irqs(s);
-> > +        break;
-> > +
-> > +    case IBEX_UART_CTRL:
-> > +        s->uart_ctrl =3D value;
-> > +
-> > +        if (value & UART_CTRL_NF) {
-> > +            qemu_log_mask(LOG_UNIMP,
-> > +                          "%s: UART_CTRL_NF is not supported\n", __fun=
-c__);
-> > +        }
-> > +        if (value & UART_CTRL_SLPBK) {
-> > +            qemu_log_mask(LOG_UNIMP,
-> > +                          "%s: UART_CTRL_SLPBK is not supported\n", __=
-func__);
-> > +        }
-> > +        if (value & UART_CTRL_LLPBK) {
-> > +            qemu_log_mask(LOG_UNIMP,
-> > +                          "%s: UART_CTRL_LLPBK is not supported\n", __=
-func__);
-> > +        }
-> > +        if (value & UART_CTRL_PARITY_EN) {
-> > +            qemu_log_mask(LOG_UNIMP,
-> > +                          "%s: UART_CTRL_PARITY_EN is not supported\n"=
-,
-> > +                          __func__);
-> > +        }
-> > +        if (value & UART_CTRL_PARITY_ODD) {
-> > +            qemu_log_mask(LOG_UNIMP,
-> > +                          "%s: UART_CTRL_PARITY_ODD is not supported\n=
-",
-> > +                          __func__);
-> > +        }
-> > +        if (value & UART_CTRL_RXBLVL) {
-> > +            qemu_log_mask(LOG_UNIMP,
-> > +                          "%s: UART_CTRL_RXBLVL is not supported\n", _=
-_func__);
-> > +        }
-> > +        if (value & UART_CTRL_NCO) {
-> > +            uint64_t baud =3D ((value & UART_CTRL_NCO) >> 16);
-> > +            baud *=3D 1000;
-> > +            baud /=3D 2 ^ 20;
-> > +
-> > +            s->char_tx_time =3D (NANOSECONDS_PER_SECOND / baud) * 10;
-> > +        }
-> > +        break;
-> > +    case IBEX_UART_STATUS:
-> > +        qemu_log_mask(LOG_GUEST_ERROR,
-> > +                      "%s: status is read only\n", __func__);
-> > +        break;
-> > +
-> > +    case IBEX_UART_RDATA:
-> > +        qemu_log_mask(LOG_GUEST_ERROR,
-> > +                      "%s: rdata is read only\n", __func__);
-> > +        break;
-> > +    case IBEX_UART_WDATA:
-> > +        uart_write_tx_fifo(s, (uint8_t *) &value, 1);
-> > +        break;
-> > +
-> > +    case IBEX_UART_FIFO_CTRL:
-> > +        s->uart_fifo_ctrl =3D value;
-> > +
-> > +        if (value & FIFO_CTRL_RXRST) {
-> > +            qemu_log_mask(LOG_UNIMP,
-> > +                          "%s: RX fifos are not supported\n", __func__=
-);
-> > +        }
-> > +        if (value & FIFO_CTRL_TXRST) {
-> > +            s->tx_level =3D 0;
-> > +        }
-> > +        break;
-> > +    case IBEX_UART_FIFO_STATUS:
-> > +        qemu_log_mask(LOG_GUEST_ERROR,
-> > +                      "%s: fifo_status is read only\n", __func__);
-> > +        break;
-> > +
-> > +    case IBEX_UART_OVRD:
-> > +        s->uart_ovrd =3D value;
-> > +        qemu_log_mask(LOG_UNIMP,
-> > +                      "%s: ovrd is not supported\n", __func__);
-> > +        break;
-> > +    case IBEX_UART_VAL:
-> > +        qemu_log_mask(LOG_GUEST_ERROR,
-> > +                      "%s: val is read only\n", __func__);
-> > +        break;
-> > +    case IBEX_UART_TIMEOUT_CTRL:
-> > +        s->uart_timeout_ctrl =3D value;
-> > +        qemu_log_mask(LOG_UNIMP,
-> > +                      "%s: timeout_ctrl is not supported\n", __func__)=
-;
-> > +        break;
-> > +    default:
-> > +        qemu_log_mask(LOG_GUEST_ERROR,
-> > +                      "%s: Bad offset 0x%"HWADDR_PRIx"\n", __func__, a=
-ddr);
-> > +    }
-> > +}
-> > +
-> > +static void fifo_trigger_update(void *opaque)
-> > +{
-> > +    IbexUartState *s =3D opaque;
-> > +
-> > +    if (s->uart_ctrl & UART_CTRL_TX_ENABLE) {
-> > +        ibex_uart_xmit(NULL, G_IO_OUT, s);
-> > +    }
-> > +}
-> > +
-> > +static const MemoryRegionOps ibex_uart_ops =3D {
-> > +    .read =3D ibex_uart_read,
-> > +    .write =3D ibex_uart_write,
->
-> As all registers are 32-bit, you want .impl min/max =3D 4 here.
-
-Added.
-
->
-> Otherwise patch looks good.
-
-Thanks!
-
-Alistair
-
->
-> > +    .endianness =3D DEVICE_NATIVE_ENDIAN,
-> > +};
-> > +
-> [...]
-> > diff --git a/include/hw/char/ibex_uart.h b/include/hw/char/ibex_uart.h
-> > new file mode 100644
-> > index 0000000000..2bec772615
-> > --- /dev/null
-> > +++ b/include/hw/char/ibex_uart.h
-> > @@ -0,0 +1,110 @@
-> > +/*
-> > + * QEMU lowRISC Ibex UART device
-> > + *
-> > + * Copyright (c) 2020 Western Digital
-> > + *
-> > + * Permission is hereby granted, free of charge, to any person obtaini=
-ng a copy
-> > + * of this software and associated documentation files (the "Software"=
-), to deal
-> > + * in the Software without restriction, including without limitation t=
-he rights
-> > + * to use, copy, modify, merge, publish, distribute, sublicense, and/o=
-r sell
-> > + * copies of the Software, and to permit persons to whom the Software =
-is
-> > + * furnished to do so, subject to the following conditions:
-> > + *
-> > + * The above copyright notice and this permission notice shall be incl=
-uded in
-> > + * all copies or substantial portions of the Software.
-> > + *
-> > + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXP=
-RESS OR
-> > + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABI=
-LITY,
-> > + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT S=
-HALL
-> > + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES O=
-R OTHER
-> > + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARI=
-SING FROM,
-> > + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALI=
-NGS IN
-> > + * THE SOFTWARE.
-> > + */
-> > +
-> > +#ifndef HW_IBEX_UART_H
-> > +#define HW_IBEX_UART_H
-> > +
-> > +#include "hw/sysbus.h"
-> > +#include "chardev/char-fe.h"
-> > +#include "qemu/timer.h"
-> > +
-> > +#define IBEX_UART_INTR_STATE   0x00
-> > +    #define INTR_STATE_TX_WATERMARK (1 << 0)
-> > +    #define INTR_STATE_RX_WATERMARK (1 << 1)
-> > +    #define INTR_STATE_TX_EMPTY     (1 << 2)
-> > +    #define INTR_STATE_RX_OVERFLOW  (1 << 3)
-> > +#define IBEX_UART_INTR_ENABLE  0x04
-> > +#define IBEX_UART_INTR_TEST    0x08
-> > +
-> > +#define IBEX_UART_CTRL         0x0c
-> > +    #define UART_CTRL_TX_ENABLE     (1 << 0)
-> > +    #define UART_CTRL_RX_ENABLE     (1 << 1)
-> > +    #define UART_CTRL_NF            (1 << 2)
-> > +    #define UART_CTRL_SLPBK         (1 << 4)
-> > +    #define UART_CTRL_LLPBK         (1 << 5)
-> > +    #define UART_CTRL_PARITY_EN     (1 << 6)
-> > +    #define UART_CTRL_PARITY_ODD    (1 << 7)
-> > +    #define UART_CTRL_RXBLVL        (3 << 8)
-> > +    #define UART_CTRL_NCO           (0xFFFF << 16)
-> > +
-> > +#define IBEX_UART_STATUS       0x10
-> > +    #define UART_STATUS_TXFULL  (1 << 0)
-> > +    #define UART_STATUS_RXFULL  (1 << 1)
-> > +    #define UART_STATUS_TXEMPTY (1 << 2)
-> > +    #define UART_STATUS_RXIDLE  (1 << 4)
-> > +    #define UART_STATUS_RXEMPTY (1 << 5)
-> > +
-> > +#define IBEX_UART_RDATA        0x14
-> > +#define IBEX_UART_WDATA        0x18
-> > +
-> > +#define IBEX_UART_FIFO_CTRL    0x1c
-> > +    #define FIFO_CTRL_RXRST          (1 << 0)
-> > +    #define FIFO_CTRL_TXRST          (1 << 1)
-> > +    #define FIFO_CTRL_RXILVL         (7 << 2)
-> > +    #define FIFO_CTRL_RXILVL_SHIFT   (2)
-> > +    #define FIFO_CTRL_TXILVL         (3 << 5)
-> > +    #define FIFO_CTRL_TXILVL_SHIFT   (5)
-> > +
-> > +#define IBEX_UART_FIFO_STATUS  0x20
-> > +#define IBEX_UART_OVRD         0x24
-> > +#define IBEX_UART_VAL          0x28
-> > +#define IBEX_UART_TIMEOUT_CTRL 0x2c
-> > +
-> > +#define IBEX_UART_TX_FIFO_SIZE 16
-> > +
-> > +#define TYPE_IBEX_UART "ibex-uart"
-> > +#define IBEX_UART(obj) \
-> > +    OBJECT_CHECK(IbexUartState, (obj), TYPE_IBEX_UART)
-> > +
-> > +typedef struct {
-> > +    /* <private> */
-> > +    SysBusDevice parent_obj;
-> > +
-> > +    /* <public> */
-> > +    MemoryRegion mmio;
-> > +
-> > +    uint8_t tx_fifo[IBEX_UART_TX_FIFO_SIZE];
-> > +    uint32_t tx_level;
-> > +
-> > +    QEMUTimer *fifo_trigger_handle;
-> > +    uint64_t char_tx_time;
-> > +
-> > +    uint32_t uart_intr_state;
-> > +    uint32_t uart_intr_enable;
-> > +    uint32_t uart_ctrl;
-> > +    uint32_t uart_status;
-> > +    uint32_t uart_rdata;
-> > +    uint32_t uart_fifo_ctrl;
-> > +    uint32_t uart_fifo_status;
-> > +    uint32_t uart_ovrd;
-> > +    uint32_t uart_val;
-> > +    uint32_t uart_timeout_ctrl;
-> > +
-> > +    CharBackend chr;
-> > +    qemu_irq tx_watermark;
-> > +    qemu_irq rx_watermark;
-> > +    qemu_irq tx_empty;
-> > +    qemu_irq rx_overflow;
-> > +} IbexUartState;
-> > +#endif /* HW_IBEX_UART_H */
-> >
->
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDUxNTE3MDgwNC41NzA3
+LTEtcGhpbG1kQHJlZGhhdC5jb20vCgoKCkhpLAoKVGhpcyBzZXJpZXMgZmFpbGVkIHRoZSBkb2Nr
+ZXItcXVpY2tAY2VudG9zNyBidWlsZCB0ZXN0LiBQbGVhc2UgZmluZCB0aGUgdGVzdGluZyBjb21t
+YW5kcyBhbmQKdGhlaXIgb3V0cHV0IGJlbG93LiBJZiB5b3UgaGF2ZSBEb2NrZXIgaW5zdGFsbGVk
+LCB5b3UgY2FuIHByb2JhYmx5IHJlcHJvZHVjZSBpdApsb2NhbGx5LgoKPT09IFRFU1QgU0NSSVBU
+IEJFR0lOID09PQojIS9iaW4vYmFzaAptYWtlIGRvY2tlci1pbWFnZS1jZW50b3M3IFY9MSBORVRX
+T1JLPTEKdGltZSBtYWtlIGRvY2tlci10ZXN0LXF1aWNrQGNlbnRvczcgU0hPV19FTlY9MSBKPTE0
+IE5FVFdPUks9MQo9PT0gVEVTVCBTQ1JJUFQgRU5EID09PQoKL3RtcC9xZW11LXRlc3Qvc3JjL3Rh
+cmdldC9hcm0vYXJtLXNlbWkuYzo3ODc6IHVuZGVmaW5lZCByZWZlcmVuY2UgdG8gYHFlbXVfc2Vt
+aWhvc3RpbmdfY29uc29sZV9vdXRzJwovdG1wL3FlbXUtdGVzdC9zcmMvdGFyZ2V0L2FybS9hcm0t
+c2VtaS5jOjgxNTogdW5kZWZpbmVkIHJlZmVyZW5jZSB0byBgcWVtdV9zZW1paG9zdGluZ19jb25z
+b2xlX2luYycKL3RtcC9xZW11LXRlc3Qvc3JjL3RhcmdldC9hcm0vYXJtLXNlbWkuYzo3ODQ6IHVu
+ZGVmaW5lZCByZWZlcmVuY2UgdG8gYHFlbXVfc2VtaWhvc3RpbmdfY29uc29sZV9vdXRjJwpjb2xs
+ZWN0MjogZXJyb3I6IGxkIHJldHVybmVkIDEgZXhpdCBzdGF0dXMKbWFrZVsxXTogKioqIFtxZW11
+LXN5c3RlbS1hYXJjaDY0XSBFcnJvciAxCm1ha2U6ICoqKiBbYWFyY2g2NC1zb2Z0bW11L2FsbF0g
+RXJyb3IgMgpUcmFjZWJhY2sgKG1vc3QgcmVjZW50IGNhbGwgbGFzdCk6CiAgRmlsZSAiLi90ZXN0
+cy9kb2NrZXIvZG9ja2VyLnB5IiwgbGluZSA2NjQsIGluIDxtb2R1bGU+CiAgICBzeXMuZXhpdCht
+YWluKCkpCi0tLQogICAgcmFpc2UgQ2FsbGVkUHJvY2Vzc0Vycm9yKHJldGNvZGUsIGNtZCkKc3Vi
+cHJvY2Vzcy5DYWxsZWRQcm9jZXNzRXJyb3I6IENvbW1hbmQgJ1snc3VkbycsICctbicsICdkb2Nr
+ZXInLCAncnVuJywgJy0tbGFiZWwnLCAnY29tLnFlbXUuaW5zdGFuY2UudXVpZD00OTBiZjE4YjQx
+ZTA0ZGY1ODE4MmJkYjE5OTZiODk2YicsICctdScsICcxMDAzJywgJy0tc2VjdXJpdHktb3B0Jywg
+J3NlY2NvbXA9dW5jb25maW5lZCcsICctLXJtJywgJy1lJywgJ1RBUkdFVF9MSVNUPScsICctZScs
+ICdFWFRSQV9DT05GSUdVUkVfT1BUUz0nLCAnLWUnLCAnVj0nLCAnLWUnLCAnSj0xNCcsICctZScs
+ICdERUJVRz0nLCAnLWUnLCAnU0hPV19FTlY9MScsICctZScsICdDQ0FDSEVfRElSPS92YXIvdG1w
+L2NjYWNoZScsICctdicsICcvaG9tZS9wYXRjaGV3Mi8uY2FjaGUvcWVtdS1kb2NrZXItY2NhY2hl
+Oi92YXIvdG1wL2NjYWNoZTp6JywgJy12JywgJy92YXIvdG1wL3BhdGNoZXctdGVzdGVyLXRtcC1r
+MDNvZTV5aC9zcmMvZG9ja2VyLXNyYy4yMDIwLTA1LTE1LTIzLjQxLjQzLjIxNjI5Oi92YXIvdG1w
+L3FlbXU6eixybycsICdxZW11OmNlbnRvczcnLCAnL3Zhci90bXAvcWVtdS9ydW4nLCAndGVzdC1x
+dWljayddJyByZXR1cm5lZCBub24temVybyBleGl0IHN0YXR1cyAyLgpmaWx0ZXI9LS1maWx0ZXI9
+bGFiZWw9Y29tLnFlbXUuaW5zdGFuY2UudXVpZD00OTBiZjE4YjQxZTA0ZGY1ODE4MmJkYjE5OTZi
+ODk2YgptYWtlWzFdOiAqKiogW2RvY2tlci1ydW5dIEVycm9yIDEKbWFrZVsxXTogTGVhdmluZyBk
+aXJlY3RvcnkgYC92YXIvdG1wL3BhdGNoZXctdGVzdGVyLXRtcC1rMDNvZTV5aC9zcmMnCm1ha2U6
+ICoqKiBbZG9ja2VyLXJ1bi10ZXN0LXF1aWNrQGNlbnRvczddIEVycm9yIDIKCnJlYWwgICAgMm00
+NS40MjBzCnVzZXIgICAgMG04LjI1N3MKCgpUaGUgZnVsbCBsb2cgaXMgYXZhaWxhYmxlIGF0Cmh0
+dHA6Ly9wYXRjaGV3Lm9yZy9sb2dzLzIwMjAwNTE1MTcwODA0LjU3MDctMS1waGlsbWRAcmVkaGF0
+LmNvbS90ZXN0aW5nLmRvY2tlci1xdWlja0BjZW50b3M3Lz90eXBlPW1lc3NhZ2UuCi0tLQpFbWFp
+bCBnZW5lcmF0ZWQgYXV0b21hdGljYWxseSBieSBQYXRjaGV3IFtodHRwczovL3BhdGNoZXcub3Jn
+L10uClBsZWFzZSBzZW5kIHlvdXIgZmVlZGJhY2sgdG8gcGF0Y2hldy1kZXZlbEByZWRoYXQuY29t
 
