@@ -1,71 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jZsj8-000799-0A
-	for mharc-qemu-riscv@gnu.org; Sat, 16 May 2020 05:03:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56386)
+	id 1jZvSh-0002u8-Cw
+	for mharc-qemu-riscv@gnu.org; Sat, 16 May 2020 07:58:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45006)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jZsj6-00078y-SO; Sat, 16 May 2020 05:03:24 -0400
-Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:42749)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jZsj3-000742-Li; Sat, 16 May 2020 05:03:24 -0400
-Received: by mail-yb1-xb44.google.com with SMTP id i16so2439876ybq.9;
- Sat, 16 May 2020 02:03:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=7gDfXY7+roULfpI+gdlhrS1+v3OswkESG8P3TB4WY6E=;
- b=Q1dC006URRFHJmZXQQQgLo4f1gtxp7myXOKwYyugTIh3eTs5ptScPoAeJ0pdwz24nz
- BiFAZMNGLtNJBLeZoi4r7FMl+Vb5Z0DrH16CyqLrUiIkT5Q1XPjH6AenpzGx3jn8YuFa
- j4jfv+arirhKfDmCMYRH+V5pXswEXNe3TDvCEy5N3Q8VTR7MFD1nSMJMgSa4IKaMolqX
- qPAFL+RMJF91+jBDfAeh62t339zbibEoGKb4GdqEOuq7ouJpud3dbJkSsu3yEYKmIF3t
- l6GMKM8bvFY2zT6cGOMEBAcSqm4RygXbo6oqjDuHpbcFt7OHjeh0/QkYvwARYQ7pqRa+
- RR9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=7gDfXY7+roULfpI+gdlhrS1+v3OswkESG8P3TB4WY6E=;
- b=leXABOgKGh3E8OAaRejL3az8fmneL9pDfuhBQQDO0eXQas07RIRlvKDqov6BAeAvio
- egtbxPBC9Of69rTLE2/AwNjza4eQdcrsZRvRTT+WsaQNZC69vbz+bw1CFi56LZihdD+1
- Ka6DNSOqe+eQELki2Ompt7mPRf2r67GdRYDEfNtZyxRpHpXcabgeYrwBztdSti6nRNMT
- OiNbcelUZ0euRvqqUxhS+pYIolFtDGGdGsHbLE1MGdM6GDgI0ROGy7xz++S/cFQBmFDB
- q/hEicWvgV6GflBXZ5hC1b4Mi87woLTt10nJ74cxmAyIyAtNdfTIUrMTW6UghQ6FFnLk
- BKiA==
-X-Gm-Message-State: AOAM531ANzL99l90x8/DTWoZU3fi7h+wZU2/EUGpk9dGrBHfL08m6aYW
- o3/NxhMYu6gwu+dMPOt71NpSP5HwrHMGb6nlMnU=
-X-Google-Smtp-Source: ABdhPJz/dvBesxt/8SqY7BNghK98mG5JGWr1TlQF9oQrFNJ7dPzFgEH7DC0nop8tMtB/1AF0661BxYGNkUlxVqm8F+0=
-X-Received: by 2002:a25:bdc8:: with SMTP id g8mr11325839ybk.122.1589619799898; 
- Sat, 16 May 2020 02:03:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1jZvSf-0002tw-VD; Sat, 16 May 2020 07:58:37 -0400
+Resent-Date: Sat, 16 May 2020 07:58:37 -0400
+Resent-Message-Id: <E1jZvSf-0002tw-VD@lists.gnu.org>
+Received: from sender4-of-o53.zoho.com ([136.143.188.53]:21326)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1jZvSd-0007cK-RZ; Sat, 16 May 2020 07:58:37 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1589630300; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=eEKmgMws7R7MnTdiobJi7kU+eySWJJNgDi+8wTdrAdPjKbErYAb1m2AW4w8jTlvNUEA6CkbNiX84w4weAHcNbUQKJTvnbqmCNTxz3AP+9/qPw9JRF4X1iDJoW0STzn3L9B7gEcZoI2xPD/XpPaiIf8jwtpZXfV/YGAFXxNIK9S0=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1589630300;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
+ bh=1RpvGy/NDW8qEs7dJIjLZKUU/oW61szrc+xBeXn+w+o=; 
+ b=BjeiP2asYubT0tQO56T8+ybOO1nUOkrrZhrNWdZrL/3RceVP04EKhJNBnTib/ibmFcfwPmZJJrb5o6sFFXgIQaWQxL/e6TI+BJbsIn33Y/jSqanAcfU9seSputHqYc9ZSpH/RksBwoCOeiBxB8OpXuE1GIk9nLwIBEr835uhmdM=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 1589630298545149.29489680263214;
+ Sat, 16 May 2020 04:58:18 -0700 (PDT)
+Message-ID: <158963029685.15373.7462129698683921952@45ef0f9c86ae>
+In-Reply-To: <20200516063746.18296-1-anup.patel@wdc.com>
+Subject: Re: [PATCH 0/4] RISC-V multi-socket support
+Reply-To: <qemu-devel@nongnu.org>
 MIME-Version: 1.0
-References: <cover.1588878756.git.alistair.francis@wdc.com>
- <44d0486b0fd156a756af544866dd7d19609b1aa6.1588878756.git.alistair.francis@wdc.com>
- <01168f32-c21c-b9fd-cb9c-06511e28bd20@redhat.com>
- <CAKmqyKMwdBmZ8kdi0xp0kJ1sPrWSGYZ304ZY8G+4xK9yYQ3VKg@mail.gmail.com>
- <CAEUhbmWWdDQfj8XBkWzDXkNdvcvEic8K23NuCpNyQdfxM4TxOg@mail.gmail.com>
- <CAKmqyKMOTnc9YX9adMyrQ5NnFZY5EZgyYYA_+23_ryWOtV92pQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKMOTnc9YX9adMyrQ5NnFZY5EZgyYYA_+23_ryWOtV92pQ@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sat, 16 May 2020 17:03:06 +0800
-Message-ID: <CAEUhbmVu2=zCs8yOzH_wRMmtXDCA_b8pPFO4jQjnbh1iZvjUuQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/9] target/riscv: Don't overwrite the reset vector
-To: Alistair Francis <alistair23@gmail.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b44;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb44.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: anup.patel@wdc.com
+Cc: peter.maydell@linaro.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ sagark@eecs.berkeley.edu, atish.patra@wdc.com, anup.patel@wdc.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, anup@brainfault.org
+Date: Sat, 16 May 2020 04:58:18 -0700 (PDT)
+X-ZohoMailClient: External
+Received-SPF: pass client-ip=136.143.188.53; envelope-from=no-reply@patchew.org;
+ helo=sender4-of-o53.zoho.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/16 06:59:03
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,162 +63,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 May 2020 09:03:25 -0000
+X-List-Received-Date: Sat, 16 May 2020 11:58:38 -0000
 
-On Sat, May 16, 2020 at 3:51 AM Alistair Francis <alistair23@gmail.com> wro=
-te:
->
-> On Thu, May 14, 2020 at 9:54 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > On Fri, May 15, 2020 at 5:51 AM Alistair Francis <alistair23@gmail.com>=
- wrote:
-> > >
-> > > On Thu, May 14, 2020 at 10:54 AM Philippe Mathieu-Daud=C3=A9
-> > > <philmd@redhat.com> wrote:
-> > > >
-> > > > On 5/7/20 9:13 PM, Alistair Francis wrote:
-> > > > > If the reset vector is set in the init function don't set it agai=
-n in
-> > > > > realise.
-> > > >
-> > > > typo "realize".
-> > >
-> > > It's not a typo, just correct English :)
-> > >
-> > > I have changed it.
-> > >
-> > > >
-> > > > >
-> > > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > ---
-> > > > >   target/riscv/cpu.c | 20 +++++++++++---------
-> > > > >   1 file changed, 11 insertions(+), 9 deletions(-)
-> > > > >
-> > > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > > > index 059d71f2c7..8f837edf8d 100644
-> > > > > --- a/target/riscv/cpu.c
-> > > > > +++ b/target/riscv/cpu.c
-> > > > > @@ -111,6 +111,14 @@ static void set_feature(CPURISCVState *env, =
-int feature)
-> > > > >       env->features |=3D (1ULL << feature);
-> > > > >   }
-> > > > >
-> > > > > +static int get_resetvec(CPURISCVState *env)
-> > > > > +{
-> > > > > +#ifndef CONFIG_USER_ONLY
-> > > > > +    return env->resetvec;
-> > > > > +#endif
-> > > > > +    return 0;
-> > > >
-> > > > Don't you get an error about double return? Maybe use #else?
-> > >
-> > > Apparently not, I have changed it though.
-> > >
-> > > Alistair
-> > >
-> > > >
-> > > > > +}
-> > > > > +
-> > > > >   static void set_resetvec(CPURISCVState *env, int resetvec)
-> > > > >   {
-> > > > >   #ifndef CONFIG_USER_ONLY
-> > > > > @@ -123,7 +131,6 @@ static void riscv_any_cpu_init(Object *obj)
-> > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> > > > >       set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | =
-RVU);
-> > > > >       set_priv_version(env, PRIV_VERSION_1_11_0);
-> > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
-> > > > >   }
-> > > > >
-> > > > >   #if defined(TARGET_RISCV32)
-> > > > > @@ -140,7 +147,6 @@ static void rv32gcsu_priv1_09_1_cpu_init(Obje=
-ct *obj)
-> > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> > > > >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RV=
-S | RVU);
-> > > > >       set_priv_version(env, PRIV_VERSION_1_09_1);
-> > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
-> > > > >       set_feature(env, RISCV_FEATURE_MMU);
-> > > > >       set_feature(env, RISCV_FEATURE_PMP);
-> > > > >   }
-> > > > > @@ -150,7 +156,6 @@ static void rv32gcsu_priv1_10_0_cpu_init(Obje=
-ct *obj)
-> > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> > > > >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RV=
-S | RVU);
-> > > > >       set_priv_version(env, PRIV_VERSION_1_10_0);
-> > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
-> > > > >       set_feature(env, RISCV_FEATURE_MMU);
-> > > > >       set_feature(env, RISCV_FEATURE_PMP);
-> > > > >   }
-> > > > > @@ -160,7 +165,6 @@ static void rv32imacu_nommu_cpu_init(Object *=
-obj)
-> > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> > > > >       set_misa(env, RV32 | RVI | RVM | RVA | RVC | RVU);
-> > > > >       set_priv_version(env, PRIV_VERSION_1_10_0);
-> > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
-> > > > >       set_feature(env, RISCV_FEATURE_PMP);
-> > > > >   }
-> > > > >
-> > > > > @@ -169,7 +173,6 @@ static void rv32imafcu_nommu_cpu_init(Object =
-*obj)
-> > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> > > > >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVC | RVU);
-> > > > >       set_priv_version(env, PRIV_VERSION_1_10_0);
-> > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
-> > > > >       set_feature(env, RISCV_FEATURE_PMP);
-> > > > >   }
-> > > > >
-> > > > > @@ -187,7 +190,6 @@ static void rv64gcsu_priv1_09_1_cpu_init(Obje=
-ct *obj)
-> > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> > > > >       set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RV=
-S | RVU);
-> > > > >       set_priv_version(env, PRIV_VERSION_1_09_1);
-> > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
-> > > > >       set_feature(env, RISCV_FEATURE_MMU);
-> > > > >       set_feature(env, RISCV_FEATURE_PMP);
-> > > > >   }
-> > > > > @@ -197,7 +199,6 @@ static void rv64gcsu_priv1_10_0_cpu_init(Obje=
-ct *obj)
-> > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> > > > >       set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RV=
-S | RVU);
-> > > > >       set_priv_version(env, PRIV_VERSION_1_10_0);
-> > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
-> > > > >       set_feature(env, RISCV_FEATURE_MMU);
-> > > > >       set_feature(env, RISCV_FEATURE_PMP);
-> > > > >   }
-> > > > > @@ -207,7 +208,6 @@ static void rv64imacu_nommu_cpu_init(Object *=
-obj)
-> > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> > > > >       set_misa(env, RV64 | RVI | RVM | RVA | RVC | RVU);
-> > > > >       set_priv_version(env, PRIV_VERSION_1_10_0);
-> > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
-> > > > >       set_feature(env, RISCV_FEATURE_PMP);
-> > > > >   }
-> > > > >
-> > > > > @@ -399,7 +399,9 @@ static void riscv_cpu_realize(DeviceState *de=
-v, Error **errp)
-> > > > >       }
-> > > > >
-> > > > >       set_priv_version(env, priv_version);
-> > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
-> > > > > +    if (!get_resetvec(env)) {
-> >
-> > What if we have a RISC-V CPU whose reset vector is at address 0?
->
-> That won't work then. I think if that happens we could swap to a
-> negative number.
->
-
-env->resetvec is declared as target_ulong so negative number does not work =
-here.
-
-How about just remove set_resetvec() in riscv_cpu_realize()? Or
-introduce a new config parameter for the reset vector, and only
-override it if the config parameter is given, like other properties?
-
-Regards,
-Bin
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDUxNjA2Mzc0Ni4xODI5
+Ni0xLWFudXAucGF0ZWxAd2RjLmNvbS8KCgoKSGksCgpUaGlzIHNlcmllcyBzZWVtcyB0byBoYXZl
+IHNvbWUgY29kaW5nIHN0eWxlIHByb2JsZW1zLiBTZWUgb3V0cHV0IGJlbG93IGZvcgptb3JlIGlu
+Zm9ybWF0aW9uOgoKTWVzc2FnZS1pZDogMjAyMDA1MTYwNjM3NDYuMTgyOTYtMS1hbnVwLnBhdGVs
+QHdkYy5jb20KU3ViamVjdDogW1BBVENIIDAvNF0gUklTQy1WIG11bHRpLXNvY2tldCBzdXBwb3J0
+ClR5cGU6IHNlcmllcwoKPT09IFRFU1QgU0NSSVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQg
+cmV2LXBhcnNlIGJhc2UgPiAvZGV2L251bGwgfHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBk
+aWZmLnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZpZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdp
+dCBjb25maWcgLS1sb2NhbCBkaWZmLmFsZ29yaXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNr
+cGF0Y2gucGwgLS1tYWlsYmFjayBiYXNlLi4KPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0
+aW5nIDNjOGNmNWE5YzIxZmY4NzgyMTY0ZDFkZWY3ZjQ0YmQ4ODg3MTMzODQKU3dpdGNoZWQgdG8g
+YSBuZXcgYnJhbmNoICd0ZXN0Jwo5MDMxNzU1IGh3L3Jpc2N2OiB2aXJ0OiBBbGxvdyBjcmVhdGlu
+ZyBtdWx0aXBsZSBzb2NrZXRzCjY3ZTk1NDcgaHcvcmlzY3Y6IEFsbG93IGNyZWF0aW5nIG11bHRp
+cGxlIGluc3RhbmNlcyBvZiBQTElDCjI5OTlhMTEgaHcvcmlzY3Y6IHNwaWtlOiBBbGxvdyBjcmVh
+dGluZyBtdWx0aXBsZSBzb2NrZXRzCmI1NjNhODAgaHcvcmlzY3Y6IEFsbG93IGNyZWF0aW5nIG11
+bHRpcGxlIGluc3RhbmNlcyBvZiBDTElOVAoKPT09IE9VVFBVVCBCRUdJTiA9PT0KMS80IENoZWNr
+aW5nIGNvbW1pdCBiNTYzYTgwODlhN2EgKGh3L3Jpc2N2OiBBbGxvdyBjcmVhdGluZyBtdWx0aXBs
+ZSBpbnN0YW5jZXMgb2YgQ0xJTlQpCjIvNCBDaGVja2luZyBjb21taXQgMjk5OWExMTAxZjI3ICho
+dy9yaXNjdjogc3Bpa2U6IEFsbG93IGNyZWF0aW5nIG11bHRpcGxlIHNvY2tldHMpCkVSUk9SOiBi
+cmFjZXMge30gYXJlIG5lY2Vzc2FyeSBmb3IgYWxsIGFybXMgb2YgdGhpcyBzdGF0ZW1lbnQKIzIw
+MjogRklMRTogaHcvcmlzY3Yvc3Bpa2UuYzoxOTQ6CisgICAgaWYgKChzbXBfY3B1cyAvIHMtPm51
+bV9zb2NzKSA8IFNQSUtFX0NQVVNfUEVSX1NPQ0tFVF9NSU4pClsuLi5dCgpFUlJPUjogYnJhY2Vz
+IHt9IGFyZSBuZWNlc3NhcnkgZm9yIGFsbCBhcm1zIG9mIHRoaXMgc3RhdGVtZW50CiMyMDY6IEZJ
+TEU6IGh3L3Jpc2N2L3NwaWtlLmM6MTk4OgorICAgIGlmIChTUElLRV9TT0NLRVRTX01BWCA8IHMt
+Pm51bV9zb2NzKQpbLi4uXQoKRVJST1I6IGJyYWNlcyB7fSBhcmUgbmVjZXNzYXJ5IGZvciBhbGwg
+YXJtcyBvZiB0aGlzIHN0YXRlbWVudAojMjEyOiBGSUxFOiBody9yaXNjdi9zcGlrZS5jOjIwNDoK
+KyAgICAgICAgaWYgKGkgPT0gKHMtPm51bV9zb2NzIC0gMSkpClsuLi5dCisgICAgICAgIGVsc2UK
+Wy4uLl0KCldBUk5JTkc6IGxpbmUgb3ZlciA4MCBjaGFyYWN0ZXJzCiMyNDg6IEZJTEU6IGh3L3Jp
+c2N2L3NwaWtlLmM6Mjk5OgorICAgIGh0aWZfbW1faW5pdChzeXN0ZW1fbWVtb3J5LCBtYXNrX3Jv
+bSwgJnMtPnNvY1swXS5oYXJ0c1swXS5lbnYsIHNlcmlhbF9oZCgwKSk7CgpXQVJOSU5HOiBsaW5l
+IG92ZXIgODAgY2hhcmFjdGVycwojMjY2OiBGSUxFOiBody9yaXNjdi9zcGlrZS5jOjMyMjoKKyAg
+ICBvYmplY3RfaW5pdGlhbGl6ZV9jaGlsZChPQkpFQ1QobWFjaGluZSksICJzb2MiLCAmcy0+c29j
+WzBdLCBzaXplb2Yocy0+c29jWzBdKSwKCldBUk5JTkc6IGxpbmUgb3ZlciA4MCBjaGFyYWN0ZXJz
+CiMyODQ6IEZJTEU6IGh3L3Jpc2N2L3NwaWtlLmM6Mzg2OgorICAgIGh0aWZfbW1faW5pdChzeXN0
+ZW1fbWVtb3J5LCBtYXNrX3JvbSwgJnMtPnNvY1swXS5oYXJ0c1swXS5lbnYsIHNlcmlhbF9oZCgw
+KSk7CgpXQVJOSU5HOiBsaW5lIG92ZXIgODAgY2hhcmFjdGVycwojMzAyOiBGSUxFOiBody9yaXNj
+di9zcGlrZS5jOjQxNDoKKyAgICBvYmplY3RfaW5pdGlhbGl6ZV9jaGlsZChPQkpFQ1QobWFjaGlu
+ZSksICJzb2MiLCAmcy0+c29jWzBdLCBzaXplb2Yocy0+c29jWzBdKSwKCldBUk5JTkc6IGxpbmUg
+b3ZlciA4MCBjaGFyYWN0ZXJzCiMzMjk6IEZJTEU6IGh3L3Jpc2N2L3NwaWtlLmM6NDk3OgorICAg
+IGh0aWZfbW1faW5pdChzeXN0ZW1fbWVtb3J5LCBtYXNrX3JvbSwgJnMtPnNvY1swXS5oYXJ0c1sw
+XS5lbnYsIHNlcmlhbF9oZCgwKSk7Cgp0b3RhbDogMyBlcnJvcnMsIDUgd2FybmluZ3MsIDMyMiBs
+aW5lcyBjaGVja2VkCgpQYXRjaCAyLzQgaGFzIHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3
+LiAgSWYgYW55IG9mIHRoZXNlIGVycm9ycwphcmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVt
+IHRvIHRoZSBtYWludGFpbmVyLCBzZWUKQ0hFQ0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KCjMvNCBD
+aGVja2luZyBjb21taXQgNjdlOTU0NzdmY2JlIChody9yaXNjdjogQWxsb3cgY3JlYXRpbmcgbXVs
+dGlwbGUgaW5zdGFuY2VzIG9mIFBMSUMpCjQvNCBDaGVja2luZyBjb21taXQgOTAzMTc1NTFkOWRh
+IChody9yaXNjdjogdmlydDogQWxsb3cgY3JlYXRpbmcgbXVsdGlwbGUgc29ja2V0cykKRVJST1I6
+IHNwYWNlcyByZXF1aXJlZCBhcm91bmQgdGhhdCAnKicgKGN0eDpWeFYpCiMzMjogRklMRTogaHcv
+cmlzY3YvdmlydC5jOjYzOgorICAgIFtWSVJUX1BMSUNdID0gICAgICAgIHsgIDB4YzAwMDAwMCwg
+VklSVF9QTElDX1NJWkUoVklSVF9DUFVTX01BWCoyKSB9LAogICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCldBUk5JTkc6
+IGxpbmUgb3ZlciA4MCBjaGFyYWN0ZXJzCiMyOTU6IEZJTEU6IGh3L3Jpc2N2L3ZpcnQuYzozNDM6
+CisgICAgICAgIHFlbXVfZmR0X3NldHByb3BfY2VsbChmZHQsIG5hbWUsICJpbnRlcnJ1cHQtcGFy
+ZW50IiwgcGxpY192aXJ0aW9fcGhhbmRsZSk7CgpFUlJPUjogYnJhY2VzIHt9IGFyZSBuZWNlc3Nh
+cnkgZm9yIGFsbCBhcm1zIG9mIHRoaXMgc3RhdGVtZW50CiM0Nzg6IEZJTEU6IGh3L3Jpc2N2L3Zp
+cnQuYzo0OTc6CisgICAgaWYgKChzbXBfY3B1cyAvIHMtPm51bV9zb2NzKSA8IFZJUlRfQ1BVU19Q
+RVJfU09DS0VUX01JTikKWy4uLl0KCkVSUk9SOiBicmFjZXMge30gYXJlIG5lY2Vzc2FyeSBmb3Ig
+YWxsIGFybXMgb2YgdGhpcyBzdGF0ZW1lbnQKIzQ4MjogRklMRTogaHcvcmlzY3YvdmlydC5jOjUw
+MToKKyAgICBpZiAoVklSVF9TT0NLRVRTX01BWCA8IHMtPm51bV9zb2NzKQpbLi4uXQoKRVJST1I6
+IGJyYWNlcyB7fSBhcmUgbmVjZXNzYXJ5IGZvciBhbGwgYXJtcyBvZiB0aGlzIHN0YXRlbWVudAoj
+NDk3OiBGSUxFOiBody9yaXNjdi92aXJ0LmM6NTA4OgorICAgICAgICBpZiAoaSA9PSAocy0+bnVt
+X3NvY3MgLSAxKSkKWy4uLl0KKyAgICAgICAgZWxzZQpbLi4uXQoKdG90YWw6IDQgZXJyb3JzLCAx
+IHdhcm5pbmdzLCA2MzggbGluZXMgY2hlY2tlZAoKUGF0Y2ggNC80IGhhcyBzdHlsZSBwcm9ibGVt
+cywgcGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBvc2l0
+aXZlcyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4gTUFJ
+TlRBSU5FUlMuCgo9PT0gT1VUUFVUIEVORCA9PT0KClRlc3QgY29tbWFuZCBleGl0ZWQgd2l0aCBj
+b2RlOiAxCgoKVGhlIGZ1bGwgbG9nIGlzIGF2YWlsYWJsZSBhdApodHRwOi8vcGF0Y2hldy5vcmcv
+bG9ncy8yMDIwMDUxNjA2Mzc0Ni4xODI5Ni0xLWFudXAucGF0ZWxAd2RjLmNvbS90ZXN0aW5nLmNo
+ZWNrcGF0Y2gvP3R5cGU9bWVzc2FnZS4KLS0tCkVtYWlsIGdlbmVyYXRlZCBhdXRvbWF0aWNhbGx5
+IGJ5IFBhdGNoZXcgW2h0dHBzOi8vcGF0Y2hldy5vcmcvXS4KUGxlYXNlIHNlbmQgeW91ciBmZWVk
+YmFjayB0byBwYXRjaGV3LWRldmVsQHJlZGhhdC5jb20=
 
