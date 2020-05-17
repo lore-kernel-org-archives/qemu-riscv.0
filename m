@@ -1,56 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jZvSh-0002u8-Cw
-	for mharc-qemu-riscv@gnu.org; Sat, 16 May 2020 07:58:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45006)
+	id 1jaN0t-0004oc-KT
+	for mharc-qemu-riscv@gnu.org; Sun, 17 May 2020 13:23:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33444)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1jZvSf-0002tw-VD; Sat, 16 May 2020 07:58:37 -0400
-Resent-Date: Sat, 16 May 2020 07:58:37 -0400
-Resent-Message-Id: <E1jZvSf-0002tw-VD@lists.gnu.org>
-Received: from sender4-of-o53.zoho.com ([136.143.188.53]:21326)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1jaN0s-0004kY-Kb
+ for qemu-riscv@nongnu.org; Sun, 17 May 2020 13:23:46 -0400
+Received: from us-smtp-2.mimecast.com ([207.211.31.81]:36916
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1jZvSd-0007cK-RZ; Sat, 16 May 2020 07:58:37 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1589630300; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=eEKmgMws7R7MnTdiobJi7kU+eySWJJNgDi+8wTdrAdPjKbErYAb1m2AW4w8jTlvNUEA6CkbNiX84w4weAHcNbUQKJTvnbqmCNTxz3AP+9/qPw9JRF4X1iDJoW0STzn3L9B7gEcZoI2xPD/XpPaiIf8jwtpZXfV/YGAFXxNIK9S0=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1589630300;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=1RpvGy/NDW8qEs7dJIjLZKUU/oW61szrc+xBeXn+w+o=; 
- b=BjeiP2asYubT0tQO56T8+ybOO1nUOkrrZhrNWdZrL/3RceVP04EKhJNBnTib/ibmFcfwPmZJJrb5o6sFFXgIQaWQxL/e6TI+BJbsIn33Y/jSqanAcfU9seSputHqYc9ZSpH/RksBwoCOeiBxB8OpXuE1GIk9nLwIBEr835uhmdM=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1589630298545149.29489680263214;
- Sat, 16 May 2020 04:58:18 -0700 (PDT)
-Message-ID: <158963029685.15373.7462129698683921952@45ef0f9c86ae>
-In-Reply-To: <20200516063746.18296-1-anup.patel@wdc.com>
-Subject: Re: [PATCH 0/4] RISC-V multi-socket support
-Reply-To: <qemu-devel@nongnu.org>
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1jaN0r-0005Rj-A4
+ for qemu-riscv@nongnu.org; Sun, 17 May 2020 13:23:45 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1589736223;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:openpgp:openpgp;
+ bh=rlRpGP7lZ1BbdLKPa6j3raKO/TET11U3U5RyLw6CsDY=;
+ b=JpLhksT3IYmeOePhXB7ku4ZNwsl90etXPGKu+NNQpVyzvWhhgxNnzpdtAlVer/Fzaaqitg
+ 9l1iw40tYsulguY+6TNlOX8ZhSNCO3uT6usaQ3wlvJQF7esjOqRzHtb3fPRLmjehLf7sZw
+ 4ecCWjh6IrU8pkhJ8JjupeB6gn3tEP4=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-431-DKW3VnAuPICfpJH_kA0eMA-1; Sun, 17 May 2020 13:23:41 -0400
+X-MC-Unique: DKW3VnAuPICfpJH_kA0eMA-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 15B37107ACCA;
+ Sun, 17 May 2020 17:23:38 +0000 (UTC)
+Received: from thuth.remote.csb (ovpn-112-98.ams2.redhat.com [10.36.112.98])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 805929CA0;
+ Sun, 17 May 2020 17:23:31 +0000 (UTC)
+Subject: Re: [PATCH v2 01/10] MAINTAINERS: Fix KVM path expansion glob
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ qemu-devel@nongnu.org
+Cc: Max Filippov <jcmvbkbc@gmail.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Richard Henderson <rth@twiddle.net>, qemu-arm@nongnu.org,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
+ Chris Wulff <crwulff@gmail.com>, qemu-riscv@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>, Peter Maydell
+ <peter.maydell@linaro.org>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Marek Vasut <marex@denx.de>, Michael Walle <michael@walle.cc>,
+ Richard Henderson <richard.henderson@linaro.org>
+References: <20200515170804.5707-1-philmd@redhat.com>
+ <20200515170804.5707-2-philmd@redhat.com>
+From: Thomas Huth <thuth@redhat.com>
+Openpgp: preference=signencrypt
+Message-ID: <09d86ad7-88b6-9f68-8ea3-5d277fe6eea3@redhat.com>
+Date: Sun, 17 May 2020 19:23:29 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: anup.patel@wdc.com
-Cc: peter.maydell@linaro.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
- sagark@eecs.berkeley.edu, atish.patra@wdc.com, anup.patel@wdc.com,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, anup@brainfault.org
-Date: Sat, 16 May 2020 04:58:18 -0700 (PDT)
-X-ZohoMailClient: External
-Received-SPF: pass client-ip=136.143.188.53; envelope-from=no-reply@patchew.org;
- helo=sender4-of-o53.zoho.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/16 06:59:03
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+In-Reply-To: <20200515170804.5707-2-philmd@redhat.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=207.211.31.81; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/17 13:23:43
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -63,77 +90,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 May 2020 11:58:38 -0000
+X-List-Received-Date: Sun, 17 May 2020 17:23:47 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDUxNjA2Mzc0Ni4xODI5
-Ni0xLWFudXAucGF0ZWxAd2RjLmNvbS8KCgoKSGksCgpUaGlzIHNlcmllcyBzZWVtcyB0byBoYXZl
-IHNvbWUgY29kaW5nIHN0eWxlIHByb2JsZW1zLiBTZWUgb3V0cHV0IGJlbG93IGZvcgptb3JlIGlu
-Zm9ybWF0aW9uOgoKTWVzc2FnZS1pZDogMjAyMDA1MTYwNjM3NDYuMTgyOTYtMS1hbnVwLnBhdGVs
-QHdkYy5jb20KU3ViamVjdDogW1BBVENIIDAvNF0gUklTQy1WIG11bHRpLXNvY2tldCBzdXBwb3J0
-ClR5cGU6IHNlcmllcwoKPT09IFRFU1QgU0NSSVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQg
-cmV2LXBhcnNlIGJhc2UgPiAvZGV2L251bGwgfHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBk
-aWZmLnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZpZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdp
-dCBjb25maWcgLS1sb2NhbCBkaWZmLmFsZ29yaXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNr
-cGF0Y2gucGwgLS1tYWlsYmFjayBiYXNlLi4KPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0
-aW5nIDNjOGNmNWE5YzIxZmY4NzgyMTY0ZDFkZWY3ZjQ0YmQ4ODg3MTMzODQKU3dpdGNoZWQgdG8g
-YSBuZXcgYnJhbmNoICd0ZXN0Jwo5MDMxNzU1IGh3L3Jpc2N2OiB2aXJ0OiBBbGxvdyBjcmVhdGlu
-ZyBtdWx0aXBsZSBzb2NrZXRzCjY3ZTk1NDcgaHcvcmlzY3Y6IEFsbG93IGNyZWF0aW5nIG11bHRp
-cGxlIGluc3RhbmNlcyBvZiBQTElDCjI5OTlhMTEgaHcvcmlzY3Y6IHNwaWtlOiBBbGxvdyBjcmVh
-dGluZyBtdWx0aXBsZSBzb2NrZXRzCmI1NjNhODAgaHcvcmlzY3Y6IEFsbG93IGNyZWF0aW5nIG11
-bHRpcGxlIGluc3RhbmNlcyBvZiBDTElOVAoKPT09IE9VVFBVVCBCRUdJTiA9PT0KMS80IENoZWNr
-aW5nIGNvbW1pdCBiNTYzYTgwODlhN2EgKGh3L3Jpc2N2OiBBbGxvdyBjcmVhdGluZyBtdWx0aXBs
-ZSBpbnN0YW5jZXMgb2YgQ0xJTlQpCjIvNCBDaGVja2luZyBjb21taXQgMjk5OWExMTAxZjI3ICho
-dy9yaXNjdjogc3Bpa2U6IEFsbG93IGNyZWF0aW5nIG11bHRpcGxlIHNvY2tldHMpCkVSUk9SOiBi
-cmFjZXMge30gYXJlIG5lY2Vzc2FyeSBmb3IgYWxsIGFybXMgb2YgdGhpcyBzdGF0ZW1lbnQKIzIw
-MjogRklMRTogaHcvcmlzY3Yvc3Bpa2UuYzoxOTQ6CisgICAgaWYgKChzbXBfY3B1cyAvIHMtPm51
-bV9zb2NzKSA8IFNQSUtFX0NQVVNfUEVSX1NPQ0tFVF9NSU4pClsuLi5dCgpFUlJPUjogYnJhY2Vz
-IHt9IGFyZSBuZWNlc3NhcnkgZm9yIGFsbCBhcm1zIG9mIHRoaXMgc3RhdGVtZW50CiMyMDY6IEZJ
-TEU6IGh3L3Jpc2N2L3NwaWtlLmM6MTk4OgorICAgIGlmIChTUElLRV9TT0NLRVRTX01BWCA8IHMt
-Pm51bV9zb2NzKQpbLi4uXQoKRVJST1I6IGJyYWNlcyB7fSBhcmUgbmVjZXNzYXJ5IGZvciBhbGwg
-YXJtcyBvZiB0aGlzIHN0YXRlbWVudAojMjEyOiBGSUxFOiBody9yaXNjdi9zcGlrZS5jOjIwNDoK
-KyAgICAgICAgaWYgKGkgPT0gKHMtPm51bV9zb2NzIC0gMSkpClsuLi5dCisgICAgICAgIGVsc2UK
-Wy4uLl0KCldBUk5JTkc6IGxpbmUgb3ZlciA4MCBjaGFyYWN0ZXJzCiMyNDg6IEZJTEU6IGh3L3Jp
-c2N2L3NwaWtlLmM6Mjk5OgorICAgIGh0aWZfbW1faW5pdChzeXN0ZW1fbWVtb3J5LCBtYXNrX3Jv
-bSwgJnMtPnNvY1swXS5oYXJ0c1swXS5lbnYsIHNlcmlhbF9oZCgwKSk7CgpXQVJOSU5HOiBsaW5l
-IG92ZXIgODAgY2hhcmFjdGVycwojMjY2OiBGSUxFOiBody9yaXNjdi9zcGlrZS5jOjMyMjoKKyAg
-ICBvYmplY3RfaW5pdGlhbGl6ZV9jaGlsZChPQkpFQ1QobWFjaGluZSksICJzb2MiLCAmcy0+c29j
-WzBdLCBzaXplb2Yocy0+c29jWzBdKSwKCldBUk5JTkc6IGxpbmUgb3ZlciA4MCBjaGFyYWN0ZXJz
-CiMyODQ6IEZJTEU6IGh3L3Jpc2N2L3NwaWtlLmM6Mzg2OgorICAgIGh0aWZfbW1faW5pdChzeXN0
-ZW1fbWVtb3J5LCBtYXNrX3JvbSwgJnMtPnNvY1swXS5oYXJ0c1swXS5lbnYsIHNlcmlhbF9oZCgw
-KSk7CgpXQVJOSU5HOiBsaW5lIG92ZXIgODAgY2hhcmFjdGVycwojMzAyOiBGSUxFOiBody9yaXNj
-di9zcGlrZS5jOjQxNDoKKyAgICBvYmplY3RfaW5pdGlhbGl6ZV9jaGlsZChPQkpFQ1QobWFjaGlu
-ZSksICJzb2MiLCAmcy0+c29jWzBdLCBzaXplb2Yocy0+c29jWzBdKSwKCldBUk5JTkc6IGxpbmUg
-b3ZlciA4MCBjaGFyYWN0ZXJzCiMzMjk6IEZJTEU6IGh3L3Jpc2N2L3NwaWtlLmM6NDk3OgorICAg
-IGh0aWZfbW1faW5pdChzeXN0ZW1fbWVtb3J5LCBtYXNrX3JvbSwgJnMtPnNvY1swXS5oYXJ0c1sw
-XS5lbnYsIHNlcmlhbF9oZCgwKSk7Cgp0b3RhbDogMyBlcnJvcnMsIDUgd2FybmluZ3MsIDMyMiBs
-aW5lcyBjaGVja2VkCgpQYXRjaCAyLzQgaGFzIHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3
-LiAgSWYgYW55IG9mIHRoZXNlIGVycm9ycwphcmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVt
-IHRvIHRoZSBtYWludGFpbmVyLCBzZWUKQ0hFQ0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KCjMvNCBD
-aGVja2luZyBjb21taXQgNjdlOTU0NzdmY2JlIChody9yaXNjdjogQWxsb3cgY3JlYXRpbmcgbXVs
-dGlwbGUgaW5zdGFuY2VzIG9mIFBMSUMpCjQvNCBDaGVja2luZyBjb21taXQgOTAzMTc1NTFkOWRh
-IChody9yaXNjdjogdmlydDogQWxsb3cgY3JlYXRpbmcgbXVsdGlwbGUgc29ja2V0cykKRVJST1I6
-IHNwYWNlcyByZXF1aXJlZCBhcm91bmQgdGhhdCAnKicgKGN0eDpWeFYpCiMzMjogRklMRTogaHcv
-cmlzY3YvdmlydC5jOjYzOgorICAgIFtWSVJUX1BMSUNdID0gICAgICAgIHsgIDB4YzAwMDAwMCwg
-VklSVF9QTElDX1NJWkUoVklSVF9DUFVTX01BWCoyKSB9LAogICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCldBUk5JTkc6
-IGxpbmUgb3ZlciA4MCBjaGFyYWN0ZXJzCiMyOTU6IEZJTEU6IGh3L3Jpc2N2L3ZpcnQuYzozNDM6
-CisgICAgICAgIHFlbXVfZmR0X3NldHByb3BfY2VsbChmZHQsIG5hbWUsICJpbnRlcnJ1cHQtcGFy
-ZW50IiwgcGxpY192aXJ0aW9fcGhhbmRsZSk7CgpFUlJPUjogYnJhY2VzIHt9IGFyZSBuZWNlc3Nh
-cnkgZm9yIGFsbCBhcm1zIG9mIHRoaXMgc3RhdGVtZW50CiM0Nzg6IEZJTEU6IGh3L3Jpc2N2L3Zp
-cnQuYzo0OTc6CisgICAgaWYgKChzbXBfY3B1cyAvIHMtPm51bV9zb2NzKSA8IFZJUlRfQ1BVU19Q
-RVJfU09DS0VUX01JTikKWy4uLl0KCkVSUk9SOiBicmFjZXMge30gYXJlIG5lY2Vzc2FyeSBmb3Ig
-YWxsIGFybXMgb2YgdGhpcyBzdGF0ZW1lbnQKIzQ4MjogRklMRTogaHcvcmlzY3YvdmlydC5jOjUw
-MToKKyAgICBpZiAoVklSVF9TT0NLRVRTX01BWCA8IHMtPm51bV9zb2NzKQpbLi4uXQoKRVJST1I6
-IGJyYWNlcyB7fSBhcmUgbmVjZXNzYXJ5IGZvciBhbGwgYXJtcyBvZiB0aGlzIHN0YXRlbWVudAoj
-NDk3OiBGSUxFOiBody9yaXNjdi92aXJ0LmM6NTA4OgorICAgICAgICBpZiAoaSA9PSAocy0+bnVt
-X3NvY3MgLSAxKSkKWy4uLl0KKyAgICAgICAgZWxzZQpbLi4uXQoKdG90YWw6IDQgZXJyb3JzLCAx
-IHdhcm5pbmdzLCA2MzggbGluZXMgY2hlY2tlZAoKUGF0Y2ggNC80IGhhcyBzdHlsZSBwcm9ibGVt
-cywgcGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBvc2l0
-aXZlcyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4gTUFJ
-TlRBSU5FUlMuCgo9PT0gT1VUUFVUIEVORCA9PT0KClRlc3QgY29tbWFuZCBleGl0ZWQgd2l0aCBj
-b2RlOiAxCgoKVGhlIGZ1bGwgbG9nIGlzIGF2YWlsYWJsZSBhdApodHRwOi8vcGF0Y2hldy5vcmcv
-bG9ncy8yMDIwMDUxNjA2Mzc0Ni4xODI5Ni0xLWFudXAucGF0ZWxAd2RjLmNvbS90ZXN0aW5nLmNo
-ZWNrcGF0Y2gvP3R5cGU9bWVzc2FnZS4KLS0tCkVtYWlsIGdlbmVyYXRlZCBhdXRvbWF0aWNhbGx5
-IGJ5IFBhdGNoZXcgW2h0dHBzOi8vcGF0Y2hldy5vcmcvXS4KUGxlYXNlIHNlbmQgeW91ciBmZWVk
-YmFjayB0byBwYXRjaGV3LWRldmVsQHJlZGhhdC5jb20=
+On 15/05/2020 19.07, Philippe Mathieu-Daudé wrote:
+> The KVM files has been moved from target-ARCH to the target/ARCH/
+> folder in commit fcf5ef2a. Fix the pathname expansion.
+> 
+> Fixes: fcf5ef2a ("Move target-* CPU file into a target/ folder")
+
+Oops, my bad. Sorry for that oversight!
+
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 47ef3139e6..fd88a3de49 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -361,7 +361,7 @@ Overall KVM CPUs
+>  M: Paolo Bonzini <pbonzini@redhat.com>
+>  L: kvm@vger.kernel.org
+>  S: Supported
+> -F: */kvm.*
+> +F: */*/kvm*
+>  F: accel/kvm/
+>  F: accel/stubs/kvm-stub.c
+>  F: include/hw/kvm/
+> 
+
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+
 
