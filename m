@@ -1,79 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jabbs-0000ha-UC
-	for mharc-qemu-riscv@gnu.org; Mon, 18 May 2020 04:58:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48736)
+	id 1jaeff-000887-Gx
+	for mharc-qemu-riscv@gnu.org; Mon, 18 May 2020 08:15:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47522)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jabbr-0000fO-Fp
- for qemu-riscv@nongnu.org; Mon, 18 May 2020 04:58:55 -0400
-Received: from us-smtp-2.mimecast.com ([205.139.110.61]:42811
+ (Exim 4.90_1) (envelope-from <dgilbert@redhat.com>)
+ id 1jaefd-00086S-DA
+ for qemu-riscv@nongnu.org; Mon, 18 May 2020 08:15:01 -0400
+Received: from us-smtp-2.mimecast.com ([205.139.110.61]:49455
  helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jabbq-0004Qh-Df
- for qemu-riscv@nongnu.org; Mon, 18 May 2020 04:58:55 -0400
+ (Exim 4.90_1) (envelope-from <dgilbert@redhat.com>)
+ id 1jaefc-0005I1-43
+ for qemu-riscv@nongnu.org; Mon, 18 May 2020 08:15:01 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589792333;
+ s=mimecast20190719; t=1589804097;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=jdn8VCfgkteyNUxKS9hYGhs/54YrFa5Prt1Xdxt3huM=;
- b=NMiKiXnOZlFpe+FYAQ+6vhGKrWUpn9E/AsPb83b2nLE6T0hVLuBJQvt0EgxTYHln9rhLYe
- B9EmnHU6bwFd4OQenZ9hHV3s+D+zUQhk4arR/fWiG5DwO/0PnHPCGwVe0X9kDjX0WtypwT
- QzOiLjvrOsnvkAFkCA46tFGQWSzbPps=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-62-vlp5qjDHMOGCvpNJnjaY8g-1; Mon, 18 May 2020 04:58:52 -0400
-X-MC-Unique: vlp5qjDHMOGCvpNJnjaY8g-1
-Received: by mail-wr1-f69.google.com with SMTP id r7so5333961wrc.13
- for <qemu-riscv@nongnu.org>; Mon, 18 May 2020 01:58:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=jdn8VCfgkteyNUxKS9hYGhs/54YrFa5Prt1Xdxt3huM=;
- b=PqBw+jPAR1pRgWJ6ZXWIhNKjcZmqG6qL9c4PK4JUY/lgqV+I1scCsTnfNp2Vp7ePah
- UWt/XqHIo9ju9hr9KfPjkn5NfqYulaYIXR99+x+NpETp7oDZq71buqrusxXf7oD6sn0w
- CKZNe1CBUXjQFYbns9AKOpISM1fIuvEIM2U9flcBffsnVXCi2IAinAUlwJDcBVYP2tMv
- eEWHT+ZhTN5r9JRNW6twyHsGA3aV8AUpi0PmTxv3cLyBd3YmF4iBZh7EZnKlHd9tFBIv
- HRcFaDAJpnzIlWdpi/gxttVYTwGtSsRNROIFkUit/bTMZbfl2EyiUQwL+X5t6HOzoKH8
- StYA==
-X-Gm-Message-State: AOAM531+jy3MmfXjLDv1TSOV4ZIPk1o8344roX2w1iwG3hShpBjZZT9J
- gy3s6AHBjJ4BmWLx4DAz7eqANL3AObEazIWFKQ4yndFQplJfw+Nc3sPSJ+3tmJNzKRtMW5oq55H
- HPXeDaXgFQLTSZL0=
-X-Received: by 2002:adf:cd83:: with SMTP id q3mr19349577wrj.187.1589792330770; 
- Mon, 18 May 2020 01:58:50 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJybEUm5Wjpeg5HBMZkdte8hrlYhKBo3P6eIZw5TCJamsV3wELqc7F7hRZJnDryrOEG48bHEtQ==
-X-Received: by 2002:adf:cd83:: with SMTP id q3mr19349565wrj.187.1589792330623; 
- Mon, 18 May 2020 01:58:50 -0700 (PDT)
-Received: from [192.168.1.38] (17.red-88-21-202.staticip.rima-tde.net.
- [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id t14sm11686202wrs.1.2020.05.18.01.58.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 May 2020 01:58:49 -0700 (PDT)
-Subject: Re: [PATCH 20/24] riscv: Fix type of SiFive[EU]SocState, member
- parent_obj
-To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
-Cc: berrange@redhat.com, ehabkost@redhat.com,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ bh=HuoUku7otY8lzNDgk4DT2MIEC7umNArTKFEtMvFwoLE=;
+ b=cGcHx/e2qvgqlVWlIT1vjWYTFGu32/2bfvFq60sLTD7SvEydAvu6/aS7vnbwttQc08qDaT
+ eNPpoIT8QmN7eqG/EHjqp+6wYzvcUENXNmG15+J+oV5+vRRZnCY1wQSGyma9XLHjyileHM
+ CAtk6Nqfurvof6i09dHLTCjQE9Q8RGU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-198-VM47gqQ6M5m6NR1oNhJ9ow-1; Mon, 18 May 2020 08:14:56 -0400
+X-MC-Unique: VM47gqQ6M5m6NR1oNhJ9ow-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C08A1108BD19;
+ Mon, 18 May 2020 12:14:47 +0000 (UTC)
+Received: from work-vm (ovpn-112-78.ams2.redhat.com [10.36.112.78])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id DDD215D9DD;
+ Mon, 18 May 2020 12:14:36 +0000 (UTC)
+Date: Mon, 18 May 2020 13:14:34 +0100
+From: "Dr. David Alan Gilbert" <dgilbert@redhat.com>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Cornelia Huck <cohuck@redhat.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org,
- pbonzini@redhat.com, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20200518050408.4579-1-armbru@redhat.com>
- <20200518050408.4579-21-armbru@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <6f1312bd-4018-c1b4-4d1a-9c1a1a0c7e67@redhat.com>
-Date: Mon, 18 May 2020 10:58:48 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ Richard Henderson <rth@twiddle.net>, Paolo Bonzini <pbonzini@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ David Hildenbrand <david@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: Re: [PATCH v3 01/12] Makefile: Only build virtiofsd if system-mode
+ is enabled
+Message-ID: <20200518121434.GA2787@work-vm>
+References: <20200504152922.21365-1-philmd@redhat.com>
+ <20200504152922.21365-2-philmd@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200518050408.4579-21-armbru@redhat.com>
-Content-Language: en-US
+In-Reply-To: <20200504152922.21365-2-philmd@redhat.com>
+User-Agent: Mutt/1.13.4 (2020-02-15)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=205.139.110.61; envelope-from=philmd@redhat.com;
+Content-Disposition: inline
+Received-SPF: pass client-ip=205.139.110.61; envelope-from=dgilbert@redhat.com;
  helo=us-smtp-delivery-1.mimecast.com
 X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/17 23:32:08
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic]
@@ -83,7 +73,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+ T_HK_NAME_DR=0.01, URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -96,54 +86,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2020 08:58:55 -0000
+X-List-Received-Date: Mon, 18 May 2020 12:15:01 -0000
 
-On 5/18/20 7:04 AM, Markus Armbruster wrote:
-> Device "riscv.sifive.e.soc" is a direct subtype of TYPE_DEVICE, but
-> its instance struct SiFiveESoCState's member @parent_obj is
-> SysBusDevice instead of DeviceState.  Correct that.
+* Philippe Mathieu-Daudé (philmd@redhat.com) wrote:
+> Do not build the virtiofsd helper when configured with
+> --disable-system.
 > 
-> Same for "riscv.sifive.u.soc"'s instance struct SiFiveUSoCState.
-> 
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
-> Cc: Alistair Francis <Alistair.Francis@wdc.com>
-> Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-> Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> Cc: qemu-riscv@nongnu.org
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+
+Yeh that seems reasonable; although virtiofsd is self-contained enough
+that perhaps it should be unrelated to whether you're building that.
+
+
+
+Acked-by: Dr. David Alan Gilbert <dgilbert@redhat.com>
+
 > ---
->   include/hw/riscv/sifive_e.h | 2 +-
->   include/hw/riscv/sifive_u.h | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
+>  Makefile | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> index 25ce7aa9d5..f05644df7c 100644
-> --- a/include/hw/riscv/sifive_e.h
-> +++ b/include/hw/riscv/sifive_e.h
-> @@ -29,7 +29,7 @@
->   
->   typedef struct SiFiveESoCState {
->       /*< private >*/
-> -    SysBusDevice parent_obj;
-> +    DeviceState parent_obj;
->   
->       /*< public >*/
->       RISCVHartArrayState cpus;
-> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> index 16c297ec5f..5f62cf5f85 100644
-> --- a/include/hw/riscv/sifive_u.h
-> +++ b/include/hw/riscv/sifive_u.h
-> @@ -31,7 +31,7 @@
->   
->   typedef struct SiFiveUSoCState {
->       /*< private >*/
-> -    SysBusDevice parent_obj;
-> +    DeviceState parent_obj;
->   
->       /*< public >*/
->       CPUClusterState e_cluster;
+> diff --git a/Makefile b/Makefile
+> index 34275f57c9..e46b6ef5d4 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -345,7 +345,7 @@ HELPERS-y += vhost-user-gpu$(EXESUF)
+>  vhost-user-json-y += contrib/vhost-user-gpu/50-qemu-gpu.json
+>  endif
+>  
+> -ifeq ($(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG),yyy)
+> +ifeq ($(CONFIG_SOFTMMU)$(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG),yyyy)
+>  HELPERS-y += virtiofsd$(EXESUF)
+>  vhost-user-json-y += tools/virtiofsd/50-qemu-virtiofsd.json
+>  endif
+> -- 
+> 2.21.3
 > 
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+> 
+--
+Dr. David Alan Gilbert / dgilbert@redhat.com / Manchester, UK
 
 
