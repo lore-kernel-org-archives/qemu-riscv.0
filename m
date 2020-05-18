@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jajDC-0004So-Bt
-	for mharc-qemu-riscv@gnu.org; Mon, 18 May 2020 13:05:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35730)
+	id 1jajJc-0004cm-Ge
+	for mharc-qemu-riscv@gnu.org; Mon, 18 May 2020 13:12:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36598)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jajDA-0004PU-HW; Mon, 18 May 2020 13:05:56 -0400
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:40659)
+ id 1jajJa-0004bP-6m; Mon, 18 May 2020 13:12:34 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:33138)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jajD9-0004nI-H5; Mon, 18 May 2020 13:05:56 -0400
-Received: by mail-io1-xd44.google.com with SMTP id s10so11397608iog.7;
- Mon, 18 May 2020 10:05:54 -0700 (PDT)
+ id 1jajJY-0006Mc-TA; Mon, 18 May 2020 13:12:33 -0400
+Received: by mail-il1-x142.google.com with SMTP id o67so5952472ila.0;
+ Mon, 18 May 2020 10:12:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=L9k9qYuhzCDCbujEXRqKRvNubN+vICoc9TrmsvH+2XI=;
- b=u4b7yMlNu/3nLLw5nUE0jELTTuZi4Kw8l8cQVjwPM8JFj0PPUPfoiKr1Ao3sPCjVe+
- qd9brfWjp6XM2yTwd/rC5HtyyhgC9fotubwM3mXJv389xKDEqcKgnczDagwdr74n4XAQ
- nuyWbTlXJlGNk5QDWq7wwUZP8fBKBGxlyLbsvySWu71PPoDjcB78ZDnH5+mxlZ1iSNYl
- VE2Zd+1g/rMoVs2at1alwypFA7Om/oFaAbZUAKTZOGU7dfcNrGzX1CKwEz1Cp2hkqJ7Z
- fWJNQBZdHfiItrkNKuldc1M1erVk7AaLBdLEUFQDmPcg1Eb8F4HQiC+pxbfIx/XIwgew
- DqWw==
+ :cc; bh=rsKtgwwVLavRmGAhjPjBx9qgFbdHnf/krAIZv1IDcSU=;
+ b=NHFzbB4aOCB6dbCyrURod39KCriS0H5R/tNoJTZ8CiLO7QMFT0gEiprIToau8LvsAK
+ RrxWZEeYLibtUi+3V6M4mY9VtDkGdKD2t0WKWEqQWnnufwCe3xnNNLttQK5Y8jV8TlFq
+ rbdnM4MWCYFb4FXE2B4DklKqibeEd8QFVzzOugv1mH8SfBSfjJ8RMuTT0E7cMLXnDrCb
+ nraIE02L1SOvzK/F9mjMp4F/etVuoR/G2qCEcF4H7Mwv1Q9VP74Ucrr4waSrGuex9TUl
+ T9aZNa8I50OdkgKBqZLH0Ra53MRz3/+btwUgwg8pd/1hzln5ehD8/bIN+6Arcc+8cGeo
+ sBnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=L9k9qYuhzCDCbujEXRqKRvNubN+vICoc9TrmsvH+2XI=;
- b=T79Ix6EZKrN3wrIeUR/MbzJhqAPuWsG8Y9mEmi3yOkk6j7GXvHyRqoLPHbFiWb9A8r
- T+NZpO+U7inYiU+AJRazOtxDnZNeg0FOxklFmsJxNNZLBzGajvtek+Iasx9XZm8fGuK/
- dTSkgrKyaJ4T7aAJ6YOTKlmDbSq+hXl//AruA3eUvs83Ar+dl6DlqViwhsaw5HOvUA8x
- Ye9YswqLsZwdHLIUCf/FHuFZIT47FxKqW+9r20VxEZkfYKdKH6zTPx4ihjTMx8akbqG1
- sJMVIjAjDcpzmIBt7nTYMVE6NZ93LCbAU906rMZXSGH1nwkPLQj26v2izLAxyrf4wmb5
- CzRw==
-X-Gm-Message-State: AOAM533EIwB9rTFzQDhj8iLGHkNxeqQPKhsGveTMEgyjbKUde+yms8ZU
- GzW0xv4pibi5NsiAnIO8VFZ7QSPNHCls4sM5xK0=
-X-Google-Smtp-Source: ABdhPJz9z6gReMqlby+93jEq1NWHDxnb9TK/LD8Ud1d7hWGoBk6NSW8MxDX+5/PfgRdWO+Up0y13wBSbYnhwYZMR1Uc=
-X-Received: by 2002:a02:a118:: with SMTP id f24mr17089184jag.8.1589821553988; 
- Mon, 18 May 2020 10:05:53 -0700 (PDT)
+ bh=rsKtgwwVLavRmGAhjPjBx9qgFbdHnf/krAIZv1IDcSU=;
+ b=iC0O9nZgtJpY3ps3DhV7f+ruGrEjMupBhhMHoDoUzuoKaiB3oAqG72yUGZuulrz0QK
+ JKM7YMm24RUHQcW8hx2B3sMbnx3ISwtKxIdmqz9/oH6zwjdkoljxADnz2LB6SXLx68eM
+ zol9Kl9DHxTJT41sdBOtjnkYYvG616AkQgwPycb5AXNuzrsdBp9wBpGq6EAFONRHCvPJ
+ Ahz+oJDBoM3husE3RcPVR4IOZKUoxPAI+lgEhJlkAe54d+7ikdEAttgrGV1hf9L+dUEu
+ WpMKqyY3xtzE5BOlJ+0raHEliO5hC8yMahNL9dsgSWAkcgqpuwz54xzdsiKkLkMLCXLd
+ qEWA==
+X-Gm-Message-State: AOAM5321jhub16RhWDmbgQ/zZEJN7R7qxhic+6zLw2FiKFzYz0pmdYWE
+ IsFIFQN+f2HbbnUIUiTMcwS6gfcRsyRMu4jouis=
+X-Google-Smtp-Source: ABdhPJx7RpmUwl9g5kaDes4ka3sfyhZrqQYPoYwGrR0Cw3hWV9291eP/gxVmJ5fBIFcplbAzkMNIB1No7YZ0Tvzbrfc=
+X-Received: by 2002:a92:48d1:: with SMTP id j78mr17960291ilg.131.1589821951497; 
+ Mon, 18 May 2020 10:12:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200518050408.4579-1-armbru@redhat.com>
- <20200518050408.4579-21-armbru@redhat.com>
-In-Reply-To: <20200518050408.4579-21-armbru@redhat.com>
+ <20200518050408.4579-20-armbru@redhat.com>
+In-Reply-To: <20200518050408.4579-20-armbru@redhat.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 May 2020 09:57:02 -0700
-Message-ID: <CAKmqyKON3YWJNGiN_xpM4z8x_WSa1kMbNE-gZectExboiCtqYQ@mail.gmail.com>
-Subject: Re: [PATCH 20/24] riscv: Fix type of SiFive[EU]SocState,
- member parent_obj
+Date: Mon, 18 May 2020 10:03:36 -0700
+Message-ID: <CAKmqyKPSF+rZCzXFeQCJZZ-w5AAUjwnv1aBPcRb2k5tR6fTkZw@mail.gmail.com>
+Subject: Re: [PATCH 19/24] riscv: Fix to put "riscv.hart_array" devices on
+ sysbus
 To: Markus Armbruster <armbru@redhat.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "Daniel P. Berrange" <berrange@redhat.com>, 
@@ -55,8 +55,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -79,15 +79,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2020 17:05:57 -0000
+X-List-Received-Date: Mon, 18 May 2020 17:12:34 -0000
 
-On Sun, May 17, 2020 at 10:07 PM Markus Armbruster <armbru@redhat.com> wrote:
+On Sun, May 17, 2020 at 10:16 PM Markus Armbruster <armbru@redhat.com> wrote:
 >
-> Device "riscv.sifive.e.soc" is a direct subtype of TYPE_DEVICE, but
-> its instance struct SiFiveESoCState's member @parent_obj is
-> SysBusDevice instead of DeviceState.  Correct that.
+> riscv_sifive_e_soc_init(), riscv_sifive_u_soc_init(),
+> spike_board_init(), spike_v1_10_0_board_init(),
+> spike_v1_09_1_board_init(), and riscv_virt_board_init() create
+> "riscv-hart_array" sysbus devices in a way that leaves them unplugged.
 >
-> Same for "riscv.sifive.u.soc"'s instance struct SiFiveUSoCState.
+> Create them the common way that puts them into the main system bus.
+> Affects machines sifive_e, sifive_u, spike, spike_v1.10, spike_v1.9.1,
+> and virt.  Visible in "info qtree", here's the change for sifive_e:
+>
+>      bus: main-system-bus
+>        type System
+>     +  dev: riscv.hart_array, id ""
+>     +    num-harts = 1 (0x1)
+>     +    hartid-base = 0 (0x0)
+>     +    cpu-type = "sifive-e31-riscv-cpu"
+>        dev: sifive_soc.gpio, id ""
 >
 > Cc: Palmer Dabbelt <palmer@dabbelt.com>
 > Cc: Alistair Francis <Alistair.Francis@wdc.com>
@@ -101,36 +112,112 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  include/hw/riscv/sifive_e.h | 2 +-
->  include/hw/riscv/sifive_u.h | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+>  hw/riscv/sifive_e.c |  5 ++---
+>  hw/riscv/sifive_u.c | 14 ++++++--------
+>  hw/riscv/spike.c    | 12 ++++++------
+>  hw/riscv/virt.c     |  4 ++--
+>  4 files changed, 16 insertions(+), 19 deletions(-)
 >
-> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> index 25ce7aa9d5..f05644df7c 100644
-> --- a/include/hw/riscv/sifive_e.h
-> +++ b/include/hw/riscv/sifive_e.h
-> @@ -29,7 +29,7 @@
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index b53109521e..8831e6728e 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -120,9 +120,8 @@ static void riscv_sifive_e_soc_init(Object *obj)
+>      MachineState *ms = MACHINE(qdev_get_machine());
+>      SiFiveESoCState *s = RISCV_E_SOC(obj);
 >
->  typedef struct SiFiveESoCState {
->      /*< private >*/
-> -    SysBusDevice parent_obj;
-> +    DeviceState parent_obj;
+> -    object_initialize_child(obj, "cpus", &s->cpus,
+> -                            sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
+> -                            &error_abort, NULL);
+> +    sysbus_init_child_obj(obj, "cpus", &s->cpus,
+> +                          sizeof(s->cpus), TYPE_RISCV_HART_ARRAY);
+>      object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
+>                              &error_abort);
+>      sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 4299bdf480..bb69fd8e48 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -491,10 +491,9 @@ static void riscv_sifive_u_soc_init(Object *obj)
+>                              &error_abort, NULL);
+>      qdev_prop_set_uint32(DEVICE(&s->e_cluster), "cluster-id", 0);
 >
->      /*< public >*/
->      RISCVHartArrayState cpus;
-> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> index 16c297ec5f..5f62cf5f85 100644
-> --- a/include/hw/riscv/sifive_u.h
-> +++ b/include/hw/riscv/sifive_u.h
-> @@ -31,7 +31,7 @@
+> -    object_initialize_child(OBJECT(&s->e_cluster), "e-cpus",
+> -                            &s->e_cpus, sizeof(s->e_cpus),
+> -                            TYPE_RISCV_HART_ARRAY, &error_abort,
+> -                            NULL);
+> +    sysbus_init_child_obj(OBJECT(&s->e_cluster), "e-cpus",
+> +                          &s->e_cpus, sizeof(s->e_cpus),
+> +                          TYPE_RISCV_HART_ARRAY);
+>      qdev_prop_set_uint32(DEVICE(&s->e_cpus), "num-harts", 1);
+>      qdev_prop_set_uint32(DEVICE(&s->e_cpus), "hartid-base", 0);
+>      qdev_prop_set_string(DEVICE(&s->e_cpus), "cpu-type", SIFIVE_E_CPU);
+> @@ -504,10 +503,9 @@ static void riscv_sifive_u_soc_init(Object *obj)
+>                              &error_abort, NULL);
+>      qdev_prop_set_uint32(DEVICE(&s->u_cluster), "cluster-id", 1);
 >
->  typedef struct SiFiveUSoCState {
->      /*< private >*/
-> -    SysBusDevice parent_obj;
-> +    DeviceState parent_obj;
+> -    object_initialize_child(OBJECT(&s->u_cluster), "u-cpus",
+> -                            &s->u_cpus, sizeof(s->u_cpus),
+> -                            TYPE_RISCV_HART_ARRAY, &error_abort,
+> -                            NULL);
+> +    sysbus_init_child_obj(OBJECT(&s->u_cluster), "u-cpus",
+> +                          &s->u_cpus, sizeof(s->u_cpus),
+> +                          TYPE_RISCV_HART_ARRAY);
+>      qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
+>      qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
+>      qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", SIFIVE_U_CPU);
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index d0c4843712..01d52e758e 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -169,8 +169,8 @@ static void spike_board_init(MachineState *machine)
+>      unsigned int smp_cpus = machine->smp.cpus;
 >
->      /*< public >*/
->      CPUClusterState e_cluster;
+>      /* Initialize SOC */
+> -    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+> -                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
+> +    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+> +                          TYPE_RISCV_HART_ARRAY);
+>      object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type",
+>                              &error_abort);
+>      object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
+> @@ -275,8 +275,8 @@ static void spike_v1_10_0_board_init(MachineState *machine)
+>      }
+>
+>      /* Initialize SOC */
+> -    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+> -                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
+> +    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+> +                          TYPE_RISCV_HART_ARRAY);
+>      object_property_set_str(OBJECT(&s->soc), SPIKE_V1_10_0_CPU, "cpu-type",
+>                              &error_abort);
+>      object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
+> @@ -365,8 +365,8 @@ static void spike_v1_09_1_board_init(MachineState *machine)
+>      }
+>
+>      /* Initialize SOC */
+> -    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+> -                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
+> +    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+> +                          TYPE_RISCV_HART_ARRAY);
+>      object_property_set_str(OBJECT(&s->soc), SPIKE_V1_09_1_CPU, "cpu-type",
+>                              &error_abort);
+>      object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index c695a44979..0f93e0d9c8 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -485,8 +485,8 @@ static void riscv_virt_board_init(MachineState *machine)
+>      unsigned int smp_cpus = machine->smp.cpus;
+>
+>      /* Initialize SOC */
+> -    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+> -                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
+> +    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+> +                          TYPE_RISCV_HART_ARRAY);
+>      object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type",
+>                              &error_abort);
+>      object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
 > --
 > 2.21.1
 >
