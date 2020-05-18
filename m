@@ -1,79 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jaeff-000887-Gx
-	for mharc-qemu-riscv@gnu.org; Mon, 18 May 2020 08:15:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47522)
+	id 1jaf62-000144-5I
+	for mharc-qemu-riscv@gnu.org; Mon, 18 May 2020 08:42:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52322)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dgilbert@redhat.com>)
- id 1jaefd-00086S-DA
- for qemu-riscv@nongnu.org; Mon, 18 May 2020 08:15:01 -0400
-Received: from us-smtp-2.mimecast.com ([205.139.110.61]:49455
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <dgilbert@redhat.com>)
- id 1jaefc-0005I1-43
- for qemu-riscv@nongnu.org; Mon, 18 May 2020 08:15:01 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589804097;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HuoUku7otY8lzNDgk4DT2MIEC7umNArTKFEtMvFwoLE=;
- b=cGcHx/e2qvgqlVWlIT1vjWYTFGu32/2bfvFq60sLTD7SvEydAvu6/aS7vnbwttQc08qDaT
- eNPpoIT8QmN7eqG/EHjqp+6wYzvcUENXNmG15+J+oV5+vRRZnCY1wQSGyma9XLHjyileHM
- CAtk6Nqfurvof6i09dHLTCjQE9Q8RGU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-198-VM47gqQ6M5m6NR1oNhJ9ow-1; Mon, 18 May 2020 08:14:56 -0400
-X-MC-Unique: VM47gqQ6M5m6NR1oNhJ9ow-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C08A1108BD19;
- Mon, 18 May 2020 12:14:47 +0000 (UTC)
-Received: from work-vm (ovpn-112-78.ams2.redhat.com [10.36.112.78])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id DDD215D9DD;
- Mon, 18 May 2020 12:14:36 +0000 (UTC)
-Date: Mon, 18 May 2020 13:14:34 +0100
-From: "Dr. David Alan Gilbert" <dgilbert@redhat.com>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Cornelia Huck <cohuck@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- Richard Henderson <rth@twiddle.net>, Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- David Hildenbrand <david@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: Re: [PATCH v3 01/12] Makefile: Only build virtiofsd if system-mode
- is enabled
-Message-ID: <20200518121434.GA2787@work-vm>
-References: <20200504152922.21365-1-philmd@redhat.com>
- <20200504152922.21365-2-philmd@redhat.com>
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1jaf60-00011Z-NZ
+ for qemu-riscv@nongnu.org; Mon, 18 May 2020 08:42:16 -0400
+Received: from mail-oo1-xc43.google.com ([2607:f8b0:4864:20::c43]:38932)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1jaf5y-0004dS-JI
+ for qemu-riscv@nongnu.org; Mon, 18 May 2020 08:42:16 -0400
+Received: by mail-oo1-xc43.google.com with SMTP id c83so1993590oob.6
+ for <qemu-riscv@nongnu.org>; Mon, 18 May 2020 05:42:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=JtBtE3nw27El8VWoeJ7zSYWKXQECO0bpQV+zh5rOwjY=;
+ b=yILxsa7bQrRoII2s2M94XNarz+RsQN8KAYDiK04dWhOlZwqUT63SlnpSz4yyP1cuv6
+ qSMKgupJVmuZ+M+N73m1fzPheqmJox512ecMu0bP4X3FWVvuiun2eiJSGgQAIf727+vl
+ wl9FrzLd8ShXNe+u5TrCeWtynsgnomEOJDipgB/+g/5yER8QxPGvoSBDBO2T+/mfWHG0
+ cvONHEhz2f4ksbdjncr8psNOJni7yCft7KVuQb8K/lMS1ojoMcpPvY1dI2wLeyqXfq1I
+ Mi7AHEzSK0+HjQDHAdqujtWZZjcDCY05IFDDJfOytYe+rxltJ79eIHW7+qtZAgyNgO87
+ 50eQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=JtBtE3nw27El8VWoeJ7zSYWKXQECO0bpQV+zh5rOwjY=;
+ b=eXXbjZgBSiWjdDNkiNmIdGaY4d9Km2a6EHu2rNIriUmEHvuIuG4M7GVDfMv0kYJkvC
+ gDVGj30/eUgMWTL87sjrlqKYhsOu/XjJCHWprQaITsuvGb2WO2NXXDRjk6hCPRS5gBKx
+ aJrOyNnSyYLNhnx0SRSmobwqR8Piz+enLcOYbuWx5zg7ZRxWMcSzmRRZ5voh59zpAan8
+ aVTJxy9hFtj3E32rWB47rMzpVluQXi/Z6tIc494atTB0SafyAnWRLCByxCv7m9nudxU4
+ mJKv55proZUxHN0Eft+2X34nNiRUgnu6tkNlkxBUBXSAsDMHlgAGd37JMq98DQlZL8Pd
+ Djgg==
+X-Gm-Message-State: AOAM531cQBHU05pZ8KhCWZ9dt3BwWSE41PgEVYHyF5Q9xk86iJ2kbPnt
+ GjHZePRIGzODtAJBlwQsGLLnJdOSK2kexW8Gwrptjg==
+X-Google-Smtp-Source: ABdhPJyn086ODLNF0KvCWf0mNSpyFFh1s0YRKG58JrKufOXvh2yYRIr+4NG9MmT/4Z65bGS47Iki1FCtT25NmkhixXM=
+X-Received: by 2002:a4a:d136:: with SMTP id n22mr12769091oor.85.1589805733154; 
+ Mon, 18 May 2020 05:42:13 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200504152922.21365-2-philmd@redhat.com>
-User-Agent: Mutt/1.13.4 (2020-02-15)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: 8bit
-Content-Disposition: inline
-Received-SPF: pass client-ip=205.139.110.61; envelope-from=dgilbert@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/17 23:32:08
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic]
+References: <20200511205246.24621-1-philmd@redhat.com>
+In-Reply-To: <20200511205246.24621-1-philmd@redhat.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 18 May 2020 13:42:02 +0100
+Message-ID: <CAFEAcA9yKxqYW0fEC87sLPwVACBzbQ2+XS-gNG8-x-VfCeAH=w@mail.gmail.com>
+Subject: Re: [PATCH] hw: Use QEMU_IS_ALIGNED() on parallel flash block size
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Leif Lindholm <leif@nuviainc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, 
+ Radoslaw Biernacki <radoslaw.biernacki@linaro.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ qemu-arm <qemu-arm@nongnu.org>, Richard Henderson <rth@twiddle.net>,
+ Max Reitz <mreitz@redhat.com>, 
+ Qemu-block <qemu-block@nongnu.org>, Kevin Wolf <kwolf@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Eduardo Habkost <ehabkost@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c43;
+ envelope-from=peter.maydell@linaro.org; helo=mail-oo1-xc43.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_PASS=-0.001,
- T_HK_NAME_DR=0.01, URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -86,44 +85,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2020 12:15:01 -0000
+X-List-Received-Date: Mon, 18 May 2020 12:42:17 -0000
 
-* Philippe Mathieu-Daudé (philmd@redhat.com) wrote:
-> Do not build the virtiofsd helper when configured with
-> --disable-system.
-> 
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-
-Yeh that seems reasonable; although virtiofsd is self-contained enough
-that perhaps it should be unrelated to whether you're building that.
-
-
-
-Acked-by: Dr. David Alan Gilbert <dgilbert@redhat.com>
-
+On Mon, 11 May 2020 at 21:52, Philippe Mathieu-Daud=C3=A9 <philmd@redhat.co=
+m> wrote:
+>
+> Use the QEMU_IS_ALIGNED() macro to verify the flash block size
+> is properly aligned. It is quicker to process when reviewing.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 > ---
->  Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/Makefile b/Makefile
-> index 34275f57c9..e46b6ef5d4 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -345,7 +345,7 @@ HELPERS-y += vhost-user-gpu$(EXESUF)
->  vhost-user-json-y += contrib/vhost-user-gpu/50-qemu-gpu.json
->  endif
->  
-> -ifeq ($(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG),yyy)
-> +ifeq ($(CONFIG_SOFTMMU)$(CONFIG_LINUX)$(CONFIG_SECCOMP)$(CONFIG_LIBCAP_NG),yyyy)
->  HELPERS-y += virtiofsd$(EXESUF)
->  vhost-user-json-y += tools/virtiofsd/50-qemu-virtiofsd.json
->  endif
-> -- 
-> 2.21.3
-> 
-> 
---
-Dr. David Alan Gilbert / dgilbert@redhat.com / Manchester, UK
+>  hw/arm/sbsa-ref.c       | 2 +-
+>  hw/arm/virt.c           | 2 +-
+>  hw/block/pflash_cfi01.c | 2 +-
+>  hw/block/pflash_cfi02.c | 2 +-
+>  hw/i386/pc_sysfw.c      | 2 +-
+>  hw/riscv/virt.c         | 2 +-
+>  6 files changed, 6 insertions(+), 6 deletions(-)
 
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+
+thanks
+-- PMM
 
