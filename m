@@ -1,71 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jaj3N-0000D1-44
-	for mharc-qemu-riscv@gnu.org; Mon, 18 May 2020 12:55:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34136)
+	id 1jajDC-0004So-Bt
+	for mharc-qemu-riscv@gnu.org; Mon, 18 May 2020 13:05:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35730)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jaj3K-00009N-2z; Mon, 18 May 2020 12:55:46 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:39129)
+ id 1jajDA-0004PU-HW; Mon, 18 May 2020 13:05:56 -0400
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:40659)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jaj3J-0001iC-4R; Mon, 18 May 2020 12:55:45 -0400
-Received: by mail-io1-xd43.google.com with SMTP id x5so11374433ioh.6;
- Mon, 18 May 2020 09:55:44 -0700 (PDT)
+ id 1jajD9-0004nI-H5; Mon, 18 May 2020 13:05:56 -0400
+Received: by mail-io1-xd44.google.com with SMTP id s10so11397608iog.7;
+ Mon, 18 May 2020 10:05:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=Ol0ORCGLTTuGNMRHjrIAOAqtx3daiObs8nq3fxwOcNM=;
- b=nSu7d5PQzivLEqe9GLyI58sGSC+c4/nr9FoJRlSQL/URJ+/d1tzuMFlUHDh751Ibnr
- TuvYBNcinysfWXV3l7ccigQoznczl/Goqh0+Rwvmko3bdZxKUECaQx0H/xr24gVhYFX8
- 6A1n6U8irBGKf08Ms+FXNs736swCn8mvDmD9AgNHl3+XTDKSCU3OWsE0NmH57wVF97Zl
- jyHJoEDr3Jbp4XE/sswKlj2b9SzroC+bh+XNdn8JNIQ0VsZXS+neb7dZA8bHx/km83jN
- ZhQ+o6DorX8miuy15g58k1kObZLlyHS6QNcpKeJ7jeKW/9BGEPi89Ny5BReyXEcXNhGj
- V+uA==
+ :cc; bh=L9k9qYuhzCDCbujEXRqKRvNubN+vICoc9TrmsvH+2XI=;
+ b=u4b7yMlNu/3nLLw5nUE0jELTTuZi4Kw8l8cQVjwPM8JFj0PPUPfoiKr1Ao3sPCjVe+
+ qd9brfWjp6XM2yTwd/rC5HtyyhgC9fotubwM3mXJv389xKDEqcKgnczDagwdr74n4XAQ
+ nuyWbTlXJlGNk5QDWq7wwUZP8fBKBGxlyLbsvySWu71PPoDjcB78ZDnH5+mxlZ1iSNYl
+ VE2Zd+1g/rMoVs2at1alwypFA7Om/oFaAbZUAKTZOGU7dfcNrGzX1CKwEz1Cp2hkqJ7Z
+ fWJNQBZdHfiItrkNKuldc1M1erVk7AaLBdLEUFQDmPcg1Eb8F4HQiC+pxbfIx/XIwgew
+ DqWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=Ol0ORCGLTTuGNMRHjrIAOAqtx3daiObs8nq3fxwOcNM=;
- b=j5gEAwQ+tpMlTINGA+AcdLkeO+pospSKBIeLinqdR6YOfpdK9+sFW6q2xXai2VJIpP
- bNxGSHYbYf+3OQZ2UTRLYxgz1lMt4jjtzblU5dt7YHfcCQwByAd2eVBgTEpd22Ty/lb/
- dvqO/vNl75PrWNeD8mfN6oYJ3MBGkPaLtzVdeMQU2e7fJwIh3QpG5tjPYkg+3llBibRp
- lV1TQ1JFn2YYQYLm6z1hHFh/qP9bVgr9PIAtOUA3EIlD2JiXslI58v8fOAlF9XXYk2Uk
- w+GECVHm9lf20m2KFrfz8IOFG4iF5wFUawY8SpXDB2+zUNAz2KDex9HlTkcumGs+M3Ua
- xHTA==
-X-Gm-Message-State: AOAM531Tnw5+WXOl0aB4mjHNDo/IlEhcygI0st1/qfrIAtNLf5iZHtNz
- E4WEAmcG8xtFpmZQBH8sfA1B7yCa9V4lwZpU260=
-X-Google-Smtp-Source: ABdhPJwFXLE0/NAwksdqDOgpM2P+9Afs7WHw0wRXDp6XyaCC7/YsedlKzPh8y9jVqesoR/WPbnIx9mxgMLxJ+qZMvyE=
-X-Received: by 2002:a02:a118:: with SMTP id f24mr17042201jag.8.1589820942980; 
- Mon, 18 May 2020 09:55:42 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=L9k9qYuhzCDCbujEXRqKRvNubN+vICoc9TrmsvH+2XI=;
+ b=T79Ix6EZKrN3wrIeUR/MbzJhqAPuWsG8Y9mEmi3yOkk6j7GXvHyRqoLPHbFiWb9A8r
+ T+NZpO+U7inYiU+AJRazOtxDnZNeg0FOxklFmsJxNNZLBzGajvtek+Iasx9XZm8fGuK/
+ dTSkgrKyaJ4T7aAJ6YOTKlmDbSq+hXl//AruA3eUvs83Ar+dl6DlqViwhsaw5HOvUA8x
+ Ye9YswqLsZwdHLIUCf/FHuFZIT47FxKqW+9r20VxEZkfYKdKH6zTPx4ihjTMx8akbqG1
+ sJMVIjAjDcpzmIBt7nTYMVE6NZ93LCbAU906rMZXSGH1nwkPLQj26v2izLAxyrf4wmb5
+ CzRw==
+X-Gm-Message-State: AOAM533EIwB9rTFzQDhj8iLGHkNxeqQPKhsGveTMEgyjbKUde+yms8ZU
+ GzW0xv4pibi5NsiAnIO8VFZ7QSPNHCls4sM5xK0=
+X-Google-Smtp-Source: ABdhPJz9z6gReMqlby+93jEq1NWHDxnb9TK/LD8Ud1d7hWGoBk6NSW8MxDX+5/PfgRdWO+Up0y13wBSbYnhwYZMR1Uc=
+X-Received: by 2002:a02:a118:: with SMTP id f24mr17089184jag.8.1589821553988; 
+ Mon, 18 May 2020 10:05:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200515170804.5707-1-philmd@redhat.com>
- <20200515170804.5707-6-philmd@redhat.com>
-In-Reply-To: <20200515170804.5707-6-philmd@redhat.com>
+References: <20200518050408.4579-1-armbru@redhat.com>
+ <20200518050408.4579-21-armbru@redhat.com>
+In-Reply-To: <20200518050408.4579-21-armbru@redhat.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 May 2020 09:46:52 -0700
-Message-ID: <CAKmqyKPAcizLC=wmNpmatpcxXtp9YcaruJGCC_=SpPgSYP-BHA@mail.gmail.com>
-Subject: Re: [PATCH v2 05/10] Makefile: Remove dangerous EOL trailing backslash
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Date: Mon, 18 May 2020 09:57:02 -0700
+Message-ID: <CAKmqyKON3YWJNGiN_xpM4z8x_WSa1kMbNE-gZectExboiCtqYQ@mail.gmail.com>
+Subject: Re: [PATCH 20/24] riscv: Fix type of SiFive[EU]SocState,
+ member parent_obj
+To: Markus Armbruster <armbru@redhat.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Marek Vasut <marex@denx.de>, 
- Peter Maydell <peter.maydell@linaro.org>, Thomas Huth <thuth@redhat.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "Daniel P. Berrange" <berrange@redhat.com>, 
+ Eduardo Habkost <ehabkost@redhat.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Chris Wulff <crwulff@gmail.com>, 
- Laurent Vivier <laurent@vivier.eu>, Max Filippov <jcmvbkbc@gmail.com>, 
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- qemu-arm <qemu-arm@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Michael Walle <michael@walle.cc>, 
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Aurelien Jarno <aurelien@aurel32.net>, Richard Henderson <rth@twiddle.net>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -88,44 +79,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2020 16:55:46 -0000
+X-List-Received-Date: Mon, 18 May 2020 17:05:57 -0000
 
-On Fri, May 15, 2020 at 10:11 AM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
+On Sun, May 17, 2020 at 10:07 PM Markus Armbruster <armbru@redhat.com> wrote:
 >
-> One might get caught trying to understand unexpected Makefile
-> behavior. Trailing backslash can help to split very long lines,
-> but are rather dangerous when nothing follow. Preserve other
-> developers debugging time by removing this one.
+> Device "riscv.sifive.e.soc" is a direct subtype of TYPE_DEVICE, but
+> its instance struct SiFiveESoCState's member @parent_obj is
+> SysBusDevice instead of DeviceState.  Correct that.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> Same for "riscv.sifive.u.soc"'s instance struct SiFiveUSoCState.
+>
+> Cc: Palmer Dabbelt <palmer@dabbelt.com>
+> Cc: Alistair Francis <Alistair.Francis@wdc.com>
+> Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
+> Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+> Cc: qemu-riscv@nongnu.org
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  include/hw/riscv/sifive_e.h | 2 +-
+>  include/hw/riscv/sifive_u.h | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/Makefile b/Makefile
-> index 34275f57c9..84453789f9 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -420,7 +420,7 @@ MINIKCONF_ARGS =3D \
+> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> index 25ce7aa9d5..f05644df7c 100644
+> --- a/include/hw/riscv/sifive_e.h
+> +++ b/include/hw/riscv/sifive_e.h
+> @@ -29,7 +29,7 @@
 >
->  MINIKCONF_INPUTS =3D $(SRC_PATH)/Kconfig.host $(SRC_PATH)/hw/Kconfig
->  MINIKCONF_DEPS =3D $(MINIKCONF_INPUTS) $(wildcard $(SRC_PATH)/hw/*/Kconf=
-ig)
-> -MINIKCONF =3D $(PYTHON) $(SRC_PATH)/scripts/minikconf.py \
-> +MINIKCONF =3D $(PYTHON) $(SRC_PATH)/scripts/minikconf.py
+>  typedef struct SiFiveESoCState {
+>      /*< private >*/
+> -    SysBusDevice parent_obj;
+> +    DeviceState parent_obj;
 >
->  $(SUBDIR_DEVICES_MAK): %/config-devices.mak: default-configs/%.mak $(MIN=
-IKCONF_DEPS) $(BUILD_DIR)/config-host.mak
->         $(call quiet-command, $(MINIKCONF) $(MINIKCONF_ARGS) > $@.tmp, "G=
-EN", "$@.tmp")
+>      /*< public >*/
+>      RISCVHartArrayState cpus;
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index 16c297ec5f..5f62cf5f85 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -31,7 +31,7 @@
+>
+>  typedef struct SiFiveUSoCState {
+>      /*< private >*/
+> -    SysBusDevice parent_obj;
+> +    DeviceState parent_obj;
+>
+>      /*< public >*/
+>      CPUClusterState e_cluster;
 > --
-> 2.21.3
+> 2.21.1
 >
 >
 
