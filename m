@@ -1,72 +1,90 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jb9yU-00058z-PV
-	for mharc-qemu-riscv@gnu.org; Tue, 19 May 2020 17:40:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39152)
+	id 1jb9zg-0007qh-Un
+	for mharc-qemu-riscv@gnu.org; Tue, 19 May 2020 17:41:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39232)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=401675184=alistair.francis@wdc.com>)
- id 1jb9yR-0004vs-9F; Tue, 19 May 2020 17:40:31 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:10362)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=401675184=alistair.francis@wdc.com>)
- id 1jb9yM-0008RH-B7; Tue, 19 May 2020 17:40:30 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1589924451; x=1621460451;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=T8XWjoCBhSRh+2XM72PdhP1tX40TfKFy2wNJXAf94nc=;
- b=SPmIVJBlTu43P4wYfIFoA5sAQExu4Yn1LZXRB6D814vjObaOUIPC6fDl
- J1M2GfO4A+Cfu+bTiz5M1DJw4lZpub9xCmiM4NXPfYZ7cENAXcGT3LTJb
- MX0MpaVAK+pQ9m6CQ7ZMZyPWLaxgM/Z4pnbYRG2IktYH4eN6IraF28Crj
- 8Up/2p2HIO9LuXDwsY9NHQSSHx0b6TIClwj1j/WQ4OVQWN5XlpNL1BADA
- gtBV82EwXd2LC6EndGJqUEZzXQzB9eafZX5jxtEBLlHLMt+pA6DCwR1XG
- 5kmqAAL88Td4GXvSW/FuBy7Dpk7U9Wdy0S/nrNJWhULdP78yiOpSl7IJi Q==;
-IronPort-SDR: WH2+AMm9dvjasVUaUKNy0tQQPfhv17emnElEj9hOH2kVziHk7mzWyNgu2PjCpfZkTX3Iu8+vR6
- w0pElZJ8/WRgr1GHBacqbebPMvG3iYbt4Kemj/OEOwoLPU5r/ysC4en+IiVC5+3/EDjJ4kqQ0o
- rJJNe7rx+1SV6RB8cdQTwsGPqGzdbK23p/bxVedYtGnCFUdEyGE77HuKAGQNjVSm66OWLMfckp
- EfiRNJiissGm5UEqwerK1OQbTVND/TKu8ZPdjod8bhT2WjQFgUXUyiedCpY1GOQag2NtGOKrMO
- bfo=
-X-IronPort-AV: E=Sophos;i="5.73,411,1583164800"; d="scan'208";a="240814210"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 20 May 2020 05:40:34 +0800
-IronPort-SDR: c3B6DngkAGBEpMCIFVuYQM0ru/rkW15zbj7Fhb7qNeH7U4AQYfHALQ0u+RRyZwq+k6zfM62eZR
- wZ6A4K53sZv7LuEyFzmgNHWsQomAAN1mY=
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 May 2020 14:29:45 -0700
-IronPort-SDR: N1rVSjNerjkXaCFajXnxxbcyrrD2LIQTydDmxzRp+0HuC786Y5gIlZe5uN2Y19Zx3E24plU4Ar
- PemXjgrriYAw==
-WDCIronportException: Internal
-Received: from usa005149.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.57.14])
- by uls-op-cesaip01.wdc.com with ESMTP; 19 May 2020 14:40:14 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
- bmeng.cn@gmail.com, philmd@redhat.com
-Subject: [PATCH v3 8/9] riscv/opentitan: Connect the UART device
-Date: Tue, 19 May 2020 14:31:47 -0700
-Message-Id: <eb6069a05d18f4a1c9c7dbc97a0c521ae4b3674f.1589923785.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <cover.1589923785.git.alistair.francis@wdc.com>
-References: <cover.1589923785.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jb9zd-0007pi-Is
+ for qemu-riscv@nongnu.org; Tue, 19 May 2020 17:41:46 -0400
+Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:42732)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jb9zc-0000He-3V
+ for qemu-riscv@nongnu.org; Tue, 19 May 2020 17:41:45 -0400
+Received: by mail-pg1-x543.google.com with SMTP id n11so416628pgl.9
+ for <qemu-riscv@nongnu.org>; Tue, 19 May 2020 14:41:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=CMye0gRnqmKea87uFYvrR2qGt7AWfI8R4JkHmzP32YI=;
+ b=Lw21wVNFk/ef9zTd2wkJzOON9dfOfJGBjhEXeK4P387RP2jLEaJkdajlgoay5EcFQD
+ 2Ff2Eb/pS/1Nq7nZQPtZLQJMT2GRX23Bx2o9sfspZJhfnn4MuPgGtK7lCG6mpsScj+CW
+ eCM279MJYS2tqr8o64rYJaoQtRDzDUPa3RSu+iheZYbGYaFYSy2W+Qx0uwpdP/L72mdT
+ 0ET2H/xsS9zS8n439yY0WnyTW+GiqF4qR0JzQg/1QzIRUVhnnWwPqirL4CM+Foj+C/Cn
+ dWWcgLcUY3TA/53V3g0UCvduuMCVJQmd18ZFVUCjaExHSP4bWOzUD/rLah8CJENbZ5N1
+ liOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=CMye0gRnqmKea87uFYvrR2qGt7AWfI8R4JkHmzP32YI=;
+ b=Z3lx1CMk8/2kWW/DzaavDU+LBWPUpvKGByMit+oO+rKZ0z80Bzu5aacw9LQNx5tfSg
+ 5SCsS5b2VD/lt9CpHKYhsnGavCmzMYlB0+NsGGrQ1ADUf+OabYgzOXIwVH7qO74PFBPK
+ 1lr/S4aoiaUbJJPaMz/BxeiD7iQYXuawR0G0ixJtJRUeFgDzuknOAeM4Mn/jSKfCt0ud
+ zzPQv0+UM5CJ+OpD2k0BHuuVkw+9dH64/Gmm5edI3tvy+E41M+52uPOlHdB/yemJ69YK
+ T9Jr7/RphX4VNmeQKcoUYK63KVirdFfMd34fMgbwN8oUOTxRDkz8tcyCUzlKuALaeSJ4
+ WydA==
+X-Gm-Message-State: AOAM533XnVj221GKkSIMSd/3lzJNqusGzDy2BIe64v8FPU7K9MJRnTeN
+ NCbAl+E2WuDss7HWODtbZ+iugw==
+X-Google-Smtp-Source: ABdhPJwoC6noJKTG77fPfU2eCRRbQs2oAlFqLDHodQayiKG7+kIM2EtKvh92YwHJApOXyau7gQq42A==
+X-Received: by 2002:a63:2347:: with SMTP id u7mr1071376pgm.183.1589924500699; 
+ Tue, 19 May 2020 14:41:40 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
+ by smtp.gmail.com with ESMTPSA id y5sm356466pff.150.2020.05.19.14.41.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 May 2020 14:41:39 -0700 (PDT)
+Subject: Re: [PATCH v2 04/10] accel/tcg: Add stub for probe_access()
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ David Hildenbrand <david@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, Marek Vasut <marex@denx.de>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ "Emilio G . Cota" <cota@braap.org>,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
+ Richard Henderson <rth@twiddle.net>, qemu-riscv@nongnu.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Chris Wulff <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Michael Walle <michael@walle.cc>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
+References: <20200515170804.5707-1-philmd@redhat.com>
+ <20200515170804.5707-5-philmd@redhat.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <23e13589-1d57-8fc2-885d-b2fa34589d6b@linaro.org>
+Date: Tue, 19 May 2020 14:41:37 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
+In-Reply-To: <20200515170804.5707-5-philmd@redhat.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.143.124;
- envelope-from=prvs=401675184=alistair.francis@wdc.com;
- helo=esa2.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/19 17:39:51
-X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::543;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x543.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -80,94 +98,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2020 21:40:31 -0000
+X-List-Received-Date: Tue, 19 May 2020 21:41:46 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
----
- include/hw/riscv/opentitan.h | 13 +++++++++++++
- hw/riscv/opentitan.c         | 24 ++++++++++++++++++++++--
- 2 files changed, 35 insertions(+), 2 deletions(-)
+On 5/15/20 10:07 AM, Philippe Mathieu-Daudé wrote:
+> From: Philippe Mathieu-Daudé <f4bug@amsat.org>
+> 
+> The TCG helpers where added in b92e5a22ec3 in softmmu_template.h.
+> probe_write() was added in there in 3b4afc9e75a to be moved out
+> to accel/tcg/cputlb.c in 3b08f0a9254, and was later refactored
+> as probe_access() in c25c283df0f.
+> Since it is a TCG specific helper, add a stub to avoid failures
+> when building without TCG, such:
+> 
+>   target/arm/helper.o: In function `probe_read':
+>   include/exec/exec-all.h:362: undefined reference to `probe_access'
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+> ---
+> Cc: Richard Henderson <rth@twiddle.net>
+> Cc: Emilio G. Cota <cota@braap.org>
+> Cc: Alex Bennée <alex.bennee@linaro.org>
+> Cc: David Hildenbrand <david@redhat.com>
+> ---
+>  accel/stubs/tcg-stub.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
 
-diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-index 8d6a09b696..825a3610bc 100644
---- a/include/hw/riscv/opentitan.h
-+++ b/include/hw/riscv/opentitan.h
-@@ -21,6 +21,7 @@
- 
- #include "hw/riscv/riscv_hart.h"
- #include "hw/intc/ibex_plic.h"
-+#include "hw/char/ibex_uart.h"
- 
- #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
- #define RISCV_IBEX_SOC(obj) \
-@@ -33,6 +34,7 @@ typedef struct LowRISCIbexSoCState {
-     /*< public >*/
-     RISCVHartArrayState cpus;
-     IbexPlicState plic;
-+    IbexUartState uart;
- 
-     MemoryRegion flash_mem;
-     MemoryRegion rom;
-@@ -63,4 +65,15 @@ enum {
-     IBEX_USBDEV,
- };
- 
-+enum {
-+    IBEX_UART_RX_PARITY_ERR_IRQ = 0x28,
-+    IBEX_UART_RX_TIMEOUT_IRQ = 0x27,
-+    IBEX_UART_RX_BREAK_ERR_IRQ = 0x26,
-+    IBEX_UART_RX_FRAME_ERR_IRQ = 0x25,
-+    IBEX_UART_RX_OVERFLOW_IRQ = 0x24,
-+    IBEX_UART_TX_EMPTY_IRQ = 0x23,
-+    IBEX_UART_RX_WATERMARK_IRQ = 0x22,
-+    IBEX_UART_TX_WATERMARK_IRQ = 0x21
-+};
-+
- #endif
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index 3926321d8c..a6c0b949ca 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -96,6 +96,9 @@ static void riscv_lowrisc_ibex_soc_init(Object *obj)
- 
-     sysbus_init_child_obj(obj, "plic", &s->plic,
-                           sizeof(s->plic), TYPE_IBEX_PLIC);
-+
-+    sysbus_init_child_obj(obj, "uart", &s->uart,
-+                          sizeof(s->uart), TYPE_IBEX_UART);
- }
- 
- static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-@@ -137,8 +140,25 @@ static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-     busdev = SYS_BUS_DEVICE(dev);
-     sysbus_mmio_map(busdev, 0, memmap[IBEX_PLIC].base);
- 
--    create_unimplemented_device("riscv.lowrisc.ibex.uart",
--        memmap[IBEX_UART].base, memmap[IBEX_UART].size);
-+    /* UART */
-+    dev = DEVICE(&(s->uart));
-+    qdev_prop_set_chr(dev, "chardev", serial_hd(0));
-+    object_property_set_bool(OBJECT(&s->uart), true, "realized", &err);
-+    if (err != NULL) {
-+        error_propagate(errp, err);
-+        return;
-+    }
-+    busdev = SYS_BUS_DEVICE(dev);
-+    sysbus_mmio_map(busdev, 0, memmap[IBEX_UART].base);
-+    sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->plic),
-+                       IBEX_UART_TX_WATERMARK_IRQ));
-+    sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->plic),
-+                       IBEX_UART_RX_WATERMARK_IRQ));
-+    sysbus_connect_irq(busdev, 2, qdev_get_gpio_in(DEVICE(&s->plic),
-+                       IBEX_UART_TX_EMPTY_IRQ));
-+    sysbus_connect_irq(busdev, 3, qdev_get_gpio_in(DEVICE(&s->plic),
-+                       IBEX_UART_RX_OVERFLOW_IRQ));
-+
-     create_unimplemented_device("riscv.lowrisc.ibex.gpio",
-         memmap[IBEX_GPIO].base, memmap[IBEX_GPIO].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.spi",
--- 
-2.26.2
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
+r~
 
