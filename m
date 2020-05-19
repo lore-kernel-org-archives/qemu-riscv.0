@@ -1,72 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jajJc-0004cm-Ge
-	for mharc-qemu-riscv@gnu.org; Mon, 18 May 2020 13:12:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36598)
+	id 1jaynT-0004Dg-AU
+	for mharc-qemu-riscv@gnu.org; Tue, 19 May 2020 05:44:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33338)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jajJa-0004bP-6m; Mon, 18 May 2020 13:12:34 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:33138)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jajJY-0006Mc-TA; Mon, 18 May 2020 13:12:33 -0400
-Received: by mail-il1-x142.google.com with SMTP id o67so5952472ila.0;
- Mon, 18 May 2020 10:12:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rsKtgwwVLavRmGAhjPjBx9qgFbdHnf/krAIZv1IDcSU=;
- b=NHFzbB4aOCB6dbCyrURod39KCriS0H5R/tNoJTZ8CiLO7QMFT0gEiprIToau8LvsAK
- RrxWZEeYLibtUi+3V6M4mY9VtDkGdKD2t0WKWEqQWnnufwCe3xnNNLttQK5Y8jV8TlFq
- rbdnM4MWCYFb4FXE2B4DklKqibeEd8QFVzzOugv1mH8SfBSfjJ8RMuTT0E7cMLXnDrCb
- nraIE02L1SOvzK/F9mjMp4F/etVuoR/G2qCEcF4H7Mwv1Q9VP74Ucrr4waSrGuex9TUl
- T9aZNa8I50OdkgKBqZLH0Ra53MRz3/+btwUgwg8pd/1hzln5ehD8/bIN+6Arcc+8cGeo
- sBnA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=rsKtgwwVLavRmGAhjPjBx9qgFbdHnf/krAIZv1IDcSU=;
- b=iC0O9nZgtJpY3ps3DhV7f+ruGrEjMupBhhMHoDoUzuoKaiB3oAqG72yUGZuulrz0QK
- JKM7YMm24RUHQcW8hx2B3sMbnx3ISwtKxIdmqz9/oH6zwjdkoljxADnz2LB6SXLx68eM
- zol9Kl9DHxTJT41sdBOtjnkYYvG616AkQgwPycb5AXNuzrsdBp9wBpGq6EAFONRHCvPJ
- Ahz+oJDBoM3husE3RcPVR4IOZKUoxPAI+lgEhJlkAe54d+7ikdEAttgrGV1hf9L+dUEu
- WpMKqyY3xtzE5BOlJ+0raHEliO5hC8yMahNL9dsgSWAkcgqpuwz54xzdsiKkLkMLCXLd
- qEWA==
-X-Gm-Message-State: AOAM5321jhub16RhWDmbgQ/zZEJN7R7qxhic+6zLw2FiKFzYz0pmdYWE
- IsFIFQN+f2HbbnUIUiTMcwS6gfcRsyRMu4jouis=
-X-Google-Smtp-Source: ABdhPJx7RpmUwl9g5kaDes4ka3sfyhZrqQYPoYwGrR0Cw3hWV9291eP/gxVmJ5fBIFcplbAzkMNIB1No7YZ0Tvzbrfc=
-X-Received: by 2002:a92:48d1:: with SMTP id j78mr17960291ilg.131.1589821951497; 
- Mon, 18 May 2020 10:12:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jaynR-0004C1-Ov; Tue, 19 May 2020 05:44:25 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:39210)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jaynP-0000dM-Aw; Tue, 19 May 2020 05:44:25 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07983936|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_enroll_verification|0.0106858-0.000522711-0.988792;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e01a16378; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.HagB8G7_1589881447; 
+Received: from 30.225.208.54(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.HagB8G7_1589881447)
+ by smtp.aliyun-inc.com(10.147.42.135);
+ Tue, 19 May 2020 17:44:10 +0800
+Subject: Re: [RFC PATCH 0/8] RISCV risu porting
+To: Richard Henderson <richard.henderson@linaro.org>, peter.maydell@linaro.org
+Cc: alistair23@gmail.com, palmer@dabbelt.com, wenmeng_zhang@c-sky.com,
+ wxy194768@alibaba-inc.com, qemu-devel@nongnu.org, alex.bennee@linaro.org,
+ qemu-riscv@nongnu.org
+References: <20200430072139.4602-1-zhiwei_liu@c-sky.com>
+ <69d804ea-5274-bee4-9368-69c888082143@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <d7475c4e-6613-5f59-b65f-d23e844b2115@c-sky.com>
+Date: Tue, 19 May 2020 17:44:07 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-References: <20200518050408.4579-1-armbru@redhat.com>
- <20200518050408.4579-20-armbru@redhat.com>
-In-Reply-To: <20200518050408.4579-20-armbru@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 May 2020 10:03:36 -0700
-Message-ID: <CAKmqyKPSF+rZCzXFeQCJZZ-w5AAUjwnv1aBPcRb2k5tR6fTkZw@mail.gmail.com>
-Subject: Re: [PATCH 19/24] riscv: Fix to put "riscv.hart_array" devices on
- sysbus
-To: Markus Armbruster <armbru@redhat.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "Daniel P. Berrange" <berrange@redhat.com>, 
- Eduardo Habkost <ehabkost@redhat.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+In-Reply-To: <69d804ea-5274-bee4-9368-69c888082143@linaro.org>
+Content-Type: multipart/alternative;
+ boundary="------------95EFDEBDF29C548A1B039BD5"
+Content-Language: en-US
+Received-SPF: none client-ip=121.197.200.217;
+ envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/19 05:44:11
+X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ UNPARSEABLE_RELAY=0.001, URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,147 +56,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2020 17:12:34 -0000
+X-List-Received-Date: Tue, 19 May 2020 09:44:26 -0000
 
-On Sun, May 17, 2020 at 10:16 PM Markus Armbruster <armbru@redhat.com> wrote:
->
-> riscv_sifive_e_soc_init(), riscv_sifive_u_soc_init(),
-> spike_board_init(), spike_v1_10_0_board_init(),
-> spike_v1_09_1_board_init(), and riscv_virt_board_init() create
-> "riscv-hart_array" sysbus devices in a way that leaves them unplugged.
->
-> Create them the common way that puts them into the main system bus.
-> Affects machines sifive_e, sifive_u, spike, spike_v1.10, spike_v1.9.1,
-> and virt.  Visible in "info qtree", here's the change for sifive_e:
->
->      bus: main-system-bus
->        type System
->     +  dev: riscv.hart_array, id ""
->     +    num-harts = 1 (0x1)
->     +    hartid-base = 0 (0x0)
->     +    cpu-type = "sifive-e31-riscv-cpu"
->        dev: sifive_soc.gpio, id ""
->
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
-> Cc: Alistair Francis <Alistair.Francis@wdc.com>
-> Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-> Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> Cc: qemu-riscv@nongnu.org
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+This is a multi-part message in MIME format.
+--------------95EFDEBDF29C548A1B039BD5
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Alistair
 
-> ---
->  hw/riscv/sifive_e.c |  5 ++---
->  hw/riscv/sifive_u.c | 14 ++++++--------
->  hw/riscv/spike.c    | 12 ++++++------
->  hw/riscv/virt.c     |  4 ++--
->  4 files changed, 16 insertions(+), 19 deletions(-)
+On 2020/5/12 0:30, Richard Henderson wrote:
+> On 4/30/20 12:21 AM, LIU Zhiwei wrote:
+>> It's some difficult when I try to support RV32, because it's very
+>> similiar to RV64, so I can't make two .risu files like arm.risu and
+>> aarch64.risu.
+> You could a command-line parameter, like --be or --sve for this.
+Yes. I should add a "--xlen" parameter to specify the general register 
+length in risugen_riscv.pm.
+
+Besides, I should modify current riscv64.risu.
+
+For instructions in RV32 and RV64:
+
+LB RV32_64 imm:12 rs1:5 000 rd:5 0000011
+
+For RV64 only instructions:
+
+LD RV64 imm:12 rs1:5 011 rd:5 0000011
+
+So I can  generate RV32 instructions through  --pattern '*.RV32.*', and 
+the  RV64 instructions through --pattern '.*RV64.*'.
+
+Best Regards,
+Zhiwei
 >
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index b53109521e..8831e6728e 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -120,9 +120,8 @@ static void riscv_sifive_e_soc_init(Object *obj)
->      MachineState *ms = MACHINE(qdev_get_machine());
->      SiFiveESoCState *s = RISCV_E_SOC(obj);
->
-> -    object_initialize_child(obj, "cpus", &s->cpus,
-> -                            sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
-> -                            &error_abort, NULL);
-> +    sysbus_init_child_obj(obj, "cpus", &s->cpus,
-> +                          sizeof(s->cpus), TYPE_RISCV_HART_ARRAY);
->      object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
->                              &error_abort);
->      sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 4299bdf480..bb69fd8e48 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -491,10 +491,9 @@ static void riscv_sifive_u_soc_init(Object *obj)
->                              &error_abort, NULL);
->      qdev_prop_set_uint32(DEVICE(&s->e_cluster), "cluster-id", 0);
->
-> -    object_initialize_child(OBJECT(&s->e_cluster), "e-cpus",
-> -                            &s->e_cpus, sizeof(s->e_cpus),
-> -                            TYPE_RISCV_HART_ARRAY, &error_abort,
-> -                            NULL);
-> +    sysbus_init_child_obj(OBJECT(&s->e_cluster), "e-cpus",
-> +                          &s->e_cpus, sizeof(s->e_cpus),
-> +                          TYPE_RISCV_HART_ARRAY);
->      qdev_prop_set_uint32(DEVICE(&s->e_cpus), "num-harts", 1);
->      qdev_prop_set_uint32(DEVICE(&s->e_cpus), "hartid-base", 0);
->      qdev_prop_set_string(DEVICE(&s->e_cpus), "cpu-type", SIFIVE_E_CPU);
-> @@ -504,10 +503,9 @@ static void riscv_sifive_u_soc_init(Object *obj)
->                              &error_abort, NULL);
->      qdev_prop_set_uint32(DEVICE(&s->u_cluster), "cluster-id", 1);
->
-> -    object_initialize_child(OBJECT(&s->u_cluster), "u-cpus",
-> -                            &s->u_cpus, sizeof(s->u_cpus),
-> -                            TYPE_RISCV_HART_ARRAY, &error_abort,
-> -                            NULL);
-> +    sysbus_init_child_obj(OBJECT(&s->u_cluster), "u-cpus",
-> +                          &s->u_cpus, sizeof(s->u_cpus),
-> +                          TYPE_RISCV_HART_ARRAY);
->      qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
->      qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
->      qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", SIFIVE_U_CPU);
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index d0c4843712..01d52e758e 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -169,8 +169,8 @@ static void spike_board_init(MachineState *machine)
->      unsigned int smp_cpus = machine->smp.cpus;
->
->      /* Initialize SOC */
-> -    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-> -                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-> +    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-> +                          TYPE_RISCV_HART_ARRAY);
->      object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type",
->                              &error_abort);
->      object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-> @@ -275,8 +275,8 @@ static void spike_v1_10_0_board_init(MachineState *machine)
->      }
->
->      /* Initialize SOC */
-> -    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-> -                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-> +    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-> +                          TYPE_RISCV_HART_ARRAY);
->      object_property_set_str(OBJECT(&s->soc), SPIKE_V1_10_0_CPU, "cpu-type",
->                              &error_abort);
->      object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-> @@ -365,8 +365,8 @@ static void spike_v1_09_1_board_init(MachineState *machine)
->      }
->
->      /* Initialize SOC */
-> -    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-> -                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-> +    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-> +                          TYPE_RISCV_HART_ARRAY);
->      object_property_set_str(OBJECT(&s->soc), SPIKE_V1_09_1_CPU, "cpu-type",
->                              &error_abort);
->      object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index c695a44979..0f93e0d9c8 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -485,8 +485,8 @@ static void riscv_virt_board_init(MachineState *machine)
->      unsigned int smp_cpus = machine->smp.cpus;
->
->      /* Initialize SOC */
-> -    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-> -                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-> +    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-> +                          TYPE_RISCV_HART_ARRAY);
->      object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type",
->                              &error_abort);
->      object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-> --
-> 2.21.1
->
->
+> r~
+
+
+--------------95EFDEBDF29C548A1B039BD5
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <br>
+    <br>
+    <div class="moz-cite-prefix">On 2020/5/12 0:30, Richard Henderson
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:69d804ea-5274-bee4-9368-69c888082143@linaro.org">
+      <pre class="moz-quote-pre" wrap="">On 4/30/20 12:21 AM, LIU Zhiwei wrote:
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">It's some difficult when I try to support RV32, because it's very
+similiar to RV64, so I can't make two .risu files like arm.risu and
+aarch64.risu.
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+You could a command-line parameter, like --be or --sve for this.
+</pre>
+    </blockquote>
+    Yes. I should add a "--xlen" parameter to specify the general
+    register length in risugen_riscv.pm.<br>
+    <br>
+    Besides, I should modify current riscv64.risu.<br>
+    <br>
+    For instructions in RV32 and RV64:<br>
+    <pre>LB RV32_64 imm:12 rs1:5 000 rd:5 0000011
+</pre>
+    For RV64 only instructions:<br>
+    <pre>LD RV64 imm:12 rs1:5 011 rd:5 0000011 
+</pre>
+    So I can  generate RV32 instructions through  --pattern '*.RV32.*',
+    and the  RV64 instructions through --pattern '.*RV64.*'.<br>
+    <br>
+    Best Regards,<br>
+    Zhiwei<br>
+    <blockquote type="cite"
+      cite="mid:69d804ea-5274-bee4-9368-69c888082143@linaro.org">
+      <pre class="moz-quote-pre" wrap="">
+
+r~
+</pre>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------95EFDEBDF29C548A1B039BD5--
 
