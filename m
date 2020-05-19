@@ -1,57 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jb9dz-0001Xu-Sz
-	for mharc-qemu-riscv@gnu.org; Tue, 19 May 2020 17:19:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37158)
+	id 1jb9no-0003rH-6p
+	for mharc-qemu-riscv@gnu.org; Tue, 19 May 2020 17:29:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38052)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jb9dy-0001V3-4f; Tue, 19 May 2020 17:19:22 -0400
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:42692)
+ id 1jb9ng-0003qS-AX; Tue, 19 May 2020 17:29:24 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:35331)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jb9dx-0004Rh-Bt; Tue, 19 May 2020 17:19:21 -0400
-Received: by mail-io1-xd44.google.com with SMTP id e18so781544iog.9;
- Tue, 19 May 2020 14:19:20 -0700 (PDT)
+ id 1jb9nd-0006Yc-Vn; Tue, 19 May 2020 17:29:23 -0400
+Received: by mail-io1-xd43.google.com with SMTP id 79so858450iou.2;
+ Tue, 19 May 2020 14:29:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=AcDt0avYRKuROuwNNZTmEtdb+RjDSrmi1rZZuiHotNY=;
- b=TA7Br14lf7rbz05+XK85Q41JpgsCVyYEwncmR0nu+sBPtD8nkJe5MoggFiY7bLBLn9
- cqPe1gxvxqNmiya4qTyNgUR04asdHIu214sqK5AhcdgcBYSzYRwmKQCG5bnNaHVdkIqj
- iLKu580RriT/TmRaUfFpjLG2IYg5ovVbcx6eQGiMAivtpjum2/mHZ3OIAKP/dn/2WVv4
- jxAx1xLSElnsFnGQfUWavzEpWQ5NPtx/7A3mbTO+NE/xbR2y8VDp6slEC0/kpCR45KPi
- LhxRuFHrwY1S7WhSGYUzeTumdefck3y1b/+eaCv3l3HRIGcdX1Pa8Gl+RCAK7VT/f6yT
- TdeQ==
+ :cc; bh=Sg2Byur8LzSL26ul6iIVScrYoMeX9tc554+GgjyqIO0=;
+ b=qmS4t413tDGch2kVOyvj7zrPijeX9173J5Lz0kj72T5DhmSUqWoNuPLF/ChZAMPFvz
+ ZTWwNNYzzf52tgrNVh1xnsWIDGKrYFkQrPg7lp7f4Sf6Dc8aY7pNKi89XK41nkUUSC/O
+ drXg/R4gDwQh5aXI9hTQLyhrGKz2HzJVDTWeYiNr7FVdl+W5qYk9HFpWh1WDA+ph0UAs
+ /MR6qgYtSrHZCT3fzKDV14H1H2svHoB2hAWNZj+pV36YXmERCVjG4hDSCxIZyxBB4Zln
+ ex/GchWBybAgvWtTA6AeoSEulNS9CptYNwR2bIKonS0V2uvsSxOqxj3qiBOBgn++HD1R
+ nMdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=AcDt0avYRKuROuwNNZTmEtdb+RjDSrmi1rZZuiHotNY=;
- b=ka+hmFI4pSCUOZHSk0fvt4G5rLcEUTrOhHrIjgsF/X78JHMe/dnWrikj+ahggSpHJc
- NVs83/LoZLBn5lh3Z7G6pYsg43PVHPsI1/ZXErXkFsYr2B+Ot344AR+lq3i6e5cjaEvu
- WJGFzaM9qhbqK2wYdwH2h7gvB4DbRZDGT9ARj1FtgkZZVV+aVZY4DFGlHG6tN4LavX7Y
- au6oZl5wnJsrlqXcb495ijCC4b/WtP9UztH4fkKFZwqrqZ80qo5CShijQ/dirtfiXz98
- p+6zZVk83oq42JMFiAkxblaiIli7DHhwYjUqm0MQviTjSDwJr2/dFWGlEKFAZAe2YZ0F
- 1KQQ==
-X-Gm-Message-State: AOAM532VTX8D8IA4q0EiuB/r61d8yzfjPVaz7iMN49UWb7GnUltINXhb
- ZQV5Z6FNYiNBivmPqXeh+7r/Tp1Oz5EHqwlS5vY=
-X-Google-Smtp-Source: ABdhPJwQ5qOwQRh7p8IcC2tfK3/QgGZXxFbI2Pbd92Gc118hJJVOotMkTAlfSDWa5DC9dnHuYRsuKQ4wxLtbUVxjPts=
-X-Received: by 2002:a05:6638:dd3:: with SMTP id
- m19mr1692492jaj.106.1589923160076; 
- Tue, 19 May 2020 14:19:20 -0700 (PDT)
+ bh=Sg2Byur8LzSL26ul6iIVScrYoMeX9tc554+GgjyqIO0=;
+ b=g8jxk5JGVZBGiRn/Vrjk/oDBBhvVbJtyIeDfVwq0QVJaZTHht0qpn6A3E1V4peWFhD
+ M8bt7Y55kXGtu2UnwD4nbcW4MbQLDkcSHUm8z0aHxubrH5vS2sMVbY5syY/0h3cLBmAP
+ EnOhOOr/+Tul/1PQpjqD2XtCKwHq0YFKa6GAJ/xrZXQc5JF4EcIOrkKIoom8xpKTVSxN
+ QtOHMvUx1z3M7lx45a1CAsooP250xp+5zoHBxekLbJFrXvl8OQMvvxLJCH25FCPr4iFq
+ p7ZP3grQ/KGhZtwq73nwI15MLz5TM1jVe9Oa+RZmCAPnWtdaa3a/BvXajsbjeffU4RGU
+ wKDQ==
+X-Gm-Message-State: AOAM5339DBB2vJQOwZOlCm1KTBopfNjiitQwdvweNFYFYp+EqCNubRg1
+ YYVJTFJrS+hWYlwY8fVuQoYIM4AKnGA1adXubW0=
+X-Google-Smtp-Source: ABdhPJyWE7KVhpentQMS6wcIOnLCO28yiBC8EyfgsmRsgTyMwDbmfs9ZYWTSBImZjFoURIrO9SJfo+Aqu6ijp+p8E1Q=
+X-Received: by 2002:a6b:5c14:: with SMTP id z20mr910688ioh.176.1589923758581; 
+ Tue, 19 May 2020 14:29:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1588878640.git.alistair.francis@wdc.com>
-In-Reply-To: <cover.1588878640.git.alistair.francis@wdc.com>
+References: <20200516063746.18296-1-anup.patel@wdc.com>
+In-Reply-To: <20200516063746.18296-1-anup.patel@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 May 2020 14:10:26 -0700
-Message-ID: <CAKmqyKNEXAV+-xBsHZn1fL30sbJ8XkKZ3Lrp6nkwyYptg6e3ng@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] RTISC-V: Remove deprecated ISA, CPUs and machines
-To: Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+Date: Tue, 19 May 2020 14:20:25 -0700
+Message-ID: <CAKmqyKNURMfx+ONV02DLiJxkMaX7_FCdoNjnUhtqnsvKpty8PA@mail.gmail.com>
+Subject: Re: [PATCH 0/4] RISC-V multi-socket support
+To: Anup Patel <anup.patel@wdc.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Atish Patra <atish.patra@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Anup Patel <anup@brainfault.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -74,34 +76,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2020 21:19:22 -0000
+X-List-Received-Date: Tue, 19 May 2020 21:29:26 -0000
 
-On Thu, May 7, 2020 at 12:19 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+On Fri, May 15, 2020 at 11:40 PM Anup Patel <anup.patel@wdc.com> wrote:
 >
-> v2:
->  - Remove the CPUs and ISA seperatley
+> This series adds multi-socket support for RISC-V virt machine and
+> RISC-V spike machine. The multi-socket support will help us improve
+> various RISC-V operating systems, firmwares, and bootloader to
+> support RISC-V NUMA systems.
 >
-> Alistair Francis (3):
->   hw/riscv: spike: Remove deprecated ISA specific machines
->   target/riscv: Remove the deprecated CPUs
->   target/riscv: Drop support for ISA spec version 1.09.1
+> These patch can be found in riscv_multi_socket_v1 branch at:
+> https://github.com/avpatel/qemu.git
+>
+> To try this patches, we will need:
+> 1. OpenSBI multi-PLIC and multi-CLINT support which can be found in
+>    multi_plic_clint_v1 branch at:
+>    https://github.com/avpatel/opensbi.git
+> 2. Linux multi-PLIC improvements support which can be found in
+>    plic_imp_v1 branch at:
+>    https://github.com/avpatel/linux.git
+>
+> Anup Patel (4):
+>   hw/riscv: Allow creating multiple instances of CLINT
+>   hw/riscv: spike: Allow creating multiple sockets
+>   hw/riscv: Allow creating multiple instances of PLIC
+>   hw/riscv: virt: Allow creating multiple sockets
 
-Any more comments?
+Can you make sure all the patches pass checkpatch?
 
 Alistair
 
 >
->  hw/riscv/spike.c                              | 217 ------------------
->  include/hw/riscv/spike.h                      |   6 +-
->  target/riscv/cpu.c                            |  30 ---
->  target/riscv/cpu.h                            |   8 -
->  target/riscv/csr.c                            |  82 ++-----
->  .../riscv/insn_trans/trans_privileged.inc.c   |   6 -
->  tests/qtest/machine-none-test.c               |   4 +-
->  7 files changed, 21 insertions(+), 332 deletions(-)
+>  hw/riscv/sifive_clint.c         |  20 +-
+>  hw/riscv/sifive_e.c             |   4 +-
+>  hw/riscv/sifive_plic.c          |  24 +-
+>  hw/riscv/sifive_u.c             |   4 +-
+>  hw/riscv/spike.c                | 210 ++++++++------
+>  hw/riscv/virt.c                 | 495 ++++++++++++++++++--------------
+>  include/hw/riscv/sifive_clint.h |   7 +-
+>  include/hw/riscv/sifive_plic.h  |  12 +-
+>  include/hw/riscv/spike.h        |   8 +-
+>  include/hw/riscv/virt.h         |  12 +-
+>  10 files changed, 458 insertions(+), 338 deletions(-)
 >
 > --
-> 2.26.2
+> 2.25.1
+>
 >
 
