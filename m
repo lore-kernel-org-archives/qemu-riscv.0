@@ -1,50 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jb1La-00038W-2d
-	for mharc-qemu-riscv@gnu.org; Tue, 19 May 2020 08:27:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51908)
+	id 1jb6jY-0001uo-7o
+	for mharc-qemu-riscv@gnu.org; Tue, 19 May 2020 14:12:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40768)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jb1LW-00033R-Hp; Tue, 19 May 2020 08:27:46 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:42344)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jb1LT-0003N0-WB; Tue, 19 May 2020 08:27:45 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08433409|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.00778686-0.00114687-0.991066;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03268; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.HajG8vg_1589891253; 
-Received: from 30.225.208.54(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.HajG8vg_1589891253)
- by smtp.aliyun-inc.com(10.147.41.137);
- Tue, 19 May 2020 20:27:34 +0800
-Subject: Re: [RFC PATCH 8/8] riscv: Add RV64F instructions description
-To: Richard Henderson <richard.henderson@linaro.org>, peter.maydell@linaro.org
-Cc: alistair23@gmail.com, palmer@dabbelt.com, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com, qemu-devel@nongnu.org, alex.bennee@linaro.org,
- qemu-riscv@nongnu.org
-References: <20200430072139.4602-1-zhiwei_liu@c-sky.com>
- <20200430072139.4602-9-zhiwei_liu@c-sky.com>
- <99fa418c-9a2e-d806-b164-3a08fecd74e8@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <c093ec93-d16b-1ca3-39d6-9c21bd4fa623@c-sky.com>
-Date: Tue, 19 May 2020 20:27:33 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jb6jX-0001tH-0E; Tue, 19 May 2020 14:12:55 -0400
+Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:43041)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jb6jV-0006Yc-Tq; Tue, 19 May 2020 14:12:54 -0400
+Received: by mail-il1-x144.google.com with SMTP id l20so293367ilj.10;
+ Tue, 19 May 2020 11:12:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=kFBrO/aduvO08L5IUBv7D6z+S+KxKKSmqO9l2X1uVg0=;
+ b=Cd/U7bfne+pGeSwQFEMUXxwD/rE2yKRzCLm6D3JoER1dpMpCROQIlBF5ZrCSkj4JUf
+ +84XLNdhkmn4dHJXca/n76y6k1jRzWMmdveMcOLpHEF/vPUtchhLCwu7IitbcLDjxaXM
+ AEhdfc+yOBIC1hOnLhcsT1gxBuNgBdI6rTEHTGmCEtoMsgYkwnJtPlVQsmdknurai9w4
+ AvNsv9Aht86CJyNXA32mnWVRIMcHyLAbNHbAKbiDBMx3PPFs1PCY5pQASk76A0747gE6
+ W1x2LfwpRajdci3WQPF2ID/sJiTTXUU4y+yD/OAyiiVJs07poSrSep1f2b68rlPPN5LY
+ xu2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=kFBrO/aduvO08L5IUBv7D6z+S+KxKKSmqO9l2X1uVg0=;
+ b=FDHOKdl5mbbTgFCd9TUdJ38cP5DAUkl9JuCr1WyvtyqYSjKOAN4NAAOsNC4TIkEzPG
+ jFt/0TTzVHeulH9VfIMuS7zmFA9CJz+l9FXPYGKvyqdLVbhLARdxanPyXqLLYeMguRBT
+ c+ydRJgTKmvHhwARPuGYmhAqZpa1u87bcNQE/7CgACTGs3zWR6iwvuqsPCJ6VNnjlmv4
+ 2dW9onpIO24FyhflN61t2hB3hhLG4d04CtDEGyAn+zgLD25k9l0yhwMNKLqDDE+yTwAn
+ vIDMrSSxo/jMB8kqIp6/rw5Pi/sJHlRXSLEjme2Hif55+bv+MuaJE3hndeU9R0F22ytW
+ WT1A==
+X-Gm-Message-State: AOAM533fWV2GH7jG5NoKV1G2ILkdT/RUFZi3gI3/pzKER7/t3bFnEDn9
+ WEHa1xbgPsYCQg3QLQdzWETAtp85v9c5i1jcT+c=
+X-Google-Smtp-Source: ABdhPJzfrzPNp9h8Or495buceQ9D4QfFZcdkFMTC1Ym9L3GdHOEYO89cJJ4vcQAGEv1WILqMV2fEfJs/Dg5IlQ17TYk=
+X-Received: by 2002:a92:48d1:: with SMTP id j78mr250749ilg.131.1589911972040; 
+ Tue, 19 May 2020 11:12:52 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <99fa418c-9a2e-d806-b164-3a08fecd74e8@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-Received-SPF: none client-ip=121.197.200.217;
- envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/19 08:27:38
-X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <cover.1588878756.git.alistair.francis@wdc.com>
+ <44d0486b0fd156a756af544866dd7d19609b1aa6.1588878756.git.alistair.francis@wdc.com>
+ <01168f32-c21c-b9fd-cb9c-06511e28bd20@redhat.com>
+ <CAKmqyKMwdBmZ8kdi0xp0kJ1sPrWSGYZ304ZY8G+4xK9yYQ3VKg@mail.gmail.com>
+ <CAEUhbmWWdDQfj8XBkWzDXkNdvcvEic8K23NuCpNyQdfxM4TxOg@mail.gmail.com>
+ <CAKmqyKMOTnc9YX9adMyrQ5NnFZY5EZgyYYA_+23_ryWOtV92pQ@mail.gmail.com>
+ <CAEUhbmVu2=zCs8yOzH_wRMmtXDCA_b8pPFO4jQjnbh1iZvjUuQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmVu2=zCs8yOzH_wRMmtXDCA_b8pPFO4jQjnbh1iZvjUuQ@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 19 May 2020 11:03:59 -0700
+Message-ID: <CAKmqyKMMiQES-60C8y4QSfeQk8Gg-8ixOTw=PrRVWrWQPxVufw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/9] target/riscv: Don't overwrite the reset vector
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
- UNPARSEABLE_RELAY=0.001 autolearn=_AUTOLEARN
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -57,33 +81,170 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2020 12:27:47 -0000
+X-List-Received-Date: Tue, 19 May 2020 18:12:55 -0000
 
-
-
-On 2020/5/12 2:11, Richard Henderson wrote:
-> On 4/30/20 12:21 AM, LIU Zhiwei wrote:
->> +FCVT_L_S RISCV 1100000 00010 rs1:5 rm:3 rd:5 1010011 \
->> +!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rm != 6 && $rm != 5 }
->> +
->> +FCVT_LU_S RISCV 1100000 00011 rs1:5 rm:3 rd:5 1010011 \
->> +!constraints { $rd != 2 && $rd != 3 && $rd != 4 && $rm != 6 && $rm != 5 }
->> +
->> +FCVT_S_L RISCV 1101000 00010 rs1:5 rm:3 rd:5 1010011 \
->> +!constraints { $rs1 != 2 && $rm != 6 && $rm != 5 }
->> +
->> +FCVT_S_LU RISCV 1101000 00011 rs1:5 rm:3 rd:5 1010011 \
->> +!constraints { $rs1 != 2 && $rm != 6 && $rm != 5 }
-> Interesting question here: Do we really want to avoid the reserved rounding
-> modes, or do we want to verify that we raise an invalid operand exception?
-I think we should always generate legal  instructions except explicitly 
-illegal instructions
-with proper risu ops code.
-
-Zhiwei
-> I guess I'm fine with it either way.
+On Sat, May 16, 2020 at 2:03 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
+> On Sat, May 16, 2020 at 3:51 AM Alistair Francis <alistair23@gmail.com> w=
+rote:
+> >
+> > On Thu, May 14, 2020 at 9:54 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >
+> > > On Fri, May 15, 2020 at 5:51 AM Alistair Francis <alistair23@gmail.co=
+m> wrote:
+> > > >
+> > > > On Thu, May 14, 2020 at 10:54 AM Philippe Mathieu-Daud=C3=A9
+> > > > <philmd@redhat.com> wrote:
+> > > > >
+> > > > > On 5/7/20 9:13 PM, Alistair Francis wrote:
+> > > > > > If the reset vector is set in the init function don't set it ag=
+ain in
+> > > > > > realise.
+> > > > >
+> > > > > typo "realize".
+> > > >
+> > > > It's not a typo, just correct English :)
+> > > >
+> > > > I have changed it.
+> > > >
+> > > > >
+> > > > > >
+> > > > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > > > > > ---
+> > > > > >   target/riscv/cpu.c | 20 +++++++++++---------
+> > > > > >   1 file changed, 11 insertions(+), 9 deletions(-)
+> > > > > >
+> > > > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > > > > index 059d71f2c7..8f837edf8d 100644
+> > > > > > --- a/target/riscv/cpu.c
+> > > > > > +++ b/target/riscv/cpu.c
+> > > > > > @@ -111,6 +111,14 @@ static void set_feature(CPURISCVState *env=
+, int feature)
+> > > > > >       env->features |=3D (1ULL << feature);
+> > > > > >   }
+> > > > > >
+> > > > > > +static int get_resetvec(CPURISCVState *env)
+> > > > > > +{
+> > > > > > +#ifndef CONFIG_USER_ONLY
+> > > > > > +    return env->resetvec;
+> > > > > > +#endif
+> > > > > > +    return 0;
+> > > > >
+> > > > > Don't you get an error about double return? Maybe use #else?
+> > > >
+> > > > Apparently not, I have changed it though.
+> > > >
+> > > > Alistair
+> > > >
+> > > > >
+> > > > > > +}
+> > > > > > +
+> > > > > >   static void set_resetvec(CPURISCVState *env, int resetvec)
+> > > > > >   {
+> > > > > >   #ifndef CONFIG_USER_ONLY
+> > > > > > @@ -123,7 +131,6 @@ static void riscv_any_cpu_init(Object *obj)
+> > > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > > > > >       set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC =
+| RVU);
+> > > > > >       set_priv_version(env, PRIV_VERSION_1_11_0);
+> > > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > > > > >   }
+> > > > > >
+> > > > > >   #if defined(TARGET_RISCV32)
+> > > > > > @@ -140,7 +147,6 @@ static void rv32gcsu_priv1_09_1_cpu_init(Ob=
+ject *obj)
+> > > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > > > > >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | =
+RVS | RVU);
+> > > > > >       set_priv_version(env, PRIV_VERSION_1_09_1);
+> > > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > > > > >       set_feature(env, RISCV_FEATURE_MMU);
+> > > > > >       set_feature(env, RISCV_FEATURE_PMP);
+> > > > > >   }
+> > > > > > @@ -150,7 +156,6 @@ static void rv32gcsu_priv1_10_0_cpu_init(Ob=
+ject *obj)
+> > > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > > > > >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | =
+RVS | RVU);
+> > > > > >       set_priv_version(env, PRIV_VERSION_1_10_0);
+> > > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > > > > >       set_feature(env, RISCV_FEATURE_MMU);
+> > > > > >       set_feature(env, RISCV_FEATURE_PMP);
+> > > > > >   }
+> > > > > > @@ -160,7 +165,6 @@ static void rv32imacu_nommu_cpu_init(Object=
+ *obj)
+> > > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > > > > >       set_misa(env, RV32 | RVI | RVM | RVA | RVC | RVU);
+> > > > > >       set_priv_version(env, PRIV_VERSION_1_10_0);
+> > > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > > > > >       set_feature(env, RISCV_FEATURE_PMP);
+> > > > > >   }
+> > > > > >
+> > > > > > @@ -169,7 +173,6 @@ static void rv32imafcu_nommu_cpu_init(Objec=
+t *obj)
+> > > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > > > > >       set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVC | RVU);
+> > > > > >       set_priv_version(env, PRIV_VERSION_1_10_0);
+> > > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > > > > >       set_feature(env, RISCV_FEATURE_PMP);
+> > > > > >   }
+> > > > > >
+> > > > > > @@ -187,7 +190,6 @@ static void rv64gcsu_priv1_09_1_cpu_init(Ob=
+ject *obj)
+> > > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > > > > >       set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | =
+RVS | RVU);
+> > > > > >       set_priv_version(env, PRIV_VERSION_1_09_1);
+> > > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > > > > >       set_feature(env, RISCV_FEATURE_MMU);
+> > > > > >       set_feature(env, RISCV_FEATURE_PMP);
+> > > > > >   }
+> > > > > > @@ -197,7 +199,6 @@ static void rv64gcsu_priv1_10_0_cpu_init(Ob=
+ject *obj)
+> > > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > > > > >       set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | =
+RVS | RVU);
+> > > > > >       set_priv_version(env, PRIV_VERSION_1_10_0);
+> > > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > > > > >       set_feature(env, RISCV_FEATURE_MMU);
+> > > > > >       set_feature(env, RISCV_FEATURE_PMP);
+> > > > > >   }
+> > > > > > @@ -207,7 +208,6 @@ static void rv64imacu_nommu_cpu_init(Object=
+ *obj)
+> > > > > >       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> > > > > >       set_misa(env, RV64 | RVI | RVM | RVA | RVC | RVU);
+> > > > > >       set_priv_version(env, PRIV_VERSION_1_10_0);
+> > > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > > > > >       set_feature(env, RISCV_FEATURE_PMP);
+> > > > > >   }
+> > > > > >
+> > > > > > @@ -399,7 +399,9 @@ static void riscv_cpu_realize(DeviceState *=
+dev, Error **errp)
+> > > > > >       }
+> > > > > >
+> > > > > >       set_priv_version(env, priv_version);
+> > > > > > -    set_resetvec(env, DEFAULT_RSTVEC);
+> > > > > > +    if (!get_resetvec(env)) {
+> > >
+> > > What if we have a RISC-V CPU whose reset vector is at address 0?
+> >
+> > That won't work then. I think if that happens we could swap to a
+> > negative number.
+> >
 >
-> r~
+> env->resetvec is declared as target_ulong so negative number does not wor=
+k here.
+>
+> How about just remove set_resetvec() in riscv_cpu_realize()? Or
+> introduce a new config parameter for the reset vector, and only
+> override it if the config parameter is given, like other properties?
 
+We need to set the default reset veector though. I can just set all of
+the values in the init function instead.
+
+Alistair
+
+>
+> Regards,
+> Bin
 
