@@ -1,72 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jbRi3-0005FZ-Of
-	for mharc-qemu-riscv@gnu.org; Wed, 20 May 2020 12:36:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48056)
+	id 1jbXpe-0000fy-Po
+	for mharc-qemu-riscv@gnu.org; Wed, 20 May 2020 19:09:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59568)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=40290bcd2=alistair.francis@wdc.com>)
- id 1jbRi2-0005CJ-0K; Wed, 20 May 2020 12:36:46 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:11692)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=40290bcd2=alistair.francis@wdc.com>)
- id 1jbRi1-0002lX-6B; Wed, 20 May 2020 12:36:45 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1589992605; x=1621528605;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=DOagZFIyWIOdVZLyXWb+AMorfmw3jWNAx6DX9j9m1ns=;
- b=JYadaoSS+1z9J2fXqAgMLtEyHPEUWCcCLmGQ7ybEvTZGWJk5aHG57iKP
- 3ARROFDl0LANkd0i3+sJdkvn8LysyDYckgrCSn9/LGbtp+MlGYISrVL6E
- 98Gmi4JCsT4IcdfI4kgz75UH2fYCp/4oZe/7TxaWAG+uUzPlP+YANsDpe
- dPeioAHVFRV2BPIVhqi51SGz8a9mcWE3recz+l4I+4PsoLCi3YS3GgfGA
- bzm82rDpPAfeldQrF3hYQLtaoHAE06IDeg6Bzi40eFHIO0ESg/GPniPyg
- W6HPPm67m/JXl+/4ZGPLNXJV1WIE6ipqjLJmC1GbubpNe3HvsgjsNpw2A w==;
-IronPort-SDR: JNlcbRFmI/YXLsQp/CEPDQbu0LQk5a8GcqafmwcylkxAuDXVug/epTkP6zKMt0AiHi22ZOJH/L
- EOIzONzH/xZ7+DgoP1xpvPhCJzLU0iTnBavaugm29bl6IZkKhApguDMPM9n1t0GifuQGvnq8mC
- oS6IuNDZL6f6V5TQVlkLZIFwmlFS0BctxH/d/JbvS8Ml5iJQQvZxvT16kqkQoRtMxIZ/ykgrlx
- 4ophXDQnW/sBb9mOz+GVQ8ddCVqpHc7Wax7B7+wFU/RdqNjcAkDMlt4ckHkCmE+rvtwy3AZrUn
- PaQ=
-X-IronPort-AV: E=Sophos;i="5.73,414,1583164800"; d="scan'208";a="138468215"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 21 May 2020 00:36:44 +0800
-IronPort-SDR: THwWWngZAjQ84jL8glqVb88OIZ63FQpRMEFlOWX4dRH0aFNV+pXyFjy13CagFGTyu5pjpZpBlw
- RMtdit1SampdjxSVWgwnnEv2DyL9J6zkI=
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 May 2020 09:26:46 -0700
-IronPort-SDR: BO2RXBNVmC0/n1sGE6nS4bygGRRdEcWAX/Y8QorFtY/bxftrqIza4LsjeD3i4yE1LK5jUV/SNo
- hoVvnN/8kyng==
-WDCIronportException: Internal
-Received: from 96yhgc2.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.57.51])
- by uls-op-cesaip02.wdc.com with ESMTP; 20 May 2020 09:36:43 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
- philmd@redhat.com, bmeng.cn@gmail.com
-Subject: [PATCH v2 2/2] sifive_e: Support the revB machine
-Date: Wed, 20 May 2020 09:28:15 -0700
-Message-Id: <9a45e819e850f6c913340a03c475b93428e9d139.1589992028.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <cover.1589992028.git.alistair.francis@wdc.com>
-References: <cover.1589992028.git.alistair.francis@wdc.com>
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1jbXpd-0000fD-4X
+ for qemu-riscv@nongnu.org; Wed, 20 May 2020 19:09:01 -0400
+Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044]:55563)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1jbXpb-00019e-Te
+ for qemu-riscv@nongnu.org; Wed, 20 May 2020 19:09:00 -0400
+Received: by mail-pj1-x1044.google.com with SMTP id k7so2031193pjs.5
+ for <qemu-riscv@nongnu.org>; Wed, 20 May 2020 16:08:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=wnGc4bt7aIHsiLHFRQ+JGJANNW/8Vj0o0EBAtJLTYN8=;
+ b=bgIySXLeCDzFQV3EDnZn0VMwoAYuCxMH033dxUF6cJB6luss/BihUFSj+VMTnt6Pam
+ rNWbNBzOBu6gaAImDrkyID/Q1p8VNKuTOPh8b8i0lko5bN64y2x+K/TTbGt9QWedzetO
+ IFhFzsrBbY7aN/p1O62P57yL0BGWvP8xh4PCwuvhHBqiBgJjj9W/VmFDpsw26MhwccFM
+ 6tutS520bieNXPqGUwAZ+yzwx3M8i4G+N3Oz6yNnSnB+3hNHM2EBfza2TcRrzYNxb7ze
+ RUg8y1T1ws3iY1PJw1ksOyBkrzZlLCc7E1XWCyeTHD8rGafe9z2CWR/8aMM9WGaOLMFo
+ cmdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=wnGc4bt7aIHsiLHFRQ+JGJANNW/8Vj0o0EBAtJLTYN8=;
+ b=J283iWM9c6fekNFg/bY7JkiLv09k7YGzuC+QfQdzWNXR60kdKn7I92YicG8qhb6186
+ Rd0pOK1mTiok20D31uECgB/G/t0ZC/CzaqVT06tgqcV3+l4nYj7hIDTFRnL+e61b5HSF
+ c8XJE26aC08Ey2C/uhed4t+18CXSVBs9iMuC16ieQM8zrjaB5LO18kdM4CYXaXCcin/J
+ HUdVU/WWuCxjKIYPOsT7jrxOetk6OyeHJboSDRqypQgHMhJ2FGZNTkEJ3pSP9ebkGKL+
+ 2JLccj2QfYRyTdc68lijG7xhdotAXrb1st5mP1yrn44xvIV0IXaEIyqeS3WVdmsOe8aX
+ toFw==
+X-Gm-Message-State: AOAM532znir7XY70afh7HfrrUZPnjVUlf4canA/4EMoJpCE63lCuxhhA
+ a/jHgHzG42I6lhJJrjEO0ubTFA==
+X-Google-Smtp-Source: ABdhPJy1ImvA9wKwwUoTL+0Km4oEm+KNZjAkVNX7vGHAtBE83pmEt2RhovgBj71dkbvv5ctczAU7Ng==
+X-Received: by 2002:a17:90a:4802:: with SMTP id
+ a2mr8214221pjh.66.1590016137681; 
+ Wed, 20 May 2020 16:08:57 -0700 (PDT)
+Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
+ [76.210.143.223])
+ by smtp.gmail.com with ESMTPSA id 7sm2954921pfc.203.2020.05.20.16.08.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 May 2020 16:08:56 -0700 (PDT)
+Date: Wed, 20 May 2020 16:08:56 -0700 (PDT)
+X-Google-Original-Date: Wed, 20 May 2020 16:04:10 PDT (-0700)
+Subject: Re: [PATCH v1 1/2] riscv: sifive_e: Manually define the machine
+In-Reply-To: <da77b1e0a31f2f8fb18117b20a1493ab1ec0471f.1589489213.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-ca9ba779-53fd-4eae-b04b-e6c921d8333f@palmerdabbelt-glaptop1>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.144;
- envelope-from=prvs=40290bcd2=alistair.francis@wdc.com;
- helo=esa5.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/20 12:36:38
-X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
+ envelope-from=palmer@dabbelt.com; helo=mail-pj1-x1044.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -80,82 +80,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2020 16:36:46 -0000
+X-List-Received-Date: Wed, 20 May 2020 23:09:01 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- include/hw/riscv/sifive_e.h |  1 +
- hw/riscv/sifive_e.c         | 35 +++++++++++++++++++++++++++++++----
- 2 files changed, 32 insertions(+), 4 deletions(-)
+On Thu, 14 May 2020 13:47:07 PDT (-0700), Alistair Francis wrote:
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  hw/riscv/sifive_e.c         | 41 +++++++++++++++++++++++++++----------
+>  include/hw/riscv/sifive_e.h |  4 ++++
+>  2 files changed, 34 insertions(+), 11 deletions(-)
+>
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index b53109521e..472a98970b 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -79,7 +79,7 @@ static void riscv_sifive_e_init(MachineState *machine)
+>  {
+>      const struct MemmapEntry *memmap = sifive_e_memmap;
+>
+> -    SiFiveEState *s = g_new0(SiFiveEState, 1);
+> +    SiFiveEState *s = RISCV_E_MACHINE(machine);
+>      MemoryRegion *sys_mem = get_system_memory();
+>      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+>      int i;
+> @@ -115,6 +115,35 @@ static void riscv_sifive_e_init(MachineState *machine)
+>      }
+>  }
+>
+> +static void sifive_e_machine_instance_init(Object *obj)
+> +{
+> +}
+> +
+> +static void sifive_e_machine_class_init(ObjectClass *oc, void *data)
+> +{
+> +    MachineClass *mc = MACHINE_CLASS(oc);
+> +
+> +    mc->desc = "RISC-V Board compatible with SiFive E SDK";
+> +    mc->init = riscv_sifive_e_init;
+> +    mc->max_cpus = 1;
+> +    mc->default_cpu_type = SIFIVE_E_CPU;
+> +}
+> +
+> +static const TypeInfo sifive_e_machine_typeinfo = {
+> +    .name       = MACHINE_TYPE_NAME("sifive_e"),
+> +    .parent     = TYPE_MACHINE,
+> +    .class_init = sifive_e_machine_class_init,
+> +    .instance_init = sifive_e_machine_instance_init,
+> +    .instance_size = sizeof(SiFiveEState),
+> +};
+> +
+> +static void sifive_e_machine_init_register_types(void)
+> +{
+> +    type_register_static(&sifive_e_machine_typeinfo);
+> +}
+> +
+> +type_init(sifive_e_machine_init_register_types)
+> +
+>  static void riscv_sifive_e_soc_init(Object *obj)
+>  {
+>      MachineState *ms = MACHINE(qdev_get_machine());
+> @@ -214,16 +243,6 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+>          &s->xip_mem);
+>  }
+>
+> -static void riscv_sifive_e_machine_init(MachineClass *mc)
+> -{
+> -    mc->desc = "RISC-V Board compatible with SiFive E SDK";
+> -    mc->init = riscv_sifive_e_init;
+> -    mc->max_cpus = 1;
+> -    mc->default_cpu_type = SIFIVE_E_CPU;
+> -}
+> -
+> -DEFINE_MACHINE("sifive_e", riscv_sifive_e_machine_init)
+> -
+>  static void riscv_sifive_e_soc_class_init(ObjectClass *oc, void *data)
+>  {
+>      DeviceClass *dc = DEVICE_CLASS(oc);
+> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> index 25ce7aa9d5..414992119e 100644
+> --- a/include/hw/riscv/sifive_e.h
+> +++ b/include/hw/riscv/sifive_e.h
+> @@ -47,6 +47,10 @@ typedef struct SiFiveEState {
+>      SiFiveESoCState soc;
+>  } SiFiveEState;
+>
+> +#define TYPE_RISCV_E_MACHINE MACHINE_TYPE_NAME("sifive_e")
+> +#define RISCV_E_MACHINE(obj) \
+> +    OBJECT_CHECK(SiFiveEState, (obj), TYPE_RISCV_E_MACHINE)
+> +
+>  enum {
+>      SIFIVE_E_DEBUG,
+>      SIFIVE_E_MROM,
 
-diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-index 414992119e..0d3cd07fcc 100644
---- a/include/hw/riscv/sifive_e.h
-+++ b/include/hw/riscv/sifive_e.h
-@@ -45,6 +45,7 @@ typedef struct SiFiveEState {
- 
-     /*< public >*/
-     SiFiveESoCState soc;
-+    bool revb;
- } SiFiveEState;
- 
- #define TYPE_RISCV_E_MACHINE MACHINE_TYPE_NAME("sifive_e")
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 472a98970b..cb7818341b 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -98,10 +98,14 @@ static void riscv_sifive_e_init(MachineState *machine)
-         memmap[SIFIVE_E_DTIM].base, main_mem);
- 
-     /* Mask ROM reset vector */
--    uint32_t reset_vec[2] = {
--        0x204002b7,        /* 0x1000: lui     t0,0x20400 */
--        0x00028067,        /* 0x1004: jr      t0 */
--    };
-+    uint32_t reset_vec[2];
-+
-+    if (s->revb) {
-+        reset_vec[0] = 0x200102b7;        /* 0x1000: lui     t0,0x20010 */
-+    } else {
-+        reset_vec[0] = 0x204002b7;        /* 0x1000: lui     t0,0x20400 */
-+    }
-+    reset_vec[1] = 0x00028067;        /* 0x1004: jr      t0 */
- 
-     /* copy in the reset vector in little_endian byte order */
-     for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-@@ -115,8 +119,31 @@ static void riscv_sifive_e_init(MachineState *machine)
-     }
- }
- 
-+static bool sifive_e_machine_get_revb(Object *obj, Error **errp)
-+{
-+    SiFiveEState *s = RISCV_E_MACHINE(obj);
-+
-+    return s->revb;
-+}
-+
-+static void sifive_e_machine_set_revb(Object *obj, bool value, Error **errp)
-+{
-+    SiFiveEState *s = RISCV_E_MACHINE(obj);
-+
-+    s->revb = value;
-+}
-+
- static void sifive_e_machine_instance_init(Object *obj)
- {
-+    SiFiveEState *s = RISCV_E_MACHINE(obj);
-+
-+    s->revb = false;
-+    object_property_add_bool(obj, "revb", sifive_e_machine_get_revb,
-+                             sifive_e_machine_set_revb, NULL);
-+    object_property_set_description(obj, "revb",
-+                                    "Set on to tell QEMU that it should model "
-+                                    "the revB HiFive1 board",
-+                                    NULL);
- }
- 
- static void sifive_e_machine_class_init(ObjectClass *oc, void *data)
--- 
-2.26.2
-
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
