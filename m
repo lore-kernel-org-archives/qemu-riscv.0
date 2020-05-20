@@ -1,77 +1,120 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jbHpl-0004Os-UO
-	for mharc-qemu-riscv@gnu.org; Wed, 20 May 2020 02:04:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54834)
+	id 1jbKQu-0000co-10
+	for mharc-qemu-riscv@gnu.org; Wed, 20 May 2020 04:50:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44936)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jbHpj-0004Nj-F3; Wed, 20 May 2020 02:04:03 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:34951)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jbHpi-00021N-M0; Wed, 20 May 2020 02:04:03 -0400
-Received: by mail-wr1-x443.google.com with SMTP id j5so1865870wrq.2;
- Tue, 19 May 2020 23:04:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=7vKBNr6qqiUPzvsUDA/Kg/96d5JxxrR5dwrnToNSbP8=;
- b=ECc+kTBv5hwtA95kzU5zyr0hZE5pq6+/sFrZQAT18cl6d0pej0x7ozg+HkWCxmp06e
- ZbNl/1jnvf2c5j2dYNcx72UrYLJ5u+UzyvzE9+SPjzA6x5FJjt/5lHfiSLXY5k18bwha
- ngpYgWVrbSK7Db5UTuMJJyLSvq4x8BYVnTL/bHv+JxpBgFVdglhLqEqYWPeLP8XeA5f9
- eyM+fAbUYgS4LnLznM/MNKtfiNdW0ZOCi70nv0HobDKsTlluyhtYNJtUfMaFKnNzBTVD
- vb2kniqmZGVP5btnSLQRBfjSRUugichSI1JdBJxT8P1XlWHyxr1my9tGfLprpxc8qbTT
- /jpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=7vKBNr6qqiUPzvsUDA/Kg/96d5JxxrR5dwrnToNSbP8=;
- b=CogdbXMMsfgNgi2gpfOKeq0xRSeNDEGjqTDy+944skvxY0A+cn1nvKsYR/4HPedKDI
- zPshU9FWoxG52u9FpK1Tk/oKzpoeVg3wMnFfLpKe2v0/fmJB4KQcgbhMxxnTBThmZRht
- BH2GGTdKvTCFGZkX54mueSFaxoWKas6ie4sg8/ZRLWlbdLcsSjoEH0LPpgt9MHXCf6TG
- 1curk2ks5OXYKCYo89NO7YeuOUATzXL+ks5Gdf7RAbWrBd4InpXRajUlQ46sfalK8ZjB
- hr8gHQekNrMx3glbXOS8fPsvXaOHy0K38Uu13kEcFUSf76zrBn127Tf5aW9IbkIThwfn
- QJqw==
-X-Gm-Message-State: AOAM531KLK2nwSI00gXBYmv8Gw7M2yVcxKz96sgzQ/d2rSxStfEaGEIl
- NzvQaIYYEFxVOZ73DWQZmQGhChWMI0E=
-X-Google-Smtp-Source: ABdhPJzb62JbNd3K9Uek/VHmeZdttRGfXd5UMcHJVrZjVAfbgwdvpSjQlatAtsTlFeEqPsOID5pWCg==
-X-Received: by 2002:a5d:5492:: with SMTP id h18mr190725wrv.330.1589954641121; 
- Tue, 19 May 2020 23:04:01 -0700 (PDT)
-Received: from [192.168.1.38] (17.red-88-21-202.staticip.rima-tde.net.
- [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id p4sm1721035wrq.31.2020.05.19.23.04.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 May 2020 23:04:00 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v3 8/9] riscv/opentitan: Connect the UART device
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair23@gmail.com, bmeng.cn@gmail.com
-References: <cover.1589923785.git.alistair.francis@wdc.com>
- <eb6069a05d18f4a1c9c7dbc97a0c521ae4b3674f.1589923785.git.alistair.francis@wdc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <47d26423-bf54-c0af-5043-5e6a93ead552@amsat.org>
-Date: Wed, 20 May 2020 08:03:59 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
-MIME-Version: 1.0
-In-Reply-To: <eb6069a05d18f4a1c9c7dbc97a0c521ae4b3674f.1589923785.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
+ (Exim 4.90_1) (envelope-from <prvs=402f50500=Anup.Patel@wdc.com>)
+ id 1jbKQr-0000Xf-RQ; Wed, 20 May 2020 04:50:34 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:11923)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <prvs=402f50500=Anup.Patel@wdc.com>)
+ id 1jbKQp-0007lM-6G; Wed, 20 May 2020 04:50:33 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1589964632; x=1621500632;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=Q+6LrkeC5sBvMvvWJkb3ipMqG7Us75b5OSuyDP9DydY=;
+ b=qfDCtwqah+RWx6IjTJoFJBSWDsGw4WjgreASMKM3BbgNN0Jz9ol6AwIz
+ tCfXA1/RosFTtL+pj1zeKJa8K/uatTjBZ8TmZRU/UIgt4fU2cXuzh/sui
+ 8tleywamODSJxwGfvhUaqNLlLHJhppepKXOiVuwNvCfYr6yyMUcsa0z9G
+ v93f7qqQPvuzeL/2pWAExsT817kPN33cKIpKsw4iMT8CcD3jLSw9QYCCw
+ 1K6Q/tXkJKIXTH6LSNsdzsD1bZFFshr2yberSmCT3Ln/kjuKNMVK4jBgy
+ LgQcV4pIRR9znXX0oytjGw1KUcaDgJeVOUs5AJYnlVsUHhHnAx8mpew9b g==;
+IronPort-SDR: X7Pd0kkrSxHHlK8gGiGI/HwdvdDXrUgbafp+TW0gL5N8NAFJhWJ7T7vwseNPSD7Na4F+JaXcVT
+ vdwBRGfG1rx1kWQVaDeFFS7KwsFavjGg8S6tK+3K+7pMLOSgtvYuaG+m3cw/5OgFmCVx25itWK
+ P7JCpeZRz4nMEW5xZoAV4WUqRym/ky/j8Ikc/T/mDb7zU8TkVUwaoh0dyp/KMV/YxAzbEcRLKr
+ xiCcHtQNWJxhuQxOAtaaI6jrGt9PlykzBPT/SEjFB5MsAZoSDjOsfdSqUYuW38wGyxN0Wv2ZH6
+ 8qs=
+X-IronPort-AV: E=Sophos;i="5.73,413,1583164800"; d="scan'208";a="142447551"
+Received: from mail-sn1nam02lp2057.outbound.protection.outlook.com (HELO
+ NAM02-SN1-obe.outbound.protection.outlook.com) ([104.47.36.57])
+ by ob1.hgst.iphmx.com with ESMTP; 20 May 2020 16:50:25 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TIaK00cmQHSGEzy8w3nFqka0iBS8ylyFQ/lFHz5gQMC5JrXYfJNfUYvaSDzE6BRBT2hf7zam++vxnhGrV7f72bEKzm/MAKtJZRxWgEVHKm4WT9j/iWEsE+TqBpCQl/nqQU7C4DY2qJp+I/pEcx6DfArUcvKqAR998NDD35AFJiCBlL9iwY5cmbS8ULzDsTtKS4AtYIrQSNuUhZ6tliMfprCrNBYKsFeL6a+Kp9hgM+npM97nV4e8KxBCsixFKqeVWGWvNmsa/gCjzBE5DmBj2bA//xfE8NPP5jHPUQTnYC3Bxi5FZn7F0/Z7sqgOPW0IJQXDY6iCy/v1NhXfWTQhFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Q+6LrkeC5sBvMvvWJkb3ipMqG7Us75b5OSuyDP9DydY=;
+ b=DIeWwScdBgK4NFeoyk3Lr3ZMx4U+VIz7wfy+7XQm3zlPyK+EIqRWpw/dVq4v++Umap3kC6rUbRsROEE2jdxidiijkKmOV8Pc3zhN6bIlOG5fvN3pHbxTY2k2CPl7DKKJyG03W4vx8n40M8tb4MkHZAfOZF01guFbIaoQbQZDxmrXY/EZ5MGLlxmoHNZpUD1nyplC54KstEHHLvzuW8ObGeAdKaLq7dpGL92TpQHBH52vHW60I7C5tjEd70Mlwr6qMX/HBA5xGhYbnkR2FF3yidHTvfyvFKdI6GxtwpB53eQaADf2Z8T/tWoq1/Y+nOKcexVj7VIC9cFb0gg9uefhhg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Q+6LrkeC5sBvMvvWJkb3ipMqG7Us75b5OSuyDP9DydY=;
+ b=mQ3niX03wENFF3M6RnrooivTD/6jRF28OL19eXm/SaWnD5F87nNLhvU2oUdW1IpGiZzEDA/KkRsRFKwHgiQYQPjUOqUtv99Hm/wBjxZCI5BGgTmPpnjLB1NedgxrmbON+GZxz1IGlzCq3jhwJRnEq8AI4Pb6NQCekOSFCKK/kIc=
+Received: from DM6PR04MB6201.namprd04.prod.outlook.com (2603:10b6:5:127::32)
+ by DM6PR04MB4972.namprd04.prod.outlook.com (2603:10b6:5:fc::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3000.26; Wed, 20 May
+ 2020 08:50:23 +0000
+Received: from DM6PR04MB6201.namprd04.prod.outlook.com
+ ([fe80::f8b3:c124:482b:52e0]) by DM6PR04MB6201.namprd04.prod.outlook.com
+ ([fe80::f8b3:c124:482b:52e0%5]) with mapi id 15.20.3000.034; Wed, 20 May 2020
+ 08:50:23 +0000
+From: Anup Patel <Anup.Patel@wdc.com>
+To: Alistair Francis <alistair23@gmail.com>
+CC: Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <Alistair.Francis@wdc.com>, Sagar
+ Karandikar <sagark@eecs.berkeley.edu>, Atish Patra <Atish.Patra@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org
+ Developers" <qemu-devel@nongnu.org>, Anup Patel <anup@brainfault.org>
+Subject: RE: [PATCH 0/4] RISC-V multi-socket support
+Thread-Topic: [PATCH 0/4] RISC-V multi-socket support
+Thread-Index: AQHWK0yQHwdaM0x1Tka0/hlTAcemqqiv8AaAgACvivA=
+Date: Wed, 20 May 2020 08:50:23 +0000
+Message-ID: <DM6PR04MB6201E9B6CF062D5FDB07A4B98DB60@DM6PR04MB6201.namprd04.prod.outlook.com>
+References: <20200516063746.18296-1-anup.patel@wdc.com>
+ <CAKmqyKNURMfx+ONV02DLiJxkMaX7_FCdoNjnUhtqnsvKpty8PA@mail.gmail.com>
+In-Reply-To: <CAKmqyKNURMfx+ONV02DLiJxkMaX7_FCdoNjnUhtqnsvKpty8PA@mail.gmail.com>
+Accept-Language: en-US
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::443;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x443.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=wdc.com;
+x-originating-ip: [106.51.25.22]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 4def611a-fabb-48d2-1d9a-08d7fc9ad5b2
+x-ms-traffictypediagnostic: DM6PR04MB4972:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <DM6PR04MB49721E4B54DD384DCCE780668DB60@DM6PR04MB4972.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-forefront-prvs: 04097B7F7F
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: uJJAGlVtlQaYcJSw9mmIf7ewJMssIpx+B5cutiYR4Gn7ZxFJLJkPNNEeUGst9i2SadJt8V9Ars5z/BjfFoJJEUZBFy6d8BOecWkvoF4Whpt7KC5aNxszjbCc23FIkyuIcjvIsXECp5u4qD5gEeq0Cc1bb7t4Kdh+VvYkbFKwRn6zfUPa8Vq2aTjWQy7b7FWfWdkIMWTkpbmhHsB34DDYbLp6TTVLdh1WfF9e+3x/tkkcOssXmImNROomV9xGf2+vrvbOzO7FMtz3eo7zLRFKj/APv5iYMhnuOjjwd7AoEX+gsN2lATgrl4Yh8pKhdohAlWz94POMtuxKqK6iE6W703PetTJ5bVO9xdHsEnho33XtGwFg+8LdghXBL41q4jJYx+Kn8Ml1pyOQf/fTLZhJwoMclhsvdUX1rHUpTKXOwUwMnJwaYY+bFHCauJJrii4rwwWxpyeR6xcVnAl4t/BY2Nms/8xNPxv1UWZXU2a5od+71/62Mq6lPYYk/VyaiFxmbIyB8tjp0l7jADF8T6zIGQ==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR04MB6201.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(396003)(136003)(39860400002)(346002)(366004)(376002)(66476007)(64756008)(66556008)(66446008)(76116006)(5660300002)(66946007)(8936002)(478600001)(86362001)(966005)(55236004)(4326008)(6506007)(7696005)(8676002)(53546011)(316002)(26005)(71200400001)(186003)(54906003)(2906002)(33656002)(6916009)(9686003)(55016002)(52536014);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata: 9CTJTfsIwMMtSoEUmGLJWbTZ4uHHEfHGyDp8j7BTMCi5osnBUuO6362PnJcuyuARAnRTfu3gf1z8HXXRa6p8H+kGw5S53bn3Naq/dKWMDP4o+CPvcyF808seMPw/LoV6HIEZ+IlLgquFMm9CExkK8/Fqti47fcHHDlvrSVfHdZVJS2CirBo8BvkijZCebH9Z4MQd+t1XLteojrPINGFY36M4ZNlZUu6UgNgJ9Shmrg39CLJj909NVDczG7efzOJTER18BXruWIeWYKnSgYmgbHpVXn1kjPohUdyY3/byK1h4u6whqVPqHlYpKUDI57ZLDAZ/nFTunyIp5LoNDUL3rifT0rM73ihEBd1H1OGNtfFiaJ63GglFKI6HQvlUla2gEWrbYcKTWlvspxbD8TmqW6iVe9/HUx2+5KYt38zaiCOhlBW8O0y/OeKUaoBZn4XQ7zzMcMt53m4h3vHRHpjpwM6zWiZrQvC1Q1nZI/3XYSs=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4def611a-fabb-48d2-1d9a-08d7fc9ad5b2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 May 2020 08:50:23.4648 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: GxxFW7otXkdMVC7g2HIUMmkW/KInnBwnCHyewuUQyYaNfrqZMszWCA7+5gUiWuo4rMDj6pVo6aVI7DJ6rQpH+g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB4972
+Received-SPF: pass client-ip=216.71.153.141;
+ envelope-from=prvs=402f50500=Anup.Patel@wdc.com; helo=esa3.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/20 04:50:25
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,96 +128,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2020 06:04:03 -0000
+X-List-Received-Date: Wed, 20 May 2020 08:50:34 -0000
 
-On 5/19/20 11:31 PM, Alistair Francis wrote:
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Bin Meng <bin.meng@windriver.com>
-> ---
->   include/hw/riscv/opentitan.h | 13 +++++++++++++
->   hw/riscv/opentitan.c         | 24 ++++++++++++++++++++++--
->   2 files changed, 35 insertions(+), 2 deletions(-)
-> 
-> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-> index 8d6a09b696..825a3610bc 100644
-> --- a/include/hw/riscv/opentitan.h
-> +++ b/include/hw/riscv/opentitan.h
-> @@ -21,6 +21,7 @@
->   
->   #include "hw/riscv/riscv_hart.h"
->   #include "hw/intc/ibex_plic.h"
-> +#include "hw/char/ibex_uart.h"
->   
->   #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
->   #define RISCV_IBEX_SOC(obj) \
-> @@ -33,6 +34,7 @@ typedef struct LowRISCIbexSoCState {
->       /*< public >*/
->       RISCVHartArrayState cpus;
->       IbexPlicState plic;
-> +    IbexUartState uart;
->   
->       MemoryRegion flash_mem;
->       MemoryRegion rom;
-> @@ -63,4 +65,15 @@ enum {
->       IBEX_USBDEV,
->   };
->   
-> +enum {
-> +    IBEX_UART_RX_PARITY_ERR_IRQ = 0x28,
-> +    IBEX_UART_RX_TIMEOUT_IRQ = 0x27,
-> +    IBEX_UART_RX_BREAK_ERR_IRQ = 0x26,
-> +    IBEX_UART_RX_FRAME_ERR_IRQ = 0x25,
-> +    IBEX_UART_RX_OVERFLOW_IRQ = 0x24,
-> +    IBEX_UART_TX_EMPTY_IRQ = 0x23,
-> +    IBEX_UART_RX_WATERMARK_IRQ = 0x22,
-> +    IBEX_UART_TX_WATERMARK_IRQ = 0x21
-> +};
-> +
->   #endif
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 3926321d8c..a6c0b949ca 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -96,6 +96,9 @@ static void riscv_lowrisc_ibex_soc_init(Object *obj)
->   
->       sysbus_init_child_obj(obj, "plic", &s->plic,
->                             sizeof(s->plic), TYPE_IBEX_PLIC);
-> +
-> +    sysbus_init_child_obj(obj, "uart", &s->uart,
-> +                          sizeof(s->uart), TYPE_IBEX_UART);
->   }
->   
->   static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-> @@ -137,8 +140,25 @@ static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->       busdev = SYS_BUS_DEVICE(dev);
->       sysbus_mmio_map(busdev, 0, memmap[IBEX_PLIC].base);
->   
-> -    create_unimplemented_device("riscv.lowrisc.ibex.uart",
-> -        memmap[IBEX_UART].base, memmap[IBEX_UART].size);
-> +    /* UART */
-> +    dev = DEVICE(&(s->uart));
-> +    qdev_prop_set_chr(dev, "chardev", serial_hd(0));
-> +    object_property_set_bool(OBJECT(&s->uart), true, "realized", &err);
-> +    if (err != NULL) {
-> +        error_propagate(errp, err);
-> +        return;
-> +    }
-> +    busdev = SYS_BUS_DEVICE(dev);
-> +    sysbus_mmio_map(busdev, 0, memmap[IBEX_UART].base);
-> +    sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                       IBEX_UART_TX_WATERMARK_IRQ));
-> +    sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                       IBEX_UART_RX_WATERMARK_IRQ));
-> +    sysbus_connect_irq(busdev, 2, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                       IBEX_UART_TX_EMPTY_IRQ));
-> +    sysbus_connect_irq(busdev, 3, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                       IBEX_UART_RX_OVERFLOW_IRQ));
-> +
->       create_unimplemented_device("riscv.lowrisc.ibex.gpio",
->           memmap[IBEX_GPIO].base, memmap[IBEX_GPIO].size);
->       create_unimplemented_device("riscv.lowrisc.ibex.spi",
-> 
-
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogQWxpc3RhaXIgRnJhbmNp
+cyA8YWxpc3RhaXIyM0BnbWFpbC5jb20+DQo+IFNlbnQ6IDIwIE1heSAyMDIwIDAyOjUwDQo+IFRv
+OiBBbnVwIFBhdGVsIDxBbnVwLlBhdGVsQHdkYy5jb20+DQo+IENjOiBQZXRlciBNYXlkZWxsIDxw
+ZXRlci5tYXlkZWxsQGxpbmFyby5vcmc+OyBQYWxtZXIgRGFiYmVsdA0KPiA8cGFsbWVyQGRhYmJl
+bHQuY29tPjsgQWxpc3RhaXIgRnJhbmNpcyA8QWxpc3RhaXIuRnJhbmNpc0B3ZGMuY29tPjsgU2Fn
+YXINCj4gS2FyYW5kaWthciA8c2FnYXJrQGVlY3MuYmVya2VsZXkuZWR1PjsgQXRpc2ggUGF0cmEg
+PEF0aXNoLlBhdHJhQHdkYy5jb20+Ow0KPiBvcGVuIGxpc3Q6UklTQy1WIDxxZW11LXJpc2N2QG5v
+bmdudS5vcmc+OyBxZW11LWRldmVsQG5vbmdudS5vcmcNCj4gRGV2ZWxvcGVycyA8cWVtdS1kZXZl
+bEBub25nbnUub3JnPjsgQW51cCBQYXRlbCA8YW51cEBicmFpbmZhdWx0Lm9yZz4NCj4gU3ViamVj
+dDogUmU6IFtQQVRDSCAwLzRdIFJJU0MtViBtdWx0aS1zb2NrZXQgc3VwcG9ydA0KPiANCj4gT24g
+RnJpLCBNYXkgMTUsIDIwMjAgYXQgMTE6NDAgUE0gQW51cCBQYXRlbCA8YW51cC5wYXRlbEB3ZGMu
+Y29tPiB3cm90ZToNCj4gPg0KPiA+IFRoaXMgc2VyaWVzIGFkZHMgbXVsdGktc29ja2V0IHN1cHBv
+cnQgZm9yIFJJU0MtViB2aXJ0IG1hY2hpbmUgYW5kDQo+ID4gUklTQy1WIHNwaWtlIG1hY2hpbmUu
+IFRoZSBtdWx0aS1zb2NrZXQgc3VwcG9ydCB3aWxsIGhlbHAgdXMgaW1wcm92ZQ0KPiA+IHZhcmlv
+dXMgUklTQy1WIG9wZXJhdGluZyBzeXN0ZW1zLCBmaXJtd2FyZXMsIGFuZCBib290bG9hZGVyIHRv
+IHN1cHBvcnQNCj4gPiBSSVNDLVYgTlVNQSBzeXN0ZW1zLg0KPiA+DQo+ID4gVGhlc2UgcGF0Y2gg
+Y2FuIGJlIGZvdW5kIGluIHJpc2N2X211bHRpX3NvY2tldF92MSBicmFuY2ggYXQ6DQo+ID4gaHR0
+cHM6Ly9naXRodWIuY29tL2F2cGF0ZWwvcWVtdS5naXQNCj4gPg0KPiA+IFRvIHRyeSB0aGlzIHBh
+dGNoZXMsIHdlIHdpbGwgbmVlZDoNCj4gPiAxLiBPcGVuU0JJIG11bHRpLVBMSUMgYW5kIG11bHRp
+LUNMSU5UIHN1cHBvcnQgd2hpY2ggY2FuIGJlIGZvdW5kIGluDQo+ID4gICAgbXVsdGlfcGxpY19j
+bGludF92MSBicmFuY2ggYXQ6DQo+ID4gICAgaHR0cHM6Ly9naXRodWIuY29tL2F2cGF0ZWwvb3Bl
+bnNiaS5naXQNCj4gPiAyLiBMaW51eCBtdWx0aS1QTElDIGltcHJvdmVtZW50cyBzdXBwb3J0IHdo
+aWNoIGNhbiBiZSBmb3VuZCBpbg0KPiA+ICAgIHBsaWNfaW1wX3YxIGJyYW5jaCBhdDoNCj4gPiAg
+ICBodHRwczovL2dpdGh1Yi5jb20vYXZwYXRlbC9saW51eC5naXQNCj4gPg0KPiA+IEFudXAgUGF0
+ZWwgKDQpOg0KPiA+ICAgaHcvcmlzY3Y6IEFsbG93IGNyZWF0aW5nIG11bHRpcGxlIGluc3RhbmNl
+cyBvZiBDTElOVA0KPiA+ICAgaHcvcmlzY3Y6IHNwaWtlOiBBbGxvdyBjcmVhdGluZyBtdWx0aXBs
+ZSBzb2NrZXRzDQo+ID4gICBody9yaXNjdjogQWxsb3cgY3JlYXRpbmcgbXVsdGlwbGUgaW5zdGFu
+Y2VzIG9mIFBMSUMNCj4gPiAgIGh3L3Jpc2N2OiB2aXJ0OiBBbGxvdyBjcmVhdGluZyBtdWx0aXBs
+ZSBzb2NrZXRzDQo+IA0KPiBDYW4geW91IG1ha2Ugc3VyZSBhbGwgdGhlIHBhdGNoZXMgcGFzcyBj
+aGVja3BhdGNoPw0KDQpNeSBiYWQsIEkgZm9yZ290IHRvIHJ1biBjaGVja3BhdGNoIG9uIHRoaXMg
+c2VyaWVzLg0KDQpJIHdpbGwgdXBkYXRlIGluIHYyLg0KDQpSZWdhcmRzLA0KQW51cA0K
 
