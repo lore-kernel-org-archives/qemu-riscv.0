@@ -1,69 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jbRQO-00024Q-L5
-	for mharc-qemu-riscv@gnu.org; Wed, 20 May 2020 12:18:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45968)
+	id 1jbRi2-0005CT-BU
+	for mharc-qemu-riscv@gnu.org; Wed, 20 May 2020 12:36:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48046)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jbRQI-000227-LO; Wed, 20 May 2020 12:18:27 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:38718)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jbRQH-0007S2-7X; Wed, 20 May 2020 12:18:26 -0400
-Received: by mail-io1-xd41.google.com with SMTP id d7so3768751ioq.5;
- Wed, 20 May 2020 09:18:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=xQBk6Yl16LtvWTOZVMrhCPbzMNMqusPpV7Rabvf+N28=;
- b=q+v0NYTJ8GjhV7KPtmYgiQtbtap4dvazFGRQl8C9iVzgjMP2H7EUNwF1CEV7MMSGxn
- jgl4TDLy00VY0wDYrtZnsCiSn+FmRD+UOf2tNZ90MiXJBMjyC4YmV/ha03EnmnRzRjVd
- t22a/aHdfWhMPDbM3hl7khNNZt5xJUJ6ygJLGT9Atw2vr729IuPk60qMNrhyNlicpzaY
- 5jXABfx6XEqy6DhMN9okGr3oWBAHN4QpWvw3WuWNZt/UA6Fgy8hSQ83nfg4TZlu6l2K+
- 3J2NkZTa71jOLM1cq4On+xaZ1P7e5PUH7hz6aTq2m5LFka7Fcdp8PI2mQ527Rg6rZ0Vu
- Ue0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=xQBk6Yl16LtvWTOZVMrhCPbzMNMqusPpV7Rabvf+N28=;
- b=mWnEE4h5HIS8peJEOT4AXfD7450bNA58fOUbRFzcPMOoBJLrl2etzeDxyC6nkee9Fg
- R74L4tR41Z/O23dOOF5EDFfUnWFUg7/svPYhDo/Yn8BCVjTja81JcTr9rwRt57h6iok3
- 40fuezUR58W7ny2bbnSLsYxwMMoa7w0fL5Z8QAlLQDIAkhmwHAi9D4HV6FAsBppl5129
- hCXJrKRDO2qMxMKUDWpWptGypWjEjpLaX+vQbpsz8+GbWbKTxmmKsv1wR+a9ESUHjE+n
- Iw59utZP+2B7oUiLaCvdqsipJuJuJUpw9/UeiLTeTP0liIqipxp7yefeSMFvW+Bk8Lhy
- D3gQ==
-X-Gm-Message-State: AOAM5308B4y6h+55wD0hRaUN2mCQEUwrRCbzNO3TKm/zD+V9pMDQn/43
- cIVqAw0ga57L2wwiicspSEM2FOnjBi1SYbl0OYU=
-X-Google-Smtp-Source: ABdhPJw7f/GDRTlaOlu79erNFsxVxblLgB649Nl69bkNDNb5U1JMEokA69z4dqtjBVmKBM9Z/IN/B6+0NZJ34sKSggc=
-X-Received: by 2002:a5d:9604:: with SMTP id w4mr4144689iol.105.1589991503759; 
- Wed, 20 May 2020 09:18:23 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=40290bcd2=alistair.francis@wdc.com>)
+ id 1jbRi0-0005Bx-ME; Wed, 20 May 2020 12:36:44 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:11692)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=40290bcd2=alistair.francis@wdc.com>)
+ id 1jbRhy-0002lX-Sb; Wed, 20 May 2020 12:36:44 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1589992603; x=1621528603;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=xuST64lSQI4MP5MnAyrlyrGzoU5swXUNK7vHX545Zhc=;
+ b=GK3nxaqJn3KvTtG39E8Y52uTw6vUp5WeQ+AecLJcfHoqZr5Sph8nzf74
+ wybLe9cH/Zw/xaK8TyXBtj5i2FAaCS8JKNDU0o1AZ0lSD4DJS4OZ3kGYZ
+ aSs8Zkk4BTPLLPC7wbmtZ5gEedOeUvPPzi6i4H/QIvjotlIq1fimKNA0+
+ gD/mQ9lNPSgnkDB808yy2fPAaBg0SnUHXn4lvDQu3lviCP87FsvTKzRDz
+ gNdphoX5y5NkDx3RGsMfzfdeUIrVi4NOgy9cKliGXes67HgBPkaZPgslt
+ KiAVXd98zUYryrgDyUekOvT9RT4nThCyRfLpJCf+XzE58m+de6Cf6BEki g==;
+IronPort-SDR: 0Vfw5LMZpsioZjdAYZq1BDb+Mf1gILMKSg+3SeZrtk1a7GVttKzhJ0SZKNW0/Le+pNECVd6U2n
+ fX5Ma4OBQUzFBZMZLdKQH96091OzyUSH2UuvgyXnk0hOtKqLj/cuTL023JCdd7uaC5aguZ7E+F
+ gsgcV7Yzk5+BvJzOA4/PcxCxZJNUTllsUDAds8645sWUCyDNm4fxisPM9N6YDRFSUYDYDSLYb8
+ XQIz2m1s2lYGI9Q4Mkq4FtUci0PWjyymCF2aheCEVSvfU2PnBu1haFmg1/3fHiPWRbWFEdcuEq
+ 9Z8=
+X-IronPort-AV: E=Sophos;i="5.73,414,1583164800"; d="scan'208";a="138468207"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 21 May 2020 00:36:38 +0800
+IronPort-SDR: wfZSq2ypkXZd9OHKdf+Jvd40TQkeHj8QPzmQ4syjfKwwZKy0mK+lz4BKPJwImhjuzLlpclAywx
+ wPCuqWwrkNp1QPM+rWt6nNoCUaJkGpIx0=
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 May 2020 09:26:40 -0700
+IronPort-SDR: tm166kVNQ001OILkzYpvoih8yDWiwuiyvwccTDZ5kiLQ1KAEB9COAlCxJiTeHZc2hoxf169+mb
+ WLVN+up8aiUQ==
+WDCIronportException: Internal
+Received: from 96yhgc2.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.57.51])
+ by uls-op-cesaip02.wdc.com with ESMTP; 20 May 2020 09:36:37 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
+ philmd@redhat.com, bmeng.cn@gmail.com
+Subject: [PATCH v2 0/2]  Add support for the HiFive1 revB
+Date: Wed, 20 May 2020 09:28:10 -0700
+Message-Id: <cover.1589992028.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <cover.1589923785.git.alistair.francis@wdc.com>
- <05ea15f2ec07e1c85273d4897d47c05225b116f6.1589923785.git.alistair.francis@wdc.com>
- <0fcaef83-ec31-d5f5-4677-d42a77d90e3e@redhat.com>
-In-Reply-To: <0fcaef83-ec31-d5f5-4677-d42a77d90e3e@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 20 May 2020 09:09:29 -0700
-Message-ID: <CAKmqyKPLL9=xm2sfdgZcovx3m_F8NEE+NC3vZyigbOk7QQyQKQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/9] riscv/boot: Add a missing header include
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.153.144;
+ envelope-from=prvs=40290bcd2=alistair.francis@wdc.com;
+ helo=esa5.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/20 12:36:38
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -77,48 +78,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2020 16:18:28 -0000
+X-List-Received-Date: Wed, 20 May 2020 16:36:45 -0000
 
-On Tue, May 19, 2020 at 11:01 PM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
->
-> On 5/19/20 11:31 PM, Alistair Francis wrote:
-> > Currently every c file that includes boot.h also includes loader.h
-> > before it. Which is why the build works fine. We should be able to
-> > include just boot.h though so this is a small fixup to allow that.
->
-> What about:
->
-> 'As the functions declared in this header use the symbol_fn_t
->   typedef itself declared in "hw/loader.h", we need to include
->   it here to make the header file self-contained.'
 
-Sounds good.
+Add support for the HiFive1 revB board. We don't want to break current
+users so this is added as an option that is disabled by default. The
+main change is the address that we jump to at boot.
 
-Alistair
+v2:
+ - Add a cover letter
 
->
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> > Reviewed-by: Bin Meng <bin.meng@windriver.com>
-> > ---
-> >   include/hw/riscv/boot.h | 1 +
-> >   1 file changed, 1 insertion(+)
-> >
-> > diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> > index 474a940ad5..9daa98da08 100644
-> > --- a/include/hw/riscv/boot.h
-> > +++ b/include/hw/riscv/boot.h
-> > @@ -21,6 +21,7 @@
-> >   #define RISCV_BOOT_H
-> >
-> >   #include "exec/cpu-defs.h"
-> > +#include "hw/loader.h"
-> >
-> >   void riscv_find_and_load_firmware(MachineState *machine,
-> >                                     const char *default_machine_firmwar=
-e,
-> >
->
+
+Alistair Francis (2):
+  riscv: sifive_e: Manually define the machine
+  sifive_e: Support the revB machine
+
+ include/hw/riscv/sifive_e.h |  5 +++
+ hw/riscv/sifive_e.c         | 76 +++++++++++++++++++++++++++++--------
+ 2 files changed, 66 insertions(+), 15 deletions(-)
+
+-- 
+2.26.2
+
 
