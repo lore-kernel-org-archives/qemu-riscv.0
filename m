@@ -1,65 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jbne7-0004yq-AF
-	for mharc-qemu-riscv@gnu.org; Thu, 21 May 2020 12:02:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44742)
+	id 1jbnie-0004TA-W0
+	for mharc-qemu-riscv@gnu.org; Thu, 21 May 2020 12:06:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45330)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jbndw-0004uR-2V; Thu, 21 May 2020 12:02:02 -0400
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:33554)
+ id 1jbnid-0004P9-Dx; Thu, 21 May 2020 12:06:51 -0400
+Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:45157)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jbndk-0004Y6-27; Thu, 21 May 2020 12:01:55 -0400
-Received: by mail-io1-xd44.google.com with SMTP id k18so8035014ion.0;
- Thu, 21 May 2020 09:01:47 -0700 (PDT)
+ id 1jbnic-0006MN-4F; Thu, 21 May 2020 12:06:50 -0400
+Received: by mail-il1-x144.google.com with SMTP id b15so7556280ilq.12;
+ Thu, 21 May 2020 09:06:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=uTHTIfmNBf76SWC/ADq3fQt/dNmanjgMWjPMSWG66gs=;
- b=qVUMJPylQt/gJadtzON+UgGN3yxHKWAuBvi+M/QNmmIr0YafgmDoPMd38Xe9B+WVsc
- Q4AOScajlmB7LHlxQKpo6+9AP+bU9ZBReDWjH+ivTjdsk4xaAkD7lNqpKnXy5oFl5/AP
- Hj0pqJBloT5QhlGKSzBsihOiY1sI0Dys86wcKOLDIdXoaat+tXgmer5qU3J7lD3rGGfy
- CZsbGkv7ycKN+nifbqRXEetoDbMPjfBfDWO/ZKisZHuGt5l7kiPSVl7Zd5OAqDlIAhcn
- 6BxR113UioExTivMxTia4ezbTXid+vu4jeSjqKNOS9exLou2KdejXoba6BFg18sNkfXx
- mv2A==
+ :cc; bh=hVYeWESeCnMzkcM+Fh3zeAkSckNAl04eVjQ1OUPApI0=;
+ b=nHVjP3AcQg0LP8VE2rwdG6VoOsllBAYDwVQNIKI3B3VCP9yyVGLTv+112SnAgeKbmk
+ 30Ij3BfZftAqqbMY1cQdrKiI20IxFCmRa456yf4LeUw1en+KTL8lrvdA45fcyFIj8HSN
+ EOSdbAas+QcvMVkc0r7sStLSR21xC1jnhPjRnylZn9LeYmneh6F0b86Ge6HqAiXY7y6a
+ Ul4G65imAbpMLZjN20/gy4DN9M8ZpOfZ41ZRATWDtK2cyogFfQuEATSOVvJTS6A17QME
+ +0/54WuRZDO235Y73fES8XAfBBxVrb4sY00wpuQndLjOmCT23CKjSUYyF2gedQcSMGWQ
+ 4C/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=uTHTIfmNBf76SWC/ADq3fQt/dNmanjgMWjPMSWG66gs=;
- b=nE8bvZZMQObKIPTEM1cS43nsIBuSJbLrP5g8kIQD+VM4nmvHRVCoeEZqderEjvL0HI
- 3l4560Yv46eOOJnX5V0pD8YAZExu0H109uBSrsLcCWR61ZndrCg2pSY5wK8ap8G8uH9Z
- i/V4L0/AqiK7qQnRoLzKx5fUtX4YSwtICmBgGi0ay2gSUm+H9mrx3ZJcV/FTHqPhf7C0
- XaCphPJalgOHMTfK/lHwsQoTOfSuhI/WrofSL0DxqlsInSL7XeJMNSc0H3pDFDg0lq5H
- nKizEVvfpXgVEx8DG1OePtIPfZQtWKFdhNZw9TEIp4zS1aVowRes/iSoTfDf6devbCdr
- o1Wg==
-X-Gm-Message-State: AOAM531lT50t0blgIjq1R6p2SGj8nw8m2LeRHxkr7lmLzD36TWSjcq+E
- qA6P1lyzFXkfsZYePHB/ShY0zWjPXVViwHM/66I=
-X-Google-Smtp-Source: ABdhPJxShgMMu6A9SuWD+GwsjM+R6WUkYtn2izYoMLlACqvJATUUwqIePO/5/IjZg7uW3tDJTen+9mypvMCOmPqkNjg=
-X-Received: by 2002:a02:a118:: with SMTP id f24mr4530548jag.8.1590076906254;
- Thu, 21 May 2020 09:01:46 -0700 (PDT)
+ bh=hVYeWESeCnMzkcM+Fh3zeAkSckNAl04eVjQ1OUPApI0=;
+ b=VHSOKgIaqyAtNejkVb3U518EfYxLTGjlpH+a4wJXUtk8pgG1/UBgQY568MozrM3fAm
+ AmgVbkp1tjlROtpq0V65VbFy4g3Bcc9AtRv3f8UKDG+jMr+ZqGOCY88+NSECBVZjqKDH
+ JRxfPS8XLMzpO+rxi6SlbaV+vPPzg9R0dgibUm2un0XsA0AnRxRKPUfAeC3x/Cxzkv3l
+ SIwRS+hLMolu4AZ2PfwpqaGOp0jfCCSFYBSGvWPThkJJ40PUuceg20BXLi+HCSW/el3D
+ mYfdcJDDLmqY4kYAZPPhJixOxcfFau5H8fvGBV2ysvidp6YiiOBAv6purVDhNUGUw9bu
+ 3j0w==
+X-Gm-Message-State: AOAM531Zx8foo372G5hZ9pK4J7VUKP/0ziOEyFbzZhOREMBLqkkIZYUu
+ zRvnhHUBGa6kbhQXR4aVansfnP2ZWw7FGtD/TyA=
+X-Google-Smtp-Source: ABdhPJxuuJ8g59+1nI4P6UuXSEAq+sJXigyCIT/ZivznOh/NFSt4hbkqTgEvdiUoE7nySOMtq2Chets+6CazVpXQMCw=
+X-Received: by 2002:a92:d087:: with SMTP id h7mr9822915ilh.227.1590077208538; 
+ Thu, 21 May 2020 09:06:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <1588335545-649-1-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKMdmVrvYDNVtm6_iviDT_mofGZO9DC2vtZdZaHN31T07A@mail.gmail.com>
- <CAKmqyKO6HGQrMxsNovPkoB4TncEmeD=uFV_oXEpQ0t+=g20Wfw@mail.gmail.com>
- <CAEUhbmVTg+521EHutukOod_PKx0RQ-s=EgnKu=JM-vduMn4mNA@mail.gmail.com>
- <CAKmqyKPdjBFmPcQY+O4zsaTHYeLVC9zanXhS5CBovfn4LLRdJg@mail.gmail.com>
- <CAEUhbmXPRN=1QCfr=ekG_m5wiWkQoG7pb-OzR-guixRutYJOEg@mail.gmail.com>
-In-Reply-To: <CAEUhbmXPRN=1QCfr=ekG_m5wiWkQoG7pb-OzR-guixRutYJOEg@mail.gmail.com>
+References: <925bdcd2b3536014306a8800975fb63592fd051a.1589489213.git.alistair.francis@wdc.com>
+ <mhng-8a09dc11-68b8-4e28-9b50-3fc5a52837e6@palmerdabbelt-glaptop1>
+In-Reply-To: <mhng-8a09dc11-68b8-4e28-9b50-3fc5a52837e6@palmerdabbelt-glaptop1>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 21 May 2020 08:52:50 -0700
-Message-ID: <CAKmqyKO+Yowc57izjx_5V6u8ncj1VZ897dTQNmkhWi9yT-PESg@mail.gmail.com>
-Subject: Re: [PATCH] riscv: Change the default behavior if no -bios option is
- specified
-To: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 21 May 2020 08:57:52 -0700
+Message-ID: <CAKmqyKM7G+b0cZ2a0MGtqRCKc5WbCcAkTfzYfF+gbvYDyOMidA@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] sifive_e: Support the revB machine
+To: Palmer Dabbelt <palmer@dabbelt.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -82,80 +73,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2020 16:02:10 -0000
+X-List-Received-Date: Thu, 21 May 2020 16:06:51 -0000
 
-On Wed, May 20, 2020 at 6:37 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, May 20, 2020 at 4:08 PM Palmer Dabbelt <palmer@dabbelt.com> wrote:
 >
-> Hi Alistair,
+> On Thu, 14 May 2020 13:47:10 PDT (-0700), Alistair Francis wrote:
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  hw/riscv/sifive_e.c         | 35 +++++++++++++++++++++++++++++++----
+> >  include/hw/riscv/sifive_e.h |  1 +
+> >  2 files changed, 32 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> > index 472a98970b..cb7818341b 100644
+> > --- a/hw/riscv/sifive_e.c
+> > +++ b/hw/riscv/sifive_e.c
+> > @@ -98,10 +98,14 @@ static void riscv_sifive_e_init(MachineState *machine)
+> >          memmap[SIFIVE_E_DTIM].base, main_mem);
+> >
+> >      /* Mask ROM reset vector */
+> > -    uint32_t reset_vec[2] = {
+> > -        0x204002b7,        /* 0x1000: lui     t0,0x20400 */
+> > -        0x00028067,        /* 0x1004: jr      t0 */
+> > -    };
+> > +    uint32_t reset_vec[2];
+> > +
+> > +    if (s->revb) {
+> > +        reset_vec[0] = 0x200102b7;        /* 0x1000: lui     t0,0x20010 */
+> > +    } else {
+> > +        reset_vec[0] = 0x204002b7;        /* 0x1000: lui     t0,0x20400 */
+> > +    }
+> > +    reset_vec[1] = 0x00028067;        /* 0x1004: jr      t0 */
+> >
+> >      /* copy in the reset vector in little_endian byte order */
+> >      for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+> > @@ -115,8 +119,31 @@ static void riscv_sifive_e_init(MachineState *machine)
+> >      }
+> >  }
+> >
+> > +static bool sifive_e_machine_get_revb(Object *obj, Error **errp)
+> > +{
+> > +    SiFiveEState *s = RISCV_E_MACHINE(obj);
+> > +
+> > +    return s->revb;
+> > +}
+> > +
+> > +static void sifive_e_machine_set_revb(Object *obj, bool value, Error **errp)
+> > +{
+> > +    SiFiveEState *s = RISCV_E_MACHINE(obj);
+> > +
+> > +    s->revb = value;
+> > +}
+> > +
+> >  static void sifive_e_machine_instance_init(Object *obj)
+> >  {
+> > +    SiFiveEState *s = RISCV_E_MACHINE(obj);
+> > +
+> > +    s->revb = false;
+> > +    object_property_add_bool(obj, "revb", sifive_e_machine_get_revb,
+> > +                             sifive_e_machine_set_revb, NULL);
+> > +    object_property_set_description(obj, "revb",
+> > +                                    "Set on to tell QEMU that it should model "
+> > +                                    "the revB HiFive1 board",
+> > +                                    NULL);
+> >  }
+> >
+> >  static void sifive_e_machine_class_init(ObjectClass *oc, void *data)
+> > diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> > index 414992119e..0d3cd07fcc 100644
+> > --- a/include/hw/riscv/sifive_e.h
+> > +++ b/include/hw/riscv/sifive_e.h
+> > @@ -45,6 +45,7 @@ typedef struct SiFiveEState {
+> >
+> >      /*< public >*/
+> >      SiFiveESoCState soc;
+> > +    bool revb;
+> >  } SiFiveEState;
+> >
+> >  #define TYPE_RISCV_E_MACHINE MACHINE_TYPE_NAME("sifive_e")
 >
-> On Thu, May 7, 2020 at 5:02 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Tue, May 5, 2020 at 6:34 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > Hi Alistair,
-> > >
-> > > On Wed, May 6, 2020 at 6:37 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > >
-> > > > On Tue, May 5, 2020 at 1:34 PM Alistair Francis <alistair23@gmail.com> wrote:
-> > > > >
-> > > > > On Fri, May 1, 2020 at 5:21 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > > >
-> > > > > > From: Bin Meng <bin.meng@windriver.com>
-> > > > > >
-> > > > > > Per QEMU deprecated doc, QEMU 4.1 introduced support for the -bios
-> > > > > > option in QEMU for RISC-V for the virt machine and sifive_u machine.
-> > > > > > The default behavior has been that QEMU does not automatically load
-> > > > > > any firmware if no -bios option is included.
-> > > > > >
-> > > > > > Now 2 releases passed, it's time to change the default behavior to
-> > > > > > load the default OpenSBI firmware automatically. The firmware is
-> > > > > > included with the QEMU release and no user interaction is required.
-> > > > > > All a user needs to do is specify the kernel they want to boot with
-> > > > > > the -kernel option.
-> > > > > >
-> > > > > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> > > > >
-> > > > > Thanks!
-> > > > >
-> > > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > >
-> > > > > Applied to the RISC-V tree.
-> > > >
-> > > > This fails `make check`
-> > > >
-> > > > qemu-system-riscv64: Unable to load the RISC-V firmware
-> > > > "opensbi-riscv64-spike-fw_jump.elf"
-> > > > Broken pipe
-> > > > /scratch/alistair/software/qemu/tests/qtest/libqtest.c:166:
-> > > > kill_qemu() tried to terminate QEMU process but encountered exit
-> > > > status 1 (expected 0)
-> > > > ERROR - too few tests run (expected 7, got 2)
-> > > > make: *** [/scratch/alistair/software/qemu/tests/Makefile.include:637:
-> > > > check-qtest-riscv64] Error 1
-> > > >
-> > >
-> > > Please apply this patch to fix the "make check" as well.
-> > >
-> > > [5/5] riscv: Suppress the error report for QEMU testing with
-> > > riscv_find_firmware()
-> > > http://patchwork.ozlabs.org/project/qemu-devel/patch/1588348254-7241-6-git-send-email-bmeng.cn@gmail.com/
-> >
-> > In future please send all related patches in a single series.
-> >
-> > I have applied those two patches.
->
-> I checked https://github.com/alistair23/qemu/ but could not find where
-> these 2 patches applied. Just make sure I was not looking at the wrong
-> place?
+> IIRC there are way more differences between the un-suffixed FE310 and the Rev
+> B, specifically the interrupt map is all different.
 
-That's the right place, I just hadn't pushed it there yet.
-
-I have an internal Git instance that does all the testing so I usually
-push it there.
+The three IRQs that QEMU uses for the SiFive E (UART0, UART1 and GPIO)
+all seem to be the same.
 
 Alistair
-
->
-> Regards,
-> Bin
 
