@@ -1,71 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jbXpf-0000gl-EF
-	for mharc-qemu-riscv@gnu.org; Wed, 20 May 2020 19:09:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59576)
+	id 1jbZem-0006oZ-5d
+	for mharc-qemu-riscv@gnu.org; Wed, 20 May 2020 21:05:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41044)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1jbXpd-0000fd-Vo
- for qemu-riscv@nongnu.org; Wed, 20 May 2020 19:09:01 -0400
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:41460)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jbZel-0006oH-3m; Wed, 20 May 2020 21:05:55 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:35421)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1jbXpd-00019q-3X
- for qemu-riscv@nongnu.org; Wed, 20 May 2020 19:09:01 -0400
-Received: by mail-pf1-x443.google.com with SMTP id 23so2328453pfy.8
- for <qemu-riscv@nongnu.org>; Wed, 20 May 2020 16:09:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=NyzjDPASPXGnu8G4f+hmdEiime8KfL28FVPix/H5nzc=;
- b=XHY9LehIwqdH8BXsXHkDWVzNo+DraJQYaAFvTh11nRlza+goAqDZi6UFZDKpYnT/rh
- IVo/yLq5mDTpxi+BIRZuZf82PumqFJFbzIyg0QBFk+FaVbGNWY1uSxZl7iAin3pn7bW5
- rejHB1gl2/tv4xPzidLeyheSnFnQA3aI0Wp8uEF+UOD2DW+OSE7i6d+GYMNbvMMPWkmc
- 8q0LET9Mhav0BTXOivMoPP9GQK58whIITZgnG/QUQTivArEkEmoEI4+QXV6gNUHA0IGR
- Vtp0tDisHe2eGuYldN77bIkJTp/yanmLfWWQYxibP1NDKwhjxp4IfaUmu+g2wNcXzmWD
- m0Pw==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jbZek-00052g-8n; Wed, 20 May 2020 21:05:54 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id o134so1960131ybg.2;
+ Wed, 20 May 2020 18:05:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=CEzFRCCd0zwrtm4gO2zb6puspyYzh9kUYN/GZEBFJEw=;
+ b=g71zBcPVHIUvygy/9OVJMvJRZFGCfS09TR1Q2YCCkE+r4L/b5U/ZKwmdebUHGRXoi8
+ vCkyG/HcOSZNoKzGzNsRphcWY44dx+NVybei23Z3VEMdYiZwfioc3oD0eM1bvm4VAN+S
+ YK5zOUy68S9qT7E1i8AA1NtgUjzwFXcvb3S8Nz0UQQAsotduESUWZ4bUsZy4YQr/y7Tp
+ MaYZgwTBRpTfhLqCAkVuV9F75EZJA5KdJBfNXR6Un23JksWaEbcppEHQVmQYIIpW8vLU
+ kuM+B9Pezb9gZ2BGINXp31SgH/xZx3e1/ZbTOxnA+2jBnsnV3mzWMQLH6wmDOCIa3qRI
+ xFDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=NyzjDPASPXGnu8G4f+hmdEiime8KfL28FVPix/H5nzc=;
- b=FIXuGJ8ea1XMLU2pbx9McJTu4TdL8OHret4mRm8j3ADyrMLlsZZJu4TnyVWhEYh7pD
- 5A4ba3W7Jzv75b1APQ7DkQ2I5LvrLXX51t7/R3EU0r2TFyDP8DVSaQhNyvL4wNaJhXO4
- r+wsoz7PoCTUVr5II2zfATDg8nzQqYvHi/pF7fmtS/7GqRSu+N6vcIUhSCnMwazhLlAJ
- UfYGwMq0Vex3SIzQHABhOkCTMgGESKlehDrUUQXro1MO7YFoSCfboZ7wO2fa/NFsVnHH
- eV5P8lg5UyUZY8atQaV3kNrioXmy9LvMSeubmYfv/p42lVnPFMRJppY1KMnrrFktNz6u
- uumg==
-X-Gm-Message-State: AOAM532GBL3JlwfTzod/gjcqHKh7pD5mkzWJKAMvsygIzg3G97FEKSEj
- 5GyegEL3uqPFVPArCbEI2V6eDw==
-X-Google-Smtp-Source: ABdhPJzJuD9fLCkLB560Cz8VjLd/k8PqmiNKdos/deE/dEA0pSVtjdP7uq30U+deQF72xf8blk8VOg==
-X-Received: by 2002:a63:f750:: with SMTP id f16mr5848161pgk.136.1590016139358; 
- Wed, 20 May 2020 16:08:59 -0700 (PDT)
-Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
- [76.210.143.223])
- by smtp.gmail.com with ESMTPSA id l2sm423547pga.44.2020.05.20.16.08.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2020 16:08:58 -0700 (PDT)
-Date: Wed, 20 May 2020 16:08:58 -0700 (PDT)
-X-Google-Original-Date: Wed, 20 May 2020 16:08:52 PDT (-0700)
-Subject: Re: [PATCH v1 2/2] sifive_e: Support the revB machine
-In-Reply-To: <925bdcd2b3536014306a8800975fb63592fd051a.1589489213.git.alistair.francis@wdc.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Message-ID: <mhng-8a09dc11-68b8-4e28-9b50-3fc5a52837e6@palmerdabbelt-glaptop1>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::443;
- envelope-from=palmer@dabbelt.com; helo=mail-pf1-x443.google.com
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=CEzFRCCd0zwrtm4gO2zb6puspyYzh9kUYN/GZEBFJEw=;
+ b=Y6IE8ePsjPFNt+KG4dRJ6XyvD6wLLf6LYJJJC7brAcNQRTsbNG38XIG7tmAtSPecp0
+ tDSEKwFHvdi/h5+Zyuo6dSR8FLMwvP3orfAYfv6ovWvoX+2Ud9SBn+BCOQoFiygjxzvi
+ WrfXoAiOGIJjkOuh7n5bHJtGHAy4rIyboQFcVaERopwS7XjwFRB9ZEXsIXj9okyTcMUL
+ O6pqTP2UdWNSdxQpLQQ5xX9sVUB8F2dIIRLPhUyo8GgT6Hac3m4QQEUiWsAegy4zH5bZ
+ l8OLQYpryadCrGnykk891KiASqEiRaYKUf2xu9Txmy4DIdL8dfw57DCwcwu62JuCiuy0
+ v8wg==
+X-Gm-Message-State: AOAM532HC3VkPGw4DctJjjLx9FzVXECSgy9UtRaP+vs/Km9dFd1xvyKG
+ 5n5kJdA+Zv/vAqUIAVsCggQPBLSZ1oGlvTU/Uuw=
+X-Google-Smtp-Source: ABdhPJzZsXqMT8W6JPACVGFG5micwqTz+OvYjK175JQRbFPvSP9CC2pS0XbUNoV/ZjB9mQlfJ1Bjjwh4y8nWc8Vtiyk=
+X-Received: by 2002:a25:bdc8:: with SMTP id g8mr11355082ybk.122.1590023151875; 
+ Wed, 20 May 2020 18:05:51 -0700 (PDT)
+MIME-Version: 1.0
+References: <cover.1588878640.git.alistair.francis@wdc.com>
+ <3033d22bf6385fc24a990c0e096696eea552c51d.1588878640.git.alistair.francis@wdc.com>
+In-Reply-To: <3033d22bf6385fc24a990c0e096696eea552c51d.1588878640.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 21 May 2020 09:05:40 +0800
+Message-ID: <CAEUhbmUwYge4WiR2rAmbf1CfOfuyUq3=89EqO1ZEBU2FBFVBPg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] hw/riscv: spike: Remove deprecated ISA specific
+ machines
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,83 +75,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2020 23:09:02 -0000
+X-List-Received-Date: Thu, 21 May 2020 01:05:55 -0000
 
-On Thu, 14 May 2020 13:47:10 PDT (-0700), Alistair Francis wrote:
+On Fri, May 8, 2020 at 3:21 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> The ISA specific Spike machines have  been deprecated in QEMU since 4.1,
+
+nits: there are 2 spaces between 'have' and 'been'
+
+> let's finally remove them.
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 > ---
->  hw/riscv/sifive_e.c         | 35 +++++++++++++++++++++++++++++++----
->  include/hw/riscv/sifive_e.h |  1 +
->  2 files changed, 32 insertions(+), 4 deletions(-)
+>  hw/riscv/spike.c         | 217 ---------------------------------------
+>  include/hw/riscv/spike.h |   6 +-
+>  2 files changed, 2 insertions(+), 221 deletions(-)
 >
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 472a98970b..cb7818341b 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -98,10 +98,14 @@ static void riscv_sifive_e_init(MachineState *machine)
->          memmap[SIFIVE_E_DTIM].base, main_mem);
->
->      /* Mask ROM reset vector */
-> -    uint32_t reset_vec[2] = {
-> -        0x204002b7,        /* 0x1000: lui     t0,0x20400 */
-> -        0x00028067,        /* 0x1004: jr      t0 */
-> -    };
-> +    uint32_t reset_vec[2];
-> +
-> +    if (s->revb) {
-> +        reset_vec[0] = 0x200102b7;        /* 0x1000: lui     t0,0x20010 */
-> +    } else {
-> +        reset_vec[0] = 0x204002b7;        /* 0x1000: lui     t0,0x20400 */
-> +    }
-> +    reset_vec[1] = 0x00028067;        /* 0x1004: jr      t0 */
->
->      /* copy in the reset vector in little_endian byte order */
->      for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-> @@ -115,8 +119,31 @@ static void riscv_sifive_e_init(MachineState *machine)
->      }
->  }
->
-> +static bool sifive_e_machine_get_revb(Object *obj, Error **errp)
-> +{
-> +    SiFiveEState *s = RISCV_E_MACHINE(obj);
-> +
-> +    return s->revb;
-> +}
-> +
-> +static void sifive_e_machine_set_revb(Object *obj, bool value, Error **errp)
-> +{
-> +    SiFiveEState *s = RISCV_E_MACHINE(obj);
-> +
-> +    s->revb = value;
-> +}
-> +
->  static void sifive_e_machine_instance_init(Object *obj)
->  {
-> +    SiFiveEState *s = RISCV_E_MACHINE(obj);
-> +
-> +    s->revb = false;
-> +    object_property_add_bool(obj, "revb", sifive_e_machine_get_revb,
-> +                             sifive_e_machine_set_revb, NULL);
-> +    object_property_set_description(obj, "revb",
-> +                                    "Set on to tell QEMU that it should model "
-> +                                    "the revB HiFive1 board",
-> +                                    NULL);
->  }
->
->  static void sifive_e_machine_class_init(ObjectClass *oc, void *data)
-> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> index 414992119e..0d3cd07fcc 100644
-> --- a/include/hw/riscv/sifive_e.h
-> +++ b/include/hw/riscv/sifive_e.h
-> @@ -45,6 +45,7 @@ typedef struct SiFiveEState {
->
->      /*< public >*/
->      SiFiveESoCState soc;
-> +    bool revb;
->  } SiFiveEState;
->
->  #define TYPE_RISCV_E_MACHINE MACHINE_TYPE_NAME("sifive_e")
 
-IIRC there are way more differences between the un-suffixed FE310 and the Rev
-B, specifically the interrupt map is all different.
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
 
