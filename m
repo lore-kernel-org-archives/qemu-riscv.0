@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jbmUo-0003fr-1s
-	for mharc-qemu-riscv@gnu.org; Thu, 21 May 2020 10:48:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36132)
+	id 1jbmVE-0005T1-9A
+	for mharc-qemu-riscv@gnu.org; Thu, 21 May 2020 10:48:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36158)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jbmUm-0003Vq-6W; Thu, 21 May 2020 10:48:28 -0400
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:37680)
+ id 1jbmVC-0005Pa-DP; Thu, 21 May 2020 10:48:54 -0400
+Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:51473)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1jbmUl-0002zd-Dy; Thu, 21 May 2020 10:48:27 -0400
-Received: by mail-wr1-x441.google.com with SMTP id l17so6936929wrr.4;
- Thu, 21 May 2020 07:48:26 -0700 (PDT)
+ id 1jbmVB-000381-O1; Thu, 21 May 2020 10:48:54 -0400
+Received: by mail-wm1-x342.google.com with SMTP id f134so5820812wmf.1;
+ Thu, 21 May 2020 07:48:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=qtqsvHSuQJOeViteiq/MtRUnB7haRBW+2sGnGMz0WjU=;
- b=qa2gv22tktvN6xWz+JvHriUfsxu6V7HwuEvTE/zCLJ9OrgULjqjhhQI96eFqm4zrt+
- 4mFC8BXFYOSVJooyi2IGP3eMhfdyoI+u/bUp1Z8jdSbwSpnbg7WU6N0FvDJ6be9mVzKj
- qk4Mh2RBj3YF+c9dG+x3b16geEoYte13NZBQPPmQFOyj5Udwfg6frGCWYnysBVtk/R0w
- yGmLVYOAWlx3GMYWoiSsSvNib+LvFaX3yfsJoY76sC2zva+Y9znGWuSScjqMhehkiPxd
- nOlyv4pExHhrwKCCGTEc2VFUqYnvUS4sAPC7+CZMgAK4iIEj9YtZ01foZ3kfEl+wqIMo
- ryhw==
+ bh=YeVQrdvPAdy8HmuHtex+PTnNy2sHKDuNksIYryrxHVo=;
+ b=fqJIIO2i/deeQAofnAgeZsJPxjK9efTKcHio5L0mo4/LLc5Pjrp4jXHs1ZSNxL61OW
+ iNRbFuAGmdjVAlOBJPvfq5ldiz1EDAmRIjsUORJ95uXtxbDqXpXKT2kP01Zrk0xpeOxR
+ aAz9+kg6VIYW0/6vbbO+4rvCh6SjoeuukXXoxItDpOxZtdyznTfPCkVLQgM1Z2VMCawI
+ Wz/nPhXahT+IaoU/0GpqMIrP3uWk6Y5lyd3VYIlHRDQs+i8YTCibiCLIto2IbhAE+Fdr
+ idXohpi8ycdocDeJ5PTQO/td+vlY9MTln9d3wQMgxSK10Ab0wyDeyzR0Ix1AwQgoUi3F
+ tw5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=qtqsvHSuQJOeViteiq/MtRUnB7haRBW+2sGnGMz0WjU=;
- b=E7tTshopj9l17VXwV0KyTYc6PADmCC6o5d/jU1mK6cX+dA/GRX2t7dHXWxPNUKIfGI
- ptiMKnewkOZMlC+POlO5Nrz/Mjvvn3Wb98sdXGZ5GyYlT9B9lH4HtracXiRvJ2XJknxJ
- zmYLe5MLOfaGx9DY5BWyKTBjbz2jwpbxNpv3vVWA6NpYgStSLUFmV1qou4Ophp9y4oam
- iqsfdzo7aYVAJGWkaX2m8c6PJbHMPgEiqz32fpVA9y9GMFZJJUCynE7Da5icOOzGczfK
- 6ibJnkyrcnHCT1YqeYemmDxzn9v+z8tuSC4zH8CVY+MdxwRidaGUbXXUS9/XEMBl6w/L
- ykAQ==
-X-Gm-Message-State: AOAM531WRs6mXIKWFPLSQl0ui5Ck7m4HzSma+1pcMOyGL+7J61sD0Vyk
- ZFH0iu0AEWbCrHfrnNaZYR4=
-X-Google-Smtp-Source: ABdhPJznZ+5w9gdiy840MRgex5+n6SH9W7MRaABcBBZXiAzrDiVgz+bzyy6ZniKG/HNvyGHauqsQkg==
-X-Received: by 2002:adf:ce05:: with SMTP id p5mr9322045wrn.423.1590072505176; 
- Thu, 21 May 2020 07:48:25 -0700 (PDT)
+ bh=YeVQrdvPAdy8HmuHtex+PTnNy2sHKDuNksIYryrxHVo=;
+ b=JGxo1IsRMLaPHGz8kYN0lBXyrfyThZlSeelLvtKskhH0ThIyPDZK/URva9EpNUQgsN
+ m3XvDXPUytqMXeNIxMi4Xd+IBrvfSiqPKzvG3HilVkUs03+bY3G1efWsn1/ZxWw2YvjY
+ stIfQ+ODIGpPwq2H1UWTPH7GsE6DbHsm1icopvfMrBE0TzH8xDRe8omvpnO8G1gJZviQ
+ xoo/keWCoZ/wQpcGBFrH+3dKtaZaMe1vSdQa+mZzkcXMh7RKLyFjNe5P5tqaHq06M6F8
+ xtWxykvG7HhOTQEjylFfLZ+tQo0Mmfl0vFt/BUAIk+wClWxanU3b+e9+J9i1HA9jMdIm
+ wdLA==
+X-Gm-Message-State: AOAM530LQ2ZYEd9QJ3Yz6VQoRoaS3KU2rXvCIbJYOmvq+P7IKEojKdS7
+ ZBcLmM8UBmJJWHcNA0Q0mW8=
+X-Google-Smtp-Source: ABdhPJzVlIE7rK5EcuDTjHdtiuMkT2uk7CdMsF/74E64Aa2p0zvWm8qha7Vv0DTla0ghqxqtU5qifw==
+X-Received: by 2002:a1c:1983:: with SMTP id 125mr9082260wmz.43.1590072532164; 
+ Thu, 21 May 2020 07:48:52 -0700 (PDT)
 Received: from [192.168.1.40] (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id b12sm7123853wmj.0.2020.05.21.07.48.23
+ by smtp.gmail.com with ESMTPSA id 5sm6718310wmd.19.2020.05.21.07.48.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 May 2020 07:48:24 -0700 (PDT)
+ Thu, 21 May 2020 07:48:51 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 1/2] hw/riscv: sifive_u: Remove the riscv_ prefix of the
- soc* functions
+Subject: Re: [PATCH 2/2] hw/riscv: virt: Remove the riscv_ prefix of the
+ machine* functions
 To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmerdabbelt@google.com>,
@@ -54,18 +54,19 @@ To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
 References: <1590072147-13035-1-git-send-email-bmeng.cn@gmail.com>
+ <1590072147-13035-2-git-send-email-bmeng.cn@gmail.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <c6fba5b7-1191-29bf-a4b7-4707efecb973@amsat.org>
-Date: Thu, 21 May 2020 16:48:23 +0200
+Message-ID: <b669d87b-38ed-e3c9-c88a-dbe1ff746357@amsat.org>
+Date: Thu, 21 May 2020 16:48:50 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <1590072147-13035-1-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1590072147-13035-2-git-send-email-bmeng.cn@gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::441;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x441.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::342;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x342.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -16
@@ -88,85 +89,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2020 14:48:28 -0000
+X-List-Received-Date: Thu, 21 May 2020 14:48:54 -0000
 
 On 5/21/20 4:42 PM, Bin Meng wrote:
 > From: Bin Meng <bin.meng@windriver.com>
 > 
-> To keep consistency with the machine* functions, remove the riscv_
-> prefix of the soc* functions.
+> Remove the riscv_ prefix of the machine* functions.
 > 
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 > ---
 > 
->   hw/riscv/sifive_u.c | 24 ++++++++++++------------
->   1 file changed, 12 insertions(+), 12 deletions(-)
+>   hw/riscv/virt.c | 20 ++++++++++----------
+>   1 file changed, 10 insertions(+), 10 deletions(-)
 > 
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 4299bdf..f9fef2b 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -481,7 +481,7 @@ static void sifive_u_machine_init_register_types(void)
->   
->   type_init(sifive_u_machine_init_register_types)
->   
-> -static void riscv_sifive_u_soc_init(Object *obj)
-> +static void sifive_u_soc_instance_init(Object *obj)
->   {
->       MachineState *ms = MACHINE(qdev_get_machine());
->       SiFiveUSoCState *s = RISCV_U_SOC(obj);
-> @@ -520,7 +520,7 @@ static void riscv_sifive_u_soc_init(Object *obj)
->                             TYPE_CADENCE_GEM);
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index c695a44..f1d6b61 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -471,7 +471,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+>       return dev;
 >   }
 >   
-> -static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-> +static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+> -static void riscv_virt_board_init(MachineState *machine)
+> +static void virt_machine_init(MachineState *machine)
 >   {
->       MachineState *ms = MACHINE(qdev_get_machine());
->       SiFiveUSoCState *s = RISCV_U_SOC(dev);
-> @@ -635,32 +635,32 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
->           memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
+>       const struct MemmapEntry *memmap = virt_memmap;
+>       RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
+> @@ -632,32 +632,32 @@ static void riscv_virt_board_init(MachineState *machine)
+>       g_free(plic_hart_config);
 >   }
 >   
-> -static Property riscv_sifive_u_soc_props[] = {
-> +static Property sifive_u_soc_props[] = {
->       DEFINE_PROP_UINT32("serial", SiFiveUSoCState, serial, OTP_SERIAL),
->       DEFINE_PROP_END_OF_LIST()
+> -static void riscv_virt_machine_instance_init(Object *obj)
+> +static void virt_machine_instance_init(Object *obj)
+>   {
+>   }
+>   
+> -static void riscv_virt_machine_class_init(ObjectClass *oc, void *data)
+> +static void virt_machine_class_init(ObjectClass *oc, void *data)
+>   {
+>       MachineClass *mc = MACHINE_CLASS(oc);
+>   
+>       mc->desc = "RISC-V VirtIO board";
+> -    mc->init = riscv_virt_board_init;
+> +    mc->init = virt_machine_init;
+>       mc->max_cpus = 8;
+>       mc->default_cpu_type = VIRT_CPU;
+>       mc->pci_allow_0_address = true;
+>   }
+>   
+> -static const TypeInfo riscv_virt_machine_typeinfo = {
+> +static const TypeInfo virt_machine_typeinfo = {
+>       .name       = MACHINE_TYPE_NAME("virt"),
+>       .parent     = TYPE_MACHINE,
+> -    .class_init = riscv_virt_machine_class_init,
+> -    .instance_init = riscv_virt_machine_instance_init,
+> +    .class_init = virt_machine_class_init,
+> +    .instance_init = virt_machine_instance_init,
+>       .instance_size = sizeof(RISCVVirtState),
 >   };
 >   
-> -static void riscv_sifive_u_soc_class_init(ObjectClass *oc, void *data)
-> +static void sifive_u_soc_class_init(ObjectClass *oc, void *data)
+> -static void riscv_virt_machine_init_register_types(void)
+> +static void virt_machine_init_register_types(void)
 >   {
->       DeviceClass *dc = DEVICE_CLASS(oc);
->   
-> -    device_class_set_props(dc, riscv_sifive_u_soc_props);
-> -    dc->realize = riscv_sifive_u_soc_realize;
-> +    device_class_set_props(dc, sifive_u_soc_props);
-> +    dc->realize = sifive_u_soc_realize;
->       /* Reason: Uses serial_hds in realize function, thus can't be used twice */
->       dc->user_creatable = false;
+> -    type_register_static(&riscv_virt_machine_typeinfo);
+> +    type_register_static(&virt_machine_typeinfo);
 >   }
 >   
-> -static const TypeInfo riscv_sifive_u_soc_type_info = {
-> +static const TypeInfo sifive_u_soc_type_info = {
->       .name = TYPE_RISCV_U_SOC,
->       .parent = TYPE_DEVICE,
->       .instance_size = sizeof(SiFiveUSoCState),
-> -    .instance_init = riscv_sifive_u_soc_init,
-> -    .class_init = riscv_sifive_u_soc_class_init,
-> +    .instance_init = sifive_u_soc_instance_init,
-> +    .class_init = sifive_u_soc_class_init,
->   };
->   
-> -static void riscv_sifive_u_soc_register_types(void)
-> +static void sifive_u_soc_register_types(void)
->   {
-> -    type_register_static(&riscv_sifive_u_soc_type_info);
-> +    type_register_static(&sifive_u_soc_type_info);
->   }
->   
-> -type_init(riscv_sifive_u_soc_register_types)
-> +type_init(sifive_u_soc_register_types)
+> -type_init(riscv_virt_machine_init_register_types)
+> +type_init(virt_machine_init_register_types)
 > 
 
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
