@@ -1,89 +1,98 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jbp4U-0007iU-KO
-	for mharc-qemu-riscv@gnu.org; Thu, 21 May 2020 13:33:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56174)
+	id 1jbrI7-00063H-F1
+	for mharc-qemu-riscv@gnu.org; Thu, 21 May 2020 15:55:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42166)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbp4T-0007cQ-5y
- for qemu-riscv@nongnu.org; Thu, 21 May 2020 13:33:29 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:31859
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbrI6-0005zw-0U
+ for qemu-riscv@nongnu.org; Thu, 21 May 2020 15:55:42 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:54977
  helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbp4R-0008Ow-LY
- for qemu-riscv@nongnu.org; Thu, 21 May 2020 13:33:28 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbrI3-0007qc-TE
+ for qemu-riscv@nongnu.org; Thu, 21 May 2020 15:55:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590082407;
+ s=mimecast20190719; t=1590090938;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=OQzcYHoz5Czl27l47Bsn/r0C/ioFvgugtKBDv+ZDzvI=;
- b=CEv14PWvz/40D85956VoKtXEPGKaKWEkU9zmNz0cxOvcm/FrLzen7kcJkHCv9IHtlQyDed
- WH2k/4asfsv14BO81ajCabXCLJHedh1siq3YbypqfSX4481rWHw1Aw5dzsk5LSmy0ItaZq
- xKLLcyFIRO9T697JdJv5elUhitiU2Yg=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-341-EbMBub11Nta-mO6NLnMHxg-1; Thu, 21 May 2020 13:33:23 -0400
-X-MC-Unique: EbMBub11Nta-mO6NLnMHxg-1
-Received: by mail-wm1-f72.google.com with SMTP id f62so2943484wme.3
- for <qemu-riscv@nongnu.org>; Thu, 21 May 2020 10:33:23 -0700 (PDT)
+ bh=Wc4Xp9iP+y8ib2misl6Q6rQMS1Tn4Or4Kjqx/XnGrz4=;
+ b=clHdwUuetl4RqJt0aBdFeuFIyackAB45klWWsTSkU0jCHdHMf1jJkKegx/ekunOx56Duyz
+ S6LU1+kNQQqVk4vigRWCPUsNi0mnBsdMydexdn6pYE4C+4d5tuWKnKwlc64vB7QovqkhFz
+ csfnaa2Uwmn3bvo23qTG364KX1rpDi8=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-46-WnVuuvVYPIWLUAs_aHHlQg-1; Thu, 21 May 2020 15:55:36 -0400
+X-MC-Unique: WnVuuvVYPIWLUAs_aHHlQg-1
+Received: by mail-wm1-f71.google.com with SMTP id j132so1524355wma.8
+ for <qemu-riscv@nongnu.org>; Thu, 21 May 2020 12:55:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=OQzcYHoz5Czl27l47Bsn/r0C/ioFvgugtKBDv+ZDzvI=;
- b=P+95nypPtWtunPKIlkOR6iSle8linliv1vk0UcehT4EWYcdbha2c3A/JdIrtZ+dVQ4
- 1pLy2v0BVEU9ygyKVXV/pAajN7KjvyqlOQvRqOYEvtaOZOl89h5JDO2W1Mufuc96KBTr
- 09psJ0ZoDEMNDeKt7vywEF4SxvolAHK8hSnLA/BOOKYgbMC1BEhgVjBijbEtu7d8mXTP
- jUKPIBstmIPgUbXYJVFBSjGEUteKFk3bjFj/s+NLmYbuvvt0yufNRjhLBKfagMBUynow
- c1XxnkapZ4nn4mOYCEy9v0wJyhD4oxveHQfbqBUZarudUxEB9HPEfAiDSW1xs4UVrtPT
- ZV5w==
-X-Gm-Message-State: AOAM531txUcqgh6roqlVjcT0KijxF1d6RItwx2b0F0nZVL+cdOg2Dl6O
- JT3RWIKzv88ghdPlfwF+08JWD+/HxS33KQ4nMqcVLawMSDgXEjEXpAofPJiDijcdT5nDD8rYpaG
- XqAEWBrnnf6g/o2Txf13mQKoXkl3t5Z0=
-X-Received: by 2002:adf:ea90:: with SMTP id s16mr9308898wrm.19.1590082402031; 
- Thu, 21 May 2020 10:33:22 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx+INRqLmVepUVc5FujEo7H1z2llLpkyx3c2FVOPx4CQ4GD5/5NAX2vE17qQsk32IOk3uQVnK0Q8A0dHSMAjyk=
-X-Received: by 2002:adf:ea90:: with SMTP id s16mr9308857wrm.19.1590082401656; 
- Thu, 21 May 2020 10:33:21 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200515170804.5707-1-philmd@redhat.com>
- <20200515170804.5707-10-philmd@redhat.com>
-In-Reply-To: <20200515170804.5707-10-philmd@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Date: Thu, 21 May 2020 19:33:10 +0200
-Message-ID: <CAP+75-WA8mDfBHkUtHvz_q3n__CH-XmKA-Jf92FHFFOQR4oUFQ@mail.gmail.com>
-Subject: Re: [PATCH v2 09/10] Makefile: Allow target-specific optional Kconfig
-To: QEMU Developers <qemu-devel@nongnu.org>
-Cc: Max Filippov <jcmvbkbc@gmail.com>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=Wc4Xp9iP+y8ib2misl6Q6rQMS1Tn4Or4Kjqx/XnGrz4=;
+ b=rIauEcmVKIGfTZa5e67Kqllhd+3iU5W9ufFJvrYzBCht2lV1plPFcnh1ihL688XGRv
+ Y3r+bWrcsiH2ORUGHb1DeDl4ig2kzhfe8JeY+ILWD0D9zLnFeHHMJyJcXzFmQ5mPiokd
+ pje+cyoClNUkOEGejz+BqYP+IasUocErBEseQ0XjI/BY7T+MudXkTyG2SsfyIMbQ5ku0
+ /B9rwqIystbG+tZS9dyi1QNEAnoZqpc2fXqTn2BIz/JYth//393QJCKzBebg2buDC0Mw
+ bkyXk+2tmfj1iUYXG4R746sV1Kxelg/1/83/tR+c828drqKS0w1F/TL6ZIgHJmsTvIQj
+ VsbA==
+X-Gm-Message-State: AOAM531O0KmpA7P3IcS6njJpxy1bRJNqfICdOIKGQytgc+8ctsrxVCPx
+ lSrJXfDaC4AGYIKXaDnl1XABAHN8sxviAfuThiMM6VRhd6/sNMEj7yoQLNiUDqsTdX+KpAQpAdH
+ 7cvUQf/FtH9CMxA8=
+X-Received: by 2002:a1c:bb0a:: with SMTP id l10mr10217264wmf.186.1590090935426; 
+ Thu, 21 May 2020 12:55:35 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxw43/kqG0dsZ4AnRCLKoBgnNvFOF0SLgu16wnIZcENRLS8rbsa4da0XeebevXsV75Alchvrw==
+X-Received: by 2002:a1c:bb0a:: with SMTP id l10mr10217230wmf.186.1590090935136; 
+ Thu, 21 May 2020 12:55:35 -0700 (PDT)
+Received: from [192.168.1.40] (17.red-88-21-202.staticip.rima-tde.net.
+ [88.21.202.17])
+ by smtp.gmail.com with ESMTPSA id l19sm7846585wmj.14.2020.05.21.12.55.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 21 May 2020 12:55:34 -0700 (PDT)
+Subject: Re: [PATCH v2 10/10] hw/semihosting: Make the feature depend of TCG, 
+ and allow to disable it
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>
+Cc: Marek Vasut <marex@denx.de>, Peter Maydell <peter.maydell@linaro.org>,
+ Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Richard Henderson <rth@twiddle.net>, qemu-arm <qemu-arm@nongnu.org>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Chris Wulff <crwulff@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Laurent Vivier <laurent@vivier.eu>, Thomas Huth <thuth@redhat.com>, 
- Peter Maydell <peter.maydell@linaro.org>, 
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, 
- Paolo Bonzini <pbonzini@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Marek Vasut <marex@denx.de>, Michael Walle <michael@walle.cc>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Chris Wulff <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>, qemu-arm@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>, Michael Walle <michael@walle.cc>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
+ Aurelien Jarno <aurelien@aurel32.net>, Richard Henderson <rth@twiddle.net>
+References: <20200515170804.5707-1-philmd@redhat.com>
+ <20200515170804.5707-11-philmd@redhat.com>
+ <a67da86e-8486-9fea-ae1c-db65bf5c4acc@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Message-ID: <2810165c-62f9-1cc0-d610-115525d6a06a@redhat.com>
+Date: Thu, 21 May 2020 21:55:33 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
+MIME-Version: 1.0
+In-Reply-To: <a67da86e-8486-9fea-ae1c-db65bf5c4acc@linaro.org>
+Content-Language: en-US
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=207.211.31.120; envelope-from=philmd@redhat.com;
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=205.139.110.120; envelope-from=philmd@redhat.com;
  helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/21 01:44:25
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/21 14:32:18
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -96,45 +105,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2020 17:33:29 -0000
+X-List-Received-Date: Thu, 21 May 2020 19:55:42 -0000
 
-On Fri, May 15, 2020 at 7:08 PM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
->
-> Allow use of target-specific Kconfig file.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> ---
->  Makefile | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/Makefile b/Makefile
-> index b4c0830b26..5fce168fcb 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -423,11 +423,13 @@ MINIKCONF_INPUTS =3D $(SRC_PATH)/Kconfig.host \
->                     $(SRC_PATH)/accel/Kconfig \
->                     $(SRC_PATH)/hw/Kconfig
->  MINIKCONF_DEPS =3D $(MINIKCONF_INPUTS) \
-> -                 $(wildcard $(SRC_PATH)/hw/*/Kconfig)
-> +                 $(wildcard $(SRC_PATH)/hw/*/Kconfig) \
-> +                 $(wildcard $(SRC_PATH)/target/*/Kconfig)
->  MINIKCONF =3D $(PYTHON) $(SRC_PATH)/scripts/minikconf.py
->
->  $(SUBDIR_DEVICES_MAK): %/config-devices.mak: default-configs/%.mak $(MIN=
-IKCONF_DEPS) $(BUILD_DIR)/config-host.mak
->         $(call quiet-command, $(MINIKCONF) $(MINIKCONF_ARGS) \
-> +               $(wildcard $(SRC_PATH)/target/$(firstword $(subst -, ,$@)=
-)/Kconfig) \
+On 5/19/20 11:44 PM, Richard Henderson wrote:
+> On 5/15/20 10:08 AM, Philippe Mathieu-Daudé wrote:
+>> +++ b/hw/semihosting/Kconfig
+>> @@ -1,3 +1,5 @@
+>>   
+>> +# default is 'n'
+>>   config SEMIHOSTING
+>> -       bool
+>> +    bool
+>> +    depends on TCG
+>> diff --git a/target/arm/Kconfig b/target/arm/Kconfig
+>> new file mode 100644
+>> index 0000000000..3224cac4ad
+>> --- /dev/null
+>> +++ b/target/arm/Kconfig
+>> @@ -0,0 +1,2 @@
+>> +config SEMIHOSTING
+>> +    default y if TCG
+> 
+> Do you really have to duplicate the TCG condition?
 
-This is incorrect, $@ is a $TARGET_ARCH (example aarch64) and we want
-to include $TARGET_BASE_ARCH (example arm).
+How so? The semihosting default table is:
 
->                 > $@.tmp, "GEN", "$@.tmp")
->         $(call quiet-command, if test -f $@; then \
->           if cmp -s $@.old $@; then \
-> --
-> 2.21.3
->
+       TCG KVM XEN
+       y n y n y n
+TCG y - - y y y y
+     n   - n n n n
+KVM y     - - n n
+     n         n n
+XEN y         - -
+     n           -
+
+So checking for TCG is the simpler way.
+
+Maybe I'm not understanding well your question.
+
+The logic is if TCG is selected, SEMIHOSTING is too.
 
 
