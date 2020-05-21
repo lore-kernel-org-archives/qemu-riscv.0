@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jbrLu-0004cw-Cg
-	for mharc-qemu-riscv@gnu.org; Thu, 21 May 2020 15:59:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42570)
+	id 1jbrLy-0004rM-L3
+	for mharc-qemu-riscv@gnu.org; Thu, 21 May 2020 15:59:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42594)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbrLs-0004Y4-Ui
- for qemu-riscv@nongnu.org; Thu, 21 May 2020 15:59:36 -0400
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:42225
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbrLx-0004lp-4e
+ for qemu-riscv@nongnu.org; Thu, 21 May 2020 15:59:41 -0400
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:39354
  helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbrLs-0008KK-77
- for qemu-riscv@nongnu.org; Thu, 21 May 2020 15:59:36 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbrLv-0008Kp-QC
+ for qemu-riscv@nongnu.org; Thu, 21 May 2020 15:59:40 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590091175;
+ s=mimecast20190719; t=1590091179;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=8n0YFO+GkTAJ70YrDyCWQHFcQ3B2rpDJ3HMzik7tebk=;
- b=Uj1W2BQyeDPBnEBpdOkXFgwDZEd1B40cv2pszsyece0cQBB4CymXSkY2MoEb1NqS1uv8rV
- 3gMdUWDcWHj7INW8Lzpv9OOFEyFrYhtz0zDJpOnuVSwuEFQFad6m9C/FKE9VFDEjpkuoTv
- AZdjGAbf3XE08zs+4P0f4vMCFvWJqpk=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-429-_GicUnKNPL-ij0rQxi_NzA-1; Thu, 21 May 2020 15:59:31 -0400
-X-MC-Unique: _GicUnKNPL-ij0rQxi_NzA-1
-Received: by mail-wr1-f71.google.com with SMTP id p13so3365602wrt.1
- for <qemu-riscv@nongnu.org>; Thu, 21 May 2020 12:59:31 -0700 (PDT)
+ bh=gy7eiStux+gIOMgnul3BY8RTTpwPoXMNvRdb9ailA+g=;
+ b=UvRkVDA8pH+0oA6/vcFLA4ZfxqDx2xXqoqlwXHxRUy+ljNiCaQ/SFnbf/hj1HfGvgymYbe
+ 6mBj89LjZjo/srNOoeHhh0H9Svk3cw9ufWZDomxW992vYShlvvVlSarMfS065ZVmi7Bglp
+ D8aUFUjyY1Yt1gTON+EtVnyQ4ysvk5E=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-191-jlNTwGp_Nq6dwbQJliLQpw-1; Thu, 21 May 2020 15:59:37 -0400
+X-MC-Unique: jlNTwGp_Nq6dwbQJliLQpw-1
+Received: by mail-wm1-f70.google.com with SMTP id l2so3087560wmi.2
+ for <qemu-riscv@nongnu.org>; Thu, 21 May 2020 12:59:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=8n0YFO+GkTAJ70YrDyCWQHFcQ3B2rpDJ3HMzik7tebk=;
- b=Z5xuTbeJJuqfDYUzG1vH2A8aK31aeklgPRCAHVT2BYfAEF6+jftd8sYAoq2dheZvT8
- cynTz5TFPBXsxjUnY5iQQQIgGsSA8jdU0L/vDVKkFheKJLXNnMkuGCmkcs1DPnKPFwN+
- iIP8lqEXoYa0pUP60ud9cdF3mWc4SkxfRhnJPSdd8eLJGNQc3P0cLYzkz69Fy5/Swbgv
- UHsXTLyDVTiNzGmJWbVAef6OU31jodw9zKO9B2jlYb4j6k00D/c9B3UJUvIAziAHOs08
- pZJhZGdAMVVuy4Rj3pq4kBf1DN754lwYsA4Ajk1VzIWni12RyusJDYFRHUQMUwd8Pfrk
- ga6A==
-X-Gm-Message-State: AOAM530k13HCinBOzp8fVIEFKCmZ1VMkjtIdBwp0xs4tBv0qzTrJMge0
- /pm2ZkuUMeP3D6U/Z1QF517bfkx3XMjbnIBjB9V7vozO/QqSxNF2ZS9rJC7r1zLd1i2osNcs/HU
- QVR1TuGov7ocwFKE=
-X-Received: by 2002:a7b:c3da:: with SMTP id t26mr9536004wmj.146.1590091170777; 
- Thu, 21 May 2020 12:59:30 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwlgGWH+n9W9cr3XjZ4gqfAZL0L5kC2xGoZnWi5HocvmVMMsWNDdtckiCifIUneNXcnwu3Eog==
-X-Received: by 2002:a7b:c3da:: with SMTP id t26mr9535989wmj.146.1590091170602; 
- Thu, 21 May 2020 12:59:30 -0700 (PDT)
+ bh=gy7eiStux+gIOMgnul3BY8RTTpwPoXMNvRdb9ailA+g=;
+ b=AZ9//J3smLElOqzrKG1BUdMfu1/txSn6RQIfVXRNSv1CwrJepJEe149Vrj6rOHpTnl
+ 89Mo2tvcuN35jh1vQSlC1oKR9tLcoTfpJ0aN6dRVjkxCh22A7SWzcMqdQzPMJvwfYl2b
+ rp/nCnXTodnGe51pXO5nXMzv1vE2tkx2MQ54oGOOEHcyVkQ3qRo+z3Zizf8uOsuOnnrB
+ ig2VV+T4ofYfRpqCODcB1ZXhFgMZh12723jdoMreFLI5c5BNkYnc7T1ti/A8XaBRz4Ac
+ OWYX5A1s6diP3+2jAWirxUyx6m/axugGqMafC/H8akLOOiz1aty/i3R7JU8Nl7o/gOYf
+ A9zA==
+X-Gm-Message-State: AOAM530WZ8NgVpYA/wXX2caHptMrEbLWMT6Kw9RL2gASghQP2KP+Jw3I
+ 2Twwhhoj0blFiMN1SXiKctcgvxA8IC4GhjZrRD5a/q3CMkkVaSpXX9JQ6CvS1tO2fFS4haElh6/
+ ZxZ9puM/7aIk/7ts=
+X-Received: by 2002:a1c:6182:: with SMTP id v124mr10231006wmb.30.1590091176369; 
+ Thu, 21 May 2020 12:59:36 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyG4o6HxlnyWsS2WQHrvVxmbsl63V323RdIWVRrEFq3WAjUEtcGOOtLAhMk/HrM6bu0cSj60w==
+X-Received: by 2002:a1c:6182:: with SMTP id v124mr10230993wmb.30.1590091176198; 
+ Thu, 21 May 2020 12:59:36 -0700 (PDT)
 Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id m3sm7370853wrn.96.2020.05.21.12.59.28
+ by smtp.gmail.com with ESMTPSA id p8sm7269705wre.11.2020.05.21.12.59.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2020 12:59:30 -0700 (PDT)
+ Thu, 21 May 2020 12:59:35 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff <crwulff@gmail.com>,
@@ -65,15 +65,12 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff <crwulff@gmail.com>,
  Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
  Richard Henderson <rth@twiddle.net>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Sergio Andres Gomez Del Real <sergio.g.delreal@gmail.com>,
- Vincent Palatin <vpalatin@chromium.org>, Yu Ning <yu.ning@intel.com>,
- Tao Wu <lepton@google.com>, haxm-team@intel.com,
- Colin Xu <colin.xu@intel.com>, Hang Yuan <hang.yuan@intel.com>,
- David Chou <david.j.chou@intel.com>, Wenchao Wang <wenchao.wang@intel.com>
-Subject: [PATCH v3 03/11] MAINTAINERS: Add an entry for the HAX accelerator
-Date: Thu, 21 May 2020 21:59:03 +0200
-Message-Id: <20200521195911.19685-4-philmd@redhat.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ "Emilio G . Cota" <cota@braap.org>, David Hildenbrand <david@redhat.com>
+Subject: [PATCH v3 04/11] accel/tcg: Add stub for probe_access()
+Date: Thu, 21 May 2020 21:59:04 +0200
+Message-Id: <20200521195911.19685-5-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200521195911.19685-1-philmd@redhat.com>
 References: <20200521195911.19685-1-philmd@redhat.com>
@@ -106,40 +103,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2020 19:59:37 -0000
+X-List-Received-Date: Thu, 21 May 2020 19:59:41 -0000
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
----
-Cc: Sergio Andres Gomez Del Real <sergio.g.delreal@gmail.com>
-Cc: Vincent Palatin <vpalatin@chromium.org>
-Cc: Yu Ning <yu.ning@intel.com>
-Cc: Tao Wu <lepton@google.com>
-Cc: haxm-team@intel.com
-Cc: Colin Xu <colin.xu@intel.com>
-Cc: Hang Yuan <hang.yuan@intel.com>
-Cc: David Chou <david.j.chou@intel.com>
-Cc: Wenchao Wang <wenchao.wang@intel.com>
----
- MAINTAINERS | 6 ++++++
- 1 file changed, 6 insertions(+)
+From: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d7b98f9878..0f76dc330b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -426,6 +426,12 @@ F: accel/accel.c
- F: accel/Makefile.objs
- F: accel/stubs/Makefile.objs
- 
-+HAX Accelerator
-+S: Orphan
-+F: accel/stubs/hax-stub.c
-+F: target/i386/hax-all.c
-+F: include/sysemu/hax.h
+The TCG helpers where added in b92e5a22ec3 in softmmu_template.h.
+probe_write() was added in there in 3b4afc9e75a to be moved out
+to accel/tcg/cputlb.c in 3b08f0a9254, and was later refactored
+as probe_access() in c25c283df0f.
+Since it is a TCG specific helper, add a stub to avoid failures
+when building without TCG, such:
+
+  target/arm/helper.o: In function `probe_read':
+  include/exec/exec-all.h:362: undefined reference to `probe_access'
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+---
+Cc: Richard Henderson <rth@twiddle.net>
+Cc: Emilio G. Cota <cota@braap.org>
+Cc: Alex Bennée <alex.bennee@linaro.org>
+Cc: David Hildenbrand <david@redhat.com>
+---
+ accel/stubs/tcg-stub.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/accel/stubs/tcg-stub.c b/accel/stubs/tcg-stub.c
+index 677191a69c..e4bbf997aa 100644
+--- a/accel/stubs/tcg-stub.c
++++ b/accel/stubs/tcg-stub.c
+@@ -22,3 +22,10 @@ void tb_flush(CPUState *cpu)
+ void tlb_set_dirty(CPUState *cpu, target_ulong vaddr)
+ {
+ }
 +
- X86 HVF CPUs
- M: Roman Bolshakov <r.bolshakov@yadro.com>
- S: Maintained
++void *probe_access(CPUArchState *env, target_ulong addr, int size,
++                   MMUAccessType access_type, int mmu_idx, uintptr_t retaddr)
++{
++     /* Handled by hardware accelerator. */
++     g_assert_not_reached();
++}
 -- 
 2.21.3
 
