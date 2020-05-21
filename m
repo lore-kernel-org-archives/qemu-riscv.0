@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jbrLy-0004rM-L3
-	for mharc-qemu-riscv@gnu.org; Thu, 21 May 2020 15:59:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42594)
+	id 1jbrM6-0005HJ-3B
+	for mharc-qemu-riscv@gnu.org; Thu, 21 May 2020 15:59:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42626)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbrLx-0004lp-4e
- for qemu-riscv@nongnu.org; Thu, 21 May 2020 15:59:41 -0400
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:39354
- helo=us-smtp-delivery-1.mimecast.com)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbrM4-00059u-1W
+ for qemu-riscv@nongnu.org; Thu, 21 May 2020 15:59:48 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:58454
+ helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbrLv-0008Kp-QC
- for qemu-riscv@nongnu.org; Thu, 21 May 2020 15:59:40 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jbrM3-0008M5-9C
+ for qemu-riscv@nongnu.org; Thu, 21 May 2020 15:59:47 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590091179;
+ s=mimecast20190719; t=1590091186;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=gy7eiStux+gIOMgnul3BY8RTTpwPoXMNvRdb9ailA+g=;
- b=UvRkVDA8pH+0oA6/vcFLA4ZfxqDx2xXqoqlwXHxRUy+ljNiCaQ/SFnbf/hj1HfGvgymYbe
- 6mBj89LjZjo/srNOoeHhh0H9Svk3cw9ufWZDomxW992vYShlvvVlSarMfS065ZVmi7Bglp
- D8aUFUjyY1Yt1gTON+EtVnyQ4ysvk5E=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-191-jlNTwGp_Nq6dwbQJliLQpw-1; Thu, 21 May 2020 15:59:37 -0400
-X-MC-Unique: jlNTwGp_Nq6dwbQJliLQpw-1
-Received: by mail-wm1-f70.google.com with SMTP id l2so3087560wmi.2
- for <qemu-riscv@nongnu.org>; Thu, 21 May 2020 12:59:37 -0700 (PDT)
+ bh=ndqFgBanjliYTdRp8N1sk+p/cY4owVogsc0x0ibf8Jw=;
+ b=HpfOgZ58q8a6kFCt8TeI6IpjiOOiyqFz2OwLnzCTzH1JTLOtjHW8hv89QAPDqaEr/uU2YC
+ 3t7/CVwXGjKwfk2sfdRZWXGWi0ZllUsq6GsALeq+uysQNjrOw2rOfNvBnlY7LtRtQvC9N+
+ oSbupkNUUon7EQuq/eYJQOQXddmeHUs=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-396-n9NJqBNFNUq141ehBbNiBg-1; Thu, 21 May 2020 15:59:42 -0400
+X-MC-Unique: n9NJqBNFNUq141ehBbNiBg-1
+Received: by mail-wm1-f71.google.com with SMTP id p24so56608wmc.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 May 2020 12:59:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=gy7eiStux+gIOMgnul3BY8RTTpwPoXMNvRdb9ailA+g=;
- b=AZ9//J3smLElOqzrKG1BUdMfu1/txSn6RQIfVXRNSv1CwrJepJEe149Vrj6rOHpTnl
- 89Mo2tvcuN35jh1vQSlC1oKR9tLcoTfpJ0aN6dRVjkxCh22A7SWzcMqdQzPMJvwfYl2b
- rp/nCnXTodnGe51pXO5nXMzv1vE2tkx2MQ54oGOOEHcyVkQ3qRo+z3Zizf8uOsuOnnrB
- ig2VV+T4ofYfRpqCODcB1ZXhFgMZh12723jdoMreFLI5c5BNkYnc7T1ti/A8XaBRz4Ac
- OWYX5A1s6diP3+2jAWirxUyx6m/axugGqMafC/H8akLOOiz1aty/i3R7JU8Nl7o/gOYf
- A9zA==
-X-Gm-Message-State: AOAM530WZ8NgVpYA/wXX2caHptMrEbLWMT6Kw9RL2gASghQP2KP+Jw3I
- 2Twwhhoj0blFiMN1SXiKctcgvxA8IC4GhjZrRD5a/q3CMkkVaSpXX9JQ6CvS1tO2fFS4haElh6/
- ZxZ9puM/7aIk/7ts=
-X-Received: by 2002:a1c:6182:: with SMTP id v124mr10231006wmb.30.1590091176369; 
- Thu, 21 May 2020 12:59:36 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyG4o6HxlnyWsS2WQHrvVxmbsl63V323RdIWVRrEFq3WAjUEtcGOOtLAhMk/HrM6bu0cSj60w==
-X-Received: by 2002:a1c:6182:: with SMTP id v124mr10230993wmb.30.1590091176198; 
- Thu, 21 May 2020 12:59:36 -0700 (PDT)
+ bh=ndqFgBanjliYTdRp8N1sk+p/cY4owVogsc0x0ibf8Jw=;
+ b=uZZZNk47dk/YVdTeFikXjR/1K/sbPZ9mPEa7N90yxHYUy4WlblWyKjKOrwiQnguSiY
+ oqJmxuG/uPcGbfdywqM3BzlpQkV5v2hAcgzkGOp89VsCTyqI7pzTmedH7xBM2GFC8/RO
+ VdZqbGF7d9B+gy1jE9wX0rstmdvSUy3Jikdvb3bluFs2ZD0pvTDYWW1yz4t3pUcd7Se0
+ QTMtitAw0KMKhN2wV80xAWthjoiEdWm7mMMEXet9o6eMV7cX6amS0mqTNXxQPzZynihj
+ OjhGhepJ8t9og47tfnz9Z6g6e/oYsv/PLLcN+ToR2QAIoOVTNRHGKkmOmlF0ksJvBL7C
+ 5jAQ==
+X-Gm-Message-State: AOAM530RRPxuiKpKtDw3xQ4jxtZ/WWNbe1ZdEK/FzdruFXdQKxu2vjxV
+ RgeBHQLuLhkCrwQ24jMeX8OTLyJfuBMrL4hBcAbPW6/UsorMG4/jOYLOmSokcKyILL9zB2uuZzb
+ mPTzhogPBNANNgfI=
+X-Received: by 2002:adf:ea09:: with SMTP id q9mr199799wrm.399.1590091181642;
+ Thu, 21 May 2020 12:59:41 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxeaXm4iwycnKbL3KPvGpgmGXlS3CyVHkAmumZ3hSREIGIXaWVOKv0e6o6ImxUtk7uwY+Ha9A==
+X-Received: by 2002:adf:ea09:: with SMTP id q9mr199773wrm.399.1590091181402;
+ Thu, 21 May 2020 12:59:41 -0700 (PDT)
 Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id p8sm7269705wre.11.2020.05.21.12.59.34
+ by smtp.gmail.com with ESMTPSA id 40sm6315242wrc.15.2020.05.21.12.59.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2020 12:59:35 -0700 (PDT)
+ Thu, 21 May 2020 12:59:40 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff <crwulff@gmail.com>,
@@ -65,12 +65,11 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff <crwulff@gmail.com>,
  Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
  Richard Henderson <rth@twiddle.net>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- "Emilio G . Cota" <cota@braap.org>, David Hildenbrand <david@redhat.com>
-Subject: [PATCH v3 04/11] accel/tcg: Add stub for probe_access()
-Date: Thu, 21 May 2020 21:59:04 +0200
-Message-Id: <20200521195911.19685-5-philmd@redhat.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v3 05/11] Makefile: Remove dangerous EOL trailing backslash
+Date: Thu, 21 May 2020 21:59:05 +0200
+Message-Id: <20200521195911.19685-6-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200521195911.19685-1-philmd@redhat.com>
 References: <20200521195911.19685-1-philmd@redhat.com>
@@ -80,9 +79,9 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8;
 	text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=207.211.31.81; envelope-from=philmd@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/21 04:44:45
+Received-SPF: pass client-ip=205.139.110.120; envelope-from=philmd@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/21 14:32:18
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -103,46 +102,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2020 19:59:41 -0000
+X-List-Received-Date: Thu, 21 May 2020 19:59:48 -0000
 
-From: Philippe Mathieu-Daudé <f4bug@amsat.org>
+One might get caught trying to understand unexpected Makefile
+behavior. Trailing backslash can help to split very long lines,
+but are rather dangerous when nothing follow. Preserve other
+developers debugging time by removing this one.
 
-The TCG helpers where added in b92e5a22ec3 in softmmu_template.h.
-probe_write() was added in there in 3b4afc9e75a to be moved out
-to accel/tcg/cputlb.c in 3b08f0a9254, and was later refactored
-as probe_access() in c25c283df0f.
-Since it is a TCG specific helper, add a stub to avoid failures
-when building without TCG, such:
-
-  target/arm/helper.o: In function `probe_read':
-  include/exec/exec-all.h:362: undefined reference to `probe_access'
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
-Cc: Richard Henderson <rth@twiddle.net>
-Cc: Emilio G. Cota <cota@braap.org>
-Cc: Alex Bennée <alex.bennee@linaro.org>
-Cc: David Hildenbrand <david@redhat.com>
----
- accel/stubs/tcg-stub.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/accel/stubs/tcg-stub.c b/accel/stubs/tcg-stub.c
-index 677191a69c..e4bbf997aa 100644
---- a/accel/stubs/tcg-stub.c
-+++ b/accel/stubs/tcg-stub.c
-@@ -22,3 +22,10 @@ void tb_flush(CPUState *cpu)
- void tlb_set_dirty(CPUState *cpu, target_ulong vaddr)
- {
- }
-+
-+void *probe_access(CPUArchState *env, target_ulong addr, int size,
-+                   MMUAccessType access_type, int mmu_idx, uintptr_t retaddr)
-+{
-+     /* Handled by hardware accelerator. */
-+     g_assert_not_reached();
-+}
+diff --git a/Makefile b/Makefile
+index 40e4f7677b..6c9d718b2c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -420,7 +420,7 @@ MINIKCONF_ARGS = \
+ 
+ MINIKCONF_INPUTS = $(SRC_PATH)/Kconfig.host $(SRC_PATH)/hw/Kconfig
+ MINIKCONF_DEPS = $(MINIKCONF_INPUTS) $(wildcard $(SRC_PATH)/hw/*/Kconfig)
+-MINIKCONF = $(PYTHON) $(SRC_PATH)/scripts/minikconf.py \
++MINIKCONF = $(PYTHON) $(SRC_PATH)/scripts/minikconf.py
+ 
+ $(SUBDIR_DEVICES_MAK): %/config-devices.mak: default-configs/%.mak $(MINIKCONF_DEPS) $(BUILD_DIR)/config-host.mak
+ 	$(call quiet-command, $(MINIKCONF) $(MINIKCONF_ARGS) > $@.tmp, "GEN", "$@.tmp")
 -- 
 2.21.3
 
