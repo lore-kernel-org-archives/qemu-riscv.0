@@ -1,55 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jcBQq-0005pF-8y
-	for mharc-qemu-riscv@gnu.org; Fri, 22 May 2020 13:26:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47744)
+	id 1jcBQw-00062T-3T
+	for mharc-qemu-riscv@gnu.org; Fri, 22 May 2020 13:26:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47786)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jcBQo-0005fG-23
- for qemu-riscv@nongnu.org; Fri, 22 May 2020 13:26:02 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:51337
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jcBQt-0005y5-Bi
+ for qemu-riscv@nongnu.org; Fri, 22 May 2020 13:26:07 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:27953
  helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jcBQm-00028u-Ck
- for qemu-riscv@nongnu.org; Fri, 22 May 2020 13:26:01 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jcBQr-0002Au-Qs
+ for qemu-riscv@nongnu.org; Fri, 22 May 2020 13:26:06 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590168359;
+ s=mimecast20190719; t=1590168364;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=zDajBbKs4gis+0Hzyip6W2ChjFSOOWvPUkN8dD09nr4=;
- b=Z30hyoAufNZRMLZFvoYS6WxQpg4eB7RnyIRa/NYsL+m7KnBgefbr1I/aCUrgXLUlcDWneO
- RQbxHLWOz89ito9Sk/1+ofr7T12ngQsEkU1Yr+96DdiQ1MbwXhO1Bxw1CnGsFAZ6stdHPJ
- wcUmHtmAJwxMLT51dFFQBv4sgiZUXj4=
+ bh=njMVcw9nzb67by0KnDJJ20QJffO3+OPEhMt5z5q8uy0=;
+ b=NuCItxMIcAEpTineeNVzcOJzxvowhhQA+sSIBdcK29OtJ7fj9Vg+fDmV/qgXbmp5tRzIy4
+ rcuYIxw8mWU9osnWp55dkqR6NwiZcFq3+EWKNGguLvWuOZFhiYCSel61X3OK5+pl9MDwFd
+ DM9LkbsXu7QqdXKoBdRIk0wsGdSsOSY=
 Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
  [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-33-1JeT955XPJOIIqjAUUH6Sw-1; Fri, 22 May 2020 13:25:58 -0400
-X-MC-Unique: 1JeT955XPJOIIqjAUUH6Sw-1
-Received: by mail-wm1-f71.google.com with SMTP id z5so1414916wml.6
- for <qemu-riscv@nongnu.org>; Fri, 22 May 2020 10:25:57 -0700 (PDT)
+ us-mta-9-SysUUl3NNSKmAOhKDYG7IQ-1; Fri, 22 May 2020 13:26:03 -0400
+X-MC-Unique: SysUUl3NNSKmAOhKDYG7IQ-1
+Received: by mail-wm1-f71.google.com with SMTP id t82so2914696wmf.4
+ for <qemu-riscv@nongnu.org>; Fri, 22 May 2020 10:26:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=zDajBbKs4gis+0Hzyip6W2ChjFSOOWvPUkN8dD09nr4=;
- b=G6eNQA93Yd/p6+t9uEVgglj+K8SAc9cFq+lbtar5U9EB5+L0q5k/jc2q9eDSfiFWOv
- K6bP6F8t7XCJbbItx3HH7CRSzItak+WlRz0UxjsSFuwP6ctqrGA1L1HfcCYOwcGdAn9w
- t59UujuQi2ifNw7/3kB2tQFEK5pIEYERdjnoM1JTeWMPLiCm3qioIHgg5OMCurO4IlzA
- ieTJgYhan0o8fOmezzhNS8TSeSPLoc4QDVMWlRJ5t5Mf6DseZfABEG3U0fMblZtUby2/
- 91QISeePVz46dxIHj5+0oz8y84xNGn9aOpktCn5xNpDo7UHo85hvN8Bpqbk6Meo2kBwJ
- IgEA==
-X-Gm-Message-State: AOAM531C08pmdk2p90BODHXCsqadC5abloeRvhFFdBSHwyI4+AlWr32v
- oiE4CTftPkTdZiOayvuOTzxn9Du8NN8NwFqXxXRzh/purhYCiehO5ABBOU62JbyRPDLVCKO551W
- gaNt5VEYG167dG+Q=
-X-Received: by 2002:a1c:3d08:: with SMTP id k8mr14280785wma.16.1590168356839; 
- Fri, 22 May 2020 10:25:56 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxyaWYO6dpnbCABYu+g8OxHh0V1WApT9Zdh2WOGUts7j67S9+77L1qYMNNi7VJtPMMSZKAj3A==
-X-Received: by 2002:a1c:3d08:: with SMTP id k8mr14280761wma.16.1590168356698; 
- Fri, 22 May 2020 10:25:56 -0700 (PDT)
+ bh=njMVcw9nzb67by0KnDJJ20QJffO3+OPEhMt5z5q8uy0=;
+ b=NDeouuDJX7iA9zDi+DSXlPyTIBQWwGRr7MRwpVPeH+at0VBGwaTr+jwIop9gEp14WA
+ pr95LMTClKTpHm89lzMeE3gy8l+zHJKFvE6m+7F4+uE1wwFbw1fDI0bftKxcBvsNdpGg
+ GbkrOr5uP+p5STg+nQ2D+mR45OyCydXj0DA5KaeeYz3+YKF3MSE2HKbOCPqyuj1hlS8A
+ z3rcIUdcWYFzQBoTylba18vvkt286EjqzMAbph5MekZi33lxV1nTYH9l2cJeqK7SXXPv
+ +mgpHJOOrrBmnHx9cTlApUz5jz/QH76nxCzmG2ZQljMDgqb3t3Iw6r7ZUD2SVVgDQW4W
+ i3IA==
+X-Gm-Message-State: AOAM531g+NhGDQL4co/Ap350QASx3g2DmPyLHhWxkeVgGE02jIJQNQx+
+ E/R7ev6YfBLS1AYOnN3zEsXSq9igtIlKGgoXvWMTJrww5mpkkdqE4MGD/7X4Duak8jBHulX8Ggn
+ xee6cNnY47aB3Fno=
+X-Received: by 2002:a05:6000:1187:: with SMTP id
+ g7mr4295112wrx.54.1590168361854; 
+ Fri, 22 May 2020 10:26:01 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwTWSYeq5PO/H81uw1oH1eRVrb4JRSLJ7bWz8JXtUZLG7fdkypR0KgHWeUhNA/fdldKY/EEVQ==
+X-Received: by 2002:a05:6000:1187:: with SMTP id
+ g7mr4295098wrx.54.1590168361652; 
+ Fri, 22 May 2020 10:26:01 -0700 (PDT)
 Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id y204sm2077653wmg.36.2020.05.22.10.25.55
+ by smtp.gmail.com with ESMTPSA id 81sm10811338wme.16.2020.05.22.10.26.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 May 2020 10:25:56 -0700 (PDT)
+ Fri, 22 May 2020 10:26:01 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>,
@@ -62,13 +64,12 @@ Cc: Cornelia Huck <cohuck@redhat.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-s390x@nongnu.org,
  qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Laurent Vivier <laurent@vivier.eu>
-Subject: [PATCH v4 09/13] arch_init: Remove unused 'qapi-commands-misc.h'
- include
-Date: Fri, 22 May 2020 19:25:06 +0200
-Message-Id: <20200522172510.25784-10-philmd@redhat.com>
+Subject: [PATCH v4 10/13] target/i386: Restrict CpuClass::get_crash_info() to
+ system-mode
+Date: Fri, 22 May 2020 19:25:07 +0200
+Message-Id: <20200522172510.25784-11-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200522172510.25784-1-philmd@redhat.com>
 References: <20200522172510.25784-1-philmd@redhat.com>
@@ -101,32 +102,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2020 17:26:02 -0000
+X-List-Received-Date: Fri, 22 May 2020 17:26:07 -0000
 
-Commit ffaee83bcb2 moved qmp_query_target but forgot to remove
-this include.
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Laurent Vivier <laurent@vivier.eu>
 Tested-by: Laurent Vivier <laurent@vivier.eu>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- arch_init.c | 1 -
- 1 file changed, 1 deletion(-)
+ target/i386/cpu.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/arch_init.c b/arch_init.c
-index d9eb0ec1dd..8afea4748b 100644
---- a/arch_init.c
-+++ b/arch_init.c
-@@ -27,7 +27,6 @@
- #include "sysemu/arch_init.h"
- #include "hw/pci/pci.h"
- #include "hw/audio/soundhw.h"
--#include "qapi/qapi-commands-misc.h"
- #include "qapi/error.h"
- #include "qemu/config-file.h"
- #include "qemu/error-report.h"
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 7a4a8e3847..dd31c1de5f 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -6843,6 +6843,7 @@ static void x86_cpu_register_feature_bit_props(X86CPU *cpu,
+     x86_cpu_register_bit_prop(cpu, name, w, bitnr);
+ }
+ 
++#if !defined(CONFIG_USER_ONLY)
+ static GuestPanicInformation *x86_cpu_get_crash_info(CPUState *cs)
+ {
+     X86CPU *cpu = X86_CPU(cs);
+@@ -6886,6 +6887,7 @@ static void x86_cpu_get_crash_info_qom(Object *obj, Visitor *v,
+                                      errp);
+     qapi_free_GuestPanicInformation(panic_info);
+ }
++#endif /* !CONFIG_USER_ONLY */
+ 
+ static void x86_cpu_initfn(Object *obj)
+ {
+@@ -6932,8 +6934,10 @@ static void x86_cpu_initfn(Object *obj)
+                         x86_cpu_get_unavailable_features,
+                         NULL, NULL, NULL);
+ 
++#if !defined(CONFIG_USER_ONLY)
+     object_property_add(obj, "crash-information", "GuestPanicInformation",
+                         x86_cpu_get_crash_info_qom, NULL, NULL, NULL);
++#endif
+ 
+     for (w = 0; w < FEATURE_WORDS; w++) {
+         int bitnr;
+@@ -7245,7 +7249,6 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
+     cc->cpu_exec_interrupt = x86_cpu_exec_interrupt;
+ #endif
+     cc->dump_state = x86_cpu_dump_state;
+-    cc->get_crash_info = x86_cpu_get_crash_info;
+     cc->set_pc = x86_cpu_set_pc;
+     cc->synchronize_from_tb = x86_cpu_synchronize_from_tb;
+     cc->gdb_read_register = x86_cpu_gdb_read_register;
+@@ -7256,6 +7259,7 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
+     cc->asidx_from_attrs = x86_asidx_from_attrs;
+     cc->get_memory_mapping = x86_cpu_get_memory_mapping;
+     cc->get_phys_page_attrs_debug = x86_cpu_get_phys_page_attrs_debug;
++    cc->get_crash_info = x86_cpu_get_crash_info;
+     cc->write_elf64_note = x86_cpu_write_elf64_note;
+     cc->write_elf64_qemunote = x86_cpu_write_elf64_qemunote;
+     cc->write_elf32_note = x86_cpu_write_elf32_note;
 -- 
 2.21.3
 
