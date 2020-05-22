@@ -1,50 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jbzEk-0007an-1G
-	for mharc-qemu-riscv@gnu.org; Fri, 22 May 2020 00:24:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55928)
+	id 1jbzGv-0002ik-Ja
+	for mharc-qemu-riscv@gnu.org; Fri, 22 May 2020 00:27:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56096)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jbzEh-0007Xn-Sa
- for qemu-riscv@nongnu.org; Fri, 22 May 2020 00:24:43 -0400
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:36517)
+ id 1jbzGq-0002gp-3X
+ for qemu-riscv@nongnu.org; Fri, 22 May 2020 00:26:56 -0400
+Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:39275)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jbzEg-0001Et-FD
- for qemu-riscv@nongnu.org; Fri, 22 May 2020 00:24:43 -0400
-Received: by mail-pg1-x543.google.com with SMTP id c75so4427715pga.3
- for <qemu-riscv@nongnu.org>; Thu, 21 May 2020 21:24:41 -0700 (PDT)
+ id 1jbzGp-0001aG-9h
+ for qemu-riscv@nongnu.org; Fri, 22 May 2020 00:26:55 -0400
+Received: by mail-pg1-x542.google.com with SMTP id u35so4424709pgk.6
+ for <qemu-riscv@nongnu.org>; Thu, 21 May 2020 21:26:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=SLX5aUjyhwSpXMrIOBG3YzlEuSkp8wTIA0mN4lHrymk=;
- b=zgUeBjLpxbxJGnkrsCaI4+/stpGitER/GPo+Kjlu1iEHNh/Z8qgvC+Am2yqw734vKY
- yuU5foJk26eqD3l27KjYQhDBRHjhXfmA0FcqP9S6gqH206zIQLbsc9FqjQHTcJcKq+/T
- n0SEdv1uOFhN4Kj9UjHjD3E+C+6z/VIomN3JlTn0y5H0Q8lGnTnh0KCMWTukBHpQi4us
- JE/lPcGsze4bkBX67xCqQ1ZqjX724Jt1SFXVa2jhgRaNkE6yIYtJF4eGJiMIUhjy31Jj
- EtRvrqKvu+vcLd48aPQD9hPRYv/qtz0Bhez5juznQtiSwBfeiX8EUjdUc5j4WEdaSKwO
- 2hjQ==
+ bh=6t60OdTEj/+df3YqBoi4RRSuD0MFWy3jgFZjTOxrC5Y=;
+ b=ABjzplJhJ7v2EY8T2PgfadwVYMYTpiHXzRtnQiQkyE4tHYiLWv6q11Iga0HDgro8op
+ sFg13WEznnn/nDw8bLQbIqm1rIJe/JWLZokpnzC9Ne5TzC0dYt0/u+1bOTs3mLemDtZG
+ iJKQ27PM4/Tvbix1SectJRTOYh9omaCRJULwouNn8ck/B82K3A3vc5QqNNCMiG76SK5z
+ IM3lazPWmdYRW7Q1nzdK5neqLhXPvv62pjemgG7+93b2a0f7x6XD6aUvUcTK6C8nZ70P
+ 9a/ylK595DV60+amKQnC5UdYL5c9GumoHzc4Xxyuf/yRWzI8nP4lHu5tyaJW6GiDf2JC
+ rqCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=SLX5aUjyhwSpXMrIOBG3YzlEuSkp8wTIA0mN4lHrymk=;
- b=g4jOnrSYku4aN5qDV5q0qE7SSguVPUEQ9DgNhysaeH8+1UmGkSkOj/k+Zl6djfeJPF
- WPs3qgjwonCMhbyolqY9vBhFvL/9l//WuI7hSK88VyTtwuiP19GIVsrvsF3tSX9EmzBr
- p9AkOieoO/o7eCW8Cg7LHLdX/TlwBrZn/7gMPKAXuhvcZs4om9cY4PPL3/2+gR4XRlB3
- vN0iyZA8quMz3AUB9j26GAyiSDXi//q9hc/tMcnZbWtdYOWJTxXR+dQBKY95GCu4L/+g
- pAp8EhMDOKIpBiwtq3zJqO+haAdVDpys4n+k3LESloM5XH9n1qby1P0zBWTJnpwMVBqP
- gA7A==
-X-Gm-Message-State: AOAM533w1GTAcpN2X6e9OqWPLloulYpIMK1DaZPyKPFyDakerK3yMpJG
- 8KnQxdzwSAwAATISVBUQ0yXMKA==
-X-Google-Smtp-Source: ABdhPJxUDUK2nvpu7o+yHeDH397TSEOPvLdpguUeDy4kCHqYgi8xtmKnbcaZg9vNENzs8OYuu74F7Q==
-X-Received: by 2002:a62:c9:: with SMTP id 192mr701238pfa.43.1590121480915;
- Thu, 21 May 2020 21:24:40 -0700 (PDT)
+ bh=6t60OdTEj/+df3YqBoi4RRSuD0MFWy3jgFZjTOxrC5Y=;
+ b=GETG/JFtDo+yxp8XqvJFgr2GbpIgZ4ZgyJLEpeN34wk6hwTyrZLGwtCna+4ye+6kQZ
+ cqZKspu09bb/pST5teJihiUXybaS4h0DGrBYvXVI4TkXZsJwLGeq5SrWdovsW0C7cvse
+ 0PIylo8Wir0M7LLISFe9RgFBUlUJXyd/KPaWw/coaPJFbSH+iUFTN9KGk7Z4ZM/oDCzI
+ mEewAL7Ci0DdIF6URhkqyCIZ/BsHvPSAgi8NiEz5h82LyX1LdoRBLOVTNjEt+hQH+yPo
+ e6IVVhNr8B7A8K5I8MjCxSUxUfO5j8OakgcnF6En9UMWRRS6XCHUu4wTtwqbEQL4IXJH
+ 1rkA==
+X-Gm-Message-State: AOAM531SO4nmH9CjkgE9ARU915lBl9ma1ebkM6lGWhtsBwL0KuEKqiTC
+ 2Ru95QYRekqwR9BPKw9sH5tsVQ==
+X-Google-Smtp-Source: ABdhPJyH7IulLdrBCc4zXIN9Yv0wCSv7AC2Yz2CgZMKL/CyQ70uJA/LgBzwbW61NL8Ezx4Mta1z1RQ==
+X-Received: by 2002:a17:90b:2396:: with SMTP id
+ mr22mr2264422pjb.118.1590121613947; 
+ Thu, 21 May 2020 21:26:53 -0700 (PDT)
 Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
- by smtp.gmail.com with ESMTPSA id j21sm3845954pfn.202.2020.05.21.21.24.39
+ by smtp.gmail.com with ESMTPSA id q17sm5064573pfq.117.2020.05.21.21.26.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 May 2020 21:24:40 -0700 (PDT)
-Subject: Re: [PATCH v3 09/11] rules.mak: Add base-arch() rule
+ Thu, 21 May 2020 21:26:53 -0700 (PDT)
+Subject: Re: [PATCH v3 11/11] hw/semihosting: Make the feature depend of TCG, 
+ and allow to disable it
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  qemu-devel@nongnu.org
 Cc: Marek Vasut <marex@denx.de>, Peter Maydell <peter.maydell@linaro.org>,
@@ -61,19 +63,19 @@ Cc: Marek Vasut <marex@denx.de>, Peter Maydell <peter.maydell@linaro.org>,
  Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Richard Henderson <rth@twiddle.net>
 References: <20200521195911.19685-1-philmd@redhat.com>
- <20200521195911.19685-10-philmd@redhat.com>
+ <20200521195911.19685-12-philmd@redhat.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <ccd78343-795e-8874-e4f3-bb6861ea64f0@linaro.org>
-Date: Thu, 21 May 2020 21:24:37 -0700
+Message-ID: <36db7554-dcc0-6b8c-e7b7-628c105d8fc7@linaro.org>
+Date: Thu, 21 May 2020 21:26:51 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200521195911.19685-10-philmd@redhat.com>
+In-Reply-To: <20200521195911.19685-12-philmd@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::543;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x543.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::542;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x542.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -95,20 +97,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2020 04:24:44 -0000
+X-List-Received-Date: Fri, 22 May 2020 04:26:56 -0000
 
 On 5/21/20 12:59 PM, Philippe Mathieu-Daudé wrote:
-> +		$(if $(findstring risc,$1),risc,\
+> +++ b/hw/semihosting/Kconfig
+> @@ -1,3 +1,5 @@
+>  
+> +# default is 'n'
+>  config SEMIHOSTING
+> -       bool
+> +    bool
+> +    depends on TCG
+> diff --git a/target/arm/Kconfig b/target/arm/Kconfig
+> new file mode 100644
+> index 0000000000..035592dd86
+> --- /dev/null
+> +++ b/target/arm/Kconfig
+> @@ -0,0 +1,2 @@
+> +config SEMIHOSTING
+> +    default y if TCG
 
-Eh?  riscv{32,64} vs openrisc.
-
-> +		$(if $(findstring x86,$1),i386,\
-
-Do we really not need an exact match for x86_64?
-
-> +		$(if $(findstring aarch64,$1),arm,$1)))))))
-
-Exact match?
+Did you answer my question about replicating the TCG test?  If you did, I
+missed it...
 
 
 r~
