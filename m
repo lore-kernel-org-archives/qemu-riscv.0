@@ -1,119 +1,86 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jc9Og-00043Y-CD
-	for mharc-qemu-riscv@gnu.org; Fri, 22 May 2020 11:15:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33804)
+	id 1jcBQD-0003rR-Id
+	for mharc-qemu-riscv@gnu.org; Fri, 22 May 2020 13:25:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47522)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jc9Of-000425-HK
- for qemu-riscv@nongnu.org; Fri, 22 May 2020 11:15:41 -0400
-Received: from us-smtp-1.mimecast.com ([205.139.110.61]:60199
- helo=us-smtp-delivery-1.mimecast.com)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jcBQB-0003nq-CQ
+ for qemu-riscv@nongnu.org; Fri, 22 May 2020 13:25:23 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:41060
+ helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jc9Oe-0002Iw-UU
- for qemu-riscv@nongnu.org; Fri, 22 May 2020 11:15:41 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jcBQA-0001ql-Bz
+ for qemu-riscv@nongnu.org; Fri, 22 May 2020 13:25:23 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590160540;
+ s=mimecast20190719; t=1590168320;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=bgwxBnm8VD+Y/kxKW7/OF/c/OhXh/FcLyD2iTqVqTJ8=;
- b=FbzUF1G7XiUZ80oFGh6q0u9EB6yUZIu8mDo1CPkAjpk5VajSQ0K2rDDEwIFC6iZqj7lKhy
- u2TpaTDIbrnf1Xkm8DMmYN8pKyd6sARE6r8uhbBanppxA+qpj2S9k15yGSj9v93r+XqVk1
- IDIRRGr8+GUnqrbsiYxSxbnx5OmL0Hw=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-470-0zu0WZ9lNA-GXrPs8VBTSQ-1; Fri, 22 May 2020 11:15:36 -0400
-X-MC-Unique: 0zu0WZ9lNA-GXrPs8VBTSQ-1
-Received: by mail-wr1-f72.google.com with SMTP id n9so4494232wru.20
- for <qemu-riscv@nongnu.org>; Fri, 22 May 2020 08:15:36 -0700 (PDT)
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ce7vwIQ/1ZeC11tqPgLtvrw+eu2OuNpc1sn0JnggcMk=;
+ b=f5Oukqh9/kzUCKUfEGvFiaaEawPwybGTwjpClMjhCcaDrYx+euBOk2yhVqg431J1qLVSY/
+ WdMt068OyEemj2YU4XiCHudHJhD6aPe+Nt1QScwH9DuRmrIxhmANOBPFOyTM/vd0IPWE5h
+ V2IyGbPtA6oQFSiuPS2dKTWfgcH8D90=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-484-H5EwZ0ycNf6MV5B1GGZbsw-1; Fri, 22 May 2020 13:25:16 -0400
+X-MC-Unique: H5EwZ0ycNf6MV5B1GGZbsw-1
+Received: by mail-wm1-f71.google.com with SMTP id t82so2914432wmf.4
+ for <qemu-riscv@nongnu.org>; Fri, 22 May 2020 10:25:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:autocrypt
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-language:content-transfer-encoding;
- bh=bgwxBnm8VD+Y/kxKW7/OF/c/OhXh/FcLyD2iTqVqTJ8=;
- b=jt2pHwnMpmzvjYK8cIhigMZ/WrcG/XmFwYpQjinWFw0p2IeBjb65om19SEv3w2lJlq
- aR/IxfsuDtk7zGOl3S9B8v0deW63Kb/eWDIvsg1tReSJRT0gs0k2T5GZDtAUKNSi4kZW
- y9HAhivTAe4kWpq/F4Au7CRU4okVG/NfJRFSZUNS5lNt7L3nHLHqAcFCQVL4bylqSdsA
- 3ZjJufgQQ42pNBdZEJFsAGgSPLb0ca0hTEgHPAzIkLj9N3Lh9iLuTNPX7LL0+ZrDWdmV
- /JCa6vAT0hR1KXxPyCJkyrGQ30aHzQCoexL4aFreL8ur/NrCpR0z2lpFjDAR75YbC0Xv
- gaXw==
-X-Gm-Message-State: AOAM533clm3c9SSd8/lCqUwjBvTgV4fXZxs6kC3Grdm+2+A6qbD6Q0lj
- LZYrGTjVnoZk9nORgIup8Ri1r8yiXul4i1Rg72aUVcwA1IqlXf9aDUCkAVoSjwkaA3SE0tFH4Fz
- qWrWDVnba9be8TsE=
-X-Received: by 2002:a5d:40d2:: with SMTP id b18mr1546085wrq.131.1590160535591; 
- Fri, 22 May 2020 08:15:35 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzWRWgt4hKN9BR9l5oRJE0HSIwZzKGuRBNwKc9iewD/J/v1TtHDYT+PIxoYnE10EOY0ydbgyw==
-X-Received: by 2002:a5d:40d2:: with SMTP id b18mr1546051wrq.131.1590160535216; 
- Fri, 22 May 2020 08:15:35 -0700 (PDT)
-Received: from [192.168.1.38] (17.red-88-21-202.staticip.rima-tde.net.
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ce7vwIQ/1ZeC11tqPgLtvrw+eu2OuNpc1sn0JnggcMk=;
+ b=C5T7eAZOLjOwGgUhZkQ678P+EpEyc8X2f5NK5o8YeAeuVidIpfRDfaF7PPKKwV8tF1
+ SpJDBllkbQ5+iSqVY8+aWsp+mIXHx5mDQ9XM9XUNVRXMa8ONfXQqJlLBgBRNzD/2096B
+ mHwTfTCdK0Jmu13ff/pg1YaiwKxEp15k+emEY1HyoAKCU12U2McTKXVA0en972OWKS0C
+ PLrEeZicN2v+DxkUEjrLeSG9c3yAMNgjGumUkVOCvtGiEMGjAjt1/HE6us3sQSYMSFqi
+ MAaqzVhL5KMEAKYTx2QKG5xUUvCpubckY3v8Er+HTichu3qX6qac6MS5tnvdqsWtq04C
+ NC1g==
+X-Gm-Message-State: AOAM5320g7EyW6xDRUBWGg4ArpTN8U5K2RaJKLHGaGYZehXpWLp4JsIj
+ PmZJFT8pyOJWlhVNhWHoBveeIZKeeqvsk4kOAksLAjsVMM3L6pvJJc6ZRFSqBaRHrd11w3wpCg4
+ FpRalm6l3NJh2ZO0=
+X-Received: by 2002:adf:8b47:: with SMTP id v7mr4023293wra.238.1590168313371; 
+ Fri, 22 May 2020 10:25:13 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJw5AaGrh13hJG8N4Mlym85bdOO8V3LNiw21Bv2sTklQf051BbLKGaJpXa+FDGTS1ecnxj0l4w==
+X-Received: by 2002:adf:8b47:: with SMTP id v7mr4023266wra.238.1590168313010; 
+ Fri, 22 May 2020 10:25:13 -0700 (PDT)
+Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
  [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id r9sm9719735wmg.47.2020.05.22.08.15.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 May 2020 08:15:34 -0700 (PDT)
-Subject: Re: [PATCH v3 09/11] rules.mak: Add base-arch() rule
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: Marek Vasut <marex@denx.de>, Peter Maydell <peter.maydell@linaro.org>,
- Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Chris Wulff <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
- Max Filippov <jcmvbkbc@gmail.com>, Michael Walle <michael@walle.cc>,
- qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
+ by smtp.gmail.com with ESMTPSA id x10sm10422397wrn.54.2020.05.22.10.25.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 May 2020 10:25:12 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Cornelia Huck <cohuck@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, David Hildenbrand <david@redhat.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Richard Henderson <rth@twiddle.net>
-References: <20200521195911.19685-1-philmd@redhat.com>
- <20200521195911.19685-10-philmd@redhat.com>
- <ccd78343-795e-8874-e4f3-bb6861ea64f0@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Autocrypt: addr=philmd@redhat.com; keydata=
- mQINBDXML8YBEADXCtUkDBKQvNsQA7sDpw6YLE/1tKHwm24A1au9Hfy/OFmkpzo+MD+dYc+7
- bvnqWAeGweq2SDq8zbzFZ1gJBd6+e5v1a/UrTxvwBk51yEkadrpRbi+r2bDpTJwXc/uEtYAB
- GvsTZMtiQVA4kRID1KCdgLa3zztPLCj5H1VZhqZsiGvXa/nMIlhvacRXdbgllPPJ72cLUkXf
- z1Zu4AkEKpccZaJspmLWGSzGu6UTZ7UfVeR2Hcc2KI9oZB1qthmZ1+PZyGZ/Dy+z+zklC0xl
- XIpQPmnfy9+/1hj1LzJ+pe3HzEodtlVA+rdttSvA6nmHKIt8Ul6b/h1DFTmUT1lN1WbAGxmg
- CH1O26cz5nTrzdjoqC/b8PpZiT0kO5MKKgiu5S4PRIxW2+RA4H9nq7nztNZ1Y39bDpzwE5Sp
- bDHzd5owmLxMLZAINtCtQuRbSOcMjZlg4zohA9TQP9krGIk+qTR+H4CV22sWldSkVtsoTaA2
- qNeSJhfHQY0TyQvFbqRsSNIe2gTDzzEQ8itsmdHHE/yzhcCVvlUzXhAT6pIN0OT+cdsTTfif
- MIcDboys92auTuJ7U+4jWF1+WUaJ8gDL69ThAsu7mGDBbm80P3vvUZ4fQM14NkxOnuGRrJxO
- qjWNJ2ZUxgyHAh5TCxMLKWZoL5hpnvx3dF3Ti9HW2dsUUWICSQARAQABtDJQaGlsaXBwZSBN
- YXRoaWV1LURhdWTDqSAoUGhpbCkgPHBoaWxtZEByZWRoYXQuY29tPokCVQQTAQgAPwIbDwYL
- CQgHAwIGFQgCCQoLBBYCAwECHgECF4AWIQSJweePYB7obIZ0lcuio/1u3q3A3gUCXsfWwAUJ
- KtymWgAKCRCio/1u3q3A3ircD/9Vjh3aFNJ3uF3hddeoFg1H038wZr/xi8/rX27M1Vj2j9VH
- 0B8Olp4KUQw/hyO6kUxqkoojmzRpmzvlpZ0cUiZJo2bQIWnvScyHxFCv33kHe+YEIqoJlaQc
- JfKYlbCoubz+02E2A6bFD9+BvCY0LBbEj5POwyKGiDMjHKCGuzSuDRbCn0Mz4kCa7nFMF5Jv
- piC+JemRdiBd6102ThqgIsyGEBXuf1sy0QIVyXgaqr9O2b/0VoXpQId7yY7OJuYYxs7kQoXI
- 6WzSMpmuXGkmfxOgbc/L6YbzB0JOriX0iRClxu4dEUg8Bs2pNnr6huY2Ft+qb41RzCJvvMyu
- gS32LfN0bTZ6Qm2A8ayMtUQgnwZDSO23OKgQWZVglGliY3ezHZ6lVwC24Vjkmq/2yBSLakZE
- 6DZUjZzCW1nvtRK05ebyK6tofRsx8xB8pL/kcBb9nCuh70aLR+5cmE41X4O+MVJbwfP5s/RW
- 9BFSL3qgXuXso/3XuWTQjJJGgKhB6xXjMmb1J4q/h5IuVV4juv1Fem9sfmyrh+Wi5V1IzKI7
- RPJ3KVb937eBgSENk53P0gUorwzUcO+ASEo3Z1cBKkJSPigDbeEjVfXQMzNt0oDRzpQqH2vp
- apo2jHnidWt8BsckuWZpxcZ9+/9obQ55DyVQHGiTN39hkETy3Emdnz1JVHTU0Q==
-Message-ID: <c96d1032-d702-c957-f85b-82ac4663c859@redhat.com>
-Date: Fri, 22 May 2020 17:15:33 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Paolo Bonzini <pbonzini@redhat.com>, Richard Henderson <rth@twiddle.net>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Subject: [PATCH v4 00/13] user-mode: Prune build dependencies (part 1)
+Date: Fri, 22 May 2020 19:24:57 +0200
+Message-Id: <20200522172510.25784-1-philmd@redhat.com>
+X-Mailer: git-send-email 2.21.3
 MIME-Version: 1.0
-In-Reply-To: <ccd78343-795e-8874-e4f3-bb6861ea64f0@linaro.org>
-Content-Language: en-US
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=UTF-8;
+	text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=205.139.110.61; envelope-from=philmd@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/22 11:11:51
+Received-SPF: pass client-ip=205.139.110.120; envelope-from=philmd@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/22 10:36:44
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -127,34 +94,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2020 15:15:41 -0000
+X-List-Received-Date: Fri, 22 May 2020 17:25:23 -0000
 
-On 5/22/20 6:24 AM, Richard Henderson wrote:
-> On 5/21/20 12:59 PM, Philippe Mathieu-Daudé wrote:
->> +		$(if $(findstring risc,$1),risc,\
-> 
-> Eh?  riscv{32,64} vs openrisc.
+This is the first part of a series reducing user-mode
+dependencies. By stripping out unused code, the build
+and testing time is reduced (as is space used by objects).
 
-Nice catch, because with this patch openrisc builds with a riscv
-config-devices.h =)
+Part 1 (generic):
+- reduce user-mode object list
+- remove some migration code from user-mode
+- remove cpu_get_crash_info()
 
-> 
->> +		$(if $(findstring x86,$1),i386,\
-> 
-> Do we really not need an exact match for x86_64?
+Patches 1-12 are fully reviewed.
 
-OK.
+Since v3:
+- Rebased due to (trivial) conflicts after:
+  . commit 2df9f5718df7722924699a3754f99165e2f4ae35
+    ui/win32-kbd-hook: handle AltGr in a hook procedure
+  . commit b69c3c21a5d11075d42100d5cfe0a736593fae6b
+    qdev: Unrealize must not fail
+  . commit d2623129a7dec1d3041ad1221dda1ca49c667532
+    qom: Drop parameter @errp of object_property_add() & friends
+- Added patch #13 'Restrict ui/win32-kbd-hook to system-mode'
 
-> 
->> +		$(if $(findstring aarch64,$1),arm,$1)))))))
-> 
-> Exact match?
+Since v2:
+- Rebased due to conflict when applying patch:
+  "util/Makefile: Reduce the user-mode object list"
+  because commit 01ef6b9e4e modified util/Makefile.objs:
+  "linux-user: factor out reading of /proc/self/maps"
 
-OK.
+Since v1:
+- Addressed Laurent/Richard review comments
+- Removed 'exec: Drop redundant #ifdeffery'
+- Removed 'target: Restrict write_elfXX_note() handlers to system-mode'
 
-> 
-> 
-> r~
-> 
+$ git backport-diff -u v2 -r v3
+Key:
+[----] : patches are identical
+[####] : number of functional differences between upstream/downstream patch
+[down] : patch is downstream-only
+The flags [FC] indicate (F)unctional and (C)ontextual differences, respectively
+
+001/13:[----] [--] 'Makefile: Only build virtiofsd if system-mode is enabled'
+002/13:[----] [--] 'configure: Avoid building TCG when not needed'
+003/13:[----] [--] 'tests/Makefile: Only display TCG-related tests when TCG is available'
+004/13:[----] [--] 'tests/Makefile: Restrict some softmmu-only tests'
+005/13:[----] [--] 'util/Makefile: Reduce the user-mode object list'
+006/13:[----] [-C] 'stubs/Makefile: Reduce the user-mode object list'
+007/13:[----] [--] 'target/riscv/cpu: Restrict CPU migration to system-mode'
+008/13:[----] [--] 'exec: Assert CPU migration is not used on user-only build'
+009/13:[----] [--] 'arch_init: Remove unused 'qapi-commands-misc.h' include'
+010/13:[----] [-C] 'target/i386: Restrict CpuClass::get_crash_info() to system-mode'
+011/13:[----] [-C] 'target/s390x: Restrict CpuClass::get_crash_info() to system-mode'
+012/13:[----] [--] 'hw/core: Restrict CpuClass::get_crash_info() to system-mode'
+013/13:[down] 'stubs: Restrict ui/win32-kbd-hook to system-mode'
+
+Philippe Mathieu-Daudé (13):
+  Makefile: Only build virtiofsd if system-mode is enabled
+  configure: Avoid building TCG when not needed
+  tests/Makefile: Only display TCG-related tests when TCG is available
+  tests/Makefile: Restrict some softmmu-only tests
+  util/Makefile: Reduce the user-mode object list
+  stubs/Makefile: Reduce the user-mode object list
+  target/riscv/cpu: Restrict CPU migration to system-mode
+  exec: Assert CPU migration is not used on user-only build
+  arch_init: Remove unused 'qapi-commands-misc.h' include
+  target/i386: Restrict CpuClass::get_crash_info() to system-mode
+  target/s390x: Restrict CpuClass::get_crash_info() to system-mode
+  hw/core: Restrict CpuClass::get_crash_info() to system-mode
+  stubs: Restrict ui/win32-kbd-hook to system-mode
+
+ configure              |  4 +++
+ Makefile               |  2 +-
+ include/hw/core/cpu.h  |  7 ++++-
+ arch_init.c            |  1 -
+ exec.c                 |  4 ++-
+ hw/core/cpu.c          |  2 ++
+ target/i386/cpu.c      |  6 ++++-
+ target/riscv/cpu.c     |  6 +++--
+ target/s390x/cpu.c     | 12 ++++-----
+ stubs/Makefile.objs    | 54 ++++++++++++++++++++++----------------
+ tests/Makefile.include | 18 +++++++------
+ util/Makefile.objs     | 59 +++++++++++++++++++++++++++---------------
+ 12 files changed, 109 insertions(+), 66 deletions(-)
+
+-- 
+2.21.3
 
 
