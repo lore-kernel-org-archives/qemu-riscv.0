@@ -1,92 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jcBR9-0006S7-Bq
-	for mharc-qemu-riscv@gnu.org; Fri, 22 May 2020 13:26:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47876)
+	id 1jdcuy-0007Yu-Jd
+	for mharc-qemu-riscv@gnu.org; Tue, 26 May 2020 12:59:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59204)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jcBR7-0006N2-Mo
- for qemu-riscv@nongnu.org; Fri, 22 May 2020 13:26:21 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:31732
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jcBR5-0002Fx-JL
- for qemu-riscv@nongnu.org; Fri, 22 May 2020 13:26:21 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590168378;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xzyCO16+5RviPogg4wPbJiKI85apokjUkaWsspBCPSs=;
- b=SXKwCWlkUzxb9XFCLYqoVlp4SGexrngYVKQfISJ1xmT+tu3TaIQihNUY/kEFiBkOKJ07rA
- R4EdlJ7yh1nQEhYDeZYlyXY+GikdCwoVhNiJ91nVBxkmcyk2qIWBYKLZT7DKUtMUtkSjgo
- u2fDWkebuYfAulhHTD3Yo42GLAz3s14=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-230-WhnUcrdlMS6RmjN6dUH1ew-1; Fri, 22 May 2020 13:26:17 -0400
-X-MC-Unique: WhnUcrdlMS6RmjN6dUH1ew-1
-Received: by mail-wr1-f70.google.com with SMTP id f4so1951028wrp.21
- for <qemu-riscv@nongnu.org>; Fri, 22 May 2020 10:26:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jdcuw-0007WY-8P; Tue, 26 May 2020 12:59:06 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:33707)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jdcut-0005FF-JQ; Tue, 26 May 2020 12:59:05 -0400
+Received: by mail-il1-x143.google.com with SMTP id y17so18971262ilg.0;
+ Tue, 26 May 2020 09:59:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=4KcvRCTJBZ1bnes7UmDOjJu5yTIQC/Pznn9vGduLt18=;
+ b=M6cN7P2YV39c5/vdkW5tKQ5Nr1j4jI4/rSEDKMeCxIvc+fgvJR775GBYVRkdbr8RQm
+ oII0iYiwGLLRy8atxtwq9b7nh9T4593qER+1i2vmNtHp2D4qaOxAIa5FalHiwxTWhVJt
+ dxRHDWaZSEM+WfkNkwLgaointBusOeqSceQRAy/qoniu7gmhDMMUqiTH9/JwFLuGm2ks
+ tpZk4uFKdmLzOObkUI/ssI0fPxD7VeWw+2dfqcavZtYGs0HxYfgKOwpggSmnshyeEyhi
+ 1xchI6y5/RrdBOWyB3s2IUzB6sGdf2APoLUGRuS8N4pMqVfLwbhmd0iI7zH1ZjyMywPQ
+ Z15w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=xzyCO16+5RviPogg4wPbJiKI85apokjUkaWsspBCPSs=;
- b=q1+AANKE/zwLPQ6uJji/RTDUy3OeJyCTYvcev/pFLlROX84lE3qO9di+n4uYEFNnUT
- X3ijQZ53gj37+ExlSQEgNKZVPbR/LCcwyMEO/k5GEKPwkngpEOF0QugEy3B8ZvPyo26K
- VktgRm2phtkaqCNmlSX5d+HNexcz1HVAJaGt0gg8OKrlfRBG1E6ZcYyw3orMKRLqHmxY
- a+NDMj5v9MrKRnW2Tu+v5tUSUokcR+hRB9307qlsuBV9XDK1n+mu8/oYwNyjzzm8P7e3
- iTOhrvuSsr/5RJ0z8gn6BTQ2dnqx/Pll57AUCmKQjpuIpz0wpzgH7+k38Sfn6xH7wEFe
- E+Rg==
-X-Gm-Message-State: AOAM532FVZHSvQ6GoiOeK7qQuF6Tic/85gLOTT6agntFUWAZ950CQUDH
- 37IaKZxk/Tuax1Qee7k/gcqzbBaZkALUkuqcpa1dNBvTOVEtEUahflYHXxHgiR+Sc3yPeNR0XfT
- Bg7NhB9ZzlIiKehA=
-X-Received: by 2002:a5d:5682:: with SMTP id f2mr4052280wrv.382.1590168376120; 
- Fri, 22 May 2020 10:26:16 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx7XwVQFkjIva/AMLjP3gw8uCZWFWC/IKnTFQiIcY1lLZG4Q16GQSx0wMepR3SdEsRAPzQJDw==
-X-Received: by 2002:a5d:5682:: with SMTP id f2mr4052267wrv.382.1590168375908; 
- Fri, 22 May 2020 10:26:15 -0700 (PDT)
-Received: from localhost.localdomain (17.red-88-21-202.staticip.rima-tde.net.
- [88.21.202.17])
- by smtp.gmail.com with ESMTPSA id c140sm10543216wmd.18.2020.05.22.10.26.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 May 2020 10:26:15 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Cornelia Huck <cohuck@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, David Hildenbrand <david@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Richard Henderson <rth@twiddle.net>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- =?UTF-8?q?Volker=20R=C3=BCmelin?= <vr_qemu@t-online.de>,
- Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PATCH v4 13/13] stubs: Restrict ui/win32-kbd-hook to system-mode
-Date: Fri, 22 May 2020 19:25:10 +0200
-Message-Id: <20200522172510.25784-14-philmd@redhat.com>
-X-Mailer: git-send-email 2.21.3
-In-Reply-To: <20200522172510.25784-1-philmd@redhat.com>
-References: <20200522172510.25784-1-philmd@redhat.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=4KcvRCTJBZ1bnes7UmDOjJu5yTIQC/Pznn9vGduLt18=;
+ b=HnyeHCe9nB7cAIpNfTZJ3wIjJ3VSo0GhCErcrGb1UeZlrpuNjGOC9ZHhloN+DPQ6GE
+ BQ4limtdovxZ1K7ZOE2kQeJv2xprP7dg7trG/EXC0EBDsky8oRoWiWDKewpwfwU1pWcc
+ CNorJ0FzqJgfgFZbECrJ+TUAIUx5gQvxbJ1aAoFL/hfZ4WG+TCYBa9PrtkjLiuXoiyXA
+ N5I5Pesaqz/FddF7QefA9ZiDCPVhienqWu88qkqR1zNJtZjqH8FEKWdVEitUN2mn2hyk
+ 53Pv84jVhugdnIzZ6l79/ZXLGqQRuJJ1eyH8sMfZ8jit69Tg9xzzyvpqCRMINKtCs+yD
+ w30g==
+X-Gm-Message-State: AOAM530hM5tvBnQOXMkfk034BOr05mbS5Fy1Qw3u92PM8X9EB29mjTv9
+ nwTIjMfLVPjiSzZOpTeoQnWeA0H+q9JUFgRDEJE=
+X-Google-Smtp-Source: ABdhPJyrEAeXglCooAotgLWpPz9BfAJCdoBvhNKqQSuZCoQtC4ktsAU70+WeU5N9/m0e20NVAVku95oh+Cl9Yhyow9E=
+X-Received: by 2002:a92:d087:: with SMTP id h7mr2171135ilh.227.1590512341154; 
+ Tue, 26 May 2020 09:59:01 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8;
-	text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=205.139.110.120; envelope-from=philmd@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/22 10:36:44
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_PASS=-0.001 autolearn=_AUTOLEARN
+References: <1590072147-13035-1-git-send-email-bmeng.cn@gmail.com>
+ <1590072147-13035-2-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1590072147-13035-2-git-send-email-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 26 May 2020 09:50:01 -0700
+Message-ID: <CAKmqyKPvWsFRWZ=J0egmzJUCZ9e2O-yKJk3sgd196CuOey=OnQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw/riscv: virt: Remove the riscv_ prefix of the
+ machine* functions
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -99,42 +78,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2020 17:26:22 -0000
+X-List-Received-Date: Tue, 26 May 2020 16:59:07 -0000
 
-In Makefile.objs, the ui/ directory is restricted to system-mode:
+On Thu, May 21, 2020 at 7:42 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> Remove the riscv_ prefix of the machine* functions.
+>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
- 43 ifeq ($(CONFIG_SOFTMMU),y)
- ...
- 65 common-obj-y += ui/
- 66 common-obj-m += ui/
- ...
- 82 endif # CONFIG_SOFTMMU
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Restrict the ui/ stub added in commit 2df9f5718df to only build
-it for system-mode emulation.
+Alistair
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
----
-Cc: Volker Rümelin <vr_qemu@t-online.de>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
----
- stubs/Makefile.objs | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/stubs/Makefile.objs b/stubs/Makefile.objs
-index f54125de31..c1e43ac68f 100644
---- a/stubs/Makefile.objs
-+++ b/stubs/Makefile.objs
-@@ -23,7 +23,7 @@ stub-obj-y += sysbus.o
- stub-obj-y += tpm.o
- stub-obj-y += trace-control.o
- stub-obj-y += vmstate.o
--stub-obj-y += win32-kbd-hook.o
-+stub-obj-$(CONFIG_SOFTMMU) += win32-kbd-hook.o
- 
- #######################################################################
- # code used by both qemu system emulation and qemu-img
--- 
-2.21.3
-
+> ---
+>
+>  hw/riscv/virt.c | 20 ++++++++++----------
+>  1 file changed, 10 insertions(+), 10 deletions(-)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index c695a44..f1d6b61 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -471,7 +471,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+>      return dev;
+>  }
+>
+> -static void riscv_virt_board_init(MachineState *machine)
+> +static void virt_machine_init(MachineState *machine)
+>  {
+>      const struct MemmapEntry *memmap = virt_memmap;
+>      RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
+> @@ -632,32 +632,32 @@ static void riscv_virt_board_init(MachineState *machine)
+>      g_free(plic_hart_config);
+>  }
+>
+> -static void riscv_virt_machine_instance_init(Object *obj)
+> +static void virt_machine_instance_init(Object *obj)
+>  {
+>  }
+>
+> -static void riscv_virt_machine_class_init(ObjectClass *oc, void *data)
+> +static void virt_machine_class_init(ObjectClass *oc, void *data)
+>  {
+>      MachineClass *mc = MACHINE_CLASS(oc);
+>
+>      mc->desc = "RISC-V VirtIO board";
+> -    mc->init = riscv_virt_board_init;
+> +    mc->init = virt_machine_init;
+>      mc->max_cpus = 8;
+>      mc->default_cpu_type = VIRT_CPU;
+>      mc->pci_allow_0_address = true;
+>  }
+>
+> -static const TypeInfo riscv_virt_machine_typeinfo = {
+> +static const TypeInfo virt_machine_typeinfo = {
+>      .name       = MACHINE_TYPE_NAME("virt"),
+>      .parent     = TYPE_MACHINE,
+> -    .class_init = riscv_virt_machine_class_init,
+> -    .instance_init = riscv_virt_machine_instance_init,
+> +    .class_init = virt_machine_class_init,
+> +    .instance_init = virt_machine_instance_init,
+>      .instance_size = sizeof(RISCVVirtState),
+>  };
+>
+> -static void riscv_virt_machine_init_register_types(void)
+> +static void virt_machine_init_register_types(void)
+>  {
+> -    type_register_static(&riscv_virt_machine_typeinfo);
+> +    type_register_static(&virt_machine_typeinfo);
+>  }
+>
+> -type_init(riscv_virt_machine_init_register_types)
+> +type_init(virt_machine_init_register_types)
+> --
+> 2.7.4
+>
+>
 
