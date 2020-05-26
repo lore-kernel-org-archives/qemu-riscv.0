@@ -1,69 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jddGx-00047k-85
-	for mharc-qemu-riscv@gnu.org; Tue, 26 May 2020 13:21:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55724)
+	id 1jdiU9-000070-Sf
+	for mharc-qemu-riscv@gnu.org; Tue, 26 May 2020 18:55:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54528)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jddGv-00045N-Fa; Tue, 26 May 2020 13:21:49 -0400
-Received: from mail-qv1-xf43.google.com ([2607:f8b0:4864:20::f43]:43768)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jddGt-00035U-3i; Tue, 26 May 2020 13:21:49 -0400
-Received: by mail-qv1-xf43.google.com with SMTP id p4so9788502qvr.10;
- Tue, 26 May 2020 10:21:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rfhEu2/oNqQE5WDQwIAA7dbm11DIeiZ4FvNlqTbYMfw=;
- b=XprSvSI1JEqr9onlhtGpkyzDMnGVOHUm4oBo84Ih6fEnCaL3SzYWf4Ut6Krvbmi2AM
- /8+A+DTvuTiZ0W9UPs1sfK8ZHNJSRu8vzST88Hg7SNqan4l36uyCNbuVgjJJgxNpZvGm
- XwuDFVsjt9Zey30/yXnnRIpU0qnZn08JEGVtRHMVekmMz26bT1LfvAXBoVxCIrrN4cdt
- 55TRH3NAXXRqD6VwKbGpBUX7j1ElpCUeSOwhnn0M840pSQAxEEsNONbVMng8S/TWIM18
- D4K+RXLwd6lJhJB9O2M+snvZHfy0YFUbBtZeezrqbKm8hDqyIxpTKW2x0ZMSE82KlSwD
- mcQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=rfhEu2/oNqQE5WDQwIAA7dbm11DIeiZ4FvNlqTbYMfw=;
- b=l0Fpoll9xtzmpQRKcDTUQ4WFCPx04WxaR/gSVGykgJgsNt+xD+Um3A/5PK9DqzOe19
- yewsQxuf1AEtUGGWncEUvVnDu7krT9r01QVUbZl4gz0iciFxC3FrLDiJhXzXrtV49Gw4
- 9MiLOdmXTITZhK4OSJo8204bGlgM1s9+qHL8IhNSXlwpdfGrkwxWw96sce1Vn8c2QUC3
- Hk8ntLoTGXtrvRJnkg4kVGqLaZzH7NmAMkiLbisLrLQ5cUqNv7VL0GfN/0qKaFmjkBCZ
- zYGK9Yoa0RbwFk/Fs1JH4+E8puuHfpSn5C8REeQIrhCQ6oeVRn7NMWQb3/TGgH47dU2A
- WWHg==
-X-Gm-Message-State: AOAM532atddddca1X/alOFMVMhDRe5tn3LX9mneC7bMRFfPt00Q+qGsM
- q/XhA+dNzQjbtocqAJLaTfsFVw1kVRpVVXk3KCo=
-X-Google-Smtp-Source: ABdhPJzvbAdnbFaYuQv/Hrevs3yN0RMwZFbuBHQMoxDGe51tgPKcXVjDYYU9NFZk2n9bQw30EImb25ayGpb6FaxYGYo=
-X-Received: by 2002:ad4:4c4f:: with SMTP id
- cs15mr20147468qvb.117.1590513705353; 
- Tue, 26 May 2020 10:21:45 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=408db4441=alistair.francis@wdc.com>)
+ id 1jdiU8-00006c-Q9; Tue, 26 May 2020 18:55:48 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:42587)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=408db4441=alistair.francis@wdc.com>)
+ id 1jdiU6-0007Re-JJ; Tue, 26 May 2020 18:55:48 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1590533746; x=1622069746;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=fzZcyslQI6KeaUWAgRQ+6LVqNsMlrxqDxWIJHPtmP5Y=;
+ b=Mz0sm5ZuTuc9WnpdyCgJ3iKbIx34fSi5qF3G8R8H2bRFrI3I+M8TBSfE
+ 8lEogDOVo31UqiH0kzeVEn+zsWGqOM5kUCOGdENcMEHGgZi2+8zE2NJtE
+ T4mCj+u490BCDWVfqj93qm/1GdsGxDyuMr6s9zevDFW3YpZ+HZ2dL9DSu
+ r9mXHj7sYHDFGmJMY06/y7hkaqlhZ2C2lF+6EWip6UJ6bUq41Bl1M1FxQ
+ oBBhXm1Sk9RdM6mzqT3hDvlQanAn1U6ZTKVvpDUM22Uolt1HMdDdgpNPP
+ YKAeUx6y07lz7a21jtrUXe2h20jpOee1SbkY1LfI6CG2AfG0OoABi6156 g==;
+IronPort-SDR: QMxQhUXY8Ufs0W9wq6kneGCdrmFZN3NkIGM+ydbh2jCvDK3vnYhl7t/2gXMJ+bjmDaxsEpUs+b
+ nu6a0bZI84GjJ3zpMtFEMxU2jAz78nTvjcrNXIDYaxa7x30mBOkVIqVmgagn+m+5AactCCdcCl
+ mAA4um8FxzjSuA6C1YZh30IRgPFxpH3/yp9MHMKn80qZujFQBCV8gep+Q+gVcuZS8A2UjqNIZE
+ Ka5vS2jwcWHiaGb9wnOvhmPL7qY82gWxN/Y3o5Bn2oQrOv30apHD50McEPz3RXqHkXljxFXttr
+ Rms=
+X-IronPort-AV: E=Sophos;i="5.73,439,1583164800"; d="scan'208";a="139996081"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 27 May 2020 06:55:43 +0800
+IronPort-SDR: niMngwJA/EmXFX3wLMPH4f80wKWh509Ijw/T1K7v3qyhB4UBkNxMpvaJu4QAAdTFOB6V1jJoqY
+ mUNSi82/kBmJ0KcKT4I10tXFES43+v894=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 26 May 2020 15:45:35 -0700
+IronPort-SDR: FclHGOg3ygxwHgbeO8Z+kfXraA2UTqjXbSuBWoPqH2Uw4TbRKRXmihHuh5cZiGw71t4ydtowtJ
+ th8sWXV6FQ2g==
+WDCIronportException: Internal
+Received: from 71vjjc2.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.57.96])
+ by uls-op-cesaip01.wdc.com with ESMTP; 26 May 2020 15:55:42 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
+ philmd@redhat.com, bmeng.cn@gmail.com
+Subject: [PATCH v3 1/3] hw/riscv: spike: Remove deprecated ISA specific
+ machines
+Date: Tue, 26 May 2020 15:47:10 -0700
+Message-Id: <a46e511b35a4459065528490b5d9716512986134.1590533156.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <cover.1590533156.git.alistair.francis@wdc.com>
+References: <cover.1590533156.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-References: <cover.1589923785.git.alistair.francis@wdc.com>
- <24ba2634ff761e7a1e6b28b15929b03db3f59008.1589923785.git.alistair.francis@wdc.com>
- <2c695b2b-a292-61ff-bd2b-5f2ff2b48271@c-sky.com>
-In-Reply-To: <2c695b2b-a292-61ff-bd2b-5f2ff2b48271@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 26 May 2020 10:12:45 -0700
-Message-ID: <CAKmqyKMKGpNT+RRnNWCTzVjYppEpE+T2DZVDFiVcvnecYtu2kQ@mail.gmail.com>
-Subject: Re: [PATCH v3 3/9] target/riscv: Add the lowRISC Ibex CPU
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f43;
- envelope-from=alistair23@gmail.com; helo=mail-qv1-xf43.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.154.45;
+ envelope-from=prvs=408db4441=alistair.francis@wdc.com;
+ helo=esa6.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/26 18:55:40
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -77,93 +82,271 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 May 2020 17:21:49 -0000
+X-List-Received-Date: Tue, 26 May 2020 22:55:49 -0000
 
-On Fri, May 22, 2020 at 12:51 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->
->
->
-> On 2020/5/20 5:31, Alistair Francis wrote:
-> > Ibex is a small and efficient, 32-bit, in-order RISC-V core with
-> > a 2-stage pipeline that implements the RV32IMC instruction set
-> > architecture.
-> >
-> > For more details on lowRISC see here:
-> > https://github.com/lowRISC/ibex
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > Reviewed-by: Bin Meng <bin.meng@windriver.com>
-> > ---
-> >   target/riscv/cpu.h |  1 +
-> >   target/riscv/cpu.c | 10 ++++++++++
-> >   2 files changed, 11 insertions(+)
-> >
-> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > index d0e7f5b9c5..8733d7467f 100644
-> > --- a/target/riscv/cpu.h
-> > +++ b/target/riscv/cpu.h
-> > @@ -35,6 +35,7 @@
-> >   #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
-> >   #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
-> >   #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
-> > +#define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
-> >   #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
-> >   #define TYPE_RISCV_CPU_SIFIVE_E34       RISCV_CPU_TYPE_NAME("sifive-e34")
-> >   #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 5eb3c02735..eb2bbc87ae 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -156,6 +156,15 @@ static void rv32gcsu_priv1_10_0_cpu_init(Object *obj)
-> >       set_feature(env, RISCV_FEATURE_PMP);
-> >   }
-> >
-> > +static void rv32imcu_nommu_cpu_init(Object *obj)
-> > +{
-> > +    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> > +    set_misa(env, RV32 | RVI | RVM | RVC | RVU);
-> > +    set_priv_version(env, PRIV_VERSION_1_10_0);
-> > +    set_resetvec(env, 0x8090);
-> Hi Alistair,
->
-> I see all RISC-V cpus  have an reset vector which acts as the first pc
-> when machine boots up.
-> However, the first pc is more like an attribute of a machine, not a cpu.
+The ISA specific Spike machines have been deprecated in QEMU since 4.1,
+let's finally remove them.
 
-In general it seems to be a CPU property. I assume that some CPUs
-would allow the reset vector to be selectable though, in which case it
-becomes a board property.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
+---
+ include/hw/riscv/spike.h |   6 +-
+ hw/riscv/spike.c         | 217 ---------------------------------------
+ 2 files changed, 2 insertions(+), 221 deletions(-)
 
->
-> Another reason is that the cpu names are a combination of ISA.
-> Then the cpus from different vendors may have same ISA, with different
-> reset vectors.
->
-> Do you think so?
+diff --git a/include/hw/riscv/spike.h b/include/hw/riscv/spike.h
+index dc770421bc..1cd72b85d6 100644
+--- a/include/hw/riscv/spike.h
++++ b/include/hw/riscv/spike.h
+@@ -39,11 +39,9 @@ enum {
+ };
+ 
+ #if defined(TARGET_RISCV32)
+-#define SPIKE_V1_09_1_CPU TYPE_RISCV_CPU_RV32GCSU_V1_09_1
+-#define SPIKE_V1_10_0_CPU TYPE_RISCV_CPU_RV32GCSU_V1_10_0
++#define SPIKE_V1_10_0_CPU TYPE_RISCV_CPU_BASE32
+ #elif defined(TARGET_RISCV64)
+-#define SPIKE_V1_09_1_CPU TYPE_RISCV_CPU_RV64GCSU_V1_09_1
+-#define SPIKE_V1_10_0_CPU TYPE_RISCV_CPU_RV64GCSU_V1_10_0
++#define SPIKE_V1_10_0_CPU TYPE_RISCV_CPU_BASE64
+ #endif
+ 
+ #endif
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index d0c4843712..7bbbdb5036 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -257,221 +257,6 @@ static void spike_board_init(MachineState *machine)
+         false);
+ }
+ 
+-static void spike_v1_10_0_board_init(MachineState *machine)
+-{
+-    const struct MemmapEntry *memmap = spike_memmap;
+-
+-    SpikeState *s = g_new0(SpikeState, 1);
+-    MemoryRegion *system_memory = get_system_memory();
+-    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+-    MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+-    int i;
+-    unsigned int smp_cpus = machine->smp.cpus;
+-
+-    if (!qtest_enabled()) {
+-        info_report("The Spike v1.10.0 machine has been deprecated. "
+-                    "Please use the generic spike machine and specify the ISA "
+-                    "versions using -cpu.");
+-    }
+-
+-    /* Initialize SOC */
+-    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+-                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
+-    object_property_set_str(OBJECT(&s->soc), SPIKE_V1_10_0_CPU, "cpu-type",
+-                            &error_abort);
+-    object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
+-                            &error_abort);
+-    object_property_set_bool(OBJECT(&s->soc), true, "realized",
+-                            &error_abort);
+-
+-    /* register system main memory (actual RAM) */
+-    memory_region_init_ram(main_mem, NULL, "riscv.spike.ram",
+-                           machine->ram_size, &error_fatal);
+-    memory_region_add_subregion(system_memory, memmap[SPIKE_DRAM].base,
+-        main_mem);
+-
+-    /* create device tree */
+-    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+-
+-    /* boot rom */
+-    memory_region_init_rom(mask_rom, NULL, "riscv.spike.mrom",
+-                           memmap[SPIKE_MROM].size, &error_fatal);
+-    memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
+-                                mask_rom);
+-
+-    if (machine->kernel_filename) {
+-        riscv_load_kernel(machine->kernel_filename, htif_symbol_callback);
+-    }
+-
+-    /* reset vector */
+-    uint32_t reset_vec[8] = {
+-        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
+-        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
+-        0xf1402573,                  /*     csrr   a0, mhartid  */
+-#if defined(TARGET_RISCV32)
+-        0x0182a283,                  /*     lw     t0, 24(t0) */
+-#elif defined(TARGET_RISCV64)
+-        0x0182b283,                  /*     ld     t0, 24(t0) */
+-#endif
+-        0x00028067,                  /*     jr     t0 */
+-        0x00000000,
+-        memmap[SPIKE_DRAM].base,     /* start: .dword DRAM_BASE */
+-        0x00000000,
+-                                     /* dtb: */
+-    };
+-
+-    /* copy in the reset vector in little_endian byte order */
+-    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+-        reset_vec[i] = cpu_to_le32(reset_vec[i]);
+-    }
+-    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
+-                          memmap[SPIKE_MROM].base, &address_space_memory);
+-
+-    /* copy in the device tree */
+-    if (fdt_pack(s->fdt) || fdt_totalsize(s->fdt) >
+-            memmap[SPIKE_MROM].size - sizeof(reset_vec)) {
+-        error_report("not enough space to store device-tree");
+-        exit(1);
+-    }
+-    qemu_fdt_dumpdtb(s->fdt, fdt_totalsize(s->fdt));
+-    rom_add_blob_fixed_as("mrom.fdt", s->fdt, fdt_totalsize(s->fdt),
+-                          memmap[SPIKE_MROM].base + sizeof(reset_vec),
+-                          &address_space_memory);
+-
+-    /* initialize HTIF using symbols found in load_kernel */
+-    htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(0));
+-
+-    /* Core Local Interruptor (timer and IPI) */
+-    sifive_clint_create(memmap[SPIKE_CLINT].base, memmap[SPIKE_CLINT].size,
+-        smp_cpus, SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
+-        false);
+-}
+-
+-static void spike_v1_09_1_board_init(MachineState *machine)
+-{
+-    const struct MemmapEntry *memmap = spike_memmap;
+-
+-    SpikeState *s = g_new0(SpikeState, 1);
+-    MemoryRegion *system_memory = get_system_memory();
+-    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+-    MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+-    int i;
+-    unsigned int smp_cpus = machine->smp.cpus;
+-
+-    if (!qtest_enabled()) {
+-        info_report("The Spike v1.09.1 machine has been deprecated. "
+-                    "Please use the generic spike machine and specify the ISA "
+-                    "versions using -cpu.");
+-    }
+-
+-    /* Initialize SOC */
+-    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
+-                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
+-    object_property_set_str(OBJECT(&s->soc), SPIKE_V1_09_1_CPU, "cpu-type",
+-                            &error_abort);
+-    object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
+-                            &error_abort);
+-    object_property_set_bool(OBJECT(&s->soc), true, "realized",
+-                            &error_abort);
+-
+-    /* register system main memory (actual RAM) */
+-    memory_region_init_ram(main_mem, NULL, "riscv.spike.ram",
+-                           machine->ram_size, &error_fatal);
+-    memory_region_add_subregion(system_memory, memmap[SPIKE_DRAM].base,
+-        main_mem);
+-
+-    /* boot rom */
+-    memory_region_init_rom(mask_rom, NULL, "riscv.spike.mrom",
+-                           memmap[SPIKE_MROM].size, &error_fatal);
+-    memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
+-                                mask_rom);
+-
+-    if (machine->kernel_filename) {
+-        riscv_load_kernel(machine->kernel_filename, htif_symbol_callback);
+-    }
+-
+-    /* reset vector */
+-    uint32_t reset_vec[8] = {
+-        0x297 + memmap[SPIKE_DRAM].base - memmap[SPIKE_MROM].base, /* lui */
+-        0x00028067,                   /* jump to DRAM_BASE */
+-        0x00000000,                   /* reserved */
+-        memmap[SPIKE_MROM].base + sizeof(reset_vec), /* config string pointer */
+-        0, 0, 0, 0                    /* trap vector */
+-    };
+-
+-    /* part one of config string - before memory size specified */
+-    const char *config_string_tmpl =
+-        "platform {\n"
+-        "  vendor ucb;\n"
+-        "  arch spike;\n"
+-        "};\n"
+-        "rtc {\n"
+-        "  addr 0x%" PRIx64 "x;\n"
+-        "};\n"
+-        "ram {\n"
+-        "  0 {\n"
+-        "    addr 0x%" PRIx64 "x;\n"
+-        "    size 0x%" PRIx64 "x;\n"
+-        "  };\n"
+-        "};\n"
+-        "core {\n"
+-        "  0" " {\n"
+-        "    " "0 {\n"
+-        "      isa %s;\n"
+-        "      timecmp 0x%" PRIx64 "x;\n"
+-        "      ipi 0x%" PRIx64 "x;\n"
+-        "    };\n"
+-        "  };\n"
+-        "};\n";
+-
+-    /* build config string with supplied memory size */
+-    char *isa = riscv_isa_string(&s->soc.harts[0]);
+-    char *config_string = g_strdup_printf(config_string_tmpl,
+-        (uint64_t)memmap[SPIKE_CLINT].base + SIFIVE_TIME_BASE,
+-        (uint64_t)memmap[SPIKE_DRAM].base,
+-        (uint64_t)ram_size, isa,
+-        (uint64_t)memmap[SPIKE_CLINT].base + SIFIVE_TIMECMP_BASE,
+-        (uint64_t)memmap[SPIKE_CLINT].base + SIFIVE_SIP_BASE);
+-    g_free(isa);
+-    size_t config_string_len = strlen(config_string);
+-
+-    /* copy in the reset vector in little_endian byte order */
+-    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+-        reset_vec[i] = cpu_to_le32(reset_vec[i]);
+-    }
+-    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
+-                          memmap[SPIKE_MROM].base, &address_space_memory);
+-
+-    /* copy in the config string */
+-    rom_add_blob_fixed_as("mrom.reset", config_string, config_string_len,
+-                          memmap[SPIKE_MROM].base + sizeof(reset_vec),
+-                          &address_space_memory);
+-
+-    /* initialize HTIF using symbols found in load_kernel */
+-    htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(0));
+-
+-    /* Core Local Interruptor (timer and IPI) */
+-    sifive_clint_create(memmap[SPIKE_CLINT].base, memmap[SPIKE_CLINT].size,
+-        smp_cpus, SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
+-        false);
+-
+-    g_free(config_string);
+-}
+-
+-static void spike_v1_09_1_machine_init(MachineClass *mc)
+-{
+-    mc->desc = "RISC-V Spike Board (Privileged ISA v1.9.1)";
+-    mc->init = spike_v1_09_1_board_init;
+-    mc->max_cpus = 1;
+-}
+-
+-static void spike_v1_10_0_machine_init(MachineClass *mc)
+-{
+-    mc->desc = "RISC-V Spike Board (Privileged ISA v1.10)";
+-    mc->init = spike_v1_10_0_board_init;
+-    mc->max_cpus = 1;
+-}
+-
+ static void spike_machine_init(MachineClass *mc)
+ {
+     mc->desc = "RISC-V Spike Board";
+@@ -481,6 +266,4 @@ static void spike_machine_init(MachineClass *mc)
+     mc->default_cpu_type = SPIKE_V1_10_0_CPU;
+ }
+ 
+-DEFINE_MACHINE("spike_v1.9.1", spike_v1_09_1_machine_init)
+-DEFINE_MACHINE("spike_v1.10", spike_v1_10_0_machine_init)
+ DEFINE_MACHINE("spike", spike_machine_init)
+-- 
+2.26.2
 
-If you are worried about CPUs with different vectors we could always
-make it a property in the future and have boards override it. I don't
-think we need that yet (only 1 CPU is different) but it is an easy
-future change.
-
-Alistair
-
->
-> Zhiwei
-> > +    set_feature(env, RISCV_FEATURE_PMP);
-> > +}
-> > +
-> >   static void rv32imacu_nommu_cpu_init(Object *obj)
-> >   {
-> >       CPURISCVState *env = &RISCV_CPU(obj)->env;
-> > @@ -619,6 +628,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-> >       DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
-> >   #if defined(TARGET_RISCV32)
-> >       DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           riscv_base32_cpu_init),
-> > +    DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32imcu_nommu_cpu_init),
-> >       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32imacu_nommu_cpu_init),
-> >       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32imafcu_nommu_cpu_init),
-> >       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32gcsu_priv1_10_0_cpu_init),
->
->
 
