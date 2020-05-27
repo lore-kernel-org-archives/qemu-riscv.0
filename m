@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jdzOd-0002DA-UI
-	for mharc-qemu-riscv@gnu.org; Wed, 27 May 2020 12:59:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35180)
+	id 1jdzOh-0002Mi-En
+	for mharc-qemu-riscv@gnu.org; Wed, 27 May 2020 12:59:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35196)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=40961fbaf=alistair.francis@wdc.com>)
- id 1jdzOb-00027X-Tb; Wed, 27 May 2020 12:59:13 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17615)
+ id 1jdzOf-0002GT-5Q; Wed, 27 May 2020 12:59:17 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:63672)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=40961fbaf=alistair.francis@wdc.com>)
- id 1jdzOa-0002Kx-QW; Wed, 27 May 2020 12:59:13 -0400
+ id 1jdzOe-0002MX-0Q; Wed, 27 May 2020 12:59:16 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1590598752; x=1622134752;
+ t=1590598756; x=1622134756;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=bypzf+ohyagefd+Z4V1gwnh1J59KBZ957z2nBB6h39I=;
- b=qtyKy4qmw/xAO6rfoDy7BOf9BUT8wYs+A1Zh+x2tyogRTDWbD06wTYq/
- hEZtT/r3gRUaB/RhL+PAWz9wOoMOFYBzYdvacur7FMvlfGmfDzIaB39Bb
- mm54+xMfmxNI+6PT1Uo0Bvr0ifzC+Oe2jCuGNMEX6NFNHNubu0S4xQznz
- bklYsmrBD7xO+wIhGPHtB8jOsgX3P2fF4kba4aTKAAgSVqzGEKkEnrv2l
- 7AyK8J1vTiTKw/C5HwZE8msASRUIKRUgn96neMwvApKyjWYJd+ZhRh1gv
- 9vFC3HpiwBTAi7iXHwpv5929YuYV3HdVOImiRcgAbHlb34P1KVRXlslyp Q==;
-IronPort-SDR: msH1nyecXP5I4+I/YmuaZ5DFUnccnvW1ymu4ct9kLrkuUtjhooFFnJ9kN+VizyiRdCRiTaVlD0
- FZbcRiwgTlHPmk9KEySdTY3eBkUjBOAC1kVQwfATfCwWb0NKKaMOs62cVltSgS4Bz1qu4YhXmT
- FrJTIuyyq7xcpikeSAtLS4A+7o+l3GlpKt5vjkBKfb+Jg/ZQ65sB35ACpT5C9o5Pa/Vi2ILKiE
- 6nlzPsibUZnsuPoSTJ/Dtkw/GU6YLGy3r0nn62nKat3boVE9QrH6FLIYHxTU5uDnUHi/HZK/pV
- BqM=
-X-IronPort-AV: E=Sophos;i="5.73,442,1583164800"; d="scan'208";a="138633231"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 28 May 2020 00:59:11 +0800
-IronPort-SDR: kX6sxtq0P4554Zos3d4Qt3ICvPXm57McWIlKpF55fT4sJv9clyycyKTFs/F8HLHEJyAsHe8PWW
- pd5xbEPEbIQhoBkOTZYlr4HnjiSaTgYQI=
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 May 2020 09:49:01 -0700
-IronPort-SDR: aRkSmyu5HNLPGnKBAsMPbVi/hIUVLc7PEPFJHs3z9VDSUav1Vc3kMxVq1I/jsJjjLKEenQdr3F
- rJE2uc2nYOMQ==
+ bh=J6jGr0+YJ7cXlecgOOQm6t/fd9FbxppC8Hh5YeUeVt4=;
+ b=QhNpxD5A1IWxkzYdtnVDC79yr9dS2/mkKcmj3rgpln6pXjJ2rXSzLZlz
+ zao/BjzVI/40WYZ1dQv6nUQPefSduty+jGuaQr52qePVtiCu/UuJt26dy
+ xNY4c3IEGp24z1UFoS3OzSty4kKN8UrRGly8v2ojIrsXQIO5fI+wNpuZ5
+ wDjwQLpqHaio0i2+XQG5OzbejSOcElQ2umfdJCel1nVAPAhn2/jFI/VA2
+ O1fFtIZ99BqdMuSyzt4Js5HncW/iULRnq0D7g5h1OrIHDyg3X8kllF7yX
+ s1lbAXKjc16tYzw3VQ20bg3tHPAjjNQuH8kRSaKR5+TX74fZx98K4eQgp w==;
+IronPort-SDR: zpJUZM0PaDGUfM1KRcVUj4SV41E7lpVH9T/vO0C2JDg70vrTKuZek2LMvHNCz0IdcWchVzWRbQ
+ 9DxNI1GjwGxSqDRWzJjV3E3qOTvD/iqnizt6BNw4sWAKJU8ozadbtXNHUHH297zb/wLKP6cnQo
+ oKwRxXhNkKJCwqyWQfw0YNqNx8v3aaRSaRtdynnEdFtrHWprSbQ6fwsW3nkX1NHW9liUfKukVx
+ rNHrW7ryqjq5JHclkbPp+Jqnqkib92IC/8JMHYtT8sCbm5Iti1WEbHm3UDKzSYN02dGF7PCaF/
+ aNI=
+X-IronPort-AV: E=Sophos;i="5.73,442,1583164800"; d="scan'208";a="140062138"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 28 May 2020 00:59:14 +0800
+IronPort-SDR: CqAF9OiC5vhkhvsee3L812rCMdxH+oA5I/jUolZ86xKiB65aeY1mokP0x/NQW4Qvy/LTpiUj0E
+ IG4hk4tpIkmTHC/OApxKi7vL9eahumV3s=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 May 2020 09:48:31 -0700
+IronPort-SDR: C9/SQ0N/OM3LBWaMoRLQQpJzWI4VHuUdUgLkyoiEW87ShefIOdaNwNupSwrRrm1vkvZ3VJusdr
+ xOYiflTM7Gqw==
 WDCIronportException: Internal
 Received: from 71vjjc2.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.57.96])
- by uls-op-cesaip02.wdc.com with ESMTP; 27 May 2020 09:59:12 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 27 May 2020 09:59:14 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
  bmeng.cn@gmail.com
-Subject: [PATCH v4 08/10] riscv/opentitan: Connect the PLIC device
-Date: Wed, 27 May 2020 09:50:37 -0700
-Message-Id: <a699a63fee27d52496076ef0bb4b3e96a7b1d4e1.1590598125.git.alistair.francis@wdc.com>
+Subject: [PATCH v4 09/10] riscv/opentitan: Connect the UART device
+Date: Wed, 27 May 2020 09:50:39 -0700
+Message-Id: <411322bc2870c735e4657bf27f5123bcc42b30ea.1590598125.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1590598125.git.alistair.francis@wdc.com>
 References: <cover.1590598125.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.154.42;
+Received-SPF: pass client-ip=216.71.154.45;
  envelope-from=prvs=40961fbaf=alistair.francis@wdc.com;
- helo=esa4.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/27 12:58:46
+ helo=esa6.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/27 12:58:55
 X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
 X-Spam_score_int: -43
 X-Spam_score: -4.4
@@ -81,95 +81,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2020 16:59:14 -0000
+X-List-Received-Date: Wed, 27 May 2020 16:59:17 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Bin Meng <bin.meng@windriver.com>
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/hw/riscv/opentitan.h |  3 +++
- hw/riscv/opentitan.c         | 19 +++++++++++++++++--
- 2 files changed, 20 insertions(+), 2 deletions(-)
+ include/hw/riscv/opentitan.h | 13 +++++++++++++
+ hw/riscv/opentitan.c         | 24 ++++++++++++++++++++++--
+ 2 files changed, 35 insertions(+), 2 deletions(-)
 
 diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-index 15a3d87ed0..8d6a09b696 100644
+index 8d6a09b696..825a3610bc 100644
 --- a/include/hw/riscv/opentitan.h
 +++ b/include/hw/riscv/opentitan.h
-@@ -20,6 +20,7 @@
- #define HW_OPENTITAN_H
+@@ -21,6 +21,7 @@
  
  #include "hw/riscv/riscv_hart.h"
-+#include "hw/intc/ibex_plic.h"
+ #include "hw/intc/ibex_plic.h"
++#include "hw/char/ibex_uart.h"
  
  #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
  #define RISCV_IBEX_SOC(obj) \
-@@ -31,6 +32,8 @@ typedef struct LowRISCIbexSoCState {
- 
+@@ -33,6 +34,7 @@ typedef struct LowRISCIbexSoCState {
      /*< public >*/
      RISCVHartArrayState cpus;
-+    IbexPlicState plic;
-+
+     IbexPlicState plic;
++    IbexUartState uart;
+ 
      MemoryRegion flash_mem;
      MemoryRegion rom;
- } LowRISCIbexSoCState;
+@@ -63,4 +65,15 @@ enum {
+     IBEX_USBDEV,
+ };
+ 
++enum {
++    IBEX_UART_RX_PARITY_ERR_IRQ = 0x28,
++    IBEX_UART_RX_TIMEOUT_IRQ = 0x27,
++    IBEX_UART_RX_BREAK_ERR_IRQ = 0x26,
++    IBEX_UART_RX_FRAME_ERR_IRQ = 0x25,
++    IBEX_UART_RX_OVERFLOW_IRQ = 0x24,
++    IBEX_UART_TX_EMPTY_IRQ = 0x23,
++    IBEX_UART_RX_WATERMARK_IRQ = 0x22,
++    IBEX_UART_TX_WATERMARK_IRQ = 0x21
++};
++
+ #endif
 diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index c00f0720ab..3926321d8c 100644
+index 3926321d8c..a6c0b949ca 100644
 --- a/hw/riscv/opentitan.c
 +++ b/hw/riscv/opentitan.c
-@@ -25,6 +25,7 @@
- #include "hw/misc/unimp.h"
- #include "hw/riscv/boot.h"
- #include "exec/address-spaces.h"
-+#include "sysemu/sysemu.h"
+@@ -96,6 +96,9 @@ static void riscv_lowrisc_ibex_soc_init(Object *obj)
  
- static const struct MemmapEntry {
-     hwaddr base;
-@@ -92,6 +93,9 @@ static void riscv_lowrisc_ibex_soc_init(Object *obj)
-     object_initialize_child(obj, "cpus", &s->cpus,
-                             sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
-                             &error_abort, NULL);
+     sysbus_init_child_obj(obj, "plic", &s->plic,
+                           sizeof(s->plic), TYPE_IBEX_PLIC);
 +
-+    sysbus_init_child_obj(obj, "plic", &s->plic,
-+                          sizeof(s->plic), TYPE_IBEX_PLIC);
++    sysbus_init_child_obj(obj, "uart", &s->uart,
++                          sizeof(s->uart), TYPE_IBEX_UART);
  }
  
  static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-@@ -100,6 +104,9 @@ static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-     MachineState *ms = MACHINE(qdev_get_machine());
-     LowRISCIbexSoCState *s = RISCV_IBEX_SOC(dev_soc);
-     MemoryRegion *sys_mem = get_system_memory();
-+    DeviceState *dev;
-+    SysBusDevice *busdev;
-+    Error *err = NULL;
+@@ -137,8 +140,25 @@ static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+     busdev = SYS_BUS_DEVICE(dev);
+     sysbus_mmio_map(busdev, 0, memmap[IBEX_PLIC].base);
  
-     object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
-                             &error_abort);
-@@ -120,6 +127,16 @@ static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-     memory_region_add_subregion(sys_mem, memmap[IBEX_FLASH].base,
-                                 &s->flash_mem);
- 
-+    /* PLIC */
-+    dev = DEVICE(&s->plic);
-+    object_property_set_bool(OBJECT(&s->plic), true, "realized", &err);
+-    create_unimplemented_device("riscv.lowrisc.ibex.uart",
+-        memmap[IBEX_UART].base, memmap[IBEX_UART].size);
++    /* UART */
++    dev = DEVICE(&(s->uart));
++    qdev_prop_set_chr(dev, "chardev", serial_hd(0));
++    object_property_set_bool(OBJECT(&s->uart), true, "realized", &err);
 +    if (err != NULL) {
 +        error_propagate(errp, err);
 +        return;
 +    }
 +    busdev = SYS_BUS_DEVICE(dev);
-+    sysbus_mmio_map(busdev, 0, memmap[IBEX_PLIC].base);
++    sysbus_mmio_map(busdev, 0, memmap[IBEX_UART].base);
++    sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->plic),
++                       IBEX_UART_TX_WATERMARK_IRQ));
++    sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->plic),
++                       IBEX_UART_RX_WATERMARK_IRQ));
++    sysbus_connect_irq(busdev, 2, qdev_get_gpio_in(DEVICE(&s->plic),
++                       IBEX_UART_TX_EMPTY_IRQ));
++    sysbus_connect_irq(busdev, 3, qdev_get_gpio_in(DEVICE(&s->plic),
++                       IBEX_UART_RX_OVERFLOW_IRQ));
 +
-     create_unimplemented_device("riscv.lowrisc.ibex.uart",
-         memmap[IBEX_UART].base, memmap[IBEX_UART].size);
      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
-@@ -134,8 +151,6 @@ static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-         memmap[IBEX_AES].base, memmap[IBEX_AES].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.hmac",
-         memmap[IBEX_HMAC].base, memmap[IBEX_HMAC].size);
--    create_unimplemented_device("riscv.lowrisc.ibex.plic",
--        memmap[IBEX_PLIC].base, memmap[IBEX_PLIC].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.pinmux",
-         memmap[IBEX_PINMUX].base, memmap[IBEX_PINMUX].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.alert_handler",
+         memmap[IBEX_GPIO].base, memmap[IBEX_GPIO].size);
+     create_unimplemented_device("riscv.lowrisc.ibex.spi",
 -- 
 2.26.2
 
