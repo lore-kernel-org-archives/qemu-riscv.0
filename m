@@ -1,66 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jdzOL-0001Q2-KR
-	for mharc-qemu-riscv@gnu.org; Wed, 27 May 2020 12:58:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35050)
+	id 1jdzOO-0001Xu-Ka
+	for mharc-qemu-riscv@gnu.org; Wed, 27 May 2020 12:59:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35096)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=40961fbaf=alistair.francis@wdc.com>)
- id 1jdzOI-0001Gu-MB; Wed, 27 May 2020 12:58:54 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17586)
+ id 1jdzOM-0001S8-A1; Wed, 27 May 2020 12:58:58 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:63648)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=40961fbaf=alistair.francis@wdc.com>)
- id 1jdzOF-000264-Ny; Wed, 27 May 2020 12:58:54 -0400
+ id 1jdzOL-0002D9-6M; Wed, 27 May 2020 12:58:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1590598731; x=1622134731;
+ t=1590598737; x=1622134737;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=6RkZQFByFl8XM3HFMV8b3oaAVUpsBTmA2wZJl/MG+Jc=;
- b=f4njVSEkD3ABFYvhLrPnFc7l9o3ceyI6jeHkEGNEuwEBomjFAcYpM97V
- gjrzWXqMtGKwIvlqV3K17CvjVlmF6I98pf4AB8aa+ZU25qdPfw9oamRPs
- ACSyOQmyURF2kGVQ62j6wSgJ9K44uNiFJHKDQ8Yzal2qLT3OZCvzwi6cy
- R05tH3pj/UEPNg+pp+jX5ojgb7VHjxvebKrTtzN/qqOGMr7EV4mWeg24q
- 34kHtmdtCge4a627wA3JQzLaMCklCFcWhRIHwKyvDun+4znnAYCiD65pn
- 344fjpGgq1SzxYbi+IQpa1F+hq9gd5Fy/KWUh1eH4CKSR5MC3t9nQGFXp Q==;
-IronPort-SDR: +idNhv0EVoICSggx6a2o6C+27Txr8OHyB+vU999PGiyn8+IWdh7qk2cgE2wYIrk6aNkj83fPio
- jCLWUGm18o5f+xpgWKJr5/ofzX4AHHOLlTSk92ilineEHH6nuisdgQ1bwXspRLovPKAQKj+dNf
- Y+SDz4FE6G0//xoqfAeNhmZFrS8/wHtV4ei5bRjuOeu5G8HG94BRA7U20Gl4CneXM2V5weGPDF
- zIS4uagM0PR75WFTuBKnlgtSpJNARcTBeI5v+9YQqEboWk4FzMzOr10wB9msnYNb2M+Z3YMG5Y
- S5w=
-X-IronPort-AV: E=Sophos;i="5.73,442,1583164800"; d="scan'208";a="138633212"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 28 May 2020 00:58:48 +0800
-IronPort-SDR: PccI82+UuO4snExQjEdlAXZsard+4MSAbLHwa8wIxWW62mNZYkTH8M+424cQedqCTsJESX2D9a
- sJKSGCyKO20LYcm+jx2OLPapVg13++Cfg=
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 May 2020 09:48:39 -0700
-IronPort-SDR: ax3DnG4f9g8/B0sfTbMi6Da8pYPORoqJxBxw3CQfhgOOFdJSVfJuAm3na6OlAQvvBf+FzZRks9
- XsDgjDT22oyg==
+ bh=95oYIs1BVKa8lJpKUNyTJ6K2xLTQpJSfhvRfZcrvMYo=;
+ b=delIy1EtSOlZ6gUnMsvovEPhxZaMLXAyA7kSGmr6xdzhV5VM5no0CmIt
+ SnPs/X9SCptYdvSX1txBEPag18xZBQys3kLkrwqo5AdE7ONEQsoQYasWE
+ 5exuYx6UreIzvWun3T98lKTO5GZ0wtgPC6jasxB7CM154lpDgGq0DLW/W
+ dxKyvEkcQ10F9njBr0nPLQBy9ovAmtwPLdH+JrMuaAVlxATVw6aa1zVfR
+ JNVlGR2IIyDy2BgPmRdFOF3+RfGGsD483xJj+TUGihgNLa1kaKFbN4KAf
+ wAyD+oKEArId4otT5DqUywXBQGg97CEnSqu81Z0gq1C2pUqTX47rg7UgX g==;
+IronPort-SDR: GK9DAE69ax+S39YK89UvGl1iUsYAUNFcJn9im9b3Dh0z8flsl9xPil7uZj6cHXUAlUwrex21nQ
+ sx6+OVLz8oTIkq7EEdiHHc5dwIyY2lNa+6LfYDoQmQ2xYgKwqH3P/4RTHUPCPTKqrhb9C+Wewj
+ cYca33ExEfsAhygFERGEKLHGu7kL9906v8ODucWdO0XS3fdPVl0qzajYjVvIIonYCgnH2z4tO6
+ rmjmTyF3MIh8yisUxyWD6dGq/EghEmT3ir1nswAYMErHpbiPY3S9AY/ZGBASyGo+AKD1Prtt66
+ 9e0=
+X-IronPort-AV: E=Sophos;i="5.73,442,1583164800"; d="scan'208";a="140062122"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 28 May 2020 00:58:55 +0800
+IronPort-SDR: 6k6vJv38jsQRvF0QhZhqzwYpXuAKzXEfDjmpXTWXtAN+J+4mpfUFtMUptZnc8A6+s28mi7k4jp
+ AEa4VmTwDFwL31iCL22uNRddu6aw/2mGA=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 May 2020 09:48:11 -0700
+IronPort-SDR: bs+Nexc6C/cgczZaRzb/7xwjmqT/WsSywsfN1WBEJOTnZjyg/Uwja3h3Oy+PTQuNj2fk6N9lXd
+ PYpN3+q6E67A==
 WDCIronportException: Internal
 Received: from 71vjjc2.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.57.96])
- by uls-op-cesaip02.wdc.com with ESMTP; 27 May 2020 09:58:49 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 27 May 2020 09:58:55 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
  bmeng.cn@gmail.com
-Subject: [PATCH v4 01/10] riscv/boot: Add a missing header include
-Date: Wed, 27 May 2020 09:50:14 -0700
-Message-Id: <ed478be74ded79f99105ec53903f35cc916c4a62.1590598125.git.alistair.francis@wdc.com>
+Subject: [PATCH v4 03/10] target/riscv: Disable the MMU correctly
+Date: Wed, 27 May 2020 09:50:20 -0700
+Message-Id: <756439d4816fb3bd7ef84b458bdb6ab3442cdeac.1590598125.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1590598125.git.alistair.francis@wdc.com>
 References: <cover.1590598125.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.154.42;
+Received-SPF: pass client-ip=216.71.154.45;
  envelope-from=prvs=40961fbaf=alistair.francis@wdc.com;
- helo=esa4.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/27 12:58:46
+ helo=esa6.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/27 12:58:55
 X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
 X-Spam_score_int: -43
 X-Spam_score: -4.4
@@ -81,31 +80,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2020 16:58:55 -0000
+X-List-Received-Date: Wed, 27 May 2020 16:58:58 -0000
 
-As the functions declared in this header use the symbol_fn_t
-typedef itself declared in "hw/loader.h", we need to include
-it here to make the header file self-contained.
+Previously if we didn't enable the MMU it would be enabled in the
+realize() function anyway. Let's ensure that if we don't want the MMU we
+disable it. We also don't need to enable the MMU as it will be enalbed
+in realize() by default.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
 ---
- include/hw/riscv/boot.h | 1 +
- 1 file changed, 1 insertion(+)
+ target/riscv/cpu.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index 474a940ad5..9daa98da08 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -21,6 +21,7 @@
- #define RISCV_BOOT_H
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 5eb3c02735..8deba3d16d 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -142,7 +142,6 @@ static void rv32gcsu_priv1_09_1_cpu_init(Object *obj)
+     set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+     set_priv_version(env, PRIV_VERSION_1_09_1);
+     set_resetvec(env, DEFAULT_RSTVEC);
+-    set_feature(env, RISCV_FEATURE_MMU);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
  
- #include "exec/cpu-defs.h"
-+#include "hw/loader.h"
+@@ -152,7 +151,6 @@ static void rv32gcsu_priv1_10_0_cpu_init(Object *obj)
+     set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     set_resetvec(env, DEFAULT_RSTVEC);
+-    set_feature(env, RISCV_FEATURE_MMU);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
  
- void riscv_find_and_load_firmware(MachineState *machine,
-                                   const char *default_machine_firmware,
+@@ -163,6 +161,7 @@ static void rv32imacu_nommu_cpu_init(Object *obj)
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     set_resetvec(env, DEFAULT_RSTVEC);
+     set_feature(env, RISCV_FEATURE_PMP);
++    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+ }
+ 
+ static void rv32imafcu_nommu_cpu_init(Object *obj)
+@@ -172,6 +171,7 @@ static void rv32imafcu_nommu_cpu_init(Object *obj)
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     set_resetvec(env, DEFAULT_RSTVEC);
+     set_feature(env, RISCV_FEATURE_PMP);
++    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+ }
+ 
+ #elif defined(TARGET_RISCV64)
+@@ -190,7 +190,6 @@ static void rv64gcsu_priv1_09_1_cpu_init(Object *obj)
+     set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+     set_priv_version(env, PRIV_VERSION_1_09_1);
+     set_resetvec(env, DEFAULT_RSTVEC);
+-    set_feature(env, RISCV_FEATURE_MMU);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
+ 
+@@ -200,7 +199,6 @@ static void rv64gcsu_priv1_10_0_cpu_init(Object *obj)
+     set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     set_resetvec(env, DEFAULT_RSTVEC);
+-    set_feature(env, RISCV_FEATURE_MMU);
+     set_feature(env, RISCV_FEATURE_PMP);
+ }
+ 
+@@ -211,6 +209,7 @@ static void rv64imacu_nommu_cpu_init(Object *obj)
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     set_resetvec(env, DEFAULT_RSTVEC);
+     set_feature(env, RISCV_FEATURE_PMP);
++    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+ }
+ 
+ #endif
 -- 
 2.26.2
 
