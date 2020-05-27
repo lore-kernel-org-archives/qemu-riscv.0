@@ -1,59 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jdzOJ-0001LG-Vt
-	for mharc-qemu-riscv@gnu.org; Wed, 27 May 2020 12:58:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35028)
+	id 1jdzOK-0001MO-DX
+	for mharc-qemu-riscv@gnu.org; Wed, 27 May 2020 12:58:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35044)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=40961fbaf=alistair.francis@wdc.com>)
- id 1jdzOH-0001Df-Dy; Wed, 27 May 2020 12:58:53 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17581)
+ id 1jdzOI-0001GQ-QA; Wed, 27 May 2020 12:58:54 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17592)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=40961fbaf=alistair.francis@wdc.com>)
- id 1jdzOF-000244-G1; Wed, 27 May 2020 12:58:52 -0400
+ id 1jdzOH-0002AL-AN; Wed, 27 May 2020 12:58:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1590598731; x=1622134731;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=0d53OiKp+2++SK471VZFVwFek97LO7t66ZdInaTMRjw=;
- b=GkV9WwpXrH32s5/3KSixzoXUd50RzWtwPA2FBAIMyvm0n/zB0kbnCahB
- NCcFBrgeaL8OfD9Vj7OIe4Dy9v2PutI/Up1W17A4W+OB4mDnTtRC81xLt
- gj4q1KMb2QDe15XWBqhRVmEg/rqFedA3PPtR24/0zm5eVy6ys6garHUlE
- hKSwdNujSte7/kXzMzAHdOWnsGJUT9OXiZ/s66hc3YpNEpZ14QkaropsI
- t5oclbRgIJYIkGGnA7dLbPNyo0EWAmTHE/OTBnqhbM4VDDiRmF36DFtc+
- aiI1IpNCOmBRjqVUCJvQ9RJPGaQIdtgIoJZ7PbsRMpln7TUim3LYkmzVj Q==;
-IronPort-SDR: cwkUHCLk1Fc5Cvri6PYRIgnn/rxS39YSp42geR9vcY3DaLXorwCOJ6EDYPkSQcFTOEH948PT+c
- HYHv8QGFnbs4+F+KLmcJ/RP1hXhAVNtl1kz6KBrUbwxXHcZJ4m+EixVwyKba8esDeKjkSm+OuC
- +cfQifH6/tnA6Zc8Lu5GYQxYip6G8t2woEBoN9zdg9wVovE5V7AS7eHMPoIX0eHyvZqTPuVk0j
- m8hPWLWrepx/SGRB4zU5KfFim3uOs6sbGA+W1Ct0rCrjNhDTdOqjFhEXiMdKE0iazlKt6cwWIe
- 518=
-X-IronPort-AV: E=Sophos;i="5.73,442,1583164800"; d="scan'208";a="138633211"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 28 May 2020 00:58:45 +0800
-IronPort-SDR: GSsJAiiqubFpTOytLmuiQSBi6GfJejldiT/9ioHnIQWXQ5k0xpy0iJRuGFKqp1GxEo+mJmleuj
- bJkO9FdZX1/J7E1Ym9TuJth8HQcDXbP3E=
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 May 2020 09:48:02 -0700
-IronPort-SDR: N4/snaMvqFFkwTS8kZYipzZ4iynP6nZpRi+YGncy8kgtMt+/20CqXkjoAziXKXzlLcY8VOB1gx
- GQ2REn7fhxCg==
+ t=1590598733; x=1622134733;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=vDZd4fWZoZGped8sJN4wTNf8wH4Xep9G/tkQsk69CK0=;
+ b=Ue0PU/XgqLFYscUJxJicA7wt5amUxvvdSwGFHx4yykMZpwzXnSCWGlEu
+ /HCU7EayHAsB9cCS9t+bdrB6lxOS4rVQREfoGH9IJSAHPoLTOjpUkZpcW
+ ZJzEnoDUYHxFEAR1eMRArEgIKJnN/hTRspfFVpu06C/XjV76F6Q9Dr6LX
+ y1ZACwto3MUsikxoJQubXZkK6xNWgH8CSAe7sQP9hp7sDG1vbgIO6cX8j
+ I/uybCvUdWf6qSNfLcq7abXAVwSdUU+btpChtIEiii/ulr3/QIkRuJCEV
+ bwWFvSo30WV981wGynnx+MPjZ5O71z4Kfk7HjGg3QxTmSzHsuwV2X5sSs w==;
+IronPort-SDR: xFGoS2dOQJ2fxmyFFKf9b3nC/UxvBeWGLZCZLaKK1A7IuEwBSmRTojY+lUIK8vF/gS/5fHpBlv
+ bfF74CBlF5P4dMNjSVf4BCIu9Nvx04PtKY4h25ZWQqY/m/15DWQ6OPrbWYce+xbNdSNkGsNEcW
+ EFHrD4EVfjtaF4YM9xmcc9B/vIq7shru4siSvnwSmd9SAuJxBO/Jeydb2JrbVOBG14TYGBebSc
+ NyT7e0f1RGJ/WAMnHK93qZ/kchuDuw6whH03102Qt2wnWGYjMxbF0yat2SCCeEDurkqDWcLyL1
+ OyQ=
+X-IronPort-AV: E=Sophos;i="5.73,442,1583164800"; d="scan'208";a="138633214"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 28 May 2020 00:58:51 +0800
+IronPort-SDR: jGC2TgpL8JPdxtyEk7wex8zoER4tsIxmHbaXEqwrFnU+UHMpgHXX13RNE67Oo0I9XSyrKVoicM
+ H6oLmFMWNSUuSxr5KFad1ctLgUOyzGBVw=
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 May 2020 09:48:42 -0700
+IronPort-SDR: NkvRZAFV6dHsAHZKgc/JSPUzqB0QGvMcJyUu+5m+FUafBhrII8MpAPOFoUdhGzQgdvN3Fdcmb7
+ nVjZ+/w7DLnw==
 WDCIronportException: Internal
 Received: from 71vjjc2.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.57.96])
- by uls-op-cesaip01.wdc.com with ESMTP; 27 May 2020 09:58:46 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 27 May 2020 09:58:52 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
  bmeng.cn@gmail.com
-Subject: [PATCH v4 00/10]  RISC-V Add the OpenTitan Machine
-Date: Wed, 27 May 2020 09:50:11 -0700
-Message-Id: <cover.1590598125.git.alistair.francis@wdc.com>
+Subject: [PATCH v4 02/10] target/riscv: Don't overwrite the reset vector
+Date: Wed, 27 May 2020 09:50:17 -0700
+Message-Id: <35cda0fb7d3ad4781e47a1e7e13cce326d391570.1590598125.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <cover.1590598125.git.alistair.francis@wdc.com>
+References: <cover.1590598125.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=216.71.154.42;
  envelope-from=prvs=40961fbaf=alistair.francis@wdc.com;
@@ -79,76 +80,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2020 16:58:53 -0000
+X-List-Received-Date: Wed, 27 May 2020 16:58:55 -0000
 
-OpenTitan is an open source silicon Root of Trust (RoT) project. This
-series adds initial support for the OpenTitan machine to QEMU.
+The reset vector is set in the init function don't set it again in
+realize.
 
-This series add the Ibex CPU to the QEMU RISC-V target. It then adds the
-OpenTitan machine, the Ibex UART and the Ibex PLIC.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
+---
+ target/riscv/cpu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-The UART has been tested sending and receiving data.
-
-With this series QEMU can boot the OpenTitan ROM, Tock OS and a Tock
-userspace app.
-
-The Ibex PLIC is similar to the RISC-V PLIC (and is based on the QEMU
-implementation) with some differences. The hope is that the Ibex PLIC
-will converge to follow the RISC-V spec. As that happens I want to
-update the QEMU Ibex PLIC and hopefully eventually replace the current
-PLIC as the implementation is a little overlay complex.
-
-For more details on OpenTitan, see here: https://docs.opentitan.org/
-
-v4:
- - Don't set the reset vector in realise
- - Fix a bug where the MMU is always enabled
- - Fixup the PMP/MMU size logic
-v3:
- - Small fixes pointed out in review
-v2:
- - Rebase on master
- - Get uart receive working
-
-
-
-Alistair Francis (10):
-  riscv/boot: Add a missing header include
-  target/riscv: Don't overwrite the reset vector
-  target/riscv: Disable the MMU correctly
-  target/riscv: Add the lowRISC Ibex CPU
-  riscv: Initial commit of OpenTitan machine
-  hw/char: Initial commit of Ibex UART
-  hw/intc: Initial commit of lowRISC Ibex PLIC
-  riscv/opentitan: Connect the PLIC device
-  riscv/opentitan: Connect the UART device
-  target/riscv: Use a smaller guess size for no-MMU PMP
-
- default-configs/riscv32-softmmu.mak |   1 +
- default-configs/riscv64-softmmu.mak |  11 +-
- include/hw/char/ibex_uart.h         | 110 +++++++
- include/hw/intc/ibex_plic.h         |  63 ++++
- include/hw/riscv/boot.h             |   1 +
- include/hw/riscv/opentitan.h        |  79 +++++
- target/riscv/cpu.h                  |   1 +
- hw/char/ibex_uart.c                 | 492 ++++++++++++++++++++++++++++
- hw/intc/ibex_plic.c                 | 261 +++++++++++++++
- hw/riscv/opentitan.c                | 204 ++++++++++++
- target/riscv/cpu.c                  |  21 +-
- target/riscv/pmp.c                  |  14 +-
- MAINTAINERS                         |  13 +
- hw/char/Makefile.objs               |   1 +
- hw/intc/Makefile.objs               |   1 +
- hw/riscv/Kconfig                    |   9 +
- hw/riscv/Makefile.objs              |   1 +
- 17 files changed, 1272 insertions(+), 11 deletions(-)
- create mode 100644 include/hw/char/ibex_uart.h
- create mode 100644 include/hw/intc/ibex_plic.h
- create mode 100644 include/hw/riscv/opentitan.h
- create mode 100644 hw/char/ibex_uart.c
- create mode 100644 hw/intc/ibex_plic.c
- create mode 100644 hw/riscv/opentitan.c
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 059d71f2c7..5eb3c02735 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -133,6 +133,7 @@ static void riscv_base32_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     /* We set this in the realise function */
+     set_misa(env, 0);
++    set_resetvec(env, DEFAULT_RSTVEC);
+ }
+ 
+ static void rv32gcsu_priv1_09_1_cpu_init(Object *obj)
+@@ -180,6 +181,7 @@ static void riscv_base64_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     /* We set this in the realise function */
+     set_misa(env, 0);
++    set_resetvec(env, DEFAULT_RSTVEC);
+ }
+ 
+ static void rv64gcsu_priv1_09_1_cpu_init(Object *obj)
+@@ -399,7 +401,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     }
+ 
+     set_priv_version(env, priv_version);
+-    set_resetvec(env, DEFAULT_RSTVEC);
+ 
+     if (cpu->cfg.mmu) {
+         set_feature(env, RISCV_FEATURE_MMU);
 -- 
 2.26.2
 
