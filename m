@@ -1,74 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jdrhr-00051w-PL
-	for mharc-qemu-riscv@gnu.org; Wed, 27 May 2020 04:46:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32810)
+	id 1jdsZQ-0001xv-CP
+	for mharc-qemu-riscv@gnu.org; Wed, 27 May 2020 05:41:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45544)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1jdrhq-00051K-Jr
- for qemu-riscv@nongnu.org; Wed, 27 May 2020 04:46:34 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:46449
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1jdrho-0001aK-P8
- for qemu-riscv@nongnu.org; Wed, 27 May 2020 04:46:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590569190;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=AV+Z/YU7yJ1LR0I6KHoSdy0lolqG2JopyB3NQlO4WTI=;
- b=JBxE+MkemRAiu+ARNWi3yLfpalxtKlvse+bpW4UyqozqXefxdC5TVkLIJIcK1hpi44DHW2
- zPGWoxfdfDgyE2BN/z8bH0tSleFdFUakfzNKEp7cI7dqgWgXqrMEX83y5/6MzKdDDZ0zbg
- Kgi1vYb4Gq3bbW5LKKbNoa0sdwXTM1g=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-357-BL6OO7JfOjCyii1YZmRYhg-1; Wed, 27 May 2020 04:46:02 -0400
-X-MC-Unique: BL6OO7JfOjCyii1YZmRYhg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E4CEC460;
- Wed, 27 May 2020 08:46:00 +0000 (UTC)
-Received: from redhat.com (unknown [10.36.110.50])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id BE6DE5D9E8;
- Wed, 27 May 2020 08:45:57 +0000 (UTC)
-Date: Wed, 27 May 2020 09:45:54 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Eduardo Habkost <ehabkost@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Atish Patra <atish.patra@wdc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Anup Patel <anup@brainfault.org>
-Subject: Re: [PATCH v2 1/5] hw: Add sockets_specified field in CpuTopology
-Message-ID: <20200527084554.GC2665520@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <20200527054226.232103-1-anup.patel@wdc.com>
- <20200527054226.232103-2-anup.patel@wdc.com>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jdsZO-0001x4-9Y; Wed, 27 May 2020 05:41:54 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:46011)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jdsZN-0007Xv-Bx; Wed, 27 May 2020 05:41:53 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id j8so6991985ybj.12;
+ Wed, 27 May 2020 02:41:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=zIJaUdw7Vw66VM7sVarVBPNBETB9RxEw8n3oUeYs0uk=;
+ b=frkT9utE8p1+YdZlrNuhXvpRm3tXqI64jZBxXc6hLNgmBb7LC1CMNpUJgLNAJuy8FS
+ iCx9iRzL05il4IUEjAFmJ0Xo7jIbywb5irzVzJfePnIzH3x6R7U6dDVSt8hTncVzb5pq
+ 3LPum00VPm1pHbM/nu8WVDGR0KA7+RZ7DTvdNTlH0b76f9rZL+Cz1cxPgeBOAX4WT+3o
+ nJA6jCuK9OjnrwwXst7XOxq2nbchumQDmHmFOalh8hucWZYof2Reua8/DmpJQzqdqctd
+ ndqZzuqnLmw8ae7zy0q+s1qLVIubo7rlcb0RyqMTxFsIGQyuEyvglXStywBg9XZVYjrH
+ L83A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=zIJaUdw7Vw66VM7sVarVBPNBETB9RxEw8n3oUeYs0uk=;
+ b=Jca6NQDhGm4pLLvEMgGtsTbaY5kuMCsfRNQaUNerGTB5o4jWM6bq/WMFdL7DcRpj+2
+ v6HpSrYxRacbNgjBTtLjR4BQX1PVNkvWoN3reVBzA4IzG2wjsn7+tc1LXZWGwA4bugd6
+ X4AXtlcG69q27L6MOEY0YIkGy1khGR2qzvikGR7zAjIQr/gSiO/FJcEATRgw7jYjwkqh
+ TbJplRLT99r0DkPfwpKkXccxUsGIWKN356nF1oHSGmYR2a2F1ERmtMa0nWm099ilT4Dl
+ ZqC8L45BpprrOwqXG0Wq+cvyHFX+5vEIuzX6qCASjndQ506yHSQAymYpFt/4I/uegXNv
+ 9etQ==
+X-Gm-Message-State: AOAM533c/R9/bsrt8Rc5dnnG66N38lav05wQxpP7OwTFLRcUJOmV4dLK
+ U1fnFASaqCiXFY6JkDgyakVCWn8X84cp88EgkN4=
+X-Google-Smtp-Source: ABdhPJxIfXVRcRn+j1jYASsXDzVaeOqmfOm3so8CyQpYOM56kVZdWBv5X2jMCJSUeeF0pvZgGjcZoMIM6xyoEyisirs=
+X-Received: by 2002:a25:6006:: with SMTP id u6mr8954288ybb.387.1590572511638; 
+ Wed, 27 May 2020 02:41:51 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200527054226.232103-2-anup.patel@wdc.com>
-User-Agent: Mutt/1.13.4 (2020-02-15)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Received-SPF: pass client-ip=207.211.31.120; envelope-from=berrange@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/27 01:25:42
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FROM_EXCESS_BASE64=0.979, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
- RCVD_IN_MSPIKE_WL=0.001, SPF_PASS=-0.001,
+References: <cover.1590533156.git.alistair.francis@wdc.com>
+ <50009ff3005847a5958327d5a31ebc70f52e7a4c.1590533156.git.alistair.francis@wdc.com>
+In-Reply-To: <50009ff3005847a5958327d5a31ebc70f52e7a4c.1590533156.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 27 May 2020 17:41:39 +0800
+Message-ID: <CAEUhbmX=4kzs96QzPiTnge9L+zswr78UuDx1gbCKzgFRVpdNpQ@mail.gmail.com>
+Subject: Re: [PATCH v3 3/3] target/riscv: Drop support for ISA spec version
+ 1.09.1
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -82,77 +74,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2020 08:46:34 -0000
+X-List-Received-Date: Wed, 27 May 2020 09:41:54 -0000
 
-On Wed, May 27, 2020 at 11:12:22AM +0530, Anup Patel wrote:
-> When "sockets" sub-option of "-smp" option is not specified, the
-> smp_parse() function will assume one CPU per-socket and set the
-> number of sockets equal to number of CPUs.
-> 
-> This is counter-intuitive and we should allow machine emulation to
-> decide default number of sockets when "sockets" sub-option is not
-> specified.
-
-I don't agree with this.  Having the semantics of the -smp option
-be the same across all targets/machines *is* intuitive.  Changing
-semantics of -smp per-machine will create a worse experiance for
-people configuring QEMU as the configuration will mean different
-things depending on the machine choce.
-
-
->           To achieve this, we add boolean flag sockets_specified
-> in struct CpuTopology which tells machine emulation whether the
-> "sockets" sub-option was specified in command-line.
-> 
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+On Wed, May 27, 2020 at 6:55 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> The RISC-V ISA spec version 1.09.1 has been deprecated in QEMU since
+> 4.1. It's not commonly used so let's remove support for it.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/core/machine.c   | 2 ++
->  include/hw/boards.h | 2 ++
->  2 files changed, 4 insertions(+)
-> 
-> diff --git a/hw/core/machine.c b/hw/core/machine.c
-> index bb3a7b18b1..fd5ef5a4bb 100644
-> --- a/hw/core/machine.c
-> +++ b/hw/core/machine.c
-> @@ -706,6 +706,8 @@ static void smp_parse(MachineState *ms, QemuOpts *opts)
->          unsigned cores   = qemu_opt_get_number(opts, "cores", 0);
->          unsigned threads = qemu_opt_get_number(opts, "threads", 0);
->  
-> +         ms->smp.sockets_specified = (sockets == 0) ? false : true;
-> +
->          /* compute missing values, prefer sockets over cores over threads */
->          if (cpus == 0 || sockets == 0) {
->              cores = cores > 0 ? cores : 1;
-> diff --git a/include/hw/boards.h b/include/hw/boards.h
-> index 18815d9be2..59b28ada65 100644
-> --- a/include/hw/boards.h
-> +++ b/include/hw/boards.h
-> @@ -244,6 +244,7 @@ typedef struct DeviceMemoryState {
->   * @cores: the number of cores in one package
->   * @threads: the number of threads in one core
->   * @sockets: the number of sockets on the machine
-> + * @sockets_specified: the number of sockets were specified for the machine
->   * @max_cpus: the maximum number of logical processors on the machine
->   */
->  typedef struct CpuTopology {
-> @@ -251,6 +252,7 @@ typedef struct CpuTopology {
->      unsigned int cores;
->      unsigned int threads;
->      unsigned int sockets;
-> +    bool sockets_specified;
->      unsigned int max_cpus;
->  } CpuTopology;
->  
-> -- 
-> 2.25.1
-> 
-> 
+>  target/riscv/cpu.h                            |   1 -
+>  target/riscv/cpu.c                            |   2 -
+>  target/riscv/cpu_helper.c                     |  82 +++++-------
+>  target/riscv/csr.c                            | 118 +++---------------
+>  .../riscv/insn_trans/trans_privileged.inc.c   |  18 +--
+>  target/riscv/monitor.c                        |   5 -
+>  target/riscv/op_helper.c                      |  17 +--
+>  7 files changed, 56 insertions(+), 187 deletions(-)
+>
+
+There are 3 more places in csr.c that need to be removed
+
+./target/riscv/csr.c:651:    if (env->priv_ver < PRIV_VERSION_1_10_0) {
+./target/riscv/csr.c:660:    if (env->priv_ver < PRIV_VERSION_1_10_0) {
+./target/riscv/csr.c:741:    } else if (env->priv_ver >= PRIV_VERSION_1_10_0) {
 
 Regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
-
+Bin
 
