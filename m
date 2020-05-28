@@ -1,72 +1,123 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jeGLn-0006Gb-66
-	for mharc-qemu-riscv@gnu.org; Thu, 28 May 2020 07:05:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49908)
+	id 1jeIcJ-0007g8-1k
+	for mharc-qemu-riscv@gnu.org; Thu, 28 May 2020 09:30:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42226)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jeGLW-0005y8-Ia
- for qemu-riscv@nongnu.org; Thu, 28 May 2020 07:05:12 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:31847
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jeGLH-0006pL-Lt
- for qemu-riscv@nongnu.org; Thu, 28 May 2020 07:05:09 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590663894;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=L//IVDXLIRjMfn0cHcrOfivCgO41+dzR/XIeCVVH65g=;
- b=CY/2Kyg2QyB67Y8ew5o1pXpUv2g2HOu13mZ6S+n1gXWQhbGtj8dVpbH9JTFcQiNb7DRqT+
- jFsy8BhZJKiBFUCroOsG//77kK1jy3lPsiQsSgGTlN4idiydcGwHDZ2goeuopDFo5PI8+5
- 2eySc85OZQI0xbXz5UZO/aCHfv1KKvA=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-50-JoNcjOr7P5edMry9zmjZLQ-1; Thu, 28 May 2020 07:04:51 -0400
-X-MC-Unique: JoNcjOr7P5edMry9zmjZLQ-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DDA6B107ACF7;
- Thu, 28 May 2020 11:04:49 +0000 (UTC)
-Received: from blackfin.pond.sub.org (ovpn-112-32.ams2.redhat.com
- [10.36.112.32])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 4C4FF5D9F5;
- Thu, 28 May 2020 11:04:49 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 1D8BB11358D2; Thu, 28 May 2020 13:04:45 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: pbonzini@redhat.com, berrange@redhat.com, ehabkost@redhat.com,
+ (Exim 4.90_1) (envelope-from <prvs=41059f22b=Anup.Patel@wdc.com>)
+ id 1jeIcF-0007eg-MZ; Thu, 28 May 2020 09:30:35 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:30070)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <prvs=41059f22b=Anup.Patel@wdc.com>)
+ id 1jeIcC-0001CO-EH; Thu, 28 May 2020 09:30:35 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1590672633; x=1622208633;
+ h=from:to:cc:subject:date:message-id:
+ content-transfer-encoding:mime-version;
+ bh=BnQ3q2+e7mPmBM/f1coUm4kOu+HmJqGGbwultwmM0Fo=;
+ b=rD3S5L4ocGgOf6Xrn8sp43Zw8xh+2r79vBC2pgo5/sndazzEfmnksdI5
+ tG9jQxAz+BFi8RLPtquNIlurfNapGf1TnUoB0FSPBQ+/VNU7bdBvcVAi0
+ jI7i6kQyi1ajPsKRFdu7dd+iQ+91ohfMhGGACJj6pPF26wH5Igcy1BZvb
+ etWbZGJL85k8ciRkj3pZ7SWMMVMBOaZ1dX/L1mPEKJqhn6kC/n+72BZ1I
+ 84tld8Wws9v4bDMtOQIYlBMrjbxgvgG0Zd5o5rmhCA+DHrxBVEatXBiF8
+ AmvquuSeLo2/T0xB45pjBbG6dZRS2iG7okJc9ZV/oNLuKir8lTUIUm6Zr A==;
+IronPort-SDR: opbIqh1DVBnmNltJGb1fzZ/qdP83ZKqn27HouqpTbQvwYw7mILD34kAD/e3jd2i2Cp8qTN2LTL
+ 8KC3Ex6c/A730ut0JqB5UsRlcXzJdsiRy8wEQRmfpl8Eceql2m7u1GI2PndI1W7mbiKVhMYaG9
+ pEirZMr2KPGYc0la/YEN+zNbI88vMO1F39HlmeumC7bDAK/Kbj5ZJ6hIj0DKrxP5OAy88KGTtn
+ 1gPvnQ81oyF/Lt6JmsvBCy4a4Eao/tNgrLzoFVkHRN79/Jfvst7pQ56UreEi0u/Njs/hVM7nkv
+ TjU=
+X-IronPort-AV: E=Sophos;i="5.73,444,1583164800"; d="scan'208";a="143036548"
+Received: from mail-bn3nam04lp2059.outbound.protection.outlook.com (HELO
+ NAM04-BN3-obe.outbound.protection.outlook.com) ([104.47.46.59])
+ by ob1.hgst.iphmx.com with ESMTP; 28 May 2020 21:30:27 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JEFcScpL+++x0DO+7Xwm09iFBcAuYzsiMNMrbz4j2mXBJqdnEgY+CF5Zm9ZZxRPRSyYdQqXqx9mi7Zi6E2Yrr/mKsvifc0dy6eYuvaTI7Ds5IxNh8UGfzZEVmYmhwMCi49feA9V4P9C5i1VbgG7N6iH5i0FDlal93Ed4xoH0Lp44SXKNDZlUU39qOGKysZd2Bplv5k48v+quyEWM8xlQe3wHMri1lVnK55Nu0+yj74vhdBGZRcoQW+EfHjmgvrU7BXRvlhPx17ChAq9/jtM1xVNzHNj7CzWIy5Ibka6oEcpeL1eu5yVGEF5KYm70hTR17Dm2GvHYAcSKrrRPTyO7SQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=n+RZb2zC6g+iyHQADbSoYWgZCBdv08hHZkrd/d3kkQo=;
+ b=Ibk0le20yCe2vhfDxfhulZ6bqlLj57wxqNMisxECpOhgFvLdp9bWccn7MCCDRii51FkojWS2isUgDkz7hMQuNyVcGqNft69lGZ6Qg/jDiS8fOn0FKX9Snx0SE4FqiNI2cb3LR+YQYtdG6CD1BiZlTQvWXtEBG6aMdioX3cLnGqklPl/Cz7lM3B7tBnrmilYyRUfG/e/fa5JiQGqQGacCqg7CtSxrzHbtl4Kt8DURbW/pmb/ox0uoWTv4aZXOEuqy1EbZoFKTYlHQfrOzfYOPKW9Gou4NtNIyr7OiVzcNzUY4CQocgvmzkScl/27vO8eRxrvZniskl5X8EEN9kVK6vA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=n+RZb2zC6g+iyHQADbSoYWgZCBdv08hHZkrd/d3kkQo=;
+ b=Bjha+79J+oIOTi6SnjD1GkFA3giha39FeHlw31l9PTly+EQwS/8dfbR8R2RToJswERejmKOQzSCxL/1NXoNvsxhQboxkHvYRZAgN2oW4wi0bkW0zzfUOmfhQ+Q/eJFQ38yysw5/8PfF9Ydrk6FblhKuipPaIV99Brg3dTUM2qK8=
+Authentication-Results: linaro.org; dkim=none (message not signed)
+ header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
+Received: from DM6PR04MB6201.namprd04.prod.outlook.com (2603:10b6:5:127::32)
+ by DM6PR04MB6204.namprd04.prod.outlook.com (2603:10b6:5:122::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3045.19; Thu, 28 May
+ 2020 13:30:25 +0000
+Received: from DM6PR04MB6201.namprd04.prod.outlook.com
+ ([fe80::f8b3:c124:482b:52e0]) by DM6PR04MB6201.namprd04.prod.outlook.com
+ ([fe80::f8b3:c124:482b:52e0%5]) with mapi id 15.20.3045.018; Thu, 28 May 2020
+ 13:30:25 +0000
+From: Anup Patel <anup.patel@wdc.com>
+To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v2 19/24] riscv: Fix to put "riscv.hart_array" devices on
- sysbus
-Date: Thu, 28 May 2020 13:04:39 +0200
-Message-Id: <20200528110444.20456-20-armbru@redhat.com>
-In-Reply-To: <20200528110444.20456-1-armbru@redhat.com>
-References: <20200528110444.20456-1-armbru@redhat.com>
-MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Anup Patel <anup.patel@wdc.com>
+Subject: [PATCH v4 0/4] RISC-V multi-socket support
+Date: Thu, 28 May 2020 18:59:55 +0530
+Message-Id: <20200528132959.47773-1-anup.patel@wdc.com>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=205.139.110.120; envelope-from=armbru@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/28 01:51:20
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
+Content-Type: text/plain
+X-ClientProxiedBy: MAXPR01CA0094.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a00:49::36) To DM6PR04MB6201.namprd04.prod.outlook.com
+ (2603:10b6:5:127::32)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from wdc.com (49.207.63.107) by
+ MAXPR01CA0094.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:49::36) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3045.18 via Frontend Transport; Thu, 28 May 2020 13:30:22 +0000
+X-Mailer: git-send-email 2.25.1
+X-Originating-IP: [49.207.63.107]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 0a0808b5-a50c-48a4-d678-08d8030b4744
+X-MS-TrafficTypeDiagnostic: DM6PR04MB6204:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM6PR04MB620431CEDF7E064BA87FF0BC8D8E0@DM6PR04MB6204.namprd04.prod.outlook.com>
+WDCIPOUTBOUND: EOP-TRUE
+X-MS-Oob-TLC-OOBClassifiers: OLM:4941;
+X-Forefront-PRVS: 0417A3FFD2
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: LYoyZGZjWBlMzUKSA+KNY11KvVgy982qTlg5CmQ0BefcgE2tbKEHL7S2YFCrgh/I5NYdfjEDdsC+FhRufmcKwXcQwpjkkHgzB3tJdb1za9NGzNAgnx8i7Ridc4m+lXD38V5v1LTAjQ9wZ7bMuTeCfePvNgMNBYSbCVkZdXJQ4SVqrc3MzmCYKOVL0mly34eNqzjaaKuJL1mbZIuH6HWjSaVXSCWSdPhDW5UoC5kQ2y0K9sANzPTdN9byYMZSbdqY06fIKT6ZZPolkTC0VsP6PzeN/IzzRJz3+eFWlCBfLu1rIDchLTgl+1P6cIp8uDNtnLGTnPqwamVYIAyaBiJDdRG3zhbZIlJohjsHFxpm8JwEMLVcErPyUoqgsJmjWvNa8wPJuN+l00G35jf3PfK3bw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR04MB6201.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(136003)(396003)(346002)(366004)(376002)(39860400002)(956004)(26005)(55016002)(44832011)(478600001)(55236004)(2616005)(5660300002)(966005)(7696005)(16526019)(52116002)(186003)(8936002)(8676002)(1076003)(86362001)(8886007)(66556008)(66946007)(66476007)(316002)(83380400001)(4326008)(54906003)(110136005)(36756003)(6666004)(1006002)(2906002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData: AQlJCp496PDvMgspsG9Sq24cdKlUWiVBJ1NewcRYbB3q0fWSqztjlvb8Sn9cKnfPmfP3bfWPwN1YoafU8lHX79DdqNyFFgFDm3Ndco4CO+emu1de5fNNZm5NppmjY0ldhy9njfVWirIvKEbJk7keAu4mjZo62XR+eK+flsTlnRHHzpwPqfYpBXFhsZOH08Y+P0U9OmowZls1Eu18A9qlIrAcu7w0yN8CNFWnGCTlrwiDPQbL75MsgOnresitd+iwcuaAnQ5kAfO2rpz4fv8QuzQwEf94Hsi0NPmAsM06OaGjFJ7LqqBseP6xNLzwwk/FcraT8Wol0v281p1pneN4A7LkAwKH/k7qRNs2AVifJLpJ6mzAqyaEVIWIbh4SGL1EJiN3W1FyaeJ/kedDVkpjQGhaIg4Mo8RBcxUdvdGZhWWau20ED/Bv1vZjdf9qr1kEgZhddethPLTDHfQjFSTyWbsk83BL9Av2dHVfztm54P0=
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0a0808b5-a50c-48a4-d678-08d8030b4744
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2020 13:30:25.1080 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rFJvfzzEwSW2YWOG+QHC4Souc1Z7laBT7mCMEpSpc2Dk731mUaBCKbUAXyThyMvJIdmvicE9LguCybvcVds4rQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB6204
+Received-SPF: pass client-ip=216.71.153.141;
+ envelope-from=prvs=41059f22b=Anup.Patel@wdc.com; helo=esa3.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/05/28 09:30:28
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+ MSGID_FROM_MTA_HEADER=0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,140 +130,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2020 11:05:12 -0000
+X-List-Received-Date: Thu, 28 May 2020 13:30:36 -0000
 
-riscv_sifive_e_soc_init(), riscv_sifive_u_soc_init(),
-spike_board_init(), spike_v1_10_0_board_init(),
-spike_v1_09_1_board_init(), and riscv_virt_board_init() create
-"riscv-hart_array" sysbus devices in a way that leaves them unplugged.
+This series adds multi-socket support for RISC-V virt machine and
+RISC-V spike machine. The multi-socket support will help us improve
+various RISC-V operating systems, firmwares, and bootloader to
+support RISC-V NUMA systems.
 
-Create them the common way that puts them into the main system bus.
-Affects machines sifive_e, sifive_u, spike, spike_v1.10, spike_v1.9.1,
-and virt.  Visible in "info qtree", here's the change for sifive_e:
+These patch can be found in riscv_multi_socket_v4 branch at:
+https://github.com/avpatel/qemu.git
 
-     bus: main-system-bus
-       type System
-    +  dev: riscv.hart_array, id ""
-    +    num-harts = 1 (0x1)
-    +    hartid-base = 0 (0x0)
-    +    cpu-type = "sifive-e31-riscv-cpu"
-       dev: sifive_soc.gpio, id ""
+To try this patches, we will need: Linux multi-PLIC improvements
+support which can be found in plic_imp_v2 branch at:
+https://github.com/avpatel/linux.git
 
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: qemu-riscv@nongnu.org
-Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/sifive_e.c |  5 ++---
- hw/riscv/sifive_u.c | 14 ++++++--------
- hw/riscv/spike.c    | 12 ++++++------
- hw/riscv/virt.c     |  4 ++--
- 4 files changed, 16 insertions(+), 19 deletions(-)
+Changes since v3:
+ - Use "-numa" QEMU options to populate sockets instead of custom
+   "multi-socket" sub-option in machine name
 
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index b53109521e..8831e6728e 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -120,9 +120,8 @@ static void riscv_sifive_e_soc_init(Object *obj)
-     MachineState *ms = MACHINE(qdev_get_machine());
-     SiFiveESoCState *s = RISCV_E_SOC(obj);
- 
--    object_initialize_child(obj, "cpus", &s->cpus,
--                            sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
--                            &error_abort, NULL);
-+    sysbus_init_child_obj(obj, "cpus", &s->cpus,
-+                          sizeof(s->cpus), TYPE_RISCV_HART_ARRAY);
-     object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
-                             &error_abort);
-     sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 4299bdf480..bb69fd8e48 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -491,10 +491,9 @@ static void riscv_sifive_u_soc_init(Object *obj)
-                             &error_abort, NULL);
-     qdev_prop_set_uint32(DEVICE(&s->e_cluster), "cluster-id", 0);
- 
--    object_initialize_child(OBJECT(&s->e_cluster), "e-cpus",
--                            &s->e_cpus, sizeof(s->e_cpus),
--                            TYPE_RISCV_HART_ARRAY, &error_abort,
--                            NULL);
-+    sysbus_init_child_obj(OBJECT(&s->e_cluster), "e-cpus",
-+                          &s->e_cpus, sizeof(s->e_cpus),
-+                          TYPE_RISCV_HART_ARRAY);
-     qdev_prop_set_uint32(DEVICE(&s->e_cpus), "num-harts", 1);
-     qdev_prop_set_uint32(DEVICE(&s->e_cpus), "hartid-base", 0);
-     qdev_prop_set_string(DEVICE(&s->e_cpus), "cpu-type", SIFIVE_E_CPU);
-@@ -504,10 +503,9 @@ static void riscv_sifive_u_soc_init(Object *obj)
-                             &error_abort, NULL);
-     qdev_prop_set_uint32(DEVICE(&s->u_cluster), "cluster-id", 1);
- 
--    object_initialize_child(OBJECT(&s->u_cluster), "u-cpus",
--                            &s->u_cpus, sizeof(s->u_cpus),
--                            TYPE_RISCV_HART_ARRAY, &error_abort,
--                            NULL);
-+    sysbus_init_child_obj(OBJECT(&s->u_cluster), "u-cpus",
-+                          &s->u_cpus, sizeof(s->u_cpus),
-+                          TYPE_RISCV_HART_ARRAY);
-     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
-     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
-     qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", SIFIVE_U_CPU);
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index d0c4843712..01d52e758e 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -169,8 +169,8 @@ static void spike_board_init(MachineState *machine)
-     unsigned int smp_cpus = machine->smp.cpus;
- 
-     /* Initialize SOC */
--    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
--                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-+    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-+                          TYPE_RISCV_HART_ARRAY);
-     object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type",
-                             &error_abort);
-     object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-@@ -275,8 +275,8 @@ static void spike_v1_10_0_board_init(MachineState *machine)
-     }
- 
-     /* Initialize SOC */
--    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
--                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-+    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-+                          TYPE_RISCV_HART_ARRAY);
-     object_property_set_str(OBJECT(&s->soc), SPIKE_V1_10_0_CPU, "cpu-type",
-                             &error_abort);
-     object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-@@ -365,8 +365,8 @@ static void spike_v1_09_1_board_init(MachineState *machine)
-     }
- 
-     /* Initialize SOC */
--    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
--                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-+    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-+                          TYPE_RISCV_HART_ARRAY);
-     object_property_set_str(OBJECT(&s->soc), SPIKE_V1_09_1_CPU, "cpu-type",
-                             &error_abort);
-     object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 7ce28895bc..0c5bcdc37f 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -485,8 +485,8 @@ static void riscv_virt_board_init(MachineState *machine)
-     unsigned int smp_cpus = machine->smp.cpus;
- 
-     /* Initialize SOC */
--    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
--                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-+    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-+                          TYPE_RISCV_HART_ARRAY);
-     object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type",
-                             &error_abort);
-     object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
+Changes since v2:
+ - Dropped PATCH1 as it is not required any more
+ - Added "multi-socket" sub-option for Spike and Virt machine
+   which can be used to enable/disable mult-socket support
+
+Changes since v1:
+ - Fixed checkpatch errors and warnings
+ - Added PATCH1 for knowning whether "sockets" sub-option was specified
+ - Remove SPIKE_CPUS_PER_SOCKET_MIN and SPIKE_CPUS_PER_SOCKET_MAX in PATCH3
+ - Remove VIRT_CPUS_PER_SOCKET_MIN and VIRT_CPUS_PER_SOCKET_MAX in PATCH5
+
+Anup Patel (4):
+  hw/riscv: Allow creating multiple instances of CLINT
+  hw/riscv: spike: Allow creating multiple NUMA sockets
+  hw/riscv: Allow creating multiple instances of PLIC
+  hw/riscv: virt: Allow creating multiple NUMA sockets
+
+ hw/riscv/sifive_clint.c         |  20 +-
+ hw/riscv/sifive_e.c             |   4 +-
+ hw/riscv/sifive_plic.c          |  24 +-
+ hw/riscv/sifive_u.c             |   4 +-
+ hw/riscv/spike.c                | 385 ++++++++++++++-----
+ hw/riscv/virt.c                 | 634 ++++++++++++++++++++------------
+ include/hw/riscv/sifive_clint.h |   7 +-
+ include/hw/riscv/sifive_plic.h  |  12 +-
+ include/hw/riscv/spike.h        |  15 +-
+ include/hw/riscv/virt.h         |  13 +-
+ 10 files changed, 746 insertions(+), 372 deletions(-)
+
 -- 
-2.21.3
+2.25.1
 
 
