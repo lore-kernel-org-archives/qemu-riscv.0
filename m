@@ -1,68 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1je2Kf-000608-Vq
-	for mharc-qemu-riscv@gnu.org; Wed, 27 May 2020 16:07:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59884)
+	id 1je8LD-0007Lz-OO
+	for mharc-qemu-riscv@gnu.org; Wed, 27 May 2020 22:32:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47976)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1je2Ke-0005te-Fr; Wed, 27 May 2020 16:07:20 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:42823)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1je8L9-0007Ku-MC; Wed, 27 May 2020 22:32:15 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:38379)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1je2Kc-0004Co-9c; Wed, 27 May 2020 16:07:20 -0400
-Received: by mail-il1-x144.google.com with SMTP id 18so25416694iln.9;
- Wed, 27 May 2020 13:07:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1je8L8-0007y6-62; Wed, 27 May 2020 22:32:15 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id s21so6880905ybe.5;
+ Wed, 27 May 2020 19:32:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=PfiSxr2uPTg5KhNRWL1lagyedkijhoUm6PDpEY6hWQI=;
- b=pAmHfgeSBAHel/o2G+428q/PhSM0nD0P8Snetrs8D10iW7mqUIODy/DLEWJ64xUW5z
- VsgQ6j2TMG7lVBdR7RNqk9Kmmkw5sMgh2tKVq3nXrjJXqQxVhkvuv8lB8dQsqInvT38P
- HCF3yFHKW342TfmE27nhFRAZ9rFGSwk8A6hoeMvanXpl6cLCTmlBmH4rfnktQOUuIG7E
- pLng8hdGvh5PncoQdcKkq6TD7soqWf9RECgEu70EMg6vTWiM3x3W7BU2g77qGUg0p8p6
- YkAZgfKmqxuqS7BesJuX6fC6WwWu1iKpBFbmovgn+JqPDjuqhai3Gn6d2gGHnrMsejM/
- A7rw==
+ :cc; bh=xqmyTvIe/w0RN7EVJ4Me43s5EgBOteNU32dHTefpLjA=;
+ b=H2DfQQhS15abehmxqVh017sOtAxIjNC3P1cHqUcpvVMmHMTVF3I9OT3qNxsHo2z6Z/
+ gow1KQENE4ocTEc7al5DR34iYDyH9sWIOnNGgOERtbSRoClElADvPSiXAxjLRtIJrRYh
+ Hv+xartYwK880tfcxGifIiSjKzdmRbViK1SJpDcKnsasUmL4D1EtlKmIBcl0wl04w2XJ
+ wboU3W241TDQC+IwJ/FEu8XjjG3clPnwFVGpLMfMYBg+W6iLAlu0RenSMdO04lWEng5I
+ qrW6aYWmkTY8dBi4sRAZZbR10jGtR+dnJmaFG8zWyTNPuehXWYWKCwu3EdYZoBkdNlQB
+ dW8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=PfiSxr2uPTg5KhNRWL1lagyedkijhoUm6PDpEY6hWQI=;
- b=VfoP3TLJVRBy+8JOUnD/eShnUNjKDa1LHq3UbDkzlnXng2qoP+V2+iotwp/A0G9jK9
- CcisNniNGwIwfOMbfXwCLAgQvgpWVWlBV7jWiUBFEMZomqQHStsffUjbDy9I/S7B+mov
- Zk85Bwd8JG0Ca4V51DcUkf+PJjLTA0tYuGPeU2Wk9bkVYIZE9mttQUCeGjLOqjDZ4lqD
- 0s4yVtmHm8cHYZxInzqGFbRKkq+uf2OR2XJn7Cl1grt2OiyKDOn2mf4/xzRnMR14Cuhe
- 06UzSJ8CxApnB4ual+/zOW79S8qvf/jrxJNmU9b+qve6/DkQMwBNL7R12booV1lFQizm
- CUSg==
-X-Gm-Message-State: AOAM53014TOjKVz6w3kQJQgRJz8VTkSFZiPKnFL6hFvYvb1sA/vcVL/z
- UjtME3C/qe/MrcCclVhcUeoqAfm79NpcvAKAIOA=
-X-Google-Smtp-Source: ABdhPJzc1nQLb5sY977N1BC0Juprx6DrqmZrCxvPIiz6/gXkgsX1RR0wj2K7U8i/5Htz8rb6BpwAyzpmCGSI2yoA8ws=
-X-Received: by 2002:a92:bb45:: with SMTP id w66mr520477ili.131.1590610036892; 
- Wed, 27 May 2020 13:07:16 -0700 (PDT)
+ bh=xqmyTvIe/w0RN7EVJ4Me43s5EgBOteNU32dHTefpLjA=;
+ b=kXncN2IcVk37lOo69B5L2BQJ1gIpqwy4eTg7XAbiZWt1nuCWCY8IUsmenJ8OBWZeUu
+ 3ttzGqBUVhJaFJea8u7H/6FqyY/ztUQzXs/zszuIfQoLuElyNhLBumPWXpCqmr9ywD7B
+ Q7LY4kr3kFyMyqvJztQEPu9NC8+/T4PN7CJMaPJVg/fRzvlfkqM76F+OBjN5JH1ruMzw
+ UxE+/COoZOISccn1OnhbE3HI7db8jLmjZrM7TV3RAgCQQ8N+kpJq+dejURJty/L6HMoD
+ bLIygOZ57sOWE9viEaBpEdoHuRh9AKVA3dLwj7se5T6iLj7DXwXEeWEW5cTrxE6NR+eG
+ siEw==
+X-Gm-Message-State: AOAM531nF4SLph6Gbd/yQGigErMpQdb07NEBk3u6hGUzLx19t2kYZBZ7
+ PpShVp+efe0sYLU+BhBO6hUKvLED2IOqsrvnBBU=
+X-Google-Smtp-Source: ABdhPJz+RcUK9amTTkppPleArRKmwpronOCmdOXqABfNxIRD4ANamnb78EO1BnH4naEfpqartr51VNQzUcO4UeVtykQ=
+X-Received: by 2002:a25:7a06:: with SMTP id v6mr1967037ybc.152.1590633132659; 
+ Wed, 27 May 2020 19:32:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1590533156.git.alistair.francis@wdc.com>
- <50009ff3005847a5958327d5a31ebc70f52e7a4c.1590533156.git.alistair.francis@wdc.com>
- <CAEUhbmX=4kzs96QzPiTnge9L+zswr78UuDx1gbCKzgFRVpdNpQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmX=4kzs96QzPiTnge9L+zswr78UuDx1gbCKzgFRVpdNpQ@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 27 May 2020 12:58:16 -0700
-Message-ID: <CAKmqyKMyoK45hGRTSy=azuXJu49-ePTfyN4WDHZLhr_hkhNEcg@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] target/riscv: Drop support for ISA spec version
- 1.09.1
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+References: <cover.1590598125.git.alistair.francis@wdc.com>
+ <756439d4816fb3bd7ef84b458bdb6ab3442cdeac.1590598125.git.alistair.francis@wdc.com>
+In-Reply-To: <756439d4816fb3bd7ef84b458bdb6ab3442cdeac.1590598125.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 28 May 2020 10:32:01 +0800
+Message-ID: <CAEUhbmV5Y6xuushwx2QEzdjHgvZA2kov4pakG5BgEXn4is=_=w@mail.gmail.com>
+Subject: Re: [PATCH v4 03/10] target/riscv: Disable the MMU correctly
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
@@ -77,39 +72,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2020 20:07:20 -0000
+X-List-Received-Date: Thu, 28 May 2020 02:32:17 -0000
 
-On Wed, May 27, 2020 at 2:41 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Thu, May 28, 2020 at 12:58 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
 >
-> On Wed, May 27, 2020 at 6:55 AM Alistair Francis
-> <alistair.francis@wdc.com> wrote:
-> >
-> > The RISC-V ISA spec version 1.09.1 has been deprecated in QEMU since
-> > 4.1. It's not commonly used so let's remove support for it.
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  target/riscv/cpu.h                            |   1 -
-> >  target/riscv/cpu.c                            |   2 -
-> >  target/riscv/cpu_helper.c                     |  82 +++++-------
-> >  target/riscv/csr.c                            | 118 +++---------------
-> >  .../riscv/insn_trans/trans_privileged.inc.c   |  18 +--
-> >  target/riscv/monitor.c                        |   5 -
-> >  target/riscv/op_helper.c                      |  17 +--
-> >  7 files changed, 56 insertions(+), 187 deletions(-)
-> >
+> Previously if we didn't enable the MMU it would be enabled in the
+> realize() function anyway. Let's ensure that if we don't want the MMU we
+> disable it. We also don't need to enable the MMU as it will be enalbed
+> in realize() by default.
 >
-> There are 3 more places in csr.c that need to be removed
->
-> ./target/riscv/csr.c:651:    if (env->priv_ver < PRIV_VERSION_1_10_0) {
-> ./target/riscv/csr.c:660:    if (env->priv_ver < PRIV_VERSION_1_10_0) {
-> ./target/riscv/csr.c:741:    } else if (env->priv_ver >= PRIV_VERSION_1_10_0) {
 
-Thanks, fixed.
+I think we should do the same for the PMP feature as the logic is the
+same as MMU: PMP is always enabled in the realize() function
 
-Alistair
-
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.c | 7 +++----
+>  1 file changed, 3 insertions(+), 4 deletions(-)
 >
-> Regards,
-> Bin
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 5eb3c02735..8deba3d16d 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -142,7 +142,6 @@ static void rv32gcsu_priv1_09_1_cpu_init(Object *obj)
+>      set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_09_1);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+> -    set_feature(env, RISCV_FEATURE_MMU);
+>      set_feature(env, RISCV_FEATURE_PMP);
+>  }
+>
+> @@ -152,7 +151,6 @@ static void rv32gcsu_priv1_10_0_cpu_init(Object *obj)
+>      set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+> -    set_feature(env, RISCV_FEATURE_MMU);
+>      set_feature(env, RISCV_FEATURE_PMP);
+>  }
+>
+> @@ -163,6 +161,7 @@ static void rv32imacu_nommu_cpu_init(Object *obj)
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+>      set_feature(env, RISCV_FEATURE_PMP);
+> +    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+>  }
+>
+>  static void rv32imafcu_nommu_cpu_init(Object *obj)
+> @@ -172,6 +171,7 @@ static void rv32imafcu_nommu_cpu_init(Object *obj)
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+>      set_feature(env, RISCV_FEATURE_PMP);
+> +    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+>  }
+>
+>  #elif defined(TARGET_RISCV64)
+> @@ -190,7 +190,6 @@ static void rv64gcsu_priv1_09_1_cpu_init(Object *obj)
+>      set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_09_1);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+> -    set_feature(env, RISCV_FEATURE_MMU);
+>      set_feature(env, RISCV_FEATURE_PMP);
+>  }
+>
+> @@ -200,7 +199,6 @@ static void rv64gcsu_priv1_10_0_cpu_init(Object *obj)
+>      set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+> -    set_feature(env, RISCV_FEATURE_MMU);
+>      set_feature(env, RISCV_FEATURE_PMP);
+>  }
+>
+> @@ -211,6 +209,7 @@ static void rv64imacu_nommu_cpu_init(Object *obj)
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+>      set_feature(env, RISCV_FEATURE_PMP);
+> +    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+>  }
+>
+
+Regards,
+Bin
 
