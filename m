@@ -1,61 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jeIcP-0007ii-V7
-	for mharc-qemu-riscv@gnu.org; Thu, 28 May 2020 09:30:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42244)
+	id 1jeIcS-0007lN-Nu
+	for mharc-qemu-riscv@gnu.org; Thu, 28 May 2020 09:30:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42260)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=41059f22b=Anup.Patel@wdc.com>)
- id 1jeIcJ-0007gJ-8r; Thu, 28 May 2020 09:30:40 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:30070)
+ id 1jeIcP-0007hx-1V; Thu, 28 May 2020 09:30:45 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:30080)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=41059f22b=Anup.Patel@wdc.com>)
- id 1jeIcG-0001CO-5x; Thu, 28 May 2020 09:30:38 -0400
+ id 1jeIcK-0001G2-Lj; Thu, 28 May 2020 09:30:44 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1590672636; x=1622208636;
+ t=1590672641; x=1622208641;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:content-transfer-encoding:mime-version;
- bh=esvbG8mwyfuf8XW2HxsiBnuLQxTMUq0Obayx/hsdVcc=;
- b=EFa6ssGpsRMB82oUBx16cUu+SZl6B+eW8AGF6oAFVyk9hKKuJLNJcK2x
- uY3uQhsHFM6zIzWj2Vo6Z9/yf2bWab94yuIdWekl29jkiYhYziF1UWJSU
- TPgLDC1wxsLQfc5CCXdWd3ujxsYWNPhQ8pgi5KAdmFYlw0pujFQxZLC72
- qf3bQkDFfMjSXqB7KvGVZDJfn8e2OB5PeNU2kJHXW+WAb2hg3s1E6Rkil
- tfuXCtL8/It9DeDqoYn6Hkb4nmp41lxrVBM2bHiAu5/GiEZufClk93728
- vIq8wpF8z0oeRdamFjDJ9IA5xdWZHQv0pVoTWv4mGndWqpusKd6HL59aR Q==;
-IronPort-SDR: h0lHD64mLzfI/CI97oGk1VkX5vz2xwfvhNqazgpEiQIt9hs9ngsH0SUFvwQt+goRcttd+RAiwV
- ZEmyXcoTkNkEsxW0XiOMiQj/wdVIjSWdjXxY9La01WXob5aVTkqCjI53leDokI+TR6kRZSZCt+
- PM6kS0sm4wURAEu382Ak2vwOT4bZ6ZNY01XLs9uq56WZfa3jF8wNDg+rxlGrFT4Obor4KTPbld
- EwWs1/dqxwiztbpKTi/GndkEvM4dSIjlgOhvB50nfmAPvRNYF4xPeWYfr2N/uKnv+wvMpBDkVP
- pbM=
-X-IronPort-AV: E=Sophos;i="5.73,444,1583164800"; d="scan'208";a="143036560"
-Received: from mail-bn3nam04lp2051.outbound.protection.outlook.com (HELO
- NAM04-BN3-obe.outbound.protection.outlook.com) ([104.47.46.51])
- by ob1.hgst.iphmx.com with ESMTP; 28 May 2020 21:30:35 +0800
+ bh=fcl2/s4taLYbTTKslRBqqC8oTwWKwM22EGfD/3R2t9E=;
+ b=gk7jU89RiCPBfXACucqn8KO/xzeNuuCuZ9QyiUyFVZ8WQB9do85SSEDm
+ g913n7WWbKSao6cs5A87keT5eNhrE8RfaSGoWjYjGsTnu+RIUzGjZAGuI
+ LkM6Kn/aXqdCoLYquD54ALDpPlDBlElFtj7hpcLLMSBFOm21Du+g8jRna
+ rvT4xjUFRTAR1E9t1ybVAUFe8iAXJLdQSwWVxQZloKHEdKu/jgOouRnco
+ g5yf2AGUveeN8tQ63xQw2bxfwGg90AwY5zwa/p5VGZ46O/9DHLnOjvk+c
+ iLDe0N0iJlLDX+qfsqEIS/mikzz+c5PtsCxUa9rkNJQu0RgqsX7q0C9wx g==;
+IronPort-SDR: wep/JWX9WjFsMjPBS7xrFTy9a/WD1LqUfINHgfn7LoRSx/SEjKQ4yROrB10VAt9cbT0IKkkGz/
+ +2sc+akEsPQVT5D2jx8NFvMO6t+SN9XOz4yBvMd2x8BXAM8R7WJhh1Nj2XNmSzZs5WUlp/v/IK
+ zQMRbFjW8H96d81WHNFAtATEJybascK+RkPPOEa7zc1EpW1spRHFQDK+EHu1YC8isU7XuevjHp
+ TJreLpxY+EH2dJHn4V9RvxH7sa+b6WWjnG6zfKt3+xYfwni9tAZU7cH71Bgf8M6SM5XpYvqPho
+ nI4=
+X-IronPort-AV: E=Sophos;i="5.73,444,1583164800"; d="scan'208";a="143036566"
+Received: from mail-bn3nam04lp2056.outbound.protection.outlook.com (HELO
+ NAM04-BN3-obe.outbound.protection.outlook.com) ([104.47.46.56])
+ by ob1.hgst.iphmx.com with ESMTP; 28 May 2020 21:30:38 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dy2T+BnifTq3OpRk2ANUmq9VVHHdTtEEyc9eXQtg4PaTYZ1f6csOpbU7CoqohVUJi6NY/LlxYQ61dUQyThfXQGdMhOcAYqMq44p5VlmAK/IHVvLZxO8JL795mS9LIU0amPWWvWC1H8UMqltB/GZkzfaEG9uSDRTTM6Mf3v3SWaTVKbtHGfKPACPNct0ZXDG/tDyp7ePN+4l0bse658503kc/wh2LvI3xwViCvRHyXF86BlZ23qBuArYdPob0mokTIl1VIjfUKdXud5WUM2Jq4iQoq2fr5lpIzEMs1qw/0upeKbdQUCXN6Q+8BH1NlYYEvYfHpjf+UPKhAq1GcuKgLg==
+ b=A3Vn2MfrESTEq6mrwtVxkXFCaItPCXlvMTEJj6/+bX8xzfGqybzGJoV45+NWHsRoUJFsGEFdNWRCvNfK3Pg7fPtVCgZ5IaoLx/lwBlyF137eHTKbcEzREfpyhp0QST1/I2XPoj3sjp9RJhfnjDIVpEIH6u0ZfoCMLcmWGaWoM3INh9lT038oPLUeBi2B3Lo+qOWntrc4NACz1iJ76W7hKEQ1WrlFTUqjxOK7KTod1gNq+XYWwC8W3CZQ3xZt+sMcoKkDAMkY0K/uzLTtUowWHutKlH+SCRbHAX8dtjRmQ2BfPt+806oUkhBMDMG6Cu2pnZ5OsFx2xmXq1Rs522Odeg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SWS+d247xFZXDb66J8uxkh46EXespExk7s1Y15FDEf0=;
- b=S4ZlJHHOgt2mm+vMHuAnjCWmqUGevK3I3cVngBirnCmeyrsuvIrOPMfKXKBWmgC5nk4IHsNYjv3O7IUgjZfDPnF2MzH9J+C67inqbnD4hjJ/KXd1rm3QGbtYRZmPdYpyj9v8skJb49EOwx9HLLbgb38omWnZjDTnTblYiOk92JOv9vw/wdVkeUtJu45uw8jC05dmTmjY5LnQgbNFbshOjrgJZP/sSHwCUf5MYG3dpKZ0FPIqYDnpOKmZHPMKOLzdtbdxnyRdJKDm9vOCjW3GRf/iarVSLWjvJenLUKg1IT7P93uwj2Tpjuib5ZnkyctXV1i/FeKqlJBZ7EwtbhX/Aw==
+ bh=tSqZwf+oGC6GnqJHzn0BQlbEQMiydC/gkmw6w1nYSYI=;
+ b=RYapNSoB+cVEs+ZORU7gO94mf3Uo6X42wPxATIIUVm9xBJQmozVpaCAs15O/2e/rCsbo1i8jnl2cCABdaYFsWlFM0tphak0Yy1pa4BEQDfHCDOUAo4ztSv12TJjjGlwDL2AItTG+XzzTOQl1tseaakKo/5bGzMCoqC/KIBkrjW3GirFiLN0tKnUPvzqjvI7GuMTZE6k0NLIcC1izsk8ZJj8mvQRJVFh+KX+LdoirBF/L3rZQWOmXViM+Bp2tIlnMhUywrFdFzmIybqwL/Ry5fjbhaqqhr1ZkpuesWlF0HJcH9FgvnowA5oL1uINodFjsxEj129Nt4gvob1eSJc8h7Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SWS+d247xFZXDb66J8uxkh46EXespExk7s1Y15FDEf0=;
- b=E/kQpaCNDIDCXFAGflyEvw/Ugohdz1Cx1Pk3PXD+MYQTkR8yuAVZUeaeu7IPkb62p0HkPB15nkVzo42GFqyGXZvonCMlztEAE3XQD4DgMghjqB+ZocWaff/T1bjXzcpHwM8z98erO5bGWKULcjwYFtE5ZRy4+1ntkpGq+35OKK4=
+ bh=tSqZwf+oGC6GnqJHzn0BQlbEQMiydC/gkmw6w1nYSYI=;
+ b=ovfAwnLpmoYFQmHTgZKT1KoY4ocJjfbI7eOk0ku885zJB2kSoTXWvqCkWXbq8POo4G2Rwlye/nYLAbsSAjkpR3twFvQ3KI75/RgctrJtHGzSVjmA4iA0p3Rz3rE7oDKXMDRXGb1qrnFEujpbppmdWj0zopLCA7I/u5Nd8mHMopE=
 Authentication-Results: linaro.org; dkim=none (message not signed)
  header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
 Received: from DM6PR04MB6201.namprd04.prod.outlook.com (2603:10b6:5:127::32)
  by DM6PR04MB6204.namprd04.prod.outlook.com (2603:10b6:5:122::11) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3045.19; Thu, 28 May
- 2020 13:30:32 +0000
+ 2020 13:30:36 +0000
 Received: from DM6PR04MB6201.namprd04.prod.outlook.com
  ([fe80::f8b3:c124:482b:52e0]) by DM6PR04MB6201.namprd04.prod.outlook.com
  ([fe80::f8b3:c124:482b:52e0%5]) with mapi id 15.20.3045.018; Thu, 28 May 2020
- 13:30:32 +0000
+ 13:30:36 +0000
 From: Anup Patel <anup.patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -63,10 +63,11 @@ To: Peter Maydell <peter.maydell@linaro.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>
 Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Anup Patel <anup.patel@wdc.com>
-Subject: [PATCH v4 2/4] hw/riscv: spike: Allow creating multiple NUMA sockets
-Date: Thu, 28 May 2020 18:59:57 +0530
-Message-Id: <20200528132959.47773-3-anup.patel@wdc.com>
+ Anup Patel <anup.patel@wdc.com>, Palmer Dabbelt <palmerdabbelt@google.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v4 3/4] hw/riscv: Allow creating multiple instances of PLIC
+Date: Thu, 28 May 2020 18:59:58 +0530
+Message-Id: <20200528132959.47773-4-anup.patel@wdc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200528132959.47773-1-anup.patel@wdc.com>
 References: <20200528132959.47773-1-anup.patel@wdc.com>
@@ -80,34 +81,34 @@ X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from wdc.com (49.207.63.107) by
  MAXPR01CA0094.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:49::36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3045.18 via Frontend Transport; Thu, 28 May 2020 13:30:29 +0000
+ 15.20.3045.18 via Frontend Transport; Thu, 28 May 2020 13:30:33 +0000
 X-Mailer: git-send-email 2.25.1
 X-Originating-IP: [49.207.63.107]
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: f3ccc6c3-b88a-49ce-2e3c-08d8030b4bbb
+X-MS-Office365-Filtering-Correlation-Id: a774c4b1-f8d4-4fe4-c96e-08d8030b4e24
 X-MS-TrafficTypeDiagnostic: DM6PR04MB6204:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM6PR04MB62049C2697818DF45DDE9EB18D8E0@DM6PR04MB6204.namprd04.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <DM6PR04MB62047B1E60A5BCEE2CE9BC918D8E0@DM6PR04MB6204.namprd04.prod.outlook.com>
 WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:517;
+X-MS-Oob-TLC-OOBClassifiers: OLM:14;
 X-Forefront-PRVS: 0417A3FFD2
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: P8Guwp6ibPXCXHW+pRyIG8As6HUsNIJLPYwHZp3lW4qx6Y31Z4sLR9MGJLCUCV867OLfwL5XOeN6WtiTucX6sc3DUDCRz/me6DJWil+cBVHJ691/1f9Tcz3oJT/Y2bIQB1Zspel1Fz82lw5RwSguX+Iem19r8muOc+5zHoH45904XKT9xSGKeeuQ/iIP0gIw6NmwYYcCT72dKhJ/ONqg9ATA6D/Rf4cGhXLBaEEOnONAgZ4Q4elKEJDSutp2HR5juFkGh4WmCpDi2KTzQ5LgJL9gBB4UHmpp1wsvJPPoVxt+HbJoK8UhBBLKBly1PPEg
+X-Microsoft-Antispam-Message-Info: 6AhqRxEIovqZ6/mh8Dqm5dbTHCp+eA8L96157C91MGqXtawpKbMHqZv70kGGzBS7eIYUnnVsJovAE/cTDk2pN8bNbjvzg+zhu1t81s8YSiNZUttXwAmicmckWGmePHMQ4QvgfnQtJa60uAY9Xhr/+k09Bne3Pe2CsaK/Gc+tBiX6WR0TC32jEre0pmZqTlfCa72exR6eqIQ1DyPXYXZIvCEGXzatnO6WNPuzYiPNEupGpXbWUqH36sE4aeL+dFepCLnFVVekfCQHZCBEv+kHSkZO2kWxxyqDY/MdE6ZHvZNsAiU9vY7+Lft+kNAGfE9Wzkne1gllF4V5E78TcZkVfg==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DM6PR04MB6201.namprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFTY:;
- SFS:(4636009)(136003)(396003)(346002)(366004)(376002)(39860400002)(956004)(26005)(55016002)(44832011)(478600001)(55236004)(2616005)(5660300002)(7696005)(16526019)(52116002)(186003)(8936002)(30864003)(8676002)(1076003)(86362001)(8886007)(66556008)(66946007)(66476007)(316002)(83380400001)(4326008)(54906003)(110136005)(36756003)(6666004)(1006002)(2906002);
+ SFS:(4636009)(136003)(396003)(346002)(366004)(376002)(39860400002)(956004)(26005)(55016002)(44832011)(478600001)(55236004)(2616005)(5660300002)(7696005)(16526019)(52116002)(186003)(8936002)(8676002)(1076003)(86362001)(8886007)(66556008)(66946007)(66476007)(316002)(83380400001)(4326008)(54906003)(110136005)(36756003)(6666004)(1006002)(2906002);
  DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData: OayT0MCLvKPiKM/1BHQ6x531VnAe0NPyfiMsxBySv4KjHl1OvodQmkKbNPHUDJgQecc95el8Dyxo4+NQSMRy8ewD/j19DAlDhrjIbmdiF+15m8hpcG6F7WHiThy38pMK1Pbw0K80OJhhMwWH9DrHIcWL+V0LWhK5mZF/F1VmTQBcZtckAmY8CCuIm8SXphlBkoSbmUGFgxehPjo1AXumuZiu/4HABbWg5HTzKtuDbsli0MMEfOTxy5AcrRwe+AwVgnaHpwhe/eyiZ2XebBkCmnK9ceVqh0h0XiYHrWKbVpQvBLysi3kuASunuVjXAPkMkpL0gcLCWT6Pgc/lIFCdZoCzZDvYB4Yb70a26/ihLq0CzGOdaKDII/CIkEA6A/gYxMxpJkuA5t1sp3EsO/CnkFHwFps7B/IkSqJ1ZGPILzZ0zZXP2rXv3u0XJxQoE03w/Di55RmAtTNJv0Z6ipy9t8jlN2+u+EMTMTCCS0lOTlM=
+X-MS-Exchange-AntiSpam-MessageData: H5pYC+A0zmO+fYeNJUUjir39OguHKpqkvLHbzBWjeQFAohbxXVleix1YibWDZDE9wdIA6d4rMOiRLd4mtHkwtwGPmkU+slnmUO4GB7zLQ6XIml6/DrNtbEcmO2Y2mP5RrGv/zuooTXo8YSiC1JrNZh/wN41DRO14cI46qcST/YTxrE1M+YMQ0DXl4LFVBrFFbuzP2Gr/d3gF1wmMoAf2VL0xW+hHm9O1EjRuWTz5vQXoTfFunLOtYUH55ysjJFJfY4ikyX9D7yF+BwTxgtBSAQXQZoNv6GMoBNfB+LjhEsWgkJ2EePzZ1AvlojbF5Oe47Y8JDSxjv6Bcyyedh+ZiBw2Sb4722elf93FUq8NRMeDRE9/lqhjEFWUIyNyBYlfNbEfE00ewQh4FPMP6o0PzIc5rjsOts82u/Qkj1U7dxV1VG1ugLkoSLWVwXFT30p5t0+iPPOOqtoxgcZ2i/xKO4OouiI+5kMghNZeUhRus6U0=
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3ccc6c3-b88a-49ce-2e3c-08d8030b4bbb
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2020 13:30:32.7674 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a774c4b1-f8d4-4fe4-c96e-08d8030b4e24
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2020 13:30:36.5771 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hz3NIwhAMaoZf5BuHV2iP1hdXsg2wU6QjMtT0jf28kgrrApH3mPMcAEJt7mL/KhIEmDrWer16dZyYjs4Y2cPKg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2DNEfbXCDcQWFDGUxA7Cz4LutU4Re3Qc48hV5epqQKpxTSyd4auua1C6GTvRi1+9S8m+L9VXByeXpg/vMr8xgw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB6204
 Received-SPF: pass client-ip=216.71.153.141;
  envelope-from=prvs=41059f22b=Anup.Patel@wdc.com; helo=esa3.hgst.iphmx.com
@@ -132,577 +133,168 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2020 13:30:40 -0000
+X-List-Received-Date: Thu, 28 May 2020 13:30:45 -0000
 
-We extend RISC-V spike machine to allow creating a multi-socket machine.
-Each RISC-V spike machine socket is a NUMA node having a set of HARTs,
-a memory instance, and a CLINT instance. Other devices are shared
-between all RISC-V spike machine sockets. We also update the generated
-device tree accordingly.
-
-By default, NUMA multi-socket support is disabled for RISC-V spike
-machine. To enable it, users can use "-numa" command-line options
-of QEMU.
-
-Example1: For two NUMA nodes with 4 CPUs each, append following
-to command-line options: "-smp 8 -numa node -numa node"
-
-Example2: For two NUMA nodes with 3 and 5 CPUs, append following
-to command-line options: "-smp 8 -numa node,cpus=0-2 -numa node,3-7"
+We extend PLIC emulation to allow multiple instances of PLIC in
+a QEMU RISC-V machine. To achieve this, we remove first HART id
+zero assumption from PLIC emulation.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/spike.c         | 381 +++++++++++++++++++++++++++++----------
- include/hw/riscv/spike.h |  15 +-
- 2 files changed, 296 insertions(+), 100 deletions(-)
+ hw/riscv/sifive_e.c            |  2 +-
+ hw/riscv/sifive_plic.c         | 24 +++++++++++++-----------
+ hw/riscv/sifive_u.c            |  2 +-
+ hw/riscv/virt.c                |  2 +-
+ include/hw/riscv/sifive_plic.h | 12 +++++++-----
+ 5 files changed, 23 insertions(+), 19 deletions(-)
 
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index d5e0103d89..b1923442b6 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -64,9 +64,14 @@ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
-     uint64_t mem_size, const char *cmdline)
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 1c3b37d0ba..bd122e71ae 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -152,7 +152,7 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+ 
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
+-        (char *)SIFIVE_E_PLIC_HART_CONFIG,
++        (char *)SIFIVE_E_PLIC_HART_CONFIG, 0,
+         SIFIVE_E_PLIC_NUM_SOURCES,
+         SIFIVE_E_PLIC_NUM_PRIORITIES,
+         SIFIVE_E_PLIC_PRIORITY_BASE,
+diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
+index c1e04cbb98..f88bb48053 100644
+--- a/hw/riscv/sifive_plic.c
++++ b/hw/riscv/sifive_plic.c
+@@ -352,6 +352,7 @@ static const MemoryRegionOps sifive_plic_ops = {
+ 
+ static Property sifive_plic_properties[] = {
+     DEFINE_PROP_STRING("hart-config", SiFivePLICState, hart_config),
++    DEFINE_PROP_UINT32("hartid-base", SiFivePLICState, hartid_base, 0),
+     DEFINE_PROP_UINT32("num-sources", SiFivePLICState, num_sources, 0),
+     DEFINE_PROP_UINT32("num-priorities", SiFivePLICState, num_priorities, 0),
+     DEFINE_PROP_UINT32("priority-base", SiFivePLICState, priority_base, 0),
+@@ -400,10 +401,12 @@ static void parse_hart_config(SiFivePLICState *plic)
+     }
+     hartid++;
+ 
+-    /* store hart/mode combinations */
+     plic->num_addrs = addrid;
++    plic->num_harts = hartid;
++
++    /* store hart/mode combinations */
+     plic->addr_config = g_new(PLICAddr, plic->num_addrs);
+-    addrid = 0, hartid = 0;
++    addrid = 0, hartid = plic->hartid_base;
+     p = plic->hart_config;
+     while ((c = *p++)) {
+         if (c == ',') {
+@@ -429,8 +432,6 @@ static void sifive_plic_irq_request(void *opaque, int irq, int level)
+ 
+ static void sifive_plic_realize(DeviceState *dev, Error **errp)
  {
-     void *fdt;
--    int cpu;
--    uint32_t *cells;
--    char *nodename;
-+    unsigned long clint_addr;
-+    int i, j, idx, cpu, socket;
-+    MachineState *mc = MACHINE(s);
-+    uint32_t dist_matrix_size;
-+    uint32_t *clint_cells, *dist_matrix;
-+    uint32_t cpu_phandle, intc_phandle, phandle = 1;
-+    char *name, *mem_name, *clint_name, *clust_name;
-+    char *core_name, *cpu_name, *intc_name;
- 
-     fdt = s->fdt = create_device_tree(&s->fdt_size);
-     if (!fdt) {
-@@ -88,68 +93,118 @@ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_cell(fdt, "/soc", "#size-cells", 0x2);
-     qemu_fdt_setprop_cell(fdt, "/soc", "#address-cells", 0x2);
- 
--    nodename = g_strdup_printf("/memory@%lx",
--        (long)memmap[SPIKE_DRAM].base);
--    qemu_fdt_add_subnode(fdt, nodename);
--    qemu_fdt_setprop_cells(fdt, nodename, "reg",
--        memmap[SPIKE_DRAM].base >> 32, memmap[SPIKE_DRAM].base,
--        mem_size >> 32, mem_size);
--    qemu_fdt_setprop_string(fdt, nodename, "device_type", "memory");
--    g_free(nodename);
--
-     qemu_fdt_add_subnode(fdt, "/cpus");
-     qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
-         SIFIVE_CLINT_TIMEBASE_FREQ);
-     qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
-     qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
-+    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
-+
-+    for (socket = (s->num_socs - 1); socket >= 0; socket--) {
-+        clust_name = g_strdup_printf("/cpus/cpu-map/cluster%d", socket);
-+        qemu_fdt_add_subnode(fdt, clust_name);
-+
-+        clint_cells =  g_new0(uint32_t, s->soc[socket].num_harts * 4);
- 
--    for (cpu = s->soc.num_harts - 1; cpu >= 0; cpu--) {
--        nodename = g_strdup_printf("/cpus/cpu@%d", cpu);
--        char *intc = g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
--        char *isa = riscv_isa_string(&s->soc.harts[cpu]);
--        qemu_fdt_add_subnode(fdt, nodename);
-+        for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
-+            cpu_phandle = phandle++;
-+
-+            cpu_name = g_strdup_printf("/cpus/cpu@%d",
-+                s->soc[socket].hartid_base + cpu);
-+            qemu_fdt_add_subnode(fdt, cpu_name);
- #if defined(TARGET_RISCV32)
--        qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
-+            qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
- #else
--        qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
-+            qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv48");
- #endif
--        qemu_fdt_setprop_string(fdt, nodename, "riscv,isa", isa);
--        qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv");
--        qemu_fdt_setprop_string(fdt, nodename, "status", "okay");
--        qemu_fdt_setprop_cell(fdt, nodename, "reg", cpu);
--        qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
--        qemu_fdt_add_subnode(fdt, intc);
--        qemu_fdt_setprop_cell(fdt, intc, "phandle", 1);
--        qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc");
--        qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
--        qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
--        g_free(isa);
--        g_free(intc);
--        g_free(nodename);
-+            name = riscv_isa_string(&s->soc[socket].harts[cpu]);
-+            qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa", name);
-+            g_free(name);
-+            qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
-+            qemu_fdt_setprop_string(fdt, cpu_name, "status", "okay");
-+            qemu_fdt_setprop_cell(fdt, cpu_name, "reg",
-+                s->soc[socket].hartid_base + cpu);
-+            qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
-+            if (s->numa_enabled) {
-+                qemu_fdt_setprop_cell(fdt, cpu_name, "numa-node-id", socket);
-+            }
-+            qemu_fdt_setprop_cell(fdt, cpu_name, "phandle", cpu_phandle);
-+
-+            intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
-+            qemu_fdt_add_subnode(fdt, intc_name);
-+            intc_phandle = phandle++;
-+            qemu_fdt_setprop_cell(fdt, intc_name, "phandle", intc_phandle);
-+            qemu_fdt_setprop_string(fdt, intc_name, "compatible",
-+                "riscv,cpu-intc");
-+            qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
-+            qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
-+
-+            clint_cells[cpu * 4 + 0] = cpu_to_be32(intc_phandle);
-+            clint_cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_SOFT);
-+            clint_cells[cpu * 4 + 2] = cpu_to_be32(intc_phandle);
-+            clint_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_M_TIMER);
-+
-+            core_name = g_strdup_printf("%s/core%d", clust_name, cpu);
-+            qemu_fdt_add_subnode(fdt, core_name);
-+            qemu_fdt_setprop_cell(fdt, core_name, "cpu", cpu_phandle);
-+
-+            g_free(core_name);
-+            g_free(intc_name);
-+            g_free(cpu_name);
-+        }
-+
-+        mem_name = g_strdup_printf("/memory@%lx",
-+            (long)memmap[SPIKE_DRAM].base + s->mem_offset[socket]);
-+        qemu_fdt_add_subnode(fdt, mem_name);
-+        qemu_fdt_setprop_cells(fdt, mem_name, "reg",
-+            (memmap[SPIKE_DRAM].base + s->mem_offset[socket]) >> 32,
-+            memmap[SPIKE_DRAM].base + s->mem_offset[socket],
-+            s->mem_size[socket] >> 32, s->mem_size[socket]);
-+        qemu_fdt_setprop_string(fdt, mem_name, "device_type", "memory");
-+        if (s->numa_enabled) {
-+            qemu_fdt_setprop_cell(fdt, mem_name, "numa-node-id", socket);
-+        }
-+        g_free(mem_name);
-+
-+        clint_addr = memmap[SPIKE_CLINT].base +
-+            (memmap[SPIKE_CLINT].size * socket);
-+        clint_name = g_strdup_printf("/soc/clint@%lx", clint_addr);
-+        qemu_fdt_add_subnode(fdt, clint_name);
-+        qemu_fdt_setprop_string(fdt, clint_name, "compatible", "riscv,clint0");
-+        qemu_fdt_setprop_cells(fdt, clint_name, "reg",
-+            0x0, clint_addr, 0x0, memmap[SPIKE_CLINT].size);
-+        qemu_fdt_setprop(fdt, clint_name, "interrupts-extended",
-+            clint_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
-+        if (s->numa_enabled) {
-+            qemu_fdt_setprop_cell(fdt, clint_name, "numa-node-id", socket);
-+        }
-+
-+        g_free(clint_name);
-+        g_free(clint_cells);
-+        g_free(clust_name);
-     }
- 
--    cells =  g_new0(uint32_t, s->soc.num_harts * 4);
--    for (cpu = 0; cpu < s->soc.num_harts; cpu++) {
--        nodename =
--            g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
--        uint32_t intc_phandle = qemu_fdt_get_phandle(fdt, nodename);
--        cells[cpu * 4 + 0] = cpu_to_be32(intc_phandle);
--        cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_SOFT);
--        cells[cpu * 4 + 2] = cpu_to_be32(intc_phandle);
--        cells[cpu * 4 + 3] = cpu_to_be32(IRQ_M_TIMER);
--        g_free(nodename);
-+    if (s->numa_enabled && mc->numa_state->have_numa_distance) {
-+        dist_matrix_size = s->num_socs * s->num_socs * 3 * sizeof(uint32_t);
-+        dist_matrix = g_malloc0(dist_matrix_size);
-+
-+        for (i = 0; i < s->num_socs; i++) {
-+            for (j = 0; j < s->num_socs; j++) {
-+                idx = (i * s->num_socs + j) * 3;
-+                dist_matrix[idx + 0] = cpu_to_be32(i);
-+                dist_matrix[idx + 1] = cpu_to_be32(j);
-+                dist_matrix[idx + 2] =
-+                    cpu_to_be32(mc->numa_state->nodes[i].distance[j]);
-+            }
-+        }
-+
-+        qemu_fdt_add_subnode(fdt, "/distance-map");
-+        qemu_fdt_setprop_string(fdt, "/distance-map", "compatible",
-+                                "numa-distance-map-v1");
-+        qemu_fdt_setprop(fdt, "/distance-map", "distance-matrix",
-+                         dist_matrix, dist_matrix_size);
-+        g_free(dist_matrix);
-     }
--    nodename = g_strdup_printf("/soc/clint@%lx",
--        (long)memmap[SPIKE_CLINT].base);
--    qemu_fdt_add_subnode(fdt, nodename);
--    qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv,clint0");
--    qemu_fdt_setprop_cells(fdt, nodename, "reg",
--        0x0, memmap[SPIKE_CLINT].base,
--        0x0, memmap[SPIKE_CLINT].size);
--    qemu_fdt_setprop(fdt, nodename, "interrupts-extended",
--        cells, s->soc.num_harts * sizeof(uint32_t) * 4);
--    g_free(cells);
--    g_free(nodename);
- 
-     if (cmdline) {
-         qemu_fdt_add_subnode(fdt, "/chosen");
-@@ -157,35 +212,82 @@ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
-     }
- }
- 
--static void spike_board_init(MachineState *machine)
-+static void spike_board_init(MachineState *mc)
- {
-     const struct MemmapEntry *memmap = spike_memmap;
--
--    SpikeState *s = g_new0(SpikeState, 1);
-+    SpikeState *s = SPIKE_MACHINE(mc);
-     MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
--    int i;
--    unsigned int smp_cpus = machine->smp.cpus;
-+    char *soc_name;
-+    unsigned int i, j, base_hartid, hart_count;
-+    uint64_t mem_offset;
-+
-+    /* Populate socket details based on NUMA options */
-+    s->num_socs = mc->numa_state->num_nodes;
-+    if (!s->num_socs) {
-+        s->numa_enabled = false;
-+        s->num_socs = 1;
-+        s->mem_offset[0] = 0;
-+        s->mem_size[0] = mc->ram_size;
-+    } else {
-+        s->numa_enabled = true;
-+        s->num_socs = mc->numa_state->num_nodes;
-+        mem_offset = 0;
-+        for (i = 0; i < s->num_socs; i++) {
-+            s->mem_offset[i] = mem_offset;
-+            s->mem_size[i] = mc->numa_state->nodes[i].node_mem;
-+            mem_offset += s->mem_size[i];
-+        }
-+    }
- 
--    /* Initialize SOC */
--    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
--                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
--    object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type",
--                            &error_abort);
--    object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
--                            &error_abort);
--    object_property_set_bool(OBJECT(&s->soc), true, "realized",
--                            &error_abort);
-+    /* Initialize sockets */
-+    for (i = 0; i < s->num_socs; i++) {
-+        if (s->numa_enabled) {
-+            base_hartid = mc->smp.cpus;
-+            hart_count = 0;
-+            for (j = 0; j < mc->smp.cpus; j++) {
-+                if (mc->possible_cpus->cpus[j].props.node_id != i) {
-+                    continue;
-+                }
-+                if (j < base_hartid) {
-+                    base_hartid = j;
-+                }
-+                hart_count++;
-+            }
-+        } else {
-+            base_hartid = 0;
-+            hart_count = mc->smp.cpus;
-+        }
-+
-+        soc_name = g_strdup_printf("soc%d", i);
-+        object_initialize_child(OBJECT(mc), soc_name, &s->soc[i],
-+            sizeof(s->soc[i]), TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-+        g_free(soc_name);
-+        object_property_set_str(OBJECT(&s->soc[i]),
-+            mc->cpu_type, "cpu-type", &error_abort);
-+        object_property_set_int(OBJECT(&s->soc[i]),
-+            base_hartid, "hartid-base", &error_abort);
-+        object_property_set_int(OBJECT(&s->soc[i]),
-+            hart_count, "num-harts", &error_abort);
-+        object_property_set_bool(OBJECT(&s->soc[i]),
-+            true, "realized", &error_abort);
-+
-+        /* Core Local Interruptor (timer and IPI) for each socket */
-+        sifive_clint_create(
-+            memmap[SPIKE_CLINT].base + i * memmap[SPIKE_CLINT].size,
-+            memmap[SPIKE_CLINT].size, base_hartid, hart_count,
-+            SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE, false);
-+    }
- 
-     /* register system main memory (actual RAM) */
-     memory_region_init_ram(main_mem, NULL, "riscv.spike.ram",
--                           machine->ram_size, &error_fatal);
-+                           mc->ram_size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[SPIKE_DRAM].base,
-         main_mem);
- 
-     /* create device tree */
--    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
-+    create_fdt(s, memmap, mc->ram_size, mc->kernel_cmdline);
- 
-     /* boot rom */
-     memory_region_init_rom(mask_rom, NULL, "riscv.spike.mrom",
-@@ -193,18 +295,18 @@ static void spike_board_init(MachineState *machine)
-     memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
-                                 mask_rom);
- 
--    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
-+    riscv_find_and_load_firmware(mc, BIOS_FILENAME,
-                                  memmap[SPIKE_DRAM].base,
-                                  htif_symbol_callback);
- 
--    if (machine->kernel_filename) {
--        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
-+    if (mc->kernel_filename) {
-+        uint64_t kernel_entry = riscv_load_kernel(mc->kernel_filename,
-                                                   htif_symbol_callback);
- 
--        if (machine->initrd_filename) {
-+        if (mc->initrd_filename) {
-             hwaddr start;
--            hwaddr end = riscv_load_initrd(machine->initrd_filename,
--                                           machine->ram_size, kernel_entry,
-+            hwaddr end = riscv_load_initrd(mc->initrd_filename,
-+                                           mc->ram_size, kernel_entry,
-                                            &start);
-             qemu_fdt_setprop_cell(s->fdt, "/chosen",
-                                   "linux,initrd-start", start);
-@@ -249,12 +351,8 @@ static void spike_board_init(MachineState *machine)
-                           &address_space_memory);
- 
-     /* initialize HTIF using symbols found in load_kernel */
--    htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(0));
--
--    /* Core Local Interruptor (timer and IPI) */
--    sifive_clint_create(memmap[SPIKE_CLINT].base, memmap[SPIKE_CLINT].size,
--        0, smp_cpus, SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
--        false);
-+    htif_mm_init(system_memory, mask_rom,
-+                 &s->soc[0].harts[0].env, serial_hd(0));
- }
- 
- static void spike_v1_10_0_board_init(MachineState *machine)
-@@ -268,6 +366,12 @@ static void spike_v1_10_0_board_init(MachineState *machine)
+-    MachineState *ms = MACHINE(qdev_get_machine());
+-    unsigned int smp_cpus = ms->smp.cpus;
+     SiFivePLICState *plic = SIFIVE_PLIC(dev);
      int i;
-     unsigned int smp_cpus = machine->smp.cpus;
  
-+    s->num_socs = 1;
-+    s->numa_enabled = false;
-+    s->num_socs = 1;
-+    s->mem_offset[0] = 0;
-+    s->mem_size[0] = machine->ram_size;
-+
-     if (!qtest_enabled()) {
-         info_report("The Spike v1.10.0 machine has been deprecated. "
-                     "Please use the generic spike machine and specify the ISA "
-@@ -275,13 +379,14 @@ static void spike_v1_10_0_board_init(MachineState *machine)
-     }
- 
-     /* Initialize SOC */
--    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-+    object_initialize_child(OBJECT(machine), "soc",
-+                            &s->soc[0], sizeof(s->soc[0]),
-                             TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
--    object_property_set_str(OBJECT(&s->soc), SPIKE_V1_10_0_CPU, "cpu-type",
-+    object_property_set_str(OBJECT(&s->soc[0]), SPIKE_V1_10_0_CPU, "cpu-type",
-                             &error_abort);
--    object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-+    object_property_set_int(OBJECT(&s->soc[0]), smp_cpus, "num-harts",
-                             &error_abort);
--    object_property_set_bool(OBJECT(&s->soc), true, "realized",
-+    object_property_set_bool(OBJECT(&s->soc[0]), true, "realized",
-                             &error_abort);
- 
-     /* register system main memory (actual RAM) */
-@@ -339,7 +444,8 @@ static void spike_v1_10_0_board_init(MachineState *machine)
-                           &address_space_memory);
- 
-     /* initialize HTIF using symbols found in load_kernel */
--    htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(0));
-+    htif_mm_init(system_memory, mask_rom,
-+                 &s->soc[0].harts[0].env, serial_hd(0));
- 
-     /* Core Local Interruptor (timer and IPI) */
-     sifive_clint_create(memmap[SPIKE_CLINT].base, memmap[SPIKE_CLINT].size,
-@@ -358,6 +464,12 @@ static void spike_v1_09_1_board_init(MachineState *machine)
-     int i;
-     unsigned int smp_cpus = machine->smp.cpus;
- 
-+    s->num_socs = 1;
-+    s->numa_enabled = false;
-+    s->num_socs = 1;
-+    s->mem_offset[0] = 0;
-+    s->mem_size[0] = machine->ram_size;
-+
-     if (!qtest_enabled()) {
-         info_report("The Spike v1.09.1 machine has been deprecated. "
-                     "Please use the generic spike machine and specify the ISA "
-@@ -365,13 +477,14 @@ static void spike_v1_09_1_board_init(MachineState *machine)
-     }
- 
-     /* Initialize SOC */
--    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-+    object_initialize_child(OBJECT(machine), "soc",
-+                            &s->soc[0], sizeof(s->soc[0]),
-                             TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
--    object_property_set_str(OBJECT(&s->soc), SPIKE_V1_09_1_CPU, "cpu-type",
-+    object_property_set_str(OBJECT(&s->soc[0]), SPIKE_V1_09_1_CPU, "cpu-type",
-                             &error_abort);
--    object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-+    object_property_set_int(OBJECT(&s->soc[0]), smp_cpus, "num-harts",
-                             &error_abort);
--    object_property_set_bool(OBJECT(&s->soc), true, "realized",
-+    object_property_set_bool(OBJECT(&s->soc[0]), true, "realized",
-                             &error_abort);
- 
-     /* register system main memory (actual RAM) */
-@@ -425,7 +538,7 @@ static void spike_v1_09_1_board_init(MachineState *machine)
-         "};\n";
- 
-     /* build config string with supplied memory size */
--    char *isa = riscv_isa_string(&s->soc.harts[0]);
-+    char *isa = riscv_isa_string(&s->soc[0].harts[0]);
-     char *config_string = g_strdup_printf(config_string_tmpl,
-         (uint64_t)memmap[SPIKE_CLINT].base + SIFIVE_TIME_BASE,
-         (uint64_t)memmap[SPIKE_DRAM].base,
-@@ -448,7 +561,8 @@ static void spike_v1_09_1_board_init(MachineState *machine)
-                           &address_space_memory);
- 
-     /* initialize HTIF using symbols found in load_kernel */
--    htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(0));
-+    htif_mm_init(system_memory, mask_rom,
-+                 &s->soc[0].harts[0].env, serial_hd(0));
- 
-     /* Core Local Interruptor (timer and IPI) */
-     sifive_clint_create(memmap[SPIKE_CLINT].base, memmap[SPIKE_CLINT].size,
-@@ -472,15 +586,86 @@ static void spike_v1_10_0_machine_init(MachineClass *mc)
-     mc->max_cpus = 1;
- }
- 
--static void spike_machine_init(MachineClass *mc)
-+DEFINE_MACHINE("spike_v1.9.1", spike_v1_09_1_machine_init)
-+DEFINE_MACHINE("spike_v1.10", spike_v1_10_0_machine_init)
-+
-+static CpuInstanceProperties
-+spike_cpu_index_to_props(MachineState *ms, unsigned cpu_index)
-+{
-+    MachineClass *mc = MACHINE_GET_CLASS(ms);
-+    const CPUArchIdList *possible_cpus = mc->possible_cpu_arch_ids(ms);
-+
-+    assert(cpu_index < possible_cpus->len);
-+    return possible_cpus->cpus[cpu_index].props;
-+}
-+
-+static int64_t spike_get_default_cpu_node_id(const MachineState *ms, int idx)
-+{
-+    int64_t nidx = 0;
-+
-+    if (ms->numa_state->num_nodes) {
-+        nidx = idx / (ms->smp.cpus / ms->numa_state->num_nodes);
-+        if (ms->numa_state->num_nodes <= nidx) {
-+            nidx = ms->numa_state->num_nodes - 1;
-+        }
-+    }
-+
-+    return nidx;
-+}
-+
-+static const CPUArchIdList *spike_possible_cpu_arch_ids(MachineState *ms)
-+{
-+    int n;
-+    unsigned int max_cpus = ms->smp.max_cpus;
-+
-+    if (ms->possible_cpus) {
-+        assert(ms->possible_cpus->len == max_cpus);
-+        return ms->possible_cpus;
-+    }
-+
-+    ms->possible_cpus = g_malloc0(sizeof(CPUArchIdList) +
-+                                  sizeof(CPUArchId) * max_cpus);
-+    ms->possible_cpus->len = max_cpus;
-+    for (n = 0; n < ms->possible_cpus->len; n++) {
-+        ms->possible_cpus->cpus[n].type = ms->cpu_type;
-+        ms->possible_cpus->cpus[n].arch_id = n;
-+        ms->possible_cpus->cpus[n].props.has_thread_id = true;
-+        ms->possible_cpus->cpus[n].props.thread_id = n;
-+    }
-+
-+    return ms->possible_cpus;
-+}
-+
-+static void spike_machine_instance_init(Object *obj)
-+{
-+}
-+
-+static void spike_machine_class_init(ObjectClass *oc, void *data)
+@@ -451,8 +452,8 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
+      * lost a interrupt in the case a PLIC is attached. The SEIP bit must be
+      * hardware controlled when a PLIC is attached.
+      */
+-    for (i = 0; i < smp_cpus; i++) {
+-        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(i));
++    for (i = 0; i < plic->num_harts; i++) {
++        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(plic->hartid_base + i));
+         if (riscv_cpu_claim_interrupts(cpu, MIP_SEIP) < 0) {
+             error_report("SEIP already claimed");
+             exit(1);
+@@ -488,16 +489,17 @@ type_init(sifive_plic_register_types)
+  * Create PLIC device.
+  */
+ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+-    uint32_t num_sources, uint32_t num_priorities,
+-    uint32_t priority_base, uint32_t pending_base,
+-    uint32_t enable_base, uint32_t enable_stride,
+-    uint32_t context_base, uint32_t context_stride,
+-    uint32_t aperture_size)
++    uint32_t hartid_base, uint32_t num_sources,
++    uint32_t num_priorities, uint32_t priority_base,
++    uint32_t pending_base, uint32_t enable_base,
++    uint32_t enable_stride, uint32_t context_base,
++    uint32_t context_stride, uint32_t aperture_size)
  {
--    mc->desc = "RISC-V Spike Board";
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-+    mc->desc = "RISC-V Spike board";
-     mc->init = spike_board_init;
--    mc->max_cpus = 8;
-+    mc->max_cpus = SPIKE_CPUS_MAX;
-     mc->is_default = true;
-     mc->default_cpu_type = SPIKE_V1_10_0_CPU;
-+    mc->possible_cpu_arch_ids = spike_possible_cpu_arch_ids;
-+    mc->cpu_index_to_instance_props = spike_cpu_index_to_props;
-+    mc->get_default_cpu_node_id = spike_get_default_cpu_node_id;
-+    mc->numa_mem_supported = true;
- }
+     DeviceState *dev = qdev_create(NULL, TYPE_SIFIVE_PLIC);
+     assert(enable_stride == (enable_stride & -enable_stride));
+     assert(context_stride == (context_stride & -context_stride));
+     qdev_prop_set_string(dev, "hart-config", hart_config);
++    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
+     qdev_prop_set_uint32(dev, "num-sources", num_sources);
+     qdev_prop_set_uint32(dev, "num-priorities", num_priorities);
+     qdev_prop_set_uint32(dev, "priority-base", priority_base);
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index c193761916..53e48e2ff5 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -586,7 +586,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
  
--DEFINE_MACHINE("spike_v1.9.1", spike_v1_09_1_machine_init)
--DEFINE_MACHINE("spike_v1.10", spike_v1_10_0_machine_init)
--DEFINE_MACHINE("spike", spike_machine_init)
-+static const TypeInfo spike_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("spike"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = spike_machine_class_init,
-+    .instance_init = spike_machine_instance_init,
-+    .instance_size = sizeof(SpikeState),
-+};
-+
-+static void spike_machine_init_register_types(void)
-+{
-+    type_register_static(&spike_machine_typeinfo);
-+}
-+
-+type_init(spike_machine_init_register_types)
-diff --git a/include/hw/riscv/spike.h b/include/hw/riscv/spike.h
-index dc770421bc..ec4fc9f799 100644
---- a/include/hw/riscv/spike.h
-+++ b/include/hw/riscv/spike.h
-@@ -21,13 +21,24 @@
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[SIFIVE_U_PLIC].base,
+-        plic_hart_config,
++        plic_hart_config, 0,
+         SIFIVE_U_PLIC_NUM_SOURCES,
+         SIFIVE_U_PLIC_NUM_PRIORITIES,
+         SIFIVE_U_PLIC_PRIORITY_BASE,
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 51afe7e23b..421815081d 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -584,7 +584,7 @@ static void riscv_virt_board_init(MachineState *machine)
  
- #include "hw/riscv/riscv_hart.h"
- #include "hw/sysbus.h"
-+#include "sysemu/numa.h"
-+
-+#define SPIKE_CPUS_MAX 8
-+
-+#define TYPE_SPIKE_MACHINE MACHINE_TYPE_NAME("spike")
-+#define SPIKE_MACHINE(obj) \
-+    OBJECT_CHECK(SpikeState, (obj), TYPE_SPIKE_MACHINE)
- 
- typedef struct {
-     /*< private >*/
--    SysBusDevice parent_obj;
-+    MachineState parent;
- 
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[VIRT_PLIC].base,
+-        plic_hart_config,
++        plic_hart_config, 0,
+         VIRT_PLIC_NUM_SOURCES,
+         VIRT_PLIC_NUM_PRIORITIES,
+         VIRT_PLIC_PRIORITY_BASE,
+diff --git a/include/hw/riscv/sifive_plic.h b/include/hw/riscv/sifive_plic.h
+index 4421e81249..ace76d0f1b 100644
+--- a/include/hw/riscv/sifive_plic.h
++++ b/include/hw/riscv/sifive_plic.h
+@@ -48,6 +48,7 @@ typedef struct SiFivePLICState {
      /*< public >*/
--    RISCVHartArrayState soc;
-+    bool numa_enabled;
-+    unsigned int num_socs;
-+    uint64_t mem_offset[MAX_NODES];
-+    uint64_t mem_size[MAX_NODES];
-+    RISCVHartArrayState soc[MAX_NODES];
-     void *fdt;
-     int fdt_size;
- } SpikeState;
+     MemoryRegion mmio;
+     uint32_t num_addrs;
++    uint32_t num_harts;
+     uint32_t bitfield_words;
+     PLICAddr *addr_config;
+     uint32_t *source_priority;
+@@ -58,6 +59,7 @@ typedef struct SiFivePLICState {
+ 
+     /* config */
+     char *hart_config;
++    uint32_t hartid_base;
+     uint32_t num_sources;
+     uint32_t num_priorities;
+     uint32_t priority_base;
+@@ -70,10 +72,10 @@ typedef struct SiFivePLICState {
+ } SiFivePLICState;
+ 
+ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+-    uint32_t num_sources, uint32_t num_priorities,
+-    uint32_t priority_base, uint32_t pending_base,
+-    uint32_t enable_base, uint32_t enable_stride,
+-    uint32_t context_base, uint32_t context_stride,
+-    uint32_t aperture_size);
++    uint32_t hartid_base, uint32_t num_sources,
++    uint32_t num_priorities, uint32_t priority_base,
++    uint32_t pending_base, uint32_t enable_base,
++    uint32_t enable_stride, uint32_t context_base,
++    uint32_t context_stride, uint32_t aperture_size);
+ 
+ #endif
 -- 
 2.25.1
 
