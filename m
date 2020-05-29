@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jelt8-0001Gb-Ll
-	for mharc-qemu-riscv@gnu.org; Fri, 29 May 2020 16:45:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46794)
+	id 1jelwF-0006DK-6N
+	for mharc-qemu-riscv@gnu.org; Fri, 29 May 2020 16:49:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47308)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jelt4-0001F8-L7; Fri, 29 May 2020 16:45:56 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:41721)
+ id 1jelwD-0006Ah-H6; Fri, 29 May 2020 16:49:09 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:39337)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jelt1-0002OC-NG; Fri, 29 May 2020 16:45:54 -0400
-Received: by mail-il1-x141.google.com with SMTP id d1so3793752ila.8;
- Fri, 29 May 2020 13:45:50 -0700 (PDT)
+ id 1jelwC-0005mI-5J; Fri, 29 May 2020 16:49:09 -0400
+Received: by mail-io1-xd41.google.com with SMTP id c8so788266iob.6;
+ Fri, 29 May 2020 13:49:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=RIWfy33Pu8WBV4rCd/lR/2Krl6M801QIKLCcDoCmtik=;
- b=LPSTuelrQoG3v9/TwrOt1kwovKRgH2zZjFKKD7uBV7ZFZDsttSdPMVsK4P5dv+c0Gw
- clzWo0VXCnnW+30Fm1lVQLTYzbMYjG9Ra9S2LYFYGve6Pg0rnq0sMcoye4Q8gUxXJmq5
- 6tQj6pD5DRC2sd493J0zUVXolBP55K7bN5YnNORHLa0WgSCfc49w4u2c9q+2R0KXfsx0
- 5Wb+9V3FpBuOx7FMQNEShI1MscITqrq5SOtPRLmzYy23gEy2mRZcTEwU+1juqLhZBxtK
- AuYkQEgMhG90rPxgR/uO9mMljBPMqBMwW42p1nHg+AYigGyqD0w301UA8ZIKV+E9eeqE
- SlZA==
+ :cc; bh=lfYJwYbsf3viRq0jEi9p4en5sgc/dXFv1cABxe72Y4g=;
+ b=JHWgApFQkhmQYyEayQNbTMfv279Hd4HPuMm+4riC6elGKmxwNAaMIRI1PmEs57DyKj
+ Xqi81eklcZ6QWW6epFnV1zYd/ZFsGhFeaFERC89Plh4Q9t1Y8wAhke+jBfMkCYaAGumH
+ XRJffhebNBBo0OC01AMMqZeGAGC9UgIP5tYyGqVs0TgTXhkwuZvS+Glg6kIzoCrls9wS
+ bY3TugfIG2TPGwGm/kVromoTwn1U6OCyZNVMVzttpo40bOpm5RyEC9WWqymV919FDqcw
+ adUCLvimikG+akLYqtV8Qhw6LkhUTSAu1O50voeWt2heEpBCBFNrACEWXt/M21blcBOT
+ S3dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=RIWfy33Pu8WBV4rCd/lR/2Krl6M801QIKLCcDoCmtik=;
- b=L1ANK8y2ioS6AtTGorEFObZe59p1SDvC0wwMmqh3Gl2y4d8F37627TYmr9HvUbNckH
- V1WA3OV0ZvgPdZpMEjMFtyECtTLPuNVGuABc8G2VBKpw4qEfvNBS+4keNm8PCURqvFSy
- +pDDyUkYaI5Vw4fB6br+mqKmLuFoyVks0MA8Emt/pxR0aZmovp66k/+0C5ZkSi9zFYeq
- FgAHwM2xaetll4P+8EorFDmwxnwjm2xDoPo9AZ0+CgevECmJuzzpL+ELBWPIKX2GLb6I
- GJRQUxChTVIQOgmwB8WRC0+Sz6CBgdo817EmEFlRn5wEMS1CF/bgga+CzWyqQPAP0/NM
- n7Qg==
-X-Gm-Message-State: AOAM531eZt7u7046raYyN4a3dPst8qX48K018mEj1xHGyuZHfxmjS1XY
- cmxCLVZErPHgk+Dn7S5yF1vTLw/0nfz5omacMwM=
-X-Google-Smtp-Source: ABdhPJz2VzVqLMMk6s6YeiG1jE8NDpa/p+u2KLtb/qelwkS1WjcNKcAE1+7e9Mwn9hDrzAWcl/W9BM+1hTk6R5k2L64=
-X-Received: by 2002:a92:c94b:: with SMTP id i11mr3476236ilq.177.1590785150087; 
- Fri, 29 May 2020 13:45:50 -0700 (PDT)
+ bh=lfYJwYbsf3viRq0jEi9p4en5sgc/dXFv1cABxe72Y4g=;
+ b=JuaOdOx46AvGR3MxAYP+04sXy+sdrJyJuaCgtT1YA1LLpDnJcuxV670KQa04CJMwre
+ KzDg4m4WG8P2Q4NZgdGFdOdECcZMLAlJbtiwcwR0bCfNgExkSU+wnfJcBane1GQjgrMw
+ f9d96Bpyb07WJd8GjdNlidPqdEH5gvHlsLFEnlJEbUaXTrviZFLQ+ZzSSxgfh14suhqI
+ xeXIsrCCMOlibKr3QLJq8VanDqvxrSTiskCpyLBXFF/FCpPeNsCRj8Ggh3yp/mcb2s8X
+ XrtaAVx5kGYSYGbJ5LQCYNibqeZa/G6ZZDEi5XJXm49Rx3jnPmAWXMBBfoQa55MGlFaP
+ K1ng==
+X-Gm-Message-State: AOAM530uyJv0GMSC5+5hjj9yAHp32/KEk7lsO6rVrE1bBgGUpKVx832b
+ TfT8cPBAFFA885dVBxYXoZ4S2GJwbGA48+nxXv4=
+X-Google-Smtp-Source: ABdhPJxA/O8VOQj6PvtK9fw3e1ssHI4WUV3LYuHb7eB7X/sn2OdgVRcUgW2Axg/AobVkoHKFmw2cEUp0hRjrKV7TppA=
+X-Received: by 2002:a5e:dd45:: with SMTP id u5mr7142530iop.118.1590785346588; 
+ Fri, 29 May 2020 13:49:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200521094413.10425-1-zhiwei_liu@c-sky.com>
- <20200521094413.10425-43-zhiwei_liu@c-sky.com>
-In-Reply-To: <20200521094413.10425-43-zhiwei_liu@c-sky.com>
+ <20200521094413.10425-44-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200521094413.10425-44-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 29 May 2020 13:36:40 -0700
-Message-ID: <CAKmqyKMFoxWAAVWBJGNNYJKy-+X1wtuYevKtZv3fbbzvYJ1rsA@mail.gmail.com>
-Subject: Re: [PATCH v8 42/62] target/riscv: vector floating-point merge
- instructions
+Date: Fri, 29 May 2020 13:40:01 -0700
+Message-ID: <CAKmqyKP04ZQ-EwURWVQDoe2on_NqNkW-OoqNOBk136+WG1L5+w@mail.gmail.com>
+Subject: Re: [PATCH v8 43/62] target/riscv: vector floating-point/integer
+ type-convert instructions
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -52,8 +52,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  wenmeng_zhang@c-sky.com, Alistair Francis <alistair.francis@wdc.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -76,126 +76,115 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 May 2020 20:45:56 -0000
+X-List-Received-Date: Fri, 29 May 2020 20:49:10 -0000
 
-On Thu, May 21, 2020 at 4:09 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Thu, May 21, 2020 at 4:11 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/helper.h                   |  4 +++
->  target/riscv/insn32.decode              |  2 ++
->  target/riscv/insn_trans/trans_rvv.inc.c | 38 +++++++++++++++++++++++++
->  target/riscv/vector_helper.c            | 24 ++++++++++++++++
->  4 files changed, 68 insertions(+)
+>  target/riscv/helper.h                   | 13 ++++++++++
+>  target/riscv/insn32.decode              |  4 +++
+>  target/riscv/insn_trans/trans_rvv.inc.c |  6 +++++
+>  target/riscv/vector_helper.c            | 33 +++++++++++++++++++++++++
+>  4 files changed, 56 insertions(+)
 >
 > diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 23b268df90..21054cc957 100644
+> index 21054cc957..05f8fb5ffc 100644
 > --- a/target/riscv/helper.h
 > +++ b/target/riscv/helper.h
-> @@ -994,3 +994,7 @@ DEF_HELPER_6(vmford_vf_d, void, ptr, ptr, i64, ptr, env, i32)
->  DEF_HELPER_5(vfclass_v_h, void, ptr, ptr, ptr, env, i32)
->  DEF_HELPER_5(vfclass_v_w, void, ptr, ptr, ptr, env, i32)
->  DEF_HELPER_5(vfclass_v_d, void, ptr, ptr, ptr, env, i32)
+> @@ -998,3 +998,16 @@ DEF_HELPER_5(vfclass_v_d, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_6(vfmerge_vfm_h, void, ptr, ptr, i64, ptr, env, i32)
+>  DEF_HELPER_6(vfmerge_vfm_w, void, ptr, ptr, i64, ptr, env, i32)
+>  DEF_HELPER_6(vfmerge_vfm_d, void, ptr, ptr, i64, ptr, env, i32)
 > +
-> +DEF_HELPER_6(vfmerge_vfm_h, void, ptr, ptr, i64, ptr, env, i32)
-> +DEF_HELPER_6(vfmerge_vfm_w, void, ptr, ptr, i64, ptr, env, i32)
-> +DEF_HELPER_6(vfmerge_vfm_d, void, ptr, ptr, i64, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_xu_f_v_h, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_xu_f_v_w, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_xu_f_v_d, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_x_f_v_h, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_x_f_v_w, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_x_f_v_d, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_f_xu_v_h, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_f_xu_v_w, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_f_xu_v_d, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_f_x_v_h, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_f_x_v_w, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfcvt_f_x_v_d, void, ptr, ptr, ptr, env, i32)
 > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 23e80fe954..14cb4e2e66 100644
+> index 14cb4e2e66..53562c6663 100644
 > --- a/target/riscv/insn32.decode
 > +++ b/target/riscv/insn32.decode
-> @@ -513,6 +513,8 @@ vmfge_vf        011111 . ..... ..... 101 ..... 1010111 @r_vm
->  vmford_vv       011010 . ..... ..... 001 ..... 1010111 @r_vm
->  vmford_vf       011010 . ..... ..... 101 ..... 1010111 @r_vm
+> @@ -515,6 +515,10 @@ vmford_vf       011010 . ..... ..... 101 ..... 1010111 @r_vm
 >  vfclass_v       100011 . ..... 10000 001 ..... 1010111 @r2_vm
-> +vfmerge_vfm     010111 0 ..... ..... 101 ..... 1010111 @r_vm_0
-> +vfmv_v_f        010111 1 00000 ..... 101 ..... 1010111 @r2
+>  vfmerge_vfm     010111 0 ..... ..... 101 ..... 1010111 @r_vm_0
+>  vfmv_v_f        010111 1 00000 ..... 101 ..... 1010111 @r2
+> +vfcvt_xu_f_v    100010 . ..... 00000 001 ..... 1010111 @r2_vm
+> +vfcvt_x_f_v     100010 . ..... 00001 001 ..... 1010111 @r2_vm
+> +vfcvt_f_xu_v    100010 . ..... 00010 001 ..... 1010111 @r2_vm
+> +vfcvt_f_x_v     100010 . ..... 00011 001 ..... 1010111 @r2_vm
 >
 >  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
 >  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 > diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-> index 621220e5ff..dfa2177331 100644
+> index dfa2177331..6db460177d 100644
 > --- a/target/riscv/insn_trans/trans_rvv.inc.c
 > +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-> @@ -2177,3 +2177,41 @@ GEN_OPFVF_TRANS(vmford_vf, opfvf_cmp_check)
->
->  /* Vector Floating-Point Classify Instruction */
->  GEN_OPFV_TRANS(vfclass_v, opfv_check)
+> @@ -2215,3 +2215,9 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
+>      }
+>      return false;
+>  }
 > +
-> +/* Vector Floating-Point Merge Instruction */
-> +GEN_OPFVF_TRANS(vfmerge_vfm,  opfvf_check)
-> +
-> +static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
-> +{
-> +    if (vext_check_isa_ill(s) &&
-> +        vext_check_reg(s, a->rd, false) &&
-> +        (s->sew != 0)) {
-> +
-> +        if (s->vl_eq_vlmax) {
-> +            tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
-> +                                 MAXSZ(s), MAXSZ(s), cpu_fpr[a->rs1]);
-> +        } else {
-> +            TCGv_ptr dest;
-> +            TCGv_i32 desc;
-> +            uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
-> +            static gen_helper_vmv_vx * const fns[3] = {
-> +                gen_helper_vmv_v_x_h,
-> +                gen_helper_vmv_v_x_w,
-> +                gen_helper_vmv_v_x_d,
-> +            };
-> +            TCGLabel *over = gen_new_label();
-> +            tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +
-> +            dest = tcg_temp_new_ptr();
-> +            desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
-> +            tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, a->rd));
-> +            fns[s->sew - 1](dest, cpu_fpr[a->rs1], cpu_env, desc);
-> +
-> +            tcg_temp_free_ptr(dest);
-> +            tcg_temp_free_i32(desc);
-> +            gen_set_label(over);
-> +        }
-> +        return true;
-> +    }
-> +    return false;
-> +}
+> +/* Single-Width Floating-Point/Integer Type-Convert Instructions */
+> +GEN_OPFV_TRANS(vfcvt_xu_f_v, opfv_check)
+> +GEN_OPFV_TRANS(vfcvt_x_f_v, opfv_check)
+> +GEN_OPFV_TRANS(vfcvt_f_xu_v, opfv_check)
+> +GEN_OPFV_TRANS(vfcvt_f_x_v, opfv_check)
 > diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 63d8873c0a..018293570d 100644
+> index 018293570d..34b21c8deb 100644
 > --- a/target/riscv/vector_helper.c
 > +++ b/target/riscv/vector_helper.c
-> @@ -4193,3 +4193,27 @@ RVVCALL(OPIVV1, vfclass_v_d, OP_UU_D, H8, H8, fclass_d)
->  GEN_VEXT_V(vfclass_v_h, 2, 2, clearh)
->  GEN_VEXT_V(vfclass_v_w, 4, 4, clearl)
->  GEN_VEXT_V(vfclass_v_d, 8, 8, clearq)
+> @@ -4217,3 +4217,36 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2, \
+>  GEN_VFMERGE_VF(vfmerge_vfm_h, int16_t, H2, clearh)
+>  GEN_VFMERGE_VF(vfmerge_vfm_w, int32_t, H4, clearl)
+>  GEN_VFMERGE_VF(vfmerge_vfm_d, int64_t, H8, clearq)
 > +
-> +/* Vector Floating-Point Merge Instruction */
-> +#define GEN_VFMERGE_VF(NAME, ETYPE, H, CLEAR_FN)              \
-> +void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2, \
-> +                  CPURISCVState *env, uint32_t desc)          \
-> +{                                                             \
-> +    uint32_t mlen = vext_mlen(desc);                          \
-> +    uint32_t vm = vext_vm(desc);                              \
-> +    uint32_t vl = env->vl;                                    \
-> +    uint32_t esz = sizeof(ETYPE);                             \
-> +    uint32_t vlmax = vext_maxsz(desc) / esz;                  \
-> +    uint32_t i;                                               \
-> +                                                              \
-> +    for (i = 0; i < vl; i++) {                                \
-> +        ETYPE s2 = *((ETYPE *)vs2 + H(i));                    \
-> +        *((ETYPE *)vd + H(i))                                 \
-> +          = (!vm && !vext_elem_mask(v0, mlen, i) ? s2 : s1);  \
-> +    }                                                         \
-> +    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                  \
-> +}
+> +/* Single-Width Floating-Point/Integer Type-Convert Instructions */
+> +/* vfcvt.xu.f.v vd, vs2, vm # Convert float to unsigned integer. */
+> +RVVCALL(OPFVV1, vfcvt_xu_f_v_h, OP_UU_H, H2, H2, float16_to_uint16)
+> +RVVCALL(OPFVV1, vfcvt_xu_f_v_w, OP_UU_W, H4, H4, float32_to_uint32)
+> +RVVCALL(OPFVV1, vfcvt_xu_f_v_d, OP_UU_D, H8, H8, float64_to_uint64)
+> +GEN_VEXT_V_ENV(vfcvt_xu_f_v_h, 2, 2, clearh)
+> +GEN_VEXT_V_ENV(vfcvt_xu_f_v_w, 4, 4, clearl)
+> +GEN_VEXT_V_ENV(vfcvt_xu_f_v_d, 8, 8, clearq)
 > +
-> +GEN_VFMERGE_VF(vfmerge_vfm_h, int16_t, H2, clearh)
-> +GEN_VFMERGE_VF(vfmerge_vfm_w, int32_t, H4, clearl)
-> +GEN_VFMERGE_VF(vfmerge_vfm_d, int64_t, H8, clearq)
+> +/* vfcvt.x.f.v vd, vs2, vm # Convert float to signed integer. */
+> +RVVCALL(OPFVV1, vfcvt_x_f_v_h, OP_UU_H, H2, H2, float16_to_int16)
+> +RVVCALL(OPFVV1, vfcvt_x_f_v_w, OP_UU_W, H4, H4, float32_to_int32)
+> +RVVCALL(OPFVV1, vfcvt_x_f_v_d, OP_UU_D, H8, H8, float64_to_int64)
+> +GEN_VEXT_V_ENV(vfcvt_x_f_v_h, 2, 2, clearh)
+> +GEN_VEXT_V_ENV(vfcvt_x_f_v_w, 4, 4, clearl)
+> +GEN_VEXT_V_ENV(vfcvt_x_f_v_d, 8, 8, clearq)
+> +
+> +/* vfcvt.f.xu.v vd, vs2, vm # Convert unsigned integer to float. */
+> +RVVCALL(OPFVV1, vfcvt_f_xu_v_h, OP_UU_H, H2, H2, uint16_to_float16)
+> +RVVCALL(OPFVV1, vfcvt_f_xu_v_w, OP_UU_W, H4, H4, uint32_to_float32)
+> +RVVCALL(OPFVV1, vfcvt_f_xu_v_d, OP_UU_D, H8, H8, uint64_to_float64)
+> +GEN_VEXT_V_ENV(vfcvt_f_xu_v_h, 2, 2, clearh)
+> +GEN_VEXT_V_ENV(vfcvt_f_xu_v_w, 4, 4, clearl)
+> +GEN_VEXT_V_ENV(vfcvt_f_xu_v_d, 8, 8, clearq)
+> +
+> +/* vfcvt.f.x.v vd, vs2, vm # Convert integer to float. */
+> +RVVCALL(OPFVV1, vfcvt_f_x_v_h, OP_UU_H, H2, H2, int16_to_float16)
+> +RVVCALL(OPFVV1, vfcvt_f_x_v_w, OP_UU_W, H4, H4, int32_to_float32)
+> +RVVCALL(OPFVV1, vfcvt_f_x_v_d, OP_UU_D, H8, H8, int64_to_float64)
+> +GEN_VEXT_V_ENV(vfcvt_f_x_v_h, 2, 2, clearh)
+> +GEN_VEXT_V_ENV(vfcvt_f_x_v_w, 4, 4, clearl)
+> +GEN_VEXT_V_ENV(vfcvt_f_x_v_d, 8, 8, clearq)
 > --
 > 2.23.0
 >
