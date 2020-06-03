@@ -1,67 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jgBFu-0007Br-Ho
-	for mharc-qemu-riscv@gnu.org; Tue, 02 Jun 2020 14:03:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49466)
+	id 1jgL0S-0004Gk-34
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Jun 2020 00:28:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48488)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jgBFt-0007Bd-FM; Tue, 02 Jun 2020 14:03:17 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:33161)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jgL0Q-0004Fg-3l
+ for qemu-riscv@nongnu.org; Wed, 03 Jun 2020 00:27:58 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:45591)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jgBFs-0003MK-74; Tue, 02 Jun 2020 14:03:17 -0400
-Received: by mail-io1-xd41.google.com with SMTP id k18so11850838ion.0;
- Tue, 02 Jun 2020 11:03:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Tot7BqAZgE26wisKNZH8IiM145nTTs7/T+hwQ7OlKjE=;
- b=rqeEW7pc9xcjTf1gLFxidKjq06VJj0Ds3D+Y+Qk+tLHMQrtHn0IbQxl32sgr5G4JVU
- 1Wb40DE/oggs0nG2+tnxy6fwAHA4JXniQXJAbeVoyuOmbpxTYOhARzTnInwlaPz6KSM0
- IRNDulMffiLOl/2/3Eh7IFTSxzkQJ+v1xlMIBVU8QBndXcCjtxipbnyzG8f2dYnN0X7r
- JyZ29EmUcKcZ33JfZ8F11dhVLXVkXMrocNCPYgnfl2f/bz325LIRD07cl69aJxOpRJIy
- D1jjAsnvrvMYrv4OUtlV1woOJnKqsMOXYNCPgtZEGzwAWsdIXkVRIs7dJEzLsRAT1F/x
- C/pA==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jgL0P-0007e4-33
+ for qemu-riscv@nongnu.org; Wed, 03 Jun 2020 00:27:57 -0400
+Received: by mail-pf1-x442.google.com with SMTP id a127so712446pfa.12
+ for <qemu-riscv@nongnu.org>; Tue, 02 Jun 2020 21:27:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=quRMxeImeQm2SMl7+Ls1gDvxLR0VJAl5Zjikf87gu4E=;
+ b=aDnQtyCw+hwlEXHzvL4/Nmsz0UyEadqm9x4fHGOM7egXBU0P/NuhuMJOyvTD2gggJP
+ 8p3ZbeazptAv7ZMs+GoIuB7uc5ygufdvC0PiqXMNJZc1iKk1RXmauAhLD0kiEjidAFEH
+ kcszv8H1pjKzhw2XkFoeMYrr6HWDTMzn9OYLtHHw6sM1XktNQ4FGlY9NZt41zdJu4qe8
+ 3c0FDnY+hmwMikzaTgiAr07XMjvtTJMeLht5ucwcpQBhB+5e2vCY0YKhWC1cC2+T3e4C
+ hlOFpsRfW12+37JisaWuMZZDwkkCHlHhkx++r64vpCHnex5lFyK2I9X6KYHHiv4QEsHt
+ KmlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Tot7BqAZgE26wisKNZH8IiM145nTTs7/T+hwQ7OlKjE=;
- b=FiLI4vwk9gvgyU4LBhiXAJ7Q2p05ui0LQNIzsh9ZQRceDGYKQoWljcYLnErX756Yji
- Zqt6QRoJl74MPeKSjHVGByI1DARBWK9SOYwau3QJwnRBE43zHKBPQfDaHVUEZqK3uuFB
- 2iZJSJdxtoQa7VyIbuzOSjUU9EnjrJIeetetQPENcl8vRyfKukUwTJzA9CN4OuqCr1Lm
- L7fgQ78q0lawCJHYRNxu7C3f0AaWIH7Y4GSKd04niE9neRJsSHLLmyZ+eXjj9pEokrSw
- gbrLYv8AX2oR63TZg1Y6iT7d2WqnKek0v9rrXMeqjpObnq/aGMzBihm9ikhubPnR73rf
- SwYQ==
-X-Gm-Message-State: AOAM533QJZFPL0eWu8SFeA/G0UIqasUzGTNb3tSqN946pj7T1gobuK/E
- Y7ky2LAno59wb235VYU85Wk1QyoIU9y/mD0qABg=
-X-Google-Smtp-Source: ABdhPJxHEkWNFo1ROa44jo8Qwo2YrTPcqDCtdJdWDKukGul7jF6rmmEmZMVUwV4fIp+DO+n/WJva72EohPGu1FSEqn0=
-X-Received: by 2002:a6b:6a13:: with SMTP id x19mr458540iog.175.1591120994848; 
- Tue, 02 Jun 2020 11:03:14 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=quRMxeImeQm2SMl7+Ls1gDvxLR0VJAl5Zjikf87gu4E=;
+ b=XYF1dkstCQGClhY13WdORCj51CSPzfTbpHHAujZUdbdJg5OW/55fhfAkN/a4hfjmeH
+ lkejxI7AbqMJ8s4Ab50txxa84jFDIyVf4E/kyVFwZw5zJYSo76m6Qf4cvoEd3WdKwx9O
+ gEV5W8oRe85WdZVaz+Pd0ugMCPz1C/VRcbfmZQKmut8vaDrWLMOMvULgrg0vHEu4EZ8y
+ 7Ihkv8Knp53duIuuQQHHUEk23XibqR8K6iWmWEhjKpGdZ4S8D3Gh5OIyWyIH2dW2X3O7
+ yoHs5ZU1h8+rQRSZbIl1JNTIAjbw4m8CtAwLHnBCb/75KrJjioFpN7Zm6YajDr8L1Af6
+ DHpw==
+X-Gm-Message-State: AOAM530ltvqWSQfI4u69DOpYG1BzMr5r0YqXvczIQKFEUFoIgzflAQpI
+ DAhi0Mo0krfBfXkN66OTC1DEPw==
+X-Google-Smtp-Source: ABdhPJwPOavZ0nv14HgofDBk5No3GTGJEIab629qI73swrUebQ3Rz06fy0akY5O4JSzzoHEUifqr7A==
+X-Received: by 2002:a05:6a00:2b0:: with SMTP id
+ q16mr12545305pfs.104.1591158474292; 
+ Tue, 02 Jun 2020 21:27:54 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
+ by smtp.gmail.com with ESMTPSA id 2sm577877pfd.163.2020.06.02.21.27.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 02 Jun 2020 21:27:53 -0700 (PDT)
+Subject: Re: [PATCH v8 30/62] target/riscv: Update fp_status when float
+ rounding mode changes
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, palmer@dabbelt.com, wenmeng_zhang@c-sky.com,
+ wxy194768@alibaba-inc.com
+References: <20200521094413.10425-1-zhiwei_liu@c-sky.com>
+ <20200521094413.10425-31-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <7cb2aa5d-833a-8544-dadc-5aabba06ecd2@linaro.org>
+Date: Tue, 2 Jun 2020 21:27:51 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-References: <cover.1590704015.git.alistair.francis@wdc.com>
- <73cce2d0edd0d41ba15df403a2096bfa70bf0565.1590704015.git.alistair.francis@wdc.com>
- <cc1a1671-b926-bb31-1ed2-d2920f0faf38@c-sky.com>
- <c9f16143-4e9b-a3a8-ffd3-12d43fd2e343@c-sky.com>
-In-Reply-To: <c9f16143-4e9b-a3a8-ffd3-12d43fd2e343@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 2 Jun 2020 10:54:05 -0700
-Message-ID: <CAKmqyKM6rigjbDoFh0bfq8gJXJ=+H+onh=DXjCzhAijMCvR16Q@mail.gmail.com>
-Subject: Re: [PATCH v5 07/11] hw/char: Initial commit of Ibex UART
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
+In-Reply-To: <20200521094413.10425-31-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::442;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x442.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
@@ -76,65 +86,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jun 2020 18:03:17 -0000
+X-List-Received-Date: Wed, 03 Jun 2020 04:27:58 -0000
 
-On Tue, Jun 2, 2020 at 5:28 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->
-> Hi Alistair,
->
-> There are still some questions I don't understand.
->
-> 1. Is the baud rate  or fifo a necessary feature to simulate?
-> As you can see, qemu_chr_fe_write will send the byte as soon as possible.
-> When you want to transmit a byte through WDATA,  you can call
-> qemu_chr_fe_write directly.
+On 5/21/20 2:43 AM, LIU Zhiwei wrote:
+> @@ -174,6 +175,9 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+>      env->mstatus |= MSTATUS_FS;
+>  #endif
+>      env->frm = val & (FSR_RD >> FSR_RD_SHIFT);
+> +    if (!riscv_cpu_set_rounding_mode(env, env->frm)) {
+> +        return -1;
+> +    }
 
-So qemu_chr_fe_write() will send the data straight away. This doesn't
-match what teh hardware does though. So by modelling a FIFO and a
-delay in sending we can better match the hardware.
+This will raise an exception immediately in helper_csrrw().
 
->
-> 2.  The baud rate calculation method is not strictly right.
-> I think when a byte write to FIFO,  char_tx_time * 8 is the correct time
-> to send the byte instead of
-> char_tx_time * 4.
+According to Section 8.2, the no exception should occur until the next fp
+operation that uses the invalid frm.
 
-Do you mind explaining why 8 is correct instead of 4?
+You're doing this just fine in helper_set_rounding_mode(), which is sufficient
+for scalar fp ops.  Without looking forward to later patches, I suppose we'll
+need to do something else for vector fp ops.
 
->
-> 3.  Why add a watch here?
 
-This is based on the Cadence UART implementation in QEMU (which does
-the same thing). This will trigger a callback when we can write more
-data or when the backend has hung up.
-
-Alistair
-
-> > +        s->uart_status |= UART_STATUS_TXEMPTY;
-> > +        s->uart_intr_state |= INTR_STATE_TX_EMPTY;
-> > +        s->uart_intr_state &= ~INTR_STATE_TX_WATERMARK;
-> > +        ibex_uart_update_irqs(s);
-> > +        return FALSE;
-> > +    }
-> > +
-> > +    ret = qemu_chr_fe_write(&s->chr, s->tx_fifo, s->tx_level);
-> > +
-> > +    if (ret >= 0) {
-> > +        s->tx_level -= ret;
-> > +        memmove(s->tx_fifo, s->tx_fifo + ret, s->tx_level);
-> > +    }
-> > +
-> > +    if (s->tx_level) {
-> > +        guint r = qemu_chr_fe_add_watch(&s->chr, G_IO_OUT | G_IO_HUP,
-> > +                                        ibex_uart_xmit, s);
-> > +        if (!r) {
-> > +            s->tx_level = 0;
-> > +            return FALSE;
-> > +        }
-> > +    }
-> > +
->
-> Zhiwei
->
->
+r~
 
