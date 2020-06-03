@@ -1,51 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jgMEc-0004uT-EV
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Jun 2020 01:46:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55480)
+	id 1jgQi5-0000Nl-4j
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Jun 2020 06:33:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56738)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jgMEZ-0004sk-PS; Wed, 03 Jun 2020 01:46:39 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:49711)
+ id 1jgQi2-0000IT-NJ; Wed, 03 Jun 2020 06:33:22 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:50960)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jgMEX-0006Me-86; Wed, 03 Jun 2020 01:46:39 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.05565376|-1; CH=green;
+ id 1jgQi0-0003vr-G2; Wed, 03 Jun 2020 06:33:22 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.04440919|-1; CH=green;
  DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.0631394-0.000127326-0.936733;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03296; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=7; RT=7; SR=0; TI=SMTPD_---.HhSgiM9_1591163185; 
+ DS=CONTINUE|ham_system_inform|0.376305-0.000289744-0.623405;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03297; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=6; RT=6; SR=0; TI=SMTPD_---.Hhaq5-7_1591180388; 
 Received: from 30.225.208.46(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.HhSgiM9_1591163185)
- by smtp.aliyun-inc.com(10.147.42.198);
- Wed, 03 Jun 2020 13:46:25 +0800
-Subject: Re: [PATCH v8 30/62] target/riscv: Update fp_status when float
- rounding mode changes
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, palmer@dabbelt.com, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com
-References: <20200521094413.10425-1-zhiwei_liu@c-sky.com>
- <20200521094413.10425-31-zhiwei_liu@c-sky.com>
- <7cb2aa5d-833a-8544-dadc-5aabba06ecd2@linaro.org>
+ fp:SMTPD_---.Hhaq5-7_1591180388)
+ by smtp.aliyun-inc.com(10.147.41.231);
+ Wed, 03 Jun 2020 18:33:08 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <ca1e71cd-c290-5fb9-e9bf-026c73e06560@c-sky.com>
-Date: Wed, 3 Jun 2020 13:46:25 +0800
+Subject: Re: [PATCH v5 07/11] hw/char: Initial commit of Ibex UART
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+References: <cover.1590704015.git.alistair.francis@wdc.com>
+ <73cce2d0edd0d41ba15df403a2096bfa70bf0565.1590704015.git.alistair.francis@wdc.com>
+ <cc1a1671-b926-bb31-1ed2-d2920f0faf38@c-sky.com>
+ <c9f16143-4e9b-a3a8-ffd3-12d43fd2e343@c-sky.com>
+ <CAKmqyKM6rigjbDoFh0bfq8gJXJ=+H+onh=DXjCzhAijMCvR16Q@mail.gmail.com>
+Message-ID: <ec0a7545-1793-d1a9-fccf-068496cf1f0a@c-sky.com>
+Date: Wed, 3 Jun 2020 18:33:07 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.1
 MIME-Version: 1.0
-In-Reply-To: <7cb2aa5d-833a-8544-dadc-5aabba06ecd2@linaro.org>
+In-Reply-To: <CAKmqyKM6rigjbDoFh0bfq8gJXJ=+H+onh=DXjCzhAijMCvR16Q@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 Received-SPF: none client-ip=121.197.200.217;
  envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/03 01:46:28
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/03 06:33:11
 X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
- UNPARSEABLE_RELAY=0.001 autolearn=_AUTOLEARN
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, UNPARSEABLE_RELAY=0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -58,40 +60,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jun 2020 05:46:40 -0000
+X-List-Received-Date: Wed, 03 Jun 2020 10:33:23 -0000
 
+On 2020/6/3 1:54, Alistair Francis wrote:
+> On Tue, Jun 2, 2020 at 5:28 AM LIU Zhiwei<zhiwei_liu@c-sky.com>  wrote:
+>> Hi Alistair,
+>>
+>> There are still some questions I don't understand.
+>>
+>> 1. Is the baud rate  or fifo a necessary feature to simulate?
+>> As you can see, qemu_chr_fe_write will send the byte as soon as possible.
+>> When you want to transmit a byte through WDATA,  you can call
+>> qemu_chr_fe_write directly.
+> So qemu_chr_fe_write() will send the data straight away. This doesn't
+> match what teh hardware does though. So by modelling a FIFO and a
+> delay in sending we can better match the hardware.
+I see many UARTs have similar features. Does the software really care about
+these features? Usually I just want to print something to the terminal 
+through UART.
+Most simulation in QEMU is for running software, not exactly the details 
+of hardware.
+For example, we will not simulate the 16x oversamples in this UART.
 
+There is no error here. Personally I  think it is necessary to simulate 
+the FIFO and baud rate,
+maybe for supporting some backends.
 
-On 2020/6/3 12:27, Richard Henderson wrote:
-> On 5/21/20 2:43 AM, LIU Zhiwei wrote:
->> @@ -174,6 +175,9 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
->>       env->mstatus |= MSTATUS_FS;
->>   #endif
->>       env->frm = val & (FSR_RD >> FSR_RD_SHIFT);
->> +    if (!riscv_cpu_set_rounding_mode(env, env->frm)) {
->> +        return -1;
->> +    }
-> This will raise an exception immediately in helper_csrrw().
->
-> According to Section 8.2, the no exception should occur until the next fp
-> operation that uses the invalid frm.
->
-> You're doing this just fine in helper_set_rounding_mode(), which is sufficient
-> for scalar fp ops.  Without looking forward to later patches, I suppose we'll
-> need to do something else for vector fp ops.
-Hi Richard,
-
-I think you are right.  Maybe I should transmit frm to ctx->frm, and 
-check ctx->frm in vector fp ops.
-
-We can set ctx->frm = env->frm instead of ctx->frm = -1 in 
-riscv_tr_init_disas_context.
-And  remove the sentence ctx->frm = rm; from gen_set_rm.
-
-Is it right?
+Can someone give a reasonable answer for this question?
+>> 2.  The baud rate calculation method is not strictly right.
+>> I think when a byte write to FIFO,  char_tx_time * 8 is the correct time
+>> to send the byte instead of
+>> char_tx_time * 4.
+> Do you mind explaining why 8 is correct instead of 4?
+Usually write a byte to WDATA will trigger a uart_write_tx_fifo. 
+Translate a bit will take
+char_tx_time. So it will take char_tx_time * 8 to transmit a byte.
+>> 3.  Why add a watch here?
+> This is based on the Cadence UART implementation in QEMU (which does
+> the same thing). This will trigger a callback when we can write more
+> data or when the backend has hung up.
+Many other serials do the same thing, like virtio-console and serial. So 
+it may be a common
+interface here. I will try to understand it(Not yet).
 
 Zhiwei
+> Alistair
 >
-> r~
+>>> +        s->uart_status |= UART_STATUS_TXEMPTY;
+>>> +        s->uart_intr_state |= INTR_STATE_TX_EMPTY;
+>>> +        s->uart_intr_state &= ~INTR_STATE_TX_WATERMARK;
+>>> +        ibex_uart_update_irqs(s);
+>>> +        return FALSE;
+>>> +    }
+>>> +
+>>> +    ret = qemu_chr_fe_write(&s->chr, s->tx_fifo, s->tx_level);
+>>> +
+>>> +    if (ret >= 0) {
+>>> +        s->tx_level -= ret;
+>>> +        memmove(s->tx_fifo, s->tx_fifo + ret, s->tx_level);
+>>> +    }
+>>> +
+>>> +    if (s->tx_level) {
+>>> +        guint r = qemu_chr_fe_add_watch(&s->chr, G_IO_OUT | G_IO_HUP,
+>>> +                                        ibex_uart_xmit, s);
+>>> +        if (!r) {
+>>> +            s->tx_level = 0;
+>>> +            return FALSE;
+>>> +        }
+>>> +    }
+>>> +
+>> Zhiwei
+>>
+>>
 
 
