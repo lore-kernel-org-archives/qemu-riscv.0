@@ -1,56 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jh1Ax-0000xA-WD
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Jun 2020 21:29:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55582)
+	id 1jh1B0-00014D-If
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Jun 2020 21:29:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55590)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=4185f83b6=alistair.francis@wdc.com>)
- id 1jh1Aw-0000sb-0m; Thu, 04 Jun 2020 21:29:38 -0400
+ id 1jh1Ay-0000zo-UG; Thu, 04 Jun 2020 21:29:40 -0400
 Received: from esa5.hgst.iphmx.com ([216.71.153.144]:56239)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=4185f83b6=alistair.francis@wdc.com>)
- id 1jh1Av-0008Vi-7D; Thu, 04 Jun 2020 21:29:37 -0400
+ id 1jh1Ax-0008Vi-NZ; Thu, 04 Jun 2020 21:29:40 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1591320578; x=1622856578;
+ t=1591320581; x=1622856581;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=5lJn9g7UHpK0u+FPdhj/bWuKg6TrI44UV+9vDM6Jp54=;
- b=cRP/mAGvCeDGqdJRQnu/fkA2bQLBCn9ZQOMOrWOOeFmAFIwp4IhgCDOD
- ErJUD26invDJUdirE6cVow8hW1CLJaVzMbwHuWktjT5asBRra3Fdyqkj/
- 2rznPYcvtbapnEbz45Y5EJkVhcTyepBXJQd+O2578tj+MZzGbywo8JN9+
- jWeb/AMG7nCWahJNUtmPp3XitYxhokuJbAYmkUoIUJd0IijW8fykuQ0cp
- XhsYrPtrXfk5PVFKXAyIsgELP6J49Lrq6zGYRmRRkbxU0/xZ2cyOMd2sz
- CaFLmufhzY7mRJBFOn90NxOQfOqA9V1dyS5ASvp+4SysGmPY6BTN/Gim3 A==;
-IronPort-SDR: q/5bYReafcfJUk9T+L0wEYonklAHzIsb4T3a7Fe+Q8J/CLXsiEEHeJj6FIjEIWmz9wDyX1wQHI
- gEz/XcSBCY5aF/choIKT/aAW7EqtzB+h8ZdrKbEaWq5fIXZullYiHjllvkYj5lGizZyVkVHLpC
- wD4wg1Az2p9nKXXs44ixykNC2Lw9yC2rnls0uI0G62B572tathZ3TlvRYZ5HbkU3LyoP13fTxD
- o0u6EIEKbLVGKQyLZ1Fz6U3Fwk+zruSsrCZeKGXt4go8sV8LEFHc36F4F0lVcb6Y9zjLrVb5ec
- QDA=
-X-IronPort-AV: E=Sophos;i="5.73,474,1583164800"; d="scan'208";a="139561712"
+ bh=70LPdx2tDUg+MG9PbYhk77PmRs6I3ZQoa//hFZ5/6VI=;
+ b=AiPy+zNqaqez67/5tOb1PKJR+eDm/Tcyyx/qLN/vNuWrFQcSCi36oiUT
+ dt+/g6M1e6hg4qbaUJPtQ2QvVf8Q2BzfH2oURjxCGgkRlNMIg6Vmccnkp
+ TxR2gDN2zAg/OrLHNbhcV2DbGPR5xIy0LNw+KZyaneewB0PwijWBJF/1t
+ z6nd3fhX/IRYhby9zH3dhW10HyMRdzmvanUuPuPZYKCZl21GKxO50wi3z
+ jfvCb+c2T+mV50p51a03e1ojhYEu6cMOfDPqOJZJdC2ClqaztNsZtrj8t
+ l4li4uG9iXviYsDRQSAZCLhzhSXFSJUt3eaEpslspdvJNNrca9YuLCk7A g==;
+IronPort-SDR: tE9AofRLOtNe2PEvYVdAlOdRc8FXiwXmHy8lVO/bQ2DJs4vnLHSSDBZW6TjoJT2OGLWmlqKCKh
+ IBRc7vNXNj35tL7L7Rfy1vC9YiB6zlMuG1ypQofNaqDU1ng29BhdVZyiFkAR0LL8JgqQ9MPUJe
+ aspsACh/PJ9SVOn6J7RvsskKvYdgkkl6jzca14L3btynYEhJBLrvwsdNij3sZHOORie6VD9T6W
+ SC0ZaPBUCBT/ibEMTT9I5ARupzYNHAvtcqCLUvvQgvzKTUau+LI3mEJ/h++8ABqQ78a6Y1Bd1J
+ uQE=
+X-IronPort-AV: E=Sophos;i="5.73,474,1583164800"; d="scan'208";a="139561719"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 05 Jun 2020 09:29:36 +0800
-IronPort-SDR: jHYY0yIg+IerpoTZPCyFZb3U7xuMCK7h84Wc03VVWAs/d5muvKuY7cRxEGgzfQoheGLK1j/20k
- xdeYCMJJfPajPZkmEKh7PjWZZmx+Qpe5s=
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by ob1.hgst.iphmx.com with ESMTP; 05 Jun 2020 09:29:39 +0800
+IronPort-SDR: 4ezoAGmnmxzKeGIsjArcyHebTMfjmhhuWpCDtpBjdNsTEwpFkoVquKyURF59+xRfpLKVnm/Jyb
+ oTpJjcw3LhCfR+LEBHcquWjLDOPMZxE48=
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Jun 2020 18:19:11 -0700
-IronPort-SDR: V4SIdune2AVVbfJ7jTNxjAz77QpELlLI9+wVpYXqu3sdf4K/9NB2P4HuuMEjxpQQeWsOk4J3zH
- IgU92be07YjQ==
+ 04 Jun 2020 18:19:14 -0700
+IronPort-SDR: OfjdVt6DP7XW5KtHbDZsg517s4BenlBI/FRIkJyMUDrPpsVcPHS/aD6SA/t44VibPTBhjGGYQU
+ eOvjVAR7AKYg==
 WDCIronportException: Internal
 Received: from cnf006056.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.57.233])
- by uls-op-cesaip01.wdc.com with ESMTP; 04 Jun 2020 18:29:36 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 04 Jun 2020 18:29:38 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
  anup.pate@wdc.com
-Subject: [PATCH v2 02/17] target/riscv: Report errors validating 2nd-stage PTEs
-Date: Thu,  4 Jun 2020 18:20:47 -0700
-Message-Id: <e8f3f03935697c721a5bb3e720d57e78e53ffe19.1591319882.git.alistair@alistair23.me>
+Subject: [PATCH v2 03/17] target/riscv: Move the hfence instructions to the
+ rvh decode
+Date: Thu,  4 Jun 2020 18:20:50 -0700
+Message-Id: <6f88ddc816f7828e4b58acc82e3e4b61bd86e158.1591319882.git.alistair@alistair23.me>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1591319882.git.alistair@alistair23.me>
 References: <cover.1591319882.git.alistair@alistair23.me>
@@ -80,33 +81,170 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2020 01:29:38 -0000
+X-List-Received-Date: Fri, 05 Jun 2020 01:29:41 -0000
+
+Also correct the name of the VVMA instruction.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ target/riscv/insn32.decode                    |  8 ++-
+ .../riscv/insn_trans/trans_privileged.inc.c   | 38 -------------
+ target/riscv/insn_trans/trans_rvh.inc.c       | 57 +++++++++++++++++++
+ target/riscv/translate.c                      |  1 +
+ 4 files changed, 63 insertions(+), 41 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvh.inc.c
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index eda7057663..75d2ae3434 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -435,8 +435,13 @@ restart:
-             hwaddr vbase;
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index b883672e63..4c8d1215ce 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -64,7 +64,7 @@
+ @r2      .......   ..... ..... ... ..... ....... %rs1 %rd
  
-             /* Do the second stage translation on the base PTE address. */
--            get_physical_address(env, &vbase, &vbase_prot, base, MMU_DATA_LOAD,
--                                 mmu_idx, false, true);
-+            int vbase_ret = get_physical_address(env, &vbase, &vbase_prot,
-+                                                 base, MMU_DATA_LOAD,
-+                                                 mmu_idx, false, true);
+ @hfence_gvma ....... ..... .....   ... ..... ....... %rs2 %rs1
+-@hfence_bvma ....... ..... .....   ... ..... ....... %rs2 %rs1
++@hfence_vvma ....... ..... .....   ... ..... ....... %rs2 %rs1
+ 
+ @sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
+ @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
+@@ -77,8 +77,6 @@ uret        0000000    00010 00000 000 00000 1110011
+ sret        0001000    00010 00000 000 00000 1110011
+ mret        0011000    00010 00000 000 00000 1110011
+ wfi         0001000    00101 00000 000 00000 1110011
+-hfence_gvma 0110001    ..... ..... 000 00000 1110011 @hfence_gvma
+-hfence_bvma 0010001    ..... ..... 000 00000 1110011 @hfence_bvma
+ sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
+ sfence_vm   0001000    00100 ..... 000 00000 1110011 @sfence_vm
+ 
+@@ -207,3 +205,7 @@ fcvt_w_d   1100001  00000 ..... ... ..... 1010011 @r2_rm
+ fcvt_wu_d  1100001  00001 ..... ... ..... 1010011 @r2_rm
+ fcvt_d_w   1101001  00000 ..... ... ..... 1010011 @r2_rm
+ fcvt_d_wu  1101001  00001 ..... ... ..... 1010011 @r2_rm
 +
-+            if (vbase_ret != TRANSLATE_SUCCESS) {
-+                return vbase_ret;
-+            }
++# *** RV32H Base Instruction Set ***
++hfence_gvma 0110001  .....  ..... 000 00000 1110011 @hfence_gvma
++hfence_vvma 0010001  .....  ..... 000 00000 1110011 @hfence_vvma
+diff --git a/target/riscv/insn_trans/trans_privileged.inc.c b/target/riscv/insn_trans/trans_privileged.inc.c
+index 5f26e0f5ea..2a61a853bf 100644
+--- a/target/riscv/insn_trans/trans_privileged.inc.c
++++ b/target/riscv/insn_trans/trans_privileged.inc.c
+@@ -95,41 +95,3 @@ static bool trans_sfence_vm(DisasContext *ctx, arg_sfence_vm *a)
+ {
+     return false;
+ }
+-
+-static bool trans_hfence_gvma(DisasContext *ctx, arg_sfence_vma *a)
+-{
+-#ifndef CONFIG_USER_ONLY
+-    if (has_ext(ctx, RVH)) {
+-        /* Hpervisor extensions exist */
+-        /*
+-         * if (env->priv == PRV_M ||
+-         *   (env->priv == PRV_S &&
+-         *    !riscv_cpu_virt_enabled(env) &&
+-         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
+-         */
+-            gen_helper_tlb_flush(cpu_env);
+-            return true;
+-        /* } */
+-    }
+-#endif
+-    return false;
+-}
+-
+-static bool trans_hfence_bvma(DisasContext *ctx, arg_sfence_vma *a)
+-{
+-#ifndef CONFIG_USER_ONLY
+-    if (has_ext(ctx, RVH)) {
+-        /* Hpervisor extensions exist */
+-        /*
+-         * if (env->priv == PRV_M ||
+-         *   (env->priv == PRV_S &&
+-         *    !riscv_cpu_virt_enabled(env) &&
+-         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
+-         */
+-            gen_helper_tlb_flush(cpu_env);
+-            return true;
+-        /* } */
+-    }
+-#endif
+-    return false;
+-}
+diff --git a/target/riscv/insn_trans/trans_rvh.inc.c b/target/riscv/insn_trans/trans_rvh.inc.c
+new file mode 100644
+index 0000000000..2c0359819d
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvh.inc.c
+@@ -0,0 +1,57 @@
++/*
++ * RISC-V translation routines for the RVXI Base Integer Instruction Set.
++ *
++ * Copyright (c) 2020 Western Digital
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++static bool trans_hfence_gvma(DisasContext *ctx, arg_sfence_vma *a)
++{
++#ifndef CONFIG_USER_ONLY
++    if (ctx->priv_ver >= PRIV_VERSION_1_10_0 &&
++        has_ext(ctx, RVH)) {
++        /* Hpervisor extensions exist */
++        /*
++         * if (env->priv == PRV_M ||
++         *   (env->priv == PRV_S &&
++         *    !riscv_cpu_virt_enabled(env) &&
++         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
++         */
++            gen_helper_tlb_flush(cpu_env);
++            return true;
++        /* } */
++    }
++#endif
++    return false;
++}
++
++static bool trans_hfence_vvma(DisasContext *ctx, arg_sfence_vma *a)
++{
++#ifndef CONFIG_USER_ONLY
++    if (ctx->priv_ver >= PRIV_VERSION_1_10_0 &&
++        has_ext(ctx, RVH)) {
++        /* Hpervisor extensions exist */
++        /*
++         * if (env->priv == PRV_M ||
++         *   (env->priv == PRV_S &&
++         *    !riscv_cpu_virt_enabled(env) &&
++         *    get_field(ctx->mstatus_fs, MSTATUS_TVM))) {
++         */
++            gen_helper_tlb_flush(cpu_env);
++            return true;
++        /* } */
++    }
++#endif
++    return false;
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 43bf7e39a6..ce71ca7a92 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -711,6 +711,7 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+ #include "insn_trans/trans_rva.inc.c"
+ #include "insn_trans/trans_rvf.inc.c"
+ #include "insn_trans/trans_rvd.inc.c"
++#include "insn_trans/trans_rvh.inc.c"
+ #include "insn_trans/trans_privileged.inc.c"
  
-             pte_addr = vbase + idx * ptesize;
-         } else {
+ /* Include the auto-generated decoder for 16 bit insn */
 -- 
 2.26.2
 
