@@ -1,77 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jgxT7-0006bL-VV
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Jun 2020 17:32:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32788)
+	id 1jh1Ax-0000uN-42
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Jun 2020 21:29:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55572)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jgxT5-0006af-Qn
- for qemu-riscv@nongnu.org; Thu, 04 Jun 2020 17:32:07 -0400
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:40849)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jgxT4-0004f0-Dv
- for qemu-riscv@nongnu.org; Thu, 04 Jun 2020 17:32:07 -0400
-Received: by mail-pf1-x442.google.com with SMTP id s23so2538219pfh.7
- for <qemu-riscv@nongnu.org>; Thu, 04 Jun 2020 14:32:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=wGt0cVLT9e/HUJvOZ5HkDGJT4IbfWPRDnB2yCxfys1s=;
- b=vuIpJbPILNLEiI56ss0CLX7RWs6xtl+cXpTyvLibK9J9SEjY8ZtAFV9xg4M4xNVRUg
- bX1LuMm6uy6dhQhFrF4fOLKsntB41ifcd7SC5nenyvCj9rO7/sJJgXpaCnTW+MJOEQgR
- //TOh9B26bqCnLK3K7tHqfsqOhsuukUvUn806qCu8iQHOT08DXuNMvcT4TyPUxeJmD0V
- sOvRPLROpVlWuXTdz1y1hmWl/dedq+EgcRXmy0drqMKcg6iwgf5xcPlReDfHj629wCrA
- 0XLINWatLAUz0LBMJoOtIK+hi45Z+kQtOnSQl3oYA3M4AlW5T38LoHgMEn8ptAQedCVs
- DEeg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=wGt0cVLT9e/HUJvOZ5HkDGJT4IbfWPRDnB2yCxfys1s=;
- b=ijlg6U2iUjfDNGbNgftXY/4oiDGP/GDyMyurLnnyaGH/EZVzec0yyoD3ZZoAiCABIp
- V4BgLBE1YoIrbHdM3ccszFQ1c5yhk0sn2/f+Pjf96XOZxUIVyinItO5kA+NKs+Vq10Nj
- XRK1Je62KIfv7cbUfIJg1RVElkRpfx+PYMNnt/E0nwuK/Oj2YB/4jaqXQNhsAOmTxkkT
- rTzB0MzHeZClXbRWU6FZyq+eURnjjtQYZhPQ0v4Ybp17CRtW1hK3M2/3/qzZmalDLg10
- KdFqy15fXRKtJq7mzMi4iNVMhzjawpzdjpzu3tqH93gXzC+46HUOYswyirjf9bvRQSgl
- 1Npg==
-X-Gm-Message-State: AOAM531m4hcjVihhYqbGNtrZ3Q12bm/0INuMHw5iLqd6vQ+muq4G153H
- lZF6KypyROJPKlh0+G5oPq29Yg==
-X-Google-Smtp-Source: ABdhPJwAqlhQ+M8LJ/D0uZ2NHWKyM5wHjkcm77rNWV9mpzJTUF3GxO479YvpJuKm9CKFZugdM+iMVA==
-X-Received: by 2002:aa7:8b54:: with SMTP id i20mr6294503pfd.230.1591306324223; 
- Thu, 04 Jun 2020 14:32:04 -0700 (PDT)
-Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
- by smtp.gmail.com with ESMTPSA id 140sm5314248pfv.38.2020.06.04.14.32.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 04 Jun 2020 14:32:03 -0700 (PDT)
-Subject: Re: [PATCH v8 58/62] target/riscv: floating-point scalar move
- instructions
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, palmer@dabbelt.com, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com
-References: <20200521094413.10425-1-zhiwei_liu@c-sky.com>
- <20200521094413.10425-59-zhiwei_liu@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <be24e64c-4f3b-c507-7ed8-f7697bea5957@linaro.org>
-Date: Thu, 4 Jun 2020 14:32:01 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ (Exim 4.90_1)
+ (envelope-from <prvs=4185f83b6=alistair.francis@wdc.com>)
+ id 1jh1Av-0000sD-3e; Thu, 04 Jun 2020 21:29:37 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:56239)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=4185f83b6=alistair.francis@wdc.com>)
+ id 1jh1At-0008Vi-3H; Thu, 04 Jun 2020 21:29:36 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1591320576; x=1622856576;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=IgtHnvrWU4YfhDphmhZfm1yvpcoHDs5Gh7DArAKK17g=;
+ b=M6y1tygOVQRpJ6MqW86lVlv29bgi10ihNlELze5W9TmtFpUJg+VbBoSD
+ NLSPegy8NrA2yZiJyLskALj9SeXIuY0RVNgZfniuu+vg1QtCjVzuNGua/
+ V2lEcUlG4RaEFFT700L3dKjyX0UglgR3Zm36qhWV47wyJ3mbj34CK2s/n
+ CGfttJVqp6VtM5JN0jn0od7DvbcDVEDMfBZnwvDATQ7fbxc+YVWioROBw
+ +cjm2hQ5Y8a2mDSTvG3bECuOJxeR6Ean66+ImvdbdiQtLUrI5F1ytu0zM
+ 9NrMGrsW+oNFE8jblzd6F07Ffm7JDRlbjkY19DVZE5tzsDioST5NzPko5 w==;
+IronPort-SDR: 7vas3P+FuPuDL6espBYyI+1e1tBfQsrHIOy8ri+KEuqHo9HXiIRMigEwLBMEL/xCVACk21R87z
+ xsk8dZAqeSWYvV7Qc+LdCyXvbHlQWqmCfBL1FkADWRaRon8Es7G1ElhR3Rf92L7b8dy46Mi1ao
+ 6a42uaEQEAf1pw2A6E5canKAwF7ONN1+2FZeTMmB5bsH4Q1w2QZNfwDM6pIn+BLXlpAAg74UZG
+ AnH4Z+waXK3xNhWO8L7RhF88t9wjRKibkbSw9Z2ZNj5cCG1HDog+dND7qhNqAfsApGBxgF2lJJ
+ rEM=
+X-IronPort-AV: E=Sophos;i="5.73,474,1583164800"; d="scan'208";a="139561706"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 05 Jun 2020 09:29:31 +0800
+IronPort-SDR: HWI1x0nrR963ruZWia//Sslqsc8jOI8xIZiKl+8LPERnQu5sRwahWPVN+xUERnTq7WhKvLv9iP
+ pg2EpvT/aRzOMChCOQ9d1IhW7aKe1NnjA=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Jun 2020 18:19:06 -0700
+IronPort-SDR: tWb75yk9iw0OSWwvGHklT3AsPGuwXhPkry1SXi3u/0AlIaFg3Y2p/CUOipQ/9roOQT2wM59nNK
+ vHWKn4rn7ssQ==
+WDCIronportException: Internal
+Received: from cnf006056.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.57.233])
+ by uls-op-cesaip01.wdc.com with ESMTP; 04 Jun 2020 18:29:30 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
+ anup.pate@wdc.com
+Subject: [PATCH v2 00/17]  RISC-V: Update the Hypervisor spec to v0.6.1
+Date: Thu,  4 Jun 2020 18:20:42 -0700
+Message-Id: <cover.1591319882.git.alistair@alistair23.me>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <20200521094413.10425-59-zhiwei_liu@c-sky.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::442;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x442.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.153.144;
+ envelope-from=prvs=4185f83b6=alistair.francis@wdc.com;
+ helo=esa5.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/04 21:29:30
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,46 +78,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2020 21:32:08 -0000
+X-List-Received-Date: Fri, 05 Jun 2020 01:29:37 -0000
 
-On 5/21/20 2:44 AM, LIU Zhiwei wrote:
-> +static bool trans_vfmv_f_s(DisasContext *s, arg_vfmv_f_s *a)
-> +{
-> +    if (!s->vill && has_ext(s, RVF) &&
-> +        (s->mstatus_fs != 0) && (s->sew != 0)) {
-> +        unsigned int ofs = (8 << s->sew);
-> +        unsigned int len = 64 - ofs;
-> +        TCGv_i64 t_nan;
-> +
-> +        vec_element_loadi(s, cpu_fpr[a->rd], a->rs2, 0);
-> +        /* NaN-box f[rd] as necessary for SEW */
-> +        if (len) {
-> +            t_nan = tcg_const_i64(UINT64_MAX);
-> +            tcg_gen_deposit_i64(cpu_fpr[a->rd], cpu_fpr[a->rd],
-> +                                t_nan, ofs, len);
-> +            tcg_temp_free_i64(t_nan);
-> +        }
+From: Alistair Francis <alistair@alistair23.me>
 
-I guess this is correct, but it looks odd.
+This series updates the experimental QEMU RISC-V Hypervisor spec to the
+v0.6.1 draft implementation.
 
-I would have done
+THis includes support for the new 2-stage lookup instructions and the new
+CSRs.
 
-    unsigned int len = 8 << s->sew;
+It also includes the new 0.6.1 support for the virtual instruction
+fault.
 
-    if (len < 64) {
-        tcg_gen_ori_i64(cpu_fpr[a->rd], cpu_fpr[a->rd],
-                        MAKE_64BIT_MASK(len, 64 - len));
-    }
+This was tested by running 32-bit and 64-bit Xvisor on QEMU and starting
+Linux guests.
 
-and to match, I might use
-
-    MAKE_64BIT_MASK(32, 32)
-
-in trans_vfmv_s_f.
-
-Otherwise,
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+v2:
+ - Update to v0.6.1
 
 
-r~
+
+Alistair Francis (17):
+  target/riscv: Set access as data_load when validating stage-2 PTEs
+  target/riscv: Report errors validating 2nd-stage PTEs
+  target/riscv: Move the hfence instructions to the rvh decode
+  target/riscv: Implement checks for hfence
+  target/riscv: Allow setting a two-stage lookup in the virt status
+  target/riscv: Allow generating hlv/hlvx/hsv instructions
+  target/riscv: Do two-stage lookups on hlv/hlvx/hsv instructions
+  target/riscv: Don't allow guest to write to htinst
+  target/riscv: Convert MSTATUS MTL to GVA
+  target/riscv: Fix the interrupt cause code
+  target/riscv: Update the Hypervisor trap return/entry
+  target/riscv: Update the CSRs to the v0.6 Hyp extension
+  target/riscv: Only support a single VSXL length
+  target/riscv: Only support little endian guests
+  target/riscv: Support the v0.6 Hypervisor extension CRSs
+  target/riscv: Return the exception from invalid CSR accesses
+  target/riscv: Support the Virtual Instruction fault
+
+ target/riscv/cpu.h                            |   2 +
+ target/riscv/cpu_bits.h                       |  25 +-
+ target/riscv/helper.h                         |   9 +
+ target/riscv/insn32-64.decode                 |   5 +
+ target/riscv/insn32.decode                    |  19 +-
+ target/riscv/cpu_helper.c                     | 114 +++---
+ target/riscv/csr.c                            | 171 ++++++--
+ .../riscv/insn_trans/trans_privileged.inc.c   |  38 --
+ target/riscv/insn_trans/trans_rvh.inc.c       | 377 ++++++++++++++++++
+ target/riscv/op_helper.c                      | 189 ++++++++-
+ target/riscv/translate.c                      |  11 +-
+ 11 files changed, 815 insertions(+), 145 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvh.inc.c
+
+-- 
+2.26.2
+
 
