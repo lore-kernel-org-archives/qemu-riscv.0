@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jh1Ax-0000vs-Jd
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Jun 2020 21:29:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55574)
+	id 1jh1Ax-0000xA-WD
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Jun 2020 21:29:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55582)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=4185f83b6=alistair.francis@wdc.com>)
- id 1jh1Au-0000sF-Sq; Thu, 04 Jun 2020 21:29:36 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:56242)
+ id 1jh1Aw-0000sb-0m; Thu, 04 Jun 2020 21:29:38 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:56239)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=4185f83b6=alistair.francis@wdc.com>)
- id 1jh1At-0008Vw-MV; Thu, 04 Jun 2020 21:29:36 -0400
+ id 1jh1Av-0008Vi-7D; Thu, 04 Jun 2020 21:29:37 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1591320576; x=1622856576;
+ t=1591320578; x=1622856578;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=TlTFn5A9/iW5WPtFBqmtDPppcRtWzpovJLC7itAoYUo=;
- b=G1r61BlHr/N3AOJCNrVjrRhpmvOV74BglZL/yfYjkXkX2z4AJCdLoE3h
- xif2aiI2YMPV3loXr7xXzgOr4wOIemiHxnzF08ye7382ej+9aIWDBx91y
- zGsvSyjyu1Q8T3gj52ts06Fb8dBR3Yr9BfNRgNmzKWcgFoddv/bDVHoqN
- Bacsuxo4YDawMERA5e50Ypn1sBHzZln1yuWtq8DPNdgaIoQkCKfc9X2SD
- rz/UCM3GpMWr6QrOfQXNCGjWSNDXrokkKK2GmyKrdoPDSQt7UhT1FifjZ
- UPqqf3xZz6AYCfpkmpq2VfoxQDM0kKo3/C0VsuiHyr0AdWlUMIV6J+OD3 w==;
-IronPort-SDR: zN6siZNowIBT3BV1vPOqIn5zTrsG20Rnc0DpKs1Ceu0BSENN9Tz9zp2TtisvFW+i2NzQi4b45/
- gqLESCJAJHyP4nwxfPUYXjOE5NckvoqWJ4YqFDXKG9xRi/P0m8Iz8IJy7cWVcAtV9VgWYo8sWq
- fwfrsVqqHG0GZyNdupvb9T+4Vpf+lMIi/pM3wmFvni7Sx43qAvAIAVJKmJsjpv26aK0LzN+PZ+
- b7D09pC/1L2CY53Zq8Ejs//68ENEZc3a2LZm2cMWen9pOhKpzqlISZvU4Rbiu46n8oMBtCIp8S
- R20=
-X-IronPort-AV: E=Sophos;i="5.73,474,1583164800"; d="scan'208";a="139561707"
+ bh=5lJn9g7UHpK0u+FPdhj/bWuKg6TrI44UV+9vDM6Jp54=;
+ b=cRP/mAGvCeDGqdJRQnu/fkA2bQLBCn9ZQOMOrWOOeFmAFIwp4IhgCDOD
+ ErJUD26invDJUdirE6cVow8hW1CLJaVzMbwHuWktjT5asBRra3Fdyqkj/
+ 2rznPYcvtbapnEbz45Y5EJkVhcTyepBXJQd+O2578tj+MZzGbywo8JN9+
+ jWeb/AMG7nCWahJNUtmPp3XitYxhokuJbAYmkUoIUJd0IijW8fykuQ0cp
+ XhsYrPtrXfk5PVFKXAyIsgELP6J49Lrq6zGYRmRRkbxU0/xZ2cyOMd2sz
+ CaFLmufhzY7mRJBFOn90NxOQfOqA9V1dyS5ASvp+4SysGmPY6BTN/Gim3 A==;
+IronPort-SDR: q/5bYReafcfJUk9T+L0wEYonklAHzIsb4T3a7Fe+Q8J/CLXsiEEHeJj6FIjEIWmz9wDyX1wQHI
+ gEz/XcSBCY5aF/choIKT/aAW7EqtzB+h8ZdrKbEaWq5fIXZullYiHjllvkYj5lGizZyVkVHLpC
+ wD4wg1Az2p9nKXXs44ixykNC2Lw9yC2rnls0uI0G62B572tathZ3TlvRYZ5HbkU3LyoP13fTxD
+ o0u6EIEKbLVGKQyLZ1Fz6U3Fwk+zruSsrCZeKGXt4go8sV8LEFHc36F4F0lVcb6Y9zjLrVb5ec
+ QDA=
+X-IronPort-AV: E=Sophos;i="5.73,474,1583164800"; d="scan'208";a="139561712"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 05 Jun 2020 09:29:34 +0800
-IronPort-SDR: vUoBS3FFE9QHHGxxwR0o6sTk+m2IXyR88/UtGLL4caDeOraUl/8LD20Vh2KL2rbwX6ePwj/DAD
- bK3cjGo8AqOv0YsoiX/sZAnG+u7OsAZu8=
+ by ob1.hgst.iphmx.com with ESMTP; 05 Jun 2020 09:29:36 +0800
+IronPort-SDR: jHYY0yIg+IerpoTZPCyFZb3U7xuMCK7h84Wc03VVWAs/d5muvKuY7cRxEGgzfQoheGLK1j/20k
+ xdeYCMJJfPajPZkmEKh7PjWZZmx+Qpe5s=
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Jun 2020 18:19:08 -0700
-IronPort-SDR: hP1RvipYIbL4t06gCtJSSiR5qh9Nft3hbBcw01Y/8UM1JAPXZ7lIbhWMOeVzjYNul0n9iZ6l4j
- ryURQ1b4HhdQ==
+ 04 Jun 2020 18:19:11 -0700
+IronPort-SDR: V4SIdune2AVVbfJ7jTNxjAz77QpELlLI9+wVpYXqu3sdf4K/9NB2P4HuuMEjxpQQeWsOk4J3zH
+ IgU92be07YjQ==
 WDCIronportException: Internal
 Received: from cnf006056.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.57.233])
- by uls-op-cesaip01.wdc.com with ESMTP; 04 Jun 2020 18:29:33 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 04 Jun 2020 18:29:36 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
  anup.pate@wdc.com
-Subject: [PATCH v2 01/17] target/riscv: Set access as data_load when
- validating stage-2 PTEs
-Date: Thu,  4 Jun 2020 18:20:45 -0700
-Message-Id: <5556f87b6d71a61f5e9113873d91132e08ac6b2f.1591319882.git.alistair@alistair23.me>
+Subject: [PATCH v2 02/17] target/riscv: Report errors validating 2nd-stage PTEs
+Date: Thu,  4 Jun 2020 18:20:47 -0700
+Message-Id: <e8f3f03935697c721a5bb3e720d57e78e53ffe19.1591319882.git.alistair@alistair23.me>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1591319882.git.alistair@alistair23.me>
 References: <cover.1591319882.git.alistair@alistair23.me>
@@ -81,26 +80,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2020 01:29:37 -0000
+X-List-Received-Date: Fri, 05 Jun 2020 01:29:38 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu_helper.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 62fe1ecc8f..eda7057663 100644
+index eda7057663..75d2ae3434 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -435,7 +435,7 @@ restart:
+@@ -435,8 +435,13 @@ restart:
              hwaddr vbase;
  
              /* Do the second stage translation on the base PTE address. */
--            get_physical_address(env, &vbase, &vbase_prot, base, access_type,
-+            get_physical_address(env, &vbase, &vbase_prot, base, MMU_DATA_LOAD,
-                                  mmu_idx, false, true);
+-            get_physical_address(env, &vbase, &vbase_prot, base, MMU_DATA_LOAD,
+-                                 mmu_idx, false, true);
++            int vbase_ret = get_physical_address(env, &vbase, &vbase_prot,
++                                                 base, MMU_DATA_LOAD,
++                                                 mmu_idx, false, true);
++
++            if (vbase_ret != TRANSLATE_SUCCESS) {
++                return vbase_ret;
++            }
  
              pte_addr = vbase + idx * ptesize;
+         } else {
 -- 
 2.26.2
 
