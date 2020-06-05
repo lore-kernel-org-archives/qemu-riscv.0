@@ -1,69 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jh6xj-00029p-Il
-	for mharc-qemu-riscv@gnu.org; Fri, 05 Jun 2020 03:40:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54732)
+	id 1jhGTr-0005QJ-CH
+	for mharc-qemu-riscv@gnu.org; Fri, 05 Jun 2020 13:50:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49528)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jh6xf-0001ye-Mi; Fri, 05 Jun 2020 03:40:19 -0400
-Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044]:40170)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jhGTq-0005Q0-3W
+ for qemu-riscv@nongnu.org; Fri, 05 Jun 2020 13:50:10 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:34071)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jh6xe-00050A-Qg; Fri, 05 Jun 2020 03:40:19 -0400
-Received: by mail-pj1-x1044.google.com with SMTP id s88so2377973pjb.5;
- Fri, 05 Jun 2020 00:40:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=Rhy2L/UJyGdmzgxzSZV4yex5B1vPy4D3Y2E2zfPwvKc=;
- b=rYcHBj9dTEztQdgQcJuD0dwqojjAxrgjf+3IL67+0l+ZcTlrE4tp2MlJJQu5Nt1vjT
- h8gLzD5W+wLJchC++Uraag0WN5xZWkOOPpEphPeHG0RIT8xQpBqTT2qkRab3cohmhHPD
- vh58yX3AWdadzjD6Fc8W3u9QQcKQBxpoWuz6fgvQakkCZJRMHfvPla/L2lTfgCsbQEw1
- XejnrD7qIYNyHlUNUqsqLZQ26fcfFPZc8/4oJla3Mm9Yq7SHRoKNDasKXwWS1DA9+b5V
- DFvUaacniwALAZGmiPifr4/X9ShTnhPYYBLrYM/xZ0T5T6kDxbh/w/8b9XIIdK7NH/VP
- hang==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jhGTp-0006Tw-87
+ for qemu-riscv@nongnu.org; Fri, 05 Jun 2020 13:50:09 -0400
+Received: by mail-pf1-x442.google.com with SMTP id z64so5323169pfb.1
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jun 2020 10:50:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=zuM3Ss61uV7K9Slj9YXzJ50CwuFDaA4NA1rXaFp4tWA=;
+ b=PZVipeApRDnZjANzqPgvyrvd94KlmYlLJJYP1v8mICk6XwbJEEcrks2B1+l2UYKjMW
+ odSYrSJcex8v9Hw2xXbQBQOExo6EtAg4pqm1FGUuwJTdCTN0Dm41DVXv6/qyWS9wnUTj
+ juxN7+16rZOsrGOfjjNmUGSQ2QIvgtOY6mRT/N96niXKxS0KY7WPxaexIICyBoUq32Bp
+ pPebbogORckfqqgeTjf+fXk1J6VpwYROijRh5v9L91tJ32vWR0NOVcrZOzsq15y6D8v+
+ ggohIrvr6XZdGe2f98qT6ZrdwiqrrGqITBpC8hD8hydAaFgx36PQKMfdULbGAS9KJGTd
+ gh2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=Rhy2L/UJyGdmzgxzSZV4yex5B1vPy4D3Y2E2zfPwvKc=;
- b=IzCX3hWaoqtyYV8VvYo5Pk2wguVKK5xUkiyNLKMSRg8oIuZPX0QnP9vVHUUnwv2aLo
- LsrAj54ySTzhbVNzson/VeRIHrR9ncuiPK4PJ7DVniOMLNwWVZwsp+W/3AWvt21MFAHa
- b0v6XWUtHownT7ZO5DqzN5sGZmQmCCUIuj6IfQwFVRWk1BYSxkHY6LsGJpWHhhebM+1e
- KgUuTIUJ5KCaWMPGK8H2r8R6mdj3zVF996URMu3780ot3hoh2vt4r/HPC9HLz7pUSS0g
- PqjRk2Lk6rd9kZDsosi5z6cIIIkbHj1rmc3n2lMcvjXd3m4fJ1+fsOeGvPMkW8QDSyoG
- 9Ttg==
-X-Gm-Message-State: AOAM532RVcofp56vkwCBQd7dFydhZ0H9GEtclIXhzXoqAQzoFOIQAwrl
- rcgepAiMBYHMlBoyFFjqcmY=
-X-Google-Smtp-Source: ABdhPJwEPMW1iETE4h62Hi/R+Z0sfxkFy6UHtUyen9/Vrs1PRvkaETbrRiG9HfufNArH7y7CJlnUTQ==
-X-Received: by 2002:a17:90b:882:: with SMTP id
- bj2mr1618559pjb.122.1591342817292; 
- Fri, 05 Jun 2020 00:40:17 -0700 (PDT)
-Received: from localhost.localdomain (unknown-224-80.windriver.com.
- [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id y23sm7446619pje.3.2020.06.05.00.40.16
- (version=TLS1 cipher=AES128-SHA bits=128/128);
- Fri, 05 Jun 2020 00:40:16 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=zuM3Ss61uV7K9Slj9YXzJ50CwuFDaA4NA1rXaFp4tWA=;
+ b=cyvglou8Gwz0KqE1RNjpKYCRvUxVBWVOtev548vb7aZzsbb2XJ2ckPZ3VmSnvbLCvC
+ G9u0HdsZ5bMxU1BxAK5BsRhRx8NiGtj6qI0aFXZnGOZ/rru66I+2BW2KACBCZpaTMnfp
+ glQPW73IZTyMxvYCT0tiRjAMM9XTejF4EKb909DB2B+nzHSTH24F81eNxVr2Rj28LQUV
+ O6WrjJLil3L2nH1MDQmkUT8BLJiqUr1QF1oYwYXQmFizjYAzAwirkZ4tWDlOmZMkz887
+ 3+SsyPyA8SHSbRe8H9cfhUDWuhVSr8z04WQZ1amWdZtyqBhwZcpQHB5gZ/pLGUWmTwW4
+ RZzw==
+X-Gm-Message-State: AOAM532pp1f7vSTRTkCXX6256i1wVbDGghAtJU7HT2WRh0ZOm1yMnJwm
+ szahKVg+2jUbPfgnIOfCuu3THg==
+X-Google-Smtp-Source: ABdhPJzxnvV8wm/kwBf8GnHqdmH27lIDLge48DOT92yCDhlrBJZCNNh87knWk1h+BgbWwoSUiOcteQ==
+X-Received: by 2002:a65:51c1:: with SMTP id i1mr10384854pgq.272.1591379407696; 
+ Fri, 05 Jun 2020 10:50:07 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
+ by smtp.gmail.com with ESMTPSA id z24sm228815pfk.29.2020.06.05.10.50.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 05 Jun 2020 10:50:06 -0700 (PDT)
+Subject: Re: [PATCH v2 01/17] target/riscv: Set access as data_load when
+ validating stage-2 PTEs
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 3/4] riscv: Generalize CPU init routine for the imacu CPU
-Date: Fri,  5 Jun 2020 00:38:26 -0700
-Message-Id: <1591342707-9729-3-git-send-email-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1591342707-9729-1-git-send-email-bmeng.cn@gmail.com>
-References: <1591342707-9729-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1044.google.com
+Cc: anup.pate@wdc.com, palmer@dabbelt.com, alistair23@gmail.com
+References: <cover.1591319882.git.alistair@alistair23.me>
+ <5556f87b6d71a61f5e9113873d91132e08ac6b2f.1591319882.git.alistair@alistair23.me>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <3289584f-74a4-b9fe-0c24-dc711711a5a7@linaro.org>
+Date: Fri, 5 Jun 2020 10:49:57 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+MIME-Version: 1.0
+In-Reply-To: <5556f87b6d71a61f5e9113873d91132e08ac6b2f.1591319882.git.alistair@alistair23.me>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::442;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x442.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
@@ -78,89 +84,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2020 07:40:20 -0000
+X-List-Received-Date: Fri, 05 Jun 2020 17:50:10 -0000
 
-From: Bin Meng <bin.meng@windriver.com>
+On 6/4/20 6:20 PM, Alistair Francis wrote:
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu_helper.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-There is no need to have two functions that have almost the same
-codes for 32-bit and 64-bit imacu CPUs.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Signed-off-by: Bin Meng <bin.meng@windriver.com>
----
 
- target/riscv/cpu.c | 31 ++++++++++---------------------
- 1 file changed, 10 insertions(+), 21 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index e66488f..c5c2abc 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -142,23 +142,23 @@ static void rvnn_gcsu_priv1_10_0_cpu_init(Object *obj)
-     set_resetvec(env, DEFAULT_RSTVEC);
- }
- 
--#if defined(TARGET_RISCV32)
--
--static void rv32imcu_nommu_cpu_init(Object *obj)
-+static void rvnn_imacu_nommu_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
--    set_misa(env, RV32 | RVI | RVM | RVC | RVU);
-+    set_misa(env, RVXLEN | RVI | RVM | RVA | RVC | RVU);
-     set_priv_version(env, PRIV_VERSION_1_10_0);
--    set_resetvec(env, 0x8090);
-+    set_resetvec(env, DEFAULT_RSTVEC);
-     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
- }
- 
--static void rv32imacu_nommu_cpu_init(Object *obj)
-+#if defined(TARGET_RISCV32)
-+
-+static void rv32imcu_nommu_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
--    set_misa(env, RV32 | RVI | RVM | RVA | RVC | RVU);
-+    set_misa(env, RV32 | RVI | RVM | RVC | RVU);
-     set_priv_version(env, PRIV_VERSION_1_10_0);
--    set_resetvec(env, DEFAULT_RSTVEC);
-+    set_resetvec(env, 0x8090);
-     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
- }
- 
-@@ -171,17 +171,6 @@ static void rv32imafcu_nommu_cpu_init(Object *obj)
-     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
- }
- 
--#elif defined(TARGET_RISCV64)
--
--static void rv64imacu_nommu_cpu_init(Object *obj)
--{
--    CPURISCVState *env = &RISCV_CPU(obj)->env;
--    set_misa(env, RV64 | RVI | RVM | RVA | RVC | RVU);
--    set_priv_version(env, PRIV_VERSION_1_10_0);
--    set_resetvec(env, DEFAULT_RSTVEC);
--    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
--}
--
- #endif
- 
- static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
-@@ -587,12 +576,12 @@ static const TypeInfo riscv_cpu_type_infos[] = {
- #if defined(TARGET_RISCV32)
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           riscv_base_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32imcu_nommu_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32imacu_nommu_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rvnn_imacu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32imafcu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rvnn_gcsu_priv1_10_0_cpu_init),
- #elif defined(TARGET_RISCV64)
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           riscv_base_cpu_init),
--    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64imacu_nommu_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rvnn_imacu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rvnn_gcsu_priv1_10_0_cpu_init),
- #endif
- };
--- 
-2.7.4
-
+r~
 
