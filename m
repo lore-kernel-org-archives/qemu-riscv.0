@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jh1Bb-0002bH-AN
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Jun 2020 21:30:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55690)
+	id 1jh1Bf-0002ka-5i
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Jun 2020 21:30:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55698)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=4185f83b6=alistair.francis@wdc.com>)
- id 1jh1BZ-0002Xk-OD; Thu, 04 Jun 2020 21:30:17 -0400
+ id 1jh1Bc-0002eJ-GF; Thu, 04 Jun 2020 21:30:20 -0400
 Received: from esa2.hgst.iphmx.com ([68.232.143.124]:22008)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=4185f83b6=alistair.francis@wdc.com>)
- id 1jh1BY-00009e-3L; Thu, 04 Jun 2020 21:30:17 -0400
+ id 1jh1Ba-00009e-Sw; Thu, 04 Jun 2020 21:30:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1591320617; x=1622856617;
+ t=1591320620; x=1622856620;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=cXuY4R2iUhKB0c3QoY7e2kDEz+l0l5YvpJtrzSp+Dmo=;
- b=Ahq6G8OwcE+DjhnA0UHjxawxAQD2THqjp3RXgPKEQ+uM86nF/9uXx8h2
- jhkGZHJ2uaeeMAppivW7gR9JQy73VQ+ybcWr6k7kdSWFOa/TW9h5hVhr7
- Zxjk9fzsNBlpKEVTQcn6a0kxbNgje/YvcLDxsngwkDgRcUy65QMMV3K2K
- dLOgb4jPsFgeAVzG+BmJsBgdZB+MBZzcZkhbQln3TBBe1wMcYHWtK0rXM
- VlXJMM0Y5gSLlHfVlZ31BPbwrfvS3qFOA11VNDpTFjMMlr+h5N+3esNPj
- OEUuuMcZ5Z7samOeH0ZRPXZTGhynY13RDgUM5mGVFvfDNwWi7qjkuTqIG w==;
-IronPort-SDR: yJhNQEm1APh4Tqzx90lqFUUVKRSKPLRgLbaKrOOiOUvvHDyJRXacUq5GJQLRF/s3TcmjSSSRGj
- 7J7m8cd4XBq1fPRZzbYf+sJzUO1+NjE9BggjU5q4t8nV/TzhaPrJ5OSBAkZ3Dbek54EogHZAkb
- vGMO/eF89wdWLFAGpzjE/mcmlO769OqhPk83kOCym3/ks7VW/SBEh3AAb7mh5RZHxaM1PaFz9V
- 9Rk3928gVAmsEwapcVoUYAkM+l9IPrg/7umMlFAV7Q4tb1OzvXc4OdZOGuas0KIHZwdqsk3Et9
- rqk=
-X-IronPort-AV: E=Sophos;i="5.73,474,1583164800"; d="scan'208";a="242127071"
+ bh=XtFXVwCUFAT+vA4t+gi7sUhQmPPR6tChBZbYsaiL+2s=;
+ b=XGJjMF/ATjCidfJn0DRPQ/F4fqdmpx3th38iXXTNC7+4AAJZ9Y2hvEvh
+ a0FA2gqshWviD6lrGm708Gh3TI/Oz6isna0kxYeJwqcvs/zTs7Zqte9uM
+ zKXId5TBIvKwXI8sJsU6ja3HlIuDZnqFPOXSK0LddOukugRR7WRcT9qGH
+ EuW9D9UyUQsnuyMWUa9rWkgW4OzdEmc1fzxDwUSUmx1GtRmj9azdBXkJO
+ u6LFkAZjMEOUW6JGgc1buDxfvbgSAkEuI2OMGfx0RUsDkgC+Ug7NU6ggo
+ lbhvzQIAXMrn/NVj/oJ1pTmMemDb0u6CSIauDYyWDLewrwhQsN5IIEKu+ g==;
+IronPort-SDR: OKfpnROFraPGghyvTwRQh2NJtdkJRh8E7S2BTVyE6M6DOgTOqKcWpHnXzAxZ0PxGM5GNs2CYvo
+ 1xaNjYLTY+fteVn5TsBLieuSsRBbs4M/8Wc7wKLfOBZ+NLTzKFoU8QM8Pz10YoPKrNjhCu1eAa
+ 49gdhxxI2wLtq/WoC3GQL1NeVhAEOpZwnJYEjQNGMgZPaKpZBT4zHORu/okMXKM/VG1NzbVQ29
+ zDWmgU8pOUGS89Pjd6/rKhktOJVxnAbjWxmFgbizfM3lAUQOXCpqwK+jG6qmZilPboIJ3rDNZ6
+ ++4=
+X-IronPort-AV: E=Sophos;i="5.73,474,1583164800"; d="scan'208";a="242127074"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 05 Jun 2020 09:30:17 +0800
-IronPort-SDR: N2nRLyvfz4dqizsYgN7Q7rVCwGCNtBINMOlmrXavUxMuUCRTxfK//PO/7V3YZ3VLbfa8Io9oam
- 2iJQVcOwTlfZaBZFaMWhTBCO69hqYRdlw=
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by ob1.hgst.iphmx.com with ESMTP; 05 Jun 2020 09:30:20 +0800
+IronPort-SDR: xaN3f4KkLXVuUwQ4AdZpIQJdbCONtPaUayN461UsL7RrA5zChhmypZKTpqGO0k4vUoIJe1ANJ5
+ PYQOAxnf/9wzlGpRF0VaWYMhnDIuNpYtk=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Jun 2020 18:19:50 -0700
-IronPort-SDR: 5NSR7Cz/Tq5FBjEijCh2GBmxmFurVGGKJ5gynlyQDbAce7c44dkJ7FGajbUTJ2QG37Gl0Bn+rq
- YpifhsXL2MLA==
+ 04 Jun 2020 18:19:53 -0700
+IronPort-SDR: nW3FLPfTD5ZoXt9O4yRPaRVX+6W18ka6PcMRLSWbmisOQTJIrRsc0i92pv/U1ARVpbaQa6r9Fx
+ b8KQuRKn2HYA==
 WDCIronportException: Internal
 Received: from cnf006056.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.57.233])
- by uls-op-cesaip02.wdc.com with ESMTP; 04 Jun 2020 18:30:14 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 04 Jun 2020 18:30:18 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com,
  anup.pate@wdc.com
-Subject: [PATCH v2 16/17] target/riscv: Return the exception from invalid CSR
- accesses
-Date: Thu,  4 Jun 2020 18:21:27 -0700
-Message-Id: <d616a44645811854db7ada768c179ad8f2532158.1591319882.git.alistair@alistair23.me>
+Subject: [PATCH v2 17/17] target/riscv: Support the Virtual Instruction fault
+Date: Thu,  4 Jun 2020 18:21:29 -0700
+Message-Id: <399681975d78747509166baccabc870a7646048a.1591319882.git.alistair@alistair23.me>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1591319882.git.alistair@alistair23.me>
 References: <cover.1591319882.git.alistair@alistair23.me>
@@ -81,267 +80,266 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2020 01:30:18 -0000
-
-When performing a CSR access let's return a negative exception value on
-an error instead of -1. This will allow us to specify the exception in
-future patches.
+X-List-Received-Date: Fri, 05 Jun 2020 01:30:21 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/csr.c       | 46 ++++++++++++++++++++--------------------
- target/riscv/op_helper.c | 18 ++++++++++------
- 2 files changed, 35 insertions(+), 29 deletions(-)
+ target/riscv/cpu_bits.h                 |  6 +++
+ target/riscv/helper.h                   |  1 +
+ target/riscv/csr.c                      | 64 ++++++++++++++++++++++++-
+ target/riscv/insn_trans/trans_rvh.inc.c |  2 +-
+ target/riscv/op_helper.c                | 42 ++++++++++++++--
+ 5 files changed, 109 insertions(+), 6 deletions(-)
 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 690f327828..30fa746d10 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -446,6 +446,11 @@
+ #define HSTATUS_WPRI HSTATUS64_WPRI
+ #endif
+ 
++#define HCOUNTEREN_CY        (1 << 0)
++#define HCOUNTEREN_TM        (1 << 1)
++#define HCOUNTEREN_IR        (1 << 2)
++#define HCOUNTEREN_HPM3      (1 << 3)
++
+ /* Privilege modes */
+ #define PRV_U 0
+ #define PRV_S 1
+@@ -538,6 +543,7 @@
+ #define RISCV_EXCP_STORE_PAGE_FAULT              0xf /* since: priv-1.10.0 */
+ #define RISCV_EXCP_INST_GUEST_PAGE_FAULT         0x14
+ #define RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT       0x15
++#define RISCV_EXCP_VIRT_INSTRUCTION_FAULT        0x16
+ #define RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT  0x17
+ 
+ #define RISCV_EXCP_INT_FLAG                0x80000000
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index d020d1459c..2df7e09766 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -80,6 +80,7 @@ DEF_HELPER_1(tlb_flush, void, env)
+ /* Hypervisor functions */
+ #ifndef CONFIG_USER_ONLY
+ DEF_HELPER_1(hyp_tlb_flush, void, env)
++DEF_HELPER_1(hyp_gvma_tlb_flush, void, env)
+ DEF_HELPER_4(hyp_load, tl, env, tl, tl, tl)
+ DEF_HELPER_5(hyp_store, void, env, tl, tl, tl, tl)
+ DEF_HELPER_4(hyp_x_load, tl, env, tl, tl, tl)
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 9990a0dd09..0c53438605 100644
+index 0c53438605..4909059baf 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -47,7 +47,7 @@ static int fs(CPURISCVState *env, int csrno)
- {
- #if !defined(CONFIG_USER_ONLY)
-     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- #endif
-     return 0;
-@@ -61,7 +61,7 @@ static int ctr(CPURISCVState *env, int csrno)
- 
-     if (!cpu->cfg.ext_counters) {
+@@ -63,6 +63,61 @@ static int ctr(CPURISCVState *env, int csrno)
          /* The Counters extensions is not enabled */
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
+         return -RISCV_EXCP_ILLEGAL_INST;
      }
++
++    if (riscv_cpu_virt_enabled(env)) {
++        switch (csrno) {
++        case CSR_CYCLE:
++            if (!get_field(env->hcounteren, HCOUNTEREN_CY) &&
++                get_field(env->mcounteren, HCOUNTEREN_CY)) {
++                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++            }
++            break;
++        case CSR_TIME:
++            if (!get_field(env->hcounteren, HCOUNTEREN_TM) &&
++                get_field(env->mcounteren, HCOUNTEREN_TM)) {
++                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++            }
++            break;
++        case CSR_INSTRET:
++            if (!get_field(env->hcounteren, HCOUNTEREN_IR) &&
++                get_field(env->mcounteren, HCOUNTEREN_IR)) {
++                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++            }
++            break;
++        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
++            if (!get_field(env->hcounteren, 1 << (csrno - CSR_HPMCOUNTER3)) &&
++                get_field(env->mcounteren, 1 << (csrno - CSR_HPMCOUNTER3))) {
++                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++            }
++            break;
++#if defined(TARGET_RISCV32)
++        case CSR_CYCLEH:
++            if (!get_field(env->hcounteren, HCOUNTEREN_CY) &&
++                get_field(env->mcounteren, HCOUNTEREN_CY)) {
++                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++            }
++            break;
++        case CSR_TIMEH:
++            if (!get_field(env->hcounteren, HCOUNTEREN_TM) &&
++                get_field(env->mcounteren, HCOUNTEREN_TM)) {
++                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++            }
++            break;
++        case CSR_INSTRETH:
++            if (!get_field(env->hcounteren, HCOUNTEREN_IR) &&
++                get_field(env->mcounteren, HCOUNTEREN_IR)) {
++                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++            }
++            break;
++        case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
++            if (!get_field(env->hcounteren, 1 << (csrno - CSR_HPMCOUNTER3H)) &&
++                get_field(env->mcounteren, 1 << (csrno - CSR_HPMCOUNTER3H))) {
++                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++            }
++            break;
++#endif
++        }
++    }
  #endif
      return 0;
-@@ -89,7 +89,7 @@ static int hmode(CPURISCVState *env, int csrno)
+ }
+@@ -86,6 +141,8 @@ static int hmode(CPURISCVState *env, int csrno)
+         if ((env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+             env->priv == PRV_M) {
+             return 0;
++        } else {
++            return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
          }
      }
  
--    return -1;
-+    return -RISCV_EXCP_ILLEGAL_INST;
- }
- 
- static int pmp(CPURISCVState *env, int csrno)
-@@ -103,7 +103,7 @@ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
- {
- #if !defined(CONFIG_USER_ONLY)
-     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- #endif
-     *val = riscv_cpu_get_fflags(env);
-@@ -114,7 +114,7 @@ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
-     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
-     env->mstatus |= MSTATUS_FS;
- #endif
-@@ -126,7 +126,7 @@ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
- {
- #if !defined(CONFIG_USER_ONLY)
-     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- #endif
-     *val = env->frm;
-@@ -137,7 +137,7 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
-     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
-     env->mstatus |= MSTATUS_FS;
- #endif
-@@ -149,7 +149,7 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
- {
- #if !defined(CONFIG_USER_ONLY)
-     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- #endif
-     *val = (riscv_cpu_get_fflags(env) << FSR_AEXC_SHIFT)
-@@ -161,7 +161,7 @@ static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
-     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
-     env->mstatus |= MSTATUS_FS;
- #endif
-@@ -223,7 +223,7 @@ static int read_time(CPURISCVState *env, int csrno, target_ulong *val)
-     uint64_t delta = riscv_cpu_virt_enabled(env) ? env->htimedelta : 0;
- 
-     if (!env->rdtime_fn) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-     *val = env->rdtime_fn() + delta;
-@@ -236,7 +236,7 @@ static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
-     uint64_t delta = riscv_cpu_virt_enabled(env) ? env->htimedelta : 0;
- 
-     if (!env->rdtime_fn) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-     *val = (env->rdtime_fn() + delta) >> 32;
-@@ -502,7 +502,7 @@ static int write_mcounteren(CPURISCVState *env, int csrno, target_ulong val)
- static int read_mscounteren(CPURISCVState *env, int csrno, target_ulong *val)
- {
-     if (env->priv_ver < PRIV_VERSION_1_11_0) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
-     *val = env->mcounteren;
-     return 0;
-@@ -512,7 +512,7 @@ static int read_mscounteren(CPURISCVState *env, int csrno, target_ulong *val)
- static int write_mscounteren(CPURISCVState *env, int csrno, target_ulong val)
- {
-     if (env->priv_ver < PRIV_VERSION_1_11_0) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
-     env->mcounteren = val;
-     return 0;
-@@ -736,7 +736,7 @@ static int read_satp(CPURISCVState *env, int csrno, target_ulong *val)
-     }
- 
-     if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     } else {
-         *val = env->satp;
-     }
-@@ -753,7 +753,7 @@ static int write_satp(CPURISCVState *env, int csrno, target_ulong val)
-         ((val ^ env->satp) & (SATP_MODE | SATP_ASID | SATP_PPN)))
-     {
-         if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
--            return -1;
-+            return -RISCV_EXCP_ILLEGAL_INST;
-         } else {
-             if((val ^ env->satp) & SATP_ASID) {
-                 tlb_flush(env_cpu(env));
-@@ -923,7 +923,7 @@ static int write_hgatp(CPURISCVState *env, int csrno, target_ulong val)
- static int read_htimedelta(CPURISCVState *env, int csrno, target_ulong *val)
- {
-     if (!env->rdtime_fn) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- 
- #if defined(TARGET_RISCV32)
-@@ -937,7 +937,7 @@ static int read_htimedelta(CPURISCVState *env, int csrno, target_ulong *val)
- static int write_htimedelta(CPURISCVState *env, int csrno, target_ulong val)
- {
-     if (!env->rdtime_fn) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- 
- #if defined(TARGET_RISCV32)
-@@ -952,7 +952,7 @@ static int write_htimedelta(CPURISCVState *env, int csrno, target_ulong val)
- static int read_htimedeltah(CPURISCVState *env, int csrno, target_ulong *val)
- {
-     if (!env->rdtime_fn) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-     *val = env->htimedelta >> 32;
-@@ -962,7 +962,7 @@ static int read_htimedeltah(CPURISCVState *env, int csrno, target_ulong *val)
- static int write_htimedeltah(CPURISCVState *env, int csrno, target_ulong val)
- {
-     if (!env->rdtime_fn) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-     env->htimedelta = deposit64(env->htimedelta, 32, 32, (uint64_t)val);
-@@ -1160,18 +1160,18 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
- 
-     if ((write_mask && read_only) ||
-         (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- #endif
- 
-     /* ensure the CSR extension is enabled. */
-     if (!cpu->cfg.ext_icsr) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
+@@ -272,6 +329,7 @@ static const target_ulong delegable_excps =
+     (1ULL << (RISCV_EXCP_STORE_PAGE_FAULT)) |
+     (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) |
+     (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
++    (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
+     (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT));
+ static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+     SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
+@@ -1170,9 +1228,13 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
      }
  
      /* check predicate */
-     if (!csr_ops[csrno].predicate || csr_ops[csrno].predicate(env, csrno) < 0) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
+-    if (!csr_ops[csrno].predicate || csr_ops[csrno].predicate(env, csrno) < 0) {
++    if (!csr_ops[csrno].predicate) {
+         return -RISCV_EXCP_ILLEGAL_INST;
      }
++    ret = csr_ops[csrno].predicate(env, csrno);
++    if (ret < 0) {
++        return ret;
++    }
  
      /* execute combined read/write operation if it exists */
-@@ -1181,7 +1181,7 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
- 
-     /* if no accessor exists then return failure */
-     if (!csr_ops[csrno].read) {
--        return -1;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-     /* read old value */
+     if (csr_ops[csrno].op) {
+diff --git a/target/riscv/insn_trans/trans_rvh.inc.c b/target/riscv/insn_trans/trans_rvh.inc.c
+index db650ae62a..881c9ef4d2 100644
+--- a/target/riscv/insn_trans/trans_rvh.inc.c
++++ b/target/riscv/insn_trans/trans_rvh.inc.c
+@@ -360,7 +360,7 @@ static bool trans_hfence_gvma(DisasContext *ctx, arg_sfence_vma *a)
+ {
+     REQUIRE_EXT(ctx, RVH);
+ #ifndef CONFIG_USER_ONLY
+-    gen_helper_hyp_tlb_flush(cpu_env);
++    gen_helper_hyp_gvma_tlb_flush(cpu_env);
+     return true;
+ #endif
+     return false;
 diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index efc2d854eb..80d632777b 100644
+index 80d632777b..d1f1a46335 100644
 --- a/target/riscv/op_helper.c
 +++ b/target/riscv/op_helper.c
-@@ -43,8 +43,10 @@ target_ulong helper_csrrw(CPURISCVState *env, target_ulong src,
-         target_ulong csr)
- {
-     target_ulong val = 0;
--    if (riscv_csrrw(env, csr, &val, src, -1) < 0) {
--        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+    int ret = riscv_csrrw(env, csr, &val, src, -1);
-+
-+    if (ret < 0) {
-+        riscv_raise_exception(env, -ret, GETPC());
+@@ -94,6 +94,11 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
      }
-     return val;
- }
-@@ -53,8 +55,10 @@ target_ulong helper_csrrs(CPURISCVState *env, target_ulong src,
-         target_ulong csr, target_ulong rs1_pass)
- {
-     target_ulong val = 0;
--    if (riscv_csrrw(env, csr, &val, -1, rs1_pass ? src : 0) < 0) {
--        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+    int ret = riscv_csrrw(env, csr, &val, -1, rs1_pass ? src : 0);
+ 
++    if (riscv_has_ext(env, RVH) && riscv_cpu_virt_enabled(env) &&
++        get_field(env->hstatus, HSTATUS_VTSR)) {
++        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
++    }
 +
-+    if (ret < 0) {
-+        riscv_raise_exception(env, -ret, GETPC());
-     }
-     return val;
- }
-@@ -63,8 +67,10 @@ target_ulong helper_csrrc(CPURISCVState *env, target_ulong src,
-         target_ulong csr, target_ulong rs1_pass)
- {
-     target_ulong val = 0;
--    if (riscv_csrrw(env, csr, &val, 0, rs1_pass ? src : 0) < 0) {
+     mstatus = env->mstatus;
+ 
+     if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
+@@ -176,7 +181,7 @@ void helper_wfi(CPURISCVState *env)
+     if ((env->priv == PRV_S &&
+         get_field(env->mstatus, MSTATUS_TW)) ||
+         riscv_cpu_virt_enabled(env)) {
 -        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+    int ret = riscv_csrrw(env, csr, &val, 0, rs1_pass ? src : 0);
-+
-+    if (ret < 0) {
-+        riscv_raise_exception(env, -ret, GETPC());
++        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+     } else {
+         cs->halted = 1;
+         cs->exception_index = EXCP_HLT;
+@@ -191,6 +196,9 @@ void helper_tlb_flush(CPURISCVState *env)
+         (env->priv == PRV_S &&
+          get_field(env->mstatus, MSTATUS_TVM))) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    } else if (riscv_has_ext(env, RVH) && riscv_cpu_virt_enabled(env) &&
++               get_field(env->hstatus, HSTATUS_VTVM)) {
++        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+     } else {
+         tlb_flush(cs);
      }
-     return val;
+@@ -200,6 +208,10 @@ void helper_hyp_tlb_flush(CPURISCVState *env)
+ {
+     CPUState *cs = env_cpu(env);
+ 
++    if (env->priv == PRV_S && riscv_cpu_virt_enabled(env)) {
++        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
++    }
++
+     if (env->priv == PRV_M ||
+         (env->priv == PRV_S && !riscv_cpu_virt_enabled(env))) {
+         tlb_flush(cs);
+@@ -209,6 +221,16 @@ void helper_hyp_tlb_flush(CPURISCVState *env)
+     riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
  }
+ 
++void helper_hyp_gvma_tlb_flush(CPURISCVState *env)
++{
++    if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) &&
++        get_field(env->mstatus, MSTATUS_TVM)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    }
++
++    helper_hyp_tlb_flush(env);
++}
++
+ target_ulong helper_hyp_load(CPURISCVState *env, target_ulong address,
+                              target_ulong attrs, target_ulong memop)
+ {
+@@ -251,7 +273,11 @@ target_ulong helper_hyp_load(CPURISCVState *env, target_ulong address,
+         return pte;
+     }
+ 
+-    riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    if (riscv_cpu_virt_enabled(env)) {
++        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
++    } else {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    }
+     return 0;
+ }
+ 
+@@ -289,7 +315,11 @@ void helper_hyp_store(CPURISCVState *env, target_ulong address,
+         return;
+     }
+ 
+-    riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    if (riscv_cpu_virt_enabled(env)) {
++        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
++    } else {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    }
+ }
+ 
+ target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
+@@ -319,7 +349,11 @@ target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
+         return pte;
+     }
+ 
+-    riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    if (riscv_cpu_virt_enabled(env)) {
++        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
++    } else {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    }
+     return 0;
+ }
+ 
 -- 
 2.26.2
 
