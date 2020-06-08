@@ -1,72 +1,105 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jiIbn-0001Z8-Ny
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 10:18:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53532)
+	id 1jiKD6-00065a-00
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 12:01:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37622)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jiIbj-0001RZ-9w; Mon, 08 Jun 2020 10:18:35 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:43510)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jiIbi-0004Wg-9Z; Mon, 08 Jun 2020 10:18:34 -0400
-Received: by mail-pl1-x641.google.com with SMTP id g12so6712109pll.10;
- Mon, 08 Jun 2020 07:18:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=Nj6OhjWGxxBEnKG0HNnd5fIFBJbiq3a3JcYD2CxwjVc=;
- b=PQbdz0HHT8FYKBTGcaOht14eZo76lwv4fFuX4U+chb2+GnVw1hWuMC6cpI2D6KUo8+
- WJtI1Y0QzGlgL45gh5YNxdVChV+44zMJaD9G7tEYPln7QOSyIM2Qu0sVotvoam7xek22
- Bhp1LFXiMfymIwUx4rMH5qdbkVdCFFedaUEiGFpgeqsyMmGJS4S7yNqfm3l4BF4ONRQ8
- oxju2F8Oyrel4A7Yw1MlRoioPegeHOXJrMdUCtGcGZDJjyofcnUj6vr80RUg4SEbvGKp
- 2SJ5sptJS/gag66JttuL9DX5f82B5r5pU9acDAhUqy67ZB9ERYeEya29v/iwSi4iiesh
- z3Qw==
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKCz-00060U-7e
+ for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:01:10 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:59716
+ helo=us-smtp-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKCw-0007TH-Lk
+ for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:01:08 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1591632064;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5qtqeym41wYPVUNcQP0hBuZd3ZN8CptiJr597zGfRw0=;
+ b=MTeDYCcoZKac/+R/Fonn1qP58ALF9W+GHJsIUUdYnJB52JvnE0ES/cMhKLmEudeO36yfUd
+ ZqiCjBL8N+8dPSqUmDwzNNzS5bSralcNdMP0xorBIPzRCa1/euyZbFWn/9Y1w+Dczpz1kc
+ JqE7UVIhmcc9oImmukhRNCv6q/pPFEI=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-22-6Oc7eF5iP_OBKjr39_q_RQ-1; Mon, 08 Jun 2020 12:01:00 -0400
+X-MC-Unique: 6Oc7eF5iP_OBKjr39_q_RQ-1
+Received: by mail-wr1-f69.google.com with SMTP id p9so7360420wrx.10
+ for <qemu-riscv@nongnu.org>; Mon, 08 Jun 2020 09:01:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=Nj6OhjWGxxBEnKG0HNnd5fIFBJbiq3a3JcYD2CxwjVc=;
- b=LLzHmW3PWYBAxk4KqXSZ11Kfgjye6R5P/EvlvaeVGO+SK79rWmie6p5xRBESBub25U
- bmSBfQFVE+aiN6+TfsHwZ5XKdjfXpZWbZUAM/oAlK4ggXGv7AC7Bpjns8IHobrY3WSl7
- Pr8sgY4KIzYdKW05fxvnLpNzq79XBkM09ZL7sotnrMcxC4fkmMa2serQCTw3rJLssZFD
- xY1WlPBO7cpTDf+Mil6hFNP5GrWeDyScYqDb+2/sNk5DkLpNH1eccckukyBRTU+aEtY3
- iT/0Z2co5A31mjdaaBgB2rb2bRdhloBCX8ghqcEPZWOwmY6xcpsSFjZAOKrhIOEZ7ZyS
- iY7g==
-X-Gm-Message-State: AOAM531pQnC6zDd0E+7G4tRaH9/4Xo7bBNUG5OKWDQsps9Sr7KdRf6uq
- Fh9dZ7/wLzfaQn5QvYdYqp4=
-X-Google-Smtp-Source: ABdhPJxjz0WWUUl2PfQue0VmBShfFa00YnGv+eXV97uxxDJi16+H8X3/XwPkojhkuKTr0bBr3MTE9A==
-X-Received: by 2002:a17:90a:bf92:: with SMTP id
- d18mr17262350pjs.120.1591625912779; 
- Mon, 08 Jun 2020 07:18:32 -0700 (PDT)
-Received: from localhost.localdomain (unknown-224-80.windriver.com.
- [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id b19sm7292575pft.74.2020.06.08.07.18.32
- (version=TLS1 cipher=AES128-SHA bits=128/128);
- Mon, 08 Jun 2020 07:18:32 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>,
+ :references:mime-version:content-transfer-encoding;
+ bh=5qtqeym41wYPVUNcQP0hBuZd3ZN8CptiJr597zGfRw0=;
+ b=Ac3WbwmCSW+PnMuo4gVVGK3t4ELO+4zSy20rzF5X8k5gundKsksKDz7CBi2Vywixng
+ XgdSO+zY9j50oerC02US3g8wNP2e1/E8V6yu3GsMi3zAvmuumlIxaTtsUQADtunJXsbw
+ Rs2xAKpUqlknppBuyPubO+BBFsZwTsIjcsmCUuY66V+meSF5kob9YUxPRRC8ad8CMSZj
+ nR7PSMcmgz18G5x83bI+ZKTbQ+11+3puZxhz/miPIVSHKc/D9+EQb4B6W+xews5z0gm0
+ 16p2Wkm0SlF6o+0OHHwhi+Vx7ERKNYkgNsZPY+E+zlPhmzKSfGwSlp5o4eylyUuJ/VAh
+ mZdA==
+X-Gm-Message-State: AOAM531MTYsXf4hNFam8Z4qqkZfdQnCqN9+C73iYX/RN+ViVDP0BMQxc
+ 8qsEwQJqFdAl/ai1Wap8fWA8zoSO8YfsZpw3lmb7a9kvd91MjiGkHRwb0NYKoz4gQpOpyxQdKCe
+ 7ClOkd3uHd39imAc=
+X-Received: by 2002:adf:de0b:: with SMTP id b11mr24236292wrm.346.1591632059267; 
+ Mon, 08 Jun 2020 09:00:59 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyCLkZjArfyp0BDfLlr7paJJyNdZb8aPEICM5cLMV+w6rNjL53A+D/YIALTIycqApB88KkdKg==
+X-Received: by 2002:adf:de0b:: with SMTP id b11mr24236267wrm.346.1591632059025; 
+ Mon, 08 Jun 2020 09:00:59 -0700 (PDT)
+Received: from localhost.localdomain
+ (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
+ by smtp.gmail.com with ESMTPSA id z12sm227313wrg.9.2020.06.08.09.00.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jun 2020 09:00:58 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Michael Walle <michael@walle.cc>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Gerd Hoffmann <kraxel@redhat.com>,
+ Stafford Horne <shorne@gmail.com>, Andrzej Zaborowski <balrogg@gmail.com>,
+ qemu-ppc@nongnu.org, Alistair Francis <alistair@alistair23.me>,
+ Richard Henderson <rth@twiddle.net>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ "Daniel P . Berrange" <berrange@redhat.com>, qemu-riscv@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, xen-devel@lists.xenproject.org,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Paul Durrant <paul@xen.org>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, Thomas Huth <huth@tuxfamily.org>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 15/15] hw/riscv: sifive_u: Add a dummy DDR memory controller
- device
-Date: Mon,  8 Jun 2020 07:17:44 -0700
-Message-Id: <1591625864-31494-16-git-send-email-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
-References: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::641;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x641.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
+ David Gibson <david@gibson.dropbear.id.au>,
+ Magnus Damm <magnus.damm@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Subject: [RFC PATCH 02/35] hw/core/qdev: Add
+ qdev_warn_deprecated_function_used() helper
+Date: Mon,  8 Jun 2020 18:00:11 +0200
+Message-Id: <20200608160044.15531-3-philmd@redhat.com>
+X-Mailer: git-send-email 2.21.3
+In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
+References: <20200608160044.15531-1-philmd@redhat.com>
+MIME-Version: 1.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8;
+	text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=205.139.110.120; envelope-from=philmd@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/08 01:05:50
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,79 +112,130 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2020 14:18:35 -0000
+X-List-Received-Date: Mon, 08 Jun 2020 16:01:11 -0000
 
-From: Bin Meng <bin.meng@windriver.com>
+When built with --enable-qdev-deprecation-warning, calling
+qdev_warn_deprecated_function_used() will emit a warning such:
 
-It is enough to simply map the SiFive FU540 DDR memory controller
-into the MMIO space using create_unimplemented_device(), to make
-the upstream U-Boot v2020.07 DDR memory initialization codes happy.
+  $ qemu-system-arm -M verdex ...
+  qemu-system-arm: warning: use of deprecated non-qdev/non-qom code in pxa2xx_lcdc_init()
+  qemu-system-arm: warning: use of deprecated non-qdev/non-qom code in pxa2xx_i2s_init()
+  qemu-system-arm: warning: use of deprecated non-qdev/non-qom code in pxa27x_keypad_init()
 
-Note we do not generate device tree fragment for the DDR memory
-controller. Since the controller data in device tree consumes a
-very large space (see fu540-hifive-unleashed-a00-ddr.dtsi in the
-U-Boot source), and it is only needed by U-Boot SPL but not any
-operating system, we choose not to generate the fragment here.
-This also means when testing with U-Boot SPL, the device tree has
-to come from U-Boot SPL itself, but not the one generated by QEMU
-on the fly. The memory has to be set to 8GiB to match the real
-HiFive Unleashed board when invoking QEMU (-m 8G).
-
-With this commit, QEMU can boot U-Boot SPL built for SiFive FU540
-all the way up to loading U-Boot proper from MMC:
-
-$ qemu-system-riscv64 -nographic -M sifive_u,msel=6 -m 8G -bios u-boot-spl.bin
-
-U-Boot SPL 2020.07-rc3-00208-g88bd5b1 (Jun 08 2020 - 20:16:10 +0800)
-Trying to boot from MMC1
-Unhandled exception: Load access fault
-EPC: 0000000008009be6 TVAL: 0000000010050014
-
-The above exception is expected because QSPI is unsupported yet.
-
-Signed-off-by: Bin Meng <bin.meng@windriver.com>
-
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
+ configure                    |  8 ++++++++
+ include/hw/qdev-deprecated.h | 26 ++++++++++++++++++++++++++
+ hw/core/qdev.c               |  8 ++++++++
+ 3 files changed, 42 insertions(+)
+ create mode 100644 include/hw/qdev-deprecated.h
 
- hw/riscv/sifive_u.c         | 4 ++++
- include/hw/riscv/sifive_u.h | 1 +
- 2 files changed, 5 insertions(+)
-
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index c94ff6f..7923df4 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -82,6 +82,7 @@ static const struct MemmapEntry {
-     [SIFIVE_U_OTP] =      { 0x10070000,     0x1000 },
-     [SIFIVE_U_GEM] =      { 0x10090000,     0x2000 },
-     [SIFIVE_U_GEM_MGMT] = { 0x100a0000,     0x1000 },
-+    [SIFIVE_U_DMC] =      { 0x100b0000,    0x10000 },
-     [SIFIVE_U_FLASH0] =   { 0x20000000, 0x10000000 },
-     [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
- };
-@@ -733,6 +734,9 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
- 
-     create_unimplemented_device("riscv.sifive.u.gem-mgmt",
-         memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
+diff --git a/configure b/configure
+index 597e909b53..9b7a8927c6 100755
+--- a/configure
++++ b/configure
+@@ -434,6 +434,7 @@ edk2_blobs="no"
+ pkgversion=""
+ pie=""
+ qom_cast_debug="yes"
++qdev_deprecation_warning="no"
+ trace_backends="log"
+ trace_file="trace"
+ spice=""
+@@ -1114,6 +1115,8 @@ for opt do
+   ;;
+   --enable-qom-cast-debug) qom_cast_debug="yes"
+   ;;
++  --enable-qdev-deprecation-warning) qdev_deprecation_warning="yes"
++  ;;
+   --disable-virtfs) virtfs="no"
+   ;;
+   --enable-virtfs) virtfs="yes"
+@@ -1882,6 +1885,7 @@ disabled with --disable-FEATURE, default is enabled if available:
+   virglrenderer   virgl rendering support
+   xfsctl          xfsctl support
+   qom-cast-debug  cast debugging support
++  qdev-deprecation-warning display qdev deprecation warnings
+   tools           build qemu-io, qemu-nbd and qemu-img tools
+   vxhs            Veritas HyperScale vDisk backend support
+   bochs           bochs image format support
+@@ -6723,6 +6727,7 @@ echo "gcov enabled      $gcov"
+ echo "TPM support       $tpm"
+ echo "libssh support    $libssh"
+ echo "QOM debugging     $qom_cast_debug"
++echo "QDEV deprecation warnings $qdev_deprecation_warning"
+ echo "Live block migration $live_block_migration"
+ echo "lzo support       $lzo"
+ echo "snappy support    $snappy"
+@@ -7345,6 +7350,9 @@ fi
+ if test "$qom_cast_debug" = "yes" ; then
+   echo "CONFIG_QOM_CAST_DEBUG=y" >> $config_host_mak
+ fi
++if test "$qdev_deprecation_warning" = "yes" ; then
++  echo "CONFIG_QDEV_DEPRECATION_WARNING=y" >> $config_host_mak
++fi
+ if test "$rbd" = "yes" ; then
+   echo "CONFIG_RBD=m" >> $config_host_mak
+   echo "RBD_CFLAGS=$rbd_cflags" >> $config_host_mak
+diff --git a/include/hw/qdev-deprecated.h b/include/hw/qdev-deprecated.h
+new file mode 100644
+index 0000000000..b815f62dae
+--- /dev/null
++++ b/include/hw/qdev-deprecated.h
+@@ -0,0 +1,26 @@
++/*
++ * QEMU QOM qdev deprecation helpers
++ *
++ * Copyright (c) 2020 Red Hat, Inc.
++ *
++ * Author:
++ *   Philippe Mathieu-Daudé <philmd@redhat.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ */
++#ifndef HW_QDEV_DEPRECATED_H
++#define HW_QDEV_DEPRECATED_H
 +
-+    create_unimplemented_device("riscv.sifive.u.dmc",
-+        memmap[SIFIVE_U_DMC].base, memmap[SIFIVE_U_DMC].size);
++/**
++ * qdev_warn_deprecated_function_used:
++ *
++ * Display a warning that deprecated code is used.
++ */
++#define qdev_warn_deprecated_function_used() \
++    qdev_warn_deprecated_function(__func__)
++void qdev_warn_deprecated_function(const char *function);
++
++#endif
+diff --git a/hw/core/qdev.c b/hw/core/qdev.c
+index 9e5538aeae..901fa93657 100644
+--- a/hw/core/qdev.c
++++ b/hw/core/qdev.c
+@@ -35,6 +35,7 @@
+ #include "hw/hotplug.h"
+ #include "hw/irq.h"
+ #include "hw/qdev-properties.h"
++#include "hw/qdev-deprecated.h"
+ #include "hw/boards.h"
+ #include "hw/sysbus.h"
+ #include "hw/qdev-clock.h"
+@@ -819,6 +820,13 @@ void qdev_alias_all_properties(DeviceState *target, Object *source)
+     } while (class != object_class_by_name(TYPE_DEVICE));
  }
  
- static Property sifive_u_soc_props[] = {
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 5d80f91..3e33646 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -78,6 +78,7 @@ enum {
-     SIFIVE_U_UART1,
-     SIFIVE_U_GPIO,
-     SIFIVE_U_OTP,
-+    SIFIVE_U_DMC,
-     SIFIVE_U_FLASH0,
-     SIFIVE_U_DRAM,
-     SIFIVE_U_GEM,
++void qdev_warn_deprecated_function(const char *function)
++{
++#ifdef CONFIG_QDEV_DEPRECATION_WARNING
++    warn_report("use of deprecated non-qdev/non-qom code in %s()", function);
++#endif
++}
++
+ static bool device_get_realized(Object *obj, Error **errp)
+ {
+     DeviceState *dev = DEVICE(obj);
 -- 
-2.7.4
+2.21.3
 
 
