@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jiKD6-00065a-00
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 12:01:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37622)
+	id 1jiKDE-00068M-CZ
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 12:01:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37608)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKCz-00060U-7e
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKCx-00060A-Fs
  for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:01:10 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:59716
- helo=us-smtp-1.mimecast.com)
+Received: from us-smtp-2.mimecast.com ([207.211.31.81]:33071
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKCw-0007TH-Lk
- for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:01:08 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKCt-0007Rj-H7
+ for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:01:06 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591632064;
+ s=mimecast20190719; t=1591632056;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5qtqeym41wYPVUNcQP0hBuZd3ZN8CptiJr597zGfRw0=;
- b=MTeDYCcoZKac/+R/Fonn1qP58ALF9W+GHJsIUUdYnJB52JvnE0ES/cMhKLmEudeO36yfUd
- ZqiCjBL8N+8dPSqUmDwzNNzS5bSralcNdMP0xorBIPzRCa1/euyZbFWn/9Y1w+Dczpz1kc
- JqE7UVIhmcc9oImmukhRNCv6q/pPFEI=
+ bh=awCHYAXUOGkS+dWmNDQ4SQqbGqK/3LMSf+67fZKCnc0=;
+ b=cDcUjz9SDc+O5KcNdlJ5/YMdGHem6EyimH6hybVCRfm2zvEofSNu0aFCKvBmVc1rm2LTe8
+ Kq0ycRhwepuGgqsia+xxBnfXb0kBNkm1MdE+dq6i4LUy94m62J5G6+337pw5IJnVEmSGjp
+ eet1C3ncp3M7YGCDLsSCcA4dbPVpWaE=
 Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
  [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-22-6Oc7eF5iP_OBKjr39_q_RQ-1; Mon, 08 Jun 2020 12:01:00 -0400
-X-MC-Unique: 6Oc7eF5iP_OBKjr39_q_RQ-1
-Received: by mail-wr1-f69.google.com with SMTP id p9so7360420wrx.10
- for <qemu-riscv@nongnu.org>; Mon, 08 Jun 2020 09:01:00 -0700 (PDT)
+ us-mta-347-D1RL3NUOPlu23KYAFwGA8w-1; Mon, 08 Jun 2020 12:00:55 -0400
+X-MC-Unique: D1RL3NUOPlu23KYAFwGA8w-1
+Received: by mail-wr1-f69.google.com with SMTP id o1so7297309wrm.17
+ for <qemu-riscv@nongnu.org>; Mon, 08 Jun 2020 09:00:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=5qtqeym41wYPVUNcQP0hBuZd3ZN8CptiJr597zGfRw0=;
- b=Ac3WbwmCSW+PnMuo4gVVGK3t4ELO+4zSy20rzF5X8k5gundKsksKDz7CBi2Vywixng
- XgdSO+zY9j50oerC02US3g8wNP2e1/E8V6yu3GsMi3zAvmuumlIxaTtsUQADtunJXsbw
- Rs2xAKpUqlknppBuyPubO+BBFsZwTsIjcsmCUuY66V+meSF5kob9YUxPRRC8ad8CMSZj
- nR7PSMcmgz18G5x83bI+ZKTbQ+11+3puZxhz/miPIVSHKc/D9+EQb4B6W+xews5z0gm0
- 16p2Wkm0SlF6o+0OHHwhi+Vx7ERKNYkgNsZPY+E+zlPhmzKSfGwSlp5o4eylyUuJ/VAh
- mZdA==
-X-Gm-Message-State: AOAM531MTYsXf4hNFam8Z4qqkZfdQnCqN9+C73iYX/RN+ViVDP0BMQxc
- 8qsEwQJqFdAl/ai1Wap8fWA8zoSO8YfsZpw3lmb7a9kvd91MjiGkHRwb0NYKoz4gQpOpyxQdKCe
- 7ClOkd3uHd39imAc=
-X-Received: by 2002:adf:de0b:: with SMTP id b11mr24236292wrm.346.1591632059267; 
- Mon, 08 Jun 2020 09:00:59 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyCLkZjArfyp0BDfLlr7paJJyNdZb8aPEICM5cLMV+w6rNjL53A+D/YIALTIycqApB88KkdKg==
-X-Received: by 2002:adf:de0b:: with SMTP id b11mr24236267wrm.346.1591632059025; 
- Mon, 08 Jun 2020 09:00:59 -0700 (PDT)
+ bh=awCHYAXUOGkS+dWmNDQ4SQqbGqK/3LMSf+67fZKCnc0=;
+ b=JDDKAZZQPZfaewQbHF0GT+WMiUeyBc95f5SVGwq4VEQsYE28/59FEaBlqIKTUMGr9q
+ D8mm4n33WhF9B++B2EeCk2XFtLTKAWsXU03Ary7NHt9B3VNFsdwRrOq+9kUWktkkrEu0
+ Yn91iixMfzy6ML8nf1Qgj9y3OoHrgVr6UqvznEzw977Ivc9tNuuuTJBHau68nUHPTmMd
+ q9e+c0OoH1zIGis9F2631CyQpOXih65xwnsE+znrQ67WSkzAmULElAjxTnlVIen84lV5
+ hc62Uc/Hfc2E1jipk7k6bJC9Yzfsyk4t0xBejT9MO3WF/evWAaNs1vOISIc9lb/YxP5G
+ v0ww==
+X-Gm-Message-State: AOAM533Ggy9FVkV7fblK+v9tRwv1GRVDzBEzPof7MBDNV0/zrY1lby6S
+ 1haV0yP5LBz5/Y0oz3Id+AJYaO4g1QMp42/FNIltXCJYS7UcOOnyJaeB/buCicrDj50Kfz7sbdr
+ VBE5nQ+/m9GTDqRk=
+X-Received: by 2002:a1c:a3c5:: with SMTP id m188mr48584wme.152.1591632053831; 
+ Mon, 08 Jun 2020 09:00:53 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJziyL5raG4PwAXzO4TG14Cp0iz1q12d2PaRjnoEeXVkhA3kNQMidurFs0yP2smspC0uLUhA1g==
+X-Received: by 2002:a1c:a3c5:: with SMTP id m188mr48526wme.152.1591632053569; 
+ Mon, 08 Jun 2020 09:00:53 -0700 (PDT)
 Received: from localhost.localdomain
  (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
- by smtp.gmail.com with ESMTPSA id z12sm227313wrg.9.2020.06.08.09.00.57
+ by smtp.gmail.com with ESMTPSA id w10sm187197wrp.16.2020.06.08.09.00.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 09:00:58 -0700 (PDT)
+ Mon, 08 Jun 2020 09:00:53 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
@@ -76,10 +76,9 @@ Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Magnus Damm <magnus.damm@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [RFC PATCH 02/35] hw/core/qdev: Add
- qdev_warn_deprecated_function_used() helper
-Date: Mon,  8 Jun 2020 18:00:11 +0200
-Message-Id: <20200608160044.15531-3-philmd@redhat.com>
+Subject: [RFC PATCH 01/35] qom/object: Update documentation
+Date: Mon,  8 Jun 2020 18:00:10 +0200
+Message-Id: <20200608160044.15531-2-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
 References: <20200608160044.15531-1-philmd@redhat.com>
@@ -89,9 +88,9 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8;
 	text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=205.139.110.120; envelope-from=philmd@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/08 01:05:50
+Received-SPF: pass client-ip=207.211.31.81; envelope-from=philmd@redhat.com;
+ helo=us-smtp-delivery-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/08 05:40:44
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -114,127 +113,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 08 Jun 2020 16:01:11 -0000
 
-When built with --enable-qdev-deprecation-warning, calling
-qdev_warn_deprecated_function_used() will emit a warning such:
-
-  $ qemu-system-arm -M verdex ...
-  qemu-system-arm: warning: use of deprecated non-qdev/non-qom code in pxa2xx_lcdc_init()
-  qemu-system-arm: warning: use of deprecated non-qdev/non-qom code in pxa2xx_i2s_init()
-  qemu-system-arm: warning: use of deprecated non-qdev/non-qom code in pxa27x_keypad_init()
+The documentation was introduced in 2f28d2ff9dc, then
+0d09e41a51 and a27bd6c77 moved the headers around.
+Update the comment.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- configure                    |  8 ++++++++
- include/hw/qdev-deprecated.h | 26 ++++++++++++++++++++++++++
- hw/core/qdev.c               |  8 ++++++++
- 3 files changed, 42 insertions(+)
- create mode 100644 include/hw/qdev-deprecated.h
+ include/qom/object.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/configure b/configure
-index 597e909b53..9b7a8927c6 100755
---- a/configure
-+++ b/configure
-@@ -434,6 +434,7 @@ edk2_blobs="no"
- pkgversion=""
- pie=""
- qom_cast_debug="yes"
-+qdev_deprecation_warning="no"
- trace_backends="log"
- trace_file="trace"
- spice=""
-@@ -1114,6 +1115,8 @@ for opt do
-   ;;
-   --enable-qom-cast-debug) qom_cast_debug="yes"
-   ;;
-+  --enable-qdev-deprecation-warning) qdev_deprecation_warning="yes"
-+  ;;
-   --disable-virtfs) virtfs="no"
-   ;;
-   --enable-virtfs) virtfs="yes"
-@@ -1882,6 +1885,7 @@ disabled with --disable-FEATURE, default is enabled if available:
-   virglrenderer   virgl rendering support
-   xfsctl          xfsctl support
-   qom-cast-debug  cast debugging support
-+  qdev-deprecation-warning display qdev deprecation warnings
-   tools           build qemu-io, qemu-nbd and qemu-img tools
-   vxhs            Veritas HyperScale vDisk backend support
-   bochs           bochs image format support
-@@ -6723,6 +6727,7 @@ echo "gcov enabled      $gcov"
- echo "TPM support       $tpm"
- echo "libssh support    $libssh"
- echo "QOM debugging     $qom_cast_debug"
-+echo "QDEV deprecation warnings $qdev_deprecation_warning"
- echo "Live block migration $live_block_migration"
- echo "lzo support       $lzo"
- echo "snappy support    $snappy"
-@@ -7345,6 +7350,9 @@ fi
- if test "$qom_cast_debug" = "yes" ; then
-   echo "CONFIG_QOM_CAST_DEBUG=y" >> $config_host_mak
- fi
-+if test "$qdev_deprecation_warning" = "yes" ; then
-+  echo "CONFIG_QDEV_DEPRECATION_WARNING=y" >> $config_host_mak
-+fi
- if test "$rbd" = "yes" ; then
-   echo "CONFIG_RBD=m" >> $config_host_mak
-   echo "RBD_CFLAGS=$rbd_cflags" >> $config_host_mak
-diff --git a/include/hw/qdev-deprecated.h b/include/hw/qdev-deprecated.h
-new file mode 100644
-index 0000000000..b815f62dae
---- /dev/null
-+++ b/include/hw/qdev-deprecated.h
-@@ -0,0 +1,26 @@
-+/*
-+ * QEMU QOM qdev deprecation helpers
-+ *
-+ * Copyright (c) 2020 Red Hat, Inc.
-+ *
-+ * Author:
-+ *   Philippe Mathieu-Daudé <philmd@redhat.com>
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-+ * See the COPYING file in the top-level directory.
-+ */
-+#ifndef HW_QDEV_DEPRECATED_H
-+#define HW_QDEV_DEPRECATED_H
-+
-+/**
-+ * qdev_warn_deprecated_function_used:
-+ *
-+ * Display a warning that deprecated code is used.
-+ */
-+#define qdev_warn_deprecated_function_used() \
-+    qdev_warn_deprecated_function(__func__)
-+void qdev_warn_deprecated_function(const char *function);
-+
-+#endif
-diff --git a/hw/core/qdev.c b/hw/core/qdev.c
-index 9e5538aeae..901fa93657 100644
---- a/hw/core/qdev.c
-+++ b/hw/core/qdev.c
-@@ -35,6 +35,7 @@
- #include "hw/hotplug.h"
- #include "hw/irq.h"
- #include "hw/qdev-properties.h"
-+#include "hw/qdev-deprecated.h"
- #include "hw/boards.h"
- #include "hw/sysbus.h"
- #include "hw/qdev-clock.h"
-@@ -819,6 +820,13 @@ void qdev_alias_all_properties(DeviceState *target, Object *source)
-     } while (class != object_class_by_name(TYPE_DEVICE));
- }
- 
-+void qdev_warn_deprecated_function(const char *function)
-+{
-+#ifdef CONFIG_QDEV_DEPRECATION_WARNING
-+    warn_report("use of deprecated non-qdev/non-qom code in %s()", function);
-+#endif
-+}
-+
- static bool device_get_realized(Object *obj, Error **errp)
- {
-     DeviceState *dev = DEVICE(obj);
+diff --git a/include/qom/object.h b/include/qom/object.h
+index fd453dc8d6..eb560bf32f 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -45,7 +45,7 @@ typedef struct InterfaceInfo InterfaceInfo;
+  * <example>
+  *   <title>Creating a minimal type</title>
+  *   <programlisting>
+- * #include "qdev.h"
++ * #include "hw/qdev-core.h"
+  *
+  * #define TYPE_MY_DEVICE "my-device"
+  *
+@@ -146,7 +146,7 @@ typedef struct InterfaceInfo InterfaceInfo;
+  * <example>
+  *   <title>Overriding a virtual function</title>
+  *   <programlisting>
+- * #include "qdev.h"
++ * #include "hw/qdev-core.h"
+  *
+  * void my_device_class_init(ObjectClass *klass, void *class_data)
+  * {
+@@ -170,7 +170,7 @@ typedef struct InterfaceInfo InterfaceInfo;
+  * <example>
+  *   <title>Defining an abstract class</title>
+  *   <programlisting>
+- * #include "qdev.h"
++ * #include "hw/qdev-core.h"
+  *
+  * typedef struct MyDeviceClass
+  * {
 -- 
 2.21.3
 
