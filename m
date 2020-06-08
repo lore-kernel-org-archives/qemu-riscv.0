@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jiIbh-0001Oq-Nu
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 10:18:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53506)
+	id 1jiIbj-0001Ru-Gd
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 10:18:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53524)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jiIbe-0001KN-Tb; Mon, 08 Jun 2020 10:18:30 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:44460)
+ id 1jiIbh-0001PE-U5; Mon, 08 Jun 2020 10:18:33 -0400
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:36041)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jiIbe-0004Ve-00; Mon, 08 Jun 2020 10:18:30 -0400
-Received: by mail-pl1-x642.google.com with SMTP id bh7so6705629plb.11;
- Mon, 08 Jun 2020 07:18:29 -0700 (PDT)
+ id 1jiIbg-0004WE-QH; Mon, 08 Jun 2020 10:18:33 -0400
+Received: by mail-pl1-x644.google.com with SMTP id bg4so6721790plb.3;
+ Mon, 08 Jun 2020 07:18:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=7OPh7ztGSwFOj/4M8wX7DpoLYf/oIKyYZ1UVi3dy1kc=;
- b=CY7klDGRnaz6YHzBLCOuTQ29PTnMR3Wy3vsvJKpBFTMBAd/dUK2S8UJxphZD4yCAsM
- hjf3fcxb7jtRcOOiWFP49DjmkCii5Hn6uIAQB06rwBeGKwbUC6EVKSIwHfiE3YXPVQnO
- sHoRfyjTGqA6JqlNqvLe5nNIpU3CfFeJknSSg9Dd4NahPl0q9xM4dd52syYfSGQLZr9s
- cwR2fbng52UJ3I2T30uspK+zXilH3s12/cXI0kRP2xDuw0JHsWspvXhDx7gTWkv/3Vlo
- 1yJeSNsq/HluuoQpYQcOnWpmQhPHZ/ci22xkikHv7/RHj6lcjYWDfU9HaZ0MIksquzSr
- RCqA==
+ bh=FHQ9AhCMfHdHOxLhqMzAe14kJHhPNfUz/e/XtuYi54A=;
+ b=jw8t/eVvhojQH4+kouoFE7qizeykXEk3eGBcgfrtkBUJ9Sg69MEbqPpLlesm4YGvtT
+ BFHCTqbFlqWti9uxQrbJmHG0SEAG2iylYTngB4A9W5/yNfwaIJqLrGzd642oHLNjUHy4
+ JyrZCa4eHZdjH5NmMqej5q/cHwgiNZZtOH3CxGcGw8W3W4LIcQIZNsqi4l0fEZ/WQxXF
+ 3+86GpALZhiMIymtbtcWZt/AqKzqy0YBVISI3/ZnSWEUcoJq/AT4rwi6olhPN+DdfQOL
+ vNpz0bObMlCdedRGQM3ifYdfSuYNM/Lvtw7N9Cc9veEkX4YGelj1is7DYKoybyqwSeOg
+ URJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=7OPh7ztGSwFOj/4M8wX7DpoLYf/oIKyYZ1UVi3dy1kc=;
- b=o2hC71Xg4prIF4qRHzcq7fQP9adB22gTdcJEjT8SY0+m1M/9czdDMogADQJPSH1LKH
- RYM2XXGfFCTf+vzaGRXfQSwRIUcaG6QHipNtRRU9VgIWHuUs0uGCSognH3H4WkddXA58
- 3ZzLZAswURmjp5E5evaWWaHR0x2X2Ygv6GbvZpKB5pd74flT6pbF5tYlvB2Wpsi2Sr5+
- 9ciPYs/AkTXUIx8DQpumBOg/xLxAXTbkTOzkSZ3p6vHwlA5f+RaWENAVUG74dyPehpec
- esOEGaSIFQPdKoY/rR1WGQB898L2jN7OZfum2cd51KwXyHNaejieEsVuYDF1T5Jp6w3x
- Waag==
-X-Gm-Message-State: AOAM533/rDl0U0kAEuH1f/kxPcwBnckE29Lh/rZFwOaQ++4i/NI6hnyL
- 7mXvV4iT58VlW+KUHSVGmtA=
-X-Google-Smtp-Source: ABdhPJy2ShW1HbItqYULL8geeBzKYcuXb6TZ/DGr4gFFVv2verrUqMD31BUwOzQeaCt9QYSVlmh1iA==
-X-Received: by 2002:a17:90b:4d08:: with SMTP id
- mw8mr17200083pjb.119.1591625908323; 
- Mon, 08 Jun 2020 07:18:28 -0700 (PDT)
+ bh=FHQ9AhCMfHdHOxLhqMzAe14kJHhPNfUz/e/XtuYi54A=;
+ b=PQB2oc1+JOr97l2SktT6qU3t8G9Jovx41wsOTggarCOi9ZFShWV1zK/9Wv0ZluRIua
+ utz+eTYM1iCrib8P7vpPgQ27i3jt4GOY/vU1gQzZcD9mJJ31lblj27Ym2t9MMmc+U0mK
+ EmjRvRRfY5gKpSwfcUWxlaQ5B3gQy14aPvTmzRmdN/xDxFsT/AqjrgjWqO+FDFcqdI6X
+ yAXEvf4uwYNrl1MF9QKw9vvoCSyKkgIT13+GZy9+H3VR6SGQJ/Kb1H7uil31zx4hkecJ
+ D6HlxujBDPIZXA0jna88OYi67Lypp5LsNmq/zm2pAIMYFliiVV5KwpoQpy0e38CFwvSO
+ 409w==
+X-Gm-Message-State: AOAM531ey7JZtIUPf1bLXLhQ2gengH3dP0yG7XG7Nyl7FSMofpHL/1PH
+ y9fmMo6X3lWz6D0tYbX7Pig=
+X-Google-Smtp-Source: ABdhPJw+pjdrzzK19a2YtS0Z2+EhgOepBGUs0keqCvo+xxEQmsthtT7kYImbKs0RydhveJEEinyNAw==
+X-Received: by 2002:a17:90b:e8f:: with SMTP id
+ fv15mr11839458pjb.47.1591625911028; 
+ Mon, 08 Jun 2020 07:18:31 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id b19sm7292575pft.74.2020.06.08.07.18.27
+ by smtp.gmail.com with ESMTPSA id b19sm7292575pft.74.2020.06.08.07.18.30
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Mon, 08 Jun 2020 07:18:27 -0700 (PDT)
+ Mon, 08 Jun 2020 07:18:30 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -49,15 +49,15 @@ To: Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 10/15] hw/riscv: sifive_u: Rename serial property get/set
- functions to a generic name
-Date: Mon,  8 Jun 2020 07:17:39 -0700
-Message-Id: <1591625864-31494-11-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH 13/15] hw/riscv: sifive_u: Support different boot source per
+ MSEL pin state
+Date: Mon,  8 Jun 2020 07:17:42 -0700
+Message-Id: <1591625864-31494-14-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
 References: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::642;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x642.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::644;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x644.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,54 +79,115 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2020 14:18:31 -0000
+X-List-Received-Date: Mon, 08 Jun 2020 14:18:34 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-In prepration to add more properties to this machine, rename the
-existing serial property get/set functions to a generic name.
+SiFive FU540 SoC supports booting from several sources, which are
+controlled using the Mode Select (MSEL[3:0]) pins on the chip.
+Typically, the boot process runs through several stages before it
+begins execution of user-provided programs.
+
+The SoC supports booting from memory-mapped QSPI flash, which is
+how start_in_flash property is used for at present. This matches
+MSEL = 1 configuration (QSPI0).
+
+Typical booting flows involve the Zeroth Stage Boot Loader (ZSBL).
+It's not necessary for QEMU to implement the full ZSBL ROM codes,
+because we know ZSBL downloads the next stage program into the L2
+LIM at address 0x8000000 and executes from there. We can bypass
+the whole ZSBL execution and use "-bios" to load the next stage
+program directly if MSEL indicates a ZSBL booting flow.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- hw/riscv/sifive_u.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ hw/riscv/sifive_u.c         | 39 +++++++++++++++++++++++++++++++--------
+ include/hw/riscv/sifive_u.h |  6 ++++++
+ 2 files changed, 37 insertions(+), 8 deletions(-)
 
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index ef51874..07e2ba0 100644
+index 0a86ffc..f64aa52 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -481,14 +481,16 @@ static void sifive_u_machine_set_start_in_flash(Object *obj, bool value, Error *
-     s->start_in_flash = value;
- }
+@@ -408,8 +408,34 @@ static void sifive_u_machine_init(MachineState *machine)
+     /* create device tree */
+     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
  
--static void sifive_u_machine_get_serial(Object *obj, Visitor *v, const char *name,
--                                void *opaque, Error **errp)
-+static void sifive_u_machine_get_uint32_prop(Object *obj, Visitor *v,
-+                                             const char *name, void *opaque,
-+                                             Error **errp)
- {
-     visit_type_uint32(v, name, (uint32_t *)opaque, errp);
- }
+-    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+-                                 memmap[SIFIVE_U_DRAM].base, NULL);
++    if (s->start_in_flash) {
++        /*
++         * If start_in_flash property is given, assign s->msel to a value
++         * that representing booting from QSPI0 memory-mapped flash.
++         *
++         * This also means that when both start_in_flash and msel properties
++         * are given, start_in_flash takes the precedence over msel.
++         *
++         * Note this is to keep backward compatibility not to break existing
++         * users that use start_in_flash property.
++         */
++        s->msel = MSEL_MEMMAP_QSPI0_FLASH;
++    }
++
++    switch (s->msel) {
++    case MSEL_MEMMAP_QSPI0_FLASH:
++        start_addr = memmap[SIFIVE_U_FLASH0].base;
++        break;
++    case MSEL_L2LIM_QSPI0_FLASH:
++    case MSEL_L2LIM_QSPI2_SD:
++        start_addr = memmap[SIFIVE_U_L2LIM].base;
++        break;
++    default:
++        start_addr = memmap[SIFIVE_U_DRAM].base;
++        break;
++    }
++
++    riscv_find_and_load_firmware(machine, BIOS_FILENAME, start_addr, NULL);
  
--static void sifive_u_machine_set_serial(Object *obj, Visitor *v, const char *name,
--                                void *opaque, Error **errp)
-+static void sifive_u_machine_set_uint32_prop(Object *obj, Visitor *v,
-+                                             const char *name, void *opaque,
-+                                             Error **errp)
- {
-     visit_type_uint32(v, name, (uint32_t *)opaque, errp);
- }
-@@ -507,8 +509,8 @@ static void sifive_u_machine_instance_init(Object *obj)
+     if (machine->kernel_filename) {
+         uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
+@@ -427,13 +453,9 @@ static void sifive_u_machine_init(MachineState *machine)
+         }
+     }
  
-     s->serial = OTP_SERIAL;
-     object_property_add(obj, "serial", "uint32",
--                        sifive_u_machine_get_serial,
--                        sifive_u_machine_set_serial, NULL, &s->serial);
-+                        sifive_u_machine_get_uint32_prop,
-+                        sifive_u_machine_set_uint32_prop, NULL, &s->serial);
-     object_property_set_description(obj, "serial", "Board serial number");
- }
+-    if (s->start_in_flash) {
+-        start_addr = memmap[SIFIVE_U_FLASH0].base;
+-    }
+-
+     /* reset vector */
+     uint32_t reset_vec[8] = {
+-        0x00000000,
++        s->msel,                       /* MSEL pin state */
+         0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(dtb) */
+         0x01c28593,                    /*     addi   a1, t0, %pcrel_lo(1b) */
+         0xf1402573,                    /*     csrr   a0, mhartid  */
+@@ -505,7 +527,8 @@ static void sifive_u_machine_instance_init(Object *obj)
+                              sifive_u_machine_set_start_in_flash);
+     object_property_set_description(obj, "start-in-flash",
+                                     "Set on to tell QEMU's ROM to jump to "
+-                                    "flash. Otherwise QEMU will jump to DRAM");
++                                    "flash. Otherwise QEMU will jump to DRAM "
++                                    "or L2LIM depending on the msel value");
+ 
+     s->msel = 0;
+     object_property_add(obj, "msel", "uint32",
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index d82cfe0..5d80f91 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -111,6 +111,12 @@ enum {
+     SIFIVE_U_RTCCLK_FREQ = 1000000
+ };
+ 
++enum {
++    MSEL_MEMMAP_QSPI0_FLASH = 1,
++    MSEL_L2LIM_QSPI0_FLASH = 6,
++    MSEL_L2LIM_QSPI2_SD = 11
++};
++
+ #define SIFIVE_U_MANAGEMENT_CPU_COUNT   1
+ #define SIFIVE_U_COMPUTE_CPU_COUNT      4
  
 -- 
 2.7.4
