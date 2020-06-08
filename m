@@ -1,55 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jiKDE-00068M-CZ
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 12:01:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37608)
+	id 1jiKDI-00069l-JK
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 12:01:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37590)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKCx-00060A-Fs
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKCx-0005zs-1j
  for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:01:10 -0400
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:33071
+Received: from us-smtp-2.mimecast.com ([207.211.31.81]:60918
  helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKCt-0007Rj-H7
- for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:01:06 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKCm-0007Px-I0
+ for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:01:05 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591632056;
+ s=mimecast20190719; t=1591632051;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=awCHYAXUOGkS+dWmNDQ4SQqbGqK/3LMSf+67fZKCnc0=;
- b=cDcUjz9SDc+O5KcNdlJ5/YMdGHem6EyimH6hybVCRfm2zvEofSNu0aFCKvBmVc1rm2LTe8
- Kq0ycRhwepuGgqsia+xxBnfXb0kBNkm1MdE+dq6i4LUy94m62J5G6+337pw5IJnVEmSGjp
- eet1C3ncp3M7YGCDLsSCcA4dbPVpWaE=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-347-D1RL3NUOPlu23KYAFwGA8w-1; Mon, 08 Jun 2020 12:00:55 -0400
-X-MC-Unique: D1RL3NUOPlu23KYAFwGA8w-1
-Received: by mail-wr1-f69.google.com with SMTP id o1so7297309wrm.17
- for <qemu-riscv@nongnu.org>; Mon, 08 Jun 2020 09:00:54 -0700 (PDT)
+ content-transfer-encoding:content-transfer-encoding;
+ bh=r7PHbUODraiyYDfGeXtIeVn3Evhw0HgQCb8r2diF6v0=;
+ b=fnGHtiUWE2LM4j38X40NYaHkSd4Jf6d0YJt17pODpTNcs2r8oZmi7eFxmzl86AxNIswF6V
+ v027L7Ek//TnOW3KpmTpShykoOaOn44I6CFV7kbwHyWXgfH69a0i4Uj+0IajYrpgJ0e1Yi
+ zC1xnXWoXFjZ4m9iTIBQT/OgcC4uGC4=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-23-z27DBXNQPjqDkEoo_2ngQQ-1; Mon, 08 Jun 2020 12:00:49 -0400
+X-MC-Unique: z27DBXNQPjqDkEoo_2ngQQ-1
+Received: by mail-wm1-f72.google.com with SMTP id a7so9992wmf.1
+ for <qemu-riscv@nongnu.org>; Mon, 08 Jun 2020 09:00:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=awCHYAXUOGkS+dWmNDQ4SQqbGqK/3LMSf+67fZKCnc0=;
- b=JDDKAZZQPZfaewQbHF0GT+WMiUeyBc95f5SVGwq4VEQsYE28/59FEaBlqIKTUMGr9q
- D8mm4n33WhF9B++B2EeCk2XFtLTKAWsXU03Ary7NHt9B3VNFsdwRrOq+9kUWktkkrEu0
- Yn91iixMfzy6ML8nf1Qgj9y3OoHrgVr6UqvznEzw977Ivc9tNuuuTJBHau68nUHPTmMd
- q9e+c0OoH1zIGis9F2631CyQpOXih65xwnsE+znrQ67WSkzAmULElAjxTnlVIen84lV5
- hc62Uc/Hfc2E1jipk7k6bJC9Yzfsyk4t0xBejT9MO3WF/evWAaNs1vOISIc9lb/YxP5G
- v0ww==
-X-Gm-Message-State: AOAM533Ggy9FVkV7fblK+v9tRwv1GRVDzBEzPof7MBDNV0/zrY1lby6S
- 1haV0yP5LBz5/Y0oz3Id+AJYaO4g1QMp42/FNIltXCJYS7UcOOnyJaeB/buCicrDj50Kfz7sbdr
- VBE5nQ+/m9GTDqRk=
-X-Received: by 2002:a1c:a3c5:: with SMTP id m188mr48584wme.152.1591632053831; 
- Mon, 08 Jun 2020 09:00:53 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJziyL5raG4PwAXzO4TG14Cp0iz1q12d2PaRjnoEeXVkhA3kNQMidurFs0yP2smspC0uLUhA1g==
-X-Received: by 2002:a1c:a3c5:: with SMTP id m188mr48526wme.152.1591632053569; 
- Mon, 08 Jun 2020 09:00:53 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=r7PHbUODraiyYDfGeXtIeVn3Evhw0HgQCb8r2diF6v0=;
+ b=nz03zjo0Vfvo4cHLAogblRnkhHH/Kt1xIfmYTPeWzVdLXbKs8BYsooJUdmD2XkW5Ow
+ yBJNLFUrXJ1wGidLX7yl2c9Gy1PXbyU7J9VgjgaSMGCefmNI+7Qak6Msc9Zo1p25CVeQ
+ rEwDVI2pq8exFAgvZZEwLuZo5a55/6g1yyymbBq4foTeKfbmdstsG9y25eOcPEFhSPqM
+ f4TiVmre64OX6fK3T8hEQ9gtk3vPM3I+lbRHbzmC3YStiYqliCgv6pnZinKUoaDYb80z
+ arfLHATYri+csWpWTLqbXGXExthb/MdB8TwL459pXl71xM+X3o7rNsBMEnomAkyGckLs
+ kAQA==
+X-Gm-Message-State: AOAM533sj5ngPekrD2PFiNfLcuIKWxcrWWcoA2Qf79oaf3d9hVHqtSRl
+ KZWtZG+zSTz+lYEExBNwuxB99hc5aWd0TXliGLMLsfqkpz+rF17a2CIHSYiloXDzza48sGQK1vS
+ cmbK43ze2lmXU8/Y=
+X-Received: by 2002:a5d:69cb:: with SMTP id s11mr24291804wrw.91.1591632048440; 
+ Mon, 08 Jun 2020 09:00:48 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwMtorKuHBb+MRvZ6tBeip6kyiiVi39BDg4R5E8m4jpXwbcp5IXslWyCaizAHQ0jAbG9qrLqg==
+X-Received: by 2002:a5d:69cb:: with SMTP id s11mr24291746wrw.91.1591632048080; 
+ Mon, 08 Jun 2020 09:00:48 -0700 (PDT)
 Received: from localhost.localdomain
  (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
- by smtp.gmail.com with ESMTPSA id w10sm187197wrp.16.2020.06.08.09.00.51
+ by smtp.gmail.com with ESMTPSA id o15sm175107wrv.48.2020.06.08.09.00.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 09:00:53 -0700 (PDT)
+ Mon, 08 Jun 2020 09:00:47 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
@@ -76,12 +75,10 @@ Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Magnus Damm <magnus.damm@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [RFC PATCH 01/35] qom/object: Update documentation
-Date: Mon,  8 Jun 2020 18:00:10 +0200
-Message-Id: <20200608160044.15531-2-philmd@redhat.com>
+Subject: [RFC PATCH 00/35] hw/qdev: Warn when using pre-qdev/QOM devices
+Date: Mon,  8 Jun 2020 18:00:09 +0200
+Message-Id: <20200608160044.15531-1-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
-In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
-References: <20200608160044.15531-1-philmd@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
@@ -113,46 +110,109 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 08 Jun 2020 16:01:11 -0000
 
-The documentation was introduced in 2f28d2ff9dc, then
-0d09e41a51 and a27bd6c77 moved the headers around.
-Update the comment.
+Based on today's IRC chat, this is a trivial RFC series
+to anotate pre-qdev/QOM devices so developers using them
+without knowing they are not QOM'ified yet can realize
+it and convert them if they have time.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
----
- include/qom/object.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+qdev/QOM devices are introspectable, so easier to test
+or even fuzz.
 
-diff --git a/include/qom/object.h b/include/qom/object.h
-index fd453dc8d6..eb560bf32f 100644
---- a/include/qom/object.h
-+++ b/include/qom/object.h
-@@ -45,7 +45,7 @@ typedef struct InterfaceInfo InterfaceInfo;
-  * <example>
-  *   <title>Creating a minimal type</title>
-  *   <programlisting>
-- * #include "qdev.h"
-+ * #include "hw/qdev-core.h"
-  *
-  * #define TYPE_MY_DEVICE "my-device"
-  *
-@@ -146,7 +146,7 @@ typedef struct InterfaceInfo InterfaceInfo;
-  * <example>
-  *   <title>Overriding a virtual function</title>
-  *   <programlisting>
-- * #include "qdev.h"
-+ * #include "hw/qdev-core.h"
-  *
-  * void my_device_class_init(ObjectClass *klass, void *class_data)
-  * {
-@@ -170,7 +170,7 @@ typedef struct InterfaceInfo InterfaceInfo;
-  * <example>
-  *   <title>Defining an abstract class</title>
-  *   <programlisting>
-- * #include "qdev.h"
-+ * #include "hw/qdev-core.h"
-  *
-  * typedef struct MyDeviceClass
-  * {
+Philippe Mathieu-Daudé (35):
+  qom/object: Update documentation
+  hw/core/qdev: Add qdev_warn_deprecated_function_used() helper
+  hw/arm/omap: Emit warning when old code is used
+  hw/arm/pxa2xx: Emit warning when old code is used
+  hw/arm/nseries: Emit warning when old code is used
+  hw/timer/arm_timer: Emit warning when old code is used
+  hw/char/parallel: Emit warning when old code is used
+  hw/display/blizzard: Emit warning when old code is used
+  hw/display/ramfb: Emit warning when old code is used
+  hw/display/tc6393xb: Emit warning when old code is used
+  hw/display/vga-isa-mm: Emit warning when old code is used
+  hw/dma/etraxfs_dma: Emit warning when old code is used
+  hw/dma/soc_dma: Emit warning when old code is used
+  hw/i386/pc: Emit warning when old code is used
+  hw/i386/xen/xen-hvm: Emit warning when old code is used
+  hw/input/lasips2: Emit warning when old code is used
+  hw/input/pckbd: Emit warning when old code is used
+  hw/input/ps2: Emit warning when old code is used
+  hw/input/tsc2005: Emit warning when old code is used
+  hw/intc/i8259: Emit warning when old code is used
+  hw/lm32/lm32_hwsetup: Emit warning when old code is used
+  hw/m68k/mcf520x: Emit warning when old code is used
+  hw/misc/applesmc: Emit warning when old code is used
+  hw/misc/cbus: Emit warning when old code is used
+  hw/nvram/eeprom93xx: Emit warning when old code is used
+  hw/openrisc/cputimer: Emit warning when old code is used
+  hw/ppc/ppc: Emit warning when old code is used
+  hw/ppc/ppc4xx: Emit warning when old code is used
+  hw/ppc/ppc_booke: Emit warning when old code is used
+  hw/ppc/virtex_ml507: Emit warning when old code is used
+  hw/sh4: Emit warning when old code is used
+  hw/riscv: Emit warning when old code is used
+  hw/timer/slavio_timer: Emit warning when old code is used
+  hw/usb/hcd-musb: Emit warning when old code is used
+  hw/xtensa/xtfpga: Emit warning when old code is used
+
+ configure                    |  8 ++++++++
+ hw/lm32/lm32_hwsetup.h       |  3 +++
+ include/hw/qdev-deprecated.h | 26 ++++++++++++++++++++++++++
+ include/qom/object.h         |  6 +++---
+ hw/arm/nseries.c             |  2 ++
+ hw/arm/omap1.c               |  6 ++++++
+ hw/arm/pxa2xx.c              |  3 +++
+ hw/char/omap_uart.c          |  5 +++++
+ hw/char/parallel.c           |  3 +++
+ hw/char/sh_serial.c          |  3 +++
+ hw/core/qdev.c               |  8 ++++++++
+ hw/display/blizzard.c        |  3 +++
+ hw/display/pxa2xx_lcd.c      |  3 +++
+ hw/display/ramfb.c           |  3 +++
+ hw/display/tc6393xb.c        |  3 +++
+ hw/display/vga-isa-mm.c      |  5 +++++
+ hw/display/vga.c             |  3 +++
+ hw/dma/etraxfs_dma.c         |  4 +++-
+ hw/dma/soc_dma.c             |  3 +++
+ hw/i386/pc.c                 |  3 +++
+ hw/i386/xen/xen-hvm.c        |  4 +++-
+ hw/input/lasips2.c           |  4 +++-
+ hw/input/pckbd.c             |  4 +++-
+ hw/input/ps2.c               |  6 +++++-
+ hw/input/pxa2xx_keypad.c     |  3 +++
+ hw/input/tsc2005.c           |  3 +++
+ hw/intc/i8259.c              |  3 +++
+ hw/intc/sh_intc.c            |  3 +++
+ hw/m68k/mcf5206.c            |  5 +++++
+ hw/m68k/mcf5208.c            |  3 +++
+ hw/misc/applesmc.c           |  3 +++
+ hw/misc/cbus.c               |  3 +++
+ hw/misc/omap_gpmc.c          |  3 +++
+ hw/misc/omap_l4.c            |  3 +++
+ hw/misc/omap_sdrc.c          |  3 +++
+ hw/nvram/eeprom93xx.c        |  3 +++
+ hw/openrisc/cputimer.c       |  3 +++
+ hw/ppc/ppc.c                 |  3 +++
+ hw/ppc/ppc405_boards.c       |  5 +++++
+ hw/ppc/ppc405_uc.c           | 21 +++++++++++++++++++++
+ hw/ppc/ppc4xx_devs.c         |  7 +++++++
+ hw/ppc/ppc_booke.c           |  4 +++-
+ hw/ppc/virtex_ml507.c        |  4 +++-
+ hw/riscv/riscv_htif.c        |  4 ++++
+ hw/riscv/sifive_uart.c       |  4 ++++
+ hw/sd/omap_mmc.c             |  5 +++++
+ hw/sh4/r2d.c                 |  3 +++
+ hw/sh4/sh7750.c              |  4 ++++
+ hw/ssi/omap_spi.c            |  3 +++
+ hw/timer/arm_timer.c         |  3 +++
+ hw/timer/omap_synctimer.c    |  4 ++++
+ hw/timer/sh_timer.c          |  5 +++++
+ hw/timer/slavio_timer.c      |  3 +++
+ hw/usb/hcd-musb.c            |  3 +++
+ hw/xtensa/xtfpga.c           |  3 +++
+ 55 files changed, 240 insertions(+), 10 deletions(-)
+ create mode 100644 include/hw/qdev-deprecated.h
+
 -- 
 2.21.3
 
