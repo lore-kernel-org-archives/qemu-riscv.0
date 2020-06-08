@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jiKEi-00076U-Gc
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 12:02:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38110)
+	id 1jiKEk-000799-6v
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 12:02:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38132)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKEW-00070T-BH
- for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:02:44 -0400
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:52934
- helo=us-smtp-delivery-1.mimecast.com)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKEa-000760-Df
+ for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:02:54 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:32648
+ helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKEU-0007ty-Hk
- for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:02:43 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jiKEZ-0007ux-PM
+ for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:02:48 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591632160;
+ s=mimecast20190719; t=1591632167;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3WzkinKDRWpQmIIO97X+MugaJnDZKw0ffp1ti6/ctwc=;
- b=OrH1ySDQhciBHAMMlCFm4kH3NnMfKOW6Rrsn+MN8vBqGsSCBE9D5Rkubnl8cVNVI+pYciS
- PxSH95EG9F0aP/B8p0tSKjDwShOa6YG4edWj4FIUZmvz4E+UY6QyiCmmfgXVYaLrJT9ZLo
- h/Lf5yhDu7Lgg0/6i4onVc9OIEbQVz0=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-145-C_N2bJP_NaCPtJd68hNsjw-1; Mon, 08 Jun 2020 12:02:36 -0400
-X-MC-Unique: C_N2bJP_NaCPtJd68hNsjw-1
-Received: by mail-wm1-f70.google.com with SMTP id t145so11994wmt.2
- for <qemu-riscv@nongnu.org>; Mon, 08 Jun 2020 09:02:36 -0700 (PDT)
+ bh=7Lcxf8cj+CxLJSf8aQEjLTWyUhOWt7SwLOi9PO4gCM4=;
+ b=bTuRUsghHF8edA4IKhtHO6aCcHr9aVh/FSflEbuzraXxufNAWXT2kFk0Lx0SO3fRtZejOU
+ LAh6lF3YTn4PdzKiNuSrjuQoapJ5vrapRkjWCCysEMRSRyABVRUKUFZyJwaUDtN6vjQXLn
+ fCTAEyhji/CF9DBLdszWjJtzuKcYxRw=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-136-E6v-Ix-_NDau4aZHacqUrw-1; Mon, 08 Jun 2020 12:02:45 -0400
+X-MC-Unique: E6v-Ix-_NDau4aZHacqUrw-1
+Received: by mail-wr1-f70.google.com with SMTP id t5so7327318wro.20
+ for <qemu-riscv@nongnu.org>; Mon, 08 Jun 2020 09:02:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=3WzkinKDRWpQmIIO97X+MugaJnDZKw0ffp1ti6/ctwc=;
- b=FV5WHNDPnlOWuBd07/MQMRicE9AWZFWn+E6rcBLRWMRA0kOM9r2KFnnt2Ve9mH9Y2/
- cjJKZxTBqKogR2rTOBD8kBvaYwAhhN/AfhGqe5ho5sYz+9Ww7fR2A0mwI6TXwzd8a7+K
- x+Ynhsq0+8IwlH9vaFuffK5nkttg7K989xcMPUcrr3z+IJYO6JSSc6w1Cwhan+Z/5Ro/
- 1d/J5ATfRnno75pnSBgwSG5eErNARZXH7w78aGxhPiLwX0snPqCLyL6vDxURwQj7/8RS
- lrVu6dmE0lcq/7S8dykX8M1fpNt4CBrTACH5WNpW6i4ipi27ZckyyN8aJ+geCeVHqYGc
- nRxQ==
-X-Gm-Message-State: AOAM533vqrJ+tnmYasafscHIsJxztLhtXzQLm3Mj5K4W4Nm70cwe5O7T
- aKGhzmX0c+1D8US7YjMYP1fXeva5DpglvVt940K8xsGYJ8wXCLa9kGmPMHOcUDfcjqf2QEB0Mto
- ENXx7JIxLegmDgWc=
-X-Received: by 2002:a5d:6391:: with SMTP id p17mr25853395wru.118.1591632155834; 
- Mon, 08 Jun 2020 09:02:35 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzDmwNfyaecxfbcj81e+/jUBcU6vumJ01a4QLGsVfaCgs3E8cqqhTSmTr88Achkag+c/jFzSw==
-X-Received: by 2002:a5d:6391:: with SMTP id p17mr25853379wru.118.1591632155624; 
- Mon, 08 Jun 2020 09:02:35 -0700 (PDT)
+ bh=7Lcxf8cj+CxLJSf8aQEjLTWyUhOWt7SwLOi9PO4gCM4=;
+ b=DPKgXInzee2m80J6G0rZLAY4G0V6twHjtMpmeXfCqp2URArkowHRG0ZSzlnzFPYFga
+ pxhE1ncQO2nRwGeySS81BmGHsTtPMXMJU1ixI3TYhzVXhNJYTyNnLaETAXH35otC/Mzq
+ PXC43E/PYevp13wZjOpDYJ22KdbwsiTjwiOEZwjmZUN56hc5DZC7gDHl6cmh1mB+N5m5
+ Bd0qfYE2J1tWSI5GdGPnh1oHNT+2KqIiufOl7cQfNxFkefgDkW751XtXG+MlEoZMwIoG
+ smxaP+EJi3+Tta48fl03KL1xqN4Qc1v9A8kn1waKIsNq0ApcrX9oACHtlw8n1qVdEjw4
+ hxtA==
+X-Gm-Message-State: AOAM533bmDZIgr3HwvK6yy2nUlkhwMfbh8P/IhY/bJAV9znHrCuPt22F
+ g8R4Ocj0TdILyeScvGUPdnPioi1Dkr2pZV1EfEGQysQskYLaF1ponaA7eQvq+dCwOk2QV66+z9a
+ 7Pan0j8tGK5Bdjw8=
+X-Received: by 2002:a1c:6056:: with SMTP id u83mr60196wmb.138.1591632161717;
+ Mon, 08 Jun 2020 09:02:41 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJztIcOuKmMAnKpEQL/s7NO4XNCQYfWj4X6mQCPh85ejUPn/olQa6U5W1zctaCPlsras+JjNJA==
+X-Received: by 2002:a1c:6056:: with SMTP id u83mr60154wmb.138.1591632161497;
+ Mon, 08 Jun 2020 09:02:41 -0700 (PDT)
 Received: from localhost.localdomain
  (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
- by smtp.gmail.com with ESMTPSA id o10sm183753wrj.37.2020.06.08.09.02.33
+ by smtp.gmail.com with ESMTPSA id a81sm19165wmd.25.2020.06.08.09.02.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 09:02:34 -0700 (PDT)
+ Mon, 08 Jun 2020 09:02:40 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
@@ -76,9 +76,9 @@ Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Magnus Damm <magnus.damm@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [RFC PATCH 19/35] hw/input/tsc2005: Emit warning when old code is used
-Date: Mon,  8 Jun 2020 18:00:28 +0200
-Message-Id: <20200608160044.15531-20-philmd@redhat.com>
+Subject: [RFC PATCH 20/35] hw/intc/i8259: Emit warning when old code is used
+Date: Mon,  8 Jun 2020 18:00:29 +0200
+Message-Id: <20200608160044.15531-21-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
 References: <20200608160044.15531-1-philmd@redhat.com>
@@ -88,9 +88,9 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8;
 	text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=207.211.31.81; envelope-from=philmd@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/08 05:40:44
+Received-SPF: pass client-ip=205.139.110.120; envelope-from=philmd@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/08 01:05:50
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -111,36 +111,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2020 16:02:44 -0000
+X-List-Received-Date: Mon, 08 Jun 2020 16:02:56 -0000
 
 This code hasn't been QOM'ified yet. Warn the user.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- hw/input/tsc2005.c | 3 +++
+ hw/intc/i8259.c | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/hw/input/tsc2005.c b/hw/input/tsc2005.c
-index 55d61cc843..1f97b82379 100644
---- a/hw/input/tsc2005.c
-+++ b/hw/input/tsc2005.c
-@@ -27,6 +27,7 @@
- #include "hw/irq.h"
- #include "migration/vmstate.h"
+diff --git a/hw/intc/i8259.c b/hw/intc/i8259.c
+index 51b27f6a34..9d9609cdab 100644
+--- a/hw/intc/i8259.c
++++ b/hw/intc/i8259.c
+@@ -30,6 +30,7 @@
+ #include "qemu/log.h"
+ #include "hw/isa/i8259_internal.h"
  #include "trace.h"
 +#include "hw/qdev-deprecated.h"
  
- #define TSC_CUT_RESOLUTION(value, p)	((value) >> (16 - (p ? 12 : 10)))
- 
-@@ -489,6 +490,8 @@ void *tsc2005_init(qemu_irq pintdav)
- {
-     TSC2005State *s;
+ /* debug PIC */
+ //#define DEBUG_PIC
+@@ -414,6 +415,8 @@ qemu_irq *i8259_init(ISABus *bus, qemu_irq parent_irq)
+     ISADevice *isadev;
+     int i;
  
 +    qdev_warn_deprecated_function_used();
 +
-     s = (TSC2005State *)
-             g_malloc0(sizeof(TSC2005State));
-     s->x = 400;
+     irq_set = g_new0(qemu_irq, ISA_NUM_IRQS);
+ 
+     isadev = i8259_init_chip(TYPE_I8259, bus, true);
 -- 
 2.21.3
 
