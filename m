@@ -1,86 +1,106 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jiKdp-0003EN-U4
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 12:28:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41000)
+	id 1jiL8E-0000nb-U8
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 13:00:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45328)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jiKdo-0003A0-4d
- for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:28:52 -0400
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:40059)
+ (Exim 4.90_1) (envelope-from <xadimgnik@gmail.com>)
+ id 1jiL3G-0001Co-6O; Mon, 08 Jun 2020 12:55:10 -0400
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:35818)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jiKdn-0004Ro-2X
- for qemu-riscv@nongnu.org; Mon, 08 Jun 2020 12:28:51 -0400
-Received: by mail-pf1-x443.google.com with SMTP id s23so7443783pfh.7
- for <qemu-riscv@nongnu.org>; Mon, 08 Jun 2020 09:28:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=rYy5eOQuMS4YMmSiYyf+dGqlj27SP/QwdDa6BIyhIUE=;
- b=OUOrI6dN6zfWDjbdzWWO8ZeeT1cirjw00WhGszRqTcxyDwKk4Z4/BiWrI7njjKGn1Z
- x5Jwb6aFhBMIfqoV8P+/MoBUSFeaym7v42/Wyg6/xDO+RD5Mp3TIxQB+NsHFHYoDehh1
- q4Z6C+m6s4Bi8XKPjtiJlDj+J8QMljMN8fuE3fNypFHABXTixzKsGVdBxI+O9+V6IPwR
- tnf//2qkumB+MtZu5FjAIkWhhH+5+R6qD26Jdw52+DVyt/H3ae9yV1kxsTIpfD/U0Lma
- 6Q4yLzyhMLZSxwqC8f07JlMRMwnn5KARHEPkr2Dve/XWIOzVWnq4pa/wLkLPHl5d8u19
- qq9w==
+ (Exim 4.90_1) (envelope-from <xadimgnik@gmail.com>)
+ id 1jiL32-0000ht-ND; Mon, 08 Jun 2020 12:55:09 -0400
+Received: by mail-wm1-x343.google.com with SMTP id q25so245584wmj.0;
+ Mon, 08 Jun 2020 09:54:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=oNB6pAr4fcRFpfN0vgO3R/SPq1U20RR7okPBo0+FgUE=;
+ b=TAfmK0oQkeSGz62TuViy7NuLCNk1BF68l8xbAdU7an1ZC1hVV98IKOoRjmqyaTwVAN
+ +in5sBo54K9vZ+PoT5Dju2DDOh9ml4x74mKWFDeR19EFjNT+Klc17086J5unyRp6crm0
+ iX59NmiKjPexLajwu2LCbDjom1z4V5Ya7Tr/x9a2tD7WOo4+qq200GMJWH+At1YTWsbM
+ +wJH2TSrIVK7d5tnTy4ZVb1OjT049f7NavDysekPgvsZp+8YL5JJqDIx0twx4zpgFLUZ
+ BUPmA4rk/i0fKuA7MEpGHm8R9boPmkow/IyBFJZL0415yukucMZFCcEQRzyZerGGqu0H
+ ++ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=rYy5eOQuMS4YMmSiYyf+dGqlj27SP/QwdDa6BIyhIUE=;
- b=uepr+nrjl6vTn4ef1EExWtYHwUnVY8ZLmlgPQWQ2dtF4PMJD8QDcqsLbzbHFLp+BuT
- QS95cs0W3bO9iGoLxgMZ27fHSSWPe4qkgRTCIstnxpiYmI0pSvYmqgVGSjIm4CgMvLgG
- XABoPN21OKumQs4/cyg5m0JEUexNTHI3oyGZCX1u3XtojaKGWAObyag5GrM7EymU2Q8y
- nle8FKIZDr5seWB6uiXhHxmHi1si5t5ZmYx4UqVq/IeVDT3n0JMMSvdGRKCxdk3a6f9J
- C+WDEoCOwnCTJTbPkA0XnpFlAnY/Z9Gz04XHNHnujMz6YyIehRfCUav/NDRt0aIAM1Kb
- UXSg==
-X-Gm-Message-State: AOAM532vIVCFKOiZBxJbgcGiLk27e4RuM6t6Kv3FdqPapsOdPzd0swSf
- WCPmA64ki5R8LmOxqtdUTmW+gg==
-X-Google-Smtp-Source: ABdhPJzUf7mNux02QTHPdgNTuq4jhyENABeWpCQFcG3Ze1876F5rPZw3FRJYAsybpiv5Z+g0GhkLfA==
-X-Received: by 2002:a05:6a00:807:: with SMTP id
- m7mr22672954pfk.246.1591633729593; 
- Mon, 08 Jun 2020 09:28:49 -0700 (PDT)
-Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
- by smtp.gmail.com with ESMTPSA id r20sm2117904pfc.101.2020.06.08.09.28.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Jun 2020 09:28:48 -0700 (PDT)
-Subject: Re: [PATCH v8 30/62] target/riscv: Update fp_status when float
- rounding mode changes
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, palmer@dabbelt.com, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com
-References: <20200521094413.10425-1-zhiwei_liu@c-sky.com>
- <20200521094413.10425-31-zhiwei_liu@c-sky.com>
- <7cb2aa5d-833a-8544-dadc-5aabba06ecd2@linaro.org>
- <ca1e71cd-c290-5fb9-e9bf-026c73e06560@c-sky.com>
- <7ec3d397-bf9a-07f5-3014-4acf47a4fd6e@linaro.org>
- <ba7ef161-8bc6-516f-b5a7-8133e3a89998@c-sky.com>
- <dd721c20-fc04-49b8-0c5a-1b4761105461@linaro.org>
- <8b1d3fb0-479a-9fa9-99cd-b71e0da275cc@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <27bc5d40-e213-da95-43ad-be082e30eac3@linaro.org>
-Date: Mon, 8 Jun 2020 09:28:46 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=oNB6pAr4fcRFpfN0vgO3R/SPq1U20RR7okPBo0+FgUE=;
+ b=caPW/ILB+sQl1KTOUupbXUumWUywu9CuEMZrVwOpvGWFA5jRFMZIpznHcV/FTtC9Mq
+ 7R/Q07s1zKhlm2jbf1g+jBb/khN/+Wvh9APuJfZ11pxqZVs5VzGiAS+Ue/VeCIFvz9wR
+ GtOzketXZCmhArs6bfNxYTmVc8ThpwVJhZNHycypjY2Lue264BOWggxkKftIMpDTWA4i
+ WHbnNn/FvPHMvzFNR76DCpUnlxOW2M488hGkweAR3jlzs2gG/Aq9kRU9IVES/hXM3Nj+
+ VSP85ixUQGtFC+A4PfUnoxvZVoy1YCZb6Tc0S3RWz788GqiV5Hm4uaocdU9fU5o0y2VB
+ wiwA==
+X-Gm-Message-State: AOAM532mzw7cf7+1a06FmRFd5ArI+74YoxKxUIdg7REWGV1FPOdnhiol
+ rvDaDauNekHA3XzcOfgs3qU=
+X-Google-Smtp-Source: ABdhPJxYf2eoroXcg65HH/FtSRR8gJU7TD34bYCLjdlEtahbcmy4LN05uTpS+ECevCEPvzvZc0skGg==
+X-Received: by 2002:a1c:4e17:: with SMTP id g23mr274089wmh.38.1591635293576;
+ Mon, 08 Jun 2020 09:54:53 -0700 (PDT)
+Received: from CBGR90WXYV0 ([54.239.6.185])
+ by smtp.gmail.com with ESMTPSA id s72sm120153wme.35.2020.06.08.09.54.50
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 08 Jun 2020 09:54:52 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+Reply-To: <paul@xen.org>
+To: =?utf-8?Q?'Philippe_Mathieu-Daud=C3=A9'?= <philmd@redhat.com>,
+ <qemu-devel@nongnu.org>
+Cc: <qemu-arm@nongnu.org>, "'Markus Armbruster'" <armbru@redhat.com>,
+ "'Max Filippov'" <jcmvbkbc@gmail.com>,
+ "'Marcel Apfelbaum'" <marcel.apfelbaum@gmail.com>,
+ "'Peter Maydell'" <peter.maydell@linaro.org>,
+ "'Michael Walle'" <michael@walle.cc>,
+ "'Edgar E. Iglesias'" <edgar.iglesias@gmail.com>,
+ "'Aurelien Jarno'" <aurelien@aurel32.net>,
+ "'Gerd Hoffmann'" <kraxel@redhat.com>,
+ "'Stafford Horne'" <shorne@gmail.com>,
+ "'Andrzej Zaborowski'" <balrogg@gmail.com>, <qemu-ppc@nongnu.org>,
+ "'Alistair Francis'" <alistair@alistair23.me>,
+ "'Richard Henderson'" <rth@twiddle.net>,
+ "'Mark Cave-Ayland'" <mark.cave-ayland@ilande.co.uk>,
+ =?utf-8?Q?'Marc-Andr=C3=A9_Lureau'?= <marcandre.lureau@redhat.com>,
+ "'Daniel P . Berrange'" <berrange@redhat.com>, <qemu-riscv@nongnu.org>,
+ "'Michael S. Tsirkin'" <mst@redhat.com>, <xen-devel@lists.xenproject.org>,
+ "'Sagar Karandikar'" <sagark@eecs.berkeley.edu>,
+ "'Anthony Perard'" <anthony.perard@citrix.com>,
+ "'Palmer Dabbelt'" <palmer@dabbelt.com>,
+ "'Stefano Stabellini'" <sstabellini@kernel.org>,
+ "'Paolo Bonzini'" <pbonzini@redhat.com>,
+ "'Alistair Francis'" <Alistair.Francis@wdc.com>,
+ "'Eduardo Habkost'" <ehabkost@redhat.com>,
+ "'Thomas Huth'" <huth@tuxfamily.org>,
+ "'Bastian Koppelmann'" <kbastian@mail.uni-paderborn.de>,
+ "'David Gibson'" <david@gibson.dropbear.id.au>,
+ "'Magnus Damm'" <magnus.damm@gmail.com>
+References: <20200608160044.15531-1-philmd@redhat.com>
+ <20200608160044.15531-16-philmd@redhat.com>
+In-Reply-To: <20200608160044.15531-16-philmd@redhat.com>
+Subject: RE: [RFC PATCH 15/35] hw/i386/xen/xen-hvm: Emit warning when old code
+ is used
+Date: Mon, 8 Jun 2020 17:54:49 +0100
+Message-ID: <004b01d63db5$87a83110$96f89330$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <8b1d3fb0-479a-9fa9-99cd-b71e0da275cc@c-sky.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::443;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x443.google.com
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQFYw0U0oKWIX6kmOq5Lq1JhZGgcHAJ29BtBqbYsFpA=
+Received-SPF: pass client-ip=2a00:1450:4864:20::343;
+ envelope-from=xadimgnik@gmail.com; helo=mail-wm1-x343.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
+X-Mailman-Approved-At: Mon, 08 Jun 2020 13:00:18 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -92,17 +112,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2020 16:28:52 -0000
+X-List-Received-Date: Mon, 08 Jun 2020 16:55:11 -0000
 
-On 6/7/20 7:39 PM, LIU Zhiwei wrote:
-> Maybe I should only gen_set_rm(ctx, 7) for each vector float insn.
-> And the csr write method for frm or fcsr will not change.
-> 
-> So I will remove this patch in the next patch set.
+> -----Original Message-----
+> From: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> Sent: 08 June 2020 17:00
+> To: qemu-devel@nongnu.org
+> Cc: qemu-arm@nongnu.org; Markus Armbruster <armbru@redhat.com>; Max =
+Filippov <jcmvbkbc@gmail.com>;
+> Marcel Apfelbaum <marcel.apfelbaum@gmail.com>; Peter Maydell =
+<peter.maydell@linaro.org>; Michael Walle
+> <michael@walle.cc>; Edgar E. Iglesias <edgar.iglesias@gmail.com>; =
+Aurelien Jarno
+> <aurelien@aurel32.net>; Gerd Hoffmann <kraxel@redhat.com>; Stafford =
+Horne <shorne@gmail.com>; Andrzej
+> Zaborowski <balrogg@gmail.com>; qemu-ppc@nongnu.org; Alistair Francis =
+<alistair@alistair23.me>;
+> Richard Henderson <rth@twiddle.net>; Mark Cave-Ayland =
+<mark.cave-ayland@ilande.co.uk>; Marc-Andr=C3=A9
+> Lureau <marcandre.lureau@redhat.com>; Daniel P . Berrange =
+<berrange@redhat.com>; qemu-
+> riscv@nongnu.org; Michael S. Tsirkin <mst@redhat.com>; =
+xen-devel@lists.xenproject.org; Sagar
+> Karandikar <sagark@eecs.berkeley.edu>; Anthony Perard =
+<anthony.perard@citrix.com>; Palmer Dabbelt
+> <palmer@dabbelt.com>; Stefano Stabellini <sstabellini@kernel.org>; =
+Paul Durrant <paul@xen.org>; Paolo
+> Bonzini <pbonzini@redhat.com>; Alistair Francis =
+<Alistair.Francis@wdc.com>; Eduardo Habkost
+> <ehabkost@redhat.com>; Thomas Huth <huth@tuxfamily.org>; Bastian =
+Koppelmann <kbastian@mail.uni-
+> paderborn.de>; David Gibson <david@gibson.dropbear.id.au>; Magnus Damm =
+<magnus.damm@gmail.com>;
+> Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> Subject: [RFC PATCH 15/35] hw/i386/xen/xen-hvm: Emit warning when old =
+code is used
+>=20
+> This code hasn't been QOM'ified yet. Warn the user.
 
-Sounds perfect, thanks.
+"Based on today's IRC chat, this is a trivial RFC series
+to anotate pre-qdev/QOM devices so developers using them
+without knowing they are not QOM'ified yet can realize
+it and convert them if they have time."
 
+So, how should this be coded then? The XenIOState doesn't really qualify =
+as a 'device', does it?
 
-r~
+  Paul
+
+>=20
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> ---
+>  hw/i386/xen/xen-hvm.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
+> index 82ece6b9e7..a1163b1529 100644
+> --- a/hw/i386/xen/xen-hvm.c
+> +++ b/hw/i386/xen/xen-hvm.c
+> @@ -31,7 +31,7 @@
+>  #include "sysemu/xen-mapcache.h"
+>  #include "trace.h"
+>  #include "exec/address-spaces.h"
+> -
+> +#include "hw/qdev-deprecated.h"
+>  #include <xen/hvm/ioreq.h>
+>  #include <xen/hvm/e820.h>
+>=20
+> @@ -1401,6 +1401,8 @@ void xen_hvm_init(PCMachineState *pcms, =
+MemoryRegion **ram_memory)
+>      xen_pfn_t ioreq_pfn;
+>      XenIOState *state;
+>=20
+> +    qdev_warn_deprecated_function_used();
+> +
+>      state =3D g_malloc0(sizeof (XenIOState));
+>=20
+>      state->xce_handle =3D xenevtchn_open(NULL, 0);
+> --
+> 2.21.3
+
 
 
