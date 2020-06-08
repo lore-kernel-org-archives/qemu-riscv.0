@@ -1,46 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jiIbd-0001Gw-AF
+	id 1jiIbd-0001HF-KG
 	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 10:18:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53484)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53470)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jiIbb-0001Dl-Ff; Mon, 08 Jun 2020 10:18:27 -0400
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:45233)
+ id 1jiIbY-00018k-VG; Mon, 08 Jun 2020 10:18:25 -0400
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:45231)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jiIba-0004V9-KJ; Mon, 08 Jun 2020 10:18:27 -0400
-Received: by mail-pf1-x442.google.com with SMTP id a127so8588024pfa.12;
- Mon, 08 Jun 2020 07:18:25 -0700 (PDT)
+ id 1jiIbX-0004Ua-T8; Mon, 08 Jun 2020 10:18:24 -0400
+Received: by mail-pf1-x441.google.com with SMTP id a127so8587953pfa.12;
+ Mon, 08 Jun 2020 07:18:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=b35v0KP1s9AjIF9HvJezGHZtrCpDZpVSHPfkMiThnkk=;
- b=pvZ07wCunCmhMVtDdajtNK7blyXfjEaZS+HgsQZ78xQVQhY1Z5qPUC2FtaqmOixWEx
- 1+nhqJOgOJz/3OLC9vgJChcSVV9VjmHWY5AxKqe6+wtz8GfphlCr7cQScdgYElDlDHOy
- Q/Oa8kSYtoTovHzOiMgflm9+RO32tv3PHWGWKWjWsuMrnKp2ohcRjzqFTvnYl3qV66As
- 6E3agBjMKSuZNyjM0c4zIucI+XvNyMiil97TSwOjp14DqA4nZWZEC/Dco5YU+9v8KNXb
- BLlc/Q+vvpWNNWF52JPYGkN1LjtI0ZSEzU+q6hWmaFTZD8rgUQGgCyDUxNGybudNc3BF
- UMbg==
+ bh=/vk8h8B6uTwCemZZoAx6aAehDYIy0T5OpDNP5dyOEg8=;
+ b=PWMnxlz+hgZhCH6jZVuChUUCvIg3CooTpEKoGq1BRb50qbXkSutJ5PI6j1M12eni+J
+ iliMqppxU6JC/lCxACkFCsQ5BxjuMBRjyOTIlmY94EArTyLoMExjR6GDXsC3+wgxrbQG
+ HVBwb08nyhoiWIyEqBLnLwn8PJUz2lk9BnP2RLdofuPLVASOsnHy5Gyj07iFz4c2JCDy
+ TljmQpO4ri7iFV2IGAmNkOwNsbVdYzmdYobnucwN0o14/FtQPjg/vXJYZCpVOZ1pvoip
+ S0PSX+CfcuflafVLA7ASsNF2ZZSx88DFOJM2MG4zmJZtBaj2RbmDDTJ02HQmCAugfn7l
+ CilA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=b35v0KP1s9AjIF9HvJezGHZtrCpDZpVSHPfkMiThnkk=;
- b=aH5q4lnk4rQ+Ovuft2H7wa2uuVtyhaElRSHhsDsV96NjYJiTV7iJJZVLOwjD840jMX
- mT6jHkrVFbv9MZuZclWCmeB0bKro0WpwsFlmyuzVKFdp1mFqynrg5QtUUVTcqafdDS/e
- IccW8buGpRAtS3zdfYdpPCMQ3jNtSHZg9Q6Kp/9hYJmyeDGc8wKxyBfzCvdpZO1fm1qy
- /Rp6D3maKURoZv+2/LYkkTUPxXxZK9tOX/XGvzSA8FnsVsXkIWPuPblu663r25mdZEbc
- YX4gNkZQvEDg25LSqG9g6Gzs9g0OVAH8gIpOgWr8oyYw5E51Ru2s6z4uhxouPZK5qVFK
- g72A==
-X-Gm-Message-State: AOAM5306/VD+3To5x7gzWzLrKScF0VIyQHFlhl8AiEf62lX6p5nh/OQO
- xC2if4TZZ58Y5FnfAS5ryeU=
-X-Google-Smtp-Source: ABdhPJzkCf7PEciRd+bdNfHQDY7H0HGHxNCvdhaqEhGDvUwfTWGj8q++WbYHaEKbeP5PrMsmvWNh6g==
-X-Received: by 2002:aa7:972b:: with SMTP id k11mr22038690pfg.299.1591625905071; 
- Mon, 08 Jun 2020 07:18:25 -0700 (PDT)
+ bh=/vk8h8B6uTwCemZZoAx6aAehDYIy0T5OpDNP5dyOEg8=;
+ b=ad7/PJqG3udBVCYH3MHY3laMfIRkHdm2tizy+LLjk4NPm4fg2m2QX0XS4TdYsC0nQq
+ gqUZYG9Q3zTRjg8DjUIc55FfSqzhxsknKngXKXLd2NCm/vPsy7502JHGY7DLHoHkRae6
+ hyApHwI3d5+WWNareQcME5SUqn/BB8WP7dUBMqwr+4gomL81rGl3CF1lDX0cVHMWJ0Fc
+ JzBRqrjtSDiV48cRUkcNGvA3Ahu/dKl/E8axTtTfpXjLYUG53UoUkE7o+Flgf7angOeh
+ f1BsqSxYvHovqeBf6aYnjdx8Gi2+Z/X7CBYVo75SfqbeWPDc/4ghbF11jtlZtnqvKFfx
+ hZQw==
+X-Gm-Message-State: AOAM533ak7rtCBGuVhY0fji1i7vvTxSHsWSHu395tiHCW88xF1tD8DHk
+ VsoQX3p3uQxJHlvj/e9nOCw=
+X-Google-Smtp-Source: ABdhPJzK0Pwok2eWDwdSTmmbn7oPRpeQB8vXlquZ111ZbOOkcJKSpYixtEFPmMSQe0e4sD5n9YFbVw==
+X-Received: by 2002:a62:2f45:: with SMTP id v66mr22654828pfv.45.1591625902256; 
+ Mon, 08 Jun 2020 07:18:22 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id b19sm7292575pft.74.2020.06.08.07.18.24
+ by smtp.gmail.com with ESMTPSA id b19sm7292575pft.74.2020.06.08.07.18.21
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Mon, 08 Jun 2020 07:18:24 -0700 (PDT)
+ Mon, 08 Jun 2020 07:18:21 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -48,15 +48,14 @@ To: Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 08/15] hw/riscv: sifive_gpio: Do not blindly trigger output
- IRQs
-Date: Mon,  8 Jun 2020 07:17:37 -0700
-Message-Id: <1591625864-31494-9-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH 05/15] hw/riscv: sifive_gpio: Clean up the codes
+Date: Mon,  8 Jun 2020 07:17:34 -0700
+Message-Id: <1591625864-31494-6-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
 References: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::442;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x442.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x441.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -78,35 +77,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2020 14:18:28 -0000
+X-List-Received-Date: Mon, 08 Jun 2020 14:18:25 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-At present the GPIO output IRQs are triggered each time any GPIO
-register is written. However this is not correct. We should only
-trigger the output IRQ when the pin is configured as output enable.
+Do various minor clean-ups to the exisiting codes for:
+
+- coding convention conformance
+- remove unnecessary blank lines
+- spell SiFive correctly
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- hw/riscv/sifive_gpio.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ hw/riscv/sifive_gpio.c         | 13 +++++--------
+ include/hw/riscv/sifive_gpio.h |  7 ++++---
+ 2 files changed, 9 insertions(+), 11 deletions(-)
 
 diff --git a/hw/riscv/sifive_gpio.c b/hw/riscv/sifive_gpio.c
-index 0d0fd2b..aac6b44 100644
+index 5c7c596..c9cffa2 100644
 --- a/hw/riscv/sifive_gpio.c
 +++ b/hw/riscv/sifive_gpio.c
-@@ -76,7 +76,9 @@ static void update_state(SIFIVEGPIOState *s)
-             actual_value = pull;
-         }
+@@ -1,5 +1,5 @@
+ /*
+- * sifive System-on-Chip general purpose input/output register definition
++ * SiFive System-on-Chip general purpose input/output register definition
+  *
+  * Copyright 2019 AdaCore
+  *
+@@ -20,7 +20,6 @@
  
--        qemu_set_irq(s->output[i], actual_value);
-+        if (output_en) {
-+            qemu_set_irq(s->output[i], actual_value);
-+        }
+ static void update_output_irq(SIFIVEGPIOState *s)
+ {
+-
+     uint32_t pending;
+     uint32_t pin;
  
-         /* Input value */
-         ival = input_en && actual_value;
+@@ -186,7 +185,7 @@ static uint64_t sifive_gpio_read(void *opaque, hwaddr offset, unsigned int size)
+ }
+ 
+ static void sifive_gpio_write(void *opaque, hwaddr offset,
+-                       uint64_t value, unsigned int size)
++                              uint64_t value, unsigned int size)
+ {
+     SIFIVEGPIOState *s = SIFIVE_GPIO(opaque);
+ 
+@@ -318,7 +317,6 @@ static void sifive_gpio_reset(DeviceState *dev)
+     s->out_xor = 0;
+     s->in = 0;
+     s->in_mask = 0;
+-
+ }
+ 
+ static const VMStateDescription vmstate_sifive_gpio = {
+@@ -342,8 +340,8 @@ static const VMStateDescription vmstate_sifive_gpio = {
+         VMSTATE_UINT32(iof_en,    SIFIVEGPIOState),
+         VMSTATE_UINT32(iof_sel,   SIFIVEGPIOState),
+         VMSTATE_UINT32(out_xor,   SIFIVEGPIOState),
+-        VMSTATE_UINT32(in, SIFIVEGPIOState),
+-        VMSTATE_UINT32(in_mask, SIFIVEGPIOState),
++        VMSTATE_UINT32(in,        SIFIVEGPIOState),
++        VMSTATE_UINT32(in_mask,   SIFIVEGPIOState),
+         VMSTATE_END_OF_LIST()
+     }
+ };
+@@ -356,7 +354,6 @@ static void sifive_gpio_init(Object *obj)
+             TYPE_SIFIVE_GPIO, SIFIVE_GPIO_SIZE);
+     sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
+ 
+-
+     for (int i = 0; i < SIFIVE_GPIO_PINS; i++) {
+         sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->irq[i]);
+     }
+@@ -371,7 +368,7 @@ static void sifive_gpio_class_init(ObjectClass *klass, void *data)
+ 
+     dc->vmsd = &vmstate_sifive_gpio;
+     dc->reset = sifive_gpio_reset;
+-    dc->desc = "sifive GPIO";
++    dc->desc = "SiFive GPIO";
+ }
+ 
+ static const TypeInfo sifive_gpio_info = {
+diff --git a/include/hw/riscv/sifive_gpio.h b/include/hw/riscv/sifive_gpio.h
+index fce03d6..ad915b2 100644
+--- a/include/hw/riscv/sifive_gpio.h
++++ b/include/hw/riscv/sifive_gpio.h
+@@ -1,5 +1,5 @@
+ /*
+- * sifive System-on-Chip general purpose input/output register definition
++ * SiFive System-on-Chip general purpose input/output register definition
+  *
+  * Copyright 2019 AdaCore
+  *
+@@ -10,10 +10,12 @@
+  * This code is licensed under the GPL version 2 or later.  See
+  * the COPYING file in the top-level directory.
+  */
++
+ #ifndef SIFIVE_GPIO_H
+ #define SIFIVE_GPIO_H
+ 
+ #include "hw/sysbus.h"
++
+ #define TYPE_SIFIVE_GPIO "sifive_soc.gpio"
+ #define SIFIVE_GPIO(obj) OBJECT_CHECK(SIFIVEGPIOState, (obj), TYPE_SIFIVE_GPIO)
+ 
+@@ -66,7 +68,6 @@ typedef struct SIFIVEGPIOState {
+     uint32_t out_xor;
+     uint32_t in;
+     uint32_t in_mask;
+-
+ } SIFIVEGPIOState;
+ 
+-#endif
++#endif /* SIFIVE_GPIO_H */
 -- 
 2.7.4
 
