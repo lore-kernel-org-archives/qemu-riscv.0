@@ -1,84 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jiOm2-0006xa-0w
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Jun 2020 16:53:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37660)
+	id 1jibAX-00078j-ND
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 06:07:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56334)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <th.huth@gmail.com>)
- id 1jiNqs-0004rf-Bf; Mon, 08 Jun 2020 15:54:34 -0400
-Received: from mail-ej1-f68.google.com ([209.85.218.68]:41694)
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1jibAW-00077v-48
+ for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 06:07:44 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:45842)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <th.huth@gmail.com>)
- id 1jiNqp-0005i0-N2; Mon, 08 Jun 2020 15:54:33 -0400
-Received: by mail-ej1-f68.google.com with SMTP id x1so19694674ejd.8;
- Mon, 08 Jun 2020 12:54:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1jibAU-0007ov-SV
+ for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 06:07:43 -0400
+Received: by mail-il1-x142.google.com with SMTP id 9so19688395ilg.12
+ for <qemu-riscv@nongnu.org>; Tue, 09 Jun 2020 03:07:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=F2aG56k+a2G508zcUJ3HboIMxYkZy/lIq/5XCAOIFgw=;
+ b=I29SJAF+OrTb5PYA5mKDYuynlVj2Ze19CQOMO0QXcgzQY6fKTbrF9tpT/cxxdcSaJA
+ Im55D+ZDsBMX0u0+kS4dvG6OY9pplfw13Hmi/BIcChyI4iYB9A25SIyY8mBVznXYHLm0
+ S6+CzYbtJlTYxP6DjYsj2aeNfWlOnqp8NhM8SR+5T1YQwDvYMCeroytSLvCMrSZGySQl
+ EUIvAT9pOQyJVx8qJjk+Ut1H+TFFOOzOkB/VgzNJ3oOS6HM5ywg8s8YCfN3kpPAfmIh5
+ mCMk/IcZbLIxgO/0lqEtwncg0fYcKZXqtIj6Ka8UZuZKYHs9NS62D8R0U/tCuNQDeZwm
+ EE9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=+sqv/n+dHdqVQBBv8HoeSPhIX6ntoKrWvEWJ5bo+JBY=;
- b=tz8z038QlT7UJZiRlc0I9j8QE6jwUc//9JdqZSsbdjqWUmz6DprZfOazcwBJp7Ftmc
- ATJ0G+AlBY7KHHoofkcrMYSFMhtHDrYG7xhC/0M7uEzmG6O6oBvThkZ5E1VuDl5mN51V
- 7BShXXr1bjoy/Jg/qI+DKBgmeeGDqSp/spQ87Tgq68EyHwDAbalyuJDhWCE/hevXIbW8
- Iic49q6NdF6ZgoSFxb/lM6HBels41Pmq21WTbHHN0iFFD03DJ/6YsaRDZSY9WHZl4uZB
- 70cl/7/mWjaWK3XxrshDgItb+uZBPP0qxL5ITJnMKBS4UNeOyOyG6jIvAStx8/044xZ5
- +vxA==
-X-Gm-Message-State: AOAM532zvVCYP5HyLYboJGmNu+4TC4zWHPJpKe8LYqIQPUy709Ij6Mxq
- 3Dcj908ZC0UlXLdhc4WAg9o=
-X-Google-Smtp-Source: ABdhPJyCrlier8KckyArgpVfsoeX+3W0TZBdF5noENbZMiCB7EHb731EzfTxbYKJrA1Y2+nQa+g7kQ==
-X-Received: by 2002:a17:906:d9dc:: with SMTP id
- qk28mr14717135ejb.6.1591646068901; 
- Mon, 08 Jun 2020 12:54:28 -0700 (PDT)
-Received: from thl530.multi.box (p5791d09b.dip0.t-ipconnect.de.
- [87.145.208.155])
- by smtp.gmail.com with ESMTPSA id bg21sm11672524ejb.90.2020.06.08.12.54.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 12:54:28 -0700 (PDT)
-Date: Mon, 8 Jun 2020 21:54:21 +0200
-From: Thomas Huth <huth@tuxfamily.org>
-To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@redhat.com>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, Markus Armbruster
- <armbru@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>, Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>, Peter Maydell <peter.maydell@linaro.org>,
- Michael Walle <michael@walle.cc>, "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>, Aurelien Jarno <aurelien@aurel32.net>, Gerd
- Hoffmann <kraxel@redhat.com>, Stafford Horne <shorne@gmail.com>, Andrzej
- Zaborowski <balrogg@gmail.com>, qemu-ppc@nongnu.org, Alistair Francis
- <alistair@alistair23.me>, Richard Henderson <rth@twiddle.net>, Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>, =?UTF-8?B?TWFyYy1BbmRyw6k=?=
- Lureau <marcandre.lureau@redhat.com>, "Daniel P . Berrange"
- <berrange@redhat.com>, qemu-riscv@nongnu.org, "Michael S. Tsirkin"
- <mst@redhat.com>, xen-devel@lists.xenproject.org, Sagar Karandikar
- <sagark@eecs.berkeley.edu>, Anthony Perard <anthony.perard@citrix.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Paul Durrant <paul@xen.org>, Paolo Bonzini
- <pbonzini@redhat.com>, Alistair Francis <Alistair.Francis@wdc.com>, Eduardo
- Habkost <ehabkost@redhat.com>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>, David Gibson
- <david@gibson.dropbear.id.au>, Magnus Damm <magnus.damm@gmail.com>
-Subject: Re: [RFC PATCH 22/35] hw/m68k/mcf520x: Emit warning when old code
- is used
-Message-ID: <20200608215421.6322016c@thl530.multi.box>
-In-Reply-To: <20200608160044.15531-23-philmd@redhat.com>
-References: <20200608160044.15531-1-philmd@redhat.com>
- <20200608160044.15531-23-philmd@redhat.com>
-X-Mailer: Claws Mail 3.17.5 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=F2aG56k+a2G508zcUJ3HboIMxYkZy/lIq/5XCAOIFgw=;
+ b=eszaQMBS4KTEvrjjFjBhRWltCPH6H8JaSGA0m+VftOiqC+dR3o/8wTuMvOBshVdHG0
+ yh6mjbCy4r6D+sPxDER+2OOol3Bhra0fSQNoj/N5zl2rpdpLH72bSqaplDNz/ayVX43M
+ URx6RH5H2zEaJsyVGrB9EiOei+zMeYF+zefHF2Zm4IdFFzJcPwtodNSclKZXpvJxzppQ
+ UzjuHs678700Evg9PNhQej/fA4VA8YTWuxSsKNAWKQ0C/QZPq+GOZ2rKGxm/A+5XYC0/
+ Wbo6VMqWGtXFTs6MaBgGqqgyhxnos7J9NrHmqEeq6AGTku3TgvlRPcdCN5QL+kMcRz/b
+ MuWg==
+X-Gm-Message-State: AOAM5324YF8i/+Covopt6xFUcD9Sc6s7As9ajLyJt6p09rxNWrgCayFO
+ 3Y1P/tKYg7dJGobG81ZytS44bZ6y1ncaOMSUT++VUw==
+X-Google-Smtp-Source: ABdhPJy9r6yPAS7hDo6N86BPIv51i0vM5vQbTFYwX7yguNC0ZOArA+MGg7ibTOpHZCldlpA8nf88bTcdI0LjYQyoZw0=
+X-Received: by 2002:a92:c812:: with SMTP id v18mr26606776iln.178.1591697260799; 
+ Tue, 09 Jun 2020 03:07:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=209.85.218.68; envelope-from=th.huth@gmail.com;
- helo=mail-ej1-f68.google.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/08 15:54:29
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -15
-X-Spam_score: -1.6
-X-Spam_bar: -
-X-Spam_report: (-1.6 / 5.0 requ) BAYES_00=-1.9,
- FREEMAIL_FORGED_FROMDOMAIN=0.001, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_PASS=-0.001 autolearn=_AUTOLEARN
+References: <20200128003707.17028-1-ianjiang.ict@gmail.com>
+ <b14a65dd-b565-77ca-d479-f88e53ca0721@linaro.org>
+In-Reply-To: <b14a65dd-b565-77ca-d479-f88e53ca0721@linaro.org>
+From: Chih-Min Chao <chihmin.chao@sifive.com>
+Date: Tue, 9 Jun 2020 18:07:30 +0800
+Message-ID: <CAEiOBXXOA40F5kdttMby6eAfMGYVT0twZOhkojFK9qRDX1Xchw@mail.gmail.com>
+Subject: Re: [PATCH v2] riscv: Add helper to make NaN-boxing for FP register
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Ian Jiang <ianjiang.ict@gmail.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, palmer@dabbelt.com,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000d2089a05a7a3e549"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=chihmin.chao@sifive.com; helo=mail-il1-x142.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 08 Jun 2020 16:53:36 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -90,78 +77,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2020 19:54:34 -0000
+X-List-Received-Date: Tue, 09 Jun 2020 10:07:44 -0000
 
-Am Mon,  8 Jun 2020 18:00:31 +0200
-schrieb Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>:
+--000000000000d2089a05a7a3e549
+Content-Type: text/plain; charset="UTF-8"
 
-> This code hasn't been QOM'ified yet. Warn the user.
->=20
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> ---
->  hw/m68k/mcf5206.c | 5 +++++
->  hw/m68k/mcf5208.c | 3 +++
->  2 files changed, 8 insertions(+)
->=20
-> diff --git a/hw/m68k/mcf5206.c b/hw/m68k/mcf5206.c
-> index a2fef04f8e..ec0d176674 100644
-> --- a/hw/m68k/mcf5206.c
-> +++ b/hw/m68k/mcf5206.c
-> @@ -16,6 +16,7 @@
->  #include "qemu/timer.h"
->  #include "hw/ptimer.h"
->  #include "sysemu/sysemu.h"
-> +#include "hw/qdev-deprecated.h"
-> =20
->  /* General purpose timer module.  */
->  typedef struct {
-> @@ -144,6 +145,8 @@ static m5206_timer_state
-> *m5206_timer_init(qemu_irq irq) {
->      m5206_timer_state *s;
-> =20
-> +    qdev_warn_deprecated_function_used();
-> +
->      s =3D g_new0(m5206_timer_state, 1);
->      s->timer =3D ptimer_init(m5206_timer_trigger, s,
-> PTIMER_POLICY_DEFAULT); s->irq =3D irq;
-> @@ -566,6 +569,8 @@ qemu_irq *mcf5206_init(MemoryRegion *sysmem,
-> uint32_t base, M68kCPU *cpu) m5206_mbar_state *s;
->      qemu_irq *pic;
-> =20
-> +    qdev_warn_deprecated_function_used();
-> +
->      s =3D g_new0(m5206_mbar_state, 1);
+ping ?  Could this be merged ?
 
-Ok, it's quite obvious what you refer to here...
 
->      memory_region_init_io(&s->iomem, NULL, &m5206_mbar_ops, s,
-> diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
-> index 2ab9701ad6..72627f6833 100644
-> --- a/hw/m68k/mcf5208.c
-> +++ b/hw/m68k/mcf5208.c
-> @@ -26,6 +26,7 @@
->  #include "hw/sysbus.h"
->  #include "elf.h"
->  #include "exec/address-spaces.h"
-> +#include "hw/qdev-deprecated.h"
-> =20
->  #define SYS_FREQ 166666666
-> =20
-> @@ -191,6 +192,8 @@ static void mcf5208_sys_init(MemoryRegion
-> *address_space, qemu_irq *pic) m5208_timer_state *s;
->      int i;
-> =20
-> +    qdev_warn_deprecated_function_used();
-> +
->      /* SDRAMC.  */
->      memory_region_init_io(iomem, NULL, &m5208_sys_ops, NULL,
-> "m5208-sys", 0x00004000); memory_region_add_subregion(address_space,
-> 0xfc0a8000, iomem);
+Chih-Min Chao
 
-... but it is not so obvious what you refer to here. I think that new
-function should maybe have a "char *what" parameter that contains the
-name of the struct you refer to. Or at least add a comment in front of
-the function with a short description?
 
- Thomas
+
+On Wed, Jan 29, 2020 at 3:43 AM Richard Henderson <
+richard.henderson@linaro.org> wrote:
+
+> On 1/27/20 4:37 PM, Ian Jiang wrote:
+> > The function that makes NaN-boxing when a 32-bit value is assigned
+> > to a 64-bit FP register is split out to a helper gen_nanbox_fpr().
+> > Then it is applied in translating of the FLW instruction.
+> >
+> > Signed-off-by: Ian Jiang <ianjiang.ict@gmail.com>
+> > ---
+> >  target/riscv/insn_trans/trans_rvf.inc.c | 17 +++++++++++++++--
+> >  1 file changed, 15 insertions(+), 2 deletions(-)
+>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>
+>
+> r~
+>
+>
+
+--000000000000d2089a05a7a3e549
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">ping ?=C2=A0 Could this be merged ?<div><br></div><div><br=
+ clear=3D"all"><div><div dir=3D"ltr" class=3D"gmail_signature" data-smartma=
+il=3D"gmail_signature"><div dir=3D"ltr"><span style=3D"color:rgb(136,136,13=
+6)">Chih-Min Chao</span><div style=3D"color:rgb(136,136,136)"><br></div></d=
+iv></div></div><br></div></div><br><div class=3D"gmail_quote"><div dir=3D"l=
+tr" class=3D"gmail_attr">On Wed, Jan 29, 2020 at 3:43 AM Richard Henderson =
+&lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.henderson@linar=
+o.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
+1ex">On 1/27/20 4:37 PM, Ian Jiang wrote:<br>
+&gt; The function that makes NaN-boxing when a 32-bit value is assigned<br>
+&gt; to a 64-bit FP register is split out to a helper gen_nanbox_fpr().<br>
+&gt; Then it is applied in translating of the FLW instruction.<br>
+&gt; <br>
+&gt; Signed-off-by: Ian Jiang &lt;<a href=3D"mailto:ianjiang.ict@gmail.com"=
+ target=3D"_blank">ianjiang.ict@gmail.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 target/riscv/insn_trans/trans_rvf.inc.c | 17 +++++++++++++++--<b=
+r>
+&gt;=C2=A0 1 file changed, 15 insertions(+), 2 deletions(-)<br>
+<br>
+Reviewed-by: Richard Henderson &lt;<a href=3D"mailto:richard.henderson@lina=
+ro.org" target=3D"_blank">richard.henderson@linaro.org</a>&gt;<br>
+<br>
+<br>
+r~<br>
+<br>
+</blockquote></div>
+
+--000000000000d2089a05a7a3e549--
 
