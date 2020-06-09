@@ -1,58 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jic3t-0006Kt-9a
-	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 07:04:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33584)
+	id 1jic4I-0006mm-4l
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 07:05:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33638)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1jic3r-0006K8-S6
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:04:55 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:42170
- helo=us-smtp-1.mimecast.com)
+ id 1jic4E-0006hA-OZ
+ for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:05:18 -0400
+Received: from us-smtp-1.mimecast.com ([205.139.110.61]:55467
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1jic3r-0000c1-4g
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:04:55 -0400
+ id 1jic4D-0000he-NC
+ for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:05:18 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591700694;
+ s=mimecast20190719; t=1591700716;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ki/NH7KwE2iZfzrfj27y3fd4qwWI07EUloemfjIHR0Y=;
- b=hEjwbb2YOQOWaMHpJZgCRA1Zh1bkdkTpVgMFBS/q95ym48i0G2lOrt1emqouh4up3714dx
- F/lqTks4o3NgeUfxDEpsQdLrAYZPQADal7Z4su5lYWWnakdpriZ1jM5vkk4wfJ/fWk+EL9
- NctG00EqnsOMyuEFKbkZVMt4weuXiwU=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-5-N3yWcvzyPWWnL7I-tDdiHg-1; Tue, 09 Jun 2020 07:04:52 -0400
-X-MC-Unique: N3yWcvzyPWWnL7I-tDdiHg-1
-Received: by mail-wm1-f72.google.com with SMTP id x6so595642wmj.9
- for <qemu-riscv@nongnu.org>; Tue, 09 Jun 2020 04:04:52 -0700 (PDT)
+ bh=S4OQhSEiQViO6+Bf5ntoxU/3fnBLGSIOBfTZnNbLbrw=;
+ b=Uij1c86O2ixWxUVUr1uXRE8jDdgna621SI02X5kCtFw/0gM61mFNm3Wq+iJH+eWVy7SlFu
+ 7xJtOICbDljCGkodyfgD4vAduqPE+gjdbdfwhdYt7sczKmYTRPjpCs4vNPSI+U9AFp96gT
+ rHZMMBE1Spvf0iKGiCTPgf9xANqxswQ=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-192-4S4aukoSO4mXCMjGlRj6mw-1; Tue, 09 Jun 2020 07:05:15 -0400
+X-MC-Unique: 4S4aukoSO4mXCMjGlRj6mw-1
+Received: by mail-wm1-f70.google.com with SMTP id a7so525928wmf.1
+ for <qemu-riscv@nongnu.org>; Tue, 09 Jun 2020 04:05:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=ki/NH7KwE2iZfzrfj27y3fd4qwWI07EUloemfjIHR0Y=;
- b=S5pxSwRQjPEqyReoVoAiJ1sN+UH102gHbZyiBZ5BCR+X33JxVBNVhGbp5K2mqNDU5P
- tIL5FlKO6QiQau9GtOmiq3zO1fRENWfaja2hgWf1zGFRWgQ4kinc1FdLCQPz9bvCc6nD
- RroPt8hfL2xpsjIloWq18gg6U591exF5AqeuvtaAYAdVlwRK4lV3EQZ/KSusKpSqaVt2
- i7VI7TCYWUc9rzn/m3tnJ4F28fccaoCzV2um2HDAlJEJsfgq+jg8CpmfKHaGSfchHLuO
- 6vki70+DnimYAXO4TqMIBZf9jWjpfuSuroNT6/meaVuQWkgNk3U7cv4aD2HiBVvxgMCM
- MGxA==
-X-Gm-Message-State: AOAM530hJt4pQ9kMWbdcElcYavVe1TvQRhprniRk0ZvfK0x6xQrmTqjX
- AwYww1G+vNBPHZ0vZQiCRFbbiXr+E1oQllUtR3FpFXwnX8xrnOGYLFBlHv4lIKCMXGOcfMZgCSb
- Mkc5YPMrvgZr/g6k=
-X-Received: by 2002:a5d:4e87:: with SMTP id e7mr3608977wru.427.1591700691533; 
- Tue, 09 Jun 2020 04:04:51 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw61DF3zQg2Ykdl+eVskia6XAOI0NHB76zgWVAci3VuUK5xBuVU12NxurjEhvkEdodKHniwzg==
-X-Received: by 2002:a5d:4e87:: with SMTP id e7mr3608951wru.427.1591700691283; 
- Tue, 09 Jun 2020 04:04:51 -0700 (PDT)
+ bh=S4OQhSEiQViO6+Bf5ntoxU/3fnBLGSIOBfTZnNbLbrw=;
+ b=sn2JFWACvb1x125vm5awajX9K3tdOJ+tazTxuQvddOIU+zmwfMI7QZExuTE8Ce8aLF
+ rJW3fq+EuPCmYkgQVyFoO3ECgyyENQEvAnAlVXzA1PqtnPEz67dFDf4I2XQsOkU1CLUe
+ cmukN91szqIEduYL/Ha1aJoXtnKkQ1OZKEXghz+clFh/EcrUOEtgqzdLFppb83Qrze9t
+ RiUI67EUFgMJACYVoRvC/xJ2ZE0L7E/VnFciI1HAyODdqwMu/HtOZ0VNxvNo/l3H6owr
+ Hl3vy4W8XifbTym2Q9hfyPGquP73pK4b8mEt7oklIQIZixHWSiJ/Ze3ssfQmj2LrE838
+ wVhw==
+X-Gm-Message-State: AOAM533/sjfnyyANb8PRCmxNJzxYsFVR0BiQpNaOMac6H9gAMCi9n0tM
+ d9wbAFGK4pOAeegzIXw2pQA2SRdnXBlkoPBX4bWqHrHzGagbwzap+jlrn9ZInBv+FYQB79hm5T6
+ 1sYBO05QMWelAvA8=
+X-Received: by 2002:adf:ef83:: with SMTP id d3mr3590955wro.145.1591700713616; 
+ Tue, 09 Jun 2020 04:05:13 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJypMcVAQwaW/I6vICjH3pnYoVeg7kiHWBRxB9LtVfTU1+Z7wL7jJgUZk4SDqi6hRzq7g/7iig==
+X-Received: by 2002:adf:ef83:: with SMTP id d3mr3590931wro.145.1591700713378; 
+ Tue, 09 Jun 2020 04:05:13 -0700 (PDT)
 Received: from [192.168.178.58] ([151.21.172.168])
- by smtp.gmail.com with ESMTPSA id e5sm3132662wrw.19.2020.06.09.04.04.49
+ by smtp.gmail.com with ESMTPSA id u7sm2957241wrm.23.2020.06.09.04.05.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Jun 2020 04:04:50 -0700 (PDT)
-Subject: Re: [RFC PATCH 32/35] hw/riscv: Emit warning when old code is used
+ Tue, 09 Jun 2020 04:05:12 -0700 (PDT)
+Subject: Re: [RFC PATCH 23/35] hw/misc/applesmc: Emit warning when old code is
+ used
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
@@ -78,29 +79,29 @@ Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Magnus Damm <magnus.damm@gmail.com>
 References: <20200608160044.15531-1-philmd@redhat.com>
- <20200608160044.15531-33-philmd@redhat.com>
+ <20200608160044.15531-24-philmd@redhat.com>
 From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <78a05ce1-ce9a-431a-69df-77b0a8fcfce9@redhat.com>
-Date: Tue, 9 Jun 2020 13:04:48 +0200
+Message-ID: <ac20d382-3ac3-5c29-8e1e-e3ba1d424138@redhat.com>
+Date: Tue, 9 Jun 2020 13:05:10 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20200608160044.15531-33-philmd@redhat.com>
+In-Reply-To: <20200608160044.15531-24-philmd@redhat.com>
 Content-Language: en-US
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=207.211.31.120; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/09 01:38:49
+Received-SPF: pass client-ip=205.139.110.61; envelope-from=pbonzini@redhat.com;
+ helo=us-smtp-delivery-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/09 02:41:53
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -114,67 +115,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2020 11:04:56 -0000
+X-List-Received-Date: Tue, 09 Jun 2020 11:05:19 -0000
 
 On 08/06/20 18:00, Philippe Mathieu-Daudé wrote:
 > This code hasn't been QOM'ified yet. Warn the user.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 > ---
->  hw/riscv/riscv_htif.c  | 4 ++++
->  hw/riscv/sifive_uart.c | 4 ++++
->  2 files changed, 8 insertions(+)
+>  hw/misc/applesmc.c | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
-> diff --git a/hw/riscv/riscv_htif.c b/hw/riscv/riscv_htif.c
-> index ca87a5cf9f..bd080dbefb 100644
-> --- a/hw/riscv/riscv_htif.c
-> +++ b/hw/riscv/riscv_htif.c
-> @@ -30,6 +30,7 @@
->  #include "hw/riscv/riscv_htif.h"
+> diff --git a/hw/misc/applesmc.c b/hw/misc/applesmc.c
+> index 1c4addb201..d63f19038d 100644
+> --- a/hw/misc/applesmc.c
+> +++ b/hw/misc/applesmc.c
+> @@ -36,6 +36,7 @@
+>  #include "ui/console.h"
+>  #include "qemu/module.h"
 >  #include "qemu/timer.h"
->  #include "qemu/error-report.h"
 > +#include "hw/qdev-deprecated.h"
 >  
->  #define RISCV_DEBUG_HTIF 0
->  #define HTIF_DEBUG(fmt, ...)                                                   \
-> @@ -238,6 +239,9 @@ HTIFState *htif_mm_init(MemoryRegion *address_space, MemoryRegion *main_mem,
->      uint64_t fromhost_offset = fromhost_addr - base;
+>  /* #define DEBUG_SMC */
 >  
->      HTIFState *s = g_malloc0(sizeof(HTIFState));
-> +
-> +    qdev_warn_deprecated_function_used();
-> +
->      s->address_space = address_space;
->      s->main_mem = main_mem;
->      s->main_mem_ram_ptr = memory_region_get_ram_ptr(main_mem);
-> diff --git a/hw/riscv/sifive_uart.c b/hw/riscv/sifive_uart.c
-> index 9350482662..1a5890d5f7 100644
-> --- a/hw/riscv/sifive_uart.c
-> +++ b/hw/riscv/sifive_uart.c
-> @@ -25,6 +25,7 @@
->  #include "hw/hw.h"
->  #include "hw/irq.h"
->  #include "hw/riscv/sifive_uart.h"
-> +#include "hw/qdev-deprecated.h"
->  
->  /*
->   * Not yet implemented:
-> @@ -183,6 +184,9 @@ SiFiveUARTState *sifive_uart_create(MemoryRegion *address_space, hwaddr base,
->      Chardev *chr, qemu_irq irq)
+> @@ -253,6 +254,8 @@ static void applesmc_add_key(AppleSMCState *s, const char *key,
 >  {
->      SiFiveUARTState *s = g_malloc0(sizeof(SiFiveUARTState));
-> +
+>      struct AppleSMCData *def;
+>  
 > +    qdev_warn_deprecated_function_used();
 > +
->      s->irq = irq;
->      qemu_chr_fe_init(&s->chr, chr, &error_abort);
->      qemu_chr_fe_set_handlers(&s->chr, uart_can_rx, uart_rx, uart_event,
+>      def = g_malloc0(sizeof(struct AppleSMCData));
+>      def->key = key;
+>      def->len = len;
 > 
 
-Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
-
-Not sure why this code was accepted, furthermore it should have been in
-hw/char.
+This one is okay.
 
 Paolo
 
