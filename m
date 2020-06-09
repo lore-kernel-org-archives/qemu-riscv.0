@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jic9Y-0005Ab-7e
-	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 07:10:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34254)
+	id 1jic9v-0005i2-OP
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 07:11:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34300)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1jic9W-00057y-Pz
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:10:46 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:45174
+ id 1jic9u-0005fa-HX
+ for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:11:10 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:53869
  helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1jic9V-0001nY-Vp
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:10:46 -0400
+ id 1jic9t-00022j-Kl
+ for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:11:10 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591701045;
+ s=mimecast20190719; t=1591701069;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=TysuOc5GXylf1UUaen/G81fkeOnuEfcp2+jvnmZ+bCw=;
- b=At29VDCeuemu2RzApLylP3dUHKoGdpW5Ql2/qlZlEF7jsunGiVUJfVnbO0dE1LMia7Ckbd
- S3LFEcv6wRvwej/CI+ANFrXt2LI1bzYR/W9JTNPj19fKwGGzKks3UCNJfl7i8yYjJFzZXu
- Q/yyAlfo1y6Vdd7h7PEM8uX9TjB8Kjc=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-155-fBonrbg2N1y3j1mVPhvgkg-1; Tue, 09 Jun 2020 07:10:43 -0400
-X-MC-Unique: fBonrbg2N1y3j1mVPhvgkg-1
-Received: by mail-wm1-f70.google.com with SMTP id s15so600529wmc.8
- for <qemu-riscv@nongnu.org>; Tue, 09 Jun 2020 04:10:43 -0700 (PDT)
+ bh=gC6WEmr69REgLn2lsRvv9NiGoR/bD5T6HVmJ4ITPF7o=;
+ b=MKUqEEYxr+tXS/WnVImsNVkESZCN52rzgnGVVqCOo47TU9mBwPU7xgPtfJqSU2yicTt/c0
+ kqm3UXwsk6R1nlldv+2Yuc8xZHoR2WQvCO8yBXP2Xfa60juhVkINNCJTJM+V+9qUIcS1bM
+ ejboYQ2UZdp6GUZ9WV8DPfS1HSPgFR8=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-7-Y5Bm6fg8PfeKfgzT-hNcMA-1; Tue, 09 Jun 2020 07:11:07 -0400
+X-MC-Unique: Y5Bm6fg8PfeKfgzT-hNcMA-1
+Received: by mail-wr1-f71.google.com with SMTP id m14so8463037wrj.12
+ for <qemu-riscv@nongnu.org>; Tue, 09 Jun 2020 04:11:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=TysuOc5GXylf1UUaen/G81fkeOnuEfcp2+jvnmZ+bCw=;
- b=Ipsx3XbzbwxEDHJyqap+X/Dq+n54EjDCyq3IcY0ER5S1nzsit4s0twW89OlUeUfLKr
- 0dCIf3OomBFBqhL8qghxtfHQA4nUhx0zDWvOkLBfNJHXHWwzCD8OGIov/woNRKjvj5W4
- p4PtRWTIu3uz3sIxN7jsFcekof+JaEhh+l85spOH3qZ05lzL6TrBxcAilLigFnVQcHn/
- WQokQ5CtEUD4cT9T7O4LJ06riJVqUKzEchqLgONnB9jxC4FgF1uAni4oNQLZ14qpRcfo
- JDN3urrriaijxlYI99llE+KTkYjjPGfGXVv1JZLIl5YE6e10Wdm8ckHHAmegV0Y08Gem
- SHFw==
-X-Gm-Message-State: AOAM531fSvXkdgEBVuAfpgeuL1l5kpTtSJfiEeBEWB1ECxE0GaJheBTW
- tZUbch5hHT7nkLMtTFVUEoEou2rNbGf6/YxvhBBpzpdX0A8xwivIb+JLVTx+Op3etZw9muVx/2E
- mh4H/dbqFEwIgx+0=
-X-Received: by 2002:a7b:cb91:: with SMTP id m17mr3627185wmi.126.1591701042665; 
- Tue, 09 Jun 2020 04:10:42 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzYXhhkklLh5/jP4wI4AWv8kJypOFv0T2ku7XSwlUIkFk2HE1PSObyt3ACvqwUvh1wPJYEGWA==
-X-Received: by 2002:a7b:cb91:: with SMTP id m17mr3627155wmi.126.1591701042347; 
- Tue, 09 Jun 2020 04:10:42 -0700 (PDT)
+ bh=gC6WEmr69REgLn2lsRvv9NiGoR/bD5T6HVmJ4ITPF7o=;
+ b=MOnz/QtuzF96aHMSVH/gLAIRrob6v/Q3uxvmw8Ub/VGdNhqUxdrtfeEAgZ7Pu6g1cJ
+ aNbeLlHyNVU74z+EaPZiu8pCe4lr+S3UvHscvL+XON620OWXuTG02L3Mz0/EqdvZrcT0
+ TWIvfZtmdCrPAVJqVxAY6KTXdVN9pKSyTpFM9muYZaFOrIeZd2jnFPuK11D3TLRCf2pT
+ 9728fQmVRlzKfOiF+wv11eX39qIgthDKfzd2AuhmySyO9RfAc47mq2fplBo34kJfuo3N
+ qRh1s3/u8sdJVN39Dz0MmD7zkvNlVkGJBQdfp+k1NgliIHD/ddXHezYK7gneU/YsGGJY
+ mpiA==
+X-Gm-Message-State: AOAM531eouisW36j7F17/393HVswtQefQ2eSWlFE2HfcOCkNeLSm5gxa
+ BgUNsMCZ1czAgpS8rMwI9chkOYq339TRIRlXhzVIz9PGAPgGMCf+4Ogl4E3fcOCF6BFlvqtIICJ
+ 2i9Y5wtTeSMZn9X8=
+X-Received: by 2002:a5d:628c:: with SMTP id k12mr3812466wru.211.1591701066332; 
+ Tue, 09 Jun 2020 04:11:06 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyY3Up1ym4TzRU1NS9l49R/XWUODvDMW5M2cEwgU3BofYT4BEs0ckiayOWBTvyLMfPr7vv94w==
+X-Received: by 2002:a5d:628c:: with SMTP id k12mr3812427wru.211.1591701066086; 
+ Tue, 09 Jun 2020 04:11:06 -0700 (PDT)
 Received: from [192.168.178.58] ([151.21.172.168])
- by smtp.gmail.com with ESMTPSA id q1sm2521908wmc.15.2020.06.09.04.10.40
+ by smtp.gmail.com with ESMTPSA id r12sm3176227wrc.22.2020.06.09.04.11.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Jun 2020 04:10:41 -0700 (PDT)
-Subject: Re: [RFC PATCH 20/35] hw/intc/i8259: Emit warning when old code is
- used
+ Tue, 09 Jun 2020 04:11:05 -0700 (PDT)
+Subject: Re: [RFC PATCH 21/35] hw/lm32/lm32_hwsetup: Emit warning when old
+ code is used
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
@@ -79,14 +79,14 @@ Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Magnus Damm <magnus.damm@gmail.com>
 References: <20200608160044.15531-1-philmd@redhat.com>
- <20200608160044.15531-21-philmd@redhat.com>
+ <20200608160044.15531-22-philmd@redhat.com>
 From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <71b5e461-88f6-eab2-f46a-e8aa4783debd@redhat.com>
-Date: Tue, 9 Jun 2020 13:10:39 +0200
+Message-ID: <3e036ca7-753b-55fb-3a19-7d50f5b6fd19@redhat.com>
+Date: Tue, 9 Jun 2020 13:11:03 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20200608160044.15531-21-philmd@redhat.com>
+In-Reply-To: <20200608160044.15531-22-philmd@redhat.com>
 Content-Language: en-US
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
@@ -115,40 +115,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2020 11:10:47 -0000
+X-List-Received-Date: Tue, 09 Jun 2020 11:11:10 -0000
 
 On 08/06/20 18:00, Philippe Mathieu-Daudé wrote:
 > This code hasn't been QOM'ified yet. Warn the user.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 > ---
->  hw/intc/i8259.c | 3 +++
+>  hw/lm32/lm32_hwsetup.h | 3 +++
 >  1 file changed, 3 insertions(+)
 > 
-> diff --git a/hw/intc/i8259.c b/hw/intc/i8259.c
-> index 51b27f6a34..9d9609cdab 100644
-> --- a/hw/intc/i8259.c
-> +++ b/hw/intc/i8259.c
-> @@ -30,6 +30,7 @@
->  #include "qemu/log.h"
->  #include "hw/isa/i8259_internal.h"
->  #include "trace.h"
+> diff --git a/hw/lm32/lm32_hwsetup.h b/hw/lm32/lm32_hwsetup.h
+> index de94de177a..f4a4d8fe4b 100644
+> --- a/hw/lm32/lm32_hwsetup.h
+> +++ b/hw/lm32/lm32_hwsetup.h
+> @@ -27,6 +27,7 @@
+>  
+>  #include "qemu/cutils.h"
+>  #include "hw/loader.h"
 > +#include "hw/qdev-deprecated.h"
 >  
->  /* debug PIC */
->  //#define DEBUG_PIC
-> @@ -414,6 +415,8 @@ qemu_irq *i8259_init(ISABus *bus, qemu_irq parent_irq)
->      ISADevice *isadev;
->      int i;
+>  typedef struct {
+>      void *data;
+> @@ -57,6 +58,8 @@ static inline HWSetup *hwsetup_init(void)
+>  {
+>      HWSetup *hw;
 >  
 > +    qdev_warn_deprecated_function_used();
 > +
->      irq_set = g_new0(qemu_irq, ISA_NUM_IRQS);
->  
->      isadev = i8259_init_chip(TYPE_I8259, bus, true);
+>      hw = g_malloc(sizeof(HWSetup));
+>      hw->data = g_malloc0(TARGET_PAGE_SIZE);
+>      hw->ptr = hw->data;
 > 
 
-This one is okay too.
+This one is okay.
 
 Paolo
 
