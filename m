@@ -1,102 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jicDV-0002j2-CL
-	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 07:14:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34734)
+	id 1jidIO-0003XE-IT
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 08:24:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41684)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1jicDT-0002hH-Me
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:14:51 -0400
-Received: from us-smtp-1.mimecast.com ([205.139.110.61]:58642
- helo=us-smtp-delivery-1.mimecast.com)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jidIM-0003Rf-8Y
+ for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 08:23:58 -0400
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:31429)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1jicDT-0002MV-0e
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:14:51 -0400
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jidIG-0005Qa-QC
+ for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 08:23:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591701289;
+ s=mimecast20190719; t=1591705428;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=pM1sXV/7eH//dmNxCu9L646uRo7LpSiWcH+A4/9rq/Y=;
- b=gZGojfQDnkzkPZPNZWCJYdaPXxEoyqMbARvMAuKRAuJwTXTIAHD4n1fi9c1OG5f3WbfL48
- 6IZbJ3dkmoyIx7ai8tro/UKPYOi1BmNgkaAKJTSDGqY9X18h4GvsLsS/E38Xg5berloShz
- sAmlg4Mub6eRWCKCCYIwB6/iGkHVXqw=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-406-yVIFEDg7NwWOtcFMRPTRUA-1; Tue, 09 Jun 2020 07:14:47 -0400
-X-MC-Unique: yVIFEDg7NwWOtcFMRPTRUA-1
-Received: by mail-wr1-f69.google.com with SMTP id l18so8533721wrm.0
- for <qemu-riscv@nongnu.org>; Tue, 09 Jun 2020 04:14:47 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=pM1sXV/7eH//dmNxCu9L646uRo7LpSiWcH+A4/9rq/Y=;
- b=gdFZUD+J6nJn5kyFLYT8j8KoWw/vi5pDHI534aL3T/M2Ach3OO94IS7QXCy+N3YPQV
- oob9e/kNz4yq/C79pcVzdoF2Y6y09kfZjmdq9p9CV9r1OoASgocU74GBuui3ot2Yb9Xs
- 09FrfgdyrLtyq9dpwJ2Nn1ew7cEQM2HK+6YyFqnic71mptgn+ZfnLoRea+uzKRjqFq96
- liKF4E91EB+G9JoVlzNLeL/MyxBgmOnjNWUindZU9k88qQHAQyZiOFqHRO9004MlQa3q
- cjC1BeYwF/7PmiDWSop3WqeG3cAwUlXtxXMmBjgChb9DWcdU2f3rV9OoEVltkzYeuoKL
- E/2g==
-X-Gm-Message-State: AOAM531LU4QggT2KyQQe91EDj1dmzOl8ZP8fF0MyRxnVkm82RPt71+r6
- 5bKQfkTEIkUqNHq0kNhALoF1QhaVa/J4SSCR4voDeVddc+GIOxp3EIqsRPF8PTh83ZcZbe8UVPw
- 1akxfy84E7P2u0jA=
-X-Received: by 2002:a5d:4e87:: with SMTP id e7mr3651918wru.427.1591701286134; 
- Tue, 09 Jun 2020 04:14:46 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzuPbVlBDSLtlTXx3ZWJ2E6euzR9/JzXQUGOR/hYo9mA/3HQUZQnicNKOucsXO2NrypVrU/9w==
-X-Received: by 2002:a5d:4e87:: with SMTP id e7mr3651896wru.427.1591701285907; 
- Tue, 09 Jun 2020 04:14:45 -0700 (PDT)
-Received: from [192.168.178.58] ([151.21.172.168])
- by smtp.gmail.com with ESMTPSA id f9sm3121051wrf.74.2020.06.09.04.14.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Jun 2020 04:14:45 -0700 (PDT)
-Subject: Re: [RFC PATCH 00/35] hw/qdev: Warn when using pre-qdev/QOM devices
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Cc: QEMU Developers <qemu-devel@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>,
- Markus Armbruster <armbru@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Michael Walle <michael@walle.cc>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Gerd Hoffmann <kraxel@redhat.com>,
- Stafford Horne <shorne@gmail.com>, Andrzej Zaborowski <balrogg@gmail.com>,
- qemu-ppc <qemu-ppc@nongnu.org>, Alistair Francis <alistair@alistair23.me>,
- Richard Henderson <rth@twiddle.net>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- "Daniel P . Berrange" <berrange@redhat.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- "open list:X86" <xen-devel@lists.xenproject.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Anthony Perard <anthony.perard@citrix.com>,
+ bh=k4qUldYCXqUpzQiNaxHXBMEG7qK+VixIwStOSbXfAmc=;
+ b=d6WP971cy2NzNk3g2739LpBGQiioHpz0CL9Jy43re8wH+c7yzuAIXeTd7HSPDOAr8ReVRf
+ DhDXBa2Fs/tm0VPY1GjLJN3JmGAw45R80HkFU+kCKmRf5GhRRcG9hBuSGPzwXOkbDO68tk
+ OeymLyd4Z+2Wuvze/kIlZFt3JLpMF+s=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-7-W75KrvfAMNmBH0uifPVqxQ-1; Tue, 09 Jun 2020 08:23:46 -0400
+X-MC-Unique: W75KrvfAMNmBH0uifPVqxQ-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 17D491007273;
+ Tue,  9 Jun 2020 12:23:45 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-112-121.ams2.redhat.com
+ [10.36.112.121])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id A3DA3891E8;
+ Tue,  9 Jun 2020 12:23:44 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 2B8F11138469; Tue,  9 Jun 2020 14:23:40 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: pbonzini@redhat.com, berrange@redhat.com, ehabkost@redhat.com,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Paul Durrant <paul@xen.org>,
  Alistair Francis <Alistair.Francis@wdc.com>,
- Eduardo Habkost <ehabkost@redhat.com>, Thomas Huth <huth@tuxfamily.org>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- David Gibson <david@gibson.dropbear.id.au>,
- Magnus Damm <magnus.damm@gmail.com>
-References: <20200608160044.15531-1-philmd@redhat.com>
- <CAFEAcA_Ni8=mvyfG=9Aa=ym-ae9HpP8J8B0ekm8=SN2WgZ6_vA@mail.gmail.com>
- <81653f82-484b-a04a-7b2c-1362a724d0e8@redhat.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <ea1a0932-aecf-3e88-1444-2f5ca369cc67@redhat.com>
-Date: Tue, 9 Jun 2020 13:14:43 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v3 20/24] riscv: Fix type of SiFive[EU]SocState,
+ member parent_obj
+Date: Tue,  9 Jun 2020 14:23:35 +0200
+Message-Id: <20200609122339.937862-21-armbru@redhat.com>
+In-Reply-To: <20200609122339.937862-1-armbru@redhat.com>
+References: <20200609122339.937862-1-armbru@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <81653f82-484b-a04a-7b2c-1362a724d0e8@redhat.com>
-Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=205.139.110.61; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/09 02:41:53
+Received-SPF: pass client-ip=207.211.31.81; envelope-from=armbru@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/08 23:42:34
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -104,7 +66,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_PASS=-0.001 autolearn=_AUTOLEARN
+ SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -117,31 +79,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2020 11:14:52 -0000
+X-List-Received-Date: Tue, 09 Jun 2020 12:23:58 -0000
 
-On 08/06/20 18:17, Philippe Mathieu-Daudé wrote:
-> On 6/8/20 6:14 PM, Peter Maydell wrote:
->> On Mon, 8 Jun 2020 at 17:00, Philippe Mathieu-Daudé <philmd@redhat.com> wrote:
->>>
->>> Based on today's IRC chat, this is a trivial RFC series
->>> to anotate pre-qdev/QOM devices so developers using them
->>> without knowing they are not QOM'ified yet can realize
->>> it and convert them if they have time.
->>
->> What mechanism did you use for identifying non-QOM devices?
-> 
-> I don't think this is the complete list, this is only all the one I
-> could find with:
-> 
->   $ git grep "g_new|g_malloc" hw/
-> 
-> Then on each match I manually reviewed (so I might have incorrectly
-> flagged code too).
+Device "riscv.sifive.e.soc" is a direct subtype of TYPE_DEVICE, but
+its instance struct SiFiveESoCState's member @parent_obj is
+SysBusDevice instead of DeviceState.  Correct that.
 
-Yes, you did, but I guess for an RFC it was a good bang for the buck.  I
-went through the patch and noticed both a few false positives and a
-couple blatant violations in recent code.
+Same for "riscv.sifive.u.soc"'s instance struct SiFiveUSoCState.
 
-Paolo
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Cc: qemu-riscv@nongnu.org
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ include/hw/riscv/sifive_e.h | 2 +-
+ include/hw/riscv/sifive_u.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+index 414992119e..d386ea9223 100644
+--- a/include/hw/riscv/sifive_e.h
++++ b/include/hw/riscv/sifive_e.h
+@@ -29,7 +29,7 @@
+ 
+ typedef struct SiFiveESoCState {
+     /*< private >*/
+-    SysBusDevice parent_obj;
++    DeviceState parent_obj;
+ 
+     /*< public >*/
+     RISCVHartArrayState cpus;
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index 16c297ec5f..5f62cf5f85 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -31,7 +31,7 @@
+ 
+ typedef struct SiFiveUSoCState {
+     /*< private >*/
+-    SysBusDevice parent_obj;
++    DeviceState parent_obj;
+ 
+     /*< public >*/
+     CPUClusterState e_cluster;
+-- 
+2.26.2
 
 
