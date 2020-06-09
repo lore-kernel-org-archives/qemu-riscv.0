@@ -1,110 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jif7v-0007uO-Bl
-	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 10:21:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55566)
+	id 1jinWC-0007Jo-Da
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 19:18:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53914)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jif7t-0007sQ-Lz
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 10:21:17 -0400
-Received: from us-smtp-1.mimecast.com ([205.139.110.61]:39642
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1jif7s-0000XD-Kl
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 10:21:17 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591712475;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=mKn89GE4yhBVAiE11TJdbe2i5inOVS2QTjmPTgDJ69s=;
- b=Rjn17yGguO1b9L/FmNyWWmyZcnqjaEGVgaq4933tyoZP7GWIdxv61iHBAr8zvtMuBBO52g
- MrtzQRzo6P2N5iZ1YicmITY/OmH32OoLo6NCdZv8RRrvfWRPJy5lxL2N9K/nZbfKRLcj+F
- CIpmP+AnVAdrJBLdzE40pEVnRzA9bMM=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-270-R00OWaXWNReLKYbyr6i5jQ-1; Tue, 09 Jun 2020 10:21:11 -0400
-X-MC-Unique: R00OWaXWNReLKYbyr6i5jQ-1
-Received: by mail-wr1-f71.google.com with SMTP id o1so8626808wrm.17
- for <qemu-riscv@nongnu.org>; Tue, 09 Jun 2020 07:21:11 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jinWA-0007Ik-JR; Tue, 09 Jun 2020 19:18:54 -0400
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:34454)
+ by eggs.gnu.org with esmtps (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jinW9-0006ab-NV; Tue, 09 Jun 2020 19:18:54 -0400
+Received: by mail-io1-xd44.google.com with SMTP id m81so117604ioa.1;
+ Tue, 09 Jun 2020 16:18:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=p16Yd9krmK9kB9uJm7XYxV+CRaiKlH1oWNxN9u08tRE=;
+ b=OCN7NbnVWskDjOFBXVERPOpWIYAHNONA4ecmOc4kqsTwzzSof3QLkaoVHpNFaH+nm5
+ e0pzbgLFr4AHRKYvQ6n7XTD13J74tF5bibCN6pR+83w0yt0Tc/GtXulSKgeXkjHq3zKe
+ JBo2+dJr/lL4zNYjVtN9IIFaKu8HBAzsuCTERFIFvO0pZnDhNJRiGorygpJP66JXhwox
+ NwpwqHQbw9pCV3G2wfidytA+wAxGDx2EHwUSl+gMrREp5MwbVda+1U8fVjDbJhaZi3dO
+ RXMZBTVVLmoqca9askv3SUjI6h32dh4bn8cKnag4Tk0j7anXNgPybL0gPt7kxR5FZx1x
+ WLrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:autocrypt
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-language:content-transfer-encoding;
- bh=mKn89GE4yhBVAiE11TJdbe2i5inOVS2QTjmPTgDJ69s=;
- b=nUvntvEtjFTGEDYFswKU1VzwSvIp2GJzPSuCuU6pXLHXe37gGzq3n+FyqZqwjhBQ7E
- VA7Ph86vaxa1WVSDVDPJEjxgq1nv24t2NW+ztdQkbEsjhkgjoG/j/4VSrFegzFGucX4I
- zIgpZq//2mmXo9aMfthj0dHAwGBXRtUNBlBrdQDVedBMyr9mwNEO60Us0n+6qod/GyTy
- IXBV74teWbnRiBG8rAjAGqHInyOQq/ye7/53yj7lVkU4a8/tOgJZd20NpxPufNsxQtTX
- HZtfj1XR5N/rrtw4XaQBiBEjSOUevFRu1VsWeqwRqiebDB4ymOJM7rOo6E4f1IvjaeU+
- 8oDA==
-X-Gm-Message-State: AOAM530GQknI/BfYBCTtZ5dxmdL3aHJTnNV1qGqn3Wwot5FUzPAj6gE4
- dCfYfs5cR2l22hvSrM0m6aTc0pyHDKme+XP2ZHcXCni2j9pAqebg7mzGLaS13ZGLnr+OOFbPDY5
- x1fAtdRmF8EuLtbs=
-X-Received: by 2002:adf:f389:: with SMTP id m9mr4483919wro.195.1591712470765; 
- Tue, 09 Jun 2020 07:21:10 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxVSbQF2Okg6IZQv8DAmCHaZ1KMAa/+F0HdbTOCecz1JLAkgSyXikD/mTwnw2Q5EztnLZDanQ==
-X-Received: by 2002:adf:f389:: with SMTP id m9mr4483889wro.195.1591712470441; 
- Tue, 09 Jun 2020 07:21:10 -0700 (PDT)
-Received: from [192.168.1.38] (181.red-88-10-103.dynamicip.rima-tde.net.
- [88.10.103.181])
- by smtp.gmail.com with ESMTPSA id l1sm3989652wrb.31.2020.06.09.07.21.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Jun 2020 07:21:09 -0700 (PDT)
-Subject: Re: [PATCH v5 06/11] riscv: Initial commit of OpenTitan machine
-To: Damien Hedde <damien.hedde@greensocs.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair23@gmail.com, bmeng.cn@gmail.com, palmer@dabbelt.com
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=p16Yd9krmK9kB9uJm7XYxV+CRaiKlH1oWNxN9u08tRE=;
+ b=aFuTzBP9xCywvOy5woY1YrvB4FF828xgNj/Ru15N+J66eR3n3z0Y139z0Rhd0R7T1p
+ 9hMEkUYmJM9p6jk61bYfegNZkM0iinsv/HS5Tpved95IhzTQ5Qnvs9AC88rIwv3uYFk2
+ rSrBCdQO5E2flG7HxJvXBih6qIg61v7lM3ej0wBeDUFz/AZlUIHbPvuTzimqRlA+M84b
+ xx+e0yF790lPi9dwNRpFv75JrSEMF5QuikMH9o1BntrrFyflBjGEtBOGKLlMM3hYDhDP
+ 8yDmFaJlzshvloB1SwmUWqLEW3eKHTR0LVOHKtMV5vCmsVNcg6b7OLlqACDEfd9GH1eZ
+ 9O0g==
+X-Gm-Message-State: AOAM530jtk4220kZfLwXDS5bYeI5Znt1cOXTTNbxFwp+Ffh/OU2x9fS8
+ RMz1cPIMbLwtwTcpHPBlkMaRsdg+NXzl9io82S4=
+X-Google-Smtp-Source: ABdhPJyRLvlfXNcbzZgYptWfyyM360nRosJ3NJ1yYWc6DqAEHOVxL+DP8jmjEZFT3RPntosSjEpVrWKuJxNOD9A5Gb8=
+X-Received: by 2002:a5d:9cc2:: with SMTP id w2mr538112iow.42.1591744720860;
+ Tue, 09 Jun 2020 16:18:40 -0700 (PDT)
+MIME-Version: 1.0
 References: <cover.1590704015.git.alistair.francis@wdc.com>
  <0ab3cecbe801f9e14ad1a5447d02483b9008fdbb.1590704015.git.alistair.francis@wdc.com>
  <c3d7b26b-c55d-8ec5-3ee3-f197693b4378@greensocs.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Autocrypt: addr=philmd@redhat.com; keydata=
- mQINBDXML8YBEADXCtUkDBKQvNsQA7sDpw6YLE/1tKHwm24A1au9Hfy/OFmkpzo+MD+dYc+7
- bvnqWAeGweq2SDq8zbzFZ1gJBd6+e5v1a/UrTxvwBk51yEkadrpRbi+r2bDpTJwXc/uEtYAB
- GvsTZMtiQVA4kRID1KCdgLa3zztPLCj5H1VZhqZsiGvXa/nMIlhvacRXdbgllPPJ72cLUkXf
- z1Zu4AkEKpccZaJspmLWGSzGu6UTZ7UfVeR2Hcc2KI9oZB1qthmZ1+PZyGZ/Dy+z+zklC0xl
- XIpQPmnfy9+/1hj1LzJ+pe3HzEodtlVA+rdttSvA6nmHKIt8Ul6b/h1DFTmUT1lN1WbAGxmg
- CH1O26cz5nTrzdjoqC/b8PpZiT0kO5MKKgiu5S4PRIxW2+RA4H9nq7nztNZ1Y39bDpzwE5Sp
- bDHzd5owmLxMLZAINtCtQuRbSOcMjZlg4zohA9TQP9krGIk+qTR+H4CV22sWldSkVtsoTaA2
- qNeSJhfHQY0TyQvFbqRsSNIe2gTDzzEQ8itsmdHHE/yzhcCVvlUzXhAT6pIN0OT+cdsTTfif
- MIcDboys92auTuJ7U+4jWF1+WUaJ8gDL69ThAsu7mGDBbm80P3vvUZ4fQM14NkxOnuGRrJxO
- qjWNJ2ZUxgyHAh5TCxMLKWZoL5hpnvx3dF3Ti9HW2dsUUWICSQARAQABtDJQaGlsaXBwZSBN
- YXRoaWV1LURhdWTDqSAoUGhpbCkgPHBoaWxtZEByZWRoYXQuY29tPokCVQQTAQgAPwIbDwYL
- CQgHAwIGFQgCCQoLBBYCAwECHgECF4AWIQSJweePYB7obIZ0lcuio/1u3q3A3gUCXsfWwAUJ
- KtymWgAKCRCio/1u3q3A3ircD/9Vjh3aFNJ3uF3hddeoFg1H038wZr/xi8/rX27M1Vj2j9VH
- 0B8Olp4KUQw/hyO6kUxqkoojmzRpmzvlpZ0cUiZJo2bQIWnvScyHxFCv33kHe+YEIqoJlaQc
- JfKYlbCoubz+02E2A6bFD9+BvCY0LBbEj5POwyKGiDMjHKCGuzSuDRbCn0Mz4kCa7nFMF5Jv
- piC+JemRdiBd6102ThqgIsyGEBXuf1sy0QIVyXgaqr9O2b/0VoXpQId7yY7OJuYYxs7kQoXI
- 6WzSMpmuXGkmfxOgbc/L6YbzB0JOriX0iRClxu4dEUg8Bs2pNnr6huY2Ft+qb41RzCJvvMyu
- gS32LfN0bTZ6Qm2A8ayMtUQgnwZDSO23OKgQWZVglGliY3ezHZ6lVwC24Vjkmq/2yBSLakZE
- 6DZUjZzCW1nvtRK05ebyK6tofRsx8xB8pL/kcBb9nCuh70aLR+5cmE41X4O+MVJbwfP5s/RW
- 9BFSL3qgXuXso/3XuWTQjJJGgKhB6xXjMmb1J4q/h5IuVV4juv1Fem9sfmyrh+Wi5V1IzKI7
- RPJ3KVb937eBgSENk53P0gUorwzUcO+ASEo3Z1cBKkJSPigDbeEjVfXQMzNt0oDRzpQqH2vp
- apo2jHnidWt8BsckuWZpxcZ9+/9obQ55DyVQHGiTN39hkETy3Emdnz1JVHTU0Q==
-Message-ID: <7bb1bc10-e986-dcbc-630d-99660517c11b@redhat.com>
-Date: Tue, 9 Jun 2020 16:21:09 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
-MIME-Version: 1.0
-In-Reply-To: <c3d7b26b-c55d-8ec5-3ee3-f197693b4378@greensocs.com>
-Content-Language: en-US
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=205.139.110.61; envelope-from=philmd@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/09 02:41:53
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+ <7bb1bc10-e986-dcbc-630d-99660517c11b@redhat.com>
+In-Reply-To: <7bb1bc10-e986-dcbc-630d-99660517c11b@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 9 Jun 2020 16:09:19 -0700
+Message-ID: <CAKmqyKPe8dBJOmXXS_sUchFPRiExt9Rqn6yUDRM4HT0cm82Nww@mail.gmail.com>
+Subject: Re: [PATCH v5 06/11] riscv: Initial commit of OpenTitan machine
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Cc: Damien Hedde <damien.hedde@greensocs.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -117,51 +79,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2020 14:21:18 -0000
+X-List-Received-Date: Tue, 09 Jun 2020 23:18:55 -0000
 
-On 6/9/20 3:48 PM, Damien Hedde wrote:
-> 
-> Hi Alistair,
-> 
-> On 5/29/20 12:14 AM, Alistair Francis wrote:
->> This adds a barebone OpenTitan machine to QEMU.
->>
->> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->> Reviewed-by: Bin Meng <bin.meng@windriver.com>
->> ---
-> 
->> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
->> new file mode 100644
->> index 0000000000..a4b6499444
->> --- /dev/null
->> +++ b/include/hw/riscv/opentitan.h
->> @@ -0,0 +1,68 @@
-> 
-> [...]
-> 
->> +
->> +static const struct MemmapEntry {
->> +    hwaddr base;
->> +    hwaddr size;
->> +} ibex_memmap[] = {
->> +    [IBEX_ROM] =            {  0x00008000,   0xc000 },
-> 
-> Shouldn't the ROM size be 0x4000 (which make the end of rom at 0xc000) ?
-> 
-> Not sure if that's exactly this platform you are modeling but the
-> following doc says the ROM size is 16kB (0x4000):
-> https://github.com/lowRISC/opentitan/blob/master/hw/top_earlgrey/doc/_index.md
+On Tue, Jun 9, 2020 at 7:21 AM Philippe Mathieu-Daud=C3=A9 <philmd@redhat.c=
+om> wrote:
+>
+> On 6/9/20 3:48 PM, Damien Hedde wrote:
+> >
+> > Hi Alistair,
+> >
+> > On 5/29/20 12:14 AM, Alistair Francis wrote:
+> >> This adds a barebone OpenTitan machine to QEMU.
+> >>
+> >> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> >> Reviewed-by: Bin Meng <bin.meng@windriver.com>
+> >> ---
+> >
+> >> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan=
+.h
+> >> new file mode 100644
+> >> index 0000000000..a4b6499444
+> >> --- /dev/null
+> >> +++ b/include/hw/riscv/opentitan.h
+> >> @@ -0,0 +1,68 @@
+> >
+> > [...]
+> >
+> >> +
+> >> +static const struct MemmapEntry {
+> >> +    hwaddr base;
+> >> +    hwaddr size;
+> >> +} ibex_memmap[] =3D {
+> >> +    [IBEX_ROM] =3D            {  0x00008000,   0xc000 },
+> >
+> > Shouldn't the ROM size be 0x4000 (which make the end of rom at 0xc000) =
+?
+> >
+> > Not sure if that's exactly this platform you are modeling but the
+> > following doc says the ROM size is 16kB (0x4000):
+> > https://github.com/lowRISC/opentitan/blob/master/hw/top_earlgrey/doc/_i=
+ndex.md
 
-Good catch. This is why I prefer the IEC notation:
+Yep you are right, I have fixed this.
 
-    [IBEX_ROM] =            {  0x00008000,   16 * KiB },
+>
+> Good catch. This is why I prefer the IEC notation:
+>
+>     [IBEX_ROM] =3D            {  0x00008000,   16 * KiB },
+>
+> You can then verify the mapping running 'info mtree' in the monitor.
 
-You can then verify the mapping running 'info mtree' in the monitor.
+Thanks!
 
-> 
-> --
-> Damien
-> 
-> 
+Alistair
 
+>
+> >
+> > --
+> > Damien
+> >
+> >
+>
 
