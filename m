@@ -1,59 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jicBM-0007l3-O5
-	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 07:12:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34462)
+	id 1jicBf-0008Ae-6T
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 07:13:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34510)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1jicBK-0007ex-Bz
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:12:38 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:26781
+ id 1jicBb-00087q-Ea
+ for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:12:56 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:20444
  helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1jicBJ-0002BB-NP
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:12:38 -0400
+ id 1jicBa-0002Ci-Ld
+ for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 07:12:55 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591701157;
+ s=mimecast20190719; t=1591701173;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6lAgcTDN/dV/f7SK/NrjUs5/i9Qjg44Eo04qPw3cNtk=;
- b=S9vVCiqCX/gTdDpkyp3ywYIjT5rzt7tPsLyG0/B95yBQuCPdIytCHIhvWBhifSATDkg3q3
- NgeTnKjT3n+D7XoNLLqZmubfSMuaE0Pl7FMKfa8pgjwNoau2sUQWAKEnaH220Dze97synb
- MvRsUCNA1ZvgpsgiQBmQEFowdgpR5iY=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-431-MeM1Jxx1Nte2NfRhr9hPaw-1; Tue, 09 Jun 2020 07:12:34 -0400
-X-MC-Unique: MeM1Jxx1Nte2NfRhr9hPaw-1
-Received: by mail-wr1-f70.google.com with SMTP id e7so8521132wrp.14
- for <qemu-riscv@nongnu.org>; Tue, 09 Jun 2020 04:12:34 -0700 (PDT)
+ bh=dy54HX3yjH25i0N8iq/ISO1rX+f/prrBggOwYYHoeGM=;
+ b=HR49Uf0DQHxjx4rRQ8oGbVB4pgnsV7xF0iRe7niF8RVnObE4IFdmq+lyd9c8BvbLW5tWLv
+ 9f9H2KKb32PTouYy3AM6/oO9p+cFIlI9DH+99mOO8wTczRXktSa5AE5yCCo5cG6ISa4D/B
+ RLRCJskwdN62AYmjBpE4zx5xjF/BKDc=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-146-MjD9bzovNx2UxBgxJlpgWg-1; Tue, 09 Jun 2020 07:12:52 -0400
+X-MC-Unique: MjD9bzovNx2UxBgxJlpgWg-1
+Received: by mail-wr1-f72.google.com with SMTP id s7so8488816wrm.16
+ for <qemu-riscv@nongnu.org>; Tue, 09 Jun 2020 04:12:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=6lAgcTDN/dV/f7SK/NrjUs5/i9Qjg44Eo04qPw3cNtk=;
- b=Sv6joZZpLAYEk+M5TyvFOYsPPpirMgIl00GWRXoVTefrSgvrrTO47lZTlJX8wLkCT8
- mLyanEYyAb+Bq0Ja5RRTrjQ97Haob4BQgiTEkAsY3zPJ+imKJNomTAtbFi2FPf4mAgh2
- Ssc0TytF0V3HpygVfE+SGLSsxJAMLeZrk48dUM1QY0iauxM3K1whO8ILEjDfc9aRgSPQ
- LYUdPpfOQCauJL0JVtXUxkSnAGVVPfs4wv7wBuCv8/+xZkcMW1veVXpe9SrcgWI5HYt8
- J9i6uYWl71xR/Ko1PMraMw6rSCaehkzlcrsb7qCPkXSiltubxtgFTpCODJKanN6QNXj9
- 9Nsg==
-X-Gm-Message-State: AOAM533fcwZx6vejmt22b3F6mZs/u9AeaUOhXmNZDmlk3XFIJGBz+N0e
- bUkMthZMpELdP3CBfrw1s4PI0iX+Q3b7bM/1BmGNc6WBeb4vCHM9jzlAg+LRlaI7lufdGSPU9hJ
- 5mZINxm7QtADnB6U=
-X-Received: by 2002:a1c:a7c3:: with SMTP id q186mr3257035wme.141.1591701150721; 
- Tue, 09 Jun 2020 04:12:30 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwew58hVelVmOrF+efwHZuIRFPhx2tAfnSXNsxzJkV6M1Bdv9a4oEF967FsVILY6ztkPcXqaQ==
-X-Received: by 2002:a1c:a7c3:: with SMTP id q186mr3256994wme.141.1591701150493; 
- Tue, 09 Jun 2020 04:12:30 -0700 (PDT)
+ bh=dy54HX3yjH25i0N8iq/ISO1rX+f/prrBggOwYYHoeGM=;
+ b=r+yhEFCmivYJTGxZxGuqQFQvMNS8OYdKrunW3NznE49HhSiKmeRIY8KZqCU9/S1Nyc
+ b607WmCzO3+GVV2uhuXW3GjmFWo6EDQZKdFWWue7Gl52dnT4LaF4jRkjUYwBVd5N1TGG
+ 882S7EqASktAEcSkLmtPkOdHtwvUTXDJaepPq5UseblYg/QpS1c1MwCTVAyvxQmoPmfc
+ 56tvaJ4AGscmAYUobzWeUmVWIbyulkiu3EVUorT4csQS+DMYVCrYXcVPjjsNufXENz5h
+ eWgNKlLvNiiOOdF7XNmuslSnnR9VvoEC42RrlSWVz9awTniUQ+nQ0rWJRfHuzFyy+hwX
+ HTyA==
+X-Gm-Message-State: AOAM5309HUAhKdALBHnzUh5SlhM+jxwIEKc3AdC/XO34iOEor4l/RDKZ
+ u2KhWYef8v95W4nXgrLN2dVHyVJHxOy8fTMiXdEWexWyWrH1wBo5wboGB3jb+HqkjJ647CXO2NA
+ w8Wlri4+GyJP0c8M=
+X-Received: by 2002:a5d:6944:: with SMTP id r4mr3766996wrw.169.1591701170929; 
+ Tue, 09 Jun 2020 04:12:50 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJy1H01HZsnF0pwx9oeoL9yjnBGXgYxEXfgTncokwamlfkzpTt0NHDCpjwEqldpHwJp0uf5vaQ==
+X-Received: by 2002:a5d:6944:: with SMTP id r4mr3766967wrw.169.1591701170664; 
+ Tue, 09 Jun 2020 04:12:50 -0700 (PDT)
 Received: from [192.168.178.58] ([151.21.172.168])
- by smtp.gmail.com with ESMTPSA id u130sm2587221wmg.32.2020.06.09.04.12.28
+ by smtp.gmail.com with ESMTPSA id u130sm2588369wmg.32.2020.06.09.04.12.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Jun 2020 04:12:29 -0700 (PDT)
-Subject: Re: [RFC PATCH 29/35] hw/ppc/ppc_booke: Emit warning when old code is
- used
+ Tue, 09 Jun 2020 04:12:50 -0700 (PDT)
+Subject: Re: [RFC PATCH 27/35] hw/ppc/ppc: Emit warning when old code is used
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
@@ -79,29 +78,29 @@ Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Magnus Damm <magnus.damm@gmail.com>
 References: <20200608160044.15531-1-philmd@redhat.com>
- <20200608160044.15531-30-philmd@redhat.com>
+ <20200608160044.15531-28-philmd@redhat.com>
 From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <c932d51a-1b7d-bec3-5dfa-222c9ba5090e@redhat.com>
-Date: Tue, 9 Jun 2020 13:12:28 +0200
+Message-ID: <135e04f9-a2f4-b4d4-6689-83ae1f36d81c@redhat.com>
+Date: Tue, 9 Jun 2020 13:12:48 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20200608160044.15531-30-philmd@redhat.com>
+In-Reply-To: <20200608160044.15531-28-philmd@redhat.com>
 Content-Language: en-US
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=207.211.31.120; envelope-from=pbonzini@redhat.com;
+Received-SPF: pass client-ip=205.139.110.120; envelope-from=pbonzini@redhat.com;
  helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/09 01:38:49
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/09 02:44:16
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
  SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -115,38 +114,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2020 11:12:38 -0000
+X-List-Received-Date: Tue, 09 Jun 2020 11:12:56 -0000
 
 On 08/06/20 18:00, Philippe Mathieu-Daudé wrote:
 > This code hasn't been QOM'ified yet. Warn the user.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 > ---
->  hw/ppc/ppc_booke.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+>  hw/ppc/ppc.c | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
-> diff --git a/hw/ppc/ppc_booke.c b/hw/ppc/ppc_booke.c
-> index 652a21b806..a9e5e68578 100644
-> --- a/hw/ppc/ppc_booke.c
-> +++ b/hw/ppc/ppc_booke.c
-> @@ -31,7 +31,7 @@
->  #include "qemu/log.h"
->  #include "hw/loader.h"
+> diff --git a/hw/ppc/ppc.c b/hw/ppc/ppc.c
+> index 4a11fb1640..39fcf746c5 100644
+> --- a/hw/ppc/ppc.c
+> +++ b/hw/ppc/ppc.c
+> @@ -37,6 +37,7 @@
 >  #include "kvm_ppc.h"
-> -
+>  #include "migration/vmstate.h"
+>  #include "trace.h"
 > +#include "hw/qdev-deprecated.h"
 >  
->  /* Timer Control Register */
->  
-> @@ -338,6 +338,8 @@ void ppc_booke_timers_init(PowerPCCPU *cpu, uint32_t freq, uint32_t flags)
->      booke_timer_t *booke_timer;
->      int ret = 0;
+>  //#define PPC_DEBUG_IRQ
+>  //#define PPC_DEBUG_TB
+> @@ -1114,6 +1115,8 @@ clk_setup_cb cpu_ppc_tb_init (CPUPPCState *env, uint32_t freq)
+>      PowerPCCPU *cpu = env_archcpu(env);
+>      ppc_tb_t *tb_env;
 >  
 > +    qdev_warn_deprecated_function_used();
 > +
->      tb_env      = g_malloc0(sizeof(ppc_tb_t));
->      booke_timer = g_malloc0(sizeof(booke_timer_t));
->  
+>      tb_env = g_malloc0(sizeof(ppc_tb_t));
+>      env->tb_env = tb_env;
+>      tb_env->flags = PPC_DECR_UNDERFLOW_TRIGGERED;
 > 
 
 This one is okay.
