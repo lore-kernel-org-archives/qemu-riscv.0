@@ -1,72 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jidIj-0003nV-Gi
-	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 08:24:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41702)
+	id 1jiecN-0001ck-Cd
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Jun 2020 09:48:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52040)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jidIN-0003VA-NQ
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 08:23:59 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:53173
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jidIH-0005Rq-CT
- for qemu-riscv@nongnu.org; Tue, 09 Jun 2020 08:23:59 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591705432;
+ (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
+ id 1jiecL-0001cS-N7; Tue, 09 Jun 2020 09:48:41 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:47354)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
+ id 1jiecJ-0003gr-7F; Tue, 09 Jun 2020 09:48:41 -0400
+Received: from [192.168.1.12] (lfbn-gre-1-344-171.w90-112.abo.wanadoo.fr
+ [90.112.62.171])
+ by beetle.greensocs.com (Postfix) with ESMTPSA id 2F81821989;
+ Tue,  9 Jun 2020 13:48:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
+ s=mail; t=1591710514;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=h7Pi+HwemFMm/otKU4BBcmgFmF+eTZwgOUdsTAPzDxk=;
- b=YoJrERcae8q3NcHe1mWFbhq4hHf1zfKjYoU2IzpUdgJeqdFBvmkMKajeKguBYaoN1CDsBS
- y/oad2njRsiKrRqn4sO3ehizy0kv4K7ZdtdTf3vyjl/PEfXkz1TqJWzpo2jPfHVCuYKf+X
- HIW7683C0Ii9HOIOFXTmDLNJz39gToE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-326-SW5M8HcIP4-V1dEYJ0ja4w-1; Tue, 09 Jun 2020 08:23:48 -0400
-X-MC-Unique: SW5M8HcIP4-V1dEYJ0ja4w-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 868B0100726C;
- Tue,  9 Jun 2020 12:23:47 +0000 (UTC)
-Received: from blackfin.pond.sub.org (ovpn-112-121.ams2.redhat.com
- [10.36.112.121])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9768078FA9;
- Tue,  9 Jun 2020 12:23:44 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 280D01138468; Tue,  9 Jun 2020 14:23:40 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: pbonzini@redhat.com, berrange@redhat.com, ehabkost@redhat.com,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 19/24] riscv: Fix to put "riscv.hart_array" devices on
- sysbus
-Date: Tue,  9 Jun 2020 14:23:34 +0200
-Message-Id: <20200609122339.937862-20-armbru@redhat.com>
-In-Reply-To: <20200609122339.937862-1-armbru@redhat.com>
-References: <20200609122339.937862-1-armbru@redhat.com>
+ bh=kEDWIg/oJXDpgZWIX2gFKX6eMVoTF0LskEcp+BP4DMg=;
+ b=BhMjMp4Fdo1UzORXkjhmB86wA0H6v089tv6res7SoxO7t3B4RdJ14BUyOWO5Ipomv2rkKX
+ cVJqgSoKQRuPqKHD8TWc7xLi4kZ0eJV+pqE8wWNt5Vuakr/ws6GeXpKDoHs8GI0mm6oiBT
+ McrqlHkPRCfhzqzwPysRrOI7JmPP4S4=
+Subject: Re: [PATCH v5 06/11] riscv: Initial commit of OpenTitan machine
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
+References: <cover.1590704015.git.alistair.francis@wdc.com>
+ <0ab3cecbe801f9e14ad1a5447d02483b9008fdbb.1590704015.git.alistair.francis@wdc.com>
+From: Damien Hedde <damien.hedde@greensocs.com>
+Message-ID: <c3d7b26b-c55d-8ec5-3ee3-f197693b4378@greensocs.com>
+Date: Tue, 9 Jun 2020 15:48:32 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=205.139.110.120; envelope-from=armbru@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/09 02:44:16
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+In-Reply-To: <0ab3cecbe801f9e14ad1a5447d02483b9008fdbb.1590704015.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US-large
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=5.135.226.135;
+ envelope-from=damien.hedde@greensocs.com; helo=beetle.greensocs.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/09 09:48:35
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,135 +61,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2020 12:24:00 -0000
+X-List-Received-Date: Tue, 09 Jun 2020 13:48:42 -0000
 
-riscv_sifive_e_soc_init(), riscv_sifive_u_soc_init(),
-spike_board_init(), spike_v1_10_0_board_init(),
-spike_v1_09_1_board_init(), and riscv_virt_board_init() create
-"riscv-hart_array" sysbus devices in a way that leaves them unplugged.
 
-Create them the common way that puts them into the main system bus.
-Affects machines sifive_e, sifive_u, spike, spike_v1.10, spike_v1.9.1,
-and virt.  Visible in "info qtree", here's the change for sifive_e:
+Hi Alistair,
 
-     bus: main-system-bus
-       type System
-    +  dev: riscv.hart_array, id ""
-    +    num-harts = 1 (0x1)
-    +    hartid-base = 0 (0x0)
-    +    cpu-type = "sifive-e31-riscv-cpu"
-       dev: sifive_soc.gpio, id ""
+On 5/29/20 12:14 AM, Alistair Francis wrote:
+> This adds a barebone OpenTitan machine to QEMU.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Bin Meng <bin.meng@windriver.com>
+> ---
 
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: qemu-riscv@nongnu.org
-Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/opentitan.c |  5 ++---
- hw/riscv/sifive_e.c  |  5 ++---
- hw/riscv/sifive_u.c  | 14 ++++++--------
- hw/riscv/spike.c     |  4 ++--
- hw/riscv/virt.c      |  4 ++--
- 5 files changed, 14 insertions(+), 18 deletions(-)
+> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+> new file mode 100644
+> index 0000000000..a4b6499444
+> --- /dev/null
+> +++ b/include/hw/riscv/opentitan.h
+> @@ -0,0 +1,68 @@
 
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index b4fb836466..29887fe363 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -94,9 +94,8 @@ static void riscv_lowrisc_ibex_soc_init(Object *obj)
- {
-     LowRISCIbexSoCState *s = RISCV_IBEX_SOC(obj);
- 
--    object_initialize_child(obj, "cpus", &s->cpus,
--                            sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
--                            &error_abort, NULL);
-+    sysbus_init_child_obj(obj, "cpus", &s->cpus,
-+                          sizeof(s->cpus), TYPE_RISCV_HART_ARRAY);
- }
- 
- static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 472a98970b..d2e2350a4d 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -149,9 +149,8 @@ static void riscv_sifive_e_soc_init(Object *obj)
-     MachineState *ms = MACHINE(qdev_get_machine());
-     SiFiveESoCState *s = RISCV_E_SOC(obj);
- 
--    object_initialize_child(obj, "cpus", &s->cpus,
--                            sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
--                            &error_abort, NULL);
-+    sysbus_init_child_obj(obj, "cpus", &s->cpus,
-+                          sizeof(s->cpus), TYPE_RISCV_HART_ARRAY);
-     object_property_set_int(OBJECT(&s->cpus), ms->smp.cpus, "num-harts",
-                             &error_abort);
-     sysbus_init_child_obj(obj, "riscv.sifive.e.gpio0",
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index f9fef2be91..d6c6364596 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -491,10 +491,9 @@ static void sifive_u_soc_instance_init(Object *obj)
-                             &error_abort, NULL);
-     qdev_prop_set_uint32(DEVICE(&s->e_cluster), "cluster-id", 0);
- 
--    object_initialize_child(OBJECT(&s->e_cluster), "e-cpus",
--                            &s->e_cpus, sizeof(s->e_cpus),
--                            TYPE_RISCV_HART_ARRAY, &error_abort,
--                            NULL);
-+    sysbus_init_child_obj(OBJECT(&s->e_cluster), "e-cpus",
-+                          &s->e_cpus, sizeof(s->e_cpus),
-+                          TYPE_RISCV_HART_ARRAY);
-     qdev_prop_set_uint32(DEVICE(&s->e_cpus), "num-harts", 1);
-     qdev_prop_set_uint32(DEVICE(&s->e_cpus), "hartid-base", 0);
-     qdev_prop_set_string(DEVICE(&s->e_cpus), "cpu-type", SIFIVE_E_CPU);
-@@ -504,10 +503,9 @@ static void sifive_u_soc_instance_init(Object *obj)
-                             &error_abort, NULL);
-     qdev_prop_set_uint32(DEVICE(&s->u_cluster), "cluster-id", 1);
- 
--    object_initialize_child(OBJECT(&s->u_cluster), "u-cpus",
--                            &s->u_cpus, sizeof(s->u_cpus),
--                            TYPE_RISCV_HART_ARRAY, &error_abort,
--                            NULL);
-+    sysbus_init_child_obj(OBJECT(&s->u_cluster), "u-cpus",
-+                          &s->u_cpus, sizeof(s->u_cpus),
-+                          TYPE_RISCV_HART_ARRAY);
-     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
-     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
-     qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", SIFIVE_U_CPU);
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 7bbbdb5036..7d1119dcb6 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -169,8 +169,8 @@ static void spike_board_init(MachineState *machine)
-     unsigned int smp_cpus = machine->smp.cpus;
- 
-     /* Initialize SOC */
--    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
--                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-+    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-+                          TYPE_RISCV_HART_ARRAY);
-     object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type",
-                             &error_abort);
-     object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 4e4c494a70..d569b38d1b 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -485,8 +485,8 @@ static void virt_machine_init(MachineState *machine)
-     unsigned int smp_cpus = machine->smp.cpus;
- 
-     /* Initialize SOC */
--    object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
--                            TYPE_RISCV_HART_ARRAY, &error_abort, NULL);
-+    sysbus_init_child_obj(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-+                          TYPE_RISCV_HART_ARRAY);
-     object_property_set_str(OBJECT(&s->soc), machine->cpu_type, "cpu-type",
-                             &error_abort);
-     object_property_set_int(OBJECT(&s->soc), smp_cpus, "num-harts",
--- 
-2.26.2
+[...]
+
+> +
+> +static const struct MemmapEntry {
+> +    hwaddr base;
+> +    hwaddr size;
+> +} ibex_memmap[] = {
+> +    [IBEX_ROM] =            {  0x00008000,   0xc000 },
+
+Shouldn't the ROM size be 0x4000 (which make the end of rom at 0xc000) ?
+
+Not sure if that's exactly this platform you are modeling but the
+following doc says the ROM size is 16kB (0x4000):
+https://github.com/lowRISC/opentitan/blob/master/hw/top_earlgrey/doc/_index.md
+
+--
+Damien
 
 
