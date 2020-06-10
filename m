@@ -1,79 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jj4c7-0002Hs-L3
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Jun 2020 13:34:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59838)
+	id 1jj95v-0004Lv-1k
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Jun 2020 18:21:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42544)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jj4c5-0002FT-NB
- for qemu-riscv@nongnu.org; Wed, 10 Jun 2020 13:34:09 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:43807)
- by eggs.gnu.org with esmtps (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jj4c4-0003CK-JL
- for qemu-riscv@nongnu.org; Wed, 10 Jun 2020 13:34:09 -0400
-Received: by mail-pl1-x642.google.com with SMTP id g12so1208872pll.10
- for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2020 10:34:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=btNqLFwPFUT5hq/IqXjWUMWAkF+LGRElOorxEgC/Fdo=;
- b=kFJwQkEDd54pk4aQqbN8ePtbaiMQEFjNWhBDnQ1FHzbN2GJ350U1Cayp5N8xL/CIzl
- RRfXHwpFLp7hw/+p7oDb3gljvn5p+nF0vCFZoN3craAiTfqguGB/pZ+q/TzHIbW+Nkpn
- hC/JLj9la2m/P+R/lAcFO9lTZvrPoQg1FkDENvF5G42h7xfvj2HFGZEEuKy/CPobd2tQ
- earoF+VFNFIQyuypeOL8YLHvDIfQx4MClt9XaFW4++AiNiueDhQtKeqwvy2LE4ZpExh0
- u6lYZ+UtVsoIyIqFOQ+pM+5kaHW38MJ6rlAY64OCK3seCQgGxEo9Vv73IBy+MppnTjDj
- LbWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=btNqLFwPFUT5hq/IqXjWUMWAkF+LGRElOorxEgC/Fdo=;
- b=ixjhFTqt0y32XhUE5VJejrfjUZ1gKtQSJiuNyXE6aNyhI7IBt6A8dz+i1JuYMF0qtj
- iMb9maO+tNEK4iVI/xJjZ/p/kke7joV7oDLH3ITK2RSlm62d43BrP6lsDWy9o9rusXtd
- nUIahGlld00QJ8UNe9GuTlWR1j7tqZ8ju4GqE+NjkK9/4Ir3O2AkhCZk6iTPiVn1YjHB
- dYJ0AwmjBPiV3MYLzsd/1MpIsf3dDOlgg88z+ByMCwnU5qN3mrMHB2w1gt8WwSajayzy
- d8wTxzPSsQq1WJBNCCCbJGhnuY92quZwjOR64I7xeB5lACdy9tpiMdZFLpVDGivlNPCL
- HDjA==
-X-Gm-Message-State: AOAM533otSti2Bo/ZOSW2ZMWfGJ8oWszk5JF9+C3bvg64gk8DXwJCsD8
- UU/PydKD2i7o+lCUobYytED4yw==
-X-Google-Smtp-Source: ABdhPJzY7dul/0xgORnECo3iJlwEjYmdm7KqffO5UyN2tYVvSfPpcPo/fphPHhx0zu4F09Xb3e+N/A==
-X-Received: by 2002:a17:902:7c8f:: with SMTP id
- y15mr3795286pll.95.1591810440615; 
- Wed, 10 Jun 2020 10:34:00 -0700 (PDT)
-Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
- by smtp.gmail.com with ESMTPSA id t201sm511414pfc.104.2020.06.10.10.33.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2020 10:33:59 -0700 (PDT)
-Subject: Re: [PATCH v9 39/61] target/riscv: vector floating-point compare
- instructions
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, wenmeng_zhang@c-sky.com,
- wxy194768@alibaba-inc.com
-References: <20200610113748.4754-1-zhiwei_liu@c-sky.com>
- <20200610113748.4754-40-zhiwei_liu@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <e6d05624-8e4d-76d5-d085-a81553773fd7@linaro.org>
-Date: Wed, 10 Jun 2020 10:33:56 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ (Exim 4.90_1)
+ (envelope-from <prvs=4234ccaf3=alistair.francis@wdc.com>)
+ id 1jj95u-0004Ki-0G; Wed, 10 Jun 2020 18:21:14 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:59124)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=4234ccaf3=alistair.francis@wdc.com>)
+ id 1jj95s-000237-5K; Wed, 10 Jun 2020 18:21:13 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1591827671; x=1623363671;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=9bD3QKWUr5LwbqJAQBdeqwpAm4nMqwx4Rcj7yirIh6Y=;
+ b=B2miHGniKtUzHgoa6rHxtlac8GKxZWv6pIV21zx9Zhc9lBodeC1rrQtC
+ dgOsAaChGLy0C1pEKpIKDYOSPf8YIrWUToTbf+EmKQluViWQ7nuUkScLZ
+ zGad+vDdNBxfquvXRCx1+z/8fTkcbKxG/g3n5sxqTNO+qkNLd7QbkflXA
+ NZ/B74sGAT9jg2QxaZ3qQHjZhMBep56m1FyRvFdY/dhjmzEUSdX4LdqpL
+ +D+IE5r8qVOG5POii/y96Xe1TtGT8MH6GW/4m3oeiUqwxY3FvHaLi8pyX
+ YTNqp96ltGE10ZaAxwI7iRtsy0s5pukv1+BRl+CAgV7o6WnrgW8Iot6uM w==;
+IronPort-SDR: WW8xMXxV6yB//Hr05R8Y/FdqdsQug6qQWGUgTudBTpCgqIeILhc+C7WpdkCDNm7eRHu70qidiv
+ luboDhnwWyljUAkGmczCf7pU9+Sy7Ehx5PbJFQS+/K8Q/JV1lcahwoM0nTrZjRbKRx1jew9Tyk
+ LYDKCmrwuTP5WQJI0rZQDBSFaIcvH68eM1Rj7W76pKifYIDVWM8rN3PhHWbiOxdKMP7kCiGDe5
+ 5FJnhkZ5pcCdmYSho5fh/nuM7O1md3rZrjnnrc12AuV0idE+voipjVUk8saLEtvKmJ+CsLI/+/
+ m5U=
+X-IronPort-AV: E=Sophos;i="5.73,497,1583164800"; d="scan'208";a="248819305"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 11 Jun 2020 06:21:05 +0800
+IronPort-SDR: rojVYqLLuCpys4+s6mewY5hqayIiEwNJKLJikeQUlTpG+zglSDlnsEZgfDwh6K3o1vvbXSoCwu
+ +pGx9d4t1nrEMSxQrxDTqgQTLIB5eWTBg=
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Jun 2020 15:10:31 -0700
+IronPort-SDR: zp3Ed/5IYkYhE+L/rju4LJzXZm4JbNssRwmRIJxOk8/W/7vrxpl1ECNS3Ruoi1BoisXPYTH3IG
+ kJljxZ3MrJjQ==
+WDCIronportException: Internal
+Received: from us4qd5p12.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.58.34])
+ by uls-op-cesaip02.wdc.com with ESMTP; 10 Jun 2020 15:21:05 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v6 0/6]  RISC-V Add the OpenTitan Machine
+Date: Wed, 10 Jun 2020 15:12:08 -0700
+Message-Id: <cover.1591827110.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <20200610113748.4754-40-zhiwei_liu@c-sky.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::642;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x642.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=68.232.141.245;
+ envelope-from=prvs=4234ccaf3=alistair.francis@wdc.com;
+ helo=esa1.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/10 18:21:06
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=_AUTOLEARN
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -86,16 +80,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2020 17:34:10 -0000
+X-List-Received-Date: Wed, 10 Jun 2020 22:21:14 -0000
 
-On 6/10/20 4:37 AM, LIU Zhiwei wrote:
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> Richard Henderson <richard.henderson@linaro.org>
-> ---
+OpenTitan is an open source silicon Root of Trust (RoT) project. This
+series adds initial support for the OpenTitan machine to QEMU.
 
-Missed the actual "Reviewed-by:" :-)
+This series add the Ibex CPU to the QEMU RISC-V target. It then adds the
+OpenTitan machine, the Ibex UART and the Ibex PLIC.
+
+The UART has been tested sending and receiving data.
+
+With this series QEMU can boot the OpenTitan ROM, Tock OS and a Tock
+userspace app.
+
+The Ibex PLIC is similar to the RISC-V PLIC (and is based on the QEMU
+implementation) with some differences. The hope is that the Ibex PLIC
+will converge to follow the RISC-V spec. As that happens I want to
+update the QEMU Ibex PLIC and hopefully eventually replace the current
+PLIC as the implementation is a little overlay complex.
+
+For more details on OpenTitan, see here: https://docs.opentitan.org/
+
+v6:
+ - Rebase on master (some patches applied)
+ - Fix the ROM address
+v5:
+ - Add some of the missing unimplemented devices
+ - Don't set PMP feature in init() function
+v4:
+ - Don't set the reset vector in realise
+ - Fix a bug where the MMU is always enabled
+ - Fixup the PMP/MMU size logic
+v3:
+ - Small fixes pointed out in review
+v2:
+ - Rebase on master
+ - Get uart receive working
 
 
-r~
+
+Alistair Francis (6):
+  riscv/opentitan: Fix the ROM size
+  hw/char: Initial commit of Ibex UART
+  hw/intc: Initial commit of lowRISC Ibex PLIC
+  riscv/opentitan: Connect the PLIC device
+  riscv/opentitan: Connect the UART device
+  target/riscv: Use a smaller guess size for no-MMU PMP
+
+ include/hw/char/ibex_uart.h  | 110 ++++++++
+ include/hw/intc/ibex_plic.h  |  63 +++++
+ include/hw/riscv/opentitan.h |  16 ++
+ hw/char/ibex_uart.c          | 492 +++++++++++++++++++++++++++++++++++
+ hw/intc/ibex_plic.c          | 261 +++++++++++++++++++
+ hw/riscv/opentitan.c         |  45 +++-
+ target/riscv/pmp.c           |  14 +-
+ MAINTAINERS                  |   4 +
+ hw/char/Makefile.objs        |   1 +
+ hw/intc/Makefile.objs        |   1 +
+ hw/riscv/Kconfig             |   4 +
+ 11 files changed, 1001 insertions(+), 10 deletions(-)
+ create mode 100644 include/hw/char/ibex_uart.h
+ create mode 100644 include/hw/intc/ibex_plic.h
+ create mode 100644 hw/char/ibex_uart.c
+ create mode 100644 hw/intc/ibex_plic.c
+
+-- 
+2.26.2
+
 
