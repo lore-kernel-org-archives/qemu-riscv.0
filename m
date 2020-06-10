@@ -1,58 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jj985-0007ub-3j
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Jun 2020 18:23:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43222)
+	id 1jj9hw-0001xZ-8t
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Jun 2020 19:00:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51434)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jj982-0007oF-RN; Wed, 10 Jun 2020 18:23:26 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:34071)
+ id 1jj9hu-0001vU-DF; Wed, 10 Jun 2020 19:00:30 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:34338)
  by eggs.gnu.org with esmtps (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jj981-0002cG-PG; Wed, 10 Jun 2020 18:23:26 -0400
-Received: by mail-il1-x142.google.com with SMTP id x18so3618130ilp.1;
- Wed, 10 Jun 2020 15:23:13 -0700 (PDT)
+ id 1jj9ht-0001P1-AD; Wed, 10 Jun 2020 19:00:30 -0400
+Received: by mail-io1-xd42.google.com with SMTP id m81so4272463ioa.1;
+ Wed, 10 Jun 2020 16:00:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=FAoEUpMzwK+O29DOALfk6N49qoz4MjXXkxUmnMcACMs=;
- b=LEJ0/jjUxRhqOZ2TtcAXOagAHVn6luY5L1U+6DIOvL2DxaGBWOyIvJCQnF0MNsZS+6
- SU1aLyhd979H90zGCqOzV+Xix/TqE47AVDA/VSyBbzALsAfoC+LvIJDciDL1kbpXbjBF
- IpuGUNncfHqxxgwqeJf/l6jH1+FDfNbP8/xiTrCoCcU0vkZl3x5bVAcMOr62I/07M+Hw
- UxkpD6DmlywiEyWrWf9wA84yjulqVMRT4o5w0FEzNVM9PdoNRS2trfYegwFTF/xSMr9+
- 4q53nxmgXX5pe6Uo2VC3w4lg0NSgUpJz3l2pUho6DZiPpZKc+v10U+9Lo6fD7iRS+bA1
- DoyQ==
+ :cc; bh=qamDXaiTgwLwXEIs/y53unU+2O9fo4AUGs1266Zl+do=;
+ b=MedzxXnNuFflUqitjVnnrdUH2V6w65mnedouw6i2bOF0ravQhIdyPH5lSFku6jeaq3
+ XA4oL2EM94EcqMCjtWPmhRQ9VszeVrtP4N/Ma2wyYtdjnkpaOa0x2P6YraPvhl8vvg7V
+ cB/ohcfSNZ028hoydHApX/DC4Q7m0Ge9pMCyD2cKFjncUwc4oFR1yLjTyKWMyOTsPAJB
+ DESULIqGnW+xdm0WCj3K+K+JbqXPd1Q4uvEvTP2SVVtO2N233AungdE5RGeVfC95RZs2
+ MKPMUM8P1bNmH2G4fZ2S5ipQ1WtrNwGGuxzWLU1KHs3qf0gqwjeg3sYDFcNO55Tf4oJB
+ YVbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=FAoEUpMzwK+O29DOALfk6N49qoz4MjXXkxUmnMcACMs=;
- b=mcnUCHGT7Qdt3sHKETO6oEkHW6I3gicP42cb/E/r+d0B2jR592IIEZMkISvH7dnd4n
- u8ArRiNLDYQCQtKh7DPyLrgo8ePCePBcaruI3fYkVhF9Gwhu0SUl8BYfI3T6HPlZ4RTH
- 53N4ulj3N0SgRgFN7rH8LgAqgJKMxcApC8IfVPHwKu4Er1FwYPEKTnW4yHooE9Q8AGqa
- xrINsLp0AkKm6zoN9TUfOVbHsjAjL18EQDeAdB794L8YOZqy3eF4t9zZGmDboCWDkCce
- ssqjrzG8zGGxrdPtAJloXSTyROhrOuwFN9FgfE1tIrF1blWTRvQPvgPAsQIsQ4ySbmrb
- t7jg==
-X-Gm-Message-State: AOAM531QQPCHqa52Zm39JOqFOc2Ia5u16ApOY4h/OqjW6Devfb+kWSjz
- hvOwCe3w2xh+OK2ZuP6xYeJmEfmzSMYyTbr2dR/msWMH
-X-Google-Smtp-Source: ABdhPJyloAIpxYBK6+aqa4w+VTNtD9apc04UaDtZi77TtF0KbnZBuY8ApqyjJ7lggBUNpq5ILYGXjHnBTzMw2qnh1DU=
-X-Received: by 2002:a92:aa07:: with SMTP id j7mr5223048ili.40.1591827792258;
- Wed, 10 Jun 2020 15:23:12 -0700 (PDT)
+ bh=qamDXaiTgwLwXEIs/y53unU+2O9fo4AUGs1266Zl+do=;
+ b=a+A0jLa+ns9AgSfqV70/cXbDBoxty6xuNcHr83fLk2FJM9tHmKA0QbQj2Qtqcq993T
+ eOOcgI4ZNC09KAWRQN+/KhcmoFHWDL5vYdXF7ITZKUV77lbtXaW2Bju/HxhueRE6hS6y
+ q4Ji4tRmxVvWUBGZpAUGUFwBO9hC9+NZGjVNyDeNsxz+VGRi+YaUsLZN9oys/UOCh+gJ
+ 48jerL2TTqhZDLYbi515gkBc7woIfLivnFVOXQIc/hqLSEqz5f4CjAorz6/xkBOaIft2
+ LmYl58Iy2j5Cp43153wCemqCiVN2UTP5471LyQRRRnVlHKU0JDTIZh+BRmigxzjLYmG4
+ rS6Q==
+X-Gm-Message-State: AOAM533yz/cDAPSoGXnmt7r9c621a5eqW0XplAkFzEmCkvC+tGV5iDyY
+ B9aXFAQNupOoOpepG3KBd3CIeA83QB2gTyJbFXc=
+X-Google-Smtp-Source: ABdhPJyV183mTenRxyZ0PdXeZPqPD1t16OCWhyQ1+1NKiYW7uc0yEhCiZQYGfbDt+7nH50pKHeKQgaGdFZYjfTnkVQc=
+X-Received: by 2002:a05:6638:dd3:: with SMTP id
+ m19mr554897jaj.106.1591830015612; 
+ Wed, 10 Jun 2020 16:00:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <925bdcd2b3536014306a8800975fb63592fd051a.1589489213.git.alistair.francis@wdc.com>
- <mhng-8a09dc11-68b8-4e28-9b50-3fc5a52837e6@palmerdabbelt-glaptop1>
- <CAKmqyKM7G+b0cZ2a0MGtqRCKc5WbCcAkTfzYfF+gbvYDyOMidA@mail.gmail.com>
- <CAKmqyKP_Z=8gYqviEAveCd18OL0YXHW8k3k652KvTbJ9zbXPog@mail.gmail.com>
-In-Reply-To: <CAKmqyKP_Z=8gYqviEAveCd18OL0YXHW8k3k652KvTbJ9zbXPog@mail.gmail.com>
+References: <1591342707-9729-1-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1591342707-9729-1-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 10 Jun 2020 15:13:49 -0700
-Message-ID: <CAKmqyKPOSdgnWfCR40jXC6qQjeeEr8rfzQaez+Ce92CZstz_aw@mail.gmail.com>
-Subject: Re: [PATCH v1 2/2] sifive_e: Support the revB machine
-To: Palmer Dabbelt <palmer@dabbelt.com>
+Date: Wed, 10 Jun 2020 15:50:53 -0700
+Message-ID: <CAKmqyKM9=cXV=GAOOF6q1-KVM+uXYxtapWNjgoUJN8T9jPBccA@mail.gmail.com>
+Subject: Re: [PATCH 1/4] riscv: Generalize CPU init routine for the base CPU
+To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -75,104 +77,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2020 22:23:27 -0000
+X-List-Received-Date: Wed, 10 Jun 2020 23:00:30 -0000
 
-On Thu, May 28, 2020 at 11:13 AM Alistair Francis <alistair23@gmail.com> wrote:
+On Fri, Jun 5, 2020 at 12:40 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Thu, May 21, 2020 at 8:57 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Wed, May 20, 2020 at 4:08 PM Palmer Dabbelt <palmer@dabbelt.com> wrote:
-> > >
-> > > On Thu, 14 May 2020 13:47:10 PDT (-0700), Alistair Francis wrote:
-> > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > ---
-> > > >  hw/riscv/sifive_e.c         | 35 +++++++++++++++++++++++++++++++----
-> > > >  include/hw/riscv/sifive_e.h |  1 +
-> > > >  2 files changed, 32 insertions(+), 4 deletions(-)
-> > > >
-> > > > diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> > > > index 472a98970b..cb7818341b 100644
-> > > > --- a/hw/riscv/sifive_e.c
-> > > > +++ b/hw/riscv/sifive_e.c
-> > > > @@ -98,10 +98,14 @@ static void riscv_sifive_e_init(MachineState *machine)
-> > > >          memmap[SIFIVE_E_DTIM].base, main_mem);
-> > > >
-> > > >      /* Mask ROM reset vector */
-> > > > -    uint32_t reset_vec[2] = {
-> > > > -        0x204002b7,        /* 0x1000: lui     t0,0x20400 */
-> > > > -        0x00028067,        /* 0x1004: jr      t0 */
-> > > > -    };
-> > > > +    uint32_t reset_vec[2];
-> > > > +
-> > > > +    if (s->revb) {
-> > > > +        reset_vec[0] = 0x200102b7;        /* 0x1000: lui     t0,0x20010 */
-> > > > +    } else {
-> > > > +        reset_vec[0] = 0x204002b7;        /* 0x1000: lui     t0,0x20400 */
-> > > > +    }
-> > > > +    reset_vec[1] = 0x00028067;        /* 0x1004: jr      t0 */
-> > > >
-> > > >      /* copy in the reset vector in little_endian byte order */
-> > > >      for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-> > > > @@ -115,8 +119,31 @@ static void riscv_sifive_e_init(MachineState *machine)
-> > > >      }
-> > > >  }
-> > > >
-> > > > +static bool sifive_e_machine_get_revb(Object *obj, Error **errp)
-> > > > +{
-> > > > +    SiFiveEState *s = RISCV_E_MACHINE(obj);
-> > > > +
-> > > > +    return s->revb;
-> > > > +}
-> > > > +
-> > > > +static void sifive_e_machine_set_revb(Object *obj, bool value, Error **errp)
-> > > > +{
-> > > > +    SiFiveEState *s = RISCV_E_MACHINE(obj);
-> > > > +
-> > > > +    s->revb = value;
-> > > > +}
-> > > > +
-> > > >  static void sifive_e_machine_instance_init(Object *obj)
-> > > >  {
-> > > > +    SiFiveEState *s = RISCV_E_MACHINE(obj);
-> > > > +
-> > > > +    s->revb = false;
-> > > > +    object_property_add_bool(obj, "revb", sifive_e_machine_get_revb,
-> > > > +                             sifive_e_machine_set_revb, NULL);
-> > > > +    object_property_set_description(obj, "revb",
-> > > > +                                    "Set on to tell QEMU that it should model "
-> > > > +                                    "the revB HiFive1 board",
-> > > > +                                    NULL);
-> > > >  }
-> > > >
-> > > >  static void sifive_e_machine_class_init(ObjectClass *oc, void *data)
-> > > > diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> > > > index 414992119e..0d3cd07fcc 100644
-> > > > --- a/include/hw/riscv/sifive_e.h
-> > > > +++ b/include/hw/riscv/sifive_e.h
-> > > > @@ -45,6 +45,7 @@ typedef struct SiFiveEState {
-> > > >
-> > > >      /*< public >*/
-> > > >      SiFiveESoCState soc;
-> > > > +    bool revb;
-> > > >  } SiFiveEState;
-> > > >
-> > > >  #define TYPE_RISCV_E_MACHINE MACHINE_TYPE_NAME("sifive_e")
-> > >
-> > > IIRC there are way more differences between the un-suffixed FE310 and the Rev
-> > > B, specifically the interrupt map is all different.
-> >
-> > The three IRQs that QEMU uses for the SiFive E (UART0, UART1 and GPIO)
-> > all seem to be the same.
+> From: Bin Meng <bin.meng@windriver.com>
 >
-> Ping!
+> There is no need to have two functions that have exactly the same
+> codes for 32-bit and 64-bit base CPUs.
+>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Ping^2
-
-Applying to RISC-V tree.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
 >
-> >
-> > Alistair
+>  target/riscv/cpu.c | 18 +++++-------------
+>  1 file changed, 5 insertions(+), 13 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 9007a25..d38d829 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -126,9 +126,7 @@ static void riscv_any_cpu_init(Object *obj)
+>      set_resetvec(env, DEFAULT_RSTVEC);
+>  }
+>
+> -#if defined(TARGET_RISCV32)
+> -
+> -static void riscv_base32_cpu_init(Object *obj)
+> +static void riscv_base_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      /* We set this in the realise function */
+> @@ -136,6 +134,8 @@ static void riscv_base32_cpu_init(Object *obj)
+>      set_resetvec(env, DEFAULT_RSTVEC);
+>  }
+>
+> +#if defined(TARGET_RISCV32)
+> +
+>  static void rv32gcsu_priv1_10_0_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> @@ -173,14 +173,6 @@ static void rv32imafcu_nommu_cpu_init(Object *obj)
+>
+>  #elif defined(TARGET_RISCV64)
+>
+> -static void riscv_base64_cpu_init(Object *obj)
+> -{
+> -    CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    /* We set this in the realise function */
+> -    set_misa(env, 0);
+> -    set_resetvec(env, DEFAULT_RSTVEC);
+> -}
+> -
+>  static void rv64gcsu_priv1_10_0_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> @@ -601,13 +593,13 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>      },
+>      DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
+>  #if defined(TARGET_RISCV32)
+> -    DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           riscv_base32_cpu_init),
+> +    DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           riscv_base_cpu_init),
+>      DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32imcu_nommu_cpu_init),
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32imacu_nommu_cpu_init),
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32imafcu_nommu_cpu_init),
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32gcsu_priv1_10_0_cpu_init),
+>  #elif defined(TARGET_RISCV64)
+> -    DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           riscv_base64_cpu_init),
+> +    DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           riscv_base_cpu_init),
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64imacu_nommu_cpu_init),
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64gcsu_priv1_10_0_cpu_init),
+>  #endif
+> --
+> 2.7.4
+>
+>
 
