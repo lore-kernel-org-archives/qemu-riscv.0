@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jj960-0004U7-Fe
+	id 1jj960-0004UY-MS
 	for mharc-qemu-riscv@gnu.org; Wed, 10 Jun 2020 18:21:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42566)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42574)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=4234ccaf3=alistair.francis@wdc.com>)
- id 1jj95x-0004On-3J; Wed, 10 Jun 2020 18:21:17 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:59139)
+ id 1jj95y-0004RQ-Ug; Wed, 10 Jun 2020 18:21:18 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:59124)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=4234ccaf3=alistair.francis@wdc.com>)
- id 1jj95v-00023G-Dz; Wed, 10 Jun 2020 18:21:16 -0400
+ id 1jj95x-000237-Oj; Wed, 10 Jun 2020 18:21:18 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1591827675; x=1623363675;
+ t=1591827677; x=1623363677;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=rfV2J0CN9UPh6faD3IgzwZvnGje5W4oWV7+wZycjHvU=;
- b=D7VjevuKVu13u3f0EJaz4xqKMea0kc0Wql8PFQIoiFq8khZ8Iqa9c616
- ZXWR+qRoIxl860inrzQsgmZLTjvUW1CiIft+Q4v71e8o/Q6iPYOKc6po+
- 0c5CoURL37rxSmct76CAByTPHLg5oDNp898Wds0tGEV26iWSGO4iJTG+q
- CLS/OKYitnAdpxpuH50P1Upic8owMjeYgRWaNgemvoNRuBKU9fLwMmD3J
- 935qczYKLayA4T+mgQB/gJFhkl7m0mQpXOd6bZScoIva3NeqrZfcFpp0G
- VXdv/KFktwLvlpItFzFBDgxBcof7IJljd7xu4HlezjikEp0fp9QkC39z/ w==;
-IronPort-SDR: hv8KcTEMYfLTrPqpofyTAGV4pmol9mvot+x1sEm0rapP2IPA1PYabxBHITOj/fvROaMbXHA1gP
- gHJVFYvGchiEQJclUUoiJwSLDzmjfPYsUugq8a3KxPugFj8fQXj4uwfTII425yXBBMPKV8uCMl
- hCI7trKTfLu8yiojSMu8lU3XvPgQBaWyhEk7o7X4MJRlqIOonn2sXo0HfCTl3TooSa4lI8s+B7
- zv/f4EkSA04pod4p89e9FHVuOH8/nRbwGBn/t0N3RhCLeGhR28Y00l/tVOgRDjz015xFV6W05I
- fe4=
-X-IronPort-AV: E=Sophos;i="5.73,497,1583164800"; d="scan'208";a="248819315"
+ bh=EO1X9I2FgpPwqH4kt9DMGmIX+WXzCoYTwWl4+hNNrUg=;
+ b=oY3RLjBIV+x0CfjuV9BnOZEmP1AH+jXoVzeX1tWO3pHiYlN+KhkyZipM
+ gVkn0CWTNOtw1Wk6Nx5ghiXYvgOOOpiifQGexjdeLIsWEyGuOvnS2OKsm
+ 176mcWLgcQVIJXyi9fTrL6b5yF7h18xIKw1Vvpf6xBtZmHBCfZdfo0SSm
+ NuQeWDO3uonuqXI0nXk+WJFdF8Rog/FxuFJI3pOWTAoRu358rORaF8fX3
+ YkNkAfEr2q5PEwyqLRvvDOapfV0Qv80j4D4ZgtG1dPhfJw3JAhtuAZNdo
+ foDjsdFJXDP2uSfaTrQXCU73kAdG/Oun3ZPAZGZUK/c2g1lY+f5NIDt06 A==;
+IronPort-SDR: STjDqGq4EIAFSXfkQ5ao5IVFwdGkf2aDiyAMvjd9kBcRJJ0DurQqL9TkDa8jGYQGEqay00o1Sc
+ 8Q831LgOcVhIef3lRpTKCR4K6dcPIXr/DJkSuriFVAZ3elihcQULUJaCVDKd7exW4sKAlaeGmq
+ tAHitkQzy744kd1gSTPyplNefZCzZ2ctjldoI4YtXmNvp2MCwxNniZkFilaC3cdn5dpjoEhPLR
+ aDYlQoELaKaS2jJhkiwCORczSh3UZVxnbl56V7WXS1rlq+xaQh0z0n1VzEs7NlPM9HSa3HZJhw
+ 5Lg=
+X-IronPort-AV: E=Sophos;i="5.73,497,1583164800"; d="scan'208";a="248819317"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 11 Jun 2020 06:21:13 +0800
-IronPort-SDR: eplSfCLXZ7W5hNo69tbffXpOqFN36yJDe8QVEf22woDTNYqqN+2YFpkNJMkT9bDmJErdYorVD9
- g+0X647+rSjvLODCX4H8Aj3rwOaLchDmw=
+ by ob1.hgst.iphmx.com with ESMTP; 11 Jun 2020 06:21:16 +0800
+IronPort-SDR: 9x2K08P/RTTKJxf5iS5S4YQQVcGXLXle4/hYNt+ShvCtgV9pleRp84IUq/gNSCOh+oAeGJxQeL
+ eGzSL70UGF4zTINRpuBZnInGY7pfFwcGo=
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Jun 2020 15:10:39 -0700
-IronPort-SDR: BKPIvbZAMPMRSiKNnDXfSuFbKlsCXdpvPp94KxKglr33CBHQ41T5pM+DJh8rScauqr8JXTW2l0
- 85JF8E20/EMw==
+ 10 Jun 2020 15:10:42 -0700
+IronPort-SDR: ZmzPkIVFnUna+2xr3Mvqrv74FMrHnjV3RInjwIPo9CC/yuuYK0n50YqFtTri72A9/3jhmWwBfb
+ oDqPlyTAGgnw==
 WDCIronportException: Internal
 Received: from us4qd5p12.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.58.34])
- by uls-op-cesaip02.wdc.com with ESMTP; 10 Jun 2020 15:21:13 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 10 Jun 2020 15:21:16 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v6 3/6] hw/intc: Initial commit of lowRISC Ibex PLIC
-Date: Wed, 10 Jun 2020 15:12:17 -0700
-Message-Id: <69841756800201d4e5edbe04a59441455fcfc541.1591827110.git.alistair.francis@wdc.com>
+Subject: [PATCH v6 4/6] riscv/opentitan: Connect the PLIC device
+Date: Wed, 10 Jun 2020 15:12:19 -0700
+Message-Id: <176fecca64adb8977ec573153576c3e6f5e381f2.1591827110.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1591827110.git.alistair.francis@wdc.com>
 References: <cover.1591827110.git.alistair.francis@wdc.com>
@@ -82,388 +82,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2020 22:21:17 -0000
-
-The Ibex core contains a PLIC that although similar to the RISC-V spec
-is not RISC-V spec compliant.
-
-This patch implements a Ibex PLIC in a somewhat generic way.
-
-As the current RISC-V PLIC needs tidying up, my hope is that as the Ibex
-PLIC move towards spec compliance this PLIC implementation can be
-updated until it can replace the current PLIC.
+X-List-Received-Date: Wed, 10 Jun 2020 22:21:19 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/hw/intc/ibex_plic.h |  63 +++++++++
- hw/intc/ibex_plic.c         | 261 ++++++++++++++++++++++++++++++++++++
- MAINTAINERS                 |   2 +
- hw/intc/Makefile.objs       |   1 +
- 4 files changed, 327 insertions(+)
- create mode 100644 include/hw/intc/ibex_plic.h
- create mode 100644 hw/intc/ibex_plic.c
+ include/hw/riscv/opentitan.h |  3 +++
+ hw/riscv/opentitan.c         | 19 +++++++++++++++++--
+ 2 files changed, 20 insertions(+), 2 deletions(-)
 
-diff --git a/include/hw/intc/ibex_plic.h b/include/hw/intc/ibex_plic.h
-new file mode 100644
-index 0000000000..ddc7909903
---- /dev/null
-+++ b/include/hw/intc/ibex_plic.h
-@@ -0,0 +1,63 @@
-+/*
-+ * QEMU RISC-V lowRISC Ibex PLIC
-+ *
-+ * Copyright (c) 2020 Western Digital
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef HW_IBEX_PLIC_H
-+#define HW_IBEX_PLIC_H
-+
-+#include "hw/sysbus.h"
-+
-+#define TYPE_IBEX_PLIC "ibex-plic"
-+#define IBEX_PLIC(obj) \
-+    OBJECT_CHECK(IbexPlicState, (obj), TYPE_IBEX_PLIC)
-+
-+typedef struct IbexPlicState {
-+    /*< private >*/
-+    SysBusDevice parent_obj;
-+
-+    /*< public >*/
-+    MemoryRegion mmio;
-+
-+    uint32_t *pending;
-+    uint32_t *source;
-+    uint32_t *priority;
-+    uint32_t *enable;
-+    uint32_t threshold;
-+    uint32_t claim;
-+
-+    /* config */
-+    uint32_t num_cpus;
-+    uint32_t num_sources;
-+
-+    uint32_t pending_base;
-+    uint32_t pending_num;
-+
-+    uint32_t source_base;
-+    uint32_t source_num;
-+
-+    uint32_t priority_base;
-+    uint32_t priority_num;
-+
-+    uint32_t enable_base;
-+    uint32_t enable_num;
-+
-+    uint32_t threshold_base;
-+
-+    uint32_t claim_base;
-+} IbexPlicState;
-+
-+#endif /* HW_IBEX_PLIC_H */
-diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
-new file mode 100644
-index 0000000000..41079518c6
---- /dev/null
-+++ b/hw/intc/ibex_plic.c
-@@ -0,0 +1,261 @@
-+/*
-+ * QEMU RISC-V lowRISC Ibex PLIC
-+ *
-+ * Copyright (c) 2020 Western Digital
-+ *
-+ * Documentation avaliable: https://docs.opentitan.org/hw/ip/rv_plic/doc/
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/log.h"
-+#include "hw/qdev-properties.h"
-+#include "hw/core/cpu.h"
-+#include "hw/boards.h"
-+#include "hw/pci/msi.h"
-+#include "target/riscv/cpu_bits.h"
-+#include "target/riscv/cpu.h"
-+#include "hw/intc/ibex_plic.h"
-+
-+static bool addr_between(uint32_t addr, uint32_t base, uint32_t num)
-+{
-+    uint32_t end = base + (num * 0x04);
-+
-+    if (addr >= base && addr < end) {
-+        return true;
-+    }
-+
-+    return false;
-+}
-+
-+static void ibex_plic_irqs_set_pending(IbexPlicState *s, int irq, bool level)
-+{
-+    int pending_num = irq / 32;
-+
-+    s->pending[pending_num] |= level << (irq % 32);
-+}
-+
-+static bool ibex_plic_irqs_pending(IbexPlicState *s, uint32_t context)
-+{
-+    int i;
-+
-+    for (i = 0; i < s->pending_num; i++) {
-+        uint32_t irq_num = ctz64(s->pending[i]) + (i * 32);
-+
-+        if (!(s->pending[i] & s->enable[i])) {
-+            /* No pending and enabled IRQ */
-+            continue;
-+        }
-+
-+        if (s->priority[irq_num] > s->threshold) {
-+            if (!s->claim) {
-+                s->claim = irq_num;
-+            }
-+            return true;
-+        }
-+    }
-+
-+    return false;
-+}
-+
-+static void ibex_plic_update(IbexPlicState *s)
-+{
-+    CPUState *cpu;
-+    int level, i;
-+
-+    for (i = 0; i < s->num_cpus; i++) {
-+        cpu = qemu_get_cpu(i);
-+
-+        if (!cpu) {
-+            continue;
-+        }
-+
-+        level = ibex_plic_irqs_pending(s, 0);
-+
-+        riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MEIP, BOOL_TO_MASK(level));
-+    }
-+}
-+
-+static void ibex_plic_reset(DeviceState *dev)
-+{
-+    IbexPlicState *s = IBEX_PLIC(dev);
-+
-+    s->threshold = 0x00000000;
-+    s->claim = 0x00000000;
-+}
-+
-+static uint64_t ibex_plic_read(void *opaque, hwaddr addr,
-+                               unsigned int size)
-+{
-+    IbexPlicState *s = opaque;
-+    int offset;
-+    uint32_t ret = 0;
-+
-+    if (addr_between(addr, s->pending_base, s->pending_num)) {
-+        offset = (addr - s->pending_base) / 4;
-+        ret = s->pending[offset];
-+    } else if (addr_between(addr, s->source_base, s->source_num)) {
-+        qemu_log_mask(LOG_UNIMP,
-+                      "%s: Interrupt source mode not supported\n", __func__);
-+    } else if (addr_between(addr, s->priority_base, s->priority_num)) {
-+        offset = (addr - s->priority_base) / 4;
-+        ret = s->priority[offset];
-+    } else if (addr_between(addr, s->enable_base, s->enable_num)) {
-+        offset = (addr - s->enable_base) / 4;
-+        ret = s->enable[offset];
-+    } else if (addr_between(addr, s->threshold_base, 1)) {
-+        ret = s->threshold;
-+    } else if (addr_between(addr, s->claim_base, 1)) {
-+        int pending_num = s->claim / 32;
-+        s->pending[pending_num] &= ~(1 << (s->claim % 32));
-+
-+        ret = s->claim;
-+    }
-+
-+    return ret;
-+}
-+
-+static void ibex_plic_write(void *opaque, hwaddr addr,
-+                            uint64_t value, unsigned int size)
-+{
-+    IbexPlicState *s = opaque;
-+
-+    if (addr_between(addr, s->pending_base, s->pending_num)) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Pending registers are read only\n", __func__);
-+    } else if (addr_between(addr, s->source_base, s->source_num)) {
-+        qemu_log_mask(LOG_UNIMP,
-+                      "%s: Interrupt source mode not supported\n", __func__);
-+    } else if (addr_between(addr, s->priority_base, s->priority_num)) {
-+        uint32_t irq = ((addr - s->priority_base) >> 2) + 1;
-+        s->priority[irq] = value & 7;
-+    } else if (addr_between(addr, s->enable_base, s->enable_num)) {
-+        uint32_t enable_reg = (addr - s->enable_base) / 4;
-+
-+        s->enable[enable_reg] = value;
-+    } else if (addr_between(addr, s->threshold_base, 1)) {
-+        s->threshold = value & 3;
-+    } else if (addr_between(addr, s->claim_base, 1)) {
-+        if (s->claim == value) {
-+            /* Interrupt was completed */
-+            s->claim = 0;
-+        }
-+    }
-+
-+    ibex_plic_update(s);
-+}
-+
-+static const MemoryRegionOps ibex_plic_ops = {
-+    .read = ibex_plic_read,
-+    .write = ibex_plic_write,
-+    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .valid = {
-+        .min_access_size = 4,
-+        .max_access_size = 4
-+    }
-+};
-+
-+static void ibex_plic_irq_request(void *opaque, int irq, int level)
-+{
-+    IbexPlicState *s = opaque;
-+
-+    ibex_plic_irqs_set_pending(s, irq, level > 0);
-+    ibex_plic_update(s);
-+}
-+
-+static Property ibex_plic_properties[] = {
-+    DEFINE_PROP_UINT32("num-cpus", IbexPlicState, num_cpus, 1),
-+    DEFINE_PROP_UINT32("num-sources", IbexPlicState, num_sources, 80),
-+
-+    DEFINE_PROP_UINT32("pending-base", IbexPlicState, pending_base, 0),
-+    DEFINE_PROP_UINT32("pending-num", IbexPlicState, pending_num, 3),
-+
-+    DEFINE_PROP_UINT32("source-base", IbexPlicState, source_base, 0x0c),
-+    DEFINE_PROP_UINT32("source-num", IbexPlicState, source_num, 3),
-+
-+    DEFINE_PROP_UINT32("priority-base", IbexPlicState, priority_base, 0x18),
-+    DEFINE_PROP_UINT32("priority-num", IbexPlicState, priority_num, 80),
-+
-+    DEFINE_PROP_UINT32("enable-base", IbexPlicState, enable_base, 0x200),
-+    DEFINE_PROP_UINT32("enable-num", IbexPlicState, enable_num, 3),
-+
-+    DEFINE_PROP_UINT32("threshold-base", IbexPlicState, threshold_base, 0x20c),
-+
-+    DEFINE_PROP_UINT32("claim-base", IbexPlicState, claim_base, 0x210),
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
-+static void ibex_plic_init(Object *obj)
-+{
-+    IbexPlicState *s = IBEX_PLIC(obj);
-+
-+    memory_region_init_io(&s->mmio, obj, &ibex_plic_ops, s,
-+                          TYPE_IBEX_PLIC, 0x400);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
-+}
-+
-+static void ibex_plic_realize(DeviceState *dev, Error **errp)
-+{
-+    IbexPlicState *s = IBEX_PLIC(dev);
-+    int i;
-+
-+    s->pending = g_new0(uint32_t, s->pending_num);
-+    s->source = g_new0(uint32_t, s->source_num);
-+    s->priority = g_new0(uint32_t, s->priority_num);
-+    s->enable = g_new0(uint32_t, s->enable_num);
-+
-+    qdev_init_gpio_in(dev, ibex_plic_irq_request, s->num_sources);
-+
-+    /*
-+     * We can't allow the supervisor to control SEIP as this would allow the
-+     * supervisor to clear a pending external interrupt which will result in
-+     * a lost interrupt in the case a PLIC is attached. The SEIP bit must be
-+     * hardware controlled when a PLIC is attached.
-+     */
-+    MachineState *ms = MACHINE(qdev_get_machine());
-+    unsigned int smp_cpus = ms->smp.cpus;
-+    for (i = 0; i < smp_cpus; i++) {
-+        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(i));
-+        if (riscv_cpu_claim_interrupts(cpu, MIP_SEIP) < 0) {
-+            error_report("SEIP already claimed");
-+            exit(1);
-+        }
-+    }
-+
-+    msi_nonbroken = true;
-+}
-+
-+static void ibex_plic_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    dc->reset = ibex_plic_reset;
-+    device_class_set_props(dc, ibex_plic_properties);
-+    dc->realize = ibex_plic_realize;
-+}
-+
-+static const TypeInfo ibex_plic_info = {
-+    .name          = TYPE_IBEX_PLIC,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(IbexPlicState),
-+    .instance_init = ibex_plic_init,
-+    .class_init    = ibex_plic_class_init,
-+};
-+
-+static void ibex_plic_register_types(void)
-+{
-+    type_register_static(&ibex_plic_info);
-+}
-+
-+type_init(ibex_plic_register_types)
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 08fc4cae8e..51a3f96d7d 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1247,8 +1247,10 @@ L: qemu-riscv@nongnu.org
- S: Supported
- F: hw/riscv/opentitan.c
- F: hw/char/ibex_uart.c
-+F: hw/intc/ibex_plic.c
- F: include/hw/riscv/opentitan.h
- F: include/hw/char/ibex_uart.h
-+F: include/hw/intc/ibex_plic.h
+diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+index a4b6499444..76f72905a8 100644
+--- a/include/hw/riscv/opentitan.h
++++ b/include/hw/riscv/opentitan.h
+@@ -20,6 +20,7 @@
+ #define HW_OPENTITAN_H
  
- SH4 Machines
- ------------
-diff --git a/hw/intc/Makefile.objs b/hw/intc/Makefile.objs
-index f726d87532..a61e6728fe 100644
---- a/hw/intc/Makefile.objs
-+++ b/hw/intc/Makefile.objs
-@@ -49,3 +49,4 @@ obj-$(CONFIG_ARM_GIC) += arm_gicv3_cpuif.o
- obj-$(CONFIG_MIPS_CPS) += mips_gic.o
- obj-$(CONFIG_NIOS2) += nios2_iic.o
- obj-$(CONFIG_OMPIC) += ompic.o
-+obj-$(CONFIG_IBEX) += ibex_plic.o
+ #include "hw/riscv/riscv_hart.h"
++#include "hw/intc/ibex_plic.h"
+ 
+ #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
+ #define RISCV_IBEX_SOC(obj) \
+@@ -31,6 +32,8 @@ typedef struct LowRISCIbexSoCState {
+ 
+     /*< public >*/
+     RISCVHartArrayState cpus;
++    IbexPlicState plic;
++
+     MemoryRegion flash_mem;
+     MemoryRegion rom;
+ } LowRISCIbexSoCState;
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index 6c7359c190..1fc0327cb5 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -25,6 +25,7 @@
+ #include "hw/misc/unimp.h"
+ #include "hw/riscv/boot.h"
+ #include "exec/address-spaces.h"
++#include "sysemu/sysemu.h"
+ 
+ static const struct MemmapEntry {
+     hwaddr base;
+@@ -97,6 +98,9 @@ static void riscv_lowrisc_ibex_soc_init(Object *obj)
+     object_initialize_child(obj, "cpus", &s->cpus,
+                             sizeof(s->cpus), TYPE_RISCV_HART_ARRAY,
+                             &error_abort, NULL);
++
++    sysbus_init_child_obj(obj, "plic", &s->plic,
++                          sizeof(s->plic), TYPE_IBEX_PLIC);
+ }
+ 
+ static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+@@ -105,6 +109,9 @@ static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+     MachineState *ms = MACHINE(qdev_get_machine());
+     LowRISCIbexSoCState *s = RISCV_IBEX_SOC(dev_soc);
+     MemoryRegion *sys_mem = get_system_memory();
++    DeviceState *dev;
++    SysBusDevice *busdev;
++    Error *err = NULL;
+ 
+     object_property_set_str(OBJECT(&s->cpus), ms->cpu_type, "cpu-type",
+                             &error_abort);
+@@ -125,6 +132,16 @@ static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+     memory_region_add_subregion(sys_mem, memmap[IBEX_FLASH].base,
+                                 &s->flash_mem);
+ 
++    /* PLIC */
++    dev = DEVICE(&s->plic);
++    object_property_set_bool(OBJECT(&s->plic), true, "realized", &err);
++    if (err != NULL) {
++        error_propagate(errp, err);
++        return;
++    }
++    busdev = SYS_BUS_DEVICE(dev);
++    sysbus_mmio_map(busdev, 0, memmap[IBEX_PLIC].base);
++
+     create_unimplemented_device("riscv.lowrisc.ibex.uart",
+         memmap[IBEX_UART].base, memmap[IBEX_UART].size);
+     create_unimplemented_device("riscv.lowrisc.ibex.gpio",
+@@ -145,8 +162,6 @@ static void riscv_lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+         memmap[IBEX_AES].base, memmap[IBEX_AES].size);
+     create_unimplemented_device("riscv.lowrisc.ibex.hmac",
+         memmap[IBEX_HMAC].base, memmap[IBEX_HMAC].size);
+-    create_unimplemented_device("riscv.lowrisc.ibex.plic",
+-        memmap[IBEX_PLIC].base, memmap[IBEX_PLIC].size);
+     create_unimplemented_device("riscv.lowrisc.ibex.pinmux",
+         memmap[IBEX_PINMUX].base, memmap[IBEX_PINMUX].size);
+     create_unimplemented_device("riscv.lowrisc.ibex.alert_handler",
 -- 
 2.26.2
 
