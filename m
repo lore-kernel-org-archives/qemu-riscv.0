@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jj9mY-0004Qa-4j
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Jun 2020 19:05:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52534)
+	id 1jj9o2-0005Ru-Mb
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Jun 2020 19:06:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52822)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jj9mW-0004Q9-6U; Wed, 10 Jun 2020 19:05:16 -0400
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:46203)
+ id 1jj9o1-0005RN-ED; Wed, 10 Jun 2020 19:06:49 -0400
+Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:37071)
  by eggs.gnu.org with esmtps (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jj9mV-0002FX-65; Wed, 10 Jun 2020 19:05:15 -0400
-Received: by mail-io1-xd44.google.com with SMTP id t9so4220833ioj.13;
- Wed, 10 Jun 2020 16:05:02 -0700 (PDT)
+ id 1jj9nz-0002lS-H2; Wed, 10 Jun 2020 19:06:49 -0400
+Received: by mail-il1-x141.google.com with SMTP id e11so3664563ilr.4;
+ Wed, 10 Jun 2020 16:06:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=dkorscTSTKNRmxZVGtmlNerM1+Tso05ZZOVhlHS+28M=;
- b=W5EJhD+SgmSey725/U0MNY0078jCteeNSvCq0rOevSUzVQQmKFrnJeuh4JAxlcVA2k
- ookQYhjqwkHXqY3GkuOfPpCinnwMdLtQE7+joD/QTXvVUOHA7OrPhBtIAljNigqHbzv0
- 8jgoY1DP9HLrp3mKe9NKeNHfM7a3cc/4d3RBRu+3c0SulXhFcbXGUFxq0W55s14ueV2E
- LEiMVXyJyMdET7lU6+Xfj0CNNGO6AxknCvrepNzrwMZGCUl7LP1nfFVeRXADJLBunlhj
- T4uKPflu5uHeXk/oWoAINMZQnL8h4YCpBHSf3Tq8O9H0Hx1+s2zvoYd3HMIJwWQQwu1f
- D9TA==
+ :cc; bh=cfw88q8YpGHDTaeCBc3RuvSXu5R8VG4uNh5NqTqiw18=;
+ b=VKXbfwllKROHfml1wPtbuvj8PVEpJJEsV4PavXVzz1LPQ6hJmLEDYDTHqvn6KQIHdk
+ PEva2NkIMEdThH8dFJ5g1MLdZckXqcuti3V59VIcu8+mGlhLZrG9rUEZMEkDEIixw+k2
+ f0duwIzneNfpbXe8c7G+k8vQg2E7SwJ3WjCoQ4YCIrpjNRugKrfTzYXzC8dRfohvYrHs
+ EJbuofng0yMBZbCjBnJScC7rzRbyfu2PR4Z3HONlLake6lR6ZmNTK6Gqs2/dgB/RROxj
+ RRRxizGJt6H0gw2AWFdY48/iJutyUquk6KkU2wx8YQffpa/nEzCQCVp1XS/b8p382xR3
+ /CIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=dkorscTSTKNRmxZVGtmlNerM1+Tso05ZZOVhlHS+28M=;
- b=bVGZhFV3pjM1NOrLcdcBrS+XW0AbuvFFh6dBEFqRwb7ThZitUETG/43n0DS2E7cmdf
- 4ttEl8rMU0vp+55PcFvED3JP78VoOtwRhHOf0o4l2WC1sRlUTDU4DEV/hlzPCWOwOexT
- y1tzjtB4lfRn6/RdZEtjIeGuSaHsApmyjKtfEV9uLbcGOrtl5aoY1IUXVfQx6AXgM1W0
- 0Aw2640r3Kn9L6NO2i0Q3dQ+Rux9mkkTsrB7fxWf4Q4pJnTkwNGiK9AELfwxJYQD+G5c
- vx7+02edh7lBRrdAHN7ZqVDVu/Z6H7ph67vR4eLI7DN1MndQ70T/VL3fh//dPX+XwB9e
- +bFw==
-X-Gm-Message-State: AOAM53254FczUn/2z/+q2sFrtxfcpW7WR8cUtQj8kBs2zcZNi/MX0uga
- nB9Hn1DjuPYHPEsNnOLbtW8pfRFDx0288owOuNI=
-X-Google-Smtp-Source: ABdhPJwiB1vOcn/pFL0LIgyR674sYfNDPU+6tcSdnn/EzofGMdEPpqlJL0SEwDDayyphKvRiOFjG7trGR9nyfFPtdW8=
-X-Received: by 2002:a02:cccd:: with SMTP id k13mr514177jaq.135.1591830301443; 
- Wed, 10 Jun 2020 16:05:01 -0700 (PDT)
+ bh=cfw88q8YpGHDTaeCBc3RuvSXu5R8VG4uNh5NqTqiw18=;
+ b=NMQMmImSg1/kFXTk1z36UO8Yw1KUnx8UT6HWCJlpdriZubAO6b5VCTmrU2ENPtLARU
+ 30/6fgwEDfGeuejGcNC2OcUUrGEQ9TtTCfQkuGRBqIM/lkCshGmL+x7LhLO9OxIFnkDT
+ 9bD3AqkiW7BHd/5gZeW3suYkzz2gMnvDoX4bK5fh9CiFuscIoYVePioWWYwtM3hbV6Bq
+ kgwWQ9UYb/J8MCtjaSbBvflZi5HHwcF9xleMuESMlxIPw1T9ZVFtDKqrnWGR791DGF7i
+ 4GQLwfOzmWeg3e89C7T1BsJe7PiF0exs0fP28kYOo3accwI1HxjzVnDbxTyN85QHw7DD
+ Gzfg==
+X-Gm-Message-State: AOAM533sPy18YPMXUjPkzMg6mkm7Z0ew9sej7f4xiPqpDdq4jo0aP9AE
+ oiaHYvvb8yvWNVehbINpxCvHYT6vs651HqaDrAk=
+X-Google-Smtp-Source: ABdhPJxQuFdGf8vAyiR+1RDgE2ioNspeojHTjsg8nzeXCOYHvk0Ey9R0D82Yfj3R6Irqmx+EFxLIw72YwkAr5ZAv5Sw=
+X-Received: by 2002:a92:aa07:: with SMTP id j7mr5375744ili.40.1591830394238;
+ Wed, 10 Jun 2020 16:06:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <1591342707-9729-1-git-send-email-bmeng.cn@gmail.com>
- <1591342707-9729-3-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1591342707-9729-3-git-send-email-bmeng.cn@gmail.com>
+ <1591342707-9729-4-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1591342707-9729-4-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 10 Jun 2020 15:55:38 -0700
-Message-ID: <CAKmqyKOTf4iFZ+4vnw-hzcmyXZc1GPHPATfw-icC-+ObGzmm8g@mail.gmail.com>
-Subject: Re: [PATCH 3/4] riscv: Generalize CPU init routine for the imacu CPU
+Date: Wed, 10 Jun 2020 15:57:11 -0700
+Message-ID: <CAKmqyKNu4rBYrcxshoVAfQUkw4wvm3DgNEGS++BjV2S9C377fw@mail.gmail.com>
+Subject: Re: [PATCH 4/4] riscv: Keep the CPU init routine names consistent
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -53,8 +53,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -77,99 +77,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2020 23:05:16 -0000
+X-List-Received-Date: Wed, 10 Jun 2020 23:06:49 -0000
 
-On Fri, Jun 5, 2020 at 12:40 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Fri, Jun 5, 2020 at 12:44 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> There is no need to have two functions that have almost the same
-> codes for 32-bit and 64-bit imacu CPUs.
+> Adding a _ to keep some consistency among the CPU init routines.
+
+We now differ from the actual ISA strings, but as these are internal
+functions I don't think it matters. This seems clearer.
+
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> ---
->
->  target/riscv/cpu.c | 31 ++++++++++---------------------
->  1 file changed, 10 insertions(+), 21 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index e66488f..c5c2abc 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -142,23 +142,23 @@ static void rvnn_gcsu_priv1_10_0_cpu_init(Object *obj)
->      set_resetvec(env, DEFAULT_RSTVEC);
->  }
->
-> -#if defined(TARGET_RISCV32)
-> -
-> -static void rv32imcu_nommu_cpu_init(Object *obj)
-> +static void rvnn_imacu_nommu_cpu_init(Object *obj)
-
-Same request with rvxx_*
-
-Otherwise:
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>
+>  target/riscv/cpu.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index c5c2abc..5060534 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -153,7 +153,7 @@ static void rvnn_imacu_nommu_cpu_init(Object *obj)
+>
+>  #if defined(TARGET_RISCV32)
+>
+> -static void rv32imcu_nommu_cpu_init(Object *obj)
+> +static void rv32_imcu_nommu_cpu_init(Object *obj)
 >  {
 >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> -    set_misa(env, RV32 | RVI | RVM | RVC | RVU);
-> +    set_misa(env, RVXLEN | RVI | RVM | RVA | RVC | RVU);
->      set_priv_version(env, PRIV_VERSION_1_10_0);
-> -    set_resetvec(env, 0x8090);
-> +    set_resetvec(env, DEFAULT_RSTVEC);
+>      set_misa(env, RV32 | RVI | RVM | RVC | RVU);
+> @@ -162,7 +162,7 @@ static void rv32imcu_nommu_cpu_init(Object *obj)
 >      qdev_prop_set_bit(DEVICE(obj), "mmu", false);
 >  }
 >
-> -static void rv32imacu_nommu_cpu_init(Object *obj)
-> +#if defined(TARGET_RISCV32)
-> +
-> +static void rv32imcu_nommu_cpu_init(Object *obj)
+> -static void rv32imafcu_nommu_cpu_init(Object *obj)
+> +static void rv32_imafcu_nommu_cpu_init(Object *obj)
 >  {
 >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> -    set_misa(env, RV32 | RVI | RVM | RVA | RVC | RVU);
-> +    set_misa(env, RV32 | RVI | RVM | RVC | RVU);
->      set_priv_version(env, PRIV_VERSION_1_10_0);
-> -    set_resetvec(env, DEFAULT_RSTVEC);
-> +    set_resetvec(env, 0x8090);
->      qdev_prop_set_bit(DEVICE(obj), "mmu", false);
->  }
->
-> @@ -171,17 +171,6 @@ static void rv32imafcu_nommu_cpu_init(Object *obj)
->      qdev_prop_set_bit(DEVICE(obj), "mmu", false);
->  }
->
-> -#elif defined(TARGET_RISCV64)
-> -
-> -static void rv64imacu_nommu_cpu_init(Object *obj)
-> -{
-> -    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> -    set_misa(env, RV64 | RVI | RVM | RVA | RVC | RVU);
-> -    set_priv_version(env, PRIV_VERSION_1_10_0);
-> -    set_resetvec(env, DEFAULT_RSTVEC);
-> -    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
-> -}
-> -
->  #endif
->
->  static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
-> @@ -587,12 +576,12 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>      set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVC | RVU);
+> @@ -575,9 +575,9 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>      DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
 >  #if defined(TARGET_RISCV32)
 >      DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           riscv_base_cpu_init),
->      DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32imcu_nommu_cpu_init),
-> -    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32imacu_nommu_cpu_init),
-> +    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rvnn_imacu_nommu_cpu_init),
->      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32imafcu_nommu_cpu_init),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32imcu_nommu_cpu_init),
+> +    DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32_imcu_nommu_cpu_init),
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rvnn_imacu_nommu_cpu_init),
+> -    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32imafcu_nommu_cpu_init),
+> +    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32_imafcu_nommu_cpu_init),
 >      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rvnn_gcsu_priv1_10_0_cpu_init),
 >  #elif defined(TARGET_RISCV64)
 >      DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           riscv_base_cpu_init),
-> -    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64imacu_nommu_cpu_init),
-> +    DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rvnn_imacu_nommu_cpu_init),
->      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rvnn_gcsu_priv1_10_0_cpu_init),
->  #endif
->  };
 > --
 > 2.7.4
 >
