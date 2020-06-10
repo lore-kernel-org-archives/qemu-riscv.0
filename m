@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jj95v-0004Lv-1k
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Jun 2020 18:21:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42544)
+	id 1jj95w-0004NU-De
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Jun 2020 18:21:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42550)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=4234ccaf3=alistair.francis@wdc.com>)
- id 1jj95u-0004Ki-0G; Wed, 10 Jun 2020 18:21:14 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:59124)
+ id 1jj95u-0004LP-Ge; Wed, 10 Jun 2020 18:21:14 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:59139)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=4234ccaf3=alistair.francis@wdc.com>)
- id 1jj95s-000237-5K; Wed, 10 Jun 2020 18:21:13 -0400
+ id 1jj95t-00023G-5A; Wed, 10 Jun 2020 18:21:14 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1591827671; x=1623363671;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=9bD3QKWUr5LwbqJAQBdeqwpAm4nMqwx4Rcj7yirIh6Y=;
- b=B2miHGniKtUzHgoa6rHxtlac8GKxZWv6pIV21zx9Zhc9lBodeC1rrQtC
- dgOsAaChGLy0C1pEKpIKDYOSPf8YIrWUToTbf+EmKQluViWQ7nuUkScLZ
- zGad+vDdNBxfquvXRCx1+z/8fTkcbKxG/g3n5sxqTNO+qkNLd7QbkflXA
- NZ/B74sGAT9jg2QxaZ3qQHjZhMBep56m1FyRvFdY/dhjmzEUSdX4LdqpL
- +D+IE5r8qVOG5POii/y96Xe1TtGT8MH6GW/4m3oeiUqwxY3FvHaLi8pyX
- YTNqp96ltGE10ZaAxwI7iRtsy0s5pukv1+BRl+CAgV7o6WnrgW8Iot6uM w==;
-IronPort-SDR: WW8xMXxV6yB//Hr05R8Y/FdqdsQug6qQWGUgTudBTpCgqIeILhc+C7WpdkCDNm7eRHu70qidiv
- luboDhnwWyljUAkGmczCf7pU9+Sy7Ehx5PbJFQS+/K8Q/JV1lcahwoM0nTrZjRbKRx1jew9Tyk
- LYDKCmrwuTP5WQJI0rZQDBSFaIcvH68eM1Rj7W76pKifYIDVWM8rN3PhHWbiOxdKMP7kCiGDe5
- 5FJnhkZ5pcCdmYSho5fh/nuM7O1md3rZrjnnrc12AuV0idE+voipjVUk8saLEtvKmJ+CsLI/+/
- m5U=
-X-IronPort-AV: E=Sophos;i="5.73,497,1583164800"; d="scan'208";a="248819305"
+ t=1591827672; x=1623363672;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=VXvPydcV3oG3Eb03rcTetmZt+5SiUVZX+S5uCVjMvU0=;
+ b=UhHufcQbVm8/D5MwY1t+JOVatkOacwUZv+YQfdNK1jdF2setAhSybomj
+ Kgxx/gZrHYssZ3PmgLOYw04KwDbrmfNnFBM/IkZxK/7NbogBgzUVP0c7z
+ hdkVqdpPk7l1BGeGxemQE6fd7ensv2j31qOkrozpBdfGC8fvGBzMmPtDL
+ fMsPO60IuWe4Sdv3Fou+ISF0BrmbDCHinB0cyHFsl8Usy9kuSdwMs+DBf
+ mfdYZnm9p81Lqm8twG+otb+d8Q8zKBcv9C8H1Nh2IiTWIV/oEG5OKtVZB
+ CDtMU33Dl4XRsdODKu8xpMyX0aq9oQDZMtpmNzzkMT+w/m9lQLEMm2fqS w==;
+IronPort-SDR: EATAsk3piwtgSUlEms79f5+neN7EeeYUVqu0mdkIwdDvPCZso7/eg2S21/IU4sttX3nOJJmPTo
+ QGgPht37UIFOybIZ7utfSNpOx1xCcL38/Do3Li+Ag6vQGZponKcZXqQz+bSIJRa1Rp0hzU5PXd
+ XBqmoC+SEB6tSjaRBGrBz5QAXb3pJT9xfSOhj8MwdlPpjRmChTl1J6ANNKslap5+mK7WcXSFEr
+ fuC4/QeOG9hM8AkHtdHjDB6xY4Sk+pkvybLBEROFNbEUJe0TktE9TnPrGm1VFSP/wBiwxWLBB9
+ GqE=
+X-IronPort-AV: E=Sophos;i="5.73,497,1583164800"; d="scan'208";a="248819307"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 11 Jun 2020 06:21:05 +0800
-IronPort-SDR: rojVYqLLuCpys4+s6mewY5hqayIiEwNJKLJikeQUlTpG+zglSDlnsEZgfDwh6K3o1vvbXSoCwu
- +pGx9d4t1nrEMSxQrxDTqgQTLIB5eWTBg=
+ by ob1.hgst.iphmx.com with ESMTP; 11 Jun 2020 06:21:08 +0800
+IronPort-SDR: em4gQod2I33wuftNjaByBDw6F0otLSJ83K1BHjnxKG5Eako8NldvC1RhvCbX1v3VmooQmmJDxs
+ hkO5ZPmYwg80NLqLjMEL90vov1OdhoCkc=
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Jun 2020 15:10:31 -0700
-IronPort-SDR: zp3Ed/5IYkYhE+L/rju4LJzXZm4JbNssRwmRIJxOk8/W/7vrxpl1ECNS3Ruoi1BoisXPYTH3IG
- kJljxZ3MrJjQ==
+ 10 Jun 2020 15:10:34 -0700
+IronPort-SDR: P6gAm0pnUqwEmpqtCZdhD5DJ+E2EhUL0nCJzbWwK6vFzlwehSZeEr1DwJ4s/ocsFMQbyarnxUA
+ c4fgxITEzR9w==
 WDCIronportException: Internal
 Received: from us4qd5p12.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.58.34])
- by uls-op-cesaip02.wdc.com with ESMTP; 10 Jun 2020 15:21:05 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 10 Jun 2020 15:21:08 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v6 0/6]  RISC-V Add the OpenTitan Machine
-Date: Wed, 10 Jun 2020 15:12:08 -0700
-Message-Id: <cover.1591827110.git.alistair.francis@wdc.com>
+Subject: [PATCH v6 1/6] riscv/opentitan: Fix the ROM size
+Date: Wed, 10 Jun 2020 15:12:11 -0700
+Message-Id: <6cb4f31c9b72af4fb81848c233e1be77d1e0e83c.1591827110.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <cover.1591827110.git.alistair.francis@wdc.com>
+References: <cover.1591827110.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=68.232.141.245;
  envelope-from=prvs=4234ccaf3=alistair.francis@wdc.com;
@@ -80,70 +81,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2020 22:21:14 -0000
+X-List-Received-Date: Wed, 10 Jun 2020 22:21:15 -0000
 
-OpenTitan is an open source silicon Root of Trust (RoT) project. This
-series adds initial support for the OpenTitan machine to QEMU.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reported-by: Damien Hedde <damien.hedde@greensocs.com>
+---
+ hw/riscv/opentitan.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This series add the Ibex CPU to the QEMU RISC-V target. It then adds the
-OpenTitan machine, the Ibex UART and the Ibex PLIC.
-
-The UART has been tested sending and receiving data.
-
-With this series QEMU can boot the OpenTitan ROM, Tock OS and a Tock
-userspace app.
-
-The Ibex PLIC is similar to the RISC-V PLIC (and is based on the QEMU
-implementation) with some differences. The hope is that the Ibex PLIC
-will converge to follow the RISC-V spec. As that happens I want to
-update the QEMU Ibex PLIC and hopefully eventually replace the current
-PLIC as the implementation is a little overlay complex.
-
-For more details on OpenTitan, see here: https://docs.opentitan.org/
-
-v6:
- - Rebase on master (some patches applied)
- - Fix the ROM address
-v5:
- - Add some of the missing unimplemented devices
- - Don't set PMP feature in init() function
-v4:
- - Don't set the reset vector in realise
- - Fix a bug where the MMU is always enabled
- - Fixup the PMP/MMU size logic
-v3:
- - Small fixes pointed out in review
-v2:
- - Rebase on master
- - Get uart receive working
-
-
-
-Alistair Francis (6):
-  riscv/opentitan: Fix the ROM size
-  hw/char: Initial commit of Ibex UART
-  hw/intc: Initial commit of lowRISC Ibex PLIC
-  riscv/opentitan: Connect the PLIC device
-  riscv/opentitan: Connect the UART device
-  target/riscv: Use a smaller guess size for no-MMU PMP
-
- include/hw/char/ibex_uart.h  | 110 ++++++++
- include/hw/intc/ibex_plic.h  |  63 +++++
- include/hw/riscv/opentitan.h |  16 ++
- hw/char/ibex_uart.c          | 492 +++++++++++++++++++++++++++++++++++
- hw/intc/ibex_plic.c          | 261 +++++++++++++++++++
- hw/riscv/opentitan.c         |  45 +++-
- target/riscv/pmp.c           |  14 +-
- MAINTAINERS                  |   4 +
- hw/char/Makefile.objs        |   1 +
- hw/intc/Makefile.objs        |   1 +
- hw/riscv/Kconfig             |   4 +
- 11 files changed, 1001 insertions(+), 10 deletions(-)
- create mode 100644 include/hw/char/ibex_uart.h
- create mode 100644 include/hw/intc/ibex_plic.h
- create mode 100644 hw/char/ibex_uart.c
- create mode 100644 hw/intc/ibex_plic.c
-
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index b4fb836466..6c7359c190 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -30,7 +30,7 @@ static const struct MemmapEntry {
+     hwaddr base;
+     hwaddr size;
+ } ibex_memmap[] = {
+-    [IBEX_ROM] =            {  0x00008000,   0xc000 },
++    [IBEX_ROM] =            {  0x00008000, 16 * KiB },
+     [IBEX_RAM] =            {  0x10000000,  0x10000 },
+     [IBEX_FLASH] =          {  0x20000000,  0x80000 },
+     [IBEX_UART] =           {  0x40000000,  0x10000 },
 -- 
 2.26.2
 
