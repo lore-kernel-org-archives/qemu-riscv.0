@@ -1,70 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jkuyE-0008Kt-AG
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 15:40:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48438)
+	id 1jkvuD-0002qk-Q7
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 16:40:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33314)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jkuyC-0008HV-M8; Mon, 15 Jun 2020 15:40:36 -0400
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:39125)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jkuyA-0006i0-Qa; Mon, 15 Jun 2020 15:40:36 -0400
-Received: by mail-il1-x143.google.com with SMTP id p5so147602ile.6;
- Mon, 15 Jun 2020 12:40:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Jp42kBAUA7U2Nm7mn62S8Xlr804bOEMiFEW0kgbKwVI=;
- b=ukzvHSyE0c55e+3LGTVDlSKHcgOygIT/JJGTyjS6zmypAUcKMtEI5NIlMUUD5/9tOV
- 8m/doAXv8UGp2NQbsq5I3tEzWEhTwRtFg/pvsI3HxHb4ZoCnlGcKB5OJ/tGyyBAZGdY2
- Q/fW3VoJuin8s6+skLpayTAS9QlL3vH5wHhTcFvTEpBVwSdlku+UvHhWTO9eyN3GG5Oc
- EM1Yb7OzNyZmbbeXyRc6CyskAAzQ3Z7sHoWpuxshmdoB94SMtQ59pVkVpZphKrv8k6mI
- Ft3qjoEUpiS2C69IdlL4Jyv+LbLp+OcE/qdZxZ7FQcQ13qnU1DgIqk2fA4uFIhQf6Lsq
- H5RA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Jp42kBAUA7U2Nm7mn62S8Xlr804bOEMiFEW0kgbKwVI=;
- b=mNtTe3rkJ+tCAc53BjERbrgvkymYXWZo2iqRCOFXU5rw7Kbrv7+UgwG9AiYPJgOhUc
- 9zFaKsCogjUtMWTvafgGqe83seFtmmyj09MxIpQxPLBf34OdH0TP4M/dnAtq4LYPVTRj
- 4H1h9jneyywHtRvKEJj4XMMEEhe9cHVKE7X0G4SMd/DW6iwp3oblPVLUdXtmqgzD00/e
- qMaCcadRWIF1zOM2587w4b1WnbGLPW6eV/0EJ+LHtPTCvlta8scDsOTh7hF9cpoCXiw9
- F/D3efKVTyK3x1nEz0E8qxktGuCXMO87RvIZz4ptzAVPmjEe6SAw1+kf9ev2zroultjj
- nTxA==
-X-Gm-Message-State: AOAM533FsJYO2QsbE5lNQE5XKku8KHR8i5kWbvXj5Ae5PjdHZLDv8b/J
- atUJkTsJbp6g368r2sPzIDIjFkYaKd6tYmYpDZA=
-X-Google-Smtp-Source: ABdhPJwzPr1BqWIrmpRv82VTDaH6puajnLzQZrlVAOmYoLH9/lk22G3C94vF3jrqYUT6vEmtToJxj3pV69BUK2mqIeo=
-X-Received: by 2002:a92:aa07:: with SMTP id j7mr28365902ili.40.1592250033326; 
- Mon, 15 Jun 2020 12:40:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jkvuC-0002n1-0q
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2020 16:40:32 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:23215
+ helo=us-smtp-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jkvu9-0000WM-93
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2020 16:40:31 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1592253628;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cXxT+Y1BlIeR9aoBSeiIfSphfi5tyAp8cTijqQDYx7g=;
+ b=hzK7XG5K0dsoj1oM9Jd5tc7Fx1jHZJPAqtWNohIhUo0ZHAaP/si2JMPBkuKM/6uPM6zXBc
+ wVvhJecQLH9JzpsVNNHR695VhNNRKTSzvEUhgGrFBdIm7xPQTivJM4vM7lFMx5z1138Jy7
+ M4ms4l/AmmqAHWBNcC2rbVQrPTxonoU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-41-ok2Z6i8_OiOxpl3sOAHKQg-1; Mon, 15 Jun 2020 16:40:26 -0400
+X-MC-Unique: ok2Z6i8_OiOxpl3sOAHKQg-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BA95C100CCC2;
+ Mon, 15 Jun 2020 20:40:24 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-112-121.ams2.redhat.com
+ [10.36.112.121])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 5D6086ED96;
+ Mon, 15 Jun 2020 20:40:24 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 6904611358DF; Mon, 15 Jun 2020 22:40:08 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PULL 22/84] riscv: Fix type of SiFive[EU]SocState, member parent_obj
+Date: Mon, 15 Jun 2020 22:39:06 +0200
+Message-Id: <20200615204008.3069956-23-armbru@redhat.com>
+In-Reply-To: <20200615204008.3069956-1-armbru@redhat.com>
+References: <20200615204008.3069956-1-armbru@redhat.com>
 MIME-Version: 1.0
-References: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Jun 2020 12:31:10 -0700
-Message-ID: <CAKmqyKOtX5QpBDY_e+Z93ALqStqRKo8DF_2=ShGEFF6WDy_95w@mail.gmail.com>
-Subject: Re: [PATCH 00/15] hw/riscv: sifive_u: Add GPIO and Mode Select
- (MSEL[3:0]) support
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=_AUTOLEARN
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=armbru@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=207.211.31.120; envelope-from=armbru@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/15 16:40:20
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,72 +80,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2020 19:40:37 -0000
+X-List-Received-Date: Mon, 15 Jun 2020 20:40:32 -0000
 
-On Mon, Jun 8, 2020 at 7:18 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> This series updates the 'sifive_u' machine support:
->
-> - Add GPIO controller support
-> - Support reboot functionality via GPIO pin#10
-> - Change SiFive E/U series CPU reset vector to 0x1004
-> - Support Mode Select (MSEL[3:0]) settings at 0x1000 via a new
->   "msel" machine property
-> - Add a dummy DDR memory controller device
->
-> The series also does some clean-ups to the existing codes.
->
-> With this series, QEMU can boot U-Boot SPL built for SiFive FU540
-> all the way up to loading U-Boot proper from MMC:
->
-> $ qemu-system-riscv64 -nographic -M sifive_u,msel=6 -m 8G -bios u-boot-spl.bin
->
-> U-Boot SPL 2020.07-rc3-00208-g88bd5b1 (Jun 08 2020 - 20:16:10 +0800)
-> Trying to boot from MMC1
-> Unhandled exception: Load access fault
-> EPC: 0000000008009be6 TVAL: 0000000010050014
->
-> The last big gap for the 'sifive_u' machine is the QSPI modeling.
->
->
-> Bin Meng (15):
->   hw/riscv: sifive_e: Remove the riscv_ prefix of the machine* and soc*
->     functions
->   hw/riscv: opentitan: Remove the riscv_ prefix of the machine* and soc*
->     functions
->   hw/riscv: sifive_u: Simplify the GEM IRQ connect code a little bit
->   hw/riscv: sifive_u: Generate device tree node for OTP
->   hw/riscv: sifive_gpio: Clean up the codes
->   hw/riscv: sifive_gpio: Add a new 'ngpio' property
->   hw/riscv: sifive_u: Hook a GPIO controller
->   hw/riscv: sifive_gpio: Do not blindly trigger output IRQs
->   hw/riscv: sifive_u: Add reset functionality
->   hw/riscv: sifive_u: Rename serial property get/set functions to a
->     generic name
->   hw/riscv: sifive_u: Add a new property msel for MSEL pin state
->   hw/riscv: sifive: Change SiFive E/U CPU reset vector to 0x1004
->   hw/riscv: sifive_u: Support different boot source per MSEL pin state
->   hw/riscv: sifive_u: Sort the SoC memmap table entries
->   hw/riscv: sifive_u: Add a dummy DDR memory controller device
+Device "riscv.sifive.e.soc" is a direct subtype of TYPE_DEVICE, but
+its instance struct SiFiveESoCState's member @parent_obj is
+SysBusDevice instead of DeviceState.  Correct that.
 
-I have applied patches 1 to 11 to the RISC-V branch.
+Same for "riscv.sifive.u.soc"'s instance struct SiFiveUSoCState.
 
-Alistair
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Cc: qemu-riscv@nongnu.org
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Message-Id: <20200609122339.937862-21-armbru@redhat.com>
+---
+ include/hw/riscv/sifive_e.h | 2 +-
+ include/hw/riscv/sifive_u.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
->
->  hw/riscv/opentitan.c           |  29 ++++----
->  hw/riscv/sifive_e.c            |  32 +++++----
->  hw/riscv/sifive_gpio.c         |  45 +++++++-----
->  hw/riscv/sifive_u.c            | 158 ++++++++++++++++++++++++++++++++++-------
->  include/hw/riscv/sifive_gpio.h |   8 ++-
->  include/hw/riscv/sifive_u.h    |  27 +++++++
->  target/riscv/cpu.c             |   4 +-
->  7 files changed, 223 insertions(+), 80 deletions(-)
->
-> --
-> 2.7.4
->
->
+diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+index 414992119e..d386ea9223 100644
+--- a/include/hw/riscv/sifive_e.h
++++ b/include/hw/riscv/sifive_e.h
+@@ -29,7 +29,7 @@
+ 
+ typedef struct SiFiveESoCState {
+     /*< private >*/
+-    SysBusDevice parent_obj;
++    DeviceState parent_obj;
+ 
+     /*< public >*/
+     RISCVHartArrayState cpus;
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index 16c297ec5f..5f62cf5f85 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -31,7 +31,7 @@
+ 
+ typedef struct SiFiveUSoCState {
+     /*< private >*/
+-    SysBusDevice parent_obj;
++    DeviceState parent_obj;
+ 
+     /*< public >*/
+     CPUClusterState e_cluster;
+-- 
+2.26.2
+
 
