@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jkrve-0003gB-Rz
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 12:25:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55672)
+	id 1jks5l-0004g3-Q3
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 12:36:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59274)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jkrvd-0003dh-G9; Mon, 15 Jun 2020 12:25:45 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:35287)
+ id 1jks5j-0004db-NX; Mon, 15 Jun 2020 12:36:11 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:41893)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jkrvb-0005ri-K5; Mon, 15 Jun 2020 12:25:45 -0400
-Received: by mail-il1-x141.google.com with SMTP id l6so15916144ilo.2;
- Mon, 15 Jun 2020 09:25:42 -0700 (PDT)
+ id 1jks5Y-000866-7c; Mon, 15 Jun 2020 12:36:10 -0400
+Received: by mail-il1-x142.google.com with SMTP id c75so15889989ila.8;
+ Mon, 15 Jun 2020 09:35:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=dQ5LoBJa98wS90Nxh809A9yRdP+gFz2r5u+kWj+K9M8=;
- b=BWyl8BBngJ8Ry47KgF5VZPni6B21QUjdJ/fo3xeKTvNMQ/WGZUM8K2zvmBCkMZF920
- knlVoAPoL81vsJsFqQmGZEyfHWi/ND7Q19VtOxpIDjfXVDbdz3KHeH8kLNjKHW49Yq8o
- F64L7/yCxOB0xlHFErqFQWz1qz5sSJz+Fk23Ind2fqgy5VH2sfsjwM2SoyggbTccEk+U
- 4EADLAnot88CDZD8zmfAZyR2F/TYxyt5UDyqk1Nrb/m8uD71Cd5MLja4GNSbwcb7yoGG
- 4JdlAd+Zxf67ZSxwH1RDraS5CZ0Uq0nq5+js17PhbGKVuBBfMs4sgTh7p0xJ3JDfSQrB
- RSag==
+ :cc; bh=1FfcsUCEPsTQru4RMbM6Ct+uStqLhgT5r5WtCZkqnhc=;
+ b=e49CxYh3o08wSweeet18/meOqvgswFFXcslJumGUJv8wRlA+9pLeiEugWg/n3b7d3b
+ 1zACh7YtuS5jCD967nbNQPya1+10xo+b0pmrrH7tXyrvA/ojKwNCuXvmu4V5o7d1ucvh
+ 5IwuRcyW7Jk7dfc7mmBHgSURE1BF6xQ6tYhQ9oossPhrg4yqu1bdmLGhnBEsVBFaFleN
+ Twom+FaMGSjIr8jE4N7CwtzXPvwtsUCukjp4b1ETjHAelR+lWN5TiPivxGmmiYYNBR0B
+ rDw2l9I5DJV2puBc0qUlXscIly07ARZjX8edSxZTAqG/DXkaD0YgVMo/+sQlw1DxarxB
+ WxhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=dQ5LoBJa98wS90Nxh809A9yRdP+gFz2r5u+kWj+K9M8=;
- b=lCzk8Ey1e21Kr32RHnGZ5iwwcdVy3u9zWgMp5eaH4gNZO0UpjM6u1LE/fN+pfHkq+Q
- MBDRwZatvQQivunHKp9wj4Pw6mJ7wlyi21UG2JiSPn2wj0DTvD2rVDmwMxagkhcI04Ho
- OsfVJIF/OrX6vFGURK8WvLhFPgiqPYKrDRPUb8DWm+Z0tP3MxQXSccBVw0AT/DIE3GIE
- 3ebcBHcALW77hrsa4KC0ls4TUTFqDPTVvGzFu6U9gck+R7nfKj+DqD4r2SSZLrtqRHAi
- uDkiRItUt/UCsP2BDtJbjFcvXumn7aQiz57zJHcO7M9AKh5+VYKhnzrBdz6gF4fDS+2P
- hd6Q==
-X-Gm-Message-State: AOAM531hYdJXGBTkn7GEXIXvO4p90RHquV0mLypo39OSf+DxHV4evl7Y
- yTNm94EAGgRsgGWgqeSq8KCtqMgt1yQyOUDI2ag=
-X-Google-Smtp-Source: ABdhPJxITfSUlRNk80cq2efY+iqSaunDdfDZ98JoN20EIkBp1NXxSU1K1WY9EAG6jpb1MbsdKIu7C6PNFRflIULq9Bs=
-X-Received: by 2002:a92:bb45:: with SMTP id w66mr27913427ili.131.1592238342153; 
- Mon, 15 Jun 2020 09:25:42 -0700 (PDT)
+ bh=1FfcsUCEPsTQru4RMbM6Ct+uStqLhgT5r5WtCZkqnhc=;
+ b=rp8uYnO1ZO2xSTz1Ksn9134Xm6JpoCMvTdSS0ToYvvfFDjfA7KORa77oJLmvbYshpg
+ 8ZN1VicOJKmBCydNnIdLEmH629rektQO6kwUfCT/GET+xkBV7LPlx05uY0udBgOJGNpW
+ 239aahA/lW0/gGydZci18nwDxoZHTiua3Ra9O3d7ZNzHcFYt0GOGjSjTSBD2ocV1Jfm6
+ ITpndABOZGlTDu5+6OJLUOKaX2uWpUU/TBqGsJX6/SlVxy8L34KtI1PGJGzqStWqHT8v
+ aaOJqwPY9yMz55CdxiTKOOin3cNbM46aE+LU2SwKo9E79l9bssEAP/BaCeQes7su04I1
+ KTBA==
+X-Gm-Message-State: AOAM530AJ23G/ORKzalOgbg8hIFOLTATmRSlkzAujfQRSaghOmJeuUii
+ /w3mP2JNmIEfQ4sdmB25P0tXRshq98gGNF+2MXE=
+X-Google-Smtp-Source: ABdhPJzhkvE6+bl2S8SK1jjcMJTAe6659sNToiZJ4UzNkv2KzSzUecml+I0IkATVOOHspverLAdvfOmoUNCqXN/jAUY=
+X-Received: by 2002:a92:aa07:: with SMTP id j7mr27627729ili.40.1592238958090; 
+ Mon, 15 Jun 2020 09:35:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
- <1591625864-31494-7-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1591625864-31494-7-git-send-email-bmeng.cn@gmail.com>
+ <1591625864-31494-8-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1591625864-31494-8-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Jun 2020 09:16:19 -0700
-Message-ID: <CAKmqyKOtfnWEABV92Ovj6wWwKwrMq0uTA797VJp7wp3ojkxgbw@mail.gmail.com>
-Subject: Re: [PATCH 06/15] hw/riscv: sifive_gpio: Add a new 'ngpio' property
+Date: Mon, 15 Jun 2020 09:26:34 -0700
+Message-ID: <CAKmqyKOMW5r-K-G=rftzrfvCgF_Pw6T40CH+Sjmetn4zjrivYg@mail.gmail.com>
+Subject: Re: [PATCH 07/15] hw/riscv: sifive_u: Hook a GPIO controller
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -53,8 +53,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -77,14 +77,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2020 16:25:45 -0000
+X-List-Received-Date: Mon, 15 Jun 2020 16:36:12 -0000
 
-On Mon, Jun 8, 2020 at 7:22 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Jun 8, 2020 at 7:24 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> Add a new property to represent the number of GPIO pins supported
-> by the GPIO controller.
+> SiFive FU540 SoC integrates a GPIO controller with 16 GPIO lines.
+> This hooks the exsiting SiFive GPIO model to the SoC, and adds its
+> device tree data as well.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
@@ -94,106 +95,144 @@ Alistair
 
 > ---
 >
->  hw/riscv/sifive_gpio.c         | 30 +++++++++++++++++++-----------
->  include/hw/riscv/sifive_gpio.h |  3 +++
->  2 files changed, 22 insertions(+), 11 deletions(-)
+>  hw/riscv/sifive_u.c         | 44 ++++++++++++++++++++++++++++++++++++++++++--
+>  include/hw/riscv/sifive_u.h | 19 +++++++++++++++++++
+>  2 files changed, 61 insertions(+), 2 deletions(-)
 >
-> diff --git a/hw/riscv/sifive_gpio.c b/hw/riscv/sifive_gpio.c
-> index c9cffa2..0d0fd2b 100644
-> --- a/hw/riscv/sifive_gpio.c
-> +++ b/hw/riscv/sifive_gpio.c
-> @@ -14,6 +14,7 @@
->  #include "qemu/osdep.h"
->  #include "qemu/log.h"
->  #include "hw/irq.h"
-> +#include "hw/qdev-properties.h"
->  #include "hw/riscv/sifive_gpio.h"
->  #include "migration/vmstate.h"
->  #include "trace.h"
-> @@ -28,7 +29,7 @@ static void update_output_irq(SIFIVEGPIOState *s)
->      pending |= s->rise_ip & s->rise_ie;
->      pending |= s->fall_ip & s->fall_ie;
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 8dc6842..881949b 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -11,8 +11,9 @@
+>   * 1) CLINT (Core Level Interruptor)
+>   * 2) PLIC (Platform Level Interrupt Controller)
+>   * 3) PRCI (Power, Reset, Clock, Interrupt)
+> - * 4) OTP (One-Time Programmable) memory with stored serial number
+> - * 5) GEM (Gigabit Ethernet Controller) and management block
+> + * 4) GPIO (General Purpose Input/Output Controller)
+> + * 5) OTP (One-Time Programmable) memory with stored serial number
+> + * 6) GEM (Gigabit Ethernet Controller) and management block
+>   *
+>   * This board currently generates devicetree dynamically that indicates at least
+>   * two harts and up to five harts.
+> @@ -75,6 +76,7 @@ static const struct MemmapEntry {
+>      [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
+>      [SIFIVE_U_UART0] =    { 0x10010000,     0x1000 },
+>      [SIFIVE_U_UART1] =    { 0x10011000,     0x1000 },
+> +    [SIFIVE_U_GPIO] =     { 0x10060000,     0x1000 },
+>      [SIFIVE_U_OTP] =      { 0x10070000,     0x1000 },
+>      [SIFIVE_U_FLASH0] =   { 0x20000000, 0x10000000 },
+>      [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
+> @@ -268,6 +270,28 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      g_free(cells);
+>      g_free(nodename);
 >
-> -    for (int i = 0; i < SIFIVE_GPIO_PINS; i++) {
-> +    for (int i = 0; i < s->ngpio; i++) {
->          pin = 1 << i;
->          qemu_set_irq(s->irq[i], (pending & pin) != 0);
->          trace_sifive_gpio_update_output_irq(i, (pending & pin) != 0);
-> @@ -41,7 +42,7 @@ static void update_state(SIFIVEGPIOState *s)
->      bool prev_ival, in, in_mask, port, out_xor, pull, output_en, input_en,
->          rise_ip, fall_ip, low_ip, high_ip, oval, actual_value, ival;
+> +    nodename = g_strdup_printf("/soc/gpio@%lx",
+> +        (long)memmap[SIFIVE_U_GPIO].base);
+> +    qemu_fdt_add_subnode(fdt, nodename);
+> +    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
+> +        prci_phandle, PRCI_CLK_TLCLK);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells", 2);
+> +    qemu_fdt_setprop(fdt, nodename, "interrupt-controller", NULL, 0);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "#gpio-cells", 2);
+> +    qemu_fdt_setprop(fdt, nodename, "gpio-controller", NULL, 0);
+> +    qemu_fdt_setprop_cells(fdt, nodename, "reg",
+> +        0x0, memmap[SIFIVE_U_GPIO].base,
+> +        0x0, memmap[SIFIVE_U_GPIO].size);
+> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupts", SIFIVE_U_GPIO_IRQ0,
+> +        SIFIVE_U_GPIO_IRQ1, SIFIVE_U_GPIO_IRQ2, SIFIVE_U_GPIO_IRQ3,
+> +        SIFIVE_U_GPIO_IRQ4, SIFIVE_U_GPIO_IRQ5, SIFIVE_U_GPIO_IRQ6,
+> +        SIFIVE_U_GPIO_IRQ7, SIFIVE_U_GPIO_IRQ8, SIFIVE_U_GPIO_IRQ9,
+> +        SIFIVE_U_GPIO_IRQ10, SIFIVE_U_GPIO_IRQ11, SIFIVE_U_GPIO_IRQ12,
+> +        SIFIVE_U_GPIO_IRQ13, SIFIVE_U_GPIO_IRQ14, SIFIVE_U_GPIO_IRQ15);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
+> +    qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,gpio0");
+> +    g_free(nodename);
+> +
+>      phy_phandle = phandle++;
+>      nodename = g_strdup_printf("/soc/ethernet@%lx",
+>          (long)memmap[SIFIVE_U_GEM].base);
+> @@ -525,6 +549,8 @@ static void sifive_u_soc_instance_init(Object *obj)
 >
-> -    for (i = 0; i < SIFIVE_GPIO_PINS; i++) {
-> +    for (i = 0; i < s->ngpio; i++) {
+>      sysbus_init_child_obj(obj, "prci", &s->prci, sizeof(s->prci),
+>                            TYPE_SIFIVE_U_PRCI);
+> +    sysbus_init_child_obj(obj, "gpio", &s->gpio, sizeof(s->gpio),
+> +                          TYPE_SIFIVE_GPIO);
+>      sysbus_init_child_obj(obj, "otp", &s->otp, sizeof(s->otp),
+>                            TYPE_SIFIVE_U_OTP);
+>      sysbus_init_child_obj(obj, "gem", &s->gem, sizeof(s->gem),
+> @@ -618,6 +644,20 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>      object_property_set_bool(OBJECT(&s->prci), true, "realized", &err);
+>      sysbus_mmio_map(SYS_BUS_DEVICE(&s->prci), 0, memmap[SIFIVE_U_PRCI].base);
 >
->          prev_ival = extract32(s->value, i, 1);
->          in        = extract32(s->in, i, 1);
-> @@ -346,27 +347,35 @@ static const VMStateDescription vmstate_sifive_gpio = {
->      }
+> +    qdev_prop_set_uint32(DEVICE(&s->gpio), "ngpio", 16);
+> +    object_property_set_bool(OBJECT(&s->gpio), true, "realized", &err);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio), 0, memmap[SIFIVE_U_GPIO].base);
+> +
+> +    /* Pass all GPIOs to the SOC layer so they are available to the board */
+> +    qdev_pass_gpios(DEVICE(&s->gpio), dev, NULL);
+> +
+> +    /* Connect GPIO interrupts to the PLIC */
+> +    for (i = 0; i < 16; i++) {
+> +        sysbus_connect_irq(SYS_BUS_DEVICE(&s->gpio), i,
+> +                           qdev_get_gpio_in(DEVICE(s->plic),
+> +                                            SIFIVE_U_GPIO_IRQ0 + i));
+> +    }
+> +
+>      qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
+>      object_property_set_bool(OBJECT(&s->otp), true, "realized", &err);
+>      sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_OTP].base);
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index 16c297e..dcf7f3b 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -22,6 +22,7 @@
+>  #include "hw/net/cadence_gem.h"
+>  #include "hw/riscv/riscv_hart.h"
+>  #include "hw/riscv/sifive_cpu.h"
+> +#include "hw/riscv/sifive_gpio.h"
+>  #include "hw/riscv/sifive_u_prci.h"
+>  #include "hw/riscv/sifive_u_otp.h"
+>
+> @@ -40,6 +41,7 @@ typedef struct SiFiveUSoCState {
+>      RISCVHartArrayState u_cpus;
+>      DeviceState *plic;
+>      SiFiveUPRCIState prci;
+> +    SIFIVEGPIOState gpio;
+>      SiFiveUOTPState otp;
+>      CadenceGEMState gem;
+>
+> @@ -73,6 +75,7 @@ enum {
+>      SIFIVE_U_PRCI,
+>      SIFIVE_U_UART0,
+>      SIFIVE_U_UART1,
+> +    SIFIVE_U_GPIO,
+>      SIFIVE_U_OTP,
+>      SIFIVE_U_FLASH0,
+>      SIFIVE_U_DRAM,
+> @@ -83,6 +86,22 @@ enum {
+>  enum {
+>      SIFIVE_U_UART0_IRQ = 4,
+>      SIFIVE_U_UART1_IRQ = 5,
+> +    SIFIVE_U_GPIO_IRQ0 = 7,
+> +    SIFIVE_U_GPIO_IRQ1 = 8,
+> +    SIFIVE_U_GPIO_IRQ2 = 9,
+> +    SIFIVE_U_GPIO_IRQ3 = 10,
+> +    SIFIVE_U_GPIO_IRQ4 = 11,
+> +    SIFIVE_U_GPIO_IRQ5 = 12,
+> +    SIFIVE_U_GPIO_IRQ6 = 13,
+> +    SIFIVE_U_GPIO_IRQ7 = 14,
+> +    SIFIVE_U_GPIO_IRQ8 = 15,
+> +    SIFIVE_U_GPIO_IRQ9 = 16,
+> +    SIFIVE_U_GPIO_IRQ10 = 17,
+> +    SIFIVE_U_GPIO_IRQ11 = 18,
+> +    SIFIVE_U_GPIO_IRQ12 = 19,
+> +    SIFIVE_U_GPIO_IRQ13 = 20,
+> +    SIFIVE_U_GPIO_IRQ14 = 21,
+> +    SIFIVE_U_GPIO_IRQ15 = 22,
+>      SIFIVE_U_GEM_IRQ = 0x35
 >  };
 >
-> -static void sifive_gpio_init(Object *obj)
-> +static Property sifive_gpio_properties[] = {
-> +    DEFINE_PROP_UINT32("ngpio", SIFIVEGPIOState, ngpio, SIFIVE_GPIO_PINS),
-> +    DEFINE_PROP_END_OF_LIST(),
-> +};
-> +
-> +static void sifive_gpio_realize(DeviceState *dev, Error **errp)
->  {
-> -    SIFIVEGPIOState *s = SIFIVE_GPIO(obj);
-> +    SIFIVEGPIOState *s = SIFIVE_GPIO(dev);
->
-> -    memory_region_init_io(&s->mmio, obj, &gpio_ops, s,
-> +    memory_region_init_io(&s->mmio, OBJECT(dev), &gpio_ops, s,
->              TYPE_SIFIVE_GPIO, SIFIVE_GPIO_SIZE);
-> -    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
->
-> -    for (int i = 0; i < SIFIVE_GPIO_PINS; i++) {
-> -        sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->irq[i]);
-> +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-> +
-> +    for (int i = 0; i < s->ngpio; i++) {
-> +        sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq[i]);
->      }
->
-> -    qdev_init_gpio_in(DEVICE(s), sifive_gpio_set, SIFIVE_GPIO_PINS);
-> -    qdev_init_gpio_out(DEVICE(s), s->output, SIFIVE_GPIO_PINS);
-> +    qdev_init_gpio_in(DEVICE(s), sifive_gpio_set, s->ngpio);
-> +    qdev_init_gpio_out(DEVICE(s), s->output, s->ngpio);
->  }
->
->  static void sifive_gpio_class_init(ObjectClass *klass, void *data)
->  {
->      DeviceClass *dc = DEVICE_CLASS(klass);
->
-> +    device_class_set_props(dc, sifive_gpio_properties);
->      dc->vmsd = &vmstate_sifive_gpio;
-> +    dc->realize = sifive_gpio_realize;
->      dc->reset = sifive_gpio_reset;
->      dc->desc = "SiFive GPIO";
->  }
-> @@ -375,7 +384,6 @@ static const TypeInfo sifive_gpio_info = {
->      .name = TYPE_SIFIVE_GPIO,
->      .parent = TYPE_SYS_BUS_DEVICE,
->      .instance_size = sizeof(SIFIVEGPIOState),
-> -    .instance_init = sifive_gpio_init,
->      .class_init = sifive_gpio_class_init
->  };
->
-> diff --git a/include/hw/riscv/sifive_gpio.h b/include/hw/riscv/sifive_gpio.h
-> index ad915b2..cf12fcf 100644
-> --- a/include/hw/riscv/sifive_gpio.h
-> +++ b/include/hw/riscv/sifive_gpio.h
-> @@ -68,6 +68,9 @@ typedef struct SIFIVEGPIOState {
->      uint32_t out_xor;
->      uint32_t in;
->      uint32_t in_mask;
-> +
-> +    /* config */
-> +    uint32_t ngpio;
->  } SIFIVEGPIOState;
->
->  #endif /* SIFIVE_GPIO_H */
 > --
 > 2.7.4
 >
