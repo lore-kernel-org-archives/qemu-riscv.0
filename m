@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jkuYS-0001fl-Qg
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 15:14:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42556)
+	id 1jkuoO-0005wU-Ap
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 15:30:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46558)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jkuYQ-0001dY-Py; Mon, 15 Jun 2020 15:13:58 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:36367)
+ id 1jkuoL-0005u2-N4; Mon, 15 Jun 2020 15:30:25 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:34904)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jkuYP-0002G2-A4; Mon, 15 Jun 2020 15:13:58 -0400
-Received: by mail-io1-xd41.google.com with SMTP id r77so19173674ior.3;
- Mon, 15 Jun 2020 12:13:56 -0700 (PDT)
+ id 1jkuoH-00052Y-D4; Mon, 15 Jun 2020 15:30:25 -0400
+Received: by mail-il1-x143.google.com with SMTP id l6so280340ilo.2;
+ Mon, 15 Jun 2020 12:30:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=mie1W8ED9wBsurJiopqcHQ76fLIUB6I1Vlo4bhBlg1o=;
- b=AGBbsIE5rlgXnUYOLGKjjD14r1IvwjGB2DiDV0y0ag8FSHDPpZNrW7Cxur6cFK3tEZ
- f3DsEt60gQCIDGehro3PnFgy9UnEm82S5COR0/eifuqszpuREZmmPlAiB5vslDOYMNuP
- cqfc4I4BHXog9A63M24ljmuIX04OXa/jwLDwgONlRrMLABKpDqRHZIAHFYGrwI6iwLin
- rSiqt192j/bJWYNeyVPOl0Emt0uINI7wo0XB42zs2BqJt6tntjb3ikenobjfpTsFCYN4
- DLqcPG43VtCGLQo2bzRmu6RlPMQJ7PD0TWlSuaLLKZvUa4nxYi2GO543Gxsj2KVhhU+C
- 5Jpw==
+ :cc; bh=BlYRvqEWuxR/ZYBa39/RP6Znz9xpxQ6R4urwXV5zTDc=;
+ b=JTzssZegRqoHqkv/j+RJugehUxuICoGzFPttDjSCTs5e0Gr02eedaiOU3ttSYnBUpQ
+ rqpCO842yc4kI57U3Ck/qhUFFuAJk2JizSil+tL9zI5YCVndOx30yoWbWzA6hATTYT7p
+ mX2ANAZa/IaqwVhIVcpE5kUCyiI4QwiMRX3IdxdLuSN//ovN7mS3sBRLqfD6uYYrLrJM
+ G0iUo8RhK/S1/E3RDWCUIEwsxFoKgBTmTBfyr2wemJP/cFBD+BA/QHUCTG8lKY2AfiFA
+ lCz3seOh9Aga2w/T2iPhdUkA72oj7v0JsD1Vc+VAQnBXyDn4wdZK1sS6DfgO2OlUoRiW
+ lHVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=mie1W8ED9wBsurJiopqcHQ76fLIUB6I1Vlo4bhBlg1o=;
- b=NrJ4gJTp2vIWxombZf4Q3h6/asxkumNpF9CCmzWMtbsTLVCFzs51KnBPt4shVR+uHE
- Cl0F2RAIf4XB3+IRBb7OYDLBett7sbvapm5Rhx8pO2n39Bn24gkjKKw1ZpvJzORIkyS6
- XXDEyO6POCz6rbA3TJTa2nAWD002kGLzd9b7NDplM2Qp+9J0Lrc5tDS5Xnl6dLI2tWDu
- IM7Aluutwjn+i70kHyyedJKcYg4bb7R3B1IMotPXo/V4d52YYxUIc7Qz5wlN597jOxxU
- 4gKvpyGQMVoyNKNcxXqSxntKeu5fbCUFU9Uvy2+N8wjinJQltS5OdZk37Xc9oDqwG4Du
- 6s0w==
-X-Gm-Message-State: AOAM530rdUva3D1o/RlhIV0ARjcI1RjEYVD7RCvstuFJxiYdFnNiI2Z2
- Y/y2yWSzWEbokw6mMunlWs3en9tSmK0AUoJTpTw=
-X-Google-Smtp-Source: ABdhPJxPGEBcxs/KpmUffJdb6ILjHFVU3/YOYFqUzWTnDlTSTzmSCYM/s8/h7P8z1qXnz3hVrHVfaKgLEz6coSSjQw0=
-X-Received: by 2002:a5d:9d03:: with SMTP id j3mr28866066ioj.176.1592248436042; 
- Mon, 15 Jun 2020 12:13:56 -0700 (PDT)
+ bh=BlYRvqEWuxR/ZYBa39/RP6Znz9xpxQ6R4urwXV5zTDc=;
+ b=otp2f3n7hTSvBOFb4fgBS6ZIje3ZhSXFrsPPBN+gpViOR5jXf+o5S9WRJe+AksCY3e
+ PgY11IEZDkVJVuSCGf2gJ2TxYlK4kzBtg2BfFdcqM4XITdP+lp/zdQFSNNj3DxQx6hYn
+ 4y1nKvlpuHE2L1nQ/5qkqj2Wuvs/SvJ5VShXPHawb2iUormnbqXim3Qu0FFSbSZkYCzD
+ cRykumuGi7SOa8Qh9FM+MjzTaR7o4YfHCfRWCzW4Eb+CsQMvCfajoG30eaaK98Yj8Dn6
+ g8GxX+WRM4fuow2TO/7GQ45xXRyMsQeCVDFrcjjurvkIV9do4mK5ftwNZx1XUdJELpca
+ zjQw==
+X-Gm-Message-State: AOAM530ZoisL0EdusjDg6FBfbAVr0SbYAIRQzX+Yc0Sok6X9LZWZqXJH
+ kXUp3oywmOzA1S0rhcFFzPYQD0RKWnPo8VkY/ZQ=
+X-Google-Smtp-Source: ABdhPJzBb0q++Slziex0FS5xoV9V623lYWHrLEZ+z6nVilQTkHvksZU7VOnWoPIqXk6OJYWqZXxtWokjpvM+Lwjlo5Y=
+X-Received: by 2002:a92:aa07:: with SMTP id j7mr28329592ili.40.1592249420009; 
+ Mon, 15 Jun 2020 12:30:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
- <1591625864-31494-15-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1591625864-31494-15-git-send-email-bmeng.cn@gmail.com>
+ <1591625864-31494-16-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1591625864-31494-16-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Jun 2020 12:04:32 -0700
-Message-ID: <CAKmqyKOAqrQu-s8Sco=bC-JZgemuQN=2N3DVHZ22HCgWCPGz7g@mail.gmail.com>
-Subject: Re: [PATCH 14/15] hw/riscv: sifive_u: Sort the SoC memmap table
- entries
+Date: Mon, 15 Jun 2020 12:20:56 -0700
+Message-ID: <CAKmqyKMFTyZqbtNT932Dq8sSR593j=QhvJB=htRKji8mcP0+PA@mail.gmail.com>
+Subject: Re: [PATCH 15/15] hw/riscv: sifive_u: Add a dummy DDR memory
+ controller device
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -54,8 +54,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -78,13 +78,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2020 19:13:59 -0000
+X-List-Received-Date: Mon, 15 Jun 2020 19:30:26 -0000
 
-On Mon, Jun 8, 2020 at 7:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Jun 8, 2020 at 7:29 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> Move the flash and DRAM to the end of the SoC memmap table.
+> It is enough to simply map the SiFive FU540 DDR memory controller
+> into the MMIO space using create_unimplemented_device(), to make
+> the upstream U-Boot v2020.07 DDR memory initialization codes happy.
+>
+> Note we do not generate device tree fragment for the DDR memory
+> controller. Since the controller data in device tree consumes a
+> very large space (see fu540-hifive-unleashed-a00-ddr.dtsi in the
+> U-Boot source), and it is only needed by U-Boot SPL but not any
+> operating system, we choose not to generate the fragment here.
+> This also means when testing with U-Boot SPL, the device tree has
+> to come from U-Boot SPL itself, but not the one generated by QEMU
+> on the fly. The memory has to be set to 8GiB to match the real
+> HiFive Unleashed board when invoking QEMU (-m 8G).
+>
+> With this commit, QEMU can boot U-Boot SPL built for SiFive FU540
+> all the way up to loading U-Boot proper from MMC:
+>
+> $ qemu-system-riscv64 -nographic -M sifive_u,msel=6 -m 8G -bios u-boot-spl.bin
+>
+> U-Boot SPL 2020.07-rc3-00208-g88bd5b1 (Jun 08 2020 - 20:16:10 +0800)
+> Trying to boot from MMC1
+> Unhandled exception: Load access fault
+> EPC: 0000000008009be6 TVAL: 0000000010050014
+>
+> The above exception is expected because QSPI is unsupported yet.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
@@ -92,28 +116,47 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+>
 > ---
 >
->  hw/riscv/sifive_u.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  hw/riscv/sifive_u.c         | 4 ++++
+>  include/hw/riscv/sifive_u.h | 1 +
+>  2 files changed, 5 insertions(+)
 >
 > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index f64aa52..c94ff6f 100644
+> index c94ff6f..7923df4 100644
 > --- a/hw/riscv/sifive_u.c
 > +++ b/hw/riscv/sifive_u.c
-> @@ -80,10 +80,10 @@ static const struct MemmapEntry {
->      [SIFIVE_U_UART1] =    { 0x10011000,     0x1000 },
->      [SIFIVE_U_GPIO] =     { 0x10060000,     0x1000 },
+> @@ -82,6 +82,7 @@ static const struct MemmapEntry {
 >      [SIFIVE_U_OTP] =      { 0x10070000,     0x1000 },
-> -    [SIFIVE_U_FLASH0] =   { 0x20000000, 0x10000000 },
-> -    [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
 >      [SIFIVE_U_GEM] =      { 0x10090000,     0x2000 },
 >      [SIFIVE_U_GEM_MGMT] = { 0x100a0000,     0x1000 },
-> +    [SIFIVE_U_FLASH0] =   { 0x20000000, 0x10000000 },
-> +    [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
+> +    [SIFIVE_U_DMC] =      { 0x100b0000,    0x10000 },
+>      [SIFIVE_U_FLASH0] =   { 0x20000000, 0x10000000 },
+>      [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
 >  };
+> @@ -733,6 +734,9 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
 >
->  #define OTP_SERIAL          1
+>      create_unimplemented_device("riscv.sifive.u.gem-mgmt",
+>          memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
+> +
+> +    create_unimplemented_device("riscv.sifive.u.dmc",
+> +        memmap[SIFIVE_U_DMC].base, memmap[SIFIVE_U_DMC].size);
+>  }
+>
+>  static Property sifive_u_soc_props[] = {
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index 5d80f91..3e33646 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -78,6 +78,7 @@ enum {
+>      SIFIVE_U_UART1,
+>      SIFIVE_U_GPIO,
+>      SIFIVE_U_OTP,
+> +    SIFIVE_U_DMC,
+>      SIFIVE_U_FLASH0,
+>      SIFIVE_U_DRAM,
+>      SIFIVE_U_GEM,
 > --
 > 2.7.4
 >
