@@ -1,49 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jksEU-0004rp-6t
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 12:45:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38240)
+	id 1jksI3-0007SG-E6
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 12:48:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39258)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jksES-0004rV-Vb; Mon, 15 Jun 2020 12:45:12 -0400
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:33146)
+ id 1jksHz-0007R7-Uc; Mon, 15 Jun 2020 12:48:52 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:44565)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jksER-0002Og-6o; Mon, 15 Jun 2020 12:45:12 -0400
-Received: by mail-il1-x143.google.com with SMTP id z2so15938129ilq.0;
- Mon, 15 Jun 2020 09:45:10 -0700 (PDT)
+ id 1jksHy-00039B-EY; Mon, 15 Jun 2020 12:48:51 -0400
+Received: by mail-il1-x143.google.com with SMTP id i1so15901679ils.11;
+ Mon, 15 Jun 2020 09:48:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=GxNE/Ziez4cPfywLHTGMClUB/FtlfEo8Us1ntedSN6k=;
- b=PWSl4OeFnGtgRFJeId32Nl7H1d/Xw6VkdEfIqCXr9MSHqtNy4okR0zMzQHfMhBmrJz
- 4wFlLUkMDad1c2G+aSKW14FnYmGDj6QxvXhXxTVXa0NOv7hdSlOc0F4K/KRU6/EQkJDu
- DXxAD7xSSsQOeeGliWwQsni7XK37Nnv3XZOGX6Ly97k56DYDsBKjnZTWghUleg99iUyb
- KVdPVjXBjMxHahFTnx7lFxQ5YntYFSxyNq1lVfcrxeFzmHtCLOpSLX1ga9fPZJF0VGiO
- 0wnrfI7N+HSV6YTHiVjhh0YNxUSA8Be+mk7y/1CoA3QL+nEqvJ7DVeTOuLHSvtj9kgaw
- WYTA==
+ :cc; bh=yHItOiITX7pnZGV3EgK7vfMRWWkWCREC1RJ2BfBpJM0=;
+ b=p077mU2Mwimh8dngzuy/g+Ey7/Jrcq5YoyY1EfwCeXcFnl5vIiUEb/4S+3rBYVGS0A
+ C6gMSHPBDQPZ6MYAcKZ8rZg3lvbb5rAuPyl01KrjiG4EYzIfCS+UvS5AJwMRc9bSMaZK
+ BtYIerdGauOCB4n58LNwTSSoMMJiFKwEY7bkUC/3A8qdf3qLrZgc3cGsn0LMhLbvF9Un
+ VUB7Ou8m7KuteSuGBjX8Y9gaj8p06MfApp1QsbcLDqmstlcAY8YBghfDededxMy0Jhln
+ bFlKYkTF29lqBn+0qyiwkH2f1uQfS2FXwOhckCVup2E2d4ZHzIbeV4tAff1O/DNDZPIr
+ pkHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=GxNE/Ziez4cPfywLHTGMClUB/FtlfEo8Us1ntedSN6k=;
- b=SPTEuGzPB0O5xIPo588DviVe+cP6T11kHfwJ6+BsJYMAgUMjPIJy6Kuf2sQqcu8X7C
- DCmdwu6UChswMzLGJfWGAJ3ThDxwJXIQ32hO0h4Dge4oviD5HZ6Aonwjsvb6LdaWhWiZ
- I8Qa08iWP3cqirlI4KvZUF/b3p8BIwEnmbci8KQFKd+I+EIrRl1cNb5pN31dAKL22Zb9
- yo3huYw3TQzqCnRfLDrakCVRR7MmLXmyBIiQNJouTFkzlIHZQuV37aYuwcSeC2P48hWk
- sQboh/kzIC2uzp0EAeAhtutAgDlctN9jnOCJmAXfs3BF51uPITcwxktda7FgXvlrzreE
- yytw==
-X-Gm-Message-State: AOAM533ZiZrZBAvQbTjpZ4zPAlY6dX4yndZ5aIKC9dz3wxirnd8rwi9f
- ixTd4ARoE42T4YI4KyU7owwLslG1ieRA4I8vxaY=
-X-Google-Smtp-Source: ABdhPJzMLXA4Iv+4WNuMTizolkuI41FiH7KRC5EQf0a1fky4MBrrrwxCjKZSUDOT+yNBd0KpJ5CuFOBf1Nzr1EV9HBA=
-X-Received: by 2002:a92:c94b:: with SMTP id i11mr28306635ilq.177.1592239509661; 
- Mon, 15 Jun 2020 09:45:09 -0700 (PDT)
+ bh=yHItOiITX7pnZGV3EgK7vfMRWWkWCREC1RJ2BfBpJM0=;
+ b=UKFr4IMVZ8L7CyY+YteI6pTjiaonHJVP68pBoqWAcwb9HxcqsYynBBt99VFci3e3R0
+ amNKGkMPBn0VJ/tdy7xKHTCXhvon89iLWrMBzA4DwxqiewW6A+jsiqe6L10PHVpNA/VU
+ nEAt0Qu1kMor/w6eJRS6Czf6DtDstLRBOD3lBMVh24EwIzMzV5BESEoOV58/bWUJ+W2z
+ s+cXNjxfZysoWdjYe5B29x0NRlfOsSoFnkBw3Qc4OrVl6CuGOSzr/bBZsV9qrIgFf0pY
+ 0PYCS5kk0dCtOUkEUvg7eRiKF+LcxbptpB0tUtK47Jmhschi05D2A/VQIARE6T8mVRgz
+ FJtA==
+X-Gm-Message-State: AOAM532xkVsAbItQWf69NmCu0l8lfWqYYYWx3EQTiEP59I8+V5mmp//D
+ Bv4ZeCNiyUXy7UkQYrCH2Kwfemr3+5Tq2a+4lE+kjqN6
+X-Google-Smtp-Source: ABdhPJxaixL70p9q6a5LMxvLMdeXvQakkbULyPmi7aGGQkCL4NzRfIweT9VfSh8ARq5LmweILgxVwJ5i/rsNJP60kts=
+X-Received: by 2002:a92:bb45:: with SMTP id w66mr28013329ili.131.1592239729054; 
+ Mon, 15 Jun 2020 09:48:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
- <1591625864-31494-10-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1591625864-31494-10-git-send-email-bmeng.cn@gmail.com>
+ <1591625864-31494-11-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1591625864-31494-11-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Jun 2020 09:35:46 -0700
-Message-ID: <CAKmqyKMKzKeBECiUXDii7MdYp4gxU8zaStjXckfVEgNOqSF=4Q@mail.gmail.com>
-Subject: Re: [PATCH 09/15] hw/riscv: sifive_u: Add reset functionality
+Date: Mon, 15 Jun 2020 09:39:26 -0700
+Message-ID: <CAKmqyKNpqe6LDeTma0iaQ6yBNdjHgzKPRyepGiWcg6q2_Mu4fw@mail.gmail.com>
+Subject: Re: [PATCH 10/15] hw/riscv: sifive_u: Rename serial property get/set
+ functions to a generic name
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -77,16 +78,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2020 16:45:13 -0000
+X-List-Received-Date: Mon, 15 Jun 2020 16:48:52 -0000
 
-On Mon, Jun 8, 2020 at 7:23 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Jun 8, 2020 at 7:21 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> The HiFive Unleashed board wires GPIO pin#10 to the input of the
-> system reset signal. Let's set up the GPIO pin#10 and insert a
-> "gpio-restart" device tree node so that reboot is now functional
-> with QEMU 'sifive_u' machine.
+> In prepration to add more properties to this machine, rename the
+> existing serial property get/set functions to a generic name.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
@@ -96,88 +95,44 @@ Alistair
 
 > ---
 >
->  hw/riscv/sifive_u.c | 24 +++++++++++++++++++++++-
->  1 file changed, 23 insertions(+), 1 deletion(-)
+>  hw/riscv/sifive_u.c | 14 ++++++++------
+>  1 file changed, 8 insertions(+), 6 deletions(-)
 >
 > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 881949b..ef51874 100644
+> index ef51874..07e2ba0 100644
 > --- a/hw/riscv/sifive_u.c
 > +++ b/hw/riscv/sifive_u.c
-> @@ -37,6 +37,7 @@
->  #include "qapi/error.h"
->  #include "qapi/visitor.h"
->  #include "hw/boards.h"
-> +#include "hw/irq.h"
->  #include "hw/loader.h"
->  #include "hw/sysbus.h"
->  #include "hw/char/serial.h"
-> @@ -53,6 +54,7 @@
->  #include "net/eth.h"
->  #include "sysemu/arch_init.h"
->  #include "sysemu/device_tree.h"
-> +#include "sysemu/runstate.h"
->  #include "sysemu/sysemu.h"
->  #include "exec/address-spaces.h"
->
-> @@ -96,7 +98,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
->      uint32_t *cells;
->      char *nodename;
->      char ethclk_names[] = "pclk\0hclk";
-> -    uint32_t plic_phandle, prci_phandle, phandle = 1;
-> +    uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle = 1;
->      uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
->
->      fdt = s->fdt = create_device_tree(&s->fdt_size);
-> @@ -270,9 +272,11 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
->      g_free(cells);
->      g_free(nodename);
->
-> +    gpio_phandle = phandle++;
->      nodename = g_strdup_printf("/soc/gpio@%lx",
->          (long)memmap[SIFIVE_U_GPIO].base);
->      qemu_fdt_add_subnode(fdt, nodename);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "phandle", gpio_phandle);
->      qemu_fdt_setprop_cells(fdt, nodename, "clocks",
->          prci_phandle, PRCI_CLK_TLCLK);
->      qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells", 2);
-> @@ -292,6 +296,12 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
->      qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,gpio0");
->      g_free(nodename);
->
-> +    nodename = g_strdup_printf("/gpio-restart");
-> +    qemu_fdt_add_subnode(fdt, nodename);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "gpios", gpio_phandle, 10, 1);
-> +    qemu_fdt_setprop_string(fdt, nodename, "compatible", "gpio-restart");
-> +    g_free(nodename);
-> +
->      phy_phandle = phandle++;
->      nodename = g_strdup_printf("/soc/ethernet@%lx",
->          (long)memmap[SIFIVE_U_GEM].base);
-> @@ -352,6 +362,14 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
->      g_free(nodename);
+> @@ -481,14 +481,16 @@ static void sifive_u_machine_set_start_in_flash(Object *obj, bool value, Error *
+>      s->start_in_flash = value;
 >  }
 >
-> +static void sifive_u_machine_reset(void *opaque, int n, int level)
-> +{
-> +    /* gpio pin active low triggers reset */
-> +    if (!level) {
-> +        qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
-> +    }
-> +}
-> +
->  static void sifive_u_machine_init(MachineState *machine)
+> -static void sifive_u_machine_get_serial(Object *obj, Visitor *v, const char *name,
+> -                                void *opaque, Error **errp)
+> +static void sifive_u_machine_get_uint32_prop(Object *obj, Visitor *v,
+> +                                             const char *name, void *opaque,
+> +                                             Error **errp)
 >  {
->      const struct MemmapEntry *memmap = sifive_u_memmap;
-> @@ -383,6 +401,10 @@ static void sifive_u_machine_init(MachineState *machine)
->      memory_region_add_subregion(system_memory, memmap[SIFIVE_U_FLASH0].base,
->                                  flash0);
+>      visit_type_uint32(v, name, (uint32_t *)opaque, errp);
+>  }
 >
-> +    /* register gpio-restart */
-> +    qdev_connect_gpio_out(DEVICE(&(s->soc.gpio)), 10,
-> +                          qemu_allocate_irq(sifive_u_machine_reset, NULL, 0));
-> +
->      /* create device tree */
->      create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+> -static void sifive_u_machine_set_serial(Object *obj, Visitor *v, const char *name,
+> -                                void *opaque, Error **errp)
+> +static void sifive_u_machine_set_uint32_prop(Object *obj, Visitor *v,
+> +                                             const char *name, void *opaque,
+> +                                             Error **errp)
+>  {
+>      visit_type_uint32(v, name, (uint32_t *)opaque, errp);
+>  }
+> @@ -507,8 +509,8 @@ static void sifive_u_machine_instance_init(Object *obj)
+>
+>      s->serial = OTP_SERIAL;
+>      object_property_add(obj, "serial", "uint32",
+> -                        sifive_u_machine_get_serial,
+> -                        sifive_u_machine_set_serial, NULL, &s->serial);
+> +                        sifive_u_machine_get_uint32_prop,
+> +                        sifive_u_machine_set_uint32_prop, NULL, &s->serial);
+>      object_property_set_description(obj, "serial", "Board serial number");
+>  }
 >
 > --
 > 2.7.4
