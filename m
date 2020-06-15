@@ -1,50 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jks7Q-0006m1-2m
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 12:37:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35432)
+	id 1jksEU-0004rp-6t
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 12:45:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38240)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jks7N-0006iU-OT; Mon, 15 Jun 2020 12:37:53 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:34642)
+ id 1jksES-0004rV-Vb; Mon, 15 Jun 2020 12:45:12 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:33146)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jks7D-0000hk-7P; Mon, 15 Jun 2020 12:37:53 -0400
-Received: by mail-il1-x141.google.com with SMTP id x18so15942825ilp.1;
- Mon, 15 Jun 2020 09:37:42 -0700 (PDT)
+ id 1jksER-0002Og-6o; Mon, 15 Jun 2020 12:45:12 -0400
+Received: by mail-il1-x143.google.com with SMTP id z2so15938129ilq.0;
+ Mon, 15 Jun 2020 09:45:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=txXM3MgeLbWFZbvN7Of7+o1pSroCioT03fnhDcZg4Ok=;
- b=Ja9TLWo6uJ5AM5x0y5E7VYnyY2rRSFe7ND8EmQhwbsbsJj0bRlwfZ+4kxfU8EN9UrN
- hgyb70deIyhqSuABjCGggSlSxRlLpbklqbdANu4h70s3Z6Z5eJtDqfFdd7WEt8B0Kx3v
- Lup0VXHsmbblDDeAdmBDEhymDVJesQExwp7oUTiIxlxKtJ2ABDBAsK1D7dHJ8TVVvyLp
- 6Bx5fPUte1LWsjMXiJ3f9Ev0JACN23uwA31pVUwp+op75NNLY4vGSwh1CcuLeDVSV9Ve
- i5r/6L351HHaKiZZhT+n46N0oQjyvol0Nzb4trLFLVol34pDbbhfn/7GLLf0qouk47A1
- u3OA==
+ :cc; bh=GxNE/Ziez4cPfywLHTGMClUB/FtlfEo8Us1ntedSN6k=;
+ b=PWSl4OeFnGtgRFJeId32Nl7H1d/Xw6VkdEfIqCXr9MSHqtNy4okR0zMzQHfMhBmrJz
+ 4wFlLUkMDad1c2G+aSKW14FnYmGDj6QxvXhXxTVXa0NOv7hdSlOc0F4K/KRU6/EQkJDu
+ DXxAD7xSSsQOeeGliWwQsni7XK37Nnv3XZOGX6Ly97k56DYDsBKjnZTWghUleg99iUyb
+ KVdPVjXBjMxHahFTnx7lFxQ5YntYFSxyNq1lVfcrxeFzmHtCLOpSLX1ga9fPZJF0VGiO
+ 0wnrfI7N+HSV6YTHiVjhh0YNxUSA8Be+mk7y/1CoA3QL+nEqvJ7DVeTOuLHSvtj9kgaw
+ WYTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=txXM3MgeLbWFZbvN7Of7+o1pSroCioT03fnhDcZg4Ok=;
- b=QTcMWP4z8XsagxIFzKl/6x7olLvEW2p3uQFtkLrs58dlwd1XX1ks2f/q0+RX5Tth6Z
- ggKS3X/1jI1zL3GbLR+vIE7yCCGzCrjLw+9Ix1ygdeZ3wdZCQPdstb1PkX4+B+V2V8Yg
- YmL5PLEdNQU6XKOiU/GL8bOVXsUwUxp6QNBNs7PpOZxw8xny2pCK99+iU9ASHdnMzdpm
- 3vn+/+f54Iu7XBZ4CgkbbomqfLWCWoyiEsVemjh0L3U+XQ1Sq0o3bvjscyHP1TrnfKov
- GionVgEi2klD3nLNcRVHMqBGfElfmE7l5u5teAkJ20+55G/ziU+ggXi4CNyzvTuIXLM5
- sG9A==
-X-Gm-Message-State: AOAM532Qvp9tgQe1wxPasdTjBEttugRQFusBHb+qQLpa9JoYXn1OX2ac
- Zf8Q3nsqaWMmjSXUrqc8a6nceu17NapUJdWlOnE=
-X-Google-Smtp-Source: ABdhPJy8GuxAXfr6eotHbaemPoTuZCr69J28WcS6++MbyG6KJXB6xTfAqRCbnAAXKI8DBKPuCp6IQyFDlGEzyyg6giY=
-X-Received: by 2002:a92:aa07:: with SMTP id j7mr27636180ili.40.1592239061451; 
- Mon, 15 Jun 2020 09:37:41 -0700 (PDT)
+ bh=GxNE/Ziez4cPfywLHTGMClUB/FtlfEo8Us1ntedSN6k=;
+ b=SPTEuGzPB0O5xIPo588DviVe+cP6T11kHfwJ6+BsJYMAgUMjPIJy6Kuf2sQqcu8X7C
+ DCmdwu6UChswMzLGJfWGAJ3ThDxwJXIQ32hO0h4Dge4oviD5HZ6Aonwjsvb6LdaWhWiZ
+ I8Qa08iWP3cqirlI4KvZUF/b3p8BIwEnmbci8KQFKd+I+EIrRl1cNb5pN31dAKL22Zb9
+ yo3huYw3TQzqCnRfLDrakCVRR7MmLXmyBIiQNJouTFkzlIHZQuV37aYuwcSeC2P48hWk
+ sQboh/kzIC2uzp0EAeAhtutAgDlctN9jnOCJmAXfs3BF51uPITcwxktda7FgXvlrzreE
+ yytw==
+X-Gm-Message-State: AOAM533ZiZrZBAvQbTjpZ4zPAlY6dX4yndZ5aIKC9dz3wxirnd8rwi9f
+ ixTd4ARoE42T4YI4KyU7owwLslG1ieRA4I8vxaY=
+X-Google-Smtp-Source: ABdhPJzMLXA4Iv+4WNuMTizolkuI41FiH7KRC5EQf0a1fky4MBrrrwxCjKZSUDOT+yNBd0KpJ5CuFOBf1Nzr1EV9HBA=
+X-Received: by 2002:a92:c94b:: with SMTP id i11mr28306635ilq.177.1592239509661; 
+ Mon, 15 Jun 2020 09:45:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
- <1591625864-31494-9-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1591625864-31494-9-git-send-email-bmeng.cn@gmail.com>
+ <1591625864-31494-10-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1591625864-31494-10-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Jun 2020 09:28:18 -0700
-Message-ID: <CAKmqyKNwobjiCpQAVPhmwsf+y1w88g=P8x+pCT1JESLy8zf+ZA@mail.gmail.com>
-Subject: Re: [PATCH 08/15] hw/riscv: sifive_gpio: Do not blindly trigger
- output IRQs
+Date: Mon, 15 Jun 2020 09:35:46 -0700
+Message-ID: <CAKmqyKMKzKeBECiUXDii7MdYp4gxU8zaStjXckfVEgNOqSF=4Q@mail.gmail.com>
+Subject: Re: [PATCH 09/15] hw/riscv: sifive_u: Add reset functionality
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -54,8 +53,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -78,15 +77,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2020 16:37:54 -0000
+X-List-Received-Date: Mon, 15 Jun 2020 16:45:13 -0000
 
-On Mon, Jun 8, 2020 at 7:24 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Jun 8, 2020 at 7:23 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> At present the GPIO output IRQs are triggered each time any GPIO
-> register is written. However this is not correct. We should only
-> trigger the output IRQ when the pin is configured as output enable.
+> The HiFive Unleashed board wires GPIO pin#10 to the input of the
+> system reset signal. Let's set up the GPIO pin#10 and insert a
+> "gpio-restart" device tree node so that reboot is now functional
+> with QEMU 'sifive_u' machine.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
@@ -96,24 +96,89 @@ Alistair
 
 > ---
 >
->  hw/riscv/sifive_gpio.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+>  hw/riscv/sifive_u.c | 24 +++++++++++++++++++++++-
+>  1 file changed, 23 insertions(+), 1 deletion(-)
 >
-> diff --git a/hw/riscv/sifive_gpio.c b/hw/riscv/sifive_gpio.c
-> index 0d0fd2b..aac6b44 100644
-> --- a/hw/riscv/sifive_gpio.c
-> +++ b/hw/riscv/sifive_gpio.c
-> @@ -76,7 +76,9 @@ static void update_state(SIFIVEGPIOState *s)
->              actual_value = pull;
->          }
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 881949b..ef51874 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -37,6 +37,7 @@
+>  #include "qapi/error.h"
+>  #include "qapi/visitor.h"
+>  #include "hw/boards.h"
+> +#include "hw/irq.h"
+>  #include "hw/loader.h"
+>  #include "hw/sysbus.h"
+>  #include "hw/char/serial.h"
+> @@ -53,6 +54,7 @@
+>  #include "net/eth.h"
+>  #include "sysemu/arch_init.h"
+>  #include "sysemu/device_tree.h"
+> +#include "sysemu/runstate.h"
+>  #include "sysemu/sysemu.h"
+>  #include "exec/address-spaces.h"
 >
-> -        qemu_set_irq(s->output[i], actual_value);
-> +        if (output_en) {
-> +            qemu_set_irq(s->output[i], actual_value);
-> +        }
+> @@ -96,7 +98,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      uint32_t *cells;
+>      char *nodename;
+>      char ethclk_names[] = "pclk\0hclk";
+> -    uint32_t plic_phandle, prci_phandle, phandle = 1;
+> +    uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle = 1;
+>      uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
 >
->          /* Input value */
->          ival = input_en && actual_value;
+>      fdt = s->fdt = create_device_tree(&s->fdt_size);
+> @@ -270,9 +272,11 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      g_free(cells);
+>      g_free(nodename);
+>
+> +    gpio_phandle = phandle++;
+>      nodename = g_strdup_printf("/soc/gpio@%lx",
+>          (long)memmap[SIFIVE_U_GPIO].base);
+>      qemu_fdt_add_subnode(fdt, nodename);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "phandle", gpio_phandle);
+>      qemu_fdt_setprop_cells(fdt, nodename, "clocks",
+>          prci_phandle, PRCI_CLK_TLCLK);
+>      qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells", 2);
+> @@ -292,6 +296,12 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,gpio0");
+>      g_free(nodename);
+>
+> +    nodename = g_strdup_printf("/gpio-restart");
+> +    qemu_fdt_add_subnode(fdt, nodename);
+> +    qemu_fdt_setprop_cells(fdt, nodename, "gpios", gpio_phandle, 10, 1);
+> +    qemu_fdt_setprop_string(fdt, nodename, "compatible", "gpio-restart");
+> +    g_free(nodename);
+> +
+>      phy_phandle = phandle++;
+>      nodename = g_strdup_printf("/soc/ethernet@%lx",
+>          (long)memmap[SIFIVE_U_GEM].base);
+> @@ -352,6 +362,14 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      g_free(nodename);
+>  }
+>
+> +static void sifive_u_machine_reset(void *opaque, int n, int level)
+> +{
+> +    /* gpio pin active low triggers reset */
+> +    if (!level) {
+> +        qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
+> +    }
+> +}
+> +
+>  static void sifive_u_machine_init(MachineState *machine)
+>  {
+>      const struct MemmapEntry *memmap = sifive_u_memmap;
+> @@ -383,6 +401,10 @@ static void sifive_u_machine_init(MachineState *machine)
+>      memory_region_add_subregion(system_memory, memmap[SIFIVE_U_FLASH0].base,
+>                                  flash0);
+>
+> +    /* register gpio-restart */
+> +    qdev_connect_gpio_out(DEVICE(&(s->soc.gpio)), 10,
+> +                          qemu_allocate_irq(sifive_u_machine_reset, NULL, 0));
+> +
+>      /* create device tree */
+>      create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+>
 > --
 > 2.7.4
 >
