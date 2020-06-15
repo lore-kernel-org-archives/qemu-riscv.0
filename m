@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jksJs-0000Dv-Or
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 12:50:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39696)
+	id 1jkuW4-0007hf-41
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 15:11:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42010)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jksJq-0000Db-2Y; Mon, 15 Jun 2020 12:50:47 -0400
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:34799)
+ id 1jkuW2-0007hC-P3; Mon, 15 Jun 2020 15:11:30 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:38742)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jksJn-0003RC-OF; Mon, 15 Jun 2020 12:50:45 -0400
-Received: by mail-il1-x143.google.com with SMTP id x18so15983713ilp.1;
- Mon, 15 Jun 2020 09:50:43 -0700 (PDT)
+ id 1jkuW1-00023O-8C; Mon, 15 Jun 2020 15:11:30 -0400
+Received: by mail-io1-xd43.google.com with SMTP id w18so19153073iom.5;
+ Mon, 15 Jun 2020 12:11:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=09cH+KrtXqLM7fQNz+W8DeIct8hAan40sX43VBh3y6o=;
- b=obq9J9OM6rEpc/fSbxryZ2XPu3FXTkkUT+vh5JAgdENTngGI+ipkMP7EMZrukyz/QO
- IcesIs/HlC54Cj4WEwbA3vrjRHgIDdgq9pDTFNMsVLBYDrdrga7R7puX7HjhkaS8AyK+
- 0s+3xqzdM4Nv+oBwNHIw043F8LeXKf/f514EwvDS9lI+fwaRsHT41D+UARHtQmroVqSJ
- sU/7mQWCVfVo8VWyjZHJTE0Hfqs4dTWS5ZcaccZI+QhyqB8qQiwKNta4YmgbY1QKGiYS
- c2jN8MZEZcTw5JsfxCTTI9oT+YCl8u633yzFYTz5Nc1EA+odirwxsiWU6/ZuKwVEGNaT
- kc5Q==
+ :cc; bh=B0a+QLYU8yk8rpZxCeahu7ArgLuOKIggwkFp2e9FmX0=;
+ b=Qehk/WqT+e6pZ3Ht/x+0ADMFi1w6jLUKG3FMfOpwKw25qWDs/h1ISaEYKTKy8NhBEQ
+ sr7ftrdoCD0Gw1K1y8TlKyv6NsUcVhW0kvTftsEcl0uCEdyI3bzQUbeM8N4cReW9oT3y
+ KPzfQi9BtmArZNIPhtCfQSqsdzcoM7mGh6oZBkpa04w+s6dcss8q5wpADlVicty281av
+ AHV2H7lY5OPq1gLE4nKbwStaCJl7bQPup7IY46y0Dcti5WMFqswGVTTTD8CkfM1Lwjc1
+ kf1+CaXtIij0JvA5vM1iibY403CP3LuODrmxkxvhvHtMDa2yxi099Te9bjovsz/5Qlan
+ RofA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=09cH+KrtXqLM7fQNz+W8DeIct8hAan40sX43VBh3y6o=;
- b=IUnkbqHKqXWI5Sg/9REzeT9rRx9StgakEhNWSf6nfeaTj+Oar6WEeLShzMYaQGiNij
- iISama+pHOoL3NT/Uvuuynsn64GiOe86D+ygXSLeOZWlXyQI5hfEJikxlH4WcWwi2Ddn
- zbbBugDZgXtZfDdoD8xpDmD4QKQVi60vDNFwBTFBXWGMxxi7UlPnKZCswCqEzsUnb1kC
- CCSGlxEBsuMdRtjVuSkauIeIMUDegtrLejD89awY1DWjCZuwL7kZsBrfa9+lEUj8ySjg
- iZ3tUxNirlIw47S0yZBgE/Fy/YdH4Yk8oHz1Vy/bVX9rYFvfeyXWiBd7HRPqnMtJCKQb
- lwnw==
-X-Gm-Message-State: AOAM533dtzURq4X5AQUgSDvpcMQkv3Ko4eLOmI2PP1Q2SQr4T+MLZE1O
- Hdb6Dxnpv5Pq1qlCU1Tdme3xkq809cR86h0DToE=
-X-Google-Smtp-Source: ABdhPJy4JJDhW2UyFHfnllSrwAMDhjTgouDagK1InPCxfyFn0MgSO2cLPviI9EUpYQaiYAeTFbWQN0RTJGK5/2v/01c=
-X-Received: by 2002:a92:bb45:: with SMTP id w66mr28021106ili.131.1592239842379; 
- Mon, 15 Jun 2020 09:50:42 -0700 (PDT)
+ bh=B0a+QLYU8yk8rpZxCeahu7ArgLuOKIggwkFp2e9FmX0=;
+ b=cqq9vcVjwP3N1FSCxI8EtyPq28uW9kJztBoCuvu6oJll0g1HTe0A65Bl6Ojop7Uf9r
+ DpNcPVnEzWaWdLvpFMaW3KtVBNiJtPvMPf7KyuF1EKqVeb/CmKzJ34eZSt9nXRTYPgCV
+ Po6x6aS52PIZP13YYFkthAyC8m1yaqlpGjxLRpxSXXVznpHpTYd/iaZE9dXhDcFG48wu
+ vzU1vy6+N2Gx4iKoYPefAj2Wfdu/86ql3uGa1qCnWLRVuT6VtmC/LwFS0weIhlgszw0j
+ QOi5iTJAoBPtqcV0mcSlMyoFyiEmv5v3UlvYmtmKYvPfENRivQaeUMo/8TEvYaqeQUkU
+ Qxtg==
+X-Gm-Message-State: AOAM530U5lmhG89nSFrZrpVKFBHzJ5Otk4LdgCO93oiDDQICol7B9N4z
+ d9O/BYdw99X8eZDugucuzLyaxFX9BQGwjLFeNh8=
+X-Google-Smtp-Source: ABdhPJzi0NOmnYE2zpx5CfD6Kjh6mYelRr1QlbqbUn07IET0Vcz1cTqnTm45Vpa7lnWh25cLrpiyxviwOB+A0nlOjUc=
+X-Received: by 2002:a6b:b503:: with SMTP id e3mr22381032iof.175.1592248287794; 
+ Mon, 15 Jun 2020 12:11:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <1591625864-31494-1-git-send-email-bmeng.cn@gmail.com>
- <1591625864-31494-12-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1591625864-31494-12-git-send-email-bmeng.cn@gmail.com>
+ <1591625864-31494-13-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1591625864-31494-13-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Jun 2020 09:41:19 -0700
-Message-ID: <CAKmqyKMGq_zNZBwbAFbtVVp0P_YvSD98ZqHg3=TvzOS5a6Qfag@mail.gmail.com>
-Subject: Re: [PATCH 11/15] hw/riscv: sifive_u: Add a new property msel for
- MSEL pin state
+Date: Mon, 15 Jun 2020 12:02:04 -0700
+Message-ID: <CAKmqyKOGMBhrHU+d1FO4NhPrPuK5tb09xV9SGZP5-xYdKwfSaQ@mail.gmail.com>
+Subject: Re: [PATCH 12/15] hw/riscv: sifive: Change SiFive E/U CPU reset
+ vector to 0x1004
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -54,8 +54,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -78,59 +78,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2020 16:50:47 -0000
+X-List-Received-Date: Mon, 15 Jun 2020 19:11:31 -0000
 
 On Mon, Jun 8, 2020 at 7:27 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> On SiFive FU540 SoC, the value stored at physical address 0x1000
-> stores the MSEL pin state that is used to control the next boot
-> location that ROM codes jump to.
->
-> Add a new property msel to sifive_u machine for this.
+> Per the SiFive manual, all E/U series CPU cores' reset vector is
+> at 0x1004. Update our codes to match the hardware.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> ---
+>
+>  hw/riscv/sifive_e.c | 8 +++++---
+>  hw/riscv/sifive_u.c | 6 +++---
+>  target/riscv/cpu.c  | 4 ++--
+>  3 files changed, 10 insertions(+), 8 deletions(-)
+>
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index 8fab152..f05cabd 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -98,9 +98,11 @@ static void sifive_e_machine_init(MachineState *machine)
+>          memmap[SIFIVE_E_DTIM].base, main_mem);
+>
+>      /* Mask ROM reset vector */
+> -    uint32_t reset_vec[2] = {
+> -        0x204002b7,        /* 0x1000: lui     t0,0x20400 */
+> -        0x00028067,        /* 0x1004: jr      t0 */
+> +    uint32_t reset_vec[4] = {
+> +        0x00000000,
+> +        0x204002b7,        /* 0x1004: lui     t0,0x20400 */
+> +        0x00028067,        /* 0x1008: jr      t0 */
+> +        0x00000000,
+>      };
+>
+>      /* copy in the reset vector in little_endian byte order */
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index aaa5adb..0a86ffc 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -433,18 +433,18 @@ static void sifive_u_machine_init(MachineState *machine)
+>
+>      /* reset vector */
+>      uint32_t reset_vec[8] = {
+> +        0x00000000,
+>          0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(dtb) */
+> -        0x02028593,                    /*     addi   a1, t0, %pcrel_lo(1b) */
+> +        0x01c28593,                    /*     addi   a1, t0, %pcrel_lo(1b) */
+>          0xf1402573,                    /*     csrr   a0, mhartid  */
+>  #if defined(TARGET_RISCV32)
+>          0x0182a283,                    /*     lw     t0, 24(t0) */
+>  #elif defined(TARGET_RISCV64)
+> -        0x0182b283,                    /*     ld     t0, 24(t0) */
+> +        0x0182e283,                    /*     lwu    t0, 24(t0) */
+>  #endif
+>          0x00028067,                    /*     jr     t0 */
+>          0x00000000,
+>          start_addr,                    /* start: .dword */
+> -        0x00000000,
+>                                         /* dtb: */
+>      };
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 5060534..1944ad6 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -139,7 +139,7 @@ static void rvnn_gcsu_priv1_10_0_cpu_init(Object *obj)
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+> -    set_resetvec(env, DEFAULT_RSTVEC);
+> +    set_resetvec(env, 0x1004);
+>  }
+>
+>  static void rvnn_imacu_nommu_cpu_init(Object *obj)
+> @@ -147,7 +147,7 @@ static void rvnn_imacu_nommu_cpu_init(Object *obj)
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      set_misa(env, RVXLEN | RVI | RVM | RVA | RVC | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+> -    set_resetvec(env, DEFAULT_RSTVEC);
+> +    set_resetvec(env, 0x1004);
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I know the Ibex CPU does the same thing, but I'm a little worried about this.
+
+At this rate we will have multiple generic (rvx_im*_cpu_init()) CPUs
+that don't have generic reset vectors. It might be best to rename the
+functions to match the actual CPUs in this case.
 
 Alistair
 
-> ---
->
->  hw/riscv/sifive_u.c         | 7 +++++++
->  include/hw/riscv/sifive_u.h | 1 +
->  2 files changed, 8 insertions(+)
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 07e2ba0..aaa5adb 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -507,6 +507,13 @@ static void sifive_u_machine_instance_init(Object *obj)
->                                      "Set on to tell QEMU's ROM to jump to "
->                                      "flash. Otherwise QEMU will jump to DRAM");
->
-> +    s->msel = 0;
-> +    object_property_add(obj, "msel", "uint32",
-> +                        sifive_u_machine_get_uint32_prop,
-> +                        sifive_u_machine_set_uint32_prop, NULL, &s->msel);
-> +    object_property_set_description(obj, "msel",
-> +                                    "Mode Select (MSEL[3:0]) pin state");
-> +
->      s->serial = OTP_SERIAL;
->      object_property_add(obj, "serial", "uint32",
->                          sifive_u_machine_get_uint32_prop,
-> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> index dcf7f3b..d82cfe0 100644
-> --- a/include/hw/riscv/sifive_u.h
-> +++ b/include/hw/riscv/sifive_u.h
-> @@ -63,6 +63,7 @@ typedef struct SiFiveUState {
->      int fdt_size;
->
->      bool start_in_flash;
-> +    uint32_t msel;
->      uint32_t serial;
->  } SiFiveUState;
+>      qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+>  }
 >
 > --
 > 2.7.4
