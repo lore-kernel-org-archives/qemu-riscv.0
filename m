@@ -1,61 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jl2Br-0000WQ-CJ
+	id 1jl2Br-0000Wl-JC
 	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 23:23:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43414)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43422)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=4298fe783=Anup.Patel@wdc.com>)
- id 1jl2Bo-0000SV-8t; Mon, 15 Jun 2020 23:23:08 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:24493)
+ id 1jl2Bp-0000T2-C6; Mon, 15 Jun 2020 23:23:09 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:58592)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=4298fe783=Anup.Patel@wdc.com>)
- id 1jl2Bi-0007be-QC; Mon, 15 Jun 2020 23:23:07 -0400
+ id 1jl2Bm-0007dC-KE; Mon, 15 Jun 2020 23:23:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1592277782; x=1623813782;
+ t=1592277787; x=1623813787;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:content-transfer-encoding:mime-version;
- bh=2/4gAOfhZqEKuUFJczqRipmnJlmMg873gQNyX6WrV+w=;
- b=pneEY6CYW/3fF1BKYwlFLK5/3veOgsZ3eHY4E34Bb2lhRV24Xag6qzqS
- D87VNu7d2cZpzL+Z51LOC/zh5t5Mc2bxIPCIkjcDNjBTg5yrBOEwXRdmi
- 2UFStc0L6DlDSxP2Q72L8XK3zIYmoMrHI7KEhLX/hOLscbQwEbRJnocUF
- yK04Modr/NmeQNwirZ8yFUHXenrNTBlaF1AKm976EuIMCNXWcUBQ0kmC4
- FyLRvDUAqxAC7wVhhrr6o8duh+be/4mU2krIsTUwdJdzkjLrTylpKA0Ws
- tFnRykkuryryCZ4iNZa8pEBkwnrUKzT0riu+0avrANm2IDU3eFx3hJ/mv g==;
-IronPort-SDR: 23nPPYk4/Ta9VOOkq8wTT2DHMN4/SwniWIu1WbZt3ZDuRRbWFLHiW6y5hzW8Mys9/dXJP+f4M0
- nv6uf//lrGgSxdkyjejmOgeuDDEKReA8LxvVz0/Nq1eNYMzP6EGl5n3H+h7HImyWt7+4ipRV1h
- C9LOWy4tKb6OYV3wKUnBWUaf7+NT7AO8DO+erlNdpCpKA8nTc77AtnDtioogjshluwC63lUoRv
- iyErkP0vXZXHfBPi816N3u59mUAZY9+VmSd61OIF6ColZKHoMxT1LyscvC01KchIWTMFEsEEK2
- nyA=
-X-IronPort-AV: E=Sophos;i="5.73,517,1583164800"; d="scan'208";a="140088524"
-Received: from mail-cys01nam02lp2056.outbound.protection.outlook.com (HELO
- NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.56])
- by ob1.hgst.iphmx.com with ESMTP; 16 Jun 2020 11:22:59 +0800
+ bh=itsAG0XTfmOAR7BnB4P9RjBCGIUIt6WWIMNonLcsJHs=;
+ b=e4ov34RF9GTHAWZMomrxnIv3TmWACQr85aJ6276lFADcwwC7cLYCyYUV
+ gIyHYlI7tioFEXCP9zlciz9tGjEysX2+Ii5NtxYPqSnO4dtfQDtNrcV+h
+ qezpW5G6vQkaScYPrxWXSU7wywpzXSNtKHY4XQHl/jG2VxUJQ+e97eteV
+ AxWUyjW/foCoYl07AU1Ye0AatEx9wWwOIpTXlHh+lY30mqPIkVUtSxczQ
+ ftm0AwTXIVZjody+Y4ZPV0XWF6KmPTEaAeDRvJ8UROu51EZSVcdVc43Vm
+ 3QkdirDTOpt+05kjumvwfL4Ljv86LHyOfufNSpOdMPuNoXNhCrei9tLD/ A==;
+IronPort-SDR: iUCwg690IM2VtgM0wyWWjXrv0+hXnQiiyRxCl14El2m8nz4RHxX2Ig+3n3Zc7y5h6Z628qKGJh
+ K/XjPfa0k5pw3fHLyHp9Zj1a+ASSL3Wt8/9gtdmde26SOX6/AL2j3YK0phmJ9WZVcYbXs70qBG
+ 7QnzuoKvPSA+CP093N+jgqqlqA9l8ycKvGYdDFibU1j7O5BRWlx0NseVJU9YNhdzEDXslAO4Qt
+ 2FPrZIWS2SBgllSh74jbW8h+s6EbS2BFpEKZ3iniFZlE9gbbBNozzOvFLzB4vrXE8D2vf3ta+0
+ JhE=
+X-IronPort-AV: E=Sophos;i="5.73,517,1583164800"; d="scan'208";a="141476254"
+Received: from mail-cys01nam02lp2054.outbound.protection.outlook.com (HELO
+ NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.54])
+ by ob1.hgst.iphmx.com with ESMTP; 16 Jun 2020 11:23:03 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NoMqZUaUSAyDoFw2JvTw9d0xYmgxtnV31qAGJo6AztOhrpt9ba0ryVoDOU25B9i/0jvFFJSqDu5q/Rtmys12qz8CPrplt6e3ti/QT/N/CRLKneyTqKQLUiOaJlbsKuhaWmn/X3NCu+7C/fvTG5b0Egb+tgrVdWwF0hm3HJW2cXzqfPxGcje5+QwpSOtiRtRRiZ8zr9WQvRSTiJDEZxqT06PwWwsfuhhEikIOxMSOeB5hCXz4FVfurFhuPDZWU5eerIKxz58aXO9aXCucfgtX6n6Oxu5QzgUc+BPIITVmTbZRVrawuS1HHmpk0HsGMXheDai2v9s58wtYrzVMz02Snw==
+ b=LHNAYWXLoXy6n66OnT3A7zDhAt5C0muhH4WLPAyEG0T6ugmw+p5qu6uaS3fWd/NkwlHiebDJBXx9yq2dd7J/eTNj/mWDBrrbOb4UWHyHaXFQ7H8e+Kr1hfzMSIuKnsnrGSnsLZRvEU1JHM0ZkPhXtFKayXjHBpZbhfmsA4v5HIyHHA0ehMUjfSyXOIenfy+WVAkIXKop9+JrN9oJeGwobXoaGJJZB6ySRduQHFQIetNR/vxRsyLTquWeeK9/kjH69U7dD7HzciHLTPyXNZmAclsvr9SqAkQ5RypKiJEYxMtqdqt6bqtRAF9nQ0p07Jw/AUSbwFq8J52zsan2JjQC6A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BE4PtQUtuBhdFtTA7wq0v7JDakws5ugoQdoLlYDQklA=;
- b=TFq+uI7MgemkThGuFZTGoxxxZQXfWPLReeALwZIQrfai8ZJ/QU9C84qfMf4vJM6racCjRWKMcQd4BGw2+krVQlaZiIjmRQ4Ing6gy1WIv4Tm4NziEkFJAY5zlx/L6x2E/+QjFbj6GnQmg/acMlIkkW+PJNqSN3JRUI5mZX8TDwuteE1kI0zKtcuI4xwVcmMrBdzlXnAxu5+vwiQwPTMH0Z2g+N8in/ex38MXNjcC1z4Zj6zfG94P0a71I/TNjlAScEPcPGnvI9XtXDBKPZA2esXqPWg+qdl+ZTbYIPZ7hOYMhbVUc7z/AA6KQp68g/ifvYlwoGxJYVxyGmH6TOONsA==
+ bh=C1UoFnBMHGDFo/lhpDYAeBqAxyZVXWgqXdU7eGZ82Gc=;
+ b=ckNWY01ajzzeT31tfR4A5IHP7lqGdh0VktqxqS6MZXMPQFZKDma5LjQ6cEQjzdLqwU/rYrVJLLunGIpnhs6nKrHJmT0saXzMq+1lyq4UyGakFhhLpND445x7K9UYI5drnvKcEQtUjwsWVEnD6OgXgoGlr25+PSt3roSzbgCyEgkeIln/YvXLl8Mz5fzaHaL2BsKKn0zIONXN9H9howBpnozs49N8mVbcK2d4VjEed2iliB9rkk+8FhCSlRZZAgiV5Ah4CDIV3VeTNxsQ5QOe9yVB/sCLTRxw7JesqtJUNQO5EKpPFi4lPAk/w6Jo+Y+Y0r1qIOlH0uvCdAc1O+ksNQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BE4PtQUtuBhdFtTA7wq0v7JDakws5ugoQdoLlYDQklA=;
- b=bw22knvk5JYcH4w9A5YSCg3JoNC4+E61Orxf1DmreyWGGYwYPSvoNpup85tWiThNVOU81b8a5D9Fy/yHXKWXQDPOegM8M02am7tXIiyJnRvfobbq6lIJlYrWo6VCC03L/O0gTkuD96XjEraaFqvNsTBdvVgerHpbA1gN1J4SpRE=
+ bh=C1UoFnBMHGDFo/lhpDYAeBqAxyZVXWgqXdU7eGZ82Gc=;
+ b=SfNNTmIzoPx5PZ2ya2HI4/L9VoB1yugKGS9QVk7zq6zDYNOAheoSxR8Ea0gJsmUAqNpNQSHa39skXulLHJeP5IWTajIvbjGv/eSJFH5TPXTr6XfFrXSDU6vQeGkAj+beUI3y71LzIE8kksZcEZdYcWuBb840P6z/BUYCuqDu/YM=
 Authentication-Results: linaro.org; dkim=none (message not signed)
  header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
 Received: from DM6PR04MB6201.namprd04.prod.outlook.com (2603:10b6:5:127::32)
  by DM6PR04MB4123.namprd04.prod.outlook.com (2603:10b6:5:98::24) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.21; Tue, 16 Jun
- 2020 03:22:58 +0000
+ 2020 03:23:02 +0000
 Received: from DM6PR04MB6201.namprd04.prod.outlook.com
  ([fe80::e0a4:aa82:1847:dea5]) by DM6PR04MB6201.namprd04.prod.outlook.com
  ([fe80::e0a4:aa82:1847:dea5%7]) with mapi id 15.20.3088.029; Tue, 16 Jun 2020
- 03:22:58 +0000
+ 03:23:02 +0000
 From: Anup Patel <anup.patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -63,12 +63,11 @@ To: Peter Maydell <peter.maydell@linaro.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>
 Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Anup Patel <anup.patel@wdc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmerdabbelt@google.com>
-Subject: [PATCH v6 1/5] hw/riscv: Allow creating multiple instances of CLINT
-Date: Tue, 16 Jun 2020 08:52:25 +0530
-Message-Id: <20200616032229.766089-2-anup.patel@wdc.com>
+ Anup Patel <anup.patel@wdc.com>, Palmer Dabbelt <palmerdabbelt@google.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v6 2/5] hw/riscv: Allow creating multiple instances of PLIC
+Date: Tue, 16 Jun 2020 08:52:26 +0530
+Message-Id: <20200616032229.766089-3-anup.patel@wdc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200616032229.766089-1-anup.patel@wdc.com>
 References: <20200616032229.766089-1-anup.patel@wdc.com>
@@ -82,38 +81,38 @@ X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from wdc.com (122.171.201.92) by
  MAXPR01CA0099.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:5d::17) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3088.19 via Frontend Transport; Tue, 16 Jun 2020 03:22:54 +0000
+ 15.20.3088.19 via Frontend Transport; Tue, 16 Jun 2020 03:22:58 +0000
 X-Mailer: git-send-email 2.25.1
 X-Originating-IP: [122.171.201.92]
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: e3471103-c3f7-4ef5-7c91-08d811a49117
+X-MS-Office365-Filtering-Correlation-Id: 022e3d58-5fb9-4f26-8023-08d811a49361
 X-MS-TrafficTypeDiagnostic: DM6PR04MB4123:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM6PR04MB4123FC19C4FA469938A52A998D9D0@DM6PR04MB4123.namprd04.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <DM6PR04MB41235F4790F726B9AB0BEE828D9D0@DM6PR04MB4123.namprd04.prod.outlook.com>
 WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:3;
+X-MS-Oob-TLC-OOBClassifiers: OLM:14;
 X-Forefront-PRVS: 04362AC73B
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: RWjaOFRsA7ALJFbmf5cIwGL2b3G/tJ+m5W14M8aA2NOH/Sz15DCBvG59qv3N7GSXP95gv7+EfDKh7aVS+smnLAu15M77fIxiGFsBFEIBUWFBOpT+P6BMXQKLlE89ymcYaTrKegjhrmsdCEEUvosnPvCmtttTjXAbCcb2ZTRFHtFkZ/vDlDomk1DV2QOmn+2GIG21rkn38nYauxrn02qxYDOIrx1xx3maiNR5aD8omjs9WWcdzepdaVYifKe6xAKb1DHOwmIZ5JmpkJriXc+jh7cwOtj2ssKp5nogao4M2F5tIIxnqSX1yP+jnzDVYwBFQqOaTP/upvXeq2v8b9EifA==
+X-Microsoft-Antispam-Message-Info: 9A/aPqAQMgVorHQJuO3YBajFLUJyfnrmrP2fs593DyQcnZvabQT2sxsbrNjnsqG37uyk41m1Vf0Yony37r3ZTDgcK3LGzwGtZsrGW94RRB9iJRpZ6+/LSobx60oIcFoBNTSupXLdzUhedzGA1KCW+ff8W8I54kpXuLqWYRSlOTN0/ax3InaYYbDw6ox5z3BGGnIdAqlLaxKHBAX6fvh+asuLP0S8H94U+CjTKH3IR0bp8qtQvzqo7qUzuk8MA3yGRvSAVRm8OnlgZ+E/Okrlp5W0APbh2b1/6jQfnxpyIlJsa7nrWIYlfxNyGj6YypFOiPNFvPCRAB4XrRogxos6Kg==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DM6PR04MB6201.namprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFTY:;
  SFS:(4636009)(39860400002)(136003)(366004)(376002)(396003)(346002)(66946007)(2616005)(66476007)(66556008)(8936002)(956004)(2906002)(316002)(54906003)(478600001)(6666004)(186003)(44832011)(55016002)(36756003)(7696005)(52116002)(83380400001)(26005)(8676002)(4326008)(86362001)(16526019)(1076003)(8886007)(110136005)(5660300002);
  DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData: CbXM8B9RZ5Ltf/h2OKleSZfxfh6YLISwEpUUL2zATnXBhWIKX5yopyS0zWXshDrM9diTbXmtepHH+ofNGD7kz9qmKFpDxbu3HTqvVvKuHrKjLZ4wkN/jwR1SGp4ezaKnwZmbACiYj3KriTevxYZ/vimisjSKT1Yl9QBU0AwhK8L2OSHEg47UFCGeYYtMAWyvAakyr2p6GoRW4RGEke4SDYqpwQbi0P+v5IHU+ZK0A13+MVBL96vZZu40NTY92yU88rNxwTU/JGM0dZQdpwGN87FTjro4Ku8y/usIHMF1Ra6vvoQdY7/UmZWNwJFIDFe9Z4Ljrr7PpT2NbLkmWEHLLJdssYu/G2yeSNDnpR/IdgWruhR6x3j2gMdK5PSHy4KzL6hFUjNE+R+8Or8KLUXQ2F7SmEIzF3AjYTS/qC8sN9GEuRrVyiZWTG2W9DTNIo1IBwi0Lf6ihf31REb5nSYdTmkRboCRK0lRIvgewe6GLMs=
+X-MS-Exchange-AntiSpam-MessageData: ieziY19S9e8NoXb/nX6q9uN4Ql980guah7kX65LDnRloueVoTMttFHFyCxT5S3Bd84nChsfPcrqEBNou9qs2VAWlEWOj9XKiM/7T+iQm7z8Ueki09EE9c6VKa8GZNffsvyFAnxkFwoJ1ti4TvnvhwY+g11ywe49DSy/i06P3NZGIGO7XMWRe77M24TQ8edrUgD/pbCGBztyDM8qBIl4yhInSS/5TXBGqnxbsAV+3+oc9KSw8LT8qXHI4oABcTUO/fRJknbDkMsqOc/ZmUoA7WEnCmuBBdNh4voUHzLUrw3R07I1+hX+q+x/AlFUyf+Ut5ucJnPzNZoHs+MEAiUEJcMboyaWSNwMTqU9lGaUYjo3IShtYlMADYYZaWC9PXYQFivoxl/3Ba7lJIW7VocWK0M5V6DWg9Toh6dyEMzMNG06E3Itc+Sd2n/u3nBXFTEfJygsKnq1zTSVinEJ4yAtqeLb93zGx+V/vxz4YgZbxvSE=
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e3471103-c3f7-4ef5-7c91-08d811a49117
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2020 03:22:58.1727 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 022e3d58-5fb9-4f26-8023-08d811a49361
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2020 03:23:02.2421 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6q2ThMlKaB9qoXlAhvXa+CmDZG58vxxop/Wxq8IVLmua4H7/wp+jUczumTf1atWWp9oj5zypGBDNjH2tYYP+yA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: nbfR2NDhmSdmBXnWAS8HhhTL5hrc3LFLCPfZe3niLC02ZchzpGy4r5wci9F2s9GcYg7w0hqg4iJduHZ6UeRKdA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB4123
-Received-SPF: pass client-ip=216.71.154.42;
- envelope-from=prvs=4298fe783=Anup.Patel@wdc.com; helo=esa4.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/15 23:23:00
+Received-SPF: pass client-ip=216.71.154.45;
+ envelope-from=prvs=4298fe783=Anup.Patel@wdc.com; helo=esa6.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/15 23:23:03
 X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
 X-Spam_score_int: -43
 X-Spam_score: -4.4
@@ -136,175 +135,166 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 16 Jun 2020 03:23:09 -0000
 
-We extend CLINT emulation to allow multiple instances of CLINT in
+We extend PLIC emulation to allow multiple instances of PLIC in
 a QEMU RISC-V machine. To achieve this, we remove first HART id
-zero assumption from CLINT emulation.
+zero assumption from PLIC emulation.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/sifive_clint.c         | 20 ++++++++++++--------
- hw/riscv/sifive_e.c             |  2 +-
- hw/riscv/sifive_u.c             |  2 +-
- hw/riscv/spike.c                |  2 +-
- hw/riscv/virt.c                 |  2 +-
- include/hw/riscv/sifive_clint.h |  7 ++++---
- 6 files changed, 20 insertions(+), 15 deletions(-)
+ hw/riscv/sifive_e.c            |  2 +-
+ hw/riscv/sifive_plic.c         | 24 +++++++++++++-----------
+ hw/riscv/sifive_u.c            |  2 +-
+ hw/riscv/virt.c                |  2 +-
+ include/hw/riscv/sifive_plic.h | 12 +++++++-----
+ 5 files changed, 23 insertions(+), 19 deletions(-)
 
-diff --git a/hw/riscv/sifive_clint.c b/hw/riscv/sifive_clint.c
-index e933d35092..7d713fd743 100644
---- a/hw/riscv/sifive_clint.c
-+++ b/hw/riscv/sifive_clint.c
-@@ -78,7 +78,7 @@ static uint64_t sifive_clint_read(void *opaque, hwaddr addr, unsigned size)
-     SiFiveCLINTState *clint = opaque;
-     if (addr >= clint->sip_base &&
-         addr < clint->sip_base + (clint->num_harts << 2)) {
--        size_t hartid = (addr - clint->sip_base) >> 2;
-+        size_t hartid = clint->hartid_base + ((addr - clint->sip_base) >> 2);
-         CPUState *cpu = qemu_get_cpu(hartid);
-         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-         if (!env) {
-@@ -91,7 +91,8 @@ static uint64_t sifive_clint_read(void *opaque, hwaddr addr, unsigned size)
-         }
-     } else if (addr >= clint->timecmp_base &&
-         addr < clint->timecmp_base + (clint->num_harts << 3)) {
--        size_t hartid = (addr - clint->timecmp_base) >> 3;
-+        size_t hartid = clint->hartid_base +
-+            ((addr - clint->timecmp_base) >> 3);
-         CPUState *cpu = qemu_get_cpu(hartid);
-         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-         if (!env) {
-@@ -128,7 +129,7 @@ static void sifive_clint_write(void *opaque, hwaddr addr, uint64_t value,
- 
-     if (addr >= clint->sip_base &&
-         addr < clint->sip_base + (clint->num_harts << 2)) {
--        size_t hartid = (addr - clint->sip_base) >> 2;
-+        size_t hartid = clint->hartid_base + ((addr - clint->sip_base) >> 2);
-         CPUState *cpu = qemu_get_cpu(hartid);
-         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-         if (!env) {
-@@ -141,7 +142,8 @@ static void sifive_clint_write(void *opaque, hwaddr addr, uint64_t value,
-         return;
-     } else if (addr >= clint->timecmp_base &&
-         addr < clint->timecmp_base + (clint->num_harts << 3)) {
--        size_t hartid = (addr - clint->timecmp_base) >> 3;
-+        size_t hartid = clint->hartid_base +
-+            ((addr - clint->timecmp_base) >> 3);
-         CPUState *cpu = qemu_get_cpu(hartid);
-         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-         if (!env) {
-@@ -185,6 +187,7 @@ static const MemoryRegionOps sifive_clint_ops = {
- };
- 
- static Property sifive_clint_properties[] = {
-+    DEFINE_PROP_UINT32("hartid-base", SiFiveCLINTState, hartid_base, 0),
-     DEFINE_PROP_UINT32("num-harts", SiFiveCLINTState, num_harts, 0),
-     DEFINE_PROP_UINT32("sip-base", SiFiveCLINTState, sip_base, 0),
-     DEFINE_PROP_UINT32("timecmp-base", SiFiveCLINTState, timecmp_base, 0),
-@@ -226,13 +229,13 @@ type_init(sifive_clint_register_types)
- /*
-  * Create CLINT device.
-  */
--DeviceState *sifive_clint_create(hwaddr addr, hwaddr size, uint32_t num_harts,
--    uint32_t sip_base, uint32_t timecmp_base, uint32_t time_base,
--    bool provide_rdtime)
-+DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
-+    uint32_t hartid_base, uint32_t num_harts, uint32_t sip_base,
-+    uint32_t timecmp_base, uint32_t time_base, bool provide_rdtime)
- {
-     int i;
-     for (i = 0; i < num_harts; i++) {
--        CPUState *cpu = qemu_get_cpu(i);
-+        CPUState *cpu = qemu_get_cpu(hartid_base + i);
-         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-         if (!env) {
-             continue;
-@@ -246,6 +249,7 @@ DeviceState *sifive_clint_create(hwaddr addr, hwaddr size, uint32_t num_harts,
-     }
- 
-     DeviceState *dev = qdev_create(NULL, TYPE_SIFIVE_CLINT);
-+    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-     qdev_prop_set_uint32(dev, "num-harts", num_harts);
-     qdev_prop_set_uint32(dev, "sip-base", sip_base);
-     qdev_prop_set_uint32(dev, "timecmp-base", timecmp_base);
 diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index b53109521e..1c3b37d0ba 100644
+index 1c3b37d0ba..bd122e71ae 100644
 --- a/hw/riscv/sifive_e.c
 +++ b/hw/riscv/sifive_e.c
-@@ -163,7 +163,7 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
-         SIFIVE_E_PLIC_CONTEXT_STRIDE,
-         memmap[SIFIVE_E_PLIC].size);
-     sifive_clint_create(memmap[SIFIVE_E_CLINT].base,
--        memmap[SIFIVE_E_CLINT].size, ms->smp.cpus,
-+        memmap[SIFIVE_E_CLINT].size, 0, ms->smp.cpus,
-         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE, false);
-     create_unimplemented_device("riscv.sifive.e.aon",
-         memmap[SIFIVE_E_AON].base, memmap[SIFIVE_E_AON].size);
+@@ -152,7 +152,7 @@ static void riscv_sifive_e_soc_realize(DeviceState *dev, Error **errp)
+ 
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
+-        (char *)SIFIVE_E_PLIC_HART_CONFIG,
++        (char *)SIFIVE_E_PLIC_HART_CONFIG, 0,
+         SIFIVE_E_PLIC_NUM_SOURCES,
+         SIFIVE_E_PLIC_NUM_PRIORITIES,
+         SIFIVE_E_PLIC_PRIORITY_BASE,
+diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
+index c1e04cbb98..f88bb48053 100644
+--- a/hw/riscv/sifive_plic.c
++++ b/hw/riscv/sifive_plic.c
+@@ -352,6 +352,7 @@ static const MemoryRegionOps sifive_plic_ops = {
+ 
+ static Property sifive_plic_properties[] = {
+     DEFINE_PROP_STRING("hart-config", SiFivePLICState, hart_config),
++    DEFINE_PROP_UINT32("hartid-base", SiFivePLICState, hartid_base, 0),
+     DEFINE_PROP_UINT32("num-sources", SiFivePLICState, num_sources, 0),
+     DEFINE_PROP_UINT32("num-priorities", SiFivePLICState, num_priorities, 0),
+     DEFINE_PROP_UINT32("priority-base", SiFivePLICState, priority_base, 0),
+@@ -400,10 +401,12 @@ static void parse_hart_config(SiFivePLICState *plic)
+     }
+     hartid++;
+ 
+-    /* store hart/mode combinations */
+     plic->num_addrs = addrid;
++    plic->num_harts = hartid;
++
++    /* store hart/mode combinations */
+     plic->addr_config = g_new(PLICAddr, plic->num_addrs);
+-    addrid = 0, hartid = 0;
++    addrid = 0, hartid = plic->hartid_base;
+     p = plic->hart_config;
+     while ((c = *p++)) {
+         if (c == ',') {
+@@ -429,8 +432,6 @@ static void sifive_plic_irq_request(void *opaque, int irq, int level)
+ 
+ static void sifive_plic_realize(DeviceState *dev, Error **errp)
+ {
+-    MachineState *ms = MACHINE(qdev_get_machine());
+-    unsigned int smp_cpus = ms->smp.cpus;
+     SiFivePLICState *plic = SIFIVE_PLIC(dev);
+     int i;
+ 
+@@ -451,8 +452,8 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
+      * lost a interrupt in the case a PLIC is attached. The SEIP bit must be
+      * hardware controlled when a PLIC is attached.
+      */
+-    for (i = 0; i < smp_cpus; i++) {
+-        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(i));
++    for (i = 0; i < plic->num_harts; i++) {
++        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(plic->hartid_base + i));
+         if (riscv_cpu_claim_interrupts(cpu, MIP_SEIP) < 0) {
+             error_report("SEIP already claimed");
+             exit(1);
+@@ -488,16 +489,17 @@ type_init(sifive_plic_register_types)
+  * Create PLIC device.
+  */
+ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+-    uint32_t num_sources, uint32_t num_priorities,
+-    uint32_t priority_base, uint32_t pending_base,
+-    uint32_t enable_base, uint32_t enable_stride,
+-    uint32_t context_base, uint32_t context_stride,
+-    uint32_t aperture_size)
++    uint32_t hartid_base, uint32_t num_sources,
++    uint32_t num_priorities, uint32_t priority_base,
++    uint32_t pending_base, uint32_t enable_base,
++    uint32_t enable_stride, uint32_t context_base,
++    uint32_t context_stride, uint32_t aperture_size)
+ {
+     DeviceState *dev = qdev_create(NULL, TYPE_SIFIVE_PLIC);
+     assert(enable_stride == (enable_stride & -enable_stride));
+     assert(context_stride == (context_stride & -context_stride));
+     qdev_prop_set_string(dev, "hart-config", hart_config);
++    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
+     qdev_prop_set_uint32(dev, "num-sources", num_sources);
+     qdev_prop_set_uint32(dev, "num-priorities", num_priorities);
+     qdev_prop_set_uint32(dev, "priority-base", priority_base);
 diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 4299bdf480..c193761916 100644
+index c193761916..53e48e2ff5 100644
 --- a/hw/riscv/sifive_u.c
 +++ b/hw/riscv/sifive_u.c
-@@ -602,7 +602,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     sifive_uart_create(system_memory, memmap[SIFIVE_U_UART1].base,
-         serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART1_IRQ));
-     sifive_clint_create(memmap[SIFIVE_U_CLINT].base,
--        memmap[SIFIVE_U_CLINT].size, ms->smp.cpus,
-+        memmap[SIFIVE_U_CLINT].size, 0, ms->smp.cpus,
-         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE, false);
+@@ -586,7 +586,7 @@ static void riscv_sifive_u_soc_realize(DeviceState *dev, Error **errp)
  
-     object_property_set_bool(OBJECT(&s->prci), true, "realized", &err);
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 7bbbdb5036..a3db885ffa 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -253,7 +253,7 @@ static void spike_board_init(MachineState *machine)
- 
-     /* Core Local Interruptor (timer and IPI) */
-     sifive_clint_create(memmap[SPIKE_CLINT].base, memmap[SPIKE_CLINT].size,
--        smp_cpus, SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
-+        0, smp_cpus, SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
-         false);
- }
- 
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[SIFIVE_U_PLIC].base,
+-        plic_hart_config,
++        plic_hart_config, 0,
+         SIFIVE_U_PLIC_NUM_SOURCES,
+         SIFIVE_U_PLIC_NUM_PRIORITIES,
+         SIFIVE_U_PLIC_PRIORITY_BASE,
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 7ce28895bc..041c400261 100644
+index 041c400261..35dc43d620 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -595,7 +595,7 @@ static void riscv_virt_board_init(MachineState *machine)
-         VIRT_PLIC_CONTEXT_STRIDE,
-         memmap[VIRT_PLIC].size);
-     sifive_clint_create(memmap[VIRT_CLINT].base,
--        memmap[VIRT_CLINT].size, smp_cpus,
-+        memmap[VIRT_CLINT].size, 0, smp_cpus,
-         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE, true);
-     sifive_test_create(memmap[VIRT_TEST].base);
+@@ -584,7 +584,7 @@ static void riscv_virt_board_init(MachineState *machine)
  
-diff --git a/include/hw/riscv/sifive_clint.h b/include/hw/riscv/sifive_clint.h
-index 4a720bfece..9f5fb3d31d 100644
---- a/include/hw/riscv/sifive_clint.h
-+++ b/include/hw/riscv/sifive_clint.h
-@@ -33,6 +33,7 @@ typedef struct SiFiveCLINTState {
- 
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[VIRT_PLIC].base,
+-        plic_hart_config,
++        plic_hart_config, 0,
+         VIRT_PLIC_NUM_SOURCES,
+         VIRT_PLIC_NUM_PRIORITIES,
+         VIRT_PLIC_PRIORITY_BASE,
+diff --git a/include/hw/riscv/sifive_plic.h b/include/hw/riscv/sifive_plic.h
+index 4421e81249..ace76d0f1b 100644
+--- a/include/hw/riscv/sifive_plic.h
++++ b/include/hw/riscv/sifive_plic.h
+@@ -48,6 +48,7 @@ typedef struct SiFivePLICState {
      /*< public >*/
      MemoryRegion mmio;
+     uint32_t num_addrs;
++    uint32_t num_harts;
+     uint32_t bitfield_words;
+     PLICAddr *addr_config;
+     uint32_t *source_priority;
+@@ -58,6 +59,7 @@ typedef struct SiFivePLICState {
+ 
+     /* config */
+     char *hart_config;
 +    uint32_t hartid_base;
-     uint32_t num_harts;
-     uint32_t sip_base;
-     uint32_t timecmp_base;
-@@ -40,9 +41,9 @@ typedef struct SiFiveCLINTState {
-     uint32_t aperture_size;
- } SiFiveCLINTState;
+     uint32_t num_sources;
+     uint32_t num_priorities;
+     uint32_t priority_base;
+@@ -70,10 +72,10 @@ typedef struct SiFivePLICState {
+ } SiFivePLICState;
  
--DeviceState *sifive_clint_create(hwaddr addr, hwaddr size, uint32_t num_harts,
--    uint32_t sip_base, uint32_t timecmp_base, uint32_t time_base,
--    bool provide_rdtime);
-+DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
-+    uint32_t hartid_base, uint32_t num_harts, uint32_t sip_base,
-+    uint32_t timecmp_base, uint32_t time_base, bool provide_rdtime);
+ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+-    uint32_t num_sources, uint32_t num_priorities,
+-    uint32_t priority_base, uint32_t pending_base,
+-    uint32_t enable_base, uint32_t enable_stride,
+-    uint32_t context_base, uint32_t context_stride,
+-    uint32_t aperture_size);
++    uint32_t hartid_base, uint32_t num_sources,
++    uint32_t num_priorities, uint32_t priority_base,
++    uint32_t pending_base, uint32_t enable_base,
++    uint32_t enable_stride, uint32_t context_base,
++    uint32_t context_stride, uint32_t aperture_size);
  
- enum {
-     SIFIVE_SIP_BASE     = 0x0,
+ #endif
 -- 
 2.25.1
 
