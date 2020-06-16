@@ -1,72 +1,123 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jkzog-0007JB-8x
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 20:51:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45190)
+	id 1jl2Bo-0000SW-SI
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Jun 2020 23:23:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43398)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jkzoY-00079Z-G5; Mon, 15 Jun 2020 20:51:01 -0400
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:36810)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jkzoW-0006Kv-OM; Mon, 15 Jun 2020 20:50:58 -0400
-Received: by mail-pl1-x643.google.com with SMTP id j4so4349473plk.3;
- Mon, 15 Jun 2020 17:50:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=jmW2hH35m1L4rvDInytOtIMsYkAXmXBZIMWlBl+zHXI=;
- b=haNTW4L2X1E8SWY3I1kYbF3H541u7v5o6ETogFbpJhRMZ+EUQAuqylpSXoMlTlbGHv
- suM8Gn/xbSx8kIY6SMh+Thsn5m86ZGoXOyQ4J/frnQsf/ytT47iDHzJYeYZP/VUVDlP2
- 0d7juuPlMM/WEEfPKEBcU6KzI0fs7EfNpLFNpVoBbYI7wFTxVPvfCX7xVm5xN+HRWwDM
- NJZCsz/qjR+iT4/Cgm9ocCu04GImlbstLkgiN+/6AZtHEjayehwuQa0CEQO2g9Zdo9PQ
- d8ZReCBy0wGeB7ZDfyeXlkJAF3P7hukOQJ06w4zHnfRMxz4OOLsnCdVs59moHuVWeQxI
- 2iSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=jmW2hH35m1L4rvDInytOtIMsYkAXmXBZIMWlBl+zHXI=;
- b=l9Rc1fmRi14W4WURKAPCRf29vNiSmcPujMxmRJx/LxkXVND5WMelar2q77UIG1bddf
- 8zWdV7jUYwFSmCiuAUxs+witP8G7v4GReyoKQ5Iit3LREYCylVZL+VqaVOdltR3eVOLh
- VEwCj3uKyrKtjn+OTDQixqp0zwMVyU3uaLcSCd1dHK/UxDYhc76egZ4GQFjUbJQK2hRl
- FiS5nZsA41LJsfirXpZHKUEqAlKVIdLZNN5N8ieZJ5K1lXeCwS99dTfUrWcRE7JEOV3R
- fsXrUdRTViawopUFbhYif0mMs7aLdztDubXq6E8XCXd8elV1Cjojocis0ttqNBoalUhd
- f2kg==
-X-Gm-Message-State: AOAM530CnABuaVNUdc/DnbS8/8j+EMVPTNcCBTjykUsKz1vWvrBw9Ver
- OT+vXivMDJTAqLkIaH8Ydjc=
-X-Google-Smtp-Source: ABdhPJzzcBiiEKVH6QGSlOKZAS56dFRq7h3QFsDP0qJSYa0p4TEJV258FMt325fRWgg/b+uoxnfhJA==
-X-Received: by 2002:a17:902:c3cb:: with SMTP id
- j11mr473566plj.171.1592268655058; 
- Mon, 15 Jun 2020 17:50:55 -0700 (PDT)
-Received: from localhost.localdomain (unknown-224-80.windriver.com.
- [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id i20sm15210539pfd.81.2020.06.15.17.50.54
- (version=TLS1 cipher=AES128-SHA bits=128/128);
- Mon, 15 Jun 2020 17:50:54 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v2 5/5] hw/riscv: sifive_u: Add a dummy DDR memory controller
- device
-Date: Mon, 15 Jun 2020 17:50:41 -0700
-Message-Id: <1592268641-7478-6-git-send-email-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1592268641-7478-1-git-send-email-bmeng.cn@gmail.com>
-References: <1592268641-7478-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::643;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x643.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=_AUTOLEARN
+ (Exim 4.90_1) (envelope-from <prvs=4298fe783=Anup.Patel@wdc.com>)
+ id 1jl2Bm-0000S6-IP; Mon, 15 Jun 2020 23:23:07 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:46442)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <prvs=4298fe783=Anup.Patel@wdc.com>)
+ id 1jl2Bi-0007aH-PW; Mon, 15 Jun 2020 23:23:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1592277782; x=1623813782;
+ h=from:to:cc:subject:date:message-id:
+ content-transfer-encoding:mime-version;
+ bh=kRe/7Rk2IAx/zyalnlwWHEW7E6IERnquP3/R3BhyOGU=;
+ b=nBxFAkLV61hbTIbkS48ZTXCOcAYDy8YibxQPGBy6KlrmXo+8gdlbJ7hM
+ bTCsf2T1AZIL4hvjfy21X+Gj18+jV8HkS5Ac2KO+GVWbSbUP0lrTEGOXY
+ aQgkVTM0OISliu42bRGHPi3MrvdtyryNohLC9kurgoZ5kTpBXUYika9v6
+ 7ngf289NSlt1yrNOkV3Y5CVHt61LqjrH6Uf/SWEhBq4mC3oYZDDh44nYj
+ 7p6oXz2npaHOvuLON5/Maa1y0Ya319u9jad1r+vAyb1dwGvHLRLpu4Tnm
+ p9NzBrIJ5Kw0fPL23iD5W0k/h/8EzNsHOAENLW90rjrOxjRGYmCmZKyy3 g==;
+IronPort-SDR: j5CwrZTd3VMna10kyoYZdJntOh3LQxrUPBZFibW2lbKN5fHwNJShrhayqhXeK0lGNBBPh1MneN
+ UJTl4HWu8qy8c57bhHRaoHNz8kSWYOgPxeXBJolV7iYKmnLsYJe8/BMh/Wp8nW2x8dNd65bQkA
+ ZwE3eKGav6RxAxSraJkqJbSiQirANGgmkC1qINpFcNGD/Gp1usW4ZCD7AgyfqhR8TN1Mbl1Lqx
+ 6XbHo7tuBTEyodKPU2F6k6bnY3TLWrQ611XJ138vZloOlQirltQW2zxg/pnU9mlvhBV9fSKy2K
+ 8Yg=
+X-IronPort-AV: E=Sophos;i="5.73,517,1583164800"; d="scan'208";a="249266450"
+Received: from mail-cys01nam02lp2053.outbound.protection.outlook.com (HELO
+ NAM02-CY1-obe.outbound.protection.outlook.com) ([104.47.37.53])
+ by ob1.hgst.iphmx.com with ESMTP; 16 Jun 2020 11:22:56 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KvkYSzKGC83z+i4lRHUlzIo360ZPKtXyhOCH8ZLwRF/U6R1ydTvhPynKXYS1Tz4hy4WDZrtVemnrPIts/9xc9NJvYak/J3SRVVUOaNGH3b7obzCbTpGf3pdXW6GEG0LpjHS25VpabPPRHWo56O3YimUTnwFWRH0aAYEZyiXPCHE+29TGsZwTt9j4PX8qAAtXY6dtScXkNGM2NM4CITCjCJLe1U8q0qn4t0WqZC/qFn/GMZmydgkUejl5Y6C/oV4433Py4S7X0NkJWLj1GJn0jNe9spVBP6yzCHOLuSMhGOlnHFxPr0FwPvjH7py2wGObcWb0YsL+3ZH3QTEEgQHIJA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=g27UUW2M4j3KCAnvgg5xdZQK3B9ZHHWGM7Hwr4UDBxQ=;
+ b=m9Kn+dAi07/h2nW2dkTnTgsNFUxjaPspiPfrdoYpZvFTDnriX3kFlMtR9tfpEdb4sTKBF19FF64CIj3P8+PJ32fHbVP4utD6NVXd0vLcmSALgJ8228RsrBPGu0pEdeAEk2svZc//Jmz0iSoXumpYdMt/4iVTGdEALOqLW7GhHGeyIIDTWD2dVB1FJHf6Kt/TkG1MfzPMn/A8/U8xz/smRjqGbOUfgBoibWi3BMg9Wy+cHge4nb/YOZTNSLrZJHuVCSXXLdzgQvst+fWq6LiYkJJ1sZp4pAryCGz20ZS6bFiTXq/5YCSHFCNvh0XLakNxjDqJRjM0rDCzcCrc5mMafg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=g27UUW2M4j3KCAnvgg5xdZQK3B9ZHHWGM7Hwr4UDBxQ=;
+ b=MpEYN5kWziUhRFxura5MG2Hjka7ok004cH3UAQ9VMLe9Y6cZts/AsELp7IkH7h7jRXoPpyn35gCvUxxeuchhH0iio3pqgGYRKTP8GkZkq6SYUZt8Kc2McczFYUT/i6MW++47RXZE+SjVkKY/YqYC1igAXf8OeA9LsIZ9RQ1wkfM=
+Authentication-Results: linaro.org; dkim=none (message not signed)
+ header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
+Received: from DM6PR04MB6201.namprd04.prod.outlook.com (2603:10b6:5:127::32)
+ by DM6PR04MB4123.namprd04.prod.outlook.com (2603:10b6:5:98::24) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.21; Tue, 16 Jun
+ 2020 03:22:54 +0000
+Received: from DM6PR04MB6201.namprd04.prod.outlook.com
+ ([fe80::e0a4:aa82:1847:dea5]) by DM6PR04MB6201.namprd04.prod.outlook.com
+ ([fe80::e0a4:aa82:1847:dea5%7]) with mapi id 15.20.3088.029; Tue, 16 Jun 2020
+ 03:22:54 +0000
+From: Anup Patel <anup.patel@wdc.com>
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Anup Patel <anup.patel@wdc.com>
+Subject: [PATCH v6 0/5] RISC-V multi-socket support
+Date: Tue, 16 Jun 2020 08:52:24 +0530
+Message-Id: <20200616032229.766089-1-anup.patel@wdc.com>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MAXPR01CA0099.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a00:5d::17) To DM6PR04MB6201.namprd04.prod.outlook.com
+ (2603:10b6:5:127::32)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from wdc.com (122.171.201.92) by
+ MAXPR01CA0099.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:5d::17) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3088.19 via Frontend Transport; Tue, 16 Jun 2020 03:22:51 +0000
+X-Mailer: git-send-email 2.25.1
+X-Originating-IP: [122.171.201.92]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: c5e7b0db-cac5-4d4e-e095-08d811a48ed3
+X-MS-TrafficTypeDiagnostic: DM6PR04MB4123:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM6PR04MB412348F2CC1C1D86570151F58D9D0@DM6PR04MB4123.namprd04.prod.outlook.com>
+WDCIPOUTBOUND: EOP-TRUE
+X-MS-Oob-TLC-OOBClassifiers: OLM:3826;
+X-Forefront-PRVS: 04362AC73B
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: QumkAKfEcRL/M5XeBj3H1AlOUkghYmETZ0qtnD9A5t/VsPPSdi7nixsqXm+3C1kNhrY5Vh4XCXw78NYI2pfHB7zbxrlAWWFS/s0OwGIwF2C+/CdBFu7nNuKdSRFULGm1ZsjFOvl0lkEHN/EaRYLdWH3yXBM/nRdqy43qgPzYK8S3dbOWXCYjAtqe9DWRh1h95+p/2z4So1D1waotAyj6K7Z+lxw/2I3txZ2EtoprmtVJmw3UJvZIuuAuHVON6LDeX/8glJbX5r49QgNkfm6UcFbusojlx6CFXn94jkNZvFweUZ+ppQfu4TbQdxkipWvmS/ZA+GQnxuDyUXz4vyTeWE96kSyOrF2mFtFHxK44FpmBFcPH+gFs7fvTMGQd8ZPnXbWcWpSjNEyvJM0n9NKSSQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR04MB6201.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(39860400002)(136003)(366004)(376002)(396003)(346002)(66946007)(2616005)(66476007)(66556008)(8936002)(956004)(2906002)(316002)(54906003)(478600001)(6666004)(186003)(44832011)(966005)(55016002)(36756003)(7696005)(52116002)(83380400001)(26005)(8676002)(4326008)(86362001)(16526019)(1076003)(8886007)(110136005)(5660300002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData: XqLoF5Jw2Wdxtb3xIxBLbYknNIAfMcPvETZW0gDsRuX4cRIL9RTuhQrnXDTRiAON70RaDEgG1ogpPBA87YsszL6+ZCAmd2ChPIkDuUeKoTsWBS0TLD3jJUjUH5RoOJ7GEb1951nzc73xnYRrEknKIX79n7ZbaOk4oLz6r9PZwR5J967GK2rDwVgaIsbumY5h1tBurFoRUqt1LkO7Dx9LNlY9eiyJ0p8vdoryKS8QJuYihxjhgtQl1OqmGnAVp4WwZgdOYu43c2z3j1cd7YV6xmnvIE/ssN/ib9mIVvRuJkxVNffdeBXiAIb7NedhqCidMrozXtQpVplBf+D/OdDuYh3GvvnCcHWAcFOfEsMiDZEqCtS7CdgVvZn1l3dKN3Ya87lp0U8sMdKLEJW7qnFw6QXJTtkA+EMYg8BsGQbNCrBUBG0BLjXM/+Vk/7Uz+S84mAfNsNk49WGNIbOocmaWRQo6897bAvNv0rL/l/bsuRc=
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c5e7b0db-cac5-4d4e-e095-08d811a48ed3
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2020 03:22:54.3462 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FD86buI4IY4Bezp9qe6FIRAPK59ZSsOllu7QA+OQ3/H74sL7BgVQroqeJzBRpJeX1YINXuTYOFkoRx3RriwE0g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB4123
+Received-SPF: pass client-ip=68.232.141.245;
+ envelope-from=prvs=4298fe783=Anup.Patel@wdc.com; helo=esa1.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/15 23:22:57
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ MSGID_FROM_MTA_HEADER=0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,82 +130,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2020 00:51:02 -0000
+X-List-Received-Date: Tue, 16 Jun 2020 03:23:07 -0000
 
-From: Bin Meng <bin.meng@windriver.com>
+This series adds multi-socket support for RISC-V virt machine and
+RISC-V spike machine. The multi-socket support will help us improve
+various RISC-V operating systems, firmwares, and bootloader to
+support RISC-V NUMA systems.
 
-It is enough to simply map the SiFive FU540 DDR memory controller
-into the MMIO space using create_unimplemented_device(), to make
-the upstream U-Boot v2020.07 DDR memory initialization codes happy.
+These patch can be found in riscv_multi_socket_v6 branch at:
+https://github.com/avpatel/qemu.git
 
-Note we do not generate device tree fragment for the DDR memory
-controller. Since the controller data in device tree consumes a
-very large space (see fu540-hifive-unleashed-a00-ddr.dtsi in the
-U-Boot source), and it is only needed by U-Boot SPL but not any
-operating system, we choose not to generate the fragment here.
-This also means when testing with U-Boot SPL, the device tree has
-to come from U-Boot SPL itself, but not the one generated by QEMU
-on the fly. The memory has to be set to 8GiB to match the real
-HiFive Unleashed board when invoking QEMU (-m 8G).
+Changes since v5:
+ - Rebased patches on Spike changes from Alistair
+ - Added comments describing RISC-V NUMA helper functions
 
-With this commit, QEMU can boot U-Boot SPL built for SiFive FU540
-all the way up to loading U-Boot proper from MMC:
+Changes since v4:
+ - Re-arrange patches and move CLINT and PLIC patches before other
+   patches because these are already reviewed
+ - Added PATCH3 for common RISC-V multi-socket helpers
+ - Added support for "-numa cpu,node-id" option in PATCH4 and PATCH5
 
-$ qemu-system-riscv64 -nographic -M sifive_u,msel=6 -m 8G -bios u-boot-spl.bin
+Changes since v3:
+ - Use "-numa" QEMU options to populate sockets instead of custom
+   "multi-socket" sub-option in machine name
 
-U-Boot SPL 2020.07-rc3-00208-g88bd5b1 (Jun 08 2020 - 20:16:10 +0800)
-Trying to boot from MMC1
-Unhandled exception: Load access fault
-EPC: 0000000008009be6 TVAL: 0000000010050014
+Changes since v2:
+ - Dropped PATCH1 as it is not required any more
+ - Added "multi-socket" sub-option for Spike and Virt machine
+   which can be used to enable/disable mult-socket support
 
-The above exception is expected because QSPI is unsupported yet.
+Changes since v1:
+ - Fixed checkpatch errors and warnings
+ - Added PATCH1 for knowning whether "sockets" sub-option was specified
+ - Remove SPIKE_CPUS_PER_SOCKET_MIN and SPIKE_CPUS_PER_SOCKET_MAX in PATCH3
+ - Remove VIRT_CPUS_PER_SOCKET_MIN and VIRT_CPUS_PER_SOCKET_MAX in PATCH5
 
-Signed-off-by: Bin Meng <bin.meng@windriver.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Anup Patel (5):
+  hw/riscv: Allow creating multiple instances of CLINT
+  hw/riscv: Allow creating multiple instances of PLIC
+  hw/riscv: Add helpers for RISC-V multi-socket NUMA machines
+  hw/riscv: spike: Allow creating multiple NUMA sockets
+  hw/riscv: virt: Allow creating multiple NUMA sockets
 
----
+ hw/riscv/Makefile.objs          |   1 +
+ hw/riscv/numa.c                 | 242 +++++++++++++++
+ hw/riscv/sifive_clint.c         |  20 +-
+ hw/riscv/sifive_e.c             |   4 +-
+ hw/riscv/sifive_plic.c          |  24 +-
+ hw/riscv/sifive_u.c             |   4 +-
+ hw/riscv/spike.c                | 237 +++++++++-----
+ hw/riscv/virt.c                 | 530 ++++++++++++++++++--------------
+ include/hw/riscv/numa.h         | 113 +++++++
+ include/hw/riscv/sifive_clint.h |   7 +-
+ include/hw/riscv/sifive_plic.h  |  12 +-
+ include/hw/riscv/spike.h        |  11 +-
+ include/hw/riscv/virt.h         |   9 +-
+ 13 files changed, 873 insertions(+), 341 deletions(-)
+ create mode 100644 hw/riscv/numa.c
+ create mode 100644 include/hw/riscv/numa.h
 
-(no changes since v1)
-
- hw/riscv/sifive_u.c         | 4 ++++
- include/hw/riscv/sifive_u.h | 1 +
- 2 files changed, 5 insertions(+)
-
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index c94ff6f..7923df4 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -82,6 +82,7 @@ static const struct MemmapEntry {
-     [SIFIVE_U_OTP] =      { 0x10070000,     0x1000 },
-     [SIFIVE_U_GEM] =      { 0x10090000,     0x2000 },
-     [SIFIVE_U_GEM_MGMT] = { 0x100a0000,     0x1000 },
-+    [SIFIVE_U_DMC] =      { 0x100b0000,    0x10000 },
-     [SIFIVE_U_FLASH0] =   { 0x20000000, 0x10000000 },
-     [SIFIVE_U_DRAM] =     { 0x80000000,        0x0 },
- };
-@@ -733,6 +734,9 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
- 
-     create_unimplemented_device("riscv.sifive.u.gem-mgmt",
-         memmap[SIFIVE_U_GEM_MGMT].base, memmap[SIFIVE_U_GEM_MGMT].size);
-+
-+    create_unimplemented_device("riscv.sifive.u.dmc",
-+        memmap[SIFIVE_U_DMC].base, memmap[SIFIVE_U_DMC].size);
- }
- 
- static Property sifive_u_soc_props[] = {
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 5d80f91..3e33646 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -78,6 +78,7 @@ enum {
-     SIFIVE_U_UART1,
-     SIFIVE_U_GPIO,
-     SIFIVE_U_OTP,
-+    SIFIVE_U_DMC,
-     SIFIVE_U_FLASH0,
-     SIFIVE_U_DRAM,
-     SIFIVE_U_GEM,
 -- 
-2.7.4
+2.25.1
 
 
