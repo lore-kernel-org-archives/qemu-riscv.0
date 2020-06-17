@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jlfE5-0003F3-By
-	for mharc-qemu-riscv@gnu.org; Wed, 17 Jun 2020 17:04:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37332)
+	id 1jlfEz-0004k6-1I
+	for mharc-qemu-riscv@gnu.org; Wed, 17 Jun 2020 17:05:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38204)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <robert.foley@linaro.org>)
- id 1jlfDy-0003CV-Ge
- for qemu-riscv@nongnu.org; Wed, 17 Jun 2020 17:03:58 -0400
-Received: from mail-qt1-x842.google.com ([2607:f8b0:4864:20::842]:38682)
+ id 1jlfEu-0004hC-Ra
+ for qemu-riscv@nongnu.org; Wed, 17 Jun 2020 17:04:57 -0400
+Received: from mail-qk1-x741.google.com ([2607:f8b0:4864:20::741]:36377)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <robert.foley@linaro.org>)
- id 1jlfDt-0008UT-PY
- for qemu-riscv@nongnu.org; Wed, 17 Jun 2020 17:03:58 -0400
-Received: by mail-qt1-x842.google.com with SMTP id z2so694837qts.5
- for <qemu-riscv@nongnu.org>; Wed, 17 Jun 2020 14:03:51 -0700 (PDT)
+ id 1jlfEp-0000P8-Q7
+ for qemu-riscv@nongnu.org; Wed, 17 Jun 2020 17:04:55 -0400
+Received: by mail-qk1-x741.google.com with SMTP id 205so3522005qkg.3
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jun 2020 14:04:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=YemnOlklw+URp/aLKC6SFqz2X8HrxCoaaT+NwLjZldo=;
- b=EaXicV2SrI+jZc6jXA3EYsKOVyBml4iIwvFptjrgJSaDZTl1CxdsgLEDDrg+OTstid
- /p0bJ/ZhZckKfDS983OAVfF+wUVE7MwWOnt9zISrGsGAI0TdgZXjmtuZAkylfJPmuJCN
- rWV4jZmZvFyKeJ69TKoVLZO7ID9PNOqbFiQyfE7oNgXwzNxvShyC7SRsUU+wWv3dhOxC
- yRjfgEL1vTFweXxAEIsGR4Sy6ca4YsqjFEIcU7Fb2ifqarqgxi09BpQSMBdIr1A9I8As
- u+47cOCFkkr0RBF25khfp7+zOR4Xh0ga3ykD7odaen/IwSoFIRliyhzHsQkAhSo9Ul7J
- 0enA==
+ bh=YTz6vFHmZFyC4ACE7F4vHqeFTUJV7CWjdiB6P/9KC+w=;
+ b=hC/Pejzb8BghSmFgUSR+yU/UxhcdgiOuTZg5ww8qnQVSJ+j0wrUDItnixZfav82TfF
+ u9kU66OoyEgjPZ2wUSfOqEsbfjJYkaDJ0dNgeGhQneC3JAAgYSs7plS52Yt19W5ddJTy
+ 6C2yFaWdcV9IS/gbbkfo6pmL6uhUpVpWCr7PiaaTIg1XVCOu5X2LN9WHmajL3OOhrHZQ
+ e6eNPGdU1F5ipFHlNs8CflvhyLr97YoWavUT7BOHfwWtmTjjDN7p0uUCq22NqqtzmSsi
+ g1CNKMY7eAld89KE83NMt0dQ9aGc/ytAjuDNkV7kAaekVPgFyRCEGH/4V418+uzQArls
+ hu2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=YemnOlklw+URp/aLKC6SFqz2X8HrxCoaaT+NwLjZldo=;
- b=FEqDG1fIQFPAwwINNZxxO9YwIArDNBmNnpWG1Fj6+H+FY41u6MuzQQFgymexNSi1Be
- 4XCJHqUppyWLubsiSJSfTA6brYNek38X2DqBXlSC4A2KqW6CjsjBJK1x/W4J7rUwqX+R
- 5TX8oY17GtdLerBuXf2+StTCJR6CBvJaBainn57v1Jkf1dVvOGgk6GaLjYUoH9q6CPGu
- uPqvO1ndIkuKh7lCMAsix5rT7opSfc1BtM263OuzqpDQFVSvbGs/9wpVh9LZxNYOU/Tw
- uco1rCsVcQ7O98wRMk3L2NufBUvMM6rK4RadDjqGkqlx2Kjz7L+KtiSihtwR3vdDdGR0
- 10PQ==
-X-Gm-Message-State: AOAM532fbVG76UHu8F6wsdWsorCldv/gBQStqmV7GvAHMlEtSa28b3b2
- d0Y0SBrQlAZ5PwwyzRaXO+qHpQ==
-X-Google-Smtp-Source: ABdhPJxHn8AowkC/EXsVktX4pts+OqQvGVJhH/dy8X8htxveYHYznjUY7wrfF7EOpcNQSeoyRZFQdw==
-X-Received: by 2002:aed:35fa:: with SMTP id d55mr1054590qte.385.1592427830871; 
- Wed, 17 Jun 2020 14:03:50 -0700 (PDT)
+ bh=YTz6vFHmZFyC4ACE7F4vHqeFTUJV7CWjdiB6P/9KC+w=;
+ b=rbZFtHWlBExqAaTrS6YrpL93k0jRrjaFLUpIk3hUdtCi7w9E93kKUNErI9rdwFpWMa
+ uR0Cj4egOeyIbJmiijUi/OEm4zHO1enKFsj0JPTapVqZ9dWAtzHNLuiAKXZy8kTU5Hnm
+ stMJfEyMF530Pj1I6mxczwMTDyMOjxcso6fQVknXdm+blbJliQWhtFnBhrKLwlrF40uR
+ O36LXqWfXBinSEakz+QAtvaonRp2ZTlrai0Xyspn4cjTMmLBcgOi3Q+ty4ylvx7OvxBd
+ rd7+k7NmM/N46asYLqqfgaQ+GTV4iCbzEoFIbe4Et6WyK8HiTMDG+DjlVhIGGJWyLsuE
+ 2o0w==
+X-Gm-Message-State: AOAM531CgTZ5uqxj44Y9te9ZwYxGXOwTTQ++C2vlah/BqjRdIXVFiYaV
+ zWP909wNsZG4Xg3+sBW4Zf9QNg==
+X-Google-Smtp-Source: ABdhPJzbaSCLaao3AWjR6m5aPs45KbFrOxOruYbFXhOkTsPlQrFCOCPObgXKviN3NH70Z40F28etrQ==
+X-Received: by 2002:a37:5e07:: with SMTP id s7mr628501qkb.20.1592427890822;
+ Wed, 17 Jun 2020 14:04:50 -0700 (PDT)
 Received: from Rfoley-MA01.hsd1.ma.comcast.net
  ([2601:199:4480:60c0:fc79:714c:9711:2e9c])
- by smtp.gmail.com with ESMTPSA id w13sm997245qkb.91.2020.06.17.14.03.49
+ by smtp.gmail.com with ESMTPSA id w13sm997245qkb.91.2020.06.17.14.04.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jun 2020 14:03:50 -0700 (PDT)
+ Wed, 17 Jun 2020 14:04:50 -0700 (PDT)
 From: Robert Foley <robert.foley@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: alex.bennee@linaro.org, cota@braap.org, peter.puhov@linaro.org,
@@ -51,14 +51,14 @@ Cc: alex.bennee@linaro.org, cota@braap.org, peter.puhov@linaro.org,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v10 24/73] riscv: convert to cpu_halted
-Date: Wed, 17 Jun 2020 17:01:42 -0400
-Message-Id: <20200617210231.4393-25-robert.foley@linaro.org>
+Subject: [PATCH v10 66/73] riscv: convert to cpu_has_work_with_iothread_lock
+Date: Wed, 17 Jun 2020 17:02:24 -0400
+Message-Id: <20200617210231.4393-67-robert.foley@linaro.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200617210231.4393-1-robert.foley@linaro.org>
 References: <20200617210231.4393-1-robert.foley@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::842;
- envelope-from=robert.foley@linaro.org; helo=mail-qt1-x842.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::741;
+ envelope-from=robert.foley@linaro.org; helo=mail-qk1-x741.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -80,9 +80,11 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2020 21:03:58 -0000
+X-List-Received-Date: Wed, 17 Jun 2020 21:04:58 -0000
 
 From: "Emilio G. Cota" <cota@braap.org>
+
+Soon we will call cpu_has_work without the BQL.
 
 Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
 Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
@@ -92,22 +94,32 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Emilio G. Cota <cota@braap.org>
 Signed-off-by: Robert Foley <robert.foley@linaro.org>
 ---
- target/riscv/op_helper.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index b0c49efc4a..fe1373a95d 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -176,7 +176,7 @@ void helper_wfi(CPURISCVState *env)
-         riscv_cpu_virt_enabled(env)) {
-         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-     } else {
--        cs->halted = 1;
-+        cpu_halted_set(cs, 1);
-         cs->exception_index = EXCP_HLT;
-         cpu_loop_exit(cs);
-     }
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 3a6d202d03..d56ba65b32 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -310,6 +310,9 @@ static bool riscv_cpu_has_work(CPUState *cs)
+ #ifndef CONFIG_USER_ONLY
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
++
++    g_assert(qemu_mutex_iothread_locked());
++
+     /*
+      * Definition of the WFI instruction requires it to ignore the privilege
+      * mode and delegation registers, but respect individual enables
+@@ -510,7 +513,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     device_class_set_parent_reset(dc, riscv_cpu_reset, &mcc->parent_reset);
+ 
+     cc->class_by_name = riscv_cpu_class_by_name;
+-    cc->has_work = riscv_cpu_has_work;
++    cc->has_work_with_iothread_lock = riscv_cpu_has_work;
+     cc->do_interrupt = riscv_cpu_do_interrupt;
+     cc->cpu_exec_interrupt = riscv_cpu_exec_interrupt;
+     cc->dump_state = riscv_cpu_dump_state;
 -- 
 2.17.1
 
