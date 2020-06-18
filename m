@@ -1,53 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jllHf-0006ji-4n
-	for mharc-qemu-riscv@gnu.org; Wed, 17 Jun 2020 23:32:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49490)
+	id 1jllXm-0003ek-Nk
+	for mharc-qemu-riscv@gnu.org; Wed, 17 Jun 2020 23:48:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52284)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1jllHd-0006jU-JH
- for qemu-riscv@nongnu.org; Wed, 17 Jun 2020 23:32:09 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:37885)
+ id 1jllXl-0003eM-Mh
+ for qemu-riscv@nongnu.org; Wed, 17 Jun 2020 23:48:49 -0400
+Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:51612)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1jllHa-0001t3-GX
- for qemu-riscv@nongnu.org; Wed, 17 Jun 2020 23:32:09 -0400
-Received: by mail-wm1-x344.google.com with SMTP id y20so4078503wmi.2
- for <qemu-riscv@nongnu.org>; Wed, 17 Jun 2020 20:32:06 -0700 (PDT)
+ id 1jllXi-0004gZ-8F
+ for qemu-riscv@nongnu.org; Wed, 17 Jun 2020 23:48:49 -0400
+Received: by mail-wm1-x341.google.com with SMTP id b82so3773203wmb.1
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jun 2020 20:48:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20150623.gappssmtp.com; s=20150623;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=f+Zc2Uqn3NF8suMLBmAoiCtGS9NjQttu6Ir5M6WfrY4=;
- b=K76/dGwFgxCOiGPoQlRSWFEv08lO32iHadrYYpNoCR1iYbTdQkQTlEArAdWN2I82d+
- 0A4UWqj6YI4LSSt2NoD3bFCzsbAjVeHQ6yXD/zmeLLqwHVMDnlexAWjK0UPCYSNINKoc
- tCi6zn/bo0jtI9nZQJmLJ4v/HDrVBlF8C/eUZIKQUN3yFwq0c1DKu1L/vfjR9E0CnCXq
- xVVRT+QPnrhnWZdIu73gzMGUuBeDyiBgeT92MBBty+XpTbof/w45cJlsu2xmWFxaqjh/
- lQVnwxBZrxy3A78+TDWUxZLpkh3Y86LGkGUwWQNghZCmZnQlQwEH6zUpsCdIqhmrW2tS
- eaWw==
+ :cc; bh=oZcoBiOkyTGPdxeGYMc4hwnYVNmcyAARJmyydwkIvVE=;
+ b=Bc9gd6T1tmM25AXhdBlhfQXfHs8Cq21AU39z8JjUdCEDbM0TOx7lvZmCSfYS4EHRF2
+ 74heus403XnwKhTY0ysAJ3brnDQv6VJn1URaHnZ1EFXFKlhV5lQCJo+5BK31yLNl41IG
+ xIZkza36eWoKln+3hrVTO9E9J//lukRm0cPe9+Ie91vMW9ws5BMvt1C9li/9tLvuBhz8
+ cMXbAYM5M/FalRk8j7iwldsK+Sc7BHVoQ1JiN1BCwNoBVEMIzfiHR6Ti/8R+aQR1++rT
+ nOstD0HJrrW0CsFJRo+J7W6YC5VsWT9o+FCAUN8oVJKQ9zGLESkGqLa3f97SUx2M7Yac
+ BjEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=f+Zc2Uqn3NF8suMLBmAoiCtGS9NjQttu6Ir5M6WfrY4=;
- b=UEUUbOBpj3bBFB0TOqS7W7ax6XuLDiaKyLVdwctjGo5mSALhdSm73eL0rEAScRUOP6
- PAZsQpMHNVutbFN4D4kxj3Y6ltgtJALiI8r5LSEXoIT9NvCdWrqbTRpbc/9cCWAwqPfQ
- El6Q60E7ACI7sKjUrGRl/0QTJl/q/jsauqcarzSpTQZFrvwzkGxQH4hLV5mlWfAEnsX4
- S/n6os4c78isivZG1P1WBULJQQzIMjys6WrWUofEJQQp3F+9d0XTcny4Wpf/YuuXUDWd
- YpXgx2uPCbeX6Y8BSPOjolWm8kmHEtBRdG4WCvWBI9xcCfAdMxvuSDZiDO/C4163Fdkt
- gM2Q==
-X-Gm-Message-State: AOAM530NOPPr8mNa/IUozxhxZITg5xfmtJux012tOBtS0AYoJoECq9DC
- VrLfrDKAhOH5Eqw+86197k4/h+7zqNe0dtgZphUZcQ==
-X-Google-Smtp-Source: ABdhPJwdQoQCV7TcdQ8O+ksmlWQsb62qJLHkS1LDjJQPRBQUFPif0FhUmFuc7FBCSYoqOOOhSMAQPfJGXi1IK7nh7rc=
-X-Received: by 2002:a05:600c:210:: with SMTP id
- 16mr1871253wmi.185.1592451124486; 
- Wed, 17 Jun 2020 20:32:04 -0700 (PDT)
+ bh=oZcoBiOkyTGPdxeGYMc4hwnYVNmcyAARJmyydwkIvVE=;
+ b=K48wWYCZLrP9V7TNSiSbrSzyqI6wsFXwAsHI9SjA5TVI279RwEvaFmSI6QM9gzCesM
+ FqXfogS9U7ls0DPQbyyFjrctJi59tHx8VdgxmmHBf6TaQ+42wasl+W/KAa5i4D1idwsS
+ BIcwgDBvZnPDXqSCfCxokrw3As7/ld9Ov8N0EyDO7fW1Qo3pZv10wGTjH0xOoW5dwME3
+ 1sGWfqbkSFwRfLXY9hluuBBcdWLQO1ex6gfb6Uka+0lRJYowVuTQZ+4JEaeFvDIVY6va
+ 46+OGkXxEcPP3HdSr4+pEzlzI1Izb/6i5/zHwPMnTukU++2M1n169FJHWgBhKDmJxykb
+ SmYg==
+X-Gm-Message-State: AOAM530pEbf0gMEEDG8Oh6ROX00gLe+i45YeKWzhrGZdhs4x0UTwTRv3
+ b0PEtkZsP1jZA2lx9s6JCJf7vgNXsy/rD0C5Xkw6sw==
+X-Google-Smtp-Source: ABdhPJzf5Vl/LxJ7HHxFCwuqlbt/GiFCFE2TWzftLRLSNazCt/xiRBcxVqrOLkuxhIruor3AkmBRKecgW/eBHnCVIYQ=
+X-Received: by 2002:a7b:c0c8:: with SMTP id s8mr1907745wmh.134.1592452124208; 
+ Wed, 17 Jun 2020 20:48:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200616032229.766089-1-anup.patel@wdc.com>
  <20200616032229.766089-6-anup.patel@wdc.com>
  <CAKmqyKNr5wuYXBOR8DHxze9RSko2GmoL4873hkHN4i2DHE-v8Q@mail.gmail.com>
 In-Reply-To: <CAKmqyKNr5wuYXBOR8DHxze9RSko2GmoL4873hkHN4i2DHE-v8Q@mail.gmail.com>
 From: Anup Patel <anup@brainfault.org>
-Date: Thu, 18 Jun 2020 09:01:52 +0530
-Message-ID: <CAAhSdy0Bma=iW09m1vR4yHD9FEGVg9Hv0O0R_7urgDx6+67YzA@mail.gmail.com>
+Date: Thu, 18 Jun 2020 09:18:33 +0530
+Message-ID: <CAAhSdy0HUAoPbX+NtBzZ-R8XXfmRf8_uxOTkORE6v5bXPHNFmg@mail.gmail.com>
 Subject: Re: [PATCH v6 5/5] hw/riscv: virt: Allow creating multiple NUMA
  sockets
 To: Alistair Francis <alistair23@gmail.com>
@@ -58,8 +57,8 @@ Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::344;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x344.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::341;
+ envelope-from=anup@brainfault.org; helo=mail-wm1-x341.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -18
@@ -80,7 +79,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2020 03:32:09 -0000
+X-List-Received-Date: Thu, 18 Jun 2020 03:48:49 -0000
 
 On Thu, Jun 18, 2020 at 7:15 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
@@ -113,17 +112,34 @@ On Thu, Jun 18, 2020 at 7:15 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
 > This patch breaks OpenSBI v0.6 -> Xvisor v0.3.0-63-gdd3338d6 booting
 > on the Virt machine.
+>
+> I have dropped it from my PR.
 
-The commit gdd3338d6 is not found on Xvisor-next repo. Which Xvisor
-repo you are referring ??
+My best guess is below commit in Xvisor which removes HACK we had
+in Xvisor to not touch.
 
-Can you try the latest Xvisor-next repo ?
+The OpenSBI v0.6 does not update /reserved-memory DT nodes so
+trying OpenSBI v0.6 with latest Xvisor will certainly not work because
+latest Xvisor relies on /reserved-memory DT node updated by
+OpenSBI v0.7 (or higher).
+
+commit 3abcf3f97e7c3d7bd3dcd33e184a18c6e74ec0f6
+Author: Anup Patel <anup@brainfault.org>
+Date:   Thu Apr 2 12:03:43 2020 +0530
+
+    RISC-V: Remove load reservation hack
+
+    To avoid touching M-mode firmware (OpenSBI) memory, we have load
+    reservation hack in arch_devtree_reserve_xyz() functions. We don't
+    need this hack now because M-mode firmware (OpenSBI) or bootloader
+    will provide us DTB with appropriate reserved memory enteries.
+
+    Signed-off-by: Anup Patel <anup@brainfault.org>
+
 
 Regards,
 Anup
 
->
-> I have dropped it from my PR.
 >
 > Alistair
 >
