@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jm2Aw-0000Fz-7L
+	id 1jm2Aw-0000GG-Cj
 	for mharc-qemu-riscv@gnu.org; Thu, 18 Jun 2020 17:34:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44510)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56338)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jrtc27@jrtc27.com>) id 1jm0Km-0003aI-1F
- for qemu-riscv@nongnu.org; Thu, 18 Jun 2020 15:36:24 -0400
-Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:50253)
+ (Exim 4.90_1) (envelope-from <jrtc27@jrtc27.com>) id 1jm14i-0004m5-EM
+ for qemu-riscv@nongnu.org; Thu, 18 Jun 2020 16:23:52 -0400
+Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442]:41914)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jrtc27@jrtc27.com>) id 1jm0Kj-0003vK-Tl
- for qemu-riscv@nongnu.org; Thu, 18 Jun 2020 15:36:23 -0400
-Received: by mail-wm1-x342.google.com with SMTP id l17so6324420wmj.0
- for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2020 12:36:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jrtc27@jrtc27.com>) id 1jm14g-0003X2-DC
+ for qemu-riscv@nongnu.org; Thu, 18 Jun 2020 16:23:52 -0400
+Received: by mail-wr1-x442.google.com with SMTP id q2so5021505wrv.8
+ for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2020 13:23:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=jrtc27.com; s=gmail.jrtc27.user;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=+ecAMYIQiG0bgTF7m4VC12CqC+k295YsygfVj48I72I=;
- b=GeISHAq6lwBYMsS92m6LXp8c/zgbPmccKMyRxQ7vedcUtQSq8UvBZiCN8eXFpmm60h
- M1b3r/1ufLIzoLIMhZkfjd0bsNxx7B5zWMZBOu34j68VcGVQodyVfQ7XLP/0oeyqoZAi
- cLGrrOGjHFghvmVjM38KYziAK+Rm8KPgXEhuSyme/Uo3WdtnjQLG8UbMGZnflR/Bjbkz
- 3Bj/jGK2kQWZJDepl5HwxR1qTMkueZlDY0sC4pYLjzOkzik0j02FBu5Ez5jo75jmKXaK
- IuNNpFScC5monmH4GfbeLLxt+WZAHy/TrkbrJ4eyfzItB48nYdpmTUB1BGkSlJQacTc8
- 4tsw==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=JRRajxzTamdBT9+1rzxFUuGVADWvlG2jM5oN0hXK2r4=;
+ b=EWUzfWfA9ZciY/8Pf4des8G5tzExTyBmRXQtb2F4rOd2LSvHY3VtYk8LKEZe7XQwyo
+ gyKqzsoR6klunD75+5Ud5OgYQl27ysLRn6j8vjedUll6Q+v7Qz1hnZ/60+thv5pqJPx/
+ jvg7F+vZfZaCsfp3ZFuhwhYve7GGSAjVthCQqzh9Tv2cdFiZ5AHIBoSX5PzQUAAKUPQw
+ ug5cPh277bTifYPmZE3vnuk7ZNDZW38qr4/Jd/PhH+u+KLczPpykywBnlenoW71avT88
+ R+2DJozDeCMKSEhtt8RdWh8JUiOHgXMjRVVNz6S9R4Bd3bYfLiMCZKDF2/Mw8s8o/PfH
+ 54CQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=+ecAMYIQiG0bgTF7m4VC12CqC+k295YsygfVj48I72I=;
- b=gqXgBl9WPygRhlG/esP+3SHmhcPzAbed1sEFrONbdH3ClRDceUaIK7NtSk9FdiA13M
- r5McqWtYZtZscLIB/m+HmHB3oq29XzqTUibCkeMCA96XmXEaug5/RmDc8wI+dklWDKh4
- C3p6suS4wW6xOPJ60FjPvHo1LkE68SFWf7mFEHUjp8uHYbM1eefSxW/m1Kuwr7Wdt3j6
- 9KGYjZXxbtswgHlZvGFtwDU1ifH4PERtr7rPJrn1X+CEhB2lVle99w5lmFrSfRRB0wMK
- uf3ckbJYFmPpgSY3io4DCXaFIryOxQbqas9rV7bUdZsHPTFbodygPSKzBAa/R526eoXt
- nTcQ==
-X-Gm-Message-State: AOAM533JkDCL3eUORuJKl2DtFqMRymsSIfT6NC/txKsXSs9sTwd+Y3QB
- o68LUxM3AEdJMnhhV0s3zIsPIg==
-X-Google-Smtp-Source: ABdhPJxpgTcK0piK4TRkyh+WtKdHHXW/l1bNwYAzpbCI7E1SthbKVoI/H2OTaWUVC0tqf17FPFol4g==
-X-Received: by 2002:a1c:154:: with SMTP id 81mr5496071wmb.23.1592508979909;
- Thu, 18 Jun 2020 12:36:19 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=JRRajxzTamdBT9+1rzxFUuGVADWvlG2jM5oN0hXK2r4=;
+ b=V6lNP6V75VolfWsNOEGi+VENMweKLZ8wU+wOYKHf6afGrEFgKvv4/D0nQiR76gsGEv
+ boxSFlw2JrRIiQ+VH6plgSt6GBiLC+vaEkFsFm02UQRIK4gw/heEshRj1IymvuABNdHg
+ My+VuGtEcxQJVhFz1D5c0CoBoVl9wihTH+J18Fd4DoG9MWJmAcPc2b9YL/LXPjuUMspp
+ g64WML+FTCSufgSkwLbeHBUSK29GyMUVH8kJSVLzLXI7+VeJYw6+TSvpXYmiT778E2Yz
+ iLqnl0NDipXm9k5gW5YIu1Yj79AH5a0ri3F4GxgDmBDX7TxkR4DOU2aIriUXDjIbz7NJ
+ NClQ==
+X-Gm-Message-State: AOAM530uWOWfq9JcMt08NyQ4Gdke/c16NtWoYX87OftOrDQ0TP1yLlkx
+ qGo86A4QwKLCbSrRx1M/t5t5ow==
+X-Google-Smtp-Source: ABdhPJwgow/wNWpaDS6YrSp2jR6h4Nnw63nZnjeULv79PiQjwaqEKEXBVnlgBVEFCEC6IgcCqYKQcQ==
+X-Received: by 2002:adf:ec4e:: with SMTP id w14mr269869wrn.280.1592511828637; 
+ Thu, 18 Jun 2020 13:23:48 -0700 (PDT)
 Received: from Jessicas-MacBook.local (trinity-students-nat.trin.cam.ac.uk.
  [131.111.193.104])
- by smtp.gmail.com with ESMTPSA id h15sm4406720wrt.73.2020.06.18.12.36.19
+ by smtp.gmail.com with ESMTPSA id c143sm11065586wmd.1.2020.06.18.13.23.47
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Thu, 18 Jun 2020 12:36:19 -0700 (PDT)
+ Thu, 18 Jun 2020 13:23:47 -0700 (PDT)
 Received: by Jessicas-MacBook.local (Postfix, from userid 501)
- id B98F0207585400; Thu, 18 Jun 2020 20:36:18 +0100 (BST)
+ id 2AFFA207586B45; Thu, 18 Jun 2020 21:23:47 +0100 (BST)
 From: Jessica Clarke <jrtc27@jrtc27.com>
 To: qemu-riscv@nongnu.org
 Cc: Jessica Clarke <jrtc27@jrtc27.com>, qemu-devel@nongnu.org,
@@ -52,14 +52,16 @@ Cc: Jessica Clarke <jrtc27@jrtc27.com>, qemu-devel@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH] riscv: plic: Honour source priorities
-Date: Thu, 18 Jun 2020 20:35:56 +0100
-Message-Id: <20200618193556.19459-1-jrtc27@jrtc27.com>
+Subject: [PATCH v2] riscv: plic: Honour source priorities
+Date: Thu, 18 Jun 2020 21:23:43 +0100
+Message-Id: <20200618202343.20455-1-jrtc27@jrtc27.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200618193556.19459-1-jrtc27@jrtc27.com>
+References: <20200618193556.19459-1-jrtc27@jrtc27.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::342;
- envelope-from=jrtc27@jrtc27.com; helo=mail-wm1-x342.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::442;
+ envelope-from=jrtc27@jrtc27.com; helo=mail-wr1-x442.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -82,7 +84,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2020 19:36:24 -0000
+X-List-Received-Date: Thu, 18 Jun 2020 20:23:52 -0000
 
 The source priorities can be used to order sources with respect to other
 sources, not just as a way to enable/disable them based off a threshold.
@@ -91,11 +93,17 @@ the first source we find.
 
 Signed-off-by: Jessica Clarke <jrtc27@jrtc27.com>
 ---
- hw/riscv/sifive_plic.c | 19 ++++++++++++++-----
- 1 file changed, 14 insertions(+), 5 deletions(-)
+Changes since v1:
+
+ * Initialise max_prio to plic->target_priority[addrid] rather than 0,
+   allowing the target priority comparison to be dropped and covered by
+   the max_prio comparison.
+
+ hw/riscv/sifive_plic.c | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
 
 diff --git a/hw/riscv/sifive_plic.c b/hw/riscv/sifive_plic.c
-index 4f216c5585..911e006095 100644
+index 4f216c5585..d91e82b8ab 100644
 --- a/hw/riscv/sifive_plic.c
 +++ b/hw/riscv/sifive_plic.c
 @@ -166,6 +166,9 @@ static void sifive_plic_update(SiFivePLICState *plic)
@@ -103,12 +111,12 @@ index 4f216c5585..911e006095 100644
  {
      int i, j;
 +    uint32_t max_irq = 0;
-+    uint32_t max_prio = 0;
++    uint32_t max_prio = plic->target_priority[addrid];
 +
      for (i = 0; i < plic->bitfield_words; i++) {
          uint32_t pending_enabled_not_claimed =
              (plic->pending[i] & ~plic->claimed[i]) &
-@@ -177,14 +180,20 @@ static uint32_t sifive_plic_claim(SiFivePLICState *plic, uint32_t addrid)
+@@ -177,14 +180,18 @@ static uint32_t sifive_plic_claim(SiFivePLICState *plic, uint32_t addrid)
              int irq = (i << 5) + j;
              uint32_t prio = plic->source_priority[irq];
              int enabled = pending_enabled_not_claimed & (1 << j);
@@ -116,9 +124,7 @@ index 4f216c5585..911e006095 100644
 -                sifive_plic_set_pending(plic, irq, false);
 -                sifive_plic_set_claimed(plic, irq, true);
 -                return irq;
-+            if (enabled && prio > plic->target_priority[addrid] &&
-+                prio > max_prio)
-+            {
++            if (enabled && prio > max_prio) {
 +                max_irq = irq;
 +                max_prio = prio;
              }
@@ -132,9 +138,9 @@ index 4f216c5585..911e006095 100644
 +    }
 +    return max_irq;
  }
- 
+
  static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
--- 
+--
 2.20.1
 
 
