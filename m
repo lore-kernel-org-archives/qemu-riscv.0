@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jm6Dc-0004u1-Qg
-	for mharc-qemu-riscv@gnu.org; Thu, 18 Jun 2020 21:53:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39250)
+	id 1jm6GB-0006Se-W9
+	for mharc-qemu-riscv@gnu.org; Thu, 18 Jun 2020 21:56:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39684)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1jm6Da-0004tX-K5
- for qemu-riscv@nongnu.org; Thu, 18 Jun 2020 21:53:22 -0400
-Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:36283)
+ id 1jm6GA-0006RK-5M
+ for qemu-riscv@nongnu.org; Thu, 18 Jun 2020 21:56:02 -0400
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:37969)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1jm6DY-00076v-6y
- for qemu-riscv@nongnu.org; Thu, 18 Jun 2020 21:53:22 -0400
-Received: by mail-wr1-x444.google.com with SMTP id q11so8096555wrp.3
- for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2020 18:53:19 -0700 (PDT)
+ id 1jm6G8-0007YJ-E5
+ for qemu-riscv@nongnu.org; Thu, 18 Jun 2020 21:56:01 -0400
+Received: by mail-wm1-x343.google.com with SMTP id f185so7626050wmf.3
+ for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2020 18:56:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=atishpatra.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5UNRIxxaCwPB6Qj9Awjd7+NylhIl3+bxNdId/TR+si4=;
- b=uW6V2FvH5vuVA1n6xMu06PLEy/x+U02Jb/E7NOpxK4U1OzxEmNDHpSlA4Mri+In2At
- P7rRj9j1T8uHeHaTAAMOiLM23MyDxQH3R4oAbjXqDA43OQ/fi8FBglYDOmG8ASz8VBqn
- z8jiSIHN/IY5Rnux5YSk95Q0YzpVm389mmmV4=
+ :cc; bh=XzFxL0Tr2VHc6i+U5sXHL28eAkGcjo5HAI4Y3K/2FBc=;
+ b=lCpDf/hnEoFUhj0m/xtwE35NwDIMRMhFzp9YyuGO9effqFpgEI9rxKZMedkeT2nmCn
+ c1aTMWKN2eNIchIbSLBUmkWjgE+VRADmwSAj5s4zOgQL9tpQzZeKCacY3MK39ata0m5b
+ N/qJD5j7dNps+QWH4B8JMkfVrstiO9yFz7Ug0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=5UNRIxxaCwPB6Qj9Awjd7+NylhIl3+bxNdId/TR+si4=;
- b=ladh78y0vym/kdvncP469yrLuCcEDNp6vUZwYmsJyM3ZErjGIfHXdIeE68EGwmFbPj
- M/uSnL7CtkAZJUkAD7laPdh4BGKkDxOGE4g0xyo/D7ZK1AA1RpT3rFicpqElEIpzb6Ib
- v9wOigbFGfjg6vvk5HjlPdKcfNyS4C7HoD1eAL5u8rCJ7PrNGtTQ/4mq3E/qbMWONLYW
- 3rSoU+SLyO4dFujzXwKgY3OwH6lWtkoLw+pcOe2a9sUvlxVvSAdjrRSgYa+AvAohUCne
- UXWszmbc/d1dC70OZeJo/QE9TNyLwLaTe3dYj04QfdMdRMTvOnPsMNM0RyqTD5qClyQn
- nMUA==
-X-Gm-Message-State: AOAM532geEowY2ZohR1GgoiYr3ECQjtsy1W6AhJb8B9Xk44d3LjJhRfp
- y9cxnFLN8UMqDfce7G2YKaaIswMisgUhtnVIb/xZ
-X-Google-Smtp-Source: ABdhPJyayRCeCDizVnfpEfmMb8doJ8vLJmy2BajVY6P9DlAAnsXiJy/qw/Jf129Nmajzp7VZBOpUdgph6lP850kJf1c=
-X-Received: by 2002:a5d:62d1:: with SMTP id o17mr1327762wrv.162.1592531598358; 
- Thu, 18 Jun 2020 18:53:18 -0700 (PDT)
+ bh=XzFxL0Tr2VHc6i+U5sXHL28eAkGcjo5HAI4Y3K/2FBc=;
+ b=PbJHXElOK8gVLi5mWyaW3TWlkQcWKq9PxgpIpUHe6yMBAKSAbYbZw9k1lDtit+Hb0W
+ Kc+DJOH5OrHyDT6IlDJjh32UWCn0K/aGJ2upi/8bb7P/Wk2S5qM98h6MVxS8x7Gfu71Q
+ 1RrmdPaVhgAzyPMBVsa0FuL1xJsyysO23KSMMkcI71s6sGZsEsqseq1MHlAfkFGt5wQB
+ z9VNB75QX7Qu153zn7m8Xm/IgmgRGgwK/368e4UlSfFXB1sEV7jK3lCuFgZxylGE2/8z
+ ekyD5arT/Ya+fPgIY0uYCYPI+o4tIiEhfOVLAGh0hzYo2iE7kjpde/l8DH9ZJtq6vCs2
+ z6AA==
+X-Gm-Message-State: AOAM531xhiLo3gg7e5ObAV5aY+EU8CvrkLFlKxKJi43c++BIoxMTCY1D
+ dfapLDVTu7DlamivU+gEu1wT0Pywk0v0N3m3JDcC
+X-Google-Smtp-Source: ABdhPJzESkpuZsAH910yLb1PKqt7P6Lc014ghtKenuATcTYnr5+Nys6qEaiAsILYC5vFluRKo9fwETsO8h1k4EU3zto=
+X-Received: by 2002:a05:600c:2:: with SMTP id g2mr1129260wmc.176.1592531758927; 
+ Thu, 18 Jun 2020 18:55:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200616192700.1900260-1-atish.patra@wdc.com>
- <20200616192700.1900260-3-atish.patra@wdc.com>
- <CAEUhbmXfo6PusamsDkhqAWX=dta3t3qCiS0SUpEz7DKheosPAg@mail.gmail.com>
-In-Reply-To: <CAEUhbmXfo6PusamsDkhqAWX=dta3t3qCiS0SUpEz7DKheosPAg@mail.gmail.com>
+ <20200616192700.1900260-2-atish.patra@wdc.com>
+ <CAEUhbmV6jtFZuC=OeYn6GWijf-Q9Zzbj=YG6EDBTZoJy0QTC4g@mail.gmail.com>
+In-Reply-To: <CAEUhbmV6jtFZuC=OeYn6GWijf-Q9Zzbj=YG6EDBTZoJy0QTC4g@mail.gmail.com>
 From: Atish Patra <atishp@atishpatra.org>
-Date: Thu, 18 Jun 2020 18:53:07 -0700
-Message-ID: <CAOnJCUJxNzes=6xHHhAafV=RZX4Zi1COcNwFpG1=bbFLLsUMSg@mail.gmail.com>
-Subject: Re: [PATCH 2/3] RISC-V: Copy the fdt in dram instead of ROM
+Date: Thu, 18 Jun 2020 18:55:48 -0700
+Message-ID: <CAOnJCUJ-7Ga3DEVZPLJdFGBAMVrCKqAb3C88cPjM+dXP0QM3+Q@mail.gmail.com>
+Subject: Re: [PATCH 1/3] riscv: Unify Qemu's reset vector code path
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Atish Patra <atish.patra@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -54,8 +54,8 @@ Cc: Atish Patra <atish.patra@wdc.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::444;
- envelope-from=atishp@atishpatra.org; helo=mail-wr1-x444.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::343;
+ envelope-from=atishp@atishpatra.org; helo=mail-wm1-x343.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -77,247 +77,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jun 2020 01:53:22 -0000
+X-List-Received-Date: Fri, 19 Jun 2020 01:56:02 -0000
 
-On Thu, Jun 18, 2020 at 1:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Thu, Jun 18, 2020 at 1:03 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Wed, Jun 17, 2020 at 3:29 AM Atish Patra <atish.patra@wdc.com> wrote:
+> On Wed, Jun 17, 2020 at 3:30 AM Atish Patra <atish.patra@wdc.com> wrote:
 > >
-> > Currently, the fdt is copied to the ROM after the reset vector. The firmware
-> > has to copy it to DRAM. Instead of this, directly copy the device tree to a
-> > pre-computed dram address. The device tree load address should be as far as
-> > possible from kernel and initrd images. That's why it is kept at the end of
-> > the DRAM or 4GB whichever is lesser.
+> > Currently, all riscv machines have identical reset vector code
+> > implementations with memory addresses being different for all machines.
+> > They can be easily combined into a single function in common code.
+> >
+> > Move it to common function and let all the machines use the common function.
 > >
 > > Signed-off-by: Atish Patra <atish.patra@wdc.com>
 > > ---
-> >  hw/riscv/boot.c         | 45 ++++++++++++++++++++++++++++++-----------
-> >  hw/riscv/sifive_u.c     | 14 ++++++++++++-
-> >  hw/riscv/spike.c        | 14 ++++++++++++-
-> >  hw/riscv/virt.c         | 13 +++++++++++-
-> >  include/hw/riscv/boot.h |  5 ++++-
-> >  5 files changed, 75 insertions(+), 16 deletions(-)
-> >
-> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> > index 8ed96da600c9..0378b7f1bd58 100644
-> > --- a/hw/riscv/boot.c
-> > +++ b/hw/riscv/boot.c
-> > @@ -160,25 +160,51 @@ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
-> >      return *start + size;
-> >  }
-> >
-> > +hwaddr riscv_calc_fdt_load_addr(hwaddr dram_base, uint64_t mem_size, void *fdt)
-> > +{
-> > +    hwaddr temp, fdt_addr;
-> > +    hwaddr dram_end = dram_base + mem_size;
-> > +    int fdtsize = fdt_totalsize(fdt);
-> > +
-> > +    if (fdtsize <= 0) {
-> > +        error_report("invalid device-tree");
-> > +        exit(1);
-> > +    }
-> > +    /*
-> > +     * We should put fdt as far as possible to avoid kernel/initrd overwriting
-> > +     * its content. But it should be addressable by 32 bit system as well.
-> > +     * Thus, put it at an aligned address that less than fdt size from end of
-> > +     * dram or 4GB whichever is lesser.
-> > +     */
-> > +    temp = MIN(dram_end, 4096 * MiB);
-> > +    fdt_addr = QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
-> > +
-> > +    return fdt_addr;
-> > +}
-> > +
-> >  void riscv_setup_rom_reset_vec(hwaddr start_addr, hwaddr rom_base,
-> > -                               hwaddr rom_size, void *fdt)
-> > +                               hwaddr rom_size,
-> > +                               hwaddr fdt_load_addr, void *fdt)
-> >  {
-> >      int i;
-> >      /* reset vector */
-> > -    uint32_t reset_vec[8] = {
-> > -        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
-> > -        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
-> > +    uint32_t reset_vec[10] = {
-> > +        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
-> >          0xf1402573,                  /*     csrr   a0, mhartid  */
-> >  #if defined(TARGET_RISCV32)
-> > +        0x0202a583,                  /*     lw     a1, 32(t0) */
-> >          0x0182a283,                  /*     lw     t0, 24(t0) */
-> >  #elif defined(TARGET_RISCV64)
-> > +        0x0202b583,                  /*     ld     a1, 32(t0) */
-> >          0x0182b283,                  /*     ld     t0, 24(t0) */
-> >  #endif
-> >          0x00028067,                  /*     jr     t0 */
-> >          0x00000000,
-> >          start_addr,                  /* start: .dword */
-> >          0x00000000,
-> > -                                     /* dtb: */
-> > +        fdt_load_addr,               /* fdt_laddr: .dword */
-> > +        0x00000000,
-> > +                                     /* fw_dyn: */
-> >      };
-> >
-> >      /* copy in the reset vector in little_endian byte order */
-> > @@ -189,14 +215,9 @@ void riscv_setup_rom_reset_vec(hwaddr start_addr, hwaddr rom_base,
-> >                            rom_base, &address_space_memory);
-> >
-> >      /* copy in the device tree */
-> > -    if (fdt_pack(fdt) || fdt_totalsize(fdt) >
-> > -        rom_size - sizeof(reset_vec)) {
-> > -        error_report("not enough space to store device-tree");
-> > -        exit(1);
-> > -    }
-> >      qemu_fdt_dumpdtb(fdt, fdt_totalsize(fdt));
-> > -    rom_add_blob_fixed_as("mrom.fdt", fdt, fdt_totalsize(fdt),
-> > -                           rom_base + sizeof(reset_vec),
-> > +
-> > +    rom_add_blob_fixed_as("fdt", fdt, fdt_totalsize(fdt), fdt_load_addr,
-> >                             &address_space_memory);
-> >
-> >      return;
-> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > index c2712570e0d9..1a1540c7f98d 100644
-> > --- a/hw/riscv/sifive_u.c
-> > +++ b/hw/riscv/sifive_u.c
-> > @@ -31,6 +31,7 @@
-> >   */
-> >
-> >  #include "qemu/osdep.h"
-> > +#include "qemu/units.h"
-> >  #include "qemu/log.h"
-> >  #include "qemu/error-report.h"
-> >  #include "qapi/error.h"
-> > @@ -325,6 +326,7 @@ static void sifive_u_machine_init(MachineState *machine)
-> >      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-> >      MemoryRegion *flash0 = g_new(MemoryRegion, 1);
-> >      target_ulong start_addr = memmap[SIFIVE_U_DRAM].base;
-> > +    hwaddr fdt_load_addr;
-> >
-> >      /* Initialize SoC */
-> >      object_initialize_child(OBJECT(machine), "soc", &s->soc,
-> > @@ -369,13 +371,23 @@ static void sifive_u_machine_init(MachineState *machine)
-> >          }
-> >      }
-> >
-> > +    /* Compute the fdt load address in dram */
-> > +    fdt_load_addr = riscv_calc_fdt_load_addr(memmap[SIFIVE_U_DRAM].base,
-> > +                                             machine->ram_size, s->fdt);
-> > +
-> > +    if (fdt_load_addr >= (memmap[SIFIVE_U_DRAM].base + machine->ram_size)) {
+> >  hw/riscv/boot.c         | 46 +++++++++++++++++++++++++++++++++++++++++
+> >  hw/riscv/sifive_u.c     | 38 +++-------------------------------
 >
-> This check is unnecessary as the parameter passed to
-> riscv_calc_fdt_load_addr() guarantees that this won't happen.
+> sifive_u's reset vector has to be different to emulate the real
+> hardware MSEL pin state.
+> Please rebase this on top of the following series:
+> http://patchwork.ozlabs.org/project/qemu-devel/list/?series=183567
 >
+Sure. I will rebase. I think sifive_u may be used in future to emulate
+other sifive boards in future.
+This may require additional data in rom. That's why, it's better to
+keep the reset vector code in
+sifive_u and just unify spike & virt.
 
-Sure. I will remove that.
-
-> > +        error_report("Not enough space for FDT after kernel + initrd");
-> > +        exit(1);
-> > +     }
-> > +
-> >      if (s->start_in_flash) {
-> >          start_addr = memmap[SIFIVE_U_FLASH0].base;
-> >      }
+> >  hw/riscv/spike.c        | 38 +++-------------------------------
+> >  hw/riscv/virt.c         | 37 +++------------------------------
+> >  include/hw/riscv/boot.h |  2 ++
+> >  5 files changed, 57 insertions(+), 104 deletions(-)
 > >
-> >      /* load the reset vector */
-> >      riscv_setup_rom_reset_vec(start_addr, memmap[SIFIVE_U_MROM].base,
-> > -                              memmap[SIFIVE_U_MROM].size, s->fdt);
-> > +                              memmap[SIFIVE_U_MROM].size,
-> > +                              fdt_load_addr, s->fdt);
-> >  }
-> >
-> >  static bool sifive_u_machine_get_start_in_flash(Object *obj, Error **errp)
-> > diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> > index 238eae48716a..2a34a1382487 100644
-> > --- a/hw/riscv/spike.c
-> > +++ b/hw/riscv/spike.c
-> > @@ -24,6 +24,7 @@
-> >   */
-> >
-> >  #include "qemu/osdep.h"
-> > +#include "qemu/units.h"
-> >  #include "qemu/log.h"
-> >  #include "qemu/error-report.h"
-> >  #include "qapi/error.h"
-> > @@ -166,6 +167,7 @@ static void spike_board_init(MachineState *machine)
-> >      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-> >      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-> >      unsigned int smp_cpus = machine->smp.cpus;
-> > +    hwaddr fdt_load_addr;
-> >
-> >      /* Initialize SOC */
-> >      object_initialize_child(OBJECT(machine), "soc", &s->soc, sizeof(s->soc),
-> > @@ -212,9 +214,19 @@ static void spike_board_init(MachineState *machine)
-> >          }
-> >      }
-> >
-> > +    /* Compute the fdt load address in dram */
-> > +    fdt_load_addr = riscv_calc_fdt_load_addr(memmap[SPIKE_DRAM].base,
-> > +                                             machine->ram_size, s->fdt);
-> > +
-> > +    if (fdt_load_addr >= (memmap[SPIKE_DRAM].base + machine->ram_size)) {
-> > +        error_report("Not enough space for FDT after kernel + initrd");
-> > +        exit(1);
-> > +     }
-> > +
-> >      /* load the reset vector */
-> >      riscv_setup_rom_reset_vec(memmap[SPIKE_DRAM].base, memmap[SPIKE_MROM].base,
-> > -                              memmap[SPIKE_MROM].size, s->fdt);
-> > +                              memmap[SPIKE_MROM].size,
-> > +                              fdt_load_addr, s->fdt);
-> >
-> >      /* initialize HTIF using symbols found in load_kernel */
-> >      htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(0));
-> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > index a8e2d58cc067..ebb5dd5c8c1c 100644
-> > --- a/hw/riscv/virt.c
-> > +++ b/hw/riscv/virt.c
-> > @@ -481,6 +481,7 @@ static void virt_machine_init(MachineState *machine)
-> >      char *plic_hart_config;
-> >      size_t plic_hart_config_len;
-> >      target_ulong start_addr = memmap[VIRT_DRAM].base;
-> > +    hwaddr fdt_load_addr;
-> >      int i;
-> >      unsigned int smp_cpus = machine->smp.cpus;
-> >
-> > @@ -536,9 +537,19 @@ static void virt_machine_init(MachineState *machine)
-> >          start_addr = virt_memmap[VIRT_FLASH].base;
-> >      }
-> >
-> > +    /* Compute the fdt load address in dram */
-> > +    fdt_load_addr = riscv_calc_fdt_load_addr(memmap[VIRT_DRAM].base,
-> > +                                             machine->ram_size, s->fdt);
-> > +    if (fdt_load_addr >= (memmap[VIRT_DRAM].base + machine->ram_size)) {
-> > +        error_report("Not enough space for FDT after kernel + initrd");
-> > +        exit(1);
-> > +     }
-> > +
-> > +
-> >      /* load the reset vector */
-> >      riscv_setup_rom_reset_vec(start_addr, virt_memmap[VIRT_MROM].base,
-> > -                              virt_memmap[VIRT_MROM].size, s->fdt);
-> > +                              virt_memmap[VIRT_MROM].size,
-> > +                              fdt_load_addr, s->fdt);
-> >
-> >      /* create PLIC hart topology configuration string */
-> >      plic_hart_config_len = (strlen(VIRT_PLIC_HART_CONFIG) + 1) * smp_cpus;
-> > diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> > index 3e9759c89aa2..b6289a05d952 100644
-> > --- a/include/hw/riscv/boot.h
-> > +++ b/include/hw/riscv/boot.h
-> > @@ -35,7 +35,10 @@ target_ulong riscv_load_kernel(const char *kernel_filename,
-> >                                 symbol_fn_t sym_cb);
-> >  hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
-> >                           uint64_t kernel_entry, hwaddr *start);
-> > +hwaddr riscv_calc_fdt_load_addr(hwaddr dram_start, uint64_t dram_size,
-> > +                                void *fdt);
-> >  void riscv_setup_rom_reset_vec(hwaddr saddr, hwaddr rom_base,
-> > -                               hwaddr rom_size, void *fdt);
-> > +                               hwaddr rom_size,
-> > +                               hwaddr fdt_load_addr, void *fdt);
-> >
-> >  #endif /* RISCV_BOOT_H */
 >
 > Regards,
 > Bin
