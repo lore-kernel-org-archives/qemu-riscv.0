@@ -1,74 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jmAIH-0004Og-0e
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Jun 2020 02:14:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53238)
+	id 1jmJwU-0005EC-2R
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Jun 2020 12:32:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48470)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jmAIF-0004K9-9G; Fri, 19 Jun 2020 02:14:27 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:36748)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jmAID-0007Uy-I9; Fri, 19 Jun 2020 02:14:27 -0400
-Received: by mail-il1-x141.google.com with SMTP id a13so8261807ilh.3;
- Thu, 18 Jun 2020 23:14:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=8eebD7N5iZMNvpDSTRHabX8tggHEe3JXaxwj/8p+1Dw=;
- b=lvdKQOVmQ3A8+k2jEXA1OzFs8k4UsI8TasG/9Vn3EE1S+KWd9DSwZcuW7dtIj/wNLG
- zY65lNwXbREb5OWmUMyXDkxPa+GIwgHNpQOhpy4vLEDivCyk0g0UqL94v+HQgAa9VekA
- gqOyRGV8L9dPgyzFhQM1YJKGaMZNJECVTC8Iv92ZLOcK/WjUF2hQsJtDpo+hd7+nwLKm
- nDqpNiTOs7WMAAOUMqAFXmyjKWiE4DBBjLWX/ppsKALAVAScVJwlxaAB0BjO+NtOwCg9
- QRwjePp0IXQks0NOHXuPlIuTdAYBAgFsgTPotCStKNk/Cdrwsyjkt22+DCRvWpc6pfUO
- 9Egw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=8eebD7N5iZMNvpDSTRHabX8tggHEe3JXaxwj/8p+1Dw=;
- b=ZFdJJLjSD9sG+pg8lMiKB/oVEz6r2eq41f/7v3BWYlUupSyE5O2Zs7AqG+b6fXMAbJ
- HA+mEN+8lX1jgrPMMQui9hqtXeAORBDyLVr8aXIXrLzJGlhobvN+QGdqOWvuWrv/hpyC
- Qn6Ar7ABo6VgpyuSdGWtVkTfsshH4X/2VNy7+KAjgaeOYZs2lZRJ5J04vozm+i2jp0VV
- 4uPJAIsO1TYNRt5vwCOne23tB3LRriU07RW5ER7cEupYTHNzzxaQrIetNBipl86Y5Q8m
- LPRIVgXJMU1yA+eGnp1rLvUuLmNAF95WP1FS0/Pt3WDDVtUaMkFXPb+2EgOocr5T8tXm
- zUDw==
-X-Gm-Message-State: AOAM533MQ2lXS+pwvnsKkANnS0XIWlkfc0n13LvV689VoJfg4eJHpF5u
- iqqWRUAlm6JHV8cXYsqNuEU81430vLHIqrGnjEE=
-X-Google-Smtp-Source: ABdhPJz4lC21EcdKd3OMrB/N9cUXHCfcBeMxbrZhhawF7RW64BlzShXWKYFAudWwRo7C4Odd1IqYxryoiSRSIfo5Glw=
-X-Received: by 2002:a92:d647:: with SMTP id x7mr2165462ilp.267.1592547263870; 
- Thu, 18 Jun 2020 23:14:23 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alr48@hermes.cam.ac.uk>)
+ id 1jmJwR-00054J-NQ; Fri, 19 Jun 2020 12:32:35 -0400
+Received: from ppsw-43.csi.cam.ac.uk ([131.111.8.143]:43630)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alr48@hermes.cam.ac.uk>)
+ id 1jmJwP-0006FD-7z; Fri, 19 Jun 2020 12:32:35 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cam.ac.uk; 
+ s=20180806.ppsw;
+ h=Sender:Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=NAb26gyr/K5h/Ph6R4AoRAP5xysoGB7s9rr1Hlxe1Hw=; b=k4r3m+iz1ycurBv/Sx0Dss425O
+ 19J4+2C2kHbAuOJ1Q/S30Ni//458ND/FX0Eq8WE+ssUURmOlp7a3OWa1U0MuLFfA/WjkdyYoNmJ5N
+ GTEITB2HnjP6Yql/7g1fv68PDW0KLiI6e/prBAYF2wghZqlMEKM4V5qm0T6i1kMiHIlA=;
+X-Cam-AntiVirus: no malware found
+X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
+Received: from mail-il1-f170.google.com ([209.85.166.170]:37782)
+ by ppsw-43.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.159]:587)
+ with esmtpsa (PLAIN:alr48) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ id 1jmJwK-000QFA-pW (Exim 4.92.3)
+ (return-path <alr48@hermes.cam.ac.uk>); Fri, 19 Jun 2020 17:32:29 +0100
+Received: by mail-il1-f170.google.com with SMTP id e11so9786766ilr.4;
+ Fri, 19 Jun 2020 09:32:28 -0700 (PDT)
+X-Gm-Message-State: AOAM531WCFBHGlhJdizzYmXV2T27aQJ4KmmAOjVfjKFHmwjDTN7uEtpK
+ MJVgo+m59AMb8RE7phCMMr+DKnFRpoqK37mVaIA=
+X-Google-Smtp-Source: ABdhPJx9Zk66FxsJ0ZauBl0VQTJaeC/B/5T6o1tlXoEkCIFyaKfSxjW2Q0RyO9qqqMF6wj+is4A/YqQwO+G4RVs+MNY=
+X-Received: by 2002:a05:6e02:13f4:: with SMTP id
+ w20mr4501867ilj.294.1592584347920; 
+ Fri, 19 Jun 2020 09:32:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <1592268641-7478-1-git-send-email-bmeng.cn@gmail.com>
- <1592268641-7478-3-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKNovTf3F+t9WFCWXvAgT_CRa5dbDuQExzbqxkM-z3ufqw@mail.gmail.com>
- <CAEUhbmVq8kVfZRQSF-LT_bDib9e1xBL-7zifmHpQgdvehcNzFA@mail.gmail.com>
- <CAEUhbmU3ouNn=PfXLwZx_Pu49zmWY1ddsSqKONdh6X5atXcncg@mail.gmail.com>
-In-Reply-To: <CAEUhbmU3ouNn=PfXLwZx_Pu49zmWY1ddsSqKONdh6X5atXcncg@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 18 Jun 2020 23:04:57 -0700
-Message-ID: <CAKmqyKN+QjohXJQ81Tpu9+VDzgAHVbyOKs-vxC3d7wGvZKMWvw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] hw/riscv: sifive: Change SiFive E/U CPU reset
- vector to 0x1004
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
+References: <20200616192700.1900260-1-atish.patra@wdc.com>
+ <CAEUhbmVRN2Ze=jNqFSJbZgO0_ggyX6B-1UydPJB1sZVdAokrxQ@mail.gmail.com>
+ <CAOnJCUKN=L+eqMsp5X_6HG3j85Gzf6jtZMdNhCZ+cwROpJOTCQ@mail.gmail.com>
+In-Reply-To: <CAOnJCUKN=L+eqMsp5X_6HG3j85Gzf6jtZMdNhCZ+cwROpJOTCQ@mail.gmail.com>
+From: Alexander Richardson <Alexander.Richardson@cl.cam.ac.uk>
+Date: Fri, 19 Jun 2020 17:32:11 +0100
+X-Gmail-Original-Message-ID: <CAEeofcg7Rvu-=AxZJKwQxHJX1pq_P6sfZJ3Vn_JGcSw5C2aF4A@mail.gmail.com>
+Message-ID: <CAEeofcg7Rvu-=AxZJKwQxHJX1pq_P6sfZJ3Vn_JGcSw5C2aF4A@mail.gmail.com>
+Subject: Re: [PATCH 0/3] Add OpenSBI dynamic firmware support
+To: Atish Patra <atishp@atishpatra.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
+ Atish Patra <atish.patra@wdc.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=_AUTOLEARN
+Sender: "A.L. Richardson" <alr48@hermes.cam.ac.uk>
+Received-SPF: pass client-ip=131.111.8.143;
+ envelope-from=alr48@hermes.cam.ac.uk; helo=ppsw-43.csi.cam.ac.uk
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/19 12:32:29
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+X-Spam_score_int: -52
+X-Spam_score: -5.3
+X-Spam_bar: -----
+X-Spam_report: (-5.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-1,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,58 +77,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jun 2020 06:14:27 -0000
+X-List-Received-Date: Fri, 19 Jun 2020 16:32:36 -0000
 
-On Wed, Jun 17, 2020 at 10:08 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Thu, 18 Jun 2020 at 19:22, Atish Patra <atishp@atishpatra.org> wrote:
 >
-> Hi Alistair,
->
-> On Thu, Jun 18, 2020 at 8:41 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> On Thu, Jun 18, 2020 at 1:56 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 > >
-> > Hi Alistair,
-> >
-> > On Thu, Jun 18, 2020 at 12:40 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > On Wed, Jun 17, 2020 at 3:29 AM Atish Patra <atish.patra@wdc.com> wrote:
 > > >
-> > > On Mon, Jun 15, 2020 at 5:51 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > >
-> > > > From: Bin Meng <bin.meng@windriver.com>
-> > > >
-> > > > Per the SiFive manual, all E/U series CPU cores' reset vector is
-> > > > at 0x1004. Update our codes to match the hardware.
-> > > >
-> > > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> > >
-> > > This commit breaks my Oreboot test.
-> > >
-> > > Oreboot starts in flash and we run the command with the
-> > > `sifive_u,start-in-flash=true` machine.
+> > > This series adds support OpenSBI dynamic firmware support to Qemu.
+> > > Qemu loader passes the information about the DT and next stage (i.e. kernel
+> > > or U-boot) via "a2" register. It allows the user to build bigger OS images
+> > > without worrying about overwriting DT. It also unifies the reset vector code
 > >
-> > Could you please post an Oreboot binary for testing somewhere, or some
-> > instructions so that I can test this?
+> > I am not sure in what situation overwriting DT could happen. Could you
+> > please elaborate?
 > >
 >
-> I have figured out where the issue is. The issue is inside the Oreboot
-> codes that its QEMU detecting logic should be updated to match this
-> change.
+> Currently, the DT is loaded 0x82200000 (34MB offset) for fw_jump.
+> Thus, a bigger kernel image
+> would overwrite the DT. In fact, it was reported by FreeBSD folks.
+> https://github.com/riscv/opensbi/issues/169
 >
-> I've sent pull request to Oreboot to fix this:
-> https://github.com/oreboot/oreboot/pull/264
+The problem is that the DT overwrites the kernel image. Usually this
+is not noticeable since it's so small and rarely overwrites something
+useful, but in my case it was overwriting program memory which
+resulted in invalid instruction crashes.
+Since this is quite awkward to debug, I added a kernel assertion to
+FreeBSD to abort boot in that case.
 
-Thanks for that.
-
+> There are temporary solutions that can put DT a little bit further or
+> put it within 2MB offset. But that's
+> just delaying the inevitable.
 >
-> > >
-> > > I have removed this and the later patches from the RISC-V branch. I
-> > > want to send a PR today. After that I'll look into this.
-> >
->
-> I don't think we should drop this patch and later ones in this series.
+I've changed OpenSBI locally to use a 1MB offset (i.e. place the DT
+between OpenSBI and the kernel), but I think the fw_dynamic approach
+is much nicer.
 
-Applied again then.
-
-Alistair
-
->
-> Regards,
-> Bin
+Thanks,
+Alex
 
