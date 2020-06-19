@@ -1,72 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jm7vd-0003w1-2w
-	for mharc-qemu-riscv@gnu.org; Thu, 18 Jun 2020 23:42:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57018)
+	id 1jmAIH-0004Og-0e
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Jun 2020 02:14:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53238)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1jm7vb-0003rc-9M
- for qemu-riscv@nongnu.org; Thu, 18 Jun 2020 23:42:55 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:45404)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jmAIF-0004K9-9G; Fri, 19 Jun 2020 02:14:27 -0400
+Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:36748)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1jm7vY-0000hl-Dw
- for qemu-riscv@nongnu.org; Thu, 18 Jun 2020 23:42:54 -0400
-Received: by mail-pl1-x642.google.com with SMTP id d8so3364359plo.12
- for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2020 20:42:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=TmXn+WrPDMeidG0EK/5eV4AmYLlUduC5OfZ46f1gmqI=;
- b=fwE/nJ79zKeCorT+zA3RTmS6xRpV13aaQ04wDQ2i8onlFxfEOPBzhUN1G58eBiAk39
- v0ZGytbotCoxtnEvZyq10ou96gw6qLmTsrrFfpM0ok3ab5Ij+eRUhPlshNDsqINZrErd
- GUMt8kj7JhM2NbCTzAFL7IdD3ctLLWuZSt48ZX8HajbAAhtFvGwZ5MTCZnwsaGC2UA/e
- f5+dRv6xPK0uo0QHMDghXbImPIpL0mdDnnL2/YMLEsdvBFzSw7ho7b+lRLMCi3Tty39t
- j/mz8bnwvzEPqkLIY8xIu5ep6VHoRcZRYyjNF4ZO3zBnQ2Q9s+L2Y7vddlMgRJIn+p1v
- tfrg==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jmAID-0007Uy-I9; Fri, 19 Jun 2020 02:14:27 -0400
+Received: by mail-il1-x141.google.com with SMTP id a13so8261807ilh.3;
+ Thu, 18 Jun 2020 23:14:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=8eebD7N5iZMNvpDSTRHabX8tggHEe3JXaxwj/8p+1Dw=;
+ b=lvdKQOVmQ3A8+k2jEXA1OzFs8k4UsI8TasG/9Vn3EE1S+KWd9DSwZcuW7dtIj/wNLG
+ zY65lNwXbREb5OWmUMyXDkxPa+GIwgHNpQOhpy4vLEDivCyk0g0UqL94v+HQgAa9VekA
+ gqOyRGV8L9dPgyzFhQM1YJKGaMZNJECVTC8Iv92ZLOcK/WjUF2hQsJtDpo+hd7+nwLKm
+ nDqpNiTOs7WMAAOUMqAFXmyjKWiE4DBBjLWX/ppsKALAVAScVJwlxaAB0BjO+NtOwCg9
+ QRwjePp0IXQks0NOHXuPlIuTdAYBAgFsgTPotCStKNk/Cdrwsyjkt22+DCRvWpc6pfUO
+ 9Egw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=TmXn+WrPDMeidG0EK/5eV4AmYLlUduC5OfZ46f1gmqI=;
- b=gwJ44vN7bjWK6jkTg0Xfi5W9pLvscYnEQB5pEx+4jZoPY3hgm9JRGfUcdSnqod6xV+
- 2jtDOYQubTdevXzP1x+xE2AAZUDwAcVuKgi+T41BCVwQo1fjV5f9tgZze0nPl+R3WfOh
- mPFXDXXFT5vlr/X/5UbjEqYr/5WYY9vlHSJA7O/8IL07GAN6DpAWokBDptKEGbLkD0ux
- nUlRV1Pi8+CLFwzOPpC+SaHxnMONgy86QFr1GyPb1UG+rx6KhU3QD+/9aj5t6HXu1Rbw
- ee8StnGNqczWCF9ewShEf6keVDQBkQ0PJmBCbTy0lW0RZ8vQ8HW7uujx9mn2lzJfrnDH
- ncBQ==
-X-Gm-Message-State: AOAM533BfPuP85cHla9wYUw0t3ZWROvcjewosFZzLkQKjlWCIC0nHWjM
- 0y3RLDhqcFlZLp4DlIg9G6/6zg==
-X-Google-Smtp-Source: ABdhPJyNMNpcvC400/+TBTsw0TC9YAQXCVsf5APbov2gmf1VN+V1mXuIG5suEpV/N6ftCjF+6eoC7w==
-X-Received: by 2002:a17:902:b603:: with SMTP id b3mr6568730pls.1.1592538170388; 
- Thu, 18 Jun 2020 20:42:50 -0700 (PDT)
-Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
- [76.210.143.223])
- by smtp.gmail.com with ESMTPSA id e12sm4439337pfj.137.2020.06.18.20.42.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jun 2020 20:42:49 -0700 (PDT)
-Date: Thu, 18 Jun 2020 20:42:49 -0700 (PDT)
-X-Google-Original-Date: Thu, 18 Jun 2020 20:27:50 PDT (-0700)
-Subject: Re: [PATCH v1 2/2] sifive_e: Support the revB machine
-In-Reply-To: <CAKmqyKMKF9QDFthRqLRQTziKNka5oJjcmYebyiR71y019AHE1g@mail.gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: alistair23@gmail.com
-Message-ID: <mhng-e6502870-4be9-42af-a89a-adfe5598059a@palmerdabbelt-glaptop1>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::642;
- envelope-from=palmer@dabbelt.com; helo=mail-pl1-x642.google.com
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=8eebD7N5iZMNvpDSTRHabX8tggHEe3JXaxwj/8p+1Dw=;
+ b=ZFdJJLjSD9sG+pg8lMiKB/oVEz6r2eq41f/7v3BWYlUupSyE5O2Zs7AqG+b6fXMAbJ
+ HA+mEN+8lX1jgrPMMQui9hqtXeAORBDyLVr8aXIXrLzJGlhobvN+QGdqOWvuWrv/hpyC
+ Qn6Ar7ABo6VgpyuSdGWtVkTfsshH4X/2VNy7+KAjgaeOYZs2lZRJ5J04vozm+i2jp0VV
+ 4uPJAIsO1TYNRt5vwCOne23tB3LRriU07RW5ER7cEupYTHNzzxaQrIetNBipl86Y5Q8m
+ LPRIVgXJMU1yA+eGnp1rLvUuLmNAF95WP1FS0/Pt3WDDVtUaMkFXPb+2EgOocr5T8tXm
+ zUDw==
+X-Gm-Message-State: AOAM533MQ2lXS+pwvnsKkANnS0XIWlkfc0n13LvV689VoJfg4eJHpF5u
+ iqqWRUAlm6JHV8cXYsqNuEU81430vLHIqrGnjEE=
+X-Google-Smtp-Source: ABdhPJz4lC21EcdKd3OMrB/N9cUXHCfcBeMxbrZhhawF7RW64BlzShXWKYFAudWwRo7C4Odd1IqYxryoiSRSIfo5Glw=
+X-Received: by 2002:a92:d647:: with SMTP id x7mr2165462ilp.267.1592547263870; 
+ Thu, 18 Jun 2020 23:14:23 -0700 (PDT)
+MIME-Version: 1.0
+References: <1592268641-7478-1-git-send-email-bmeng.cn@gmail.com>
+ <1592268641-7478-3-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKNovTf3F+t9WFCWXvAgT_CRa5dbDuQExzbqxkM-z3ufqw@mail.gmail.com>
+ <CAEUhbmVq8kVfZRQSF-LT_bDib9e1xBL-7zifmHpQgdvehcNzFA@mail.gmail.com>
+ <CAEUhbmU3ouNn=PfXLwZx_Pu49zmWY1ddsSqKONdh6X5atXcncg@mail.gmail.com>
+In-Reply-To: <CAEUhbmU3ouNn=PfXLwZx_Pu49zmWY1ddsSqKONdh6X5atXcncg@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 18 Jun 2020 23:04:57 -0700
+Message-ID: <CAKmqyKN+QjohXJQ81Tpu9+VDzgAHVbyOKs-vxC3d7wGvZKMWvw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] hw/riscv: sifive: Change SiFive E/U CPU reset
+ vector to 0x1004
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,142 +81,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jun 2020 03:42:55 -0000
+X-List-Received-Date: Fri, 19 Jun 2020 06:14:27 -0000
 
-On Thu, 18 Jun 2020 16:18:20 PDT (-0700), alistair23@gmail.com wrote:
-> On Thu, Jun 18, 2020 at 3:42 PM Palmer Dabbelt <palmer@dabbelt.com> wrote:
->>
->> On Wed, 10 Jun 2020 15:13:49 PDT (-0700), alistair23@gmail.com wrote:
->> > On Thu, May 28, 2020 at 11:13 AM Alistair Francis <alistair23@gmail.com> wrote:
->> >>
->> >> On Thu, May 21, 2020 at 8:57 AM Alistair Francis <alistair23@gmail.com> wrote:
->> >> >
->> >> > On Wed, May 20, 2020 at 4:08 PM Palmer Dabbelt <palmer@dabbelt.com> wrote:
->> >> > >
->> >> > > On Thu, 14 May 2020 13:47:10 PDT (-0700), Alistair Francis wrote:
->> >> > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->> >> > > > ---
->> >> > > >  hw/riscv/sifive_e.c         | 35 +++++++++++++++++++++++++++++++----
->> >> > > >  include/hw/riscv/sifive_e.h |  1 +
->> >> > > >  2 files changed, 32 insertions(+), 4 deletions(-)
->> >> > > >
->> >> > > > diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
->> >> > > > index 472a98970b..cb7818341b 100644
->> >> > > > --- a/hw/riscv/sifive_e.c
->> >> > > > +++ b/hw/riscv/sifive_e.c
->> >> > > > @@ -98,10 +98,14 @@ static void riscv_sifive_e_init(MachineState *machine)
->> >> > > >          memmap[SIFIVE_E_DTIM].base, main_mem);
->> >> > > >
->> >> > > >      /* Mask ROM reset vector */
->> >> > > > -    uint32_t reset_vec[2] = {
->> >> > > > -        0x204002b7,        /* 0x1000: lui     t0,0x20400 */
->> >> > > > -        0x00028067,        /* 0x1004: jr      t0 */
->> >> > > > -    };
->> >> > > > +    uint32_t reset_vec[2];
->> >> > > > +
->> >> > > > +    if (s->revb) {
->> >> > > > +        reset_vec[0] = 0x200102b7;        /* 0x1000: lui     t0,0x20010 */
->> >> > > > +    } else {
->> >> > > > +        reset_vec[0] = 0x204002b7;        /* 0x1000: lui     t0,0x20400 */
->> >> > > > +    }
->> >> > > > +    reset_vec[1] = 0x00028067;        /* 0x1004: jr      t0 */
->> >> > > >
->> >> > > >      /* copy in the reset vector in little_endian byte order */
->> >> > > >      for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
->> >> > > > @@ -115,8 +119,31 @@ static void riscv_sifive_e_init(MachineState *machine)
->> >> > > >      }
->> >> > > >  }
->> >> > > >
->> >> > > > +static bool sifive_e_machine_get_revb(Object *obj, Error **errp)
->> >> > > > +{
->> >> > > > +    SiFiveEState *s = RISCV_E_MACHINE(obj);
->> >> > > > +
->> >> > > > +    return s->revb;
->> >> > > > +}
->> >> > > > +
->> >> > > > +static void sifive_e_machine_set_revb(Object *obj, bool value, Error **errp)
->> >> > > > +{
->> >> > > > +    SiFiveEState *s = RISCV_E_MACHINE(obj);
->> >> > > > +
->> >> > > > +    s->revb = value;
->> >> > > > +}
->> >> > > > +
->> >> > > >  static void sifive_e_machine_instance_init(Object *obj)
->> >> > > >  {
->> >> > > > +    SiFiveEState *s = RISCV_E_MACHINE(obj);
->> >> > > > +
->> >> > > > +    s->revb = false;
->> >> > > > +    object_property_add_bool(obj, "revb", sifive_e_machine_get_revb,
->> >> > > > +                             sifive_e_machine_set_revb, NULL);
->> >> > > > +    object_property_set_description(obj, "revb",
->> >> > > > +                                    "Set on to tell QEMU that it should model "
->> >> > > > +                                    "the revB HiFive1 board",
->> >> > > > +                                    NULL);
->> >> > > >  }
->> >> > > >
->> >> > > >  static void sifive_e_machine_class_init(ObjectClass *oc, void *data)
->> >> > > > diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
->> >> > > > index 414992119e..0d3cd07fcc 100644
->> >> > > > --- a/include/hw/riscv/sifive_e.h
->> >> > > > +++ b/include/hw/riscv/sifive_e.h
->> >> > > > @@ -45,6 +45,7 @@ typedef struct SiFiveEState {
->> >> > > >
->> >> > > >      /*< public >*/
->> >> > > >      SiFiveESoCState soc;
->> >> > > > +    bool revb;
->> >> > > >  } SiFiveEState;
->> >> > > >
->> >> > > >  #define TYPE_RISCV_E_MACHINE MACHINE_TYPE_NAME("sifive_e")
->> >> > >
->> >> > > IIRC there are way more differences between the un-suffixed FE310 and the Rev
->> >> > > B, specifically the interrupt map is all different.
->> >> >
->> >> > The three IRQs that QEMU uses for the SiFive E (UART0, UART1 and GPIO)
->> >> > all seem to be the same.
->> >>
->> >> Ping!
->> >
->> > Ping^2
->> >
->> > Applying to RISC-V tree.
->>
->> They're not: uart0 is interrupt 3 on the rev b but 5 on the non-rev b (which
->> they don't call rev a but I'm going to :)).  There's isn't even a uart1 in the
->> DTS on the rev a, and the GPIO interrupts are different as well.
->>
->> The DTS files are in SiFive's SDK:
->>
->> https://github.com/sifive/freedom-e-sdk/blob/master/bsp/sifive-hifive1-revb/core.dts
->> https://github.com/sifive/freedom-e-sdk/blob/master/bsp/sifive-hifive1/core.dts
->>
->> which should also generate some test programs.  When I was there we tested on
->> QEMU for the platforms that were supported, so there should be some support for
->> doing so still.
+On Wed, Jun 17, 2020 at 10:08 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> I am reading the wrong data sheets?
+> Hi Alistair,
 >
-> For revB I looked at
-> https://sifive.cdn.prismic.io/sifive%2F9ecbb623-7c7f-4acc-966f-9bb10ecdb62e_fe310-g002.pdf,
-> page 46, table 26. The interrupts for the revB match what we currently
-> have in QEMU.
+> On Thu, Jun 18, 2020 at 8:41 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > Hi Alistair,
+> >
+> > On Thu, Jun 18, 2020 at 12:40 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > >
+> > > On Mon, Jun 15, 2020 at 5:51 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > >
+> > > > From: Bin Meng <bin.meng@windriver.com>
+> > > >
+> > > > Per the SiFive manual, all E/U series CPU cores' reset vector is
+> > > > at 0x1004. Update our codes to match the hardware.
+> > > >
+> > > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> > >
+> > > This commit breaks my Oreboot test.
+> > >
+> > > Oreboot starts in flash and we run the command with the
+> > > `sifive_u,start-in-flash=true` machine.
+> >
+> > Could you please post an Oreboot binary for testing somewhere, or some
+> > instructions so that I can test this?
+> >
 >
-> For revA https://sifive.cdn.prismic.io/sifive%2F500a69f8-af3a-4fd9-927f-10ca77077532_fe310-g000.pdf,
-> page 42, table 21 also matches what we have in QEMU.
+> I have figured out where the issue is. The issue is inside the Oreboot
+> codes that its QEMU detecting logic should be updated to match this
+> change.
 >
-> To me it looks like both have two UARTs and both have the same
-> interrupt numbers.
+> I've sent pull request to Oreboot to fix this:
+> https://github.com/oreboot/oreboot/pull/264
+
+Thanks for that.
+
 >
-> The actual software I am running also hasn't changed UART interrupt
-> numbering between the two boards and UART interrupts are working
-> correctly.
+> > >
+> > > I have removed this and the later patches from the RISC-V branch. I
+> > > want to send a PR today. After that I'll look into this.
+> >
 >
-> Alistair
+> I don't think we should drop this patch and later ones in this series.
+
+Applied again then.
+
+Alistair
+
 >
->>
->> >
->> > Alistair
->> >
->> >>
->> >> >
->> >> > Alistair
+> Regards,
+> Bin
 
