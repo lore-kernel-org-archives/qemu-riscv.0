@@ -1,46 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jnG1l-0006ei-HQ
-	for mharc-qemu-riscv@gnu.org; Mon, 22 Jun 2020 02:33:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37136)
+	id 1jnG1m-0006i4-P1
+	for mharc-qemu-riscv@gnu.org; Mon, 22 Jun 2020 02:33:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37188)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jnG1h-0006V0-N9; Mon, 22 Jun 2020 02:33:53 -0400
-Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:52515)
+ id 1jnG1j-0006ZM-Il; Mon, 22 Jun 2020 02:33:55 -0400
+Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:36160)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jnG1W-0007ul-GC; Mon, 22 Jun 2020 02:33:53 -0400
-Received: by mail-wm1-x341.google.com with SMTP id r9so13699487wmh.2;
- Sun, 21 Jun 2020 23:33:41 -0700 (PDT)
+ id 1jnG1h-0007vo-Ng; Mon, 22 Jun 2020 02:33:55 -0400
+Received: by mail-wr1-x441.google.com with SMTP id k6so2917404wrn.3;
+ Sun, 21 Jun 2020 23:33:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=xAwN/a4oBvgObKEWKqLHwzSi23Om+xZRsWpsUFF+lhU=;
- b=bLyI0el3fQ1Af0KNXQomybyruDMqB/LyVdJrM0LzCWapPFEb507ueDkv3pHvoUwRxr
- YQiv159ybBomQOSTAKVeqA0oeiTFCMQHAr3z3gy/MXBH1ZbZrKE2Xpr9z6D+XRmBXxBG
- 6iT3bE/973is2afBqqTJe7qozq9iIATZB64Z7GqPPvV937c1+d+xKvwx5awPWvSXSiEy
- 98goxTlEBg180NlKCp8UpmuwZpVcEgAVy1epaHXs/OCryAE+bUIBMMOb1EW68liCzkKq
- PAq4v7kS7h5lctDfHfnFH7jdVUQmjKuVZBcj4iEt1phKvnYGkRZaxbdJPho0vIJYNWO+
- fUxw==
+ bh=DBMvo4MSmxnrTos0RHTFQ1uipETn7yULsn5/57j1g2I=;
+ b=CbrscSCh7wy90RoaEA729exYVrmnCp9th0HqJvUlVF+sfMwIbv1WeXHfXvIppc9dUj
+ DWOY8RRF8Wp28YCaPEamVzx38SmaRhB/PyYqdSP5JYcot6dNZrKl7JmQaUe/uV3CNU51
+ rTpPdOWoiLOL6thpkq/ci6rTQ3o2evXvaDpPS4bDWe28CrvVHn5Ymv3UiT0Fh4dHt2Oj
+ ffIl2aLsFYxS/pNmStD7y71suDDQA/s2outz+TkOgRipE16oth7Ipxf/pcX80PaEtVAu
+ JkxyKKg+A5nRVxJ64qoX1OdWv8Fqp+a5rV3jgPIS9uzhW4xv5pQBQP/HZr3P9kcX8Avj
+ IyDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=xAwN/a4oBvgObKEWKqLHwzSi23Om+xZRsWpsUFF+lhU=;
- b=ZVQ4bIFbYDMVSJDFSOqrP19gzX6gwWGCall2NgQ50oaqNJIrbH5OESp4NXUieF2h6l
- /p+2MKU0L0MakkHvo39LnGjjyzDXRLwt7rd6sBAEQWpYMfcIWtTmZSkaJZ1hXSJok5KU
- 6I0B0kq2uLZxauCWYOhzDOXoBpcSOBdSBnFPYjMaYe/wlQ8Hf2D5RyA6O/NDdGORIp7U
- uywMNL5AvIAsvqet/USkX5jWJEYy2XrARlpRUS9EH6A0LQkK0gzIBVPagGNS7O85dCVL
- E4ojIxr+UFOE9RovPzb0rR2cz8o0hxgIOJTwCyo+cN5i6rOKQnYk2xpREENfhWjhcMyy
- wtPA==
-X-Gm-Message-State: AOAM533IemSNNpWAkqSuIxtBeZ+lxo1ooTy0srPl4A97LzPCQemjZ+C+
- o1VYLnPY3fB/FmeyT9pBSpI=
-X-Google-Smtp-Source: ABdhPJwp4wsC/VupXLnJyEivh+9jjMgz9ZXrOLn41yfFdUSv/aoVsayD2Qr/toJBrJTqu7dCB3+GKA==
-X-Received: by 2002:a1c:2157:: with SMTP id h84mr15499792wmh.35.1592807620778; 
- Sun, 21 Jun 2020 23:33:40 -0700 (PDT)
+ bh=DBMvo4MSmxnrTos0RHTFQ1uipETn7yULsn5/57j1g2I=;
+ b=rLtEDEMeXVZb9ZxEtK+kt3Ppq8er2dDpP5+pMVQ1UJPcvpb/dyh9RO22x8YyQhhnUU
+ 40qMgPY71sYMYJdCS2D2HTkGc3itPDWggr7F0F8oA7eBRiS2TarhJiLeEIekKk1CgKes
+ DckNDImWFumvUcBCEJwse/ti9VDrPn3ECpj8C/WhEs802W1WgqEOPCE3451//1IUGEBm
+ sYko4stMvV9WW7jOKLXSGhYhLI1CZQILcszKohsYp5rSA2lz5GwEJ1asnjDmL4MY7vgy
+ z64Uf5y82sk3L4Ph0//Mf2OBs4XvNpIKzXD0Z7T2vElLhuyM71XE9jkMAa0/XLPmEvcN
+ reaA==
+X-Gm-Message-State: AOAM532ZjpVgX6pY6jC0iTkUpdcW+gvoaVyPWzo51/Tdijzi7TgKqKag
+ HphbkPrR9b41jJOL1Z2Prfk=
+X-Google-Smtp-Source: ABdhPJzIymSFXUZgF545ZWfQjZDiLIvp8afF3GhTBnreqwrhqjB4b9GrX856vGYhtwnypV0/Kf5eXA==
+X-Received: by 2002:a5d:62d1:: with SMTP id o17mr16997999wrv.162.1592807630175; 
+ Sun, 21 Jun 2020 23:33:50 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id a10sm16684240wrm.21.2020.06.21.23.33.38
+ by smtp.gmail.com with ESMTPSA id a10sm16684240wrm.21.2020.06.21.23.33.48
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Sun, 21 Jun 2020 23:33:40 -0700 (PDT)
+ Sun, 21 Jun 2020 23:33:49 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -49,15 +49,15 @@ To: Alistair Francis <Alistair.Francis@wdc.com>,
  qemu-riscv@nongnu.org
 Cc: Anup Patel <anup@brainfault.org>,
 	Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v2 3/7] roms/Makefile: Build the generic platform for RISC-V
- OpenSBI firmware
-Date: Sun, 21 Jun 2020 23:33:20 -0700
-Message-Id: <1592807604-20805-4-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH v2 7/7] Makefile: Ship the generic platform bios images for
+ RISC-V
+Date: Sun, 21 Jun 2020 23:33:24 -0700
+Message-Id: <1592807604-20805-8-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1592807604-20805-1-git-send-email-bmeng.cn@gmail.com>
 References: <1592807604-20805-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::341;
- envelope-from=bmeng.cn@gmail.com; helo=mail-wm1-x341.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::441;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-wr1-x441.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,84 +79,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2020 06:33:54 -0000
+X-List-Received-Date: Mon, 22 Jun 2020 06:33:56 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-The RISC-V generic platform is a flattened device tree (FDT) based
-platform where all platform specific functionality is provided based
-on FDT passed by previous booting stage. The support was added in
-the upstream OpenSBI v0.8 release recently.
-
-Update our Makefile to build the generic platform instead of building
-virt and sifive_u separately for RISC-V OpenSBI firmware.
-
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
-Reviewed-by: Anup Patel <anup@brainfault.org>
 
 ---
 
 Changes in v2:
-- Copy the ELF images too in the make rules
+- new patch: Makefile: Ship the generic platform bios images for RISC-V
 
- roms/Makefile | 32 ++++++++++----------------------
- 1 file changed, 10 insertions(+), 22 deletions(-)
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/roms/Makefile b/roms/Makefile
-index f9acf39..211a269 100644
---- a/roms/Makefile
-+++ b/roms/Makefile
-@@ -64,10 +64,8 @@ default help:
- 	@echo "  u-boot.e500        -- update u-boot.e500"
- 	@echo "  u-boot.sam460      -- update u-boot.sam460"
- 	@echo "  efi                -- update UEFI (edk2) platform firmware"
--	@echo "  opensbi32-virt     -- update OpenSBI for 32-bit virt machine"
--	@echo "  opensbi64-virt     -- update OpenSBI for 64-bit virt machine"
--	@echo "  opensbi32-sifive_u -- update OpenSBI for 32-bit sifive_u machine"
--	@echo "  opensbi64-sifive_u -- update OpenSBI for 64-bit sifive_u machine"
-+	@echo "  opensbi32-generic  -- update OpenSBI for 32-bit generic machine"
-+	@echo "  opensbi64-generic  -- update OpenSBI for 64-bit generic machine"
- 	@echo "  bios-microvm       -- update bios-microvm.bin (qboot)"
- 	@echo "  clean              -- delete the files generated by the previous" \
- 	                              "build targets"
-@@ -170,29 +168,19 @@ skiboot:
- efi: edk2-basetools
- 	$(MAKE) -f Makefile.edk2
+diff --git a/Makefile b/Makefile
+index 48f23aa..ddd7c43 100644
+--- a/Makefile
++++ b/Makefile
+@@ -841,8 +841,8 @@ u-boot.e500 u-boot-sam460-20100605.bin \
+ qemu_vga.ndrv \
+ edk2-licenses.txt \
+ hppa-firmware.img \
+-opensbi-riscv32-sifive_u-fw_jump.bin opensbi-riscv32-virt-fw_jump.bin \
+-opensbi-riscv64-sifive_u-fw_jump.bin opensbi-riscv64-virt-fw_jump.bin
++opensbi-riscv32-generic-fw_jump.bin opensbi-riscv32-generic-fw_jump.elf \
++opensbi-riscv64-generic-fw_jump.bin opensbi-riscv64-generic-fw_jump.elf
  
--opensbi32-virt:
-+opensbi32-generic:
- 	$(MAKE) -C opensbi \
- 		CROSS_COMPILE=$(riscv32_cross_prefix) \
--		PLATFORM="qemu/virt"
--	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-virt-fw_jump.bin
-+		PLATFORM="generic"
-+	cp opensbi/build/platform/generic/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-generic-fw_jump.bin
-+	cp opensbi/build/platform/generic/firmware/fw_jump.elf ../pc-bios/opensbi-riscv32-generic-fw_jump.elf
  
--opensbi64-virt:
-+opensbi64-generic:
- 	$(MAKE) -C opensbi \
- 		CROSS_COMPILE=$(riscv64_cross_prefix) \
--		PLATFORM="qemu/virt"
--	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-virt-fw_jump.bin
--
--opensbi32-sifive_u:
--	$(MAKE) -C opensbi \
--		CROSS_COMPILE=$(riscv32_cross_prefix) \
--		PLATFORM="sifive/fu540"
--	cp opensbi/build/platform/sifive/fu540/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
--
--opensbi64-sifive_u:
--	$(MAKE) -C opensbi \
--		CROSS_COMPILE=$(riscv64_cross_prefix) \
--		PLATFORM="sifive/fu540"
--	cp opensbi/build/platform/sifive/fu540/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
-+		PLATFORM="generic"
-+	cp opensbi/build/platform/generic/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-generic-fw_jump.bin
-+	cp opensbi/build/platform/generic/firmware/fw_jump.elf ../pc-bios/opensbi-riscv64-generic-fw_jump.elf
- 
- bios-microvm:
- 	$(MAKE) -C qboot
+ DESCS=50-edk2-i386-secure.json 50-edk2-x86_64-secure.json \
 -- 
 2.7.4
 
