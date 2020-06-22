@@ -1,71 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jnJv9-0007mB-Tm
-	for mharc-qemu-riscv@gnu.org; Mon, 22 Jun 2020 06:43:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40272)
+	id 1jnLJy-000894-9g
+	for mharc-qemu-riscv@gnu.org; Mon, 22 Jun 2020 08:13:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57410)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jnJv0-0007aH-7b
- for qemu-riscv@nongnu.org; Mon, 22 Jun 2020 06:43:14 -0400
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:52030
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jnJuo-0005O7-JD
- for qemu-riscv@nongnu.org; Mon, 22 Jun 2020 06:43:13 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1592822581;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Y41/tyfk83Bxo7I6Ik9l+fJFLuq+rilcHzefqhhuvEk=;
- b=Hkcn+w2zPRQ8U9P0WOkLCEdAX54/E9HdjH6jLi4OrYYO06wsf/znJpvq21pOQpbxHuHj71
- MdMbR+c7p2Rnt8oGX/xibXT1rdA2aocUZ1lTFPOcKErWTobiGAZ+LyJmjrlFa5VG2rHFae
- M2Zl0gYkfxMrs1dLHXy2frbd/oCfeL0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-443-AB_lkKkXNwug5284oO3j5Q-1; Mon, 22 Jun 2020 06:42:58 -0400
-X-MC-Unique: AB_lkKkXNwug5284oO3j5Q-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 82675835B41;
- Mon, 22 Jun 2020 10:42:56 +0000 (UTC)
-Received: from blackfin.pond.sub.org (ovpn-112-121.ams2.redhat.com
- [10.36.112.121])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 127127167B;
- Mon, 22 Jun 2020 10:42:56 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 457E01138481; Mon, 22 Jun 2020 12:42:51 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org
-Subject: [PATCH 19/22] riscv_hart: Fix riscv_harts_realize() error API
- violations
-Date: Mon, 22 Jun 2020 12:42:47 +0200
-Message-Id: <20200622104250.1404835-20-armbru@redhat.com>
-In-Reply-To: <20200622104250.1404835-1-armbru@redhat.com>
-References: <20200622104250.1404835-1-armbru@redhat.com>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jnLJw-00088i-FX; Mon, 22 Jun 2020 08:13:04 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:35680)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jnLJu-0007Fi-L1; Mon, 22 Jun 2020 08:13:04 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id 187so8984364ybq.2;
+ Mon, 22 Jun 2020 05:13:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=/NN/9u77e9B+qXaVahDiUEE7BSunPhSjs0zadeZbxpY=;
+ b=MlERDvQO7WjxcKiIsBzKp9AgiSk3Y4ZTYK2CQcj3cWLFGShZJNq8rEt/vYv42edOwk
+ mL8a/56RH+tPSR/oRP1CaIdM14eT4R7jmy/UoCdPft/z0ReRr3jxWrDQ3K6jY4Dd9CmQ
+ xnlcqY9dfQBROe6qshe5IVPFU5PUbHtmuBiyN5W+FMDWRKcXMMTINQHFBZffAT4mCf+L
+ lXJPvBjKMBw3tw2/YCkbssiVbg2Jb+1urb8FGKwXgsxdJTy6IZxNGQp0CCHQJ1j/BNf9
+ I8Cip/LMkwXE1vf+WJzzkK19MM8JUb4077oG8gm1kgZm48AdhriUOMNWOVuTmBUqh/04
+ o34A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=/NN/9u77e9B+qXaVahDiUEE7BSunPhSjs0zadeZbxpY=;
+ b=NFYWoT79XqMmsmAWXcOTir9Li0CZ7Yk8ZnrW02DyEGXx1CDEAQE7Oxg2sQUiS/YUdF
+ xIa6VNWDwKKwpDuB3l1OzQ2L78SA0Vl0z5Bxp0FUYzIXbVP12warkecFYy94ojPZAl+0
+ wRSG9NlxwzNKLRQMpHjfIfFx7rGm8rsynnhb/GinMR4nI82l2VyZbybtXGXboRyke7U/
+ fXeMpw6flIwZx6MwOtYrPJf1IQpwE/G+BdQovUyyEdMq4VsAJetznRs9lMsm7tznSJ8+
+ oRbljQ/+PcJNXL7Pz5dnTH4RfLP5SCFbosdUDdZ5hSdAcDwbEtMnSIiyYzYvPwsCjeFq
+ 6xKg==
+X-Gm-Message-State: AOAM531vLOv1lTLJByETWBYY3VQhNY1pVadwaPaiYJUVKGb3HxSMQ6Td
+ 81R9VyFcPrnAjTdkVa8DsPveZqchm6YOQv3pV9U=
+X-Google-Smtp-Source: ABdhPJzttXwSNeg2qZd84dunUK+aTi1nsKoTGmOD1Fd9ujZC/ZaYn3lAwiUbx+ZARzwJbBeVEhgYlnlrnoFfZ1MP4uw=
+X-Received: by 2002:a25:38c5:: with SMTP id
+ f188mr27878031yba.332.1592827981324; 
+ Mon, 22 Jun 2020 05:13:01 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=207.211.31.81; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/22 02:57:26
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -30
-X-Spam_score: -3.1
-X-Spam_bar: ---
-X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=_AUTOLEARN
+References: <1592807604-20805-1-git-send-email-bmeng.cn@gmail.com>
+ <DM6PR04MB620142B152292DD3945E4D3C8D970@DM6PR04MB6201.namprd04.prod.outlook.com>
+In-Reply-To: <DM6PR04MB620142B152292DD3945E4D3C8D970@DM6PR04MB6201.namprd04.prod.outlook.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 22 Jun 2020 20:12:49 +0800
+Message-ID: <CAEUhbmVhHKy70dA5dyQCiWeYk1nbhXHnZH8JBxmRJP6EUb2z9g@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] riscv: Switch to use generic platform of opensbi
+ bios images
+To: Anup Patel <Anup.Patel@wdc.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -78,69 +78,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2020 10:43:15 -0000
+X-List-Received-Date: Mon, 22 Jun 2020 12:13:04 -0000
 
-The Error ** argument must be NULL, &error_abort, &error_fatal, or a
-pointer to a variable containing NULL.  Passing an argument of the
-latter kind twice without clearing it in between is wrong: if the
-first call sets an error, it no longer points to NULL for the second
-call.
+Hi Anup,
 
-riscv_harts_realize() is wrong that way: it passes @errp to
-riscv_hart_realize() in a loop.  I can't tell offhand whether this can
-fail.
+On Mon, Jun 22, 2020 at 6:09 PM Anup Patel <Anup.Patel@wdc.com> wrote:
+>
+>
+>
+> > -----Original Message-----
+> > From: Qemu-riscv <qemu-riscv-
+> > bounces+anup.patel=wdc.com@nongnu.org> On Behalf Of Bin Meng
+> > Sent: 22 June 2020 12:03
+> > To: Alistair Francis <Alistair.Francis@wdc.com>; Bastian Koppelmann
+> > <kbastian@mail.uni-paderborn.de>; Palmer Dabbelt
+> > <palmerdabbelt@google.com>; Sagar Karandikar
+> > <sagark@eecs.berkeley.edu>; qemu-devel@nongnu.org; qemu-
+> > riscv@nongnu.org
+> > Cc: Anup Patel <anup@brainfault.org>; Bin Meng
+> > <bin.meng@windriver.com>
+> > Subject: [PATCH v2 0/7] riscv: Switch to use generic platform of opensbi bios
+> > images
+> >
+> > From: Bin Meng <bin.meng@windriver.com>
+> >
+> > The RISC-V generic platform is a flattened device tree (FDT) based platform
+> > where all platform specific functionality is provided based on FDT passed by
+> > previous booting stage. The support was added in the upstream OpenSBI
+> > v0.8 release recently.
+> >
+> > This series updates QEMU to switch to use generic platform of opensbi bios
+> > images.
+> >
+> > The patch emails do not contain binary bits, please grab all updates at
+> > https://github.com/lbmeng/qemu.git bios branch.
+>
+> It will be nice to have this series updated to for fw_dynamic.bin .
 
-Fix by checking for failure in each iteration.
+Do you mean we include fw_dynamic.bin for virt & sifive_u, and
+fw_dynamic.elf for spike?
 
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: qemu-riscv@nongnu.org
-Signed-off-by: Markus Armbruster <armbru@redhat.com>
----
- hw/riscv/riscv_hart.c | 14 +++++---------
- 1 file changed, 5 insertions(+), 9 deletions(-)
+But previously we agreed to include only generic platform BIN and ELF files.
+See https://lists.gnu.org/archive/html/qemu-devel/2020-05/msg00664.html
 
-diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
-index e26c382259..f59fe52f0f 100644
---- a/hw/riscv/riscv_hart.c
-+++ b/hw/riscv/riscv_hart.c
-@@ -40,19 +40,13 @@ static void riscv_harts_cpu_reset(void *opaque)
-     cpu_reset(CPU(cpu));
- }
- 
--static void riscv_hart_realize(RISCVHartArrayState *s, int idx,
-+static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
-                                char *cpu_type, Error **errp)
- {
--    Error *err = NULL;
--
-     object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
-     s->harts[idx].env.mhartid = s->hartid_base + idx;
-     qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
--    qdev_realize(DEVICE(&s->harts[idx]), NULL, &err);
--    if (err) {
--        error_propagate(errp, err);
--        return;
--    }
-+    return qdev_realize(DEVICE(&s->harts[idx]), NULL, errp);
- }
- 
- static void riscv_harts_realize(DeviceState *dev, Error **errp)
-@@ -63,7 +57,9 @@ static void riscv_harts_realize(DeviceState *dev, Error **errp)
-     s->harts = g_new0(RISCVCPU, s->num_harts);
- 
-     for (n = 0; n < s->num_harts; n++) {
--        riscv_hart_realize(s, n, s->cpu_type, errp);
-+        if (!riscv_hart_realize(s, n, s->cpu_type, errp)) {
-+            return;
-+        }
-     }
- }
- 
--- 
-2.26.2
+>
+> Maybe you can rebase your series on top of Atish's patches ??
 
+Regards,
+Bin
 
