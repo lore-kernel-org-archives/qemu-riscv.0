@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jnTzh-0000Vk-Lb
-	for mharc-qemu-riscv@gnu.org; Mon, 22 Jun 2020 17:28:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36288)
+	id 1jnU46-0004Xb-Ok
+	for mharc-qemu-riscv@gnu.org; Mon, 22 Jun 2020 17:33:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40304)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jnTzf-0000Su-8S; Mon, 22 Jun 2020 17:28:43 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:36471)
+ id 1jnU44-0004Tg-R1; Mon, 22 Jun 2020 17:33:16 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:34749)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jnTzd-0004EV-Kr; Mon, 22 Jun 2020 17:28:42 -0400
-Received: by mail-io1-xd41.google.com with SMTP id y2so3483406ioy.3;
- Mon, 22 Jun 2020 14:28:40 -0700 (PDT)
+ id 1jnU43-0006Nx-0b; Mon, 22 Jun 2020 17:33:16 -0400
+Received: by mail-il1-x143.google.com with SMTP id x18so17426214ilp.1;
+ Mon, 22 Jun 2020 14:33:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=F1p4zzPgRjNq8whbDdvwLh4qbc2rmMf1KFz2ImorXrE=;
- b=Wb38PVivBnhtoHF3m6stOGcp81t1Vd03fWHHZeM8Q+ea4C4ANrtglBkPGeq7clTc85
- z6nuwypIGrxPBP5dQgwrN/5QsPzEWQJCbwSXuHd0W/mUFENrcfH/zUkV8PSvW4l3TQuF
- nsxdVYN4vr+SnDz1VWUF0V3fFLYizydpXLmMct1CUzNl1zbAYxMSR0IZM5zsLR6gOzmP
- vJJ3EycudLAlCJGChjNQ96WCEDqZHJygYe0RCevzjeoQkUyZMpB6BNKy8MS6U5ZcXWiR
- 7gR8ZAVgC/lCtar5HJm4yYP0BGuqsYSSmqtIogcjhxidn01Smtay9xm3gYvE+RFEz0P/
- L5vw==
+ :cc; bh=rubvoy2h9dj43M6haU17R2Jj0U2JGfulVap4b2+HV3E=;
+ b=MU1rudWMMjLWg3D6rZjVl0BxvQ+V5vIb/5gcRp017isnGCtSUqZ+ceCQyyAOlLo8ZM
+ 6T1Y07AZ9O9EFIDCv6j8uzrvuYIiFaTVru770EYko5pUeLrF7Tg7fXD3empyg4d/DgQT
+ Dte7lJijv85lHtto7IMfxLhbUhMs8kVtZsWLS3tjl45DVDPaeToAayFfP/CEPwNye0AB
+ 5y3XzsmrN2vIcv4oloStXXSdfnR79N17HeQbxCR4Y6T65d1E1ccHY3zew8k3prIeXfOf
+ q+Cjamr5VQXtu8Z3LJ2/geXCFTcOBGSZ8k5l2B67DVW5RTbae5shgyXrWMD/3VHPbgOZ
+ Biow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=F1p4zzPgRjNq8whbDdvwLh4qbc2rmMf1KFz2ImorXrE=;
- b=KB5SOyioIkjPoPjeUKvS8StGr25WDSOdbpBSS5nes1wuULxmyE5G5SGeGYCz/benam
- ObTqVqW9a5fx1AUO7BNj5KHSbdVWIIazYZtaY01XxMgyX/cbZ7UtQ+/wvs86iWpGzrkG
- 90keXhb+udMP2GGBWukefeHBiIH28CHMmDFufJqX4pFbA9Bm2VenIl+iUjg2Qigi24Yu
- y+jCsCkVnB7lZRneS6OiUZfoH/WiYUMBcmzKap/CLb8Hwmwp+Vi7nUpyS5ZfTcyDrTEf
- XZhDGO4MMTPAUX6lxoZ632ircSfP5hIQEt7d6sM/lthC3qCJz8FYxR/eWuE9KhAoSdpk
- ba6w==
-X-Gm-Message-State: AOAM5304NQAyPm0ZuTMZCdlPQUtUVenGp0/8+yhs0GxZ0AjZgRLtUnZk
- x3cKHph85Y27xjNiQsigg51qQkghZy6FSMtFZvQ=
-X-Google-Smtp-Source: ABdhPJxkRMiKuuCIMSi0triEbRJMZ2Rrdig8kmVLnKwKqqGwv7TInh9UIRwkDCN6YmI5GC0UnoUDBY6ZwKtDHkpZ8yQ=
-X-Received: by 2002:a5d:88c1:: with SMTP id i1mr20372022iol.176.1592861319661; 
- Mon, 22 Jun 2020 14:28:39 -0700 (PDT)
+ bh=rubvoy2h9dj43M6haU17R2Jj0U2JGfulVap4b2+HV3E=;
+ b=ICejKYHAA6bAeONNlmF7FjcrLcUUJS+9VEys//3wRr63bICTuVJSgeao+VC1ZerTeP
+ i/2P2LECi4U1roDjYaW2bz50qtUcCcnXE4Q1dGPtXrJ98YrJgpJ9K3CBwC1ap2r80oRI
+ xQ/QcZVvoTbC0G0kQSizeKffoTMfbEX3/MVHuWx2HHlN0SmxzBT7q3Ti6f6E8ouygCNr
+ 81tH3fZGezzAsd4wagEIWzfAuGGToUh5bT7gUzUvFaffJ/f77i3EYmqhUEXHFsQCERQj
+ MYdztij438jfJeJgycfnUS2mgCy+X+1xhJltnwq8GAfDC2PNHk3QcYiYTdgagp6R86Kv
+ In5Q==
+X-Gm-Message-State: AOAM531XSe8WgsOiqT5U+nvvC0dNc79JQrzGMGawaVYK9NGic+7WXtmx
+ 8uLrzmJkjAVxJ7kPPLr6OLZr0nClHd174YrRIBjH6SZx
+X-Google-Smtp-Source: ABdhPJx3zLP+jqYHUX5mL1kxyY+1K1xfY7PZrzBQN/RhbkbOsL1DkVvf18FOy+Jg5dDPOIqIlRAEdBHnftZbw88DC5Q=
+X-Received: by 2002:a92:d647:: with SMTP id x7mr19941431ilp.267.1592861588354; 
+ Mon, 22 Jun 2020 14:33:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200622104250.1404835-1-armbru@redhat.com>
- <20200622104250.1404835-20-armbru@redhat.com>
-In-Reply-To: <20200622104250.1404835-20-armbru@redhat.com>
+ <20200622104250.1404835-19-armbru@redhat.com>
+In-Reply-To: <20200622104250.1404835-19-armbru@redhat.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jun 2020 14:19:05 -0700
-Message-ID: <CAKmqyKPDA8gfTSX2d+OUos10v5z=6_366LSj=LBbVVXYDFisZg@mail.gmail.com>
-Subject: Re: [PATCH 19/22] riscv_hart: Fix riscv_harts_realize() error API
- violations
+Date: Mon, 22 Jun 2020 14:23:36 -0700
+Message-ID: <CAKmqyKOhfK2FcibsM_LxhcpekWZw=0S6+BsjL22xowzj0cX=5g@mail.gmail.com>
+Subject: Re: [PATCH 18/22] riscv/sifive_u: Fix sifive_u_soc_realize() error
+ API violations
 To: Markus Armbruster <armbru@redhat.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -53,8 +53,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -77,9 +77,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2020 21:28:43 -0000
+X-List-Received-Date: Mon, 22 Jun 2020 21:33:17 -0000
 
-On Mon, Jun 22, 2020 at 3:51 AM Markus Armbruster <armbru@redhat.com> wrote:
+On Mon, Jun 22, 2020 at 3:55 AM Markus Armbruster <armbru@redhat.com> wrote:
 >
 > The Error ** argument must be NULL, &error_abort, &error_fatal, or a
 > pointer to a variable containing NULL.  Passing an argument of the
@@ -87,11 +87,11 @@ On Mon, Jun 22, 2020 at 3:51 AM Markus Armbruster <armbru@redhat.com> wrote:
 > first call sets an error, it no longer points to NULL for the second
 > call.
 >
-> riscv_harts_realize() is wrong that way: it passes @errp to
-> riscv_hart_realize() in a loop.  I can't tell offhand whether this can
-> fail.
+> sifive_u_soc_realize() is wrong that way: it passes &err to
+> sysbus_realize() three times before checking it.  Harmless, because
+> the first two can't actually fail (I think).
 >
-> Fix by checking for failure in each iteration.
+> Fix by checking for failure right away.
 >
 > Cc: Palmer Dabbelt <palmer@dabbelt.com>
 > Cc: Alistair Francis <Alistair.Francis@wdc.com>
@@ -106,46 +106,31 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/riscv_hart.c | 14 +++++---------
->  1 file changed, 5 insertions(+), 9 deletions(-)
+>  hw/riscv/sifive_u.c | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
 >
-> diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
-> index e26c382259..f59fe52f0f 100644
-> --- a/hw/riscv/riscv_hart.c
-> +++ b/hw/riscv/riscv_hart.c
-> @@ -40,19 +40,13 @@ static void riscv_harts_cpu_reset(void *opaque)
->      cpu_reset(CPU(cpu));
->  }
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index ea197ab64f..3857b92d9a 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -587,11 +587,15 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>          memmap[SIFIVE_U_CLINT].size, ms->smp.cpus,
+>          SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE, false);
 >
-> -static void riscv_hart_realize(RISCVHartArrayState *s, int idx,
-> +static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
->                                 char *cpu_type, Error **errp)
->  {
-> -    Error *err = NULL;
-> -
->      object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
->      s->harts[idx].env.mhartid = s->hartid_base + idx;
->      qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
-> -    qdev_realize(DEVICE(&s->harts[idx]), NULL, &err);
-> -    if (err) {
-> -        error_propagate(errp, err);
-> -        return;
-> -    }
-> +    return qdev_realize(DEVICE(&s->harts[idx]), NULL, errp);
->  }
+> -    sysbus_realize(SYS_BUS_DEVICE(&s->prci), &err);
+> +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->prci), errp)) {
+> +        return;
+> +    }
+>      sysbus_mmio_map(SYS_BUS_DEVICE(&s->prci), 0, memmap[SIFIVE_U_PRCI].base);
 >
->  static void riscv_harts_realize(DeviceState *dev, Error **errp)
-> @@ -63,7 +57,9 @@ static void riscv_harts_realize(DeviceState *dev, Error **errp)
->      s->harts = g_new0(RISCVCPU, s->num_harts);
+>      qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
+> -    sysbus_realize(SYS_BUS_DEVICE(&s->otp), &err);
+> +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->otp), errp)) {
+> +        return;
+> +    }
+>      sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_OTP].base);
 >
->      for (n = 0; n < s->num_harts; n++) {
-> -        riscv_hart_realize(s, n, s->cpu_type, errp);
-> +        if (!riscv_hart_realize(s, n, s->cpu_type, errp)) {
-> +            return;
-> +        }
->      }
->  }
->
+>      for (i = 0; i < SIFIVE_U_PLIC_NUM_SOURCES; i++) {
 > --
 > 2.26.2
 >
