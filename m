@@ -1,57 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jo5r5-0003dD-U4
-	for mharc-qemu-riscv@gnu.org; Wed, 24 Jun 2020 09:54:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55650)
+	id 1joB4J-0001ru-MC
+	for mharc-qemu-riscv@gnu.org; Wed, 24 Jun 2020 15:28:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41420)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jo5r4-0003bF-2F; Wed, 24 Jun 2020 09:54:22 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:38238)
+ id 1joB4I-0001nj-2S; Wed, 24 Jun 2020 15:28:22 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:43843)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jo5r1-0005mV-UX; Wed, 24 Jun 2020 09:54:21 -0400
-Received: by mail-il1-x142.google.com with SMTP id t85so2128986ili.5;
- Wed, 24 Jun 2020 06:54:19 -0700 (PDT)
+ id 1joB4G-0008VQ-H7; Wed, 24 Jun 2020 15:28:21 -0400
+Received: by mail-io1-xd43.google.com with SMTP id k23so3443296iom.10;
+ Wed, 24 Jun 2020 12:28:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=I5Rjf8ii59Aiql206cPhopkdhvS2t9/pnAmPDhHAzHk=;
- b=gLI59hXKvqfXsyokQCjmeCpQs47SlbzLM22btqFyZbdPLLiDoqU0Gw9VhKk52UgqJF
- 3uk7uA7Z1NlPm3rdb9CKIBujjEbNwbEqGk7jKCC1QBpaVjGeh+E7pApricfBbOiN5//w
- CX4e6jobrYWNGnKJVbirxH5OGJHdUN2ES22PHYtaS+cqT/QCiXOYjrlpSLdcHjMc5WDO
- udtSU9QZziHvFHrMEOalsu7pRJaBfwOYI8aqI2sbMRi3io4hUa4DAXd7KS/MsuF81IuM
- ZhQN2skTfkO0k7FWP1RtfS/la1bUkJKzCx3sF3f2tb4/5GZ2VjTbKblcqXYApgIlYt8n
- 6aWg==
+ :cc; bh=tRrv+rACQSY60UF94VoDS2Yh/k0OjWOtOzFq/T7rIIU=;
+ b=bc3ttPCZxPGYdo+tvV4KhIgyn7VBUu8azmOELN7fGHR9+o/mcLEPTOkvWuooa93PuU
+ GjBZRVDlmSnQu0XKmV6FIyxJJNYfuOtXXtxCn6cLqf4yh8pwiYxMSW8FpII8Eaq5k50Y
+ n/LfMqaq0J/MVy+IPkOwamh1rD3Jy4Egc0iK6EiXCSSo8de6YzlLvkY36f5WqzTWi6ui
+ 3N1E3+JgTS6fjq2jTtB3iNVP2XpCGY7DjwC5jdrbqxIhCMQf+kIX7AtlE8wnjCqyVDN+
+ m6nogAklLHpWY+B5DaksVCMeNE4oTaEoCjdJUl/pAkPR1ytmX9f5zP/rcoNbQOGeb05P
+ 5rQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=I5Rjf8ii59Aiql206cPhopkdhvS2t9/pnAmPDhHAzHk=;
- b=eOE5fQbDP38mb7QSUlWXAIu/BX7ra3Cpn5ONUWyngCRYSJz5ZjsJPkCRqKYJE6U616
- drDERmDS79qzsJD8aDTo45dI+O7e8QSWiYanh1BqN49giKMQUrTPM2EqRMrxKBWu8epZ
- 2I1SUtiA2dqsihGVg48FN6NLiQRqwaNedsTtEZCYd356SeXzEZ2MwCyoxRpWaszE2P/y
- uaaSprVvRg208jxtp/ufZtt7bAfBQ8MrH0fmSoW0l700XkZ4QK4OVF7OTI1za7Leiiks
- JHB25/ZRXKqyYizx9JrwVOy+60IHQevgbKWj6tVJkFPYsn/fzLpbU30s7I1Hf2pBryAl
- agKQ==
-X-Gm-Message-State: AOAM532f8e2T6nPTCfNwWOBHnvIwMc83Ts4J/IchIL127qKyraQokn4z
- VknRxSwaTCIfPDctK/qrfCOKbGUSy9lBxoYKBo8=
-X-Google-Smtp-Source: ABdhPJztM2/Kh9Rf5qJXEazNqh15/BfaT/JKyJiTIlSs5nJ3l6d0kYBOBBkDdQ5Uot62G+3CNJiZrmuMIKLsrf7eXdI=
-X-Received: by 2002:a92:c213:: with SMTP id j19mr21902108ilo.40.1593006858418; 
- Wed, 24 Jun 2020 06:54:18 -0700 (PDT)
+ bh=tRrv+rACQSY60UF94VoDS2Yh/k0OjWOtOzFq/T7rIIU=;
+ b=rXhYAZXe/H88o7aTCMkfsoYhu8BacTAckG7VghEr4cnFrp95AZEuB9pD9Iz0kxm2vT
+ HCZ5pFbqW5vxd99e/O5+ib3jfIjl9rC56BqRMcHIFYvGZyyEddTocd3axIuatx5GbaKt
+ +tCtnBqNUtbftufatpfQ7Tx48IRanQdYR3Hoxx8qjeuUXKOpFUmj8A0CIb1FUs2j32cO
+ CpNvBkbiZMjDvTc2XyBKSjKt5R7aWTOPlLHeSjvzi0M9AysfVboGSbwziHMCnZav5A+c
+ /2+hBQwpm2DLRMrKrbJ6GudUfB9/OAmVNhaA9v5H81oRcUlPY8L6Lw4FCQIpaARgwrli
+ CrKQ==
+X-Gm-Message-State: AOAM532TxodA7Askyn9sNYiiH/cwnU6F1HVcWAeMbkfyE85+kdLPz9X6
+ xfb5RLkwyCAIjO4ST8F+bjJyzNYL3M1Q3QuEN6I=
+X-Google-Smtp-Source: ABdhPJyUbCN+YiIQPgdc4LsR4XFE/Ao7olpuMrnfEr1khSTub2vUckY6K/n+6PLEerg/HylUUuha1Q3MMahcZPq52mw=
+X-Received: by 2002:a05:6638:dd3:: with SMTP id
+ m19mr32152714jaj.106.1593026898748; 
+ Wed, 24 Jun 2020 12:28:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200623215920.2594-1-zhiwei_liu@c-sky.com>
-In-Reply-To: <20200623215920.2594-1-zhiwei_liu@c-sky.com>
+References: <1592807604-20805-1-git-send-email-bmeng.cn@gmail.com>
+ <1592807604-20805-2-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1592807604-20805-2-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 24 Jun 2020 06:44:44 -0700
-Message-ID: <CAKmqyKPWH70gGHFmO4EBgC3yT=OnbgEfUieqEHgB8BSqjUWO9Q@mail.gmail.com>
-Subject: Re: [PATCH v11 00/61] target/riscv: support vector extension v0.7.1
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Wed, 24 Jun 2020 12:18:44 -0700
+Message-ID: <CAKmqyKMBWSDCiUwMcHQoBDetru9HSeHy1iMm-gzX5TqthFibRA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/7] configure: Create symbolic links for pc-bios/*.elf
+ files
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Richard Henderson <richard.henderson@linaro.org>, wxy194768@alibaba-inc.com, 
- wenmeng_zhang@c-sky.com, Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+ Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -60,8 +65,8 @@ X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -74,189 +79,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jun 2020 13:54:22 -0000
+X-List-Received-Date: Wed, 24 Jun 2020 19:28:22 -0000
 
-On Tue, Jun 23, 2020 at 3:00 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Sun, Jun 21, 2020 at 11:34 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> This patchset implements the vector extension for RISC-V on QEMU.
+> From: Bin Meng <bin.meng@windriver.com>
 >
-> You can also find the patchset and all *test cases* in
-> my repo(https://github.com/romanheros/qemu.git branch:vector-upstream-v11).
-> All the test cases are in the directory qemu/tests/riscv/vector/. They are
-> riscv64 linux user mode programs.
+> Now we need to ship the OpenSBI fw_jump.elf image for the
+> RISC-V Spike machine, it requires us to create symbolic
+> links for pc-bios/*.elf files.
 >
-> You can test the patchset by the script qemu/tests/riscv/vector/runcase.sh.
->
-> Features:
->   * support specification riscv-v-spec-0.7.1.(https://github.com/riscv/riscv-v-spec/releases/tag/0.7.1/)
->   * support basic vector extension.
->   * support Zvlsseg.
->   * support Zvamo.
->   * not support Zvediv as it is changing.
->   * SLEN always equals VLEN.
->   * element width support 8bit, 16bit, 32bit, 64bit.
->
-> Changelog:
->
-> v11
->   * fix all non-ASCII characters.
->
-> v10
->   * rebase to https://github.com/alistair23/qemu/tree/riscv-to-apply.next.
->   * fix compile error in patch 57/61.
->   * fix review tag typo.
->
-> v9
->   * always set dynamic rounding mode for vector float insns.
->   * bug fix atomic implementation.
->   * bug fix first-only-fault.
->   * some small tidy up.
->
-> v8
->   * support different float rounding modes for vector instructions.
->   * use lastest released TCG GVEC DUP IR.
->   * set RV_VLEN_MAX to 256 bits, as GVEC IR uses simd_desc.
->
-> v7
->   * move vl == 0 check to translation time by add a global cpu_vl.
->   * implement vector element inline load and store function by TCG IR.
->   * based on vec_element_load(store), implement some permutation instructions.
->   * implement rsubs GVEC IR.
->   * fixup vsmul, vmfne, vfmerge, vslidedown.
->   * some other small bugs and indentation errors.
->
-> v6
->   * use gvec_dup Gvec IR to accellerate move and merge.
->   * a better way to implement fixed point instructions.
->   * a global check when vl == 0.
->   * limit some macros to only one inline function call.
->   * fixup sew error when use Gvec IR.
->   * fixup bugs for corner cases.
->
-> v5
->   * fixup a bug in tb flags.
->
-> v4
->   * no change
->
-> v3
->   * move check code from execution-time to translation-time
->   * use a continous memory block for vector register description.
->   * vector registers as direct fields in RISCVCPUState.
->   * support VLEN configure from qemu command line.
->   * support ELEN configure from qemu command line.
->   * support vector specification version configure from qemu command line.
->   * probe pages before real load or store access.
->   * use probe_page_check for no-fault operations in linux user mode.
->   * generation atomic exit exception when in parallel environment.
->   * fixup a lot of concrete bugs.
->
-> V2
->   * use float16_compare{_quiet}
->   * only use GETPC() in outer most helper
->   * add ctx.ext_v Property
->
->
->
-> LIU Zhiwei (61):
->   target/riscv: add vector extension field in CPURISCVState
->   target/riscv: implementation-defined constant parameters
->   target/riscv: support vector extension csr
->   target/riscv: add vector configure instruction
->   target/riscv: add an internals.h header
->   target/riscv: add vector stride load and store instructions
->   target/riscv: add vector index load and store instructions
->   target/riscv: add fault-only-first unit stride load
->   target/riscv: add vector amo operations
->   target/riscv: vector single-width integer add and subtract
->   target/riscv: vector widening integer add and subtract
->   target/riscv: vector integer add-with-carry / subtract-with-borrow
->     instructions
->   target/riscv: vector bitwise logical instructions
->   target/riscv: vector single-width bit shift instructions
->   target/riscv: vector narrowing integer right shift instructions
->   target/riscv: vector integer comparison instructions
->   target/riscv: vector integer min/max instructions
->   target/riscv: vector single-width integer multiply instructions
->   target/riscv: vector integer divide instructions
->   target/riscv: vector widening integer multiply instructions
->   target/riscv: vector single-width integer multiply-add instructions
->   target/riscv: vector widening integer multiply-add instructions
->   target/riscv: vector integer merge and move instructions
->   target/riscv: vector single-width saturating add and subtract
->   target/riscv: vector single-width averaging add and subtract
->   target/riscv: vector single-width fractional multiply with rounding
->     and saturation
->   target/riscv: vector widening saturating scaled multiply-add
->   target/riscv: vector single-width scaling shift instructions
->   target/riscv: vector narrowing fixed-point clip instructions
->   target/riscv: vector single-width floating-point add/subtract
->     instructions
->   target/riscv: vector widening floating-point add/subtract instructions
->   target/riscv: vector single-width floating-point multiply/divide
->     instructions
->   target/riscv: vector widening floating-point multiply
->   target/riscv: vector single-width floating-point fused multiply-add
->     instructions
->   target/riscv: vector widening floating-point fused multiply-add
->     instructions
->   target/riscv: vector floating-point square-root instruction
->   target/riscv: vector floating-point min/max instructions
->   target/riscv: vector floating-point sign-injection instructions
->   target/riscv: vector floating-point compare instructions
->   target/riscv: vector floating-point classify instructions
->   target/riscv: vector floating-point merge instructions
->   target/riscv: vector floating-point/integer type-convert instructions
->   target/riscv: widening floating-point/integer type-convert
->     instructions
->   target/riscv: narrowing floating-point/integer type-convert
->     instructions
->   target/riscv: vector single-width integer reduction instructions
->   target/riscv: vector wideing integer reduction instructions
->   target/riscv: vector single-width floating-point reduction
->     instructions
->   target/riscv: vector widening floating-point reduction instructions
->   target/riscv: vector mask-register logical instructions
->   target/riscv: vector mask population count vmpopc
->   target/riscv: vmfirst find-first-set mask bit
->   target/riscv: set-X-first mask bit
->   target/riscv: vector iota instruction
->   target/riscv: vector element index instruction
->   target/riscv: integer extract instruction
->   target/riscv: integer scalar move instruction
->   target/riscv: floating-point scalar move instructions
->   target/riscv: vector slide instructions
->   target/riscv: vector register gather instruction
->   target/riscv: vector compress instruction
->   target/riscv: configure and turn on vector extension from command line
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Thanks!
-
-Applied to the RISC-V tree.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 >
->  target/riscv/Makefile.objs              |    2 +-
->  target/riscv/cpu.c                      |   50 +
->  target/riscv/cpu.h                      |   82 +-
->  target/riscv/cpu_bits.h                 |   15 +
->  target/riscv/csr.c                      |   75 +-
->  target/riscv/fpu_helper.c               |   33 +-
->  target/riscv/helper.h                   | 1069 +++++
->  target/riscv/insn32-64.decode           |   11 +
->  target/riscv/insn32.decode              |  372 ++
->  target/riscv/insn_trans/trans_rvv.inc.c | 2888 +++++++++++++
->  target/riscv/internals.h                |   41 +
->  target/riscv/translate.c                |   27 +-
->  target/riscv/vector_helper.c            | 4899 +++++++++++++++++++++++
->  13 files changed, 9520 insertions(+), 44 deletions(-)
->  create mode 100644 target/riscv/insn_trans/trans_rvv.inc.c
->  create mode 100644 target/riscv/internals.h
->  create mode 100644 target/riscv/vector_helper.c
+> ---
 >
+> Changes in v2:
+> - new patch: configure: Create symbolic links for pc-bios/*.elf files
+>
+>  configure | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/configure b/configure
+> index ba88fd1..4a1514a 100755
+> --- a/configure
+> +++ b/configure
+> @@ -8399,6 +8399,7 @@ LINKS="$LINKS tests/qemu-iotests/check"
+>  LINKS="$LINKS python"
+>  for bios_file in \
+>      $source_path/pc-bios/*.bin \
+> +    $source_path/pc-bios/*.elf \
+>      $source_path/pc-bios/*.lid \
+>      $source_path/pc-bios/*.rom \
+>      $source_path/pc-bios/*.dtb \
 > --
-> 2.23.0
+> 2.7.4
 >
 >
 
