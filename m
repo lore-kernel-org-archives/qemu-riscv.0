@@ -1,59 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1joXIV-0004TB-Jt
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Jun 2020 15:12:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46030)
+	id 1joXsp-0008B7-VX
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Jun 2020 15:50:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55968)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1joXIT-0004RH-Nc; Thu, 25 Jun 2020 15:12:29 -0400
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:39213)
+ id 1joXsn-00089y-LW; Thu, 25 Jun 2020 15:50:01 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:33214)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1joXIS-0000ZW-3d; Thu, 25 Jun 2020 15:12:29 -0400
-Received: by mail-il1-x143.google.com with SMTP id k6so6334417ili.6;
- Thu, 25 Jun 2020 12:12:27 -0700 (PDT)
+ id 1joXsl-0007bc-Oq; Thu, 25 Jun 2020 15:50:01 -0400
+Received: by mail-io1-xd41.google.com with SMTP id i25so7452224iog.0;
+ Thu, 25 Jun 2020 12:49:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zO3MmrpcjuV25Jzf8+6bs2iEgnVSEVoU/K9kpd78Mss=;
- b=nx4DP8tLK+ng9V8qjpbkPVn75cFsfYXH7dtVjJH32G4UjVcp8c2RhnrI7mAiAq0zHx
- lkbAQRP7RSeG4/nkC4cuFx/HG+O1bpQoMrJUqWAdljj7gYSw2FwQRb+xeHQdvEGHTxC8
- DqdGTgqShL8oHCCgQ4dJTlZPLpmQr0YpOdIH5NyA+JiYezcnLAdDsQjG/kKOpf+HuUI8
- RHFi981FdWnKttBYrT7lk4461D7V+CX1+xOS+mSWW/9VXrkRZTrQUsdePKd4RIgfHbbN
- /0f5FVyRuCBF49B0nGxR9jeNGGL2yAFOPPA78yWpdVg7TD9kEwpd8V6Q99R8Sg0cVBcC
- BJFA==
+ :cc; bh=/RyC1veO3ORa+RKSXar1Qiq6XfsSnjjnZulEjX38NLo=;
+ b=nKD8yEsNvpdjsVkfW/RBgwbwSSCSoB6ILzUB0dPDon0cbZw4uMQhgPN0kEsfC2DRex
+ dVxvac4r89rOXiegEH0InLt77+iDILNaPipkOgV0rLdMPin1dpUZmNnnePZwaMIySDaM
+ PlwkjYDjfa04k/PGyRNTjOyGULZMfv/jVnikHijbsJltmD1QEl5jb1NA9poSKWrANPpt
+ oIQ6QtlFRTTJ3DsJJSsv4cw3YWebEr4HNRhT7Phcvkp04jMjoz9JReebFIiE1IL6wck0
+ DISAUKO/d82tgImBLT3PyNQOUXnJ8Lf4HDSSjIwz5kCQwu5qPqnnX52IDx6l/vSx35yU
+ Sueg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=zO3MmrpcjuV25Jzf8+6bs2iEgnVSEVoU/K9kpd78Mss=;
- b=ZdquKFp93FQQmA4Lq0IaTZ/0qZh52UvppI7SE/uW++n+/MLTNkVQfJn3rbSlHU7uhK
- 6UODQa9mmwYHFMq0c6tEl98JaAEHvUY9u8XFeoiMSqgkvzg/hZFKjUkPBPgCrMSayQ0W
- 3f2DaFkUQ+st1B/+zQ3oPxhlnor3vMdkaUQe4+hhPnfmzfrtfVbFjj7TJYqCpcntw1LF
- MMl5O92zirF87XPlRqAFI8wUd5YOLxBuNhYIRmm+XXDJ0BOqSp++KAHosF4nuHm5Exwf
- kTybO2hpWnwaNmSrs24K2Aib6nhf3BVwip7ZrtInAQGyil4m4SSBu/oNi7e6ZpNhWGXV
- PsyA==
-X-Gm-Message-State: AOAM532vt/r61WUM9dmoYyDYL6SvG/lpWxEQkuQ51OLbtOp0iiFRldKT
- 3jkQ7OSfHrQWKCQEUI1YvCTuZ4lpKi1aDTq/Zwo=
-X-Google-Smtp-Source: ABdhPJyE6cBRk/ZrWiKIptVXTUwYb4H/Jqs2qA+qAM7ADDpnkZ9ooth+sIbKZhyTwpnmaGROqlfVqNMao65UqZojzzQ=
-X-Received: by 2002:a92:c213:: with SMTP id j19mr29061908ilo.40.1593112346675; 
- Thu, 25 Jun 2020 12:12:26 -0700 (PDT)
+ bh=/RyC1veO3ORa+RKSXar1Qiq6XfsSnjjnZulEjX38NLo=;
+ b=W3uhWDaCJQxJ3qyH5xthJ/5ostUm+/LSWgxRmRibQr3v+S5fekCGOKQW0Jxx3XqMPT
+ sHIA09J70DfOSKBohI54IRM2qsuoXJNacyY8fS41gwisnIpEascHMx2BPN++FSviQKIJ
+ o2BOe5Lhm8KqBL6fnZHhVkbAaDgGYBP6iWGXIng9PQhzCWka0bbyaZePLfBNCvjI0IUa
+ qdKckdGj65olKwttryEETV86flHg90ScmJ3IGmsQBDf6IMbEoPXTaG+FvsdR/M+hQyTF
+ 0PdStPp5vNq8KKDhf/WB4Udg9GukBKqmluBKutzUbCYEobpYBIK15KIBv1b8Y6qRKjmo
+ QgCQ==
+X-Gm-Message-State: AOAM531/BxP58Yy8gzMlBNoF2KlLzVU6NTulLQ34QlPADWOHB2Yc2HNG
+ JsUI32fgpfoIOPWeS3pbo0HjceuJKzkI3v3tXNE=
+X-Google-Smtp-Source: ABdhPJy8PGFVItPsD99FwYYKgoz+TmrIRZWEtJ027lz03odQxAjiqXzkbcu6u4a8YAciY/Km0u0zhlph9A33y+klmHc=
+X-Received: by 2002:a05:6638:dd3:: with SMTP id
+ m19mr38115118jaj.106.1593114597762; 
+ Thu, 25 Jun 2020 12:49:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1585262586.git.alistair.francis@wdc.com>
- <931db85d6890ed4bc2b527fd1011197cd28299aa.1585262586.git.alistair.francis@wdc.com>
- <a7f32084-2060-1de5-8308-987bcddf1e6d@linaro.org>
-In-Reply-To: <a7f32084-2060-1de5-8308-987bcddf1e6d@linaro.org>
+References: <20200625183741.642407-1-atish.patra@wdc.com>
+ <20200625183741.642407-2-atish.patra@wdc.com>
+In-Reply-To: <20200625183741.642407-2-atish.patra@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 25 Jun 2020 12:02:50 -0700
-Message-ID: <CAKmqyKPdGp+5n_fRuzi74JK8z8rcXMU+KiJw5v2nTMApHqXauA@mail.gmail.com>
-Subject: Re: [PATCH for 5.0 v1 1/2] riscv: Don't use stage-2 PTE lookup
- protection flags
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Thu, 25 Jun 2020 12:40:21 -0700
+Message-ID: <CAKmqyKOVfVBYvRZNht9tCGCFX-USuWo72VR09=6d=h53zavzeA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] riscv: Unify Qemu's reset vector code path
+To: Atish Patra <atish.patra@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Alexander Richardson <Alexander.Richardson@cl.cam.ac.uk>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -76,92 +78,219 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2020 19:12:30 -0000
+X-List-Received-Date: Thu, 25 Jun 2020 19:50:02 -0000
 
-On Thu, Mar 26, 2020 at 4:50 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Thu, Jun 25, 2020 at 11:38 AM Atish Patra <atish.patra@wdc.com> wrote:
 >
-> On 3/26/20 3:44 PM, Alistair Francis wrote:
-> > When doing the fist of a two stage lookup (Hypervisor extensions) don't
-> > set the current protection flags from the second stage lookup of the
-> > base address PTE.
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  target/riscv/cpu_helper.c | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index d3ba9efb02..f36d184b7b 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -452,10 +452,11 @@ restart:
-> >          hwaddr pte_addr;
-> >
-> >          if (two_stage && first_stage) {
-> > +            int vbase_prot;
-> >              hwaddr vbase;
-> >
-> >              /* Do the second stage translation on the base PTE address. */
-> > -            get_physical_address(env, &vbase, prot, base, access_type,
-> > +            get_physical_address(env, &vbase, &vbase_prot, base, access_type,
-> >                                   mmu_idx, false, true);
-> >
-> >              pte_addr = vbase + idx * ptesize;
-> >
+> Currently, all riscv machines except sifive_u have identical reset vector
+> code implementations with memory addresses being different for all machines.
+> They can be easily combined into a single function in common code.
 >
-> Certainly stage2 pte lookup has nothing to do with the original lookup, so
-> using a new variable for prot is correct.
+> Move it to common function and let all the machines use the common function.
 >
-> So as far as this minimal patch,
+> Signed-off-by: Atish Patra <atish.patra@wdc.com>
+> ---
+>  hw/riscv/boot.c         | 46 +++++++++++++++++++++++++++++++++++++++++
+>  hw/riscv/spike.c        | 38 +++-------------------------------
+>  hw/riscv/virt.c         | 37 +++------------------------------
+>  include/hw/riscv/boot.h |  2 ++
+>  4 files changed, 54 insertions(+), 69 deletions(-)
 >
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index adb421b91b68..8ed96da600c9 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -22,12 +22,16 @@
+>  #include "qemu/units.h"
+>  #include "qemu/error-report.h"
+>  #include "exec/cpu-defs.h"
+> +#include "exec/address-spaces.h"
+>  #include "hw/boards.h"
+>  #include "hw/loader.h"
+>  #include "hw/riscv/boot.h"
+>  #include "elf.h"
+> +#include "sysemu/device_tree.h"
+>  #include "sysemu/qtest.h"
 >
-> However, this bit of code doesn't look right:
+> +#include <libfdt.h>
+> +
 
-Thanks for the comments here. Coming back to this after a while.
+Do you mind removing these header from the original files, we
+shouldn't need them now.
 
->
-> (1) Similarly, what has the original access_type got to do with the PTE lookup?
->  Seems like this should be MMU_DATA_LOAD always.
+Besides that:
 
-Fixed in master now
-
->
-> (2) Why is the get_physical_address return value ignored?  On failure, surely
-> this should be some sort of PTE lookup failure.
-
-Also fixed in master now
-
->
-> (3) Do we need to validate vbase_prot for write before updating the PTE for
-> Access or Dirty?  That seems like a loop-hole to allow silent modification of
-> hypervisor read-only memory.
-
-That's a good point.
-
-Updating the accessed bit seems correct to me as we did access it and
-that doesn't then provide write permissions.
-
-Updating the dirty bit would provide write permissions, but we would
-only change the dirty bit on a store and vbase_prot is now always a
-load.
-
-If the PTE was already dirty then we might incorrectly provide write
-access though.
-
->
-> I do wonder if it might be easier to manage all of this by using additional
-> TLBs to handle the stage2 and physical address spaces.  That's probably too
-> invasive for this stage of development though.
-
-Do you mean change riscv_cpu_mmu_index() to take into account
-virtulisation and have more then the current 3 (M, S and U) MMU
-indexes?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+>  #if defined(TARGET_RISCV32)
+>  # define KERNEL_BOOT_ADDRESS 0x80400000
+>  #else
+> @@ -155,3 +159,45 @@ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+>
+>      return *start + size;
+>  }
+> +
+> +void riscv_setup_rom_reset_vec(hwaddr start_addr, hwaddr rom_base,
+> +                               hwaddr rom_size, void *fdt)
+> +{
+> +    int i;
+> +    /* reset vector */
+> +    uint32_t reset_vec[8] = {
+> +        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
+> +        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
+> +        0xf1402573,                  /*     csrr   a0, mhartid  */
+> +#if defined(TARGET_RISCV32)
+> +        0x0182a283,                  /*     lw     t0, 24(t0) */
+> +#elif defined(TARGET_RISCV64)
+> +        0x0182b283,                  /*     ld     t0, 24(t0) */
+> +#endif
+> +        0x00028067,                  /*     jr     t0 */
+> +        0x00000000,
+> +        start_addr,                  /* start: .dword */
+> +        0x00000000,
+> +                                     /* dtb: */
+> +    };
+> +
+> +    /* copy in the reset vector in little_endian byte order */
+> +    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+> +        reset_vec[i] = cpu_to_le32(reset_vec[i]);
+> +    }
+> +    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
+> +                          rom_base, &address_space_memory);
+> +
+> +    /* copy in the device tree */
+> +    if (fdt_pack(fdt) || fdt_totalsize(fdt) >
+> +        rom_size - sizeof(reset_vec)) {
+> +        error_report("not enough space to store device-tree");
+> +        exit(1);
+> +    }
+> +    qemu_fdt_dumpdtb(fdt, fdt_totalsize(fdt));
+> +    rom_add_blob_fixed_as("mrom.fdt", fdt, fdt_totalsize(fdt),
+> +                           rom_base + sizeof(reset_vec),
+> +                           &address_space_memory);
+> +
+> +    return;
+> +}
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 3c87e04fdceb..561642c1fb5d 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -165,7 +165,6 @@ static void spike_board_init(MachineState *machine)
+>      MemoryRegion *system_memory = get_system_memory();
+>      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+>      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+> -    int i;
+>      unsigned int smp_cpus = machine->smp.cpus;
+>
+>      /* Initialize SOC */
+> @@ -212,40 +211,9 @@ static void spike_board_init(MachineState *machine)
+>          }
+>      }
+>
+> -    /* reset vector */
+> -    uint32_t reset_vec[8] = {
+> -        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
+> -        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
+> -        0xf1402573,                  /*     csrr   a0, mhartid  */
+> -#if defined(TARGET_RISCV32)
+> -        0x0182a283,                  /*     lw     t0, 24(t0) */
+> -#elif defined(TARGET_RISCV64)
+> -        0x0182b283,                  /*     ld     t0, 24(t0) */
+> -#endif
+> -        0x00028067,                  /*     jr     t0 */
+> -        0x00000000,
+> -        memmap[SPIKE_DRAM].base,     /* start: .dword DRAM_BASE */
+> -        0x00000000,
+> -                                     /* dtb: */
+> -    };
+> -
+> -    /* copy in the reset vector in little_endian byte order */
+> -    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+> -        reset_vec[i] = cpu_to_le32(reset_vec[i]);
+> -    }
+> -    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
+> -                          memmap[SPIKE_MROM].base, &address_space_memory);
+> -
+> -    /* copy in the device tree */
+> -    if (fdt_pack(s->fdt) || fdt_totalsize(s->fdt) >
+> -            memmap[SPIKE_MROM].size - sizeof(reset_vec)) {
+> -        error_report("not enough space to store device-tree");
+> -        exit(1);
+> -    }
+> -    qemu_fdt_dumpdtb(s->fdt, fdt_totalsize(s->fdt));
+> -    rom_add_blob_fixed_as("mrom.fdt", s->fdt, fdt_totalsize(s->fdt),
+> -                          memmap[SPIKE_MROM].base + sizeof(reset_vec),
+> -                          &address_space_memory);
+> +    /* load the reset vector */
+> +    riscv_setup_rom_reset_vec(memmap[SPIKE_DRAM].base, memmap[SPIKE_MROM].base,
+> +                              memmap[SPIKE_MROM].size, s->fdt);
+>
+>      /* initialize HTIF using symbols found in load_kernel */
+>      htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(0));
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 616db6f5aced..22a60259daab 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -535,40 +535,9 @@ static void virt_machine_init(MachineState *machine)
+>          start_addr = virt_memmap[VIRT_FLASH].base;
+>      }
+>
+> -    /* reset vector */
+> -    uint32_t reset_vec[8] = {
+> -        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
+> -        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
+> -        0xf1402573,                  /*     csrr   a0, mhartid  */
+> -#if defined(TARGET_RISCV32)
+> -        0x0182a283,                  /*     lw     t0, 24(t0) */
+> -#elif defined(TARGET_RISCV64)
+> -        0x0182b283,                  /*     ld     t0, 24(t0) */
+> -#endif
+> -        0x00028067,                  /*     jr     t0 */
+> -        0x00000000,
+> -        start_addr,                  /* start: .dword */
+> -        0x00000000,
+> -                                     /* dtb: */
+> -    };
+> -
+> -    /* copy in the reset vector in little_endian byte order */
+> -    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+> -        reset_vec[i] = cpu_to_le32(reset_vec[i]);
+> -    }
+> -    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
+> -                          memmap[VIRT_MROM].base, &address_space_memory);
+> -
+> -    /* copy in the device tree */
+> -    if (fdt_pack(s->fdt) || fdt_totalsize(s->fdt) >
+> -            memmap[VIRT_MROM].size - sizeof(reset_vec)) {
+> -        error_report("not enough space to store device-tree");
+> -        exit(1);
+> -    }
+> -    qemu_fdt_dumpdtb(s->fdt, fdt_totalsize(s->fdt));
+> -    rom_add_blob_fixed_as("mrom.fdt", s->fdt, fdt_totalsize(s->fdt),
+> -                          memmap[VIRT_MROM].base + sizeof(reset_vec),
+> -                          &address_space_memory);
+> +    /* load the reset vector */
+> +    riscv_setup_rom_reset_vec(start_addr, virt_memmap[VIRT_MROM].base,
+> +                              virt_memmap[VIRT_MROM].size, s->fdt);
+>
+>      /* create PLIC hart topology configuration string */
+>      plic_hart_config_len = (strlen(VIRT_PLIC_HART_CONFIG) + 1) * smp_cpus;
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index 9daa98da08d7..3e9759c89aa2 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -35,5 +35,7 @@ target_ulong riscv_load_kernel(const char *kernel_filename,
+>                                 symbol_fn_t sym_cb);
+>  hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+>                           uint64_t kernel_entry, hwaddr *start);
+> +void riscv_setup_rom_reset_vec(hwaddr saddr, hwaddr rom_base,
+> +                               hwaddr rom_size, void *fdt);
+>
+>  #endif /* RISCV_BOOT_H */
+> --
+> 2.26.2
 >
 >
-> r~
 
