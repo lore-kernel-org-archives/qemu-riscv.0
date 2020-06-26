@@ -1,32 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jovRm-0000Ic-CS
-	for mharc-qemu-riscv@gnu.org; Fri, 26 Jun 2020 16:59:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38552)
+	id 1jovTc-0001NO-Dz
+	for mharc-qemu-riscv@gnu.org; Fri, 26 Jun 2020 17:01:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39226)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jovRk-0000IP-8q; Fri, 26 Jun 2020 16:59:40 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:52965)
+ id 1jovTY-0001N5-Nv; Fri, 26 Jun 2020 17:01:32 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:41804)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jovRh-00020v-KJ; Fri, 26 Jun 2020 16:59:40 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.275405|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0239574-0.00820966-0.967833;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03306; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.Ht1zpuE_1593205165; 
+ id 1jovTW-0002uu-U1; Fri, 26 Jun 2020 17:01:32 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.09593284|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0130556-0.00467745-0.982267;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03294; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=9; RT=9; SR=0; TI=SMTPD_---.Ht1zUrN_1593205286; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Ht1zpuE_1593205165)
- by smtp.aliyun-inc.com(10.147.41.120);
- Sat, 27 Jun 2020 04:59:26 +0800
+ fp:SMTPD_---.Ht1zUrN_1593205286)
+ by smtp.aliyun-inc.com(10.147.42.241);
+ Sat, 27 Jun 2020 05:01:26 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: richard.henderson@linaro.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
  wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com, ianjiang.ict@gmail.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 0/6] target/riscv: NaN-boxing for multiple precison
-Date: Sat, 27 Jun 2020 04:59:11 +0800
-Message-Id: <20200626205917.4545-1-zhiwei_liu@c-sky.com>
+Subject: [PATCH 1/6] target/riscv: move gen_nanbox_fpr to translate.c
+Date: Sat, 27 Jun 2020 04:59:12 +0800
+Message-Id: <20200626205917.4545-2-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20200626205917.4545-1-zhiwei_liu@c-sky.com>
+References: <20200626205917.4545-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: none client-ip=121.197.200.217;
@@ -50,35 +53,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jun 2020 20:59:40 -0000
+X-List-Received-Date: Fri, 26 Jun 2020 21:01:34 -0000
 
-Multiple precison shoule be supported by NaN-boxing. That means, we should
-flush not valid NaN-boxing input to canonical NaN before effective
-calculation and we should NaN-boxing the result after the effective
-calculation.
+As this function will be used by fcvt.d.s in trans_rvd.inc.c,
+make it a visible function for RVF and RVD.
 
-In this patch set, split the implementation to three steps for compute,
-sign-injection, and some covert insns, which are check_nanboxed,
-effective calculation and gen_nanbox_fpr.
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+---
+ target/riscv/insn_trans/trans_rvf.inc.c | 14 --------------
+ target/riscv/translate.c                | 14 ++++++++++++++
+ 2 files changed, 14 insertions(+), 14 deletions(-)
 
-Check_nanboxed checks the inputs and flushes not valid inputs to cancical NaN.
-Effective calculation is direct calculation on fp32 values.
-Gen_nanbox_fpr does the NaN-boxing, writing the 1s to upper 32 bits.
-
-LIU Zhiwei (6):
-  target/riscv: move gen_nanbox_fpr to translate.c
-  target/riscv: NaN-boxing compute, sign-injection and convert
-    instructions.
-  target/riscv: Check for LEGAL NaN-boxing
-  target/riscv: check before allocating TCG temps
-  target/riscv: Flush not valid NaN-boxing input to canonical NaN
-  target/riscv: clean up fmv.w.x
-
- target/riscv/insn_trans/trans_rvd.inc.c |  16 +-
- target/riscv/insn_trans/trans_rvf.inc.c | 317 +++++++++++++++++++-----
- target/riscv/translate.c                |  43 ++++
- 3 files changed, 306 insertions(+), 70 deletions(-)
-
+diff --git a/target/riscv/insn_trans/trans_rvf.inc.c b/target/riscv/insn_trans/trans_rvf.inc.c
+index 3bfd8881e7..0d5ce373cb 100644
+--- a/target/riscv/insn_trans/trans_rvf.inc.c
++++ b/target/riscv/insn_trans/trans_rvf.inc.c
+@@ -23,20 +23,6 @@
+         return false;                       \
+ } while (0)
+ 
+-/*
+- * RISC-V requires NaN-boxing of narrower width floating
+- * point values.  This applies when a 32-bit value is
+- * assigned to a 64-bit FP register.  Thus this does not
+- * apply when the RVD extension is not present.
+- */
+-static void gen_nanbox_fpr(DisasContext *ctx, int regno)
+-{
+-    if (has_ext(ctx, RVD)) {
+-        tcg_gen_ori_i64(cpu_fpr[regno], cpu_fpr[regno],
+-                        MAKE_64BIT_MASK(32, 32));
+-    }
+-}
+-
+ static bool trans_flw(DisasContext *ctx, arg_flw *a)
+ {
+     TCGv t0 = tcg_temp_new();
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 9632e79cf3..4b1534c9a6 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -90,6 +90,20 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+     return ctx->misa & ext;
+ }
+ 
++/*
++ * RISC-V requires NaN-boxing of narrower width floating
++ * point values.  This applies when a 32-bit value is
++ * assigned to a 64-bit FP register.  Thus this does not
++ * apply when the RVD extension is not present.
++ */
++static void gen_nanbox_fpr(DisasContext *ctx, int regno)
++{
++    if (has_ext(ctx, RVD)) {
++        tcg_gen_ori_i64(cpu_fpr[regno], cpu_fpr[regno],
++                        MAKE_64BIT_MASK(32, 32));
++    }
++}
++
+ static void generate_exception(DisasContext *ctx, int excp)
+ {
+     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
 -- 
 2.23.0
 
