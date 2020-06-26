@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1joms3-0000yh-O9
-	for mharc-qemu-riscv@gnu.org; Fri, 26 Jun 2020 07:50:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60938)
+	id 1jonIZ-0000JC-K0
+	for mharc-qemu-riscv@gnu.org; Fri, 26 Jun 2020 08:17:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42068)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1joms2-0000yQ-BM; Fri, 26 Jun 2020 07:50:14 -0400
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:41129)
+ id 1jonIY-0000Hh-1s; Fri, 26 Jun 2020 08:17:38 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:45506)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jomrz-0006ge-Fv; Fri, 26 Jun 2020 07:50:14 -0400
-Received: by mail-yb1-xb43.google.com with SMTP id d13so4336066ybk.8;
- Fri, 26 Jun 2020 04:50:10 -0700 (PDT)
+ id 1jonIV-0006xK-OI; Fri, 26 Jun 2020 08:17:37 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id y17so2268960ybm.12;
+ Fri, 26 Jun 2020 05:17:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=t96CpMwVd7xZ1SNeun6wF0l9eQJLREbNHXsXwreVH3o=;
- b=WvDp/X0/RcgkMxxsYAtiyw1OdZySobwzho4R72cUIQO6Uncyqmr2gp+/GQSyWfNil5
- S5zysqtqd2GA6HyXswxxsbEi16cfm8UXqtZyvszxLPMxQuSgfePg9Y/pY8DuSBaLsdCr
- aoMZjQwo2QzeclROhh9DF6GKNwnwC1pCAbooSqa7HsTFw5eD8xZ+fsfoWoExIXf+jIR1
- BNtkh2ZsjoaURRnTuYfYuYDTdkeDLBvV6l8tmnsfMPpiu+T2zWYI0ZZHbvMC5+YcOehe
- ZHi6eYE9qxAyh5tQhj6bXJG1lDl1vtcQl82hJk1bj5qgzHVVKZ57qKyqloLK2GoeuWiY
- Cx3Q==
+ :cc; bh=67Ez5DY/fUov57YVpFUPh8MrsqoaSwT07AfouMX6II4=;
+ b=W+gAoS5qrOgDGAj+eMCH+oGveAQqDBuAIwdAGldXN2a6fdJ0XfENOBk/NbweuY0a+1
+ vmxF3fi3pO3sbwumEwXFf9ZZGqPq99Z4JLVVqfi2OnThTfXzNhOPPvr3H0w+ukMkmE8M
+ q9oCoh7Dhy3AzjJNJdI+Q+GmvmgnloC/zXQltcdJM54DyrukjYvBgylvvlYSExdsSMJm
+ VIuX5+Vbpqjy0UHOX8sZsJOniVekvm+RWCP1R9ZtX6z5NaReqOLeGzvAQ2ZDR0bPCYDM
+ UsKA5ixISJqkLwvQER5EBOKfsIA3JW2eY9iRPnAlxpK2YtCk+9vOEpn5CzHEmDhEBUtZ
+ VOtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=t96CpMwVd7xZ1SNeun6wF0l9eQJLREbNHXsXwreVH3o=;
- b=J/I+Oy+T//e7v74P4O6uCGpAoTSu8pYEcLNKV50eQVX1PSHn7a8d2fmsYZvJDESoiz
- FoETghuFj8q1nAT5we9chwFyBGOKSbz+F6SsdJJjFVJ2/4+ZrwNcqG5HEdiRpWoTjlqy
- 7nDQukgN5XdYJELRmn6Q+luOQOu88yA2uYZLExeaeqS27mPbg8pcoURFa304xSNR0bOU
- 2HCO1f1W+sy8SgHDyx/zG79ANt0o++U0dZoZH50jtMn71v9OA+5YGd9W6nbz7Iew9r5M
- UdtyDJxUykf//ndfqD2rTb7C1ADuAD6KeNWEanm4RNUPmiBS9qdCZb1mB97NhWupYzM3
- Yckg==
-X-Gm-Message-State: AOAM532jKJMM0hhNWm5rwleMyX/tExlXVpVFquXwGUNrIkIeS+uwC27r
- EXeQtn6F52n6yH1Z1lDBrEOjodGWzKYimOYCtA8=
-X-Google-Smtp-Source: ABdhPJwxM6i7NBKNtETlkGx/zGStnmpO+FDOAu+Lt67Xz/JBh4aAmZlyDLrZCqogigTNKblfkV/aUHh6YMaaXqqwsAM=
-X-Received: by 2002:a25:c507:: with SMTP id v7mr4190023ybe.306.1593172210030; 
- Fri, 26 Jun 2020 04:50:10 -0700 (PDT)
+ bh=67Ez5DY/fUov57YVpFUPh8MrsqoaSwT07AfouMX6II4=;
+ b=cRmdm2JAZQnt4ZrUhHWBetFEZKQYxwEtnbFmQtSxCDSEhiSyK9jDClZ1fdDW4f4UEc
+ /4/cEPERjjf43Lq/CazIWtvZK8YAhgjGECE83pCGGBfbywo6PQ1pvhs3F0Zvu3bKYmPr
+ ZbsafoeS7bAao3nG/f2JtzpkmGzN/2+Jy3NobrZy37DdncHlE+IivX73gLOhuJ0fkCzO
+ xjzmZsivdeLpSF41Pw+6QJC3dgFzAiqFeNG9CqT6EtKzOfivSuemmz+LJmFcgUM/yDtF
+ OiCmEQ3TgJQZrPU06ejqfnS7QeuE5KCSSqJ8duRUYXoZk/A/0JPgA1dUc9hZosM0E3Sc
+ i95g==
+X-Gm-Message-State: AOAM533bH5OSM98nsa8YcSnWBsWlJwHAxSfOYpD3BqusbQgi4yUKPIV9
+ P17mURKSwZ4ywvd6N3jwteFExnlSY/kX/LCOzhA=
+X-Google-Smtp-Source: ABdhPJy7IgSX/qQNKMlWthNglc0rX+xs6uLCzjw9US9nm5saPYnmjDDftYWQNfEZWPWMikcdLrYHjuEAgHaW2HVoRJ0=
+X-Received: by 2002:a25:800c:: with SMTP id m12mr4794134ybk.239.1593173854111; 
+ Fri, 26 Jun 2020 05:17:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200626003313.715355-1-atish.patra@wdc.com>
- <20200626003313.715355-3-atish.patra@wdc.com>
-In-Reply-To: <20200626003313.715355-3-atish.patra@wdc.com>
+ <20200626003313.715355-4-atish.patra@wdc.com>
+In-Reply-To: <20200626003313.715355-4-atish.patra@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 26 Jun 2020 19:49:58 +0800
-Message-ID: <CAEUhbmUCJcosvYd44qPMXdkE+Bj2MUcFBvz1VWSZL2w-6Z3d6g@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] RISC-V: Copy the fdt in dram instead of ROM
+Date: Fri, 26 Jun 2020 20:17:22 +0800
+Message-ID: <CAEUhbmW3yQymuDnbdcKPz80B5ktm=3YUbMFbMnjgKpYthzm02A@mail.gmail.com>
+Subject: Re: [PATCH v3 3/3] riscv: Add opensbi firmware dynamic support
 To: Atish Patra <atish.patra@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -53,8 +53,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Alexander Richardson <Alexander.Richardson@cl.cam.ac.uk>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -76,277 +76,377 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jun 2020 11:50:14 -0000
+X-List-Received-Date: Fri, 26 Jun 2020 12:17:38 -0000
 
 Hi Atish,
 
 On Fri, Jun 26, 2020 at 8:33 AM Atish Patra <atish.patra@wdc.com> wrote:
 >
-> Currently, the fdt is copied to the ROM after the reset vector. The firmware
-> has to copy it to DRAM. Instead of this, directly copy the device tree to a
-> pre-computed dram address. The device tree load address should be as far as
-> possible from kernel and initrd images. That's why it is kept at the end of
-> the DRAM or 4GB whichever is lesser.
+> OpenSBI is the default firmware in Qemu and has various firmware loading
+> options. Currently, qemu loader uses fw_jump which has a compile time
+> pre-defined address where fdt & kernel image must reside. This puts a
+> constraint on image size of the Linux kernel depending on the fdt location
+> and available memory. However, fw_dynamic allows the loader to specify
+> the next stage location (i.e. Linux kernel/U-boot) in memory and other
+
+nits: U-Boot
+
+> configurable boot options available in OpenSBI.
+>
+> Add support for OpenSBI dynamic firmware loading support. This doesn't
+> break existing setup and fw_jump will continue to work as it is. Any
+> other firmware will continue to work without any issues as long as it
+> doesn't expect anything specific from loader in "a2" register.
 >
 > Signed-off-by: Atish Patra <atish.patra@wdc.com>
 > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/riscv/boot.c         | 57 +++++++++++++++++++++++++++++------------
->  hw/riscv/sifive_u.c     | 32 +++++++++++------------
->  hw/riscv/spike.c        |  7 ++++-
->  hw/riscv/virt.c         |  7 ++++-
->  include/hw/riscv/boot.h |  5 +++-
->  5 files changed, 71 insertions(+), 37 deletions(-)
+>  hw/riscv/boot.c                 | 39 ++++++++++++++++++++--
+>  hw/riscv/sifive_u.c             | 15 +++++++--
+>  hw/riscv/spike.c                | 11 +++++--
+>  hw/riscv/virt.c                 | 11 +++++--
+>  include/hw/riscv/boot.h         |  5 ++-
+>  include/hw/riscv/boot_opensbi.h | 58 +++++++++++++++++++++++++++++++++
+>  6 files changed, 130 insertions(+), 9 deletions(-)
+>  create mode 100644 include/hw/riscv/boot_opensbi.h
 >
 > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 482b78147993..02c4018a8105 100644
+> index 02c4018a8105..c96249c73c9f 100644
 > --- a/hw/riscv/boot.c
 > +++ b/hw/riscv/boot.c
-> @@ -159,44 +159,67 @@ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
->      return *start + size;
+> @@ -25,6 +25,7 @@
+>  #include "hw/boards.h"
+>  #include "hw/loader.h"
+>  #include "hw/riscv/boot.h"
+> +#include "hw/riscv/boot_opensbi.h"
+>  #include "elf.h"
+>  #include "sysemu/device_tree.h"
+>  #include "sysemu/qtest.h"
+> @@ -33,8 +34,10 @@
+>
+>  #if defined(TARGET_RISCV32)
+>  # define KERNEL_BOOT_ADDRESS 0x80400000
+> +#define fw_dynamic_info_data(__val)     cpu_to_le32(__val)
+>  #else
+>  # define KERNEL_BOOT_ADDRESS 0x80200000
+> +#define fw_dynamic_info_data(__val)     cpu_to_le64(__val)
+>  #endif
+>
+>  void riscv_find_and_load_firmware(MachineState *machine,
+> @@ -189,14 +192,45 @@ hwaddr riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
+>      return fdt_addr;
 >  }
 >
-> +hwaddr riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
-
-I think we should use uint32_t for the return value type, since it is
-always below 4GiB
-
+> +void riscv_rom_copy_firmware_info(hwaddr rom_base, hwaddr rom_size,
+> +                              uint32_t reset_vec_size, uint64_t kernel_entry)
 > +{
-> +    hwaddr temp, fdt_addr;
-> +    hwaddr dram_end = dram_base + mem_size;
-> +    int fdtsize = fdt_totalsize(fdt);
+> +    struct fw_dynamic_info dinfo;
+> +    uint64_t dinfo_len;
+
+size_t?
+
 > +
-> +    if (fdtsize <= 0) {
-> +        error_report("invalid device-tree");
+> +    dinfo.magic = fw_dynamic_info_data(FW_DYNAMIC_INFO_MAGIC_VALUE);
+> +    dinfo.version =  fw_dynamic_info_data(FW_DYNAMIC_INFO_VERSION);
+
+nits: two spaces after =
+
+> +    dinfo.next_mode = fw_dynamic_info_data(FW_DYNAMIC_INFO_NEXT_MODE_S);
+> +    dinfo.next_addr = fw_dynamic_info_data(kernel_entry);
+> +    dinfo.options = 0;
+> +    dinfo.boot_hart = 0;
+> +    dinfo_len = sizeof(dinfo);
+> +
+> +    /**
+> +     * copy the dynamic firmware info. This information is specific to
+> +     * OpenSBI but doesn't break any other firmware as long as they don't
+> +     * expect any certain value in "a2" register.
+> +     */
+> +    if (dinfo_len > (rom_size - reset_vec_size)) {
+> +        error_report("not enough space to store dynamic firmware info");
 > +        exit(1);
 > +    }
 > +
-> +    /*
-> +     * We should put fdt as far as possible to avoid kernel/initrd overwriting
-> +     * its content. But it should be addressable by 32 bit system as well.
-> +     * Thus, put it at an aligned address that less than fdt size from end of
-> +     * dram or 4GB whichever is lesser.
-> +     */
-> +    temp = MIN(dram_end, 4096 * MiB);
-> +    fdt_addr = QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
-> +
-> +    fdt_pack(fdt);
-> +    /* copy in the device tree */
-> +    qemu_fdt_dumpdtb(fdt, fdt_totalsize(fdt));
-
-Use fdtsize
-
-> +
-> +    rom_add_blob_fixed_as("fdt", fdt, fdtsize, fdt_addr,
-> +                          &address_space_memory);
-> +
-> +    return fdt_addr;
+> +    rom_add_blob_fixed_as("mrom.finfo", &dinfo, dinfo_len,
+> +                           rom_base + reset_vec_size,
+> +                           &address_space_memory);
 > +}
 > +
 >  void riscv_setup_rom_reset_vec(hwaddr start_addr, hwaddr rom_base,
-> -                               hwaddr rom_size, void *fdt)
-> +                               hwaddr rom_size,
-> +                               hwaddr fdt_load_addr, void *fdt)
+> -                               hwaddr rom_size,
+> +                               hwaddr rom_size, uint64_t kernel_entry,
+>                                 hwaddr fdt_load_addr, void *fdt)
 >  {
 >      int i;
+> +
+
+This change should be in the 1st patch
+
 >      /* reset vector */
-> -    uint32_t reset_vec[8] = {
-> -        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
-> -        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
-> +    uint32_t reset_vec[10] = {
-> +        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
-
-fw_dync should be introduced in the next patch, so this line should be
-kept unchanged in this patch
-
+>      uint32_t reset_vec[10] = {
+>          0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
+> +        0x02828613,                  /*     addi   a2, t0, %pcrel_lo(1b) */
 >          0xf1402573,                  /*     csrr   a0, mhartid  */
 >  #if defined(TARGET_RISCV32)
-> +        0x0202a583,                  /*     lw     a1, 32(t0) */
->          0x0182a283,                  /*     lw     t0, 24(t0) */
->  #elif defined(TARGET_RISCV64)
-> +        0x0202b583,                  /*     ld     a1, 32(t0) */
+>          0x0202a583,                  /*     lw     a1, 32(t0) */
+> @@ -206,7 +240,6 @@ void riscv_setup_rom_reset_vec(hwaddr start_addr, hwaddr rom_base,
 >          0x0182b283,                  /*     ld     t0, 24(t0) */
 >  #endif
 >          0x00028067,                  /*     jr     t0 */
->          0x00000000,
+> -        0x00000000,
 >          start_addr,                  /* start: .dword */
 >          0x00000000,
-> -                                     /* dtb: */
-> +        fdt_load_addr,               /* fdt_laddr: .dword */
-> +        0x00000000,
-> +                                     /* fw_dyn: */
->      };
->
->      /* copy in the reset vector in little_endian byte order */
-> -    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-> +    for (i = 0; i < ARRAY_SIZE(reset_vec); i++) {
->          reset_vec[i] = cpu_to_le32(reset_vec[i]);
+>          fdt_load_addr,               /* fdt_laddr: .dword */
+> @@ -220,6 +253,8 @@ void riscv_setup_rom_reset_vec(hwaddr start_addr, hwaddr rom_base,
 >      }
 >      rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
 >                            rom_base, &address_space_memory);
+> +    riscv_rom_copy_firmware_info(rom_base, rom_size, sizeof(reset_vec),
+> +                                 kernel_entry);
 >
-> -    /* copy in the device tree */
-> -    if (fdt_pack(fdt) || fdt_totalsize(fdt) >
-> -        rom_size - sizeof(reset_vec)) {
-> -        error_report("not enough space to store device-tree");
-> -        exit(1);
-> -    }
-> -    qemu_fdt_dumpdtb(fdt, fdt_totalsize(fdt));
-> -    rom_add_blob_fixed_as("mrom.fdt", fdt, fdt_totalsize(fdt),
-> -                           rom_base + sizeof(reset_vec),
-> -                           &address_space_memory);
-> -
 >      return;
 >  }
 > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 395b21703ab4..7d39a4e4ec6d 100644
+> index 7d39a4e4ec6d..de25e9ceb0e7 100644
 > --- a/hw/riscv/sifive_u.c
 > +++ b/hw/riscv/sifive_u.c
-> @@ -379,6 +379,7 @@ static void sifive_u_machine_init(MachineState *machine)
->      MemoryRegion *flash0 = g_new(MemoryRegion, 1);
+> @@ -380,6 +380,7 @@ static void sifive_u_machine_init(MachineState *machine)
 >      target_ulong start_addr = memmap[SIFIVE_U_DRAM].base;
 >      int i;
-> +    hwaddr fdt_load_addr;
+>      hwaddr fdt_load_addr;
+> +    uint64_t kernel_entry;
 >
 >      /* Initialize SoC */
 >      object_initialize_child(OBJECT(machine), "soc", &s->soc, TYPE_RISCV_U_SOC);
-> @@ -450,40 +451,37 @@ static void sifive_u_machine_init(MachineState *machine)
+> @@ -436,7 +437,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>      riscv_find_and_load_firmware(machine, BIOS_FILENAME, start_addr, NULL);
+>
+>      if (machine->kernel_filename) {
+> -        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> +        kernel_entry = riscv_load_kernel(machine->kernel_filename,
+>                                                    NULL);
+
+nits: NULL not indented correctly. Can be moved to the same line above
+
+>
+>          if (machine->initrd_filename) {
+> @@ -449,6 +450,12 @@ static void sifive_u_machine_init(MachineState *machine)
+>              qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
+>                                    end);
 >          }
+> +    } else {
+> +       /*
+> +        * If dynamic firmware is used, it doesn't know where is the next mode
+> +        * if kernel argument is not set.
+> +        */
+> +        kernel_entry = 0;
 >      }
 >
-> +    /* Compute the fdt load address in dram */
-> +    fdt_load_addr = riscv_load_fdt(memmap[SIFIVE_U_DRAM].base,
-> +                                   machine->ram_size, s->fdt);
-> +
->      /* reset vector */
-> -    uint32_t reset_vec[8] = {
-> +    uint32_t reset_vec[11] = {
+>      /* Compute the fdt load address in dram */
+> @@ -459,6 +466,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>      uint32_t reset_vec[11] = {
 >          s->msel,                       /* MSEL pin state */
-> -        0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(dtb) */
-> -        0x01c28593,                    /*     addi   a1, t0, %pcrel_lo(1b) */
-> +        0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
+>          0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
+> +        0x02828613,                  /*     addi   a2, t0, %pcrel_lo(1b) */
+
+nits: /* is not indented correctly
+
 >          0xf1402573,                    /*     csrr   a0, mhartid  */
 >  #if defined(TARGET_RISCV32)
-> +        0x0202a583,                    /*     lw     a1, 32(t0) */
->          0x0182a283,                    /*     lw     t0, 24(t0) */
->  #elif defined(TARGET_RISCV64)
-> -        0x0182e283,                    /*     lwu    t0, 24(t0) */
-> +        0x0202b583,                    /*     ld     a1, 32(t0) */
-> +        0x0182b283,                    /*     ld     t0, 24(t0) */
-
-This change (lwu => ld) is unnecessary.
-
+>          0x0202a583,                    /*     lw     a1, 32(t0) */
+> @@ -468,7 +476,6 @@ static void sifive_u_machine_init(MachineState *machine)
+>          0x0182b283,                    /*     ld     t0, 24(t0) */
 >  #endif
 >          0x00028067,                    /*     jr     t0 */
->          0x00000000,
+> -        0x00000000,
 >          start_addr,                    /* start: .dword */
-> -                                       /* dtb: */
-> +        0x00000000,
-
-unnecessary change. Above lwu can be kept unchanged
-
-> +        fdt_load_addr,                 /* fdt_laddr: .dword */
-> +        0x00000000,
-> +                                       /* fw_dyn: */
-
-should be in next patch
-
->      };
->
->      /* copy in the reset vector in little_endian byte order */
-> -    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-> +    for (i = 0; i < ARRAY_SIZE(reset_vec); i++) {
->          reset_vec[i] = cpu_to_le32(reset_vec[i]);
+>          0x00000000,
+>          fdt_load_addr,                 /* fdt_laddr: .dword */
+> @@ -482,6 +489,10 @@ static void sifive_u_machine_init(MachineState *machine)
 >      }
 >      rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
 >                            memmap[SIFIVE_U_MROM].base, &address_space_memory);
-> -
-> -    /* copy in the device tree */
-> -    if (fdt_pack(s->fdt) || fdt_totalsize(s->fdt) >
-> -            memmap[SIFIVE_U_MROM].size - sizeof(reset_vec)) {
-> -        error_report("not enough space to store device-tree");
-> -        exit(1);
-> -    }
-> -    qemu_fdt_dumpdtb(s->fdt, fdt_totalsize(s->fdt));
-> -    rom_add_blob_fixed_as("mrom.fdt", s->fdt, fdt_totalsize(s->fdt),
-> -                          memmap[SIFIVE_U_MROM].base + sizeof(reset_vec),
-> -                          &address_space_memory);
+> +
+> +    riscv_rom_copy_firmware_info(memmap[SIFIVE_U_MROM].base,
+> +                                 memmap[SIFIVE_U_MROM].size,
+> +                                 sizeof(reset_vec), kernel_entry);
 >  }
 >
 >  static bool sifive_u_machine_get_start_in_flash(Object *obj, Error **errp)
 > diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index c696077cbc16..69f050c07e5a 100644
+> index 69f050c07e5a..1ede1a28e6d4 100644
 > --- a/hw/riscv/spike.c
 > +++ b/hw/riscv/spike.c
-> @@ -163,6 +163,7 @@ static void spike_board_init(MachineState *machine)
->      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+> @@ -164,6 +164,7 @@ static void spike_board_init(MachineState *machine)
 >      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
 >      unsigned int smp_cpus = machine->smp.cpus;
-> +    hwaddr fdt_load_addr;
+>      hwaddr fdt_load_addr;
+> +    uint64_t kernel_entry;
 >
 >      /* Initialize SOC */
 >      object_initialize_child(OBJECT(machine), "soc", &s->soc,
-> @@ -208,9 +209,13 @@ static void spike_board_init(MachineState *machine)
->          }
->      }
+> @@ -194,7 +195,7 @@ static void spike_board_init(MachineState *machine)
+>                                   htif_symbol_callback);
 >
-> +    /* Compute the fdt load address in dram */
-> +    fdt_load_addr = riscv_load_fdt(memmap[SPIKE_DRAM].base,
-> +                                   machine->ram_size, s->fdt);
->      /* load the reset vector */
->      riscv_setup_rom_reset_vec(memmap[SPIKE_DRAM].base, memmap[SPIKE_MROM].base,
-> -                              memmap[SPIKE_MROM].size, s->fdt);
-> +                              memmap[SPIKE_MROM].size,
-> +                              fdt_load_addr, s->fdt);
->
->      /* initialize HTIF using symbols found in load_kernel */
->      htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(0));
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 8ec77e43de26..639e284fc2e3 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -478,6 +478,7 @@ static void virt_machine_init(MachineState *machine)
->      char *plic_hart_config;
->      size_t plic_hart_config_len;
->      target_ulong start_addr = memmap[VIRT_DRAM].base;
-> +    hwaddr fdt_load_addr;
->      int i;
->      unsigned int smp_cpus = machine->smp.cpus;
->
-> @@ -532,9 +533,13 @@ static void virt_machine_init(MachineState *machine)
->          start_addr = virt_memmap[VIRT_FLASH].base;
->      }
->
-> +    /* Compute the fdt load address in dram */
-> +    fdt_load_addr = riscv_load_fdt(memmap[VIRT_DRAM].base,
-> +                                   machine->ram_size, s->fdt);
->      /* load the reset vector */
->      riscv_setup_rom_reset_vec(start_addr, virt_memmap[VIRT_MROM].base,
-> -                              virt_memmap[VIRT_MROM].size, s->fdt);
-> +                              virt_memmap[VIRT_MROM].size,
-> +                              fdt_load_addr, s->fdt);
->
->      /* create PLIC hart topology configuration string */
->      plic_hart_config_len = (strlen(VIRT_PLIC_HART_CONFIG) + 1) * smp_cpus;
-> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> index 3e9759c89aa2..f64fcadd2390 100644
-> --- a/include/hw/riscv/boot.h
-> +++ b/include/hw/riscv/boot.h
-> @@ -35,7 +35,10 @@ target_ulong riscv_load_kernel(const char *kernel_filename,
->                                 symbol_fn_t sym_cb);
->  hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
->                           uint64_t kernel_entry, hwaddr *start);
-> +hwaddr riscv_load_fdt(hwaddr dram_start, uint64_t dram_size,
-> +                                void *fdt);
+>      if (machine->kernel_filename) {
+> -        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> +        kernel_entry = riscv_load_kernel(machine->kernel_filename,
+>                                                    htif_symbol_callback);
 
 nits: not indented to (
 
+>
+>          if (machine->initrd_filename) {
+> @@ -207,6 +208,12 @@ static void spike_board_init(MachineState *machine)
+>              qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
+>                                    end);
+>          }
+> +    } else {
+> +       /*
+> +        * If dynamic firmware is used, it doesn't know where is the next mode
+> +        * if kernel argument is not set.
+> +        */
+> +        kernel_entry = 0;
+>      }
+>
+>      /* Compute the fdt load address in dram */
+> @@ -214,7 +221,7 @@ static void spike_board_init(MachineState *machine)
+>                                     machine->ram_size, s->fdt);
+>      /* load the reset vector */
+>      riscv_setup_rom_reset_vec(memmap[SPIKE_DRAM].base, memmap[SPIKE_MROM].base,
+> -                              memmap[SPIKE_MROM].size,
+> +                              memmap[SPIKE_MROM].size, kernel_entry,
+>                                fdt_load_addr, s->fdt);
+>
+>      /* initialize HTIF using symbols found in load_kernel */
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 639e284fc2e3..25ac984e99f0 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -479,6 +479,7 @@ static void virt_machine_init(MachineState *machine)
+>      size_t plic_hart_config_len;
+>      target_ulong start_addr = memmap[VIRT_DRAM].base;
+>      hwaddr fdt_load_addr;
+> +    uint64_t kernel_entry;
+>      int i;
+>      unsigned int smp_cpus = machine->smp.cpus;
+>
+> @@ -510,7 +511,7 @@ static void virt_machine_init(MachineState *machine)
+>                                   memmap[VIRT_DRAM].base, NULL);
+>
+>      if (machine->kernel_filename) {
+> -        uint64_t kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> +        kernel_entry = riscv_load_kernel(machine->kernel_filename,
+>                                                    NULL);
+
+nits: not indented correctly. Can be moved to above line
+
+>
+>          if (machine->initrd_filename) {
+> @@ -523,6 +524,12 @@ static void virt_machine_init(MachineState *machine)
+>              qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
+>                                    end);
+>          }
+> +    } else {
+> +       /*
+> +        * If dynamic firmware is used, it doesn't know where is the next mode
+> +        * if kernel argument is not set.
+> +        */
+> +        kernel_entry = 0;
+>      }
+>
+>      if (drive_get(IF_PFLASH, 0, 0)) {
+> @@ -538,7 +545,7 @@ static void virt_machine_init(MachineState *machine)
+>                                     machine->ram_size, s->fdt);
+>      /* load the reset vector */
+>      riscv_setup_rom_reset_vec(start_addr, virt_memmap[VIRT_MROM].base,
+> -                              virt_memmap[VIRT_MROM].size,
+> +                              virt_memmap[VIRT_MROM].size, kernel_entry,
+>                                fdt_load_addr, s->fdt);
+>
+>      /* create PLIC hart topology configuration string */
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index f64fcadd2390..0ccfd2285888 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -37,8 +37,11 @@ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+>                           uint64_t kernel_entry, hwaddr *start);
+>  hwaddr riscv_load_fdt(hwaddr dram_start, uint64_t dram_size,
+>                                  void *fdt);
+> +void riscv_rom_copy_firmware_info(hwaddr rom_base, hwaddr rom_size,
+> +                                  uint32_t reset_vec_size,
+> +                                  uint64_t kernel_entry);
 >  void riscv_setup_rom_reset_vec(hwaddr saddr, hwaddr rom_base,
-> -                               hwaddr rom_size, void *fdt);
-> +                               hwaddr rom_size,
-> +                               hwaddr fdt_load_addr, void *fdt);
+> -                               hwaddr rom_size,
+> +                               hwaddr rom_size, uint64_t kernel_entry,
+>                                 hwaddr fdt_load_addr, void *fdt);
 >
 >  #endif /* RISCV_BOOT_H */
+> diff --git a/include/hw/riscv/boot_opensbi.h b/include/hw/riscv/boot_opensbi.h
+> new file mode 100644
+> index 000000000000..0d5ddd6c3daf
+> --- /dev/null
+> +++ b/include/hw/riscv/boot_opensbi.h
+> @@ -0,0 +1,58 @@
+> +/* SPDX-License-Identifier: BSD-2-Clause */
+> +/*
+> + * Copyright (c) 2019 Western Digital Corporation or its affiliates.
+> + *
+> + * Based on include/sbi/{fw_dynamic.h,sbi_scratch.h} from the OpenSBI project.
+> + */
+> +#ifndef OPENSBI_H
+> +#define OPENSBI_H
+> +
+> +/** Expected value of info magic ('OSBI' ascii string in hex) */
+> +#define FW_DYNAMIC_INFO_MAGIC_VALUE     0x4942534f
+> +
+> +/** Maximum supported info version */
+> +#define FW_DYNAMIC_INFO_VERSION         0x2
+> +
+> +/** Possible next mode values */
+> +#define FW_DYNAMIC_INFO_NEXT_MODE_U     0x0
+> +#define FW_DYNAMIC_INFO_NEXT_MODE_S     0x1
+> +#define FW_DYNAMIC_INFO_NEXT_MODE_M     0x3
+> +
+> +enum sbi_scratch_options {
+> +    /** Disable prints during boot */
+> +    SBI_SCRATCH_NO_BOOT_PRINTS = (1 << 0),
+> +    /** Enable runtime debug prints */
+> +    SBI_SCRATCH_DEBUG_PRINTS = (1 << 1),
+> +};
+> +
+> +/** Representation dynamic info passed by previous booting stage */
+> +struct fw_dynamic_info {
+> +    /** Info magic */
+> +    target_long magic;
+> +    /** Info version */
+> +    target_long version;
+> +    /** Next booting stage address */
+> +    target_long next_addr;
+> +    /** Next booting stage mode */
+> +    target_long next_mode;
+> +    /** Options for OpenSBI library */
+> +    target_long options;
+> +    /**
+> +     * Preferred boot HART id
+> +     *
+> +     * It is possible that the previous booting stage uses same link
+> +     * address as the FW_DYNAMIC firmware. In this case, the relocation
+> +     * lottery mechanism can potentially overwrite the previous booting
+> +     * stage while other HARTs are still running in the previous booting
+> +     * stage leading to boot-time crash. To avoid this boot-time crash,
+> +     * the previous booting stage can specify last HART that will jump
+> +     * to the FW_DYNAMIC firmware as the preferred boot HART.
+> +     *
+> +     * To avoid specifying a preferred boot HART, the previous booting
+> +     * stage can set it to -1UL which will force the FW_DYNAMIC firmware
+> +     * to use the relocation lottery mechanism.
+> +     */
+> +    target_long boot_hart;
+> +};
+> +
+> +#endif
+> --
 
 Regards,
 Bin
