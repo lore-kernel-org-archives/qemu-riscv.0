@@ -1,41 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jp3RZ-0005gD-LY
-	for mharc-qemu-riscv@gnu.org; Sat, 27 Jun 2020 01:32:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34718)
+	id 1jp7Yn-0007FR-Na
+	for mharc-qemu-riscv@gnu.org; Sat, 27 Jun 2020 05:55:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46728)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jp3RY-0005fq-OG; Sat, 27 Jun 2020 01:32:00 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:38102)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jp7Ym-0007De-67; Sat, 27 Jun 2020 05:55:44 -0400
+Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:43044)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jp3RW-0007JI-Ey; Sat, 27 Jun 2020 01:32:00 -0400
-Received: by mail-il1-x142.google.com with SMTP id t85so10291628ili.5;
- Fri, 26 Jun 2020 22:31:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jp7Yj-0001zp-Vm; Sat, 27 Jun 2020 05:55:43 -0400
+Received: by mail-yb1-xb41.google.com with SMTP id y13so5701501ybj.10;
+ Sat, 27 Jun 2020 02:55:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=JE/K7KKiPdNjMlWzW56Qx5RO/9d6vAHTG6esw/P9qM8=;
- b=TVXHilk0zckz6MNK50pK9IB77gyOTBrcfTBL5uhP0MvyO1loqo9bQnrzygC6y0On1w
- WFkjd4ff0h4HVObL+flzhUT3Y1yzet+q8GoD1NVK42MOxD5WqZmKqrj81gwrgYe3Z7gd
- EXlr9kOrBZYAp7J5cymGgI98HdJZkYnv7EVagQUag9+NQCavS/CEiyprvT7UooYUJ2Wm
- 0xQ+mBVOTLcqGeyuSDmWhcJrjg94dDJwXXYEfPUfSXuCrLCRgaNy4RIQYX5jR7ofdy5U
- 3vr06OZs8IesAhXvnkZpPuoQHnGyR9anVwYNhOfazLD2fB2h1gH2bpNvcJO3VuZ5HHD4
- 0VVw==
+ :cc; bh=AZ7DOtTPoC6LwcsgCttifrOTW1lnPKSelIh9mpl3Xgo=;
+ b=l5PxSkq/0JRdJuPjkLwu6ulzZYmUej1aTQPk8nGPg5/PVZkwGTAvpQvaNat+7WIg/V
+ Db9NYgwnsQMO1VdYXXwezyRXqapeqZ+LrcvUq8Y8afBymORDN3mCIppdWpvpz6RbRsR+
+ xPgnXgWLxT/r3sebK6P9600anexIRFHNqwO6sMJhijTv8A7R9v6HxxBeQH56AbN7fM8p
+ iK9eIctMySuRiHbaXcvnmEoPBk8j8oDrwxEnMaKiF+Yjw+UuJna2dDwhCoPmRHUG7rVm
+ vdq/BFZt8o4zRXLmRMRHebTACX8DWWTpecA3eqKjDkxiXSh458ndcOB71UqoyGUKe86e
+ smMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=JE/K7KKiPdNjMlWzW56Qx5RO/9d6vAHTG6esw/P9qM8=;
- b=Zi12OykdUuBbFq4iRdzM/G2ID6H+7gHveh+83Y8gOcZVl332s5fmudvA+iU7DUihsx
- McgAxSw+OlOPCMCL6CoSbL61Ul8Cp3HxiENWdfbUkwh4xbfpB64TYQYsZp5iV/UKlw9W
- 0ZuwrRlcSlETRJ/VTLGytnh86VBOWR5mmLmffRuvNyKxojQr7jSXeM3gpxR6Ua0QQwfH
- /HkDj327An+zF4yfOdfdxvoaEBMPZl4nFsddvEwHRsFoNgtZngi9/q3g12BOVwwsyroy
- nBOle2GBqLOjqiO5RHJAeQoa9LeARLmgpbhvvh8MwC897AMSmNRvbDU13wms0dB+xflD
- NbGQ==
-X-Gm-Message-State: AOAM532g5IvmZhnyk0R4tCssocUTJ8uBoE1nMTLhRWE/mrXr3l0TVdND
- 6uT36vDG6A8q7SBiD1A8fxxjdjR59fqAza7FXxI=
-X-Google-Smtp-Source: ABdhPJzogHvAO/CmGRrc7M4+u+x05j+tJD8Vj91o2GjWYcTIFGAyLJIsblzay2ZdyPkFwLnkXS12WE6+zbXDu6yj2OU=
-X-Received: by 2002:a92:bb84:: with SMTP id x4mr6657550ilk.177.1593235916854; 
- Fri, 26 Jun 2020 22:31:56 -0700 (PDT)
+ bh=AZ7DOtTPoC6LwcsgCttifrOTW1lnPKSelIh9mpl3Xgo=;
+ b=NIfGxllLPETc/Ol3DV2W6ObeT96Xo5dA6X3Ngz+QzHe51mNZloP0Knd9VS6yAhsUXQ
+ vLpLXQpu433RIECvfEYh6JfDIbC2HpxnwyM4rvaniU+LkCG6maNRph0lb9WiiIZZK+m8
+ l/Y633nmJRmmeFnjIaU5YGC6iRP4G2zNVBMKeu1dEa+ztNb/kwYEjlg6MOR3qbJrReM6
+ c/AI22wEF8uqRoyerieUc2eYsfy4cyeAhrGYeJ+t7Gl/DDcHfTkX9ia8DopU4fr2a3Rr
+ gxmsZ/qBFYxgBwSx+wuFPladURig4eiWefQy5xQyN2HhXEWVP+nB4GOq9xz/imJBP1SM
+ zqWA==
+X-Gm-Message-State: AOAM530j6wtN3YrODFBzqbXEMbpuw1CBGj8gC3L2zB3lfWL3q+sBWK2m
+ vMhcIxyimNbVRT6CJryv6utufcp/KlIgwJJ+PM0=
+X-Google-Smtp-Source: ABdhPJzv/87/HngEpMyHd9+Kvi3Jex1/swYx1rWkMJdX39qVYV3Fe5rccGEysu2fcINipPXi+ohMu6kYAgY9W7ZexIM=
+X-Received: by 2002:a25:ca06:: with SMTP id a6mr12610677ybg.387.1593251740510; 
+ Sat, 27 Jun 2020 02:55:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200626003313.715355-1-atish.patra@wdc.com>
  <20200626003313.715355-3-atish.patra@wdc.com>
@@ -44,29 +44,29 @@ References: <20200626003313.715355-1-atish.patra@wdc.com>
  <CAEUhbmVH9RauXydanCv6OpVAMi9cKP4OaJetgNx3vaVSoPSQBw@mail.gmail.com>
  <CAOnJCUJzF0rBEqUFCjgwFQ36m-WO3yuvUY9BD8N6SCTTeLKZ3Q@mail.gmail.com>
 In-Reply-To: <CAOnJCUJzF0rBEqUFCjgwFQ36m-WO3yuvUY9BD8N6SCTTeLKZ3Q@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 26 Jun 2020 22:22:18 -0700
-Message-ID: <CAKmqyKM74qgNSP4feMZvaYAq+3pr5xThw4Te5MpL7O+6pEaBGA@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sat, 27 Jun 2020 17:55:29 +0800
+Message-ID: <CAEUhbmXjyBa_Ejn+2joL5w7qOC08eub1zOktDfMTGrFa46PJ6Q@mail.gmail.com>
 Subject: Re: [PATCH v3 2/3] RISC-V: Copy the fdt in dram instead of ROM
 To: Atish Patra <atishp@atishpatra.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Cc: Atish Patra <atish.patra@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Atish Patra <atish.patra@wdc.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, 
  Alexander Richardson <Alexander.Richardson@cl.cam.ac.uk>, 
  Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
@@ -81,9 +81,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jun 2020 05:32:01 -0000
+X-List-Received-Date: Sat, 27 Jun 2020 09:55:44 -0000
 
-On Fri, Jun 26, 2020 at 9:37 PM Atish Patra <atishp@atishpatra.org> wrote:
+On Sat, Jun 27, 2020 at 12:37 PM Atish Patra <atishp@atishpatra.org> wrote:
 >
 > On Fri, Jun 26, 2020 at 7:54 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 > >
@@ -277,10 +277,8 @@ On Fri, Jun 26, 2020 at 9:37 PM Atish Patra <atishp@atishpatra.org> wrote:
 >
 > I prefer ld because it is not ambiguous and future proof as well.
 
-Agreed. The sifive_u is supposed to cover multiple similar SoCs so it
-makes sense to use a `ld` here.
-
-Alistair
+If we use ld, then please fix the 0x00000000 entry, so that it becomes
+the high 32-bit of start_addr.
 
 >
 > > >
@@ -398,14 +396,7 @@ Alistair
 > > > > >
 > > > > >  #endif /* RISCV_BOOT_H */
 > > > >
-> >
-> > Regards,
-> > Bin
->
->
->
-> --
-> Regards,
-> Atish
->
+
+Regards,
+Bin
 
