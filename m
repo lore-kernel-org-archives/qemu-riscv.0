@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jptVm-0008IV-Dz
+	id 1jptVm-0008Iw-KT
 	for mharc-qemu-riscv@gnu.org; Mon, 29 Jun 2020 09:07:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50596)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50598)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jptVj-0008Dc-LI; Mon, 29 Jun 2020 09:07:47 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:39536)
+ id 1jptVk-0008EH-0F; Mon, 29 Jun 2020 09:07:48 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:42935)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jptVf-0003Xu-R9; Mon, 29 Jun 2020 09:07:47 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.3852587|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_news_journal|0.0631693-0.000208245-0.936622;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03268; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ id 1jptVf-0003Y9-Ts; Mon, 29 Jun 2020 09:07:47 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07438486|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.0520955-0.00143157-0.946473;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03305; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
  RN=8; RT=8; SR=0; TI=SMTPD_---.HucVN.U_1593436054; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.HucVN.U_1593436054)
@@ -23,10 +23,12 @@ To: qemu-devel@nongnu.org,
 Cc: richard.henderson@linaro.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
  wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 0/2] target/riscv: fixup atomic implementation
-Date: Mon, 29 Jun 2020 21:07:29 +0800
-Message-Id: <20200629130731.1080-1-zhiwei_liu@c-sky.com>
+Subject: [PATCH 2/2] target/riscv: Do amo*.w insns operate with 32 bits
+Date: Mon, 29 Jun 2020 21:07:31 +0800
+Message-Id: <20200629130731.1080-3-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20200629130731.1080-1-zhiwei_liu@c-sky.com>
+References: <20200629130731.1080-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: none client-ip=121.197.200.217;
@@ -52,18 +54,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 29 Jun 2020 13:07:48 -0000
 
-When I tested RVA with RISU, I found there is something wrong.
-In particular, amo*.w instructions should only operate the lowerest 32
-bits. However, the current implementation uses the whole XLEN bits.
+For amo*.w insns, we should only calculate on the 32 bits data either from the
+register or the memory.
 
-LIU Zhiwei (2):
-  tcg/tcg-op: Fix nonatomic_op load with MO_SIGN
-  target/riscv: Do amo*.w insns operate with 32 bits
-
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+---
  target/riscv/insn_trans/trans_rva.inc.c | 60 +++++++++++++++++++------
- tcg/tcg-op.c                            |  4 +-
- 2 files changed, 49 insertions(+), 15 deletions(-)
+ 1 file changed, 47 insertions(+), 13 deletions(-)
 
+diff --git a/target/riscv/insn_trans/trans_rva.inc.c b/target/riscv/insn_trans/trans_rva.inc.c
+index be8a9f06dd..6b3fc14436 100644
+--- a/target/riscv/insn_trans/trans_rva.inc.c
++++ b/target/riscv/insn_trans/trans_rva.inc.c
+@@ -81,19 +81,26 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
+     return true;
+ }
+ 
+-static bool gen_amo(DisasContext *ctx, arg_atomic *a,
+-                    void(*func)(TCGv, TCGv, TCGv, TCGArg, MemOp),
+-                    MemOp mop)
++static bool
++gen_amo_w(DisasContext *ctx, arg_atomic *a,
++          void(*func)(TCGv, TCGv, TCGv, TCGArg, MemOp),
++          MemOp mop, bool sign)
+ {
+     TCGv src1 = tcg_temp_new();
+     TCGv src2 = tcg_temp_new();
+ 
+     gen_get_gpr(src1, a->rs1);
+     gen_get_gpr(src2, a->rs2);
++    if (sign) {
++        tcg_gen_ext32s_tl(src2, src2);
++    } else {
++        tcg_gen_ext32u_tl(src2, src2);
++    }
+ 
+     (*func)(src2, src1, src2, ctx->mem_idx, mop);
+-
++    tcg_gen_ext32s_tl(src2, src2);
+     gen_set_gpr(a->rd, src2);
++
+     tcg_temp_free(src1);
+     tcg_temp_free(src2);
+     return true;
+@@ -114,59 +121,86 @@ static bool trans_sc_w(DisasContext *ctx, arg_sc_w *a)
+ static bool trans_amoswap_w(DisasContext *ctx, arg_amoswap_w *a)
+ {
+     REQUIRE_EXT(ctx, RVA);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, (MO_ALIGN | MO_TESL));
++    return gen_amo_w(ctx, a, &tcg_gen_atomic_xchg_tl,
++                     (MO_ALIGN | MO_TESL), true);
+ }
+ 
+ static bool trans_amoadd_w(DisasContext *ctx, arg_amoadd_w *a)
+ {
+     REQUIRE_EXT(ctx, RVA);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, (MO_ALIGN | MO_TESL));
++    return gen_amo_w(ctx, a, &tcg_gen_atomic_fetch_add_tl,
++                     (MO_ALIGN | MO_TESL), true);
+ }
+ 
+ static bool trans_amoxor_w(DisasContext *ctx, arg_amoxor_w *a)
+ {
+     REQUIRE_EXT(ctx, RVA);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, (MO_ALIGN | MO_TESL));
++    return gen_amo_w(ctx, a, &tcg_gen_atomic_fetch_xor_tl,
++                     (MO_ALIGN | MO_TESL), true);
+ }
+ 
+ static bool trans_amoand_w(DisasContext *ctx, arg_amoand_w *a)
+ {
+     REQUIRE_EXT(ctx, RVA);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, (MO_ALIGN | MO_TESL));
++    return gen_amo_w(ctx, a, &tcg_gen_atomic_fetch_and_tl,
++                     (MO_ALIGN | MO_TESL), true);
+ }
+ 
+ static bool trans_amoor_w(DisasContext *ctx, arg_amoor_w *a)
+ {
+     REQUIRE_EXT(ctx, RVA);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, (MO_ALIGN | MO_TESL));
++    return gen_amo_w(ctx, a, &tcg_gen_atomic_fetch_or_tl,
++                     (MO_ALIGN | MO_TESL), true);
+ }
+ 
+ static bool trans_amomin_w(DisasContext *ctx, arg_amomin_w *a)
+ {
+     REQUIRE_EXT(ctx, RVA);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, (MO_ALIGN | MO_TESL));
++    return gen_amo_w(ctx, a, &tcg_gen_atomic_fetch_smin_tl,
++                     (MO_ALIGN | MO_TESL), true);
+ }
+ 
+ static bool trans_amomax_w(DisasContext *ctx, arg_amomax_w *a)
+ {
+     REQUIRE_EXT(ctx, RVA);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, (MO_ALIGN | MO_TESL));
++    return gen_amo_w(ctx, a, &tcg_gen_atomic_fetch_smax_tl,
++                     (MO_ALIGN | MO_TESL), true);
+ }
+ 
+ static bool trans_amominu_w(DisasContext *ctx, arg_amominu_w *a)
+ {
+     REQUIRE_EXT(ctx, RVA);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, (MO_ALIGN | MO_TESL));
++    return gen_amo_w(ctx, a, &tcg_gen_atomic_fetch_umin_tl,
++                     (MO_ALIGN | MO_TEUL), false);
+ }
+ 
+ static bool trans_amomaxu_w(DisasContext *ctx, arg_amomaxu_w *a)
+ {
+     REQUIRE_EXT(ctx, RVA);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, (MO_ALIGN | MO_TESL));
++    return gen_amo_w(ctx, a, &tcg_gen_atomic_fetch_umax_tl,
++                     (MO_ALIGN | MO_TEUL), false);
+ }
+ 
+ #ifdef TARGET_RISCV64
+ 
++static bool gen_amo(DisasContext *ctx, arg_atomic *a,
++                    void(*func)(TCGv_i64, TCGv_i64, TCGv_i64, TCGArg, MemOp),
++                    MemOp mop)
++{
++    TCGv src1 = tcg_temp_new();
++    TCGv src2 = tcg_temp_new();
++
++    gen_get_gpr(src1, a->rs1);
++    gen_get_gpr(src2, a->rs2);
++
++    (*func)(src2, src1, src2, ctx->mem_idx, mop);
++
++    gen_set_gpr(a->rd, src2);
++    tcg_temp_free(src1);
++    tcg_temp_free(src2);
++    return true;
++}
++
+ static bool trans_lr_d(DisasContext *ctx, arg_lr_d *a)
+ {
+     return gen_lr(ctx, a, MO_ALIGN | MO_TEQ);
 -- 
 2.23.0
 
