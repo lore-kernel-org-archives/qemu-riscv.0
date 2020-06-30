@@ -1,74 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jqCBo-00030m-6P
-	for mharc-qemu-riscv@gnu.org; Tue, 30 Jun 2020 05:04:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40170)
+	id 1jqHgJ-0007rW-DG
+	for mharc-qemu-riscv@gnu.org; Tue, 30 Jun 2020 10:56:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58502)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jqCBc-0002uD-Gd
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2020 05:04:17 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:49822
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jqCBP-0002y0-SU
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2020 05:04:16 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593507843;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=IBuWJeUdSlFDG1n5rSJL7eqW1pQQCWjeqmk23CBp2OE=;
- b=EROHYPcgCe95umwxEanPg67NsQySiMVrNlf8o6IdkrsmBd/QMcuF3uEjJdoDOFECLSbYOE
- jj0HhEs6fUSNP3hfMaG9oJCEyOLN+MfZWmpsWrKgGSfzGvAYwDbWm8uG5KyVCIiffh/f9T
- iyMmeGMMhg3wH3ohPAZbg8XcXwMiORA=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-490-pCOfr_yzPaWsvZhhkDu51w-1; Tue, 30 Jun 2020 05:03:58 -0400
-X-MC-Unique: pCOfr_yzPaWsvZhhkDu51w-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3FA7FBFC3;
- Tue, 30 Jun 2020 09:03:57 +0000 (UTC)
-Received: from blackfin.pond.sub.org (ovpn-112-121.ams2.redhat.com
- [10.36.112.121])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id D0694741AD;
- Tue, 30 Jun 2020 09:03:56 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 1178C113847E; Tue, 30 Jun 2020 11:03:52 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 18/26] riscv_hart: Fix riscv_harts_realize() error API
- violations
-Date: Tue, 30 Jun 2020 11:03:43 +0200
-Message-Id: <20200630090351.1247703-19-armbru@redhat.com>
-In-Reply-To: <20200630090351.1247703-1-armbru@redhat.com>
-References: <20200630090351.1247703-1-armbru@redhat.com>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jqHgH-0007nW-GY
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2020 10:56:17 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:46523)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jqHgF-00037Q-Kd
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2020 10:56:17 -0400
+Received: by mail-pf1-x442.google.com with SMTP id b16so9508657pfi.13
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2020 07:56:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=ySo3IrSh2zZoDnqprPzVne9wIGX1iErVR4kH5ApU/H0=;
+ b=hjw7SSXFPElCFqgqu2T2PdzyPXB8GDiCkSDgvXt3UTS3cN/m/GDDtPWdrkuvucsg4z
+ 2xlqAB/3+K8FG0PBJCzVDFKSAGnNcHY0xNffXbbekxars7MYSSSEjCrVD37dOsttQ+P0
+ e7uITi66ZcBPyk160ae7HtFGp5H7BboWk9bnAuniDFpOtJTB7t5MnKsS1rn9ZivZxTTW
+ Y0KjbpcMHz1E0pW3ooYRpE/I/HttUzrizmgsz38GHMRXxoBpSRuy9B30bHJ0Y5o0eanD
+ K57cFKWnxJm+G7S3ChHgGElYpX4VseAJh5huwm0ouKRrHvln2WTytYRm1cqtSwAj8es+
+ jPDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=ySo3IrSh2zZoDnqprPzVne9wIGX1iErVR4kH5ApU/H0=;
+ b=YC92YVXYsnIgbTymkZ1UAsifMKYGiLcjOoy73TPaWX8kvZreryVV6uySxI7kvvHoPJ
+ 1hosrmqj5s5jWDOcVNFzpWNm6DNo1K0+pO6l5vokiKllF2qzTUtiOXCDuxUBlkXkyyfS
+ pOpFzNz6UWvklC7d6wn0mMrKfhwf3lcW4uv+PYMroh0R8Y1F7OQCsERnVig6qSOtiw1l
+ NcRRGK0dpycevib6ca+4wVzYERSBiKDir3YJiEJZNNLV6FYLgrpKJRvbCXz1SiWjTqvG
+ oCkXDGIx8hEuQ9Gv9jf3SxE+ebZuPVHs517ASwiYs2ngYFDS70eruZipjk96DxcPLeoh
+ 6QyQ==
+X-Gm-Message-State: AOAM533kiDrfGmwJC0sq1soBupBMRFYZxQ/uiH4UbnGFuPHjmgcUKJYY
+ +KRfM0GmUoUGHSSlgCwwZDlbfg==
+X-Google-Smtp-Source: ABdhPJystL4w8DiZ8k+WJzM2zVVsTEGus27mUfQ3fODLg8E25R7NZGAhuVFnkmwRtqwuSzdNcE6Yyw==
+X-Received: by 2002:aa7:9630:: with SMTP id r16mr14000848pfg.144.1593528973633; 
+ Tue, 30 Jun 2020 07:56:13 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
+ by smtp.gmail.com with ESMTPSA id cl17sm2584730pjb.50.2020.06.30.07.56.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Jun 2020 07:56:12 -0700 (PDT)
+Subject: Re: [PATCH 1/2] tcg/tcg-op: Fix nonatomic_op load with MO_SIGN
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, wenmeng_zhang@c-sky.com,
+ wxy194768@alibaba-inc.com
+References: <20200629130731.1080-1-zhiwei_liu@c-sky.com>
+ <20200629130731.1080-2-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <db9e632e-4fcc-2374-590f-4ea35d1adda6@linaro.org>
+Date: Tue, 30 Jun 2020 07:56:10 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=armbru@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=205.139.110.120; envelope-from=armbru@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/30 03:55:26
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -30
-X-Spam_score: -3.1
-X-Spam_bar: ---
-X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=_AUTOLEARN
+In-Reply-To: <20200629130731.1080-2-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::442;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x442.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,70 +84,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2020 09:04:18 -0000
+X-List-Received-Date: Tue, 30 Jun 2020 14:56:17 -0000
 
-The Error ** argument must be NULL, &error_abort, &error_fatal, or a
-pointer to a variable containing NULL.  Passing an argument of the
-latter kind twice without clearing it in between is wrong: if the
-first call sets an error, it no longer points to NULL for the second
-call.
+On 6/29/20 6:07 AM, LIU Zhiwei wrote:
+> @@ -3189,7 +3189,7 @@ static void do_nonatomic_op_i32(TCGv_i32 ret, TCGv addr, TCGv_i32 val,
+>  
+>      memop = tcg_canonicalize_memop(memop, 0, 0);
+>  
+> -    tcg_gen_qemu_ld_i32(t1, addr, idx, memop & ~MO_SIGN);
+> +    tcg_gen_qemu_ld_i32(t1, addr, idx, memop);
+>      gen(t2, t1, val);
+>      tcg_gen_qemu_st_i32(t2, addr, idx, memop);
+>  
+> @@ -3232,7 +3232,7 @@ static void do_nonatomic_op_i64(TCGv_i64 ret, TCGv addr, TCGv_i64 val,
+>  
+>      memop = tcg_canonicalize_memop(memop, 1, 0);
+>  
+> -    tcg_gen_qemu_ld_i64(t1, addr, idx, memop & ~MO_SIGN);
+> +    tcg_gen_qemu_ld_i64(t1, addr, idx, memop);
+>      gen(t2, t1, val);
+>      tcg_gen_qemu_st_i64(t2, addr, idx, memop);
 
-riscv_harts_realize() is wrong that way: it passes @errp to
-riscv_hart_realize() in a loop.  I can't tell offhand whether this can
-fail.
+This is insufficient for smin/smax -- we also need to extend the "val" input.
 
-Fix by checking for failure in each iteration.
 
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: qemu-riscv@nongnu.org
-Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/riscv_hart.c | 14 +++++---------
- 1 file changed, 5 insertions(+), 9 deletions(-)
-
-diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
-index e26c382259..f59fe52f0f 100644
---- a/hw/riscv/riscv_hart.c
-+++ b/hw/riscv/riscv_hart.c
-@@ -40,19 +40,13 @@ static void riscv_harts_cpu_reset(void *opaque)
-     cpu_reset(CPU(cpu));
- }
- 
--static void riscv_hart_realize(RISCVHartArrayState *s, int idx,
-+static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
-                                char *cpu_type, Error **errp)
- {
--    Error *err = NULL;
--
-     object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
-     s->harts[idx].env.mhartid = s->hartid_base + idx;
-     qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
--    qdev_realize(DEVICE(&s->harts[idx]), NULL, &err);
--    if (err) {
--        error_propagate(errp, err);
--        return;
--    }
-+    return qdev_realize(DEVICE(&s->harts[idx]), NULL, errp);
- }
- 
- static void riscv_harts_realize(DeviceState *dev, Error **errp)
-@@ -63,7 +57,9 @@ static void riscv_harts_realize(DeviceState *dev, Error **errp)
-     s->harts = g_new0(RISCVCPU, s->num_harts);
- 
-     for (n = 0; n < s->num_harts; n++) {
--        riscv_hart_realize(s, n, s->cpu_type, errp);
-+        if (!riscv_hart_realize(s, n, s->cpu_type, errp)) {
-+            return;
-+        }
-     }
- }
- 
--- 
-2.26.2
-
+r~
 
