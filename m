@@ -1,76 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jq4hl-0001bm-Ai
-	for mharc-qemu-riscv@gnu.org; Mon, 29 Jun 2020 21:04:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39980)
+	id 1jqAZo-0007Ne-Ra
+	for mharc-qemu-riscv@gnu.org; Tue, 30 Jun 2020 03:21:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44430)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jq4hg-0001Xn-FK; Mon, 29 Jun 2020 21:04:53 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:34169)
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1jqAZn-0007MT-AR
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2020 03:21:07 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:42712)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jq4hc-000449-TP; Mon, 29 Jun 2020 21:04:50 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id j19so6254564ybj.1;
- Mon, 29 Jun 2020 18:04:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1jqAZd-0003kn-CL
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2020 03:21:07 -0400
+Received: by mail-io1-xd43.google.com with SMTP id c16so19899380ioi.9
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2020 00:20:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=2gloZ1BcqS3npr+OTl9aFg3Kcknp3tiU9+fhtRKt120=;
- b=StA1JdZUwDrAX5ViC6Os7mgpcPj7P2Dur+H8V7BNkMbatclxVq4lDig6Re/5Pb7BfI
- cOFWFSQN4cVHWhF8cKInLgxRpdQUfe89V5JNNcCJWlHWuDoK3JBq8n7yINARxSzmId88
- sryDAl3QbzcgSCng1rtMvwrtNtRi0wEUjlACXhO50Ehf0nD5ncm+Od2yfhYBCYpY3DgZ
- 3Z69cShB3Ve2frUAt45o1X+LzyPN2pXHzWeIHfowow8nwL/nFpA8ZVLxxrKs1vZc0WXb
- hPQw3Btv9LVEfrT3csg2lI1aA7HyJK2ENBZfXqhGa+hSjbhWuZmdgypJzBGDj27FLEcC
- 7t+Q==
+ :cc; bh=p2GMc+9NLu2HY0kaTaRdGrxJJgalYC5CSeXSfxm6o10=;
+ b=EU9S0/StJYyNws5Zd8iSIG0koV20ZlkOcqpl1smtMEQfK31EX+7Qf2xDW1gnvwgz6R
+ fbweyq1FDGtNHl2SHvCIKkdDy0zOawNVIamiOedui1CtXqpJ3pMMCI+whdIT3hibc25c
+ QITvllcKx8m4zpIqXVjJo5MKL3doxeMAlJLR169V7kRcqpATFEaxUZm54GjT571BMICV
+ iuQ2VJtjnqdBL9Ze+/eZRZdiW1T49OD0mxbHxHrHdACz0NfsgKWUcdVR+QVI+on8Tstc
+ voHHIptzn40hf53XeELzsG0ozFQru+EYf5pldl/NqGnID27sV4LsUeJb3lx7uzX0XDa6
+ z3uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=2gloZ1BcqS3npr+OTl9aFg3Kcknp3tiU9+fhtRKt120=;
- b=Idia7WeNaKH0cuURdU6UhFHgUYOlc0swL/ChQOrR9GRqmt9z1AX25koCOriBJ1A/mP
- NRkbFdG3pfSr1AXt1ZS6K7DinrrAXNtQVsnF3lVTfF5sOcp9BmFahLjFHechloDqU93J
- HXknZQXw1MquK0D0wcHclYPA54DFa+cSSrlr+0A0yMciIjxQCZwRxcpNQ8UK8bTeQf7R
- FbsmiXGvSTKqiFohO+YnjBIuHnUxggj1U2hD7rNAFHkWz34VWICiBx3cNmmcYjP4hOAg
- PTvoj933vJqXr0zVxpMtJ7UFubdXN0hHSyDY7yhnBqIqXSFhCSdRD1gV6Zz7oRasuwfQ
- C/Qw==
-X-Gm-Message-State: AOAM531UBIRJm6VDvaTKRl+8nMt8aRIq6VxqyG2X1Lkd7w54WJJTWwAy
- j/mr81L+sg5BzgfDJZVWpcPmppYEDy3KrHEirMM=
-X-Google-Smtp-Source: ABdhPJwr+X+uQIJQAF6r1S4JLSeua7S122A5p8sKCnq0xVvwll5x9YFD9rUND2DTpBmAs1Wive/nLegaItBTv2Htb0g=
-X-Received: by 2002:a25:5806:: with SMTP id m6mr999839ybb.152.1593479087085;
- Mon, 29 Jun 2020 18:04:47 -0700 (PDT)
+ bh=p2GMc+9NLu2HY0kaTaRdGrxJJgalYC5CSeXSfxm6o10=;
+ b=G9NnPqj7GPjuXQAA20dCbLwlG73FziXDCosmO0MnQ2bK4KHKn/acy/3ecgozJR45O+
+ hCAeOMsdaFs/l4bhQu5YZf3j4yIrveMgTiqkELuuum1YtRbWVJ/qmAiSM+thofuyCs1l
+ 6WGJSngkYy/ff7epwm/lZlhhyqv+M5gztu7774YS7DLzgaPiHBOf7f5i8yEMXQqvlSEc
+ mBaHnwiJoGmEwGWtITZq8lARgnAQ/vDRyXx9vuwgOElXzuDr4soK2RnhSE1ZlLcVggmn
+ EFDQ/fACPjGyxwnVbuBa+qGAaK7VmSttE+3JRNX0Lu6qMiW/fW4Amb3+F1xACSGt2+ds
+ UOlg==
+X-Gm-Message-State: AOAM532B6KRHurfi3EtzWb48uMSNvRNCVEehHWvKa+4hSZ9bStBwjcSn
+ hQ8hGrDhh3GwVr9M1zlqcWP7V9z7DTGajU+eQPkoWA==
+X-Google-Smtp-Source: ABdhPJz7YJmDeZVm5JaLy6y3cQfeQIeMmn6N5zTatCLMvYcTBpLlifqZMLDxOpKcffmukqIyeuky+Pnm6e5eRlva4Oo=
+X-Received: by 2002:a05:6638:1483:: with SMTP id
+ j3mr22167115jak.65.1593501655470; 
+ Tue, 30 Jun 2020 00:20:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200626003313.715355-1-atish.patra@wdc.com>
- <20200626003313.715355-3-atish.patra@wdc.com>
- <CAEUhbmUCJcosvYd44qPMXdkE+Bj2MUcFBvz1VWSZL2w-6Z3d6g@mail.gmail.com>
- <CAOnJCUKr5XXga5B02WDOeiyvEjgpAfcqp_VN-y2AAD0vXsn2Uw@mail.gmail.com>
- <CAEUhbmVH9RauXydanCv6OpVAMi9cKP4OaJetgNx3vaVSoPSQBw@mail.gmail.com>
- <CAOnJCUJzF0rBEqUFCjgwFQ36m-WO3yuvUY9BD8N6SCTTeLKZ3Q@mail.gmail.com>
- <CAEUhbmXjyBa_Ejn+2joL5w7qOC08eub1zOktDfMTGrFa46PJ6Q@mail.gmail.com>
- <CAOnJCU+VtjnaN=3wVNZMdBMjrj3ag1gnA6okfROA85um8pKqsA@mail.gmail.com>
-In-Reply-To: <CAOnJCU+VtjnaN=3wVNZMdBMjrj3ag1gnA6okfROA85um8pKqsA@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 30 Jun 2020 09:04:35 +0800
-Message-ID: <CAEUhbmVG=rT2qZ8x=cpBQOg8my3n4cuG98xGPjVqyLgpx-aT+A@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] RISC-V: Copy the fdt in dram instead of ROM
-To: Atish Patra <atishp@atishpatra.org>
-Cc: Atish Patra <atish.patra@wdc.com>,
+References: <20200626205917.4545-1-zhiwei_liu@c-sky.com>
+ <20200626205917.4545-4-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200626205917.4545-4-zhiwei_liu@c-sky.com>
+From: Chih-Min Chao <chihmin.chao@sifive.com>
+Date: Tue, 30 Jun 2020 15:20:44 +0800
+Message-ID: <CAEiOBXWCVWhZ4oopTvmhU5yfSW+pdyJPDvqDfnvHD2DesXdAhQ@mail.gmail.com>
+Subject: Re: [PATCH 3/6] target/riscv: Check for LEGAL NaN-boxing
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alexander Richardson <Alexander.Richardson@cl.cam.ac.uk>, 
- Alistair Francis <alistair.francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
+ Richard Henderson <richard.henderson@linaro.org>, wxy194768@alibaba-inc.com, 
+ wenmeng_zhang@c-sky.com, Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Ian Jiang <ianjiang.ict@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000001fba1d05a948045a"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=chihmin.chao@sifive.com; helo=mail-io1-xd43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=_AUTOLEARN
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -83,215 +77,160 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2020 01:04:53 -0000
+X-List-Received-Date: Tue, 30 Jun 2020 07:21:07 -0000
 
-On Tue, Jun 30, 2020 at 2:50 AM Atish Patra <atishp@atishpatra.org> wrote:
+--0000000000001fba1d05a948045a
+Content-Type: text/plain; charset="UTF-8"
+
+On Sat, Jun 27, 2020 at 5:05 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+
+> A narrow n-bit operation, where n < FLEN, checks that input operands
+> are correctly NaN-boxed, i.e., all upper FLEN - n bits are 1.
+> If so, the n least-significant bits of the input are used as the input
+> value,
+> otherwise the input value is treated as an n-bit canonical NaN.
 >
-> On Sat, Jun 27, 2020 at 2:55 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > On Sat, Jun 27, 2020 at 12:37 PM Atish Patra <atishp@atishpatra.org> wrote:
-> > >
-> > > On Fri, Jun 26, 2020 at 7:54 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > >
-> > > > Hi Atish,
-> > > >
-> > > > On Sat, Jun 27, 2020 at 12:58 AM Atish Patra <atishp@atishpatra.org> wrote:
-> > > > >
-> > > > > On Fri, Jun 26, 2020 at 4:50 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > > >
-> > > > > > Hi Atish,
-> > > > > >
-> > > > > > On Fri, Jun 26, 2020 at 8:33 AM Atish Patra <atish.patra@wdc.com> wrote:
-> > > > > > >
-> > > > > > > Currently, the fdt is copied to the ROM after the reset vector. The firmware
-> > > > > > > has to copy it to DRAM. Instead of this, directly copy the device tree to a
-> > > > > > > pre-computed dram address. The device tree load address should be as far as
-> > > > > > > possible from kernel and initrd images. That's why it is kept at the end of
-> > > > > > > the DRAM or 4GB whichever is lesser.
-> > > > > > >
-> > > > > > > Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> > > > > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > > > ---
-> > > > > > >  hw/riscv/boot.c         | 57 +++++++++++++++++++++++++++++------------
-> > > > > > >  hw/riscv/sifive_u.c     | 32 +++++++++++------------
-> > > > > > >  hw/riscv/spike.c        |  7 ++++-
-> > > > > > >  hw/riscv/virt.c         |  7 ++++-
-> > > > > > >  include/hw/riscv/boot.h |  5 +++-
-> > > > > > >  5 files changed, 71 insertions(+), 37 deletions(-)
-> > > > > > >
-> > > > > > > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> > > > > > > index 482b78147993..02c4018a8105 100644
-> > > > > > > --- a/hw/riscv/boot.c
-> > > > > > > +++ b/hw/riscv/boot.c
-> > > > > > > @@ -159,44 +159,67 @@ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
-> > > > > > >      return *start + size;
-> > > > > > >  }
-> > > > > > >
-> > > > > > > +hwaddr riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
-> > > > > >
-> > > > > > I think we should use uint32_t for the return value type, since it is
-> > > > > > always below 4GiB
-> > > > > >
-> > > > >
-> > > > > You are correct. I will update it. Thanks.
-> > > > > > > +{
-> > > > > > > +    hwaddr temp, fdt_addr;
-> > > > > > > +    hwaddr dram_end = dram_base + mem_size;
-> > > > > > > +    int fdtsize = fdt_totalsize(fdt);
-> > > > > > > +
-> > > > > > > +    if (fdtsize <= 0) {
-> > > > > > > +        error_report("invalid device-tree");
-> > > > > > > +        exit(1);
-> > > > > > > +    }
-> > > > > > > +
-> > > > > > > +    /*
-> > > > > > > +     * We should put fdt as far as possible to avoid kernel/initrd overwriting
-> > > > > > > +     * its content. But it should be addressable by 32 bit system as well.
-> > > > > > > +     * Thus, put it at an aligned address that less than fdt size from end of
-> > > > > > > +     * dram or 4GB whichever is lesser.
-> > > > > > > +     */
-> > > > > > > +    temp = MIN(dram_end, 4096 * MiB);
-> > > > > > > +    fdt_addr = QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
-> > > > > > > +
-> > > > > > > +    fdt_pack(fdt);
-> > > > > > > +    /* copy in the device tree */
-> > > > > > > +    qemu_fdt_dumpdtb(fdt, fdt_totalsize(fdt));
-> > > > > >
-> > > > > > Use fdtsize
-> > > > > >
-> > > > >
-> > > > > Sure.
-> > > > > > > +
-> > > > > > > +    rom_add_blob_fixed_as("fdt", fdt, fdtsize, fdt_addr,
-> > > > > > > +                          &address_space_memory);
-> > > > > > > +
-> > > > > > > +    return fdt_addr;
-> > > > > > > +}
-> > > > > > > +
-> > > > > > >  void riscv_setup_rom_reset_vec(hwaddr start_addr, hwaddr rom_base,
-> > > > > > > -                               hwaddr rom_size, void *fdt)
-> > > > > > > +                               hwaddr rom_size,
-> > > > > > > +                               hwaddr fdt_load_addr, void *fdt)
-> > > > > > >  {
-> > > > > > >      int i;
-> > > > > > >      /* reset vector */
-> > > > > > > -    uint32_t reset_vec[8] = {
-> > > > > > > -        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
-> > > > > > > -        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
-> > > > > > > +    uint32_t reset_vec[10] = {
-> > > > > > > +        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
-> > > > > >
-> > > > > > fw_dync should be introduced in the next patch, so this line should be
-> > > > > > kept unchanged in this patch
-> > > > > >
-> > > > > As we have fdt_laddr, keeping it unchanged may create confusion with
-> > > > > another dtb label.
-> > > > > I will change the label to "end" in the next version.
-> > > > >
-> > > > > > >          0xf1402573,                  /*     csrr   a0, mhartid  */
-> > > > > > >  #if defined(TARGET_RISCV32)
-> > > > > > > +        0x0202a583,                  /*     lw     a1, 32(t0) */
-> > > > > > >          0x0182a283,                  /*     lw     t0, 24(t0) */
-> > > > > > >  #elif defined(TARGET_RISCV64)
-> > > > > > > +        0x0202b583,                  /*     ld     a1, 32(t0) */
-> > > > > > >          0x0182b283,                  /*     ld     t0, 24(t0) */
-> > > > > > >  #endif
-> > > > > > >          0x00028067,                  /*     jr     t0 */
-> > > > > > >          0x00000000,
-> > > > > > >          start_addr,                  /* start: .dword */
-> > > > > > >          0x00000000,
-> > > > > > > -                                     /* dtb: */
-> > > > > > > +        fdt_load_addr,               /* fdt_laddr: .dword */
-> > > > > > > +        0x00000000,
-> > > > > > > +                                     /* fw_dyn: */
-> > > > > > >      };
-> > > > > > >
-> > > > > > >      /* copy in the reset vector in little_endian byte order */
-> > > > > > > -    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-> > > > > > > +    for (i = 0; i < ARRAY_SIZE(reset_vec); i++) {
-> > > > > > >          reset_vec[i] = cpu_to_le32(reset_vec[i]);
-> > > > > > >      }
-> > > > > > >      rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
-> > > > > > >                            rom_base, &address_space_memory);
-> > > > > > >
-> > > > > > > -    /* copy in the device tree */
-> > > > > > > -    if (fdt_pack(fdt) || fdt_totalsize(fdt) >
-> > > > > > > -        rom_size - sizeof(reset_vec)) {
-> > > > > > > -        error_report("not enough space to store device-tree");
-> > > > > > > -        exit(1);
-> > > > > > > -    }
-> > > > > > > -    qemu_fdt_dumpdtb(fdt, fdt_totalsize(fdt));
-> > > > > > > -    rom_add_blob_fixed_as("mrom.fdt", fdt, fdt_totalsize(fdt),
-> > > > > > > -                           rom_base + sizeof(reset_vec),
-> > > > > > > -                           &address_space_memory);
-> > > > > > > -
-> > > > > > >      return;
-> > > > > > >  }
-> > > > > > > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > > > > > > index 395b21703ab4..7d39a4e4ec6d 100644
-> > > > > > > --- a/hw/riscv/sifive_u.c
-> > > > > > > +++ b/hw/riscv/sifive_u.c
-> > > > > > > @@ -379,6 +379,7 @@ static void sifive_u_machine_init(MachineState *machine)
-> > > > > > >      MemoryRegion *flash0 = g_new(MemoryRegion, 1);
-> > > > > > >      target_ulong start_addr = memmap[SIFIVE_U_DRAM].base;
-> > > > > > >      int i;
-> > > > > > > +    hwaddr fdt_load_addr;
-> > > > > > >
-> > > > > > >      /* Initialize SoC */
-> > > > > > >      object_initialize_child(OBJECT(machine), "soc", &s->soc, TYPE_RISCV_U_SOC);
-> > > > > > > @@ -450,40 +451,37 @@ static void sifive_u_machine_init(MachineState *machine)
-> > > > > > >          }
-> > > > > > >      }
-> > > > > > >
-> > > > > > > +    /* Compute the fdt load address in dram */
-> > > > > > > +    fdt_load_addr = riscv_load_fdt(memmap[SIFIVE_U_DRAM].base,
-> > > > > > > +                                   machine->ram_size, s->fdt);
-> > > > > > > +
-> > > > > > >      /* reset vector */
-> > > > > > > -    uint32_t reset_vec[8] = {
-> > > > > > > +    uint32_t reset_vec[11] = {
-> > > > > > >          s->msel,                       /* MSEL pin state */
-> > > > > > > -        0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(dtb) */
-> > > > > > > -        0x01c28593,                    /*     addi   a1, t0, %pcrel_lo(1b) */
-> > > > > > > +        0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
-> > > > > > >          0xf1402573,                    /*     csrr   a0, mhartid  */
-> > > > > > >  #if defined(TARGET_RISCV32)
-> > > > > > > +        0x0202a583,                    /*     lw     a1, 32(t0) */
-> > > > > > >          0x0182a283,                    /*     lw     t0, 24(t0) */
-> > > > > > >  #elif defined(TARGET_RISCV64)
-> > > > > > > -        0x0182e283,                    /*     lwu    t0, 24(t0) */
-> > > > > > > +        0x0202b583,                    /*     ld     a1, 32(t0) */
-> > > > > > > +        0x0182b283,                    /*     ld     t0, 24(t0) */
-> > > > > >
-> > > > > > This change (lwu => ld) is unnecessary.
-> > > > > >
-> > > > > start_addr is a dword. Currently, the start address is within 32 bits.
-> > > > > But it can be changed to more than 32 bits. No ?
-> > > >
-> > > > For RV32, only 32-bit can be used here. For Rv64, I am not sure
-> > > > whether it is a big value to support jumping directly to 4GiB address
-> > > > above in QEMU. For FU540 SoC, all possible boot adddresses are below
-> > > > 4GiB so I think there is no need to support that in QEMU.
-> > > >
-> > >
-> > > That's true only for hifive unleashed. But that may change for future
-> > > generations of sifive socs.
-> > > But I was trying to say that it is confusing to use a lwu for a dword
-> > > (as per the comment section).
-> > > If you prefer to use lwu only, we should cast it to a 32 bit value,
-> > > update the comment and use lwu.
-> > >
-> > > I prefer ld because it is not ambiguous and future proof as well.
-> >
-> > If we use ld, then please fix the 0x00000000 entry, so that it becomes
-> > the high 32-bit of start_addr.
-> >
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> ---
+>  target/riscv/translate.c | 29 +++++++++++++++++++++++++++++
+>  1 file changed, 29 insertions(+)
 >
-> I am bit confused. It is already happening. Otherwise, it won't boot.
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 4b1534c9a6..1c9b809d4a 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -104,6 +104,35 @@ static void gen_nanbox_fpr(DisasContext *ctx, int
+> regno)
+>      }
+>  }
+>
+> +/*
+> + * A narrow n-bit operation, where n < FLEN, checks that input operands
+> + * are correctly NaN-boxed, i.e., all upper FLEN - n bits are 1.
+> + * If so, the n least-signicant bits of the input are used as the input
+> value,
+> + * otherwise the input value is treated as an n-bit canonical NaN.
+> + * (riscv-spec-v2.2 Section 9.2).
+> + */
+> +static void check_nanboxed(DisasContext *ctx, int num, ...)
+> +{
+> +    if (has_ext(ctx, RVD)) {
+> +        int i;
+> +        TCGv_i64 cond1 = tcg_temp_new_i64();
+>
+forget to remove ?
 
-Currently all machines are using 32-bit start_addr. Because the high
-32-bit of the start_addr is hardcoded to zero, as I mentioned.
+> +        TCGv_i64 t_nan = tcg_const_i64(0x7fc00000);
+> +        TCGv_i64 t_max = tcg_const_i64(MAKE_64BIT_MASK(32, 32));
+> +        va_list valist;
+> +        va_start(valist, num);
+> +
+> +        for (i = 0; i < num; i++) {
+> +            TCGv_i64 t = va_arg(valist, TCGv_i64);
+> +            tcg_gen_movcond_i64(TCG_COND_GEU, t, t, t_max, t, t_nan);
+> +        }
+> +
+> +        va_end(valist);
+> +        tcg_temp_free_i64(cond1);
+>
+forget to remove ?
 
-Regards,
-Bin
+> +        tcg_temp_free_i64(t_nan);
+> +        tcg_temp_free_i64(t_max);
+> +    }
+> +}
+> +
+>  static void generate_exception(DisasContext *ctx, int excp)
+>  {
+>      tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+> --
+> 2.23.0
+>
+>
+
+ Chih-Min Chao
+
+--0000000000001fba1d05a948045a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br clear=3D"all"><div><div dir=3D"ltr" c=
+lass=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr=
+"><span style=3D"color:rgb(136,136,136)"></span><div style=3D"color:rgb(136=
+,136,136)"><br></div></div></div></div></div><div class=3D"gmail_quote"><di=
+v dir=3D"ltr" class=3D"gmail_attr">On Sat, Jun 27, 2020 at 5:05 AM LIU Zhiw=
+ei &lt;<a href=3D"mailto:zhiwei_liu@c-sky.com">zhiwei_liu@c-sky.com</a>&gt;=
+ wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
+0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">A narrow=
+ n-bit operation, where n &lt; FLEN, checks that input operands<br>
+are correctly NaN-boxed, i.e., all upper FLEN - n bits are 1.<br>
+If so, the n least-significant bits of the input are used as the input valu=
+e,<br>
+otherwise the input value is treated as an n-bit canonical NaN.<br>
+<br>
+Signed-off-by: LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@c-sky.com" targe=
+t=3D"_blank">zhiwei_liu@c-sky.com</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/translate.c | 29 +++++++++++++++++++++++++++++<br>
+=C2=A01 file changed, 29 insertions(+)<br>
+<br>
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c<br>
+index 4b1534c9a6..1c9b809d4a 100644<br>
+--- a/target/riscv/translate.c<br>
++++ b/target/riscv/translate.c<br>
+@@ -104,6 +104,35 @@ static void gen_nanbox_fpr(DisasContext *ctx, int regn=
+o)<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0}<br>
+<br>
++/*<br>
++ * A narrow n-bit operation, where n &lt; FLEN, checks that input operands=
+<br>
++ * are correctly NaN-boxed, i.e., all upper FLEN - n bits are 1.<br>
++ * If so, the n least-signicant bits of the input are used as the input va=
+lue,<br>
++ * otherwise the input value is treated as an n-bit canonical NaN.<br>
++ * (riscv-spec-v2.2 Section 9.2).<br>
++ */<br>
++static void check_nanboxed(DisasContext *ctx, int num, ...)<br>
++{<br>
++=C2=A0 =C2=A0 if (has_ext(ctx, RVD)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 int i;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 TCGv_i64 cond1 =3D tcg_temp_new_i64();<br></bl=
+ockquote><div>forget to remove ?=C2=A0</div><blockquote class=3D"gmail_quot=
+e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
+;padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 TCGv_i64 t_nan =3D tcg_const_i64(0x7fc00000);<=
+br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 TCGv_i64 t_max =3D tcg_const_i64(MAKE_64BIT_MA=
+SK(32, 32));<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 va_list valist;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 va_start(valist, num);<br>
++<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 for (i =3D 0; i &lt; num; i++) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 TCGv_i64 t =3D va_arg(valist, TC=
+Gv_i64);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_movcond_i64(TCG_COND_GEU=
+, t, t, t_max, t, t_nan);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 va_end(valist);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free_i64(cond1);<br></blockquote><div=
+>forget to remove ?=C2=A0=C2=A0</div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free_i64(t_nan);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free_i64(t_max);<br>
++=C2=A0 =C2=A0 }<br>
++}<br>
++<br>
+=C2=A0static void generate_exception(DisasContext *ctx, int excp)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0tcg_gen_movi_tl(cpu_pc, ctx-&gt;base.pc_next);<br>
+-- <br>
+2.23.0<br>
+<br></blockquote><div><br></div><div>=C2=A0</div><div>=C2=A0Chih-Min Chao</=
+div><div>=C2=A0</div></div></div>
+
+--0000000000001fba1d05a948045a--
 
