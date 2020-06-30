@@ -1,40 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jqCBd-0002ur-TD
-	for mharc-qemu-riscv@gnu.org; Tue, 30 Jun 2020 05:04:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40106)
+	id 1jqCBo-00030m-6P
+	for mharc-qemu-riscv@gnu.org; Tue, 30 Jun 2020 05:04:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40170)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jqCBZ-0002s5-Nd
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2020 05:04:13 -0400
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:49645)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jqCBc-0002uD-Gd
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2020 05:04:17 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:49822
+ helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jqCBP-0002xi-7I
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2020 05:04:13 -0400
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jqCBP-0002y0-SU
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2020 05:04:16 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593507842;
+ s=mimecast20190719; t=1593507843;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3iDl2ElwkXpRbcCCv6gyWEk3cW3jpGvA4tnLbRXMjV8=;
- b=d2ElcFKuvlfQldIumqnjn13cQ5r512Tx3jRNJEDAjepJYOpzj9Os2Pa0NnrgBqhxhwzgQO
- ARP8SvnhQPpsh37QCTZ5EO7hBj0x7r/RnvHzTMqsvnrBFMuUeWD4iFjaX4yaFS4GRuKjZz
- qXbj5tgDYPOFPfgHFV0Lz2eSzaGc/TE=
+ bh=IBuWJeUdSlFDG1n5rSJL7eqW1pQQCWjeqmk23CBp2OE=;
+ b=EROHYPcgCe95umwxEanPg67NsQySiMVrNlf8o6IdkrsmBd/QMcuF3uEjJdoDOFECLSbYOE
+ jj0HhEs6fUSNP3hfMaG9oJCEyOLN+MfZWmpsWrKgGSfzGvAYwDbWm8uG5KyVCIiffh/f9T
+ iyMmeGMMhg3wH3ohPAZbg8XcXwMiORA=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-3-9AApus3qOS-X4OtGSbH69A-1; Tue, 30 Jun 2020 05:03:58 -0400
-X-MC-Unique: 9AApus3qOS-X4OtGSbH69A-1
+ us-mta-490-pCOfr_yzPaWsvZhhkDu51w-1; Tue, 30 Jun 2020 05:03:58 -0400
+X-MC-Unique: pCOfr_yzPaWsvZhhkDu51w-1
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
  [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3F06018A0731;
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3FA7FBFC3;
  Tue, 30 Jun 2020 09:03:57 +0000 (UTC)
 Received: from blackfin.pond.sub.org (ovpn-112-121.ams2.redhat.com
  [10.36.112.121])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id C983471669;
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id D0694741AD;
  Tue, 30 Jun 2020 09:03:56 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 0AED8113847D; Tue, 30 Jun 2020 11:03:52 +0200 (CEST)
+ id 1178C113847E; Tue, 30 Jun 2020 11:03:52 +0200 (CEST)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -43,10 +44,10 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 17/26] riscv/sifive_u: Fix sifive_u_soc_realize() error API
+Subject: [PATCH v3 18/26] riscv_hart: Fix riscv_harts_realize() error API
  violations
-Date: Tue, 30 Jun 2020 11:03:42 +0200
-Message-Id: <20200630090351.1247703-18-armbru@redhat.com>
+Date: Tue, 30 Jun 2020 11:03:43 +0200
+Message-Id: <20200630090351.1247703-19-armbru@redhat.com>
 In-Reply-To: <20200630090351.1247703-1-armbru@redhat.com>
 References: <20200630090351.1247703-1-armbru@redhat.com>
 MIME-Version: 1.0
@@ -57,9 +58,9 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=207.211.31.81; envelope-from=armbru@redhat.com;
+Received-SPF: pass client-ip=205.139.110.120; envelope-from=armbru@redhat.com;
  helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/30 02:00:02
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/06/30 03:55:26
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -30
 X-Spam_score: -3.1
@@ -80,7 +81,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2020 09:04:14 -0000
+X-List-Received-Date: Tue, 30 Jun 2020 09:04:18 -0000
 
 The Error ** argument must be NULL, &error_abort, &error_fatal, or a
 pointer to a variable containing NULL.  Passing an argument of the
@@ -88,11 +89,11 @@ latter kind twice without clearing it in between is wrong: if the
 first call sets an error, it no longer points to NULL for the second
 call.
 
-sifive_u_soc_realize() is wrong that way: it passes &err to
-sysbus_realize() four times before checking it.  Harmless, because the
-first three can't actually fail (I think).
+riscv_harts_realize() is wrong that way: it passes @errp to
+riscv_hart_realize() in a loop.  I can't tell offhand whether this can
+fail.
 
-Fix by checking for failure right away.
+Fix by checking for failure in each iteration.
 
 Cc: Palmer Dabbelt <palmer@dabbelt.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>
@@ -103,42 +104,46 @@ Cc: qemu-riscv@nongnu.org
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/sifive_u.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ hw/riscv/riscv_hart.c | 14 +++++---------
+ 1 file changed, 5 insertions(+), 9 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 7d051e7c92..a1d2edfe13 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -677,11 +677,15 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
-         memmap[SIFIVE_U_CLINT].size, ms->smp.cpus,
-         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE, false);
+diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+index e26c382259..f59fe52f0f 100644
+--- a/hw/riscv/riscv_hart.c
++++ b/hw/riscv/riscv_hart.c
+@@ -40,19 +40,13 @@ static void riscv_harts_cpu_reset(void *opaque)
+     cpu_reset(CPU(cpu));
+ }
  
--    sysbus_realize(SYS_BUS_DEVICE(&s->prci), &err);
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->prci), errp)) {
-+        return;
-+    }
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->prci), 0, memmap[SIFIVE_U_PRCI].base);
+-static void riscv_hart_realize(RISCVHartArrayState *s, int idx,
++static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
+                                char *cpu_type, Error **errp)
+ {
+-    Error *err = NULL;
+-
+     object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
+     s->harts[idx].env.mhartid = s->hartid_base + idx;
+     qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
+-    qdev_realize(DEVICE(&s->harts[idx]), NULL, &err);
+-    if (err) {
+-        error_propagate(errp, err);
+-        return;
+-    }
++    return qdev_realize(DEVICE(&s->harts[idx]), NULL, errp);
+ }
  
-     qdev_prop_set_uint32(DEVICE(&s->gpio), "ngpio", 16);
--    sysbus_realize(SYS_BUS_DEVICE(&s->gpio), &err);
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->gpio), errp)) {
-+        return;
-+    }
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio), 0, memmap[SIFIVE_U_GPIO].base);
+ static void riscv_harts_realize(DeviceState *dev, Error **errp)
+@@ -63,7 +57,9 @@ static void riscv_harts_realize(DeviceState *dev, Error **errp)
+     s->harts = g_new0(RISCVCPU, s->num_harts);
  
-     /* Pass all GPIOs to the SOC layer so they are available to the board */
-@@ -695,7 +699,9 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     for (n = 0; n < s->num_harts; n++) {
+-        riscv_hart_realize(s, n, s->cpu_type, errp);
++        if (!riscv_hart_realize(s, n, s->cpu_type, errp)) {
++            return;
++        }
      }
+ }
  
-     qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
--    sysbus_realize(SYS_BUS_DEVICE(&s->otp), &err);
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->otp), errp)) {
-+        return;
-+    }
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_OTP].base);
- 
-     if (nd->used) {
 -- 
 2.26.2
 
