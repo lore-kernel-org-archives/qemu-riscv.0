@@ -1,47 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jqgXj-0002dD-Lu
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Jul 2020 13:29:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59494)
+	id 1jqheO-00010G-KF
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Jul 2020 14:40:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47828)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jqgXh-0002bS-Ds; Wed, 01 Jul 2020 13:29:05 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:45691)
+ (Exim 4.90_1) (envelope-from <prvs=4447ca4a2=atish.patra@wdc.com>)
+ id 1jqheM-0000zk-Ps; Wed, 01 Jul 2020 14:40:02 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:13131)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jqgXf-0002wR-DD; Wed, 01 Jul 2020 13:29:05 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07437483|-1; CH=blue; DM=|OVERLOAD|false|;
- DS=CONTINUE|ham_system_inform|0.0270799-9.17707e-05-0.972828;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01l07381; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=8; SR=0; TI=SMTPD_---.HvxtnRt_1593624536; 
-Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.HvxtnRt_1593624536)
- by smtp.aliyun-inc.com(10.147.44.129);
- Thu, 02 Jul 2020 01:28:56 +0800
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: richard.henderson@linaro.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
- wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- LIU Zhiwei <zhiwei_liu@c-sky.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v12 61/61] target/riscv: configure and turn on vector
- extension from command line
-Date: Wed,  1 Jul 2020 23:25:49 +0800
-Message-Id: <20200701152549.1218-62-zhiwei_liu@c-sky.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20200701152549.1218-1-zhiwei_liu@c-sky.com>
-References: <20200701152549.1218-1-zhiwei_liu@c-sky.com>
+ (Exim 4.90_1) (envelope-from <prvs=4447ca4a2=atish.patra@wdc.com>)
+ id 1jqheJ-0006SU-KX; Wed, 01 Jul 2020 14:40:02 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1593628799; x=1625164799;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=WeVV+ECuPk5S81Hthax5qKFbwjjza9mjQLe8acb8+KE=;
+ b=BPov/QnlNQabUhLzsSjWW6DAMmS2o6yKzl4Izpj2AwXrI4M3P/qC/8og
+ LvIdN2wm3o0EHV7RGxjNfXy2Sh2bDKDhYmI8hBmCcxqutRDKKkfvkIYuK
+ 0lK2cIW33XNwu3ijRuPzV1uKDLZZ7aSHOWnuh39kvaVqEmRo83NtO86ax
+ dpVQ6ALG87yeUH+Hwvabl6/lmExwnsU4lj9Q6pExo9A8XN3snkk+n6div
+ blHFC1Y/8i2d2DSqGgbvexN45Oza0Yx99iiY2A7enfQBjm5H2v0OOukMw
+ e6EHPC/ZvKKC81QdYoa4X3sQDLRi0ZmWi/9MnDNYYeJZBFVhGAGdOj2rK g==;
+IronPort-SDR: S/SLPMvhTLUxEGPdY/V/7H0cAzgbDSMp9k+W+IOj1xdraezDrUu0IArbl2QJurEBhz2AStmSmO
+ 4nMXLjgal8/OMh8Epv3D0qTUoECetWgtNWlDfSeR+b5tRQTozI7XapTTOURaq+Sl7MSD4/OUoH
+ X/MHTVRCgoX42Uy3q8OTCV4kLMLMLJ90hqs7fA2gs2uXeo2GBF8YJ98Dy/wmCEBMxYbpL7KSG2
+ ocwCiL9rHEv+VGFmodwaI2LR6vmjCr3u06bOrOZ8vfBQNky3ptJQIvwt9Foz1s2ZIdfKtVb0zh
+ 238=
+X-IronPort-AV: E=Sophos;i="5.75,301,1589212800"; d="scan'208";a="250642368"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 02 Jul 2020 02:39:53 +0800
+IronPort-SDR: g/tvrr31HB5MKjZleoxyWNrzSaotj3e6gkDIkQ7YsaK3uFTuSJO9nWIYjNSKKBZbQtVnqoAkHe
+ oYQj6B8QBmxVMrcIY5k0V6UYmz4aLDLpA=
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Jul 2020 11:28:10 -0700
+IronPort-SDR: 6ImAleFFqP7dq9OJfXgEkqJEj6XVutTnFD+NgPi8EaaP7nSsIMHgsYCvTuD9APbEzqbzkee8x0
+ ciYGCo0W4GFQ==
+WDCIronportException: Internal
+Received: from cnf006900.ad.shared (HELO yoda.hgst.com) ([10.86.58.95])
+ by uls-op-cesaip02.wdc.com with ESMTP; 01 Jul 2020 11:39:53 -0700
+From: Atish Patra <atish.patra@wdc.com>
+To: qemu-devel@nongnu.org
+Cc: Atish Patra <atish.patra@wdc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Alexander Richardson <Alexander.Richardson@cl.cam.ac.uk>,
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v4 1/4] riscv: Unify Qemu's reset vector code path
+Date: Wed,  1 Jul 2020 11:39:46 -0700
+Message-Id: <20200701183949.398134-2-atish.patra@wdc.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200701183949.398134-1-atish.patra@wdc.com>
+References: <20200701183949.398134-1-atish.patra@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=121.197.200.217;
- envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/01 11:22:02
-X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=_AUTOLEARN
+Received-SPF: pass client-ip=68.232.141.245;
+ envelope-from=prvs=4447ca4a2=atish.patra@wdc.com; helo=esa1.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/01 14:39:54
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -54,120 +82,241 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2020 17:29:05 -0000
+X-List-Received-Date: Wed, 01 Jul 2020 18:40:03 -0000
 
-Vector extension is default off. The only way to use vector extension is
-1. use cpu rv32 or rv64
-2. turn on it by command line
-   "-cpu rv64,x-v=true,vlen=128,elen=64,vext_spec=v0.7.1".
+Currently, all riscv machines except sifive_u have identical reset vector
+code implementations with memory addresses being different for all machines.
+They can be easily combined into a single function in common code.
 
-vlen is the vector register length, default value is 128 bit.
-elen is the max operator size in bits, default value is 64 bit.
-vext_spec is the vector specification version, default value is v0.7.1.
-These properties can be specified with other values.
+Move it to common function and let all the machines use the common function.
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Signed-off-by: Atish Patra <atish.patra@wdc.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
+Tested-by: Bin Meng <bin.meng@windriver.com>
 ---
- target/riscv/cpu.c | 43 +++++++++++++++++++++++++++++++++++++++++++
- target/riscv/cpu.h |  4 +++-
- 2 files changed, 46 insertions(+), 1 deletion(-)
+ hw/riscv/boot.c         | 46 +++++++++++++++++++++++++++++++++++++++++
+ hw/riscv/sifive_u.c     |  1 -
+ hw/riscv/spike.c        | 41 +++---------------------------------
+ hw/riscv/virt.c         | 40 +++--------------------------------
+ include/hw/riscv/boot.h |  2 ++
+ 5 files changed, 54 insertions(+), 76 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d525cfb687..228b9bdb5d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -430,6 +430,45 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         if (cpu->cfg.ext_h) {
-             target_misa |= RVH;
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index adb421b91b68..3df802380a36 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -26,8 +26,11 @@
+ #include "hw/loader.h"
+ #include "hw/riscv/boot.h"
+ #include "elf.h"
++#include "sysemu/device_tree.h"
+ #include "sysemu/qtest.h"
+ 
++#include <libfdt.h>
++
+ #if defined(TARGET_RISCV32)
+ # define KERNEL_BOOT_ADDRESS 0x80400000
+ #else
+@@ -155,3 +158,46 @@ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+ 
+     return *start + size;
+ }
++
++void riscv_setup_rom_reset_vec(hwaddr start_addr, hwaddr rom_base,
++                               hwaddr rom_size, void *fdt)
++{
++    int i;
++
++    /* reset vector */
++    uint32_t reset_vec[8] = {
++        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
++        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
++        0xf1402573,                  /*     csrr   a0, mhartid  */
++#if defined(TARGET_RISCV32)
++        0x0182a283,                  /*     lw     t0, 24(t0) */
++#elif defined(TARGET_RISCV64)
++        0x0182b283,                  /*     ld     t0, 24(t0) */
++#endif
++        0x00028067,                  /*     jr     t0 */
++        0x00000000,
++        start_addr,                  /* start: .dword */
++        0x00000000,
++                                     /* dtb: */
++    };
++
++    /* copy in the reset vector in little_endian byte order */
++    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
++        reset_vec[i] = cpu_to_le32(reset_vec[i]);
++    }
++    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
++                          rom_base, &address_space_memory);
++
++    /* copy in the device tree */
++    if (fdt_pack(fdt) || fdt_totalsize(fdt) >
++        rom_size - sizeof(reset_vec)) {
++        error_report("not enough space to store device-tree");
++        exit(1);
++    }
++    qemu_fdt_dumpdtb(fdt, fdt_totalsize(fdt));
++    rom_add_blob_fixed_as("mrom.fdt", fdt, fdt_totalsize(fdt),
++                           rom_base + sizeof(reset_vec),
++                           &address_space_memory);
++
++    return;
++}
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 7d051e7c9299..395b21703ab4 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -56,7 +56,6 @@
+ #include "sysemu/device_tree.h"
+ #include "sysemu/runstate.h"
+ #include "sysemu/sysemu.h"
+-#include "exec/address-spaces.h"
+ 
+ #include <libfdt.h>
+ 
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 3c87e04fdceb..c696077cbc16 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -41,9 +41,6 @@
+ #include "sysemu/device_tree.h"
+ #include "sysemu/qtest.h"
+ #include "sysemu/sysemu.h"
+-#include "exec/address-spaces.h"
+-
+-#include <libfdt.h>
+ 
+ #if defined(TARGET_RISCV32)
+ # define BIOS_FILENAME "opensbi-riscv32-spike-fw_jump.elf"
+@@ -165,7 +162,6 @@ static void spike_board_init(MachineState *machine)
+     MemoryRegion *system_memory = get_system_memory();
+     MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+-    int i;
+     unsigned int smp_cpus = machine->smp.cpus;
+ 
+     /* Initialize SOC */
+@@ -212,40 +208,9 @@ static void spike_board_init(MachineState *machine)
          }
-+        if (cpu->cfg.ext_v) {
-+            target_misa |= RVV;
-+            if (!is_power_of_2(cpu->cfg.vlen)) {
-+                error_setg(errp,
-+                        "Vector extension VLEN must be power of 2");
-+                return;
-+            }
-+            if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
-+                error_setg(errp,
-+                        "Vector extension implementation only supports VLEN "
-+                        "in the range [128, %d]", RV_VLEN_MAX);
-+                return;
-+            }
-+            if (!is_power_of_2(cpu->cfg.elen)) {
-+                error_setg(errp,
-+                        "Vector extension ELEN must be power of 2");
-+                return;
-+            }
-+            if (cpu->cfg.elen > 64 || cpu->cfg.vlen < 8) {
-+                error_setg(errp,
-+                        "Vector extension implementation only supports ELEN "
-+                        "in the range [8, 64]");
-+                return;
-+            }
-+            if (cpu->cfg.vext_spec) {
-+                if (!g_strcmp0(cpu->cfg.vext_spec, "v0.7.1")) {
-+                    vext_version = VEXT_VERSION_0_07_1;
-+                } else {
-+                    error_setg(errp,
-+                           "Unsupported vector spec version '%s'",
-+                           cpu->cfg.vext_spec);
-+                    return;
-+                }
-+            } else {
-+                qemu_log("vector verison is not specified, "
-+                        "use the default value v0.7.1\n");
-+            }
-+            set_vext_version(env, vext_version);
-+        }
- 
-         set_misa(env, RVXLEN | target_misa);
      }
-@@ -469,10 +508,14 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-     /* This is experimental so mark with 'x-' */
-     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-+    DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-+    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-+    DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-+    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-     DEFINE_PROP_END_OF_LIST(),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0ad51c6580..eef20ca6e5 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -92,7 +92,7 @@ typedef struct CPURISCVState CPURISCVState;
  
- #include "pmp.h"
+-    /* reset vector */
+-    uint32_t reset_vec[8] = {
+-        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
+-        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
+-        0xf1402573,                  /*     csrr   a0, mhartid  */
+-#if defined(TARGET_RISCV32)
+-        0x0182a283,                  /*     lw     t0, 24(t0) */
+-#elif defined(TARGET_RISCV64)
+-        0x0182b283,                  /*     ld     t0, 24(t0) */
+-#endif
+-        0x00028067,                  /*     jr     t0 */
+-        0x00000000,
+-        memmap[SPIKE_DRAM].base,     /* start: .dword DRAM_BASE */
+-        0x00000000,
+-                                     /* dtb: */
+-    };
+-
+-    /* copy in the reset vector in little_endian byte order */
+-    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+-        reset_vec[i] = cpu_to_le32(reset_vec[i]);
+-    }
+-    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
+-                          memmap[SPIKE_MROM].base, &address_space_memory);
+-
+-    /* copy in the device tree */
+-    if (fdt_pack(s->fdt) || fdt_totalsize(s->fdt) >
+-            memmap[SPIKE_MROM].size - sizeof(reset_vec)) {
+-        error_report("not enough space to store device-tree");
+-        exit(1);
+-    }
+-    qemu_fdt_dumpdtb(s->fdt, fdt_totalsize(s->fdt));
+-    rom_add_blob_fixed_as("mrom.fdt", s->fdt, fdt_totalsize(s->fdt),
+-                          memmap[SPIKE_MROM].base + sizeof(reset_vec),
+-                          &address_space_memory);
++    /* load the reset vector */
++    riscv_setup_rom_reset_vec(memmap[SPIKE_DRAM].base, memmap[SPIKE_MROM].base,
++                              memmap[SPIKE_MROM].size, s->fdt);
  
--#define RV_VLEN_MAX 512
-+#define RV_VLEN_MAX 256
+     /* initialize HTIF using symbols found in load_kernel */
+     htif_mm_init(system_memory, mask_rom, &s->soc.harts[0].env, serial_hd(0));
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 616db6f5aced..8ec77e43de26 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -39,12 +39,9 @@
+ #include "sysemu/arch_init.h"
+ #include "sysemu/device_tree.h"
+ #include "sysemu/sysemu.h"
+-#include "exec/address-spaces.h"
+ #include "hw/pci/pci.h"
+ #include "hw/pci-host/gpex.h"
  
- FIELD(VTYPE, VLMUL, 0, 2)
- FIELD(VTYPE, VSEW, 2, 3)
-@@ -279,12 +279,14 @@ typedef struct RISCVCPU {
-         bool ext_s;
-         bool ext_u;
-         bool ext_h;
-+        bool ext_v;
-         bool ext_counters;
-         bool ext_ifencei;
-         bool ext_icsr;
+-#include <libfdt.h>
+-
+ #if defined(TARGET_RISCV32)
+ # define BIOS_FILENAME "opensbi-riscv32-virt-fw_jump.bin"
+ #else
+@@ -535,40 +532,9 @@ static void virt_machine_init(MachineState *machine)
+         start_addr = virt_memmap[VIRT_FLASH].base;
+     }
  
-         char *priv_spec;
-         char *user_spec;
-+        char *vext_spec;
-         uint16_t vlen;
-         uint16_t elen;
-         bool mmu;
+-    /* reset vector */
+-    uint32_t reset_vec[8] = {
+-        0x00000297,                  /* 1:  auipc  t0, %pcrel_hi(dtb) */
+-        0x02028593,                  /*     addi   a1, t0, %pcrel_lo(1b) */
+-        0xf1402573,                  /*     csrr   a0, mhartid  */
+-#if defined(TARGET_RISCV32)
+-        0x0182a283,                  /*     lw     t0, 24(t0) */
+-#elif defined(TARGET_RISCV64)
+-        0x0182b283,                  /*     ld     t0, 24(t0) */
+-#endif
+-        0x00028067,                  /*     jr     t0 */
+-        0x00000000,
+-        start_addr,                  /* start: .dword */
+-        0x00000000,
+-                                     /* dtb: */
+-    };
+-
+-    /* copy in the reset vector in little_endian byte order */
+-    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
+-        reset_vec[i] = cpu_to_le32(reset_vec[i]);
+-    }
+-    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
+-                          memmap[VIRT_MROM].base, &address_space_memory);
+-
+-    /* copy in the device tree */
+-    if (fdt_pack(s->fdt) || fdt_totalsize(s->fdt) >
+-            memmap[VIRT_MROM].size - sizeof(reset_vec)) {
+-        error_report("not enough space to store device-tree");
+-        exit(1);
+-    }
+-    qemu_fdt_dumpdtb(s->fdt, fdt_totalsize(s->fdt));
+-    rom_add_blob_fixed_as("mrom.fdt", s->fdt, fdt_totalsize(s->fdt),
+-                          memmap[VIRT_MROM].base + sizeof(reset_vec),
+-                          &address_space_memory);
++    /* load the reset vector */
++    riscv_setup_rom_reset_vec(start_addr, virt_memmap[VIRT_MROM].base,
++                              virt_memmap[VIRT_MROM].size, s->fdt);
+ 
+     /* create PLIC hart topology configuration string */
+     plic_hart_config_len = (strlen(VIRT_PLIC_HART_CONFIG) + 1) * smp_cpus;
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index 9daa98da08d7..3e9759c89aa2 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -35,5 +35,7 @@ target_ulong riscv_load_kernel(const char *kernel_filename,
+                                symbol_fn_t sym_cb);
+ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+                          uint64_t kernel_entry, hwaddr *start);
++void riscv_setup_rom_reset_vec(hwaddr saddr, hwaddr rom_base,
++                               hwaddr rom_size, void *fdt);
+ 
+ #endif /* RISCV_BOOT_H */
 -- 
-2.23.0
+2.26.2
 
 
