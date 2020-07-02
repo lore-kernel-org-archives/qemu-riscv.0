@@ -1,69 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jr2oS-0007z8-0L
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Jul 2020 13:15:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43830)
+	id 1jr39S-0002eB-K6
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Jul 2020 13:37:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49070)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jr2oQ-0007wH-Tk
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2020 13:15:50 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:44134)
+ id 1jr39R-0002bj-Dx
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2020 13:37:33 -0400
+Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:33975)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jr2oO-0002Ry-Gv
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2020 13:15:50 -0400
-Received: by mail-pf1-x444.google.com with SMTP id t11so7946235pfq.11
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2020 10:15:48 -0700 (PDT)
+ id 1jr39P-0006AG-M4
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2020 13:37:33 -0400
+Received: by mail-pg1-x541.google.com with SMTP id t6so13817789pgq.1
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2020 10:37:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=6vG7jpWndOAy1UZCZIPUDV2h1TOyEUA78r/89wM+Nis=;
- b=Im6DJy+j8H3c5TVp0z/clSnRtH3+0Ihzf/nMLRZ8ZGxMQMfNYJGF4sdlsBVqDXI3e3
- a+1/+nOG5qX+f5re8F2ajCj+oUlseULUxmrE3zleD/l1cLqbirvdKNttK18kPeZI59Tq
- KcVps8cpxMtIcbpGnDKc7tLABydyFgqnUlUAwKVyrErM7teVDdT0prOJBTKAraQtIdt1
- 1gFtFQleD3QDY7b/i6+qH0aaZ1KneFkrKkKW4iGK/1wQrN6sRu5e1v4qQcDo2bpS7jEO
- 3PqLyZ9T6qa0J8N/0OyBEA/iUzFYdLyvqGVqp9L+ApgB0tfkDgboh0qRc8RGpf5Yls93
- Gf0A==
+ bh=MhMg4rPf1u+L6cvVhFXqDVElEDNcAbRtLEvG8y507Rk=;
+ b=WblYSB8lVQVWEhhXwagbDAO5PTOKP1az66mjxsULRdLoggcc8lF07bJHGNGFWq9Q8M
+ A0AbgW6flt6p/M4kPuDvcPZvITYmID/o63ArRtzy0zXUPh7rJxur59hbmH49euKy1tXr
+ BB//a/qXbN9sHk+5J9LUA325Y8rQ6trckdMD4UWqW9lJzrWtOK5/RG0zV9ausRrrvn3t
+ 8ifHJrxKOfDxwkHrYXzCELgiCCSIcka8oy2prG6xJZ8CO2cuNnKFDf5Q29n74vpBmmt4
+ JUgIeP4tJmzT1ADux/mJ8wKAKbUpD1ac9t5fWHfuSUzqnDtLqIbO4DTxCHqA7l9PL1mW
+ n5Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=6vG7jpWndOAy1UZCZIPUDV2h1TOyEUA78r/89wM+Nis=;
- b=m4Ir5acMncj9NUZvhTIn3nXL9jI54zrnYG2q2FRKrEyWObCWGa20AeVjIYCnsCP385
- LlHM2H6K34tYSTQCmfJpYkk8gvqXX8lgUsQftTbeyrbFMUBH3739kX/6/9wMLBGGaf17
- E+dFzBu8S0kEOiKLm6lJSP+tSZkRH2//FtxnLDT2bx4whKHQDeMROgQy2mPY+ULlBW6V
- TTnq226l5zpoh7Sc35oTK4/xiA9w61xE6M5z5eGCLNxpsy5O/MJLgUq2e08qBF1zW45r
- Tpq8xEtuAWOzS6HtZ96QbAN5qDRaUBK8QaCvZpIm6j1ZgoQMWawQb1DUFs3xkyL2Q1p6
- C4Lw==
-X-Gm-Message-State: AOAM532NVOUMGbfz9ZeEfxomYczVfF9/uoFT8HJ7jJ2Fga6bfuOmHPF7
- HPp3wZjN5T2R1pMjQgYjmk5YMw==
-X-Google-Smtp-Source: ABdhPJxQ2niQ6E4JbnO2vRFZOWUrN2fnibu8Bl4rVUWR4Z2A/3EdjQbHuVeJ7WMuSAyjl3nfZP2fng==
-X-Received: by 2002:a63:ce41:: with SMTP id r1mr1712942pgi.203.1593710146855; 
- Thu, 02 Jul 2020 10:15:46 -0700 (PDT)
+ bh=MhMg4rPf1u+L6cvVhFXqDVElEDNcAbRtLEvG8y507Rk=;
+ b=si5xsoRKgaxsMhoCqDt6yGrirg2VsFXyplOurJBL+4HY3C8nRL+9wQceP6dtZ8KfJv
+ ZpLRqQC1zSHxOxZZ6WQszZlQjY9BYv6P7YwtISIldf0vVijXKCPmrX5RdDV/cZ818olu
+ uXaoIb/CYcxNQRbXUyTKwRk/itH9cZSCvMJ2Z+OgL2JZdB9M4FYxR4ctjFIfjZB1SsmV
+ vE+rFYD+PXwuQN93winJNA8lMjr8n6Bw1eIHSEPiBFvBaK0OhOrohgoTQhKhxfHMR1T7
+ MUoGFc1zaR9qCeNm2CVacq8DjooYAPqxRvN8NdIF3r5SwBZ1Iuhg2tjVxLxvDie950C/
+ 8ovg==
+X-Gm-Message-State: AOAM533J/aTyoR+ZY6MJusKn6JHjvCYXXZCkRKliZncRrAWunZjg4iGK
+ 11AUfHf8g8LRm/0gFf0NcX9BGw==
+X-Google-Smtp-Source: ABdhPJz0a2XTjLSXfX9YuvOVIpKCaHK9zP6zPR1cCUj2KvGR0Yz1I7XUuksqQeXkR8JdBY35gv6Jxw==
+X-Received: by 2002:a05:6a00:1342:: with SMTP id
+ k2mr28924874pfu.32.1593711449822; 
+ Thu, 02 Jul 2020 10:37:29 -0700 (PDT)
 Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
- by smtp.gmail.com with ESMTPSA id 186sm3047176pfe.1.2020.07.02.10.15.45
+ by smtp.gmail.com with ESMTPSA id p10sm3783746pgn.6.2020.07.02.10.37.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 02 Jul 2020 10:15:46 -0700 (PDT)
-Subject: Re: [PATCH 2/6] target/riscv: NaN-boxing compute, sign-injection and
- convert instructions.
+ Thu, 02 Jul 2020 10:37:29 -0700 (PDT)
+Subject: Re: [PATCH 0/6] target/riscv: NaN-boxing for multiple precison
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, wenmeng_zhang@c-sky.com,
  wxy194768@alibaba-inc.com, ianjiang.ict@gmail.com
 References: <20200626205917.4545-1-zhiwei_liu@c-sky.com>
- <20200626205917.4545-3-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <704bff99-8ece-ae9b-cf28-8fdddf17e0d5@linaro.org>
-Date: Thu, 2 Jul 2020 10:15:44 -0700
+Message-ID: <6d2e6876-18a8-b32a-0879-565693b6d446@linaro.org>
+Date: Thu, 2 Jul 2020 10:37:27 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200626205917.4545-3-zhiwei_liu@c-sky.com>
+In-Reply-To: <20200626205917.4545-1-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::444;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x444.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::541;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x541.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -85,21 +84,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jul 2020 17:15:51 -0000
+X-List-Received-Date: Thu, 02 Jul 2020 17:37:33 -0000
 
 On 6/26/20 1:59 PM, LIU Zhiwei wrote:
-> An n-bit foating-point result is written to the n least-significant bits
-> of the destination f register, with all 1s written to the uppermost
-> FLEN - n bits to yield a legal NaN-boxed value
+> Multiple precison shoule be supported by NaN-boxing. That means, we should
+> flush not valid NaN-boxing input to canonical NaN before effective
+> calculation and we should NaN-boxing the result after the effective
+> calculation.
 > 
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> ---
->  target/riscv/insn_trans/trans_rvd.inc.c |  1 +
->  target/riscv/insn_trans/trans_rvf.inc.c | 19 +++++++++++++++++++
->  2 files changed, 20 insertions(+)
+> In this patch set, split the implementation to three steps for compute,
+> sign-injection, and some covert insns, which are check_nanboxed,
+> effective calculation and gen_nanbox_fpr.
+> 
+> Check_nanboxed checks the inputs and flushes not valid inputs to cancical NaN.
+> Effective calculation is direct calculation on fp32 values.
+> Gen_nanbox_fpr does the NaN-boxing, writing the 1s to upper 32 bits.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+I know I just reviewed a couple of these, but then I got to thinking about
+patch 3 more closely.
+
+I think it would be better to do all of the nan-boxing work inside of the
+helpers, including the return values.
+
+Since we must have a helper call for the actual fp arithmetic, we might as well
+put the rest of the logic in there too.  That way the JIT code is smaller.
+
+If, for RVF && !RVD, we always maintain the invariant that the values are
+nanboxed anyway, then we do not even have to check for RVD at runtime.
+
+Thoughts?
+
 
 r~
-
 
