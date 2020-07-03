@@ -1,63 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jrCDZ-00086q-35
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Jul 2020 23:18:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41874)
+	id 1jrCH5-0006m2-VB
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Jul 2020 23:22:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43064)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jrCDX-00080B-00; Thu, 02 Jul 2020 23:18:23 -0400
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:36468)
+ id 1jrCH2-0006jd-68; Thu, 02 Jul 2020 23:22:00 -0400
+Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044]:55266)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jrCDV-0005zD-Gu; Thu, 02 Jul 2020 23:18:22 -0400
-Received: by mail-pf1-x443.google.com with SMTP id 207so13206906pfu.3;
- Thu, 02 Jul 2020 20:18:20 -0700 (PDT)
+ id 1jrCH0-0006rR-6l; Thu, 02 Jul 2020 23:21:59 -0400
+Received: by mail-pj1-x1044.google.com with SMTP id u8so12983867pje.4;
+ Thu, 02 Jul 2020 20:21:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=mYGOqQs+HqwCvvR4hOJZAekFvpPNdREJOjr+cZasMEE=;
- b=PGRkpYexEiqDwFIRhDpwxjs+WSX0N/TICe/qAOBOQb+d9kcxXazQLToA33WXchAslc
- tGLhmBh6R4M+Qbyne8PBdRmAIHbxdJBOT1aDXWVtlqN7EEfZ4KVI3NkYSFCtNM9JInfb
- 3lMs+HHnGr7LGhbr0S2gLzaih0pySJ8Mcto/YoCPSUvRzUjpA8gevh+benExlD0HIYUc
- axy8UJtamGVExX/l8JaOQsHXpBG1Bj1bh7k9Js7DFq8/pXkI7waXumcK+GYbDrao52+4
- BIZ7PSBnWaMrSFA8nuGCT/mEYWXMTXI/DJFylruGx/bot0IxLnAU1H0XqDRuIPDRZN/S
- GboA==
+ h=from:to:cc:subject:date:message-id;
+ bh=/HM5zEb2R72OqiDbPriYiqvc3Xj//HmllZogpWwviMU=;
+ b=lVHj98ujvz7a1OVn4fX6kupsC6eS4MyWiOSEd7CwkYv17FOAl2GPb3cYQ7za5GoTGh
+ NR2zh/QQM+tVmGMzbQ1NZYdJWwD83lhCx1QlJ29G7SDr72/SSMV4mYwzy3IQ4qOdRHXA
+ KMBYfEQ+LENwfBBlssIFzyV2uJMk/gP4rBFLIiZFFja8piGyyUIAPBpp7urlGOS1GCdt
+ YtZqRonojdcUwEEqc7un4HP6qpeCO88LuZr1CazQbqeih4Tu8eQu36Y3+fWDztDzV9Qo
+ d3el9WFsk8slRIQ0b63suga+1/mADgxMhUuE5877W8BdwvShBHJ/WyjMrQZpzlWiNu/a
+ y95Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=mYGOqQs+HqwCvvR4hOJZAekFvpPNdREJOjr+cZasMEE=;
- b=DMV2pe92akFicLf+wO2KddYRmqF58Y2V8KIobt0Rku/TpZUQNsIXpFm6bbSqTEaSpu
- ew2fjBRiGf7vSI1aH1Is4gXBiCzAAES/sTWrnbs87zkJhyZJkc3Ug6oSjxIaehmmA5RE
- ycZ/c/v8LfXF82P4pBQKDV2bYWIU615wIkKDEceiBHuZJ/Z3vSIHc202Ejzn2R4ghM/v
- G4OqoK5fmSzE7RgoaKo5SgN9bZTUIV/M+W8mYZpGl1DlPgUw3bwHKi5EV1LHhCWnkZ35
- BvBT/695UoWpgjtfyPrq4IVJRf90znJ/5iCs5tTDGYFke8xtkdTC/wDZm4V751DtB+E0
- 8Oew==
-X-Gm-Message-State: AOAM533Teg41rcDzx4v8c9AAz7oN3sdeu1LeROveCvyCZ3wiDQdzX1Ng
- 53NbrAaifreROIGngKzQDsI=
-X-Google-Smtp-Source: ABdhPJzuGq9x8ki6jLo3TtgkdBjp5R8VCilf27PhVkUNc+D405FjebWKVO7ZyA22aoV3Bi3buIwLbA==
-X-Received: by 2002:a63:8c4a:: with SMTP id q10mr27500224pgn.431.1593746299788; 
- Thu, 02 Jul 2020 20:18:19 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=/HM5zEb2R72OqiDbPriYiqvc3Xj//HmllZogpWwviMU=;
+ b=dsE+cH+TKPBI0860C7pE5YbXmaVjdwrzRNOGilmSlwPEHA3GQoq/yhCjuQGTdIBpnI
+ ZOxfcckSHxwc3JGg8yS1Fwzz2521B8y5DfdsD8+Fd6mlTPKwSUUQzQ1UaPmSJwOGfWVB
+ rZx13C1Cp5tTKBYVehKh6lmuE57W7qBo2eXCQB8k4ij9wQc2IwfWjaxSOZDVMLSldTB3
+ GzKfCmEg0V7DsMdWofMinO97S2Ac/uFxOAhpVQbzADC3RmSEsx+bNOzRUMZSSNW/Cy5U
+ Jcgdq6IeWLVZtRSoMTtXEqUF+FY9mqN7ZE1eSgljFgLYri6jcTjgviDp5wafugiWt04J
+ 2loA==
+X-Gm-Message-State: AOAM530Hr50FiAgVgkFNYnnLieFZ2Gxm2EqMzKvv0y/T3yG4ydNevsq7
+ C3Vwm7EiBpEK6FkK3MWLmCqsnfJA
+X-Google-Smtp-Source: ABdhPJwx00FH1i1K7c1L3IlpE5Bpz9vkfRnzmZVBU+9niohzfwFMktj8Rr7Nj7EdBJMbBD8BXQG28A==
+X-Received: by 2002:a17:90a:b891:: with SMTP id
+ o17mr20617230pjr.202.1593746516542; 
+ Thu, 02 Jul 2020 20:21:56 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id c12sm10165745pfn.162.2020.07.02.20.18.19
+ by smtp.gmail.com with ESMTPSA id i128sm10341987pfe.74.2020.07.02.20.21.55
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Thu, 02 Jul 2020 20:18:19 -0700 (PDT)
+ Thu, 02 Jul 2020 20:21:56 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmerdabbelt@google.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Cc: Anup Patel <anup@brainfault.org>,
-	Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v3 7/7] Makefile: Ship the generic platform bios images for
- RISC-V
-Date: Thu,  2 Jul 2020 20:18:07 -0700
-Message-Id: <1593746287-19251-8-git-send-email-bmeng.cn@gmail.com>
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH] hw/riscv: virt: Sort the SoC memmap table entries
+Date: Thu,  2 Jul 2020 20:21:51 -0700
+Message-Id: <1593746511-19517-1-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1593746287-19251-1-git-send-email-bmeng.cn@gmail.com>
-References: <1593746287-19251-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::443;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x443.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1044.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,41 +75,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jul 2020 03:18:23 -0000
+X-List-Received-Date: Fri, 03 Jul 2020 03:22:02 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Update the install blob list to include the generic platform
-fw_dynamic bios images.
+Adjust the PCIe memory maps to follow the order.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
-
 ---
 
-Changes in v3:
-- change fw_jump to fw_dynamic in the Makefile
+ hw/riscv/virt.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Changes in v2:
-- new patch: Makefile: Ship the generic platform bios images for RISC-V
-
- Makefile | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/Makefile b/Makefile
-index b1b8a5a..05e05bb 100644
---- a/Makefile
-+++ b/Makefile
-@@ -841,8 +841,8 @@ u-boot.e500 u-boot-sam460-20100605.bin \
- qemu_vga.ndrv \
- edk2-licenses.txt \
- hppa-firmware.img \
--opensbi-riscv32-sifive_u-fw_jump.bin opensbi-riscv32-virt-fw_jump.bin \
--opensbi-riscv64-sifive_u-fw_jump.bin opensbi-riscv64-virt-fw_jump.bin
-+opensbi-riscv32-generic-fw_dynamic.bin opensbi-riscv32-generic-fw_dynamic.elf \
-+opensbi-riscv64-generic-fw_dynamic.bin opensbi-riscv64-generic-fw_dynamic.elf
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 5ca49c5..aacfbda 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -57,14 +57,14 @@ static const struct MemmapEntry {
+     [VIRT_TEST] =        {   0x100000,        0x1000 },
+     [VIRT_RTC] =         {   0x101000,        0x1000 },
+     [VIRT_CLINT] =       {  0x2000000,       0x10000 },
++    [VIRT_PCIE_PIO] =    {  0x3000000,       0x10000 },
+     [VIRT_PLIC] =        {  0xc000000,     0x4000000 },
+     [VIRT_UART0] =       { 0x10000000,         0x100 },
+     [VIRT_VIRTIO] =      { 0x10001000,        0x1000 },
+     [VIRT_FLASH] =       { 0x20000000,     0x4000000 },
+-    [VIRT_DRAM] =        { 0x80000000,           0x0 },
+-    [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
+-    [VIRT_PCIE_PIO] =    { 0x03000000,    0x00010000 },
+     [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
++    [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
++    [VIRT_DRAM] =        { 0x80000000,           0x0 },
+ };
  
- 
- DESCS=50-edk2-i386-secure.json 50-edk2-x86_64-secure.json \
+ #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
 -- 
 2.7.4
 
