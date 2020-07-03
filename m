@@ -1,68 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jrCH5-0006m2-VB
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Jul 2020 23:22:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43064)
+	id 1jrGLD-0002c2-Em
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Jul 2020 03:42:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40880)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jrCH2-0006jd-68; Thu, 02 Jul 2020 23:22:00 -0400
-Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044]:55266)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1jrGLB-0002bq-Vt; Fri, 03 Jul 2020 03:42:34 -0400
+Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:50244)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jrCH0-0006rR-6l; Thu, 02 Jul 2020 23:21:59 -0400
-Received: by mail-pj1-x1044.google.com with SMTP id u8so12983867pje.4;
- Thu, 02 Jul 2020 20:21:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1jrGLA-0002dK-EM; Fri, 03 Jul 2020 03:42:33 -0400
+Received: by mail-wm1-x342.google.com with SMTP id l17so31056562wmj.0;
+ Fri, 03 Jul 2020 00:42:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=/HM5zEb2R72OqiDbPriYiqvc3Xj//HmllZogpWwviMU=;
- b=lVHj98ujvz7a1OVn4fX6kupsC6eS4MyWiOSEd7CwkYv17FOAl2GPb3cYQ7za5GoTGh
- NR2zh/QQM+tVmGMzbQ1NZYdJWwD83lhCx1QlJ29G7SDr72/SSMV4mYwzy3IQ4qOdRHXA
- KMBYfEQ+LENwfBBlssIFzyV2uJMk/gP4rBFLIiZFFja8piGyyUIAPBpp7urlGOS1GCdt
- YtZqRonojdcUwEEqc7un4HP6qpeCO88LuZr1CazQbqeih4Tu8eQu36Y3+fWDztDzV9Qo
- d3el9WFsk8slRIQ0b63suga+1/mADgxMhUuE5877W8BdwvShBHJ/WyjMrQZpzlWiNu/a
- y95Q==
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=OcGtQhJRMUZfDgXX7pdu/Iotiu0PoVya/fQ4Kmv2YdE=;
+ b=uDtAwF/1Uz90P+mkoX3UQK/2w/3maBZhn0kPIq0w500ed+nCqDbbnGScBmebLq0Hpx
+ 7SzuNsvHT86Q8j/FlfrKkgX1TNWNHWC+1oGi4qqq5mztTVZpRu5YhtMsnq1hv+fBp4J8
+ yYtKau1L6/MrRD5rPmnfUOC0oCW7Nhf+TDrCyWL3x5slJEIfJwTczSletYqEltOY+p1a
+ QNySocFVgEBpX76BBWFlFS6WpnFMz77BAx0hHBhsWsJ1sA19uwbpkLp/SX4FeH+hpoK/
+ S/RVdhMykhR6tVoFXLQFfxIHI5R6pXFDc5H0y3+M0qSzR/swSugFuzExcapWsW53aqPR
+ Ir+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=/HM5zEb2R72OqiDbPriYiqvc3Xj//HmllZogpWwviMU=;
- b=dsE+cH+TKPBI0860C7pE5YbXmaVjdwrzRNOGilmSlwPEHA3GQoq/yhCjuQGTdIBpnI
- ZOxfcckSHxwc3JGg8yS1Fwzz2521B8y5DfdsD8+Fd6mlTPKwSUUQzQ1UaPmSJwOGfWVB
- rZx13C1Cp5tTKBYVehKh6lmuE57W7qBo2eXCQB8k4ij9wQc2IwfWjaxSOZDVMLSldTB3
- GzKfCmEg0V7DsMdWofMinO97S2Ac/uFxOAhpVQbzADC3RmSEsx+bNOzRUMZSSNW/Cy5U
- Jcgdq6IeWLVZtRSoMTtXEqUF+FY9mqN7ZE1eSgljFgLYri6jcTjgviDp5wafugiWt04J
- 2loA==
-X-Gm-Message-State: AOAM530Hr50FiAgVgkFNYnnLieFZ2Gxm2EqMzKvv0y/T3yG4ydNevsq7
- C3Vwm7EiBpEK6FkK3MWLmCqsnfJA
-X-Google-Smtp-Source: ABdhPJwx00FH1i1K7c1L3IlpE5Bpz9vkfRnzmZVBU+9niohzfwFMktj8Rr7Nj7EdBJMbBD8BXQG28A==
-X-Received: by 2002:a17:90a:b891:: with SMTP id
- o17mr20617230pjr.202.1593746516542; 
- Thu, 02 Jul 2020 20:21:56 -0700 (PDT)
-Received: from localhost.localdomain (unknown-224-80.windriver.com.
- [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id i128sm10341987pfe.74.2020.07.02.20.21.55
- (version=TLS1 cipher=AES128-SHA bits=128/128);
- Thu, 02 Jul 2020 20:21:56 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=OcGtQhJRMUZfDgXX7pdu/Iotiu0PoVya/fQ4Kmv2YdE=;
+ b=PrUSI4vFNGMKMC83gebguB2X1ZKvumoNcCc15U40koERn9i+YshNChvcZK3ZXO/0Wn
+ iSS67Fh1ii1SigaJAlHo5AeuijuO6epnKvZDEJ8YZSJALaYBqWbKjRkm8+ow2ixG1P/J
+ RFOTWv2ZlBYrewNvVNbqpPS05M2MIv36/BfxzdWKdhR4Y7Coe6crpBdjLm/eE+uMImu+
+ NnK2oZbnjERxwmmPiIvPx3niLHAo4XWpgmQGpP04zcI2flbI4No5mb+lEC10mSvwRmpw
+ yl4ZUlVT5QLEt1RA15DyqvUy2Rcnk/oSO0jSdI4SehP/LslaMPW4+7z5UVSTZ4LhpO7I
+ t3AQ==
+X-Gm-Message-State: AOAM530afrFwbJ0ZJxhHVfJeZwpFIxSiNzxDGA+11qv2ZzOR8jkQYUKa
+ OOFoEWZYjwzGITQaD8odIt4=
+X-Google-Smtp-Source: ABdhPJxPaJMJhkKZHGUTHvNN8gNXcDDtlMHpCmheKMp0+2GmflgRfcpvd5bzn45S7LK/L8iuiyLxxw==
+X-Received: by 2002:a1c:f203:: with SMTP id s3mr34232460wmc.126.1593762150570; 
+ Fri, 03 Jul 2020 00:42:30 -0700 (PDT)
+Received: from [192.168.1.39] (1.red-83-51-162.dynamicip.rima-tde.net.
+ [83.51.162.1])
+ by smtp.gmail.com with ESMTPSA id q188sm12712397wma.46.2020.07.03.00.42.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 03 Jul 2020 00:42:29 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH v1 1/3] hw/char: Convert the Ibex UART to use the qdev
+ Clock model
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH] hw/riscv: virt: Sort the SoC memmap table entries
-Date: Thu,  2 Jul 2020 20:21:51 -0700
-Message-Id: <1593746511-19517-1-git-send-email-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 1.7.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1044.google.com
+Cc: palmer@dabbelt.com, alistair23@gmail.com,
+ Damien Hedde <damien.hedde@greensocs.com>
+References: <cover.1593547870.git.alistair.francis@wdc.com>
+ <bd1e09bc3c721bf92e3f0e3e260d0f548acbce8f.1593547870.git.alistair.francis@wdc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <3e856aa3-9142-feae-3259-3936b47bef17@amsat.org>
+Date: Fri, 3 Jul 2020 09:42:29 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
+MIME-Version: 1.0
+In-Reply-To: <bd1e09bc3c721bf92e3f0e3e260d0f548acbce8f.1593547870.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::342;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x342.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=_AUTOLEARN
+X-Spam_score_int: 0
+X-Spam_score: 0.0
+X-Spam_bar: /
+X-Spam_report: (0.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=1, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -75,41 +86,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jul 2020 03:22:02 -0000
+X-List-Received-Date: Fri, 03 Jul 2020 07:42:34 -0000
 
-From: Bin Meng <bin.meng@windriver.com>
++Damien
 
-Adjust the PCIe memory maps to follow the order.
+On 6/30/20 10:12 PM, Alistair Francis wrote:
+> Conver the Ibex UART to use the recently added qdev-clock functions.
 
-Signed-off-by: Bin Meng <bin.meng@windriver.com>
----
+Yeah! This is our first user \o/
 
- hw/riscv/virt.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  include/hw/char/ibex_uart.h |  2 ++
+>  hw/char/ibex_uart.c         | 19 ++++++++++++++++++-
+>  2 files changed, 20 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/hw/char/ibex_uart.h b/include/hw/char/ibex_uart.h
+> index 2bec772615..322bfffd8b 100644
+> --- a/include/hw/char/ibex_uart.h
+> +++ b/include/hw/char/ibex_uart.h
+> @@ -101,6 +101,8 @@ typedef struct {
+>      uint32_t uart_val;
+>      uint32_t uart_timeout_ctrl;
+>  
+> +    Clock *f_clk;
+> +
+>      CharBackend chr;
+>      qemu_irq tx_watermark;
+>      qemu_irq rx_watermark;
+> diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
+> index 45cd724998..f967e6919a 100644
+> --- a/hw/char/ibex_uart.c
+> +++ b/hw/char/ibex_uart.c
+> @@ -28,6 +28,7 @@
+>  #include "qemu/osdep.h"
+>  #include "hw/char/ibex_uart.h"
+>  #include "hw/irq.h"
+> +#include "hw/qdev-clock.h"
+>  #include "hw/qdev-properties.h"
+>  #include "migration/vmstate.h"
+>  #include "qemu/log.h"
+> @@ -330,7 +331,7 @@ static void ibex_uart_write(void *opaque, hwaddr addr,
+>          }
+>          if (value & UART_CTRL_NCO) {
+>              uint64_t baud = ((value & UART_CTRL_NCO) >> 16);
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 5ca49c5..aacfbda 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -57,14 +57,14 @@ static const struct MemmapEntry {
-     [VIRT_TEST] =        {   0x100000,        0x1000 },
-     [VIRT_RTC] =         {   0x101000,        0x1000 },
-     [VIRT_CLINT] =       {  0x2000000,       0x10000 },
-+    [VIRT_PCIE_PIO] =    {  0x3000000,       0x10000 },
-     [VIRT_PLIC] =        {  0xc000000,     0x4000000 },
-     [VIRT_UART0] =       { 0x10000000,         0x100 },
-     [VIRT_VIRTIO] =      { 0x10001000,        0x1000 },
-     [VIRT_FLASH] =       { 0x20000000,     0x4000000 },
--    [VIRT_DRAM] =        { 0x80000000,           0x0 },
--    [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
--    [VIRT_PCIE_PIO] =    { 0x03000000,    0x00010000 },
-     [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
-+    [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
-+    [VIRT_DRAM] =        { 0x80000000,           0x0 },
- };
- 
- #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
--- 
-2.7.4
+UART_CTRL_NCO is defined as:
+
+  #define UART_CTRL_NCO           (0xFFFF << 16)
+
+Note for later, convert to the clearer registerfields API?
+
+> -            baud *= 1000;
+> +            baud *= clock_get_hz(s->f_clk);
+>              baud >>= 20;
+>  
+>              s->char_tx_time = (NANOSECONDS_PER_SECOND / baud) * 10;
+> @@ -385,6 +386,18 @@ static void ibex_uart_write(void *opaque, hwaddr addr,
+>      }
+>  }
+>  
+> +static void ibex_uart_clk_update(void *opaque)
+> +{
+> +    IbexUartState *s = opaque;
+> +
+> +    /* recompute uart's speed on clock change */
+> +    uint64_t baud = ((s->uart_ctrl & UART_CTRL_NCO) >> 16);
+> +    baud *= clock_get_hz(s->f_clk);
+> +    baud >>= 20;
+
+Maybe worth to extract:
+
+  uint64_t ibex_uart_get_baud(IbexUartState *s)
+  {
+       uint64_t baud;
+
+       baud = ((s->uart_ctrl & UART_CTRL_NCO) >> 16);
+       baud *= clock_get_hz(s->f_clk);
+       baud >>= 20;
+
+       return baud;
+  }
+
+> +
+> +    s->char_tx_time = (NANOSECONDS_PER_SECOND / baud) * 10;
+> +}
+> +
+>  static void fifo_trigger_update(void *opaque)
+>  {
+>      IbexUartState *s = opaque;
+> @@ -444,6 +457,10 @@ static void ibex_uart_init(Object *obj)
+>  {
+>      IbexUartState *s = IBEX_UART(obj);
+>  
+> +    s->f_clk = qdev_init_clock_in(DEVICE(obj), "f_clock",
+> +                                  ibex_uart_clk_update, s);
+> +    clock_set_hz(s->f_clk, 50000000);
+
+Can you add a definition for this 50 MHz value:
+
+Otherwise:
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+
+> +
+>      sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->tx_watermark);
+>      sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->rx_watermark);
+>      sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->tx_empty);
+> 
 
 
