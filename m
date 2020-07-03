@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jrCDV-0007wk-HO
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Jul 2020 23:18:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41832)
+	id 1jrCDW-0007zP-Nn
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Jul 2020 23:18:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41836)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jrCDT-0007sb-T3; Thu, 02 Jul 2020 23:18:19 -0400
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:36247)
+ id 1jrCDU-0007tF-5a; Thu, 02 Jul 2020 23:18:20 -0400
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:37090)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jrCDR-0005xU-D8; Thu, 02 Jul 2020 23:18:19 -0400
-Received: by mail-pl1-x644.google.com with SMTP id d10so63794pll.3;
- Thu, 02 Jul 2020 20:18:16 -0700 (PDT)
+ id 1jrCDS-0005xp-AP; Thu, 02 Jul 2020 23:18:19 -0400
+Received: by mail-pj1-x1042.google.com with SMTP id o22so8311230pjw.2;
+ Thu, 02 Jul 2020 20:18:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=vQX2ENn7C5a82lIVn8bFx2VOYI6O7PIoTdabJDVC7ZM=;
- b=qj95F6brXM/tEK4Zqy0TNpv2MkTqMvPxvVMVrhokRtdnDUNHRlYMWjELDy60vHsX3X
- HqCS/ZJgc7KB4ze95C89x+PIxuqjTdH1KuzrCpAi5fIhgJgG0fRsgnml62h/zQ8S3FLl
- tQ3FWKKxwFkDR9i1d9td+aGtaM8iWZq12vhjQCyf+1GhRApKebtCfGxHb5WbSmnNJkoH
- +pFz3PSHDzodOfNDdL7MlY5oErIoI1C0UUUB9qTrbXVxAEB4t6LPuIzlc/0FtEtY3Bst
- FA62xSpJII2rS3xqkBhKW24kWcqnuQYF2mlKepc91pEvOe7APF1qCfLdB4E8uUh65C+3
- oSvw==
+ bh=B3ZPTZWvEFa8psd9EPNHowS+r+EdsAUNC0pRqgtNa+s=;
+ b=MQsl+V78mjmV5BS0JhcdDcONSFpSYLxEtAA4+mLa+1f5gkmUxKD/94nBKRcazs9iY+
+ t3iqT+vRBjhRFVGGblwPCr8O7lIPWj4ypLHxYw8vzmqeAi7kdfaUGdkTP4jqXpcpP3lh
+ lEOdozbXCHf9HtlujWH6AWAqURRDueGKufPpngvyUJEaY/qFwOOpxf0gckLuTtQo4f/m
+ uezdyzyIU599ZuMeHZXlDtn9UP8gKFJ7xzQNqXLR91e5Mwtcv2gmgfkownI6PRIzmM73
+ PWM72e25Syl9l8cmyk0ea0sMa6akzQJ3y5WvJ965JUmJPaU/4rNoued74yo59aBrhPTy
+ N6yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=vQX2ENn7C5a82lIVn8bFx2VOYI6O7PIoTdabJDVC7ZM=;
- b=jqffGk8wyH4SJzC8xsS25X87lpMtlShKVQBTCUyGDq0C18/dxLW4PzAOwwpniVzOik
- 6VCBSQb3ETQEf5ZDzqYkgmCNW8o7O6DD8PPxWmDtv72gh7Pq2R9lZ1zgGwVOwBdEYxfw
- goMU/DqgKQlOxr5D6XOQc4XcaBOn9xugmZmw/vgDcbj7otY67BSd9eWxEZWccBFG2JaS
- obBTWfoIZErTwUUz+w8tMH8fztZRuaxGhfaSTVdVYUgFTU8FQWxi2MLtGLZ66QkFsB+D
- w3IGshb6qQA7N8YnWKdPASNO/b2aHivWb2uSclyQmTAmpwot1saokali2PXH04tUHknK
- E92Q==
-X-Gm-Message-State: AOAM533YM5PDY9b/Oj8zkP6BevtGp5MAzcBhS0O2CCNoZjPhhHAVL08f
- TL1Fl6dXQlNNC8Cj5YiF/MY=
-X-Google-Smtp-Source: ABdhPJxHxUTinRug4vFFtHkAcb9817zTZqJmdQtzA1F3dmFCSSsSJ/3By3ZTFKnDJsGSl6Vj3+tnLw==
-X-Received: by 2002:a17:90a:e618:: with SMTP id
- j24mr5094467pjy.41.1593746295930; 
- Thu, 02 Jul 2020 20:18:15 -0700 (PDT)
+ bh=B3ZPTZWvEFa8psd9EPNHowS+r+EdsAUNC0pRqgtNa+s=;
+ b=hXTaIhCgRkz2gdKHdxNb+NFyvWpH/lYwj6/HLvFCFptBimuXfeABZrKXPS+diFynjF
+ voQXZyYf8NOKXG3nBwOMhYz9XZMQ9sX9yFMK+xwccPMD2tnRDkejx/lMwuoiVP2vgAaW
+ QnO+jDKDtpr9qonrESua6adUb01QvJA73gzgoweBnzFlGeOSnbLQyxBPs+idIfBEx9sX
+ vA/hkWfd60qdYmqoUY7oOr31twyOcqEmDPKAppYolJt8y0YMUXu9uO0GzbkNx+MozinH
+ TCkIEQo+wAHqBOqiLf1lPMYKDXSzVqJb3Pr228EGzym9/IZJyVcuwj8uuo0d2MlS/KWo
+ BwHA==
+X-Gm-Message-State: AOAM531pP8nDi9w9502cfuWeVAAaryEUmtgmzKIdOGAYwLaMybgmfhxx
+ RpN4LE5/Xx36rZpFdUkghVU=
+X-Google-Smtp-Source: ABdhPJx4HmEg/rdf/pdcWHf6xJhCXSo3XUR1fmip8+axJL4r23I7r9XFGRVxTQ/Y6XgBnjgRHDIIHg==
+X-Received: by 2002:a17:90a:c592:: with SMTP id
+ l18mr37235674pjt.119.1593746296846; 
+ Thu, 02 Jul 2020 20:18:16 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id c12sm10165745pfn.162.2020.07.02.20.18.15
+ by smtp.gmail.com with ESMTPSA id c12sm10165745pfn.162.2020.07.02.20.18.16
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Thu, 02 Jul 2020 20:18:15 -0700 (PDT)
+ Thu, 02 Jul 2020 20:18:16 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -50,15 +50,15 @@ To: Alistair Francis <Alistair.Francis@wdc.com>,
  qemu-riscv@nongnu.org
 Cc: Anup Patel <anup@brainfault.org>,
 	Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v3 3/7] roms/Makefile: Build the generic platform for RISC-V
- OpenSBI firmware
-Date: Thu,  2 Jul 2020 20:18:03 -0700
-Message-Id: <1593746287-19251-4-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH v3 4/7] hw/riscv: Use pre-built bios image of generic platform
+ for virt & sifive_u
+Date: Thu,  2 Jul 2020 20:18:04 -0700
+Message-Id: <1593746287-19251-5-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1593746287-19251-1-git-send-email-bmeng.cn@gmail.com>
 References: <1593746287-19251-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::644;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x644.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1042;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1042.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -84,84 +84,92 @@ X-List-Received-Date: Fri, 03 Jul 2020 03:18:20 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-The RISC-V generic platform is a flattened device tree (FDT) based
-platform where all platform specific functionality is provided based
-on FDT passed by previous booting stage. The support was added in
-the upstream OpenSBI v0.8 release recently.
+Update virt and sifive_u machines to use the opensbi fw_dynamic bios
+image built for the generic FDT platform.
 
-Update our Makefile to build the generic platform instead of building
-virt and sifive_u separately for RISC-V OpenSBI firmware, and change
-to use fw_dynamic type images as well.
+Remove the out-of-date no longer used bios images.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 Reviewed-by: Anup Patel <anup@brainfault.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 ---
 
 Changes in v3:
-- Change fw_jump to fw_dynamic in the make rules
+- Change to fw_dynamic.bin for virt & sifive_u
 
-Changes in v2:
-- Copy the ELF images too in the make rules
+ hw/riscv/sifive_u.c                            |   4 ++--
+ hw/riscv/virt.c                                |   4 ++--
+ pc-bios/opensbi-riscv32-generic-fw_dynamic.bin | Bin 0 -> 62144 bytes
+ pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin   | Bin 49520 -> 0 bytes
+ pc-bios/opensbi-riscv32-virt-fw_jump.bin       | Bin 49504 -> 0 bytes
+ pc-bios/opensbi-riscv64-generic-fw_dynamic.bin | Bin 0 -> 70792 bytes
+ pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin   | Bin 57936 -> 0 bytes
+ pc-bios/opensbi-riscv64-virt-fw_jump.bin       | Bin 57920 -> 0 bytes
+ 8 files changed, 4 insertions(+), 4 deletions(-)
+ create mode 100644 pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
+ delete mode 100644 pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
+ delete mode 100644 pc-bios/opensbi-riscv32-virt-fw_jump.bin
+ create mode 100644 pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
+ delete mode 100644 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+ delete mode 100644 pc-bios/opensbi-riscv64-virt-fw_jump.bin
 
- roms/Makefile | 32 ++++++++++----------------------
- 1 file changed, 10 insertions(+), 22 deletions(-)
-
-diff --git a/roms/Makefile b/roms/Makefile
-index f9acf39..5d9f15b 100644
---- a/roms/Makefile
-+++ b/roms/Makefile
-@@ -64,10 +64,8 @@ default help:
- 	@echo "  u-boot.e500        -- update u-boot.e500"
- 	@echo "  u-boot.sam460      -- update u-boot.sam460"
- 	@echo "  efi                -- update UEFI (edk2) platform firmware"
--	@echo "  opensbi32-virt     -- update OpenSBI for 32-bit virt machine"
--	@echo "  opensbi64-virt     -- update OpenSBI for 64-bit virt machine"
--	@echo "  opensbi32-sifive_u -- update OpenSBI for 32-bit sifive_u machine"
--	@echo "  opensbi64-sifive_u -- update OpenSBI for 64-bit sifive_u machine"
-+	@echo "  opensbi32-generic  -- update OpenSBI for 32-bit generic machine"
-+	@echo "  opensbi64-generic  -- update OpenSBI for 64-bit generic machine"
- 	@echo "  bios-microvm       -- update bios-microvm.bin (qboot)"
- 	@echo "  clean              -- delete the files generated by the previous" \
- 	                              "build targets"
-@@ -170,29 +168,19 @@ skiboot:
- efi: edk2-basetools
- 	$(MAKE) -f Makefile.edk2
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index b434fd3..dc46f64 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -60,9 +60,9 @@
+ #include <libfdt.h>
  
--opensbi32-virt:
-+opensbi32-generic:
- 	$(MAKE) -C opensbi \
- 		CROSS_COMPILE=$(riscv32_cross_prefix) \
--		PLATFORM="qemu/virt"
--	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-virt-fw_jump.bin
-+		PLATFORM="generic"
-+	cp opensbi/build/platform/generic/firmware/fw_dynamic.bin ../pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
-+	cp opensbi/build/platform/generic/firmware/fw_dynamic.elf ../pc-bios/opensbi-riscv32-generic-fw_dynamic.elf
+ #if defined(TARGET_RISCV32)
+-# define BIOS_FILENAME "opensbi-riscv32-sifive_u-fw_jump.bin"
++# define BIOS_FILENAME "opensbi-riscv32-generic-fw_dynamic.bin"
+ #else
+-# define BIOS_FILENAME "opensbi-riscv64-sifive_u-fw_jump.bin"
++# define BIOS_FILENAME "opensbi-riscv64-generic-fw_dynamic.bin"
+ #endif
  
--opensbi64-virt:
-+opensbi64-generic:
- 	$(MAKE) -C opensbi \
- 		CROSS_COMPILE=$(riscv64_cross_prefix) \
--		PLATFORM="qemu/virt"
--	cp opensbi/build/platform/qemu/virt/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-virt-fw_jump.bin
--
--opensbi32-sifive_u:
--	$(MAKE) -C opensbi \
--		CROSS_COMPILE=$(riscv32_cross_prefix) \
--		PLATFORM="sifive/fu540"
--	cp opensbi/build/platform/sifive/fu540/firmware/fw_jump.bin ../pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
--
--opensbi64-sifive_u:
--	$(MAKE) -C opensbi \
--		CROSS_COMPILE=$(riscv64_cross_prefix) \
--		PLATFORM="sifive/fu540"
--	cp opensbi/build/platform/sifive/fu540/firmware/fw_jump.bin ../pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
-+		PLATFORM="generic"
-+	cp opensbi/build/platform/generic/firmware/fw_dynamic.bin ../pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
-+	cp opensbi/build/platform/generic/firmware/fw_dynamic.elf ../pc-bios/opensbi-riscv64-generic-fw_dynamic.elf
+ static const struct MemmapEntry {
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 85e17fe..5ca49c5 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -43,9 +43,9 @@
+ #include "hw/pci-host/gpex.h"
  
- bios-microvm:
- 	$(MAKE) -C qboot
+ #if defined(TARGET_RISCV32)
+-# define BIOS_FILENAME "opensbi-riscv32-virt-fw_jump.bin"
++# define BIOS_FILENAME "opensbi-riscv32-generic-fw_dynamic.bin"
+ #else
+-# define BIOS_FILENAME "opensbi-riscv64-virt-fw_jump.bin"
++# define BIOS_FILENAME "opensbi-riscv64-generic-fw_dynamic.bin"
+ #endif
+ 
+ static const struct MemmapEntry {
+diff --git a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
+new file mode 100644
+index 0000000..23b4dfb
+Binary files /dev/null and b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin differ
+diff --git a/pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin b/pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
+deleted file mode 100644
+index 3e0da54..0000000
+Binary files a/pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin and /dev/null differ
+diff --git a/pc-bios/opensbi-riscv32-virt-fw_jump.bin b/pc-bios/opensbi-riscv32-virt-fw_jump.bin
+deleted file mode 100644
+index bc56ed6..0000000
+Binary files a/pc-bios/opensbi-riscv32-virt-fw_jump.bin and /dev/null differ
+diff --git a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
+new file mode 100644
+index 0000000..16c0cf4
+Binary files /dev/null and b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin differ
+diff --git a/pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin b/pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+deleted file mode 100644
+index 1acee86..0000000
+Binary files a/pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin and /dev/null differ
+diff --git a/pc-bios/opensbi-riscv64-virt-fw_jump.bin b/pc-bios/opensbi-riscv64-virt-fw_jump.bin
+deleted file mode 100644
+index c62f2b4..0000000
+Binary files a/pc-bios/opensbi-riscv64-virt-fw_jump.bin and /dev/null differ
 -- 
 2.7.4
 
