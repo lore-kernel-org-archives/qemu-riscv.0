@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jrAMV-000147-TI
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Jul 2020 21:19:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50754)
+	id 1jrAMY-00019w-9v
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Jul 2020 21:19:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50768)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jrAMT-0000zp-Mv; Thu, 02 Jul 2020 21:19:29 -0400
-Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:32774)
+ id 1jrAMW-00015n-DY; Thu, 02 Jul 2020 21:19:32 -0400
+Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:34228)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jrAMS-0005MZ-47; Thu, 02 Jul 2020 21:19:29 -0400
-Received: by mail-yb1-xb44.google.com with SMTP id o4so14712894ybp.0;
- Thu, 02 Jul 2020 18:19:27 -0700 (PDT)
+ id 1jrAMU-0005Mv-UY; Thu, 02 Jul 2020 21:19:32 -0400
+Received: by mail-yb1-xb41.google.com with SMTP id l19so1832445ybl.1;
+ Thu, 02 Jul 2020 18:19:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=W96E0lKCag1Y0M/Pnhw3YHiDTbeq3/x61CkSWRMK3fc=;
- b=lxhJuctLowhRrVeRUWRu1zBG2xx9OCpN/Uet5PRrEue9Yst+lv3mWw+tkLOrAQjyxO
- d3vXaJGGW6MhgcVwjgijen+C8uIcRAR2sn6zZ4mzw3F6frVk7FcJzPhAZKGakehsUtCP
- rdzk2zVNwZseY5ZyNG8T/niK0OFp/TOFQpPs2YTW/xHH97OXT4bIYwHMSlfrN7cGoGlO
- vcXnbZJmhqAlJAZmLG3w6AjBw/Lb+XCI37K0Pw4BDNRQwyqh7S8GGo3AcprQeUusdkk7
- SnZ/86O4rkO/i8/amL+1t8TY6DPGYQ/deWFnOk+lUOGUC5YJE+jzhdmhigOfvrXDstvz
- 6ZgQ==
+ :cc; bh=GJYRLJU1nGbebkdEaZI1GrtzuGIGfHc8B6xnBzBoyeE=;
+ b=CPh/qorq3t+omt0z6ifBqdnEy2sc8a7hBFoXoEvOLxf3i5u0YkDopB6TWZnxPmJIBZ
+ wAATUQqc6ioNdaqIvU0fiATD8vdXANgfYh799pK+9a9u8bUy9h1yjoOnXXnXgg35F3Wr
+ 4rgwPK2raCzcf0CAerMwvZxlnYd3JoI9B8TzEqdCP8qMnNd6ndoD+U9iOWhV5/dVZMcw
+ kwJIMWo1XT2kxU3EtE+unCCucuKQ2OjItnNM76tiOZPBIgm8kE6q+pcutiO5MgKoZCzy
+ ortVt8y2MrbiRsDj23Bj1V5piKrz5A7NDQpWyIaec2L6Tw53j/PHT0UFWmgSGiLI5G23
+ mjfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=W96E0lKCag1Y0M/Pnhw3YHiDTbeq3/x61CkSWRMK3fc=;
- b=TtVTTT/OvJ34zQ0XLTVwSfpRP8Zvx/WC+TgA+JXz6+4pU+lUS7qrEjqZNnyMRslwUq
- 62p31qpgZ5zOpJNH2webYNFT7znYqOQTd278MRrpzCObWnPTPSkVsaJ1FssXIkPgtUb9
- 2N1w6YwqbQkve4wTlRUVFB6PBJMzYEzJYoOv8/Gd7sAtEPAA1bcJYOrMIkhgFFAKSrCb
- xG/IeRGqKTu3H4pr+O2KXIAhs2zd4e3aBHmKCD0I+hL81VODsrdeOZROzrs2OzwECxcy
- MThbtZBXFyHfcCQz1AW6Ee/2JpWuVWSPAUNxqdQORCi9d0Mt5mEUw5UUAfjqb88fcJT7
- 3h9w==
-X-Gm-Message-State: AOAM531i2ZIqBiNENZz7+oK1Yg2feDqP3Me+NgC/BTDKEHS5uLEP7AKu
- e/9gQFdwgzZ0YIGt2qBwVxgwegfJwwAN4goK64Y=
-X-Google-Smtp-Source: ABdhPJwcWmtms5y/bvECvWO5XcgmbQqN9/LANeTuvA7K10ukCmDUcMYGWzOMoHS+rdnh67XJi8gJWyM9WrBdkrWbKmQ=
-X-Received: by 2002:a25:afca:: with SMTP id d10mr50985211ybj.517.1593739166826; 
- Thu, 02 Jul 2020 18:19:26 -0700 (PDT)
+ bh=GJYRLJU1nGbebkdEaZI1GrtzuGIGfHc8B6xnBzBoyeE=;
+ b=Xni0kd+T8yv6sj6hA34fuVAnDcs89oScc036TIC50sbf8VnyDw0/htyMfPqQ3lEksb
+ UU4saS316QGoXKF0c4+5x3g6t45fd7w0BI05WRVWDI1QO7Rm+gywwzNDOY7ycS7bGm+A
+ 930sZSbETkEarlNwVu9epY2zwqNHvVecuHcOxkmHz9XuMhAGMOeqmINmpOT+ItJpTsgR
+ 6JBGhzGJA2VjEdGm1M2OrDK1hf39l14Kxl2MrET7gvtKZREBiRVEQnFtU3+FQVEQJhmN
+ ZF2w4GGHGpgxR3HTe7qHM3CT1tFDcrAYQKn8chwyNng/CMO/SOy/ozh2L8xdRXYinhdG
+ L4nw==
+X-Gm-Message-State: AOAM533NPS6Fmck8hB7y3tvVekN237lLE0txRPYa+yEZhsgt9SWDiwmx
+ FHNFUe6h6YB0MAhx6gkpLfzFaecnpAuzzaXBclk=
+X-Google-Smtp-Source: ABdhPJwPk+8MN2r+y8rlxM47hHb1B0YViRYGUUEwABz65QU9F5CJX3R49M+3JMiXMPWbmAK4txaC/EzjkwlBy4lE/Zg=
+X-Received: by 2002:a25:800c:: with SMTP id m12mr56637950ybk.239.1593739169906; 
+ Thu, 02 Jul 2020 18:19:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200701183949.398134-1-atish.patra@wdc.com>
- <20200701183949.398134-4-atish.patra@wdc.com>
-In-Reply-To: <20200701183949.398134-4-atish.patra@wdc.com>
+ <20200701183949.398134-5-atish.patra@wdc.com>
+In-Reply-To: <20200701183949.398134-5-atish.patra@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 3 Jul 2020 09:19:15 +0800
-Message-ID: <CAEUhbmWcRCTVg-9kkFzPZ5_ZF63h841QzPYP=xRm=Y2s1=sJDQ@mail.gmail.com>
-Subject: Re: [PATCH v4 3/4] riscv: Add opensbi firmware dynamic support
+Date: Fri, 3 Jul 2020 09:19:18 +0800
+Message-ID: <CAEUhbmXea4nf9pq-6bumtK-rE8b0B7EF-agptnX5T_Hpm5EfgA@mail.gmail.com>
+Subject: Re: [PATCH v4 4/4] RISC-V: Support 64 bit start address
 To: Atish Patra <atish.patra@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
  "open list:RISC-V" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Alexander Richardson <Alexander.Richardson@cl.cam.ac.uk>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b44;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb44.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -76,34 +76,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jul 2020 01:19:30 -0000
+X-List-Received-Date: Fri, 03 Jul 2020 01:19:32 -0000
 
 On Thu, Jul 2, 2020 at 2:39 AM Atish Patra <atish.patra@wdc.com> wrote:
 >
-> OpenSBI is the default firmware in Qemu and has various firmware loading
-> options. Currently, qemu loader uses fw_jump which has a compile time
-> pre-defined address where fdt & kernel image must reside. This puts a
-> constraint on image size of the Linux kernel depending on the fdt location
-> and available memory. However, fw_dynamic allows the loader to specify
-> the next stage location (i.e. Linux kernel/U-Boot) in memory and other
-> configurable boot options available in OpenSBI.
+> Even though the start address in ROM code is declared as a 64 bit address
+> for RV64, it can't be used as upper bits are set to zero in ROM code.
 >
-> Add support for OpenSBI dynamic firmware loading support. This doesn't
-> break existing setup and fw_jump will continue to work as it is. Any
-> other firmware will continue to work without any issues as long as it
-> doesn't expect anything specific from loader in "a2" register.
+> Update the ROM code correctly to reflect the 64bit value.
 >
 > Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/riscv/boot.c                 | 42 +++++++++++++++++++++---
->  hw/riscv/sifive_u.c             | 20 +++++++++---
->  hw/riscv/spike.c                | 13 ++++++--
->  hw/riscv/virt.c                 | 12 +++++--
->  include/hw/riscv/boot.h         |  5 ++-
->  include/hw/riscv/boot_opensbi.h | 58 +++++++++++++++++++++++++++++++++
->  6 files changed, 134 insertions(+), 16 deletions(-)
->  create mode 100644 include/hw/riscv/boot_opensbi.h
+>  hw/riscv/boot.c     | 6 +++++-
+>  hw/riscv/sifive_u.c | 6 +++++-
+>  2 files changed, 10 insertions(+), 2 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bin.meng@windriver.com>
