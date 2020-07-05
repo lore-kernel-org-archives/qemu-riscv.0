@@ -1,75 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jryBF-0006oW-RB
-	for mharc-qemu-riscv@gnu.org; Sun, 05 Jul 2020 02:31:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48590)
+	id 1js8d6-0003Ej-9M
+	for mharc-qemu-riscv@gnu.org; Sun, 05 Jul 2020 13:40:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38912)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <th.huth@gmail.com>)
- id 1jryBD-0006oB-Nq; Sun, 05 Jul 2020 02:31:11 -0400
-Received: from mail-ej1-f68.google.com ([209.85.218.68]:38612)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <th.huth@gmail.com>)
- id 1jryB9-0007r8-A0; Sun, 05 Jul 2020 02:31:10 -0400
-Received: by mail-ej1-f68.google.com with SMTP id w16so39185042ejj.5;
- Sat, 04 Jul 2020 23:31:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=AC0bKtFkufkyNwdJUNbQrXinwDiu3+IvdQQi3k0ExBk=;
- b=QPvPgAWMdZVws2Kp5/L9ptW0zp+5ro97UW9GZu+7aPRQTElCI0FpL+qD5pYA9Q1sTf
- IWeIy5rxIPjFzjC4/aDDVSSCcCdRw72YeZzzmDf+6K9ATN4iDmOwsZkqGhvmIjAz1KDk
- Tw5ntoRc9nVI1yAFhAGeon/KyrrKbliL5MM6Bh6qhmj//gE3PCFpV9KWVsuo+JKAxR5J
- 1OpD2EYRjIlD/D4J1tN8N6hyVxmszp7HsYRBmPaptcsH7d3IxAQ+0wbQZ7GfQC3imOnO
- 2f5YcLc8rCYjF8Gi2BXWVZTUhm8V641j253RLLNPz5QLPf+UMfKx+Nt4jZ9C9w6MdV+u
- td6Q==
-X-Gm-Message-State: AOAM532BjjrlBLTqHEftg6ht14PL6Us7wBTiM5LMAFARMuKKa39hXYW4
- pJiT3HepUby1nDNySM/Xebw=
-X-Google-Smtp-Source: ABdhPJyArN3Df+uaJN/4OlyiwvauV0WFeBmtrHxUe4PEdiMCltn1oIUMe8ewC47UMB1fL0rez67gmQ==
-X-Received: by 2002:a17:906:1751:: with SMTP id
- d17mr22130319eje.140.1593930664580; 
- Sat, 04 Jul 2020 23:31:04 -0700 (PDT)
-Received: from thl530.multi.box (pd9e83654.dip0.t-ipconnect.de.
- [217.232.54.84])
- by smtp.gmail.com with ESMTPSA id by20sm14519161ejc.119.2020.07.04.23.31.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2020 23:31:04 -0700 (PDT)
-Date: Sun, 5 Jul 2020 08:31:00 +0200
-From: Thomas Huth <huth@tuxfamily.org>
-To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@redhat.com>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>, qemu-riscv@nongnu.org, Peter Maydell
- <peter.maydell@linaro.org>, Alistair Francis <alistair@alistair23.me>,
- Stafford Horne <shorne@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Eduardo Habkost <ehabkost@redhat.com>, Yoshinori Sato
- <ysato@users.sourceforge.jp>, David Gibson <david@gibson.dropbear.id.au>,
- "Michael S. Tsirkin" <mst@redhat.com>, qemu-ppc@nongnu.org, Andrzej
- Zaborowski <balrogg@gmail.com>, Gerd Hoffmann <kraxel@redhat.com>, "Daniel
- P. =?UTF-8?B?QmVycmFuZ8Op?=" <berrange@redhat.com>, Alistair Francis
- <Alistair.Francis@wdc.com>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>, Paolo Bonzini <pbonzini@redhat.com>,
- Magnus Damm <magnus.damm@gmail.com>, Sagar Karandikar
- <sagark@eecs.berkeley.edu>, qemu-arm@nongnu.org, =?UTF-8?B?TWFyYy1BbmRy?=
- =?UTF-8?B?w6k=?= Lureau <marcandre.lureau@redhat.com>
-Subject: Re: [RFC PATCH v2 15/23] hw/m68k/mcf520x: Emit warning when old
- code is used
-Message-ID: <20200705083100.19e74e4a@thl530.multi.box>
-In-Reply-To: <20200704153908.12118-16-philmd@redhat.com>
-References: <20200704153908.12118-1-philmd@redhat.com>
- <20200704153908.12118-16-philmd@redhat.com>
-X-Mailer: Claws Mail 3.17.5 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1js8d4-0003EF-JE; Sun, 05 Jul 2020 13:40:38 -0400
+Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001]:24949)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1js8d0-0004Yc-N2; Sun, 05 Jul 2020 13:40:37 -0400
+Received: from zero.eik.bme.hu (blah.eik.bme.hu [152.66.115.182])
+ by localhost (Postfix) with SMTP id 003C07475F9;
+ Sun,  5 Jul 2020 19:40:21 +0200 (CEST)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id BDD0174633F; Sun,  5 Jul 2020 19:40:20 +0200 (CEST)
+From: BALATON Zoltan <balaton@eik.bme.hu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=209.85.218.68; envelope-from=th.huth@gmail.com;
- helo=mail-ej1-f68.google.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/05 02:31:04
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: 1
-X-Spam_score: 0.1
-X-Spam_bar: /
-X-Spam_report: (0.1 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_FROMDOMAIN=1,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+Content-Transfer-Encoding: 8bit
+Date: Sun, 5 Jul 2020 19:22:11 +0200
+Subject: [PATCH] load_elf: Remove unused address variables from callers
+To: qemu-devel@nongnu.org
+Cc: Richard Henderson <rth@twiddle.net>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Huacai Chen <chenhc@lemote.com>, philmd@redhat.com,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Anthony Green <green@moxielogic.com>, Chris Wulff <crwulff@gmail.com>,
+ Marek Vasut <marex@denx.de>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
+Message-Id: <20200705174020.BDD0174633F@zero.eik.bme.hu>
+X-Spam-Probability: 8%
+Received-SPF: pass client-ip=2001:738:2001:2001::2001;
+ envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,20 +62,427 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Jul 2020 06:31:12 -0000
+X-List-Received-Date: Sun, 05 Jul 2020 17:40:39 -0000
 
-Am Sat,  4 Jul 2020 17:39:00 +0200
-schrieb Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>:
+Several callers of load_elf() pass pointers for lowaddr and highaddr
+parameters which are then not used for anything. This may stem from a
+misunderstanding that load_elf need a value here but in fact it can
+take NULL to ignore these values. Remove such unused variables and
+pass NULL instead from callers that don't need these.
 
-> This code hasn't been QOM'ified yet. Warn the user.
->=20
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> ---
-> v2: Add comment (thuth)
-> ---
->  hw/m68k/mcf5206.c | 5 +++++
->  hw/m68k/mcf5208.c | 3 +++
->  2 files changed, 8 insertions(+)
+Signed-off-by: BALATON Zoltan <balaton@eik.bme.hu>
+---
+ hw/alpha/dp264.c       |  8 ++++----
+ hw/arm/armv7m.c        |  4 +---
+ hw/cris/boot.c         |  4 ++--
+ hw/microblaze/boot.c   |  4 ++--
+ hw/mips/fuloong2e.c    |  8 ++++----
+ hw/moxie/moxiesim.c    |  4 ++--
+ hw/nios2/boot.c        |  4 ++--
+ hw/ppc/mac_newworld.c  |  6 ++----
+ hw/ppc/mac_oldworld.c  |  6 ++----
+ hw/ppc/ppc440_bamboo.c |  9 +++------
+ hw/ppc/sam460ex.c      | 12 +++++-------
+ hw/ppc/spapr.c         | 11 ++++-------
+ hw/ppc/virtex_ml507.c  |  4 ++--
+ hw/riscv/boot.c        |  8 ++++----
+ hw/xtensa/sim.c        |  3 +--
+ hw/xtensa/xtfpga.c     |  3 +--
+ 16 files changed, 41 insertions(+), 57 deletions(-)
 
-Acked-by: Thomas Huth <huth@tuxfamily.org>
+diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
+index f7751b18f6..4d24518d1d 100644
+--- a/hw/alpha/dp264.c
++++ b/hw/alpha/dp264.c
+@@ -62,8 +62,8 @@ static void clipper_init(MachineState *machine)
+     qemu_irq rtc_irq;
+     long size, i;
+     char *palcode_filename;
+-    uint64_t palcode_entry, palcode_low, palcode_high;
+-    uint64_t kernel_entry, kernel_low, kernel_high;
++    uint64_t palcode_entry;
++    uint64_t kernel_entry, kernel_low;
+     unsigned int smp_cpus = machine->smp.cpus;
+ 
+     /* Create up to 4 cpus.  */
+@@ -113,7 +113,7 @@ static void clipper_init(MachineState *machine)
+         exit(1);
+     }
+     size = load_elf(palcode_filename, NULL, cpu_alpha_superpage_to_phys,
+-                    NULL, &palcode_entry, &palcode_low, &palcode_high, NULL,
++                    NULL, &palcode_entry, NULL, NULL, NULL,
+                     0, EM_ALPHA, 0, 0);
+     if (size < 0) {
+         error_report("could not load palcode '%s'", palcode_filename);
+@@ -132,7 +132,7 @@ static void clipper_init(MachineState *machine)
+         uint64_t param_offset;
+ 
+         size = load_elf(kernel_filename, NULL, cpu_alpha_superpage_to_phys,
+-                        NULL, &kernel_entry, &kernel_low, &kernel_high, NULL,
++                        NULL, &kernel_entry, &kernel_low, NULL, NULL,
+                         0, EM_ALPHA, 0, 0);
+         if (size < 0) {
+             error_report("could not load kernel '%s'", kernel_filename);
+diff --git a/hw/arm/armv7m.c b/hw/arm/armv7m.c
+index 3308211e9c..92f859d760 100644
+--- a/hw/arm/armv7m.c
++++ b/hw/arm/armv7m.c
+@@ -309,7 +309,6 @@ void armv7m_load_kernel(ARMCPU *cpu, const char *kernel_filename, int mem_size)
+ {
+     int image_size;
+     uint64_t entry;
+-    uint64_t lowaddr;
+     int big_endian;
+     AddressSpace *as;
+     int asidx;
+@@ -330,12 +329,11 @@ void armv7m_load_kernel(ARMCPU *cpu, const char *kernel_filename, int mem_size)
+ 
+     if (kernel_filename) {
+         image_size = load_elf_as(kernel_filename, NULL, NULL, NULL,
+-                                 &entry, &lowaddr, NULL,
++                                 &entry, NULL, NULL,
+                                  NULL, big_endian, EM_ARM, 1, 0, as);
+         if (image_size < 0) {
+             image_size = load_image_targphys_as(kernel_filename, 0,
+                                                 mem_size, as);
+-            lowaddr = 0;
+         }
+         if (image_size < 0) {
+             error_report("Could not load kernel '%s'", kernel_filename);
+diff --git a/hw/cris/boot.c b/hw/cris/boot.c
+index b8947bc660..aa8d2756d6 100644
+--- a/hw/cris/boot.c
++++ b/hw/cris/boot.c
+@@ -67,7 +67,7 @@ static uint64_t translate_kernel_address(void *opaque, uint64_t addr)
+ void cris_load_image(CRISCPU *cpu, struct cris_load_info *li)
+ {
+     CPUCRISState *env = &cpu->env;
+-    uint64_t entry, high;
++    uint64_t entry;
+     int kcmdline_len;
+     int image_size;
+ 
+@@ -76,7 +76,7 @@ void cris_load_image(CRISCPU *cpu, struct cris_load_info *li)
+        devboard SDK.  */
+     image_size = load_elf(li->image_filename, NULL,
+                           translate_kernel_address, NULL,
+-                          &entry, NULL, &high, NULL, 0, EM_CRIS, 0, 0);
++                          &entry, NULL, NULL, NULL, 0, EM_CRIS, 0, 0);
+     li->entry = entry;
+     if (image_size < 0) {
+         /* Takes a kimage from the axis devboard SDK.  */
+diff --git a/hw/microblaze/boot.c b/hw/microblaze/boot.c
+index 925e3f7c9d..8ad3c27f2c 100644
+--- a/hw/microblaze/boot.c
++++ b/hw/microblaze/boot.c
+@@ -135,7 +135,7 @@ void microblaze_load_kernel(MicroBlazeCPU *cpu, hwaddr ddr_base,
+ 
+     if (kernel_filename) {
+         int kernel_size;
+-        uint64_t entry, low, high;
++        uint64_t entry, high;
+         uint32_t base32;
+         int big_endian = 0;
+ 
+@@ -145,7 +145,7 @@ void microblaze_load_kernel(MicroBlazeCPU *cpu, hwaddr ddr_base,
+ 
+         /* Boots a kernel elf binary.  */
+         kernel_size = load_elf(kernel_filename, NULL, NULL, NULL,
+-                               &entry, &low, &high, NULL,
++                               &entry, NULL, &high, NULL,
+                                big_endian, EM_MICROBLAZE, 0, 0);
+         base32 = entry;
+         if (base32 == 0xc0000000) {
+diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
+index 8ca31e5162..507e549fca 100644
+--- a/hw/mips/fuloong2e.c
++++ b/hw/mips/fuloong2e.c
+@@ -107,7 +107,7 @@ static void GCC_FMT_ATTR(3, 4) prom_set(uint32_t *prom_buf, int index,
+ 
+ static int64_t load_kernel(CPUMIPSState *env)
+ {
+-    int64_t kernel_entry, kernel_low, kernel_high, initrd_size;
++    int64_t kernel_entry, kernel_high, initrd_size;
+     int index = 0;
+     long kernel_size;
+     ram_addr_t initrd_offset;
+@@ -116,9 +116,9 @@ static int64_t load_kernel(CPUMIPSState *env)
+ 
+     kernel_size = load_elf(loaderparams.kernel_filename, NULL,
+                            cpu_mips_kseg0_to_phys, NULL,
+-                           (uint64_t *)&kernel_entry,
+-                           (uint64_t *)&kernel_low, (uint64_t *)&kernel_high,
+-                           NULL, 0, EM_MIPS, 1, 0);
++                           (uint64_t *)&kernel_entry, NULL,
++                           (uint64_t *)&kernel_high, NULL,
++                           0, EM_MIPS, 1, 0);
+     if (kernel_size < 0) {
+         error_report("could not load kernel '%s': %s",
+                      loaderparams.kernel_filename,
+diff --git a/hw/moxie/moxiesim.c b/hw/moxie/moxiesim.c
+index 51a98287b5..a765e9f6be 100644
+--- a/hw/moxie/moxiesim.c
++++ b/hw/moxie/moxiesim.c
+@@ -52,13 +52,13 @@ typedef struct {
+ 
+ static void load_kernel(MoxieCPU *cpu, LoaderParams *loader_params)
+ {
+-    uint64_t entry, kernel_low, kernel_high;
++    uint64_t entry, kernel_high;
+     int64_t initrd_size;
+     long kernel_size;
+     ram_addr_t initrd_offset;
+ 
+     kernel_size = load_elf(loader_params->kernel_filename,  NULL, NULL, NULL,
+-                           &entry, &kernel_low, &kernel_high, NULL, 1, EM_MOXIE,
++                           &entry, NULL, &kernel_high, NULL, 1, EM_MOXIE,
+                            0, 0);
+ 
+     if (kernel_size <= 0) {
+diff --git a/hw/nios2/boot.c b/hw/nios2/boot.c
+index 88224aa84c..1df3b66c29 100644
+--- a/hw/nios2/boot.c
++++ b/hw/nios2/boot.c
+@@ -139,7 +139,7 @@ void nios2_load_kernel(Nios2CPU *cpu, hwaddr ddr_base,
+ 
+     if (kernel_filename) {
+         int kernel_size, fdt_size;
+-        uint64_t entry, low, high;
++        uint64_t entry, high;
+         int big_endian = 0;
+ 
+ #ifdef TARGET_WORDS_BIGENDIAN
+@@ -148,7 +148,7 @@ void nios2_load_kernel(Nios2CPU *cpu, hwaddr ddr_base,
+ 
+         /* Boots a kernel elf binary. */
+         kernel_size = load_elf(kernel_filename, NULL, NULL, NULL,
+-                               &entry, &low, &high, NULL,
++                               &entry, NULL, &high, NULL,
+                                big_endian, EM_ALTERA_NIOS2, 0, 0);
+         if ((uint32_t)entry == 0xc0000000) {
+             /*
+diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
+index 828c5992ae..a3f25ab479 100644
+--- a/hw/ppc/mac_newworld.c
++++ b/hw/ppc/mac_newworld.c
+@@ -177,7 +177,6 @@ static void ppc_core99_init(MachineState *machine)
+     }
+ 
+     if (linux_boot) {
+-        uint64_t lowaddr = 0;
+         int bswap_needed;
+ 
+ #ifdef BSWAP_NEEDED
+@@ -188,9 +187,8 @@ static void ppc_core99_init(MachineState *machine)
+         kernel_base = KERNEL_LOAD_ADDR;
+ 
+         kernel_size = load_elf(kernel_filename, NULL,
+-                               translate_kernel_address, NULL,
+-                               NULL, &lowaddr, NULL, NULL, 1, PPC_ELF_MACHINE,
+-                               0, 0);
++                               translate_kernel_address, NULL, NULL, NULL,
++                               NULL, NULL, 1, PPC_ELF_MACHINE, 0, 0);
+         if (kernel_size < 0)
+             kernel_size = load_aout(kernel_filename, kernel_base,
+                                     ram_size - kernel_base, bswap_needed,
+diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
+index f8c204ead7..4bcce22a96 100644
+--- a/hw/ppc/mac_oldworld.c
++++ b/hw/ppc/mac_oldworld.c
+@@ -150,7 +150,6 @@ static void ppc_heathrow_init(MachineState *machine)
+     }
+ 
+     if (linux_boot) {
+-        uint64_t lowaddr = 0;
+         int bswap_needed;
+ 
+ #ifdef BSWAP_NEEDED
+@@ -160,9 +159,8 @@ static void ppc_heathrow_init(MachineState *machine)
+ #endif
+         kernel_base = KERNEL_LOAD_ADDR;
+         kernel_size = load_elf(kernel_filename, NULL,
+-                               translate_kernel_address, NULL,
+-                               NULL, &lowaddr, NULL, NULL, 1, PPC_ELF_MACHINE,
+-                               0, 0);
++                               translate_kernel_address, NULL, NULL, NULL,
++                               NULL, NULL, 1, PPC_ELF_MACHINE, 0, 0);
+         if (kernel_size < 0)
+             kernel_size = load_aout(kernel_filename, kernel_base,
+                                     ram_size - kernel_base, bswap_needed,
+diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
+index 4c5e9e4373..74028dc986 100644
+--- a/hw/ppc/ppc440_bamboo.c
++++ b/hw/ppc/ppc440_bamboo.c
+@@ -172,9 +172,6 @@ static void bamboo_init(MachineState *machine)
+     PCIBus *pcibus;
+     PowerPCCPU *cpu;
+     CPUPPCState *env;
+-    uint64_t elf_entry;
+-    uint64_t elf_lowaddr;
+-    hwaddr loadaddr = LOAD_UIMAGE_LOADADDR_INVALID;
+     target_long initrd_size = 0;
+     DeviceState *dev;
+     int success;
+@@ -246,14 +243,14 @@ static void bamboo_init(MachineState *machine)
+ 
+     /* Load kernel. */
+     if (kernel_filename) {
++        hwaddr loadaddr = LOAD_UIMAGE_LOADADDR_INVALID;
+         success = load_uimage(kernel_filename, &entry, &loadaddr, NULL,
+                               NULL, NULL);
+         if (success < 0) {
++            uint64_t elf_entry;
+             success = load_elf(kernel_filename, NULL, NULL, NULL, &elf_entry,
+-                               &elf_lowaddr, NULL, NULL, 1, PPC_ELF_MACHINE,
+-                               0, 0);
++                               NULL, NULL, NULL, 1, PPC_ELF_MACHINE, 0, 0);
+             entry = elf_entry;
+-            loadaddr = elf_lowaddr;
+         }
+         /* XXX try again as binary */
+         if (success < 0) {
+diff --git a/hw/ppc/sam460ex.c b/hw/ppc/sam460ex.c
+index 1a106a68de..71f74e983c 100644
+--- a/hw/ppc/sam460ex.c
++++ b/hw/ppc/sam460ex.c
+@@ -286,7 +286,6 @@ static void sam460ex_init(MachineState *machine)
+     CPUPPCState *env;
+     I2CBus *i2c;
+     hwaddr entry = UBOOT_ENTRY;
+-    hwaddr loadaddr = LOAD_UIMAGE_LOADADDR_INVALID;
+     target_long initrd_size = 0;
+     DeviceState *dev;
+     SysBusDevice *sbdev;
+@@ -426,17 +425,16 @@ static void sam460ex_init(MachineState *machine)
+ 
+     /* Load kernel. */
+     if (machine->kernel_filename) {
++        hwaddr loadaddr = LOAD_UIMAGE_LOADADDR_INVALID;
+         success = load_uimage(machine->kernel_filename, &entry, &loadaddr,
+                               NULL, NULL, NULL);
+         if (success < 0) {
+-            uint64_t elf_entry, elf_lowaddr;
++            uint64_t elf_entry;
+ 
+-            success = load_elf(machine->kernel_filename, NULL,
+-                               NULL, NULL, &elf_entry,
+-                               &elf_lowaddr, NULL, NULL, 1, PPC_ELF_MACHINE, 0,
+-                               0);
++            success = load_elf(machine->kernel_filename, NULL, NULL, NULL,
++                               &elf_entry, NULL, NULL, NULL,
++                               1, PPC_ELF_MACHINE, 0, 0);
+             entry = elf_entry;
+-            loadaddr = elf_lowaddr;
+         }
+         /* XXX try again as binary */
+         if (success < 0) {
+diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+index f6f034d039..f4e8e2e139 100644
+--- a/hw/ppc/spapr.c
++++ b/hw/ppc/spapr.c
+@@ -2972,18 +2972,15 @@ static void spapr_machine_init(MachineState *machine)
+     }
+ 
+     if (kernel_filename) {
+-        uint64_t lowaddr = 0;
+-
+         spapr->kernel_size = load_elf(kernel_filename, NULL,
+                                       translate_kernel_address, spapr,
+-                                      NULL, &lowaddr, NULL, NULL, 1,
++                                      NULL, NULL, NULL, NULL, 1,
+                                       PPC_ELF_MACHINE, 0, 0);
+         if (spapr->kernel_size == ELF_LOAD_WRONG_ENDIAN) {
+             spapr->kernel_size = load_elf(kernel_filename, NULL,
+-                                          translate_kernel_address, spapr, NULL,
+-                                          &lowaddr, NULL, NULL, 0,
+-                                          PPC_ELF_MACHINE,
+-                                          0, 0);
++                                          translate_kernel_address, spapr,
++                                          NULL, NULL, NULL, NULL, 0,
++                                          PPC_ELF_MACHINE, 0, 0);
+             spapr->kernel_le = spapr->kernel_size > 0;
+         }
+         if (spapr->kernel_size < 0) {
+diff --git a/hw/ppc/virtex_ml507.c b/hw/ppc/virtex_ml507.c
+index 78c4901be1..c790c1113f 100644
+--- a/hw/ppc/virtex_ml507.c
++++ b/hw/ppc/virtex_ml507.c
+@@ -250,12 +250,12 @@ static void virtex_init(MachineState *machine)
+     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
+ 
+     if (kernel_filename) {
+-        uint64_t entry, low, high;
++        uint64_t entry, high;
+         hwaddr boot_offset;
+ 
+         /* Boots a kernel elf binary.  */
+         kernel_size = load_elf(kernel_filename, NULL, NULL, NULL,
+-                               &entry, &low, &high, NULL, 1, PPC_ELF_MACHINE,
++                               &entry, NULL, &high, NULL, 1, PPC_ELF_MACHINE,
+                                0, 0);
+         boot_info.bootstrap_pc = entry & 0x00ffffff;
+ 
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index adb421b91b..ab8da252ee 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -85,10 +85,10 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+                                  hwaddr firmware_load_addr,
+                                  symbol_fn_t sym_cb)
+ {
+-    uint64_t firmware_entry, firmware_start, firmware_end;
++    uint64_t firmware_entry;
+ 
+     if (load_elf_ram_sym(firmware_filename, NULL, NULL, NULL,
+-                         &firmware_entry, &firmware_start, &firmware_end, NULL,
++                         &firmware_entry, NULL, NULL, NULL,
+                          0, EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
+         return firmware_entry;
+     }
+@@ -104,10 +104,10 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+ 
+ target_ulong riscv_load_kernel(const char *kernel_filename, symbol_fn_t sym_cb)
+ {
+-    uint64_t kernel_entry, kernel_high;
++    uint64_t kernel_entry;
+ 
+     if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
+-                         &kernel_entry, NULL, &kernel_high, NULL, 0,
++                         &kernel_entry, NULL, NULL, NULL, 0,
+                          EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
+         return kernel_entry;
+     }
+diff --git a/hw/xtensa/sim.c b/hw/xtensa/sim.c
+index aeb46d86f5..cbac50db2d 100644
+--- a/hw/xtensa/sim.c
++++ b/hw/xtensa/sim.c
+@@ -106,9 +106,8 @@ void xtensa_sim_load_kernel(XtensaCPU *cpu, MachineState *machine)
+ 
+     if (kernel_filename) {
+         uint64_t elf_entry;
+-        uint64_t elf_lowaddr;
+         int success = load_elf(kernel_filename, NULL, translate_phys_addr, cpu,
+-                               &elf_entry, &elf_lowaddr, NULL, NULL, big_endian,
++                               &elf_entry, NULL, NULL, NULL, big_endian,
+                                EM_XTENSA, 0, 0);
+ 
+         if (success > 0) {
+diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
+index 10de15855a..b1470b88e6 100644
+--- a/hw/xtensa/xtfpga.c
++++ b/hw/xtensa/xtfpga.c
+@@ -413,9 +413,8 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
+         env->regs[2] = tagptr;
+ 
+         uint64_t elf_entry;
+-        uint64_t elf_lowaddr;
+         int success = load_elf(kernel_filename, NULL, translate_phys_addr, cpu,
+-                &elf_entry, &elf_lowaddr, NULL, NULL, be, EM_XTENSA, 0, 0);
++                &elf_entry, NULL, NULL, NULL, be, EM_XTENSA, 0, 0);
+         if (success > 0) {
+             entry_point = elf_entry;
+         } else {
+-- 
+2.21.3
+
 
