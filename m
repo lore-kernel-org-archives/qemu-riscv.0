@@ -1,47 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jsW7L-0005B6-IQ
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Jul 2020 14:45:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56956)
+	id 1jsWBE-0007jH-CF
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Jul 2020 14:49:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57790)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jsW7J-0005A8-DA; Mon, 06 Jul 2020 14:45:25 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:44342)
+ id 1jsWBD-0007ib-6B; Mon, 06 Jul 2020 14:49:27 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:37020)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jsW7H-00080N-Ks; Mon, 06 Jul 2020 14:45:25 -0400
-Received: by mail-io1-xd42.google.com with SMTP id i4so40400480iov.11;
- Mon, 06 Jul 2020 11:45:22 -0700 (PDT)
+ id 1jsWBB-00009o-LS; Mon, 06 Jul 2020 14:49:26 -0400
+Received: by mail-io1-xd41.google.com with SMTP id v6so26811036iob.4;
+ Mon, 06 Jul 2020 11:49:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=LZf3cRbrhmfMKtFd2VXkyzNt4V6sFUPHsbIxjimIwCs=;
- b=o2Mofn1KuY7iUdC654jg4m2gNJ2jMMEwAGg1ZCv2pQvcEPk9j8I1QrrTUtifYH7Ah3
- 5OfE7lk3eMmt9inHqPyZ0SdGAlzm5aYE3OiALqAxduqha0kKwcHzb1A3NAdjbZgNChlv
- e/0p1B9vgtqDhu22rCnKGi+8reoXHO6xteML1cH5VH9ykArtFJumPjPG5b2qM+T8vQda
- CW3G9QFmOBgdw4zYPw6o143qcV+Irqxtrsv1f7m+VSwOFcoxTaYt4nT3OgZH+VGUNKBl
- xNDmFOnIGKELeosH+/HjmRIkLidmREAyGg9HD29v4kVPKEmseJbbiUFISFAk+BRXv7DI
- T7Mw==
+ :cc; bh=cQsmIkOSDLPbF1rwN2rsz6MizLe502CiYFhs1QJ5zoA=;
+ b=UYMCVDl2hupJPXBMo32HPMmLkLlRVveTcCTn74Ov8jcHt1YvqkMF1FJXm+qQqit9ig
+ RGMz//LCozLGTigEklXiTJpxZrA5/beSegC30eAn/IrSgv4ta4kJp1L12tQrM0SS6RG8
+ HUGDI9NdK6QC7/sUSfB3HiNucXYYH1DxYrUsnRkUaqLtGsHvEuVRjNJBfkcbUPqc0xeQ
+ RW5iJpjYXNds0h8v4/5+LI3z15koeSIOQrI50bWv12AE3md8crL1h+zB9Zd7SnOAcNNY
+ FWmpR2zCnGlRTRQwsFblxuRj5FHhPQ9SekOH4E58J5Z4em1FKr4J6Xgk4HCfZ51C1MCw
+ UYGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=LZf3cRbrhmfMKtFd2VXkyzNt4V6sFUPHsbIxjimIwCs=;
- b=QLPw7YXscMkfdECdmLZ4Ee2Vad6WPBetl/y6GS3+hM8DXTECjjei9HcrouLZ/2xqEz
- UakICtQ3Ju1P/X6rGaMBQh5l5b8u2gQXrx/q6lBOR54+6vF5xoMrS2mwIZMUrS9zFmRD
- iu9bKNcF27k2/NCHauWpDe5rAJVDDQXkQQTFilUZMQK7gzFR2MUCebOcBOzEQFH40axa
- Ljq3FEdoabkYWrGo0QLOj20GJYo8+a50hS+08a4W3RW8h9uhhC2k4R6zjsW7NsmiNrNh
- wP+i2wpYgaghtdaVRmc4CvZ4oEwSXrgalBrydsLwCtNFeVV4Mv71Y7uMiFsQch030qFx
- 7pWg==
-X-Gm-Message-State: AOAM530CiBJjVH8pcYqQ2QOHpchyOD1X8FRun43ArMCGSWViCoirZkWh
- M2jQPp51g3JQekz0pM5YwiAmYVYvnoLeETy95Jc=
-X-Google-Smtp-Source: ABdhPJwQEAlp8OaN90vHhCh3zPsQtK4yz4nM9hnprGWzLTQ3gkJXJJvv+svSRPotwU7BMNrsQ6qR2iXjXhaz8s4JlCs=
-X-Received: by 2002:a02:5b83:: with SMTP id g125mr54862576jab.91.1594061122093; 
- Mon, 06 Jul 2020 11:45:22 -0700 (PDT)
+ bh=cQsmIkOSDLPbF1rwN2rsz6MizLe502CiYFhs1QJ5zoA=;
+ b=Fa2yZI0KgmLWepmjyZOQ0cwfqP3F69e4nKvDdgp74Gn+O/ePdxZwb7PKh+tkD19kYp
+ eJHRxfai7F/vbf00VxNwriaiB8vwwXDYTHwwG+CL2jQVeHyek7o7toW0RSLJ7OrE1l5s
+ +on/rxG9VpVHqTpiEzfPAA/Dr5yKSJyYUnNJ20IifLOCpNBnN7Qgeb0gBigUlN3KyYuh
+ r+on6F0xVYnprP3FWifJTs7W5YRcToQLCJjzT295CzLAVxZSpt43/yzqe2ABQUDWLCYn
+ pEwsUJKhpcQp+0UOtgwqao1eujGL4IB7ESijqwGjRBIbre/Pj0DPl5f5Wng9E5zQtKqk
+ PZcg==
+X-Gm-Message-State: AOAM531UPoxQpMUWXju82Gten8zhycGSVCtortzTrkJ/2w2QVZn8Mrxs
+ 7pCipj9CV4JVyNJrQtIazT9Hp4gs1RgHXNuVFGpoDdpRKFw=
+X-Google-Smtp-Source: ABdhPJzEr+7dxLE8Wyufyj1D4zI0VXPihc4Ev134Dphhtf3jYJyCRd2bXPZk3uIdso0iY1bWmZnlGGEz6kJ/p410v5k=
+X-Received: by 2002:a6b:8dd1:: with SMTP id
+ p200mr26827705iod.118.1594061364251; 
+ Mon, 06 Jul 2020 11:49:24 -0700 (PDT)
 MIME-Version: 1.0
 References: <1593746511-19517-1-git-send-email-bmeng.cn@gmail.com>
 In-Reply-To: <1593746511-19517-1-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 6 Jul 2020 11:35:35 -0700
-Message-ID: <CAKmqyKM+KtuHAhY+ZAPoOHH=hC7qzWbHHBi=HUETeYER1AE1vg@mail.gmail.com>
+Date: Mon, 6 Jul 2020 11:39:37 -0700
+Message-ID: <CAKmqyKNFpq+Ko=6obUkG26uRJYYOLT8m2RwRWELwnKaGznSq2A@mail.gmail.com>
 Subject: Re: [PATCH] hw/riscv: virt: Sort the SoC memmap table entries
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
@@ -52,8 +53,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -62,8 +63,8 @@ X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=_AUTOLEARN
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,7 +77,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jul 2020 18:45:26 -0000
+X-List-Received-Date: Mon, 06 Jul 2020 18:49:27 -0000
 
 On Thu, Jul 2, 2020 at 8:23 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
@@ -86,7 +87,9 @@ On Thu, Jul 2, 2020 at 8:23 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
