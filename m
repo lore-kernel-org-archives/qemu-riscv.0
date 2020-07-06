@@ -1,73 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jsUQ1-000124-RG
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Jul 2020 12:56:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60302)
+	id 1jsW7L-0005B6-IQ
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Jul 2020 14:45:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56956)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jsUPw-0000yu-T2; Mon, 06 Jul 2020 12:56:33 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:44731)
+ id 1jsW7J-0005A8-DA; Mon, 06 Jul 2020 14:45:25 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:44342)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jsUPu-0005XS-Nw; Mon, 06 Jul 2020 12:56:32 -0400
-Received: by mail-il1-x141.google.com with SMTP id h16so10172002ilj.11;
- Mon, 06 Jul 2020 09:56:29 -0700 (PDT)
+ id 1jsW7H-00080N-Ks; Mon, 06 Jul 2020 14:45:25 -0400
+Received: by mail-io1-xd42.google.com with SMTP id i4so40400480iov.11;
+ Mon, 06 Jul 2020 11:45:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=L1yDIvA88vi1SgltVFMfPCZczTxmxTH0/nCyzEY2sLM=;
- b=Aqh+O/XyfP+h5qtevBYxfA2ozEfP3E38+RL+UpEl8kroHP77+5qRgTCik/GCicN+6S
- +rKRRRmasE1xQxg7houBPEQLk9fZyBXJz3Gd/aPzGeHbLPJuiwUR93vNoKORGH/3K0Zj
- XRraX/qVHeyon7mx5KjL5ftajYCyy9590ZCI69XiiWA4AGIBJ4VbVlu1dtlogNRIbVJt
- F/SzwCM4CTBlLS9Oep876d3Zo5skaH7N0kJ19Jgqacx7q5n4pHOby1h3rfdbcX+JUkMW
- O2JhjisLiDRQJM5Yl4Ax2ACke9kc9WWwEsAtkjrYOqkjVofEl6bD2uRyP5YVPuBA9oaO
- XQmQ==
+ :cc; bh=LZf3cRbrhmfMKtFd2VXkyzNt4V6sFUPHsbIxjimIwCs=;
+ b=o2Mofn1KuY7iUdC654jg4m2gNJ2jMMEwAGg1ZCv2pQvcEPk9j8I1QrrTUtifYH7Ah3
+ 5OfE7lk3eMmt9inHqPyZ0SdGAlzm5aYE3OiALqAxduqha0kKwcHzb1A3NAdjbZgNChlv
+ e/0p1B9vgtqDhu22rCnKGi+8reoXHO6xteML1cH5VH9ykArtFJumPjPG5b2qM+T8vQda
+ CW3G9QFmOBgdw4zYPw6o143qcV+Irqxtrsv1f7m+VSwOFcoxTaYt4nT3OgZH+VGUNKBl
+ xNDmFOnIGKELeosH+/HjmRIkLidmREAyGg9HD29v4kVPKEmseJbbiUFISFAk+BRXv7DI
+ T7Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=L1yDIvA88vi1SgltVFMfPCZczTxmxTH0/nCyzEY2sLM=;
- b=MP2+ZBbNMf6i2ZIIbwaJ+Nw+j4Nwvll9qmTWdFgg2p0DNt4ktoBfb1dj+Yb0tH3pej
- yzyzi4KsfdhtsYXLfT7j1Ih1aIoaYZv6hU/POyGUdbm/r+66ASg+lQxYs5O2KFyPKX+/
- lkzb8Rw/Kbj38SNrezeXiluecIo4slo01O/V78rK6C44D9fK95r604mqADH/QigWlXvw
- 2fmsBNxTdfEh/cfUAfTF1UXcqgL19zwCsqpobvATF1kdCw3DMefFDUWHRj9edY6PQ4DL
- AOmFmDpoIhCHic7A4rHvgABwTgeNu41ZoVDRdPDPUjObwxkhavPfi9m2obKAw0SxWvUP
- P5KQ==
-X-Gm-Message-State: AOAM530ugJZ7xrFMO6mRkEzSRRopG3jFKdIjViEljS04tC9x+BLFSpcK
- VsN8Ml/hEeg3L2GqH1VagejXMxGuGfDsjn9hKo4=
-X-Google-Smtp-Source: ABdhPJw/uGqEBJeyth+hrcyWGteDMhEzQn23gr50loOewZAqiVJNtM1FfMLGJkQCgbvJlCnRPxvOQh0duo89p2KIWqY=
-X-Received: by 2002:a92:c213:: with SMTP id j19mr31576589ilo.40.1594054588655; 
- Mon, 06 Jul 2020 09:56:28 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=LZf3cRbrhmfMKtFd2VXkyzNt4V6sFUPHsbIxjimIwCs=;
+ b=QLPw7YXscMkfdECdmLZ4Ee2Vad6WPBetl/y6GS3+hM8DXTECjjei9HcrouLZ/2xqEz
+ UakICtQ3Ju1P/X6rGaMBQh5l5b8u2gQXrx/q6lBOR54+6vF5xoMrS2mwIZMUrS9zFmRD
+ iu9bKNcF27k2/NCHauWpDe5rAJVDDQXkQQTFilUZMQK7gzFR2MUCebOcBOzEQFH40axa
+ Ljq3FEdoabkYWrGo0QLOj20GJYo8+a50hS+08a4W3RW8h9uhhC2k4R6zjsW7NsmiNrNh
+ wP+i2wpYgaghtdaVRmc4CvZ4oEwSXrgalBrydsLwCtNFeVV4Mv71Y7uMiFsQch030qFx
+ 7pWg==
+X-Gm-Message-State: AOAM530CiBJjVH8pcYqQ2QOHpchyOD1X8FRun43ArMCGSWViCoirZkWh
+ M2jQPp51g3JQekz0pM5YwiAmYVYvnoLeETy95Jc=
+X-Google-Smtp-Source: ABdhPJwQEAlp8OaN90vHhCh3zPsQtK4yz4nM9hnprGWzLTQ3gkJXJJvv+svSRPotwU7BMNrsQ6qR2iXjXhaz8s4JlCs=
+X-Received: by 2002:a02:5b83:: with SMTP id g125mr54862576jab.91.1594061122093; 
+ Mon, 06 Jul 2020 11:45:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200704153908.12118-1-philmd@redhat.com>
- <20200704153908.12118-22-philmd@redhat.com>
-In-Reply-To: <20200704153908.12118-22-philmd@redhat.com>
+References: <1593746511-19517-1-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1593746511-19517-1-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 6 Jul 2020 09:46:42 -0700
-Message-ID: <CAKmqyKNaTK+CSDvy-C0_go0EeggGYvWP4sjFmGkEF1cJSnBXUQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 21/23] hw/riscv: Emit warning when old code is used
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>, 
- Max Filippov <jcmvbkbc@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Magnus Damm <magnus.damm@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Eduardo Habkost <ehabkost@redhat.com>, 
- Alistair Francis <alistair@alistair23.me>, qemu-arm <qemu-arm@nongnu.org>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Stafford Horne <shorne@gmail.com>, David Gibson <david@gibson.dropbear.id.au>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Thomas Huth <huth@tuxfamily.org>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "open list:New World" <qemu-ppc@nongnu.org>,
- Paolo Bonzini <pbonzini@redhat.com>
+Date: Mon, 6 Jul 2020 11:35:35 -0700
+Message-ID: <CAKmqyKM+KtuHAhY+ZAPoOHH=hC7qzWbHHBi=HUETeYER1AE1vg@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: virt: Sort the SoC memmap table entries
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -90,74 +76,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jul 2020 16:56:35 -0000
+X-List-Received-Date: Mon, 06 Jul 2020 18:45:26 -0000
 
-On Sat, Jul 4, 2020 at 8:48 AM Philippe Mathieu-Daud=C3=A9 <philmd@redhat.c=
-om> wrote:
+On Thu, Jul 2, 2020 at 8:23 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> This code hasn't been QOM'ified yet. Warn the user.
+> From: Bin Meng <bin.meng@windriver.com>
 >
-> Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> Adjust the PCIe memory maps to follow the order.
+>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/riscv_htif.c  | 4 ++++
->  hw/riscv/sifive_uart.c | 4 ++++
->  2 files changed, 8 insertions(+)
 >
-> diff --git a/hw/riscv/riscv_htif.c b/hw/riscv/riscv_htif.c
-> index ca87a5cf9f..bd080dbefb 100644
-> --- a/hw/riscv/riscv_htif.c
-> +++ b/hw/riscv/riscv_htif.c
-> @@ -30,6 +30,7 @@
->  #include "hw/riscv/riscv_htif.h"
->  #include "qemu/timer.h"
->  #include "qemu/error-report.h"
-> +#include "hw/qdev-deprecated.h"
+>  hw/riscv/virt.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >
->  #define RISCV_DEBUG_HTIF 0
->  #define HTIF_DEBUG(fmt, ...)                                            =
-       \
-> @@ -238,6 +239,9 @@ HTIFState *htif_mm_init(MemoryRegion *address_space, =
-MemoryRegion *main_mem,
->      uint64_t fromhost_offset =3D fromhost_addr - base;
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 5ca49c5..aacfbda 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -57,14 +57,14 @@ static const struct MemmapEntry {
+>      [VIRT_TEST] =        {   0x100000,        0x1000 },
+>      [VIRT_RTC] =         {   0x101000,        0x1000 },
+>      [VIRT_CLINT] =       {  0x2000000,       0x10000 },
+> +    [VIRT_PCIE_PIO] =    {  0x3000000,       0x10000 },
+>      [VIRT_PLIC] =        {  0xc000000,     0x4000000 },
+>      [VIRT_UART0] =       { 0x10000000,         0x100 },
+>      [VIRT_VIRTIO] =      { 0x10001000,        0x1000 },
+>      [VIRT_FLASH] =       { 0x20000000,     0x4000000 },
+> -    [VIRT_DRAM] =        { 0x80000000,           0x0 },
+> -    [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
+> -    [VIRT_PCIE_PIO] =    { 0x03000000,    0x00010000 },
+>      [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
+> +    [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
+> +    [VIRT_DRAM] =        { 0x80000000,           0x0 },
+>  };
 >
->      HTIFState *s =3D g_malloc0(sizeof(HTIFState));
-> +
-> +    qdev_warn_deprecated_function_used();
-> +
->      s->address_space =3D address_space;
->      s->main_mem =3D main_mem;
->      s->main_mem_ram_ptr =3D memory_region_get_ram_ptr(main_mem);
-> diff --git a/hw/riscv/sifive_uart.c b/hw/riscv/sifive_uart.c
-> index 9350482662..1a5890d5f7 100644
-> --- a/hw/riscv/sifive_uart.c
-> +++ b/hw/riscv/sifive_uart.c
-> @@ -25,6 +25,7 @@
->  #include "hw/hw.h"
->  #include "hw/irq.h"
->  #include "hw/riscv/sifive_uart.h"
-> +#include "hw/qdev-deprecated.h"
->
->  /*
->   * Not yet implemented:
-> @@ -183,6 +184,9 @@ SiFiveUARTState *sifive_uart_create(MemoryRegion *add=
-ress_space, hwaddr base,
->      Chardev *chr, qemu_irq irq)
->  {
->      SiFiveUARTState *s =3D g_malloc0(sizeof(SiFiveUARTState));
-> +
-> +    qdev_warn_deprecated_function_used();
-> +
->      s->irq =3D irq;
->      qemu_chr_fe_init(&s->chr, chr, &error_abort);
->      qemu_chr_fe_set_handlers(&s->chr, uart_can_rx, uart_rx, uart_event,
+>  #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
 > --
-> 2.21.3
+> 2.7.4
 >
 >
 
