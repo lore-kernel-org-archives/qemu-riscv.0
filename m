@@ -1,71 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jsWBE-0007jH-CF
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Jul 2020 14:49:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57790)
+	id 1jsfmw-0006zW-Hy
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Jul 2020 01:05:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54742)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jsWBD-0007ib-6B; Mon, 06 Jul 2020 14:49:27 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:37020)
+ (Exim 4.90_1) (envelope-from <jcfaracco@gmail.com>)
+ id 1jsd1N-0005Sq-Sw; Mon, 06 Jul 2020 22:07:45 -0400
+Received: from mail-qt1-x843.google.com ([2607:f8b0:4864:20::843]:35743)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jsWBB-00009o-LS; Mon, 06 Jul 2020 14:49:26 -0400
-Received: by mail-io1-xd41.google.com with SMTP id v6so26811036iob.4;
- Mon, 06 Jul 2020 11:49:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jcfaracco@gmail.com>)
+ id 1jsd1K-0005bb-7S; Mon, 06 Jul 2020 22:07:45 -0400
+Received: by mail-qt1-x843.google.com with SMTP id b25so9213599qto.2;
+ Mon, 06 Jul 2020 19:07:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=cQsmIkOSDLPbF1rwN2rsz6MizLe502CiYFhs1QJ5zoA=;
- b=UYMCVDl2hupJPXBMo32HPMmLkLlRVveTcCTn74Ov8jcHt1YvqkMF1FJXm+qQqit9ig
- RGMz//LCozLGTigEklXiTJpxZrA5/beSegC30eAn/IrSgv4ta4kJp1L12tQrM0SS6RG8
- HUGDI9NdK6QC7/sUSfB3HiNucXYYH1DxYrUsnRkUaqLtGsHvEuVRjNJBfkcbUPqc0xeQ
- RW5iJpjYXNds0h8v4/5+LI3z15koeSIOQrI50bWv12AE3md8crL1h+zB9Zd7SnOAcNNY
- FWmpR2zCnGlRTRQwsFblxuRj5FHhPQ9SekOH4E58J5Z4em1FKr4J6Xgk4HCfZ51C1MCw
- UYGQ==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=YmRCz4CwArI7TD+I+EW3fguN01b3jj4dYKCICNEeHC4=;
+ b=TfSt0N1N9W77+ZlljQ6gGaYzMJg2ImLigjRQfF2w2/MTEim/xEMIUVDY4k2JFoqgBc
+ qewGHL4vNugZZVq5J6ySJLWpVjLBylJ99PqNKyp5WVsQ6Gbu/QGeHZGwYUxBmwrxt2JF
+ OxoKprEP/9/gOpMbyrMqR11S1gW/appK77/jueYGBayCWGz/lWXFnNm4qejaYP9QNOgh
+ DKIHvmEYeA0oyPJg2hamy28315Mh33GLATitz6oB2c9I8ugY7DhyB8/k4Wi9TgnVhlQ9
+ 3cgFSqmluuQPbaCxylT3B5/hnM8ndf0m/aqieH6SRKzDGMd2xyVxwuCkd3EManYt6i6u
+ VtkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=cQsmIkOSDLPbF1rwN2rsz6MizLe502CiYFhs1QJ5zoA=;
- b=Fa2yZI0KgmLWepmjyZOQ0cwfqP3F69e4nKvDdgp74Gn+O/ePdxZwb7PKh+tkD19kYp
- eJHRxfai7F/vbf00VxNwriaiB8vwwXDYTHwwG+CL2jQVeHyek7o7toW0RSLJ7OrE1l5s
- +on/rxG9VpVHqTpiEzfPAA/Dr5yKSJyYUnNJ20IifLOCpNBnN7Qgeb0gBigUlN3KyYuh
- r+on6F0xVYnprP3FWifJTs7W5YRcToQLCJjzT295CzLAVxZSpt43/yzqe2ABQUDWLCYn
- pEwsUJKhpcQp+0UOtgwqao1eujGL4IB7ESijqwGjRBIbre/Pj0DPl5f5Wng9E5zQtKqk
- PZcg==
-X-Gm-Message-State: AOAM531UPoxQpMUWXju82Gten8zhycGSVCtortzTrkJ/2w2QVZn8Mrxs
- 7pCipj9CV4JVyNJrQtIazT9Hp4gs1RgHXNuVFGpoDdpRKFw=
-X-Google-Smtp-Source: ABdhPJzEr+7dxLE8Wyufyj1D4zI0VXPihc4Ev134Dphhtf3jYJyCRd2bXPZk3uIdso0iY1bWmZnlGGEz6kJ/p410v5k=
-X-Received: by 2002:a6b:8dd1:: with SMTP id
- p200mr26827705iod.118.1594061364251; 
- Mon, 06 Jul 2020 11:49:24 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=YmRCz4CwArI7TD+I+EW3fguN01b3jj4dYKCICNEeHC4=;
+ b=YhQEcZQdymRogz80w8sZVnNRs4JuQm5SqRgDVnRTuKv+MTPrSOMJ5f0NG/ivnmXcQ0
+ iqNVvbL5C1NRJ3tiUpa/Oe9kPhZW8LZqAMrcQ/SNv4+il9qHjOUH4Mjvo/k1HGu+PLV+
+ +lk6F7a4Y2+Yu6Jx6bEx4QuMst8G1OLfL2o4mBEdgLmxmRTOwybJLHliQFjgYAhZdhFD
+ ipRS8ZwCn3gudtwffOcW0j/CNFZ8ppDnChIMdBpT6tc9zOeJaRDjv31ykX8c5YtZ7ZT1
+ XUwpE3ApgCUqi/qon1qkJi2Iz7q2ltiliCEOdCe+U8jt+U7rEYJ6BbsMDCFYnt6ykvhk
+ tMAw==
+X-Gm-Message-State: AOAM530JiUDJKG0XsReibNMWWEwPBQRpheFWK27DZe6LC9ScCg+2VmI1
+ uxPv+JAsult3WYzd+/fMdEilDQ+47rw=
+X-Google-Smtp-Source: ABdhPJz7mPRSBvkiD/TR4KVHXeuIjk50m84eEH8vtO6+mk4Zgmmc/pBPZsR+YTmTYEYdyMrvyyfv7g==
+X-Received: by 2002:ac8:4e03:: with SMTP id c3mr52498987qtw.82.1594087659942; 
+ Mon, 06 Jul 2020 19:07:39 -0700 (PDT)
+Received: from localhost.localdomain ([177.188.126.13])
+ by smtp.gmail.com with ESMTPSA id t36sm25323735qtj.58.2020.07.06.19.07.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Jul 2020 19:07:39 -0700 (PDT)
+From: Julio Faracco <jcfaracco@gmail.com>
+To: qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
+ Julio Faracco <jcfaracco@gmail.com>
+Subject: [PATCH] riscv: Add OpenTitan Big Number (OTBN) device address
+Date: Mon,  6 Jul 2020 23:07:28 -0300
+Message-Id: <20200707020728.23420-1-jcfaracco@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <1593746511-19517-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1593746511-19517-1-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 6 Jul 2020 11:39:37 -0700
-Message-ID: <CAKmqyKNFpq+Ko=6obUkG26uRJYYOLT8m2RwRWELwnKaGznSq2A@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: virt: Sort the SoC memmap table entries
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::843;
+ envelope-from=jcfaracco@gmail.com; helo=mail-qt1-x843.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 07 Jul 2020 01:05:01 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,51 +76,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jul 2020 18:49:27 -0000
+X-List-Received-Date: Tue, 07 Jul 2020 02:07:46 -0000
 
-On Thu, Jul 2, 2020 at 8:23 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> Adjust the PCIe memory maps to follow the order.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+This commit adds basics skecthes to implemente a OTBN unit.
+OTBN has address 0x50000000 and size 0x400000.
+For further reference, see OTBN docummentation:
+https://docs.opentitan.org/hw/ip/otbn/doc/
 
-Thanks!
+Signed-off-by: Julio Faracco <jcfaracco@gmail.com>
+---
+ hw/riscv/opentitan.c         | 5 ++++-
+ include/hw/riscv/opentitan.h | 1 +
+ 2 files changed, 5 insertions(+), 1 deletion(-)
 
-Applied to riscv-to-apply.next
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index 19223e4c29..8a5d060b57 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -50,7 +50,8 @@ static const struct MemmapEntry {
+     [IBEX_ALERT_HANDLER] =  {  0x40130000,  0x10000 },
+     [IBEX_NMI_GEN] =        {  0x40140000,  0x10000 },
+     [IBEX_USBDEV] =         {  0x40150000,  0x10000 },
+-    [IBEX_PADCTRL] =        {  0x40160000,  0x10000 }
++    [IBEX_PADCTRL] =        {  0x40160000,  0x10000 },
++    [IBEX_OTBN] =           {  0x50000000, 0x400000 }
+ };
+ 
+ static void opentitan_board_init(MachineState *machine)
+@@ -183,6 +184,8 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+         memmap[IBEX_USBDEV].base, memmap[IBEX_USBDEV].size);
+     create_unimplemented_device("riscv.lowrisc.ibex.padctrl",
+         memmap[IBEX_PADCTRL].base, memmap[IBEX_PADCTRL].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.otbn",
++        memmap[IBEX_PADCTRL].base, memmap[IBEX_OTBN].size);
+ }
+ 
+ static void lowrisc_ibex_soc_class_init(ObjectClass *oc, void *data)
+diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+index 8f29b9cbbf..c739d44fbc 100644
+--- a/include/hw/riscv/opentitan.h
++++ b/include/hw/riscv/opentitan.h
+@@ -68,6 +68,7 @@ enum {
+     IBEX_NMI_GEN,
+     IBEX_USBDEV,
+     IBEX_PADCTRL,
++    IBEX_OTBN,
+ };
+ 
+ enum {
+-- 
+2.25.1
 
-Alistair
-
-> ---
->
->  hw/riscv/virt.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 5ca49c5..aacfbda 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -57,14 +57,14 @@ static const struct MemmapEntry {
->      [VIRT_TEST] =        {   0x100000,        0x1000 },
->      [VIRT_RTC] =         {   0x101000,        0x1000 },
->      [VIRT_CLINT] =       {  0x2000000,       0x10000 },
-> +    [VIRT_PCIE_PIO] =    {  0x3000000,       0x10000 },
->      [VIRT_PLIC] =        {  0xc000000,     0x4000000 },
->      [VIRT_UART0] =       { 0x10000000,         0x100 },
->      [VIRT_VIRTIO] =      { 0x10001000,        0x1000 },
->      [VIRT_FLASH] =       { 0x20000000,     0x4000000 },
-> -    [VIRT_DRAM] =        { 0x80000000,           0x0 },
-> -    [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
-> -    [VIRT_PCIE_PIO] =    { 0x03000000,    0x00010000 },
->      [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
-> +    [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
-> +    [VIRT_DRAM] =        { 0x80000000,           0x0 },
->  };
->
->  #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
-> --
-> 2.7.4
->
->
 
