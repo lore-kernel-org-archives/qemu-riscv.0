@@ -1,58 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jsjao-0001Uc-Kd
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Jul 2020 05:08:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40630)
+	id 1jsojO-0000uu-W8
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Jul 2020 10:37:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55064)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jsjam-0001PJ-Rw; Tue, 07 Jul 2020 05:08:44 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:38278)
+ (Exim 4.90_1) (envelope-from <lazyparser@gmail.com>)
+ id 1jskYl-0006c9-Tu
+ for qemu-riscv@nongnu.org; Tue, 07 Jul 2020 06:10:43 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:34372)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jsjal-0007NG-3g; Tue, 07 Jul 2020 05:08:44 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id a30so4909297ybj.5;
- Tue, 07 Jul 2020 02:08:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <lazyparser@gmail.com>)
+ id 1jskYk-00016Y-CS
+ for qemu-riscv@nongnu.org; Tue, 07 Jul 2020 06:10:43 -0400
+Received: by mail-pg1-x544.google.com with SMTP id t6so19811011pgq.1
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jul 2020 03:10:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=6+gRvNoE8S1z/mxk8ZMSzXMftWS1IFjV+yoc1Jeu7To=;
- b=jwJSp3x87HqzrLnDOfPUvkbKTufmEHZrTnN4MIY01tD9OS4mFeFfC53ojJoRfqyMm+
- hHbR7/09/HsPq3RSW7DNG7TYMZHAz2qZgRdLAgdsVyLIXgmgbCLu03QW618ASQ01rSU+
- mkUjpEPhy7NFU7PaKgYWn7mOd+47LQPmhXiW9gVS8oNkCvqlYba9f9JwJSS17/X1nPqu
- GczQWaTEzNghfkV7zfPKP1MepT2fXpjQQuqZX0ZzXSaZmDBaNmJvbMim5zDnJM9oogiA
- bVAOz6hW6cakXBhWGi+yL/gW5803t06OUwlKZLhEMxEk6xo+scspMPPiXb+eHOkGlDfi
- ns9Q==
+ h=from:to:cc:subject:date:message-id;
+ bh=jbaiWudyLl1t/ATOC3EUXBawMf9xIkzMV5OYrN8XXaQ=;
+ b=jUx4tk2wk0BKZI69QPVABLSmjmfpsG0H7/U22wo7KeKuJCICFiyUllZ2Bwqd90heA5
+ a18mvZfrI7pvryi5c707NFjxArPLRio9wYB3JrEho/OLAbSN/+Qfb/9o8ZTobOWWZhKv
+ wWTsY5D2kiUxyqGLxK6F8YWJLWiji53/HViRpu5h9k4KkBjsPDNLMAVA7UpeExBSRtdH
+ 0CiKa3Qv2Su5coGGFwE7MCA/JmfR+7I5FaFtPQTwOZDUgRhNKI4LWPvmp1MDQ41iIPl4
+ BEZKRUNIqEaySViKsAy/B2KIWkIf63PUwTcyr5Qa64HOwplosflBB0K111PHCVoSvn/o
+ 0XkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=6+gRvNoE8S1z/mxk8ZMSzXMftWS1IFjV+yoc1Jeu7To=;
- b=A5qFUVVvUuRse8CkabYB2j5SCv5WQi8JzE82Xa8wbrEhFQUIBv+/w4+s61y1igNLXu
- QlHOZHk6bIf5nPjAzoB/mvlKXx9kYB4XWjvyeSzS5fyaHbw2mrqX6q9o805YfZLduVqr
- HVNQyvm4j2k/P2hREQUQ8oUKutRfUDpFo4FPkbydzoKHCK1h0uITmEPXM1OrSY8gydRU
- JJBVv9K6nIylGoLjvHcMSoC3AOnhkWz6nlq+nO2cECCkarm9YNRrFuxQxHW2yjPgaF08
- do7RkQsrDofLsL6Wi8gl5VWdE1QawgjVWAOW4/9v8atRJwtXGfrBjQFn9ORDm2aDnJvg
- +HIA==
-X-Gm-Message-State: AOAM530zOMbQ3UgQgyLzoI8AH8Kk7H1gBWAE1oDODwmIIy5TZvwf9DOm
- VP0SuNHN/y2Vq37VcNcg52ewsNDKHgyabqCw5lM=
-X-Google-Smtp-Source: ABdhPJy/eTQYISmkFC5sl9jb3YRDb0g2f8jrGwBiN3jzIHHjbEsXtoYFgYC/mcFHs45MrZMV+U+TkEYJq4oDPvYWQ+4=
-X-Received: by 2002:a25:aea5:: with SMTP id b37mr27142530ybj.239.1594112921338; 
- Tue, 07 Jul 2020 02:08:41 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200707020728.23420-1-jcfaracco@gmail.com>
-In-Reply-To: <20200707020728.23420-1-jcfaracco@gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 7 Jul 2020 17:08:30 +0800
-Message-ID: <CAEUhbmUXV_xUUuph3FmNbLAUUtMtBvQATOYvp4Ou1iytSDY1TA@mail.gmail.com>
-Subject: Re: [PATCH] riscv: Add OpenTitan Big Number (OTBN) device address
-To: Julio Faracco <jcfaracco@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=jbaiWudyLl1t/ATOC3EUXBawMf9xIkzMV5OYrN8XXaQ=;
+ b=Ic0p4T6TAsUob0ROX7TcOi/edwmwyyr6a9fbClZ8e7ON+VHZcnjkHfdYcpMCC0himh
+ //J2u/3UtMRr6DktDt412PUYLtF5Cm19dvwdfq2eWyuuRHorpsnHTaAeTI72h10s0jl3
+ kTDU2hE3wdKlt2noACjnktCsXiKgYeCurMByYb2P7EhrHzotIZ5cyAsf8VsO1P4Yhget
+ 7Yv1yIuVHLS6Jo0vreXL7MNDuPt1/91CUWqtI7P0aqvaNnMk2tecZ4QcEM8WcBELza3l
+ 3oFkv6oru8+uQSoR0JBOx4r99/r+RxhinGD0/bdXEtpT+oJuVAHC178I286dR0JfusSM
+ cnIg==
+X-Gm-Message-State: AOAM533qKRxlKnCRGm0g2SLrWLNYeqAkrDZEh1581Wu7ZQSTSrTy86HZ
+ rmGMNqe8dbOxGOxjUzerO867izWqSQ0awn1K
+X-Google-Smtp-Source: ABdhPJyoklt6mR6LVQUUM9I2DmHV+7R00x2/L6A8LzLU8i2BGy3hOd1PwrUWjHtJe2lqqvd3rLYdoA==
+X-Received: by 2002:a63:e14c:: with SMTP id h12mr4277018pgk.110.1594116640309; 
+ Tue, 07 Jul 2020 03:10:40 -0700 (PDT)
+Received: from localhost.localdomain ([39.98.209.129])
+ by smtp.googlemail.com with ESMTPSA id
+ u188sm18996965pfu.26.2020.07.07.03.10.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Jul 2020 03:10:39 -0700 (PDT)
+From: lazyparser@gmail.com
+To: qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, Wei Wu <lazyparser@gmail.com>
+Subject: [PATCH] disas/riscv: Fix incorrect disassembly for `imm20` operand.
+Date: Tue,  7 Jul 2020 18:09:30 +0800
+Message-Id: <20200707100930.4041-1-lazyparser@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
+ envelope-from=lazyparser@gmail.com; helo=mail-pg1-x544.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -60,9 +58,10 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=_AUTOLEARN
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=_AUTOLEARN
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 07 Jul 2020 10:37:58 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,61 +73,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2020 09:08:45 -0000
+X-List-Received-Date: Tue, 07 Jul 2020 10:10:44 -0000
 
-On Tue, Jul 7, 2020 at 10:08 AM Julio Faracco <jcfaracco@gmail.com> wrote:
->
-> This commit adds basics skecthes to implemente a OTBN unit.
+From: Wei Wu <lazyparser@gmail.com>
 
-typo: skecthes, implemente
+`imm20` operand type is used in LUI/AUIPC and other instructions.
+The value should not be left shifted 12bits for disassembly output.
 
-> OTBN has address 0x50000000 and size 0x400000.
-> For further reference, see OTBN docummentation:
+Signed-off-by: Wei Wu <lazyparser@gmail.com>
+---
+ disas/riscv.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-typo: docummentation
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 278d9be924..a2b6472bd8 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -2083,7 +2083,7 @@ static int32_t operand_imm12(rv_inst inst)
+ 
+ static int32_t operand_imm20(rv_inst inst)
+ {
+-    return (((int64_t)inst << 32) >> 44) << 12;
++    return ((int64_t)inst << 32) >> 44;
+ }
+ 
+ static int32_t operand_jimm20(rv_inst inst)
+-- 
+2.17.1
 
-> https://docs.opentitan.org/hw/ip/otbn/doc/
->
-> Signed-off-by: Julio Faracco <jcfaracco@gmail.com>
-> ---
->  hw/riscv/opentitan.c         | 5 ++++-
->  include/hw/riscv/opentitan.h | 1 +
->  2 files changed, 5 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 19223e4c29..8a5d060b57 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -50,7 +50,8 @@ static const struct MemmapEntry {
->      [IBEX_ALERT_HANDLER] =  {  0x40130000,  0x10000 },
->      [IBEX_NMI_GEN] =        {  0x40140000,  0x10000 },
->      [IBEX_USBDEV] =         {  0x40150000,  0x10000 },
-> -    [IBEX_PADCTRL] =        {  0x40160000,  0x10000 }
-> +    [IBEX_PADCTRL] =        {  0x40160000,  0x10000 },
-> +    [IBEX_OTBN] =           {  0x50000000, 0x400000 }
->  };
->
->  static void opentitan_board_init(MachineState *machine)
-> @@ -183,6 +184,8 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->          memmap[IBEX_USBDEV].base, memmap[IBEX_USBDEV].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.padctrl",
->          memmap[IBEX_PADCTRL].base, memmap[IBEX_PADCTRL].size);
-> +    create_unimplemented_device("riscv.lowrisc.ibex.otbn",
-> +        memmap[IBEX_PADCTRL].base, memmap[IBEX_OTBN].size);
->  }
->
->  static void lowrisc_ibex_soc_class_init(ObjectClass *oc, void *data)
-> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-> index 8f29b9cbbf..c739d44fbc 100644
-> --- a/include/hw/riscv/opentitan.h
-> +++ b/include/hw/riscv/opentitan.h
-> @@ -68,6 +68,7 @@ enum {
->      IBEX_NMI_GEN,
->      IBEX_USBDEV,
->      IBEX_PADCTRL,
-> +    IBEX_OTBN,
->  };
-
-Other than that,
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
 
