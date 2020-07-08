@@ -1,69 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jswzy-0006um-Jn
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Jul 2020 19:27:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38416)
+	id 1jsy4W-000250-Nu
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Jul 2020 20:36:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51196)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jswzw-0006u2-NF; Tue, 07 Jul 2020 19:27:36 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:35287)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jsy4U-00023O-Nc; Tue, 07 Jul 2020 20:36:22 -0400
+Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:39032)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jswzv-0003Fc-5U; Tue, 07 Jul 2020 19:27:36 -0400
-Received: by mail-io1-xd43.google.com with SMTP id v8so44970532iox.2;
- Tue, 07 Jul 2020 16:27:34 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jsy4T-00030O-2v; Tue, 07 Jul 2020 20:36:22 -0400
+Received: by mail-yb1-xb41.google.com with SMTP id 134so1267305ybd.6;
+ Tue, 07 Jul 2020 17:36:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=OtUhTQztt/ScSfWZTz1D2W9tNwBIULiYZ2mDiLic5WU=;
- b=XI9E4O+KA8f6vANEqLit2EKyQfd6woZNsTP+6IWnyOWmzrdc+elh5MD12xWId6md/e
- 1GnYd3WGgNCy2JelM5DAWC9mRvYUFpRdXKtuZ3JtFelfM7Aal6mspzXbhKb0rPwalX+V
- 7igxgvGGIEmN3mOYqF3hYlmZ4EUrJszIBnndJGdCofYyEXfUOfHesdhLd60FXStTb3VB
- dOX1R/xRXJUZ3Wkft961FbAVkwBoFQD/azetbSggcNDiBgfKZ6o7rco+cqUyK4PAEtj7
- MiQb1jkJhpjeW+rHTAJ8ouvuzbMlbqQrYl8QIbIlmYgSLlUO2VCwu/SiO838I4Asaf05
- marg==
+ :cc; bh=JOFJ6oH1odZlAZAnUFbaqkxYNsQU2RyPUzhXIwucLeQ=;
+ b=PbM+DraP7ezIog/lpaOhmqOVUm2U7xtcvog3SQ6MsDk7ySCPvEJd5QFWz5SOGT2Ec5
+ NWTVLn4ivDNLWq0OBbF2N9Mzi5tHazyYZW+yMOilMSYOt1/yMPXOu2EyKDaW1bX5Gx6d
+ MOK98P0pq6YCig3DLG7daWowVJoJA3UsxbhHziKRChklBD0pnzJXhdyqy3Uted6CqyTG
+ qQlGfzyNHsU1N6S5ddQqrn46ROOtJKX8qRjIyZR7SIMhxUosby3Y0QGYpz/ORk9ZMmYn
+ uYg2xFzlHwMMb9i+9t/HIbIwwREndSdV75o7/SiEQmehSiavhKV4u+N5AAclbwgF9Iz8
+ WCOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=OtUhTQztt/ScSfWZTz1D2W9tNwBIULiYZ2mDiLic5WU=;
- b=nXQi3jAuAb6ucCVl7N2+weKt6Fo2RnnbLDGi1TK6FehfvYx9H3X6EMftz09SaYydAA
- yA0NKKCNEbWbq7usLLrhDzipavuL/p4+Ehq2Q/f5Kay/qKTIpBQ4A8Gvae0gclCJ/+ff
- gMXHdyd/mLn252WrPW9yqFOYWRa+d0o5BIgUjYw7RVfG4f5KoystvxG4/lDe8sqeJY14
- 4sF1EWDTP9M5GlQxP6HwTyxxCS08ldl6KbS+43y+C3GnJ4WLIf1Ma+2JmAOhv25AynwQ
- eB1s5xiZ9xLo45PybktkMEgYzaBXTVdVYRCzb40bRWZfVCt4riMvFasCqmUkr4EYqq3z
- l8ZQ==
-X-Gm-Message-State: AOAM530+pzD92q9lYT+urJXgr3NzRGN5LMvXJi0UlG12zJ4kGmRGDNaq
- kXTz5UpKh2X83TXw2gq/c41CzKRPpTA6H9hE4ad5VxzEE0o=
-X-Google-Smtp-Source: ABdhPJyfpMjBu02f+T1pRK0vIA4k7kqb3WSyTyY25dXbS6zblZUVJknP6ZuyHMGntPWnNmFwbeuKuJ2fYsK1jsEJO8Q=
-X-Received: by 2002:a92:d186:: with SMTP id z6mr40419537ilz.227.1594157537032; 
- Tue, 07 Jul 2020 14:32:17 -0700 (PDT)
+ bh=JOFJ6oH1odZlAZAnUFbaqkxYNsQU2RyPUzhXIwucLeQ=;
+ b=nctpo6t9xtDTfjfxUHK97Aqn+P73pINVeEsm+Qoo2NJ8dQ8rNBoweeyGY3fskzS342
+ 3F79d27JMTsJsL/rWknfZ6YOTbC4uuJwfky0IdqbbB0gekNfTJMndUHt6fV1Dmfd1IKl
+ w7da/de9BjfEOJpdh3OsIDCJIg4FyDop+WNGB9zQ+p9oBI2T9iB6t6kvVXa+46CfTmkc
+ Rde15J8k59Vkl7kmyUx+GA/RSpmnEa3hp8VZydBcXqDuWEkONy5jowTtVhwT5klEQjMy
+ K4y8g8p8HiJDvft2lhkPpumjqbx+fg33ArHhohmcraX2UiOpv08FJuJTvFmiKR7F/YU/
+ kLCw==
+X-Gm-Message-State: AOAM53167RZQZmdevc1priuYKS1DvU2kR95e+H5S5GyPlfwHuzyEJZAL
+ 19V5nPcc5K7BTCdxeAt+9PdY8xMKncLv3s8wdjA=
+X-Google-Smtp-Source: ABdhPJztWCqWstM+bypnEWIaddYqNa2s5I+B4MpqT78Q9BTznFkV31RkJ0ixJm8NKqN7RdqJAOjmq2Ws3r5aMCRSMw0=
+X-Received: by 2002:a25:aea5:: with SMTP id b37mr33327035ybj.239.1594168579465; 
+ Tue, 07 Jul 2020 17:36:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <1593746287-19251-1-git-send-email-bmeng.cn@gmail.com>
- <1593746287-19251-8-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1593746287-19251-8-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 7 Jul 2020 14:22:27 -0700
-Message-ID: <CAKmqyKPRPdz=3_QRM8+ct2TYLO8rY_kFqrHkX0qn78rEpSAgag@mail.gmail.com>
-Subject: Re: [PATCH v3 7/7] Makefile: Ship the generic platform bios images
- for RISC-V
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+References: <cover.1593547870.git.alistair.francis@wdc.com>
+ <ea4f280e6f77e734c8e555e3c98d10085ce9f5b6.1593547870.git.alistair.francis@wdc.com>
+ <CAEUhbmVsQX+es-xw5Omj+-dsU1Km2kKNAZa_NJ6PipE4ZAEucA@mail.gmail.com>
+ <CAKmqyKPDUVCVcm8d8bAqr=M_atAgfsFSAMhv6DZ5hOC5aAUHXQ@mail.gmail.com>
+In-Reply-To: <CAKmqyKPDUVCVcm8d8bAqr=M_atAgfsFSAMhv6DZ5hOC5aAUHXQ@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 8 Jul 2020 08:36:08 +0800
+Message-ID: <CAEUhbmXRWw7nDJsDLX+8r4D7MzVM=Tkcb7DodOf+tQ5yC9G3Zw@mail.gmail.com>
+Subject: Re: [PATCH v1 3/3] target/riscv: Regen floating point rounding mode
+ in dynamic mode
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,52 +76,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2020 23:27:37 -0000
+X-List-Received-Date: Wed, 08 Jul 2020 00:36:23 -0000
 
-On Thu, Jul 2, 2020 at 8:20 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> Update the install blob list to include the generic platform
-> fw_dynamic bios images.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+Hi Alistair,
 
-Shouldn't this patch be included in an earlier patch?
+On Wed, Jul 8, 2020 at 1:33 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Thu, Jul 2, 2020 at 6:25 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > On Wed, Jul 1, 2020 at 4:23 AM Alistair Francis
+> > <alistair.francis@wdc.com> wrote:
+> > >
+> > > When a guest specificies the the rounding mode should be dynamic 0b111
+> > > then we want to re-caclulate the rounding mode on each instruction. The
+> > > gen_helper_set_rounding_mode() function will correctly check the
+> > > rounding mode and handle a dynamic rounding, we just need to make sure
+> > > it's always called if dynamic rounding is selected.
+> > >
+> > > Fixes: 1885350 ("RISCV dynamic rounding mode is not behaving correctly")
+> >
+> > I can't find this commit id.
+>
+> It's a launchpad bug case: https://bugs.launchpad.net/qemu/+bug/1885350
+>
 
-Otherwise won't this break `make install` bisection?
+My understanding is that the convention used in "Fixes" tag is for
+commit id. 1885350 is not a commit id but a QEMU bug report id.
 
-Alistair
-
->
-> ---
->
-> Changes in v3:
-> - change fw_jump to fw_dynamic in the Makefile
->
-> Changes in v2:
-> - new patch: Makefile: Ship the generic platform bios images for RISC-V
->
->  Makefile | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/Makefile b/Makefile
-> index b1b8a5a..05e05bb 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -841,8 +841,8 @@ u-boot.e500 u-boot-sam460-20100605.bin \
->  qemu_vga.ndrv \
->  edk2-licenses.txt \
->  hppa-firmware.img \
-> -opensbi-riscv32-sifive_u-fw_jump.bin opensbi-riscv32-virt-fw_jump.bin \
-> -opensbi-riscv64-sifive_u-fw_jump.bin opensbi-riscv64-virt-fw_jump.bin
-> +opensbi-riscv32-generic-fw_dynamic.bin opensbi-riscv32-generic-fw_dynamic.elf \
-> +opensbi-riscv64-generic-fw_dynamic.bin opensbi-riscv64-generic-fw_dynamic.elf
->
->
->  DESCS=50-edk2-i386-secure.json 50-edk2-x86_64-secure.json \
-> --
-> 2.7.4
->
->
+Regards,
+Bin
 
