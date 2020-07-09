@@ -1,70 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtaLw-00069V-IE
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Jul 2020 13:28:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53200)
+	id 1jteoA-0007Xt-OG
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Jul 2020 18:14:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39820)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jtaLu-00067e-SJ; Thu, 09 Jul 2020 13:28:54 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:43063)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jtaLt-0005oq-Ax; Thu, 09 Jul 2020 13:28:54 -0400
-Received: by mail-io1-xd41.google.com with SMTP id k23so3137661iom.10;
- Thu, 09 Jul 2020 10:28:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=3eprv0vHNk1cbTgErogcMPWD9Mv/u0rtXsYYUQqfdws=;
- b=W0it/BS56cMeA2rGFhIKK+swKAhyEp0Rpc6cSDoVTUnCiio8ujrRtxIxyJzZJNLl9F
- q/qa6+hDqvbK0mtfgISerCPSIwA9iybdI8oxDfvsLJdfDcqz5LtJlMS4D/MLqn3MbL/N
- gt+ORKa0T4BcueAkl+0U2wt1OTjGdiW75EifMuo3J3oYAXoaxbADkPeWqfzgHNTcTcUd
- QZA0QIzZf0tH6LQQg1XMtng5wtVhLwUEPxsBGttaKfXKConD6KJitiJ54Bt6bK6UV9tK
- Dff6gs3RN9UYKAyBGWi7xRyMGpdqCZ0Dlhx0BNvnREkOXisi4SpM25UJR6pB0as1OcT9
- dt4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=3eprv0vHNk1cbTgErogcMPWD9Mv/u0rtXsYYUQqfdws=;
- b=rln10qOLUJK1RWOp9S/z8xllryYk0rXFeegqXDyWDOHa3pkJ0L9JFYYIKlAdlDQgqZ
- bXISrl4HZ4sg09qiYm0SWVKv6f2tc+5p01WeIUVdG+7J4/OPT45zXlvBOj/CPUZAns0H
- 202piKjY7I2WgmndQ0O+IbGNU0P8HWG/kxrL2rnmiVBvZ7M6oBvSx9GFKRhfGrhcuhGz
- 04s9I+PPnxVHvkCUpbiEKhZJsPAyZfGO48azfTEJarDofgGdCVVzC+g3dd+RLyn3uF/a
- TqgcYbEdYeXul0yhelkckgw6CUV2Fzt8XPEHvyECsJYkyMxNPeloheALd4lv50Do1mAf
- 19pg==
-X-Gm-Message-State: AOAM530PR/Nx0vzt2yaOaU9pK9eKgwovYOELpjuQQMijeu8T5nGgLGCn
- QYkw7x/kVKYV+8+MNF/G+CyzIy5vy0F2M54fNDk=
-X-Google-Smtp-Source: ABdhPJw/Je0m2CCSDIYtbFl2epzVL4KdxRSTPktcxbTBObac7BG6J40qAN9IIAqNJQ5L4Ht6d5kjJryRC/dachQ+Hps=
-X-Received: by 2002:a02:6c4c:: with SMTP id w73mr74782575jab.26.1594315731840; 
- Thu, 09 Jul 2020 10:28:51 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=45291e402=alistair.francis@wdc.com>)
+ id 1jteo7-0007Uy-Ab; Thu, 09 Jul 2020 18:14:19 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:3634)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=45291e402=alistair.francis@wdc.com>)
+ id 1jteo4-0003wC-1o; Thu, 09 Jul 2020 18:14:18 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1594332856; x=1625868856;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=bna7bmE33T/p5LBVAqkYsFbWUVy5FO2obUUpf0nGopY=;
+ b=Yk7Nz5jMKL4NxKZYSqkysusLaHkgdUrgTOUATcnVNWHHxkmM6iToauh4
+ Jx/LG26uyeyvHHkUG8HSf1zSr+L9RZAnHf5fuRU1a/1wxIaGhv6W8WGsM
+ eybiTUQjZ1Q/RvBbeEoAhIx9Fq78t/N7X8zdJDTMB+hJGG1OH8XMfKk6e
+ PuWujbG7AzLDX/qypvkD5Q73DROYZu+w9C2eVZ6ZGX+bafTp/TI0rwpix
+ CEiQXUHBFwQ//J2j0EydEBMrQihtJ2fYdxdc9z2NDCB1ozh7vScBH15zw
+ 0JHc6OBCgHTYaEQTmPUTRk4fxdLouZqahkEm9rcv7UNMyhq+frERQaTAC w==;
+IronPort-SDR: cF8l1fQ6IoaZwjkXAV070CW4T5+F1x+0hUXm1G0qssm044dAN3TFHkPHSDgS9RFXWh3RIFY/Nf
+ 8MOElxZ/8S6XlMBwBiMHfovVVRThGtSU7m2w2Oko8oz0UgGPaJJmpYVqFsOqtzDBQNiXv8lLQA
+ Y0yNgnb9YBX49mte8M+d7ttjP2CFgjBpFA9KF0mKCFNKlvlbnMJLRAet8JLi3x/YM7wGJMY7Bp
+ gGSgASKuWT2+M3D64Cd2jPX1hwufaR3N+kfH/4NkktX2p8kiO/K22CoW4sVH1S+Otql4CaKgvV
+ zSM=
+X-IronPort-AV: E=Sophos;i="5.75,332,1589212800"; d="scan'208";a="146394137"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 10 Jul 2020 06:14:11 +0800
+IronPort-SDR: hwg1EvKylje0nS6w7Es9n2W5hiTsyRKEmrCqzEzSgvXQfkpAK9vtkGrVOFeS4CYu8mWZwTZUQ3
+ iia+9fNgE7n8bwXLjimN9mdyjU7vfbqLw=
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Jul 2020 15:02:46 -0700
+IronPort-SDR: Sb0N/yHQONwEBSDqfDttpT39uToqz+N0WkjXXdkkwGEYQAXbW389SlmXvfDPxWb+U2Fv/Uq4HJ
+ AXh4G7/YSfvg==
+WDCIronportException: Internal
+Received: from 6hj08h2.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.57.245])
+ by uls-op-cesaip01.wdc.com with ESMTP; 09 Jul 2020 15:14:11 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v2 v2 0/2]  A few RISC-V fixes
+Date: Thu,  9 Jul 2020 15:04:45 -0700
+Message-Id: <cover.1594332223.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <1594289144-24723-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1594289144-24723-1-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 9 Jul 2020 10:19:00 -0700
-Message-ID: <CAKmqyKPYG8wuS5zP58PqqZD=ZAYpmsE=+VwUH7N6ZiBH3APMBg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] hw/riscv: Modify MROM size to end at 0x10000
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.153.141;
+ envelope-from=prvs=45291e402=alistair.francis@wdc.com;
+ helo=esa3.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/09 18:14:11
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -78,75 +80,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jul 2020 17:28:55 -0000
+X-List-Received-Date: Thu, 09 Jul 2020 22:14:19 -0000
 
-On Thu, Jul 9, 2020 at 3:06 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> At present the size of Mask ROM for sifive_u / spike / virt machines
-> is set to 0x11000, which ends at an unusual address. This changes the
-> size to 0xf000 so that it ends at 0x10000.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 
-Thanks!
+This series has a few fixes for RISC-V OpenTitan
 
-Applied to riscv-to-apply.next
+v2:
+ - Convert Ibex UART to the register field API
 
-Alistair
+Alistair Francis (2):
+  hw/char: Convert the Ibex UART to use the qdev Clock model
+  hw/char: Convert the Ibex UART to use the registerfields API
 
-> ---
->
-> (no changes since v1)
->
->  hw/riscv/sifive_u.c | 2 +-
->  hw/riscv/spike.c    | 2 +-
->  hw/riscv/virt.c     | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index dc46f64..3413369 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -70,7 +70,7 @@ static const struct MemmapEntry {
->      hwaddr size;
->  } sifive_u_memmap[] =3D {
->      [SIFIVE_U_DEBUG] =3D    {        0x0,      0x100 },
-> -    [SIFIVE_U_MROM] =3D     {     0x1000,    0x11000 },
-> +    [SIFIVE_U_MROM] =3D     {     0x1000,     0xf000 },
->      [SIFIVE_U_CLINT] =3D    {  0x2000000,    0x10000 },
->      [SIFIVE_U_L2LIM] =3D    {  0x8000000,  0x2000000 },
->      [SIFIVE_U_PLIC] =3D     {  0xc000000,  0x4000000 },
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index a187aa3..ea4be98 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -57,7 +57,7 @@ static const struct MemmapEntry {
->      hwaddr base;
->      hwaddr size;
->  } spike_memmap[] =3D {
-> -    [SPIKE_MROM] =3D     {     0x1000,    0x11000 },
-> +    [SPIKE_MROM] =3D     {     0x1000,     0xf000 },
->      [SPIKE_CLINT] =3D    {  0x2000000,    0x10000 },
->      [SPIKE_DRAM] =3D     { 0x80000000,        0x0 },
->  };
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 5ca49c5..37b8c55 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -53,7 +53,7 @@ static const struct MemmapEntry {
->      hwaddr size;
->  } virt_memmap[] =3D {
->      [VIRT_DEBUG] =3D       {        0x0,         0x100 },
-> -    [VIRT_MROM] =3D        {     0x1000,       0x11000 },
-> +    [VIRT_MROM] =3D        {     0x1000,        0xf000 },
->      [VIRT_TEST] =3D        {   0x100000,        0x1000 },
->      [VIRT_RTC] =3D         {   0x101000,        0x1000 },
->      [VIRT_CLINT] =3D       {  0x2000000,       0x10000 },
-> --
-> 2.7.4
->
->
+ include/hw/char/ibex_uart.h |  79 +++++++++---------
+ hw/char/ibex_uart.c         | 158 +++++++++++++++++++++---------------
+ 2 files changed, 129 insertions(+), 108 deletions(-)
+
+-- 
+2.27.0
+
 
