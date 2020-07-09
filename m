@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jsy4W-000250-Nu
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Jul 2020 20:36:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51196)
+	id 1jtL40-0002Th-Gk
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Jul 2020 21:09:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53438)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jsy4U-00023O-Nc; Tue, 07 Jul 2020 20:36:22 -0400
-Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:39032)
+ id 1jtL3y-0002QX-Es; Wed, 08 Jul 2020 21:09:22 -0400
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:53750)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jsy4T-00030O-2v; Tue, 07 Jul 2020 20:36:22 -0400
-Received: by mail-yb1-xb41.google.com with SMTP id 134so1267305ybd.6;
- Tue, 07 Jul 2020 17:36:20 -0700 (PDT)
+ id 1jtL3w-0004dE-QE; Wed, 08 Jul 2020 21:09:22 -0400
+Received: by mail-pj1-x1042.google.com with SMTP id cm21so339068pjb.3;
+ Wed, 08 Jul 2020 18:09:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=JOFJ6oH1odZlAZAnUFbaqkxYNsQU2RyPUzhXIwucLeQ=;
- b=PbM+DraP7ezIog/lpaOhmqOVUm2U7xtcvog3SQ6MsDk7ySCPvEJd5QFWz5SOGT2Ec5
- NWTVLn4ivDNLWq0OBbF2N9Mzi5tHazyYZW+yMOilMSYOt1/yMPXOu2EyKDaW1bX5Gx6d
- MOK98P0pq6YCig3DLG7daWowVJoJA3UsxbhHziKRChklBD0pnzJXhdyqy3Uted6CqyTG
- qQlGfzyNHsU1N6S5ddQqrn46ROOtJKX8qRjIyZR7SIMhxUosby3Y0QGYpz/ORk9ZMmYn
- uYg2xFzlHwMMb9i+9t/HIbIwwREndSdV75o7/SiEQmehSiavhKV4u+N5AAclbwgF9Iz8
- WCOg==
+ h=from:to:cc:subject:date:message-id;
+ bh=DMPcXBPT3sVJAnuBxLEiaF82OmeeooQVYUpuYan8c3k=;
+ b=Vi2PWSg3ZO2OV/Qxan4Z5Tz8/zVG6mx2rml/U54zDkjFzysMUVX9Vt2h/f8/jqt1S9
+ vz+1cgcBkoDNaWZxNqHlwPwDnMErY8w34gQ6j9jmr0aoOjyJRvGoT+nn9ugTE+9lLVZZ
+ 4gnoy4Z8eX2OUGkaabAAyYXyBeRCxEe2wm089NLfSPNg6fdA1afHV8vSRQSKsWUMUG1X
+ T+LxqI1hdkKZu3YHs38ga/Kv9cjCGymkgyh9FDjfR+DSUeOHrbL2ZjLWbve+uCi4q6l/
+ t/GMDk158ifBZqdXm99w0ItIOCHynxVRaYD4JrWQjgG9BuviNctYcIXr8OA/LjyK6ed6
+ wSMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=JOFJ6oH1odZlAZAnUFbaqkxYNsQU2RyPUzhXIwucLeQ=;
- b=nctpo6t9xtDTfjfxUHK97Aqn+P73pINVeEsm+Qoo2NJ8dQ8rNBoweeyGY3fskzS342
- 3F79d27JMTsJsL/rWknfZ6YOTbC4uuJwfky0IdqbbB0gekNfTJMndUHt6fV1Dmfd1IKl
- w7da/de9BjfEOJpdh3OsIDCJIg4FyDop+WNGB9zQ+p9oBI2T9iB6t6kvVXa+46CfTmkc
- Rde15J8k59Vkl7kmyUx+GA/RSpmnEa3hp8VZydBcXqDuWEkONy5jowTtVhwT5klEQjMy
- K4y8g8p8HiJDvft2lhkPpumjqbx+fg33ArHhohmcraX2UiOpv08FJuJTvFmiKR7F/YU/
- kLCw==
-X-Gm-Message-State: AOAM53167RZQZmdevc1priuYKS1DvU2kR95e+H5S5GyPlfwHuzyEJZAL
- 19V5nPcc5K7BTCdxeAt+9PdY8xMKncLv3s8wdjA=
-X-Google-Smtp-Source: ABdhPJztWCqWstM+bypnEWIaddYqNa2s5I+B4MpqT78Q9BTznFkV31RkJ0ixJm8NKqN7RdqJAOjmq2Ws3r5aMCRSMw0=
-X-Received: by 2002:a25:aea5:: with SMTP id b37mr33327035ybj.239.1594168579465; 
- Tue, 07 Jul 2020 17:36:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1593547870.git.alistair.francis@wdc.com>
- <ea4f280e6f77e734c8e555e3c98d10085ce9f5b6.1593547870.git.alistair.francis@wdc.com>
- <CAEUhbmVsQX+es-xw5Omj+-dsU1Km2kKNAZa_NJ6PipE4ZAEucA@mail.gmail.com>
- <CAKmqyKPDUVCVcm8d8bAqr=M_atAgfsFSAMhv6DZ5hOC5aAUHXQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKPDUVCVcm8d8bAqr=M_atAgfsFSAMhv6DZ5hOC5aAUHXQ@mail.gmail.com>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=DMPcXBPT3sVJAnuBxLEiaF82OmeeooQVYUpuYan8c3k=;
+ b=kBynESmhQit1E+SJoMVgKDfw9F9CGVGdT8S3KF2PNDxuqaf0Cn9SaxypOsP/LcloqI
+ ipyRodF2BgWmuy3bBXlqby0DYG1v7d0ven7PCYECQrY3Wk23iB//v5dGaayI4gf/cnz8
+ jdNomHAVoyy9jTZOMHIK9ibswsWLZFhUO5P6yS8YhvQON6Q2ame++NuigGFDdlhjOy7y
+ ZGPlnNiTGJlD9e1t3U43+9pxYQ4KCLvGF5RIT87iVMtpV8yM4haPiKGA9h6qeo3HQ/Pc
+ jvVBBx9Es4bHOowtUDiIo0gP59gJ1Ifp0R8zug7MfhaYi3AcR/pNVhwpUUSICMiV00hX
+ LpGg==
+X-Gm-Message-State: AOAM530eaLQ7dsVa+1y5ueOq6NICDcn3UvHyZjwh7AsF/K0k58+JR32p
+ XY3+dsK/0Z/0X75uZqb1EzU=
+X-Google-Smtp-Source: ABdhPJwHbl/7sm6/OYM0/wmHJptwsbxmFGtE4ApODFf1PPYYb0q6jb7TZ7GpqWfC95+1eXGaq8p+Dg==
+X-Received: by 2002:a17:902:c401:: with SMTP id
+ k1mr30542589plk.202.1594256958565; 
+ Wed, 08 Jul 2020 18:09:18 -0700 (PDT)
+Received: from localhost.localdomain (unknown-224-80.windriver.com.
+ [147.11.224.80])
+ by smtp.gmail.com with ESMTPSA id g3sm868071pfq.19.2020.07.08.18.09.17
+ (version=TLS1 cipher=AES128-SHA bits=128/128);
+ Wed, 08 Jul 2020 18:09:18 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 8 Jul 2020 08:36:08 +0800
-Message-ID: <CAEUhbmXRWw7nDJsDLX+8r4D7MzVM=Tkcb7DodOf+tQ5yC9G3Zw@mail.gmail.com>
-Subject: Re: [PATCH v1 3/3] target/riscv: Regen floating point rounding mode
- in dynamic mode
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
+To: Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH 1/2] hw/riscv: Modify MROM size to end at 0x10000
+Date: Wed,  8 Jul 2020 18:09:04 -0700
+Message-Id: <1594256945-21744-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1042;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1042.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -76,33 +75,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jul 2020 00:36:23 -0000
+X-List-Received-Date: Thu, 09 Jul 2020 01:09:22 -0000
 
-Hi Alistair,
+From: Bin Meng <bin.meng@windriver.com>
 
-On Wed, Jul 8, 2020 at 1:33 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Thu, Jul 2, 2020 at 6:25 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > On Wed, Jul 1, 2020 at 4:23 AM Alistair Francis
-> > <alistair.francis@wdc.com> wrote:
-> > >
-> > > When a guest specificies the the rounding mode should be dynamic 0b111
-> > > then we want to re-caclulate the rounding mode on each instruction. The
-> > > gen_helper_set_rounding_mode() function will correctly check the
-> > > rounding mode and handle a dynamic rounding, we just need to make sure
-> > > it's always called if dynamic rounding is selected.
-> > >
-> > > Fixes: 1885350 ("RISCV dynamic rounding mode is not behaving correctly")
-> >
-> > I can't find this commit id.
->
-> It's a launchpad bug case: https://bugs.launchpad.net/qemu/+bug/1885350
->
+At present the size of Mask ROM for sifive_u / spike / virt machines
+is set to 0x11000, which ends at an unusual address. This changes the
+size to 0xf000 so that it ends at 0x10000.
 
-My understanding is that the convention used in "Fixes" tag is for
-commit id. 1885350 is not a commit id but a QEMU bug report id.
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+---
 
-Regards,
-Bin
+ hw/riscv/sifive_u.c | 2 +-
+ hw/riscv/spike.c    | 2 +-
+ hw/riscv/virt.c     | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index dc46f64..3413369 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -70,7 +70,7 @@ static const struct MemmapEntry {
+     hwaddr size;
+ } sifive_u_memmap[] = {
+     [SIFIVE_U_DEBUG] =    {        0x0,      0x100 },
+-    [SIFIVE_U_MROM] =     {     0x1000,    0x11000 },
++    [SIFIVE_U_MROM] =     {     0x1000,     0xf000 },
+     [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
+     [SIFIVE_U_L2LIM] =    {  0x8000000,  0x2000000 },
+     [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index a187aa3..ea4be98 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -57,7 +57,7 @@ static const struct MemmapEntry {
+     hwaddr base;
+     hwaddr size;
+ } spike_memmap[] = {
+-    [SPIKE_MROM] =     {     0x1000,    0x11000 },
++    [SPIKE_MROM] =     {     0x1000,     0xf000 },
+     [SPIKE_CLINT] =    {  0x2000000,    0x10000 },
+     [SPIKE_DRAM] =     { 0x80000000,        0x0 },
+ };
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 5ca49c5..37b8c55 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -53,7 +53,7 @@ static const struct MemmapEntry {
+     hwaddr size;
+ } virt_memmap[] = {
+     [VIRT_DEBUG] =       {        0x0,         0x100 },
+-    [VIRT_MROM] =        {     0x1000,       0x11000 },
++    [VIRT_MROM] =        {     0x1000,        0xf000 },
+     [VIRT_TEST] =        {   0x100000,        0x1000 },
+     [VIRT_RTC] =         {   0x101000,        0x1000 },
+     [VIRT_CLINT] =       {  0x2000000,       0x10000 },
+-- 
+2.7.4
+
 
