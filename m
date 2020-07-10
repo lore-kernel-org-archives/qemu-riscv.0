@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtsco-0006cG-SC
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37100)
+	id 1jtscp-0006cq-1z
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37418)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqd4-0005DA-Lw
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:42 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:46799)
+ id 1jtqdV-0005Od-QV
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:52:09 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433]:42311)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqd3-0006bI-2i
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:42 -0400
-Received: by mail-pf1-x431.google.com with SMTP id i14so2369512pfu.13
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:51:40 -0700 (PDT)
+ id 1jtqdT-0006eq-KG
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:52:09 -0400
+Received: by mail-pf1-x433.google.com with SMTP id 1so2376380pfn.9
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:52:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=2eepYDRNDWrdw3gKaNt6ZPFFqa2QCWqaNWVSQxHa3vo=;
- b=i+IpiXveesHNLFgGx4yjIsYRegm5CfgCS8Vv5v1vLdMSD69ulwreh2HW7fAVQFJ0rB
- Bb8qJxSesl1h3l/L2Tmshry0RF6xRE7CKzQV1nQzc15+OXMFMfJACDlDMRP3Vtw8y9Z4
- 3+evjoC3DzRB0RAg2sdE0w1T+3WqBqjwaktPFrKd2V30xlfYNaXiUxW9C2hvSgYgZa21
- KluXUsIiXBHmLWhnG/H4WcZukqUFTDb4fZ0QsCalTP3BPf+1WDWJV+8pOMkAfO8NkzbA
- eqYRPTrs4cbJRdyv0y6roU1+fm1u918FacJZeQ/0v64BLmoHJ4QHOz9/zgscJYDEc46q
- op3g==
+ bh=4piOJT33/Ks8zF+9lTjhNZDrDdEfFTDr1vcWWDQC6yw=;
+ b=ksTjYxWdPj1ksMb3WDrIljRPevALRn6DhxvTjc0nHKyRJGMgAkyH+YnCi3vucNCUqr
+ nc6iFjvuxpA2AiGa8ni4RI/VIfleJRcorCi60D4aCul08jjaY4anY/76FdY0Gz/++TkW
+ uH5oI90akm4hfk2jymSe7YqgIwZhx7hErc3DXFL7ZjraTr59SYLflWxC5qRzEkuH6C0b
+ BCi5x4m2AlUt8zSBfcXnoPhcUU4RUXI+p5HvlxdfUmHfYRCFrEOimZoGXgEuq5PjRYUc
+ dA6WKcR+sMBMHtt2ylTWcwyDXKoVGgXa5wSIRYm9CNu6iRNRTHIaK9t9xqLwChl63YOP
+ F16A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=2eepYDRNDWrdw3gKaNt6ZPFFqa2QCWqaNWVSQxHa3vo=;
- b=ufF8tEi7L8q4VQjBUG5JLUQ3f83wDelynvnkdFx4AnNFfq7KfI7Umx5rXOyd3GQFbd
- vmpzIcVmwFTutGOn6saLtMmbcg9CYe9HPN+vUs8R9rnQf+IqJyCWQFovTBRXIfRcRMFX
- JjcnfQwJaRqVLEdFovaZ/U5KtwSBvZT2DOAhNF/FgwP1Yicxy9Kh/nzQFK1PeLcRj6ix
- 1mpxHJa5y9QHG+Fr/JZZuMjWU6tRIO7nG4XipFo/Km2RY9/z2IK40mrh/l99I8/Ro8Kt
- it+50OakFWZWmZrsSZrSVGk1Wy7HdeNYbUZRH2wjHDpGXn8bzmNCcWGuSgMIj+dfFaic
- eA6w==
-X-Gm-Message-State: AOAM530u7n49EuZrDTgXvxbzQxSVZPUuBi34zEBza4DqKPcmxVh5FUp3
- hcfeBo8YFeVU3ugWAlIU/wJ8GLIF1FnG9A==
-X-Google-Smtp-Source: ABdhPJy+AOxwaWG68THtDwJChz9szmwm1j8HtIhRor7P7c1MKOdG5Btu8q9Qb+cMOslJ513mB0iFMw==
-X-Received: by 2002:aa7:9685:: with SMTP id f5mr10652142pfk.223.1594378299917; 
- Fri, 10 Jul 2020 03:51:39 -0700 (PDT)
+ bh=4piOJT33/Ks8zF+9lTjhNZDrDdEfFTDr1vcWWDQC6yw=;
+ b=tqlG2mtekusGsWszJbxtfrGE9madOAaNSirQlxdMcbrrrRFvHPu5C/SO+0YXK0PL6k
+ 5mlWIznzMbZHfyu+ZYakU5lsAJoJdPx0bdKkFQOc0bpi/RllNEGKv5gUyZbujvQnYBBl
+ F71RBCt5YtFAaC+hJ02WF30H1ZNch+jAIN3dr7c+Ja9BNHr8CkARQn18I5FgUTDN8mon
+ w5pGMTfQsN3TcxjY0Ra0oDTmBizI6laqB92QCAZFVqx3ntyuaRZYkedqeykgD24BkOAC
+ dfYMSEIK//qYMrb9vpuHMkbWuW0ILn1WqlUL/mH6usav79efyV+7Hh5pOCMrrq3plPUf
+ 38bg==
+X-Gm-Message-State: AOAM530sad5NUvxsZq1Va4tu1JXPQ6cQQpwowdkIMyYp01ptL1IVYt+r
+ zt/He74aGpPJquFrZhZBYSh6YQ==
+X-Google-Smtp-Source: ABdhPJxUg86F8XFbRrre2d2UX3el93oN91C9dHdbPiUxviEMiCwL3gYCHAsRmtX97j9Q40e2rEkIaA==
+X-Received: by 2002:a63:e60b:: with SMTP id g11mr59807259pgh.188.1594378326469; 
+ Fri, 10 Jul 2020 03:52:06 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.51.38
+ by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.52.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2020 03:51:39 -0700 (PDT)
+ Fri, 10 Jul 2020 03:52:06 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -50,15 +50,15 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC 16/65] target/riscv: rvv-0.9: fix address index overflow bug of
- indexed load/store insns
-Date: Fri, 10 Jul 2020 18:48:30 +0800
-Message-Id: <20200710104920.13550-17-frank.chang@sifive.com>
+Subject: [RFC 23/65] target/riscv: rvv-0.9: floating-point classify
+ instructions
+Date: Fri, 10 Jul 2020 18:48:37 +0800
+Message-Id: <20200710104920.13550-24-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200710104920.13550-1-frank.chang@sifive.com>
 References: <20200710104920.13550-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x433.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -67,9 +67,9 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 10 Jul 2020 08:58:58 -0400
+X-Mailman-Approved-At: Fri, 10 Jul 2020 08:58:59 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,37 +81,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 10:51:42 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 10:52:10 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Replace ETYPE from signed int to unsigned int to prevent index overflow
-issue, which would lead to wrong index address.
-
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/vector_helper.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ target/riscv/insn32.decode | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index a2926427ce..3ec56bb6fc 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -456,10 +456,10 @@ static target_ulong NAME(target_ulong base,            \
-     return (base + *((ETYPE *)vs2 + H(idx)));          \
- }
- 
--GEN_VEXT_GET_INDEX_ADDR(idx_b, int8_t,  H1)
--GEN_VEXT_GET_INDEX_ADDR(idx_h, int16_t, H2)
--GEN_VEXT_GET_INDEX_ADDR(idx_w, int32_t, H4)
--GEN_VEXT_GET_INDEX_ADDR(idx_d, int64_t, H8)
-+GEN_VEXT_GET_INDEX_ADDR(idx_b, uint8_t,  H1)
-+GEN_VEXT_GET_INDEX_ADDR(idx_h, uint16_t, H2)
-+GEN_VEXT_GET_INDEX_ADDR(idx_w, uint32_t, H4)
-+GEN_VEXT_GET_INDEX_ADDR(idx_d, uint64_t, H8)
- 
- static inline void
- vext_ldst_index(void *vd, void *v0, target_ulong base,
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 1d34fa647b..7ad936e605 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -532,7 +532,7 @@ vmfgt_vf        011101 . ..... ..... 101 ..... 1010111 @r_vm
+ vmfge_vf        011111 . ..... ..... 101 ..... 1010111 @r_vm
+ vmford_vv       011010 . ..... ..... 001 ..... 1010111 @r_vm
+ vmford_vf       011010 . ..... ..... 101 ..... 1010111 @r_vm
+-vfclass_v       100011 . ..... 10000 001 ..... 1010111 @r2_vm
++vfclass_v       010011 . ..... 10000 001 ..... 1010111 @r2_vm
+ vfmerge_vfm     010111 0 ..... ..... 101 ..... 1010111 @r_vm_0
+ vfmv_v_f        010111 1 00000 ..... 101 ..... 1010111 @r2
+ vfcvt_xu_f_v    100010 . ..... 00000 001 ..... 1010111 @r2_vm
 -- 
 2.17.1
 
