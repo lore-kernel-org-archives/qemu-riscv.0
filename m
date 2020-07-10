@@ -1,62 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtxrL-0005g9-2c
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 14:34:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45900)
+	id 1jty2R-0000cp-09
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 14:46:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48268)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jtxrJ-0005fb-1a; Fri, 10 Jul 2020 14:34:53 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:36799)
+ id 1jty2P-0000cc-41; Fri, 10 Jul 2020 14:46:21 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:36560)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jtxrD-0006bp-LS; Fri, 10 Jul 2020 14:34:52 -0400
-Received: by mail-io1-xd42.google.com with SMTP id y2so7057236ioy.3;
- Fri, 10 Jul 2020 11:34:46 -0700 (PDT)
+ id 1jty2N-0008Aw-79; Fri, 10 Jul 2020 14:46:20 -0400
+Received: by mail-il1-x142.google.com with SMTP id x9so5951468ila.3;
+ Fri, 10 Jul 2020 11:46:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/z6DLBz413FMPmE+w+/tds6gqklZ6f/Dtvv31G6dQWI=;
- b=MDD7NEeCfQnmuIBEXifC7sXvZWmiyVDesXdmG7sdyweiTS43+8hP95TTPv5/UgTiYA
- ApJaEjzW6liCe2ej7hOODlEhyMdRU0Aqb7KA97tWCAaCambqdgByD/an2Zv0NWLTiHSS
- Dw1n23ozz9Siq9Gyizidspq6plJB9ctN+1gZ/gD9N0TnP/kVce8E/jrpqiaCpSuJBJVk
- umUNDztJPxe1eQgg+JqT88WA/1GHeBEov2S/eY+m0sWrz+ozqEy5WM/H8//7zSI7w+9/
- +rlmmMsdHezUq/Ahmhq2bpIyE+v/eDFmMBn0itmrvsNkYy05mzB3VoGFgc3EYyK49wCc
- KsCw==
+ :cc; bh=74PRxuwVQhYKAeFYZ/fJ9AQ94hWBTbTARAGzqRn6L6Q=;
+ b=jhLsxzIVio/KldHc+nTKEFBOLHzlwdUC3BUWRAYCX3MOqw6VNaH25SYBMD4sfaw4+b
+ U7Cxo0VMBALLUp/7UzFQUoN9ayC6uIYMseZlj53fOx+eCALtpJ6jNi+1ZwBG1oBj7EAD
+ 6OZBSfxOH78sWASUveMxx754jIcOMThDpStAZ4X1WKI9OIC29EVFrSXZ81mqxPrqkzYq
+ PVhnx/shXTRiq0AB/T5qK2j9lXvr6JVfrppCo43jJliSu63Ei8PYlZhIoi5tnyco1FWV
+ UpdzG5AfpYlQW0kzoVdcPU7wY7o6nc4zmfyNRS2U9FF0iQZi88wy1XBG27OY0xgKklD3
+ lmGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/z6DLBz413FMPmE+w+/tds6gqklZ6f/Dtvv31G6dQWI=;
- b=W1hKZd5JsrorgvG5YVV8s2JqtbjBn20HqX8VfsYNJtVW0MKxoeULvxK0t8LJunfqtC
- C3hDX6V4q1T/Q4VhZ+6ld/mqW1yRsGG6aB0/hfWzXJQgysz2qPl7HdBweGLuYw1w0euG
- ooGQaAd/pWdMZALtzoH0UTSYTKqaK9rbhCkH1eyMSzixAOKRQZf9JyHNy1neWzWcnh1J
- UoQ0/K9AuKnKUMbSiBBS+qGzLoQ37pyNGUCR7JWXLYFfCz5vTzrl3fHaxSJcBzButvfj
- cv56cvbwjXwFdQOl26XPWSNkMpZyyF+2xDmbdQNZBQUmU6JxNYvMNM84yuHALMLdpQWB
- bcjA==
-X-Gm-Message-State: AOAM533Is+ockl/jdPYgZkdAhb9n6rp674iFlor1isZbLJFyZyAegwRr
- PYPf5GyTOZDDjnOCORDOxctlQ03Ywk7O/feUAEU=
-X-Google-Smtp-Source: ABdhPJz0E+0EOvWGMBaOEpDgZ5FA1EemwtBL5bZUMsyoVrCtsLIogjX50N27/j/y+ARZkxNP5gxBMs6QMLXeL5L18yE=
-X-Received: by 2002:a5d:9ed0:: with SMTP id a16mr48422328ioe.176.1594406085913; 
- Fri, 10 Jul 2020 11:34:45 -0700 (PDT)
+ bh=74PRxuwVQhYKAeFYZ/fJ9AQ94hWBTbTARAGzqRn6L6Q=;
+ b=nTTXsNutjMnyHFIApUZx11kKA/8FACmE7QxMJ1XOMOs10IIMfiGLxbHfH+XpiMNnnl
+ 7ewnV2ic4M6Go5yYPDg0Y+xRBPFNly3tDhUhCC2lhIkHMz6cLTk981vRtjz3WPo8Gh+2
+ n9CF8XXNo3ecHZzHLAUhSlCCQ8rVNJzLZyu/sf2GdTHQysE4FDOzqz0sFkwJNugPlfFU
+ 5fTYwnNqVTU0mZ9+7hfp0pRsTGe+r8epNvCchcva+oXHCEoYalwzfGAjejXGN9sgx+ht
+ pCMl+al49oeyDmNSFSUpjJBVihzrcpMML0dvVVUZNx3PaRYKI/bHeWL7dwnmO4Yu8vf7
+ hsAA==
+X-Gm-Message-State: AOAM533kO0z+rXGXM+VqKILfe6rUidIRu//iivvIuQbKvJXnvkzDU0IQ
+ sAR47aMRN2hD8Wt1kHnAhwr0sDjL+xRHA0vI8CM=
+X-Google-Smtp-Source: ABdhPJyxU/4bU23xfHtn4O1MWIDux9riBbVRSttITXs1Kx8vhIgPecyvE+AEhzwmWgNgYIKHi1gNmyksLKFdOGvQg8A=
+X-Received: by 2002:a92:d186:: with SMTP id z6mr56528745ilz.227.1594406777569; 
+ Fri, 10 Jul 2020 11:46:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200710104920.13550-1-frank.chang@sifive.com>
- <20200710104920.13550-2-frank.chang@sifive.com>
- <9be2326f-96d8-7680-d068-6fac66ba0be8@linaro.org>
-In-Reply-To: <9be2326f-96d8-7680-d068-6fac66ba0be8@linaro.org>
+References: <1594357499-29068-1-git-send-email-bmeng.cn@gmail.com>
+ <1594357499-29068-8-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1594357499-29068-8-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 10 Jul 2020 11:24:50 -0700
-Message-ID: <CAKmqyKMMsEW_NmnjmOV-4PTfvdEGP_jK8T51Z=8tArZ3rcEXUA@mail.gmail.com>
-Subject: Re: [RFC 01/65] target/riscv: fix rsub gvec tcg_assert_listed_vecop
- assertion
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: frank.chang@sifive.com, 
+Date: Fri, 10 Jul 2020 11:36:24 -0700
+Message-ID: <CAKmqyKPf4YH9Ut1mTLRoRdk-aja6wTKS-FhA-5LynbCeajh-_Q@mail.gmail.com>
+Subject: Re: [PATCH v4 7/7] Makefile: Ship the generic platform bios images
+ for RISC-V
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- LIU Zhiwei <zhiwei_liu@c-sky.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+ Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -79,32 +78,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 18:34:53 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 18:46:21 -0000
 
-On Fri, Jul 10, 2020 at 9:13 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Thu, Jul 9, 2020 at 10:11 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On 7/10/20 3:48 AM, frank.chang@sifive.com wrote:
-> > From: Frank Chang <frank.chang@sifive.com>
-> >
-> > gvec should provide vecop_list to avoid:
-> > "tcg_tcg_assert_listed_vecop: code should not be reached bug" assertion.
-> >
-> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> > ---
-> >  target/riscv/insn_trans/trans_rvv.inc.c | 5 +++++
-> >  1 file changed, 5 insertions(+)
+> From: Bin Meng <bin.meng@windriver.com>
 >
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Update the install blob list to include the generic platform
+> fw_dynamic bios images.
 >
-> Alistair, this one should be queued for 5.1 as a bug fix.
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Thanks for reviewing these. I have applied the first 4 to my PR for 5.1.
+You didn't address the comments in v3.
+
+Thinking about this more though it looks like we currently don't
+install anything, so this is an improvement.
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 >
+> ---
 >
-> r~
+> (no changes since v3)
+>
+> Changes in v3:
+> - change fw_jump to fw_dynamic in the Makefile
+>
+> Changes in v2:
+> - new patch: Makefile: Ship the generic platform bios images for RISC-V
+>
+>  Makefile | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/Makefile b/Makefile
+> index f06b3ae..05e05bb 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -840,7 +840,9 @@ palcode-clipper \
+>  u-boot.e500 u-boot-sam460-20100605.bin \
+>  qemu_vga.ndrv \
+>  edk2-licenses.txt \
+> -hppa-firmware.img
+> +hppa-firmware.img \
+> +opensbi-riscv32-generic-fw_dynamic.bin opensbi-riscv32-generic-fw_dynamic.elf \
+> +opensbi-riscv64-generic-fw_dynamic.bin opensbi-riscv64-generic-fw_dynamic.elf
+>
+>
+>  DESCS=50-edk2-i386-secure.json 50-edk2-x86_64-secure.json \
+> --
+> 2.7.4
+>
 >
 
