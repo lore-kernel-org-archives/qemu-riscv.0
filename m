@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtscg-0006EJ-ME
+	id 1jtscg-0006Ew-TC
 	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37328)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37624)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqdS-0005Mx-1J
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:52:06 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:55412)
+ id 1jtqdo-0005V8-UB
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:52:28 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:33739)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqdQ-0006eG-G7
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:52:05 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id ch3so2448591pjb.5
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:52:04 -0700 (PDT)
+ id 1jtqdn-0006hM-B7
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:52:28 -0400
+Received: by mail-pl1-x641.google.com with SMTP id 72so2113304ple.0
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:52:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=mGnKSMkKMtsxEVb7JFS0nY27EekRK3d4wsP51kVAl90=;
- b=Zuf+vGmqjzcAJJn8IEs0hWUiO+M0vI+4INjHzDDG5u69S//0fx/ZqKsTOVsXWd/yPi
- ii+95JFuylF0GzdKwNom5gSf19r9b9sWofO7tZWBuOIWlG1/TEGK3zbIH5SyesySgAaE
- jkWABx3hXsHHSbU+ZozSqoVf2tmReRggfwyVGs5q8bu845I1na4geA0FyQGwNuW1y72w
- Smus/PKprmdsD/01NgfzJo+hgKzgf1GyxWQCiBAkT1EOvdtSYlqxYNSEhYAfR4rLATYJ
- Utt3aEus4oIBAfGK9pZEaVO1rBKfIYBRlfYHRy4KQXL8YBHhIKVs7d2sSSSi2+V6C54X
- C6tQ==
+ bh=L4Kzsw7wUWuVwYBl74RPS8EslTXrh5P2ZhIpCnrFxpQ=;
+ b=AXGSNlW/DmpQEPlIj1iYGCQ6q5VKp++KbE4TvMCO3hguVg8qB50762WxSabIOsHFdS
+ tceUOedVxbiz1x1fRxnkelW09YaWDOP9fJNO1Bet7D4+OOFEHOQbSyxCFhoBUa1BTBsd
+ H/oDPOfB5H8h/BKfWXDZHLrYmtqLjTVRz3ctm51CxGEVi6RlHeTJIiUYIZ2mu7cbBCjT
+ lXN4W//Vu2iRp9/7vJKEEXvEFZL4xyfO8CRgZqRJOtuRAclWnoUAxoY39UUdlFjLWoDK
+ SJZdT4BRlObggoOTdsioL5UeRT4m7+vqgO/OhYD80fc2p4uRCepvQqQyPEAQKmuYuD3U
+ 4pcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=mGnKSMkKMtsxEVb7JFS0nY27EekRK3d4wsP51kVAl90=;
- b=tdxI58dEuKoAw9q8RuKW+++UV/1p5SZkGJBimYQl+0SVLqvQ/uaDDUhpbYc3/ggiMT
- lRNVJobjoFB4rnT3FcL2hAvO9if266KOXvZFyJK6hIU2ZhFf3y8IRgUxSlFY6ws3aqnn
- 2sTWtxjYymHSOg7Ef9Ih1ygIBB2AtAkgtE+10+hlg5yX2xd2r16kDxRfP7eRgn9vEUz9
- mF1HOfNoAMSLdUB5kMDFnj6bkAupWG/snYlBB0p7MsHUNibswFoSUpsIxO89TTSbmkW6
- 2ouqACcuIqGQMWAMccTj0n7MfGxAbMHPJGBUuZYUNCKWI1xoHHbNWv0IrTwBde3JCtQQ
- UUPQ==
-X-Gm-Message-State: AOAM532PDQEguuS1rgUHzYmf3ykLwk/C7faSRnEjtivdd+6VNYSLMpuA
- +P4hX1iLQA0DOg3E8/xWdCVlYw==
-X-Google-Smtp-Source: ABdhPJyzbPxUZXhnlpeVNHG6c5CN+lyeYYtkgZ2qM4meUS8EtasSa4AvT/hJgq0kVLQW2oSi6p1dtg==
-X-Received: by 2002:a17:902:8204:: with SMTP id
- x4mr53877958pln.16.1594378323192; 
- Fri, 10 Jul 2020 03:52:03 -0700 (PDT)
+ bh=L4Kzsw7wUWuVwYBl74RPS8EslTXrh5P2ZhIpCnrFxpQ=;
+ b=T2FnyhBFdOzH+7eCOqYFJRAsb0hpoFlK8mPsJGFmrFsO8PMCWeJhGdUV+e1XbaXwD2
+ AcO7jsqiC5a8k97EF/dYVTl0Ivdoonkh8whjN7/deqjM3nRS01MX41bJtnro2ne23L22
+ RGpogn/2+6VsxXfHjY3OcfMHnhKfqw2TVZi93oWSPYx6KgIME0SsHuJ4InLO/zfB2J5x
+ Y4bljSxPJV9HhwYkKDZ4u+Twnln70c0EjmHkvAqxXr1NnJ+oWJUNhZzwZFHZJIY2DC3Y
+ zcWwJDny6CNoZ323hRqtUA/HL15DsBnm95NJsL957ZiJ1rtkwtuTW9hItwT1k9tNVSpV
+ svHg==
+X-Gm-Message-State: AOAM530PsPb559xiDv86FI1NLVtl6BYzLVZQ+W89dF+FpYUmJUUE4pns
+ CtFgqF3Ssxt1OEGvbPBmhJtfqtpfqTibhQ==
+X-Google-Smtp-Source: ABdhPJwUvBPlCa0vvkaJFSsNoBRe8A66YVBpxOWdBPN/HyJHx2XLliXC7YfKXQCadAMny/p75JnKPg==
+X-Received: by 2002:a17:902:446:: with SMTP id
+ 64mr14668853ple.157.1594378346243; 
+ Fri, 10 Jul 2020 03:52:26 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.52.01
+ by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.52.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2020 03:52:02 -0700 (PDT)
+ Fri, 10 Jul 2020 03:52:25 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC 22/65] target/riscv: rvv-0.9: floating-point square-root
- instruction
-Date: Fri, 10 Jul 2020 18:48:36 +0800
-Message-Id: <20200710104920.13550-23-frank.chang@sifive.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [RFC 28/65] target/riscv: rvv-0.9: element index instruction
+Date: Fri, 10 Jul 2020 18:48:42 +0800
+Message-Id: <20200710104920.13550-29-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200710104920.13550-1-frank.chang@sifive.com>
 References: <20200710104920.13550-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::641;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x641.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -82,28 +83,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 10:52:06 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 10:52:29 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn32.decode | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/insn32.decode              |  2 +-
+ target/riscv/insn_trans/trans_rvv.inc.c | 40 ++++++++++++-------------
+ 2 files changed, 21 insertions(+), 21 deletions(-)
 
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index e3f0fba912..1d34fa647b 100644
+index 4560bc4379..01316c908d 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -509,7 +509,7 @@ vfwmsac_vv      111110 . ..... ..... 001 ..... 1010111 @r_vm
- vfwmsac_vf      111110 . ..... ..... 101 ..... 1010111 @r_vm
- vfwnmsac_vv     111111 . ..... ..... 001 ..... 1010111 @r_vm
- vfwnmsac_vf     111111 . ..... ..... 101 ..... 1010111 @r_vm
--vfsqrt_v        100011 . ..... 00000 001 ..... 1010111 @r2_vm
-+vfsqrt_v        010011 . ..... 00000 001 ..... 1010111 @r2_vm
- vfmin_vv        000100 . ..... ..... 001 ..... 1010111 @r_vm
- vfmin_vf        000100 . ..... ..... 101 ..... 1010111 @r_vm
- vfmax_vv        000110 . ..... ..... 001 ..... 1010111 @r_vm
+@@ -579,7 +579,7 @@ vmsbf_m         010100 . ..... 00001 010 ..... 1010111 @r2_vm
+ vmsif_m         010100 . ..... 00011 010 ..... 1010111 @r2_vm
+ vmsof_m         010100 . ..... 00010 010 ..... 1010111 @r2_vm
+ viota_m         010100 . ..... 10000 010 ..... 1010111 @r2_vm
+-vid_v           010110 . 00000 10001 010 ..... 1010111 @r1_vm
++vid_v           010100 . 00000 10001 010 ..... 1010111 @r1_vm
+ vext_x_v        001100 1 ..... ..... 010 ..... 1010111 @r
+ vmv_s_x         001101 1 00000 ..... 110 ..... 1010111 @r2
+ vfmv_f_s        001100 1 ..... 00000 001 ..... 1010111 @r2rd
+diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+index 0e552c3660..c03f3326cc 100644
+--- a/target/riscv/insn_trans/trans_rvv.inc.c
++++ b/target/riscv/insn_trans/trans_rvv.inc.c
+@@ -2813,27 +2813,27 @@ static bool trans_viota_m(DisasContext *s, arg_viota_m *a)
+ /* Vector Element Index Instruction */
+ static bool trans_vid_v(DisasContext *s, arg_vid_v *a)
+ {
+-    if (vext_check_isa_ill(s) &&
+-        vext_check_reg(s, a->rd, false) &&
+-        vext_check_overlap_mask(s, a->rd, a->vm, false)) {
+-        uint32_t data = 0;
+-        TCGLabel *over = gen_new_label();
+-        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    require_align(a->rd, s->flmul);
++    require_vm(a->vm, a->rd);
+ 
+-        data = FIELD_DP32(data, VDATA, VM, a->vm);
+-        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
+-        data = FIELD_DP32(data, VDATA, VTA, s->vta);
+-        data = FIELD_DP32(data, VDATA, VMA, s->vma);
+-        static gen_helper_gvec_2_ptr * const fns[4] = {
+-            gen_helper_vid_v_b, gen_helper_vid_v_h,
+-            gen_helper_vid_v_w, gen_helper_vid_v_d,
+-        };
+-        tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+-                           cpu_env, 0, s->vlen / 8, data, fns[s->sew]);
+-        gen_set_label(over);
+-        return true;
+-    }
+-    return false;
++    uint32_t data = 0;
++    TCGLabel *over = gen_new_label();
++    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++
++    data = FIELD_DP32(data, VDATA, VM, a->vm);
++    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
++    data = FIELD_DP32(data, VDATA, VTA, s->vta);
++    data = FIELD_DP32(data, VDATA, VMA, s->vma);
++    static gen_helper_gvec_2_ptr * const fns[4] = {
++        gen_helper_vid_v_b, gen_helper_vid_v_h,
++        gen_helper_vid_v_w, gen_helper_vid_v_d,
++    };
++    tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
++                       cpu_env, 0, s->vlen / 8, data, fns[s->sew]);
++    gen_set_label(over);
++    return true;
+ }
+ 
+ /*
 -- 
 2.17.1
 
