@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtscp-0006fF-Sh
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37944)
+	id 1jtscq-0006fv-2q
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38458)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqeF-0005eD-D4
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:52:55 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:40147)
+ id 1jtqew-0005uX-JH
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:53:38 -0400
+Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044]:35814)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqeC-0006mm-9c
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:52:55 -0400
-Received: by mail-pl1-x641.google.com with SMTP id x11so2097825plo.7
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:52:51 -0700 (PDT)
+ id 1jtqeu-0006uv-H7
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:53:38 -0400
+Received: by mail-pj1-x1044.google.com with SMTP id f16so2455797pjt.0
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:53:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=zXYHYDSZaziuRM0VIkNPoyudqwYvSOpENroC7S+5aAA=;
- b=O8mIfJmztJoY2dYjomvoyOU1ICvHk2aTiEcIPN3i4p1mtWbXxNFda+2YqDQQElV2bn
- o8XDmSGfhb7PUAAv33UD7FFSFNPbtzzsq+qoj/RwwzRA8Yv9oqJYWNmp3teHcg6fv2Gw
- sXIPSRkD3az/KqlsuSnnXPlRa0DSeXtVO4mwcmwZBVtVhiq6nueO2xbD+1RHqvIglBFO
- setBcdRxgi17s884MPhLZKVV0sq6iiQhTZv2wZn4oDUMiwXKaTq3CjkQreqP+BKxFvD6
- OqnH7D01rVH5d1G4CFhqHQfHzDIq7yU8jT5ve3icnMZOyXBwRLPSG28saABCNcDBfgMm
- 3JzA==
+ bh=raPeNNVGTWTWe3j0tOl4U7ukQw7k+xVhzTGPpxxshcQ=;
+ b=XIYMIOYOim3QsF2v9ILaHLYW8YsfR0/YOJlCK14Ve7+Ewm8I5cL+czndGXIq8HZzLS
+ GM8zPbVi7RXHeFFhaAioIeJYkcu1w1JeAyLSV2qJJtQtbKa3Dqe8yY4Az+jsZ2X6VxRd
+ EvYY7AzLaTHytLfJ4L1KhtvW1rW2FZf+suTEQAA3hmLZJP8tDuuQy+8AqthOFVdePGMk
+ 9O4EXt+EoFrnWIuTnsZbPpvKtzCd7oVkxLDbTsHYzZeghIGzKvFb7qsIN2OkvEz0yYNn
+ g38alJYbRp0LXweFTNY1ge8KF4n2aDeGaBKT+uS7RFXGcEH7YzkknXTiJiuejjy2z5Jx
+ QDNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=zXYHYDSZaziuRM0VIkNPoyudqwYvSOpENroC7S+5aAA=;
- b=HXwmT5I8lomBWN0/h4zuBWcshTvoyMDVu7pwFurXONMtSEMJADxCfiNiTlJbx4fNR3
- HxC7/RIRixuvZaScoT/J9W2wkKJPOyhWIKQY37HMp47kXt/0FanvcRcOaXyNq2Bd9XWs
- +A15bBKY9BlA+lbtqpCagunlCTS8vndErmvVS6BjxM+qUlvwT6Ux08b7t9TP8mXcCeen
- Nu/6stSlp+a7LEG32MO0xM3iWqhifzBzDw3X2n1fDqT10M7Vr27sbKFIf2XKFLtp4meu
- kVNOvBgLxZhr7xBb5o/dRGvISfXkKBtgQt9y3+rmGQUhcd7M6kmL+4bYZRt4Xjwx8S8q
- XGww==
-X-Gm-Message-State: AOAM533lW6KMb1TX0dvT0mNav+uTpL+07Yv68LdZGBwhIztkJzRVxU8Z
- 8FVKiPSmZhigHcxL9pszcaCzfg==
-X-Google-Smtp-Source: ABdhPJwyOaLmVmr1eVzG2H2mvrsXGEOce6wjEk+p52ims8ts9iMdICkC/H58KffKeEqyLiCMJioX3A==
-X-Received: by 2002:a17:90b:4d06:: with SMTP id
- mw6mr5336195pjb.190.1594378371087; 
- Fri, 10 Jul 2020 03:52:51 -0700 (PDT)
+ bh=raPeNNVGTWTWe3j0tOl4U7ukQw7k+xVhzTGPpxxshcQ=;
+ b=poH7Ecm67O86jmCoW1oqs02hMla35eoNEAL9sncU6/ZzwP7ubbmw7YQ+CdQ3iqeNDp
+ 29u03qKqq9fqSAT8m/V3FWXICt/8UBOhhjhx3coEiVJAvi9C9d9MvofUr60DqYSLFf66
+ GW3P0bOJ4+eu1ZUthaM4PhMo6Z2achhKojOqwNTyE/HJsedlRd7bHaWU2X9GWUd4hdox
+ qkJnZ7z3J+ya0yB55cVV3LxcisePL749GXd78fmSbVcHbf+tYDLzYW5bVDM0PRRH3xSd
+ 1y5nqwAfiguNBhSnE1XXjT8Go4E0hmQZSj0GcxVGXG4wJnzJssohTgoF2UJpivBWfufC
+ hhww==
+X-Gm-Message-State: AOAM533Cmx6+wJmkIx8qYFFbAyI8xSlJJBtXudqgVplRtLf7BLoj4AnC
+ 2jcUOizSynjaizx+DZwDaQEnVw==
+X-Google-Smtp-Source: ABdhPJzLun8PgoluA+WUZBtG6qcxg5TQeIMmzs6A2AhXNcV0fg7pIV32Bz5Qdn9loToWfLP3AC7JCQ==
+X-Received: by 2002:a17:90b:2350:: with SMTP id
+ ms16mr5167849pjb.127.1594378414636; 
+ Fri, 10 Jul 2020 03:53:34 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.52.48
+ by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.53.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2020 03:52:50 -0700 (PDT)
+ Fri, 10 Jul 2020 03:53:34 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -53,15 +53,14 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [RFC 34/65] target/riscv: rvv-0.9: integer
- add-with-carry/subtract-with-borrow
-Date: Fri, 10 Jul 2020 18:48:48 +0800
-Message-Id: <20200710104920.13550-35-frank.chang@sifive.com>
+Subject: [RFC 45/65] target/riscv: rvv-0.9: register gather instructions
+Date: Fri, 10 Jul 2020 18:48:59 +0800
+Message-Id: <20200710104920.13550-46-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200710104920.13550-1-frank.chang@sifive.com>
 References: <20200710104920.13550-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::641;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x641.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1044.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -72,7 +71,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 10 Jul 2020 08:58:59 -0400
+X-Mailman-Approved-At: Fri, 10 Jul 2020 08:59:04 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -84,137 +83,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 10:52:55 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 10:53:38 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn32.decode              | 20 +++++-----
- target/riscv/insn_trans/trans_rvv.inc.c |  2 +-
- target/riscv/vector_helper.c            | 50 ++++++++++++++-----------
- 3 files changed, 40 insertions(+), 32 deletions(-)
+ target/riscv/insn_trans/trans_rvv.inc.c | 33 +++++++++++++++++--------
+ 1 file changed, 23 insertions(+), 10 deletions(-)
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 0521ca4ab4..481f909d47 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -324,16 +324,16 @@ vwsubu_wv       110110 . ..... ..... 010 ..... 1010111 @r_vm
- vwsubu_wx       110110 . ..... ..... 110 ..... 1010111 @r_vm
- vwsub_wv        110111 . ..... ..... 010 ..... 1010111 @r_vm
- vwsub_wx        110111 . ..... ..... 110 ..... 1010111 @r_vm
--vadc_vvm        010000 1 ..... ..... 000 ..... 1010111 @r_vm_1
--vadc_vxm        010000 1 ..... ..... 100 ..... 1010111 @r_vm_1
--vadc_vim        010000 1 ..... ..... 011 ..... 1010111 @r_vm_1
--vmadc_vvm       010001 1 ..... ..... 000 ..... 1010111 @r_vm_1
--vmadc_vxm       010001 1 ..... ..... 100 ..... 1010111 @r_vm_1
--vmadc_vim       010001 1 ..... ..... 011 ..... 1010111 @r_vm_1
--vsbc_vvm        010010 1 ..... ..... 000 ..... 1010111 @r_vm_1
--vsbc_vxm        010010 1 ..... ..... 100 ..... 1010111 @r_vm_1
--vmsbc_vvm       010011 1 ..... ..... 000 ..... 1010111 @r_vm_1
--vmsbc_vxm       010011 1 ..... ..... 100 ..... 1010111 @r_vm_1
-+vadc_vvm        010000 0 ..... ..... 000 ..... 1010111 @r_vm_1
-+vadc_vxm        010000 0 ..... ..... 100 ..... 1010111 @r_vm_1
-+vadc_vim        010000 0 ..... ..... 011 ..... 1010111 @r_vm_1
-+vmadc_vvm       010001 . ..... ..... 000 ..... 1010111 @r_vm
-+vmadc_vxm       010001 . ..... ..... 100 ..... 1010111 @r_vm
-+vmadc_vim       010001 . ..... ..... 011 ..... 1010111 @r_vm
-+vsbc_vvm        010010 0 ..... ..... 000 ..... 1010111 @r_vm_1
-+vsbc_vxm        010010 0 ..... ..... 100 ..... 1010111 @r_vm_1
-+vmsbc_vvm       010011 . ..... ..... 000 ..... 1010111 @r_vm
-+vmsbc_vxm       010011 . ..... ..... 100 ..... 1010111 @r_vm
- vand_vv         001001 . ..... ..... 000 ..... 1010111 @r_vm
- vand_vx         001001 . ..... ..... 100 ..... 1010111 @r_vm
- vand_vi         001001 . ..... ..... 011 ..... 1010111 @r_vm
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index d90820ff6a..89a909b312 100644
+index 59b25e17f8..50f9782a96 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -1588,7 +1588,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+@@ -2958,17 +2958,29 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v *a)
+ /* Integer Extract Instruction */
  
- /*
-  * For vadc and vsbc, an illegal instruction exception is raised if the
-- * destination vector register is v0 and LMUL > 1. (Section 12.3)
-+ * destination vector register is v0 and LMUL > 1. (Section 12.4)
-  */
- static bool opivv_vadc_check(DisasContext *s, arg_rmrr *a)
+ static void load_element(TCGv_i64 dest, TCGv_ptr base,
+-                         int ofs, int sew)
++                         int ofs, int sew, bool sign)
  {
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 17cc1a96e9..af4d3c6441 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -1322,24 +1322,28 @@ GEN_VEXT_VADC_VXM(vsbc_vxm_d, uint64_t, H8, DO_VSBC, clearq)
-                           (__typeof(N))(N + M) < N)
- #define DO_MSBC(N, M, C) (C ? N <= M : N < M)
+     switch (sew) {
+     case MO_8:
+-        tcg_gen_ld8u_i64(dest, base, ofs);
++        if (!sign) {
++            tcg_gen_ld8u_i64(dest, base, ofs);
++        } else {
++            tcg_gen_ld8s_i64(dest, base, ofs);
++        }
+         break;
+     case MO_16:
+-        tcg_gen_ld16u_i64(dest, base, ofs);
++        if (!sign) {
++            tcg_gen_ld16u_i64(dest, base, ofs);
++        } else {
++            tcg_gen_ld16s_i64(dest, base, ofs);
++        }
+         break;
+     case MO_32:
+-        tcg_gen_ld32u_i64(dest, base, ofs);
++        if (!sign) {
++            tcg_gen_ld32u_i64(dest, base, ofs);
++        } else {
++            tcg_gen_ld32s_i64(dest, base, ofs);
++        }
+         break;
+     case MO_64:
+         tcg_gen_ld_i64(dest, base, ofs);
+@@ -3023,7 +3035,7 @@ static void vec_element_loadx(DisasContext *s, TCGv_i64 dest,
  
--#define GEN_VEXT_VMADC_VVM(NAME, ETYPE, H, DO_OP)             \
--void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
--                  CPURISCVState *env, uint32_t desc)          \
--{                                                             \
--    uint32_t vl = env->vl;                                    \
--    uint32_t vlmax = vext_maxsz(desc) / sizeof(ETYPE);        \
--    uint32_t i;                                               \
--                                                              \
--    for (i = 0; i < vl; i++) {                                \
--        ETYPE s1 = *((ETYPE *)vs1 + H(i));                    \
--        ETYPE s2 = *((ETYPE *)vs2 + H(i));                    \
--        uint8_t carry = vext_elem_mask(v0, i);                \
--                                                              \
--        vext_set_elem_mask(vd, i, DO_OP(s2, s1, carry));      \
--    }                                                         \
--    for (; i < vlmax; i++) {                                  \
--        vext_set_elem_mask(vd, i, 0);                         \
--    }                                                         \
-+#define GEN_VEXT_VMADC_VVM(NAME, ETYPE, H, DO_OP)               \
-+void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,     \
-+                  CPURISCVState *env, uint32_t desc)            \
-+{                                                               \
-+    uint32_t vl = env->vl;                                      \
-+    uint32_t vlmax = vext_max_elems(desc, sizeof(ETYPE), false);\
-+    uint32_t vm = vext_vm(desc);                                \
-+    uint32_t vta = vext_vta(desc);                              \
-+    uint32_t i;                                                 \
-+                                                                \
-+    for (i = 0; i < vl; i++) {                                  \
-+        ETYPE s1 = *((ETYPE *)vs1 + H(i));                      \
-+        ETYPE s2 = *((ETYPE *)vs2 + H(i));                      \
-+        uint8_t carry = !vm ? vext_elem_mask(v0, i) : 0;        \
-+                                                                \
-+        vext_set_elem_mask(vd, i, DO_OP(s2, s1, carry));        \
-+    }                                                           \
-+    if (vta == 1) {                                             \
-+        for (; i < vlmax; i++) {                                \
-+            vext_set_elem_mask(vd, i, 0);                       \
-+        }                                                       \
-+    }                                                           \
+     /* Perform the load. */
+     load_element(dest, base,
+-                 vreg_ofs(s, vreg), s->sew);
++                 vreg_ofs(s, vreg), s->sew, false);
+     tcg_temp_free_ptr(base);
+     tcg_temp_free_i32(ofs);
+ 
+@@ -3041,9 +3053,9 @@ static void vec_element_loadx(DisasContext *s, TCGv_i64 dest,
  }
  
- GEN_VEXT_VMADC_VVM(vmadc_vvm_b, uint8_t,  H1, DO_MADC)
-@@ -1358,17 +1362,21 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,          \
- {                                                               \
-     uint32_t vl = env->vl;                                      \
-     uint32_t vlmax = vext_max_elems(desc, sizeof(ETYPE), false);\
-+    uint32_t vm = vext_vm(desc);                                \
-+    uint32_t vta = vext_vta(desc);                              \
-     uint32_t i;                                                 \
-                                                                 \
-     for (i = 0; i < vl; i++) {                                  \
-         ETYPE s2 = *((ETYPE *)vs2 + H(i));                      \
--        uint8_t carry = vext_elem_mask(v0, i);                  \
-+        uint8_t carry = !vm ? vext_elem_mask(v0, i) : 0;         \
-                                                                 \
-         vext_set_elem_mask(vd, i,                               \
-                 DO_OP(s2, (ETYPE)(target_long)s1, carry));      \
-     }                                                           \
--    for (; i < vlmax; i++) {                                    \
--        vext_set_elem_mask(vd, i, 0);                           \
-+    if (vta == 1) {                                             \
-+        for (; i < vlmax; i++) {                                \
-+            vext_set_elem_mask(vd, i, 0);                       \
-+        }                                                       \
-     }                                                           \
+ static void vec_element_loadi(DisasContext *s, TCGv_i64 dest,
+-                              int vreg, int idx)
++                              int vreg, int idx, bool sign)
+ {
+-    load_element(dest, cpu_env, endian_ofs(s, vreg, idx), s->sew);
++    load_element(dest, cpu_env, endian_ofs(s, vreg, idx), s->sew, sign);
  }
  
+ static bool trans_vext_x_v(DisasContext *s, arg_r *a)
+@@ -3251,11 +3263,11 @@ static bool trans_vrgather_vx(DisasContext *s, arg_rmrr *a)
+     }
+ 
+     if (a->vm && s->vl_eq_vlmax) {
+-        int vlmax = s->vlen;
++        int vlmax = s->vlen * s->flmul / (1 << (s->sew + 3));
+         TCGv_i64 dest = tcg_temp_new_i64();
+ 
+         if (a->rs1 == 0) {
+-            vec_element_loadi(s, dest, a->rs2, 0);
++            vec_element_loadi(s, dest, a->rs2, 0, false);
+         } else {
+             vec_element_loadx(s, dest, a->rs2, cpu_gpr[a->rs1], vlmax);
+         }
+@@ -3282,7 +3294,8 @@ static bool trans_vrgather_vi(DisasContext *s, arg_rmrr *a)
+     }
+ 
+     if (a->vm && s->vl_eq_vlmax) {
+-        if (a->rs1 >= s->vlen) {
++        int vlmax = s->vlen * s->flmul / (1 << (s->sew + 3));
++        if (a->rs1 >= vlmax) {
+             tcg_gen_gvec_dup_imm(SEW64, vreg_ofs(s, a->rd),
+                                  MAXSZ(s), MAXSZ(s), 0);
+         } else {
 -- 
 2.17.1
 
