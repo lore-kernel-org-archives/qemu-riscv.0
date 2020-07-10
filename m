@@ -1,59 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtzjf-0000x2-Kq
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 16:35:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43488)
+	id 1ju0xX-00076C-UF
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 17:53:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59412)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jtzje-0000uT-3G; Fri, 10 Jul 2020 16:35:06 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:38254)
+ id 1ju0xW-00075U-BM; Fri, 10 Jul 2020 17:53:30 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:37794)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jtzjc-0004om-FF; Fri, 10 Jul 2020 16:35:05 -0400
-Received: by mail-il1-x144.google.com with SMTP id s21so6181344ilk.5;
- Fri, 10 Jul 2020 13:35:03 -0700 (PDT)
+ id 1ju0xU-0006H7-Fl; Fri, 10 Jul 2020 17:53:30 -0400
+Received: by mail-io1-xd43.google.com with SMTP id v6so7574453iob.4;
+ Fri, 10 Jul 2020 14:53:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=HnWt/hZyXezbEvChdfViIOo9Shdhe49a4Ah1talr3l4=;
- b=nnAxulEmMkjY6Ol0s/3wlndPpSkluD6+Sp6yLIhgFf+iElI9H3nU5OFqHncs9TT1Ad
- SL8Z3fkKojAlPAMNMta+5vS80f5rhIIdRIhuvcu8AH2qCLV3s0brkZ9/EmjqpuQOMhJ6
- 35rxICSIA0inRra61PtTECM2fYmP8HMSf3c9UTgfNwMgoDV0tMx2qp3Mqvt97pv2sns7
- nhcutk7xJvWWea+V5ecThTS1CVtfptLvcFvOAWUWXgPYK0ZKlC0pjSbV+lZK1IplIELZ
- LR5U8PqWQdirQ89BspCJrWILIiR/R2fTmXx3FpuQIJlguVzkrDqSDDDENsmRBZhH+5gX
- JEjw==
+ :cc; bh=iILW2C0CZbd0qowWzJCMVpU4Tnx9A8dYXb0tFkk7hbU=;
+ b=t7giLv8nCrXRfGwUoUnqbgcodn/+306NXdpfZkF6Zhpd3WlMO2b+GjOHKxS7RkYwIz
+ CnZBfalq0oo5oS9gYoZ7PP8FLoJpwq0t8b1faWKt5+4UFLQ9vNP62TUYD0d05AepQhyO
+ V0Gwcc/6AKyYRN3mDbkYBVeytwqnUZUPyH38ZVED8D0v8QBe6yQMSC+fPPsk3hvjf3Bh
+ +j+140Vj9oaL4P2SnjdAbwQdKtlWb96n4G3f0siDYJX1TeJAmHZCbpByZ5GXqSXY1BdA
+ eNnM6aSbaQ/DKkCp1sh9eNWivI1w9Pmj3btVjy32bBie/IReKKnRAs1clr1dacRXXYSR
+ sztw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=HnWt/hZyXezbEvChdfViIOo9Shdhe49a4Ah1talr3l4=;
- b=DTav/3Qt7jaYhEPybK0s8Ph40QR26jZAdtxsPpP6Lvj34STLxHRSiedjXLdp2qAOsn
- drsRmB9UmHD2XmHcjZKq6PJK9lzmFb4DDTLcxWmWfyBLwZXjIlq1kWbuYsv4XvpgaG3a
- 0ah/u8aoSXrrEgpWX97v9US5nARSK9AHsRwv+RZpbVC4T2Kp0ttsDvU9RKk0pPOZbCu3
- fzmisysUGw9PoRuqTe6Fl5lG0Wm3rCsrxbMMODqUm5Qxp23DWNw31EXzfZi2/1vF9FZr
- pchMkF/J+vkgaUjfPPEDAKnN6Qz0zwedc0FpsuBOSf8dOVo/82t7kfmce0IKCbTDx8nO
- Z0Iw==
-X-Gm-Message-State: AOAM531wTG1KyoprMODNNHDGXJ2LzbIoXvlf3f5HjrSu1ovCCBa5l92q
- IP91t5VAOGwzv7L9Xc4s11IPgVrH5bhVInVBCwc=
-X-Google-Smtp-Source: ABdhPJxqpo0KmBFUFdLCF6fk25q5v2rNyvK0p9YKTAWaNoTqC2lwQzbJMmKZjeY9QmZ9F/+7TU2Nn7XcK+8fDit6Dks=
-X-Received: by 2002:a92:d186:: with SMTP id z6mr56934791ilz.227.1594413302684; 
- Fri, 10 Jul 2020 13:35:02 -0700 (PDT)
+ bh=iILW2C0CZbd0qowWzJCMVpU4Tnx9A8dYXb0tFkk7hbU=;
+ b=Y8bN4sxpY3N/FvDkKWoOs57Hn6BowP35aYBIazyIDM2H/jaUPs4uGWVh2FiAuC0FA6
+ EMrnKwvegt3Iv3mF02m2jHxH/L+1uYEseXCeZTjlnjAStRlQvPF1IUmhEZz8ltwNTMxC
+ 0Cerkd4ibsYsBwwhulgigeto8xgEtI5hL0IqLIve5+Z/rGCbfPOSxnhSwnYSfs1SM4gy
+ Ebwh5U/K7CexoUlCo7u85nJ5z+TNHT/hshoYN2DuBzwn8JVnKvZXR+axl7iB/+oswXbj
+ akgqHz/kzeNcf+tR9DWAgNytdKOlHwnNQ+E+7eK+rfaNSkRSR0hqg2oizzt9kpV8ednF
+ F3BA==
+X-Gm-Message-State: AOAM5332y15NdDscq/fSkk+HDoCf/QcVoO832KWZHmQtJWowr4aRHZ/M
+ kJ093S8XIxUFj7Hsi+65LdN1Wgp/gk5CZK1QFZWHXsRt+g4=
+X-Google-Smtp-Source: ABdhPJyE+L3gOUdRLmq1yB+gtJqrnJzV07rTt2rkzkMVqpeMFifZtmZkaCIJqobc0XgqH3bOa91qi+THTQPNtTSXIBw=
+X-Received: by 2002:a02:878b:: with SMTP id t11mr976365jai.106.1594418006632; 
+ Fri, 10 Jul 2020 14:53:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200706084550.24117-1-amergnat@baylibre.com>
-In-Reply-To: <20200706084550.24117-1-amergnat@baylibre.com>
+References: <20200710104920.13550-1-frank.chang@sifive.com>
+In-Reply-To: <20200710104920.13550-1-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 10 Jul 2020 13:25:09 -0700
-Message-ID: <CAKmqyKMhsF+X4L2Eahn3f-f-_F6ZUeTTimKWGibYo2VxVbFSiw@mail.gmail.com>
-Subject: Re: [PATCH v1] target/riscv: fix pmp implementation
-To: Alexandre Mergnat <amergnat@baylibre.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- baylibre-upstreaming@groups.io, 
- nroyer@baylibre.com, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Date: Fri, 10 Jul 2020 14:43:32 -0700
+Message-ID: <CAKmqyKPtKtD=G+tXcd2Y-TM2go1TWbETHK2e3vdN-ehHyHU9-w@mail.gmail.com>
+Subject: Re: [RFC 00/65] target/riscv: support vector extension v0.9
+To: frank.chang@sifive.com
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -62,8 +57,8 @@ X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,49 +71,145 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 20:35:06 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 21:53:30 -0000
 
-On Mon, Jul 6, 2020 at 2:45 AM Alexandre Mergnat <amergnat@baylibre.com> wrote:
+On Fri, Jul 10, 2020 at 5:59 AM <frank.chang@sifive.com> wrote:
 >
-> The end address calculation for NA4 mode is wrong because the address
-> used isn't shifted.
+> From: Frank Chang <frank.chang@sifive.com>
 >
-> That imply all NA4 setup are not applied by the PMP.
+> This patchset implements the vector extension v0.9 for RISC-V on QEMU.
+>
+> This patchset is sent as RFC because RVV v0.9 is still in draft state.
+> However, as RVV v1.0 should be ratified soon and there shouldn't be
+> critical changes between RVV v1.0 and RVV v0.9. We would like to have
+> the community to review RVV v0.9 implementations. Once RVV v1.0 is
+> ratified, we will then upgrade to RVV v1.0.
+>
+> You can change the cpu argument: vext_spec to v0.9 (i.e. vext_spec=v0.9)
+> to run with RVV v0.9 instructions.
 
-I'm not sure what you mean here, can you clarify this?
+Hello,
 
->
-> The solution is to use the shifted address calculated for start address
-> variable.
->
-> Modifications are tested on Zephyr OS userspace test suite which works
-> for other RISC-V boards (E31 and E34 core).
->
-> Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
+First off thanks for the patches!
 
-Otherwise:
+QEMU has a policy of accepting draft specs as experimental. We
+currently support the v0.7.1 Vector extension for example, so this
+does not need to be an RFC and can be a full patch series that can be
+merged into master.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I have applied the first few patches (PR should be out next week) and
+they should be in the QEMU 5.1 release. QEMU is currently in a freeze
+so I won't be able to merge this series for 5.1. In saying that please
+feel free to continue to send patches to the list, they can still be
+reviewed.
+
+In general we would need to gracefully handle extension upgrades and
+maintain backwards compatibility. This same principle doesn't apply to
+experimental features though (such as the vector extension) so you are
+free to remove support for the v0.7.1. For users who want v0.7.1
+support they can always use the QEMU 5.1. release. Just make sure that
+your series does not break bisectability.
+
+Thanks again for the patches!
 
 Alistair
 
-> ---
->  target/riscv/pmp.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 9418660f1b..2a2b9f5363 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -171,7 +171,7 @@ static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index)
+> Chih-Min Chao (2):
+>   fpu: fix float16 nan check
+>   fpu: add api to handle alternative sNaN propagation
 >
->      case PMP_AMATCH_NA4:
->          sa = this_addr << 2; /* shift up from [xx:0] to [xx+2:2] */
-> -        ea = (this_addr + 4u) - 1u;
-> +        ea = (sa + 4u) - 1u;
->          break;
+> Frank Chang (58):
+>   target/riscv: fix rsub gvec tcg_assert_listed_vecop assertion
+>   target/riscv: correct the gvec IR called in gen_vec_rsub16_i64()
+>   target/riscv: fix return value of do_opivx_widen()
+>   target/riscv: fix vill bit index in vtype register
+>   target/riscv: remove vsll.vi, vsrl.vi, vsra.vi insns from using gvec
+>   target/riscv: rvv-0.9: remove MLEN calculations
+>   target/riscv: rvv-0.9: add fractional LMUL, VTA and VMA
+>   target/riscv: rvv-0.9: update check functions
+>   target/riscv: rvv-0.9: configure instructions
+>   target/riscv: rvv-0.9: stride load and store instructions
+>   target/riscv: rvv-0.9: index load and store instructions
+>   target/riscv: rvv-0.9: fix address index overflow bug of indexed
+>     load/store insns
+>   target/riscv: rvv-0.9: fault-only-first unit stride load
+>   target/riscv: rvv-0.9: amo operations
+>   target/riscv: rvv-0.9: load/store whole register instructions
+>   target/riscv: rvv-0.9: update vext_max_elems() for load/store insns
+>   target/riscv: rvv-0.9: take fractional LMUL into vector max elements
+>     calculation
+>   target/riscv: rvv-0.9: floating-point square-root instruction
+>   target/riscv: rvv-0.9: floating-point classify instructions
+>   target/riscv: rvv-0.9: mask population count instruction
+>   target/riscv: rvv-0.9: find-first-set mask bit instruction
+>   target/riscv: rvv-0.9: set-X-first mask bit instructions
+>   target/riscv: rvv-0.9: iota instruction
+>   target/riscv: rvv-0.9: element index instruction
+>   target/riscv: rvv-0.9: integer scalar move instructions
+>   target/riscv: rvv-0.9: floating-point scalar move instructions
+>   target/riscv: rvv-0.9: whole register move instructions
+>   target/riscv: rvv-0.9: integer extension instructions
+>   target/riscv: rvv-0.9: single-width averaging add and subtract
+>     instructions
+>   target/riscv: rvv-0.9: integer add-with-carry/subtract-with-borrow
+>   target/riscv: rvv-0.9: narrowing integer right shift instructions
+>   target/riscv: rvv-0.9: widening integer multiply-add instructions
+>   target/riscv: rvv-0.9: quad-widening integer multiply-add instructions
+>   target/riscv: rvv-0.9: integer merge and move instructions
+>   target/riscv: rvv-0.9: single-width saturating add and subtract
+>     instructions
+>   target/riscv: rvv-0.9: integer comparison instructions
+>   target/riscv: rvv-0.9: floating-point compare instructions
+>   target/riscv: rvv-0.9: single-width integer reduction instructions
+>   target/riscv: rvv-0.9: widening integer reduction instructions
+>   target/riscv: rvv-0.9: mask-register logical instructions
+>   target/riscv: rvv-0.9: register gather instructions
+>   target/riscv: rvv-0.9: slide instructions
+>   target/riscv: rvv-0.9: floating-point slide instructions
+>   target/riscv: rvv-0.9: narrowing fixed-point clip instructions
+>   target/riscv: rvv-0.9: floating-point move instructions
+>   target/riscv: rvv-0.9: floating-point/integer type-convert
+>     instructions
+>   target/riscv: rvv-0.9: single-width floating-point reduction
+>   target/riscv: rvv-0.9: widening floating-point reduction instructions
+>   target/riscv: rvv-0.9: single-width scaling shift instructions
+>   target/riscv: rvv-0.9: remove widening saturating scaled multiply-add
+>   target/riscv: rvv-0.9: remove vmford.vv and vmford.vf
+>   target/riscv: rvv-0.9: remove integer extract instruction
+>   target/riscv: rvv-0.9: floating-point min/max instructions
+>   target/riscv: rvv-0.9: widening floating-point/integer type-convert
+>   target/riscv: rvv-0.9: narrowing floating-point/integer type-convert
+>   softfloat: add fp16 and uint8/int8 interconvert functions
+>   target/riscv: use softfloat lib float16 comparison functions
+>   target/riscv: bump to RVV 0.9
 >
->      case PMP_AMATCH_NAPOT:
+> Kito Cheng (1):
+>   fpu: implement full set compare for fp16
+>
+> LIU Zhiwei (4):
+>   target/riscv: rvv-0.9: add vcsr register
+>   target/riscv: rvv-0.9: add vector context status
+>   target/riscv: rvv-0.9: update mstatus_vs by tb_flags
+>   target/riscv: rvv-0.9: add vlenb register
+>
+>  fpu/softfloat-specialize.inc.c          |    4 +-
+>  fpu/softfloat.c                         |  342 +++-
+>  include/fpu/softfloat.h                 |   22 +
+>  target/riscv/cpu.c                      |    9 +-
+>  target/riscv/cpu.h                      |   68 +-
+>  target/riscv/cpu_bits.h                 |    9 +
+>  target/riscv/cpu_helper.c               |   13 +
+>  target/riscv/csr.c                      |   53 +-
+>  target/riscv/helper.h                   |  507 +++--
+>  target/riscv/insn32-64.decode           |   18 +-
+>  target/riscv/insn32.decode              |  282 +--
+>  target/riscv/insn_trans/trans_rvv.inc.c | 2468 ++++++++++++++---------
+>  target/riscv/internals.h                |   18 +-
+>  target/riscv/translate.c                |   43 +-
+>  target/riscv/vector_helper.c            | 2349 +++++++++++----------
+>  15 files changed, 3833 insertions(+), 2372 deletions(-)
+>
 > --
 > 2.17.1
 >
