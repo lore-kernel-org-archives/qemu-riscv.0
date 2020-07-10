@@ -1,75 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtscj-0006Mn-9Q
+	id 1jtscj-0006NM-Ee
 	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39064)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32782)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqg5-0006Km-C3
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:54:49 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:35708)
+ id 1jtrwY-0001Dr-EY
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 08:15:54 -0400
+Received: from mail-oo1-xc36.google.com ([2607:f8b0:4864:20::c36]:37270)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqg3-000744-80
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:54:49 -0400
-Received: by mail-pf1-x429.google.com with SMTP id a14so2398818pfi.2
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:54:46 -0700 (PDT)
+ id 1jtrwV-0001tY-Rg
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 08:15:54 -0400
+Received: by mail-oo1-xc36.google.com with SMTP id t6so954704ooh.4
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 05:15:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=p0+5sllnaV2tm87OEkeWNPkIZ/rbPv0yLmAGeCI7suI=;
- b=ZQmF/pVKTChxEFbi0wTDQERnb3/xD4+NjlJdj2p8h4IcFUXB4flyDNsoENq2VWAqMz
- +fnwVbQC8fXgU9Be9wuCnNMvNCtBVrImCTsD+DTy70OEQ4osnfwYDorKDn6cERqlLznO
- JuTqS75OvD3BWOsGyiv6aG0GtSnXmYY/f6LPArIviofoKWW6Ak4gmxeilVMwnXLrJKyF
- 0Xwe9hMHTpLhit0IWKo09yor6IIyV9W0MbnaChAGAzI+39W93w6eHpCOEWSQ3zPH3FBg
- 33Y+yjqmkMyI2psqFVp7NEZdi5n5af59P0cK80TGN6BZYNmg1lRTccis6diGFxHZI/jI
- R8vA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=yDT+xjbmnBte6qteDf60M/ur8XNiuBuAS62SAURwG3k=;
+ b=C6fogeXkPiLhlQDXxKIrRSQhObU9bT8gK7T0kUgqQ3N47gmRikkk8EUjQEob0fop7C
+ f7PPXISnFp8BJs7J0azVnPJdOnQx9d55RtIQbSaJabRyN4Oljx3riOdkD6yCNq/LEzLt
+ Sn0UTAYNYn0MwcsvkGCVIm2/59tbVgN7HCSCdAnZTLyHKzqPAJ+DYjiFAKSsfuLnMnVu
+ zdyZPY/8E34xz28XvIjlZz5ity8h3uvcO27JRT6Yk8yn3W123sw6JuwX9VJw1+qrCmi+
+ PoFq0MDePXJLJd70CwKDJK8M2Z10wfg3Wt1zeZehvnLwAVrrZTSlf1Yzq1MLYBNoHRTp
+ yanQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=p0+5sllnaV2tm87OEkeWNPkIZ/rbPv0yLmAGeCI7suI=;
- b=r+xjRbgn99SBaCyaZ0wEi/q+Rqal8+VIteRl3ru88ihKE1xjenPu4OOhBmlu5REAj6
- v35almh5p5zln5KqS1vN+nCzaj4czO92+iFZfsec7/sI4KgErwxAX2tj0DqloOAR4JCa
- xAjy/zn9cSJ2LOdNIx47SEUXLJy+HmdbWtyiSHe4ctPBzqeT8wuKQW9jxGhWkz8i8ZOD
- y1BL+xPZJs51y8DW9Q4rKW2NWP7c3v6povq7NcjeHuWk5wlWnn6cfWp4VM1NJRWQprQd
- /bGpfWHAxh91q1pLyA0B0gISUqSPusm5JZpEQkg0/imtlRpQB7niaG75p6CNOrMn8WA0
- 6Frw==
-X-Gm-Message-State: AOAM532A6/Ovl7jb501iK+EVx49y2Csn6TIwqv7gUwozm77Vj5sfTw1x
- qRzE6Y5fm2yYxcnfb8c8E50U0w==
-X-Google-Smtp-Source: ABdhPJzkDAAjPBqznzJ+F9HN993gaixcaYDTnhqjdNQxUjX0aAksifB/O9NyYshOYEnnzHNBzcb/4w==
-X-Received: by 2002:a05:6a00:2257:: with SMTP id
- i23mr54770187pfu.25.1594378485889; 
- Fri, 10 Jul 2020 03:54:45 -0700 (PDT)
-Received: from frankchang-ThinkPad-T490.internal.sifive.com
- (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.54.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2020 03:54:45 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Kito Cheng <kito.cheng@sifive.com>,
- Chih-Min Chao <chihmin.chao@sifive.com>,
- Frank Chang <frank.chang@sifive.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [RFC 63/65] fpu: implement full set compare for fp16
-Date: Fri, 10 Jul 2020 18:49:17 +0800
-Message-Id: <20200710104920.13550-64-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200710104920.13550-1-frank.chang@sifive.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=yDT+xjbmnBte6qteDf60M/ur8XNiuBuAS62SAURwG3k=;
+ b=JVIj1j0qbdDOLuVgHGCIAY7ywx4DYXyRD4f32jxuYlnVnZ7g7R3d2zRWTqtxbQXq3t
+ OsaXzCXaccWWEen2s5Gz1dIv9YZNB6AsXnc2mdEUbHyrzcyU5QCSq/JrJa8BMV21lpCm
+ DPgtRHnB4rMjHj+7I1G6pe4xvup/u66oLS/5FzmHgh7V0B5XGvZ/GsUcVJ/2etNWxaro
+ fO5JCbLA/0R2PQnqJ1u4XgWwswDDduU4KzBQcjJ/pm3DoJwJIEANaaO/eY5w9i10UFIi
+ /ePCjYQgTZi+WzAAj+l3NpaG3wq+VrltbxPYBSZSO3tDu/DyMXps2xIXIBeh/57rXh+p
+ l2CQ==
+X-Gm-Message-State: AOAM531LffBXT0lnbr/sYfKxsr4rGECW9wmMhaxWnDgQM2KjvabYCe9d
+ 0D5xQ/82NkOzmtHDKkd8ERCbCcW+hrVJZ/XiPkV09g==
+X-Google-Smtp-Source: ABdhPJwO2/B5rFJaobapmPDWRjaAC8DsbqGLa3X8OzLuayknrC8dKNHVVqqJIau8WdB1LLxi4pFPd2cKhMeCLVJULmQ=
+X-Received: by 2002:a4a:2a41:: with SMTP id x1mr59812266oox.79.1594383350670; 
+ Fri, 10 Jul 2020 05:15:50 -0700 (PDT)
+MIME-Version: 1.0
 References: <20200710104920.13550-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x429.google.com
+ <20200710104920.13550-61-frank.chang@sifive.com> <87k0zblgjx.fsf@linaro.org>
+In-Reply-To: <87k0zblgjx.fsf@linaro.org>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Fri, 10 Jul 2020 20:15:39 +0800
+Message-ID: <CAE_xrPhKg1FeRwW0zS-jpfo8XL7WvSFywif27X0kAYgh044N6w@mail.gmail.com>
+Subject: Re: [RFC 60/65] softfloat: add fp16 and uint8/int8 interconvert
+ functions
+To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Aurelien Jarno <aurelien@aurel32.net>, Peter Maydell <peter.maydell@linaro.org>
+Content-Type: multipart/alternative; boundary="00000000000040c49a05aa154d29"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c36;
+ envelope-from=frank.chang@sifive.com; helo=mail-oo1-xc36.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Fri, 10 Jul 2020 08:59:04 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,296 +75,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 10:54:49 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 12:15:54 -0000
 
-From: Kito Cheng <kito.cheng@sifive.com>
+--00000000000040c49a05aa154d29
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
-Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
----
- fpu/softfloat.c         | 240 ++++++++++++++++++++++++++++++++++++++++
- include/fpu/softfloat.h |   8 ++
- 2 files changed, 248 insertions(+)
+On Fri, Jul 10, 2020 at 8:07 PM Alex Benn=C3=A9e <alex.bennee@linaro.org> w=
+rote:
 
-diff --git a/fpu/softfloat.c b/fpu/softfloat.c
-index 028b857167..8bebea1142 100644
---- a/fpu/softfloat.c
-+++ b/fpu/softfloat.c
-@@ -401,6 +401,34 @@ float64_gen2(float64 xa, float64 xb, float_status *s,
-     return soft(ua.s, ub.s, s);
- }
- 
-+/*----------------------------------------------------------------------------
-+| Returns the fraction bits of the half-precision floating-point value `a'.
-+*----------------------------------------------------------------------------*/
-+
-+static inline uint32_t extractFloat16Frac(float16 a)
-+{
-+    return float16_val(a) & 0x3ff;
-+}
-+
-+/*----------------------------------------------------------------------------
-+| Returns the exponent bits of the half-precision floating-point value `a'.
-+*----------------------------------------------------------------------------*/
-+
-+static inline int extractFloat16Exp(float16 a)
-+{
-+    return (float16_val(a) >> 10) & 0x1f;
-+}
-+
-+/*----------------------------------------------------------------------------
-+| Returns the sign bit of the half-precision floating-point value `a'.
-+*----------------------------------------------------------------------------*/
-+
-+static inline bool extractFloat16Sign(float16 a)
-+{
-+    return float16_val(a) >> 15;
-+}
-+
-+
- /*----------------------------------------------------------------------------
- | Returns the fraction bits of the single-precision floating-point value `a'.
- *----------------------------------------------------------------------------*/
-@@ -5006,6 +5034,218 @@ float64 float64_log2(float64 a, float_status *status)
-     return normalizeRoundAndPackFloat64(zSign, 0x408, zSig, status);
- }
- 
-+/*----------------------------------------------------------------------------
-+| Returns 1 if the half-precision floating-point value `a' is equal to
-+| the corresponding value `b', and 0 otherwise.  The invalid exception is
-+| raised if either operand is a NaN.  Otherwise, the comparison is performed
-+| according to the IEC/IEEE Standard for Binary Floating-Point Arithmetic.
-+*----------------------------------------------------------------------------*/
-+
-+int float16_eq(float16 a, float16 b, float_status *status)
-+{
-+    uint16_t av, bv;
-+    a = float16_squash_input_denormal(a, status);
-+    b = float16_squash_input_denormal(b, status);
-+
-+    if (((extractFloat16Exp(a) == 0x1F) && extractFloat16Frac(a))
-+        || ((extractFloat16Exp(b) == 0x1F) && extractFloat16Frac(b))) {
-+        float_raise(float_flag_invalid, status);
-+        return 0;
-+    }
-+    av = float16_val(a);
-+    bv = float16_val(b);
-+    return (av == bv) || ((uint16_t) ((av | bv) << 1) == 0);
-+}
-+
-+/*----------------------------------------------------------------------------
-+| Returns 1 if the half-precision floating-point value `a' is less than
-+| or equal to the corresponding value `b', and 0 otherwise.  The invalid
-+| exception is raised if either operand is a NaN.  The comparison is performed
-+| according to the IEC/IEEE Standard for Binary Floating-Point Arithmetic.
-+*----------------------------------------------------------------------------*/
-+
-+int float16_le(float16 a, float16 b, float_status *status)
-+{
-+    bool aSign, bSign;
-+    uint16_t av, bv;
-+    a = float16_squash_input_denormal(a, status);
-+    b = float16_squash_input_denormal(b, status);
-+
-+    if (((extractFloat16Exp(a) == 0x1F) && extractFloat16Frac(a))
-+        || ((extractFloat16Exp(b) == 0x1F) && extractFloat16Frac(b))) {
-+        float_raise(float_flag_invalid, status);
-+        return 0;
-+    }
-+    aSign = extractFloat16Sign(a);
-+    bSign = extractFloat16Sign(b);
-+    av = float16_val(a);
-+    bv = float16_val(b);
-+    if (aSign != bSign) {
-+        return aSign || ((uint16_t) ((av | bv) << 1) == 0);
-+    }
-+    return (av == bv) || (aSign ^ (av < bv));
-+}
-+
-+/*----------------------------------------------------------------------------
-+| Returns 1 if the half-precision floating-point value `a' is less than
-+| the corresponding value `b', and 0 otherwise.  The invalid exception is
-+| raised if either operand is a NaN.  The comparison is performed according
-+| to the IEC/IEEE Standard for Binary Floating-Point Arithmetic.
-+*----------------------------------------------------------------------------*/
-+
-+int float16_lt(float16 a, float16 b, float_status *status)
-+{
-+    bool aSign, bSign;
-+    uint16_t av, bv;
-+    a = float16_squash_input_denormal(a, status);
-+    b = float16_squash_input_denormal(b, status);
-+
-+    if (((extractFloat16Exp(a) == 0x1F) && extractFloat16Frac(a))
-+        || ((extractFloat16Exp(b) == 0x1F) && extractFloat16Frac(b))) {
-+        float_raise(float_flag_invalid, status);
-+        return 0;
-+    }
-+    aSign = extractFloat16Sign(a);
-+    bSign = extractFloat16Sign(b);
-+    av = float16_val(a);
-+    bv = float16_val(b);
-+    if (aSign != bSign) {
-+        return aSign && ((uint16_t) ((av | bv) << 1) != 0);
-+    }
-+    return (av != bv) && (aSign ^ (av < bv));
-+}
-+
-+/*----------------------------------------------------------------------------
-+| Returns 1 if the half-precision floating-point values `a' and `b' cannot
-+| be compared, and 0 otherwise.  The invalid exception is raised if either
-+| operand is a NaN.  The comparison is performed according to the IEC/IEEE
-+| Standard for Binary Floating-Point Arithmetic.
-+*----------------------------------------------------------------------------*/
-+
-+int float16_unordered(float16 a, float16 b, float_status *status)
-+{
-+    a = float16_squash_input_denormal(a, status);
-+    b = float16_squash_input_denormal(b, status);
-+
-+    if (((extractFloat16Exp(a) == 0x1F) && extractFloat16Frac(a))
-+        || ((extractFloat16Exp(b) == 0x1F) && extractFloat16Frac(b))) {
-+        float_raise(float_flag_invalid, status);
-+        return 1;
-+    }
-+    return 0;
-+}
-+
-+/*----------------------------------------------------------------------------
-+| Returns 1 if the half-precision floating-point value `a' is equal to
-+| the corresponding value `b', and 0 otherwise.  Quiet NaNs do not cause an
-+| exception.  The comparison is performed according to the IEC/IEEE Standard
-+| for Binary Floating-Point Arithmetic.
-+*----------------------------------------------------------------------------*/
-+
-+int float16_eq_quiet(float16 a, float16 b, float_status *status)
-+{
-+    a = float16_squash_input_denormal(a, status);
-+    b = float16_squash_input_denormal(b, status);
-+
-+    if (((extractFloat16Exp(a) == 0x1F) && extractFloat16Frac(a))
-+        || ((extractFloat16Exp(b) == 0x1F) && extractFloat16Frac(b))) {
-+        if (float16_is_signaling_nan(a, status)
-+        || float16_is_signaling_nan(b, status)) {
-+            float_raise(float_flag_invalid, status);
-+        }
-+        return 0;
-+    }
-+    return (float16_val(a) == float16_val(b)) ||
-+            ((uint16_t) ((float16_val(a) | float16_val(b)) << 1) == 0);
-+}
-+
-+/*----------------------------------------------------------------------------
-+| Returns 1 if the half-precision floating-point value `a' is less than or
-+| equal to the corresponding value `b', and 0 otherwise.  Quiet NaNs do not
-+| cause an exception.  Otherwise, the comparison is performed according to the
-+| IEC/IEEE Standard for Binary Floating-Point Arithmetic.
-+*----------------------------------------------------------------------------*/
-+
-+int float16_le_quiet(float16 a, float16 b, float_status *status)
-+{
-+    bool aSign, bSign;
-+    uint16_t av, bv;
-+    a = float16_squash_input_denormal(a, status);
-+    b = float16_squash_input_denormal(b, status);
-+
-+    if (((extractFloat16Exp(a) == 0x1F) && extractFloat16Frac(a))
-+        || ((extractFloat16Exp(b) == 0x1F) && extractFloat16Frac(b))) {
-+        if (float16_is_signaling_nan(a, status)
-+        || float16_is_signaling_nan(b, status)) {
-+            float_raise(float_flag_invalid, status);
-+        }
-+        return 0;
-+    }
-+    aSign = extractFloat16Sign(a);
-+    bSign = extractFloat16Sign(b);
-+    av = float16_val(a);
-+    bv = float16_val(b);
-+    if (aSign != bSign) {
-+        return aSign || ((uint16_t) ((av | bv) << 1) == 0);
-+    }
-+    return (av == bv) || (aSign ^ (av < bv));
-+}
-+
-+/*----------------------------------------------------------------------------
-+| Returns 1 if the half-precision floating-point value `a' is less than
-+| the corresponding value `b', and 0 otherwise.  Quiet NaNs do not cause an
-+| exception.  Otherwise, the comparison is performed according to the IEC/IEEE
-+| Standard for Binary Floating-Point Arithmetic.
-+*----------------------------------------------------------------------------*/
-+
-+int float16_lt_quiet(float16 a, float16 b, float_status *status)
-+{
-+    bool aSign, bSign;
-+    uint16_t av, bv;
-+    a = float16_squash_input_denormal(a, status);
-+    b = float16_squash_input_denormal(b, status);
-+
-+    if (((extractFloat16Exp(a) == 0x1F) && extractFloat16Frac(a))
-+        || ((extractFloat16Exp(b) == 0x1F) && extractFloat16Frac(b))) {
-+        if (float16_is_signaling_nan(a, status)
-+        || float16_is_signaling_nan(b, status)) {
-+            float_raise(float_flag_invalid, status);
-+        }
-+        return 0;
-+    }
-+    aSign = extractFloat16Sign(a);
-+    bSign = extractFloat16Sign(b);
-+    av = float16_val(a);
-+    bv = float16_val(b);
-+    if (aSign != bSign) {
-+        return aSign && ((uint16_t) ((av | bv) << 1) != 0);
-+    }
-+    return (av != bv) && (aSign ^ (av < bv));
-+}
-+
-+/*----------------------------------------------------------------------------
-+| Returns 1 if the half-precision floating-point values `a' and `b' cannot
-+| be compared, and 0 otherwise.  Quiet NaNs do not cause an exception.  The
-+| comparison is performed according to the IEC/IEEE Standard for Binary
-+| Floating-Point Arithmetic.
-+*----------------------------------------------------------------------------*/
-+
-+int float16_unordered_quiet(float16 a, float16 b, float_status *status)
-+{
-+    a = float16_squash_input_denormal(a, status);
-+    b = float16_squash_input_denormal(b, status);
-+
-+    if (((extractFloat16Exp(a) == 0x1F) && extractFloat16Frac(a))
-+        || ((extractFloat16Exp(b) == 0x1F) && extractFloat16Frac(b))) {
-+        if (float16_is_signaling_nan(a, status)
-+        || float16_is_signaling_nan(b, status)) {
-+            float_raise(float_flag_invalid, status);
-+        }
-+        return 1;
-+    }
-+    return 0;
-+}
-+
- /*----------------------------------------------------------------------------
- | Returns the result of converting the extended double-precision floating-
- | point value `a' to the 32-bit two's complement integer format.  The
-diff --git a/include/fpu/softfloat.h b/include/fpu/softfloat.h
-index 075c680456..d36a54be3e 100644
---- a/include/fpu/softfloat.h
-+++ b/include/fpu/softfloat.h
-@@ -244,6 +244,14 @@ float16 float16_maxnum_noprop(float16, float16, float_status *status);
- float16 float16_sqrt(float16, float_status *status);
- FloatRelation float16_compare(float16, float16, float_status *status);
- FloatRelation float16_compare_quiet(float16, float16, float_status *status);
-+int float16_eq(float16, float16, float_status *status);
-+int float16_le(float16, float16, float_status *status);
-+int float16_lt(float16, float16, float_status *status);
-+int float16_unordered(float16, float16, float_status *status);
-+int float16_eq_quiet(float16, float16, float_status *status);
-+int float16_le_quiet(float16, float16, float_status *status);
-+int float16_lt_quiet(float16, float16, float_status *status);
-+int float16_unordered_quiet(float16, float16, float_status *status);
- 
- bool float16_is_quiet_nan(float16, float_status *status);
- bool float16_is_signaling_nan(float16, float_status *status);
--- 
-2.17.1
+>
+> frank.chang@sifive.com writes:
+>
+> > From: Frank Chang <frank.chang@sifive.com>
+> >
+> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
+>
+> Did I miss the rest of the series somewhere?
+>
+> Otherwise this looks fine to me:
+>
+> Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+>
+> If you mean float16 to uint8 and int8 conversion functions, this commit i=
+s
+everything.
+I think I just cc the mail based on *scripts/get_maintainer.pl
+<http://get_maintainer.pl>*, so probably didn't send the whole series to
+everyone.
+--
+Frank Chang
 
+> --
+> Alex Benn=C3=A9e
+>
+
+--00000000000040c49a05aa154d29
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Fri, Jul 10, 2020 at 8:07 PM Alex Benn=
+=C3=A9e &lt;<a href=3D"mailto:alex.bennee@linaro.org">alex.bennee@linaro.or=
+g</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex"><br>
+<a href=3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sif=
+ive.com</a> writes:<br>
+<br>
+&gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=
+=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt;<br>
+&gt; Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.co=
+m" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+<br>
+Did I miss the rest of the series somewhere?<br>
+<br>
+Otherwise this looks fine to me:<br>
+<br>
+Reviewed-by: Alex Benn=C3=A9e &lt;<a href=3D"mailto:alex.bennee@linaro.org"=
+ target=3D"_blank">alex.bennee@linaro.org</a>&gt;<br>
+<br></blockquote><div>If you mean float16 to uint8 and int8 conversion func=
+tions, this commit is everything.<br>I think I just cc the mail based on <i=
+>scripts/<a href=3D"http://get_maintainer.pl">get_maintainer.pl</a></i>, so=
+ probably=C2=A0didn&#39;t=C2=A0send the whole series to everyone.</div><div=
+>--</div><div>Frank Chang</div><blockquote class=3D"gmail_quote" style=3D"m=
+argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
+:1ex">
+-- <br>
+Alex Benn=C3=A9e<br>
+</blockquote></div></div>
+
+--00000000000040c49a05aa154d29--
 
