@@ -1,48 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtscl-0006T1-Hn
+	id 1jtscl-0006Tc-Oe
 	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36930)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37138)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqcl-00056M-IL
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:23 -0400
-Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:37346)
+ id 1jtqd9-0005FM-F5
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:47 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:45698)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqci-0006Xs-KK
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:23 -0400
-Received: by mail-pg1-x541.google.com with SMTP id d4so2375403pgk.4
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:51:20 -0700 (PDT)
+ id 1jtqd7-0006bq-Dl
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:47 -0400
+Received: by mail-pl1-x636.google.com with SMTP id k4so2086168pld.12
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:51:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=/rldlRV0Ju7ecAcYGvhu7TjDF36DgLEmoYyxAEMea3o=;
- b=U4Xxe1oWbFVRadI1nQ1VydDb981vHLm3v5EkFx3HUFDszj0TEiUeTMDSqPgv4PNgxv
- Breu0MRqSe2ZYTv0v9gl68WWyoGsvbaIPqg94egN9dZQj7h0hgg5wJ/wUP7Hx3UTjX/k
- 7k7hsw4wKaSVMgiVa+KbSHZ+C68paXT9scwN3pTwLfP9r/ToAmypTFrhJBUrXg0UeLC/
- 8h/4JOH6k34EV7YMeHqyAWUaqzwJLywvrcf9vSO4FU/j2NNBrlZ/3YzWUy21Yae2FGgZ
- eIg3kKy92NY9t3ayBBECvd8cC4QUk6x7MYh8jtnlizhA5IV8FPQ8NfxP7hpEL1re1ppw
- yemQ==
+ bh=+iRPmbuMdHobYwBjPg2b0Sm7HMs4t/YW9apRnR/5t8o=;
+ b=CsuAOc7xk4yxCD5LA1pkrcOUS7WccygzGsuvv5jv8UlV5Sfo1jH4ImDYrUVt/QvCR6
+ sug543m8rc60/9kDnrXdS063yWWcsLBwCiNxGZQbPTf8ID18fye7ItIiafIIIG0Unnh5
+ ML0xu1IatfcOWCm4z7F0NU/ZzKE3V+JgdXjsPVVREo9ZaRfRjGCiHb6+ryAaB9Gpfklr
+ Veo4dO5EgpBpdDlfVUzbWLa+AlcfNGeJkupzws7gNgBnpnhn+c7K3nHdDapAkfbh3Ukp
+ 0WQ9CR7FCtsAie7q3H1glBS4GhRUpeuQBuEDLYaabxikiyKcCLnU/aMwVJsaec3vvFPC
+ pzTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=/rldlRV0Ju7ecAcYGvhu7TjDF36DgLEmoYyxAEMea3o=;
- b=L81JmjsPTwVMNTEbUcGwPIBlX5RjiO1z7T87yxLBi2tIkf+UNdn49gFvoDF6ewgD20
- rVmHoNf7Jn3Yl26+RlhhwEHQn+Ji/wZTGWcIrSU/UAc7/kn//wqKVcYuNOMcgiVCL5JA
- g9Ytqz0AGpbZXWBmL8mHKHKB67/8jA5gTnWhfduJnRsKJkY3trMyK8c1d9UnEVgVucqN
- PcAJqgSmRskd+xXtZRjJWCwssgQAkJQF07qtJUZigvPOLw3ZU5BQDgo3TTKOrKZNUKHL
- QLauattRTpDcDwyIdCITmnbGgKG4jiLlOh/Xj0juHLApiJDKaVRXRrryU10NVOgTK8uW
- RtBQ==
-X-Gm-Message-State: AOAM531JzG7zIVcLdhkFPT1FaiYA76Rfxoe0yNV+8AsqyXd8UllBcLj9
- eLD5BNKCPyC4Oo2qOIGzJfgaYQ==
-X-Google-Smtp-Source: ABdhPJxcY01tSdlclxZMkK7hvPH3qOn9lO5fT4tojCDakhdZ73QwzcwQND8tHjsswBUaYHQrsHUp/w==
-X-Received: by 2002:a63:eb52:: with SMTP id b18mr56230397pgk.434.1594378279184; 
- Fri, 10 Jul 2020 03:51:19 -0700 (PDT)
+ bh=+iRPmbuMdHobYwBjPg2b0Sm7HMs4t/YW9apRnR/5t8o=;
+ b=P3xfdFqdFRtd54NBNliomAr1MNB2ue3KuKjfS1R4C/c9FtVdCwmva5m/J/dMCMp/eC
+ XUrpUPYe4btSEduCMQ3K70kN63rpJuSIJApqWNAMp8NkuCAag7mITTVf+8uZT/Co3rll
+ /uq3I1tpLuj/KfaY8LK34Vvws6GMMUdI+TiUWYuNqQviOaXI2JJ5z87/lIUR6sBVlxww
+ zM4vecE3favO9g7kFd3lYCVbfqe58InUYdoNdAjpvYxmZE/sxIjqAMSzhELzN5g3JY/j
+ 36ZtRae3HxIy7Sn4eNb/oQ5xkUFviYUg9B59COcFLwWlVVmMcamLlMJCDIPBfOOgmCp6
+ Piag==
+X-Gm-Message-State: AOAM532AnvzeiFZ+HD4QEgOq9G3UzjWLjACU/eFkNklyxkl0QHssbP88
+ RLLGwoq5bB+gAGBHkhpYcR6OuQ==
+X-Google-Smtp-Source: ABdhPJzUKKaQP0qcurt2PTKPaLO9e5SLsuP7veEcYmF+FxSm6osEv2DUPJ2ishmw5AqeskX/U3GSQg==
+X-Received: by 2002:a17:902:7807:: with SMTP id
+ p7mr59943994pll.242.1594378304044; 
+ Fri, 10 Jul 2020 03:51:44 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.51.16
+ by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.51.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2020 03:51:18 -0700 (PDT)
+ Fri, 10 Jul 2020 03:51:43 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -52,14 +53,14 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [RFC 12/65] target/riscv: rvv-0.9: update check functions
-Date: Fri, 10 Jul 2020 18:48:26 +0800
-Message-Id: <20200710104920.13550-13-frank.chang@sifive.com>
+Subject: [RFC 17/65] target/riscv: rvv-0.9: fault-only-first unit stride load
+Date: Fri, 10 Jul 2020 18:48:31 +0800
+Message-Id: <20200710104920.13550-18-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200710104920.13550-1-frank.chang@sifive.com>
 References: <20200710104920.13550-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::541;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x541.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x636.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -82,756 +83,241 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 10:51:23 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 10:51:47 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.inc.c | 507 ++++++++++++++----------
- 1 file changed, 308 insertions(+), 199 deletions(-)
+ target/riscv/helper.h                   | 27 +++---------
+ target/riscv/insn32.decode              | 14 +++----
+ target/riscv/insn_trans/trans_rvv.inc.c | 31 ++++----------
+ target/riscv/vector_helper.c            | 56 +++++++++----------------
+ 4 files changed, 38 insertions(+), 90 deletions(-)
 
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 99ea68b0b9..d83d1def4e 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -140,28 +140,11 @@ DEF_HELPER_6(vsxei64_8_v, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vsxei64_16_v, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vsxei64_32_v, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vsxei64_64_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_5(vlbff_v_b, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbff_v_h, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhff_v_h, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlwff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlwff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vleff_v_b, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vleff_v_h, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vleff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vleff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbuff_v_b, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbuff_v_h, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbuff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbuff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhuff_v_h, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhuff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhuff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlwuff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlwuff_v_d, void, ptr, ptr, tl, env, i32)
++DEF_HELPER_5(vle8ff_v, void, ptr, ptr, tl, env, i32)
++DEF_HELPER_5(vle16ff_v, void, ptr, ptr, tl, env, i32)
++DEF_HELPER_5(vle32ff_v, void, ptr, ptr, tl, env, i32)
++DEF_HELPER_5(vle64ff_v, void, ptr, ptr, tl, env, i32)
++
+ #ifdef TARGET_RISCV64
+ DEF_HELPER_6(vamoswapw_v_d, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vamoswapd_v_d, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 46542d162e..b0aaa186b8 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -249,14 +249,6 @@ vsse16_v    ... 010 . ..... ..... 101 ..... 0100111 @r_nfvm
+ vsse32_v    ... 010 . ..... ..... 110 ..... 0100111 @r_nfvm
+ vsse64_v    ... 010 . ..... ..... 111 ..... 0100111 @r_nfvm
+ 
+-vlbff_v    ... 100 . 10000 ..... 000 ..... 0000111 @r2_nfvm
+-vlhff_v    ... 100 . 10000 ..... 101 ..... 0000111 @r2_nfvm
+-vlwff_v    ... 100 . 10000 ..... 110 ..... 0000111 @r2_nfvm
+-vleff_v    ... 000 . 10000 ..... 111 ..... 0000111 @r2_nfvm
+-vlbuff_v   ... 000 . 10000 ..... 000 ..... 0000111 @r2_nfvm
+-vlhuff_v   ... 000 . 10000 ..... 101 ..... 0000111 @r2_nfvm
+-vlwuff_v   ... 000 . 10000 ..... 110 ..... 0000111 @r2_nfvm
+-
+ # Vector indexed load insns.
+ vlxei8_v      ... 011 . ..... ..... 000 ..... 0000111 @r_nfvm
+ vlxei16_v     ... 011 . ..... ..... 101 ..... 0000111 @r_nfvm
+@@ -269,6 +261,12 @@ vsxei16_v     ... 0-1 . ..... ..... 101 ..... 0100111 @r_nfvm
+ vsxei32_v     ... 0-1 . ..... ..... 110 ..... 0100111 @r_nfvm
+ vsxei64_v     ... 0-1 . ..... ..... 111 ..... 0100111 @r_nfvm
+ 
++# Vector unit-stride fault-only-first load insns.
++vle8ff_v      ... 000 . 10000 ..... 000 ..... 0000111 @r2_nfvm
++vle16ff_v     ... 000 . 10000 ..... 101 ..... 0000111 @r2_nfvm
++vle32ff_v     ... 000 . 10000 ..... 110 ..... 0000111 @r2_nfvm
++vle64ff_v     ... 000 . 10000 ..... 111 ..... 0000111 @r2_nfvm
++
+ #*** Vector AMO operations are encoded under the standard AMO major opcode ***
+ vamoswapw_v     00001 . . ..... ..... 110 ..... 0101111 @r_wdvm
+ vamoaddw_v      00000 . . ..... ..... 110 ..... 0101111 @r_wdvm
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index 1cc58c86b2..fc1908389e 100644
+index 417edbe5a1..d8fea3af4c 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -19,6 +19,59 @@
- #include "tcg/tcg-gvec-desc.h"
- #include "internals.h"
- 
-+#define NVPR    32
-+
-+#define require(x) if (unlikely(!(x))) { return false; }
-+#define require_align(val, pos) require(is_aligned(val, pos))
-+
-+/* Destination vector register group cannot overlap source mask register. */
-+#define require_vm(vm, rd) do { if (vm == 0) require(rd != 0); } while (0)
-+
-+#define require_noover(astart, asize, bstart, bsize) \
-+  require(!is_overlapped(astart, asize, bstart, bsize))
-+#define require_noover_widen(astart, asize, bstart, bsize) \
-+  require(!is_overlapped_widen(astart, asize, bstart, bsize))
-+
-+#define REQUIRE_RVV do {    \
-+    if (s->mstatus_vs == 0) \
-+        return false;       \
-+} while (0)
-+
-+static inline bool is_aligned(const unsigned val, const unsigned pos)
-+{
-+    return pos ? (val & (pos - 1)) == 0 : true;
-+}
-+
-+static inline bool is_overlapped(const int astart, int asize,
-+                                 const int bstart, int bsize)
-+{
-+    asize = asize == 0 ? 1 : asize;
-+    bsize = bsize == 0 ? 1 : bsize;
-+
-+    const int aend = astart + asize;
-+    const int bend = bstart + bsize;
-+
-+    return MAX(aend, bend) - MIN(astart, bstart) < asize + bsize;
-+}
-+
-+static inline bool is_overlapped_widen(const int astart, int asize,
-+                                       const int bstart, int bsize)
-+{
-+    asize = asize == 0 ? 1 : asize;
-+    bsize = bsize == 0 ? 1 : bsize;
-+
-+    const int aend = astart + asize;
-+    const int bend = bstart + bsize;
-+
-+    if (astart < bstart &&
-+        is_overlapped(astart, asize, bstart, bsize) &&
-+        !is_overlapped(astart, asize, bstart + bsize, bsize)) {
-+        return false;
-+    } else  {
-+        return MAX(aend, bend) - MIN(astart, bstart) < asize + bsize;
-+    }
-+}
-+
- static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
+@@ -771,25 +771,13 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
  {
-     TCGv s1, s2, dst;
-@@ -103,29 +156,121 @@ static bool vext_check_isa_ill(DisasContext *s)
+     uint32_t data = 0;
+     gen_helper_ldst_us *fn;
+-    static gen_helper_ldst_us * const fns[7][4] = {
+-        { gen_helper_vlbff_v_b,  gen_helper_vlbff_v_h,
+-          gen_helper_vlbff_v_w,  gen_helper_vlbff_v_d },
+-        { NULL,                  gen_helper_vlhff_v_h,
+-          gen_helper_vlhff_v_w,  gen_helper_vlhff_v_d },
+-        { NULL,                  NULL,
+-          gen_helper_vlwff_v_w,  gen_helper_vlwff_v_d },
+-        { gen_helper_vleff_v_b,  gen_helper_vleff_v_h,
+-          gen_helper_vleff_v_w,  gen_helper_vleff_v_d },
+-        { gen_helper_vlbuff_v_b, gen_helper_vlbuff_v_h,
+-          gen_helper_vlbuff_v_w, gen_helper_vlbuff_v_d },
+-        { NULL,                  gen_helper_vlhuff_v_h,
+-          gen_helper_vlhuff_v_w, gen_helper_vlhuff_v_d },
+-        { NULL,                  NULL,
+-          gen_helper_vlwuff_v_w, gen_helper_vlwuff_v_d }
++    static gen_helper_ldst_us * const fns[4] = {
++        gen_helper_vle8ff_v, gen_helper_vle16ff_v,
++        gen_helper_vle32ff_v, gen_helper_vle64ff_v
+     };
+     bool ret;
+ 
+-    fn =  fns[seq][s->sew];
++    fn = fns[seq];
+     if (fn == NULL) {
+         return false;
+     }
+@@ -805,13 +793,10 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
+     return ret;
  }
  
- /*
-- * There are two rules check here.
-+ * Check function for vector instruction with format:
-+ * single-width result and single-width sources (SEW = SEW op SEW)
-+ *
-+ * is_vs1: indicates whether insn[19:15] is a vs1 field or not.
-+ */
-+#define VEXT_CHECK_SSS(s, rd, rs1, rs2, vm, is_vs1) do { \
-+    require_vm(vm, rd);                                  \
-+    if (s->flmul > 1) {                                  \
-+        require_align(rd, s->flmul);                     \
-+        require_align(rs2, s->flmul);                    \
-+        if (is_vs1) {                                    \
-+            require_align(rs1, s->flmul);                \
-+        }                                                \
-+    }                                                    \
-+} while (0)
-+
-+/*
-+ * Check function for maskable vector instruction with format:
-+ * single-width result and single-width sources (SEW = SEW op SEW)
-  *
-- * 1. Vector register numbers are multiples of LMUL. (Section 3.2)
-+ * is_vs1: indicates whether insn[19:15] is a vs1 field or not.
-+ */
-+#define VEXT_CHECK_MSS(s, rd, rs1, rs2, is_vs1) do { \
-+    if (rd != rs2) {                                 \
-+        require_noover(rd, 1, rs2, s->flmul);        \
-+    }                                                \
-+    require_align(rs2, s->flmul);                    \
-+    if (is_vs1) {                                    \
-+        if (rd != rs1) {                             \
-+            require_noover(rd, 1, rs1, s->flmul);    \
-+        }                                            \
-+        require_align(rs1, s->flmul);                \
-+    }                                                \
-+} while (0)
-+
-+/* Common check function for vector widening instructions */
-+#define VEXT_WIDE_CHECK_COMMON(s, rd, vm) do { \
-+    require(s->flmul <= 4);                    \
-+    require(s->sew < 3);                       \
-+    require_align(rd, s->flmul * 2);           \
-+    require_vm(vm, rd);                        \
-+} while (0)
-+
-+/* Common check function for vector narrowing instructions */
-+#define VEXT_NARROW_CHECK_COMMON(s, rd, rs2, vm) do { \
-+    require(s->flmul <= 4);                           \
-+    require(s->sew < 3);                              \
-+    require_align(rs2, s->flmul * 2);                 \
-+    require_align(rd, s->flmul);                      \
-+    require_vm(vm, rd);                               \
-+} while (0)
-+
-+/*
-+ * Check function for vector instruction with format:
-+ * double-width result and single-width sources (2*SEW = SEW op SEW)
-  *
-- * 2. For all widening instructions, the destination LMUL value must also be
-- *    a supported LMUL value. (Section 11.2)
-+ * is_vs1: indicates whether insn[19:15] is a vs1 field or not.
-  */
--static bool vext_check_reg(DisasContext *s, uint32_t reg, bool widen)
--{
--    /*
--     * The destination vector register group results are arranged as if both
--     * SEW and LMUL were at twice their current settings. (Section 11.2).
--     */
--    int legal = widen ? 2 << s->lmul : 1 << s->lmul;
-+#define VEXT_CHECK_DSS(s, rd, rs1, rs2, vm, is_vs1) do {           \
-+    VEXT_WIDE_CHECK_COMMON(s, rd, vm);                             \
-+    require_align(rs2, s->flmul);                                  \
-+    if (s->flmul < 1) {                                            \
-+        require_noover(rd, s->flmul * 2, rs2, s->flmul);           \
-+    } else {                                                       \
-+        require_noover_widen(rd, s->flmul * 2, rs2, s->flmul);     \
-+    }                                                              \
-+    if (is_vs1) {                                                  \
-+        require_align(rs1, s->flmul);                              \
-+        if (s->flmul < 1) {                                        \
-+            require_noover(rd, s->flmul * 2, rs1, s->flmul);       \
-+        } else {                                                   \
-+            require_noover_widen(rd, s->flmul * 2, rs1, s->flmul); \
-+        }                                                          \
-+    }                                                              \
-+} while (0)
- 
--    return !((s->lmul == 0x3 && widen) || (reg % legal));
--}
-+/*
-+ * Check function for vector instruction with format:
-+ * double-width result and double-width source1 and single-width
-+ * source2 (2*SEW = 2*SEW op SEW)
-+ *
-+ * is_vs1: indicates whether insn[19:15] is a vs1 field or not.
-+ */
-+#define VEXT_CHECK_DDS(s, rd, rs1, rs2, vm, is_vs1) do {           \
-+    VEXT_WIDE_CHECK_COMMON(s, rd, vm);                             \
-+    require_align(rs2, s->flmul * 2);                              \
-+    if (is_vs1) {                                                  \
-+        require_align(rs1, s->flmul);                              \
-+        if (s->flmul < 1) {                                        \
-+            require_noover(rd, s->flmul * 2, rs1, s->flmul);       \
-+        } else {                                                   \
-+            require_noover_widen(rd, s->flmul * 2, rs1, s->flmul); \
-+        }                                                          \
-+    }                                                              \
-+} while (0)
+-GEN_VEXT_TRANS(vlbff_v, 0, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vlhff_v, 1, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vlwff_v, 2, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vleff_v, 3, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vlbuff_v, 4, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vlhuff_v, 5, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vlwuff_v, 6, r2nfvm, ldff_op, ld_us_check)
++GEN_VEXT_TRANS(vle8ff_v,  8,  0, r2nfvm, ldff_op, ld_us_check)
++GEN_VEXT_TRANS(vle16ff_v, 16, 1, r2nfvm, ldff_op, ld_us_check)
++GEN_VEXT_TRANS(vle32ff_v, 32, 2, r2nfvm, ldff_op, ld_us_check)
++GEN_VEXT_TRANS(vle64ff_v, 64, 3, r2nfvm, ldff_op, ld_us_check)
  
  /*
-- * There are two rules check here.
-+ * Check function for vector instruction with format:
-+ * single-width result and double-width source1 and single-width
-+ * source2 (SEW = 2*SEW op SEW)
-  *
-- * 1. The destination vector register group for a masked vector instruction can
-- *    only overlap the source mask register (v0) when LMUL=1. (Section 5.3)
-+ * is_vs1: indicates whether insn[19:15] is a vs1 field or not.
-+ */
-+#define VEXT_CHECK_SDS(s, rd, rs1, rs2, vm, is_vs1) do { \
-+    VEXT_NARROW_CHECK_COMMON(s, rd, rs2, vm);            \
-+    if (rd != rs2) {                                     \
-+        require_noover(rd, s->flmul, rs2, s->flmul * 2); \
-+    }                                                    \
-+    if (is_vs1) {                                        \
-+        require_align(rs1, s->flmul);                    \
-+    }                                                    \
-+} while (0)
-+
-+/*
-+ * Check function for vector reduction instructions
-  *
-  * 2. In widen instructions and some other insturctions, like vslideup.vx,
-  *    there is no need to check whether LMUL=1.
-@@ -136,20 +281,14 @@ static bool vext_check_overlap_mask(DisasContext *s, uint32_t vd, bool vm,
-     return (vm != 0 || vd != 0) || (!force && (s->lmul == 0));
+  *** vector atomic operation
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 3ec56bb6fc..86d01a96a3 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -564,7 +564,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+           CPURISCVState *env, uint32_t desc,
+           vext_ldst_elem_fn *ldst_elem,
+           clear_fn *clear_elem,
+-          uint32_t esz, uint32_t msz, uintptr_t ra)
++          uint32_t esz, uintptr_t ra)
+ {
+     void *host;
+     uint32_t i, k, vl = 0;
+@@ -579,24 +579,24 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+         if (!vm && !vext_elem_mask(v0, i)) {
+             continue;
+         }
+-        addr = base + nf * i * msz;
++        addr = base + nf * i * esz;
+         if (i == 0) {
+-            probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
++            probe_pages(env, addr, nf * esz, ra, MMU_DATA_LOAD);
+         } else {
+             /* if it triggers an exception, no need to check watchpoint */
+-            remain = nf * msz;
++            remain = nf * esz;
+             while (remain > 0) {
+                 offset = -(addr | TARGET_PAGE_MASK);
+                 host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD,
+                                          cpu_mmu_index(env, false));
+                 if (host) {
+ #ifdef CONFIG_USER_ONLY
+-                    if (page_check_range(addr, nf * msz, PAGE_READ) < 0) {
++                    if (page_check_range(addr, nf * esz, PAGE_READ) < 0) {
+                         vl = i;
+                         goto ProbeSuccess;
+                     }
+ #else
+-                    probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
++                    probe_pages(env, addr, nf * esz, ra, MMU_DATA_LOAD);
+ #endif
+                 } else {
+                     vl = i;
+@@ -621,7 +621,7 @@ ProbeSuccess:
+             continue;
+         }
+         while (k < nf) {
+-            target_ulong addr = base + (i * nf + k) * msz;
++            target_ulong addr = base + (i * nf + k) * esz;
+             ldst_elem(env, addr, i + k * vlmax, vd, ra);
+             k++;
+         }
+@@ -636,36 +636,18 @@ ProbeSuccess:
+     }
  }
  
--/* The LMUL setting must be such that LMUL * NFIELDS <= 8. (Section 7.8) */
--static bool vext_check_nf(DisasContext *s, uint32_t nf)
--{
--    return (1 << s->lmul) * nf <= 8;
+-#define GEN_VEXT_LDFF(NAME, MTYPE, ETYPE, LOAD_FN, CLEAR_FN)     \
+-void HELPER(NAME)(void *vd, void *v0, target_ulong base,         \
+-                  CPURISCVState *env, uint32_t desc)             \
+-{                                                                \
+-    vext_ldff(vd, v0, base, env, desc, LOAD_FN, CLEAR_FN,        \
+-              sizeof(ETYPE), sizeof(MTYPE), GETPC());            \
 -}
 -
- /*
-- * The destination vector register group cannot overlap a source vector register
-- * group of a different element width. (Section 11.2)
-+ * In cpu_get_tb_cpu_state(), set VILL if RVV was not present.
-+ * So RVV is also be checked in this function.
-  */
--static inline bool vext_check_overlap_group(int rd, int dlen, int rs, int slen)
--{
--    return ((rd >= rs + slen) || (rs >= rd + dlen));
--}
-+#define VEXT_CHECK_ISA_ILL(s) do { \
-+    require(!s->vill)              \
-+} while (0)
+-GEN_VEXT_LDFF(vlbff_v_b,  int8_t,   int8_t,   ldb_b,  clearb)
+-GEN_VEXT_LDFF(vlbff_v_h,  int8_t,   int16_t,  ldb_h,  clearh)
+-GEN_VEXT_LDFF(vlbff_v_w,  int8_t,   int32_t,  ldb_w,  clearl)
+-GEN_VEXT_LDFF(vlbff_v_d,  int8_t,   int64_t,  ldb_d,  clearq)
+-GEN_VEXT_LDFF(vlhff_v_h,  int16_t,  int16_t,  ldh_h,  clearh)
+-GEN_VEXT_LDFF(vlhff_v_w,  int16_t,  int32_t,  ldh_w,  clearl)
+-GEN_VEXT_LDFF(vlhff_v_d,  int16_t,  int64_t,  ldh_d,  clearq)
+-GEN_VEXT_LDFF(vlwff_v_w,  int32_t,  int32_t,  ldw_w,  clearl)
+-GEN_VEXT_LDFF(vlwff_v_d,  int32_t,  int64_t,  ldw_d,  clearq)
+-GEN_VEXT_LDFF(vleff_v_b,  int8_t,   int8_t,   lde_b,  clearb)
+-GEN_VEXT_LDFF(vleff_v_h,  int16_t,  int16_t,  lde_h,  clearh)
+-GEN_VEXT_LDFF(vleff_v_w,  int32_t,  int32_t,  lde_w,  clearl)
+-GEN_VEXT_LDFF(vleff_v_d,  int64_t,  int64_t,  lde_d,  clearq)
+-GEN_VEXT_LDFF(vlbuff_v_b, uint8_t,  uint8_t,  ldbu_b, clearb)
+-GEN_VEXT_LDFF(vlbuff_v_h, uint8_t,  uint16_t, ldbu_h, clearh)
+-GEN_VEXT_LDFF(vlbuff_v_w, uint8_t,  uint32_t, ldbu_w, clearl)
+-GEN_VEXT_LDFF(vlbuff_v_d, uint8_t,  uint64_t, ldbu_d, clearq)
+-GEN_VEXT_LDFF(vlhuff_v_h, uint16_t, uint16_t, ldhu_h, clearh)
+-GEN_VEXT_LDFF(vlhuff_v_w, uint16_t, uint32_t, ldhu_w, clearl)
+-GEN_VEXT_LDFF(vlhuff_v_d, uint16_t, uint64_t, ldhu_d, clearq)
+-GEN_VEXT_LDFF(vlwuff_v_w, uint32_t, uint32_t, ldwu_w, clearl)
+-GEN_VEXT_LDFF(vlwuff_v_d, uint32_t, uint64_t, ldwu_d, clearq)
++#define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN, CLEAR_FN)     \
++void HELPER(NAME)(void *vd, void *v0, target_ulong base,  \
++                  CPURISCVState *env, uint32_t desc)      \
++{                                                         \
++    vext_ldff(vd, v0, base, env, desc, LOAD_FN, CLEAR_FN, \
++              sizeof(ETYPE), GETPC());                    \
++}
 +
- /* common translation macro */
- #define GEN_VEXT_TRANS(NAME, SEQ, ARGTYPE, OP, CHECK)      \
- static bool trans_##NAME(DisasContext *s, arg_##ARGTYPE *a)\
-@@ -824,11 +963,10 @@ GEN_VEXT_TRANS(vamomaxud_v, 17, rwdvm, amo_op, amo_check)
++GEN_VEXT_LDFF(vle8ff_v,  int8_t,  lde_b, clearb)
++GEN_VEXT_LDFF(vle16ff_v, int16_t, lde_h, clearh)
++GEN_VEXT_LDFF(vle32ff_v, int32_t, lde_w, clearl)
++GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d, clearq)
  
- static bool opivv_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_reg(s, a->rs1, false));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, true);
-+    return true;
- }
- 
- typedef void GVecGen3Fn(unsigned, uint32_t, uint32_t,
-@@ -922,10 +1060,10 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
- 
- static bool opivx_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, false));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, false);
-+    return true;
- }
- 
- typedef void GVecGen2sFn(unsigned, uint32_t, uint32_t, TCGv_i64,
-@@ -1129,16 +1267,10 @@ GEN_OPIVI_GVEC_TRANS(vrsub_vi, 0, vrsub_vx, rsubi)
- /* OPIVV with WIDEN */
- static bool opivv_widen_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, true) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_reg(s, a->rs1, false) &&
--            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs2,
--                                     1 << s->lmul) &&
--            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs1,
--                                     1 << s->lmul) &&
--            (s->lmul < 0x3) && (s->sew < 0x3));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_DSS(s, a->rd, a->rs1, a->rs2, a->vm, true);
-+    return true;
- }
- 
- static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
-@@ -1185,13 +1317,10 @@ GEN_OPIVV_WIDEN_TRANS(vwsub_vv, opivv_widen_check)
- /* OPIVX with WIDEN */
- static bool opivx_widen_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, true) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs2,
--                                     1 << s->lmul) &&
--            (s->lmul < 0x3) && (s->sew < 0x3));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_DSS(s, a->rd, a->rs1, a->rs2, a->vm, false);
-+    return true;
- }
- 
- static bool do_opivx_widen(DisasContext *s, arg_rmrr *a,
-@@ -1222,14 +1351,10 @@ GEN_OPIVX_WIDEN_TRANS(vwsub_vx)
- /* WIDEN OPIVV with WIDEN */
- static bool opiwv_widen_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, true) &&
--            vext_check_reg(s, a->rs2, true) &&
--            vext_check_reg(s, a->rs1, false) &&
--            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs1,
--                                     1 << s->lmul) &&
--            (s->lmul < 0x3) && (s->sew < 0x3));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_DDS(s, a->rd, a->rs1, a->rs2, a->vm, true);
-+    return true;
- }
- 
- static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
-@@ -1274,11 +1399,10 @@ GEN_OPIWV_WIDEN_TRANS(vwsub_wv)
- /* WIDEN OPIVX with WIDEN */
- static bool opiwx_widen_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, true) &&
--            vext_check_reg(s, a->rs2, true) &&
--            (s->lmul < 0x3) && (s->sew < 0x3));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_DDS(s, a->rd, a->rs1, a->rs2, a->vm, false);
-+    return true;
- }
- 
- static bool do_opiwx_widen(DisasContext *s, arg_rmrr *a,
-@@ -1341,11 +1465,11 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
-  */
- static bool opivv_vadc_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_reg(s, a->rs1, false) &&
--            ((a->rd != 0) || (s->lmul == 0)));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    require(a->rd != 0);
-+    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, true);
-+    return true;
- }
- 
- GEN_OPIVV_TRANS(vadc_vvm, opivv_vadc_check)
-@@ -1357,11 +1481,10 @@ GEN_OPIVV_TRANS(vsbc_vvm, opivv_vadc_check)
-  */
- static bool opivv_vmadc_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_reg(s, a->rs1, false) &&
--            vext_check_overlap_group(a->rd, 1, a->rs1, 1 << s->lmul) &&
--            vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, true);
-+    return true;
- }
- 
- GEN_OPIVV_TRANS(vmadc_vvm, opivv_vmadc_check)
-@@ -1369,10 +1492,11 @@ GEN_OPIVV_TRANS(vmsbc_vvm, opivv_vmadc_check)
- 
- static bool opivx_vadc_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, false) &&
--            ((a->rd != 0) || (s->lmul == 0)));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    require(a->rd != 0);
-+    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, false);
-+    return true;
- }
- 
- /* OPIVX without GVEC IR */
-@@ -1395,9 +1519,10 @@ GEN_OPIVX_TRANS(vsbc_vxm, opivx_vadc_check)
- 
- static bool opivx_vmadc_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, false);
-+    return true;
- }
- 
- GEN_OPIVX_TRANS(vmadc_vxm, opivx_vmadc_check)
-@@ -1488,14 +1613,10 @@ GEN_OPIVI_TRANS(vsra_vi, 1, vsra_vx, opivx_check)
- /* Vector Narrowing Integer Right Shift Instructions */
- static bool opivv_narrow_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, true) &&
--            vext_check_reg(s, a->rs1, false) &&
--            vext_check_overlap_group(a->rd, 1 << s->lmul, a->rs2,
--                2 << s->lmul) &&
--            (s->lmul < 0x3) && (s->sew < 0x3));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_SDS(s, a->rd, a->rs1, a->rs2, a->vm, true);
-+    return true;
- }
- 
- /* OPIVV with NARROW */
-@@ -1531,13 +1652,10 @@ GEN_OPIVV_NARROW_TRANS(vnsrl_vv)
- 
- static bool opivx_narrow_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, true) &&
--            vext_check_overlap_group(a->rd, 1 << s->lmul, a->rs2,
--                2 << s->lmul) &&
--            (s->lmul < 0x3) && (s->sew < 0x3));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_SDS(s, a->rd, a->rs1, a->rs2, a->vm, false);
-+    return true;
- }
- 
- /* OPIVX with NARROW */
-@@ -1585,13 +1703,12 @@ GEN_OPIVI_NARROW_TRANS(vnsrl_vi, 1, vnsrl_vx)
-  */
- static bool opivv_cmp_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_reg(s, a->rs1, false) &&
--            ((vext_check_overlap_group(a->rd, 1, a->rs1, 1 << s->lmul) &&
--              vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul)) ||
--             (s->lmul == 0)));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, true);
-+    return true;
- }
-+
- GEN_OPIVV_TRANS(vmseq_vv, opivv_cmp_check)
- GEN_OPIVV_TRANS(vmsne_vv, opivv_cmp_check)
- GEN_OPIVV_TRANS(vmsltu_vv, opivv_cmp_check)
-@@ -1601,10 +1718,10 @@ GEN_OPIVV_TRANS(vmsle_vv, opivv_cmp_check)
- 
- static bool opivx_cmp_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_reg(s, a->rs2, false) &&
--            (vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul) ||
--             (s->lmul == 0)));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, false);
-+    return true;
- }
- 
- GEN_OPIVX_TRANS(vmseq_vx, opivx_cmp_check)
-@@ -1863,12 +1980,11 @@ GEN_OPIVI_NARROW_TRANS(vnclip_vi, 1, vnclip_vx)
-  */
- static bool opfvv_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_reg(s, a->rs1, false) &&
--            (s->sew != 0));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, true);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- /* OPFVV without GVEC IR */
-@@ -1934,17 +2050,17 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     return true;
- }
- 
--static bool opfvf_check(DisasContext *s, arg_rmrr *a)
--{
  /*
-  * If the current SEW does not correspond to a supported IEEE floating-point
-  * type, an illegal instruction exception is raised
-  */
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, false) &&
--            (s->sew != 0));
-+static bool opfvf_check(DisasContext *s, arg_rmrr *a)
-+{
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, false);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- /* OPFVF without GVEC IR */
-@@ -1976,16 +2092,11 @@ GEN_OPFVF_TRANS(vfrsub_vf,  opfvf_check)
- /* Vector Widening Floating-Point Add/Subtract Instructions */
- static bool opfvv_widen_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, true) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_reg(s, a->rs1, false) &&
--            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs2,
--                                     1 << s->lmul) &&
--            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs1,
--                                     1 << s->lmul) &&
--            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_DSS(s, a->rd, a->rs1, a->rs2, a->vm, true);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- /* OPFVV with WIDEN */
-@@ -2021,13 +2132,11 @@ GEN_OPFVV_WIDEN_TRANS(vfwsub_vv, opfvv_widen_check)
- 
- static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, true) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs2,
--                                     1 << s->lmul) &&
--            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_DSS(s, a->rd, a->rs1, a->rs2, a->vm, false);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- /* OPFVF with WIDEN */
-@@ -2055,14 +2164,11 @@ GEN_OPFVF_WIDEN_TRANS(vfwsub_vf)
- 
- static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, true) &&
--            vext_check_reg(s, a->rs2, true) &&
--            vext_check_reg(s, a->rs1, false) &&
--            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs1,
--                                     1 << s->lmul) &&
--            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_DDS(s, a->rd, a->rs1, a->rs2, a->vm, true);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- /* WIDEN OPFVV with WIDEN */
-@@ -2098,11 +2204,11 @@ GEN_OPFWV_WIDEN_TRANS(vfwsub_wv)
- 
- static bool opfwf_widen_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, true) &&
--            vext_check_reg(s, a->rs2, true) &&
--            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_DDS(s, a->rd, a->rs1, a->rs2, a->vm, false);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- /* WIDEN OPFVF with WIDEN */
-@@ -2175,11 +2281,12 @@ GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf)
-  */
- static bool opfv_check(DisasContext *s, arg_rmr *a)
- {
--   return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, false) &&
--            (s->sew != 0));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    /* OPFV instructions ignore vs1 check */
-+    VEXT_CHECK_SSS(s, a->rd, 0, a->rs2, a->vm, false);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- #define GEN_OPFV_TRANS(NAME, CHECK)                                \
-@@ -2229,13 +2336,11 @@ GEN_OPFVF_TRANS(vfsgnjx_vf, opfvf_check)
- /* Vector Floating-Point Compare Instructions */
- static bool opfvv_cmp_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_reg(s, a->rs1, false) &&
--            (s->sew != 0) &&
--            ((vext_check_overlap_group(a->rd, 1, a->rs1, 1 << s->lmul) &&
--              vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul)) ||
--             (s->lmul == 0)));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, true);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- GEN_OPFVV_TRANS(vmfeq_vv, opfvv_cmp_check)
-@@ -2246,11 +2351,11 @@ GEN_OPFVV_TRANS(vmford_vv, opfvv_cmp_check)
- 
- static bool opfvf_cmp_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_reg(s, a->rs2, false) &&
--            (s->sew != 0) &&
--            (vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul) ||
--             (s->lmul == 0)));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, false);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- GEN_OPFVF_TRANS(vmfeq_vf, opfvf_cmp_check)
-@@ -2316,13 +2421,12 @@ GEN_OPFV_TRANS(vfcvt_f_x_v, opfv_check)
-  */
- static bool opfv_widen_check(DisasContext *s, arg_rmr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, true) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs2,
--                                     1 << s->lmul) &&
--            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    /* OPFV widening instructions ignore vs1 check */
-+    VEXT_CHECK_DSS(s, a->rd, 0, a->rs2, a->vm, false);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- #define GEN_OPFV_WIDEN_TRANS(NAME)                                 \
-@@ -2366,13 +2470,12 @@ GEN_OPFV_WIDEN_TRANS(vfwcvt_f_f_v)
-  */
- static bool opfv_narrow_check(DisasContext *s, arg_rmr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, true) &&
--            vext_check_overlap_group(a->rd, 1 << s->lmul, a->rs2,
--                                     2 << s->lmul) &&
--            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    /* OPFV narrowing instructions ignore vs1 check */
-+    VEXT_CHECK_SDS(s, a->rd, 0, a->rs2, a->vm, false);
-+    require(s->sew != 0);
-+    return true;
- }
- 
- #define GEN_OPFV_NARROW_TRANS(NAME)                                \
-@@ -2865,23 +2968,27 @@ GEN_OPIVI_TRANS(vslidedown_vi, 1, vslidedown_vx, opivx_check)
- /* Vector Register Gather Instruction */
- static bool vrgather_vv_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs1, false) &&
--            vext_check_reg(s, a->rs2, false) &&
--            (a->rd != a->rs2) && (a->rd != a->rs1));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    require_align(a->rd, s->flmul);
-+    require_align(a->rs1, s->flmul);
-+    require_align(a->rs2, s->flmul);
-+    require(a->rd != a->rs2 && a->rd != a->rs1);
-+    require_vm(a->vm, a->rd);
-+    return true;
- }
- 
- GEN_OPIVV_TRANS(vrgather_vv, vrgather_vv_check)
- 
- static bool vrgather_vx_check(DisasContext *s, arg_rmrr *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, false) &&
--            (a->rd != a->rs2));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    require_align(a->rd, s->flmul);
-+    require_align(a->rs2, s->flmul);
-+    require(a->rd != a->rs2);
-+    require_vm(a->vm, a->rd);
-+    return true;
- }
- 
- /* vrgather.vx vd, vs2, rs1, vm # vd[i] = (x[rs1] >= VLMAX) ? 0 : vs2[rs1] */
-@@ -2945,11 +3052,13 @@ static bool trans_vrgather_vi(DisasContext *s, arg_rmrr *a)
- /* Vector Compress Instruction */
- static bool vcompress_vm_check(DisasContext *s, arg_r *a)
- {
--    return (vext_check_isa_ill(s) &&
--            vext_check_reg(s, a->rd, false) &&
--            vext_check_reg(s, a->rs2, false) &&
--            vext_check_overlap_group(a->rd, 1 << s->lmul, a->rs1, 1) &&
--            (a->rd != a->rs2));
-+    REQUIRE_RVV;
-+    VEXT_CHECK_ISA_ILL(s);
-+    require_align(a->rd, s->flmul);
-+    require_align(a->rs2, s->flmul);
-+    require(a->rd != a->rs2);
-+    require_noover(a->rd, s->flmul, a->rs1, 1);
-+    return true;
- }
- 
- static bool trans_vcompress_vm(DisasContext *s, arg_r *a)
+  *** Vector AMO Operations (Zvamo)
 -- 
 2.17.1
 
