@@ -1,48 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtscm-0006Wi-RR
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38354)
+	id 1jtscn-0006XE-1m
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38490)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqem-0005os-Li
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:53:28 -0400
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e]:39815)
+ id 1jtqf1-0005wA-Fh
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:53:43 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b]:37807)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqej-0006rk-Uo
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:53:28 -0400
-Received: by mail-pf1-x42e.google.com with SMTP id x72so2382560pfc.6
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:53:24 -0700 (PDT)
+ id 1jtqez-0006vP-IY
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:53:43 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id p1so2103414pls.4
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:53:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=3ujHei68+TrulsqEDpcUZY6fmHNCEECLw0crtdoSkSY=;
- b=K/j6JT8N5NSkW3GSWUqmCgjBr/Qs84SKOa3D0rmsaE3akLS4Fna4uPsoWQFAiJVXNS
- QZ2Afswnh13bnJGI4uYuTn4SJCVsqpkwPmV57zFB7tg6Skkbg+Hn/dpp8kjXU1kpFsru
- JZ0IGybGo0AK5FbJDJltVoJW2xW/JgTOpGTj/4rrLNIfLraLd5e02VHemxsUpD44vgKc
- 6kagaG6UzgkK6pP0G3yaLt9fYWFPgUUGw+gzHFG45ZJWYt3j6lEpU5y0YYG92BG1hX61
- za3acEIedkOY0ABznZ++AG7Rb6M/LuAT+ezE3E0PngRqqfqva5Q3esI9u/PTR0HKjZZN
- P+8A==
+ bh=RihXg84FjDeVLFolFz2utaTiEAaEOxIfUOHxy3Jd+OI=;
+ b=TIaEopqdNYkQmWAHeYm/isurotnEZDjgMrM++Ng+D5d0kJkNwFaAKPOuTHac5oswk7
+ l2jLMPjstFPCbFcTM7K3KdDO4yLJ1HC2z3NaxtCa1RYVmKXW4jfuxjvEcXNNWeymzktm
+ AD7btFi5nYdrtciVuoqvnju2Ba0dofqWpHw3/APSgHmK49xZyXTepaSGUJshNYaB0pm9
+ GmJLo+gBir9CdsVk/PLWakhXc2B2TUHE9Wjekarg8MYaMORaUjug9Rr2VCiBzoBbAoDX
+ TpSfwC8U5Vv9y6/LZJoTLBISHDqC1iOQhmY4lOdVohsaHV02FmxNAhj3r7ZE+7cPPJyy
+ Bb/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=3ujHei68+TrulsqEDpcUZY6fmHNCEECLw0crtdoSkSY=;
- b=YcpCZ8GetGSs56RU7FNtVeXKO7jzp93cm+b50rIUh2DQZwCNfBR/eqQ3A5/8FDWG8u
- A1oMtuMpkOY296DQEoEzW1YrcbueDyRnzIz4ygBNBZq5PJbmJc68aGJDMRbr8dvX2vj1
- ARWrLQgMMYky8AaNr8/7A1WtZyZSGqLrff+tVQCraIBekXXO7lyubQQtgZYJ0BtL23md
- apxnHg22KFWETJfrS1G18+TpA9gweu2p57nEZnS0LVF74wHVMnQL0ZLOnr0oiRZLs55u
- lQbIeuALkM6HsYYtuQxC2Bc2JKS3rVzMIYlb80JldD2w6LLUsEFbvXo299wwVmxopN1C
- 2WcQ==
-X-Gm-Message-State: AOAM532zIqo3a5mfjTAJDRwRsIraxipPszKd7pNGnCYJAgyX8dD4TQlx
- JiPI9bw9EtiommqD2q92kropAA==
-X-Google-Smtp-Source: ABdhPJzBAz3+NSDW13RGWnBkosXEHGYbpFW3QqK+pxWAnsgXOzBz+MKV7v9hIT4oGzxQTdt5UzYc5w==
-X-Received: by 2002:a63:7a56:: with SMTP id j22mr58088372pgn.293.1594378403070; 
- Fri, 10 Jul 2020 03:53:23 -0700 (PDT)
+ bh=RihXg84FjDeVLFolFz2utaTiEAaEOxIfUOHxy3Jd+OI=;
+ b=ezzA0Mp7pHWb2MnlchAFd/0fAXZTIxVc5SYQNvbf9L3UhCULgRnIQXs8Jx4xQlVXLN
+ lZSF2yI+x8k0V6R561wt1CZxSUnBfZ8Tw953NScD0T7HLW3zf00Zi9Cfto4C/wxBwkOT
+ 0aZfIElKhYh0lQQ4iXnFyRQq1dKbOop/09ExSwNfHfqCUE5H5RAjmuvGLuTaDCUEvMxH
+ enixvqSirLofyrqWOVM0MP8w+uDHepKlEgfy8cAtdrCQNxnwGsrPxoyIDef52ErKqv8J
+ +HAd2bAMYM/VUBu+DE2DrrlO3/0uhtW3F9yiGurSirdNFSZbualmvq9t4jk/8h8WDtu0
+ 03KQ==
+X-Gm-Message-State: AOAM530XOxMKDCWC+UiGR1fQoOiPEXgo6AkBSyQRE4CxwfhaqOK0smS+
+ M7JlZ2VhqIZaoChYdfg0vrdrIA==
+X-Google-Smtp-Source: ABdhPJxGul1srCkjnrqDF7ErNGXwzPol32XUGEEvfy/Pm96T8KzAT9948dOMkqw9cQUOpyPbnALo+g==
+X-Received: by 2002:a17:90b:3684:: with SMTP id
+ mj4mr5251225pjb.66.1594378420277; 
+ Fri, 10 Jul 2020 03:53:40 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.53.20
+ by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.53.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2020 03:53:22 -0700 (PDT)
+ Fri, 10 Jul 2020 03:53:39 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -52,15 +53,14 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [RFC 42/65] target/riscv: rvv-0.9: single-width integer reduction
- instructions
-Date: Fri, 10 Jul 2020 18:48:56 +0800
-Message-Id: <20200710104920.13550-43-frank.chang@sifive.com>
+Subject: [RFC 46/65] target/riscv: rvv-0.9: slide instructions
+Date: Fri, 10 Jul 2020 18:49:00 +0800
+Message-Id: <20200710104920.13550-47-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200710104920.13550-1-frank.chang@sifive.com>
 References: <20200710104920.13550-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62b.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -69,7 +69,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Fri, 10 Jul 2020 08:59:04 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,167 +83,219 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 10:53:28 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 10:53:43 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.inc.c | 21 ++++----
- target/riscv/vector_helper.c            | 69 ++++++++++++-------------
- 2 files changed, 45 insertions(+), 45 deletions(-)
+ target/riscv/insn_trans/trans_rvv.inc.c | 35 ++++++++---
+ target/riscv/vector_helper.c            | 83 +++++++++++--------------
+ 2 files changed, 64 insertions(+), 54 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index b2552f920e..7d44ce7e0a 100644
+index 50f9782a96..dab642ab7a 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -368,16 +368,16 @@ static uint32_t vreg_ofs(DisasContext *s, int reg)
+@@ -379,6 +379,18 @@ static uint32_t vreg_ofs(DisasContext *s, int reg)
+     require_align(rs2, s->flmul)                   \
  } while (0)
  
- /*
-- * Check function for vector reduction instructions
-+ * Check function for vector reduction instructions.
-  *
-- * 2. In widen instructions and some other insturctions, like vslideup.vx,
-- *    there is no need to check whether LMUL=1.
-+ * TODO: Check vstart == 0
-  */
--static bool vext_check_overlap_mask(DisasContext *s, uint32_t vd, bool vm,
--    bool force)
--{
--    return (vm != 0 || vd != 0) || (!force && (s->lmul == 0));
--}
-+#define VEXT_CHECK_REDUCTION(s, rs2, is_wide) do { \
-+    if (is_wide) {                                 \
-+        require(s->sew < 3);                       \
-+    }                                              \
-+    require_align(rs2, s->flmul)                   \
++/*
++ * Check function for vector slide instructions.
++ */
++#define VEXT_CHECK_SLIDE(s, rd, rs2, vm, is_over) do { \
++    require_align(rs2, s->flmul);                      \
++    require_align(rd, s->flmul);                       \
++    require_vm(vm, rd);                                \
++    if (is_over) {                                     \
++        require(rd != rs2);                            \
++    }                                                  \
 +} while (0)
- 
++
  /*
   * Check function for vector integer extension instructions.
-@@ -2731,7 +2731,10 @@ GEN_OPFV_NARROW_TRANS(vfncvt_f_f_v)
- /* Vector Single-Width Integer Reduction Instructions */
- static bool reduction_check(DisasContext *s, arg_rmrr *a)
+  */
+@@ -3214,20 +3226,27 @@ static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
+ /* Vector Slide Instructions */
+ static bool slideup_check(DisasContext *s, arg_rmrr *a)
  {
--    return vext_check_isa_ill(s) && vext_check_reg(s, a->rs2, false);
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            (a->rd != a->rs2));
 +    REQUIRE_RVV;
 +    VEXT_CHECK_ISA_ILL(s);
-+    VEXT_CHECK_REDUCTION(s, a->rs2, false);
++    VEXT_CHECK_SLIDE(s, a->rd, a->rs2, a->vm, true);
 +    return true;
  }
  
- GEN_OPIVV_TRANS(vredsum_vs, reduction_check)
+ GEN_OPIVX_TRANS(vslideup_vx, slideup_check)
+ GEN_OPIVX_TRANS(vslide1up_vx, slideup_check)
+ GEN_OPIVI_TRANS(vslideup_vi, 1, vslideup_vx, slideup_check)
+ 
+-GEN_OPIVX_TRANS(vslidedown_vx, opivx_check)
+-GEN_OPIVX_TRANS(vslide1down_vx, opivx_check)
+-GEN_OPIVI_TRANS(vslidedown_vi, 1, vslidedown_vx, opivx_check)
++static bool slidedown_check(DisasContext *s, arg_rmrr *a)
++{
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_SLIDE(s, a->rd, a->rs2, a->vm, false);
++    return true;
++}
++
++GEN_OPIVX_TRANS(vslidedown_vx, slidedown_check)
++GEN_OPIVX_TRANS(vslide1down_vx, slidedown_check)
++GEN_OPIVI_TRANS(vslidedown_vi, 1, vslidedown_vx, slidedown_check)
+ 
+ /* Vector Register Gather Instruction */
+ static bool vrgather_vv_check(DisasContext *s, arg_rmrr *a)
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 11c962431e..a7f960184b 100644
+index 6484c660c6..050f4fd895 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -4558,15 +4558,13 @@ GEN_VEXT_V_ENV(vfncvt_f_f_v_w, 4, 4, clearl)
-  *** Vector Reduction Operations
+@@ -4916,64 +4916,59 @@ GEN_VEXT_VID_V(vid_v_d, uint64_t, H8, clearq)
   */
- /* Vector Single-Width Integer Reduction Instructions */
--#define GEN_VEXT_RED(NAME, TD, TS2, HD, HS2, OP, CLEAR_FN)\
-+#define GEN_VEXT_RED(NAME, TD, TS2, HD, HS2, OP)          \
- void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-         void *vs2, CPURISCVState *env, uint32_t desc)     \
- {                                                         \
-     uint32_t vm = vext_vm(desc);                          \
--    uint32_t vta = vext_vm(desc);                         \
-     uint32_t vl = env->vl;                                \
-     uint32_t i;                                           \
--    uint32_t tot = env_archcpu(env)->cfg.vlen / 8;        \
-     TD s1 =  *((TD *)vs1 + HD(0));                        \
-                                                           \
-     for (i = 0; i < vl; i++) {                            \
-@@ -4577,56 +4575,55 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-         s1 = OP(s1, (TD)s2);                              \
-     }                                                     \
-     *((TD *)vd + HD(0)) = s1;                             \
--    CLEAR_FN(vd, vta, 1, sizeof(TD), tot);                \
+ 
+ /* Vector Slide Instructions */
+-#define GEN_VEXT_VSLIDEUP_VX(NAME, ETYPE, H, CLEAR_FN)                    \
+-void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+-                  CPURISCVState *env, uint32_t desc)                      \
+-{                                                                         \
+-    uint32_t vlmax = vext_max_elems(desc, sizeof(ETYPE), false);          \
+-    uint32_t vm = vext_vm(desc);                                          \
+-    uint32_t vta = vext_vta(desc);                                        \
+-    uint32_t vl = env->vl;                                                \
+-    target_ulong offset = s1, i;                                          \
+-                                                                          \
+-    for (i = offset; i < vl; i++) {                                       \
+-        if (!vm && !vext_elem_mask(v0, i)) {                              \
+-            continue;                                                     \
+-        }                                                                 \
+-        *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - offset));          \
+-    }                                                                     \
+-    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
++#define GEN_VEXT_VSLIDEUP_VX(NAME, ETYPE, H)                      \
++void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2, \
++                  CPURISCVState *env, uint32_t desc)              \
++{                                                                 \
++    uint32_t vm = vext_vm(desc);                                  \
++    uint32_t vl = env->vl;                                        \
++    target_ulong offset = s1, i;                                  \
++                                                                  \
++    for (i = offset; i < vl; i++) {                               \
++        if (!vm && !vext_elem_mask(v0, i)) {                      \
++            continue;                                             \
++        }                                                         \
++        *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - offset));  \
++    }                                                             \
  }
  
- /* vd[0] = sum(vs1[0], vs2[*]) */
--GEN_VEXT_RED(vredsum_vs_b, int8_t, int8_t, H1, H1, DO_ADD, clearb)
--GEN_VEXT_RED(vredsum_vs_h, int16_t, int16_t, H2, H2, DO_ADD, clearh)
--GEN_VEXT_RED(vredsum_vs_w, int32_t, int32_t, H4, H4, DO_ADD, clearl)
--GEN_VEXT_RED(vredsum_vs_d, int64_t, int64_t, H8, H8, DO_ADD, clearq)
-+GEN_VEXT_RED(vredsum_vs_b, int8_t,  int8_t,  H1, H1, DO_ADD)
-+GEN_VEXT_RED(vredsum_vs_h, int16_t, int16_t, H2, H2, DO_ADD)
-+GEN_VEXT_RED(vredsum_vs_w, int32_t, int32_t, H4, H4, DO_ADD)
-+GEN_VEXT_RED(vredsum_vs_d, int64_t, int64_t, H8, H8, DO_ADD)
+ /* vslideup.vx vd, vs2, rs1, vm # vd[i+rs1] = vs2[i] */
+-GEN_VEXT_VSLIDEUP_VX(vslideup_vx_b, uint8_t, H1, clearb)
+-GEN_VEXT_VSLIDEUP_VX(vslideup_vx_h, uint16_t, H2, clearh)
+-GEN_VEXT_VSLIDEUP_VX(vslideup_vx_w, uint32_t, H4, clearl)
+-GEN_VEXT_VSLIDEUP_VX(vslideup_vx_d, uint64_t, H8, clearq)
++GEN_VEXT_VSLIDEUP_VX(vslideup_vx_b, uint8_t,  H1)
++GEN_VEXT_VSLIDEUP_VX(vslideup_vx_h, uint16_t, H2)
++GEN_VEXT_VSLIDEUP_VX(vslideup_vx_w, uint32_t, H4)
++GEN_VEXT_VSLIDEUP_VX(vslideup_vx_d, uint64_t, H8)
  
- /* vd[0] = maxu(vs1[0], vs2[*]) */
--GEN_VEXT_RED(vredmaxu_vs_b, uint8_t, uint8_t, H1, H1, DO_MAX, clearb)
--GEN_VEXT_RED(vredmaxu_vs_h, uint16_t, uint16_t, H2, H2, DO_MAX, clearh)
--GEN_VEXT_RED(vredmaxu_vs_w, uint32_t, uint32_t, H4, H4, DO_MAX, clearl)
--GEN_VEXT_RED(vredmaxu_vs_d, uint64_t, uint64_t, H8, H8, DO_MAX, clearq)
-+GEN_VEXT_RED(vredmaxu_vs_b, uint8_t,  uint8_t,  H1, H1, DO_MAX)
-+GEN_VEXT_RED(vredmaxu_vs_h, uint16_t, uint16_t, H2, H2, DO_MAX)
-+GEN_VEXT_RED(vredmaxu_vs_w, uint32_t, uint32_t, H4, H4, DO_MAX)
-+GEN_VEXT_RED(vredmaxu_vs_d, uint64_t, uint64_t, H8, H8, DO_MAX)
+-#define GEN_VEXT_VSLIDEDOWN_VX(NAME, ETYPE, H, CLEAR_FN)                  \
++#define GEN_VEXT_VSLIDEDOWN_VX(NAME, ETYPE, H)                            \
+ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+                   CPURISCVState *env, uint32_t desc)                      \
+ {                                                                         \
+-    uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
++    uint32_t vlmax = vext_max_elems(desc, sizeof(ETYPE), false);          \
+     uint32_t vm = vext_vm(desc);                                          \
+-    uint32_t vta = vext_vta(desc);                                        \
+     uint32_t vl = env->vl;                                                \
+     target_ulong offset = s1, i;                                          \
+                                                                           \
+     for (i = 0; i < vl; ++i) {                                            \
++        /* offset may be a large value, which j may overflow */           \
+         target_ulong j = i + offset;                                      \
++        bool is_valid = (offset >= vlmax || j >= vlmax) ? false : true;   \
+         if (!vm && !vext_elem_mask(v0, i)) {                              \
+             continue;                                                     \
+         }                                                                 \
+-        *((ETYPE *)vd + H(i)) = j >= vlmax ? 0 : *((ETYPE *)vs2 + H(j));  \
++        *((ETYPE *)vd + H(i)) = is_valid ? *((ETYPE *)vs2 + H(j)) : 0;  \
+     }                                                                     \
+-    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+ }
  
- /* vd[0] = max(vs1[0], vs2[*]) */
--GEN_VEXT_RED(vredmax_vs_b, int8_t, int8_t, H1, H1, DO_MAX, clearb)
--GEN_VEXT_RED(vredmax_vs_h, int16_t, int16_t, H2, H2, DO_MAX, clearh)
--GEN_VEXT_RED(vredmax_vs_w, int32_t, int32_t, H4, H4, DO_MAX, clearl)
--GEN_VEXT_RED(vredmax_vs_d, int64_t, int64_t, H8, H8, DO_MAX, clearq)
-+GEN_VEXT_RED(vredmax_vs_b, int8_t,  int8_t,  H1, H1, DO_MAX)
-+GEN_VEXT_RED(vredmax_vs_h, int16_t, int16_t, H2, H2, DO_MAX)
-+GEN_VEXT_RED(vredmax_vs_w, int32_t, int32_t, H4, H4, DO_MAX)
-+GEN_VEXT_RED(vredmax_vs_d, int64_t, int64_t, H8, H8, DO_MAX)
+ /* vslidedown.vx vd, vs2, rs1, vm # vd[i] = vs2[i+rs1] */
+-GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_b, uint8_t, H1, clearb)
+-GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_h, uint16_t, H2, clearh)
+-GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_w, uint32_t, H4, clearl)
+-GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_d, uint64_t, H8, clearq)
++GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_b, uint8_t,  H1)
++GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_h, uint16_t, H2)
++GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_w, uint32_t, H4)
++GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_d, uint64_t, H8)
  
- /* vd[0] = minu(vs1[0], vs2[*]) */
--GEN_VEXT_RED(vredminu_vs_b, uint8_t, uint8_t, H1, H1, DO_MIN, clearb)
--GEN_VEXT_RED(vredminu_vs_h, uint16_t, uint16_t, H2, H2, DO_MIN, clearh)
--GEN_VEXT_RED(vredminu_vs_w, uint32_t, uint32_t, H4, H4, DO_MIN, clearl)
--GEN_VEXT_RED(vredminu_vs_d, uint64_t, uint64_t, H8, H8, DO_MIN, clearq)
-+GEN_VEXT_RED(vredminu_vs_b, uint8_t,  uint8_t,  H1, H1, DO_MIN)
-+GEN_VEXT_RED(vredminu_vs_h, uint16_t, uint16_t, H2, H2, DO_MIN)
-+GEN_VEXT_RED(vredminu_vs_w, uint32_t, uint32_t, H4, H4, DO_MIN)
-+GEN_VEXT_RED(vredminu_vs_d, uint64_t, uint64_t, H8, H8, DO_MIN)
+-#define GEN_VEXT_VSLIDE1UP_VX(NAME, ETYPE, H, CLEAR_FN)                   \
++#define GEN_VEXT_VSLIDE1UP_VX(NAME, ETYPE, H)                             \
+ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+                   CPURISCVState *env, uint32_t desc)                      \
+ {                                                                         \
+-    uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
+     uint32_t vm = vext_vm(desc);                                          \
+-    uint32_t vta = vext_vta(desc);                                        \
+     uint32_t vl = env->vl;                                                \
+     uint32_t i;                                                           \
+                                                                           \
+@@ -4987,22 +4982,19 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+             *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - 1));           \
+         }                                                                 \
+     }                                                                     \
+-    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+ }
  
- /* vd[0] = min(vs1[0], vs2[*]) */
--GEN_VEXT_RED(vredmin_vs_b, int8_t, int8_t, H1, H1, DO_MIN, clearb)
--GEN_VEXT_RED(vredmin_vs_h, int16_t, int16_t, H2, H2, DO_MIN, clearh)
--GEN_VEXT_RED(vredmin_vs_w, int32_t, int32_t, H4, H4, DO_MIN, clearl)
--GEN_VEXT_RED(vredmin_vs_d, int64_t, int64_t, H8, H8, DO_MIN, clearq)
-+GEN_VEXT_RED(vredmin_vs_b, int8_t,  int8_t,  H1, H1, DO_MIN)
-+GEN_VEXT_RED(vredmin_vs_h, int16_t, int16_t, H2, H2, DO_MIN)
-+GEN_VEXT_RED(vredmin_vs_w, int32_t, int32_t, H4, H4, DO_MIN)
-+GEN_VEXT_RED(vredmin_vs_d, int64_t, int64_t, H8, H8, DO_MIN)
+ /* vslide1up.vx vd, vs2, rs1, vm # vd[0]=x[rs1], vd[i+1] = vs2[i] */
+-GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_b, uint8_t, H1, clearb)
+-GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_h, uint16_t, H2, clearh)
+-GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_w, uint32_t, H4, clearl)
+-GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_d, uint64_t, H8, clearq)
++GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_b, uint8_t,  H1)
++GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_h, uint16_t, H2)
++GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_w, uint32_t, H4)
++GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_d, uint64_t, H8)
  
- /* vd[0] = and(vs1[0], vs2[*]) */
--GEN_VEXT_RED(vredand_vs_b, int8_t, int8_t, H1, H1, DO_AND, clearb)
--GEN_VEXT_RED(vredand_vs_h, int16_t, int16_t, H2, H2, DO_AND, clearh)
--GEN_VEXT_RED(vredand_vs_w, int32_t, int32_t, H4, H4, DO_AND, clearl)
--GEN_VEXT_RED(vredand_vs_d, int64_t, int64_t, H8, H8, DO_AND, clearq)
-+GEN_VEXT_RED(vredand_vs_b, int8_t,  int8_t,  H1, H1, DO_AND)
-+GEN_VEXT_RED(vredand_vs_h, int16_t, int16_t, H2, H2, DO_AND)
-+GEN_VEXT_RED(vredand_vs_w, int32_t, int32_t, H4, H4, DO_AND)
-+GEN_VEXT_RED(vredand_vs_d, int64_t, int64_t, H8, H8, DO_AND)
+-#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, ETYPE, H, CLEAR_FN)                 \
++#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, ETYPE, H)                           \
+ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+                   CPURISCVState *env, uint32_t desc)                      \
+ {                                                                         \
+-    uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
+     uint32_t vm = vext_vm(desc);                                          \
+-    uint32_t vta = vext_vta(desc);                                        \
+     uint32_t vl = env->vl;                                                \
+     uint32_t i;                                                           \
+                                                                           \
+@@ -5016,14 +5008,13 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+             *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i + 1));           \
+         }                                                                 \
+     }                                                                     \
+-    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+ }
  
- /* vd[0] = or(vs1[0], vs2[*]) */
--GEN_VEXT_RED(vredor_vs_b, int8_t, int8_t, H1, H1, DO_OR, clearb)
--GEN_VEXT_RED(vredor_vs_h, int16_t, int16_t, H2, H2, DO_OR, clearh)
--GEN_VEXT_RED(vredor_vs_w, int32_t, int32_t, H4, H4, DO_OR, clearl)
--GEN_VEXT_RED(vredor_vs_d, int64_t, int64_t, H8, H8, DO_OR, clearq)
-+GEN_VEXT_RED(vredor_vs_b, int8_t,  int8_t,  H1, H1, DO_OR)
-+GEN_VEXT_RED(vredor_vs_h, int16_t, int16_t, H2, H2, DO_OR)
-+GEN_VEXT_RED(vredor_vs_w, int32_t, int32_t, H4, H4, DO_OR)
-+GEN_VEXT_RED(vredor_vs_d, int64_t, int64_t, H8, H8, DO_OR)
+ /* vslide1down.vx vd, vs2, rs1, vm # vd[i] = vs2[i+1], vd[vl-1]=x[rs1] */
+-GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_b, uint8_t, H1, clearb)
+-GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_h, uint16_t, H2, clearh)
+-GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_w, uint32_t, H4, clearl)
+-GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_d, uint64_t, H8, clearq)
++GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_b, uint8_t,  H1)
++GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_h, uint16_t, H2)
++GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_w, uint32_t, H4)
++GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_d, uint64_t, H8)
  
- /* vd[0] = xor(vs1[0], vs2[*]) */
--GEN_VEXT_RED(vredxor_vs_b, int8_t, int8_t, H1, H1, DO_XOR, clearb)
--GEN_VEXT_RED(vredxor_vs_h, int16_t, int16_t, H2, H2, DO_XOR, clearh)
--GEN_VEXT_RED(vredxor_vs_w, int32_t, int32_t, H4, H4, DO_XOR, clearl)
--GEN_VEXT_RED(vredxor_vs_d, int64_t, int64_t, H8, H8, DO_XOR, clearq)
-+GEN_VEXT_RED(vredxor_vs_b, int8_t,  int8_t,  H1, H1, DO_XOR)
-+GEN_VEXT_RED(vredxor_vs_h, int16_t, int16_t, H2, H2, DO_XOR)
-+GEN_VEXT_RED(vredxor_vs_w, int32_t, int32_t, H4, H4, DO_XOR)
-+GEN_VEXT_RED(vredxor_vs_d, int64_t, int64_t, H8, H8, DO_XOR)
- 
- /* Vector Widening Integer Reduction Instructions */
- /* signed sum reduction into double-width accumulator */
+ /* Vector Register Gather Instruction */
+ #define GEN_VEXT_VRGATHER_VV(NAME, ETYPE, H, CLEAR_FN)                    \
 -- 
 2.17.1
 
