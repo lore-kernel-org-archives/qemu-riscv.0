@@ -1,72 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtuUc-0004uB-KZ
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 10:59:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49976)
+	id 1jtvdy-0000eN-9m
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 12:12:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41988)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1jtuUa-0004rw-Qw
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 10:59:12 -0400
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:35936)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jtvdw-0000ca-Qw
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 12:12:56 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:41229)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1jtuUV-0000SO-QX
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 10:59:12 -0400
-Received: by mail-wr1-x441.google.com with SMTP id k6so6285197wrn.3
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 07:59:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jtvdu-0004rA-VA
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 12:12:56 -0400
+Received: by mail-pf1-x435.google.com with SMTP id q17so2732247pfu.8
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 09:12:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=references:user-agent:from:to:cc:subject:in-reply-to:date
- :message-id:mime-version:content-transfer-encoding;
- bh=TA/HkXSapHZeZe5bfTpqkCWfDhLsdsc8tqcDOZY4jlI=;
- b=aYR7a1c+34KqNLVuAfWp4pw3oBZ1VmTYI2LFh7wgswFE7Lpo161qmoSbNSsAeplwsu
- qZ600TyYleuPs3rIiOk8DDPWrB3gcoRm56dRJtjC86w07NMXAEIMeEJKmH7xikiDRjak
- NDNzT85CbnYVqmzBZ6/5yZLxwex4Gjg9+xjeVKgLYBnl2KtiY+qkfrN4p0aAIOHY4edN
- /B92GkROFP4cJQYuItaYsTHe0oCZP06N/MddfvBKL9WzMHSYPEjUlemK/wZwDc9TQ5eU
- 0q7qmmPiETukUej7ahBkiRVbVty3xa81x3vZqizig5G7zkFn26u2Vw8LXNmioXoagxyu
- /bOA==
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=qRqlCF7caLfmkcVuclm0vZ4IDFCmNbMkWR5ABSmYfSU=;
+ b=RzMVlg7WxenqZDVIzUB4mdrZdoqCh+lFsk1XyqIL5YKPh4h9P6OXjNoFftj2yiUxeh
+ CB91O1Ofse6b+fu0P+jkfUJjeb0nCmwZ1OVTNhSE+ukjkES/taEMWrblJHMf8WJvXrLj
+ GFjpJhWHOkIOmmPP5vNLgH6fA1m8jhr31nx9lsKuWJgSXXARBECnj7I6Gcdp62Biv7/f
+ zIDGaTD97Ts51BMOlW71YRepIrcvqbGpDwdhCMWrY5J+9QsPht2rlSRiWh1C1i2MVayi
+ w1K7USzCWkpvHLPlLkoPy0KSXggKbPgpaWUbhpMN7DI5okMVLPNdnWRa+KHYEo/DwwD7
+ G+4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:references:user-agent:from:to:cc:subject
- :in-reply-to:date:message-id:mime-version:content-transfer-encoding;
- bh=TA/HkXSapHZeZe5bfTpqkCWfDhLsdsc8tqcDOZY4jlI=;
- b=MOY+R32XbChpZRN0vrP/uBBpwMGqU+7/S7vOSgkuC2zG8EOpUFBMutwu7Kz71eLs8k
- lZGExBnhL8Qc1kjjBrfRVUeMD3icLEm51ypwaj7QY4r9hVL/0fbPmLGJ4gUu3JAI3GPB
- XGm3gu6Dqe5jgPq9Bb0wpiRRHkD/I4SKXkU5COy77rsMo03pIfe8JZ+q4qjscn1O/6EI
- WWHWJFW/fnX7JqsyyDV58GMuwLHBg7rsueVLmzGHezhmTDRdOZxIYEQOsceZ8T4a0z7K
- EzZyE4IqNEPZk1W1QWUebdbv/cRmAnAbs52czu8+9nDICjSPOJl/PIOYf7eNL3FWW4fl
- Yxuw==
-X-Gm-Message-State: AOAM5302ikbGi6ZA1XJYx1OU49dp8lcAllb7fTcBRHdsQGXKweym1qXd
- HBnmxLNTzVystPbSsYrzO8WH3w==
-X-Google-Smtp-Source: ABdhPJyXdq5B8QVpPtA/vGhBnMsMBSDg5AHWXFSNZLjVLUgNRmQL0nqZJ0NKkSD+D9My3dMqyqPl1A==
-X-Received: by 2002:a5d:6288:: with SMTP id k8mr66296042wru.373.1594393146438; 
- Fri, 10 Jul 2020 07:59:06 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id r8sm10186461wrp.40.2020.07.10.07.59.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2020 07:59:05 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 846AB1FF7E;
- Fri, 10 Jul 2020 15:59:04 +0100 (BST)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=qRqlCF7caLfmkcVuclm0vZ4IDFCmNbMkWR5ABSmYfSU=;
+ b=mMIuX2D5/kmudcyvvoPLCcS+DZSNMY8B/AHPg0YElgwrsesVUFXp5nYyHrgVOaa0Zb
+ I/BLpCTTEnOpgSWkXlV+SWydhMfxnD+YT9rhDqFFryCvojzpai4Wg4MyNJNKQSnazzjm
+ m4x7wPcMogLvvgEy+qdccJy/ctLzgZQ5/e+kG8+WWuz4JjP5q4SB63zlfpImEGTSUZdz
+ z6/P3wWL2q1b6P5npsqNR9LiJQ598WM3Et9NGCH68ZpmXpTeJCTYxsFlVwbAyD5EvkYu
+ FjrKz+VcDuNwOP9yOlC+iEp/I8u3JBc97oRgEB9kyY6jHWzkQom5Xn4nPWH5cEdhPuax
+ IoSg==
+X-Gm-Message-State: AOAM532UaG70r0slK4GsvZ8wAPr0DVt6+izsLjIcB15Dc6K0+g87Cy/1
+ eYsIXM6F7eaNAyrw8mVAwYlQEg==
+X-Google-Smtp-Source: ABdhPJyo+L8ryJa/OoVwpBeTGr8LRJB7IbK0a+AchsI8D1MtGnuiMYFF+0HlVMU2yexWzA5S5JGSfQ==
+X-Received: by 2002:a63:1007:: with SMTP id f7mr58180509pgl.147.1594397573352; 
+ Fri, 10 Jul 2020 09:12:53 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
+ by smtp.gmail.com with ESMTPSA id s187sm7257085pfs.83.2020.07.10.09.12.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 10 Jul 2020 09:12:52 -0700 (PDT)
+Subject: Re: [RFC 01/65] target/riscv: fix rsub gvec tcg_assert_listed_vecop
+ assertion
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
 References: <20200710104920.13550-1-frank.chang@sifive.com>
- <20200710104920.13550-61-frank.chang@sifive.com>
- <87k0zblgjx.fsf@linaro.org>
- <CAE_xrPhKg1FeRwW0zS-jpfo8XL7WvSFywif27X0kAYgh044N6w@mail.gmail.com>
- <878sfrleq9.fsf@linaro.org>
- <CAE_xrPht7BytoFxLdkGk+CRr+kEyT50woe_UE5mRVHjk6=pORA@mail.gmail.com>
-User-agent: mu4e 1.5.4; emacs 28.0.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Frank Chang <frank.chang@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Aurelien Jarno
- <aurelien@aurel32.net>, Peter Maydell <peter.maydell@linaro.org>
-Subject: Re: [RFC 60/65] softfloat: add fp16 and uint8/int8 interconvert
- functions
-In-reply-to: <CAE_xrPht7BytoFxLdkGk+CRr+kEyT50woe_UE5mRVHjk6=pORA@mail.gmail.com>
-Date: Fri, 10 Jul 2020 15:59:04 +0100
-Message-ID: <87zh87ju13.fsf@linaro.org>
+ <20200710104920.13550-2-frank.chang@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <9be2326f-96d8-7680-d068-6fac66ba0be8@linaro.org>
+Date: Fri, 10 Jul 2020 09:12:50 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
+In-Reply-To: <20200710104920.13550-2-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::441;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x441.google.com
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x435.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -74,8 +73,8 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -88,60 +87,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 14:59:13 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 16:12:57 -0000
+
+On 7/10/20 3:48 AM, frank.chang@sifive.com wrote:
+> From: Frank Chang <frank.chang@sifive.com>
+> 
+> gvec should provide vecop_list to avoid:
+> "tcg_tcg_assert_listed_vecop: code should not be reached bug" assertion.
+> 
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  target/riscv/insn_trans/trans_rvv.inc.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+Alistair, this one should be queued for 5.1 as a bug fix.
 
 
-Frank Chang <frank.chang@sifive.com> writes:
-
-> On Fri, Jul 10, 2020 at 8:46 PM Alex Benn=C3=A9e <alex.bennee@linaro.org>=
- wrote:
->
->>
->> Frank Chang <frank.chang@sifive.com> writes:
->>
->> > On Fri, Jul 10, 2020 at 8:07 PM Alex Benn=C3=A9e <alex.bennee@linaro.o=
-rg>
->> wrote:
->> >
->> >>
->> >> frank.chang@sifive.com writes:
->> >>
->> >> > From: Frank Chang <frank.chang@sifive.com>
->> >> >
->> >> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
->> >>
->> >> Did I miss the rest of the series somewhere?
->> >>
->> >> Otherwise this looks fine to me:
->> >>
->> >> Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
->> >>
->> >> If you mean float16 to uint8 and int8 conversion functions, this comm=
-it
->> is
->> > everything.
->> > I think I just cc the mail based on *scripts/get_maintainer.pl
->> > <http://get_maintainer.pl>*, so probably didn't send the whole series =
-to
->> > everyone.
->>
->> Usually I see the rest of the thread from the mailing list. I can't see:
->>
->>   In-Reply-To: <20200710104920.13550-1-frank.chang@sifive.com>
->>   References: <20200710104920.13550-1-frank.chang@sifive.com>
->>
->> on any of the qemu mailing lists.
->>
->> --
->> Alex Benn=C3=A9e
->>
->
-> The rest of the patches are coming out:
-> https://patchew.org/QEMU/20200710104920.13550-1-frank.chang@sifive.com/
-> Not sure what caused the delay...
-
-Ahh the mailing list is still chugging a bit it seems.
-
---=20
-Alex Benn=C3=A9e
+r~
 
