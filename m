@@ -1,64 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtscf-0006At-M1
+	id 1jtscf-0006Bg-Se
 	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36768)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36976)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqcU-00051i-Hr
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:06 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:40353)
+ id 1jtqcs-00058N-JV
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:30 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:44460)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqcT-0006WF-0k
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:06 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id u5so2380488pfn.7
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:51:04 -0700 (PDT)
+ id 1jtqcq-0006Zd-OY
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:30 -0400
+Received: by mail-pl1-x634.google.com with SMTP id w17so2089670ply.11
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:51:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=B6X3Angz3a9fADBGRD8iRciXrYqjv/GzyJKhnyt8KN0=;
- b=adlI23sr1hWB/wr7xH6KCe1dssnuRPPkXCJ8wbGLyzv37r6OG6FiupB+YVJ0AT95UA
- zdDmBwSWNCrbW0C56yYzhspgom2+QHlztcONxiFLn5GAnTbL4tIQdPJcZza9G95ttsLH
- O8KU3M/gQxHsGraptX6tIzWLliqYhwMIqVzAYpf2HQ0caPnqc2o9pw6rGOThwLFtomve
- wXRaYjsvgwHboBJFtqvFHAVk9MoS0e0WDmErUTalpeFgtY1aNuiHpZx8wlfGyJoQUuDa
- HjYJ2cid6u6UnPGMI8i7ZgHsYQDn8lcRh1UzASN68JC/ZLmpqMNKmQZrpfC3qt3eoDeb
- lvaQ==
+ bh=9zjuMxsHl1Yz3Vtp5Jd2e1VqCar4pnOkYjAkW0culYI=;
+ b=jxbmMS8ws8JdINMM6xHkhi726ku/JdzFzKuOS4wtr5CuTKC9irtYb2ywfzTHg2WeJm
+ zfMcsmNDa7Sff76NOdRm0ctkWAkFqPvzQMqTRURmqFq6JQPIYb4xOZka5ywtOQAzPfRD
+ xdtvOfLn9u2fKhAeFpUppAODl/RUeYbkR7/lIIzrmjf6DYRn93x79qKRFpzD8bzbLE4g
+ 9zatBOJZfOQCdsfWR3PJQ6wmn6c2GOxKwMoq+QILRYEZS5nNGmot5JXgYXXOi/wq1qpm
+ /i87E+O0A5nHHroMQCt/JxryTcGm256mueQHN2mUh493jn+DkHMiEJ7AGHk52KMnwuoM
+ mP9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=B6X3Angz3a9fADBGRD8iRciXrYqjv/GzyJKhnyt8KN0=;
- b=jje3MyhMpGuYh/bIE72/p7Ybj5JT40O/NqxT7wPNeYiBGFOd5M62Vzr7PE9aJpE9sB
- /bTebVb8IY3cstjMYV1j9pQztAymHJY6rB5UrxWDMRSioojVfuTC0iI+E9BQvtqYlYCQ
- +YseVUlMgAMpE3AIpF88wQQ0Eb46GVwDdVJYAM8BVdf3OedoFFbSenOqU/V7VRwreCZJ
- 1StjePyjQDgpaTQDxzOhR29lrlL8EEFEFWqob4nEydPU7yCQc+ES7R5CCJfe0asfzTDm
- fBKMzB+iJsyBw2YY4DCRxjbllhqvZpZC4lsy5yFF9GFbZetIZfcSEy+Ss4AhWbGc9/bb
- YmkQ==
-X-Gm-Message-State: AOAM531iSCWYXgpOWrLJDARNJN439hL01iNo8Uwr+u26+eLP2GCdYnFg
- UJOegcHELi+5g90HO/nFhP4wLg==
-X-Google-Smtp-Source: ABdhPJzsowJFyDhitTrHXZPVHvEhFqHZNWlBjrqKg1u+v3xXXbwEoTJIChVbLevmJLdm4wLOnzt4lA==
-X-Received: by 2002:a63:5a54:: with SMTP id k20mr57031539pgm.226.1594378263794; 
- Fri, 10 Jul 2020 03:51:03 -0700 (PDT)
+ bh=9zjuMxsHl1Yz3Vtp5Jd2e1VqCar4pnOkYjAkW0culYI=;
+ b=nCp3EFEog1LgeswZp2Ga3N3dgDGSCn86Eb+aUAiCqvgnJUoMcoImXbVGROGHWAcZjr
+ IpX3gZ/zFtj6k9/rLhJKhMbURQ13EF9L45zcya9Tb0mHNvESQ3KqpQMFFH+GwGjHsdQU
+ GPGcMUCncSwtZgiK2V10CNvVgnibChI5YlMw9m4uG0+wDBeXO9bXO0c/alApJF5zR45Y
+ 9oPq6sgVdJSTYq2opzIDgVAi3+aT+D675Fi8uWdimKdkgCD0/qL8NYJz3BOznp2BsJrz
+ +UQ1698VR1DvtarpIo8k8jHU/UYuzd9J3k7oqa3mwyx9H9Z7TCerX1w0or9p/fG5/MrF
+ Lh4A==
+X-Gm-Message-State: AOAM533bshJDkRuf4se/Z2gaGVIPIKVPGSJrrX/RZLiYDupHYu2s1bqW
+ MIBC3GIlgAK1tyLyC8npmNd6OQ==
+X-Google-Smtp-Source: ABdhPJzBHjdTrsJMvgW7BYutP3y59HRhnjEI6jo4UXcr9kH9vCM4hzTe1HandYuSDCiHTChv50feqQ==
+X-Received: by 2002:a17:902:6949:: with SMTP id
+ k9mr47748655plt.91.1594378287340; 
+ Fri, 10 Jul 2020 03:51:27 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.51.01
+ by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.51.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2020 03:51:03 -0700 (PDT)
+ Fri, 10 Jul 2020 03:51:27 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>, Greentime Hu <greentime.hu@sifive.com>,
- Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC 09/65] target/riscv: rvv-0.9: add vlenb register
-Date: Fri, 10 Jul 2020 18:48:23 +0800
-Message-Id: <20200710104920.13550-10-frank.chang@sifive.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [RFC 13/65] target/riscv: rvv-0.9: configure instructions
+Date: Fri, 10 Jul 2020 18:48:27 +0800
+Message-Id: <20200710104920.13550-14-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200710104920.13550-1-frank.chang@sifive.com>
 References: <20200710104920.13550-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x634.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -81,81 +83,190 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 10:51:06 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 10:51:30 -0000
 
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+From: Frank Chang <frank.chang@sifive.com>
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Signed-off-by: Greentime Hu <greentime.hu@sifive.com>
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/cpu.c      | 1 +
- target/riscv/cpu.h      | 1 +
- target/riscv/cpu_bits.h | 1 +
- target/riscv/csr.c      | 7 +++++++
- 4 files changed, 10 insertions(+)
+ target/riscv/helper.h                   |  2 +-
+ target/riscv/insn_trans/trans_rvv.inc.c | 52 ++++++++++++-------------
+ target/riscv/vector_helper.c            | 38 ++++++++++++------
+ 3 files changed, 53 insertions(+), 39 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 228b9bdb5d..871c2ddfa1 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -317,6 +317,7 @@ static void riscv_cpu_reset(DeviceState *dev)
-     env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
-     env->mcause = 0;
-     env->pc = env->resetvec;
-+    env->vlenb = cpu->cfg.vlen >> 3;
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index acc298219d..5939897a82 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -83,7 +83,7 @@ DEF_HELPER_1(hyp_tlb_flush, void, env)
  #endif
-     cs->exception_index = EXCP_NONE;
-     env->load_res = -1;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index c02690ed0d..81c85bf4c2 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -111,6 +111,7 @@ struct CPURISCVState {
-     target_ulong vl;
-     target_ulong vstart;
-     target_ulong vtype;
-+    target_ulong vlenb;
  
-     target_ulong pc;
-     target_ulong load_res;
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 79ae0accbc..62789e3720 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -63,6 +63,7 @@
- #define CSR_VCSR            0x00f
- #define CSR_VL              0xc20
- #define CSR_VTYPE           0xc21
-+#define CSR_VLENB           0xc22
- 
- /* VCSR fields */
- #define VCSR_VXSAT_SHIFT    0
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 77d371f385..6b05c631f4 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -197,6 +197,12 @@ static int read_vtype(CPURISCVState *env, int csrno, target_ulong *val)
-     return 0;
+ /* Vector functions */
+-DEF_HELPER_3(vsetvl, tl, env, tl, tl)
++DEF_HELPER_5(vsetvl, tl, env, i32, i32, tl, tl)
+ DEF_HELPER_5(vlb_v_b, void, ptr, ptr, tl, env, i32)
+ DEF_HELPER_5(vlb_v_b_mask, void, ptr, ptr, tl, env, i32)
+ DEF_HELPER_5(vlb_v_h, void, ptr, ptr, tl, env, i32)
+diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+index fc1908389e..da8e7598e9 100644
+--- a/target/riscv/insn_trans/trans_rvv.inc.c
++++ b/target/riscv/insn_trans/trans_rvv.inc.c
+@@ -72,33 +72,32 @@ static inline bool is_overlapped_widen(const int astart, int asize,
+     }
  }
  
-+static int read_vlenb(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->vlenb;
-+    return 0;
-+}
-+
- static int read_vl(CPURISCVState *env, int csrno, target_ulong *val)
+-static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
++static bool trans_vsetvl(DisasContext *s, arg_vsetvl *a)
  {
-     *val = env->vl;
-@@ -1301,6 +1307,7 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_VCSR] =                { vs,   read_vcsr,        write_vcsr        },
-     [CSR_VL] =                  { vs,   read_vl                             },
-     [CSR_VTYPE] =               { vs,   read_vtype                          },
-+    [CSR_VLENB] =               { vs,   read_vlenb                          },
-     /* User Timers and Counters */
-     [CSR_CYCLE] =               { ctr,  read_instret                        },
-     [CSR_INSTRET] =             { ctr,  read_instret                        },
++    TCGv_i32 rd, rs1;
+     TCGv s1, s2, dst;
+ 
+     REQUIRE_RVV;
+-    if (!has_ext(ctx, RVV)) {
++    if (!has_ext(s, RVV)) {
+         return false;
+     }
+ 
++    rd = tcg_const_i32(a->rd);
++    rs1 = tcg_const_i32(a->rs1);
++    s1 = tcg_temp_new();
+     s2 = tcg_temp_new();
+     dst = tcg_temp_new();
+ 
+-    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
+-    if (a->rs1 == 0) {
+-        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
+-        s1 = tcg_const_tl(RV_VLEN_MAX);
+-    } else {
+-        s1 = tcg_temp_new();
+-        gen_get_gpr(s1, a->rs1);
+-    }
++    gen_get_gpr(s1, a->rs1);
+     gen_get_gpr(s2, a->rs2);
+-    gen_helper_vsetvl(dst, cpu_env, s1, s2);
++    gen_helper_vsetvl(dst, cpu_env, rd, rs1, s1, s2);
+     gen_set_gpr(a->rd, dst);
+-    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+-    lookup_and_goto_ptr(ctx);
+-    ctx->base.is_jmp = DISAS_NORETURN;
++    tcg_gen_movi_tl(cpu_pc, s->pc_succ_insn);
++    lookup_and_goto_ptr(s);
++    s->base.is_jmp = DISAS_NORETURN;
+ 
++    tcg_temp_free_i32(rd);
++    tcg_temp_free_i32(rs1);
+     tcg_temp_free(s1);
+     tcg_temp_free(s2);
+     tcg_temp_free(dst);
+@@ -106,31 +105,30 @@ static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
+     return true;
+ }
+ 
+-static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)
++static bool trans_vsetvli(DisasContext *s, arg_vsetvli *a)
+ {
++    TCGv_i32 rd, rs1;
+     TCGv s1, s2, dst;
+ 
+     REQUIRE_RVV;
+-    if (!has_ext(ctx, RVV)) {
++    if (!has_ext(s, RVV)) {
+         return false;
+     }
+ 
++    rd = tcg_const_i32(a->rd);
++    rs1 = tcg_const_i32(a->rs1);
++    s1 = tcg_temp_new();
+     s2 = tcg_const_tl(a->zimm);
+     dst = tcg_temp_new();
+ 
+-    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
+-    if (a->rs1 == 0) {
+-        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
+-        s1 = tcg_const_tl(RV_VLEN_MAX);
+-    } else {
+-        s1 = tcg_temp_new();
+-        gen_get_gpr(s1, a->rs1);
+-    }
+-    gen_helper_vsetvl(dst, cpu_env, s1, s2);
++    gen_get_gpr(s1, a->rs1);
++    gen_helper_vsetvl(dst, cpu_env, rd, rs1, s1, s2);
+     gen_set_gpr(a->rd, dst);
+-    gen_goto_tb(ctx, 0, ctx->pc_succ_insn);
+-    ctx->base.is_jmp = DISAS_NORETURN;
++    gen_goto_tb(s, 0, s->pc_succ_insn);
++    s->base.is_jmp = DISAS_NORETURN;
+ 
++    tcg_temp_free_i32(rd);
++    tcg_temp_free_i32(rs1);
+     tcg_temp_free(s1);
+     tcg_temp_free(s2);
+     tcg_temp_free(dst);
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index db54288c08..1279ef4fb1 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -26,33 +26,49 @@
+ #include "internals.h"
+ #include <math.h>
+ 
+-target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+-                            target_ulong s2)
++target_ulong HELPER(vsetvl)(CPURISCVState *env, uint32_t rd, uint32_t rs1,
++                            target_ulong s1, target_ulong s2)
+ {
+-    int vlmax, vl;
++    int vlmax;
++    int vl = 0;
++
+     RISCVCPU *cpu = env_archcpu(env);
+     uint16_t sew = 8 << FIELD_EX64(s2, VTYPE, VSEW);
+     uint8_t ediv = FIELD_EX64(s2, VTYPE, VEDIV);
+     bool vill = FIELD_EX64(s2, VTYPE, VILL);
++    vlmax = vext_get_vlmax(cpu, s2);
+     target_ulong reserved = FIELD_EX64(s2, VTYPE, RESERVED);
+ 
+-    if ((sew > cpu->cfg.elen) || vill || (ediv != 0) || (reserved != 0)) {
++    uint64_t lmul = (FIELD_EX64(s2, VTYPE, VFLMUL) << 2)
++        | FIELD_EX64(s2, VTYPE, VLMUL);
++    float vflmul = flmul_table[lmul];
++
++    if ((sew > cpu->cfg.elen)
++        || vill
++        || vflmul < ((float)sew / cpu->cfg.elen)
++        || (ediv != 0)
++        || (reserved != 0)) {
+         /* only set vill bit. */
+         env->vtype = FIELD_DP64(0, VTYPE, VILL, 1);
+-        env->vl = 0;
+-        env->vstart = 0;
+         return 0;
+     }
+ 
+-    vlmax = vext_get_vlmax(cpu, s2);
+-    if (s1 <= vlmax) {
+-        vl = s1;
+-    } else {
++    /* set vl */
++    if (rd == 0 && rs1 == 0) {
++        /* keep existing vl */
++        vl = env->vl > vlmax ? vlmax : env->vl;
++    } else if (rd != 0 && rs1 == 0) {
++        /* set vl to vlmax */
+         vl = vlmax;
++    } else if (rs1 != 0) {
++        /* normal stripmining */
++        vl = s1 > vlmax ? vlmax : s1;
+     }
+-    env->vl = vl;
++
+     env->vtype = s2;
+     env->vstart = 0;
++    env->vl = vl;
++
+     return vl;
+ }
+ 
 -- 
 2.17.1
 
