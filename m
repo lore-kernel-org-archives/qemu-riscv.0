@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtwpG-0007IK-RK
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 13:28:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59846)
+	id 1jtwre-0002p3-UH
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 13:31:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60490)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jtwpE-0007Dw-Oo
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 13:28:40 -0400
-Received: from mail-pj1-x1041.google.com ([2607:f8b0:4864:20::1041]:34258)
+ id 1jtwrd-0002n7-DU
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 13:31:09 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:37324)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jtwp8-0006lE-0U
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 13:28:40 -0400
-Received: by mail-pj1-x1041.google.com with SMTP id cv18so4731301pjb.1
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 10:28:33 -0700 (PDT)
+ id 1jtwra-0007BE-Kk
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 13:31:09 -0400
+Received: by mail-pg1-x530.google.com with SMTP id d4so2822940pgk.4
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 10:31:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=iqNLFpP6KUyrc5tyIbpCb/TXFVDQR8Mx3rkLviBHfbI=;
- b=wWOvmgZf8TiQi+xST8ykq28skl1D3gT8r+4dP99LSJrovJHbsaDLfmtwRuO2CneQsQ
- TMybQbz6KlQF7KY9CVSU29opLOGN9JdI0o7HjZeQq8aA7OuV259FMT2gBGGmCzGS/9yQ
- LyIFBVRhQgxhTEaGNw3R3OC1LaA481V0CidRZouzCW1mAc6/AcD2QC28Ag0geEyZYM5w
- W1UcjzJpikqhIy8yJuD/7VNUEObU51q7bitZe8MV4ombCEyV3hiasJhpbe8XWbLVYT33
- CyOMWIwjGQ21mfP6wP/TTE22X0JXdP2c0d/Hb53PaIdS5qmSdseBoyT1z6Fv6IcsGth4
- fP9Q==
+ bh=+O9voR6d2w5/VScNaOa0W4xRCl/1x5Zgbu/5/sqAhuU=;
+ b=UVxV4oGEF/XCM2UzybfAqhjtbP70TEanuMqMbA24hPlLe2bBmlhENmf/F/TF6i5M5y
+ Hr4gFtrA388c411rziEkBrnyJyvv4pWs8vQZcJXWMz5Qw8haYnMYh3EKo8XmgVbAdrHy
+ 3h6TBeRyIjez6A+HYovKpq/SZvLeAEtkRVpVrV2TFnxIf3WYZtE7jwU0pYjLr+sCl3b4
+ DBW+9pTL/zMwCHDVGE+v5d0OHR2cW96cT62g+owhbrU6qYvp1cAeHEbBIdsia25S5WB9
+ G07b6lN210FbhKlC1mTC+bNK3/15FsxjXeuqegoyaDDFNtvamVrw0USAaz59n7a5+siQ
+ Ll5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=iqNLFpP6KUyrc5tyIbpCb/TXFVDQR8Mx3rkLviBHfbI=;
- b=uPj+Ctlh8NMYqJOlbyLV6ngmNjFraHh3w5foyiZFABn6YG4k8WcM42qT+cd9Ac+d5M
- JKtUhD24GnMNQU4hKrJy24ZdmUlvYx/OYXLTfPbJi56kzGBK/n82yp3LuvhlIJtQrqDC
- n80Edk34uWg0Le5w6FtIMLrFYemMAVAvs/MuOA5u4ro1uVVmFaOazA9qm638vUa6Y+VY
- fhwtyQsJsvwKgCYXlfTD1qJNFC1psMUGzAm9A3wiub+FMetu3VyoaFXylCHtFqjrl4gB
- EeRNuOTL5TCD3gnIXXNE4pEWqb6AfTOkZwsFGfkS1YCXZ7deAVTSzKWxDRXGdxqrEz+X
- 0zHg==
-X-Gm-Message-State: AOAM532yMd/vQ73emEEU4Pqt8eYKqf2Novgy4xCw7qdVXYkMGhmlXAJ8
- cTRW01e8llQ0GE+cdw+e9LkjZTu5FXI=
-X-Google-Smtp-Source: ABdhPJxspcPfHJ/8hn/s70vrxVpTvFLBm+ujlQABMl0Rvuv2J6nYUZa9zt1RfKWZiVuFoZ07X9k1gQ==
-X-Received: by 2002:a17:902:6b87:: with SMTP id
- p7mr55323783plk.275.1594402112594; 
- Fri, 10 Jul 2020 10:28:32 -0700 (PDT)
+ bh=+O9voR6d2w5/VScNaOa0W4xRCl/1x5Zgbu/5/sqAhuU=;
+ b=ZhIsxapKHCR8KnpAe7x0LWgncnmsRibH6JwxMPhRjaKuyyXaQQzOZ9OwEtzj+hCQV7
+ av/9Klo84U88zpT2rgSFQSZJTVnCietR7necSKiPlw73jNGLYlIJry4WhN6b7gROH6yq
+ q/OTd48Enj819MYdag0Yv0aH7joUqk8kfyvgJxOP8kE1b6iQN9q9N28/FvOtAkTKhW5I
+ ysRs7chOp0pqHS9TRq5RttMv468o4FoKTvEBFidbIWXJukhMZ67QET0jGQ+qjDssI0SF
+ 21vpMuSlceZ4h4rl+9d3IsHQfBH5gzdrU6KKEFrnCwPCgURD/MfSpKBTZPNpO5RGgiIj
+ RtzQ==
+X-Gm-Message-State: AOAM530aPeW7QyYMJamnpBu7s+iApdfRcZa/SZQCAL/qQNQyYnJg8Qsj
+ HMenkf90aLp9wrJqKfKz8xGPNw==
+X-Google-Smtp-Source: ABdhPJxIYU6nEy3jRiloEznw/duAwIPocYPQgQ6u2NqgNFBkNPr7Msp1KbwHXnsf7QpqHwv6bqh/dw==
+X-Received: by 2002:a63:6c1:: with SMTP id 184mr61216843pgg.262.1594402265170; 
+ Fri, 10 Jul 2020 10:31:05 -0700 (PDT)
 Received: from [192.168.1.11] (174-21-143-238.tukw.qwest.net. [174.21.143.238])
- by smtp.gmail.com with ESMTPSA id c139sm6470541pfb.65.2020.07.10.10.28.31
+ by smtp.gmail.com with ESMTPSA id d37sm6381792pgd.18.2020.07.10.10.31.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Jul 2020 10:28:31 -0700 (PDT)
-Subject: Re: [RFC 08/65] target/riscv: rvv-0.9: update mstatus_vs by tb_flags
+ Fri, 10 Jul 2020 10:31:04 -0700 (PDT)
+Subject: Re: [RFC 09/65] target/riscv: rvv-0.9: add vlenb register
 To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
+ Greentime Hu <greentime.hu@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>
 References: <20200710104920.13550-1-frank.chang@sifive.com>
- <20200710104920.13550-9-frank.chang@sifive.com>
+ <20200710104920.13550-10-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <af51b2ed-e27e-452e-6488-81d42148ad22@linaro.org>
-Date: Fri, 10 Jul 2020 10:28:29 -0700
+Message-ID: <de67dad3-37a4-611f-f18a-cc6d06a0f8dc@linaro.org>
+Date: Fri, 10 Jul 2020 10:31:02 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200710104920.13550-9-frank.chang@sifive.com>
+In-Reply-To: <20200710104920.13550-10-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1041;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1041.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -86,56 +86,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 17:28:41 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 17:31:09 -0000
 
 On 7/10/20 3:48 AM, frank.chang@sifive.com wrote:
-> From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> 
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> ---
->  target/riscv/cpu.h       | 2 ++
->  target/riscv/translate.c | 1 +
->  2 files changed, 3 insertions(+)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 228b9bdb5d..871c2ddfa1 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -317,6 +317,7 @@ static void riscv_cpu_reset(DeviceState *dev)
+>      env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+>      env->mcause = 0;
+>      env->pc = env->resetvec;
+> +    env->vlenb = cpu->cfg.vlen >> 3;
+>  #endif
+>      cs->exception_index = EXCP_NONE;
+>      env->load_res = -1;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index c02690ed0d..81c85bf4c2 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -111,6 +111,7 @@ struct CPURISCVState {
+>      target_ulong vl;
+>      target_ulong vstart;
+>      target_ulong vtype;
+> +    target_ulong vlenb;
 
-This belongs with the second half of the previous patch, the translate portion.
+I don't see that you need this.  The field is read-only, so the read_vlenb
+function can just return
+
+  env_archcpu(env)->cfg.vlen >> 3
+
+directly.
 
 
 r~
-
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 0cf3fe9456..c02690ed0d 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -361,6 +361,7 @@ void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
->  
->  #define TB_FLAGS_MMU_MASK   3
->  #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
-> +#define TB_FLAGS_MSTATUS_VS MSTATUS_VS
->  
->  typedef CPURISCVState CPUArchState;
->  typedef RISCVCPU ArchCPU;
-> @@ -411,6 +412,7 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->  
->  #ifdef CONFIG_USER_ONLY
->      flags |= TB_FLAGS_MSTATUS_FS;
-> +    flags |= TB_FLAGS_MSTATUS_VS;
->  #else
->      flags |= cpu_mmu_index(env, 0);
->      if (riscv_cpu_fp_enabled(env)) {
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index a806e33301..02b4204584 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -796,6 +796,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->pc_succ_insn = ctx->base.pc_first;
->      ctx->mem_idx = tb_flags & TB_FLAGS_MMU_MASK;
->      ctx->mstatus_fs = tb_flags & TB_FLAGS_MSTATUS_FS;
-> +    ctx->mstatus_vs = tb_flags & TB_FLAGS_MSTATUS_VS;
->      ctx->priv_ver = env->priv_ver;
->  #if !defined(CONFIG_USER_ONLY)
->      if (riscv_has_ext(env, RVH)) {
-> 
-
 
