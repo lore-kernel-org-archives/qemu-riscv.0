@@ -1,49 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtscl-0006SS-Bm
+	id 1jtscl-0006T1-Hn
 	for mharc-qemu-riscv@gnu.org; Fri, 10 Jul 2020 08:59:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36878)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36930)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqcg-00054d-J3
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:18 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:37280)
+ id 1jtqcl-00056M-IL
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:23 -0400
+Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:37346)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jtqcc-0006X2-Td
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:18 -0400
-Received: by mail-pl1-x642.google.com with SMTP id p1so2101265pls.4
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:51:14 -0700 (PDT)
+ id 1jtqci-0006Xs-KK
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2020 06:51:23 -0400
+Received: by mail-pg1-x541.google.com with SMTP id d4so2375403pgk.4
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2020 03:51:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=5uTP7oB6yrlRVhy7HpoTa+lnfmmPB1B/gM+zfITfhFU=;
- b=Vi7LJsh4OfYNlY5a5LOmL8u/0hsQjv+O30qVSIo+4BO4FDw7lKePe7J6KeEKnWCgAb
- /uGsXNRmPNaw/lKBqDqUdxlkEBP4T+5SmVi5RNe+1C5ykVe0A/smOMZfwhX4PKN+QzM5
- jVUsSYiIiR40ArElPmAKsehId1ShRJ8a56W2lXS7I/OxkJhBu+JAeIxhbkT/FLE8/QXl
- EbRoRakj51ygpqPbX/FLNcC2EFmJVV5aaiU9O510Quy42pW3iyWTbe5+ix7YrvonTbRX
- qwKzyyppZz1IeJon1yUNuMcTLY/QsFHnzg3h7oNB2+JT66Pf151D2wfgchFdxtazg2Ka
- dVEQ==
+ bh=/rldlRV0Ju7ecAcYGvhu7TjDF36DgLEmoYyxAEMea3o=;
+ b=U4Xxe1oWbFVRadI1nQ1VydDb981vHLm3v5EkFx3HUFDszj0TEiUeTMDSqPgv4PNgxv
+ Breu0MRqSe2ZYTv0v9gl68WWyoGsvbaIPqg94egN9dZQj7h0hgg5wJ/wUP7Hx3UTjX/k
+ 7k7hsw4wKaSVMgiVa+KbSHZ+C68paXT9scwN3pTwLfP9r/ToAmypTFrhJBUrXg0UeLC/
+ 8h/4JOH6k34EV7YMeHqyAWUaqzwJLywvrcf9vSO4FU/j2NNBrlZ/3YzWUy21Yae2FGgZ
+ eIg3kKy92NY9t3ayBBECvd8cC4QUk6x7MYh8jtnlizhA5IV8FPQ8NfxP7hpEL1re1ppw
+ yemQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=5uTP7oB6yrlRVhy7HpoTa+lnfmmPB1B/gM+zfITfhFU=;
- b=QzG5IYMp2hfaEXsdT3wRRBgFrVH403snqYxrzY5GlCUJK+IyeTXCW6DZirBTsLvAAZ
- /FEsh0F3/N6WAMY++IHbxnd6czMey+BperGTWfNEt/UPix03yq6zIMa4OWLTsindg9Zu
- sR2NjdtEBo5Szju7qYvDckqYN4nX5bbBlMBR8xjkgXUQxUxa/xiMf3dtOxg7pw3zRag5
- T2l3GtilQrOccVPesXScso1b8KizK56P4DUFuAKkLINoOYNnKWApzxkfhx99I7naHKRU
- JeRs16MmhXQbeUENyIcuswaZtjh5XsiccXxQfAvxFuVSUGrTTktzFChvLSQnot5+lf/L
- yAxw==
-X-Gm-Message-State: AOAM530E7bwzxDawLK//qZC0liyCODVEn5ldea0QEu1txcnSuLhssv+t
- 8VTMZkhtm2FA2DtFQeHPPxS1HA==
-X-Google-Smtp-Source: ABdhPJzfRDD8uP1vNzERjtfbcT+27YdImWB1Y+wSWRncKORlCoFVdIhyNbm4Iv8CByLlm+ISy+RF/g==
-X-Received: by 2002:a17:902:9f96:: with SMTP id
- g22mr14097012plq.306.1594378273348; 
- Fri, 10 Jul 2020 03:51:13 -0700 (PDT)
+ bh=/rldlRV0Ju7ecAcYGvhu7TjDF36DgLEmoYyxAEMea3o=;
+ b=L81JmjsPTwVMNTEbUcGwPIBlX5RjiO1z7T87yxLBi2tIkf+UNdn49gFvoDF6ewgD20
+ rVmHoNf7Jn3Yl26+RlhhwEHQn+Ji/wZTGWcIrSU/UAc7/kn//wqKVcYuNOMcgiVCL5JA
+ g9Ytqz0AGpbZXWBmL8mHKHKB67/8jA5gTnWhfduJnRsKJkY3trMyK8c1d9UnEVgVucqN
+ PcAJqgSmRskd+xXtZRjJWCwssgQAkJQF07qtJUZigvPOLw3ZU5BQDgo3TTKOrKZNUKHL
+ QLauattRTpDcDwyIdCITmnbGgKG4jiLlOh/Xj0juHLApiJDKaVRXRrryU10NVOgTK8uW
+ RtBQ==
+X-Gm-Message-State: AOAM531JzG7zIVcLdhkFPT1FaiYA76Rfxoe0yNV+8AsqyXd8UllBcLj9
+ eLD5BNKCPyC4Oo2qOIGzJfgaYQ==
+X-Google-Smtp-Source: ABdhPJxcY01tSdlclxZMkK7hvPH3qOn9lO5fT4tojCDakhdZ73QwzcwQND8tHjsswBUaYHQrsHUp/w==
+X-Received: by 2002:a63:eb52:: with SMTP id b18mr56230397pgk.434.1594378279184; 
+ Fri, 10 Jul 2020 03:51:19 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.51.11
+ by smtp.gmail.com with ESMTPSA id r191sm5519406pfr.181.2020.07.10.03.51.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2020 03:51:12 -0700 (PDT)
+ Fri, 10 Jul 2020 03:51:18 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -53,14 +52,14 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [RFC 11/65] target/riscv: rvv-0.9: add fractional LMUL, VTA and VMA
-Date: Fri, 10 Jul 2020 18:48:25 +0800
-Message-Id: <20200710104920.13550-12-frank.chang@sifive.com>
+Subject: [RFC 12/65] target/riscv: rvv-0.9: update check functions
+Date: Fri, 10 Jul 2020 18:48:26 +0800
+Message-Id: <20200710104920.13550-13-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200710104920.13550-1-frank.chang@sifive.com>
 References: <20200710104920.13550-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::642;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x642.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::541;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x541.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -83,1161 +82,756 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2020 10:51:18 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 10:51:23 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/cpu.h                      |  25 +++-
- target/riscv/insn_trans/trans_rvv.inc.c |  79 ++++++++++-
- target/riscv/internals.h                |  13 +-
- target/riscv/translate.c                |   8 ++
- target/riscv/vector_helper.c            | 166 +++++++++++++++++-------
- 5 files changed, 232 insertions(+), 59 deletions(-)
+ target/riscv/insn_trans/trans_rvv.inc.c | 507 ++++++++++++++----------
+ 1 file changed, 308 insertions(+), 199 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 81c85bf4c2..61393c9e2e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -96,8 +96,11 @@ typedef struct CPURISCVState CPURISCVState;
- 
- FIELD(VTYPE, VLMUL, 0, 2)
- FIELD(VTYPE, VSEW, 2, 3)
--FIELD(VTYPE, VEDIV, 5, 2)
--FIELD(VTYPE, RESERVED, 7, sizeof(target_ulong) * 8 - 9)
-+FIELD(VTYPE, VFLMUL, 5, 1)
-+FIELD(VTYPE, VTA, 6, 1)
-+FIELD(VTYPE, VMA, 7, 1)
-+FIELD(VTYPE, VEDIV, 8, 2)
-+FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 - 11)
- FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
- 
- struct CPURISCVState {
-@@ -369,9 +372,13 @@ typedef RISCVCPU ArchCPU;
- #include "exec/cpu-all.h"
- 
- FIELD(TB_FLAGS, VL_EQ_VLMAX, 2, 1)
--FIELD(TB_FLAGS, LMUL, 3, 2)
--FIELD(TB_FLAGS, SEW, 5, 3)
--FIELD(TB_FLAGS, VILL, 8, 1)
-+FIELD(TB_FLAGS, LMUL, 3, 3)
-+FIELD(TB_FLAGS, SEW, 6, 3)
-+/* Skip MSTATUS_VS (0x600) fields */
-+FIELD(TB_FLAGS, VTA, 11, 1)
-+FIELD(TB_FLAGS, VMA, 12, 1)
-+/* Skip MSTATUS_VS (0x6000) fields */
-+FIELD(TB_FLAGS, VILL, 15, 1)
- 
- /*
-  * A simplification for VLMAX
-@@ -400,12 +407,18 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-     if (riscv_has_ext(env, RVV)) {
-         uint32_t vlmax = vext_get_vlmax(env_archcpu(env), env->vtype);
-         bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl);
-+
-         flags = FIELD_DP32(flags, TB_FLAGS, VILL,
-                     FIELD_EX64(env->vtype, VTYPE, VILL));
-         flags = FIELD_DP32(flags, TB_FLAGS, SEW,
-                     FIELD_EX64(env->vtype, VTYPE, VSEW));
-         flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
--                    FIELD_EX64(env->vtype, VTYPE, VLMUL));
-+                    (FIELD_EX64(env->vtype, VTYPE, VFLMUL) << 2)
-+                        | FIELD_EX64(env->vtype, VTYPE, VLMUL));
-+        flags = FIELD_DP32(flags, TB_FLAGS, VTA,
-+                    FIELD_EX64(env->vtype, VTYPE, VTA));
-+        flags = FIELD_DP32(flags, TB_FLAGS, VMA,
-+                    FIELD_EX64(env->vtype, VTYPE, VMA));
-         flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
-     } else {
-         flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index e222bd78a2..1cc58c86b2 100644
+index 1cc58c86b2..fc1908389e 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -248,6 +248,9 @@ static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
+@@ -19,6 +19,59 @@
+ #include "tcg/tcg-gvec-desc.h"
+ #include "internals.h"
  
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, SEW, s->sew);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     ret = ldst_us_trans(a->rd, a->rs1, data, fn, s);
-     mark_vs_dirty(s);
-@@ -302,6 +305,9 @@ static bool st_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
- 
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, SEW, s->sew);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     return ldst_us_trans(a->rd, a->rs1, data, fn, s);
- }
-@@ -386,6 +392,9 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
- 
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, SEW, s->sew);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     ret  = ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-     mark_vs_dirty(s);
-@@ -431,6 +440,9 @@ static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
- 
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, SEW, s->sew);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
- 
-     return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-@@ -516,6 +528,9 @@ static bool ld_index_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
- 
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, SEW, s->sew);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     ret = ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-     mark_vs_dirty(s);
-@@ -561,6 +576,9 @@ static bool st_index_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
- 
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, SEW, s->sew);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s);
- }
-@@ -639,6 +657,9 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
- 
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, SEW, s->sew);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     ret = ldff_trans(a->rd, a->rs1, data, fn, s);
-     mark_vs_dirty(s);
-@@ -750,6 +771,9 @@ static bool amo_op(DisasContext *s, arg_rwdvm *a, uint8_t seq)
- 
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, SEW, s->sew);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-     data = FIELD_DP32(data, VDATA, WD, a->wd);
-     ret = amo_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-     mark_vs_dirty(s);
-@@ -830,6 +854,8 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen3Fn *gvec_fn,
- 
-         data = FIELD_DP32(data, VDATA, VM, a->vm);
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1), vreg_ofs(s, a->rs2),
-                            cpu_env, 0, s->vlen / 8, data, fn);
-@@ -875,6 +901,8 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
- 
-     data = FIELD_DP32(data, VDATA, VM, vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-     desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
- 
-     tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-@@ -1025,6 +1053,8 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
-     }
-     data = FIELD_DP32(data, VDATA, VM, vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-     desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
- 
-     tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-@@ -1122,6 +1152,8 @@ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
- 
-         data = FIELD_DP32(data, VDATA, VM, a->vm);
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1),
-                            vreg_ofs(s, a->rs2),
-@@ -1210,6 +1242,8 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
- 
-         data = FIELD_DP32(data, VDATA, VM, a->vm);
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1),
-                            vreg_ofs(s, a->rs2),
-@@ -1288,6 +1322,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
-                                                                    \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-                            vreg_ofs(s, a->rs1),                    \
-                            vreg_ofs(s, a->rs2), cpu_env, 0,        \
-@@ -1478,6 +1514,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
-                                                                    \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-                            vreg_ofs(s, a->rs1),                    \
-                            vreg_ofs(s, a->rs2), cpu_env, 0,        \
-@@ -1654,7 +1692,9 @@ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v *a)
-                              vreg_ofs(s, a->rs1),
-                              MAXSZ(s), MAXSZ(s));
-         } else {
--            uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
-+            uint32_t data = 0;
-+            data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+            data = FIELD_DP32(data, VDATA, VTA, s->vta);
-             static gen_helper_gvec_2_ptr * const fns[4] = {
-                 gen_helper_vmv_v_v_b, gen_helper_vmv_v_v_h,
-                 gen_helper_vmv_v_v_w, gen_helper_vmv_v_v_d,
-@@ -1691,7 +1731,9 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
-             TCGv_i32 desc ;
-             TCGv_i64 s1_i64 = tcg_temp_new_i64();
-             TCGv_ptr dest = tcg_temp_new_ptr();
--            uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
-+            uint32_t data = 0;
-+            data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+            data = FIELD_DP32(data, VDATA, VTA, s->vta);
-             static gen_helper_vmv_vx * const fns[4] = {
-                 gen_helper_vmv_v_x_b, gen_helper_vmv_v_x_h,
-                 gen_helper_vmv_v_x_w, gen_helper_vmv_v_x_d,
-@@ -1727,7 +1769,10 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
-             TCGv_i32 desc;
-             TCGv_i64 s1;
-             TCGv_ptr dest;
--            uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
-+            uint32_t data = 0;
-+            data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+            data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+            data = FIELD_DP32(data, VDATA, VMA, s->vma);
-             static gen_helper_vmv_vx * const fns[4] = {
-                 gen_helper_vmv_v_x_b, gen_helper_vmv_v_x_h,
-                 gen_helper_vmv_v_x_w, gen_helper_vmv_v_x_d,
-@@ -1843,6 +1888,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
-                                                                    \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-                            vreg_ofs(s, a->rs1),                    \
-                            vreg_ofs(s, a->rs2), cpu_env, 0,        \
-@@ -1914,6 +1961,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)            \
-         gen_set_rm(s, 7);                                         \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);                \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);            \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);              \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);              \
-         return opfvf_trans(a->rd, a->rs1, a->rs2, data,           \
-                            fns[s->sew - 1], s);                   \
-     }                                                             \
-@@ -1954,6 +2003,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
-                                                                  \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);               \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);           \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);             \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);             \
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),   \
-                            vreg_ofs(s, a->rs1),                  \
-                            vreg_ofs(s, a->rs2), cpu_env, 0,      \
-@@ -1991,6 +2042,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
-         gen_set_rm(s, 7);                                        \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);               \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);           \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);             \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);             \
-         return opfvf_trans(a->rd, a->rs1, a->rs2, data,          \
-                            fns[s->sew - 1], s);                  \
-     }                                                            \
-@@ -2027,6 +2080,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
-                                                                    \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-                            vreg_ofs(s, a->rs1),                    \
-                            vreg_ofs(s, a->rs2), cpu_env, 0,        \
-@@ -2062,6 +2117,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
-         gen_set_rm(s, 7);                                        \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);               \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);           \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);             \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);             \
-         return opfvf_trans(a->rd, a->rs1, a->rs2, data,          \
-                            fns[s->sew - 1], s);                  \
-     }                                                            \
-@@ -2141,6 +2198,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
-                                                                    \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
-         tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-                            vreg_ofs(s, a->rs2), cpu_env, 0,        \
-                            s->vlen / 8, data, fns[s->sew - 1]);    \
-@@ -2281,6 +2340,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
-                                                                    \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
-         tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-                            vreg_ofs(s, a->rs2), cpu_env, 0,        \
-                            s->vlen / 8, data, fns[s->sew - 1]);    \
-@@ -2329,6 +2390,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
-                                                                    \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
-         tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-                            vreg_ofs(s, a->rs2), cpu_env, 0,        \
-                            s->vlen / 8, data, fns[s->sew - 1]);    \
-@@ -2390,6 +2453,7 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)                \
-         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-                                                                    \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-                            vreg_ofs(s, a->rs1),                    \
-                            vreg_ofs(s, a->rs2), cpu_env, 0,        \
-@@ -2419,6 +2483,7 @@ static bool trans_vmpopc_m(DisasContext *s, arg_rmr *a)
-         uint32_t data = 0;
-         data = FIELD_DP32(data, VDATA, VM, a->vm);
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);
- 
-         mask = tcg_temp_new_ptr();
-         src2 = tcg_temp_new_ptr();
-@@ -2450,6 +2515,7 @@ static bool trans_vmfirst_m(DisasContext *s, arg_rmr *a)
-         uint32_t data = 0;
-         data = FIELD_DP32(data, VDATA, VM, a->vm);
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);
- 
-         mask = tcg_temp_new_ptr();
-         src2 = tcg_temp_new_ptr();
-@@ -2485,6 +2551,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
-                                                                    \
-         data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
-         tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd),                     \
-                            vreg_ofs(s, 0), vreg_ofs(s, a->rs2),    \
-                            cpu_env, 0, s->vlen / 8, data, fn);     \
-@@ -2511,6 +2578,8 @@ static bool trans_viota_m(DisasContext *s, arg_viota_m *a)
- 
-         data = FIELD_DP32(data, VDATA, VM, a->vm);
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);
-         static gen_helper_gvec_3_ptr * const fns[4] = {
-             gen_helper_viota_m_b, gen_helper_viota_m_h,
-             gen_helper_viota_m_w, gen_helper_viota_m_d,
-@@ -2536,6 +2605,8 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v *a)
- 
-         data = FIELD_DP32(data, VDATA, VM, a->vm);
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);
-         static gen_helper_gvec_2_ptr * const fns[4] = {
-             gen_helper_vid_v_b, gen_helper_vid_v_h,
-             gen_helper_vid_v_w, gen_helper_vid_v_d,
-@@ -2893,6 +2964,8 @@ static bool trans_vcompress_vm(DisasContext *s, arg_r *a)
-         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
- 
-         data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1), vreg_ofs(s, a->rs2),
-                            cpu_env, 0, s->vlen / 8, data, fns[s->sew]);
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 89fc0753bc..4538e5faf8 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -24,8 +24,11 @@
- /* share data between vector helpers and decode code */
- FIELD(VDATA, VM, 0, 1)
- FIELD(VDATA, LMUL, 1, 3)
--FIELD(VDATA, NF, 4, 4)
--FIELD(VDATA, WD, 4, 1)
-+FIELD(VDATA, SEW, 4, 3)
-+FIELD(VDATA, VTA, 7, 1)
-+FIELD(VDATA, VMA, 8, 1)
-+FIELD(VDATA, NF, 9, 4)
-+FIELD(VDATA, WD, 9, 1)
- 
- /* float point classify helpers */
- target_ulong fclass_h(uint64_t frs1);
-@@ -37,4 +40,10 @@ target_ulong fclass_d(uint64_t frs1);
- #define SEW32 2
- #define SEW64 3
- 
-+/* table to convert fractional LMUL value */
-+static const float flmul_table[8] = {
-+    1, 2, 4, 8,      /* LMUL */
-+    -1,              /* reserved */
-+    0.125, 0.25, 0.5 /* fractional LMUL */
-+};
- #endif
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 7593b41a1f..4599e3574e 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -60,6 +60,11 @@ typedef struct DisasContext {
-     /* vector extension */
-     bool vill;
-     uint8_t lmul;
-+    float flmul;
-+    uint8_t eew;
-+    float emul;
-+    uint8_t vta;
-+    uint8_t vma;
-     uint8_t sew;
-     uint16_t vlen;
-     bool vl_eq_vlmax;
-@@ -823,6 +828,9 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->vill = FIELD_EX32(tb_flags, TB_FLAGS, VILL);
-     ctx->sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
-     ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
-+    ctx->flmul = flmul_table[ctx->lmul];
-+    ctx->vta = FIELD_EX32(tb_flags, TB_FLAGS, VTA);
-+    ctx->vma = FIELD_EX32(tb_flags, TB_FLAGS, VMA);
-     ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
- }
- 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 6545f91732..db54288c08 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -86,9 +86,15 @@ static inline uint32_t vext_vm(uint32_t desc)
-     return FIELD_EX32(simd_data(desc), VDATA, VM);
- }
- 
--static inline uint32_t vext_lmul(uint32_t desc)
-+static inline uint32_t vext_sew(uint32_t desc)
++#define NVPR    32
++
++#define require(x) if (unlikely(!(x))) { return false; }
++#define require_align(val, pos) require(is_aligned(val, pos))
++
++/* Destination vector register group cannot overlap source mask register. */
++#define require_vm(vm, rd) do { if (vm == 0) require(rd != 0); } while (0)
++
++#define require_noover(astart, asize, bstart, bsize) \
++  require(!is_overlapped(astart, asize, bstart, bsize))
++#define require_noover_widen(astart, asize, bstart, bsize) \
++  require(!is_overlapped_widen(astart, asize, bstart, bsize))
++
++#define REQUIRE_RVV do {    \
++    if (s->mstatus_vs == 0) \
++        return false;       \
++} while (0)
++
++static inline bool is_aligned(const unsigned val, const unsigned pos)
++{
++    return pos ? (val & (pos - 1)) == 0 : true;
++}
++
++static inline bool is_overlapped(const int astart, int asize,
++                                 const int bstart, int bsize)
++{
++    asize = asize == 0 ? 1 : asize;
++    bsize = bsize == 0 ? 1 : bsize;
++
++    const int aend = astart + asize;
++    const int bend = bstart + bsize;
++
++    return MAX(aend, bend) - MIN(astart, bstart) < asize + bsize;
++}
++
++static inline bool is_overlapped_widen(const int astart, int asize,
++                                       const int bstart, int bsize)
++{
++    asize = asize == 0 ? 1 : asize;
++    bsize = bsize == 0 ? 1 : bsize;
++
++    const int aend = astart + asize;
++    const int bend = bstart + bsize;
++
++    if (astart < bstart &&
++        is_overlapped(astart, asize, bstart, bsize) &&
++        !is_overlapped(astart, asize, bstart + bsize, bsize)) {
++        return false;
++    } else  {
++        return MAX(aend, bend) - MIN(astart, bstart) < asize + bsize;
++    }
++}
++
+ static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
  {
--    return FIELD_EX32(simd_data(desc), VDATA, LMUL);
-+    return 1 << (FIELD_EX32(simd_data(desc), VDATA, SEW) + 3);
-+}
-+
-+static inline float vext_vflmul(uint32_t desc)
-+{
-+    uint32_t lmul = FIELD_EX32(simd_data(desc), VDATA, LMUL);
-+    return flmul_table[lmul];
+     TCGv s1, s2, dst;
+@@ -103,29 +156,121 @@ static bool vext_check_isa_ill(DisasContext *s)
  }
  
- static uint32_t vext_wd(uint32_t desc)
-@@ -96,6 +102,16 @@ static uint32_t vext_wd(uint32_t desc)
-     return FIELD_EX32(simd_data(desc), VDATA, WD);
- }
- 
-+static inline uint32_t vext_vta(uint32_t desc)
-+{
-+    return FIELD_EX32(simd_data(desc), VDATA, VTA);
-+}
-+
-+static inline uint32_t vext_vma(uint32_t desc)
-+{
-+    return FIELD_EX32(simd_data(desc), VDATA, VMA);
-+}
-+
  /*
-  * Get vector group length in bytes. Its range is [64, 2048].
+- * There are two rules check here.
++ * Check function for vector instruction with format:
++ * single-width result and single-width sources (SEW = SEW op SEW)
++ *
++ * is_vs1: indicates whether insn[19:15] is a vs1 field or not.
++ */
++#define VEXT_CHECK_SSS(s, rd, rs1, rs2, vm, is_vs1) do { \
++    require_vm(vm, rd);                                  \
++    if (s->flmul > 1) {                                  \
++        require_align(rd, s->flmul);                     \
++        require_align(rs2, s->flmul);                    \
++        if (is_vs1) {                                    \
++            require_align(rs1, s->flmul);                \
++        }                                                \
++    }                                                    \
++} while (0)
++
++/*
++ * Check function for maskable vector instruction with format:
++ * single-width result and single-width sources (SEW = SEW op SEW)
   *
-@@ -135,8 +151,13 @@ static void probe_pages(CPURISCVState *env, target_ulong addr,
- }
- 
- #ifdef HOST_WORDS_BIGENDIAN
--static void vext_clear(void *tail, uint32_t cnt, uint32_t tot)
-+static void vext_clear(void *tail, uint32_t vta, uint32_t cnt, uint32_t tot)
- {
-+    /* tail element undisturbed */
-+    if (vta == 0) {
-+        return;
-+    }
+- * 1. Vector register numbers are multiples of LMUL. (Section 3.2)
++ * is_vs1: indicates whether insn[19:15] is a vs1 field or not.
++ */
++#define VEXT_CHECK_MSS(s, rd, rs1, rs2, is_vs1) do { \
++    if (rd != rs2) {                                 \
++        require_noover(rd, 1, rs2, s->flmul);        \
++    }                                                \
++    require_align(rs2, s->flmul);                    \
++    if (is_vs1) {                                    \
++        if (rd != rs1) {                             \
++            require_noover(rd, 1, rs1, s->flmul);    \
++        }                                            \
++        require_align(rs1, s->flmul);                \
++    }                                                \
++} while (0)
 +
-     /*
-      * Split the remaining range to two parts.
-      * The first part is in the last uint64_t unit.
-@@ -153,34 +174,43 @@ static void vext_clear(void *tail, uint32_t cnt, uint32_t tot)
-     }
- }
- #else
--static void vext_clear(void *tail, uint32_t cnt, uint32_t tot)
-+static void vext_clear(void *tail, uint32_t vta, uint32_t cnt, uint32_t tot)
- {
-+    /* tail element undisturbed */
-+    if (vta == 0) {
-+        return;
-+    }
++/* Common check function for vector widening instructions */
++#define VEXT_WIDE_CHECK_COMMON(s, rd, vm) do { \
++    require(s->flmul <= 4);                    \
++    require(s->sew < 3);                       \
++    require_align(rd, s->flmul * 2);           \
++    require_vm(vm, rd);                        \
++} while (0)
 +
-     memset(tail, 0, tot - cnt);
- }
- #endif
++/* Common check function for vector narrowing instructions */
++#define VEXT_NARROW_CHECK_COMMON(s, rd, rs2, vm) do { \
++    require(s->flmul <= 4);                           \
++    require(s->sew < 3);                              \
++    require_align(rs2, s->flmul * 2);                 \
++    require_align(rd, s->flmul);                      \
++    require_vm(vm, rd);                               \
++} while (0)
++
++/*
++ * Check function for vector instruction with format:
++ * double-width result and single-width sources (2*SEW = SEW op SEW)
+  *
+- * 2. For all widening instructions, the destination LMUL value must also be
+- *    a supported LMUL value. (Section 11.2)
++ * is_vs1: indicates whether insn[19:15] is a vs1 field or not.
+  */
+-static bool vext_check_reg(DisasContext *s, uint32_t reg, bool widen)
+-{
+-    /*
+-     * The destination vector register group results are arranged as if both
+-     * SEW and LMUL were at twice their current settings. (Section 11.2).
+-     */
+-    int legal = widen ? 2 << s->lmul : 1 << s->lmul;
++#define VEXT_CHECK_DSS(s, rd, rs1, rs2, vm, is_vs1) do {           \
++    VEXT_WIDE_CHECK_COMMON(s, rd, vm);                             \
++    require_align(rs2, s->flmul);                                  \
++    if (s->flmul < 1) {                                            \
++        require_noover(rd, s->flmul * 2, rs2, s->flmul);           \
++    } else {                                                       \
++        require_noover_widen(rd, s->flmul * 2, rs2, s->flmul);     \
++    }                                                              \
++    if (is_vs1) {                                                  \
++        require_align(rs1, s->flmul);                              \
++        if (s->flmul < 1) {                                        \
++            require_noover(rd, s->flmul * 2, rs1, s->flmul);       \
++        } else {                                                   \
++            require_noover_widen(rd, s->flmul * 2, rs1, s->flmul); \
++        }                                                          \
++    }                                                              \
++} while (0)
  
--static void clearb(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot)
-+static void clearb(void *vd, uint32_t vta, uint32_t idx,
-+                   uint32_t cnt, uint32_t tot)
- {
-     int8_t *cur = ((int8_t *)vd + H1(idx));
--    vext_clear(cur, cnt, tot);
-+    vext_clear(cur, vta, cnt, tot);
- }
- 
--static void clearh(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot)
-+static void clearh(void *vd, uint32_t vta, uint32_t idx,
-+                   uint32_t cnt, uint32_t tot)
- {
-     int16_t *cur = ((int16_t *)vd + H2(idx));
--    vext_clear(cur, cnt, tot);
-+    vext_clear(cur, vta, cnt, tot);
- }
- 
--static void clearl(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot)
-+static void clearl(void *vd, uint32_t vta, uint32_t idx,
-+                   uint32_t cnt, uint32_t tot)
- {
-     int32_t *cur = ((int32_t *)vd + H4(idx));
--    vext_clear(cur, cnt, tot);
-+    vext_clear(cur, vta, cnt, tot);
- }
- 
--static void clearq(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot)
-+static void clearq(void *vd, uint32_t vta, uint32_t idx,
-+                   uint32_t cnt, uint32_t tot)
- {
-     int64_t *cur = (int64_t *)vd + idx;
--    vext_clear(cur, cnt, tot);
-+    vext_clear(cur, vta, cnt, tot);
- }
- 
- static inline void vext_set_elem_mask(void *v0, int index,
-@@ -207,7 +237,8 @@ static inline int vext_elem_mask(void *v0, int index)
- /* elements operations for load and store */
- typedef void vext_ldst_elem_fn(CPURISCVState *env, target_ulong addr,
-                                uint32_t idx, void *vd, uintptr_t retaddr);
--typedef void clear_fn(void *vd, uint32_t idx, uint32_t cnt, uint32_t tot);
-+typedef void clear_fn(void *vd, uint32_t vta, uint32_t idx,
-+                      uint32_t cnt, uint32_t tot);
- 
- #define GEN_VEXT_LD_ELEM(NAME, MTYPE, ETYPE, H, LDSUF)     \
- static void NAME(CPURISCVState *env, abi_ptr addr,         \
-@@ -278,6 +309,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-     uint32_t i, k;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t vta = vext_vta(desc);
- 
-     /* probe every access*/
-     for (i = 0; i < env->vl; i++) {
-@@ -301,7 +333,8 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-     /* clear tail elements */
-     if (clear_elem) {
-         for (k = 0; k < nf; k++) {
--            clear_elem(vd, env->vl + k * vlmax, env->vl * esz, vlmax * esz);
-+            clear_elem(vd, vta, env->vl + k * vlmax,
-+                       env->vl * esz, vlmax * esz);
-         }
-     }
- }
-@@ -379,6 +412,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-     uint32_t i, k;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t vta = vext_vta(desc);
- 
-     /* probe every access */
-     probe_pages(env, base, env->vl * nf * msz, ra, access_type);
-@@ -394,7 +428,8 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-     /* clear tail elements */
-     if (clear_elem) {
-         for (k = 0; k < nf; k++) {
--            clear_elem(vd, env->vl + k * vlmax, env->vl * esz, vlmax * esz);
-+            clear_elem(vd, vta, env->vl + k * vlmax,
-+                       env->vl * esz, vlmax * esz);
-         }
-     }
- }
-@@ -506,6 +541,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
-     uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t vta = vext_vta(desc);
- 
-     /* probe every access*/
-     for (i = 0; i < env->vl; i++) {
-@@ -530,7 +566,8 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-     /* clear tail elements */
-     if (clear_elem) {
-         for (k = 0; k < nf; k++) {
--            clear_elem(vd, env->vl + k * vlmax, env->vl * esz, vlmax * esz);
-+            clear_elem(vd, vta, env->vl + k * vlmax,
-+                       env->vl * esz, vlmax * esz);
-         }
-     }
- }
-@@ -605,6 +642,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
-     uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t vta = vext_vta(desc);
-     target_ulong addr, offset, remain;
- 
-     /* probe every access*/
-@@ -664,7 +702,8 @@ ProbeSuccess:
-         return;
-     }
-     for (k = 0; k < nf; k++) {
--        clear_elem(vd, env->vl + k * vlmax, env->vl * esz, vlmax * esz);
-+        clear_elem(vd, vta, env->vl + k * vlmax,
-+                   env->vl * esz, vlmax * esz);
-     }
- }
- 
-@@ -782,6 +821,7 @@ vext_amo_noatomic(void *vs3, void *v0, target_ulong base,
-     uint32_t wd = vext_wd(desc);
-     uint32_t vm = vext_vm(desc);
-     uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t vta = vext_vta(desc);
- 
-     for (i = 0; i < env->vl; i++) {
-         if (!vm && !vext_elem_mask(v0, i)) {
-@@ -797,7 +837,7 @@ vext_amo_noatomic(void *vs3, void *v0, target_ulong base,
-         addr = get_index_addr(base, i, vs2);
-         noatomic_op(vs3, addr, wd, i, env, ra);
-     }
--    clear_elem(vs3, env->vl, env->vl * esz, vlmax * esz);
-+    clear_elem(vs3, vta, env->vl, env->vl * esz, vlmax * esz);
- }
- 
- #define GEN_VEXT_AMO(NAME, MTYPE, ETYPE, INDEX_FN, CLEAR_FN)    \
-@@ -908,6 +948,7 @@ static void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
- {
-     uint32_t vlmax = vext_maxsz(desc) / esz;
-     uint32_t vm = vext_vm(desc);
-+    uint32_t vta = vext_vta(desc);
-     uint32_t vl = env->vl;
-     uint32_t i;
- 
-@@ -917,7 +958,7 @@ static void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
-         }
-         fn(vd, vs1, vs2, i);
-     }
--    clearfn(vd, vl, vl * dsz,  vlmax * dsz);
-+    clearfn(vd, vta, vl, vl * dsz,  vlmax * dsz);
- }
- 
- /* generate the helpers for OPIVV */
-@@ -972,6 +1013,7 @@ static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
- {
-     uint32_t vlmax = vext_maxsz(desc) / esz;
-     uint32_t vm = vext_vm(desc);
-+    uint32_t vta = vext_vta(desc);
-     uint32_t vl = env->vl;
-     uint32_t i;
- 
-@@ -981,7 +1023,7 @@ static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-         }
-         fn(vd, s1, vs2, i);
-     }
--    clearfn(vd, vl, vl * dsz,  vlmax * dsz);
-+    clearfn(vd, vta, vl, vl * dsz,  vlmax * dsz);
- }
- 
- /* generate the helpers for OPIVX */
-@@ -1169,6 +1211,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
-     uint32_t vl = env->vl;                                    \
-     uint32_t esz = sizeof(ETYPE);                             \
-     uint32_t vlmax = vext_maxsz(desc) / esz;                  \
-+    uint32_t vta = vext_vta(desc);                            \
-     uint32_t i;                                               \
-                                                               \
-     for (i = 0; i < vl; i++) {                                \
-@@ -1178,7 +1221,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
-                                                               \
-         *((ETYPE *)vd + H(i)) = DO_OP(s2, s1, carry);         \
-     }                                                         \
--    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                  \
-+    CLEAR_FN(vd, vta, vl, vl * esz, vlmax * esz);             \
- }
- 
- GEN_VEXT_VADC_VVM(vadc_vvm_b, uint8_t,  H1, DO_VADC, clearb)
-@@ -1198,6 +1241,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,        \
-     uint32_t vl = env->vl;                                               \
-     uint32_t esz = sizeof(ETYPE);                                        \
-     uint32_t vlmax = vext_maxsz(desc) / esz;                             \
-+    uint32_t vta = vext_vta(desc);                                       \
-     uint32_t i;                                                          \
-                                                                          \
-     for (i = 0; i < vl; i++) {                                           \
-@@ -1206,7 +1250,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,        \
-                                                                          \
-         *((ETYPE *)vd + H(i)) = DO_OP(s2, (ETYPE)(target_long)s1, carry);\
-     }                                                                    \
--    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                             \
-+    CLEAR_FN(vd, vta, vl, vl * esz, vlmax * esz);                        \
- }
- 
- GEN_VEXT_VADC_VXM(vadc_vxm_b, uint8_t,  H1, DO_VADC, clearb)
-@@ -1347,6 +1391,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,                          \
-     uint32_t vl = env->vl;                                                \
-     uint32_t esz = sizeof(TS1);                                           \
-     uint32_t vlmax = vext_maxsz(desc) / esz;                              \
-+    uint32_t vta = vext_vta(desc);                                        \
-     uint32_t i;                                                           \
-                                                                           \
-     for (i = 0; i < vl; i++) {                                            \
-@@ -1357,7 +1402,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,                          \
-         TS2 s2 = *((TS2 *)vs2 + HS2(i));                                  \
-         *((TS1 *)vd + HS1(i)) = OP(s2, s1 & MASK);                        \
-     }                                                                     \
--    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                              \
-+    CLEAR_FN(vd, vta, vl, vl * esz, vlmax * esz);                         \
- }
- 
- GEN_VEXT_SHIFT_VV(vsll_vv_b, uint8_t,  uint8_t, H1, H1, DO_SLL, 0x7, clearb)
-@@ -1384,6 +1429,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,                \
-     uint32_t vl = env->vl;                                            \
-     uint32_t esz = sizeof(TD);                                        \
-     uint32_t vlmax = vext_maxsz(desc) / esz;                          \
-+    uint32_t vta = vext_vta(desc);                                    \
-     uint32_t i;                                                       \
-                                                                       \
-     for (i = 0; i < vl; i++) {                                        \
-@@ -1393,7 +1439,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,                \
-         TS2 s2 = *((TS2 *)vs2 + HS2(i));                              \
-         *((TD *)vd + HD(i)) = OP(s2, s1 & MASK);                      \
-     }                                                                 \
--    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                          \
-+    CLEAR_FN(vd, vta, vl, vl * esz, vlmax * esz);                     \
- }
- 
- GEN_VEXT_SHIFT_VX(vsll_vx_b, uint8_t, int8_t, H1, H1, DO_SLL, 0x7, clearb)
-@@ -2026,13 +2072,14 @@ void HELPER(NAME)(void *vd, void *vs1, CPURISCVState *env,           \
-     uint32_t vl = env->vl;                                           \
-     uint32_t esz = sizeof(ETYPE);                                    \
-     uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-+    uint32_t vta = vext_vta(desc);                                   \
-     uint32_t i;                                                      \
-                                                                      \
-     for (i = 0; i < vl; i++) {                                       \
-         ETYPE s1 = *((ETYPE *)vs1 + H(i));                           \
-         *((ETYPE *)vd + H(i)) = s1;                                  \
-     }                                                                \
--    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                         \
-+    CLEAR_FN(vd, vta, vl, vl * esz, vlmax * esz);                    \
- }
- 
- GEN_VEXT_VMV_VV(vmv_v_v_b, int8_t,  H1, clearb)
-@@ -2047,12 +2094,13 @@ void HELPER(NAME)(void *vd, uint64_t s1, CPURISCVState *env,         \
-     uint32_t vl = env->vl;                                           \
-     uint32_t esz = sizeof(ETYPE);                                    \
-     uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-+    uint32_t vta = vext_vta(desc);                                   \
-     uint32_t i;                                                      \
-                                                                      \
-     for (i = 0; i < vl; i++) {                                       \
-         *((ETYPE *)vd + H(i)) = (ETYPE)s1;                           \
-     }                                                                \
--    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                         \
-+    CLEAR_FN(vd, vta, vl, vl * esz, vlmax * esz);                    \
- }
- 
- GEN_VEXT_VMV_VX(vmv_v_x_b, int8_t,  H1, clearb)
-@@ -2067,13 +2115,14 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,          \
-     uint32_t vl = env->vl;                                           \
-     uint32_t esz = sizeof(ETYPE);                                    \
-     uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-+    uint32_t vta = vext_vta(desc);                                   \
-     uint32_t i;                                                      \
-                                                                      \
-     for (i = 0; i < vl; i++) {                                       \
-         ETYPE *vt = (!vext_elem_mask(v0, i) ? vs2 : vs1);            \
-         *((ETYPE *)vd + H(i)) = *(vt + H(i));                        \
-     }                                                                \
--    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                         \
-+    CLEAR_FN(vd, vta, vl, vl * esz, vlmax * esz);                    \
- }
- 
- GEN_VEXT_VMERGE_VV(vmerge_vvm_b, int8_t,  H1, clearb)
-@@ -2088,6 +2137,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,               \
-     uint32_t vl = env->vl;                                           \
-     uint32_t esz = sizeof(ETYPE);                                    \
-     uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-+    uint32_t vta = vext_vta(desc);                                   \
-     uint32_t i;                                                      \
-                                                                      \
-     for (i = 0; i < vl; i++) {                                       \
-@@ -2096,7 +2146,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,               \
-                    (ETYPE)(target_long)s1);                          \
-         *((ETYPE *)vd + H(i)) = d;                                   \
-     }                                                                \
--    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                         \
-+    CLEAR_FN(vd, vta, vl, vl * esz, vlmax * esz);                    \
- }
- 
- GEN_VEXT_VMERGE_VX(vmerge_vxm_b, int8_t,  H1, clearb)
-@@ -2149,6 +2199,7 @@ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
- {
-     uint32_t vlmax = vext_maxsz(desc) / esz;
-     uint32_t vm = vext_vm(desc);
-+    uint32_t vta = vext_vta(desc);
-     uint32_t vl = env->vl;
- 
-     switch (env->vxrm) {
-@@ -2170,7 +2221,7 @@ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
-         break;
-     }
- 
--    clearfn(vd, vl, vl * dsz,  vlmax * dsz);
-+    clearfn(vd, vta, vl, vl * dsz,  vlmax * dsz);
- }
- 
- /* generate helpers for fixed point instructions with OPIVV format */
-@@ -2268,6 +2319,7 @@ vext_vx_rm_2(void *vd, void *v0, target_long s1, void *vs2,
- {
-     uint32_t vlmax = vext_maxsz(desc) / esz;
-     uint32_t vm = vext_vm(desc);
-+    uint32_t vta = vext_vta(desc);
-     uint32_t vl = env->vl;
- 
-     switch (env->vxrm) {
-@@ -2289,7 +2341,7 @@ vext_vx_rm_2(void *vd, void *v0, target_long s1, void *vs2,
-         break;
-     }
- 
--    clearfn(vd, vl, vl * dsz,  vlmax * dsz);
-+    clearfn(vd, vta, vl, vl * dsz,  vlmax * dsz);
- }
- 
- /* generate helpers for fixed point instructions with OPIVX format */
-@@ -3171,6 +3223,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
- {                                                         \
-     uint32_t vlmax = vext_maxsz(desc) / ESZ;              \
-     uint32_t vm = vext_vm(desc);                          \
-+    uint32_t vta = vext_vta(desc);                        \
-     uint32_t vl = env->vl;                                \
-     uint32_t i;                                           \
-                                                           \
-@@ -3180,7 +3233,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-         }                                                 \
-         do_##NAME(vd, vs1, vs2, i, env);                  \
-     }                                                     \
--    CLEAR_FN(vd, vl, vl * DSZ,  vlmax * DSZ);             \
-+    CLEAR_FN(vd, vta, vl, vl * DSZ,  vlmax * DSZ);        \
- }
- 
- RVVCALL(OPFVV2, vfadd_vv_h, OP_UUU_H, H2, H2, H2, float16_add)
-@@ -3205,6 +3258,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1,        \
- {                                                         \
-     uint32_t vlmax = vext_maxsz(desc) / ESZ;              \
-     uint32_t vm = vext_vm(desc);                          \
-+    uint32_t vta = vext_vta(desc);                        \
-     uint32_t vl = env->vl;                                \
-     uint32_t i;                                           \
-                                                           \
-@@ -3214,7 +3268,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1,        \
-         }                                                 \
-         do_##NAME(vd, s1, vs2, i, env);                   \
-     }                                                     \
--    CLEAR_FN(vd, vl, vl * DSZ,  vlmax * DSZ);             \
-+    CLEAR_FN(vd, vta, vl, vl * DSZ,  vlmax * DSZ);        \
- }
- 
- RVVCALL(OPFVF2, vfadd_vf_h, OP_UUU_H, H2, H2, float16_add)
-@@ -3775,6 +3829,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
- {                                                      \
-     uint32_t vlmax = vext_maxsz(desc) / ESZ;           \
-     uint32_t vm = vext_vm(desc);                       \
-+    uint32_t vta = vext_vta(desc);                     \
-     uint32_t vl = env->vl;                             \
-     uint32_t i;                                        \
-                                                        \
-@@ -3787,7 +3842,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
-         }                                              \
-         do_##NAME(vd, vs2, i, env);                    \
-     }                                                  \
--    CLEAR_FN(vd, vl, vl * DSZ,  vlmax * DSZ);          \
-+    CLEAR_FN(vd, vta, vl, vl * DSZ,  vlmax * DSZ);     \
- }
- 
- RVVCALL(OPFVV1, vfsqrt_v_h, OP_UU_H, H2, H2, float16_sqrt)
-@@ -4095,6 +4150,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
- {                                                      \
-     uint32_t vlmax = vext_maxsz(desc) / ESZ;           \
-     uint32_t vm = vext_vm(desc);                       \
-+    uint32_t vta = vext_vta(desc);                     \
-     uint32_t vl = env->vl;                             \
-     uint32_t i;                                        \
-                                                        \
-@@ -4104,7 +4160,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
-         }                                              \
-         do_##NAME(vd, vs2, i);                         \
-     }                                                  \
--    CLEAR_FN(vd, vl, vl * DSZ,  vlmax * DSZ);          \
-+    CLEAR_FN(vd, vta, vl, vl * DSZ,  vlmax * DSZ);     \
- }
- 
- target_ulong fclass_h(uint64_t frs1)
-@@ -4180,6 +4236,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2, \
-     uint32_t vl = env->vl;                                    \
-     uint32_t esz = sizeof(ETYPE);                             \
-     uint32_t vlmax = vext_maxsz(desc) / esz;                  \
-+    uint32_t vta = vext_vta(desc);                            \
-     uint32_t i;                                               \
-                                                               \
-     for (i = 0; i < vl; i++) {                                \
-@@ -4187,7 +4244,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2, \
-         *((ETYPE *)vd + H(i))                                 \
-           = (!vm && !vext_elem_mask(v0, i) ? s2 : s1);        \
-     }                                                         \
--    CLEAR_FN(vd, vl, vl * esz, vlmax * esz);                  \
-+    CLEAR_FN(vd, vta, vl, vl * esz, vlmax * esz);             \
- }
- 
- GEN_VFMERGE_VF(vfmerge_vfm_h, int16_t, H2, clearh)
-@@ -4317,6 +4374,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-         void *vs2, CPURISCVState *env, uint32_t desc)     \
- {                                                         \
-     uint32_t vm = vext_vm(desc);                          \
-+    uint32_t vta = vext_vm(desc);                         \
-     uint32_t vl = env->vl;                                \
-     uint32_t i;                                           \
-     uint32_t tot = env_archcpu(env)->cfg.vlen / 8;        \
-@@ -4330,7 +4388,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-         s1 = OP(s1, (TD)s2);                              \
-     }                                                     \
-     *((TD *)vd + HD(0)) = s1;                             \
--    CLEAR_FN(vd, 1, sizeof(TD), tot);                     \
-+    CLEAR_FN(vd, vta, 1, sizeof(TD), tot);                \
- }
- 
- /* vd[0] = sum(vs1[0], vs2[*]) */
-@@ -4399,6 +4457,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,           \
-                   uint32_t desc)                           \
- {                                                          \
-     uint32_t vm = vext_vm(desc);                           \
-+    uint32_t vta = vext_vta(desc);                         \
-     uint32_t vl = env->vl;                                 \
-     uint32_t i;                                            \
-     uint32_t tot = env_archcpu(env)->cfg.vlen / 8;         \
-@@ -4412,7 +4471,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,           \
-         s1 = OP(s1, (TD)s2, &env->fp_status);              \
-     }                                                      \
-     *((TD *)vd + HD(0)) = s1;                              \
--    CLEAR_FN(vd, 1, sizeof(TD), tot);                      \
-+    CLEAR_FN(vd, vta, 1, sizeof(TD), tot);                 \
- }
- 
- /* Unordered sum */
-@@ -4436,6 +4495,7 @@ void HELPER(vfwredsum_vs_h)(void *vd, void *v0, void *vs1,
-                             void *vs2, CPURISCVState *env, uint32_t desc)
- {
-     uint32_t vm = vext_vm(desc);
-+    uint32_t vta = vext_vta(desc);
-     uint32_t vl = env->vl;
-     uint32_t i;
-     uint32_t tot = env_archcpu(env)->cfg.vlen / 8;
-@@ -4450,13 +4510,14 @@ void HELPER(vfwredsum_vs_h)(void *vd, void *v0, void *vs1,
-                          &env->fp_status);
-     }
-     *((uint32_t *)vd + H4(0)) = s1;
--    clearl(vd, 1, sizeof(uint32_t), tot);
-+    clearl(vd, vta, 1, sizeof(uint32_t), tot);
- }
- 
- void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *vs1,
-                             void *vs2, CPURISCVState *env, uint32_t desc)
- {
-     uint32_t vm = vext_vm(desc);
-+    uint32_t vta = vext_vta(desc);
-     uint32_t vl = env->vl;
-     uint32_t i;
-     uint32_t tot = env_archcpu(env)->cfg.vlen / 8;
-@@ -4471,7 +4532,7 @@ void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *vs1,
-                          &env->fp_status);
-     }
-     *((uint64_t *)vd) = s1;
--    clearq(vd, 1, sizeof(uint64_t), tot);
-+    clearq(vd, vta, 1, sizeof(uint64_t), tot);
- }
+-    return !((s->lmul == 0x3 && widen) || (reg % legal));
+-}
++/*
++ * Check function for vector instruction with format:
++ * double-width result and double-width source1 and single-width
++ * source2 (2*SEW = 2*SEW op SEW)
++ *
++ * is_vs1: indicates whether insn[19:15] is a vs1 field or not.
++ */
++#define VEXT_CHECK_DDS(s, rd, rs1, rs2, vm, is_vs1) do {           \
++    VEXT_WIDE_CHECK_COMMON(s, rd, vm);                             \
++    require_align(rs2, s->flmul * 2);                              \
++    if (is_vs1) {                                                  \
++        require_align(rs1, s->flmul);                              \
++        if (s->flmul < 1) {                                        \
++            require_noover(rd, s->flmul * 2, rs1, s->flmul);       \
++        } else {                                                   \
++            require_noover_widen(rd, s->flmul * 2, rs1, s->flmul); \
++        }                                                          \
++    }                                                              \
++} while (0)
  
  /*
-@@ -4619,6 +4680,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2, CPURISCVState *env,      \
- {                                                                         \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-     uint32_t vm = vext_vm(desc);                                          \
-+    uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     uint32_t sum = 0;                                                     \
-     int i;                                                                \
-@@ -4632,7 +4694,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2, CPURISCVState *env,      \
-             sum++;                                                        \
-         }                                                                 \
-     }                                                                     \
--    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
-+    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+- * There are two rules check here.
++ * Check function for vector instruction with format:
++ * single-width result and double-width source1 and single-width
++ * source2 (SEW = 2*SEW op SEW)
+  *
+- * 1. The destination vector register group for a masked vector instruction can
+- *    only overlap the source mask register (v0) when LMUL=1. (Section 5.3)
++ * is_vs1: indicates whether insn[19:15] is a vs1 field or not.
++ */
++#define VEXT_CHECK_SDS(s, rd, rs1, rs2, vm, is_vs1) do { \
++    VEXT_NARROW_CHECK_COMMON(s, rd, rs2, vm);            \
++    if (rd != rs2) {                                     \
++        require_noover(rd, s->flmul, rs2, s->flmul * 2); \
++    }                                                    \
++    if (is_vs1) {                                        \
++        require_align(rs1, s->flmul);                    \
++    }                                                    \
++} while (0)
++
++/*
++ * Check function for vector reduction instructions
+  *
+  * 2. In widen instructions and some other insturctions, like vslideup.vx,
+  *    there is no need to check whether LMUL=1.
+@@ -136,20 +281,14 @@ static bool vext_check_overlap_mask(DisasContext *s, uint32_t vd, bool vm,
+     return (vm != 0 || vd != 0) || (!force && (s->lmul == 0));
  }
  
- GEN_VEXT_VIOTA_M(viota_m_b, uint8_t, H1, clearb)
-@@ -4646,6 +4708,7 @@ void HELPER(NAME)(void *vd, void *v0, CPURISCVState *env, uint32_t desc)  \
- {                                                                         \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-     uint32_t vm = vext_vm(desc);                                          \
-+    uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     int i;                                                                \
-                                                                           \
-@@ -4655,7 +4718,7 @@ void HELPER(NAME)(void *vd, void *v0, CPURISCVState *env, uint32_t desc)  \
-         }                                                                 \
-         *((ETYPE *)vd + H(i)) = i;                                        \
-     }                                                                     \
--    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
-+    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+-/* The LMUL setting must be such that LMUL * NFIELDS <= 8. (Section 7.8) */
+-static bool vext_check_nf(DisasContext *s, uint32_t nf)
+-{
+-    return (1 << s->lmul) * nf <= 8;
+-}
+-
+ /*
+- * The destination vector register group cannot overlap a source vector register
+- * group of a different element width. (Section 11.2)
++ * In cpu_get_tb_cpu_state(), set VILL if RVV was not present.
++ * So RVV is also be checked in this function.
+  */
+-static inline bool vext_check_overlap_group(int rd, int dlen, int rs, int slen)
+-{
+-    return ((rd >= rs + slen) || (rs >= rd + dlen));
+-}
++#define VEXT_CHECK_ISA_ILL(s) do { \
++    require(!s->vill)              \
++} while (0)
++
+ /* common translation macro */
+ #define GEN_VEXT_TRANS(NAME, SEQ, ARGTYPE, OP, CHECK)      \
+ static bool trans_##NAME(DisasContext *s, arg_##ARGTYPE *a)\
+@@ -824,11 +963,10 @@ GEN_VEXT_TRANS(vamomaxud_v, 17, rwdvm, amo_op, amo_check)
+ 
+ static bool opivv_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_reg(s, a->rs1, false));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, true);
++    return true;
  }
  
- GEN_VEXT_VID_V(vid_v_b, uint8_t, H1, clearb)
-@@ -4674,6 +4737,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
- {                                                                         \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-     uint32_t vm = vext_vm(desc);                                          \
-+    uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     target_ulong offset = s1, i;                                          \
-                                                                           \
-@@ -4683,7 +4747,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-         }                                                                 \
-         *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - offset));          \
-     }                                                                     \
--    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
-+    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+ typedef void GVecGen3Fn(unsigned, uint32_t, uint32_t,
+@@ -922,10 +1060,10 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
+ 
+ static bool opivx_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, false));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, false);
++    return true;
  }
  
- /* vslideup.vx vd, vs2, rs1, vm # vd[i+rs1] = vs2[i] */
-@@ -4698,6 +4762,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
- {                                                                         \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-     uint32_t vm = vext_vm(desc);                                          \
-+    uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     target_ulong offset = s1, i;                                          \
-                                                                           \
-@@ -4708,7 +4773,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-         }                                                                 \
-         *((ETYPE *)vd + H(i)) = j >= vlmax ? 0 : *((ETYPE *)vs2 + H(j));  \
-     }                                                                     \
--    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
-+    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+ typedef void GVecGen2sFn(unsigned, uint32_t, uint32_t, TCGv_i64,
+@@ -1129,16 +1267,10 @@ GEN_OPIVI_GVEC_TRANS(vrsub_vi, 0, vrsub_vx, rsubi)
+ /* OPIVV with WIDEN */
+ static bool opivv_widen_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, true) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs2,
+-                                     1 << s->lmul) &&
+-            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs1,
+-                                     1 << s->lmul) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_DSS(s, a->rd, a->rs1, a->rs2, a->vm, true);
++    return true;
  }
  
- /* vslidedown.vx vd, vs2, rs1, vm # vd[i] = vs2[i+rs1] */
-@@ -4723,6 +4788,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
- {                                                                         \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-     uint32_t vm = vext_vm(desc);                                          \
-+    uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     uint32_t i;                                                           \
-                                                                           \
-@@ -4736,7 +4802,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-             *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - 1));           \
-         }                                                                 \
-     }                                                                     \
--    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
-+    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
+@@ -1185,13 +1317,10 @@ GEN_OPIVV_WIDEN_TRANS(vwsub_vv, opivv_widen_check)
+ /* OPIVX with WIDEN */
+ static bool opivx_widen_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, true) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs2,
+-                                     1 << s->lmul) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_DSS(s, a->rd, a->rs1, a->rs2, a->vm, false);
++    return true;
  }
  
- /* vslide1up.vx vd, vs2, rs1, vm # vd[0]=x[rs1], vd[i+1] = vs2[i] */
-@@ -4751,6 +4817,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
- {                                                                         \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-     uint32_t vm = vext_vm(desc);                                          \
-+    uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     uint32_t i;                                                           \
-                                                                           \
-@@ -4764,7 +4831,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-             *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i + 1));           \
-         }                                                                 \
-     }                                                                     \
--    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
-+    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+ static bool do_opivx_widen(DisasContext *s, arg_rmrr *a,
+@@ -1222,14 +1351,10 @@ GEN_OPIVX_WIDEN_TRANS(vwsub_vx)
+ /* WIDEN OPIVV with WIDEN */
+ static bool opiwv_widen_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, true) &&
+-            vext_check_reg(s, a->rs2, true) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs1,
+-                                     1 << s->lmul) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_DDS(s, a->rd, a->rs1, a->rs2, a->vm, true);
++    return true;
  }
  
- /* vslide1down.vx vd, vs2, rs1, vm # vd[i] = vs2[i+1], vd[vl-1]=x[rs1] */
-@@ -4780,6 +4847,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
- {                                                                         \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-     uint32_t vm = vext_vm(desc);                                          \
-+    uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     uint32_t index, i;                                                    \
-                                                                           \
-@@ -4794,7 +4862,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
-             *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(index));           \
-         }                                                                 \
-     }                                                                     \
--    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
-+    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+ static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
+@@ -1274,11 +1399,10 @@ GEN_OPIWV_WIDEN_TRANS(vwsub_wv)
+ /* WIDEN OPIVX with WIDEN */
+ static bool opiwx_widen_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, true) &&
+-            vext_check_reg(s, a->rs2, true) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_DDS(s, a->rd, a->rs1, a->rs2, a->vm, false);
++    return true;
  }
  
- /* vd[i] = (vs1[i] >= VLMAX) ? 0 : vs2[vs1[i]]; */
-@@ -4809,6 +4877,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
- {                                                                         \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-     uint32_t vm = vext_vm(desc);                                          \
-+    uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     uint32_t index = s1, i;                                               \
-                                                                           \
-@@ -4822,7 +4891,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-             *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(index));           \
-         }                                                                 \
-     }                                                                     \
--    CLEAR_FN(vd, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));          \
-+    CLEAR_FN(vd, vta, vl, vl * sizeof(ETYPE), vlmax * sizeof(ETYPE));     \
+ static bool do_opiwx_widen(DisasContext *s, arg_rmrr *a,
+@@ -1341,11 +1465,11 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+  */
+ static bool opivv_vadc_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            ((a->rd != 0) || (s->lmul == 0)));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    require(a->rd != 0);
++    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, true);
++    return true;
  }
  
- /* vd[i] = (x[rs1] >= VLMAX) ? 0 : vs2[rs1] */
-@@ -4837,6 +4906,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
-                   CPURISCVState *env, uint32_t desc)                      \
- {                                                                         \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-+    uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     uint32_t num = 0, i;                                                  \
-                                                                           \
-@@ -4847,7 +4917,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
-         *((ETYPE *)vd + H(num)) = *((ETYPE *)vs2 + H(i));                 \
-         num++;                                                            \
-     }                                                                     \
--    CLEAR_FN(vd, num, num * sizeof(ETYPE), vlmax * sizeof(ETYPE));        \
-+    CLEAR_FN(vd, vta, num, num * sizeof(ETYPE), vlmax * sizeof(ETYPE));   \
+ GEN_OPIVV_TRANS(vadc_vvm, opivv_vadc_check)
+@@ -1357,11 +1481,10 @@ GEN_OPIVV_TRANS(vsbc_vvm, opivv_vadc_check)
+  */
+ static bool opivv_vmadc_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            vext_check_overlap_group(a->rd, 1, a->rs1, 1 << s->lmul) &&
+-            vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, true);
++    return true;
  }
  
- /* Compress into vd elements of vs2 where vs1 is enabled */
+ GEN_OPIVV_TRANS(vmadc_vvm, opivv_vmadc_check)
+@@ -1369,10 +1492,11 @@ GEN_OPIVV_TRANS(vmsbc_vvm, opivv_vmadc_check)
+ 
+ static bool opivx_vadc_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            ((a->rd != 0) || (s->lmul == 0)));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    require(a->rd != 0);
++    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, false);
++    return true;
+ }
+ 
+ /* OPIVX without GVEC IR */
+@@ -1395,9 +1519,10 @@ GEN_OPIVX_TRANS(vsbc_vxm, opivx_vadc_check)
+ 
+ static bool opivx_vmadc_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, false);
++    return true;
+ }
+ 
+ GEN_OPIVX_TRANS(vmadc_vxm, opivx_vmadc_check)
+@@ -1488,14 +1613,10 @@ GEN_OPIVI_TRANS(vsra_vi, 1, vsra_vx, opivx_check)
+ /* Vector Narrowing Integer Right Shift Instructions */
+ static bool opivv_narrow_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, true) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            vext_check_overlap_group(a->rd, 1 << s->lmul, a->rs2,
+-                2 << s->lmul) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_SDS(s, a->rd, a->rs1, a->rs2, a->vm, true);
++    return true;
+ }
+ 
+ /* OPIVV with NARROW */
+@@ -1531,13 +1652,10 @@ GEN_OPIVV_NARROW_TRANS(vnsrl_vv)
+ 
+ static bool opivx_narrow_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, true) &&
+-            vext_check_overlap_group(a->rd, 1 << s->lmul, a->rs2,
+-                2 << s->lmul) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_SDS(s, a->rd, a->rs1, a->rs2, a->vm, false);
++    return true;
+ }
+ 
+ /* OPIVX with NARROW */
+@@ -1585,13 +1703,12 @@ GEN_OPIVI_NARROW_TRANS(vnsrl_vi, 1, vnsrl_vx)
+  */
+ static bool opivv_cmp_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            ((vext_check_overlap_group(a->rd, 1, a->rs1, 1 << s->lmul) &&
+-              vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul)) ||
+-             (s->lmul == 0)));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, true);
++    return true;
+ }
++
+ GEN_OPIVV_TRANS(vmseq_vv, opivv_cmp_check)
+ GEN_OPIVV_TRANS(vmsne_vv, opivv_cmp_check)
+ GEN_OPIVV_TRANS(vmsltu_vv, opivv_cmp_check)
+@@ -1601,10 +1718,10 @@ GEN_OPIVV_TRANS(vmsle_vv, opivv_cmp_check)
+ 
+ static bool opivx_cmp_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            (vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul) ||
+-             (s->lmul == 0)));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, false);
++    return true;
+ }
+ 
+ GEN_OPIVX_TRANS(vmseq_vx, opivx_cmp_check)
+@@ -1863,12 +1980,11 @@ GEN_OPIVI_NARROW_TRANS(vnclip_vi, 1, vnclip_vx)
+  */
+ static bool opfvv_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            (s->sew != 0));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, true);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ /* OPFVV without GVEC IR */
+@@ -1934,17 +2050,17 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
+     return true;
+ }
+ 
+-static bool opfvf_check(DisasContext *s, arg_rmrr *a)
+-{
+ /*
+  * If the current SEW does not correspond to a supported IEEE floating-point
+  * type, an illegal instruction exception is raised
+  */
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            (s->sew != 0));
++static bool opfvf_check(DisasContext *s, arg_rmrr *a)
++{
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_SSS(s, a->rd, a->rs1, a->rs2, a->vm, false);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ /* OPFVF without GVEC IR */
+@@ -1976,16 +2092,11 @@ GEN_OPFVF_TRANS(vfrsub_vf,  opfvf_check)
+ /* Vector Widening Floating-Point Add/Subtract Instructions */
+ static bool opfvv_widen_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, true) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs2,
+-                                     1 << s->lmul) &&
+-            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs1,
+-                                     1 << s->lmul) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_DSS(s, a->rd, a->rs1, a->rs2, a->vm, true);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ /* OPFVV with WIDEN */
+@@ -2021,13 +2132,11 @@ GEN_OPFVV_WIDEN_TRANS(vfwsub_vv, opfvv_widen_check)
+ 
+ static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, true) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs2,
+-                                     1 << s->lmul) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_DSS(s, a->rd, a->rs1, a->rs2, a->vm, false);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ /* OPFVF with WIDEN */
+@@ -2055,14 +2164,11 @@ GEN_OPFVF_WIDEN_TRANS(vfwsub_vf)
+ 
+ static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, true) &&
+-            vext_check_reg(s, a->rs2, true) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs1,
+-                                     1 << s->lmul) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_DDS(s, a->rd, a->rs1, a->rs2, a->vm, true);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ /* WIDEN OPFVV with WIDEN */
+@@ -2098,11 +2204,11 @@ GEN_OPFWV_WIDEN_TRANS(vfwsub_wv)
+ 
+ static bool opfwf_widen_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, true) &&
+-            vext_check_reg(s, a->rs2, true) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_DDS(s, a->rd, a->rs1, a->rs2, a->vm, false);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ /* WIDEN OPFVF with WIDEN */
+@@ -2175,11 +2281,12 @@ GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf)
+  */
+ static bool opfv_check(DisasContext *s, arg_rmr *a)
+ {
+-   return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            (s->sew != 0));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    /* OPFV instructions ignore vs1 check */
++    VEXT_CHECK_SSS(s, a->rd, 0, a->rs2, a->vm, false);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ #define GEN_OPFV_TRANS(NAME, CHECK)                                \
+@@ -2229,13 +2336,11 @@ GEN_OPFVF_TRANS(vfsgnjx_vf, opfvf_check)
+ /* Vector Floating-Point Compare Instructions */
+ static bool opfvv_cmp_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            (s->sew != 0) &&
+-            ((vext_check_overlap_group(a->rd, 1, a->rs1, 1 << s->lmul) &&
+-              vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul)) ||
+-             (s->lmul == 0)));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, true);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ GEN_OPFVV_TRANS(vmfeq_vv, opfvv_cmp_check)
+@@ -2246,11 +2351,11 @@ GEN_OPFVV_TRANS(vmford_vv, opfvv_cmp_check)
+ 
+ static bool opfvf_cmp_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            (s->sew != 0) &&
+-            (vext_check_overlap_group(a->rd, 1, a->rs2, 1 << s->lmul) ||
+-             (s->lmul == 0)));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    VEXT_CHECK_MSS(s, a->rd, a->rs1, a->rs2, false);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ GEN_OPFVF_TRANS(vmfeq_vf, opfvf_cmp_check)
+@@ -2316,13 +2421,12 @@ GEN_OPFV_TRANS(vfcvt_f_x_v, opfv_check)
+  */
+ static bool opfv_widen_check(DisasContext *s, arg_rmr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, true) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_overlap_group(a->rd, 2 << s->lmul, a->rs2,
+-                                     1 << s->lmul) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    /* OPFV widening instructions ignore vs1 check */
++    VEXT_CHECK_DSS(s, a->rd, 0, a->rs2, a->vm, false);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ #define GEN_OPFV_WIDEN_TRANS(NAME)                                 \
+@@ -2366,13 +2470,12 @@ GEN_OPFV_WIDEN_TRANS(vfwcvt_f_f_v)
+  */
+ static bool opfv_narrow_check(DisasContext *s, arg_rmr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, false) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, true) &&
+-            vext_check_overlap_group(a->rd, 1 << s->lmul, a->rs2,
+-                                     2 << s->lmul) &&
+-            (s->lmul < 0x3) && (s->sew < 0x3) && (s->sew != 0));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    /* OPFV narrowing instructions ignore vs1 check */
++    VEXT_CHECK_SDS(s, a->rd, 0, a->rs2, a->vm, false);
++    require(s->sew != 0);
++    return true;
+ }
+ 
+ #define GEN_OPFV_NARROW_TRANS(NAME)                                \
+@@ -2865,23 +2968,27 @@ GEN_OPIVI_TRANS(vslidedown_vi, 1, vslidedown_vx, opivx_check)
+ /* Vector Register Gather Instruction */
+ static bool vrgather_vv_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs1, false) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            (a->rd != a->rs2) && (a->rd != a->rs1));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    require_align(a->rd, s->flmul);
++    require_align(a->rs1, s->flmul);
++    require_align(a->rs2, s->flmul);
++    require(a->rd != a->rs2 && a->rd != a->rs1);
++    require_vm(a->vm, a->rd);
++    return true;
+ }
+ 
+ GEN_OPIVV_TRANS(vrgather_vv, vrgather_vv_check)
+ 
+ static bool vrgather_vx_check(DisasContext *s, arg_rmrr *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_overlap_mask(s, a->rd, a->vm, true) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            (a->rd != a->rs2));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    require_align(a->rd, s->flmul);
++    require_align(a->rs2, s->flmul);
++    require(a->rd != a->rs2);
++    require_vm(a->vm, a->rd);
++    return true;
+ }
+ 
+ /* vrgather.vx vd, vs2, rs1, vm # vd[i] = (x[rs1] >= VLMAX) ? 0 : vs2[rs1] */
+@@ -2945,11 +3052,13 @@ static bool trans_vrgather_vi(DisasContext *s, arg_rmrr *a)
+ /* Vector Compress Instruction */
+ static bool vcompress_vm_check(DisasContext *s, arg_r *a)
+ {
+-    return (vext_check_isa_ill(s) &&
+-            vext_check_reg(s, a->rd, false) &&
+-            vext_check_reg(s, a->rs2, false) &&
+-            vext_check_overlap_group(a->rd, 1 << s->lmul, a->rs1, 1) &&
+-            (a->rd != a->rs2));
++    REQUIRE_RVV;
++    VEXT_CHECK_ISA_ILL(s);
++    require_align(a->rd, s->flmul);
++    require_align(a->rs2, s->flmul);
++    require(a->rd != a->rs2);
++    require_noover(a->rd, s->flmul, a->rs1, 1);
++    return true;
+ }
+ 
+ static bool trans_vcompress_vm(DisasContext *s, arg_r *a)
 -- 
 2.17.1
 
