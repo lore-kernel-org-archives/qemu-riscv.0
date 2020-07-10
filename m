@@ -1,71 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jtess-000300-82
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Jul 2020 18:19:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41172)
+	id 1jthAG-0003Ik-50
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Jul 2020 20:45:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46236)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jtesq-0002zV-VE; Thu, 09 Jul 2020 18:19:12 -0400
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:39478)
+ (Exim 4.90_1) (envelope-from <palmerdabbelt@google.com>)
+ id 1jthAE-0003Hh-KR
+ for qemu-riscv@nongnu.org; Thu, 09 Jul 2020 20:45:18 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:38475)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jtesp-0004ic-DQ; Thu, 09 Jul 2020 18:19:12 -0400
-Received: by mail-io1-xd44.google.com with SMTP id f23so4018994iof.6;
- Thu, 09 Jul 2020 15:19:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zlbovMq+CfQFgr0L2fGTZuKo7s7GwKCOyZktdYMSYt8=;
- b=nrW+HPkPi5C2fdpGY61RDKFJcYxhpYIE5P0+K4q2+xqlEq4L9mNGiJ7qqFK9npfrr8
- +dn8XnV+qHN/Fuo80E8Dd0cbMkjSnusT2NBQeWUpbS9pe7jkRIzwhPfAzYG8i0qslK+I
- YJJiaL5nrIjIuH9MLtW8cG6OLknmROSXLsQYfuPULxmV0dWBYC32ZMzUOzZuFWMUz0f7
- fJnRuVA9n9cSuttHgDONzeCOHrgqAFsMQgpNz+0FEg9Vkei+0EA5V3Bozn0LjgkWypx9
- l6EWDlYxBOUecdWRlO6imVRrCL5kP/bX4HLPSqLnc/lTcG3OH7+F0MttryI2YHUiZQJP
- q7ug==
+ (Exim 4.90_1) (envelope-from <palmerdabbelt@google.com>)
+ id 1jthAC-0007Ez-4j
+ for qemu-riscv@nongnu.org; Thu, 09 Jul 2020 20:45:18 -0400
+Received: by mail-pg1-x544.google.com with SMTP id e8so1735249pgc.5
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jul 2020 17:45:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=J1UpzMZlOeaM972X/gFqPoo1VAgPgIckz2WY7EjALcE=;
+ b=IkhZW8l/Sz4zoGH/ZsyVjSDJX2px++IaB1CXaFCgnhzZ6FSWNXu0GfAcjs/7CM9p8q
+ uPmd4seWQDV1uR+EBHK8ejkXS5i79agal1qjYaEDAyiKq5LbXG8QF7snG10WpZqcoPzo
+ GLjf3CBA7OTYIwUu8Qi6gj2v6N6HRk/BRyi7P+t3bz6hwNfudQ4SqhOFGltbKc/r2fhi
+ jsMLRkq/Yygu5puBxnfcCgkgPjKegwqs0qIW1JxQk0bQnik6PmYfP4CmKOTqgt/hSzJ0
+ stCTxDgiS9SKSBXaDr2NbZ+f+39PVZ3myWqUiXxeMDXmqX17gHuofv2AGlJWdZyyiemJ
+ ALUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=zlbovMq+CfQFgr0L2fGTZuKo7s7GwKCOyZktdYMSYt8=;
- b=p7hi37QnImtd/H0AlvswJ9ZE8T/emGDqo0tH5nVppMavoYsheYC1YXriS/hMhMcnlF
- KWoqH8J7ba1b65682qY/7YmCoEa+5SqNqEhHAy//scgtyKca6aApulwb2BRW9O8asSz4
- GvRr59yagZE87AoKhUbcx/MlY6GgifCYjDKz8hZ0uNd3vOVpwo2Z8FtK30RlVA6xfOOu
- YwvDJ11urzjP0eyJN2l3NLGwiRBJVn1KMGxy2Hcjm4ppJGzqc+tDGaNj1REVnHjXvuFF
- jV6VFm5mOTxq8fhGpoQWAp/frPsu8mjzsMGDqL1hKwd/DIpADO4Conwb0llzIv433CH0
- RTbw==
-X-Gm-Message-State: AOAM533L2QfqijXqrDA8U6ehVTU9xzuolqJ2aq/1j0h3YqGCN7A4alGR
- +J0OMCB1qHsI/L13mtFAKZNd+5Op7j08MMJtlkk=
-X-Google-Smtp-Source: ABdhPJzfJD1fKCRKIw0uJC7sfjI2Z68R9Ew3hfbgSKfIPw4lAbsl3ErXgiY5U/JjSNQGZYNSynWG0LvW5VOPOBCHYzQ=
-X-Received: by 2002:a5d:97d9:: with SMTP id k25mr44638476ios.42.1594333149988; 
- Thu, 09 Jul 2020 15:19:09 -0700 (PDT)
-MIME-Version: 1.0
-References: <1594289144-24723-1-git-send-email-bmeng.cn@gmail.com>
- <1594289144-24723-2-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1594289144-24723-2-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 9 Jul 2020 15:09:18 -0700
-Message-ID: <CAKmqyKPvn7dALUHhK=na1svr==oZ2rvyFOnw8FvRJZP23uHN7Q@mail.gmail.com>
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=J1UpzMZlOeaM972X/gFqPoo1VAgPgIckz2WY7EjALcE=;
+ b=MGjobOU6xO/oCwR7ttfnZ/1kXQdYadCbLjCbk20buyvD0nJuw+Px5hrQKF+hjzxHAn
+ iN2YGwh6BeYpNDc13GQ11wJoZ8OVxt+KL8zC2snhvd1HQRmneduSPm8+NSEIJAtImkkq
+ dwjln5cMBVAE4IsMWIS/0fD0ci3Fj1EQmWwp2DyEfktpsQ3rG3BR4TgX/H0P4eMa0yqy
+ rFXmBOIWPiIoEJ/Q99bDGj7xhdVVvdv6NPuRD2IseqqhlT3dj9xRm2Co8R9yP1hKdPwa
+ Gct601J9klmyxP1DKIkvFQt7CGQUK8XsWOisDRkNeLZvawRFmaI3kVvgaUTvHuS9rMEu
+ y6bw==
+X-Gm-Message-State: AOAM530AeN8bXHRvHyC/XFIG5+waHsvKB8/vx82kaxp8NDzHXdtArKs2
+ cx/Lv6J3Pi0NFKrUP/uZm8iNRQ==
+X-Google-Smtp-Source: ABdhPJxVe8oqIBBadnSd/zhmDGORQpd75WoYuixC1x20+OwxUx1GKMCFyKxnt3tOiwmkF62p3IJnQA==
+X-Received: by 2002:a63:20d:: with SMTP id 13mr56638069pgc.166.1594341913243; 
+ Thu, 09 Jul 2020 17:45:13 -0700 (PDT)
+Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
+ [76.210.143.223])
+ by smtp.gmail.com with ESMTPSA id w1sm3664549pfc.55.2020.07.09.17.45.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jul 2020 17:45:12 -0700 (PDT)
+Date: Thu, 09 Jul 2020 17:45:12 -0700 (PDT)
+X-Google-Original-Date: Thu, 09 Jul 2020 17:45:10 PDT (-0700)
 Subject: Re: [PATCH v2 2/2] hw/riscv: sifive_u: Provide a reliable way for
  bootloader to detect whether it is running in QEMU
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
+In-Reply-To: <CAKmqyKPvn7dALUHhK=na1svr==oZ2rvyFOnw8FvRJZP23uHN7Q@mail.gmail.com>
+CC: bmeng.cn@gmail.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
+ sagark@eecs.berkeley.edu, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>
+From: Palmer Dabbelt <palmerdabbelt@google.com>
+To: alistair23@gmail.com
+Message-ID: <mhng-842d31db-ac34-4bab-a523-808f1f542101@palmerdabbelt-glaptop1>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
+ envelope-from=palmerdabbelt@google.com; helo=mail-pg1-x544.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -185
+X-Spam_score: -18.6
+X-Spam_bar: ------------------
+X-Spam_report: (-18.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-1,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ ENV_AND_HDR_SPF_MATCH=-0.5, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -78,83 +82,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jul 2020 22:19:13 -0000
+X-List-Received-Date: Fri, 10 Jul 2020 00:45:18 -0000
 
-On Thu, Jul 9, 2020 at 3:07 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Thu, 09 Jul 2020 15:09:18 PDT (-0700), alistair23@gmail.com wrote:
+> On Thu, Jul 9, 2020 at 3:07 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>>
+>> From: Bin Meng <bin.meng@windriver.com>
+>>
+>> The reset vector codes are subject to change, e.g.: with recent
+>> fw_dynamic type image support, it breaks oreboot again.
 >
-> From: Bin Meng <bin.meng@windriver.com>
+> This is a recurring problem, I have another patch for Oreboot to fix
+> the latest breakage.
 >
-> The reset vector codes are subject to change, e.g.: with recent
-> fw_dynamic type image support, it breaks oreboot again.
+>>
+>> Add a subregion in the MROM, with the size of machine RAM stored,
+>> so that we can provide a reliable way for bootloader to detect
+>> whether it is running in QEMU.
+>
+> I don't really like this though. I would prefer that we don't
+> encourage guest software to behave differently on QEMU. I don't think
+> other upstream boards do this.
 
-This is a recurring problem, I have another patch for Oreboot to fix
-the latest breakage.
+I agree.  If you want an explicitly virtual board, use the virt board.  Users
+of sifive_u are presumably trying to do their best to test against what the
+hardware does without actually using the hardware.  Otherwise there should be
+no reason to use the sifive_u board, as it's just sticking a layer of
+complexity in the middle of everything.
 
->
-> Add a subregion in the MROM, with the size of machine RAM stored,
-> so that we can provide a reliable way for bootloader to detect
-> whether it is running in QEMU.
+> Besides Oreboot setting up the clocks are there any other users of this?
 
-I don't really like this though. I would prefer that we don't
-encourage guest software to behave differently on QEMU. I don't think
-other upstream boards do this.
+IIRC we have a scheme for handling the clock setup in QEMU where we accept
+pretty much any control write and then just return reads that say the PLLs have
+locked.  I'd be in favor of improving the scheme to improve compatibility with
+the actual hardware, but adding some way for programs to skip the clocks
+because they know they're in QEMU seems like the wrong way to go.
 
-Besides Oreboot setting up the clocks are there any other users of this?
-
-Alistair
-
+> Alistair
 >
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
->
-> ---
->
-> Changes in v2:
-> - correctly populate the value in little-endian
->
->  hw/riscv/sifive_u.c | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 3413369..79519d4 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -88,6 +88,7 @@ static const struct MemmapEntry {
->
->  #define OTP_SERIAL          1
->  #define GEM_REVISION        0x10070109
-> +#define MROM_RAMSIZE_OFFSET 0xf8
->
->  static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
->      uint64_t mem_size, const char *cmdline)
-> @@ -496,6 +497,26 @@ static void sifive_u_machine_init(MachineState *machine)
->      riscv_rom_copy_firmware_info(memmap[SIFIVE_U_MROM].base,
->                                   memmap[SIFIVE_U_MROM].size,
->                                   sizeof(reset_vec), kernel_entry);
-> +
-> +    /*
-> +     * Tell guest the machine ram size at MROM_RAMSIZE_OFFSET.
-> +     * On real hardware, the 64-bit value from MROM_RAMSIZE_OFFSET is zero.
-> +     * QEMU aware bootloader (e.g.: oreboot, U-Boot) can check value stored
-> +     * here to determine whether it is running in QEMU.
-> +     */
-> +
-> +    uint32_t ram_size[2] = {
-> +        machine->ram_size,
-> +        ((uint64_t)(machine->ram_size)) >> 32
-> +    };
-> +
-> +    /* copy in the ram size in little_endian byte order */
-> +    for (i = 0; i < ARRAY_SIZE(ram_size); i++) {
-> +        ram_size[i] = cpu_to_le32(ram_size[i]);
-> +    }
-> +    rom_add_blob_fixed_as("mrom.ram_size", ram_size, sizeof(ram_size),
-> +                          memmap[SIFIVE_U_MROM].base + MROM_RAMSIZE_OFFSET,
-> +                          &address_space_memory);
->  }
->
->  static bool sifive_u_machine_get_start_in_flash(Object *obj, Error **errp)
-> --
-> 2.7.4
->
->
+>>
+>> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+>>
+>> ---
+>>
+>> Changes in v2:
+>> - correctly populate the value in little-endian
+>>
+>>  hw/riscv/sifive_u.c | 21 +++++++++++++++++++++
+>>  1 file changed, 21 insertions(+)
+>>
+>> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+>> index 3413369..79519d4 100644
+>> --- a/hw/riscv/sifive_u.c
+>> +++ b/hw/riscv/sifive_u.c
+>> @@ -88,6 +88,7 @@ static const struct MemmapEntry {
+>>
+>>  #define OTP_SERIAL          1
+>>  #define GEM_REVISION        0x10070109
+>> +#define MROM_RAMSIZE_OFFSET 0xf8
+>>
+>>  static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>>      uint64_t mem_size, const char *cmdline)
+>> @@ -496,6 +497,26 @@ static void sifive_u_machine_init(MachineState *machine)
+>>      riscv_rom_copy_firmware_info(memmap[SIFIVE_U_MROM].base,
+>>                                   memmap[SIFIVE_U_MROM].size,
+>>                                   sizeof(reset_vec), kernel_entry);
+>> +
+>> +    /*
+>> +     * Tell guest the machine ram size at MROM_RAMSIZE_OFFSET.
+>> +     * On real hardware, the 64-bit value from MROM_RAMSIZE_OFFSET is zero.
+>> +     * QEMU aware bootloader (e.g.: oreboot, U-Boot) can check value stored
+>> +     * here to determine whether it is running in QEMU.
+>> +     */
+>> +
+>> +    uint32_t ram_size[2] = {
+>> +        machine->ram_size,
+>> +        ((uint64_t)(machine->ram_size)) >> 32
+>> +    };
+>> +
+>> +    /* copy in the ram size in little_endian byte order */
+>> +    for (i = 0; i < ARRAY_SIZE(ram_size); i++) {
+>> +        ram_size[i] = cpu_to_le32(ram_size[i]);
+>> +    }
+>> +    rom_add_blob_fixed_as("mrom.ram_size", ram_size, sizeof(ram_size),
+>> +                          memmap[SIFIVE_U_MROM].base + MROM_RAMSIZE_OFFSET,
+>> +                          &address_space_memory);
+>>  }
+>>
+>>  static bool sifive_u_machine_get_start_in_flash(Object *obj, Error **errp)
+>> --
+>> 2.7.4
+>>
+>>
 
