@@ -1,47 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1juIDa-0007it-2W
-	for mharc-qemu-riscv@gnu.org; Sat, 11 Jul 2020 12:19:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54690)
+	id 1juJIr-0000Kj-2n
+	for mharc-qemu-riscv@gnu.org; Sat, 11 Jul 2020 13:28:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37118)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1juIDY-0007fX-Rf; Sat, 11 Jul 2020 12:19:12 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:38873)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1juIDW-0001Ln-9Z; Sat, 11 Jul 2020 12:19:12 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.531228-0.000452356-0.46832;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01l07447; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=10; RT=10; SR=0; TI=SMTPD_---.I0GMGMe_1594484317; 
-Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.I0GMGMe_1594484317)
- by smtp.aliyun-inc.com(10.147.44.129);
- Sun, 12 Jul 2020 00:18:38 +0800
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: richard.henderson@linaro.org, Alistair.Francis@wdc.com,
- chihmin.chao@sifive.com, alex.bennee@linaro.org, peter.maydell@linaro.org,
- wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
- LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 01/11] riscv: Add RV64I instructions description
-Date: Sun, 12 Jul 2020 00:16:45 +0800
-Message-Id: <20200711161655.2856-2-zhiwei_liu@c-sky.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20200711161655.2856-1-zhiwei_liu@c-sky.com>
-References: <20200711161655.2856-1-zhiwei_liu@c-sky.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1juJIp-0000KL-VG; Sat, 11 Jul 2020 13:28:43 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:46365)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1juJIk-0000gs-VS; Sat, 11 Jul 2020 13:28:43 -0400
+Received: by mail-il1-x142.google.com with SMTP id p15so142331ilh.13;
+ Sat, 11 Jul 2020 10:28:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=7RVP8Reptsl69FVo8Kg+s9KUvL4PHpu0EKM4Bsps12o=;
+ b=PVf3xBhRRvSZBOOXdz8ejLnm51tIjbuapVedDL62pkQR/c0gny/8Y7uDdFSt2QK4p+
+ V0zsOx9djmXti4z+XbTcMg46X9MNTI7LrTia1phodXvR+9IW+T5O+M691H6aNg8msbMY
+ dxZUKIE0G7lgt9v/iT7IvyXsg2hHC3W6YkjtsUQDS+Vm1akVcLJpQBDLRBDcCLysZvLK
+ 3falV1Gy9RJW6ELk86+3B+31o0lsxk4l2nbKWz5BS+mjtcMImzvPtA8ao3VL4f7yaYvv
+ 4x9IO7ED7pOLm+4t3TBmfKJZkDgYTk5xWZHqn5GFGWGwXLEjv0C/1LW6ViLoyfqmvD1r
+ VDpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=7RVP8Reptsl69FVo8Kg+s9KUvL4PHpu0EKM4Bsps12o=;
+ b=LruBSr6XMzTQuCEbhWt+fv8hjD1SIVtd+1p+k0PZQOFuxGr1sokfXjCppkJj20TFPG
+ gpmNjUuSelfg7oOpXBdXrDJfPnlVIe39k57RrP3RFqiG30RqshyFPv49hC8dLR7uXFF4
+ U11VezW0jvfCvUDmua6UKzKrzx25PPH45wH6lX7RnR/mF6KMer9c3YiTKaAHCeiB3oLa
+ E/z1Vg8B39xM2FjogmXlUxTfrzsQ5Xwag8urNwdT7fqzWYW/63RMY4hptCpSYR2PGEuQ
+ oLBFy4MwQvwhNdDR1oJl6l4+7CbJ4PRWQRjDJ/kbkAe3DxgfVdgnKccjCyZWWdohyWNb
+ CAdg==
+X-Gm-Message-State: AOAM532uRc2RxJLbAs5KFFpmzUUc2wJ0OAWRx+R2zP3QcyavP2E0bpZV
+ xPJBRRcYsUrl9qtYFnSuLkni+6aC53XZsIpdZZc=
+X-Google-Smtp-Source: ABdhPJxr/pNlLtXmJOePLgRdOJNBMJt6HwqlCLEI69T+VZflo9B5jonY54dh0bgU4iUaT0QwNz/LSWDnqCdc+u9ZdQc=
+X-Received: by 2002:a92:d186:: with SMTP id z6mr61038175ilz.227.1594488517108; 
+ Sat, 11 Jul 2020 10:28:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=121.197.200.217;
- envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/11 12:18:40
-X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <1594357499-29068-1-git-send-email-bmeng.cn@gmail.com>
+ <1594357499-29068-8-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKPf4YH9Ut1mTLRoRdk-aja6wTKS-FhA-5LynbCeajh-_Q@mail.gmail.com>
+In-Reply-To: <CAKmqyKPf4YH9Ut1mTLRoRdk-aja6wTKS-FhA-5LynbCeajh-_Q@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Sat, 11 Jul 2020 10:18:42 -0700
+Message-ID: <CAKmqyKOQM4pZLAnt42m-MC2cFOxM_+_-tw7FHxe1RbDf84q0Nw@mail.gmail.com>
+Subject: Re: [PATCH v4 7/7] Makefile: Ship the generic platform bios images
+ for RISC-V
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -54,167 +79,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jul 2020 16:19:13 -0000
+X-List-Received-Date: Sat, 11 Jul 2020 17:28:44 -0000
 
-Avoid using stack pointer(x2), thread pointer(x3), global pointer(x4),
-as they are not under control of risu.
-Besides, avoid using x0 as base address register, because we can't
-emit a valid random address by setting x0.
+On Fri, Jul 10, 2020 at 11:36 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Thu, Jul 9, 2020 at 10:11 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > From: Bin Meng <bin.meng@windriver.com>
+> >
+> > Update the install blob list to include the generic platform
+> > fw_dynamic bios images.
+> >
+> > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+>
+> You didn't address the comments in v3.
+>
+> Thinking about this more though it looks like we currently don't
+> install anything, so this is an improvement.
+>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
----
- rv64.risu | 141 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 141 insertions(+)
- create mode 100644 rv64.risu
+Nope, I was wrong. This should be squashed into patch 4 where you
+remove the installed binaries.
 
-diff --git a/rv64.risu b/rv64.risu
-new file mode 100644
-index 0000000..edf0d1f
---- /dev/null
-+++ b/rv64.risu
-@@ -0,0 +1,141 @@
-+# Input file for risugen defining RISC-V instructions
-+.mode riscv.rv64
-+@RV64I
-+
-+# x2 stack pointer, x3 global pointer, x4 thread pointer
-+# These registers should be reserved for signal handler.
-+
-+LUI RISCV imm:20 rd:5 0110111 \
-+!constraints { greg($rd); }
-+
-+AUIPC RISCV imm:20 rd:5 0110111 \
-+!constraints { greg($rd); }
-+
-+# Limit to current implementation, the base address register will be overide
-+LB RISCV imm:12 rs1:5 000 rd:5 0000011 \
-+!constraints { greg($rd) && gbase($rs1); } \
-+!memory { align(1); reg_plus_imm($rs1, sextract($imm, 12), $rd); }
-+
-+LH RISCV imm:12 rs1:5 001 rd:5 0000011 \
-+!constraints { greg($rd) && gbase($rs1); } \
-+!memory { align(2); reg_plus_imm($rs1, sextract($imm, 12), $rd); }
-+
-+LW RISCV imm:12 rs1:5 010 rd:5 0000011 \
-+!constraints { greg($rd) && gbase($rs1); } \
-+!memory { align(4); reg_plus_imm($rs1, sextract($imm, 12), $rd); }
-+
-+LBU RISCV imm:12 rs1:5 100 rd:5 0000011 \
-+!constraints { greg($rd) && gbase($rs1); } \
-+!memory { align(1); reg_plus_imm($rs1, sextract($imm, 12), $rd); }
-+
-+LHU RISCV imm:12 rs1:5 101 rd:5 0000011 \
-+!constraints { greg($rd) && gbase($rs1); } \
-+!memory { align(2); reg_plus_imm($rs1, sextract($imm, 12), $rd); }
-+
-+SB RISCV imm5:7 rs2:5 rs1:5 000 imm:5 0100011 \
-+!constraints { greg($rs2) && gbase($rs1) && $rs2 != $rs1; } \
-+!memory { align(1); reg_plus_imm($rs1, sextract($imm5 << 5 | $imm, 12)); }
-+
-+SH RISCV imm5:7 rs2:5 rs1:5 001 imm:5 0100011 \
-+!constraints { greg($rs2) && gbase($rs1) && $rs2 != $rs1; } \
-+!memory { align(2); reg_plus_imm($rs1, sextract($imm5 << 5 | $imm, 12)); }
-+
-+SW RISCV imm5:7 rs2:5 rs1:5 010 imm:5 0100011 \
-+!constraints { greg($rs2) && gbase($rs1) && $rs2 != $rs1; } \
-+!memory { align(4); reg_plus_imm($rs1, sextract($imm5 << 5 | $imm, 12)); }
-+
-+ADDI RISCV imm:12 rs1:5 000 rd:5 0010011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+SLTI RISCV imm:12 rs1:5 010 rd:5 0010011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+SLTIU RISCV imm:12 rs1:5 011 rd:5 0010011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+XORI RISCV imm:12 rs1:5 100 rd:5 0010011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+ORI RISCV imm:12 rs1:5 110 rd:5 0010011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+ANDI RISCV imm:12 rs1:5 111 rd:5 0010011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+ADD RISCV 0000000 rs2:5 rs1:5 000 rd:5 0110011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+SUB RISCV 0100000 rs2:5 rs1:5 000 rd:5 0110011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+SLL RISCV 0000000 rs2:5 rs1:5 001 rd:5 0110011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+SLT RISCV 0000000 rs2:5 rs1:5 010 rd:5 0110011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+SLTU  RISCV 0000000 rs2:5 rs1:5 011 rd:5 0110011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+XOR RISCV 0000000 rs2:5 rs1:5 100 rd:5 0110011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+SRL RISCV 0000000 rs2:5 rs1:5 101 rd:5 0110011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+SRA RISCV 0100000 rs2:5 rs1:5 101 rd:5 0110011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+OR RISCV 0000000 rs2:5 rs1:5 110 rd:5 0110011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+AND RISCV 0000000 rs2:5 rs1:5 111 rd:5 0110011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+LWU RISCV imm:12 rs1:5 110 rd:5 0000011 \
-+!constraints { greg($rd) && gbase($rs1); } \
-+!memory { align(4); reg_plus_imm($rs1, sextract($imm, 12), $rd); }
-+
-+LD RISCV imm:12 rs1:5 011 rd:5 0000011 \
-+!constraints { greg($rd) && gbase($rs1); } \
-+!memory { align(8); reg_plus_imm($rs1, sextract($imm, 12), $rd); }
-+
-+SD RISCV imm5:7 rs2:5 rs1:5 011 imm:5 0100011 \
-+!constraints { greg($rs2) && gbase($rs1) && $rs2 != $rs1; } \
-+!memory { align(8); reg_plus_imm($rs1, sextract($imm5 << 5 | $imm, 12)); }
-+
-+SLLI RISCV 00000 sham5:7 rs1:5 001 rd:5 0010011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+SRLI RISCV 00000 sham5:7 rs1:5 101 rd:5 0010011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+SRAI RISCV 01000 sham5:7 rs1:5 101 rd:5 0010011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+ADDIW RISCV imm:12 rs1:5 000 rd:5 0011011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+SLLIW RISCV 0000000 shamt:5 rs1:5 001 rd:5 0011011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+SRLIW RISCV 0000000 shamt:5 rs1:5 101 rd:5 0011011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+SRAIW RISCV 0100000 shamt:5 rs1:5 101 rd:5 0011011 \
-+!constraints { greg($rd) && greg($rs1); }
-+
-+ADDW RISCV 0000000 rs2:5 rs1:5 000 rd:5 0011011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+SUBW RISCV 0100000 rs2:5 rs1:5 000 rd:5 0011011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+SLLW RISCV 0000000 rs2:5 rs1:5 001 rd:5 0011011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+SRLW RISCV 0000000 rs2:5 rs1:5 101 rd:5 0011011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
-+
-+SRAW RISCV 0100000 rs2:5 rs1:5 101 rd:5 0011011 \
-+!constraints { greg($rd) && greg($rs1) && greg($rs2); }
--- 
-2.23.0
+Alistair
 
+>
+> Alistair
+>
+> >
+> > ---
+> >
+> > (no changes since v3)
+> >
+> > Changes in v3:
+> > - change fw_jump to fw_dynamic in the Makefile
+> >
+> > Changes in v2:
+> > - new patch: Makefile: Ship the generic platform bios images for RISC-V
+> >
+> >  Makefile | 4 +++-
+> >  1 file changed, 3 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/Makefile b/Makefile
+> > index f06b3ae..05e05bb 100644
+> > --- a/Makefile
+> > +++ b/Makefile
+> > @@ -840,7 +840,9 @@ palcode-clipper \
+> >  u-boot.e500 u-boot-sam460-20100605.bin \
+> >  qemu_vga.ndrv \
+> >  edk2-licenses.txt \
+> > -hppa-firmware.img
+> > +hppa-firmware.img \
+> > +opensbi-riscv32-generic-fw_dynamic.bin opensbi-riscv32-generic-fw_dynamic.elf \
+> > +opensbi-riscv64-generic-fw_dynamic.bin opensbi-riscv64-generic-fw_dynamic.elf
+> >
+> >
+> >  DESCS=50-edk2-i386-secure.json 50-edk2-x86_64-secure.json \
+> > --
+> > 2.7.4
+> >
+> >
 
