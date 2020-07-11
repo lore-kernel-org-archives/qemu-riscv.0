@@ -1,18 +1,18 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1juIDN-0007P0-Oe
-	for mharc-qemu-riscv@gnu.org; Sat, 11 Jul 2020 12:19:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54526)
+	id 1juIDP-0007Sf-6Z
+	for mharc-qemu-riscv@gnu.org; Sat, 11 Jul 2020 12:19:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54548)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1juIDH-0007F6-Qb; Sat, 11 Jul 2020 12:18:55 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:44399)
+ id 1juIDI-0007FN-C5; Sat, 11 Jul 2020 12:18:56 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:60698)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1juIDD-0001M9-FD; Sat, 11 Jul 2020 12:18:55 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436318|-1; CH=green;
+ id 1juIDD-0001M7-Ix; Sat, 11 Jul 2020 12:18:56 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07440338|-1; CH=green;
  DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0983034-0.000812451-0.900884;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03307; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ DS=CONTINUE|ham_system_inform|0.325301-0.00391217-0.670787;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03268; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
  RN=10; RT=10; SR=0; TI=SMTPD_---.I0GMGMe_1594484317; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.I0GMGMe_1594484317)
@@ -25,9 +25,9 @@ Cc: richard.henderson@linaro.org, Alistair.Francis@wdc.com,
  chihmin.chao@sifive.com, alex.bennee@linaro.org, peter.maydell@linaro.org,
  wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 10/11] riscv: Implement payload load interfaces
-Date: Sun, 12 Jul 2020 00:16:54 +0800
-Message-Id: <20200711161655.2856-11-zhiwei_liu@c-sky.com>
+Subject: [PATCH 11/11] riscv: Add configure script
+Date: Sun, 12 Jul 2020 00:16:55 +0800
+Message-Id: <20200711161655.2856-12-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200711161655.2856-1-zhiwei_liu@c-sky.com>
 References: <20200711161655.2856-1-zhiwei_liu@c-sky.com>
@@ -57,211 +57,247 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sat, 11 Jul 2020 16:18:56 -0000
 
-When a risu op emits, the signal handler wll take over execution before
-running the payload again.
-
-The signal handler need some interfaces, such as setting struct reginfo
-and the comparison of struct reginfo.
+For RV64 risu, make CFLAGS="-march=rv64g"
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- risu_reginfo_riscv64.c | 132 +++++++++++++++++++++++++++++++++++++++++
- risu_riscv64.c         |  47 +++++++++++++++
- 2 files changed, 179 insertions(+)
- create mode 100644 risu_reginfo_riscv64.c
- create mode 100644 risu_riscv64.c
+ configure          |   4 +-
+ upstream/configure | 204 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 207 insertions(+), 1 deletion(-)
+ create mode 100644 upstream/configure
 
-diff --git a/risu_reginfo_riscv64.c b/risu_reginfo_riscv64.c
+diff --git a/configure b/configure
+index ca2d7db..00624d3 100755
+--- a/configure
++++ b/configure
+@@ -58,6 +58,8 @@ guess_arch() {
+         ARCH="m68k"
+     elif check_define __powerpc64__ ; then
+         ARCH="ppc64"
++    elif check_define __riscv && check_define _LP64; then
++        ARCH="riscv64"
+     else
+         echo "This cpu is not supported by risu. Try -h. " >&2
+         exit 1
+@@ -139,7 +141,7 @@ Some influential environment variables:
+                prefixed with the given string.
+ 
+   ARCH         force target architecture instead of trying to detect it.
+-               Valid values=[arm|aarch64|ppc64|ppc64le|m68k]
++               Valid values=[arm|aarch64|ppc64|ppc64le|m68k|riscv64]
+ 
+   CC           C compiler command
+   CFLAGS       C compiler flags
+diff --git a/upstream/configure b/upstream/configure
 new file mode 100644
-index 0000000..763001f
+index 0000000..297cd3a
 --- /dev/null
-+++ b/risu_reginfo_riscv64.c
-@@ -0,0 +1,132 @@
-+/******************************************************************************
-+ * Copyright (c) 2020 T-Head Semiconductor Co., Ltd.
-+ * All rights reserved. This program and the accompanying materials
-+ * are made available under the terms of the Eclipse Public License v1.0
-+ * which accompanies this distribution, and is available at
-+ * http://www.eclipse.org/legal/epl-v10.html
-+ *
-+ * Contributors:
-+ *     LIU Zhiwei (T-Head) - initial implementation
-+ *     based on Peter Maydell's risu_arm.c
-+ *****************************************************************************/
++++ b/upstream/configure
+@@ -0,0 +1,204 @@
++#!/bin/sh
++# simple risu configure script
++#
++# Copyright (c) 2013 Linaro Limited
++# All rights reserved. This program and the accompanying materials
++# are made available under the terms of the Eclipse Public License v1.0
++# which accompanies this distribution, and is available at
++# http://www.eclipse.org/legal/epl-v10.html
++#
++# Contributors:
++#      Claudio Fontana (Linaro) - initial implementation
 +
-+#include <stdio.h>
-+#include <ucontext.h>
-+#include <string.h>
-+#include <signal.h> /* for FPSIMD_MAGIC */
-+#include <stdlib.h>
-+#include <stddef.h>
-+#include <stdbool.h>
-+#include <inttypes.h>
-+#include <assert.h>
-+#include <sys/prctl.h>
++# Locate the directory where this configure script is
++SRCDIR="$(cd "$(dirname "$0")"; pwd)"
 +
-+#include "risu.h"
-+#include "risu_reginfo_riscv64.h"
++# Temporary directory used for files created by this script.
++# Like autoconf (and like QEMU) we put this directory in the
++# build directory, which means we can just give it a fixed name and
++# blow it away when configure is run, and we don't need to jump
++# through complicated hoops to delete it when configure exits
++# abnormally (it may be useful for debug purposes on an
++# abnormal exit).
++tmp_dir="config-temp"
++rm -rf "$tmp_dir"
++mkdir -p "$tmp_dir"
++if [ $? -ne 0 ]; then
++    echo "ERROR: could not create temporary directory"
++    exit 1
++fi
 +
-+const struct option * const arch_long_opts;
-+const char * const arch_extra_help;
-+
-+void process_arch_opt(int opt, const char *arg)
-+{
-+    abort();
++compile() {
++    $CC $CFLAGS -c -o ${1}.o ${1}.c 2>/dev/null
 +}
 +
-+const int reginfo_size(void)
-+{
-+    return sizeof(struct reginfo);
++link() {
++    $LD $LDFLAGS -l${2} -o ${1} ${1}.o 2>/dev/null
 +}
 +
-+/* reginfo_init: initialize with a ucontext */
-+void reginfo_init(struct reginfo *ri, ucontext_t *uc)
-+{
-+    int i;
-+    union __riscv_mc_fp_state *fp;
-+    /* necessary to be able to compare with memcmp later */
-+    memset(ri, 0, sizeof(*ri));
-+
-+    for (i = 0; i < 32; i++) {
-+        ri->regs[i] = uc->uc_mcontext.__gregs[i];
-+    }
-+
-+    ri->regs[2] = 0xdeadbeefdeadbeef;
-+    ri->regs[3] = 0xdeadbeefdeadbeef;
-+    ri->regs[4] = 0xdeadbeefdeadbeef;
-+    ri->pc = uc->uc_mcontext.__gregs[0] - image_start_address;
-+    ri->regs[0] = ri->pc;
-+    ri->faulting_insn = *((uint32_t *) uc->uc_mcontext.__gregs[0]);
-+    fp = &uc->uc_mcontext.__fpregs;
-+#if __riscv_flen == 64
-+    ri->fcsr = fp->__d.__fcsr;
-+
-+    for (i = 0; i < 32; i++) {
-+        ri->fregs[i] = fp->__d.__f[i];
-+    }
-+#else
-+# error "Unsupported fp length"
++check_define() {
++    c=${tmp_dir}/check_define_${1}
++    cat > ${c}.c <<EOF
++#if !defined($1)
++#error $1 not defined
 +#endif
++int main(void) { return 0; }
++EOF
++    compile $c
 +}
 +
-+/* reginfo_is_eq: compare the reginfo structs, returns nonzero if equal */
-+int reginfo_is_eq(struct reginfo *r1, struct reginfo *r2)
-+{
-+    return memcmp(r1, r2, reginfo_size()) == 0;
++guess_arch() {
++    if check_define __aarch64__ ; then
++        ARCH="aarch64"
++    elif check_define __arm__ ; then
++        ARCH="arm"
++    elif check_define __i386__ || check_define __x86_64__ ; then
++        ARCH="i386"
++    elif check_define __m68k__ ; then
++        ARCH="m68k"
++    elif check_define __powerpc64__ ; then
++        ARCH="ppc64"
++    elif check_define __riscv ; then
++        if __riscv_xlen == 64; then
++            ARCH="riscv64"
++        elif __riscv_xlen == 32; then
++            ARCH="riscv32"
++        else
++            echo "__riscv_xlen is not supported by risu. " >&2
++            exit 1
++        fi
++    else
++        echo "This cpu is not supported by risu. Try -h. " >&2
++        exit 1
++    fi
 +}
 +
-+/* reginfo_dump: print state to a stream, returns nonzero on success */
-+int reginfo_dump(struct reginfo *ri, FILE * f)
-+{
-+    int i;
-+    fprintf(f, "  faulting insn %08x\n", ri->faulting_insn);
++check_type() {
++    c=${tmp_dir}/check_type_${1}
++    cat > ${c}.c <<EOF
++#include <inttypes.h>
++#include <stdint.h>
++#include <sys/types.h>
++#include <sys/socket.h>
 +
-+    for (i = 1; i < 32; i++) {
-+        fprintf(f, "  X%-2d    : %016" PRIx64 "\n", i, ri->regs[i]);
-+    }
-+
-+    fprintf(f, "  pc     : %016" PRIx64 "\n", ri->pc);
-+    fprintf(f, "  fcsr   : %08x\n", ri->fcsr);
-+
-+    for (i = 0; i < 32; i++) {
-+        fprintf(f, "  F%-2d    : %016" PRIx64 "\n", i, ri->fregs[i]);
-+    }
-+
-+    return !ferror(f);
++int main(void) { $1 thisone; return 0; }
++EOF
++    compile $c
 +}
 +
-+/* reginfo_dump_mismatch: print mismatch details to a stream, ret nonzero=ok */
-+int reginfo_dump_mismatch(struct reginfo *m, struct reginfo *a, FILE * f)
-+{
-+    int i;
-+    fprintf(f, "mismatch detail (master : apprentice):\n");
-+    if (m->faulting_insn != a->faulting_insn) {
-+        fprintf(f, "  faulting insn mismatch %08x vs %08x\n",
-+                m->faulting_insn, a->faulting_insn);
-+    }
-+    for (i = 1; i < 32; i++) {
-+        if (m->regs[i] != a->regs[i]) {
-+            fprintf(f, "  X%-2d    : %016" PRIx64 " vs %016" PRIx64 "\n",
-+                    i, m->regs[i], a->regs[i]);
-+        }
-+    }
++check_lib() {
++    c=${tmp_dir}/check_lib${1}
++    cat > ${c}.c <<EOF
++#include <stdint.h>
++#include <$2.h>
 +
-+    if (m->pc != a->pc) {
-+        fprintf(f, "  pc     : %016" PRIx64 " vs %016" PRIx64 "\n",
-+                m->pc, a->pc);
-+    }
-+
-+    if (m->fcsr != a->fcsr) {
-+        fprintf(f, "  fcsr   : %08x vs %08x\n", m->fcsr, a->fcsr);
-+    }
-+
-+    for (i = 0; i < 32; i++) {
-+        if (m->fregs[i] != a->fregs[i]) {
-+            fprintf(f, "  F%-2d    : "
-+                    "%016" PRIx64 " vs "
-+                    "%016" PRIx64 "\n", i,
-+                    (uint64_t) m->fregs[i],
-+                    (uint64_t) a->fregs[i]);
-+        }
-+    }
-+
-+    return !ferror(f);
-+}
-diff --git a/risu_riscv64.c b/risu_riscv64.c
-new file mode 100644
-index 0000000..06dbb2d
---- /dev/null
-+++ b/risu_riscv64.c
-@@ -0,0 +1,47 @@
-+/******************************************************************************
-+ * Copyright (c) 2020 T-Head Semiconductor Co., Ltd.
-+ * All rights reserved. This program and the accompanying materials
-+ * are made available under the terms of the Eclipse Public License v1.0
-+ * which accompanies this distribution, and is available at
-+ * http://www.eclipse.org/legal/epl-v10.html
-+ *
-+ * Contributors:
-+ *     LIU Zhiwei(Linaro) - initial implementation
-+ *     based on Peter Maydell's risu_arm.c
-+ *****************************************************************************/
-+
-+#include "risu.h"
-+
-+void advance_pc(void *vuc)
-+{
-+    ucontext_t *uc = vuc;
-+    uc->uc_mcontext.__gregs[0] += 4;
++int main(void) { $3; return 0; }
++EOF
++    compile $c && link $c $1
 +}
 +
-+void set_ucontext_paramreg(void *vuc, uint64_t value)
-+{
-+    ucontext_t *uc = vuc;
-+    uc->uc_mcontext.__gregs[10] = value;
++generate_config() {
++    cfg=config.h
++    echo "generating config.h..."
++
++    echo "/* config.h - generated by the 'configure' script */" > $cfg
++    echo "#ifndef CONFIG_H" >> $cfg
++    echo "#define CONFIG_H 1" >> $cfg
++
++    if check_lib z zlib "zlibVersion()"; then
++        echo "#define HAVE_ZLIB 1" >> $cfg
++        LDFLAGS=-lz
++    fi
++
++    echo "#endif /* CONFIG_H */" >> $cfg
++
++    echo "...done"
 +}
 +
-+uint64_t get_reginfo_paramreg(struct reginfo *ri)
-+{
-+    return ri->regs[10];
++generate_makefilein() {
++    m=Makefile.in
++    echo "generating Makefile.in..."
++
++    echo "# Makefile.in - generated by the 'configure' script" > $m
++    echo "ARCH:=${ARCH}" >> $m
++    echo "CC:=${CC}" >> $m
++    echo "CPPFLAGS:=${CPPFLAGS}" >> $m
++    echo "LDFLAGS:=${LDFLAGS}" >> $m
++    echo "AS:=${AS}" >> $m
++    echo "OBJCOPY:=${OBJCOPY}" >> $m
++    echo "OBJDUMP:=${OBJDUMP}" >> $m
++    echo "STATIC:=${STATIC}" >> $m
++    echo "SRCDIR:=${SRCDIR}" >> $m
++    echo "BUILD_INC:=${BUILD_INC}" >> $m
++
++    echo "...done"
 +}
 +
-+int get_risuop(struct reginfo *ri)
-+{
-+    /* Return the risuop we have been asked to do
-+     * (or -1 if this was a SIGILL for a non-risuop insn)
-+     */
-+    uint32_t insn = ri->faulting_insn;
-+    uint32_t op = (insn & 0xf00) >> 8;
-+    uint32_t key = insn & ~0xf00;
-+    uint32_t risukey = 0x0000006b;
-+    return (key != risukey) ? -1 : op;
++usage() {
++    cat <<EOF
++Usage: [VAR=VALUE]... ./configure [-h|--help] [-s|--static]
++
++  -s/--static - force a static build of risu
++
++To assign environment variables (e.g., CC, CFLAGS...), specify them as
++VAR=VALUE.  See below for descriptions of some of the useful variables.
++
++Some influential environment variables:
++  CROSS_PREFIX cross-compiler prefix, defaults to gcc and other tools
++               prefixed with the given string.
++
++  ARCH         force target architecture instead of trying to detect it.
++               Valid values=[arm|aarch64|ppc64|ppc64le|m68k|riscv64]
++
++  CC           C compiler command
++  CFLAGS       C compiler flags
++  CPPFLAGS     C preprocessor flags, e.g. -I<include dir>
++
++  AS           assembler command
++  OBJCOPY      object copy utility command
++  OBJDUMP      object dump utility command
++
++EOF
 +}
 +
-+uintptr_t get_pc(struct reginfo *ri)
-+{
-+   return ri->pc;
-+}
++# STARTUP: entry point
++STATIC=""
++
++for opt do
++  case "$opt" in
++      --help | -h)
++          usage;
++          exit 0;;
++      --static | -s)
++          STATIC="-static"
++          ;;
++
++  esac
++done
++
++CC="${CC-${CROSS_PREFIX}gcc}"
++AS="${AS-${CROSS_PREFIX}as}"
++LD="${LD-${CROSS_PREFIX}ld}"
++OBJCOPY="${OBJCOPY-${CROSS_PREFIX}objcopy}"
++OBJDUMP="${OBJDUMP-${CROSS_PREFIX}objdump}"
++
++if test "x${ARCH}" = "x"; then
++    guess_arch
++fi
++
++# Are we in a separate build tree? If so, link the Makefile
++# so that 'make' works.
++if test ! -e Makefile || test -s Makefile; then
++    echo "linking Makefile..."
++    BUILD_INC="-I $(pwd)"
++    ln -sf "${SRCDIR}/Makefile" .
++fi
++
++generate_config
++generate_makefilein
++
++rm -r "$tmp_dir"
++
++echo "type 'make' to start the build"
++exit 0
++
 -- 
 2.23.0
 
