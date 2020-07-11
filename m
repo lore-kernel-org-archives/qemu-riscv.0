@@ -1,23 +1,23 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1juIDN-0007Nj-9N
+	id 1juIDN-0007OJ-GU
 	for mharc-qemu-riscv@gnu.org; Sat, 11 Jul 2020 12:19:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54586)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54516)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1juIDK-0007H2-9H; Sat, 11 Jul 2020 12:18:58 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:53984)
+ id 1juIDH-0007Eu-IZ; Sat, 11 Jul 2020 12:18:55 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:46455)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1juIDE-0001Lx-AU; Sat, 11 Jul 2020 12:18:57 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07460231|-1; CH=green;
+ id 1juIDD-0001M1-K4; Sat, 11 Jul 2020 12:18:55 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436351|-1; CH=green;
  DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.252457-0.00103191-0.746511;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03299; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ DS=CONTINUE|ham_regular_dialog|0.194827-0.000235336-0.804938;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03297; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
  RN=10; RT=10; SR=0; TI=SMTPD_---.I0GMGMe_1594484317; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.I0GMGMe_1594484317)
  by smtp.aliyun-inc.com(10.147.44.129);
- Sun, 12 Jul 2020 00:18:40 +0800
+ Sun, 12 Jul 2020 00:18:42 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -25,9 +25,9 @@ Cc: richard.henderson@linaro.org, Alistair.Francis@wdc.com,
  chihmin.chao@sifive.com, alex.bennee@linaro.org, peter.maydell@linaro.org,
  wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 06/11] riscv: Add RV64C instructions description
-Date: Sun, 12 Jul 2020 00:16:50 +0800
-Message-Id: <20200711161655.2856-7-zhiwei_liu@c-sky.com>
+Subject: [PATCH 08/11] riscv: Add standard test case
+Date: Sun, 12 Jul 2020 00:16:52 +0800
+Message-Id: <20200711161655.2856-9-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200711161655.2856-1-zhiwei_liu@c-sky.com>
 References: <20200711161655.2856-1-zhiwei_liu@c-sky.com>
@@ -41,7 +41,8 @@ X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -54,120 +55,106 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jul 2020 16:18:58 -0000
-
-Make it a separate file, so that we can get subarch to recgonize the
-instrcution length.
+X-List-Received-Date: Sat, 11 Jul 2020 16:18:56 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- rv64c.risu | 97 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 97 insertions(+)
- create mode 100644 rv64c.risu
+ test_riscv64.s | 85 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 85 insertions(+)
+ create mode 100644 test_riscv64.s
 
-diff --git a/rv64c.risu b/rv64c.risu
+diff --git a/test_riscv64.s b/test_riscv64.s
 new file mode 100644
-index 0000000..fdd8afb
+index 0000000..22a22b6
 --- /dev/null
-+++ b/rv64c.risu
-@@ -0,0 +1,97 @@
-+# Input file for risugen defining RISC-V instructions
-+.mode riscv.rv64c
++++ b/test_riscv64.s
+@@ -0,0 +1,85 @@
++/*****************************************************************************
++ * Copyright (c) 2020 T-Head Semiconductor Co., Ltd.
++ * All rights reserved. This program and the accompanying materials
++ * are made available under the terms of the Eclipse Public License v1.0
++ * which accompanies this distribution, and is available at
++ * http://www.eclipse.org/legal/epl-v10.html
++ *
++ * Contributors:
++ *     LIU Zhiwei (T-Head) - initial implementation
++ *     based on test_arm.s by Peter Maydell
++ *****************************************************************************/
 +
-+@RV64C
++/* Initialise the gp regs */
++li x1, 1
++#li x2, 2  # stack pointer
++#li x3, 3  # global pointer
++#li x4, 4  # thread pointer
++li x5, 5
++li x6, 6
++li x7, 7
++li x8, 8
++li x9, 9
++li x10, 10
++li x11, 11
++li x12, 12
++li x13, 13
++li x14, 14
++li x15, 15
++li x16, 16
++li x17, 17
++li x18, 18
++li x19, 19
++li x20, 20
++li x21, 21
++li x22, 22
++li x23, 23
++li x24, 24
++li x25, 25
++li x26, 26
++li x27, 27
++li x28, 28
++li x29, 29
++li x30, 30
++li x31, 30
 +
-+# we borrow X11 to store stack register
-+C_LWSP RISCV 010 imm5:1 rd:5 imm2:3 imm6:2 10 \
-+!constraints { greg($rd) && $rd != 0 && $rd != 11; } \
-+!memory { align(4); stack_plus_imm($imm5 * 32 + $imm2 * 4 + $imm6 * 64, $rd); }
++/* Initialise the fp regs */
++fcvt.d.lu f0, x0
++fcvt.d.lu f1, x1
++fcvt.d.lu f2, x2
++fcvt.d.lu f3, x3
++fcvt.d.lu f4, x4
++fcvt.d.lu f5, x5
++fcvt.d.lu f6, x6
++fcvt.d.lu f7, x7
++fcvt.d.lu f8, x8
++fcvt.d.lu f9, x9
++fcvt.d.lu f10, x10
++fcvt.d.lu f11, x11
++fcvt.d.lu f12, x12
++fcvt.d.lu f13, x13
++fcvt.d.lu f14, x14
++fcvt.d.lu f15, x15
++fcvt.d.lu f16, x16
++fcvt.d.lu f17, x17
++fcvt.d.lu f18, x18
++fcvt.d.lu f19, x19
++fcvt.d.lu f20, x20
++fcvt.d.lu f21, x21
++fcvt.d.lu f22, x22
++fcvt.d.lu f23, x23
++fcvt.d.lu f24, x24
++fcvt.d.lu f25, x25
++fcvt.d.lu f26, x26
++fcvt.d.lu f27, x27
++fcvt.d.lu f28, x28
++fcvt.d.lu f29, x29
++fcvt.d.lu f30, x30
++fcvt.d.lu f31, x31
 +
-+C_LDSP RISCV 011 imm5:1 rd:5 imm3:2 imm6:3 10 \
-+!constraints { greg($rd) && $rd != 0 && $rd != 11; } \
-+!memory { align(8); stack_plus_imm($imm5 * 32 + $imm3 * 8 + $imm6 * 64, $rd); }
-+
-+C_FLDSP RISCV 001 imm5:1 rd:5 imm3:2 imm6:3 10 \
-+!memory { align(8); stack_plus_imm($imm5 * 32 + $imm3 * 8 + $imm6 * 64); }
-+
-+C_SWSP RISCV 110 imm2:4 imm6:2 rs2:5 10 \
-+!constraints { greg($rs2) && $rs2 != 11; } \
-+!memory { align(4); stack_plus_imm($imm2 * 4 + $imm6 * 64); }
-+
-+C_SDSP RISCV 111 imm3:3 imm6:3 rs2:5 10 \
-+!constraints { greg($rs2) && $rs2 != 11; } \
-+!memory { align(8); stack_plus_imm($imm3 * 8 + $imm6 * 64); }
-+
-+C_FSDSP RISCV 101 imm3:3 imm6:3 rs2:5 10 \
-+!memory { align(8); stack_plus_imm($imm3 * 8 + $imm6 * 64); }
-+
-+# encode x11 into 0b011 in CL format
-+C_LW RISCV 010 imm3:3 rs1:3 imm2:1 imm6:1 rd:3 00 \
-+!memory { align(4); reg_plus_imm($rs1 + 8, $imm2 * 4 + $imm3 * 8 + $imm6 * 64, $rd + 8); }
-+
-+C_LD RISCV 011 imm3:3 rs1:3 imm6:2 rd:3 00 \
-+!memory { align(8); reg_plus_imm($rs1 + 8, $imm3 * 8 + $imm6 * 64, $rd + 8); }
-+
-+C_FLD RISCV 001 imm3:3 rs1:3 imm6:2 rd:3 00 \
-+!memory { align(8); reg_plus_imm($rs1 + 8, $imm3 * 8 + $imm6 * 64); }
-+
-+C_SW RISCV 110 imm3:3 rs1:3 imm2:1 imm6:1 rs2:3 00 \
-+!constraints { $rs2 != $rs1; } \
-+!memory { align(4); reg_plus_imm($rs1 + 8, $imm2 * 4 + $imm3 * 8 + $imm6 * 64); }
-+
-+C_SD RISCV 111 imm3:3 rs1:3 imm6:2 rs2:3 00 \
-+!constraints { $rs2 != $rs1; } \
-+!memory { align(8); reg_plus_imm($rs1 + 8, $imm3 * 8 + $imm6 * 64); }
-+
-+C_FSD RISCV 101 imm3:3 rs1:3 imm6:2 rs2:3 00 \
-+!memory { align(8); reg_plus_imm($rs1 + 8, $imm3 * 8 + $imm6 * 64); }
-+
-+C_LI RISCV 010 imm5:1 rd:5 imm:5 01 \
-+!constraints { gbase($rd); }
-+
-+C_LUI RISCV 011 imm17:1 rd:5 imm12:5 01 \
-+!constraints { gbase($rd) && ($imm17 != 0 || $imm12 != 0); }
-+
-+C_ADDI RISCV 000 imm5:1 rd:5 imm:5 01 \
-+!constraints { gbase($rd) && ($imm5 != 0 || $imm != 0); }
-+
-+C_ADDIW RISCV 001 imm5:1 rd:5 imm:5 01 \
-+!constraints { gbase($rd); }
-+
-+# Todo C_ADDI16SP, as it need stack as destination
-+# Move sp to aother register through the memory address function.
-+
-+# C_ADDI4SPN RISCV 000 imm4:2 imm6:4 imm2:1 imm3:1 rd:3 00 \
-+# !constraints { $imm4 != 0 || $imm6 != 0 || $imm2 != 0 || $imm3 != 0; }
-+
-+C_SLLI RISCV 000 shamt5:1 rd:5 shamt:5 10 \
-+!constraints { gbase($rd) && ($shamt5 != 0 || $shamt != 0); }
-+
-+C_SRLI RISCV 100 shamt5:1 00 rd:3 shamt:5 01 \
-+!constraints { ($shamt5 != 0 || $shamt != 0); }
-+
-+C_SRAI RISCV 100 shamt5:1 01 rd:3 shamt:5 01 \
-+!constraints { ($shamt5 != 0 || $shamt != 0); }
-+
-+C_ANDI RISCV 100 imm5:1 10 rd:3 imm:5 01
-+
-+C_MV RISCV 100 0 rd:5 rs2:5 10 \
-+!constraints { gbase($rd) && gbase($rs2); }
-+
-+C_ADD RISCV 100 1 rd:5 rs2:5 10 \
-+!constraints { gbase($rd) && gbase($rs2); }
-+
-+C_AND RISCV 100 0 11 rd:3 11 rs2:3 01
-+
-+C_OR RISCV 100 0 11 rd:3 10 rs2:3 01
-+
-+C_XOR RISCV 100 0 11 rd:3 01 rs2:3 01
-+
-+C_SUB RISCV 100 0 11 rd:3 01 rs2:3 01
-+
-+C_SUBW RISCV 100 1 11 rd:3 00 rs2:3 01
-+
-+C_ADDW RISCV 100 1 11 rd:3 01 rs2:3 01
-+
-+C_NOP RISCV 0000000000000001
++/* do compare.
++ * The manual says instr with bits (6:0) == 1 1 0 1 0 1 1 are UNALLOCATED
++ */
++.int 0x0000006b
++/* exit test */
++.int 0x0000016b
 -- 
 2.23.0
 
