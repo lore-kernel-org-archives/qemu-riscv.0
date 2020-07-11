@@ -1,18 +1,18 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1juIDN-0007N6-32
+	id 1juIDN-0007Nj-9N
 	for mharc-qemu-riscv@gnu.org; Sat, 11 Jul 2020 12:19:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54552)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54586)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1juIDI-0007FT-Ke; Sat, 11 Jul 2020 12:18:56 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:40247)
+ id 1juIDK-0007H2-9H; Sat, 11 Jul 2020 12:18:58 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:53984)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1juIDD-0001Lq-Ku; Sat, 11 Jul 2020 12:18:56 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green;
+ id 1juIDE-0001Lx-AU; Sat, 11 Jul 2020 12:18:57 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07460231|-1; CH=green;
  DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0023182-0.000295609-0.997386;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01l07381; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ DS=CONTINUE|ham_system_inform|0.252457-0.00103191-0.746511;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03299; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
  RN=10; RT=10; SR=0; TI=SMTPD_---.I0GMGMe_1594484317; 
 Received: from L-PF1D6DP4-1208.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.I0GMGMe_1594484317)
@@ -25,9 +25,9 @@ Cc: richard.henderson@linaro.org, Alistair.Francis@wdc.com,
  chihmin.chao@sifive.com, alex.bennee@linaro.org, peter.maydell@linaro.org,
  wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 05/11] riscv: Add RV64D instructions description
-Date: Sun, 12 Jul 2020 00:16:49 +0800
-Message-Id: <20200711161655.2856-6-zhiwei_liu@c-sky.com>
+Subject: [PATCH 06/11] riscv: Add RV64C instructions description
+Date: Sun, 12 Jul 2020 00:16:50 +0800
+Message-Id: <20200711161655.2856-7-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20200711161655.2856-1-zhiwei_liu@c-sky.com>
 References: <20200711161655.2856-1-zhiwei_liu@c-sky.com>
@@ -54,125 +54,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jul 2020 16:18:57 -0000
+X-List-Received-Date: Sat, 11 Jul 2020 16:18:58 -0000
 
-For supporting multi-precison, split all 32 fp registers into two groups.
-The RV64D instructions will use only the 16 fp registers selected by
-gfp64().
+Make it a separate file, so that we can get subarch to recgonize the
+instrcution length.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- rv64.risu | 100 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 100 insertions(+)
+ rv64c.risu | 97 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 97 insertions(+)
+ create mode 100644 rv64c.risu
 
-diff --git a/rv64.risu b/rv64.risu
-index 0dcc9a1..a6fa9fc 100644
---- a/rv64.risu
-+++ b/rv64.risu
-@@ -364,3 +364,103 @@ FCVT_S_L RISCV 1101000 00010 rs1:5 rm:3 rd:5 1010011 \
- 
- FCVT_S_LU RISCV 1101000 00011 rs1:5 rm:3 rd:5 1010011 \
- !constraints { greg($rs1) && gfp32($rd) && grm($rm); }
+diff --git a/rv64c.risu b/rv64c.risu
+new file mode 100644
+index 0000000..fdd8afb
+--- /dev/null
++++ b/rv64c.risu
+@@ -0,0 +1,97 @@
++# Input file for risugen defining RISC-V instructions
++.mode riscv.rv64c
 +
-+@RV64D
++@RV64C
 +
-+FLD RISCV imm:12 rs1:5 011 rd:5 0000111 \
-+!constraints { gbase($rs1) && gfp64($rd); } \
-+!memory { align(8); reg_plus_imm($rs1, sextract($imm, 12)); }
++# we borrow X11 to store stack register
++C_LWSP RISCV 010 imm5:1 rd:5 imm2:3 imm6:2 10 \
++!constraints { greg($rd) && $rd != 0 && $rd != 11; } \
++!memory { align(4); stack_plus_imm($imm5 * 32 + $imm2 * 4 + $imm6 * 64, $rd); }
 +
-+FSD RISCV imm5:7 rs2:5 rs1:5 010 imm:5 0100111 \
-+!constraints { gbase($rs1) && gfp64($rs2); } \
-+!memory { align(8); reg_plus_imm($rs1, sextract($imm5 << 5 | $imm, 12)); }
++C_LDSP RISCV 011 imm5:1 rd:5 imm3:2 imm6:3 10 \
++!constraints { greg($rd) && $rd != 0 && $rd != 11; } \
++!memory { align(8); stack_plus_imm($imm5 * 32 + $imm3 * 8 + $imm6 * 64, $rd); }
 +
-+FMADD_D RISCV rs3:5 01 rs2:5 rs1:5 rm:3 rd:5 1000011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd) && grm($rm); }
++C_FLDSP RISCV 001 imm5:1 rd:5 imm3:2 imm6:3 10 \
++!memory { align(8); stack_plus_imm($imm5 * 32 + $imm3 * 8 + $imm6 * 64); }
 +
-+FMSUB_D RISCV rs3:5 01 rs2:5 rs1:5 rm:3 rd:5 1000111 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd) && grm($rm); }
++C_SWSP RISCV 110 imm2:4 imm6:2 rs2:5 10 \
++!constraints { greg($rs2) && $rs2 != 11; } \
++!memory { align(4); stack_plus_imm($imm2 * 4 + $imm6 * 64); }
 +
-+FNMSUB_D RISCV rs3:5 01 rs2:5 rs1:5 rm:3 rd:5 1001011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd) && grm($rm); }
++C_SDSP RISCV 111 imm3:3 imm6:3 rs2:5 10 \
++!constraints { greg($rs2) && $rs2 != 11; } \
++!memory { align(8); stack_plus_imm($imm3 * 8 + $imm6 * 64); }
 +
-+FNMADD_D RISCV rs3:5 01 rs2:5 rs1:5 rm:3 rd:5 1001111 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd) && grm($rm); }
++C_FSDSP RISCV 101 imm3:3 imm6:3 rs2:5 10 \
++!memory { align(8); stack_plus_imm($imm3 * 8 + $imm6 * 64); }
 +
-+FADD_D RISCV 0000001 rs2:5 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd) && grm($rm); }
++# encode x11 into 0b011 in CL format
++C_LW RISCV 010 imm3:3 rs1:3 imm2:1 imm6:1 rd:3 00 \
++!memory { align(4); reg_plus_imm($rs1 + 8, $imm2 * 4 + $imm3 * 8 + $imm6 * 64, $rd + 8); }
 +
-+FSUB_D RISCV 0000101 rs2:5 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd) && grm($rm); }
++C_LD RISCV 011 imm3:3 rs1:3 imm6:2 rd:3 00 \
++!memory { align(8); reg_plus_imm($rs1 + 8, $imm3 * 8 + $imm6 * 64, $rd + 8); }
 +
-+FMUL_D RISCV 0001001 rs2:5 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd) && grm($rm); }
++C_FLD RISCV 001 imm3:3 rs1:3 imm6:2 rd:3 00 \
++!memory { align(8); reg_plus_imm($rs1 + 8, $imm3 * 8 + $imm6 * 64); }
 +
-+FDIV_D RISCV 0001101 rs2:5 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd) && grm($rm); }
++C_SW RISCV 110 imm3:3 rs1:3 imm2:1 imm6:1 rs2:3 00 \
++!constraints { $rs2 != $rs1; } \
++!memory { align(4); reg_plus_imm($rs1 + 8, $imm2 * 4 + $imm3 * 8 + $imm6 * 64); }
 +
-+FSQRT_D RISCV 0101101 00000  rs1:5 rm:3 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rd) && grm($rm); }
++C_SD RISCV 111 imm3:3 rs1:3 imm6:2 rs2:3 00 \
++!constraints { $rs2 != $rs1; } \
++!memory { align(8); reg_plus_imm($rs1 + 8, $imm3 * 8 + $imm6 * 64); }
 +
-+FSGNJ_D RISCV 0010001 rs2:5  rs1:5 000 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd); }
++C_FSD RISCV 101 imm3:3 rs1:3 imm6:2 rs2:3 00 \
++!memory { align(8); reg_plus_imm($rs1 + 8, $imm3 * 8 + $imm6 * 64); }
 +
-+FSGNJN_D RISCV 0010001 rs2:5  rs1:5 001 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd); }
++C_LI RISCV 010 imm5:1 rd:5 imm:5 01 \
++!constraints { gbase($rd); }
 +
-+FSGNJX_D RISCV 0010001 rs2:5  rs1:5 010 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd); }
++C_LUI RISCV 011 imm17:1 rd:5 imm12:5 01 \
++!constraints { gbase($rd) && ($imm17 != 0 || $imm12 != 0); }
 +
-+FMIN_D RISCV 0010101 rs2:5  rs1:5 000 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd); }
++C_ADDI RISCV 000 imm5:1 rd:5 imm:5 01 \
++!constraints { gbase($rd) && ($imm5 != 0 || $imm != 0); }
 +
-+FMAX_D RISCV 0010101 rs2:5  rs1:5 001 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rs2) && gfp64($rd); }
++C_ADDIW RISCV 001 imm5:1 rd:5 imm:5 01 \
++!constraints { gbase($rd); }
 +
-+FCVT_S_D RISCV 0100000 00001 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rd) && grm($rm); }
++# Todo C_ADDI16SP, as it need stack as destination
++# Move sp to aother register through the memory address function.
 +
-+FCVT_D_S RISCV 0100001 00000 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { gfp64($rs1) && gfp64($rd) && grm($rm); }
++# C_ADDI4SPN RISCV 000 imm4:2 imm6:4 imm2:1 imm3:1 rd:3 00 \
++# !constraints { $imm4 != 0 || $imm6 != 0 || $imm2 != 0 || $imm3 != 0; }
 +
-+FEQ_D RISCV 1010001 rs2:5 rs1:5 010 rd:5 1010011 \
-+!constraints { greg($rd) && gfp64($rs1) && gfp64($rs1); }
++C_SLLI RISCV 000 shamt5:1 rd:5 shamt:5 10 \
++!constraints { gbase($rd) && ($shamt5 != 0 || $shamt != 0); }
 +
-+FLT_D RISCV 1010001 rs2:5 rs1:5 001 rd:5 1010011 \
-+!constraints { greg($rd) && gfp64($rs1) && gfp64($rs1); }
++C_SRLI RISCV 100 shamt5:1 00 rd:3 shamt:5 01 \
++!constraints { ($shamt5 != 0 || $shamt != 0); }
 +
-+FLE_D RISCV 1010001 rs2:5 rs1:5 000 rd:5 1010011 \
-+!constraints { greg($rd) && gfp64($rs1) && gfp64($rs1); }
++C_SRAI RISCV 100 shamt5:1 01 rd:3 shamt:5 01 \
++!constraints { ($shamt5 != 0 || $shamt != 0); }
 +
-+FCLASS_D RISCV 1110001 00000 rs1:5 001 rd:5 1010011 \
-+!constraints { greg($rd) && gfp64($rs1); }
++C_ANDI RISCV 100 imm5:1 10 rd:3 imm:5 01
 +
-+FCVT_W_D RISCV 1100001 00000 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { greg($rd) && gfp64($rs1) && grm($rm); }
++C_MV RISCV 100 0 rd:5 rs2:5 10 \
++!constraints { gbase($rd) && gbase($rs2); }
 +
-+FCVT_WU_D RISCV 1100001 00001 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { greg($rd) && gfp64($rs1) && grm($rm); }
++C_ADD RISCV 100 1 rd:5 rs2:5 10 \
++!constraints { gbase($rd) && gbase($rs2); }
 +
-+FCVT_D_W RISCV 1101001 00000 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { greg($rs1) && gfp64($rd) && grm($rm); }
++C_AND RISCV 100 0 11 rd:3 11 rs2:3 01
 +
-+FCVT_D_WU RISCV 1101001 00001 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { greg($rs1) && gfp64($rd) && grm($rm); }
++C_OR RISCV 100 0 11 rd:3 10 rs2:3 01
 +
-+FCVT_L_D RISCV 1100001 00010 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { greg($rd) && gfp64($rs1) && grm($rm); }
++C_XOR RISCV 100 0 11 rd:3 01 rs2:3 01
 +
-+FCVT_LU_D RISCV 1100001 00011 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { greg($rd) && gfp64($rs1) && grm($rm); }
++C_SUB RISCV 100 0 11 rd:3 01 rs2:3 01
 +
-+FCVT_D_L RISCV 1101001 00010 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { greg($rs1) && gfp64($rd) && grm($rm); }
++C_SUBW RISCV 100 1 11 rd:3 00 rs2:3 01
 +
-+FCVT_D_LU RISCV 1101001 00011 rs1:5 rm:3 rd:5 1010011 \
-+!constraints { greg($rs1) && gfp64($rd) && grm($rm); }
++C_ADDW RISCV 100 1 11 rd:3 01 rs2:3 01
 +
-+FMV_D_X RISCV 1111001 00000 rs1:5 000 rd:5 1010011 \
-+!constraints { greg($rs1) && gfp64($rd); }
-+
-+FMV_X_D RISCV 1110001 00000 rs1:5 000 rd:5 1010011 \
-+!constraints { greg($rd) && gfp64($rs1); }
++C_NOP RISCV 0000000000000001
 -- 
 2.23.0
 
