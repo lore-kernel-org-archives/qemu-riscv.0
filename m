@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jun4v-0000p3-O1
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Jul 2020 21:16:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55288)
+	id 1junF1-0002vO-Gg
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Jul 2020 21:26:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56474)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jun4t-0000mv-Tu; Sun, 12 Jul 2020 21:16:19 -0400
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:46554)
+ id 1junEz-0002ua-7d; Sun, 12 Jul 2020 21:26:45 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:44012)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jun4s-0001Nl-6f; Sun, 12 Jul 2020 21:16:19 -0400
-Received: by mail-yb1-xb43.google.com with SMTP id 2so5623423ybr.13;
- Sun, 12 Jul 2020 18:16:17 -0700 (PDT)
+ id 1junEx-0002aR-Hu; Sun, 12 Jul 2020 21:26:44 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id y13so5633212ybj.10;
+ Sun, 12 Jul 2020 18:26:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ZFZ0/xnaFA7vslJ3xXNw6jGIxziben2ebs31BAxhUws=;
- b=UJkUfqRMLZThUphFs98Ezxn4+uG57DoOanZVGo/GnZfKtkD6yD08iSLS4zy0Jib6S8
- xR651qQWxdevrX/7aNKJFKN3iigzDVPAupyh6/eMv13jv9pBSAj3CZDwCIueCvds6+mn
- UeYLooSCWeVbt3WOrJ3hNN3W/EovNru08z3shVvoMY9crYtkQFfxSOcgkpfdsxl2KVjB
- 9XR3pSM+q+a5Bq9zrCDgac3v/Y8mooNAEhijJlSP/aRe5sdLBUYeoY9x02UX8FCuzBtU
- BbaVfhRxELZS2NG6bz5DS2hfuUMhn/VfMnXUiq5QiU2j8yvSx5qUM+S3Iw3WrUA1p9Xs
- udkA==
+ :cc; bh=tEtTDo5REdLq/Ft8mJWQbjnZEzjfGBVsty3PG91N6Ck=;
+ b=NQ+mJ3Y2wStvMtsBjFPyJY42wFcZlqUOA814twsa16N6o4BjDSUfFVQJteCaNHVvCj
+ 6an336dUI36ZG6PQbwya/MURZjIjFfYsIFjXrh7H/dsd8eAoLH7+D8pZx6lE50w9tZ7V
+ bSDt/5mIyRqIH9EhjFJLa+JcKJc1Ddoti5OFr8HB+kaS58LMAfFzt9u3Bm71Wft3VqVs
+ M7oCAgAHDh3LRNiE5yxpknUvk6AgRqYVRLSmkt8h8UkSoQf1PM93DJZh7N8AIxQ6DSaG
+ uCBY+6P7WsqSkwQbQy8Hp1J/Lwu7ojC87/qH0phOv0KAglxm6CscXNRhcNSiZ3smb0Dv
+ EuFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ZFZ0/xnaFA7vslJ3xXNw6jGIxziben2ebs31BAxhUws=;
- b=L1Lc3LeE9fXmAWDFHIluOAz6LNwkmUkhPoiNFbI2nCUdLAmKuJkGL8bLRJ/bzY/3P9
- fYrFrLlpAQPGXW9sT1h3boHvVdeWijKYZ1i1BM5BOOBsBCyVlgBPg4NLjKxV7f8Xq9mc
- oLQ5oYwBwcIxT8ywTXHOQpo5Wrr/4/ILA6ZT3qW1Q6ExjclOU4FCD9npsCk9l9J4T2uB
- AeoNGbm12YyT7z6NqEZTsg6HFY4b5sI9ti5E3ABbu1XYlX8gjoHY8tlgCkz1GkDAf1Vr
- E8AZfP7xGT49FAqRhlVvDjrVv8/sm1YmA2NwNMhNWiggMYlI/qmLFtJbV14O548SeazK
- KKLQ==
-X-Gm-Message-State: AOAM530Dw2JGPESCWROMFT820bDpGzYSnjOuqLIPj1aMFDEqtcni/D12
- TGFyP9QwSGbudrWxlyEtXukSrYFlEHwziBv7zERe0Q==
-X-Google-Smtp-Source: ABdhPJwpR9JLdYLhHOR1gCEjTORK9VmOSW3xNxdXSDWAVqVpThEGrrHzmC9Ev27qtai9CG8aThTUqY+dcd8a+AGALxg=
-X-Received: by 2002:a25:46:: with SMTP id 67mr41082587yba.517.1594602976910;
- Sun, 12 Jul 2020 18:16:16 -0700 (PDT)
+ bh=tEtTDo5REdLq/Ft8mJWQbjnZEzjfGBVsty3PG91N6Ck=;
+ b=WJhsbjXT7klDqSrBZEPRdcpEjaJ7ecM8BIYTPzkBojxYzCeN8QUuQsCwB8XhXbwagq
+ JKZ2FNtL8SAelN7pQ1BYSV1zyP2u/6fUF+6elkfWa/dG8Z9uy0TD6qvCqc8BCpN+ptuR
+ kctaudDnJm/CKPXAju9uDZRaoUK83IKIyv8MLw71s0RovJd0UkJHrGvGcc2GkDFgs7+8
+ FwWFT92iFSsRR+YItpcgPIuovO086a4KNAUapEPQvPBe1q4QE7O7+DtJj1tDYB3GjvNT
+ 0yUG2xtJuHzwvpk1+uKlFd1gigGu5hlzFRWlctqinkJmRMYwfe4YvkcWlMnTu8DT2LfF
+ M8fw==
+X-Gm-Message-State: AOAM532kzgNbeYgvtqYW5J9xt4zSTGOIn6jq5TFWmZcnmrFa8QbE5kEh
+ IHKtDjmbm9StqI568e7+fhSUUEldmtAsE5t4vaU=
+X-Google-Smtp-Source: ABdhPJwSgETaxRTBhkJrxb0mX959Z41iAqZYnM9w62e+aGr47SzHrp+nI42Q7IZVxYnjSQlyU3vyIdYdbne+WwpRKRE=
+X-Received: by 2002:a25:c342:: with SMTP id
+ t63mr128410615ybf.122.1594603602235; 
+ Sun, 12 Jul 2020 18:26:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAKmqyKPvn7dALUHhK=na1svr==oZ2rvyFOnw8FvRJZP23uHN7Q@mail.gmail.com>
- <mhng-842d31db-ac34-4bab-a523-808f1f542101@palmerdabbelt-glaptop1>
- <CAEUhbmUPxCmo-4SPm8JwG7emD0YfLeAMSgd7mWaCH2VDZJTtsA@mail.gmail.com>
- <CAKmqyKN=HfpTs=d8RzXcaVYZQ-pH_kvO9VV5h4CKAtLSKaVqyQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKN=HfpTs=d8RzXcaVYZQ-pH_kvO9VV5h4CKAtLSKaVqyQ@mail.gmail.com>
+References: <1594357499-29068-1-git-send-email-bmeng.cn@gmail.com>
+ <1594357499-29068-8-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKPf4YH9Ut1mTLRoRdk-aja6wTKS-FhA-5LynbCeajh-_Q@mail.gmail.com>
+ <CAKmqyKOQM4pZLAnt42m-MC2cFOxM_+_-tw7FHxe1RbDf84q0Nw@mail.gmail.com>
+In-Reply-To: <CAKmqyKOQM4pZLAnt42m-MC2cFOxM_+_-tw7FHxe1RbDf84q0Nw@mail.gmail.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 13 Jul 2020 09:16:05 +0800
-Message-ID: <CAEUhbmXUa-bSMXcHZyV=FybP9gxYsHFhbUPm15tw70+hNQfNEA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] hw/riscv: sifive_u: Provide a reliable way for
- bootloader to detect whether it is running in QEMU
+Date: Mon, 13 Jul 2020 09:26:31 +0800
+Message-ID: <CAEUhbmXAfN5zjpAF-pZmjrERUsoZZ0z4OQO+2_Q6MU_RxvX=EA@mail.gmail.com>
+Subject: Re: [PATCH v4 7/7] Makefile: Ship the generic platform bios images
+ for RISC-V
 To: Alistair Francis <alistair23@gmail.com>
-Cc: Palmer Dabbelt <palmerdabbelt@google.com>,
- Bin Meng <bin.meng@windriver.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,69 +80,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jul 2020 01:16:20 -0000
+X-List-Received-Date: Mon, 13 Jul 2020 01:26:45 -0000
 
-Hi Alistair,
+On Sun, Jul 12, 2020 at 1:28 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Fri, Jul 10, 2020 at 11:36 AM Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Thu, Jul 9, 2020 at 10:11 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >
+> > > From: Bin Meng <bin.meng@windriver.com>
+> > >
+> > > Update the install blob list to include the generic platform
+> > > fw_dynamic bios images.
+> > >
+> > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> >
+> > You didn't address the comments in v3.
+> >
+> > Thinking about this more though it looks like we currently don't
+> > install anything, so this is an improvement.
+> >
+> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>
+> Nope, I was wrong. This should be squashed into patch 4 where you
+> remove the installed binaries.
 
-On Sun, Jul 12, 2020 at 12:04 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Thu, Jul 9, 2020 at 5:50 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > Hi Palmer,
-> >
-> > On Fri, Jul 10, 2020 at 8:45 AM Palmer Dabbelt <palmerdabbelt@google.com> wrote:
-> > >
-> > > On Thu, 09 Jul 2020 15:09:18 PDT (-0700), alistair23@gmail.com wrote:
-> > > > On Thu, Jul 9, 2020 at 3:07 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > >>
-> > > >> From: Bin Meng <bin.meng@windriver.com>
-> > > >>
-> > > >> The reset vector codes are subject to change, e.g.: with recent
-> > > >> fw_dynamic type image support, it breaks oreboot again.
-> > > >
-> > > > This is a recurring problem, I have another patch for Oreboot to fix
-> > > > the latest breakage.
-> > > >
-> > > >>
-> > > >> Add a subregion in the MROM, with the size of machine RAM stored,
-> > > >> so that we can provide a reliable way for bootloader to detect
-> > > >> whether it is running in QEMU.
-> > > >
-> > > > I don't really like this though. I would prefer that we don't
-> > > > encourage guest software to behave differently on QEMU. I don't think
-> > > > other upstream boards do this.
-> > >
-> > > I agree.  If you want an explicitly virtual board, use the virt board.  Users
-> > > of sifive_u are presumably trying to do their best to test against what the
-> > > hardware does without actually using the hardware.  Otherwise there should be
-> > > no reason to use the sifive_u board, as it's just sticking a layer of
-> > > complexity in the middle of everything.
-> >
-> > Understood. Then let's drop this patch.
-> >
-> > >
-> > > > Besides Oreboot setting up the clocks are there any other users of this?
-> > >
-> > > IIRC we have a scheme for handling the clock setup in QEMU where we accept
-> > > pretty much any control write and then just return reads that say the PLLs have
-> > > locked.  I'd be in favor of improving the scheme to improve compatibility with
-> > > the actual hardware, but adding some way for programs to skip the clocks
-> > > because they know they're in QEMU seems like the wrong way to go.
-> > >
-> >
-> > Yep, that's my question to Oreboot too.
-> >
-> > U-Boot SPL can boot with QEMU and no problem was seen with clock
-> > settings in PRCI model in QEMU.
->
-> I don't think it's an unsolvable problem. There is just little work on
-> Oreboot to run on QEMU. I can dig into it a bit and see if I can find
-> a better fix on the Oreboot side.
->
-
-Can we remove the QEMU detect logic completely in Oreboot? Except the
-QSPI controller QEMU should be able to run Oreboot since it runs
-U-Boot SPL.
+Not entirely correct. The .bin changes should go to patch 4, and .elf
+changes should remain in this patch I think.
 
 Regards,
 Bin
