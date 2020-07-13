@@ -1,53 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1junqC-0002hB-WF
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Jul 2020 22:05:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34358)
+	id 1junsJ-0003kz-Ad
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Jul 2020 22:07:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34700)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1junqB-0002fg-KS
- for qemu-riscv@nongnu.org; Sun, 12 Jul 2020 22:05:11 -0400
-Received: from mail-ot1-x330.google.com ([2607:f8b0:4864:20::330]:40150)
+ id 1junsI-0003ko-1U
+ for qemu-riscv@nongnu.org; Sun, 12 Jul 2020 22:07:22 -0400
+Received: from mail-oi1-x233.google.com ([2607:f8b0:4864:20::233]:37331)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1junq9-0007JA-5Z
- for qemu-riscv@nongnu.org; Sun, 12 Jul 2020 22:05:11 -0400
-Received: by mail-ot1-x330.google.com with SMTP id c25so8401133otf.7
- for <qemu-riscv@nongnu.org>; Sun, 12 Jul 2020 19:05:08 -0700 (PDT)
+ id 1junsF-0007eh-EC
+ for qemu-riscv@nongnu.org; Sun, 12 Jul 2020 22:07:21 -0400
+Received: by mail-oi1-x233.google.com with SMTP id 12so9775519oir.4
+ for <qemu-riscv@nongnu.org>; Sun, 12 Jul 2020 19:07:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hUVel/xU/BOej0nYVdF1QFva42QIH8kA/EPuRaK071M=;
- b=E+zfVvjg1Weef4qqpqLq+8deXufDOy3GG9DMfE8OXqQWRs7nzC8BdA15TRCYsqgBmI
- t4S9iHmyHJGR3ViUxhfQ6IrbYcU7+tUeaQaUxxOD6YyEI2qq024B+VqdY6ZXpnwRTojd
- dWwChwYOwz/b+ipOnAuLmhYDIz6M7Gup8zKtVTGxgSy0upc1In2hMfXPKhmWwHJNiECI
- jtTznYjh1clKOd0JP3LjLQhS9slF9zXhTUZ/97600sNWjoMy/weP+OUvcWqtfHAuf/GY
- +yRiS1m8gAZGOgo7LjXhOmvs9uL9wNgJy3njuBHgC4obJr6tImvjt4I1mq0lVNDZu5MS
- mRjA==
+ :cc; bh=ABw3Z3OuvCTl1fggcJHqjIgqh/IW2fOK0CJY+oyqysQ=;
+ b=jwW4NF3Z3zVAgijcZmCN8FSH3odlPu1g808q/y/oDvILd9ixZo2TdgHktDeZpdCzsZ
+ nzi6ZBSuSMYEnTBp4cOv9zQgEgrSeLTYiDu3QDra03DSUsllrNH71bG9EJwmOYeGOj6c
+ 07r1st4ud/p4AR0x1v9L4kp2HxUsA5G25Ex6DPShVnC4SAHkznEmuvKP+6up1r4Kfq9M
+ RTr4I/AIPGaK+yD4uFU3KpLcmF1eGo1II0LTJQQE+5O9wlH/aVZBP05ktaDqJYOjkNq2
+ 5ePutC1VVCqhQvgPvmTP2zClCM9jXhCfEEFV/8XEt10IMEZ+d/+CGMUsQFB3peINEngT
+ fAHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=hUVel/xU/BOej0nYVdF1QFva42QIH8kA/EPuRaK071M=;
- b=Raw+wl3JxTr61V2dDG6aGHeUYNOtNgMNNm9DNgmbW02HwgZWjG8WSGU99vu0pcK6s7
- CV8DK01jmlS8f1b8fUOFiSff0IQJn4rfDY/D1xvl4uhAvmcax9/j5FVunUMSSbmzAEu4
- 939f9bX47xUcWKfCYjuR6e5dAaPoVMmkGhbbywuiFCwuF6iMeakG2bP9jPP1N9ROhe20
- 3v7VezIzPYcxFjkYL/3KaVlxormzZCgZCAGw3m7LtDoO9Sri0QM/+c1XHqrtOCqoddSl
- dozsr2RlFb5ihQpZchVB5StXAcEYzGD/32LNBlrZ0sAQB9e6ux7S6TpTHurETUbyDdl6
- 910g==
-X-Gm-Message-State: AOAM532Juz5DnHi17VMt3LaPa8KmXe5EKVgnVXBg83OTQMj/54/tAmiQ
- +0yugdqmjHuQrqOS12dhW502AGujM1vFMpdx5EwHQQ==
-X-Google-Smtp-Source: ABdhPJwmT2anp+GkqzwGqkx3sYwCqTZ+fQn8ctRJa0bxm4w/YxR0Xr2ggALqAaSmklOmbZHssrePC05/6XxjNEv1tEE=
-X-Received: by 2002:a9d:5e93:: with SMTP id f19mr5236512otl.175.1594605908003; 
- Sun, 12 Jul 2020 19:05:08 -0700 (PDT)
+ bh=ABw3Z3OuvCTl1fggcJHqjIgqh/IW2fOK0CJY+oyqysQ=;
+ b=Pkowc0FqF1lkrdVGyu2DNo56tEMl/kl9EdyRBwGrM/l+Mob6D9ci6Itk95/r5sCQud
+ M6XAlWXOWpuKu0XPBUoGw0+RZIC9Q6TOP8tXgRxPcDW37xVdneRWvT3FrjUbu75kTRWL
+ r4HfUpmxU/dXRlajLjWVKeJoKXEgeGFSMw6eYlrJsJNLugaIM8XsS5bhsby0y8CqrA7h
+ 55LqUIfke2YM9D+DuYcw4g1/3AV1pXWlIm3sosv/R8EX1+UGdIIixWIDzrZrhasyctKG
+ sh1umLXRO14rs5Ty2PgOmOlmqdJwz51MimeKlkU0/1MCzwNOZT++TGqG5X+iOh+hWNoa
+ crOw==
+X-Gm-Message-State: AOAM533y1lUPm+bkD4IbZLJ2UeqZLD6fntXIKGAIlWeiFX8XwGH9KI+1
+ HOrrWR9ZaE7Bek01JpOPn3yP+ZWE2aYZG+2Xm/wZjA==
+X-Google-Smtp-Source: ABdhPJy0ojkQKo0eSoLHsaA1vv/mwPn8WhkthBzbrq19t+voyqnbwWhaTV/sfMs8+a0LNxw48KY+CIuUIxiXHTTZJ5U=
+X-Received: by 2002:aca:b203:: with SMTP id b3mr11918689oif.118.1594606038369; 
+ Sun, 12 Jul 2020 19:07:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200710104920.13550-1-frank.chang@sifive.com>
- <20200710104920.13550-15-frank.chang@sifive.com>
- <0dc40d00-a89d-9818-9fd3-2bce4141eca7@linaro.org>
-In-Reply-To: <0dc40d00-a89d-9818-9fd3-2bce4141eca7@linaro.org>
+ <20200710104920.13550-14-frank.chang@sifive.com>
+ <facf726b-d355-b0af-3f7f-5574593aa44c@linaro.org>
+In-Reply-To: <facf726b-d355-b0af-3f7f-5574593aa44c@linaro.org>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Mon, 13 Jul 2020 10:04:57 +0800
-Message-ID: <CAE_xrPjb2RRd8BTg+1FSYBUVnV6DSSQrot0Z33NE9ej10C-uRg@mail.gmail.com>
-Subject: Re: [RFC 14/65] target/riscv: rvv-0.9: stride load and store
- instructions
+Date: Mon, 13 Jul 2020 10:07:07 +0800
+Message-ID: <CAE_xrPjkhsowsGeq_OJJeJUwDAvOM5JnHo-Ovtd8aFuuziiN2Q@mail.gmail.com>
+Subject: Re: [RFC 13/65] target/riscv: rvv-0.9: configure instructions
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -55,9 +54,9 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Content-Type: multipart/alternative; boundary="000000000000b423d305aa491e7b"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::330;
- envelope-from=frank.chang@sifive.com; helo=mail-ot1-x330.google.com
+Content-Type: multipart/alternative; boundary="0000000000007950e805aa49260f"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::233;
+ envelope-from=frank.chang@sifive.com; helo=mail-oi1-x233.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,94 +78,144 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jul 2020 02:05:11 -0000
+X-List-Received-Date: Mon, 13 Jul 2020 02:07:22 -0000
 
---000000000000b423d305aa491e7b
+--0000000000007950e805aa49260f
 Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Jul 11, 2020 at 2:15 AM Richard Henderson <
+On Sat, Jul 11, 2020 at 2:07 AM Richard Henderson <
 richard.henderson@linaro.org> wrote:
 
 > On 7/10/20 3:48 AM, frank.chang@sifive.com wrote:
-> >  # *** Vector loads and stores are encoded within LOADFP/STORE-FP ***
-> > -vlb_v      ... 100 . 00000 ..... 000 ..... 0000111 @r2_nfvm
-> > -vlh_v      ... 100 . 00000 ..... 101 ..... 0000111 @r2_nfvm
-> > -vlw_v      ... 100 . 00000 ..... 110 ..... 0000111 @r2_nfvm
+> > -static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
+> > +static bool trans_vsetvl(DisasContext *s, arg_vsetvl *a)
 >
-> Again, something you can't do until 0.7.1 is not supported.
+> Do not mix this change with anything else.
+
+
+OK~
+---
+Frank Chang
+
+
+> > +    rd = tcg_const_i32(a->rd);
+> > +    rs1 = tcg_const_i32(a->rs1);
 >
-> If you don't want to simultaneously support 0.7.1 and 0.9/1.0, then you
-> should
-> simply remove 0.7.1 in the first patch, so that there's no confusion.
+> Any time you put a register number into a tcg const, there's probably a
+> better
+> way to do things.
+
+
+> > -    /* Using x0 as the rs1 register specifier, encodes an infinite AVL
+> */
+> > -    if (a->rs1 == 0) {
+> > -        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
+> > -        s1 = tcg_const_tl(RV_VLEN_MAX);
+> > -    } else {
+> > -        s1 = tcg_temp_new();
+> > -        gen_get_gpr(s1, a->rs1);
+> > -    }
 >
-> Is the rest of it mostly renaming?  You should definitely expand on what
-> you're
-> doing within each patch description.  A description of what has changed in
-> the
-> spec since 0.7.1 will help the reviewer validate that you've gotten all of
-> the
-> corner cases.
+> E.g. this code should be kept, and add
 >
-> I am going to stop reviewing this patch series now, as I expect that most
-> of
-> the remaining patches will have similar comments.
+>     if (a->rd == 0 && a->rs1 == 0) {
+>         s1 = tcg_temp_new();
+>         tcg_gen_mov_tl(s1, cpu_vl);
+>     } else ...
+>
+OK~
+
+>
+> > +    if ((sew > cpu->cfg.elen)
+> > +        || vill
+> > +        || vflmul < ((float)sew / cpu->cfg.elen)
+> > +        || (ediv != 0)
+> > +        || (reserved != 0)) {
+> >          /* only set vill bit. */
+> >          env->vtype = FIELD_DP64(0, VTYPE, VILL, 1);
+> > -        env->vl = 0;
+> > -        env->vstart = 0;
+> >          return 0;
+> >      }
+>
+> You do need to check 0.7.1 so long as it's supported.
 >
 >
 > r~
 >
 
-Thanks for the reviews.
+Will drop 0.7.1 support in my first patch to prevent the confusion.
 
-I will rearrange my commits as what you suggest and add more comments in my
-next patchset.
-
---
 Frank Chang
 
---000000000000b423d305aa491e7b
+--0000000000007950e805aa49260f
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Sat, Jul 11, 2020 at 2:15 AM Richard H=
+<div dir=3D"ltr"><div dir=3D"ltr">On Sat, Jul 11, 2020 at 2:07 AM Richard H=
 enderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hender=
 son@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquo=
 te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
 solid rgb(204,204,204);padding-left:1ex">On 7/10/20 3:48 AM, <a href=3D"mai=
 lto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> wr=
 ote:<br>
-&gt;=C2=A0 # *** Vector loads and stores are encoded within LOADFP/STORE-FP=
- ***<br>
-&gt; -vlb_v=C2=A0 =C2=A0 =C2=A0 ... 100 . 00000 ..... 000 ..... 0000111 @r2=
-_nfvm<br>
-&gt; -vlh_v=C2=A0 =C2=A0 =C2=A0 ... 100 . 00000 ..... 101 ..... 0000111 @r2=
-_nfvm<br>
-&gt; -vlw_v=C2=A0 =C2=A0 =C2=A0 ... 100 . 00000 ..... 110 ..... 0000111 @r2=
-_nfvm<br>
+&gt; -static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)<br>
+&gt; +static bool trans_vsetvl(DisasContext *s, arg_vsetvl *a)<br>
 <br>
-Again, something you can&#39;t do until 0.7.1 is not supported.<br>
+Do not mix this change with anything else.</blockquote><div>=C2=A0</div><di=
+v>OK~</div><div>---</div><div>Frank Chang</div><div><br></div><blockquote c=
+lass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px soli=
+d rgb(204,204,204);padding-left:1ex">
 <br>
-If you don&#39;t want to simultaneously support 0.7.1 and 0.9/1.0, then you=
- should<br>
-simply remove 0.7.1 in the first patch, so that there&#39;s no confusion.<b=
-r>
+&gt; +=C2=A0 =C2=A0 rd =3D tcg_const_i32(a-&gt;rd);<br>
+&gt; +=C2=A0 =C2=A0 rs1 =3D tcg_const_i32(a-&gt;rs1);<br>
 <br>
-Is the rest of it mostly renaming?=C2=A0 You should definitely expand on wh=
-at you&#39;re<br>
-doing within each patch description.=C2=A0 A description of what has change=
-d in the<br>
-spec since 0.7.1 will help the reviewer validate that you&#39;ve gotten all=
- of the<br>
-corner cases.<br>
+Any time you put a register number into a tcg const, there&#39;s probably a=
+ better<br>
+way to do things.</blockquote><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
+1ex">
 <br>
-I am going to stop reviewing this patch series now, as I expect that most o=
-f<br>
-the remaining patches will have similar comments.<br>
+&gt; -=C2=A0 =C2=A0 /* Using x0 as the rs1 register specifier, encodes an i=
+nfinite AVL */<br>
+&gt; -=C2=A0 =C2=A0 if (a-&gt;rs1 =3D=3D 0) {<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* As the mask is at least one bit, RV_VL=
+EN_MAX is &gt;=3D VLMAX */<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 s1 =3D tcg_const_tl(RV_VLEN_MAX);<br>
+&gt; -=C2=A0 =C2=A0 } else {<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 s1 =3D tcg_temp_new();<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 gen_get_gpr(s1, a-&gt;rs1);<br>
+&gt; -=C2=A0 =C2=A0 }<br>
+<br>
+E.g. this code should be kept, and add<br>
+<br>
+=C2=A0 =C2=A0 if (a-&gt;rd =3D=3D 0 &amp;&amp; a-&gt;rs1 =3D=3D 0) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 s1 =3D tcg_temp_new();<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_mov_tl(s1, cpu_vl);<br>
+=C2=A0 =C2=A0 } else ...<br></blockquote><div>OK~</div><blockquote class=3D=
+"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(2=
+04,204,204);padding-left:1ex">
+<br>
+&gt; +=C2=A0 =C2=A0 if ((sew &gt; cpu-&gt;cfg.elen)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 || vill<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 || vflmul &lt; ((float)sew / cpu-&gt;cfg.=
+elen)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 || (ediv !=3D 0)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 || (reserved !=3D 0)) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* only set vill bit. */<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;vtype =3D FIELD_DP64(0, VTYP=
+E, VILL, 1);<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;vl =3D 0;<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;vstart =3D 0;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return 0;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+<br>
+You do need to check 0.7.1 so long as it&#39;s supported.<br>
 <br>
 <br>
-r~<br></blockquote><div><br></div><div>Thanks for the reviews.</div><div><b=
-r></div><div>I will rearrange my commits as what you suggest and add more c=
-omments in my next patchset.</div><div><br></div><div>--</div><div>Frank Ch=
-ang</div></div></div>
+r~<br></blockquote><div><br></div><div>Will drop 0.7.1 support in my first =
+patch to prevent the confusion.=C2=A0</div><div><br></div><div>Frank Chang<=
+/div></div></div>
 
---000000000000b423d305aa491e7b--
+--0000000000007950e805aa49260f--
 
