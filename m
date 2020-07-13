@@ -1,69 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1juJOU-0001lB-B6
-	for mharc-qemu-riscv@gnu.org; Sat, 11 Jul 2020 13:34:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38046)
+	id 1jun3T-0007Vo-8k
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Jul 2020 21:14:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55004)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1juJOS-0001l1-NN; Sat, 11 Jul 2020 13:34:32 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:44121)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jun3R-0007VT-Jr; Sun, 12 Jul 2020 21:14:49 -0400
+Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:42942)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1juJOQ-0001Iv-Tm; Sat, 11 Jul 2020 13:34:32 -0400
-Received: by mail-io1-xd43.google.com with SMTP id i4so9256229iov.11;
- Sat, 11 Jul 2020 10:34:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jun3P-00014g-Tq; Sun, 12 Jul 2020 21:14:49 -0400
+Received: by mail-yb1-xb41.google.com with SMTP id x138so4062492ybg.9;
+ Sun, 12 Jul 2020 18:14:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pJKbhCYt/hDoahS1RbD5LBHrBWpJpazO8Ppdjj/swjQ=;
- b=faXNdFoQdXzTsgPTykXwyWDN7OPtx5Ouidf+zcLIin1ePsYppkPI1gRq0tIYLN8C92
- 3dp9v2D/GZg3neqfdd6krp72tOz6gdFlL9clNVVj1sFml+U64TP61Wd6oA2B4SlTnbsd
- x/SgkmF5yaM3BC5mjoZe/t/SE5xLedaGHHgnZi7YQCtwjVjxkIlJ+bQYLmMiwp1wdJbn
- dm2o+SzEwdJviGjQZXtRSdZhALxxkjP74NuZVtLjNqGPEymYV1dVoF8Hek7TtUvAHegV
- he+Hi1QuY4CJsetimZm/SZxIV34u5sDTen1GjbH5c60olr9Fvft478q4L3hsJA28bxyE
- zLSA==
+ :cc; bh=gdqH0XhQFa0VRGbuLsFrAvUgcSV5sgjjAGNz2Xc8CO0=;
+ b=XP67xxjEjWdaVFLsYQQXJuB0xBC7bp3E5P4c9/t7m1TJ6ISxgWQfKX1zL4wPeDK1r/
+ OJwh6euvrguIXzbR+FMuX+f6qz3u9/EvygaSdqTy4HNRWtV1U3+3dPJHggJCYZu2H0Ve
+ ZbwMyFWwWJLQQiZHbP12uBcPGz5M1v9enhO5YClH0yB3xkelrbbBG1l4etKoEi6v9O+Y
+ D00uSwnLJ+SRer3dPQJWttVuCQAaq69hOa/xb/A6vTpLpF+jkJEinEPLbi+Wvoi3GlkL
+ PfiU85BgFYa0yl3aEdtziT1XWIcBW9AAGY3X47iT1RidK0NZxyHylQczjQYf0Joyahr+
+ r8Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=pJKbhCYt/hDoahS1RbD5LBHrBWpJpazO8Ppdjj/swjQ=;
- b=UIbgpmmKFyB+WJ/rN/h0mm4/dbcDTKi+5sCvuoxYysmewH9PvXLxcWoAxLdND9sUo2
- o8h3QWQ/zCDA9N94Shb9TV75fJ6oY/GrkOxQgl3C3ztl5aEus9QisFKnE2CNwIEUNcve
- gWERwoUaGCPbaSMM1uXfzadAOZCpEB1WQrT7sco5J+145eoRdl42oIsKSe7Qh1CF1WTg
- 6JxGdRon2RtTOIkfxowRg6RMu0hLbUj4zwJq7NQZ/BNLDmmMzOTlwDWsZtLQSL5NTVYR
- vpM/j2jnSN/W6oexRZZ0jRe9nxWdTloWDWbeY6DnZ3pR8/QJIYIC8TjvLeqnK4d7AdnO
- LQhA==
-X-Gm-Message-State: AOAM533tZVbahd98qzn0MUnuPVB0I+h+tdPGx5zsyW7BKGrCZnCtIy2P
- /8TLG1gUBpjmlNRAPdcvIP0HHY7CR5vPac36Ox0=
-X-Google-Smtp-Source: ABdhPJyBxPvvvs0fqS6O+rmWb1QOSEydwuspryiGFVtns0qNQ7syEmqbJDc0/6L6VIha9FpsSt0JSrFTBADm2SSkZdc=
-X-Received: by 2002:a02:1a06:: with SMTP id 6mr85644875jai.8.1594488869336;
- Sat, 11 Jul 2020 10:34:29 -0700 (PDT)
+ bh=gdqH0XhQFa0VRGbuLsFrAvUgcSV5sgjjAGNz2Xc8CO0=;
+ b=D7lETHr0Gp2+hicwMU6MFQOosXYp7boEDvgjRIVBTl3SkLs0MJ0BXYorlwMRZBupfN
+ lN3Go45w7iSYN4Py6zcFnsm5cZghkhI2mGxw0vtnTx2UwJbzfYwzoU++gGWFBuC5B5xA
+ uFCgqJgWWdQAhFIKDcoTDZ6RyTsVdmcb04yHm9O6AXRk4bqTIboZJqLqRyRdJ86CNj0l
+ uKv5NmkYk99B0ppOEb72GjTZzfvMPxHj44PZ7xrMKURrIym749+FISoXuTp9aSjUuHyT
+ vuVtbBfygM40as49If8TcdtmSyQZ+w7xhDmy7eWz2i5zNVda4SQkLwlRLoEOvNOdELvI
+ 0hZQ==
+X-Gm-Message-State: AOAM532tiSeCrbS6wpPSRTkKSai3OTjJ33LNKn8O1SNfV7fDU50pzrqn
+ cu5/BTieqNn6/o+Eu6xMs7lsgSl52NLXvogelt0=
+X-Google-Smtp-Source: ABdhPJw/y/4TBgh4IucQWF+uIGNN6+Mwi4FO0QzltfmwAVQrrP9mPGtbIID3upx1jkBh2HkzHNUmZydr4UIUvtlP3d0=
+X-Received: by 2002:a25:e5c3:: with SMTP id c186mr9912548ybh.332.1594602886205; 
+ Sun, 12 Jul 2020 18:14:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <1594357499-29068-1-git-send-email-bmeng.cn@gmail.com>
- <1594357499-29068-5-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1594357499-29068-5-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Sat, 11 Jul 2020 10:24:34 -0700
-Message-ID: <CAKmqyKM1m2j15ncbcW0rp5fk6FmbJ20uWOYUC40+v9PG=Hu7yQ@mail.gmail.com>
-Subject: Re: [PATCH v4 4/7] hw/riscv: Use pre-built bios image of generic
- platform for virt & sifive_u
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+References: <1594289144-24723-1-git-send-email-bmeng.cn@gmail.com>
+ <1594289144-24723-2-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKPvn7dALUHhK=na1svr==oZ2rvyFOnw8FvRJZP23uHN7Q@mail.gmail.com>
+ <CAEUhbmX4-Js6J9eqRnBT5q9QqRY8R5-AQ4VRg1iVDJPzcurDUA@mail.gmail.com>
+ <CAKmqyKM2ZQ4oNqLG3UQWVhnHi1q7h_HjW7hjTfAC-2-1gXjzNg@mail.gmail.com>
+In-Reply-To: <CAKmqyKM2ZQ4oNqLG3UQWVhnHi1q7h_HjW7hjTfAC-2-1gXjzNg@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 13 Jul 2020 09:14:35 +0800
+Message-ID: <CAEUhbmXTfjsGVE-i_8ty5W0ybOS+1mPjf0ECzs0j6T+ZqLt77A@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] hw/riscv: sifive_u: Provide a reliable way for
+ bootloader to detect whether it is running in QEMU
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Pragnesh Patel <pragnesh.patel@sifive.com>,
+ Sagar Kadam <sagar.kadam@sifive.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmerdabbelt@google.com>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
+ Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,124 +82,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jul 2020 17:34:33 -0000
+X-List-Received-Date: Mon, 13 Jul 2020 01:14:49 -0000
 
-On Thu, Jul 9, 2020 at 10:07 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> Update virt and sifive_u machines to use the opensbi fw_dynamic bios
-> image built for the generic FDT platform.
->
-> Remove the out-of-date no longer used bios images.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> Reviewed-by: Anup Patel <anup@brainfault.org>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Hi Alistair,
 
-This patch seems to break 32-bit Linux boots on the sifive_u and virt machines.
+On Sun, Jul 12, 2020 at 12:03 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Thu, Jul 9, 2020 at 5:48 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > Hi Alistair,
+> >
+> > On Fri, Jul 10, 2020 at 6:19 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > >
+> > > On Thu, Jul 9, 2020 at 3:07 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > >
+> > > > From: Bin Meng <bin.meng@windriver.com>
+> > > >
+> > > > The reset vector codes are subject to change, e.g.: with recent
+> > > > fw_dynamic type image support, it breaks oreboot again.
+> > >
+> > > This is a recurring problem, I have another patch for Oreboot to fix
+> > > the latest breakage.
+> > >
+> >
+> > Can Oreboot be updated to remove the QEMU detection?
+>
+> In general I think it should be.
+>
+> Right now it's not critical to do. I think from a QEMU perspective we
+> have finished changing the "ROM" code so after this release we can
+> update Oreboot and then it should settle down again.
+>
+> >
+> > > >
+> > > > Add a subregion in the MROM, with the size of machine RAM stored,
+> > > > so that we can provide a reliable way for bootloader to detect
+> > > > whether it is running in QEMU.
+> > >
+> > > I don't really like this though. I would prefer that we don't
+> > > encourage guest software to behave differently on QEMU. I don't think
+> > > other upstream boards do this.
+> > >
+> > > Besides Oreboot setting up the clocks are there any other users of this?
+> >
+> > I don't really have any specific reason, except for testing U-Boot SPL
+> > by relaxing the requirement of hardcoding the memory to 8G "-m 8G" as
+> > I indicated in the commit message below:
+>
+> Yeah, I think that's just something we will have to deal with. If the
+> guest expects 8GB and doesn't check the device tree passed to it then
+> the user has to create 8GB of memory.
+>
 
-Alistair
+Note there are two reasons that why "-m 8G" is used to test U-Boot SPL:
 
->
-> ---
->
-> Changes in v4:
-> - Remove old binaries in the Makefile for `make install` bisection
->
-> Changes in v3:
-> - Change to fw_dynamic.bin for virt & sifive_u
->
->  Makefile                                       |   4 +---
->  hw/riscv/sifive_u.c                            |   4 ++--
->  hw/riscv/virt.c                                |   4 ++--
->  pc-bios/opensbi-riscv32-generic-fw_dynamic.bin | Bin 0 -> 62144 bytes
->  pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin   | Bin 49520 -> 0 bytes
->  pc-bios/opensbi-riscv32-virt-fw_jump.bin       | Bin 49504 -> 0 bytes
->  pc-bios/opensbi-riscv64-generic-fw_dynamic.bin | Bin 0 -> 70792 bytes
->  pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin   | Bin 57936 -> 0 bytes
->  pc-bios/opensbi-riscv64-virt-fw_jump.bin       | Bin 57920 -> 0 bytes
->  9 files changed, 5 insertions(+), 7 deletions(-)
->  create mode 100644 pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
->  delete mode 100644 pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
->  delete mode 100644 pc-bios/opensbi-riscv32-virt-fw_jump.bin
->  create mode 100644 pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
->  delete mode 100644 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
->  delete mode 100644 pc-bios/opensbi-riscv64-virt-fw_jump.bin
->
-> diff --git a/Makefile b/Makefile
-> index b1b8a5a..f06b3ae 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -840,9 +840,7 @@ palcode-clipper \
->  u-boot.e500 u-boot-sam460-20100605.bin \
->  qemu_vga.ndrv \
->  edk2-licenses.txt \
-> -hppa-firmware.img \
-> -opensbi-riscv32-sifive_u-fw_jump.bin opensbi-riscv32-virt-fw_jump.bin \
-> -opensbi-riscv64-sifive_u-fw_jump.bin opensbi-riscv64-virt-fw_jump.bin
-> +hppa-firmware.img
->
->
->  DESCS=50-edk2-i386-secure.json 50-edk2-x86_64-secure.json \
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index b434fd3..dc46f64 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -60,9 +60,9 @@
->  #include <libfdt.h>
->
->  #if defined(TARGET_RISCV32)
-> -# define BIOS_FILENAME "opensbi-riscv32-sifive_u-fw_jump.bin"
-> +# define BIOS_FILENAME "opensbi-riscv32-generic-fw_dynamic.bin"
->  #else
-> -# define BIOS_FILENAME "opensbi-riscv64-sifive_u-fw_jump.bin"
-> +# define BIOS_FILENAME "opensbi-riscv64-generic-fw_dynamic.bin"
->  #endif
->
->  static const struct MemmapEntry {
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 85e17fe..5ca49c5 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -43,9 +43,9 @@
->  #include "hw/pci-host/gpex.h"
->
->  #if defined(TARGET_RISCV32)
-> -# define BIOS_FILENAME "opensbi-riscv32-virt-fw_jump.bin"
-> +# define BIOS_FILENAME "opensbi-riscv32-generic-fw_dynamic.bin"
->  #else
-> -# define BIOS_FILENAME "opensbi-riscv64-virt-fw_jump.bin"
-> +# define BIOS_FILENAME "opensbi-riscv64-generic-fw_dynamic.bin"
->  #endif
->
->  static const struct MemmapEntry {
-> diff --git a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
-> new file mode 100644
-> index 0000000..23b4dfb
-> Binary files /dev/null and b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin differ
-> diff --git a/pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin b/pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
-> deleted file mode 100644
-> index 3e0da54..0000000
-> Binary files a/pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin and /dev/null differ
-> diff --git a/pc-bios/opensbi-riscv32-virt-fw_jump.bin b/pc-bios/opensbi-riscv32-virt-fw_jump.bin
-> deleted file mode 100644
-> index bc56ed6..0000000
-> Binary files a/pc-bios/opensbi-riscv32-virt-fw_jump.bin and /dev/null differ
-> diff --git a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
-> new file mode 100644
-> index 0000000..16c0cf4
-> Binary files /dev/null and b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin differ
-> diff --git a/pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin b/pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
-> deleted file mode 100644
-> index 1acee86..0000000
-> Binary files a/pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin and /dev/null differ
-> diff --git a/pc-bios/opensbi-riscv64-virt-fw_jump.bin b/pc-bios/opensbi-riscv64-virt-fw_jump.bin
-> deleted file mode 100644
-> index c62f2b4..0000000
-> Binary files a/pc-bios/opensbi-riscv64-virt-fw_jump.bin and /dev/null differ
-> --
-> 2.7.4
->
->
+1. U-Boot DDR driver is hardcoding memory to 8G, which I had a fix
+locally and will send U-Boot upstream soon.
+2. U-Boot SPL has to use its own device tree because we don't want to
+update QEMU to include all the DDR register settings in the device
+tree which is very big.
+
+Why I wanted to add this patch here is that I wanted to dynamically
+patch U-Boot SPL DT to use the actual ram size that QEMU instantiates.
+This way we can avoid editing U-Boot SPL DT to set the actual memory
+size.
+
+Regards,
+Bin
 
