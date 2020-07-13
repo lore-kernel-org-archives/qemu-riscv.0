@@ -1,53 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1junF1-0002vO-Gg
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Jul 2020 21:26:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56474)
+	id 1junfS-00084N-BX
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Jul 2020 21:54:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60902)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1junEz-0002ua-7d; Sun, 12 Jul 2020 21:26:45 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:44012)
+ id 1junfR-000848-AE; Sun, 12 Jul 2020 21:54:05 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:41944)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1junEx-0002aR-Hu; Sun, 12 Jul 2020 21:26:44 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id y13so5633212ybj.10;
- Sun, 12 Jul 2020 18:26:42 -0700 (PDT)
+ id 1junfP-00062x-ND; Sun, 12 Jul 2020 21:54:05 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id a15so5658557ybs.8;
+ Sun, 12 Jul 2020 18:54:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=tEtTDo5REdLq/Ft8mJWQbjnZEzjfGBVsty3PG91N6Ck=;
- b=NQ+mJ3Y2wStvMtsBjFPyJY42wFcZlqUOA814twsa16N6o4BjDSUfFVQJteCaNHVvCj
- 6an336dUI36ZG6PQbwya/MURZjIjFfYsIFjXrh7H/dsd8eAoLH7+D8pZx6lE50w9tZ7V
- bSDt/5mIyRqIH9EhjFJLa+JcKJc1Ddoti5OFr8HB+kaS58LMAfFzt9u3Bm71Wft3VqVs
- M7oCAgAHDh3LRNiE5yxpknUvk6AgRqYVRLSmkt8h8UkSoQf1PM93DJZh7N8AIxQ6DSaG
- uCBY+6P7WsqSkwQbQy8Hp1J/Lwu7ojC87/qH0phOv0KAglxm6CscXNRhcNSiZ3smb0Dv
- EuFw==
+ :cc; bh=xNyNspxOZnByj7xwKvb/k3qqCO/MEqSXjc6QfhWqYPI=;
+ b=Y2lySuXT+WqArjR4qZHuEaHP6HRWk0gzRY/ntEOLf+sI0A/TuJ+mveuNJhA+JK10kc
+ DtJA1uo8AVxYeksAQKkUybGNGRVs5TH+MENLZChsstoblvU+ZGbv1s+jflvF5XFNDGZj
+ vfnzHLcVb7g+rxAA53/28FBb+9hFL5H2D/C69K5AbmxF3MSTyhMBOxYw9fOOl3EuuhNL
+ 9vyLGcK50pUMuUjfEFPRD6balTdCpQKg1gZFDazI+XYNq0Sp/7D1WyFLl/xNakmRCwW2
+ kxwBS2svg9H5v9qe+ovHaltZEAj4NUvL3HEg415kNYByddRWkeKYfQ9I+5pjWvZJC/K5
+ +TpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=tEtTDo5REdLq/Ft8mJWQbjnZEzjfGBVsty3PG91N6Ck=;
- b=WJhsbjXT7klDqSrBZEPRdcpEjaJ7ecM8BIYTPzkBojxYzCeN8QUuQsCwB8XhXbwagq
- JKZ2FNtL8SAelN7pQ1BYSV1zyP2u/6fUF+6elkfWa/dG8Z9uy0TD6qvCqc8BCpN+ptuR
- kctaudDnJm/CKPXAju9uDZRaoUK83IKIyv8MLw71s0RovJd0UkJHrGvGcc2GkDFgs7+8
- FwWFT92iFSsRR+YItpcgPIuovO086a4KNAUapEPQvPBe1q4QE7O7+DtJj1tDYB3GjvNT
- 0yUG2xtJuHzwvpk1+uKlFd1gigGu5hlzFRWlctqinkJmRMYwfe4YvkcWlMnTu8DT2LfF
- M8fw==
-X-Gm-Message-State: AOAM532kzgNbeYgvtqYW5J9xt4zSTGOIn6jq5TFWmZcnmrFa8QbE5kEh
- IHKtDjmbm9StqI568e7+fhSUUEldmtAsE5t4vaU=
-X-Google-Smtp-Source: ABdhPJwSgETaxRTBhkJrxb0mX959Z41iAqZYnM9w62e+aGr47SzHrp+nI42Q7IZVxYnjSQlyU3vyIdYdbne+WwpRKRE=
+ bh=xNyNspxOZnByj7xwKvb/k3qqCO/MEqSXjc6QfhWqYPI=;
+ b=tZvk1A0ixGfRbjJopTEjZSf6ElBDNTI+5J2N2G4rv536fW2xUmYO51Q/4HUtNFe35t
+ uH9tu8VMlVL1Z7OcBFspnnjz4UkAtOrWzQqupSV2G1ZNe82Y3PH2NLGg10pv012IQ/st
+ Wx9QKPkswV3N8rmImK5bXgTCMoZJkg+FTij7cib1tMZakU5B2ku3PyEWNTUZ/HTp/3fx
+ lg005W4Hz7bXc6zvyUutgPENCx6+NGzFeAyGvbkdPED1m7mVqcxtwxn6fZXmia4NaqpA
+ q9VsYZCCDSum2iNFTQewe2lExqvNMEZQIWlPNsrqLzzFyHMQGD+pn/oaMSHiaiozzRF/
+ KmFQ==
+X-Gm-Message-State: AOAM532vfPV/36zWHjAhPrHMyS6ykqPKjk4rKfLZyg58WMVQyhU+QxRX
+ vcfD22N4ysZlvuNlrFIpE5zLgb7AthqkBFRJXkg=
+X-Google-Smtp-Source: ABdhPJyPP6H+kxy5QoBbQObbkZNNPOVG6YG1cnl/Akt0v21uP/ZpQhNxEs5rQWawFpnnjYr9AGwvzgzgWGSOyC9sbu4=
 X-Received: by 2002:a25:c342:: with SMTP id
- t63mr128410615ybf.122.1594603602235; 
- Sun, 12 Jul 2020 18:26:42 -0700 (PDT)
+ t63mr128539035ybf.122.1594605242187; 
+ Sun, 12 Jul 2020 18:54:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <1594357499-29068-1-git-send-email-bmeng.cn@gmail.com>
- <1594357499-29068-8-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKPf4YH9Ut1mTLRoRdk-aja6wTKS-FhA-5LynbCeajh-_Q@mail.gmail.com>
- <CAKmqyKOQM4pZLAnt42m-MC2cFOxM_+_-tw7FHxe1RbDf84q0Nw@mail.gmail.com>
-In-Reply-To: <CAKmqyKOQM4pZLAnt42m-MC2cFOxM_+_-tw7FHxe1RbDf84q0Nw@mail.gmail.com>
+ <1594357499-29068-5-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKM1m2j15ncbcW0rp5fk6FmbJ20uWOYUC40+v9PG=Hu7yQ@mail.gmail.com>
+In-Reply-To: <CAKmqyKM1m2j15ncbcW0rp5fk6FmbJ20uWOYUC40+v9PG=Hu7yQ@mail.gmail.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 13 Jul 2020 09:26:31 +0800
-Message-ID: <CAEUhbmXAfN5zjpAF-pZmjrERUsoZZ0z4OQO+2_Q6MU_RxvX=EA@mail.gmail.com>
-Subject: Re: [PATCH v4 7/7] Makefile: Ship the generic platform bios images
- for RISC-V
+Date: Mon, 13 Jul 2020 09:53:50 +0800
+Message-ID: <CAEUhbmWxCMZG+kdyqeSBrJPRf0Jvb7a4AcADuFXpRwQ7fb8zDA@mail.gmail.com>
+Subject: Re: [PATCH v4 4/7] hw/riscv: Use pre-built bios image of generic
+ platform for virt & sifive_u
 To: Alistair Francis <alistair23@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -80,33 +79,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jul 2020 01:26:45 -0000
+X-List-Received-Date: Mon, 13 Jul 2020 01:54:05 -0000
 
-On Sun, Jul 12, 2020 at 1:28 AM Alistair Francis <alistair23@gmail.com> wrote:
+On Sun, Jul 12, 2020 at 1:34 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> On Fri, Jul 10, 2020 at 11:36 AM Alistair Francis <alistair23@gmail.com> wrote:
+> On Thu, Jul 9, 2020 at 10:07 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 > >
-> > On Thu, Jul 9, 2020 at 10:11 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > From: Bin Meng <bin.meng@windriver.com>
-> > >
-> > > Update the install blob list to include the generic platform
-> > > fw_dynamic bios images.
-> > >
-> > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> > From: Bin Meng <bin.meng@windriver.com>
 > >
-> > You didn't address the comments in v3.
+> > Update virt and sifive_u machines to use the opensbi fw_dynamic bios
+> > image built for the generic FDT platform.
 > >
-> > Thinking about this more though it looks like we currently don't
-> > install anything, so this is an improvement.
+> > Remove the out-of-date no longer used bios images.
 > >
+> > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> > Reviewed-by: Anup Patel <anup@brainfault.org>
 > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 >
-> Nope, I was wrong. This should be squashed into patch 4 where you
-> remove the installed binaries.
+> This patch seems to break 32-bit Linux boots on the sifive_u and virt machines.
+>
 
-Not entirely correct. The .bin changes should go to patch 4, and .elf
-changes should remain in this patch I think.
+It looks only Linux boot on sifive_u is broken. On our side, we have
+been using VxWorks to test 32-bit OpenSBI on sifive_u so this issue
+gets unnoticed. I will take a look.
 
 Regards,
 Bin
