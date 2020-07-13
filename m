@@ -1,57 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1junns-0001NB-7S
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Jul 2020 22:02:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33946)
+	id 1junqC-0002hB-WF
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Jul 2020 22:05:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34358)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1junnr-0001N1-Bz
- for qemu-riscv@nongnu.org; Sun, 12 Jul 2020 22:02:47 -0400
-Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234]:40764)
+ id 1junqB-0002fg-KS
+ for qemu-riscv@nongnu.org; Sun, 12 Jul 2020 22:05:11 -0400
+Received: from mail-ot1-x330.google.com ([2607:f8b0:4864:20::330]:40150)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1junno-00073m-42
- for qemu-riscv@nongnu.org; Sun, 12 Jul 2020 22:02:47 -0400
-Received: by mail-oi1-x234.google.com with SMTP id t198so9750896oie.7
- for <qemu-riscv@nongnu.org>; Sun, 12 Jul 2020 19:02:43 -0700 (PDT)
+ id 1junq9-0007JA-5Z
+ for qemu-riscv@nongnu.org; Sun, 12 Jul 2020 22:05:11 -0400
+Received: by mail-ot1-x330.google.com with SMTP id c25so8401133otf.7
+ for <qemu-riscv@nongnu.org>; Sun, 12 Jul 2020 19:05:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9KCoK88gpzBtqmTq5EC1fc00IBdi2FABzlZ6Q5EHL4k=;
- b=bx7JllviB7lXgD4AvbgS35G33skhdVu+maw41Ihrla1C6vmJk5ozY7c2Aq0GcH3bNk
- S6ilGdbPdcE7oU63hQqdA8G1sHvAldubABQU0Vq7B8WpND3QG70QjPdu8jIS+5foBowW
- DtQhTMHLem+4wRDMGnNGVkLNr65aOJdXUSjVrdiwbimqZQB8TpGlPm9KNpZjp0zbAnhA
- O2v+Su+7Qefg8gWYxeHe6oRRIyWvipuXiQyT+nuGmJ9LLrgbMCL6FSwRv6XmQ56qHBtR
- siWoZk0HrhTwfgMTkorb2K5KdsbG5QCJlm9Lb7NRp5Uppv9m95DMBUNf4qqVTQTIqLIN
- 5w/A==
+ :cc; bh=hUVel/xU/BOej0nYVdF1QFva42QIH8kA/EPuRaK071M=;
+ b=E+zfVvjg1Weef4qqpqLq+8deXufDOy3GG9DMfE8OXqQWRs7nzC8BdA15TRCYsqgBmI
+ t4S9iHmyHJGR3ViUxhfQ6IrbYcU7+tUeaQaUxxOD6YyEI2qq024B+VqdY6ZXpnwRTojd
+ dWwChwYOwz/b+ipOnAuLmhYDIz6M7Gup8zKtVTGxgSy0upc1In2hMfXPKhmWwHJNiECI
+ jtTznYjh1clKOd0JP3LjLQhS9slF9zXhTUZ/97600sNWjoMy/weP+OUvcWqtfHAuf/GY
+ +yRiS1m8gAZGOgo7LjXhOmvs9uL9wNgJy3njuBHgC4obJr6tImvjt4I1mq0lVNDZu5MS
+ mRjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=9KCoK88gpzBtqmTq5EC1fc00IBdi2FABzlZ6Q5EHL4k=;
- b=aES9cfkr3zYUU6UYh9dVjyAlVpCQ8RGZB+2WqsDB954hkn1U6zHfrJU7nXgjTVpXIx
- ZBXfbSWxegwTQ03F0G3UmFHiZXHgV4s3Vy469UCHz7xbiVUlt56Z2BBLPXFajBWFFfPF
- 1Mn5sVI1LLTSz6ClQdL4ObEgmdYSeDSBJDSvCLnIhlYJUyMjcxxIO+PoSvscsuSVIQ61
- PHGvqax3A+0ewpjDRcJweIWfXZCA1f+3jHsHc0mynE8+H2wh5/IqPwnhdF5zQ39xCms8
- GaIbD2EdUsxQccPRP3Xhgj/g9HJe+Wzl1kj4LB8NYZuG8kV1y+5KHBXyFuUcxtQL1JVr
- r0QA==
-X-Gm-Message-State: AOAM532QWFV7wRjQkKfuLEqt2kMjwSXcJXRq+mom5psDvp2AhGc0SUbq
- JRT3cQMjdIoDaJsuZKN9hF/JzIUQXPVpiT+rom/CuA==
-X-Google-Smtp-Source: ABdhPJwaj+citAkihP9hJqL7lHUeSQGZv9aP+ztsSnR5VV2evtTAMdmsQsjDzE5996S3Y3m1h+cfX2SSyKSkb4vxgaA=
-X-Received: by 2002:aca:b203:: with SMTP id b3mr11907824oif.118.1594605762169; 
- Sun, 12 Jul 2020 19:02:42 -0700 (PDT)
+ bh=hUVel/xU/BOej0nYVdF1QFva42QIH8kA/EPuRaK071M=;
+ b=Raw+wl3JxTr61V2dDG6aGHeUYNOtNgMNNm9DNgmbW02HwgZWjG8WSGU99vu0pcK6s7
+ CV8DK01jmlS8f1b8fUOFiSff0IQJn4rfDY/D1xvl4uhAvmcax9/j5FVunUMSSbmzAEu4
+ 939f9bX47xUcWKfCYjuR6e5dAaPoVMmkGhbbywuiFCwuF6iMeakG2bP9jPP1N9ROhe20
+ 3v7VezIzPYcxFjkYL/3KaVlxormzZCgZCAGw3m7LtDoO9Sri0QM/+c1XHqrtOCqoddSl
+ dozsr2RlFb5ihQpZchVB5StXAcEYzGD/32LNBlrZ0sAQB9e6ux7S6TpTHurETUbyDdl6
+ 910g==
+X-Gm-Message-State: AOAM532Juz5DnHi17VMt3LaPa8KmXe5EKVgnVXBg83OTQMj/54/tAmiQ
+ +0yugdqmjHuQrqOS12dhW502AGujM1vFMpdx5EwHQQ==
+X-Google-Smtp-Source: ABdhPJwmT2anp+GkqzwGqkx3sYwCqTZ+fQn8ctRJa0bxm4w/YxR0Xr2ggALqAaSmklOmbZHssrePC05/6XxjNEv1tEE=
+X-Received: by 2002:a9d:5e93:: with SMTP id f19mr5236512otl.175.1594605908003; 
+ Sun, 12 Jul 2020 19:05:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200710104920.13550-1-frank.chang@sifive.com>
- <CAKmqyKPtKtD=G+tXcd2Y-TM2go1TWbETHK2e3vdN-ehHyHU9-w@mail.gmail.com>
-In-Reply-To: <CAKmqyKPtKtD=G+tXcd2Y-TM2go1TWbETHK2e3vdN-ehHyHU9-w@mail.gmail.com>
+ <20200710104920.13550-15-frank.chang@sifive.com>
+ <0dc40d00-a89d-9818-9fd3-2bce4141eca7@linaro.org>
+In-Reply-To: <0dc40d00-a89d-9818-9fd3-2bce4141eca7@linaro.org>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Mon, 13 Jul 2020 10:02:31 +0800
-Message-ID: <CAE_xrPhEW_VSRQVkthwu0NmBQYBZ11phLRgSbFqqFc9wZZ38Xg@mail.gmail.com>
-Subject: Re: [RFC 00/65] target/riscv: support vector extension v0.9
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: multipart/alternative; boundary="00000000000002e3f705aa4916b0"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::234;
- envelope-from=frank.chang@sifive.com; helo=mail-oi1-x234.google.com
+Date: Mon, 13 Jul 2020 10:04:57 +0800
+Message-ID: <CAE_xrPjb2RRd8BTg+1FSYBUVnV6DSSQrot0Z33NE9ej10C-uRg@mail.gmail.com>
+Subject: Re: [RFC 14/65] target/riscv: rvv-0.9: stride load and store
+ instructions
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Content-Type: multipart/alternative; boundary="000000000000b423d305aa491e7b"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::330;
+ envelope-from=frank.chang@sifive.com; helo=mail-ot1-x330.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -73,426 +79,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jul 2020 02:02:47 -0000
+X-List-Received-Date: Mon, 13 Jul 2020 02:05:11 -0000
 
---00000000000002e3f705aa4916b0
+--000000000000b423d305aa491e7b
 Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Jul 11, 2020 at 5:53 AM Alistair Francis <alistair23@gmail.com>
-wrote:
+On Sat, Jul 11, 2020 at 2:15 AM Richard Henderson <
+richard.henderson@linaro.org> wrote:
 
-> On Fri, Jul 10, 2020 at 5:59 AM <frank.chang@sifive.com> wrote:
-> >
-> > From: Frank Chang <frank.chang@sifive.com>
-> >
-> > This patchset implements the vector extension v0.9 for RISC-V on QEMU.
-> >
-> > This patchset is sent as RFC because RVV v0.9 is still in draft state.
-> > However, as RVV v1.0 should be ratified soon and there shouldn't be
-> > critical changes between RVV v1.0 and RVV v0.9. We would like to have
-> > the community to review RVV v0.9 implementations. Once RVV v1.0 is
-> > ratified, we will then upgrade to RVV v1.0.
-> >
-> > You can change the cpu argument: vext_spec to v0.9 (i.e. vext_spec=v0.9)
-> > to run with RVV v0.9 instructions.
+> On 7/10/20 3:48 AM, frank.chang@sifive.com wrote:
+> >  # *** Vector loads and stores are encoded within LOADFP/STORE-FP ***
+> > -vlb_v      ... 100 . 00000 ..... 000 ..... 0000111 @r2_nfvm
+> > -vlh_v      ... 100 . 00000 ..... 101 ..... 0000111 @r2_nfvm
+> > -vlw_v      ... 100 . 00000 ..... 110 ..... 0000111 @r2_nfvm
 >
-> Hello,
+> Again, something you can't do until 0.7.1 is not supported.
 >
-> First off thanks for the patches!
+> If you don't want to simultaneously support 0.7.1 and 0.9/1.0, then you
+> should
+> simply remove 0.7.1 in the first patch, so that there's no confusion.
 >
-> QEMU has a policy of accepting draft specs as experimental. We
-> currently support the v0.7.1 Vector extension for example, so this
-> does not need to be an RFC and can be a full patch series that can be
-> merged into master.
+> Is the rest of it mostly renaming?  You should definitely expand on what
+> you're
+> doing within each patch description.  A description of what has changed in
+> the
+> spec since 0.7.1 will help the reviewer validate that you've gotten all of
+> the
+> corner cases.
 >
-> I have applied the first few patches (PR should be out next week) and
-> they should be in the QEMU 5.1 release. QEMU is currently in a freeze
-> so I won't be able to merge this series for 5.1. In saying that please
-> feel free to continue to send patches to the list, they can still be
-> reviewed.
+> I am going to stop reviewing this patch series now, as I expect that most
+> of
+> the remaining patches will have similar comments.
 >
-> In general we would need to gracefully handle extension upgrades and
-> maintain backwards compatibility. This same principle doesn't apply to
-> experimental features though (such as the vector extension) so you are
-> free to remove support for the v0.7.1. For users who want v0.7.1
-> support they can always use the QEMU 5.1. release. Just make sure that
-> your series does not break bisectability.
 >
-> Thanks again for the patches!
->
-> Alistair
+> r~
 >
 
-Hi Alistair,
+Thanks for the reviews.
 
-Thanks for the review.
+I will rearrange my commits as what you suggest and add more comments in my
+next patchset.
 
-Currently I would prefer to drop 0.7.1 support because I don't know if
-there's
-a good way to keep both 0.7.1 and 0.9 opcodes. I'm afraid it would cause the
-encoding overlap while compiling with decodetree.
-
-Does decodetree support any feature for multi-version opcodes?
-Or if it can use something like C macros to compile with the opcodes by the
-vspec
-user assigned? If there's any good way to keep both versions, then I can
-try to rearrange
-my codes to support both vspecs.
-
-Otherwise, I'll keep on my current approach to drop the support of v0.7.1
-as the way
-Richard has mentioned:
-*If you don't want to simultaneously support 0.7.1 and 0.9/1.0, then you
-should*
-*simply remove 0.7.1 in the first patch, so that there's no confusion.*
-
-Any suggestion would be appreciated.
-
-Thanks
 --
 Frank Chang
 
-
-> >
-> > Chih-Min Chao (2):
-> >   fpu: fix float16 nan check
-> >   fpu: add api to handle alternative sNaN propagation
-> >
-> > Frank Chang (58):
-> >   target/riscv: fix rsub gvec tcg_assert_listed_vecop assertion
-> >   target/riscv: correct the gvec IR called in gen_vec_rsub16_i64()
-> >   target/riscv: fix return value of do_opivx_widen()
-> >   target/riscv: fix vill bit index in vtype register
-> >   target/riscv: remove vsll.vi, vsrl.vi, vsra.vi insns from using gvec
-> >   target/riscv: rvv-0.9: remove MLEN calculations
-> >   target/riscv: rvv-0.9: add fractional LMUL, VTA and VMA
-> >   target/riscv: rvv-0.9: update check functions
-> >   target/riscv: rvv-0.9: configure instructions
-> >   target/riscv: rvv-0.9: stride load and store instructions
-> >   target/riscv: rvv-0.9: index load and store instructions
-> >   target/riscv: rvv-0.9: fix address index overflow bug of indexed
-> >     load/store insns
-> >   target/riscv: rvv-0.9: fault-only-first unit stride load
-> >   target/riscv: rvv-0.9: amo operations
-> >   target/riscv: rvv-0.9: load/store whole register instructions
-> >   target/riscv: rvv-0.9: update vext_max_elems() for load/store insns
-> >   target/riscv: rvv-0.9: take fractional LMUL into vector max elements
-> >     calculation
-> >   target/riscv: rvv-0.9: floating-point square-root instruction
-> >   target/riscv: rvv-0.9: floating-point classify instructions
-> >   target/riscv: rvv-0.9: mask population count instruction
-> >   target/riscv: rvv-0.9: find-first-set mask bit instruction
-> >   target/riscv: rvv-0.9: set-X-first mask bit instructions
-> >   target/riscv: rvv-0.9: iota instruction
-> >   target/riscv: rvv-0.9: element index instruction
-> >   target/riscv: rvv-0.9: integer scalar move instructions
-> >   target/riscv: rvv-0.9: floating-point scalar move instructions
-> >   target/riscv: rvv-0.9: whole register move instructions
-> >   target/riscv: rvv-0.9: integer extension instructions
-> >   target/riscv: rvv-0.9: single-width averaging add and subtract
-> >     instructions
-> >   target/riscv: rvv-0.9: integer add-with-carry/subtract-with-borrow
-> >   target/riscv: rvv-0.9: narrowing integer right shift instructions
-> >   target/riscv: rvv-0.9: widening integer multiply-add instructions
-> >   target/riscv: rvv-0.9: quad-widening integer multiply-add instructions
-> >   target/riscv: rvv-0.9: integer merge and move instructions
-> >   target/riscv: rvv-0.9: single-width saturating add and subtract
-> >     instructions
-> >   target/riscv: rvv-0.9: integer comparison instructions
-> >   target/riscv: rvv-0.9: floating-point compare instructions
-> >   target/riscv: rvv-0.9: single-width integer reduction instructions
-> >   target/riscv: rvv-0.9: widening integer reduction instructions
-> >   target/riscv: rvv-0.9: mask-register logical instructions
-> >   target/riscv: rvv-0.9: register gather instructions
-> >   target/riscv: rvv-0.9: slide instructions
-> >   target/riscv: rvv-0.9: floating-point slide instructions
-> >   target/riscv: rvv-0.9: narrowing fixed-point clip instructions
-> >   target/riscv: rvv-0.9: floating-point move instructions
-> >   target/riscv: rvv-0.9: floating-point/integer type-convert
-> >     instructions
-> >   target/riscv: rvv-0.9: single-width floating-point reduction
-> >   target/riscv: rvv-0.9: widening floating-point reduction instructions
-> >   target/riscv: rvv-0.9: single-width scaling shift instructions
-> >   target/riscv: rvv-0.9: remove widening saturating scaled multiply-add
-> >   target/riscv: rvv-0.9: remove vmford.vv and vmford.vf
-> >   target/riscv: rvv-0.9: remove integer extract instruction
-> >   target/riscv: rvv-0.9: floating-point min/max instructions
-> >   target/riscv: rvv-0.9: widening floating-point/integer type-convert
-> >   target/riscv: rvv-0.9: narrowing floating-point/integer type-convert
-> >   softfloat: add fp16 and uint8/int8 interconvert functions
-> >   target/riscv: use softfloat lib float16 comparison functions
-> >   target/riscv: bump to RVV 0.9
-> >
-> > Kito Cheng (1):
-> >   fpu: implement full set compare for fp16
-> >
-> > LIU Zhiwei (4):
-> >   target/riscv: rvv-0.9: add vcsr register
-> >   target/riscv: rvv-0.9: add vector context status
-> >   target/riscv: rvv-0.9: update mstatus_vs by tb_flags
-> >   target/riscv: rvv-0.9: add vlenb register
-> >
-> >  fpu/softfloat-specialize.inc.c          |    4 +-
-> >  fpu/softfloat.c                         |  342 +++-
-> >  include/fpu/softfloat.h                 |   22 +
-> >  target/riscv/cpu.c                      |    9 +-
-> >  target/riscv/cpu.h                      |   68 +-
-> >  target/riscv/cpu_bits.h                 |    9 +
-> >  target/riscv/cpu_helper.c               |   13 +
-> >  target/riscv/csr.c                      |   53 +-
-> >  target/riscv/helper.h                   |  507 +++--
-> >  target/riscv/insn32-64.decode           |   18 +-
-> >  target/riscv/insn32.decode              |  282 +--
-> >  target/riscv/insn_trans/trans_rvv.inc.c | 2468 ++++++++++++++---------
-> >  target/riscv/internals.h                |   18 +-
-> >  target/riscv/translate.c                |   43 +-
-> >  target/riscv/vector_helper.c            | 2349 +++++++++++----------
-> >  15 files changed, 3833 insertions(+), 2372 deletions(-)
-> >
-> > --
-> > 2.17.1
-> >
-> >
->
-
---00000000000002e3f705aa4916b0
+--000000000000b423d305aa491e7b
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Sat, Jul 11, 2020 at 5:53 AM Alistair =
-Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a=
->&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail=
-_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
-,204);padding-left:1ex">On Fri, Jul 10, 2020 at 5:59 AM &lt;<a href=3D"mail=
-to:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a>&gt;=
- wrote:<br>
-&gt;<br>
-&gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=
-=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt;<br>
-&gt; This patchset implements the vector extension v0.9 for RISC-V on QEMU.=
-<br>
-&gt;<br>
-&gt; This patchset is sent as RFC because RVV v0.9 is still in draft state.=
-<br>
-&gt; However, as RVV v1.0 should be ratified soon and there shouldn&#39;t b=
-e<br>
-&gt; critical changes between RVV v1.0 and RVV v0.9. We would like to have<=
-br>
-&gt; the community to review RVV v0.9 implementations. Once RVV v1.0 is<br>
-&gt; ratified, we will then upgrade to RVV v1.0.<br>
-&gt;<br>
-&gt; You can change the cpu argument: vext_spec to v0.9 (i.e. vext_spec=3Dv=
-0.9)<br>
-&gt; to run with RVV v0.9 instructions.<br>
-<br>
-Hello,<br>
-<br>
-First off thanks for the patches!<br>
-<br>
-QEMU has a policy of accepting draft specs as experimental. We<br>
-currently support the v0.7.1 Vector extension for example, so this<br>
-does not need to be an RFC and can be a full patch series that can be<br>
-merged into master.<br>
-<br>
-I have applied the first few patches (PR should be out next week) and<br>
-they should be in the QEMU 5.1 release. QEMU is currently in a freeze<br>
-so I won&#39;t be able to merge this series for 5.1. In saying that please<=
-br>
-feel free to continue to send patches to the list, they can still be<br>
-reviewed.<br>
-<br>
-In general we would need to gracefully handle extension upgrades and<br>
-maintain backwards compatibility. This same principle doesn&#39;t apply to<=
-br>
-experimental features though (such as the vector extension) so you are<br>
-free to remove support for the v0.7.1. For users who want v0.7.1<br>
-support they can always use the QEMU 5.1. release. Just make sure that<br>
-your series does not break bisectability.<br>
-<br>
-Thanks again for the patches!<br>
-<br>
-Alistair<br></blockquote><div><br></div><div>Hi Alistair,</div><div><br></d=
-iv><div>Thanks for the review.</div><div><br></div><div>Currently I would p=
-refer to drop 0.7.1 support because I don&#39;t know if there&#39;s</div><d=
-iv>a good way to keep both 0.7.1 and 0.9 opcodes. I&#39;m afraid it would c=
-ause the</div><div>encoding overlap while compiling with decodetree.</div><=
-div><br></div><div>Does decodetree support any feature for multi-version op=
-codes?</div><div>Or if it can use something like C macros to compile with t=
-he opcodes by the vspec</div><div>user assigned? If there&#39;s any good wa=
-y to keep both versions, then I can try to rearrange</div><div>my codes to =
-support both vspecs.</div><div><br></div><div>Otherwise, I&#39;ll keep on m=
-y current approach to drop the support of v0.7.1 as the way</div><div>Richa=
-rd has mentioned:</div><div><i>If you don&#39;t want to simultaneously supp=
-ort 0.7.1 and 0.9/1.0, then you should</i><br></div><div><i>simply remove 0=
-.7.1 in the first patch, so that there&#39;s no confusion.</i><br></div><di=
-v><br></div><div>Any suggestion would be appreciated.</div><div><br></div><=
-div>Thanks</div><div>--</div><div>Frank Chang</div><div><br></div><blockquo=
+<div dir=3D"ltr"><div dir=3D"ltr">On Sat, Jul 11, 2020 at 2:15 AM Richard H=
+enderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hender=
+son@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquo=
 te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">
+solid rgb(204,204,204);padding-left:1ex">On 7/10/20 3:48 AM, <a href=3D"mai=
+lto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> wr=
+ote:<br>
+&gt;=C2=A0 # *** Vector loads and stores are encoded within LOADFP/STORE-FP=
+ ***<br>
+&gt; -vlb_v=C2=A0 =C2=A0 =C2=A0 ... 100 . 00000 ..... 000 ..... 0000111 @r2=
+_nfvm<br>
+&gt; -vlh_v=C2=A0 =C2=A0 =C2=A0 ... 100 . 00000 ..... 101 ..... 0000111 @r2=
+_nfvm<br>
+&gt; -vlw_v=C2=A0 =C2=A0 =C2=A0 ... 100 . 00000 ..... 110 ..... 0000111 @r2=
+_nfvm<br>
 <br>
-&gt;<br>
-&gt; Chih-Min Chao (2):<br>
-&gt;=C2=A0 =C2=A0fpu: fix float16 nan check<br>
-&gt;=C2=A0 =C2=A0fpu: add api to handle alternative sNaN propagation<br>
-&gt;<br>
-&gt; Frank Chang (58):<br>
-&gt;=C2=A0 =C2=A0target/riscv: fix rsub gvec tcg_assert_listed_vecop assert=
-ion<br>
-&gt;=C2=A0 =C2=A0target/riscv: correct the gvec IR called in gen_vec_rsub16=
-_i64()<br>
-&gt;=C2=A0 =C2=A0target/riscv: fix return value of do_opivx_widen()<br>
-&gt;=C2=A0 =C2=A0target/riscv: fix vill bit index in vtype register<br>
-&gt;=C2=A0 =C2=A0target/riscv: remove <a href=3D"http://vsll.vi" rel=3D"nor=
-eferrer" target=3D"_blank">vsll.vi</a>, <a href=3D"http://vsrl.vi" rel=3D"n=
-oreferrer" target=3D"_blank">vsrl.vi</a>, <a href=3D"http://vsra.vi" rel=3D=
-"noreferrer" target=3D"_blank">vsra.vi</a> insns from using gvec<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: remove MLEN calculations<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: add fractional LMUL, VTA and VMA<br=
->
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: update check functions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: configure instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: stride load and store instructions<=
-br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: index load and store instructions<b=
+Again, something you can&#39;t do until 0.7.1 is not supported.<br>
+<br>
+If you don&#39;t want to simultaneously support 0.7.1 and 0.9/1.0, then you=
+ should<br>
+simply remove 0.7.1 in the first patch, so that there&#39;s no confusion.<b=
 r>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: fix address index overflow bug of i=
-ndexed<br>
-&gt;=C2=A0 =C2=A0 =C2=A0load/store insns<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: fault-only-first unit stride load<b=
-r>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: amo operations<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: load/store whole register instructi=
-ons<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: update vext_max_elems() for load/st=
-ore insns<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: take fractional LMUL into vector ma=
-x elements<br>
-&gt;=C2=A0 =C2=A0 =C2=A0calculation<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: floating-point square-root instruct=
-ion<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: floating-point classify instruction=
-s<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: mask population count instruction<b=
-r>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: find-first-set mask bit instruction=
 <br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: set-X-first mask bit instructions<b=
-r>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: iota instruction<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: element index instruction<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: integer scalar move instructions<br=
->
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: floating-point scalar move instruct=
-ions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: whole register move instructions<br=
->
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: integer extension instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: single-width averaging add and subt=
-ract<br>
-&gt;=C2=A0 =C2=A0 =C2=A0instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: integer add-with-carry/subtract-wit=
-h-borrow<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: narrowing integer right shift instr=
-uctions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: widening integer multiply-add instr=
-uctions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: quad-widening integer multiply-add =
-instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: integer merge and move instructions=
+Is the rest of it mostly renaming?=C2=A0 You should definitely expand on wh=
+at you&#39;re<br>
+doing within each patch description.=C2=A0 A description of what has change=
+d in the<br>
+spec since 0.7.1 will help the reviewer validate that you&#39;ve gotten all=
+ of the<br>
+corner cases.<br>
 <br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: single-width saturating add and sub=
-tract<br>
-&gt;=C2=A0 =C2=A0 =C2=A0instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: integer comparison instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: floating-point compare instructions=
+I am going to stop reviewing this patch series now, as I expect that most o=
+f<br>
+the remaining patches will have similar comments.<br>
 <br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: single-width integer reduction inst=
-ructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: widening integer reduction instruct=
-ions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: mask-register logical instructions<=
-br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: register gather instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: slide instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: floating-point slide instructions<b=
-r>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: narrowing fixed-point clip instruct=
-ions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: floating-point move instructions<br=
->
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: floating-point/integer type-convert=
 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: single-width floating-point reducti=
-on<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: widening floating-point reduction i=
-nstructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: single-width scaling shift instruct=
-ions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: remove widening saturating scaled m=
-ultiply-add<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: remove vmford.vv and vmford.vf<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: remove integer extract instruction<=
-br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: floating-point min/max instructions=
-<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: widening floating-point/integer typ=
-e-convert<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: narrowing floating-point/integer ty=
-pe-convert<br>
-&gt;=C2=A0 =C2=A0softfloat: add fp16 and uint8/int8 interconvert functions<=
-br>
-&gt;=C2=A0 =C2=A0target/riscv: use softfloat lib float16 comparison functio=
-ns<br>
-&gt;=C2=A0 =C2=A0target/riscv: bump to RVV 0.9<br>
-&gt;<br>
-&gt; Kito Cheng (1):<br>
-&gt;=C2=A0 =C2=A0fpu: implement full set compare for fp16<br>
-&gt;<br>
-&gt; LIU Zhiwei (4):<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: add vcsr register<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: add vector context status<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: update mstatus_vs by tb_flags<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvv-0.9: add vlenb register<br>
-&gt;<br>
-&gt;=C2=A0 fpu/softfloat-specialize.inc.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- |=C2=A0 =C2=A0 4 +-<br>
-&gt;=C2=A0 fpu/softfloat.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 342 +++-<br>
-&gt;=C2=A0 include/fpu/softfloat.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A022 +<br>
-&gt;=C2=A0 target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 9 +-<br>
-&gt;=C2=A0 target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A068 +-<br>
-&gt;=C2=A0 target/riscv/cpu_bits.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A0 9 +<br>
-&gt;=C2=A0 target/riscv/cpu_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A013 +<br>
-&gt;=C2=A0 target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A053 +-<br>
-&gt;=C2=A0 target/riscv/helper.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 507 +++--<br>
-&gt;=C2=A0 target/riscv/insn32-64.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 =C2=A018 +-<br>
-&gt;=C2=A0 target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 |=C2=A0 282 +--<br>
-&gt;=C2=A0 target/riscv/insn_trans/trans_rvv.inc.c | 2468 ++++++++++++++---=
-------<br>
-&gt;=C2=A0 target/riscv/internals.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A018 +-<br>
-&gt;=C2=A0 target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A043 +-<br>
-&gt;=C2=A0 target/riscv/vector_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 | 2349 +++++++++++----------<br>
-&gt;=C2=A0 15 files changed, 3833 insertions(+), 2372 deletions(-)<br>
-&gt;<br>
-&gt; --<br>
-&gt; 2.17.1<br>
-&gt;<br>
-&gt;<br>
-</blockquote></div></div>
+r~<br></blockquote><div><br></div><div>Thanks for the reviews.</div><div><b=
+r></div><div>I will rearrange my commits as what you suggest and add more c=
+omments in my next patchset.</div><div><br></div><div>--</div><div>Frank Ch=
+ang</div></div></div>
 
---00000000000002e3f705aa4916b0--
+--000000000000b423d305aa491e7b--
 
