@@ -1,63 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jv4Nn-0005UY-91
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Jul 2020 15:44:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50722)
+	id 1jv9Bv-0005jR-6Z
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Jul 2020 20:53:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53874)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jv4Nl-0005U3-Mv; Mon, 13 Jul 2020 15:44:57 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:33577)
+ id 1jv9Bt-0005jC-4s; Mon, 13 Jul 2020 20:53:01 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:36459)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jv4Nk-000210-8I; Mon, 13 Jul 2020 15:44:57 -0400
-Received: by mail-io1-xd42.google.com with SMTP id d18so14840778ion.0;
- Mon, 13 Jul 2020 12:44:55 -0700 (PDT)
+ id 1jv9Br-0001Ip-DM; Mon, 13 Jul 2020 20:53:00 -0400
+Received: by mail-il1-x143.google.com with SMTP id x9so12865928ila.3;
+ Mon, 13 Jul 2020 17:52:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=3erh4qMgLZTK5xvcKDeAtxWG6rsClVq2Bn2xLBtZTq4=;
- b=AddhXMGfhKBQgo4V3pC2KFjt4VxiCuvzXq7XE6p0cQhrg3IMKZ8GeXbcP2h8IYtQDt
- Jrvq9DoQ2K2+/knlW0FTQF/sqNaM0qt4Thfpjuqphnhcj/83hDSqap6z4Mj5Sp9pmgag
- AiP/aDMnHbgS8qsfVI/agXNOrFa/6cb6akzlXC+rioCYJflIwjbWE/WK7ZChWCYebpgI
- jcls5Pfmo0sFSeucW/PhmyaXOy4Av/H3eFI51Zb8Js4eiCv13z8cn+Ckt4WHULmeAPWC
- T92dzWwg40KBgE0qru9CU7BmKEVaGe3j6odv58glKO2KcsJu4CUZz9iqDKg3fGllRYvf
- 1Z1w==
+ :cc; bh=MJhjNCWzJNXn+QVSmgxXQqbWXChXTBrCHICHemYz9O8=;
+ b=cPMU9M8dk8glKmoSkwQcFMab5vJ1swbIqBgHivDFby2zVEkn2AEKD3Ira+vw5XLGwy
+ gyrvfo6leIhXNAhaB33JrVoKkrVqqqNYxg2bKwkfOIJa6AXuSaBlRNDyPayWLiwHKywF
+ XBitFobaPNl6S9KVpv3jTfIysp75zjkXUG7RLNkAqNQQ7SFnY6ZC+iYTegjdnbWbLqgQ
+ OXnUjgRdEjO67FFKxPANLim82S5u9c6MR5M9zPplaujNDVT01ms3Ng+acUimaoe2soIV
+ SO4YPwINNp4lPfq08hsYxxLmAbYgTGaC6oMlAEDAyhXIeMMEBrmfu0nwMhTxubtMz8Pg
+ W6lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=3erh4qMgLZTK5xvcKDeAtxWG6rsClVq2Bn2xLBtZTq4=;
- b=qPtnOtVyqvVDCzjRadeJWBjI/JK4zIClvNGUycVDhrotMdaCNjyUtmBIDL0Tq1CZiM
- VxQ0sbNXq+8NeY1lakK11BWONP9PqtLcdOSWrx905bXYi1WDthbLSdNpuBby2wL+JSTf
- olufrDu+O4H1gg3jxuWOnncO9KeiZOyerqJqZ0/OfWTguUFGZftBGzqmnS/6o4mW5hY2
- y31vscahGVm3k/19UPdKzw5WOQPgEitJHoiFlltTHFLH8sKHg5tNSe4HBKYkAEU2pnlz
- IPkaG69bF/vyvmigPRMZCLvCDjhV3AI+/KjEEGooYewGrzvTKx4YOlM3fmNS0aUOzl80
- xyZQ==
-X-Gm-Message-State: AOAM530jbsbwmC7UNtXQKIntTIGmGDslLQY63A7llUkqhYkYFKyBYhdR
- TzBFMGG7R+5/ewm7sWTS0au4xg5MeJplWK9P9ZI=
-X-Google-Smtp-Source: ABdhPJwc8weT/A55twXeNnLTPokqLCp90/VWIZplm6FbEjfhKkfd3qc6SAp5UzQ5YC/31kHO54/TLHd3ZEfIEVAYGZE=
-X-Received: by 2002:a5d:9306:: with SMTP id l6mr1386321ion.105.1594669494780; 
- Mon, 13 Jul 2020 12:44:54 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=MJhjNCWzJNXn+QVSmgxXQqbWXChXTBrCHICHemYz9O8=;
+ b=Da7OiErpA6Q6YxPYa6GPcvRNN6x80yoT8EhvylAKNpXU6lwo2kT7X4NbzkuRR57rmD
+ 4riSPdEpdninN/jRocQPeXNhjNjUhBje6VwOFNcyhR+7662GnhoWle8IAnOgGxXc/Oe7
+ zh6l5h0ptiOy1NV853+ZkNevmiHl94CBe0dz2PYgqBjaVQSNfnv9lhTRl+k27I3JEtf1
+ 4oCn6U0C17oC2UBuu0cijxRsejJd2KwpIHNpivFqQTxJaR6EFMVd92YGGSraAR3kx9Js
+ 9I9Hn/g4fKDAjKLBdIA6UylOS+5jsQv+U0GTIsV2I4ALRx6sODdTkcS8O29cvPxlduBU
+ 3CVQ==
+X-Gm-Message-State: AOAM5312BjJzLITXf6YPPVSE9s1tnEgtxj5Hju8P1wtK9RRagwrEPKZu
+ jlZYrDSKideI0B1ti+2TvYXsQPov4CYvY9e7IpQ=
+X-Google-Smtp-Source: ABdhPJwQfWF7YjySqnAzCtsPzKHiszqowNPxxT+2seUjVEfn9DYLP3G9mA8dLOO8w2UCMfyqyjdvZ+nP2ks/atYMAp8=
+X-Received: by 2002:a05:6e02:d51:: with SMTP id
+ h17mr2526565ilj.131.1594687976823; 
+ Mon, 13 Jul 2020 17:52:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200706084550.24117-1-amergnat@baylibre.com>
- <CAKmqyKMhsF+X4L2Eahn3f-f-_F6ZUeTTimKWGibYo2VxVbFSiw@mail.gmail.com>
- <CAFGrd9qQ=VVdv15tGoTK_MF+3gwp1AKtuMBQCP_XMNOHJdQsnw@mail.gmail.com>
-In-Reply-To: <CAFGrd9qQ=VVdv15tGoTK_MF+3gwp1AKtuMBQCP_XMNOHJdQsnw@mail.gmail.com>
+References: <CAKmqyKPvn7dALUHhK=na1svr==oZ2rvyFOnw8FvRJZP23uHN7Q@mail.gmail.com>
+ <mhng-842d31db-ac34-4bab-a523-808f1f542101@palmerdabbelt-glaptop1>
+ <CAEUhbmUPxCmo-4SPm8JwG7emD0YfLeAMSgd7mWaCH2VDZJTtsA@mail.gmail.com>
+ <CAKmqyKN=HfpTs=d8RzXcaVYZQ-pH_kvO9VV5h4CKAtLSKaVqyQ@mail.gmail.com>
+ <CAEUhbmXUa-bSMXcHZyV=FybP9gxYsHFhbUPm15tw70+hNQfNEA@mail.gmail.com>
+In-Reply-To: <CAEUhbmXUa-bSMXcHZyV=FybP9gxYsHFhbUPm15tw70+hNQfNEA@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 13 Jul 2020 12:34:56 -0700
-Message-ID: <CAKmqyKPHZhCx9iTPAu-Zg5hyKqYCuUYG7t3p8rtTkOKHY4uEDA@mail.gmail.com>
-Subject: Re: [PATCH v1] target/riscv: fix pmp implementation
-To: Alexandre Mergnat <amergnat@baylibre.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
+Date: Mon, 13 Jul 2020 17:42:58 -0700
+Message-ID: <CAKmqyKMos-ujKL8X3AZY0_UX0ht6UUJuDEs1yu6NCi=-75LabA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] hw/riscv: sifive_u: Provide a reliable way for
+ bootloader to detect whether it is running in QEMU
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Palmer Dabbelt <palmerdabbelt@google.com>,
+ Bin Meng <bin.meng@windriver.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- baylibre-upstreaming@groups.io, 
- Nicolas Royer <nroyer@baylibre.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -80,79 +82,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jul 2020 19:44:57 -0000
+X-List-Received-Date: Tue, 14 Jul 2020 00:53:02 -0000
 
-On Mon, Jul 13, 2020 at 3:10 AM Alexandre Mergnat <amergnat@baylibre.com> w=
-rote:
+On Sun, Jul 12, 2020 at 6:16 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Le ven. 10 juil. 2020 =C3=A0 22:35, Alistair Francis <alistair23@gmail.co=
-m> a =C3=A9crit :
-> >
-> > On Mon, Jul 6, 2020 at 2:45 AM Alexandre Mergnat <amergnat@baylibre.com=
-> wrote:
-> > >
-> > > The end address calculation for NA4 mode is wrong because the address
-> > > used isn't shifted.
-> > >
-> > > That imply all NA4 setup are not applied by the PMP.
-> >
-> > I'm not sure what you mean here, can you clarify this?
+> Hi Alistair,
 >
-> I'm just saying NA4 configuration doesn't work properly on QEMU (It
-> doesn't watch 4byte but a huge range)
-> because the end address calculation is wrong.
+> On Sun, Jul 12, 2020 at 12:04 AM Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Thu, Jul 9, 2020 at 5:50 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >
+> > > Hi Palmer,
+> > >
+> > > On Fri, Jul 10, 2020 at 8:45 AM Palmer Dabbelt <palmerdabbelt@google.com> wrote:
+> > > >
+> > > > On Thu, 09 Jul 2020 15:09:18 PDT (-0700), alistair23@gmail.com wrote:
+> > > > > On Thu, Jul 9, 2020 at 3:07 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > > >>
+> > > > >> From: Bin Meng <bin.meng@windriver.com>
+> > > > >>
+> > > > >> The reset vector codes are subject to change, e.g.: with recent
+> > > > >> fw_dynamic type image support, it breaks oreboot again.
+> > > > >
+> > > > > This is a recurring problem, I have another patch for Oreboot to fix
+> > > > > the latest breakage.
+> > > > >
+> > > > >>
+> > > > >> Add a subregion in the MROM, with the size of machine RAM stored,
+> > > > >> so that we can provide a reliable way for bootloader to detect
+> > > > >> whether it is running in QEMU.
+> > > > >
+> > > > > I don't really like this though. I would prefer that we don't
+> > > > > encourage guest software to behave differently on QEMU. I don't think
+> > > > > other upstream boards do this.
+> > > >
+> > > > I agree.  If you want an explicitly virtual board, use the virt board.  Users
+> > > > of sifive_u are presumably trying to do their best to test against what the
+> > > > hardware does without actually using the hardware.  Otherwise there should be
+> > > > no reason to use the sifive_u board, as it's just sticking a layer of
+> > > > complexity in the middle of everything.
+> > >
+> > > Understood. Then let's drop this patch.
+> > >
+> > > >
+> > > > > Besides Oreboot setting up the clocks are there any other users of this?
+> > > >
+> > > > IIRC we have a scheme for handling the clock setup in QEMU where we accept
+> > > > pretty much any control write and then just return reads that say the PLLs have
+> > > > locked.  I'd be in favor of improving the scheme to improve compatibility with
+> > > > the actual hardware, but adding some way for programs to skip the clocks
+> > > > because they know they're in QEMU seems like the wrong way to go.
+> > > >
+> > >
+> > > Yep, that's my question to Oreboot too.
+> > >
+> > > U-Boot SPL can boot with QEMU and no problem was seen with clock
+> > > settings in PRCI model in QEMU.
+> >
+> > I don't think it's an unsolvable problem. There is just little work on
+> > Oreboot to run on QEMU. I can dig into it a bit and see if I can find
+> > a better fix on the Oreboot side.
+> >
+>
+> Can we remove the QEMU detect logic completely in Oreboot? Except the
+> QSPI controller QEMU should be able to run Oreboot since it runs
+> U-Boot SPL.
 
-Ok, I replaced the original sentence with:
-
-It doesn't watch 4 bytes but a huge range because the end address
-calculation is wrong.
-
-and changed the title to: target/riscv: Fix pmp NA4 implementation
-
-and applied it to the RISC-V tree.
+That is the eventual goal.
 
 Alistair
 
 >
-> >
-> > >
-> > > The solution is to use the shifted address calculated for start addre=
-ss
-> > > variable.
-> > >
-> > > Modifications are tested on Zephyr OS userspace test suite which work=
-s
-> > > for other RISC-V boards (E31 and E34 core).
-> > >
-> > > Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
-> >
-> > Otherwise:
-> >
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> >
-> > Alistair
-> >
-> > > ---
-> > >  target/riscv/pmp.c | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> > > index 9418660f1b..2a2b9f5363 100644
-> > > --- a/target/riscv/pmp.c
-> > > +++ b/target/riscv/pmp.c
-> > > @@ -171,7 +171,7 @@ static void pmp_update_rule(CPURISCVState *env, u=
-int32_t pmp_index)
-> > >
-> > >      case PMP_AMATCH_NA4:
-> > >          sa =3D this_addr << 2; /* shift up from [xx:0] to [xx+2:2] *=
-/
-> > > -        ea =3D (this_addr + 4u) - 1u;
-> > > +        ea =3D (sa + 4u) - 1u;
-> > >          break;
-> > >
-> > >      case PMP_AMATCH_NAPOT:
-> > > --
-> > > 2.17.1
-> > >
-> > >
+> Regards,
+> Bin
 
