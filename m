@@ -1,75 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jv9Bv-0005jR-6Z
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Jul 2020 20:53:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53874)
+	id 1jvBAd-000560-S9
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Jul 2020 22:59:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46152)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jv9Bt-0005jC-4s; Mon, 13 Jul 2020 20:53:01 -0400
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:36459)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1jvBAc-00055e-IC
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2020 22:59:50 -0400
+Received: from mail-ot1-x333.google.com ([2607:f8b0:4864:20::333]:33036)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jv9Br-0001Ip-DM; Mon, 13 Jul 2020 20:53:00 -0400
-Received: by mail-il1-x143.google.com with SMTP id x9so12865928ila.3;
- Mon, 13 Jul 2020 17:52:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1jvBAa-0003mg-Da
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2020 22:59:50 -0400
+Received: by mail-ot1-x333.google.com with SMTP id h13so11724194otr.0
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2020 19:59:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=MJhjNCWzJNXn+QVSmgxXQqbWXChXTBrCHICHemYz9O8=;
- b=cPMU9M8dk8glKmoSkwQcFMab5vJ1swbIqBgHivDFby2zVEkn2AEKD3Ira+vw5XLGwy
- gyrvfo6leIhXNAhaB33JrVoKkrVqqqNYxg2bKwkfOIJa6AXuSaBlRNDyPayWLiwHKywF
- XBitFobaPNl6S9KVpv3jTfIysp75zjkXUG7RLNkAqNQQ7SFnY6ZC+iYTegjdnbWbLqgQ
- OXnUjgRdEjO67FFKxPANLim82S5u9c6MR5M9zPplaujNDVT01ms3Ng+acUimaoe2soIV
- SO4YPwINNp4lPfq08hsYxxLmAbYgTGaC6oMlAEDAyhXIeMMEBrmfu0nwMhTxubtMz8Pg
- W6lg==
+ :cc; bh=ZmRaRt6MxQlbtjG3pd9shXgA2Px7RKTIjzuc+Um3MjM=;
+ b=FwbpxDPWwE8Ub3UJMX1OFqvv2pgQGn4d98+yomx4QOjr9fEiyZaI/Xm8rZkQ16gV8v
+ 7KX5iT7Ol+PUTonu233ggxfrO1AQV8UoIWKXg74YugAXOJQpxwEideM+Lk4OAieJNKcf
+ biMmnPMS0gS+R0wN9I9ZidP+8dNubjzjHn16qiYNRBaxvbPOW6Jui7rP56/0VlE+zw8M
+ xM/w29zvc11Lpz26KAs/TFeJFstigRqyCaiBNW9ETCO2wqCY4FBzhWeIToKVj5tMkOLc
+ LUDbJxhIT5WRHTqpWcZ+NXl2Luqv/NwJ65X7A2/qPO7s2dQaFuqVe8edwt9RcON0lGnZ
+ 8FLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=MJhjNCWzJNXn+QVSmgxXQqbWXChXTBrCHICHemYz9O8=;
- b=Da7OiErpA6Q6YxPYa6GPcvRNN6x80yoT8EhvylAKNpXU6lwo2kT7X4NbzkuRR57rmD
- 4riSPdEpdninN/jRocQPeXNhjNjUhBje6VwOFNcyhR+7662GnhoWle8IAnOgGxXc/Oe7
- zh6l5h0ptiOy1NV853+ZkNevmiHl94CBe0dz2PYgqBjaVQSNfnv9lhTRl+k27I3JEtf1
- 4oCn6U0C17oC2UBuu0cijxRsejJd2KwpIHNpivFqQTxJaR6EFMVd92YGGSraAR3kx9Js
- 9I9Hn/g4fKDAjKLBdIA6UylOS+5jsQv+U0GTIsV2I4ALRx6sODdTkcS8O29cvPxlduBU
- 3CVQ==
-X-Gm-Message-State: AOAM5312BjJzLITXf6YPPVSE9s1tnEgtxj5Hju8P1wtK9RRagwrEPKZu
- jlZYrDSKideI0B1ti+2TvYXsQPov4CYvY9e7IpQ=
-X-Google-Smtp-Source: ABdhPJwQfWF7YjySqnAzCtsPzKHiszqowNPxxT+2seUjVEfn9DYLP3G9mA8dLOO8w2UCMfyqyjdvZ+nP2ks/atYMAp8=
-X-Received: by 2002:a05:6e02:d51:: with SMTP id
- h17mr2526565ilj.131.1594687976823; 
- Mon, 13 Jul 2020 17:52:56 -0700 (PDT)
+ bh=ZmRaRt6MxQlbtjG3pd9shXgA2Px7RKTIjzuc+Um3MjM=;
+ b=NMFRQCuJL3WQG2Y/bw7TvyF/b4J5Q5Ro+dJAS6H/T3yppiPEzA1JEGKi4y8bVqmyN+
+ pIDgohF8VsOeU01pdOHU7JumlRSdptmut4nH7AGbUGmWs/SFbVtp1xlsE52MN6muWnsf
+ omNPa4QU3eGaWGOzSd3EGdwNf0u3bgaEaKGntyQRl/K6bHdWoUwqk/p6uvEgPlYGK4pw
+ fh+iIClygFGOyqOEDBuUsquAIVQEwJH6rKackdgx2h+2lsoBb1WvjA5Zx+y1fUDnoDR+
+ n16Q2aXfm489ytCz4T1ojjyQbbzsNAaxJXaTKwQROX5M/TRMnRwWDEXwOWIoLDalY+GS
+ /dfA==
+X-Gm-Message-State: AOAM533i2R/JbOwcmNg77EK6Z9vuuFrPgjUa0siOE1JFoJ93t/Nfa0B4
+ DrR0Xwu7cQm5IG4XDK9nBtWzfGr1UfzbJU9LlfJspw==
+X-Google-Smtp-Source: ABdhPJwhiZU3hQX2SIjv7UIF6DslwV+8hkEVkUy9xV9lsbgYCel+RqP8EZ2XgUR81QtDhfjZrqMucIjMWH4pRQ4DMso=
+X-Received: by 2002:a9d:5e93:: with SMTP id f19mr2112218otl.175.1594695586645; 
+ Mon, 13 Jul 2020 19:59:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAKmqyKPvn7dALUHhK=na1svr==oZ2rvyFOnw8FvRJZP23uHN7Q@mail.gmail.com>
- <mhng-842d31db-ac34-4bab-a523-808f1f542101@palmerdabbelt-glaptop1>
- <CAEUhbmUPxCmo-4SPm8JwG7emD0YfLeAMSgd7mWaCH2VDZJTtsA@mail.gmail.com>
- <CAKmqyKN=HfpTs=d8RzXcaVYZQ-pH_kvO9VV5h4CKAtLSKaVqyQ@mail.gmail.com>
- <CAEUhbmXUa-bSMXcHZyV=FybP9gxYsHFhbUPm15tw70+hNQfNEA@mail.gmail.com>
-In-Reply-To: <CAEUhbmXUa-bSMXcHZyV=FybP9gxYsHFhbUPm15tw70+hNQfNEA@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 13 Jul 2020 17:42:58 -0700
-Message-ID: <CAKmqyKMos-ujKL8X3AZY0_UX0ht6UUJuDEs1yu6NCi=-75LabA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] hw/riscv: sifive_u: Provide a reliable way for
- bootloader to detect whether it is running in QEMU
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Palmer Dabbelt <palmerdabbelt@google.com>,
- Bin Meng <bin.meng@windriver.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
+References: <20200710104920.13550-1-frank.chang@sifive.com>
+ <20200710104920.13550-6-frank.chang@sifive.com>
+ <452e8bc7-4622-77c2-ec81-9aa6f25705fc@linaro.org>
+In-Reply-To: <452e8bc7-4622-77c2-ec81-9aa6f25705fc@linaro.org>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Tue, 14 Jul 2020 10:59:35 +0800
+Message-ID: <CAE_xrPjWr2KShiwaCZi1DXueFnRAz41D3j9_k2vBL2j7-d9WOQ@mail.gmail.com>
+Subject: Re: [RFC 05/65] target/riscv: remove vsll.vi, vsrl.vi, vsra.vi insns
+ from using gvec
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Content-Type: multipart/alternative; boundary="000000000000f79cb205aa5dffb0"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::333;
+ envelope-from=frank.chang@sifive.com; helo=mail-ot1-x333.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,77 +80,119 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jul 2020 00:53:02 -0000
+X-List-Received-Date: Tue, 14 Jul 2020 02:59:50 -0000
 
-On Sun, Jul 12, 2020 at 6:16 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> Hi Alistair,
->
-> On Sun, Jul 12, 2020 at 12:04 AM Alistair Francis <alistair23@gmail.com> wrote:
+--000000000000f79cb205aa5dffb0
+Content-Type: text/plain; charset="UTF-8"
+
+On Sat, Jul 11, 2020 at 12:27 AM Richard Henderson <
+richard.henderson@linaro.org> wrote:
+
+> On 7/10/20 3:48 AM, frank.chang@sifive.com wrote:
+> > From: Frank Chang <frank.chang@sifive.com>
 > >
-> > On Thu, Jul 9, 2020 at 5:50 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > Hi Palmer,
-> > >
-> > > On Fri, Jul 10, 2020 at 8:45 AM Palmer Dabbelt <palmerdabbelt@google.com> wrote:
-> > > >
-> > > > On Thu, 09 Jul 2020 15:09:18 PDT (-0700), alistair23@gmail.com wrote:
-> > > > > On Thu, Jul 9, 2020 at 3:07 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > >>
-> > > > >> From: Bin Meng <bin.meng@windriver.com>
-> > > > >>
-> > > > >> The reset vector codes are subject to change, e.g.: with recent
-> > > > >> fw_dynamic type image support, it breaks oreboot again.
-> > > > >
-> > > > > This is a recurring problem, I have another patch for Oreboot to fix
-> > > > > the latest breakage.
-> > > > >
-> > > > >>
-> > > > >> Add a subregion in the MROM, with the size of machine RAM stored,
-> > > > >> so that we can provide a reliable way for bootloader to detect
-> > > > >> whether it is running in QEMU.
-> > > > >
-> > > > > I don't really like this though. I would prefer that we don't
-> > > > > encourage guest software to behave differently on QEMU. I don't think
-> > > > > other upstream boards do this.
-> > > >
-> > > > I agree.  If you want an explicitly virtual board, use the virt board.  Users
-> > > > of sifive_u are presumably trying to do their best to test against what the
-> > > > hardware does without actually using the hardware.  Otherwise there should be
-> > > > no reason to use the sifive_u board, as it's just sticking a layer of
-> > > > complexity in the middle of everything.
-> > >
-> > > Understood. Then let's drop this patch.
-> > >
-> > > >
-> > > > > Besides Oreboot setting up the clocks are there any other users of this?
-> > > >
-> > > > IIRC we have a scheme for handling the clock setup in QEMU where we accept
-> > > > pretty much any control write and then just return reads that say the PLLs have
-> > > > locked.  I'd be in favor of improving the scheme to improve compatibility with
-> > > > the actual hardware, but adding some way for programs to skip the clocks
-> > > > because they know they're in QEMU seems like the wrong way to go.
-> > > >
-> > >
-> > > Yep, that's my question to Oreboot too.
-> > >
-> > > U-Boot SPL can boot with QEMU and no problem was seen with clock
-> > > settings in PRCI model in QEMU.
+> > vsll.vi, vsrl.vi, vsra.vi cannot use shli gvec as it requires the
+> > shift immediate value to be within the range: [0.. SEW bits].
+> > Otherwise, it will hit the assertion:
+> > tcg_debug_assert(shift >= 0 && shift < (8 << vece));
 > >
-> > I don't think it's an unsolvable problem. There is just little work on
-> > Oreboot to run on QEMU. I can dig into it a bit and see if I can find
-> > a better fix on the Oreboot side.
-> >
+> > However, RVV spec does not have such constraint, therefore we have to
+> > use helper functions instead.
 >
-> Can we remove the QEMU detect logic completely in Oreboot? Except the
-> QSPI controller QEMU should be able to run Oreboot since it runs
-> U-Boot SPL.
-
-That is the eventual goal.
-
-Alistair
-
+> Why do you say that?  It does have such a constraint:
 >
-> Regards,
-> Bin
+> # Only the low lg2(SEW) bits are read to obtain the shift amount from a
+> register value.
+>
+> While that only talks about the register value, I sincerely doubt that the
+> same
+> truncation does not actually apply to immediates.
+>
+> And if the entire immediate value does apply, the manual should certainly
+> specify what should happen in that case.  And at present it doesn't.
+>
+> It seems to me the bug is the bare use of GEN_OPIVI_GVEC_TRANS and thence
+> do_opivi_gvec.  The ZX parameter should be extended to more than just
+> "zero vs
+> sign-extend", it should have an option for truncating the immediate to
+> s->sew.
+>
+>
+> r~
+>
+
+The latest spec specified:
+
+Only the low *lg2(SEW) bits* are read to obtain the shift amount from
+a *register
+value*.
+The *immediate* is treated as an *unsigned shift amount*, with a *maximum
+shift amount of 31*.
+
+Looks like the shift amount in the immediate value is not relevant with SEW
+setting.
+If so, is it better to just use do_opivi_gvec() and implement the logic by
+our own rather than using gvec IR?
+
+Frank Chang
+
+--000000000000f79cb205aa5dffb0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Sat, Jul 11, 2020 at 12:27 AM Richard =
+Henderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hende=
+rson@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
+ solid rgb(204,204,204);padding-left:1ex">On 7/10/20 3:48 AM, <a href=3D"ma=
+ilto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> w=
+rote:<br>
+&gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=
+=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt; <br>
+&gt; <a href=3D"http://vsll.vi" rel=3D"noreferrer" target=3D"_blank">vsll.v=
+i</a>, <a href=3D"http://vsrl.vi" rel=3D"noreferrer" target=3D"_blank">vsrl=
+.vi</a>, <a href=3D"http://vsra.vi" rel=3D"noreferrer" target=3D"_blank">vs=
+ra.vi</a> cannot use shli gvec as it requires the<br>
+&gt; shift immediate value to be within the range: [0.. SEW bits].<br>
+&gt; Otherwise, it will hit the assertion:<br>
+&gt; tcg_debug_assert(shift &gt;=3D 0 &amp;&amp; shift &lt; (8 &lt;&lt; vec=
+e));<br>
+&gt; <br>
+&gt; However, RVV spec does not have such constraint, therefore we have to<=
+br>
+&gt; use helper functions instead.<br>
+<br>
+Why do you say that?=C2=A0 It does have such a constraint:<br>
+<br>
+# Only the low lg2(SEW) bits are read to obtain the shift amount from a<br>
+register value.<br>
+<br>
+While that only talks about the register value, I sincerely doubt that the =
+same<br>
+truncation does not actually apply to immediates.<br>
+<br>
+And if the entire immediate value does apply, the manual should certainly<b=
+r>
+specify what should happen in that case.=C2=A0 And at present it doesn&#39;=
+t.<br>
+<br>
+It seems to me the bug is the bare use of GEN_OPIVI_GVEC_TRANS and thence<b=
+r>
+do_opivi_gvec.=C2=A0 The ZX parameter should be extended to more than just =
+&quot;zero vs<br>
+sign-extend&quot;, it should have an option for truncating the immediate to=
+ s-&gt;sew.<br>
+<br>
+<br>
+r~<br></blockquote><div><br></div><div>The latest spec specified:</div><div=
+><br></div>Only the low <b>lg2(SEW) bits</b> are read to obtain the shift a=
+mount from a <b>register value</b>.<br><div>The <b>immediate</b> is treated=
+ as an <b>unsigned shift amount</b>, with a <b>maximum shift amount of 31</=
+b>.</div><div><br></div><div>Looks like the shift amount in the immediate v=
+alue is not relevant with SEW setting.</div><div>If so, is it better to jus=
+t use do_opivi_gvec() and implement the logic by our own rather than using =
+gvec IR?</div><div><br></div><div>Frank Chang</div></div></div>
+
+--000000000000f79cb205aa5dffb0--
 
