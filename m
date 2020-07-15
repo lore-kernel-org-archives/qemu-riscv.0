@@ -1,59 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jvXXh-0003XJ-1d
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Jul 2020 22:53:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39626)
+	id 1jvi1l-0007SC-4j
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Jul 2020 10:04:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43944)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jvXXe-0003WC-FF; Tue, 14 Jul 2020 22:53:06 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:33097)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jvXXZ-0001zp-TL; Tue, 14 Jul 2020 22:53:06 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07516912|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.0747618-0.0105898-0.914648;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03306; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=8; RT=8; SR=0; TI=SMTPD_---.I1rnTxH_1594781569; 
-Received: from 30.225.208.24(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.I1rnTxH_1594781569)
- by smtp.aliyun-inc.com(10.147.41.178);
- Wed, 15 Jul 2020 10:52:49 +0800
-Subject: Re: [RFC 05/65] target/riscv: remove vsll.vi, vsrl.vi, vsra.vi insns
- from using gvec
-To: Frank Chang <frank.chang@sifive.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-References: <20200710104920.13550-1-frank.chang@sifive.com>
- <20200710104920.13550-6-frank.chang@sifive.com>
- <452e8bc7-4622-77c2-ec81-9aa6f25705fc@linaro.org>
- <CAE_xrPjWr2KShiwaCZi1DXueFnRAz41D3j9_k2vBL2j7-d9WOQ@mail.gmail.com>
- <0ccc7311-02f4-821f-6272-73ab600a8cda@linaro.org>
- <CAE_xrPg9otd9tbpHL_1DmvZ=3nFNdgkse_nUe=fApTQt1hPCYA@mail.gmail.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <5e56bedb-b404-19f9-4dbf-dfd675aee383@c-sky.com>
-Date: Wed, 15 Jul 2020 10:52:49 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jvi1j-0007OW-Nv
+ for qemu-riscv@nongnu.org; Wed, 15 Jul 2020 10:04:51 -0400
+Received: from us-smtp-2.mimecast.com ([207.211.31.81]:44004
+ helo=us-smtp-delivery-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1jvi1h-0007JB-G2
+ for qemu-riscv@nongnu.org; Wed, 15 Jul 2020 10:04:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1594821888;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=AkBlyp40DiIM7TNyjoB2z5dsCGgUHKGkbokmCXgV6lk=;
+ b=fPaN07xLwRJtlwtZI2esQOj7uwYM0SPXDfC/uXiMTPpZ1xoCklfl6ZP/RErfk4dEqyda+S
+ cghH6lyUTLuHdvBsnjNMNiUt8DlFLLIlLMBzLECTmUq5yJfFsJKU4L6sQQ5OYv3sw7xI9h
+ hKb964MOdVPArAfMkC0z8sIrmwD24tU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-447-M1RE-x-FPd2E0MSC6IETBw-1; Wed, 15 Jul 2020 10:04:44 -0400
+X-MC-Unique: M1RE-x-FPd2E0MSC6IETBw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DD5EB18C63C6;
+ Wed, 15 Jul 2020 14:04:42 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-112-143.ams2.redhat.com
+ [10.36.112.143])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 3E3E479D00;
+ Wed, 15 Jul 2020 14:04:42 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id ABBD4113860C; Wed, 15 Jul 2020 16:04:40 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: b.galvani@gmail.com, peter.maydell@linaro.org, nieklinnenbank@gmail.com,
+ sundeep.lkml@gmail.com, alistair@alistair23.me, edgar.iglesias@gmail.com,
+ mark.cave-ayland@ilande.co.uk, palmer@dabbelt.com,
+ sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, thuth@redhat.com
+Subject: [PATCH for-5.1 2/2] hw: Mark nd_table[] misuse in realize methods
+ FIXME
+Date: Wed, 15 Jul 2020 16:04:40 +0200
+Message-Id: <20200715140440.3540942-3-armbru@redhat.com>
+In-Reply-To: <20200715140440.3540942-1-armbru@redhat.com>
+References: <20200715140440.3540942-1-armbru@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <CAE_xrPg9otd9tbpHL_1DmvZ=3nFNdgkse_nUe=fApTQt1hPCYA@mail.gmail.com>
-Content-Type: multipart/alternative;
- boundary="------------8C543CA8B571EB653508EBBC"
-Content-Language: en-US
-Received-SPF: none client-ip=121.197.200.217;
- envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/14 22:52:51
-X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=207.211.31.81; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/15 02:01:40
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -66,248 +78,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2020 02:53:06 -0000
+X-List-Received-Date: Wed, 15 Jul 2020 14:04:52 -0000
 
-This is a multi-part message in MIME format.
---------------8C543CA8B571EB653508EBBC
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+nd_table[] contains NIC configuration for boards to pick up.  Device
+code has no business looking there.  Several devices do it anyway.
+Two of them already have a suitable FIXME comment: "allwinner-a10" and
+"msf2-soc".  Copy it to the others: "allwinner-h3", "xlnx-versal",
+"xlnx,zynqmp", "sparc32-ledma", "riscv.sifive.u.soc".
 
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+---
+ hw/arm/allwinner-h3.c | 1 +
+ hw/arm/xlnx-versal.c  | 1 +
+ hw/arm/xlnx-zynqmp.c  | 1 +
+ hw/dma/sparc32_dma.c  | 1 +
+ hw/riscv/sifive_u.c   | 1 +
+ 5 files changed, 5 insertions(+)
 
+diff --git a/hw/arm/allwinner-h3.c b/hw/arm/allwinner-h3.c
+index 8e09468e86..ff92ded82c 100644
+--- a/hw/arm/allwinner-h3.c
++++ b/hw/arm/allwinner-h3.c
+@@ -358,6 +358,7 @@ static void allwinner_h3_realize(DeviceState *dev, Error **errp)
+                               "sd-bus");
+ 
+     /* EMAC */
++    /* FIXME use qdev NIC properties instead of nd_table[] */
+     if (nd_table[0].used) {
+         qemu_check_nic_model(&nd_table[0], TYPE_AW_SUN8I_EMAC);
+         qdev_set_nic_properties(DEVICE(&s->emac), &nd_table[0]);
+diff --git a/hw/arm/xlnx-versal.c b/hw/arm/xlnx-versal.c
+index ead038b971..e3aa4bd1e5 100644
+--- a/hw/arm/xlnx-versal.c
++++ b/hw/arm/xlnx-versal.c
+@@ -160,6 +160,7 @@ static void versal_create_gems(Versal *s, qemu_irq *pic)
+         object_initialize_child(OBJECT(s), name, &s->lpd.iou.gem[i],
+                                 TYPE_CADENCE_GEM);
+         dev = DEVICE(&s->lpd.iou.gem[i]);
++        /* FIXME use qdev NIC properties instead of nd_table[] */
+         if (nd->used) {
+             qemu_check_nic_model(nd, "cadence_gem");
+             qdev_set_nic_properties(dev, nd);
+diff --git a/hw/arm/xlnx-zynqmp.c b/hw/arm/xlnx-zynqmp.c
+index 772cfa3771..5855e5d5bf 100644
+--- a/hw/arm/xlnx-zynqmp.c
++++ b/hw/arm/xlnx-zynqmp.c
+@@ -455,6 +455,7 @@ static void xlnx_zynqmp_realize(DeviceState *dev, Error **errp)
+     for (i = 0; i < XLNX_ZYNQMP_NUM_GEMS; i++) {
+         NICInfo *nd = &nd_table[i];
+ 
++        /* FIXME use qdev NIC properties instead of nd_table[] */
+         if (nd->used) {
+             qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+             qdev_set_nic_properties(DEVICE(&s->gem[i]), nd);
+diff --git a/hw/dma/sparc32_dma.c b/hw/dma/sparc32_dma.c
+index 9459178866..bcd1626fbd 100644
+--- a/hw/dma/sparc32_dma.c
++++ b/hw/dma/sparc32_dma.c
+@@ -341,6 +341,7 @@ static void sparc32_ledma_device_realize(DeviceState *dev, Error **errp)
+     DeviceState *d;
+     NICInfo *nd = &nd_table[0];
+ 
++    /* FIXME use qdev NIC properties instead of nd_table[] */
+     qemu_check_nic_model(nd, TYPE_LANCE);
+ 
+     d = qdev_new(TYPE_LANCE);
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 19a976c9a6..e5682c38a9 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -714,6 +714,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     }
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->otp), 0, memmap[SIFIVE_U_OTP].base);
+ 
++    /* FIXME use qdev NIC properties instead of nd_table[] */
+     if (nd->used) {
+         qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+         qdev_set_nic_properties(DEVICE(&s->gem), nd);
+-- 
+2.26.2
 
-On 2020/7/14 21:59, Frank Chang wrote:
-> On Tue, Jul 14, 2020 at 9:21 PM Richard Henderson 
-> <richard.henderson@linaro.org <mailto:richard.henderson@linaro.org>> 
-> wrote:
->
->     On 7/13/20 7:59 PM, Frank Chang wrote:
->     > The latest spec specified:
->     >
->     > Only the low *lg2(SEW) bits* are read to obtain the shift amount
->     from a
->     > *register value*.
->     > The *immediate* is treated as an *unsigned shift amount*, with a
->     *maximum shift
->     > amount of 31*.
->
->     Which, I hope you will agree is underspecified, and should be
->     reported as a bug
->     in the manual.
->
->
-> Yes, you're correct.
-> I found out I missed the MASK part in GEN_VEXT_SHIFT_VV() macro,
-> which this macro is shared between OPIVV and OPIVI format of instructions.
-> So the same masking methodology should be applied to shift amounts 
-> coming from both register and immediate value.
-> Spike also does something like:
-> /vs2 >> (zimm5 & (sew - 1) & 0x1f);/ for SEW = 8.
->
-> I think spec is kind of misleading to the reader by the way it expresses.
->
->
->     > Looks like the shift amount in the immediate value is not
->     relevant with SEW
->     > setting.
->
->     How can it not be?  It is when the value comes from a register...
->
->     > If so, is it better to just use do_opivi_gvec() and implement
->     the logic by our
->     > own rather than using gvec IR?
->
->     No, it is not.  What is the logic you would apply on your own? 
->     There should be
->     a right answer.
->
->
-> I was talking about just calling GEN_OPIVI_TRANS() to generate the 
-> helper functions
-> defined in vector_helper.c as what I'm doing in the original patch.
-> But as long as the immediate value should also apply *lg2(SEW) bits* 
-> truncating,
-> I think I should update GEN_OPIVI_GVEC_TRANS() to utilize gvec IR.
->
->
->     If the answer is that out-of-range shift produces zero, which some
->     architectures use, then you can look at the immediate value, see
->     that you must
->     supply zero, and then fill the vector with zeros from translate. 
->     You need not
->     call a helper to perform N shifts when you know the result a-priori.
->
->     If the answer is that shift values are truncated, which riscv uses
->     *everywhere
->     else*, then you should truncate the immediate value during translate.
->
->
-> I think vsll.vi <http://vsll.vi>, vsrl.vi <http://vsrl.vi> and vsra.vi 
-> <http://vsra.vi> truncate the out-of-range shift as other riscv 
-> instructions.
-> I will double confirm that, thanks for the advice.
->
-Perhaps the reason is that the assembler can't identify if an imm is 
-legal according to log(SEW),
-because the assembler can't get the SEW.
-
-To make more compliance with assembler directly users'  intuition, just 
-let the imm encoding to insn as itself(truncate to 31)
-and work as itself.
-
-Zhiwei
-> Frank Chang
->
->
->
->     r~
->
-
-
---------------8C543CA8B571EB653508EBBC
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <br>
-    <br>
-    <div class="moz-cite-prefix">On 2020/7/14 21:59, Frank Chang wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAE_xrPg9otd9tbpHL_1DmvZ=3nFNdgkse_nUe=fApTQt1hPCYA@mail.gmail.com">
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <div dir="ltr">
-        <div dir="ltr">On Tue, Jul 14, 2020 at 9:21 PM Richard Henderson
-          &lt;<a href="mailto:richard.henderson@linaro.org"
-            moz-do-not-send="true">richard.henderson@linaro.org</a>&gt;
-          wrote:<br>
-        </div>
-        <div class="gmail_quote">
-          <blockquote class="gmail_quote" style="margin:0px 0px 0px
-            0.8ex;border-left:1px solid
-            rgb(204,204,204);padding-left:1ex">On 7/13/20 7:59 PM, Frank
-            Chang wrote:<br>
-            &gt; The latest spec specified:<br>
-            &gt; <br>
-            &gt; Only the low *lg2(SEW) bits* are read to obtain the
-            shift amount from a<br>
-            &gt; *register value*.<br>
-            &gt; The *immediate* is treated as an *unsigned shift
-            amount*, with a *maximum shift<br>
-            &gt; amount of 31*.<br>
-            <br>
-            Which, I hope you will agree is underspecified, and should
-            be reported as a bug<br>
-            in the manual.<br>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>Yes, you're correct.</div>
-          <div>I found out I missed the MASK part in GEN_VEXT_SHIFT_VV()
-            macro,</div>
-          <div>which this macro is shared between OPIVV and OPIVI format
-            of instructions.</div>
-          <div>So the same masking methodology should be applied to
-            shift amounts coming from both register and immediate value.</div>
-          <div>Spike also does something like:</div>
-          <div><i>vs2 &gt;&gt; (zimm5 &amp; (sew - 1) &amp; 0x1f);</i>
-            for SEW = 8.</div>
-          <div><br>
-          </div>
-          <div>I think spec is kind of misleading to the reader by the
-            way it expresses.</div>
-          <div> </div>
-          <blockquote class="gmail_quote" style="margin:0px 0px 0px
-            0.8ex;border-left:1px solid
-            rgb(204,204,204);padding-left:1ex">
-            <br>
-            &gt; Looks like the shift amount in the immediate value is
-            not relevant with SEW<br>
-            &gt; setting.<br>
-            <br>
-            How can it not be?  It is when the value comes from a
-            register...<br>
-            <br>
-            &gt; If so, is it better to just use do_opivi_gvec() and
-            implement the logic by our<br>
-            &gt; own rather than using gvec IR?<br>
-            <br>
-            No, it is not.  What is the logic you would apply on your
-            own?  There should be<br>
-            a right answer.<br>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>I was talking about just calling GEN_OPIVI_TRANS() to
-            generate the helper functions</div>
-          <div>defined in vector_helper.c as what I'm doing in the
-            original patch.</div>
-          <div>But as long as the immediate value should also
-            apply *lg2(SEW) bits* truncating,</div>
-          <div>I think I should update GEN_OPIVI_GVEC_TRANS() to utilize
-            gvec IR.</div>
-          <div> </div>
-          <blockquote class="gmail_quote" style="margin:0px 0px 0px
-            0.8ex;border-left:1px solid
-            rgb(204,204,204);padding-left:1ex">
-            <br>
-            If the answer is that out-of-range shift produces zero,
-            which some<br>
-            architectures use, then you can look at the immediate value,
-            see that you must<br>
-            supply zero, and then fill the vector with zeros from
-            translate.  You need not<br>
-            call a helper to perform N shifts when you know the result
-            a-priori.<br>
-            <br>
-            If the answer is that shift values are truncated, which
-            riscv uses *everywhere<br>
-            else*, then you should truncate the immediate value during
-            translate.<br>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>I think <a href="http://vsll.vi" moz-do-not-send="true">vsll.vi</a>,
-            <a href="http://vsrl.vi" moz-do-not-send="true">vsrl.vi</a>
-            and <a href="http://vsra.vi" moz-do-not-send="true">vsra.vi</a>
-            truncate the out-of-range shift as other riscv instructions.</div>
-          <div>I will double confirm that, thanks for the advice.</div>
-          <div><br>
-          </div>
-        </div>
-      </div>
-    </blockquote>
-    Perhaps the reason is that the assembler can't identify if an imm is
-    legal according to log(SEW),<br>
-    because the assembler can't get the SEW.<br>
-    <br>
-    To make more compliance with assembler directly users'  intuition,
-    just let the imm encoding to insn as itself(truncate to 31)<br>
-    and work as itself.<br>
-    <br>
-    Zhiwei<br>
-    <blockquote type="cite"
-cite="mid:CAE_xrPg9otd9tbpHL_1DmvZ=3nFNdgkse_nUe=fApTQt1hPCYA@mail.gmail.com">
-      <div dir="ltr">
-        <div class="gmail_quote">
-          <div>Frank Chang</div>
-          <div> </div>
-          <blockquote class="gmail_quote" style="margin:0px 0px 0px
-            0.8ex;border-left:1px solid
-            rgb(204,204,204);padding-left:1ex">
-            <br>
-            <br>
-            r~<br>
-          </blockquote>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------8C543CA8B571EB653508EBBC--
 
