@@ -1,74 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jvLSt-0005rn-8d
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Jul 2020 09:59:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35202)
+	id 1jvXXh-0003XJ-1d
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Jul 2020 22:53:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39626)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jvLSr-0005my-IK
- for qemu-riscv@nongnu.org; Tue, 14 Jul 2020 09:59:21 -0400
-Received: from mail-oi1-x22f.google.com ([2607:f8b0:4864:20::22f]:37096)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jvLSp-0003WC-9S
- for qemu-riscv@nongnu.org; Tue, 14 Jul 2020 09:59:21 -0400
-Received: by mail-oi1-x22f.google.com with SMTP id 12so13983782oir.4
- for <qemu-riscv@nongnu.org>; Tue, 14 Jul 2020 06:59:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fpCH2xXs20luc7pWr52c7kARIxu1wP3GT6gdRE3Sm2o=;
- b=WW4jGZwcgPDKK+BwP2AwLQnkgaDKBj8W5G3gPAw/gDnMnT8rQLhUk30FGVoBKz+rqG
- NDYfPJO+Fdk8zaEiAV7wYgC81+RMWncwD2qlpS48ntqGyVxyqvXhDJoZ7DwU1E9Tq/nq
- 1w2qrIgG+9aPgvYVHAjDV2+1bX1z0dF2+QlZWLjtYa71Kp9LpqGwhHJ185A1LTmJGWrL
- 15BNpERGGw/hopGmWct1AyVUPfGkrhbmecYz2xnVLi0owMI03IxYks9TSqQ681oLxwUu
- j2RsbHODVHG0K9cEwSsNVxh344KyCq1sZXiVUohlkS1z5B2X95JRJf0QlwsJp4tc9t/P
- PsqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=fpCH2xXs20luc7pWr52c7kARIxu1wP3GT6gdRE3Sm2o=;
- b=HQwpys9tQgJMGr3sfUhm1DISBitAMsli6lG4BRY9jhDLtdXchf5DRVhORnh308YcWS
- +9qD+gNg++Q8ykm3BXcCHtVvSeSFomEjK8mY3NoWQpqhFfAcz8t5MPn3rQ/9nhSBLKqm
- ecjWZGc70522u5TRzWWTrob2ruFvqAE3CjO6h1MZb1sTW6JQOu67xJ9OO6p1t3oGiFfv
- iscd59z9fhDThkLBM0eDL+oRJ/rAh8nsptIN6sXOBahcSQP7Gds8oq1koCPXi2v2RzGj
- dByYB0t19CS4ldxwKlh9LwrrJ4xiDf8D9C6S9OVH+pesTfGvUmpP3JCod4n9duW76B9I
- DWYQ==
-X-Gm-Message-State: AOAM532h4ii7bSl6jFt7668nGufVFJlJa+f8urTd/dMJdn06xC1XtPsP
- Jd+ODAF7muDbR5WJBKd2zZTfy/i5Gv/V5v9cK6xVwA==
-X-Google-Smtp-Source: ABdhPJwG1X5webumfjZZGt3y2f5WQAin2zpantl6+e/Kxyv3Ee/2rtkXPhBnbnnujvX10tSBVYPh+QhRsAY/wClIIwE=
-X-Received: by 2002:aca:3f8b:: with SMTP id m133mr3531532oia.78.1594735157695; 
- Tue, 14 Jul 2020 06:59:17 -0700 (PDT)
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jvXXe-0003WC-FF; Tue, 14 Jul 2020 22:53:06 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:33097)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jvXXZ-0001zp-TL; Tue, 14 Jul 2020 22:53:06 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07516912|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_regular_dialog|0.0747618-0.0105898-0.914648;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03306; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=8; RT=8; SR=0; TI=SMTPD_---.I1rnTxH_1594781569; 
+Received: from 30.225.208.24(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.I1rnTxH_1594781569)
+ by smtp.aliyun-inc.com(10.147.41.178);
+ Wed, 15 Jul 2020 10:52:49 +0800
+Subject: Re: [RFC 05/65] target/riscv: remove vsll.vi, vsrl.vi, vsra.vi insns
+ from using gvec
+To: Frank Chang <frank.chang@sifive.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 References: <20200710104920.13550-1-frank.chang@sifive.com>
  <20200710104920.13550-6-frank.chang@sifive.com>
  <452e8bc7-4622-77c2-ec81-9aa6f25705fc@linaro.org>
  <CAE_xrPjWr2KShiwaCZi1DXueFnRAz41D3j9_k2vBL2j7-d9WOQ@mail.gmail.com>
  <0ccc7311-02f4-821f-6272-73ab600a8cda@linaro.org>
-In-Reply-To: <0ccc7311-02f4-821f-6272-73ab600a8cda@linaro.org>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Tue, 14 Jul 2020 21:59:06 +0800
-Message-ID: <CAE_xrPg9otd9tbpHL_1DmvZ=3nFNdgkse_nUe=fApTQt1hPCYA@mail.gmail.com>
-Subject: Re: [RFC 05/65] target/riscv: remove vsll.vi, vsrl.vi, vsra.vi insns
- from using gvec
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- LIU Zhiwei <zhiwei_liu@c-sky.com>
-Content-Type: multipart/alternative; boundary="00000000000095f17b05aa6736b0"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22f;
- envelope-from=frank.chang@sifive.com; helo=mail-oi1-x22f.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ <CAE_xrPg9otd9tbpHL_1DmvZ=3nFNdgkse_nUe=fApTQt1hPCYA@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <5e56bedb-b404-19f9-4dbf-dfd675aee383@c-sky.com>
+Date: Wed, 15 Jul 2020 10:52:49 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <CAE_xrPg9otd9tbpHL_1DmvZ=3nFNdgkse_nUe=fApTQt1hPCYA@mail.gmail.com>
+Content-Type: multipart/alternative;
+ boundary="------------8C543CA8B571EB653508EBBC"
+Content-Language: en-US
+Received-SPF: none client-ip=121.197.200.217;
+ envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/14 22:52:51
+X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001,
  URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -82,163 +66,248 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jul 2020 13:59:21 -0000
+X-List-Received-Date: Wed, 15 Jul 2020 02:53:06 -0000
 
---00000000000095f17b05aa6736b0
-Content-Type: text/plain; charset="UTF-8"
+This is a multi-part message in MIME format.
+--------------8C543CA8B571EB653508EBBC
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Tue, Jul 14, 2020 at 9:21 PM Richard Henderson <
-richard.henderson@linaro.org> wrote:
 
-> On 7/13/20 7:59 PM, Frank Chang wrote:
-> > The latest spec specified:
-> >
-> > Only the low *lg2(SEW) bits* are read to obtain the shift amount from a
-> > *register value*.
-> > The *immediate* is treated as an *unsigned shift amount*, with a
-> *maximum shift
-> > amount of 31*.
+
+On 2020/7/14 21:59, Frank Chang wrote:
+> On Tue, Jul 14, 2020 at 9:21 PM Richard Henderson 
+> <richard.henderson@linaro.org <mailto:richard.henderson@linaro.org>> 
+> wrote:
 >
-> Which, I hope you will agree is underspecified, and should be reported as
-> a bug
-> in the manual.
+>     On 7/13/20 7:59 PM, Frank Chang wrote:
+>     > The latest spec specified:
+>     >
+>     > Only the low *lg2(SEW) bits* are read to obtain the shift amount
+>     from a
+>     > *register value*.
+>     > The *immediate* is treated as an *unsigned shift amount*, with a
+>     *maximum shift
+>     > amount of 31*.
 >
-
-Yes, you're correct.
-I found out I missed the MASK part in GEN_VEXT_SHIFT_VV() macro,
-which this macro is shared between OPIVV and OPIVI format of instructions.
-So the same masking methodology should be applied to shift amounts coming
-from both register and immediate value.
-Spike also does something like:
-*vs2 >> (zimm5 & (sew - 1) & 0x1f);* for SEW = 8.
-
-I think spec is kind of misleading to the reader by the way it expresses.
-
-
->
-> > Looks like the shift amount in the immediate value is not relevant with
-> SEW
-> > setting.
->
-> How can it not be?  It is when the value comes from a register...
->
-> > If so, is it better to just use do_opivi_gvec() and implement the logic
-> by our
-> > own rather than using gvec IR?
->
-> No, it is not.  What is the logic you would apply on your own?  There
-> should be
-> a right answer.
->
-
-I was talking about just calling GEN_OPIVI_TRANS() to generate the helper
-functions
-defined in vector_helper.c as what I'm doing in the original patch.
-But as long as the immediate value should also apply *lg2(SEW) bits*
-truncating,
-I think I should update GEN_OPIVI_GVEC_TRANS() to utilize gvec IR.
-
-
->
-> If the answer is that out-of-range shift produces zero, which some
-> architectures use, then you can look at the immediate value, see that you
-> must
-> supply zero, and then fill the vector with zeros from translate.  You need
-> not
-> call a helper to perform N shifts when you know the result a-priori.
->
-> If the answer is that shift values are truncated, which riscv uses
-> *everywhere
-> else*, then you should truncate the immediate value during translate.
->
-
-I think vsll.vi, vsrl.vi and vsra.vi truncate the out-of-range shift as
-other riscv instructions.
-I will double confirm that, thanks for the advice.
-
-Frank Chang
-
-
+>     Which, I hope you will agree is underspecified, and should be
+>     reported as a bug
+>     in the manual.
 >
 >
-> r~
+> Yes, you're correct.
+> I found out I missed the MASK part in GEN_VEXT_SHIFT_VV() macro,
+> which this macro is shared between OPIVV and OPIVI format of instructions.
+> So the same masking methodology should be applied to shift amounts 
+> coming from both register and immediate value.
+> Spike also does something like:
+> /vs2 >> (zimm5 & (sew - 1) & 0x1f);/ for SEW = 8.
+>
+> I think spec is kind of misleading to the reader by the way it expresses.
+>
+>
+>     > Looks like the shift amount in the immediate value is not
+>     relevant with SEW
+>     > setting.
+>
+>     How can it not be?  It is when the value comes from a register...
+>
+>     > If so, is it better to just use do_opivi_gvec() and implement
+>     the logic by our
+>     > own rather than using gvec IR?
+>
+>     No, it is not.  What is the logic you would apply on your own? 
+>     There should be
+>     a right answer.
+>
+>
+> I was talking about just calling GEN_OPIVI_TRANS() to generate the 
+> helper functions
+> defined in vector_helper.c as what I'm doing in the original patch.
+> But as long as the immediate value should also apply *lg2(SEW) bits* 
+> truncating,
+> I think I should update GEN_OPIVI_GVEC_TRANS() to utilize gvec IR.
+>
+>
+>     If the answer is that out-of-range shift produces zero, which some
+>     architectures use, then you can look at the immediate value, see
+>     that you must
+>     supply zero, and then fill the vector with zeros from translate. 
+>     You need not
+>     call a helper to perform N shifts when you know the result a-priori.
+>
+>     If the answer is that shift values are truncated, which riscv uses
+>     *everywhere
+>     else*, then you should truncate the immediate value during translate.
+>
+>
+> I think vsll.vi <http://vsll.vi>, vsrl.vi <http://vsrl.vi> and vsra.vi 
+> <http://vsra.vi> truncate the out-of-range shift as other riscv 
+> instructions.
+> I will double confirm that, thanks for the advice.
+>
+Perhaps the reason is that the assembler can't identify if an imm is 
+legal according to log(SEW),
+because the assembler can't get the SEW.
+
+To make more compliance with assembler directly users'  intuition, just 
+let the imm encoding to insn as itself(truncate to 31)
+and work as itself.
+
+Zhiwei
+> Frank Chang
+>
+>
+>
+>     r~
 >
 
---00000000000095f17b05aa6736b0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Tue, Jul 14, 2020 at 9:21 PM Richard H=
-enderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hender=
-son@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">On 7/13/20 7:59 PM, Frank Chang wr=
-ote:<br>
-&gt; The latest spec specified:<br>
-&gt; <br>
-&gt; Only the low *lg2(SEW) bits* are read to obtain the shift amount from =
-a<br>
-&gt; *register value*.<br>
-&gt; The *immediate* is treated as an *unsigned shift amount*, with a *maxi=
-mum shift<br>
-&gt; amount of 31*.<br>
-<br>
-Which, I hope you will agree is underspecified, and should be reported as a=
- bug<br>
-in the manual.<br></blockquote><div><br></div><div>Yes, you&#39;re=C2=A0cor=
-rect.</div><div>I found out I missed the MASK part in=C2=A0GEN_VEXT_SHIFT_V=
-V() macro,</div><div>which this macro is shared between=C2=A0OPIVV and OPIV=
-I=C2=A0format of instructions.</div><div>So the=C2=A0same masking methodolo=
-gy should be applied to shift=C2=A0amounts coming from both register=C2=A0a=
-nd immediate value.</div><div>Spike also does something like:</div><div><i>=
-vs2 &gt;&gt; (zimm5 &amp; (sew - 1) &amp; 0x1f);</i> for SEW =3D 8.</div><d=
-iv><br></div><div>I think spec is kind of misleading to the reader by=C2=A0=
-the way it expresses.</div><div>=C2=A0</div><blockquote class=3D"gmail_quot=
-e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
-;padding-left:1ex">
-<br>
-&gt; Looks like the shift amount in the immediate value is not relevant wit=
-h SEW<br>
-&gt; setting.<br>
-<br>
-How can it not be?=C2=A0 It is when the value comes from a register...<br>
-<br>
-&gt; If so, is it better to just use do_opivi_gvec() and implement the logi=
-c by our<br>
-&gt; own rather than using gvec IR?<br>
-<br>
-No, it is not.=C2=A0 What is the logic you would apply on your own?=C2=A0 T=
-here should be<br>
-a right answer.<br></blockquote><div><br></div><div>I was talking about jus=
-t calling GEN_OPIVI_TRANS() to generate the helper functions</div><div>defi=
-ned in vector_helper.c as what I&#39;m doing in the original patch.</div><d=
-iv>But as long as the immediate value should also apply=C2=A0*lg2(SEW) bits=
-* truncating,</div><div>I think I should update GEN_OPIVI_GVEC_TRANS() to u=
-tilize gvec IR.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddi=
-ng-left:1ex">
-<br>
-If the answer is that out-of-range shift produces zero, which some<br>
-architectures use, then you can look at the immediate value, see that you m=
-ust<br>
-supply zero, and then fill the vector with zeros from translate.=C2=A0 You =
-need not<br>
-call a helper to perform N shifts when you know the result a-priori.<br>
-<br>
-If the answer is that shift values are truncated, which riscv uses *everywh=
-ere<br>
-else*, then you should truncate the immediate value during translate.<br></=
-blockquote><div><br></div><div>I think=C2=A0<a href=3D"http://vsll.vi">vsll=
-.vi</a>, <a href=3D"http://vsrl.vi">vsrl.vi</a> and <a href=3D"http://vsra.=
-vi">vsra.vi</a> truncate the out-of-range shift as other=C2=A0riscv instruc=
-tions.</div><div>I will double confirm that, thanks for the advice.</div><d=
-iv><br></div><div>Frank Chang</div><div>=C2=A0</div><blockquote class=3D"gm=
-ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
-204,204);padding-left:1ex">
-<br>
-<br>
-r~<br>
-</blockquote></div></div>
+--------------8C543CA8B571EB653508EBBC
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
---00000000000095f17b05aa6736b0--
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <br>
+    <br>
+    <div class="moz-cite-prefix">On 2020/7/14 21:59, Frank Chang wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:CAE_xrPg9otd9tbpHL_1DmvZ=3nFNdgkse_nUe=fApTQt1hPCYA@mail.gmail.com">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <div dir="ltr">
+        <div dir="ltr">On Tue, Jul 14, 2020 at 9:21 PM Richard Henderson
+          &lt;<a href="mailto:richard.henderson@linaro.org"
+            moz-do-not-send="true">richard.henderson@linaro.org</a>&gt;
+          wrote:<br>
+        </div>
+        <div class="gmail_quote">
+          <blockquote class="gmail_quote" style="margin:0px 0px 0px
+            0.8ex;border-left:1px solid
+            rgb(204,204,204);padding-left:1ex">On 7/13/20 7:59 PM, Frank
+            Chang wrote:<br>
+            &gt; The latest spec specified:<br>
+            &gt; <br>
+            &gt; Only the low *lg2(SEW) bits* are read to obtain the
+            shift amount from a<br>
+            &gt; *register value*.<br>
+            &gt; The *immediate* is treated as an *unsigned shift
+            amount*, with a *maximum shift<br>
+            &gt; amount of 31*.<br>
+            <br>
+            Which, I hope you will agree is underspecified, and should
+            be reported as a bug<br>
+            in the manual.<br>
+          </blockquote>
+          <div><br>
+          </div>
+          <div>Yes, you're correct.</div>
+          <div>I found out I missed the MASK part in GEN_VEXT_SHIFT_VV()
+            macro,</div>
+          <div>which this macro is shared between OPIVV and OPIVI format
+            of instructions.</div>
+          <div>So the same masking methodology should be applied to
+            shift amounts coming from both register and immediate value.</div>
+          <div>Spike also does something like:</div>
+          <div><i>vs2 &gt;&gt; (zimm5 &amp; (sew - 1) &amp; 0x1f);</i>
+            for SEW = 8.</div>
+          <div><br>
+          </div>
+          <div>I think spec is kind of misleading to the reader by the
+            way it expresses.</div>
+          <div> </div>
+          <blockquote class="gmail_quote" style="margin:0px 0px 0px
+            0.8ex;border-left:1px solid
+            rgb(204,204,204);padding-left:1ex">
+            <br>
+            &gt; Looks like the shift amount in the immediate value is
+            not relevant with SEW<br>
+            &gt; setting.<br>
+            <br>
+            How can it not be?  It is when the value comes from a
+            register...<br>
+            <br>
+            &gt; If so, is it better to just use do_opivi_gvec() and
+            implement the logic by our<br>
+            &gt; own rather than using gvec IR?<br>
+            <br>
+            No, it is not.  What is the logic you would apply on your
+            own?  There should be<br>
+            a right answer.<br>
+          </blockquote>
+          <div><br>
+          </div>
+          <div>I was talking about just calling GEN_OPIVI_TRANS() to
+            generate the helper functions</div>
+          <div>defined in vector_helper.c as what I'm doing in the
+            original patch.</div>
+          <div>But as long as the immediate value should also
+            apply *lg2(SEW) bits* truncating,</div>
+          <div>I think I should update GEN_OPIVI_GVEC_TRANS() to utilize
+            gvec IR.</div>
+          <div> </div>
+          <blockquote class="gmail_quote" style="margin:0px 0px 0px
+            0.8ex;border-left:1px solid
+            rgb(204,204,204);padding-left:1ex">
+            <br>
+            If the answer is that out-of-range shift produces zero,
+            which some<br>
+            architectures use, then you can look at the immediate value,
+            see that you must<br>
+            supply zero, and then fill the vector with zeros from
+            translate.  You need not<br>
+            call a helper to perform N shifts when you know the result
+            a-priori.<br>
+            <br>
+            If the answer is that shift values are truncated, which
+            riscv uses *everywhere<br>
+            else*, then you should truncate the immediate value during
+            translate.<br>
+          </blockquote>
+          <div><br>
+          </div>
+          <div>I think <a href="http://vsll.vi" moz-do-not-send="true">vsll.vi</a>,
+            <a href="http://vsrl.vi" moz-do-not-send="true">vsrl.vi</a>
+            and <a href="http://vsra.vi" moz-do-not-send="true">vsra.vi</a>
+            truncate the out-of-range shift as other riscv instructions.</div>
+          <div>I will double confirm that, thanks for the advice.</div>
+          <div><br>
+          </div>
+        </div>
+      </div>
+    </blockquote>
+    Perhaps the reason is that the assembler can't identify if an imm is
+    legal according to log(SEW),<br>
+    because the assembler can't get the SEW.<br>
+    <br>
+    To make more compliance with assembler directly users'  intuition,
+    just let the imm encoding to insn as itself(truncate to 31)<br>
+    and work as itself.<br>
+    <br>
+    Zhiwei<br>
+    <blockquote type="cite"
+cite="mid:CAE_xrPg9otd9tbpHL_1DmvZ=3nFNdgkse_nUe=fApTQt1hPCYA@mail.gmail.com">
+      <div dir="ltr">
+        <div class="gmail_quote">
+          <div>Frank Chang</div>
+          <div> </div>
+          <blockquote class="gmail_quote" style="margin:0px 0px 0px
+            0.8ex;border-left:1px solid
+            rgb(204,204,204);padding-left:1ex">
+            <br>
+            <br>
+            r~<br>
+          </blockquote>
+        </div>
+      </div>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------8C543CA8B571EB653508EBBC--
 
