@@ -1,67 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jw0EN-0006D1-IY
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Jul 2020 05:31:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42872)
+	id 1jw0Z1-0001Zh-EJ
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Jul 2020 05:52:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48356)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jw0EM-0006Cq-DP; Thu, 16 Jul 2020 05:31:06 -0400
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:40437)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jw0EJ-0002E6-GL; Thu, 16 Jul 2020 05:31:06 -0400
-Received: by mail-pl1-x643.google.com with SMTP id l6so3607847plt.7;
- Thu, 16 Jul 2020 02:31:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:subject:date:message-id;
- bh=azQTDxp2AGf8ggOnGFH5tfIaZzBBmvEsmTO3HYeMlyw=;
- b=FH0xqORbIFeDxJquDOwAJ4cFlqN+xbPqN0xKj9MwpEUmuTsxPdnJEiDRZsTlG/4qXL
- Hx7DwqRn16WAwnKxAnfJ2iuou6Va2mHhBXKth/oozzJjcMRvzBVofcW3zVmS98WyRt9f
- UGkt5niea+o6WXCkLD5OvEXJxe/sYM3KqCw1J8RR3JACZ1CisVNvea8Phagh7cyEjs9U
- ci+woNoNGeWzwJ/80sdH9BOHmHASPZLMUPn01ppOE3hLpGZvrQkBZgNma4PwR3g9rxHh
- aUfywXB/UQzWYnj/i9tILwWGZg62S7YZ297gkvQicPcFhP5PMc+AIVdExkBEh1cKDixV
- tv3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:subject:date:message-id;
- bh=azQTDxp2AGf8ggOnGFH5tfIaZzBBmvEsmTO3HYeMlyw=;
- b=W/hxp8zsgIAS1Uyq8POfh4zT7uFJGr25sp7i1UohZlTMf+73xAS1FDVsqLhmGm5w/U
- JPQXA5m1tcRTsd6oyaITzOk5fh8IZuYR0cWF+La9MUWdKI1b+PXpo3VoiJR4TM0JqzsM
- u2jUUSWvqe8+6SV+OkJ2j042B8vm+5TVe6bGFOvL+FQNRecdM5v/Uhl3llmeSSSPcJNt
- oCz3e/KS+jJ+b5rjdRfOcAlEPHibaeDYaRYpV2jy0+/24Q7Miw/uVI/B790FMOuVCg31
- GPeR7l5z0F5L67Ce7K26lKDqt80aOvbI8as/tyAY8t44geRXcd7pQFWpDqcr3Kmdxogf
- GCEw==
-X-Gm-Message-State: AOAM531XzTIQ1wq0oE0vvxfXgVL1KQaVSlFjJ5oq1X8K02nxKxwO95Jk
- v7Kv9Yoaq5TfEOdhIgnDG4E=
-X-Google-Smtp-Source: ABdhPJwN5Cp6Ync9czEfj+JUsdJ+BvtBwamhKivh8zR5OXKqmVYzuzmdytukyRbVyBWOFISHijVzQg==
-X-Received: by 2002:a17:90b:30d0:: with SMTP id
- hi16mr4079961pjb.65.1594891861524; 
- Thu, 16 Jul 2020 02:31:01 -0700 (PDT)
-Received: from localhost.localdomain (unknown-224-80.windriver.com.
- [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id o11sm4120459pfp.88.2020.07.16.02.31.00
- (version=TLS1 cipher=AES128-SHA bits=128/128);
- Thu, 16 Jul 2020 02:31:01 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1jw0Yz-0001XQ-GP; Thu, 16 Jul 2020 05:52:25 -0400
+Resent-Date: Thu, 16 Jul 2020 05:52:25 -0400
+Resent-Message-Id: <E1jw0Yz-0001XQ-GP@lists.gnu.org>
+Received: from sender4-of-o57.zoho.com ([136.143.188.57]:21759)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1jw0Yw-0006yK-No; Thu, 16 Jul 2020 05:52:25 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1594893122; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=Xr1fAZkyCl52haAfP6JAcEgmusU5kR2UrMCZ/rhbWogdlvGVWQ3oC6XurO1gHCTBcKjAXs0XLW2YzTN53SkDaJR07JobcKabCw8YdD/d0Yt5Q2kSeMDNf1Rw1Sq0mA05bGcHz0vxiOl8coBFsaUXSSCies3P1D5lDnxWRYV9UWw=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1594893122;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
+ bh=0kWqcMn/4x74uQxyZKAfe2eWfEtwRXw9nbOuRLDPVXw=; 
+ b=hxr7XcrO4EwFxgSicA7GJnyZYPswwcylKc7d+IA5c/dipm9PywIKWB68pxgOLDxzKKbHayPsY0HeUOANGJRdmmey8ljHcb/bAFYgJ2zAxDwDCJkvCA73rgnDlJaeBtj9W/B+baMlo984UJ2zRSGmtYJP5WD5fkmGQnrJRL628tg=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 1594893117609631.3915426017187;
+ Thu, 16 Jul 2020 02:51:57 -0700 (PDT)
+Subject: Re: [PATCH] hw/riscv: sifive_e: Correct debug block size
+Message-ID: <159489311546.24176.16290580199233458898@07a7f0d89f7d>
+Reply-To: <qemu-devel@nongnu.org>
+In-Reply-To: <1594891856-15474-1-git-send-email-bmeng.cn@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: bmeng.cn@gmail.com
+Cc: Alistair.Francis@wdc.com, kbastian@mail.uni-paderborn.de,
+ palmerdabbelt@google.com, sagark@eecs.berkeley.edu, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH] hw/riscv: sifive_e: Correct debug block size
-Date: Thu, 16 Jul 2020 02:30:56 -0700
-Message-Id: <1594891856-15474-1-git-send-email-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 1.7.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::643;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x643.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Date: Thu, 16 Jul 2020 02:51:57 -0700 (PDT)
+X-ZohoMailClient: External
+Received-SPF: pass client-ip=136.143.188.57; envelope-from=no-reply@patchew.org;
+ helo=sender4-of-o57.zoho.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/16 05:52:19
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -74,36 +63,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2020 09:31:06 -0000
+X-List-Received-Date: Thu, 16 Jul 2020 09:52:25 -0000
 
-Currently the debug region size is set to 0x100, but according to
-FE310-G000 and FE310-G002 manuals:
-
-  FE310-G000: 0x100 - 0xFFF
-  FE310-G002: 0x0   - 0xFFF
-
-Change the size to 0x1000 that applies to both.
-
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
----
-
- hw/riscv/sifive_e.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 7bb97b4..c8b0604 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -54,7 +54,7 @@ static const struct MemmapEntry {
-     hwaddr base;
-     hwaddr size;
- } sifive_e_memmap[] = {
--    [SIFIVE_E_DEBUG] =    {        0x0,      0x100 },
-+    [SIFIVE_E_DEBUG] =    {        0x0,     0x1000 },
-     [SIFIVE_E_MROM] =     {     0x1000,     0x2000 },
-     [SIFIVE_E_OTP] =      {    0x20000,     0x2000 },
-     [SIFIVE_E_CLINT] =    {  0x2000000,    0x10000 },
--- 
-2.7.4
-
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8xNTk0ODkxODU2LTE1NDc0LTEt
+Z2l0LXNlbmQtZW1haWwtYm1lbmcuY25AZ21haWwuY29tLwoKCgpIaSwKClRoaXMgc2VyaWVzIGZh
+aWxlZCB0aGUgZG9ja2VyLXF1aWNrQGNlbnRvczcgYnVpbGQgdGVzdC4gUGxlYXNlIGZpbmQgdGhl
+IHRlc3RpbmcgY29tbWFuZHMgYW5kCnRoZWlyIG91dHB1dCBiZWxvdy4gSWYgeW91IGhhdmUgRG9j
+a2VyIGluc3RhbGxlZCwgeW91IGNhbiBwcm9iYWJseSByZXByb2R1Y2UgaXQKbG9jYWxseS4KCj09
+PSBURVNUIFNDUklQVCBCRUdJTiA9PT0KIyEvYmluL2Jhc2gKbWFrZSBkb2NrZXItaW1hZ2UtY2Vu
+dG9zNyBWPTEgTkVUV09SSz0xCnRpbWUgbWFrZSBkb2NrZXItdGVzdC1xdWlja0BjZW50b3M3IFNI
+T1dfRU5WPTEgSj0xNCBORVRXT1JLPTEKPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KCiAgVEVTVCAg
+ICBjaGVjay11bml0OiB0ZXN0cy90ZXN0LWNyeXB0by1zZWNyZXQKICBURVNUICAgIGNoZWNrLXVu
+aXQ6IHRlc3RzL3Rlc3QtY2hhcgoqKgpFUlJPUjovdG1wL3FlbXUtdGVzdC9zcmMvdGVzdHMvdGVz
+dC1jaGFyLmM6MTIwNDpjaGFyX3NlcmlhbF90ZXN0OiAnY2hyJyBzaG91bGQgbm90IGJlIE5VTEwK
+RVJST1IgdGVzdC1jaGFyIC0gQmFpbCBvdXQhIEVSUk9SOi90bXAvcWVtdS10ZXN0L3NyYy90ZXN0
+cy90ZXN0LWNoYXIuYzoxMjA0OmNoYXJfc2VyaWFsX3Rlc3Q6ICdjaHInIHNob3VsZCBub3QgYmUg
+TlVMTAptYWtlOiAqKiogW2NoZWNrLXVuaXRdIEVycm9yIDEKbWFrZTogKioqIFdhaXRpbmcgZm9y
+IHVuZmluaXNoZWQgam9icy4uLi4KICBURVNUICAgIGlvdGVzdC1xY293MjogMDI0CiAgVEVTVCAg
+ICBpb3Rlc3QtcWNvdzI6IDAyNQotLS0KICAgIHJhaXNlIENhbGxlZFByb2Nlc3NFcnJvcihyZXRj
+b2RlLCBjbWQpCnN1YnByb2Nlc3MuQ2FsbGVkUHJvY2Vzc0Vycm9yOiBDb21tYW5kICdbJ3N1ZG8n
+LCAnLW4nLCAnZG9ja2VyJywgJ3J1bicsICctLWxhYmVsJywgJ2NvbS5xZW11Lmluc3RhbmNlLnV1
+aWQ9NGFjZjJiNjczZWZkNDlmMzhkNDQ4OTM3NDI2MzQ0ZmEnLCAnLXUnLCAnMTAwMycsICctLXNl
+Y3VyaXR5LW9wdCcsICdzZWNjb21wPXVuY29uZmluZWQnLCAnLS1ybScsICctZScsICdUQVJHRVRf
+TElTVD0nLCAnLWUnLCAnRVhUUkFfQ09ORklHVVJFX09QVFM9JywgJy1lJywgJ1Y9JywgJy1lJywg
+J0o9MTQnLCAnLWUnLCAnREVCVUc9JywgJy1lJywgJ1NIT1dfRU5WPTEnLCAnLWUnLCAnQ0NBQ0hF
+X0RJUj0vdmFyL3RtcC9jY2FjaGUnLCAnLXYnLCAnL2hvbWUvcGF0Y2hldzIvLmNhY2hlL3FlbXUt
+ZG9ja2VyLWNjYWNoZTovdmFyL3RtcC9jY2FjaGU6eicsICctdicsICcvdmFyL3RtcC9wYXRjaGV3
+LXRlc3Rlci10bXAtNjdwZ2ZxZmcvc3JjL2RvY2tlci1zcmMuMjAyMC0wNy0xNi0wNS4zNi4zMy4y
+NjY1MzovdmFyL3RtcC9xZW11Onoscm8nLCAncWVtdS9jZW50b3M3JywgJy92YXIvdG1wL3FlbXUv
+cnVuJywgJ3Rlc3QtcXVpY2snXScgcmV0dXJuZWQgbm9uLXplcm8gZXhpdCBzdGF0dXMgMi4KZmls
+dGVyPS0tZmlsdGVyPWxhYmVsPWNvbS5xZW11Lmluc3RhbmNlLnV1aWQ9NGFjZjJiNjczZWZkNDlm
+MzhkNDQ4OTM3NDI2MzQ0ZmEKbWFrZVsxXTogKioqIFtkb2NrZXItcnVuXSBFcnJvciAxCm1ha2Vb
+MV06IExlYXZpbmcgZGlyZWN0b3J5IGAvdmFyL3RtcC9wYXRjaGV3LXRlc3Rlci10bXAtNjdwZ2Zx
+Zmcvc3JjJwptYWtlOiAqKiogW2RvY2tlci1ydW4tdGVzdC1xdWlja0BjZW50b3M3XSBFcnJvciAy
+CgpyZWFsICAgIDE1bTIzLjI2M3MKdXNlciAgICAwbTguNjQzcwoKClRoZSBmdWxsIGxvZyBpcyBh
+dmFpbGFibGUgYXQKaHR0cDovL3BhdGNoZXcub3JnL2xvZ3MvMTU5NDg5MTg1Ni0xNTQ3NC0xLWdp
+dC1zZW5kLWVtYWlsLWJtZW5nLmNuQGdtYWlsLmNvbS90ZXN0aW5nLmRvY2tlci1xdWlja0BjZW50
+b3M3Lz90eXBlPW1lc3NhZ2UuCi0tLQpFbWFpbCBnZW5lcmF0ZWQgYXV0b21hdGljYWxseSBieSBQ
+YXRjaGV3IFtodHRwczovL3BhdGNoZXcub3JnL10uClBsZWFzZSBzZW5kIHlvdXIgZmVlZGJhY2sg
+dG8gcGF0Y2hldy1kZXZlbEByZWRoYXQuY29t
 
