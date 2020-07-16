@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jvvvJ-0002mG-V8
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Jul 2020 00:55:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35824)
+	id 1jvwss-0005h2-LV
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Jul 2020 01:56:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46682)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jvvvH-0002lE-Jo; Thu, 16 Jul 2020 00:55:07 -0400
-Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:43299)
+ id 1jvwsp-0005eL-6p; Thu, 16 Jul 2020 01:56:39 -0400
+Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:38875)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jvvvE-0006hc-Qi; Thu, 16 Jul 2020 00:55:07 -0400
-Received: by mail-yb1-xb44.google.com with SMTP id y13so2232658ybj.10;
- Wed, 15 Jul 2020 21:55:03 -0700 (PDT)
+ id 1jvwsn-0000Kn-Lj; Thu, 16 Jul 2020 01:56:38 -0400
+Received: by mail-wm1-x344.google.com with SMTP id f18so9714444wml.3;
+ Wed, 15 Jul 2020 22:56:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5UuqnJOSNryh7rl6ROoUmW3hK1EcwSAJsRWP6K/Is3k=;
- b=GSzqHyMbU3ZxrBFdPULkYJps4rW/bvQaABJjHJD7z2GFNkams7tHrp/CjYDQydqMs7
- hbrVwkgQdy53vc7ukYADVfAdbq+6q0lZvef39RyIJCteMBXLg9UmGjQ8hKmlb8DM8PAq
- C5NY1UYA89d4YOtdl3Ma0sUzL0ecwaJu9eu3pOoebnojHcJe1GcTa7F45Xf6oHFkQp54
- 5cM7TSitdV97SJ1QBm8m0KOAxJ9vdxaGvMyua8sHLy1RTQMzosCxW9v9D4nUcmUdxz+C
- p6/uZkObWBnsPVTt+pNhbTFPpgvaJ+2Fw03lQvZeITG+k2c0tFjBeGzEb25OTYAXlhyi
- ujPA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=BHeKtHmNWiAjV5Xy3SbLdEwwCu4Vu5ZZ6NV6lX457O4=;
+ b=d3b8bHtHOLqMe8zIUGln1BEIdLByd+SFIqRGoysSJfp1vT2mXtRfXMd1dam+edHfTf
+ gFuLaN9lhWj/xjjtxVtmDYbaLwj95T7RMpmaLs/jRjpI/dozjgTKj0BRKkyJBlhBeXDl
+ 1G9iMPA70vThqO3ZEXuGl1bXV6SsZ1VcUm/Wl+JqTfQ0KcZ9iBSQnnahNzEFzE6MYQhW
+ Ta30/2CtGvMVmWICgqHZT6GGtSY6yqsIDwoy3w8WGHbFzUY+iSsAA1/u0reHDxdvkaIO
+ w5Je7xrfWCwVukDgsizwflWn4QD0SjUQqBD0So/xVd2CxWpQE//A1FhWUdAx3zSG47zr
+ kjOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=5UuqnJOSNryh7rl6ROoUmW3hK1EcwSAJsRWP6K/Is3k=;
- b=kWMWiBM4vuE4QcGMzmG0FFpEGM4wwIlAgXFqwpxDnjw+IL4nB4Xn2rZUg1uIfqKIWd
- DlCfvDmBLKoCh6/f0tGg8hNk9T/LgjNTDWDF+7DA65bw5kfyCteUjyiDYeoNodqYr5iN
- MJYwKV+2GxBdLuqBKUT3GPHRuSD6YN8fUOnSP29Ar9YJ5s90rI9MzgELLCcTd6mtLuJB
- 9iXeHpct35DMrcYUUxOBJTzSN2l1Fwqef79rfP1aLaw0RTZyq0qCa5y1jGWolekD2xTJ
- qTmywNrt4iEnowOKrbNykJq8/wCPRmsOCn5sQSfqojxqULUOZCqcSN/5MRo899lK828n
- ThjA==
-X-Gm-Message-State: AOAM532n2IolFmPWjlLKTCsDSaqc4uGCp0IIoS1wQzuccgKRSa5ge6yN
- K9SwcyWKmcxJCKWuynW8SR39inmYDgpr5D1bsLM=
-X-Google-Smtp-Source: ABdhPJzFQ9LNnTiO5MP5ZDwBiBt3fuS5jDwFKqU7R2/ERC971gdJSun37Gp+Nm2cmCy+OwcdeGvHF/WedUx3ZRQxIqg=
-X-Received: by 2002:a25:c342:: with SMTP id t63mr3778755ybf.122.1594875303182; 
- Wed, 15 Jul 2020 21:55:03 -0700 (PDT)
-MIME-Version: 1.0
-References: <1594357499-29068-1-git-send-email-bmeng.cn@gmail.com>
- <1594357499-29068-5-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKM1m2j15ncbcW0rp5fk6FmbJ20uWOYUC40+v9PG=Hu7yQ@mail.gmail.com>
- <CAEUhbmWxCMZG+kdyqeSBrJPRf0Jvb7a4AcADuFXpRwQ7fb8zDA@mail.gmail.com>
-In-Reply-To: <CAEUhbmWxCMZG+kdyqeSBrJPRf0Jvb7a4AcADuFXpRwQ7fb8zDA@mail.gmail.com>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=BHeKtHmNWiAjV5Xy3SbLdEwwCu4Vu5ZZ6NV6lX457O4=;
+ b=LqOPDYlvHibZI6lCMu7VdteZ7vVMnRoxpV430GhqWbMsUwfitGVaXWQ1Xi2KFZn0Rq
+ IJ3Ky2jplCiuSXo5Ixxj4AkIZMVYZWTrNtkNUMp5sLuH6DBEsfp4jKvuSzh3ivUvhLmi
+ peZVGxTccS1P4emnqWBwLOytv5t92uopAQYsc0UQLJ7W8XKALjIRVYi/+NMFdcDG5B0O
+ NIk4uGcQlW/pA5oairnxZ3kqTEtE6i+x3TGPobFFMt381Qevw9XG0XYBwuP/cfh1a1Hk
+ AbrjKM5kemajMG0lyS93EqOzx1qOUhWi+ZBnh6Z6BPLF0POsQH35kp8bmJPN2m8dXY/y
+ qTIQ==
+X-Gm-Message-State: AOAM532vJSzpyvRqIh7yJR4nWyqh+0iVbNkvILErrkA4D+K6zzpaxiJr
+ QNQyrdMne8cMYNq1hijYebg=
+X-Google-Smtp-Source: ABdhPJye6fll3K++lOytsGfUhED+dT4+vl7x9X07FmaRhUexyW4CUHQKQv5BHfIAvhc1g8wHET4kLg==
+X-Received: by 2002:a7b:c936:: with SMTP id h22mr2654430wml.114.1594878995257; 
+ Wed, 15 Jul 2020 22:56:35 -0700 (PDT)
+Received: from localhost.localdomain (unknown-224-80.windriver.com.
+ [147.11.224.80])
+ by smtp.gmail.com with ESMTPSA id f12sm7193458wrw.53.2020.07.15.22.56.33
+ (version=TLS1 cipher=AES128-SHA bits=128/128);
+ Wed, 15 Jul 2020 22:56:34 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 16 Jul 2020 12:54:51 +0800
-Message-ID: <CAEUhbmVJ94QF3UyEZUwcn-2yS4M3tKR-KOb4xPwSCwf9uRs-ww@mail.gmail.com>
-Subject: Re: [PATCH v4 4/7] hw/riscv: Use pre-built bios image of generic
- platform for virt & sifive_u
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b44;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb44.google.com
+ Palmer Dabbelt <palmerdabbelt@google.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Anup Patel <anup@brainfault.org>,
+	Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH v5 1/7] configure: Create symbolic links for pc-bios/*.elf
+ files
+Date: Wed, 15 Jul 2020 22:56:05 -0700
+Message-Id: <1594878971-26050-2-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1594878971-26050-1-git-send-email-bmeng.cn@gmail.com>
+References: <1594878971-26050-1-git-send-email-bmeng.cn@gmail.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::344;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-wm1-x344.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -65,8 +65,8 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,38 +79,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2020 04:55:07 -0000
+X-List-Received-Date: Thu, 16 Jul 2020 05:56:39 -0000
 
-Hi Alistair,
+From: Bin Meng <bin.meng@windriver.com>
 
-On Mon, Jul 13, 2020 at 9:53 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> On Sun, Jul 12, 2020 at 1:34 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Thu, Jul 9, 2020 at 10:07 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > From: Bin Meng <bin.meng@windriver.com>
-> > >
-> > > Update virt and sifive_u machines to use the opensbi fw_dynamic bios
-> > > image built for the generic FDT platform.
-> > >
-> > > Remove the out-of-date no longer used bios images.
-> > >
-> > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> > > Reviewed-by: Anup Patel <anup@brainfault.org>
-> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> >
-> > This patch seems to break 32-bit Linux boots on the sifive_u and virt machines.
-> >
->
-> It looks only Linux boot on sifive_u is broken. On our side, we have
-> been using VxWorks to test 32-bit OpenSBI on sifive_u so this issue
-> gets unnoticed. I will take a look.
+Now we need to ship the OpenSBI fw_dynamic.elf image for the
+RISC-V Spike machine, it requires us to create symbolic links
+for pc-bios/*.elf files.
 
-I've figured out the issue of 32-bit Linux booting failure on
-sifive_u. A patch has been sent to Linux upstream:
-http://lists.infradead.org/pipermail/linux-riscv/2020-July/001213.html
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Regards,
-Bin
+---
+
+(no changes since v2)
+
+Changes in v2:
+- new patch: configure: Create symbolic links for pc-bios/*.elf files
+
+ configure | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configure b/configure
+index b751c85..af027c5 100755
+--- a/configure
++++ b/configure
+@@ -8584,6 +8584,7 @@ LINKS="$LINKS tests/qemu-iotests/check"
+ LINKS="$LINKS python"
+ for bios_file in \
+     $source_path/pc-bios/*.bin \
++    $source_path/pc-bios/*.elf \
+     $source_path/pc-bios/*.lid \
+     $source_path/pc-bios/*.rom \
+     $source_path/pc-bios/*.dtb \
+-- 
+2.7.4
+
 
