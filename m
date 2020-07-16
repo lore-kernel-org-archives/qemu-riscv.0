@@ -1,71 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jvyiv-0001Lo-Dc
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Jul 2020 03:54:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45310)
+	id 1jw0EN-0006D1-IY
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Jul 2020 05:31:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42872)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sundeep.lkml@gmail.com>)
- id 1jvyit-0001LE-Ri; Thu, 16 Jul 2020 03:54:31 -0400
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:34263)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jw0EM-0006Cq-DP; Thu, 16 Jul 2020 05:31:06 -0400
+Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:40437)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sundeep.lkml@gmail.com>)
- id 1jvyis-0003Xh-5b; Thu, 16 Jul 2020 03:54:31 -0400
-Received: by mail-il1-x143.google.com with SMTP id t4so4286119iln.1;
- Thu, 16 Jul 2020 00:54:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jw0EJ-0002E6-GL; Thu, 16 Jul 2020 05:31:06 -0400
+Received: by mail-pl1-x643.google.com with SMTP id l6so3607847plt.7;
+ Thu, 16 Jul 2020 02:31:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=xUcuCANla6QWG55l5nrD61xLU5a8E+PWSqV3G7mO+Gc=;
- b=pcIuGLDRN0pEGipMQJtI2jVkys5Tut7LTuTxSiSl6kxuZUyS606+WIzHNVLCaLUcJs
- ZATqztRQH+YfRqEQIH/zkMVw/w5SFK/clCY25FbbciDhDbi6cwrDCBjzipb347HXiYvZ
- g8vp4hyFfbg+ItPmDpgPUHQ1FntCGS9kxKi2nRMVHosnHAe0HePFb1PphGSZ54jt3cpy
- pJ2eTx4zuQpnJLdun1JoZEXwm8Vczmg1A09TK8BHsOb9JDf7ysZPWqdJmC+6nTadMT0J
- l7stYaSKWKS39EMV8icx1A/WHjjlZ0w4/NdtkROM3fzXOsVQ//QbSsvzOghezKx3JsA8
- OiHA==
+ h=from:to:subject:date:message-id;
+ bh=azQTDxp2AGf8ggOnGFH5tfIaZzBBmvEsmTO3HYeMlyw=;
+ b=FH0xqORbIFeDxJquDOwAJ4cFlqN+xbPqN0xKj9MwpEUmuTsxPdnJEiDRZsTlG/4qXL
+ Hx7DwqRn16WAwnKxAnfJ2iuou6Va2mHhBXKth/oozzJjcMRvzBVofcW3zVmS98WyRt9f
+ UGkt5niea+o6WXCkLD5OvEXJxe/sYM3KqCw1J8RR3JACZ1CisVNvea8Phagh7cyEjs9U
+ ci+woNoNGeWzwJ/80sdH9BOHmHASPZLMUPn01ppOE3hLpGZvrQkBZgNma4PwR3g9rxHh
+ aUfywXB/UQzWYnj/i9tILwWGZg62S7YZ297gkvQicPcFhP5PMc+AIVdExkBEh1cKDixV
+ tv3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=xUcuCANla6QWG55l5nrD61xLU5a8E+PWSqV3G7mO+Gc=;
- b=njWXXjZEyGiafzxAawgV9p8XA93Mh0TL3kCnXSVjC0mXHzjcGK56IMSubpkqxumuxK
- JadtgSQtrrhwC3HvVdvFiyfeRV8RsjTlvJmQJrXP12iANgrevctarjNoSRm+AjO2guj/
- kM7gURo69KprdQwXnsKE5lqmPnSjZHSw6ImoilS4VsOAp3V1jrWOhtTzes8Jm01bZeJG
- lZEzIktlE7jlHVpziaTwZjpcwu7ekoV7mtktOsnzRXy1UGXZH0eqwYZxtlCR58cZVG4l
- MZJqESEVqHVaiOB2G5CN4aX7+O/3Ou4gspn02IZAP4EmzqrJxgClZ2CGOU3RT3PD7gug
- voCw==
-X-Gm-Message-State: AOAM5317dZ8RyfMG4ihMWxCuUC5MhtvAeYTLNQxFmwVQSKKz+L6nDMIi
- CEvquHLT5RVNyafmwPDQaT8ywGRVdlk48q1WR0U=
-X-Google-Smtp-Source: ABdhPJzxqDj/FjjQFkFYOp4RfBWCS1mkZrhmiYUxwpAmQ8iEJekAdFLyOH7c6x1FOOeNDw8dE7uwgIDn9KvbMs2vY+k=
-X-Received: by 2002:a05:6e02:128d:: with SMTP id
- y13mr3315673ilq.305.1594886068312; 
- Thu, 16 Jul 2020 00:54:28 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200715140440.3540942-1-armbru@redhat.com>
- <20200715140440.3540942-2-armbru@redhat.com>
- <ef1d7fe4-0558-cc7b-16d7-906c4aa9915b@amsat.org>
- <87wo34u9fv.fsf@dusky.pond.sub.org>
- <CALHRZurw_HsyFmNWYuG_Cagx8cTTBCGzafWmx6JHJ+NS7aVKOw@mail.gmail.com>
- <9b3f870c-481f-79f1-e55e-074ee0d95633@redhat.com>
- <4e08aa92-0db0-1a09-0716-5f5ff896910d@amsat.org>
-In-Reply-To: <4e08aa92-0db0-1a09-0716-5f5ff896910d@amsat.org>
-From: sundeep subbaraya <sundeep.lkml@gmail.com>
-Date: Thu, 16 Jul 2020 13:24:16 +0530
-Message-ID: <CALHRZuo_T5ZVS32M8jukdu6iqxsSf=apXi=dS8y-vY1u=kuWOg@mail.gmail.com>
-Subject: Re: [PATCH for-5.1 1/2] msf2: Unbreak device-list-properties for
- "msf-soc"
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
-Cc: Thomas Huth <thuth@redhat.com>, Markus Armbruster <armbru@redhat.com>, 
- Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ h=x-gm-message-state:from:to:subject:date:message-id;
+ bh=azQTDxp2AGf8ggOnGFH5tfIaZzBBmvEsmTO3HYeMlyw=;
+ b=W/hxp8zsgIAS1Uyq8POfh4zT7uFJGr25sp7i1UohZlTMf+73xAS1FDVsqLhmGm5w/U
+ JPQXA5m1tcRTsd6oyaITzOk5fh8IZuYR0cWF+La9MUWdKI1b+PXpo3VoiJR4TM0JqzsM
+ u2jUUSWvqe8+6SV+OkJ2j042B8vm+5TVe6bGFOvL+FQNRecdM5v/Uhl3llmeSSSPcJNt
+ oCz3e/KS+jJ+b5rjdRfOcAlEPHibaeDYaRYpV2jy0+/24Q7Miw/uVI/B790FMOuVCg31
+ GPeR7l5z0F5L67Ce7K26lKDqt80aOvbI8as/tyAY8t44geRXcd7pQFWpDqcr3Kmdxogf
+ GCEw==
+X-Gm-Message-State: AOAM531XzTIQ1wq0oE0vvxfXgVL1KQaVSlFjJ5oq1X8K02nxKxwO95Jk
+ v7Kv9Yoaq5TfEOdhIgnDG4E=
+X-Google-Smtp-Source: ABdhPJwN5Cp6Ync9czEfj+JUsdJ+BvtBwamhKivh8zR5OXKqmVYzuzmdytukyRbVyBWOFISHijVzQg==
+X-Received: by 2002:a17:90b:30d0:: with SMTP id
+ hi16mr4079961pjb.65.1594891861524; 
+ Thu, 16 Jul 2020 02:31:01 -0700 (PDT)
+Received: from localhost.localdomain (unknown-224-80.windriver.com.
+ [147.11.224.80])
+ by smtp.gmail.com with ESMTPSA id o11sm4120459pfp.88.2020.07.16.02.31.00
+ (version=TLS1 cipher=AES128-SHA bits=128/128);
+ Thu, 16 Jul 2020 02:31:01 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Alistair Francis <alistair@alistair23.me>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- QEMU Developers <qemu-devel@nongnu.org>, 
- Beniamino Galvani <b.galvani@gmail.com>, nieklinnenbank@gmail.com, 
- qemu-arm <qemu-arm@nongnu.org>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
- envelope-from=sundeep.lkml@gmail.com; helo=mail-il1-x143.google.com
+ Palmer Dabbelt <palmerdabbelt@google.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH] hw/riscv: sifive_e: Correct debug block size
+Date: Thu, 16 Jul 2020 02:30:56 -0700
+Message-Id: <1594891856-15474-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::643;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x643.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -73,8 +60,8 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -87,69 +74,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2020 07:54:32 -0000
+X-List-Received-Date: Thu, 16 Jul 2020 09:31:06 -0000
 
-Yep I will rework on this soon.
+Currently the debug region size is set to 0x100, but according to
+FE310-G000 and FE310-G002 manuals:
 
-Thanks guys,
-Sundeep
+  FE310-G000: 0x100 - 0xFFF
+  FE310-G002: 0x0   - 0xFFF
 
-On Thu, Jul 16, 2020 at 1:06 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
-g> wrote:
->
-> On 7/16/20 8:07 AM, Thomas Huth wrote:
-> > On 16/07/2020 04.59, sundeep subbaraya wrote:
-> >> On Wed, Jul 15, 2020 at 8:12 PM Markus Armbruster <armbru@redhat.com> =
-wrote:
-> >>>
-> >>> Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
-> >>>
-> >>>> On 7/15/20 4:04 PM, Markus Armbruster wrote:
-> >>>>> Watch this:
-> >>>>>
-> >>>>>     $ qemu-system-aarch64 -M ast2600-evb -S -display none -qmp stdi=
-o
-> >>>>>     {"QMP": {"version": {"qemu": {"micro": 50, "minor": 0, "major":=
- 5}, "package": "v5.0.0-2464-g3a9163af4e"}, "capabilities": ["oob"]}}
-> >>>>>     {"execute": "qmp_capabilities"}
-> >>>>>     {"return": {}}
-> >>>>>     {"execute": "device-list-properties", "arguments": {"typename":=
- "msf2-soc"}}
-> >>>>>     Unsupported NIC model: ftgmac100
-> >>>>>     armbru@dusky:~/work/images$ echo $?
-> >>>>>     1
-> >>>>>
-> >>>>> This is what breaks "make check SPEED=3Dslow".
-> >>>>>
-> >>>>> Root cause is m2sxxx_soc_initfn()'s messing with nd_table[] via
-> >>>>> qemu_check_nic_model().  That's wrong.
-> >>>>>
-> >>>>> We fixed the exact same bug for device "allwinner-a10" in commit
-> >>>>> 8aabc5437b "hw/arm/allwinner-a10: Do not use nd_table in instance_i=
-nit
-> >>>>> function".  Fix this instance the same way: move the offending code=
- to
-> >>>>> m2sxxx_soc_realize(), where it's less wrong, and add a FIXME commen=
-t.
-> >>>>
-> >>>> That addresses this other thread, right?
-> >>>> https://www.mail-archive.com/qemu-devel@nongnu.org/msg720658.html
-> >>>
-> >>> Correct!  I wasn't aware of it, thanks for making the connection.
-> >>>
-> >>
-> >> Thanks Markus for the fix.
-> >
-> > It's rather just a work-around that avoids the crash than a real fix. I
-> > think we can use it for the upcoming 5.1 release, but it would be great
-> > if you could rework this code for 5.2, so that the nd_table handling is
-> > moved to msf2-som.c instead.
->
-> Yes this is not a 'fix' but rather a kludge.
-> Thomas gave some tips to work on a fix here:
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg720658.html
->
-> Thanks,
->
-> Phil.
+Change the size to 0x1000 that applies to both.
+
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+---
+
+ hw/riscv/sifive_e.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 7bb97b4..c8b0604 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -54,7 +54,7 @@ static const struct MemmapEntry {
+     hwaddr base;
+     hwaddr size;
+ } sifive_e_memmap[] = {
+-    [SIFIVE_E_DEBUG] =    {        0x0,      0x100 },
++    [SIFIVE_E_DEBUG] =    {        0x0,     0x1000 },
+     [SIFIVE_E_MROM] =     {     0x1000,     0x2000 },
+     [SIFIVE_E_OTP] =      {    0x20000,     0x2000 },
+     [SIFIVE_E_CLINT] =    {  0x2000000,    0x10000 },
+-- 
+2.7.4
+
 
