@@ -1,68 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jvv08-0002D9-FC
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Jul 2020 23:56:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41314)
+	id 1jvvvJ-0002mG-V8
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Jul 2020 00:55:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35824)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sundeep.lkml@gmail.com>)
- id 1jvu82-0005Ny-LQ; Wed, 15 Jul 2020 23:00:10 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:39039)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jvvvH-0002lE-Jo; Thu, 16 Jul 2020 00:55:07 -0400
+Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:43299)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sundeep.lkml@gmail.com>)
- id 1jvu80-000453-R8; Wed, 15 Jul 2020 23:00:10 -0400
-Received: by mail-il1-x144.google.com with SMTP id k6so3825672ili.6;
- Wed, 15 Jul 2020 20:00:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jvvvE-0006hc-Qi; Thu, 16 Jul 2020 00:55:07 -0400
+Received: by mail-yb1-xb44.google.com with SMTP id y13so2232658ybj.10;
+ Wed, 15 Jul 2020 21:55:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=Kcv9F9yInqThuGi9ooZUXwSu/hdJyhJpWeASQpL33I0=;
- b=UyHpaA7brQcecUCqgqsffOSnPA4yCLOgdj9IgLU+k7BHdOm0pXFYFP6KxDHBzRi6t6
- cO2np075Txv8ddUGHeC1/2s2B9MBlAzAxH+aL7EW+vskKL12EbzkHwAQSkuweXpCqNle
- DC2QCHh8YNVgKTEi2b6ErnxfxOIKouZBuKEwjDGKRGvtEbqRP9BaenR7Z4GrF5SM4XOm
- OCdhaE1SrZZ+EnQfygro3RtUMP8YlKrOsIFq1v5YmevuV3tyJNziSk0gdDAsGWdSC7ry
- deupzxjpIVKGEKSw/O97MykGZnCvCftb6WkLD7+Tn9tpJiAhfgjkHsRrS850mrysyKXm
- keWQ==
+ :cc; bh=5UuqnJOSNryh7rl6ROoUmW3hK1EcwSAJsRWP6K/Is3k=;
+ b=GSzqHyMbU3ZxrBFdPULkYJps4rW/bvQaABJjHJD7z2GFNkams7tHrp/CjYDQydqMs7
+ hbrVwkgQdy53vc7ukYADVfAdbq+6q0lZvef39RyIJCteMBXLg9UmGjQ8hKmlb8DM8PAq
+ C5NY1UYA89d4YOtdl3Ma0sUzL0ecwaJu9eu3pOoebnojHcJe1GcTa7F45Xf6oHFkQp54
+ 5cM7TSitdV97SJ1QBm8m0KOAxJ9vdxaGvMyua8sHLy1RTQMzosCxW9v9D4nUcmUdxz+C
+ p6/uZkObWBnsPVTt+pNhbTFPpgvaJ+2Fw03lQvZeITG+k2c0tFjBeGzEb25OTYAXlhyi
+ ujPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=Kcv9F9yInqThuGi9ooZUXwSu/hdJyhJpWeASQpL33I0=;
- b=aeZrBoCFNssa0Uj6o7XVC0cym/dcld4YPTdOJ/5hpcXe5InNgSTl1w3adK6u9zTvqo
- olK3+WLqbtxs+KHZSZ/EVpHiyOCD6M5TvltYQOh9BgEB5zoRapAaSM9YdQDH7NaszrcX
- Sus0xTtQ7R1PAI7Lb7bLVLBtygsq+1QMVoliPQ6P4LQ0/RabxiEsb6eScfFAs4wmIDIF
- zXI1/Vu2xLg4T2OAwaDbq/WDeRNljmjLg4j0nQ63Gone7+oG9e+8ZQBM2qG52vgcYmq6
- UAtBIQrZVcKylMHV+voqLUtEFs/Qi9swNClrUH8wRXVmvzrR+dXz5ma+Krda4QnDaz7m
- MUVQ==
-X-Gm-Message-State: AOAM531+Hk1TYw6pSyD0c5x7SWH4LZYro77CN2F+6YrJNIZ6ShZ2VXUJ
- Cce5sAGQZIzpdTM142Kah28eg9+EPoP/NB0g1Uc=
-X-Google-Smtp-Source: ABdhPJz0V5PqocNQiuleGnwGAToyqfsNlT+seElo0VM4mBKehy3uk6gy9qSzk9YG7Xkq8n84BUIKta37JHZrEMNzuZE=
-X-Received: by 2002:a92:c0c4:: with SMTP id t4mr2491585ilf.211.1594868406315; 
- Wed, 15 Jul 2020 20:00:06 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=5UuqnJOSNryh7rl6ROoUmW3hK1EcwSAJsRWP6K/Is3k=;
+ b=kWMWiBM4vuE4QcGMzmG0FFpEGM4wwIlAgXFqwpxDnjw+IL4nB4Xn2rZUg1uIfqKIWd
+ DlCfvDmBLKoCh6/f0tGg8hNk9T/LgjNTDWDF+7DA65bw5kfyCteUjyiDYeoNodqYr5iN
+ MJYwKV+2GxBdLuqBKUT3GPHRuSD6YN8fUOnSP29Ar9YJ5s90rI9MzgELLCcTd6mtLuJB
+ 9iXeHpct35DMrcYUUxOBJTzSN2l1Fwqef79rfP1aLaw0RTZyq0qCa5y1jGWolekD2xTJ
+ qTmywNrt4iEnowOKrbNykJq8/wCPRmsOCn5sQSfqojxqULUOZCqcSN/5MRo899lK828n
+ ThjA==
+X-Gm-Message-State: AOAM532n2IolFmPWjlLKTCsDSaqc4uGCp0IIoS1wQzuccgKRSa5ge6yN
+ K9SwcyWKmcxJCKWuynW8SR39inmYDgpr5D1bsLM=
+X-Google-Smtp-Source: ABdhPJzFQ9LNnTiO5MP5ZDwBiBt3fuS5jDwFKqU7R2/ERC971gdJSun37Gp+Nm2cmCy+OwcdeGvHF/WedUx3ZRQxIqg=
+X-Received: by 2002:a25:c342:: with SMTP id t63mr3778755ybf.122.1594875303182; 
+ Wed, 15 Jul 2020 21:55:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200715140440.3540942-1-armbru@redhat.com>
- <20200715140440.3540942-2-armbru@redhat.com>
- <ef1d7fe4-0558-cc7b-16d7-906c4aa9915b@amsat.org>
- <87wo34u9fv.fsf@dusky.pond.sub.org>
-In-Reply-To: <87wo34u9fv.fsf@dusky.pond.sub.org>
-From: sundeep subbaraya <sundeep.lkml@gmail.com>
-Date: Thu, 16 Jul 2020 08:29:55 +0530
-Message-ID: <CALHRZurw_HsyFmNWYuG_Cagx8cTTBCGzafWmx6JHJ+NS7aVKOw@mail.gmail.com>
-Subject: Re: [PATCH for-5.1 1/2] msf2: Unbreak device-list-properties for
- "msf-soc"
-To: Markus Armbruster <armbru@redhat.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- QEMU Developers <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+References: <1594357499-29068-1-git-send-email-bmeng.cn@gmail.com>
+ <1594357499-29068-5-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKM1m2j15ncbcW0rp5fk6FmbJ20uWOYUC40+v9PG=Hu7yQ@mail.gmail.com>
+ <CAEUhbmWxCMZG+kdyqeSBrJPRf0Jvb7a4AcADuFXpRwQ7fb8zDA@mail.gmail.com>
+In-Reply-To: <CAEUhbmWxCMZG+kdyqeSBrJPRf0Jvb7a4AcADuFXpRwQ7fb8zDA@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 16 Jul 2020 12:54:51 +0800
+Message-ID: <CAEUhbmVJ94QF3UyEZUwcn-2yS4M3tKR-KOb4xPwSCwf9uRs-ww@mail.gmail.com>
+Subject: Re: [PATCH v4 4/7] hw/riscv: Use pre-built bios image of generic
+ platform for virt & sifive_u
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Alistair Francis <alistair@alistair23.me>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Beniamino Galvani <b.galvani@gmail.com>, 
- nieklinnenbank@gmail.com, qemu-arm <qemu-arm@nongnu.org>, palmer@dabbelt.com
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=sundeep.lkml@gmail.com; helo=mail-il1-x144.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b44;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb44.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -73,7 +68,6 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 15 Jul 2020 23:56:03 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -85,43 +79,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2020 03:00:11 -0000
+X-List-Received-Date: Thu, 16 Jul 2020 04:55:07 -0000
 
-On Wed, Jul 15, 2020 at 8:12 PM Markus Armbruster <armbru@redhat.com> wrote=
-:
+Hi Alistair,
+
+On Mon, Jul 13, 2020 at 9:53 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
->
-> > On 7/15/20 4:04 PM, Markus Armbruster wrote:
-> >> Watch this:
-> >>
-> >>     $ qemu-system-aarch64 -M ast2600-evb -S -display none -qmp stdio
-> >>     {"QMP": {"version": {"qemu": {"micro": 50, "minor": 0, "major": 5}=
-, "package": "v5.0.0-2464-g3a9163af4e"}, "capabilities": ["oob"]}}
-> >>     {"execute": "qmp_capabilities"}
-> >>     {"return": {}}
-> >>     {"execute": "device-list-properties", "arguments": {"typename": "m=
-sf2-soc"}}
-> >>     Unsupported NIC model: ftgmac100
-> >>     armbru@dusky:~/work/images$ echo $?
-> >>     1
-> >>
-> >> This is what breaks "make check SPEED=3Dslow".
-> >>
-> >> Root cause is m2sxxx_soc_initfn()'s messing with nd_table[] via
-> >> qemu_check_nic_model().  That's wrong.
-> >>
-> >> We fixed the exact same bug for device "allwinner-a10" in commit
-> >> 8aabc5437b "hw/arm/allwinner-a10: Do not use nd_table in instance_init
-> >> function".  Fix this instance the same way: move the offending code to
-> >> m2sxxx_soc_realize(), where it's less wrong, and add a FIXME comment.
+> On Sun, Jul 12, 2020 at 1:34 AM Alistair Francis <alistair23@gmail.com> wrote:
 > >
-> > That addresses this other thread, right?
-> > https://www.mail-archive.com/qemu-devel@nongnu.org/msg720658.html
+> > On Thu, Jul 9, 2020 at 10:07 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >
+> > > From: Bin Meng <bin.meng@windriver.com>
+> > >
+> > > Update virt and sifive_u machines to use the opensbi fw_dynamic bios
+> > > image built for the generic FDT platform.
+> > >
+> > > Remove the out-of-date no longer used bios images.
+> > >
+> > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> > > Reviewed-by: Anup Patel <anup@brainfault.org>
+> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> >
+> > This patch seems to break 32-bit Linux boots on the sifive_u and virt machines.
+> >
 >
-> Correct!  I wasn't aware of it, thanks for making the connection.
->
+> It looks only Linux boot on sifive_u is broken. On our side, we have
+> been using VxWorks to test 32-bit OpenSBI on sifive_u so this issue
+> gets unnoticed. I will take a look.
 
-Thanks Markus for the fix.
-Sundeep
+I've figured out the issue of 32-bit Linux booting failure on
+sifive_u. A patch has been sent to Linux upstream:
+http://lists.infradead.org/pipermail/linux-riscv/2020-July/001213.html
+
+Regards,
+Bin
 
