@@ -1,56 +1,95 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jw0Z1-0001Zh-EJ
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Jul 2020 05:52:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48356)
+	id 1jw3wG-0006IX-MJ
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Jul 2020 09:28:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54462)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1jw0Yz-0001XQ-GP; Thu, 16 Jul 2020 05:52:25 -0400
-Resent-Date: Thu, 16 Jul 2020 05:52:25 -0400
-Resent-Message-Id: <E1jw0Yz-0001XQ-GP@lists.gnu.org>
-Received: from sender4-of-o57.zoho.com ([136.143.188.57]:21759)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1jw0Yw-0006yK-No; Thu, 16 Jul 2020 05:52:25 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1594893122; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=Xr1fAZkyCl52haAfP6JAcEgmusU5kR2UrMCZ/rhbWogdlvGVWQ3oC6XurO1gHCTBcKjAXs0XLW2YzTN53SkDaJR07JobcKabCw8YdD/d0Yt5Q2kSeMDNf1Rw1Sq0mA05bGcHz0vxiOl8coBFsaUXSSCies3P1D5lDnxWRYV9UWw=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1594893122;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=0kWqcMn/4x74uQxyZKAfe2eWfEtwRXw9nbOuRLDPVXw=; 
- b=hxr7XcrO4EwFxgSicA7GJnyZYPswwcylKc7d+IA5c/dipm9PywIKWB68pxgOLDxzKKbHayPsY0HeUOANGJRdmmey8ljHcb/bAFYgJ2zAxDwDCJkvCA73rgnDlJaeBtj9W/B+baMlo984UJ2zRSGmtYJP5WD5fkmGQnrJRL628tg=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1594893117609631.3915426017187;
- Thu, 16 Jul 2020 02:51:57 -0700 (PDT)
-Subject: Re: [PATCH] hw/riscv: sifive_e: Correct debug block size
-Message-ID: <159489311546.24176.16290580199233458898@07a7f0d89f7d>
-Reply-To: <qemu-devel@nongnu.org>
-In-Reply-To: <1594891856-15474-1-git-send-email-bmeng.cn@gmail.com>
+ (Exim 4.90_1) (envelope-from <Pankaj.VJ@exaleapsemi.com>)
+ id 1jw3wF-0006IO-Mo
+ for qemu-riscv@nongnu.org; Thu, 16 Jul 2020 09:28:39 -0400
+Received: from mail-eopbgr1380131.outbound.protection.outlook.com
+ ([40.107.138.131]:21152 helo=IND01-MA1-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <Pankaj.VJ@exaleapsemi.com>)
+ id 1jw3wC-0003Y0-Qi
+ for qemu-riscv@nongnu.org; Thu, 16 Jul 2020 09:28:39 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BjlljpeBrWMsQ9922yUd65j6HFWwQEsXCVZrlS43+/y64b/UbWm7KbpuZpqzs4ysEE3OLg8aujUNT+HkvoR9iFl7Ob72TrXCvJ/esFFhRetCaDD2owzLDlLuhJEXLVS+CyApXQjGkQ3PwyZM2HpsFmMio1Yv4A6sjmJ/fzpn4IRsAbcL1PSHhGs7QlXV07a+Pa6+iDj6q0dBN0rfATZp3wXQLwCZ+M39nSpk8nSrZRoILgOfftulfi25Q0Hy0FkHNWKxDtpQr4Tfy6Rfak/X7YZvJnYrPdiEhZVc6YxFPwVsbaANNqMGncM5yTr1wQz8Gqp+4gX3D/3loiXjvy/pag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sN5Qd/vHst5H5RihvU8jgj3oO9pCs1QEikK+Yjna6uo=;
+ b=VIWXqJaSc+2lLNIZi0nxSRkZse6LC9TEy3MLG/iHAZ1QC0wz+Sjb39NyCk1XG3dh0xRn1CG5qTEEpKW5FtinAsHlF0W4clwYrzquCM7ML6kj6YkmgBiqczYQlQfSvupgcDl2GjK1W8o5TKUo3HmK0wlSV9sMmLPj9BvCj+fFYhtQIRbNCnpAl6Ua2NfBflRjTThVY3be2GWObZ+HsER1v5GqE9qAprEdqgOIOANRxS299yytVG5F7lssJkJPgr5NDc9YogQ1v8kcLNDvkQSIs8PrTrDu0C4r9WGr/5sWQ6BxwYUQwJlC9n6Oth+v9LvcIPTsHJeerr7KaoFleDRLlg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=exaleapsemi.com; dmarc=pass action=none
+ header.from=exaleapsemi.com; dkim=pass header.d=exaleapsemi.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=exaleapsemi.onmicrosoft.com; s=selector2-exaleapsemi-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sN5Qd/vHst5H5RihvU8jgj3oO9pCs1QEikK+Yjna6uo=;
+ b=uUTMfchLWOVMsLOzXUBeRRpy4WLfK4jB55UF/uXfARIx3/ISBIBVQB5KsSL+w8nCHU/u/d75pGFFAeZwLrNiMdxRWGkEEU+VzhAXgPpmkWjgXI8EUZ/hA5GFZzbMwsD4WNfv0yLbfemMnotIPiJly42FdBvyC/qIKCT5dBbtmWw=
+Received: from BMXPR01MB2344.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:36::20)
+ by BM1PR0101MB1601.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:1e::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.21; Thu, 16 Jul
+ 2020 13:13:27 +0000
+Received: from BMXPR01MB2344.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::adf5:6e2d:b2df:3e72]) by BMXPR01MB2344.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::adf5:6e2d:b2df:3e72%2]) with mapi id 15.20.3174.025; Thu, 16 Jul 2020
+ 13:13:27 +0000
+From: "Pankaj  Vinadrao Joshi" <Pankaj.VJ@exaleapsemi.com>
+To: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Subject: Replacing the existing kernel image with new image
+Thread-Topic: Replacing the existing kernel image with new image
+Thread-Index: AQHWW1vAv08DcwJVo0WW1/54bZB2IA==
+Date: Thu, 16 Jul 2020 13:13:27 +0000
+Message-ID: <BMXPR01MB234427906D0FC16A6873B934EE7F0@BMXPR01MB2344.INDPRD01.PROD.OUTLOOK.COM>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: nongnu.org; dkim=none (message not signed)
+ header.d=none; nongnu.org; dmarc=none action=none header.from=exaleapsemi.com; 
+x-originating-ip: [2405:204:95a5:bfae:94d7:75f4:c9e2:209c]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 89910777-dddf-4afb-f0fe-08d8298a074a
+x-ms-traffictypediagnostic: BM1PR0101MB1601:
+x-microsoft-antispam-prvs: <BM1PR0101MB1601E836F2364D06D8F53A74EE7F0@BM1PR0101MB1601.INDPRD01.PROD.OUTLOOK.COM>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 7oLANRwGKO4cJpdc9pj1AM7pUIHC3F/lHd9tXItPZrifHHeOlBwbYPiFduJBMWFHYc44wUcq8OfVXEQDTqc4TsdazchMv6IW27d/GtmQ5tztt1aeMcrwtW68oN3EGhHBC8xejm1sESg6c4y/KHMTks2fRe0swISE4+GGxjK/k+KIAZ0yA/QLmc9+pIY2KGJFRyXhc/5F/G2JyEBQMlAnRq1FwIon0oZ6NRhNV5IdRCd16R5NByakOPsFIhFwrGwI7QypHkjZuW2g1NhRFHvTSkkuq+0jbZX8B3wsEWjUuZCqvJ6VCA9VV4USzSr+m+OiLP69BdCMeIHgK2Lfe6RhZw==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BMXPR01MB2344.INDPRD01.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(39830400003)(366004)(376002)(396003)(346002)(136003)(6506007)(6916009)(7696005)(76116006)(52536014)(66556008)(66946007)(66446008)(33656002)(64756008)(66476007)(316002)(71200400001)(19627405001)(83380400001)(8936002)(9686003)(186003)(508600001)(55016002)(5660300002)(8676002)(86362001)(2906002);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata: iT3Xf85X0EPdThAfMe7hJNzTHoF61BY+BCm+7FmdIpbSSKFWuvN3ycmAplrdtByp18nR9GmbaWEed45kgj/xe6gw/NYhAmmhiVMXcc0lSxMGCKATmATFZZA544BoGzd1VHiEVdv5PnvXuGxDe/ffDJ9lNazFEPYDUQ9erNeo1PxPb4o5ygnQZ+gJzIdk0WJUAgRXibmoZhx6g2sKZ9KBHa1RrEP3UzQh0EBhA5rLLD3UQB7zIsdNXR/5w5foNy+CYcWmmbQ1DMCB8B2kFd2bDHaqvgIFQXKwD87jm0R0jrNk2QcZ+Q7aD0HiFDdzAgbKodgdyrguj903q/JOHGhwpbDlWeUxlhL8JvD6Yf2usN5X+JDP6Qnf5DBDYNzBjbqne/eEY0VRxbc2kW2wHXVwIwHHIQy9pG+jql1A2Md8uSXrbjlgk+7RV6jbHxPaVWCh5d36BvnU3jMDWE+Ys9gIRfqb+wdYKrXeImbbSCviFAlqy1+oHoD/rp0200eq5Vj10YcpPU2nd/aXsgeiUg1XZa0lJf22hbjhb+usPKGS0UMJD+vdBb8tEen8hpo2YqgF
+x-ms-exchange-transport-forked: True
+Content-Type: multipart/alternative;
+ boundary="_000_BMXPR01MB234427906D0FC16A6873B934EE7F0BMXPR01MB2344INDP_"
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: bmeng.cn@gmail.com
-Cc: Alistair.Francis@wdc.com, kbastian@mail.uni-paderborn.de,
- palmerdabbelt@google.com, sagark@eecs.berkeley.edu, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Date: Thu, 16 Jul 2020 02:51:57 -0700 (PDT)
-X-ZohoMailClient: External
-Received-SPF: pass client-ip=136.143.188.57; envelope-from=no-reply@patchew.org;
- helo=sender4-of-o57.zoho.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/16 05:52:19
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+X-OriginatorOrg: exaleapsemi.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BMXPR01MB2344.INDPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89910777-dddf-4afb-f0fe-08d8298a074a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jul 2020 13:13:27.6173 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 34df156e-9bc4-4450-9e80-487c0e7f9471
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: arf13GLHF2hvZke0AOWk03rRRFO1+uZnbjnwk1NVK97knrY41E8+OTWNP+DN3o/h9JgPDrMJgu/gVmpqzLqL2GmqVW0+RRU6DSX8fX8UVGM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BM1PR0101MB1601
+Received-SPF: pass client-ip=40.107.138.131;
+ envelope-from=Pankaj.VJ@exaleapsemi.com;
+ helo=IND01-MA1-obe.outbound.protection.outlook.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/16 09:28:33
+X-ACL-Warn: Detected OS   = Windows NT kernel [generic] [fuzzy]
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H2=-1, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -63,43 +102,327 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2020 09:52:25 -0000
+X-List-Received-Date: Thu, 16 Jul 2020 13:28:40 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8xNTk0ODkxODU2LTE1NDc0LTEt
-Z2l0LXNlbmQtZW1haWwtYm1lbmcuY25AZ21haWwuY29tLwoKCgpIaSwKClRoaXMgc2VyaWVzIGZh
-aWxlZCB0aGUgZG9ja2VyLXF1aWNrQGNlbnRvczcgYnVpbGQgdGVzdC4gUGxlYXNlIGZpbmQgdGhl
-IHRlc3RpbmcgY29tbWFuZHMgYW5kCnRoZWlyIG91dHB1dCBiZWxvdy4gSWYgeW91IGhhdmUgRG9j
-a2VyIGluc3RhbGxlZCwgeW91IGNhbiBwcm9iYWJseSByZXByb2R1Y2UgaXQKbG9jYWxseS4KCj09
-PSBURVNUIFNDUklQVCBCRUdJTiA9PT0KIyEvYmluL2Jhc2gKbWFrZSBkb2NrZXItaW1hZ2UtY2Vu
-dG9zNyBWPTEgTkVUV09SSz0xCnRpbWUgbWFrZSBkb2NrZXItdGVzdC1xdWlja0BjZW50b3M3IFNI
-T1dfRU5WPTEgSj0xNCBORVRXT1JLPTEKPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KCiAgVEVTVCAg
-ICBjaGVjay11bml0OiB0ZXN0cy90ZXN0LWNyeXB0by1zZWNyZXQKICBURVNUICAgIGNoZWNrLXVu
-aXQ6IHRlc3RzL3Rlc3QtY2hhcgoqKgpFUlJPUjovdG1wL3FlbXUtdGVzdC9zcmMvdGVzdHMvdGVz
-dC1jaGFyLmM6MTIwNDpjaGFyX3NlcmlhbF90ZXN0OiAnY2hyJyBzaG91bGQgbm90IGJlIE5VTEwK
-RVJST1IgdGVzdC1jaGFyIC0gQmFpbCBvdXQhIEVSUk9SOi90bXAvcWVtdS10ZXN0L3NyYy90ZXN0
-cy90ZXN0LWNoYXIuYzoxMjA0OmNoYXJfc2VyaWFsX3Rlc3Q6ICdjaHInIHNob3VsZCBub3QgYmUg
-TlVMTAptYWtlOiAqKiogW2NoZWNrLXVuaXRdIEVycm9yIDEKbWFrZTogKioqIFdhaXRpbmcgZm9y
-IHVuZmluaXNoZWQgam9icy4uLi4KICBURVNUICAgIGlvdGVzdC1xY293MjogMDI0CiAgVEVTVCAg
-ICBpb3Rlc3QtcWNvdzI6IDAyNQotLS0KICAgIHJhaXNlIENhbGxlZFByb2Nlc3NFcnJvcihyZXRj
-b2RlLCBjbWQpCnN1YnByb2Nlc3MuQ2FsbGVkUHJvY2Vzc0Vycm9yOiBDb21tYW5kICdbJ3N1ZG8n
-LCAnLW4nLCAnZG9ja2VyJywgJ3J1bicsICctLWxhYmVsJywgJ2NvbS5xZW11Lmluc3RhbmNlLnV1
-aWQ9NGFjZjJiNjczZWZkNDlmMzhkNDQ4OTM3NDI2MzQ0ZmEnLCAnLXUnLCAnMTAwMycsICctLXNl
-Y3VyaXR5LW9wdCcsICdzZWNjb21wPXVuY29uZmluZWQnLCAnLS1ybScsICctZScsICdUQVJHRVRf
-TElTVD0nLCAnLWUnLCAnRVhUUkFfQ09ORklHVVJFX09QVFM9JywgJy1lJywgJ1Y9JywgJy1lJywg
-J0o9MTQnLCAnLWUnLCAnREVCVUc9JywgJy1lJywgJ1NIT1dfRU5WPTEnLCAnLWUnLCAnQ0NBQ0hF
-X0RJUj0vdmFyL3RtcC9jY2FjaGUnLCAnLXYnLCAnL2hvbWUvcGF0Y2hldzIvLmNhY2hlL3FlbXUt
-ZG9ja2VyLWNjYWNoZTovdmFyL3RtcC9jY2FjaGU6eicsICctdicsICcvdmFyL3RtcC9wYXRjaGV3
-LXRlc3Rlci10bXAtNjdwZ2ZxZmcvc3JjL2RvY2tlci1zcmMuMjAyMC0wNy0xNi0wNS4zNi4zMy4y
-NjY1MzovdmFyL3RtcC9xZW11Onoscm8nLCAncWVtdS9jZW50b3M3JywgJy92YXIvdG1wL3FlbXUv
-cnVuJywgJ3Rlc3QtcXVpY2snXScgcmV0dXJuZWQgbm9uLXplcm8gZXhpdCBzdGF0dXMgMi4KZmls
-dGVyPS0tZmlsdGVyPWxhYmVsPWNvbS5xZW11Lmluc3RhbmNlLnV1aWQ9NGFjZjJiNjczZWZkNDlm
-MzhkNDQ4OTM3NDI2MzQ0ZmEKbWFrZVsxXTogKioqIFtkb2NrZXItcnVuXSBFcnJvciAxCm1ha2Vb
-MV06IExlYXZpbmcgZGlyZWN0b3J5IGAvdmFyL3RtcC9wYXRjaGV3LXRlc3Rlci10bXAtNjdwZ2Zx
-Zmcvc3JjJwptYWtlOiAqKiogW2RvY2tlci1ydW4tdGVzdC1xdWlja0BjZW50b3M3XSBFcnJvciAy
-CgpyZWFsICAgIDE1bTIzLjI2M3MKdXNlciAgICAwbTguNjQzcwoKClRoZSBmdWxsIGxvZyBpcyBh
-dmFpbGFibGUgYXQKaHR0cDovL3BhdGNoZXcub3JnL2xvZ3MvMTU5NDg5MTg1Ni0xNTQ3NC0xLWdp
-dC1zZW5kLWVtYWlsLWJtZW5nLmNuQGdtYWlsLmNvbS90ZXN0aW5nLmRvY2tlci1xdWlja0BjZW50
-b3M3Lz90eXBlPW1lc3NhZ2UuCi0tLQpFbWFpbCBnZW5lcmF0ZWQgYXV0b21hdGljYWxseSBieSBQ
-YXRjaGV3IFtodHRwczovL3BhdGNoZXcub3JnL10uClBsZWFzZSBzZW5kIHlvdXIgZmVlZGJhY2sg
-dG8gcGF0Y2hldy1kZXZlbEByZWRoYXQuY29t
+--_000_BMXPR01MB234427906D0FC16A6873B934EE7F0BMXPR01MB2344INDP_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Hi ,
+I am trying to replace my existing kernel image which is 5.5.6 to 5.5.7 on =
+qemuriscv64 i would like to mention i have built my qemu image with openemb=
+edded-core.
+
+i have tried to build the kernel 5.5.7 natively,i was able to build the ker=
+nel successfully and in my /boot folder i am able to see vmlinux-5.5.7  but=
+ now i want to install this image..i have tried to do it by make install i =
+didnt got any error with it but when i rebooted my system i am getting
+
+i have followed the following steps to build kernel
+$root@qemuriscv64-exaleapsemi-r2:/usr/src/kernel#  make menuconfig arch=3Dr=
+iscv64
+$root@qemuriscv64-exaleapsemi-r2:/usr/src/kernel# make -j4
+$root@qemuriscv64-exaleapsemi-r2:/usr/src/kernel# make modules_install
+$root@qemuriscv64-exaleapsemi-r2:/usr/src/kernel# make install
+sh ./arch/riscv/boot/install.sh 5.5.7 \
+arch/riscv/boot/Image System.map "/boot"
+Installing normal kernel
+
+$reboot
+13024.451157] printk: systemd-shutdow: 37 output lines suppressed due to ra=
+telimiting
+[13024.527282] systemd-shutdown[1]: Syncing filesystems and block devices.
+[13024.668538] systemd-shutdown[1]: Sending SIGTERM to remaining processes.=
+..
+[13024.719496] systemd-journald[87]: Received SIGTERM from PID 1 (systemd-s=
+hutdow).
+[13024.769405] systemd-shutdown[1]: Sending SIGKILL to remaining processes.=
+..
+[13024.834318] systemd-shutdown[1]: Unmounting file systems.
+[13024.868285] [13413]: Remounting '/' read-only in with options '(null)'.
+[13025.228499] EXT4-fs (vda): re-mounted. Opts: (null)
+[13025.358123] systemd-shutdown[1]: All filesystems unmounted.
+[13025.358576] systemd-shutdown[1]: Deactivating swaps.
+[13025.361264] systemd-shutdown[1]: All swaps deactivated.
+[13025.361727] systemd-shutdown[1]: Detaching loop devices.
+[13025.420602] systemd-shutdown[1]: All loop devices detached.
+[13025.421071] systemd-shutdown[1]: Detaching DM devices.
+[13025.595237] reboot: Restarting system
+[13046.599875] rcu: INFO: rcu_sched detected stalls on CPUs/tasks:
+[13046.600329] (detected by 0, t=3D5252 jiffies, g=3D2837145, q=3D17)
+[13046.600763] rcu: All QSes seen, last rcu_sched kthread activity 5252 (42=
+98153942-4298148690), jiffies_till_next_fqs=3D1, root ->qsmask 0x0
+[13046.601503] systemd-shutdow R  running task        0     1      0 0x0000=
+0008
+[13046.602053] Call Trace:
+[13046.602562] [<ffffffe00006d3fc>] walk_stackframe+0x0/0xa4
+[13046.602890] [<ffffffe00006d5e2>] show_stack+0x2a/0x34
+[13046.603156] [<ffffffe000091094>] sched_show_task+0x158/0x174
+[13046.603442] [<ffffffe0000c4dde>] rcu_sched_clock_irq+0x6b2/0x6ec
+[13046.603740] [<ffffffe0000ccadc>] update_process_times+0x1e/0x44
+[13046.604009] [<ffffffe0000d79dc>] tick_sched_handle.isra.16+0x30/0x3e
+[13046.604331] [<ffffffe0000d7a38>] tick_sched_timer+0x4e/0x94
+[13046.604620] [<ffffffe0000cd44a>] __hrtimer_run_queues+0x10c/0x2de
+[13046.604928] [<ffffffe0000cdc96>] hrtimer_interrupt+0xcc/0x1d6
+[13046.605236] [<ffffffe0005d3f7c>] riscv_timer_interrupt+0x32/0x3a
+[13046.605580] [<ffffffe0007889ce>] do_IRQ+0xae/0xba
+[13046.605837] [<ffffffe00006bd3c>] ret_from_exception+0x0/0xc
+[13046.606127] [<ffffffe00006ca58>] machine_restart+0xc/0xe
+[13046.606508] rcu: rcu_sched kthread starved for 5252 jiffies! g2837145 f0=
+x2 RCU_GP_WAIT_FQS(5) ->state=3D0x0 ->cpu=3D0
+[13046.606990] rcu: RCU grace-period kthread stack dump:
+[13046.607257] rcu_sched       R  running task        0    10      2 0x0000=
+0000
+[13046.607610] Call Trace:
+[13046.607774] [<ffffffe000784258>] __schedule+0x1a8/0x482
+[13046.608044] [<ffffffe000784592>] schedule+0x60/0xda
+[13046.608304] [<ffffffe000787a56>] schedule_timeout+0x15c/0x2b2
+[13046.608602] [<ffffffe0000c2ec8>] rcu_gp_kthread+0x4cc/0x7ec
+[13046.608889] [<ffffffe00008b0f2>] kthread+0xf0/0x102
+[13046.609162] [<ffffffe00006bd3c>] ret_from_exception+0x0/0xc
+
+
+Can someone help me out how i can replace my kernel to 5.5.7 since i am not=
+ able to find grub or grub2 on my riscv platform?? i have googled for the s=
+olution but most of them seems to be x86 specific where they are tryying to=
+ change the grub??Where i should modify for riscv to get my kernel up????
+
+Thanks
+
+--_000_BMXPR01MB234427906D0FC16A6873B934EE7F0BMXPR01MB2344INDP_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+Hi ,</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+I am trying to replace my existing kernel image which is 5.5.6 to 5.5.7 on =
+qemuriscv64 i would like to mention i have built my qemu image with openemb=
+edded-core.</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+i have tried to build the kernel 5.5.7 natively,i was able to build the ker=
+nel successfully and in my /boot folder i am able to see vmlinux-5.5.7&nbsp=
+; but now i want to install this image..i have tried to do it by make insta=
+ll i didnt got any error with it but
+ when i rebooted my system i am getting&nbsp;</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+i have followed the following steps to build kernel</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+$<span style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; backgro=
+und-color: rgb(255, 255, 255); display: inline !important">root@qemuriscv64=
+-exaleapsemi-r2:/usr/src/kernel#&nbsp;&nbsp;</span>make menuconfig arch=3Dr=
+iscv64</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+$<span style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; backgro=
+und-color: rgb(255, 255, 255); display: inline !important">root@qemuriscv64=
+-exaleapsemi-r2:/usr/src/kernel#&nbsp;</span>make -j4</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+$<span style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; backgro=
+und-color: rgb(255, 255, 255); display: inline !important">root@qemuriscv64=
+-exaleapsemi-r2:/usr/src/kernel#&nbsp;</span>make modules_install</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+<span style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-siz=
+e: 12pt;">$root@qemuriscv64-exaleapsemi-r2:/usr/src/kernel# make install</s=
+pan><br>
+</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+<div style=3D"margin: 0px; font-size: 12pt; font-family: Calibri, Arial, He=
+lvetica, sans-serif; background-color: rgb(255, 255, 255)">
+sh ./arch/riscv/boot/install.sh 5.5.7 \</div>
+<div style=3D"margin: 0px; font-size: 12pt; font-family: Calibri, Arial, He=
+lvetica, sans-serif; background-color: rgb(255, 255, 255)">
+arch/riscv/boot/Image System.map &quot;/boot&quot;</div>
+<div style=3D"margin: 0px; font-size: 12pt; font-family: Calibri, Arial, He=
+lvetica, sans-serif; background-color: rgb(255, 255, 255)">
+Installing normal kernel</div>
+<br>
+</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+<span style=3D"font-family: Calibri, Arial, Helvetica, sans-serif;">$reboot=
+</span><br>
+</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+<div style=3D"margin: 0px; font-family: Calibri, Arial, Helvetica, sans-ser=
+if; background-color: rgb(255, 255, 255)">
+<span style=3D"margin: 0px">13024.451157] printk: systemd-shutdow: 37 outpu=
+t lines suppressed due to ratelimiting<br>
+</span>
+<div style=3D"margin: 0px">[13024.527282] systemd-shutdown[1]: Syncing file=
+systems and block devices.<br>
+</div>
+<div style=3D"margin: 0px">[13024.668538] systemd-shutdown[1]: Sending SIGT=
+ERM to remaining processes...<br>
+</div>
+<div style=3D"margin: 0px">[13024.719496] systemd-journald[87]: Received SI=
+GTERM from PID 1 (systemd-shutdow).<br>
+</div>
+<div style=3D"margin: 0px">[13024.769405] systemd-shutdown[1]: Sending SIGK=
+ILL to remaining processes...<br>
+</div>
+<div style=3D"margin: 0px">[13024.834318] systemd-shutdown[1]: Unmounting f=
+ile systems.<br>
+</div>
+<div style=3D"margin: 0px">[13024.868285] [13413]: Remounting '/' read-only=
+ in with options '(null)'.<br>
+</div>
+<div style=3D"margin: 0px">[13025.228499] EXT4-fs (vda): re-mounted. Opts: =
+(null)<br>
+</div>
+<div style=3D"margin: 0px">[13025.358123] systemd-shutdown[1]: All filesyst=
+ems unmounted.<br>
+</div>
+<div style=3D"margin: 0px">[13025.358576] systemd-shutdown[1]: Deactivating=
+ swaps.<br>
+</div>
+<div style=3D"margin: 0px">[13025.361264] systemd-shutdown[1]: All swaps de=
+activated.<br>
+</div>
+<div style=3D"margin: 0px">[13025.361727] systemd-shutdown[1]: Detaching lo=
+op devices.<br>
+</div>
+<div style=3D"margin: 0px">[13025.420602] systemd-shutdown[1]: All loop dev=
+ices detached.<br>
+</div>
+<div style=3D"margin: 0px">[13025.421071] systemd-shutdown[1]: Detaching DM=
+ devices.<br>
+</div>
+<div style=3D"margin: 0px">[13025.595237] reboot: Restarting system<br>
+</div>
+<div style=3D"margin: 0px">[13046.599875] rcu: INFO: rcu_sched detected sta=
+lls on CPUs/tasks:<br>
+</div>
+<div style=3D"margin: 0px">[13046.600329] (detected by 0, t=3D5252 jiffies,=
+ g=3D2837145, q=3D17)<br>
+</div>
+<div style=3D"margin: 0px">[13046.600763] rcu: All QSes seen, last rcu_sche=
+d kthread activity 5252 (4298153942-4298148690), jiffies_till_next_fqs=3D1,=
+ root -&gt;qsmask 0x0<br>
+</div>
+<div style=3D"margin: 0px">[13046.601503] systemd-shutdow R &nbsp;running t=
+ask &nbsp; &nbsp; &nbsp; &nbsp;0 &nbsp; &nbsp; 1 &nbsp; &nbsp; &nbsp;0 0x00=
+000008<br>
+</div>
+<div style=3D"margin: 0px">[13046.602053] Call Trace:<br>
+</div>
+<div style=3D"margin: 0px">[13046.602562] [&lt;ffffffe00006d3fc&gt;] walk_s=
+tackframe&#43;0x0/0xa4<br>
+</div>
+<div style=3D"margin: 0px">[13046.602890] [&lt;ffffffe00006d5e2&gt;] show_s=
+tack&#43;0x2a/0x34<br>
+</div>
+<div style=3D"margin: 0px">[13046.603156] [&lt;ffffffe000091094&gt;] sched_=
+show_task&#43;0x158/0x174<br>
+</div>
+<div style=3D"margin: 0px">[13046.603442] [&lt;ffffffe0000c4dde&gt;] rcu_sc=
+hed_clock_irq&#43;0x6b2/0x6ec<br>
+</div>
+<div style=3D"margin: 0px">[13046.603740] [&lt;ffffffe0000ccadc&gt;] update=
+_process_times&#43;0x1e/0x44<br>
+</div>
+<div style=3D"margin: 0px">[13046.604009] [&lt;ffffffe0000d79dc&gt;] tick_s=
+ched_handle.isra.16&#43;0x30/0x3e<br>
+</div>
+<div style=3D"margin: 0px">[13046.604331] [&lt;ffffffe0000d7a38&gt;] tick_s=
+ched_timer&#43;0x4e/0x94<br>
+</div>
+<div style=3D"margin: 0px">[13046.604620] [&lt;ffffffe0000cd44a&gt;] __hrti=
+mer_run_queues&#43;0x10c/0x2de<br>
+</div>
+<div style=3D"margin: 0px">[13046.604928] [&lt;ffffffe0000cdc96&gt;] hrtime=
+r_interrupt&#43;0xcc/0x1d6<br>
+</div>
+<div style=3D"margin: 0px">[13046.605236] [&lt;ffffffe0005d3f7c&gt;] riscv_=
+timer_interrupt&#43;0x32/0x3a<br>
+</div>
+<div style=3D"margin: 0px">[13046.605580] [&lt;ffffffe0007889ce&gt;] do_IRQ=
+&#43;0xae/0xba<br>
+</div>
+<div style=3D"margin: 0px">[13046.605837] [&lt;ffffffe00006bd3c&gt;] ret_fr=
+om_exception&#43;0x0/0xc<br>
+</div>
+<div style=3D"margin: 0px">[13046.606127] [&lt;ffffffe00006ca58&gt;] machin=
+e_restart&#43;0xc/0xe<br>
+</div>
+<div style=3D"margin: 0px">[13046.606508] rcu: rcu_sched kthread starved fo=
+r 5252 jiffies! g2837145 f0x2 RCU_GP_WAIT_FQS(5) -&gt;state=3D0x0 -&gt;cpu=
+=3D0<br>
+</div>
+<div style=3D"margin: 0px">[13046.606990] rcu: RCU grace-period kthread sta=
+ck dump:<br>
+</div>
+<div style=3D"margin: 0px">[13046.607257] rcu_sched &nbsp; &nbsp; &nbsp; R =
+&nbsp;running task &nbsp; &nbsp; &nbsp; &nbsp;0 &nbsp; &nbsp;10 &nbsp; &nbs=
+p; &nbsp;2 0x00000000<br>
+</div>
+<div style=3D"margin: 0px">[13046.607610] Call Trace:<br>
+</div>
+<div style=3D"margin: 0px">[13046.607774] [&lt;ffffffe000784258&gt;] __sche=
+dule&#43;0x1a8/0x482<br>
+</div>
+<div style=3D"margin: 0px">[13046.608044] [&lt;ffffffe000784592&gt;] schedu=
+le&#43;0x60/0xda<br>
+</div>
+<div style=3D"margin: 0px">[13046.608304] [&lt;ffffffe000787a56&gt;] schedu=
+le_timeout&#43;0x15c/0x2b2<br>
+</div>
+<div style=3D"margin: 0px">[13046.608602] [&lt;ffffffe0000c2ec8&gt;] rcu_gp=
+_kthread&#43;0x4cc/0x7ec<br>
+</div>
+<div style=3D"margin: 0px">[13046.608889] [&lt;ffffffe00008b0f2&gt;] kthrea=
+d&#43;0xf0/0x102<br>
+</div>
+<div style=3D"margin: 0px">[13046.609162] [&lt;ffffffe00006bd3c&gt;] ret_fr=
+om_exception&#43;0x0/0xc</div>
+</div>
+<br>
+</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+Can someone help me out how i can replace my kernel to 5.5.7 since i am not=
+ able to find grub or grub2 on my riscv platform?? i have googled for the s=
+olution but most of them seems to be x86 specific where they are tryying to=
+ change the grub??Where i should
+ modify for riscv to get my kernel up????</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+Thanks</div>
+</body>
+</html>
+
+--_000_BMXPR01MB234427906D0FC16A6873B934EE7F0BMXPR01MB2344INDP_--
 
