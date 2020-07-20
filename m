@@ -1,64 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jxSLv-00015a-I4
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Jul 2020 05:44:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38998)
+	id 1jxSLx-0001Ak-LH
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Jul 2020 05:44:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39004)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
- id 1jxRLE-0004Cz-9N
+ id 1jxRLE-0004ES-SE
  for qemu-riscv@nongnu.org; Mon, 20 Jul 2020 04:40:08 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:42950)
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:43679)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
- id 1jxRLC-0003tq-Io
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2020 04:40:07 -0400
-Received: by mail-pf1-x441.google.com with SMTP id 1so8713723pfn.9
+ id 1jxRLD-0003u4-8H
+ for qemu-riscv@nongnu.org; Mon, 20 Jul 2020 04:40:08 -0400
+Received: by mail-pg1-x544.google.com with SMTP id w2so9972580pgg.10
  for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2020 01:40:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=JsLTfddsKgoMRSVCuJtsD4pLBNDevQya9a9kk1rBuvs=;
- b=HTYmFu40g+Oa9ygM0ZvoPP1PgQX2rz4Dr4B7FQOUoyPtgA74+p3GLJnMm1EwqAoPfq
- L6Zt+SOXvaJbp4E9H5OzgFZTk31lh5joGbmTEYBqxegHWHgKvG0wDecCAbV903cDH2/Y
- 6CfYV1O9vl0wt+aUw6N8IxWNWOOJHAj0tUaUHtv5FJzS8vLEJMPX5H1z5AliINJ1p3XH
- oMCohpVDuEehbe4komI+eq/sPgj2WusEopgpneuMOTTQlcplMepk6qMcS1Fz50q9/DET
- J67XAJ49FhB8NetlWEpkLr2FKp+uNh5PI7QTpnt3MJT6plXriGX3WwcHEn60cH8o/xNA
- 840w==
+ bh=hHlA6wmhpvYVr+0JFQxF6AzpWLBgIsPSzrz6OprCNsQ=;
+ b=iKj+cIaGrtmTYNZccQXM1I1mOsrkjEFYFMUR3SWCbsS+zT6DkG/G4jbbekAwe8bfN8
+ kt0VPleUYJcBPMmNP7bVuD9BU9Mg5bgbSFeoh7MVLBEby0QmCHEJejxkdeh0VseyhX5i
+ WmQ6fDsVajFW4FXTJOJWk+yyfHROPRxHRP88mDe+Pkc72i54T1f2aJn0JB/r7FaSfBdo
+ N97cMbm0aHVI1CBX2Y0PXWJjegTtJElBydoXB1tuHdOrJ2AHWhzDVz7/Kk5gwX8SJUmc
+ /Buns+o6KNu25dybhaNXlXSv5bwL6keMRVPy/+Qana9EKjshGKOAy/gHr3Jyfjnz/bl4
+ 94mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=JsLTfddsKgoMRSVCuJtsD4pLBNDevQya9a9kk1rBuvs=;
- b=iSfWdw/MGcM0ncKamuWSjb4uqbJWBl8JTufcJz+YI9M7CmeV+96PM28X6tYPg7UfJS
- dIT/A+hq56DGHXnHpE3hl0jZGze+PBjhUZOA5XSTF4O84v0zW6KHbrE2e29hyFwNHDyo
- CRCOgCk7hGgskkeeGQHFKp0gshnImgrIdBQ8v0SOvJlz6SnBrtqfnGJAEDajH6IcnaIB
- cnxjaLJWeFCHYlvxovhPhdS1Xt8JU/lscdK/wuM5cOXeigoodH77059OcFBXFhKFb4qt
- DyGeDmDJGGr1c0BAWg3yHEiIOFA/iCzu4MJ7nmCRX7bf3gbiRnnSGsPDt3JAAtuNYjfx
- SmFQ==
-X-Gm-Message-State: AOAM532x47Ve5wDn/9fkNhX4/kgWOhzPudJUxzBWI8l0j4gm1KRO4qAd
- KARYN3+1Pd4yLJNScgg/9Bpa3Q==
-X-Google-Smtp-Source: ABdhPJypxHssbOrUNASzWyJtBQzO8CXAyQLzJbyxtMYaWvDwcey4PU3MRhC5jWdAbMfOqBkuecE2mQ==
-X-Received: by 2002:a63:6c0a:: with SMTP id h10mr17924212pgc.11.1595234404148; 
- Mon, 20 Jul 2020 01:40:04 -0700 (PDT)
+ bh=hHlA6wmhpvYVr+0JFQxF6AzpWLBgIsPSzrz6OprCNsQ=;
+ b=FBPQlni02EM403rknInTUkPEkbBeQDTmRYNCWEXmWB6Gdll37dKYaYMeYZn3pTQJPJ
+ m15sKYOCrdas5fH44+Eu6opAShR4rTA8TGMKtkQC5rVVm/ZgR6Zkm+OlcJqkjrxO5AJg
+ qzAF0gb74msIXAQLj7iKD9fOwoOUXn6FgpnzaqL99rHYjivwBJJCzAKKcUh3jRHiV0b/
+ cMCd4WzOYPtHqoq6UGe9ZPst+2FO1RhMklDgPuTQ5UwmeSJApSnv0XiJ08zsQbUE3kb6
+ CRDZ+6vyWjI50VYBHb6EfkFhdrryiw0NmSPJu+L5T0umpoWSCDyoktjUZG9hOvtCkJ6h
+ WOrA==
+X-Gm-Message-State: AOAM5320bfBpZXUlmcQX8lsHYWsXj7O/Qy6njXwtmE6w5KJZDSMR53Rd
+ WXOfp9Gv+f1ESyjNOMTv1IQkrQ==
+X-Google-Smtp-Source: ABdhPJxtdrRtnGeEssu2d6QbFJYoHGCidiXzGoO3Uo9LeOzGmBQ8Rla5uNx09vVG+5XwmIslihtfoA==
+X-Received: by 2002:aa7:9ec2:: with SMTP id r2mr18816853pfq.265.1595234405912; 
+ Mon, 20 Jul 2020 01:40:05 -0700 (PDT)
 Received: from hsinchu02.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id o4sm11388151pjo.16.2020.07.20.01.40.02
+ by smtp.gmail.com with ESMTPSA id o4sm11388151pjo.16.2020.07.20.01.40.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2020 01:40:03 -0700 (PDT)
+ Mon, 20 Jul 2020 01:40:05 -0700 (PDT)
 From: Zong Li <zong.li@sifive.com>
 To: palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: Zong Li <zong.li@sifive.com>
-Subject: [PATCH 1/2] target/riscv: Fix the range of pmpcfg of CSR funcion table
-Date: Mon, 20 Jul 2020 16:39:56 +0800
-Message-Id: <c01aa428c0b4dc9c3e5b24a3d04040a1253bb3a5.1595234208.git.zong.li@sifive.com>
+Subject: [PATCH 2/2] target/riscv/pmp.c: Fix the index offset on RV64
+Date: Mon, 20 Jul 2020 16:39:57 +0800
+Message-Id: <658e49284fc564d4114307cb559cf23ea3e751fd.1595234208.git.zong.li@sifive.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1595234208.git.zong.li@sifive.com>
 References: <cover.1595234208.git.zong.li@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
- envelope-from=zong.li@sifive.com; helo=mail-pf1-x441.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
+ envelope-from=zong.li@sifive.com; helo=mail-pg1-x544.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -69,7 +69,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 20 Jul 2020 05:44:54 -0400
+X-Mailman-Approved-At: Mon, 20 Jul 2020 05:44:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,29 +81,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jul 2020 08:40:08 -0000
+X-List-Received-Date: Mon, 20 Jul 2020 08:40:09 -0000
 
-The range of Physical Memory Protection should be from CSR_PMPCFG0
-to CSR_PMPCFG3, not to CSR_PMPADDR9.
+On RV64, the reg_index is 2 (pmpcfg2 CSR) after the seventh pmp
+entry, it is not 1 (pmpcfg1 CSR) like RV32. In the original
+implementation, the second parameter of pmp_write_cfg is
+"reg_index * sizeof(target_ulong)", and we get the the result
+which is started from 16 if reg_index is 2, but we expect that
+it should be started from 8. Separate the implementation for
+RV32 and RV64 respectively.
 
 Signed-off-by: Zong Li <zong.li@sifive.com>
 ---
- target/riscv/csr.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/pmp.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index ac01c835e1..6a96a01b1c 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1353,7 +1353,7 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_MTINST] =              { hmode,   read_mtinst,      write_mtinst     },
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 2a2b9f5363..adcdd411e6 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -320,8 +320,13 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
  
-     /* Physical Memory Protection */
--    [CSR_PMPCFG0  ... CSR_PMPADDR9] =  { pmp,   read_pmpcfg,  write_pmpcfg   },
-+    [CSR_PMPCFG0  ... CSR_PMPCFG3]   = { pmp,   read_pmpcfg,  write_pmpcfg   },
-     [CSR_PMPADDR0 ... CSR_PMPADDR15] = { pmp,   read_pmpaddr, write_pmpaddr  },
+     for (i = 0; i < sizeof(target_ulong); i++) {
+         cfg_val = (val >> 8 * i)  & 0xff;
++#if defined(TARGET_RISCV32)
+         pmp_write_cfg(env, (reg_index * sizeof(target_ulong)) + i,
+             cfg_val);
++#elif defined(TARGET_RISCV64)
++        pmp_write_cfg(env, ((reg_index >> 1) * sizeof(target_ulong)) + i,
++            cfg_val);
++#endif
+     }
+ }
  
-     /* Performance Counters */
+@@ -336,7 +341,11 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
+     target_ulong val = 0;
+ 
+     for (i = 0; i < sizeof(target_ulong); i++) {
++#if defined(TARGET_RISCV32)
+         val = pmp_read_cfg(env, (reg_index * sizeof(target_ulong)) + i);
++#elif defined(TARGET_RISCV64)
++        val = pmp_read_cfg(env, ((reg_index >> 1) * sizeof(target_ulong)) + i);
++#endif
+         cfg_val |= (val << (i * 8));
+     }
+     trace_pmpcfg_csr_read(env->mhartid, reg_index, cfg_val);
 -- 
 2.27.0
 
