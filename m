@@ -1,75 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jxSLx-0001Ak-LH
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Jul 2020 05:44:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39004)
+	id 1jxf61-0001tB-Lv
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Jul 2020 19:21:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46928)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
- id 1jxRLE-0004ES-SE
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2020 04:40:08 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:43679)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jxf60-0001sW-Ab; Mon, 20 Jul 2020 19:21:20 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:45953)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
- id 1jxRLD-0003u4-8H
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2020 04:40:08 -0400
-Received: by mail-pg1-x544.google.com with SMTP id w2so9972580pgg.10
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2020 01:40:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=hHlA6wmhpvYVr+0JFQxF6AzpWLBgIsPSzrz6OprCNsQ=;
- b=iKj+cIaGrtmTYNZccQXM1I1mOsrkjEFYFMUR3SWCbsS+zT6DkG/G4jbbekAwe8bfN8
- kt0VPleUYJcBPMmNP7bVuD9BU9Mg5bgbSFeoh7MVLBEby0QmCHEJejxkdeh0VseyhX5i
- WmQ6fDsVajFW4FXTJOJWk+yyfHROPRxHRP88mDe+Pkc72i54T1f2aJn0JB/r7FaSfBdo
- N97cMbm0aHVI1CBX2Y0PXWJjegTtJElBydoXB1tuHdOrJ2AHWhzDVz7/Kk5gwX8SJUmc
- /Buns+o6KNu25dybhaNXlXSv5bwL6keMRVPy/+Qana9EKjshGKOAy/gHr3Jyfjnz/bl4
- 94mg==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1jxf5y-0002CL-IU; Mon, 20 Jul 2020 19:21:20 -0400
+Received: by mail-io1-xd41.google.com with SMTP id e64so19425406iof.12;
+ Mon, 20 Jul 2020 16:21:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=rFBhgINNlJ6GuKDyOev5puWMRyBRkyz3ArJkP6pxiz8=;
+ b=MIChtKLsM4ODl7MituXLFrwnmpE9uurZYIdLn82Q4HmgLpvw+ai3xdm1M+v7nPQ3xU
+ kg1gy8uvH0kZH7O1WNDOSFUQzIPZDxBK0yzhmNEmJ5CtK3p6M55cbXuts9WucvmwcQf9
+ 8Y3rvCPbNvNZ1QBWvMF8c7IU2vfS9OZiEaWUkvMwiNyN9kJppYwsIS2G3mhFAdfb1Wa9
+ UlXg48d/xdJLGBv24285FVPF/QQqvtu9/9OZrjsFeIqZNxRdbzuK166ACy4GqjxQWr2x
+ wxtQc4ybYb91O1nFu/3cThTJDDfqsw20mmoR3JhkpUoTlwYqmBS8DJpfiBXjTvlRnNRK
+ ODmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=hHlA6wmhpvYVr+0JFQxF6AzpWLBgIsPSzrz6OprCNsQ=;
- b=FBPQlni02EM403rknInTUkPEkbBeQDTmRYNCWEXmWB6Gdll37dKYaYMeYZn3pTQJPJ
- m15sKYOCrdas5fH44+Eu6opAShR4rTA8TGMKtkQC5rVVm/ZgR6Zkm+OlcJqkjrxO5AJg
- qzAF0gb74msIXAQLj7iKD9fOwoOUXn6FgpnzaqL99rHYjivwBJJCzAKKcUh3jRHiV0b/
- cMCd4WzOYPtHqoq6UGe9ZPst+2FO1RhMklDgPuTQ5UwmeSJApSnv0XiJ08zsQbUE3kb6
- CRDZ+6vyWjI50VYBHb6EfkFhdrryiw0NmSPJu+L5T0umpoWSCDyoktjUZG9hOvtCkJ6h
- WOrA==
-X-Gm-Message-State: AOAM5320bfBpZXUlmcQX8lsHYWsXj7O/Qy6njXwtmE6w5KJZDSMR53Rd
- WXOfp9Gv+f1ESyjNOMTv1IQkrQ==
-X-Google-Smtp-Source: ABdhPJxtdrRtnGeEssu2d6QbFJYoHGCidiXzGoO3Uo9LeOzGmBQ8Rla5uNx09vVG+5XwmIslihtfoA==
-X-Received: by 2002:aa7:9ec2:: with SMTP id r2mr18816853pfq.265.1595234405912; 
- Mon, 20 Jul 2020 01:40:05 -0700 (PDT)
-Received: from hsinchu02.internal.sifive.com
- (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id o4sm11388151pjo.16.2020.07.20.01.40.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2020 01:40:05 -0700 (PDT)
-From: Zong Li <zong.li@sifive.com>
-To: palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Zong Li <zong.li@sifive.com>
-Subject: [PATCH 2/2] target/riscv/pmp.c: Fix the index offset on RV64
-Date: Mon, 20 Jul 2020 16:39:57 +0800
-Message-Id: <658e49284fc564d4114307cb559cf23ea3e751fd.1595234208.git.zong.li@sifive.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1595234208.git.zong.li@sifive.com>
-References: <cover.1595234208.git.zong.li@sifive.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=rFBhgINNlJ6GuKDyOev5puWMRyBRkyz3ArJkP6pxiz8=;
+ b=Y3eWthEeBKdX7B0+DQdfPwItja1TQYY4vx8kL+24a1ujgV8yqoXsHIRNQZT+H+dPbT
+ Jf4iXVOpOXJR91X9D0ka5maSnc0ma9Tzb7+n7s4hLKSKZOOkBkyqB2DrcVA3/4e/ZTFi
+ 37/bCYypW0VV0C0sEri84ogOPRGc+rDSpMFflHeBVlIRkyEolGVIstpO0LbkKerJsluN
+ U6nb5gyWWtCMZTfQlJVfHn0qNk8j5i/xAavfupwDxp1HHuMsr/KU89VzpmX6IDdilSVG
+ Vx4JiOGJ7TMzPmzr8Q++6XkYY3/bDO5Y/pNJ0iit2Hq4FNp66sOlrFETFnXHNCYzTW8C
+ o8ng==
+X-Gm-Message-State: AOAM530f2Fkuf3ddTplpMIT9BJOQBtPpf9fM7Wt7eFBRhUu7HCpr1PES
+ 4vyV+pvw1TQq5zc5YGm74Efqe8Kp0DAnRXdqzGs=
+X-Google-Smtp-Source: ABdhPJz+7GtKB8GCkNotLBdaEcYr6D26fZVKplbdsejWPMLiIaZj9XkcCQ6oo0RtyaLMVIZik2vsLwd2kpOEXedykdw=
+X-Received: by 2002:a6b:8dd1:: with SMTP id
+ p200mr25230083iod.118.1595287276945; 
+ Mon, 20 Jul 2020 16:21:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
- envelope-from=zong.li@sifive.com; helo=mail-pg1-x544.google.com
+References: <20200718002027.82300-1-jrtc27@jrtc27.com>
+ <20200718004934.83174-1-jrtc27@jrtc27.com>
+ <569659ed-7b03-7440-9167-855e92301f13@amsat.org>
+ <92816800-F7B8-45CB-9863-96B8DF526D29@jrtc27.com>
+ <CAFEAcA-EHOVEQLGaF_wu3d-LVvC3+bDHo0=xyvzG+769Kus7WQ@mail.gmail.com>
+In-Reply-To: <CAFEAcA-EHOVEQLGaF_wu3d-LVvC3+bDHo0=xyvzG+769Kus7WQ@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 20 Jul 2020 16:11:11 -0700
+Message-ID: <CAKmqyKNLL+kDtPXOHd_oSXXLi2P7Zemfu6fPtk9DWd4xKDNWbg@mail.gmail.com>
+Subject: Re: [PATCH v2] goldfish_rtc: Fix non-atomic read behaviour of
+ TIME_LOW/TIME_HIGH
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Jessica Clarke <jrtc27@jrtc27.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Anup Patel <anup.patel@wdc.com>, Alistair Francis <Alistair.Francis@wdc.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
+ QEMU Developers <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 20 Jul 2020 05:44:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,52 +82,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jul 2020 08:40:09 -0000
+X-List-Received-Date: Mon, 20 Jul 2020 23:21:20 -0000
 
-On RV64, the reg_index is 2 (pmpcfg2 CSR) after the seventh pmp
-entry, it is not 1 (pmpcfg1 CSR) like RV32. In the original
-implementation, the second parameter of pmp_write_cfg is
-"reg_index * sizeof(target_ulong)", and we get the the result
-which is started from 16 if reg_index is 2, but we expect that
-it should be started from 8. Separate the implementation for
-RV32 and RV64 respectively.
+On Sat, Jul 18, 2020 at 11:09 AM Peter Maydell <peter.maydell@linaro.org> w=
+rote:
+>
+> On Sat, 18 Jul 2020 at 15:45, Jessica Clarke <jrtc27@jrtc27.com> wrote:
+> > On 18 Jul 2020, at 08:42, Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>=
+ wrote:
+> > > Maybe easier to cache the whole u64, this matches RTC_ALARM_LOW /
+> > > RTC_ALARM_HIGH pattern (goldfish_rtc_vmstate change not included):
+> >
+> > We could, but why waste space storing an extra 32 bits you never need?
+> > I don't think saving all 64 bits makes it any easier to read, I'd
+> > personally even argue it makes it slightly less obvious what's going on=
+.
+>
+> You could go either way. (The original Google-written version
+> of this device model went for store-the-whole-u64:
+> https://android.googlesource.com/platform/external/qemu/+/refs/heads/emu-=
+2.0-release/hw/android/goldfish/timer.c
+> but we don't need to follow their implementation.)
+> Since "save the high half" is the version you've written
+> and tested, I vote we go with that :-)
+>
+> Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
-Signed-off-by: Zong Li <zong.li@sifive.com>
----
- target/riscv/pmp.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Applied to the RISC-V tree, this looks like a bug worth fixing for 5.1
+so I'll send a PR soon.
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 2a2b9f5363..adcdd411e6 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -320,8 +320,13 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
- 
-     for (i = 0; i < sizeof(target_ulong); i++) {
-         cfg_val = (val >> 8 * i)  & 0xff;
-+#if defined(TARGET_RISCV32)
-         pmp_write_cfg(env, (reg_index * sizeof(target_ulong)) + i,
-             cfg_val);
-+#elif defined(TARGET_RISCV64)
-+        pmp_write_cfg(env, ((reg_index >> 1) * sizeof(target_ulong)) + i,
-+            cfg_val);
-+#endif
-     }
- }
- 
-@@ -336,7 +341,11 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
-     target_ulong val = 0;
- 
-     for (i = 0; i < sizeof(target_ulong); i++) {
-+#if defined(TARGET_RISCV32)
-         val = pmp_read_cfg(env, (reg_index * sizeof(target_ulong)) + i);
-+#elif defined(TARGET_RISCV64)
-+        val = pmp_read_cfg(env, ((reg_index >> 1) * sizeof(target_ulong)) + i);
-+#endif
-         cfg_val |= (val << (i * 8));
-     }
-     trace_pmpcfg_csr_read(env->mhartid, reg_index, cfg_val);
--- 
-2.27.0
+>
+> NB: this is a migration compatibility break for the risc-v
+> 'virt' board : up to Alistair whether that's OK or if the
+> more awkward compat-maintaining vmstate subsection is worth
+> the effort.
 
+I think it's ok
+
+Alistair
+
+>
+> thanks
+> -- PMM
+>
 
