@@ -1,66 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jxu6W-0004EU-Qo
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Jul 2020 11:22:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51436)
+	id 1jxuEH-0002Qw-0I
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Jul 2020 11:30:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53330)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jxu6V-0004Dj-1h; Tue, 21 Jul 2020 11:22:51 -0400
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:39216)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1jxuEF-0002Qe-3Y
+ for qemu-riscv@nongnu.org; Tue, 21 Jul 2020 11:30:51 -0400
+Received: from mail-oo1-xc42.google.com ([2607:f8b0:4864:20::c42]:45810)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jxu6T-0005Hm-Du; Tue, 21 Jul 2020 11:22:50 -0400
-Received: by mail-io1-xd44.google.com with SMTP id z6so4317739iow.6;
- Tue, 21 Jul 2020 08:22:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1jxuEC-0006rx-Ld
+ for qemu-riscv@nongnu.org; Tue, 21 Jul 2020 11:30:50 -0400
+Received: by mail-oo1-xc42.google.com with SMTP id a9so3989430oof.12
+ for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2020 08:30:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=dg6ywj0QsHTflwHtlgnpMJUCnmY3aA89oiRMLeeCkVU=;
- b=WnQmO+uOxBMCf2Qrld2/ZKoWKpxx+hc+mjYLZQgsWMLP7iwHnKQVtwCvyScPSvZIBc
- EMpgACiOcUFifMDHX/GNzjkQuSt+gPx6vOrK7ZcLuSsvfBohcD8+bGP/+HNgYWcXnkex
- HbH1ubhKS1eLrJt40llhuZi2zLdAvq/WeIB+gWHpGqfmm9oKPQPvNYhrT0hZHJ1RrRWm
- WX1NkUEUqSMDsEvsoRqJAsHqmGWukmmN3tTLaN0Plgu0u6IV2SVur9GQB+lyJBGCpjRR
- zMOvJqik0UPF3ycm+kCAnwkWZqWvl57v1tgCuNuA3vGweie9HtVjybJ/i62jtW/k7UEV
- +XbQ==
+ :cc; bh=0QQ9LSjKCX7WYfKLzfQabmF5yYVgASKsc0PsMjohddU=;
+ b=S0AtwJrznVS77udcGXJ6C+rq3sgZI8k+bnHvUNZyX6VQqwZ1x/qJs1wNJUnzCXb92/
+ 1OpxsqwN5mvqE8srAHyaK1sWp4v9C6VVKXq6Vjynf7I53FZFd1kNiZoK5bfs/UMeMmSe
+ 5eUQQPkIbx59CTCfSCOrvZzg3Jq58Eoz65TlBMUcoxwHtmU+C0FiFQW9aLRITpM6B3Qo
+ 8VywssrIkMCr/SFfBJyI8BoYwkXFHwX7fEVeEmkugvjBoaYK6OndodGuSeL7rudzBhnz
+ N3Tkmb5xV7K0LrrD0B1zlw9tbtZo0868QA93/q23DC6MWjS+7ZgzUfBgyZIvqZKZswur
+ q7dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=dg6ywj0QsHTflwHtlgnpMJUCnmY3aA89oiRMLeeCkVU=;
- b=s1hLAD8tW4bCDAAyWYbJ3F8PFzAr4AfjdnWPhjfd8dA64ySeomuR5ReHBXlYFfXzgm
- pDz3GAprxVyC+N2QkKywR9tOMGWBPqMZfdjOHCBMOb6kpJNQkJQVuAsDZHPOt3zYzuuq
- WqGGXnYkOZWMplqjWeTFAU7Z+Po3n4KTSGoub545bh4ROzzUtuyTQc0TZbl/wAYBneYy
- RgJxHIoHllbUGbLMcoXPhpddfzUkhLzgnCOTL4sXED3yX4pi+5GO4oJZdLPNvSkkNavV
- Zd5IoLHTn6IWb/d8qMhI9aD9U5tVgDUowSfp9vJxmPKUXMkPiS0s1/WfJCQKI2lGmJwH
- vB7Q==
-X-Gm-Message-State: AOAM531g5TA1rtko54qS2nylGEjkAKfXwR+USWEvWuxzHgLCLZ9O8oZn
- IswNr2IyIqNlNA+x8anrGhIb4d65v7PD8CuLilo=
-X-Google-Smtp-Source: ABdhPJyusPRk8SfzFFbnFVCo73IoZ/dyg8Vrrtp9uKeqPr7+Bk5VyNT3Q4sltslhsvVD28hIDXPwJeVKI+ruY7iLUm0=
-X-Received: by 2002:a5d:9306:: with SMTP id l6mr28810280ion.105.1595344967830; 
- Tue, 21 Jul 2020 08:22:47 -0700 (PDT)
+ bh=0QQ9LSjKCX7WYfKLzfQabmF5yYVgASKsc0PsMjohddU=;
+ b=Nd49D6pD7sJk9T+I85hx41F6GEcBh5LZ6kIx1LKK0phh70OQt/AlmM8yiMQPkYsV5R
+ N5yRKHipx3aj0MMeLkRkNMkrCY5FoYoT9fdr20cuS5cQL+MAUITYlBXPey3Q7KBJPur2
+ iBi5epqisR8jPIrH8xQC8nPcWrjJL81hQVKV2uab4b3iS5+R8Tr2W3d5DuJ3b2xQ+PkV
+ wc7RlFRxHp5wqDjxSxwvGP4HjcrcZq/iiYhChJI5ZIqHL5N8Uv6R2QYb3mDUBXGQZXER
+ rU2LA0vxS2BeHAdoVb+4GWq9asRUzetZyAUUufAeQbsenMwWftvjiiVj59XyIAoHJ5J6
+ R6UQ==
+X-Gm-Message-State: AOAM5332xalxiFUh6HGjwSRxA8YQKUgRNby52ouAFZjv41r4lo6Gf4Zo
+ DCA7rgj9eBxzWFz3oHpcbQ1q4/NFcodP9bvL6vCDHQ==
+X-Google-Smtp-Source: ABdhPJwEjUKRlt7/9Vtm0V732JItyLB8ucoLbon6TSCrWXVf40El/VPo4d24LA7VfHXNFRChdTBcy2hmqZ5DTtAE/KY=
+X-Received: by 2002:a4a:a685:: with SMTP id f5mr14420256oom.85.1595345447041; 
+ Tue, 21 Jul 2020 08:30:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <1594891856-15474-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1594891856-15474-1-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 Jul 2020 08:12:42 -0700
-Message-ID: <CAKmqyKOGVqFxh7azqo95TwPtCyBtVLE34x6UFfmqvmbNZWDDXA@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: sifive_e: Correct debug block size
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+References: <20200721133742.2298-1-zhiwei_liu@c-sky.com>
+ <CAKmqyKMPrwkxhXgfWqEofGUdKTJ3jAi7hQ7h6hEP-zFDN3Yt9w@mail.gmail.com>
+In-Reply-To: <CAKmqyKMPrwkxhXgfWqEofGUdKTJ3jAi7hQ7h6hEP-zFDN3Yt9w@mail.gmail.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 21 Jul 2020 16:30:35 +0100
+Message-ID: <CAFEAcA87pws6QNEoJk4B-+vQiE3Pe7munfJiWgQZuTDZ+uBZwg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Quiet Coverity complains about vamo*
+To: Alistair Francis <alistair23@gmail.com>
+Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c42;
+ envelope-from=peter.maydell@linaro.org; helo=mail-oo1-xc42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -75,44 +76,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jul 2020 15:22:51 -0000
+X-List-Received-Date: Tue, 21 Jul 2020 15:30:51 -0000
 
-On Thu, Jul 16, 2020 at 2:31 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, 21 Jul 2020 at 16:19, Alistair Francis <alistair23@gmail.com> wrote:
 >
-> Currently the debug region size is set to 0x100, but according to
-> FE310-G000 and FE310-G002 manuals:
+> On Tue, Jul 21, 2020 at 6:38 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+> >
+> > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 >
->   FE310-G000: 0x100 - 0xFFF
->   FE310-G002: 0x0   - 0xFFF
->
-> Change the size to 0x1000 that applies to both.
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Interestingly Coverity's latest scan has decided all these
+issues are 'fixed', even without the assert. I guess that the
+online version of Coverity has had an improvement to its
+checking and so is now able to figure out that it's not going
+to overrun the array? Still I think the assert is worth having.
 
-Alistair
-
-> ---
->
->  hw/riscv/sifive_e.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 7bb97b4..c8b0604 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -54,7 +54,7 @@ static const struct MemmapEntry {
->      hwaddr base;
->      hwaddr size;
->  } sifive_e_memmap[] = {
-> -    [SIFIVE_E_DEBUG] =    {        0x0,      0x100 },
-> +    [SIFIVE_E_DEBUG] =    {        0x0,     0x1000 },
->      [SIFIVE_E_MROM] =     {     0x1000,     0x2000 },
->      [SIFIVE_E_OTP] =      {    0x20000,     0x2000 },
->      [SIFIVE_E_CLINT] =    {  0x2000000,    0x10000 },
-> --
-> 2.7.4
->
->
+thanks
+-- PMM
 
