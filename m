@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jxiIP-0002R9-Uu
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Jul 2020 22:46:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43100)
+	id 1jxlNJ-000157-Tr
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Jul 2020 02:03:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45046)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
- id 1jxiIO-0002Qd-2M
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2020 22:46:20 -0400
-Received: from mail-oi1-x244.google.com ([2607:f8b0:4864:20::244]:39147)
+ id 1jxlNI-00014T-BH
+ for qemu-riscv@nongnu.org; Tue, 21 Jul 2020 02:03:36 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c]:55452)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
- id 1jxiIM-0000iB-Ei
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2020 22:46:19 -0400
-Received: by mail-oi1-x244.google.com with SMTP id w17so16045857oie.6
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2020 19:46:18 -0700 (PDT)
+ id 1jxlNG-00006n-O8
+ for qemu-riscv@nongnu.org; Tue, 21 Jul 2020 02:03:35 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id k1so1034704pjt.5
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2020 23:03:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ZvtYBtBKpih4QmDpBqfuD7U/hOUtMDyjJ2qtYKxB568=;
- b=i7AiMrL36RCzMo5/AR2E1Nbopn9ARiUKIdBS0wrikt4n1VW5g5fxOXhDQ93TwuppTe
- OjDg/JhBg3Vul1conSLIpdlp00I7VoGtGcNQkU3vH3Ux8K34q+xH/qgaatV4BUso+SDA
- t9Es63E1/lFIfFl84Emru4cay9asbzyJIsk1VkD1Pfs/R0u0c2NXMSpxLYiWPMd8LkVr
- gAaHthgWXpueU7uVwHHpCmcA+3q9/jZjx880SbcrciedSiCNS7v7kqOoxgR2lhATbdm6
- 4VcGWp2ozwJrT9t7so/SzCjJAqA+U8xRA+tHsGuhuPzncwN2saBLFvSjUEKRLi05TkVZ
- r8Fg==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=1oJgumxJW9euJulVVhe0hfyyrmYeeSc/dhTCZ82IU9A=;
+ b=AqWM1L4nVH4ahXFgl5rqP++GCiVASnr43qBgUdBAF8jWfwznwiOtRkt51fiEklU5uU
+ jxC3TzwwC/a0qiTpmmaRSE6PDot35ggObusxHgCytctBod7ByQpSsJcCsnU4AaVQ4vAy
+ OV1Z58TWoHH9DAtoQQPGuyB2+jCozXSgiPLDsKjixQtUBF3dcRX3tarQeLsy07mhT63B
+ vD+r2elRWmMUjPcPdU2ddpVy8aAaKdjUC03c82pN0p1m3sP5osW7ztf0ZMTDaMc0TbFr
+ Gu6iICCmyZfjSd1dk6+DFjdHtiMbvN4VytyaM3kpBg4xg0PfMPuyUWY/sCKrPKyJABAl
+ njEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ZvtYBtBKpih4QmDpBqfuD7U/hOUtMDyjJ2qtYKxB568=;
- b=a5gVZ7DAgk1A1rV2n5floifA7KMblY6nzWP5vZilnnN8Vr41wnLLABvu56LKfSTwF7
- derkKxxA3019o3vgL3TiVyUwe/6BUxYPFT3eGa4IQ60GbStQ85UlcLL1jupgX8/5nef6
- ZgJk9vveg+hzMnh1xc7ykMexxb73qTzJTu5PW+2ZNRxGCIUQGBIlPbOF/wrycFGhjhOc
- ZIXbAOXE61IS5yKFNU/m4x+iQ7FqjGWy3R1ubhjgp0kl3tVz0esQf4qnaSgQ+ddz76TX
- EjbB7rPNEcMKukBTCWuub6BOnbWd+cZLoAXbW+MOXyPDlkx9/0nm5OOzIsg7ze7qZXAY
- pvoA==
-X-Gm-Message-State: AOAM531T0fu8RoOuCnTeOaknge6XYUwTUPj7yMzfdvT1FRyv2xMlPO2B
- xy3HNVm2ZQmH1Pk9XZ1zV/sQP2tLtao5g8GPVtSHXg==
-X-Google-Smtp-Source: ABdhPJy/t4FSy2xk9r4adOXS9wwLrNXQblEDBrB+S6JFMkdH1iQzpNH3tUlQ5YZwev9K92VzyCeLBA+JGT6CPVLMPaU=
-X-Received: by 2002:aca:d509:: with SMTP id m9mr1534190oig.116.1595299577131; 
- Mon, 20 Jul 2020 19:46:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1595234208.git.zong.li@sifive.com>
- <658e49284fc564d4114307cb559cf23ea3e751fd.1595234208.git.zong.li@sifive.com>
- <CAEUhbmWz0Afs4YotbQi-t96A-eEcQzxzwkYjHtQ4BZxJ7SCgxw@mail.gmail.com>
-In-Reply-To: <CAEUhbmWz0Afs4YotbQi-t96A-eEcQzxzwkYjHtQ4BZxJ7SCgxw@mail.gmail.com>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=1oJgumxJW9euJulVVhe0hfyyrmYeeSc/dhTCZ82IU9A=;
+ b=qJpo4f+TFSkfF28DbP3C6Z7Y5OFFlVbJqyMfOeGGhkqLDtn9u1w2Fwco5X4ncX5M4q
+ Q2bHiyLp0hlunmi1oEEAGXDOhw839eYvM5xIImKnUazwCxxydXSJc6Wr2DVtpStYnE8d
+ LjkYqTNpOT3BFuNOT66rKYmgLVoTBMMQYUOVUiYOLURCjvdsMyZQ8chg+ZBa4YHvcwVw
+ SqKqTCp4hlTqQKWIRZYFVXwUtpJEfZHZiEEERXUY4CbnIKy7xs60ZgqjXSnKlBVMZBKD
+ 8BfSkyxUQT3k/uGQYCv54U2H+jCpEyvoBKn/6VX3zxKzkO0W5mtQN+6ZP0w2CNJ3f9ly
+ i6wg==
+X-Gm-Message-State: AOAM531YktSmNr7DJikatiJ83n8kHIaLNgpIZ7TRhpRdaIuyGs93sD6k
+ nMY9+YKLxhBXV5QFi7km8m36AA==
+X-Google-Smtp-Source: ABdhPJwnH1xjPj+9AQqwKCenuOQaJTbBeBJibl+HGMx6MPVi2qPUAfFOGxLdsPx4EH9pBxOg7HfP3w==
+X-Received: by 2002:a17:902:be06:: with SMTP id
+ r6mr19621523pls.143.1595311413216; 
+ Mon, 20 Jul 2020 23:03:33 -0700 (PDT)
+Received: from hsinchu02.internal.sifive.com
+ (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
+ by smtp.gmail.com with ESMTPSA id 66sm19724068pfa.92.2020.07.20.23.03.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Jul 2020 23:03:32 -0700 (PDT)
 From: Zong Li <zong.li@sifive.com>
-Date: Tue, 21 Jul 2020 10:46:06 +0800
-Message-ID: <CANXhq0pd7LyN4-Ysmss=SWjidBZjui_EGq1d1xrOXDmDNN=KeA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv/pmp.c: Fix the index offset on RV64
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::244;
- envelope-from=zong.li@sifive.com; helo=mail-oi1-x244.google.com
+To: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
+ sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Zong Li <zong.li@sifive.com>
+Subject: [PATCH v2 0/2] Fix some PMP implementation
+Date: Tue, 21 Jul 2020 14:03:26 +0800
+Message-Id: <cover.1595311277.git.zong.li@sifive.com>
+X-Mailer: git-send-email 2.27.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=zong.li@sifive.com; helo=mail-pj1-x102c.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -78,65 +79,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jul 2020 02:46:20 -0000
+X-List-Received-Date: Tue, 21 Jul 2020 06:03:36 -0000
 
-On Tue, Jul 21, 2020 at 10:41 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> Hi Zong,
->
-> On Mon, Jul 20, 2020 at 5:46 PM Zong Li <zong.li@sifive.com> wrote:
-> >
-> > On RV64, the reg_index is 2 (pmpcfg2 CSR) after the seventh pmp
-> > entry, it is not 1 (pmpcfg1 CSR) like RV32. In the original
-> > implementation, the second parameter of pmp_write_cfg is
-> > "reg_index * sizeof(target_ulong)", and we get the the result
-> > which is started from 16 if reg_index is 2, but we expect that
-> > it should be started from 8. Separate the implementation for
-> > RV32 and RV64 respectively.
-> >
-> > Signed-off-by: Zong Li <zong.li@sifive.com>
-> > ---
-> >  target/riscv/pmp.c | 9 +++++++++
-> >  1 file changed, 9 insertions(+)
-> >
-> > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> > index 2a2b9f5363..adcdd411e6 100644
-> > --- a/target/riscv/pmp.c
-> > +++ b/target/riscv/pmp.c
-> > @@ -320,8 +320,13 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
-> >
-> >      for (i = 0; i < sizeof(target_ulong); i++) {
-> >          cfg_val = (val >> 8 * i)  & 0xff;
-> > +#if defined(TARGET_RISCV32)
-> >          pmp_write_cfg(env, (reg_index * sizeof(target_ulong)) + i,
-> >              cfg_val);
-> > +#elif defined(TARGET_RISCV64)
-> > +        pmp_write_cfg(env, ((reg_index >> 1) * sizeof(target_ulong)) + i,
-> > +            cfg_val);
-> > +#endif
->
-> Can you please simplify this by shifting reg_index outside the for
-> loop for RV64?
->
+This patch set contains the fixes for wrong index of pmpcfg CSR on rv64,
+and the pmp range in CSR function table.
 
-OK, that would be great. Change it in the next version, thanks.
+Changed in v2:
+ - Move out the shifting operation from loop. Suggested by Bin Meng.
 
-> >      }
-> >  }
-> >
-> > @@ -336,7 +341,11 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
-> >      target_ulong val = 0;
-> >
-> >      for (i = 0; i < sizeof(target_ulong); i++) {
-> > +#if defined(TARGET_RISCV32)
-> >          val = pmp_read_cfg(env, (reg_index * sizeof(target_ulong)) + i);
-> > +#elif defined(TARGET_RISCV64)
-> > +        val = pmp_read_cfg(env, ((reg_index >> 1) * sizeof(target_ulong)) + i);
-> > +#endif
-> >          cfg_val |= (val << (i * 8));
-> >      }
-> >      trace_pmpcfg_csr_read(env->mhartid, reg_index, cfg_val);
->
-> Regards,
-> Bin
+Zong Li (2):
+  target/riscv: Fix the range of pmpcfg of CSR funcion table
+  target/riscv/pmp.c: Fix the index offset on RV64
+
+ target/riscv/csr.c |  2 +-
+ target/riscv/pmp.c | 19 ++++++++++++++++---
+ 2 files changed, 17 insertions(+), 4 deletions(-)
+
+-- 
+2.27.0
+
 
