@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyAs5-0004XE-K9
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:17:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52414)
+	id 1jyAsI-0004mt-Eg
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:17:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52508)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAs3-0004VY-1M
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:17:04 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b]:35179)
+ id 1jyAsG-0004kV-Vu
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:17:16 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f]:35184)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyArz-00059J-PK
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:17:02 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id x9so656366plr.2
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:16:58 -0700 (PDT)
+ id 1jyAsF-0005BG-B1
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:17:16 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id x9so656710plr.2
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:17:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=rOp6YSrx5ear3r2vr5z2v8mQ11+Ffd42dKwAlwR1PgQ=;
- b=Kflan8mymvg8QofwJ/8q7/BxinyP/AY9t67rgcj8+rUR7TyaueouyxmHrCUsYKgZr2
- 4lKnlmrosC/SnncMwoBA5ciJfxq1vk/HT+d27YZWNcuQVkA5lOHWbeOBs8Fb7MDZBrl5
- SI7YVF+XocZViG5LiqeWX28ZIULVGl9sSR6U9Q95/KQ6O6rTLh9XiVWxf8Z5OsRt0XZB
- xytXrtjGBZQ7SDpFzRV6H89hV7hlgXmwKFS7G7yvq+43udvok5s6JEH8wWgrr1OyZmaa
- Xs93H+eRugEcBHWp8IlHXcx2djemMSM9Er7yN6hDZmv4481KP5fXLF+z1WF7E8nWggQs
- jmvA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=lIAWnZ0kGmaPMXxXhAaDX7KeOlS4ElOBc/y5+NIu9jI=;
+ b=fAl+4JmGLef92i5d7ZnmTLeloBTWFijxEAC/C05KRKBEJAQ5wZfZ7vBwsnp6x6gRLI
+ aRpZMFtfc5X62ppaaJxwsQONDTX8mWEuYrrnaFGG4lmCuNHsuBZekdlOsblPcGlB4yIu
+ 1jredABBfPh2Ba94IG1pfugvTmmd1QQ8PhlS/WuE4prA5GTggEBPnX2+TlektnqSM/Hn
+ 52AR/CQe8oKJv2EdVnmRSHBu6xTiB64rndRUxhye3VVAensIfsQ+Fp8qyF3UMgoogs4I
+ q7GLBHgw4th1jDOuGRFRqnD+RSaRKTG81BJmo1q1qRIqsUTpJUnxHouDByxtHWp7gtY3
+ pWWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=rOp6YSrx5ear3r2vr5z2v8mQ11+Ffd42dKwAlwR1PgQ=;
- b=d2eyHOISmdrA8c5lFK+C3GviLWFqtV2Zv/0tx7gX6i9Qwvbwst9wn20HWo2O+mFhY1
- odjdoArkEkhP2p6y4T0WxsQ59yaOFyQBSaOhe+80MNO4M8NNiJCOfOuX8wOzRV3mwk+9
- XiyMdvT1wYVdFIezWKvU9LqVN+X5qaJ5jZ2T+AB7107SeHCalyyguTJnZOCcuJGcopFC
- VIDdSdFHx3Owtq1XqyBZ8Qk1n7aUS944uKac7Sa2G5tlj/X2j1mfHd2zOZqipexZxBOj
- ZhP1uvHYCIXfggNc5BNSIOLji0K/Oa+vDquiRzRCY9Gcg9pAeJZlT4n523KiAtgj+pPW
- FdyQ==
-X-Gm-Message-State: AOAM533mhMgXg6/7Ai2goWmVkKag1nPCqzasu38UiewvtJ5F08yHAXCQ
- Jq4X4rG1ZdFmdYdqMLAPnI6WIg==
-X-Google-Smtp-Source: ABdhPJyyCH2RHjr37GN6PDWvWmGWPCbljsvIQuUHBNBRl69SueAGTmz0OZGYfVT3/iRLM+5MUrk87Q==
-X-Received: by 2002:a17:90a:2562:: with SMTP id
- j89mr8653303pje.218.1595409417901; 
- Wed, 22 Jul 2020 02:16:57 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=lIAWnZ0kGmaPMXxXhAaDX7KeOlS4ElOBc/y5+NIu9jI=;
+ b=lTLdf5Shndy0Q75WMX8YM1DXp6VfxVpkEebffpOB54WSZwtLkbk0l+h3BaGPGK88r4
+ 805Vep37UssMfzUBk1IOIUkJIs8F11AqHxuuv1ctofuMf9bDqFl+YzKRHr2FovqJXhEr
+ SILURofekm5JkHuvXWlSvpFQcPGaTBlcXxfEZD3ovVn72Q3NCTV+t/hFfCwA1UiPl8Hy
+ F2Ypiwp1jhi6ZfaN+cv9Cgtzaqw7ni9NMbSI8HufjLfOCPAV/UTHH6EvoIF9qa6z85l+
+ eEFokNsD8gmEL3UbBYBoUmo4nfw4iXEZr0YkvRQu8a2MR/ogO+N94jQS07JDrRJIjoor
+ c4Aw==
+X-Gm-Message-State: AOAM5314UkrwbKAGPhKtypG7tVHqOCv5118O8XuNeXWHTz942wtrllBi
+ djVU4e7bHkTAbVzM5uCoRi6XpQ==
+X-Google-Smtp-Source: ABdhPJyElK+jTC6uT3yuXXlo0UodDCf+khJgxVo2b1iKT1siY25JKg5zkJHj6zkC5d0TOXe3NES1Vg==
+X-Received: by 2002:a17:902:b185:: with SMTP id
+ s5mr26253436plr.211.1595409434101; 
+ Wed, 22 Jul 2020 02:17:14 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.16.55
+ by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.17.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2020 02:16:57 -0700 (PDT)
+ Wed, 22 Jul 2020 02:17:13 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>
-Subject: [RFC v2 00/76] target/riscv: support vector extension v0.9
-Date: Wed, 22 Jul 2020 17:15:23 +0800
-Message-Id: <20200722091641.8834-1-frank.chang@sifive.com>
+Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Subject: [RFC v2 01/76] target/riscv: drop vector 0.7.1 support
+Date: Wed, 22 Jul 2020 17:15:24 +0800
+Message-Id: <20200722091641.8834-2-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62b.google.com
+In-Reply-To: <20200722091641.8834-1-frank.chang@sifive.com>
+References: <20200722091641.8834-1-frank.chang@sifive.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62f.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,154 +80,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 09:17:04 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 09:17:17 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-This patchset implements the vector extension v0.9 for RISC-V on QEMU.
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+---
+ target/riscv/cpu.c | 24 ++++++------------------
+ target/riscv/cpu.h |  2 --
+ 2 files changed, 6 insertions(+), 20 deletions(-)
 
-This patchset is sent as RFC because RVV v0.9 is still in draft state.
-However, as RVV v1.0 should be ratified soon and there shouldn't be
-critical changes between RVV v1.0 and RVV v0.9. We would like to have
-the community to review RVV v0.9 implementations. Once RVV v1.0 is
-ratified, we will then upgrade to RVV v1.0.
-
-You can change the cpu argument: vext_spec to v0.9 (i.e. vext_spec=v0.9)
-to run with RVV v0.9 instructions.
-
-Changelog:
-
-v2
-  * drop v0.7.1 support.
-  * replace invisible return check macros with functions.
-  * move mark_vs_dirty() to translators.
-  * add SSTATUS_VS flag for s-mode.
-  * nan-box scalar fp register for floating-point operations.
-  * add gdbstub files for vector registers to allow system-mode
-    debugging with GDB.
-
-Chih-Min Chao (2):
-  fpu: add api to handle alternative sNaN propagation
-  fpu: fix float16 nan check
-
-Frank Chang (65):
-  target/riscv: drop vector 0.7.1 support
-  target/riscv: rvv-0.9: support vector 0.9
-  target/riscv: fix rsub gvec tcg_assert_listed_vecop assertion
-  target/riscv: correct the gvec IR called in gen_vec_rsub16_i64()
-  target/riscv: fix return value of do_opivx_widen()
-  target/riscv: fix vill bit index in vtype register
-  target/riscv: Use FIELD_EX32() to extract wd field
-  target/riscv: rvv-0.9: remove vxrm and vxsat fields from fcsr register
-  target/riscv: rvv-0.9: remove MLEN calculations
-  target/riscv: rvv-0.9: add fractional LMUL
-  target/riscv: rvv-0.9: add VMA and VTA
-  target/riscv: rvv-0.9: update check functions
-  target/riscv: introduce more imm value modes in translator functions
-  target/riscv: rvv-0.9: add narrower_nanbox_fpr helper
-  target/riscv: rvv-0.9: apply narrower nanbox helper in opfvf_trans
-  target/riscv: rvv-0.9: configure instructions
-  target/riscv: rvv-0.9: stride load and store instructions
-  target/riscv: rvv-0.9: index load and store instructions
-  target/riscv: rvv-0.9: fix address index overflow bug of indexed
-    load/store insns
-  target/riscv: rvv-0.9: fault-only-first unit stride load
-  target/riscv: rvv-0.9: amo operations
-  target/riscv: rvv-0.9: load/store whole register instructions
-  target/riscv: rvv-0.9: update vext_max_elems() for load/store insns
-  target/riscv: rvv-0.9: take fractional LMUL into vector max elements
-    calculation
-  target/riscv: rvv-0.9: floating-point square-root instruction
-  target/riscv: rvv-0.9: floating-point classify instructions
-  target/riscv: rvv-0.9: mask population count instruction
-  target/riscv: rvv-0.9: find-first-set mask bit instruction
-  target/riscv: rvv-0.9: set-X-first mask bit instructions
-  target/riscv: rvv-0.9: iota instruction
-  target/riscv: rvv-0.9: element index instruction
-  target/riscv: rvv-0.9: allow load element with sign-extended
-  target/riscv: rvv-0.9: register gather instructions
-  target/riscv: rvv-0.9: integer scalar move instructions
-  target/riscv: rvv-0.9: floating-point move instruction
-  target/riscv: rvv-0.9: floating-point scalar move instructions
-  target/riscv: rvv-0.9: whole register move instructions
-  target/riscv: rvv-0.9: integer extension instructions
-  target/riscv: rvv-0.9: single-width averaging add and subtract
-    instructions
-  target/riscv: rvv-0.9: single-width bit shift instructions
-  target/riscv: rvv-0.9: integer add-with-carry/subtract-with-borrow
-  target/riscv: rvv-0.9: narrowing integer right shift instructions
-  target/riscv: rvv-0.9: widening integer multiply-add instructions
-  target/riscv: rvv-0.9: quad-widening integer multiply-add instructions
-  target/riscv: rvv-0.9: single-width saturating add and subtract
-    instructions
-  target/riscv: rvv-0.9: integer comparison instructions
-  target/riscv: use softfloat lib float16 comparison functions
-  target/riscv: rvv-0.9: floating-point compare instructions
-  target/riscv: rvv-0.9: single-width integer reduction instructions
-  target/riscv: rvv-0.9: widening integer reduction instructions
-  target/riscv: rvv-0.9: mask-register logical instructions
-  target/riscv: rvv-0.9: slide instructions
-  target/riscv: rvv-0.9: floating-point slide instructions
-  target/riscv: rvv-0.9: narrowing fixed-point clip instructions
-  target/riscv: rvv-0.9: floating-point/integer type-convert
-    instructions
-  target/riscv: rvv-0.9: single-width floating-point reduction
-  target/riscv: rvv-0.9: widening floating-point reduction instructions
-  target/riscv: rvv-0.9: single-width scaling shift instructions
-  target/riscv: rvv-0.9: remove widening saturating scaled multiply-add
-  target/riscv: rvv-0.9: remove vmford.vv and vmford.vf
-  target/riscv: rvv-0.9: remove integer extract instruction
-  target/riscv: rvv-0.9: floating-point min/max instructions
-  softfloat: add fp16 and uint8/int8 interconvert functions
-  target/riscv: rvv-0.9: widening floating-point/integer type-convert
-  target/riscv: rvv-0.9: narrowing floating-point/integer type-convert
-
-Greentime Hu (2):
-  target/riscv: rvv-0.9: add vlenb register
-  target/riscv: gdb: support vector registers for rv32
-
-Hsiangkai Wang (2):
-  target/riscv: gdb: modify gdb csr xml file to align with csr register
-    map
-  target/riscv: gdb: support vector registers for rv64
-
-Kito Cheng (1):
-  fpu: implement full set compare for fp16
-
-LIU Zhiwei (4):
-  target/riscv: rvv-0.9: add mstatus VS field
-  target/riscv: rvv-0.9: add sstatus VS field
-  target/riscv: rvv-0.9: add translation-time vector context status
-  target/riscv: rvv-0.9: add vcsr register
-
- configure                               |    4 +-
- fpu/softfloat-specialize.inc.c          |    4 +-
- fpu/softfloat.c                         |  137 +-
- gdb-xml/riscv-32bit-csr.xml             |   11 +-
- gdb-xml/riscv-64bit-csr.xml             |   18 +-
- gdb-xml/riscv-64bit-vector-128b.xml     |   59 +
- gdb-xml/riscv-64bit-vector-256b.xml     |   59 +
- gdb-xml/riscv-64bit-vector-512b.xml     |   59 +
- include/fpu/softfloat.h                 |   55 +
- target/riscv/cpu.c                      |   10 +-
- target/riscv/cpu.h                      |   67 +-
- target/riscv/cpu_bits.h                 |   10 +
- target/riscv/cpu_helper.c               |   16 +-
- target/riscv/csr.c                      |   63 +-
- target/riscv/gdbstub.c                  |   62 +-
- target/riscv/helper.h                   |  507 +++--
- target/riscv/insn32-64.decode           |   18 +-
- target/riscv/insn32.decode              |  282 +--
- target/riscv/insn_trans/trans_rvv.inc.c | 2291 +++++++++++++++-------
- target/riscv/internals.h                |   18 +-
- target/riscv/translate.c                |   43 +-
- target/riscv/vector_helper.c            | 2367 +++++++++++++----------
- 22 files changed, 3993 insertions(+), 2167 deletions(-)
- create mode 100644 gdb-xml/riscv-64bit-vector-128b.xml
- create mode 100644 gdb-xml/riscv-64bit-vector-256b.xml
- create mode 100644 gdb-xml/riscv-64bit-vector-512b.xml
-
---
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 228b9bdb5d..2800953e6c 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -106,11 +106,6 @@ static void set_priv_version(CPURISCVState *env, int priv_ver)
+     env->priv_ver = priv_ver;
+ }
+ 
+-static void set_vext_version(CPURISCVState *env, int vext_ver)
+-{
+-    env->vext_ver = vext_ver;
+-}
+-
+ static void set_feature(CPURISCVState *env, int feature)
+ {
+     env->features |= (1ULL << feature);
+@@ -339,7 +334,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     CPURISCVState *env = &cpu->env;
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+     int priv_version = PRIV_VERSION_1_11_0;
+-    int vext_version = VEXT_VERSION_0_07_1;
+     target_ulong target_misa = 0;
+     Error *local_err = NULL;
+ 
+@@ -363,7 +357,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     }
+ 
+     set_priv_version(env, priv_version);
+-    set_vext_version(env, vext_version);
+ 
+     if (cpu->cfg.mmu) {
+         set_feature(env, RISCV_FEATURE_MMU);
+@@ -455,19 +448,14 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+                 return;
+             }
+             if (cpu->cfg.vext_spec) {
+-                if (!g_strcmp0(cpu->cfg.vext_spec, "v0.7.1")) {
+-                    vext_version = VEXT_VERSION_0_07_1;
+-                } else {
+-                    error_setg(errp,
+-                           "Unsupported vector spec version '%s'",
+-                           cpu->cfg.vext_spec);
+-                    return;
+-                }
++                error_setg(errp,
++                       "Unsupported vector spec version '%s'",
++                       cpu->cfg.vext_spec);
++                return;
+             } else {
+-                qemu_log("vector verison is not specified, "
+-                        "use the default value v0.7.1\n");
++                qemu_log("vector version is not specified\n");
++                return;
+             }
+-            set_vext_version(env, vext_version);
+         }
+ 
+         set_misa(env, RVXLEN | target_misa);
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index eef20ca6e5..6766dcd914 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -79,8 +79,6 @@ enum {
+ #define PRIV_VERSION_1_10_0 0x00011000
+ #define PRIV_VERSION_1_11_0 0x00011100
+ 
+-#define VEXT_VERSION_0_07_1 0x00000701
+-
+ #define TRANSLATE_PMP_FAIL 2
+ #define TRANSLATE_FAIL 1
+ #define TRANSLATE_SUCCESS 0
+-- 
 2.17.1
 
 
