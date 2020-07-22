@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyHuL-0005gm-3z
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 12:47:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43650)
+	id 1jyHxE-0007Oq-J9
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 12:50:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44290)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jyHuI-0005fS-GQ; Wed, 22 Jul 2020 12:47:50 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:39299)
+ id 1jyHxC-0007Mu-JN; Wed, 22 Jul 2020 12:50:50 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:38559)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jyHuG-00014h-W5; Wed, 22 Jul 2020 12:47:50 -0400
-Received: by mail-il1-x144.google.com with SMTP id k6so1885741ili.6;
- Wed, 22 Jul 2020 09:47:47 -0700 (PDT)
+ id 1jyHx6-0001W5-4a; Wed, 22 Jul 2020 12:50:50 -0400
+Received: by mail-io1-xd43.google.com with SMTP id l1so3244613ioh.5;
+ Wed, 22 Jul 2020 09:50:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=GuQ4sDegdpnxWj225poLyKadOWZodmsmX0QI/j9lJBQ=;
- b=CfsvfXy5hiQH/hJdn0/sV50ilsNh1yOT1L/1aaoyPZ3Ix5M3PVQvFsMSnCP3AD8JDS
- rRD828qXbbaW1h5N5xQtCleRHUCefvtxvOb4zxq8kY3tZUR5Z8WLORDZrnVGSW5VvYnj
- uv6H5xD04Q+c8mCXpXhSwDkp7SFvKSQzGrAW+mRjo/d+2SBgIgi1EjrP4LO9zJB5SqGp
- mr0ksIl+/rgasFdTcq85aX7Ym+X7rUoUJlpFloKL2//DvUS7ZFYQuDGIkJiQGM+XIyqg
- QBK0bdhmwUp/fWe+o3UTevangIQtyBE1wMCpWfiybyYHPXikvup2vJFRCum749HbgkyD
- 72ZQ==
+ :cc; bh=XUg1u1TtQnycfs+N+tRiWOafjQdiRU9tLYD9iCjxkx0=;
+ b=ukv+Bno++XtwyOTXQwpYXB7zKWNkuEADe+Z0+TvzX0fj8rhPb9jNzxylM8m8Bb6NCY
+ FjeHg7t1jG754mia4Van59B80I8vR6v3JJ2hmRu+a4xLfcvoVlKSyKqkndRG8aeS8dQ4
+ unb0xqqoKv+hSbqVCanLrUVyIz798Pl+oAPgAq+l8Nuo7ap0O7drZHn+jWj97na2Ac9a
+ 0l+tzUL2R6R9gbFLnEa0yXvYyzfeu5F1wrO0tRttmwA79v6UaR7IsvH8F3H3Zkb/OFpX
+ s7DtM0VywXVUnXz+RVca/3kzptGHG2YiiCa/JqBPFyPvIOJCTzho546Zq7QzHjzO9YIj
+ JwoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=GuQ4sDegdpnxWj225poLyKadOWZodmsmX0QI/j9lJBQ=;
- b=EkfTx2jyPVVOmJCYiIChFBc9wDwaHlP0qvIagbOssHFJ/GfPkQc5i2PQfFf/r//C47
- BiVG6qRP5XMMl2hum565A4mfv9PKJrc3LSF4Ar6Qt7Xm+/62xlAVcy5fOgKZHFiSpAqt
- xzZz8J74J7ZxcAwOPlnH04FmkgWV5rkNqwvTNXCQB1BBbbD+NqTPUVQHC7eVtdrWx0NP
- PP5ivPPg4eHR/gVnNe6aNUfB1G6Zm6wh8/tc76eAmSIWJOI/qBdD7dmRJvhCNkZ0VCSp
- hv7dveoVvWG+xJvnq6/u7pmU3NWPxmXVOWYNk/ch5nT0EFXH0/eIUTHhmPgjsPkcDPmf
- UYQA==
-X-Gm-Message-State: AOAM5304/XhU7faYYtp6+ZOpseUv4cuviM3Cz3P3PUz15MIy2nwWQoIu
- NybtEc2+zgt1YL+mBXLSSnlRu/9rsLw5XbHiu4g=
-X-Google-Smtp-Source: ABdhPJzbQcQlwhKmjZtjLdYbsTgkt7+Z/HRL5xGG5Gy8aMIe8rNeVzLhmBMH6ySfT1Y5Ibyck/m0P/uW2aTrRVXnDAQ=
-X-Received: by 2002:a92:c213:: with SMTP id j19mr830112ilo.40.1595436466924;
- Wed, 22 Jul 2020 09:47:46 -0700 (PDT)
+ bh=XUg1u1TtQnycfs+N+tRiWOafjQdiRU9tLYD9iCjxkx0=;
+ b=NGF94i/wXs3ICN+DGDsDSSmeXJIK5NA5JojRJoNkEI8yMSksZMnWnOVAV6o0feFeQH
+ 1h0Y0SNTdM4iYCSDSYAggwE19fXoINf9QSboIbve90SM8wRDrlngYm/J+qkMQ6Utb6Ze
+ QqO7k+t98hiuA33ZrI3Dt5hdpn3xc08Pgg2YobKkp8i51tZCcWIAyuMIzrFl4seNgZdM
+ x67+XnS69fZ46qUV+B4dqPX+MPCGQEAHZ/uomYtMZB/In4jRKWXswVx1MmOXg047zv26
+ UD4JY3B0rXID9gLrJ5dEi/koQx5rq8XwMafP5F7bEp81kN2QA1gnkZxIJjnWdmVB5G/C
+ MC/w==
+X-Gm-Message-State: AOAM532uUyxrLYtB0x96+ye+YaAne3UUYRs+s7Ia5zs3nVaVJcjxgL9m
+ 1Bt2wV1lZ0W1L27EWPm1WFovaku5QblajV5fJlU=
+X-Google-Smtp-Source: ABdhPJwzKkDOKGGKgNIjpbPevG1J8O6CFdCDpqOlgCWcIA7at9mx1yjJ79nqvW4/wCkn322yZSYw8SH4wRZkp4W5FaI=
+X-Received: by 2002:a5d:9306:: with SMTP id l6mr652462ion.105.1595436642400;
+ Wed, 22 Jul 2020 09:50:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200722091641.8834-1-frank.chang@sifive.com>
- <20200722091641.8834-2-frank.chang@sifive.com>
-In-Reply-To: <20200722091641.8834-2-frank.chang@sifive.com>
+References: <20200721133742.2298-1-zhiwei_liu@c-sky.com>
+ <CAKmqyKMPrwkxhXgfWqEofGUdKTJ3jAi7hQ7h6hEP-zFDN3Yt9w@mail.gmail.com>
+ <CAFEAcA87pws6QNEoJk4B-+vQiE3Pe7munfJiWgQZuTDZ+uBZwg@mail.gmail.com>
+In-Reply-To: <CAFEAcA87pws6QNEoJk4B-+vQiE3Pe7munfJiWgQZuTDZ+uBZwg@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 22 Jul 2020 09:37:39 -0700
-Message-ID: <CAKmqyKP5CxKRnaL3bwrT5LrGZWS=xUjxnuTRXujgZ2ywKV_D2A@mail.gmail.com>
-Subject: Re: [RFC v2 01/76] target/riscv: drop vector 0.7.1 support
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Wed, 22 Jul 2020 09:40:35 -0700
+Message-ID: <CAKmqyKN_OoqmXAKm-rLZRue3T+Bja=tFKdrSRWHuZD+WmBOaVg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Quiet Coverity complains about vamo*
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -76,96 +76,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 16:47:50 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 16:50:50 -0000
 
-On Wed, Jul 22, 2020 at 2:18 AM <frank.chang@sifive.com> wrote:
+On Tue, Jul 21, 2020 at 8:30 AM Peter Maydell <peter.maydell@linaro.org> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> On Tue, 21 Jul 2020 at 16:19, Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Tue, Jul 21, 2020 at 6:38 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+> > >
+> > > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> >
+> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 >
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Interestingly Coverity's latest scan has decided all these
+> issues are 'fixed', even without the assert. I guess that the
+> online version of Coverity has had an improvement to its
+> checking and so is now able to figure out that it's not going
+> to overrun the array? Still I think the assert is worth having.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Strange.
+
+I'll still apply these two patches.
 
 Alistair
 
-> ---
->  target/riscv/cpu.c | 24 ++++++------------------
->  target/riscv/cpu.h |  2 --
->  2 files changed, 6 insertions(+), 20 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 228b9bdb5d..2800953e6c 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -106,11 +106,6 @@ static void set_priv_version(CPURISCVState *env, int priv_ver)
->      env->priv_ver = priv_ver;
->  }
->
-> -static void set_vext_version(CPURISCVState *env, int vext_ver)
-> -{
-> -    env->vext_ver = vext_ver;
-> -}
-> -
->  static void set_feature(CPURISCVState *env, int feature)
->  {
->      env->features |= (1ULL << feature);
-> @@ -339,7 +334,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->      CPURISCVState *env = &cpu->env;
->      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
->      int priv_version = PRIV_VERSION_1_11_0;
-> -    int vext_version = VEXT_VERSION_0_07_1;
->      target_ulong target_misa = 0;
->      Error *local_err = NULL;
->
-> @@ -363,7 +357,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->      }
->
->      set_priv_version(env, priv_version);
-> -    set_vext_version(env, vext_version);
->
->      if (cpu->cfg.mmu) {
->          set_feature(env, RISCV_FEATURE_MMU);
-> @@ -455,19 +448,14 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->                  return;
->              }
->              if (cpu->cfg.vext_spec) {
-> -                if (!g_strcmp0(cpu->cfg.vext_spec, "v0.7.1")) {
-> -                    vext_version = VEXT_VERSION_0_07_1;
-> -                } else {
-> -                    error_setg(errp,
-> -                           "Unsupported vector spec version '%s'",
-> -                           cpu->cfg.vext_spec);
-> -                    return;
-> -                }
-> +                error_setg(errp,
-> +                       "Unsupported vector spec version '%s'",
-> +                       cpu->cfg.vext_spec);
-> +                return;
->              } else {
-> -                qemu_log("vector verison is not specified, "
-> -                        "use the default value v0.7.1\n");
-> +                qemu_log("vector version is not specified\n");
-> +                return;
->              }
-> -            set_vext_version(env, vext_version);
->          }
->
->          set_misa(env, RVXLEN | target_misa);
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index eef20ca6e5..6766dcd914 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -79,8 +79,6 @@ enum {
->  #define PRIV_VERSION_1_10_0 0x00011000
->  #define PRIV_VERSION_1_11_0 0x00011100
->
-> -#define VEXT_VERSION_0_07_1 0x00000701
-> -
->  #define TRANSLATE_PMP_FAIL 2
->  #define TRANSLATE_FAIL 1
->  #define TRANSLATE_SUCCESS 0
-> --
-> 2.17.1
->
->
+> thanks
+> -- PMM
 
