@@ -1,47 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jy4qS-0008NU-Ev
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Jul 2020 22:51:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33092)
+	id 1jy6pL-0003BK-3w
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 00:57:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54950)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jy4qP-0008M4-I0; Tue, 21 Jul 2020 22:50:57 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:52392)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jy4qM-00028P-M4; Tue, 21 Jul 2020 22:50:57 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1049182|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0577189-0.000867167-0.941414;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01l10434; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=9; RT=9; SR=0; TI=SMTPD_---.I5dorAA_1595386246; 
-Received: from 30.225.208.49(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.I5dorAA_1595386246)
- by smtp.aliyun-inc.com(10.147.41.231);
- Wed, 22 Jul 2020 10:50:47 +0800
-Subject: Re: [PATCH 00/11] RISC-V risu porting
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: richard.henderson@linaro.org, Alistair.Francis@wdc.com,
- chihmin.chao@sifive.com, alex.bennee@linaro.org, peter.maydell@linaro.org,
- wenmeng_zhang@c-sky.com, wxy194768@alibaba-inc.com
-References: <20200711161655.2856-1-zhiwei_liu@c-sky.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <c6fbf67e-3674-faf6-2107-cdfad956d296@c-sky.com>
-Date: Wed, 22 Jul 2020 10:50:46 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jy6pJ-0003AF-2h; Wed, 22 Jul 2020 00:57:57 -0400
+Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:33044)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1jy6pH-0004q0-I0; Wed, 22 Jul 2020 00:57:56 -0400
+Received: by mail-yb1-xb44.google.com with SMTP id c14so384525ybj.0;
+ Tue, 21 Jul 2020 21:57:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=AywOsFIlwmIbHv/IGfx+vHRTo2l6JU9nGGTgBfGkgW8=;
+ b=rOleJMu+zawfVGQmQ5d2ezF4ZSczEqQpY8wLjxTNSYc6y/AkpfNxB8IbeBXiIYlbzk
+ v8BeEtXvm/yrHxxlttkeGALHYzoi1D6IGZ5v9ZADQbiu24RrFjJs6lf/8RJNiK+4Sz6E
+ q0rz6iMGYVo15D5UPFv7mrkUiKM/ZNNKdfQv7Sxrn4hDldWynRWy7V/t+4+O+c5cQiGU
+ kh89HGV5wSvkmCnKCMbwwX8E6oZnqTwGy5z9Ctarb9XzJxIIdZj+t9eN73T5W+Rt7oz7
+ wi1usDKsgYtAidLhm1OuQPtqAaTl0RqBg3vUp/Wt6pxtqQCSs8MZEyQ1/xlF8NN0/ezx
+ tRBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=AywOsFIlwmIbHv/IGfx+vHRTo2l6JU9nGGTgBfGkgW8=;
+ b=Dyg84Vgs4L5TFJpe1jkeYv73GDJ4LX3r+5pnnRKpG3jPOro29UYQKs+r3hMYRm4lI2
+ isSjt2rl8IY0cL+uZ0pubFBHcbtr0umEioaisrhk1aPq6sXGnt1qS4zQZ0tgoOdjSTvX
+ JJPjbhUI54h+0naKbVastZuMjR+9akbOcIJK/355Pn8srXS4S57Wbz4IYoh9hK2L0cgI
+ X7AuEUbWmStKCn4aH6RCMRyDR1vqVlFWVo4UZ+WFCZfE8PxGWVUUbctiCARgM13ZYzoP
+ G9bCxB0UNkDqDOrqXSoEiysplTANiIaqMd+FnDIncE7wWXv77CW0CBRfNduJrDdtiW9j
+ ZHXg==
+X-Gm-Message-State: AOAM533G8zM2bhBD5Qkfiss/5XGAO6v0ZvQb5YhZK1z0bMEZvEdhWwBw
+ oYu+mspwxs85v3sek/P/dXVG7mHbgtalybteJuA=
+X-Google-Smtp-Source: ABdhPJwt36PAcimD/wv81fnLnwXu7r9EN/7gNeAZcYCE4VEmETwA7yggGhaSCm6lQztjPVeba4pIqxwkZ/rCKuTdDP0=
+X-Received: by 2002:a25:24c7:: with SMTP id
+ k190mr47307724ybk.306.1595393873800; 
+ Tue, 21 Jul 2020 21:57:53 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200711161655.2856-1-zhiwei_liu@c-sky.com>
-Content-Type: text/plain; charset=gbk; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-Received-SPF: none client-ip=121.197.200.217;
- envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/21 22:50:48
-X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+References: <cover.1595335112.git.zong.li@sifive.com>
+ <80450819119ba8493f18c825517f1b4f37eeb600.1595335112.git.zong.li@sifive.com>
+In-Reply-To: <80450819119ba8493f18c825517f1b4f37eeb600.1595335112.git.zong.li@sifive.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 22 Jul 2020 12:57:42 +0800
+Message-ID: <CAEUhbmUFq+j4fD5pKDwp8RPPZNaRvFcG5uUAsp6KZSKhSC8dWQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] target/riscv/pmp.c: Fix the index offset on RV64
+To: Zong Li <zong.li@sifive.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b44;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb44.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -54,57 +76,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 02:50:57 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 04:57:57 -0000
 
-Ping.
+Hi Zong,
 
-On 2020/7/12 0:16, LIU Zhiwei wrote:
-> In contrast to the RFC, add more instructions description. Now it supports
-> RV64IMACFD. Some cross verifications have been done, such as comparison
-> between QEMU and TinyEMU, and comparison between QEMU and C906 FPGA.
+On Tue, Jul 21, 2020 at 8:41 PM Zong Li <zong.li@sifive.com> wrote:
 >
-> Now it has some productive.
+> On RV64, the reg_index is 2 (pmpcfg2 CSR) after the seventh pmp
+> entry, it is not 1 (pmpcfg1 CSR) like RV32. In the original
+> implementation, the second parameter of pmp_write_cfg is
+> "reg_index * sizeof(target_ulong)", and we get the the result
+> which is started from 16 if reg_index is 2, but we expect that
+> it should be started from 8. Separate the implementation for
+> RV32 and RV64 respectively.
 >
-> Features:
-> * support RV64IMACFD.
-> * support multi-precision float point.
-> * support accurate special values generation.
+> Signed-off-by: Zong Li <zong.li@sifive.com>
 >
-> Todo:
-> * support RVV and RVP.
+> Changed in v3:
+>  - Refine the implementation. Suggested by Bin Meng.
 >
->
-> LIU Zhiwei (11):
->    riscv: Add RV64I instructions description
->    riscv: Add RV64M instructions description
->    riscv: Add RV64A instructions description
->    riscv: Add RV64F instructions description
->    riscv: Add RV64D instructions description
->    riscv: Add RV64C instructions description
->    riscv: Generate payload scripts
->    riscv: Add standard test case
->    riscv: Define riscv struct reginfo
->    riscv: Implement payload load interfaces
->    riscv: Add configure script
->
->   configure              |   4 +-
->   risu_reginfo_riscv64.c | 132 +++++++++
->   risu_reginfo_riscv64.h |  28 ++
->   risu_riscv64.c         |  47 +++
->   risugen_riscv.pm       | 643 +++++++++++++++++++++++++++++++++++++++++
->   rv64.risu              | 466 +++++++++++++++++++++++++++++
->   rv64c.risu             |  97 +++++++
->   test_riscv64.s         |  85 ++++++
->   upstream/configure     | 204 +++++++++++++
->   9 files changed, 1705 insertions(+), 1 deletion(-)
->   create mode 100644 risu_reginfo_riscv64.c
->   create mode 100644 risu_reginfo_riscv64.h
->   create mode 100644 risu_riscv64.c
->   create mode 100644 risugen_riscv.pm
->   create mode 100644 rv64.risu
->   create mode 100644 rv64c.risu
->   create mode 100644 test_riscv64.s
->   create mode 100644 upstream/configure
->
+> Changed in v2:
+>  - Move out the shifting operation from loop. Suggested by Bin Meng.
 
+As I mentioned previously, these changelog should go after --- below.
+It should not appear in the commit message.
+
+> ---
+>  target/riscv/pmp.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 2a2b9f5363..f2d50bace5 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -318,6 +318,10 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
+>          return;
+>      }
+>
+> +#if defined(TARGET_RISCV64)
+> +    reg_index >>= 1;
+> +#endif
+> +
+>      for (i = 0; i < sizeof(target_ulong); i++) {
+>          cfg_val = (val >> 8 * i)  & 0xff;
+>          pmp_write_cfg(env, (reg_index * sizeof(target_ulong)) + i,
+> @@ -335,6 +339,10 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
+>      target_ulong cfg_val = 0;
+>      target_ulong val = 0;
+>
+> +#if defined(TARGET_RISCV64)
+> +    reg_index >>= 1;
+> +#endif
+
+We should also move the following:
+
+    trace_pmpcfg_csr_read(env->mhartid, reg_index, cfg_val);
+
+before shifting reg_index. Otherwise it traces the wrong pmpcfg CSR read.
+
+> +
+>      for (i = 0; i < sizeof(target_ulong); i++) {
+>          val = pmp_read_cfg(env, (reg_index * sizeof(target_ulong)) + i);
+>          cfg_val |= (val << (i * 8));
+> --
+
+Regards,
+Bin
 
