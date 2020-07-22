@@ -1,70 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyHNE-0000w2-7V
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 12:13:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60724)
+	id 1jyHRs-0004NK-8S
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 12:18:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34068)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jyHND-0000vW-53
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 12:13:39 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:33833)
+ id 1jyHRq-0004K4-Oh
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 12:18:26 -0400
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:34169)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jyHNA-0003Lw-IH
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 12:13:38 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id t6so1534484pgq.1
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 09:13:35 -0700 (PDT)
+ id 1jyHRn-00046r-OU
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 12:18:26 -0400
+Received: by mail-pl1-x642.google.com with SMTP id o1so1245151plk.1
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 09:18:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=Re2PK0LJsagIgr6c5yITwnXVNSmcxrZuYOW7wUFVdU4=;
- b=leUSnBs3HcLfwGEVs66IHc6kcTgNimQa8ATf/L8Gs1KyNxctQh8IH4vXa+GyKbur2E
- tErgWE/7ZRxlbMwdl+RY6zcUhRIn3p3XIVVduNLLSATWhePWJx0ymHnMB5VlMClgNM73
- pKjgAhyONNY5ybqwjx8eCf84uRVSlDHejJSJNVBhQoymL8dEL2oSnu87dPLctZbkoFbm
- rmk0yzDHlgUVACRHHYb9PYj2Ahuosk5b1NP5uwfv/dsboqiBjixS6/IPvqs9TiQ2mFdh
- 0uh6TYna4OLu7TMXJA/m7BXNUPI+XxoV8XVSIFh/AlrwP0x00+GWSafIyJIgPB6a9Uas
- Vq1Q==
+ bh=YFbJtf+CWRuJjCYVVs58KiD6YIYaIJ2Jgoffj9BqBZs=;
+ b=SzOxPDfIIsM8njGBz12plZUz3qDAawbhWqAl+g2/IVeTkXXiw8dOCowMICATnhlLbX
+ X/c0Ys7xfI6yXKHvx1n78q9u5b7/0YoAX2SHv/dGeQheiysbgHHYcSVItZ60K74sE0Iw
+ zQh16qIhhRFX6b9rNM3TNHj+MSJllQbt87kaurkZix0duMJarAuAxHyuenACQHIDCR0C
+ qKhrFYoJUw6/P72HWqNvamHflYD/Ja0sOZPsL9C+vctl9ul0L8ez9GRg9FeXRfsZJbLz
+ D+gzIXyHH/+nBg8vkJnscrDVDdOBivoa748OGYMbdeYws//ZQGcnYpFsNG1pBTsqajeh
+ Irig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=Re2PK0LJsagIgr6c5yITwnXVNSmcxrZuYOW7wUFVdU4=;
- b=e9HPrhSusEOaEFSxFvxz+L+B3/8C6wJbBO/U6PB0Syt2SMZDOjzuIVI41LUIljieN3
- 0YkmuZXgdwuwCzG/SzTEQ5hgh+NBrTfF23R09qjNGKDbFbDMW8VyGb3OjelEMCZYlyaJ
- crTBE9D++aKIhUkiVVto9FotdD7xrfWs5pNno/FziUZIG3UCGlsfQLWQewqTWn7iuau0
- r6INssQplXqr72q1qJDU6P1KB6Mk5epWc9GZKc4qDXF+UjXPm0sftfjvYCCtcrdfoqKd
- mgqsd4YnAJyTrtzUUXDScXvv+i07mdKFWU8plBoiy5UrpJDmx+2Uvij4OcxAL7rUb0Xp
- Yx4g==
-X-Gm-Message-State: AOAM530yTsFF1j3Ehdr3JyxtNi/NSe6IYUUT/ph6W4ugL5FR/O9UQK2J
- jx1nmpZsA0mfSW6CitPQm+CEJQ==
-X-Google-Smtp-Source: ABdhPJwL/QCh4Yr2vyNbk7Y1ic+zVK0k9/kfInodsWAxRxTtf9jrnNFbEIM5Esfkf7ds/AJB1coZNw==
-X-Received: by 2002:a62:8603:: with SMTP id x3mr374290pfd.268.1595434414764;
- Wed, 22 Jul 2020 09:13:34 -0700 (PDT)
+ bh=YFbJtf+CWRuJjCYVVs58KiD6YIYaIJ2Jgoffj9BqBZs=;
+ b=nS2O8RrrCCmycUj1cibjFFPlHhbMTbTD5WCN2tMkjmDyTgtslRG/euEs7+il41iNXJ
+ 1YL1UF7AKQ2J5y/s0GcwHU4GNeygjFB4i7ntnweNHrff4t3Hd7ZyEEZr77ZjUdwRlHo/
+ uCSv0jwMp3g/oiRccrFoF29QTLPIa036/GpzgIVsrQ2nfCVMkCmG5J+jYj5LY5BxGcKD
+ hbYRxkQv/ff5dn+aBZoS/K4B+8+mLVm1DmmVMbSb9HTATFeugmiyRQbpWK5kakLkJjgr
+ LV60NH5DbvV+45c5cZZW+bXEy24ZHtugbd+sBOnGd1/j+cAnppKpuyAaQpF7c6zvPsUs
+ s6YA==
+X-Gm-Message-State: AOAM533krqKNN2h1EcYAdl0COEuHJmnp4YKIrRwitXq52VD0MdO4q2E+
+ 6YSBrha4PjRm9VatJevJq9bxvQ==
+X-Google-Smtp-Source: ABdhPJzXoxlee68xLMKdNuUSVt2d2zMCgO9JRYwxjQI1xnU1YNovMqzqtcIuPsifz+j9BEMyGV750w==
+X-Received: by 2002:a17:90b:1296:: with SMTP id
+ fw22mr206796pjb.20.1595434702221; 
+ Wed, 22 Jul 2020 09:18:22 -0700 (PDT)
 Received: from [192.168.1.11] (216-160-65-90.tukw.qwest.net. [216.160.65.90])
  by smtp.gmail.com with ESMTPSA id
- gv16sm159966pjb.5.2020.07.22.09.13.33
+ y19sm64390pgj.35.2020.07.22.09.18.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Jul 2020 09:13:34 -0700 (PDT)
-Subject: Re: [RFC v2 02/76] target/riscv: rvv-0.9: support vector 0.9
+ Wed, 22 Jul 2020 09:18:21 -0700 (PDT)
+Subject: Re: [RFC v2 03/76] target/riscv: fix rsub gvec
+ tcg_assert_listed_vecop assertion
 To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
- <20200722091641.8834-3-frank.chang@sifive.com>
+ <20200722091641.8834-4-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <172338a7-1553-dd19-c6c0-f02f4c538b39@linaro.org>
-Date: Wed, 22 Jul 2020 09:13:32 -0700
+Message-ID: <7db64384-920d-b96e-ee95-5f5ec989bd2f@linaro.org>
+Date: Wed, 22 Jul 2020 09:18:19 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200722091641.8834-3-frank.chang@sifive.com>
+In-Reply-To: <20200722091641.8834-4-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::642;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x642.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -86,21 +89,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 16:13:39 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 16:18:27 -0000
 
 On 7/22/20 2:15 AM, frank.chang@sifive.com wrote:
 > From: Frank Chang <frank.chang@sifive.com>
 > 
+> gvec should provide vecop_list to avoid:
+> "tcg_tcg_assert_listed_vecop: code should not be reached bug" assertion.
+> 
 > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 > ---
->  target/riscv/cpu.c | 24 ++++++++++++++++++------
->  target/riscv/cpu.h |  2 ++
->  2 files changed, 20 insertions(+), 6 deletions(-)
+>  target/riscv/insn_trans/trans_rvv.inc.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 
-I think you can squash this with patch 1, just so you don't have to churn
-functions like set_vext_version.  Anyway,
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+It would be handy if you would rebase on master when you re-post, since this
+patch and the 4 following were merged to master on July 14.
 
 
 r~
