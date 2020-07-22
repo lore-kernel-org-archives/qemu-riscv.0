@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyAxH-0007Sw-NY
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:22:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55508)
+	id 1jyAxN-0007c1-6i
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:22:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55550)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAxG-0007Oi-6d
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:26 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630]:45302)
+ id 1jyAxJ-0007Xi-AY
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:29 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432]:39424)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAxD-0006Bh-UO
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:25 -0400
-Received: by mail-pl1-x630.google.com with SMTP id k4so643881pld.12
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:22:23 -0700 (PDT)
+ id 1jyAxH-0006Cu-EA
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:28 -0400
+Received: by mail-pf1-x432.google.com with SMTP id x72so870396pfc.6
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:22:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=a5PwNJt6p7A34P7KMk3YOv09AaOqqY2gRl2sf9hwDV0=;
- b=kdiu9QpZ4fWCX1c8J6rwYH7Q/bj9mv2WU02czASlWe/NJ8hKM0UkvlGzjhlzA9KTLY
- dFDr8ZxONp5o2ehkZspRmUubYSKIhWG3cIAd0+LbJkLa3WFbvDu1v8p17K+T9ljMuU5Q
- f2PyLXM70IuaQ8QZePwKDnU6FUmFKvynWCoL8NaVEI+ekGEc32ir0C25P3Mwj2WZLH8R
- 7ZPzhNSBdPSO8CwSOaE9duN5qhYanbYdcsVmG9oVvmdwBYJKHO7P29rtyjlUeNcEne2O
- mTs0YRrn80w9vvRpZNxoJVxuau2T2CdKQyHQ+j0C0IAJtfg+fBHc7qS8xH5acBASO1sp
- VhcQ==
+ bh=aUA4lJ98g9Mf2dTHcPIuDucVxVhO4/F5ZEHerwqnT8U=;
+ b=OAMtUsSnc6L3K4q+z6BVT3ggR/EG5O3V6Yf4sKSE1AbSbLp09VcycOM44zxL+ylgCo
+ WKCONK1cSLcNK/65GOGYNCAiXB3ItIb8Hg5BOYmXAXGnx5gtv9qgtV2lcNTxpQTniQBQ
+ 5TL7t3EBy8Vam1Pl6hIzpLjCDSocZ1EXT0OwbpLVEBZyzKCXlCSUz0aCgySn1u4EIGFn
+ +jDcfCUFmNS2plNGFO8uu7Ef+7fX3s1ZcZhyMQQOy2j/+74eQ/GtjzXzbtpLDANxHInX
+ XwCfqX8CeiDMz3F7HSj3jSiEY9XKx/QgYfXA34SGoEIBm0oqUlMNTK+/kTj0rdhV83om
+ PDvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=a5PwNJt6p7A34P7KMk3YOv09AaOqqY2gRl2sf9hwDV0=;
- b=DV6NMd/k1cil1VvDb60rnoqj5EKEbV8FPzqIyPQtxneOHpvaXWscof6KfZNU4WGV9Z
- J05ED+tjcbkQu5CD7kvIgPJ8WXBwMAXdEr5f/E90kV/ZmyZSbgqKgIdz4lAZNwK7iAaK
- Hj48FA3C6dNo2UgcVnFgA8inRgJuek3EfYIro3x5EbpdbgZ9aYZNX2idTqFm9kLGXknP
- eeQZilX/sNrwyt0+k3IP2oikyKU1DO4TNywkF1Q8PAtvIRb22teImz0UhEp13zD1hFlu
- Ew2neIZIvhNMyJ7vHnjDca2lYfioDJLuvF6AKhEyEhm0dGkGfRxoXXuUWspUCwGrTp0z
- kqMw==
-X-Gm-Message-State: AOAM5302X+4m1JF8ZlThVXoQTstTuJGKTGxjtQFqYUjO3QYoGKxU7Oxn
- a0lb6aNVmsTMNp/115Mn4qg9kw==
-X-Google-Smtp-Source: ABdhPJw2CSLWoC9PjSxG9fuLrsKd2mr1M0ArsExA+bdUUFyCFOGvmKuXWP+RojYJng5P4OhOU16bvw==
-X-Received: by 2002:a17:90a:6946:: with SMTP id
- j6mr8004497pjm.223.1595409742653; 
- Wed, 22 Jul 2020 02:22:22 -0700 (PDT)
+ bh=aUA4lJ98g9Mf2dTHcPIuDucVxVhO4/F5ZEHerwqnT8U=;
+ b=X3N4uE3i93luAes/Nq6JZSNLh/MCkhAkVyFaDNQ/afSAmMAExhNLH7JSi3Pf2RbCiX
+ zbO6x4YNlejWQD9cYcUdfI/u87BOxpm3VO5BJDqcdDcD7bbJXJPvFtnGtOvNx0LmkMxr
+ IAoPwnJssQHHeVOdrGzrdao2AOQCU4eDfDymNpIF6LTlgs2mzBNdCdHQNJ+7OZnVvncN
+ 3g/gDQOGNeNCXsekHTa+RK7u6jqH2PKLDdGgufg2hhh+21P+9xP3VJytMIPbN0qfDRlt
+ e622b+SZv5YRUkDm0iXDpY+mwVfaLj2M43XVmM4wXWytt3dL1vWTxid2/hWa2F8JHOJs
+ Vj7g==
+X-Gm-Message-State: AOAM5307XoL7VKWDTZJl2iVIOJRS82qJbXpSONj4FVdUfHsZQEmZ0SiT
+ eSRx0Y7Zx13SvqVB+2sfZzVfuQ==
+X-Google-Smtp-Source: ABdhPJyVpZsoIkv7uEPQtv3e5A7FFrlxzAnvbDiiCWe50wopv9rhtKrM+sj/KX8i8GQtLdU6Gug+kg==
+X-Received: by 2002:a63:140f:: with SMTP id u15mr24630217pgl.94.1595409746223; 
+ Wed, 22 Jul 2020 02:22:26 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.22.20
+ by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.22.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2020 02:22:21 -0700 (PDT)
+ Wed, 22 Jul 2020 02:22:25 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Chih-Min Chao <chihmin.chao@sifive.com>,
- Frank Chang <frank.chang@sifive.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [RFC v2 68/76] fpu: add api to handle alternative sNaN propagation
-Date: Wed, 22 Jul 2020 17:16:31 +0800
-Message-Id: <20200722091641.8834-69-frank.chang@sifive.com>
+Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Subject: [RFC v2 69/76] target/riscv: rvv-0.9: floating-point min/max
+ instructions
+Date: Wed, 22 Jul 2020 17:16:32 +0800
+Message-Id: <20200722091641.8834-70-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200722091641.8834-1-frank.chang@sifive.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x432.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -81,187 +80,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 09:22:26 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 09:22:29 -0000
 
-From: Chih-Min Chao <chihmin.chao@sifive.com>
+From: Frank Chang <frank.chang@sifive.com>
 
-For "fmax/fmin ft0, ft1, ft2" and if one of the inputs is sNaN,
-  The original logic
-    return NaN and set invalid flag if ft1 == sNaN || ft2 == sNan
-
-  The alternative path
-    set invalid flag if ft1 == sNaN || ft2 == sNaN
-    return NaN if ft1 == sNaN && ft2 == sNaN
-
-   The ieee754 spec allows both implementation and some architecture such
-   as riscv choose differenct defintion in two spec versions.
-   (riscv-spec-v2.2 use original one, riscv-spec-20191213 changes to
-    alternative one)
-
-Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- fpu/softfloat.c         | 75 ++++++++++++++++++++++++++---------------
- include/fpu/softfloat.h |  6 ++++
- 2 files changed, 54 insertions(+), 27 deletions(-)
+ target/riscv/vector_helper.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/fpu/softfloat.c b/fpu/softfloat.c
-index 9c6640862e..e1661f22a5 100644
---- a/fpu/softfloat.c
-+++ b/fpu/softfloat.c
-@@ -898,11 +898,16 @@ static FloatParts return_nan(FloatParts a, float_status *s)
-     return a;
- }
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 49e6a91859..4c6755db97 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -3857,28 +3857,28 @@ GEN_VEXT_V_ENV(vfsqrt_v_w, 4, 4, clearl)
+ GEN_VEXT_V_ENV(vfsqrt_v_d, 8, 8, clearq)
  
--static FloatParts pick_nan(FloatParts a, FloatParts b, float_status *s)
-+static void set_snan_flag(FloatParts a, FloatParts b, float_status *s)
- {
-     if (is_snan(a.cls) || is_snan(b.cls)) {
-         s->float_exception_flags |= float_flag_invalid;
-     }
-+}
-+
-+static FloatParts pick_nan(FloatParts a, FloatParts b, float_status *s)
-+{
-+    set_snan_flag(a, b, s);
+ /* Vector Floating-Point MIN/MAX Instructions */
+-RVVCALL(OPFVV2, vfmin_vv_h, OP_UUU_H, H2, H2, H2, float16_minnum)
+-RVVCALL(OPFVV2, vfmin_vv_w, OP_UUU_W, H4, H4, H4, float32_minnum)
+-RVVCALL(OPFVV2, vfmin_vv_d, OP_UUU_D, H8, H8, H8, float64_minnum)
++RVVCALL(OPFVV2, vfmin_vv_h, OP_UUU_H, H2, H2, H2, float16_minnum_noprop)
++RVVCALL(OPFVV2, vfmin_vv_w, OP_UUU_W, H4, H4, H4, float32_minnum_noprop)
++RVVCALL(OPFVV2, vfmin_vv_d, OP_UUU_D, H8, H8, H8, float64_minnum_noprop)
+ GEN_VEXT_VV_ENV(vfmin_vv_h, 2, 2, clearh)
+ GEN_VEXT_VV_ENV(vfmin_vv_w, 4, 4, clearl)
+ GEN_VEXT_VV_ENV(vfmin_vv_d, 8, 8, clearq)
+-RVVCALL(OPFVF2, vfmin_vf_h, OP_UUU_H, H2, H2, float16_minnum)
+-RVVCALL(OPFVF2, vfmin_vf_w, OP_UUU_W, H4, H4, float32_minnum)
+-RVVCALL(OPFVF2, vfmin_vf_d, OP_UUU_D, H8, H8, float64_minnum)
++RVVCALL(OPFVF2, vfmin_vf_h, OP_UUU_H, H2, H2, float16_minnum_noprop)
++RVVCALL(OPFVF2, vfmin_vf_w, OP_UUU_W, H4, H4, float32_minnum_noprop)
++RVVCALL(OPFVF2, vfmin_vf_d, OP_UUU_D, H8, H8, float64_minnum_noprop)
+ GEN_VEXT_VF(vfmin_vf_h, 2, 2, clearh)
+ GEN_VEXT_VF(vfmin_vf_w, 4, 4, clearl)
+ GEN_VEXT_VF(vfmin_vf_d, 8, 8, clearq)
  
-     if (s->default_nan_mode) {
-         return parts_default_nan(s);
-@@ -2771,23 +2776,32 @@ float64 uint16_to_float64(uint16_t a, float_status *status)
-  * and minNumMag() from the IEEE-754 2008.
-  */
- static FloatParts minmax_floats(FloatParts a, FloatParts b, bool ismin,
--                                bool ieee, bool ismag, float_status *s)
-+                                bool ieee, bool ismag, bool issnan_prop,
-+                                float_status *s)
- {
-     if (unlikely(is_nan(a.cls) || is_nan(b.cls))) {
-         if (ieee) {
-             /* Takes two floating-point values `a' and `b', one of
-              * which is a NaN, and returns the appropriate NaN
-              * result. If either `a' or `b' is a signaling NaN,
--             * the invalid exception is raised.
-+             * the invalid exception is raised but the NaN
-+             * propagation is 'shall'.
-              */
-             if (is_snan(a.cls) || is_snan(b.cls)) {
--                return pick_nan(a, b, s);
--            } else if (is_nan(a.cls) && !is_nan(b.cls)) {
-+                if (issnan_prop) {
-+                    return pick_nan(a, b, s);
-+                } else {
-+                    set_snan_flag(a, b, s);
-+                }
-+            }
-+
-+            if (is_nan(a.cls) && !is_nan(b.cls)) {
-                 return b;
-             } else if (is_nan(b.cls) && !is_nan(a.cls)) {
-                 return a;
-             }
-         }
-+
-         return pick_nan(a, b, s);
-     } else {
-         int a_exp, b_exp;
-@@ -2841,37 +2855,44 @@ static FloatParts minmax_floats(FloatParts a, FloatParts b, bool ismin,
-     }
- }
- 
--#define MINMAX(sz, name, ismin, isiee, ismag)                           \
-+#define MINMAX(sz, name, ismin, isiee, ismag, issnan_prop)              \
- float ## sz float ## sz ## _ ## name(float ## sz a, float ## sz b,      \
-                                      float_status *s)                   \
- {                                                                       \
-     FloatParts pa = float ## sz ## _unpack_canonical(a, s);             \
-     FloatParts pb = float ## sz ## _unpack_canonical(b, s);             \
--    FloatParts pr = minmax_floats(pa, pb, ismin, isiee, ismag, s);      \
-+    FloatParts pr = minmax_floats(pa, pb, ismin, isiee, ismag,          \
-+                                  issnan_prop, s);                      \
-                                                                         \
-     return float ## sz ## _round_pack_canonical(pr, s);                 \
- }
- 
--MINMAX(16, min, true, false, false)
--MINMAX(16, minnum, true, true, false)
--MINMAX(16, minnummag, true, true, true)
--MINMAX(16, max, false, false, false)
--MINMAX(16, maxnum, false, true, false)
--MINMAX(16, maxnummag, false, true, true)
--
--MINMAX(32, min, true, false, false)
--MINMAX(32, minnum, true, true, false)
--MINMAX(32, minnummag, true, true, true)
--MINMAX(32, max, false, false, false)
--MINMAX(32, maxnum, false, true, false)
--MINMAX(32, maxnummag, false, true, true)
--
--MINMAX(64, min, true, false, false)
--MINMAX(64, minnum, true, true, false)
--MINMAX(64, minnummag, true, true, true)
--MINMAX(64, max, false, false, false)
--MINMAX(64, maxnum, false, true, false)
--MINMAX(64, maxnummag, false, true, true)
-+MINMAX(16, min, true, false, false, true)
-+MINMAX(16, minnum, true, true, false, true)
-+MINMAX(16, minnum_noprop, true, true, false, false)
-+MINMAX(16, minnummag, true, true, true, true)
-+MINMAX(16, max, false, false, false, true)
-+MINMAX(16, maxnum, false, true, false, true)
-+MINMAX(16, maxnum_noprop, false, true, false, false)
-+MINMAX(16, maxnummag, false, true, true, true)
-+
-+MINMAX(32, min, true, false, false, true)
-+MINMAX(32, minnum, true, true, false, true)
-+MINMAX(32, minnum_noprop, true, true, false, false)
-+MINMAX(32, minnummag, true, true, true, true)
-+MINMAX(32, max, false, false, false, true)
-+MINMAX(32, maxnum, false, true, false, true)
-+MINMAX(32, maxnum_noprop, false, true, false, false)
-+MINMAX(32, maxnummag, false, true, true, true)
-+
-+MINMAX(64, min, true, false, false, true)
-+MINMAX(64, minnum, true, true, false, true)
-+MINMAX(64, minnum_noprop, true, true, false, false)
-+MINMAX(64, minnummag, true, true, true, true)
-+MINMAX(64, max, false, false, false, true)
-+MINMAX(64, maxnum, false, true, false, true)
-+MINMAX(64, maxnum_noprop, false, true, false, false)
-+MINMAX(64, maxnummag, false, true, true, true)
- 
- #undef MINMAX
- 
-diff --git a/include/fpu/softfloat.h b/include/fpu/softfloat.h
-index 267519cd65..078cad8ad9 100644
---- a/include/fpu/softfloat.h
-+++ b/include/fpu/softfloat.h
-@@ -231,6 +231,8 @@ float16 float16_minnum(float16, float16, float_status *status);
- float16 float16_maxnum(float16, float16, float_status *status);
- float16 float16_minnummag(float16, float16, float_status *status);
- float16 float16_maxnummag(float16, float16, float_status *status);
-+float16 float16_minnum_noprop(float16, float16, float_status *status);
-+float16 float16_maxnum_noprop(float16, float16, float_status *status);
- float16 float16_sqrt(float16, float_status *status);
- FloatRelation float16_compare(float16, float16, float_status *status);
- FloatRelation float16_compare_quiet(float16, float16, float_status *status);
-@@ -392,6 +394,8 @@ float32 float32_minnum(float32, float32, float_status *status);
- float32 float32_maxnum(float32, float32, float_status *status);
- float32 float32_minnummag(float32, float32, float_status *status);
- float32 float32_maxnummag(float32, float32, float_status *status);
-+float32 float32_minnum_noprop(float32, float32, float_status *status);
-+float32 float32_maxnum_noprop(float32, float32, float_status *status);
- bool float32_is_quiet_nan(float32, float_status *status);
- bool float32_is_signaling_nan(float32, float_status *status);
- float32 float32_silence_nan(float32, float_status *status);
-@@ -581,6 +585,8 @@ float64 float64_minnum(float64, float64, float_status *status);
- float64 float64_maxnum(float64, float64, float_status *status);
- float64 float64_minnummag(float64, float64, float_status *status);
- float64 float64_maxnummag(float64, float64, float_status *status);
-+float64 float64_minnum_noprop(float64, float64, float_status *status);
-+float64 float64_maxnum_noprop(float64, float64, float_status *status);
- bool float64_is_quiet_nan(float64 a, float_status *status);
- bool float64_is_signaling_nan(float64, float_status *status);
- float64 float64_silence_nan(float64, float_status *status);
+-RVVCALL(OPFVV2, vfmax_vv_h, OP_UUU_H, H2, H2, H2, float16_maxnum)
+-RVVCALL(OPFVV2, vfmax_vv_w, OP_UUU_W, H4, H4, H4, float32_maxnum)
+-RVVCALL(OPFVV2, vfmax_vv_d, OP_UUU_D, H8, H8, H8, float64_maxnum)
++RVVCALL(OPFVV2, vfmax_vv_h, OP_UUU_H, H2, H2, H2, float16_maxnum_noprop)
++RVVCALL(OPFVV2, vfmax_vv_w, OP_UUU_W, H4, H4, H4, float32_maxnum_noprop)
++RVVCALL(OPFVV2, vfmax_vv_d, OP_UUU_D, H8, H8, H8, float64_maxnum_noprop)
+ GEN_VEXT_VV_ENV(vfmax_vv_h, 2, 2, clearh)
+ GEN_VEXT_VV_ENV(vfmax_vv_w, 4, 4, clearl)
+ GEN_VEXT_VV_ENV(vfmax_vv_d, 8, 8, clearq)
+-RVVCALL(OPFVF2, vfmax_vf_h, OP_UUU_H, H2, H2, float16_maxnum)
+-RVVCALL(OPFVF2, vfmax_vf_w, OP_UUU_W, H4, H4, float32_maxnum)
+-RVVCALL(OPFVF2, vfmax_vf_d, OP_UUU_D, H8, H8, float64_maxnum)
++RVVCALL(OPFVF2, vfmax_vf_h, OP_UUU_H, H2, H2, float16_maxnum_noprop)
++RVVCALL(OPFVF2, vfmax_vf_w, OP_UUU_W, H4, H4, float32_maxnum_noprop)
++RVVCALL(OPFVF2, vfmax_vf_d, OP_UUU_D, H8, H8, float64_maxnum_noprop)
+ GEN_VEXT_VF(vfmax_vf_h, 2, 2, clearh)
+ GEN_VEXT_VF(vfmax_vf_w, 4, 4, clearl)
+ GEN_VEXT_VF(vfmax_vf_d, 8, 8, clearq)
 -- 
 2.17.1
 
