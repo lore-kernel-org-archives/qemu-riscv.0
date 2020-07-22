@@ -1,66 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyAuj-0001rh-MG
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:19:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53808)
+	id 1jyAup-0001zZ-2K
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:19:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53856)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAug-0001ps-BJ
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:19:46 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534]:36045)
+ id 1jyAum-0001wg-N3
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:19:52 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:34510)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAue-0005c4-GJ
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:19:46 -0400
-Received: by mail-pg1-x534.google.com with SMTP id p3so880945pgh.3
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:19:44 -0700 (PDT)
+ id 1jyAuk-0005ct-6w
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:19:52 -0400
+Received: by mail-pg1-x533.google.com with SMTP id t6so884643pgq.1
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:19:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=tzS1NhxcZynnC3BiJPnOg5ltt6hy7hD1fUmF5Dof7xY=;
- b=i/qst5NB3gpcKwigmmRG8UBZDn+3ciJVdwAhIxCrmYHsBKD13BM5d1UpyV4yX3uW6i
- YwcwyfFSyzQOGEn+hhXJiaf0JTZ2CDD+twqnQ5tWhs0T5ZfPjIMBJwfu5o56fblvv0LI
- J77bX1HDwl9vfei6ED7NXg5K5JBWqL4rGAwiHYa5/2itJI9jluqRfq1jLQq2Sqp93xag
- B0zpQTrjGCshVvxtQ01mx6bwEngu8gdqKwfo7n81lOdEVhCrRgm/eFmhGQ3aHBRtUUww
- FkR2LwXBQY4SG0iPqi7okac2+EheRBVBkNLXz/FffFXZ1x2AAcoJEJ4leHTChoPCUXR9
- 2XtQ==
+ bh=mGnKSMkKMtsxEVb7JFS0nY27EekRK3d4wsP51kVAl90=;
+ b=G2rnH8m0AcSmUyCzxoci1Tb8SPSeg7DaQt1+GjXsxVSWHC6VQpliA7g9BUJx/G4DAF
+ Zuu0RHRHJSjwaaLIrZMePpb+Xm7eacRRkmSgBTGOAW9mliw+JGs7GfyUdw5JDWy0BIXz
+ 1W1qzDYJYrKpxgLpIvNPTz/sCxzOn0R0hYU/EkMlOkdDGhLeC0Qc7a3NWyXLvkMVpY4z
+ WhxRcc3XKmjaC4ddFm6Mbqg1RTym8n5nuSjRvTriT8pfQO4olCmQgYkEuh9XImx5yjbG
+ TkR+czYEMVWc3MFwbrz9bv26tWnAPRzNuN7nerDdvbsiNVrWR5kHCurNl6YRSWweHl2n
+ hCSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=tzS1NhxcZynnC3BiJPnOg5ltt6hy7hD1fUmF5Dof7xY=;
- b=gbwmzV39mMpT92ihUHvzy6Djyl2jtUMeik2nI9TxXJ4aCU9zLKuu46WffZTkCt1HoX
- fZbYoIsDSN4UMpt2pF7Z/7mNyKdFhDq2bYdQ+foBYiY4mlVew/2RBPe29nVNbW7dT8+a
- l+ozWQn3PBwa20fLrZCAQ9WQosSEV4pPPXtRaSlcTTRexafpiN5WNqh19dravybvLmKG
- lKsQ8GLKT+72ScDzIyAeuG1PABQgPpeqbCf5pwzFqXZzbYE6oIrY+gikvdROhfn6p9FP
- 8cMnQspD+y+/EVL6H9l12lfrMjyc6OtKcsy9CEqOABVf9zh4TvVidWMkaJpEmFqkmcii
- f8hQ==
-X-Gm-Message-State: AOAM533eaaVDF7LNvcqP5a2Mn1ZjWZeAoeGjZSPF3Kq6vEWM2+/rA++O
- VDFOmJzNVlt/x6QVmM37JDuJR45ffUw=
-X-Google-Smtp-Source: ABdhPJxMdS6cWMWKiBf1UK/uCt6dzGE47WB/MNcPgyXBErNe45ULB9WKJKk8w3Csj9zmoSA+2zQ7QQ==
-X-Received: by 2002:aa7:8005:: with SMTP id j5mr26374609pfi.142.1595409583246; 
- Wed, 22 Jul 2020 02:19:43 -0700 (PDT)
+ bh=mGnKSMkKMtsxEVb7JFS0nY27EekRK3d4wsP51kVAl90=;
+ b=X7UM4myrTMqfxZqBmvOnZn0jnDkg3UPJCDjbfEr9LUshlJKzpjufQqXHULqdEz8jfj
+ lY6Q1fplChbDAz8JSGcgE/c5VNlJPM+SInGPSU7Jsnm6Dru8rSAFjlY6Ng4PFktOAoh6
+ 8yHWZZglk17vv7kq+z8bND6boZ1MiKQrCCXiiaoduiN62nBfOKo5aZFXgGX0RL1YSfwB
+ rWMuQ/e7p/fCo2cf9wkvetmVP7fBhaQcH/99fJZWzPGXLSRwQu+Jhloi8Rlbjs2RYtGz
+ 1BOliNNkMcoypirLjpPoh1fbmggZg+27CnVTLDDYY+iSy98jeBlA9aYJ7Dzmotn4EIEv
+ a3kQ==
+X-Gm-Message-State: AOAM532Loff34h1zRfT5r1w2YqhBTs3wmsqW/H+q0U3sXBR4R7+fqHH7
+ na4Kv8z2VMko0FuhwH+WWdM8xA==
+X-Google-Smtp-Source: ABdhPJwz2PRLy0ePfNpOkFksGcSj8T/7V+MLLru1WyUGDnZI77BQz4NmqlTPe/V6jJdT7dyWfHvPhg==
+X-Received: by 2002:a62:fc53:: with SMTP id e80mr26746292pfh.129.1595409589088; 
+ Wed, 22 Jul 2020 02:19:49 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.19.40
+ by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.19.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2020 02:19:42 -0700 (PDT)
+ Wed, 22 Jul 2020 02:19:48 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- LIU Zhiwei <zhiwei_liu@c-sky.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [RFC v2 29/76] target/riscv: rvv-0.9: take fractional LMUL into
- vector max elements calculation
-Date: Wed, 22 Jul 2020 17:15:52 +0800
-Message-Id: <20200722091641.8834-30-frank.chang@sifive.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Subject: [RFC v2 30/76] target/riscv: rvv-0.9: floating-point square-root
+ instruction
+Date: Wed, 22 Jul 2020 17:15:53 +0800
+Message-Id: <20200722091641.8834-31-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200722091641.8834-1-frank.chang@sifive.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x533.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -82,106 +80,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 09:19:47 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 09:19:53 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Update vext_get_vlmax() and MAXSZ() to take fractional LMUL into
-calculation for RVV 0.9.
-
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/cpu.h                      | 32 +++++++++++++++----------
- target/riscv/insn_trans/trans_rvv.inc.c | 11 ++++++++-
- 2 files changed, 29 insertions(+), 14 deletions(-)
+ target/riscv/insn32.decode | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a650df0441..446ce1a667 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -25,6 +25,8 @@
- #include "exec/cpu-defs.h"
- #include "fpu/softfloat-types.h"
- 
-+#include "internals.h"
-+
- #define TCG_GUEST_DEFAULT_MO 0
- 
- #define TYPE_RISCV_CPU "riscv-cpu"
-@@ -379,20 +381,14 @@ FIELD(TB_FLAGS, VMA, 12, 1)
- /* Skip MSTATUS_FS (0x6000) fields */
- FIELD(TB_FLAGS, VILL, 15, 1)
- 
--/*
-- * A simplification for VLMAX
-- * = (1 << LMUL) * VLEN / (8 * (1 << SEW))
-- * = (VLEN << LMUL) / (8 << SEW)
-- * = (VLEN << LMUL) >> (SEW + 3)
-- * = VLEN >> (SEW + 3 - LMUL)
-- */
- static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
- {
-     uint8_t sew, lmul;
--
-     sew = FIELD_EX64(vtype, VTYPE, VSEW);
--    lmul = FIELD_EX64(vtype, VTYPE, VLMUL);
--    return cpu->cfg.vlen >> (sew + 3 - lmul);
-+    lmul = (FIELD_EX64(vtype, VTYPE, VFLMUL) << 2)
-+            | FIELD_EX64(vtype, VTYPE, VLMUL);
-+    float flmul = flmul_table[lmul];
-+    return cpu->cfg.vlen * flmul / (1 << (sew + 3));
- }
- 
- static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-@@ -404,13 +400,23 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-     *cs_base = 0;
- 
-     if (riscv_has_ext(env, RVV)) {
-+        /*
-+         * If env->vl equals to VLMAX, we can use generic vector operation
-+         * expanders (GVEC) to accerlate the vector operations.
-+         * However, as LMUL could be a fractional number. The maximum
-+         * vector size can be operated might be less than 8 bytes,
-+         * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
-+         * only when maxsz >= 8 bytes.
-+         */
-         uint32_t vlmax = vext_get_vlmax(env_archcpu(env), env->vtype);
--        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl);
-+        uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
-+        uint32_t maxsz = vlmax * (1 << sew);
-+        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl)
-+                           && (maxsz >= 8);
- 
-         flags = FIELD_DP32(flags, TB_FLAGS, VILL,
-                     FIELD_EX64(env->vtype, VTYPE, VILL));
--        flags = FIELD_DP32(flags, TB_FLAGS, SEW,
--                    FIELD_EX64(env->vtype, VTYPE, VSEW));
-+        flags = FIELD_DP32(flags, TB_FLAGS, SEW, sew);
-         flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
-                     (FIELD_EX64(env->vtype, VTYPE, VFLMUL) << 2)
-                         | FIELD_EX64(env->vtype, VTYPE, VLMUL));
-diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index 4274daf08e..89209a5d18 100644
---- a/target/riscv/insn_trans/trans_rvv.inc.c
-+++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -1270,7 +1270,16 @@ GEN_VEXT_TRANS(vamomaxuei64_v, 64, 8,  rwdvm, amo_op, amo_check)
- /*
-  *** Vector Integer Arithmetic Instructions
-  */
--#define MAXSZ(s) (s->vlen >> (3 - s->lmul))
-+
-+/*
-+ * MAXSZ returns the maximum vector size can be operated in bytes,
-+ * which is used in GVEC IR when vl_eq_vlmax flag is set to true
-+ * to accerlate vector operation.
-+ */
-+static inline uint32_t MAXSZ(DisasContext *s)
-+{
-+    return (s->vlen >> 3) * s->flmul;
-+}
- 
- static bool opivv_check(DisasContext *s, arg_rmrr *a)
- {
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index e3f0fba912..1d34fa647b 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -509,7 +509,7 @@ vfwmsac_vv      111110 . ..... ..... 001 ..... 1010111 @r_vm
+ vfwmsac_vf      111110 . ..... ..... 101 ..... 1010111 @r_vm
+ vfwnmsac_vv     111111 . ..... ..... 001 ..... 1010111 @r_vm
+ vfwnmsac_vf     111111 . ..... ..... 101 ..... 1010111 @r_vm
+-vfsqrt_v        100011 . ..... 00000 001 ..... 1010111 @r2_vm
++vfsqrt_v        010011 . ..... 00000 001 ..... 1010111 @r2_vm
+ vfmin_vv        000100 . ..... ..... 001 ..... 1010111 @r_vm
+ vfmin_vf        000100 . ..... ..... 101 ..... 1010111 @r_vm
+ vfmax_vv        000110 . ..... ..... 001 ..... 1010111 @r_vm
 -- 
 2.17.1
 
