@@ -1,64 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyAuf-0001nw-Ky
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:19:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53776)
+	id 1jyAuj-0001rh-MG
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:19:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53808)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAue-0001kd-GT
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:19:44 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:37936)
+ id 1jyAug-0001ps-BJ
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:19:46 -0400
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534]:36045)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAua-0005bi-1p
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:19:43 -0400
-Received: by mail-pf1-x444.google.com with SMTP id j20so867275pfe.5
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:19:39 -0700 (PDT)
+ id 1jyAue-0005c4-GJ
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:19:46 -0400
+Received: by mail-pg1-x534.google.com with SMTP id p3so880945pgh.3
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:19:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=5Wcnm8IqhkmajVRLy3EPsUykg3HluDMA8Ajti6zvwSg=;
- b=RSLfqkWMuS0H0eLGdhX+zJ5A/B5kzIXun1zQejjwJJJ1LidffekShJlYcwEJSD6gCa
- diYBjvEY4NX+HiD92KOyslUqzbNZf5dnuDK/BSuyI6ubyRUlgAl5A64LHKYvBiCEEFeB
- vEOJ8sHidI1q39mLlwjuNtJQkR7V2cqg0diRhFoKXbuBgUbDXmbJIjz7jagzx4PO9vMS
- ZGiu1Gl/xtAvkE2BybJ6sX3n4LUkzuS47msswcm2gPWUmx4yiDJsD5kj66evwp701e16
- rEEBTD3TPYBZlb4yKdD87g54L0z9A6VEgrJVsdghDsmxv9dMrFLDZvUg7tuhH70J71sd
- voQA==
+ bh=tzS1NhxcZynnC3BiJPnOg5ltt6hy7hD1fUmF5Dof7xY=;
+ b=i/qst5NB3gpcKwigmmRG8UBZDn+3ciJVdwAhIxCrmYHsBKD13BM5d1UpyV4yX3uW6i
+ YwcwyfFSyzQOGEn+hhXJiaf0JTZ2CDD+twqnQ5tWhs0T5ZfPjIMBJwfu5o56fblvv0LI
+ J77bX1HDwl9vfei6ED7NXg5K5JBWqL4rGAwiHYa5/2itJI9jluqRfq1jLQq2Sqp93xag
+ B0zpQTrjGCshVvxtQ01mx6bwEngu8gdqKwfo7n81lOdEVhCrRgm/eFmhGQ3aHBRtUUww
+ FkR2LwXBQY4SG0iPqi7okac2+EheRBVBkNLXz/FffFXZ1x2AAcoJEJ4leHTChoPCUXR9
+ 2XtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=5Wcnm8IqhkmajVRLy3EPsUykg3HluDMA8Ajti6zvwSg=;
- b=AaCdiyNV9PBJlHNDqXBgfi0+ZK8x8Gp0Q9YDOOAmSny/+Ut4kv4ocNhJlEhR9bFn1h
- MAkgKgacxh1njfbyanaIWPMdVheUopHXbc6mgGjaz6QZ5JmbHhI6dj5QmPJCXm/kEIQ0
- SGdBxn8r3lbiiALmiFSQmwp1sbPvSiDRc/NS4l/7vupXH8vf0ZaRXG+AO5QnQIOPCDUk
- gjBbOXgpH318+DQ+ytbC1grufsdqzMMRdwBVn3iWcBTgvIn42U+iTqkqGjDhxMYmevJ2
- Ati0bzmChlTpy3jijd8Bqm3iSd8vU81EHksWndfMOuXggsJASJ4QamZGy+PYrQ6SpaYK
- HHIg==
-X-Gm-Message-State: AOAM533HVUvUSL3j1q0DtC9H0+/myShhPmnAz4XdL2OzsG3pNIgW1RiI
- EqKpSXaD6qsunL5Zec6xPnp0nySBgZI=
-X-Google-Smtp-Source: ABdhPJxxDeAmdZc1+eOf9eo+RPH+qR1EnhQEhFETFGpRRSpyOw+lsbxmLIiGy1vBHrvnbnGMdpAYTQ==
-X-Received: by 2002:aa7:955a:: with SMTP id w26mr28585277pfq.137.1595409575329; 
- Wed, 22 Jul 2020 02:19:35 -0700 (PDT)
+ bh=tzS1NhxcZynnC3BiJPnOg5ltt6hy7hD1fUmF5Dof7xY=;
+ b=gbwmzV39mMpT92ihUHvzy6Djyl2jtUMeik2nI9TxXJ4aCU9zLKuu46WffZTkCt1HoX
+ fZbYoIsDSN4UMpt2pF7Z/7mNyKdFhDq2bYdQ+foBYiY4mlVew/2RBPe29nVNbW7dT8+a
+ l+ozWQn3PBwa20fLrZCAQ9WQosSEV4pPPXtRaSlcTTRexafpiN5WNqh19dravybvLmKG
+ lKsQ8GLKT+72ScDzIyAeuG1PABQgPpeqbCf5pwzFqXZzbYE6oIrY+gikvdROhfn6p9FP
+ 8cMnQspD+y+/EVL6H9l12lfrMjyc6OtKcsy9CEqOABVf9zh4TvVidWMkaJpEmFqkmcii
+ f8hQ==
+X-Gm-Message-State: AOAM533eaaVDF7LNvcqP5a2Mn1ZjWZeAoeGjZSPF3Kq6vEWM2+/rA++O
+ VDFOmJzNVlt/x6QVmM37JDuJR45ffUw=
+X-Google-Smtp-Source: ABdhPJxMdS6cWMWKiBf1UK/uCt6dzGE47WB/MNcPgyXBErNe45ULB9WKJKk8w3Csj9zmoSA+2zQ7QQ==
+X-Received: by 2002:aa7:8005:: with SMTP id j5mr26374609pfi.142.1595409583246; 
+ Wed, 22 Jul 2020 02:19:43 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.19.33
+ by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.19.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2020 02:19:34 -0700 (PDT)
+ Wed, 22 Jul 2020 02:19:42 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v2 28/76] target/riscv: rvv-0.9: update vext_max_elems() for
- load/store insns
-Date: Wed, 22 Jul 2020 17:15:51 +0800
-Message-Id: <20200722091641.8834-29-frank.chang@sifive.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [RFC v2 29/76] target/riscv: rvv-0.9: take fractional LMUL into
+ vector max elements calculation
+Date: Wed, 22 Jul 2020 17:15:52 +0800
+Message-Id: <20200722091641.8834-30-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200722091641.8834-1-frank.chang@sifive.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::444;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x444.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x534.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -80,427 +82,106 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 09:19:44 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 09:19:47 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Unlike other vector instructions, load/store vector instructions return
-the maximum vector size calculated with EMUL.
-For other vector instructions, return VLMAX as the maximum vector size.
+Update vext_get_vlmax() and MAXSZ() to take fractional LMUL into
+calculation for RVV 0.9.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/vector_helper.c | 118 ++++++++++++++++++++---------------
- 1 file changed, 68 insertions(+), 50 deletions(-)
+ target/riscv/cpu.h                      | 32 +++++++++++++++----------
+ target/riscv/insn_trans/trans_rvv.inc.c | 11 ++++++++-
+ 2 files changed, 29 insertions(+), 14 deletions(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 995e873549..53867a6a2d 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -121,14 +121,32 @@ static inline uint32_t vext_vma(uint32_t desc)
- }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index a650df0441..446ce1a667 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -25,6 +25,8 @@
+ #include "exec/cpu-defs.h"
+ #include "fpu/softfloat-types.h"
  
- /*
-- * Get vector group length in bytes. Its range is [64, 2048].
-- *
-- * As simd_desc support at most 256, the max vlen is 512 bits.
-- * So vlen in bytes is encoded as maxsz.
-+ * Get the maximum number of elements can be operated.
-  */
--static inline uint32_t vext_maxsz(uint32_t desc)
-+static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz, bool is_ldst)
- {
--    return simd_maxsz(desc) << vext_lmul(desc);
-+    /*
-+     * As simd_desc support at most 256, the max vlen is 512 bits,
-+     * so vlen in bytes (vlenb) is encoded as maxsz.
-+     */
-+    uint32_t vlenb = simd_maxsz(desc);
++#include "internals.h"
 +
-+    if (is_ldst) {
+ #define TCG_GUEST_DEFAULT_MO 0
+ 
+ #define TYPE_RISCV_CPU "riscv-cpu"
+@@ -379,20 +381,14 @@ FIELD(TB_FLAGS, VMA, 12, 1)
+ /* Skip MSTATUS_FS (0x6000) fields */
+ FIELD(TB_FLAGS, VILL, 15, 1)
+ 
+-/*
+- * A simplification for VLMAX
+- * = (1 << LMUL) * VLEN / (8 * (1 << SEW))
+- * = (VLEN << LMUL) / (8 << SEW)
+- * = (VLEN << LMUL) >> (SEW + 3)
+- * = VLEN >> (SEW + 3 - LMUL)
+- */
+ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
+ {
+     uint8_t sew, lmul;
+-
+     sew = FIELD_EX64(vtype, VTYPE, VSEW);
+-    lmul = FIELD_EX64(vtype, VTYPE, VLMUL);
+-    return cpu->cfg.vlen >> (sew + 3 - lmul);
++    lmul = (FIELD_EX64(vtype, VTYPE, VFLMUL) << 2)
++            | FIELD_EX64(vtype, VTYPE, VLMUL);
++    float flmul = flmul_table[lmul];
++    return cpu->cfg.vlen * flmul / (1 << (sew + 3));
+ }
+ 
+ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+@@ -404,13 +400,23 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+     *cs_base = 0;
+ 
+     if (riscv_has_ext(env, RVV)) {
 +        /*
-+         * Vector load/store instructions have the EEW encoded
-+         * directly in the instructions. The maximum vector size is
-+         * calculated with EMUL rather than LMUL.
++         * If env->vl equals to VLMAX, we can use generic vector operation
++         * expanders (GVEC) to accerlate the vector operations.
++         * However, as LMUL could be a fractional number. The maximum
++         * vector size can be operated might be less than 8 bytes,
++         * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
++         * only when maxsz >= 8 bytes.
 +         */
-+        uint32_t eew = esz << 3;
-+        uint32_t sew = vext_sew(desc);
-+        float flmul = vext_vflmul(desc);
-+        float emul = (float)eew / sew * flmul;
-+        uint32_t emul_r = emul < 1 ? 1 : emul;
-+        return vlenb * emul_r / esz;
-+    } else {
-+        /* Return VLMAX */
-+        return vlenb * vext_vflmul(desc) / esz;
-+    }
- }
+         uint32_t vlmax = vext_get_vlmax(env_archcpu(env), env->vtype);
+-        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl);
++        uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
++        uint32_t maxsz = vlmax * (1 << sew);
++        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl)
++                           && (maxsz >= 8);
  
+         flags = FIELD_DP32(flags, TB_FLAGS, VILL,
+                     FIELD_EX64(env->vtype, VTYPE, VILL));
+-        flags = FIELD_DP32(flags, TB_FLAGS, SEW,
+-                    FIELD_EX64(env->vtype, VTYPE, VSEW));
++        flags = FIELD_DP32(flags, TB_FLAGS, SEW, sew);
+         flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
+                     (FIELD_EX64(env->vtype, VTYPE, VFLMUL) << 2)
+                         | FIELD_EX64(env->vtype, VTYPE, VLMUL));
+diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+index 4274daf08e..89209a5d18 100644
+--- a/target/riscv/insn_trans/trans_rvv.inc.c
++++ b/target/riscv/insn_trans/trans_rvv.inc.c
+@@ -1270,7 +1270,16 @@ GEN_VEXT_TRANS(vamomaxuei64_v, 64, 8,  rwdvm, amo_op, amo_check)
  /*
-@@ -289,7 +307,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+  *** Vector Integer Arithmetic Instructions
+  */
+-#define MAXSZ(s) (s->vlen >> (3 - s->lmul))
++
++/*
++ * MAXSZ returns the maximum vector size can be operated in bytes,
++ * which is used in GVEC IR when vl_eq_vlmax flag is set to true
++ * to accerlate vector operation.
++ */
++static inline uint32_t MAXSZ(DisasContext *s)
++{
++    return (s->vlen >> 3) * s->flmul;
++}
+ 
+ static bool opivv_check(DisasContext *s, arg_rmrr *a)
  {
-     uint32_t i, k;
-     uint32_t nf = vext_nf(desc);
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t max_elems = vext_max_elems(desc, esz, true);
-     uint32_t vta = vext_vta(desc);
- 
-     /* probe every access*/
-@@ -307,15 +325,15 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-         }
-         while (k < nf) {
-             target_ulong addr = base + stride * i + k * esz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            ldst_elem(env, addr, i + k * max_elems, vd, ra);
-             k++;
-         }
-     }
-     /* clear tail elements */
-     if (clear_elem) {
-         for (k = 0; k < nf; k++) {
--            clear_elem(vd, vta, env->vl + k * vlmax,
--                       env->vl * esz, vlmax * esz);
-+            clear_elem(vd, vta, env->vl + k * max_elems,
-+                       env->vl * esz, max_elems * esz);
-         }
-     }
- }
-@@ -364,7 +382,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
- {
-     uint32_t i, k;
-     uint32_t nf = vext_nf(desc);
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t max_elems = vext_max_elems(desc, esz, true);
-     uint32_t vta = vext_vta(desc);
- 
-     /* probe every access */
-@@ -374,15 +392,15 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-         k = 0;
-         while (k < nf) {
-             target_ulong addr = base + (i * nf + k) * esz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            ldst_elem(env, addr, i + k * max_elems, vd, ra);
-             k++;
-         }
-     }
-     /* clear tail elements */
-     if (clear_elem) {
-         for (k = 0; k < nf; k++) {
--            clear_elem(vd, vta, env->vl + k * vlmax,
--                       env->vl * esz, vlmax * esz);
-+            clear_elem(vd, vta, env->vl + k * max_elems,
-+                       env->vl * esz, max_elems * esz);
-         }
-     }
- }
-@@ -465,7 +483,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-     uint32_t i, k;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t max_elems = vext_max_elems(desc, esz, true);
-     uint32_t vta = vext_vta(desc);
- 
-     /* probe every access*/
-@@ -484,15 +502,15 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-         }
-         while (k < nf) {
-             abi_ptr addr = get_index_addr(base, i, vs2) + k * esz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            ldst_elem(env, addr, i + k * max_elems, vd, ra);
-             k++;
-         }
-     }
-     /* clear tail elements */
-     if (clear_elem) {
-         for (k = 0; k < nf; k++) {
--            clear_elem(vd, vta, env->vl + k * vlmax,
--                       env->vl * esz, vlmax * esz);
-+            clear_elem(vd, vta, env->vl + k * max_elems,
-+                       env->vl * esz, max_elems * esz);
-         }
-     }
- }
-@@ -563,7 +581,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-     uint32_t i, k, vl = 0;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t max_elems = vext_max_elems(desc, esz, true);
-     uint32_t vta = vext_vta(desc);
-     target_ulong addr, offset, remain;
- 
-@@ -615,7 +633,7 @@ ProbeSuccess:
-         }
-         while (k < nf) {
-             target_ulong addr = base + (i * nf + k) * esz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            ldst_elem(env, addr, i + k * max_elems, vd, ra);
-             k++;
-         }
-     }
-@@ -624,8 +642,8 @@ ProbeSuccess:
-         return;
-     }
-     for (k = 0; k < nf; k++) {
--        clear_elem(vd, vta, env->vl + k * vlmax,
--                   env->vl * esz, vlmax * esz);
-+        clear_elem(vd, vta, env->vl + k * max_elems,
-+                   env->vl * esz, max_elems * esz);
-     }
- }
- 
-@@ -652,7 +670,7 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
- {
-     uint32_t i, k;
-     uint32_t nf = vext_nf(desc);
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t max_elems = vext_max_elems(desc, esz, true);
-     uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
- 
-     /* probe every access */
-@@ -663,7 +681,7 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-         k = 0;
-         while (k < nf) {
-             target_ulong addr = base + (i * nf + k) * esz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            ldst_elem(env, addr, i + k * max_elems, vd, ra);
-             k++;
-         }
-     }
-@@ -806,7 +824,7 @@ vext_amo_noatomic(void *vs3, void *v0, target_ulong base,
-     target_long addr;
-     uint32_t wd = vext_wd(desc);
-     uint32_t vm = vext_vm(desc);
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);
-     uint32_t vta = vext_vta(desc);
- 
-     for (i = 0; i < env->vl; i++) {
-@@ -977,7 +995,7 @@ static void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
-                        uint32_t esz, uint32_t dsz,
-                        opivv2_fn *fn, clear_fn *clearfn)
- {
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);
-     uint32_t vm = vext_vm(desc);
-     uint32_t vta = vext_vta(desc);
-     uint32_t vl = env->vl;
-@@ -989,7 +1007,7 @@ static void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
-         }
-         fn(vd, vs1, vs2, i);
-     }
--    clearfn(vd, vta, vl, vl * dsz,  vlmax * dsz);
-+    clearfn(vd, vta, vl, vl * dsz, vlmax * dsz);
- }
- 
- /* generate the helpers for OPIVV */
-@@ -1042,7 +1060,7 @@ static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-                        uint32_t esz, uint32_t dsz,
-                        opivx2_fn fn, clear_fn *clearfn)
- {
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);
-     uint32_t vm = vext_vm(desc);
-     uint32_t vta = vext_vta(desc);
-     uint32_t vl = env->vl;
-@@ -1054,7 +1072,7 @@ static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-         }
-         fn(vd, s1, vs2, i);
-     }
--    clearfn(vd, vta, vl, vl * dsz,  vlmax * dsz);
-+    clearfn(vd, vta, vl, vl * dsz, vlmax * dsz);
- }
- 
- /* generate the helpers for OPIVX */
-@@ -1241,7 +1259,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
- {                                                             \
-     uint32_t vl = env->vl;                                    \
-     uint32_t esz = sizeof(ETYPE);                             \
--    uint32_t vlmax = vext_maxsz(desc) / esz;                  \
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);        \
-     uint32_t vta = vext_vta(desc);                            \
-     uint32_t i;                                               \
-                                                               \
-@@ -1271,7 +1289,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,        \
- {                                                                        \
-     uint32_t vl = env->vl;                                               \
-     uint32_t esz = sizeof(ETYPE);                                        \
--    uint32_t vlmax = vext_maxsz(desc) / esz;                             \
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);                   \
-     uint32_t vta = vext_vta(desc);                                       \
-     uint32_t i;                                                          \
-                                                                          \
-@@ -1333,7 +1351,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,          \
-                   void *vs2, CPURISCVState *env, uint32_t desc) \
- {                                                               \
-     uint32_t vl = env->vl;                                      \
--    uint32_t vlmax = vext_maxsz(desc) / sizeof(ETYPE);          \
-+    uint32_t vlmax = vext_max_elems(desc, sizeof(ETYPE), false);\
-     uint32_t i;                                                 \
-                                                                 \
-     for (i = 0; i < vl; i++) {                                  \
-@@ -1421,7 +1439,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,                          \
-     uint32_t vm = vext_vm(desc);                                          \
-     uint32_t vl = env->vl;                                                \
-     uint32_t esz = sizeof(TS1);                                           \
--    uint32_t vlmax = vext_maxsz(desc) / esz;                              \
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);                    \
-     uint32_t vta = vext_vta(desc);                                        \
-     uint32_t i;                                                           \
-                                                                           \
-@@ -1459,7 +1477,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,                \
-     uint32_t vm = vext_vm(desc);                                      \
-     uint32_t vl = env->vl;                                            \
-     uint32_t esz = sizeof(TD);                                        \
--    uint32_t vlmax = vext_maxsz(desc) / esz;                          \
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);                \
-     uint32_t vta = vext_vta(desc);                                    \
-     uint32_t i;                                                       \
-                                                                       \
-@@ -2102,7 +2120,7 @@ void HELPER(NAME)(void *vd, void *vs1, CPURISCVState *env,           \
- {                                                                    \
-     uint32_t vl = env->vl;                                           \
-     uint32_t esz = sizeof(ETYPE);                                    \
--    uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);               \
-     uint32_t vta = vext_vta(desc);                                   \
-     uint32_t i;                                                      \
-                                                                      \
-@@ -2124,7 +2142,7 @@ void HELPER(NAME)(void *vd, uint64_t s1, CPURISCVState *env,         \
- {                                                                    \
-     uint32_t vl = env->vl;                                           \
-     uint32_t esz = sizeof(ETYPE);                                    \
--    uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);               \
-     uint32_t vta = vext_vta(desc);                                   \
-     uint32_t i;                                                      \
-                                                                      \
-@@ -2145,7 +2163,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,          \
- {                                                                    \
-     uint32_t vl = env->vl;                                           \
-     uint32_t esz = sizeof(ETYPE);                                    \
--    uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);               \
-     uint32_t vta = vext_vta(desc);                                   \
-     uint32_t i;                                                      \
-                                                                      \
-@@ -2167,7 +2185,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,               \
- {                                                                    \
-     uint32_t vl = env->vl;                                           \
-     uint32_t esz = sizeof(ETYPE);                                    \
--    uint32_t vlmax = vext_maxsz(desc) / esz;                         \
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);               \
-     uint32_t vta = vext_vta(desc);                                   \
-     uint32_t i;                                                      \
-                                                                      \
-@@ -2228,7 +2246,7 @@ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
-              uint32_t desc, uint32_t esz, uint32_t dsz,
-              opivv2_rm_fn *fn, clear_fn *clearfn)
- {
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);
-     uint32_t vm = vext_vm(desc);
-     uint32_t vta = vext_vta(desc);
-     uint32_t vl = env->vl;
-@@ -2348,7 +2366,7 @@ vext_vx_rm_2(void *vd, void *v0, target_long s1, void *vs2,
-              uint32_t desc, uint32_t esz, uint32_t dsz,
-              opivx2_rm_fn *fn, clear_fn *clearfn)
- {
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);
-     uint32_t vm = vext_vm(desc);
-     uint32_t vta = vext_vta(desc);
-     uint32_t vl = env->vl;
-@@ -3284,7 +3302,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-                   void *vs2, CPURISCVState *env,          \
-                   uint32_t desc)                          \
- {                                                         \
--    uint32_t vlmax = vext_maxsz(desc) / ESZ;              \
-+    uint32_t vlmax = vext_max_elems(desc, ESZ, false);    \
-     uint32_t vm = vext_vm(desc);                          \
-     uint32_t vta = vext_vta(desc);                        \
-     uint32_t vl = env->vl;                                \
-@@ -3319,7 +3337,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1,        \
-                   void *vs2, CPURISCVState *env,          \
-                   uint32_t desc)                          \
- {                                                         \
--    uint32_t vlmax = vext_maxsz(desc) / ESZ;              \
-+    uint32_t vlmax = vext_max_elems(desc, ESZ, false);    \
-     uint32_t vm = vext_vm(desc);                          \
-     uint32_t vta = vext_vta(desc);                        \
-     uint32_t vl = env->vl;                                \
-@@ -3890,7 +3908,7 @@ static void do_##NAME(void *vd, void *vs2, int i,      \
- void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
-         CPURISCVState *env, uint32_t desc)             \
- {                                                      \
--    uint32_t vlmax = vext_maxsz(desc) / ESZ;           \
-+    uint32_t vlmax = vext_max_elems(desc, ESZ, false); \
-     uint32_t vm = vext_vm(desc);                       \
-     uint32_t vta = vext_vta(desc);                     \
-     uint32_t vl = env->vl;                             \
-@@ -4067,7 +4085,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,       \
- {                                                                   \
-     uint32_t vm = vext_vm(desc);                                    \
-     uint32_t vl = env->vl;                                          \
--    uint32_t vlmax = vext_maxsz(desc) / sizeof(ETYPE);              \
-+    uint32_t vlmax = vext_max_elems(desc, sizeof(ETYPE), false);    \
-     uint32_t i;                                                     \
-                                                                     \
-     for (i = 0; i < vl; i++) {                                      \
-@@ -4211,7 +4229,7 @@ static void do_##NAME(void *vd, void *vs2, int i)      \
- void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
-                   CPURISCVState *env, uint32_t desc)   \
- {                                                      \
--    uint32_t vlmax = vext_maxsz(desc) / ESZ;           \
-+    uint32_t vlmax = vext_max_elems(desc, ESZ, false); \
-     uint32_t vm = vext_vm(desc);                       \
-     uint32_t vta = vext_vta(desc);                     \
-     uint32_t vl = env->vl;                             \
-@@ -4298,7 +4316,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2, \
-     uint32_t vm = vext_vm(desc);                              \
-     uint32_t vl = env->vl;                                    \
-     uint32_t esz = sizeof(ETYPE);                             \
--    uint32_t vlmax = vext_maxsz(desc) / esz;                  \
-+    uint32_t vlmax = vext_max_elems(desc, esz, false);        \
-     uint32_t vta = vext_vta(desc);                            \
-     uint32_t i;                                               \
-                                                               \
-@@ -4798,7 +4816,7 @@ GEN_VEXT_VID_V(vid_v_d, uint64_t, H8, clearq)
- void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-                   CPURISCVState *env, uint32_t desc)                      \
- {                                                                         \
--    uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-+    uint32_t vlmax = vext_max_elems(desc, sizeof(ETYPE), false);          \
-     uint32_t vm = vext_vm(desc);                                          \
-     uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-@@ -4908,7 +4926,7 @@ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_d, uint64_t, H8, clearq)
- void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
-                   CPURISCVState *env, uint32_t desc)                      \
- {                                                                         \
--    uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-+    uint32_t vlmax = vext_max_elems(desc, sizeof(ETYPE), false);          \
-     uint32_t vm = vext_vm(desc);                                          \
-     uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-@@ -4938,7 +4956,7 @@ GEN_VEXT_VRGATHER_VV(vrgather_vv_d, uint64_t, H8, clearq)
- void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-                   CPURISCVState *env, uint32_t desc)                      \
- {                                                                         \
--    uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-+    uint32_t vlmax = vext_max_elems(desc, sizeof(ETYPE), false);          \
-     uint32_t vm = vext_vm(desc);                                          \
-     uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-@@ -4968,7 +4986,7 @@ GEN_VEXT_VRGATHER_VX(vrgather_vx_d, uint64_t, H8, clearq)
- void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
-                   CPURISCVState *env, uint32_t desc)                      \
- {                                                                         \
--    uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-+    uint32_t vlmax = vext_max_elems(desc, sizeof(ETYPE), false);          \
-     uint32_t vta = vext_vta(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     uint32_t num = 0, i;                                                  \
 -- 
 2.17.1
 
