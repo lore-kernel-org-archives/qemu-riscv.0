@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyAxf-0008Ff-9D
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:22:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55714)
+	id 1jyAxk-0008VG-N9
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:22:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55754)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAxd-00089v-5p
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:49 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:43061)
+ id 1jyAxi-0008OA-DJ
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:54 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432]:34196)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAxb-0006GO-8O
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:48 -0400
-Received: by mail-pl1-x636.google.com with SMTP id x8so648171plm.10
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:22:46 -0700 (PDT)
+ id 1jyAxf-0006Gv-S3
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:54 -0400
+Received: by mail-pf1-x432.google.com with SMTP id u185so881494pfu.1
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:22:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=Pi0ETlpWV5x2QnbEIJYiwXrfA/Q9GYlQx2rBVg7/nsg=;
- b=m8AEGkIrfRpHFKMOp9MrXTcjNLBgys9u87LvgWsYfFzfF/IMcJIIorfYhVUpi5l6vW
- ERgX/OXiIEXl7oYZODR488XucGP+frLA6JYeBQDxcJ0ARSwKlFls6lZa+As/PeECjKY0
- QCsTVJi1yLNJNUIXCxoZynHuFNSU8AQDPHgmi3S7JVjBlv6LolfiXzom9KLv45CY9B2P
- cJx4lkCc6acxgvIRJN4s1QaAMNlNUx1Xdb6jVmjY/iKKOacfhq6LsMmIR58ZcVza0siy
- CU53jYtCcBssos6V/cDZlNi3aSYGKQ57kPPjqh1AFgenVTCxCDlMr+ENPOTncCaYRuMa
- gmCw==
+ bh=MqJ1W7Xx6Rp4RwGFL/cojw2iykbesH1Xy4iT4eyuvxQ=;
+ b=TFK6oXAmpE4GwPcmKizc2c4ZIln0NzP4fFxg/NfqCom1NHwcWklZRlqClYmC0X8qJ9
+ F2n3h++8MAYoaWB5vU8Q6qwzuKmNo7EezJ5rNe6O842UiTxQLBHbTCcBTZIKr76VO+Ma
+ zR23MRQjkR3spt4vj5QpFVlltkHZJ0oCTje12/av8xzTktHxEpksjMr5v8vV9UljJyeu
+ KH6nnhZpweRyyy0/R0iE7fj27icmQxjFPT/IRd8A+j3fz20AW1IDgmJxxpUCQxo8qMqF
+ FpvjrgtcuI9UEXvOJHkhzFimtaQyGHuZyuTwUpsmnDsnEvATkR9jnlRh3M/y8W/Qf7fw
+ urGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=Pi0ETlpWV5x2QnbEIJYiwXrfA/Q9GYlQx2rBVg7/nsg=;
- b=Q4yeA9FWl8UZODS/Cq3v2MK2J2rYpaau++bnnNDsliwuRellC83F2OfPmsevxofAYy
- 4EZ6loDLoI6wTUcf/+04bk3KxXDns+euE+T7eAlGHfp4SNxrtb/0yEnYI1Q7YgaqlMsz
- qTjFWXKWtvOKc2IT7UdABPT48soqeIwJ8qpYwqIotaq0CiGHziUtB8r3ENchVZOCc0xY
- nGiCMj60Isus5pwQPpLUKfKbwFgA3r2RFH+51fr2nWybsD5GtlpcpGf7SsdLopnjZ/k3
- pYvlGQvZTfMZTl2fVKJMsJlm4Cr47Kk8+2GsXzb8sEBfQqcpHkuBzFkZfRVmoC7OE8yv
- 6TOg==
-X-Gm-Message-State: AOAM533q20MT3Tidrdulfg7T8MDqn0rXsz10aplnkJ00cb9OdVtJnb5T
- W1+QWIJbePKnaOUcdx2osmDVMA==
-X-Google-Smtp-Source: ABdhPJyBn3z5vNb3z6ChytI7djpTQusLCibyVpMk7Oe4KX0u99ydq29Ee2igZYNRL4LZaeJm4AENKQ==
-X-Received: by 2002:a17:90a:a10b:: with SMTP id
- s11mr9394459pjp.216.1595409766075; 
- Wed, 22 Jul 2020 02:22:46 -0700 (PDT)
+ bh=MqJ1W7Xx6Rp4RwGFL/cojw2iykbesH1Xy4iT4eyuvxQ=;
+ b=LPfm9qIpLEjLz82r7oPyigbDPRDmNTdH04KK8u3KfBP9n8cFzea8RehpqBgImmb22j
+ 2CqdV6JbNF2RbQ0EnUBY9IsmyWHkXMkyLpvmPzxTDR2ReUxmBGq4TIH1v1lhZCxni1EL
+ 72RQhODzCD17fdmxYueVDcb1SdgR2+d1MQEQyEaxcSdfJFYV5uBbSj4GlP78Rdg5wB8k
+ Gprf+Dv6B/KsY53E0gX/q2AysB8MT/xSpZCuk8+sq+aBTGNEYTCmgSM2RQyFvrUlBn8l
+ JBijbCgGLLXQkJRoz0/yZFtZGqAChOLDky9qpwcEUVyf5BUKT3LhgArjzLxdIdik//fM
+ BRWA==
+X-Gm-Message-State: AOAM531pDgNPbEnmxaJqNV+xwQK1v94Hof/FgTeT1YP0Q4i8ZN/vCFyM
+ +c4QgXI3ZnsTbCvZE22EIQY9HQ==
+X-Google-Smtp-Source: ABdhPJwhk2+ZYsuIY7BNcbGN4g1i7wHjjy6Jdk7GL+Kf3tsx4uJzLz3KxIM4Ja0dBlRWDru1sTdAig==
+X-Received: by 2002:a05:6a00:2b0:: with SMTP id
+ q16mr29635976pfs.79.1595409770535; 
+ Wed, 22 Jul 2020 02:22:50 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.22.43
+ by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.22.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2020 02:22:45 -0700 (PDT)
+ Wed, 22 Jul 2020 02:22:50 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -53,16 +53,18 @@ Cc: Hsiangkai Wang <kai.wang@sifive.com>, Frank Chang <frank.chang@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v2 74/76] target/riscv: gdb: modify gdb csr xml file to align
- with csr register map
-Date: Wed, 22 Jul 2020 17:16:37 +0800
-Message-Id: <20200722091641.8834-75-frank.chang@sifive.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Laurent Vivier <laurent@vivier.eu>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: [RFC v2 75/76] target/riscv: gdb: support vector registers for rv64
+Date: Wed, 22 Jul 2020 17:16:38 +0800
+Message-Id: <20200722091641.8834-76-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200722091641.8834-1-frank.chang@sifive.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x432.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -84,95 +86,339 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 09:22:49 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 09:22:54 -0000
 
 From: Hsiangkai Wang <kai.wang@sifive.com>
 
 Signed-off-by: Hsiangkai Wang <kai.wang@sifive.com>
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- gdb-xml/riscv-32bit-csr.xml | 11 ++++++-----
- gdb-xml/riscv-64bit-csr.xml | 11 ++++++-----
- target/riscv/gdbstub.c      |  4 ++--
- 3 files changed, 14 insertions(+), 12 deletions(-)
+ configure                           |  2 +-
+ gdb-xml/riscv-64bit-csr.xml         |  7 ++++
+ gdb-xml/riscv-64bit-vector-128b.xml | 59 +++++++++++++++++++++++++++
+ gdb-xml/riscv-64bit-vector-256b.xml | 59 +++++++++++++++++++++++++++
+ gdb-xml/riscv-64bit-vector-512b.xml | 59 +++++++++++++++++++++++++++
+ target/riscv/gdbstub.c              | 62 ++++++++++++++++++++++++++++-
+ 6 files changed, 245 insertions(+), 3 deletions(-)
+ create mode 100644 gdb-xml/riscv-64bit-vector-128b.xml
+ create mode 100644 gdb-xml/riscv-64bit-vector-256b.xml
+ create mode 100644 gdb-xml/riscv-64bit-vector-512b.xml
 
-diff --git a/gdb-xml/riscv-32bit-csr.xml b/gdb-xml/riscv-32bit-csr.xml
-index da1bf19e2f..3d2031da7d 100644
---- a/gdb-xml/riscv-32bit-csr.xml
-+++ b/gdb-xml/riscv-32bit-csr.xml
-@@ -110,6 +110,8 @@
-   <reg name="mcause" bitsize="32"/>
-   <reg name="mtval" bitsize="32"/>
-   <reg name="mip" bitsize="32"/>
-+  <reg name="mtinst" bitsize="32"/>
-+  <reg name="mtval2" bitsize="32"/>
-   <reg name="pmpcfg0" bitsize="32"/>
-   <reg name="pmpcfg1" bitsize="32"/>
-   <reg name="pmpcfg2" bitsize="32"/>
-@@ -232,12 +234,11 @@
-   <reg name="hedeleg" bitsize="32"/>
-   <reg name="hideleg" bitsize="32"/>
-   <reg name="hie" bitsize="32"/>
--  <reg name="htvec" bitsize="32"/>
--  <reg name="hscratch" bitsize="32"/>
--  <reg name="hepc" bitsize="32"/>
--  <reg name="hcause" bitsize="32"/>
--  <reg name="hbadaddr" bitsize="32"/>
-+  <reg name="hcounteren" bitsize="32"/>
-+  <reg name="htval" bitsize="32"/>
-   <reg name="hip" bitsize="32"/>
-+  <reg name="htinst" bitsize="32"/>
-+  <reg name="hgatp" bitsize="32"/>
-   <reg name="mbase" bitsize="32"/>
-   <reg name="mbound" bitsize="32"/>
-   <reg name="mibase" bitsize="32"/>
+diff --git a/configure b/configure
+index ee6c3c6792..8d69013a97 100755
+--- a/configure
++++ b/configure
+@@ -8228,7 +8228,7 @@ case "$target_name" in
+     TARGET_BASE_ARCH=riscv
+     TARGET_ABI_DIR=riscv
+     mttcg=yes
+-    gdb_xml_files="riscv-64bit-cpu.xml riscv-32bit-fpu.xml riscv-64bit-fpu.xml riscv-64bit-csr.xml riscv-64bit-virtual.xml"
++    gdb_xml_files="riscv-64bit-cpu.xml riscv-32bit-fpu.xml riscv-64bit-fpu.xml riscv-64bit-vector-128b.xml riscv-64bit-vector-256b.xml riscv-64bit-vector-512b.xml riscv-64bit-csr.xml riscv-64bit-virtual.xml"
+   ;;
+   rx)
+     TARGET_ARCH=rx
 diff --git a/gdb-xml/riscv-64bit-csr.xml b/gdb-xml/riscv-64bit-csr.xml
-index 6aa4bed9f5..9039456293 100644
+index 9039456293..28a7c9a9f3 100644
 --- a/gdb-xml/riscv-64bit-csr.xml
 +++ b/gdb-xml/riscv-64bit-csr.xml
-@@ -110,6 +110,8 @@
-   <reg name="mcause" bitsize="64"/>
-   <reg name="mtval" bitsize="64"/>
-   <reg name="mip" bitsize="64"/>
-+  <reg name="mtinst" bitsize="64"/>
-+  <reg name="mtval2" bitsize="64"/>
-   <reg name="pmpcfg0" bitsize="64"/>
-   <reg name="pmpcfg1" bitsize="64"/>
-   <reg name="pmpcfg2" bitsize="64"/>
-@@ -232,12 +234,11 @@
-   <reg name="hedeleg" bitsize="64"/>
-   <reg name="hideleg" bitsize="64"/>
-   <reg name="hie" bitsize="64"/>
--  <reg name="htvec" bitsize="64"/>
--  <reg name="hscratch" bitsize="64"/>
--  <reg name="hepc" bitsize="64"/>
--  <reg name="hcause" bitsize="64"/>
--  <reg name="hbadaddr" bitsize="64"/>
-+  <reg name="hcounteren" bitsize="64"/>
-+  <reg name="htval" bitsize="64"/>
-   <reg name="hip" bitsize="64"/>
-+  <reg name="htinst" bitsize="64"/>
-+  <reg name="hgatp" bitsize="64"/>
-   <reg name="mbase" bitsize="64"/>
-   <reg name="mbound" bitsize="64"/>
-   <reg name="mibase" bitsize="64"/>
+@@ -248,4 +248,11 @@
+   <reg name="mucounteren" bitsize="64"/>
+   <reg name="mscounteren" bitsize="64"/>
+   <reg name="mhcounteren" bitsize="64"/>
++  <reg name="vstart" bitsize="64"/>
++  <reg name="vxsat" bitsize="64"/>
++  <reg name="vxrm" bitsize="64"/>
++  <reg name="vcsr" bitsize="64"/>
++  <reg name="vl" bitsize="64"/>
++  <reg name="vtype" bitsize="64"/>
++  <reg name="vlenb" bitsize="64"/>
+ </feature>
+diff --git a/gdb-xml/riscv-64bit-vector-128b.xml b/gdb-xml/riscv-64bit-vector-128b.xml
+new file mode 100644
+index 0000000000..f6150968b3
+--- /dev/null
++++ b/gdb-xml/riscv-64bit-vector-128b.xml
+@@ -0,0 +1,59 @@
++<?xml version="1.0"?>
++<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
++
++     Copying and distribution of this file, with or without modification,
++     are permitted in any medium without royalty provided the copyright
++     notice and this notice are preserved.  -->
++
++<!-- Register numbers are hard-coded in order to maintain backward
++     compatibility with older versions of tools that didn't use xml
++     register descriptions.  -->
++
++<!DOCTYPE feature SYSTEM "gdb-target.dtd">
++<feature name="org.gnu.gdb.riscv.vector">
++<vector id="bytes" type="uint8" count="16"/>
++<vector id="shorts" type="uint16" count="8"/>
++<vector id="words" type="uint32" count="4"/>
++<vector id="longs" type="uint64" count="2"/>
++<vector id="quads" type="uint128" count="1"/>
++  <union id="riscv_vector">
++    <field name="b" type="bytes"/>
++    <field name="s" type="shorts"/>
++    <field name="w" type="words"/>
++    <field name="l" type="longs"/>
++    <field name="q" type="quads"/>
++  </union>
++
++  <reg name="v0" bitsize="128" save-restore="no" type="riscv_vector" group="vector" regnum="69"/>
++  <reg name="v1" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v2" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v3" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v4" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v5" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v6" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v7" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v8" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v9" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v10" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v11" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v12" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v13" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v14" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v15" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v16" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v17" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v18" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v19" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v20" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v21" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v22" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v23" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v24" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v25" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v26" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v27" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v28" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v29" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v30" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v31" bitsize="128" save-restore="no" type="riscv_vector" group="vector"/>
++</feature>
+diff --git a/gdb-xml/riscv-64bit-vector-256b.xml b/gdb-xml/riscv-64bit-vector-256b.xml
+new file mode 100644
+index 0000000000..6183846a35
+--- /dev/null
++++ b/gdb-xml/riscv-64bit-vector-256b.xml
+@@ -0,0 +1,59 @@
++<?xml version="1.0"?>
++<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
++
++     Copying and distribution of this file, with or without modification,
++     are permitted in any medium without royalty provided the copyright
++     notice and this notice are preserved.  -->
++
++<!-- Register numbers are hard-coded in order to maintain backward
++     compatibility with older versions of tools that didn't use xml
++     register descriptions.  -->
++
++<!DOCTYPE feature SYSTEM "gdb-target.dtd">
++<feature name="org.gnu.gdb.riscv.vector">
++<vector id="bytes" type="uint8" count="32"/>
++<vector id="shorts" type="uint16" count="16"/>
++<vector id="words" type="uint32" count="8"/>
++<vector id="longs" type="uint64" count="4"/>
++<vector id="quads" type="uint128" count="2"/>
++  <union id="riscv_vector">
++    <field name="b" type="bytes"/>
++    <field name="s" type="shorts"/>
++    <field name="w" type="words"/>
++    <field name="l" type="longs"/>
++    <field name="q" type="quads"/>
++  </union>
++
++  <reg name="v0" bitsize="256" save-restore="no" type="riscv_vector" group="vector" regnum="69"/>
++  <reg name="v1" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v2" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v3" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v4" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v5" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v6" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v7" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v8" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v9" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v10" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v11" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v12" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v13" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v14" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v15" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v16" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v17" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v18" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v19" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v20" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v21" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v22" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v23" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v24" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v25" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v26" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v27" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v28" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v29" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v30" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v31" bitsize="256" save-restore="no" type="riscv_vector" group="vector"/>
++</feature>
+diff --git a/gdb-xml/riscv-64bit-vector-512b.xml b/gdb-xml/riscv-64bit-vector-512b.xml
+new file mode 100644
+index 0000000000..78bb147cdf
+--- /dev/null
++++ b/gdb-xml/riscv-64bit-vector-512b.xml
+@@ -0,0 +1,59 @@
++<?xml version="1.0"?>
++<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
++
++     Copying and distribution of this file, with or without modification,
++     are permitted in any medium without royalty provided the copyright
++     notice and this notice are preserved.  -->
++
++<!-- Register numbers are hard-coded in order to maintain backward
++     compatibility with older versions of tools that didn't use xml
++     register descriptions.  -->
++
++<!DOCTYPE feature SYSTEM "gdb-target.dtd">
++<feature name="org.gnu.gdb.riscv.vector">
++<vector id="bytes" type="uint8" count="64"/>
++<vector id="shorts" type="uint16" count="32"/>
++<vector id="words" type="uint32" count="16"/>
++<vector id="longs" type="uint64" count="8"/>
++<vector id="quads" type="uint128" count="4"/>
++  <union id="riscv_vector">
++    <field name="b" type="bytes"/>
++    <field name="s" type="shorts"/>
++    <field name="w" type="words"/>
++    <field name="l" type="longs"/>
++    <field name="q" type="quads"/>
++  </union>
++
++  <reg name="v0" bitsize="512" save-restore="no" type="riscv_vector" group="vector" regnum="69"/>
++  <reg name="v1" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v2" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v3" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v4" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v5" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v6" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v7" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v8" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v9" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v10" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v11" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v12" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v13" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v14" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v15" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v16" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v17" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v18" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v19" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v20" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v21" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v22" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v23" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v24" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v25" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v26" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v27" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v28" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v29" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v30" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++  <reg name="v31" bitsize="512" save-restore="no" type="riscv_vector" group="vector"/>
++</feature>
 diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index eba12a86f2..f7c5212e27 100644
+index f7c5212e27..1681f883e4 100644
 --- a/target/riscv/gdbstub.c
 +++ b/target/riscv/gdbstub.c
-@@ -418,13 +418,13 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+@@ -268,6 +268,13 @@ static int csr_register_map[] = {
+     CSR_MUCOUNTEREN,
+     CSR_MSCOUNTEREN,
+     CSR_MHCOUNTEREN,
++    CSR_VSTART,
++    CSR_VXSAT,
++    CSR_VXRM,
++    CSR_VCSR,
++    CSR_VL,
++    CSR_VTYPE,
++    CSR_VLENB,
+ };
+ 
+ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+@@ -351,6 +358,34 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+     return 0;
+ }
+ 
++static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
++{
++    uint16_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
++    if (n < 32) {
++        int i;
++        int cnt = 0;
++        for (i = 0; i < vlenb; i += 8) {
++            cnt += gdb_get_reg64(buf,
++                                 env->vreg[(n * vlenb + i) / 8]);
++        }
++        return cnt;
++    }
++    return 0;
++}
++
++static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
++{
++    uint16_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
++    if (n < 32) {
++        int i;
++        for (i = 0; i < vlenb; i += 8) {
++            env->vreg[(n * vlenb + i) / 8] = ldq_p(mem_buf + i);
++        }
++        return vlenb;
++    }
++    return 0;
++}
++
+ static int riscv_gdb_get_csr(CPURISCVState *env, GByteArray *buf, int n)
+ {
+     if (n < ARRAY_SIZE(csr_register_map)) {
+@@ -416,15 +451,38 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+         gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+                                  36, "riscv-32bit-fpu.xml", 0);
      }
++    if (env->misa & RVV) {
++        /* TODO: support vlen other than 128, 256, 512 bits. */
++        const char *vector_xml_name = NULL;
++        switch (cpu->cfg.vlen) {
++        case 128:
++            vector_xml_name = "riscv-64bit-vector-128b.xml";
++            break;
++        case 256:
++            vector_xml_name = "riscv-64bit-vector-256b.xml";
++            break;
++        case 512:
++            vector_xml_name = "riscv-64bit-vector-512b.xml";
++            break;
++        default:
++            vector_xml_name = NULL;
++            break;
++        }
++        if (vector_xml_name) {
++            gdb_register_coprocessor(cs, riscv_gdb_get_vector,
++                                     riscv_gdb_set_vector,
++                                     32, vector_xml_name, 0);
++        }
++    }
  #if defined(TARGET_RISCV32)
      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
--                             240, "riscv-32bit-csr.xml", 0);
-+                             241, "riscv-32bit-csr.xml", 0);
+-                             241, "riscv-32bit-csr.xml", 0);
++                             248, "riscv-32bit-csr.xml", 0);
  
      gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
                               1, "riscv-32bit-virtual.xml", 0);
  #elif defined(TARGET_RISCV64)
      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
--                             240, "riscv-64bit-csr.xml", 0);
-+                             241, "riscv-64bit-csr.xml", 0);
+-                             241, "riscv-64bit-csr.xml", 0);
++                             248, "riscv-64bit-csr.xml", 0);
  
      gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
                               1, "riscv-64bit-virtual.xml", 0);
