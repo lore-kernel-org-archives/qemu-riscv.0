@@ -1,64 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyAxN-0007c1-6i
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:22:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55550)
+	id 1jyAxP-0007eN-TI
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:22:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55576)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAxJ-0007Xi-AY
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:29 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432]:39424)
+ id 1jyAxN-0007bh-30
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:33 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d]:42286)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAxH-0006Cu-EA
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:28 -0400
-Received: by mail-pf1-x432.google.com with SMTP id x72so870396pfc.6
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:22:27 -0700 (PDT)
+ id 1jyAxL-0006Ec-1z
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:22:32 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id q17so650363pls.9
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:22:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=aUA4lJ98g9Mf2dTHcPIuDucVxVhO4/F5ZEHerwqnT8U=;
- b=OAMtUsSnc6L3K4q+z6BVT3ggR/EG5O3V6Yf4sKSE1AbSbLp09VcycOM44zxL+ylgCo
- WKCONK1cSLcNK/65GOGYNCAiXB3ItIb8Hg5BOYmXAXGnx5gtv9qgtV2lcNTxpQTniQBQ
- 5TL7t3EBy8Vam1Pl6hIzpLjCDSocZ1EXT0OwbpLVEBZyzKCXlCSUz0aCgySn1u4EIGFn
- +jDcfCUFmNS2plNGFO8uu7Ef+7fX3s1ZcZhyMQQOy2j/+74eQ/GtjzXzbtpLDANxHInX
- XwCfqX8CeiDMz3F7HSj3jSiEY9XKx/QgYfXA34SGoEIBm0oqUlMNTK+/kTj0rdhV83om
- PDvA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=O3tJNy/mx1SX7dN5+KyOXPJCc/LvDChTHRqMQLei8AM=;
+ b=WRoQ2ibAqobzDm8yOt/UqdokkPfCrAEZ9qULnkjMSpLZGq3/8oyYX3xqvdqP8SmSJp
+ S+ZP0A5r+VTpbEpeb6ktHBAH95GITgqlGaOHsJ/lS84/TM1LhiloXLbNPQ8uPh/zz/Fp
+ w8DjqqFaeAQyMKoIGPxnA5sC7Dw0Um2unCXrt59GdvXJLoR2CE+p8vzfgGTZ8KFtqirI
+ mYCJfl31UhNgR+TVscohR6RsbbnefJmS5eWaXLs6zD1IBHJB4p2QBE/PqTUDvAGUESvk
+ znvlD0zFJoW1PIEFveqdOFYnlw3Tq9suArHCpvSc5Ywfh4ER3WN+RKLzm0GfzyjGM63+
+ YCtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=aUA4lJ98g9Mf2dTHcPIuDucVxVhO4/F5ZEHerwqnT8U=;
- b=X3N4uE3i93luAes/Nq6JZSNLh/MCkhAkVyFaDNQ/afSAmMAExhNLH7JSi3Pf2RbCiX
- zbO6x4YNlejWQD9cYcUdfI/u87BOxpm3VO5BJDqcdDcD7bbJXJPvFtnGtOvNx0LmkMxr
- IAoPwnJssQHHeVOdrGzrdao2AOQCU4eDfDymNpIF6LTlgs2mzBNdCdHQNJ+7OZnVvncN
- 3g/gDQOGNeNCXsekHTa+RK7u6jqH2PKLDdGgufg2hhh+21P+9xP3VJytMIPbN0qfDRlt
- e622b+SZv5YRUkDm0iXDpY+mwVfaLj2M43XVmM4wXWytt3dL1vWTxid2/hWa2F8JHOJs
- Vj7g==
-X-Gm-Message-State: AOAM5307XoL7VKWDTZJl2iVIOJRS82qJbXpSONj4FVdUfHsZQEmZ0SiT
- eSRx0Y7Zx13SvqVB+2sfZzVfuQ==
-X-Google-Smtp-Source: ABdhPJyVpZsoIkv7uEPQtv3e5A7FFrlxzAnvbDiiCWe50wopv9rhtKrM+sj/KX8i8GQtLdU6Gug+kg==
-X-Received: by 2002:a63:140f:: with SMTP id u15mr24630217pgl.94.1595409746223; 
- Wed, 22 Jul 2020 02:22:26 -0700 (PDT)
+ :references:mime-version:content-transfer-encoding;
+ bh=O3tJNy/mx1SX7dN5+KyOXPJCc/LvDChTHRqMQLei8AM=;
+ b=dvMul0R+npq8NsTVA0PedHUNmDouU7yt1bS1K5/ae66SzvF1wfm+xj5uV4LQIIwoQ6
+ SJOHpgZgiJ8Y29hB5crbZrhu+6Zk5y42hKk/poghvDzrqkWutrq9aqID9cnVCRL0aNfN
+ jA0QpdYJRxaOXvfhFjr67stCgMcNPv1BwJYvvGkKjIBH3336jdWcovvftPjHKZgfYD+5
+ 9QxydA3/tFhtCEAmooe2RWdshi8K8EL6l6IvTEldj8RDSkTa6VUVJAUjMZWPGwdKri9x
+ j539S7HS8Ykxg7fD9lOO6S5xRPuOikXl9OLMva4pHzmD6/6I/+AVU5Kyrj1XIli/RRbV
+ jAQA==
+X-Gm-Message-State: AOAM533OyYxZVgzJax+vLlUxe2z3Cmsb7xAiDdD16bwEYkgF8S/XtuTS
+ W9sg9jPYUbFLEvp9Wo07y/4rVg==
+X-Google-Smtp-Source: ABdhPJyjNAis+n0uSfZEcOr9YsbAZYC9Kh0vD5Q9aAohh0dOZb4EEx/3IlLA7UpCaEd0UBLHjmOGGw==
+X-Received: by 2002:a17:90a:d583:: with SMTP id
+ v3mr8549065pju.33.1595409749906; 
+ Wed, 22 Jul 2020 02:22:29 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.22.24
+ by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.22.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2020 02:22:25 -0700 (PDT)
+ Wed, 22 Jul 2020 02:22:29 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v2 69/76] target/riscv: rvv-0.9: floating-point min/max
- instructions
-Date: Wed, 22 Jul 2020 17:16:32 +0800
-Message-Id: <20200722091641.8834-70-frank.chang@sifive.com>
+Cc: Frank Chang <frank.chang@sifive.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: [RFC v2 70/76] softfloat: add fp16 and uint8/int8 interconvert
+ functions
+Date: Wed, 22 Jul 2020 17:16:33 +0800
+Message-Id: <20200722091641.8834-71-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200722091641.8834-1-frank.chang@sifive.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x432.google.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62d.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -80,60 +85,144 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 09:22:29 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 09:22:34 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/riscv/vector_helper.c | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
+ fpu/softfloat.c         | 34 ++++++++++++++++++++++++++++++++++
+ include/fpu/softfloat.h |  8 ++++++++
+ 2 files changed, 42 insertions(+)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 49e6a91859..4c6755db97 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -3857,28 +3857,28 @@ GEN_VEXT_V_ENV(vfsqrt_v_w, 4, 4, clearl)
- GEN_VEXT_V_ENV(vfsqrt_v_d, 8, 8, clearq)
+diff --git a/fpu/softfloat.c b/fpu/softfloat.c
+index e1661f22a5..89634267db 100644
+--- a/fpu/softfloat.c
++++ b/fpu/softfloat.c
+@@ -2142,6 +2142,13 @@ static int64_t round_to_int_and_pack(FloatParts in, FloatRoundMode rmode,
+     }
+ }
  
- /* Vector Floating-Point MIN/MAX Instructions */
--RVVCALL(OPFVV2, vfmin_vv_h, OP_UUU_H, H2, H2, H2, float16_minnum)
--RVVCALL(OPFVV2, vfmin_vv_w, OP_UUU_W, H4, H4, H4, float32_minnum)
--RVVCALL(OPFVV2, vfmin_vv_d, OP_UUU_D, H8, H8, H8, float64_minnum)
-+RVVCALL(OPFVV2, vfmin_vv_h, OP_UUU_H, H2, H2, H2, float16_minnum_noprop)
-+RVVCALL(OPFVV2, vfmin_vv_w, OP_UUU_W, H4, H4, H4, float32_minnum_noprop)
-+RVVCALL(OPFVV2, vfmin_vv_d, OP_UUU_D, H8, H8, H8, float64_minnum_noprop)
- GEN_VEXT_VV_ENV(vfmin_vv_h, 2, 2, clearh)
- GEN_VEXT_VV_ENV(vfmin_vv_w, 4, 4, clearl)
- GEN_VEXT_VV_ENV(vfmin_vv_d, 8, 8, clearq)
--RVVCALL(OPFVF2, vfmin_vf_h, OP_UUU_H, H2, H2, float16_minnum)
--RVVCALL(OPFVF2, vfmin_vf_w, OP_UUU_W, H4, H4, float32_minnum)
--RVVCALL(OPFVF2, vfmin_vf_d, OP_UUU_D, H8, H8, float64_minnum)
-+RVVCALL(OPFVF2, vfmin_vf_h, OP_UUU_H, H2, H2, float16_minnum_noprop)
-+RVVCALL(OPFVF2, vfmin_vf_w, OP_UUU_W, H4, H4, float32_minnum_noprop)
-+RVVCALL(OPFVF2, vfmin_vf_d, OP_UUU_D, H8, H8, float64_minnum_noprop)
- GEN_VEXT_VF(vfmin_vf_h, 2, 2, clearh)
- GEN_VEXT_VF(vfmin_vf_w, 4, 4, clearl)
- GEN_VEXT_VF(vfmin_vf_d, 8, 8, clearq)
++int8_t float16_to_int8_scalbn(float16 a, FloatRoundMode rmode, int scale,
++                              float_status *s)
++{
++    return round_to_int_and_pack(float16_unpack_canonical(a, s),
++                                 rmode, scale, INT8_MIN, INT8_MAX, s);
++}
++
+ int16_t float16_to_int16_scalbn(float16 a, FloatRoundMode rmode, int scale,
+                                 float_status *s)
+ {
+@@ -2205,6 +2212,11 @@ int64_t float64_to_int64_scalbn(float64 a, FloatRoundMode rmode, int scale,
+                                  rmode, scale, INT64_MIN, INT64_MAX, s);
+ }
  
--RVVCALL(OPFVV2, vfmax_vv_h, OP_UUU_H, H2, H2, H2, float16_maxnum)
--RVVCALL(OPFVV2, vfmax_vv_w, OP_UUU_W, H4, H4, H4, float32_maxnum)
--RVVCALL(OPFVV2, vfmax_vv_d, OP_UUU_D, H8, H8, H8, float64_maxnum)
-+RVVCALL(OPFVV2, vfmax_vv_h, OP_UUU_H, H2, H2, H2, float16_maxnum_noprop)
-+RVVCALL(OPFVV2, vfmax_vv_w, OP_UUU_W, H4, H4, H4, float32_maxnum_noprop)
-+RVVCALL(OPFVV2, vfmax_vv_d, OP_UUU_D, H8, H8, H8, float64_maxnum_noprop)
- GEN_VEXT_VV_ENV(vfmax_vv_h, 2, 2, clearh)
- GEN_VEXT_VV_ENV(vfmax_vv_w, 4, 4, clearl)
- GEN_VEXT_VV_ENV(vfmax_vv_d, 8, 8, clearq)
--RVVCALL(OPFVF2, vfmax_vf_h, OP_UUU_H, H2, H2, float16_maxnum)
--RVVCALL(OPFVF2, vfmax_vf_w, OP_UUU_W, H4, H4, float32_maxnum)
--RVVCALL(OPFVF2, vfmax_vf_d, OP_UUU_D, H8, H8, float64_maxnum)
-+RVVCALL(OPFVF2, vfmax_vf_h, OP_UUU_H, H2, H2, float16_maxnum_noprop)
-+RVVCALL(OPFVF2, vfmax_vf_w, OP_UUU_W, H4, H4, float32_maxnum_noprop)
-+RVVCALL(OPFVF2, vfmax_vf_d, OP_UUU_D, H8, H8, float64_maxnum_noprop)
- GEN_VEXT_VF(vfmax_vf_h, 2, 2, clearh)
- GEN_VEXT_VF(vfmax_vf_w, 4, 4, clearl)
- GEN_VEXT_VF(vfmax_vf_d, 8, 8, clearq)
++int8_t float16_to_int8(float16 a, float_status *s)
++{
++    return float16_to_int8_scalbn(a, s->float_rounding_mode, 0, s);
++}
++
+ int16_t float16_to_int16(float16 a, float_status *s)
+ {
+     return float16_to_int16_scalbn(a, s->float_rounding_mode, 0, s);
+@@ -2355,6 +2367,13 @@ static uint64_t round_to_uint_and_pack(FloatParts in, FloatRoundMode rmode,
+     }
+ }
+ 
++uint8_t float16_to_uint8_scalbn(float16 a, FloatRoundMode rmode, int scale,
++                                float_status *s)
++{
++    return round_to_uint_and_pack(float16_unpack_canonical(a, s),
++                                  rmode, scale, UINT8_MAX, s);
++}
++
+ uint16_t float16_to_uint16_scalbn(float16 a, FloatRoundMode rmode, int scale,
+                                   float_status *s)
+ {
+@@ -2418,6 +2437,11 @@ uint64_t float64_to_uint64_scalbn(float64 a, FloatRoundMode rmode, int scale,
+                                   rmode, scale, UINT64_MAX, s);
+ }
+ 
++uint8_t float16_to_uint8(float16 a, float_status *s)
++{
++    return float16_to_uint8_scalbn(a, s->float_rounding_mode, 0, s);
++}
++
+ uint16_t float16_to_uint16(float16 a, float_status *s)
+ {
+     return float16_to_uint16_scalbn(a, s->float_rounding_mode, 0, s);
+@@ -2572,6 +2596,11 @@ float16 int16_to_float16(int16_t a, float_status *status)
+     return int64_to_float16_scalbn(a, 0, status);
+ }
+ 
++float16 int8_to_float16(int8_t a, float_status *status)
++{
++    return int64_to_float16_scalbn(a, 0, status);
++}
++
+ float32 int64_to_float32_scalbn(int64_t a, int scale, float_status *status)
+ {
+     FloatParts pa = int_to_float(a, scale, status);
+@@ -2697,6 +2726,11 @@ float16 uint16_to_float16(uint16_t a, float_status *status)
+     return uint64_to_float16_scalbn(a, 0, status);
+ }
+ 
++float16 uint8_to_float16(uint8_t a, float_status *status)
++{
++    return uint64_to_float16_scalbn(a, 0, status);
++}
++
+ float32 uint64_to_float32_scalbn(uint64_t a, int scale, float_status *status)
+ {
+     FloatParts pa = uint_to_float(a, scale, status);
+diff --git a/include/fpu/softfloat.h b/include/fpu/softfloat.h
+index 078cad8ad9..5700d2024b 100644
+--- a/include/fpu/softfloat.h
++++ b/include/fpu/softfloat.h
+@@ -136,9 +136,11 @@ float16 uint16_to_float16_scalbn(uint16_t a, int, float_status *status);
+ float16 uint32_to_float16_scalbn(uint32_t a, int, float_status *status);
+ float16 uint64_to_float16_scalbn(uint64_t a, int, float_status *status);
+ 
++float16 int8_to_float16(int8_t a, float_status *status);
+ float16 int16_to_float16(int16_t a, float_status *status);
+ float16 int32_to_float16(int32_t a, float_status *status);
+ float16 int64_to_float16(int64_t a, float_status *status);
++float16 uint8_to_float16(uint8_t a, float_status *status);
+ float16 uint16_to_float16(uint16_t a, float_status *status);
+ float16 uint32_to_float16(uint32_t a, float_status *status);
+ float16 uint64_to_float16(uint64_t a, float_status *status);
+@@ -187,10 +189,13 @@ float32 float16_to_float32(float16, bool ieee, float_status *status);
+ float16 float64_to_float16(float64 a, bool ieee, float_status *status);
+ float64 float16_to_float64(float16 a, bool ieee, float_status *status);
+ 
++int8_t  float16_to_int8_scalbn(float16, FloatRoundMode, int,
++                               float_status *status);
+ int16_t float16_to_int16_scalbn(float16, FloatRoundMode, int, float_status *);
+ int32_t float16_to_int32_scalbn(float16, FloatRoundMode, int, float_status *);
+ int64_t float16_to_int64_scalbn(float16, FloatRoundMode, int, float_status *);
+ 
++int8_t  float16_to_int8(float16, float_status *status);
+ int16_t float16_to_int16(float16, float_status *status);
+ int32_t float16_to_int32(float16, float_status *status);
+ int64_t float16_to_int64(float16, float_status *status);
+@@ -199,6 +204,8 @@ int16_t float16_to_int16_round_to_zero(float16, float_status *status);
+ int32_t float16_to_int32_round_to_zero(float16, float_status *status);
+ int64_t float16_to_int64_round_to_zero(float16, float_status *status);
+ 
++uint8_t float16_to_uint8_scalbn(float16 a, FloatRoundMode,
++                                int, float_status *status);
+ uint16_t float16_to_uint16_scalbn(float16 a, FloatRoundMode,
+                                   int, float_status *status);
+ uint32_t float16_to_uint32_scalbn(float16 a, FloatRoundMode,
+@@ -206,6 +213,7 @@ uint32_t float16_to_uint32_scalbn(float16 a, FloatRoundMode,
+ uint64_t float16_to_uint64_scalbn(float16 a, FloatRoundMode,
+                                   int, float_status *status);
+ 
++uint8_t  float16_to_uint8(float16 a, float_status *status);
+ uint16_t float16_to_uint16(float16 a, float_status *status);
+ uint32_t float16_to_uint32(float16 a, float_status *status);
+ uint64_t float16_to_uint64(float16 a, float_status *status);
 -- 
 2.17.1
 
