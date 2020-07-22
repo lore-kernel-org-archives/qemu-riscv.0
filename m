@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyIZx-0000UK-29
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 13:30:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53870)
+	id 1jyJ2h-0001Zo-Hl
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 14:00:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60046)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jyIZv-0000TT-Jd
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 13:30:51 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:41793)
+ id 1jyJ2g-0001Wl-0E
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 14:00:34 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c]:35856)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jyIZs-0007BE-Tl
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 13:30:51 -0400
-Received: by mail-pl1-x634.google.com with SMTP id d1so1336388plr.8
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 10:30:48 -0700 (PDT)
+ id 1jyJ2e-0002YG-0f
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 14:00:33 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id md7so1809046pjb.1
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 11:00:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=H+N05Q6iH/7kKItLonUDpGJYS7Eiq7WvbdCHpHhINzs=;
- b=JSr4x+5m1U/ypd5X5CUc6NSr1MfYj89Uzf0NXzVpqOjtVEiSPvNpAUHW3NHuY7zE1Q
- d6+gRXti4Rhs4cZIRLZsWIxIZoLMvc8lSWFezZbisJ4IGHn5dRLGEGCPXNu7QK89LQuB
- Bu7K/6rqZz3FLTJ/aMFhBuZt17R+K2U5NwQ/6xt8T2p70FBmmN0NA0DSN4QpklTe+pfF
- 1Cs9FSK3tI4NaK6H4WZisZ0MxejwJ32Zdgy8LOqH5kq0AGgATEt+uFuYSZTXy+SKE79B
- n4qUcWyeUX4edsjbYxw2JgD6Th28fypIQ056ojw5jKSoP4sKwyQcuaMUBBQwVJAdufS+
- Vuqg==
+ bh=5n2fCFqddpQ+teBXgKuSxKVIND558u1pltuSIXE1Cpw=;
+ b=v1wdUZAfB5aJI68f/JvMtz/fG3lpLMdmB4sWqm3dA6i2O/2uNm00w76Btux9GQqOki
+ gyvPfaZY0EflfyzxK6p1Bb/CkBqHntka4GYhFyoF+fPWum4/P/ex8Ums/1rtLie1h6Vm
+ 7zqM8/g/rGaqyOK0ceAh88TNm6APzOhZYa8hkJ5HFm9BMPrUhgsAwOwFPe4FXXWJWqr+
+ lJAmTyiJrz33fvnTDssDMUTwJWO+Q4F092X+HWySEQzcgxemTsU+pspG8uMcWEOG8oSo
+ XZZwUF3K8L3QEmLzQg+h377Vp6lPfNHGbrx7tjXqBv6xan1M6ElZEDPE55Z5RU2/nDR4
+ GRFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=H+N05Q6iH/7kKItLonUDpGJYS7Eiq7WvbdCHpHhINzs=;
- b=PUZqR7dyv/lQYxIR38C2zP41YKJnlid+1HEWXswLJTsQqswr3ZiSTSb6WIN97ZmdNZ
- 7aeQXqy23ZjhRvlckO+iUPg74DcDNuAoDlsJiGFm3Dfd/zBQliGvAuet4EXyFjCRq9RP
- N7Cs4+2ARbb/FRV+jAwioKRlGmOKX9kLMUyxyJje4PNWzFLZPGDJ8XxSdZqOMEQpscCY
- r8HZT1H4gdirML5XQOENHqGJPjOxa9zHQXwDwyt+kib2ZV0Wkq9U28BXw/YOIpqgY6q+
- zjOj0Nufy62ENp6rbk7RxjG6WNdqh3oJLTyAMv1lmUuNbJYuc25gLKp5ua5XmRr1Lxqz
- cqXw==
-X-Gm-Message-State: AOAM531FRdDE4Nk3o8jOB87mNeWUty8P+8qra9WhSwnuqGqoH7vY5sRZ
- yqUMlhD9y1kiSIQohnAGi/lAlA==
-X-Google-Smtp-Source: ABdhPJyl35v5cBnVhifA7huu1ZKUDPTw+l5gMyelsaBINkonjrsFJ3yV5vcaiJyRzFAhY5npSAx8hw==
-X-Received: by 2002:a17:90b:338d:: with SMTP id
- ke13mr470419pjb.60.1595439047284; 
- Wed, 22 Jul 2020 10:30:47 -0700 (PDT)
+ bh=5n2fCFqddpQ+teBXgKuSxKVIND558u1pltuSIXE1Cpw=;
+ b=RC6xP34XeV+f0ALQAWg10d5qJ0AB4IasMR9MmyPFkVwFcSoUoh4XbSYFMwuLaMKpV+
+ trpiJBsV+IvG4q/120LhfTx+lY/+RFqZ+Fdcq6xNh6j7wg4SrI4JhsnfPZAgRIz4XrP+
+ 7rmWBpzxru4ufl599TgVQvCE7Y3thOYDj77xIa46wDOymXbFJ9vCKiiGrQ9sKYMmeTH9
+ 9sFNNUsGQ0lToV20TE2Ws//AyEPI9IylKcSa6QTOleOA7lVxgUFEmovlwo0/YojMFq9j
+ t5q+fs9NxoXQWUIWdB/VXKliurbeyVuk+RXAKQ15dVtI3TFd1hC5meZ4JvdlAn3rvrEl
+ r+hg==
+X-Gm-Message-State: AOAM5326p8PQo0PsTkr2BV+xxrzqL13n4GZVGlLuP45SaB0tP+MDxzU0
+ gKeCyjP4s6F2M8u3mdGfyG6Iww==
+X-Google-Smtp-Source: ABdhPJxYCdeT/WMIz458kfVHPLhyQHkDZQArmYpeW8U1towrVbYODQmAGY452od3A3kONhg4CIBezQ==
+X-Received: by 2002:a17:90a:db0b:: with SMTP id
+ g11mr552552pjv.11.1595440829447; 
+ Wed, 22 Jul 2020 11:00:29 -0700 (PDT)
 Received: from [192.168.1.11] (216-160-65-90.tukw.qwest.net. [216.160.65.90])
  by smtp.gmail.com with ESMTPSA id
- x10sm211365pfp.80.2020.07.22.10.30.46
+ w18sm256605pgj.31.2020.07.22.11.00.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Jul 2020 10:30:46 -0700 (PDT)
-Subject: Re: [RFC v2 15/76] target/riscv: rvv-0.9: add fractional LMUL
+ Wed, 22 Jul 2020 11:00:28 -0700 (PDT)
+Subject: Re: [RFC v2 16/76] target/riscv: rvv-0.9: add VMA and VTA
 To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
@@ -54,19 +54,19 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
- <20200722091641.8834-16-frank.chang@sifive.com>
+ <20200722091641.8834-17-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <d0d9b56e-5d8a-83c9-59b0-88b842380487@linaro.org>
-Date: Wed, 22 Jul 2020 10:30:44 -0700
+Message-ID: <05c8267d-f22b-6714-8806-92edf228091e@linaro.org>
+Date: Wed, 22 Jul 2020 11:00:26 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200722091641.8834-16-frank.chang@sifive.com>
+In-Reply-To: <20200722091641.8834-17-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -88,53 +88,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 17:30:51 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 18:00:34 -0000
 
 On 7/22/20 2:15 AM, frank.chang@sifive.com wrote:
->  FIELD(VTYPE, VLMUL, 0, 2)
->  FIELD(VTYPE, VSEW, 2, 3)
-> -FIELD(VTYPE, VEDIV, 5, 2)
-> -FIELD(VTYPE, RESERVED, 7, sizeof(target_ulong) * 8 - 9)
-> +FIELD(VTYPE, VFLMUL, 5, 1)
-> +FIELD(VTYPE, VEDIV, 8, 9)
-> +FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 - 11)
->  FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
-
-The ediv definition is wrong -- should be 8, 2.
-
-
-> @@ -37,4 +38,10 @@ target_ulong fclass_d(uint64_t frs1);
->  #define SEW32 2
->  #define SEW64 3
->  
-> +/* table to convert fractional LMUL value */
-> +static const float flmul_table[8] = {
-> +    1, 2, 4, 8,      /* LMUL */
-> +    -1,              /* reserved */
-> +    0.125, 0.25, 0.5 /* fractional LMUL */
-> +};
->  #endif
-
-Don't define data in a header file; only declare it.
-
-> @@ -60,6 +60,9 @@ typedef struct DisasContext {
->      /* vector extension */
->      bool vill;
->      uint8_t lmul;
-> +    float flmul;
-> +    uint8_t eew;
-> +    float emul;
-
-Why are you adding floating-point values to DisasContext?
-
-> +static inline float vext_vflmul(uint32_t desc)
-> +{
-> +    uint32_t lmul = FIELD_EX32(simd_data(desc), VDATA, LMUL);
-> +    return flmul_table[lmul];
+> -static void vext_clear(void *tail, uint32_t cnt, uint32_t tot)
+> +static void vext_clear(void *tail, uint32_t vta, uint32_t cnt, uint32_t tot)
+>  {
+> +    if (vta == 0) {
+> +        /* tail element undisturbed */
+> +        return;
+> +    }
+> +
+>      /*
+> +     * Tail element agnostic.
+>       * Split the remaining range to two parts.
+>       * The first part is in the last uint64_t unit.
+>       * The second part start from the next uint64_t unit.
+> @@ -152,41 +168,50 @@ static void vext_clear(void *tail, uint32_t cnt, uint32_t tot)
+>      if (cnt % 8) {
+>          part1 = 8 - (cnt % 8);
+>          part2 = tot - cnt - part1;
+> -        memset((void *)((uintptr_t)tail & ~(7ULL)), 0, part1);
+> -        memset((void *)(((uintptr_t)tail + 8) & ~(7ULL)), 0, part2);
+> +        memset((void *)((uintptr_t)tail & ~(7ULL)), 1, part1);
+> +        memset((void *)(((uintptr_t)tail + 8) & ~(7ULL)), 1, part2);
+>      } else {
+> -        memset(tail, 0, part2);
+> +        memset(tail, 1, part2);
+>      }
 >  }
 
-And in the helpers?  Are you planning on some sort of path through int -> float
--> int for computation?  That seems questionable.
+"1s" surely means all bits set to 1, not each byte to 1.
+
+Is there any reason to do anything with VTA/VMA at all?  One alternative for
+"agnostic" is to leave the values undisturbed.  So the quickest thing for qemu
+to do is remove all of this code.  Then we don't have to pass the values in
+translate either.
+
+Which is exactly what is recommended in the 4th paragraph of the notes
+following the VTA/VMA description.
 
 
 r~
