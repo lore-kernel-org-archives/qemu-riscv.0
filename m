@@ -1,69 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyHxE-0007Oq-J9
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 12:50:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44290)
+	id 1jyI0E-000387-Ey
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 12:53:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44884)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jyHxC-0007Mu-JN; Wed, 22 Jul 2020 12:50:50 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:38559)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jyI0D-00037R-Cj
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 12:53:57 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:37533)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1jyHx6-0001W5-4a; Wed, 22 Jul 2020 12:50:50 -0400
-Received: by mail-io1-xd43.google.com with SMTP id l1so3244613ioh.5;
- Wed, 22 Jul 2020 09:50:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=XUg1u1TtQnycfs+N+tRiWOafjQdiRU9tLYD9iCjxkx0=;
- b=ukv+Bno++XtwyOTXQwpYXB7zKWNkuEADe+Z0+TvzX0fj8rhPb9jNzxylM8m8Bb6NCY
- FjeHg7t1jG754mia4Van59B80I8vR6v3JJ2hmRu+a4xLfcvoVlKSyKqkndRG8aeS8dQ4
- unb0xqqoKv+hSbqVCanLrUVyIz798Pl+oAPgAq+l8Nuo7ap0O7drZHn+jWj97na2Ac9a
- 0l+tzUL2R6R9gbFLnEa0yXvYyzfeu5F1wrO0tRttmwA79v6UaR7IsvH8F3H3Zkb/OFpX
- s7DtM0VywXVUnXz+RVca/3kzptGHG2YiiCa/JqBPFyPvIOJCTzho546Zq7QzHjzO9YIj
- JwoA==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1jyI0A-0001pn-VC
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 12:53:57 -0400
+Received: by mail-pf1-x435.google.com with SMTP id s26so1590822pfm.4
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 09:53:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=v02qBny/fBifeAWxA7VPDDvDbBoPApIkv4BMUuzXBqg=;
+ b=LGj20X/siigpsn0RhYNdZVGP3MeKLD5+yU0se0y64yQkOmnsQ4zgH6dNqnmIzsqsxw
+ Q2c4UCDw5ARGwkyxjA5q/m/2KIA2uBVsfR++ctz47TK5VYnbpmraKY4osv++bB6fiQBl
+ n/1R6DjhYW5ITvb0le1Kgh3T8jCMdwNtmkHg71SqOejUmHtwWb5A06hsGGHE467FOWWS
+ 1pLdLKUmGVQ6XHOrpccjAL83ooEg8jdeKy9LjBodxk8kVOAb/9AanaFhxnjLz8fNDVzT
+ neLIXWe+Sq/kzavgWChE/90+pAgDKVQZfHzU3gU9qN1ER0pNEM8ybI7aaB6gf4RYqORd
+ 8pYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=XUg1u1TtQnycfs+N+tRiWOafjQdiRU9tLYD9iCjxkx0=;
- b=NGF94i/wXs3ICN+DGDsDSSmeXJIK5NA5JojRJoNkEI8yMSksZMnWnOVAV6o0feFeQH
- 1h0Y0SNTdM4iYCSDSYAggwE19fXoINf9QSboIbve90SM8wRDrlngYm/J+qkMQ6Utb6Ze
- QqO7k+t98hiuA33ZrI3Dt5hdpn3xc08Pgg2YobKkp8i51tZCcWIAyuMIzrFl4seNgZdM
- x67+XnS69fZ46qUV+B4dqPX+MPCGQEAHZ/uomYtMZB/In4jRKWXswVx1MmOXg047zv26
- UD4JY3B0rXID9gLrJ5dEi/koQx5rq8XwMafP5F7bEp81kN2QA1gnkZxIJjnWdmVB5G/C
- MC/w==
-X-Gm-Message-State: AOAM532uUyxrLYtB0x96+ye+YaAne3UUYRs+s7Ia5zs3nVaVJcjxgL9m
- 1Bt2wV1lZ0W1L27EWPm1WFovaku5QblajV5fJlU=
-X-Google-Smtp-Source: ABdhPJwzKkDOKGGKgNIjpbPevG1J8O6CFdCDpqOlgCWcIA7at9mx1yjJ79nqvW4/wCkn322yZSYw8SH4wRZkp4W5FaI=
-X-Received: by 2002:a5d:9306:: with SMTP id l6mr652462ion.105.1595436642400;
- Wed, 22 Jul 2020 09:50:42 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=v02qBny/fBifeAWxA7VPDDvDbBoPApIkv4BMUuzXBqg=;
+ b=F+mGOK4kN7kJS6sGOCQ3Q6YKrppR5O0J3LTQ4XX/jYN4PFERROHx6urjC9lllW174J
+ 484qpBZL0Klw5fuoWIXC5Nzh9mDqqzcXhGakBt23fwIyAcIHnb4JC7ba9jss4QEaq4TN
+ zpHMioBXDTwcVAzlRbmtjf8fOK9Kf+sC4Zc6QIGg0SVlCtOK6DtOxuZhWyENK0S8hHbK
+ SE5V9kdDKCGpGrr9bdssgEFwP94QuH7pHjWWFfjgRZSQej6JmHw81b/f3q5jbPhDomNd
+ 5KFHDqU7dBKE2eI16XATm/Y3EUuMm0SaAkGVqWgi3IUcMkDGqECvQcO9LazltAWEXILA
+ 4dMQ==
+X-Gm-Message-State: AOAM533LmZbL3FD9U/mF1o2XbsyTuapS1d37z+y9LBYU9oLAQ3a63fob
+ Ev5JdPfVqXr3NJG2BuUOUAFe/A==
+X-Google-Smtp-Source: ABdhPJwuorP8VaPy5ozHNAS3P0FRtqgThvj8LRe9CB6Z5Nv0iss2iKrRxZzXLDCytLaFq/B+4B0vHg==
+X-Received: by 2002:a63:4543:: with SMTP id u3mr610129pgk.398.1595436832805;
+ Wed, 22 Jul 2020 09:53:52 -0700 (PDT)
+Received: from [192.168.1.11] (216-160-65-90.tukw.qwest.net. [216.160.65.90])
+ by smtp.gmail.com with ESMTPSA id
+ 137sm123506pgg.72.2020.07.22.09.53.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 Jul 2020 09:53:52 -0700 (PDT)
+Subject: Re: [RFC v2 10/76] target/riscv: rvv-0.9: add translation-time vector
+ context status
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+References: <20200722091641.8834-1-frank.chang@sifive.com>
+ <20200722091641.8834-11-frank.chang@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <8bb5342f-fafb-cf31-d478-d0d61f18239f@linaro.org>
+Date: Wed, 22 Jul 2020 09:53:49 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20200721133742.2298-1-zhiwei_liu@c-sky.com>
- <CAKmqyKMPrwkxhXgfWqEofGUdKTJ3jAi7hQ7h6hEP-zFDN3Yt9w@mail.gmail.com>
- <CAFEAcA87pws6QNEoJk4B-+vQiE3Pe7munfJiWgQZuTDZ+uBZwg@mail.gmail.com>
-In-Reply-To: <CAFEAcA87pws6QNEoJk4B-+vQiE3Pe7munfJiWgQZuTDZ+uBZwg@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 22 Jul 2020 09:40:35 -0700
-Message-ID: <CAKmqyKN_OoqmXAKm-rLZRue3T+Bja=tFKdrSRWHuZD+WmBOaVg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: Quiet Coverity complains about vamo*
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
+In-Reply-To: <20200722091641.8834-11-frank.chang@sifive.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x435.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,31 +87,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 16:50:50 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 16:53:57 -0000
 
-On Tue, Jul 21, 2020 at 8:30 AM Peter Maydell <peter.maydell@linaro.org> wrote:
->
-> On Tue, 21 Jul 2020 at 16:19, Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Tue, Jul 21, 2020 at 6:38 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
-> > >
-> > > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> >
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->
-> Interestingly Coverity's latest scan has decided all these
-> issues are 'fixed', even without the assert. I guess that the
-> online version of Coverity has had an improvement to its
-> checking and so is now able to figure out that it's not going
-> to overrun the array? Still I think the assert is worth having.
+On 7/22/20 2:15 AM, frank.chang@sifive.com wrote:
+> From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> 
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  target/riscv/insn_trans/trans_rvv.inc.c | 69 ++++++++++++++++++++-----
+>  target/riscv/translate.c                | 33 ++++++++++++
+>  2 files changed, 90 insertions(+), 12 deletions(-)
 
-Strange.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-I'll still apply these two patches.
 
-Alistair
+r~
 
->
-> thanks
-> -- PMM
 
