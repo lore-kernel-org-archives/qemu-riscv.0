@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyAsZ-0005Io-Gf
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:17:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52608)
+	id 1jyAse-0005U8-F4
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 05:17:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52676)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAsX-0005E9-MG
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:17:33 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:40457)
+ id 1jyAsd-0005R7-2J
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:17:39 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433]:39408)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1jyAsV-0005E0-0J
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:17:32 -0400
-Received: by mail-pf1-x441.google.com with SMTP id u5so857538pfn.7
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:17:30 -0700 (PDT)
+ id 1jyAsa-0005EU-7V
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 05:17:38 -0400
+Received: by mail-pf1-x433.google.com with SMTP id x72so863355pfc.6
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 02:17:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=AsV8nXeGOBZSH3zrEUqd9iliNzH/znlE74D2q/iZRbA=;
- b=WKZHXpsKzctP/i1YhVCpIyBr6v9tYK32nFXo0WeWDDOxvbUqE4YiKto45Ic5fT6129
- fNDa5WnmJQRX/dx9OiL76ax7d9ZfgQTYvA51NF21D7ah40Me40NjZGK/4NRHjHFiLoR8
- tNYNBmEQih4w/pOWs3Krrvbl2k3pr+FX+LM6GZkwDZgFJKqjurXp7i4u0npL/+BFomZn
- +TMv1Ycamgaa7zJQ1RGs128IB1yyqnSE71wXH4Fae2FoiyiQczHrwt5ZNIwc85domgZX
- hN0qm0YTkJrz1Qup4PxoxYVl64cQWdA4M9IxQVpXHjviTHrQ2T08FmN4PMUkJrxU3/eM
- doxw==
+ bh=dY1VnCufQZpa+aF68DC4K7OikxwvWj2GSrpOqri/zyA=;
+ b=YyvwtEWm3SZpOurKdG7x6QNieY/R2CtsObGD8omuXOjGvRxJojJXb+EF1I+mKRQm3K
+ xaHGV0jVlugF2DvHiLSaEeJkEXFmxtCPhlda3eKfMlk4kTbnBa07PbjNp2AfiAyXRh+u
+ hEClgtM/U8ysFA2wRkI1uZnUdB9Xx3a/hkFUsrApdoA9K+xbODqofsqNG4nxkKbQOtIu
+ 6B5NvWxEfuY8K71ouCSsx8mg00gESQ549xZ5yAlssFTIe8NBUIwXTTdy+TtJxTz8oHDQ
+ 83Z+x0V2A67KWIvy4/Ve/ZY6lGV++saI/qWXU+SAQPu5V8yhRr5TyDnciZN3FPuprosp
+ 83gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=AsV8nXeGOBZSH3zrEUqd9iliNzH/znlE74D2q/iZRbA=;
- b=CZK0N3V5U3Yexya+D2Vb7AIWL3crrM2qRSUtHqw02lFWMlYCZi3EVY9miiqr6EJcAR
- MIsONIZcg/oXn6Mkj6AYKrpXEbsJIwIjjETAXcDvNYdDdeiHRj6ZRVevB6xluqpPeFNJ
- i7tkH4/VzjPa+nTHp1+CHZamRRhHZrj2anrwIHL4GxCQFo8HVr5t95mfndpAzr1uDumr
- 4nQFkUnNsTmN+m9ke2DR+M3+o6R8zDnV2ix420jalwAmGG2K1GpMdX7xb6M+TYNtDZGq
- g72JnUYj+zwUgrbjaM6Wsom7Oa2lYVK5qsncFfInTYsru4g7HfCRtDUc5fknGEqpMrnC
- Pm5Q==
-X-Gm-Message-State: AOAM533fmTzqjLma7XsbvF3yirneQx5OxHLa33V2dIeLzyZWHtC0Gi9B
- JWsiXlPERs0ClteNwSY6rCAauQ==
-X-Google-Smtp-Source: ABdhPJyI4As6fp/k4k7+8FrEN9ZQiZEWwCBdbAoemoFTg47dew3fMqoijIlSKNznVHT8RVMdZ/377Q==
-X-Received: by 2002:a62:6285:: with SMTP id w127mr27143261pfb.12.1595409449760; 
- Wed, 22 Jul 2020 02:17:29 -0700 (PDT)
+ bh=dY1VnCufQZpa+aF68DC4K7OikxwvWj2GSrpOqri/zyA=;
+ b=XC7PnF8IvWjWOBy1iTGfDVxMi+SEwYssXdPjutWzCQU//igwwXNIRF8GnYU5NDk+5d
+ n8OOOD4e4s0GCBscb0xQ3xc0zyMNs8OKKVJ+EdOTuHnGOsdWvRwnCDag9xH9P6k2mkJa
+ g/u5f/JxaQNUfrM2e90hcU2II3H75hbkTb4MTw3VBf4iw8jQBuYmic7srXNuUecgoZu/
+ Tqf3T8rxBD0wiabH/LTw49RwtllmnoWCFVxzRR5MxbtrrXTaIABIY2tByDLSIiIKl3MO
+ cX/fKK3whWo0fXsVdSGtGNGKYUGFvImwQ80gWq8+HICnhC6NVhOWfofCEbK4SHbk3jiR
+ ISfw==
+X-Gm-Message-State: AOAM533k1Dl1MAnsExvYdI9UkQs5nnKMOJtMSMufvk3cERZcBF9K5kgh
+ 8JFLbHqnVu8uDKDIN7YYQ2nUyQ==
+X-Google-Smtp-Source: ABdhPJxrtBNZoM5PQ7qpaY8LDID71dzKi7yj0Uxp7NqcqUFishirIGLpNK31OpzoiUMoSGd6V20e8g==
+X-Received: by 2002:aa7:93c3:: with SMTP id y3mr27667419pff.206.1595409454891; 
+ Wed, 22 Jul 2020 02:17:34 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.17.27
+ by smtp.gmail.com with ESMTPSA id c125sm22301879pfa.119.2020.07.22.02.17.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jul 2020 02:17:29 -0700 (PDT)
+ Wed, 22 Jul 2020 02:17:34 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -52,15 +52,15 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [RFC v2 03/76] target/riscv: fix rsub gvec tcg_assert_listed_vecop
- assertion
-Date: Wed, 22 Jul 2020 17:15:26 +0800
-Message-Id: <20200722091641.8834-4-frank.chang@sifive.com>
+Subject: [RFC v2 04/76] target/riscv: correct the gvec IR called in
+ gen_vec_rsub16_i64()
+Date: Wed, 22 Jul 2020 17:15:27 +0800
+Message-Id: <20200722091641.8834-5-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200722091641.8834-1-frank.chang@sifive.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x441.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x433.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -69,7 +69,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,50 +82,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 09:17:33 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 09:17:39 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-gvec should provide vecop_list to avoid:
-"tcg_tcg_assert_listed_vecop: code should not be reached bug" assertion.
-
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.inc.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ target/riscv/insn_trans/trans_rvv.inc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index dc333e6a91..433cdacbe1 100644
+index 433cdacbe1..7cd08f0868 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -958,22 +958,27 @@ static void gen_rsub_vec(unsigned vece, TCGv_vec r, TCGv_vec a, TCGv_vec b)
- static void tcg_gen_gvec_rsubs(unsigned vece, uint32_t dofs, uint32_t aofs,
-                                TCGv_i64 c, uint32_t oprsz, uint32_t maxsz)
+@@ -937,7 +937,7 @@ static void gen_vec_rsub8_i64(TCGv_i64 d, TCGv_i64 a, TCGv_i64 b)
+ 
+ static void gen_vec_rsub16_i64(TCGv_i64 d, TCGv_i64 a, TCGv_i64 b)
  {
-+    static const TCGOpcode vecop_list[] = { INDEX_op_sub_vec, 0 };
-     static const GVecGen2s rsub_op[4] = {
-         { .fni8 = gen_vec_rsub8_i64,
-           .fniv = gen_rsub_vec,
-           .fno = gen_helper_vec_rsubs8,
-+          .opt_opc = vecop_list,
-           .vece = MO_8 },
-         { .fni8 = gen_vec_rsub16_i64,
-           .fniv = gen_rsub_vec,
-           .fno = gen_helper_vec_rsubs16,
-+          .opt_opc = vecop_list,
-           .vece = MO_16 },
-         { .fni4 = gen_rsub_i32,
-           .fniv = gen_rsub_vec,
-           .fno = gen_helper_vec_rsubs32,
-+          .opt_opc = vecop_list,
-           .vece = MO_32 },
-         { .fni8 = gen_rsub_i64,
-           .fniv = gen_rsub_vec,
-           .fno = gen_helper_vec_rsubs64,
-+          .opt_opc = vecop_list,
-           .prefer_i64 = TCG_TARGET_REG_BITS == 64,
-           .vece = MO_64 },
-     };
+-    tcg_gen_vec_sub8_i64(d, b, a);
++    tcg_gen_vec_sub16_i64(d, b, a);
+ }
+ 
+ static void gen_rsub_i32(TCGv_i32 ret, TCGv_i32 arg1, TCGv_i32 arg2)
 -- 
 2.17.1
 
