@@ -1,73 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyKD2-00067y-6l
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 15:15:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49260)
+	id 1jyKuk-0004VD-7o
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 16:00:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57652)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jyKCz-00066z-UW
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 15:15:17 -0400
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:33906)
+ id 1jyKui-0004Uh-Aj
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 16:00:28 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:34563)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jyKCy-0004Gi-2q
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 15:15:17 -0400
-Received: by mail-pj1-x1032.google.com with SMTP id cv18so3279828pjb.1
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 12:15:15 -0700 (PDT)
+ id 1jyKug-0001hZ-KM
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 16:00:27 -0400
+Received: by mail-pg1-x530.google.com with SMTP id t6so1878863pgq.1
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 13:00:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=eqhuUVI1s7w3MF+FCKmU/idPUjAhMzCrUsSRtkzXNKI=;
- b=B1w6crUDbw/OVsoSpHejxkks6Y0jWvMvLQUW2q/0U0aUXnqlEfqrctmBapq8syZcjf
- UaRSYqmOOR2Dy1JeB2HKTSz8hCux9uPtpkXDP3yYdtpaVV+COUYk/oILOy7jqx3W7rIP
- ZWQUr1Px7HnSx6hwbQ5++Wb8zYwyKSo6H9iJtAnhrLT4wkcTCbngFNiK25Ja62v1kw75
- pPZEihFJwh1RKn58oJhokGP0ysZGyM6ae1sLgA4+JAkLtVOxk2MmD088lCUwHLlf+Tbu
- DoxtpVDotoFMhBD7poxqm45TdMfciyzgK/X9Mr6D7TyD1NiwRmLcR5l/f6uNUFnhCYU9
- 8Z/A==
+ bh=5yY29WyUtcGMg3JYJpZWK5m4IoAUzfnBRUjC+PL25w4=;
+ b=OsJF43BpX6CJtaQ59W5l7TqJMMYOB02EXB1rcNNQyPrkGWHpzN/y8Bc86uz65TO4uJ
+ eAXcNVGC/C1AijGSlud7/4I2YE1K3Yp6LERTlZK8Rx6jv6C0/0xOhjcdtaDTadIienF7
+ AEXTeeLnmVHxyZQr7p66XqfZ1eA1skt8KVFau7kiMT8Hh97C5G7lvtNd1u92kofqbB/l
+ mWk0NESHpVOU8LPCk4x0hrzHtYo5rmEzQX3h3FuD9Yg4HD4mERoErcO4TLY3nulAOgMy
+ ELW9cOb4Ok7xLG23Q6X3U7+iYDRHLEPlm7Zkwe38riUldVXB+h2HjdlMtWHB8cVhjOp3
+ MGQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=eqhuUVI1s7w3MF+FCKmU/idPUjAhMzCrUsSRtkzXNKI=;
- b=Q6jLQHOh7EUTS2ipTd864/nIdeVCOsvMNSh1o06IP+Hqa8u+QX92RyfjCZ7GWpYfv5
- iBOivEib1f2GDMfNK3D5c2IoxTpAUzx98/pdlt/BuBDwVZY4Tx1iKvQy8+cAzviMP3VN
- QXUR9IL09FkAcXlEkwo0oY7SDOTu6h4w12QfJ40ZXb+a9n8RFBqg7vz0mVYaHg4IyI7a
- LT1RHop+a7TmsFJGj75SiR1uQ+Gt6AQfV2PIm88Dl7xeVJFGKAglCIhmFJOC+sRZyjCD
- niwgLyYyJLLg7YOEooyT0+dc9kGvcxUB4kumm+vTJ4sL49p7hA1PZJhM/EBaZnXOiEw7
- I0Dw==
-X-Gm-Message-State: AOAM531c/GNJuVo/U1lLCH1ecz1CJAiPWDJb8278cAmdnwS+zqP2fec5
- Bp4gRTPE6nXyAxjkY2vPvZvyhw==
-X-Google-Smtp-Source: ABdhPJycIUPU5EF7YLgPyfMhgycoTyN3dwt6EJvPG7gYlb3cYDnnRo962EIQWdWrWUUZnBL+lcCQsg==
-X-Received: by 2002:a17:90a:de8d:: with SMTP id
- n13mr754269pjv.95.1595445314386; 
- Wed, 22 Jul 2020 12:15:14 -0700 (PDT)
+ bh=5yY29WyUtcGMg3JYJpZWK5m4IoAUzfnBRUjC+PL25w4=;
+ b=ORM4JCgm3QxYfwYYb5ZcQN0eX5R8OnVTkft9L4m16HYvwFEn4AdjvSp+Qm1R2H/6AK
+ kEiFj8pm98eGeGy1x16n5ttB4hgo2x9jAaHw/0NkIv5sjNH2ZZazYhQ8cXQwOCGUXF17
+ dCLzw4rt/s/ush44w397k3ltIbHtmTSlMQuWQ0yX0jIjtfKFd1mED+6soN8nykuTOayP
+ /9H6poXV0jSIpQ9NHt5mTXD7BySYrqzmxn68CbGLjR9NN1zP577julpA65BDHlY239mS
+ oU4tYJbAD4WMuRcp32RW/IEl3P/inhDdkmeDBDIxlQoSCH50/AoPkXFmfp5zv1j+dYW+
+ O9Dg==
+X-Gm-Message-State: AOAM530jCsOF/H/JFBG4zlvELFdiIbKtzYblWZsRuA6miRdvxftVsVZR
+ 1MDa9VpKj0WQu3hSQrfTp0tm+g==
+X-Google-Smtp-Source: ABdhPJz/jpxoDW5biKBULRnhl/SVGUvJyfblsaFRwa7tLJS0Uw2k7atU78iLwZusSnfGkhSu+V2K1Q==
+X-Received: by 2002:aa7:9708:: with SMTP id a8mr1117991pfg.234.1595448024880; 
+ Wed, 22 Jul 2020 13:00:24 -0700 (PDT)
 Received: from [192.168.1.11] (216-160-65-90.tukw.qwest.net. [216.160.65.90])
  by smtp.gmail.com with ESMTPSA id
- u66sm343370pfb.191.2020.07.22.12.15.13
+ p5sm383662pgi.83.2020.07.22.13.00.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Jul 2020 12:15:13 -0700 (PDT)
-Subject: Re: [RFC v2 19/76] target/riscv: rvv-0.9: add narrower_nanbox_fpr
- helper
+ Wed, 22 Jul 2020 13:00:24 -0700 (PDT)
+Subject: Re: [RFC v2 21/76] target/riscv: rvv-0.9: configure instructions
 To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
- <20200722091641.8834-20-frank.chang@sifive.com>
+ <20200722091641.8834-22-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <87cba14d-0ff5-97b8-b1ed-34872906495a@linaro.org>
-Date: Wed, 22 Jul 2020 12:15:11 -0700
+Message-ID: <0a1f78bf-a844-06df-e76d-56a113464727@linaro.org>
+Date: Wed, 22 Jul 2020 13:00:21 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200722091641.8834-20-frank.chang@sifive.com>
+In-Reply-To: <20200722091641.8834-22-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -89,29 +87,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2020 19:15:18 -0000
+X-List-Received-Date: Wed, 22 Jul 2020 20:00:28 -0000
 
 On 7/22/20 2:15 AM, frank.chang@sifive.com wrote:
-> From: Frank Chang <frank.chang@sifive.com>
-> 
-> For floating-point operations, the scalar can be taken from a scalar
-> f register. If FLEN > SEW, the value in the f registers is checked for
-> a valid NaN-boxed value, in which case the least-significant SEW bits
-> of the f register are used, else the canonical NaN value is used.
-> 
-> Add helper to generate the correspond NaN-boxed value or the SEW-bit
-> canonical NaN for floating-point operations.
-> 
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> ---
->  target/riscv/helper.h        |  2 ++
->  target/riscv/vector_helper.c | 32 ++++++++++++++++++++++++++++++++
->  2 files changed, 34 insertions(+)
+> +    float vflmul = flmul_table[lmul];
+> +
+> +    if ((sew > cpu->cfg.elen)
+> +        || vill
+> +        || vflmul < ((float)sew / cpu->cfg.elen)
 
-The helper can be done inline in two tcg ops.
+Hmm.  I suppose this is fairly compact.
 
-Though, really, we need to coordinate with Liu Zhiwei's other patch set that
-also deals with nan-boxing.
+Expanding this to integer code would take something like
+
+    if (vflmul & 4) {
+        /* Fractional LMUL. */
+        if (vflmul == 4 ||
+            cpu->cfg.elen >> (8 - vflmul) < sew) {
+            vill = 1;
+        }
+    }
 
 
 r~
