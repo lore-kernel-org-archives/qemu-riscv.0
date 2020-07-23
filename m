@@ -1,70 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyRms-0008TI-0F
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Jul 2020 23:20:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43210)
+	id 1jyVPt-0000HT-B9
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Jul 2020 03:13:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34574)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
- id 1jyRmq-0008Ry-UK
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 23:20:48 -0400
-Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342]:34309)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1jyVPr-0000GC-BN
+ for qemu-riscv@nongnu.org; Thu, 23 Jul 2020 03:13:19 -0400
+Received: from mail-oi1-x22f.google.com ([2607:f8b0:4864:20::22f]:38618)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
- id 1jyRmp-0008SY-7Y
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2020 23:20:48 -0400
-Received: by mail-ot1-x342.google.com with SMTP id e90so3414418ote.1
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2020 20:20:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1jyVPo-0005m7-9R
+ for qemu-riscv@nongnu.org; Thu, 23 Jul 2020 03:13:19 -0400
+Received: by mail-oi1-x22f.google.com with SMTP id r8so4163315oij.5
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2020 00:13:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BNXpHc2EtQBwYYXOJAAWmqMrbRXKhB/87zHefCPJioY=;
- b=lo4TvUutv+35DdpdN30nF7xhB6x+7l/4n2BGuldG2nxulVskezugQ9EO7hpgeITEfw
- SMVauKqc84Y3PQCm7WrdZuB9uiZ+H4ZBuj4bxmtn2opBjC9qblrbXIMLLNQRtiGZx8OE
- JS2KkWoxKEg8owk0656dWLMOTlvszrY+B0jH97e1jNqTZOHettG8Xf9x6jZ91sDNWxEr
- DrbuaaMnNx9m0weF+qzzsz+lcr8B0OcQTAhHXs1RU4p/LPktaqnFIoncYNk/Aobjrmis
- wF8S7q+3Nm2Jhn8WQSxlHBD8nA2I0P2R8x9vFN7PE4xX/NMRaFiigZyIyiALKQaSZhTL
- VfgA==
+ :cc; bh=zgxpCz3r5iBBrc3aC3OMCcuIqFIoYcP5JlEdaJPGS3g=;
+ b=Ce11y5gDx521//CmmkgmUUC/DqplDbtRME7MJ78Dn5pAJnXrW+K+Ez8fiq1huNpgrH
+ GyPa78sluzL7you3BPDT+BbOuJ4FoPYo4a8W4K9Q/Bj94mo2DWMG3EYO4lIvR/H7J00X
+ fkB2dE+StugwUOafEYlbfvlaeC9Pbnsn4aNG+5TO9CtowoS1bifjI1d4PP8TJThgltlo
+ A1m7X2baiYGDyYCKiYKfaPBYzSLUboag0nKO5DHI8cU04TQy6JwgUMbGDeNM6AHgoTKR
+ 0EALoc3kbjxjV058hZX8k2i/aU/v9g6v34i0JJW7gWk0MuVJRiGFmyL6hykAxxIw8ztP
+ Q6wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=BNXpHc2EtQBwYYXOJAAWmqMrbRXKhB/87zHefCPJioY=;
- b=HdcJprtCV47OdzEecRauFpKDzLGvKKxKtY8E0e1QfqtnClICzOgpczWUvRpksItWt8
- v9ZHcBVD3BCL0WB1aLkXR3FXIGflDsHBZNNhLyporAYy54zHsMsaiu3eHCRanppw4f4+
- VnOv/MixKv9BTHTsFouOTl3tXBmKoWxO3PBtx9mVq8v19AGCNuM7k9XYDJa2hObZuSCe
- zlHb1i+vMMyoWuQmc8VKapBK1YGfyzDz5/5wdZhWqqwjn7PgS/XgcaknwdA/p6f9Vkqh
- ifGl4toaVCFPaV8FCvpldd5cP2rf45Dyp7sVgmjnp5qI1PBD6L7URe0swyJ32UWNimYM
- tGIw==
-X-Gm-Message-State: AOAM530OGL1jrIEEEl1NDEXJkMZf59P8/ZR7q1hppkOMwLAmWXr+d9KD
- x5yyLTl2AI2NbsmDuuOme2p/hgMtS9YAU1mOCyfmCA==
-X-Google-Smtp-Source: ABdhPJxCHHc/iiTwaXKA24SHwdPiZhCnb+jU0OcvgO+hNPaSBihuX8AsPvCCvWl6Cnhf7yOLteDakkBbLIuEWM3E7zs=
-X-Received: by 2002:a9d:708e:: with SMTP id l14mr2771277otj.127.1595474446040; 
- Wed, 22 Jul 2020 20:20:46 -0700 (PDT)
+ bh=zgxpCz3r5iBBrc3aC3OMCcuIqFIoYcP5JlEdaJPGS3g=;
+ b=BjvomAPARk5PY707+nuNusXooMLdqZlXawjM0RQqdyjmZ/W0hlMbNxDW+5nJmkBN0g
+ XGPqwJopqPtdvReovBXb/JwyeyIsaa4crrf7BS+uQxWs2kcV57kkwDEOCcv4zzChedb9
+ rGfmwCZhDVugdlJacErUwc4s/S7dGDgppP0ad/CvkM2oEc/Cg8f1ylAi+X7xVekbRtQ/
+ rbJ6dCj2T1N+yMYQ2EjkDnJ+rS/IdYbvb+52NyQcpS3nGD4EDbftdR/nVWK/Ujzup1t1
+ gUZOduD7DSDESZxLgQHGygJveBqqF0jVSAhcRyMPU6XqdTgvd7RHFzIAQk/TCF7PUS8S
+ v9Cg==
+X-Gm-Message-State: AOAM531niT9CmAUi2yXy2jfTn/gKNT0q778hxlad+bAPXSvc1L0dVpef
+ Z6W9hwbiyhWBAfk9o/VNHKAjkluSmwfZarMOut4B6g==
+X-Google-Smtp-Source: ABdhPJzje6F6z7N5MTfEHzXJYQxv2EBZ1yjF9oYJZgTBHPAKxM1+1/kocS0mzwRCEwQwJOf0xWe5/dDkVZuqcQhwbmw=
+X-Received: by 2002:aca:6289:: with SMTP id w131mr2500020oib.122.1595488394827; 
+ Thu, 23 Jul 2020 00:13:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1595335112.git.zong.li@sifive.com>
- <26ac4734d2079d5ec782adef3a5a40e82082b51f.1595335112.git.zong.li@sifive.com>
- <CAEeofchMe3H35zmuyzbVMOWOKrYZwfEGT9UVRb4k8L18WwW8PQ@mail.gmail.com>
-In-Reply-To: <CAEeofchMe3H35zmuyzbVMOWOKrYZwfEGT9UVRb4k8L18WwW8PQ@mail.gmail.com>
-From: Zong Li <zong.li@sifive.com>
-Date: Thu, 23 Jul 2020 11:20:36 +0800
-Message-ID: <CANXhq0rcvhGX95JkX08OpRWWZBNZyDgeShD35BvbcQax10PBOA@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] target/riscv: Fix the translation of physical
- address
-To: Alexander Richardson <Alexander.Richardson@cl.cam.ac.uk>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+References: <20200722091641.8834-1-frank.chang@sifive.com>
+ <20200722091641.8834-20-frank.chang@sifive.com>
+ <87cba14d-0ff5-97b8-b1ed-34872906495a@linaro.org>
+In-Reply-To: <87cba14d-0ff5-97b8-b1ed-34872906495a@linaro.org>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Thu, 23 Jul 2020 15:13:04 +0800
+Message-ID: <CAE_xrPgbj9aMJ3k6-WW72_Ng=hz=GNkVu5y1zu57efNiqkEd3g@mail.gmail.com>
+Subject: Re: [RFC v2 19/76] target/riscv: rvv-0.9: add narrower_nanbox_fpr
+ helper
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::342;
- envelope-from=zong.li@sifive.com; helo=mail-ot1-x342.google.com
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Content-Type: multipart/alternative; boundary="000000000000046ff305ab169785"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22f;
+ envelope-from=frank.chang@sifive.com; helo=mail-oi1-x22f.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -79,45 +80,99 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jul 2020 03:20:49 -0000
+X-List-Received-Date: Thu, 23 Jul 2020 07:13:19 -0000
 
-On Wed, Jul 22, 2020 at 5:08 PM Alexander Richardson
-<Alexander.Richardson@cl.cam.ac.uk> wrote:
->
-> On Tue, 21 Jul 2020 at 13:43, Zong Li <zong.li@sifive.com> wrote:
+--000000000000046ff305ab169785
+Content-Type: text/plain; charset="UTF-8"
+
+On Thu, Jul 23, 2020 at 3:15 AM Richard Henderson <
+richard.henderson@linaro.org> wrote:
+
+> On 7/22/20 2:15 AM, frank.chang@sifive.com wrote:
+> > From: Frank Chang <frank.chang@sifive.com>
 > >
-> > The real physical address should add the 12 bits page offset. It also
-> > causes the PMP wrong checking due to the minimum granularity of PMP is
-> > 4 byte, but we always get the physical address which is 4KB alignment,
-> > that means, we always use the start address of the page to check PMP for
-> > all addresses which in the same page.
+> > For floating-point operations, the scalar can be taken from a scalar
+> > f register. If FLEN > SEW, the value in the f registers is checked for
+> > a valid NaN-boxed value, in which case the least-significant SEW bits
+> > of the f register are used, else the canonical NaN value is used.
 > >
-> > Signed-off-by: Zong Li <zong.li@sifive.com>
+> > Add helper to generate the correspond NaN-boxed value or the SEW-bit
+> > canonical NaN for floating-point operations.
+> >
+> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 > > ---
-> >  target/riscv/cpu_helper.c | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index 75d2ae3434..08b069f0c9 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -543,7 +543,8 @@ restart:
-> >              /* for superpage mappings, make a fake leaf PTE for the TLB's
-> >                 benefit. */
-> >              target_ulong vpn = addr >> PGSHIFT;
-> > -            *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
-> > +            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
-> > +                        (addr & ~TARGET_PAGE_MASK);
-> >
-> >              /* set permissions on the TLB entry */
-> >              if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
-> > --
-> > 2.27.0
+> >  target/riscv/helper.h        |  2 ++
+> >  target/riscv/vector_helper.c | 32 ++++++++++++++++++++++++++++++++
+> >  2 files changed, 34 insertions(+)
 >
-> I made the same change for our CHERI fork a few months ago but forgot
-> to send the patch upstream (despite marking the commit as a candidate
-> for upstreaming). Sorry about the duplicated debugging work!
-> (https://github.com/CTSRD-CHERI/qemu/commit/61c8e3f2c0fd4965ec3f316146d1751fae673c12)
+> The helper can be done inline in two tcg ops.
+>
+> Though, really, we need to coordinate with Liu Zhiwei's other patch set
+> that
+> also deals with nan-boxing.
+>
+>
+So, it's better to leverage the codes at:
+https://patchew.org/QEMU/20200626205917.4545-1-zhiwei_liu@c-sky.com/
+but has to extend for the case of SEW=16?
 
-No, problem.
+Frank Chang
+
+
+>
+> r~
+>
+
+--000000000000046ff305ab169785
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Thu, Jul 23, 2020 at 3:15 AM Richard H=
+enderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hender=
+son@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">On 7/22/20 2:15 AM, <a href=3D"mai=
+lto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> wr=
+ote:<br>
+&gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=
+=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt; <br>
+&gt; For floating-point operations, the scalar can be taken from a scalar<b=
+r>
+&gt; f register. If FLEN &gt; SEW, the value in the f registers is checked =
+for<br>
+&gt; a valid NaN-boxed value, in which case the least-significant SEW bits<=
+br>
+&gt; of the f register are used, else the canonical NaN value is used.<br>
+&gt; <br>
+&gt; Add helper to generate the correspond NaN-boxed value or the SEW-bit<b=
+r>
+&gt; canonical NaN for floating-point operations.<br>
+&gt; <br>
+&gt; Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.co=
+m" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 target/riscv/helper.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 2 ++<br=
+>
+&gt;=C2=A0 target/riscv/vector_helper.c | 32 ++++++++++++++++++++++++++++++=
+++<br>
+&gt;=C2=A0 2 files changed, 34 insertions(+)<br>
+<br>
+The helper can be done inline in two tcg ops.<br>
+<br>
+Though, really, we need to coordinate with Liu Zhiwei&#39;s other patch set=
+ that<br>
+also deals with nan-boxing.<br>
+<br></blockquote><div><br></div><div>So, it&#39;s better to leverage the co=
+des at:=C2=A0<a href=3D"https://patchew.org/QEMU/20200626205917.4545-1-zhiw=
+ei_liu@c-sky.com/">https://patchew.org/QEMU/20200626205917.4545-1-zhiwei_li=
+u@c-sky.com/</a></div><div>but has to extend for the case of SEW=3D16?=C2=
+=A0</div><div><br></div><div>Frank Chang</div><div>=C2=A0</div><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
+id rgb(204,204,204);padding-left:1ex">
+<br>
+r~<br>
+</blockquote></div></div>
+
+--000000000000046ff305ab169785--
 
