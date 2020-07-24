@@ -1,69 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jytuE-0005bi-1W
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Jul 2020 05:22:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49768)
+	id 1jyy9j-0005BG-2c
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Jul 2020 09:54:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34162)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jytuC-0005b5-2R; Fri, 24 Jul 2020 05:22:16 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:38788)
+ (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
+ id 1jyuMo-0004wp-F4
+ for qemu-riscv@nongnu.org; Fri, 24 Jul 2020 05:51:50 -0400
+Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:35901)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jytuA-0005l1-D6; Fri, 24 Jul 2020 05:22:15 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id d133so2411632ybh.5;
- Fri, 24 Jul 2020 02:22:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=JNM8E9/+q8IKpeRrn7ZU7uK706DUw8E2QRawmufOm1g=;
- b=Y/FLH/6uoI9xr/ZmYVoS1uEG7N/JHfxupqqrJGiIv/AzT8zBW4KEUdPdOQHp3AXaDF
- +xEUciG+PZw+RLOOe0sQcOZX99Pf5xhMxH36lRQBnOmIShmV9Tw/Tv5O/yRLLIIJB6n7
- 9Hoj39vhvQS91Y5R1KliZo+YVettEQ+DyBTIwF6WjIXlDgqffLTZq2HNNMj+gMffkbLk
- kExAWXAazskksHRbUpe+HnXg+r8wEUy4Rfg4qS+cvf4EliOsWIvR8psAbC2trJB0o+gX
- BPLLjsgSOWmSV5wCOPR1pZom/ERNI0rgGwZSuQv/SgNcyoERSRGtEQ4l9MJvXF5glvc9
- l0XQ==
+ (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
+ id 1jyuMl-0002om-EU
+ for qemu-riscv@nongnu.org; Fri, 24 Jul 2020 05:51:50 -0400
+Received: by mail-pl1-x643.google.com with SMTP id t6so4169168plo.3
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jul 2020 02:51:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=VrIzcegVqGZqnujnuKczVriGy3clDNfKz9O0N+B95RE=;
+ b=FQEtZVA+RBLH50gOlUpMbaiWBAjxCw6RBMQx2IL/msW09V4t5iseNP5p5/2a0Ap9a1
+ AsgNKw4YLJnH4lvlDpKgaaW4vS2FPTFGuZ25Z11L0xm6llE7NRt06txwBps4boTtxr6V
+ YoE1VaKJorUW/7l5oyCx2PGPNHbzI96rdRb9a1aMARsos+HJFLSirrNScQlTRHkxhXhD
+ m7qK4i/6rSMUEZr25Z80/jSe7jSNSFdPkuF/siry6v4fqHZ3Okmozdn118GlHR61sYO1
+ zJWjGhMGpmN131pdmkWZDUvt3gLUCgsHhLcbSCx+HtvT3SYnEjsdMiSp+KNKxZgA4ZWd
+ S1iQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=JNM8E9/+q8IKpeRrn7ZU7uK706DUw8E2QRawmufOm1g=;
- b=Oai+Pldizz0MMeXYVuIrhHzVC8YE/ctymABNWJiDdGyYbt8inAgj5EtbEZj8BHl0IF
- MZGJnKizIxmJwt5FvQ8NDHsUPbqtKoU8q+UI8k0Q8StJVUxInwOqSDejUxEGbx8O5QlB
- jEVpsUIoBaCE1PzDe8XVlFk02BEtAGYQkjB/Xa1SABBudnCvzsmlQHAtcBaeYtrNcI4+
- QQrC3DuNkEiZ4n/jBGGt3Okdo+2x4pC/wfhXsdrHBzlx/xADEgQfpe0jzvRPzVTDhdSe
- lb2B4YqTuaO/YbtQBkOLQXn1Ihp/nvD3DADzq0CoY+GbYvKq28kSNcu7Q+cBOcqPc4M5
- /6ow==
-X-Gm-Message-State: AOAM532f1myH99AnYdEO/Gz5Tz8QDmW5WCC8YDPYAJ/ISVCgg46pS5bj
- eL9oRJZYgkJqRhzGlm38E65qZPYfGkCd3rGyuMA=
-X-Google-Smtp-Source: ABdhPJx4cVEzPOe5QoZ3tlBgTKHTb2NRrrHNKpoZoHCYemtY/FoiHfwr48SsPkZ90TMmYMUWmraGahiNTMj/B4HpxNE=
-X-Received: by 2002:a25:d953:: with SMTP id q80mr2013136ybg.387.1595582532596; 
- Fri, 24 Jul 2020 02:22:12 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1595581140.git.zong.li@sifive.com>
- <56c2770fc75e1e0c833248ea5d9faa038b69e328.1595581140.git.zong.li@sifive.com>
-In-Reply-To: <56c2770fc75e1e0c833248ea5d9faa038b69e328.1595581140.git.zong.li@sifive.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 24 Jul 2020 17:22:00 +0800
-Message-ID: <CAEUhbmX-va3wLY_aU7QYXE0ke0sn-4mfenz5Mszy+2k9NMib9A@mail.gmail.com>
-Subject: Re: [PATCH v4 2/4] target/riscv/pmp.c: Fix the index offset on RV64
-To: Zong Li <zong.li@sifive.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=VrIzcegVqGZqnujnuKczVriGy3clDNfKz9O0N+B95RE=;
+ b=NB6wkqv7rSrzAPLhRHgcuxrvsMzix5Jzt6/7SQGBmbvQ+rhKiEfZBXjoKTYv+sdumI
+ 5CtWJ0WJi7yF05y7F/27F2Qs/VkW1LzsAHbnCzxxXzAcd7LifqVFyroiOB9na2I5zR0S
+ 7mWVqcTjIbfXPl8hEV91cmQJFTK4fShLyl9uL6lhx/uQH2tXNSG30ajX4UwCF0lkTtSG
+ hkUYecFwY4JjEVb/u9N/pLOND72N87/EacyId32qma+L8efX8S9p9Nm4rozcw7qBn42y
+ kjxn4CxnJiw2hJd6F7PKO7amny8BcLo5jmuVGlyfLehoMUquL5mPyewJElIg2U0HaFtK
+ hZTQ==
+X-Gm-Message-State: AOAM5330mYnmbydfqJK9gwMgt4FIQ4l5tlE2dvtWTQ7iInZcX+pTrlLF
+ RZ+NrpPUqhepYw3Yfb4AIZ8BlA==
+X-Google-Smtp-Source: ABdhPJxMCSqOmlCOtofSzHKyyXpsSXk19bFR/uY5dYYvtoWiiKQwXjbZ2yWN00RIn9BmU+YMsbfklQ==
+X-Received: by 2002:a17:90a:f00d:: with SMTP id
+ bt13mr2836578pjb.109.1595584304882; 
+ Fri, 24 Jul 2020 02:51:44 -0700 (PDT)
+Received: from localhost.localdomain (111-243-186-54.dynamic-ip.hinet.net.
+ [111.243.186.54])
+ by smtp.gmail.com with ESMTPSA id x23sm5581636pfn.4.2020.07.24.02.51.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Jul 2020 02:51:44 -0700 (PDT)
+From: Green Wan <green.wan@sifive.com>
+To: 
+Cc: bmeng.cn@gmail.com, Green Wan <green.wan@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: [RFC PATCH 0/2] Add write-once and file-backed features to OTP
+Date: Fri, 24 Jul 2020 17:51:10 +0800
+Message-Id: <20200724095112.2615-1-green.wan@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::643;
+ envelope-from=green.wan@sifive.com; helo=mail-pl1-x643.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 24 Jul 2020 09:54:34 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,56 +80,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jul 2020 09:22:16 -0000
+X-List-Received-Date: Fri, 24 Jul 2020 09:51:50 -0000
 
-Hi Zong,
+Add file-backed implementation to allow users to assign an OTP image
+file to machine. If '-boot otp-file=filename' is specified, OTP 
+device uses otp image file instead of fuse array. In order to keep data
+up-to-date due to unexpected crash or CTRL+a-x, every read/write to OTP
+memory involves file open, mmap and close operation to the image file.
 
-On Fri, Jul 24, 2020 at 5:08 PM Zong Li <zong.li@sifive.com> wrote:
->
-> On RV64, the reg_index is 2 (pmpcfg2 CSR) after the seventh pmp
-> entry, it is not 1 (pmpcfg1 CSR) like RV32. In the original
-> implementation, the second parameter of pmp_write_cfg is
-> "reg_index * sizeof(target_ulong)", and we get the the result
-> which is started from 16 if reg_index is 2, but we expect that
-> it should be started from 8. Separate the implementation for
-> RV32 and RV64 respectively.
->
-> Signed-off-by: Zong Li <zong.li@sifive.com>
-> ---
->  target/riscv/pmp.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 2a2b9f5363..e0161d6aab 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -310,6 +310,10 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
->      int i;
->      uint8_t cfg_val;
->
-> +#if defined(TARGET_RISCV64)
-> +    reg_index >>= 1;
-> +#endif
-> +
->      trace_pmpcfg_csr_write(env->mhartid, reg_index, val);
->
->      if ((reg_index & 1) && (sizeof(target_ulong) == 8)) {
-> @@ -335,6 +339,10 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
->      target_ulong cfg_val = 0;
->      target_ulong val = 0;
->
-> +#if defined(TARGET_RISCV64)
-> +    reg_index >>= 1;
-> +#endif
-> +
->      for (i = 0; i < sizeof(target_ulong); i++) {
->          val = pmp_read_cfg(env, (reg_index * sizeof(target_ulong)) + i);
->          cfg_val |= (val << (i * 8));
-> --
+Add write-once feature to block second write operation to the OTP
+memory. Only keep the 'written' state for non-control register range
+from 0x38 to 16KB.
 
-It seems you missed to address my review comments in v3? reg_index
-should be shifted after we call the trace function.
+Tested on sifive_u for both qemu and u-boot.
 
-Regards,
-Bin
+Green Wan (2):
+  hw/riscv: sifive_u: Add file-backed OTP. softmmu/vl: add otp-file to
+    boot option
+  hw/riscv: sifive_u: Add write-once protection.
+
+ hw/riscv/sifive_u_otp.c         | 122 ++++++++++++++++++++++++++++++--
+ include/hw/riscv/sifive_u_otp.h |   3 +
+ qemu-options.hx                 |   3 +-
+ softmmu/vl.c                    |   6 +-
+ 4 files changed, 128 insertions(+), 6 deletions(-)
+
+-- 
+2.17.1
+
 
