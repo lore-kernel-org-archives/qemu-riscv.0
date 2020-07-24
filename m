@@ -1,78 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyorz-0002uJ-Rs
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Jul 2020 23:59:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38738)
+	id 1jyqop-00027N-7H
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Jul 2020 02:04:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58650)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jyory-0002tZ-Ly
- for qemu-riscv@nongnu.org; Thu, 23 Jul 2020 23:59:38 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:35646)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jyorw-0005jM-33
- for qemu-riscv@nongnu.org; Thu, 23 Jul 2020 23:59:38 -0400
-Received: by mail-pl1-x641.google.com with SMTP id x9so3783178plr.2
- for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2020 20:59:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=XjdktMDmz9PN4tGrlzmXySUB4FgiQVb7VNbcbwk1gP4=;
- b=xqvDR586IFTSphozaZtOIXepGSwdlVBRGoNlGKo5xFRxaw3Np0JM2sScNtCe4/zUKb
- horoj1vwnSQ2fuLNOir+GNlzuIif81EDKfNNT5AiPpciXmyDeFoGFO3Rhwk2moYhPqDQ
- PR1cK2UUVCp6E2znSGTjQQ5QflawkYahmRbkJ8dZEbDwTu/QHuCoymXA/FOXDigZ36wL
- IC8QZVuR97zb0eKcJc7KhNB4zU+COLVfJwGqwWF4fdg3Gwp9wWDWqg54kQvIAVxkj1o3
- 1LHTr0vvqrNfdlrTeWtoz8qw5F2CmGeSEBBGi8RatNLcJ569TC+7OMp+mxFLHEIPIlqX
- 49Jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=XjdktMDmz9PN4tGrlzmXySUB4FgiQVb7VNbcbwk1gP4=;
- b=svFTrrSxs+OU+hdrKil2TZENBHeeaiKMchVJ7qcbZ2zwPkRlhccwx+SOtwjrTs1Wbf
- 5WRvtCk0SyHkOA6ua94gTQN8Ro8YljOVglpnhQae36uZHc+vkRwcuhJfChzAGHgM9A+Z
- FQ/2RbCmPdeUCx51o7qMZ0BdBduTm3WT/KldKk3WFWxnLm6PbnIsxNbafLzMq9O84YVI
- SExOCyfsxo9lARlLOgywpEAKDVKQzeDvhvPhF7ZZwOSEqGHsGDT1PA8rlFpmsMLxCWjy
- tCiKFQz8xtD/3qtX8T82r+upn9R/pIgVzo9Vvz5x7R4JuUzM2QRkVTSMyMHK5mDX1gV3
- o3pQ==
-X-Gm-Message-State: AOAM5321Uan6KUxYKIJj08Vz/A1KSAVX/p8o242eWk63fu6L6l/284BS
- AosuxFoImOu8zz5QkqS5OJt3Yg==
-X-Google-Smtp-Source: ABdhPJzhgd6xmZPBn7dtZJJdptZeTNsNt1oAyloLyUv9qnJZPVS2Jts46uP4ncq1P4AOQWcox5Nrdw==
-X-Received: by 2002:a17:90a:6b02:: with SMTP id
- v2mr3351394pjj.163.1595563174671; 
- Thu, 23 Jul 2020 20:59:34 -0700 (PDT)
-Received: from [192.168.1.11] (216-160-65-90.tukw.qwest.net. [216.160.65.90])
- by smtp.gmail.com with ESMTPSA id
- 66sm4746432pfa.92.2020.07.23.20.59.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2020 20:59:33 -0700 (PDT)
-Subject: Re: [PATCH v2 4/7] target/riscv: Check nanboxed inputs to fp helpers
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jyqon-000277-EH; Fri, 24 Jul 2020 02:04:29 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:53040)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jyqok-00040Z-Ew; Fri, 24 Jul 2020 02:04:29 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.0744274|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_alarm|0.0251564-0.00101945-0.973824; FP=0|0|0|0|0|-1|-1|-1;
+ HT=e01l07440; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=5; RT=5; SR=0;
+ TI=SMTPD_---.I6o5CbQ_1595570654; 
+Received: from 30.225.208.37(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.I6o5CbQ_1595570654)
+ by smtp.aliyun-inc.com(10.147.41.120);
+ Fri, 24 Jul 2020 14:04:16 +0800
+Subject: Re: [PATCH v2 5/7] target/riscv: Check nanboxed inputs in
+ trans_rvf.inc.c
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: frank.chang@sifive.com, qemu-riscv@nongnu.org, alistair23@gmail.com
 References: <20200724002807.441147-1-richard.henderson@linaro.org>
- <20200724002807.441147-5-richard.henderson@linaro.org>
- <abf8bc3d-b021-6d01-3b7d-fa42bfe64653@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <a624b5cc-bee5-76c6-35ce-008a4bf9f0ca@linaro.org>
-Date: Thu, 23 Jul 2020 20:59:31 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ <20200724002807.441147-6-richard.henderson@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <e953ce76-984f-7931-4979-9b140f22ea84@c-sky.com>
+Date: Fri, 24 Jul 2020 14:04:14 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <abf8bc3d-b021-6d01-3b7d-fa42bfe64653@c-sky.com>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <20200724002807.441147-6-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=gbk; format=flowed
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::641;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x641.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: none client-ip=121.197.200.217;
+ envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/24 02:04:16
+X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -85,59 +54,159 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jul 2020 03:59:38 -0000
+X-List-Received-Date: Fri, 24 Jul 2020 06:04:29 -0000
 
-On 7/23/20 7:47 PM, LIU Zhiwei wrote:
-> 
-> 
-> On 2020/7/24 8:28, Richard Henderson wrote:
->> If a 32-bit input is not properly nanboxed, then the input is
->> replaced with the default qnan.
->>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   target/riscv/internals.h  | 11 +++++++
->>   target/riscv/fpu_helper.c | 64 ++++++++++++++++++++++++++++-----------
->>   2 files changed, 57 insertions(+), 18 deletions(-)
->>
->> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
->> index 9f4ba7d617..f1a546dba6 100644
->> --- a/target/riscv/internals.h
->> +++ b/target/riscv/internals.h
->> @@ -43,4 +43,15 @@ static inline uint64_t nanbox_s(float32 f)
->>       return f | MAKE_64BIT_MASK(32, 32);
->>   }
->>   +static inline float32 check_nanbox_s(uint64_t f)
->> +{
->> +    uint64_t mask = MAKE_64BIT_MASK(32, 32);
->> +
->> +    if (likely((f & mask) == mask)) {
->> +        return (uint32_t)f;
->> +    } else {
->> +        return 0x7fc00000u; /* default qnan */
->> +    }
->> +}
->> +
-> If possible,
-> 
-> +static inline float32 check_nanbox(uint64_t f, uint32_t flen)
-> +{
-> +    uint64_t mask = MAKE_64BIT_MASK(flen, 64 - flen);
+
+
+On 2020/7/24 8:28, Richard Henderson wrote:
+> If a 32-bit input is not properly nanboxed, then the input is replaced
+> with the default qnan.  The only inline expansion is for the sign-changing
+> set of instructions: FSGNJ.S, FSGNJX.S, FSGNJN.S.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   target/riscv/insn_trans/trans_rvf.inc.c | 71 +++++++++++++++++++------
+>   target/riscv/translate.c                | 18 +++++++
+>   2 files changed, 73 insertions(+), 16 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvf.inc.c b/target/riscv/insn_trans/trans_rvf.inc.c
+> index 264d3139f1..f9a9e0643a 100644
+> --- a/target/riscv/insn_trans/trans_rvf.inc.c
+> +++ b/target/riscv/insn_trans/trans_rvf.inc.c
+> @@ -161,47 +161,86 @@ static bool trans_fsgnj_s(DisasContext *ctx, arg_fsgnj_s *a)
+>   {
+>       REQUIRE_FPU;
+>       REQUIRE_EXT(ctx, RVF);
 > +
-> +    if (likely((f & mask) == mask)) {
-> +        return (uint32_t)f;
-> +    } else {
-> +        return (flen == 32) ? 0x7fc00000u : 0x7e00u; /* default qnan */
-> +    }
+>       if (a->rs1 == a->rs2) { /* FMOV */
+> -        tcg_gen_mov_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
+> +        gen_check_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
+>       } else { /* FSGNJ */
+> -        tcg_gen_deposit_i64(cpu_fpr[a->rd], cpu_fpr[a->rs2], cpu_fpr[a->rs1],
+> -                            0, 31);
+> +        TCGv_i64 rs1 = tcg_temp_new_i64();
+> +        TCGv_i64 rs2 = tcg_temp_new_i64();
+> +
+> +        gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
+> +        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
+> +
+> +        /* This formulation retains the nanboxing of rs2. */
+> +        tcg_gen_deposit_i64(cpu_fpr[a->rd], rs2, rs1, 0, 31);
+> +        tcg_temp_free_i64(rs1);
+> +        tcg_temp_free_i64(rs2);
+>       }
+> -    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
+>       mark_fs_dirty(ctx);
+>       return true;
+>   }
+>   
+>   static bool trans_fsgnjn_s(DisasContext *ctx, arg_fsgnjn_s *a)
+>   {
+> +    TCGv_i64 rs1, rs2, mask;
+> +
+>       REQUIRE_FPU;
+>       REQUIRE_EXT(ctx, RVF);
+> +
+> +    rs1 = tcg_temp_new_i64();
+> +    gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
+> +
+>       if (a->rs1 == a->rs2) { /* FNEG */
+> -        tcg_gen_xori_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], INT32_MIN);
+> +        tcg_gen_xori_i64(cpu_fpr[a->rd], rs1, MAKE_64BIT_MASK(31, 1));
+>       } else {
+> -        TCGv_i64 t0 = tcg_temp_new_i64();
+> -        tcg_gen_not_i64(t0, cpu_fpr[a->rs2]);
+> -        tcg_gen_deposit_i64(cpu_fpr[a->rd], t0, cpu_fpr[a->rs1], 0, 31);
+> -        tcg_temp_free_i64(t0);
+> +        rs2 = tcg_temp_new_i64();
+> +        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
+> +
+> +        /*
+> +         * Replace bit 31 in rs1 with inverse in rs2.
+> +         * This formulation retains the nanboxing of rs1.
+> +         */
+> +        mask = tcg_const_i64(~MAKE_64BIT_MASK(31, 1));
+> +        tcg_gen_andc_i64(rs2, mask, rs2);
+> +        tcg_gen_and_i64(rs1, mask, rs1);
+> +        tcg_gen_or_i64(cpu_fpr[a->rd], rs1, rs2);
+> +
+> +        tcg_temp_free_i64(mask);
+> +        tcg_temp_free_i64(rs2);
+>       }
+> -    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
+> +    tcg_temp_free_i64(rs1);
+> +
+>       mark_fs_dirty(ctx);
+>       return true;
+>   }
+>   
+>   static bool trans_fsgnjx_s(DisasContext *ctx, arg_fsgnjx_s *a)
+>   {
+> +    TCGv_i64 rs1, rs2;
+> +
+>       REQUIRE_FPU;
+>       REQUIRE_EXT(ctx, RVF);
+> +
+> +    rs1 = tcg_temp_new_i64();
+> +    gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
+> +
+>       if (a->rs1 == a->rs2) { /* FABS */
+> -        tcg_gen_andi_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], ~INT32_MIN);
+> +        tcg_gen_andi_i64(cpu_fpr[a->rd], rs1, ~MAKE_64BIT_MASK(31, 1));
+>       } else {
+> -        TCGv_i64 t0 = tcg_temp_new_i64();
+> -        tcg_gen_andi_i64(t0, cpu_fpr[a->rs2], INT32_MIN);
+> -        tcg_gen_xor_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], t0);
+> -        tcg_temp_free_i64(t0);
+> +        rs2 = tcg_temp_new_i64();
+> +        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
+> +
+> +        /*
+> +         * Xor bit 31 in rs1 with that in rs2.
+> +         * This formulation retains the nanboxing of rs1.
+> +         */
+> +        tcg_gen_andi_i64(rs2, rs2, MAKE_64BIT_MASK(31, 1));
+> +        tcg_gen_xor_i64(cpu_fpr[a->rd], rs1, rs2);
+> +
+> +        tcg_temp_free_i64(rs2);
+>       }
+> -    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
+> +    tcg_temp_free_i64(rs1);
+> +
+>       mark_fs_dirty(ctx);
+>       return true;
+>   }
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 12a746da97..bf35182776 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -101,6 +101,24 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+>       tcg_gen_ori_i64(out, in, MAKE_64BIT_MASK(32, 32));
+>   }
+>   
+> +/*
+> + * A narrow n-bit operation, where n < FLEN, checks that input operands
+> + * are correctly Nan-boxed, i.e., all upper FLEN - n bits are 1.
+> + * If so, the least-significant bits of the input are used, otherwise the
+> + * input value is treated as an n-bit canonical NaN (v2.2 section 9.2).
+> + *
+> + * Here, the result is always nan-boxed, even the canonical nan.
+> + */
+> +static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+> +{
+> +    TCGv_i64 t_max = tcg_const_i64(0xffffffff00000000ull);
+> +    TCGv_i64 t_nan = tcg_const_i64(0xffffffff7fc00000ull);
+> +
+> +    tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
+> +    tcg_temp_free_i64(t_max);
+> +    tcg_temp_free_i64(t_nan);
 > +}
+> +
+Reviewed-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 
-The difficulty of choosing the proper default qnan is an example of why we
-should *not* attempt to make this function fully general, but should instead
-define separate functions for each type.  E.g.
+Zhiwei
+>   static void generate_exception(DisasContext *ctx, int excp)
+>   {
+>       tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
 
-static inline float16 check_nanbox_h(uint64_t f);
-static inline bfloat16 check_nanbox_b(uint64_t f);
-
-
-r~
 
