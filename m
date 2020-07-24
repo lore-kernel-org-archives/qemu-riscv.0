@@ -1,49 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyqpy-00034c-Pn
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Jul 2020 02:05:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58826)
+	id 1jytgq-0002yz-1w
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Jul 2020 05:08:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45550)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jyqpx-00034T-VW; Fri, 24 Jul 2020 02:05:41 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:60316)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1jyqpv-0004Bu-8P; Fri, 24 Jul 2020 02:05:41 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1413044|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.0934425-0.00159043-0.904967;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03308; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=5; RT=5; SR=0; TI=SMTPD_---.I6om39v_1595570734; 
-Received: from 30.225.208.37(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.I6om39v_1595570734)
- by smtp.aliyun-inc.com(10.147.44.145);
- Fri, 24 Jul 2020 14:05:34 +0800
-Subject: Re: [PATCH v2 1/7] target/riscv: Generate nanboxed results from fp
- helpers
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: frank.chang@sifive.com, qemu-riscv@nongnu.org, alistair23@gmail.com
-References: <20200724002807.441147-1-richard.henderson@linaro.org>
- <20200724002807.441147-2-richard.henderson@linaro.org>
- <1aa6cb56-2f41-45c1-2d32-ec8b3b10780b@c-sky.com>
- <9e10c17c-7a9e-5f7f-b1e3-c195d4e30b32@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <ccc72223-d98e-6dd4-6c44-ca30f4e687d5@c-sky.com>
-Date: Fri, 24 Jul 2020 14:05:34 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
+ id 1jytgo-0002y1-9M
+ for qemu-riscv@nongnu.org; Fri, 24 Jul 2020 05:08:26 -0400
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:34639)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
+ id 1jytgm-0003qJ-FQ
+ for qemu-riscv@nongnu.org; Fri, 24 Jul 2020 05:08:25 -0400
+Received: by mail-pf1-x441.google.com with SMTP id u185so4749471pfu.1
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jul 2020 02:08:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=t0T7C8gSWgr1wtDkt6o+vQNAP8br3EtqgTWVItkOaUQ=;
+ b=HTw2x7jz4ZGphx+bpb0N7WfxMnLjPBZNWbfbid/EOQZa/dTLkLo6SjNnAB8TUR/G0f
+ yY7uAPtMGnuNiN2LQQBxX2fiZSAMUbEYvJXfgAhdJPGMkz/sLzbupuXfS/VRPH34/q+L
+ uM0JFmZl5RiLPu1pqa2gazy5HKyAaVgDircLERJ5i98umAwWm800g2/beQFqL5N83snj
+ 7Q47zjCMaz+3LsAB9zhMPS4cW03zP8QqyB4fYOJLDKnWIrcppS/SbvGB68L3psS5yKe+
+ 5vtNpiuNYk7KlWYEfH0hBt7C+OKy+xsw7opC3pDQRCDoNrpnXv84OuNaPbCM0ESYw9Z4
+ bzyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=t0T7C8gSWgr1wtDkt6o+vQNAP8br3EtqgTWVItkOaUQ=;
+ b=BvRDMk5UHt9dS2dlvx2k0OY9GfBK8Ed/o2hJVYW/KmIo0AfOJCHjUoBMbLlma/RO9n
+ TWw385HIMU8MMh20O8Gu0Gtm9kogIvT7eDJjSQ7+S1S8nud0o0t/FiJpkoEeHOv6ZC5y
+ kP0p7VCxEqPzitV5jz1l/RZoTK1u8IXKeeok1L/2+S0tNmeEt+s8lU7jtMCSXpXeL1YZ
+ IjWTLu3rD+ZfnowjtRwkeB2rfNCETgH0gxwl4yPhjM+iC/oKBc0H2IFzwsRXebKFZGTK
+ 9mWbSaVJt8+xOKxK41HdgaeyFmzPMtzhwWDf0VYbxI4DThng96Xk85GrxAIQL3Yq+hmZ
+ wj6Q==
+X-Gm-Message-State: AOAM531YAl7Swom1Pul8YedK34fV0oKu6Mpq3EWCF8EwpO+35ZXrUdKV
+ HhK303h+LmFBr24RoEAjhTzdbA==
+X-Google-Smtp-Source: ABdhPJwvx0Wuy6U3ztF2SJjlde2nytuNtHVZaRW94EqxPYFRtr/nQqUyVWGib8FeHvbWmjY6m2CWrQ==
+X-Received: by 2002:a65:4b85:: with SMTP id t5mr7748098pgq.36.1595581702067;
+ Fri, 24 Jul 2020 02:08:22 -0700 (PDT)
+Received: from hsinchu02.internal.sifive.com
+ (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
+ by smtp.gmail.com with ESMTPSA id z10sm5751282pfr.90.2020.07.24.02.08.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Jul 2020 02:08:21 -0700 (PDT)
+From: Zong Li <zong.li@sifive.com>
+To: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
+ sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Zong Li <zong.li@sifive.com>
+Subject: [PATCH v4 0/4] Fix some PMP implementations
+Date: Fri, 24 Jul 2020 17:08:13 +0800
+Message-Id: <cover.1595581140.git.zong.li@sifive.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-In-Reply-To: <9e10c17c-7a9e-5f7f-b1e3-c195d4e30b32@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-Received-SPF: none client-ip=121.197.200.217;
- envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/24 02:04:16
-X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
+ envelope-from=zong.li@sifive.com; helo=mail-pf1-x441.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -56,58 +78,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jul 2020 06:05:42 -0000
+X-List-Received-Date: Fri, 24 Jul 2020 09:08:26 -0000
 
+This patch set contains the fixes for wrong index of pmpcfg CSR on rv64,
+and the pmp range in CSR function table. After 3rd version of this patch
+series, we also fix the PMP issues such as wrong physical address
+translation and ignoring PMP checking.
 
+Chagned in v4:
+ - Refine the implementation. Suggested by Bin Meng.
+ - Add fix for PMP checking was ignored.
 
-On 2020/7/24 11:55, Richard Henderson wrote:
-> On 7/23/20 7:35 PM, LIU Zhiwei wrote:
->>
->> On 2020/7/24 8:28, Richard Henderson wrote:
->>> Make sure that all results from single-precision scalar helpers
->>> are properly nan-boxed to 64-bits.
->>>
->>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->>> ---
->>>    target/riscv/internals.h  |  5 +++++
->>>    target/riscv/fpu_helper.c | 42 +++++++++++++++++++++------------------
->>>    2 files changed, 28 insertions(+), 19 deletions(-)
->>>
->>> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
->>> index 37d33820ad..9f4ba7d617 100644
->>> --- a/target/riscv/internals.h
->>> +++ b/target/riscv/internals.h
->>> @@ -38,4 +38,9 @@ target_ulong fclass_d(uint64_t frs1);
->>>    #define SEW32 2
->>>    #define SEW64 3
->>>    +static inline uint64_t nanbox_s(float32 f)
->>> +{
->>> +    return f | MAKE_64BIT_MASK(32, 32);
->>> +}
->>> +
->> If define it here,  we can also define a more general  function with flen.
->>
->> +static inline uint64_t nanbox_s(float32 f, uint32_t flen)
->> +{
->> +    return f | MAKE_64BIT_MASK(flen, 64 - flen);
->> +}
->> +
->>
->> So we can reuse it in fp16 or bf16 scalar instruction and in vector instructions.
-> While we could do that, we will not encounter all possible lengths.  In the
-> cover letter, I mentioned defining a second function,
->
-> static inline uint64_t nanbox_h(float16 f)
-> {
->     return f | MAKE_64BIT_MASK(16, 48);
-> }
->
-> Having two separate functions will, I believe, be easier to use in practice.
->
-Get  it. Thanks.
+Changed in v3:
+ - Refine the implementation. Suggested by Bin Meng.
+ - Add fix for wrong pphysical address translation.
 
-Zhiwei
->
-> r~
+Changed in v2:
+ - Move out the shifting operation from loop. Suggested by Bin Meng.
+
+Zong Li (4):
+  target/riscv: Fix the range of pmpcfg of CSR funcion table
+  target/riscv/pmp.c: Fix the index offset on RV64
+  target/riscv: Fix the translation of physical address
+  target/riscv: Change the TLB page size depends on PMP entries.
+
+ target/riscv/cpu_helper.c | 13 +++++++--
+ target/riscv/csr.c        |  2 +-
+ target/riscv/pmp.c        | 60 +++++++++++++++++++++++++++++++++++++++
+ target/riscv/pmp.h        |  2 ++
+ 4 files changed, 73 insertions(+), 4 deletions(-)
+
+-- 
+2.27.0
 
 
