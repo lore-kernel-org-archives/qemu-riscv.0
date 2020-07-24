@@ -1,72 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jylZY-0000WB-MK
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Jul 2020 20:28:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54468)
+	id 1jynUg-000803-6R
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Jul 2020 22:31:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50726)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jylZU-0000Le-Sc
- for qemu-riscv@nongnu.org; Thu, 23 Jul 2020 20:28:20 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d]:45045)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1jylZT-0008G9-AC
- for qemu-riscv@nongnu.org; Thu, 23 Jul 2020 20:28:20 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id t11so4050655pfq.11
- for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2020 17:28:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=jQCpNdFJsrF3Bpi0rRRCXqsUrN96754LDnpff+tQIzo=;
- b=FScUEfH+7aJujA9JSdolRAFuUDhHsshCEERdH9W9YZSRKL/KK/ZQsHZL+zn+iNOTsk
- FJAmFC0hc3hPsj3xkJEUkQpUG+TS1RPZDrhIKySvy2ApU0W9w1NYKkALTK+ONPCTrpws
- J5WH6aOhDU6jrfUwYLZzk61TkcUHDnAIydTHzdvoZZrhHZWiVNAiQSmrVqUttLZRRhAl
- ClcKyQDVEaI+Wd5IGe+Iw5wV86HJ93TnaHhInjRwCOprPbSMmozOxl6ya3bfaiKuhYWa
- HHVGd4ETYkVEfcJ0DoY5nr2ydDGeVVDSvZrfda7/wc32U8Znms5Kzw9GBjsb8Eb7q8fQ
- b5Xw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=jQCpNdFJsrF3Bpi0rRRCXqsUrN96754LDnpff+tQIzo=;
- b=nxm9XjNixLi9OAYizthD/CaP4kFC0ok8fdC+HnpB37gOBcxKU9AsnIKUMfm2xooXbh
- saRjBmBuL59TxlaVLI6+g+0kUYZZXe4J+cwCr9tYbCtSR77VEEcvQnoVzPMwsRGtdLi6
- mN+hHSRORJ3vgB/lA+y3KLRGPfzr3cTIA7ni0rVG9xTjz/Zc7rxF3tEUbRLaz3tmZdjj
- bJAxqmmlDjBaF93f8b6vWB6cRW2yu01v1sg0GtA1ZTt3tx16dSdJxhsduJceKRgMsXP1
- B8/LgR3QNzbAT2zyhYqO+XqHZJ7UnKFboOiGGISvl+7CF9qmmO1lcrwtsdb4P2mtNfXr
- 1q2g==
-X-Gm-Message-State: AOAM53331q77ELNBnT0m/MaLWJLctmjXuwcIGihn9Fhv03nCOLddY+6b
- XtO4ispNrgLx785y8djr8FYArQ==
-X-Google-Smtp-Source: ABdhPJwJpM0IToCX7H1EapTXmYY8AmBjtWlS0t+IfEhdMMHDFQjM4DNvrOefl4ODTNMaCzGEDy0FNA==
-X-Received: by 2002:a65:6416:: with SMTP id a22mr6212003pgv.392.1595550497983; 
- Thu, 23 Jul 2020 17:28:17 -0700 (PDT)
-Received: from localhost.localdomain (216-160-65-90.tukw.qwest.net.
- [216.160.65.90])
- by smtp.gmail.com with ESMTPSA id q20sm4224635pfn.111.2020.07.23.17.28.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jul 2020 17:28:17 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: frank.chang@sifive.com, qemu-riscv@nongnu.org, alistair23@gmail.com,
- zhiwei_liu@c-sky.com
-Subject: [PATCH v2 7/7] target/riscv: check before allocating TCG temps
-Date: Thu, 23 Jul 2020 17:28:07 -0700
-Message-Id: <20200724002807.441147-8-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200724002807.441147-1-richard.henderson@linaro.org>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jynUe-0007zm-I2; Thu, 23 Jul 2020 22:31:28 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:41692)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1jynUa-0006k7-P8; Thu, 23 Jul 2020 22:31:28 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1524953|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_regular_dialog|0.0206393-0.00202531-0.977335;
+ FP=0|0|0|0|0|-1|-1|-1; HT=e02c03307; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
+ RN=5; RT=5; SR=0; TI=SMTPD_---.I6ihQM9_1595557871; 
+Received: from 30.225.208.37(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.I6ihQM9_1595557871)
+ by smtp.aliyun-inc.com(10.147.41.138);
+ Fri, 24 Jul 2020 10:31:12 +0800
+Subject: Re: [PATCH v2 0/7] target/riscv: NaN-boxing for multiple precison
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: frank.chang@sifive.com, qemu-riscv@nongnu.org, alistair23@gmail.com
 References: <20200724002807.441147-1-richard.henderson@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <4c5a8910-f6c1-a29f-b258-a0b83376bcb4@c-sky.com>
+Date: Fri, 24 Jul 2020 10:31:11 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <20200724002807.441147-1-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42d.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Language: en-US
+Received-SPF: none client-ip=121.197.200.217;
+ envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/23 22:31:14
+X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,80 +53,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jul 2020 00:28:21 -0000
+X-List-Received-Date: Fri, 24 Jul 2020 02:31:28 -0000
 
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-Id: <20200626205917.4545-5-zhiwei_liu@c-sky.com>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/insn_trans/trans_rvd.inc.c | 8 ++++----
- target/riscv/insn_trans/trans_rvf.inc.c | 8 ++++----
- 2 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvd.inc.c b/target/riscv/insn_trans/trans_rvd.inc.c
-index ea1044f13b..4f832637fa 100644
---- a/target/riscv/insn_trans/trans_rvd.inc.c
-+++ b/target/riscv/insn_trans/trans_rvd.inc.c
-@@ -20,10 +20,10 @@
- 
- static bool trans_fld(DisasContext *ctx, arg_fld *a)
- {
--    TCGv t0 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
-+    TCGv t0 = tcg_temp_new();
-+    gen_get_gpr(t0, a->rs1);
-     tcg_gen_addi_tl(t0, t0, a->imm);
- 
-     tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], t0, ctx->mem_idx, MO_TEQ);
-@@ -35,10 +35,10 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
- 
- static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
- {
--    TCGv t0 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
-+    TCGv t0 = tcg_temp_new();
-+    gen_get_gpr(t0, a->rs1);
-     tcg_gen_addi_tl(t0, t0, a->imm);
- 
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], t0, ctx->mem_idx, MO_TEQ);
-diff --git a/target/riscv/insn_trans/trans_rvf.inc.c b/target/riscv/insn_trans/trans_rvf.inc.c
-index 0d04677a02..16df9c5ee2 100644
---- a/target/riscv/insn_trans/trans_rvf.inc.c
-+++ b/target/riscv/insn_trans/trans_rvf.inc.c
-@@ -25,10 +25,10 @@
- 
- static bool trans_flw(DisasContext *ctx, arg_flw *a)
- {
--    TCGv t0 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVF);
-+    TCGv t0 = tcg_temp_new();
-+    gen_get_gpr(t0, a->rs1);
-     tcg_gen_addi_tl(t0, t0, a->imm);
- 
-     tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], t0, ctx->mem_idx, MO_TEUL);
-@@ -41,11 +41,11 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
- 
- static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
- {
-+    REQUIRE_FPU;
-+    REQUIRE_EXT(ctx, RVF);
-     TCGv t0 = tcg_temp_new();
-     gen_get_gpr(t0, a->rs1);
- 
--    REQUIRE_FPU;
--    REQUIRE_EXT(ctx, RVF);
-     tcg_gen_addi_tl(t0, t0, a->imm);
- 
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], t0, ctx->mem_idx, MO_TEUL);
--- 
-2.25.1
+On 2020/7/24 8:28, Richard Henderson wrote:
+> This is my take on Liu Zhiwei's patch set:
+> https://patchew.org/QEMU/20200626205917.4545-1-zhiwei_liu@c-sky.com
+>
+> This differs from Zhiwei's v1 in:
+>
+>   * If a helper is involved, the helper does the boxing and unboxing.
+>
+>   * Which leaves only LDW and FSGN*.S as the only instructions that
+>     are expanded inline which need to handle nanboxing.
+>
+>   * All mention of RVD is dropped vs boxing.  This means that an
+>     RVF-only cpu will still generate and check nanboxes into the
+>     64-bit cpu_fpu slots.  There should be no way an RVF-only cpu
+>     can generate an unboxed cpu_fpu value.
+>
+>     This choice is made to speed up the common case: RVF+RVD, so
+>     that we do not have to check whether RVD is enabled.
+>
+>   * The translate.c primitives take TCGv values rather than fpu
+>     regno, which will make it possible to use them with RVV,
+>     since v0.9 does proper nanboxing.
+Agree.
+
+And I think this patch set should be applied  if possible, because it is 
+bug fix.
+>   * I have adjusted the current naming to be float32 specific ("*_s"),
+>     to avoid confusion with the float16 data type supported by RVV.
+It's OK.
+
+A more general function with flen is better in my opinion. So that it 
+can be used
+everywhere, both in scalar and vector instructions, even the future fp16 or
+bf16 instructions.
+
+Zhiwei
+>
+> r~
+>
+>
+> LIU Zhiwei (2):
+>    target/riscv: Clean up fmv.w.x
+>    target/riscv: check before allocating TCG temps
+>
+> Richard Henderson (5):
+>    target/riscv: Generate nanboxed results from fp helpers
+>    target/riscv: Generalize gen_nanbox_fpr to gen_nanbox_s
+>    target/riscv: Generate nanboxed results from trans_rvf.inc.c
+>    target/riscv: Check nanboxed inputs to fp helpers
+>    target/riscv: Check nanboxed inputs in trans_rvf.inc.c
+>
+>   target/riscv/internals.h                |  16 ++++
+>   target/riscv/fpu_helper.c               | 102 ++++++++++++++++--------
+>   target/riscv/insn_trans/trans_rvd.inc.c |   8 +-
+>   target/riscv/insn_trans/trans_rvf.inc.c |  99 ++++++++++++++---------
+>   target/riscv/translate.c                |  29 +++++++
+>   5 files changed, 178 insertions(+), 76 deletions(-)
+>
 
 
