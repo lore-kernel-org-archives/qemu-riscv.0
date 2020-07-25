@@ -1,70 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jyyYg-0005w2-5O
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Jul 2020 10:20:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44738)
+	id 1jzCz1-0003qd-LD
+	for mharc-qemu-riscv@gnu.org; Sat, 25 Jul 2020 01:44:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47954)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jyyYe-0005tK-Dv; Fri, 24 Jul 2020 10:20:20 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:39449)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1jyyYc-0002rE-Cc; Fri, 24 Jul 2020 10:20:20 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id q16so2573147ybk.6;
- Fri, 24 Jul 2020 07:20:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=YqcN2NQc7gaCr2V/22gdwYFCkw+AamcVfvmyHrRMS+E=;
- b=VmUZD28ZdwOlo+BJ2ob2V/9tFBiyL5C25+mjrrUszgQuYATx5UZlu1Bf56ubAO0ah9
- jY/R3oFqAFlysYZeP6Jk+igazn6qTC/ZsJ1JNDVFj84dOx/yBWIC3lm3waum4gXNrFVV
- oCoNdMH+ltWI1bFd+VBKFV9SvPx7EcnJ9Hprv34YVeBBzvpvbBHqZJTyIdMjCs7x07IM
- qWpEA2nf1m8go3ntK1gZZKGyBdo1wnvasgmnt75JWXxpW/RgtdYHmrvCKur8znVpbfjh
- xoi475qA76Q0J/zcuOXsG2H4swN85+/RlelYHaT6bXNR7R3UWpPe2VBz0TxIsJWK6z7o
- YzPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=YqcN2NQc7gaCr2V/22gdwYFCkw+AamcVfvmyHrRMS+E=;
- b=fWU6fhZLr7EoIJtp4VcVbxWzhI5C3uyXZrayLzfn61osqVoSHG4zxAVRSbdDUrvWFx
- 6ni6JO6SEhDnkf8e9u9Vb61o6FUBn19Ly6EpWVnVOAMVS8ad/gd8vbGC4X1y9o21Hqkl
- nx0LKEtawYowGU7fd/kLTTp+Vv+pXX34pokQ6ryC5yh+bfH/I3tPdRWVbs6hVZCPNR9I
- 7MffqxHd7ZkGcK7OYObBCLvbI9YI0+FzM94AVjpeMDTKI+Q1fPQmKgXI/e3mS2U61H6d
- 3sL1wM6g1WMpwShzl267Kmry4C2z4vz7J3d6ADW/FLcBh3Gfrshy0doZ6Dspta7skO1u
- lsLg==
-X-Gm-Message-State: AOAM530GTwin6EZJPkxeTKehDEzS32ugKNYVeIKwMM7RjOtnNZCvsTx+
- RFUKkoPmcvYZIUeIaOVVEHnQeE9aEEzYhwfzsi4=
-X-Google-Smtp-Source: ABdhPJxVSbYdAXaxyGzsn/poqP0PsVS7Lkp/HacFDZucHYavuGxJeduqY46axtwy/QNAo6SDMSfDk8H0vxRGJwEdU4c=
-X-Received: by 2002:a25:d006:: with SMTP id h6mr13980035ybg.122.1595600416834; 
- Fri, 24 Jul 2020 07:20:16 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=46842bc30=alistair.francis@wdc.com>)
+ id 1jzCz0-0003qL-Ds; Sat, 25 Jul 2020 01:44:30 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:4659)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=46842bc30=alistair.francis@wdc.com>)
+ id 1jzCyy-00054Y-B6; Sat, 25 Jul 2020 01:44:30 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1595655869; x=1627191869;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=R6ZRT6wwYaLQhVVdX9vY8+1Sj9WCDCaCpExLFgi/9BE=;
+ b=MiC/XI7eq1AiHb1Bk6t59muk9cuRO4GVpFgHXgnOqA0EGYbwYY5jVoMG
+ lfjsxTSDcdalOXjW//B+nECCUOeDDvfq9PLcsrR2HK8YwWSwMbk8Fv+cO
+ eOi+u4wdFOvW+7fkGtETgFE0oDRGD6u6uKpm8PTu2dZbBeiJYqEq6yqPc
+ 8B7rgKjBTnTphb+j6SdlxqSuQMZR+ApV7ahGfGtF7jPjOLtZ4dLoFNgkb
+ PP2QiX6vwGylCgp3PFlXcob7tn9ICHvn1QKJXU/KHiYpQPULZsizwJa/y
+ 5ECGQdO+O9Dk1sjr8m+MyQpx2J+Agrd4TXcHnPzRZKuJBSdTMi+97s4hY Q==;
+IronPort-SDR: HkpjcQZVYBJgSd+sMf1sILQj6P+Ml2DRPGNQDAcymNutICxHaVrkp80YR1lFdIbOTMmeH4WNID
+ dCH6U8AsxUc3LLgQYMbyQujLKTFViicMrq1Vtgc50kHV+eHQTFU6NX6dG+Bb6Xn6faAYTEAM2n
+ e+1ZZH4GyUvgoGGiIv9oPZLUZfVqegAbjHd+F0fvGIUJ5b0t8IsN0smmn4Yn/zwsTnelso3Nid
+ AFtTfO1mIO3s1HbNGBGBBE6yES1s/4PJksVb3MzkSmvWoUJIBMl6Jugs9tsNDJjSJSl+eu+RrH
+ A14=
+X-IronPort-AV: E=Sophos;i="5.75,392,1589212800"; d="scan'208";a="144611246"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 25 Jul 2020 13:44:24 +0800
+IronPort-SDR: aHqMaSAmay7ojzcYU23i4yfr0nO8FNQbepbw0By4c0fbUP3x/iUnVHr1z+izZgQwG7WwEGoOks
+ 9lGZ1ke/rUWDFFkhZ9ueZ21dvmt1RJHIE=
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 Jul 2020 22:32:36 -0700
+IronPort-SDR: DlqQRt7cvXuLBknL8QhfX1Wgp4qzOXdtoW6kFHfg1BGQ2pIgI4uyo3+AC6tMESQjTYnW8bXUJD
+ GO8iFvKJIgCg==
+WDCIronportException: Internal
+Received: from cnf007830.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.58.124])
+ by uls-op-cesaip02.wdc.com with ESMTP; 24 Jul 2020 22:44:23 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v1 0/3] hw/intc: A few fixes for the Ibex PLIC
+Date: Fri, 24 Jul 2020 22:34:37 -0700
+Message-Id: <cover.1595655188.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <20200724095112.2615-1-green.wan@sifive.com>
- <20200724095112.2615-2-green.wan@sifive.com>
-In-Reply-To: <20200724095112.2615-2-green.wan@sifive.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 24 Jul 2020 22:20:01 +0800
-Message-ID: <CAEUhbmVgqNEe9k9p7Fto08_Rsu0W3d7UfzSK0HcprTk3cSzgaQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/2] hw/riscv: sifive_u: Add file-backed OTP.
- softmmu/vl: add otp-file to boot option
-To: Green Wan <green.wan@sifive.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.154.45;
+ envelope-from=prvs=46842bc30=alistair.francis@wdc.com;
+ helo=esa6.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/25 01:44:23
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,180 +79,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jul 2020 14:20:20 -0000
+X-List-Received-Date: Sat, 25 Jul 2020 05:44:30 -0000
 
-Hi Green,
+Recently some SiFive PLIC fixes have been merged into QEMU, this applies
+those fixes to the Ibex PLIC as well as an update on how claiming
+interrupts works.
 
-On Fri, Jul 24, 2020 at 5:51 PM Green Wan <green.wan@sifive.com> wrote:
->
-> Add a file-backed implementation for OTP of sifive_u machine. Use
-> '-boot otp-file=xxx' to enable it. Do file open, mmap and close
-> for every OTP read/write in case keep the update-to-date snapshot
-> of OTP.
->
-> Signed-off-by: Green Wan <green.wan@sifive.com>
-> ---
->  hw/riscv/sifive_u_otp.c         | 88 ++++++++++++++++++++++++++++++++-
->  include/hw/riscv/sifive_u_otp.h |  2 +
->  qemu-options.hx                 |  3 +-
->  softmmu/vl.c                    |  6 ++-
->  4 files changed, 96 insertions(+), 3 deletions(-)
->
-> diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
-> index f6ecbaa2ca..26e1965821 100644
-> --- a/hw/riscv/sifive_u_otp.c
-> +++ b/hw/riscv/sifive_u_otp.c
-> @@ -24,6 +24,72 @@
->  #include "qemu/log.h"
->  #include "qemu/module.h"
->  #include "hw/riscv/sifive_u_otp.h"
-> +#include <stdio.h>
-> +#include <stdlib.h>
-> +#include <sys/types.h>
-> +#include <sys/stat.h>
-> +#include <unistd.h>
-> +#include <fcntl.h>
-> +#include <sys/mman.h>
-> +#include <string.h>
-> +
-> +#define TRACE_PREFIX            "FU540_OTP: "
-> +#define SIFIVE_FU540_OTP_SIZE   (SIFIVE_U_OTP_NUM_FUSES * 4)
-> +
-> +static int otp_backed_fd;
-> +static unsigned int *otp_mmap;
-> +
-> +static void sifive_u_otp_backed_load(const char *filename);
-> +static uint64_t sifive_u_otp_backed_read(uint32_t fuseidx);
-> +static void sifive_u_otp_backed_write(uint32_t fuseidx,
-> +                                      uint32_t paio,
-> +                                      uint32_t pdin);
-> +static void sifive_u_otp_backed_unload(void);
-> +
-> +void sifive_u_otp_backed_load(const char *filename)
-> +{
-> +    if (otp_backed_fd < 0) {
-> +
-> +        otp_backed_fd = open(filename, O_RDWR);
-> +
-> +        if (otp_backed_fd < 0)
-> +            qemu_log_mask(LOG_TRACE,
-> +                          TRACE_PREFIX "Warning: can't open otp file\n");
-> +        else {
-> +
-> +            otp_mmap = (unsigned int *)mmap(0,
-> +                                            SIFIVE_FU540_OTP_SIZE,
-> +                                            PROT_READ | PROT_WRITE | PROT_EXEC,
-> +                                            MAP_FILE | MAP_SHARED,
-> +                                            otp_backed_fd,
-> +                                            0);
-> +
-> +            if (otp_mmap == MAP_FAILED)
-> +                qemu_log_mask(LOG_TRACE,
-> +                              TRACE_PREFIX "Warning: can't mmap otp file\n");
-> +        }
-> +    }
-> +
-> +}
-> +
-> +uint64_t sifive_u_otp_backed_read(uint32_t fuseidx)
-> +{
-> +    return (uint64_t)(otp_mmap[fuseidx]);
-> +}
-> +
-> +void sifive_u_otp_backed_write(uint32_t fuseidx, uint32_t paio, uint32_t pdin)
-> +{
-> +    otp_mmap[fuseidx] &= ~(pdin << paio);
-> +    otp_mmap[fuseidx] |= (pdin << paio);
-> +}
-> +
-> +
-> +void sifive_u_otp_backed_unload(void)
-> +{
-> +    munmap(otp_mmap, SIFIVE_FU540_OTP_SIZE);
-> +    close(otp_backed_fd);
-> +    otp_backed_fd = -1;
-> +}
->
->  static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
->  {
-> @@ -46,7 +112,17 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
->          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
->              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
->              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
-> -            return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
-> +
-> +            if (otp_file) {
-> +                uint64_t val;
-> +
-> +                sifive_u_otp_backed_load(otp_file);
-> +                val = sifive_u_otp_backed_read(s->pa);
-> +                sifive_u_otp_backed_unload();
-> +
-> +                return val;
-> +            } else
-> +                return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
->          } else {
->              return 0xff;
->          }
-> @@ -123,6 +199,12 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
->          s->ptrim = val32;
->          break;
->      case SIFIVE_U_OTP_PWE:
-> +        if (otp_file) {
-> +            sifive_u_otp_backed_load(otp_file);
-> +            sifive_u_otp_backed_write(s->pa, s->paio, s->pdin);
-> +            sifive_u_otp_backed_unload();
-> +        }
-> +
->          s->pwe = val32;
->          break;
->      default:
-> @@ -165,6 +247,10 @@ static void sifive_u_otp_reset(DeviceState *dev)
->      /* Make a valid content of serial number */
->      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR] = s->serial;
->      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR + 1] = ~(s->serial);
-> +
-> +    /* Initialize file mmap and descriptor. */
-> +    otp_mmap = NULL;
-> +    otp_backed_fd = -1;
->  }
->
->  static void sifive_u_otp_class_init(ObjectClass *klass, void *data)
-> diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
-> index 639297564a..1342bd7342 100644
-> --- a/include/hw/riscv/sifive_u_otp.h
-> +++ b/include/hw/riscv/sifive_u_otp.h
-> @@ -52,6 +52,8 @@
->  #define SIFIVE_U_OTP(obj) \
->      OBJECT_CHECK(SiFiveUOTPState, (obj), TYPE_SIFIVE_U_OTP)
->
-> +extern const char *otp_file;
-> +
->  typedef struct SiFiveUOTPState {
->      /*< private >*/
->      SysBusDevice parent_obj;
-> diff --git a/qemu-options.hx b/qemu-options.hx
-> index 708583b4ce..eb9a54f4ed 100644
-> --- a/qemu-options.hx
-> +++ b/qemu-options.hx
-> @@ -415,10 +415,11 @@ ERST
->
->  DEF("boot", HAS_ARG, QEMU_OPTION_boot,
->      "-boot [order=drives][,once=drives][,menu=on|off]\n"
-> -    "      [,splash=sp_name][,splash-time=sp_time][,reboot-timeout=rb_time][,strict=on|off]\n"
-> +    "      [,splash=sp_name][,splash-time=sp_time][,reboot-timeout=rb_time][,strict=on|off][,otp-file=otp_file]\n"
->      "                'drives': floppy (a), hard disk (c), CD-ROM (d), network (n)\n"
->      "                'sp_name': the file's name that would be passed to bios as logo picture, if menu=on\n"
->      "                'sp_time': the period that splash picture last if menu=on, unit is ms\n"
-> +    "                'otp_file': the file name backed OTP\n"
->      "                'rb_timeout': the timeout before guest reboot when boot failed, unit is ms\n",
+Alistair Francis (3):
+  hw/intc: ibex_plic: Update the pending irqs
+  hw/intc: ibex_plic: Don't allow repeat interrupts on claimed lines
+  hw/intc: ibex_plic: Honour source priorities
 
-Instead of touching generic codes, could we add such property at the
-board level?
+ include/hw/intc/ibex_plic.h |  1 +
+ hw/intc/ibex_plic.c         | 36 +++++++++++++++++++++++++++++++-----
+ 2 files changed, 32 insertions(+), 5 deletions(-)
 
->      QEMU_ARCH_ALL)
->  SRST
+-- 
+2.27.0
 
-Regards,
-Bin
 
