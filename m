@@ -1,58 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jzCz1-0003qd-LD
-	for mharc-qemu-riscv@gnu.org; Sat, 25 Jul 2020 01:44:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47954)
+	id 1jzCz3-0003sB-02
+	for mharc-qemu-riscv@gnu.org; Sat, 25 Jul 2020 01:44:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47974)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=46842bc30=alistair.francis@wdc.com>)
- id 1jzCz0-0003qL-Ds; Sat, 25 Jul 2020 01:44:30 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:4659)
+ id 1jzCz1-0003qX-B8; Sat, 25 Jul 2020 01:44:31 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:4665)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=46842bc30=alistair.francis@wdc.com>)
- id 1jzCyy-00054Y-B6; Sat, 25 Jul 2020 01:44:30 -0400
+ id 1jzCyy-00054c-GY; Sat, 25 Jul 2020 01:44:31 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
  t=1595655869; x=1627191869;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=R6ZRT6wwYaLQhVVdX9vY8+1Sj9WCDCaCpExLFgi/9BE=;
- b=MiC/XI7eq1AiHb1Bk6t59muk9cuRO4GVpFgHXgnOqA0EGYbwYY5jVoMG
- lfjsxTSDcdalOXjW//B+nECCUOeDDvfq9PLcsrR2HK8YwWSwMbk8Fv+cO
- eOi+u4wdFOvW+7fkGtETgFE0oDRGD6u6uKpm8PTu2dZbBeiJYqEq6yqPc
- 8B7rgKjBTnTphb+j6SdlxqSuQMZR+ApV7ahGfGtF7jPjOLtZ4dLoFNgkb
- PP2QiX6vwGylCgp3PFlXcob7tn9ICHvn1QKJXU/KHiYpQPULZsizwJa/y
- 5ECGQdO+O9Dk1sjr8m+MyQpx2J+Agrd4TXcHnPzRZKuJBSdTMi+97s4hY Q==;
-IronPort-SDR: HkpjcQZVYBJgSd+sMf1sILQj6P+Ml2DRPGNQDAcymNutICxHaVrkp80YR1lFdIbOTMmeH4WNID
- dCH6U8AsxUc3LLgQYMbyQujLKTFViicMrq1Vtgc50kHV+eHQTFU6NX6dG+Bb6Xn6faAYTEAM2n
- e+1ZZH4GyUvgoGGiIv9oPZLUZfVqegAbjHd+F0fvGIUJ5b0t8IsN0smmn4Yn/zwsTnelso3Nid
- AFtTfO1mIO3s1HbNGBGBBE6yES1s/4PJksVb3MzkSmvWoUJIBMl6Jugs9tsNDJjSJSl+eu+RrH
- A14=
-X-IronPort-AV: E=Sophos;i="5.75,392,1589212800"; d="scan'208";a="144611246"
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=yat/4F+Ac/cA5mvkOHze9b1OlBey1fQI6/rSOkeqLbA=;
+ b=bwvc4OSMtBoJdKH5fObGRk1coMmA1Xth6Wj5WaE0Gco6Sa8QTzyhO7kM
+ +e0rjp127YpRHcP20BrV3GJsQ2Q0ZyhND9D8UkZzm7ng/+d97k9YJMqig
+ 4LAkf4a3kmstye9I+CWRlsmkTPTA6JgcV6b5kjy+UCvVbGjnZ5vkmULfy
+ k05gCgrzChctVokzQl7AnB42esbWXgIeSvEhDY7SsNeA9D657whUq+dz6
+ vy/SwwqRtAdnTQ8hvbqegkCdO2cgRjrrUcc9BYRuT77oVyRS6xYYnbVkc
+ 2jP6RRnDlB60Seo73e5NKj50klZA+ryw5W6cPp6pXahCLg/vCgMWUIjQa w==;
+IronPort-SDR: G0AUMufRQ14EljeUM/CyFqfcxr3ncH4n+eerCRmQZ6oX9i8Q9dZLN84oQCmSxmERih9XKto3E5
+ ycHTXqSmUul8xmdsGRXWrN1I5fQd4MZkxnNWEx2Uh7+3eSXocghiDN/7MIAQUN8AV+gx57hNs6
+ 1edpxCRVYfMTihRTCMS40/+b6w3DWelKKah7rA7xyhmaawhiHa7nI1QJ4UAQjG/i64J2GRtKGm
+ etwDW/HJ1WTrx8u6TF1H+6kcU63JSSGm7KV0bMXvLLBvtZCmzpYmLOGmX+Ln2XZUsQzaBM4RGv
+ flw=
+X-IronPort-AV: E=Sophos;i="5.75,392,1589212800"; d="scan'208";a="144611249"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 25 Jul 2020 13:44:24 +0800
-IronPort-SDR: aHqMaSAmay7ojzcYU23i4yfr0nO8FNQbepbw0By4c0fbUP3x/iUnVHr1z+izZgQwG7WwEGoOks
- 9lGZ1ke/rUWDFFkhZ9ueZ21dvmt1RJHIE=
+ by ob1.hgst.iphmx.com with ESMTP; 25 Jul 2020 13:44:26 +0800
+IronPort-SDR: e4Q703NC550Uv76eKasNUV08xNRLEoUfLlXzllcqO8WcGNwxs4aqybBzu70tfFVlTMDA8l3V6d
+ sEHn46AU6ErbF9dj61JQQkGSY2qMfX6DY=
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 24 Jul 2020 22:32:36 -0700
-IronPort-SDR: DlqQRt7cvXuLBknL8QhfX1Wgp4qzOXdtoW6kFHfg1BGQ2pIgI4uyo3+AC6tMESQjTYnW8bXUJD
- GO8iFvKJIgCg==
+ 24 Jul 2020 22:32:39 -0700
+IronPort-SDR: 8otWBHcKCa0sKw2WUuyNrShvLYwRylUgQa+B7mSU1Di0ZVmbQSJhcaiVd9SbQ9eNY4Acm0XOl+
+ boDxfWqFplHA==
 WDCIronportException: Internal
 Received: from cnf007830.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.58.124])
- by uls-op-cesaip02.wdc.com with ESMTP; 24 Jul 2020 22:44:23 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 24 Jul 2020 22:44:25 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	alistair23@gmail.com
-Subject: [PATCH v1 0/3] hw/intc: A few fixes for the Ibex PLIC
-Date: Fri, 24 Jul 2020 22:34:37 -0700
-Message-Id: <cover.1595655188.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 1/3] hw/intc: ibex_plic: Update the pending irqs
+Date: Fri, 24 Jul 2020 22:34:40 -0700
+Message-Id: <0693aa700a4c67c49b3f1c973a82b257fdb7198d.1595655188.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.27.0
+In-Reply-To: <cover.1595655188.git.alistair.francis@wdc.com>
+References: <cover.1595655188.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=216.71.154.45;
@@ -79,21 +81,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jul 2020 05:44:30 -0000
+X-List-Received-Date: Sat, 25 Jul 2020 05:44:31 -0000
 
-Recently some SiFive PLIC fixes have been merged into QEMU, this applies
-those fixes to the Ibex PLIC as well as an update on how claiming
-interrupts works.
+After a claim or a priority change we need to update the pending
+interrupts. This is based on the same patch for the SiFive PLIC:
+55765822804f5a58594e "riscv: plic: Add a couple of mising
+sifive_plic_update calls"
 
-Alistair Francis (3):
-  hw/intc: ibex_plic: Update the pending irqs
-  hw/intc: ibex_plic: Don't allow repeat interrupts on claimed lines
-  hw/intc: ibex_plic: Honour source priorities
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Cc: Jessica Clarke <jrtc27@jrtc27.com>
+---
+ hw/intc/ibex_plic.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
- include/hw/intc/ibex_plic.h |  1 +
- hw/intc/ibex_plic.c         | 36 +++++++++++++++++++++++++++++++-----
- 2 files changed, 32 insertions(+), 5 deletions(-)
-
+diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
+index 41079518c6..578edd2ce0 100644
+--- a/hw/intc/ibex_plic.c
++++ b/hw/intc/ibex_plic.c
+@@ -121,6 +121,9 @@ static uint64_t ibex_plic_read(void *opaque, hwaddr addr,
+         s->pending[pending_num] &= ~(1 << (s->claim % 32));
+ 
+         ret = s->claim;
++
++        /* Update the interrupt status after the claim */
++        ibex_plic_update(s);
+     }
+ 
+     return ret;
+@@ -140,6 +143,7 @@ static void ibex_plic_write(void *opaque, hwaddr addr,
+     } else if (addr_between(addr, s->priority_base, s->priority_num)) {
+         uint32_t irq = ((addr - s->priority_base) >> 2) + 1;
+         s->priority[irq] = value & 7;
++        ibex_plic_update(s);
+     } else if (addr_between(addr, s->enable_base, s->enable_num)) {
+         uint32_t enable_reg = (addr - s->enable_base) / 4;
+ 
 -- 
 2.27.0
 
