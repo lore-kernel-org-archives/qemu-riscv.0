@@ -1,74 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1jzCz6-00040w-IT
-	for mharc-qemu-riscv@gnu.org; Sat, 25 Jul 2020 01:44:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47992)
+	id 1jzLi8-0002gz-8C
+	for mharc-qemu-riscv@gnu.org; Sat, 25 Jul 2020 11:03:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40874)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=46842bc30=alistair.francis@wdc.com>)
- id 1jzCz4-0003ui-A7; Sat, 25 Jul 2020 01:44:34 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:4667)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=46842bc30=alistair.francis@wdc.com>)
- id 1jzCz2-00054k-J8; Sat, 25 Jul 2020 01:44:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1595655873; x=1627191873;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=IXjQaYSKp/KRab7qi0wsM5kCyfMdF4d7gzReheNEn6M=;
- b=f7xnuxAadjPhsk5ARb55xraUf8Npklx2ojDLz4yltY3uCPrwZdXCFP4s
- Yl920I2T+LuQH8yaxHj7IvLZFOUkWxdePNrnV0fGuYHwsIFCy0JgRKWck
- /qfdh5Eoqw7lSsVONXAVsh9ybAtlCS0d09grYJwUGULKgEOaVnM16/F7l
- SKFvsecOdSZp9tbPnC7cg261WzphqICyhgTUpyNp+9SAoPZUFNaRfypJQ
- yYknHowBd+edSipf5jq1VC9o3ef49sED92hz2B5ezSM3HNPtHAKRqYlBT
- mkQnbHe3t5BWcljmw3OMok0VHL5RG62ivD9tKcZVsCfCL+dRwSaXQ1Fj4 g==;
-IronPort-SDR: NyR4QwrnUdXkSnZ5RcNW4M4IfmzIcV3fD+KrCo+q8nVQd0PS+FFmwx4owgQh83UpfPtEvO6CLT
- mtJcTyJvDHtEC1IOQoJUPIeMHi97j2RH0GML0wg9FvZH02LzXaLR5Ot2yQd5Xr8JEBh71+qPTW
- 67rvdWCuzukZI3Px7R0lC5PajtKf14zN0nLC6SRXyKptYZQkzDbyqCd5LbjjuU1jr5beOy8bvI
- hN2AanuZZFlX0L7lNxhf6bWbCKU8EzP+WqKAe6mG9aN+JbwBPjr6rbok77flPwXCW32smz/Usv
- bjE=
-X-IronPort-AV: E=Sophos;i="5.75,392,1589212800"; d="scan'208";a="144611254"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 25 Jul 2020 13:44:32 +0800
-IronPort-SDR: YmBQGBCbEYcIZ4vQhZkUgdREXquX7Jyap0HuHmGwLa6hJjCdu+GXLLsMqHbjDeEnXJTzKxoDgi
- vliSsUdDGI3suhbMlM7u/nMIqt17ppsFY=
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 24 Jul 2020 22:32:45 -0700
-IronPort-SDR: zDMKS1vp1ZUrUZkzrts89+KXoclUMYL6tKC8DNGylqbCFiiY+mUEIerUE3L08+uYt8LMXZp8kT
- y13TFJJRJzlw==
-WDCIronportException: Internal
-Received: from cnf007830.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.58.124])
- by uls-op-cesaip02.wdc.com with ESMTP; 24 Jul 2020 22:44:31 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Subject: [PATCH v1 3/3] hw/intc: ibex_plic: Honour source priorities
-Date: Fri, 24 Jul 2020 22:34:45 -0700
-Message-Id: <a697ca8a31eff8eb18a88e09a28206063cf85d48.1595655188.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
+ id 1jzLi6-0002fH-QB
+ for qemu-riscv@nongnu.org; Sat, 25 Jul 2020 11:03:38 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:42334)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
+ id 1jzLi3-000869-M8
+ for qemu-riscv@nongnu.org; Sat, 25 Jul 2020 11:03:38 -0400
+Received: by mail-pf1-x442.google.com with SMTP id 1so6803996pfn.9
+ for <qemu-riscv@nongnu.org>; Sat, 25 Jul 2020 08:03:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=HaSMpiNAE5XGFluxVENpTh1dzhrXk37EmhnlnzeEltM=;
+ b=PMWOhQF+8VXZuvp+Yg95EkKAtodgXc5fCgJ2VecMzep+mT76n0iyQLlSqVwCtKMjZb
+ wCUXiqVn8NSOBuOEJePmvbqG1I/lrgVAv/MyDLqDGH7yKR28/pCz/J/ZZVx67g9Tutv0
+ RQHRpFapOsg8yEEpDJr20nLq7hPYbGrgkbbXmfcUEzBOrj05SloFh/e4aNTTb2KXSnYW
+ /QbVl2mNRFODbfSFBlT/HLTsj3MWtP0+BzwDs/L9bdujFeeF7eU+yxWYwalhsFN0zMJO
+ fBI/soN1VKjvvXjZFkaorGKISMejubo0AlciRZJbjQTPDw6BnFp+fAOcrxuBR2lM/0l9
+ v5WA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=HaSMpiNAE5XGFluxVENpTh1dzhrXk37EmhnlnzeEltM=;
+ b=afhkIizMLfNRc4/VPMWxPjDaiMjCJSg92diMVSfAcUx2/u5V2idZzyRDvsIaRlRok1
+ smJocyoL03Pya3o+XwiZcFyMlq/MZ9Ed1o1Q9BJ79pfALXX2IzH5Fo2SydaTyjHfNACI
+ 0FwVrk5f1nrHusJRGeXUpVocR92lpWUb0suZlV1D34R4i1cjUTQVDgu8UWfMpl9D52/+
+ 0kk+vaZng3RaxUhO4NmuwCN/szMVT712Lg64vz/42n2ounQExiJfukHu/GHruCvrM5a5
+ mUw9HqmjcImUD3Y5yap8SnIL1CUOdXC3ems8mtlWXVsJ2OXHFSZVkZdaiGeO5X7ixqpd
+ i9bw==
+X-Gm-Message-State: AOAM532Dxl9/CVIn1ZhKjAjoWajTt4nsHs7NIquWDQazd8LB4M4PP1uq
+ DGkpCva3kZbXE+L2uGbC46OlKQ==
+X-Google-Smtp-Source: ABdhPJxjJY7UVDpZ54xjReV6d6fHhTI3iYfdzY48yX+gAQrx7Z5OCHRlg6id4nfTZjtAeJkC4GdpBw==
+X-Received: by 2002:a62:7653:: with SMTP id r80mr13367336pfc.236.1595689413689; 
+ Sat, 25 Jul 2020 08:03:33 -0700 (PDT)
+Received: from hsinchu02.internal.sifive.com
+ (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
+ by smtp.gmail.com with ESMTPSA id g22sm9059783pgb.82.2020.07.25.08.03.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Jul 2020 08:03:33 -0700 (PDT)
+From: Zong Li <zong.li@sifive.com>
+To: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
+ sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Zong Li <zong.li@sifive.com>
+Subject: [PATCH v5 0/4] Fix some PMP implementations
+Date: Sat, 25 Jul 2020 23:03:23 +0800
+Message-Id: <cover.1595689201.git.zong.li@sifive.com>
 X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1595655188.git.alistair.francis@wdc.com>
-References: <cover.1595655188.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.154.45;
- envelope-from=prvs=46842bc30=alistair.francis@wdc.com;
- helo=esa6.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/25 01:44:23
-X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::442;
+ envelope-from=zong.li@sifive.com; helo=mail-pf1-x442.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,54 +78,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jul 2020 05:44:34 -0000
+X-List-Received-Date: Sat, 25 Jul 2020 15:03:39 -0000
 
-This patch follows what commit aa4d30f6618dc "riscv: plic: Honour source
-priorities" does and ensures that the highest priority interrupt will be
-serviced first.
+This patch set contains the fixes for wrong index of pmpcfg CSR on rv64,
+and the pmp range in CSR function table. After 3rd version of this patch
+series, we also fix the PMP issues such as wrong physical address
+translation and ignoring PMP checking.
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Cc: Jessica Clarke <jrtc27@jrtc27.com>
----
- hw/intc/ibex_plic.c | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+Changed in v5:
+ - Pick the suggestion which was lost in last version.
 
-diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
-index 669247ef08..f49fa67c91 100644
---- a/hw/intc/ibex_plic.c
-+++ b/hw/intc/ibex_plic.c
-@@ -57,6 +57,8 @@ static void ibex_plic_irqs_set_pending(IbexPlicState *s, int irq, bool level)
- static bool ibex_plic_irqs_pending(IbexPlicState *s, uint32_t context)
- {
-     int i;
-+    uint32_t max_irq = 0;
-+    uint32_t max_prio = s->threshold;
- 
-     for (i = 0; i < s->pending_num; i++) {
-         uint32_t irq_num = ctz64(s->pending[i]) + (i * 32);
-@@ -66,14 +68,17 @@ static bool ibex_plic_irqs_pending(IbexPlicState *s, uint32_t context)
-             continue;
-         }
- 
--        if (s->priority[irq_num] > s->threshold) {
--            if (!s->claim) {
--                s->claim = irq_num;
--            }
--            return true;
-+        if (s->priority[irq_num] > max_prio) {
-+            max_irq = irq_num;
-+            max_prio = s->priority[irq_num];
-         }
-     }
- 
-+    if (max_irq) {
-+        s->claim = max_irq;
-+        return true;
-+    }
-+
-     return false;
- }
- 
+Changed in v4:
+ - Refine the implementation. Suggested by Bin Meng.
+ - Add fix for PMP checking was ignored.
+
+Changed in v3:
+ - Refine the implementation. Suggested by Bin Meng.
+ - Add fix for wrong pphysical address translation.
+
+Changed in v2:
+ - Move out the shifting operation from loop. Suggested by Bin Meng.
+
+Zong Li (4):
+  target/riscv: Fix the range of pmpcfg of CSR funcion table
+  target/riscv/pmp.c: Fix the index offset on RV64
+  target/riscv: Fix the translation of physical address
+  target/riscv: Change the TLB page size depends on PMP entries.
+
+ target/riscv/cpu_helper.c | 13 ++++++--
+ target/riscv/csr.c        |  2 +-
+ target/riscv/pmp.c        | 63 ++++++++++++++++++++++++++++++++++++++-
+ target/riscv/pmp.h        |  2 ++
+ 4 files changed, 75 insertions(+), 5 deletions(-)
+
 -- 
 2.27.0
 
