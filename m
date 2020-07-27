@@ -1,60 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k0Bvv-0008GV-3g
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Jul 2020 18:49:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57498)
+	id 1k0Cqq-0005hb-GF
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Jul 2020 19:48:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39700)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k0Bvt-0008Fs-LK; Mon, 27 Jul 2020 18:49:21 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:38785)
+ id 1k0Cqo-0005gv-FD; Mon, 27 Jul 2020 19:48:10 -0400
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:38959)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k0Bvr-00027z-TO; Mon, 27 Jul 2020 18:49:21 -0400
-Received: by mail-io1-xd43.google.com with SMTP id l1so18748887ioh.5;
- Mon, 27 Jul 2020 15:49:19 -0700 (PDT)
+ id 1k0Cqm-0000ac-OM; Mon, 27 Jul 2020 19:48:10 -0400
+Received: by mail-io1-xd44.google.com with SMTP id z6so18931421iow.6;
+ Mon, 27 Jul 2020 16:48:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=cv1uHciEEYiPiKTkN7vOzBhm3aM/wkxwyDHaZBgNM1c=;
- b=I5adfvoT5r0eS1L+68NZYcc53AOsLul5SrhvQjnVw7bx6iVpIPyDLtUY83JMKcIbWg
- J0JOtD+cKiOFkFOmvMk/FvBSwJecr/88EG/QKO5XwFSD2LIqK3V95pHuYHKkc2DUJ7cH
- twOzFoH4bE34InurUR0ZEqt7c0fqHCPUj+Zrn/YswB6GrF7fWVSguEXWo41mde5Z7iXK
- Q1ysWXapf8vq5RbI6Hw4rQutfOHkh+usKdwtE/LOSbVg/wdExmsd/I4w/dr3Mbcaaijm
- Tgc+G7+J7NpPbMSihrHjr3C19KJ8fuFbdSjCRvmQ+hMCmld5V8tZ0qES3/GGSDstbLyP
- SAKw==
+ :cc; bh=xRSnipLXxx5JJUoCpXfRUL0NwQn7XhzydcMr06MSod4=;
+ b=uwPfxmnvjDdk7DDeT/r1knho+g6sqLzuD05zM7DLJ+DPtQHVNt81f+fw9g8zzu03za
+ UdPIN2XVb19FsvgUOrhC3HUgqxn0cND0dkYMzVEm9EOAYOS4dGxJ1l210/BtEb2Zd1aI
+ QLn7F6VgZnVVe3nWUQFG/aPJ4Hq1uBh9pObDmtRwUsy2WDsJCQ0IFhpbpc5PcVkjSJLd
+ o60gMvVltW7MHA82deteQMheDbfdLf0Tfq4du9HKyonbvfkLVUQhAGtb6Oe4oHVG8MYs
+ kqV36VNc1CysRhceCBYT3GBJPb6FOl5QyqsNkLN4Pd4S9ChT1XWFCPgmyEQtHTMfqCDY
+ IaXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=cv1uHciEEYiPiKTkN7vOzBhm3aM/wkxwyDHaZBgNM1c=;
- b=BZ8wqtHnkGyEq3MEw8AO3cwK+in/xujFG6YDtpCvvkreWqKtn8e9umBeCqmZnkhM8W
- IeAYK3nntAR/u0cmHgk7puXBMwoQmVfw02YdGAGIPneeViShkMaN+5M99EJWWQPnlkeF
- xRTWAFjILc0M66SR2NYJGw3cL9ob7ELFW2fVn0p7HjZbdkMb/u/211DyFKUCoKWlebmN
- 3g+yN1VBj3AxMWR3lQbdmaFjJ/g+/Z679m37++cRPmiHqSOxGdckGNLLkx7GAQ3fSljL
- xEzt/uQEsW2kJTSCM6kMmdpYh5VPh/UPz2qRuztPwKfIkMgr8+Av5dPln4ocqsR61wbJ
- R3Eg==
-X-Gm-Message-State: AOAM5318FRCIbe9uBssNaaZkJkclIZkcPlbVCFgimnUtSSnx15P7ijyG
- tKqqg8iyz1T7hHx20ESJiuN6QjmwvpLM1UyH5jA=
-X-Google-Smtp-Source: ABdhPJyXiQf7w7JrkMdJ2WOr3A9MoJdtPYMHzFaP90xuaTJRYhlcHmGxdPbD0JfRmvTudCMaBkUWgTueTWPvC85W+eQ=
-X-Received: by 2002:a6b:e006:: with SMTP id z6mr22016297iog.118.1595890158467; 
- Mon, 27 Jul 2020 15:49:18 -0700 (PDT)
+ bh=xRSnipLXxx5JJUoCpXfRUL0NwQn7XhzydcMr06MSod4=;
+ b=sHUonEDag086Jcr8WDA96shkVSKu8tnOuU3sqVloNURy4ToM2ZRI2asUZSerd08YZg
+ KhtRN4Tg8wX9E1h0OR5UmciHHfc6hTE8wwKWB+BkosJz3q6fIa9wZWUjkRjMtzZm58Rm
+ vSMlHIXDvyEfQGb6QYZFNLRjRuBFirvjAr9By4BXSNNYGsH1zyhp5cwqLEvHDdeUCtTL
+ dNoFiaBNi3FpKqiahqgU+t5rtQWPIMVmycYRYiEF6bpfAJY+C6l2Apl1tu8iK2UCpmxF
+ YkjHglC7F95wV81gHHJN++b+RUfLJJHJhJyA3olX/rwMDaV4FkFAvpQvJkyNgKDgjrE4
+ tLbA==
+X-Gm-Message-State: AOAM532VOcz+E7DGgBgS9xroQXGeuqLQRhv0K47T9yKPN057uyObsQLM
+ nK+88GYqCg664rbRtgWfD9KULATdMkdrIpBC8Sg=
+X-Google-Smtp-Source: ABdhPJxiTi73hz4aMSoUlZxIZlzl0pJ3AlIBqOsuFD0/2gLMQCmOwFSIODZWkjf6hDYCojVyc26D0ZjA0DptawX0beg=
+X-Received: by 2002:a6b:640f:: with SMTP id t15mr25991311iog.175.1595893687195; 
+ Mon, 27 Jul 2020 16:48:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1595689201.git.zong.li@sifive.com>
- <a3b3b05f429a50b5ea061f4e8385d4f8d6d77d58.1595689201.git.zong.li@sifive.com>
-In-Reply-To: <a3b3b05f429a50b5ea061f4e8385d4f8d6d77d58.1595689201.git.zong.li@sifive.com>
+References: <20200724002807.441147-1-richard.henderson@linaro.org>
+In-Reply-To: <20200724002807.441147-1-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 27 Jul 2020 15:39:01 -0700
-Message-ID: <CAKmqyKNgVD2sb4GEdmFwgHtpbooV=dNkxHHN+mNWDzC1e1S1DQ@mail.gmail.com>
-Subject: Re: [PATCH v5 3/4] target/riscv: Fix the translation of physical
- address
-To: Zong Li <zong.li@sifive.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Date: Mon, 27 Jul 2020 16:37:51 -0700
+Message-ID: <CAKmqyKMwv7cWf+b9AL4ufsB3oJt56SUkDKa45JqhoDuuSh+7hA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] target/riscv: NaN-boxing for multiple precison
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Frank Chang <frank.chang@sifive.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, liuzhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -63,8 +58,8 @@ X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,52 +72,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jul 2020 22:49:21 -0000
+X-List-Received-Date: Mon, 27 Jul 2020 23:48:10 -0000
 
-On Sat, Jul 25, 2020 at 8:05 AM Zong Li <zong.li@sifive.com> wrote:
+On Thu, Jul 23, 2020 at 5:28 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> The real physical address should add the 12 bits page offset. It also
-> causes the PMP wrong checking due to the minimum granularity of PMP is
-> 4 byte, but we always get the physical address which is 4KB alignment,
-> that means, we always use the start address of the page to check PMP for
-> all addresses which in the same page.
+> This is my take on Liu Zhiwei's patch set:
+> https://patchew.org/QEMU/20200626205917.4545-1-zhiwei_liu@c-sky.com
+>
+> This differs from Zhiwei's v1 in:
+>
+>  * If a helper is involved, the helper does the boxing and unboxing.
+>
+>  * Which leaves only LDW and FSGN*.S as the only instructions that
+>    are expanded inline which need to handle nanboxing.
+>
+>  * All mention of RVD is dropped vs boxing.  This means that an
+>    RVF-only cpu will still generate and check nanboxes into the
+>    64-bit cpu_fpu slots.  There should be no way an RVF-only cpu
+>    can generate an unboxed cpu_fpu value.
+>
+>    This choice is made to speed up the common case: RVF+RVD, so
+>    that we do not have to check whether RVD is enabled.
+>
+>  * The translate.c primitives take TCGv values rather than fpu
+>    regno, which will make it possible to use them with RVV,
+>    since v0.9 does proper nanboxing.
+>
+>  * I have adjusted the current naming to be float32 specific ("*_s"),
+>    to avoid confusion with the float16 data type supported by RVV.
 
-So riscv_cpu_tlb_fill() will clear these bits when calling
-tlb_set_page(), so this won't have an impact on actual translation
-(although it will change in input address for 2-stage translation, but
-that seems fine).
-
-Your point about PMP seems correct as we allow a smaller then page
-granularity this seems like the right approach.
-
-Can you edit riscv_cpu_get_phys_page_debug() to mask these bits out at
-the end? Otherwise we will break what callers to
-cpu_get_phys_page_attrs_debug() expect.
+Thanks Richard. As Zhiwei has reviewed all of these I have applied
+them to the riscv-to-apply.next tree for 5.2.
 
 Alistair
 
 >
-> Signed-off-by: Zong Li <zong.li@sifive.com>
-> ---
->  target/riscv/cpu_helper.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 75d2ae3434..08b069f0c9 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -543,7 +543,8 @@ restart:
->              /* for superpage mappings, make a fake leaf PTE for the TLB's
->                 benefit. */
->              target_ulong vpn = addr >> PGSHIFT;
-> -            *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
-> +            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
-> +                        (addr & ~TARGET_PAGE_MASK);
+> r~
 >
->              /* set permissions on the TLB entry */
->              if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
+>
+> LIU Zhiwei (2):
+>   target/riscv: Clean up fmv.w.x
+>   target/riscv: check before allocating TCG temps
+>
+> Richard Henderson (5):
+>   target/riscv: Generate nanboxed results from fp helpers
+>   target/riscv: Generalize gen_nanbox_fpr to gen_nanbox_s
+>   target/riscv: Generate nanboxed results from trans_rvf.inc.c
+>   target/riscv: Check nanboxed inputs to fp helpers
+>   target/riscv: Check nanboxed inputs in trans_rvf.inc.c
+>
+>  target/riscv/internals.h                |  16 ++++
+>  target/riscv/fpu_helper.c               | 102 ++++++++++++++++--------
+>  target/riscv/insn_trans/trans_rvd.inc.c |   8 +-
+>  target/riscv/insn_trans/trans_rvf.inc.c |  99 ++++++++++++++---------
+>  target/riscv/translate.c                |  29 +++++++
+>  5 files changed, 178 insertions(+), 76 deletions(-)
+>
 > --
-> 2.27.0
->
+> 2.25.1
 >
 
