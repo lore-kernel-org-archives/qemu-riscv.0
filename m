@@ -1,94 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k0Kyc-0007fc-Ks
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Jul 2020 04:28:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50374)
+	id 1k0RbA-0000wW-CP
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Jul 2020 11:33:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48898)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1k0KyZ-0007dT-GS
- for qemu-riscv@nongnu.org; Tue, 28 Jul 2020 04:28:43 -0400
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:21014
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1k0KyX-00013x-7m
- for qemu-riscv@nongnu.org; Tue, 28 Jul 2020 04:28:43 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595924920;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gaJr8e9WETC/JPrw5OplSqXZ5AQhNL31V1HMx/YY8CI=;
- b=KZ6kaW4t4RYciSYyes4L6c1axzn0a+4ZiyiBalgp6pY4WQ29nFh1ELWW7vP3SDfl8PB8m4
- PyInMoAZYRzjsg8ERNYAlbCpyunbz29FVCmh5yJ/CF6EFWZT2O62QsAOMmDBp4ccpmcp/E
- nCRcqN3uShIJ4xwYW8dDFBsPKIuFqvs=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-149-DxzHWaDKMm2_gVTeFBqc9g-1; Tue, 28 Jul 2020 04:28:39 -0400
-X-MC-Unique: DxzHWaDKMm2_gVTeFBqc9g-1
-Received: by mail-wr1-f71.google.com with SMTP id r29so678560wrr.10
- for <qemu-riscv@nongnu.org>; Tue, 28 Jul 2020 01:28:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1k0Rb9-0000vR-CV; Tue, 28 Jul 2020 11:32:59 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:35779)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1k0Rb7-0003M7-PF; Tue, 28 Jul 2020 11:32:59 -0400
+Received: by mail-io1-xd42.google.com with SMTP id s189so13929831iod.2;
+ Tue, 28 Jul 2020 08:32:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=aFiggvsybxP7Q+K3MUxmqRhc2eENIdqqqh2Sgg6FwSA=;
+ b=HsvX8jEPFGV1imUvxGXB6TqbHibeXL99BAweT80B49/e6Silh0P87mtljdW7uS7zz7
+ njG/bQ65jmYThbJm7IhazJxFaeoOR05jphXbfktp/UOXX3biVeMnhfaXL9FEwEws6Jgr
+ LfmVvSM2xZIS5MSDFre+ExrlwWS7O2DWzBkSNqln4LQRP3by6tSEiKFJSkwE+PUANGGk
+ wehp9VtXOodEWpjdcxAdYSMP37O7kz+EQF+NVdzUgeE15Wod9LxG7bKiIb9LGyf68VWI
+ h7CmjtqE/nznt6Dgq13bY3NcNzYeY1stkT5rWWPOWRyxJ3uajXpUDB30gMzTJCca1brm
+ 6EpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=gaJr8e9WETC/JPrw5OplSqXZ5AQhNL31V1HMx/YY8CI=;
- b=iFUi02QLvlQ9oqA1rM3iDll/pSnsK6EILFnSavZnyqoRzP2O8Kl4olEQkfMugaM00q
- 91zWypX9am6foN5exTxim9V6RUQElC1nzgtLisppS5EQMUGwsnJ0s9Q1rWYcOuFEpYS2
- qGwluSIMfTSvY3R97SqBvqKWn2cC4AUy7VWKWxO3Iy4INPiyi7ADl/uZjuyFv6jKY+lN
- bBaIGHufn8MuTfKElKO3J0Y+xkHpWCynWETltY2/ZYoFTR1QB3Xfd1ZceWtJtOCxuWXC
- 6S3BIDsNrtEmFWxETBEW0c18aH002uPCHgFdYw1SQcQjlKDsb/zihvDXoXgs8QW70KzL
- n0AQ==
-X-Gm-Message-State: AOAM530fYPLvZmv6ZR21Hkd96gc+MGUJDV5su7Adxke/qsitSkdm4ohZ
- ENrlnwoHUf5qA3zEB6dsYggWNigoTc8HTVFEaWhdUJMDgJcgjPkQoHzoT1nJ2dJN/kguhR0/qs5
- yyYt8MokwWyYt9H4=
-X-Received: by 2002:adf:b7cd:: with SMTP id t13mr22997577wre.424.1595924915259; 
- Tue, 28 Jul 2020 01:28:35 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx25cX3CC6dBRNl5l9cKtVkgY/ACcCqrKZCwOyNPG7DK61L0S8jZgkgwCw37mfU1LCRtfWXEw==
-X-Received: by 2002:adf:b7cd:: with SMTP id t13mr22997499wre.424.1595924914023; 
- Tue, 28 Jul 2020 01:28:34 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:4502:3ee3:2bae:c612?
- ([2001:b07:6468:f312:4502:3ee3:2bae:c612])
- by smtp.gmail.com with ESMTPSA id p8sm17364808wrq.9.2020.07.28.01.28.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jul 2020 01:28:33 -0700 (PDT)
-Subject: Re: [RFC PATCH 1/2] hw/riscv: sifive_u: Add file-backed OTP.
- softmmu/vl: add otp-file to boot option
-To: Green Wan <green.wan@sifive.com>, Bin Meng <bmeng.cn@gmail.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-References: <20200724095112.2615-1-green.wan@sifive.com>
- <20200724095112.2615-2-green.wan@sifive.com>
- <CAEUhbmVgqNEe9k9p7Fto08_Rsu0W3d7UfzSK0HcprTk3cSzgaQ@mail.gmail.com>
- <CAJivOr7qLJvryjQXUE7Oro2aSzWv1Sj6AR0gO9TO6+FL9HwkGw@mail.gmail.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <74c8704f-cda2-ecb7-6cf6-e3ebd7bd9ba3@redhat.com>
-Date: Tue, 28 Jul 2020 10:28:32 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=aFiggvsybxP7Q+K3MUxmqRhc2eENIdqqqh2Sgg6FwSA=;
+ b=Cez/u8JIuvvCI4e835ACSSC0WjoDuEI8ZEEB7hlEXJE2Z1Z4XUVPxf+9jLysWAxNnq
+ deQ7EA0paha0eZVLcxNfYPss6iUNX+9IWEac1eKAY9J++QjLRQrpC28fMaGu4k/jmql5
+ jjklKL2JeOsCTkotSk5KJrUrEGZV+RC6NHQQICFHdJzEo3TmWIydXVFOQhEM9qETKgZU
+ r5eKAbF6vusexnznLs8GC7izjpFZEGC/p5oeVLdajGBJMJo/5PbbjLe0GX9ZYpriAoPB
+ 1UprjtJC3ajlF9ZTxHcZdp6PJ9mlepv3u3RMQwH49Rb+iqc0+0Ax/1xEwa0zC97x6oA3
+ avFA==
+X-Gm-Message-State: AOAM530VDZRZHvKK/fUcLe6j5PDoOVk/B6r0gi9HFvHgSuiYSOCDXM5e
+ VEx84PSLCvABChpxbjjGXbGRGLLuHZhBskMoBPc=
+X-Google-Smtp-Source: ABdhPJxoj7UHLrYCkgoHrAXLwuILv1cnBNW9I9zIU1rE4GFVStbxrpSGQDZ2xi5a+lLTMdvZH1b5bD/99osMfo4fJPE=
+X-Received: by 2002:a02:5b83:: with SMTP id g125mr33368303jab.91.1595950376114; 
+ Tue, 28 Jul 2020 08:32:56 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAJivOr7qLJvryjQXUE7Oro2aSzWv1Sj6AR0gO9TO6+FL9HwkGw@mail.gmail.com>
-Content-Language: en-US
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=207.211.31.81; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/28 00:06:48
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -30
-X-Spam_score: -3.1
-X-Spam_bar: ---
-X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <1595227748-24720-1-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1595227748-24720-1-git-send-email-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 28 Jul 2020 08:22:37 -0700
+Message-ID: <CAKmqyKPSaB_GVM7K6BTzFApSEBWE0xE4_wXi0GbHnwfT0kRXig@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: sifive_u: Add a dummy L2 cache controller device
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -101,240 +76,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jul 2020 08:28:43 -0000
+X-List-Received-Date: Tue, 28 Jul 2020 15:32:59 -0000
 
-On 28/07/20 04:02, Green Wan wrote:
-> Hi Bin,
-> 
-> Thanks for the reply.
-> 
-> I think we can add property to sifive_u_otp_properties[] (something like
-> below) and remove generic code dependency. What do you think of it?
-> 
-> @@ -243,6 +245,7 @@ static const MemoryRegionOps sifive_u_otp_ops = {
->  
->  static Property sifive_u_otp_properties[] = {
->      DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
-> +    DEFINE_PROP_STRING("otp_file", SiFiveUOTPState, otp_file),
->      DEFINE_PROP_END_OF_LIST(),
->  };
-> 
->  typedef struct SiFiveUOTPState {
->      /*< private >*/
->      SysBusDevice parent_obj;
-> @@ -77,6 +75,7 @@ typedef struct SiFiveUOTPState {
->      uint32_t fuse[SIFIVE_U_OTP_NUM_FUSES];
->      /* config */
->      uint32_t serial;
-> +    char *otp_file;
->      uint32_t fuse_wo[SIFIVE_U_OTP_NUM_FUSES];
->  } SiFiveUOTPState;
+On Sun, Jul 19, 2020 at 11:50 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> It is enough to simply map the SiFive FU540 L2 cache controller
+> into the MMIO space using create_unimplemented_device(), with an
+> FDT fragment generated, to make the latest upstream U-Boot happy.
+>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Yes, I agree.  (Also, dashes are preferred to underscores these days).
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-You can also add an alias to the machine so that you can access this
-with "-machine otp-file=...".
+Applied to riscv-to-apply.next tree for 5.2.
 
-Paolo
+Alistair
 
-> Regards,
-> Green
-> 
-> 
-> On Fri, Jul 24, 2020 at 10:20 PM Bin Meng <bmeng.cn@gmail.com
-> <mailto:bmeng.cn@gmail.com>> wrote:
-> 
->     Hi Green,
-> 
->     On Fri, Jul 24, 2020 at 5:51 PM Green Wan <green.wan@sifive.com
->     <mailto:green.wan@sifive.com>> wrote:
->     >
->     > Add a file-backed implementation for OTP of sifive_u machine. Use
->     > '-boot otp-file=xxx' to enable it. Do file open, mmap and close
->     > for every OTP read/write in case keep the update-to-date snapshot
->     > of OTP.
->     >
->     > Signed-off-by: Green Wan <green.wan@sifive.com
->     <mailto:green.wan@sifive.com>>
->     > ---
->     >  hw/riscv/sifive_u_otp.c         | 88
->     ++++++++++++++++++++++++++++++++-
->     >  include/hw/riscv/sifive_u_otp.h |  2 +
->     >  qemu-options.hx                 |  3 +-
->     >  softmmu/vl.c                    |  6 ++-
->     >  4 files changed, 96 insertions(+), 3 deletions(-)
->     >
->     > diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
->     > index f6ecbaa2ca..26e1965821 100644
->     > --- a/hw/riscv/sifive_u_otp.c
->     > +++ b/hw/riscv/sifive_u_otp.c
->     > @@ -24,6 +24,72 @@
->     >  #include "qemu/log.h"
->     >  #include "qemu/module.h"
->     >  #include "hw/riscv/sifive_u_otp.h"
->     > +#include <stdio.h>
->     > +#include <stdlib.h>
->     > +#include <sys/types.h>
->     > +#include <sys/stat.h>
->     > +#include <unistd.h>
->     > +#include <fcntl.h>
->     > +#include <sys/mman.h>
->     > +#include <string.h>
->     > +
->     > +#define TRACE_PREFIX            "FU540_OTP: "
->     > +#define SIFIVE_FU540_OTP_SIZE   (SIFIVE_U_OTP_NUM_FUSES * 4)
->     > +
->     > +static int otp_backed_fd;
->     > +static unsigned int *otp_mmap;
->     > +
->     > +static void sifive_u_otp_backed_load(const char *filename);
->     > +static uint64_t sifive_u_otp_backed_read(uint32_t fuseidx);
->     > +static void sifive_u_otp_backed_write(uint32_t fuseidx,
->     > +                                      uint32_t paio,
->     > +                                      uint32_t pdin);
->     > +static void sifive_u_otp_backed_unload(void);
->     > +
->     > +void sifive_u_otp_backed_load(const char *filename)
->     > +{
->     > +    if (otp_backed_fd < 0) {
->     > +
->     > +        otp_backed_fd = open(filename, O_RDWR);
->     > +
->     > +        if (otp_backed_fd < 0)
->     > +            qemu_log_mask(LOG_TRACE,
->     > +                          TRACE_PREFIX "Warning: can't open otp
->     file\n");
->     > +        else {
->     > +
->     > +            otp_mmap = (unsigned int *)mmap(0,
->     > +                                            SIFIVE_FU540_OTP_SIZE,
->     > +                                            PROT_READ |
->     PROT_WRITE | PROT_EXEC,
->     > +                                            MAP_FILE | MAP_SHARED,
->     > +                                            otp_backed_fd,
->     > +                                            0);
->     > +
->     > +            if (otp_mmap == MAP_FAILED)
->     > +                qemu_log_mask(LOG_TRACE,
->     > +                              TRACE_PREFIX "Warning: can't mmap
->     otp file\n");
->     > +        }
->     > +    }
->     > +
->     > +}
->     > +
->     > +uint64_t sifive_u_otp_backed_read(uint32_t fuseidx)
->     > +{
->     > +    return (uint64_t)(otp_mmap[fuseidx]);
->     > +}
->     > +
->     > +void sifive_u_otp_backed_write(uint32_t fuseidx, uint32_t paio,
->     uint32_t pdin)
->     > +{
->     > +    otp_mmap[fuseidx] &= ~(pdin << paio);
->     > +    otp_mmap[fuseidx] |= (pdin << paio);
->     > +}
->     > +
->     > +
->     > +void sifive_u_otp_backed_unload(void)
->     > +{
->     > +    munmap(otp_mmap, SIFIVE_FU540_OTP_SIZE);
->     > +    close(otp_backed_fd);
->     > +    otp_backed_fd = -1;
->     > +}
->     >
->     >  static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr,
->     unsigned int size)
->     >  {
->     > @@ -46,7 +112,17 @@ static uint64_t sifive_u_otp_read(void
->     *opaque, hwaddr addr, unsigned int size)
->     >          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
->     >              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
->     >              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
->     > -            return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
->     > +
->     > +            if (otp_file) {
->     > +                uint64_t val;
->     > +
->     > +                sifive_u_otp_backed_load(otp_file);
->     > +                val = sifive_u_otp_backed_read(s->pa);
->     > +                sifive_u_otp_backed_unload();
->     > +
->     > +                return val;
->     > +            } else
->     > +                return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
->     >          } else {
->     >              return 0xff;
->     >          }
->     > @@ -123,6 +199,12 @@ static void sifive_u_otp_write(void *opaque,
->     hwaddr addr,
->     >          s->ptrim = val32;
->     >          break;
->     >      case SIFIVE_U_OTP_PWE:
->     > +        if (otp_file) {
->     > +            sifive_u_otp_backed_load(otp_file);
->     > +            sifive_u_otp_backed_write(s->pa, s->paio, s->pdin);
->     > +            sifive_u_otp_backed_unload();
->     > +        }
->     > +
->     >          s->pwe = val32;
->     >          break;
->     >      default:
->     > @@ -165,6 +247,10 @@ static void sifive_u_otp_reset(DeviceState *dev)
->     >      /* Make a valid content of serial number */
->     >      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR] = s->serial;
->     >      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR + 1] = ~(s->serial);
->     > +
->     > +    /* Initialize file mmap and descriptor. */
->     > +    otp_mmap = NULL;
->     > +    otp_backed_fd = -1;
->     >  }
->     >
->     >  static void sifive_u_otp_class_init(ObjectClass *klass, void *data)
->     > diff --git a/include/hw/riscv/sifive_u_otp.h
->     b/include/hw/riscv/sifive_u_otp.h
->     > index 639297564a..1342bd7342 100644
->     > --- a/include/hw/riscv/sifive_u_otp.h
->     > +++ b/include/hw/riscv/sifive_u_otp.h
->     > @@ -52,6 +52,8 @@
->     >  #define SIFIVE_U_OTP(obj) \
->     >      OBJECT_CHECK(SiFiveUOTPState, (obj), TYPE_SIFIVE_U_OTP)
->     >
->     > +extern const char *otp_file;
->     > +
->     >  typedef struct SiFiveUOTPState {
->     >      /*< private >*/
->     >      SysBusDevice parent_obj;
->     > diff --git a/qemu-options.hx b/qemu-options.hx
->     > index 708583b4ce..eb9a54f4ed 100644
->     > --- a/qemu-options.hx
->     > +++ b/qemu-options.hx
->     > @@ -415,10 +415,11 @@ ERST
->     >
->     >  DEF("boot", HAS_ARG, QEMU_OPTION_boot,
->     >      "-boot [order=drives][,once=drives][,menu=on|off]\n"
->     > -    "     
->     [,splash=sp_name][,splash-time=sp_time][,reboot-timeout=rb_time][,strict=on|off]\n"
->     > +    "     
->     [,splash=sp_name][,splash-time=sp_time][,reboot-timeout=rb_time][,strict=on|off][,otp-file=otp_file]\n"
->     >      "                'drives': floppy (a), hard disk (c), CD-ROM
->     (d), network (n)\n"
->     >      "                'sp_name': the file's name that would be
->     passed to bios as logo picture, if menu=on\n"
->     >      "                'sp_time': the period that splash picture
->     last if menu=on, unit is ms\n"
->     > +    "                'otp_file': the file name backed OTP\n"
->     >      "                'rb_timeout': the timeout before guest
->     reboot when boot failed, unit is ms\n",
-> 
->     Instead of touching generic codes, could we add such property at the
->     board level?
-> 
->     >      QEMU_ARCH_ALL)
->     >  SRST
-> 
->     Regards,
->     Bin
-> 
-
+> ---
+>
+>  hw/riscv/sifive_u.c         | 22 ++++++++++++++++++++++
+>  include/hw/riscv/sifive_u.h |  4 ++++
+>  2 files changed, 26 insertions(+)
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 6487d5e..f771cb0 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -72,6 +72,7 @@ static const struct MemmapEntry {
+>      [SIFIVE_U_DEBUG] =    {        0x0,      0x100 },
+>      [SIFIVE_U_MROM] =     {     0x1000,     0xf000 },
+>      [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
+> +    [SIFIVE_U_L2CC] =     {  0x2010000,     0x1000 },
+>      [SIFIVE_U_L2LIM] =    {  0x8000000,  0x2000000 },
+>      [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
+>      [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
+> @@ -302,6 +303,24 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      qemu_fdt_setprop_string(fdt, nodename, "compatible", "gpio-restart");
+>      g_free(nodename);
+>
+> +    nodename = g_strdup_printf("/soc/cache-controller@%lx",
+> +        (long)memmap[SIFIVE_U_L2CC].base);
+> +    qemu_fdt_add_subnode(fdt, nodename);
+> +    qemu_fdt_setprop_cells(fdt, nodename, "reg",
+> +        0x0, memmap[SIFIVE_U_L2CC].base,
+> +        0x0, memmap[SIFIVE_U_L2CC].size);
+> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
+> +        SIFIVE_U_L2CC_IRQ0, SIFIVE_U_L2CC_IRQ1, SIFIVE_U_L2CC_IRQ2);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
+> +    qemu_fdt_setprop(fdt, nodename, "cache-unified", NULL, 0);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "cache-size", 2097152);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "cache-sets", 1024);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "cache-level", 2);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "cache-block-size", 64);
+> +    qemu_fdt_setprop_string(fdt, nodename, "compatible",
+> +                            "sifive,fu540-c000-ccache");
+> +    g_free(nodename);
+> +
+>      phy_phandle = phandle++;
+>      nodename = g_strdup_printf("/soc/ethernet@%lx",
+>          (long)memmap[SIFIVE_U_GEM].base);
+> @@ -732,6 +751,9 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>
+>      create_unimplemented_device("riscv.sifive.u.dmc",
+>          memmap[SIFIVE_U_DMC].base, memmap[SIFIVE_U_DMC].size);
+> +
+> +    create_unimplemented_device("riscv.sifive.u.l2cc",
+> +        memmap[SIFIVE_U_L2CC].base, memmap[SIFIVE_U_L2CC].size);
+>  }
+>
+>  static Property sifive_u_soc_props[] = {
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index aba4d01..d3c0c00 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -71,6 +71,7 @@ enum {
+>      SIFIVE_U_DEBUG,
+>      SIFIVE_U_MROM,
+>      SIFIVE_U_CLINT,
+> +    SIFIVE_U_L2CC,
+>      SIFIVE_U_L2LIM,
+>      SIFIVE_U_PLIC,
+>      SIFIVE_U_PRCI,
+> @@ -86,6 +87,9 @@ enum {
+>  };
+>
+>  enum {
+> +    SIFIVE_U_L2CC_IRQ0 = 1,
+> +    SIFIVE_U_L2CC_IRQ1 = 2,
+> +    SIFIVE_U_L2CC_IRQ2 = 3,
+>      SIFIVE_U_UART0_IRQ = 4,
+>      SIFIVE_U_UART1_IRQ = 5,
+>      SIFIVE_U_GPIO_IRQ0 = 7,
+> --
+> 2.7.4
+>
+>
 
