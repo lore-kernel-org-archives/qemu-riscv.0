@@ -1,48 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k0RbA-0000wW-CP
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Jul 2020 11:33:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48898)
+	id 1k0Rfg-0004at-FF
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Jul 2020 11:37:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50364)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k0Rb9-0000vR-CV; Tue, 28 Jul 2020 11:32:59 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:35779)
+ id 1k0Rfe-0004a7-T3; Tue, 28 Jul 2020 11:37:38 -0400
+Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:33530)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k0Rb7-0003M7-PF; Tue, 28 Jul 2020 11:32:59 -0400
-Received: by mail-io1-xd42.google.com with SMTP id s189so13929831iod.2;
- Tue, 28 Jul 2020 08:32:57 -0700 (PDT)
+ id 1k0Rfb-0004Hu-Rj; Tue, 28 Jul 2020 11:37:38 -0400
+Received: by mail-il1-x141.google.com with SMTP id p16so5762514ile.0;
+ Tue, 28 Jul 2020 08:37:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=aFiggvsybxP7Q+K3MUxmqRhc2eENIdqqqh2Sgg6FwSA=;
- b=HsvX8jEPFGV1imUvxGXB6TqbHibeXL99BAweT80B49/e6Silh0P87mtljdW7uS7zz7
- njG/bQ65jmYThbJm7IhazJxFaeoOR05jphXbfktp/UOXX3biVeMnhfaXL9FEwEws6Jgr
- LfmVvSM2xZIS5MSDFre+ExrlwWS7O2DWzBkSNqln4LQRP3by6tSEiKFJSkwE+PUANGGk
- wehp9VtXOodEWpjdcxAdYSMP37O7kz+EQF+NVdzUgeE15Wod9LxG7bKiIb9LGyf68VWI
- h7CmjtqE/nznt6Dgq13bY3NcNzYeY1stkT5rWWPOWRyxJ3uajXpUDB30gMzTJCca1brm
- 6EpQ==
+ :cc; bh=ZzqjNDHjyBP72RmWzIfEhocBh3SxGafaKx89XkWeqb8=;
+ b=abkk2UTz6XGzoCZenSFYzUR2bd4W6Lv2Mm31X0sjjg5ZJnwGziSzgo8meiEs6LArGo
+ AAEB/FGwe6kWtSJJDuhe5GAODmAQgDMmdiHXLLtyEiMZKGYgylSTKnaTreseszUGhLtl
+ WASjHB9QtOc9dbstSf+luZTJeQq2QswC2rwlXHYMeOLyIQZUa01z3HN18hpbFLjp1TMU
+ uDoLDyOvCnj33EY6w/IGGHazVTvqMWxEZjugAdn8s9WXAPJW1JAuE/H+NcShFBrqa2Ri
+ Fonkdei8BHSrqyheLi9USO0ql7a+d53QIGxyDjWPUrtRE0GVnr2mOrDRwDOXFTdZS77y
+ XZpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=aFiggvsybxP7Q+K3MUxmqRhc2eENIdqqqh2Sgg6FwSA=;
- b=Cez/u8JIuvvCI4e835ACSSC0WjoDuEI8ZEEB7hlEXJE2Z1Z4XUVPxf+9jLysWAxNnq
- deQ7EA0paha0eZVLcxNfYPss6iUNX+9IWEac1eKAY9J++QjLRQrpC28fMaGu4k/jmql5
- jjklKL2JeOsCTkotSk5KJrUrEGZV+RC6NHQQICFHdJzEo3TmWIydXVFOQhEM9qETKgZU
- r5eKAbF6vusexnznLs8GC7izjpFZEGC/p5oeVLdajGBJMJo/5PbbjLe0GX9ZYpriAoPB
- 1UprjtJC3ajlF9ZTxHcZdp6PJ9mlepv3u3RMQwH49Rb+iqc0+0Ax/1xEwa0zC97x6oA3
- avFA==
-X-Gm-Message-State: AOAM530VDZRZHvKK/fUcLe6j5PDoOVk/B6r0gi9HFvHgSuiYSOCDXM5e
- VEx84PSLCvABChpxbjjGXbGRGLLuHZhBskMoBPc=
-X-Google-Smtp-Source: ABdhPJxoj7UHLrYCkgoHrAXLwuILv1cnBNW9I9zIU1rE4GFVStbxrpSGQDZ2xi5a+lLTMdvZH1b5bD/99osMfo4fJPE=
-X-Received: by 2002:a02:5b83:: with SMTP id g125mr33368303jab.91.1595950376114; 
- Tue, 28 Jul 2020 08:32:56 -0700 (PDT)
+ bh=ZzqjNDHjyBP72RmWzIfEhocBh3SxGafaKx89XkWeqb8=;
+ b=diMmpYNzmDJkQJQ/v8gTpGMeAivjrSmGScxwfJoHYahdmfw5uJq05wBg2DM3F15jxu
+ WCgLi40At/I8e5RvjZ1c3JdS+K4SP5G3SeMRW6m7mowZiBa1yWuiPcNUM1iYDZWBD/ge
+ zJuXr1DvrecPf0G1oGHf20Urw7eSCDDD2/iS9YLfkNcIB1bvw8Apqrvzt98Gi+YkK/ik
+ WbRkevIPIOzSXX+hcsfzn8s69mCqSMkpw0qTm4z+NhmTWAuZcPBLecdp9/6fg0XQuALR
+ LAo6/Bmlkur7l3h/JKlo/ejYxojxix+wVNV00MKSfECcszrhu0LtzvnYTfKi0dqohiCG
+ sv9g==
+X-Gm-Message-State: AOAM5331FHRLNos6GlQVT3+nhVdSPh+UdUc7gHGDfzahn4w4I1HrKMS0
+ fWy8r9IiXmnu3RsbiD+l74TzM83FP6bTiosAyYA=
+X-Google-Smtp-Source: ABdhPJwWxjePzJ66TEsbJxkga/vT72cLAojkLfoiwgnSrghQ+7q38Uj6AeAdcv+XrWf1ohFYInZrGKGkTgPZ/EsZG10=
+X-Received: by 2002:a92:cf50:: with SMTP id c16mr9482823ilr.131.1595950654700; 
+ Tue, 28 Jul 2020 08:37:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <1595227748-24720-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1595227748-24720-1-git-send-email-bmeng.cn@gmail.com>
+References: <1594878971-26050-1-git-send-email-bmeng.cn@gmail.com>
+ <1594878971-26050-8-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1594878971-26050-8-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 28 Jul 2020 08:22:37 -0700
-Message-ID: <CAKmqyKPSaB_GVM7K6BTzFApSEBWE0xE4_wXi0GbHnwfT0kRXig@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: sifive_u: Add a dummy L2 cache controller device
+Date: Tue, 28 Jul 2020 08:27:16 -0700
+Message-ID: <CAKmqyKOFXGbW3ubNc4RHOh_4ujDSqKS_3GGMnyno2S7gDL-+Ow@mail.gmail.com>
+Subject: Re: [PATCH v5 7/7] Makefile: Ship the generic platform bios ELF
+ images for RISC-V
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -50,10 +52,10 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
+ Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -62,8 +64,8 @@ X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,99 +78,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jul 2020 15:32:59 -0000
+X-List-Received-Date: Tue, 28 Jul 2020 15:37:39 -0000
 
-On Sun, Jul 19, 2020 at 11:50 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Jul 15, 2020 at 11:01 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> It is enough to simply map the SiFive FU540 L2 cache controller
-> into the MMIO space using create_unimplemented_device(), with an
-> FDT fragment generated, to make the latest upstream U-Boot happy.
+> At present only the generic platform fw_dynamic bios BIN images
+> are included in the 'make install' target for 'virt' and 'sifive_u'
+> machines. This updates the install blob list to include ELF images
+> which are needed by the 'spike' machine.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This commit should be squashed into patch 5.
 
-Applied to riscv-to-apply.next tree for 5.2.
+Do you want me to do that when applying?
 
 Alistair
 
+>
 > ---
 >
->  hw/riscv/sifive_u.c         | 22 ++++++++++++++++++++++
->  include/hw/riscv/sifive_u.h |  4 ++++
->  2 files changed, 26 insertions(+)
+> Changes in v5:
+> - Ship generic fw_dynamic.elf images in the Makefile
 >
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 6487d5e..f771cb0 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -72,6 +72,7 @@ static const struct MemmapEntry {
->      [SIFIVE_U_DEBUG] =    {        0x0,      0x100 },
->      [SIFIVE_U_MROM] =     {     0x1000,     0xf000 },
->      [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
-> +    [SIFIVE_U_L2CC] =     {  0x2010000,     0x1000 },
->      [SIFIVE_U_L2LIM] =    {  0x8000000,  0x2000000 },
->      [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
->      [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
-> @@ -302,6 +303,24 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
->      qemu_fdt_setprop_string(fdt, nodename, "compatible", "gpio-restart");
->      g_free(nodename);
+> Changes in v3:
+> - change fw_jump to fw_dynamic in the Makefile
 >
-> +    nodename = g_strdup_printf("/soc/cache-controller@%lx",
-> +        (long)memmap[SIFIVE_U_L2CC].base);
-> +    qemu_fdt_add_subnode(fdt, nodename);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-> +        0x0, memmap[SIFIVE_U_L2CC].base,
-> +        0x0, memmap[SIFIVE_U_L2CC].size);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
-> +        SIFIVE_U_L2CC_IRQ0, SIFIVE_U_L2CC_IRQ1, SIFIVE_U_L2CC_IRQ2);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
-> +    qemu_fdt_setprop(fdt, nodename, "cache-unified", NULL, 0);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "cache-size", 2097152);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "cache-sets", 1024);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "cache-level", 2);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "cache-block-size", 64);
-> +    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-> +                            "sifive,fu540-c000-ccache");
-> +    g_free(nodename);
-> +
->      phy_phandle = phandle++;
->      nodename = g_strdup_printf("/soc/ethernet@%lx",
->          (long)memmap[SIFIVE_U_GEM].base);
-> @@ -732,6 +751,9 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+> Changes in v2:
+> - new patch: Makefile: Ship the generic platform bios images for RISC-V
 >
->      create_unimplemented_device("riscv.sifive.u.dmc",
->          memmap[SIFIVE_U_DMC].base, memmap[SIFIVE_U_DMC].size);
-> +
-> +    create_unimplemented_device("riscv.sifive.u.l2cc",
-> +        memmap[SIFIVE_U_L2CC].base, memmap[SIFIVE_U_L2CC].size);
->  }
+>  Makefile | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
->  static Property sifive_u_soc_props[] = {
-> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> index aba4d01..d3c0c00 100644
-> --- a/include/hw/riscv/sifive_u.h
-> +++ b/include/hw/riscv/sifive_u.h
-> @@ -71,6 +71,7 @@ enum {
->      SIFIVE_U_DEBUG,
->      SIFIVE_U_MROM,
->      SIFIVE_U_CLINT,
-> +    SIFIVE_U_L2CC,
->      SIFIVE_U_L2LIM,
->      SIFIVE_U_PLIC,
->      SIFIVE_U_PRCI,
-> @@ -86,6 +87,9 @@ enum {
->  };
+> diff --git a/Makefile b/Makefile
+> index a6d6234..142c545 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -841,7 +841,8 @@ u-boot.e500 u-boot-sam460-20100605.bin \
+>  qemu_vga.ndrv \
+>  edk2-licenses.txt \
+>  hppa-firmware.img \
+> -opensbi-riscv32-generic-fw_dynamic.bin opensbi-riscv64-generic-fw_dynamic.bin
+> +opensbi-riscv32-generic-fw_dynamic.bin opensbi-riscv64-generic-fw_dynamic.bin \
+> +opensbi-riscv32-generic-fw_dynamic.elf opensbi-riscv64-generic-fw_dynamic.elf
 >
->  enum {
-> +    SIFIVE_U_L2CC_IRQ0 = 1,
-> +    SIFIVE_U_L2CC_IRQ1 = 2,
-> +    SIFIVE_U_L2CC_IRQ2 = 3,
->      SIFIVE_U_UART0_IRQ = 4,
->      SIFIVE_U_UART1_IRQ = 5,
->      SIFIVE_U_GPIO_IRQ0 = 7,
+>
+>  DESCS=50-edk2-i386-secure.json 50-edk2-x86_64-secure.json \
 > --
 > 2.7.4
 >
