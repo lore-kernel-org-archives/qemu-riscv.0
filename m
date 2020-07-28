@@ -1,75 +1,94 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k0KwX-00042U-Bj
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Jul 2020 04:26:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49948)
+	id 1k0Kyc-0007fc-Ks
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Jul 2020 04:28:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50374)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
- id 1k0KwW-0003zm-18
- for qemu-riscv@nongnu.org; Tue, 28 Jul 2020 04:26:36 -0400
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:37687)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <zong.li@sifive.com>)
- id 1k0KwS-0000q3-MW
- for qemu-riscv@nongnu.org; Tue, 28 Jul 2020 04:26:35 -0400
-Received: by mail-pl1-x644.google.com with SMTP id p1so9514001pls.4
- for <qemu-riscv@nongnu.org>; Tue, 28 Jul 2020 01:26:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=UC0InaM2Av4NdGRB30AcNgGF6NmB2i/F1RQN192G0E0=;
- b=gHmUNT7Z0hYepK/a/IHgsaHkPfHTaZxEsXHq32AMZzjwvJ2IOrH0ATFeylOFqHKfXf
- t9oZqyOR8XMUsKY7DlXMMQZdyZNBWChkncRgeqy+ND71AgYtthjW6vGtt7307l29xoRR
- 4c/ih7hQW+DNqJzkIA31xpO1re6Ukrocb0Zp5o2Bu8MSiclpfuh3U2gTQyWI8i62Kobk
- HRqK6VP7uchy14bjAPiQZ/W75IJejkPZJEoIJ/fwi9R6T6Lv564N4qmePGihG/5qatVv
- Q9PLEustxY945RbmoIi5XShbPU6JMpJR48m0joisdfKJPbIRZhHIia27XiZFSFOQp4vD
- NmPA==
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1k0KyZ-0007dT-GS
+ for qemu-riscv@nongnu.org; Tue, 28 Jul 2020 04:28:43 -0400
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:21014
+ helo=us-smtp-delivery-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1k0KyX-00013x-7m
+ for qemu-riscv@nongnu.org; Tue, 28 Jul 2020 04:28:43 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1595924920;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=gaJr8e9WETC/JPrw5OplSqXZ5AQhNL31V1HMx/YY8CI=;
+ b=KZ6kaW4t4RYciSYyes4L6c1axzn0a+4ZiyiBalgp6pY4WQ29nFh1ELWW7vP3SDfl8PB8m4
+ PyInMoAZYRzjsg8ERNYAlbCpyunbz29FVCmh5yJ/CF6EFWZT2O62QsAOMmDBp4ccpmcp/E
+ nCRcqN3uShIJ4xwYW8dDFBsPKIuFqvs=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-149-DxzHWaDKMm2_gVTeFBqc9g-1; Tue, 28 Jul 2020 04:28:39 -0400
+X-MC-Unique: DxzHWaDKMm2_gVTeFBqc9g-1
+Received: by mail-wr1-f71.google.com with SMTP id r29so678560wrr.10
+ for <qemu-riscv@nongnu.org>; Tue, 28 Jul 2020 01:28:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=UC0InaM2Av4NdGRB30AcNgGF6NmB2i/F1RQN192G0E0=;
- b=WpBIhqz1LL7Qnma4wVfmgK1iYz8U98znroa60GLUc0ykoqHKNC03mGHpbiCrarq+sA
- CgrQU7HqabbkPNcgHqwNbgiNisxizrbh+mhPGAdx9F1aT+j0iVW7fUweWQzvVzY6F0Gc
- dYwCdB9W+mlU4efDwg9JkxB87mFT9/C/LxOSo9DpTVMHX7rfY5u7aKGzg6bPQHxO84K8
- 2zI+SGDmrGQgz0Q6lvR9lz8/a3sZCFe6gtIE5+YTE9NutM2KUFVHsCjKi3RRR1uKPeZ+
- 4Wy2ZtyIfDJqvyaAPedIetLPaFCpWenZGe5gmKKqfkI/96L0dli5gfU87Kki2LQng654
- 8Oug==
-X-Gm-Message-State: AOAM530UPXjFVL5gPPY+8BCCFlhhCVVcBkfXu7zCUpxk5qs3GOeMDIPP
- +8WQeTdEqycLRG200qHMh3RgAg==
-X-Google-Smtp-Source: ABdhPJw7Wf/PUWOtDu/gHK+DK+I1oe0f4LPcvGnR5zBPgQ9DldM3nWupgVC7g+6FUAXx5nwd4LxPPw==
-X-Received: by 2002:a17:90a:ea83:: with SMTP id
- h3mr3524636pjz.176.1595924791246; 
- Tue, 28 Jul 2020 01:26:31 -0700 (PDT)
-Received: from hsinchu02.internal.sifive.com
- (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id h2sm17599747pfk.93.2020.07.28.01.26.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jul 2020 01:26:30 -0700 (PDT)
-From: Zong Li <zong.li@sifive.com>
-To: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
- sagark@eecs.berkeley.edu, kbastian@mail.uni-paderborn.de,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Zong Li <zong.li@sifive.com>
-Subject: [PATCH v6 4/4] target/riscv: Change the TLB page size depends on PMP
- entries.
-Date: Tue, 28 Jul 2020 16:26:17 +0800
-Message-Id: <6b0bf48662ef26ab4c15381a08e78a74ebd7ca79.1595924470.git.zong.li@sifive.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1595924470.git.zong.li@sifive.com>
-References: <cover.1595924470.git.zong.li@sifive.com>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=gaJr8e9WETC/JPrw5OplSqXZ5AQhNL31V1HMx/YY8CI=;
+ b=iFUi02QLvlQ9oqA1rM3iDll/pSnsK6EILFnSavZnyqoRzP2O8Kl4olEQkfMugaM00q
+ 91zWypX9am6foN5exTxim9V6RUQElC1nzgtLisppS5EQMUGwsnJ0s9Q1rWYcOuFEpYS2
+ qGwluSIMfTSvY3R97SqBvqKWn2cC4AUy7VWKWxO3Iy4INPiyi7ADl/uZjuyFv6jKY+lN
+ bBaIGHufn8MuTfKElKO3J0Y+xkHpWCynWETltY2/ZYoFTR1QB3Xfd1ZceWtJtOCxuWXC
+ 6S3BIDsNrtEmFWxETBEW0c18aH002uPCHgFdYw1SQcQjlKDsb/zihvDXoXgs8QW70KzL
+ n0AQ==
+X-Gm-Message-State: AOAM530fYPLvZmv6ZR21Hkd96gc+MGUJDV5su7Adxke/qsitSkdm4ohZ
+ ENrlnwoHUf5qA3zEB6dsYggWNigoTc8HTVFEaWhdUJMDgJcgjPkQoHzoT1nJ2dJN/kguhR0/qs5
+ yyYt8MokwWyYt9H4=
+X-Received: by 2002:adf:b7cd:: with SMTP id t13mr22997577wre.424.1595924915259; 
+ Tue, 28 Jul 2020 01:28:35 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJx25cX3CC6dBRNl5l9cKtVkgY/ACcCqrKZCwOyNPG7DK61L0S8jZgkgwCw37mfU1LCRtfWXEw==
+X-Received: by 2002:adf:b7cd:: with SMTP id t13mr22997499wre.424.1595924914023; 
+ Tue, 28 Jul 2020 01:28:34 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:4502:3ee3:2bae:c612?
+ ([2001:b07:6468:f312:4502:3ee3:2bae:c612])
+ by smtp.gmail.com with ESMTPSA id p8sm17364808wrq.9.2020.07.28.01.28.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Jul 2020 01:28:33 -0700 (PDT)
+Subject: Re: [RFC PATCH 1/2] hw/riscv: sifive_u: Add file-backed OTP.
+ softmmu/vl: add otp-file to boot option
+To: Green Wan <green.wan@sifive.com>, Bin Meng <bmeng.cn@gmail.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+References: <20200724095112.2615-1-green.wan@sifive.com>
+ <20200724095112.2615-2-green.wan@sifive.com>
+ <CAEUhbmVgqNEe9k9p7Fto08_Rsu0W3d7UfzSK0HcprTk3cSzgaQ@mail.gmail.com>
+ <CAJivOr7qLJvryjQXUE7Oro2aSzWv1Sj6AR0gO9TO6+FL9HwkGw@mail.gmail.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <74c8704f-cda2-ecb7-6cf6-e3ebd7bd9ba3@redhat.com>
+Date: Tue, 28 Jul 2020 10:28:32 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
 MIME-Version: 1.0
+In-Reply-To: <CAJivOr7qLJvryjQXUE7Oro2aSzWv1Sj6AR0gO9TO6+FL9HwkGw@mail.gmail.com>
+Content-Language: en-US
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::644;
- envelope-from=zong.li@sifive.com; helo=mail-pl1-x644.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=207.211.31.81; envelope-from=pbonzini@redhat.com;
+ helo=us-smtp-delivery-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/07/28 00:06:48
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,122 +101,240 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jul 2020 08:26:36 -0000
+X-List-Received-Date: Tue, 28 Jul 2020 08:28:43 -0000
 
-The minimum granularity of PMP is 4 bytes, it is small than 4KB page
-size, therefore, the pmp checking would be ignored if its range doesn't
-start from the alignment of one page. This patch detects the pmp entries
-and sets the small page size to TLB if there is a PMP entry which cover
-the page size.
+On 28/07/20 04:02, Green Wan wrote:
+> Hi Bin,
+> 
+> Thanks for the reply.
+> 
+> I think we can add property to sifive_u_otp_properties[] (something like
+> below) and remove generic code dependency. What do you think of it?
+> 
+> @@ -243,6 +245,7 @@ static const MemoryRegionOps sifive_u_otp_ops = {
+>  
+>  static Property sifive_u_otp_properties[] = {
+>      DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
+> +    DEFINE_PROP_STRING("otp_file", SiFiveUOTPState, otp_file),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+> 
+>  typedef struct SiFiveUOTPState {
+>      /*< private >*/
+>      SysBusDevice parent_obj;
+> @@ -77,6 +75,7 @@ typedef struct SiFiveUOTPState {
+>      uint32_t fuse[SIFIVE_U_OTP_NUM_FUSES];
+>      /* config */
+>      uint32_t serial;
+> +    char *otp_file;
+>      uint32_t fuse_wo[SIFIVE_U_OTP_NUM_FUSES];
+>  } SiFiveUOTPState;
 
-Signed-off-by: Zong Li <zong.li@sifive.com>
----
- target/riscv/cpu_helper.c | 10 ++++++--
- target/riscv/pmp.c        | 52 +++++++++++++++++++++++++++++++++++++++
- target/riscv/pmp.h        |  2 ++
- 3 files changed, 62 insertions(+), 2 deletions(-)
+Yes, I agree.  (Also, dashes are preferred to underscores these days).
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 2f337e418c..fd1d373b6f 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -693,6 +693,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     bool first_stage_error = true;
-     int ret = TRANSLATE_FAIL;
-     int mode = mmu_idx;
-+    target_ulong tlb_size = 0;
- 
-     env->guest_phys_fault_addr = 0;
- 
-@@ -784,8 +785,13 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     }
- 
-     if (ret == TRANSLATE_SUCCESS) {
--        tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
--                     prot, mmu_idx, TARGET_PAGE_SIZE);
-+        if (pmp_is_range_in_tlb(env, pa & TARGET_PAGE_MASK, &tlb_size)) {
-+            tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
-+                         prot, mmu_idx, tlb_size);
-+        } else {
-+            tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
-+                         prot, mmu_idx, TARGET_PAGE_SIZE);
-+        }
-         return true;
-     } else if (probe) {
-         return false;
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index aeba796484..adadf6e9ba 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -393,3 +393,55 @@ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
- 
-     return val;
- }
-+
-+/*
-+ * Calculate the TLB size if the start address or the end address of
-+ * PMP entry is presented in thie TLB page.
-+ */
-+static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
-+    target_ulong tlb_sa, target_ulong tlb_ea)
-+{
-+    target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
-+    target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
-+
-+    if (pmp_sa >= tlb_sa && pmp_ea <= tlb_ea) {
-+        return pmp_ea - pmp_sa + 1;
-+    }
-+
-+    if (pmp_sa >= tlb_sa && pmp_sa <= tlb_ea && pmp_ea >= tlb_ea) {
-+        return tlb_ea - pmp_sa + 1;
-+    }
-+
-+    if (pmp_ea <= tlb_ea && pmp_ea >= tlb_sa && pmp_sa <= tlb_sa) {
-+        return pmp_ea - tlb_sa + 1;
-+    }
-+
-+    return 0;
-+}
-+
-+/*
-+ * Check is there a PMP entry whcih range covers this page. If so,
-+ * try to find the minimum granularity for the TLB size.
-+ */
-+bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
-+    target_ulong *tlb_size)
-+{
-+    int i;
-+    target_ulong val;
-+    target_ulong tlb_ea = (tlb_sa + TARGET_PAGE_SIZE - 1);
-+
-+    for (i = 0; i < MAX_RISCV_PMPS; i++) {
-+        val = pmp_get_tlb_size(env, i, tlb_sa, tlb_ea);
-+        if (val) {
-+            if (*tlb_size == 0 || *tlb_size > val) {
-+                *tlb_size = val;
-+            }
-+        }
-+    }
-+
-+    if (*tlb_size != 0) {
-+        return true;
-+    }
-+
-+    return false;
-+}
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index 8e19793132..c70f2ea4c4 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -60,5 +60,7 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
- target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
- bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-     target_ulong size, pmp_priv_t priv, target_ulong mode);
-+bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
-+    target_ulong *tlb_size);
- 
- #endif
--- 
-2.27.0
+You can also add an alias to the machine so that you can access this
+with "-machine otp-file=...".
+
+Paolo
+
+> Regards,
+> Green
+> 
+> 
+> On Fri, Jul 24, 2020 at 10:20 PM Bin Meng <bmeng.cn@gmail.com
+> <mailto:bmeng.cn@gmail.com>> wrote:
+> 
+>     Hi Green,
+> 
+>     On Fri, Jul 24, 2020 at 5:51 PM Green Wan <green.wan@sifive.com
+>     <mailto:green.wan@sifive.com>> wrote:
+>     >
+>     > Add a file-backed implementation for OTP of sifive_u machine. Use
+>     > '-boot otp-file=xxx' to enable it. Do file open, mmap and close
+>     > for every OTP read/write in case keep the update-to-date snapshot
+>     > of OTP.
+>     >
+>     > Signed-off-by: Green Wan <green.wan@sifive.com
+>     <mailto:green.wan@sifive.com>>
+>     > ---
+>     >  hw/riscv/sifive_u_otp.c         | 88
+>     ++++++++++++++++++++++++++++++++-
+>     >  include/hw/riscv/sifive_u_otp.h |  2 +
+>     >  qemu-options.hx                 |  3 +-
+>     >  softmmu/vl.c                    |  6 ++-
+>     >  4 files changed, 96 insertions(+), 3 deletions(-)
+>     >
+>     > diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
+>     > index f6ecbaa2ca..26e1965821 100644
+>     > --- a/hw/riscv/sifive_u_otp.c
+>     > +++ b/hw/riscv/sifive_u_otp.c
+>     > @@ -24,6 +24,72 @@
+>     >  #include "qemu/log.h"
+>     >  #include "qemu/module.h"
+>     >  #include "hw/riscv/sifive_u_otp.h"
+>     > +#include <stdio.h>
+>     > +#include <stdlib.h>
+>     > +#include <sys/types.h>
+>     > +#include <sys/stat.h>
+>     > +#include <unistd.h>
+>     > +#include <fcntl.h>
+>     > +#include <sys/mman.h>
+>     > +#include <string.h>
+>     > +
+>     > +#define TRACE_PREFIX            "FU540_OTP: "
+>     > +#define SIFIVE_FU540_OTP_SIZE   (SIFIVE_U_OTP_NUM_FUSES * 4)
+>     > +
+>     > +static int otp_backed_fd;
+>     > +static unsigned int *otp_mmap;
+>     > +
+>     > +static void sifive_u_otp_backed_load(const char *filename);
+>     > +static uint64_t sifive_u_otp_backed_read(uint32_t fuseidx);
+>     > +static void sifive_u_otp_backed_write(uint32_t fuseidx,
+>     > +                                      uint32_t paio,
+>     > +                                      uint32_t pdin);
+>     > +static void sifive_u_otp_backed_unload(void);
+>     > +
+>     > +void sifive_u_otp_backed_load(const char *filename)
+>     > +{
+>     > +    if (otp_backed_fd < 0) {
+>     > +
+>     > +        otp_backed_fd = open(filename, O_RDWR);
+>     > +
+>     > +        if (otp_backed_fd < 0)
+>     > +            qemu_log_mask(LOG_TRACE,
+>     > +                          TRACE_PREFIX "Warning: can't open otp
+>     file\n");
+>     > +        else {
+>     > +
+>     > +            otp_mmap = (unsigned int *)mmap(0,
+>     > +                                            SIFIVE_FU540_OTP_SIZE,
+>     > +                                            PROT_READ |
+>     PROT_WRITE | PROT_EXEC,
+>     > +                                            MAP_FILE | MAP_SHARED,
+>     > +                                            otp_backed_fd,
+>     > +                                            0);
+>     > +
+>     > +            if (otp_mmap == MAP_FAILED)
+>     > +                qemu_log_mask(LOG_TRACE,
+>     > +                              TRACE_PREFIX "Warning: can't mmap
+>     otp file\n");
+>     > +        }
+>     > +    }
+>     > +
+>     > +}
+>     > +
+>     > +uint64_t sifive_u_otp_backed_read(uint32_t fuseidx)
+>     > +{
+>     > +    return (uint64_t)(otp_mmap[fuseidx]);
+>     > +}
+>     > +
+>     > +void sifive_u_otp_backed_write(uint32_t fuseidx, uint32_t paio,
+>     uint32_t pdin)
+>     > +{
+>     > +    otp_mmap[fuseidx] &= ~(pdin << paio);
+>     > +    otp_mmap[fuseidx] |= (pdin << paio);
+>     > +}
+>     > +
+>     > +
+>     > +void sifive_u_otp_backed_unload(void)
+>     > +{
+>     > +    munmap(otp_mmap, SIFIVE_FU540_OTP_SIZE);
+>     > +    close(otp_backed_fd);
+>     > +    otp_backed_fd = -1;
+>     > +}
+>     >
+>     >  static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr,
+>     unsigned int size)
+>     >  {
+>     > @@ -46,7 +112,17 @@ static uint64_t sifive_u_otp_read(void
+>     *opaque, hwaddr addr, unsigned int size)
+>     >          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
+>     >              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
+>     >              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
+>     > -            return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
+>     > +
+>     > +            if (otp_file) {
+>     > +                uint64_t val;
+>     > +
+>     > +                sifive_u_otp_backed_load(otp_file);
+>     > +                val = sifive_u_otp_backed_read(s->pa);
+>     > +                sifive_u_otp_backed_unload();
+>     > +
+>     > +                return val;
+>     > +            } else
+>     > +                return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
+>     >          } else {
+>     >              return 0xff;
+>     >          }
+>     > @@ -123,6 +199,12 @@ static void sifive_u_otp_write(void *opaque,
+>     hwaddr addr,
+>     >          s->ptrim = val32;
+>     >          break;
+>     >      case SIFIVE_U_OTP_PWE:
+>     > +        if (otp_file) {
+>     > +            sifive_u_otp_backed_load(otp_file);
+>     > +            sifive_u_otp_backed_write(s->pa, s->paio, s->pdin);
+>     > +            sifive_u_otp_backed_unload();
+>     > +        }
+>     > +
+>     >          s->pwe = val32;
+>     >          break;
+>     >      default:
+>     > @@ -165,6 +247,10 @@ static void sifive_u_otp_reset(DeviceState *dev)
+>     >      /* Make a valid content of serial number */
+>     >      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR] = s->serial;
+>     >      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR + 1] = ~(s->serial);
+>     > +
+>     > +    /* Initialize file mmap and descriptor. */
+>     > +    otp_mmap = NULL;
+>     > +    otp_backed_fd = -1;
+>     >  }
+>     >
+>     >  static void sifive_u_otp_class_init(ObjectClass *klass, void *data)
+>     > diff --git a/include/hw/riscv/sifive_u_otp.h
+>     b/include/hw/riscv/sifive_u_otp.h
+>     > index 639297564a..1342bd7342 100644
+>     > --- a/include/hw/riscv/sifive_u_otp.h
+>     > +++ b/include/hw/riscv/sifive_u_otp.h
+>     > @@ -52,6 +52,8 @@
+>     >  #define SIFIVE_U_OTP(obj) \
+>     >      OBJECT_CHECK(SiFiveUOTPState, (obj), TYPE_SIFIVE_U_OTP)
+>     >
+>     > +extern const char *otp_file;
+>     > +
+>     >  typedef struct SiFiveUOTPState {
+>     >      /*< private >*/
+>     >      SysBusDevice parent_obj;
+>     > diff --git a/qemu-options.hx b/qemu-options.hx
+>     > index 708583b4ce..eb9a54f4ed 100644
+>     > --- a/qemu-options.hx
+>     > +++ b/qemu-options.hx
+>     > @@ -415,10 +415,11 @@ ERST
+>     >
+>     >  DEF("boot", HAS_ARG, QEMU_OPTION_boot,
+>     >      "-boot [order=drives][,once=drives][,menu=on|off]\n"
+>     > -    "     
+>     [,splash=sp_name][,splash-time=sp_time][,reboot-timeout=rb_time][,strict=on|off]\n"
+>     > +    "     
+>     [,splash=sp_name][,splash-time=sp_time][,reboot-timeout=rb_time][,strict=on|off][,otp-file=otp_file]\n"
+>     >      "                'drives': floppy (a), hard disk (c), CD-ROM
+>     (d), network (n)\n"
+>     >      "                'sp_name': the file's name that would be
+>     passed to bios as logo picture, if menu=on\n"
+>     >      "                'sp_time': the period that splash picture
+>     last if menu=on, unit is ms\n"
+>     > +    "                'otp_file': the file name backed OTP\n"
+>     >      "                'rb_timeout': the timeout before guest
+>     reboot when boot failed, unit is ms\n",
+> 
+>     Instead of touching generic codes, could we add such property at the
+>     board level?
+> 
+>     >      QEMU_ARCH_ALL)
+>     >  SRST
+> 
+>     Regards,
+>     Bin
+> 
 
 
