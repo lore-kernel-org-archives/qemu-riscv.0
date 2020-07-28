@@ -1,63 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k0UK3-0004P4-R9
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Jul 2020 14:27:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42598)
+	id 1k0Zbg-0000El-Lt
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Jul 2020 20:06:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58994)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k0UK1-0004MA-V7; Tue, 28 Jul 2020 14:27:29 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:38101)
+ id 1k0Zbf-0000DG-2G; Tue, 28 Jul 2020 20:06:03 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:44068)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k0UK0-0003rO-Ge; Tue, 28 Jul 2020 14:27:29 -0400
-Received: by mail-il1-x141.google.com with SMTP id s21so17050668ilk.5;
- Tue, 28 Jul 2020 11:27:27 -0700 (PDT)
+ id 1k0Zbc-0003i4-3Y; Tue, 28 Jul 2020 20:06:02 -0400
+Received: by mail-io1-xd43.google.com with SMTP id v6so7457107iow.11;
+ Tue, 28 Jul 2020 17:05:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Vb4E8Ar/tj0qituhsZw5eVTgCjglCgcIHUwdXgf2byM=;
- b=n53rAr51xJGTuRMPkneiBooSXj9CIthEAhgQDG86eL56nByhA3vRtg6oQ5ScwlTA7Y
- 1K1WL1QktLSojPlfl5ut5N/27JkH8iYXFNQXKSy8ApaFwBEV5cdq9wldyzjx98J3HW24
- 1qWgKqwf7on/4K/9Z1nuBnA5wg479KAvymvPkG95kWbiRnFhmt5DEszRI5TqFj2bsvDP
- gPEmryCBGhkfo5EWdp2DbPctsFHQZw70SDMmVH75zhndIR57nHeTISBmc5YNqYCeDX2v
- vsWUiwuDGxRYzaBJTRBxrImAJix4JAshD25MIcRhwl54xxDVoaEOwVYVyJ6r2a5WcJsj
- zuLw==
+ :cc; bh=NcDFvjgGbx9VfQKK+9SR4tGKVPrq8hLqVBMEwEgtI1g=;
+ b=VE/2D3oDZjS2kA7KnhC3cmX7UCzNo9HeSJYGntlnuymMmtpsaLGRDIfZXSXRfHYAgT
+ oo4ZQqgLit7ySt0aqubkX1C/oDsC/RgRdngH+SkzsvOu5VumsnnGahUizyUEbLq6u2GN
+ rdI5kWJCXuJKyXWmAYc7hx1nPmSh2yEa/1ZbEu+Sxdic7NOU+uuPWBxezVQuzBULAO5+
+ 9AljGa/7Sv5GxOafn2PmUMGud9dhDTQb2rdfNXGk8WtGlsWHO6+2k9iOOco9gl1PBMPD
+ YNKaAhGnBMq8iYlqeC0ZRbZjP06EGoIAwYqiFZSe2BqtHfQPz3GG2XNLAC/DRkB4Gk0Q
+ T80w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Vb4E8Ar/tj0qituhsZw5eVTgCjglCgcIHUwdXgf2byM=;
- b=Wj/GwoDhE1UwoUhEzwpYOm0mochHNMazoyOuwl8sC+p+OykfKZdD+tTbLajnBgFwMK
- ZRudOYOUeFZbqUmwqK9DlyotvfC2OMEblFadUyQrh4m/8ZZHGJzytrpracP6Ok/t3O/7
- XG/S0mPR1mxRBg9/msLumcDcc21RN7H4AxAopdfTkjiKpqRzUzavEt62yzRKnNOdm0xl
- 2HnwNTArrtfSF1IgHTGu07f3/IlgEt0SFm6ks1CcAf0mR790A8LfCAjTUlMv2wyAM8La
- H0zpOjOG9JxLrWmfmPgAqJr4+pm+SAEkj8MBib9ATIRcaRZyQvcxvqgHrEdJkv/y4fxF
- j3yA==
-X-Gm-Message-State: AOAM531NmcmLTVCknJ3HOthwiGkxoeQIeoH7WX6OXJxJBjPinMpd4bIi
- 8SOKq0w0jiSr3RsEJrWzs7x8RQWHNhC8QzxHVH8=
-X-Google-Smtp-Source: ABdhPJxDxIyEXaE1mQd1enqxmEE7wEUP3ybu4vhM9L5/C18i7GjKjr1uaZy5ZGBadNFeglpk9zwTx8uwD17MiGDz+sg=
-X-Received: by 2002:a92:bb84:: with SMTP id x4mr31172539ilk.177.1595960847006; 
- Tue, 28 Jul 2020 11:27:27 -0700 (PDT)
+ bh=NcDFvjgGbx9VfQKK+9SR4tGKVPrq8hLqVBMEwEgtI1g=;
+ b=IC8UskCfD40lMAntD6T9ZMbToKcQe+MTGjhxNGUhBKyj8AiGnis9F8BJiPsiTDOMcq
+ Mn+6GQ1iWnVa8aDFGRwT1bFa3eHA+ykySfjsxVv7s/hD4ZqsRSnYjUVZ96pfHk5uOMaf
+ 6hLoXz802/Nt/7iWczSHjKxB+Bzl1pyboSflqY8cx4su8t9Lz2pCCmZ6HakUzvhBjB7y
+ lW8c1HGOX4Z9j/81Ueg3hB+iDPStHkSSHx2k3CHxDaoSpHs8is0a5Ohpr+39p+C/0kp4
+ WZ8lPluuR/iqNo4mEUAYPUMnguDIzNjyY8e4hqHa63MZVJh/Mg7yHb8cgnyaGjpwwYRE
+ rAmw==
+X-Gm-Message-State: AOAM53253RU/dcaozM0N2EukDDH/crTbyv4vtOAHMaAoIZqpRrimO+Ki
+ rpk7vsCZcVrqakcx62uUdcZM1F9STvLWHLtTcM4=
+X-Google-Smtp-Source: ABdhPJxyHpm88VGyz4zKwjx5GGp0El/E9c9cv/o3/VD5aHvw4FCy+uIl/GZQV2baRFgmz8lsc9A5NJpuD8Y89hN+Hwk=
+X-Received: by 2002:a5d:9306:: with SMTP id l6mr31791462ion.105.1595981158403; 
+ Tue, 28 Jul 2020 17:05:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <1594878971-26050-1-git-send-email-bmeng.cn@gmail.com>
- <1594878971-26050-8-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKOFXGbW3ubNc4RHOh_4ujDSqKS_3GGMnyno2S7gDL-+Ow@mail.gmail.com>
- <CAEUhbmV4VNPax7GmowsT6Jc+d5-qtqi9bOXymn9XKC9SdsuhcQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmV4VNPax7GmowsT6Jc+d5-qtqi9bOXymn9XKC9SdsuhcQ@mail.gmail.com>
+References: <cover.1595924470.git.zong.li@sifive.com>
+ <370a983d0f9e8a9a927b9bb8af5e7bc84b1bf9b1.1595924470.git.zong.li@sifive.com>
+In-Reply-To: <370a983d0f9e8a9a927b9bb8af5e7bc84b1bf9b1.1595924470.git.zong.li@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 28 Jul 2020 11:17:10 -0700
-Message-ID: <CAKmqyKNqBadLdA3MR4bowfuE01VYHzwVJA=HVhuUM-W+rcXP9Q@mail.gmail.com>
-Subject: Re: [PATCH v5 7/7] Makefile: Ship the generic platform bios ELF
- images for RISC-V
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+Date: Tue, 28 Jul 2020 16:55:45 -0700
+Message-ID: <CAKmqyKPex+98-jN5pWON1EHQ=Y16uwRAS0y-WnYG8QSCzqjY7A@mail.gmail.com>
+Subject: Re: [PATCH v6 3/4] target/riscv: Fix the translation of physical
+ address
+To: Zong Li <zong.li@sifive.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -80,45 +77,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jul 2020 18:27:30 -0000
+X-List-Received-Date: Wed, 29 Jul 2020 00:06:03 -0000
 
-On Tue, Jul 28, 2020 at 8:52 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, Jul 28, 2020 at 1:26 AM Zong Li <zong.li@sifive.com> wrote:
 >
-> Hi Alistair,
+> The real physical address should add the 12 bits page offset. It also
+> causes the PMP wrong checking due to the minimum granularity of PMP is
+> 4 byte, but we always get the physical address which is 4KB alignment,
+> that means, we always use the start address of the page to check PMP for
+> all addresses which in the same page.
 >
-> On Tue, Jul 28, 2020 at 11:37 PM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Wed, Jul 15, 2020 at 11:01 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > From: Bin Meng <bin.meng@windriver.com>
-> > >
-> > > At present only the generic platform fw_dynamic bios BIN images
-> > > are included in the 'make install' target for 'virt' and 'sifive_u'
-> > > machines. This updates the install blob list to include ELF images
-> > > which are needed by the 'spike' machine.
-> > >
-> > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> >
-> > This commit should be squashed into patch 5.
->
-> I actually considered this before, and I was thinking that patch 5 is
-> only for "fixing" the missing binaries for Spike machine, and this
-> patch addresses the "make install" issue, hence separate patch.
+> Signed-off-by: Zong Li <zong.li@sifive.com>
 
-Patch 5 creates the issue though, so I think it is worth fixing there.
-
->
-> >
-> > Do you want me to do that when applying?
->
-> Sure, please do then if you feel this is the correct way.
-
-This series still has regressions, so when you send a new version
-please squash this patch.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu_helper.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 >
-> Regards,
-> Bin
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 75d2ae3434..2f337e418c 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -543,7 +543,8 @@ restart:
+>              /* for superpage mappings, make a fake leaf PTE for the TLB's
+>                 benefit. */
+>              target_ulong vpn = addr >> PGSHIFT;
+> -            *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
+> +            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
+> +                        (addr & ~TARGET_PAGE_MASK);
+>
+>              /* set permissions on the TLB entry */
+>              if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
+> @@ -630,7 +631,7 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
+>          }
+>      }
+>
+> -    return phys_addr;
+> +    return phys_addr & TARGET_PAGE_MASK;
+>  }
+>
+>  void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
+> --
+> 2.27.0
+>
+>
 
