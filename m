@@ -1,70 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k0Zbg-0000El-Lt
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Jul 2020 20:06:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58994)
+	id 1k0e3j-0001Gg-4U
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Jul 2020 00:51:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34460)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k0Zbf-0000DG-2G; Tue, 28 Jul 2020 20:06:03 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:44068)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1k0e3g-0001Cw-7E; Wed, 29 Jul 2020 00:51:16 -0400
+Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:38654)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k0Zbc-0003i4-3Y; Tue, 28 Jul 2020 20:06:02 -0400
-Received: by mail-io1-xd43.google.com with SMTP id v6so7457107iow.11;
- Tue, 28 Jul 2020 17:05:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1k0e3d-0004PN-PQ; Wed, 29 Jul 2020 00:51:15 -0400
+Received: by mail-yb1-xb41.google.com with SMTP id d133so9918412ybh.5;
+ Tue, 28 Jul 2020 21:51:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NcDFvjgGbx9VfQKK+9SR4tGKVPrq8hLqVBMEwEgtI1g=;
- b=VE/2D3oDZjS2kA7KnhC3cmX7UCzNo9HeSJYGntlnuymMmtpsaLGRDIfZXSXRfHYAgT
- oo4ZQqgLit7ySt0aqubkX1C/oDsC/RgRdngH+SkzsvOu5VumsnnGahUizyUEbLq6u2GN
- rdI5kWJCXuJKyXWmAYc7hx1nPmSh2yEa/1ZbEu+Sxdic7NOU+uuPWBxezVQuzBULAO5+
- 9AljGa/7Sv5GxOafn2PmUMGud9dhDTQb2rdfNXGk8WtGlsWHO6+2k9iOOco9gl1PBMPD
- YNKaAhGnBMq8iYlqeC0ZRbZjP06EGoIAwYqiFZSe2BqtHfQPz3GG2XNLAC/DRkB4Gk0Q
- T80w==
+ :cc; bh=s60jSJJ/3cxrSnbF5oaXBs/Z8ZYWzPit+/YHasxxZpg=;
+ b=gqQIShTKeWIWBE/ohzNWmHqlst3OVqOwNrPH8hsedfHBMYOK+bABndbOtpN6HOLUdN
+ MTZlQRxzQNmJbT9ZUSZvPYC96MGvUDRRdozjACTwDhJAwPY9Jqj5nRYJBVlHhoMfGN4L
+ 1Zr4q0fAVCh9S/GVzVsjVBtyqpx3w5eJAZ4jE1sLkC2FAhl/qGlb4MdTa5PRUYxH8n43
+ u/Ak6d5W9foh5DS3wGkV1/7KhfqSldNZp08t2PQakGC5CmwwhDwJVwHSpsbCzpXxmjWf
+ dw9TQjTiJ2VssfagEnOSzIC3FbkEopqxzZ4fBXp/GeBtrY0C07hhz6TQtjv6khwUMyfm
+ MZww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=NcDFvjgGbx9VfQKK+9SR4tGKVPrq8hLqVBMEwEgtI1g=;
- b=IC8UskCfD40lMAntD6T9ZMbToKcQe+MTGjhxNGUhBKyj8AiGnis9F8BJiPsiTDOMcq
- Mn+6GQ1iWnVa8aDFGRwT1bFa3eHA+ykySfjsxVv7s/hD4ZqsRSnYjUVZ96pfHk5uOMaf
- 6hLoXz802/Nt/7iWczSHjKxB+Bzl1pyboSflqY8cx4su8t9Lz2pCCmZ6HakUzvhBjB7y
- lW8c1HGOX4Z9j/81Ueg3hB+iDPStHkSSHx2k3CHxDaoSpHs8is0a5Ohpr+39p+C/0kp4
- WZ8lPluuR/iqNo4mEUAYPUMnguDIzNjyY8e4hqHa63MZVJh/Mg7yHb8cgnyaGjpwwYRE
- rAmw==
-X-Gm-Message-State: AOAM53253RU/dcaozM0N2EukDDH/crTbyv4vtOAHMaAoIZqpRrimO+Ki
- rpk7vsCZcVrqakcx62uUdcZM1F9STvLWHLtTcM4=
-X-Google-Smtp-Source: ABdhPJxyHpm88VGyz4zKwjx5GGp0El/E9c9cv/o3/VD5aHvw4FCy+uIl/GZQV2baRFgmz8lsc9A5NJpuD8Y89hN+Hwk=
-X-Received: by 2002:a5d:9306:: with SMTP id l6mr31791462ion.105.1595981158403; 
- Tue, 28 Jul 2020 17:05:58 -0700 (PDT)
+ bh=s60jSJJ/3cxrSnbF5oaXBs/Z8ZYWzPit+/YHasxxZpg=;
+ b=mkbQqWgm4XeAvMiv+KoQuLnk0KlYMu0BoEhVMxbXSA1A0tYw57I/byGwHq2DvG1bTW
+ cy+zjUttZgIp7oGmjV4AyhK/+niIaDLcWRVAD1BwongvKYZiAqb9W51JSLj9IXhyv9gz
+ faAdtyAfZIQGxga5IftHasZebxT25WkE7MxtXckJuwIQuHZudhkxlH/YbV+T53dABhgK
+ knvKJJnoQbVQdaCoBJIsC0BV6bqDi/zyRzFXHIdvkwBcytRzv2v1a6AWfoudeKZnTvxM
+ 2YZiDduOiFW787j2DYABvd59J4w71DkXLNTMCFv14eZNsCClLEEACE2e/r5xr5Ea+/pj
+ OBjw==
+X-Gm-Message-State: AOAM531R0OqABE0zhSy99ILDuW6aE9HvuJN0HiJzgiukiAYmt0MUaPMW
+ wCbTFpDSTEnY7ySQYzYvBe4RoaPBbGChIHjK3Fo=
+X-Google-Smtp-Source: ABdhPJzKf+7JJJj3DqCL2DvrE7utAQ7Am9HgubU5SJYkncird9UI1taBbPeEBaR/g2xopBzBQGTEkXNW3u34sSWqo3I=
+X-Received: by 2002:a25:3b0d:: with SMTP id i13mr22763734yba.314.1595998272231; 
+ Tue, 28 Jul 2020 21:51:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1595924470.git.zong.li@sifive.com>
- <370a983d0f9e8a9a927b9bb8af5e7bc84b1bf9b1.1595924470.git.zong.li@sifive.com>
-In-Reply-To: <370a983d0f9e8a9a927b9bb8af5e7bc84b1bf9b1.1595924470.git.zong.li@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 28 Jul 2020 16:55:45 -0700
-Message-ID: <CAKmqyKPex+98-jN5pWON1EHQ=Y16uwRAS0y-WnYG8QSCzqjY7A@mail.gmail.com>
-Subject: Re: [PATCH v6 3/4] target/riscv: Fix the translation of physical
- address
-To: Zong Li <zong.li@sifive.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+References: <1594357499-29068-1-git-send-email-bmeng.cn@gmail.com>
+ <1594357499-29068-5-git-send-email-bmeng.cn@gmail.com>
+ <CAKmqyKM1m2j15ncbcW0rp5fk6FmbJ20uWOYUC40+v9PG=Hu7yQ@mail.gmail.com>
+ <CAEUhbmWxCMZG+kdyqeSBrJPRf0Jvb7a4AcADuFXpRwQ7fb8zDA@mail.gmail.com>
+ <CAEUhbmVJ94QF3UyEZUwcn-2yS4M3tKR-KOb4xPwSCwf9uRs-ww@mail.gmail.com>
+ <CAKmqyKNJA0_5Qsfe6FZXSgNydxSHRXQQtqk8nB6-kR-yNpFHCQ@mail.gmail.com>
+ <CAEUhbmXzufivy-7Qm-Nr6j6U9ynGOUgzV7XjXYDL_Ewcm1oj_g@mail.gmail.com>
+ <CAKmqyKN-Ez_fE6oBfczxsGVyyRpeEE8go0pB-C7i6a4SALj8uA@mail.gmail.com>
+In-Reply-To: <CAKmqyKN-Ez_fE6oBfczxsGVyyRpeEE8go0pB-C7i6a4SALj8uA@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 29 Jul 2020 12:51:00 +0800
+Message-ID: <CAEUhbmX5rcMuD8F30wdgYrvUq6NU84t5o=VkgKqwvwyfmA9e+w@mail.gmail.com>
+Subject: Re: [PATCH v4 4/7] hw/riscv: Use pre-built bios image of generic
+ platform for virt & sifive_u
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+ Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,51 +83,126 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2020 00:06:03 -0000
+X-List-Received-Date: Wed, 29 Jul 2020 04:51:16 -0000
 
-On Tue, Jul 28, 2020 at 1:26 AM Zong Li <zong.li@sifive.com> wrote:
->
-> The real physical address should add the 12 bits page offset. It also
-> causes the PMP wrong checking due to the minimum granularity of PMP is
-> 4 byte, but we always get the physical address which is 4KB alignment,
-> that means, we always use the start address of the page to check PMP for
-> all addresses which in the same page.
->
-> Signed-off-by: Zong Li <zong.li@sifive.com>
+Hi Alistair,
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+On Wed, Jul 29, 2020 at 2:26 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Tue, Jul 28, 2020 at 8:46 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > Hi Alistair,
+> >
+> > On Tue, Jul 28, 2020 at 11:39 PM Alistair Francis <alistair23@gmail.com> wrote:
+> > >
+> > > On Wed, Jul 15, 2020 at 9:55 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > >
+> > > > Hi Alistair,
+> > > >
+> > > > On Mon, Jul 13, 2020 at 9:53 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > > >
+> > > > > On Sun, Jul 12, 2020 at 1:34 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > > > > >
+> > > > > > On Thu, Jul 9, 2020 at 10:07 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > > > > >
+> > > > > > > From: Bin Meng <bin.meng@windriver.com>
+> > > > > > >
+> > > > > > > Update virt and sifive_u machines to use the opensbi fw_dynamic bios
+> > > > > > > image built for the generic FDT platform.
+> > > > > > >
+> > > > > > > Remove the out-of-date no longer used bios images.
+> > > > > > >
+> > > > > > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> > > > > > > Reviewed-by: Anup Patel <anup@brainfault.org>
+> > > > > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > > > > >
+> > > > > > This patch seems to break 32-bit Linux boots on the sifive_u and virt machines.
+> > > > > >
+> > > > >
+> > > > > It looks only Linux boot on sifive_u is broken. On our side, we have
+> > > > > been using VxWorks to test 32-bit OpenSBI on sifive_u so this issue
+> > > > > gets unnoticed. I will take a look.
+> > > >
+> > > > I've figured out the issue of 32-bit Linux booting failure on
+> > > > sifive_u. A patch has been sent to Linux upstream:
+> > > > http://lists.infradead.org/pipermail/linux-riscv/2020-July/001213.html
+> > >
+> > > Thanks for that. What change in QEMU causes this failure though?
+> > >
+> >
+> > There is nothing wrong in QEMU.
+>
+> There is. This patch causes a regression for 32-bit Linux boot on the
+> sifive_u. Your v5 has not addressed this.
 
-Alistair
+The 32-bit Linux boot failure was fixed by:
+http://lists.infradead.org/pipermail/linux-riscv/2020-July/001213.html
 
-> ---
->  target/riscv/cpu_helper.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+What additional issue did you see?
+
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 75d2ae3434..2f337e418c 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -543,7 +543,8 @@ restart:
->              /* for superpage mappings, make a fake leaf PTE for the TLB's
->                 benefit. */
->              target_ulong vpn = addr >> PGSHIFT;
-> -            *physical = (ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT;
-> +            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
-> +                        (addr & ~TARGET_PAGE_MASK);
+> With this patch, the Linux boot stops here:
 >
->              /* set permissions on the TLB entry */
->              if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
-> @@ -630,7 +631,7 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
->          }
->      }
+> OpenSBI v0.8
+>    ____                    _____ ____ _____
+>   / __ \                  / ____|  _ \_   _|
+>  | |  | |_ __   ___ _ __ | (___ | |_) || |
+>  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+>  | |__| | |_) |  __/ | | |____) | |_) || |_
+>   \____/| .__/ \___|_| |_|_____/|____/_____|
+>         | |
+>         |_|
 >
-> -    return phys_addr;
-> +    return phys_addr & TARGET_PAGE_MASK;
->  }
+> Platform Name       : SiFive HiFive Unleashed A00
+> Platform Features   : timer,mfdeleg
+> Platform HART Count : 4
+> Boot HART ID        : 3
+> Boot HART ISA       : rv64imafdcsu
+
+This is a 64-bit hardware.
+
+> BOOT HART Features  : pmp,scounteren,mcounteren
+> BOOT HART PMP Count : 16
+> Firmware Base       : 0x80000000
+> Firmware Size       : 116 KB
+> Runtime SBI Version : 0.2
 >
->  void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
-> --
-> 2.27.0
+> MIDELEG : 0x0000000000000222
+> MEDELEG : 0x000000000000b109
+> PMP0    : 0x0000000080000000-0x000000008001ffff (A)
+> PMP1    : 0x0000000000000000-0xffffffffffffffff (A,R,W,X)
+> [    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80200000
+> [    0.000000] Linux version 5.3.0 (oe-user@oe-host) (gcc version
+
+It seems that you are using quite an old kernel. Can you please try
+the latest version?
+
+> 9.2.0 (GCC)) #1 SMP Thu Sep 19 18:34:52 UTC 2019
+> [    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+> [    0.000000] printk: bootconsole [sbi0] enabled
+> [    0.000000] initrd not found or empty - disabling initrd
+> [    0.000000] Zone ranges:
+> [    0.000000]   DMA32    [mem 0x0000000080200000-0x00000000bfffffff]
+> [    0.000000]   Normal   empty
+> [    0.000000] Movable zone start for each node
+> [    0.000000] Early memory node ranges
+> [    0.000000]   node   0: [mem 0x0000000080200000-0x00000000bfffffff]
+> [    0.000000] Initmem setup node 0 [mem 0x0000000080200000-0x00000000bfffffff]
+> [    0.000000] OF: fdt: Invalid device tree blob header
+> [    0.000000] software IO TLB: mapped [mem 0xbb1fe000-0xbf1fe000] (64MB)
 >
+> Without this patch I can boot all the way to looking for a rootFS.
 >
+> Please don't send new versions of patches without addresses regressions.
+
+The patches were sent after addressing all regressions you reported
+(well the 32-bit Linux booting issue is actually not a QEMU
+regression, but one that exists in the Linux kernel side for a long
+time).
+
+I just tested 64-bit Linux boot on both virt and sifive_u, and they
+both can boot all the way to looking for a root fs.
+
+Regards,
+Bin
 
