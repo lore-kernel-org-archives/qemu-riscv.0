@@ -1,61 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k0kGJ-0005CR-Sp
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Jul 2020 07:28:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43710)
+	id 1k0kGO-0005Gz-2b
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Jul 2020 07:28:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43734)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=47218c038=Anup.Patel@wdc.com>)
- id 1k0kGH-0005AJ-Im; Wed, 29 Jul 2020 07:28:41 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:14617)
+ id 1k0kGK-0005D5-4V; Wed, 29 Jul 2020 07:28:44 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:14630)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=47218c038=Anup.Patel@wdc.com>)
- id 1k0kGE-0001pU-Ed; Wed, 29 Jul 2020 07:28:41 -0400
+ id 1k0kGI-0001pz-0I; Wed, 29 Jul 2020 07:28:43 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1596022118; x=1627558118;
+ t=1596022121; x=1627558121;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:content-transfer-encoding:mime-version;
- bh=O9q0lziQmErYW67NNpuYOugAfNuDIgqzBmwVWx4B+Oo=;
- b=JeSSix/gXNyDRawWevRB08jwjt6BDTyh6ectXsLzK7pdmxgYtwn5AdIG
- Cy58Xdn30ko0kskh+q1sH0xH19jv44w5fk4UkzHFn6Cjt0X6PWpcEuGNR
- BwF5dsnvXw6VKaC40/6kP5bnCMLLDeMNaILTWOAfc61KNluHNUrsrdHZE
- Q24VXf4RoOow+pyxdqzPCui3YttJL0h5AuL23KNNm6eG23kQTHLDqqXha
- XeJD0i3BZrsrmmmYYYbgCBki9bo8VUxhQ5aVoVcgOHx37z0fPanH9ptLW
- H2GRSxZqgsQQ5wZVne5gXw8u1CTAz1CJobtGZ1OvHxELGQ8tDpgGQCDCJ g==;
-IronPort-SDR: P0F/atC95s201mSUoJJgSKtJH7lH7pJq/7treVUOPvpdMt4tuPhBm5UsM9nlw5Y7Gzltok4Fkm
- O3j+GZ1wuA2U6QXkuEzzhScT9CWJOUmFm46sHPg+Kbb8gWK/OqFKO6xZyz+bD7dnami+1j2o0S
- pVaPc+V5sOS+zB2++cLlUzMHpxRlPUWH8q7m/H8XxNw08/lNENIvymGL94eStlJ3a6TD0kIUqM
- I33OYumSshU8RCKIeZnXk6MffOBHIO1Exa22dZoZuSbmQPfdykxcosm60LCff2jE8OEIHQKSFT
- gY4=
-X-IronPort-AV: E=Sophos;i="5.75,410,1589212800"; d="scan'208";a="143644185"
-Received: from mail-dm6nam12lp2175.outbound.protection.outlook.com (HELO
- NAM12-DM6-obe.outbound.protection.outlook.com) ([104.47.59.175])
- by ob1.hgst.iphmx.com with ESMTP; 29 Jul 2020 19:28:35 +0800
+ bh=3ovgoh9RYf9x+TXZWqjXqhdhVCBZC5tQzm8JwHuvwZA=;
+ b=i8Ftcq+zMYmTeNerMgPmWakB/v4q6Y2QRoBeYs1zV1RCTwP+IbBR0MMf
+ zJMCFe61nONh3CQM91PX5jh5x0BWnTQMdus3LRazkSpgaoOVvL9TevSq9
+ FybXrEdBHOUZf3waTA3A1gf1ckaceAokZENaxtvj5wvtHDEyJTeLIdJo+
+ zacjJYS8WNoZsUBsh0LmNRWFabhi9/SuoC00EDv/BrxPOp+1QZQSR7FvL
+ eGK4NRqFL7dn9lKjCWzQZKozJSWuLqlnGsjdT+AXJksZONBJfdgvqkVxe
+ +lxgugAZt/9Y72yOJRjkN7l9X4ug9/H39AXVxXeCZanad2X+2ygLXJOqO A==;
+IronPort-SDR: Uu+pcmRyLy+qVlbzzGurXQRluKS5YCflVJaI6GVreGcHebP5lA2e6hscHefKrwLBPo0yQCLTW4
+ K/NrdAsWply+YKGBi0cQbDtBrVlolnXNTos9WDkWobhf5GOSjPfOB7T+m5i4dBXk+79cQE7DaQ
+ SPesg5nDinnDWtYh+OpdP99U6yZFll+9WW7jo81/WswXi5IJwKjvgmI0fe7rg0XTHKpEwQgvZ3
+ P4CWGH9Wl47d51lr7b0F2Uievw/DMTHL719zzIKv9YIEkmQZ2RLDEvvhW0WvM63uxpw4gX/NTH
+ lms=
+X-IronPort-AV: E=Sophos;i="5.75,410,1589212800"; d="scan'208";a="143644194"
+Received: from mail-dm6nam12lp2168.outbound.protection.outlook.com (HELO
+ NAM12-DM6-obe.outbound.protection.outlook.com) ([104.47.59.168])
+ by ob1.hgst.iphmx.com with ESMTP; 29 Jul 2020 19:28:39 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nBi7CByvhmYXlHCgnA70/+fU3MQsnSi0qdiJclzUkuXCmvejPsMSBpcgGnz+MFZZDjI7VPgf8vZg2Gmf8wa7zFPHTDTHlRPAe4H2N3QsU+tkbx6GQEe229G5R32wirWtjP+BRDZD5q7PYq9WCNAwI03Ly0NEr6CPE76s8Hub2W48LBPpU2mj+CXWDpfXKo1QkMWDYpxcvJQqvOjkQverSOqMIzyrDYOiqqj/kSnaPVjhu4uSYHGUh4tTvWPF7xs/I51fyzw0ACJQ2vOuy2rcmi5MSA6Bhq0Jon2f0iIFmT9OPhcdJhowsYaLckjq7sl9UwBtWwIObI2axCOyxjD8cw==
+ b=I4uYmPxCEmbfJMaKz/iNVGx2ZO0oLdoz7vv3EGKEzpMqyX2y6VBTprslcLbUTLMqkIAb+6/zricPeF+8XKKk+En0nmpl3qSDVpE256Ux5S0Uhi2xeHS5D+H3fb21BmRtq7Sj9RPuum2htcl475a1iR3HNCBBTsiibcF2VyBmaQqcRLKs5Qdf3nGbWlmDr+SCA8AY2fHfg/zwRbO9porJovjVJFPr9CG6zoHnwaC5cVPsML+YM2i+jH80fdqJQaZCYyw2Ry8RCYThYyusGuR/8/52LGf5ua21V5nKdjXUPNBC+wI+Kc0e2vut75QXXmg6EvvABKBYVhuMVLSlkXnBBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Wj6gqpC3nsGj1KbwccBpw/cmuIwLQCeyi0Jl+MGuCvQ=;
- b=N9a98Ci58em9qeWnJtRYLUkkRO0yTMpk52Qg/RUfbwe7T4awXP7nSpAkCqcUV7lOEefGHS5sz0NUbO0Q6uDxMxdOkNgTrC34i0QOHXZa0smTr9MDpEK9kja6UZ2urMrnhF35qDzAHPE6Pp94MAwQL5YlvzKjoQXEI/VWL03yugSAajEIXKZ3WqmIDEG4foUF2WzJsJJ5uSq336Zt5Yr10ddbL0YCwFstWV8BEDaMwzH5BjCYr0L3giWk+DusB6piGbXM72ygx7E3wRRO59vV16RSpPJXjc8LzvDTOZcl4NxFYUGYI50l65kxapzaK+wrTsOV5W1BvxZLtxUPTFxeRA==
+ bh=2zucbBLuhA++Js13w8UpK5p5c03btMirgbnWzE/10yg=;
+ b=nI/EB0jFCfz4e7/En1KAdFQJfmbCcO1u2Ljc7x4aF8UL8LCCXQVip+TL66Jfs1CwqSfbwnvWMBLy/1eg6ZTDpTUj+OMlIiOfIU1ln/laXDAUtVfxNnnBEA0lOW25CH2zCAp9o8S7QfLYrb2i0YDm3ARzIBV62S9ZG0Oqy4bAtZ2XNcY56bqIK7hPT6o6b2nng/WnPZujZoXX9NUjdBhmXvhH4KJt9WzoUQDqfloZKpUfyrWV8M8SuN4lfEGCLg+7pg9mNRWCiqp9vPoicL3DKZGLXPOSgtuQ2H6NpX7SZguWXq+eomlz4+4VAnLczgNjJ71gCLmoXAFNilx9MPU1ew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Wj6gqpC3nsGj1KbwccBpw/cmuIwLQCeyi0Jl+MGuCvQ=;
- b=oYQ4yXJfSfgiT5+X6lTqrPsexNq6pb+v8qpqlZSuqYRxbwxpf3nUAVYmA7wYy269w3hCUL7+nfl2FcVPBwEO2TH5E5yRZEMbm8hXpdwWatKmc1hs541swUiSaS1u0BVCSWq22EMcF1Nwk0ThyWRNhnN0fbae0ItNqg68Hug/ylM=
+ bh=2zucbBLuhA++Js13w8UpK5p5c03btMirgbnWzE/10yg=;
+ b=pHQ9wABUQpPdAAkSwBcudrurpjUE5XweB42QSXHg/truDBcQAPSjjQdIv6AATQyeGHKE2eWGcFWP+s0U225P5jGTGeIUSH3Xf4KOm2p8Ci78qcPXAHsslMBqSwdCtXiVxQ7OOOVmbLzjJD3ISKr213ugE5lm7ifeBlhnKX+/fwY=
 Authentication-Results: linaro.org; dkim=none (message not signed)
  header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
 Received: from DM6PR04MB6201.namprd04.prod.outlook.com (2603:10b6:5:127::32)
  by DM6PR04MB5753.namprd04.prod.outlook.com (2603:10b6:5:167::25) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.23; Wed, 29 Jul
- 2020 11:28:34 +0000
+ 2020 11:28:38 +0000
 Received: from DM6PR04MB6201.namprd04.prod.outlook.com
  ([fe80::e0a4:aa82:1847:dea5]) by DM6PR04MB6201.namprd04.prod.outlook.com
  ([fe80::e0a4:aa82:1847:dea5%7]) with mapi id 15.20.3239.017; Wed, 29 Jul 2020
- 11:28:34 +0000
+ 11:28:38 +0000
 From: Anup Patel <anup.patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -64,10 +64,9 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Anup Patel <anup.patel@wdc.com>
-Subject: [PATCH 1/3] target/riscv: Optional feature to provide trapped
- instruction in CSRs
-Date: Wed, 29 Jul 2020 16:57:59 +0530
-Message-Id: <20200729112801.108985-2-anup.patel@wdc.com>
+Subject: [PATCH 2/3] target/riscv: Fix write_htinst() implementation
+Date: Wed, 29 Jul 2020 16:58:00 +0530
+Message-Id: <20200729112801.108985-3-anup.patel@wdc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200729112801.108985-1-anup.patel@wdc.com>
 References: <20200729112801.108985-1-anup.patel@wdc.com>
@@ -81,35 +80,35 @@ X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from wdc.com (103.56.183.175) by
  BM1PR01CA0166.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:68::36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3239.17 via Frontend Transport; Wed, 29 Jul 2020 11:28:30 +0000
+ 15.20.3239.17 via Frontend Transport; Wed, 29 Jul 2020 11:28:34 +0000
 X-Mailer: git-send-email 2.25.1
 X-Originating-IP: [103.56.183.175]
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 9d466722-dda5-457f-182e-08d833b2875f
+X-MS-Office365-Filtering-Correlation-Id: 564d6e7c-4e39-4a54-5cae-08d833b289dc
 X-MS-TrafficTypeDiagnostic: DM6PR04MB5753:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM6PR04MB57532DDFB7583E30E993CF218D700@DM6PR04MB5753.namprd04.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <DM6PR04MB5753AE5EA4FC5A1485ADD8178D700@DM6PR04MB5753.namprd04.prod.outlook.com>
 WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:4941;
+X-MS-Oob-TLC-OOBClassifiers: OLM:1388;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: gk5+275I2k9ITeJn/oMtfIk8+LS8MgObGtfTpcNhN+i47qjK1iVn37oJdWjaLK4HYDIuEECk9Suhl7/nMlW6ZpIeBOX9/YpCdgMQ+r9FbqPst6c8eV1W9kJwiVH7Bg/z8KXNhEXL2tP/iS7s+HNQjdOrjbfvgopCeWdEnRdfC8468UtIbKkAXtI+mT++LZkOIKmGWHLjQi8TSwyrafOfFvx0+oSQhVV2K5VJ6wEWuHg9BWBaZfTC2Ps6H5pxzY8TRH1kg2OOycOZm6bJl7mA2+M1pLy5D18uxMgdx3P/rOBUBYITGYqa9iLAVSQrjZU/
+X-Microsoft-Antispam-Message-Info: ImuYcHTkx6qGb7C/QNazCftt3b+P0718EpHRXf9Oto+qPCv2FLXpUybvwDo+hhishBL27B9OM4Zopy/RCsf6FwLG8OVzBN0gd7e5WtZBKQDFq1ahKd/axFTT2ySFEEl4/cZ02Lo340b+rlDIQJHlRLNYBkMENwu4yRdkowFOs546xVEhI6Y3tX6SWHtx9Hg4UQBU8rFLP/JsqQ4YWNlotaVy6AvB++MqRpl+5fS6J1aRG8Qra6qtsgPs6ahd0dT5ioSj1i9Of1A8RPApPBrNqmt2do2Ii8ys/+Cu/4uMaVD6zRObsabhSKRscRCNX6gc
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DM6PR04MB6201.namprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFTY:;
- SFS:(4636009)(39860400002)(396003)(136003)(376002)(366004)(346002)(4326008)(36756003)(956004)(2616005)(52116002)(8886007)(110136005)(2906002)(83380400001)(7696005)(55016002)(8676002)(44832011)(186003)(66946007)(316002)(26005)(54906003)(16526019)(8936002)(86362001)(66556008)(5660300002)(6666004)(1076003)(478600001)(66476007);
+ SFS:(4636009)(39860400002)(396003)(136003)(376002)(366004)(346002)(4326008)(36756003)(956004)(2616005)(52116002)(8886007)(110136005)(2906002)(7696005)(55016002)(8676002)(44832011)(186003)(4744005)(66946007)(316002)(26005)(54906003)(16526019)(8936002)(86362001)(66556008)(5660300002)(6666004)(1076003)(478600001)(66476007);
  DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData: tZPafMqQXMds8dyt1Gj/jmVtlua8L0bqlaxTC1/KOPTSK/dg2UYM+7/SZMvJg7uaJr/R+3twPey4J5ZivAsLVW0ETih/CQM8IVX+rqd1drEv/Wyzbx/XZgjDRsnlLqyg6qksGHFsKLJpenRko3c9c0uObjAIfMORcKxXIj+ZSYe+6mLPWyiyv+f3vprU9V0zmej+WqH4rQy4BEUg5E8BwacFDhtE4inkpckNE3C1n5wo0uiehTykNq05xIDwiS4mKZvW9VZ7a/aigR74nI7dItafrQ6uSz48YahNH8F0JDNKOGJVr86IbSIRPlWV7E5yTaDUjYUcJR7VPYCb6Gdw2aY0sFVXaftpbVsv3kFWdKWHAAcZZJBkRioD0Xn+vqfmyL2RlAOvtYxjso7x1lZGsS1AYkaBqwS88lieZey6HOUZyGG1mtuev9BPzcBncJSrgaOpAlwKjZhp9DbGGfeoSjmyKGYhMFFjlNLZo5brUFpHJg418+0I/4YYPOTSRyto
+X-MS-Exchange-AntiSpam-MessageData: xf7vNfROaFLCi/6v1t2YG+Qgc6gwliR8ibRtNXFkXGbBk/59BOyTivvQUshfQOgCsJX8FU9J8LWxEeKqsDCIkWWrgGESclWIDm5WZhj65JNjGe7n2NOBuqsPGztBM7L8T46ILKIu6ATRm99gqbWyRoNSz0oskdjM+rMixqj96p+VxeK1+v707WE6oWfBjwk/hFUSARkzi63UkDq+G99kVidrzdCykK1Sn3momofneYa4p9oTuUy+dliy2R3tPA/aVIoNhK04LW8nhJ9FB2StLAWPa4v2Hdqg4pmMs+Pbx2R8op4+7r0GLyoow88A0z0Rp3xXfSdYTOaYcyzV6HHfIVe48UJtHK0FZ0eC52qYhf1N2mN6i6TFU+HKhapwlyEJQyOhps/2nrp1z++kCTPxXaqpC1fHhY62FRX7aqZA15eifCpevZkZwNAr/Mk4TvnUUjbX2PNrmWY0R6X1us90r1tJC7jc05Yql3eO9DsyThx4R9ni2Jz6O/NeRyAXII1Y
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d466722-dda5-457f-182e-08d833b2875f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 564d6e7c-4e39-4a54-5cae-08d833b289dc
 X-MS-Exchange-CrossTenant-AuthSource: DM6PR04MB6201.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2020 11:28:34.4224 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2020 11:28:38.7907 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lVXsO8YCqSAkp/kAvJZUMNDr1wYjOD05YWdDs1ePTteo1wJQC5vWVA0ZlzQbSuUZuDOXh971VdeP2ESa9IaLQA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: q9q6tKpLvLn8rkf8oQu5is084v71hQR31YciJkAWJmcFN2HasvtEKeHWnhkCfUUFrGoBXKqJfOry4O/8itaO9Q==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB5753
 Received-SPF: pass client-ip=216.71.154.42;
  envelope-from=prvs=47218c038=Anup.Patel@wdc.com; helo=esa4.hgst.iphmx.com
@@ -134,182 +133,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2020 11:28:41 -0000
+X-List-Received-Date: Wed, 29 Jul 2020 11:28:44 -0000
 
-The RISC-V spec allows implementations to provide trapped instruction
-opcode in MTVAL/STVAL CSR for illegal/virtual instruction traps. This
-is totally optional and most RISC-V implementations always set zero
-in the MTVAL/STVAL CSR for illegal/virtual instruction traps.
-
-When trapped instruction opcode is available in MTVAL/STVAL CSR, the
-M-mode runtime firmware (and Hypervisors) can skip unprivlege access
-for reading trapped instruction opcode which in-turn will speed-up
-the illegal/virtual instruction trap handling.
-
-This patch implements RISCV_FEATURE_TINST feature which when enabled
-provides original trapped instruction opcode in MTVAL/STVAL CSRs for
-illegal/virtual instruction trap.
+The htinst CSR is writeable from M-mode and HS-mode so
+we should not ignore writes to htinst CSR.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 ---
- target/riscv/cpu.c        |  7 +++++++
- target/riscv/cpu.h        | 11 ++++++++++-
- target/riscv/cpu_helper.c |  6 ++++++
- target/riscv/translate.c  | 14 +++++++++++++-
- 4 files changed, 36 insertions(+), 2 deletions(-)
+ target/riscv/csr.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index eeb91f8513..ec098e445e 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -317,6 +317,7 @@ void restore_state_to_opc(CPURISCVState *env, TranslationBlock *tb,
-                           target_ulong *data)
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index f985b85de4..99fcb7f67d 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -943,6 +943,7 @@ static int read_htinst(CPURISCVState *env, int csrno, target_ulong *val)
+ 
+ static int write_htinst(CPURISCVState *env, int csrno, target_ulong val)
  {
-     env->pc = data[0];
-+    env->trap_insn = data[1];
++    env->htinst = val;
+     return 0;
  }
  
- static void riscv_cpu_reset(DeviceState *dev)
-@@ -332,6 +333,7 @@ static void riscv_cpu_reset(DeviceState *dev)
-     env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
-     env->mcause = 0;
-     env->pc = env->resetvec;
-+    env->trap_insn = 0;
- #endif
-     cs->exception_index = EXCP_NONE;
-     env->load_res = -1;
-@@ -387,6 +389,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         set_feature(env, RISCV_FEATURE_PMP);
-     }
- 
-+    if (cpu->cfg.tinst) {
-+        set_feature(env, RISCV_FEATURE_TINST);
-+    }
-+
-     /* If misa isn't set (rv32 and rv64 machines) set it here */
-     if (!env->misa) {
-         /* Do some ISA extension error checking */
-@@ -487,6 +493,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-+    DEFINE_PROP_BOOL("tinst", RISCVCPU, cfg.tinst, false),
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 1bb5271511..33984539d7 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -26,6 +26,12 @@
- 
- #define TCG_GUEST_DEFAULT_MO 0
- 
-+/*
-+ * RISC-V-specific extra insn start words:
-+ * 1: Original instruction opcode
-+ */
-+#define TARGET_INSN_START_EXTRA_WORDS 1
-+
- #define TYPE_RISCV_CPU "riscv-cpu"
- 
- #define RISCV_CPU_TYPE_SUFFIX "-" TYPE_RISCV_CPU
-@@ -70,7 +76,8 @@
- enum {
-     RISCV_FEATURE_MMU,
-     RISCV_FEATURE_PMP,
--    RISCV_FEATURE_MISA
-+    RISCV_FEATURE_MISA,
-+    RISCV_FEATURE_TINST
- };
- 
- #define PRIV_VERSION_1_10_0 0x00011000
-@@ -97,6 +104,7 @@ struct CPURISCVState {
-     target_ulong frm;
- 
-     target_ulong badaddr;
-+    target_ulong trap_insn;
-     target_ulong guest_phys_fault_addr;
- 
-     target_ulong priv_ver;
-@@ -264,6 +272,7 @@ typedef struct RISCVCPU {
-         char *user_spec;
-         bool mmu;
-         bool pmp;
-+        bool tinst;
-     } cfg;
- } RISCVCPU;
- 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index eccd80cfef..e4bd45d66a 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -864,6 +864,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         case RISCV_EXCP_STORE_PAGE_FAULT:
-             tval = env->badaddr;
-             break;
-+        case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
-+        case RISCV_EXCP_ILLEGAL_INST:
-+            if (riscv_feature(env, RISCV_FEATURE_TINST)) {
-+                tval = env->trap_insn;
-+            }
-+            break;
-         default:
-             break;
-         }
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 1d973b62e9..03954bff62 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -56,6 +56,8 @@ typedef struct DisasContext {
-        to reset this known value.  */
-     int frm;
-     bool ext_ifencei;
-+    /* TCG op of the current insn_start.  */
-+    TCGOp *insn_start;
- } DisasContext;
- 
- #ifdef TARGET_RISCV64
-@@ -717,6 +719,13 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
- /* Include the auto-generated decoder for 16 bit insn */
- #include "decode_insn16.inc.c"
- 
-+static inline void decode_save_opc(DisasContext *ctx, target_ulong opc)
-+{
-+    assert(ctx->insn_start != NULL);
-+    tcg_set_insn_start_param(ctx->insn_start, 1, opc);
-+    ctx->insn_start = NULL;
-+}
-+
- static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
- {
-     /* check for compressed insn */
-@@ -724,6 +733,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-         if (!has_ext(ctx, RVC)) {
-             gen_exception_illegal(ctx);
-         } else {
-+            decode_save_opc(ctx, opcode);
-             ctx->pc_succ_insn = ctx->base.pc_next + 2;
-             if (!decode_insn16(ctx, opcode)) {
-                 /* fall back to old decoder */
-@@ -734,6 +744,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-         uint32_t opcode32 = opcode;
-         opcode32 = deposit32(opcode32, 16, 16,
-                              translator_lduw(env, ctx->base.pc_next + 2));
-+        decode_save_opc(ctx, opcode32);
-         ctx->pc_succ_insn = ctx->base.pc_next + 4;
-         if (!decode_insn32(ctx, opcode32)) {
-             gen_exception_illegal(ctx);
-@@ -773,7 +784,8 @@ static void riscv_tr_insn_start(DisasContextBase *dcbase, CPUState *cpu)
- {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
- 
--    tcg_gen_insn_start(ctx->base.pc_next);
-+    tcg_gen_insn_start(ctx->base.pc_next, 0);
-+    ctx->insn_start = tcg_last_op();
- }
- 
- static bool riscv_tr_breakpoint_check(DisasContextBase *dcbase, CPUState *cpu,
 -- 
 2.25.1
 
