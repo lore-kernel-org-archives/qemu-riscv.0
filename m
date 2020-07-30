@@ -1,66 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k15F5-0000EB-MS
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Jul 2020 05:52:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41802)
+	id 1k17f0-00064x-5o
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Jul 2020 08:27:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53046)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
- id 1k15F4-0000Bo-E3
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 05:52:50 -0400
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b]:54424)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1k17ew-00064O-6O
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 08:27:43 -0400
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a]:38504)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
- id 1k15F2-0000gK-Gr
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 05:52:50 -0400
-Received: by mail-pj1-x102b.google.com with SMTP id mt12so3708131pjb.4
- for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2020 02:52:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=Zs94FTgWvcu/MzkMP8Xd/Rn4NJyFeB+zub1Qx5JMGTU=;
- b=b3RLf+r8mN1LK2Gxqry2WpiOyTDWRnFdCy/J8e6kGOo1ACyFKet6bFms3OF1/gMnJ+
- owaDiVq+oBIGI4YC7vJsdHOh7NT2Y+4dLnKGu/rIGOnh1qUya24td6kV+Jkr0+TLvwFC
- js7hwk3xIe4qFNsq74XIfq25Izczd7GZM6FxTMuDo+vvcKgQWCkAwqrdeejL85XPTjLO
- RqHcv04HP0vccwo8NGnpwDJgN13fQ6/8dOiLnNTw1QgLVtOSNaWdnOqTIOT/1Hupwm3J
- Z9ZxmY1zrEpmivETW23EAdMGoVBKpRmzIYrj5Kd+QbaRevcEzGICHD+OAn+IxMc1s1x+
- c/FQ==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1k17er-0005kk-FP
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 08:27:41 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id m16so13956540pls.5
+ for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2020 05:27:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=0b3dRDlok4eTJZfgVkBj+lYoyi4tcWWlSRgfYqrWfr8=;
+ b=H67eqjEV1GlGVsY8KLGbZoJVlxyOWwrQFA9qibdIWaLquLtspruVjfIws8fjZ49l/H
+ gmHzcO0DZTYsqcMxazOE43wsmefPhw5uOsEoTq3dmCM4PdGRL2wB9poLOZ8EqaOjTYen
+ h/pDFrCSxLe6ljQqRzBQZShvr0rn87qq7vPf0t/S3loWhmGBMWOAbdexeYUFAlA4r0fc
+ bbz2nz3jo8jo70ZrRilzWbcP9TJYfkXDNmkc9k/9yGh7chMXGLk2sPUxgBaOpkJgPcNm
+ 3pNwRKGIxtMlsBhMYGZ08vj5FE6ld4aa6DYzrIpZ+GjpRhHg9+VeKjm31pLW5yfSX9Pz
+ Sadw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=Zs94FTgWvcu/MzkMP8Xd/Rn4NJyFeB+zub1Qx5JMGTU=;
- b=o4n0ca1rLiJzkUyj50dT/cuZWDJb4ckkHfz9NxJzwS11le7GnZjEni1LOlXoauqseV
- TRR8KTS5I75KpMH+9q/2ozYAIByQhjkpus0ifT0e9qOLjv3wUC6Tl5tOEL96eXuOYO61
- FUCh7T2DTDKtORbT9IpUOgzjTIK5jERk9LxQNkSVa8IBTrWKE8fYizkIgi11giNpKC7Z
- bneVopd0w03liAIH6dAuF88tYF6B9XM4KazLVntvA0VcrwjD7+DlSGxrVDoRhshWnZH9
- Wacj2XwaLqIcQSpF57ufthgqm8PP1y2B3NhgryfIaRnzhY/ukZRtcumCZ1czXcx2cwSN
- Uisw==
-X-Gm-Message-State: AOAM5325YP3LYL3vf/DOwWXfHe2wXSSsbt9ad/jX9KOJl/ZBaXhT/rHu
- AHfNRjaPrHryFENhE4CFrm6vgQ==
-X-Google-Smtp-Source: ABdhPJzHa4bQ/U3MhFN6ZE6I+Uu8HnhNqeJUcOu2PMP/TjkRsd1vhaJzh3t9jucd6SPOsiaEvFflyg==
-X-Received: by 2002:a62:e217:: with SMTP id a23mr2458418pfi.257.1596102767136; 
- Thu, 30 Jul 2020 02:52:47 -0700 (PDT)
-Received: from gamma11.internal.sifive.com ([64.62.193.194])
- by smtp.gmail.com with ESMTPSA id e5sm5040654pjy.26.2020.07.30.02.52.46
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 30 Jul 2020 02:52:46 -0700 (PDT)
-From: Chih-Min Chao <chihmin.chao@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH 3/3] softfloat: add fp16 and uint8/int8 interconvert functions
-Date: Thu, 30 Jul 2020 02:52:24 -0700
-Message-Id: <1596102747-20226-4-git-send-email-chihmin.chao@sifive.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1596102747-20226-1-git-send-email-chihmin.chao@sifive.com>
-References: <1596102747-20226-1-git-send-email-chihmin.chao@sifive.com>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=0b3dRDlok4eTJZfgVkBj+lYoyi4tcWWlSRgfYqrWfr8=;
+ b=fNMASNh8TivT+8GkEcmof5KUZGlRDI3YKMdlJcNszelPB3vI2Sou9HJUUvyrl65VmF
+ fTbfCOso1D3jU247iXN903zuLttI5v+Xzt0fqF55LMBpaIRBFPQ69xhBG7OOgw6Dy8CZ
+ 00I8YOn4y5qtfuf+1IabEyLMgK39BNLcV2SkB6pbb9c6S86BPiNvRdRiXkZ5vbqYM4Kz
+ IEqOB3TRbJrF87WCsksILBbMnzr2nap451PqN9plzOmr7afAa40+W5glH5Tf7KpQGqCA
+ FRvOWdMBLsVHUyHMELmPqcexgcKBl8WR0FEoEe1gYjvfXy6BZ1P8TlEmf10w4zd1VizH
+ kbSA==
+X-Gm-Message-State: AOAM533p2SXfFKMEZ3Mz5AY2Q8ODN9zX5uubo+CUBtIU8fpKchyUvcCq
+ C6ChXFdPM9ipkF/tMPTX07UElQ==
+X-Google-Smtp-Source: ABdhPJwkXf0ayBQ8mAz4nPkAG1/KN+eqI2yls9HUzWq9yVomvJZc9q57puTr9pMcSSuWTCY6gThTlg==
+X-Received: by 2002:a63:6c0a:: with SMTP id h10mr34449497pgc.11.1596112055481; 
+ Thu, 30 Jul 2020 05:27:35 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.141.89])
+ by smtp.gmail.com with ESMTPSA id s125sm4294749pfc.63.2020.07.30.05.27.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Jul 2020 05:27:34 -0700 (PDT)
+Subject: Re: [RFC v2 01/76] target/riscv: drop vector 0.7.1 support
+To: Frank Chang <frank.chang@sifive.com>,
+ Alistair Francis <alistair23@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20200722091641.8834-2-frank.chang@sifive.com>
+ <mhng-0246b27e-f392-45a9-806e-9998bb5ede5e@palmerdabbelt-glaptop1>
+ <CAKmqyKMEraiyw_r7U3v8K-2pdipBh3otaPOaNPLKtpvqPe780A@mail.gmail.com>
+ <CAE_xrPi0Rc88P4wehno_ewjH_-wCm5bicO-rae-ZYsAgVpyOBw@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <5a3b8461-51ba-8fdf-03a0-31da01cd6d91@linaro.org>
+Date: Thu, 30 Jul 2020 05:27:32 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <CAE_xrPi0Rc88P4wehno_ewjH_-wCm5bicO-rae-ZYsAgVpyOBw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=chihmin.chao@sifive.com; helo=mail-pj1-x102b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -68,8 +76,8 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,145 +90,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2020 09:52:50 -0000
+X-List-Received-Date: Thu, 30 Jul 2020 12:27:43 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+On 7/30/20 1:07 AM, Frank Chang wrote:
+> So, if it's okay, we can skip RVV v0.9 and bump to RVV v1.0 directly in our
+> next version of patchset.
+> Which I think may relieve the burden for the community to maintain
+> multi-version of vector drafts.
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
----
- fpu/softfloat.c         | 34 ++++++++++++++++++++++++++++++++++
- include/fpu/softfloat.h |  8 ++++++++
- 2 files changed, 42 insertions(+)
+That would be my preference.  Thanks,
 
-diff --git a/fpu/softfloat.c b/fpu/softfloat.c
-index 4466ece..c700a39 100644
---- a/fpu/softfloat.c
-+++ b/fpu/softfloat.c
-@@ -2114,6 +2114,13 @@ static int64_t round_to_int_and_pack(FloatParts in, FloatRoundMode rmode,
-     }
- }
- 
-+int8_t float16_to_int8_scalbn(float16 a, FloatRoundMode rmode, int scale,
-+                              float_status *s)
-+{
-+    return round_to_int_and_pack(float16_unpack_canonical(a, s),
-+                                 rmode, scale, INT8_MIN, INT8_MAX, s);
-+}
-+
- int16_t float16_to_int16_scalbn(float16 a, FloatRoundMode rmode, int scale,
-                                 float_status *s)
- {
-@@ -2177,6 +2184,11 @@ int64_t float64_to_int64_scalbn(float64 a, FloatRoundMode rmode, int scale,
-                                  rmode, scale, INT64_MIN, INT64_MAX, s);
- }
- 
-+int8_t float16_to_int8(float16 a, float_status *s)
-+{
-+    return float16_to_int8_scalbn(a, s->float_rounding_mode, 0, s);
-+}
-+
- int16_t float16_to_int16(float16 a, float_status *s)
- {
-     return float16_to_int16_scalbn(a, s->float_rounding_mode, 0, s);
-@@ -2327,6 +2339,13 @@ static uint64_t round_to_uint_and_pack(FloatParts in, FloatRoundMode rmode,
-     }
- }
- 
-+uint8_t float16_to_uint8_scalbn(float16 a, FloatRoundMode rmode, int scale,
-+                                float_status *s)
-+{
-+    return round_to_uint_and_pack(float16_unpack_canonical(a, s),
-+                                  rmode, scale, UINT8_MAX, s);
-+}
-+
- uint16_t float16_to_uint16_scalbn(float16 a, FloatRoundMode rmode, int scale,
-                                   float_status *s)
- {
-@@ -2390,6 +2409,11 @@ uint64_t float64_to_uint64_scalbn(float64 a, FloatRoundMode rmode, int scale,
-                                   rmode, scale, UINT64_MAX, s);
- }
- 
-+uint8_t float16_to_uint8(float16 a, float_status *s)
-+{
-+    return float16_to_uint8_scalbn(a, s->float_rounding_mode, 0, s);
-+}
-+
- uint16_t float16_to_uint16(float16 a, float_status *s)
- {
-     return float16_to_uint16_scalbn(a, s->float_rounding_mode, 0, s);
-@@ -2544,6 +2568,11 @@ float16 int16_to_float16(int16_t a, float_status *status)
-     return int64_to_float16_scalbn(a, 0, status);
- }
- 
-+float16 int8_to_float16(int8_t a, float_status *status)
-+{
-+    return int64_to_float16_scalbn(a, 0, status);
-+}
-+
- float32 int64_to_float32_scalbn(int64_t a, int scale, float_status *status)
- {
-     FloatParts pa = int_to_float(a, scale, status);
-@@ -2669,6 +2698,11 @@ float16 uint16_to_float16(uint16_t a, float_status *status)
-     return uint64_to_float16_scalbn(a, 0, status);
- }
- 
-+float16 uint8_to_float16(uint8_t a, float_status *status)
-+{
-+    return uint64_to_float16_scalbn(a, 0, status);
-+}
-+
- float32 uint64_to_float32_scalbn(uint64_t a, int scale, float_status *status)
- {
-     FloatParts pa = uint_to_float(a, scale, status);
-diff --git a/include/fpu/softfloat.h b/include/fpu/softfloat.h
-index 65842b0..fec670a 100644
---- a/include/fpu/softfloat.h
-+++ b/include/fpu/softfloat.h
-@@ -136,9 +136,11 @@ float16 uint16_to_float16_scalbn(uint16_t a, int, float_status *status);
- float16 uint32_to_float16_scalbn(uint32_t a, int, float_status *status);
- float16 uint64_to_float16_scalbn(uint64_t a, int, float_status *status);
- 
-+float16 int8_to_float16(int8_t a, float_status *status);
- float16 int16_to_float16(int16_t a, float_status *status);
- float16 int32_to_float16(int32_t a, float_status *status);
- float16 int64_to_float16(int64_t a, float_status *status);
-+float16 uint8_to_float16(uint8_t a, float_status *status);
- float16 uint16_to_float16(uint16_t a, float_status *status);
- float16 uint32_to_float16(uint32_t a, float_status *status);
- float16 uint64_to_float16(uint64_t a, float_status *status);
-@@ -187,10 +189,13 @@ float32 float16_to_float32(float16, bool ieee, float_status *status);
- float16 float64_to_float16(float64 a, bool ieee, float_status *status);
- float64 float16_to_float64(float16 a, bool ieee, float_status *status);
- 
-+int8_t  float16_to_int8_scalbn(float16, FloatRoundMode, int,
-+                               float_status *status);
- int16_t float16_to_int16_scalbn(float16, FloatRoundMode, int, float_status *);
- int32_t float16_to_int32_scalbn(float16, FloatRoundMode, int, float_status *);
- int64_t float16_to_int64_scalbn(float16, FloatRoundMode, int, float_status *);
- 
-+int8_t  float16_to_int8(float16, float_status *status);
- int16_t float16_to_int16(float16, float_status *status);
- int32_t float16_to_int32(float16, float_status *status);
- int64_t float16_to_int64(float16, float_status *status);
-@@ -199,6 +204,8 @@ int16_t float16_to_int16_round_to_zero(float16, float_status *status);
- int32_t float16_to_int32_round_to_zero(float16, float_status *status);
- int64_t float16_to_int64_round_to_zero(float16, float_status *status);
- 
-+uint8_t float16_to_uint8_scalbn(float16 a, FloatRoundMode,
-+                                int, float_status *status);
- uint16_t float16_to_uint16_scalbn(float16 a, FloatRoundMode,
-                                   int, float_status *status);
- uint32_t float16_to_uint32_scalbn(float16 a, FloatRoundMode,
-@@ -206,6 +213,7 @@ uint32_t float16_to_uint32_scalbn(float16 a, FloatRoundMode,
- uint64_t float16_to_uint64_scalbn(float16 a, FloatRoundMode,
-                                   int, float_status *status);
- 
-+uint8_t  float16_to_uint8(float16 a, float_status *status);
- uint16_t float16_to_uint16(float16 a, float_status *status);
- uint32_t float16_to_uint32(float16 a, float_status *status);
- uint64_t float16_to_uint64(float16 a, float_status *status);
--- 
-2.7.4
 
+r~
 
