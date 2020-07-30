@@ -1,80 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k0siP-0001c0-LN
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Jul 2020 16:30:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34304)
+	id 1k13bS-000737-Cn
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Jul 2020 04:07:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48508)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k0siO-0001bP-9c
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2020 16:30:16 -0400
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c]:44229)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1k13bR-00072y-9P
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 04:07:49 -0400
+Received: from mail-ot1-x32f.google.com ([2607:f8b0:4864:20::32f]:33974)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k0siM-00040l-2y
- for qemu-riscv@nongnu.org; Wed, 29 Jul 2020 16:30:15 -0400
-Received: by mail-pg1-x52c.google.com with SMTP id j19so15025023pgm.11
- for <qemu-riscv@nongnu.org>; Wed, 29 Jul 2020 13:30:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=p+aqaaXHAQ8uEWbVmX1DMlJXBwCvw5T6O78rpXaT0HE=;
- b=t+hVH4UCLwDttH9X3DqDgT9gLKsYl/pzaLj3aF+EkHfjNAehY6lULLNrQCQpTew4ds
- 6qjpik1MkiYcz28iDb4kF6kSjg/gLe8wV3O2w+nPAa+EPmlhn0gBuX28M9S2WHp3WwS0
- 3cbxzLocr+5RRKAzCB86U4KW9XLsFgXnkgLvBxKZMldMI/3GQg/56ApkWnFCrashMv1p
- aPUnDdB2eXjBCNWucZassqplqvlLRQyRZECnsdayYylI7FYTL0SBbGb8eG26pwG9dq4F
- WffsneoyJzQzhl8LmviCiFqhDNQ/si74LIQFnekkxnSg+v7ND+NNPhXAbm1Xxqs1ABjT
- qfDA==
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1k13bO-0003FU-L1
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 04:07:48 -0400
+Received: by mail-ot1-x32f.google.com with SMTP id k12so2651492otr.1
+ for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2020 01:07:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=UQsqOwv0Bj/SsgWe8rf6tO6u76r/jzzA/V2mY0pM3bg=;
+ b=WKgf3sZt6Bf2jUAXLvFi0pG5P8HPyI0+WF0wdBwjAUnCsgczeJUkS7f1iGjxB+YjLO
+ GynsDzHDr+BFfIpPShYG9w3CVbXnOsM43qfwHiW5mAlS4FsqQv9bVkCo5djiI4o6RbSl
+ QippqECljfxXpov+XYQy/wgoYxydxtQF9i/jmRcKzWQixlIkkkfObax5812Jbc0cn4H3
+ 4zOWqnH1V6KH1v+p0Ov7hbhG1ccubrKod4I24goQZUaFg8Qvawx8F9KXo3XZltVPsCJv
+ jqoseN0pa2TZSCLbTT8umXlofm1FU/gE3kpvHj8z9WvXCY5nfQZVJyP40LPZwLv2109r
+ Dolw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=p+aqaaXHAQ8uEWbVmX1DMlJXBwCvw5T6O78rpXaT0HE=;
- b=NRaIxBAoxq4c/qecvaTTSA6trHqySZBeGNEhQjsOkDqfR9haY2dp+TLKt4F81TncDi
- KeBPVFbetXCSlkMVC7nAiEZ6GYHQo9S6DnNDuQw1d+3/keDd7zm8Lk62Eo7dOvRfZpa3
- cdFFA/Pq6eEukK9YVWcbqF47EKB1molULVwTg4A/yFZSZ0lFvU2kP6cmV19EY1ScF6m4
- KiLTnh6ph6rrCr53IRhHrIcFGkp2k5qNObA3YQ0BS0jPdscvCcB6NsvP5KudwtrpR/TZ
- DadwIL0DE2JXYSML2sWlUWV7SIEqCy/q/b28ZdMPj+Gf1uACqJ1011LmJMcl2nITWEX2
- 0T+g==
-X-Gm-Message-State: AOAM531Q9Kr830ABjCe4eUXIahMpShwSAWTN2kQkhxiNB/CR8ydriRqu
- Fo+EZe5fIoDfz36Qr/DAIKz6Yw==
-X-Google-Smtp-Source: ABdhPJwF+XD4L9LKg/OlGXp1It8ivylvxd7yRmLHoIlr1rSPkmaVlKL/MC/7+jSZ1TCvg8GN39uB3w==
-X-Received: by 2002:a62:7b4e:: with SMTP id w75mr71390pfc.130.1596054611869;
- Wed, 29 Jul 2020 13:30:11 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id z3sm3062497pjn.32.2020.07.29.13.30.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Jul 2020 13:30:11 -0700 (PDT)
-Subject: Re: [RFC v2 27/76] target/riscv: rvv-0.9: load/store whole register
- instructions
-To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- LIU Zhiwei <zhiwei_liu@c-sky.com>
-References: <20200722091641.8834-1-frank.chang@sifive.com>
- <20200722091641.8834-28-frank.chang@sifive.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <d1e2f533-9107-3e43-cb65-22125d2eb396@linaro.org>
-Date: Wed, 29 Jul 2020 13:30:09 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=UQsqOwv0Bj/SsgWe8rf6tO6u76r/jzzA/V2mY0pM3bg=;
+ b=rLsY4g0Gc8sdzP2KsHn3LYnkTlhm0DkbiekDM32TxxHEaMcv640kOv3uvDkRHI65+o
+ JU0Ea3iHACFwn915uYgUZE+ssaOdemQh2pIixZ82G9KQe8f/sIaSMNRTsTMUQym4D+y+
+ LJkVL1xQL2bppSckDyaxzT8AHjCW5UQw3jxTICMOAfhA7x4LqtkcB1RsrUmgochN1wMC
+ UeiA2oVwCEjd+PBlFztm1qwIQO689QLkQtaJNyS4viysizH00DxkqKbM5jfEwAJbgNyo
+ jS7fykiRU4G7cFPY65SwEhIqaqI/V7UOHuMVDLHaUZ9WXvKjUREj2P6BRHOm8n46bi/3
+ 55rg==
+X-Gm-Message-State: AOAM5309VNvrMRKc8Fh028qvCvtp619t3JksTm/jMygDGmj2n6WLb2ei
+ L/KJp63P16dsf7A317ORsH1ottpd4d61W0uw4uyPkg==
+X-Google-Smtp-Source: ABdhPJy1f7MSG6+V4q5x5e+XaLueACbt5Wu1SfVVmKV9/EWCUVBpTI26VA72x2R/qw1ewK9n2xqELbxjg6NyBNpRQys=
+X-Received: by 2002:a05:6830:1e71:: with SMTP id
+ m17mr1467317otr.188.1596096464640; 
+ Thu, 30 Jul 2020 01:07:44 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200722091641.8834-28-frank.chang@sifive.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52c.google.com
+References: <20200722091641.8834-2-frank.chang@sifive.com>
+ <mhng-0246b27e-f392-45a9-806e-9998bb5ede5e@palmerdabbelt-glaptop1>
+ <CAKmqyKMEraiyw_r7U3v8K-2pdipBh3otaPOaNPLKtpvqPe780A@mail.gmail.com>
+In-Reply-To: <CAKmqyKMEraiyw_r7U3v8K-2pdipBh3otaPOaNPLKtpvqPe780A@mail.gmail.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Thu, 30 Jul 2020 16:07:33 +0800
+Message-ID: <CAE_xrPi0Rc88P4wehno_ewjH_-wCm5bicO-rae-ZYsAgVpyOBw@mail.gmail.com>
+Subject: Re: [RFC v2 01/76] target/riscv: drop vector 0.7.1 support
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: multipart/alternative; boundary="000000000000cd74dc05aba42af6"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32f;
+ envelope-from=frank.chang@sifive.com; helo=mail-ot1-x32f.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -87,43 +79,390 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2020 20:30:16 -0000
+X-List-Received-Date: Thu, 30 Jul 2020 08:07:49 -0000
 
-On 7/22/20 2:15 AM, frank.chang@sifive.com wrote:
-> +static void
-> +vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-> +                vext_ldst_elem_fn *ldst_elem, uint32_t esz, uintptr_t ra,
-> +                MMUAccessType access_type)
-> +{
-> +    uint32_t i, k;
-> +    uint32_t nf = vext_nf(desc);
-> +    uint32_t vlmax = vext_maxsz(desc) / esz;
-> +    uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> +
-> +    /* probe every access */
-> +    probe_pages(env, base, vlenb * nf * esz, ra, access_type);
-> +
-> +    /* load bytes from guest memory */
-> +    for (i = 0; i < vlenb; i++) {
-> +        k = 0;
-> +        while (k < nf) {
-> +            target_ulong addr = base + (i * nf + k) * esz;
-> +            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-> +            k++;
-> +        }
-> +    }
-> +}
+--000000000000cd74dc05aba42af6
+Content-Type: text/plain; charset="UTF-8"
 
-First, nf != 0 is reserved, so you shouldn't attempt to support it here.
+On Tue, Jul 28, 2020 at 4:05 AM Alistair Francis <alistair23@gmail.com>
+wrote:
 
-Second, even then the note in the spec suggests that these two loops should be
-interchanged -- but I'll also grant that the language could use improvement.
+> On Mon, Jul 27, 2020 at 12:54 PM Palmer Dabbelt <palmer@dabbelt.com>
+> wrote:
+> >
+> > On Wed, 22 Jul 2020 02:15:24 PDT (-0700), frank.chang@sifive.com wrote:
+> > > From: Frank Chang <frank.chang@sifive.com>
+> > >
+> > > Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> > > ---
+> > >  target/riscv/cpu.c | 24 ++++++------------------
+> > >  target/riscv/cpu.h |  2 --
+> > >  2 files changed, 6 insertions(+), 20 deletions(-)
+> > >
+> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > index 228b9bdb5d..2800953e6c 100644
+> > > --- a/target/riscv/cpu.c
+> > > +++ b/target/riscv/cpu.c
+> > > @@ -106,11 +106,6 @@ static void set_priv_version(CPURISCVState *env,
+> int priv_ver)
+> > >      env->priv_ver = priv_ver;
+> > >  }
+> > >
+> > > -static void set_vext_version(CPURISCVState *env, int vext_ver)
+> > > -{
+> > > -    env->vext_ver = vext_ver;
+> > > -}
+> > > -
+> > >  static void set_feature(CPURISCVState *env, int feature)
+> > >  {
+> > >      env->features |= (1ULL << feature);
+> > > @@ -339,7 +334,6 @@ static void riscv_cpu_realize(DeviceState *dev,
+> Error **errp)
+> > >      CPURISCVState *env = &cpu->env;
+> > >      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+> > >      int priv_version = PRIV_VERSION_1_11_0;
+> > > -    int vext_version = VEXT_VERSION_0_07_1;
+> > >      target_ulong target_misa = 0;
+> > >      Error *local_err = NULL;
+> > >
+> > > @@ -363,7 +357,6 @@ static void riscv_cpu_realize(DeviceState *dev,
+> Error **errp)
+> > >      }
+> > >
+> > >      set_priv_version(env, priv_version);
+> > > -    set_vext_version(env, vext_version);
+> > >
+> > >      if (cpu->cfg.mmu) {
+> > >          set_feature(env, RISCV_FEATURE_MMU);
+> > > @@ -455,19 +448,14 @@ static void riscv_cpu_realize(DeviceState *dev,
+> Error **errp)
+> > >                  return;
+> > >              }
+> > >              if (cpu->cfg.vext_spec) {
+> > > -                if (!g_strcmp0(cpu->cfg.vext_spec, "v0.7.1")) {
+> > > -                    vext_version = VEXT_VERSION_0_07_1;
+> > > -                } else {
+> > > -                    error_setg(errp,
+> > > -                           "Unsupported vector spec version '%s'",
+> > > -                           cpu->cfg.vext_spec);
+> > > -                    return;
+> > > -                }
+> > > +                error_setg(errp,
+> > > +                       "Unsupported vector spec version '%s'",
+> > > +                       cpu->cfg.vext_spec);
+> > > +                return;
+> > >              } else {
+> > > -                qemu_log("vector verison is not specified, "
+> > > -                        "use the default value v0.7.1\n");
+> > > +                qemu_log("vector version is not specified\n");
+> > > +                return;
+> > >              }
+> > > -            set_vext_version(env, vext_version);
+> > >          }
+> > >
+> > >          set_misa(env, RVXLEN | target_misa);
+> > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > > index eef20ca6e5..6766dcd914 100644
+> > > --- a/target/riscv/cpu.h
+> > > +++ b/target/riscv/cpu.h
+> > > @@ -79,8 +79,6 @@ enum {
+> > >  #define PRIV_VERSION_1_10_0 0x00011000
+> > >  #define PRIV_VERSION_1_11_0 0x00011100
+> > >
+> > > -#define VEXT_VERSION_0_07_1 0x00000701
+> > > -
+> > >  #define TRANSLATE_PMP_FAIL 2
+> > >  #define TRANSLATE_FAIL 1
+> > >  #define TRANSLATE_SUCCESS 0
+> >
+> > If I'm reading things correctly, 5.0 did not have the V extension.  This
+> means
+> > that we can technically drop 0.7.1 from QEMU, as it's never been
+> released.
+>
+> There is no intention of this making it into 5.1. We are currently in
+> hard freeze.
+>
+> The idea is that QEMU 5.1 will support v0.7.1 and then hopefully 5.2
+> will support v0.9.
+>
+> > That said, I'd still prefer to avoid dropping 0.7.1 so late in the
+> release
+> > cycle (it's already soft freeze, right?).  Given the extended length of
+> the V
+> > extension development process it seems likely that 0.7.1 is going to end
+> up in
+> > some silicon, which means it would be quite useful to have it in QEMU.
+>
+> Agreed!
+>
+> >
+> > I understand it's a lot more work to maintain multiple vector
+> extensions, but
+> > it was very useful to have multiple privileged extensions supported in
+> QEMU
+> > while that was all getting sorted out and as the vector drafts has
+> massive
+> > differences it'll probably be even more useful.
+>
+> Hopefully a release will be enough for this as managing both will be a
+> huge maintenance burden.
+>
+> Alistair
+>
+> >
 
-Indeed, the whole vector load/store section seems to need improvement.  For
-instance, no where does it say how EEW < SEW load operations are extended.
-From reading Spike source code I can infer that it's sign-extended.  But that's
-something a spec should explicitly say.
 
 
-r~
+
+Although RVV v1.0 spec is not ratified yet.
+However, the differences between RVV v0.9 by far are minor:
+1. SLEN=VLEN layout mandatory.
+>> Luckily we haven't defined *slen* in our RVV implementation by far, so
+we can just ignore the change.
+2. Support ELEN > VLEN for LMUL > 1
+3. Defined vector FP exception behavior.
+4. Added reciprocal and reciprocal square-root estimate instructions.
+>> *vfrece7.v* and *vfrsqrte7.v* instructions are added, but the
+behaviors are still undefined.
+5. Defined hint behavior on whole register moves and load/stores to enable
+microarchitectures with internal data rearrangement.
+>> Serveral *vl**<NF>re<EEW>.v* and *vs<NF>r.v* instructions are added.
+6. Added *vrgatherei16* instruction.
+7. Rearranged bits in *vtype* to make *vlmul* bits into a contiguous field.
+
+As QEMU v5.1 is already hard-freezed and should be released between
+2020/08/11 and 2020/08/18.
+So perhaps we still have some time for waiting RVV v1.0 spec. to be
+ratified before QEMU v5.2 is soft-freezed?
+
+We have already made these RVV v1.0 changes in our local branch.
+(*vfrece7.v* and *vfrsqrte7.v* instructions are not included as they're not
+defined yet.)
+So, if it's okay, we can skip RVV v0.9 and bump to RVV v1.0 directly in our
+next version of patchset.
+Which I think may relieve the burden for the community to maintain
+multi-version of vector drafts.
+
+Any thoughts?
+
+Frank Chang
+
+--000000000000cd74dc05aba42af6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Tue, Jul 28, 2020 at 4:05 AM Alistair =
+Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a=
+>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail=
+_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
+,204);padding-left:1ex">On Mon, Jul 27, 2020 at 12:54 PM Palmer Dabbelt &lt=
+;<a href=3D"mailto:palmer@dabbelt.com" target=3D"_blank">palmer@dabbelt.com=
+</a>&gt; wrote:<br>
+&gt;<br>
+&gt; On Wed, 22 Jul 2020 02:15:24 PDT (-0700), <a href=3D"mailto:frank.chan=
+g@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> wrote:<br>
+&gt; &gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" t=
+arget=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt; &gt;<br>
+&gt; &gt; Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifi=
+ve.com" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt; &gt; ---<br>
+&gt; &gt;=C2=A0 target/riscv/cpu.c | 24 ++++++------------------<br>
+&gt; &gt;=C2=A0 target/riscv/cpu.h |=C2=A0 2 --<br>
+&gt; &gt;=C2=A0 2 files changed, 6 insertions(+), 20 deletions(-)<br>
+&gt; &gt;<br>
+&gt; &gt; diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
+&gt; &gt; index 228b9bdb5d..2800953e6c 100644<br>
+&gt; &gt; --- a/target/riscv/cpu.c<br>
+&gt; &gt; +++ b/target/riscv/cpu.c<br>
+&gt; &gt; @@ -106,11 +106,6 @@ static void set_priv_version(CPURISCVState *=
+env, int priv_ver)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;priv_ver =3D priv_ver;<br>
+&gt; &gt;=C2=A0 }<br>
+&gt; &gt;<br>
+&gt; &gt; -static void set_vext_version(CPURISCVState *env, int vext_ver)<b=
+r>
+&gt; &gt; -{<br>
+&gt; &gt; -=C2=A0 =C2=A0 env-&gt;vext_ver =3D vext_ver;<br>
+&gt; &gt; -}<br>
+&gt; &gt; -<br>
+&gt; &gt;=C2=A0 static void set_feature(CPURISCVState *env, int feature)<br=
+>
+&gt; &gt;=C2=A0 {<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;features |=3D (1ULL &lt;&lt; feature)=
+;<br>
+&gt; &gt; @@ -339,7 +334,6 @@ static void riscv_cpu_realize(DeviceState *de=
+v, Error **errp)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(de=
+v);<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 int priv_version =3D PRIV_VERSION_1_11_0;<br>
+&gt; &gt; -=C2=A0 =C2=A0 int vext_version =3D VEXT_VERSION_0_07_1;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 target_ulong target_misa =3D 0;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 Error *local_err =3D NULL;<br>
+&gt; &gt;<br>
+&gt; &gt; @@ -363,7 +357,6 @@ static void riscv_cpu_realize(DeviceState *de=
+v, Error **errp)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; &gt;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 set_priv_version(env, priv_version);<br>
+&gt; &gt; -=C2=A0 =C2=A0 set_vext_version(env, vext_version);<br>
+&gt; &gt;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (cpu-&gt;cfg.mmu) {<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 set_feature(env, RISCV_FEATURE_=
+MMU);<br>
+&gt; &gt; @@ -455,19 +448,14 @@ static void riscv_cpu_realize(DeviceState *=
+dev, Error **errp)<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret=
+urn;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (cpu-&gt;cfg.v=
+ext_spec) {<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!g_s=
+trcmp0(cpu-&gt;cfg.vext_spec, &quot;v0.7.1&quot;)) {<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 vext_version =3D VEXT_VERSION_0_07_1;<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {=
+<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 error_setg(errp,<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;Unsupported vector spec version &#3=
+9;%s&#39;&quot;,<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu-&gt;cfg.vext_spec);<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 return;<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_se=
+tg(errp,<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0&quot;Unsupported vector spec version &#39;%s&#39;&quot=
+;,<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0cpu-&gt;cfg.vext_spec);<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<=
+br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_log=
+(&quot;vector verison is not specified, &quot;<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 &quot;use the default value v0.7.1\n&quot;);<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_log=
+(&quot;vector version is not specified\n&quot;);<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<=
+br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 set_vext_version(env, =
+vext_version);<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; &gt;<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 set_misa(env, RVXLEN | target_m=
+isa);<br>
+&gt; &gt; diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
+&gt; &gt; index eef20ca6e5..6766dcd914 100644<br>
+&gt; &gt; --- a/target/riscv/cpu.h<br>
+&gt; &gt; +++ b/target/riscv/cpu.h<br>
+&gt; &gt; @@ -79,8 +79,6 @@ enum {<br>
+&gt; &gt;=C2=A0 #define PRIV_VERSION_1_10_0 0x00011000<br>
+&gt; &gt;=C2=A0 #define PRIV_VERSION_1_11_0 0x00011100<br>
+&gt; &gt;<br>
+&gt; &gt; -#define VEXT_VERSION_0_07_1 0x00000701<br>
+&gt; &gt; -<br>
+&gt; &gt;=C2=A0 #define TRANSLATE_PMP_FAIL 2<br>
+&gt; &gt;=C2=A0 #define TRANSLATE_FAIL 1<br>
+&gt; &gt;=C2=A0 #define TRANSLATE_SUCCESS 0<br>
+&gt;<br>
+&gt; If I&#39;m reading things correctly, 5.0 did not have the V extension.=
+=C2=A0 This means<br>
+&gt; that we can technically drop 0.7.1 from QEMU, as it&#39;s never been r=
+eleased.<br>
+<br>
+There is no intention of this making it into 5.1. We are currently in<br>
+hard freeze.<br>
+<br>
+The idea is that QEMU 5.1 will support v0.7.1 and then hopefully 5.2<br>
+will support v0.9.<br>
+<br>
+&gt; That said, I&#39;d still prefer to avoid dropping 0.7.1 so late in the=
+ release<br>
+&gt; cycle (it&#39;s already soft freeze, right?).=C2=A0 Given the extended=
+ length of the V<br>
+&gt; extension development process it seems likely that 0.7.1 is going to e=
+nd up in<br>
+&gt; some silicon, which means it would be quite useful to have it in QEMU.=
+<br>
+<br>
+Agreed!<br>
+<br>
+&gt;<br>
+&gt; I understand it&#39;s a lot more work to maintain multiple vector exte=
+nsions, but<br>
+&gt; it was very useful to have multiple privileged extensions supported in=
+ QEMU<br>
+&gt; while that was all getting sorted out and as the vector drafts has mas=
+sive<br>
+&gt; differences it&#39;ll probably be even more useful.<br>
+<br>
+Hopefully a release will be enough for this as managing both will be a<br>
+huge maintenance burden.<br>
+<br>
+Alistair<br>
+<br>
+&gt;=C2=A0</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0p=
+x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
+=C2=A0</blockquote><div><br></div><div>Although RVV v1.0 spec is not ratifi=
+ed yet.</div><div>However, the differences between RVV v0.9 by far are mino=
+r:</div><div>1. SLEN=3DVLEN layout mandatory.</div><div>&gt;&gt; Luckily=C2=
+=A0we haven&#39;t defined=C2=A0<i>slen</i> in our RVV implementation by far=
+, so we can just ignore the change.=C2=A0</div><div>2.=C2=A0Support ELEN &g=
+t; VLEN for LMUL &gt; 1</div>3.=C2=A0<span style=3D"color:rgb(0,0,0);white-=
+space:pre-wrap">Defined vector FP exception behavior.</span></div><div clas=
+s=3D"gmail_quote"><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">4. =
+</span><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">Added reciproc=
+al and reciprocal square-root estimate instructions.</span></div><div class=
+=3D"gmail_quote"><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">&gt;=
+&gt; </span><i>vfrece7.v</i>=C2=A0and=C2=A0<i>vfrsqrte7.v</i>=C2=A0instruct=
+ions are added, but the behaviors=C2=A0are still undefined.</div><div class=
+=3D"gmail_quote"><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">5. <=
+/span><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">Defined hint be=
+havior on whole register moves and load/stores to enable microarchitectures=
+ with internal data rearrangement.</span></div><div class=3D"gmail_quote"><=
+span style=3D"color:rgb(0,0,0);white-space:pre-wrap">&gt;&gt; Serveral <i>v=
+l</i></span><i>&lt;NF&gt;re&lt;EEW&gt;.v</i> and <i>vs&lt;NF&gt;r.v</i> ins=
+tructions are added.</div><div class=3D"gmail_quote"><span style=3D"color:r=
+gb(0,0,0);white-space:pre-wrap">6. </span><span style=3D"color:rgb(0,0,0);w=
+hite-space:pre-wrap">Added <i>vrgatherei16</i> instruction.</span></div><di=
+v class=3D"gmail_quote"><font color=3D"#000000"><span style=3D"white-space:=
+pre-wrap">7. </span></font><span style=3D"color:rgb(0,0,0);white-space:pre-=
+wrap">Rearranged bits in <i>vtype</i> to make <i>vlmul</i> bits into a cont=
+iguous field.</span></div><div class=3D"gmail_quote"><span style=3D"color:r=
+gb(0,0,0);white-space:pre-wrap"><br></span></div><div class=3D"gmail_quote"=
+><span style=3D"color:rgb(0,0,0);white-space:pre-wrap"></span></div><div cl=
+ass=3D"gmail_quote"><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">A=
+s QEMU v5.1 is already hard-freezed and should be released between 2020/08/=
+11 and 2020/08/18.</span><br></div><div class=3D"gmail_quote"><div class=3D=
+"gmail_quote"><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">So perh=
+aps we still have some time for waiting RVV v1.0 spec. to be ratified befor=
+e QEMU v5.2 is soft-freezed?</span></div><div class=3D"gmail_quote"><br></d=
+iv><div class=3D"gmail_quote">We have already made these RVV v1.0 changes i=
+n our local branch.<span style=3D"color:rgb(0,0,0);white-space:pre-wrap"><b=
+r></span></div><div class=3D"gmail_quote">(<i>vfrece7.v</i>=C2=A0and=C2=A0<=
+i>vfrsqrte7.v</i>=C2=A0instructions are not included as they&#39;re not def=
+ined=C2=A0yet.)</div><div class=3D"gmail_quote"></div></div><div class=3D"g=
+mail_quote"><font color=3D"#000000"><span style=3D"white-space:pre-wrap">So=
+, if it&#39;s okay, we can </span></font>skip RVV v0.9 and=C2=A0<span style=
+=3D"white-space:pre-wrap;color:rgb(0,0,0)">bump to RVV v1.0 directly in our=
+ next version of patchset.</span></div><div class=3D"gmail_quote"><span sty=
+le=3D"white-space:pre-wrap;color:rgb(0,0,0)">Which I think may relieve the =
+burden for the community to maintain multi-version of vector drafts.</span>=
+</div><div class=3D"gmail_quote"><span style=3D"white-space:pre-wrap;color:=
+rgb(0,0,0)"><br></span></div><div class=3D"gmail_quote"><span style=3D"whit=
+e-space:pre-wrap;color:rgb(0,0,0)">Any thoughts?</span></div><div class=3D"=
+gmail_quote"><span style=3D"white-space:pre-wrap;color:rgb(0,0,0)"><br></sp=
+an></div><div class=3D"gmail_quote"><span style=3D"white-space:pre-wrap;col=
+or:rgb(0,0,0)">Frank Chang</span></div></div>
+
+--000000000000cd74dc05aba42af6--
 
