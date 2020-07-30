@@ -1,74 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k17f0-00064x-5o
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Jul 2020 08:27:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53046)
+	id 1k17vQ-000176-KG
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Jul 2020 08:44:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56986)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k17ew-00064O-6O
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 08:27:43 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a]:38504)
+ id 1k17vO-00016w-Vu
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 08:44:43 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:40908)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k17er-0005kk-FP
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 08:27:41 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id m16so13956540pls.5
- for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2020 05:27:36 -0700 (PDT)
+ id 1k17vN-0008Kn-9f
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 08:44:42 -0400
+Received: by mail-pl1-x634.google.com with SMTP id u10so4510088plr.7
+ for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2020 05:44:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=0b3dRDlok4eTJZfgVkBj+lYoyi4tcWWlSRgfYqrWfr8=;
- b=H67eqjEV1GlGVsY8KLGbZoJVlxyOWwrQFA9qibdIWaLquLtspruVjfIws8fjZ49l/H
- gmHzcO0DZTYsqcMxazOE43wsmefPhw5uOsEoTq3dmCM4PdGRL2wB9poLOZ8EqaOjTYen
- h/pDFrCSxLe6ljQqRzBQZShvr0rn87qq7vPf0t/S3loWhmGBMWOAbdexeYUFAlA4r0fc
- bbz2nz3jo8jo70ZrRilzWbcP9TJYfkXDNmkc9k/9yGh7chMXGLk2sPUxgBaOpkJgPcNm
- 3pNwRKGIxtMlsBhMYGZ08vj5FE6ld4aa6DYzrIpZ+GjpRhHg9+VeKjm31pLW5yfSX9Pz
- Sadw==
+ bh=oV6rcCkMbsnQHABAX/akD/HhRI9cAoksbDq35cDB1mQ=;
+ b=RpBwqqzT7JIuoOJOnsvGsBrzWsseWUigb/UPbBkHuInX6TdspEPxMTIzLyjP3KLzdZ
+ CHu00LIBJ/zGghzXzlWutt5nr7KWPxUthMYHn/hKnyuLZmzE3GZx8k6teR1u9AAhhRLz
+ LqijUCQObj+Dgh7UbOTaRLbHBIUuBgEICYFY1iuKpFIgz+8m3JDfeCy2SqPR3rMR8a3+
+ 22r316lSN726YLqa0RpQeMX3qehKWiebrWBcys3qaE7v29Noaw4c9b+9Ldb0zHQYyy64
+ MAnEqQanVKft7pyDpO3ABwSRCnPRRD9HJ515cLvLuYoqTdc/1CywUySvXc48SsCeloOo
+ CH9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=0b3dRDlok4eTJZfgVkBj+lYoyi4tcWWlSRgfYqrWfr8=;
- b=fNMASNh8TivT+8GkEcmof5KUZGlRDI3YKMdlJcNszelPB3vI2Sou9HJUUvyrl65VmF
- fTbfCOso1D3jU247iXN903zuLttI5v+Xzt0fqF55LMBpaIRBFPQ69xhBG7OOgw6Dy8CZ
- 00I8YOn4y5qtfuf+1IabEyLMgK39BNLcV2SkB6pbb9c6S86BPiNvRdRiXkZ5vbqYM4Kz
- IEqOB3TRbJrF87WCsksILBbMnzr2nap451PqN9plzOmr7afAa40+W5glH5Tf7KpQGqCA
- FRvOWdMBLsVHUyHMELmPqcexgcKBl8WR0FEoEe1gYjvfXy6BZ1P8TlEmf10w4zd1VizH
- kbSA==
-X-Gm-Message-State: AOAM533p2SXfFKMEZ3Mz5AY2Q8ODN9zX5uubo+CUBtIU8fpKchyUvcCq
- C6ChXFdPM9ipkF/tMPTX07UElQ==
-X-Google-Smtp-Source: ABdhPJwkXf0ayBQ8mAz4nPkAG1/KN+eqI2yls9HUzWq9yVomvJZc9q57puTr9pMcSSuWTCY6gThTlg==
-X-Received: by 2002:a63:6c0a:: with SMTP id h10mr34449497pgc.11.1596112055481; 
- Thu, 30 Jul 2020 05:27:35 -0700 (PDT)
+ bh=oV6rcCkMbsnQHABAX/akD/HhRI9cAoksbDq35cDB1mQ=;
+ b=GpxQ7wRWGgE3re30+yOZnFPIyA69GoXUa6atGLkPIqxtXm82R5p0eHfkU+2qvztPWb
+ BbP2ZirggnCDPA+9Ct9ekDt4Bbh89fOXH/ENfeWTqWaIjWn1yL0RnqOSxZ/M/cNIHdga
+ u4sNIh7VWEDeGHMT4HDB4Yqmpx5kI1ER1cSGMH69/cbioa1O2HwOAV2amL0s2bTld6sL
+ 4r/0gk8s4yQouElfpdie+EZEuLT4DKzD7jKjnxve+XmtFutwtDjs2JsFkHdnbLD33Ddy
+ niVL2fMVyxTF1JRE1SANXnpfwJozbNQMdu553OtBBp0HncjrpaY1Dlb0pv/6c62XOY7K
+ 4TLA==
+X-Gm-Message-State: AOAM531PUsd78bx6EUjBGBsU+o+QUVM5xaq0G2U1/dOUGhN0v1MiJrUW
+ 2BgnK0VZCsafHTAcNgnzouCHhg==
+X-Google-Smtp-Source: ABdhPJyOe2XEMpw0CwBbCqBnrWACYnPfm350YwVe5RKPLgUyJGiBrTDfqWArb6A96Lnx6GvG93VZTQ==
+X-Received: by 2002:a17:90a:1fca:: with SMTP id
+ z10mr1018067pjz.209.1596113079350; 
+ Thu, 30 Jul 2020 05:44:39 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id s125sm4294749pfc.63.2020.07.30.05.27.34
+ by smtp.gmail.com with ESMTPSA id z1sm5908720pgk.89.2020.07.30.05.44.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jul 2020 05:27:34 -0700 (PDT)
-Subject: Re: [RFC v2 01/76] target/riscv: drop vector 0.7.1 support
-To: Frank Chang <frank.chang@sifive.com>,
- Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Thu, 30 Jul 2020 05:44:38 -0700 (PDT)
+Subject: Re: [RFC v2 28/76] target/riscv: rvv-0.9: update vext_max_elems() for
+ load/store insns
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20200722091641.8834-2-frank.chang@sifive.com>
- <mhng-0246b27e-f392-45a9-806e-9998bb5ede5e@palmerdabbelt-glaptop1>
- <CAKmqyKMEraiyw_r7U3v8K-2pdipBh3otaPOaNPLKtpvqPe780A@mail.gmail.com>
- <CAE_xrPi0Rc88P4wehno_ewjH_-wCm5bicO-rae-ZYsAgVpyOBw@mail.gmail.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+References: <20200722091641.8834-1-frank.chang@sifive.com>
+ <20200722091641.8834-29-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <5a3b8461-51ba-8fdf-03a0-31da01cd6d91@linaro.org>
-Date: Thu, 30 Jul 2020 05:27:32 -0700
+Message-ID: <c841182e-8ef2-3793-e580-f4abde5f8f2d@linaro.org>
+Date: Thu, 30 Jul 2020 05:44:36 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <CAE_xrPi0Rc88P4wehno_ewjH_-wCm5bicO-rae-ZYsAgVpyOBw@mail.gmail.com>
+In-Reply-To: <20200722091641.8834-29-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x634.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -90,15 +87,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2020 12:27:43 -0000
+X-List-Received-Date: Thu, 30 Jul 2020 12:44:43 -0000
 
-On 7/30/20 1:07 AM, Frank Chang wrote:
-> So, if it's okay, we can skip RVV v0.9 and bump to RVV v1.0 directly in our
-> next version of patchset.
-> Which I think may relieve the burden for the community to maintain
-> multi-version of vector drafts.
+On 7/22/20 2:15 AM, frank.chang@sifive.com wrote:
+> -static inline uint32_t vext_maxsz(uint32_t desc)
+> +static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz, bool is_ldst)
+>  {
+> -    return simd_maxsz(desc) << vext_lmul(desc);
+> +    /*
+> +     * As simd_desc support at most 256, the max vlen is 512 bits,
+> +     * so vlen in bytes (vlenb) is encoded as maxsz.
+> +     */
+> +    uint32_t vlenb = simd_maxsz(desc);
+> +
+> +    if (is_ldst) {
+> +        /*
+> +         * Vector load/store instructions have the EEW encoded
+> +         * directly in the instructions. The maximum vector size is
+> +         * calculated with EMUL rather than LMUL.
+> +         */
+> +        uint32_t eew = esz << 3;
+> +        uint32_t sew = vext_sew(desc);
+> +        float flmul = vext_vflmul(desc);
+> +        float emul = (float)eew / sew * flmul;
+> +        uint32_t emul_r = emul < 1 ? 1 : emul;
+> +        return vlenb * emul_r / esz;
+> +    } else {
+> +        /* Return VLMAX */
+> +        return vlenb * vext_vflmul(desc) / esz;
+> +    }
+>  }
 
-That would be my preference.  Thanks,
+We do not want to be doing all of this arithmetic at runtime.  We want to be
+doing it at translation time and pass the result to the helper.
+
+If we must do any arithmetic at runtime, we would very much prefer to pass
+log2(esz) so that we can use shifts instead of full integer division.
+
+We really really want to avoid a bunch of floating-point conversions and
+operations.
+
+If you need to adjust the vext descriptor to make this happen, do so.  Do not
+feel that load/store needs to pass the *same* descriptor to the helpers as
+everything else.
 
 
 r~
