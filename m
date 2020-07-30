@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k19tS-0008VX-KN
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Jul 2020 10:50:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35196)
+	id 1k1Eg1-0002CG-1h
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Jul 2020 15:57:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34718)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k19tR-0008T0-7M
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 10:50:49 -0400
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:52380)
+ id 1k1Efz-0002C2-Dz
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 15:57:15 -0400
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a]:41525)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k19tN-0001Q1-74
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 10:50:48 -0400
-Received: by mail-pj1-x1032.google.com with SMTP id kr4so2483080pjb.2
- for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2020 07:50:44 -0700 (PDT)
+ id 1k1Efx-0008Hk-I4
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 15:57:14 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id d1so15139141plr.8
+ for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2020 12:57:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=HY/RzSHyQvwyWF/W//ebYNIPd1zGtRDEdOWAmCIIwkA=;
- b=VfP8HJCx1/chqGqr0rbiMbsIEQxWoZl61U5rUSUFjxWsK6x8wZfvU9fqciBqIdaNVe
- miVsjTTI7Y6azZFNG60/v5O0T8t4eFJ2E9pzcBr+5QdVGXE5Lh7IJtY77B+PjP0w8XfV
- f1z8vMtJCxMgtLq/Xzv0Swd/BhxVvWVf2r9nfZBq6wEkIxeG2nxUnoaKNwsL315iZDMB
- cjG97NM+C2Jj5H5BO48PyKdYPNDeIonoCUSzGSxcvhyQHLfBqo+E29uSmKxx1NDKu6uk
- ufkgdaDZEoa64KystAX4yTUgBb4pnSzn/tY2FafFGFbE58UgO6xaohT8XSPkAZUYfvCy
- tTVw==
+ bh=q+OQZH0A78/893P2XM6/uHhB7U4385gH1+4XgbrDow4=;
+ b=pD0/l/0l8ch4e8msk92NdUOwhDn2qveoG6B63qXgpWkUckCMh3/k7uKM4Ojzk47CnL
+ Ek6p3IHo2oAvwxL3/B6M/XYuwqFm+iqHfO9E5cB3Dh6zBv3OM9yUA7qA3priI1ddeqoe
+ bb7K8A5cJ/4guV7U12vnTg/Pjw7xjIj3NNo61HO3vkOHWytkCcpSAGevGVgdNll+o2WE
+ beUAn3JpIHXuvhZSCCfK4/Gdwd2AUQo2OHm3Pz5v18I+BIrPsLB5JS458YEDfELah+OH
+ mJl/J7aWudwq5gzqb8TaO0WAA91ccYcDh8EQtJ5lMt7kV1kozPWksGopK0lLlo5oS9hz
+ hHlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=HY/RzSHyQvwyWF/W//ebYNIPd1zGtRDEdOWAmCIIwkA=;
- b=d0BkrKgcujfwVEOaDwt3GbrXlS2WSlfR+g7ZsenKiQECPKP2CZQzRhhVJslKxTa2BA
- bMJmzPmf44mbD8axfcWqVOCijCNkUjNaH1ka30Jtopt1+yPsFMlt9LpbMlLCdeWWS8/p
- kTVB+zPsbn9J2XOH4cFNybSAX7rgb8CQiDp7D1X73d167jr9bXuS3rcGm/fHlzTgFfk2
- u08adhthv4l6MgPdp5RlHWCE18HalM1ay6yxM3r0wcnsQo7uqFoNLvUPg/GT4pkMY0on
- K+syzvGcmL+JiCNPjJllYECc4/1ni/uUH81+7lTCXJHZQp67QqFB0FdW4XfRYIJVK8ue
- iHcw==
-X-Gm-Message-State: AOAM531rxBwNqvhvkHAKCuYo6pbcoNDt/PnX8oWI8JtHr6yjAbfEVpP/
- vpKiQVYjSa6/KWZYb7hS30cdoQ==
-X-Google-Smtp-Source: ABdhPJyZ778w6ILenejAQbdbsDkIfO45nlA2lLrWnPREXNnSOiSEJ6xjj5TP+9k433IF6Qf/J4kZwQ==
-X-Received: by 2002:aa7:9357:: with SMTP id 23mr3688671pfn.278.1596120643525; 
- Thu, 30 Jul 2020 07:50:43 -0700 (PDT)
+ bh=q+OQZH0A78/893P2XM6/uHhB7U4385gH1+4XgbrDow4=;
+ b=ByjA9JudGM716fpPhwOjDr1PR6+zCp2uS1ejJaSDSEcYGbYJSer1R7xvibAAPXrVhb
+ rTqFKglnLiYUtaNRXsOFRTGLuGjND5LyKaQ1ZT7I+bCgSbHFAS/JcFfR5r+9kWXliZTg
+ 1KVQSmZv44FiQU6+nKMR9147O2Dz07jR0BX6nr1nslsq7WsY/AbuSbNmarh4pNl36itb
+ buv/nu1Mn4wciguqnlN4PKniY2hetvvjzZhY9dAriUBAKJKXc5vmCbeu1ld20y+lWSBc
+ JJHQR59dbHegk5ORoWZF4nF6bA+Q9NHygeA7GwDnzq6PJgX5QcxCj+GS5xWlHfsRhqMc
+ P96g==
+X-Gm-Message-State: AOAM531J2dAPfBtWOwgQvnb9WL6S9xsLoorQrLbd5+llVG7TLuHrwvI1
+ NHHBWJdlecwFWsgQPnHFKuprLQ==
+X-Google-Smtp-Source: ABdhPJwQFT7s+ZuHX3CrxvRdNIXrdGrZtvqFUcgy5aJBE5RXTrZbq2AX/JzPtNxoTQBT/Uw9hhINwg==
+X-Received: by 2002:a62:1d90:: with SMTP id d138mr535919pfd.159.1596139031359; 
+ Thu, 30 Jul 2020 12:57:11 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id r1sm3102696pgi.28.2020.07.30.07.50.41
+ by smtp.gmail.com with ESMTPSA id q2sm6500584pff.107.2020.07.30.12.57.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jul 2020 07:50:42 -0700 (PDT)
-Subject: Re: [RFC v2 39/76] target/riscv: rvv-0.9: integer scalar move
- instructions
+ Thu, 30 Jul 2020 12:57:10 -0700 (PDT)
+Subject: Re: [RFC v2 40/76] target/riscv: rvv-0.9: floating-point move
+ instruction
 To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
@@ -53,19 +53,19 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
- <20200722091641.8834-40-frank.chang@sifive.com>
+ <20200722091641.8834-41-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <d61baa86-3852-6ec3-bcfc-25449eb43746@linaro.org>
-Date: Thu, 30 Jul 2020 07:50:40 -0700
+Message-ID: <45dc44af-55d4-5254-4476-75b35e249d2c@linaro.org>
+Date: Thu, 30 Jul 2020 12:57:08 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200722091641.8834-40-frank.chang@sifive.com>
+In-Reply-To: <20200722091641.8834-41-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -74,7 +74,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -87,34 +87,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2020 14:50:49 -0000
+X-List-Received-Date: Thu, 30 Jul 2020 19:57:15 -0000
 
 On 7/22/20 2:16 AM, frank.chang@sifive.com wrote:
-> +/* vmv.x.s rd, vs2 # x[rd] = vs2[0] */
-> +static bool trans_vmv_x_s(DisasContext *s, arg_vmv_x_s *a)
-> +{
-> +    if (require_rvv(s) &&
-> +        vext_check_isa_ill(s)) {
-> +        TCGv_i64 t1;
-> +        TCGv dest;
+> From: Frank Chang <frank.chang@sifive.com>
+> 
+> NaN-boxed the scalar floating-point register based on RVV 0.9's rules.
+> 
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  target/riscv/insn_trans/trans_rvv.inc.c | 16 +++++++++++++++-
+>  1 file changed, 15 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+> index 780f8660bf..54c08ea1f8 100644
+> --- a/target/riscv/insn_trans/trans_rvv.inc.c
+> +++ b/target/riscv/insn_trans/trans_rvv.inc.c
+> @@ -2722,6 +2722,7 @@ GEN_OPFVF_TRANS(vfmerge_vfm,  opfvf_check)
+>  static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
+>  {
+>      if (require_rvv(s) &&
+> +        has_ext(s, RVF) &&
+>          vext_check_isa_ill(s) &&
+>          require_align(a->rd, s->flmul) &&
+>          (s->sew != 0)) {
+> @@ -2744,7 +2745,20 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
+>              dest = tcg_temp_new_ptr();
+>              desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
+>              tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, a->rd));
+> -            fns[s->sew - 1](dest, cpu_fpr[a->rs1], cpu_env, desc);
 > +
-> +        t1 = tcg_temp_new_i64();
-> +        dest = tcg_temp_new();
-> +        /*
-> +         * load vreg and sign-extend to 64 bits,
-> +         * then truncate to XLEN bits before storing to gpr.
-> +         */
-> +        vec_element_loadi(s, t1, a->rs2, 0, true);
-> +        tcg_gen_trunc_i64_tl(dest, t1);
-> +        gen_set_gpr(a->rd, dest);
-> +        tcg_temp_free_i64(t1);
-> +        tcg_temp_free(dest);
-> +        mark_vs_dirty(s);
+> +            if ((s->sew < MO_64 && has_ext(s, RVD)) ||
 
-No need to mark the vector set dirty, since we're modifying general regs.
+Bearing in mind my nanboxing patch set that Alistair picked up (for 5.2, I
+assume), wherein you would not check RVD, but allow the nanboxing to 64-bits to
+happen always.
 
-Otherwise,
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+But this also isn't the correct place to do this.  You need to move it up above
+
+        if (s->vl_eq_vlmax) {
+            tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
+                                 MAXSZ(s), MAXSZ(s),
+                                 cpu_fpr[a->rs1]);
+
+
+> +                (s->sew < MO_32)) {
+> +                /* SEW < FLEN */
+> +                TCGv_i64 t1 = tcg_temp_new_i64();
+> +                TCGv_i32 sew = tcg_const_i32(1 << (s->sew + 3));
+> +                gen_helper_narrower_nanbox_fpr(t1, cpu_fpr[a->rs1],
+> +                                               sew, cpu_env);
+
+Also, while there is currently one function, gen_nanbox_s, you'll want to add
+gen_nanbox_h to match.
+
 
 r~
+
+
+> +                fns[s->sew - 1](dest, t1, cpu_env, desc);
+> +                tcg_temp_free_i64(t1);
+> +                tcg_temp_free_i32(sew);
+> +            } else {
+> +                fns[s->sew - 1](dest, cpu_fpr[a->rs1], cpu_env, desc);
+> +            }
+>  
+>              tcg_temp_free_ptr(dest);
+>              tcg_temp_free_i32(desc);
+> 
+
 
