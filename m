@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k1YO4-0005Fn-L8
-	for mharc-qemu-riscv@gnu.org; Fri, 31 Jul 2020 13:00:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43130)
+	id 1k1YQO-0006Qo-6z
+	for mharc-qemu-riscv@gnu.org; Fri, 31 Jul 2020 13:02:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43918)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k1YO3-0005FY-GW
- for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:00:03 -0400
-Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f]:41650)
+ id 1k1YQN-0006QW-HT
+ for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:02:27 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:40328)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k1YO1-00043P-LO
- for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:00:03 -0400
-Received: by mail-pg1-x52f.google.com with SMTP id s15so4794190pgc.8
- for <qemu-riscv@nongnu.org>; Fri, 31 Jul 2020 10:00:01 -0700 (PDT)
+ id 1k1YQI-0004VJ-Qr
+ for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:02:27 -0400
+Received: by mail-pf1-x436.google.com with SMTP id k18so7544731pfp.7
+ for <qemu-riscv@nongnu.org>; Fri, 31 Jul 2020 10:02:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=P0uDl581Zx7OtJgsG9JCwHqkp4s42eRukweVPsz3aNg=;
- b=UTXSuh7QsRiqy/8dgJxsUDXNJwJP2asVwsENfhhfey1FYhoslsM98xx/VIBCcZZVQj
- pokn4WF3S6ccOmcPUX8OWJ+79SSBolZAOMwAi1P7H7dFSGZ8iNEwnBcOqVhb/iPGLkAt
- 3rAXF+YQgIfpyFeQYVnQ8EZqxmd1sgRJPRq8RFggfvy7WBZBRTUqSs3YOPPTSXv57Wxj
- hVmQOqLNcBk0Lc3a+NpM88M6+K+p7dLa5tvr82fodrBs2pLhYNL/WxewMMyg/bwxgIYV
- Mm24FYRNzXN0URy2TrX51WSy1dH6yKWPWSMwNfbSjdJM5OQzFyuOokZletFr+fr9yJya
- xDgA==
+ bh=JlFAGtqbK3x9r76yBteOvIjBOWzwUcJOpWdwUyCk0ak=;
+ b=uFPz6PqqaecCU64+tbJvUXeuBwoY0WVyjeFffhhyB+HRhVyTZVawAcl1XNzno2ttfi
+ 5DrdbGrk4Ng+d2NzeR5tlYRj0UOKksgWjk/rX1La65Mn6MCyO1rpasazJUB26hmXqWJJ
+ 0RtPfeor6fr44h90zdwn2SLvyHF8AvUmtu70YUXRoG0M589N0nD0yAGJCVwrXUT9WULE
+ K5sIMATAMwX2CAMeBZA+D9pKpKSxODDsOkimqx33r/4TkJUFqvS/clUI2c8n7QELosF7
+ x2cdW3Gg/ljSV76xDzncrXFYAmlvsT5XRWOTX6ZbrXbd5kyHnSiqoloWqbH4m8sIRQME
+ IDAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=P0uDl581Zx7OtJgsG9JCwHqkp4s42eRukweVPsz3aNg=;
- b=eDDKyDiYk93RgmTrS7sdEVzBlkISYBKU4ZkAkz9pRMujKJ1ysYFBHRSeS/mSsH1Mm3
- 8IcrZ2oQnzbghrdG5bM5rE6gJ2opN70PlgUMcphCOJjXLuApHSr+/SFzkjVP0iLZwBm4
- FAucrv+ch2TEylSFo7hfTTFxOgglY21yxyeS656whtbRKXaRluaLLaAygw0ic/qzz9Gr
- OteaDOnALoHS/3Sc9LP/ss6lwNrIGxUO9kCZWxwj5x4wGqwSWAhhidd0CBwXTzadm6iS
- goRGzOaGjMMgfDxMDJMD3QqX+zhUFrqwcg90f81IUo/3tTBsSLHGgznHnQJjUt3iQWMq
- I7vw==
-X-Gm-Message-State: AOAM532YoOnz4oPhWdvlpEn/2oio+jXyVxzwZiRynwHtm9DMr/4wDDdv
- q4Ou5CzsceXD1DzKAAfyFUuKjA==
-X-Google-Smtp-Source: ABdhPJxmPecNRUE2hk1+YOll/MsGtydRb+1jMZ6JH2tIAeNDyaQhejmubjTsOA99Exn++vmIjnlwXg==
-X-Received: by 2002:a62:a21e:: with SMTP id m30mr4329433pff.11.1596214799918; 
- Fri, 31 Jul 2020 09:59:59 -0700 (PDT)
+ bh=JlFAGtqbK3x9r76yBteOvIjBOWzwUcJOpWdwUyCk0ak=;
+ b=CUtvKsBk7/hFNZ9qJBbEOgfzCVsVZMD2zEunXr86O7ZetKMl5yhreQxnolPIlzOElp
+ aPxyf0MlTnO73vhwjZ4hrSFOaHj5NNn9Uc6wmSJZH8e11jrHzBcHsJFZ2kLPdtjeBJ6o
+ QI5dpUbHo6oQ7g5hR2ZlqMTeoDrTQUbkkzotfpg/Wfh5PH1vvU42jHel4c+mn40T0TAE
+ i1RM14y073KWsI3evoIQ1GudGSQgYwrMK/shxuRQt/OFCqJUqrItm89IIq04FIxLqt9K
+ 7F1alknW7j5Bf6Gb8P912DurHyPsAoL6mmJfWmfIhyfUt0JTAw9n1+G/anOYU5AWLB9u
+ LMUQ==
+X-Gm-Message-State: AOAM531uXPjklU7XStmAL+8kYAjtNpbzvoNqxjBV+bTt8X4AHI31toWq
+ EnmMmNpF0M8tTlHlxZJI6OBlwQ==
+X-Google-Smtp-Source: ABdhPJyJ3lGksi96RHQjYfXRWLO52ErKkbRIRHuoL8XyIEJ+QvQoCsm+YJH23/AeamdgIjnUQJm+pw==
+X-Received: by 2002:a63:a05f:: with SMTP id u31mr4544998pgn.4.1596214939051;
+ Fri, 31 Jul 2020 10:02:19 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id d17sm1899444pjr.40.2020.07.31.09.59.58
+ by smtp.gmail.com with ESMTPSA id lr1sm11045306pjb.27.2020.07.31.10.02.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Jul 2020 09:59:59 -0700 (PDT)
-Subject: Re: [RFC v2 64/76] target/riscv: rvv-0.9: single-width scaling shift
- instructions
+ Fri, 31 Jul 2020 10:02:18 -0700 (PDT)
+Subject: Re: [RFC v2 65/76] target/riscv: rvv-0.9: remove widening saturating
+ scaled multiply-add
 To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
@@ -53,19 +53,19 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
- <20200722091641.8834-65-frank.chang@sifive.com>
+ <20200722091641.8834-66-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <7ebc7527-65e2-8fac-c744-0aac857a40f3@linaro.org>
-Date: Fri, 31 Jul 2020 09:59:57 -0700
+Message-ID: <863e4297-648a-d40f-1270-9abf7580150f@linaro.org>
+Date: Fri, 31 Jul 2020 10:02:16 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200722091641.8834-65-frank.chang@sifive.com>
+In-Reply-To: <20200722091641.8834-66-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x436.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -87,16 +87,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2020 17:00:03 -0000
+X-List-Received-Date: Fri, 31 Jul 2020 17:02:27 -0000
 
 On 7/22/20 2:16 AM, frank.chang@sifive.com wrote:
->  GEN_OPIVI_TRANS(vssrl_vi, IMM_ZX, vssrl_vx, opivx_check)
-> -GEN_OPIVI_TRANS(vssra_vi, IMM_SX, vssra_vx, opivx_check)
-> +GEN_OPIVI_TRANS(vssra_vi, IMM_ZX, vssra_vx, opivx_check)
->  
+> From: Frank Chang <frank.chang@sifive.com>
+> 
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  target/riscv/helper.h                   |  22 ---
+>  target/riscv/insn32.decode              |   7 -
+>  target/riscv/insn_trans/trans_rvv.inc.c |   9 --
+>  target/riscv/vector_helper.c            | 205 ------------------------
+>  4 files changed, 243 deletions(-)
 
-I think both vssrl and vssra should use IMM_TRUNC_SEW.
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
