@@ -1,74 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k1YmZ-0001ci-V4
-	for mharc-qemu-riscv@gnu.org; Fri, 31 Jul 2020 13:25:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48712)
+	id 1k1Yrr-0004jw-US
+	for mharc-qemu-riscv@gnu.org; Fri, 31 Jul 2020 13:30:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49892)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k1YmX-0001Yr-OO
- for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:25:21 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:51219)
+ id 1k1Yrq-0004in-E2
+ for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:30:50 -0400
+Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d]:45725)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k1YmV-0007N2-2q
- for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:25:21 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id c6so7739766pje.1
- for <qemu-riscv@nongnu.org>; Fri, 31 Jul 2020 10:25:17 -0700 (PDT)
+ id 1k1Yro-0008Aw-KC
+ for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:30:50 -0400
+Received: by mail-pg1-x52d.google.com with SMTP id x6so1199601pgx.12
+ for <qemu-riscv@nongnu.org>; Fri, 31 Jul 2020 10:30:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=v0RlbWiTo8KRlB+z/cZJ0MQTmzfaIWBJNl8xqksUh9Q=;
- b=hXgkfQFBHFfHs+8bz5mIee9I0hmknd/cN6gmVabZ31wnTTewylWnckSSzAM00L7cNw
- +tU9qW6mlMVaVKw49xfLYpgLmvL4M4bntFJ7jIVH/ciy90PJpufUz++oOvZ5DxywYn1O
- sKPxF8YdXl/KP6pLZYs++ry9Sf98QPuDmrq5JoQqxAIyRbLSiPZRahAamGxsDGdqr/+W
- S0iGHkli0Pqs31w7rAeD6T6EVnz9SPiksBcJGs8gQbNoKoWdEKds3PAjaFIs/D/ZRuqd
- hzCv7HyDNDFq/Rb/965UkgcpSpPmCgFInT6E/S4sKE/jvbEseMCmTT9t0vdt0lc/22ge
- 6D4A==
+ bh=WNZ0jVmsgiE0w8UeoHmpnAwLATROJgr1I69IRXhLDMM=;
+ b=hW11kHc/rcOBR4aW0LrlQY9nKvO9ploB8n2V95PVOghD8cEGV9JvrA8vrXKOlBsRqJ
+ Ml6za6Qk4YpWtsTG1uxcRH3anCrIapKz6+IbDefDoPNYVtksNGMiDbV15vrfqu3IC7dl
+ ePRMTeWvZ8TPbLhhYkG+lnTTE9eTbIFBCDHozNhcv2Lp8YXeIqm0qjy6JflqEVAMdeme
+ v04lyq2BBparMGY+UqKXs+kybTmsPzXgzmYWdOgaMTJySf8JlgvfjGLlA1qcADIpordl
+ PqWeJDac9smM6xaBsQJhHgykr4VVhkUWrYrylPGzj+VpGg36wjx+h8tDHalPrMDLZ5at
+ f5iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=v0RlbWiTo8KRlB+z/cZJ0MQTmzfaIWBJNl8xqksUh9Q=;
- b=OgDguZiJTJqs5oE/0S0UPh7gkGGFpBxr8xyuVQcjSgz/lmcCS3EfTzfv8KGR5syOka
- DolG2mDzvZhZNnRHCJ5ifmzqi8SjMI8JKfC84fYjiWmBXWNPanP1f6cPnsdh9F94g4gk
- 6MvdsnyuD/YPdP4Ho52ecyjh/Xm9l62FDybMBbFJH3cGcAgQdtbEw7x3mfo1/V796iBg
- CS/RuYcK9ADKy18ZOvc7U1MrhjGXsEkGN+ncXhGm0vkOP/mPRoib3P0AyX5yH/MBaHWK
- l5NAgwbMZoCFHvRLBlRIOfGsSenxZY+1Lqfr8wxHyurbbL7PdCLVfKwydtu4ht7SF2Gv
- mWSA==
-X-Gm-Message-State: AOAM531Sq79Dv68J3v7z5l2biYMjiUK3IKhwWZhDCmNuFtMspmhAeaaW
- eth8PZhYkHjuKJAiCu/89d7VXQ==
-X-Google-Smtp-Source: ABdhPJw8lfkT9qZevlvgZ/qKtw0Dhy2qERWP0crBCQAIZHK5Mqx+pGI1uXUkRe/PnBP+6T58Wirrmw==
-X-Received: by 2002:a17:90a:9d84:: with SMTP id
- k4mr5100721pjp.227.1596216315510; 
- Fri, 31 Jul 2020 10:25:15 -0700 (PDT)
+ bh=WNZ0jVmsgiE0w8UeoHmpnAwLATROJgr1I69IRXhLDMM=;
+ b=cJdDkTTumYFyTpTD06fzx1A7u0kQxPP2T2FbrXBQQb785ekojOAq0tg16mf5cw/orc
+ q+BmmvOYHBKi8UgsfuxflEdYixoK4tdxuMxB8JPOPXp7SqdKf/mEkLNRw4PJYJYKpmYr
+ uGGZK/hYFtJL+ganfcEJRZn+HOfY6qieKzS4BJDwG5ttJns4lxBFQMlld+1IzSLN4jeW
+ Oopu+w2W4OYUa0P0UwAIS6ELs79IXfPWG74E/UZefrOiCqNXus8gIjjFJfnCZSDlxnWu
+ 78SKX90uqPpLrRU/8k2JDe7lQQrWkcb6vu8RB7ihgjZUBS8UiaqyJeY5Mjg8jH/D3v7q
+ FpZw==
+X-Gm-Message-State: AOAM533ZjFIuhxb1iXXr2T80yCRcHO0PokvScBQ9NToncJwu6ujG1XDn
+ +GvTHwQB4HMApUqdwCEPEt+Yiw==
+X-Google-Smtp-Source: ABdhPJxcJNZPdh5W7MuE70WBa7wRoDFMALmRXCq3C6mmwx9lWVVBCZXJ7ue2FBPV4Id1qqqwzeJZ/w==
+X-Received: by 2002:aa7:9404:: with SMTP id x4mr4651500pfo.46.1596216646863;
+ Fri, 31 Jul 2020 10:30:46 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id r202sm618129pfc.127.2020.07.31.10.25.14
+ by smtp.gmail.com with ESMTPSA id z25sm11051807pfg.150.2020.07.31.10.30.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Jul 2020 10:25:14 -0700 (PDT)
-Subject: Re: [RFC v2 75/76] target/riscv: gdb: support vector registers for
- rv64
-To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Hsiangkai Wang <kai.wang@sifive.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
- <alex.bennee@linaro.org>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
- <philmd@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Fri, 31 Jul 2020 10:30:46 -0700 (PDT)
+Subject: Re: [RFC v2 43/76] target/riscv: rvv-0.9: integer extension
+ instructions
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
- <20200722091641.8834-76-frank.chang@sifive.com>
+ <20200722091641.8834-44-frank.chang@sifive.com>
+ <0b042afa-61e4-d6a4-7fbd-2c359026b8aa@linaro.org>
+ <CAE_xrPhOJ3nUJJ_9o2m8EcJsBbpdEUz78qEt71mtFoF8gKgtiA@mail.gmail.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <684f11b4-eb62-601a-1664-afaeca4b1711@linaro.org>
-Date: Fri, 31 Jul 2020 10:25:12 -0700
+Message-ID: <ea51f7de-24c4-7e9e-0649-b4e74810c887@linaro.org>
+Date: Fri, 31 Jul 2020 10:30:44 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200722091641.8834-76-frank.chang@sifive.com>
+In-Reply-To: <CAE_xrPhOJ3nUJJ_9o2m8EcJsBbpdEUz78qEt71mtFoF8gKgtiA@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1031.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52d.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -77,7 +78,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -90,28 +91,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2020 17:25:22 -0000
+X-List-Received-Date: Fri, 31 Jul 2020 17:30:50 -0000
 
-On 7/22/20 2:16 AM, frank.chang@sifive.com wrote:
-> +    if (env->misa & RVV) {
-> +        /* TODO: support vlen other than 128, 256, 512 bits. */
-> +        const char *vector_xml_name = NULL;
-> +        switch (cpu->cfg.vlen) {
-> +        case 128:
-> +            vector_xml_name = "riscv-64bit-vector-128b.xml";
-> +            break;
-> +        case 256:
-> +            vector_xml_name = "riscv-64bit-vector-256b.xml";
-> +            break;
-> +        case 512:
-> +            vector_xml_name = "riscv-64bit-vector-512b.xml";
-> +            break;
-> +        default:
-> +            vector_xml_name = NULL;
-> +            break;
-> +        }
+On 7/31/20 3:17 AM, Frank Chang wrote:
+> On Fri, Jul 31, 2020 at 4:35 AM Richard Henderson <richard.henderson@linaro.org
+>     I don't understand why there aren't more functions in this table.  As far as I
+>     can see, the only NULLs should be at [*][0].
+> 
+> 
+> As source EEW has to be 1/2, 1/4, 1/8 of SEW and the source EEW must be
+> a supported width (Section 12.3).
 
-I guess this is ok as-is, but consider mirroring arm_gen_dynamic_svereg_xml().
+Oh, duh, of course.
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
 r~
