@@ -1,71 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k1GAc-00073f-DZ
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Jul 2020 17:32:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58774)
+	id 1k1L5P-0001HM-3W
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Jul 2020 22:47:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59862)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k1GAa-00072k-Gq
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 17:32:56 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e]:39872)
+ (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
+ id 1k1L5N-0001GT-M6
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 22:47:53 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:37797)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k1GAX-0004WT-Hf
- for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 17:32:56 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id f9so5773805pju.4
- for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2020 14:32:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=rTEQ9qi39BiNJZVkVAHaaevAUcf8e6x1Fahkn45LvrM=;
- b=kOIVMBxWpgJkZ0vXLNsIvhHDOCyBnoucxOnocBKSpd6354+yTBUtzELm3IBo0FG27p
- QlE1iVUSzIZN+wVP9DTLjD3QmOL4Ss7pTn7vh+e9DRoGPnUPuEAE805BvEWuBq/kluhB
- yEWzbKZ081jZLWAqSjEt7jtL8LFPs9coZtEXdcAheyDNhfhkzp3t/P49ESjWeO/rZsn4
- fMMerArX+4dMd6DYekmMkXkPzPnb2VhQKCFWMz+pm6fPPF/ByCYx8EE/fsVrywcC+98O
- stLCsoW7ymURoJ0CEvJdHKBrWK3Hmdq03zSEz6TV5c3wImojG7rPXj63MP+3vpeLQKiX
- vD3g==
+ (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
+ id 1k1L5I-0003ok-9Y
+ for qemu-riscv@nongnu.org; Thu, 30 Jul 2020 22:47:52 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id p1so16032596pls.4
+ for <qemu-riscv@nongnu.org>; Thu, 30 Jul 2020 19:47:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=+Ve18ryrBZm3ej+tqfAtVJOqiNP/aMp/Y358iAXxN+0=;
+ b=dEGoLJVSbnDcPNFN3SXrM/uIqIoTDom1kH8qo1a6HDcmgkakZv/yaoWwzSi0Tr9ytF
+ ixgDBXopgFSDTw3BqPA/kK0rKvyatR40EThaFbKsvwtBReL6ls6iqsSiD5gVmaoIDjYr
+ KpaAHRTtC1S0mf2ESlT0jNuFU1+SCJAprsaSiBTEvuemERtXkrmVdcbyi6NvwSSGR3OX
+ eRjPh+nRqI3RuryUawhFKkybaeYK1QVOK9VEpdTKFv33QLM9NB/t1w15D/xqwsA/u/7K
+ 9hcgOGZ499jjSyBa7wgFpLyEgK8rvkI/2Ki3erXBgtQzmapHpOXWTZ+2c8IvQ72PMkfJ
+ 0VHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=rTEQ9qi39BiNJZVkVAHaaevAUcf8e6x1Fahkn45LvrM=;
- b=QlIB0hVHm5yZ3NQQxRZHlXsR12/s7jxbn8IkcqF1WjNM1hMG1geNSjyDpMfuKMoEhE
- 8mVdJ58i/N9nNxqS0jHJgo/BDKNhMr8X8Zafxg6PlX90zrG++woNksjoXBZW1TDHVChd
- 2lKqZsF2bk6MI62THxpA8zxJ8lJ3FVtObl8ok6AOc+XW1A09fWkVbGwD9spM70B3f1Le
- BoEtkwNQ3IZXbrhDpN/VjWprHuK3WSRnZXa6o12ZQSpWVCeWKglFknFH5sPhY2BMQfqP
- LX7FSGOkk1KekDUn3Mw2Uy7zAKSNvmxioymzt218qz78DWdC7hapJYkn3/vJQUTlkRDf
- oKkA==
-X-Gm-Message-State: AOAM5337oxH8YzdwUWKJbltSTDyfF24Kbkj5VkKrZs4aD3C/jl9VGnHa
- 1AfXp8UeXZrTlceUJVAUPfIOgQ==
-X-Google-Smtp-Source: ABdhPJyFUD8J/JgIwGJ1OChvKv35vI0iZ8/x17I3rbrJaM1JknTxvXN1nP7eYanABGmCaEO2noGjww==
-X-Received: by 2002:a17:902:b20a:: with SMTP id
- t10mr978543plr.185.1596144772053; 
- Thu, 30 Jul 2020 14:32:52 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id x66sm7601370pgb.12.2020.07.30.14.32.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jul 2020 14:32:51 -0700 (PDT)
-Subject: Re: [RFC v2 53/76] target/riscv: use softfloat lib float16 comparison
- functions
-To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=+Ve18ryrBZm3ej+tqfAtVJOqiNP/aMp/Y358iAXxN+0=;
+ b=nGHmHwmAYUP7iLg6fJdxGAm9R0FUEUrbIm9VGyiuTzSK3rKTOVRwuLrT2K1gSp3ZRV
+ QUL2hqG8MLF5+bfRyZorPCVR9O0nqw4xKasWwPCsn+6d3KuKQW6e6vlvI9U7OBnwDBjc
+ QUCSGNibyzfW2i8ij3zwfm7ZCS0fOKqpyto544UG12zRU1TJkoJL1HoL9Nsc/fIcVKsj
+ ulcftpVnDCyo7sDywwhDz5KgtcMYwQzu4+z8vXppno8joB7zl+/GTa7nO7iiVdqD3EBh
+ qphWeTTQQBDdCKq8IRaGz1LI7kOUhMX77M0g5Ezdfdj7P+nF0rAMothXeeCkwrLH5omp
+ kyLA==
+X-Gm-Message-State: AOAM533U6TvJVRQOfX8cWrEqhhEGkU/0tWhWSyZN8e3Yucdn9URf7eYr
+ TibAR/kydv5oeoGt9Z+qURGzig==
+X-Google-Smtp-Source: ABdhPJxlZirf0thx/sT37MRy0KAh5NyqL2F1ZtoVTK+20RG/ztp7QoYvSW5TLCQKuDYUGI0i6EPGpw==
+X-Received: by 2002:aa7:83cf:: with SMTP id j15mr1643425pfn.251.1596163666047; 
+ Thu, 30 Jul 2020 19:47:46 -0700 (PDT)
+Received: from localhost.localdomain (111-243-189-249.dynamic-ip.hinet.net.
+ [111.243.189.249])
+ by smtp.gmail.com with ESMTPSA id c27sm7578483pfj.163.2020.07.30.19.47.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jul 2020 19:47:45 -0700 (PDT)
+From: Green Wan <green.wan@sifive.com>
+To: 
+Cc: bmeng.cn@gmail.com, Green Wan <green.wan@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-References: <20200722091641.8834-1-frank.chang@sifive.com>
- <20200722091641.8834-54-frank.chang@sifive.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <6169b129-2868-3ee9-b70d-7a1725ef75ab@linaro.org>
-Date: Thu, 30 Jul 2020 14:32:49 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <20200722091641.8834-54-frank.chang@sifive.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102e.google.com
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: [RFC PATCH v2 0/2] Add write-once and file-backed features to OTP
+Date: Fri, 31 Jul 2020 10:47:06 +0800
+Message-Id: <20200731024708.32725-1-green.wan@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=green.wan@sifive.com; helo=mail-pl1-x62e.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -73,8 +63,8 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -87,18 +77,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2020 21:32:56 -0000
+X-List-Received-Date: Fri, 31 Jul 2020 02:47:53 -0000
 
-On 7/22/20 2:16 AM, frank.chang@sifive.com wrote:
-> From: Frank Chang <frank.chang@sifive.com>
-> 
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> ---
->  target/riscv/vector_helper.c | 19 -------------------
->  1 file changed, 19 deletions(-)
+First patch is to add file-backed implementation to allow users to assign
+an OTP image file to machine. Users can assign the property, "otp-file",
+to machine to enable it. File-backed feature is set to "NULL" string in
+default. Any filename other than "NULL" is used as OTP image file.
 
+For example, '-M sifive_u,otp-file="otp.img"'
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+To keep data up-to-date due to an unexpected crash or CTRL+a-x exit, every
+read/write command to OTP memory involves file open, mmap and close
+operation to the image file.
 
-r~
+Second patch is to add 'write-once' feature to block second write to the
+OTP memory. Only keep the 'written' state for non-control register range
+from 0x38 to 16KB.
+
+Tested on sifive_u for both qemu and u-boot.
+
+Green Wan (2):
+  hw/riscv: sifive_u: Add file-backed OTP.
+  hw/riscv: sifive_u: Add write-once protection.
+
+ hw/riscv/sifive_u.c             |  26 ++++++++
+ hw/riscv/sifive_u_otp.c         | 103 ++++++++++++++++++++++++++++++++
+ include/hw/riscv/sifive_u.h     |   2 +
+ include/hw/riscv/sifive_u_otp.h |   2 +
+ 4 files changed, 133 insertions(+)
+
+-- 
+2.17.1
+
 
