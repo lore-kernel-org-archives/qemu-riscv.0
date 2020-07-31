@@ -1,72 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k1YgH-0004wt-8t
-	for mharc-qemu-riscv@gnu.org; Fri, 31 Jul 2020 13:18:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47134)
+	id 1k1YmZ-0001ci-V4
+	for mharc-qemu-riscv@gnu.org; Fri, 31 Jul 2020 13:25:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48712)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k1YgG-0004vs-Bp
- for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:18:52 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f]:43470)
+ id 1k1YmX-0001Yr-OO
+ for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:25:21 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:51219)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k1YgD-0006XQ-Ly
- for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:18:52 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id t10so12419499plz.10
- for <qemu-riscv@nongnu.org>; Fri, 31 Jul 2020 10:18:49 -0700 (PDT)
+ id 1k1YmV-0007N2-2q
+ for qemu-riscv@nongnu.org; Fri, 31 Jul 2020 13:25:21 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id c6so7739766pje.1
+ for <qemu-riscv@nongnu.org>; Fri, 31 Jul 2020 10:25:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=BgSLifIsjwZZcBuz8dVhcHgyO9B5S7lmDSsidn38h6Y=;
- b=KpMNnTIRFC4VQ2jgDOJFa1CyIRKpm9+gPvfFlNy8hyNb7XIovyDF1ji7gl2z4hyhWb
- lXH1dysmAFK35JLe17cHnimsH9+xuFR+oa3X2ACPMqXqRsZeIovMHICUAR6tzKKZzv8I
- 3dEU7zYVTLN9OhnI7rW7RZxJu5e+f9lcdVMEP2YkVKLZqeDbKqki0oM1hrZ7korE73U4
- mQF2INr2sb2aKNjtceQ91UYO7geJQwWgG24BnrHKWfWot0i0sszZIkUqc64QZi/ZXaqd
- 9V+AwR6tHKdupsZ2hbBRPydJ9Lz6e0W9wy2M3ZytU/DVJBZno2P9jJ20ArEsDpOmE474
- WLVQ==
+ bh=v0RlbWiTo8KRlB+z/cZJ0MQTmzfaIWBJNl8xqksUh9Q=;
+ b=hXgkfQFBHFfHs+8bz5mIee9I0hmknd/cN6gmVabZ31wnTTewylWnckSSzAM00L7cNw
+ +tU9qW6mlMVaVKw49xfLYpgLmvL4M4bntFJ7jIVH/ciy90PJpufUz++oOvZ5DxywYn1O
+ sKPxF8YdXl/KP6pLZYs++ry9Sf98QPuDmrq5JoQqxAIyRbLSiPZRahAamGxsDGdqr/+W
+ S0iGHkli0Pqs31w7rAeD6T6EVnz9SPiksBcJGs8gQbNoKoWdEKds3PAjaFIs/D/ZRuqd
+ hzCv7HyDNDFq/Rb/965UkgcpSpPmCgFInT6E/S4sKE/jvbEseMCmTT9t0vdt0lc/22ge
+ 6D4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=BgSLifIsjwZZcBuz8dVhcHgyO9B5S7lmDSsidn38h6Y=;
- b=cUi3AZ3EdMYmDzjcDESdug2dYAhO1s7zdrAiLJJOULdq3hI5YaOZN/quS9rgq05DfF
- +6CLhgku6MIukqf23Wh6EXbeKVhfsCbmJH5nsG7ITjHSd8riujTNG2JudCqr0QmCEF4n
- UUExTkkfXH4fTj4qC/tuuie5bgywJjcE9Ov4GVIC31qe3+B2UpsaiEXArfLl8ZglPZsi
- gBJskOevIBd7PphKvSwsMpYQZzYJWCrJDYsqrIKTGNZw3U6r7+iqFeaSSPw7E6VMSwO5
- JmJGDOYHXj/ZwNIhzz249PBDMDSBfhovoTXb9rd59jK0/E8Y34ImKv5mcazbdmrO9adN
- +dGQ==
-X-Gm-Message-State: AOAM530iILqxdjvqEHFh6Oaoad99Xf6kYhYAItKCdqM70POmnj/mKu8M
- A7Rc5etqjMg+H8/r3dsRaFE3Jw==
-X-Google-Smtp-Source: ABdhPJwuIsKPhtUV0SIwRy9VJcxrg7vrwbPYr85Go0EQT2KeWOu3GhXKx3LreRTrjDPbARkfsVmXOA==
-X-Received: by 2002:a17:90a:8a90:: with SMTP id
- x16mr4977780pjn.89.1596215928071; 
- Fri, 31 Jul 2020 10:18:48 -0700 (PDT)
+ bh=v0RlbWiTo8KRlB+z/cZJ0MQTmzfaIWBJNl8xqksUh9Q=;
+ b=OgDguZiJTJqs5oE/0S0UPh7gkGGFpBxr8xyuVQcjSgz/lmcCS3EfTzfv8KGR5syOka
+ DolG2mDzvZhZNnRHCJ5ifmzqi8SjMI8JKfC84fYjiWmBXWNPanP1f6cPnsdh9F94g4gk
+ 6MvdsnyuD/YPdP4Ho52ecyjh/Xm9l62FDybMBbFJH3cGcAgQdtbEw7x3mfo1/V796iBg
+ CS/RuYcK9ADKy18ZOvc7U1MrhjGXsEkGN+ncXhGm0vkOP/mPRoib3P0AyX5yH/MBaHWK
+ l5NAgwbMZoCFHvRLBlRIOfGsSenxZY+1Lqfr8wxHyurbbL7PdCLVfKwydtu4ht7SF2Gv
+ mWSA==
+X-Gm-Message-State: AOAM531Sq79Dv68J3v7z5l2biYMjiUK3IKhwWZhDCmNuFtMspmhAeaaW
+ eth8PZhYkHjuKJAiCu/89d7VXQ==
+X-Google-Smtp-Source: ABdhPJw8lfkT9qZevlvgZ/qKtw0Dhy2qERWP0crBCQAIZHK5Mqx+pGI1uXUkRe/PnBP+6T58Wirrmw==
+X-Received: by 2002:a17:90a:9d84:: with SMTP id
+ k4mr5100721pjp.227.1596216315510; 
+ Fri, 31 Jul 2020 10:25:15 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id i68sm10140796pgd.32.2020.07.31.10.18.47
+ by smtp.gmail.com with ESMTPSA id r202sm618129pfc.127.2020.07.31.10.25.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Jul 2020 10:18:47 -0700 (PDT)
-Subject: Re: [RFC v2 72/76] target/riscv: rvv-0.9: narrowing
- floating-point/integer type-convert
+ Fri, 31 Jul 2020 10:25:14 -0700 (PDT)
+Subject: Re: [RFC v2 75/76] target/riscv: gdb: support vector registers for
+ rv64
 To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Hsiangkai Wang <kai.wang@sifive.com>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
+ <alex.bennee@linaro.org>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
+ <philmd@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- LIU Zhiwei <zhiwei_liu@c-sky.com>
+ Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>
 References: <20200722091641.8834-1-frank.chang@sifive.com>
- <20200722091641.8834-73-frank.chang@sifive.com>
+ <20200722091641.8834-76-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <adbe61bf-45b4-825b-5b27-b9a834493cd1@linaro.org>
-Date: Fri, 31 Jul 2020 10:18:45 -0700
+Message-ID: <684f11b4-eb62-601a-1664-afaeca4b1711@linaro.org>
+Date: Fri, 31 Jul 2020 10:25:12 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200722091641.8834-73-frank.chang@sifive.com>
+In-Reply-To: <20200722091641.8834-76-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1031.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -88,30 +90,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2020 17:18:52 -0000
+X-List-Received-Date: Fri, 31 Jul 2020 17:25:22 -0000
 
 On 7/22/20 2:16 AM, frank.chang@sifive.com wrote:
-> +DEF_HELPER_5(vfncvt_rod_f_f_w_h, void, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_5(vfncvt_rod_f_f_w_w, void, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_5(vfncvt_rtz_xu_f_w_b, void, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_5(vfncvt_rtz_xu_f_w_h, void, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_5(vfncvt_rtz_xu_f_w_w, void, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_5(vfncvt_rtz_x_f_w_b, void, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_5(vfncvt_rtz_x_f_w_h, void, ptr, ptr, ptr, env, i32)
-> +DEF_HELPER_5(vfncvt_rtz_x_f_w_w, void, ptr, ptr, ptr, env, i32)
+> +    if (env->misa & RVV) {
+> +        /* TODO: support vlen other than 128, 256, 512 bits. */
+> +        const char *vector_xml_name = NULL;
+> +        switch (cpu->cfg.vlen) {
+> +        case 128:
+> +            vector_xml_name = "riscv-64bit-vector-128b.xml";
+> +            break;
+> +        case 256:
+> +            vector_xml_name = "riscv-64bit-vector-256b.xml";
+> +            break;
+> +        case 512:
+> +            vector_xml_name = "riscv-64bit-vector-512b.xml";
+> +            break;
+> +        default:
+> +            vector_xml_name = NULL;
+> +            break;
+> +        }
 
-Again, no rtz helpers.
-
-As for rod... I think you'll want a new helper akin to
-helper_set_rounding_mode() that sets float_round_to_odd.  We don't want to
-change helper_set_rounding_mode because that's responsible for SIGILL, and this
-should be an interface private to translation.
-
-You'd probably want to add a private value for to be used only within
-translate.c and insn_trans/*, so that gen_set_rm() can remember the odd setting
-as with all of the others.  E.g.
-
-#define QEMU_FRM_ODD 8
+I guess this is ok as-is, but consider mirroring arm_gen_dynamic_svereg_xml().
 
 
 r~
