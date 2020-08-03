@@ -1,70 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k2UJt-00047F-Fd
-	for mharc-qemu-riscv@gnu.org; Mon, 03 Aug 2020 02:51:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50052)
+	id 1k2Uvo-0001QL-Qp
+	for mharc-qemu-riscv@gnu.org; Mon, 03 Aug 2020 03:30:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58896)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k2UJr-000455-Fw; Mon, 03 Aug 2020 02:51:35 -0400
-Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:35936)
+ id 1k2Uvm-0001Om-9d; Mon, 03 Aug 2020 03:30:46 -0400
+Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:43985)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k2UJp-0001Fz-1D; Mon, 03 Aug 2020 02:51:35 -0400
-Received: by mail-yb1-xb41.google.com with SMTP id n141so17437186ybf.3;
- Sun, 02 Aug 2020 23:51:31 -0700 (PDT)
+ id 1k2Uvk-00065g-38; Mon, 03 Aug 2020 03:30:46 -0400
+Received: by mail-wr1-x443.google.com with SMTP id a15so33167057wrh.10;
+ Mon, 03 Aug 2020 00:30:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0J6c4aFAI+42R8anVtsHXp+lWUTw2bvT8F7DupLc2hg=;
- b=XnwD3XNvGXHx5SVD24BaRrBiFEQLC2BEyH5JRwrbAbvT/Ls3CgxSTwoBZdsShVKsVl
- 3Ue5+ucEfVamDId3XruTO54tKPsR6jVWC4gx1F48XpdMkA9Ib5S6YZTF4xtLdp4dogeO
- +ndofBLbWTSvbg50GQuSjPP2PZ9Km/V/IxC2Xbz0KzU0wm1+hjdJZK3dVGGZIiwqAr7Q
- muzr6oRFPLH3R6L6vKsoCBac4vQ6/PLHK6F6bNxC+eICD7GkukRweZv9HMdvmTimYo3m
- hL2tpN0dGEP7RJUrEZP0g39196j4WIwnf6u34i0/Qq2xdCjQrbv2sdhcKbGyKO6fUtY3
- mTuA==
+ h=from:to:cc:subject:date:message-id;
+ bh=x9ZHqpFOW+mw18lc3FPOEM8YlIVhGuhIIszL8eaScns=;
+ b=ah80WN9pxpdXFiFLatfwfCMOXUPVEc565BfEcPun45Ael4ka+KXBuSMlfVV0VHFQtq
+ w/9YjK+ZMRnEOrMA2SHBS8haAi6nGZO/weLai3oOhg7+B711iCAw8l7GSAJ6/7fiZGTK
+ l2WOwub3yqY3GcO1yLb/EVOFuaR9L5U/08Ddpg1pJZedMNC9zhzYzziLE1cB8yME2D7H
+ ejABsJiDOD/0dyTB6x+d57MKclaXD+wWbqcxypWb0MT+KMNcpTBLUe1xHDHE+Fxbp3EW
+ v0AMrDs5XV4a14FOVJCKQrta229Fkd3LVdIGLguLvq+lCb481+0ocLgnAyc67SOLYxji
+ gDRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=0J6c4aFAI+42R8anVtsHXp+lWUTw2bvT8F7DupLc2hg=;
- b=gbKwPWsVS/jQYAUhuh4WXcOJ9gF4xm0XzxMX2MTOUZWVhQrRbUmxxF4ND2ewVDyNMa
- mYNrUo/p/sOK1Djp9y2guk1Qt9gOHAYLVEV4ZLeApolD7EkeuHHKHRSiDgETa2OI7T3h
- weMKuge/2cuCnAwjItqKS5+RVLnx7tUGkDUuSKuT3xyri7NswrJnf6TktEbNiXvepFUi
- OOYe33kkuxoYROsP5IypEDGHj79U8cN369l7LIzDfI7AHqOtFqfSMMY8la1OyAgaM0vi
- EpcwJYgfB6mqPv+tRX1k0qP4booYjzZ5J3Wa9z5QT0P3mEFM6J0/eVwtyxvoa6AVYI9W
- 38bA==
-X-Gm-Message-State: AOAM531be1uItgP9i/42+s8/7gVID81xQs6ngU7ggvnrDFQS0umyko8i
- 3GlJF4jJ2RaLuDvUxClpkk122xljqIinPX3oq24=
-X-Google-Smtp-Source: ABdhPJxhfC/XNcS5/R9Z5VYN5eIK1On6E1GvI2XdRhoEh8yQfxMcKnZNT/2bYFra14xRBcoWGraB3UKcPQ/tnVqFuqg=
-X-Received: by 2002:a25:6b04:: with SMTP id g4mr5898703ybc.387.1596437490951; 
- Sun, 02 Aug 2020 23:51:30 -0700 (PDT)
-MIME-Version: 1.0
-References: <1594357499-29068-1-git-send-email-bmeng.cn@gmail.com>
- <1594357499-29068-5-git-send-email-bmeng.cn@gmail.com>
- <CAKmqyKM1m2j15ncbcW0rp5fk6FmbJ20uWOYUC40+v9PG=Hu7yQ@mail.gmail.com>
- <CAEUhbmWxCMZG+kdyqeSBrJPRf0Jvb7a4AcADuFXpRwQ7fb8zDA@mail.gmail.com>
- <CAEUhbmVJ94QF3UyEZUwcn-2yS4M3tKR-KOb4xPwSCwf9uRs-ww@mail.gmail.com>
- <CAKmqyKNJA0_5Qsfe6FZXSgNydxSHRXQQtqk8nB6-kR-yNpFHCQ@mail.gmail.com>
- <CAEUhbmXzufivy-7Qm-Nr6j6U9ynGOUgzV7XjXYDL_Ewcm1oj_g@mail.gmail.com>
- <CAKmqyKN-Ez_fE6oBfczxsGVyyRpeEE8go0pB-C7i6a4SALj8uA@mail.gmail.com>
- <CAEUhbmX5rcMuD8F30wdgYrvUq6NU84t5o=VkgKqwvwyfmA9e+w@mail.gmail.com>
- <CAKmqyKNDTOKeb+5h5NuJcYWMRoS24H=ski6Jau84uEEx46Ep9Q@mail.gmail.com>
- <CAEUhbmVK7DMT_MpHtOsS45fZZ58OaAW1a=hWk=4vNY-Ph2XvmA@mail.gmail.com>
-In-Reply-To: <CAEUhbmVK7DMT_MpHtOsS45fZZ58OaAW1a=hWk=4vNY-Ph2XvmA@mail.gmail.com>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=x9ZHqpFOW+mw18lc3FPOEM8YlIVhGuhIIszL8eaScns=;
+ b=VLN2dVmQ2CDBVKxcm9r3YhEyFRLXqVg7mOzege3D5d6CCSzeH4A/+KrLb151PZleOQ
+ pg2G0K1PT/3kXNI8MlKPfPgRoUncy3lTU0XUDV1/tY7627ZIOlnBC4TVXORgKVEhPSeZ
+ Ube9pilR2L904xi0HayzQCS2klrNGYskcOeqgah5jkiDJom05NfmVCqfGruGAcu68usI
+ ksJoqLp9SooKzG8rj9Ko/Bo3DgdTA5orog9E+i/dWdS2e3aWn0HsXSWoSEXn0Ku+jDma
+ jswqKktehg1sbN8I+H00pE5JvqmfQNtn36qG7zHy7leucTeafZfnGSNYJlakx2guUDda
+ 4cWA==
+X-Gm-Message-State: AOAM530I5N0xuzqXSBhxsI+3whpQeuphJ5L1JEVglJHh+ZlH7JKSS4EF
+ tbHkvoCFh5iWjpck9hHzqhQ=
+X-Google-Smtp-Source: ABdhPJzlNT1qMAVVyfR/x4z6gxZLzQTfZCnZ43asXxp6w0iMmFSrBaZp4MBmsoUzk+cgnrttJPb3yA==
+X-Received: by 2002:adf:c552:: with SMTP id s18mr13428322wrf.209.1596439840201; 
+ Mon, 03 Aug 2020 00:30:40 -0700 (PDT)
+Received: from localhost.localdomain (unknown-224-80.windriver.com.
+ [147.11.224.80])
+ by smtp.gmail.com with ESMTPSA id 130sm23969438wme.26.2020.08.03.00.30.38
+ (version=TLS1 cipher=AES128-SHA bits=128/128);
+ Mon, 03 Aug 2020 00:30:39 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 3 Aug 2020 14:51:19 +0800
-Message-ID: <CAEUhbmV7wJ7mBKwv+WbfFDOuPmLDUzua7kdwSWvYengub6jYEw@mail.gmail.com>
-Subject: Re: [PATCH v4 4/7] hw/riscv: Use pre-built bios image of generic
- platform for virt & sifive_u
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Anup Patel <anup@brainfault.org>, Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
+ Palmer Dabbelt <palmerdabbelt@google.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH v6 0/6] riscv: Switch to use generic platform fw_dynamic type
+ opensbi bios images
+Date: Mon,  3 Aug 2020 00:30:26 -0700
+Message-Id: <1596439832-29238-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Received-SPF: pass client-ip=2a00:1450:4864:20::443;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-wr1-x443.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -86,157 +75,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Aug 2020 06:51:35 -0000
+X-List-Received-Date: Mon, 03 Aug 2020 07:30:47 -0000
 
-Hi Alistair,
+From: Bin Meng <bin.meng@windriver.com>
 
-On Wed, Jul 29, 2020 at 1:10 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> Hi Alistair,
->
-> On Wed, Jul 29, 2020 at 1:05 PM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Tue, Jul 28, 2020 at 9:51 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > Hi Alistair,
-> > >
-> > > On Wed, Jul 29, 2020 at 2:26 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > >
-> > > > On Tue, Jul 28, 2020 at 8:46 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > >
-> > > > > Hi Alistair,
-> > > > >
-> > > > > On Tue, Jul 28, 2020 at 11:39 PM Alistair Francis <alistair23@gmail.com> wrote:
-> > > > > >
-> > > > > > On Wed, Jul 15, 2020 at 9:55 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > > > >
-> > > > > > > Hi Alistair,
-> > > > > > >
-> > > > > > > On Mon, Jul 13, 2020 at 9:53 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > > > > >
-> > > > > > > > On Sun, Jul 12, 2020 at 1:34 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Thu, Jul 9, 2020 at 10:07 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > > > > > > >
-> > > > > > > > > > From: Bin Meng <bin.meng@windriver.com>
-> > > > > > > > > >
-> > > > > > > > > > Update virt and sifive_u machines to use the opensbi fw_dynamic bios
-> > > > > > > > > > image built for the generic FDT platform.
-> > > > > > > > > >
-> > > > > > > > > > Remove the out-of-date no longer used bios images.
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> > > > > > > > > > Reviewed-by: Anup Patel <anup@brainfault.org>
-> > > > > > > > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > > > > >
-> > > > > > > > > This patch seems to break 32-bit Linux boots on the sifive_u and virt machines.
-> > > > > > > > >
-> > > > > > > >
-> > > > > > > > It looks only Linux boot on sifive_u is broken. On our side, we have
-> > > > > > > > been using VxWorks to test 32-bit OpenSBI on sifive_u so this issue
-> > > > > > > > gets unnoticed. I will take a look.
-> > > > > > >
-> > > > > > > I've figured out the issue of 32-bit Linux booting failure on
-> > > > > > > sifive_u. A patch has been sent to Linux upstream:
-> > > > > > > http://lists.infradead.org/pipermail/linux-riscv/2020-July/001213.html
-> > > > > >
-> > > > > > Thanks for that. What change in QEMU causes this failure though?
-> > > > > >
-> > > > >
-> > > > > There is nothing wrong in QEMU.
-> > > >
-> > > > There is. This patch causes a regression for 32-bit Linux boot on the
-> > > > sifive_u. Your v5 has not addressed this.
-> > >
-> > > The 32-bit Linux boot failure was fixed by:
-> > > http://lists.infradead.org/pipermail/linux-riscv/2020-July/001213.html
-> > >
-> > > What additional issue did you see?
-> > >
-> > > >
-> > > > With this patch, the Linux boot stops here:
-> > > >
-> > > > OpenSBI v0.8
-> > > >    ____                    _____ ____ _____
-> > > >   / __ \                  / ____|  _ \_   _|
-> > > >  | |  | |_ __   ___ _ __ | (___ | |_) || |
-> > > >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> > > >  | |__| | |_) |  __/ | | |____) | |_) || |_
-> > > >   \____/| .__/ \___|_| |_|_____/|____/_____|
-> > > >         | |
-> > > >         |_|
-> > > >
-> > > > Platform Name       : SiFive HiFive Unleashed A00
-> > > > Platform Features   : timer,mfdeleg
-> > > > Platform HART Count : 4
-> > > > Boot HART ID        : 3
-> > > > Boot HART ISA       : rv64imafdcsu
-> > >
-> > > This is a 64-bit hardware.
-> >
-> > You are right. It's not 32-bit, that was my mistake. I'm used to my
-> > first test being 32-bit, but in this case it's not.
-> >
-> > It looks like this commit instead breaks the sifive_u for 64-bit with
-> > the 5.3 kernel.
-> >
-> > >
-> > > > BOOT HART Features  : pmp,scounteren,mcounteren
-> > > > BOOT HART PMP Count : 16
-> > > > Firmware Base       : 0x80000000
-> > > > Firmware Size       : 116 KB
-> > > > Runtime SBI Version : 0.2
-> > > >
-> > > > MIDELEG : 0x0000000000000222
-> > > > MEDELEG : 0x000000000000b109
-> > > > PMP0    : 0x0000000080000000-0x000000008001ffff (A)
-> > > > PMP1    : 0x0000000000000000-0xffffffffffffffff (A,R,W,X)
-> > > > [    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80200000
-> > > > [    0.000000] Linux version 5.3.0 (oe-user@oe-host) (gcc version
-> > >
-> > > It seems that you are using quite an old kernel. Can you please try
-> > > the latest version?
-> >
-> > It is an old kernel, but old kernels should still keep working (or we
-> > should at least know why they don't)
-> >
-> > >
-> > > > 9.2.0 (GCC)) #1 SMP Thu Sep 19 18:34:52 UTC 2019
-> > > > [    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
-> > > > [    0.000000] printk: bootconsole [sbi0] enabled
-> > > > [    0.000000] initrd not found or empty - disabling initrd
-> > > > [    0.000000] Zone ranges:
-> > > > [    0.000000]   DMA32    [mem 0x0000000080200000-0x00000000bfffffff]
-> > > > [    0.000000]   Normal   empty
-> > > > [    0.000000] Movable zone start for each node
-> > > > [    0.000000] Early memory node ranges
-> > > > [    0.000000]   node   0: [mem 0x0000000080200000-0x00000000bfffffff]
-> > > > [    0.000000] Initmem setup node 0 [mem 0x0000000080200000-0x00000000bfffffff]
-> > > > [    0.000000] OF: fdt: Invalid device tree blob header
-> > > > [    0.000000] software IO TLB: mapped [mem 0xbb1fe000-0xbf1fe000] (64MB)
-> > > >
-> > > > Without this patch I can boot all the way to looking for a rootFS.
-> > > >
-> > > > Please don't send new versions of patches without addresses regressions.
-> > >
-> > > The patches were sent after addressing all regressions you reported
-> > > (well the 32-bit Linux booting issue is actually not a QEMU
-> > > regression, but one that exists in the Linux kernel side for a long
-> > > time).
-> >
-> > Yep, that is my mistake. Sorry about the confusion.
-> >
-> > >
-> > > I just tested 64-bit Linux boot on both virt and sifive_u, and they
-> > > both can boot all the way to looking for a root fs.
-> >
-> > Can you test with older kernels?
-> >
->
-> OK I will investigate.
+The RISC-V generic platform is a flattened device tree (FDT) based
+platform where all platform specific functionality is provided based
+on FDT passed by previous booting stage. The support was added in
+the upstream OpenSBI v0.8 release recently.
 
-I've located the commit in the newer Linux kernel that fixed the boot
-failure of the 5.3 kernel. See below:
+This series updates QEMU to switch to use generic platform of opensbi
+bios images. With the recent fw_dynamic image support, let's replace
+the fw_jump images with fw_dynamic ones too.
+
+The patch emails do not contain binary bits, please grab all updates
+at https://github.com/lbmeng/qemu.git bios branch.
+
+Note:
+
+1. To test 32-bit Linux kernel on QEMU 'sifive_u' 32-bit machine,
+the following patch is needed:
+http://lists.infradead.org/pipermail/linux-riscv/2020-July/001213.html
+
+2. To test 64-bit Linux 5.3 kernel on QEMU 'virt' or 'sifive_u' 64-bit
+machines, the following commit should be cherry-picked to 5.3:
 
 commit 922b0375fc93fb1a20c5617e37c389c26bbccb70
 Author: Albert Ou <aou@eecs.berkeley.edu>
@@ -244,123 +106,67 @@ Date:   Fri Sep 27 16:14:18 2019 -0700
 
     riscv: Fix memblock reservation for device tree blob
 
-    This fixes an error with how the FDT blob is reserved in memblock.
-    An incorrect physical address calculation exposed the FDT header to
-    unintended corruption, which typically manifested with of_fdt_raw_init()
-    faulting during late boot after fdt_totalsize() returned a wrong value.
-    Systems with smaller physical memory sizes more frequently trigger this
-    issue, as the kernel is more likely to allocate from the DMA32 zone
-    where bbl places the DTB after the kernel image.
+Linux 5.4 or above already contains this commit/fix.
 
-    Commit 671f9a3e2e24 ("RISC-V: Setup initial page tables in two stages")
-    changed the mapping of the DTB to reside in the fixmap area.
-    Consequently, early_init_fdt_reserve_self() cannot be used anymore in
-    setup_bootmem() since it relies on __pa() to derive a physical address,
-    which does not work with dtb_early_va that is no longer a valid kernel
-    logical address.
+Changes in v6:
+- Rebased on https://github.com/alistair23/qemu/commits/riscv-to-apply.next
+- Add information about Linux kernel tested
+- Squash the Makefile ELF changes into patch 5
 
-    The reserved[0x1] region shows the effect of the pointer underflow
-    resulting from the __pa(initial_boot_params) offset subtraction:
+Changes in v5:
+- Include the generic fw_dynamic.bin in the Makefile for `make install` bisection
 
-    [    0.000000] MEMBLOCK configuration:
-    [    0.000000]  memory size = 0x000000001fe00000 reserved size =
-0x0000000000a2e514
-    [    0.000000]  memory.cnt  = 0x1
-    [    0.000000]  memory[0x0]
-[0x0000000080200000-0x000000009fffffff], 0x000000001fe00000 bytes
-flags: 0x0
-    [    0.000000]  reserved.cnt  = 0x2
-    [    0.000000]  reserved[0x0]
-[0x0000000080200000-0x0000000080c2dfeb], 0x0000000000a2dfec bytes
-flags: 0x0
-    [    0.000000]  reserved[0x1]
-[0xfffffff080100000-0xfffffff080100527], 0x0000000000000528 bytes
-flags: 0x0
+Changes in v4:
+- Remove old binaries in the Makefile for `make install` bisection
 
-    With the fix applied:
+Changes in v3:
+- Change fw_jump to fw_dynamic in the make rules
+- Change to fw_dynamic.bin for virt & sifive_u
+- Change to fw_dynamic.elf for Spike
+- Generate fw_dynamic images in the artifacts
 
-    [    0.000000] MEMBLOCK configuration:
-    [    0.000000]  memory size = 0x000000001fe00000 reserved size =
-0x0000000000a2e514
-    [    0.000000]  memory.cnt  = 0x1
-    [    0.000000]  memory[0x0]
-[0x0000000080200000-0x000000009fffffff], 0x000000001fe00000 bytes
-flags: 0x0
-    [    0.000000]  reserved.cnt  = 0x2
-    [    0.000000]  reserved[0x0]
-[0x0000000080200000-0x0000000080c2dfeb], 0x0000000000a2dfec bytes
-flags: 0x0
-    [    0.000000]  reserved[0x1]
-[0x0000000080e00000-0x0000000080e00527], 0x0000000000000528 bytes
-flags: 0x0
+Changes in v2:
+- new patch: configure: Create symbolic links for pc-bios/*.elf files
+- Upgrade OpenSBI to v0.8 release
+- Copy the ELF images too in the make rules
+- Include ELF images in the artifacts
 
-    Fixes: 671f9a3e2e24 ("RISC-V: Setup initial page tables in two stages")
-    Signed-off-by: Albert Ou <aou@eecs.berkeley.edu>
-    Tested-by: Bin Meng <bmeng.cn@gmail.com>
-    Reviewed-by: Anup Patel <anup@brainfault.org>
-    Signed-off-by: Paul Walmsley <paul.walmsley@sifive.com>
+Bin Meng (6):
+  configure: Create symbolic links for pc-bios/*.elf files
+  roms/opensbi: Upgrade from v0.7 to v0.8
+  roms/Makefile: Build the generic platform for RISC-V OpenSBI firmware
+  hw/riscv: Use pre-built bios image of generic platform for virt &
+    sifive_u
+  hw/riscv: spike: Change the default bios to use generic platform image
+  gitlab-ci/opensbi: Update GitLab CI to build generic platform
 
-As the commit message says, this commit is a fix to commit
-671f9a3e2e24 ("RISC-V: Setup initial page tables in two stages") which
-is in the 5.3 kernel:
+ .gitlab-ci.d/opensbi.yml                       |  28 ++++++++--------------
+ Makefile                                       |   4 ++--
+ configure                                      |   1 +
+ hw/riscv/sifive_u.c                            |   4 ++--
+ hw/riscv/spike.c                               |   9 +++++--
+ hw/riscv/virt.c                                |   4 ++--
+ pc-bios/opensbi-riscv32-generic-fw_dynamic.bin | Bin 0 -> 62144 bytes
+ pc-bios/opensbi-riscv32-generic-fw_dynamic.elf | Bin 0 -> 558668 bytes
+ pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin   | Bin 49520 -> 0 bytes
+ pc-bios/opensbi-riscv32-virt-fw_jump.bin       | Bin 49504 -> 0 bytes
+ pc-bios/opensbi-riscv64-generic-fw_dynamic.bin | Bin 0 -> 70792 bytes
+ pc-bios/opensbi-riscv64-generic-fw_dynamic.elf | Bin 0 -> 620424 bytes
+ pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin   | Bin 57936 -> 0 bytes
+ pc-bios/opensbi-riscv64-virt-fw_jump.bin       | Bin 57920 -> 0 bytes
+ roms/Makefile                                  |  32 ++++++++-----------------
+ roms/opensbi                                   |   2 +-
+ 16 files changed, 35 insertions(+), 49 deletions(-)
+ create mode 100644 pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
+ create mode 100644 pc-bios/opensbi-riscv32-generic-fw_dynamic.elf
+ delete mode 100644 pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
+ delete mode 100644 pc-bios/opensbi-riscv32-virt-fw_jump.bin
+ create mode 100644 pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
+ create mode 100644 pc-bios/opensbi-riscv64-generic-fw_dynamic.elf
+ delete mode 100644 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
+ delete mode 100644 pc-bios/opensbi-riscv64-virt-fw_jump.bin
 
-commit 671f9a3e2e24cdeb2d2856abee7422f093e23e29
-Author: Anup Patel <Anup.Patel@wdc.com>
-Date:   Fri Jun 28 13:36:21 2019 -0700
+-- 
+2.7.4
 
-    RISC-V: Setup initial page tables in two stages
-
-    Currently, the setup_vm() does initial page table setup in one-shot
-    very early before enabling MMU. Due to this, the setup_vm() has to map
-    all possible kernel virtual addresses since it does not know size and
-    location of RAM. This means we have kernel mappings for non-existent
-    RAM and any buggy driver (or kernel) code doing out-of-bound access
-    to RAM will not fault and cause underterministic behaviour.
-
-    Further, the setup_vm() creates PMD mappings (i.e. 2M mappings) for
-    RV64 systems. This means for PAGE_OFFSET=0xffffffe000000000 (i.e.
-    MAXPHYSMEM_128GB=y), the setup_vm() will require 129 pages (i.e.
-    516 KB) of memory for initial page tables which is never freed. The
-    memory required for initial page tables will further increase if
-    we chose a lower value of PAGE_OFFSET (e.g. 0xffffff0000000000)
-
-    This patch implements two-staged initial page table setup, as follows:
-    1. Early (i.e. setup_vm()): This stage maps kernel image and DTB in
-    a early page table (i.e. early_pg_dir). The early_pg_dir will be used
-    only by boot HART so it can be freed as-part of init memory free-up.
-    2. Final (i.e. setup_vm_final()): This stage maps all possible RAM
-    banks in the final page table (i.e. swapper_pg_dir). The boot HART
-    will start using swapper_pg_dir at the end of setup_vm_final(). All
-    non-boot HARTs directly use the swapper_pg_dir created by boot HART.
-
-    We have following advantages with this new approach:
-    1. Kernel mappings for non-existent RAM don't exists anymore.
-    2. Memory consumed by initial page tables is now indpendent of the
-    chosen PAGE_OFFSET.
-    3. Memory consumed by initial page tables on RV64 system is 2 pages
-    (i.e. 8 KB) which has significantly reduced and these pages will be
-    freed as-part of the init memory free-up.
-
-    The patch also provides a foundation for implementing strict kernel
-    mappings where we protect kernel text and rodata using PTE permissions.
-
-    Suggested-by: Mike Rapoport <rppt@linux.ibm.com>
-    Signed-off-by: Anup Patel <anup.patel@wdc.com>
-    [paul.walmsley@sifive.com: updated to apply; fixed a checkpatch warning]
-    Signed-off-by: Paul Walmsley <paul.walmsley@sifive.com>
-
-I cherry-picked 922b0375fc93fb1a20c5617e37c389c26bbccb70 on top of a
-5.3 kernel, and with that the kernel boots again with this patch set.
-
->
-> > If we can't support older kernels with the default bios option we at
-> > least need to know why and list that in the release notes.
-> >
-
-I will include the above findings in my commit message of this series,
-mentioning that to test an older kernel like 5.3 version Linux,
-922b0375fc93fb1a20c5617e37c389c26bbccb70 should be cherry-picked.
-
-Regards,
-Bin
 
