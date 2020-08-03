@@ -1,45 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k2Uvo-0001QL-Qp
-	for mharc-qemu-riscv@gnu.org; Mon, 03 Aug 2020 03:30:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58896)
+	id 1k2Uvr-0001VF-17
+	for mharc-qemu-riscv@gnu.org; Mon, 03 Aug 2020 03:30:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58946)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k2Uvm-0001Om-9d; Mon, 03 Aug 2020 03:30:46 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:43985)
+ id 1k2Uvo-0001QK-PY; Mon, 03 Aug 2020 03:30:48 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:34749)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k2Uvk-00065g-38; Mon, 03 Aug 2020 03:30:46 -0400
-Received: by mail-wr1-x443.google.com with SMTP id a15so33167057wrh.10;
- Mon, 03 Aug 2020 00:30:42 -0700 (PDT)
+ id 1k2Uvm-00065v-OP; Mon, 03 Aug 2020 03:30:48 -0400
+Received: by mail-wr1-x444.google.com with SMTP id f7so33223626wrw.1;
+ Mon, 03 Aug 2020 00:30:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=x9ZHqpFOW+mw18lc3FPOEM8YlIVhGuhIIszL8eaScns=;
- b=ah80WN9pxpdXFiFLatfwfCMOXUPVEc565BfEcPun45Ael4ka+KXBuSMlfVV0VHFQtq
- w/9YjK+ZMRnEOrMA2SHBS8haAi6nGZO/weLai3oOhg7+B711iCAw8l7GSAJ6/7fiZGTK
- l2WOwub3yqY3GcO1yLb/EVOFuaR9L5U/08Ddpg1pJZedMNC9zhzYzziLE1cB8yME2D7H
- ejABsJiDOD/0dyTB6x+d57MKclaXD+wWbqcxypWb0MT+KMNcpTBLUe1xHDHE+Fxbp3EW
- v0AMrDs5XV4a14FOVJCKQrta229Fkd3LVdIGLguLvq+lCb481+0ocLgnAyc67SOLYxji
- gDRw==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=YoykrVtjYqt8oRbnP42shFLWN1mv4jmw4/LHlHynF4c=;
+ b=vg9HvVP312vecH6MZZkKaIc4Yf1hftWL/W1GPOrPswYCbV7uMm6nQ4RSBd2q8RwUic
+ qAnRn0RnF+obTxHiIK0AvuG3l+9NouV+03YbTwIpvxTP9486rhy4JIes/2MzNNBZq5ZB
+ IHW4AOeTE5LuHprTDC/YUBCa62/VALfa2A1ZZlbIYC0E/hNbN+00C+Bz2RlghuraZeXx
+ t3CPN2uWmiLXUwRveCNMVgEW2Ec/lbYjqVa0i2lK8Tz5I8z8LbDZnoTKR5o6MLuZkWqF
+ DcAGimmFKLd19RHtX57V8bn2346Yy/s0bWG7SFGbYJpchb2XjhhGrsoyCDt5BhM16NmN
+ D3uA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=x9ZHqpFOW+mw18lc3FPOEM8YlIVhGuhIIszL8eaScns=;
- b=VLN2dVmQ2CDBVKxcm9r3YhEyFRLXqVg7mOzege3D5d6CCSzeH4A/+KrLb151PZleOQ
- pg2G0K1PT/3kXNI8MlKPfPgRoUncy3lTU0XUDV1/tY7627ZIOlnBC4TVXORgKVEhPSeZ
- Ube9pilR2L904xi0HayzQCS2klrNGYskcOeqgah5jkiDJom05NfmVCqfGruGAcu68usI
- ksJoqLp9SooKzG8rj9Ko/Bo3DgdTA5orog9E+i/dWdS2e3aWn0HsXSWoSEXn0Ku+jDma
- jswqKktehg1sbN8I+H00pE5JvqmfQNtn36qG7zHy7leucTeafZfnGSNYJlakx2guUDda
- 4cWA==
-X-Gm-Message-State: AOAM530I5N0xuzqXSBhxsI+3whpQeuphJ5L1JEVglJHh+ZlH7JKSS4EF
- tbHkvoCFh5iWjpck9hHzqhQ=
-X-Google-Smtp-Source: ABdhPJzlNT1qMAVVyfR/x4z6gxZLzQTfZCnZ43asXxp6w0iMmFSrBaZp4MBmsoUzk+cgnrttJPb3yA==
-X-Received: by 2002:adf:c552:: with SMTP id s18mr13428322wrf.209.1596439840201; 
- Mon, 03 Aug 2020 00:30:40 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=YoykrVtjYqt8oRbnP42shFLWN1mv4jmw4/LHlHynF4c=;
+ b=G4aRf2CGBlmMAayxoTzpGOrdMy8XMf+PYA+4XBo2sGM7mue9QhfKrXdRoomIbUbkBV
+ 5r3oPOdS0+TMnJN+x0batfbLdVBLa+839Sc+1E3b7xXk8/dhrVrR4Jef/1S6Drr3M4YU
+ jq/pMz954tCzlYK25TXV8KpaZQNSlOZUukSftnfhH+c9RAN2CrhuYpHNtcovLLUYEOcx
+ d93ldBPDleocf1t5fH2n3Z0PoMTVBhAbTAFoN1H94MeCZwogjkyzt9nx0J/w/54+Sb4k
+ IOtIGwS/I07PP6V3fo4hH1qS4/BuimMSJQvxTbjoAATMd/GA2J798SiLg7vNCX1HiOJi
+ 7JNw==
+X-Gm-Message-State: AOAM531RkWwkV9UoPfUU2tSYoRIOVSg6NecdEYNRra6AvkN/V5pwT5qj
+ 0VKExvAKc4MV2Vwh1riD4sl6ES4T
+X-Google-Smtp-Source: ABdhPJxyfm7mkydbgIffoCyUkY//5xhf5Nq/gI1q8naEQgDbZvtdWUVkVCaeXE4K/Uwcm1KedqhWHg==
+X-Received: by 2002:a5d:6a8b:: with SMTP id s11mr13784421wru.222.1596439844831; 
+ Mon, 03 Aug 2020 00:30:44 -0700 (PDT)
 Received: from localhost.localdomain (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id 130sm23969438wme.26.2020.08.03.00.30.38
+ by smtp.gmail.com with ESMTPSA id 130sm23969438wme.26.2020.08.03.00.30.42
  (version=TLS1 cipher=AES128-SHA bits=128/128);
- Mon, 03 Aug 2020 00:30:39 -0700 (PDT)
+ Mon, 03 Aug 2020 00:30:44 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -47,13 +48,14 @@ To: Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v6 0/6] riscv: Switch to use generic platform fw_dynamic type
- opensbi bios images
-Date: Mon,  3 Aug 2020 00:30:26 -0700
-Message-Id: <1596439832-29238-1-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH v6 2/6] roms/opensbi: Upgrade from v0.7 to v0.8
+Date: Mon,  3 Aug 2020 00:30:28 -0700
+Message-Id: <1596439832-29238-3-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 1.7.1
-Received-SPF: pass client-ip=2a00:1450:4864:20::443;
- envelope-from=bmeng.cn@gmail.com; helo=mail-wr1-x443.google.com
+In-Reply-To: <1596439832-29238-1-git-send-email-bmeng.cn@gmail.com>
+References: <1596439832-29238-1-git-send-email-bmeng.cn@gmail.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::444;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-wr1-x444.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -75,97 +77,125 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Aug 2020 07:30:47 -0000
+X-List-Received-Date: Mon, 03 Aug 2020 07:30:49 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-The RISC-V generic platform is a flattened device tree (FDT) based
-platform where all platform specific functionality is provided based
-on FDT passed by previous booting stage. The support was added in
-the upstream OpenSBI v0.8 release recently.
+Upgrade OpenSBI from v0.7 to v0.8.
 
-This series updates QEMU to switch to use generic platform of opensbi
-bios images. With the recent fw_dynamic image support, let's replace
-the fw_jump images with fw_dynamic ones too.
+The v0.8 release includes the following commits:
 
-The patch emails do not contain binary bits, please grab all updates
-at https://github.com/lbmeng/qemu.git bios branch.
+1bb00ab lib: No need to provide default PMP region using platform callbacks
+a9eac67 include: sbi_platform: Combine reboot and shutdown into one callback
+6585fab lib: utils: Add SiFive test device
+4781545 platform: Add Nuclei UX600 platform
+3a326af scripts: adapt binary archive script for Nuclei UX600
+5bdf022 firmware: fw_base: Remove CSR_MTVEC update check
+e6c1345 lib: utils/serial: Skip baudrate config if input frequency is zero
+01a8c8e lib: utils: Improve fdt_parse_uart8250() API
+0a0093b lib: utils: Add fdt_parse_uart8250_node() function
+243b0d0 lib: utils: Remove redundant clint_ipi_sync() declaration
+e3ad7c1 lib: utils: Rename fdt_parse_clint() to fdt_parse_compat_addr()
+a39cd6f lib: utils: Add FDT match table based node lookup
+dd33b9e lib: utils: Make fdt_get_node_addr_size() public function
+66185b3 lib: utils: Add fdt_parse_sifive_uart_node() function
+19e966b lib: utils: Add fdt_parse_hart_id() function
+44dd7be lib: utils: Add fdt_parse_max_hart_id() API
+f0eb503 lib: utils: Add fdt_parse_plic_node() function
+1ac794c include: Add array_size() macro
+8ff2b94 lib: utils: Add simple FDT timer framework
+76f0f81 lib: utils: Add simple FDT ipi framework
+75322a6 lib: utils: Add simple FDT irqchip framework
+76a8940 lib: utils: Add simple FDT serial framework
+7cc6fa4 lib: utils: Add simple FDT reset framework
+4d06353 firmware: fw_base: Introduce optional fw_platform_init()
+f1aa9e5 platform: Add generic FDT based platform support
+1f21b99 lib: sbi: Print platform hart count at boot time
+2ba7087 scripts: Add generic platform to create-binary-archive.sh
+4f18c6e platform: generic: Add Sifive FU540 TLB flush range limit override
+13717a8 platform: Remove qemu/virt directory
+65c06b0 platform: Remove spike directory
+d626037 docs: Add missing links in platform.md
+7993ca2 include: sbi: Remove redundant page table related defines
+5338679 lib: sbi_tlb: Fix remote TLB HFENCE VVMA implementation
+dc38929 lib: sbi: Improve misa_string() implementation
+433bac7 docs: platform/generic: Add details about stdout-path DT property
+b4efa70 docs: platform/generic: Add details about IPI and timer expectations
+dfd9dd6 docs: Add platform requirements document
+c2286b6 docs: Fix ordering of pages in table of contents
+7be75f5 docs: Don't use italic text in page title
+63a513e lib: Rename unprivileged trap handler
+aef9a60 lib: Add csr detect support
+13ca20d lib: Create a separate math helper function file
+79d0fad lib: utils: Update reserved memory fdt node even if PMP is not present
+6a053f6 lib: Add support for hart specific features
+b2df751 platform: Move platform features to hart
+4938024 platform: fpga: Remove redundant platform specific features
+ec0d2a7 lib: timer: Provide a hart based timer feature
+1f235ec lib: Add platform features in boot time print
+22c4334 lib: Add hart features in boot time print
+36833ab lib: Optimize inline assembly for unprivilege access functions
+38a4b54 firmware: Correct spelling mistakes
+28b4052 lib: sbi: detect features before everything else in sbi_hart_init()
+4984183 lib: sbi: Improve get_feature_str() implementation and usage
+3aa1036 lib: sbi: Remove extra spaces from boot time prints
+3a8fc81 lib: sbi: Print platform HART count just before boot HART id
+63b0f5f include: sbi: Use scratch pointer as parmeter in HART feature APIs
+2966510 lib: sbi: Few cosmetic improvements to HART feature detection
+a38bea9 lib: sbi_hart: Detect number of supported PMP regions
+89ba634 include: sbi: Add firmware extension constants
+73d6ef3 lib: utils: Remove redundant parameters from PLIC init functions
+446a9c6 lib: utils: Allow PLIC functions to be used for multiple PLICs
+2c685c2 lib: utils: Extend fdt_find_match() Implementation
+d30bb68 lib: utils/irqchip: Initialize all matching irqchip DT nodes
+a9a9751 lib: utils: Allow CLINT functions to be used for multiple CLINTs
+569dd64 lib: utils: Add fdt_parse_clint_node() function
+6956e83 lib: utils/ipi: Initialize all matching ipi DT nodes
+a63f05f lib: utils/timer: Initialize all matching timer DT nodes
+30b6040 Makefile: Fix builtin DTB compilation for out-of-tree platforms
+64f1408 firmware: fw_base: Make builtin DTB available to fw_platform_init()
+4ce6b7a firmware: fw_base: Don't OR forced FW_OPTIONS
+86ec534 firmware: Allow fw_platform_init() to return updated FDT location
+c6c65ee Makefile: Preprocess builtin DTS
+4e3876d Makefile: Add mechanism for platforms to have multiple builtin DTBs
+72019ee platform: kendryte/k210: Use new mechanism of builtin DTB
+51f0e4a firmware: Remove FW_PAYLOAD_FDT and related documentation
+1b8c012 lib: Add RISC-V hypervisor v0.6.1 support
+79bfd67 docs: Use doxygen config to mark the main page
+106b888 docs: Remove redundant documentation about combined payload use case
+9802906 platform: Add AE350 platform specific SBI handler
+32f87e5 platform: Add AE350 cache control SBIs
+e2c3f01 lib: Fix __sbi_hfence_gvma_vmid_gpa() and __sbi_hfence_vvma_asid_va()
+6966ad0 platform/lib: Allow the OS to map the regions that are protected by PMP
+518e85c platform: Update Nuclei ux600 platform support
+d5725c2 lib: Don't print delegation CSRs if there is no S-Mode
+637b348 lib: Fix the SBI_HART_HAS_MCOUNTEREN feature check
+db56ef3 platform: Add support for Shakti C-class SoC from IIT-M
+9bd5f8f lib: sbi: Fix 32/64 bits variable compatibility
+2314101 lib: Don't return any invalid error from SBI ecall
+a98258d include: Bump-up version to 0.8
 
-Note:
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+Reviewed-by: Anup Patel <anup@brainfault.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-1. To test 32-bit Linux kernel on QEMU 'sifive_u' 32-bit machine,
-the following patch is needed:
-http://lists.infradead.org/pipermail/linux-riscv/2020-July/001213.html
+---
 
-2. To test 64-bit Linux 5.3 kernel on QEMU 'virt' or 'sifive_u' 64-bit
-machines, the following commit should be cherry-picked to 5.3:
-
-commit 922b0375fc93fb1a20c5617e37c389c26bbccb70
-Author: Albert Ou <aou@eecs.berkeley.edu>
-Date:   Fri Sep 27 16:14:18 2019 -0700
-
-    riscv: Fix memblock reservation for device tree blob
-
-Linux 5.4 or above already contains this commit/fix.
-
-Changes in v6:
-- Rebased on https://github.com/alistair23/qemu/commits/riscv-to-apply.next
-- Add information about Linux kernel tested
-- Squash the Makefile ELF changes into patch 5
-
-Changes in v5:
-- Include the generic fw_dynamic.bin in the Makefile for `make install` bisection
-
-Changes in v4:
-- Remove old binaries in the Makefile for `make install` bisection
-
-Changes in v3:
-- Change fw_jump to fw_dynamic in the make rules
-- Change to fw_dynamic.bin for virt & sifive_u
-- Change to fw_dynamic.elf for Spike
-- Generate fw_dynamic images in the artifacts
+(no changes since v2)
 
 Changes in v2:
-- new patch: configure: Create symbolic links for pc-bios/*.elf files
 - Upgrade OpenSBI to v0.8 release
-- Copy the ELF images too in the make rules
-- Include ELF images in the artifacts
 
-Bin Meng (6):
-  configure: Create symbolic links for pc-bios/*.elf files
-  roms/opensbi: Upgrade from v0.7 to v0.8
-  roms/Makefile: Build the generic platform for RISC-V OpenSBI firmware
-  hw/riscv: Use pre-built bios image of generic platform for virt &
-    sifive_u
-  hw/riscv: spike: Change the default bios to use generic platform image
-  gitlab-ci/opensbi: Update GitLab CI to build generic platform
+ roms/opensbi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- .gitlab-ci.d/opensbi.yml                       |  28 ++++++++--------------
- Makefile                                       |   4 ++--
- configure                                      |   1 +
- hw/riscv/sifive_u.c                            |   4 ++--
- hw/riscv/spike.c                               |   9 +++++--
- hw/riscv/virt.c                                |   4 ++--
- pc-bios/opensbi-riscv32-generic-fw_dynamic.bin | Bin 0 -> 62144 bytes
- pc-bios/opensbi-riscv32-generic-fw_dynamic.elf | Bin 0 -> 558668 bytes
- pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin   | Bin 49520 -> 0 bytes
- pc-bios/opensbi-riscv32-virt-fw_jump.bin       | Bin 49504 -> 0 bytes
- pc-bios/opensbi-riscv64-generic-fw_dynamic.bin | Bin 0 -> 70792 bytes
- pc-bios/opensbi-riscv64-generic-fw_dynamic.elf | Bin 0 -> 620424 bytes
- pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin   | Bin 57936 -> 0 bytes
- pc-bios/opensbi-riscv64-virt-fw_jump.bin       | Bin 57920 -> 0 bytes
- roms/Makefile                                  |  32 ++++++++-----------------
- roms/opensbi                                   |   2 +-
- 16 files changed, 35 insertions(+), 49 deletions(-)
- create mode 100644 pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
- create mode 100644 pc-bios/opensbi-riscv32-generic-fw_dynamic.elf
- delete mode 100644 pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
- delete mode 100644 pc-bios/opensbi-riscv32-virt-fw_jump.bin
- create mode 100644 pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
- create mode 100644 pc-bios/opensbi-riscv64-generic-fw_dynamic.elf
- delete mode 100644 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
- delete mode 100644 pc-bios/opensbi-riscv64-virt-fw_jump.bin
-
+diff --git a/roms/opensbi b/roms/opensbi
+index 9f1b72c..a98258d 160000
+--- a/roms/opensbi
++++ b/roms/opensbi
+@@ -1 +1 @@
+-Subproject commit 9f1b72ce66d659e91013b358939e832fb27223f5
++Subproject commit a98258d0b537a295f517bbc8d813007336731fa9
 -- 
 2.7.4
 
