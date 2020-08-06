@@ -1,57 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k3cjU-00005h-6w
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 06:02:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57540)
+	id 1k3dQe-0000PE-V3
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 06:47:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39892)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1k3cjR-00005O-OE; Thu, 06 Aug 2020 06:02:41 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:60679)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1k3cjM-0001wd-Sc; Thu, 06 Aug 2020 06:02:41 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.06887019|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_social|0.0302796-0.00234627-0.967374;
- FP=0|0|0|0|0|-1|-1|-1; HT=e01a16368; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=6; RT=6; SR=0; TI=SMTPD_---.IDMK18c_1596708147; 
-Received: from 30.225.208.44(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.IDMK18c_1596708147)
- by smtp.aliyun-inc.com(10.147.42.197);
- Thu, 06 Aug 2020 18:02:28 +0800
-Subject: Re: [PATCH v2 1/7] target/riscv: Generate nanboxed results from fp
- helpers
-To: Chih-Min Chao <chihmin.chao@sifive.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Frank Chang <frank.chang@sifive.com>, Alistair Francis
- <alistair23@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>
-References: <20200724002807.441147-1-richard.henderson@linaro.org>
- <20200724002807.441147-2-richard.henderson@linaro.org>
- <1aa6cb56-2f41-45c1-2d32-ec8b3b10780b@c-sky.com>
- <9e10c17c-7a9e-5f7f-b1e3-c195d4e30b32@linaro.org>
- <ccc72223-d98e-6dd4-6c44-ca30f4e687d5@c-sky.com>
- <CAEiOBXXmz2APpmtwPrvikXUt5j_Q=k5ZqK9g2Fe4bdjeAbg_6g@mail.gmail.com>
- <4183e2c5-9a9b-2416-301d-95e62ac53a6c@c-sky.com>
- <CAEiOBXXUDECyBXxduJCgPkFx0=Rmtjgad0yu_irVcjw32aELFQ@mail.gmail.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <0631dbf2-9373-8ec6-f20b-1d5d137a7028@c-sky.com>
-Date: Thu, 6 Aug 2020 18:02:27 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
-MIME-Version: 1.0
-In-Reply-To: <CAEiOBXXUDECyBXxduJCgPkFx0=Rmtjgad0yu_irVcjw32aELFQ@mail.gmail.com>
-Content-Type: multipart/alternative;
- boundary="------------C4674CC0C5E7928B9A8680B7"
-Content-Language: en-US
-Received-SPF: none client-ip=121.197.200.217;
- envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/06 06:02:29
-X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1k3dQd-0000LS-Fh
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:47:19 -0400
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534]:43281)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1k3dQb-0007e9-5K
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:47:18 -0400
+Received: by mail-pg1-x534.google.com with SMTP id d19so2931684pgl.10
+ for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2020 03:47:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=JAl88y0xPmjeTU2KFmFTabUFrFyw6bXjO0tOtAZjqr8=;
+ b=iUe9ZysypzuQgwEYor7/effGmmD2UuT0OEJpnYXvx01jfpkKg+Qu4bh7gHD607o6lE
+ EiI3WIQ7JD+Dbm37hyhUOpl4c4zXqkeWdCWE6qhdiix7TJUyBfnXnngllCj546OrHr91
+ ZOExh2/VELj4qo/XeaVRjJEccOTj3gL6TAx79CBWfIhyBFAbemERGrfSI0KWtBdEXVaW
+ SLAB9Bn0UFY4eiOq+ecw2GCQzpLsrUoECBddsAjCLJyx8iVU4wx7g+VURca6dl/1q/uR
+ uNQMK3DwKajYbFx9hU7106btXnJJ8e7CQtLreUIMO5Ovro0GVFYnR82e6G/K+yAjl7QB
+ zQ8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=JAl88y0xPmjeTU2KFmFTabUFrFyw6bXjO0tOtAZjqr8=;
+ b=PQ5tNSNE0psNUGmEeLDuX6jLqYpTWGgWo/IbnuY9OpfDhOeLSgbWsmFpEkf22fG1Cm
+ ikFEQiT/Fw4MkWeXyWXSg7NOq3JnQ1AmXyE5Lk10l4JGoQdNV1TmEZuz3icMah67QMYP
+ bYTCwZ5dCUGNz6kj7UMRKSpQm5aEm89Al7I+Jy97TYOGtoUyLF7Y/tbztB3/eRoxaFob
+ k2wx9TRLKGmvc52wvAbFuljPsBZ6uxOi9McHq4hY6fYO/fH1FlE4ByfdTM4T4lTBoc7S
+ 8Ge3t3+tld8RArx1JTLcXDgvUdTBpxTGJp9n6b5YVkKbZaz3jxm4jZ4dgInT6yNhpr4B
+ nj3Q==
+X-Gm-Message-State: AOAM5318oiFkjmQJ8HZJeIj3vPSgRWH/PMpVs5tudpmlh1oLHhFeBLYI
+ 52HINTLPhBtDnYGB8LYrY2yUdQ==
+X-Google-Smtp-Source: ABdhPJzGoCptZv2Otd+06/Z+ZqNmYtzLeZn3agBWbA5xAdkOUx1UPSFHeLU/vPLStE0z7vSLXbZ7AQ==
+X-Received: by 2002:a63:6f02:: with SMTP id k2mr420505pgc.207.1596710834962;
+ Thu, 06 Aug 2020 03:47:14 -0700 (PDT)
+Received: from frankchang-ThinkPad-T490.internal.sifive.com
+ (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
+ by smtp.gmail.com with ESMTPSA id f18sm6567309pgv.84.2020.08.06.03.47.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Aug 2020 03:47:14 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>
+Subject: [RFC v3 00/71] target/riscv: support vector extension v1.0
+Date: Thu,  6 Aug 2020 18:45:57 +0800
+Message-Id: <20200806104709.13235-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x534.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -64,358 +73,162 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2020 10:02:42 -0000
+X-List-Received-Date: Thu, 06 Aug 2020 10:47:19 -0000
 
-This is a multi-part message in MIME format.
---------------C4674CC0C5E7928B9A8680B7
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: Frank Chang <frank.chang@sifive.com>
 
+This patchset implements the vector extension v1.0 for RISC-V on QEMU.
 
+This patchset is sent as RFC because RVV v1.0 is still in draft state.
+v2 patchset was sent for RVV v0.9. However, in order to relieve the
+burden for the community to maintain multi-version of vector drafts.
+v3 patchset is updated and bump to RVV v1.0 for review.
 
-On 2020/8/6 16:42, Chih-Min Chao wrote:
->
->
->
-> On Thu, Aug 6, 2020 at 3:05 PM LIU Zhiwei <zhiwei_liu@c-sky.com 
-> <mailto:zhiwei_liu@c-sky.com>> wrote:
->
->
->
->     On 2020/8/6 14:09, Chih-Min Chao wrote:
->>     On Fri, Jul 24, 2020 at 2:06 PM LIU Zhiwei <zhiwei_liu@c-sky.com
->>     <mailto:zhiwei_liu@c-sky.com>> wrote:
->>
->>
->>
->>         On 2020/7/24 11:55, Richard Henderson wrote:
->>         > On 7/23/20 7:35 PM, LIU Zhiwei wrote:
->>         >>
->>         >> On 2020/7/24 8:28, Richard Henderson wrote:
->>         >>> Make sure that all results from single-precision scalar
->>         helpers
->>         >>> are properly nan-boxed to 64-bits.
->>         >>>
->>         >>> Signed-off-by: Richard Henderson
->>         <richard.henderson@linaro.org
->>         <mailto:richard.henderson@linaro.org>>
->>         >>> ---
->>         >>>    target/riscv/internals.h  |  5 +++++
->>         >>>    target/riscv/fpu_helper.c | 42
->>         +++++++++++++++++++++------------------
->>         >>>    2 files changed, 28 insertions(+), 19 deletions(-)
->>         >>>
->>         >>> diff --git a/target/riscv/internals.h
->>         b/target/riscv/internals.h
->>         >>> index 37d33820ad..9f4ba7d617 100644
->>         >>> --- a/target/riscv/internals.h
->>         >>> +++ b/target/riscv/internals.h
->>         >>> @@ -38,4 +38,9 @@ target_ulong fclass_d(uint64_t frs1);
->>         >>>    #define SEW32 2
->>         >>>    #define SEW64 3
->>         >>>    +static inline uint64_t nanbox_s(float32 f)
->>         >>> +{
->>         >>> +    return f | MAKE_64BIT_MASK(32, 32);
->>         >>> +}
->>         >>> +
->>         >> If define it here,  we can also define a more general 
->>         function with flen.
->>         >>
->>         >> +static inline uint64_t nanbox_s(float32 f, uint32_t flen)
->>         >> +{
->>         >> +    return f | MAKE_64BIT_MASK(flen, 64 - flen);
->>         >> +}
->>         >> +
->>         >>
->>         >> So we can reuse it in fp16 or bf16 scalar instruction and
->>         in vector instructions.
->>         > While we could do that, we will not encounter all possible
->>         lengths.  In the
->>         > cover letter, I mentioned defining a second function,
->>         >
->>         > static inline uint64_t nanbox_h(float16 f)
->>         > {
->>         >     return f | MAKE_64BIT_MASK(16, 48);
->>         > }
->>         >
->>         > Having two separate functions will, I believe, be easier to
->>         use in practice.
->>         >
->>         Get  it. Thanks.
->>
->>         Zhiwei
->>         >
->>         > r~
->>
->>
->>
->>     That is what has been implemented in spike.  It fills up the
->>     Nan-Box when value is stored back internal structure and
->>     unbox the value with difference floating type
->>     (half/single/double/quad).
->     Hi Chih-Min,
->
->     Has half-precision been a part of RVV? Or do you know the ISA
->     abbreviation of half-precision?
->
->     Thanks very much.
->
->     Best Regards,
->     Zhiwei
->>
->>     By the way,  I prefer to keeping the suffix to tell
->>     different floating type rather than pass arbitrary
->>     since each floating type belong to each extension.
->>
->>     Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com
->>     <mailto:chihmin.chao@sifive.com>>
->
->
-> Hi  ZhiWei,
->
-> It is still under branch 
-> https://github.com/riscv/riscv-isa-manual/tree/zfh and I am not sure 
-> about the working group progress.
-> I have an implementation based on this draft and will send it as RFC 
-> patch next week.
-Hi Chih-Min,
+You can change the cpu argument: vext_spec to v1.0 (i.e. vext_spec=v1.0)
+to run with RVV v1.0 instructions.
 
-Thanks for your information.
+Note: This patchset depends on two other patchsets listed in Based-on
+      section below so it might not able to be built unless those two
+      patchsets are applied.
 
-As Krste said once,  as we don't have RV16, FP16 separated won't make 
-sense.  Obviously, it has changed.:-P
+Changelog:
 
-I also have implemented a version of FP16 ,“obvious set including 
-existing FP instructions with format field set to "half" (fmt=10)“
+v3
+  * apply nan-box helpers from Richard Henderson.
+  * remove fp16 api changes as they are sent independently in another
+    pathcset by Chih-Min Chao.
+  * remove all tail elements clear functions as tail elements can
+    retain unchanged for either VTA set to undisturbed or agnostic.
+  * add fp16 nan-box check generator function.
+  * add floating-point rounding mode enum.
+  * replace flmul arithmetic with shifts to avoid floating-point
+    conversions.
+  * add Zvqmac extension.
+  * replace gdbstub vector register xml files with dynamic generator.
+  * RVV v1.0 related changes:
+    * add vl<nf>re<eew>.v and vs<nf>r.v vector whole register
+      load/store instructions
+    * add vrgatherei16 instruction.
+    * rearranged bits in vtype to make vlmul bits into a contiguous
+      field.
 
-If you want to send the patch, I will not send it again.:-)
+v2
+  * drop v0.7.1 support.
+  * replace invisible return check macros with functions.
+  * move mark_vs_dirty() to translators.
+  * add SSTATUS_VS flag for s-mode.
+  * nan-box scalar fp register for floating-point operations.
+  * add gdbstub files for vector registers to allow system-mode
+    debugging with GDB.
 
+Based-on: <20200724002807.441147-1-richard.henderson@linaro.org/>
+Based-on: <1596102747-20226-1-git-send-email-chihmin.chao@sifive.com/>
 
-Zhiwei
->
-> Thanks
-> Chih-Min
+Frank Chang (63):
+  target/riscv: drop vector 0.7.1 and add 1.0 support
+  target/riscv: Use FIELD_EX32() to extract wd field
+  target/riscv: rvv-1.0: introduce writable misa.v field
+  target/riscv: rvv-1.0: remove vxrm and vxsat fields from fcsr register
+  target/riscv: rvv-1.0: check MSTATUS_VS when accessing vector csr
+    registers
+  target/riscv: rvv-1.0: remove MLEN calculations
+  target/riscv: rvv-1.0: add fractional LMUL
+  target/riscv: rvv-1.0: add VMA and VTA
+  target/riscv: rvv-1.0: update check functions
+  target/riscv: introduce more imm value modes in translator functions
+  target/riscv: add fp16 nan-box check generator function
+  target/riscv: rvv:1.0: add translation-time nan-box helper function
+  target/riscv: rvv-1.0: apply nanbox helper in opfvf_trans
+  target/riscv: rvv-1.0: configure instructions
+  target/riscv: rvv-1.0: stride load and store instructions
+  target/riscv: rvv-1.0: index load and store instructions
+  target/riscv: rvv-1.0: fix address index overflow bug of indexed
+    load/store insns
+  target/riscv: rvv-1.0: fault-only-first unit stride load
+  target/riscv: rvv-1.0: amo operations
+  target/riscv: rvv-1.0: load/store whole register instructions
+  target/riscv: rvv-1.0: update vext_max_elems() for load/store insns
+  target/riscv: rvv-1.0: take fractional LMUL into vector max elements
+    calculation
+  target/riscv: rvv-1.0: floating-point square-root instruction
+  target/riscv: rvv-1.0: floating-point classify instructions
+  target/riscv: rvv-1.0: mask population count instruction
+  target/riscv: rvv-1.0: find-first-set mask bit instruction
+  target/riscv: rvv-1.0: set-X-first mask bit instructions
+  target/riscv: rvv-1.0: iota instruction
+  target/riscv: rvv-1.0: element index instruction
+  target/riscv: rvv-1.0: allow load element with sign-extended
+  target/riscv: rvv-1.0: register gather instructions
+  target/riscv: rvv-1.0: integer scalar move instructions
+  target/riscv: rvv-1.0: floating-point move instruction
+  target/riscv: rvv-1.0: floating-point scalar move instructions
+  target/riscv: rvv-1.0: whole register move instructions
+  target/riscv: rvv-1.0: integer extension instructions
+  target/riscv: rvv-1.0: single-width averaging add and subtract
+    instructions
+  target/riscv: rvv-1.0: single-width bit shift instructions
+  target/riscv: rvv-1.0: integer add-with-carry/subtract-with-borrow
+  target/riscv: rvv-1.0: narrowing integer right shift instructions
+  target/riscv: rvv-1.0: widening integer multiply-add instructions
+  target/riscv: rvv-1.0: add Zvqmac extension
+  target/riscv: rvv-1.0: quad-widening integer multiply-add instructions
+  target/riscv: rvv-1.0: single-width saturating add and subtract
+    instructions
+  target/riscv: rvv-1.0: integer comparison instructions
+  target/riscv: use softfloat lib float16 comparison functions
+  target/riscv: rvv-1.0: floating-point compare instructions
+  target/riscv: rvv-1.0: mask-register logical instructions
+  target/riscv: rvv-1.0: slide instructions
+  target/riscv: rvv-1.0: floating-point slide instructions
+  target/riscv: rvv-1.0: narrowing fixed-point clip instructions
+  target/riscv: rvv-1.0: single-width floating-point reduction
+  target/riscv: rvv-1.0: widening floating-point reduction instructions
+  target/riscv: rvv-1.0: single-width scaling shift instructions
+  target/riscv: rvv-1.0: remove widening saturating scaled multiply-add
+  target/riscv: rvv-1.0: remove vmford.vv and vmford.vf
+  target/riscv: rvv-1.0: remove integer extract instruction
+  target/riscv: rvv-1.0: floating-point min/max instructions
+  target/riscv: introduce floating-point rounding mode enum
+  target/riscv: rvv-1.0: floating-point/integer type-convert
+    instructions
+  target/riscv: rvv-1.0: widening floating-point/integer type-convert
+  target/riscv: add "set round to odd" rounding mode helper function
+  target/riscv: rvv-1.0: narrowing floating-point/integer type-convert
 
+Greentime Hu (2):
+  target/riscv: rvv-1.0: add vlenb register
+  target/riscv: gdb: support vector registers for rv32
 
---------------C4674CC0C5E7928B9A8680B7
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Hsiangkai Wang (2):
+  target/riscv: gdb: modify gdb csr xml file to align with csr register
+    map
+  target/riscv: gdb: support vector registers for rv64
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <br>
-    <br>
-    <div class="moz-cite-prefix">On 2020/8/6 16:42, Chih-Min Chao wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAEiOBXXUDECyBXxduJCgPkFx0=Rmtjgad0yu_irVcjw32aELFQ@mail.gmail.com">
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <div dir="ltr">
-        <div dir="ltr"><br clear="all">
-          <div>
-            <div dir="ltr" class="gmail_signature"
-              data-smartmail="gmail_signature">
-              <div dir="ltr"><br>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="gmail_quote">
-          <div dir="ltr" class="gmail_attr">On Thu, Aug 6, 2020 at 3:05
-            PM LIU Zhiwei &lt;<a href="mailto:zhiwei_liu@c-sky.com"
-              moz-do-not-send="true">zhiwei_liu@c-sky.com</a>&gt; wrote:<br>
-          </div>
-          <blockquote class="gmail_quote" style="margin:0px 0px 0px
-            0.8ex;border-left:1px solid
-            rgb(204,204,204);padding-left:1ex">
-            <div> <br>
-              <br>
-              <div>On 2020/8/6 14:09, Chih-Min Chao wrote:<br>
-              </div>
-              <blockquote type="cite">
-                <div dir="ltr">
-                  <div dir="ltr">
-                    <div>
-                      <div dir="ltr">
-                        <div dir="ltr">On Fri, Jul 24, 2020 at 2:06 PM
-                          LIU Zhiwei &lt;<a
-                            href="mailto:zhiwei_liu@c-sky.com"
-                            target="_blank" moz-do-not-send="true">zhiwei_liu@c-sky.com</a>&gt;
-                          wrote:<br>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="gmail_quote">
-                    <blockquote class="gmail_quote" style="margin:0px
-                      0px 0px 0.8ex;border-left:1px solid
-                      rgb(204,204,204);padding-left:1ex"><br>
-                      <br>
-                      On 2020/7/24 11:55, Richard Henderson wrote:<br>
-                      &gt; On 7/23/20 7:35 PM, LIU Zhiwei wrote:<br>
-                      &gt;&gt;<br>
-                      &gt;&gt; On 2020/7/24 8:28, Richard Henderson
-                      wrote:<br>
-                      &gt;&gt;&gt; Make sure that all results from
-                      single-precision scalar helpers<br>
-                      &gt;&gt;&gt; are properly nan-boxed to 64-bits.<br>
-                      &gt;&gt;&gt;<br>
-                      &gt;&gt;&gt; Signed-off-by: Richard Henderson &lt;<a
-                        href="mailto:richard.henderson@linaro.org"
-                        target="_blank" moz-do-not-send="true">richard.henderson@linaro.org</a>&gt;<br>
-                      &gt;&gt;&gt; ---<br>
-                      &gt;&gt;&gt;    target/riscv/internals.h  |  5
-                      +++++<br>
-                      &gt;&gt;&gt;    target/riscv/fpu_helper.c | 42
-                      +++++++++++++++++++++------------------<br>
-                      &gt;&gt;&gt;    2 files changed, 28 insertions(+),
-                      19 deletions(-)<br>
-                      &gt;&gt;&gt;<br>
-                      &gt;&gt;&gt; diff --git a/target/riscv/internals.h
-                      b/target/riscv/internals.h<br>
-                      &gt;&gt;&gt; index 37d33820ad..9f4ba7d617 100644<br>
-                      &gt;&gt;&gt; --- a/target/riscv/internals.h<br>
-                      &gt;&gt;&gt; +++ b/target/riscv/internals.h<br>
-                      &gt;&gt;&gt; @@ -38,4 +38,9 @@ target_ulong
-                      fclass_d(uint64_t frs1);<br>
-                      &gt;&gt;&gt;    #define SEW32 2<br>
-                      &gt;&gt;&gt;    #define SEW64 3<br>
-                      &gt;&gt;&gt;    +static inline uint64_t
-                      nanbox_s(float32 f)<br>
-                      &gt;&gt;&gt; +{<br>
-                      &gt;&gt;&gt; +    return f | MAKE_64BIT_MASK(32,
-                      32);<br>
-                      &gt;&gt;&gt; +}<br>
-                      &gt;&gt;&gt; +<br>
-                      &gt;&gt; If define it here,  we can also define a
-                      more general  function with flen.<br>
-                      &gt;&gt;<br>
-                      &gt;&gt; +static inline uint64_t nanbox_s(float32
-                      f, uint32_t flen)<br>
-                      &gt;&gt; +{<br>
-                      &gt;&gt; +    return f | MAKE_64BIT_MASK(flen, 64
-                      - flen);<br>
-                      &gt;&gt; +}<br>
-                      &gt;&gt; +<br>
-                      &gt;&gt;<br>
-                      &gt;&gt; So we can reuse it in fp16 or bf16 scalar
-                      instruction and in vector instructions.<br>
-                      &gt; While we could do that, we will not encounter
-                      all possible lengths.  In the<br>
-                      &gt; cover letter, I mentioned defining a second
-                      function,<br>
-                      &gt;<br>
-                      &gt; static inline uint64_t nanbox_h(float16 f)<br>
-                      &gt; {<br>
-                      &gt;     return f | MAKE_64BIT_MASK(16, 48);<br>
-                      &gt; }<br>
-                      &gt;<br>
-                      &gt; Having two separate functions will, I
-                      believe, be easier to use in practice.<br>
-                      &gt;<br>
-                      Get  it. Thanks.<br>
-                      <br>
-                      Zhiwei<br>
-                      &gt;<br>
-                      &gt; r~<br>
-                      <br>
-                      <br>
-                    </blockquote>
-                    <div><br>
-                    </div>
-                    <div>That is what has been implemented in spike.  It
-                      fills up the Nan-Box when value is stored back
-                      internal structure and </div>
-                    <div>unbox the value with difference floating type
-                      (half/single/double/quad).<br>
-                    </div>
-                  </div>
-                </div>
-              </blockquote>
-              Hi Chih-Min,<br>
-              <br>
-              Has half-precision been a part of RVV? Or do you know the
-              ISA abbreviation of half-precision?<br>
-              <br>
-              Thanks very much.<br>
-              <br>
-              Best Regards,<br>
-              Zhiwei <br>
-              <blockquote type="cite">
-                <div dir="ltr">
-                  <div class="gmail_quote">
-                    <div><br>
-                    </div>
-                    <div>By the way,  I prefer to keeping the suffix to
-                      tell different floating type rather than pass
-                      arbitrary </div>
-                    <div>since each floating type belong to each
-                      extension.<br>
-                      <br>
-                      Reviewed-by: Chih-Min Chao &lt;<a
-                        href="mailto:chihmin.chao@sifive.com"
-                        target="_blank" moz-do-not-send="true">chihmin.chao@sifive.com</a>&gt;</div>
-                  </div>
-                </div>
-              </blockquote>
-            </div>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>Hi  ZhiWei,</div>
-          <div><br>
-          </div>
-          <div>It is still under branch <a
-              href="https://github.com/riscv/riscv-isa-manual/tree/zfh"
-              moz-do-not-send="true">https://github.com/riscv/riscv-isa-manual/tree/zfh</a> and
-            I am not sure about the working group progress.</div>
-          <div>I have an implementation based on this draft and will
-            send it as RFC patch next week.<br>
-          </div>
-        </div>
-      </div>
-    </blockquote>
-    Hi Chih-Min,<br>
-    <br>
-    Thanks for your information.<br>
-    <br>
-    As Krste said once,  as we don't have RV16, FP16 separated won't
-    make sense.  Obviously, it has changed.<span class="moz-smiley-s4"><span>:-P</span></span><br>
-    <br>
-    I also have implemented a version of FP16 ,“<span style="color:
-      rgb(36, 41, 46); font-size: 14px; font-style: normal;
-      font-variant-ligatures: normal; font-variant-caps: normal;
-      font-weight: 400; letter-spacing: normal; text-align: left;
-      text-indent: 0px; text-transform: none; white-space: normal;
-      word-spacing: 0px; -webkit-text-stroke-width: 0px;
-      background-color: rgb(255, 255, 255); text-decoration-style:
-      initial; text-decoration-color: initial; display: inline
-      !important; float: none;">obvious set including existing FP
-      instructions with format field set to "half" (fmt=10)“<br>
-      <br>
-      If you want to send the patch, I will not send it again.<span
-        class="moz-smiley-s1"><span>:-)</span></span><br>
-      <br>
-      <br>
-      Zhiwei<br>
-    </span>
-    <blockquote type="cite"
-cite="mid:CAEiOBXXUDECyBXxduJCgPkFx0=Rmtjgad0yu_irVcjw32aELFQ@mail.gmail.com">
-      <div dir="ltr">
-        <div class="gmail_quote">
-          <div><br>
-            Thanks</div>
-          <div>Chih-Min</div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-  </body>
-</html>
+LIU Zhiwei (4):
+  target/riscv: rvv-1.0: add mstatus VS field
+  target/riscv: rvv-1.0: add sstatus VS field
+  target/riscv: rvv-1.0: add translation-time vector context status
+  target/riscv: rvv-1.0: add vcsr register
 
---------------C4674CC0C5E7928B9A8680B7--
+ gdb-xml/riscv-32bit-csr.xml             |   18 +-
+ gdb-xml/riscv-64bit-csr.xml             |   18 +-
+ target/riscv/cpu.c                      |   12 +-
+ target/riscv/cpu.h                      |   95 +-
+ target/riscv/cpu_bits.h                 |   10 +
+ target/riscv/cpu_helper.c               |   16 +-
+ target/riscv/csr.c                      |   69 +-
+ target/riscv/fpu_helper.c               |   17 +-
+ target/riscv/gdbstub.c                  |  126 +-
+ target/riscv/helper.h                   |  523 ++--
+ target/riscv/insn32-64.decode           |   18 +-
+ target/riscv/insn32.decode              |  295 +-
+ target/riscv/insn_trans/trans_rvv.inc.c | 2335 +++++++++++-----
+ target/riscv/internals.h                |   20 +-
+ target/riscv/translate.c                |   55 +-
+ target/riscv/vector_helper.c            | 3367 +++++++++++------------
+ 16 files changed, 4076 insertions(+), 2918 deletions(-)
+
+--
+2.17.1
+
 
