@@ -1,75 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k3Nz1-0004h5-FM
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Aug 2020 14:17:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50062)
+	id 1k3Z5n-0003PN-Fa
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 02:09:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36102)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <robert.foley@linaro.org>)
- id 1k3Nyx-0004eT-L4
- for qemu-riscv@nongnu.org; Wed, 05 Aug 2020 14:17:44 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:40487)
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1k3Z5l-0003NZ-Cv
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 02:09:29 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:43113)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <robert.foley@linaro.org>)
- id 1k3Nyv-0006V9-JU
- for qemu-riscv@nongnu.org; Wed, 05 Aug 2020 14:17:43 -0400
-Received: by mail-pg1-x544.google.com with SMTP id h12so13585028pgf.7
- for <qemu-riscv@nongnu.org>; Wed, 05 Aug 2020 11:17:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=YM01JZCOBFTkObfq+41JWuhzyHiJWJ7EohnvO1vdIJU=;
- b=E/xsOwj1out5jTDw1B6uHewMdZZssRhI0qYSGvOkDZ8q6nMosifaO3SUYGRsaBrefG
- lCS6oar456DouWXOhlB8jJwebXTQJBkXUBBT3yMi31IV4n5ivkGztic6TDWfqGKUTl5J
- dAlDI4wDLoElA1Q13fhWkuZPLGirHNQtYZtr5WQyIXDJFAs/T0fzVaQZ5E1tBjz1E//v
- cLbSnZVD5h+HDdfIPibvT7lx4V5TC18YZc3vgwxZLDCp+E9ZEHLOre+dDUhrjxPxDDyD
- ETTYsY8MPdmf7V0Kgh2qNVG73U/Heu4NEuXS+HXK0q5RG4oD5BFGQqJXDJAI9Me8IAoI
- vuiw==
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1k3Z5i-0000PA-K5
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 02:09:29 -0400
+Received: by mail-io1-xd41.google.com with SMTP id k23so48374189iom.10
+ for <qemu-riscv@nongnu.org>; Wed, 05 Aug 2020 23:09:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=/IEkLSEhabr43s0zlznR/yjMZeS9Ccw5v0UmxfcwxcU=;
+ b=T/CPlqfbsmNAvkR0kTblGYrc7HkUUnJVhCG2Fku1KlT9PziSjVXq6kBKvDiS5E7wyZ
+ xSX+X7ThBH7E6CVGN1sovah44s+JTugmjGPhzi8HtBifWGhEFi1FW1lWpGfdG1hUBli6
+ iJDaHvpKCdnUYPtSd8rxDLIhsI1K55l0Wph/1TxsVFLKAkSFLbuotJFkw9ag/y3kgyxo
+ 4GR8Ij8pAM89/JmQyGt9Fh91iQRHEJUJ8aQ3k2gxVGcGorYmlj7CRsu95OtVs6IR0ZSh
+ 6LPloLefxXFWqfLpdy/KqRAP890gOdDCog8zbBHeUyKM79i+7ySpqKe8jQ5UbihlkF+i
+ fx6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=YM01JZCOBFTkObfq+41JWuhzyHiJWJ7EohnvO1vdIJU=;
- b=fyiUQr4kaVEz59x6iJXzt8CC8dHoBSApt+XvfBTN7B9lYopsZmw6sN5gOd5hyAELve
- 1kcm7/h1Rl6/OyzpPT88OrAeEcrHE8kCyAOmSBuRNbZIk9GQTLRN40LxZvDVYMNgeNPv
- n9I6hLg3ge6c1kOi8RasRAJXxcgMxHsCf5GubkxvcaaoF5MGDUc64roHyykCDhaZzQYy
- Jm2mXrgiiMx3SJdsoCm53yEtkFdBlLyyMAb7HGoDTuW8hz5Gu8fia0rj8m0hoALtDB9O
- uf1fJIcaea+QWwbKx4ofiSSe4SRlgYlisgl66+aSNc2cjj1AYW6Te8umNnairqh9fQGm
- 5SBA==
-X-Gm-Message-State: AOAM530un84JrohuSlR2MsmQyU5AzgaDRz/thHXEdYVKC837XhssQnPr
- pQcnPnM8tQtK+DlIokIntRqpWw==
-X-Google-Smtp-Source: ABdhPJxjuA9Ylj1mq4sVihjlFA2l6FIIAeNxChpioXsJuOaar6eJVj1oCra0DTnrID81k0Z6xroI4A==
-X-Received: by 2002:a62:647:: with SMTP id 68mr4820009pfg.45.1596651460295;
- Wed, 05 Aug 2020 11:17:40 -0700 (PDT)
-Received: from Rfoley-MA01.hsd1.ma.comcast.net
- ([2601:199:4480:60c0:38ab:50b1:ff8a:26ef])
- by smtp.gmail.com with ESMTPSA id a15sm3670196pfo.185.2020.08.05.11.17.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Aug 2020 11:17:39 -0700 (PDT)
-From: Robert Foley <robert.foley@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: alex.bennee@linaro.org, cota@braap.org, pbonzini@redhat.com,
- peter.puhov@linaro.org, robert.foley@linaro.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v1 15/21] target/riscv: add BQL to do_interrupt and
- cpu_exec_interrupt
-Date: Wed,  5 Aug 2020 14:12:57 -0400
-Message-Id: <20200805181303.7822-16-robert.foley@linaro.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200805181303.7822-1-robert.foley@linaro.org>
-References: <20200805181303.7822-1-robert.foley@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
- envelope-from=robert.foley@linaro.org; helo=mail-pg1-x544.google.com
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=/IEkLSEhabr43s0zlznR/yjMZeS9Ccw5v0UmxfcwxcU=;
+ b=tBUz/xtQ291ka7xSD/brA/t69qaztMocuguBYUXmWpkXM2wKftgBaRIvPj/b2h65CQ
+ ToyeaDYSLmXwLb8lLG0Wp+B4vj/52tf7bSGY3hW2YKsnxfcp/Pi6IatpKfpZR4LCaPOB
+ h+57OzHazXMRIvNquw/9V1tdYjkNVNdjfUu6bBicrwncFyfq1T6qT4zbCWWyvFbg8Kt5
+ yxB4DF0FcBrALMhurwF4cTRlJJUDyWoKRD5TPb6zRCYNacyNZCE0QSFTal9XsNZjwYlL
+ hZk9+t2UmHwgqGM8UBqkGzBDh4QNuWPJ6icdmCkKn/Bv8SoZIphSOkFczcsG8rsfwPaJ
+ 4+BQ==
+X-Gm-Message-State: AOAM531XTmx3t9wZ71byS0Yq3fqkiItTObHc0oXfXEpcCUbWFoC7Hhno
+ yeKhBOaUe8TnD9bEr5M3oRzdraHPdAsPggCi7Y6k7w==
+X-Google-Smtp-Source: ABdhPJzseYkCy5C0XoXf9PPSL8j+6oQ2tV4JXXAlZHvM5ToxmvB4uB7HG5AVsDVyTTxAHeh3g3WGxxiWnhuuJNVOvgI=
+X-Received: by 2002:a05:6638:248e:: with SMTP id
+ x14mr9184108jat.135.1596694164161; 
+ Wed, 05 Aug 2020 23:09:24 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200724002807.441147-1-richard.henderson@linaro.org>
+ <20200724002807.441147-2-richard.henderson@linaro.org>
+ <1aa6cb56-2f41-45c1-2d32-ec8b3b10780b@c-sky.com>
+ <9e10c17c-7a9e-5f7f-b1e3-c195d4e30b32@linaro.org>
+ <ccc72223-d98e-6dd4-6c44-ca30f4e687d5@c-sky.com>
+In-Reply-To: <ccc72223-d98e-6dd4-6c44-ca30f4e687d5@c-sky.com>
+From: Chih-Min Chao <chihmin.chao@sifive.com>
+Date: Thu, 6 Aug 2020 14:09:13 +0800
+Message-ID: <CAEiOBXXmz2APpmtwPrvikXUt5j_Q=k5ZqK9g2Fe4bdjeAbg_6g@mail.gmail.com>
+Subject: Re: [PATCH v2 1/7] target/riscv: Generate nanboxed results from fp
+ helpers
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Frank Chang <frank.chang@sifive.com>, 
+ Alistair Francis <alistair23@gmail.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000786a5e05ac2f5464"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
+ envelope-from=chihmin.chao@sifive.com; helo=mail-io1-xd41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,72 +81,163 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2020 18:17:45 -0000
+X-List-Received-Date: Thu, 06 Aug 2020 06:09:29 -0000
 
-This is part of a series of changes to remove the implied BQL
-from the common code of cpu_handle_interrupt and
-cpu_handle_exception.  As part of removing the implied BQL
-from the common code, we are pushing the BQL holding
-down into the per-arch implementation functions of
-do_interrupt and cpu_exec_interrupt.
+--000000000000786a5e05ac2f5464
+Content-Type: text/plain; charset="UTF-8"
 
-The purpose of this set of changes is to set the groundwork
-so that an arch could move towards removing
-the BQL from the cpu_handle_interrupt/exception paths.
+On Fri, Jul 24, 2020 at 2:06 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 
-This approach was suggested by Paolo Bonzini.
-For reference, here are two key posts in the discussion, explaining
-the reasoning/benefits of this approach.
-https://lists.gnu.org/archive/html/qemu-devel/2020-07/msg08731.html
-https://lists.gnu.org/archive/html/qemu-devel/2020-08/msg00044.html
+>
+>
+> On 2020/7/24 11:55, Richard Henderson wrote:
+> > On 7/23/20 7:35 PM, LIU Zhiwei wrote:
+> >>
+> >> On 2020/7/24 8:28, Richard Henderson wrote:
+> >>> Make sure that all results from single-precision scalar helpers
+> >>> are properly nan-boxed to 64-bits.
+> >>>
+> >>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> >>> ---
+> >>>    target/riscv/internals.h  |  5 +++++
+> >>>    target/riscv/fpu_helper.c | 42
+> +++++++++++++++++++++------------------
+> >>>    2 files changed, 28 insertions(+), 19 deletions(-)
+> >>>
+> >>> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+> >>> index 37d33820ad..9f4ba7d617 100644
+> >>> --- a/target/riscv/internals.h
+> >>> +++ b/target/riscv/internals.h
+> >>> @@ -38,4 +38,9 @@ target_ulong fclass_d(uint64_t frs1);
+> >>>    #define SEW32 2
+> >>>    #define SEW64 3
+> >>>    +static inline uint64_t nanbox_s(float32 f)
+> >>> +{
+> >>> +    return f | MAKE_64BIT_MASK(32, 32);
+> >>> +}
+> >>> +
+> >> If define it here,  we can also define a more general  function with
+> flen.
+> >>
+> >> +static inline uint64_t nanbox_s(float32 f, uint32_t flen)
+> >> +{
+> >> +    return f | MAKE_64BIT_MASK(flen, 64 - flen);
+> >> +}
+> >> +
+> >>
+> >> So we can reuse it in fp16 or bf16 scalar instruction and in vector
+> instructions.
+> > While we could do that, we will not encounter all possible lengths.  In
+> the
+> > cover letter, I mentioned defining a second function,
+> >
+> > static inline uint64_t nanbox_h(float16 f)
+> > {
+> >     return f | MAKE_64BIT_MASK(16, 48);
+> > }
+> >
+> > Having two separate functions will, I believe, be easier to use in
+> practice.
+> >
+> Get  it. Thanks.
+>
+> Zhiwei
+> >
+> > r~
+>
+>
+>
+That is what has been implemented in spike.  It fills up the Nan-Box when
+value is stored back internal structure and
+unbox the value with difference floating type (half/single/double/quad).
 
-Signed-off-by: Robert Foley <robert.foley@linaro.org>
----
- target/riscv/cpu_helper.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+By the way,  I prefer to keeping the suffix to tell different floating
+type rather than pass arbitrary
+since each floating type belong to each extension.
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 75d2ae3434..5050802e95 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -80,14 +80,17 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
- {
- #if !defined(CONFIG_USER_ONLY)
-     if (interrupt_request & CPU_INTERRUPT_HARD) {
-+        qemu_mutex_lock_iothread();
-         RISCVCPU *cpu = RISCV_CPU(cs);
-         CPURISCVState *env = &cpu->env;
-         int interruptno = riscv_cpu_local_irq_pending(env);
-         if (interruptno >= 0) {
-             cs->exception_index = RISCV_EXCP_INT_FLAG | interruptno;
-             riscv_cpu_do_interrupt(cs);
-+            qemu_mutex_unlock_iothread();
-             return true;
-         }
-+        qemu_mutex_unlock_iothread();
-     }
- #endif
-     return false;
-@@ -822,6 +825,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-  */
- void riscv_cpu_do_interrupt(CPUState *cs)
- {
-+    bool bql = !qemu_mutex_iothread_locked();
-+    if (bql) {
-+        qemu_mutex_lock_iothread();
-+    }
- #if !defined(CONFIG_USER_ONLY)
- 
-     RISCVCPU *cpu = RISCV_CPU(cs);
-@@ -982,4 +989,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
- 
- #endif
-     cs->exception_index = EXCP_NONE; /* mark handled to qemu */
-+    if (bql) {
-+        qemu_mutex_unlock_iothread();
-+    }
- }
--- 
-2.17.1
+Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 
+--000000000000786a5e05ac2f5464
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div><div dir=3D"ltr" class=3D"gmail_sign=
+ature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr">On Fri, Jul 24, =
+2020 at 2:06 PM LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@c-sky.com">zhiw=
+ei_liu@c-sky.com</a>&gt; wrote:<br></div></div></div></div><div class=3D"gm=
+ail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
+8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
+<br>
+On 2020/7/24 11:55, Richard Henderson wrote:<br>
+&gt; On 7/23/20 7:35 PM, LIU Zhiwei wrote:<br>
+&gt;&gt;<br>
+&gt;&gt; On 2020/7/24 8:28, Richard Henderson wrote:<br>
+&gt;&gt;&gt; Make sure that all results from single-precision scalar helper=
+s<br>
+&gt;&gt;&gt; are properly nan-boxed to 64-bits.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; Signed-off-by: Richard Henderson &lt;<a href=3D"mailto:richard=
+.henderson@linaro.org" target=3D"_blank">richard.henderson@linaro.org</a>&g=
+t;<br>
+&gt;&gt;&gt; ---<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 target/riscv/internals.h=C2=A0 |=C2=A0 5 +++++<br=
+>
+&gt;&gt;&gt;=C2=A0 =C2=A0 target/riscv/fpu_helper.c | 42 ++++++++++++++++++=
++++------------------<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 2 files changed, 28 insertions(+), 19 deletions(-=
+)<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; diff --git a/target/riscv/internals.h b/target/riscv/internals=
+.h<br>
+&gt;&gt;&gt; index 37d33820ad..9f4ba7d617 100644<br>
+&gt;&gt;&gt; --- a/target/riscv/internals.h<br>
+&gt;&gt;&gt; +++ b/target/riscv/internals.h<br>
+&gt;&gt;&gt; @@ -38,4 +38,9 @@ target_ulong fclass_d(uint64_t frs1);<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 #define SEW32 2<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 #define SEW64 3<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 +static inline uint64_t nanbox_s(float32 f)<br>
+&gt;&gt;&gt; +{<br>
+&gt;&gt;&gt; +=C2=A0=C2=A0=C2=A0 return f | MAKE_64BIT_MASK(32, 32);<br>
+&gt;&gt;&gt; +}<br>
+&gt;&gt;&gt; +<br>
+&gt;&gt; If define it here,=C2=A0 we can also define a more general=C2=A0 f=
+unction with flen.<br>
+&gt;&gt;<br>
+&gt;&gt; +static inline uint64_t nanbox_s(float32 f, uint32_t flen)<br>
+&gt;&gt; +{<br>
+&gt;&gt; +=C2=A0=C2=A0=C2=A0 return f | MAKE_64BIT_MASK(flen, 64 - flen);<b=
+r>
+&gt;&gt; +}<br>
+&gt;&gt; +<br>
+&gt;&gt;<br>
+&gt;&gt; So we can reuse it in fp16 or bf16 scalar instruction and in vecto=
+r instructions.<br>
+&gt; While we could do that, we will not encounter all possible lengths.=C2=
+=A0 In the<br>
+&gt; cover letter, I mentioned defining a second function,<br>
+&gt;<br>
+&gt; static inline uint64_t nanbox_h(float16 f)<br>
+&gt; {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0return f | MAKE_64BIT_MASK(16, 48);<br>
+&gt; }<br>
+&gt;<br>
+&gt; Having two separate functions will, I believe, be easier to use in pra=
+ctice.<br>
+&gt;<br>
+Get=C2=A0 it. Thanks.<br>
+<br>
+Zhiwei<br>
+&gt;<br>
+&gt; r~<br>
+<br>
+<br></blockquote><div><br></div><div>That is what has been implemented in s=
+pike.=C2=A0 It fills up the Nan-Box when value is stored back internal stru=
+cture and=C2=A0</div><div>unbox the value with difference floating type (ha=
+lf/single/double/quad).<br></div><div><br></div><div>By the way,=C2=A0 I pr=
+efer to keeping the suffix to tell different=C2=A0floating type=C2=A0rather=
+ than pass arbitrary=C2=A0</div><div>since each floating type belong to eac=
+h extension.<br><br>Reviewed-by: Chih-Min Chao &lt;<a href=3D"mailto:chihmi=
+n.chao@sifive.com">chihmin.chao@sifive.com</a>&gt;<br></div></div></div>
+
+--000000000000786a5e05ac2f5464--
 
