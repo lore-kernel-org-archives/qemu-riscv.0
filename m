@@ -1,48 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k3dSS-0003Q1-TB
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 06:49:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41244)
+	id 1k3dST-0003RX-DU
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 06:49:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41260)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k3dSN-0003Hh-6T
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:49:07 -0400
-Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a]:42646)
+ id 1k3dSN-0003Hu-R4
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:49:09 -0400
+Received: from mail-pj1-x1043.google.com ([2607:f8b0:4864:20::1043]:40577)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k3dSJ-0007ww-Mj
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:49:06 -0400
-Received: by mail-pf1-x42a.google.com with SMTP id 17so4356142pfw.9
- for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2020 03:49:03 -0700 (PDT)
+ id 1k3dSI-0007wd-2t
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:49:07 -0400
+Received: by mail-pj1-x1043.google.com with SMTP id d4so6278646pjx.5
+ for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2020 03:49:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=NR1664it16RY8C1uPlBNxYlSGqAXR1fGDYTpsJCJOoM=;
- b=HKI45LCs/0bqDHMjo52hTqgX98AHmw2KHH92T06aj78ZYtyn87XLo22PLw/wJKv5Xk
- SQ9miLRl0yMY+ZyaKf4tsrNoyyv1CpCUU8rNNWoSQcM52B7HQato5vaOC9cRfCJ7iBU5
- FwdNUC5TtdqeIzomi7cXtFzHxQq/i+Gk/ruswrxLzIOdfUk2xBv1qbtrxxFy06b9UCrY
- 3zx/Bed0wUpCIgkCh7TcHQOe6Wizi0UD9hyYsynaVsFA75bxiFpKYpAEAMPqg8DyhxHC
- olksowavG37mpwvAZ67nW2tpy9bwDXnYAqmvzv5RetwWtaDE1Nk/1MqgDD0dS2F06FUk
- 679g==
+ bh=Avnu70PdDYkSdW1ScaLQpwE2+GGkyRo7iSkv1USbDyg=;
+ b=lBCm8GXD7Sw5LX0fF7w2YUT2MbEHxlK2FVzGGuOQ+C+cPHN9i4I0HRXj9d/8o5s9z3
+ BB/XpHaJ4J7Z+g/vq/DajMQUcBeOcTh8Im8vlu36l7qvEKIX0a6/aH9Y/KoP1Ya9LSr8
+ laia0Np/ZgupkJwlJbgff1e9c89qY3jYJfd9GkmpUhyoUSwmSv/nMdUrSFftHGDji0Lv
+ jlTH8I+fuIXJq3YHF8Kv3Gu4lTAe2rwiZbPalDy7O0YamMwLFy0jWpJSyB1H4WgYKrd0
+ 7kpcfMOiw70MCTnyzHLChuFnedm6SZvC42r4wlbLf3plKsTjJeq2Eyp2C+P9F9Zjv67a
+ s8Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=NR1664it16RY8C1uPlBNxYlSGqAXR1fGDYTpsJCJOoM=;
- b=j5+XltDi4cejjMQUhL/br0G4wm5JFepc4ETecdpKfxqBwoEtfRM/15gfu4BmBfdhlt
- 11vBh7MMwafINl1ANp+x2Mz9Ci0wVEaThh9/2JiMacvlpb9UVLt9BQxqXZzUdKrxkWf6
- ojLrfDMrl7Y8v2EMwgGAMzZki+yVi0hWCBTvARp3TfPPOYci3pU/MhC0fElZZ9JOpCz7
- IfqeSISVDca2iQnoUWJnyfYYYDeBh7JIKSu8IeD98JI19o4prSm0rVSUt+ygkaiqgF0s
- S4eb3wFOJ47AW8V2AtyZ0zgfxC9uw5ly8e9uuk1/o1mg1W7On+KxpjioWTMj4UMUjhAG
- 4mzg==
-X-Gm-Message-State: AOAM531T0qHV0PEjYxeP8JizqxxTSZdJ1nRcXy+Eqb/zddD2opAeRyFJ
- vbs27RxFJ9xhtGsm6dx/lNQV+g==
-X-Google-Smtp-Source: ABdhPJyp+IEfMMpMNffVXb72FX8njlDVFW5IJWCwGeRqnPqRQktOl68rV43y8GOGO+zb3W7wEDc4KQ==
-X-Received: by 2002:a62:3185:: with SMTP id x127mr7507474pfx.290.1596710942475; 
- Thu, 06 Aug 2020 03:49:02 -0700 (PDT)
+ bh=Avnu70PdDYkSdW1ScaLQpwE2+GGkyRo7iSkv1USbDyg=;
+ b=uJpyXQV9KS9UsxgaZ5EUl4AptbNkMw8/oapoKNh4mcMZcs7+9LmeHOEz9O0Apnwh5J
+ q/5OQouqmBuovjIjAKX4lhJ/sowv/R/AMzeMffVwhf/8+LHqsRMmdzavVacz7/R0BA9M
+ jii48jsgwnJrmXjDwQ649hHlQw2QnLl3YMwz0S2gvMkOh0wYFu2xj861IR0grLmn4YV2
+ IEhiMwJ2POqRxl0IeHN6V9nBT3wBPrNpMHESZU55dcKgC2LfieclckSSxrAT25bRu/YA
+ 6uwEj/SgCRop7IvelZOv3IzETuPqqi3amFdJFlAmVy9DNXtAdztVqhw76mDXVTgg8Ep9
+ GEdQ==
+X-Gm-Message-State: AOAM532XXSPoxwSCmvi1HxN0e0MjHocybAayMUc44Kl4kkHifuEYqK4C
+ HtgUbuwcUsgvqW81TzL9OXW6/Q==
+X-Google-Smtp-Source: ABdhPJwQ8gTCYNz+1fpDY958t5Yc/yAemBC/CKw5cGoMdpxOluiIWYIPZHYlDRMBmd0BYJNVMlyf0g==
+X-Received: by 2002:a17:90a:4701:: with SMTP id
+ h1mr7645844pjg.93.1596710940219; 
+ Thu, 06 Aug 2020 03:49:00 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id f18sm6567309pgv.84.2020.08.06.03.49.00
+ by smtp.gmail.com with ESMTPSA id f18sm6567309pgv.84.2020.08.06.03.48.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2020 03:49:02 -0700 (PDT)
+ Thu, 06 Aug 2020 03:48:59 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -50,14 +51,14 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v3 41/71] target/riscv: rvv-1.0: integer extension instructions
-Date: Thu,  6 Aug 2020 18:46:38 +0800
-Message-Id: <20200806104709.13235-42-frank.chang@sifive.com>
+Subject: [RFC v3 40/71] target/riscv: rvv-1.0: whole register move instructions
+Date: Thu,  6 Aug 2020 18:46:37 +0800
+Message-Id: <20200806104709.13235-41-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200806104709.13235-1-frank.chang@sifive.com>
 References: <20200806104709.13235-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1043;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1043.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -66,7 +67,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -85,194 +86,65 @@ From: Frank Chang <frank.chang@sifive.com>
 
 Add the following instructions:
 
-* vzext.vf2
-* vzext.vf4
-* vzext.vf8
-* vsext.vf2
-* vsext.vf4
-* vsext.vf8
+* vmv1r.v
+* vmv2r.v
+* vmv4r.v
+* vmv8r.v
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/helper.h                   | 14 ++++
- target/riscv/insn32.decode              |  8 +++
- target/riscv/insn_trans/trans_rvv.inc.c | 85 +++++++++++++++++++++++++
- target/riscv/vector_helper.c            | 31 +++++++++
- 4 files changed, 138 insertions(+)
+ target/riscv/insn32.decode              |  4 ++++
+ target/riscv/insn_trans/trans_rvv.inc.c | 25 +++++++++++++++++++++++++
+ 2 files changed, 29 insertions(+)
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 35fb09d2892..7ce2fa08d58 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1118,3 +1118,17 @@ DEF_HELPER_6(vcompress_vm_b, void, ptr, ptr, ptr, ptr, env, i32)
- DEF_HELPER_6(vcompress_vm_h, void, ptr, ptr, ptr, ptr, env, i32)
- DEF_HELPER_6(vcompress_vm_w, void, ptr, ptr, ptr, ptr, env, i32)
- DEF_HELPER_6(vcompress_vm_d, void, ptr, ptr, ptr, ptr, env, i32)
-+
-+DEF_HELPER_5(vzext_vf2_h, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vzext_vf2_w, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vzext_vf2_d, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vzext_vf4_w, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vzext_vf4_d, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vzext_vf8_d, void, ptr, ptr, ptr, env, i32)
-+
-+DEF_HELPER_5(vsext_vf2_h, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vsext_vf2_w, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vsext_vf2_d, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vsext_vf4_w, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vsext_vf4_d, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vsext_vf8_d, void, ptr, ptr, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 65ff1688c25..2b9700a42ad 100644
+index 97fce34fcd8..65ff1688c25 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -619,5 +619,13 @@ vmv2r_v         100111 1 ..... 00001 011 ..... 1010111 @r2rd
- vmv4r_v         100111 1 ..... 00011 011 ..... 1010111 @r2rd
- vmv8r_v         100111 1 ..... 00111 011 ..... 1010111 @r2rd
+@@ -614,6 +614,10 @@ vrgatherei16_vv 001110 . ..... ..... 000 ..... 1010111 @r_vm
+ vrgather_vx     001100 . ..... ..... 100 ..... 1010111 @r_vm
+ vrgather_vi     001100 . ..... ..... 011 ..... 1010111 @r_vm
+ vcompress_vm    010111 - ..... ..... 010 ..... 1010111 @r
++vmv1r_v         100111 1 ..... 00000 011 ..... 1010111 @r2rd
++vmv2r_v         100111 1 ..... 00001 011 ..... 1010111 @r2rd
++vmv4r_v         100111 1 ..... 00011 011 ..... 1010111 @r2rd
++vmv8r_v         100111 1 ..... 00111 011 ..... 1010111 @r2rd
  
-+# Vector Integer Extension
-+vzext_vf2       010010 . ..... 00110 010 ..... 1010111 @r2_vm
-+vzext_vf4       010010 . ..... 00100 010 ..... 1010111 @r2_vm
-+vzext_vf8       010010 . ..... 00010 010 ..... 1010111 @r2_vm
-+vsext_vf2       010010 . ..... 00111 010 ..... 1010111 @r2_vm
-+vsext_vf4       010010 . ..... 00101 010 ..... 1010111 @r2_vm
-+vsext_vf8       010010 . ..... 00011 010 ..... 1010111 @r2_vm
-+
  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index c3fe5d0eee7..cb9062e6ad8 100644
+index f5d72d68a79..c3fe5d0eee7 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -3491,3 +3491,88 @@ GEN_VMV_WHOLE_TRANS(vmv1r_v, 1)
- GEN_VMV_WHOLE_TRANS(vmv2r_v, 2)
- GEN_VMV_WHOLE_TRANS(vmv4r_v, 4)
- GEN_VMV_WHOLE_TRANS(vmv8r_v, 8)
+@@ -3466,3 +3466,28 @@ static bool trans_vcompress_vm(DisasContext *s, arg_r *a)
+     }
+     return false;
+ }
 +
-+static bool int_ext_check(DisasContext *s, arg_rmr *a, uint8_t div)
-+{
-+    uint32_t from = (1 << (s->sew + 3)) / div;
-+    bool ret = require_rvv(s);
-+    ret &= (from >= 8 && from <= 64) &&
-+           (a->rd != a->rs2) &&
-+           require_align(a->rd, s->flmul) &&
-+           require_align(a->rs2, s->flmul / div) &&
-+           require_vm(a->vm, a->rd);
-+    if ((s->flmul / div) < 1) {
-+        ret &= require_noover(a->rd, s->flmul, a->rs2, s->flmul / div);
-+    } else {
-+        ret &= require_noover_widen(a->rd, s->flmul, a->rs2, s->flmul / div);
-+    }
-+    return ret;
++/*
++ * Whole Vector Register Move Instructions ignore vtype and vl setting.
++ * Thus, we don't need to check vill bit. (Section 17.6)
++ */
++#define GEN_VMV_WHOLE_TRANS(NAME, LEN)                          \
++static bool trans_##NAME(DisasContext *s, arg_##NAME * a)       \
++{                                                               \
++    if (require_rvv(s) &&                                       \
++        QEMU_IS_ALIGNED(a->rd, LEN) &&                          \
++        QEMU_IS_ALIGNED(a->rs2, LEN)) {                         \
++        /* EEW = 8 */                                           \
++        tcg_gen_gvec_mov(MO_8, vreg_ofs(s, a->rd),              \
++                         vreg_ofs(s, a->rs2),                   \
++                         s->vlen / 8 * LEN, s->vlen / 8 * LEN); \
++        mark_vs_dirty(s);                                       \
++        return true;                                            \
++    }                                                           \
++    return false;                                               \
 +}
 +
-+static bool int_ext_op(DisasContext *s, arg_rmr *a, uint8_t seq)
-+{
-+    uint32_t data = 0;
-+    gen_helper_gvec_3_ptr *fn;
-+    TCGLabel *over = gen_new_label();
-+    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-+
-+    static gen_helper_gvec_3_ptr * const fns[6][4] = {
-+        {
-+            NULL, gen_helper_vzext_vf2_h,
-+            gen_helper_vzext_vf2_w, gen_helper_vzext_vf2_d
-+        },
-+        {
-+            NULL, NULL,
-+            gen_helper_vzext_vf4_w, gen_helper_vzext_vf4_d,
-+        },
-+        {
-+            NULL, NULL,
-+            NULL, gen_helper_vzext_vf8_d
-+        },
-+        {
-+            NULL, gen_helper_vsext_vf2_h,
-+            gen_helper_vsext_vf2_w, gen_helper_vsext_vf2_d
-+        },
-+        {
-+            NULL, NULL,
-+            gen_helper_vsext_vf4_w, gen_helper_vsext_vf4_d,
-+        },
-+        {
-+            NULL, NULL,
-+            NULL, gen_helper_vsext_vf8_d
-+        }
-+    };
-+
-+    fn = fns[seq][s->sew];
-+    if (fn == NULL) {
-+        return false;
-+    }
-+
-+    data = FIELD_DP32(data, VDATA, VM, a->vm);
-+    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+
-+    tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-+                       vreg_ofs(s, a->rs2), cpu_env, 0,
-+                       s->vlen / 8, data, fn);
-+
-+    mark_vs_dirty(s);
-+    gen_set_label(over);
-+    return true;
-+}
-+
-+/* Vector Integer Extension */
-+#define GEN_INT_EXT_TRANS(NAME, DIV, SEQ)             \
-+static bool trans_##NAME(DisasContext *s, arg_rmr *a) \
-+{                                                     \
-+    if (int_ext_check(s, a, DIV)) {                   \
-+        return int_ext_op(s, a, SEQ);                 \
-+    }                                                 \
-+    return false;                                     \
-+}
-+
-+GEN_INT_EXT_TRANS(vzext_vf2, 2, 0)
-+GEN_INT_EXT_TRANS(vzext_vf4, 4, 1)
-+GEN_INT_EXT_TRANS(vzext_vf8, 8, 2)
-+GEN_INT_EXT_TRANS(vsext_vf2, 2, 3)
-+GEN_INT_EXT_TRANS(vsext_vf4, 4, 4)
-+GEN_INT_EXT_TRANS(vsext_vf8, 8, 5)
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index d7827a9db10..33378940ae1 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -4793,3 +4793,34 @@ GEN_VEXT_VCOMPRESS_VM(vcompress_vm_b, uint8_t,  H1)
- GEN_VEXT_VCOMPRESS_VM(vcompress_vm_h, uint16_t, H2)
- GEN_VEXT_VCOMPRESS_VM(vcompress_vm_w, uint32_t, H4)
- GEN_VEXT_VCOMPRESS_VM(vcompress_vm_d, uint64_t, H8)
-+
-+/* Vector Integer Extension */
-+#define GEN_VEXT_INT_EXT(NAME, ETYPE, DTYPE, HD, HS1)            \
-+void HELPER(NAME)(void *vd, void *v0, void *vs2,                 \
-+                  CPURISCVState *env, uint32_t desc)             \
-+{                                                                \
-+    uint32_t vl = env->vl;                                       \
-+    uint32_t vm = vext_vm(desc);                                 \
-+    uint32_t i;                                                  \
-+                                                                 \
-+    for (i = 0; i < vl; i++) {                                   \
-+        if (!vm && !vext_elem_mask(v0, i)) {                     \
-+            continue;                                            \
-+        }                                                        \
-+        *((ETYPE *)vd + HD(i)) = *((DTYPE *)vs2 + HS1(i));       \
-+    }                                                            \
-+}
-+
-+GEN_VEXT_INT_EXT(vzext_vf2_h, uint16_t, uint8_t,  H2, H1)
-+GEN_VEXT_INT_EXT(vzext_vf2_w, uint32_t, uint16_t, H4, H2)
-+GEN_VEXT_INT_EXT(vzext_vf2_d, uint64_t, uint32_t, H8, H4)
-+GEN_VEXT_INT_EXT(vzext_vf4_w, uint32_t, uint8_t,  H4, H1)
-+GEN_VEXT_INT_EXT(vzext_vf4_d, uint64_t, uint16_t, H8, H2)
-+GEN_VEXT_INT_EXT(vzext_vf8_d, uint64_t, uint8_t,  H8, H1)
-+
-+GEN_VEXT_INT_EXT(vsext_vf2_h, int16_t, int8_t,  H2, H1)
-+GEN_VEXT_INT_EXT(vsext_vf2_w, int32_t, int16_t, H4, H2)
-+GEN_VEXT_INT_EXT(vsext_vf2_d, int64_t, int32_t, H8, H4)
-+GEN_VEXT_INT_EXT(vsext_vf4_w, int32_t, int8_t,  H4, H1)
-+GEN_VEXT_INT_EXT(vsext_vf4_d, int64_t, int16_t, H8, H2)
-+GEN_VEXT_INT_EXT(vsext_vf8_d, int64_t, int8_t,  H8, H1)
++GEN_VMV_WHOLE_TRANS(vmv1r_v, 1)
++GEN_VMV_WHOLE_TRANS(vmv2r_v, 2)
++GEN_VMV_WHOLE_TRANS(vmv4r_v, 4)
++GEN_VMV_WHOLE_TRANS(vmv8r_v, 8)
 -- 
 2.17.1
 
