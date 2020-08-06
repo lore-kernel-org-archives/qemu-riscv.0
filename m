@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k3dT1-0004Qa-BB
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 06:49:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41766)
+	id 1k3dT2-0004Ts-RT
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 06:49:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41798)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k3dSy-0004J5-Ex
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:49:44 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430]:43295)
+ id 1k3dT0-0004PO-RO
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:49:46 -0400
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430]:37977)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k3dSw-00083i-Mu
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:49:44 -0400
-Received: by mail-pf1-x430.google.com with SMTP id y206so14428203pfb.10
- for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2020 03:49:42 -0700 (PDT)
+ id 1k3dSz-000844-28
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:49:46 -0400
+Received: by mail-pf1-x430.google.com with SMTP id d22so6391615pfn.5
+ for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2020 03:49:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=DQhH2Q4YXEvegCMiWnmy59ZjpowYkn1863Fk7UHo49Q=;
- b=RQ2zqNxhZk49Ts2mpe1T+5pIJ/G7/aBW4vrT6RvizMInbOIqWVmHuzpe/WcQxrUxiX
- UVVQ7J/2cHSdimQqIEqwc2I9REkLC3cBlyzWnjH9jT3h3zw504bkviI/nUPZmC8VpVcL
- 0KXZlHYJakba4O6mhleokDTBx6Wg7lhO20qDke1ai4PfY8hCjiVzjE/nIsynpsQ9ONmX
- yoHXBQJtBlwDCpJ7Fv4Is03W1kRtrojCH0AeO0/1aOahsvyJWgttlZOJfwzfq8FPAYP/
- PoJ5DHj5MAIlS0cdxNDlKRGclTRyQy05tm5RTz5upU96lnkGpI1RbRw1qYHzBSuYPxLn
- 6O4w==
+ bh=La0dMO1EDgYzAK0UH7rJx1lpxEeCZ+SwiTkARPgIAro=;
+ b=Cy1E4wOBmKf3E4tPP25ocinfFgXo8DWw52hVG9wuhQChlb+OHvPjo+BcJt8JV1gO1i
+ KUOOTmD8d2N53vU6fVxaEviqXEKQ1DZYwgyygFy83u3AXwX6vmvSqx1mq2dKEavWBn4E
+ +aEo0HvsVEIdGKheXGudVIUYSL0YWAXgyFVQTTdy37hzIRtTyfqFC2/B3jyHGTAnFLeJ
+ hlMO3dqf8aio6pZT37EYUD8UrQBWOFw0t3+mLuRSzOSzvaiA9QYB8W5NECS1ZVl227jT
+ PUapNlNJjJj42wv+7/3a2lb0vBZvmOm2k2geh7w5bzNR/J780C+VnuIZRXg8g9SNHtMD
+ mrGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=DQhH2Q4YXEvegCMiWnmy59ZjpowYkn1863Fk7UHo49Q=;
- b=IgyCNLanS5LJr3uMggp7izAC3KsvXtT53BFj/UaUpp85y0Ubyx0zb97bRzz8OK1Pdy
- +SPoidwMJ4mJFvY4biifWsXuPLGV3H1VKC/jQQgFISU47Fs5xV5y82p6e5upPgpjuy0J
- y6EnM/4PWVJBNkvOt8jWPoJN2MzWun+F9eRomP7qYqeF3C+BYseUl68UsWBPrKhf1pzt
- VoP1EJq8EQ5R2lcOmZCj/xec8hSGcwC8E7EC9Rkw9w8AKdO4z/mXhC3/eeR2UWQIWH/G
- 90mQ1UHphbJQZve6aNzFJaTIL2UztXjUNq3erdznw2JEHet7KH2mx6iwGOyOfv6+wZ2G
- twdA==
-X-Gm-Message-State: AOAM5303T4wvhO6D0YVvI5buKvesQtz9JujkKl0+glGKPE/WsX5OqKpD
- Tn5tYt1PbYVyW20wPclDKyBk9g==
-X-Google-Smtp-Source: ABdhPJyw3RVjDkYcyh30/fJ80sFTIxjKQCstNrpmEojzumQmg3ItF5mEgNLdi2rJkqn++RjvGtAR/Q==
-X-Received: by 2002:aa7:9519:: with SMTP id b25mr7537412pfp.292.1596710981504; 
- Thu, 06 Aug 2020 03:49:41 -0700 (PDT)
+ bh=La0dMO1EDgYzAK0UH7rJx1lpxEeCZ+SwiTkARPgIAro=;
+ b=bNbGmpSXRBee/j8LjHsEdWFTnNBfa3vEB9ogESPh9GucHMXLkQ9j8FEYjlfBT5f2g7
+ uF8Hi2o4C2opO0hTeaXmIQrlrmNrfK5cpBVn/aR03+uk9VfZ3pf/pXM25SaPLp3P7n2/
+ lOEgP8XF1aFwW7mfZyMS5AxEwq34bnuKOFWvuchKRUBUXuyJMoQiqcvDDIWusCVIg2f1
+ KAc7Q6mC8sVrdzv5mGh6pEcataxZhEnIrFl6LitmdT+B80Ar8UrOGbFyMHdEds05IHNK
+ gLOoTg+7EEkjahzknJZEwTQG9J0DpJjdLiWp+JUSfm+VE/T0OY/DAXhEbUT6FSxMVBtn
+ M+Ww==
+X-Gm-Message-State: AOAM5329NrgorNmWKR1r8ZkMFZqjaRRIls9ZdXPERsCBZIb15eVKlPj4
+ F/pmPKHgRu2kzPSJC9nk1uxkOw==
+X-Google-Smtp-Source: ABdhPJxF0C5XE7WQJpvkMyUq496/h9MzP3bqhYx36lkrYqxLhJis+nCE5tX+hoSDhxOsVK6WLauzWQ==
+X-Received: by 2002:aa7:9e1e:: with SMTP id y30mr7143741pfq.120.1596710983826; 
+ Thu, 06 Aug 2020 03:49:43 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id f18sm6567309pgv.84.2020.08.06.03.49.39
+ by smtp.gmail.com with ESMTPSA id f18sm6567309pgv.84.2020.08.06.03.49.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2020 03:49:41 -0700 (PDT)
+ Thu, 06 Aug 2020 03:49:43 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -50,10 +50,10 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v3 58/71] target/riscv: rvv-1.0: widening floating-point
- reduction instructions
-Date: Thu,  6 Aug 2020 18:46:55 +0800
-Message-Id: <20200806104709.13235-59-frank.chang@sifive.com>
+Subject: [RFC v3 59/71] target/riscv: rvv-1.0: single-width scaling shift
+ instructions
+Date: Thu,  6 Aug 2020 18:46:56 +0800
+Message-Id: <20200806104709.13235-60-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200806104709.13235-1-frank.chang@sifive.com>
 References: <20200806104709.13235-1-frank.chang@sifive.com>
@@ -80,28 +80,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2020 10:49:45 -0000
+X-List-Received-Date: Thu, 06 Aug 2020 10:49:47 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
+log(SEW) truncate vssra.vi immediate value.
+
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.inc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/insn_trans/trans_rvv.inc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index 9e8798902a3..64bd4aa239d 100644
+index 64bd4aa239d..2a2133a588b 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -2965,7 +2965,7 @@ GEN_OPFVV_TRANS(vfredmax_vs, reduction_check)
- GEN_OPFVV_TRANS(vfredmin_vs, reduction_check)
+@@ -2360,8 +2360,8 @@ GEN_OPIVV_TRANS(vssrl_vv, opivv_check)
+ GEN_OPIVV_TRANS(vssra_vv, opivv_check)
+ GEN_OPIVX_TRANS(vssrl_vx,  opivx_check)
+ GEN_OPIVX_TRANS(vssra_vx,  opivx_check)
+-GEN_OPIVI_TRANS(vssrl_vi, IMM_ZX, vssrl_vx, opivx_check)
+-GEN_OPIVI_TRANS(vssra_vi, IMM_SX, vssra_vx, opivx_check)
++GEN_OPIVI_TRANS(vssrl_vi, IMM_TRUNC_SEW, vssrl_vx, opivx_check)
++GEN_OPIVI_TRANS(vssra_vi, IMM_TRUNC_SEW, vssra_vx, opivx_check)
  
- /* Vector Widening Floating-Point Reduction Instructions */
--GEN_OPFVV_WIDEN_TRANS(vfwredsum_vs, reduction_check)
-+GEN_OPFVV_WIDEN_TRANS(vfwredsum_vs, reduction_widen_check)
- 
- /*
-  *** Vector Mask Operations
+ /* Vector Narrowing Fixed-Point Clip Instructions */
+ GEN_OPIWV_NARROW_TRANS(vnclipu_wv)
 -- 
 2.17.1
 
