@@ -1,65 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k3Z5n-0003PN-Fa
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 02:09:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36102)
+	id 1k3ZKA-00078Q-V8
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 02:24:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39830)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
- id 1k3Z5l-0003NZ-Cv
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 02:09:29 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:43113)
+ id 1k3ZK9-00076R-6x
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 02:24:21 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:45328)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
- id 1k3Z5i-0000PA-K5
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 02:09:29 -0400
-Received: by mail-io1-xd41.google.com with SMTP id k23so48374189iom.10
- for <qemu-riscv@nongnu.org>; Wed, 05 Aug 2020 23:09:25 -0700 (PDT)
+ id 1k3ZK6-00024w-7e
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 02:24:20 -0400
+Received: by mail-io1-xd42.google.com with SMTP id u126so11175548iod.12
+ for <qemu-riscv@nongnu.org>; Wed, 05 Aug 2020 23:24:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/IEkLSEhabr43s0zlznR/yjMZeS9Ccw5v0UmxfcwxcU=;
- b=T/CPlqfbsmNAvkR0kTblGYrc7HkUUnJVhCG2Fku1KlT9PziSjVXq6kBKvDiS5E7wyZ
- xSX+X7ThBH7E6CVGN1sovah44s+JTugmjGPhzi8HtBifWGhEFi1FW1lWpGfdG1hUBli6
- iJDaHvpKCdnUYPtSd8rxDLIhsI1K55l0Wph/1TxsVFLKAkSFLbuotJFkw9ag/y3kgyxo
- 4GR8Ij8pAM89/JmQyGt9Fh91iQRHEJUJ8aQ3k2gxVGcGorYmlj7CRsu95OtVs6IR0ZSh
- 6LPloLefxXFWqfLpdy/KqRAP890gOdDCog8zbBHeUyKM79i+7ySpqKe8jQ5UbihlkF+i
- fx6w==
+ :cc; bh=hafr8k9YOgdf5KgqdQie/z85p/Ia5bt7WDCDxUBdvdg=;
+ b=ZBcNKliwxZMR5CwNl76Wp2MBF+d0mCTiEHLWCbnihmHspuuIycm0JRhajxmIqIqjD5
+ LIcVcQv7YsIPKMD/3us2JiqENp6e163Vo3Vd/jm1IDEbv0OzeKx9jUjtZ+pOrEBAloMQ
+ hUd0CRqvTG/EyGCz/SELWi0QunfTNmL75FoHyN0j9HajqPjv1o7QhZmz7GoHW24OReNW
+ 1/JJ8qgIAaQA+RfogiacEoiLGyjp9i1qhp6DI1qC65DBU4FOjfpnEaaiClibpsLQS8c4
+ NkqwVmN7GJQ4fJjguFYOOHdOpfFxdw52CF+OZyTYwzeVxANFDhtONbsljvWgMdGrKSkH
+ UBrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/IEkLSEhabr43s0zlznR/yjMZeS9Ccw5v0UmxfcwxcU=;
- b=tBUz/xtQ291ka7xSD/brA/t69qaztMocuguBYUXmWpkXM2wKftgBaRIvPj/b2h65CQ
- ToyeaDYSLmXwLb8lLG0Wp+B4vj/52tf7bSGY3hW2YKsnxfcp/Pi6IatpKfpZR4LCaPOB
- h+57OzHazXMRIvNquw/9V1tdYjkNVNdjfUu6bBicrwncFyfq1T6qT4zbCWWyvFbg8Kt5
- yxB4DF0FcBrALMhurwF4cTRlJJUDyWoKRD5TPb6zRCYNacyNZCE0QSFTal9XsNZjwYlL
- hZk9+t2UmHwgqGM8UBqkGzBDh4QNuWPJ6icdmCkKn/Bv8SoZIphSOkFczcsG8rsfwPaJ
- 4+BQ==
-X-Gm-Message-State: AOAM531XTmx3t9wZ71byS0Yq3fqkiItTObHc0oXfXEpcCUbWFoC7Hhno
- yeKhBOaUe8TnD9bEr5M3oRzdraHPdAsPggCi7Y6k7w==
-X-Google-Smtp-Source: ABdhPJzseYkCy5C0XoXf9PPSL8j+6oQ2tV4JXXAlZHvM5ToxmvB4uB7HG5AVsDVyTTxAHeh3g3WGxxiWnhuuJNVOvgI=
-X-Received: by 2002:a05:6638:248e:: with SMTP id
- x14mr9184108jat.135.1596694164161; 
- Wed, 05 Aug 2020 23:09:24 -0700 (PDT)
+ bh=hafr8k9YOgdf5KgqdQie/z85p/Ia5bt7WDCDxUBdvdg=;
+ b=Ha8pCdnfZQc4VTW3ewB0pCypWXvmKVLO5FOBzwE/5g7wFNrTwqgfeenuKPOqWfmc++
+ +p3O4+eUFcqoUZyexwNO4QwWixkDd5VDnqFZCt7LCD5slJ6PYIJkTELwys5J5FQfaYA9
+ SppWN5lTO1oL75yTVEu6m4NkWqP0U9U4knqKNh7PD/5nS1KaFUfzvb+BmHc8d31TBDHT
+ Rsm/+0ngLm+6h9Wbxz03wWD7LBxSOHaGsabX6NGUyqo6HiWgD4geNRn8w/2VvE7pQnk3
+ iQCo5ElPpUKg0VwDIwha4+2aJWOHZOOgPp4KaZ9CD1mhoIiFqg8Kcr/GB25JCEGuvK7c
+ 19ew==
+X-Gm-Message-State: AOAM5323nqH2k5Z7gvxEEMiJNgtgVyxa3znJjM6RvHpZSKwqbirayjI+
+ A2weRY6qD7K2W6jVOVMnqzPYf/NNnB2BCthSKZrKcA==
+X-Google-Smtp-Source: ABdhPJz2LgU4WegSavfCTiM5F1hAmXbq54wUcw3akGtW5IbEFgOmUWBOwsb1yTNcpvGgGZvYx4gXv3+4RydYcinzXJk=
+X-Received: by 2002:a6b:f911:: with SMTP id j17mr7631181iog.96.1596695053544; 
+ Wed, 05 Aug 2020 23:24:13 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200724002807.441147-1-richard.henderson@linaro.org>
- <20200724002807.441147-2-richard.henderson@linaro.org>
- <1aa6cb56-2f41-45c1-2d32-ec8b3b10780b@c-sky.com>
- <9e10c17c-7a9e-5f7f-b1e3-c195d4e30b32@linaro.org>
- <ccc72223-d98e-6dd4-6c44-ca30f4e687d5@c-sky.com>
-In-Reply-To: <ccc72223-d98e-6dd4-6c44-ca30f4e687d5@c-sky.com>
+ <20200724002807.441147-3-richard.henderson@linaro.org>
+In-Reply-To: <20200724002807.441147-3-richard.henderson@linaro.org>
 From: Chih-Min Chao <chihmin.chao@sifive.com>
-Date: Thu, 6 Aug 2020 14:09:13 +0800
-Message-ID: <CAEiOBXXmz2APpmtwPrvikXUt5j_Q=k5ZqK9g2Fe4bdjeAbg_6g@mail.gmail.com>
-Subject: Re: [PATCH v2 1/7] target/riscv: Generate nanboxed results from fp
- helpers
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Thu, 6 Aug 2020 14:24:02 +0800
+Message-ID: <CAEiOBXWCULxgcJwme=cvS1iHpogubtTE72a5LN38WfLGKqbrjA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/7] target/riscv: Generalize gen_nanbox_fpr to
+ gen_nanbox_s
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Frank Chang <frank.chang@sifive.com>, 
  Alistair Francis <alistair23@gmail.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: multipart/alternative; boundary="000000000000786a5e05ac2f5464"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=chihmin.chao@sifive.com; helo=mail-io1-xd41.google.com
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ liuzhiwei <zhiwei_liu@c-sky.com>
+Content-Type: multipart/alternative; boundary="0000000000007b454f05ac2f8969"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=chihmin.chao@sifive.com; helo=mail-io1-xd42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -81,163 +77,181 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2020 06:09:29 -0000
+X-List-Received-Date: Thu, 06 Aug 2020 06:24:21 -0000
 
---000000000000786a5e05ac2f5464
+--0000000000007b454f05ac2f8969
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Jul 24, 2020 at 2:06 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Fri, Jul 24, 2020 at 8:28 AM Richard Henderson <
+richard.henderson@linaro.org> wrote:
 
+> Do not depend on the RVD extension, take input and output via
+> TCGv_i64 instead of fpu regno.  Move the function to translate.c
+> so that it can be used in multiple trans_*.inc.c files.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  target/riscv/insn_trans/trans_rvf.inc.c | 16 +---------------
+>  target/riscv/translate.c                | 11 +++++++++++
+>  2 files changed, 12 insertions(+), 15 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvf.inc.c
+> b/target/riscv/insn_trans/trans_rvf.inc.c
+> index 3bfd8881e7..c7057482e8 100644
+> --- a/target/riscv/insn_trans/trans_rvf.inc.c
+> +++ b/target/riscv/insn_trans/trans_rvf.inc.c
+> @@ -23,20 +23,6 @@
+>          return false;                       \
+>  } while (0)
+>
+> -/*
+> - * RISC-V requires NaN-boxing of narrower width floating
+> - * point values.  This applies when a 32-bit value is
+> - * assigned to a 64-bit FP register.  Thus this does not
+> - * apply when the RVD extension is not present.
+> - */
+> -static void gen_nanbox_fpr(DisasContext *ctx, int regno)
+> -{
+> -    if (has_ext(ctx, RVD)) {
+> -        tcg_gen_ori_i64(cpu_fpr[regno], cpu_fpr[regno],
+> -                        MAKE_64BIT_MASK(32, 32));
+> -    }
+> -}
+> -
+>  static bool trans_flw(DisasContext *ctx, arg_flw *a)
+>  {
+>      TCGv t0 = tcg_temp_new();
+> @@ -46,7 +32,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
+>      tcg_gen_addi_tl(t0, t0, a->imm);
+>
+>      tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], t0, ctx->mem_idx, MO_TEUL);
+> -    gen_nanbox_fpr(ctx, a->rd);
+> +    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
+>
+>      tcg_temp_free(t0);
+>      mark_fs_dirty(ctx);
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 9632e79cf3..12a746da97 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -90,6 +90,17 @@ static inline bool has_ext(DisasContext *ctx, uint32_t
+> ext)
+>      return ctx->misa & ext;
+>  }
+>
+> +/*
+> + * RISC-V requires NaN-boxing of narrower width floating point values.
+> + * This applies when a 32-bit value is assigned to a 64-bit FP register.
+> + * For consistency and simplicity, we nanbox results even when the RVD
+> + * extension is not present.
+> + */
+> +static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+> +{
+> +    tcg_gen_ori_i64(out, in, MAKE_64BIT_MASK(32, 32));
+> +}
+> +
+>  static void generate_exception(DisasContext *ctx, int excp)
+>  {
+>      tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+> --
+> 2.25.1
 >
 >
-> On 2020/7/24 11:55, Richard Henderson wrote:
-> > On 7/23/20 7:35 PM, LIU Zhiwei wrote:
-> >>
-> >> On 2020/7/24 8:28, Richard Henderson wrote:
-> >>> Make sure that all results from single-precision scalar helpers
-> >>> are properly nan-boxed to 64-bits.
-> >>>
-> >>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> >>> ---
-> >>>    target/riscv/internals.h  |  5 +++++
-> >>>    target/riscv/fpu_helper.c | 42
-> +++++++++++++++++++++------------------
-> >>>    2 files changed, 28 insertions(+), 19 deletions(-)
-> >>>
-> >>> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-> >>> index 37d33820ad..9f4ba7d617 100644
-> >>> --- a/target/riscv/internals.h
-> >>> +++ b/target/riscv/internals.h
-> >>> @@ -38,4 +38,9 @@ target_ulong fclass_d(uint64_t frs1);
-> >>>    #define SEW32 2
-> >>>    #define SEW64 3
-> >>>    +static inline uint64_t nanbox_s(float32 f)
-> >>> +{
-> >>> +    return f | MAKE_64BIT_MASK(32, 32);
-> >>> +}
-> >>> +
-> >> If define it here,  we can also define a more general  function with
-> flen.
-> >>
-> >> +static inline uint64_t nanbox_s(float32 f, uint32_t flen)
-> >> +{
-> >> +    return f | MAKE_64BIT_MASK(flen, 64 - flen);
-> >> +}
-> >> +
-> >>
-> >> So we can reuse it in fp16 or bf16 scalar instruction and in vector
-> instructions.
-> > While we could do that, we will not encounter all possible lengths.  In
-> the
-> > cover letter, I mentioned defining a second function,
-> >
-> > static inline uint64_t nanbox_h(float16 f)
-> > {
-> >     return f | MAKE_64BIT_MASK(16, 48);
-> > }
-> >
-> > Having two separate functions will, I believe, be easier to use in
-> practice.
-> >
-> Get  it. Thanks.
 >
-> Zhiwei
-> >
-> > r~
->
->
->
-That is what has been implemented in spike.  It fills up the Nan-Box when
-value is stored back internal structure and
-unbox the value with difference floating type (half/single/double/quad).
-
-By the way,  I prefer to keeping the suffix to tell different floating
-type rather than pass arbitrary
-since each floating type belong to each extension.
-
 Reviewed-by: Chih-Min Chao <chihmin.chao@sifive.com>
 
---000000000000786a5e05ac2f5464
+--0000000000007b454f05ac2f8969
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><div><div dir=3D"ltr" class=3D"gmail_sign=
-ature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr">On Fri, Jul 24, =
-2020 at 2:06 PM LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@c-sky.com">zhiw=
-ei_liu@c-sky.com</a>&gt; wrote:<br></div></div></div></div><div class=3D"gm=
-ail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
-8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
+ature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><br></div></div>=
+</div></div><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr=
+">On Fri, Jul 24, 2020 at 8:28 AM Richard Henderson &lt;<a href=3D"mailto:r=
+ichard.henderson@linaro.org">richard.henderson@linaro.org</a>&gt; wrote:<br=
+></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
+border-left:1px solid rgb(204,204,204);padding-left:1ex">Do not depend on t=
+he RVD extension, take input and output via<br>
+TCGv_i64 instead of fpu regno.=C2=A0 Move the function to translate.c<br>
+so that it can be used in multiple trans_*.inc.c files.<br>
 <br>
-On 2020/7/24 11:55, Richard Henderson wrote:<br>
-&gt; On 7/23/20 7:35 PM, LIU Zhiwei wrote:<br>
-&gt;&gt;<br>
-&gt;&gt; On 2020/7/24 8:28, Richard Henderson wrote:<br>
-&gt;&gt;&gt; Make sure that all results from single-precision scalar helper=
-s<br>
-&gt;&gt;&gt; are properly nan-boxed to 64-bits.<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Signed-off-by: Richard Henderson &lt;<a href=3D"mailto:richard=
-.henderson@linaro.org" target=3D"_blank">richard.henderson@linaro.org</a>&g=
-t;<br>
-&gt;&gt;&gt; ---<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 target/riscv/internals.h=C2=A0 |=C2=A0 5 +++++<br=
->
-&gt;&gt;&gt;=C2=A0 =C2=A0 target/riscv/fpu_helper.c | 42 ++++++++++++++++++=
-+++------------------<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 2 files changed, 28 insertions(+), 19 deletions(-=
-)<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; diff --git a/target/riscv/internals.h b/target/riscv/internals=
-.h<br>
-&gt;&gt;&gt; index 37d33820ad..9f4ba7d617 100644<br>
-&gt;&gt;&gt; --- a/target/riscv/internals.h<br>
-&gt;&gt;&gt; +++ b/target/riscv/internals.h<br>
-&gt;&gt;&gt; @@ -38,4 +38,9 @@ target_ulong fclass_d(uint64_t frs1);<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 #define SEW32 2<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 #define SEW64 3<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 +static inline uint64_t nanbox_s(float32 f)<br>
-&gt;&gt;&gt; +{<br>
-&gt;&gt;&gt; +=C2=A0=C2=A0=C2=A0 return f | MAKE_64BIT_MASK(32, 32);<br>
-&gt;&gt;&gt; +}<br>
-&gt;&gt;&gt; +<br>
-&gt;&gt; If define it here,=C2=A0 we can also define a more general=C2=A0 f=
-unction with flen.<br>
-&gt;&gt;<br>
-&gt;&gt; +static inline uint64_t nanbox_s(float32 f, uint32_t flen)<br>
-&gt;&gt; +{<br>
-&gt;&gt; +=C2=A0=C2=A0=C2=A0 return f | MAKE_64BIT_MASK(flen, 64 - flen);<b=
+Signed-off-by: Richard Henderson &lt;<a href=3D"mailto:richard.henderson@li=
+naro.org" target=3D"_blank">richard.henderson@linaro.org</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/insn_trans/trans_rvf.inc.c | 16 +---------------<br>
+=C2=A0target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 | 11 +++++++++++<br>
+=C2=A02 files changed, 12 insertions(+), 15 deletions(-)<br>
+<br>
+diff --git a/target/riscv/insn_trans/trans_rvf.inc.c b/target/riscv/insn_tr=
+ans/trans_rvf.inc.c<br>
+index 3bfd8881e7..c7057482e8 100644<br>
+--- a/target/riscv/insn_trans/trans_rvf.inc.c<br>
++++ b/target/riscv/insn_trans/trans_rvf.inc.c<br>
+@@ -23,20 +23,6 @@<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return false;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
+=C2=A0} while (0)<br>
+<br>
+-/*<br>
+- * RISC-V requires NaN-boxing of narrower width floating<br>
+- * point values.=C2=A0 This applies when a 32-bit value is<br>
+- * assigned to a 64-bit FP register.=C2=A0 Thus this does not<br>
+- * apply when the RVD extension is not present.<br>
+- */<br>
+-static void gen_nanbox_fpr(DisasContext *ctx, int regno)<br>
+-{<br>
+-=C2=A0 =C2=A0 if (has_ext(ctx, RVD)) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_ori_i64(cpu_fpr[regno], cpu_fpr[regno]=
+,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 MAKE_64BIT_MASK(32, 32));<br>
+-=C2=A0 =C2=A0 }<br>
+-}<br>
+-<br>
+=C2=A0static bool trans_flw(DisasContext *ctx, arg_flw *a)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0TCGv t0 =3D tcg_temp_new();<br>
+@@ -46,7 +32,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)<br>
+=C2=A0 =C2=A0 =C2=A0tcg_gen_addi_tl(t0, t0, a-&gt;imm);<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0tcg_gen_qemu_ld_i64(cpu_fpr[a-&gt;rd], t0, ctx-&gt;mem_=
+idx, MO_TEUL);<br>
+-=C2=A0 =C2=A0 gen_nanbox_fpr(ctx, a-&gt;rd);<br>
++=C2=A0 =C2=A0 gen_nanbox_s(cpu_fpr[a-&gt;rd], cpu_fpr[a-&gt;rd]);<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0tcg_temp_free(t0);<br>
+=C2=A0 =C2=A0 =C2=A0mark_fs_dirty(ctx);<br>
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c<br>
+index 9632e79cf3..12a746da97 100644<br>
+--- a/target/riscv/translate.c<br>
++++ b/target/riscv/translate.c<br>
+@@ -90,6 +90,17 @@ static inline bool has_ext(DisasContext *ctx, uint32_t e=
+xt)<br>
+=C2=A0 =C2=A0 =C2=A0return ctx-&gt;misa &amp; ext;<br>
+=C2=A0}<br>
+<br>
++/*<br>
++ * RISC-V requires NaN-boxing of narrower width floating point values.<br>
++ * This applies when a 32-bit value is assigned to a 64-bit FP register.<b=
 r>
-&gt;&gt; +}<br>
-&gt;&gt; +<br>
-&gt;&gt;<br>
-&gt;&gt; So we can reuse it in fp16 or bf16 scalar instruction and in vecto=
-r instructions.<br>
-&gt; While we could do that, we will not encounter all possible lengths.=C2=
-=A0 In the<br>
-&gt; cover letter, I mentioned defining a second function,<br>
-&gt;<br>
-&gt; static inline uint64_t nanbox_h(float16 f)<br>
-&gt; {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0return f | MAKE_64BIT_MASK(16, 48);<br>
-&gt; }<br>
-&gt;<br>
-&gt; Having two separate functions will, I believe, be easier to use in pra=
-ctice.<br>
-&gt;<br>
-Get=C2=A0 it. Thanks.<br>
++ * For consistency and simplicity, we nanbox results even when the RVD<br>
++ * extension is not present.<br>
++ */<br>
++static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)<br>
++{<br>
++=C2=A0 =C2=A0 tcg_gen_ori_i64(out, in, MAKE_64BIT_MASK(32, 32));<br>
++}<br>
++<br>
+=C2=A0static void generate_exception(DisasContext *ctx, int excp)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0tcg_gen_movi_tl(cpu_pc, ctx-&gt;base.pc_next);<br>
+-- <br>
+2.25.1<br>
 <br>
-Zhiwei<br>
-&gt;<br>
-&gt; r~<br>
-<br>
-<br></blockquote><div><br></div><div>That is what has been implemented in s=
-pike.=C2=A0 It fills up the Nan-Box when value is stored back internal stru=
-cture and=C2=A0</div><div>unbox the value with difference floating type (ha=
-lf/single/double/quad).<br></div><div><br></div><div>By the way,=C2=A0 I pr=
-efer to keeping the suffix to tell different=C2=A0floating type=C2=A0rather=
- than pass arbitrary=C2=A0</div><div>since each floating type belong to eac=
-h extension.<br><br>Reviewed-by: Chih-Min Chao &lt;<a href=3D"mailto:chihmi=
-n.chao@sifive.com">chihmin.chao@sifive.com</a>&gt;<br></div></div></div>
+<br></blockquote><div><br></div><div>Reviewed-by: Chih-Min Chao &lt;<a href=
+=3D"mailto:chihmin.chao@sifive.com">chihmin.chao@sifive.com</a>&gt;<br></di=
+v></div></div>
 
---000000000000786a5e05ac2f5464--
+--0000000000007b454f05ac2f8969--
 
