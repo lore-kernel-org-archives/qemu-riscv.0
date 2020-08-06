@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k3dS4-000347-Th
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 06:48:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41018)
+	id 1k3dS9-0003AB-Px
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Aug 2020 06:48:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41078)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k3dS4-000329-0j
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:48:48 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534]:33866)
+ id 1k3dS7-000388-TQ
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:48:51 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434]:36502)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k3dS2-0007uK-BA
- for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:48:47 -0400
-Received: by mail-pg1-x534.google.com with SMTP id t6so26493887pgq.1
- for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2020 03:48:45 -0700 (PDT)
+ id 1k3dS4-0007uv-Kw
+ for qemu-riscv@nongnu.org; Thu, 06 Aug 2020 06:48:51 -0400
+Received: by mail-pf1-x434.google.com with SMTP id m8so17862467pfh.3
+ for <qemu-riscv@nongnu.org>; Thu, 06 Aug 2020 03:48:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=5gJQpQuBdx5+IRqoLCBuH1Sdjx31gU5U1EvDuXvWhTM=;
- b=QOucNCXwwKUzLCXKpxaitn4EBvdRjp2gLHEooPPMC7hg8Zuo3bp5JpHHxpweFfLMXt
- 9S1kmGltJFpF2+WtC384QkbptRAoAdEbQPK0+FNXZK1GA5puK4gFZRy3v0U9/NskpIfC
- NPI26C7EWLM/1FxeOPtUIfyoZeyjyw5XABT9HfhDrdwirwo76VYoBXdqeA8nnCCRsNfi
- KJ4xwKRirAnzviI9jIwAHLoBJQDwNbRA6Wu7x6toVB3zTBk2r2Rk8kqAYH1z0r9iiJDd
- r/LIlMBD525BiV/oKEsi+bKz1oQWSzsQsslSwMq4tUeIX5R32Uxg7rpzIbt68GQhCvwQ
- ENGA==
+ bh=7zatC+tzrXp+A9xuiZ1D/H6H+NHiImlD3B/njQwKS1Y=;
+ b=Tx5ceoHWHCj94/uXuRO7PxRevgEQnI1EyAiP92OlMpfhQrEFqfMkrnWoZumbY9bj6V
+ 77R+5AZQOytzJU7q2ssDm37C+oW7BN/ehEihMgJCIgK7U06nIPO7ZqPcN24xjtc1MraN
+ 3tRw0+N81hq+5yFtkbExJWGQCd9DiHOHliQ84d4i+0XhL7qaBhOnJmN2vxpDM3NOkd0l
+ kXnL9Y1BBSbHbxKrniizH0lYBGBSpOSiCrNeRvsVqN3cyKn+4ERS90OxFGztMNHiMizw
+ MoCGlW6Wnp40Z9zNuCvFvBu7D9YGlLOZ/cduCiPbx1HBe4pimTAa0O2PLCAFy79MtIPu
+ rM0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=5gJQpQuBdx5+IRqoLCBuH1Sdjx31gU5U1EvDuXvWhTM=;
- b=fXbj3nJ0yuqTI71/+6AK4YsuRKwY4cc/s/S5ZN6+dUiHHQRCqd4ayutxgUlf8GCBtl
- 5dcKd1+HrU6bcVA0Jc6vPGrXh7rRXjBrpi6X7qJ8EWRsMTIob/N431fq4oOqlkXLr0mS
- GzYF/t1TmTGQQm2dLYgJJH36Hj8Hap3j70YeSviCh5pEqifr7GZTG5z2YHr6sNTk45dH
- ZxRq8C5O9rhQqFM+BKRiCQG8kJ35nhSmoWALdZlc0WtdlzU6yXCGVf0kh8MhdoYWhyYu
- pJm3tdXscB5G/a8NkBCEOLEt1yUjY1qLb5fj4tuGWy/pUOlM/rvT2q//KCILYgWOCDoD
- dlBA==
-X-Gm-Message-State: AOAM5325zwA1Nzig/7VWvausc+MZiasp1a3bvl5AUk7+BlzLVbqAVw3b
- i5DyBgUP8wLXuYwqN1TSNmpI3w==
-X-Google-Smtp-Source: ABdhPJyCo91lh0lVCmuZ/W0oq7q30sll9g0wg8XduOEGKVsHj4xGDVtu5cLMlledjM/rJsQGLwunHg==
-X-Received: by 2002:aa7:80d6:: with SMTP id a22mr4094761pfn.275.1596710925062; 
- Thu, 06 Aug 2020 03:48:45 -0700 (PDT)
+ bh=7zatC+tzrXp+A9xuiZ1D/H6H+NHiImlD3B/njQwKS1Y=;
+ b=A3uEm3pSvROcloS0MuOxkn5WRzrbsCUt0F4O3qg5NHJuwt1T3nBZE11OHujWZf1vcL
+ 24W4NHo4Y1IZHnAaYo4FC4UXnJjdQ5JT1DeSiujFj9AlUuNjjJtOtuusIrd65xsI++qz
+ 1u+ItTyZ0gOhP7g8NE9PR8NEheAvpKrvI38ftAr5iaalfQVRLSmVSTY36HCK14ngdHSr
+ CrTvwIB+mWMaYR27KphQzI8XJzXZ8W6R2Cuzt+Xd4c+890xj/b2U+TlMj8kBVay9JUei
+ ZpuXYbk3OoM4cfGMLIfMyZbFuFiaEhcaPm6ymjHP8NTv9LCVIcavQtOmm71KAD458k45
+ yyXw==
+X-Gm-Message-State: AOAM530YFDLugnohq2t0yOHUIpitCH2TPbjmEuepnUYXwD5h41WrzCIE
+ d5VsHeleLGX3AX+rR2CHa6hzzw==
+X-Google-Smtp-Source: ABdhPJzwl1xLErosET6KquJ9VcJInZFTMl1fwcmGFD/XnqZs9eg3aG+PYCf8nfhRVvwGxtrqhKujwQ==
+X-Received: by 2002:a63:3c08:: with SMTP id j8mr6476159pga.82.1596710927490;
+ Thu, 06 Aug 2020 03:48:47 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id f18sm6567309pgv.84.2020.08.06.03.48.42
+ by smtp.gmail.com with ESMTPSA id f18sm6567309pgv.84.2020.08.06.03.48.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Aug 2020 03:48:44 -0700 (PDT)
+ Thu, 06 Aug 2020 03:48:47 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -50,14 +50,15 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v3 34/71] target/riscv: rvv-1.0: element index instruction
-Date: Thu,  6 Aug 2020 18:46:31 +0800
-Message-Id: <20200806104709.13235-35-frank.chang@sifive.com>
+Subject: [RFC v3 35/71] target/riscv: rvv-1.0: allow load element with
+ sign-extended
+Date: Thu,  6 Aug 2020 18:46:32 +0800
+Message-Id: <20200806104709.13235-36-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200806104709.13235-1-frank.chang@sifive.com>
 References: <20200806104709.13235-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x434.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,29 +80,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Aug 2020 10:48:48 -0000
+X-List-Received-Date: Thu, 06 Aug 2020 10:48:52 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
+
+For some vector instructions (e.g. vmv.s.x), the element is loaded with
+sign-extended.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn32.decode | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/insn_trans/trans_rvv.inc.c | 26 ++++++++++++++++++-------
+ 1 file changed, 19 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 7a10fc27c5f..15afc469cb0 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -597,7 +597,7 @@ vmsbf_m         010100 . ..... 00001 010 ..... 1010111 @r2_vm
- vmsif_m         010100 . ..... 00011 010 ..... 1010111 @r2_vm
- vmsof_m         010100 . ..... 00010 010 ..... 1010111 @r2_vm
- viota_m         010100 . ..... 10000 010 ..... 1010111 @r2_vm
--vid_v           010110 . 00000 10001 010 ..... 1010111 @r1_vm
-+vid_v           010100 . 00000 10001 010 ..... 1010111 @r1_vm
- vext_x_v        001100 1 ..... ..... 010 ..... 1010111 @r
- vmv_s_x         001101 1 00000 ..... 110 ..... 1010111 @r2
- vfmv_f_s        001100 1 ..... 00000 001 ..... 1010111 @r2rd
+diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+index 62c6b469364..469d0bad056 100644
+--- a/target/riscv/insn_trans/trans_rvv.inc.c
++++ b/target/riscv/insn_trans/trans_rvv.inc.c
+@@ -3041,17 +3041,29 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v *a)
+ /* Integer Extract Instruction */
+ 
+ static void load_element(TCGv_i64 dest, TCGv_ptr base,
+-                         int ofs, int sew)
++                         int ofs, int sew, bool sign)
+ {
+     switch (sew) {
+     case MO_8:
+-        tcg_gen_ld8u_i64(dest, base, ofs);
++        if (!sign) {
++            tcg_gen_ld8u_i64(dest, base, ofs);
++        } else {
++            tcg_gen_ld8s_i64(dest, base, ofs);
++        }
+         break;
+     case MO_16:
+-        tcg_gen_ld16u_i64(dest, base, ofs);
++        if (!sign) {
++            tcg_gen_ld16u_i64(dest, base, ofs);
++        } else {
++            tcg_gen_ld16s_i64(dest, base, ofs);
++        }
+         break;
+     case MO_32:
+-        tcg_gen_ld32u_i64(dest, base, ofs);
++        if (!sign) {
++            tcg_gen_ld32u_i64(dest, base, ofs);
++        } else {
++            tcg_gen_ld32s_i64(dest, base, ofs);
++        }
+         break;
+     case MO_64:
+         tcg_gen_ld_i64(dest, base, ofs);
+@@ -3106,7 +3118,7 @@ static void vec_element_loadx(DisasContext *s, TCGv_i64 dest,
+ 
+     /* Perform the load. */
+     load_element(dest, base,
+-                 vreg_ofs(s, vreg), s->sew);
++                 vreg_ofs(s, vreg), s->sew, false);
+     tcg_temp_free_ptr(base);
+     tcg_temp_free_i32(ofs);
+ 
+@@ -3124,9 +3136,9 @@ static void vec_element_loadx(DisasContext *s, TCGv_i64 dest,
+ }
+ 
+ static void vec_element_loadi(DisasContext *s, TCGv_i64 dest,
+-                              int vreg, int idx)
++                              int vreg, int idx, bool sign)
+ {
+-    load_element(dest, cpu_env, endian_ofs(s, vreg, idx), s->sew);
++    load_element(dest, cpu_env, endian_ofs(s, vreg, idx), s->sew, sign);
+ }
+ 
+ static bool trans_vext_x_v(DisasContext *s, arg_r *a)
 -- 
 2.17.1
 
