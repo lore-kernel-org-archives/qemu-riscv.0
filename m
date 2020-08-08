@@ -1,71 +1,109 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k48uZ-0006yu-Mo
-	for mharc-qemu-riscv@gnu.org; Fri, 07 Aug 2020 16:24:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56804)
+	id 1k4OSJ-0002aq-T6
+	for mharc-qemu-riscv@gnu.org; Sat, 08 Aug 2020 09:00:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53418)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
- id 1k48uX-0006yJ-Px
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2020 16:24:17 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:36106)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
- id 1k48uU-00030l-Sy
- for qemu-riscv@nongnu.org; Fri, 07 Aug 2020 16:24:17 -0400
-Received: by mail-io1-xd42.google.com with SMTP id t15so3166473iob.3
- for <qemu-riscv@nongnu.org>; Fri, 07 Aug 2020 13:24:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=wIBO+1edhTfax9nbowihE0T+Ozo346+VaKPIDCNuOs8=;
- b=eMaRqb+TGbciq1bpCyHVbWYNRyMMckZFdGC72tqu/UvWLRf29A7R/S4vn7Gf4bw9wo
- ruSb06i2U1RB2hSYEnQT4BqEK1csr1gn2NlQvb4QTno2n7qN1Aa4f4wz2YnC3vOAavsm
- FFcnXHGrXKcMTW5jS/fS9pkxoZGPoWQy42pcmvsv+Z+EzmUETuKipQX7I4ynSyEhk41K
- d9GDp08mKtOn5dueWSzZhigtyyQzh3i5XyHRuQ/05uVcp4VKO2NYPr7ot81P/IEbq0UH
- /5d9vEFGlrykM71W2ZoQRRQLbQoN+4tO87F5VZbfJ7yEYT3pvbWApqhKj9wJVX186zGU
- Atrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=wIBO+1edhTfax9nbowihE0T+Ozo346+VaKPIDCNuOs8=;
- b=S4EQyV84eKhIhhFA3mbFTZwzvd+VQ8vA+GWoZLokgl8mfmNoGWKIhGqCReQacbNc66
- rxYY6agPC2YGKXQdAHbeeJncXAyyn/iuPsmGv4ae/CFGleZ6cB5JFU9E6rPkjxZTDLUi
- d2IXbRFVEAoKYy3sv8YtLifVUmlYbkWHjgLzSGTM6B9Dm+/rX4slrsFOfrr/pkyZpU9D
- ABWkPfWK1x/mBFDH7l9XyrK0fSXkPEh3z33Bsz1Xoe3lm3a34Pprtoo0TvoQI1MXMpiH
- cxyagYnj8LrhueyIaarQmMrMPyYqJTyASamRHl2RDz6aj8J7/VkRPU5YlA1+a8mDwcZE
- FCkA==
-X-Gm-Message-State: AOAM531wgSUNpl58i90Tqs7b2qe+aDdzM9Em5fZGp4KkwRKeqHdUoky3
- pa8PEb9ErBGoFYPLrbchmkuA+VKrsUiA9cBI1PiSKA==
-X-Google-Smtp-Source: ABdhPJx25KGEVk2ghIjvf/j0LcVFkHN2xWRE+amHwbu840CEIwluD5YyY07fD0WByBEWN7rP2nXZ2VNPv527zSftCNM=
-X-Received: by 2002:a6b:f911:: with SMTP id j17mr6010056iog.96.1596831853098; 
- Fri, 07 Aug 2020 13:24:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <weiying_hou@outlook.com>)
+ id 1k4HHq-0007op-6a; Sat, 08 Aug 2020 01:20:54 -0400
+Received: from mail-oln040092253026.outbound.protection.outlook.com
+ ([40.92.253.26]:6035 helo=APC01-SG2-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <weiying_hou@outlook.com>)
+ id 1k4HHo-0003EI-HF; Sat, 08 Aug 2020 01:20:53 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=kS3T6869WkAZa9m8PAMVxIJNPxWO2bKickl0qavP+dFBJ4CPy4wBX6f1aa5fCk4k9Rt15mWKNJm/cbofkYu9hzvTMkEH6YFwxLkEUqa/076tkjcFWCSulsstPw6Vt54CxYz3JowrRj4XwBLPcJmLPIij7aemBINtkpotjZDv8LiFUZwosOZQqBv4T2ZqxghMtitTypBaQw9ZigPnVvxGZIja5NPWow5DeVx8jEHnWYoJgrj37SyowymJZTX11Lofs4s2KJd1zsdaBJPlizzi5hlxJJjgcLq0VQEEaytPVo6XoDWFM4qEWm7Z55UskLTR/yksnNwrptkKxLs7Y98m/g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Y9e/eHh2eUxi/aXJLtQZjs59sug1p6gsWr7t02S4niM=;
+ b=N3WC+sk1vrsh3rFfDH52D4bv83nMxB+qIVupbBppjA5z7D08Mi1godUF5Qx9sLvAGQHI/Mf07IvIDE5pTDvoHT+7rds3wGhhjcu9kGQ2Pna0s0YnyK3YzvjvOQ5jLuGbNYPPDsO5RhEhhuo7Z3pBFpuYv7R938zKoNbsJc/3NL6FdEY3hDHfe/jIvGAvohJEOFiWdt1d6X7SCGsb3lORafQKocGvoQKwr8kwUUwoJRoE1E0cIoMBh0Se0MVZuEST2H69iB3flwyuQq44K8nXZY5G7IBhesY75sEb7dGTcjJuICMS1h4Kbpy6WoxiqeIFEafr+m7jSNKhlQNAXPCAOg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Y9e/eHh2eUxi/aXJLtQZjs59sug1p6gsWr7t02S4niM=;
+ b=GLqbaeShnreu271hyG0EDZgt8BrDl00ZQwwcn87sAO+WojyNoHh6aMn4LFPfomT4Qt/STefl9auEUv7zoapYD2SThDPCnquAYZkj77Lx2ESS72ChAgUI30ek+POu1WfcDsCGeJffmRSqUqgNYuS60Yk+ZueOO2FCYt4vfoXZQ97LHA4py27CCEjdDqHRqOi9HFohcExIhXBRelPGZ5yKQlvCHhTDs7cD+uX8PYYEhdTbwH2kFrIIlhlS6S0IAJYVKD2Gd8PpNhL9O6+3bw6tUhnFFS5EBkjn5jk0qzO4meEwE7QSMU0IHPZJH4AvEWSaqQWe7WDrAsQUEjkSI7vNpQ==
+Received: from HK2APC01FT029.eop-APC01.prod.protection.outlook.com
+ (2a01:111:e400:7ebc::4c) by
+ HK2APC01HT185.eop-APC01.prod.protection.outlook.com (2a01:111:e400:7ebc::277)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.16; Sat, 8 Aug
+ 2020 05:20:42 +0000
+Received: from SG2PR02MB2634.apcprd02.prod.outlook.com
+ (2a01:111:e400:7ebc::53) by HK2APC01FT029.mail.protection.outlook.com
+ (2a01:111:e400:7ebc::195) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.16 via Frontend
+ Transport; Sat, 8 Aug 2020 05:20:41 +0000
+X-IncomingTopHeaderMarker: OriginalChecksum:4609F4C2EB12B9FE654E253DE08CD92D385379B642D5DF352591BC0641D4220C;
+ UpperCasedChecksum:7D62A51B6E5CFBCF8F5AC4A5C2992272E61731603618BEFC4F328D6C0E3CE1C2;
+ SizeAsReceived:7674; Count:49
+Received: from SG2PR02MB2634.apcprd02.prod.outlook.com
+ ([fe80::8f0:37c7:286c:1725]) by SG2PR02MB2634.apcprd02.prod.outlook.com
+ ([fe80::8f0:37c7:286c:1725%5]) with mapi id 15.20.3261.022; Sat, 8 Aug 2020
+ 05:20:41 +0000
+From: Hou Weiying <weiying_hou@outlook.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, Hongzheng-Li <Ethan.Lee.QNL@gmail.com>,
+ Myriad-Dreamin <camiyoru@gmail.com>
+Subject: [PATCH 3/4] Add ePMP CSR accesses
+Date: Sat,  8 Aug 2020 13:20:30 +0800
+Message-ID: <SG2PR02MB2634629878DEAAEC3C8F13D693460@SG2PR02MB2634.apcprd02.prod.outlook.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200808052031.19523-1-weiying_hou@outlook.com>
+References: <20200808052031.19523-1-weiying_hou@outlook.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: HKAPR03CA0012.apcprd03.prod.outlook.com
+ (2603:1096:203:c8::17) To SG2PR02MB2634.apcprd02.prod.outlook.com
+ (2603:1096:4:51::19)
+X-Microsoft-Original-Message-ID: <20200808052031.19523-4-weiying_hou@outlook.com>
 MIME-Version: 1.0
-References: <20200724002807.441147-1-richard.henderson@linaro.org>
- <20200724002807.441147-6-richard.henderson@linaro.org>
-In-Reply-To: <20200724002807.441147-6-richard.henderson@linaro.org>
-From: Chih-Min Chao <chihmin.chao@sifive.com>
-Date: Sat, 8 Aug 2020 04:24:02 +0800
-Message-ID: <CAEiOBXVac0bFSZCrh_rhZbLVC7DGVwBe+D6YF90HQy1K-8wfYQ@mail.gmail.com>
-Subject: Re: [PATCH v2 5/7] target/riscv: Check nanboxed inputs in
- trans_rvf.inc.c
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Frank Chang <frank.chang@sifive.com>, 
- Alistair Francis <alistair23@gmail.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- liuzhiwei <zhiwei_liu@c-sky.com>
-Content-Type: multipart/alternative; boundary="0000000000005edfaf05ac4f6390"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=chihmin.chao@sifive.com; helo=mail-io1-xd42.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost.localdomain (223.89.141.129) by
+ HKAPR03CA0012.apcprd03.prod.outlook.com (2603:1096:203:c8::17) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3283.7 via Frontend Transport; Sat, 8 Aug 2020 05:20:40 +0000
+X-Mailer: git-send-email 2.20.1
+X-Microsoft-Original-Message-ID: <20200808052031.19523-4-weiying_hou@outlook.com>
+X-TMN: [eVH/KVaYKtbjqk6dri6NhB+oII+/9cFf]
+X-MS-PublicTrafficType: Email
+X-IncomingHeaderCount: 49
+X-EOPAttributedMessage: 0
+X-MS-Office365-Filtering-Correlation-Id: 4d69a239-c53e-4e03-aa62-08d83b5acb23
+X-MS-TrafficTypeDiagnostic: HK2APC01HT185:
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: FMbIrGxoVK6RzI+QnPaxa1EKeJzmkKLuj/fHd081CA37scH8dDKyVKDDxshHAGKrVIYK55gZe+FHtPy9T01qLLTBHAsboQUdSoWnXpBIoqF9tWHckLROfgLCcpIVbMUoUcWCPAOzHe9swU5VyDv1pLi5FCqHTau6r6gpLp0QCquYrM1T5GpwuKK0ZtDwKO2kZaID4QCOyJTZNUSu3IadOw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:0; SRV:;
+ IPV:NLI; SFV:NSPM; H:SG2PR02MB2634.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:; SFS:; DIR:OUT; SFP:1901; 
+X-MS-Exchange-AntiSpam-MessageData: swsS1MDqZaJ/JMxmyow1TXVu7wiq249vjhNboYEkTxKEKLHaKtzvcaz1C5nvIN/ABTngCCgSO8/wFeHnWRPnirLtEE0JnP7ByijaZ6OFkv9oMnVO1J+XRDw68P0Ce3wOmpApbHb1a9mO2cZNTb8AGw==
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4d69a239-c53e-4e03-aa62-08d83b5acb23
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2020 05:20:41.8904 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: HK2APC01FT029.eop-APC01.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HK2APC01HT185
+Received-SPF: pass client-ip=40.92.253.26;
+ envelope-from=weiying_hou@outlook.com;
+ helo=APC01-SG2-obe.outbound.protection.outlook.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/08 01:20:42
+X-ACL-Warn: Detected OS   = Windows NT kernel [generic] [fuzzy]
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ MSGID_FROM_MTA_HEADER=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-1,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Sat, 08 Aug 2020 09:00:07 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,383 +115,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Aug 2020 20:24:18 -0000
+X-List-Received-Date: Sat, 08 Aug 2020 05:20:54 -0000
 
---0000000000005edfaf05ac4f6390
-Content-Type: text/plain; charset="UTF-8"
+Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
+Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
+Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
+---
+ target/riscv/csr.c | 18 ++++++++++++++++++
+ target/riscv/pmp.c | 40 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
 
-On Fri, Jul 24, 2020 at 8:28 AM Richard Henderson <
-richard.henderson@linaro.org> wrote:
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 11d184cd16..e2395e3a51 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -112,6 +112,11 @@ static int hmode(CPURISCVState *env, int csrno)
+     return -1;
+ }
+ 
++static int epmp(CPURISCVState *env, int csrno)
++{
++    return -!(env->priv == PRV_M && riscv_feature(env, RISCV_FEATURE_EPMP));
++}
++
+ static int pmp(CPURISCVState *env, int csrno)
+ {
+     return -!riscv_feature(env, RISCV_FEATURE_PMP);
+@@ -1160,6 +1165,18 @@ static int write_pmpaddr(CPURISCVState *env, int csrno, target_ulong val)
+     return 0;
+ }
+ 
++static int read_mseccfg(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = mseccfg_csr_read(env);
++    return 0;
++}
++
++static int write_mseccfg(CPURISCVState *env, int csrno, target_ulong val)
++{
++    mseccfg_csr_write(env, val);
++    return 0;
++}
++
+ #endif
+ 
+ /*
+@@ -1368,6 +1385,7 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_MTINST] =              { hmode,   read_mtinst,      write_mtinst     },
+ 
+     /* Physical Memory Protection */
++    [CSR_MSECCFG] =             { epmp,    read_mseccfg,     write_mseccfg    },
+     [CSR_PMPCFG0  ... CSR_PMPADDR9] =  { pmp,   read_pmpcfg,  write_pmpcfg   },
+     [CSR_PMPADDR0 ... CSR_PMPADDR15] = { pmp,   read_pmpaddr, write_pmpaddr  },
+ 
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 8df389cecd..0eabaf690c 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -490,3 +490,43 @@ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
+ 
+     return val;
+ }
++
++
++/*
++ * Handle a write to a mseccfg CSR
++ */
++void mseccfg_csr_write(CPURISCVState *env, target_ulong val)
++{
++    int i;
++
++    if (!MSECCFG_RLB_ISSET(env)) {
++        for (i = 0; i < MAX_RISCV_PMPS; i++) {
++            if (pmp_is_locked(env, i)) {
++                /*
++                 * Now that mseccfg.rlb is zero
++                 * the value of mseccfg.rlb should be locked.
++                 */
++                val &= ~MSECCFG_RLB;
++                break;
++            }
++        }
++    }
++
++    /*
++     * sticky bit
++     */
++    val |= (env->mseccfg & (MSECCFG_MMWP | MSECCFG_MML));
++
++    env->mseccfg = val;
++    trace_mseccfg_csr_write(env->mhartid, val);
++}
++
++
++/*
++ * Handle a read from a mseccfg CSR
++ */
++target_ulong mseccfg_csr_read(CPURISCVState *env)
++{
++    trace_mseccfg_csr_read(env->mhartid, env->mseccfg);
++    return env->mseccfg;
++}
+-- 
+2.20.1
 
-> If a 32-bit input is not properly nanboxed, then the input is replaced
-> with the default qnan.  The only inline expansion is for the sign-changing
-> set of instructions: FSGNJ.S, FSGNJX.S, FSGNJN.S.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  target/riscv/insn_trans/trans_rvf.inc.c | 71 +++++++++++++++++++------
->  target/riscv/translate.c                | 18 +++++++
->  2 files changed, 73 insertions(+), 16 deletions(-)
->
-> diff --git a/target/riscv/insn_trans/trans_rvf.inc.c
-> b/target/riscv/insn_trans/trans_rvf.inc.c
-> index 264d3139f1..f9a9e0643a 100644
-> --- a/target/riscv/insn_trans/trans_rvf.inc.c
-> +++ b/target/riscv/insn_trans/trans_rvf.inc.c
-> @@ -161,47 +161,86 @@ static bool trans_fsgnj_s(DisasContext *ctx,
-> arg_fsgnj_s *a)
->  {
->      REQUIRE_FPU;
->      REQUIRE_EXT(ctx, RVF);
-> +
->      if (a->rs1 == a->rs2) { /* FMOV */
-> -        tcg_gen_mov_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
-> +        gen_check_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
->      } else { /* FSGNJ */
-> -        tcg_gen_deposit_i64(cpu_fpr[a->rd], cpu_fpr[a->rs2],
-> cpu_fpr[a->rs1],
-> -                            0, 31);
-> +        TCGv_i64 rs1 = tcg_temp_new_i64();
-> +        TCGv_i64 rs2 = tcg_temp_new_i64();
-> +
-> +        gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
-> +        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
-> +
-> +        /* This formulation retains the nanboxing of rs2. */
-> +        tcg_gen_deposit_i64(cpu_fpr[a->rd], rs2, rs1, 0, 31);
-> +        tcg_temp_free_i64(rs1);
-> +        tcg_temp_free_i64(rs2);
->      }
-> -    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
->      mark_fs_dirty(ctx);
->      return true;
->  }
->
->  static bool trans_fsgnjn_s(DisasContext *ctx, arg_fsgnjn_s *a)
->  {
-> +    TCGv_i64 rs1, rs2, mask;
-> +
->      REQUIRE_FPU;
->      REQUIRE_EXT(ctx, RVF);
-> +
-> +    rs1 = tcg_temp_new_i64();
-> +    gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
-> +
->      if (a->rs1 == a->rs2) { /* FNEG */
-> -        tcg_gen_xori_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], INT32_MIN);
-> +        tcg_gen_xori_i64(cpu_fpr[a->rd], rs1, MAKE_64BIT_MASK(31, 1));
->      } else {
-> -        TCGv_i64 t0 = tcg_temp_new_i64();
-> -        tcg_gen_not_i64(t0, cpu_fpr[a->rs2]);
-> -        tcg_gen_deposit_i64(cpu_fpr[a->rd], t0, cpu_fpr[a->rs1], 0, 31);
-> -        tcg_temp_free_i64(t0);
-> +        rs2 = tcg_temp_new_i64();
-> +        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
-> +
-> +        /*
-> +         * Replace bit 31 in rs1 with inverse in rs2.
-> +         * This formulation retains the nanboxing of rs1.
-> +         */
-> +        mask = tcg_const_i64(~MAKE_64BIT_MASK(31, 1));
-> +        tcg_gen_andc_i64(rs2, mask, rs2);
->
-
-should be
-              tcg_gen_not_i64(rs2, rs2);         // forget to inverse rs2
-              tcg_gen_andc_i64(rs2, rs2, mask);  //mask needs to be
-inverted to get only sign
-
- Chih-Min Chao
-
-> +        tcg_gen_and_i64(rs1, mask, rs1);
-> +        tcg_gen_or_i64(cpu_fpr[a->rd], rs1, rs2);
-> +
-> +        tcg_temp_free_i64(mask);
-> +        tcg_temp_free_i64(rs2);
->      }
-> -    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
-> +    tcg_temp_free_i64(rs1);
-> +
->      mark_fs_dirty(ctx);
->      return true;
->  }
->
->  static bool trans_fsgnjx_s(DisasContext *ctx, arg_fsgnjx_s *a)
->  {
-> +    TCGv_i64 rs1, rs2;
-> +
->      REQUIRE_FPU;
->      REQUIRE_EXT(ctx, RVF);
-> +
-> +    rs1 = tcg_temp_new_i64();
-> +    gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
-> +
->      if (a->rs1 == a->rs2) { /* FABS */
-> -        tcg_gen_andi_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], ~INT32_MIN);
-> +        tcg_gen_andi_i64(cpu_fpr[a->rd], rs1, ~MAKE_64BIT_MASK(31, 1));
->      } else {
-> -        TCGv_i64 t0 = tcg_temp_new_i64();
-> -        tcg_gen_andi_i64(t0, cpu_fpr[a->rs2], INT32_MIN);
-> -        tcg_gen_xor_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], t0);
-> -        tcg_temp_free_i64(t0);
-> +        rs2 = tcg_temp_new_i64();
-> +        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
-> +
-> +        /*
-> +         * Xor bit 31 in rs1 with that in rs2.
-> +         * This formulation retains the nanboxing of rs1.
-> +         */
-> +        tcg_gen_andi_i64(rs2, rs2, MAKE_64BIT_MASK(31, 1));
-> +        tcg_gen_xor_i64(cpu_fpr[a->rd], rs1, rs2);
-> +
-> +        tcg_temp_free_i64(rs2);
->      }
-> -    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
-> +    tcg_temp_free_i64(rs1);
-> +
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 12a746da97..bf35182776 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -101,6 +101,24 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
->      tcg_gen_ori_i64(out, in, MAKE_64BIT_MASK(32, 32));
->  }
->
-> +/*
-> + * A narrow n-bit operation, where n < FLEN, checks that input operands
-> + * are correctly Nan-boxed, i.e., all upper FLEN - n bits are 1.
-> + * If so, the least-significant bits of the input are used, otherwise the
-> + * input value is treated as an n-bit canonical NaN (v2.2 section 9.2).
-> + *
-> + * Here, the result is always nan-boxed, even the canonical nan.
-> + */
-> +static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
-> +{
-> +    TCGv_i64 t_max = tcg_const_i64(0xffffffff00000000ull);
-> +    TCGv_i64 t_nan = tcg_const_i64(0xffffffff7fc00000ull);
-> +
-> +    tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
-> +    tcg_temp_free_i64(t_max);
-> +    tcg_temp_free_i64(t_nan);
-> +}
-> +
->  static void generate_exception(DisasContext *ctx, int excp)
->  {
->      tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
-> --
-> 2.25.1
->
->
->
-
---0000000000005edfaf05ac4f6390
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div><div dir=3D"ltr" class=3D"gmail_sign=
-ature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr">On Fri, Jul 24, =
-2020 at 8:28 AM Richard Henderson &lt;<a href=3D"mailto:richard.henderson@l=
-inaro.org">richard.henderson@linaro.org</a>&gt; wrote:<br></div></div></div=
-></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">If a 32-bit input is not properly nanboxed, then the input is re=
-placed<br>
-with the default qnan.=C2=A0 The only inline expansion is for the sign-chan=
-ging<br>
-set of instructions: FSGNJ.S, FSGNJX.S, FSGNJN.S.<br>
-<br>
-Signed-off-by: Richard Henderson &lt;<a href=3D"mailto:richard.henderson@li=
-naro.org" target=3D"_blank">richard.henderson@linaro.org</a>&gt;<br>
----<br>
-=C2=A0target/riscv/insn_trans/trans_rvf.inc.c | 71 +++++++++++++++++++-----=
--<br>
-=C2=A0target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 | 18 +++++++<br>
-=C2=A02 files changed, 73 insertions(+), 16 deletions(-)<br>
-<br>
-diff --git a/target/riscv/insn_trans/trans_rvf.inc.c b/target/riscv/insn_tr=
-ans/trans_rvf.inc.c<br>
-index 264d3139f1..f9a9e0643a 100644<br>
---- a/target/riscv/insn_trans/trans_rvf.inc.c<br>
-+++ b/target/riscv/insn_trans/trans_rvf.inc.c<br>
-@@ -161,47 +161,86 @@ static bool trans_fsgnj_s(DisasContext *ctx, arg_fsgn=
-j_s *a)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0REQUIRE_FPU;<br>
-=C2=A0 =C2=A0 =C2=A0REQUIRE_EXT(ctx, RVF);<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0if (a-&gt;rs1 =3D=3D a-&gt;rs2) { /* FMOV */<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_mov_i64(cpu_fpr[a-&gt;rd], cpu_fpr[a-&=
-gt;rs1]);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 gen_check_nanbox_s(cpu_fpr[a-&gt;rd], cpu_fpr[=
-a-&gt;rs1]);<br>
-=C2=A0 =C2=A0 =C2=A0} else { /* FSGNJ */<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_deposit_i64(cpu_fpr[a-&gt;rd], cpu_fpr=
-[a-&gt;rs2], cpu_fpr[a-&gt;rs1],<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0, 31);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 TCGv_i64 rs1 =3D tcg_temp_new_i64();<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 TCGv_i64 rs2 =3D tcg_temp_new_i64();<br>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 gen_check_nanbox_s(rs1, cpu_fpr[a-&gt;rs1]);<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 gen_check_nanbox_s(rs2, cpu_fpr[a-&gt;rs2]);<b=
-r>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* This formulation retains the nanboxing of r=
-s2. */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_deposit_i64(cpu_fpr[a-&gt;rd], rs2, rs=
-1, 0, 31);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free_i64(rs1);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free_i64(rs2);<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
--=C2=A0 =C2=A0 gen_nanbox_s(cpu_fpr[a-&gt;rd], cpu_fpr[a-&gt;rd]);<br>
-=C2=A0 =C2=A0 =C2=A0mark_fs_dirty(ctx);<br>
-=C2=A0 =C2=A0 =C2=A0return true;<br>
-=C2=A0}<br>
-<br>
-=C2=A0static bool trans_fsgnjn_s(DisasContext *ctx, arg_fsgnjn_s *a)<br>
-=C2=A0{<br>
-+=C2=A0 =C2=A0 TCGv_i64 rs1, rs2, mask;<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0REQUIRE_FPU;<br>
-=C2=A0 =C2=A0 =C2=A0REQUIRE_EXT(ctx, RVF);<br>
-+<br>
-+=C2=A0 =C2=A0 rs1 =3D tcg_temp_new_i64();<br>
-+=C2=A0 =C2=A0 gen_check_nanbox_s(rs1, cpu_fpr[a-&gt;rs1]);<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0if (a-&gt;rs1 =3D=3D a-&gt;rs2) { /* FNEG */<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_xori_i64(cpu_fpr[a-&gt;rd], cpu_fpr[a-=
-&gt;rs1], INT32_MIN);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_xori_i64(cpu_fpr[a-&gt;rd], rs1, MAKE_=
-64BIT_MASK(31, 1));<br>
-=C2=A0 =C2=A0 =C2=A0} else {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 TCGv_i64 t0 =3D tcg_temp_new_i64();<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_not_i64(t0, cpu_fpr[a-&gt;rs2]);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_deposit_i64(cpu_fpr[a-&gt;rd], t0, cpu=
-_fpr[a-&gt;rs1], 0, 31);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free_i64(t0);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 rs2 =3D tcg_temp_new_i64();<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 gen_check_nanbox_s(rs2, cpu_fpr[a-&gt;rs2]);<b=
-r>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Replace bit 31 in rs1 with inverse in =
-rs2.<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* This formulation retains the nanboxing=
- of rs1.<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 mask =3D tcg_const_i64(~MAKE_64BIT_MASK(31, 1)=
-);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_andc_i64(rs2, mask, rs2);<br></blockqu=
-ote><div><br></div><div>should be=C2=A0</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_not_i64(rs2, rs2);=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0// forget to inverse rs2</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 tcg_gen_andc_i64(rs2, rs2, mask);=C2=A0 //mask needs t=
-o be inverted to get only sign</div><div><br></div><div>=C2=A0Chih-Min Chao=
-<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_and_i64(rs1, mask, rs1);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_or_i64(cpu_fpr[a-&gt;rd], rs1, rs2);<b=
-r>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free_i64(mask);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free_i64(rs2);<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
--=C2=A0 =C2=A0 gen_nanbox_s(cpu_fpr[a-&gt;rd], cpu_fpr[a-&gt;rd]);<br>
-+=C2=A0 =C2=A0 tcg_temp_free_i64(rs1);<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0mark_fs_dirty(ctx);<br>
-=C2=A0 =C2=A0 =C2=A0return true;<br>
-=C2=A0}<br>
-<br>
-=C2=A0static bool trans_fsgnjx_s(DisasContext *ctx, arg_fsgnjx_s *a)<br>
-=C2=A0{<br>
-+=C2=A0 =C2=A0 TCGv_i64 rs1, rs2;<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0REQUIRE_FPU;<br>
-=C2=A0 =C2=A0 =C2=A0REQUIRE_EXT(ctx, RVF);<br>
-+<br>
-+=C2=A0 =C2=A0 rs1 =3D tcg_temp_new_i64();<br>
-+=C2=A0 =C2=A0 gen_check_nanbox_s(rs1, cpu_fpr[a-&gt;rs1]);<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0if (a-&gt;rs1 =3D=3D a-&gt;rs2) { /* FABS */<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_andi_i64(cpu_fpr[a-&gt;rd], cpu_fpr[a-=
-&gt;rs1], ~INT32_MIN);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_andi_i64(cpu_fpr[a-&gt;rd], rs1, ~MAKE=
-_64BIT_MASK(31, 1));<br>
-=C2=A0 =C2=A0 =C2=A0} else {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 TCGv_i64 t0 =3D tcg_temp_new_i64();<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_andi_i64(t0, cpu_fpr[a-&gt;rs2], INT32=
-_MIN);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_xor_i64(cpu_fpr[a-&gt;rd], cpu_fpr[a-&=
-gt;rs1], t0);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free_i64(t0);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 rs2 =3D tcg_temp_new_i64();<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 gen_check_nanbox_s(rs2, cpu_fpr[a-&gt;rs2]);<b=
-r>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Xor bit 31 in rs1 with that in rs2.<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* This formulation retains the nanboxing=
- of rs1.<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_andi_i64(rs2, rs2, MAKE_64BIT_MASK(31,=
- 1));<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_xor_i64(cpu_fpr[a-&gt;rd], rs1, rs2);<=
-br>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free_i64(rs2);<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
--=C2=A0 =C2=A0 gen_nanbox_s(cpu_fpr[a-&gt;rd], cpu_fpr[a-&gt;rd]);<br>
-+=C2=A0 =C2=A0 tcg_temp_free_i64(rs1);<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0mark_fs_dirty(ctx);<br>
-=C2=A0 =C2=A0 =C2=A0return true;<br>
-=C2=A0}<br>
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c<br>
-index 12a746da97..bf35182776 100644<br>
---- a/target/riscv/translate.c<br>
-+++ b/target/riscv/translate.c<br>
-@@ -101,6 +101,24 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)<br=
->
-=C2=A0 =C2=A0 =C2=A0tcg_gen_ori_i64(out, in, MAKE_64BIT_MASK(32, 32));<br>
-=C2=A0}<br>
-<br>
-+/*<br>
-+ * A narrow n-bit operation, where n &lt; FLEN, checks that input operands=
-<br>
-+ * are correctly Nan-boxed, i.e., all upper FLEN - n bits are 1.<br>
-+ * If so, the least-significant bits of the input are used, otherwise the<=
-br>
-+ * input value is treated as an n-bit canonical NaN (v2.2 section 9.2).<br=
->
-+ *<br>
-+ * Here, the result is always nan-boxed, even the canonical nan.<br>
-+ */<br>
-+static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)<br>
-+{<br>
-+=C2=A0 =C2=A0 TCGv_i64 t_max =3D tcg_const_i64(0xffffffff00000000ull);<br>
-+=C2=A0 =C2=A0 TCGv_i64 t_nan =3D tcg_const_i64(0xffffffff7fc00000ull);<br>
-+<br>
-+=C2=A0 =C2=A0 tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan)=
-;<br>
-+=C2=A0 =C2=A0 tcg_temp_free_i64(t_max);<br>
-+=C2=A0 =C2=A0 tcg_temp_free_i64(t_nan);<br>
-+}<br>
-+<br>
-=C2=A0static void generate_exception(DisasContext *ctx, int excp)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0tcg_gen_movi_tl(cpu_pc, ctx-&gt;base.pc_next);<br>
--- <br>
-2.25.1<br>
-<br>
-<br>
-</blockquote></div></div>
-
---0000000000005edfaf05ac4f6390--
 
