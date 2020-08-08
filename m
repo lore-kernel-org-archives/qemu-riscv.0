@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k4OSN-0002f9-0m
+	id 1k4OSN-0002fZ-9u
 	for mharc-qemu-riscv@gnu.org; Sat, 08 Aug 2020 09:00:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51764)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51788)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <weiying_hou@outlook.com>)
- id 1k4Kf7-0007Kq-Lx; Sat, 08 Aug 2020 04:57:09 -0400
-Received: from mail-oln040092254107.outbound.protection.outlook.com
- ([40.92.254.107]:24426 helo=APC01-PU1-obe.outbound.protection.outlook.com)
+ id 1k4Kf9-0007Ld-Pg; Sat, 08 Aug 2020 04:57:11 -0400
+Received: from mail-oln040092254059.outbound.protection.outlook.com
+ ([40.92.254.59]:23424 helo=APC01-PU1-obe.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <weiying_hou@outlook.com>)
- id 1k4Kf6-0007EX-2O; Sat, 08 Aug 2020 04:57:09 -0400
+ id 1k4Kf7-0007Ef-C4; Sat, 08 Aug 2020 04:57:11 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fL/gN4hCxCD4EYBHlSrDypwzyoTTlS/YrUoeh70rGGwqV6Rg3MG/caqwjptgMGRUaQ3f8yOP5ZXilUizfq1w5jjIEEk/fRQkmO9lQEJ2MI4cOahRMWfCb/kGuH2rHhJPRBdthbyAyNX5josmdxxiwSZgEghHM4UqJM/R56WEsgOssqYiJt/InLjyZzvIUugyoxT6qCHJy9e3BHYl6gg/cOmlfOUGSTRgzMXAUfoF8wGGsASTbmyM7d3ei3jCOQeuI0NSRyVfaeNUFwUCPd9gAcbwqFWcxIsbAWhMHbq9qJtpGiUVgoOMQqdBmIzORZ2CXwimVo8A1bJu/6ytCJf47g==
+ b=RG9ClTzgwg9bM09Mdr1I4N19GJ7C3icvbS8sd7XuFFjc3kyVZgyLg5RHTQztChcz2uxQQeyaBQnop/0kwClKFyWK3/qblA9wLR0pKK3Q8rJEkwgnSgTCZkvS/N27PyqvmkSKAqeRT7//TNKIMy9i5YnZ2M5Dnz1OvCl5qJxILdfJNZoaVfX1gpmas/4CtnNbxKsJObENLF2rRseb9+RG891ZvmiH473+DnyCbNW1WWISHhnStZWzMtAkVp68Hiv6e2HmbIlyu7NLowqEzD7HkV2haOtOLieqDzYOj3qZ1u5qbqYNNq/YL7dk6leQpVdGsH64CFqfgkWIier+A0jYZw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KJQp5LnvRu+Lsc3qDb6WkZP4+QwKlHSumw/vknLoROs=;
- b=SOLVWPTpjEAwJ2Qo3gduhIxsaiSW+A4b5DG/uvgOgZD7PZMFmfYjsCDqgLK6tuWfH1fPUxUelSFVd1A2B/YWtIfT70CXm1TydDOVOtQ19hiGlOJXXeFBSVnlKo5H4dRbHcuR6oxDBHG/X0fM3YbD4e/QnRxpTzMJyXO+8Y4hqt2tJ8aKmkzrC5C1rE6XIst6VrkAQfLqNXO1gzN+K8AeZau+2F0FfrjRk9id85+imDco9vonFWXuulnCJrPMHSCIqXDZKLmFUcFt/noUhpxxzHOVIquF2HxWYUcSEMqtKKwHZy9tu4gMO7zaqaYCvqcpOtZ1Lf4ULQ3LMvzj8PwuVA==
+ bh=4WKS20sgAIub+ADs2QizCC26J4BbnDH98WrRZWpLpqc=;
+ b=E6T9E0Z+GZW1ozKEtVh1tEkNTY8c/ZIXyRiXq4ffC/5JdYa4476bcy9fdWzWuTyIwirC3Wq2YKZhAoB8gcKggB1w4mTCaEMqiYyIvXHK/WnFXPZuBHwWBUIlSyOb7BAyRJq5toPsiDKF3EOyFURNGaQV0FQOD53DpJXEi77L1go8gzMS7XUhxlLgF8u67CoaSP1ddOkgpwZZN14J9XVNcNIEAQS+FD21Rn0xYrArkKSFrbFwaUZ2gTOMmEbtrqF+2UfPJCKK55WEAfuShPKE0+p/K063ivCxu+cvlJg2bzxpUh97+337ZKBPTcDOuDHeJP6/kdCuLRrZ9GlbNOhASg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KJQp5LnvRu+Lsc3qDb6WkZP4+QwKlHSumw/vknLoROs=;
- b=cLR2UTFlDvMmHkux8ONTNCNTi8EF2ff+YQsDrXzJDEubhpzpJIZKDHgBT12d/caTLHMzhhJqBN+bq5Fwy7aDI8pDQZtXgMeRncGcnh79Uhxc7kPALCn8KKI28q3DayeR/J1mJRey4fBeGuGVn9UpEJAAEhUeJm6ZrMJCrUf9J1dESi9CVfZ+fcgEQDCbYyw3l7OQobLkWp5Nbwd5YLOBQDoxhW1KTaE1eaYJbnAtI3SxqvvhuoQYM2CwNU5VnwIRW6Bwm/unkLvpDyVCb/X0rhpFQfXPodsUwrdcGM9kVQ43LJhwMO1lOBXnFX59EJDk8BHVflzOym/vwPkXENF5lw==
+ bh=4WKS20sgAIub+ADs2QizCC26J4BbnDH98WrRZWpLpqc=;
+ b=ksjDl/DzL1nrCHiGOG5Tjh2gM+6Flr/XRNoHIFuHCChZg7cF2EGaojinfPLT5JC3IxcGN4LAUZmFhenioLGJu1ipVYMmLf1o8H7F4sHnW3gY+Oj+sx71D8gr8kxF8Dvf6kmz2TYtnvZfjYh27gmrsxjKTxDOThhdGojs1WE38fmYzm5tQpHGyUg4YFl9tiCmkEAy3cw1S7I0gAEDIKICLZ4ZU5SZt+gvdwD79TR5G5l77zRgYJrxGz7dQgyD0G6x67Pto//GPnDbcgz/Wa0YNosT/IoSfGv9DHmYnRy11eqHbb6NYa94KXSxNhuk0cbHLTPboo4JIXREkYqH2+iGag==
 Received: from SG2APC01FT013.eop-APC01.prod.protection.outlook.com
  (2a01:111:e400:7ebd::4e) by
- SG2APC01HT185.eop-APC01.prod.protection.outlook.com (2a01:111:e400:7ebd::490)
+ SG2APC01HT112.eop-APC01.prod.protection.outlook.com (2a01:111:e400:7ebd::482)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.16; Sat, 8 Aug
- 2020 08:57:01 +0000
+ 2020 08:57:03 +0000
 Received: from SG2PR02MB2634.apcprd02.prod.outlook.com
  (2a01:111:e400:7ebd::50) by SG2APC01FT013.mail.protection.outlook.com
  (2a01:111:e400:7ebd::186) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.16 via Frontend
- Transport; Sat, 8 Aug 2020 08:57:01 +0000
-X-IncomingTopHeaderMarker: OriginalChecksum:835953886FF168CC6568EB48102B22A518D0BCD904788524F2572CC3DFB406B5;
- UpperCasedChecksum:4DA4250BA31A39961CA0B5F22FDD621175A9D3B7DC6D7DD512E4912CD2401C6B;
- SizeAsReceived:7680; Count:49
+ Transport; Sat, 8 Aug 2020 08:57:03 +0000
+X-IncomingTopHeaderMarker: OriginalChecksum:243E6BB9C7FE0549273AC91AD2CE8335A6C9A63CDF6AAE8862719ACBE314CD18;
+ UpperCasedChecksum:2A03CA610377C441756DFBE12EE263BF20223467828BD91D1F4087A77940F9A9;
+ SizeAsReceived:7706; Count:49
 Received: from SG2PR02MB2634.apcprd02.prod.outlook.com
  ([fe80::8f0:37c7:286c:1725]) by SG2PR02MB2634.apcprd02.prod.outlook.com
  ([fe80::8f0:37c7:286c:1725%5]) with mapi id 15.20.3261.022; Sat, 8 Aug 2020
- 08:57:01 +0000
+ 08:57:03 +0000
 From: Hou Weiying <weiying_hou@outlook.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, Hongzheng-Li <Ethan.Lee.QNL@gmail.com>,
  Myriad-Dreamin <camiyoru@gmail.com>
-Subject: [PATCH 1/4] Define ePMP mseccfg
-Date: Sat,  8 Aug 2020 16:56:53 +0800
-Message-ID: <SG2PR02MB2634F136E13C28B7640BB0EE93460@SG2PR02MB2634.apcprd02.prod.outlook.com>
+Subject: [PATCH 2/4] Implementation of enhanced PMP(ePMP) support
+Date: Sat,  8 Aug 2020 16:56:54 +0800
+Message-ID: <SG2PR02MB2634E856FCAC7A6DCAE5ACBC93460@SG2PR02MB2634.apcprd02.prod.outlook.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200808085656.28692-1-weiying_hou@outlook.com>
 References: <20200808085656.28692-1-weiying_hou@outlook.com>
@@ -59,41 +59,41 @@ Content-Type: text/plain
 X-ClientProxiedBy: HK2PR02CA0187.apcprd02.prod.outlook.com
  (2603:1096:201:21::23) To SG2PR02MB2634.apcprd02.prod.outlook.com
  (2603:1096:4:51::19)
-X-Microsoft-Original-Message-ID: <20200808085656.28692-2-weiying_hou@outlook.com>
+X-Microsoft-Original-Message-ID: <20200808085656.28692-3-weiying_hou@outlook.com>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from localhost.localdomain (223.89.139.46) by
  HK2PR02CA0187.apcprd02.prod.outlook.com (2603:1096:201:21::23) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3261.15 via Frontend Transport; Sat, 8 Aug 2020 08:57:00 +0000
+ 15.20.3261.15 via Frontend Transport; Sat, 8 Aug 2020 08:57:01 +0000
 X-Mailer: git-send-email 2.20.1
-X-Microsoft-Original-Message-ID: <20200808085656.28692-2-weiying_hou@outlook.com>
-X-TMN: [8kW9kcGlDXGmF7BULfAome0wr/TZ6MJD]
+X-Microsoft-Original-Message-ID: <20200808085656.28692-3-weiying_hou@outlook.com>
+X-TMN: [ue/a59dyS4TiXuvaoi6DtNS/Ttx69Txs]
 X-MS-PublicTrafficType: Email
 X-IncomingHeaderCount: 49
 X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-Correlation-Id: 81e24c93-1979-448b-c975-08d83b7903c0
-X-MS-TrafficTypeDiagnostic: SG2APC01HT185:
+X-MS-Office365-Filtering-Correlation-Id: fe16cff1-e424-46f7-cea5-08d83b7904b9
+X-MS-TrafficTypeDiagnostic: SG2APC01HT112:
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: F5YadmqkQAQKlMgvz/qFF9qbMO//3jtE6kQxpQr0azgh4w/7rCqjZqTsE354sgbG5CznfUeMVkO801RMLMGjdVuLdLnKLqARe0MBksCzmYHLzKmnoWswTARd1Rx/luIJ+NLiLnNcBIfqpLAlSZNNk6uYrXjMEFIpeK+gLJeNvwg4apAV1qKlzzw5Fn9Z74ItlyH8ctodGaZcDd+YpvA8tg==
+X-Microsoft-Antispam-Message-Info: 5gnRDYgOERxQ3VEuQOxgmYWMUgqoWxxCD2VZnEvmNVe5VNbamB80mef9ZJm6Dl5PzlBiBjU+sso2Z7QsQh2oFlONhRZ7IJMV3MhxDOt1MgD6ARkogMA6JpubCSSLSnX1RfTDPNDnNNhnlZs02KYU+/mHbpMXWWL5jeKG4OCdLrVD4VXOPblcIHB5P8zsQfc2yHKaLnTIU6Bz3B9ifsNeb608V9qngw0YB8ayHCsATGZjSYiOyu7KgUypHoR7dOqH
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:0; SRV:;
  IPV:NLI; SFV:NSPM; H:SG2PR02MB2634.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
  SFTY:; SFS:; DIR:OUT; SFP:1901; 
-X-MS-Exchange-AntiSpam-MessageData: jHnZhV9QeN60VcqYi/MZ8pLPhonD7INw27D4v7Rs4gSqVM4aEQLNe5J2qz2xsDu8mQrzyIvXVR4/obYobBDSygUtlChjGA//TGAI6/jtS3wUpz1IeBphI/tJBAi8+1hD4fZlRQAbRpHQlxdgNP367g==
+X-MS-Exchange-AntiSpam-MessageData: YJ7NiahmEOqANkQUFZU3HHIf7zgcUJb6hS/7CTOuGwFXkzk3wcvi0eBh//3hfWIP1t5cgENh3p1scqD5Ixu57YCvrqjmRqy2G4yvcNHTZf9GqchbH2Im7h9bj9JLo6iB84zf+npvmREAG2MUVqQ9JQ==
 X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 81e24c93-1979-448b-c975-08d83b7903c0
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2020 08:57:01.5922 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fe16cff1-e424-46f7-cea5-08d83b7904b9
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2020 08:57:03.7123 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
 X-MS-Exchange-CrossTenant-AuthSource: SG2APC01FT013.eop-APC01.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2APC01HT185
-Received-SPF: pass client-ip=40.92.254.107;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2APC01HT112
+Received-SPF: pass client-ip=40.92.254.59;
  envelope-from=weiying_hou@outlook.com;
  helo=APC01-PU1-obe.outbound.protection.outlook.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/08 04:57:05
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/08 04:57:06
 X-ACL-Warn: Detected OS   = Windows NT kernel [generic] [fuzzy]
 X-Spam_score_int: -30
 X-Spam_score: -3.1
@@ -115,45 +115,244 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Aug 2020 08:57:09 -0000
+X-List-Received-Date: Sat, 08 Aug 2020 08:57:12 -0000
 
-Currently using 0x390 and 0x391 for x-epmp (experimental). This may change in the future spec.
+The ePMP can be found in:
+https://docs.google.com/document/d/1Mh_aiHYxemL0umN3GTTw8vsbmzHZ_nxZXgjgOUzbvc8/edit#heading=h.9wsr1lnxtwe2
 
 Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
 Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
 Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
 ---
- target/riscv/cpu_bits.h | 3 +++
- target/riscv/gdbstub.c  | 2 ++
- 2 files changed, 5 insertions(+)
+ target/riscv/pmp.c        | 134 ++++++++++++++++++++++++++++++++++----
+ target/riscv/pmp.h        |  12 ++++
+ target/riscv/trace-events |   4 ++
+ 3 files changed, 138 insertions(+), 12 deletions(-)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 7f64ee1174..9a8a6be534 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -214,6 +214,9 @@
- #define CSR_MTINST          0x34a
- #define CSR_MTVAL2          0x34b
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 0e6b640fbd..8df389cecd 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -34,6 +34,26 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
+ static uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t addr_index);
+ static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index);
  
-+/* Enhanced PMP */
-+#define CSR_MSECCFG         0x390
-+#define CSR_MSECCFGH        0x391
- /* Physical Memory Protection */
- #define CSR_PMPCFG0         0x3a0
- #define CSR_PMPCFG1         0x3a1
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index eba12a86f2..de5551604a 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -132,6 +132,8 @@ static int csr_register_map[] = {
-     CSR_MIP,
-     CSR_MTINST,
-     CSR_MTVAL2,
-+    CSR_MSECCFG,
-+    CSR_MSECCFGH,
-     CSR_PMPCFG0,
-     CSR_PMPCFG1,
-     CSR_PMPCFG2,
++static char mode_to_char(int mode)
++{
++    char ret = 0;
++    switch (mode) {
++    case PRV_U:
++        ret = 'u';
++        break;
++    case PRV_S:
++        ret = 's';
++        break;
++    case PRV_H:
++        ret = 'h';
++        break;
++    case PRV_M:
++        ret = 'm';
++        break;
++    }
++    return ret;
++}
++
+ /*
+  * Accessor method to extract address matching type 'a field' from cfg reg
+  */
+@@ -99,7 +119,28 @@ static inline uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t pmp_index)
+ static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+ {
+     if (pmp_index < MAX_RISCV_PMPS) {
+-        if (!pmp_is_locked(env, pmp_index)) {
++        /*
++         * mseccfg.RLB is set
++         */
++        if (MSECCFG_RLB_ISSET(env) ||
++            /*
++             * mseccfg.MML is set
++             */
++            (MSECCFG_MML_ISSET(env) &&
++            /*
++             * m model and not adding X bit
++             */
++            (((val & PMP_LOCK) != 0 && (val & PMP_EXEC) != PMP_EXEC) ||
++             /*
++              * shared region and not adding X bit
++              */
++            ((val & PMP_LOCK) != PMP_LOCK &&
++            (val & 0x7) != (PMP_WRITE | PMP_EXEC)))) ||
++            /*
++             * mseccfg.MML is not set
++             */
++            (!MSECCFG_MML_ISSET(env) && !pmp_is_locked(env, pmp_index))
++        ){
+             env->pmp_state.pmp[pmp_index].cfg_reg = val;
+             pmp_update_rule(env, pmp_index);
+         } else {
+@@ -230,6 +271,18 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ 
+     /* Short cut if no rules */
+     if (0 == pmp_get_num_rules(env)) {
++        if (MSECCFG_MMWP_ISSET(env)) {
++            qemu_log_mask(LOG_GUEST_ERROR,
++                          "pmp violation - %c mode access denied\n",
++                          mode_to_char(mode));
++            return false;
++        }
++        if (MSECCFG_MML_ISSET(env) && (mode != PRV_M || (privs & PMP_EXEC))) {
++            qemu_log_mask(LOG_GUEST_ERROR,
++                          "pmp violation - %c mode access denied\n",
++                          mode_to_char(mode));
++            return false;
++        }
+         return true;
+     }
+ 
+@@ -261,16 +314,65 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+         const uint8_t a_field =
+             pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg);
+ 
+-        /*
+-         * If the PMP entry is not off and the address is in range, do the priv
+-         * check
+-         */
+         if (((s + e) == 2) && (PMP_AMATCH_OFF != a_field)) {
+-            allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
+-            if ((mode != PRV_M) || pmp_is_locked(env, i)) {
+-                allowed_privs &= env->pmp_state.pmp[i].cfg_reg;
++            /*
++             * If the PMP entry is not off and the address is in range,
++             * do the priv check
++             */
++            if (!MSECCFG_MML_ISSET(env)) {
++                /*
++                 * If mseccfg.MML Bit is not set, do pmp priv check
++                 */
++                allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
++                if ((mode != PRV_M) || pmp_is_locked(env, i)) {
++                    allowed_privs &= env->pmp_state.pmp[i].cfg_reg;
++                }
++            } else {
++                /*
++                 * If mseccfg.MML Bit set, do the enhanced pmp priv check
++                 */
++                if (env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) {
++                    /*
++                     * Shared Region
++                     */
++                    if ((env->pmp_state.pmp[i].cfg_reg &
++                    (PMP_READ | PMP_WRITE)) == PMP_WRITE) {
++                        allowed_privs = PMP_EXEC | ((mode == PRV_M &&
++                        (env->pmp_state.pmp[i].cfg_reg & PMP_EXEC)) ?
++                        PMP_READ : 0);
++                    } else {
++                        allowed_privs = env->pmp_state.pmp[i].cfg_reg &
++                        (PMP_READ | PMP_WRITE | PMP_EXEC);
++
++                        if (mode != PRV_M && allowed_privs) {
++                            qemu_log_mask(LOG_GUEST_ERROR,
++                                "pmp violation - %c mode access denied\n",
++                                mode_to_char(mode));
++                            ret = 0;
++                            break;
++                        }
++                    }
++                } else {
++                    /*
++                     * Shared Region
++                     */
++                    if ((env->pmp_state.pmp[i].cfg_reg &
++                        (PMP_READ | PMP_WRITE)) == PMP_WRITE) {
++                        allowed_privs = PMP_READ | ((mode == PRV_M ||
++                        (env->pmp_state.pmp[i].cfg_reg & PMP_EXEC)) ?
++                        PMP_WRITE : 0);
++                    } else {
++                        allowed_privs = env->pmp_state.pmp[i].cfg_reg &
++                        (PMP_READ | PMP_WRITE | PMP_EXEC);
++                        if (mode == PRV_M && allowed_privs) {
++                            qemu_log_mask(LOG_GUEST_ERROR,
++                                    "pmp violation - m mode access denied\n");
++                            ret = 0;
++                            break;
++                        }
++                    }
++                }
+             }
+-
+             if ((privs & allowed_privs) == privs) {
+                 ret = 1;
+                 break;
+@@ -284,15 +386,23 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+     /* No rule matched */
+     if (ret == -1) {
+         if (mode == PRV_M) {
+-            ret = 1; /* Privileged spec v1.10 states if no PMP entry matches an
+-                      * M-Mode access, the access succeeds */
++            ret = !MSECCFG_MMWP_ISSET(env); /* PMP Enhancements */
++            if (MSECCFG_MML_ISSET(env) && (privs & PMP_EXEC)) {
++                ret = 0;
++            }
+         } else {
+             ret = 0; /* Other modes are not allowed to succeed if they don't
+                       * match a rule, but there are rules.  We've checked for
+                       * no rule earlier in this function. */
+         }
+     }
+-
++    if (ret) {
++        trace_pmp_hart_has_privs_pass_match(
++            env->mhartid, addr, size, privs, mode);
++    } else {
++        trace_pmp_hart_has_privs_violation(
++            env->mhartid, addr, size, privs, mode);
++    }
+     return ret == 1 ? true : false;
+ }
+ 
+diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+index 8e19793132..7db2069204 100644
+--- a/target/riscv/pmp.h
++++ b/target/riscv/pmp.h
+@@ -36,6 +36,12 @@ typedef enum {
+     PMP_AMATCH_NAPOT /* Naturally aligned power-of-two region */
+ } pmp_am_t;
+ 
++typedef enum {
++    MSECCFG_MML  = 1 << 0,
++    MSECCFG_MMWP = 1 << 1,
++    MSECCFG_RLB  = 1 << 2
++} mseccfg_field_t;
++
+ typedef struct {
+     target_ulong addr_reg;
+     uint8_t  cfg_reg;
+@@ -58,7 +64,13 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index);
+ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+     target_ulong val);
+ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
++void mseccfg_csr_write(CPURISCVState *env, target_ulong val);
++target_ulong mseccfg_csr_read(CPURISCVState *env);
+ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+     target_ulong size, pmp_priv_t priv, target_ulong mode);
+ 
++#define MSECCFG_MML_ISSET(env) get_field(env->mseccfg, MSECCFG_MML)
++#define MSECCFG_MMWP_ISSET(env) get_field(env->mseccfg, MSECCFG_MMWP)
++#define MSECCFG_RLB_ISSET(env) get_field(env->mseccfg, MSECCFG_RLB)
++
+ #endif
+diff --git a/target/riscv/trace-events b/target/riscv/trace-events
+index 4b6c652ae9..4f877f90f7 100644
+--- a/target/riscv/trace-events
++++ b/target/riscv/trace-events
+@@ -6,3 +6,7 @@ pmpcfg_csr_read(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRI
+ pmpcfg_csr_write(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": write reg%" PRIu32", val: 0x%" PRIx64
+ pmpaddr_csr_read(uint64_t mhartid, uint32_t addr_index, uint64_t val) "hart %" PRIu64 ": read addr%" PRIu32", val: 0x%" PRIx64
+ pmpaddr_csr_write(uint64_t mhartid, uint32_t addr_index, uint64_t val) "hart %" PRIu64 ": write addr%" PRIu32", val: 0x%" PRIx64
++mseccfg_csr_read(uint64_t mhartid, uint64_t val) "hart %" PRIu64 ": read mseccfg, val: 0x%" PRIx64
++mseccfg_csr_write(uint64_t mhartid, uint64_t val) "hart %" PRIu64 ": write mseccfg, val: 0x%" PRIx64
++pmp_hart_has_privs_pass_match(uint64_t mhartid, uint64_t addr, uint64_t size, uint64_t privs, uint64_t mode) "hart %"PRId64 "pass PMP 0 match addr:%"PRIu64" size:%"PRIu64 "privs: %"PRIu64 "mode: %"PRIu64
++pmp_hart_has_privs_violation(uint64_t mhartid, uint64_t addr, uint64_t size, uint64_t privs, uint64_t mode) "hart %"PRId64 "pass PMP 0 match addr:%"PRIu64" size:%"PRIu64 "privs: %"PRIu64 "mode: %"PRIu64
 -- 
 2.20.1
 
