@@ -1,54 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k4Xuu-0008Br-JM
-	for mharc-qemu-riscv@gnu.org; Sat, 08 Aug 2020 19:06:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58284)
+	id 1k5GDP-0005ro-0G
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Aug 2020 18:24:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51670)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1k4Xus-0008BX-FB; Sat, 08 Aug 2020 19:06:18 -0400
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:37013)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1k4Xuo-0000l7-MD; Sat, 08 Aug 2020 19:06:18 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.06608262|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.0209824-0.00210163-0.976916;
- FP=0|0|0|0|0|-1|-1|-1; HT=e02c03301; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS;
- RN=6; RT=6; SR=0; TI=SMTPD_---.IEdpYRn_1596927965; 
-Received: from 30.15.222.6(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.IEdpYRn_1596927965)
- by smtp.aliyun-inc.com(10.147.42.197);
- Sun, 09 Aug 2020 07:06:05 +0800
-Subject: Re: [PATCH v2 5/7] target/riscv: Check nanboxed inputs in
- trans_rvf.inc.c
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-To: Chih-Min Chao <chihmin.chao@sifive.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Frank Chang <frank.chang@sifive.com>, Alistair Francis
- <alistair23@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>
-References: <20200724002807.441147-1-richard.henderson@linaro.org>
- <20200724002807.441147-6-richard.henderson@linaro.org>
- <CAEiOBXVac0bFSZCrh_rhZbLVC7DGVwBe+D6YF90HQy1K-8wfYQ@mail.gmail.com>
- <560581be-926e-c303-85a6-b15d4c187ad6@c-sky.com>
-Message-ID: <cd6908d3-75eb-b5ee-35fb-b1d20b9c28d8@c-sky.com>
-Date: Sun, 9 Aug 2020 07:06:05 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1k5GDM-0005qS-PH; Mon, 10 Aug 2020 18:24:20 -0400
+Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:42674)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1k5GDK-0005lj-FN; Mon, 10 Aug 2020 18:24:20 -0400
+Received: by mail-il1-x141.google.com with SMTP id i15so8229028ils.9;
+ Mon, 10 Aug 2020 15:24:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fXwsnB9KmrrNRKEzswdxPfdR+RcPDY96bFi+8GYfWhc=;
+ b=dKv4Ju6V4M2SQU59AoGGHFm2bVhEmsCSNv3EHnHhp2nV9VCGOiFXNng09s3L+u6tSm
+ s5tMan+VROeCvs1yPtMbZY9xLX8A97tNLW9xQPR/mebpKXtcpfbxBLu9kh7WDsBf5SqI
+ OX42uc7if32588ERdlTlr1GxnDiyhXZ/9jfThPbmwwjKQh4ty+EpS3rzrpiOPqHf526K
+ GZSPJE0qZ1qmxlA71UDWjqLEYy86UDyql9PdRmo94Y8WCBjkOP+HPhBR6Whkw9l3XKDE
+ CdXj/syk9xor722bAQV5V49kjHjEedR9We+2VG4gFGC3K4EXLl5xyGzocZjQda5QPbzb
+ bW8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fXwsnB9KmrrNRKEzswdxPfdR+RcPDY96bFi+8GYfWhc=;
+ b=Z53xfU8aVMKobr80DfNP9fOTskSEtBghPHA7+t4eBt/fYqDHSZMYcYfyZ1DL56PRZH
+ zkehTAzPwERzREzfma+WfwLDJWP9NMta38jKs6z8A1GojmibBoGzfSBQn9XDGT3kZuiP
+ eDtyPjpHWDC0REe6Usd3uO6uXwIz3yI35UtJl5G+tjJV/emCKz+bHPzChbeZ+9RLsK6a
+ lTj+2llC7ZTvRwp67cr/1VGhmDhx/xBdfEvkn6hcfaetbTrEW4I63c1pL74AVAi+AS2i
+ e1FYvgY3RcKZnu2jWw4/jb+z51cugbAY54Bx/j7WYkFUcXzPi4d42WwmhN+duTQ0L+F3
+ zK5w==
+X-Gm-Message-State: AOAM532qrzmTe4YWG+6DV5namZuPcGdkhnTcRtVpgRqW90o8WDQVBotK
+ DfXelQ8WFfPCrhKrTiwwAASTjhjtOOx0+X8KhOc=
+X-Google-Smtp-Source: ABdhPJyaZ8jzjIAVIepa6C5h4cR+FWzjO8PhiPhZBBacdOKgN91eympBnFVbP7rOrWwUUAJIcHYLFsrfjJM3jbIOxgk=
+X-Received: by 2002:a05:6e02:f07:: with SMTP id
+ x7mr20253745ilj.40.1597098256432; 
+ Mon, 10 Aug 2020 15:24:16 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <560581be-926e-c303-85a6-b15d4c187ad6@c-sky.com>
-Content-Type: multipart/alternative;
- boundary="------------37494E5E7E4CA08EED0AB2D3"
-Content-Language: en-US
-Received-SPF: none client-ip=121.197.200.217;
- envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/08 19:06:07
-X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20200731024708.32725-1-green.wan@sifive.com>
+ <20200731024708.32725-2-green.wan@sifive.com>
+In-Reply-To: <20200731024708.32725-2-green.wan@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 10 Aug 2020 15:13:53 -0700
+Message-ID: <CAKmqyKP=P92SzwnLh-UmBcvt20_PTjMNZpTVKE6w-KyDd0PDMQ@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 1/2] hw/riscv: sifive_u: Add file-backed OTP.
+To: Green Wan <green.wan@sifive.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -61,490 +77,266 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Aug 2020 23:06:18 -0000
+X-List-Received-Date: Mon, 10 Aug 2020 22:24:21 -0000
 
-This is a multi-part message in MIME format.
---------------37494E5E7E4CA08EED0AB2D3
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+,()On Thu, Jul 30, 2020 at 7:49 PM Green Wan <green.wan@sifive.com> wrote:
+>
+> Add a file-backed implementation for OTP of sifive_u machine. The
+> machine property for file-backed is disabled in default. Do file
+> open, mmap and close for every OTP read/write in case keep the
+> update-to-date snapshot of OTP.
 
+I don't think this is the correct way to write to the file.
 
+QEMU has backends that should do this for you. For example QEMU
+includes the -blockdev/-driver or -mtdblock command line arguments.
 
-On 2020/8/8 22:18, LIU Zhiwei wrote:
+This implementation should look more like an SD card in terms of
+interface. You will probably want to call drive_get_next() (probably
+with IF_MTD, but that's up to you).
+
+The hw/arm/xlnx-zcu102.c file has a good example of attaching an SD
+card by setting the drive property.
+
+Alistair
+
+>
+> Signed-off-by: Green Wan <green.wan@sifive.com>
+> ---
+>  hw/riscv/sifive_u.c             | 26 +++++++++++
+>  hw/riscv/sifive_u_otp.c         | 83 +++++++++++++++++++++++++++++++++
+>  include/hw/riscv/sifive_u.h     |  2 +
+>  include/hw/riscv/sifive_u_otp.h |  1 +
+>  4 files changed, 112 insertions(+)
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index e5682c38a9..c818496918 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -87,6 +87,7 @@ static const struct MemmapEntry {
+>  };
+>
+>  #define OTP_SERIAL          1
+> +#define OTP_FILE            "NULL"
+>  #define GEM_REVISION        0x10070109
+>
+>  static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+> @@ -387,6 +388,8 @@ static void sifive_u_machine_init(MachineState *machine)
+>      object_initialize_child(OBJECT(machine), "soc", &s->soc, TYPE_RISCV_U_SOC);
+>      object_property_set_uint(OBJECT(&s->soc), "serial", s->serial,
+>                               &error_abort);
+> +    object_property_set_str(OBJECT(&s->soc), "otp-file", s->otp_file,
+> +                             &error_abort);
+>      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
+>
+>      /* register RAM */
+> @@ -526,6 +529,21 @@ static void sifive_u_machine_set_uint32_prop(Object *obj, Visitor *v,
+>      visit_type_uint32(v, name, (uint32_t *)opaque, errp);
+>  }
+>
+> +static void sifive_u_machine_get_str_prop(Object *obj, Visitor *v,
+> +                                             const char *name, void *opaque,
+> +                                             Error **errp)
+> +{
+> +    visit_type_str(v, name, (char **)opaque, errp);
+> +}
+> +
+> +static void sifive_u_machine_set_str_prop(Object *obj, Visitor *v,
+> +                                             const char *name, void *opaque,
+> +                                             Error **errp)
+> +{
+> +    visit_type_str(v, name, (char **)opaque, errp);
+> +}
+> +
+> +
+>  static void sifive_u_machine_instance_init(Object *obj)
+>  {
+>      SiFiveUState *s = RISCV_U_MACHINE(obj);
+> @@ -551,6 +569,12 @@ static void sifive_u_machine_instance_init(Object *obj)
+>                          sifive_u_machine_get_uint32_prop,
+>                          sifive_u_machine_set_uint32_prop, NULL, &s->serial);
+>      object_property_set_description(obj, "serial", "Board serial number");
+> +
+> +    s->otp_file = (char *)OTP_FILE;
+> +    object_property_add(obj, "otp-file", "string",
+> +                        sifive_u_machine_get_str_prop,
+> +                        sifive_u_machine_set_str_prop, NULL, &s->otp_file);
+> +    object_property_set_description(obj, "otp-file", "file-backed otp file");
+>  }
+>
+>  static void sifive_u_machine_class_init(ObjectClass *oc, void *data)
+> @@ -709,6 +733,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>      }
+>
+>      qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
+> +    qdev_prop_set_string(DEVICE(&s->otp), "otp-file", s->otp_file);
+>      if (!sysbus_realize(SYS_BUS_DEVICE(&s->otp), errp)) {
+>          return;
+>      }
+> @@ -737,6 +762,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>
+>  static Property sifive_u_soc_props[] = {
+>      DEFINE_PROP_UINT32("serial", SiFiveUSoCState, serial, OTP_SERIAL),
+> +    DEFINE_PROP_STRING("otp-file", SiFiveUSoCState, otp_file),
+>      DEFINE_PROP_END_OF_LIST()
+>  };
+>
+> diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
+> index f6ecbaa2ca..e359f30fdb 100644
+> --- a/hw/riscv/sifive_u_otp.c
+> +++ b/hw/riscv/sifive_u_otp.c
+> @@ -24,6 +24,62 @@
+>  #include "qemu/log.h"
+>  #include "qemu/module.h"
+>  #include "hw/riscv/sifive_u_otp.h"
+> +#include <stdio.h>
+> +#include <stdlib.h>
+> +#include <sys/types.h>
+> +#include <sys/stat.h>
+> +#include <unistd.h>
+> +#include <fcntl.h>
+> +#include <sys/mman.h>
+> +#include <string.h>
+> +
+> +#define TRACE_PREFIX            "FU540_OTP: "
+> +#define SIFIVE_FU540_OTP_SIZE   (SIFIVE_U_OTP_NUM_FUSES * 4)
+> +
+> +static int32_t sifive_u_otp_backed_open(const char *filename, int32_t *fd,
+> +                                        uint32_t **map)
+> +{
+> +    /* open and mmap OTP image file */
+> +    if (filename && strcmp(filename, "NULL") != 0) {
+> +        *fd = open(filename, O_RDWR);
+> +
+> +        if (*fd < 0) {
+> +            qemu_log_mask(LOG_TRACE,
+> +                          TRACE_PREFIX "Warning: can't open otp file<%s>\n",
+> +                          filename);
+> +            return -1;
+> +        } else {
+> +
+> +            *map = (unsigned int *)mmap(0,
+> +                                         SIFIVE_FU540_OTP_SIZE,
+> +                                         PROT_READ | PROT_WRITE | PROT_EXEC,
+> +                                         MAP_FILE | MAP_SHARED,
+> +                                         *fd,
+> +                                         0);
+> +
+> +            if (*map == MAP_FAILED) {
+> +                qemu_log_mask(LOG_TRACE,
+> +                              TRACE_PREFIX "Warning: can't mmap otp file<%s>\n",
+> +                              filename);
+> +                close(*fd);
+> +                return -2;
+> +            }
+> +        }
+> +    } else {
+> +        /* filename is 'NULL' */
+> +        return -3;
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+> +static int32_t sifive_u_otp_backed_close(int fd, unsigned int *map)
+> +{
+> +    munmap(map, SIFIVE_FU540_OTP_SIZE);
+> +    close(fd);
+> +
+> +    return 0;
+> +}
+>
+>  static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
+>  {
+> @@ -46,6 +102,20 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
+>          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
+>              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
+>              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
+> +
+> +            int32_t fd;
+> +            uint32_t *map;
+> +            uint64_t val;
+> +
+> +            /* open and mmap OTP image file */
+> +            if (0 == sifive_u_otp_backed_open(s->otp_file, &fd, &map)) {
+> +                val = (uint64_t)(map[s->pa]);
+> +
+> +                /* close and unmmap */
+> +                sifive_u_otp_backed_close(fd, map);
+> +                return val;
+> +            }
+> +
+>              return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
+>          } else {
+>              return 0xff;
+> @@ -78,6 +148,8 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
+>  {
+>      SiFiveUOTPState *s = opaque;
+>      uint32_t val32 = (uint32_t)val64;
+> +    int32_t fd;
+> +    uint32_t *map;
+>
+>      switch (addr) {
+>      case SIFIVE_U_OTP_PA:
+> @@ -123,6 +195,16 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
+>          s->ptrim = val32;
+>          break;
+>      case SIFIVE_U_OTP_PWE:
+> +        /* open and mmap OTP image file */
+> +        if (0 == sifive_u_otp_backed_open(s->otp_file, &fd, &map)) {
+> +            /* store value */
+> +            map[s->pa] &= ~(s->pdin << s->paio);
+> +            map[s->pa] |= (s->pdin << s->paio);
+> +
+> +            /* close and unmmap */
+> +            sifive_u_otp_backed_close(fd, map);
+> +        }
+> +
+>          s->pwe = val32;
+>          break;
+>      default:
+> @@ -143,6 +225,7 @@ static const MemoryRegionOps sifive_u_otp_ops = {
+>
+>  static Property sifive_u_otp_properties[] = {
+>      DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
+> +    DEFINE_PROP_STRING("otp-file", SiFiveUOTPState, otp_file),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+>
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index aba4d0181f..966723da1d 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -46,6 +46,7 @@ typedef struct SiFiveUSoCState {
+>      CadenceGEMState gem;
+>
+>      uint32_t serial;
+> +    char *otp_file;
+>  } SiFiveUSoCState;
+>
+>  #define TYPE_RISCV_U_MACHINE MACHINE_TYPE_NAME("sifive_u")
+> @@ -65,6 +66,7 @@ typedef struct SiFiveUState {
+>      bool start_in_flash;
+>      uint32_t msel;
+>      uint32_t serial;
+> +    char *otp_file;
+>  } SiFiveUState;
+>
+>  enum {
+> diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
+> index 639297564a..f3d71ce82d 100644
+> --- a/include/hw/riscv/sifive_u_otp.h
+> +++ b/include/hw/riscv/sifive_u_otp.h
+> @@ -75,6 +75,7 @@ typedef struct SiFiveUOTPState {
+>      uint32_t fuse[SIFIVE_U_OTP_NUM_FUSES];
+>      /* config */
+>      uint32_t serial;
+> +    char *otp_file;
+>  } SiFiveUOTPState;
+>
+>  #endif /* HW_SIFIVE_U_OTP_H */
+> --
+> 2.17.1
 >
 >
-> On 2020/8/8 4:24, Chih-Min Chao wrote:
->> On Fri, Jul 24, 2020 at 8:28 AM Richard Henderson 
->> <richard.henderson@linaro.org <mailto:richard.henderson@linaro.org>> 
->> wrote:
->>
->>     If a 32-bit input is not properly nanboxed, then the input is
->>     replaced
->>     with the default qnan.  The only inline expansion is for the
->>     sign-changing
->>     set of instructions: FSGNJ.S, FSGNJX.S, FSGNJN.S.
->>
->>     Signed-off-by: Richard Henderson <richard.henderson@linaro.org
->>     <mailto:richard.henderson@linaro.org>>
->>     ---
->>      target/riscv/insn_trans/trans_rvf.inc.c | 71
->>     +++++++++++++++++++------
->>      target/riscv/translate.c                | 18 +++++++
->>      2 files changed, 73 insertions(+), 16 deletions(-)
->>
->>     diff --git a/target/riscv/insn_trans/trans_rvf.inc.c
->>     b/target/riscv/insn_trans/trans_rvf.inc.c
->>     index 264d3139f1..f9a9e0643a 100644
->>     --- a/target/riscv/insn_trans/trans_rvf.inc.c
->>     +++ b/target/riscv/insn_trans/trans_rvf.inc.c
->>     @@ -161,47 +161,86 @@ static bool trans_fsgnj_s(DisasContext
->>     *ctx, arg_fsgnj_s *a)
->>      {
->>          REQUIRE_FPU;
->>          REQUIRE_EXT(ctx, RVF);
->>     +
->>          if (a->rs1 == a->rs2) { /* FMOV */
->>     -        tcg_gen_mov_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
->>     +        gen_check_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
->>          } else { /* FSGNJ */
->>     -        tcg_gen_deposit_i64(cpu_fpr[a->rd], cpu_fpr[a->rs2],
->>     cpu_fpr[a->rs1],
->>     -                            0, 31);
->>     +        TCGv_i64 rs1 = tcg_temp_new_i64();
->>     +        TCGv_i64 rs2 = tcg_temp_new_i64();
->>     +
->>     +        gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
->>     +        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
->>     +
->>     +        /* This formulation retains the nanboxing of rs2. */
->>     +        tcg_gen_deposit_i64(cpu_fpr[a->rd], rs2, rs1, 0, 31);
->>     +        tcg_temp_free_i64(rs1);
->>     +        tcg_temp_free_i64(rs2);
->>          }
->>     -    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
->>          mark_fs_dirty(ctx);
->>          return true;
->>      }
->>
->>      static bool trans_fsgnjn_s(DisasContext *ctx, arg_fsgnjn_s *a)
->>      {
->>     +    TCGv_i64 rs1, rs2, mask;
->>     +
->>          REQUIRE_FPU;
->>          REQUIRE_EXT(ctx, RVF);
->>     +
->>     +    rs1 = tcg_temp_new_i64();
->>     +    gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
->>     +
->>          if (a->rs1 == a->rs2) { /* FNEG */
->>     -        tcg_gen_xori_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1],
->>     INT32_MIN);
->>     +        tcg_gen_xori_i64(cpu_fpr[a->rd], rs1,
->>     MAKE_64BIT_MASK(31, 1));
->>          } else {
->>     -        TCGv_i64 t0 = tcg_temp_new_i64();
->>     -        tcg_gen_not_i64(t0, cpu_fpr[a->rs2]);
->>     -        tcg_gen_deposit_i64(cpu_fpr[a->rd], t0, cpu_fpr[a->rs1],
->>     0, 31);
->>     -        tcg_temp_free_i64(t0);
->>     +        rs2 = tcg_temp_new_i64();
->>     +        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
->>     +
->>     +        /*
->>     +         * Replace bit 31 in rs1 with inverse in rs2.
->>     +         * This formulation retains the nanboxing of rs1.
->>     +         */
->>     +        mask = tcg_const_i64(~MAKE_64BIT_MASK(31, 1));
->>     +        tcg_gen_andc_i64(rs2, mask, rs2);
->>
->>
->> should be
->>               tcg_gen_not_i64(rs2, rs2);         // forget to inverse rs2
->>               tcg_gen_andc_i64(rs2, rs2, mask);  //mask needs to be 
->> inverted to get only sign
-> Hi Chih-Min，
->
-> Thanks for pointing it out. It's a bug here. However, I think it 
-> should be
->
-> tcg_gen_andc_i64(rs2, rs2, mask);  // only get rs2 bit 31
-> tcg_gen_not_i64(rs2, rs2);  // inverse rs2
->
-Hi Chih-Min,
-
-Sorry， your code is right.
-
-Zhiwei
-> Best Regards,
-> Zhiwei
->>
->>  Chih-Min Chao
->>
->>     + tcg_gen_and_i64(rs1, mask, rs1);
->>     +        tcg_gen_or_i64(cpu_fpr[a->rd], rs1, rs2);
->>     +
->>     +        tcg_temp_free_i64(mask);
->>     +        tcg_temp_free_i64(rs2);
->>          }
->>     -    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
->>     +    tcg_temp_free_i64(rs1);
->>     +
->>          mark_fs_dirty(ctx);
->>          return true;
->>      }
->>
->>      static bool trans_fsgnjx_s(DisasContext *ctx, arg_fsgnjx_s *a)
->>      {
->>     +    TCGv_i64 rs1, rs2;
->>     +
->>          REQUIRE_FPU;
->>          REQUIRE_EXT(ctx, RVF);
->>     +
->>     +    rs1 = tcg_temp_new_i64();
->>     +    gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
->>     +
->>          if (a->rs1 == a->rs2) { /* FABS */
->>     -        tcg_gen_andi_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1],
->>     ~INT32_MIN);
->>     +        tcg_gen_andi_i64(cpu_fpr[a->rd], rs1,
->>     ~MAKE_64BIT_MASK(31, 1));
->>          } else {
->>     -        TCGv_i64 t0 = tcg_temp_new_i64();
->>     -        tcg_gen_andi_i64(t0, cpu_fpr[a->rs2], INT32_MIN);
->>     -        tcg_gen_xor_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], t0);
->>     -        tcg_temp_free_i64(t0);
->>     +        rs2 = tcg_temp_new_i64();
->>     +        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
->>     +
->>     +        /*
->>     +         * Xor bit 31 in rs1 with that in rs2.
->>     +         * This formulation retains the nanboxing of rs1.
->>     +         */
->>     +        tcg_gen_andi_i64(rs2, rs2, MAKE_64BIT_MASK(31, 1));
->>     +        tcg_gen_xor_i64(cpu_fpr[a->rd], rs1, rs2);
->>     +
->>     +        tcg_temp_free_i64(rs2);
->>          }
->>     -    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
->>     +    tcg_temp_free_i64(rs1);
->>     +
->>          mark_fs_dirty(ctx);
->>          return true;
->>      }
->>     diff --git a/target/riscv/translate.c b/target/riscv/translate.c
->>     index 12a746da97..bf35182776 100644
->>     --- a/target/riscv/translate.c
->>     +++ b/target/riscv/translate.c
->>     @@ -101,6 +101,24 @@ static void gen_nanbox_s(TCGv_i64 out,
->>     TCGv_i64 in)
->>          tcg_gen_ori_i64(out, in, MAKE_64BIT_MASK(32, 32));
->>      }
->>
->>     +/*
->>     + * A narrow n-bit operation, where n < FLEN, checks that input
->>     operands
->>     + * are correctly Nan-boxed, i.e., all upper FLEN - n bits are 1.
->>     + * If so, the least-significant bits of the input are used,
->>     otherwise the
->>     + * input value is treated as an n-bit canonical NaN (v2.2
->>     section 9.2).
->>     + *
->>     + * Here, the result is always nan-boxed, even the canonical nan.
->>     + */
->>     +static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
->>     +{
->>     +    TCGv_i64 t_max = tcg_const_i64(0xffffffff00000000ull);
->>     +    TCGv_i64 t_nan = tcg_const_i64(0xffffffff7fc00000ull);
->>     +
->>     +    tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
->>     +    tcg_temp_free_i64(t_max);
->>     +    tcg_temp_free_i64(t_nan);
->>     +}
->>     +
->>      static void generate_exception(DisasContext *ctx, int excp)
->>      {
->>          tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
->>     -- 
->>     2.25.1
->>
->>
->
-
-
---------------37494E5E7E4CA08EED0AB2D3
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <br>
-    <br>
-    <div class="moz-cite-prefix">On 2020/8/8 22:18, LIU Zhiwei wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:560581be-926e-c303-85a6-b15d4c187ad6@c-sky.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <br>
-      <br>
-      <div class="moz-cite-prefix">On 2020/8/8 4:24, Chih-Min Chao
-        wrote:<br>
-      </div>
-      <blockquote type="cite"
-cite="mid:CAEiOBXVac0bFSZCrh_rhZbLVC7DGVwBe+D6YF90HQy1K-8wfYQ@mail.gmail.com">
-        <meta http-equiv="content-type" content="text/html;
-          charset=UTF-8">
-        <div dir="ltr">
-          <div dir="ltr">
-            <div>
-              <div dir="ltr" class="gmail_signature"
-                data-smartmail="gmail_signature">
-                <div dir="ltr">On Fri, Jul 24, 2020 at 8:28 AM Richard
-                  Henderson &lt;<a
-                    href="mailto:richard.henderson@linaro.org"
-                    moz-do-not-send="true">richard.henderson@linaro.org</a>&gt;
-                  wrote:<br>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="gmail_quote">
-            <blockquote class="gmail_quote" style="margin:0px 0px 0px
-              0.8ex;border-left:1px solid
-              rgb(204,204,204);padding-left:1ex">If a 32-bit input is
-              not properly nanboxed, then the input is replaced<br>
-              with the default qnan.  The only inline expansion is for
-              the sign-changing<br>
-              set of instructions: FSGNJ.S, FSGNJX.S, FSGNJN.S.<br>
-              <br>
-              Signed-off-by: Richard Henderson &lt;<a
-                href="mailto:richard.henderson@linaro.org"
-                target="_blank" moz-do-not-send="true">richard.henderson@linaro.org</a>&gt;<br>
-              ---<br>
-               target/riscv/insn_trans/trans_rvf.inc.c | 71
-              +++++++++++++++++++------<br>
-               target/riscv/translate.c                | 18 +++++++<br>
-               2 files changed, 73 insertions(+), 16 deletions(-)<br>
-              <br>
-              diff --git a/target/riscv/insn_trans/trans_rvf.inc.c
-              b/target/riscv/insn_trans/trans_rvf.inc.c<br>
-              index 264d3139f1..f9a9e0643a 100644<br>
-              --- a/target/riscv/insn_trans/trans_rvf.inc.c<br>
-              +++ b/target/riscv/insn_trans/trans_rvf.inc.c<br>
-              @@ -161,47 +161,86 @@ static bool
-              trans_fsgnj_s(DisasContext *ctx, arg_fsgnj_s *a)<br>
-               {<br>
-                   REQUIRE_FPU;<br>
-                   REQUIRE_EXT(ctx, RVF);<br>
-              +<br>
-                   if (a-&gt;rs1 == a-&gt;rs2) { /* FMOV */<br>
-              -        tcg_gen_mov_i64(cpu_fpr[a-&gt;rd],
-              cpu_fpr[a-&gt;rs1]);<br>
-              +        gen_check_nanbox_s(cpu_fpr[a-&gt;rd],
-              cpu_fpr[a-&gt;rs1]);<br>
-                   } else { /* FSGNJ */<br>
-              -        tcg_gen_deposit_i64(cpu_fpr[a-&gt;rd],
-              cpu_fpr[a-&gt;rs2], cpu_fpr[a-&gt;rs1],<br>
-              -                            0, 31);<br>
-              +        TCGv_i64 rs1 = tcg_temp_new_i64();<br>
-              +        TCGv_i64 rs2 = tcg_temp_new_i64();<br>
-              +<br>
-              +        gen_check_nanbox_s(rs1, cpu_fpr[a-&gt;rs1]);<br>
-              +        gen_check_nanbox_s(rs2, cpu_fpr[a-&gt;rs2]);<br>
-              +<br>
-              +        /* This formulation retains the nanboxing of rs2.
-              */<br>
-              +        tcg_gen_deposit_i64(cpu_fpr[a-&gt;rd], rs2, rs1,
-              0, 31);<br>
-              +        tcg_temp_free_i64(rs1);<br>
-              +        tcg_temp_free_i64(rs2);<br>
-                   }<br>
-              -    gen_nanbox_s(cpu_fpr[a-&gt;rd], cpu_fpr[a-&gt;rd]);<br>
-                   mark_fs_dirty(ctx);<br>
-                   return true;<br>
-               }<br>
-              <br>
-               static bool trans_fsgnjn_s(DisasContext *ctx,
-              arg_fsgnjn_s *a)<br>
-               {<br>
-              +    TCGv_i64 rs1, rs2, mask;<br>
-              +<br>
-                   REQUIRE_FPU;<br>
-                   REQUIRE_EXT(ctx, RVF);<br>
-              +<br>
-              +    rs1 = tcg_temp_new_i64();<br>
-              +    gen_check_nanbox_s(rs1, cpu_fpr[a-&gt;rs1]);<br>
-              +<br>
-                   if (a-&gt;rs1 == a-&gt;rs2) { /* FNEG */<br>
-              -        tcg_gen_xori_i64(cpu_fpr[a-&gt;rd],
-              cpu_fpr[a-&gt;rs1], INT32_MIN);<br>
-              +        tcg_gen_xori_i64(cpu_fpr[a-&gt;rd], rs1,
-              MAKE_64BIT_MASK(31, 1));<br>
-                   } else {<br>
-              -        TCGv_i64 t0 = tcg_temp_new_i64();<br>
-              -        tcg_gen_not_i64(t0, cpu_fpr[a-&gt;rs2]);<br>
-              -        tcg_gen_deposit_i64(cpu_fpr[a-&gt;rd], t0,
-              cpu_fpr[a-&gt;rs1], 0, 31);<br>
-              -        tcg_temp_free_i64(t0);<br>
-              +        rs2 = tcg_temp_new_i64();<br>
-              +        gen_check_nanbox_s(rs2, cpu_fpr[a-&gt;rs2]);<br>
-              +<br>
-              +        /*<br>
-              +         * Replace bit 31 in rs1 with inverse in rs2.<br>
-              +         * This formulation retains the nanboxing of rs1.<br>
-              +         */<br>
-              +        mask = tcg_const_i64(~MAKE_64BIT_MASK(31, 1));<br>
-              +        tcg_gen_andc_i64(rs2, mask, rs2);<br>
-            </blockquote>
-            <div><br>
-            </div>
-            <div>should be </div>
-            <div>              tcg_gen_not_i64(rs2, rs2);         //
-              forget to inverse rs2</div>
-            <div>              tcg_gen_andc_i64(rs2, rs2, mask);  //mask
-              needs to be inverted to get only sign</div>
-          </div>
-        </div>
-      </blockquote>
-      Hi Chih-Min，<br>
-      <br>
-      Thanks for pointing it out. It's a bug here. However, I think it
-      should be <br>
-      <br>
-      <pre>tcg_gen_andc_i64(rs2, rs2, mask);  // only get rs2 bit 31</pre>
-      <pre>tcg_gen_not_i64(rs2, rs2);  // inverse rs2</pre>
-      <br>
-    </blockquote>
-    Hi Chih-Min,<br>
-    <br>
-    Sorry， your code is right. <br>
-    <br>
-    Zhiwei<br>
-    <blockquote type="cite"
-      cite="mid:560581be-926e-c303-85a6-b15d4c187ad6@c-sky.com"> Best
-      Regards,<br>
-      Zhiwei<br>
-      <blockquote type="cite"
-cite="mid:CAEiOBXVac0bFSZCrh_rhZbLVC7DGVwBe+D6YF90HQy1K-8wfYQ@mail.gmail.com">
-        <div dir="ltr">
-          <div class="gmail_quote">
-            <div><br>
-            </div>
-            <div> Chih-Min Chao<br>
-            </div>
-            <blockquote class="gmail_quote" style="margin:0px 0px 0px
-              0.8ex;border-left:1px solid
-              rgb(204,204,204);padding-left:1ex"> +       
-              tcg_gen_and_i64(rs1, mask, rs1);<br>
-              +        tcg_gen_or_i64(cpu_fpr[a-&gt;rd], rs1, rs2);<br>
-              +<br>
-              +        tcg_temp_free_i64(mask);<br>
-              +        tcg_temp_free_i64(rs2);<br>
-                   }<br>
-              -    gen_nanbox_s(cpu_fpr[a-&gt;rd], cpu_fpr[a-&gt;rd]);<br>
-              +    tcg_temp_free_i64(rs1);<br>
-              +<br>
-                   mark_fs_dirty(ctx);<br>
-                   return true;<br>
-               }<br>
-              <br>
-               static bool trans_fsgnjx_s(DisasContext *ctx,
-              arg_fsgnjx_s *a)<br>
-               {<br>
-              +    TCGv_i64 rs1, rs2;<br>
-              +<br>
-                   REQUIRE_FPU;<br>
-                   REQUIRE_EXT(ctx, RVF);<br>
-              +<br>
-              +    rs1 = tcg_temp_new_i64();<br>
-              +    gen_check_nanbox_s(rs1, cpu_fpr[a-&gt;rs1]);<br>
-              +<br>
-                   if (a-&gt;rs1 == a-&gt;rs2) { /* FABS */<br>
-              -        tcg_gen_andi_i64(cpu_fpr[a-&gt;rd],
-              cpu_fpr[a-&gt;rs1], ~INT32_MIN);<br>
-              +        tcg_gen_andi_i64(cpu_fpr[a-&gt;rd], rs1,
-              ~MAKE_64BIT_MASK(31, 1));<br>
-                   } else {<br>
-              -        TCGv_i64 t0 = tcg_temp_new_i64();<br>
-              -        tcg_gen_andi_i64(t0, cpu_fpr[a-&gt;rs2],
-              INT32_MIN);<br>
-              -        tcg_gen_xor_i64(cpu_fpr[a-&gt;rd],
-              cpu_fpr[a-&gt;rs1], t0);<br>
-              -        tcg_temp_free_i64(t0);<br>
-              +        rs2 = tcg_temp_new_i64();<br>
-              +        gen_check_nanbox_s(rs2, cpu_fpr[a-&gt;rs2]);<br>
-              +<br>
-              +        /*<br>
-              +         * Xor bit 31 in rs1 with that in rs2.<br>
-              +         * This formulation retains the nanboxing of rs1.<br>
-              +         */<br>
-              +        tcg_gen_andi_i64(rs2, rs2, MAKE_64BIT_MASK(31,
-              1));<br>
-              +        tcg_gen_xor_i64(cpu_fpr[a-&gt;rd], rs1, rs2);<br>
-              +<br>
-              +        tcg_temp_free_i64(rs2);<br>
-                   }<br>
-              -    gen_nanbox_s(cpu_fpr[a-&gt;rd], cpu_fpr[a-&gt;rd]);<br>
-              +    tcg_temp_free_i64(rs1);<br>
-              +<br>
-                   mark_fs_dirty(ctx);<br>
-                   return true;<br>
-               }<br>
-              diff --git a/target/riscv/translate.c
-              b/target/riscv/translate.c<br>
-              index 12a746da97..bf35182776 100644<br>
-              --- a/target/riscv/translate.c<br>
-              +++ b/target/riscv/translate.c<br>
-              @@ -101,6 +101,24 @@ static void gen_nanbox_s(TCGv_i64
-              out, TCGv_i64 in)<br>
-                   tcg_gen_ori_i64(out, in, MAKE_64BIT_MASK(32, 32));<br>
-               }<br>
-              <br>
-              +/*<br>
-              + * A narrow n-bit operation, where n &lt; FLEN, checks
-              that input operands<br>
-              + * are correctly Nan-boxed, i.e., all upper FLEN - n bits
-              are 1.<br>
-              + * If so, the least-significant bits of the input are
-              used, otherwise the<br>
-              + * input value is treated as an n-bit canonical NaN (v2.2
-              section 9.2).<br>
-              + *<br>
-              + * Here, the result is always nan-boxed, even the
-              canonical nan.<br>
-              + */<br>
-              +static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)<br>
-              +{<br>
-              +    TCGv_i64 t_max =
-              tcg_const_i64(0xffffffff00000000ull);<br>
-              +    TCGv_i64 t_nan =
-              tcg_const_i64(0xffffffff7fc00000ull);<br>
-              +<br>
-              +    tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in,
-              t_nan);<br>
-              +    tcg_temp_free_i64(t_max);<br>
-              +    tcg_temp_free_i64(t_nan);<br>
-              +}<br>
-              +<br>
-               static void generate_exception(DisasContext *ctx, int
-              excp)<br>
-               {<br>
-                   tcg_gen_movi_tl(cpu_pc, ctx-&gt;base.pc_next);<br>
-              -- <br>
-              2.25.1<br>
-              <br>
-              <br>
-            </blockquote>
-          </div>
-        </div>
-      </blockquote>
-      <br>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------37494E5E7E4CA08EED0AB2D3--
 
