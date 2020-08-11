@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k5Q8S-00040J-2Y
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Aug 2020 04:59:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48924)
+	id 1k5Q8X-00049W-9R
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Aug 2020 05:00:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49004)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
- id 1k5Q8Q-0003w8-52
- for qemu-riscv@nongnu.org; Tue, 11 Aug 2020 04:59:54 -0400
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:39744)
+ id 1k5Q8V-00045y-56
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2020 04:59:59 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432]:41006)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
- id 1k5Q8O-0005TL-DV
- for qemu-riscv@nongnu.org; Tue, 11 Aug 2020 04:59:53 -0400
-Received: by mail-pg1-x542.google.com with SMTP id v15so6329965pgh.6
- for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2020 01:59:52 -0700 (PDT)
+ id 1k5Q8R-0005Tz-G2
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2020 04:59:58 -0400
+Received: by mail-pf1-x432.google.com with SMTP id a79so7248665pfa.8
+ for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2020 01:59:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=r5VyTkVLYpF3phTVGF7Kd2M8aWZEyprVmGzZRT5UTRI=;
- b=j76pdoOdk+VvI4MffC6WcL5H6d+Pi954WGnmj17UEhQQvh5u1S69IIA1vWDToCiuy1
- 7SRaxg1dNtyrKmv5v/EauAHUHtfxX5jZTm5ifmDwELXcKAEGt/R3V0XwQHKbfX6JLvdf
- rxi9+QquADVkUsEuwbWjiw1Z22bELQ3XVklqrmnvClY+NCGnePhLXS+AcTkoHRaZN6S4
- Ib6tIpxQfTPt/I6r6ekd/I2opMjxoBPTiYuCiUjSr1AUOWtSEeYhKGr67Lu+oF5fvspd
- mxySHOKgAVKiIRGHD/BHNa0rSEZY/xvR2gSUN9+GxPkkUxKjG9o3UZfQqYyVRlnA4ySA
- afZg==
+ bh=Zu7rqHxSKkcifOLj33WtmEIrqrJqXtmC8yRbMszb1Wc=;
+ b=Ao6M7VtkqHz+6A33OHTtfe1NuBXN0j0vrG9rAFMHT2IxvGa7ifPMuMjBca3hSYNQC0
+ f906rpHZtqSbFirRb3G8xbn9WM72Ny2wPP84FGr6bTcFs186lDY3v8EcKB23JZhRpX+N
+ ZEpiRK1Ul1UeYNYMXWB4ww7vVjwEF9jHAJA5IycGODwTnSmCB78WLQlWASCO8eA4i4jV
+ /asl3PUGS5iKH/aQ7rwrq4yCuBFncwHq8n+PALNsmxDjBEbXhap4Um48w+s0YwiDOnlm
+ QAFe+9/I/K4pCQ4hUfNptaWF/80otY6xoBM2LyCMJdlFCNC7WbZZS+IEYlW0DY0P6Nys
+ ww+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=r5VyTkVLYpF3phTVGF7Kd2M8aWZEyprVmGzZRT5UTRI=;
- b=ryXRHZVJVEtJ6Q8+sSEnHVQ7Sid0PK6nFQCKtFUH0MrW3Id9JIzdNQXpODTsvEWgj8
- ihKh8PZzBZMDxwyYINygDvhLw7uJCM3mFe80OyE7jJzfTo+/dA+RbaV4WMZCIyXGKrM0
- 5ySxSY2TDbDboU6utZv2WGWDJwuK74brARFXChYWAYcyVlG95wrh2jN7d+VuVchYQ9oK
- aCfIpXpd9nPy6Sy+FSs7QY4qHW9wJQH62tusLefGktwS4sm6d66oKJINK9d00xiJDxQQ
- /vZzyD1HGdnwuJflinN2H0L7ty1PJPpvWV+NTIIxfTtGpNNGOz0HcXUewl7d1utkoRLq
- 8Zjw==
-X-Gm-Message-State: AOAM533N513xvSH4TF/5JRYj1xMYM+GWfxkTAXONFM4MfWq02Iq8W2Qq
- 60mIx6XrcqA6p4xBRzD892PRxw==
-X-Google-Smtp-Source: ABdhPJyYde/QqfZhqtwD84HSkE8A0pQvchWhZDRf16feJS2AaaWl/suc9pgUcWET434Yh+REhZkhAQ==
-X-Received: by 2002:aa7:8d95:: with SMTP id i21mr4957266pfr.240.1597136391078; 
- Tue, 11 Aug 2020 01:59:51 -0700 (PDT)
+ bh=Zu7rqHxSKkcifOLj33WtmEIrqrJqXtmC8yRbMszb1Wc=;
+ b=cknzghddaMa08DVmlSfoNwhtVQ9Dchy0VJHbfMnsC6S4suP+oLOVv+ucmidpuaCqgG
+ Qe1RNdDy4I6JVnWa7s7mbdeaV5+0Nnm6WYcMQMOeUt8j2LDrbcXG4EwU8PgSkLhGtW7A
+ fw/DWu9bpY6Cszxfr2nEGQfQa1cGRe4s4EHf8TrDbYE8CI0gH3kmCRsCwVWwgfmKjYVc
+ n/2IEBOHdRlX5Nj4H6dhxS3sPHD0+vg/otbzBWis0We+ZRRorFpF0ecNnomQ5CfqMtWg
+ zvHxdynzCAmB0PY5wKcUoQjdvB6rU+/EvTb9etqki0gyqopH9rBnY1F3ydimuyCz2qrI
+ PDIQ==
+X-Gm-Message-State: AOAM531vGcjMnYexkTCyiOcSK2h7oNpKR5zQEBTv24FNb07d/eX+MAdG
+ wBLPJPD4gEAHXBdmLzjwThFPWwmVfkjq9g==
+X-Google-Smtp-Source: ABdhPJwtBLcEkwCpLQXDW/L6TZoDzgU58Qwjk7pV2kCeG0LJgv5Z5Yo0ZOC8QEfxKEhjBtUyx5Mtsw==
+X-Received: by 2002:a63:1342:: with SMTP id 2mr28552pgt.214.1597136393608;
+ Tue, 11 Aug 2020 01:59:53 -0700 (PDT)
 Received: from gamma11.internal.sifive.com ([64.62.193.194])
- by smtp.gmail.com with ESMTPSA id w10sm1282499pjq.46.2020.08.11.01.59.50
+ by smtp.gmail.com with ESMTPSA id w10sm1282499pjq.46.2020.08.11.01.59.52
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 11 Aug 2020 01:59:50 -0700 (PDT)
+ Tue, 11 Aug 2020 01:59:53 -0700 (PDT)
 From: Chih-Min Chao <chihmin.chao@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Chih-Min Chao <chihmin.chao@sifive.com>,
+Cc: Kito Cheng <kito.cheng@sifive.com>,
+ Chih-Min Chao <chihmin.chao@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH 1/3] target/riscv: add NaN-Boxing helper for half-float
-Date: Tue, 11 Aug 2020 01:59:24 -0700
-Message-Id: <1597136381-17296-2-git-send-email-chihmin.chao@sifive.com>
+Subject: [PATCH 2/3] target/riscv: Implement zfh extension
+Date: Tue, 11 Aug 2020 01:59:25 -0700
+Message-Id: <1597136381-17296-3-git-send-email-chihmin.chao@sifive.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1597136381-17296-1-git-send-email-chihmin.chao@sifive.com>
 References: <1597136381-17296-1-git-send-email-chihmin.chao@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::542;
- envelope-from=chihmin.chao@sifive.com; helo=mail-pg1-x542.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=chihmin.chao@sifive.com; helo=mail-pf1-x432.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -66,7 +67,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,68 +80,925 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Aug 2020 08:59:54 -0000
+X-List-Received-Date: Tue, 11 Aug 2020 08:59:59 -0000
 
-When writing, box the 16bit value with all ones in high part[63:16]
-When reading, unbox the 16bit value from 64bit storage and validate it
+From: Kito Cheng <kito.cheng@sifive.com>
 
+All of instructions listed in spec has been implemented. The spec is still
+under discussion and not included master branch.
+
+ref:
+  https://github.com/riscv/riscv-isa-manual/tree/zfh
+
+Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
 Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
 ---
- target/riscv/internals.h | 16 ++++++++++++++++
- target/riscv/translate.c | 15 +++++++++++++++
- 2 files changed, 31 insertions(+)
+ target/riscv/cpu.h                        |   1 +
+ target/riscv/fpu_helper.c                 | 180 ++++++++++
+ target/riscv/helper.h                     |  34 ++
+ target/riscv/insn32-64.decode             |   6 +
+ target/riscv/insn32.decode                |  32 ++
+ target/riscv/insn_trans/trans_rvzfh.inc.c | 531 ++++++++++++++++++++++++++++++
+ target/riscv/translate.c                  |   1 +
+ 7 files changed, 785 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzfh.inc.c
 
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index f1a546d..522c306 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -54,4 +54,20 @@ static inline float32 check_nanbox_s(uint64_t f)
-     }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index a804a5d..6a077c1 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -65,6 +65,7 @@
+ #define RVS RV('S')
+ #define RVU RV('U')
+ #define RVH RV('H')
++#define RVZfh RV('K')
+ 
+ /* S extension denotes that Supervisor mode exists, however it is possible
+    to have a core that support S mode but does not have an MMU and there
+diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+index 2c52ff1..5b1b210 100644
+--- a/target/riscv/fpu_helper.c
++++ b/target/riscv/fpu_helper.c
+@@ -81,6 +81,15 @@ void helper_set_rounding_mode(CPURISCVState *env, uint32_t rm)
+     set_float_rounding_mode(softrm, &env->fp_status);
  }
  
-+static inline uint64_t nanbox_h(float16 f)
++static uint64_t do_fmadd_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2,
++                           uint64_t rs3, int flags)
 +{
-+    return f | MAKE_64BIT_MASK(16, 48);
++    float16 frs1 = check_nanbox_h(rs1);
++    float16 frs2 = check_nanbox_h(rs2);
++    float16 frs3 = check_nanbox_h(rs3);
++    return nanbox_h(float16_muladd(frs1, frs2, frs3, flags, &env->fp_status));
 +}
 +
-+static inline float16 check_nanbox_h(uint64_t f)
+ static uint64_t do_fmadd_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2,
+                            uint64_t rs3, int flags)
+ {
+@@ -102,6 +111,12 @@ uint64_t helper_fmadd_d(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
+     return float64_muladd(frs1, frs2, frs3, 0, &env->fp_status);
+ }
+ 
++uint64_t helper_fmadd_h(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
++                        uint64_t frs3)
 +{
-+    uint64_t mask = MAKE_64BIT_MASK(16, 48);
-+
-+    if (likely((f & mask) == mask)) {
-+        return (uint16_t)f;
-+    } else {
-+        return 0x7E00u; /* default qnan */
-+    }
++    return do_fmadd_h(env, frs1, frs2, frs3, 0);
 +}
 +
+ uint64_t helper_fmsub_s(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
+                         uint64_t frs3)
+ {
+@@ -115,6 +130,12 @@ uint64_t helper_fmsub_d(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
+                           &env->fp_status);
+ }
+ 
++uint64_t helper_fmsub_h(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
++                        uint64_t frs3)
++{
++    return do_fmadd_h(env, frs1, frs2, frs3, float_muladd_negate_c);
++}
++
+ uint64_t helper_fnmsub_s(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
+                          uint64_t frs3)
+ {
+@@ -128,6 +149,12 @@ uint64_t helper_fnmsub_d(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
+                           &env->fp_status);
+ }
+ 
++uint64_t helper_fnmsub_h(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
++                         uint64_t frs3)
++{
++    return do_fmadd_h(env, frs1, frs2, frs3, float_muladd_negate_product);
++}
++
+ uint64_t helper_fnmadd_s(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
+                          uint64_t frs3)
+ {
+@@ -142,6 +169,13 @@ uint64_t helper_fnmadd_d(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
+                           float_muladd_negate_product, &env->fp_status);
+ }
+ 
++uint64_t helper_fnmadd_h(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
++                         uint64_t frs3)
++{
++    return do_fmadd_h(env, frs1, frs2, frs3,
++                      float_muladd_negate_c | float_muladd_negate_product);
++}
++
+ uint64_t helper_fadd_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
+ {
+     float32 frs1 = check_nanbox_s(rs1);
+@@ -374,3 +408,149 @@ target_ulong helper_fclass_d(uint64_t frs1)
+ {
+     return fclass_d(frs1);
+ }
++
++uint64_t helper_fadd_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    float16 frs2 = check_nanbox_h(rs2);
++    return nanbox_h(float16_add(frs1, frs2, &env->fp_status));
++}
++
++uint64_t helper_fsub_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    float16 frs2 = check_nanbox_h(rs2);
++    return nanbox_h(float16_sub(frs1, frs2, &env->fp_status));
++}
++
++uint64_t helper_fmul_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    float16 frs2 = check_nanbox_h(rs2);
++    return nanbox_h(float16_mul(frs1, frs2, &env->fp_status));
++}
++
++uint64_t helper_fdiv_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    float16 frs2 = check_nanbox_h(rs2);
++    return nanbox_h(float16_div(frs1, frs2, &env->fp_status));
++}
++
++uint64_t helper_fmin_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    float16 frs2 = check_nanbox_h(rs2);
++    return nanbox_h(float16_minnum_noprop(frs1, frs2, &env->fp_status));
++}
++
++uint64_t helper_fmax_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    float16 frs2 = check_nanbox_h(rs2);
++    return nanbox_h(float16_maxnum_noprop(frs1, frs2, &env->fp_status));
++}
++
++uint64_t helper_fsqrt_h(CPURISCVState *env, uint64_t rs1)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    return nanbox_h(float16_sqrt(frs1, &env->fp_status));
++}
++
++target_ulong helper_fle_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    float16 frs2 = check_nanbox_h(rs2);
++    return float16_le(frs1, frs2, &env->fp_status);
++}
++
++target_ulong helper_flt_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    float16 frs2 = check_nanbox_h(rs2);
++    return float16_lt(frs1, frs2, &env->fp_status);
++}
++
++target_ulong helper_feq_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    float16 frs2 = check_nanbox_h(rs2);
++    return float16_eq_quiet(frs1, frs2, &env->fp_status);
++}
++
++target_ulong helper_fclass_h(uint64_t rs1)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    return fclass_h(frs1);
++}
++
++target_ulong helper_fcvt_w_h(CPURISCVState *env, uint64_t rs1)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    return float16_to_int32(frs1, &env->fp_status);
++}
++
++target_ulong helper_fcvt_wu_h(CPURISCVState *env, uint64_t rs1)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    return (int32_t)float16_to_uint32(frs1, &env->fp_status);
++}
++
++#if defined(TARGET_RISCV64)
++uint64_t helper_fcvt_l_h(CPURISCVState *env, uint64_t rs1)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    return float16_to_int64(frs1, &env->fp_status);
++}
++
++uint64_t helper_fcvt_lu_h(CPURISCVState *env, uint64_t rs1)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    return float16_to_uint64(frs1, &env->fp_status);
++}
++#endif
++
++uint64_t helper_fcvt_h_w(CPURISCVState *env, target_ulong rs1)
++{
++    return nanbox_h(int32_to_float16((int32_t)rs1, &env->fp_status));
++}
++
++uint64_t helper_fcvt_h_wu(CPURISCVState *env, target_ulong rs1)
++{
++    return nanbox_h(uint32_to_float16((uint32_t)rs1, &env->fp_status));
++}
++
++#if defined(TARGET_RISCV64)
++uint64_t helper_fcvt_h_l(CPURISCVState *env, uint64_t rs1)
++{
++    return nanbox_h(int64_to_float16(rs1, &env->fp_status));
++}
++
++uint64_t helper_fcvt_h_lu(CPURISCVState *env, uint64_t rs1)
++{
++    return nanbox_h(uint64_to_float16(rs1, &env->fp_status));
++}
++#endif
++
++uint64_t helper_fcvt_h_s(CPURISCVState *env, uint64_t rs1)
++{
++    float32 frs1 = check_nanbox_s(rs1);
++    return nanbox_h(float32_to_float16(frs1, true, &env->fp_status));
++}
++
++uint64_t helper_fcvt_s_h(CPURISCVState *env, uint64_t rs1)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    return nanbox_s(float16_to_float32(frs1, true, &env->fp_status));
++}
++
++uint64_t helper_fcvt_h_d(CPURISCVState *env, uint64_t rs1)
++{
++    return nanbox_h(float64_to_float16(rs1, true, &env->fp_status));
++}
++
++uint64_t helper_fcvt_d_h(CPURISCVState *env, uint64_t rs1)
++{
++    float16 frs1 = check_nanbox_h(rs1);
++    return float16_to_float64(frs1, true, &env->fp_status);
++}
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index acc2982..66c95dc 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -7,12 +7,16 @@ DEF_HELPER_FLAGS_2(set_rounding_mode, TCG_CALL_NO_WG, void, env, i32)
+ /* Floating Point - fused */
+ DEF_HELPER_FLAGS_4(fmadd_s, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
+ DEF_HELPER_FLAGS_4(fmadd_d, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
++DEF_HELPER_FLAGS_4(fmadd_h, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
+ DEF_HELPER_FLAGS_4(fmsub_s, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
+ DEF_HELPER_FLAGS_4(fmsub_d, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
++DEF_HELPER_FLAGS_4(fmsub_h, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
+ DEF_HELPER_FLAGS_4(fnmsub_s, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
+ DEF_HELPER_FLAGS_4(fnmsub_d, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
++DEF_HELPER_FLAGS_4(fnmsub_h, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
+ DEF_HELPER_FLAGS_4(fnmadd_s, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
+ DEF_HELPER_FLAGS_4(fnmadd_d, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
++DEF_HELPER_FLAGS_4(fnmadd_h, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
+ 
+ /* Floating Point - Single Precision */
+ DEF_HELPER_FLAGS_3(fadd_s, TCG_CALL_NO_RWG, i64, env, i64, i64)
+@@ -66,6 +70,36 @@ DEF_HELPER_FLAGS_2(fcvt_d_lu, TCG_CALL_NO_RWG, i64, env, tl)
  #endif
+ DEF_HELPER_FLAGS_1(fclass_d, TCG_CALL_NO_RWG_SE, tl, i64)
+ 
++/* Floating Point - Half Precision */
++DEF_HELPER_FLAGS_3(fadd_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
++DEF_HELPER_FLAGS_3(fsub_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
++DEF_HELPER_FLAGS_3(fmul_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
++DEF_HELPER_FLAGS_3(fdiv_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
++DEF_HELPER_FLAGS_3(fmin_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
++DEF_HELPER_FLAGS_3(fmax_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
++DEF_HELPER_FLAGS_2(fsqrt_h, TCG_CALL_NO_RWG, i64, env, i64)
++DEF_HELPER_FLAGS_3(fle_h, TCG_CALL_NO_RWG, tl, env, i64, i64)
++DEF_HELPER_FLAGS_3(flt_h, TCG_CALL_NO_RWG, tl, env, i64, i64)
++DEF_HELPER_FLAGS_3(feq_h, TCG_CALL_NO_RWG, tl, env, i64, i64)
++DEF_HELPER_FLAGS_2(fcvt_s_h, TCG_CALL_NO_RWG, i64, env, i64)
++DEF_HELPER_FLAGS_2(fcvt_h_s, TCG_CALL_NO_RWG, i64, env, i64)
++DEF_HELPER_FLAGS_2(fcvt_d_h, TCG_CALL_NO_RWG, i64, env, i64)
++DEF_HELPER_FLAGS_2(fcvt_h_d, TCG_CALL_NO_RWG, i64, env, i64)
++DEF_HELPER_FLAGS_2(fcvt_w_h, TCG_CALL_NO_RWG, tl, env, i64)
++DEF_HELPER_FLAGS_2(fcvt_wu_h, TCG_CALL_NO_RWG, tl, env, i64)
++#if defined(TARGET_RISCV64)
++DEF_HELPER_FLAGS_2(fcvt_l_h, TCG_CALL_NO_RWG, tl, env, i64)
++DEF_HELPER_FLAGS_2(fcvt_lu_h, TCG_CALL_NO_RWG, tl, env, i64)
++#endif
++DEF_HELPER_FLAGS_2(fcvt_h_w, TCG_CALL_NO_RWG, i64, env, tl)
++DEF_HELPER_FLAGS_2(fcvt_h_wu, TCG_CALL_NO_RWG, i64, env, tl)
++#if defined(TARGET_RISCV64)
++DEF_HELPER_FLAGS_2(fcvt_h_l, TCG_CALL_NO_RWG, i64, env, tl)
++DEF_HELPER_FLAGS_2(fcvt_h_lu, TCG_CALL_NO_RWG, i64, env, tl)
++#endif
++DEF_HELPER_FLAGS_1(fclass_h, TCG_CALL_NO_RWG_SE, tl, i64)
++
++
+ /* Special functions */
+ DEF_HELPER_3(csrrw, tl, env, tl, tl)
+ DEF_HELPER_4(csrrs, tl, env, tl, tl, tl)
+diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
+index 86153d9..f6f1ac9 100644
+--- a/target/riscv/insn32-64.decode
++++ b/target/riscv/insn32-64.decode
+@@ -81,3 +81,9 @@ fmv_x_d    1110001  00000 ..... 000 ..... 1010011 @r2
+ fcvt_d_l   1101001  00010 ..... ... ..... 1010011 @r2_rm
+ fcvt_d_lu  1101001  00011 ..... ... ..... 1010011 @r2_rm
+ fmv_d_x    1111001  00000 ..... 000 ..... 1010011 @r2
++
++# *** RV64Zfh Standard Extension (in addition to RV32Zfh) ***
++fcvt_l_h   1100010  00010 ..... ... ..... 1010011 @r2_rm
++fcvt_lu_h  1100010  00011 ..... ... ..... 1010011 @r2_rm
++fcvt_h_l   1101010  00010 ..... ... ..... 1010011 @r2_rm
++fcvt_h_lu  1101010  00011 ..... ... ..... 1010011 @r2_rm
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index bdd8563..185fc4b 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -581,3 +581,35 @@ vcompress_vm    010111 - ..... ..... 010 ..... 1010111 @r
+ 
+ vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+ vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
++
++# *** RV32Zfh Extension ***
++flh        ............   ..... 001 ..... 0000111 @i
++fsh        .......  ..... ..... 001 ..... 0100111 @s
++fmadd_h    ..... 10 ..... ..... ... ..... 1000011 @r4_rm
++fmsub_h    ..... 10 ..... ..... ... ..... 1000111 @r4_rm
++fnmsub_h   ..... 10 ..... ..... ... ..... 1001011 @r4_rm
++fnmadd_h   ..... 10 ..... ..... ... ..... 1001111 @r4_rm
++fadd_h     0000010  ..... ..... ... ..... 1010011 @r_rm
++fsub_h     0000110  ..... ..... ... ..... 1010011 @r_rm
++fmul_h     0001010  ..... ..... ... ..... 1010011 @r_rm
++fdiv_h     0001110  ..... ..... ... ..... 1010011 @r_rm
++fsqrt_h    0101110  00000 ..... ... ..... 1010011 @r2_rm
++fsgnj_h    0010010  ..... ..... 000 ..... 1010011 @r
++fsgnjn_h   0010010  ..... ..... 001 ..... 1010011 @r
++fsgnjx_h   0010010  ..... ..... 010 ..... 1010011 @r
++fmin_h     0010110  ..... ..... 000 ..... 1010011 @r
++fmax_h     0010110  ..... ..... 001 ..... 1010011 @r
++fcvt_h_s   0100010  00000 ..... ... ..... 1010011 @r2_rm
++fcvt_s_h   0100000  00010 ..... ... ..... 1010011 @r2_rm
++fcvt_h_d   0100010  00001 ..... ... ..... 1010011 @r2_rm
++fcvt_d_h   0100001  00010 ..... ... ..... 1010011 @r2_rm
++fcvt_w_h   1100010  00000 ..... ... ..... 1010011 @r2_rm
++fcvt_wu_h  1100010  00001 ..... ... ..... 1010011 @r2_rm
++fmv_x_h    1110010  00000 ..... 000 ..... 1010011 @r2
++feq_h      1010010  ..... ..... 010 ..... 1010011 @r
++flt_h      1010010  ..... ..... 001 ..... 1010011 @r
++fle_h      1010010  ..... ..... 000 ..... 1010011 @r
++fclass_h   1110010  00000 ..... 001 ..... 1010011 @r2
++fcvt_h_w   1101010  00000 ..... ... ..... 1010011 @r2_rm
++fcvt_h_wu  1101010  00001 ..... ... ..... 1010011 @r2_rm
++fmv_h_x    1111010  00000 ..... 000 ..... 1010011 @r2
+diff --git a/target/riscv/insn_trans/trans_rvzfh.inc.c b/target/riscv/insn_trans/trans_rvzfh.inc.c
+new file mode 100644
+index 0000000..1b4dede
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzfh.inc.c
+@@ -0,0 +1,531 @@
++/*
++ * RISC-V translation routines for the RV64Zfh Standard Extension.
++ *
++ * Copyright (c) 2020 SiFive, Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++static bool trans_flh(DisasContext *ctx, arg_flh *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++
++    tcg_gen_addi_tl(t0, t0, a->imm);
++
++    tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], t0, ctx->mem_idx, MO_TEUW);
++
++    gen_nanbox_h(cpu_fpr[a->rd], cpu_fpr[a->rd]);
++
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
++    return true;
++}
++
++static bool trans_fsh(DisasContext *ctx, arg_fsh *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++    tcg_gen_addi_tl(t0, t0, a->imm);
++
++    tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], t0, ctx->mem_idx, MO_TEUW);
++
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
++    return true;
++}
++
++static bool trans_fmadd_h(DisasContext *ctx, arg_fmadd_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fmadd_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
++                       cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fmsub_h(DisasContext *ctx, arg_fmsub_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fmsub_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
++                       cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fnmsub_h(DisasContext *ctx, arg_fnmsub_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fnmsub_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
++                        cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fnmadd_h(DisasContext *ctx, arg_fnmadd_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fnmadd_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
++                        cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fadd_h(DisasContext *ctx, arg_fadd_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fadd_h(cpu_fpr[a->rd], cpu_env,
++                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fsub_h(DisasContext *ctx, arg_fsub_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fsub_h(cpu_fpr[a->rd], cpu_env,
++                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fmul_h(DisasContext *ctx, arg_fmul_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fmul_h(cpu_fpr[a->rd], cpu_env,
++                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fdiv_h(DisasContext *ctx, arg_fdiv_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fdiv_h(cpu_fpr[a->rd], cpu_env,
++                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fsqrt_h(DisasContext *ctx, arg_fsqrt_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fsqrt_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fsgnj_h(DisasContext *ctx, arg_fsgnj_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    if (a->rs1 == a->rs2) { /* FMOV */
++        gen_check_nanbox_h(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
++    } else {
++        TCGv_i64 rs1 = tcg_temp_new_i64();
++        TCGv_i64 rs2 = tcg_temp_new_i64();
++
++        gen_check_nanbox_h(rs1, cpu_fpr[a->rs1]);
++        gen_check_nanbox_h(rs2, cpu_fpr[a->rs2]);
++
++        /* This formulation retains the nanboxing of rs2. */
++        tcg_gen_deposit_i64(cpu_fpr[a->rd], rs2, rs1, 0, 15);
++        tcg_temp_free_i64(rs1);
++        tcg_temp_free_i64(rs2);
++    }
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fsgnjn_h(DisasContext *ctx, arg_fsgnjn_h *a)
++{
++    TCGv_i64 rs1, rs2, mask;
++
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    rs1 = tcg_temp_new_i64();
++    gen_check_nanbox_h(rs1, cpu_fpr[a->rs1]);
++
++    if (a->rs1 == a->rs2) { /* FNEG */
++        tcg_gen_xori_i64(cpu_fpr[a->rd], rs1, MAKE_64BIT_MASK(15, 1));
++    } else {
++        rs2 = tcg_temp_new_i64();
++        gen_check_nanbox_h(rs2, cpu_fpr[a->rs2]);
++
++        /*
++         * Replace bit 15 in rs1 with inverse in rs2.
++         * This formulation retains the nanboxing of rs1.
++         */
++        mask = tcg_const_i64(~MAKE_64BIT_MASK(15, 1));
++        tcg_gen_not_i64(rs2, rs2);
++        tcg_gen_andc_i64(rs2, rs2, mask);
++        tcg_gen_and_i64(rs1, mask, rs1);
++        tcg_gen_or_i64(cpu_fpr[a->rd], rs1, rs2);
++
++        tcg_temp_free_i64(mask);
++        tcg_temp_free_i64(rs2);
++    }
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fsgnjx_h(DisasContext *ctx, arg_fsgnjx_h *a)
++{
++    TCGv_i64 rs1, rs2;
++
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    rs1 = tcg_temp_new_i64();
++    gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
++
++    if (a->rs1 == a->rs2) { /* FABS */
++        tcg_gen_andi_i64(cpu_fpr[a->rd], rs1, ~MAKE_64BIT_MASK(15, 1));
++    } else {
++        rs2 = tcg_temp_new_i64();
++        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
++
++        /*
++         * Xor bit 15 in rs1 with that in rs2.
++         * This formulation retains the nanboxing of rs1.
++         */
++        tcg_gen_andi_i64(rs2, rs2, MAKE_64BIT_MASK(15, 1));
++        tcg_gen_xor_i64(cpu_fpr[a->rd], rs1, rs2);
++
++        tcg_temp_free_i64(rs2);
++    }
++
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fmin_h(DisasContext *ctx, arg_fmin_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    gen_helper_fmin_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
++                      cpu_fpr[a->rs2]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fmax_h(DisasContext *ctx, arg_fmax_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    gen_helper_fmax_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
++                      cpu_fpr[a->rs2]);
++    mark_fs_dirty(ctx);
++    return true;
++}
++
++static bool trans_fcvt_s_h(DisasContext *ctx, arg_fcvt_s_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_s_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
++
++    mark_fs_dirty(ctx);
++
++    return true;
++}
++
++static bool trans_fcvt_d_h(DisasContext *ctx, arg_fcvt_d_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_d_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
++
++    mark_fs_dirty(ctx);
++
++
++    return true;
++}
++
++static bool trans_fcvt_h_s(DisasContext *ctx, arg_fcvt_h_s *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_h_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
++
++    mark_fs_dirty(ctx);
++
++    return true;
++}
++
++static bool trans_fcvt_h_d(DisasContext *ctx, arg_fcvt_h_d *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++    REQUIRE_EXT(ctx, RVD);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_h_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
++
++    mark_fs_dirty(ctx);
++
++    return true;
++}
++
++static bool trans_feq_h(DisasContext *ctx, arg_feq_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++    TCGv t0 = tcg_temp_new();
++    gen_helper_feq_h(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++    return true;
++}
++
++static bool trans_flt_h(DisasContext *ctx, arg_flt_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++    TCGv t0 = tcg_temp_new();
++    gen_helper_flt_h(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++    return true;
++}
++
++static bool trans_fle_h(DisasContext *ctx, arg_fle_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++    TCGv t0 = tcg_temp_new();
++    gen_helper_fle_h(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++    return true;
++}
++
++static bool trans_fclass_h(DisasContext *ctx, arg_fclass_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++
++    gen_helper_fclass_h(t0, cpu_fpr[a->rs1]);
++
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fcvt_w_h(DisasContext *ctx, arg_fcvt_w_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_w_h(t0, cpu_env, cpu_fpr[a->rs1]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fcvt_wu_h(DisasContext *ctx, arg_fcvt_wu_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_wu_h(t0, cpu_env, cpu_fpr[a->rs1]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fcvt_h_w(DisasContext *ctx, arg_fcvt_h_w *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_h_w(cpu_fpr[a->rd], cpu_env, t0);
++
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fcvt_h_wu(DisasContext *ctx, arg_fcvt_h_wu *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_h_wu(cpu_fpr[a->rd], cpu_env, t0);
++
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fmv_x_h(DisasContext *ctx, arg_fmv_x_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++
++#if defined(TARGET_RISCV64)
++    tcg_gen_ext16s_tl(t0, cpu_fpr[a->rs1]); // 16 bits->64 bits
++#else
++    tcg_gen_extrl_i64_i32(t0, cpu_fpr[a->rs1]); //16 bits->32 bits
++    tcg_gen_ext16s_tl(t0, t0);
++#endif
++
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fmv_h_x(DisasContext *ctx, arg_fmv_h_x *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++
++    tcg_gen_extu_tl_i64(cpu_fpr[a->rd], t0);
++    gen_nanbox_h(cpu_fpr[a->rd], cpu_fpr[a->rd]);
++
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++#ifdef TARGET_RISCV64
++
++static bool trans_fcvt_l_h(DisasContext *ctx, arg_fcvt_l_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_l_h(t0, cpu_env, cpu_fpr[a->rs1]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fcvt_lu_h(DisasContext *ctx, arg_fcvt_lu_h *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_lu_h(t0, cpu_env, cpu_fpr[a->rs1]);
++    gen_set_gpr(a->rd, t0);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fcvt_h_l(DisasContext *ctx, arg_fcvt_h_l *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_h_l(cpu_fpr[a->rd], cpu_env, t0);
++
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
++
++    return true;
++}
++
++static bool trans_fcvt_h_lu(DisasContext *ctx, arg_fcvt_h_lu *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVZfh);
++
++    TCGv t0 = tcg_temp_new();
++    gen_get_gpr(t0, a->rs1);
++
++    gen_set_rm(ctx, a->rm);
++    gen_helper_fcvt_h_lu(cpu_fpr[a->rd], cpu_env, t0);
++
++    mark_fs_dirty(ctx);
++    tcg_temp_free(t0);
++
++    return true;
++}
++#endif
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index bf35182..e227534 100644
+index e227534..6dbd8c9 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -119,6 +119,21 @@ static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
-     tcg_temp_free_i64(t_nan);
- }
+@@ -769,6 +769,7 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+ #include "insn_trans/trans_rvd.inc.c"
+ #include "insn_trans/trans_rvh.inc.c"
+ #include "insn_trans/trans_rvv.inc.c"
++#include "insn_trans/trans_rvzfh.inc.c"
+ #include "insn_trans/trans_privileged.inc.c"
  
-+static void gen_nanbox_h(TCGv_i64 out, TCGv_i64 in)
-+{
-+    tcg_gen_ori_i64(out, in, MAKE_64BIT_MASK(16, 48));
-+}
-+
-+static void gen_check_nanbox_h(TCGv_i64 out, TCGv_i64 in)
-+{
-+    TCGv_i64 t_max = tcg_const_i64(0xffffffffffff0000ull);
-+    TCGv_i64 t_nan = tcg_const_i64(0xffffffffffff7e00ull);
-+
-+    tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
-+    tcg_temp_free_i64(t_max);
-+    tcg_temp_free_i64(t_nan);
-+}
-+
- static void generate_exception(DisasContext *ctx, int excp)
- {
-     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+ /* Include the auto-generated decoder for 16 bit insn */
 -- 
 2.7.4
 
