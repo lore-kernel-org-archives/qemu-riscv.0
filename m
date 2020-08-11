@@ -1,70 +1,105 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k5GZr-000523-5m
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Aug 2020 18:47:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56310)
+	id 1k5I4s-0006iY-0R
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Aug 2020 20:23:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42814)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k5GZp-00051s-QH; Mon, 10 Aug 2020 18:47:33 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:35064)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k5GZo-00009Z-BY; Mon, 10 Aug 2020 18:47:33 -0400
-Received: by mail-io1-xd41.google.com with SMTP id s189so10705047iod.2;
- Mon, 10 Aug 2020 15:47:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Dxc546p/XTjL0jg8GPPGX9kFHD8YVGDZwJnCXYzvNm8=;
- b=XH5l59YwrDapFwBZMNPnhwJj4Gi075lXLv468KDIvVEqnJ1XEIn8PXIPnu4yo+NPF5
- pK0y6XlCQUU093MhaJ45PZbF7FqZwWbTFnEI6fmY9eUWU/fgFEtxsDSvLHpPX3F06JkC
- j79cZ30huZgVVaSQcE+DPd00xS0hkO8Tb6vyAvejg9dwYt9Q7shF+MmAOI7uB9olHNNo
- 9pmcwlCK77U6Xg67kFSupM5gogU9yAzmxSLTxVRWCWWBPQ8QhUOTnAiGHuQ3gVeDQw5Z
- fc8I5i2UM7bhZdOq30gPv/GtmZ2nnEVx+uBaccSse6DPWta8dr84ePtozzqIjEfqeE9r
- GaCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Dxc546p/XTjL0jg8GPPGX9kFHD8YVGDZwJnCXYzvNm8=;
- b=mQvZpDv9wsuIevCufGTDN1uJZ3bcAkzQZjQtUyoLuBfXI68fpBX245K5TmBJBvMnVj
- Sq6RGR1WCLzl5JtTJZKjSMWqj6ykxR+UIzQ72cbyGkxuhHgsuGbE9fLBYBJNDBWAcGTA
- 03xbMixJcL6lli1pFlQK6oKdQY1rOfEIQAGwxPIwHehUG136qmZ1uXcEzjd4Ci5qtmxg
- YSsWaX1dlA5CttGbbRHp48+mydQ3WCmc2Mt3xwUiXgPXKnLrfzEmiw89fNcKVQdZeqy8
- BN9a8KcgowEEqL2smqTgjKlqCSB1eWMJ5IsCg55OKvfDWk4zOLtYUUAM4frz2pyD5yRb
- DU1g==
-X-Gm-Message-State: AOAM5307khvwppHAe1cMDkEJr9jrHDTx/eGrsULZ9fpCtbJAFPVGQR2y
- EjIuZ2ql/PA1OVmGR3btN7HwWgYvwlmdargugmA=
-X-Google-Smtp-Source: ABdhPJx7AYTEHUAb39AWIK2s3wvIww3TNlQkO2gDr8eV/mGBhN2f1c3rL40AzAi9N74Joy8hV44Os1m8qii0KkwwamA=
-X-Received: by 2002:a02:84c1:: with SMTP id f59mr22676456jai.106.1597099650822; 
- Mon, 10 Aug 2020 15:47:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <weiying_hou@outlook.com>)
+ id 1k5I4p-0006gb-BH; Mon, 10 Aug 2020 20:23:39 -0400
+Received: from mail-oln040092255024.outbound.protection.outlook.com
+ ([40.92.255.24]:37299 helo=APC01-HK2-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <weiying_hou@outlook.com>)
+ id 1k5I4n-000200-4j; Mon, 10 Aug 2020 20:23:39 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=asgY9fqENjrWG+6+/fteRegOVHC7R14w8szJ6mk9q+yVH+0HgksUT+NKRzbWQ713wUG5sH67UYnJ+kr16c76whXwrR2pmc83+9EYZtDX/hSuPF20lNehmXkPvSFYI8wK3inf531i7VRl8F+skX8RG3HWhBE0opo7kNnTA+BWacr1jBS9OWk3kLgN5kncPOMlWZRr2jBSA64sn1ZYewlToPCeGMfpT/imFPrBNDr5cgfB+OJaSykQ41PtypAR987AaaizGYyll6rBUvl5G7x/QjjOmGTDLRj3cCLVGEnTeIvUJI9PZnQlhx+30FUU47G+yTjcpOHVUjOGghnGWd1ERA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NguLQaFEZBuLOjw5huGrCl6lfp+dmDlrkXb1bqVvNyg=;
+ b=d39fLBAFZviNYEpiwnhm4ICAmruKzYWjb+OSYKBXG9v2yzITpym+vnGy9r0jVU6e5dUR9m+rt2zE7Db5gAXoY+JnX3aBFlUPB+uYOn99k1iBGjhhR7QBWD1zdIV/xP83gauHanoego/pJmUjT1I+FdBAfPNqBWSmbj/u8y4qpSOQ+1y994o/yuiuy7rkg7Nomj8ZFsPMOWrFjuYLYZgzG0aXrrq4mTkbUSHpO1Gkb1lg6vaYybCIGhMFGd9zZq0ovJzNjZ3siWYJT0gsg54uP5uX5ZBJyzqRMAmWWyEuESZKxHubPZq9tW1JjAwy6HFKB9L3Q+bmSHrarYhFBO0ylw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NguLQaFEZBuLOjw5huGrCl6lfp+dmDlrkXb1bqVvNyg=;
+ b=OlA+YIg5VHhk+caMLuwpelMLs4yGVorb5eG+bPLUmSzbw9AfnIo3/Wu6qHZrJX3Ven/0CPJgjaTMrh10EnIRCZ46mBXYON/7+G4jzMutFMI6eN2uuEH/5WPu8FU2fhAmWQ5ibsJ8cqarnzOUhdV+tdlQxrrEgHg2E1kT84TIgMa4BzwpxB3dl9oNRUmrE9qdr1uR9D2CodHghGjGnTVQU47B1qpe2BJpXekCiUSInEl0RMeVRoq5CHFHrYpwWf+DBm02VZeweOMBQD5Vz5qixvTJPuSVGm7oJr79e4sYjdrueTKBluuZgzzNtwq8AAEk3HJ85DuLqBlGlHaGhyBq2Q==
+Received: from SG2APC01FT057.eop-APC01.prod.protection.outlook.com
+ (2a01:111:e400:7ebd::45) by
+ SG2APC01HT141.eop-APC01.prod.protection.outlook.com (2a01:111:e400:7ebd::363)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.16; Tue, 11 Aug
+ 2020 00:23:30 +0000
+Received: from SG2PR02MB2634.apcprd02.prod.outlook.com
+ (2a01:111:e400:7ebd::4c) by SG2APC01FT057.mail.protection.outlook.com
+ (2a01:111:e400:7ebd::389) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.16 via Frontend
+ Transport; Tue, 11 Aug 2020 00:23:30 +0000
+X-IncomingTopHeaderMarker: OriginalChecksum:A5D1BD764E4DD9772612D0E56AE0F0C1556E1AD6C5ED29BB985860BAA5FCA7C3;
+ UpperCasedChecksum:6C6846ABE1A1C26B8888172AB12897970234B22D30E82347BAC99021B0AA097E;
+ SizeAsReceived:7504; Count:47
+Received: from SG2PR02MB2634.apcprd02.prod.outlook.com
+ ([fe80::8f0:37c7:286c:1725]) by SG2PR02MB2634.apcprd02.prod.outlook.com
+ ([fe80::8f0:37c7:286c:1725%5]) with mapi id 15.20.3261.024; Tue, 11 Aug 2020
+ 00:23:30 +0000
+From: Hou Weiying <weiying_hou@outlook.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de
+Subject: [PATCH v2 0/4] riscv: Add enhanced PMP support
+Date: Tue, 11 Aug 2020 08:23:21 +0800
+Message-ID: <SG2PR02MB26340A07DB8609F72486202C93450@SG2PR02MB2634.apcprd02.prod.outlook.com>
+X-Mailer: git-send-email 2.20.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: HK0PR01CA0050.apcprd01.prod.exchangelabs.com
+ (2603:1096:203:a6::14) To SG2PR02MB2634.apcprd02.prod.outlook.com
+ (2603:1096:4:51::19)
+X-Microsoft-Original-Message-ID: <20200811002325.46056-1-weiying_hou@outlook.com>
 MIME-Version: 1.0
-References: <20200729112801.108985-1-anup.patel@wdc.com>
- <20200729112801.108985-3-anup.patel@wdc.com>
-In-Reply-To: <20200729112801.108985-3-anup.patel@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 10 Aug 2020 15:37:06 -0700
-Message-ID: <CAKmqyKNaXpYt21PdX3EwwDXQEjcTD5_+Vpi3J3f2CNywjX8_OQ@mail.gmail.com>
-Subject: Re: [PATCH 2/3] target/riscv: Fix write_htinst() implementation
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atish.patra@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Anup Patel <anup@brainfault.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost.localdomain (223.89.139.46) by
+ HK0PR01CA0050.apcprd01.prod.exchangelabs.com (2603:1096:203:a6::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.19 via Frontend
+ Transport; Tue, 11 Aug 2020 00:23:29 +0000
+X-Mailer: git-send-email 2.20.1
+X-Microsoft-Original-Message-ID: <20200811002325.46056-1-weiying_hou@outlook.com>
+X-TMN: [KrnAezB6yDSFZgF39g0k4hAcD5Buub5l]
+X-MS-PublicTrafficType: Email
+X-IncomingHeaderCount: 47
+X-EOPAttributedMessage: 0
+X-MS-Office365-Filtering-Correlation-Id: 7331e4d0-9408-43ac-841e-08d83d8cc5ea
+X-MS-TrafficTypeDiagnostic: SG2APC01HT141:
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: iLV2X5+bylrJi6oVfsq2TJ1Bj0wcoQUDQcI9PBa2lI7bzWtLWtjqFjj9kFBy0A99fZCwN/tDiLTEfJNFu5cLYtGdlZS9JKavo//uPLHIy80oefJYiMv5pM1qj7Y7dY5wdMKcjQdSFp0gcHB3haG7yG29WDJW6x3wmxJ3VGvR1PO9EIk26pSsIhObLVZMlA7e722mvaLt3GAFGNYUbBdivw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:0; SRV:;
+ IPV:NLI; SFV:NSPM; H:SG2PR02MB2634.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:; SFS:; DIR:OUT; SFP:1901; 
+X-MS-Exchange-AntiSpam-MessageData: PIxJaScdtbmS/HqmI/LsK3Bgti7vWLp9C08b9b4O/6EUi00egRvimqtzXFb8dGKHqSGFJiOqB9tcvkG5NfTQrqQip9fTU9R0s9RU4o+ZJggFiN58vEOEZ7CLOWc7lUgiRdpjgJyRbGaC8j4Xo+4kDg==
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7331e4d0-9408-43ac-841e-08d83d8cc5ea
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2020 00:23:30.1610 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: SG2APC01FT057.eop-APC01.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2APC01HT141
+Received-SPF: pass client-ip=40.92.255.24;
+ envelope-from=weiying_hou@outlook.com;
+ helo=APC01-HK2-obe.outbound.protection.outlook.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/10 20:23:32
+X-ACL-Warn: Detected OS   = Windows NT kernel [generic] [fuzzy]
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ MSGID_FROM_MTA_HEADER=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-1,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,37 +112,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2020 22:47:34 -0000
+X-List-Received-Date: Tue, 11 Aug 2020 00:23:39 -0000
 
-On Wed, Jul 29, 2020 at 4:30 AM Anup Patel <anup.patel@wdc.com> wrote:
->
-> The htinst CSR is writeable from M-mode and HS-mode so
-> we should not ignore writes to htinst CSR.
->
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+v1 -> v2 :
+* regenerate this patch based on the latest upstream
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Hou Weiying (4):
+  Define ePMP mseccfg
+  Implementation of enhanced PMP(ePMP) support
+  Add ePMP CSR accesses
+  Add a config option for ePMP.
 
-Alistair
+ target/riscv/cpu.c        |   9 ++
+ target/riscv/cpu.h        |   3 +
+ target/riscv/cpu_bits.h   |   3 +
+ target/riscv/csr.c        |  18 ++++
+ target/riscv/gdbstub.c    |   2 +
+ target/riscv/pmp.c        | 174 +++++++++++++++++++++++++++++++++++---
+ target/riscv/pmp.h        |  12 +++
+ target/riscv/trace-events |   4 +
+ 8 files changed, 213 insertions(+), 12 deletions(-)
 
-> ---
->  target/riscv/csr.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index f985b85de4..99fcb7f67d 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -943,6 +943,7 @@ static int read_htinst(CPURISCVState *env, int csrno, target_ulong *val)
->
->  static int write_htinst(CPURISCVState *env, int csrno, target_ulong val)
->  {
-> +    env->htinst = val;
->      return 0;
->  }
->
-> --
-> 2.25.1
->
->
+-- 
+2.20.1
+
 
