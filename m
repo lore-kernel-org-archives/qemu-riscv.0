@@ -1,109 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k5I56-00078f-4o
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Aug 2020 20:23:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42926)
+	id 1k5Q8P-0003v2-GB
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Aug 2020 04:59:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48890)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <weiying_hou@outlook.com>)
- id 1k5I52-00076g-MS; Mon, 10 Aug 2020 20:23:54 -0400
-Received: from mail-hk2apc01olkn0827.outbound.protection.outlook.com
- ([2a01:111:f400:febc::827]:18848
- helo=APC01-HK2-obe.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <weiying_hou@outlook.com>)
- id 1k5I50-000211-RT; Mon, 10 Aug 2020 20:23:52 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Aksbvnrs05CL7nlvM1rV3K58xnqYqF6A2dbQ91lsoII8dRvMT19RX3scpuBQNGtZfVSX7iO+udRxkp5WXD4LsYbArZNBcuWXyb34F3a8AIueSfdaU4JMsoKcWBJnQdf0Az8TjBkj+Wc3d1ofDdfa42n1JWWQ89bvNGgBaK7fPUtum3LjF2kWgeTVVVZqcGW5cOrfk2ES78DWx1GzgMI+6yZr7jxYTxpDe8OXPsm0wSjetnbK0zDnvEEP4Z9z3IPki6N+Dg1ewKBD25Ig2ilNKojoCKwPQnvf5YjNqrwjM06EqJIN6CHPRvlpCcgGgzuD6i7R52l0o7zoHF9eFQekLA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kdGkXH8F4w3dyBYAEE3eSCxz42ACBtC8kQixFIYGVCI=;
- b=FF7pJXFndLeKaYSr++ohl8fkgFqELZpF2d1agCjhz+0l63h42T1UBDWlLJOzczJPwzioPmcF4e0biS4LdQUpJGFjM+LpMemfWsLRBOb1a+lbMAIq7Nj+Wr7SNG+xa92vze0KIO4UUNwZA6IbvfmcvcZvu3qWLszS4gfOmsQ4TsMfH5RpX73eynXxTCbxhIjoXruZmRDJe8B37vnBVsLSnvTE5AVKn6HWoQ7T+HXrhwE11IhEZYHiZIDJ5n6C6G89V50zwBZgXo44zGRqKuXiUgqKAVFWoiT1+28PLbOo/hHP9SohWzh23GhSzDTQ7LuC2Ao2CgcXV37aln0+gVFNEw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kdGkXH8F4w3dyBYAEE3eSCxz42ACBtC8kQixFIYGVCI=;
- b=KLhxqTzMwp97bNCgyR+5t+W8eoLQbTozlu/Cuni99Wr3dZdpw2PsmoyM5S/V2TqB/dCF22E35Zsl7qY3By8y2mD6Aihb9PR5afsaSA4bMM6w5zmIAAnB6PRBm7NeROPWaoq4zvcOKiZZ9twECWvY61ZCbwPO1sl7GzDdu4+F+8QmNoRVJT+uYOPVFjwUo9koslBAEFyWwyTMABRFGg2w4fDdPlkonJSMp1ihOQ+eqyG4zF916pKY17qMdDZkQbPrr3loC7h5Aw1xOB1xiyheieNLkheYO2qBUGeThvv8WY4FsSrvpT5dBDN7Ht+qMqtap3kEgCDSMsnjX7X9K5IzAw==
-Received: from SG2APC01FT057.eop-APC01.prod.protection.outlook.com
- (2a01:111:e400:7ebd::40) by
- SG2APC01HT214.eop-APC01.prod.protection.outlook.com (2a01:111:e400:7ebd::267)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.16; Tue, 11 Aug
- 2020 00:23:34 +0000
-Received: from SG2PR02MB2634.apcprd02.prod.outlook.com
- (2a01:111:e400:7ebd::4c) by SG2APC01FT057.mail.protection.outlook.com
- (2a01:111:e400:7ebd::389) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.16 via Frontend
- Transport; Tue, 11 Aug 2020 00:23:34 +0000
-X-IncomingTopHeaderMarker: OriginalChecksum:30FEBE8ED4FE323B2093882BF5BB95D7281322F16460E495CC7E42B1C498C521;
- UpperCasedChecksum:CA6FC02BA149E3F7663F15882B23E6578B87B63157FEE4A4D7A76A4A186ECDD4;
- SizeAsReceived:7692; Count:49
-Received: from SG2PR02MB2634.apcprd02.prod.outlook.com
- ([fe80::8f0:37c7:286c:1725]) by SG2PR02MB2634.apcprd02.prod.outlook.com
- ([fe80::8f0:37c7:286c:1725%5]) with mapi id 15.20.3261.024; Tue, 11 Aug 2020
- 00:23:34 +0000
-From: Hou Weiying <weiying_hou@outlook.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, Hongzheng-Li <Ethan.Lee.QNL@gmail.com>,
- Myriad-Dreamin <camiyoru@gmail.com>
-Subject: [PATCH v2 4/4] Add a config option for ePMP.
-Date: Tue, 11 Aug 2020 08:23:25 +0800
-Message-ID: <SG2PR02MB263458D195A60A57C05EBE9993450@SG2PR02MB2634.apcprd02.prod.outlook.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200811002325.46056-1-weiying_hou@outlook.com>
-References: <20200811002325.46056-1-weiying_hou@outlook.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: HK0PR01CA0050.apcprd01.prod.exchangelabs.com
- (2603:1096:203:a6::14) To SG2PR02MB2634.apcprd02.prod.outlook.com
- (2603:1096:4:51::19)
-X-Microsoft-Original-Message-ID: <20200811002325.46056-5-weiying_hou@outlook.com>
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost.localdomain (223.89.139.46) by
- HK0PR01CA0050.apcprd01.prod.exchangelabs.com (2603:1096:203:a6::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3261.19 via Frontend
- Transport; Tue, 11 Aug 2020 00:23:33 +0000
-X-Mailer: git-send-email 2.20.1
-X-Microsoft-Original-Message-ID: <20200811002325.46056-5-weiying_hou@outlook.com>
-X-TMN: [Ds+cNC+tOFcDZv48zO7ufvMxjR7Ggn+l]
-X-MS-PublicTrafficType: Email
-X-IncomingHeaderCount: 49
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-Correlation-Id: 1ecaa089-4ff5-4317-3cf9-08d83d8cc8ab
-X-MS-TrafficTypeDiagnostic: SG2APC01HT214:
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: AX6ML41wzrroa7syfRdgX7dvJrfSiGeMxUcSRkp5ZG3i9URwJQdaRRuZstnN6U4JBfrauuuvHjw9pY9cOB0zYhnLSaSIW38HCXd9JxO+WyPOrRgMNQ6zPmi9udrc8KgVLU4cERK48sZBvN6GEsagg74vC4n21BSkicdIdYkD/AT6HFUwrZm1sQmobq8aK0jYasW7dXVV81pEBruBHDHtDA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:0; SRV:;
- IPV:NLI; SFV:NSPM; H:SG2PR02MB2634.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFTY:; SFS:; DIR:OUT; SFP:1901; 
-X-MS-Exchange-AntiSpam-MessageData: n9e/bFJtwpFES49ObC0n4iVc1DiXmbj4WaelH6tAeFs7E1wWhXKS/5OEONBqNWIWxxu6lNT4TpLx8pjinYG/CThCFETXbI7ZxZq1jvnY6TUD44SW7VRn4ZynBiSodfWyTvdg9bkP3VwLD3KYLWP+Vg==
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1ecaa089-4ff5-4317-3cf9-08d83d8cc8ab
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2020 00:23:34.6103 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-AuthSource: SG2APC01FT057.eop-APC01.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2APC01HT214
-Received-SPF: pass client-ip=2a01:111:f400:febc::827;
- envelope-from=weiying_hou@outlook.com;
- helo=APC01-HK2-obe.outbound.protection.outlook.com
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1k5Q8O-0003so-Kk
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2020 04:59:52 -0400
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:35812)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1k5Q8M-0005T9-So
+ for qemu-riscv@nongnu.org; Tue, 11 Aug 2020 04:59:52 -0400
+Received: by mail-pg1-x52a.google.com with SMTP id o5so6410442pgb.2
+ for <qemu-riscv@nongnu.org>; Tue, 11 Aug 2020 01:59:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=8Oa1NMTa30y2wMEwqzgmHnRPPsrYFPcBXMzRuwI3Bf4=;
+ b=NbAQ3rFaLfb2y2xQf+774lG4hxAqAVBoBqUlOZ3T5aHP5hhX4SSclXz3ztQzR+p1ob
+ JHjent55JjqoDIJHMyr74SGCdc8YTozabS2HKV/bHZ9vCtxMJmWsGAmmlc9+WYdDnCQk
+ qUGRj/mNliqw4YRhMgln/vCj8TPBwPeOBLk8vGVLgnTS3+7amGrEHc/esTKR8nPkZKsx
+ 53BZUkM9XZ+GwMMNKwmyp2bmYWMcwxkHd17UVBGzIMI+MyW92GbtedgSVhra0wSEdqbA
+ SrXlWZddYCgZd896zYDu7RHydx4SQj3X7kMg3RwlPqWJSU2jb1zDImjB8roRgf5U4lkC
+ AlGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=8Oa1NMTa30y2wMEwqzgmHnRPPsrYFPcBXMzRuwI3Bf4=;
+ b=WNjBtDgbr9sdZ8UM3hGZqumsenTttAl+lc2iqZB3NwxxtAIrznyCHmEA0O74zIae9r
+ 0bqTDS23O8plQmPlRWgYFdUiP6Vk9E57gb1s9hkggs7Fc3EG6LM8lXLnkISSzrZZr7SG
+ th4e+QEaDanaH1ARY+yU1CCeuulYTymiV4mO2w40/sfzSi/KDwBsU3s8814cV3Zam9mK
+ AkrrDOMy9HFn6ZTeqJ3SUt87zVSjbXGRFPeIjZJ7Zq+HS9eVEq8ZHVUbTdgGeCLGBfbF
+ jNACmDatYBsHngWyStblYtDOUq8BaB1W2n50R3GNirAzv9vsxAwfLOm3J8wF+UqYl7AN
+ Z+xA==
+X-Gm-Message-State: AOAM531kxGw8PI0gCqrQKNRdU+kCSiTW9i68OVRkwSmZahqV4YtkPTA8
+ iT7DBPFvkzOxgCyhJq1SfQ9eiQ==
+X-Google-Smtp-Source: ABdhPJxYXlTrwuFJGx6EvTr0dN6ILxLk9QtWXCyUNfK4TNtuI2Q4ytOdkUdT5acwjBjOsJuqNHHL2g==
+X-Received: by 2002:a63:4d8:: with SMTP id 207mr32132pge.146.1597136388443;
+ Tue, 11 Aug 2020 01:59:48 -0700 (PDT)
+Received: from gamma11.internal.sifive.com ([64.62.193.194])
+ by smtp.gmail.com with ESMTPSA id w10sm1282499pjq.46.2020.08.11.01.59.47
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 11 Aug 2020 01:59:47 -0700 (PDT)
+From: Chih-Min Chao <chihmin.chao@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Chih-Min Chao <chihmin.chao@sifive.com>
+Subject: [PATCH 0/3] RFC: target/riscv: add half-precision floating-point
+ extension
+Date: Tue, 11 Aug 2020 01:59:23 -0700
+Message-Id: <1597136381-17296-1-git-send-email-chihmin.chao@sifive.com>
+X-Mailer: git-send-email 2.7.4
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=chihmin.chao@sifive.com; helo=mail-pg1-x52a.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- MSGID_FROM_MTA_HEADER=0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -116,75 +73,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Aug 2020 00:23:54 -0000
+X-List-Received-Date: Tue, 11 Aug 2020 08:59:52 -0000
 
-Add a config option to enable experimental support for ePMP. This
-is disabled by default and can be enabled with 'x-epmp=true'.
+The spec is a draft but required by vector extension.  The reference is 
+availabe at
+   https://github.com/riscv/riscv-isa-manual/tree/zfh
 
-Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
-Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
-Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
----
- target/riscv/cpu.c | 9 +++++++++
- target/riscv/cpu.h | 3 +++
- 2 files changed, 12 insertions(+)
+The patch depends two unmerged patch set
+  1. extend softfloat to support int8 and alternative NaN probagapation
+  2. NaNBox fix
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 228b9bdb5d..d691d6ffd6 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -371,6 +371,14 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
- 
-     if (cpu->cfg.pmp) {
-         set_feature(env, RISCV_FEATURE_PMP);
-+
-+        /*
-+         * Enhanced PMP should only be available
-+         * on harts with PMP support
-+         */
-+        if (cpu->cfg.epmp) {
-+            set_feature(env, RISCV_FEATURE_EPMP);
-+        }
-     }
- 
-     /* If misa isn't set (rv32 and rv64 machines) set it here */
-@@ -518,6 +526,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-+    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a804a5d0ba..9a813f3f1c 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -73,6 +73,7 @@
- enum {
-     RISCV_FEATURE_MMU,
-     RISCV_FEATURE_PMP,
-+    RISCV_FEATURE_EPMP,
-     RISCV_FEATURE_MISA
- };
- 
-@@ -217,6 +218,7 @@ struct CPURISCVState {
- 
-     /* physical memory protection */
-     pmp_table_t pmp_state;
-+    target_ulong mseccfg;
- 
-     /* machine specific rdtime callback */
-     uint64_t (*rdtime_fn)(void);
-@@ -291,6 +293,7 @@ typedef struct RISCVCPU {
-         uint16_t elen;
-         bool mmu;
-         bool pmp;
-+        bool epmp;
-     } cfg;
- } RISCVCPU;
- 
+Based-on: <1596102747-20226-1-git-send-email-chihmin.chao@sifive.com>
+Based-on: <20200724002807.441147-1-richard.henderson@linaro.org>
+
+Chih-Min Chao (2):
+  target/riscv: add NaN-Boxing helper for half-float
+  target/riscv: support 'x-k' in cpu option
+
+Kito Cheng (1):
+  target/riscv: Implement zfh extension
+
+ target/riscv/cpu.c                        |   4 +
+ target/riscv/cpu.h                        |   2 +
+ target/riscv/fpu_helper.c                 | 180 ++++++++++
+ target/riscv/helper.h                     |  34 ++
+ target/riscv/insn32-64.decode             |   6 +
+ target/riscv/insn32.decode                |  32 ++
+ target/riscv/insn_trans/trans_rvzfh.inc.c | 531 ++++++++++++++++++++++++++++++
+ target/riscv/internals.h                  |  16 +
+ target/riscv/translate.c                  |  16 +
+ 9 files changed, 821 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzfh.inc.c
+
 -- 
-2.20.1
+2.7.4
 
 
