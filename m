@@ -1,76 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k5toF-00070g-S8
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 12:41:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45064)
+	id 1k5vtO-0008Ms-L8
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 14:54:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52050)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k5toE-0006y9-67; Wed, 12 Aug 2020 12:41:02 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:40459)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1k5vtL-0008Kz-Sg; Wed, 12 Aug 2020 14:54:27 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:35430)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k5toB-00045o-A5; Wed, 12 Aug 2020 12:41:01 -0400
-Received: by mail-il1-x142.google.com with SMTP id x1so2367571ilp.7;
- Wed, 12 Aug 2020 09:40:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1k5vtK-00051B-D8; Wed, 12 Aug 2020 14:54:27 -0400
+Received: by mail-wr1-x444.google.com with SMTP id f1so3035593wro.2;
+ Wed, 12 Aug 2020 11:54:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=WNvNPXWPfE9l3sTS7CTrUl9KyStKg4151mJXx5lyPYE=;
- b=HNsMPtrnzMWl1k0qes1OS5/5Dz6Oq00ZF5r25U0tSNr+v7xUjU5fdlRLVOjc+i9Dn8
- HG8oy3D30/2m3WTlSDEk0qB2ciItGR7KsAaTA3ytKqQapzstsFZ0QZdh34RZOjhTwCqH
- r1BhUCfe32kTWYTUM5h1vWFCxrpmLLSwoKgvpF4Xf0vGV8wfCBlQiEXtw6jlvd3/PUxT
- D4aFl3OKaAs70wcswdGubuiOM9e4kfZlqoEZx6kgn2zbCt1QvaOaq6SlgYG0o/FUvosq
- FoJrlSc8TY2hq7TclXL6HoPWDUk26OEPElnfal274Z1jBvESLbJ2aWquqVk7mRW/DSHb
- QzfQ==
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=dxAExs3eG8Wiz2w/0qPoftcsX8vyKKdMXw++FjakOPk=;
+ b=LRSR+B+mhYF83SM0LAVcUvQz2AqtGJkMQXFdgAMj/HAIaYdjqeWOZ55esijc3VX1tU
+ HI4en9VjscOVmYuqNOtdSJymNWYo8a4nXxJYG0z1EfarQEPr1guW//hvwzu7qqQ1RSb6
+ 9yuL+C86eVz3HYeqvTSrEfKvGUL2pHq1VaLpiP0qW0RjoflE2sjhAKNlhqpKrvh++5u1
+ BSvoM3lwgfFxTcMPRAPsiMfrxyf4w61qekpo5ngA4uN3RrfjZshRlLD8czixRVg4BjSS
+ HANeMhodroYBVKaywFWq2NgYOMcaQFBXY9uh8MYgIyUC7atakj0NkorxNeKLD62N/zpF
+ btPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=WNvNPXWPfE9l3sTS7CTrUl9KyStKg4151mJXx5lyPYE=;
- b=fseoJKpogq54ZkVRYHJFbIz2qxTG0nXJ8qch3xF+M/Z26x+gKflUjcJTCinm8YhGlY
- Ck9t2sD9KQT/qF3dyQ+NLP38f7sE9G3E/0U+NksBwC8QTHiah97l6udyz4pJkJ0qm12g
- 9uWsiEFJA5++tRaQH3FiChlSZJBW+pYciYPTpT4/FvZ9M8q5T9wLwY9XOVbfLhuzSHr9
- E9OH2USVtsPcIuJo4/Gspf3WX8kapmE1+yLIdryH4hkAg8VvkIDPYxHe6/xNx6fGxZ/v
- KEuXFDlIwAejK37YPo5T4H+wXf3VFlT7jaKLDwbMXpQMFx/TJQqUx+A4TKImK+T1cjXd
- WWcg==
-X-Gm-Message-State: AOAM532ndB0drB80nmhfcuYR7LBhP6Iodml8DZvm1FiYb4zHL/B4DCUU
- FF/iHGdKNEU2+qNuWCMaHVL0REmk+m3U9sZwTSI=
-X-Google-Smtp-Source: ABdhPJyolds156rpD+dvZp44J0V29bWq9jMHvXf4a6TvhCnYP/Uyk2Jne6WU9PlcAnfE0bald6jZauEzZNTEOLxACRQ=
-X-Received: by 2002:a05:6e02:ef3:: with SMTP id
- j19mr512952ilk.227.1597250457293; 
- Wed, 12 Aug 2020 09:40:57 -0700 (PDT)
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=dxAExs3eG8Wiz2w/0qPoftcsX8vyKKdMXw++FjakOPk=;
+ b=p8fDZAmtfRwC+Wl4DwkVu58AtomFHI9w5BxE2+PweExU73F2TcmHFPXtdRi5tJWSNv
+ EgrAWVpJjNDb2uDxknR9sargSQaSpiaWT40AmbVQwc7ip7H55l/e/Bur5mjp87cOLjRy
+ FF2HBvJ2ula12lC30x7DrTXs/0DNT7LM9ETtWsE1g0eagLZD1uxhskVDtUiOkMsDEuLy
+ yn+XYN5/1up9bkfP6ICdElENsmEa9Arg7zQQfUgN4kUpBXmnIPXjqa2dvqi9Awi8ioNu
+ fBQV+eN56elliLNT9Qo/CeFRlhrTnJsjRA/QpEbqGpi993V+87rgeYJ+a+Ft3yDByoSK
+ quOQ==
+X-Gm-Message-State: AOAM5324PEPAih4HbpAm9G2p/V9CErKOTHq7fEZZF2T62wOdbi7WwLlx
+ QWQGdOOG7DSz/ghEpCn2yoVQMEQQ
+X-Google-Smtp-Source: ABdhPJwqW89fKcEmbMkdxaAU7wTQyaW+e70J9cViLOKN0lNTbrhFGjjAiypZIWCGHYf5OOgy2bCa4g==
+X-Received: by 2002:adf:eb89:: with SMTP id t9mr522709wrn.65.1597258464583;
+ Wed, 12 Aug 2020 11:54:24 -0700 (PDT)
+Received: from [192.168.1.36] (121.red-81-40-121.staticip.rima-tde.net.
+ [81.40.121.121])
+ by smtp.gmail.com with ESMTPSA id j5sm5524243wmb.15.2020.08.12.11.54.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 12 Aug 2020 11:54:23 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH v1 1/3] hw/intc: ibex_plic: Update the pending irqs
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair23@gmail.com
+References: <cover.1595655188.git.alistair.francis@wdc.com>
+ <0693aa700a4c67c49b3f1c973a82b257fdb7198d.1595655188.git.alistair.francis@wdc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <5ad0ac0c-8a78-9c49-d48c-b46556cbf0bc@amsat.org>
+Date: Wed, 12 Aug 2020 20:54:23 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-References: <1596102747-20226-1-git-send-email-chihmin.chao@sifive.com>
- <1596102747-20226-2-git-send-email-chihmin.chao@sifive.com>
-In-Reply-To: <1596102747-20226-2-git-send-email-chihmin.chao@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 Aug 2020 09:30:31 -0700
-Message-ID: <CAKmqyKM8nKVKW6iae7kZ2Ouq6LQ-cvQPo7eSm3PKC_dDOU9QSA@mail.gmail.com>
-Subject: Re: [PATCH 1/3] softfloat: target/riscv: implement full set fp16
- comparision
-To: Chih-Min Chao <chihmin.chao@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Peter Maydell <peter.maydell@linaro.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, Kito Cheng <kito.cheng@sifive.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Aurelien Jarno <aurelien@aurel32.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+In-Reply-To: <0693aa700a4c67c49b3f1c973a82b257fdb7198d.1595655188.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::444;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x444.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: 0
+X-Spam_score: 0.0
+X-Spam_bar: /
+X-Spam_report: (0.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=1, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -83,149 +84,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2020 16:41:02 -0000
+X-List-Received-Date: Wed, 12 Aug 2020 18:54:28 -0000
 
-On Thu, Jul 30, 2020 at 2:54 AM Chih-Min Chao <chihmin.chao@sifive.com> wro=
-te:
->
-> From: Kito Cheng <kito.cheng@sifive.com>
->
-> Implement them in softfloat and remove local version in riscv
->
-> Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
-> Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
-> Acked-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+On 7/25/20 7:34 AM, Alistair Francis wrote:
+> After a claim or a priority change we need to update the pending
+> interrupts. This is based on the same patch for the SiFive PLIC:
+> 55765822804f5a58594e "riscv: plic: Add a couple of mising
+> sifive_plic_update calls"
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Cc: Jessica Clarke <jrtc27@jrtc27.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
 > ---
->  include/fpu/softfloat.h      | 41 ++++++++++++++++++++++++++++++++++++++=
-+++
->  target/riscv/vector_helper.c | 25 -------------------------
->  2 files changed, 41 insertions(+), 25 deletions(-)
->
-> diff --git a/include/fpu/softfloat.h b/include/fpu/softfloat.h
-> index 659218b..573fce9 100644
-> --- a/include/fpu/softfloat.h
-> +++ b/include/fpu/softfloat.h
-> @@ -285,6 +285,47 @@ static inline float16 float16_set_sign(float16 a, in=
-t sign)
->      return make_float16((float16_val(a) & 0x7fff) | (sign << 15));
->  }
->
-> +static inline bool float16_eq(float16 a, float16 b, float_status *s)
-> +{
-> +    return float16_compare(a, b, s) =3D=3D float_relation_equal;
-> +}
+>  hw/intc/ibex_plic.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
+> index 41079518c6..578edd2ce0 100644
+> --- a/hw/intc/ibex_plic.c
+> +++ b/hw/intc/ibex_plic.c
+> @@ -121,6 +121,9 @@ static uint64_t ibex_plic_read(void *opaque, hwaddr addr,
+>          s->pending[pending_num] &= ~(1 << (s->claim % 32));
+>  
+>          ret = s->claim;
 > +
-> +static inline bool float16_le(float16 a, float16 b, float_status *s)
-> +{
-> +    return float16_compare(a, b, s) <=3D float_relation_equal;
-> +}
-> +
-> +static inline bool float16_lt(float16 a, float16 b, float_status *s)
-> +{
-> +    return float16_compare(a, b, s) < float_relation_equal;
-> +}
-> +
-> +static inline bool float16_unordered(float16 a, float16 b, float_status =
-*s)
-> +{
-> +    return float16_compare(a, b, s) =3D=3D float_relation_unordered;
-> +}
-> +
-> +static inline bool float16_eq_quiet(float16 a, float16 b, float_status *=
-s)
-> +{
-> +    return float16_compare_quiet(a, b, s) =3D=3D float_relation_equal;
-> +}
-> +
-> +static inline bool float16_le_quiet(float16 a, float16 b, float_status *=
-s)
-> +{
-> +    return float16_compare_quiet(a, b, s) <=3D float_relation_equal;
-> +}
-> +
-> +static inline bool float16_lt_quiet(float16 a, float16 b, float_status *=
-s)
-> +{
-> +    return float16_compare_quiet(a, b, s) < float_relation_equal;
-> +}
-> +
-> +static inline bool float16_unordered_quiet(float16 a, float16 b,
-> +                                           float_status *s)
-> +{
-> +    return float16_compare_quiet(a, b, s) =3D=3D float_relation_unordere=
-d;
-> +}
-> +
->  #define float16_zero make_float16(0)
->  #define float16_half make_float16(0x3800)
->  #define float16_one make_float16(0x3c00)
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 39f44d1..c68e6c4 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -3955,12 +3955,6 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, v=
-oid *vs2,   \
->      }                                                         \
->  }
->
-> -static bool float16_eq_quiet(uint16_t a, uint16_t b, float_status *s)
-> -{
-> -    FloatRelation compare =3D float16_compare_quiet(a, b, s);
-> -    return compare =3D=3D float_relation_equal;
-> -}
-> -
->  GEN_VEXT_CMP_VV_ENV(vmfeq_vv_h, uint16_t, H2, float16_eq_quiet)
->  GEN_VEXT_CMP_VV_ENV(vmfeq_vv_w, uint32_t, H4, float32_eq_quiet)
->  GEN_VEXT_CMP_VV_ENV(vmfeq_vv_d, uint64_t, H8, float64_eq_quiet)
-> @@ -4017,12 +4011,6 @@ GEN_VEXT_CMP_VF(vmfne_vf_h, uint16_t, H2, vmfne16)
->  GEN_VEXT_CMP_VF(vmfne_vf_w, uint32_t, H4, vmfne32)
->  GEN_VEXT_CMP_VF(vmfne_vf_d, uint64_t, H8, vmfne64)
->
-> -static bool float16_lt(uint16_t a, uint16_t b, float_status *s)
-> -{
-> -    FloatRelation compare =3D float16_compare(a, b, s);
-> -    return compare =3D=3D float_relation_less;
-> -}
-> -
->  GEN_VEXT_CMP_VV_ENV(vmflt_vv_h, uint16_t, H2, float16_lt)
->  GEN_VEXT_CMP_VV_ENV(vmflt_vv_w, uint32_t, H4, float32_lt)
->  GEN_VEXT_CMP_VV_ENV(vmflt_vv_d, uint64_t, H8, float64_lt)
-> @@ -4030,13 +4018,6 @@ GEN_VEXT_CMP_VF(vmflt_vf_h, uint16_t, H2, float16_=
-lt)
->  GEN_VEXT_CMP_VF(vmflt_vf_w, uint32_t, H4, float32_lt)
->  GEN_VEXT_CMP_VF(vmflt_vf_d, uint64_t, H8, float64_lt)
->
-> -static bool float16_le(uint16_t a, uint16_t b, float_status *s)
-> -{
-> -    FloatRelation compare =3D float16_compare(a, b, s);
-> -    return compare =3D=3D float_relation_less ||
-> -           compare =3D=3D float_relation_equal;
-> -}
-> -
->  GEN_VEXT_CMP_VV_ENV(vmfle_vv_h, uint16_t, H2, float16_le)
->  GEN_VEXT_CMP_VV_ENV(vmfle_vv_w, uint32_t, H4, float32_le)
->  GEN_VEXT_CMP_VV_ENV(vmfle_vv_d, uint64_t, H8, float64_le)
-> @@ -4091,12 +4072,6 @@ GEN_VEXT_CMP_VF(vmfge_vf_h, uint16_t, H2, vmfge16)
->  GEN_VEXT_CMP_VF(vmfge_vf_w, uint32_t, H4, vmfge32)
->  GEN_VEXT_CMP_VF(vmfge_vf_d, uint64_t, H8, vmfge64)
->
-> -static bool float16_unordered_quiet(uint16_t a, uint16_t b, float_status=
- *s)
-> -{
-> -    FloatRelation compare =3D float16_compare_quiet(a, b, s);
-> -    return compare =3D=3D float_relation_unordered;
-> -}
-> -
->  GEN_VEXT_CMP_VV_ENV(vmford_vv_h, uint16_t, H2, !float16_unordered_quiet)
->  GEN_VEXT_CMP_VV_ENV(vmford_vv_w, uint32_t, H4, !float32_unordered_quiet)
->  GEN_VEXT_CMP_VV_ENV(vmford_vv_d, uint64_t, H8, !float64_unordered_quiet)
-> --
-> 2.7.4
->
->
+> +        /* Update the interrupt status after the claim */
+> +        ibex_plic_update(s);
+>      }
+>  
+>      return ret;
+> @@ -140,6 +143,7 @@ static void ibex_plic_write(void *opaque, hwaddr addr,
+>      } else if (addr_between(addr, s->priority_base, s->priority_num)) {
+>          uint32_t irq = ((addr - s->priority_base) >> 2) + 1;
+>          s->priority[irq] = value & 7;
+> +        ibex_plic_update(s);
+>      } else if (addr_between(addr, s->enable_base, s->enable_num)) {
+>          uint32_t enable_reg = (addr - s->enable_base) / 4;
+>  
+> 
+
 
