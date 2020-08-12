@@ -1,61 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k5hYP-0004lF-CZ
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Aug 2020 23:35:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56796)
+	id 1k5sZS-00031X-3S
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 11:21:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52158)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k5hYO-0004jn-1v; Tue, 11 Aug 2020 23:35:52 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:39408)
+ id 1k5sZQ-00030n-13; Wed, 12 Aug 2020 11:21:40 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:34114)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k5hYM-0007RW-1q; Tue, 11 Aug 2020 23:35:51 -0400
-Received: by mail-il1-x144.google.com with SMTP id z17so469268ill.6;
- Tue, 11 Aug 2020 20:35:49 -0700 (PDT)
+ id 1k5sZO-00025c-6N; Wed, 12 Aug 2020 11:21:39 -0400
+Received: by mail-il1-x143.google.com with SMTP id t4so2020799iln.1;
+ Wed, 12 Aug 2020 08:21:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=t2hqqdFBou7BxgdQbJ4HKmVWgZH5rBk3tZGbETcmImE=;
- b=CGQDGUQJRTxv8/u+rwAlNnd1XxoJ9eMVILnHXIVQfbDhXWrqyd4u738Cz1gNVxllgT
- VLk3VbPYhTqThRjb4wf/PtZyjSaIT4GUvkeLVqV0luei17Ck0Tj4ae7Gn9H1DZJiC71f
- S8P2wtDikavZOijpqAX48S4wdLQkfz1LLpSZDHPHh5AjMLOt8PtDraNQu7m7/WndMZxN
- i0gs4dHGisv+Q/R6LU6J94onKFrJxh9GPwRYWEw83qYbeC94H6gmzfinA8mAJlLbxwIl
- 9uNggUB8lYEkPLrcN6yz39FZp5zcG919TBo3XpWJ+S3C8JfuFXT8ABVT0dl0JUc6qRv4
- dZTQ==
+ :cc; bh=MnnoYJ+Yzalu2GoWL+smxqyMsEar2Ew0G/MVfADnPKo=;
+ b=BB0XnFkCGZ6EgbuXbTo+9VOMBDsffT1A2c/C9kapskZpyVC8fPlBKuwwJekwTvDSAJ
+ XcF4XuQ8gEs2nbHcxlJrs26MJJyWfIUO/LjEBAHNijbhVWdELV+V8M2EJ2HyzxSP0qcw
+ 1t0hwAoersnzTaMPXlarusJcblKAoOgySZxMYAiETlqzf+1vepnW566OOy8EaREP2e1Q
+ M2Elc7FbMA78tn7MhhLM4osdjHzGYNFCypMZMjex4wlib86wsqygvlezTwlxzMX2ZN0T
+ lLMWgPVSbhuQr99lqT9cyXC9jkevWWhC5HI1ZYUfktal5iGw7qEGBlniXYnD4GPXMDVH
+ MBBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=t2hqqdFBou7BxgdQbJ4HKmVWgZH5rBk3tZGbETcmImE=;
- b=fkvkZzv1ElsvgZdCh50D5+1OlXW4ztQikoO1DYW7lU/5oLbe3qSj1zjPG7FDOOgkUb
- XcBwOhdwxege24NDvbwd7aNHHYo0zWpi9OfSwdtLjmFECEZ+NqmqUOKPXLvkTVfOwDBy
- 1LNLCkONmuqOYC/+fXoMmevghXud+YBevbQhl/K6CI6IbB2i1Thgk71ZQxpR+DG76jVf
- RBDJp4O8JZe0KSjZeRLZsRxseALvGlEPY+YwsGrVbujwIziy2Yh9r6TAB7iwAMxS1Xma
- 7boXQRrHKnDZ9XzH4zKblw3Ry0k7gf7S27g4AnE32NvukpQmtKVIFysQQhKp7Gso2PSF
- lAsA==
-X-Gm-Message-State: AOAM531evUvpTvjt35GGA/d53sGJv7ei4anNU/+kpXXvWi8Gi3z6cvOd
- XahgVSfdF+pxfHhIc9Jz0zLi7q4keywNSZXcCPI=
-X-Google-Smtp-Source: ABdhPJxpG/VLVbJli0CI3ScqaIOVKi5ik7+Hvg9hgq/u95MH2dHG8CV6hLuVZkRexu7yhCr1kxz8ivlnVygD3c9aNPI=
+ bh=MnnoYJ+Yzalu2GoWL+smxqyMsEar2Ew0G/MVfADnPKo=;
+ b=DD0MQYXPru481UWveI7MgQqiuBF3XSxw9KXvXpAnkrHOc+EA7npvSQLaXE+ksu4WHB
+ QwjC2SgzF8wWR3i3fThhLTUq8+ykeAunzCYjLOzdZj9QkTPYHCXNEdjplcs7BZg5HNwd
+ OmwLvsGYCrH96wY9BOgb6MhVruQSs0XenbfLoYkaBz6NIAkxu8NI7zUlyQuUlhyypE1c
+ eS190Q5vY+Aw2gv3XS9CJqghhakqlkL738yXIHv/XC1pqhaaniZJ3pEYkyojU20YmKW9
+ ycxaLJmX82QtnOVDpi3P2TGhmKz6d2MoDcsTD8HNT33WJP8lvASctqg0bBWpdO2VMC9G
+ lLUA==
+X-Gm-Message-State: AOAM533Pfb+LEkoIKJByYM5zAyvdV5g3Zmf+6X3nNWetd/63VPAlCLvt
+ eahmG2fMHMFPQ2tpIfcJNSCcR7QLMCFRYxKZNVg=
+X-Google-Smtp-Source: ABdhPJxFcehUSn0KokyDEoF/sAXVuf65ae6Gep+uS6yTdG7cYBW9jbte2YT3WooB5BHp22ny4R4GDiWtIomIg/wDeps=
 X-Received: by 2002:a05:6e02:ef3:: with SMTP id
- j19mr15371074ilk.227.1597203348509; 
- Tue, 11 Aug 2020 20:35:48 -0700 (PDT)
+ j19mr146670ilk.227.1597245696707; 
+ Wed, 12 Aug 2020 08:21:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <1596439832-29238-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1596439832-29238-1-git-send-email-bmeng.cn@gmail.com>
+References: <cover.1595924470.git.zong.li@sifive.com>
+ <6b0bf48662ef26ab4c15381a08e78a74ebd7ca79.1595924470.git.zong.li@sifive.com>
+In-Reply-To: <6b0bf48662ef26ab4c15381a08e78a74ebd7ca79.1595924470.git.zong.li@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Aug 2020 20:25:23 -0700
-Message-ID: <CAKmqyKMM-sWAHGM=iXVXHtCGPSHzfoEVb0QvrSRT7Rc7zSibbg@mail.gmail.com>
-Subject: Re: [PATCH v6 0/6] riscv: Switch to use generic platform fw_dynamic
- type opensbi bios images
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+Date: Wed, 12 Aug 2020 08:11:07 -0700
+Message-ID: <CAKmqyKNso-cTYuwxo5waxp9n8ifV2GR9v=x6aM-y0NjQTSsw+A@mail.gmail.com>
+Subject: Re: [PATCH v6 4/4] target/riscv: Change the TLB page size depends on
+ PMP entries.
+To: Zong Li <zong.li@sifive.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -64,8 +64,8 @@ X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -78,108 +78,142 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2020 03:35:52 -0000
+X-List-Received-Date: Wed, 12 Aug 2020 15:21:40 -0000
 
-On Mon, Aug 3, 2020 at 12:31 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, Jul 28, 2020 at 1:29 AM Zong Li <zong.li@sifive.com> wrote:
 >
-> From: Bin Meng <bin.meng@windriver.com>
+> The minimum granularity of PMP is 4 bytes, it is small than 4KB page
+> size, therefore, the pmp checking would be ignored if its range doesn't
+> start from the alignment of one page. This patch detects the pmp entries
+> and sets the small page size to TLB if there is a PMP entry which cover
+> the page size.
 >
-> The RISC-V generic platform is a flattened device tree (FDT) based
-> platform where all platform specific functionality is provided based
-> on FDT passed by previous booting stage. The support was added in
-> the upstream OpenSBI v0.8 release recently.
+> Signed-off-by: Zong Li <zong.li@sifive.com>
+> ---
+>  target/riscv/cpu_helper.c | 10 ++++++--
+>  target/riscv/pmp.c        | 52 +++++++++++++++++++++++++++++++++++++++
+>  target/riscv/pmp.h        |  2 ++
+>  3 files changed, 62 insertions(+), 2 deletions(-)
 >
-> This series updates QEMU to switch to use generic platform of opensbi
-> bios images. With the recent fw_dynamic image support, let's replace
-> the fw_jump images with fw_dynamic ones too.
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 2f337e418c..fd1d373b6f 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -693,6 +693,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>      bool first_stage_error = true;
+>      int ret = TRANSLATE_FAIL;
+>      int mode = mmu_idx;
+> +    target_ulong tlb_size = 0;
 >
-> The patch emails do not contain binary bits, please grab all updates
-> at https://github.com/lbmeng/qemu.git bios branch.
+>      env->guest_phys_fault_addr = 0;
 >
-> Note:
+> @@ -784,8 +785,13 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>      }
 >
-> 1. To test 32-bit Linux kernel on QEMU 'sifive_u' 32-bit machine,
-> the following patch is needed:
-> http://lists.infradead.org/pipermail/linux-riscv/2020-July/001213.html
+>      if (ret == TRANSLATE_SUCCESS) {
+> -        tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
+> -                     prot, mmu_idx, TARGET_PAGE_SIZE);
+> +        if (pmp_is_range_in_tlb(env, pa & TARGET_PAGE_MASK, &tlb_size)) {
+> +            tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
+> +                         prot, mmu_idx, tlb_size);
+> +        } else {
+> +            tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
+> +                         prot, mmu_idx, TARGET_PAGE_SIZE);
+> +        }
+>          return true;
+>      } else if (probe) {
+>          return false;
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index aeba796484..adadf6e9ba 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -393,3 +393,55 @@ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
 >
-> 2. To test 64-bit Linux 5.3 kernel on QEMU 'virt' or 'sifive_u' 64-bit
-> machines, the following commit should be cherry-picked to 5.3:
->
-> commit 922b0375fc93fb1a20c5617e37c389c26bbccb70
-> Author: Albert Ou <aou@eecs.berkeley.edu>
-> Date:   Fri Sep 27 16:14:18 2019 -0700
->
->     riscv: Fix memblock reservation for device tree blob
->
-> Linux 5.4 or above already contains this commit/fix.
+>      return val;
+>  }
+> +
+> +/*
+> + * Calculate the TLB size if the start address or the end address of
+> + * PMP entry is presented in thie TLB page.
+> + */
+> +static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
+> +    target_ulong tlb_sa, target_ulong tlb_ea)
+> +{
+> +    target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
+> +    target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
+> +
+> +    if (pmp_sa >= tlb_sa && pmp_ea <= tlb_ea) {
+> +        return pmp_ea - pmp_sa + 1;
+> +    }
+> +
+> +    if (pmp_sa >= tlb_sa && pmp_sa <= tlb_ea && pmp_ea >= tlb_ea) {
+> +        return tlb_ea - pmp_sa + 1;
+> +    }
+> +
+> +    if (pmp_ea <= tlb_ea && pmp_ea >= tlb_sa && pmp_sa <= tlb_sa) {
+> +        return pmp_ea - tlb_sa + 1;
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+> +/*
+> + * Check is there a PMP entry whcih range covers this page. If so,
 
-Thanks for this.
+s/whcih/which/g
 
-Applied to riscv-to-apply.next
+I fixed this when apply it.
+
+> + * try to find the minimum granularity for the TLB size.
+> + */
+> +bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+> +    target_ulong *tlb_size)
+> +{
+> +    int i;
+> +    target_ulong val;
+> +    target_ulong tlb_ea = (tlb_sa + TARGET_PAGE_SIZE - 1);
+> +
+> +    for (i = 0; i < MAX_RISCV_PMPS; i++) {
+> +        val = pmp_get_tlb_size(env, i, tlb_sa, tlb_ea);
+> +        if (val) {
+> +            if (*tlb_size == 0 || *tlb_size > val) {
+> +                *tlb_size = val;
+> +            }
+> +        }
+> +    }
+> +
+> +    if (*tlb_size != 0) {
+> +        return true;
+> +    }
+> +
+> +    return false;
+> +}
+> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+> index 8e19793132..c70f2ea4c4 100644
+> --- a/target/riscv/pmp.h
+> +++ b/target/riscv/pmp.h
+> @@ -60,5 +60,7 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+>  target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
+>  bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>      target_ulong size, pmp_priv_t priv, target_ulong mode);
+> +bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+> +    target_ulong *tlb_size);
+
+The indentation is wrong here (as it is in the rest of the file). I
+just fixed this up as well as the others when I applied it.
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+I have applied patch 3 and 4 of this series. Patch 1 has already been
+applied and patch 2 no longer applies due to a different fix, sorry
+about that.
 
 Alistair
 
 >
-> Changes in v6:
-> - Rebased on https://github.com/alistair23/qemu/commits/riscv-to-apply.next
-> - Add information about Linux kernel tested
-> - Squash the Makefile ELF changes into patch 5
->
-> Changes in v5:
-> - Include the generic fw_dynamic.bin in the Makefile for `make install` bisection
->
-> Changes in v4:
-> - Remove old binaries in the Makefile for `make install` bisection
->
-> Changes in v3:
-> - Change fw_jump to fw_dynamic in the make rules
-> - Change to fw_dynamic.bin for virt & sifive_u
-> - Change to fw_dynamic.elf for Spike
-> - Generate fw_dynamic images in the artifacts
->
-> Changes in v2:
-> - new patch: configure: Create symbolic links for pc-bios/*.elf files
-> - Upgrade OpenSBI to v0.8 release
-> - Copy the ELF images too in the make rules
-> - Include ELF images in the artifacts
->
-> Bin Meng (6):
->   configure: Create symbolic links for pc-bios/*.elf files
->   roms/opensbi: Upgrade from v0.7 to v0.8
->   roms/Makefile: Build the generic platform for RISC-V OpenSBI firmware
->   hw/riscv: Use pre-built bios image of generic platform for virt &
->     sifive_u
->   hw/riscv: spike: Change the default bios to use generic platform image
->   gitlab-ci/opensbi: Update GitLab CI to build generic platform
->
->  .gitlab-ci.d/opensbi.yml                       |  28 ++++++++--------------
->  Makefile                                       |   4 ++--
->  configure                                      |   1 +
->  hw/riscv/sifive_u.c                            |   4 ++--
->  hw/riscv/spike.c                               |   9 +++++--
->  hw/riscv/virt.c                                |   4 ++--
->  pc-bios/opensbi-riscv32-generic-fw_dynamic.bin | Bin 0 -> 62144 bytes
->  pc-bios/opensbi-riscv32-generic-fw_dynamic.elf | Bin 0 -> 558668 bytes
->  pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin   | Bin 49520 -> 0 bytes
->  pc-bios/opensbi-riscv32-virt-fw_jump.bin       | Bin 49504 -> 0 bytes
->  pc-bios/opensbi-riscv64-generic-fw_dynamic.bin | Bin 0 -> 70792 bytes
->  pc-bios/opensbi-riscv64-generic-fw_dynamic.elf | Bin 0 -> 620424 bytes
->  pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin   | Bin 57936 -> 0 bytes
->  pc-bios/opensbi-riscv64-virt-fw_jump.bin       | Bin 57920 -> 0 bytes
->  roms/Makefile                                  |  32 ++++++++-----------------
->  roms/opensbi                                   |   2 +-
->  16 files changed, 35 insertions(+), 49 deletions(-)
->  create mode 100644 pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
->  create mode 100644 pc-bios/opensbi-riscv32-generic-fw_dynamic.elf
->  delete mode 100644 pc-bios/opensbi-riscv32-sifive_u-fw_jump.bin
->  delete mode 100644 pc-bios/opensbi-riscv32-virt-fw_jump.bin
->  create mode 100644 pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
->  create mode 100644 pc-bios/opensbi-riscv64-generic-fw_dynamic.elf
->  delete mode 100644 pc-bios/opensbi-riscv64-sifive_u-fw_jump.bin
->  delete mode 100644 pc-bios/opensbi-riscv64-virt-fw_jump.bin
->
+>  #endif
 > --
-> 2.7.4
+> 2.27.0
 >
 >
 
