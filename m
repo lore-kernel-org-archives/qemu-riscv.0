@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k5wLf-0005GF-3B
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 15:23:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59592)
+	id 1k5wLj-0005Mz-VU
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 15:23:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59618)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=486123ee4=alistair.francis@wdc.com>)
- id 1k5wLb-0005AE-Jl; Wed, 12 Aug 2020 15:23:39 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:4837)
+ id 1k5wLh-0005Gs-SE; Wed, 12 Aug 2020 15:23:45 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:4839)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=486123ee4=alistair.francis@wdc.com>)
- id 1k5wLZ-0000UE-Th; Wed, 12 Aug 2020 15:23:39 -0400
+ id 1k5wLc-0000UI-6t; Wed, 12 Aug 2020 15:23:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1597260218; x=1628796218;
+ t=1597260220; x=1628796220;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=LpK/Kkf+fwylS840kCf3NVSFUj6Cc/XdSH0z+Sq7yuI=;
- b=HNqUTAXNDm/WqNRsPlroYTbW91RvXt12wwW/Z9yAG722ejA21J6qtwAe
- vF9W91IxrbxfzrMxLHlRQjqXRP/9OJuS1Xzcva7QyyVpm5fViSJZsn5kJ
- rdNLS6Rk9eQTD02KN4wbaf21FOidAZitXqDSfdbA5kEfr+0YMba634D7L
- 3zg++aqwdvLUMaq62UJmfZ87WwFBaU9DrJS+ENDkMBlsRtmekOb52tL9j
- aWI/A4vZS1KIAum0XtzSzThE2sEucayxBLu04HWn6TgquCJOCdL6T26sA
- Q15zi26K+yFM9dA94FPvUyw9gTBPnqlhvT3XE3ujam+fq7bEmyBfZY3fq g==;
-IronPort-SDR: Lnr/1QQiU3I+u5jLoh56sjbPqlkKTzJelZKrmzst7rDSvAUQ7OsM/idSOfLuy8E8CzCRoZjfbD
- YCQzh+EsYRH2PrPvDzukkJu+g7sLNjVcDNsRrdd7d75wO9ArkEPh50BLd9vus7Qx6Cmn/BMRR6
- HGg+PWVt4ny/vmKTv9X9GkOplCr5ekqah/AA9dDc8Z9QRmPxNsinTamXCw4r8eY+dG4LIR/M0V
- 6kFQ1oYRg+P5sBXevP4hfxlQCnzkipgW/C1Z+TJz9LY09KB20HEZGOeZwCZiSzv5H9/DzWs9mM
- 6Mw=
-X-IronPort-AV: E=Sophos;i="5.76,305,1592841600"; d="scan'208";a="146029209"
+ bh=FNpkEhXF3G0wGMMrrCplVS4/5vssOWwwtnYQkdrsvM4=;
+ b=JM0hAoO61Qp/39GJaJcAlerGc2gEUreHdL8V8EXiPdPhjjqUcYJ1o231
+ V6ICGBU9wZRjoyICTJZ3N1tMfX9kiiA7qVBeELbSOufxbPuwdCNe9GlEG
+ 5qeHW4U5AayO18qAWbSzeIMVqN9giiL0QbE8uAE3JQD+gC0Duhy2wg7cl
+ nSTCziGyTdsblJzvbDo9EvHxBTwa+heVVrd2416+f9Yag7WuF/ON0kx/O
+ o3TWwaEt+0Pto4JaqBj3/5FgfDIhuLRvaBXDFJEiGJMGOtRZLojyOUFex
+ xihpXqsprvLBFG5fkTBMui+F9szFYktu6Xs8LiFKLarLiKBziEcZjnzVR A==;
+IronPort-SDR: HGGng6y8HBwQGg0OnTodWu3nWx7yRSyH2ZJXLqjznAgmXuEV/nAuG5QVDbn7KPf/YbVtxPXr7T
+ arqwNDBam9NCVrqRDAkLU36truGkE6yhoSlPU/rCfW5Q+kuPL9objb/2n9QMhRbKFRqQvo2yYG
+ 9ZhXJEEL7ZMLHsF0inStwg4Lt9qfxvtmrYjKbp8vwaGq5lrOzRAN9X419MzAF6Vo2B7cxTs4aF
+ JEYZjJKf5n24Yx4Cs1hH7rFk/YUcZDfwxUSCH+ZaQL9+s6dZtX61GxsU1ymCL549o2HWBV1zZ2
+ G1A=
+X-IronPort-AV: E=Sophos;i="5.76,305,1592841600"; d="scan'208";a="146029210"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 13 Aug 2020 03:23:36 +0800
-IronPort-SDR: mCNlwNiAcf29vLpdbkdkQhi9h+viX6j+2m5ISF8zLLyVmrHQIlfjdxV0nTS+7cNdnOHiPcuVQy
- 5h1wQa+qhFbw==
+ by ob1.hgst.iphmx.com with ESMTP; 13 Aug 2020 03:23:39 +0800
+IronPort-SDR: mUyccbobPowvVtvfZ8ovWKLzoEOGaGMhQ10pr5TVRhWl82fLhOSRZhc3gDte3G0KaUneA3PXcz
+ NrDDTpModd/g==
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Aug 2020 12:10:44 -0700
-IronPort-SDR: QVLEhwbHRxQkgXlhOLRE7I8q0+ucx8R2opMC9tP2o+qLuU4KnwR0H0AQk5HNs+m9oNAJmRnI1q
- LPDbrZ+dAGXA==
+ 12 Aug 2020 12:10:47 -0700
+IronPort-SDR: OAF8VfAb7uykzh3vu+tDqaZHuU3eOlT+BgKqubBtIp2YytZqqU+Tu/Lmt7SKnioLPP+iUOAYKX
+ Ty4nkq3VIeZw==
 WDCIronportException: Internal
 Received: from jbfyk72.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.59.14])
- by uls-op-cesaip02.wdc.com with ESMTP; 12 Aug 2020 12:23:37 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 12 Aug 2020 12:23:40 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, anup.patel@wdc.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v3 08/13] target/riscv: Update the CSRs to the v0.6 Hyp
- extension
-Date: Wed, 12 Aug 2020 12:13:36 -0700
-Message-Id: <4f227b30cb1816795296c0994f1123fab143666a.1597259519.git.alistair.francis@wdc.com>
+Subject: [PATCH v3 09/13] target/riscv: Only support a single VSXL length
+Date: Wed, 12 Aug 2020 12:13:38 -0700
+Message-Id: <f3f4fd2ec22a07cc1d750e96895d6813f131de4d.1597259519.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1597259519.git.alistair.francis@wdc.com>
 References: <cover.1597259519.git.alistair.francis@wdc.com>
@@ -81,41 +80,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2020 19:23:40 -0000
+X-List-Received-Date: Wed, 12 Aug 2020 19:23:46 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_bits.h | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ target/riscv/csr.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index fb6a3e9092..573d85da41 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -437,15 +437,17 @@
- #endif
- 
- /* hstatus CSR bits */
--#define HSTATUS_SPRV         0x00000001
-+#define HSTATUS_VSBE         0x00000020
-+#define HSTATUS_GVA          0x00000040
- #define HSTATUS_SPV          0x00000080
--#define HSTATUS_SP2P         0x00000100
--#define HSTATUS_SP2V         0x00000200
-+#define HSTATUS_SPVP         0x00000100
-+#define HSTATUS_HU           0x00000200
-+#define HSTATUS_VGEIN        0x0003F000
- #define HSTATUS_VTVM         0x00100000
- #define HSTATUS_VTSR         0x00400000
--#define HSTATUS_HU           0x00000200
--#define HSTATUS_GVA          0x00000040
--#define HSTATUS_SPVP         0x00000100
-+#if defined(TARGET_RISCV64)
-+#define HSTATUS_VSXL        0x300000000
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index f9ac21d687..390ef781e4 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -836,12 +836,21 @@ static int write_satp(CPURISCVState *env, int csrno, target_ulong val)
+ static int read_hstatus(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+     *val = env->hstatus;
++#ifdef TARGET_RISCV64
++    /* We only support 64-bit VSXL */
++    *val = set_field(*val, HSTATUS_VSXL, 2);
 +#endif
+     return 0;
+ }
  
- #define HSTATUS32_WPRI       0xFF8FF87E
- #define HSTATUS64_WPRI       0xFFFFFFFFFF8FF87EULL
+ static int write_hstatus(CPURISCVState *env, int csrno, target_ulong val)
+ {
+     env->hstatus = val;
++#ifdef TARGET_RISCV64
++    if (get_field(val, HSTATUS_VSXL) != 2) {
++        qemu_log_mask(LOG_UNIMP, "QEMU does not support mixed HSXLEN options.");
++    }
++#endif
+     return 0;
+ }
+ 
 -- 
 2.27.0
 
