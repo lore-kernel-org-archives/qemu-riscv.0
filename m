@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k5wLS-0004oq-Ah
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 15:23:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59472)
+	id 1k5wLV-0004uN-Gv
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 15:23:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59516)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=486123ee4=alistair.francis@wdc.com>)
- id 1k5wLQ-0004km-6z; Wed, 12 Aug 2020 15:23:28 -0400
+ id 1k5wLU-0004sD-8e; Wed, 12 Aug 2020 15:23:32 -0400
 Received: from esa6.hgst.iphmx.com ([216.71.154.45]:4810)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=486123ee4=alistair.francis@wdc.com>)
- id 1k5wLO-0000Qu-KP; Wed, 12 Aug 2020 15:23:27 -0400
+ id 1k5wLR-0000Qu-8n; Wed, 12 Aug 2020 15:23:31 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1597260207; x=1628796207;
+ t=1597260209; x=1628796209;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=vlZ67bAT/zorltvkSQdWj17eSXvrdCgq5WM/GjFmfk0=;
- b=jZ7rQWITShG3OEzbrg3jyIB7CV5r4qoQmiKlpcr+hzOMNbk9q5zyWxhP
- oVf+9lDfy2yqBCDkNaEtegGP9zBwHARRhNJ6tCO3Sqy5n6+FV/k0patXZ
- FEG+U/wKPtj8dvpOHFJP9yesltlZNsrsOmKsUV9lLUQonLoDdGbPyuitr
- 0zsNhgcNcKHhFzT5dkicoHDny+ZEjjKZCDsNKq+KJEi5dS/v/adt+EYSx
- lh0pEOfSD9W2MFMvGZIl4EYSkIvDsFHL6zfZRzka9M9tBCTvJmQFCf0na
- TFrrtNa2G5ZUVgHxDoAKuDFoTIWEZmwk0Kcha6S1DeLelIO5zF8khrjFr g==;
-IronPort-SDR: jtEWHrE964QuBMTYdz0hGGVvZNDks1JjV061pwKb70n4VV9WIBoIyX3dFK6mmINwQl6qEE0WQ+
- Sx8lbrPvYP9EXUbDO2e6jW5Koj7SQTxjriLr2P/QG4dn7iZcffQax0oNO2x5TqsM4zNAKthBHP
- ecNmneqVq29KvtCLD8Qy2xpa8GjRt36RVvVgWY7r+W3CAnXj6gJwLqA5crZuW/CtsD+pyaehF2
- ct+sAD/5nkrPJ6RHvLyXScjEYMBVheIhfYbM/5Vb6alkPqHX1fOQt8ErpWXOmrbqC0DxXJK/Xt
- pm8=
-X-IronPort-AV: E=Sophos;i="5.76,305,1592841600"; d="scan'208";a="146029199"
+ bh=bTBYJS33X66hR5BWg52KbjhjVXejja8XXpAu0gSx3v8=;
+ b=WBvuwhieZJZaR22bCnVIz/ROMf3pBwmnge3yUe8QE4ZUQVpu/hjpbCSC
+ Vwt4XEZJEuYVwWaz/2Q0XMztGORF4HrtKHtjR7lTb0j+8P+mnTbdYXRUO
+ 5tMEPAcntYsmoi5bJDZkNe14Ji9vOFX00TOKp0HWLZVUX40PFQQ+2+wNx
+ J2+Tn7MEkTOFrZ0E6x6z+GK3hAYuIncdfbXWSMOu53l5RlMFO66RYf0gD
+ wZYiDHlwMuSO6mPLbx0NB1mp24nRmyojIdB+4rYXJIZ0+xHGvdUlGYwuD
+ /XN9727I9a4+1XWJoqOsi6NnVmC0g9bUczDTE4kJfJYrBivyIjazvkFX0 A==;
+IronPort-SDR: i/gnJVNX/FLywHF2+AW4m0q7IXyZxD2i730K91wZxGat58nUYZRsEeXjdpq7QZHrffQWpJryoL
+ nBb/b5T+enJFCxWF0fR+eF4acxzzSZSXjOR4T9e8Vt/+PhmcLT4+ciULhA9a99HBVVgxmZ8sDE
+ uZklH8UgrHYjGZmf6Sy5/Y6HW2DN8YDdHP2Y0C1CO8E4O7jgOSkanyyJTy9V5pz/blYewcVcGl
+ y35+tYztOT7j3oz78spkF8yLHu8hHQW4gy85XmYgCrGqq0h5Ezx7cJGz7vbkd+uU8TFNX6oVql
+ fzI=
+X-IronPort-AV: E=Sophos;i="5.76,305,1592841600"; d="scan'208";a="146029202"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 13 Aug 2020 03:23:25 +0800
-IronPort-SDR: B8tfvx9qqtSwd41Z6+VQlIuW0T/t2lzAw3z7/H+l4LhCZe8HUGkQvqozhPnmw4UW+Z4313Abxw
- NkrFUyqSSPng==
+ by ob1.hgst.iphmx.com with ESMTP; 13 Aug 2020 03:23:28 +0800
+IronPort-SDR: 1OEodlBCKetwIFppLaOdSh38FyxWAHVAwuZRWe0HaiSMc4E8GCAZG4gYU7Nn8OtnU+Bjnn1NHv
+ dPfBLMgk+FUg==
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Aug 2020 12:10:33 -0700
-IronPort-SDR: uCAvhyDEdLwKm1knfVPyh9OulTeIsU/iG9IGo2QV9P83ql0cYg+LPZsQgDEvYtN0E7dQ6oYmzw
- /MPKnPcmxY3g==
+ 12 Aug 2020 12:10:36 -0700
+IronPort-SDR: xWPvZb4NhCsOeI98eD7XcpHDboJymBg6VVNzh9Cyl+4KVQjKrUPQzq6O7vlxK8zRnP2FGrpG96
+ T2j1MQiSk+HA==
 WDCIronportException: Internal
 Received: from jbfyk72.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.59.14])
- by uls-op-cesaip02.wdc.com with ESMTP; 12 Aug 2020 12:23:26 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 12 Aug 2020 12:23:29 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, anup.patel@wdc.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v3 04/13] target/riscv: Don't allow guest to write to htinst
-Date: Wed, 12 Aug 2020 12:13:25 -0700
-Message-Id: <ca5359fec6b2aff851eef3b3bc4b53cb5d4ad194.1597259519.git.alistair.francis@wdc.com>
+Subject: [PATCH v3 05/13] target/riscv: Convert MSTATUS MTL to GVA
+Date: Wed, 12 Aug 2020 12:13:27 -0700
+Message-Id: <9308432988946de550a68524ed76e4b8683f10e2.1597259519.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1597259519.git.alistair.francis@wdc.com>
 References: <cover.1597259519.git.alistair.francis@wdc.com>
@@ -80,24 +80,117 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2020 19:23:28 -0000
+X-List-Received-Date: Wed, 12 Aug 2020 19:23:32 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/csr.c | 1 -
- 1 file changed, 1 deletion(-)
+ target/riscv/cpu_bits.h   |  5 +++--
+ target/riscv/cpu_helper.c | 24 ++++++++++++++++++++----
+ target/riscv/csr.c        |  6 +++---
+ 3 files changed, 26 insertions(+), 9 deletions(-)
 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 7abae4267f..43617e7c1f 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -379,10 +379,10 @@
+ #define MSTATUS_TW          0x20000000 /* since: priv-1.10 */
+ #define MSTATUS_TSR         0x40000000 /* since: priv-1.10 */
+ #if defined(TARGET_RISCV64)
+-#define MSTATUS_MTL         0x4000000000ULL
++#define MSTATUS_GVA         0x4000000000ULL
+ #define MSTATUS_MPV         0x8000000000ULL
+ #elif defined(TARGET_RISCV32)
+-#define MSTATUS_MTL         0x00000040
++#define MSTATUS_GVA         0x00000040
+ #define MSTATUS_MPV         0x00000080
+ #endif
+ 
+@@ -444,6 +444,7 @@
+ #define HSTATUS_VTVM         0x00100000
+ #define HSTATUS_VTSR         0x00400000
+ #define HSTATUS_HU           0x00000200
++#define HSTATUS_GVA          0x00000040
+ 
+ #define HSTATUS32_WPRI       0xFF8FF87E
+ #define HSTATUS64_WPRI       0xFFFFFFFFFF8FF87EULL
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 10c9f8b63b..b5f4264525 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -894,6 +894,19 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         if (riscv_has_ext(env, RVH)) {
+             target_ulong hdeleg = async ? env->hideleg : env->hedeleg;
+ 
++            if ((riscv_cpu_virt_enabled(env) ||
++                 riscv_cpu_two_stage_lookup(env)) && tval) {
++                /*
++                 * If we are writing a guest virtual address to stval, set
++                 * this to 1. If we are trapping to VS we will set this to 0
++                 * later.
++                 */
++                env->hstatus = set_field(env->hstatus, HSTATUS_GVA, 1);
++            } else {
++                /* For other HS-mode traps, we set this to 0. */
++                env->hstatus = set_field(env->hstatus, HSTATUS_GVA, 0);
++            }
++
+             if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
+                 !force_hs_execp) {
+                 /*
+@@ -904,6 +917,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                     cause == IRQ_VS_EXT)
+                     cause = cause - 1;
+                 /* Trap to VS mode */
++                env->hstatus = set_field(env->hstatus, HSTATUS_GVA, 0);
+             } else if (riscv_cpu_virt_enabled(env)) {
+                 /* Trap into HS mode, from virt */
+                 riscv_cpu_swap_hypervisor_regs(env);
+@@ -952,13 +966,15 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+ #ifdef TARGET_RISCV32
+             env->mstatush = set_field(env->mstatush, MSTATUS_MPV,
+                                        riscv_cpu_virt_enabled(env));
+-            env->mstatush = set_field(env->mstatush, MSTATUS_MTL,
+-                                       riscv_cpu_force_hs_excep_enabled(env));
++            if (riscv_cpu_virt_enabled(env) && tval) {
++                env->mstatush = set_field(env->mstatush, MSTATUS_GVA, 1);
++            }
+ #else
+             env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
+                                       riscv_cpu_virt_enabled(env));
+-            env->mstatus = set_field(env->mstatus, MSTATUS_MTL,
+-                                      riscv_cpu_force_hs_excep_enabled(env));
++            if (riscv_cpu_virt_enabled(env) && tval) {
++                env->mstatus = set_field(env->mstatus, MSTATUS_GVA, 1);
++            }
+ #endif
+ 
+             mtval2 = env->guest_phys_fault_addr;
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 6a96a01b1c..0f035d33b1 100644
+index 0f035d33b1..f9ac21d687 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -922,7 +922,6 @@ static int read_htinst(CPURISCVState *env, int csrno, target_ulong *val)
+@@ -403,10 +403,10 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
+         MSTATUS_TW;
+ #if defined(TARGET_RISCV64)
+     /*
+-     * RV32: MPV and MTL are not in mstatus. The current plan is to
++     * RV32: MPV and GVA are not in mstatus. The current plan is to
+      * add them to mstatush. For now, we just don't support it.
+      */
+-    mask |= MSTATUS_MTL | MSTATUS_MPV;
++    mask |= MSTATUS_MPV | MSTATUS_GVA;
+ #endif
  
- static int write_htinst(CPURISCVState *env, int csrno, target_ulong val)
- {
--    env->htinst = val;
-     return 0;
- }
+     mstatus = (mstatus & ~mask) | (val & mask);
+@@ -432,7 +432,7 @@ static int write_mstatush(CPURISCVState *env, int csrno, target_ulong val)
+         tlb_flush(env_cpu(env));
+     }
+ 
+-    val &= MSTATUS_MPV | MSTATUS_MTL;
++    val &= MSTATUS_MPV | MSTATUS_GVA;
+ 
+     env->mstatush = val;
  
 -- 
 2.27.0
