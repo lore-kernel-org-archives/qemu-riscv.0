@@ -1,60 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k5wLL-0004c6-Db
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 15:23:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59412)
+	id 1k5wLN-0004eL-42
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 15:23:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59428)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=486123ee4=alistair.francis@wdc.com>)
- id 1k5wLJ-0004br-W6; Wed, 12 Aug 2020 15:23:22 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:50446)
+ id 1k5wLL-0004c2-4m; Wed, 12 Aug 2020 15:23:23 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:50443)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=486123ee4=alistair.francis@wdc.com>)
- id 1k5wLH-0000Qi-LQ; Wed, 12 Aug 2020 15:23:21 -0400
+ id 1k5wLH-0000QZ-4C; Wed, 12 Aug 2020 15:23:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1597260199; x=1628796199;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=vcurfjazEvMMtOCVG9Klun77gGKJkNPeMTrWvizvDhc=;
- b=qkG00kZUg91PhPJ/Tl6cM4GttrJtxb46oPshMXXCM90oBWPFHsPmKpB3
- Bv4y1SPJnpgHecgOhoiStvogho5BOxqlI+QxBdROa9/K/QnW7bWr2xi6T
- Wh4yJ73WmMPl63JNmdcK6Ph4I8PCoE7cgDNXQI6oRSe51BzerpVWSjvKp
- aHHA9L+P8okO6hF9IF9i/awNtzGjaVsob+RiffpZSNfeLcBmODuQRPnej
- mMEyw4f77BxEP/Cr2UwjvKEmGpz6EasTcwG+26Kt+zEYOsiH88pSqehv9
- ysknO8jEpAePMAiybdBbFxfXwHNNKwxGZs2T+KiGklm347ff6+92q3HKn w==;
-IronPort-SDR: GfUyoyGLarePZMYXIp8ThAE9CqG/O5PogzdXg+/Su6NqtQrjmW+xe0zTt1hXtMULuR/vLQZ0AF
- el+t1tjOP3PRBW8TAyLgo9YOQMvUj0nReKLSsmkg9m0TAbbc9yxsKiVXNNFJhRs5teNfyse0J7
- TiZ+kfW2/zKBte+0fVA8SnfKou5uICU1VZN+/fi4Dn8EmNoNvlmOh21PSula5QY5PQsduarYhz
- O5hc18yQfeJER1d2aa2x4RvX6uKdwmpS8NimUNUyBXTtNvXuhgNQcIvjxKvKWUim80fbmfKijC
- e6E=
-X-IronPort-AV: E=Sophos;i="5.76,305,1592841600"; d="scan'208";a="144786678"
+ t=1597260198; x=1628796198;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=sYzibE/kdXlmqf0yyengbm7+wamxTSqDhk7lUTV/Bww=;
+ b=epqxyFx/41yfX2skZQtXcuSLTXb2d7Jx3K46qmaKcJo6VUpIn9Bzado+
+ 7Lb01PvFTV+LhZuAwsWq/hk0uvG2+L39M7mOF4GHMTzGdMwj/llnKVY1R
+ QkiEy98QlTy+s0dbisC1p6pbl1ptlI5xQ7FWrX5jUI9JtCPJ6xJEXPM1D
+ 7Qujk6qsxXLQK4BZEJfN0Ij6efB77xYdZc4f/I9Hal81m5KxcejVlnn4F
+ nIgaCnv9f3PBrZtVWQ9urrEZ+CHlGDwpsTEkSqydP9QjhKYxAXXAPtLZX
+ vijr+/pC0c/37wtVuMOud62GcUH7RNbkuD/iQJSAnNJImKEUk2+Kk0igL g==;
+IronPort-SDR: jCTDTqFJFQ8TYwsCRZzf/Pnjylzdnjx8bpHWJjAOZaXjLrcrJIulL/AhQfa1f6rE/JKwk0JVQc
+ ORU7nqRMtUxm1Jf8NRGAPoYSKRfZpOBTvWWQvJckBqiEAJoU0m5gmjlsqc7qOLivpbhpyBtV+g
+ 8V7FWLkg6c+DZh0nLj5X42uR6dUYnY+JcdZQVQcVU6BT1OX2s+6f6LzCzOMmU+xt8b14i1/wsd
+ KL4YicbVJvq8yJe2A+twhf2JLiuuckI7Lgo6ifdmxxsKn9QPn1zBJ42VsNH+0Bro/tZLI2L6qK
+ /ks=
+X-IronPort-AV: E=Sophos;i="5.76,305,1592841600"; d="scan'208";a="144786676"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 13 Aug 2020 03:23:16 +0800
-IronPort-SDR: ii49DnrbmH24uTUXU/gZoBrH+yj8k7xbxna2S2BYgQQ72hckUvMHk242+AtP6rLqvae6/T8SDA
- empCkgI/c01g==
+ by ob1.hgst.iphmx.com with ESMTP; 13 Aug 2020 03:23:14 +0800
+IronPort-SDR: Kk1j1/poCnJquLAYbxEmPdMHKHitkv/2A3IMdMRry50RoOHQKczZ1ofaReEAGAzBDIk1IFxlWq
+ /IeMROIJzbbA==
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Aug 2020 12:11:08 -0700
-IronPort-SDR: LqX//zM9FQjRt/lD18USpcQ4leE553RuuQP09AdwXpa9sB23KaZEE3csiKOtsMlQj+9pSnY7uF
- RLKUohES8x6w==
+ 12 Aug 2020 12:11:05 -0700
+IronPort-SDR: ouxOJtNHygGGPjl2PE4G4jTdAg2v3nKGkTIwjDZE8E1F2H8trmeetbpXlwbpWFVW/PnlcuGY+H
+ HJEUmcBBbhqg==
 WDCIronportException: Internal
 Received: from jbfyk72.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.59.14])
- by uls-op-cesaip01.wdc.com with ESMTP; 12 Aug 2020 12:23:17 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 12 Aug 2020 12:23:14 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, anup.patel@wdc.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v3 01/13] target/riscv: Allow setting a two-stage lookup in
- the virt status
-Date: Wed, 12 Aug 2020 12:13:16 -0700
-Message-Id: <08cdefb171b1bdb0c9e3151c509aaadefc3dcd3e.1597259519.git.alistair.francis@wdc.com>
+Subject: [PATCH v3 00/13]  RISC-V: Update the Hypervisor spec to v0.6.1
+Date: Wed, 12 Aug 2020 12:13:14 -0700
+Message-Id: <cover.1597259519.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1597259519.git.alistair.francis@wdc.com>
-References: <cover.1597259519.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=216.71.154.42;
@@ -81,69 +78,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2020 19:23:22 -0000
+X-List-Received-Date: Wed, 12 Aug 2020 19:23:23 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.h        |  2 ++
- target/riscv/cpu_bits.h   |  1 +
- target/riscv/cpu_helper.c | 18 ++++++++++++++++++
- 3 files changed, 21 insertions(+)
+This series updates the experimental QEMU RISC-V Hypervisor spec to the
+v0.6.1 draft implementation.
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a804a5d0ba..383808bf88 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -321,6 +321,8 @@ bool riscv_cpu_virt_enabled(CPURISCVState *env);
- void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
- bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
- void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable);
-+bool riscv_cpu_two_stage_lookup(CPURISCVState *env);
-+void riscv_cpu_set_two_stage_lookup(CPURISCVState *env, bool enable);
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
- hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 8117e8b5a7..ba0a5b50ff 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -467,6 +467,7 @@
-  * page table fault.
-  */
- #define FORCE_HS_EXCEP      2
-+#define HS_TWO_STAGE        4
- 
- /* RV32 satp CSR field masks */
- #define SATP32_MODE         0x80000000
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 75d2ae3434..68abccc993 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -220,6 +220,24 @@ void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable)
-     env->virt = set_field(env->virt, FORCE_HS_EXCEP, enable);
- }
- 
-+bool riscv_cpu_two_stage_lookup(CPURISCVState *env)
-+{
-+    if (!riscv_has_ext(env, RVH)) {
-+        return false;
-+    }
-+
-+    return get_field(env->virt, HS_TWO_STAGE);
-+}
-+
-+void riscv_cpu_set_two_stage_lookup(CPURISCVState *env, bool enable)
-+{
-+    if (!riscv_has_ext(env, RVH)) {
-+        return;
-+    }
-+
-+    env->virt = set_field(env->virt, HS_TWO_STAGE, enable);
-+}
-+
- int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
- {
-     CPURISCVState *env = &cpu->env;
+THis includes support for the new 2-stage lookup instructions and the new
+CSRs.
+
+It also includes the new 0.6.1 support for the virtual instruction
+fault.
+
+This was tested by running 32-bit and 64-bit Xvisor on QEMU and starting
+Linux guests.
+
+v3:
+ - Rebase on master
+v2:
+ - Update to v0.6.1
+
+
+
+Alistair Francis (13):
+  target/riscv: Allow setting a two-stage lookup in the virt status
+  target/riscv: Allow generating hlv/hlvx/hsv instructions
+  target/riscv: Do two-stage lookups on hlv/hlvx/hsv instructions
+  target/riscv: Don't allow guest to write to htinst
+  target/riscv: Convert MSTATUS MTL to GVA
+  target/riscv: Fix the interrupt cause code
+  target/riscv: Update the Hypervisor trap return/entry
+  target/riscv: Update the CSRs to the v0.6 Hyp extension
+  target/riscv: Only support a single VSXL length
+  target/riscv: Only support little endian guests
+  target/riscv: Support the v0.6 Hypervisor extension CRSs
+  target/riscv: Return the exception from invalid CSR accesses
+  target/riscv: Support the Virtual Instruction fault
+
+ target/riscv/cpu.h                      |   2 +
+ target/riscv/cpu_bits.h                 |  25 +-
+ target/riscv/helper.h                   |   4 +
+ target/riscv/insn32-64.decode           |   5 +
+ target/riscv/insn32.decode              |  11 +
+ target/riscv/cpu_helper.c               | 123 +++++----
+ target/riscv/csr.c                      | 171 ++++++++++--
+ target/riscv/insn_trans/trans_rvh.inc.c | 342 +++++++++++++++++++++++-
+ target/riscv/op_helper.c                | 176 +++++++++++-
+ target/riscv/translate.c                |  10 -
+ 10 files changed, 761 insertions(+), 108 deletions(-)
+
 -- 
 2.27.0
 
