@@ -1,77 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k5vv3-0002Tr-EU
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 14:56:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52464)
+	id 1k5wLL-0004c6-Db
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 15:23:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59412)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1k5vv1-0002RC-2L; Wed, 12 Aug 2020 14:56:11 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:42545)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1k5vuy-0005PK-LC; Wed, 12 Aug 2020 14:56:10 -0400
-Received: by mail-wr1-x443.google.com with SMTP id r4so3011025wrx.9;
- Wed, 12 Aug 2020 11:56:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=7B2qr/BUzGQOKH4il/G8YhlkCNVM/EenlUe+FeUmbTk=;
- b=qrvHJxhzdMIrFw1I5M5BQ/+dtS8WZPOIEyfszHxLxTSbNLSUFnNGLXI85Kmlt2/KYV
- R4qPZCqBhjogA7DI1sV+/6Yd06b2UC57nxBXMKmigPJGVVU+p5sm0FmHlKmMFISjkIeZ
- +jCvzu91Xc1A1XsihiTO4moOLEplWs6NM3hQl+La68LuLj2N3/Ie/1s893DqbnkL7sV1
- AEX7gEmrjDE3Tai0aOcRg/jej9cbycEZRRj2P7i9GvlMSkoeZiKSBpfGHfabRbQC/FmX
- P6+UvgjZiSMjyh+d8I2D3Lg6gzpkCmFjZXrsGJJEgFRf2ak+gEzm3yXxQE6Me46RwPYV
- Pscg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=7B2qr/BUzGQOKH4il/G8YhlkCNVM/EenlUe+FeUmbTk=;
- b=V4DAFYYdaIsBjMt/1Gy+yMYfG+e/7M5Ps6TFu3+VDABpeKtvP+V7aSFbUgu2oC3v4K
- +8mks50zHTr4nX9DhWnw6hjg7TECXg5cm6wo9Zx4xpDUmfRap5ajo2XnsWioCqEApVoH
- tUCWdd7kq0TpOhAGrvqjIbp5y3mpLtqtvgDdDt5wlPAlRFz+4rKiSF+JNu6O0qz7IzG4
- bitT7vEFjuZBws9R4lD1q99+RVrpoJpign9LNbu/RJPieeeVhVlXuOZ0TiSYCg241R65
- DSTB5pxPyVsNOJd75+JFPHW9iHPQ83jRQqnEp2wLDmeK67UBcOys9p4vH0CxLsSarggJ
- aWzw==
-X-Gm-Message-State: AOAM531fey9tWO4kB7HFyzMk1IWghCjMjzM23V7kKenNk170DlaPWR3/
- 6Unjl5Qdc00pQ9oj3YFhg5A=
-X-Google-Smtp-Source: ABdhPJyw8TFzrAyDALNLv5nsYsoc9D5aGK+BoRIoptqol1+5X1X6x+Bq4W2n9wIiMXpPJCj3l+cglA==
-X-Received: by 2002:adf:de08:: with SMTP id b8mr537555wrm.4.1597258566344;
- Wed, 12 Aug 2020 11:56:06 -0700 (PDT)
-Received: from [192.168.1.36] (121.red-81-40-121.staticip.rima-tde.net.
- [81.40.121.121])
- by smtp.gmail.com with ESMTPSA id t189sm5400623wmf.47.2020.08.12.11.56.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Aug 2020 11:56:05 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v1 3/3] hw/intc: ibex_plic: Honour source priorities
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair23@gmail.com
-References: <cover.1595655188.git.alistair.francis@wdc.com>
- <a697ca8a31eff8eb18a88e09a28206063cf85d48.1595655188.git.alistair.francis@wdc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <7899d7e1-f33f-fb40-cace-a20b218cc89e@amsat.org>
-Date: Wed, 12 Aug 2020 20:56:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ (Exim 4.90_1)
+ (envelope-from <prvs=486123ee4=alistair.francis@wdc.com>)
+ id 1k5wLJ-0004br-W6; Wed, 12 Aug 2020 15:23:22 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:50446)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=486123ee4=alistair.francis@wdc.com>)
+ id 1k5wLH-0000Qi-LQ; Wed, 12 Aug 2020 15:23:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1597260199; x=1628796199;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=vcurfjazEvMMtOCVG9Klun77gGKJkNPeMTrWvizvDhc=;
+ b=qkG00kZUg91PhPJ/Tl6cM4GttrJtxb46oPshMXXCM90oBWPFHsPmKpB3
+ Bv4y1SPJnpgHecgOhoiStvogho5BOxqlI+QxBdROa9/K/QnW7bWr2xi6T
+ Wh4yJ73WmMPl63JNmdcK6Ph4I8PCoE7cgDNXQI6oRSe51BzerpVWSjvKp
+ aHHA9L+P8okO6hF9IF9i/awNtzGjaVsob+RiffpZSNfeLcBmODuQRPnej
+ mMEyw4f77BxEP/Cr2UwjvKEmGpz6EasTcwG+26Kt+zEYOsiH88pSqehv9
+ ysknO8jEpAePMAiybdBbFxfXwHNNKwxGZs2T+KiGklm347ff6+92q3HKn w==;
+IronPort-SDR: GfUyoyGLarePZMYXIp8ThAE9CqG/O5PogzdXg+/Su6NqtQrjmW+xe0zTt1hXtMULuR/vLQZ0AF
+ el+t1tjOP3PRBW8TAyLgo9YOQMvUj0nReKLSsmkg9m0TAbbc9yxsKiVXNNFJhRs5teNfyse0J7
+ TiZ+kfW2/zKBte+0fVA8SnfKou5uICU1VZN+/fi4Dn8EmNoNvlmOh21PSula5QY5PQsduarYhz
+ O5hc18yQfeJER1d2aa2x4RvX6uKdwmpS8NimUNUyBXTtNvXuhgNQcIvjxKvKWUim80fbmfKijC
+ e6E=
+X-IronPort-AV: E=Sophos;i="5.76,305,1592841600"; d="scan'208";a="144786678"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 13 Aug 2020 03:23:16 +0800
+IronPort-SDR: ii49DnrbmH24uTUXU/gZoBrH+yj8k7xbxna2S2BYgQQ72hckUvMHk242+AtP6rLqvae6/T8SDA
+ empCkgI/c01g==
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Aug 2020 12:11:08 -0700
+IronPort-SDR: LqX//zM9FQjRt/lD18USpcQ4leE553RuuQP09AdwXpa9sB23KaZEE3csiKOtsMlQj+9pSnY7uF
+ RLKUohES8x6w==
+WDCIronportException: Internal
+Received: from jbfyk72.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.59.14])
+ by uls-op-cesaip01.wdc.com with ESMTP; 12 Aug 2020 12:23:17 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, anup.patel@wdc.com, alistair.francis@wdc.com,
+ alistair23@gmail.com
+Subject: [PATCH v3 01/13] target/riscv: Allow setting a two-stage lookup in
+ the virt status
+Date: Wed, 12 Aug 2020 12:13:16 -0700
+Message-Id: <08cdefb171b1bdb0c9e3151c509aaadefc3dcd3e.1597259519.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.27.0
+In-Reply-To: <cover.1597259519.git.alistair.francis@wdc.com>
+References: <cover.1597259519.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-In-Reply-To: <a697ca8a31eff8eb18a88e09a28206063cf85d48.1595655188.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::443;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x443.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: 0
-X-Spam_score: 0.0
-X-Spam_bar: /
-X-Spam_report: (0.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=1, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=216.71.154.42;
+ envelope-from=prvs=486123ee4=alistair.francis@wdc.com;
+ helo=esa4.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/12 15:23:14
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,58 +81,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2020 18:56:11 -0000
+X-List-Received-Date: Wed, 12 Aug 2020 19:23:22 -0000
 
-On 7/25/20 7:34 AM, Alistair Francis wrote:
-> This patch follows what commit aa4d30f6618dc "riscv: plic: Honour source
-> priorities" does and ensures that the highest priority interrupt will be
-> serviced first.
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Cc: Jessica Clarke <jrtc27@jrtc27.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.h        |  2 ++
+ target/riscv/cpu_bits.h   |  1 +
+ target/riscv/cpu_helper.c | 18 ++++++++++++++++++
+ 3 files changed, 21 insertions(+)
 
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-
-> ---
->  hw/intc/ibex_plic.c | 15 ++++++++++-----
->  1 file changed, 10 insertions(+), 5 deletions(-)
-> 
-> diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
-> index 669247ef08..f49fa67c91 100644
-> --- a/hw/intc/ibex_plic.c
-> +++ b/hw/intc/ibex_plic.c
-> @@ -57,6 +57,8 @@ static void ibex_plic_irqs_set_pending(IbexPlicState *s, int irq, bool level)
->  static bool ibex_plic_irqs_pending(IbexPlicState *s, uint32_t context)
->  {
->      int i;
-> +    uint32_t max_irq = 0;
-> +    uint32_t max_prio = s->threshold;
->  
->      for (i = 0; i < s->pending_num; i++) {
->          uint32_t irq_num = ctz64(s->pending[i]) + (i * 32);
-> @@ -66,14 +68,17 @@ static bool ibex_plic_irqs_pending(IbexPlicState *s, uint32_t context)
->              continue;
->          }
->  
-> -        if (s->priority[irq_num] > s->threshold) {
-> -            if (!s->claim) {
-> -                s->claim = irq_num;
-> -            }
-> -            return true;
-> +        if (s->priority[irq_num] > max_prio) {
-> +            max_irq = irq_num;
-> +            max_prio = s->priority[irq_num];
->          }
->      }
->  
-> +    if (max_irq) {
-> +        s->claim = max_irq;
-> +        return true;
-> +    }
-> +
->      return false;
->  }
->  
-> 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index a804a5d0ba..383808bf88 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -321,6 +321,8 @@ bool riscv_cpu_virt_enabled(CPURISCVState *env);
+ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+ bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
+ void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable);
++bool riscv_cpu_two_stage_lookup(CPURISCVState *env);
++void riscv_cpu_set_two_stage_lookup(CPURISCVState *env, bool enable);
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
+ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 8117e8b5a7..ba0a5b50ff 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -467,6 +467,7 @@
+  * page table fault.
+  */
+ #define FORCE_HS_EXCEP      2
++#define HS_TWO_STAGE        4
+ 
+ /* RV32 satp CSR field masks */
+ #define SATP32_MODE         0x80000000
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 75d2ae3434..68abccc993 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -220,6 +220,24 @@ void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable)
+     env->virt = set_field(env->virt, FORCE_HS_EXCEP, enable);
+ }
+ 
++bool riscv_cpu_two_stage_lookup(CPURISCVState *env)
++{
++    if (!riscv_has_ext(env, RVH)) {
++        return false;
++    }
++
++    return get_field(env->virt, HS_TWO_STAGE);
++}
++
++void riscv_cpu_set_two_stage_lookup(CPURISCVState *env, bool enable)
++{
++    if (!riscv_has_ext(env, RVH)) {
++        return;
++    }
++
++    env->virt = set_field(env->virt, HS_TWO_STAGE, enable);
++}
++
+ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+ {
+     CPURISCVState *env = &cpu->env;
+-- 
+2.27.0
 
 
