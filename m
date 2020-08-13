@@ -1,63 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6AmQ-0004cy-2V
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Aug 2020 06:48:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53340)
+	id 1k6CB7-0006eA-Ql
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Aug 2020 08:17:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44314)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1k6AmM-0004XW-L1; Thu, 13 Aug 2020 06:48:14 -0400
-Resent-Date: Thu, 13 Aug 2020 06:48:14 -0400
-Resent-Message-Id: <E1k6AmM-0004XW-L1@lists.gnu.org>
-Received: from sender4-of-o57.zoho.com ([136.143.188.57]:21734)
+ (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
+ id 1k6CB5-0006cq-Ql
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2020 08:17:51 -0400
+Received: from us-smtp-2.mimecast.com ([207.211.31.81]:22852
+ helo=us-smtp-delivery-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1k6AmK-0000GF-A9; Thu, 13 Aug 2020 06:48:14 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1597315642; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=IJW50G8/FckcsgsiS7Kc9+etBmzKo0EF+4V8sWJ23gfjqCf9hA/HSxyNv2+xeaREPw75TQy6dnziM6h+20qhhFAEoqdFhFIqbbQALNrbJqwhnHsFMe7i6W1Ozivuwo7ERUymArZ4splUrsqiBH7pS0khTkKYlTcpvia2sDvayKM=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1597315642;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=phrvuSdAwBk3kACzkhf6nN0QCfV6Ft1SxHyayOuK7W4=; 
- b=XKHyVEVKz5Q0sr6EviU14X+1buuhRjNIxFkTP7VxgwkyHCFV0SNXfclg8iRCqgyEHU2XCzeFtrSBc/VvB1sTy+On82AfKZkAIZNjzabENHgsZ8nIkZChKEbrjMXjlKGJA4YtU3IttpB/e1/7pfcWvlOEh5Fc0Ja/IE+hWkHe5n0=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1597315636000853.2675672060795;
- Thu, 13 Aug 2020 03:47:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
+ id 1k6CB4-0002TH-8s
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2020 08:17:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1597321069;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=DnbtrnFl35hLAfcQH1sSiHleh7rcpckqO2IPgfwNpVc=;
+ b=KpBRLrSSCS+QKbeNWBNuNLDUYvdEssFj7Uyr8Ds6WbJBvHhjHGo5nf2bVKJV74p1Npo+un
+ Gf8I/FFwBsUkmc2rAA72KMjrR3yKHnS8OpyEarSAcaCwLsu4NrJBvOHRCydkBHYDMCNHzL
+ wg+wcj0x04ATPlswjlQR5ZHy5FfINZo=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-499-2lM74kmQMFWUrl-WB6_dkQ-1; Thu, 13 Aug 2020 08:17:44 -0400
+X-MC-Unique: 2lM74kmQMFWUrl-WB6_dkQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1E99D1854FC2;
+ Thu, 13 Aug 2020 12:17:42 +0000 (UTC)
+Received: from localhost (ovpn-114-3.ams2.redhat.com [10.36.114.3])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1515A600C5;
+ Thu, 13 Aug 2020 12:17:24 +0000 (UTC)
+Date: Thu, 13 Aug 2020 13:17:23 +0100
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: peter.maydell@linaro.org, sagark@eecs.berkeley.edu, mst@redhat.com,
+ jasowang@redhat.com, Alistair.Francis@wdc.com, kraxel@redhat.com,
+ lizhijian@cn.fujitsu.com, qemu-block@nongnu.org,
+ quintela@redhat.com, david@redhat.com,
+ aleksandar.qemu.devel@gmail.com, marcandre.lureau@redhat.com,
+ aleksandar.rikalo@syrmia.com, dgilbert@redhat.com,
+ alex.williamson@redhat.com, palmer@dabbelt.com,
+ david@gibson.dropbear.id.au, kwolf@redhat.com,
+ qemu-riscv@nongnu.org, kbastian@mail.uni-paderborn.de,
+ mreitz@redhat.com, chen.zhang@intel.com, qemu-ppc@nongnu.org,
+ pbonzini@redhat.com, aurelien@aurel32.net, stefanb@linux.ibm.com
 Subject: Re: [PULL 0/9] Tracing patches
-Message-ID: <159731563394.15736.4645467986235495124@66eaa9a8a123>
-Reply-To: <qemu-devel@nongnu.org>
-In-Reply-To: <20200813052257.226142-1-stefanha@redhat.com>
+Message-ID: <20200813121723.GB6559@stefanha-x1.localdomain>
+References: <20200813052257.226142-1-stefanha@redhat.com>
+ <159731563394.15736.4645467986235495124@66eaa9a8a123>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: stefanha@redhat.com
-Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, sagark@eecs.berkeley.edu,
- mst@redhat.com, jasowang@redhat.com, Alistair.Francis@wdc.com,
- kraxel@redhat.com, lizhijian@cn.fujitsu.com, qemu-block@nongnu.org,
- quintela@redhat.com, david@redhat.com, aleksandar.qemu.devel@gmail.com,
- marcandre.lureau@redhat.com, aleksandar.rikalo@syrmia.com, dgilbert@redhat.com,
- alex.williamson@redhat.com, stefanha@redhat.com, palmer@dabbelt.com,
- david@gibson.dropbear.id.au, kwolf@redhat.com, qemu-riscv@nongnu.org,
- kbastian@mail.uni-paderborn.de, mreitz@redhat.com, chen.zhang@intel.com,
- qemu-ppc@nongnu.org, pbonzini@redhat.com, aurelien@aurel32.net,
- stefanb@linux.ibm.com
-Date: Thu, 13 Aug 2020 03:47:16 -0700 (PDT)
-X-ZohoMailClient: External
-Received-SPF: pass client-ip=136.143.188.57; envelope-from=no-reply@patchew.org;
- helo=sender4-of-o57.zoho.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/13 06:32:21
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <159731563394.15736.4645467986235495124@66eaa9a8a123>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=stefanha@redhat.com
+X-Mimecast-Spam-Score: 0.001
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="s2ZSL+KKDSLx8OML"
+Content-Disposition: inline
+Received-SPF: pass client-ip=207.211.31.81; envelope-from=stefanha@redhat.com;
+ helo=us-smtp-delivery-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/13 02:03:30
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+X-Spam_score_int: -40
+X-Spam_score: -4.1
+X-Spam_bar: ----
+X-Spam_report: (-4.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -70,43 +85,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2020 10:48:15 -0000
+X-List-Received-Date: Thu, 13 Aug 2020 12:17:52 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDgxMzA1MjI1Ny4yMjYx
-NDItMS1zdGVmYW5oYUByZWRoYXQuY29tLwoKCgpIaSwKClRoaXMgc2VyaWVzIGZhaWxlZCB0aGUg
-ZG9ja2VyLXF1aWNrQGNlbnRvczcgYnVpbGQgdGVzdC4gUGxlYXNlIGZpbmQgdGhlIHRlc3Rpbmcg
-Y29tbWFuZHMgYW5kCnRoZWlyIG91dHB1dCBiZWxvdy4gSWYgeW91IGhhdmUgRG9ja2VyIGluc3Rh
-bGxlZCwgeW91IGNhbiBwcm9iYWJseSByZXByb2R1Y2UgaXQKbG9jYWxseS4KCj09PSBURVNUIFND
-UklQVCBCRUdJTiA9PT0KIyEvYmluL2Jhc2gKbWFrZSBkb2NrZXItaW1hZ2UtY2VudG9zNyBWPTEg
-TkVUV09SSz0xCnRpbWUgbWFrZSBkb2NrZXItdGVzdC1xdWlja0BjZW50b3M3IFNIT1dfRU5WPTEg
-Sj0xNCBORVRXT1JLPTEKPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KCiAgVEVTVCAgICBjaGVjay11
-bml0OiB0ZXN0cy90ZXN0LWNoYXIKVW5leHBlY3RlZCBlcnJvciBpbiBvYmplY3RfcHJvcGVydHlf
-dHJ5X2FkZCgpIGF0IC90bXAvcWVtdS10ZXN0L3NyYy9xb20vb2JqZWN0LmM6MTE4MToKYXR0ZW1w
-dCB0byBhZGQgZHVwbGljYXRlIHByb3BlcnR5ICdzZXJpYWwtaWQnIHRvIG9iamVjdCAodHlwZSAn
-Y29udGFpbmVyJykKRVJST1IgdGVzdC1jaGFyIC0gdG9vIGZldyB0ZXN0cyBydW4gKGV4cGVjdGVk
-IDM4LCBnb3QgOSkKbWFrZTogKioqIFtjaGVjay11bml0XSBFcnJvciAxCm1ha2U6ICoqKiBXYWl0
-aW5nIGZvciB1bmZpbmlzaGVkIGpvYnMuLi4uCnFlbXUtc3lzdGVtLWFhcmNoNjQ6IC1hY2NlbCBr
-dm06IGludmFsaWQgYWNjZWxlcmF0b3Iga3ZtCnFlbXUtc3lzdGVtLWFhcmNoNjQ6IGZhbGxpbmcg
-YmFjayB0byB0Y2cKLS0tCiAgICByYWlzZSBDYWxsZWRQcm9jZXNzRXJyb3IocmV0Y29kZSwgY21k
-KQpzdWJwcm9jZXNzLkNhbGxlZFByb2Nlc3NFcnJvcjogQ29tbWFuZCAnWydzdWRvJywgJy1uJywg
-J2RvY2tlcicsICdydW4nLCAnLS1sYWJlbCcsICdjb20ucWVtdS5pbnN0YW5jZS51dWlkPTU4MDhj
-OTdjNzExZTQ4NWRiOTc5ZTUyODkyMDc2MTNiJywgJy11JywgJzEwMDMnLCAnLS1zZWN1cml0eS1v
-cHQnLCAnc2VjY29tcD11bmNvbmZpbmVkJywgJy0tcm0nLCAnLWUnLCAnVEFSR0VUX0xJU1Q9Jywg
-Jy1lJywgJ0VYVFJBX0NPTkZJR1VSRV9PUFRTPScsICctZScsICdWPScsICctZScsICdKPTE0Jywg
-Jy1lJywgJ0RFQlVHPScsICctZScsICdTSE9XX0VOVj0xJywgJy1lJywgJ0NDQUNIRV9ESVI9L3Zh
-ci90bXAvY2NhY2hlJywgJy12JywgJy9ob21lL3BhdGNoZXcyLy5jYWNoZS9xZW11LWRvY2tlci1j
-Y2FjaGU6L3Zhci90bXAvY2NhY2hlOnonLCAnLXYnLCAnL3Zhci90bXAvcGF0Y2hldy10ZXN0ZXIt
-dG1wLXdvNHY2bm5wL3NyYy9kb2NrZXItc3JjLjIwMjAtMDgtMTMtMDYuMzIuNDIuMzE4MTM6L3Zh
-ci90bXAvcWVtdTp6LHJvJywgJ3FlbXUvY2VudG9zNycsICcvdmFyL3RtcC9xZW11L3J1bicsICd0
-ZXN0LXF1aWNrJ10nIHJldHVybmVkIG5vbi16ZXJvIGV4aXQgc3RhdHVzIDIuCmZpbHRlcj0tLWZp
-bHRlcj1sYWJlbD1jb20ucWVtdS5pbnN0YW5jZS51dWlkPTU4MDhjOTdjNzExZTQ4NWRiOTc5ZTUy
-ODkyMDc2MTNiCm1ha2VbMV06ICoqKiBbZG9ja2VyLXJ1bl0gRXJyb3IgMQptYWtlWzFdOiBMZWF2
-aW5nIGRpcmVjdG9yeSBgL3Zhci90bXAvcGF0Y2hldy10ZXN0ZXItdG1wLXdvNHY2bm5wL3NyYycK
-bWFrZTogKioqIFtkb2NrZXItcnVuLXRlc3QtcXVpY2tAY2VudG9zN10gRXJyb3IgMgoKcmVhbCAg
-ICAxNG0zMi40NTBzCnVzZXIgICAgMG04LjM4MXMKCgpUaGUgZnVsbCBsb2cgaXMgYXZhaWxhYmxl
-IGF0Cmh0dHA6Ly9wYXRjaGV3Lm9yZy9sb2dzLzIwMjAwODEzMDUyMjU3LjIyNjE0Mi0xLXN0ZWZh
-bmhhQHJlZGhhdC5jb20vdGVzdGluZy5kb2NrZXItcXVpY2tAY2VudG9zNy8/dHlwZT1tZXNzYWdl
-LgotLS0KRW1haWwgZ2VuZXJhdGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0Y2hldyBbaHR0cHM6Ly9w
-YXRjaGV3Lm9yZy9dLgpQbGVhc2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRvIHBhdGNoZXctZGV2ZWxA
-cmVkaGF0LmNvbQ==
+--s2ZSL+KKDSLx8OML
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Thu, Aug 13, 2020 at 03:47:16AM -0700, no-reply@patchew.org wrote:
+>   TEST    check-unit: tests/test-char
+> Unexpected error in object_property_try_add() at /tmp/qemu-test/src/qom/object.c:1181:
+> attempt to add duplicate property 'serial-id' to object (type 'container')
+> ERROR test-char - too few tests run (expected 38, got 9)
+
+Pre-existing issue. This error is also affecting other patch series.
+
+Stefan
+
+--s2ZSL+KKDSLx8OML
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl81L1MACgkQnKSrs4Gr
+c8hf0wf/ZZYPwVleiFbu0kpZbbmwOBYPaD1wlZULiBai+ZhqVhyG/b0jt1PJ6NTi
+mmUOFkf3PQxPRPFRG01JP7oJ9jFAXHjdf4R3L2IuECAQMYM9Q7akfSpYfGh8Fg8m
+HlhsbTxWHrR4nfvh6jhyniP5ufO2l//p4pk+kqun4S10/ZMVZwJe7pZ68CCf3aTJ
++8wzf1aHNCrjFHnR7fHBJJHMDU/ESTWnpDrufbOtbK/ecCEHRUj89fDxQUdkSXHd
+G7/ochGHD3+nSsj4kcLmPXs+GEGtVT233b7ZgJlQlwrt/4KkPPuOnhmp/eW8Jdts
+f3y0Nez94ypqiYlyIYTn7EnNlnyR+Q==
+=AGIO
+-----END PGP SIGNATURE-----
+
+--s2ZSL+KKDSLx8OML--
+
 
