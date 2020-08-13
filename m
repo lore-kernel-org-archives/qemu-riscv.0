@@ -1,72 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k608l-00027P-Mg
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 19:26:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48710)
+	id 1k62xE-0004bV-FS
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Aug 2020 22:26:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49600)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k608k-00027C-Dt; Wed, 12 Aug 2020 19:26:38 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:34759)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k608i-0002W4-8c; Wed, 12 Aug 2020 19:26:38 -0400
-Received: by mail-il1-x141.google.com with SMTP id t4so3744660iln.1;
- Wed, 12 Aug 2020 16:26:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=wytlQz6bzpk943b0Muie01TFuftSx/f1fjCONG06DLA=;
- b=mDfLWS+OkaHCH+0zUP//8FHz+etQ/CYINsqNfXE98ZamZCrAYAOrdQug5dosDSrqqk
- gMb59FkyPZWUkuGxE78yqN9aGvga+wQOf5dTpHoO1ydAeGSbfW8YlgR5ruQSWiHH3BfS
- TUjm9TN8aWBR0ZrbaYiDWow4bEVxEjDPO/y6yI5iLIwZRf8MFQInujKv/bMIXPRtfWgR
- k/fQiaIiWegt6C1F6LSvc7dAygRBU3mlBOSTlDl5OfppwkWgmcRmwX8xBHcWcLsKWXWI
- W7psVjep2tsTZJisxkQ6iVv1JVAqUXpARpiltRqfhjRokTW8j7NScVCSMBgz1iZGqMGM
- jYuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=wytlQz6bzpk943b0Muie01TFuftSx/f1fjCONG06DLA=;
- b=J91zHdTPbaah2rEybVYiyPrHNc+I1Vz4phgoWZ1XrZgz233C3n+SP68tS6YQyBuGsZ
- V/59d6i0gL/TaeZRtA2pj3En4sOeyFdy15oSCvwr7/sI4XbFZxP/pjDQFTyUyI7lEWr2
- Dk8/pghltDwhDpKuHB67bmZUkkqLz/6x9QVyqhxM45aACfo8rtk1MD5oxvRWjNnRzphL
- d+2uvDFn6FeqhcmJnIL0gpxe4dLwVbRzXlFOSst3DCpej3cTd0Ysnne0WLYVIOzecsEI
- SD2B7e7ntRXeibN17xxb9eDVSm3adcDqGk/xFQUaqoDga5NZdIPIMq2b9grf9jpgFDex
- G3eQ==
-X-Gm-Message-State: AOAM531yC14lLufOUxbzAbyyfjOYSGkTWIXnxGQJ+/PheirmpDuQSdrV
- bS0kLtJDWIRKZR630E4AuSmZ7s8W7ddud4D0XaU=
-X-Google-Smtp-Source: ABdhPJwkanTUa4w+iJNLO2+6Eb6cTVqbmaq1WeRbU2xRGRHpRXjfx8sKfzelKsy2QBW/kz8YYokqep12l8OPLA20sG8=
-X-Received: by 2002:a05:6e02:13f1:: with SMTP id
- w17mr2029112ilj.131.1597274794749; 
- Wed, 12 Aug 2020 16:26:34 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1k62xC-0004bF-Gp; Wed, 12 Aug 2020 22:26:54 -0400
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:33049)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1k62x8-0005Pp-P6; Wed, 12 Aug 2020 22:26:54 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1112179|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_alarm|0.0682781-0.00109182-0.93063; FP=0|0|0|0|0|-1|-1|-1;
+ HT=e02c03279; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=6; RT=6; SR=0;
+ TI=SMTPD_---.IGpDMDT_1597285599; 
+Received: from 30.225.208.90(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.IGpDMDT_1597285599) by smtp.aliyun-inc.com(10.147.40.2);
+ Thu, 13 Aug 2020 10:26:39 +0800
+Subject: Re: [PATCH v3 00/13] RISC-V: Update the Hypervisor spec to v0.6.1
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: anup.patel@wdc.com, palmer@dabbelt.com, alistair23@gmail.com
+References: <cover.1597259519.git.alistair.francis@wdc.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <6e40b9b8-5883-7b49-e63e-2e24e8f5baec@c-sky.com>
+Date: Thu, 13 Aug 2020 10:26:39 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-References: <20200729112801.108985-1-anup.patel@wdc.com>
- <20200729112801.108985-4-anup.patel@wdc.com>
-In-Reply-To: <20200729112801.108985-4-anup.patel@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 Aug 2020 16:16:08 -0700
-Message-ID: <CAKmqyKMCYutR5TNvbJ3nA0rAu4W0xFVsZRm66W7Fi_Nw3joiBw@mail.gmail.com>
-Subject: Re: [PATCH 3/3] target/riscv: Update MTINST/HTINST CSR in
- riscv_cpu_do_interrupt()
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atish.patra@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Anup Patel <anup@brainfault.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+In-Reply-To: <cover.1597259519.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Received-SPF: none client-ip=121.197.200.217;
+ envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/12 22:14:07
+X-ACL-Warn: Detected OS   = Linux 3.x [generic] [fuzzy]
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,319 +52,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2020 23:26:38 -0000
+X-List-Received-Date: Thu, 13 Aug 2020 02:26:54 -0000
 
-On Wed, Jul 29, 2020 at 4:32 AM Anup Patel <anup.patel@wdc.com> wrote:
->
-> When RISCV_FEATURE_TINST feature is enabled, we should write
-> transformed instruction encoding of the trapped instruction
-> in MTINST/HTINST CSR at time of taking trap.
->
-> We update riscv_cpu_do_interrupt() as-per above.
->
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> ---
->  target/riscv/cpu_helper.c | 166 +++++++++++++++++++++++++++++++++++++-
->  target/riscv/instmap.h    |  41 ++++++++++
->  2 files changed, 204 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index e4bd45d66a..97ae23ad2b 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -22,6 +22,7 @@
->  #include "qemu/main-loop.h"
->  #include "cpu.h"
->  #include "exec/exec-all.h"
-> +#include "instmap.h"
->  #include "tcg/tcg-op.h"
->  #include "trace.h"
->
-> @@ -820,6 +821,151 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->  #endif
->  }
->
-> +static target_ulong riscv_transformed_insn(CPURISCVState *env,
-> +                                           int xlen, target_ulong insn)
-> +{
-> +    target_ulong xinsn = 0;
-> +
-> +    if ((insn & 0x3) != 0x3) {
-> +        /* Transform 16bit instruction into 32bit instruction */
-> +        switch (GET_C_OP(insn)) {
-> +        case OPC_RISC_C_OP_QUAD0: /* Quadrant 0 */
-> +            switch (GET_C_FUNC(insn)) {
-> +            case OPC_RISC_C_FUNC_FLD_LQ:
-> +                if (xlen != 128) { /* C.FLD (RV32/64) */
-> +                    xinsn = OPC_RISC_FLD;
-> +                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
-> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
-> +                    xinsn = SET_I_IMM(xinsn, GET_C_LD_IMM(insn));
-> +                }
-> +                break;
-> +            case OPC_RISC_C_FUNC_LW: /* C.LW */
-> +                xinsn = OPC_RISC_LW;
-> +                xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
-> +                xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
-> +                xinsn = SET_I_IMM(xinsn, GET_C_LW_IMM(insn));
-> +                break;
-> +            case OPC_RISC_C_FUNC_FLW_LD:
-> +                if (xlen == 32) { /* C.FLW (RV32) */
-> +                    xinsn = OPC_RISC_FLW;
-> +                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
-> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
-> +                    xinsn = SET_I_IMM(xinsn, GET_C_LW_IMM(insn));
-> +                } else { /* C.LD (RV64/RV128) */
-> +                    xinsn = OPC_RISC_LD;
-> +                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
-> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
-> +                    xinsn = SET_I_IMM(xinsn, GET_C_LD_IMM(insn));
-> +                }
-> +                break;
-> +            case OPC_RISC_C_FUNC_FSD_SQ:
-> +                if (xlen != 128) { /* C.FSD (RV32/64) */
-> +                    xinsn = OPC_RISC_FSD;
-> +                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
-> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
-> +                    xinsn = SET_S_IMM(xinsn, GET_C_SD_IMM(insn));
-> +                }
-> +                break;
-> +            case OPC_RISC_C_FUNC_SW: /* C.SW */
-> +                xinsn = OPC_RISC_SW;
-> +                xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
-> +                xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
-> +                xinsn = SET_S_IMM(xinsn, GET_C_SW_IMM(insn));
-> +                break;
-> +            case OPC_RISC_C_FUNC_FSW_SD:
-> +                if (xlen == 32) { /* C.FSW (RV32) */
-> +                    xinsn = OPC_RISC_FSW;
-> +                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
-> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
-> +                    xinsn = SET_S_IMM(xinsn, GET_C_SW_IMM(insn));
-> +                } else { /* C.SD (RV64/RV128) */
-> +                    xinsn = OPC_RISC_SD;
-> +                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
-> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
-> +                    xinsn = SET_S_IMM(xinsn, GET_C_SD_IMM(insn));
-> +                }
-> +                break;
-> +            default:
-> +                break;
-> +            }
-> +            break;
-> +        case OPC_RISC_C_OP_QUAD2: /* Quadrant 2 */
-> +            switch (GET_C_FUNC(insn)) {
-> +            case OPC_RISC_C_FUNC_FLDSP_LQSP:
-> +                if (xlen != 128) { /* C.FLDSP (RV32/64) */
-> +                    xinsn = OPC_RISC_FLD;
-> +                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
-> +                    xinsn = SET_RS1(xinsn, 2);
-> +                    xinsn = SET_I_IMM(xinsn, GET_C_LDSP_IMM(insn));
-> +                }
-> +                break;
-> +            case OPC_RISC_C_FUNC_LWSP: /* C.LWSP */
-> +                xinsn = OPC_RISC_LW;
-> +                xinsn = SET_RD(xinsn, GET_C_RD(insn));
-> +                xinsn = SET_RS1(xinsn, 2);
-> +                xinsn = SET_I_IMM(xinsn, GET_C_LWSP_IMM(insn));
-> +                break;
-> +            case OPC_RISC_C_FUNC_FLWSP_LDSP:
-> +                if (xlen == 32) { /* C.FLWSP (RV32) */
-> +                    xinsn = OPC_RISC_FLW;
-> +                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
-> +                    xinsn = SET_RS1(xinsn, 2);
-> +                    xinsn = SET_I_IMM(xinsn, GET_C_LWSP_IMM(insn));
-> +                } else { /* C.LDSP (RV64/RV128) */
-> +                    xinsn = OPC_RISC_LD;
-> +                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
-> +                    xinsn = SET_RS1(xinsn, 2);
-> +                    xinsn = SET_I_IMM(xinsn, GET_C_LDSP_IMM(insn));
-> +                }
-> +                break;
-> +            case OPC_RISC_C_FUNC_FSDSP_SQSP:
-> +                if (xlen != 128) { /* C.FSDSP (RV32/64) */
-> +                    xinsn = OPC_RISC_FSD;
-> +                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
-> +                    xinsn = SET_RS1(xinsn, 2);
-> +                    xinsn = SET_S_IMM(xinsn, GET_C_SDSP_IMM(insn));
-> +                }
-> +                break;
-> +            case OPC_RISC_C_FUNC_SWSP: /* C.SWSP */
-> +                xinsn = OPC_RISC_SW;
-> +                xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
-> +                xinsn = SET_RS1(xinsn, 2);
-> +                xinsn = SET_S_IMM(xinsn, GET_C_SWSP_IMM(insn));
-> +                break;
-> +            case 7:
-> +                if (xlen == 32) { /* C.FSWSP (RV32) */
-> +                    xinsn = OPC_RISC_FSW;
-> +                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
-> +                    xinsn = SET_RS1(xinsn, 2);
-> +                    xinsn = SET_S_IMM(xinsn, GET_C_SWSP_IMM(insn));
-> +                } else { /* C.SDSP (RV64/RV128) */
-> +                    xinsn = OPC_RISC_SD;
-> +                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
-> +                    xinsn = SET_RS1(xinsn, 2);
-> +                    xinsn = SET_S_IMM(xinsn, GET_C_SDSP_IMM(insn));
-> +                }
-> +                break;
-> +            default:
-> +                break;
-> +            }
-> +            break;
-> +        default:
-> +            break;
-> +        }
 
-I don't like that we have to manually decode the instructions. As it's
-only a handful it's not the end of the world, but it seems like
-duplication that could grow. Could we not use decode_insn16() instead?
-That way we can share the well tested TCG decoder.
 
-Alistair
+On 2020/8/13 3:13, Alistair Francis wrote:
+> This series updates the experimental QEMU RISC-V Hypervisor spec to the
+> v0.6.1 draft implementation.
+>
+> THis includes support for the new 2-stage lookup instructions and the new
+> CSRs.
+>
+> It also includes the new 0.6.1 support for the virtual instruction
+> fault.
+>
+> This was tested by running 32-bit and 64-bit Xvisor on QEMU and starting
+> Linux guests.
+Hi Alistair,
 
-> +
-> +        /*
-> +         * Clear Bit1 of transformed instruction to indicate that
-> +         * original insruction was a 16bit instruction
-> +         */
-> +        xinsn &= ~((target_ulong)0x2);
-> +    } else {
-> +        /* No need to transform 32bit (or wider) instructions */
-> +        xinsn = insn;
-> +    }
-> +
-> +    return xinsn;
-> +}
-> +
->  /*
->   * Handle Traps
->   *
-> @@ -842,6 +988,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->      target_ulong cause = cs->exception_index & RISCV_EXCP_INT_MASK;
->      target_ulong deleg = async ? env->mideleg : env->medeleg;
->      target_ulong tval = 0;
-> +    target_ulong tinst = 0;
->      target_ulong htval = 0;
->      target_ulong mtval2 = 0;
->
-> @@ -849,20 +996,31 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->          /* set tval to badaddr for traps with address information */
->          switch (cause) {
->          case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
-> -        case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
-> -        case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
->              force_hs_execp = true;
->              /* fallthrough */
->          case RISCV_EXCP_INST_ADDR_MIS:
->          case RISCV_EXCP_INST_ACCESS_FAULT:
-> +        case RISCV_EXCP_INST_PAGE_FAULT:
-> +            tval = env->badaddr;
-> +            break;
-> +        case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
-> +        case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
-> +            force_hs_execp = true;
-> +            /* fallthrough */
->          case RISCV_EXCP_LOAD_ADDR_MIS:
->          case RISCV_EXCP_STORE_AMO_ADDR_MIS:
->          case RISCV_EXCP_LOAD_ACCESS_FAULT:
->          case RISCV_EXCP_STORE_AMO_ACCESS_FAULT:
-> -        case RISCV_EXCP_INST_PAGE_FAULT:
->          case RISCV_EXCP_LOAD_PAGE_FAULT:
->          case RISCV_EXCP_STORE_PAGE_FAULT:
->              tval = env->badaddr;
-> +            if (riscv_feature(env, RISCV_FEATURE_TINST)) {
-> +#if defined(TARGET_RISCV32)
-> +                tinst = riscv_transformed_insn(env, 32, env->trap_insn);
-> +#elif defined(TARGET_RISCV64)
-> +                tinst = riscv_transformed_insn(env, 64, env->trap_insn);
-> +#endif
-> +            }
->              break;
->          case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
->          case RISCV_EXCP_ILLEGAL_INST:
-> @@ -955,6 +1113,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->          env->sepc = env->pc;
->          env->sbadaddr = tval;
->          env->htval = htval;
-> +        env->htinst = tinst;
->          env->pc = (env->stvec >> 2 << 2) +
->              ((async && (env->stvec & 3) == 1) ? cause * 4 : 0);
->          riscv_cpu_set_mode(env, PRV_S);
-> @@ -994,6 +1153,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->          env->mepc = env->pc;
->          env->mbadaddr = tval;
->          env->mtval2 = mtval2;
-> +        env->mtinst = tinst;
->          env->pc = (env->mtvec >> 2 << 2) +
->              ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
->          riscv_cpu_set_mode(env, PRV_M);
-> diff --git a/target/riscv/instmap.h b/target/riscv/instmap.h
-> index 40b6d2b64d..f4ee686c78 100644
-> --- a/target/riscv/instmap.h
-> +++ b/target/riscv/instmap.h
-> @@ -316,6 +316,12 @@ enum {
->  #define GET_RS2(inst)  extract32(inst, 20, 5)
->  #define GET_RD(inst)   extract32(inst, 7, 5)
->  #define GET_IMM(inst)  sextract64(inst, 20, 12)
-> +#define SET_RS1(inst, val)  deposit32(inst, 15, 5, val)
-> +#define SET_RS2(inst, val)  deposit32(inst, 20, 5, val)
-> +#define SET_RD(inst, val)   deposit32(inst, 7, 5, val)
-> +#define SET_I_IMM(inst, val)  deposit32(inst, 20, 12, val)
-> +#define SET_S_IMM(inst, val)  \
-> +    deposit32(deposit32(inst, 7, 5, val), 25, 7, (val) >> 5)
->
->  /* RVC decoding macros */
->  #define GET_C_IMM(inst)             (extract32(inst, 2, 5) \
-> @@ -346,6 +352,8 @@ enum {
->                                      | (extract32(inst, 5, 1) << 6))
->  #define GET_C_LD_IMM(inst)          ((extract16(inst, 10, 3) << 3) \
->                                      | (extract16(inst, 5, 2) << 6))
-> +#define GET_C_SW_IMM(inst)          GET_C_LW_IMM(inst)
-> +#define GET_C_SD_IMM(inst)          GET_C_LD_IMM(inst)
->  #define GET_C_J_IMM(inst)           ((extract32(inst, 3, 3) << 1) \
->                                      | (extract32(inst, 11, 1) << 4) \
->                                      | (extract32(inst, 2, 1) << 5) \
-> @@ -366,4 +374,37 @@ enum {
->  #define GET_C_RS1S(inst)            (8 + extract16(inst, 7, 3))
->  #define GET_C_RS2S(inst)            (8 + extract16(inst, 2, 3))
->
-> +#define GET_C_FUNC(inst)           extract32(inst, 13, 3)
-> +#define GET_C_OP(inst)             extract32(inst, 0, 2)
-> +
-> +enum {
-> +    /* RVC Quadrants */
-> +    OPC_RISC_C_OP_QUAD0 = 0x0,
-> +    OPC_RISC_C_OP_QUAD1 = 0x1,
-> +    OPC_RISC_C_OP_QUAD2 = 0x2
-> +};
-> +
-> +enum {
-> +    /* RVC Quadrant 0 */
-> +    OPC_RISC_C_FUNC_ADDI4SPN = 0x0,
-> +    OPC_RISC_C_FUNC_FLD_LQ = 0x1,
-> +    OPC_RISC_C_FUNC_LW = 0x2,
-> +    OPC_RISC_C_FUNC_FLW_LD = 0x3,
-> +    OPC_RISC_C_FUNC_FSD_SQ = 0x5,
-> +    OPC_RISC_C_FUNC_SW = 0x6,
-> +    OPC_RISC_C_FUNC_FSW_SD = 0x7
-> +};
-> +
-> +enum {
-> +    /* RVC Quadrant 2 */
-> +    OPC_RISC_C_FUNC_SLLI_SLLI64 = 0x0,
-> +    OPC_RISC_C_FUNC_FLDSP_LQSP = 0x1,
-> +    OPC_RISC_C_FUNC_LWSP = 0x2,
-> +    OPC_RISC_C_FUNC_FLWSP_LDSP = 0x3,
-> +    OPC_RISC_C_FUNC_JR_MV_EBREAK_JALR_ADD = 0x4,
-> +    OPC_RISC_C_FUNC_FSDSP_SQSP = 0x5,
-> +    OPC_RISC_C_FUNC_SWSP = 0x6,
-> +    OPC_RISC_C_FUNC_FSWSP_SDSP = 0x7
-> +};
-> +
->  #endif
-> --
-> 2.25.1
+I am reading Christoper Dall's article on ARM virtualization.  As far as 
+I can see,  Xvisor is type 1 hypervisor.
+
+I want to  try this patch set. Could you share the method? Thanks very much.
+
+Best Regards,
+Zhiwei
+> v3:
+>   - Rebase on master
+> v2:
+>   - Update to v0.6.1
 >
 >
+>
+> Alistair Francis (13):
+>    target/riscv: Allow setting a two-stage lookup in the virt status
+>    target/riscv: Allow generating hlv/hlvx/hsv instructions
+>    target/riscv: Do two-stage lookups on hlv/hlvx/hsv instructions
+>    target/riscv: Don't allow guest to write to htinst
+>    target/riscv: Convert MSTATUS MTL to GVA
+>    target/riscv: Fix the interrupt cause code
+>    target/riscv: Update the Hypervisor trap return/entry
+>    target/riscv: Update the CSRs to the v0.6 Hyp extension
+>    target/riscv: Only support a single VSXL length
+>    target/riscv: Only support little endian guests
+>    target/riscv: Support the v0.6 Hypervisor extension CRSs
+>    target/riscv: Return the exception from invalid CSR accesses
+>    target/riscv: Support the Virtual Instruction fault
+>
+>   target/riscv/cpu.h                      |   2 +
+>   target/riscv/cpu_bits.h                 |  25 +-
+>   target/riscv/helper.h                   |   4 +
+>   target/riscv/insn32-64.decode           |   5 +
+>   target/riscv/insn32.decode              |  11 +
+>   target/riscv/cpu_helper.c               | 123 +++++----
+>   target/riscv/csr.c                      | 171 ++++++++++--
+>   target/riscv/insn_trans/trans_rvh.inc.c | 342 +++++++++++++++++++++++-
+>   target/riscv/op_helper.c                | 176 +++++++++++-
+>   target/riscv/translate.c                |  10 -
+>   10 files changed, 761 insertions(+), 108 deletions(-)
+>
+
 
