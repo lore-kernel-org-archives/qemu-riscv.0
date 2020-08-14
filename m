@@ -1,59 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6RGZ-0006cw-9Q
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 00:24:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37558)
+	id 1k6UBH-00086q-AZ
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 03:31:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40098)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1k6RGX-0006cm-Jd; Fri, 14 Aug 2020 00:24:29 -0400
-Resent-Date: Fri, 14 Aug 2020 00:24:29 -0400
-Resent-Message-Id: <E1k6RGX-0006cm-Jd@lists.gnu.org>
-Received: from sender4-of-o57.zoho.com ([136.143.188.57]:21783)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1k6RGU-0003eE-O2; Fri, 14 Aug 2020 00:24:29 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1597379036; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=S9nVcHZItZesFwjzTTO3g/thW3muA7jCUfx9kA1Xvf8kbIZ0DPJLFtOwbUbOe3epXwuFTTbi+d10wGW6ycweUMMp/zYUxgfMpp+xqCo4+VN0d/NhLLKlvRgqeiaZI6wsiwhvAW+a4VZeTwV4qCIrGXXR5OGWxtIWCNu2mp2QPXg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1597379036;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=OEvfY9qtAFo+CEpS0u/Qu/lSFAIbwXlFOiLV3WvRCbo=; 
- b=Uv8Nekjx9KmBhH+gOrPm9Z9suHOjtS5/NaPRPZceCVt6Z4r3DYzhxXQN8ffNP9LZ2GWbpl5ZPO2MorSk7CAGcZ3MitELNWJ4qMlxW+kzmIknkq1QQ+EdVZ51wfmLIIA5VypqY9ylyR/zcsyqP9yR6ntRlp75/RNdTNLNczF+ijs=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 159737903177795.25170292746691;
- Thu, 13 Aug 2020 21:23:51 -0700 (PDT)
-Subject: Re: [PATCH] target/riscv: Fix bug in getting trap cause name for
- trace_riscv_trap
-Message-ID: <159737903042.30514.18022346928129143910@66eaa9a8a123>
-Reply-To: <qemu-devel@nongnu.org>
-In-Reply-To: <20200814035819.1214-1-jiangyifei@huawei.com>
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1k6UBF-00086Y-JD; Fri, 14 Aug 2020 03:31:13 -0400
+Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:36241)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1k6UBD-0006UJ-6u; Fri, 14 Aug 2020 03:31:13 -0400
+Received: by mail-wm1-x341.google.com with SMTP id 3so7119506wmi.1;
+ Fri, 14 Aug 2020 00:31:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:references:cc:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=SUzPO0rmg94uDA0r2cz+XDec4sVmrSgtOpeeLY6wdrs=;
+ b=BdOedG2a5UpbKPg9piFmMy6w6jUTPiG9UfZHhwMJ6J4s+EfpWPDuqmiTZaFBMdRwqU
+ AVcH/TNOZfx0oUT/TEMTUK995KsvePHG/XCE349eV3qc0ysbeEbqxwfLyYZs/EezDkiG
+ 31mGq5rZ3oYGWNwMJxFSb1WoH+W1eEHik7fwOYzfe5FA8QJxTCtDn/kfiNItBCSg4Dxl
+ CbH0Yv4oy/OEqka1amCt2O1IKwU6umUfWVqGdAhBID6liizFIN0YOUR2lEoHo7nMO0xr
+ ZudkzlJCHphuuyx5xlyWOHxbG7d32Q/oeQWM34hZ8WgXk9Pej6a/KatzkEz7rXYifskq
+ 7VeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:subject:to:references:cc:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=SUzPO0rmg94uDA0r2cz+XDec4sVmrSgtOpeeLY6wdrs=;
+ b=pzeH3864LOgWYss13tRsVZAWc0wOJZXx28SVEp9ad6rtlf9a/uQY6uJ+gF2ker6OBN
+ YjCbhNgb65IbG2MIu5fiLJc/gYbeJkUu8iJ62acDHRZp5+gQniRp5jHFnGcAp9a5DY3L
+ k5wz2jbAwUHV9DQcdA98YskHDRz4RVdSly7QijLo1jFRfNNWXo83xQhIVK8nGdaji1Rh
+ QgJS5zaJ6NVAYnDTXsofy5TTq+ocx/QuEUaTbbquv/BYIyRZvXMvhmDyyzYufIpJmv2X
+ LPJVMq6TOoXgAScW5ag7Ow1uPdeBy6juQ1QeVdtBXsOpg2J83ysZh2wmGdi+k0Fi+IlP
+ EdNQ==
+X-Gm-Message-State: AOAM5312c77FepCrMKnLECy75WCI85Kb6Nvbm0uzjuglWL9i+DS9tfk4
+ 5JTk/E/4qHGqmxYRLOjQ5g6NCfJ8tO8=
+X-Google-Smtp-Source: ABdhPJzc5idv6qBouuQJdKu4+ban/H02JIadMRQuTVnaPXvqS1PVd5gER0dJgdg7L4OCc8hixQWLHA==
+X-Received: by 2002:a7b:cf0b:: with SMTP id l11mr1309695wmg.128.1597390264782; 
+ Fri, 14 Aug 2020 00:31:04 -0700 (PDT)
+Received: from [192.168.1.36] (121.red-81-40-121.staticip.rima-tde.net.
+ [81.40.121.121])
+ by smtp.gmail.com with ESMTPSA id x82sm13240038wmb.30.2020.08.14.00.31.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 14 Aug 2020 00:31:03 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: QEMU latest release riscv32-softmmu not working
+To: arman avetisyan <arman.avetisyan2000@gmail.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+References: <CAK29XkHKxt94TPFwwuTy78Ye1Z9=-zxMe77bx7R+xxtP-nmipw@mail.gmail.com>
+Cc: qemu-discuss@nongnu.org, qemu-devel <qemu-devel@nongnu.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <f4dbe759-a360-efde-17f7-b67c8350c899@amsat.org>
+Date: Fri, 14 Aug 2020 09:31:02 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: jiangyifei@huawei.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- zhang.zhanghailiang@huawei.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, victor.zhangxiaofeng@huawei.com,
- jiangyifei@huawei.com, Alistair.Francis@wdc.com, yinyipeng1@huawei.com,
- palmer@dabbelt.com, wu.wubin@huawei.com, dengkai1@huawei.com
-Date: Thu, 13 Aug 2020 21:23:51 -0700 (PDT)
-X-ZohoMailClient: External
-Received-SPF: pass client-ip=136.143.188.57; envelope-from=no-reply@patchew.org;
- helo=sender4-of-o57.zoho.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/14 00:24:23
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <CAK29XkHKxt94TPFwwuTy78Ye1Z9=-zxMe77bx7R+xxtP-nmipw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::341;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x341.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: 0
+X-Spam_score: 0.0
+X-Spam_bar: /
+X-Spam_report: (0.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=1, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -66,42 +83,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2020 04:24:29 -0000
+X-List-Received-Date: Fri, 14 Aug 2020 07:31:14 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDgxNDAzNTgxOS4xMjE0
-LTEtamlhbmd5aWZlaUBodWF3ZWkuY29tLwoKCgpIaSwKClRoaXMgc2VyaWVzIGZhaWxlZCB0aGUg
-ZG9ja2VyLXF1aWNrQGNlbnRvczcgYnVpbGQgdGVzdC4gUGxlYXNlIGZpbmQgdGhlIHRlc3Rpbmcg
-Y29tbWFuZHMgYW5kCnRoZWlyIG91dHB1dCBiZWxvdy4gSWYgeW91IGhhdmUgRG9ja2VyIGluc3Rh
-bGxlZCwgeW91IGNhbiBwcm9iYWJseSByZXByb2R1Y2UgaXQKbG9jYWxseS4KCj09PSBURVNUIFND
-UklQVCBCRUdJTiA9PT0KIyEvYmluL2Jhc2gKbWFrZSBkb2NrZXItaW1hZ2UtY2VudG9zNyBWPTEg
-TkVUV09SSz0xCnRpbWUgbWFrZSBkb2NrZXItdGVzdC1xdWlja0BjZW50b3M3IFNIT1dfRU5WPTEg
-Sj0xNCBORVRXT1JLPTEKPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KCiAgVEVTVCAgICBjaGVjay11
-bml0OiB0ZXN0cy90ZXN0LWNoYXIKVW5leHBlY3RlZCBlcnJvciBpbiBvYmplY3RfcHJvcGVydHlf
-dHJ5X2FkZCgpIGF0IC90bXAvcWVtdS10ZXN0L3NyYy9xb20vb2JqZWN0LmM6MTE4MToKYXR0ZW1w
-dCB0byBhZGQgZHVwbGljYXRlIHByb3BlcnR5ICdzZXJpYWwtaWQnIHRvIG9iamVjdCAodHlwZSAn
-Y29udGFpbmVyJykKRVJST1IgdGVzdC1jaGFyIC0gdG9vIGZldyB0ZXN0cyBydW4gKGV4cGVjdGVk
-IDM4LCBnb3QgOSkKbWFrZTogKioqIFtjaGVjay11bml0XSBFcnJvciAxCm1ha2U6ICoqKiBXYWl0
-aW5nIGZvciB1bmZpbmlzaGVkIGpvYnMuLi4uCiAgVEVTVCAgICBpb3Rlc3QtcWNvdzI6IDAyOQog
-IFRFU1QgICAgY2hlY2stcXRlc3QteDg2XzY0OiB0ZXN0cy9xdGVzdC9oZC1nZW8tdGVzdAotLS0K
-ICAgIHJhaXNlIENhbGxlZFByb2Nlc3NFcnJvcihyZXRjb2RlLCBjbWQpCnN1YnByb2Nlc3MuQ2Fs
-bGVkUHJvY2Vzc0Vycm9yOiBDb21tYW5kICdbJ3N1ZG8nLCAnLW4nLCAnZG9ja2VyJywgJ3J1bics
-ICctLWxhYmVsJywgJ2NvbS5xZW11Lmluc3RhbmNlLnV1aWQ9ODNlOGJlOTgyZmU4NGY3MzliMzQy
-NDM1ZjMzYjYyZjYnLCAnLXUnLCAnMTAwMycsICctLXNlY3VyaXR5LW9wdCcsICdzZWNjb21wPXVu
-Y29uZmluZWQnLCAnLS1ybScsICctZScsICdUQVJHRVRfTElTVD0nLCAnLWUnLCAnRVhUUkFfQ09O
-RklHVVJFX09QVFM9JywgJy1lJywgJ1Y9JywgJy1lJywgJ0o9MTQnLCAnLWUnLCAnREVCVUc9Jywg
-Jy1lJywgJ1NIT1dfRU5WPTEnLCAnLWUnLCAnQ0NBQ0hFX0RJUj0vdmFyL3RtcC9jY2FjaGUnLCAn
-LXYnLCAnL2hvbWUvcGF0Y2hldzIvLmNhY2hlL3FlbXUtZG9ja2VyLWNjYWNoZTovdmFyL3RtcC9j
-Y2FjaGU6eicsICctdicsICcvdmFyL3RtcC9wYXRjaGV3LXRlc3Rlci10bXAtYnJ4a29sNTMvc3Jj
-L2RvY2tlci1zcmMuMjAyMC0wOC0xNC0wMC4xMC4zNi42MTUyOi92YXIvdG1wL3FlbXU6eixybycs
-ICdxZW11L2NlbnRvczcnLCAnL3Zhci90bXAvcWVtdS9ydW4nLCAndGVzdC1xdWljayddJyByZXR1
-cm5lZCBub24temVybyBleGl0IHN0YXR1cyAyLgpmaWx0ZXI9LS1maWx0ZXI9bGFiZWw9Y29tLnFl
-bXUuaW5zdGFuY2UudXVpZD04M2U4YmU5ODJmZTg0ZjczOWIzNDI0MzVmMzNiNjJmNgptYWtlWzFd
-OiAqKiogW2RvY2tlci1ydW5dIEVycm9yIDEKbWFrZVsxXTogTGVhdmluZyBkaXJlY3RvcnkgYC92
-YXIvdG1wL3BhdGNoZXctdGVzdGVyLXRtcC1icnhrb2w1My9zcmMnCm1ha2U6ICoqKiBbZG9ja2Vy
-LXJ1bi10ZXN0LXF1aWNrQGNlbnRvczddIEVycm9yIDIKCnJlYWwgICAgMTNtMTUuMDU4cwp1c2Vy
-ICAgIDBtOC40MDlzCgoKVGhlIGZ1bGwgbG9nIGlzIGF2YWlsYWJsZSBhdApodHRwOi8vcGF0Y2hl
-dy5vcmcvbG9ncy8yMDIwMDgxNDAzNTgxOS4xMjE0LTEtamlhbmd5aWZlaUBodWF3ZWkuY29tL3Rl
-c3RpbmcuZG9ja2VyLXF1aWNrQGNlbnRvczcvP3R5cGU9bWVzc2FnZS4KLS0tCkVtYWlsIGdlbmVy
-YXRlZCBhdXRvbWF0aWNhbGx5IGJ5IFBhdGNoZXcgW2h0dHBzOi8vcGF0Y2hldy5vcmcvXS4KUGxl
-YXNlIHNlbmQgeW91ciBmZWVkYmFjayB0byBwYXRjaGV3LWRldmVsQHJlZGhhdC5jb20=
+Hi Arman,
+
+On 8/13/20 10:20 PM, arman avetisyan wrote:
+> Hi QEMU Team, having issue running riscv32-softmmu
+
+Cc'ing this to the QEMU RISCV mailing list.
+
+> 
+> After running riscv32-softmmu supplying custom linux build it crashes
+> and complains about rom segments overlaping
+> 
+> $ qemu-system-riscv32 -nographic -machine virt -kernel bbl   -append
+> "root=/dev/vda ro console=ttyS0"   -drive
+> file=busybear.bin,format=raw,id=hd0   -device virtio-blk-device,drive=hd0
+> 
+> Log:
+> rom: requested regions overlap (rom phdr #0: bbl.
+> free=0x000000008000c160, addr=0x0000000080000000)
+> qemu-system-riscv32: rom check and register reset failed
+> 
+> qemu version = 5.1.0
+> Pulled from github.com <http://github.com> (latest commit in master =
+> also tagged v5.1.0)
+> 
+> Same files are used in 4.2.0 and are working fine.
+> Tried different kernel files, all had same issue.
+> 
+> How can I help to debug it? I really want to modify QEMU to support new
+> board/machine but having hard time building latest version from github
+> (which happens to be release v5.1.0)
+> 
+> Thanks, Arman
+
 
