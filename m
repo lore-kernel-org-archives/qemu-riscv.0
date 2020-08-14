@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6clq-0007UK-Lv
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 12:41:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47232)
+	id 1k6clt-0007c9-TD
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 12:41:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47260)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k6clo-0007P4-Ew; Fri, 14 Aug 2020 12:41:32 -0400
-Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:50235)
+ id 1k6clr-0007X6-Pc; Fri, 14 Aug 2020 12:41:35 -0400
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:54095)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k6clm-0002eq-Gn; Fri, 14 Aug 2020 12:41:32 -0400
-Received: by mail-pj1-x1042.google.com with SMTP id e4so4673813pjd.0;
- Fri, 14 Aug 2020 09:41:29 -0700 (PDT)
+ id 1k6clq-0002fS-6w; Fri, 14 Aug 2020 12:41:35 -0400
+Received: by mail-pj1-x1042.google.com with SMTP id l60so4661744pjb.3;
+ Fri, 14 Aug 2020 09:41:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=mdPr+L46xcY0jrrcKDo2FpIIhtgmjgb2ImLyVvpn5I0=;
- b=bGrfVYdS4RZKNXSI0PR7SvLA9DfAvXyFZk3+z9Jo2r2EnbteF+fTd6PpJBV7/skFaT
- y2mZr3eYT2rQQMF6tCLqujLFfcDuwGQoWOYFL99xXz2qP2tF7ov1HoKu5IecCwaXziPs
- 5Db/Hp3RiIg/XvPdjetA6jt6OpH1ucOj5P9OciB2PXt8UWhC7Ml3KqdfcHbE5N/XrPbV
- ZqU6wJEmtX8QOnVGBhGmXxgtxwnY1UQOKBX5nUTaOLVXDOP9y/9yUztS1OQO2nCG2atx
- ai1r2m3pWnH2PbozlsrDrEfJ26q1/S04Xc+e2+Ei3MUVew31aPQ/qjz9KI5sy9OMzph+
- /oFA==
+ bh=OQuHkgiSAag0FaRCedSN1Lrezlh8zBNDZa5YbEmYI+E=;
+ b=b/6H4pwDjKf3Bn0itTfx55DAd5teyk8GKzf2tQvYVcGzV8R2M8VzshOnEa2mTCurub
+ DKspAI09nCUbyodbg2GOWposA+BRuxSqK2HRuitWh3ZoAI3AzxEIQnaFcAf8a8vVLbwT
+ 3YPh7ODQoDMuvOzJ7xNYPJkHoz6US/I7VLdzpUnE6qchL39/uBqn1BFGkXAFsBK0GQiF
+ OoLkrR4PknrLmizI6SJwTXtc6EqsK2P6dkK5tgRWAfLitkAGVQxzMbEPf6C5j4U0R8hi
+ uKvI/SLHZcAjjdQWPd9Cy077BCVc8B7+SEGdUbbNMaJ+tJRUIF/KYGPDAV3mOhgWV55p
+ phYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=mdPr+L46xcY0jrrcKDo2FpIIhtgmjgb2ImLyVvpn5I0=;
- b=mttaKykV76oibZoAGkBx756b9atIcJ2z7eWqXURidEsIRW2Fjdn8TpYZLZBORpg5he
- 3JOaM5hNya3FMexVcKKc8RyDpSByQpa6VK+cCVh72r1U8j/zkhezoVjRjAM07YsCd1fG
- Od3XHPYeFdP9iqoBi+U6TBzQhmj9oeJ3BE72DWjgdTvOdRnFNEce2T90fnmB8YpUNAvX
- yAlGc4tx3dKqgfm+qfiqZHlnl8xkPkNyrT/q4IZJkbWnOG4MteCy5WjYhnvEsvG4Xh3p
- 7yLIzY2NLOUXneZPI+/T1nmjeHpMrHzeti8vAXqVKAUu7LIXfUDjh5wcnapxD0GDpae2
- 2CtQ==
-X-Gm-Message-State: AOAM531fJqnQMmP2m5XoCZZlRrN8nZStJrN2jX3bPEQSxplczKn6PyiD
- h5L/F7RWKdJtXTdTeR7eMsg=
-X-Google-Smtp-Source: ABdhPJxsGKDTIr3altxRnkUBZIH8CLyKEX3TEsiEYEk5iXzBSoLq+mmyEJzcxEhlVCoyIqpHoz25wQ==
-X-Received: by 2002:a17:90b:2388:: with SMTP id
- mr8mr3202035pjb.64.1597423288857; 
- Fri, 14 Aug 2020 09:41:28 -0700 (PDT)
+ bh=OQuHkgiSAag0FaRCedSN1Lrezlh8zBNDZa5YbEmYI+E=;
+ b=po28C0nc6tLetKfFqTZHnKDxWwSOHg+HoEESNGiHyuHS1yPENcWL3fv98YfpA9X9Vw
+ pA3DfnY8Q5wZpCOko1IFz4N4AUJwAN7bIjag9GcjfQnBpILlMX3fiPCRYWVjFFe0CUR+
+ Rhjr/X/TyAOzZVKvryM8wM0Z5e3v67E+OVD/+djsnOf4njaj7IO04i5akdFsHwdHDSvX
+ NKyf3sr5t/8/Aug7ZBFDlRg6Nj9WkZ3uFI1I1QQHJX5RzT5X9rosVSgyc915xiuXJcki
+ YxiR+XqEoY5cgjheLbrZZuoT8Vcbvri7MUBrUJZb+JcsXgC8+xa1WnBSVYLNocDMrj36
+ NYFg==
+X-Gm-Message-State: AOAM530WTfn4/92GUldCWcWZf6+mnu3LGsEq9UzUX/G5Ozfv+6piOKqb
+ JOtjIcz3opv6rkdG8SfemPulO0QeLhdTmYws
+X-Google-Smtp-Source: ABdhPJxT50zYt27U7Nqafr+aS32iFqx3WmA2xpLflK6DYnJVZ7Ynt+2Ny2Ifvy02ZauecKvGg8O9Ew==
+X-Received: by 2002:a17:902:523:: with SMTP id
+ 32mr2536567plf.176.1597423292358; 
+ Fri, 14 Aug 2020 09:41:32 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
  [147.11.146.144])
- by smtp.gmail.com with ESMTPSA id 16sm9836332pfi.161.2020.08.14.09.41.25
+ by smtp.gmail.com with ESMTPSA id 16sm9836332pfi.161.2020.08.14.09.41.29
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 14 Aug 2020 09:41:28 -0700 (PDT)
+ Fri, 14 Aug 2020 09:41:31 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -49,10 +49,12 @@ To: Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 06/18] hw/riscv: microchip_pfsoc: Connect 5 MMUARTs
-Date: Sat, 15 Aug 2020 00:40:44 +0800
-Message-Id: <1597423256-14847-7-git-send-email-bmeng.cn@gmail.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ qemu-block@nongnu.org
+Subject: [PATCH 07/18] hw/sd: sd: Fix incorrect populated function switch
+ status data structure
+Date: Sat, 15 Aug 2020 00:40:45 +0800
+Message-Id: <1597423256-14847-8-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
 References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
@@ -65,8 +67,8 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,154 +81,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2020 16:41:33 -0000
+X-List-Received-Date: Fri, 14 Aug 2020 16:41:36 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Microchip PolarFire SoC has 5 MMUARTs, and the Icicle Kit board
-wires 4 of them out. Let's connect all 5 MMUARTs.
+At present the function switch status data structure bit [399:376]
+are wrongly pupulated. These 3 bytes encode function switch status
+for the 6 function groups, with 4 bits per group, starting from
+function group 6 at bit 399, then followed by function group 5 at
+bit 395, and so on.
+
+However the codes mistakenly fills in the function group 1 status
+at bit 399. This fixes the code logic.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- hw/riscv/Kconfig                   |  1 +
- hw/riscv/microchip_pfsoc.c         | 30 ++++++++++++++++++++++++++++++
- include/hw/riscv/microchip_pfsoc.h | 20 ++++++++++++++++++++
- 3 files changed, 51 insertions(+)
+ hw/sd/sd.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 3292fae..ceb7c16 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -54,3 +54,4 @@ config MICROCHIP_PFSOC
-     select HART
-     select SIFIVE
-     select UNIMP
-+    select MCHP_PFSOC_MMUART
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index 20a642c..f6b375c 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -11,6 +11,7 @@
-  * 0) CLINT (Core Level Interruptor)
-  * 1) PLIC (Platform Level Interrupt Controller)
-  * 2) eNVM (Embedded Non-Volatile Memory)
-+ * 3) MMUARTs (Multi-Mode UART)
-  *
-  * This board currently generates devicetree dynamically that indicates at least
-  * two harts and up to five harts.
-@@ -38,6 +39,7 @@
- #include "hw/irq.h"
- #include "hw/loader.h"
- #include "hw/sysbus.h"
-+#include "chardev/char.h"
- #include "hw/cpu/cluster.h"
- #include "target/riscv/cpu.h"
- #include "hw/misc/unimp.h"
-@@ -46,6 +48,7 @@
- #include "hw/riscv/sifive_clint.h"
- #include "hw/riscv/sifive_plic.h"
- #include "hw/riscv/microchip_pfsoc.h"
-+#include "sysemu/sysemu.h"
- 
- /*
-  * The BIOS image used by this machine is called Hart Software Services (HSS).
-@@ -69,8 +72,13 @@ static const struct MemmapEntry {
-     [MICROCHIP_PFSOC_L2CC] =            {  0x2010000,     0x1000 },
-     [MICROCHIP_PFSOC_L2LIM] =           {  0x8000000,  0x2000000 },
-     [MICROCHIP_PFSOC_PLIC] =            {  0xc000000,  0x4000000 },
-+    [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
-     [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
-     [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
-+    [MICROCHIP_PFSOC_MMUART1] =         { 0x20100000,     0x1000 },
-+    [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
-+    [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
-+    [MICROCHIP_PFSOC_MMUART4] =         { 0x20106000,     0x1000 },
-     [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
-     [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
-     [MICROCHIP_PFSOC_IOSCB_CFG] =       { 0x37080000,     0x1000 },
-@@ -215,6 +223,28 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-         memmap[MICROCHIP_PFSOC_MPUCFG].base,
-         memmap[MICROCHIP_PFSOC_MPUCFG].size);
- 
-+    /* MMUARTs */
-+    s->serial0 = mchp_pfsoc_mmuart_create(system_memory,
-+        memmap[MICROCHIP_PFSOC_MMUART0].base,
-+        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART0_IRQ),
-+        serial_hd(0));
-+    s->serial1 = mchp_pfsoc_mmuart_create(system_memory,
-+        memmap[MICROCHIP_PFSOC_MMUART1].base,
-+        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART1_IRQ),
-+        serial_hd(1));
-+    s->serial2 = mchp_pfsoc_mmuart_create(system_memory,
-+        memmap[MICROCHIP_PFSOC_MMUART2].base,
-+        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART2_IRQ),
-+        serial_hd(2));
-+    s->serial3 = mchp_pfsoc_mmuart_create(system_memory,
-+        memmap[MICROCHIP_PFSOC_MMUART3].base,
-+        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART3_IRQ),
-+        serial_hd(3));
-+    s->serial4 = mchp_pfsoc_mmuart_create(system_memory,
-+        memmap[MICROCHIP_PFSOC_MMUART4].base,
-+        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART4_IRQ),
-+        serial_hd(4));
+diff --git a/hw/sd/sd.c b/hw/sd/sd.c
+index fad9cf1..51f5900 100644
+--- a/hw/sd/sd.c
++++ b/hw/sd/sd.c
+@@ -806,11 +806,15 @@ static void sd_function_switch(SDState *sd, uint32_t arg)
+     sd->data[11] = 0x43;
+     sd->data[12] = 0x80;	/* Supported group 1 functions */
+     sd->data[13] = 0x03;
 +
-     /* eNVM */
-     memory_region_init_rom(envm_data, OBJECT(dev), "microchip.pfsoc.envm.data",
-                            memmap[MICROCHIP_PFSOC_ENVM_DATA].size,
-diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-index 1953ef1..a5efa1d 100644
---- a/include/hw/riscv/microchip_pfsoc.h
-+++ b/include/hw/riscv/microchip_pfsoc.h
-@@ -22,6 +22,8 @@
- #ifndef HW_MICROCHIP_PFSOC_H
- #define HW_MICROCHIP_PFSOC_H
- 
-+#include "hw/char/mchp_pfsoc_mmuart.h"
-+
- typedef struct MicrochipPFSoCState {
-     /*< private >*/
-     DeviceState parent_obj;
-@@ -32,6 +34,11 @@ typedef struct MicrochipPFSoCState {
-     RISCVHartArrayState e_cpus;
-     RISCVHartArrayState u_cpus;
-     DeviceState *plic;
-+    MchpPfSoCMMUartState *serial0;
-+    MchpPfSoCMMUartState *serial1;
-+    MchpPfSoCMMUartState *serial2;
-+    MchpPfSoCMMUartState *serial3;
-+    MchpPfSoCMMUartState *serial4;
- } MicrochipPFSoCState;
- 
- #define TYPE_MICROCHIP_PFSOC    "microchip.pfsoc"
-@@ -64,14 +71,27 @@ enum {
-     MICROCHIP_PFSOC_L2CC,
-     MICROCHIP_PFSOC_L2LIM,
-     MICROCHIP_PFSOC_PLIC,
-+    MICROCHIP_PFSOC_MMUART0,
-     MICROCHIP_PFSOC_SYSREG,
-     MICROCHIP_PFSOC_MPUCFG,
-+    MICROCHIP_PFSOC_MMUART1,
-+    MICROCHIP_PFSOC_MMUART2,
-+    MICROCHIP_PFSOC_MMUART3,
-+    MICROCHIP_PFSOC_MMUART4,
-     MICROCHIP_PFSOC_ENVM_CFG,
-     MICROCHIP_PFSOC_ENVM_DATA,
-     MICROCHIP_PFSOC_IOSCB_CFG,
-     MICROCHIP_PFSOC_DRAM,
- };
- 
-+enum {
-+    MICROCHIP_PFSOC_MMUART0_IRQ = 90,
-+    MICROCHIP_PFSOC_MMUART1_IRQ = 91,
-+    MICROCHIP_PFSOC_MMUART2_IRQ = 92,
-+    MICROCHIP_PFSOC_MMUART3_IRQ = 93,
-+    MICROCHIP_PFSOC_MMUART4_IRQ = 94,
-+};
-+
- #define MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT    1
- #define MICROCHIP_PFSOC_COMPUTE_CPU_COUNT       4
- 
++    sd->data[14] = 0;
++    sd->data[15] = 0;
++    sd->data[16] = 0;
+     for (i = 0; i < 6; i ++) {
+         new_func = (arg >> (i * 4)) & 0x0f;
+         if (mode && new_func != 0x0f)
+             sd->function_group[i] = new_func;
+-        sd->data[14 + (i >> 1)] = new_func << ((i * 4) & 4);
++        sd->data[16 - (i >> 1)] |= new_func << ((i % 2) * 4);
+     }
+     memset(&sd->data[17], 0, 47);
+     stw_be_p(sd->data + 64, sd_crc16(sd->data, 64));
 -- 
 2.7.4
 
