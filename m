@@ -1,47 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6cm5-00086M-Qu
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 12:41:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47338)
+	id 1k6cm9-0008FK-8e
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 12:41:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47366)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k6cm3-0007zj-AO; Fri, 14 Aug 2020 12:41:47 -0400
-Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:52753)
+ id 1k6cm6-00088m-Lk; Fri, 14 Aug 2020 12:41:50 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:38693)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k6cm1-0002iJ-71; Fri, 14 Aug 2020 12:41:46 -0400
-Received: by mail-pj1-x1042.google.com with SMTP id kr4so4665656pjb.2;
- Fri, 14 Aug 2020 09:41:44 -0700 (PDT)
+ id 1k6cm4-0002im-KG; Fri, 14 Aug 2020 12:41:50 -0400
+Received: by mail-pf1-x444.google.com with SMTP id d22so4815587pfn.5;
+ Fri, 14 Aug 2020 09:41:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=9ASlt84VPNpgMOgTGGDjknhiaN8WnaW8vF8XcV6uIN0=;
- b=mjAqpr6GUGFAtHvQKyMNQh+Y1xxmukmxKuF/thKgdsL4Uc8Gn6SsNCrmfob3AuClny
- ASgj90YQMx7N7iNoyTrAb8eCCDNzduz6VkzpqZWNQVsv9Ze0sdWGwZVlJe8xjL/GavgS
- KG7Qh+49qws+IB7h91fT0Y+nh3VOR52ZAItSdA0QzphbgrcghetjngfD2FzXZDSyx0Q3
- UzgxG/Yd4LXxk4mwZPb9MPhtcFvhgc2CcI9CmuBvr5fqIdzggKEzMLxVektv808gtb2w
- b62lSwjHnJG/8gpIlOwdGA0K9aZ1o+hn7M/nlmACy3YulesPvZZjV8W/tdmkrPBIaiA7
- ryLg==
+ bh=FK50ORz16F3dnaLHeIWxnRqzsyIO5VCFaWwZ349ZLBQ=;
+ b=ZwdayXy92Zc009OwTIbJbfKn8uCZoQP111ub8pqYd3cK9Nx9K7tFMvQWArFLSlQI7w
+ dBcDNbbdIEOukzLAPqrh1SrnK05HNd+jxPsDYfQRp5dAhxVGCgpk5G32TnUxfYw1jlDS
+ VotQ20tNL9PXRIisZjfleZxWc/uRVWDaNQKuV9nECvasxBZzAfWV6ETL5ItohLqN7utd
+ L36lZAOKV3vib+/+u5pRMl+MwYHVYdRbuesydup5gHenhozN5MMVwk6SVqBmL47FrtA8
+ 6b5gSEOOEsO2j/jHgci3W4/OitnoRkadKgnxaXgAUI3UwfTT443+LPLHFyZq6g2XoyaT
+ B8zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=9ASlt84VPNpgMOgTGGDjknhiaN8WnaW8vF8XcV6uIN0=;
- b=IkYAlpnIZVG2ZdBDC3LHytDVbMkvDE8IypPyO1jN/F4S9zPKb9G4G9J7Z3EIinElgQ
- ZoDjY7lqSfFjyDpC/ig5SmvU5hbUVtlCGd1faCAepehTOn3w+DS3XWtRzjL/AfVLE93U
- ricy76C8t2gK32YGbjMaj9LQJ9c1ASSMVOfj0FaxusHTES8IItxlwubmr/m3doCiE4dp
- q6j1OMLxdLHR6FkcKxm1P8/pv6fgFOE6D2l6Dn04ZjTXBg7whxheVZ24deg7jYyxSc1D
- A8W14HO4l4Q69kSWy0AHIMht2arnz9/BPehZaOzYT2ibx6fFRz4rDGH+HH/7PQ4TNi1T
- 0Z6A==
-X-Gm-Message-State: AOAM531KoF3OZS1/JAzfltFR0GWWzor39szX0+YQniUSHxPfYC3QRD/G
- D7ppjK1jkEIDtnoDLGw1ad8=
-X-Google-Smtp-Source: ABdhPJy7zG1SPvhcc0cMql5ijKKSaD37auSGzKz14JKlycTTtS7CoRbdvO0sVuk0c7PMQTICBVjasA==
-X-Received: by 2002:a17:90b:241:: with SMTP id
- fz1mr979491pjb.213.1597423303296; 
- Fri, 14 Aug 2020 09:41:43 -0700 (PDT)
+ bh=FK50ORz16F3dnaLHeIWxnRqzsyIO5VCFaWwZ349ZLBQ=;
+ b=NPwF0hSN2G1lzWP3aZinY6xNYwIt/LWPvJJnAhUkHJHFNFHBmp4OHXWGWcbEx97JrJ
+ +TVOZB0XklJAYf2UJmaUmUyG06mNDJMU+n75gGYIpuZAIWS5jCIPmusmvJ9jNUB0W9/A
+ vK9PVeaRSiVaIWrFXafiN4T+07zzfDtPyhNdMf9T8/v0hLkBiil34VNXSfTGFEoVwzVQ
+ kzCdGqPJYeO1gZQRGo3AFk7uMeh8DgAN7ZjfaHOAkSsKd2T7HcB8RjLTTAvmrafCs4hZ
+ qwunQhzxO29qgOHwhbeoG1HCy2CawNQgDI/UKexR57vthONnAWKK2zUYZKzqnkEZqBwL
+ SOIw==
+X-Gm-Message-State: AOAM5336naaQgbes+UZkbeYQGpTbvkpHaTp+wxs4rgTsQlHu+GJKy6lf
+ lmoUCPWiFgvsnYJzavaCJw4=
+X-Google-Smtp-Source: ABdhPJxzS2vMKeKILxWuL1Ege8SIBqWqDAeic59RVa3oqxjTSVteoA48phwxoZZMAaWijIfT/36Bqw==
+X-Received: by 2002:a63:af47:: with SMTP id s7mr2381722pgo.335.1597423306955; 
+ Fri, 14 Aug 2020 09:41:46 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
  [147.11.146.144])
- by smtp.gmail.com with ESMTPSA id 16sm9836332pfi.161.2020.08.14.09.41.39
+ by smtp.gmail.com with ESMTPSA id 16sm9836332pfi.161.2020.08.14.09.41.43
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 14 Aug 2020 09:41:42 -0700 (PDT)
+ Fri, 14 Aug 2020 09:41:46 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -49,17 +48,16 @@ To: Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <alistair@alistair23.me>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org
-Subject: [PATCH 10/18] hw/sd: Add Cadence SDHCI emulation
-Date: Sat, 15 Aug 2020 00:40:48 +0800
-Message-Id: <1597423256-14847-11-git-send-email-bmeng.cn@gmail.com>
+	Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH 11/18] hw/riscv: microchip_pfsoc: Connect a Cadence SDHCI
+ controller and an SD card
+Date: Sat, 15 Aug 2020 00:40:49 +0800
+Message-Id: <1597423256-14847-12-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
 References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1042;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1042.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::444;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x444.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -81,289 +79,155 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2020 16:41:47 -0000
+X-List-Received-Date: Fri, 14 Aug 2020 16:41:51 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Cadence SD/SDIO/eMMC Host Controller (SD4HC) is an SDHCI compatible
-controller. The SDHCI compatible registers start from offset 0x200,
-which are called Slot Register Set (SRS) in its datasheet.
+Microchip PolarFire SoC integrates one Cadence SDHCI controller.
+On the Icicle Kit board, one eMMC chip and an external SD card
+connect to this controller depending on different configuration.
 
-This creates a Cadence SDHCI model built on top of the existing
-generic SDHCI model. Cadence specific Host Register Set (HRS) is
-implemented to make guest software happy.
+As QEMU does not support eMMC yet, we just emulate the SD card
+configuration. To test this, the Hart Software Services (HSS)
+should choose the SD card configuration:
+
+$ cp boards/icicle-kit-es/def_config.sdcard .config
+$ make BOARD=icicle-kit-es
+
+The SD card image can be built from the Yocto BSP at:
+https://github.com/polarfire-soc/meta-polarfire-soc-yocto-bsp
+
+Note the generated SD card image should be resized before use:
+$ qemu-img resize /path/to/sdcard.img 4G
+
+Launch QEMU with the following command:
+$ qemu-system-riscv64 -nographic -M microchip-icicle-kit -sd sdcard.img
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- hw/sd/Kconfig                 |   4 ++
- hw/sd/Makefile.objs           |   1 +
- hw/sd/cadence_sdhci.c         | 162 ++++++++++++++++++++++++++++++++++++++++++
- include/hw/sd/cadence_sdhci.h |  65 +++++++++++++++++
- 4 files changed, 232 insertions(+)
- create mode 100644 hw/sd/cadence_sdhci.c
- create mode 100644 include/hw/sd/cadence_sdhci.h
+ hw/riscv/Kconfig                   |  1 +
+ hw/riscv/microchip_pfsoc.c         | 26 ++++++++++++++++++++++++++
+ include/hw/riscv/microchip_pfsoc.h |  4 ++++
+ 3 files changed, 31 insertions(+)
 
-diff --git a/hw/sd/Kconfig b/hw/sd/Kconfig
-index c5e1e55..633b9af 100644
---- a/hw/sd/Kconfig
-+++ b/hw/sd/Kconfig
-@@ -19,3 +19,7 @@ config SDHCI_PCI
-     default y if PCI_DEVICES
-     depends on PCI
-     select SDHCI
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index ceb7c16..7412db9 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -55,3 +55,4 @@ config MICROCHIP_PFSOC
+     select SIFIVE
+     select UNIMP
+     select MCHP_PFSOC_MMUART
++    select CADENCE_SDHCI
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index f6b375c..7c09078 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -12,6 +12,7 @@
+  * 1) PLIC (Platform Level Interrupt Controller)
+  * 2) eNVM (Embedded Non-Volatile Memory)
+  * 3) MMUARTs (Multi-Mode UART)
++ * 4) Cadence eMMC/SDHC controller and an SD card connected to it
+  *
+  * This board currently generates devicetree dynamically that indicates at least
+  * two harts and up to five harts.
+@@ -75,6 +76,7 @@ static const struct MemmapEntry {
+     [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
+     [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
+     [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
++    [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
+     [MICROCHIP_PFSOC_MMUART1] =         { 0x20100000,     0x1000 },
+     [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
+     [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
+@@ -111,6 +113,11 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
+     qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type",
+                          TYPE_RISCV_CPU_SIFIVE_U54);
+     qdev_prop_set_uint64(DEVICE(&s->u_cpus), "resetvec", RESET_VECTOR);
 +
-+config CADENCE_SDHCI
-+    bool
-+    select SDHCI
-diff --git a/hw/sd/Makefile.objs b/hw/sd/Makefile.objs
-index 0d1df17..4d500a6 100644
---- a/hw/sd/Makefile.objs
-+++ b/hw/sd/Makefile.objs
-@@ -10,3 +10,4 @@ common-obj-$(CONFIG_OMAP) += omap_mmc.o
- common-obj-$(CONFIG_PXA2XX) += pxa2xx_mmci.o
- common-obj-$(CONFIG_RASPI) += bcm2835_sdhost.o
- common-obj-$(CONFIG_ASPEED_SOC) += aspeed_sdhci.o
-+common-obj-$(CONFIG_CADENCE_SDHCI) += cadence_sdhci.o
-diff --git a/hw/sd/cadence_sdhci.c b/hw/sd/cadence_sdhci.c
-new file mode 100644
-index 0000000..67ffd14
---- /dev/null
-+++ b/hw/sd/cadence_sdhci.c
-@@ -0,0 +1,162 @@
-+/*
-+ * Cadence SDHCI emulation
-+ *
-+ * Copyright (c) 2020 Wind River Systems, Inc.
-+ *
-+ * Author:
-+ *   Bin Meng <bin.meng@windriver.com>
-+ *
-+ * This program is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU General Public License as
-+ * published by the Free Software Foundation; either version 2 or
-+ * (at your option) version 3 of the License.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along
-+ * with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
++    object_initialize_child(obj, "sd-controller", &s->sdhci,
++                            TYPE_CADENCE_SDHCI);
++    object_initialize_child(OBJECT(&s->sdhci), "sd-controller.sdhci",
++                            &s->sdhci.slot, TYPE_SYSBUS_SDHCI);
+ }
+ 
+ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+@@ -223,6 +230,13 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+         memmap[MICROCHIP_PFSOC_MPUCFG].base,
+         memmap[MICROCHIP_PFSOC_MPUCFG].size);
+ 
++    /* SDHCI */
++    sysbus_realize(SYS_BUS_DEVICE(&s->sdhci), errp);
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci), 0,
++                    memmap[MICROCHIP_PFSOC_EMMC_SD].base);
++    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sdhci.slot), 0,
++        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_EMMC_SD_IRQ));
 +
-+#include "qemu/osdep.h"
-+#include "qemu/error-report.h"
-+#include "qemu/log.h"
-+#include "qapi/error.h"
-+#include "migration/vmstate.h"
-+#include "hw/irq.h"
+     /* MMUARTs */
+     s->serial0 = mchp_pfsoc_mmuart_create(system_memory,
+         memmap[MICROCHIP_PFSOC_MMUART0].base,
+@@ -290,6 +304,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+     MicrochipIcicleKitState *s = MICROCHIP_ICICLE_KIT_MACHINE(machine);
+     MemoryRegion *system_memory = get_system_memory();
+     MemoryRegion *main_mem = g_new(MemoryRegion, 1);
++    DriveInfo *dinfo = drive_get_next(IF_SD);
+ 
+     /* Sanity check on RAM size */
+     if (machine->ram_size < mc->default_ram_size) {
+@@ -312,6 +327,17 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+ 
+     /* Load the firmware */
+     riscv_find_and_load_firmware(machine, BIOS_FILENAME, RESET_VECTOR, NULL);
++
++    /* Attach an SD card */
++    if (dinfo) {
++        SDHCIState *sdhci = &(s->soc.sdhci.slot);
++        DeviceState *card = qdev_new(TYPE_SD_CARD);
++        BusState *bus = qdev_get_child_bus(DEVICE(sdhci), "sd-bus");
++
++        qdev_prop_set_drive_err(card, "drive", blk_by_legacy_dinfo(dinfo),
++                                &error_fatal);
++        qdev_realize_and_unref(card, bus, &error_fatal);
++    }
+ }
+ 
+ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc, void *data)
+diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+index a5efa1d..d810ee8 100644
+--- a/include/hw/riscv/microchip_pfsoc.h
++++ b/include/hw/riscv/microchip_pfsoc.h
+@@ -23,6 +23,7 @@
+ #define HW_MICROCHIP_PFSOC_H
+ 
+ #include "hw/char/mchp_pfsoc_mmuart.h"
 +#include "hw/sd/cadence_sdhci.h"
-+#include "sdhci-internal.h"
-+
-+#define TO_REG(addr)    ((addr) / sizeof(uint32_t))
-+
-+static void cadence_sdhci_reset(DeviceState *dev)
-+{
-+    CadenceSDHCIState *sdhci = CADENCE_SDHCI(dev);
-+
-+    memset(sdhci->regs, 0, CADENCE_SDHCI_REG_SIZE);
-+    sdhci->regs[TO_REG(SDHCI_CDNS_HRS00)] = SDHCI_CDNS_HRS00_POR_VAL;
-+}
-+
-+static uint64_t cadence_sdhci_read(void *opaque, hwaddr addr, unsigned int size)
-+{
-+    uint32_t val = 0;
-+    CadenceSDHCIState *sdhci = opaque;
-+
-+    if (addr < CADENCE_SDHCI_REG_SIZE) {
-+        val = sdhci->regs[TO_REG(addr)];
-+    } else {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Out-of-bounds read at 0x%" HWADDR_PRIx "\n",
-+                      __func__, addr);
-+    }
-+
-+    return (uint64_t)val;
-+}
-+
-+static void cadence_sdhci_write(void *opaque, hwaddr addr, uint64_t val,
-+                                unsigned int size)
-+{
-+    CadenceSDHCIState *sdhci = opaque;
-+    uint32_t val32 = (uint32_t)val;
-+
-+    switch (addr) {
-+    case SDHCI_CDNS_HRS00:
-+        /*
-+         * The only writable bit is SWR (software reset) and it automatically
-+         * clears to zero, so essentially this register remains unchanged.
-+         */
-+        if (val32 & SDHCI_CDNS_HRS00_SWR) {
-+            cadence_sdhci_reset(DEVICE(sdhci));
-+            sdhci_poweron_reset(DEVICE(&sdhci->slot));
-+        }
-+
-+        break;
-+    case SDHCI_CDNS_HRS04:
-+        /*
-+         * Only emulate the ACK bit behavior when read or write transaction
-+         * are requested.
-+         */
-+        if (val32 & (SDHCI_CDNS_HRS04_WR | SDHCI_CDNS_HRS04_RD)) {
-+            val32 |= SDHCI_CDNS_HRS04_ACK;
-+        } else {
-+            val32 &= ~SDHCI_CDNS_HRS04_ACK;
-+        }
-+
-+        sdhci->regs[TO_REG(addr)] = val32;
-+        break;
-+    case SDHCI_CDNS_HRS06:
-+        if (val32 & SDHCI_CDNS_HRS06_TUNE_UP) {
-+            val32 &= ~SDHCI_CDNS_HRS06_TUNE_UP;
-+        }
-+
-+        sdhci->regs[TO_REG(addr)] = val32;
-+        break;
-+    default:
-+        if (addr < CADENCE_SDHCI_REG_SIZE) {
-+            sdhci->regs[TO_REG(addr)] = val32;
-+        } else {
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "%s: Out-of-bounds write at 0x%" HWADDR_PRIx "\n",
-+                          __func__, addr);
-+        }
-+    }
-+}
-+
-+static const MemoryRegionOps cadence_sdhci_ops = {
-+    .read = cadence_sdhci_read,
-+    .write = cadence_sdhci_write,
-+    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .valid = {
-+        .min_access_size = 4,
-+        .max_access_size = 4,
-+    }
-+};
-+
-+static void cadence_sdhci_realize(DeviceState *dev, Error **errp)
-+{
-+    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
-+    CadenceSDHCIState *sdhci = CADENCE_SDHCI(dev);
-+    SysBusDevice *sbd_slot = SYS_BUS_DEVICE(&sdhci->slot);
-+
-+    memory_region_init_io(&sdhci->iomem, OBJECT(sdhci), &cadence_sdhci_ops,
-+                          sdhci, TYPE_CADENCE_SDHCI, 0x1000);
-+    sysbus_init_mmio(sbd, &sdhci->iomem);
-+
-+    sysbus_realize(sbd_slot, errp);
-+    memory_region_add_subregion(&sdhci->iomem, SDHCI_CDNS_SRS_BASE,
-+                                &sdhci->slot.iomem);
-+}
-+
-+static const VMStateDescription vmstate_cadence_sdhci = {
-+    .name = TYPE_CADENCE_SDHCI,
-+    .version_id = 1,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINT32_ARRAY(regs, CadenceSDHCIState, CADENCE_SDHCI_NUM_REGS),
-+        VMSTATE_END_OF_LIST(),
-+    },
-+};
-+
-+static void cadence_sdhci_class_init(ObjectClass *classp, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(classp);
-+
-+    dc->realize = cadence_sdhci_realize;
-+    dc->reset = cadence_sdhci_reset;
-+    dc->vmsd = &vmstate_cadence_sdhci;
-+}
-+
-+static TypeInfo cadence_sdhci_info = {
-+    .name          = TYPE_CADENCE_SDHCI,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(CadenceSDHCIState),
-+    .class_init    = cadence_sdhci_class_init,
-+};
-+
-+static void cadence_sdhci_register_types(void)
-+{
-+    type_register_static(&cadence_sdhci_info);
-+}
-+
-+type_init(cadence_sdhci_register_types)
-diff --git a/include/hw/sd/cadence_sdhci.h b/include/hw/sd/cadence_sdhci.h
-new file mode 100644
-index 0000000..9ff78a9
---- /dev/null
-+++ b/include/hw/sd/cadence_sdhci.h
-@@ -0,0 +1,65 @@
-+/*
-+ * Cadence SDHCI emulation
-+ *
-+ * Copyright (c) 2020 Wind River Systems, Inc.
-+ *
-+ * Author:
-+ *   Bin Meng <bin.meng@windriver.com>
-+ *
-+ * This program is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU General Public License as
-+ * published by the Free Software Foundation; either version 2 or
-+ * (at your option) version 3 of the License.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along
-+ * with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef CADENCE_SDHCI_H
-+#define CADENCE_SDHCI_H
-+
-+#include "qemu/bitops.h"
-+#include "hw/sd/sdhci.h"
-+
-+/* HRS - Host Register Set (specific to Cadence) */
-+
-+#define SDHCI_CDNS_HRS00                0x00    /* general information */
-+#define SDHCI_CDNS_HRS00_SWR                BIT(0)
-+#define SDHCI_CDNS_HRS00_POR_VAL            0x00010000
-+
-+#define SDHCI_CDNS_HRS04                0x10    /* PHY access port */
-+#define SDHCI_CDNS_HRS04_WR                 BIT(24)
-+#define SDHCI_CDNS_HRS04_RD                 BIT(25)
-+#define SDHCI_CDNS_HRS04_ACK                BIT(26)
-+
-+#define SDHCI_CDNS_HRS06                0x18    /* eMMC control */
-+#define SDHCI_CDNS_HRS06_TUNE_UP            BIT(15)
-+
-+/* SRS - Slot Register Set (SDHCI-compatible) */
-+#define SDHCI_CDNS_SRS_BASE             0x200
-+
-+#define CADENCE_SDHCI_CAPABILITIES 0x01E80080
-+#define CADENCE_SDHCI_REG_SIZE     0x100
-+#define CADENCE_SDHCI_NUM_REGS     (CADENCE_SDHCI_REG_SIZE / sizeof(uint32_t))
-+
-+typedef struct CadenceSDHCIState {
-+    SysBusDevice parent;
-+
-+    MemoryRegion iomem;
-+    qemu_irq irq;
-+
-+    uint32_t regs[CADENCE_SDHCI_NUM_REGS];
-+
-+    SDHCIState slot;
-+} CadenceSDHCIState;
-+
-+#define TYPE_CADENCE_SDHCI  "cadence.sdhci"
-+#define CADENCE_SDHCI(obj)  OBJECT_CHECK(CadenceSDHCIState, (obj), \
-+                                         TYPE_CADENCE_SDHCI)
-+
-+#endif /* CADENCE_SDHCI_H */
+ 
+ typedef struct MicrochipPFSoCState {
+     /*< private >*/
+@@ -39,6 +40,7 @@ typedef struct MicrochipPFSoCState {
+     MchpPfSoCMMUartState *serial2;
+     MchpPfSoCMMUartState *serial3;
+     MchpPfSoCMMUartState *serial4;
++    CadenceSDHCIState sdhci;
+ } MicrochipPFSoCState;
+ 
+ #define TYPE_MICROCHIP_PFSOC    "microchip.pfsoc"
+@@ -74,6 +76,7 @@ enum {
+     MICROCHIP_PFSOC_MMUART0,
+     MICROCHIP_PFSOC_SYSREG,
+     MICROCHIP_PFSOC_MPUCFG,
++    MICROCHIP_PFSOC_EMMC_SD,
+     MICROCHIP_PFSOC_MMUART1,
+     MICROCHIP_PFSOC_MMUART2,
+     MICROCHIP_PFSOC_MMUART3,
+@@ -85,6 +88,7 @@ enum {
+ };
+ 
+ enum {
++    MICROCHIP_PFSOC_EMMC_SD_IRQ = 88,
+     MICROCHIP_PFSOC_MMUART0_IRQ = 90,
+     MICROCHIP_PFSOC_MMUART1_IRQ = 91,
+     MICROCHIP_PFSOC_MMUART2_IRQ = 92,
 -- 
 2.7.4
 
