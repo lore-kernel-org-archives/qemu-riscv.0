@@ -1,66 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6KuP-0003AH-Jg
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Aug 2020 17:37:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54448)
+	id 1k6PmJ-0008WI-Cw
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Aug 2020 22:49:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49856)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k6KuN-00038P-TR; Thu, 13 Aug 2020 17:37:11 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:44108)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1k6PmH-0008To-Me
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2020 22:49:09 -0400
+Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342]:33712)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k6KuM-0005sN-4L; Thu, 13 Aug 2020 17:37:11 -0400
-Received: by mail-io1-xd42.google.com with SMTP id v6so8783527iow.11;
- Thu, 13 Aug 2020 14:37:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1k6PmF-0006k3-Cp
+ for qemu-riscv@nongnu.org; Thu, 13 Aug 2020 22:49:09 -0400
+Received: by mail-ot1-x342.google.com with SMTP id t7so6548336otp.0
+ for <qemu-riscv@nongnu.org>; Thu, 13 Aug 2020 19:49:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=qAPSL5AnTtEcutN0VXFUZ9Lh2cXgd+XdsyrlfR4lfgE=;
- b=hVJG/L9wuVEuyMlgIuOktkgM8tydpUhHygriRNETtc3XsgW5P4eDZbXZ7Z3tWxIJEk
- 345NQukamJ6NHJ3JaRTGMByGq67OLp+s1tZt9KC5JVGF5oi1Q9XjmT9Y9Z0nr7Q3r1sY
- ispIeQlVI5IjB2mrN56PBm/52K0IcbrhnM6O2AvGUQTfcG8SXK7fzPBfsG3MvgsGSTVG
- bRj4M1H01H/8UF5PJpLMji4+oUmyLWVjNW6+gKOQ7L/PPeMiioQn1CFo0oGzDJRUqb8g
- TyYZEt68vHsoyPxKYu20SPN/GOJBqN3sisl3bqCqx6tJ8XkSEmHkuFz/NDrVIkQBhjQ0
- VZVQ==
+ :cc; bh=uFQKdubY/ms3j4228z9fO7enTa4ep01JZX/g8u5ZeNA=;
+ b=YSFuylZ6C7o0d3dLKw8j4H+sqZ5R6j63MZfK9dBerkX0yv/8Ev0lSn4PDjaTkRWaJ4
+ shfmOzpJHwy4u8jfhYeRH6KebUSkvLFoouvhsLoqzbj6/J72hOdlYcWXcHEAfYoC6G7F
+ 29nghGaUrg6dtQyE33uc+ofbcaeHJYi+SHUc3bEUdjbSqU7UDnQWPZeb2bOn2EXeHCwk
+ k4w91v3ak/ojLyp65NBsDPUEcBl9G/ek1hvKQv2Dq2SNlW2qS1GMMg+rDqkfDeUQnFDm
+ 8ezZ7YXCylsPQL7H3zWuXGZE1VZd7YxdSgXWyaqF38RfMHDVaKIrfDgS/p6+t0AGSxyE
+ Cixg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=qAPSL5AnTtEcutN0VXFUZ9Lh2cXgd+XdsyrlfR4lfgE=;
- b=f7zVAm2dh9tjcGSvHgDx1Iq3QKEZ18X481de1v0z8vu1nT7f0t+AvOKmmxM1caAkoz
- qd13tZLPXMLvarT0qrt5oP07m01m4opvHb7Xgsgky0SC8UFTX3rAabN95kUmjVkndJny
- X/WnUOciTXWGIIOKHyNXooLT4PBW9PAZZ2tDnc3f3V98g+478u/r1UE0mkZHXLEz4HHr
- wy8apgo4DS1DbqsdozmCueArtTyu5QGjG1SZZg3h8lX4lgmmdq8aXj8gk2WSTjBRuCbw
- f3zWyAmRokwYa29IJk70Mj76c6t360c0IDm8OjMt6kvoWE7/itAeD6b14vxnPoEJaUBU
- 3ToA==
-X-Gm-Message-State: AOAM531koTgYphhBxWAJCaHep7tsc8+OooiMUK6R0hziNllVlALDC/L+
- q8RL65tMB+xURHLH1Zt7a87LvcF3GuE4/PjyZzQ=
-X-Google-Smtp-Source: ABdhPJzeL92sKeX0OhRXJlhpaAD1B5426drD2uSOQiE6/4pWUDyFytv9r+1o3Lq3zMs1k5RnuhXqC7+1a/m75R5yMTs=
-X-Received: by 2002:a05:6638:248e:: with SMTP id
- x14mr6949360jat.135.1597354628734; 
- Thu, 13 Aug 2020 14:37:08 -0700 (PDT)
+ bh=uFQKdubY/ms3j4228z9fO7enTa4ep01JZX/g8u5ZeNA=;
+ b=m7VewJm16oOLN1+b5MuAjbwCZc0qIx1+FHnbxIjmLVAZYjs8iJ6G+szkL87F3hr7Qj
+ Ve10Sl+esve++Ue9yvIPQQwgS0BygFVrTLguqleDVJJhTN/4Dd8gnf2EwNdpbF0qN2iv
+ bliUUol26XjqspZoUUnTjE4jImeAmJF0hdPChUa+QgJj/PAuicxvYvVGzpDYCIQQGKA7
+ ufofvFHlBFIrP1zAe/HCNyMBRMjuhWfKt9F1WkvwBFJpY4ORllp4qduviIX0d5hC1L0q
+ UEQdoeNqffaKt8FVAhj530pYe0lf4W+AAOFgPfq1jfM7W65gMMOt2jcy89/avUfT8/qJ
+ 8OvQ==
+X-Gm-Message-State: AOAM533GnM8mST/hhkk9jrKv6uvlV864A5I/XzPY58KvXCKz6vRpDvEA
+ BNkU9LC/VRQynqjlKYp4vOqE/iadUTg7lO3gMtJd3A==
+X-Google-Smtp-Source: ABdhPJwt5WlWNkpU9HT+sZ0yQsG+RzlDv6BusUoiHzfRn9gXIgvpy6f1hB0UBNtFA0+1XjeDx8an9M6YmD2+nXwFyqw=
+X-Received: by 2002:a9d:630c:: with SMTP id q12mr483005otk.175.1597373345597; 
+ Thu, 13 Aug 2020 19:49:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1597259519.git.alistair.francis@wdc.com>
- <6e40b9b8-5883-7b49-e63e-2e24e8f5baec@c-sky.com>
-In-Reply-To: <6e40b9b8-5883-7b49-e63e-2e24e8f5baec@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 13 Aug 2020 14:26:40 -0700
-Message-ID: <CAKmqyKNSzQpnZpMT5DXS8iU1XnvtE=vBMCJv2oS2LmbLRkr3rQ@mail.gmail.com>
-Subject: Re: [PATCH v3 00/13] RISC-V: Update the Hypervisor spec to v0.6.1
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+References: <20200806104709.13235-1-frank.chang@sifive.com>
+ <20200806104709.13235-27-frank.chang@sifive.com>
+ <90f01984-54a4-2a56-c52f-d1f4332b39d4@linaro.org>
+In-Reply-To: <90f01984-54a4-2a56-c52f-d1f4332b39d4@linaro.org>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Fri, 14 Aug 2020 10:48:54 +0800
+Message-ID: <CAE_xrPiJRRV3FYtfve6LMOF6LNEYGfhmi9CiabxqUBEew9igLg@mail.gmail.com>
+Subject: Re: [RFC v3 26/71] target/riscv: rvv-1.0: update vext_max_elems() for
+ load/store insns
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Anup Patel <anup.patel@wdc.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Content-Type: multipart/alternative; boundary="000000000000d6a1d705accd76b9"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::342;
+ envelope-from=frank.chang@sifive.com; helo=mail-ot1-x342.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -75,80 +79,266 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2020 21:37:12 -0000
+X-List-Received-Date: Fri, 14 Aug 2020 02:49:09 -0000
 
-On Wed, Aug 12, 2020 at 7:26 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+--000000000000d6a1d705accd76b9
+Content-Type: text/plain; charset="UTF-8"
+
+On Fri, Aug 7, 2020 at 8:04 AM Richard Henderson <
+richard.henderson@linaro.org> wrote:
+
+> On 8/6/20 3:46 AM, frank.chang@sifive.com wrote:
+> > +static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz, bool
+> is_ldst)
+> >  {
+> > -    return simd_maxsz(desc) << vext_lmul(desc);
+> > +    /*
+> > +     * As simd_desc support at most 256 bytes, the max vlen is 256 bits.
+> > +     * so vlen in bytes (vlenb) is encoded as maxsz.
+> > +     */
+> > +    uint32_t vlenb = simd_maxsz(desc);
+> > +
+> > +    if (is_ldst) {
+> > +        /*
+> > +         * Vector load/store instructions have the EEW encoded
+> > +         * directly in the instructions. The maximum vector size is
+> > +         * calculated with EMUL rather than LMUL.
+> > +         */
+> > +        uint32_t eew = ctzl(esz);
+> > +        uint32_t sew = vext_sew(desc);
+> > +        uint32_t lmul = vext_lmul(desc);
+> > +        int32_t emul = eew - sew + lmul;
+> > +        uint32_t emul_r = emul < 0 ? 0 : emul;
+> > +        return 1 << (ctzl(vlenb) + emul_r - ctzl(esz));
+>
+> As I said before, the is_ldst instructions should put the EEW and EMUL
+> values
+> into the SEW and LMUL desc fields, so that this does not need to be
+
+special-cased at all.
+>
+
+I add a vext_get_emul() helper function in trans_rvv.inc.c:
+
+> static uint8_t vext_get_emul(DisasContext *s, uint8_t eew)
+> {
+>     int8_t lmul = sextract32(s->lmul, 0, 3);
+>     int8_t emul = ctzl(eew) - (s->sew + 3) + lmul;  // may remove ctzl()
+if eew is already log2(eew)
+>     return emul < 0 ? 0 : emul;
+> }
+
+and pass emul as LMUL field in VDATA so that it can be
+reused in vector_helper.c: vext_max_elems():
+
+> uint8_t emul = vext_get_emul(s, eew);
+> data = FIELD_DP32(data, VDATA, LMUL, emul);
+
+I also remove the passing SEW field in VDATA codes as I think SEW
+might not be required in the updated vext_max_elems() (see below).
+
+
+>
+> > +        /* Return VLMAX */
+> > +        return 1 << (ctzl(vlenb) + vext_lmul(desc) - ctzl(esz));
+>
+> This is overly complicated.
+>
+> (1) 1 << ctzl(vlenb) == vlenb.
+> (2) I'm not sure why esz is not already a log2 number.
+>
+
+esz is passed from e.g. GEN_VEXT_LD_STRIDE() macro:
+
+> #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)        \
+> void HELPER(NAME)(void *vd, void * v0, target_ulong base,           \
+>                   target_ulong stride, CPURISCVState *env,
+      \
+>                   uint32_t desc)
+                         \
+> {
+                                   \
+>     uint32_t vm = vext_vm(desc);
+                \
+>     vext_ldst_stride(vd, v0, base, stride, env, desc, vm, LOAD_FN,     \
+>                      sizeof(ETYPE), GETPC(), MMU_DATA_LOAD);            \
+> }
+>
+> GEN_VEXT_LD_STRIDE(vlse8_v,  int8_t,  lde_b)
+
+which is calculated by sizeof(ETYPE), so the results would be: 1, 2, 4, 8.
+and vext_max_elems() is called by e.g. vext_ldst_stride():
+
+> uint32_t max_elems = vext_max_elems(desc, esz);
+
+I can add another parameter to the macro and pass the hard-coded log2(esz)
+number
+if it's the better way instead of using ctzl().
+Or if there's another approach to get the log2(esz) number more elegantly?
+
+
+>
+> This ought to look more like
+>
+>   int scale = lmul - esz;
+>   return (scale < 0
+>           ? vlenb >> -scale
+>           : vlenb << scale);
 >
 >
->
-> On 2020/8/13 3:13, Alistair Francis wrote:
-> > This series updates the experimental QEMU RISC-V Hypervisor spec to the
-> > v0.6.1 draft implementation.
-> >
-> > THis includes support for the new 2-stage lookup instructions and the new
-> > CSRs.
-> >
-> > It also includes the new 0.6.1 support for the virtual instruction
-> > fault.
-> >
-> > This was tested by running 32-bit and 64-bit Xvisor on QEMU and starting
-> > Linux guests.
-> Hi Alistair,
->
-> I am reading Christoper Dall's article on ARM virtualization.  As far as
-> I can see,  Xvisor is type 1 hypervisor.
+Thanks for the detailed point outs.
+I manage to change the codes to below as your suggestion.
 
-Yep, it's a bare metal Hypervisor.
+> static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz)
+> {
+>     /*
+>      * As simd_desc support at most 256 bytes, the max vlen is 256 bits.
+>      * so vlen in bytes (vlenb) is encoded as maxsz.
+>      */
+>     uint32_t vlenb = simd_maxsz(desc);
+>
+>     /* Return VLMAX */
+>     int scale = vext_lmul(desc) - ctzl(esz);  // may remove ctzl() if esz
+is already log2(esz)
+>     return scale < 0 ? vlenb >> -scale : vlenb << scale;
+> }
+
 
 >
-> I want to  try this patch set. Could you share the method? Thanks very much.
-
-There are some details in the origins submission, you can see them
-here: https://patchew.org/QEMU/cover.1580518859.git.alistair.francis@wdc.com/
-
-I'm also working on improving the support in meta-virtualisation to
-help as well.
-
-Thanks for helping test.
-
-Alistair
-
+> r~
 >
-> Best Regards,
-> Zhiwei
-> > v3:
-> >   - Rebase on master
-> > v2:
-> >   - Update to v0.6.1
-> >
-> >
-> >
-> > Alistair Francis (13):
-> >    target/riscv: Allow setting a two-stage lookup in the virt status
-> >    target/riscv: Allow generating hlv/hlvx/hsv instructions
-> >    target/riscv: Do two-stage lookups on hlv/hlvx/hsv instructions
-> >    target/riscv: Don't allow guest to write to htinst
-> >    target/riscv: Convert MSTATUS MTL to GVA
-> >    target/riscv: Fix the interrupt cause code
-> >    target/riscv: Update the Hypervisor trap return/entry
-> >    target/riscv: Update the CSRs to the v0.6 Hyp extension
-> >    target/riscv: Only support a single VSXL length
-> >    target/riscv: Only support little endian guests
-> >    target/riscv: Support the v0.6 Hypervisor extension CRSs
-> >    target/riscv: Return the exception from invalid CSR accesses
-> >    target/riscv: Support the Virtual Instruction fault
-> >
-> >   target/riscv/cpu.h                      |   2 +
-> >   target/riscv/cpu_bits.h                 |  25 +-
-> >   target/riscv/helper.h                   |   4 +
-> >   target/riscv/insn32-64.decode           |   5 +
-> >   target/riscv/insn32.decode              |  11 +
-> >   target/riscv/cpu_helper.c               | 123 +++++----
-> >   target/riscv/csr.c                      | 171 ++++++++++--
-> >   target/riscv/insn_trans/trans_rvh.inc.c | 342 +++++++++++++++++++++++-
-> >   target/riscv/op_helper.c                | 176 +++++++++++-
-> >   target/riscv/translate.c                |  10 -
-> >   10 files changed, 761 insertions(+), 108 deletions(-)
-> >
->
+
+Thanks for the review.
+Frank Chang
+
+--000000000000d6a1d705accd76b9
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Fri, Aug 7, 2020 at 8:04 AM Richard He=
+nderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.henders=
+on@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquot=
+e class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px s=
+olid rgb(204,204,204);padding-left:1ex">On 8/6/20 3:46 AM, <a href=3D"mailt=
+o:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> wrot=
+e:<br>
+&gt; +static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz, bo=
+ol is_ldst)<br>
+&gt;=C2=A0 {<br>
+&gt; -=C2=A0 =C2=A0 return simd_maxsz(desc) &lt;&lt; vext_lmul(desc);<br>
+&gt; +=C2=A0 =C2=A0 /*<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0* As simd_desc support at most 256 bytes, the max=
+ vlen is 256 bits.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0* so vlen in bytes (vlenb) is encoded as maxsz.<b=
+r>
+&gt; +=C2=A0 =C2=A0 =C2=A0*/<br>
+&gt; +=C2=A0 =C2=A0 uint32_t vlenb =3D simd_maxsz(desc);<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 if (is_ldst) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Vector load/store instructions ha=
+ve the EEW encoded<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* directly in the instructions. The=
+ maximum vector size is<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* calculated with EMUL rather than =
+LMUL.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t eew =3D ctzl(esz);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t sew =3D vext_sew(desc);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t lmul =3D vext_lmul(desc);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 int32_t emul =3D eew - sew + lmul;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t emul_r =3D emul &lt; 0 ? 0 : emu=
+l;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return 1 &lt;&lt; (ctzl(vlenb) + emul_r -=
+ ctzl(esz));<br>
+<br>
+As I said before, the is_ldst instructions should put the EEW and EMUL valu=
+es<br>
+into the SEW and LMUL desc fields, so that this does not need to be=C2=A0</=
+blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
+8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+special-cased at all.<br></blockquote><div><br></div><div><div>I add a=C2=
+=A0vext_get_emul() helper function in trans_rvv.inc.c:</div><div><br></div>=
+<div>&gt; static uint8_t vext_get_emul(DisasContext *s, uint8_t eew)<br>&gt=
+; {<br>&gt; =C2=A0 =C2=A0 int8_t lmul =3D sextract32(s-&gt;lmul, 0, 3);<br>=
+&gt; =C2=A0 =C2=A0 int8_t emul =3D ctzl(eew) - (s-&gt;sew + 3) + lmul;=C2=
+=A0 // may remove ctzl() if eew is already log2(eew)<br>&gt; =C2=A0 =C2=A0 =
+return emul &lt; 0 ? 0 : emul;<br>&gt; }<br></div><div><br></div><div>and p=
+ass emul as LMUL field in VDATA  so that it can be</div><div>reused in vect=
+or_helper.c:=C2=A0vext_max_elems():</div></div><div><br></div><div>&gt; uin=
+t8_t emul =3D vext_get_emul(s, eew);</div>&gt; data =3D FIELD_DP32(data, VD=
+ATA, LMUL, emul);</div><div class=3D"gmail_quote"><br></div><div class=3D"g=
+mail_quote">I also remove the passing SEW field in VDATA codes as I think S=
+EW</div><div class=3D"gmail_quote">might not be required in the updated=C2=
+=A0vext_max_elems() (see below).</div><div class=3D"gmail_quote"><div>=C2=
+=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Return VLMAX */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return 1 &lt;&lt; (ctzl(vlenb) + vext_lmu=
+l(desc) - ctzl(esz));<br>
+<br>
+This is overly complicated.<br>
+<br>
+(1) 1 &lt;&lt; ctzl(vlenb) =3D=3D vlenb.<br>
+(2) I&#39;m not sure why esz is not already a log2 number.<br></blockquote>=
+<div><br></div><div>esz is passed from e.g.=C2=A0GEN_VEXT_LD_STRIDE() macro=
+:</div><div><br></div><div>&gt; #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOA=
+D_FN)=C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>&gt; void HELPER(NAME)(void *vd, void=
+ * v0, target_ulong base,=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>&gt;=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulon=
+g stride, CPURISCVState *env,=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t desc)=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>&gt; {=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0\<br>&gt; =C2=A0 =C2=A0 uint32_t vm =3D vext_vm(desc);=C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>&gt; =C2=A0 =C2=A0 vext_=
+ldst_stride(vd, v0, base, stride, env, desc, vm, LOAD_FN,=C2=A0 =C2=A0 =C2=
+=A0\<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0sizeof(ETYPE), GETPC(), MMU_DATA_LOAD); =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0\<br>&gt; }<br></div><div>&gt;</div><div>&gt;=C2=A0GEN_=
+VEXT_LD_STRIDE(vlse8_v, =C2=A0int8_t, =C2=A0lde_b)</div><div><br></div><div=
+>which is calculated by sizeof(ETYPE), so the results would be: 1, 2, 4, 8.=
+</div><div>and vext_max_elems() is called by e.g. vext_ldst_stride():</div>=
+<div><br></div><div>&gt; uint32_t max_elems =3D vext_max_elems(desc, esz);<=
+br></div><div><br></div><div></div><div>I can add another parameter to the =
+macro and pass the hard-coded log2(esz) number</div><div>if it&#39;s the be=
+tter way instead of using=C2=A0ctzl().</div><div>Or if there&#39;s another =
+approach to get the log2(esz) number more elegantly?</div><div>=C2=A0</div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+This ought to look more like<br>
+<br>
+=C2=A0 int scale =3D lmul - esz;<br>
+=C2=A0 return (scale &lt; 0<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ? vlenb &gt;&gt; -scale<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 : vlenb &lt;&lt; scale);<br>
+<br></blockquote><div>=C2=A0</div><div><div>Thanks for the detailed point o=
+uts.</div><div>I manage to change the codes to below as your suggestion.</d=
+iv><div><br></div>&gt; static inline uint32_t vext_max_elems(uint32_t desc,=
+ uint32_t esz)<br>&gt; {<br>&gt; =C2=A0 =C2=A0 /*<br>&gt; =C2=A0 =C2=A0 =C2=
+=A0* As simd_desc support at most 256 bytes, the max vlen is 256 bits.<br>&=
+gt; =C2=A0 =C2=A0 =C2=A0* so vlen in bytes (vlenb) is encoded as maxsz.<br>=
+&gt; =C2=A0 =C2=A0 =C2=A0*/<br>&gt; =C2=A0 =C2=A0 uint32_t vlenb =3D simd_m=
+axsz(desc);<br>&gt; <br>&gt; =C2=A0 =C2=A0 /* Return VLMAX */<br>&gt; =C2=
+=A0 =C2=A0 int scale =3D vext_lmul(desc) - ctzl(esz);=C2=A0 // may remove c=
+tzl() if esz is already log2(esz)<br>&gt; =C2=A0 =C2=A0 return scale &lt; 0=
+ ? vlenb &gt;&gt; -scale : vlenb &lt;&lt; scale;<br>&gt; }<br></div><div>=
+=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
+.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+r~<br></blockquote><div><br></div><div>Thanks for the review.</div>Frank Ch=
+ang</div></div>
+
+--000000000000d6a1d705accd76b9--
 
