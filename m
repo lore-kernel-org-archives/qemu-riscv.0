@@ -1,47 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6Qsd-0001RI-G3
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Aug 2020 23:59:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33988)
+	id 1k6RGZ-0006cw-9Q
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 00:24:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37558)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1k6Qsb-0001R2-Aj; Thu, 13 Aug 2020 23:59:45 -0400
-Received: from szxga06-in.huawei.com ([45.249.212.32]:34262 helo=huawei.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1k6QsZ-0001CY-7e; Thu, 13 Aug 2020 23:59:45 -0400
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 83E80C7706C26F28BB17;
- Fri, 14 Aug 2020 11:59:28 +0800 (CST)
-Received: from huawei.com (10.174.187.31) by DGGEMS403-HUB.china.huawei.com
- (10.3.19.203) with Microsoft SMTP Server id 14.3.487.0; Fri, 14 Aug 2020
- 11:59:20 +0800
-From: Yifei Jiang <jiangyifei@huawei.com>
-To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
- <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
- <victor.zhangxiaofeng@huawei.com>, <wu.wubin@huawei.com>,
- <zhang.zhanghailiang@huawei.com>, <dengkai1@huawei.com>,
- <yinyipeng1@huawei.com>, Yifei Jiang <jiangyifei@huawei.com>
-Subject: [PATCH] target/riscv: Fix bug in getting trap cause name for
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1k6RGX-0006cm-Jd; Fri, 14 Aug 2020 00:24:29 -0400
+Resent-Date: Fri, 14 Aug 2020 00:24:29 -0400
+Resent-Message-Id: <E1k6RGX-0006cm-Jd@lists.gnu.org>
+Received: from sender4-of-o57.zoho.com ([136.143.188.57]:21783)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1k6RGU-0003eE-O2; Fri, 14 Aug 2020 00:24:29 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1597379036; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=S9nVcHZItZesFwjzTTO3g/thW3muA7jCUfx9kA1Xvf8kbIZ0DPJLFtOwbUbOe3epXwuFTTbi+d10wGW6ycweUMMp/zYUxgfMpp+xqCo4+VN0d/NhLLKlvRgqeiaZI6wsiwhvAW+a4VZeTwV4qCIrGXXR5OGWxtIWCNu2mp2QPXg=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1597379036;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
+ bh=OEvfY9qtAFo+CEpS0u/Qu/lSFAIbwXlFOiLV3WvRCbo=; 
+ b=Uv8Nekjx9KmBhH+gOrPm9Z9suHOjtS5/NaPRPZceCVt6Z4r3DYzhxXQN8ffNP9LZ2GWbpl5ZPO2MorSk7CAGcZ3MitELNWJ4qMlxW+kzmIknkq1QQ+EdVZ51wfmLIIA5VypqY9ylyR/zcsyqP9yR6ntRlp75/RNdTNLNczF+ijs=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 159737903177795.25170292746691;
+ Thu, 13 Aug 2020 21:23:51 -0700 (PDT)
+Subject: Re: [PATCH] target/riscv: Fix bug in getting trap cause name for
  trace_riscv_trap
-Date: Fri, 14 Aug 2020 11:58:19 +0800
-Message-ID: <20200814035819.1214-1-jiangyifei@huawei.com>
-X-Mailer: git-send-email 2.26.2.windows.1
+Message-ID: <159737903042.30514.18022346928129143910@66eaa9a8a123>
+Reply-To: <qemu-devel@nongnu.org>
+In-Reply-To: <20200814035819.1214-1-jiangyifei@huawei.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain
-X-Originating-IP: [10.174.187.31]
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.32; envelope-from=jiangyifei@huawei.com;
- helo=huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/13 23:59:29
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: jiangyifei@huawei.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ zhang.zhanghailiang@huawei.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, victor.zhangxiaofeng@huawei.com,
+ jiangyifei@huawei.com, Alistair.Francis@wdc.com, yinyipeng1@huawei.com,
+ palmer@dabbelt.com, wu.wubin@huawei.com, dengkai1@huawei.com
+Date: Thu, 13 Aug 2020 21:23:51 -0700 (PDT)
+X-ZohoMailClient: External
+Received-SPF: pass client-ip=136.143.188.57; envelope-from=no-reply@patchew.org;
+ helo=sender4-of-o57.zoho.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/14 00:24:23
 X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -54,74 +66,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2020 03:59:45 -0000
+X-List-Received-Date: Fri, 14 Aug 2020 04:24:29 -0000
 
-When the cause number is equal to or greater than 23, print "(unknown)" in
-trace_riscv_trap. The max valid number of riscv_excp_names is 23, so the last
-excpetion "guest_store_page_fault" can not be printed.
-
-In addition, the current check of cause is invalid for riscv_intr_names. So
-introduce riscv_cpu_get_trap_name to get the trap cause name.
-
-Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
----
- target/riscv/cpu.c        | 11 +++++++++++
- target/riscv/cpu.h        |  1 +
- target/riscv/cpu_helper.c |  4 ++--
- 3 files changed, 14 insertions(+), 2 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 228b9bdb5d..bcdce85c5e 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -96,6 +96,17 @@ const char * const riscv_intr_names[] = {
-     "reserved"
- };
- 
-+const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
-+{
-+    if (async) {
-+        return (cause < ARRAY_SIZE(riscv_intr_names)) ?
-+               riscv_intr_names[cause] : "(unknown)";
-+    } else {
-+        return (cause < ARRAY_SIZE(riscv_excp_names)) ?
-+               riscv_excp_names[cause] : "(unknown)";
-+    }
-+}
-+
- static void set_misa(CPURISCVState *env, target_ulong misa)
- {
-     env->misa_mask = env->misa = misa;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a804a5d0ba..7c72979f6a 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -312,6 +312,7 @@ extern const char * const riscv_fpr_regnames[];
- extern const char * const riscv_excp_names[];
- extern const char * const riscv_intr_names[];
- 
-+const char *riscv_cpu_get_trap_name(target_ulong cause, bool async);
- void riscv_cpu_do_interrupt(CPUState *cpu);
- int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
- int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 75d2ae3434..2e047f0948 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -877,8 +877,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         }
-     }
- 
--    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval, cause < 23 ?
--        (async ? riscv_intr_names : riscv_excp_names)[cause] : "(unknown)");
-+    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval,
-+        riscv_cpu_get_trap_name(cause, async));
- 
-     if (env->priv <= PRV_S &&
-             cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
--- 
-2.19.1
-
-
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDgxNDAzNTgxOS4xMjE0
+LTEtamlhbmd5aWZlaUBodWF3ZWkuY29tLwoKCgpIaSwKClRoaXMgc2VyaWVzIGZhaWxlZCB0aGUg
+ZG9ja2VyLXF1aWNrQGNlbnRvczcgYnVpbGQgdGVzdC4gUGxlYXNlIGZpbmQgdGhlIHRlc3Rpbmcg
+Y29tbWFuZHMgYW5kCnRoZWlyIG91dHB1dCBiZWxvdy4gSWYgeW91IGhhdmUgRG9ja2VyIGluc3Rh
+bGxlZCwgeW91IGNhbiBwcm9iYWJseSByZXByb2R1Y2UgaXQKbG9jYWxseS4KCj09PSBURVNUIFND
+UklQVCBCRUdJTiA9PT0KIyEvYmluL2Jhc2gKbWFrZSBkb2NrZXItaW1hZ2UtY2VudG9zNyBWPTEg
+TkVUV09SSz0xCnRpbWUgbWFrZSBkb2NrZXItdGVzdC1xdWlja0BjZW50b3M3IFNIT1dfRU5WPTEg
+Sj0xNCBORVRXT1JLPTEKPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KCiAgVEVTVCAgICBjaGVjay11
+bml0OiB0ZXN0cy90ZXN0LWNoYXIKVW5leHBlY3RlZCBlcnJvciBpbiBvYmplY3RfcHJvcGVydHlf
+dHJ5X2FkZCgpIGF0IC90bXAvcWVtdS10ZXN0L3NyYy9xb20vb2JqZWN0LmM6MTE4MToKYXR0ZW1w
+dCB0byBhZGQgZHVwbGljYXRlIHByb3BlcnR5ICdzZXJpYWwtaWQnIHRvIG9iamVjdCAodHlwZSAn
+Y29udGFpbmVyJykKRVJST1IgdGVzdC1jaGFyIC0gdG9vIGZldyB0ZXN0cyBydW4gKGV4cGVjdGVk
+IDM4LCBnb3QgOSkKbWFrZTogKioqIFtjaGVjay11bml0XSBFcnJvciAxCm1ha2U6ICoqKiBXYWl0
+aW5nIGZvciB1bmZpbmlzaGVkIGpvYnMuLi4uCiAgVEVTVCAgICBpb3Rlc3QtcWNvdzI6IDAyOQog
+IFRFU1QgICAgY2hlY2stcXRlc3QteDg2XzY0OiB0ZXN0cy9xdGVzdC9oZC1nZW8tdGVzdAotLS0K
+ICAgIHJhaXNlIENhbGxlZFByb2Nlc3NFcnJvcihyZXRjb2RlLCBjbWQpCnN1YnByb2Nlc3MuQ2Fs
+bGVkUHJvY2Vzc0Vycm9yOiBDb21tYW5kICdbJ3N1ZG8nLCAnLW4nLCAnZG9ja2VyJywgJ3J1bics
+ICctLWxhYmVsJywgJ2NvbS5xZW11Lmluc3RhbmNlLnV1aWQ9ODNlOGJlOTgyZmU4NGY3MzliMzQy
+NDM1ZjMzYjYyZjYnLCAnLXUnLCAnMTAwMycsICctLXNlY3VyaXR5LW9wdCcsICdzZWNjb21wPXVu
+Y29uZmluZWQnLCAnLS1ybScsICctZScsICdUQVJHRVRfTElTVD0nLCAnLWUnLCAnRVhUUkFfQ09O
+RklHVVJFX09QVFM9JywgJy1lJywgJ1Y9JywgJy1lJywgJ0o9MTQnLCAnLWUnLCAnREVCVUc9Jywg
+Jy1lJywgJ1NIT1dfRU5WPTEnLCAnLWUnLCAnQ0NBQ0hFX0RJUj0vdmFyL3RtcC9jY2FjaGUnLCAn
+LXYnLCAnL2hvbWUvcGF0Y2hldzIvLmNhY2hlL3FlbXUtZG9ja2VyLWNjYWNoZTovdmFyL3RtcC9j
+Y2FjaGU6eicsICctdicsICcvdmFyL3RtcC9wYXRjaGV3LXRlc3Rlci10bXAtYnJ4a29sNTMvc3Jj
+L2RvY2tlci1zcmMuMjAyMC0wOC0xNC0wMC4xMC4zNi42MTUyOi92YXIvdG1wL3FlbXU6eixybycs
+ICdxZW11L2NlbnRvczcnLCAnL3Zhci90bXAvcWVtdS9ydW4nLCAndGVzdC1xdWljayddJyByZXR1
+cm5lZCBub24temVybyBleGl0IHN0YXR1cyAyLgpmaWx0ZXI9LS1maWx0ZXI9bGFiZWw9Y29tLnFl
+bXUuaW5zdGFuY2UudXVpZD04M2U4YmU5ODJmZTg0ZjczOWIzNDI0MzVmMzNiNjJmNgptYWtlWzFd
+OiAqKiogW2RvY2tlci1ydW5dIEVycm9yIDEKbWFrZVsxXTogTGVhdmluZyBkaXJlY3RvcnkgYC92
+YXIvdG1wL3BhdGNoZXctdGVzdGVyLXRtcC1icnhrb2w1My9zcmMnCm1ha2U6ICoqKiBbZG9ja2Vy
+LXJ1bi10ZXN0LXF1aWNrQGNlbnRvczddIEVycm9yIDIKCnJlYWwgICAgMTNtMTUuMDU4cwp1c2Vy
+ICAgIDBtOC40MDlzCgoKVGhlIGZ1bGwgbG9nIGlzIGF2YWlsYWJsZSBhdApodHRwOi8vcGF0Y2hl
+dy5vcmcvbG9ncy8yMDIwMDgxNDAzNTgxOS4xMjE0LTEtamlhbmd5aWZlaUBodWF3ZWkuY29tL3Rl
+c3RpbmcuZG9ja2VyLXF1aWNrQGNlbnRvczcvP3R5cGU9bWVzc2FnZS4KLS0tCkVtYWlsIGdlbmVy
+YXRlZCBhdXRvbWF0aWNhbGx5IGJ5IFBhdGNoZXcgW2h0dHBzOi8vcGF0Y2hldy5vcmcvXS4KUGxl
+YXNlIHNlbmQgeW91ciBmZWVkYmFjayB0byBwYXRjaGV3LWRldmVsQHJlZGhhdC5jb20=
 
