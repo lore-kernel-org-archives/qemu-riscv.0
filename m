@@ -1,60 +1,84 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6eAg-0006UV-F9
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 14:11:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37970)
+	id 1k6eZZ-0003Lh-28
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 14:37:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42850)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1k6eAe-0006TT-Au; Fri, 14 Aug 2020 14:11:16 -0400
-Resent-Date: Fri, 14 Aug 2020 14:11:16 -0400
-Resent-Message-Id: <E1k6eAe-0006TT-Au@lists.gnu.org>
-Received: from sender4-of-o57.zoho.com ([136.143.188.57]:21709)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1k6eAa-0004sn-SS; Fri, 14 Aug 2020 14:11:16 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1597428638; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=LkxbnH2VWKcvbQrzdqx79n8jHPDvvQ6r4v2MoTqNEP3S9aPEUXTfPntbS8riY8xO8lIeQqDXxXy9aUM1fBQl+yylk5DmGbufPbomdMWjKs/lUkNkOTRkFIVQs+DeB7Yc3aOp5e7hbkivF58/BpUS+MTw8gElhGRuulIrY+dgjnI=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1597428638;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=3WQ/sYsZGKmWGvICEm4yk6yBK3bgTO3NCBJ4DZNW+d8=; 
- b=FAVDMhM9AeHAqBIBBLBH6QZX/ZHZycPXeA+73s1YZ0jVfJYEeN2zI/nRx8Kc6YPKEEpXVXsvZ+CPhURqJeyqjhTR4P22wNAEOL6zRexcwyE1dsND3DL/wiolFBvbaI5P6rSghpQU2QTEF9pJSM1jmHU5cqo07WFi8U/vY+VlZMg=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1597428631629197.05788517949736;
- Fri, 14 Aug 2020 11:10:31 -0700 (PDT)
-Subject: Re: [PATCH 00/18] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
- board support
-Message-ID: <159742862975.7155.16347016576483852972@66eaa9a8a123>
-Reply-To: <qemu-devel@nongnu.org>
-In-Reply-To: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1k6eZX-0003LT-Nu
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2020 14:36:59 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:42196)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1k6eZU-0007hO-GV
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2020 14:36:58 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id f5so4550399plr.9
+ for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2020 11:36:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=mSyGCQ00UyCgU4W9lEQIrAQfxGRZDKKKHrtU9PhMcIQ=;
+ b=CSSJKKfy+sonqbtGFLnLCNeBbrSCw7u9HMPegawyNa4ju/wtj18SKQr71AeFIQSkwY
+ WlRmAVDYf7QAJgNuIgIxe93VRu4vvxNIFzJ62+iV/VwKC6AR+CB26ZUTXgDk3lO5ZUS6
+ M3m2YlCSNrYmsk3bzjZnP7USMDQ4wjBgKxJX7vnMmjFrwI4Evzh4kcQ+vKSecthOpsEj
+ eWR4c2Zy9ZSyoNUXvDT2O3FWN0IR+ohDCvaxnWk2XA26tEGN+IUJevEJ5GCQYNBr0mDq
+ YrXNzoGKyBA2WbtxDuVtYq565BTh65nHP7cLK2QJFgD/5WhoNnvaHU9f/6yEYeJFBW6K
+ AD/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=mSyGCQ00UyCgU4W9lEQIrAQfxGRZDKKKHrtU9PhMcIQ=;
+ b=pr2wfnWgow9SkSnmYMKH2/BgXsnGy++qerhCK7OoH5QL7ARMPtZnJ4MXarjyRGalyr
+ Ow7rmcvef4vYFKqeSzxoAqbuam4K3B3nvm/Yn1LKSdMOZK5wCchdZ7tW+hxMxrLGC8j+
+ ziLFO6buxHpJ7LWT6UXhTKTP8KxOzvp0FcNGaf/SKJ3gsAVygEvZScg3NNPt9TeGL4MM
+ kCe8ruPZdMaHGAYEOsCFD6c+8exAKNaRA8CL+8Fl5V8SHaUnfh/dMxl8jAfpaF9u5bgB
+ G1gANl2a+WjeVO3oBSjBhLuBpHJZnyAdiVXi3HuSmWZ1+TIJeXahCFwdVeH09HS5BaKR
+ nuRQ==
+X-Gm-Message-State: AOAM531usMlIRvGlm3oNLQg4BTh+5gPxOZLjsR9AwSBjA6/LCTFp2sPs
+ kEVhA/jhW9CONQbB9gUnBzf/+Q==
+X-Google-Smtp-Source: ABdhPJyZLCyL2BtMWKO3xuiCXoArtbr1UhQmM/7Dh3ImiZJHn6KM0/KKC75b/GBGVAuobIHZ3tG/QQ==
+X-Received: by 2002:a17:90b:803:: with SMTP id
+ bk3mr3324828pjb.57.1597430214965; 
+ Fri, 14 Aug 2020 11:36:54 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.141.89])
+ by smtp.gmail.com with ESMTPSA id d128sm10192297pfa.24.2020.08.14.11.36.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 14 Aug 2020 11:36:54 -0700 (PDT)
+Subject: Re: [RFC v3 26/71] target/riscv: rvv-1.0: update vext_max_elems() for
+ load/store insns
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+References: <20200806104709.13235-1-frank.chang@sifive.com>
+ <20200806104709.13235-27-frank.chang@sifive.com>
+ <90f01984-54a4-2a56-c52f-d1f4332b39d4@linaro.org>
+ <CAE_xrPiJRRV3FYtfve6LMOF6LNEYGfhmi9CiabxqUBEew9igLg@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <5706a1ca-1dd9-22cd-08ce-c70780111bfc@linaro.org>
+Date: Fri, 14 Aug 2020 11:36:52 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: bmeng.cn@gmail.com
-Cc: Alistair.Francis@wdc.com, kbastian@mail.uni-paderborn.de,
- palmerdabbelt@google.com, sagark@eecs.berkeley.edu, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, peter.maydell@linaro.org, alistair@alistair23.me,
- qemu-block@nongnu.org, jasowang@redhat.com, bin.meng@windriver.com,
- pbonzini@redhat.com, palmer@dabbelt.com, qemu-arm@nongnu.org,
- marcandre.lureau@redhat.com, edgar.iglesias@gmail.com, philmd@redhat.com
-Date: Fri, 14 Aug 2020 11:10:31 -0700 (PDT)
-X-ZohoMailClient: External
-Received-SPF: pass client-ip=136.143.188.57; envelope-from=no-reply@patchew.org;
- helo=sender4-of-o57.zoho.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/14 12:16:06
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <CAE_xrPiJRRV3FYtfve6LMOF6LNEYGfhmi9CiabxqUBEew9igLg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -67,43 +91,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2020 18:11:16 -0000
+X-List-Received-Date: Fri, 14 Aug 2020 18:36:59 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8xNTk3NDIzMjU2LTE0ODQ3LTEt
-Z2l0LXNlbmQtZW1haWwtYm1lbmcuY25AZ21haWwuY29tLwoKCgpIaSwKClRoaXMgc2VyaWVzIGZh
-aWxlZCB0aGUgZG9ja2VyLXF1aWNrQGNlbnRvczcgYnVpbGQgdGVzdC4gUGxlYXNlIGZpbmQgdGhl
-IHRlc3RpbmcgY29tbWFuZHMgYW5kCnRoZWlyIG91dHB1dCBiZWxvdy4gSWYgeW91IGhhdmUgRG9j
-a2VyIGluc3RhbGxlZCwgeW91IGNhbiBwcm9iYWJseSByZXByb2R1Y2UgaXQKbG9jYWxseS4KCj09
-PSBURVNUIFNDUklQVCBCRUdJTiA9PT0KIyEvYmluL2Jhc2gKbWFrZSBkb2NrZXItaW1hZ2UtY2Vu
-dG9zNyBWPTEgTkVUV09SSz0xCnRpbWUgbWFrZSBkb2NrZXItdGVzdC1xdWlja0BjZW50b3M3IFNI
-T1dfRU5WPTEgSj0xNCBORVRXT1JLPTEKPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KCiAgVEVTVCAg
-ICBjaGVjay11bml0OiB0ZXN0cy90ZXN0LWNoYXIKVW5leHBlY3RlZCBlcnJvciBpbiBvYmplY3Rf
-cHJvcGVydHlfdHJ5X2FkZCgpIGF0IC90bXAvcWVtdS10ZXN0L3NyYy9xb20vb2JqZWN0LmM6MTE4
-MToKYXR0ZW1wdCB0byBhZGQgZHVwbGljYXRlIHByb3BlcnR5ICdzZXJpYWwtaWQnIHRvIG9iamVj
-dCAodHlwZSAnY29udGFpbmVyJykKRVJST1IgdGVzdC1jaGFyIC0gdG9vIGZldyB0ZXN0cyBydW4g
-KGV4cGVjdGVkIDM4LCBnb3QgOSkKbWFrZTogKioqIFtjaGVjay11bml0XSBFcnJvciAxCm1ha2U6
-ICoqKiBXYWl0aW5nIGZvciB1bmZpbmlzaGVkIGpvYnMuLi4uCiAgVEVTVCAgICBjaGVjay1xdGVz
-dC14ODZfNjQ6IHRlc3RzL3F0ZXN0L2hkLWdlby10ZXN0CnFlbXUtc3lzdGVtLWFhcmNoNjQ6IC1h
-Y2NlbCBrdm06IGludmFsaWQgYWNjZWxlcmF0b3Iga3ZtCi0tLQogICAgcmFpc2UgQ2FsbGVkUHJv
-Y2Vzc0Vycm9yKHJldGNvZGUsIGNtZCkKc3VicHJvY2Vzcy5DYWxsZWRQcm9jZXNzRXJyb3I6IENv
-bW1hbmQgJ1snc3VkbycsICctbicsICdkb2NrZXInLCAncnVuJywgJy0tbGFiZWwnLCAnY29tLnFl
-bXUuaW5zdGFuY2UudXVpZD01ZDg3ZWQ0YjMyMTA0ZDNmYTMwMGY4OTI0OGU1OTgwOScsICctdScs
-ICcxMDAzJywgJy0tc2VjdXJpdHktb3B0JywgJ3NlY2NvbXA9dW5jb25maW5lZCcsICctLXJtJywg
-Jy1lJywgJ1RBUkdFVF9MSVNUPScsICctZScsICdFWFRSQV9DT05GSUdVUkVfT1BUUz0nLCAnLWUn
-LCAnVj0nLCAnLWUnLCAnSj0xNCcsICctZScsICdERUJVRz0nLCAnLWUnLCAnU0hPV19FTlY9MScs
-ICctZScsICdDQ0FDSEVfRElSPS92YXIvdG1wL2NjYWNoZScsICctdicsICcvaG9tZS9wYXRjaGV3
-Mi8uY2FjaGUvcWVtdS1kb2NrZXItY2NhY2hlOi92YXIvdG1wL2NjYWNoZTp6JywgJy12JywgJy92
-YXIvdG1wL3BhdGNoZXctdGVzdGVyLXRtcC1va3JyOWtibC9zcmMvZG9ja2VyLXNyYy4yMDIwLTA4
-LTE0LTEzLjU2LjU1LjEyMjUxOi92YXIvdG1wL3FlbXU6eixybycsICdxZW11L2NlbnRvczcnLCAn
-L3Zhci90bXAvcWVtdS9ydW4nLCAndGVzdC1xdWljayddJyByZXR1cm5lZCBub24temVybyBleGl0
-IHN0YXR1cyAyLgpmaWx0ZXI9LS1maWx0ZXI9bGFiZWw9Y29tLnFlbXUuaW5zdGFuY2UudXVpZD01
-ZDg3ZWQ0YjMyMTA0ZDNmYTMwMGY4OTI0OGU1OTgwOQptYWtlWzFdOiAqKiogW2RvY2tlci1ydW5d
-IEVycm9yIDEKbWFrZVsxXTogTGVhdmluZyBkaXJlY3RvcnkgYC92YXIvdG1wL3BhdGNoZXctdGVz
-dGVyLXRtcC1va3JyOWtibC9zcmMnCm1ha2U6ICoqKiBbZG9ja2VyLXJ1bi10ZXN0LXF1aWNrQGNl
-bnRvczddIEVycm9yIDIKCnJlYWwgICAgMTNtMzUuMzAwcwp1c2VyICAgIDBtOC4yNjZzCgoKVGhl
-IGZ1bGwgbG9nIGlzIGF2YWlsYWJsZSBhdApodHRwOi8vcGF0Y2hldy5vcmcvbG9ncy8xNTk3NDIz
-MjU2LTE0ODQ3LTEtZ2l0LXNlbmQtZW1haWwtYm1lbmcuY25AZ21haWwuY29tL3Rlc3RpbmcuZG9j
-a2VyLXF1aWNrQGNlbnRvczcvP3R5cGU9bWVzc2FnZS4KLS0tCkVtYWlsIGdlbmVyYXRlZCBhdXRv
-bWF0aWNhbGx5IGJ5IFBhdGNoZXcgW2h0dHBzOi8vcGF0Y2hldy5vcmcvXS4KUGxlYXNlIHNlbmQg
-eW91ciBmZWVkYmFjayB0byBwYXRjaGV3LWRldmVsQHJlZGhhdC5jb20=
+On 8/13/20 7:48 PM, Frank Chang wrote:
+> esz is passed from e.g. GEN_VEXT_LD_STRIDE() macro:
+> 
+>> #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)        \
+>> void HELPER(NAME)(void *vd, void * v0, target_ulong base,  \
+>>                   target_ulong stride, CPURISCVState *env, \
+>>                   uint32_t desc)                           \
+>> {                                                          \
+>>     uint32_t vm = vext_vm(desc);                           \
+>>     vext_ldst_stride(vd, v0, base, stride, env, desc, vm, LOAD_FN, \
+>>                      sizeof(ETYPE), GETPC(), MMU_DATA_LOAD);       \
+>> }
+>>
+>> GEN_VEXT_LD_STRIDE(vlse8_v,  int8_t,  lde_b)
+> 
+> which is calculated by sizeof(ETYPE), so the results would be: 1, 2, 4, 8.
+> and vext_max_elems() is called by e.g. vext_ldst_stride():
+
+Ah, yes.
+
+>> uint32_t max_elems = vext_max_elems(desc, esz);
+> 
+> I can add another parameter to the macro and pass the hard-coded log2(esz) number
+> if it's the better way instead of using ctzl().
+> Or if there's another approach to get the log2(esz) number more elegantly?
+
+Using ctzl(sizeof(type)) in the GEN_VEXT_LD_STRIDE macro will work well.  This
+will be constant folded by the compiler.
+
+
+r~
 
