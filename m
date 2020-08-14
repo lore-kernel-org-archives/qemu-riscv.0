@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6cm9-0008FK-8e
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 12:41:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47366)
+	id 1k6cmC-0008N3-9o
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 12:41:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47386)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k6cm6-00088m-Lk; Fri, 14 Aug 2020 12:41:50 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:38693)
+ id 1k6cmA-0008Hf-1f; Fri, 14 Aug 2020 12:41:54 -0400
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:36506)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k6cm4-0002im-KG; Fri, 14 Aug 2020 12:41:50 -0400
-Received: by mail-pf1-x444.google.com with SMTP id d22so4815587pfn.5;
- Fri, 14 Aug 2020 09:41:47 -0700 (PDT)
+ id 1k6cm7-0002jD-H7; Fri, 14 Aug 2020 12:41:53 -0400
+Received: by mail-pl1-x644.google.com with SMTP id y6so4426268plt.3;
+ Fri, 14 Aug 2020 09:41:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=FK50ORz16F3dnaLHeIWxnRqzsyIO5VCFaWwZ349ZLBQ=;
- b=ZwdayXy92Zc009OwTIbJbfKn8uCZoQP111ub8pqYd3cK9Nx9K7tFMvQWArFLSlQI7w
- dBcDNbbdIEOukzLAPqrh1SrnK05HNd+jxPsDYfQRp5dAhxVGCgpk5G32TnUxfYw1jlDS
- VotQ20tNL9PXRIisZjfleZxWc/uRVWDaNQKuV9nECvasxBZzAfWV6ETL5ItohLqN7utd
- L36lZAOKV3vib+/+u5pRMl+MwYHVYdRbuesydup5gHenhozN5MMVwk6SVqBmL47FrtA8
- 6b5gSEOOEsO2j/jHgci3W4/OitnoRkadKgnxaXgAUI3UwfTT443+LPLHFyZq6g2XoyaT
- B8zQ==
+ bh=adiYZFq8zyrROf6pqRS8afgeUZ7H+MCq0abcua8JyKM=;
+ b=jSfxL/1JCLTrP7oj99CrcMCoaWiwV81XvwxGPycJS4hjqMPr+cKkK9o13onFsRYltm
+ HMn3vuALmLr1yGiMzQbvD5Ut87dE9uqmVD4VdTZdolXEUMhvv5VI7qpE/EF323hmwI8b
+ q5wjplC5i/8YB4Bq8XgFQ4LsJmU+ImLA04dxty/YhwdAt9GkkbDor3U6BMoYlWHGwHhi
+ FUDJTJIs7cEP4+N4OWU8wMtWr6JrwqnA8b+9Y336XA35CiGypzXalTvsfW/p/lWcBSvL
+ LgfeQUC12nJR7D1qfks0p32Zu3DM/JfnKcxJb7+t2El+tXgljHHWoMKczPtxN1Rdp0FK
+ bXHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=FK50ORz16F3dnaLHeIWxnRqzsyIO5VCFaWwZ349ZLBQ=;
- b=NPwF0hSN2G1lzWP3aZinY6xNYwIt/LWPvJJnAhUkHJHFNFHBmp4OHXWGWcbEx97JrJ
- +TVOZB0XklJAYf2UJmaUmUyG06mNDJMU+n75gGYIpuZAIWS5jCIPmusmvJ9jNUB0W9/A
- vK9PVeaRSiVaIWrFXafiN4T+07zzfDtPyhNdMf9T8/v0hLkBiil34VNXSfTGFEoVwzVQ
- kzCdGqPJYeO1gZQRGo3AFk7uMeh8DgAN7ZjfaHOAkSsKd2T7HcB8RjLTTAvmrafCs4hZ
- qwunQhzxO29qgOHwhbeoG1HCy2CawNQgDI/UKexR57vthONnAWKK2zUYZKzqnkEZqBwL
- SOIw==
-X-Gm-Message-State: AOAM5336naaQgbes+UZkbeYQGpTbvkpHaTp+wxs4rgTsQlHu+GJKy6lf
- lmoUCPWiFgvsnYJzavaCJw4=
-X-Google-Smtp-Source: ABdhPJxzS2vMKeKILxWuL1Ege8SIBqWqDAeic59RVa3oqxjTSVteoA48phwxoZZMAaWijIfT/36Bqw==
-X-Received: by 2002:a63:af47:: with SMTP id s7mr2381722pgo.335.1597423306955; 
- Fri, 14 Aug 2020 09:41:46 -0700 (PDT)
+ bh=adiYZFq8zyrROf6pqRS8afgeUZ7H+MCq0abcua8JyKM=;
+ b=shELQmUkMz2uSLnr/dolHgQFjYLkuLCNxky0QV9uE7/MxDpinWjz0J3e7uJo5nc5Pg
+ iOG/YvwXfP99MLEw9B4sRrZA4u4xKhOFi8GsZ3Lwv8O0HQ1zybvI4BhFdDpIyFzZXIPr
+ AJ/ajOmBnrKfsxpKBSRFr89skpIn+g2wq8+e4ZPKjNE8i6BPjJUwzWqeLYo7SUmV9xA9
+ u4Qyq3XHuTiLQ0IVwr5ulUgXwZG+U8QJJOFQjNA234w/smdpD2s5aw6t2ir/3NfJnWCL
+ ceMFWzVatsr1qDcMxa76Vu5EbUv9Ypz6OHUVbmGM+zBOkd+x5G1VGEKY27gr4PmtThp8
+ jTKg==
+X-Gm-Message-State: AOAM531qg9REC86GUqNoa6F7O9EqWrQ8c0R+/QAguoDZ9OlvIkz5qiS4
+ o5PHi0VRRau/YGjjoaj/yjgMhvl+7EYUlEIO
+X-Google-Smtp-Source: ABdhPJwEC8XAhdsoR6a04H87jshIW3MbHM4BRbF8G6lKuiSSKqY0//Li9MS72MQIQsT0D61IMeAfRA==
+X-Received: by 2002:a17:90a:154e:: with SMTP id
+ y14mr3054827pja.178.1597423309942; 
+ Fri, 14 Aug 2020 09:41:49 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
  [147.11.146.144])
- by smtp.gmail.com with ESMTPSA id 16sm9836332pfi.161.2020.08.14.09.41.43
+ by smtp.gmail.com with ESMTPSA id 16sm9836332pfi.161.2020.08.14.09.41.47
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 14 Aug 2020 09:41:46 -0700 (PDT)
+ Fri, 14 Aug 2020 09:41:49 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmerdabbelt@google.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 11/18] hw/riscv: microchip_pfsoc: Connect a Cadence SDHCI
- controller and an SD card
-Date: Sat, 15 Aug 2020 00:40:49 +0800
-Message-Id: <1597423256-14847-12-git-send-email-bmeng.cn@gmail.com>
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH 12/18] hw/dma: Add Microchip PolarFire Soc DMA controller
+ emulation
+Date: Sat, 15 Aug 2020 00:40:50 +0800
+Message-Id: <1597423256-14847-13-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
 References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::444;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x444.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::644;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x644.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,155 +79,457 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2020 16:41:51 -0000
+X-List-Received-Date: Fri, 14 Aug 2020 16:41:54 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Microchip PolarFire SoC integrates one Cadence SDHCI controller.
-On the Icicle Kit board, one eMMC chip and an external SD card
-connect to this controller depending on different configuration.
+Microchip PolarFire SoC integrates a DMA engine that supports:
+* Independent concurrent DMA transfers using 4 DMA channels
+* Generation of interrupts on various conditions during execution
 
-As QEMU does not support eMMC yet, we just emulate the SD card
-configuration. To test this, the Hart Software Services (HSS)
-should choose the SD card configuration:
-
-$ cp boards/icicle-kit-es/def_config.sdcard .config
-$ make BOARD=icicle-kit-es
-
-The SD card image can be built from the Yocto BSP at:
-https://github.com/polarfire-soc/meta-polarfire-soc-yocto-bsp
-
-Note the generated SD card image should be resized before use:
-$ qemu-img resize /path/to/sdcard.img 4G
-
-Launch QEMU with the following command:
-$ qemu-system-riscv64 -nographic -M microchip-icicle-kit -sd sdcard.img
+This creates a simple model to support polling mode which is
+enough for firmware usage. While there are codes for interrupts
+handling, please note the interrupt path has not been validated
+due to missing kernel driver for testing as of now.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- hw/riscv/Kconfig                   |  1 +
- hw/riscv/microchip_pfsoc.c         | 26 ++++++++++++++++++++++++++
- include/hw/riscv/microchip_pfsoc.h |  4 ++++
- 3 files changed, 31 insertions(+)
+ MAINTAINERS                     |   2 +
+ hw/dma/Kconfig                  |   3 +
+ hw/dma/Makefile.objs            |   1 +
+ hw/dma/mchp_pfsoc_dma.c         | 322 ++++++++++++++++++++++++++++++++++++++++
+ include/hw/dma/mchp_pfsoc_dma.h |  57 +++++++
+ 5 files changed, 385 insertions(+)
+ create mode 100644 hw/dma/mchp_pfsoc_dma.c
+ create mode 100644 include/hw/dma/mchp_pfsoc_dma.h
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index ceb7c16..7412db9 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -55,3 +55,4 @@ config MICROCHIP_PFSOC
-     select SIFIVE
-     select UNIMP
-     select MCHP_PFSOC_MMUART
-+    select CADENCE_SDHCI
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index f6b375c..7c09078 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -12,6 +12,7 @@
-  * 1) PLIC (Platform Level Interrupt Controller)
-  * 2) eNVM (Embedded Non-Volatile Memory)
-  * 3) MMUARTs (Multi-Mode UART)
-+ * 4) Cadence eMMC/SDHC controller and an SD card connected to it
-  *
-  * This board currently generates devicetree dynamically that indicates at least
-  * two harts and up to five harts.
-@@ -75,6 +76,7 @@ static const struct MemmapEntry {
-     [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
-     [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
-     [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
-+    [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
-     [MICROCHIP_PFSOC_MMUART1] =         { 0x20100000,     0x1000 },
-     [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
-     [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
-@@ -111,6 +113,11 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
-     qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type",
-                          TYPE_RISCV_CPU_SIFIVE_U54);
-     qdev_prop_set_uint64(DEVICE(&s->u_cpus), "resetvec", RESET_VECTOR);
-+
-+    object_initialize_child(obj, "sd-controller", &s->sdhci,
-+                            TYPE_CADENCE_SDHCI);
-+    object_initialize_child(OBJECT(&s->sdhci), "sd-controller.sdhci",
-+                            &s->sdhci.slot, TYPE_SYSBUS_SDHCI);
- }
+diff --git a/MAINTAINERS b/MAINTAINERS
+index e51edac..0aacc90 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1320,8 +1320,10 @@ L: qemu-riscv@nongnu.org
+ S: Supported
+ F: hw/riscv/microchip_pfsoc.c
+ F: hw/char/mchp_pfsoc_mmuart.c
++F: hw/dma/mchp_pfsoc_dma.c
+ F: include/hw/riscv/microchip_pfsoc.h
+ F: include/hw/char/mchp_pfsoc_mmuart.h
++F: include/hw/dma/mchp_pfsoc_dma.h
  
- static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-@@ -223,6 +230,13 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-         memmap[MICROCHIP_PFSOC_MPUCFG].base,
-         memmap[MICROCHIP_PFSOC_MPUCFG].size);
+ RX Machines
+ -----------
+diff --git a/hw/dma/Kconfig b/hw/dma/Kconfig
+index 5c61b67..778e20b 100644
+--- a/hw/dma/Kconfig
++++ b/hw/dma/Kconfig
+@@ -20,3 +20,6 @@ config ZYNQ_DEVCFG
  
-+    /* SDHCI */
-+    sysbus_realize(SYS_BUS_DEVICE(&s->sdhci), errp);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci), 0,
-+                    memmap[MICROCHIP_PFSOC_EMMC_SD].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sdhci.slot), 0,
-+        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_EMMC_SD_IRQ));
+ config STP2000
+     bool
 +
-     /* MMUARTs */
-     s->serial0 = mchp_pfsoc_mmuart_create(system_memory,
-         memmap[MICROCHIP_PFSOC_MMUART0].base,
-@@ -290,6 +304,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-     MicrochipIcicleKitState *s = MICROCHIP_ICICLE_KIT_MACHINE(machine);
-     MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-+    DriveInfo *dinfo = drive_get_next(IF_SD);
- 
-     /* Sanity check on RAM size */
-     if (machine->ram_size < mc->default_ram_size) {
-@@ -312,6 +327,17 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
- 
-     /* Load the firmware */
-     riscv_find_and_load_firmware(machine, BIOS_FILENAME, RESET_VECTOR, NULL);
++config MCHP_PFSOC_DMA
++    bool
+diff --git a/hw/dma/Makefile.objs b/hw/dma/Makefile.objs
+index f4b1cfe..fd7e836 100644
+--- a/hw/dma/Makefile.objs
++++ b/hw/dma/Makefile.objs
+@@ -14,3 +14,4 @@ common-obj-$(CONFIG_XLNX_ZYNQMP_ARM) += xlnx-zdma.o
+ common-obj-$(CONFIG_OMAP) += omap_dma.o soc_dma.o
+ common-obj-$(CONFIG_PXA2XX) += pxa2xx_dma.o
+ common-obj-$(CONFIG_RASPI) += bcm2835_dma.o
++common-obj-$(CONFIG_MCHP_PFSOC_DMA) += mchp_pfsoc_dma.o
+diff --git a/hw/dma/mchp_pfsoc_dma.c b/hw/dma/mchp_pfsoc_dma.c
+new file mode 100644
+index 0000000..8531a6f
+--- /dev/null
++++ b/hw/dma/mchp_pfsoc_dma.c
+@@ -0,0 +1,322 @@
++/*
++ * Microchip PolarFire SoC DMA emulation
++ *
++ * Copyright (c) 2020 Wind River Systems, Inc.
++ *
++ * Author:
++ *   Bin Meng <bin.meng@windriver.com>
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 or
++ * (at your option) version 3 of the License.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
 +
-+    /* Attach an SD card */
-+    if (dinfo) {
-+        SDHCIState *sdhci = &(s->soc.sdhci.slot);
-+        DeviceState *card = qdev_new(TYPE_SD_CARD);
-+        BusState *bus = qdev_get_child_bus(DEVICE(sdhci), "sd-bus");
++#include "qemu/osdep.h"
++#include "qemu/bitops.h"
++#include "qemu/log.h"
++#include "qapi/error.h"
++#include "hw/hw.h"
++#include "hw/irq.h"
++#include "hw/qdev-properties.h"
++#include "hw/sysbus.h"
++#include "migration/vmstate.h"
++#include "sysemu/dma.h"
++#include "hw/dma/mchp_pfsoc_dma.h"
 +
-+        qdev_prop_set_drive_err(card, "drive", blk_by_legacy_dinfo(dinfo),
-+                                &error_fatal);
-+        qdev_realize_and_unref(card, bus, &error_fatal);
++#define DMA_CONTROL         0x000
++#define   CONTROL_CLAIM     BIT(0)
++#define   CONTROL_RUN       BIT(1)
++#define   CONTROL_DONE_IE   BIT(14)
++#define   CONTROL_ERR_IE    BIT(15)
++#define   CONTROL_DONE      BIT(30)
++#define   CONTROL_ERR       BIT(31)
++
++#define DMA_NEXT_CONFIG     0x004
++#define   CONFIG_REPEAT     BIT(2)
++#define   CONFIG_ORDER      BIT(3)
++#define   CONFIG_WRSZ_SHIFT 24
++#define   CONFIG_RDSZ_SHIFT 28
++#define   CONFIG_SZ_MASK    0xf
++
++#define DMA_NEXT_BYTES      0x008
++#define DMA_NEXT_DST        0x010
++#define DMA_NEXT_SRC        0x018
++#define DMA_EXEC_CONFIG     0x104
++#define DMA_EXEC_BYTES      0x108
++#define DMA_EXEC_DST        0x110
++#define DMA_EXEC_SRC        0x118
++
++enum dma_chan_state {
++    DMA_CHAN_STATE_IDLE,
++    DMA_CHAN_STATE_STARTED,
++    DMA_CHAN_STATE_ERROR,
++    DMA_CHAN_STATE_DONE
++};
++
++static void mchp_pfsoc_dma_run(MchpPfSoCDMAState *s, int ch)
++{
++    uint64_t bytes = s->chan[ch].next_bytes;
++    uint64_t dst = s->chan[ch].next_dst;
++    uint64_t src = s->chan[ch].next_src;
++    uint32_t config = s->chan[ch].next_config;
++    int wsize, rsize, size;
++    uint8_t buf[64];
++    int n;
++
++    /* do nothing if bytes to transfer is zero */
++    if (!bytes) {
++        goto error;
 +    }
- }
- 
- static void microchip_icicle_kit_machine_class_init(ObjectClass *oc, void *data)
-diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-index a5efa1d..d810ee8 100644
---- a/include/hw/riscv/microchip_pfsoc.h
-+++ b/include/hw/riscv/microchip_pfsoc.h
-@@ -23,6 +23,7 @@
- #define HW_MICROCHIP_PFSOC_H
- 
- #include "hw/char/mchp_pfsoc_mmuart.h"
-+#include "hw/sd/cadence_sdhci.h"
- 
- typedef struct MicrochipPFSoCState {
-     /*< private >*/
-@@ -39,6 +40,7 @@ typedef struct MicrochipPFSoCState {
-     MchpPfSoCMMUartState *serial2;
-     MchpPfSoCMMUartState *serial3;
-     MchpPfSoCMMUartState *serial4;
-+    CadenceSDHCIState sdhci;
- } MicrochipPFSoCState;
- 
- #define TYPE_MICROCHIP_PFSOC    "microchip.pfsoc"
-@@ -74,6 +76,7 @@ enum {
-     MICROCHIP_PFSOC_MMUART0,
-     MICROCHIP_PFSOC_SYSREG,
-     MICROCHIP_PFSOC_MPUCFG,
-+    MICROCHIP_PFSOC_EMMC_SD,
-     MICROCHIP_PFSOC_MMUART1,
-     MICROCHIP_PFSOC_MMUART2,
-     MICROCHIP_PFSOC_MMUART3,
-@@ -85,6 +88,7 @@ enum {
- };
- 
- enum {
-+    MICROCHIP_PFSOC_EMMC_SD_IRQ = 88,
-     MICROCHIP_PFSOC_MMUART0_IRQ = 90,
-     MICROCHIP_PFSOC_MMUART1_IRQ = 91,
-     MICROCHIP_PFSOC_MMUART2_IRQ = 92,
++
++    /*
++     * The manual does not describe how the hardware behaviors when
++     * config.wsize and config.rsize are given different values.
++     * A common case is memory to memory DMA, and in this case they
++     * are normally the same. Abort if this expectation fails.
++     */
++    wsize = (config >> CONFIG_WRSZ_SHIFT) & CONFIG_SZ_MASK;
++    rsize = (config >> CONFIG_RDSZ_SHIFT) & CONFIG_SZ_MASK;
++    if (wsize != rsize) {
++        goto error;
++    }
++
++    /*
++     * Calculate the transaction size
++     *
++     * size field is base 2 logarithm of DMA transaction size,
++     * but there is an upper limit of 64 bytes per transaction.
++     */
++    size = wsize;
++    if (size > 6) {
++        size = 6;
++    }
++    size = 1 << size;
++
++    /* the bytes to transfer should be multiple of transaction size */
++    if (bytes % size) {
++        goto error;
++    }
++
++    /* inidate a DMA transfer is started */
++    s->chan[ch].state = DMA_CHAN_STATE_STARTED;
++    s->chan[ch].control |= CONTROL_CLAIM;
++    s->chan[ch].control &= ~CONTROL_DONE;
++    s->chan[ch].control &= ~CONTROL_ERR;
++
++    /* load the next_ registers into their exec_ counterparts */
++    s->chan[ch].exec_config = config;
++    s->chan[ch].exec_bytes = bytes;
++    s->chan[ch].exec_dst = dst;
++    s->chan[ch].exec_src = src;
++
++    for (n = 0; n < bytes / size; n++) {
++        cpu_physical_memory_read(s->chan[ch].exec_src, buf, size);
++        cpu_physical_memory_write(s->chan[ch].exec_dst, buf, size);
++        s->chan[ch].exec_src += size;
++        s->chan[ch].exec_dst += size;
++        s->chan[ch].exec_bytes -= size;
++    }
++
++    /* inidate a DMA transfer is done */
++    s->chan[ch].state = DMA_CHAN_STATE_DONE;
++    s->chan[ch].control &= ~CONTROL_CLAIM;
++    s->chan[ch].control &= ~CONTROL_RUN;
++    s->chan[ch].control |= CONTROL_DONE;
++
++    /* reload exec_ registers if repeat is required */
++    if (s->chan[ch].next_config & CONFIG_REPEAT) {
++        s->chan[ch].exec_bytes = bytes;
++        s->chan[ch].exec_dst = dst;
++        s->chan[ch].exec_src = src;
++    }
++
++    return;
++
++error:
++    s->chan[ch].state = DMA_CHAN_STATE_ERROR;
++    s->chan[ch].control |= CONTROL_ERR;
++    return;
++}
++
++static inline void mchp_pfsoc_dma_update_irq(MchpPfSoCDMAState *s, int ch)
++{
++    bool done_ie, err_ie;
++
++    done_ie = !!(s->chan[ch].control & CONTROL_DONE_IE);
++    err_ie = !!(s->chan[ch].control & CONTROL_ERR_IE);
++
++    /*
++     * Todo:
++     *
++     * It's unclear from the manual when the interrupt will be lowered.
++     * It might be that the ISR reads the status bits and writes 1 to clear,
++     * Right now there is no driver that uses ISR to validate this guess.
++     *
++     * Also the manual does not clear describe how the 2 interrupt lines
++     * are routed to PLIC hence we assume only 1 line for now.
++     */
++    if ((done_ie && (s->chan[ch].control & CONTROL_DONE)) ||
++        (err_ie && (s->chan[ch].control & CONTROL_ERR))) {
++        qemu_irq_raise(s->irq);
++    } else {
++        qemu_irq_lower(s->irq);
++    }
++
++    s->chan[ch].state = DMA_CHAN_STATE_IDLE;
++}
++
++static uint64_t mchp_pfsoc_dma_read(void *opaque, hwaddr offset, unsigned size)
++{
++    MchpPfSoCDMAState *s = opaque;
++    int no = MCHP_PFSOC_DMA_CHAN_NO(offset);
++    uint64_t val = 0;
++
++    if (no >= MCHP_PFSOC_DMA_CHANS) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid channel no %d\n",
++                      __func__, no);
++        return 0;
++    }
++
++    switch (offset) {
++    case DMA_CONTROL:
++        val = s->chan[no].control;
++        break;
++    case DMA_NEXT_CONFIG:
++        val = s->chan[no].next_config;
++        break;
++    case DMA_NEXT_BYTES:
++        val = s->chan[no].next_bytes;
++        break;
++    case DMA_NEXT_DST:
++        val = s->chan[no].next_dst;
++        break;
++    case DMA_NEXT_SRC:
++        val = s->chan[no].next_src;
++        break;
++    case DMA_EXEC_CONFIG:
++        val = s->chan[no].exec_config;
++        break;
++    case DMA_EXEC_BYTES:
++        val = s->chan[no].exec_bytes;
++        break;
++    case DMA_EXEC_DST:
++        val = s->chan[no].exec_dst;
++        break;
++    case DMA_EXEC_SRC:
++        val = s->chan[no].exec_src;
++        break;
++    default:
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: Bad offset 0x%" HWADDR_PRIX "\n",
++                      __func__, offset);
++        break;
++    }
++
++    return val;
++}
++
++static void mchp_pfsoc_dma_write(void *opaque, hwaddr offset,
++                                 uint64_t value, unsigned size)
++{
++    MchpPfSoCDMAState *s = opaque;
++    int no = MCHP_PFSOC_DMA_CHAN_NO(offset);
++
++    if (no >= MCHP_PFSOC_DMA_CHANS) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid channel no %d\n",
++                      __func__, no);
++        return;
++    }
++
++    switch (offset) {
++    case DMA_CONTROL:
++        s->chan[no].control = value;
++
++        if (value & CONTROL_CLAIM) {
++            s->chan[no].next_config = 0;
++            s->chan[no].next_bytes = 0;
++            s->chan[no].next_dst = 0;
++            s->chan[no].next_src = 0;
++            s->chan[no].control &= ~CONTROL_CLAIM;
++        }
++
++        if (value & CONTROL_RUN) {
++            mchp_pfsoc_dma_run(s, no);
++        }
++
++        mchp_pfsoc_dma_update_irq(s, no);
++        break;
++    case DMA_NEXT_CONFIG:
++        s->chan[no].next_config = value;
++        break;
++    case DMA_NEXT_BYTES:
++        s->chan[no].next_bytes = value;
++        break;
++    case DMA_NEXT_DST:
++        s->chan[no].next_dst = value;
++        break;
++    case DMA_NEXT_SRC:
++        s->chan[no].next_src = value;
++        break;
++    case DMA_EXEC_CONFIG:
++    case DMA_EXEC_BYTES:
++    case DMA_EXEC_DST:
++    case DMA_EXEC_SRC:
++        /* these are read-only registers */
++        break;
++    default:
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: Bad offset 0x%" HWADDR_PRIX "\n",
++                      __func__, offset);
++        break;
++    }
++}
++
++static const MemoryRegionOps mchp_pfsoc_dma_ops = {
++    .read = mchp_pfsoc_dma_read,
++    .write = mchp_pfsoc_dma_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    /* there are 32-bit and 64-bit wide registers */
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 8,
++    }
++};
++
++static void mchp_pfsoc_dma_realize(DeviceState *dev, Error **errp)
++{
++    MchpPfSoCDMAState *s = MCHP_PFSOC_DMA(dev);
++
++    memory_region_init_io(&s->iomem, OBJECT(dev), &mchp_pfsoc_dma_ops, s,
++                          "mchp.pfsoc.dma", MCHP_PFSOC_DMA_REG_SIZE);
++    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->iomem);
++    sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
++}
++
++static void mchp_pfsoc_dma_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++
++    dc->desc = "Microchip PolarFire SoC DMA controller";
++    dc->realize = mchp_pfsoc_dma_realize;
++}
++
++static const TypeInfo mchp_pfsoc_dma_info = {
++    .name          = TYPE_MCHP_PFSOC_DMA,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(MchpPfSoCDMAState),
++    .class_init    = mchp_pfsoc_dma_class_init,
++};
++
++static void mchp_pfsoc_dma_register_types(void)
++{
++    type_register_static(&mchp_pfsoc_dma_info);
++}
++
++type_init(mchp_pfsoc_dma_register_types)
+diff --git a/include/hw/dma/mchp_pfsoc_dma.h b/include/hw/dma/mchp_pfsoc_dma.h
+new file mode 100644
+index 0000000..e474f67
+--- /dev/null
++++ b/include/hw/dma/mchp_pfsoc_dma.h
+@@ -0,0 +1,57 @@
++/*
++ * Microchip PolarFire SoC DMA emulation
++ *
++ * Copyright (c) 2020 Wind River Systems, Inc.
++ *
++ * Author:
++ *   Bin Meng <bin.meng@windriver.com>
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 or
++ * (at your option) version 3 of the License.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program; if not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef MCHP_PFSOC_DMA_H
++#define MCHP_PFSOC_DMA_H
++
++struct mchp_pfsoc_dma_chan {
++    uint32_t control;
++    uint32_t next_config;
++    uint64_t next_bytes;
++    uint64_t next_dst;
++    uint64_t next_src;
++    uint32_t exec_config;
++    uint64_t exec_bytes;
++    uint64_t exec_dst;
++    uint64_t exec_src;
++    int state;
++};
++
++#define MCHP_PFSOC_DMA_CHANS        4
++#define MCHP_PFSOC_DMA_REG_SIZE     0x100000
++#define MCHP_PFSOC_DMA_CHAN_NO(reg) \
++        ((reg & (MCHP_PFSOC_DMA_REG_SIZE - 1)) >> 12)
++
++typedef struct MchpPfSoCDMAState {
++    SysBusDevice parent;
++    MemoryRegion iomem;
++    qemu_irq irq;
++
++    struct mchp_pfsoc_dma_chan chan[MCHP_PFSOC_DMA_CHANS];
++} MchpPfSoCDMAState;
++
++#define TYPE_MCHP_PFSOC_DMA "mchp.pfsoc.dma"
++
++#define MCHP_PFSOC_DMA(obj) \
++    OBJECT_CHECK(MchpPfSoCDMAState, (obj), TYPE_MCHP_PFSOC_DMA)
++
++#endif /* MCHP_PFSOC_DMA_H */
 -- 
 2.7.4
 
