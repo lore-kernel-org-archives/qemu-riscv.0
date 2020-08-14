@@ -1,73 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6cmW-0000mw-7W
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 12:42:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47524)
+	id 1k6dlJ-0004yh-9v
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 13:45:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33144)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k6cmU-0000ib-Fd; Fri, 14 Aug 2020 12:42:14 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:36508)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1k6dlH-0004y8-Ct
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2020 13:45:03 -0400
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:51117)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k6cmS-0002kz-NK; Fri, 14 Aug 2020 12:42:14 -0400
-Received: by mail-pl1-x642.google.com with SMTP id y6so4426733plt.3;
- Fri, 14 Aug 2020 09:42:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=oAXhBscEjBxoVrn8A4ECG0YzNXRBy4UTeqzsNHK0BBA=;
- b=TQMnCi1xj6ZpoMBiJKg820sA4hVaiNB/+DjxuyBAA+JeD1rCkFgxH88yQXl0avczYu
- RL/tCejW2kG7p+ufUJ824OylpE0GxVaOV5Bhcf9tbej1+4rneB3DGkqZ52p54eBLsVGl
- +jYx20dmmUxS3jTPjGqbLrTZeJczX3ujY9qPZUY4Qd3UU7ZYnDhhqMgIes0R2fwkGAZO
- YDe+jTTHN+a4KeE2QQodqdAah6B7Ogv1CL4ea1aeX1wjiwSrWzpvQ9FbwI4xirrGhhMj
- 2dMBf91Rik3+IbCUgH44mjjsYBLI0bPrDMLGx5Os+VyFmkBIPE7r/c1xSXviNQvBZMry
- DeWA==
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1k6dlE-0001qk-QO
+ for qemu-riscv@nongnu.org; Fri, 14 Aug 2020 13:45:03 -0400
+Received: by mail-wm1-x343.google.com with SMTP id c80so8144028wme.0
+ for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2020 10:44:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=f9+aDzu9oUPppk6ZVStJuzR6QVDfjB+EhDX+IpalXOs=;
+ b=FYt3HFrsFG9PWomUJNDrZFrzieZJARi79Ear4EAYooGo7cd6MCxgGRuRoXl4Vs8i/q
+ 2ZEJjpf4oVw2WjhzoaruFSIqcylfD/mVdWn09w1h0Pe81pOF532m9xDoDXoJCXk5snv5
+ 2AdA+TX685ProI7R5U8iPl8qG6lBqtvbWRA8wRROLcUfzVdqvtkhgh9QLigzIbKmVPNa
+ CV+gQ3jFseHw410lsLRQO1kKKIfsqe3j/0NmZYH1I1tFpFRVEZMPXbRaB0XIZv/LwVqI
+ GeQF8PCi6cg/nTaM8TAYKRUL38a6GFyxD60KtcJdzCCobPsUP4Wfp8dY1oSOtQcukwz+
+ P7mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=oAXhBscEjBxoVrn8A4ECG0YzNXRBy4UTeqzsNHK0BBA=;
- b=Rmeq/C9zIKyvfT/kvZqMXFVl45fpuwO47ctjzStTTr7d3tPBTz0mGr9gxyZrMYGcIi
- cHK+OGNAdzFSWVzvawfNUcds/m0SRcngtpJ1QAV7zS0eZUsZTYI1RzJy+fX7/mIly7/b
- b41RDac/wcHWFLvA+/Mqw+T0K2OY2LLK/Ay9JiKDOUXmbN7fXmgS6ZEaBcSp/fwTq6KZ
- L3Dv9lE3VRUqqo0VkWiTgt11RBJ8XzmjWTh0jok3mqMjPwEDR9mXvcdoXyLyXA/dwfis
- ncBhWIo768Ls08UhR4aPgwcTu318+l+vUDTPmFTrReB13jngW6xkpqpSsm6lgRG3MRQL
- kYkA==
-X-Gm-Message-State: AOAM531gVMzGSPYD2ld87UpRrQsawkR1Av2EB+9/PFhX51VJhJGpayEA
- OZAglUk8QKJnYQ+7+AfWThI=
-X-Google-Smtp-Source: ABdhPJxhVUGzR01RAsxsmyVaB4WwRX9+8to1XGZ7QMEAk5t3Nc6lTk1Qtgc1pMDn4pbeKz86fIaU1A==
-X-Received: by 2002:a17:90a:1fca:: with SMTP id
- z10mr2907301pjz.209.1597423330966; 
- Fri, 14 Aug 2020 09:42:10 -0700 (PDT)
-Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
- [147.11.146.144])
- by smtp.gmail.com with ESMTPSA id 16sm9836332pfi.161.2020.08.14.09.42.07
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 14 Aug 2020 09:42:10 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 18/18] hw/riscv: microchip_pfsoc: Document the software used
- for testing
-Date: Sat, 15 Aug 2020 00:40:56 +0800
-Message-Id: <1597423256-14847-19-git-send-email-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=f9+aDzu9oUPppk6ZVStJuzR6QVDfjB+EhDX+IpalXOs=;
+ b=T5XVZHW36/6rNl9KFbfU42SYynqdpK94uvOFi0Sx0HRx1zWEVGZ5VyDiqj4iYwPSmJ
+ uXycWaI6YqvuowBiqKpZV4T/5YvQr7LhSKR6BzxCPhh92eOXH07pkuN+sV0RuIr1Artv
+ he6A695wYSdT7VqtFWAK7fnS9CmBlS4OJ5wZQDUVpzk0Q9hXN0qcUZVnnI88WYfthygA
+ 1iy1+zvKUR/RoNNzuGanfTwsU/e7pTCseCay1HN3/f9An3gBeghF9cBwjEGUg7TryuD/
+ MgAWv8LsGpQixLIe4GV+epXkeYErnXKfu2zQn5SbJXxXPJta6cq5xN5Ri7WVHG9Lt7Yp
+ urSQ==
+X-Gm-Message-State: AOAM532ugHMEKvv8uLLEfNKLw1SQTNMWONfPJBzCaGpHSN4mlv40iCQi
+ 6d6oe+oL9RogCmhiU7mMnSlixFx8a18XQxqoxUEglw==
+X-Google-Smtp-Source: ABdhPJxrO5xkBAOSpO2oWrXPXSzq1oNb4b9bLjr+EazJKxVWmP8Q9D1U3UL3XkAfmy3tkMfJbIvWAnlCj+jqo+fMW9c=
+X-Received: by 2002:a1c:6689:: with SMTP id a131mr3318205wmc.157.1597427098082; 
+ Fri, 14 Aug 2020 10:44:58 -0700 (PDT)
+MIME-Version: 1.0
 References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::642;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x642.google.com
+In-Reply-To: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Fri, 14 Aug 2020 23:14:46 +0530
+Message-ID: <CAAhSdy2D=TcENAJDja4r6pnhz0LRi-T+A9k3Btrs_EuB4x0e4w@mail.gmail.com>
+Subject: Re: [PATCH 00/18] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
+ board support
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ QEMU Developers <qemu-devel@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Alistair Francis <alistair@alistair23.me>, qemu-block@nongnu.org, 
+ Jason Wang <jasowang@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-arm@nongnu.org, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: none client-ip=2a00:1450:4864:20::343;
+ envelope-from=anup@brainfault.org; helo=mail-wm1-x343.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,63 +85,169 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2020 16:42:15 -0000
+X-List-Received-Date: Fri, 14 Aug 2020 17:45:03 -0000
 
-From: Bin Meng <bin.meng@windriver.com>
+On Fri, Aug 14, 2020 at 10:12 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> This adds support for Microchip PolarFire SoC Icicle Kit board.
+> The Icicle Kit board integrates a PolarFire SoC, with one SiFive's
+> E51 plus four U54 cores and many on-chip peripherals and an FPGA.
 
-Add some useful comments to document the software used for testing.
-including how to patch HSS to bypass the DDR memory initialization,
-HSS and Yocto BSP build instructions, etc.
+Nice Work !!! This is very helpful.
 
-To launch this machine for testing:
-$ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
-    -bios path/to/hss.bin -sd path/to/sdcard.img \
-    -nic user,model=cadence_gem \
-    -nic tap,ifname=tap,model=cadence_gem \
-    -display none -serial stdio \
-    -chardev socket,id=serial1,path=serial1.sock,server,wait \
-    -serial chardev:serial1
+>
+> For more details about Microchip PolarFire Soc, please see:
+> https://www.microsemi.com/product-directory/soc-fpgas/5498-polarfire-soc-fpga
+>
+> The Icicle Kit board information can be found here:
+> https://www.microsemi.com/existing-parts/parts/152514
+>
+> Unlike SiFive FU540, the RISC-V core resect vector is at 0x20220000.
+> The RISC-V CPU and HART codes has been updated to set the core's
+> reset vector based on a configurable property from machine codes.
+>
+> The following perepherals are created as an unimplemented device:
+>
+> - Bus Error Uint 0/1/2/3/4
+> - L2 cache controller
+> - SYSREG
+> - MPUCFG
+> - IOSCBCFG
+> - GPIO
+>
+> The following perepherals are emulated:
+> - SiFive CLINT
+> - SiFive PLIC
+> - PolarFire SoC Multi-Mode UART
+> - PolarFire SoC DMA
+> - Cadence eMMC/SDHCI controller
+> - Cadence Gigabit Ethernet MAC
+>
+> Some bugs in the SD card codes are fixed during the development.
+>
+> The BIOS image used by this machine is hss.bin, aka Hart Software
+> Services, which can be built from:
+> https://github.com/polarfire-soc/hart-software-services
+>
+> To launch this machine:
+> $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
+>     -bios path/to/hss.bin -sd path/to/sdcard.img \
+>     -nic tap,ifname=tap,script=no,model=cadence_gem \
+>     -display none -serial stdio \
+>     -chardev socket,id=serial1,path=serial1.sock,server,wait \
+>     -serial chardev:serial1
 
-Signed-off-by: Bin Meng <bin.meng@windriver.com>
+Currently, it is fine to use HSS (with OpenSBI v0.6 as a library) but
+this is not aligned with the existing booting flow of many RISC-V
+systems.
 
----
+It will be nice to have standard U-Boot RISC-V boot-flow working
+on Microchip PolarFire SoC:
+U-Boot SPL (BIOS) => FW_DYNAMIC (Generic) => U-Boot S-mode
 
- hw/riscv/microchip_pfsoc.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+The Microchip HSS is quite convoluted. It has:
+1. DDR Init
+2. Boot device support
+3. SBI support using OpenSBI as library
+4. Simple TEE support
 
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index e8b7f86..1575fef 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -56,6 +56,27 @@
- /*
-  * The BIOS image used by this machine is called Hart Software Services (HSS).
-  * See https://github.com/polarfire-soc/hart-software-services
-+ *
-+ * As of now the DDR memory controller in the Microchip PolarFire SoC has not
-+ * been modeled. Simply creating unimplemented devices does not make HSS happy.
-+ * Emulating the DDR memory controller is tedious, so a patched HSS should be
-+ * used as the BIOS for this machine.
-+ *
-+ * To patch HSS, open boards/icicle-kit-es/hss_board_init.c in the HSS source
-+ * tree, find the boardInitFunctions[] array that contains the initialization
-+ * routines for this board, and remove the line that contains 'HSS_DDRInit'.
-+ *
-+ * QEMU does not support eMMC hence the SD configuration shall be used in the
-+ * HSS and Yocto BSP build. The eMMC configuration is not supported.
-+ *
-+ * Instructions to build HSS:
-+ *   $ cp boards/icicle-kit-es/def_config.sdcard .config
-+ *   $ make BOARD=icicle-kit-es
-+ *
-+ * For Yocto build, "MACHINE=icicle-kit-es-sd" should be specified, otherwise
-+ * when booting Linux kernel the rootfs cannot be mounted. The generated image
-+ * is something like: mpfs-dev-cli-icicle-kit-es-sd.rootfs.wic. Resize the file
-+ * with 'qemu-image' to a power of 2 before passing to QEMU '-sd' command line.
-  */
- #define BIOS_FILENAME   "hss.bin"
- #define RESET_VECTOR    0x20220000
--- 
-2.7.4
+I think point 1) and 2) above should be part of U-Boot SPL.
+The point 3) can be OpenSBI FW_DYNAMIC.
 
+Lastly,for point 4), we are working on a new OpenSBI feature using
+which we can run independent Secure OS and Non-Secure OS using
+U-Boot_SPL+OpenSBI (for both SiFive Unleashed and Microchip
+PolarFire).
+
+Do you have plans for adding U-Boot SPL support for this board ??
+
+Regards,
+Anup
+
+>
+> The memory is set to 1 GiB by default to match the hardware.
+> A sanity check on ram size is performed in the machine init routine
+> to prompt user to increase the RAM size to > 1 GiB when less than
+> 1 GiB ram is detected.
+>
+> HSS output is on the first serial port (stdio) and U-Boot/Linux
+> outputs on the 2nd serial port. OpenSBI outputs on a random serial
+> port due to the lottery mechanism used during the multi-core boot.
+>
+>
+> Bin Meng (18):
+>   target/riscv: cpu: Add a new 'resetvec' property
+>   hw/riscv: hart: Add a new 'resetvec' property
+>   target/riscv: cpu: Set reset vector based on the configured property
+>     value
+>   hw/riscv: Initial support for Microchip PolarFire SoC Icicle Kit board
+>   hw/char: Add Microchip PolarFire SoC MMUART emulation
+>   hw/riscv: microchip_pfsoc: Connect 5 MMUARTs
+>   hw/sd: sd: Fix incorrect populated function switch status data
+>     structure
+>   hw/sd: sd: Correctly set the high capacity bit
+>   hw/sd: sdhci: Make sdhci_poweron_reset() internal visible
+>   hw/sd: Add Cadence SDHCI emulation
+>   hw/riscv: microchip_pfsoc: Connect a Cadence SDHCI controller and an
+>     SD card
+>   hw/dma: Add Microchip PolarFire Soc DMA controller emulation
+>   hw/riscv: microchip_pfsoc: Connect a DMA controller
+>   hw/net: cadence_gem: Add a new 'phy-addr' property
+>   hw/riscv: microchip_pfsoc: Connect 2 Cadence GEMs
+>   hw/riscv: microchip_pfsoc: Hook GPIO controllers
+>   hw/riscv: clint: Avoid using hard-coded timebase frequency
+>   hw/riscv: microchip_pfsoc: Document the software used for testing
+>
+>  MAINTAINERS                         |  11 +
+>  default-configs/riscv64-softmmu.mak |   1 +
+>  hw/char/Kconfig                     |   3 +
+>  hw/char/Makefile.objs               |   1 +
+>  hw/char/mchp_pfsoc_mmuart.c         |  82 +++++++
+>  hw/dma/Kconfig                      |   3 +
+>  hw/dma/Makefile.objs                |   1 +
+>  hw/dma/mchp_pfsoc_dma.c             | 322 +++++++++++++++++++++++++
+>  hw/net/cadence_gem.c                |   7 +-
+>  hw/riscv/Kconfig                    |   9 +
+>  hw/riscv/Makefile.objs              |   1 +
+>  hw/riscv/microchip_pfsoc.c          | 456 ++++++++++++++++++++++++++++++++++++
+>  hw/riscv/opentitan.c                |   1 +
+>  hw/riscv/riscv_hart.c               |   3 +
+>  hw/riscv/sifive_clint.c             |  25 +-
+>  hw/riscv/sifive_e.c                 |   4 +-
+>  hw/riscv/sifive_u.c                 |   5 +-
+>  hw/riscv/spike.c                    |   2 +-
+>  hw/riscv/virt.c                     |   3 +-
+>  hw/sd/Kconfig                       |   4 +
+>  hw/sd/Makefile.objs                 |   1 +
+>  hw/sd/cadence_sdhci.c               | 162 +++++++++++++
+>  hw/sd/sd.c                          |   8 +-
+>  hw/sd/sdhci-internal.h              |   1 +
+>  hw/sd/sdhci.c                       |   2 +-
+>  include/hw/char/mchp_pfsoc_mmuart.h |  61 +++++
+>  include/hw/dma/mchp_pfsoc_dma.h     |  57 +++++
+>  include/hw/net/cadence_gem.h        |   2 +
+>  include/hw/riscv/microchip_pfsoc.h  | 125 ++++++++++
+>  include/hw/riscv/riscv_hart.h       |   1 +
+>  include/hw/riscv/sifive_clint.h     |   3 +-
+>  include/hw/sd/cadence_sdhci.h       |  65 +++++
+>  target/riscv/cpu.c                  |   8 +-
+>  target/riscv/cpu.h                  |   7 +-
+>  target/riscv/cpu_helper.c           |   4 +-
+>  target/riscv/csr.c                  |   4 +-
+>  36 files changed, 1424 insertions(+), 31 deletions(-)
+>  create mode 100644 hw/char/mchp_pfsoc_mmuart.c
+>  create mode 100644 hw/dma/mchp_pfsoc_dma.c
+>  create mode 100644 hw/riscv/microchip_pfsoc.c
+>  create mode 100644 hw/sd/cadence_sdhci.c
+>  create mode 100644 include/hw/char/mchp_pfsoc_mmuart.h
+>  create mode 100644 include/hw/dma/mchp_pfsoc_dma.h
+>  create mode 100644 include/hw/riscv/microchip_pfsoc.h
+>  create mode 100644 include/hw/sd/cadence_sdhci.h
+>
+> --
+> 2.7.4
+>
+>
 
