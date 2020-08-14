@@ -1,46 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6cla-0006wd-Bs
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 12:41:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47064)
+	id 1k6clc-000703-La
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 12:41:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47076)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k6clW-0006uG-Jn; Fri, 14 Aug 2020 12:41:15 -0400
-Received: from mail-pj1-x1043.google.com ([2607:f8b0:4864:20::1043]:52749)
+ id 1k6clY-0006vX-Hf; Fri, 14 Aug 2020 12:41:16 -0400
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:50232)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1k6clS-0002cV-UD; Fri, 14 Aug 2020 12:41:14 -0400
-Received: by mail-pj1-x1043.google.com with SMTP id kr4so4664919pjb.2;
- Fri, 14 Aug 2020 09:41:08 -0700 (PDT)
+ id 1k6clW-0002cs-3j; Fri, 14 Aug 2020 12:41:15 -0400
+Received: by mail-pj1-x1042.google.com with SMTP id e4so4673410pjd.0;
+ Fri, 14 Aug 2020 09:41:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=+KRD7ihJuTfMxHUh2Xl9h6Z1MtH7Mi0HFpkbylrs4Es=;
- b=pbuuLfhz6VT+CY2YWHw7MLjevxsOOGmcmzhC+EAbwDKV8NO+bo6nKIopUV79UQvrM/
- 8cs7ocIX02QpUJSg99BjCcojQ/RfbfHqqjHSGsHlmcaFaU4QiuAK7rE0GJsdhqc8tSlH
- l9wNUaP1lNz0OpUH6c4Vhwql3UZE/9xaoIauE5FynAQCSQPhv6OULPkmhvqskml+a1BN
- cbtT1oQc2tyKyMNQq0T8kJfJTax/wskXlU4LDEv3L1xJKO6hooK3XwkBDrhEYNGd31gE
- VJwxvDFZaUkq8KZR/kpTmV73UP9eSvqFYvJ0XtNXItxn3o8z5vx4BnTU0UfKwXnNHZRs
- 679w==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=lKUs7RsfnQHorD24cOgxBvy/CDttu+urOseKddDE6Ek=;
+ b=LR6kurrOlFO0Rx3THi+2AlQha+YhDd9sVvQyOSSSKfMkf4nRrmBXFnB3bWDkyYMiCv
+ O6sNKOth7zNiNyagGkaiEE2QHxoEKMjH6iLXz/7bIBG068DK8HBcLPMYxNhGyneyyG0c
+ y8uP9GVSkAgXQXhYmIDZcwk+BLKi9/buMoQr2lynb5QeTOi2tf26cPjJbLI2SG673zG7
+ M0groblXZQAN276rjt7ct/jXbvSFIpm7TLdlauM9w+8rCPWyhLqBoZbgfRXcT16DI1jW
+ VjAfSLEWzdpCQVAPOtBYT2Lu0VL5b6KovOleuJsGudKVHhvbzNYR0vWdyRcz6inHmVtz
+ /FkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=+KRD7ihJuTfMxHUh2Xl9h6Z1MtH7Mi0HFpkbylrs4Es=;
- b=Z+FOXpgbL6MEFsHqxazfPOp0PD4lFUf+9eA4GQTuznC9hw8+Q7XcDlrueOazkC5KAu
- h4gx7uYtjD/b9Tj9MaAsWKwoCLu47gdybdalLHTYzgxF9huIXbca2LoPJQ3713ZOBcSD
- CPFWJjqgkuhe0e/fOn/0Oat6/WM1jpXbfJhPJCLBCnJeWBcdn7M1MdtGAiBQyBfQUYVE
- 8+piJMCnq0AbvLZfE6IONM9fj0VIDqPHRHyUxscS45WHm5WJZ5TI9Lu2EsB2XZRXKmu9
- tpaa/jTt0aDYS29rc0GqZewrU5LP4YVDhYKbqsF8mSaSpbsU9uTEe5mQ7/Eau97xZYEW
- LLtQ==
-X-Gm-Message-State: AOAM531cT4Ji+WxYjmrk+VXvPE5q6meXSAOQWYKHWXRUorCm+Wzqq5/P
- mSrDoeknU10xDKEE78sYPhE=
-X-Google-Smtp-Source: ABdhPJyHZ4Zmj1kNGL+Fn4khBAovJHAiEv7cLlq+sPYsNErspMDOQeExkbeDfRfTsty+99l/sdeQfA==
-X-Received: by 2002:a17:90b:1254:: with SMTP id
- gx20mr3116424pjb.117.1597423267836; 
- Fri, 14 Aug 2020 09:41:07 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=lKUs7RsfnQHorD24cOgxBvy/CDttu+urOseKddDE6Ek=;
+ b=dAf4KhVUN01BqBukuas7JgoqJVNqoA8V01IyjBVhGCQwtgxB+/K/UTYlg42HTcP+0g
+ E1rpgcmR+cREDAvssrSbsKTLBTO5R97JkYtoka6G9KtMWvdEf9izwbLVD3wqGQKKM3xV
+ jOSObRUwVjIsvW5QGLPkUx0zXjwFIuqPIYplCe8oa86lUzUoU4/ESZkTbK8YRxo7LnRu
+ l4Z8JwwvZuszlrbqRG04y7LCNXs81OsTQHKWybyLL6j2mcgrfGALM2gqi+sZ9PH63Jg3
+ XTT3S2pGAOdHzPCvDyxpmccC2L5J29IRBDBnFkW2c1XhmNeOvR3YUpHYMiacdphrTOm7
+ /JIA==
+X-Gm-Message-State: AOAM532BE8N3ltjZeZ/iEfXw9JAiV0JMx07ZRSgVo4r+Ui3+yHsGZ0Ki
+ Dx44zbHhOD9VmXYDFaVlG9w=
+X-Google-Smtp-Source: ABdhPJwVVNRQJZDzxzOwpMBPVLYtDEeQGRjbkSqFaWHEsxlMNn7RfFoZJU7OhiCer1XE2ZUtb7eyeQ==
+X-Received: by 2002:a17:902:9883:: with SMTP id
+ s3mr2551764plp.271.1597423271182; 
+ Fri, 14 Aug 2020 09:41:11 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
  [147.11.146.144])
- by smtp.gmail.com with ESMTPSA id 16sm9836332pfi.161.2020.08.14.09.41.03
+ by smtp.gmail.com with ESMTPSA id 16sm9836332pfi.161.2020.08.14.09.41.08
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 14 Aug 2020 09:41:07 -0700 (PDT)
+ Fri, 14 Aug 2020 09:41:10 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -48,21 +49,15 @@ To: Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <alistair@alistair23.me>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Jason Wang <jasowang@redhat.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- qemu-arm@nongnu.org, qemu-block@nongnu.org
-Subject: [PATCH 00/18] hw/riscv: Add Microchip PolarFire SoC Icicle Kit board
- support
-Date: Sat, 15 Aug 2020 00:40:38 +0800
-Message-Id: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
+	Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH 01/18] target/riscv: cpu: Add a new 'resetvec' property
+Date: Sat, 15 Aug 2020 00:40:39 +0800
+Message-Id: <1597423256-14847-2-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1043;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1043.google.com
+In-Reply-To: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
+References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1042;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1042.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -70,8 +65,8 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,134 +79,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2020 16:41:16 -0000
+X-List-Received-Date: Fri, 14 Aug 2020 16:41:17 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-This adds support for Microchip PolarFire SoC Icicle Kit board.
-The Icicle Kit board integrates a PolarFire SoC, with one SiFive's
-E51 plus four U54 cores and many on-chip peripherals and an FPGA.
+Currently the reset vector address is hard-coded in a RISC-V CPU's
+instance_init() routine. In a real world we can have 2 exact same
+CPUs except for the reset vector address, which is pretty common in
+the RISC-V core IP licensing business.
 
-For more details about Microchip PolarFire Soc, please see:
-https://www.microsemi.com/product-directory/soc-fpgas/5498-polarfire-soc-fpga
+Normally reset vector address is a configurable parameter. Let's
+create a 64-bit property to store the reset vector address which
+covers both 32-bit and 64-bit CPUs.
 
-The Icicle Kit board information can be found here:
-https://www.microsemi.com/existing-parts/parts/152514
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+---
 
-Unlike SiFive FU540, the RISC-V core resect vector is at 0x20220000.
-The RISC-V CPU and HART codes has been updated to set the core's
-reset vector based on a configurable property from machine codes.
+ target/riscv/cpu.c | 1 +
+ target/riscv/cpu.h | 1 +
+ 2 files changed, 2 insertions(+)
 
-The following perepherals are created as an unimplemented device:
-
-- Bus Error Uint 0/1/2/3/4
-- L2 cache controller
-- SYSREG
-- MPUCFG
-- IOSCBCFG
-- GPIO
-
-The following perepherals are emulated:
-- SiFive CLINT
-- SiFive PLIC
-- PolarFire SoC Multi-Mode UART
-- PolarFire SoC DMA
-- Cadence eMMC/SDHCI controller
-- Cadence Gigabit Ethernet MAC
-
-Some bugs in the SD card codes are fixed during the development.
-
-The BIOS image used by this machine is hss.bin, aka Hart Software
-Services, which can be built from:
-https://github.com/polarfire-soc/hart-software-services
-
-To launch this machine:
-$ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
-    -bios path/to/hss.bin -sd path/to/sdcard.img \
-    -nic tap,ifname=tap,script=no,model=cadence_gem \
-    -display none -serial stdio \
-    -chardev socket,id=serial1,path=serial1.sock,server,wait \
-    -serial chardev:serial1
-
-The memory is set to 1 GiB by default to match the hardware.
-A sanity check on ram size is performed in the machine init routine
-to prompt user to increase the RAM size to > 1 GiB when less than
-1 GiB ram is detected.
-
-HSS output is on the first serial port (stdio) and U-Boot/Linux
-outputs on the 2nd serial port. OpenSBI outputs on a random serial
-port due to the lottery mechanism used during the multi-core boot.
-
-
-Bin Meng (18):
-  target/riscv: cpu: Add a new 'resetvec' property
-  hw/riscv: hart: Add a new 'resetvec' property
-  target/riscv: cpu: Set reset vector based on the configured property
-    value
-  hw/riscv: Initial support for Microchip PolarFire SoC Icicle Kit board
-  hw/char: Add Microchip PolarFire SoC MMUART emulation
-  hw/riscv: microchip_pfsoc: Connect 5 MMUARTs
-  hw/sd: sd: Fix incorrect populated function switch status data
-    structure
-  hw/sd: sd: Correctly set the high capacity bit
-  hw/sd: sdhci: Make sdhci_poweron_reset() internal visible
-  hw/sd: Add Cadence SDHCI emulation
-  hw/riscv: microchip_pfsoc: Connect a Cadence SDHCI controller and an
-    SD card
-  hw/dma: Add Microchip PolarFire Soc DMA controller emulation
-  hw/riscv: microchip_pfsoc: Connect a DMA controller
-  hw/net: cadence_gem: Add a new 'phy-addr' property
-  hw/riscv: microchip_pfsoc: Connect 2 Cadence GEMs
-  hw/riscv: microchip_pfsoc: Hook GPIO controllers
-  hw/riscv: clint: Avoid using hard-coded timebase frequency
-  hw/riscv: microchip_pfsoc: Document the software used for testing
-
- MAINTAINERS                         |  11 +
- default-configs/riscv64-softmmu.mak |   1 +
- hw/char/Kconfig                     |   3 +
- hw/char/Makefile.objs               |   1 +
- hw/char/mchp_pfsoc_mmuart.c         |  82 +++++++
- hw/dma/Kconfig                      |   3 +
- hw/dma/Makefile.objs                |   1 +
- hw/dma/mchp_pfsoc_dma.c             | 322 +++++++++++++++++++++++++
- hw/net/cadence_gem.c                |   7 +-
- hw/riscv/Kconfig                    |   9 +
- hw/riscv/Makefile.objs              |   1 +
- hw/riscv/microchip_pfsoc.c          | 456 ++++++++++++++++++++++++++++++++++++
- hw/riscv/opentitan.c                |   1 +
- hw/riscv/riscv_hart.c               |   3 +
- hw/riscv/sifive_clint.c             |  25 +-
- hw/riscv/sifive_e.c                 |   4 +-
- hw/riscv/sifive_u.c                 |   5 +-
- hw/riscv/spike.c                    |   2 +-
- hw/riscv/virt.c                     |   3 +-
- hw/sd/Kconfig                       |   4 +
- hw/sd/Makefile.objs                 |   1 +
- hw/sd/cadence_sdhci.c               | 162 +++++++++++++
- hw/sd/sd.c                          |   8 +-
- hw/sd/sdhci-internal.h              |   1 +
- hw/sd/sdhci.c                       |   2 +-
- include/hw/char/mchp_pfsoc_mmuart.h |  61 +++++
- include/hw/dma/mchp_pfsoc_dma.h     |  57 +++++
- include/hw/net/cadence_gem.h        |   2 +
- include/hw/riscv/microchip_pfsoc.h  | 125 ++++++++++
- include/hw/riscv/riscv_hart.h       |   1 +
- include/hw/riscv/sifive_clint.h     |   3 +-
- include/hw/sd/cadence_sdhci.h       |  65 +++++
- target/riscv/cpu.c                  |   8 +-
- target/riscv/cpu.h                  |   7 +-
- target/riscv/cpu_helper.c           |   4 +-
- target/riscv/csr.c                  |   4 +-
- 36 files changed, 1424 insertions(+), 31 deletions(-)
- create mode 100644 hw/char/mchp_pfsoc_mmuart.c
- create mode 100644 hw/dma/mchp_pfsoc_dma.c
- create mode 100644 hw/riscv/microchip_pfsoc.c
- create mode 100644 hw/sd/cadence_sdhci.c
- create mode 100644 include/hw/char/mchp_pfsoc_mmuart.h
- create mode 100644 include/hw/dma/mchp_pfsoc_dma.h
- create mode 100644 include/hw/riscv/microchip_pfsoc.h
- create mode 100644 include/hw/sd/cadence_sdhci.h
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 228b9bd..8067a26 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -518,6 +518,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
++    DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index a804a5d..d34bcfa 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -291,6 +291,7 @@ typedef struct RISCVCPU {
+         uint16_t elen;
+         bool mmu;
+         bool pmp;
++        uint64_t resetvec;
+     } cfg;
+ } RISCVCPU;
+ 
 -- 
 2.7.4
 
