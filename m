@@ -1,85 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6yg0-0003lo-PE
-	for mharc-qemu-riscv@gnu.org; Sat, 15 Aug 2020 12:05:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55204)
+	id 1k6ypp-0008Ti-Hr
+	for mharc-qemu-riscv@gnu.org; Sat, 15 Aug 2020 12:15:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58298)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k6yfy-0003ja-Jx
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2020 12:04:58 -0400
-Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:40061)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1k6ypn-0008RU-D3; Sat, 15 Aug 2020 12:15:07 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:34424)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k6yfw-0001sa-Tx
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2020 12:04:58 -0400
-Received: by mail-io1-xd2f.google.com with SMTP id b17so13586951ion.7
- for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2020 09:04:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1k6ypl-0003Ba-WD; Sat, 15 Aug 2020 12:15:07 -0400
+Received: by mail-wr1-x444.google.com with SMTP id f7so10929295wrw.1;
+ Sat, 15 Aug 2020 09:15:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=FI/r/KPM3NamuEvu+F9mW+RliiWbhgVxKmNTvx6BQcc=;
- b=tY8QGWDcFtWOVpQJZV0liCOS04JLlmA+FB8vkBPVaUAkjzJWRbZ+qL2u8k2wtCWGTp
- 3YdCfIr+k6HZxtWNVQ1Egi7Mofiq82yxK1dIRNgxayxrq7r3UonSJFfy7YhEcpRkw5pP
- s+lIXKL43zbsR5402wVvQ90q/01MmwnBnMOLGgtAtKaSxq8WWNtfCJDUjNVbX8dknKBr
- sjO+74OkbcioE/8OP1ORS0oKdzw6dw9FxybxOeXfdCE6tJZhU7ZxAeztbln9EkPYcbRG
- bTkf2LP0LntNX0xEnlU5NecLQxpUS1GWU399tE940judQvptUKW+d4lwnpHiqPfLGreb
- IF4w==
+ bh=nSrc/lb9fkx3CNfm+ox5hrRtqhW1/GlYoh+C1KHuZYA=;
+ b=AKcdzNq5HaZXLkcZYpCBtPQrKMtWcq7VMs35+4fu+28ojUJtOnkSSpWEc1SfMtjIXh
+ x8NF553TYXqJ6hyEscbcBeJdQDNyvOanYh5UJhwGt8pwOdf/WqTUdZRT8WbhJVawkRTH
+ wwj1fh03NdJ3wbcZKtomOsXW38ZmUsylgMRcbbwaULUX4t2b4yjUUI7wUjvjHRgwSpSE
+ U+Lbe83bI1VlY7VoxEOmKrlEq/EvO3T/n1nHuTVYxnDZb7bDqVUsxWMXY0fNK6PIg6sW
+ kPT1F9xnlj19qRULbpU4nAHAUra2ANkhSCEkHxDTWTSli4si/eF34a41SxIrUthWeHBv
+ w3kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=FI/r/KPM3NamuEvu+F9mW+RliiWbhgVxKmNTvx6BQcc=;
- b=gW9SsZmWcHjZ4t52oacACryUY7+YPjd+rCVOcRxzchUQuEaGSDGoYZGCZSTW4O2ElB
- YrpVtAeq/i0kgyuyddm9iCqhzKhOSi8uqGd+EkCHywJU8MfGoVF4EAlxU2l3+UlQVx1H
- HgMg8D91pozfZrA0fP78n/YEn/BVAGb+XdRPrOTzg9i5e7FhtRsOlj5fZypxBPFGx9aE
- oFqzqY8taELFC22tMBJmT1sPmpZkYRtkbT/x6Q587GfkdqYX509/H+jcx7bRGl6W7Xf+
- aTORutTqSbHk/eqNoo8/Gfbgz9iCv3VfRL6Da4aTvI6/rzmpwMDCkLBoQNvS5K3986Rf
- aFkg==
-X-Gm-Message-State: AOAM531m+aezhtuPYjkFMj02L7R793ZPwdVQUKEjVR9c+VGYIFeKDJYh
- a4pXt3Tq9p0tbrXHHhVht5OItIAHnaQn1w==
-X-Google-Smtp-Source: ABdhPJw0LwMD3EbR1FBKH852hmnoFvx+VhSkX3kEnC3/GndsGW0vzotWC3zGi6/oUfpLjWlwj3q9YQ==
-X-Received: by 2002:a63:1a66:: with SMTP id a38mr3737132pgm.253.1597469360358; 
- Fri, 14 Aug 2020 22:29:20 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id v78sm11468635pfc.121.2020.08.14.22.29.19
+ bh=nSrc/lb9fkx3CNfm+ox5hrRtqhW1/GlYoh+C1KHuZYA=;
+ b=TrEicz/8KuIPpR+fGYmGb4296YT7mswCSQU14pQwR1W0titAGctW41ENztkzElxEIf
+ DdTQBUPs0CBasjqCnXqT+/wmB2Sy6VijcRgsMupGtPkLWQRFdCNsCpcHsNrrxR1QKgEc
+ VR8dv9ZUb/aqT+DpgRTkqvUYprdv8Aybyq9ATt4vZO4ch1//Pn4F6bpF/dwlbiz+2ToQ
+ JgJMgggBl2OADqQRVOqJrZauv+PsusvzJEGOUe64IJ/Av1ZsMoLGVH0CwfOLwS6Sg/a4
+ XDBBkiMX2TtfTBdBdSkIIzldHbVaSz+g7MFOuKGk8Wqu6BCFWg0kZGKGbqcVUzLEq/Il
+ titw==
+X-Gm-Message-State: AOAM533RJxhZjHEzX8eYQsXCTvAw0RS5b5+PHnk1JlefRIsj2B4uAtup
+ FKdk1OgUxS72Scq/TjYrUXJZaCTkWE0=
+X-Google-Smtp-Source: ABdhPJwF/U0O3qXjFbyal5jme90ZU0vTSSux9BYEgGksdFa3QUEmLTbb+wFj3JmG6ilxi+59FKRX5Q==
+X-Received: by 2002:a5d:610a:: with SMTP id v10mr5870342wrt.8.1597478332238;
+ Sat, 15 Aug 2020 00:58:52 -0700 (PDT)
+Received: from [192.168.1.36] (121.red-81-40-121.staticip.rima-tde.net.
+ [81.40.121.121])
+ by smtp.gmail.com with ESMTPSA id n11sm14558612wmi.15.2020.08.15.00.58.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 Aug 2020 22:29:19 -0700 (PDT)
-Subject: Re: [RFC v3 26/71] target/riscv: rvv-1.0: update vext_max_elems() for
- load/store insns
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-References: <20200806104709.13235-1-frank.chang@sifive.com>
- <20200806104709.13235-27-frank.chang@sifive.com>
- <90f01984-54a4-2a56-c52f-d1f4332b39d4@linaro.org>
- <CAE_xrPiJRRV3FYtfve6LMOF6LNEYGfhmi9CiabxqUBEew9igLg@mail.gmail.com>
- <5706a1ca-1dd9-22cd-08ce-c70780111bfc@linaro.org>
- <CAE_xrPgSbzzJqHYTeSND4wQDJUMoMYPmmcH97VE6hRcxh2S54A@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <de85d715-924a-8156-7424-5c35fd585fb3@linaro.org>
-Date: Fri, 14 Aug 2020 22:29:17 -0700
+ Sat, 15 Aug 2020 00:58:51 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH 07/18] hw/sd: sd: Fix incorrect populated function switch
+ status data structure
+To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Sai Pavan Boddu <saipava@xilinx.com>
+Cc: Bin Meng <bin.meng@windriver.com>, qemu-block@nongnu.org
+References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
+ <1597423256-14847-8-git-send-email-bmeng.cn@gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <565d9936-3eda-db2f-b390-05f675cf6644@amsat.org>
+Date: Sat, 15 Aug 2020 09:58:50 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <CAE_xrPgSbzzJqHYTeSND4wQDJUMoMYPmmcH97VE6hRcxh2S54A@mail.gmail.com>
+In-Reply-To: <1597423256-14847-8-git-send-email-bmeng.cn@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
- envelope-from=richard.henderson@linaro.org; helo=mail-io1-xd2f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::444;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x444.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_score_int: 0
+X-Spam_score: 0.0
+X-Spam_bar: /
+X-Spam_report: (0.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=1, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -92,25 +88,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2020 16:04:58 -0000
+X-List-Received-Date: Sat, 15 Aug 2020 16:15:07 -0000
 
-On 8/14/20 7:52 PM, Frank Chang wrote:
->     probe_pages(env, base + stride * i, nf * esz, ra, access_type);
-> and
->     target_ulong addr = base + stride * i + k * esz;
++Sai Pavan
+
+On 8/14/20 6:40 PM, Bin Meng wrote:
+> From: Bin Meng <bin.meng@windriver.com>
 > 
-> If we pass ctzl(sizeof(type)) in GEN_VEXT_LD_STRIDE(),
-> I would still have to do: (1 << esz) to get the correct element size in the
-> above calculations.
-> Would it eliminate the performance gain we have in vext_max_elems() instead?
+> At present the function switch status data structure bit [399:376]
+> are wrongly pupulated. These 3 bytes encode function switch status
+> for the 6 function groups, with 4 bits per group, starting from
+> function group 6 at bit 399, then followed by function group 5 at
+> bit 395, and so on.
+> 
+> However the codes mistakenly fills in the function group 1 status
+> at bit 399. This fixes the code logic.
+> 
 
-Well, no, it will improve performance, because you'll write
+Fixes: a1bb27b1e9 ("SD card emulation (initial implementation)")
 
-  addr = base + stride * i + (k << esz)
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> ---
+> 
+>  hw/sd/sd.c | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/hw/sd/sd.c b/hw/sd/sd.c
+> index fad9cf1..51f5900 100644
+> --- a/hw/sd/sd.c
+> +++ b/hw/sd/sd.c
+> @@ -806,11 +806,15 @@ static void sd_function_switch(SDState *sd, uint32_t arg)
+>      sd->data[11] = 0x43;
+>      sd->data[12] = 0x80;	/* Supported group 1 functions */
+>      sd->data[13] = 0x03;
+> +
+> +    sd->data[14] = 0;
+> +    sd->data[15] = 0;
+> +    sd->data[16] = 0;
 
-I.e. strength-reduce the multiply to a shift.
+Pointless zero initialization.
 
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
-r~
+I'll wait until next week in case Sai Pavan wants to test this
+patch (I don't have access to the Xilinx images anymore) then
+I'll queue this via my sd-next tree.
+
+Regards,
+
+Phil.
+
+>      for (i = 0; i < 6; i ++) {
+>          new_func = (arg >> (i * 4)) & 0x0f;
+>          if (mode && new_func != 0x0f)
+>              sd->function_group[i] = new_func;
+> -        sd->data[14 + (i >> 1)] = new_func << ((i * 4) & 4);
+> +        sd->data[16 - (i >> 1)] |= new_func << ((i % 2) * 4);
+>      }
+>      memset(&sd->data[17], 0, 47);
+>      stw_be_p(sd->data + 64, sd_crc16(sd->data, 64));
+> 
 
 
