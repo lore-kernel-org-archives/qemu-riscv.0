@@ -1,43 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6ywg-0000P7-Lb
-	for mharc-qemu-riscv@gnu.org; Sat, 15 Aug 2020 12:22:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60228)
+	id 1k6yxO-00011H-3K
+	for mharc-qemu-riscv@gnu.org; Sat, 15 Aug 2020 12:22:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60406)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k6ywf-0000NG-Be
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2020 12:22:13 -0400
-Received: from mail-oi1-x242.google.com ([2607:f8b0:4864:20::242]:40204)
+ id 1k6yxM-00010x-Eu
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2020 12:22:56 -0400
+Received: from mail-ot1-x344.google.com ([2607:f8b0:4864:20::344]:33464)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k6ywd-0004Io-KY
- for qemu-riscv@nongnu.org; Sat, 15 Aug 2020 12:22:13 -0400
-Received: by mail-oi1-x242.google.com with SMTP id u24so9836918oic.7
- for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2020 09:22:11 -0700 (PDT)
+ id 1k6yxK-0004Mx-QU
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2020 12:22:56 -0400
+Received: by mail-ot1-x344.google.com with SMTP id t7so10085396otp.0
+ for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2020 09:22:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=nNxcyvydBKW7um7acp/fp1BhM/4SQTbKf0bBRIbObWA=;
- b=WS1wj6+Luh3GU2QmWNRtvgIkTaGEaoC8uIU+t0s2qurInNUA6hZHkgBnShAy0vJYPp
- Fbpi9wQXm/eDVNcbPBl93Uyg5nhuqZrICobe41YTiipWlzCGwNZ4K69eKRgl0rLuSbcM
- dLYFpjmwPoNFrANxpQv0XxtXrjXALKinaF25h1BW7D5HqWa4qoR73Zf4Wl+48Av3Prhp
- bQvA71tsVmuyC2SsIAHSp15H7ct0pyS40A1rWICu2ztqDBjhTNQzNjSJbN4unaYqA1nr
- QzOIXb+PudAi0cjtSPIVS7KBO7N76fkWGUmWR951T4QZ+ljbMZ0Ijm4cVXl8JYDrs2rP
- Y3xg==
+ :cc; bh=7RMLVHoSe4RfTgt2yr7dUICRnUSgknP3fT/3lLIZJm4=;
+ b=jL10nvl+FJFSXy1/WYR+Wy8tKZOfTWqQq2aEZ8uDYQNBiIB8B3CGGTGjidiIyAMass
+ fEUIqA/27goxWxiRbdWDAL8euOyYNVZD8wi8UZgbhxsfav+ayduyFMNiOCuWyevvfgSa
+ +Oq4ecxGarw1Ab+nrkV7/HbHXoaeQ2gXHFAKKk9xkR5Mfv2LlDBEOztHnI7ENMyq/N3a
+ Y9RBoK0os8Y6Dp4q98La0IUwMbq3RMrz5Yqnu94VGMkand2Hjup/ftNVPr12BsTagyh5
+ 9sbcbr7ArjtS14XiE5aerJaj5ojODZ3/L07aDd0uuC72EBV/0FWQzceIAKbqtoOHZ9pR
+ 6OIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=nNxcyvydBKW7um7acp/fp1BhM/4SQTbKf0bBRIbObWA=;
- b=nuLpZ2+l6DZcmnqHklahCDN4OKPN/IyiKMIv8sLeCKciHaCZFDfQ+ZtyfzJvIVFnp5
- K/GfbcpIZPPrntXcL3rZ8FThGvA6AymZCfcvq4rqHzBCo4kIjmgVrnmnTNr/kgNeXwVC
- X8OIEf7OapoutoLfzZgucv8x1k73pZhUp4NTT27Y494MAE9gpD0fY8t3gO4GHer0GN+o
- Fn3P5u7BCNiPrgDx9PYRwXs0vuFet6jmjCkJbRisObpnqGGrE5h7AvNdri/MnXWKurAf
- spKJsYgHmjJhU/6RN3PH0MSPJPTulUGMgBZcJAID9EzOMieQ4Y+EWF66b17jN8q1nkoJ
- iT/A==
-X-Gm-Message-State: AOAM530dviYqDHvB3icymmdsyLgw1aCQHoyiEXhnwsf4XVvINXJDv+o5
- ROVPBGL9VEBKpsvEmqTCsxQ7BgAGYGvwCIwI0A+AOUII/po=
-X-Google-Smtp-Source: ABdhPJwks7FCHLO+icCm1f/bxIWRNnwBbQGIm4b/hUFuy5n0R20aqcOqtkDL+DEury7bEBOne5qQYFbmVUy+gtIrJf0=
-X-Received: by 2002:aca:bd89:: with SMTP id n131mr3125624oif.78.1597458353242; 
- Fri, 14 Aug 2020 19:25:53 -0700 (PDT)
+ bh=7RMLVHoSe4RfTgt2yr7dUICRnUSgknP3fT/3lLIZJm4=;
+ b=NnBgp239fo0rm8q99noBbpXwS+jAza+/e2mXnsJsaLhkU0E5++sN478gVp17RoqNPA
+ s9TZfSDxHu12peLc5z9waqk625a1NIniNPlS3lDsTdcSj7aJ79XGq4HOlGks5tOMpyZw
+ T1YfxV/XNEBwcJWqsHG5kHWqzptyzoPlyzgk5/nbp/VIOmDx1YRmi5ufw4wBrQf4X/tl
+ IEFXp2FvzTsVAqMzJC9muiBQXa9V6OAc6GusF3FskAnOC5uq/+wyukAB7zDS0iCRL74S
+ oRGjA3BZ6tqREmob4vbeq61cPYE7O7ACvVPqgiUfJhSq/qsrpSQbQ6wSNopYWlrRN+us
+ 3QOg==
+X-Gm-Message-State: AOAM5331S7jBMYWlGzaBRKLfFO+lNAwiQCcVe2JMA335H8ef9QauGfVM
+ EUooKVP6lumIzFBMPMNmPw2GABGcCLg1ZA8WeVHR3gkfqLZxug==
+X-Google-Smtp-Source: ABdhPJwFq1YG2ZrYuuPq4toItMcvIhzqOCt/pRNjBoX6XhtUzmaiSKAAQgFq8/bZE+FBt812jJQQAk8o7SXSYUSC18I=
+X-Received: by 2002:a9d:3443:: with SMTP id v61mr4159868otb.139.1597459935137; 
+ Fri, 14 Aug 2020 19:52:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200806104709.13235-1-frank.chang@sifive.com>
  <20200806104709.13235-27-frank.chang@sifive.com>
@@ -46,8 +46,8 @@ References: <20200806104709.13235-1-frank.chang@sifive.com>
  <5706a1ca-1dd9-22cd-08ce-c70780111bfc@linaro.org>
 In-Reply-To: <5706a1ca-1dd9-22cd-08ce-c70780111bfc@linaro.org>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Sat, 15 Aug 2020 10:25:42 +0800
-Message-ID: <CAE_xrPi93pRQccEncy00SO6cax0_GGRw-HUFF0uFzQ0f2P67kA@mail.gmail.com>
+Date: Sat, 15 Aug 2020 10:52:04 +0800
+Message-ID: <CAE_xrPgSbzzJqHYTeSND4wQDJUMoMYPmmcH97VE6hRcxh2S54A@mail.gmail.com>
 Subject: Re: [RFC v3 26/71] target/riscv: rvv-1.0: update vext_max_elems() for
  load/store insns
 To: Richard Henderson <richard.henderson@linaro.org>
@@ -57,9 +57,9 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Content-Type: multipart/alternative; boundary="000000000000b0614605ace14148"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::242;
- envelope-from=frank.chang@sifive.com; helo=mail-oi1-x242.google.com
+Content-Type: multipart/alternative; boundary="000000000000fa2cc205ace19fc8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::344;
+ envelope-from=frank.chang@sifive.com; helo=mail-ot1-x344.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -9
@@ -81,9 +81,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2020 16:22:13 -0000
+X-List-Received-Date: Sat, 15 Aug 2020 16:22:56 -0000
 
---000000000000b0614605ace14148
+--000000000000fa2cc205ace19fc8
 Content-Type: text/plain; charset="UTF-8"
 
 On Sat, Aug 15, 2020 at 2:36 AM Richard Henderson <
@@ -126,13 +126,24 @@ richard.henderson@linaro.org> wrote:
 > r~
 >
 
-Nice, didn't come up with the compiler optimization.
-Will fix the codes and send out a new version of patchset.
-Thanks for the tips.
+Checked the codes again,
+GEN_VEXT_LD_STRIDE() will eventually call vext_ldst_stride() and pass esz
+as the parameter.
+However, esz is not only used in vext_max_elems() but also used for other
+calculation, e.g.:
+
+    probe_pages(env, base + stride * i, nf * esz, ra, access_type);
+and
+    target_ulong addr = base + stride * i + k * esz;
+
+If we pass ctzl(sizeof(type)) in GEN_VEXT_LD_STRIDE(),
+I would still have to do: (1 << esz) to get the correct element size in the
+above calculations.
+Would it eliminate the performance gain we have in vext_max_elems() instead?
 
 Frank Chang
 
---000000000000b0614605ace14148
+--000000000000fa2cc205ace19fc8
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -187,10 +198,17 @@ Using ctzl(sizeof(type)) in the GEN_VEXT_LD_STRIDE macro will work well.=C2=
 will be constant folded by the compiler.<br>
 <br>
 <br>
-r~<br></blockquote><div><br></div><div>Nice, didn&#39;t come up with the co=
-mpiler optimization.</div><div>Will fix the codes and send out a new versio=
-n of patchset.</div><div>Thanks for the tips.</div><div><br></div><div>Fran=
-k Chang=C2=A0<br></div></div></div>
+r~<br></blockquote><div><br></div><div>Checked the codes again,</div><div>G=
+EN_VEXT_LD_STRIDE() will eventually call=C2=A0vext_ldst_stride() and pass e=
+sz as the parameter.</div><div>However, esz is not only used in=C2=A0vext_m=
+ax_elems() but also used for other calculation, e.g.:</div><div><br></div><=
+div>=C2=A0 =C2=A0 probe_pages(env, base + stride * i, nf * esz, ra, access_=
+type);<br></div><div>and</div><div>=C2=A0 =C2=A0 target_ulong addr =3D base=
+ + stride * i + k * esz;</div><div><br></div><div>If we pass ctzl(sizeof(ty=
+pe)) in=C2=A0GEN_VEXT_LD_STRIDE(),</div><div>I would still have to do: (1 &=
+lt;&lt; esz) to get the correct element size in the above calculations.</di=
+v><div>Would it eliminate the performance gain we have in=C2=A0vext_max_ele=
+ms() instead?</div><div><br></div><div>Frank Chang</div></div></div>
 
---000000000000b0614605ace14148--
+--000000000000fa2cc205ace19fc8--
 
