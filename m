@@ -1,80 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6ya5-0004cb-6s
-	for mharc-qemu-riscv@gnu.org; Sat, 15 Aug 2020 11:58:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53116)
+	id 1k6yg0-0003lo-PE
+	for mharc-qemu-riscv@gnu.org; Sat, 15 Aug 2020 12:05:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55204)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1k6ya2-0004bO-SQ; Sat, 15 Aug 2020 11:58:50 -0400
-Received: from mail-ej1-x641.google.com ([2a00:1450:4864:20::641]:35583)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1k6yfy-0003ja-Jx
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2020 12:04:58 -0400
+Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:40061)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1k6ya1-000115-9Z; Sat, 15 Aug 2020 11:58:50 -0400
-Received: by mail-ej1-x641.google.com with SMTP id a26so13054299ejc.2;
- Sat, 15 Aug 2020 08:58:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1k6yfw-0001sa-Tx
+ for qemu-riscv@nongnu.org; Sat, 15 Aug 2020 12:04:58 -0400
+Received: by mail-io1-xd2f.google.com with SMTP id b17so13586951ion.7
+ for <qemu-riscv@nongnu.org>; Sat, 15 Aug 2020 09:04:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=23ClA1zj5xFJ/0MPwFI0Fld8oSCrUIsEogBg4Ief7j4=;
- b=YkTBr86YEckUL1Q6GdC5yh5BlLbjrHsGM3RT4t3K4tzG390qdJBs8YnBfb32JHfash
- yJAmcV14RkNFPxZ5XL9xZzN81TkLZmbxKhWhWbuhvTFqkgo9xsNy6ZC64svjGZunQwst
- xWwCYwrCJSrZT/MOlKpgMaGjJlLWirnLhVT2JJLI/oyqGr0k07NoT+3aNTxqSVnJH2JT
- PUXMy7/UqUHfMuAVUFwArzEZqO8ob4Js2LeO3hmqV2sPscaoEYNAIUFMaryJEDwGJrRl
- vmy6m/+BrYGRcUO4/qVwAv/m8Z7WGQWnzBvsq58+JYiYNKWDiXHRGKInaZxGtQVBlwvx
- 2l5g==
+ bh=FI/r/KPM3NamuEvu+F9mW+RliiWbhgVxKmNTvx6BQcc=;
+ b=tY8QGWDcFtWOVpQJZV0liCOS04JLlmA+FB8vkBPVaUAkjzJWRbZ+qL2u8k2wtCWGTp
+ 3YdCfIr+k6HZxtWNVQ1Egi7Mofiq82yxK1dIRNgxayxrq7r3UonSJFfy7YhEcpRkw5pP
+ s+lIXKL43zbsR5402wVvQ90q/01MmwnBnMOLGgtAtKaSxq8WWNtfCJDUjNVbX8dknKBr
+ sjO+74OkbcioE/8OP1ORS0oKdzw6dw9FxybxOeXfdCE6tJZhU7ZxAeztbln9EkPYcbRG
+ bTkf2LP0LntNX0xEnlU5NecLQxpUS1GWU399tE940judQvptUKW+d4lwnpHiqPfLGreb
+ IF4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=23ClA1zj5xFJ/0MPwFI0Fld8oSCrUIsEogBg4Ief7j4=;
- b=mMOWvA9ZMmnpPqtOEkC482z9QLHaZMZjFMQYJ+pTQuD3JhYwWom1VXB7pM1DZ9/Xqs
- xC8wpFvGNFjMF0Walx5wzY9BwKtILWa6LN6EMrJaNhTlm3GS1O9ZanHoGIefF0HXZkFQ
- NrMte0Kb5plNCaF+sNH+jtz73FsgvLxduVegK8RhTsx/cm0qbMt078rhafGSrQuEm62s
- 0FZtcQlucVEm1yJEZemTwF4zt4xkI7tNiIKtuDZ4fsJ0EIU4YG+wxslqZtCPLt8f6d2N
- flwcs5nfTrrXcSWkLpzZVLil7YLw+scTdEUV7HIvqHR2cagvre2menToBRu24kvRqzAh
- BEdA==
-X-Gm-Message-State: AOAM532jSA+9epSxCxXIae5lgYyI0SnVYRrV4GNlq7AF630BObGK/hch
- BVxJJ0G2z7to9y5FtlGkj1c6LetlHWU=
-X-Google-Smtp-Source: ABdhPJyCh2JMbov66bRCSzNwslYV0cujTQZRClFPFsv/CyvYv17PXy4cYPTjCJPM+yP+oPdO2Gskqg==
-X-Received: by 2002:adf:94c3:: with SMTP id 61mr5783672wrr.289.1597480706228; 
- Sat, 15 Aug 2020 01:38:26 -0700 (PDT)
-Received: from [192.168.1.36] (121.red-81-40-121.staticip.rima-tde.net.
- [81.40.121.121])
- by smtp.gmail.com with ESMTPSA id u204sm20580087wmg.9.2020.08.15.01.38.24
+ bh=FI/r/KPM3NamuEvu+F9mW+RliiWbhgVxKmNTvx6BQcc=;
+ b=gW9SsZmWcHjZ4t52oacACryUY7+YPjd+rCVOcRxzchUQuEaGSDGoYZGCZSTW4O2ElB
+ YrpVtAeq/i0kgyuyddm9iCqhzKhOSi8uqGd+EkCHywJU8MfGoVF4EAlxU2l3+UlQVx1H
+ HgMg8D91pozfZrA0fP78n/YEn/BVAGb+XdRPrOTzg9i5e7FhtRsOlj5fZypxBPFGx9aE
+ oFqzqY8taELFC22tMBJmT1sPmpZkYRtkbT/x6Q587GfkdqYX509/H+jcx7bRGl6W7Xf+
+ aTORutTqSbHk/eqNoo8/Gfbgz9iCv3VfRL6Da4aTvI6/rzmpwMDCkLBoQNvS5K3986Rf
+ aFkg==
+X-Gm-Message-State: AOAM531m+aezhtuPYjkFMj02L7R793ZPwdVQUKEjVR9c+VGYIFeKDJYh
+ a4pXt3Tq9p0tbrXHHhVht5OItIAHnaQn1w==
+X-Google-Smtp-Source: ABdhPJw0LwMD3EbR1FBKH852hmnoFvx+VhSkX3kEnC3/GndsGW0vzotWC3zGi6/oUfpLjWlwj3q9YQ==
+X-Received: by 2002:a63:1a66:: with SMTP id a38mr3737132pgm.253.1597469360358; 
+ Fri, 14 Aug 2020 22:29:20 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.141.89])
+ by smtp.gmail.com with ESMTPSA id v78sm11468635pfc.121.2020.08.14.22.29.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 15 Aug 2020 01:38:25 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 08/18] hw/sd: sd: Correctly set the high capacity bit
-To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmerdabbelt@google.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>, qemu-block@nongnu.org
-References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
- <1597423256-14847-9-git-send-email-bmeng.cn@gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <3b8ef426-77ce-d3b2-594b-045cae5ec94f@amsat.org>
-Date: Sat, 15 Aug 2020 10:38:24 +0200
+ Fri, 14 Aug 2020 22:29:19 -0700 (PDT)
+Subject: Re: [RFC v3 26/71] target/riscv: rvv-1.0: update vext_max_elems() for
+ load/store insns
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+References: <20200806104709.13235-1-frank.chang@sifive.com>
+ <20200806104709.13235-27-frank.chang@sifive.com>
+ <90f01984-54a4-2a56-c52f-d1f4332b39d4@linaro.org>
+ <CAE_xrPiJRRV3FYtfve6LMOF6LNEYGfhmi9CiabxqUBEew9igLg@mail.gmail.com>
+ <5706a1ca-1dd9-22cd-08ce-c70780111bfc@linaro.org>
+ <CAE_xrPgSbzzJqHYTeSND4wQDJUMoMYPmmcH97VE6hRcxh2S54A@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <de85d715-924a-8156-7424-5c35fd585fb3@linaro.org>
+Date: Fri, 14 Aug 2020 22:29:17 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <1597423256-14847-9-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <CAE_xrPgSbzzJqHYTeSND4wQDJUMoMYPmmcH97VE6hRcxh2S54A@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::641;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-ej1-x641.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-io1-xd2f.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: 0
-X-Spam_score: 0.0
-X-Spam_bar: /
-X-Spam_report: (0.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=1, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -87,43 +92,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2020 15:58:51 -0000
+X-List-Received-Date: Sat, 15 Aug 2020 16:04:58 -0000
 
-On 8/14/20 6:40 PM, Bin Meng wrote:
-> From: Bin Meng <bin.meng@windriver.com>
+On 8/14/20 7:52 PM, Frank Chang wrote:
+>     probe_pages(env, base + stride * i, nf * esz, ra, access_type);
+> and
+>     target_ulong addr = base + stride * i + k * esz;
 > 
-> Per the SD spec, Standard Capacity SD Memory Card (SDSC) supports
-> capacity up to and including 2 GiB.
-> 
+> If we pass ctzl(sizeof(type)) in GEN_VEXT_LD_STRIDE(),
+> I would still have to do: (1 << esz) to get the correct element size in the
+> above calculations.
+> Would it eliminate the performance gain we have in vext_max_elems() instead?
 
-Fixes: 2d7adea4fe ("hw/sd: Support SDHC size cards")
+Well, no, it will improve performance, because you'll write
 
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> ---
-> 
->  hw/sd/sd.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/hw/sd/sd.c b/hw/sd/sd.c
-> index 51f5900..5e7fc3f 100644
-> --- a/hw/sd/sd.c
-> +++ b/hw/sd/sd.c
-> @@ -313,7 +313,7 @@ static void sd_ocr_powerup(void *opaque)
->      /* card power-up OK */
->      sd->ocr = FIELD_DP32(sd->ocr, OCR, CARD_POWER_UP, 1);
->  
-> -    if (sd->size > 1 * GiB) {
-> +    if (sd->size > 2 * GiB) {
+  addr = base + stride * i + (k << esz)
 
-But you need to fix sd_set_csd() too, else this is incomplete.
+I.e. strength-reduce the multiply to a shift.
 
-Thanks,
 
-Phil.
-
->          sd->ocr = FIELD_DP32(sd->ocr, OCR, CARD_CAPACITY, 1);
->      }
->  }
-> 
+r~
 
 
