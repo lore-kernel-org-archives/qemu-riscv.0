@@ -1,84 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k6eZZ-0003Lh-28
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Aug 2020 14:37:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42850)
+	id 1k6xgP-0003pN-AK
+	for mharc-qemu-riscv@gnu.org; Sat, 15 Aug 2020 11:01:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46170)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k6eZX-0003LT-Nu
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2020 14:36:59 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:42196)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1k6xgN-0003ls-1G; Sat, 15 Aug 2020 11:01:19 -0400
+Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:39190)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1k6eZU-0007hO-GV
- for qemu-riscv@nongnu.org; Fri, 14 Aug 2020 14:36:58 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id f5so4550399plr.9
- for <qemu-riscv@nongnu.org>; Fri, 14 Aug 2020 11:36:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1k6xgL-00065o-Be; Sat, 15 Aug 2020 11:01:18 -0400
+Received: by mail-wm1-x344.google.com with SMTP id g75so10262765wme.4;
+ Sat, 15 Aug 2020 08:01:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=mSyGCQ00UyCgU4W9lEQIrAQfxGRZDKKKHrtU9PhMcIQ=;
- b=CSSJKKfy+sonqbtGFLnLCNeBbrSCw7u9HMPegawyNa4ju/wtj18SKQr71AeFIQSkwY
- WlRmAVDYf7QAJgNuIgIxe93VRu4vvxNIFzJ62+iV/VwKC6AR+CB26ZUTXgDk3lO5ZUS6
- M3m2YlCSNrYmsk3bzjZnP7USMDQ4wjBgKxJX7vnMmjFrwI4Evzh4kcQ+vKSecthOpsEj
- eWR4c2Zy9ZSyoNUXvDT2O3FWN0IR+ohDCvaxnWk2XA26tEGN+IUJevEJ5GCQYNBr0mDq
- YrXNzoGKyBA2WbtxDuVtYq565BTh65nHP7cLK2QJFgD/5WhoNnvaHU9f/6yEYeJFBW6K
- AD/Q==
+ bh=xn08/tCXD2hq75/8vWCwbqv7ZGe+tb9E/jIVsKQ6dH8=;
+ b=RSETcpZsO+BM7Eihox3hFHz7koLZ9oMYTn/CAsNrHc2dD6F8N+LnWSEtuL1QMfkPLg
+ 4LLb4N+F7WgjSvOAy3wN1SBJK4UhJUkw7eVCT3vCD4PGiR5gb3CVz1Ztk2U5d00PLsG6
+ 8ZqQBbGYvRFIkJvdX+2MIo7iMXa12i5KI3BTR898li41lvebvwKeMVgOqgLSyCHlQpqg
+ i5kJefEq9HvQ//UTGN65VT6zzeblEOgpeIW9jewD43pVOduKdT3rBcL6GOeHJEvAJSlV
+ YIfvEMC2FgRHD5OlIaeSc59RGKKUH1P9Y3E713Ku8plgmgy2wdjOH68ZJmLONHzdg7O2
+ RXew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=mSyGCQ00UyCgU4W9lEQIrAQfxGRZDKKKHrtU9PhMcIQ=;
- b=pr2wfnWgow9SkSnmYMKH2/BgXsnGy++qerhCK7OoH5QL7ARMPtZnJ4MXarjyRGalyr
- Ow7rmcvef4vYFKqeSzxoAqbuam4K3B3nvm/Yn1LKSdMOZK5wCchdZ7tW+hxMxrLGC8j+
- ziLFO6buxHpJ7LWT6UXhTKTP8KxOzvp0FcNGaf/SKJ3gsAVygEvZScg3NNPt9TeGL4MM
- kCe8ruPZdMaHGAYEOsCFD6c+8exAKNaRA8CL+8Fl5V8SHaUnfh/dMxl8jAfpaF9u5bgB
- G1gANl2a+WjeVO3oBSjBhLuBpHJZnyAdiVXi3HuSmWZ1+TIJeXahCFwdVeH09HS5BaKR
- nuRQ==
-X-Gm-Message-State: AOAM531usMlIRvGlm3oNLQg4BTh+5gPxOZLjsR9AwSBjA6/LCTFp2sPs
- kEVhA/jhW9CONQbB9gUnBzf/+Q==
-X-Google-Smtp-Source: ABdhPJyZLCyL2BtMWKO3xuiCXoArtbr1UhQmM/7Dh3ImiZJHn6KM0/KKC75b/GBGVAuobIHZ3tG/QQ==
-X-Received: by 2002:a17:90b:803:: with SMTP id
- bk3mr3324828pjb.57.1597430214965; 
- Fri, 14 Aug 2020 11:36:54 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id d128sm10192297pfa.24.2020.08.14.11.36.53
+ bh=xn08/tCXD2hq75/8vWCwbqv7ZGe+tb9E/jIVsKQ6dH8=;
+ b=i01hoeBdvQvIBqO76WvjFrGXbSun6d5VmKlgnnbbMDYHDtl6VFCrgM774waw9xOfwQ
+ sTuO/PL40ztj0/fe5ANKO8spY9rpm93PMNJU+8zqcnGe1N1MVm7ZRh6MDK+iQrAPgocm
+ yr0Kf/So9R1U5kGWaUlinWntP1dkwcIvn7hLKNI4L7xjKc26tKZs7RHZdtb6z23Zouqp
+ eT0HQ1tyMLu/etglj6cQO6Z66k8b9m+7arnpVcnC1P8Ig2/+H4RtwTHoci8qxjr5w6GB
+ Kq+uyX/DBhUwtDa0QFx1xB8qOtdDFO2M47YrNhjPuifHys/V6V/o+CrTyXngB/6pxMqH
+ +gOA==
+X-Gm-Message-State: AOAM5304t+jH2sreQ18L2tKLypRPYxto7vToC1FMfF1xkI0/yMBjSnOH
+ +Qbb6V3QRk78ppbnleQubrgVaTzLLgk=
+X-Google-Smtp-Source: ABdhPJx1XNNorJJMdunI64iPJxc6y7h0iJi/Asrz83xSTeZvMy9flrgTkaxNoL+75Vi5vzJE3gq+XA==
+X-Received: by 2002:a1c:32c3:: with SMTP id y186mr5956407wmy.15.1597482408096; 
+ Sat, 15 Aug 2020 02:06:48 -0700 (PDT)
+Received: from [192.168.1.36] (121.red-81-40-121.staticip.rima-tde.net.
+ [81.40.121.121])
+ by smtp.gmail.com with ESMTPSA id t189sm21362506wmf.47.2020.08.15.02.06.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 Aug 2020 11:36:54 -0700 (PDT)
-Subject: Re: [RFC v3 26/71] target/riscv: rvv-1.0: update vext_max_elems() for
- load/store insns
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-References: <20200806104709.13235-1-frank.chang@sifive.com>
- <20200806104709.13235-27-frank.chang@sifive.com>
- <90f01984-54a4-2a56-c52f-d1f4332b39d4@linaro.org>
- <CAE_xrPiJRRV3FYtfve6LMOF6LNEYGfhmi9CiabxqUBEew9igLg@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <5706a1ca-1dd9-22cd-08ce-c70780111bfc@linaro.org>
-Date: Fri, 14 Aug 2020 11:36:52 -0700
+ Sat, 15 Aug 2020 02:06:47 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH 14/18] hw/net: cadence_gem: Add a new 'phy-addr' property
+To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Alistair Francis <alistair@alistair23.me>, Jason Wang <jasowang@redhat.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-arm@nongnu.org,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
+ <1597423256-14847-15-git-send-email-bmeng.cn@gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <e97e1bc4-277d-9fdd-1372-f69d22b4a7e4@amsat.org>
+Date: Sat, 15 Aug 2020 11:06:46 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <CAE_xrPiJRRV3FYtfve6LMOF6LNEYGfhmi9CiabxqUBEew9igLg@mail.gmail.com>
+In-Reply-To: <1597423256-14847-15-git-send-email-bmeng.cn@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::344;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x344.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: 0
+X-Spam_score: 0.0
+X-Spam_bar: /
+X-Spam_report: (0.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=1, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -91,37 +90,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2020 18:36:59 -0000
+X-List-Received-Date: Sat, 15 Aug 2020 15:01:19 -0000
 
-On 8/13/20 7:48 PM, Frank Chang wrote:
-> esz is passed from e.g. GEN_VEXT_LD_STRIDE() macro:
+On 8/14/20 6:40 PM, Bin Meng wrote:
+> From: Bin Meng <bin.meng@windriver.com>
 > 
->> #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)        \
->> void HELPER(NAME)(void *vd, void * v0, target_ulong base,  \
->>                   target_ulong stride, CPURISCVState *env, \
->>                   uint32_t desc)                           \
->> {                                                          \
->>     uint32_t vm = vext_vm(desc);                           \
->>     vext_ldst_stride(vd, v0, base, stride, env, desc, vm, LOAD_FN, \
->>                      sizeof(ETYPE), GETPC(), MMU_DATA_LOAD);       \
->> }
->>
->> GEN_VEXT_LD_STRIDE(vlse8_v,  int8_t,  lde_b)
+> At present the PHY address of the PHY connected to GEM is hard-coded
+> to either 23 (BOARD_PHY_ADDRESS) or 0. This might not be the case for
+> all boards. Add a new 'phy-addr' property so that board can specify
+> the PHY address for each GEM instance.
 > 
-> which is calculated by sizeof(ETYPE), so the results would be: 1, 2, 4, 8.
-> and vext_max_elems() is called by e.g. vext_ldst_stride():
-
-Ah, yes.
-
->> uint32_t max_elems = vext_max_elems(desc, esz);
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> ---
 > 
-> I can add another parameter to the macro and pass the hard-coded log2(esz) number
-> if it's the better way instead of using ctzl().
-> Or if there's another approach to get the log2(esz) number more elegantly?
+>  hw/net/cadence_gem.c         | 7 +++++--
+>  include/hw/net/cadence_gem.h | 2 ++
+>  2 files changed, 7 insertions(+), 2 deletions(-)
+> 
+> diff --git a/hw/net/cadence_gem.c b/hw/net/cadence_gem.c
+> index a93b5c0..9fa03de 100644
+> --- a/hw/net/cadence_gem.c
+> +++ b/hw/net/cadence_gem.c
+> @@ -1446,7 +1446,8 @@ static uint64_t gem_read(void *opaque, hwaddr offset, unsigned size)
+>              uint32_t phy_addr, reg_num;
+>  
+>              phy_addr = (retval & GEM_PHYMNTNC_ADDR) >> GEM_PHYMNTNC_ADDR_SHFT;
+> -            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0) {
+> +            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0 ||
+> +                phy_addr == s->phy_addr) {
+>                  reg_num = (retval & GEM_PHYMNTNC_REG) >> GEM_PHYMNTNC_REG_SHIFT;
+>                  retval &= 0xFFFF0000;
+>                  retval |= gem_phy_read(s, reg_num);
+> @@ -1569,7 +1570,8 @@ static void gem_write(void *opaque, hwaddr offset, uint64_t val,
+>              uint32_t phy_addr, reg_num;
+>  
+>              phy_addr = (val & GEM_PHYMNTNC_ADDR) >> GEM_PHYMNTNC_ADDR_SHFT;
+> -            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0) {
+> +            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0 ||
+> +                phy_addr == s->phy_addr) {
+>                  reg_num = (val & GEM_PHYMNTNC_REG) >> GEM_PHYMNTNC_REG_SHIFT;
+>                  gem_phy_write(s, reg_num, val);
+>              }
+> @@ -1682,6 +1684,7 @@ static Property gem_properties[] = {
+>      DEFINE_NIC_PROPERTIES(CadenceGEMState, conf),
+>      DEFINE_PROP_UINT32("revision", CadenceGEMState, revision,
+>                         GEM_MODID_VALUE),
+> +    DEFINE_PROP_UINT8("phy-addr", CadenceGEMState, phy_addr, 0),
 
-Using ctzl(sizeof(type)) in the GEN_VEXT_LD_STRIDE macro will work well.  This
-will be constant folded by the compiler.
+This patch would be complete by moving the BOARD_PHY_ADDRESS definition
+to each board using this NIC, and setting the "phy-addr" property to
+this value.
 
+>      DEFINE_PROP_UINT8("num-priority-queues", CadenceGEMState,
+>                        num_priority_queues, 1),
+>      DEFINE_PROP_UINT8("num-type1-screeners", CadenceGEMState,
+> diff --git a/include/hw/net/cadence_gem.h b/include/hw/net/cadence_gem.h
+> index 54e646f..01c6189 100644
+> --- a/include/hw/net/cadence_gem.h
+> +++ b/include/hw/net/cadence_gem.h
+> @@ -73,6 +73,8 @@ typedef struct CadenceGEMState {
+>      /* Mask of register bits which are write 1 to clear */
+>      uint32_t regs_w1c[CADENCE_GEM_MAXREG];
+>  
+> +    /* PHY address */
+> +    uint8_t phy_addr;
+>      /* PHY registers backing store */
+>      uint16_t phy_regs[32];
+>  
+> 
 
-r~
 
