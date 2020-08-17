@@ -1,49 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k7aro-0000nn-N1
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:51:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45316)
+	id 1k7arq-0000tX-TI
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:51:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45348)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k7arm-0000iy-Vq
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:43 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:34259)
+ id 1k7arp-0000pS-Az
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:45 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:44843)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k7ark-00056a-Dq
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:42 -0400
-Received: by mail-pl1-x642.google.com with SMTP id g7so6031304plq.1
- for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:51:39 -0700 (PDT)
+ id 1k7arn-000573-50
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:44 -0400
+Received: by mail-pf1-x436.google.com with SMTP id r11so7878437pfl.11
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:51:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=0b8c7D5YZ1cytdVVynu/RAGcEOVMzEcyfcoZKirW6bg=;
- b=TZbd348DSpwwCun5Do03cjl9H8tFaYYhIs22Ry9jtvA4p/vnLy7dK7AFsEmYdmYLwt
- yFlqUwa82mC+s/gLhO3xxl8cm3tY6XXm2dyHvWxNXBxB6biZiexoU/GC54m2Hey4ROGW
- 6lAQwTu/z0ZczOaG0IVzxac52h6nLvYCg3xUR60vi0Osos0fHUe65/3o20ab4dl3d45W
- NEp/smUlf63e42JF1hZGV7PjeCb0+BU1sgsm9WHazarbardk2UUu/2qSVTBcJHNrFHqe
- qp24jzu9QePeSwngo5XcenjoKEoNnem8EIl/2jVM0jUjUI06fzmPiRtIoj9QIzZAy9UX
- 57mw==
+ bh=kdV/DLbRkszWL23vC+x1qFeulOdV1WYvVXiJb/rz5to=;
+ b=TE7Tz8FNnNY3OXcmLFEWe8zFE15lYCTOH1xyWeuMLITp2NJSKAr7BMGNlmb3JLdYM6
+ +auJMiPcnQRifJE2M53CjVIvhPsPz6Fc8eIORkJYAHaSd3nM1LejcGtGR5WZrvmro6FC
+ JI+Pw1/n9QwfywKyE8uUAxU/i0sNwCWYPls8opOXP/VB+9JwfOhIbbYa1Nr0NrezC02p
+ qSG6Rv1r06pzKktsBx7FzHfFsk/Wb8AKidFawHIGtnBaoLONP65GJNE3l8e+g88iNgvn
+ eZ53eJJLX7e0/BS3HKezeGdqtuKP+73NJAfHJ5he8ORg/NW0VkgitnjJ5lLxf9SPStm3
+ 6lgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=0b8c7D5YZ1cytdVVynu/RAGcEOVMzEcyfcoZKirW6bg=;
- b=VklM2wb6jEhVa3eBxfuq1N8JvnqCf8mTkVM1JMkE/LAKntAtfz/4SOt8WAw452dQ1t
- Z1hz5GzeU3oq8Pxd9f5OaZ+TaiShmKGafKCiT2fIDgP/8nUSr+OqRkPH96LZIEPccmcf
- ifG3aPdwMbRyb6CuPJMDc/4yQO9zpQolIQPOX/i8ApkzoUPBIX2U1Bp7+tQ/+RuNP34C
- Vw5Hu23ViCHTE0+ngyz4AhqDwhyTsOKmfMxshQY5/9i+qIzziHOzp2/km7ztkmCO+FWm
- s05GVHb9e9gzahgNQ9akxXfW7g3dHf7hokW6C/MrnZrhB+KRoahebQT480/d2TL6glkv
- jegg==
-X-Gm-Message-State: AOAM533EgLaKEq+HlnimL5dH4MHjxvFJLg45DuAUdUjg/BfQpaR6Eiyk
- jiaPm1ctfxUb73XYaioeYj8RiA==
-X-Google-Smtp-Source: ABdhPJzWCaOoPO4LNulERonXWjrJOTJuKwd+8VeFO9t75RpNp+FOkwWsD0rYEggVmGKu4okr9ZhlVg==
-X-Received: by 2002:a17:90a:9203:: with SMTP id
- m3mr11760679pjo.148.1597654298855; 
- Mon, 17 Aug 2020 01:51:38 -0700 (PDT)
+ bh=kdV/DLbRkszWL23vC+x1qFeulOdV1WYvVXiJb/rz5to=;
+ b=h8bFzr6RD4RFUaNrHHBXWMILOk6As3BQwGE8mygAz9RNSyjD9+zO+PNhTap8TA5Wxy
+ lfZyxn2+ogFs97yOhMFsW5V8wzd4qFkbGdLHuk8Mq66pVJxy1ISMoLyPQHY5VFT9DNVh
+ Px5CQ+4/CeLOHL0YCSAoIR15ilFMN5R1lqlwaeaqZwzWj94N05HNgcNEATt7RF/uusel
+ dgsPHmIhCQEAwkNFTH5+vJNNRlScfLjvQfOcGLfsuuwdzG0EPILK/mp/xx47bhMA/XoV
+ U+1fluUuZkseZqX/CZLtKVbBsczkXx+8Z2hqvZxEavPduPuH45JddVHRefQLXvmiYCDy
+ fI7A==
+X-Gm-Message-State: AOAM5312oPk0mBqYcrJpn49PAMUCjqH0+WNaKJI7I1CzyZy++sHF15NW
+ SGdJxspJonBo60vQGPwVJHk7+A==
+X-Google-Smtp-Source: ABdhPJyVzxVzc2wTZphIp3ig0hx+Ipi7ogjdE9a/4Ps5M8G95hMwjDeyvALEc2lKPnPlrMJcEYj0Iw==
+X-Received: by 2002:a63:5b55:: with SMTP id l21mr9561288pgm.348.1597654301793; 
+ Mon, 17 Aug 2020 01:51:41 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.51.36
+ by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.51.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Aug 2020 01:51:38 -0700 (PDT)
+ Mon, 17 Aug 2020 01:51:41 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -51,15 +50,14 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v4 33/70] target/riscv: rvv-1.0: allow load element with
- sign-extended
-Date: Mon, 17 Aug 2020 16:49:18 +0800
-Message-Id: <20200817084955.28793-34-frank.chang@sifive.com>
+Subject: [RFC v4 34/70] target/riscv: rvv-1.0: register gather instructions
+Date: Mon, 17 Aug 2020 16:49:19 +0800
+Message-Id: <20200817084955.28793-35-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200817084955.28793-1-frank.chang@sifive.com>
 References: <20200817084955.28793-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::642;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x642.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x436.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -68,7 +66,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,105 +79,145 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2020 08:51:43 -0000
+X-List-Received-Date: Mon, 17 Aug 2020 08:51:45 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-For some vector instructions (e.g. vmv.s.x), the element is loaded with
-sign-extended.
+* Add vrgatherei16.vv instruction.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn_trans/trans_rvv.inc.c | 32 +++++++++++++++++--------
- 1 file changed, 22 insertions(+), 10 deletions(-)
+ target/riscv/helper.h                   |  4 ++++
+ target/riscv/insn32.decode              |  1 +
+ target/riscv/insn_trans/trans_rvv.inc.c | 21 +++++++++++++++++++--
+ target/riscv/vector_helper.c            | 23 ++++++++++++++---------
+ 4 files changed, 38 insertions(+), 11 deletions(-)
 
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index a5d58010134..35fb09d2892 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1105,6 +1105,10 @@ DEF_HELPER_6(vrgather_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vrgather_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vrgather_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vrgather_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vrgatherei16_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vrgatherei16_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vrgatherei16_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vrgatherei16_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vrgather_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vrgather_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vrgather_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 15afc469cb0..67306ac7161 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -609,6 +609,7 @@ vslidedown_vx   001111 . ..... ..... 100 ..... 1010111 @r_vm
+ vslidedown_vi   001111 . ..... ..... 011 ..... 1010111 @r_vm
+ vslide1down_vx  001111 . ..... ..... 110 ..... 1010111 @r_vm
+ vrgather_vv     001100 . ..... ..... 000 ..... 1010111 @r_vm
++vrgatherei16_vv 001110 . ..... ..... 000 ..... 1010111 @r_vm
+ vrgather_vx     001100 . ..... ..... 100 ..... 1010111 @r_vm
+ vrgather_vi     001100 . ..... ..... 011 ..... 1010111 @r_vm
+ vcompress_vm    010111 - ..... ..... 010 ..... 1010111 @r
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index b21fa747d84..be5149fa762 100644
+index be5149fa762..392a1eba6b9 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -3052,17 +3052,29 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v *a)
- /* Integer Extract Instruction */
- 
- static void load_element(TCGv_i64 dest, TCGv_ptr base,
--                         int ofs, int sew)
-+                         int ofs, int sew, bool sign)
- {
-     switch (sew) {
-     case MO_8:
--        tcg_gen_ld8u_i64(dest, base, ofs);
-+        if (!sign) {
-+            tcg_gen_ld8u_i64(dest, base, ofs);
-+        } else {
-+            tcg_gen_ld8s_i64(dest, base, ofs);
-+        }
-         break;
-     case MO_16:
--        tcg_gen_ld16u_i64(dest, base, ofs);
-+        if (!sign) {
-+            tcg_gen_ld16u_i64(dest, base, ofs);
-+        } else {
-+            tcg_gen_ld16s_i64(dest, base, ofs);
-+        }
-         break;
-     case MO_32:
--        tcg_gen_ld32u_i64(dest, base, ofs);
-+        if (!sign) {
-+            tcg_gen_ld32u_i64(dest, base, ofs);
-+        } else {
-+            tcg_gen_ld32s_i64(dest, base, ofs);
-+        }
-         break;
-     case MO_64:
-         tcg_gen_ld_i64(dest, base, ofs);
-@@ -3117,7 +3129,7 @@ static void vec_element_loadx(DisasContext *s, TCGv_i64 dest,
- 
-     /* Perform the load. */
-     load_element(dest, base,
--                 vreg_ofs(s, vreg), s->sew);
-+                 vreg_ofs(s, vreg), s->sew, false);
-     tcg_temp_free_ptr(base);
-     tcg_temp_free_i32(ofs);
- 
-@@ -3135,9 +3147,9 @@ static void vec_element_loadx(DisasContext *s, TCGv_i64 dest,
+@@ -3319,7 +3319,21 @@ static bool vrgather_vv_check(DisasContext *s, arg_rmrr *a)
+            require_vm(a->vm, a->rd);
  }
  
- static void vec_element_loadi(DisasContext *s, TCGv_i64 dest,
--                              int vreg, int idx)
-+                              int vreg, int idx, bool sign)
++static bool vrgatherei16_vv_check(DisasContext *s, arg_rmrr *a)
++{
++    int8_t emul = 4 - (s->sew + 3) + s->lmul;
++    return require_rvv(s) &&
++           vext_check_isa_ill(s) &&
++           (emul >= -3 && emul <= 3) &&
++           require_align(a->rd, 1 << s->lmul) &&
++           require_align(a->rs1, 1 << emul) &&
++           require_align(a->rs2, 1 << s->lmul) &&
++           (a->rd != a->rs2 && a->rd != a->rs1) &&
++           require_vm(a->vm, a->rd);
++}
++
+ GEN_OPIVV_TRANS(vrgather_vv, vrgather_vv_check)
++GEN_OPIVV_TRANS(vrgatherei16_vv, vrgatherei16_vv_check)
+ 
+ static bool vrgather_vx_check(DisasContext *s, arg_rmrr *a)
  {
--    load_element(dest, cpu_env, endian_ofs(s, vreg, idx), s->sew);
-+    load_element(dest, cpu_env, endian_ofs(s, vreg, idx), s->sew, sign);
- }
+@@ -3339,7 +3353,8 @@ static bool trans_vrgather_vx(DisasContext *s, arg_rmrr *a)
+     }
  
- static bool trans_vext_x_v(DisasContext *s, arg_r *a)
-@@ -3147,7 +3159,7 @@ static bool trans_vext_x_v(DisasContext *s, arg_r *a)
- 
-     if (a->rs1 == 0) {
-         /* Special case vmv.x.s rd, vs2. */
--        vec_element_loadi(s, tmp, a->rs2, 0);
-+        vec_element_loadi(s, tmp, a->rs2, 0, false);
-     } else {
-         /* This instruction ignores LMUL and vector register groups */
-         int vlmax = s->vlen >> (3 + s->sew);
-@@ -3229,7 +3241,7 @@ static bool trans_vfmv_f_s(DisasContext *s, arg_vfmv_f_s *a)
-         (s->mstatus_fs != 0) && (s->sew != 0)) {
-         unsigned int len = 8 << s->sew;
- 
--        vec_element_loadi(s, cpu_fpr[a->rd], a->rs2, 0);
-+        vec_element_loadi(s, cpu_fpr[a->rd], a->rs2, 0, false);
-         if (len < 64) {
-             tcg_gen_ori_i64(cpu_fpr[a->rd], cpu_fpr[a->rd],
-                             MAKE_64BIT_MASK(len, 64 - len));
-@@ -3331,7 +3343,7 @@ static bool trans_vrgather_vx(DisasContext *s, arg_rmrr *a)
+     if (a->vm && s->vl_eq_vlmax) {
+-        int vlmax = s->vlen;
++        int scale = s->lmul - (s->sew + 3);
++        int vlmax = scale < 0 ? s->vlen >> -scale : s->vlen << scale;
          TCGv_i64 dest = tcg_temp_new_i64();
  
          if (a->rs1 == 0) {
--            vec_element_loadi(s, dest, a->rs2, 0);
-+            vec_element_loadi(s, dest, a->rs2, 0, false);
+@@ -3370,7 +3385,9 @@ static bool trans_vrgather_vi(DisasContext *s, arg_rmrr *a)
+     }
+ 
+     if (a->vm && s->vl_eq_vlmax) {
+-        if (a->rs1 >= s->vlen) {
++        int scale = s->lmul - (s->sew + 3);
++        int vlmax = scale < 0 ? s->vlen >> -scale : s->vlen << scale;
++        if (a->rs1 >= vlmax) {
+             tcg_gen_gvec_dup_imm(SEW64, vreg_ofs(s, a->rd),
+                                  MAXSZ(s), MAXSZ(s), 0);
          } else {
-             vec_element_loadx(s, dest, a->rs2, cpu_gpr[a->rs1], vlmax);
-         }
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 716e1926ee2..26a8ac6fe25 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -4693,11 +4693,11 @@ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_w, uint32_t, H4)
+ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_d, uint64_t, H8)
+ 
+ /* Vector Register Gather Instruction */
+-#define GEN_VEXT_VRGATHER_VV(NAME, ETYPE, H)                              \
++#define GEN_VEXT_VRGATHER_VV(NAME, TS1, TS2, HS1, HS2)                    \
+ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+                   CPURISCVState *env, uint32_t desc)                      \
+ {                                                                         \
+-    uint32_t vlmax = vext_max_elems(desc, ctzl(sizeof(ETYPE)));           \
++    uint32_t vlmax = vext_max_elems(desc, ctzl(sizeof(TS1)));             \
+     uint32_t vm = vext_vm(desc);                                          \
+     uint32_t vl = env->vl;                                                \
+     uint32_t index, i;                                                    \
+@@ -4706,20 +4706,25 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+         if (!vm && !vext_elem_mask(v0, i)) {                              \
+             continue;                                                     \
+         }                                                                 \
+-        index = *((ETYPE *)vs1 + H(i));                                   \
++        index = *((TS1 *)vs1 + HS1(i));                                   \
+         if (index >= vlmax) {                                             \
+-            *((ETYPE *)vd + H(i)) = 0;                                    \
++            *((TS2 *)vd + HS2(i)) = 0;                                    \
+         } else {                                                          \
+-            *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(index));           \
++            *((TS2 *)vd + HS2(i)) = *((TS2 *)vs2 + HS2(index));           \
+         }                                                                 \
+     }                                                                     \
+ }
+ 
+ /* vd[i] = (vs1[i] >= VLMAX) ? 0 : vs2[vs1[i]]; */
+-GEN_VEXT_VRGATHER_VV(vrgather_vv_b, uint8_t,  H1)
+-GEN_VEXT_VRGATHER_VV(vrgather_vv_h, uint16_t, H2)
+-GEN_VEXT_VRGATHER_VV(vrgather_vv_w, uint32_t, H4)
+-GEN_VEXT_VRGATHER_VV(vrgather_vv_d, uint64_t, H8)
++GEN_VEXT_VRGATHER_VV(vrgather_vv_b, uint8_t,  uint8_t,  H1, H1)
++GEN_VEXT_VRGATHER_VV(vrgather_vv_h, uint16_t, uint16_t, H2, H2)
++GEN_VEXT_VRGATHER_VV(vrgather_vv_w, uint32_t, uint32_t, H4, H4)
++GEN_VEXT_VRGATHER_VV(vrgather_vv_d, uint64_t, uint64_t, H8, H8)
++
++GEN_VEXT_VRGATHER_VV(vrgatherei16_vv_b, uint16_t, uint8_t,  H2, H1)
++GEN_VEXT_VRGATHER_VV(vrgatherei16_vv_h, uint16_t, uint16_t, H2, H2)
++GEN_VEXT_VRGATHER_VV(vrgatherei16_vv_w, uint16_t, uint32_t, H2, H4)
++GEN_VEXT_VRGATHER_VV(vrgatherei16_vv_d, uint16_t, uint64_t, H2, H8)
+ 
+ #define GEN_VEXT_VRGATHER_VX(NAME, ETYPE, H)                              \
+ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
 -- 
 2.17.1
 
