@@ -1,92 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k7LZK-0005q7-4R
-	for mharc-qemu-riscv@gnu.org; Sun, 16 Aug 2020 12:31:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37036)
+	id 1k7aqG-0005DY-RN
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:50:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43998)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1k7LZG-0005o8-Dg; Sun, 16 Aug 2020 12:31:34 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:51808)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1k7aqE-0005Bn-V2
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:50:06 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f]:36909)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1k7LZE-0002OB-Bl; Sun, 16 Aug 2020 12:31:34 -0400
-Received: by mail-wm1-x344.google.com with SMTP id p14so11420787wmg.1;
- Sun, 16 Aug 2020 09:31:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=P+YF+pu8frl+VmvrUhoikCYvioSqDUo2f9h3KfJ+e7o=;
- b=Kc0MBooVrCC5K/jfE4Ow5Bkaz9v441aqmmufvGbo/pVu/Rf1Q3muewlwzhrWm+/Kmv
- jmFDIJmMvD0k2Z963f8s8zeFMWO40VmrnafyAWsoeNAl4aE05cEnqEonrguM9iq1ui5r
- h0J+j+COYDsl4+LBlTyWc7r3lHHcAtbZuaTbmB6f5jt3wdapGc8eSTzv0LjsmtKcl4k5
- MmEMaZQs3u/y7/c2VcAggwzcbnE/nSmsXbMac8jkcjc8skaLVgMX7yZjuJhAA/53vIWy
- B0ambjP5FjWZfz6s7B0uDU21SaXsYoacLAR+44Ns4Vps36wa7m7m2auseEfnU3ec3Z9S
- heVQ==
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1k7aqC-0004gH-0P
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:50:06 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id s14so1191544plp.4
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:50:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=YaRz00F3DdxFE8gRMGnGvA7xLPyskscbRKXD8PrH9lw=;
+ b=Pn+FzaA/3eoynZQFDr6+pbZwzDAW0kJsw1VEI6PRa+di30+MW45dKXVMXkmEHj0n71
+ e108Ghuo6NhjlDc5jkrSbpNUk4qmlzSq+sUAaD2EHcA8OPtxQGqBjcri9P5qZJnHuDeB
+ 2+qh5mD4wKsQKx3aUaXCvM9ntrMzcryB3X/Gk6coTmYP8DHhA/TEX9FlMWq+N1jAVQMU
+ Flaif8GvtKoX6ZgRN3JttO4UA0A12x1VXzJGTtq3wLq8V+jL8z5wDtzeZELaJDKSqi0F
+ EjXbYCiwMrkaED2XMBq5xgNIykNJMWqRr4RfwlExQOvzHD0rVoCfJDQr35bH+nEkTYJh
+ pmOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=P+YF+pu8frl+VmvrUhoikCYvioSqDUo2f9h3KfJ+e7o=;
- b=mjfOob9RLHkWU7vPoiqukHS2bFTrtq6e5dyStHCfkxaxIdptK3GV78RC1hZcvs4Lxq
- X2gNPmGc0PkgiG9tCroxv+fSpuWswVfwdgq3l2fg/IfyxCrm+Ow/NOvEvk1mU0ImBxy6
- ZKD7QeoYZ6krdrB3j++tPPEMv8hBQLKs9t2xy8RteUgYjB9MdAycpmRYfxPm9HPqrVAI
- Z8MytR5zVErSyz9Jmy5ZwX22W8ArHHMS6CQn52VA8HKCHgXzTOlF27GAYhpLyoRaeNQ+
- WYTAOi/zwtiEDY/1MVVlomG5VDGv7W1iXp1ZqleVZzG7SYiylkAkPa8MHhHSw3LuZh7f
- 1GZw==
-X-Gm-Message-State: AOAM533M8NJ5AQg36N5nKjgpZFvLF88mACKHhOqS9DtZ+us6VaCB+aX9
- BNahXXnqo/VTubghjSW7Dww=
-X-Google-Smtp-Source: ABdhPJxxrKxJtSHN2WnnpQaBsH18OwCjXaa86r6hy/+Ll4ZEh66bBSPkL+YC0uJxGSZPOgEhbPEEyA==
-X-Received: by 2002:a1c:c1:: with SMTP id 184mr12031290wma.105.1597595490161; 
- Sun, 16 Aug 2020 09:31:30 -0700 (PDT)
-Received: from [192.168.1.36] (121.red-81-40-121.staticip.rima-tde.net.
- [81.40.121.121])
- by smtp.gmail.com with ESMTPSA id p15sm26553172wrj.61.2020.08.16.09.31.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 16 Aug 2020 09:31:29 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 14/18] hw/net: cadence_gem: Add a new 'phy-addr' property
-To: Bin Meng <bmeng.cn@gmail.com>, Nathan Rossi <nathan@nathanrossi.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Peter Crosthwaite <peter.crosthwaite@xilinx.com>,
- Alistair Francis <alistair@alistair23.me>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bin Meng <bin.meng@windriver.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Jason Wang <jasowang@redhat.com>, Palmer Dabbelt <palmerdabbelt@google.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "Peter A. G. Crosthwaite" <peter.crosthwaite@petalogix.com>,
- qemu-arm <qemu-arm@nongnu.org>, Alistair Francis <Alistair.Francis@wdc.com>,
- John Linn <john.linn@xilinx.com>
-References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
- <1597423256-14847-15-git-send-email-bmeng.cn@gmail.com>
- <e97e1bc4-277d-9fdd-1372-f69d22b4a7e4@amsat.org>
- <CAEUhbmX6O7gGc2+sZFXSve=rBJLZQ5ts2sfWM=OU6k+4j-uryg@mail.gmail.com>
- <CA+aJhH1YooxPkaT2xc4o6CjDYLm++6psSc3ZZW-EiAPFCz=PjA@mail.gmail.com>
- <CAEUhbmXQ6yxRMcP_LqaUTQra33iLsbU=vVs0MCaQkMU_ryUAUA@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <e17abf75-a8db-712d-504a-2177ebca32cf@amsat.org>
-Date: Sun, 16 Aug 2020 18:31:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
-MIME-Version: 1.0
-In-Reply-To: <CAEUhbmXQ6yxRMcP_LqaUTQra33iLsbU=vVs0MCaQkMU_ryUAUA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::344;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x344.google.com
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=YaRz00F3DdxFE8gRMGnGvA7xLPyskscbRKXD8PrH9lw=;
+ b=LPANnsMaUh17B/C1tOJ+SuHNiqGBOWmC/bzLqG0QlpfTaDMSJolby8tdHcQ331ekyo
+ 2UA1pg4k9+zHn3wGGGYIBYQumnCxXvk2J3sCb7j5f1et3hqcgl5p2wLMxnfkorDKuhC+
+ DYk/DdHXy7BugETUE/dk5LJjyWur/ef1ZTDoThzQbtGHKWAO0cOgM276dfm8BvCjYXT5
+ ffB9LdyTyrEjpRBcTkfiavi4FmGvI2dKFt/0k5Ue1HojyGFP49k9zJUQvcWMeWwgmRnR
+ YgXPbLa6nvStCQXZBPu785DRQvF3666SabSoYnIzVMlYI9+N5B4+mLGWdF8gFFPOR9eA
+ f4Kw==
+X-Gm-Message-State: AOAM53086vwtLzp6L315edC9gq2vMd88HOTtZfLa5ZhUyC7pCun8h2nm
+ h2uMxbJUbiQX5Vlu2jyipYrxkA==
+X-Google-Smtp-Source: ABdhPJwZuZLJvCZAw6JPc2stebg7Q5A+e8lP5RmaD8cKl50aZONipRM6UYuGuXA2lwfgw1XbJ1NcAw==
+X-Received: by 2002:a17:90b:2092:: with SMTP id
+ hb18mr12129512pjb.118.1597654201849; 
+ Mon, 17 Aug 2020 01:50:01 -0700 (PDT)
+Received: from frankchang-ThinkPad-T490.internal.sifive.com
+ (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
+ by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.49.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Aug 2020 01:50:00 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>
+Subject: [RFC v4 00/70] support vector extension v1.0
+Date: Mon, 17 Aug 2020 16:48:45 +0800
+Message-Id: <20200817084955.28793-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62f.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: 0
-X-Spam_score: 0.0
-X-Spam_bar: /
-X-Spam_report: (0.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=1, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=no autolearn_force=no
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -99,147 +74,169 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Aug 2020 16:31:34 -0000
+X-List-Received-Date: Mon, 17 Aug 2020 08:50:07 -0000
 
-On 8/16/20 3:42 PM, Bin Meng wrote:
-> On Sun, Aug 16, 2020 at 8:08 PM Nathan Rossi <nathan@nathanrossi.com> wrote:
->>
->> On Sun, 16 Aug 2020 at 18:29, Bin Meng <bmeng.cn@gmail.com> wrote:
->>>
->>> On Sat, Aug 15, 2020 at 5:06 PM Philippe Mathieu-Daudé <f4bug@amsat.org> wrote:
->>>>
->>>> On 8/14/20 6:40 PM, Bin Meng wrote:
->>>>> From: Bin Meng <bin.meng@windriver.com>
->>>>>
->>>>> At present the PHY address of the PHY connected to GEM is hard-coded
->>>>> to either 23 (BOARD_PHY_ADDRESS) or 0. This might not be the case for
->>>>> all boards. Add a new 'phy-addr' property so that board can specify
->>>>> the PHY address for each GEM instance.
->>>>>
->>>>> Signed-off-by: Bin Meng <bin.meng@windriver.com>
->>>>> ---
->>>>>
->>>>>  hw/net/cadence_gem.c         | 7 +++++--
->>>>>  include/hw/net/cadence_gem.h | 2 ++
->>>>>  2 files changed, 7 insertions(+), 2 deletions(-)
->>>>>
->>>>> diff --git a/hw/net/cadence_gem.c b/hw/net/cadence_gem.c
->>>>> index a93b5c0..9fa03de 100644
->>>>> --- a/hw/net/cadence_gem.c
->>>>> +++ b/hw/net/cadence_gem.c
->>>>> @@ -1446,7 +1446,8 @@ static uint64_t gem_read(void *opaque, hwaddr offset, unsigned size)
->>>>>              uint32_t phy_addr, reg_num;
->>>>>
->>>>>              phy_addr = (retval & GEM_PHYMNTNC_ADDR) >> GEM_PHYMNTNC_ADDR_SHFT;
->>>>> -            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0) {
->>>>> +            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0 ||
->>>>> +                phy_addr == s->phy_addr) {
->>>>>                  reg_num = (retval & GEM_PHYMNTNC_REG) >> GEM_PHYMNTNC_REG_SHIFT;
->>>>>                  retval &= 0xFFFF0000;
->>>>>                  retval |= gem_phy_read(s, reg_num);
->>>>> @@ -1569,7 +1570,8 @@ static void gem_write(void *opaque, hwaddr offset, uint64_t val,
->>>>>              uint32_t phy_addr, reg_num;
->>>>>
->>>>>              phy_addr = (val & GEM_PHYMNTNC_ADDR) >> GEM_PHYMNTNC_ADDR_SHFT;
->>>>> -            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0) {
->>>>> +            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0 ||
->>>>> +                phy_addr == s->phy_addr) {
->>>>>                  reg_num = (val & GEM_PHYMNTNC_REG) >> GEM_PHYMNTNC_REG_SHIFT;
->>>>>                  gem_phy_write(s, reg_num, val);
->>>>>              }
->>>>> @@ -1682,6 +1684,7 @@ static Property gem_properties[] = {
->>>>>      DEFINE_NIC_PROPERTIES(CadenceGEMState, conf),
->>>>>      DEFINE_PROP_UINT32("revision", CadenceGEMState, revision,
->>>>>                         GEM_MODID_VALUE),
->>>>> +    DEFINE_PROP_UINT8("phy-addr", CadenceGEMState, phy_addr, 0),
->>>>
->>>> This patch would be complete by moving the BOARD_PHY_ADDRESS definition
->>>> to each board using this NIC, and setting the "phy-addr" property to
->>>> this value.
->>>
->>> I actually have no idea which board in QEMU is using this special PHY
->>> address instead of default 0.
->>
->> Given Xilinx's QEMU fork has not used this value for quite some time,
->> I suspect it was only used to match an early chip emulation
->> platform/board.
->>
->> https://github.com/Xilinx/qemu/blame/master/hw/net/cadence_gem.c#L248
->>
->>>
->>> It looks BOARD_PHY_ADDRESS has been there since the initial version of
->>> the cadence_gem model.
->>>
->>> commit e9f186e514a70557d695cadd2c2287ef97737023
->>> Author: Peter A. G. Crosthwaite <peter.crosthwaite@petalogix.com>
->>> Date:   Mon Mar 5 14:39:12 2012 +1000
->>>
->>>     cadence_gem: initial version of device model
->>>
->>>     Device model for cadence gem ethernet controller.
->>>
->>>     Signed-off-by: Peter A. G. Crosthwaite <peter.crosthwaite@petalogix.com>
->>>     Signed-off-by: John Linn <john.linn@xilinx.com>
->>>     Acked-by: Edgar E. Iglesias <edgar.iglesias@gmail.com>
->>>     Signed-off-by: Edgar E. Iglesias <edgar.iglesias@gmail.com>
->>>
->>> Later PHY address 0 was added via the following commit:
->>>
->>> commit 553893736885e4f2dda424bff3e2200e1b6482a5
->>> Author: Peter Crosthwaite <peter.crosthwaite@xilinx.com>
->>> Date:   Thu Apr 3 23:55:19 2014 -0700
->>>
->>>     net: cadence_gem: Make phy respond to broadcast
->>>
->>>     Phys must respond to address 0 by specification. Implement.
->>>
->>>     Signed-off-by: Nathan Rossi <nathan.rossi@xilinx.com>
->>>     Signed-off-by: Peter Crosthwaite <peter.crosthwaite@xilinx.com>
->>>     Message-id:
->>> 6f4d53b04ddbfb19895bfb61a595e69f1c08859a.1396594056.git.peter.crosthwaite@xilinx.com
->>>     Reviewed-by: Beniamino Galvani <b.galvani@gmail.com>
->>>     Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
->>>
->>> I doubt the commit message said that PHYs must respond to address 0. I
->>> am not aware of such specs. The issue was probably that whatever board
->>> 2nd commit was tested against did not have a PHY at address
->>> BOARD_PHY_ADDRESS.
->>
->> It is common for phy devices to support it as a broadcast address. It
->> is also commonly written in Xilinx documentation that it is treated as
->> a broadcast address. e.g. the axi ethernet core
->> (https://www.xilinx.com/support/documentation/ip_documentation/axi_ethernet/v7_0/pg138-axi-ethernet.pdf
->> page 45). But 802.3 does not require it, instead address 0 is only
->> reserved.
->>
->> With this commit the "must" refers to the device specification, in
->> that QEMU is emulating a real phy (though more specifically the phy(s)
->> that were being emulated for Zynq boards) that does respond to address
->> 0 as a broadcast. This change was a trade off in order to make QEMU
->> behave as it would on hardware, such that software using address 0 as
->> broadcast would work correctly.
->>
-> 
-> Thanks Nathan. So is it safe to just remove BOARD_PHY_ADDRESS and set
-> "phy-addr" property default value to 0?
+From: Frank Chang <frank.chang@sifive.com>
 
-I'd do as following:
+This patchset implements the vector extension v1.0 for RISC-V on QEMU.
 
-First patch, introduce "phy-addr" property (default to
-BOARD_PHY_ADDRESS) and remove BOARD_PHY_ADDRESS in code:
+This patchset is sent as RFC because RVV v1.0 is still in draft state.
+v2 patchset was sent for RVV v0.9 and bumped to RVV v1.0 since v3 patchset.
 
-    DEFINE_PROP_UINT8("phy-addr", CadenceGEMState,
-                      phy_addr, BOARD_PHY_ADDRESS),
+The port is available here:
+https://github.com/sifive/qemu/tree/rvv-1.0-upstream-v4
 
-Second patch set "phy-addr" to BOARD_PHY_ADDRESS in all
-current boards using this PHY and set the default to 0.
+You can change the cpu argument: vext_spec to v1.0 (i.e. vext_spec=v1.0)
+to run with RVV v1.0 instructions.
 
-Thanks,
+Note: This patchset depends on two other patchsets listed in Based-on
+      section below so it might not able to be built unless those two
+      patchsets are applied.
 
-Phil.
+Changelog:
 
-> 
-> Regards,
-> Bin
-> 
+v4
+  * remove explicit float flmul variable in DisasContext.
+  * replace floating-point calculations with shift operations to
+    improve performance.
+  * relax RV_VLEN_MAX to 512-bits.
+
+v3
+  * apply nan-box helpers from Richard Henderson.
+  * remove fp16 api changes as they are sent independently in another
+    pathcset by Chih-Min Chao.
+  * remove all tail elements clear functions as tail elements can
+    retain unchanged for either VTA set to undisturbed or agnostic.
+  * add fp16 nan-box check generator function.
+  * add floating-point rounding mode enum.
+  * replace flmul arithmetic with shifts to avoid floating-point
+    conversions.
+  * add Zvqmac extension.
+  * replace gdbstub vector register xml files with dynamic generator.
+  * bumped to RVV v1.0.
+  * RVV v1.0 related changes:
+    * add vl<nf>re<eew>.v and vs<nf>r.v vector whole register
+      load/store instructions
+    * add vrgatherei16 instruction.
+    * rearranged bits in vtype to make vlmul bits into a contiguous
+      field.
+
+v2
+  * drop v0.7.1 support.
+  * replace invisible return check macros with functions.
+  * move mark_vs_dirty() to translators.
+  * add SSTATUS_VS flag for s-mode.
+  * nan-box scalar fp register for floating-point operations.
+  * add gdbstub files for vector registers to allow system-mode
+    debugging with GDB.
+
+Based-on: <20200724002807.441147-1-richard.henderson@linaro.org/>
+Based-on: <1596102747-20226-1-git-send-email-chihmin.chao@sifive.com/>
+
+Frank Chang (62):
+  target/riscv: drop vector 0.7.1 and add 1.0 support
+  target/riscv: Use FIELD_EX32() to extract wd field
+  target/riscv: rvv-1.0: introduce writable misa.v field
+  target/riscv: rvv-1.0: remove rvv related codes from fcsr registers
+  target/riscv: rvv-1.0: check MSTATUS_VS when accessing vector csr
+    registers
+  target/riscv: rvv-1.0: remove MLEN calculations
+  target/riscv: rvv-1.0: add fractional LMUL
+  target/riscv: rvv-1.0: add VMA and VTA
+  target/riscv: rvv-1.0: update check functions
+  target/riscv: introduce more imm value modes in translator functions
+  target/riscv: rvv:1.0: add translation-time nan-box helper function
+  target/riscv: rvv-1.0: configure instructions
+  target/riscv: rvv-1.0: stride load and store instructions
+  target/riscv: rvv-1.0: index load and store instructions
+  target/riscv: rvv-1.0: fix address index overflow bug of indexed
+    load/store insns
+  target/riscv: rvv-1.0: fault-only-first unit stride load
+  target/riscv: rvv-1.0: amo operations
+  target/riscv: rvv-1.0: load/store whole register instructions
+  target/riscv: rvv-1.0: update vext_max_elems() for load/store insns
+  target/riscv: rvv-1.0: take fractional LMUL into vector max elements
+    calculation
+  target/riscv: rvv-1.0: floating-point square-root instruction
+  target/riscv: rvv-1.0: floating-point classify instructions
+  target/riscv: rvv-1.0: mask population count instruction
+  target/riscv: rvv-1.0: find-first-set mask bit instruction
+  target/riscv: rvv-1.0: set-X-first mask bit instructions
+  target/riscv: rvv-1.0: iota instruction
+  target/riscv: rvv-1.0: element index instruction
+  target/riscv: rvv-1.0: allow load element with sign-extended
+  target/riscv: rvv-1.0: register gather instructions
+  target/riscv: rvv-1.0: integer scalar move instructions
+  target/riscv: rvv-1.0: floating-point move instruction
+  target/riscv: rvv-1.0: floating-point scalar move instructions
+  target/riscv: rvv-1.0: whole register move instructions
+  target/riscv: rvv-1.0: integer extension instructions
+  target/riscv: rvv-1.0: single-width averaging add and subtract
+    instructions
+  target/riscv: rvv-1.0: single-width bit shift instructions
+  target/riscv: rvv-1.0: integer add-with-carry/subtract-with-borrow
+  target/riscv: rvv-1.0: narrowing integer right shift instructions
+  target/riscv: rvv-1.0: widening integer multiply-add instructions
+  target/riscv: rvv-1.0: add Zvqmac extension
+  target/riscv: rvv-1.0: quad-widening integer multiply-add instructions
+  target/riscv: rvv-1.0: single-width saturating add and subtract
+    instructions
+  target/riscv: rvv-1.0: integer comparison instructions
+  target/riscv: use softfloat lib float16 comparison functions
+  target/riscv: rvv-1.0: floating-point compare instructions
+  target/riscv: rvv-1.0: mask-register logical instructions
+  target/riscv: rvv-1.0: slide instructions
+  target/riscv: rvv-1.0: floating-point slide instructions
+  target/riscv: rvv-1.0: narrowing fixed-point clip instructions
+  target/riscv: rvv-1.0: single-width floating-point reduction
+  target/riscv: rvv-1.0: widening floating-point reduction instructions
+  target/riscv: rvv-1.0: single-width scaling shift instructions
+  target/riscv: rvv-1.0: remove widening saturating scaled multiply-add
+  target/riscv: rvv-1.0: remove vmford.vv and vmford.vf
+  target/riscv: rvv-1.0: remove integer extract instruction
+  target/riscv: rvv-1.0: floating-point min/max instructions
+  target/riscv: introduce floating-point rounding mode enum
+  target/riscv: rvv-1.0: floating-point/integer type-convert
+    instructions
+  target/riscv: rvv-1.0: widening floating-point/integer type-convert
+  target/riscv: add "set round to odd" rounding mode helper function
+  target/riscv: rvv-1.0: narrowing floating-point/integer type-convert
+  target/riscv: rvv-1.0: relax RV_VLEN_MAX to 512-bits
+
+Greentime Hu (2):
+  target/riscv: rvv-1.0: add vlenb register
+  target/riscv: gdb: support vector registers for rv32
+
+Hsiangkai Wang (2):
+  target/riscv: gdb: modify gdb csr xml file to align with csr register
+    map
+  target/riscv: gdb: support vector registers for rv64
+
+LIU Zhiwei (4):
+  target/riscv: rvv-1.0: add mstatus VS field
+  target/riscv: rvv-1.0: add sstatus VS field
+  target/riscv: rvv-1.0: add translation-time vector context status
+  target/riscv: rvv-1.0: add vcsr register
+
+ gdb-xml/riscv-32bit-csr.xml             |   18 +-
+ gdb-xml/riscv-64bit-csr.xml             |   18 +-
+ target/riscv/cpu.c                      |   12 +-
+ target/riscv/cpu.h                      |   97 +-
+ target/riscv/cpu_bits.h                 |   10 +
+ target/riscv/cpu_helper.c               |   16 +-
+ target/riscv/csr.c                      |   73 +-
+ target/riscv/fpu_helper.c               |   17 +-
+ target/riscv/gdbstub.c                  |  126 +-
+ target/riscv/helper.h                   |  523 ++--
+ target/riscv/insn32-64.decode           |   18 +-
+ target/riscv/insn32.decode              |  295 +-
+ target/riscv/insn_trans/trans_rvv.inc.c | 2366 ++++++++++------
+ target/riscv/internals.h                |   19 +-
+ target/riscv/translate.c                |   68 +-
+ target/riscv/vector_helper.c            | 3269 +++++++++++------------
+ 16 files changed, 4051 insertions(+), 2894 deletions(-)
+
+--
+2.17.1
+
 
