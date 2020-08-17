@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k7arD-0007eP-CF
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:51:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44744)
+	id 1k7arG-0007no-Q5
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:51:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44790)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k7arB-0007Ye-4O
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:05 -0400
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:45319)
+ id 1k7arE-0007hw-J8
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:08 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:45470)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k7ar9-0004zs-8U
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:04 -0400
-Received: by mail-pf1-x442.google.com with SMTP id f193so7886515pfa.12
- for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:51:02 -0700 (PDT)
+ id 1k7arC-00050Y-38
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:08 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id x6so7780983pgx.12
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:51:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=bh+dNsmGP/qZR/VB/85dqarQceH1VG542/49ilIh4wY=;
- b=eU+JyqH+DebpNBwecsGT7dAyOCLWygVzZrBnk33DZZFhFAxIdtGhriUHpqK/iaREgQ
- QvUXaAHoLGJ9EV3MQtlfaEfbXch/SHHRlYk7E3c20dOeqNmqL2KuDJPGtKed78zr5DF5
- GsEb5X1eqrJbfA4TEbMkxqC3emBhlVVNw48vIAwzH5pjuvODfPa3QiaWmeET9VyS8iYm
- 2SDxotvUqSgYfDVtufo27FJN3cAs/RIBp65lJcqR380DRgaUh0WtBbcL2PvX1Qr2g8IX
- R7k6p/uQOCLIkX1o/LgsY3JRiWcEKqxrjaJwrr/VnvNbw4IPV5t8/rnWEyG57Ou4roJH
- 9TEw==
+ bh=LdHpClMahN7se1UkrNfzkyRmZy+4FE920DAoieQ3aoo=;
+ b=DOEe8aq50xgjeouRqL7EbBI/WANr/RXN0rq2PSYenX7QDopIA9ANeFeb5Cem/Y5fWj
+ FN4plJ7/7G4KXoJ7XK5pXsGNGNgMr6xn2ps9D4VlmjUMalrZaWnwW49iPc+gZ5ChsqoW
+ o7OSIbEz7wEcPZ8qDJ4ciPabrH2+V+EY6xthFL2Gf4gV/q3cK4z9i8jR06alhSEsYKb0
+ F0Zr4ABQE7SM798rThGlDsEQI2c3Y9kfei/4Xb4KfUB5gOoaIkK8VrCdZO364ENipScJ
+ uu1wHAUOLkVC3wUoc1Yz0TGnzRi13EqTshXwkzRfuktNmcariPbDPEdP7VzHu2mhW25M
+ fwdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=bh+dNsmGP/qZR/VB/85dqarQceH1VG542/49ilIh4wY=;
- b=csvOZSGI2i5rf7qBRur3ksMu/dC6sTXU0EqOzTMG2yX5syjP+jJwa/jrgA9BCuJtdE
- bO5tujeSXa+287QWpoTtWFGNuKD5stdrKpkZ+qw2vn+Mt1sORSMyZIl1ZEq7JZ4PqslK
- wOT7BATiwkrPR5+bUjwJ36CIFGhjBG8gn3ITah695+DHXiSwj828Ojgm5wT27veXruot
- nrnJHSiuVRSSQaRuv1CrLnQCJTS4M0QuOcAff+IpQiOgTyCEctMgDlJu4CGCkzQMyQGU
- Sg5Ap5XOlh6k1wLaRDXmfZnDp0bXSxSItXKJF3QzuVrhAN7/gDVjz1+QnWE91/pS/yf+
- eWZQ==
-X-Gm-Message-State: AOAM530zgZinTPUgNWPKK1DuQf7uWbrhL3VR2tXDW4kmqrg40t461GoS
- W4k3HdkpFe8v09GjPZxxh5de5A==
-X-Google-Smtp-Source: ABdhPJwrBG3k8yB5pokzqfB+5aVpTtgRqUktZOFQ7Mv+Me+pVOTQ7bONqEcodmPYyqz2J/r7iRaiEA==
-X-Received: by 2002:a63:f44b:: with SMTP id p11mr5007805pgk.324.1597654261999; 
- Mon, 17 Aug 2020 01:51:01 -0700 (PDT)
+ bh=LdHpClMahN7se1UkrNfzkyRmZy+4FE920DAoieQ3aoo=;
+ b=f8DHPBgXJqLt71XLhqLHQcMk6njnmVQh/lMo6Wcqb7TuvwF33pWbc/smPpXjXu89Oo
+ RK8h0Za632J1iNRgvM+7/wV6ziFcP/GDLlzuKCvs05j6cQHnz+pMS+f3HpTd5N5b288P
+ c4GKQNRhhGqK+dOG2b5KyKewjjA7EP4P+Jz9YDMsLm86eiuYt/1+ya8469A9LvpDxufL
+ nsVUzOIPGe6ci6aQzraCa3bhuSGasSrFZKHQp0gKDkSIjLXJ29A6UsLzw+np6bC1jj54
+ ZEeVa6V5oBQA+HmqQtkDYZQi08SKCseWP7svXqfTiMH7SPQNGcJV86PTb4eoxRWG/kS7
+ WIDA==
+X-Gm-Message-State: AOAM533yXocRlQ3JJV3cuvedQkEl4VYvhMZdDBP5ebj9sHCXfZfz1v20
+ Culy0eWUianbV99ocva6Il1sgw==
+X-Google-Smtp-Source: ABdhPJx39EPDq/a3LkPiKpWnHl1TcUI852dJMYjOSPi0NtcQGDoAtC1FmmGavHBRJjsoYEuVzKOvKQ==
+X-Received: by 2002:a63:1a66:: with SMTP id a38mr9043949pgm.253.1597654264562; 
+ Mon, 17 Aug 2020 01:51:04 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.51.00
+ by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.51.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Aug 2020 01:51:01 -0700 (PDT)
+ Mon, 17 Aug 2020 01:51:04 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -50,15 +50,15 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v4 20/70] target/riscv: rvv-1.0: fix address index overflow bug
- of indexed load/store insns
-Date: Mon, 17 Aug 2020 16:49:05 +0800
-Message-Id: <20200817084955.28793-21-frank.chang@sifive.com>
+Subject: [RFC v4 21/70] target/riscv: rvv-1.0: fault-only-first unit stride
+ load
+Date: Mon, 17 Aug 2020 16:49:06 +0800
+Message-Id: <20200817084955.28793-22-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200817084955.28793-1-frank.chang@sifive.com>
 References: <20200817084955.28793-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::442;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x442.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52b.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -80,37 +80,239 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2020 08:51:05 -0000
+X-List-Received-Date: Mon, 17 Aug 2020 08:51:09 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Replace ETYPE from signed int to unsigned int to prevent index overflow
-issue, which would lead to wrong index address.
-
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/vector_helper.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ target/riscv/helper.h                   | 27 +++---------
+ target/riscv/insn32.decode              | 14 +++----
+ target/riscv/insn_trans/trans_rvv.inc.c | 31 ++++----------
+ target/riscv/vector_helper.c            | 56 +++++++++----------------
+ 4 files changed, 38 insertions(+), 90 deletions(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 272a65ebb3a..92a2161e373 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -363,10 +363,10 @@ static target_ulong NAME(target_ulong base,            \
-     return (base + *((ETYPE *)vs2 + H(idx)));          \
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 8a5d97969da..3d931ba0c70 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -140,28 +140,11 @@ DEF_HELPER_6(vsxei64_8_v, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vsxei64_16_v, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vsxei64_32_v, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vsxei64_64_v, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_5(vlbff_v_b, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbff_v_h, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhff_v_h, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlwff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlwff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vleff_v_b, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vleff_v_h, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vleff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vleff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbuff_v_b, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbuff_v_h, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbuff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlbuff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhuff_v_h, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhuff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlhuff_v_d, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlwuff_v_w, void, ptr, ptr, tl, env, i32)
+-DEF_HELPER_5(vlwuff_v_d, void, ptr, ptr, tl, env, i32)
++DEF_HELPER_5(vle8ff_v, void, ptr, ptr, tl, env, i32)
++DEF_HELPER_5(vle16ff_v, void, ptr, ptr, tl, env, i32)
++DEF_HELPER_5(vle32ff_v, void, ptr, ptr, tl, env, i32)
++DEF_HELPER_5(vle64ff_v, void, ptr, ptr, tl, env, i32)
++
+ #ifdef TARGET_RISCV64
+ DEF_HELPER_6(vamoswapw_v_d, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vamoswapd_v_d, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 46542d162e6..b0aaa186b8b 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -249,14 +249,6 @@ vsse16_v    ... 010 . ..... ..... 101 ..... 0100111 @r_nfvm
+ vsse32_v    ... 010 . ..... ..... 110 ..... 0100111 @r_nfvm
+ vsse64_v    ... 010 . ..... ..... 111 ..... 0100111 @r_nfvm
+ 
+-vlbff_v    ... 100 . 10000 ..... 000 ..... 0000111 @r2_nfvm
+-vlhff_v    ... 100 . 10000 ..... 101 ..... 0000111 @r2_nfvm
+-vlwff_v    ... 100 . 10000 ..... 110 ..... 0000111 @r2_nfvm
+-vleff_v    ... 000 . 10000 ..... 111 ..... 0000111 @r2_nfvm
+-vlbuff_v   ... 000 . 10000 ..... 000 ..... 0000111 @r2_nfvm
+-vlhuff_v   ... 000 . 10000 ..... 101 ..... 0000111 @r2_nfvm
+-vlwuff_v   ... 000 . 10000 ..... 110 ..... 0000111 @r2_nfvm
+-
+ # Vector indexed load insns.
+ vlxei8_v      ... 011 . ..... ..... 000 ..... 0000111 @r_nfvm
+ vlxei16_v     ... 011 . ..... ..... 101 ..... 0000111 @r_nfvm
+@@ -269,6 +261,12 @@ vsxei16_v     ... 0-1 . ..... ..... 101 ..... 0100111 @r_nfvm
+ vsxei32_v     ... 0-1 . ..... ..... 110 ..... 0100111 @r_nfvm
+ vsxei64_v     ... 0-1 . ..... ..... 111 ..... 0100111 @r_nfvm
+ 
++# Vector unit-stride fault-only-first load insns.
++vle8ff_v      ... 000 . 10000 ..... 000 ..... 0000111 @r2_nfvm
++vle16ff_v     ... 000 . 10000 ..... 101 ..... 0000111 @r2_nfvm
++vle32ff_v     ... 000 . 10000 ..... 110 ..... 0000111 @r2_nfvm
++vle64ff_v     ... 000 . 10000 ..... 111 ..... 0000111 @r2_nfvm
++
+ #*** Vector AMO operations are encoded under the standard AMO major opcode ***
+ vamoswapw_v     00001 . . ..... ..... 110 ..... 0101111 @r_wdvm
+ vamoaddw_v      00000 . . ..... ..... 110 ..... 0101111 @r_wdvm
+diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
+index 74e83824b36..6bb3cd47ff9 100644
+--- a/target/riscv/insn_trans/trans_rvv.inc.c
++++ b/target/riscv/insn_trans/trans_rvv.inc.c
+@@ -946,24 +946,12 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
+ {
+     uint32_t data = 0;
+     gen_helper_ldst_us *fn;
+-    static gen_helper_ldst_us * const fns[7][4] = {
+-        { gen_helper_vlbff_v_b,  gen_helper_vlbff_v_h,
+-          gen_helper_vlbff_v_w,  gen_helper_vlbff_v_d },
+-        { NULL,                  gen_helper_vlhff_v_h,
+-          gen_helper_vlhff_v_w,  gen_helper_vlhff_v_d },
+-        { NULL,                  NULL,
+-          gen_helper_vlwff_v_w,  gen_helper_vlwff_v_d },
+-        { gen_helper_vleff_v_b,  gen_helper_vleff_v_h,
+-          gen_helper_vleff_v_w,  gen_helper_vleff_v_d },
+-        { gen_helper_vlbuff_v_b, gen_helper_vlbuff_v_h,
+-          gen_helper_vlbuff_v_w, gen_helper_vlbuff_v_d },
+-        { NULL,                  gen_helper_vlhuff_v_h,
+-          gen_helper_vlhuff_v_w, gen_helper_vlhuff_v_d },
+-        { NULL,                  NULL,
+-          gen_helper_vlwuff_v_w, gen_helper_vlwuff_v_d }
++    static gen_helper_ldst_us * const fns[4] = {
++        gen_helper_vle8ff_v, gen_helper_vle16ff_v,
++        gen_helper_vle32ff_v, gen_helper_vle64ff_v
+     };
+ 
+-    fn =  fns[seq][s->sew];
++    fn = fns[seq];
+     if (fn == NULL) {
+         return false;
+     }
+@@ -974,13 +962,10 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
+     return ldff_trans(a->rd, a->rs1, data, fn, s);
  }
  
--GEN_VEXT_GET_INDEX_ADDR(idx_b, int8_t,  H1)
--GEN_VEXT_GET_INDEX_ADDR(idx_h, int16_t, H2)
--GEN_VEXT_GET_INDEX_ADDR(idx_w, int32_t, H4)
--GEN_VEXT_GET_INDEX_ADDR(idx_d, int64_t, H8)
-+GEN_VEXT_GET_INDEX_ADDR(idx_b, uint8_t,  H1)
-+GEN_VEXT_GET_INDEX_ADDR(idx_h, uint16_t, H2)
-+GEN_VEXT_GET_INDEX_ADDR(idx_w, uint32_t, H4)
-+GEN_VEXT_GET_INDEX_ADDR(idx_d, uint64_t, H8)
+-GEN_VEXT_TRANS(vlbff_v, 0, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vlhff_v, 1, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vlwff_v, 2, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vleff_v, 3, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vlbuff_v, 4, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vlhuff_v, 5, r2nfvm, ldff_op, ld_us_check)
+-GEN_VEXT_TRANS(vlwuff_v, 6, r2nfvm, ldff_op, ld_us_check)
++GEN_VEXT_TRANS(vle8ff_v,  8,  0, r2nfvm, ldff_op, ld_us_check)
++GEN_VEXT_TRANS(vle16ff_v, 16, 1, r2nfvm, ldff_op, ld_us_check)
++GEN_VEXT_TRANS(vle32ff_v, 32, 2, r2nfvm, ldff_op, ld_us_check)
++GEN_VEXT_TRANS(vle64ff_v, 64, 3, r2nfvm, ldff_op, ld_us_check)
  
- static inline void
- vext_ldst_index(void *vd, void *v0, target_ulong base,
+ /*
+  *** vector atomic operation
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 92a2161e373..72f749be837 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -460,7 +460,7 @@ static inline void
+ vext_ldff(void *vd, void *v0, target_ulong base,
+           CPURISCVState *env, uint32_t desc,
+           vext_ldst_elem_fn *ldst_elem,
+-          uint32_t esz, uint32_t msz, uintptr_t ra)
++          uint32_t esz, uintptr_t ra)
+ {
+     void *host;
+     uint32_t i, k, vl = 0;
+@@ -474,24 +474,24 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+         if (!vm && !vext_elem_mask(v0, i)) {
+             continue;
+         }
+-        addr = base + nf * i * msz;
++        addr = base + nf * i * esz;
+         if (i == 0) {
+-            probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
++            probe_pages(env, addr, nf * esz, ra, MMU_DATA_LOAD);
+         } else {
+             /* if it triggers an exception, no need to check watchpoint */
+-            remain = nf * msz;
++            remain = nf * esz;
+             while (remain > 0) {
+                 offset = -(addr | TARGET_PAGE_MASK);
+                 host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD,
+                                          cpu_mmu_index(env, false));
+                 if (host) {
+ #ifdef CONFIG_USER_ONLY
+-                    if (page_check_range(addr, nf * msz, PAGE_READ) < 0) {
++                    if (page_check_range(addr, nf * esz, PAGE_READ) < 0) {
+                         vl = i;
+                         goto ProbeSuccess;
+                     }
+ #else
+-                    probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
++                    probe_pages(env, addr, nf * esz, ra, MMU_DATA_LOAD);
+ #endif
+                 } else {
+                     vl = i;
+@@ -516,43 +516,25 @@ ProbeSuccess:
+             continue;
+         }
+         while (k < nf) {
+-            target_ulong addr = base + (i * nf + k) * msz;
++            target_ulong addr = base + (i * nf + k) * esz;
+             ldst_elem(env, addr, i + k * vlmax, vd, ra);
+             k++;
+         }
+     }
+ }
+ 
+-#define GEN_VEXT_LDFF(NAME, MTYPE, ETYPE, LOAD_FN)               \
+-void HELPER(NAME)(void *vd, void *v0, target_ulong base,         \
+-                  CPURISCVState *env, uint32_t desc)             \
+-{                                                                \
+-    vext_ldff(vd, v0, base, env, desc, LOAD_FN,                  \
+-              sizeof(ETYPE), sizeof(MTYPE), GETPC());            \
+-}
+-
+-GEN_VEXT_LDFF(vlbff_v_b,  int8_t,   int8_t,   ldb_b)
+-GEN_VEXT_LDFF(vlbff_v_h,  int8_t,   int16_t,  ldb_h)
+-GEN_VEXT_LDFF(vlbff_v_w,  int8_t,   int32_t,  ldb_w)
+-GEN_VEXT_LDFF(vlbff_v_d,  int8_t,   int64_t,  ldb_d)
+-GEN_VEXT_LDFF(vlhff_v_h,  int16_t,  int16_t,  ldh_h)
+-GEN_VEXT_LDFF(vlhff_v_w,  int16_t,  int32_t,  ldh_w)
+-GEN_VEXT_LDFF(vlhff_v_d,  int16_t,  int64_t,  ldh_d)
+-GEN_VEXT_LDFF(vlwff_v_w,  int32_t,  int32_t,  ldw_w)
+-GEN_VEXT_LDFF(vlwff_v_d,  int32_t,  int64_t,  ldw_d)
+-GEN_VEXT_LDFF(vleff_v_b,  int8_t,   int8_t,   lde_b)
+-GEN_VEXT_LDFF(vleff_v_h,  int16_t,  int16_t,  lde_h)
+-GEN_VEXT_LDFF(vleff_v_w,  int32_t,  int32_t,  lde_w)
+-GEN_VEXT_LDFF(vleff_v_d,  int64_t,  int64_t,  lde_d)
+-GEN_VEXT_LDFF(vlbuff_v_b, uint8_t,  uint8_t,  ldbu_b)
+-GEN_VEXT_LDFF(vlbuff_v_h, uint8_t,  uint16_t, ldbu_h)
+-GEN_VEXT_LDFF(vlbuff_v_w, uint8_t,  uint32_t, ldbu_w)
+-GEN_VEXT_LDFF(vlbuff_v_d, uint8_t,  uint64_t, ldbu_d)
+-GEN_VEXT_LDFF(vlhuff_v_h, uint16_t, uint16_t, ldhu_h)
+-GEN_VEXT_LDFF(vlhuff_v_w, uint16_t, uint32_t, ldhu_w)
+-GEN_VEXT_LDFF(vlhuff_v_d, uint16_t, uint64_t, ldhu_d)
+-GEN_VEXT_LDFF(vlwuff_v_w, uint32_t, uint32_t, ldwu_w)
+-GEN_VEXT_LDFF(vlwuff_v_d, uint32_t, uint64_t, ldwu_d)
++#define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
++void HELPER(NAME)(void *vd, void *v0, target_ulong base,  \
++                  CPURISCVState *env, uint32_t desc)      \
++{                                                         \
++    vext_ldff(vd, v0, base, env, desc, LOAD_FN,           \
++              sizeof(ETYPE), GETPC());                    \
++}
++
++GEN_VEXT_LDFF(vle8ff_v,  int8_t,  lde_b)
++GEN_VEXT_LDFF(vle16ff_v, int16_t, lde_h)
++GEN_VEXT_LDFF(vle32ff_v, int32_t, lde_w)
++GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d)
+ 
+ /*
+  *** Vector AMO Operations (Zvamo)
 -- 
 2.17.1
 
