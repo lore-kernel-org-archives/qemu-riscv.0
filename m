@@ -1,48 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k7arP-0008CR-VQ
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:51:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44974)
+	id 1k7arS-0008IE-5A
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:51:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45004)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k7arO-00087F-0e
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:18 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e]:42243)
+ id 1k7arP-0008C1-Po
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:19 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:54941)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k7arK-00052Y-Nc
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:17 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id j21so7785189pgi.9
- for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:51:14 -0700 (PDT)
+ id 1k7arN-000533-OF
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:51:19 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id mt12so7483230pjb.4
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:51:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=ilv4oS+naP+1NFBXaPazACxKaoolnVKjPTkRbsbHgqo=;
- b=Hkg0Uas5/sT7pXIuTthsWp5HsaSwx7RGQT+cGGWHydcDMXwiUeWc6XRRJOjr73Ans+
- xix2AWMsbuMMYS4ztIZpP5X0e1xdiMRiy2IAJuGZ10EBX2T7lG3Ekcz5quh6hFkJ6xlg
- YBqFAw0RHSoF+fEJDW6v1Oe6wgP/hWDmKwvzmtOjK6ygwjD6yted3i8ql3fyc7Kbt3aQ
- J/zUM+JqL07uD3edaLDRcvvqnWfSxD8T13S8/9Zj4RCJ9gLngUd8fyU+Jcb282A8WxSq
- 8ZLGTm2HPFDjCvICdo84gVE/naOGJWG5snEM+nwCrNjvh1kfuXpi8QdnRmXpXyytJxh3
- eG5g==
+ bh=PeNRirOsAYetV+xE0dMFlxFMaG6kB8KyHDl0oM6vhPg=;
+ b=Mi6GU1ZHrB3tXhXAtm5y9Uhbng5e1lOuqdgtvxyLdf8Qz7yEEKp486bEgE87PRZms2
+ Sje5dOtup0/XjKJ0WkCa/VzXFGVTuOxYt9iSOl3gWFFXv4wVMpiKHCgXKg3d8PFLS2Y0
+ BExNRdQ1mHz+9rRVea4CJJ5QzNMm6LOhe+3dgJko4Yl8oguYjRu0o/+53rrqKmFaky7d
+ GOGJLKpb+7wWtDgRNTjbtMAvAguzXfdKOWv/ZSzhGI1h1T0JU38vG3BcRQfocvatt8LY
+ 43rh5Vy/VdsW9aiCx79oB+tBmexrE9Nfq4s2+y0aaYlcDzw7f6G9/qwAHwJWQB+FR2zv
+ Vb4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=ilv4oS+naP+1NFBXaPazACxKaoolnVKjPTkRbsbHgqo=;
- b=b41js9mKyUpMj8u2OLY7fuubWQYjF58RwkdAPlwTeAETa/1fRnb9leL/zHb1dNXO6R
- /4Qy/3i4BfudQ56X+s04AjpNkDJKyKSgbR1Dzawbu7v0wYWWa376U3eEDBQUpaTFmQIy
- 5bDivquMvsiGKeEYCHWUGH14fgPlrHVpw9p0uStUowSmm4zO5PQY05aFkxeWsFytZa6r
- IXuodfg0JgT55qH3ojrIJxjKeTGMwD+kZW3j9DXtKZz6Wy1uGVD1CXxbtDt2zqEKuHsG
- KBAVSb1qeQJkX6a/LRYXobeoY9hm3LaPpuDkgRKnE0AkkT3+8ckG1LoYx7CBeMMsAquu
- FV3w==
-X-Gm-Message-State: AOAM5304BCp/UQd9OIcDGp3vXi4iyGD3uiUABnJ9RLriTotOKNXhILtW
- TDaBdB/QSkJ24fX4TTxdG1P1PA==
-X-Google-Smtp-Source: ABdhPJz3ik/LPT6icwdxnbh1LuVLR+WT41vbNWHvf+xypCN2dPgAOc0SVqrStqAAV5ln2mgX9cCfXw==
-X-Received: by 2002:a63:6f02:: with SMTP id k2mr9238956pgc.191.1597654273214; 
- Mon, 17 Aug 2020 01:51:13 -0700 (PDT)
+ bh=PeNRirOsAYetV+xE0dMFlxFMaG6kB8KyHDl0oM6vhPg=;
+ b=e0xhWn61zC1u5jfWmNlYddCeJKrhmeTHgKXliUeePAmQT5AFo1h6hDpc+2rWay/pUm
+ Bfhywn77fHkkLy58P/v6kvxOLrlk/yOZ53O753uoPhmEgh7js+eoae1+UUKKQkeSuaWN
+ iujgJLXlfNbb4EKlsgdRjEwkK9McwiBlR6UQhFAh2685qUIZ+2LhB9mr2RN5EUua2eXo
+ S6j7zyb8/sueSvPtiy1nlwrrQ53l55SuHrk7r51TXCUOwuQ1/eUiw4t9tU/eKJDAOno2
+ 0BKlLevmFeeQtg3M+fXEu976WOiKZqHgH5wOghOwPCjhAhfuTZ61zTtUZeYEWn93A638
+ OHgg==
+X-Gm-Message-State: AOAM531PETAfMfXngi4cwmACY7mpOeBcaLxCQ7wdijV/VNAe446qpPAx
+ NaNO++qmmZbLkfWlyOBy1XnNzw==
+X-Google-Smtp-Source: ABdhPJw66PmA7IeJjOAhKY1a6JX9ieUzL0pqRdA0zJf+BRgjp8zjFA1dWphEiC2hVy9F0EEJCHgA3A==
+X-Received: by 2002:a17:90a:c591:: with SMTP id
+ l17mr11453226pjt.17.1597654276410; 
+ Mon, 17 Aug 2020 01:51:16 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.51.11
+ by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.51.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Aug 2020 01:51:12 -0700 (PDT)
+ Mon, 17 Aug 2020 01:51:16 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -50,15 +51,15 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v4 24/70] target/riscv: rvv-1.0: update vext_max_elems() for
- load/store insns
-Date: Mon, 17 Aug 2020 16:49:09 +0800
-Message-Id: <20200817084955.28793-25-frank.chang@sifive.com>
+Subject: [RFC v4 25/70] target/riscv: rvv-1.0: take fractional LMUL into
+ vector max elements calculation
+Date: Mon, 17 Aug 2020 16:49:10 +0800
+Message-Id: <20200817084955.28793-26-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200817084955.28793-1-frank.chang@sifive.com>
 References: <20200817084955.28793-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1029.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -80,515 +81,109 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2020 08:51:18 -0000
+X-List-Received-Date: Mon, 17 Aug 2020 08:51:20 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Unlike other vector instructions, load/store vector instructions return
-the maximum vector size calculated with EMUL.
-For other vector instructions, return VLMAX as the maximum vector size.
+Update vext_get_vlmax() and MAXSZ() to take fractional LMUL into
+calculation for RVV 1.0.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.inc.c | 57 +++++++++++-----
- target/riscv/vector_helper.c            | 90 ++++++++++++++-----------
- 2 files changed, 88 insertions(+), 59 deletions(-)
+ target/riscv/cpu.h                      | 43 ++++++++++++++++++-------
+ target/riscv/insn_trans/trans_rvv.inc.c | 12 ++++++-
+ 2 files changed, 42 insertions(+), 13 deletions(-)
 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 8b5e6429015..715faed8824 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -376,18 +376,27 @@ FIELD(TB_FLAGS, SEW, 6, 3)
+ FIELD(TB_FLAGS, VILL, 11, 1)
+ 
+ /*
+- * A simplification for VLMAX
+- * = (1 << LMUL) * VLEN / (8 * (1 << SEW))
+- * = (VLEN << LMUL) / (8 << SEW)
+- * = (VLEN << LMUL) >> (SEW + 3)
+- * = VLEN >> (SEW + 3 - LMUL)
++ * Encode LMUL to lmul as follows:
++ *     LMUL    vlmul    lmul
++ *      1       000       0
++ *      2       001       1
++ *      4       010       2
++ *      8       011       3
++ *      -       100       -
++ *     1/8      101      -3
++ *     1/4      110      -2
++ *     1/2      111      -1
++ *
++ * then, we can calculate VLMAX = vlen >> (vsew + 3 - lmul)
++ * e.g. vlen = 256 bits, SEW = 16, LMUL = 1/8
++ *      => VLMAX = vlen >> (1 + 3 - (-3))
++ *               = 256 >> 7
++ *               = 2
+  */
+ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
+ {
+-    uint8_t sew, lmul;
+-
+-    sew = FIELD_EX64(vtype, VTYPE, VSEW);
+-    lmul = FIELD_EX64(vtype, VTYPE, VLMUL);
++    uint8_t sew = FIELD_EX64(vtype, VTYPE, VSEW);
++    int8_t lmul = sextract32(FIELD_EX64(vtype, VTYPE, VLMUL), 0, 3);
+     return cpu->cfg.vlen >> (sew + 3 - lmul);
+ }
+ 
+@@ -400,12 +409,22 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+     *cs_base = 0;
+ 
+     if (riscv_has_ext(env, RVV)) {
++        /*
++         * If env->vl equals to VLMAX, we can use generic vector operation
++         * expanders (GVEC) to accerlate the vector operations.
++         * However, as LMUL could be a fractional number. The maximum
++         * vector size can be operated might be less than 8 bytes,
++         * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
++         * only when maxsz >= 8 bytes.
++         */
+         uint32_t vlmax = vext_get_vlmax(env_archcpu(env), env->vtype);
+-        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl);
++        uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
++        uint32_t maxsz = vlmax << sew;
++        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl)
++                           && (maxsz >= 8);
+         flags = FIELD_DP32(flags, TB_FLAGS, VILL,
+                     FIELD_EX64(env->vtype, VTYPE, VILL));
+-        flags = FIELD_DP32(flags, TB_FLAGS, SEW,
+-                    FIELD_EX64(env->vtype, VTYPE, VSEW));
++        flags = FIELD_DP32(flags, TB_FLAGS, SEW, sew);
+         flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
+                     FIELD_EX64(env->vtype, VTYPE, VLMUL));
+         flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
 diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index 6a2f175b50a..334e1fc123b 100644
+index 334e1fc123b..2c6efce00a7 100644
 --- a/target/riscv/insn_trans/trans_rvv.inc.c
 +++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -583,11 +583,17 @@ static bool vext_check_isa_ill(DisasContext *s)
- static bool trans_##NAME(DisasContext *s, arg_##ARGTYPE * a) \
- {                                                            \
-     if (CHECK(s, a, EEW)) {                                  \
--        return OP(s, a, SEQ);                                \
-+        return OP(s, a, EEW, SEQ);                           \
-     }                                                        \
-     return false;                                            \
- }
- 
-+static uint8_t vext_get_emul(DisasContext *s, uint8_t eew)
+@@ -1268,7 +1268,17 @@ GEN_VEXT_TRANS(vamomaxuei64_v, 64, 35, rwdvm, amo_op, amo_check)
+ /*
+  *** Vector Integer Arithmetic Instructions
+  */
+-#define MAXSZ(s) (s->vlen >> (3 - s->lmul))
++
++/*
++ * MAXSZ returns the maximum vector size can be operated in bytes,
++ * which is used in GVEC IR when vl_eq_vlmax flag is set to true
++ * to accerlate vector operation.
++ */
++static inline uint32_t MAXSZ(DisasContext *s)
 +{
-+    int8_t emul = ctzl(eew) - (s->sew + 3) + s->lmul;
-+    return emul < 0 ? 0 : emul;
++    int scale = s->lmul - 3;
++    return scale < 0 ? s->vlen >> -scale : s->vlen << scale;
 +}
-+
- /*
-  *** unit stride load and store
-  */
-@@ -611,7 +617,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
  
-     /*
-      * As simd_desc supports at most 256 bytes, and in this implementation,
--     * the max vector group length is 2048 bytes. So split it into two parts.
-+     * the max vector group length is 1024 bytes. So split it into two parts.
-      *
-      * The first part is vlen in bytes, encoded in maxsz of simd_desc.
-      * The second part is lmul, encoded in data of simd_desc.
-@@ -635,7 +641,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
-     return true;
- }
- 
--static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
-+static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew, uint8_t seq)
+ static bool opivv_check(DisasContext *s, arg_rmrr *a)
  {
-     uint32_t data = 0;
-     gen_helper_ldst_us *fn;
-@@ -653,8 +659,14 @@ static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
-         return false;
-     }
- 
-+    /*
-+     * Vector load/store instructions have the EEW encoded
-+     * directly in the instructions. The maximum vector size is
-+     * calculated with EMUL rather than LMUL.
-+     */
-+    uint8_t emul = vext_get_emul(s, eew);
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
--    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, LMUL, emul);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
- }
-@@ -671,7 +683,7 @@ GEN_VEXT_TRANS(vle16_v, 16, 1, r2nfvm, ld_us_op, ld_us_check)
- GEN_VEXT_TRANS(vle32_v, 32, 2, r2nfvm, ld_us_op, ld_us_check)
- GEN_VEXT_TRANS(vle64_v, 64, 3, r2nfvm, ld_us_op, ld_us_check)
- 
--static bool st_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
-+static bool st_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew, uint8_t seq)
- {
-     uint32_t data = 0;
-     gen_helper_ldst_us *fn;
-@@ -689,8 +701,9 @@ static bool st_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
-         return false;
-     }
- 
-+    uint8_t emul = vext_get_emul(s, eew);
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
--    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, LMUL, emul);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
- }
-@@ -749,7 +762,8 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
-     return true;
- }
- 
--static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
-+static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew,
-+                         uint8_t seq)
- {
-     uint32_t data = 0;
-     gen_helper_ldst_stride *fn;
-@@ -763,8 +777,9 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
-         return false;
-     }
- 
-+    uint8_t emul = vext_get_emul(s, eew);
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
--    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, LMUL, emul);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
- }
-@@ -781,7 +796,8 @@ GEN_VEXT_TRANS(vlse16_v, 16, 1, rnfvm, ld_stride_op, ld_stride_check)
- GEN_VEXT_TRANS(vlse32_v, 32, 2, rnfvm, ld_stride_op, ld_stride_check)
- GEN_VEXT_TRANS(vlse64_v, 64, 3, rnfvm, ld_stride_op, ld_stride_check)
- 
--static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
-+static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew,
-+                         uint8_t seq)
- {
-     uint32_t data = 0;
-     gen_helper_ldst_stride *fn;
-@@ -791,8 +807,9 @@ static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
-         gen_helper_vsse32_v,  gen_helper_vsse64_v
-     };
- 
-+    uint8_t emul = vext_get_emul(s, eew);
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
--    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, LMUL, emul);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     fn = fns[seq];
-     if (fn == NULL) {
-@@ -856,7 +873,7 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     return true;
- }
- 
--static bool ld_index_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
-+static bool ld_index_op(DisasContext *s, arg_rnfvm *a, uint8_t eew, uint8_t seq)
- {
-     uint32_t data = 0;
-     gen_helper_ldst_index *fn;
-@@ -889,8 +906,9 @@ static bool ld_index_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
- 
-     fn = fns[seq][s->sew];
- 
-+    uint8_t emul = vext_get_emul(s, 1 << (s->sew + 3));
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
--    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, LMUL, emul);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
- }
-@@ -907,7 +925,7 @@ GEN_VEXT_TRANS(vlxei16_v, 16, 1, rnfvm, ld_index_op, ld_index_check)
- GEN_VEXT_TRANS(vlxei32_v, 32, 2, rnfvm, ld_index_op, ld_index_check)
- GEN_VEXT_TRANS(vlxei64_v, 64, 3, rnfvm, ld_index_op, ld_index_check)
- 
--static bool st_index_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
-+static bool st_index_op(DisasContext *s, arg_rnfvm *a, uint8_t eew, uint8_t seq)
- {
-     uint32_t data = 0;
-     gen_helper_ldst_index *fn;
-@@ -940,8 +958,9 @@ static bool st_index_op(DisasContext *s, arg_rnfvm *a, uint8_t seq)
- 
-     fn = fns[seq][s->sew];
- 
-+    uint8_t emul = vext_get_emul(s, 1 << (s->sew + 3));
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
--    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, LMUL, emul);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
- }
-@@ -991,7 +1010,7 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, uint32_t data,
-     return true;
- }
- 
--static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
-+static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew, uint8_t seq)
- {
-     uint32_t data = 0;
-     gen_helper_ldst_us *fn;
-@@ -1005,8 +1024,9 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
-         return false;
-     }
- 
-+    uint8_t emul = vext_get_emul(s, eew);
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
--    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, LMUL, emul);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     return ldff_trans(a->rd, a->rs1, data, fn, s);
- }
-@@ -1127,7 +1147,7 @@ static bool amo_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     return true;
- }
- 
--static bool amo_op(DisasContext *s, arg_rwdvm *a, uint8_t seq)
-+static bool amo_op(DisasContext *s, arg_rwdvm *a, uint8_t eew, uint8_t seq)
- {
-     uint32_t data = 0;
-     gen_helper_amo *fn;
-@@ -1187,8 +1207,9 @@ static bool amo_op(DisasContext *s, arg_rwdvm *a, uint8_t seq)
-         return false;
-     }
- 
-+    uint8_t emul = vext_get_emul(s, eew);
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
--    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, LMUL, emul);
-     data = FIELD_DP32(data, VDATA, WD, a->wd);
-     return amo_trans(a->rd, a->rs1, a->rs2, data, fn, s);
- }
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index f3da2e7fbbd..f802e8c9c05 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -17,6 +17,7 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qemu/host-utils.h"
- #include "cpu.h"
- #include "exec/memop.h"
- #include "exec/exec-all.h"
-@@ -121,14 +122,21 @@ static uint32_t vext_wd(uint32_t desc)
- }
- 
- /*
-- * Get vector group length in bytes. Its range is [64, 2048].
-+ * Get the maximum number of elements can be operated.
-  *
-- * As simd_desc support at most 256, the max vlen is 512 bits.
-- * So vlen in bytes is encoded as maxsz.
-+ * esz: log2 of element size in bytes.
-  */
--static inline uint32_t vext_maxsz(uint32_t desc)
-+static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz)
- {
--    return simd_maxsz(desc) << vext_lmul(desc);
-+    /*
-+     * As simd_desc support at most 256 bytes, the max vlen is 256 bits.
-+     * so vlen in bytes (vlenb) is encoded as maxsz.
-+     */
-+    uint32_t vlenb = simd_maxsz(desc);
-+
-+    /* Return VLMAX */
-+    int scale = vext_lmul(desc) - esz;
-+    return scale < 0 ? vlenb >> -scale : vlenb << scale;
- }
- 
- /*
-@@ -223,14 +231,14 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
- {
-     uint32_t i, k;
-     uint32_t nf = vext_nf(desc);
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t max_elems = vext_max_elems(desc, esz);
- 
-     /* probe every access*/
-     for (i = 0; i < env->vl; i++) {
-         if (!vm && !vext_elem_mask(v0, i)) {
-             continue;
-         }
--        probe_pages(env, base + stride * i, nf * esz, ra, access_type);
-+        probe_pages(env, base + stride * i, nf << esz, ra, access_type);
-     }
-     /* do real access */
-     for (i = 0; i < env->vl; i++) {
-@@ -239,8 +247,8 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-             continue;
-         }
-         while (k < nf) {
--            target_ulong addr = base + stride * i + k * esz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            target_ulong addr = base + stride * i + (k << esz);
-+            ldst_elem(env, addr, i + k * max_elems, vd, ra);
-             k++;
-         }
-     }
-@@ -253,7 +261,7 @@ void HELPER(NAME)(void *vd, void * v0, target_ulong base,               \
- {                                                                       \
-     uint32_t vm = vext_vm(desc);                                        \
-     vext_ldst_stride(vd, v0, base, stride, env, desc, vm, LOAD_FN,      \
--                     sizeof(ETYPE), GETPC(), MMU_DATA_LOAD);            \
-+                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD);      \
- }
- 
- GEN_VEXT_LD_STRIDE(vlse8_v,  int8_t,  lde_b)
-@@ -268,7 +276,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base,                \
- {                                                                       \
-     uint32_t vm = vext_vm(desc);                                        \
-     vext_ldst_stride(vd, v0, base, stride, env, desc, vm, STORE_FN,     \
--                     sizeof(ETYPE), GETPC(), MMU_DATA_STORE);           \
-+                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);     \
- }
- 
- GEN_VEXT_ST_STRIDE(vsse8_v,  int8_t,  ste_b)
-@@ -288,16 +296,16 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
- {
-     uint32_t i, k;
-     uint32_t nf = vext_nf(desc);
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t max_elems = vext_max_elems(desc, esz);
- 
-     /* probe every access */
--    probe_pages(env, base, env->vl * nf * esz, ra, access_type);
-+    probe_pages(env, base, env->vl * (nf << esz), ra, access_type);
-     /* load bytes from guest memory */
-     for (i = 0; i < env->vl; i++) {
-         k = 0;
-         while (k < nf) {
--            target_ulong addr = base + (i * nf + k) * esz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            target_ulong addr = base + ((i * nf + k) << esz);
-+            ldst_elem(env, addr, i + k * max_elems, vd, ra);
-             k++;
-         }
-     }
-@@ -312,16 +320,16 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
- void HELPER(NAME##_mask)(void *vd, void *v0, target_ulong base,         \
-                          CPURISCVState *env, uint32_t desc)             \
- {                                                                       \
--    uint32_t stride = vext_nf(desc) * sizeof(ETYPE);                    \
-+    uint32_t stride = vext_nf(desc) << ctzl(sizeof(ETYPE));             \
-     vext_ldst_stride(vd, v0, base, stride, env, desc, false, LOAD_FN,   \
--                     sizeof(ETYPE), GETPC(), MMU_DATA_LOAD);            \
-+                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD);      \
- }                                                                       \
-                                                                         \
- void HELPER(NAME)(void *vd, void *v0, target_ulong base,                \
-                   CPURISCVState *env, uint32_t desc)                    \
- {                                                                       \
-     vext_ldst_us(vd, base, env, desc, LOAD_FN,                          \
--                 sizeof(ETYPE), GETPC(), MMU_DATA_LOAD);                \
-+                 ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD);          \
- }
- 
- GEN_VEXT_LD_US(vle8_v,  int8_t,  lde_b)
-@@ -333,16 +341,16 @@ GEN_VEXT_LD_US(vle64_v, int64_t, lde_d)
- void HELPER(NAME##_mask)(void *vd, void *v0, target_ulong base,         \
-                          CPURISCVState *env, uint32_t desc)             \
- {                                                                       \
--    uint32_t stride = vext_nf(desc) * sizeof(ETYPE);                    \
-+    uint32_t stride = vext_nf(desc) << ctzl(sizeof(ETYPE));             \
-     vext_ldst_stride(vd, v0, base, stride, env, desc, false, STORE_FN,  \
--                     sizeof(ETYPE), GETPC(), MMU_DATA_STORE);           \
-+                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);     \
- }                                                                       \
-                                                                         \
- void HELPER(NAME)(void *vd, void *v0, target_ulong base,                \
-                   CPURISCVState *env, uint32_t desc)                    \
- {                                                                       \
-     vext_ldst_us(vd, base, env, desc, STORE_FN,                         \
--                 sizeof(ETYPE), GETPC(), MMU_DATA_STORE);               \
-+                 ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);         \
- }
- 
- GEN_VEXT_ST_US(vse8_v,  int8_t,  ste_b)
-@@ -378,14 +386,14 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-     uint32_t i, k;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t max_elems = vext_max_elems(desc, esz);
- 
-     /* probe every access*/
-     for (i = 0; i < env->vl; i++) {
-         if (!vm && !vext_elem_mask(v0, i)) {
-             continue;
-         }
--        probe_pages(env, get_index_addr(base, i, vs2), nf * esz, ra,
-+        probe_pages(env, get_index_addr(base, i, vs2), nf << esz, ra,
-                     access_type);
-     }
-     /* load bytes from guest memory */
-@@ -395,8 +403,8 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-             continue;
-         }
-         while (k < nf) {
--            abi_ptr addr = get_index_addr(base, i, vs2) + k * esz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            abi_ptr addr = get_index_addr(base, i, vs2) + (k << esz);
-+            ldst_elem(env, addr, i + k * max_elems, vd, ra);
-             k++;
-         }
-     }
-@@ -407,7 +415,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base,                   \
-                   void *vs2, CPURISCVState *env, uint32_t desc)            \
- {                                                                          \
-     vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,                \
--                    LOAD_FN, sizeof(ETYPE), GETPC(), MMU_DATA_LOAD);       \
-+                    LOAD_FN, ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD); \
- }
- 
- GEN_VEXT_LD_INDEX(vlxei8_8_v,   int8_t,  idx_b, lde_b)
-@@ -432,7 +440,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base,         \
-                   void *vs2, CPURISCVState *env, uint32_t desc)  \
- {                                                                \
-     vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,      \
--                    STORE_FN, sizeof(ETYPE),                     \
-+                    STORE_FN, ctzl(sizeof(ETYPE)),               \
-                     GETPC(), MMU_DATA_STORE);                    \
- }
- 
-@@ -466,7 +474,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-     uint32_t i, k, vl = 0;
-     uint32_t nf = vext_nf(desc);
-     uint32_t vm = vext_vm(desc);
--    uint32_t vlmax = vext_maxsz(desc) / esz;
-+    uint32_t max_elems = vext_max_elems(desc, esz);
-     target_ulong addr, offset, remain;
- 
-     /* probe every access*/
-@@ -474,24 +482,24 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-         if (!vm && !vext_elem_mask(v0, i)) {
-             continue;
-         }
--        addr = base + nf * i * esz;
-+        addr = base + i * (nf << esz);
-         if (i == 0) {
--            probe_pages(env, addr, nf * esz, ra, MMU_DATA_LOAD);
-+            probe_pages(env, addr, nf << esz, ra, MMU_DATA_LOAD);
-         } else {
-             /* if it triggers an exception, no need to check watchpoint */
--            remain = nf * esz;
-+            remain = nf << esz;
-             while (remain > 0) {
-                 offset = -(addr | TARGET_PAGE_MASK);
-                 host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD,
-                                          cpu_mmu_index(env, false));
-                 if (host) {
- #ifdef CONFIG_USER_ONLY
--                    if (page_check_range(addr, nf * esz, PAGE_READ) < 0) {
-+                    if (page_check_range(addr, nf << esz, PAGE_READ) < 0) {
-                         vl = i;
-                         goto ProbeSuccess;
-                     }
- #else
--                    probe_pages(env, addr, nf * esz, ra, MMU_DATA_LOAD);
-+                    probe_pages(env, addr, nf << esz, ra, MMU_DATA_LOAD);
- #endif
-                 } else {
-                     vl = i;
-@@ -516,8 +524,8 @@ ProbeSuccess:
-             continue;
-         }
-         while (k < nf) {
--            target_ulong addr = base + (i * nf + k) * esz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            target_ulong addr = base + ((i * nf + k) << esz);
-+            ldst_elem(env, addr, i + k * max_elems, vd, ra);
-             k++;
-         }
-     }
-@@ -528,7 +536,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base,  \
-                   CPURISCVState *env, uint32_t desc)      \
- {                                                         \
-     vext_ldff(vd, v0, base, env, desc, LOAD_FN,           \
--              sizeof(ETYPE), GETPC());                    \
-+              ctzl(sizeof(ETYPE)), GETPC());              \
- }
- 
- GEN_VEXT_LDFF(vle8ff_v,  int8_t,  lde_b)
-@@ -741,7 +749,7 @@ void HELPER(NAME)(void *vs3, void *v0, target_ulong base,       \
- {                                                               \
-     vext_amo_noatomic(vs3, v0, base, vs2, env, desc,            \
-                       INDEX_FN, vext_##NAME##_noatomic_op,      \
--                      sizeof(ETYPE), GETPC());                  \
-+                      ctzl(sizeof(ETYPE)), GETPC());            \
- }
- 
- GEN_VEXT_AMO(vamoswapei8_32_v,  int32_t, idx_b)
-@@ -1227,7 +1235,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,          \
-                   void *vs2, CPURISCVState *env, uint32_t desc) \
- {                                                               \
-     uint32_t vl = env->vl;                                      \
--    uint32_t vlmax = vext_maxsz(desc) / sizeof(ETYPE);          \
-+    uint32_t vlmax = vext_max_elems(desc, ctzl(sizeof(ETYPE))); \
-     uint32_t i;                                                 \
-                                                                 \
-     for (i = 0; i < vl; i++) {                                  \
-@@ -3888,7 +3896,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,       \
- {                                                                   \
-     uint32_t vm = vext_vm(desc);                                    \
-     uint32_t vl = env->vl;                                          \
--    uint32_t vlmax = vext_maxsz(desc) / sizeof(ETYPE);              \
-+    uint32_t vlmax = vext_max_elems(desc, ctzl(sizeof(ETYPE)));     \
-     uint32_t i;                                                     \
-                                                                     \
-     for (i = 0; i < vl; i++) {                                      \
-@@ -4693,7 +4701,7 @@ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_d, uint64_t, H8)
- void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
-                   CPURISCVState *env, uint32_t desc)                      \
- {                                                                         \
--    uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-+    uint32_t vlmax = vext_max_elems(desc, ctzl(sizeof(ETYPE)));           \
-     uint32_t vm = vext_vm(desc);                                          \
-     uint32_t vl = env->vl;                                                \
-     uint32_t index, i;                                                    \
-@@ -4721,7 +4729,7 @@ GEN_VEXT_VRGATHER_VV(vrgather_vv_d, uint64_t, H8)
- void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-                   CPURISCVState *env, uint32_t desc)                      \
- {                                                                         \
--    uint32_t vlmax = env_archcpu(env)->cfg.vlen;                          \
-+    uint32_t vlmax = vext_max_elems(desc, ctzl(sizeof(ETYPE)));           \
-     uint32_t vm = vext_vm(desc);                                          \
-     uint32_t vl = env->vl;                                                \
-     uint32_t index = s1, i;                                               \
 -- 
 2.17.1
 
