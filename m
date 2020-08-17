@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k7jQC-0001mf-6u
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 13:59:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37342)
+	id 1k7jQr-0002LY-4g
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 14:00:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37594)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k7jQA-0001mJ-TZ; Mon, 17 Aug 2020 13:59:46 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:43177)
+ id 1k7jQo-0002IT-Iw; Mon, 17 Aug 2020 14:00:26 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:46443)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k7jQ9-0000Xf-6p; Mon, 17 Aug 2020 13:59:46 -0400
-Received: by mail-il1-x144.google.com with SMTP id e11so7335234ils.10;
- Mon, 17 Aug 2020 10:59:44 -0700 (PDT)
+ id 1k7jQm-0000iL-TK; Mon, 17 Aug 2020 14:00:26 -0400
+Received: by mail-io1-xd42.google.com with SMTP id a5so18421643ioa.13;
+ Mon, 17 Aug 2020 11:00:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=uCaym5yllGtxBKdP9XNiXAqKEbI4fYlvrnbla8AIZbY=;
- b=IED7aJCmyNpCZ1qaeRIIijyFMzkxveXyOxwkvalgLqvkop0AbuA0ytB8/Kd4UnNDLK
- WHZqV2I8g+FLMd/cU6IKugEAxukcKpXr85qFhP8PIHX+xDZpL9Pi2+3jzkJqY6Odzbyk
- PTKeqD6DRRq1PRwR+2apYR1VSM7fvep0e/lbu/osezsBbT6pSCNHdM4kvhwmCNTflOMh
- aSmbQnQ52tj/IWnYCfFKrtkKaZasTkYHjfqfd/TMQ7Ezjgr7rR+NAD8qsQ7ew3FhS9hA
- unbg6DR3bj8HfDJjoqrxkAsQvN2IftmO4ssTjyPiTV9Mifx5eqJJMdkm+pGUpQgs72yn
- YPIw==
+ :cc; bh=NCNzXUKkCm417okyZTi7Dh5dWry84XmsjV5fHPAgirI=;
+ b=sgFubLC0GeWr7Tc4Je0cbC2cnA//pk09sziIFxvbixZah8Msea95wJ4l7jPSiv7giz
+ WvFCg9z/PldVaymCN92UPxkV8Bapht/UI+SPFQF2Y/mk66EydRcm37jtWXxT8uNbiKpe
+ 846Krvmc2e2FMYNMRfQLRijR/Ojrre2n+CGYXvtxLM7qJXTBX7Kt8Hp7SViNGmjhVes/
+ TWFnt605v1HMiagGy9Q/qj7r0grblP+FGXaxymyIOzE7dQYosaJusJZrmqykAPfaAA5i
+ UAXNKFHRkbZgPym0/dT7wnIyitmDZ2Q5bX4P3Ru7LHhTQge7/iYc5BAMPeJ5CTYXwDst
+ /jjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=uCaym5yllGtxBKdP9XNiXAqKEbI4fYlvrnbla8AIZbY=;
- b=p9J4Acr0JI0VDldU/ohFnUw8GTcgzJnV18MH3gALQBfJpRs74+JKMQL+a4P3mUyXJo
- llCtb3gXNRhqzkUK0qBq4uqrU5RKI0sLqqG6lNBOxErOEey151faIJdUGUf1yQrXHQJA
- hDzm/7LhcTbnPF4j3IkcS157x1ihkVAz+ldHAaJ4xe8+fLStPALY6U1enV+S64Kv54As
- lIyUdsUpCcXCN1mBdd/hyYiOJfME+Drll7t7OqqtIFj9VMMy7o8G81JCOciEuuon47qX
- UjIgcg6qcna2pDhvfnEe3LBnXtWCN4jUOZRs/XRP5FVoNjW0ZqiKYyt9DD9/XgKuvOm0
- kQXA==
-X-Gm-Message-State: AOAM5337swbmasynoMMUbRAxQfiLk8VQYiWluqlOBYpN4G/QFpi7nb5h
- VAvX5IVs9YVFa0MnCprj0Xyn3Op2dpo5AQpYagc=
-X-Google-Smtp-Source: ABdhPJy6Z4CTSBS0sp5Asab3Z/s9cG4YmYG07ovvCT5PqZGNwf32CvEh/SS3kiKXmiYYA/oN/cPWOnpraWK1uttB11Q=
-X-Received: by 2002:a05:6e02:ef3:: with SMTP id
- j19mr15538784ilk.227.1597687183879; 
- Mon, 17 Aug 2020 10:59:43 -0700 (PDT)
+ bh=NCNzXUKkCm417okyZTi7Dh5dWry84XmsjV5fHPAgirI=;
+ b=ZIlCdksegoAApSr9+2JFAzy0q5V+NX/JVTsiMuhveVDtYQD9mTSAWXG6jgWECzNCYr
+ IKerRqKBQmIEEsc8WEesGeVqM0cpd9OruZwfcJkpsYY36eX2GnsTwrgtDzD5kJ8t2Ud/
+ Z3cbrA3xIlDQC4xTOWseiFy229q9yh9oib+8iUzqXs5PKYqxcc46R6mcMEFV69HNLJyg
+ jQ/i2/TOz5YOEaVCaw+2LOX3hnYRGX8YpOe5Y+vTyuxMoyKsxGrxj95iP1/0vcqoTbSR
+ x3ajywUqAt9jVzjNYFmNSyuHHUj5bx2NQJD+gAvY8Ap6mGRGZsIP7NLf+wXmSOQAgk9H
+ SjIw==
+X-Gm-Message-State: AOAM5329URt3t141fI2tLF471cVG/F8z3E0WqxqJBzadk3OtMW+AFe9f
+ 64q3obQ8lR9wBgGRhZYo3FQSdX+TQdpv0NpjXrU=
+X-Google-Smtp-Source: ABdhPJx+uFR4J1JZgTtGkESbcpzeJME6yDRmojks0yAjztlaX7/M+DewRcuA2UbzoyhPIh9qwMSW0AHCzYeA2g692I4=
+X-Received: by 2002:a05:6638:1690:: with SMTP id
+ f16mr15764196jat.91.1597687223315; 
+ Mon, 17 Aug 2020 11:00:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
- <1597423256-14847-2-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1597423256-14847-2-git-send-email-bmeng.cn@gmail.com>
+ <1597423256-14847-3-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1597423256-14847-3-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 17 Aug 2020 10:49:12 -0700
-Message-ID: <CAKmqyKN4p_msMBUNQ5XCBL7EV2H3-UDo6bEpAVWqAidaE5cNeQ@mail.gmail.com>
-Subject: Re: [PATCH 01/18] target/riscv: cpu: Add a new 'resetvec' property
+Date: Mon, 17 Aug 2020 10:49:51 -0700
+Message-ID: <CAKmqyKMczvWVnJ0=bPenUHxwTmzDbfvw+qQD+FW2mXpJPL=LQg@mail.gmail.com>
+Subject: Re: [PATCH 02/18] hw/riscv: hart: Add a new 'resetvec' property
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
@@ -54,8 +54,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -78,20 +78,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2020 17:59:47 -0000
+X-List-Received-Date: Mon, 17 Aug 2020 18:00:27 -0000
 
-On Fri, Aug 14, 2020 at 9:43 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Fri, Aug 14, 2020 at 9:41 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> Currently the reset vector address is hard-coded in a RISC-V CPU's
-> instance_init() routine. In a real world we can have 2 exact same
-> CPUs except for the reset vector address, which is pretty common in
-> the RISC-V core IP licensing business.
->
-> Normally reset vector address is a configurable parameter. Let's
-> create a 64-bit property to store the reset vector address which
-> covers both 32-bit and 64-bit CPUs.
+> RISC-V machines do not instantiate RISC-V CPUs directly, instead
+> they do that via the hart array. Add a new property for the reset
+> vector address to allow the value to be passed to the CPU, before
+> CPU is realized.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
@@ -101,33 +97,42 @@ Alistair
 
 > ---
 >
->  target/riscv/cpu.c | 1 +
->  target/riscv/cpu.h | 1 +
->  2 files changed, 2 insertions(+)
+>  hw/riscv/riscv_hart.c         | 3 +++
+>  include/hw/riscv/riscv_hart.h | 1 +
+>  2 files changed, 4 insertions(+)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 228b9bd..8067a26 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -518,6 +518,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-> +    DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
+> diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+> index f59fe52..613ea2a 100644
+> --- a/hw/riscv/riscv_hart.c
+> +++ b/hw/riscv/riscv_hart.c
+> @@ -31,6 +31,8 @@ static Property riscv_harts_props[] = {
+>      DEFINE_PROP_UINT32("num-harts", RISCVHartArrayState, num_harts, 1),
+>      DEFINE_PROP_UINT32("hartid-base", RISCVHartArrayState, hartid_base, 0),
+>      DEFINE_PROP_STRING("cpu-type", RISCVHartArrayState, cpu_type),
+> +    DEFINE_PROP_UINT64("resetvec", RISCVHartArrayState, resetvec,
+> +                       DEFAULT_RSTVEC),
 >      DEFINE_PROP_END_OF_LIST(),
 >  };
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index a804a5d..d34bcfa 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -291,6 +291,7 @@ typedef struct RISCVCPU {
->          uint16_t elen;
->          bool mmu;
->          bool pmp;
-> +        uint64_t resetvec;
->      } cfg;
->  } RISCVCPU;
+> @@ -44,6 +46,7 @@ static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
+>                                 char *cpu_type, Error **errp)
+>  {
+>      object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
+> +    qdev_prop_set_uint64(DEVICE(&s->harts[idx]), "resetvec", s->resetvec);
+>      s->harts[idx].env.mhartid = s->hartid_base + idx;
+>      qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
+>      return qdev_realize(DEVICE(&s->harts[idx]), NULL, errp);
+> diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.h
+> index c75856f..77aa4bc 100644
+> --- a/include/hw/riscv/riscv_hart.h
+> +++ b/include/hw/riscv/riscv_hart.h
+> @@ -37,6 +37,7 @@ typedef struct RISCVHartArrayState {
+>      uint32_t num_harts;
+>      uint32_t hartid_base;
+>      char *cpu_type;
+> +    uint64_t resetvec;
+>      RISCVCPU *harts;
+>  } RISCVHartArrayState;
 >
 > --
 > 2.7.4
