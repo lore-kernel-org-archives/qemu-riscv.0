@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k7aqa-0005sf-JG
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:50:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44288)
+	id 1k7aqe-00064E-Oz
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:50:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44320)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k7aqZ-0005qh-Rd
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:50:27 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:54949)
+ id 1k7aqd-000604-6A
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:50:31 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:45475)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k7aqX-0004qf-Vn
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:50:27 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id mt12so7482264pjb.4
- for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:50:25 -0700 (PDT)
+ id 1k7aqb-0004uM-CS
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:50:30 -0400
+Received: by mail-pg1-x533.google.com with SMTP id x6so7780345pgx.12
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:50:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=QP1ruXw5l6C+lj6ysQ0KAHvQ+wLxEkpUq7+eUbeJMsI=;
- b=cYMBm1XF+8oCl+njAO0gF0KaA+BSWosAE8XskcjMcs02bek9ld2dz/0TXT2oYJHG/K
- Y7tcA4ny057/Us391mIXWfdDddgHNRYP6OW7WWAS46/Q6yXgtQ2YsDoVtipzzsMZ4pG4
- yQEa+ZBsYq5uAjxWx+7iLOQkyLJyDUO+zNpPWq1hsO+uqkesqczb1feKmGnoG6iLi7sf
- QUzG6q/3g9+a6788xh5g82nGN8A8C7YERLrpSPMwFhSnrT4Gn3qlZPV7asZ1tobJmyzf
- tUlPnh4h3p18MtSrDyQhUDxIC/Km5h3wRsTf3vCuD/iQKVksjr9FKde6k58XRaQYWQwu
- dn9A==
+ bh=vtU6W/iPy1WqXusu53GCslBqK96uSeswo5m1tRYHk+c=;
+ b=IOW8Iu2R4c84iDzvbdxT15pEj9jyZ3MxUAvMcKeNMJtpITHPM0wsqGaFQ9WNZp0gRU
+ p5Cj6McqCQAOjVPngdiaFrkDKy4DCsQ1y97V8Wc5B8oxsUtjGTjKeBxQ/lwHeBCDOq6b
+ Zm2gwomXD1iRkiNaywNR5yQL+CfKidsdf2E8CevibNw81kjp8g4ZQeFC1jO72M5iO6ZB
+ h5A7kU0/UpmovWz4hQexpHe58BeDhiAz5KBb9u8Wb0J1/VFAB51/xefFv4Wz4P70XVTw
+ EC/w2rMH9EjFJ59nphpi4vSYgpcqgIPOJCLRlD61mvMFbCl0lAEHLfgbDp+U1i2e566M
+ b7Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=QP1ruXw5l6C+lj6ysQ0KAHvQ+wLxEkpUq7+eUbeJMsI=;
- b=CjsDqnC8wCOR6eRoVK0Pa/UsdKrLn/WsVnOimVJfSdNpPZKccjyr/GZuPum3vET9yF
- L7mudkEe2hco31qdZecNf1pzmRElKcZUG2mMz/n0ZeOWOJMkyY9RRpF6pruHurn5SGfH
- Yj69X1qu8j8v455kDUCDC9zulIhMgN0skh2Nn+pfnv4rYOesWBPlP/iSry+Ig1VPc3n1
- lDA+mALkBtzIQH/uNP/GMiLQPn8lpf9m1jOsal5lg4yJ4btTsf5MjSt620HeD3GXNoI+
- K6gQzkHWXEhPCqbRs8pNNcZz9YXvwta67/KjtuFY1q07ZF1WtlTfdv7XNbo8ykrqr3Li
- cFmg==
-X-Gm-Message-State: AOAM5300el68vYgU4Uy91ywIWhEIcFYLrmpOStQjluq2JOLaHapURxiT
- QACQ6Q+cg19a1l9TD2KJOrA3uTWTu+qufw==
-X-Google-Smtp-Source: ABdhPJxTq+/bbwaF8pjFfuPLn3gWJvCyxpwy0bTRTjzIB/sAqyGU8OLeDM7e0iRn3n8HFe6HZjsBXQ==
-X-Received: by 2002:a17:902:d346:: with SMTP id
- l6mr9778783plk.77.1597654224698; 
- Mon, 17 Aug 2020 01:50:24 -0700 (PDT)
+ bh=vtU6W/iPy1WqXusu53GCslBqK96uSeswo5m1tRYHk+c=;
+ b=XymTT+xrw6l4+ZtXhz1h8bJPmbYxTgxKrkKmpNar8+lXxawCR4dRoYTD+r9dqh09Vr
+ EywP9F7hhrXibIpvIn95bf5MmCJWwfN7mOvv6EnFJY7sT0QZsQoqT+0ZeJb99XWJzUzW
+ PV4UK+AFKQOo08gBbwldiH/+rblau3CAPPCp0lMbyl82Ei5SF/w9vYGCn6bnERdS1AoN
+ gNvE3CgkN5ZCCO8hPiXEJLJJ5Uep9O+4PflAI1ofgC7KQAs3b0wtusi7uMF5WsjmxKR4
+ Vmajrs5oo0XDkIM+Fc7BULg8svAxHTZmjIpQ3T6JKoE2uknwIFYPTZhlPWNe67xu8h2e
+ YVnQ==
+X-Gm-Message-State: AOAM5318OwdOF33B1M4UNZSsuC+jq2BAJW/96iS2LausfGeEUGR1AUfs
+ LEOSw+s/4ZKwGaR2LCgvT039Lg==
+X-Google-Smtp-Source: ABdhPJysax/ps2jocNoT0CwlW3miKr1eqt2dhpaSnVBVdIjpx0cXTTvbtMHivLQIoP9BgYdJBZAD7g==
+X-Received: by 2002:a65:47c4:: with SMTP id f4mr9095439pgs.234.1597654228068; 
+ Mon, 17 Aug 2020 01:50:28 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.50.22
+ by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.50.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Aug 2020 01:50:24 -0700 (PDT)
+ Mon, 17 Aug 2020 01:50:27 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>, Frank Chang <frank.chang@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v4 07/70] target/riscv: rvv-1.0: remove rvv related codes from
- fcsr registers
-Date: Mon, 17 Aug 2020 16:48:52 +0800
-Message-Id: <20200817084955.28793-8-frank.chang@sifive.com>
+Subject: [RFC v4 08/70] target/riscv: rvv-1.0: add vcsr register
+Date: Mon, 17 Aug 2020 16:48:53 +0800
+Message-Id: <20200817084955.28793-9-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200817084955.28793-1-frank.chang@sifive.com>
 References: <20200817084955.28793-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x533.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -81,59 +80,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2020 08:50:28 -0000
+X-List-Received-Date: Mon, 17 Aug 2020 08:50:31 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 
-* Remove VXRM and VXSAT fields from FCSR register as they are only
-  presented in VCSR register.
-* Remove RVV loose check in fs() predicate function.
-
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/csr.c | 13 -------------
- 1 file changed, 13 deletions(-)
+ target/riscv/cpu_bits.h |  7 +++++++
+ target/riscv/csr.c      | 21 +++++++++++++++++++++
+ 2 files changed, 28 insertions(+)
 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 5b0be0bb888..7afdd4814bb 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -60,9 +60,16 @@
+ #define CSR_VSTART          0x008
+ #define CSR_VXSAT           0x009
+ #define CSR_VXRM            0x00a
++#define CSR_VCSR            0x00f
+ #define CSR_VL              0xc20
+ #define CSR_VTYPE           0xc21
+ 
++/* VCSR fields */
++#define VCSR_VXSAT_SHIFT    0
++#define VCSR_VXSAT          (0x1 << VCSR_VXSAT_SHIFT)
++#define VCSR_VXRM_SHIFT     1
++#define VCSR_VXRM           (0x3 << VCSR_VXRM_SHIFT)
++
+ /* User Timers and Counters */
+ #define CSR_CYCLE           0xc00
+ #define CSR_TIME            0xc01
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 7f937e5b9c8..005839390a1 100644
+index 005839390a1..c87f2ddbf7d 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -46,10 +46,6 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
- static int fs(CPURISCVState *env, int csrno)
- {
- #if !defined(CONFIG_USER_ONLY)
--    /* loose check condition for fcsr in vector extension */
--    if ((csrno == CSR_FCSR) && (env->misa & RVV)) {
--        return 0;
--    }
-     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-         return -1;
-     }
-@@ -166,10 +162,6 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
- #endif
-     *val = (riscv_cpu_get_fflags(env) << FSR_AEXC_SHIFT)
-         | (env->frm << FSR_RD_SHIFT);
--    if (vs(env, csrno) >= 0) {
--        *val |= (env->vxrm << FSR_VXRM_SHIFT)
--                | (env->vxsat << FSR_VXSAT_SHIFT);
--    }
+@@ -247,6 +247,26 @@ static int write_vstart(CPURISCVState *env, int csrno, target_ulong val)
      return 0;
  }
  
-@@ -180,13 +172,8 @@ static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
-         return -1;
-     }
-     env->mstatus |= MSTATUS_FS;
--    env->mstatus |= MSTATUS_VS;
- #endif
-     env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
--    if (vs(env, csrno) >= 0) {
--        env->vxrm = (val & FSR_VXRM) >> FSR_VXRM_SHIFT;
--        env->vxsat = (val & FSR_VXSAT) >> FSR_VXSAT_SHIFT;
--    }
-     riscv_cpu_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
-     return 0;
- }
++static int read_vcsr(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    *val = (env->vxrm << VCSR_VXRM_SHIFT) | (env->vxsat << VCSR_VXSAT_SHIFT);
++    return 0;
++}
++
++static int write_vcsr(CPURISCVState *env, int csrno, target_ulong val)
++{
++#if !defined(CONFIG_USER_ONLY)
++    if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
++        return -1;
++    }
++    env->mstatus |= MSTATUS_VS;
++#endif
++
++    env->vxrm = (val & VCSR_VXRM) >> VCSR_VXRM_SHIFT;
++    env->vxsat = (val & VCSR_VXSAT) >> VCSR_VXSAT_SHIFT;
++    return 0;
++}
++
+ /* User Timers and Counters */
+ static int read_instret(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+@@ -1265,6 +1285,7 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_VSTART] =              { vs,   read_vstart,      write_vstart      },
+     [CSR_VXSAT] =               { vs,   read_vxsat,       write_vxsat       },
+     [CSR_VXRM] =                { vs,   read_vxrm,        write_vxrm        },
++    [CSR_VCSR] =                { vs,   read_vcsr,        write_vcsr        },
+     [CSR_VL] =                  { vs,   read_vl                             },
+     [CSR_VTYPE] =               { vs,   read_vtype                          },
+     /* User Timers and Counters */
 -- 
 2.17.1
 
