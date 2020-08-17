@@ -1,63 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k7atM-00039C-LS
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:53:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46558)
+	id 1k7atO-0003E9-Fa
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 04:53:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46580)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k7atK-00034L-7N
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:53:18 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:36956)
+ id 1k7atM-00038W-Cf
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:53:20 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632]:46917)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1k7atH-0005Ms-EW
- for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:53:17 -0400
-Received: by mail-pf1-x444.google.com with SMTP id x25so7908169pff.4
- for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:53:13 -0700 (PDT)
+ id 1k7atJ-0005NQ-60
+ for qemu-riscv@nongnu.org; Mon, 17 Aug 2020 04:53:19 -0400
+Received: by mail-pl1-x632.google.com with SMTP id k13so7151364plk.13
+ for <qemu-riscv@nongnu.org>; Mon, 17 Aug 2020 01:53:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=9Kp0pFLFALQvk40zb/M+TgTL+1Cc+suD4wuluvhzTso=;
- b=lHn4EzFcpAHNunfacJlW+BCt3foUAjSdQ9T20n+Fz95Bwb8Ifp3j4beVgZdxl1vHwn
- bySO12RJgvDdstDuw507q3eT0iyKgy41dMuWKwkV7PqjahY3fCX7n6IlrEYW7pjisa1j
- AdnkGSyruwX9CqZoba+iwVzfk6cAnzKRNiPCWPDt8eLHwgLDkfxJRpLcenZ8oZcvnneV
- g3s72GB1+BrFYIoY8VHX9n/Jt7tZ4idQsE8EIWh5SExtLYkZdcHKbqpa/Qc4IWGGQeOE
- hxJ5boI4I8PRNtuotDQiiFpQtf+ti8IqdDOMfJVpVipaHL3oeBlbabHIXKeRdinccTgQ
- Uy/w==
+ bh=IIDpnVDv9+trjyRRch9JAqW8+nRxIqRgOoCbDIBNhSI=;
+ b=fjx6VuYBV6Vy/VYoKzWMrxaq2FbJBzTVpOApLV13UNVkFoiPA5XUCdH0sK5TTpaZxX
+ 5zPRWVh+IfeFZs5ZohzuuePadpR+vrZjKf9+mJus+B7hWCcDJqKCUaqr0zR+x81OD6b/
+ IMwoTBo9iDV69V3eLF5NdIydwgmrm+hikDjkAkrVVXh2LKaZkyPt25HLLk6Sw1WX5+lO
+ +APHkcIqGsx9eIFC4mE7WwNmDaQ+PknUITeJltyQLRSuBZdf7UaKzGaREmRJ5Oi60fTV
+ uwWo97qv4YPSG6LdIWk6fOgLbZKRRyoixIeAerNrbgGVbbd8DtdGT/gZP0NfW4ABf7a9
+ ExzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=9Kp0pFLFALQvk40zb/M+TgTL+1Cc+suD4wuluvhzTso=;
- b=nTj4QR4SuJLKkCw78fSOx79WL2/SoqTe98tnaLuC1tKYWJyYnt0U65NrCFsqRHYm8H
- d5mn1dtEnhnfEVf8IrAjcWupcvuA0GEK44n9OajS03ubBFZNdNs74IRFmIAvKd+sTNmv
- E2Kc0eWhEwkU0jUGhxQJEn2Fv7IGkxO7AGtmhckAe5md89J8wMO5hIIZmzxqsSFHUFpk
- xmzjSol6DOab2bVWadbSXxNeFy5O3+5uBRPStU8VY5Mz29qLmff1xRMIXctqO4ky70MA
- kGERjFTKiTVElw4dWzuCRnOTSFA2Kjf5CrC7/1SMVmWpDNs+8JFDoGILcgGsv9AHTeh/
- wGFg==
-X-Gm-Message-State: AOAM530/3xN9K8p7QtTQrtdtoQKFHTTpkFVRt4qfL5lLZExnXB9dJFNx
- JLJmvmR99j///dUimleJFgEDWA==
-X-Google-Smtp-Source: ABdhPJyWVGdTZRFmUlaD8hvyuAJzOnYdh1lpvsVkFB/x4iLhxY1z3mKWDwnGDg/pU8DLdRYAJxdnTA==
-X-Received: by 2002:aa7:97b7:: with SMTP id d23mr10418668pfq.264.1597654392261; 
- Mon, 17 Aug 2020 01:53:12 -0700 (PDT)
+ bh=IIDpnVDv9+trjyRRch9JAqW8+nRxIqRgOoCbDIBNhSI=;
+ b=jJmt7khVNqhUjuSqQUEq+RV4U7QCjrgUQGGHelNI70zA/kY6/jOYhfxMuF++RbF7QG
+ 7FAaVtAAqnqlK9PuJY9QEKU/S5gD1jHUoygqQbZC12TBad26qAAEl+oAFtRYS5isx4mV
+ GcZaOSbY2ki8Vvd+QVnv/+Ms0ZkjX3Lvq+G6XRH83VFcUVnBSvcY1SZVp3tighxNdTRJ
+ zsRuXfXCaLGD/sIA8UC16PZv+t59CXVbZvOqZg/oioPRBQMM/sAq7kjvQzIrKnrefLjP
+ bp1SksLdTtC8+mLMMDFGCSc0dcycPH0UxcxKenut16kct2Wp3+X6VlbKNcvbO6Iw8ulr
+ fRZQ==
+X-Gm-Message-State: AOAM531OUUQn78+OsRcjA75kM/FSMEI4uSYDbDqn0FQa56X70Z/VD4am
+ n0EzW3iFZZX360vgVRZRVFu7Eg==
+X-Google-Smtp-Source: ABdhPJw2HSlzcjR4EErxKvbwPYLs1L8eqSieIJ1nO1TTK8SgXodmT7mZBnw2VpHLOcZPODeiujC5EA==
+X-Received: by 2002:a17:902:9345:: with SMTP id
+ g5mr10676858plp.192.1597654395549; 
+ Mon, 17 Aug 2020 01:53:15 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.53.10
+ by smtp.gmail.com with ESMTPSA id d9sm16478588pgv.45.2020.08.17.01.53.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Aug 2020 01:53:11 -0700 (PDT)
+ Mon, 17 Aug 2020 01:53:15 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Hsiangkai Wang <kai.wang@sifive.com>, Frank Chang <frank.chang@sifive.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v4 67/70] target/riscv: rvv-1.0: relax RV_VLEN_MAX to 512-bits
-Date: Mon, 17 Aug 2020 16:49:52 +0800
-Message-Id: <20200817084955.28793-68-frank.chang@sifive.com>
+Subject: [RFC v4 68/70] target/riscv: gdb: modify gdb csr xml file to align
+ with csr register map
+Date: Mon, 17 Aug 2020 16:49:53 +0800
+Message-Id: <20200817084955.28793-69-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200817084955.28793-1-frank.chang@sifive.com>
 References: <20200817084955.28793-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::444;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x444.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x632.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,90 +84,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2020 08:53:18 -0000
+X-List-Received-Date: Mon, 17 Aug 2020 08:53:20 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+From: Hsiangkai Wang <kai.wang@sifive.com>
 
-As GVEC only supports MAXSZ and OPRSZ in the range of: [8..256] bytes
-and LMUL could be a fractional number. The maximum vector size can be
-operated might be less than 8 bytes or larger than 256 bytes.
-Skip to use GVEC if maximum vector size <= 8 or >= 256 bytes.
-
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-
---
-Maybe to relax the limitations of MAXSZ or OPRSZ would be a better
-approach.
-
+Signed-off-by: Hsiangkai Wang <kai.wang@sifive.com>
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/cpu.h                      | 13 +++++++------
- target/riscv/insn_trans/trans_rvv.inc.c |  2 +-
- target/riscv/vector_helper.c            |  2 +-
- 3 files changed, 9 insertions(+), 8 deletions(-)
+ gdb-xml/riscv-32bit-csr.xml | 11 ++++++-----
+ gdb-xml/riscv-64bit-csr.xml | 11 ++++++-----
+ target/riscv/gdbstub.c      |  4 ++--
+ 3 files changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 6e9b17c4e38..2c7ce500fa7 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -92,7 +92,7 @@ typedef struct CPURISCVState CPURISCVState;
+diff --git a/gdb-xml/riscv-32bit-csr.xml b/gdb-xml/riscv-32bit-csr.xml
+index da1bf19e2f4..3d2031da7dc 100644
+--- a/gdb-xml/riscv-32bit-csr.xml
++++ b/gdb-xml/riscv-32bit-csr.xml
+@@ -110,6 +110,8 @@
+   <reg name="mcause" bitsize="32"/>
+   <reg name="mtval" bitsize="32"/>
+   <reg name="mip" bitsize="32"/>
++  <reg name="mtinst" bitsize="32"/>
++  <reg name="mtval2" bitsize="32"/>
+   <reg name="pmpcfg0" bitsize="32"/>
+   <reg name="pmpcfg1" bitsize="32"/>
+   <reg name="pmpcfg2" bitsize="32"/>
+@@ -232,12 +234,11 @@
+   <reg name="hedeleg" bitsize="32"/>
+   <reg name="hideleg" bitsize="32"/>
+   <reg name="hie" bitsize="32"/>
+-  <reg name="htvec" bitsize="32"/>
+-  <reg name="hscratch" bitsize="32"/>
+-  <reg name="hepc" bitsize="32"/>
+-  <reg name="hcause" bitsize="32"/>
+-  <reg name="hbadaddr" bitsize="32"/>
++  <reg name="hcounteren" bitsize="32"/>
++  <reg name="htval" bitsize="32"/>
+   <reg name="hip" bitsize="32"/>
++  <reg name="htinst" bitsize="32"/>
++  <reg name="hgatp" bitsize="32"/>
+   <reg name="mbase" bitsize="32"/>
+   <reg name="mbound" bitsize="32"/>
+   <reg name="mibase" bitsize="32"/>
+diff --git a/gdb-xml/riscv-64bit-csr.xml b/gdb-xml/riscv-64bit-csr.xml
+index 6aa4bed9f50..90394562930 100644
+--- a/gdb-xml/riscv-64bit-csr.xml
++++ b/gdb-xml/riscv-64bit-csr.xml
+@@ -110,6 +110,8 @@
+   <reg name="mcause" bitsize="64"/>
+   <reg name="mtval" bitsize="64"/>
+   <reg name="mip" bitsize="64"/>
++  <reg name="mtinst" bitsize="64"/>
++  <reg name="mtval2" bitsize="64"/>
+   <reg name="pmpcfg0" bitsize="64"/>
+   <reg name="pmpcfg1" bitsize="64"/>
+   <reg name="pmpcfg2" bitsize="64"/>
+@@ -232,12 +234,11 @@
+   <reg name="hedeleg" bitsize="64"/>
+   <reg name="hideleg" bitsize="64"/>
+   <reg name="hie" bitsize="64"/>
+-  <reg name="htvec" bitsize="64"/>
+-  <reg name="hscratch" bitsize="64"/>
+-  <reg name="hepc" bitsize="64"/>
+-  <reg name="hcause" bitsize="64"/>
+-  <reg name="hbadaddr" bitsize="64"/>
++  <reg name="hcounteren" bitsize="64"/>
++  <reg name="htval" bitsize="64"/>
+   <reg name="hip" bitsize="64"/>
++  <reg name="htinst" bitsize="64"/>
++  <reg name="hgatp" bitsize="64"/>
+   <reg name="mbase" bitsize="64"/>
+   <reg name="mbound" bitsize="64"/>
+   <reg name="mibase" bitsize="64"/>
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index eba12a86f2e..f7c5212e274 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -418,13 +418,13 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+     }
+ #if defined(TARGET_RISCV32)
+     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+-                             240, "riscv-32bit-csr.xml", 0);
++                             241, "riscv-32bit-csr.xml", 0);
  
- #include "pmp.h"
+     gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+                              1, "riscv-32bit-virtual.xml", 0);
+ #elif defined(TARGET_RISCV64)
+     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+-                             240, "riscv-64bit-csr.xml", 0);
++                             241, "riscv-64bit-csr.xml", 0);
  
--#define RV_VLEN_MAX 256
-+#define RV_VLEN_MAX 512
- 
- FIELD(VTYPE, VLMUL, 0, 3)
- FIELD(VTYPE, VSEW, 3, 3)
-@@ -413,16 +413,17 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-         /*
-          * If env->vl equals to VLMAX, we can use generic vector operation
-          * expanders (GVEC) to accerlate the vector operations.
--         * However, as LMUL could be a fractional number. The maximum
--         * vector size can be operated might be less than 8 bytes,
--         * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
--         * only when maxsz >= 8 bytes.
-+         * However, as GVEC only supports MAXSZ and OPRSZ in the range of:
-+         * [8..256] bytes and LMUL could be a fractional number. The maximum
-+         * vector size can be operated might be less than 8 bytes or
-+         * larger than 256 bytes. So we set vl_eq_vlmax flag to true only
-+         * when maxsz >= 8 bytes and <= 256 bytes.
-          */
-         uint32_t vlmax = vext_get_vlmax(env_archcpu(env), env->vtype);
-         uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
-         uint32_t maxsz = vlmax << sew;
-         bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl)
--                           && (maxsz >= 8);
-+                           && (maxsz >= 8) && (maxsz <= 256);
-         flags = FIELD_DP32(flags, TB_FLAGS, VILL,
-                     FIELD_EX64(env->vtype, VTYPE, VILL));
-         flags = FIELD_DP32(flags, TB_FLAGS, SEW, sew);
-diff --git a/target/riscv/insn_trans/trans_rvv.inc.c b/target/riscv/insn_trans/trans_rvv.inc.c
-index f2edf804460..9ad64762239 100644
---- a/target/riscv/insn_trans/trans_rvv.inc.c
-+++ b/target/riscv/insn_trans/trans_rvv.inc.c
-@@ -669,7 +669,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
- 
-     /*
-      * As simd_desc supports at most 256 bytes, and in this implementation,
--     * the max vector group length is 1024 bytes. So split it into two parts.
-+     * the max vector group length is 2048 bytes. So split it into two parts.
-      *
-      * The first part is vlen in bytes, encoded in maxsz of simd_desc.
-      * The second part is lmul, encoded in data of simd_desc.
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 316e435f8af..07d1ee60717 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -129,7 +129,7 @@ static uint32_t vext_wd(uint32_t desc)
- static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz)
- {
-     /*
--     * As simd_desc support at most 256 bytes, the max vlen is 256 bits.
-+     * As simd_desc support at most 256 bytes, the max vlen is 512 bits.
-      * so vlen in bytes (vlenb) is encoded as maxsz.
-      */
-     uint32_t vlenb = simd_maxsz(desc);
+     gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+                              1, "riscv-64bit-virtual.xml", 0);
 -- 
 2.17.1
 
