@@ -1,139 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k7lCg-0008EW-VD
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 15:53:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35292)
+	id 1k7mGH-0003El-Uy
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Aug 2020 17:01:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48372)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Cyril.Jean@microchip.com>)
- id 1k7lCf-0008Ds-I2; Mon, 17 Aug 2020 15:53:57 -0400
-Received: from esa5.microchip.iphmx.com ([216.71.150.166]:53420)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Cyril.Jean@microchip.com>)
- id 1k7lCb-0005MJ-Od; Mon, 17 Aug 2020 15:53:56 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1597694035; x=1629230035;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=1cvPr/VPakVgquhfCH70EKkCqUYBFONRRhpQgq7voTY=;
- b=l1o6eHSRxCk2AkiboLdlRAsCFZtzSkCKRw1L/c8IhIzKO+6tyTVIyUYM
- VS9Vpu6DFtDVfXTsUJB5qnvHWvI831bdQDH9YI7+Rm0bdjKVJH1YY4vzb
- 8kmlOCBojWXZqhYBIdDdUTwPhXIkYvo69SK5Bktk6KrJFilJ53xKFWMql
- 5nC0Bkk1vof2SrXSRBwuSXt/n9LrvLdn1UYtNbTd5Iv4x4tjAsmeuPGxW
- dHMXT+tPfzkER4bd3nNdX6iOFSMbA3Fnel4ckIPW/wGsysFJzjritT+n9
- D8eDOzhe+KvhscCQIFuSAvJd7dRRDMjH9bmk3T011+j2pA3V2bG98VTOb Q==;
-IronPort-SDR: O0hMvaluxUUn0BpRcofJfVT97V6bLTHLO72eCEbds4Lh4o8a1nLzurS94jDhoUUcxe0L551T3f
- zC7ia4n7AthUbU9D4ach/ugVzaslFwUGxN0U9Z4VHbNUegTtaMlaei7PtbZrmxbxRjIpkOdeYx
- ohynk+3uiWuQkZ2g+wiQKwFFpuy9G8K43y7+UPJmpmOG+q4iq+WrzWdJH3PPzWZVubAJizelT2
- gNsyhGWVlt2DMOInaroC/FVka4q1vREf4JkTsiTvRcep6+cLvynbnJ84D5NrIVaE5+vI7gBy6X
- bA8=
-X-IronPort-AV: E=Sophos;i="5.76,324,1592895600"; d="scan'208";a="87456517"
-Received: from smtpout.microchip.com (HELO email.microchip.com)
- ([198.175.253.82])
- by esa5.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256;
- 17 Aug 2020 12:53:50 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1979.3; Mon, 17 Aug 2020 12:53:43 -0700
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (10.10.215.89) by
- email.microchip.com (10.10.87.151) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1979.3
- via Frontend Transport; Mon, 17 Aug 2020 12:53:43 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NB+7M2z+DbCqAVX2csNBdNwc3T8OGPB1NbHZEpVqU/6WQJTodNIOIyrOVQsDv0mTKiPleBY/jE8hITC/cX3hrKEcSqNviHWJJM8F4M0p3jXEMEd+AduRlhaxfhZlAG7oY/SVyJZ1M2hZX5/BxpAdQJlUFwURyL9SXacaFEICvpbe6krijdW7iRK2we/wm4NmdNtlNi5NdC3P9JW93sY/+iiniQazlGaeuu3hcD7RWwNVuipJQCVgSvjkBqV3tQggWMj2PshE4hzmcNy1B9w7FdQCQsmlIXyB6427vQ5/jsU13V/6ZKQKKOBBb5BTl15iZro8If1u/Wf8+9VzQYRZHw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1cvPr/VPakVgquhfCH70EKkCqUYBFONRRhpQgq7voTY=;
- b=QyFnysAiEVl6peh+zAsScsKPf90Yt7wkDl6OlK2FRVxnuIBdpOC0xIGp5iuP8/gj2LnzzJ96ExgMENR4rkaOvmC9qw24Z6wY8UOkyh5ctrGs4y0iWAhKKiIA5n3yEmR1LBfGGaRmFIeRoGzU1d9PfvZbtPPWA1/2TXYyqqnX12McklJOAw0UW2t3A6wQXMT2FeTu64UG//zSzD/YuFHZ8hiaAFUoXl4I2KCQtMYsoVnS3Sw8DSgVurfL1/XfU5kdHAKAj6HXHmyg1hW1rcv5tz0JLDkDcNPWlfzWCIZsVaokaXBrSqWejxA3ctiB2QEdh8fh6+UxfjoDWvpBOC2SKw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=microchiptechnology.onmicrosoft.com;
- s=selector2-microchiptechnology-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1cvPr/VPakVgquhfCH70EKkCqUYBFONRRhpQgq7voTY=;
- b=NWw7bsskl4SfVn0Wy1KZ1njWMQt9QitTm2mZIjSVJdzUBMs+xSW0aBwhSJ4t2ug1nCggCVVmGY0OIKZi3CbY7vDp/8fqnPnJSVf0cR8xHa9OxkoDkazBj4ErdhEzrQH9Bf0McMEeGqSO4m77Rw2jVyVNNtK79nByzUXjq8XKPt4=
-Received: from DM6PR11MB3690.namprd11.prod.outlook.com (2603:10b6:5:13d::32)
- by DM5PR1101MB2169.namprd11.prod.outlook.com (2603:10b6:4:51::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.24; Mon, 17 Aug
- 2020 19:53:46 +0000
-Received: from DM6PR11MB3690.namprd11.prod.outlook.com
- ([fe80::e0ca:f0fd:7675:46d7]) by DM6PR11MB3690.namprd11.prod.outlook.com
- ([fe80::e0ca:f0fd:7675:46d7%4]) with mapi id 15.20.3283.027; Mon, 17 Aug 2020
- 19:53:46 +0000
-From: <Cyril.Jean@microchip.com>
-To: <alistair23@gmail.com>
-CC: <bmeng.cn@gmail.com>, <anup@brainfault.org>, <Alistair.Francis@wdc.com>,
- <kbastian@mail.uni-paderborn.de>, <palmerdabbelt@google.com>,
- <sagark@eecs.berkeley.edu>, <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, 
- <peter.maydell@linaro.org>, <alistair@alistair23.me>,
- <qemu-block@nongnu.org>, <jasowang@redhat.com>, <bin.meng@windriver.com>,
- <pbonzini@redhat.com>, <palmer@dabbelt.com>, <qemu-arm@nongnu.org>,
- <marcandre.lureau@redhat.com>, <edgar.iglesias@gmail.com>,
- <philmd@redhat.com>
-Subject: Re: [PATCH 00/18] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
- board support
-Thread-Topic: [PATCH 00/18] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
- board support
-Thread-Index: AQHWdIGDfQ2ADX3iMkmaUQkzVWiMJKk8cXaAgAA+ugCAAAcHgA==
-Date: Mon, 17 Aug 2020 19:53:46 +0000
-Message-ID: <d3f61c2c-a489-887e-0143-4d9a1e66e6f2@microchip.com>
-References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
- <CAAhSdy2D=TcENAJDja4r6pnhz0LRi-T+A9k3Btrs_EuB4x0e4w@mail.gmail.com>
- <CAEUhbmV5=B5xKhYqMj1MQb61nt5cNUJG1MXT++C1w1YMYTfLCQ@mail.gmail.com>
- <202949f7-c9d5-4d4d-3ebe-53727f4fa169@microchip.com>
- <CAKmqyKM3nm0rhxgDvWKWfO+4b23ZLSkHW2TzmcVZ_ZFy4L7MRg@mail.gmail.com>
-In-Reply-To: <CAKmqyKM3nm0rhxgDvWKWfO+4b23ZLSkHW2TzmcVZ_ZFy4L7MRg@mail.gmail.com>
-Accept-Language: en-IE, en-US
-Content-Language: en-IE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=microchip.com;
-x-originating-ip: [86.40.244.225]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: ed454b7c-5877-4b75-2034-08d842e740a0
-x-ms-traffictypediagnostic: DM5PR1101MB2169:
-x-microsoft-antispam-prvs: <DM5PR1101MB2169BB4F4A67CF8D425923C19E5F0@DM5PR1101MB2169.namprd11.prod.outlook.com>
-x-bypassexternaltag: True
-x-ms-oob-tlc-oobclassifiers: OLM:8882;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: dny3CeeP0EOUwqWuFlvz3Z1J76bL7wAiGTJ0asHClfF/PAXS8qVhuXBteyJnHz6iugPoqDMAdv6/SNbt4kQFMA8+GsK2LJ4jSafN3HVq/qZb4d/n2Ez+4U55ec2N3yWMbP7guc9m03Lv+bxdDkOS/wswt2SXEn7O1JD3XrFyt2p6/6PQeOKgkohXz7v453Mr2W+IsoiDqF9fqfuLn0+IzUI8sfRkVxiMH+NEjaK6Ou+ihdwrnrA5xNJ5v62k5dS4Aht5HGNdi0a17ZkiucdUnurjI7wcUj+CDRPd+4LpfrYWYq7JvM+1wy6m6G/bFBGci7D23dnQF0PhfuvSVmuKXA==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM6PR11MB3690.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(366004)(186003)(54906003)(5660300002)(53546011)(26005)(6486002)(8936002)(66476007)(66556008)(66946007)(66446008)(64756008)(6506007)(4326008)(6512007)(498600001)(8676002)(6916009)(83380400001)(2906002)(2616005)(86362001)(76116006)(91956017)(36756003)(31686004)(31696002)(7416002)(71200400001);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata: TfYQrkl+XCurxedsbl1xyLMw+qN8Jy0LOokDCygHpAWk/KKZA7ASmxzZRGBLPCAXPHEIHYT8a4OfkXPX3rfq086fhJact567BmKC9824/Vp9KSnpJ/uXN0oTiKAJkXZkj/ryuFsAWTg7S0l8ojVdR19pGbBiPWYw9cBOg4dL+QiBIcK5TOQUS2tMqfI5uvD+l/clZPcOvpYWyw04HRvcaMwjE5CY6ZU2jhD2FI9q0dxCJqfG1AtsR0VW12kJ+yo09ubTf/7+yN2WKBBpo76v/3aiuyRRRKeWfGE2ELcmf9ctBirV+9TQc+hiq0Qr9/WwKHJf1jxcY+dCP057cqCyfJxEV8NX0JSVah/orvxpcfqemuuLnJDCX6TfYHL9LbK7VwWM+ds6dKgI0H1hYoStLhsyLVuK3RWdGlqlgHaQiuNUHJPMrH215Wht0HBFwFUwR+6tNtWSaVdvwUl4WfCrQkwL1FJ+lCF4m8jR0hwRK2SNh5sJLAzOXjF+iQzj+mvDb1sCSPaIogMpIQJmk12A/d897bgF4TJrxjyXOQe8aEDlymYUypT0z0NLnn9juMZ0Ef4bsOB4GzHuQT7rfHVstF4x629C6B+MybBhXEA1U9PiE+8gE+E3a476IUc6TV+3WfGu0ohJQxSRJ1PHlfG77Q==
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <94AE9F10AC5C344493150A2FB7763272@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1k7mGG-0003E2-5k; Mon, 17 Aug 2020 17:01:44 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:42811)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1k7mGE-0004yS-2h; Mon, 17 Aug 2020 17:01:43 -0400
+Received: by mail-io1-xd41.google.com with SMTP id g13so4782274ioo.9;
+ Mon, 17 Aug 2020 14:01:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=jRvgnwynUsTh8rQgUrHkptyW0TT2ujuA1qFHWSdEv1I=;
+ b=tXL5IkiMFKHmUhYsOea7z5C8jXGSPrpAYMc+1UN3B+uavdP3HN3s0qeQqDUEGDInlp
+ WRWnwlg5y33Nqt5EVRXR+tbEM+VpYy5bIQXKjd3nTAsrvtkws2miQYeulSzBb9CtHCGW
+ bFZ5RDBMzZZxxPe4/ckTKbDHem28+qcVU/fbR3xL6u6vYzUeCsHNhExTQvT8dw63RSyp
+ Xtlhd/OWbCw/+CA5r7dyWZgIWO6oRxxC6PBppqzS8I5coldTRbFVbkjijH2Pu+pnkggE
+ PI61F6A0L75Qsn7LlOYg7nU2eJ+CrXUR5RMoADoZHjZy1SXViZfky0ZDz7qSHSHUmEQ8
+ o1Xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=jRvgnwynUsTh8rQgUrHkptyW0TT2ujuA1qFHWSdEv1I=;
+ b=R9siZG945APRf0FGDEPQYOYj0qih6at5QczOQGgt11zC1DQ1qPjsWa64W9xt1irPQV
+ S7a8/i5zuivK2YJkkqIA0TUyPY8l7ocTEAQZQ5s7qs/dQxCiH/9SKj9IhRmLsf/kT4kq
+ 1GF9A73q06MNx2y2oh98Kyk6Cz7vDNTD7L2IL7vfY0n24tGN9rAYIW1tW3yXuF07H1yb
+ 7dLqZS/pGSYgU9zpScaAxXlXzVRNTMBO7NHFlJrlqqGIa0WEJG/upAUqSlVNY/v80b4k
+ T/I9lNI+bwYlmDWtbvoZmkKNsGennC6e/0Ekn+Hfv24axLWT4Fwrj3T2x+lYdO+nGxy3
+ XUWQ==
+X-Gm-Message-State: AOAM533A6ZBy0fLGAeYO0Vva6DNzbx94YKIjfUpWjt8+6ol2ZM+GDEep
+ pn7TDwpVoLdBlkujaxLTThl8yVaC/N0skXgQJZs=
+X-Google-Smtp-Source: ABdhPJxXW8D+eMZVhyaCw/0nqkBCM2e0c6LFrpwjcgLrEpcJ9nfxLUdNg6/ovUIOzC8P7eMWYC0LT0RTTY7HL+AKzJ0=
+X-Received: by 2002:a6b:400e:: with SMTP id k14mr13523328ioa.175.1597698099543; 
+ Mon, 17 Aug 2020 14:01:39 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3690.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ed454b7c-5877-4b75-2034-08d842e740a0
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Aug 2020 19:53:46.0520 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 39jTLBwFOu5XGJt9J19SYZDD3hrKSI5Xh16XH7X63UtUuehc8oiwvO+sO1E7NXGZSsOnEK8dyFdAt99BfH69VBApBgFDm0nBjUNFLAN2oGE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR1101MB2169
-Received-SPF: pass client-ip=216.71.150.166;
- envelope-from=Cyril.Jean@microchip.com; helo=esa5.microchip.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/17 15:53:49
-X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
+ <1597423256-14847-6-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1597423256-14847-6-git-send-email-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 17 Aug 2020 13:51:07 -0700
+Message-ID: <CAKmqyKMrBYAUkiyTzbp9UazZ8-tBmMzn1V+CdFJ-K=aeaLV85w@mail.gmail.com>
+Subject: Re: [PATCH 05/18] hw/char: Add Microchip PolarFire SoC MMUART
+ emulation
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -146,51 +79,231 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2020 19:53:58 -0000
+X-List-Received-Date: Mon, 17 Aug 2020 21:01:44 -0000
 
-T24gOC8xNy8yMCA4OjI4IFBNLCBBbGlzdGFpciBGcmFuY2lzIHdyb3RlOg0KPiBFWFRFUk5BTCBF
-TUFJTDogRG8gbm90IGNsaWNrIGxpbmtzIG9yIG9wZW4gYXR0YWNobWVudHMgdW5sZXNzIHlvdSBr
-bm93IHRoZSBjb250ZW50IGlzIHNhZmUNCj4NCj4gT24gTW9uLCBBdWcgMTcsIDIwMjAgYXQgMTE6
-MTIgQU0gdmlhIDxxZW11LWRldmVsQG5vbmdudS5vcmc+IHdyb3RlOg0KPj4gSGkgQW51cCwNCj4+
-DQo+PiBPbiA4LzE3LzIwIDExOjMwIEFNLCBCaW4gTWVuZyB3cm90ZToNCj4+PiBFWFRFUk5BTCBF
-TUFJTDogRG8gbm90IGNsaWNrIGxpbmtzIG9yIG9wZW4gYXR0YWNobWVudHMgdW5sZXNzIHlvdSBr
-bm93IHRoZSBjb250ZW50IGlzIHNhZmUNCj4+Pg0KPj4+IEhpIEFudXAsDQo+Pj4NCj4+PiBPbiBT
-YXQsIEF1ZyAxNSwgMjAyMCBhdCAxOjQ0IEFNIEFudXAgUGF0ZWwgPGFudXBAYnJhaW5mYXVsdC5v
-cmc+IHdyb3RlOg0KPj4+PiBPbiBGcmksIEF1ZyAxNCwgMjAyMCBhdCAxMDoxMiBQTSBCaW4gTWVu
-ZyA8Ym1lbmcuY25AZ21haWwuY29tPiB3cm90ZToNCj4+Pj4+IEZyb206IEJpbiBNZW5nIDxiaW4u
-bWVuZ0B3aW5kcml2ZXIuY29tPg0KPj4+Pj4NCj4+Pj4+IFRoaXMgYWRkcyBzdXBwb3J0IGZvciBN
-aWNyb2NoaXAgUG9sYXJGaXJlIFNvQyBJY2ljbGUgS2l0IGJvYXJkLg0KPj4+Pj4gVGhlIEljaWNs
-ZSBLaXQgYm9hcmQgaW50ZWdyYXRlcyBhIFBvbGFyRmlyZSBTb0MsIHdpdGggb25lIFNpRml2ZSdz
-DQo+Pj4+PiBFNTEgcGx1cyBmb3VyIFU1NCBjb3JlcyBhbmQgbWFueSBvbi1jaGlwIHBlcmlwaGVy
-YWxzIGFuZCBhbiBGUEdBLg0KPj4+PiBOaWNlIFdvcmsgISEhIFRoaXMgaXMgdmVyeSBoZWxwZnVs
-Lg0KPj4+IFRoYW5rcyENCj4+Pg0KPj4+PiBUaGUgTWljcm9jaGlwIEhTUyBpcyBxdWl0ZSBjb252
-b2x1dGVkLiBJdCBoYXM6DQo+Pj4+IDEuIEREUiBJbml0DQo+Pj4+IDIuIEJvb3QgZGV2aWNlIHN1
-cHBvcnQNCj4+Pj4gMy4gU0JJIHN1cHBvcnQgdXNpbmcgT3BlblNCSSBhcyBsaWJyYXJ5DQo+Pj4+
-IDQuIFNpbXBsZSBURUUgc3VwcG9ydA0KPj4+Pg0KPj4+PiBJIHRoaW5rIHBvaW50IDEpIGFuZCAy
-KSBhYm92ZSBzaG91bGQgYmUgcGFydCBvZiBVLUJvb3QgU1BMLg0KPj4+PiBUaGUgcG9pbnQgMykg
-Y2FuIGJlIE9wZW5TQkkgRldfRFlOQU1JQy4NCj4+Pj4NCj4+Pj4gTGFzdGx5LGZvciBwb2ludCA0
-KSwgd2UgYXJlIHdvcmtpbmcgb24gYSBuZXcgT3BlblNCSSBmZWF0dXJlIHVzaW5nDQo+Pj4+IHdo
-aWNoIHdlIGNhbiBydW4gaW5kZXBlbmRlbnQgU2VjdXJlIE9TIGFuZCBOb24tU2VjdXJlIE9TIHVz
-aW5nDQo+Pj4+IFUtQm9vdF9TUEwrT3BlblNCSSAoZm9yIGJvdGggU2lGaXZlIFVubGVhc2hlZCBh
-bmQgTWljcm9jaGlwDQo+Pj4+IFBvbGFyRmlyZSkuDQo+Pj4+DQo+Pj4+IERvIHlvdSBoYXZlIHBs
-YW5zIGZvciBhZGRpbmcgVS1Cb290IFNQTCBzdXBwb3J0IGZvciB0aGlzIGJvYXJkID8/DQo+Pj4g
-KyBDeXJpbCBKZWFuIGZyb20gTWljcm9jaGlwDQo+Pj4NCj4+PiBJIHdpbGwgaGF2ZSB0byBsZWF2
-ZSB0aGlzIHF1ZXN0aW9uIHRvIEN5cmlsIHRvIGNvbW1lbnQuDQo+Pj4NCj4+IEkgY3VycmVudGx5
-IGRvIG5vdCBoYXZlIGEgcGxhbiB0byBzdXBwb3J0IFUtQm9vdCBTUEwuIFRoZSBpZGVhIG9mIHRo
-ZQ0KPj4gSFNTIGlzIHRvIGNvbnRhaW4gYWxsIHRoZSBzaWxpY29uIHNwZWNpZmljIGluaXRpYWxp
-emF0aW9uIGFuZA0KPj4gY29uZmlndXJhdGlvbiBjb2RlIHdpdGhpbiB0aGUgSFNTIGJlZm9yZSBq
-dW1waW5nIHRvIFUtQm9vdCBTLW1vZGUuIEkNCj4+IHdvdWxkIHJhdGhlciBrZWVwIGFsbCB0aGlz
-IHdpdGhpbiB0aGUgSFNTIGZvciB0aGUgdGltZSBiZWluZy4gSSB3b3VsZA0KPj4gd2FpdCB1bnRp
-bCB3ZSByZWFjaCBwcm9kdWN0aW9uIHNpbGljb24gYmVmb3JlIGF0dGVtcHRpbmcgdG8gbW92ZSB0
-aGlzIHRvDQo+PiBVLUJvb3QgU1BMIGFzIHRoZSBIU1MgaXMgbGlrZWx5IHRvIGNvbnRhaW4gc29t
-ZSBvcGFxdWUgc2lsaWNvbiByZWxhdGVkDQo+PiBjaGFuZ2VzIGZvciBhbm90aGVyIHdoaWxlLg0K
-PiBUaGF0IGlzIHVuZm9ydHVuYXRlLCBhIGxvdCBvZiB3b3JrIGhhcyBnb25lIGludG8gbWFraW5n
-IHRoZSBib290IGZsb3cNCj4gc2ltcGxlIGFuZCBlYXN5IHRvIHVzZS4NCj4NCj4gUUVNVSBub3cg
-aW5jbHVkZXMgT3BlblNCSSBieSBkZWZhdWx0IHRvIG1ha2UgaXQgZWFzeSBmb3IgdXNlcnMgdG8g
-Ym9vdA0KPiBMaW51eC4gVGhlIEljaWNsZSBLaXQgYm9hcmQgaXMgbm93IHRoZSBtb3N0IGRpZmZp
-Y3VsdCBRRU1VIGJvYXJkIHRvDQo+IGJvb3QgTGludXggb24uIE5vdCB0byBtZW50aW9uIGl0IG1h
-a2VzIGl0IGhhcmQgdG8gaW1wb3NzaWJsZSB0bw0KPiBzdXBwb3J0IGl0IGluIHN0YW5kYXJkIHRv
-b2wgZmxvd3Mgc3VjaCBhcyBtZXRhLXJpc2N2Lg0KPg0KPiBBbGlzdGFpcg0KDQpJZiBpdCBpcyBz
-dWNoIGEgcHJvYmxlbSB3ZSBjYW4gYWRkIGEgVS1Cb290IFNQTCBzdGFnZSBhbmQgdGhlIEhTUyBj
-YW4gYmUgDQp0cmVhdGVkIGFzIHN0YW5kYXJkIFNvQyBST00gY29kZS4NCg0KQ3lyaWwuDQoNCg0K
+On Fri, Aug 14, 2020 at 9:45 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> Microchip PolarFire SoC MMUART is ns16550 compatible, with some
+> additional registers. Create a simple MMUART model built on top
+> of the existing ns16550 model.
+>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> ---
+>
+>  MAINTAINERS                         |  2 +
+>  hw/char/Kconfig                     |  3 ++
+>  hw/char/Makefile.objs               |  1 +
+>  hw/char/mchp_pfsoc_mmuart.c         | 82 +++++++++++++++++++++++++++++++++++++
+>  include/hw/char/mchp_pfsoc_mmuart.h | 61 +++++++++++++++++++++++++++
+>  5 files changed, 149 insertions(+)
+>  create mode 100644 hw/char/mchp_pfsoc_mmuart.c
+>  create mode 100644 include/hw/char/mchp_pfsoc_mmuart.h
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 8716cb6..e51edac 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1319,7 +1319,9 @@ M: Bin Meng <bin.meng@windriver.com>
+>  L: qemu-riscv@nongnu.org
+>  S: Supported
+>  F: hw/riscv/microchip_pfsoc.c
+> +F: hw/char/mchp_pfsoc_mmuart.c
+>  F: include/hw/riscv/microchip_pfsoc.h
+> +F: include/hw/char/mchp_pfsoc_mmuart.h
+>
+>  RX Machines
+>  -----------
+> diff --git a/hw/char/Kconfig b/hw/char/Kconfig
+> index b7e0e4d..1d64555 100644
+> --- a/hw/char/Kconfig
+> +++ b/hw/char/Kconfig
+> @@ -52,3 +52,6 @@ config RENESAS_SCI
+>
+>  config AVR_USART
+>      bool
+> +
+> +config MCHP_PFSOC_MMUART
+> +    bool
+> diff --git a/hw/char/Makefile.objs b/hw/char/Makefile.objs
+> index bf177ac..f705845 100644
+> --- a/hw/char/Makefile.objs
+> +++ b/hw/char/Makefile.objs
+> @@ -33,6 +33,7 @@ common-obj-$(CONFIG_LM32) += lm32_juart.o
+>  common-obj-$(CONFIG_LM32) += lm32_uart.o
+>  common-obj-$(CONFIG_MILKYMIST) += milkymist-uart.o
+>  common-obj-$(CONFIG_SCLPCONSOLE) += sclpconsole.o sclpconsole-lm.o
+> +common-obj-$(CONFIG_MCHP_PFSOC_MMUART) += mchp_pfsoc_mmuart.o
+>
+>  obj-$(CONFIG_VIRTIO) += virtio-serial-bus.o
+>  obj-$(CONFIG_PSERIES) += spapr_vty.o
+> diff --git a/hw/char/mchp_pfsoc_mmuart.c b/hw/char/mchp_pfsoc_mmuart.c
+> new file mode 100644
+> index 0000000..9984acc
+> --- /dev/null
+> +++ b/hw/char/mchp_pfsoc_mmuart.c
+> @@ -0,0 +1,82 @@
+> +/*
+> + * Microchip PolarFire SoC MMUART emulation
+> + *
+> + * Copyright (c) 2020 Wind River Systems, Inc.
+> + *
+> + * Author:
+> + *   Bin Meng <bin.meng@windriver.com>
+> + *
+> + * This program is free software; you can redistribute it and/or
+> + * modify it under the terms of the GNU General Public License as
+> + * published by the Free Software Foundation; either version 2 or
+> + * (at your option) version 3 of the License.
+> + *
+> + * This program is distributed in the hope that it will be useful,
+> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
+> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+> + * GNU General Public License for more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along
+> + * with this program; if not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "qemu/log.h"
+> +#include "chardev/char.h"
+> +#include "exec/address-spaces.h"
+> +#include "hw/char/mchp_pfsoc_mmuart.h"
+> +
+> +static uint64_t mchp_pfsoc_mmuart_read(void *opaque, hwaddr addr, unsigned size)
+> +{
+> +    MchpPfSoCMMUartState *s = opaque;
+> +
+> +    if ((addr % sizeof(uint32_t)) || (addr >= 0x34)) {
+
+You can specify impl.min_access_size and impl.max_access_size as part
+of MemoryRegionOps so the allignment check isn't required here.
+
+> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: read: addr=0x%" HWADDR_PRIx "\n",
+> +                      __func__, addr);
+> +        return 0;
+> +    }
+> +
+> +    return s->reg[addr / sizeof(uint32_t)];
+> +}
+> +
+> +static void mchp_pfsoc_mmuart_write(void *opaque, hwaddr addr,
+> +                                    uint64_t value, unsigned size)
+> +{
+> +    MchpPfSoCMMUartState *s = opaque;
+> +    uint32_t val32 = (uint32_t)value;
+> +
+> +    if ((addr % sizeof(uint32_t)) || (addr >= 0x34)) {
+
+Same comment here about allignment.
+
+Alistair
+
+> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: bad write: addr=0x%" HWADDR_PRIx
+> +                      " v=0x%x\n", __func__, addr, val32);
+> +        return;
+> +    }
+> +
+> +    s->reg[addr / sizeof(uint32_t)] = val32;
+> +}
+> +
+> +static const MemoryRegionOps mchp_pfsoc_mmuart_ops = {
+> +    .read = mchp_pfsoc_mmuart_read,
+> +    .write = mchp_pfsoc_mmuart_write,
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +};
+> +
+> +MchpPfSoCMMUartState *mchp_pfsoc_mmuart_create(MemoryRegion *sysmem,
+> +    hwaddr base, qemu_irq irq, Chardev *chr)
+> +{
+> +    MchpPfSoCMMUartState *s;
+> +
+> +    s = g_new0(MchpPfSoCMMUartState, 1);
+> +
+> +    memory_region_init_io(&s->iomem, NULL, &mchp_pfsoc_mmuart_ops, s,
+> +                          "mchp.pfsoc.mmuart", 0x1000);
+> +
+> +    s->base = base;
+> +    s->irq = irq;
+> +
+> +    s->serial = serial_mm_init(sysmem, base, 2, irq, 399193, chr,
+> +                               DEVICE_LITTLE_ENDIAN);
+> +
+> +    memory_region_add_subregion(sysmem, base + 0x20, &s->iomem);
+> +
+> +    return s;
+> +}
+> diff --git a/include/hw/char/mchp_pfsoc_mmuart.h b/include/hw/char/mchp_pfsoc_mmuart.h
+> new file mode 100644
+> index 0000000..f619902
+> --- /dev/null
+> +++ b/include/hw/char/mchp_pfsoc_mmuart.h
+> @@ -0,0 +1,61 @@
+> +/*
+> + * Microchip PolarFire SoC MMUART emulation
+> + *
+> + * Copyright (c) 2020 Wind River Systems, Inc.
+> + *
+> + * Author:
+> + *   Bin Meng <bin.meng@windriver.com>
+> + *
+> + * Permission is hereby granted, free of charge, to any person obtaining a copy
+> + * of this software and associated documentation files (the "Software"), to deal
+> + * in the Software without restriction, including without limitation the rights
+> + * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> + * copies of the Software, and to permit persons to whom the Software is
+> + * furnished to do so, subject to the following conditions:
+> + *
+> + * The above copyright notice and this permission notice shall be included in
+> + * all copies or substantial portions of the Software.
+> + *
+> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+> + * THE SOFTWARE.
+> + */
+> +
+> +#ifndef HW_MCHP_PFSOC_MMUART_H
+> +#define HW_MCHP_PFSOC_MMUART_H
+> +
+> +#include "hw/char/serial.h"
+> +
+> +#define MCHP_PFSOC_MMUART_REG_SIZE  52
+> +
+> +typedef struct MchpPfSoCMMUartState {
+> +    MemoryRegion iomem;
+> +    hwaddr base;
+> +    qemu_irq irq;
+> +
+> +    SerialMM *serial;
+> +
+> +    uint32_t reg[MCHP_PFSOC_MMUART_REG_SIZE / sizeof(uint32_t)];
+> +} MchpPfSoCMMUartState;
+> +
+> +/**
+> + * mchp_pfsoc_mmuart_create - Create a Microchip PolarFire SoC MMUART
+> + *
+> + * This is a helper routine for board to create a MMUART device that is
+> + * compatible with Microchip PolarFire SoC.
+> + *
+> + * @sysmem: system memory region to map
+> + * @base: base address of the MMUART registers
+> + * @irq: IRQ number of the MMUART device
+> + * @chr: character device to associate to
+> + *
+> + * @return: a pointer to the device specific control structure
+> + */
+> +MchpPfSoCMMUartState *mchp_pfsoc_mmuart_create(MemoryRegion *sysmem,
+> +    hwaddr base, qemu_irq irq, Chardev *chr);
+> +
+> +#endif /* HW_MCHP_PFSOC_MMUART_H */
+> --
+> 2.7.4
+>
+>
 
