@@ -1,108 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k84bW-0004tV-JV
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Aug 2020 12:36:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43880)
+	id 1k856s-0006ZJ-NF
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Aug 2020 13:09:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55172)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <saipava@xilinx.com>)
- id 1k84VJ-0006e9-Fm; Tue, 18 Aug 2020 12:30:29 -0400
-Received: from mail-bn8nam11on2083.outbound.protection.outlook.com
- ([40.107.236.83]:28448 helo=NAM11-BN8-obe.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <saipava@xilinx.com>)
- id 1k84VG-0004J6-Qd; Tue, 18 Aug 2020 12:30:28 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=M16ups/lr/tQGOMT10bkpY1QzOvE7PSq/YASrODaLiWqo/aurZAKKxBr6kjqsZWB6qhJ+ckP3Hx3XQY9rd1j/nko8/LXLULzUUoEfEVucP5eQMD1AFdakkuvCrCMiUEVBfn5myvGMTXZpp7P2AUXXJtTlVM8kq/HovNgqkFuLwpzO5cvF64dvxq+TWeC9lE8kyIxhqId/pYIjcpUCGyDogyvvllcphN/MB56YyEVcwS55i56ypqXuhi5x9Sk5959/9BmTra/lLb8i80F0nVNcyqadD59iRTBoCdCx3REu63o1heJp15inCthCmid+dAumNnivYhV9zudlxE+T6i1Qg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xW2TBk+uizOR8hLdt7KWPbRHZIXdOyLaIrHFJals+W4=;
- b=b3l/1JXfOnfYTz/sP/q/wVRLLN0Fj9kBpYPkR8Ymn//BxA55P0c20hiNfjP+SePOEv02rcp068CsHuerXdbjgjWsAtzvZA0KdfGkPr6G4ocLU1N+r4hwtr7h2R5UUoONhsYObma9E2UwWQV08vbHFxavZ+XZUEHu7UQD9mZqQWPaTQkO8FIIDVIJfrS/r9UHe26ZFwkQ6wsAT2IRp02mfcoYd551qW6O+ThDpncbqCKlbjWDPqtyiyWL2xAsg+6RP9v+6JUmzEtCV78rDVPdKviMlevgfYrmGSO6srdgYjm7m8tKc9cxz9Ly2Y07T5ENapR1AJrM31QDzHLoSTfoDQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=xilinx.com; dmarc=pass action=none header.from=xilinx.com;
- dkim=pass header.d=xilinx.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xW2TBk+uizOR8hLdt7KWPbRHZIXdOyLaIrHFJals+W4=;
- b=CAUek7ZMZ8FMtIWI/8ebjFNrbfrz8f6THNmhsFgi7kttVPybsXTYMnR/SfDJw0DUn/vOr4GsVlKwNciIQLfbDknSE7ed7HdQbR5+jRXZniWmvbygLNdyRGE6P/EBp0kkyttwnBlZG4pOgK3CawS6/48QfV6+pPd6Sn+CQ8ORwVg=
-Received: from BY5PR02MB6772.namprd02.prod.outlook.com (2603:10b6:a03:206::11)
- by BYAPR02MB5975.namprd02.prod.outlook.com (2603:10b6:a03:118::29)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.18; Tue, 18 Aug
- 2020 16:30:15 +0000
-Received: from BY5PR02MB6772.namprd02.prod.outlook.com
- ([fe80::1007:f094:45c9:bb47]) by BY5PR02MB6772.namprd02.prod.outlook.com
- ([fe80::1007:f094:45c9:bb47%7]) with mapi id 15.20.3283.028; Tue, 18 Aug 2020
- 16:30:15 +0000
-From: Sai Pavan Boddu <saipava@xilinx.com>
-To: =?utf-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?= <f4bug@amsat.org>, Bin Meng
- <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>, Bastian
- Koppelmann <kbastian@mail.uni-paderborn.de>, Palmer Dabbelt
- <palmerdabbelt@google.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
- <qemu-riscv@nongnu.org>
-CC: Bin Meng <bin.meng@windriver.com>, "qemu-block@nongnu.org"
- <qemu-block@nongnu.org>
-Subject: RE: [PATCH 07/18] hw/sd: sd: Fix incorrect populated function switch
- status data structure
-Thread-Topic: [PATCH 07/18] hw/sd: sd: Fix incorrect populated function switch
- status data structure
-Thread-Index: AQHWctnsU/SfbQBsXUKm8YZh5uGNLKk+E8PA
-Date: Tue, 18 Aug 2020 16:30:15 +0000
-Message-ID: <BY5PR02MB67720168B25F53370840545BCA5C0@BY5PR02MB6772.namprd02.prod.outlook.com>
-References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
- <1597423256-14847-8-git-send-email-bmeng.cn@gmail.com>
- <565d9936-3eda-db2f-b390-05f675cf6644@amsat.org>
-In-Reply-To: <565d9936-3eda-db2f-b390-05f675cf6644@amsat.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-TNEF-Correlator: 
-authentication-results: amsat.org; dkim=none (message not signed)
- header.d=none;amsat.org; dmarc=none action=none header.from=xilinx.com;
-x-originating-ip: [149.199.50.129]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 9cedc970-0d1f-4bc0-cfce-08d84393fccf
-x-ms-traffictypediagnostic: BYAPR02MB5975:
-x-microsoft-antispam-prvs: <BYAPR02MB5975263219F672B0C17D7336CA5C0@BYAPR02MB5975.namprd02.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:7691;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: wq2Cjpw4Q7JPEBry6XRdQUIOzn5u9K3A+oJ5Obb1Umt0P6zKIbxVfWMmYGt4UrScS5jzgJOmgd/PNVE0vr+w1iHTibeZO3psxZ+8R0jY+sn+ixqE/WiH/zI1TyNtjefOJFsuX6NLqQZtH4Wx0oo8P12eXf8Xg4pg1zTXbe7EzDCn3810dT1mzTl6iNnaCz49d7Z7yKrgLeiuBF3dnhqrOEThtbW8G7u6QR3uIL48dyiCAPz/jIy7gxmiQHS1NG9KQthpu4PYgwX+Jer4Rq8HQtxwxtFQvKy5gnEnett9IVGX9L/OoLiIZG84bwQZeyf2z4w4Z7NDei6uTiyzXxRmHg==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BY5PR02MB6772.namprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(376002)(136003)(366004)(39860400002)(346002)(396003)(186003)(9686003)(55016002)(2906002)(71200400001)(5660300002)(7416002)(33656002)(54906003)(83380400001)(86362001)(7696005)(6506007)(66946007)(4326008)(8676002)(478600001)(316002)(26005)(66476007)(110136005)(53546011)(64756008)(66446008)(76116006)(8936002)(66556008)(52536014);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata: oAti0Aqm1BShBXdLV72SQ7l3/vpPIDe3MYsIUnTZpIgg/hJsxboyGp7H0uFHL6BNTwegVJpp+rMz9lzltPTFp1z+yJTnSJc6uT9xj26fXYwR++pLqKeNdLF6cCs/D3wdagKpRZyMKFcuJYgmwbZeLfRB/OTtqM+xnac3k9lWoN+NH1fUUyjU1DrkE1fuGGT/BCT4+joJU2KTrSWFsZ0nxhscq4G51zs93/69glQxpKOYeEqrhBhlWe+q4d8XEeWtghyf/ShV3FItMHexRCsggMiNbbr8OSApcQmzlt3jY77u21ZbNEbMG5kpQEoRxnSA1SKzPTvk8gKFBDL++6i9vMlj7TbWb81lb3vaPvHpa75Lo2izQG1yHkzoigqj5zV4BtQTvmWOXeT43hbh/pJHMVFxavHKFACQF2F1XoyfeqD6pUf2SupkMTGqP8RMPjoRnSqO9hJF8DUNQvqCLWyUWtx2fd545/3MXrc4HfZZVIgub+Qm6QWxZ2zHP2V1JQHyaOP85Cq5GtfXy8QbJSpRr71mHE/WgnDIL57cSuNMPqY/5EP3HKsQjg50BmMPOMF1JtPNRwfjzgLoPW2KhP/vLRiI8SnNVoSPs0tB/GKSND3b5ZIu6KitD0LvcoN3o8d+9z14UyUfq65kEWpZHKilDg==
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR02MB6772.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9cedc970-0d1f-4bc0-cfce-08d84393fccf
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Aug 2020 16:30:15.2561 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: lymLVXNVNzT9ZZXhcgujn5febyM7zSzFTfz21tRcVbsNaRdwijEjM9kljpNpit930dEGPrz0LotbJfx0R1vhIA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR02MB5975
-Received-SPF: pass client-ip=40.107.236.83; envelope-from=saipava@xilinx.com;
- helo=NAM11-BN8-obe.outbound.protection.outlook.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/18 12:30:20
-X-ACL-Warn: Detected OS   = Windows NT kernel [generic] [fuzzy]
-X-Spam_score_int: -28
-X-Spam_score: -2.9
+ (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
+ id 1k856r-0006Ys-BG
+ for qemu-riscv@nongnu.org; Tue, 18 Aug 2020 13:09:17 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:33160)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
+ id 1k856p-0002zV-EF
+ for qemu-riscv@nongnu.org; Tue, 18 Aug 2020 13:09:16 -0400
+Received: by mail-pf1-x444.google.com with SMTP id u20so10284480pfn.0
+ for <qemu-riscv@nongnu.org>; Tue, 18 Aug 2020 10:09:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=22Zz+YwGzBdQSdlyIPwby04sg60ddKWl41y0fTGfHyw=;
+ b=AXS+c3vJG4w5Jj1vig1Ym+2gUZRAfqrmSV6PfYov2m9+IkK4Rtgi8IPABOmaECviYF
+ O8ntjyM0FJ6uxMJfj1h6ytuWRiCu/PNtF6iKC/4qhGptJ3I+A0rR+9GUoSycyM+ce31U
+ v0SBqZfpXqn/hkO+xaYcv++TpS6kkyeY593XgtAKGP1liRXZ9c8GsAHx63XfFTqYPtn1
+ SHry6JwJ7S9O0wBsMScTMAUGokAMgt95Av5Mt/sQ7QHwL6gHaCYsD/B3z3r1gOMsIsnz
+ +IBethrVkAWA1ZgQlOYFgByQwmV6a6B5RFs3ZF7PAOXXsi69BEwdVYvyFvVJWpJ64HAB
+ 3WQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=22Zz+YwGzBdQSdlyIPwby04sg60ddKWl41y0fTGfHyw=;
+ b=FdrJcgAZ7IaCBM68PRiXTMzffJUFTqKkyvQ4ForVKsItytOZW4SFOlSDqsBfr/kdAH
+ Wstee6w9ArB6dMfDBuSLxzD63BCnMkxF9dkLTjkA3M4wZY5qVLxrHyzqT5lTIHLMROcb
+ JejmSBdzSPQxp9e+9/L8gTTkrXjsNxpw4Zy+eNAqCBE7Kt1QbCAQ44Ze+4xIafDQxTJs
+ N9bFFTIZFDH9H9gBEJnV9cDfk1dsc0woLyKnLDMm/p7bDH1uv+2cnNBE0W3c+m/4d3XI
+ GiqSJvh1Fs6HCRzA9qI4msQon5Ycg06AZs5Feq6/EcpClzrnm++5fd7CIOtCg8fzzrSK
+ g4sQ==
+X-Gm-Message-State: AOAM5328C+lRbC/ImMt4DsBCkdbMy96IY7vwY/HRiQk94NffFzNrnKm2
+ elM+IUpKRyYspeTSfbh6IkbD3w==
+X-Google-Smtp-Source: ABdhPJxdXpjFYeUiw7ZhNYnf3yjbbMa7dU67XLWo4wn2yRsEkCIpMeOKEGifFwKMfgbvijcsvFJIxA==
+X-Received: by 2002:aa7:8608:: with SMTP id p8mr15520198pfn.62.1597770553446; 
+ Tue, 18 Aug 2020 10:09:13 -0700 (PDT)
+Received: from localhost.localdomain (114-47-163-2.dynamic-ip.hinet.net.
+ [114.47.163.2])
+ by smtp.gmail.com with ESMTPSA id m3sm460043pjs.22.2020.08.18.10.09.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Aug 2020 10:09:12 -0700 (PDT)
+From: Green Wan <green.wan@sifive.com>
+To: 
+Cc: bmeng.cn@gmail.com, Green Wan <green.wan@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: [RFC PATCH v3 0/2] Add file-backed and write-once features to OTP
+Date: Wed, 19 Aug 2020 01:08:37 +0800
+Message-Id: <20200818170839.20258-1-green.wan@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::444;
+ envelope-from=green.wan@sifive.com; helo=mail-pf1-x444.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-1,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 18 Aug 2020 12:36:53 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -114,54 +77,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2020 16:30:29 -0000
+X-List-Received-Date: Tue, 18 Aug 2020 17:09:17 -0000
 
-VGhhbmtzIFBoaWxpcHBlLA0KDQpJIHdvdWxkIHRlc3QgdGhpcyBhbmQgZ2V0IGJhY2suDQoNClJl
-Z2FyZHMsDQpTYWkgUGF2YW4NCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9t
-OiBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqSA8cGhpbGlwcGUubWF0aGlldS5kYXVkZUBnbWFpbC5j
-b20+IE9uDQo+IEJlaGFsZiBPZiBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqQ0KPiBTZW50OiBTYXR1
-cmRheSwgQXVndXN0IDE1LCAyMDIwIDE6MjkgUE0NCj4gVG86IEJpbiBNZW5nIDxibWVuZy5jbkBn
-bWFpbC5jb20+OyBBbGlzdGFpciBGcmFuY2lzDQo+IDxBbGlzdGFpci5GcmFuY2lzQHdkYy5jb20+
-OyBCYXN0aWFuIEtvcHBlbG1hbm4gPGtiYXN0aWFuQG1haWwudW5pLQ0KPiBwYWRlcmJvcm4uZGU+
-OyBQYWxtZXIgRGFiYmVsdCA8cGFsbWVyZGFiYmVsdEBnb29nbGUuY29tPjsgU2FnYXINCj4gS2Fy
-YW5kaWthciA8c2FnYXJrQGVlY3MuYmVya2VsZXkuZWR1PjsgcWVtdS1kZXZlbEBub25nbnUub3Jn
-OyBxZW11LQ0KPiByaXNjdkBub25nbnUub3JnOyBTYWkgUGF2YW4gQm9kZHUgPHNhaXBhdmFAeGls
-aW54LmNvbT4NCj4gQ2M6IEJpbiBNZW5nIDxiaW4ubWVuZ0B3aW5kcml2ZXIuY29tPjsgcWVtdS1i
-bG9ja0Bub25nbnUub3JnDQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggMDcvMThdIGh3L3NkOiBzZDog
-Rml4IGluY29ycmVjdCBwb3B1bGF0ZWQgZnVuY3Rpb24gc3dpdGNoDQo+IHN0YXR1cyBkYXRhIHN0
-cnVjdHVyZQ0KPiANCj4gK1NhaSBQYXZhbg0KPiANCj4gT24gOC8xNC8yMCA2OjQwIFBNLCBCaW4g
-TWVuZyB3cm90ZToNCj4gPiBGcm9tOiBCaW4gTWVuZyA8YmluLm1lbmdAd2luZHJpdmVyLmNvbT4N
-Cj4gPg0KPiA+IEF0IHByZXNlbnQgdGhlIGZ1bmN0aW9uIHN3aXRjaCBzdGF0dXMgZGF0YSBzdHJ1
-Y3R1cmUgYml0IFszOTk6Mzc2XSBhcmUNCj4gPiB3cm9uZ2x5IHB1cHVsYXRlZC4gVGhlc2UgMyBi
-eXRlcyBlbmNvZGUgZnVuY3Rpb24gc3dpdGNoIHN0YXR1cyBmb3IgdGhlDQo+ID4gNiBmdW5jdGlv
-biBncm91cHMsIHdpdGggNCBiaXRzIHBlciBncm91cCwgc3RhcnRpbmcgZnJvbSBmdW5jdGlvbiBn
-cm91cA0KPiA+IDYgYXQgYml0IDM5OSwgdGhlbiBmb2xsb3dlZCBieSBmdW5jdGlvbiBncm91cCA1
-IGF0IGJpdCAzOTUsIGFuZCBzbyBvbi4NCj4gPg0KPiA+IEhvd2V2ZXIgdGhlIGNvZGVzIG1pc3Rh
-a2VubHkgZmlsbHMgaW4gdGhlIGZ1bmN0aW9uIGdyb3VwIDEgc3RhdHVzIGF0DQo+ID4gYml0IDM5
-OS4gVGhpcyBmaXhlcyB0aGUgY29kZSBsb2dpYy4NCj4gPg0KPiANCj4gRml4ZXM6IGExYmIyN2Ix
-ZTkgKCJTRCBjYXJkIGVtdWxhdGlvbiAoaW5pdGlhbCBpbXBsZW1lbnRhdGlvbikiKQ0KPiANCj4g
-PiBTaWduZWQtb2ZmLWJ5OiBCaW4gTWVuZyA8YmluLm1lbmdAd2luZHJpdmVyLmNvbT4NCj4gPiAt
-LS0NCj4gPg0KPiA+ICBody9zZC9zZC5jIHwgNiArKysrKy0NCj4gPiAgMSBmaWxlIGNoYW5nZWQs
-IDUgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQ0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL2h3
-L3NkL3NkLmMgYi9ody9zZC9zZC5jDQo+ID4gaW5kZXggZmFkOWNmMS4uNTFmNTkwMCAxMDA2NDQN
-Cj4gPiAtLS0gYS9ody9zZC9zZC5jDQo+ID4gKysrIGIvaHcvc2Qvc2QuYw0KPiA+IEBAIC04MDYs
-MTEgKzgwNiwxNSBAQCBzdGF0aWMgdm9pZCBzZF9mdW5jdGlvbl9zd2l0Y2goU0RTdGF0ZSAqc2Qs
-DQo+IHVpbnQzMl90IGFyZykNCj4gPiAgICAgIHNkLT5kYXRhWzExXSA9IDB4NDM7DQo+ID4gICAg
-ICBzZC0+ZGF0YVsxMl0gPSAweDgwOwkvKiBTdXBwb3J0ZWQgZ3JvdXAgMSBmdW5jdGlvbnMgKi8N
-Cj4gPiAgICAgIHNkLT5kYXRhWzEzXSA9IDB4MDM7DQo+ID4gKw0KPiA+ICsgICAgc2QtPmRhdGFb
-MTRdID0gMDsNCj4gPiArICAgIHNkLT5kYXRhWzE1XSA9IDA7DQo+ID4gKyAgICBzZC0+ZGF0YVsx
-Nl0gPSAwOw0KPiANCj4gUG9pbnRsZXNzIHplcm8gaW5pdGlhbGl6YXRpb24uDQo+IA0KPiBSZXZp
-ZXdlZC1ieTogUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgPGY0YnVnQGFtc2F0Lm9yZz4NCj4gDQo+
-IEknbGwgd2FpdCB1bnRpbCBuZXh0IHdlZWsgaW4gY2FzZSBTYWkgUGF2YW4gd2FudHMgdG8gdGVz
-dCB0aGlzIHBhdGNoIChJIGRvbid0IGhhdmUNCj4gYWNjZXNzIHRvIHRoZSBYaWxpbnggaW1hZ2Vz
-IGFueW1vcmUpIHRoZW4gSSdsbCBxdWV1ZSB0aGlzIHZpYSBteSBzZC1uZXh0IHRyZWUuDQo+IA0K
-PiBSZWdhcmRzLA0KPiANCj4gUGhpbC4NCj4gDQo+ID4gICAgICBmb3IgKGkgPSAwOyBpIDwgNjsg
-aSArKykgew0KPiA+ICAgICAgICAgIG5ld19mdW5jID0gKGFyZyA+PiAoaSAqIDQpKSAmIDB4MGY7
-DQo+ID4gICAgICAgICAgaWYgKG1vZGUgJiYgbmV3X2Z1bmMgIT0gMHgwZikNCj4gPiAgICAgICAg
-ICAgICAgc2QtPmZ1bmN0aW9uX2dyb3VwW2ldID0gbmV3X2Z1bmM7DQo+ID4gLSAgICAgICAgc2Qt
-PmRhdGFbMTQgKyAoaSA+PiAxKV0gPSBuZXdfZnVuYyA8PCAoKGkgKiA0KSAmIDQpOw0KPiA+ICsg
-ICAgICAgIHNkLT5kYXRhWzE2IC0gKGkgPj4gMSldIHw9IG5ld19mdW5jIDw8ICgoaSAlIDIpICog
-NCk7DQo+ID4gICAgICB9DQo+ID4gICAgICBtZW1zZXQoJnNkLT5kYXRhWzE3XSwgMCwgNDcpOw0K
-PiA+ICAgICAgc3R3X2JlX3Aoc2QtPmRhdGEgKyA2NCwgc2RfY3JjMTYoc2QtPmRhdGEsIDY0KSk7
-DQo+ID4NCg0K
+First patch is to add file-backed implementation to allow users to use
+'-drive' to assign an OTP raw image file. OTP image file must be bigger
+than 16K.
+
+For example, '-drive if=none,format=raw,file=otp.img'
+
+Second patch is to add 'write-once' feature to block second write to the
+OTP memory. Only keep the 'written' state for non-control register range
+from 0x38 to 16KB.
+
+Tested on sifive_u for both qemu and u-boot.
+
+Green Wan (2):
+  hw/riscv: sifive_u: Add backend drive support
+  hw/riscv: sifive_u: Add write-once protection.
+
+ hw/riscv/sifive_u_otp.c         | 71 +++++++++++++++++++++++++++++++++
+ include/hw/riscv/sifive_u_otp.h |  3 ++
+ 2 files changed, 74 insertions(+)
+
+-- 
+2.17.1
+
 
