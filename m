@@ -1,73 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k85Af-0002M6-55
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Aug 2020 13:13:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56054)
+	id 1k8Czd-00062N-8f
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Aug 2020 21:34:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35120)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
- id 1k85Ab-0002K8-EI
- for qemu-riscv@nongnu.org; Tue, 18 Aug 2020 13:13:11 -0400
-Received: from mail-qk1-x744.google.com ([2607:f8b0:4864:20::744]:35209)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1k8Czb-00061i-8n; Tue, 18 Aug 2020 21:34:19 -0400
+Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:45300)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
- id 1k85AY-0003ct-7x
- for qemu-riscv@nongnu.org; Tue, 18 Aug 2020 13:13:09 -0400
-Received: by mail-qk1-x744.google.com with SMTP id p25so18991343qkp.2
- for <qemu-riscv@nongnu.org>; Tue, 18 Aug 2020 10:13:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1k8CzZ-0002AW-7q; Tue, 18 Aug 2020 21:34:18 -0400
+Received: by mail-yb1-xb41.google.com with SMTP id x2so12429226ybf.12;
+ Tue, 18 Aug 2020 18:34:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=wc+6uylRK1t4MMgRQeTUnHicEeTnTrg5SGhzCMb6vVU=;
- b=JxTMV7vXdQ9xbuJeJpUqpqE7Oto6DaVcPiVGN+dDcryzG1tUmTtkhv1XxhxmUISsMV
- HwbiycAslE66Ze6AyC6eJmWzcAKmmVc8m189xkHnPlf3Z5RWt/bWmts7DWdPr74LsMb4
- GNzuEE/xsSDZNcDEYUVB3gAQR9sEvFhbfRYGR1G2RK+e2AwfTFEaAtsyQvhRZ23d/tBc
- Ai6prpmV5SbMln/kX2Wgao8byc+fCDmg/+T93i77cAlkW1XGwOOaIVpFpc6pDunb/7w8
- E/USErpW9xqLBpjSrANslAJDkQbc3ZXdK1ptr8QGO5cN1XoF9ebHEQrB7duVhHFq1o60
- 3r7g==
+ :cc; bh=x9v32iJwwCHKnri7jWQl1HJe8M+XkbGwit4e3sHhZBg=;
+ b=WItehrSJIFcAJnCzr56ZGcipn/MD0pRPKMKwjzbd1tfU61p5k2EcRYoiPXc1G2GCiu
+ MZ1UjcHjZI70jVSsiSLBGLNzSfLH06mFhUeHI6OQQr55pKiC7NpD1W9VIXFmQFe9pukf
+ 4b8bDKwDlrwd0Fllp/PULgHZleICYuelaGVy+tQD3pOC7wNTytA1Qh1Lx/2vzxfeENHG
+ GBvFks/sOSiMbXbFp4lzCbDQ2DoexVneftCwZMXUJffzTC7Lf4eEM6lV9h9nYEiJ5LlC
+ AWL5M11HkeIAoj6opr9haSY8DolfqbBvoJmCvkmEyWKs4tKzK618d24E8F146nkqzjz6
+ YGNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=wc+6uylRK1t4MMgRQeTUnHicEeTnTrg5SGhzCMb6vVU=;
- b=FKUJ6gZUPxUAVISYxMVr3DOyOPRaqsLwDPhRJi3ArB9lF3NA5W978oGGzDuJPRaO2z
- CeI/wH52YDjx4wvPxVoiac48dLgoW5FJncCoErcx8uWjVXMxY6pDuNzaPHXs2MWBzJQo
- UrmHmoFvfsFT8anE5bSUY3Ai4hiAB4kG8R6EmxbBILrj1xoY3DQhb/wFDnOUyL9MeJc4
- KMD0wSYNyA452IiiBQysr9KobSh5SCzAmIV85ERSHK67z0Hfhm6wCZJQTTd1pTsHrwu/
- ZBV6qEwn/cVNPf/G4cIz9sQmpBAg4NFAnobV+zuhurP8c+oLVkGrDnWG3zpT12kcwmrV
- r5oQ==
-X-Gm-Message-State: AOAM532JgBK8P980uM/heOWCgRMSJdJ7+QQd3TIACc4JBkfRO68MAPp+
- 6/FHA0d2smr/hdTrNioZP9H7rKdPgYxtSLA90+o1/Q==
-X-Google-Smtp-Source: ABdhPJzDIjNhUa67cA6gbLpZPZC8W1qT+Qtulmkmmhjy7TuRA/Vmz3pm+vqDeaJULhJSJKAYRrWXBpzZ2gCwr1noGiM=
-X-Received: by 2002:a37:a758:: with SMTP id q85mr17851642qke.325.1597770784798; 
- Tue, 18 Aug 2020 10:13:04 -0700 (PDT)
+ bh=x9v32iJwwCHKnri7jWQl1HJe8M+XkbGwit4e3sHhZBg=;
+ b=U3rCIZlBg1IarFCjzNpxpCCB+qUB5MVJGf78/c/ZWsp0XftWwsAbfV+3IdhG91Ovje
+ 8aYGYSIPQBArdnmgNDJuFRVWimM+OYywBUmQQEc7HxG5G96dTqPL1+31rKNTFV/ToeE4
+ eiHVBld6nm81WhPj2tfrlkmb+vLj5bsGVtH5Ef3HeZNLnL1E7BVGLXoaZGXeiMvzqXUu
+ 7pfY8nJwwab79cxivmSj7lSEkIC69UwLLosdFyhFJGjPbXnyTSOMxD6MPW8+fTHNc3bH
+ 2RMZbL71KGkhYhwly4WM0KzJDU3mzO+mVQVR02vjs47rlfC1GexaxqN0v05XpX8b6dd1
+ polQ==
+X-Gm-Message-State: AOAM532vlCiIEaPmHO6/P/LkAAJVxryaZlqd9ApF0ML3gp3KCDB9QrlY
+ rVTsdI/3EGYIqxeVQwh4DmAF402MeagX3X3s/T8=
+X-Google-Smtp-Source: ABdhPJx27MPsQuv3SAGRRGpd/w1PnASnhNzs4cU2AXYczcDWxUS2tOktN9VtQv8CIhcvDmUdm9sWvfs5sn9m+Y1sZLs=
+X-Received: by 2002:a25:f20d:: with SMTP id i13mr30632404ybe.152.1597800854784; 
+ Tue, 18 Aug 2020 18:34:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200731024708.32725-1-green.wan@sifive.com>
- <20200731024708.32725-2-green.wan@sifive.com>
- <CAKmqyKP=P92SzwnLh-UmBcvt20_PTjMNZpTVKE6w-KyDd0PDMQ@mail.gmail.com>
- <CAJivOr4pqLnh_46KT7YsuENOVkmnn39_NOG8cyUYSsT3H5cVwA@mail.gmail.com>
- <CAKmqyKOa6T0BE=AuJcQRfe-WSGMuiCgCis7JweKzarR30Ga0nA@mail.gmail.com>
-In-Reply-To: <CAKmqyKOa6T0BE=AuJcQRfe-WSGMuiCgCis7JweKzarR30Ga0nA@mail.gmail.com>
-From: Green Wan <green.wan@sifive.com>
-Date: Wed, 19 Aug 2020 01:12:52 +0800
-Message-ID: <CAJivOr4Y2FRxdnmH44Y1fqkLwOf6_rMh3yOaebfH=RpKjE7amQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 1/2] hw/riscv: sifive_u: Add file-backed OTP.
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
+ <CAAhSdy2D=TcENAJDja4r6pnhz0LRi-T+A9k3Btrs_EuB4x0e4w@mail.gmail.com>
+ <CAEUhbmV5=B5xKhYqMj1MQb61nt5cNUJG1MXT++C1w1YMYTfLCQ@mail.gmail.com>
+ <202949f7-c9d5-4d4d-3ebe-53727f4fa169@microchip.com>
+ <CAKmqyKM3nm0rhxgDvWKWfO+4b23ZLSkHW2TzmcVZ_ZFy4L7MRg@mail.gmail.com>
+ <d3f61c2c-a489-887e-0143-4d9a1e66e6f2@microchip.com>
+ <CAAhSdy32owLO0KytyYsg-zH6JyyfNfGofa4vanqTFJLntPq0=g@mail.gmail.com>
+ <1f17cc4c-83f8-a024-ebef-79e28fab9a32@microchip.com>
+ <CAAhSdy1MTvjfpHZEAs2YVHXdPBaEMQxUNdP_yc7br0C2p9kfng@mail.gmail.com>
+In-Reply-To: <CAAhSdy1MTvjfpHZEAs2YVHXdPBaEMQxUNdP_yc7br0C2p9kfng@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 19 Aug 2020 09:34:03 +0800
+Message-ID: <CAEUhbmUWcTxv70yuLMXwniGXB6zkadcpB4YTq=8F9UcXRK72+g@mail.gmail.com>
+Subject: Re: [PATCH 00/18] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
+ board support
+To: Anup Patel <anup@brainfault.org>
+Cc: Cyril.Jean@microchip.com, Alistair Francis <alistair23@gmail.com>, 
  Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: multipart/alternative; boundary="0000000000000f940005ad2a00c2"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::744;
- envelope-from=green.wan@sifive.com; helo=mail-qk1-x744.google.com
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ QEMU Developers <qemu-devel@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Alistair Francis <alistair@alistair23.me>, qemu-block@nongnu.org, 
+ Jason Wang <jasowang@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-arm <qemu-arm@nongnu.org>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,764 +92,155 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2020 17:13:11 -0000
+X-List-Received-Date: Wed, 19 Aug 2020 01:34:19 -0000
 
---0000000000000f940005ad2a00c2
-Content-Type: text/plain; charset="UTF-8"
-
-Hi Alistair,
-
-You're right. I can get drive without -device. Now it looks much better.
-Sent v3 patch.
-
-Thanks a lot,
-- Green
-
-On Fri, Aug 14, 2020 at 5:34 AM Alistair Francis <alistair23@gmail.com>
-wrote:
-
-> On Wed, Aug 12, 2020 at 9:12 PM Green Wan <green.wan@sifive.com> wrote:
+On Tue, Aug 18, 2020 at 9:55 PM Anup Patel <anup@brainfault.org> wrote:
+>
+> On Tue, Aug 18, 2020 at 6:39 PM <Cyril.Jean@microchip.com> wrote:
 > >
-> > Hi Alistair,
+> > On 8/18/20 7:17 AM, Anup Patel wrote:
+> > > EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
+> > >
+> > > On Tue, Aug 18, 2020 at 1:23 AM <Cyril.Jean@microchip.com> wrote:
+> > >> On 8/17/20 8:28 PM, Alistair Francis wrote:
+> > >>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
+> > >>>
+> > >>> On Mon, Aug 17, 2020 at 11:12 AM via <qemu-devel@nongnu.org> wrote:
+> > >>>> Hi Anup,
+> > >>>>
+> > >>>> On 8/17/20 11:30 AM, Bin Meng wrote:
+> > >>>>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
+> > >>>>>
+> > >>>>> Hi Anup,
+> > >>>>>
+> > >>>>> On Sat, Aug 15, 2020 at 1:44 AM Anup Patel <anup@brainfault.org> wrote:
+> > >>>>>> On Fri, Aug 14, 2020 at 10:12 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >>>>>>> From: Bin Meng <bin.meng@windriver.com>
+> > >>>>>>>
+> > >>>>>>> This adds support for Microchip PolarFire SoC Icicle Kit board.
+> > >>>>>>> The Icicle Kit board integrates a PolarFire SoC, with one SiFive's
+> > >>>>>>> E51 plus four U54 cores and many on-chip peripherals and an FPGA.
+> > >>>>>> Nice Work !!! This is very helpful.
+> > >>>>> Thanks!
+> > >>>>>
+> > >>>>>> The Microchip HSS is quite convoluted. It has:
+> > >>>>>> 1. DDR Init
+> > >>>>>> 2. Boot device support
+> > >>>>>> 3. SBI support using OpenSBI as library
+> > >>>>>> 4. Simple TEE support
+> > >>>>>>
+> > >>>>>> I think point 1) and 2) above should be part of U-Boot SPL.
+> > >>>>>> The point 3) can be OpenSBI FW_DYNAMIC.
+> > >>>>>>
+> > >>>>>> Lastly,for point 4), we are working on a new OpenSBI feature using
+> > >>>>>> which we can run independent Secure OS and Non-Secure OS using
+> > >>>>>> U-Boot_SPL+OpenSBI (for both SiFive Unleashed and Microchip
+> > >>>>>> PolarFire).
+> > >>>>>>
+> > >>>>>> Do you have plans for adding U-Boot SPL support for this board ??
+> > >>>>> + Cyril Jean from Microchip
+> > >>>>>
+> > >>>>> I will have to leave this question to Cyril to comment.
+> > >>>>>
+> > >>>> I currently do not have a plan to support U-Boot SPL. The idea of the
+> > >>>> HSS is to contain all the silicon specific initialization and
+> > >>>> configuration code within the HSS before jumping to U-Boot S-mode. I
+> > >>>> would rather keep all this within the HSS for the time being. I would
+> > >>>> wait until we reach production silicon before attempting to move this to
+> > >>>> U-Boot SPL as the HSS is likely to contain some opaque silicon related
+> > >>>> changes for another while.
+> > >>> That is unfortunate, a lot of work has gone into making the boot flow
+> > >>> simple and easy to use.
+> > >>>
+> > >>> QEMU now includes OpenSBI by default to make it easy for users to boot
+> > >>> Linux. The Icicle Kit board is now the most difficult QEMU board to
+> > >>> boot Linux on. Not to mention it makes it hard to impossible to
+> > >>> support it in standard tool flows such as meta-riscv.
+> > >>>
+> > >>> Alistair
+> > >> If it is such a problem we can add a U-Boot SPL stage and the HSS can be
+> > >> treated as standard SoC ROM code.
+> > > It's not mandatory for U-Boot SPL to have stable DRAM calibration settings
+> > > from the start itself. The initial U-Boot SPL support for most
+> > > platforms (accross
+> > > architectures) usually include basic working DRAM calibration settings which
+> > > is later on updated with separate patches. Also, we don't need all U-Boot
+> > > drivers to be upstreamed in one-go as this can be done in phases.
+> > >
+> > > The advantage we have with PolarFire SoC Icicle board is that we already
+> > > have a U-Boot S-mode. and we believe the OpenSBI generic platform will
+> > > work fine for PolarFire SoC Icicle board so the only thing missing right now
+> > > is the U-Boot SPL support for OpenSource boot-flow.
+> > >
+> > > It will certainly accelerate open-source development if we have boot-flow
+> > > U-Boot_SPL => OpenSBI (FW_DYNAMIC) => U-Boot_S-mode working
+> > > on PolarFire SoC Icicle board. Initially, we just need DRAM, SD/eMMC,
+> > > and Serial port support for U-Boot SPL and U-Boot S-mode. Later on,
+> > > more patches can add ethernet and other booting device drivers to U-Boot.
+> > >
+> > > Regarding security services of HSS, we are working on a OpenSBI
+> > > feature which will allow HSS security services to run as independent
+> > > binary in M-mode (not linked to OpenSBI) and OpenSBI FW_DYNAMIC
+> > > will be a separate binary acting as a secure monitor.
+> > >
+> > > Regards,
+> > > Anup
 > >
-> > Thanks for the feedback and tips. Not sure whether I get it right. I
-> gave a try with -drive and -device options as below.
-> >
-> > $ qemu-system-riscv64 -M sifive_u -drive if=none,format=raw,file=otp.img
-> -device riscv.sifive.u.otp
-> > qemu-system-riscv64: -device riscv.sifive.u.otp: Parameter 'driver'
-> expects pluggable device type
+> > What I have in mind is that the external memory will be up and running
+> > by the time we get to U-Boot SPL. In the case of PolarFire SoC the ROM
+> > code equivalent brings up the DDR memory interface so we do not need to
+> > worry about this as part of U-Boot.
 >
-> You don't need the -device, -drive should be enough (and then the OTP
-> device needs to be re-written to support it).
+> Keeping DRAM configuration as part of a separate ROM booting stage prior
+> to the U-Boot SPL sounds good to me. This will lead to following boot-flow:
 >
-> Alistair
->
-> >
-> > Then I dump "info qtree". The device, "riscv.sifive.u.otp", belongs to
-> 'System' bus. (dump list by 'info qdm') and all devices on 'System' bus
-> seem not available with "-device". Any suggestions for specifying the
-> device?
-> >
-> > Thanks,
-> > - Green
-> >
-> > On Tue, Aug 11, 2020 at 6:24 AM Alistair Francis <alistair23@gmail.com>
-> wrote:
-> >>
-> >> ,()On Thu, Jul 30, 2020 at 7:49 PM Green Wan <green.wan@sifive.com>
-> wrote:
-> >> >
-> >> > Add a file-backed implementation for OTP of sifive_u machine. The
-> >> > machine property for file-backed is disabled in default. Do file
-> >> > open, mmap and close for every OTP read/write in case keep the
-> >> > update-to-date snapshot of OTP.
-> >>
-> >> I don't think this is the correct way to write to the file.
-> >>
-> >> QEMU has backends that should do this for you. For example QEMU
-> >> includes the -blockdev/-driver or -mtdblock command line arguments.
-> >>
-> >> This implementation should look more like an SD card in terms of
-> >> interface. You will probably want to call drive_get_next() (probably
-> >> with IF_MTD, but that's up to you).
-> >>
-> >> The hw/arm/xlnx-zcu102.c file has a good example of attaching an SD
-> >> card by setting the drive property.
-> >>
-> >> Alistair
-> >>
-> >> >
-> >> > Signed-off-by: Green Wan <green.wan@sifive.com>
-> >> > ---
-> >> >  hw/riscv/sifive_u.c             | 26 +++++++++++
-> >> >  hw/riscv/sifive_u_otp.c         | 83
-> +++++++++++++++++++++++++++++++++
-> >> >  include/hw/riscv/sifive_u.h     |  2 +
-> >> >  include/hw/riscv/sifive_u_otp.h |  1 +
-> >> >  4 files changed, 112 insertions(+)
-> >> >
-> >> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> >> > index e5682c38a9..c818496918 100644
-> >> > --- a/hw/riscv/sifive_u.c
-> >> > +++ b/hw/riscv/sifive_u.c
-> >> > @@ -87,6 +87,7 @@ static const struct MemmapEntry {
-> >> >  };
-> >> >
-> >> >  #define OTP_SERIAL          1
-> >> > +#define OTP_FILE            "NULL"
-> >> >  #define GEM_REVISION        0x10070109
-> >> >
-> >> >  static void create_fdt(SiFiveUState *s, const struct MemmapEntry
-> *memmap,
-> >> > @@ -387,6 +388,8 @@ static void sifive_u_machine_init(MachineState
-> *machine)
-> >> >      object_initialize_child(OBJECT(machine), "soc", &s->soc,
-> TYPE_RISCV_U_SOC);
-> >> >      object_property_set_uint(OBJECT(&s->soc), "serial", s->serial,
-> >> >                               &error_abort);
-> >> > +    object_property_set_str(OBJECT(&s->soc), "otp-file", s->otp_file,
-> >> > +                             &error_abort);
-> >> >      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
-> >> >
-> >> >      /* register RAM */
-> >> > @@ -526,6 +529,21 @@ static void
-> sifive_u_machine_set_uint32_prop(Object *obj, Visitor *v,
-> >> >      visit_type_uint32(v, name, (uint32_t *)opaque, errp);
-> >> >  }
-> >> >
-> >> > +static void sifive_u_machine_get_str_prop(Object *obj, Visitor *v,
-> >> > +                                             const char *name, void
-> *opaque,
-> >> > +                                             Error **errp)
-> >> > +{
-> >> > +    visit_type_str(v, name, (char **)opaque, errp);
-> >> > +}
-> >> > +
-> >> > +static void sifive_u_machine_set_str_prop(Object *obj, Visitor *v,
-> >> > +                                             const char *name, void
-> *opaque,
-> >> > +                                             Error **errp)
-> >> > +{
-> >> > +    visit_type_str(v, name, (char **)opaque, errp);
-> >> > +}
-> >> > +
-> >> > +
-> >> >  static void sifive_u_machine_instance_init(Object *obj)
-> >> >  {
-> >> >      SiFiveUState *s = RISCV_U_MACHINE(obj);
-> >> > @@ -551,6 +569,12 @@ static void
-> sifive_u_machine_instance_init(Object *obj)
-> >> >                          sifive_u_machine_get_uint32_prop,
-> >> >                          sifive_u_machine_set_uint32_prop, NULL,
-> &s->serial);
-> >> >      object_property_set_description(obj, "serial", "Board serial
-> number");
-> >> > +
-> >> > +    s->otp_file = (char *)OTP_FILE;
-> >> > +    object_property_add(obj, "otp-file", "string",
-> >> > +                        sifive_u_machine_get_str_prop,
-> >> > +                        sifive_u_machine_set_str_prop, NULL,
-> &s->otp_file);
-> >> > +    object_property_set_description(obj, "otp-file", "file-backed
-> otp file");
-> >> >  }
-> >> >
-> >> >  static void sifive_u_machine_class_init(ObjectClass *oc, void *data)
-> >> > @@ -709,6 +733,7 @@ static void sifive_u_soc_realize(DeviceState
-> *dev, Error **errp)
-> >> >      }
-> >> >
-> >> >      qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
-> >> > +    qdev_prop_set_string(DEVICE(&s->otp), "otp-file", s->otp_file);
-> >> >      if (!sysbus_realize(SYS_BUS_DEVICE(&s->otp), errp)) {
-> >> >          return;
-> >> >      }
-> >> > @@ -737,6 +762,7 @@ static void sifive_u_soc_realize(DeviceState
-> *dev, Error **errp)
-> >> >
-> >> >  static Property sifive_u_soc_props[] = {
-> >> >      DEFINE_PROP_UINT32("serial", SiFiveUSoCState, serial,
-> OTP_SERIAL),
-> >> > +    DEFINE_PROP_STRING("otp-file", SiFiveUSoCState, otp_file),
-> >> >      DEFINE_PROP_END_OF_LIST()
-> >> >  };
-> >> >
-> >> > diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
-> >> > index f6ecbaa2ca..e359f30fdb 100644
-> >> > --- a/hw/riscv/sifive_u_otp.c
-> >> > +++ b/hw/riscv/sifive_u_otp.c
-> >> > @@ -24,6 +24,62 @@
-> >> >  #include "qemu/log.h"
-> >> >  #include "qemu/module.h"
-> >> >  #include "hw/riscv/sifive_u_otp.h"
-> >> > +#include <stdio.h>
-> >> > +#include <stdlib.h>
-> >> > +#include <sys/types.h>
-> >> > +#include <sys/stat.h>
-> >> > +#include <unistd.h>
-> >> > +#include <fcntl.h>
-> >> > +#include <sys/mman.h>
-> >> > +#include <string.h>
-> >> > +
-> >> > +#define TRACE_PREFIX            "FU540_OTP: "
-> >> > +#define SIFIVE_FU540_OTP_SIZE   (SIFIVE_U_OTP_NUM_FUSES * 4)
-> >> > +
-> >> > +static int32_t sifive_u_otp_backed_open(const char *filename,
-> int32_t *fd,
-> >> > +                                        uint32_t **map)
-> >> > +{
-> >> > +    /* open and mmap OTP image file */
-> >> > +    if (filename && strcmp(filename, "NULL") != 0) {
-> >> > +        *fd = open(filename, O_RDWR);
-> >> > +
-> >> > +        if (*fd < 0) {
-> >> > +            qemu_log_mask(LOG_TRACE,
-> >> > +                          TRACE_PREFIX "Warning: can't open otp
-> file<%s>\n",
-> >> > +                          filename);
-> >> > +            return -1;
-> >> > +        } else {
-> >> > +
-> >> > +            *map = (unsigned int *)mmap(0,
-> >> > +                                         SIFIVE_FU540_OTP_SIZE,
-> >> > +                                         PROT_READ | PROT_WRITE |
-> PROT_EXEC,
-> >> > +                                         MAP_FILE | MAP_SHARED,
-> >> > +                                         *fd,
-> >> > +                                         0);
-> >> > +
-> >> > +            if (*map == MAP_FAILED) {
-> >> > +                qemu_log_mask(LOG_TRACE,
-> >> > +                              TRACE_PREFIX "Warning: can't mmap otp
-> file<%s>\n",
-> >> > +                              filename);
-> >> > +                close(*fd);
-> >> > +                return -2;
-> >> > +            }
-> >> > +        }
-> >> > +    } else {
-> >> > +        /* filename is 'NULL' */
-> >> > +        return -3;
-> >> > +    }
-> >> > +
-> >> > +    return 0;
-> >> > +}
-> >> > +
-> >> > +static int32_t sifive_u_otp_backed_close(int fd, unsigned int *map)
-> >> > +{
-> >> > +    munmap(map, SIFIVE_FU540_OTP_SIZE);
-> >> > +    close(fd);
-> >> > +
-> >> > +    return 0;
-> >> > +}
-> >> >
-> >> >  static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr,
-> unsigned int size)
-> >> >  {
-> >> > @@ -46,6 +102,20 @@ static uint64_t sifive_u_otp_read(void *opaque,
-> hwaddr addr, unsigned int size)
-> >> >          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
-> >> >              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
-> >> >              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
-> >> > +
-> >> > +            int32_t fd;
-> >> > +            uint32_t *map;
-> >> > +            uint64_t val;
-> >> > +
-> >> > +            /* open and mmap OTP image file */
-> >> > +            if (0 == sifive_u_otp_backed_open(s->otp_file, &fd,
-> &map)) {
-> >> > +                val = (uint64_t)(map[s->pa]);
-> >> > +
-> >> > +                /* close and unmmap */
-> >> > +                sifive_u_otp_backed_close(fd, map);
-> >> > +                return val;
-> >> > +            }
-> >> > +
-> >> >              return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
-> >> >          } else {
-> >> >              return 0xff;
-> >> > @@ -78,6 +148,8 @@ static void sifive_u_otp_write(void *opaque,
-> hwaddr addr,
-> >> >  {
-> >> >      SiFiveUOTPState *s = opaque;
-> >> >      uint32_t val32 = (uint32_t)val64;
-> >> > +    int32_t fd;
-> >> > +    uint32_t *map;
-> >> >
-> >> >      switch (addr) {
-> >> >      case SIFIVE_U_OTP_PA:
-> >> > @@ -123,6 +195,16 @@ static void sifive_u_otp_write(void *opaque,
-> hwaddr addr,
-> >> >          s->ptrim = val32;
-> >> >          break;
-> >> >      case SIFIVE_U_OTP_PWE:
-> >> > +        /* open and mmap OTP image file */
-> >> > +        if (0 == sifive_u_otp_backed_open(s->otp_file, &fd, &map)) {
-> >> > +            /* store value */
-> >> > +            map[s->pa] &= ~(s->pdin << s->paio);
-> >> > +            map[s->pa] |= (s->pdin << s->paio);
-> >> > +
-> >> > +            /* close and unmmap */
-> >> > +            sifive_u_otp_backed_close(fd, map);
-> >> > +        }
-> >> > +
-> >> >          s->pwe = val32;
-> >> >          break;
-> >> >      default:
-> >> > @@ -143,6 +225,7 @@ static const MemoryRegionOps sifive_u_otp_ops = {
-> >> >
-> >> >  static Property sifive_u_otp_properties[] = {
-> >> >      DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
-> >> > +    DEFINE_PROP_STRING("otp-file", SiFiveUOTPState, otp_file),
-> >> >      DEFINE_PROP_END_OF_LIST(),
-> >> >  };
-> >> >
-> >> > diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> >> > index aba4d0181f..966723da1d 100644
-> >> > --- a/include/hw/riscv/sifive_u.h
-> >> > +++ b/include/hw/riscv/sifive_u.h
-> >> > @@ -46,6 +46,7 @@ typedef struct SiFiveUSoCState {
-> >> >      CadenceGEMState gem;
-> >> >
-> >> >      uint32_t serial;
-> >> > +    char *otp_file;
-> >> >  } SiFiveUSoCState;
-> >> >
-> >> >  #define TYPE_RISCV_U_MACHINE MACHINE_TYPE_NAME("sifive_u")
-> >> > @@ -65,6 +66,7 @@ typedef struct SiFiveUState {
-> >> >      bool start_in_flash;
-> >> >      uint32_t msel;
-> >> >      uint32_t serial;
-> >> > +    char *otp_file;
-> >> >  } SiFiveUState;
-> >> >
-> >> >  enum {
-> >> > diff --git a/include/hw/riscv/sifive_u_otp.h
-> b/include/hw/riscv/sifive_u_otp.h
-> >> > index 639297564a..f3d71ce82d 100644
-> >> > --- a/include/hw/riscv/sifive_u_otp.h
-> >> > +++ b/include/hw/riscv/sifive_u_otp.h
-> >> > @@ -75,6 +75,7 @@ typedef struct SiFiveUOTPState {
-> >> >      uint32_t fuse[SIFIVE_U_OTP_NUM_FUSES];
-> >> >      /* config */
-> >> >      uint32_t serial;
-> >> > +    char *otp_file;
-> >> >  } SiFiveUOTPState;
-> >> >
-> >> >  #endif /* HW_SIFIVE_U_OTP_H */
-> >> > --
-> >> > 2.17.1
-> >> >
-> >> >
->
+> ROM/HSS (M-mode) => U-Boot SPL (M-mode) => OpenSBI (M-mode) => U-Boot S-mode
 
---0000000000000f940005ad2a00c2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+If we want to keep the HSS, meaning that DDR memory is already
+initialized, then there is no need to create an additional step of
+U-Boot SPL phase, because there is no size limitation any more.
 
-<div dir=3D"ltr">Hi Alistair,<br><br>You&#39;re right. I can get drive with=
-out -device. Now it looks much better. Sent v3 patch.<br><br>Thanks a lot,<=
-br>- Green</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gm=
-ail_attr">On Fri, Aug 14, 2020 at 5:34 AM Alistair Francis &lt;<a href=3D"m=
-ailto:alistair23@gmail.com">alistair23@gmail.com</a>&gt; wrote:<br></div><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
-ft:1px solid rgb(204,204,204);padding-left:1ex">On Wed, Aug 12, 2020 at 9:1=
-2 PM Green Wan &lt;<a href=3D"mailto:green.wan@sifive.com" target=3D"_blank=
-">green.wan@sifive.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Hi Alistair,<br>
-&gt;<br>
-&gt; Thanks for the feedback and tips. Not sure whether I get it right. I g=
-ave a try with -drive and -device options as below.<br>
-&gt;<br>
-&gt; $ qemu-system-riscv64 -M sifive_u -drive if=3Dnone,format=3Draw,file=
-=3Dotp.img -device riscv.sifive.u.otp<br>
-&gt; qemu-system-riscv64: -device riscv.sifive.u.otp: Parameter &#39;driver=
-&#39; expects pluggable device type<br>
-<br>
-You don&#39;t need the -device, -drive should be enough (and then the OTP<b=
-r>
-device needs to be re-written to support it).<br>
-<br>
-Alistair<br>
-<br>
-&gt;<br>
-&gt; Then I dump &quot;info qtree&quot;. The device, &quot;riscv.sifive.u.o=
-tp&quot;, belongs to &#39;System&#39; bus. (dump list by &#39;info qdm&#39;=
-) and all devices on &#39;System&#39; bus seem not available with &quot;-de=
-vice&quot;. Any suggestions for specifying the device?<br>
-&gt;<br>
-&gt; Thanks,<br>
-&gt; - Green<br>
-&gt;<br>
-&gt; On Tue, Aug 11, 2020 at 6:24 AM Alistair Francis &lt;<a href=3D"mailto=
-:alistair23@gmail.com" target=3D"_blank">alistair23@gmail.com</a>&gt; wrote=
-:<br>
-&gt;&gt;<br>
-&gt;&gt; ,()On Thu, Jul 30, 2020 at 7:49 PM Green Wan &lt;<a href=3D"mailto=
-:green.wan@sifive.com" target=3D"_blank">green.wan@sifive.com</a>&gt; wrote=
-:<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; Add a file-backed implementation for OTP of sifive_u machine.=
- The<br>
-&gt;&gt; &gt; machine property for file-backed is disabled in default. Do f=
-ile<br>
-&gt;&gt; &gt; open, mmap and close for every OTP read/write in case keep th=
-e<br>
-&gt;&gt; &gt; update-to-date snapshot of OTP.<br>
-&gt;&gt;<br>
-&gt;&gt; I don&#39;t think this is the correct way to write to the file.<br=
->
-&gt;&gt;<br>
-&gt;&gt; QEMU has backends that should do this for you. For example QEMU<br=
->
-&gt;&gt; includes the -blockdev/-driver or -mtdblock command line arguments=
-.<br>
-&gt;&gt;<br>
-&gt;&gt; This implementation should look more like an SD card in terms of<b=
-r>
-&gt;&gt; interface. You will probably want to call drive_get_next() (probab=
-ly<br>
-&gt;&gt; with IF_MTD, but that&#39;s up to you).<br>
-&gt;&gt;<br>
-&gt;&gt; The hw/arm/xlnx-zcu102.c file has a good example of attaching an S=
-D<br>
-&gt;&gt; card by setting the drive property.<br>
-&gt;&gt;<br>
-&gt;&gt; Alistair<br>
-&gt;&gt;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; Signed-off-by: Green Wan &lt;<a href=3D"mailto:green.wan@sifi=
-ve.com" target=3D"_blank">green.wan@sifive.com</a>&gt;<br>
-&gt;&gt; &gt; ---<br>
-&gt;&gt; &gt;=C2=A0 hw/riscv/sifive_u.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0| 26 +++++++++++<br>
-&gt;&gt; &gt;=C2=A0 hw/riscv/sifive_u_otp.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0| 83 +++++++++++++++++++++++++++++++++<br>
-&gt;&gt; &gt;=C2=A0 include/hw/riscv/sifive_u.h=C2=A0 =C2=A0 =C2=A0|=C2=A0 =
-2 +<br>
-&gt;&gt; &gt;=C2=A0 include/hw/riscv/sifive_u_otp.h |=C2=A0 1 +<br>
-&gt;&gt; &gt;=C2=A0 4 files changed, 112 insertions(+)<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c<br>
-&gt;&gt; &gt; index e5682c38a9..c818496918 100644<br>
-&gt;&gt; &gt; --- a/hw/riscv/sifive_u.c<br>
-&gt;&gt; &gt; +++ b/hw/riscv/sifive_u.c<br>
-&gt;&gt; &gt; @@ -87,6 +87,7 @@ static const struct MemmapEntry {<br>
-&gt;&gt; &gt;=C2=A0 };<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 #define OTP_SERIAL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 1<=
-br>
-&gt;&gt; &gt; +#define OTP_FILE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &q=
-uot;NULL&quot;<br>
-&gt;&gt; &gt;=C2=A0 #define GEM_REVISION=C2=A0 =C2=A0 =C2=A0 =C2=A0 0x10070=
-109<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 static void create_fdt(SiFiveUState *s, const struct Me=
-mmapEntry *memmap,<br>
-&gt;&gt; &gt; @@ -387,6 +388,8 @@ static void sifive_u_machine_init(Machine=
-State *machine)<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 object_initialize_child(OBJECT(machine), =
-&quot;soc&quot;, &amp;s-&gt;soc, TYPE_RISCV_U_SOC);<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 object_property_set_uint(OBJECT(&amp;s-&g=
-t;soc), &quot;serial&quot;, s-&gt;serial,<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&amp;error_abort);<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 object_property_set_str(OBJECT(&amp;s-&gt;soc)=
-, &quot;otp-file&quot;, s-&gt;otp_file,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&amp;error_abort);<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 qdev_realize(DEVICE(&amp;s-&gt;soc), NULL=
-, &amp;error_abort);<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 /* register RAM */<br>
-&gt;&gt; &gt; @@ -526,6 +529,21 @@ static void sifive_u_machine_set_uint32_=
-prop(Object *obj, Visitor *v,<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 visit_type_uint32(v, name, (uint32_t *)op=
-aque, errp);<br>
-&gt;&gt; &gt;=C2=A0 }<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; +static void sifive_u_machine_get_str_prop(Object *obj, Visit=
-or *v,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0const char *name, void *opaque,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0Error **errp)<br>
-&gt;&gt; &gt; +{<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 visit_type_str(v, name, (char **)opaque, errp)=
-;<br>
-&gt;&gt; &gt; +}<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +static void sifive_u_machine_set_str_prop(Object *obj, Visit=
-or *v,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0const char *name, void *opaque,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0Error **errp)<br>
-&gt;&gt; &gt; +{<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 visit_type_str(v, name, (char **)opaque, errp)=
-;<br>
-&gt;&gt; &gt; +}<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt;=C2=A0 static void sifive_u_machine_instance_init(Object *obj)=
-<br>
-&gt;&gt; &gt;=C2=A0 {<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 SiFiveUState *s =3D RISCV_U_MACHINE(obj);=
-<br>
-&gt;&gt; &gt; @@ -551,6 +569,12 @@ static void sifive_u_machine_instance_in=
-it(Object *obj)<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 sifive_u_machine_get_uint32_prop,<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 sifive_u_machine_set_uint32_prop, NULL, &amp;s=
--&gt;serial);<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 object_property_set_description(obj, &quo=
-t;serial&quot;, &quot;Board serial number&quot;);<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 s-&gt;otp_file =3D (char *)OTP_FILE;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 object_property_add(obj, &quot;otp-file&quot;,=
- &quot;string&quot;,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 sifive_u_machine_get_str_prop,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 sifive_u_machine_set_str_prop, NULL, &amp;s-&gt;ot=
-p_file);<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 object_property_set_description(obj, &quot;otp=
--file&quot;, &quot;file-backed otp file&quot;);<br>
-&gt;&gt; &gt;=C2=A0 }<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 static void sifive_u_machine_class_init(ObjectClass *oc=
-, void *data)<br>
-&gt;&gt; &gt; @@ -709,6 +733,7 @@ static void sifive_u_soc_realize(DeviceSt=
-ate *dev, Error **errp)<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 qdev_prop_set_uint32(DEVICE(&amp;s-&gt;ot=
-p), &quot;serial&quot;, s-&gt;serial);<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 qdev_prop_set_string(DEVICE(&amp;s-&gt;otp), &=
-quot;otp-file&quot;, s-&gt;otp_file);<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 if (!sysbus_realize(SYS_BUS_DEVICE(&amp;s=
--&gt;otp), errp)) {<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; &gt; @@ -737,6 +762,7 @@ static void sifive_u_soc_realize(DeviceSt=
-ate *dev, Error **errp)<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 static Property sifive_u_soc_props[] =3D {<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 DEFINE_PROP_UINT32(&quot;serial&quot;, Si=
-FiveUSoCState, serial, OTP_SERIAL),<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 DEFINE_PROP_STRING(&quot;otp-file&quot;, SiFiv=
-eUSoCState, otp_file),<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 DEFINE_PROP_END_OF_LIST()<br>
-&gt;&gt; &gt;=C2=A0 };<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.=
-c<br>
-&gt;&gt; &gt; index f6ecbaa2ca..e359f30fdb 100644<br>
-&gt;&gt; &gt; --- a/hw/riscv/sifive_u_otp.c<br>
-&gt;&gt; &gt; +++ b/hw/riscv/sifive_u_otp.c<br>
-&gt;&gt; &gt; @@ -24,6 +24,62 @@<br>
-&gt;&gt; &gt;=C2=A0 #include &quot;qemu/log.h&quot;<br>
-&gt;&gt; &gt;=C2=A0 #include &quot;qemu/module.h&quot;<br>
-&gt;&gt; &gt;=C2=A0 #include &quot;hw/riscv/sifive_u_otp.h&quot;<br>
-&gt;&gt; &gt; +#include &lt;stdio.h&gt;<br>
-&gt;&gt; &gt; +#include &lt;stdlib.h&gt;<br>
-&gt;&gt; &gt; +#include &lt;sys/types.h&gt;<br>
-&gt;&gt; &gt; +#include &lt;sys/stat.h&gt;<br>
-&gt;&gt; &gt; +#include &lt;unistd.h&gt;<br>
-&gt;&gt; &gt; +#include &lt;fcntl.h&gt;<br>
-&gt;&gt; &gt; +#include &lt;sys/mman.h&gt;<br>
-&gt;&gt; &gt; +#include &lt;string.h&gt;<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +#define TRACE_PREFIX=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 &quot;FU540_OTP: &quot;<br>
-&gt;&gt; &gt; +#define SIFIVE_FU540_OTP_SIZE=C2=A0 =C2=A0(SIFIVE_U_OTP_NUM_=
-FUSES * 4)<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +static int32_t sifive_u_otp_backed_open(const char *filename=
-, int32_t *fd,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 uint32_t **map)<br>
-&gt;&gt; &gt; +{<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 /* open and mmap OTP image file */<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 if (filename &amp;&amp; strcmp(filename, &quot=
-;NULL&quot;) !=3D 0) {<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 *fd =3D open(filename, O_RDWR);<=
-br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (*fd &lt; 0) {<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_log_mask(LOG_=
-TRACE,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 TRACE_PREFIX &quot;Warning: can&#39;t open =
-otp file&lt;%s&gt;\n&quot;,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 filename);<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -1;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *map =3D (unsigned=
- int *)mmap(0,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0SIFIVE_FU540_OTP_SIZE,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0PROT_READ | PROT_WRITE | PROT_EXEC,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0MAP_FILE | MAP_SHARED,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0*fd,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A00);<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (*map =3D=3D MA=
-P_FAILED) {<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu=
-_log_mask(LOG_TRACE,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 TRACE_PREFIX &quot;Warning: c=
-an&#39;t mmap otp file&lt;%s&gt;\n&quot;,<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 filename);<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 clos=
-e(*fd);<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 retu=
-rn -2;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 } else {<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* filename is &#39;NULL&#39; */=
-<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return -3;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 return 0;<br>
-&gt;&gt; &gt; +}<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +static int32_t sifive_u_otp_backed_close(int fd, unsigned in=
-t *map)<br>
-&gt;&gt; &gt; +{<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 munmap(map, SIFIVE_FU540_OTP_SIZE);<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 close(fd);<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 return 0;<br>
-&gt;&gt; &gt; +}<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 static uint64_t sifive_u_otp_read(void *opaque, hwaddr =
-addr, unsigned int size)<br>
-&gt;&gt; &gt;=C2=A0 {<br>
-&gt;&gt; &gt; @@ -46,6 +102,20 @@ static uint64_t sifive_u_otp_read(void *o=
-paque, hwaddr addr, unsigned int size)<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if ((s-&gt;pce &amp; SIFIVE=
-_U_OTP_PCE_EN) &amp;&amp;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (s-&gt;pdstb =
-&amp; SIFIVE_U_OTP_PDSTB_EN) &amp;&amp;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (s-&gt;ptrim =
-&amp; SIFIVE_U_OTP_PTRIM_EN)) {<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 int32_t fd;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t *map;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint64_t val;<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* open and mmap O=
-TP image file */<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (0 =3D=3D sifiv=
-e_u_otp_backed_open(s-&gt;otp_file, &amp;fd, &amp;map)) {<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 val =
-=3D (uint64_t)(map[s-&gt;pa]);<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* c=
-lose and unmmap */<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sifi=
-ve_u_otp_backed_close(fd, map);<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 retu=
-rn val;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return s-&gt;=
-fuse[s-&gt;pa &amp; SIFIVE_U_OTP_PA_MASK];<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return 0xff;<=
-br>
-&gt;&gt; &gt; @@ -78,6 +148,8 @@ static void sifive_u_otp_write(void *opaqu=
-e, hwaddr addr,<br>
-&gt;&gt; &gt;=C2=A0 {<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 SiFiveUOTPState *s =3D opaque;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 uint32_t val32 =3D (uint32_t)val64;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 int32_t fd;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 uint32_t *map;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 switch (addr) {<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 case SIFIVE_U_OTP_PA:<br>
-&gt;&gt; &gt; @@ -123,6 +195,16 @@ static void sifive_u_otp_write(void *opa=
-que, hwaddr addr,<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;ptrim =3D val32;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 case SIFIVE_U_OTP_PWE:<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* open and mmap OTP image file =
-*/<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (0 =3D=3D sifive_u_otp_backed=
-_open(s-&gt;otp_file, &amp;fd, &amp;map)) {<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* store value */<=
-br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 map[s-&gt;pa] &amp=
-;=3D ~(s-&gt;pdin &lt;&lt; s-&gt;paio);<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 map[s-&gt;pa] |=3D=
- (s-&gt;pdin &lt;&lt; s-&gt;paio);<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* close and unmma=
-p */<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sifive_u_otp_backe=
-d_close(fd, map);<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;pwe =3D val32;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 default:<br>
-&gt;&gt; &gt; @@ -143,6 +225,7 @@ static const MemoryRegionOps sifive_u_otp=
-_ops =3D {<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 static Property sifive_u_otp_properties[] =3D {<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 DEFINE_PROP_UINT32(&quot;serial&quot;, Si=
-FiveUOTPState, serial, 0),<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 DEFINE_PROP_STRING(&quot;otp-file&quot;, SiFiv=
-eUOTPState, otp_file),<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 DEFINE_PROP_END_OF_LIST(),<br>
-&gt;&gt; &gt;=C2=A0 };<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/s=
-ifive_u.h<br>
-&gt;&gt; &gt; index aba4d0181f..966723da1d 100644<br>
-&gt;&gt; &gt; --- a/include/hw/riscv/sifive_u.h<br>
-&gt;&gt; &gt; +++ b/include/hw/riscv/sifive_u.h<br>
-&gt;&gt; &gt; @@ -46,6 +46,7 @@ typedef struct SiFiveUSoCState {<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 CadenceGEMState gem;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 uint32_t serial;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 char *otp_file;<br>
-&gt;&gt; &gt;=C2=A0 } SiFiveUSoCState;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 #define TYPE_RISCV_U_MACHINE MACHINE_TYPE_NAME(&quot;si=
-five_u&quot;)<br>
-&gt;&gt; &gt; @@ -65,6 +66,7 @@ typedef struct SiFiveUState {<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 bool start_in_flash;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 uint32_t msel;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 uint32_t serial;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 char *otp_file;<br>
-&gt;&gt; &gt;=C2=A0 } SiFiveUState;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 enum {<br>
-&gt;&gt; &gt; diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/ris=
-cv/sifive_u_otp.h<br>
-&gt;&gt; &gt; index 639297564a..f3d71ce82d 100644<br>
-&gt;&gt; &gt; --- a/include/hw/riscv/sifive_u_otp.h<br>
-&gt;&gt; &gt; +++ b/include/hw/riscv/sifive_u_otp.h<br>
-&gt;&gt; &gt; @@ -75,6 +75,7 @@ typedef struct SiFiveUOTPState {<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 uint32_t fuse[SIFIVE_U_OTP_NUM_FUSES];<br=
->
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 /* config */<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 uint32_t serial;<br>
-&gt;&gt; &gt; +=C2=A0 =C2=A0 char *otp_file;<br>
-&gt;&gt; &gt;=C2=A0 } SiFiveUOTPState;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 #endif /* HW_SIFIVE_U_OTP_H */<br>
-&gt;&gt; &gt; --<br>
-&gt;&gt; &gt; 2.17.1<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;<br>
-</blockquote></div>
+Right now, the boot workflow on PolarFire is:
 
---0000000000000f940005ad2a00c2--
+HSS + OpenSBI (as a library) (M-mode) => U-Boot S-mode
+
+It's just not the canonical way because of the HSS and OpenSBI as a library.
+
+A canonical way should be:
+
+U-Boot SPL (M-mode) => OpenSBI dynamic (M-mode) => U-Boot S-mode
+
+So we should be aiming to replace HSS with U-Boot SPL.
+
+>
+> >
+> > Sounds to me the component that needs to be upstreamed next is the eMMC
+> > support so that it can be used as part of U-Boot SPL. Correct?
+>
+> Maybe as a PHASE1 patch series for PolarFire U-Boot support can
+> target the following:
+> 1. Minimal U-Boot board support for PolarFire IcIcle Board with
+> single defconfig to build both U-Boot SPL and U-Boot S-mode
+> 2. Serial port driver (probably re-use existing driver)
+> 3. SD and eMMC driver
+>
+> Supporting SD booting is highly desirable for PHASE1. At least,
+> U-Boot SPL, OpenSBI, U-Boot S-mode, and Linux should come
+> as separate images from SD card. The ROM/HSS can reside and
+> boot from on-board flash/eMMC.
+>
+> Above is my suggestion based on experience with SiFive Unleashed.
+>
+> The general idea behind OpenSource boot-flow is to have each
+> booting stage as a separate binary so that users can selectively
+> upgrade a particular booting stage without re-compiling/re-flashing
+> other booting stages.
+>
+> Various distros and yocto already support building most of the above
+> booting stages (U-Boot, OpenSBI, Linux, etc) so we can reuse a lot
+> of existing work. Eventually, I am confident we will endup moving
+> more stuff from ROM/HSS to U-Boot SPL for ease in maintenance.
+
+Regards,
+Bin
 
