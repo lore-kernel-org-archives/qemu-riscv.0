@@ -1,145 +1,97 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k8L5w-0000Dw-Ix
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Aug 2020 06:13:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57194)
+	id 1k8Sqw-0002yw-9a
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Aug 2020 14:30:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60118)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Cyril.Jean@microchip.com>)
- id 1k8L5t-0008Us-S1; Wed, 19 Aug 2020 06:13:22 -0400
-Received: from esa5.microchip.iphmx.com ([216.71.150.166]:29311)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Cyril.Jean@microchip.com>)
- id 1k8L5p-00077m-OS; Wed, 19 Aug 2020 06:13:20 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1597831998; x=1629367998;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=gy7cW+8l2G5/PDLFgkFNBvpmD4mMMlHtxMpS4nmF3yw=;
- b=huByzTxeDOkaMgkb8otH6hCZffzWSzqwwbhgulia/i8usFptqo8z7pP6
- MrMidkPTdUJtE471xEbWvivLJDgQy3CG74lTLpp+ck9oGhCOhUcqWFmfX
- PA2aFm2k2WkpgflaLYJLqgtqtNEYsH85n5mx3p6Son9lfoLDc0tcwn8DD
- FUfpzb1QdGhgcAtluSAchnGRb1WKLsj85DOl4qHOx23mq1GGb8WolVEGf
- +JqKQy/l4oBvR7ptGq8BevOEDukA4DVnUue0Qy9mn4AF47mIGW6NHtRai
- cf7SZoWUh4wZDoUJZ7JcdBOo8XtaEV3/TS8xoh0SnKiELVUl5Ynz30DZH A==;
-IronPort-SDR: XLL6WRthFQI89M2Bac4V6XcznVpOlqhYXblMPPRvpInGxKMvP0fg4ItWAbyV7l9lyWlr6gORFZ
- k5Lp6HVZyS3dg9XalMFvHNKn5nnU8o6d48YFjV+x+fQp4lPgyRJFbAjnd6BsIS9/tk4YJki0ij
- Qkab3UxIjKhLX116lkFOUpF3HbfAEWASaPomRo+mfbyE4avKfX1pfbm8p257aj/Jj6siv502m4
- rU4pySSpHO9PUz/25pwgu9R8Y6gi/pXuswqia9wdWBtwlNu+i4AknXxjVxVxJ9Eob+wVmiQokW
- Hzs=
-X-IronPort-AV: E=Sophos;i="5.76,331,1592895600"; d="scan'208";a="87717942"
-Received: from smtpout.microchip.com (HELO email.microchip.com)
- ([198.175.253.82])
- by esa5.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256;
- 19 Aug 2020 03:13:10 -0700
-Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1979.3; Wed, 19 Aug 2020 03:12:14 -0700
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com (10.10.215.89) by
- email.microchip.com (10.10.87.72) with Microsoft SMTP Server
- (version=TLS1_2, 
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1979.3 via Frontend
- Transport; Wed, 19 Aug 2020 03:12:13 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VY0VAog7RBw23XRCPxtPScwv0b2ut0sSHE8u/qNkAq9mCCb7mhefWmt7Z8eCyF3Q5IUr6cD3vdPrYV9rcPoxsP3Kduva95X79ZmQtY94UUbXgluSh522iUuzsCivQWqRDGfM7DkRjMCwuto/mq84UsQN3rXW/TXVA9qN58K7LdJjxjF1Bi987sgRxlcFaDfuma87t25MhihYwDvRytoKwNftH4avlp9oa1UezsNh5f4ni0+cy/2pYsH5jpbNq0sSYt/frQCN8Aic/7pgmwYRY0oY4Y0kzFMTjTzushb7uQE1V9VgrzCGS4qT3GBrw70KT1+G6rNSkMOVv+K0dnWpKQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gy7cW+8l2G5/PDLFgkFNBvpmD4mMMlHtxMpS4nmF3yw=;
- b=ZN90lFNwQfmS//7Uq1aDfeiajWWj+zCqB0X69hSANP2qd8LgF6sKicFdshTOnsbLgbTjyWRzLGHV/JH5buRB13b5PKZoFnlFxap3Ym9En6FoVhTXMl7efWb0jE+rKMiRkb9WN9XO5o4WMMfDlWGQb2aVIcPD/mR5/IWgY6LmZwWcV+8wvIqZCSK2dZLEC1+SLfr4vBt47kc4iQHBtoip5HLot6zeBfHqm0Qc0ssu8tgENjHEUYTku8dvuR2U+rOjn596UTSLC+/TB58kqYu2oYh6FUV6nteZo53dZJl2h5Gt74z/YOUsKaFKzbY7NP8ieRfNmeaDl5P+iQJVrvvpkg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=microchiptechnology.onmicrosoft.com;
- s=selector2-microchiptechnology-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gy7cW+8l2G5/PDLFgkFNBvpmD4mMMlHtxMpS4nmF3yw=;
- b=vwyNnm/IbXhIzzFr5gJXjko4+zoCcvKYn/t0hjHLbsdxBltIc1eJw1g77P/Q2+XGAG8Zo+eNhttRwfrqRD97th0CxX6DrRAY95SR1YHhmd4i3ZfeqvTMLe4tBlRqpFOeLCqWJo6LYsPQ/rT+ccH7BB7sX0ITAvKTSvDerLOCOnk=
-Received: from DM6PR11MB3690.namprd11.prod.outlook.com (2603:10b6:5:13d::32)
- by DM6PR11MB4332.namprd11.prod.outlook.com (2603:10b6:5:1dd::26) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.16; Wed, 19 Aug
- 2020 10:13:08 +0000
-Received: from DM6PR11MB3690.namprd11.prod.outlook.com
- ([fe80::e0ca:f0fd:7675:46d7]) by DM6PR11MB3690.namprd11.prod.outlook.com
- ([fe80::e0ca:f0fd:7675:46d7%4]) with mapi id 15.20.3283.027; Wed, 19 Aug 2020
- 10:13:08 +0000
-From: <Cyril.Jean@microchip.com>
-To: <bmeng.cn@gmail.com>, <anup@brainfault.org>
-CC: <alistair23@gmail.com>, <Alistair.Francis@wdc.com>,
- <kbastian@mail.uni-paderborn.de>, <palmerdabbelt@google.com>,
- <sagark@eecs.berkeley.edu>, <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, 
- <peter.maydell@linaro.org>, <alistair@alistair23.me>,
- <qemu-block@nongnu.org>, <jasowang@redhat.com>, <bin.meng@windriver.com>,
- <pbonzini@redhat.com>, <palmer@dabbelt.com>, <qemu-arm@nongnu.org>,
- <marcandre.lureau@redhat.com>, <edgar.iglesias@gmail.com>,
- <philmd@redhat.com>
-Subject: Re: [PATCH 00/18] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
- board support
-Thread-Topic: [PATCH 00/18] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
- board support
-Thread-Index: AQHWdIGDfQ2ADX3iMkmaUQkzVWiMJKk8cXaAgAA+ugCAAAcHgIAArjWAgABzR4CAAAy6AIAAwzOAgACRB4A=
-Date: Wed, 19 Aug 2020 10:13:08 +0000
-Message-ID: <9d6dd97b-20de-2be1-68eb-6ea2cf5b3ffc@microchip.com>
-References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
- <CAAhSdy2D=TcENAJDja4r6pnhz0LRi-T+A9k3Btrs_EuB4x0e4w@mail.gmail.com>
- <CAEUhbmV5=B5xKhYqMj1MQb61nt5cNUJG1MXT++C1w1YMYTfLCQ@mail.gmail.com>
- <202949f7-c9d5-4d4d-3ebe-53727f4fa169@microchip.com>
- <CAKmqyKM3nm0rhxgDvWKWfO+4b23ZLSkHW2TzmcVZ_ZFy4L7MRg@mail.gmail.com>
- <d3f61c2c-a489-887e-0143-4d9a1e66e6f2@microchip.com>
- <CAAhSdy32owLO0KytyYsg-zH6JyyfNfGofa4vanqTFJLntPq0=g@mail.gmail.com>
- <1f17cc4c-83f8-a024-ebef-79e28fab9a32@microchip.com>
- <CAAhSdy1MTvjfpHZEAs2YVHXdPBaEMQxUNdP_yc7br0C2p9kfng@mail.gmail.com>
- <CAEUhbmUWcTxv70yuLMXwniGXB6zkadcpB4YTq=8F9UcXRK72+g@mail.gmail.com>
-In-Reply-To: <CAEUhbmUWcTxv70yuLMXwniGXB6zkadcpB4YTq=8F9UcXRK72+g@mail.gmail.com>
-Accept-Language: en-IE, en-US
-Content-Language: en-IE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=microchip.com;
-x-originating-ip: [86.40.244.225]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 33cce952-2a43-4380-f27e-08d844287877
-x-ms-traffictypediagnostic: DM6PR11MB4332:
-x-microsoft-antispam-prvs: <DM6PR11MB43320FA330423197BC8F4EB89E5D0@DM6PR11MB4332.namprd11.prod.outlook.com>
-x-bypassexternaltag: True
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: EEoCPH3Syssfqit6Gq88jaSGy6X3Qo2jank7ZlVRGsxoRTRIYn88cqYeBlxrFIHUhluD7KNUl0GHr6tvgCx8Dco1G0FxwEOjKtWm5KoCrbMAR0xheDcnVtyZ6UpHbH8u50REGpoaFXRO+HS8lMvUSLruDtbpRrcf8xrrAeQM8gQaGeDBscYFmann7XxRdKBPJCDXhbNTUglAD66+OeqoV1QMz/LnbZdXpFRVy/K4f+5KYqWmVV1TD/HpFaqZUOl4lECuoO99rsjYPbLvNEWb7l6LwyrZjceucjXRxfoKcPU/xuKMDPyzSFjeCe4ic+T16uwGBUkuIwq0emwN7A146g==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM6PR11MB3690.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(136003)(366004)(376002)(396003)(346002)(39860400002)(36756003)(110136005)(66556008)(4326008)(5660300002)(64756008)(76116006)(186003)(6506007)(54906003)(8936002)(26005)(7416002)(316002)(66476007)(66946007)(86362001)(91956017)(66446008)(53546011)(8676002)(31686004)(71200400001)(6512007)(2616005)(6486002)(2906002)(31696002)(83380400001)(478600001);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata: SFR79RukiOqtFfVuhNrX5iGU7rnGVOj7lT1cMxSg7YoyQJERhxY7Cc59O0cmnNR70CpySBkBenJrSEww47y6EWXRnBS9xQc/2trZ8QgJDOmlEVL5IvM/bFv3Ti3pVmM05OQYvxV9e65xuqYOdX2Bb3iHwXHTAyV7oSNcGe3txIN+qwGlqMpbJlZos/gtOfhGzmbFuCR8USPW+z4XTelIu4x7EZSM5P4/zwokDm9/OHdijrQBSjoxBwlMxqamz9PwakvN2pHTWgWAml587vlOaHjKkYep1GA5Pvde5xlyPp/RmmeDDvYKYeA3KNP/+yKfUwN4MyKMvNVBnygMd8WgxUCnRbahT5FqqMJHTuwMoGOSlhSktM+LLvGkuQrdkHWmtbOSLi1kIPmvpqOwFXI+1sVm08NYvCI3JuloIgNLYdbQPYZW7Yi6NlzprHZiywY/TOaWGnDI7zQvGJw+K1p3lb42t46s6aMEJHDOFhY9ELozLm2m+YcxLWELzmMCPvHUnOXoDTB4VlzhdV2z2R30N9t7PtfHQ4Us5uLghCuUoLuE9u8rdPddU9OnACPRpgB1fsc3WETIIl3Qy9EMH2vwr0Ik/1fihO82vA75hCC2JwhivGvxUwq0XZO3s854NB+XVV1ftosPEB9AnNZY7JDkrw==
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <237DB52C6609784F980EAEA4C11E971D@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3690.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 33cce952-2a43-4380-f27e-08d844287877
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Aug 2020 10:13:08.2143 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: LDu8FIrxPeX4ObT+sX+v5hb9uE3R7hjndafJqXU2MAbQzvjb/dwVDYUn0qTpz+CQNTB48kyrM6EP9HnYEDlT/DvykHkgAX61p4Q4G5H4G/Q=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4332
-Received-SPF: pass client-ip=216.71.150.166;
- envelope-from=Cyril.Jean@microchip.com; helo=esa5.microchip.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/19 06:13:11
-X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ (Exim 4.90_1) (envelope-from <robert.foley@linaro.org>)
+ id 1k8Sqv-0002wv-Co
+ for qemu-riscv@nongnu.org; Wed, 19 Aug 2020 14:30:25 -0400
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:45105)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <robert.foley@linaro.org>)
+ id 1k8Sqq-0001wp-8p
+ for qemu-riscv@nongnu.org; Wed, 19 Aug 2020 14:30:25 -0400
+Received: by mail-pl1-x642.google.com with SMTP id bh1so11223335plb.12
+ for <qemu-riscv@nongnu.org>; Wed, 19 Aug 2020 11:30:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=cERuJlDV7NTRJGjVkGRVTXHsJwTCTvANBx0F7hdApoA=;
+ b=jG083Qm53OvAj42qYBCvVWCmcwHXtDKpasaDzAQmY3lywgaRZRzHb/e29tvVtmkvXy
+ FAZwasPgbUHj9xhO1S3eslPmb4RXNK9PdYldzYMPPYZ2xbam9KU1rLkLoaV8oLZWV2cf
+ mq0kAiqtR6+CQ0cx4HODpbOmMWIBGtDAcB2GgLDEt5J8zs54bOZuqU7CW1mvcZVNweUX
+ sqpojq9JaKZBDUmWxOTKSfHAS2WSnMOQE6rKSNbiFmiU3PITGp0q56HJjyjQsYiFxxUm
+ l6ZabPQlojxJxWGehCde6biDlYZxr4tEy8+8/jsOFo8bTPHO/L8fbQDJYzLI5IqeS65Z
+ VNLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=cERuJlDV7NTRJGjVkGRVTXHsJwTCTvANBx0F7hdApoA=;
+ b=ZQoFq+6y4ibJDH8paH3zM1bkImUpibmFtRbDOlTRV2U//CkaNO/oIzE1BPYdZDQ1QB
+ w1bt0JrpA8v4BVii22eMsJh4XSPpnpUP4LXV+Dj86u0GOwx/KIk7azd7u7T9mY3ZO4GK
+ mkqBTt/EGL486TUm2tY51qBETUnvSnvL4jZgk2GX3ohBe8Xk4Mo+SPVzu0uW5+1VBLMp
+ wHWUE/BukrmBc4LQplHSZG+j45ZnZw/cIx1lkkKfygtWeXhih+3/14pDInGC4PAs+Q9R
+ CUA5vI8BwR6BknVXTisLgAKhAXHVAWa3MsjBQziGeGa0sibxBgrZbvjZfOCZLtIiuyEJ
+ AP9Q==
+X-Gm-Message-State: AOAM530ziK0cE/a+G4DkpZdFeVFm4zbgUmbV80MyDIEZDPUVjKgeRW/g
+ m2Y2hMoooZjvLdSalNbmbq7MDw==
+X-Google-Smtp-Source: ABdhPJz1Yvg8PSds4SVRrKCdwayuTg8Gc6KVcPFext56h6Uj0VZWXBPwzVbvHOl/clSvO15Z7KjYtg==
+X-Received: by 2002:a17:902:6bc2:: with SMTP id
+ m2mr19368856plt.114.1597861817962; 
+ Wed, 19 Aug 2020 11:30:17 -0700 (PDT)
+Received: from Rfoley-MA01.hsd1.ma.comcast.net
+ (c-73-47-162-176.hsd1.ma.comcast.net. [73.47.162.176])
+ by smtp.gmail.com with ESMTPSA id p20sm220766pjg.44.2020.08.19.11.30.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Aug 2020 11:30:16 -0700 (PDT)
+From: Robert Foley <robert.foley@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: alex.bennee@linaro.org, pbonzini@redhat.com, peter.puhov@linaro.org,
+ robert.foley@linaro.org, David Gibson <david@gibson.dropbear.id.au>,
+ Richard Henderson <rth@twiddle.net>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Michael Rolnik <mrolnik@gmail.com>, Sarah Harris <S.E.Harris@kent.ac.uk>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, Michael Walle <michael@walle.cc>,
+ Laurent Vivier <laurent@vivier.eu>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Anthony Green <green@moxielogic.com>, Chris Wulff <crwulff@gmail.com>,
+ Marek Vasut <marex@denx.de>, Stafford Horne <shorne@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Cornelia Huck <cohuck@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ David Hildenbrand <david@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Guan Xuetao <gxt@mprc.pku.edu.cn>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-ppc@nongnu.org (open list:sPAPR),
+ qemu-arm@nongnu.org (open list:ARM TCG CPUs),
+ kvm@vger.kernel.org (open list:Overall KVM CPUs),
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
+ qemu-s390x@nongnu.org (open list:S390 general arch...)
+Subject: [PATCH v2 1/7] target: rename all *_do_interupt functions to
+ _do_interrupt_locked
+Date: Wed, 19 Aug 2020 14:28:50 -0400
+Message-Id: <20200819182856.4893-2-robert.foley@linaro.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200819182856.4893-1-robert.foley@linaro.org>
+References: <20200819182856.4893-1-robert.foley@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::642;
+ envelope-from=robert.foley@linaro.org; helo=mail-pl1-x642.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -152,174 +104,1294 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2020 10:13:22 -0000
+X-List-Received-Date: Wed, 19 Aug 2020 18:30:25 -0000
 
-T24gOC8xOS8yMCAyOjM0IEFNLCBCaW4gTWVuZyB3cm90ZToNCj4gRVhURVJOQUwgRU1BSUw6IERv
-IG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVubGVzcyB5b3Uga25vdyB0aGUg
-Y29udGVudCBpcyBzYWZlDQo+DQo+IE9uIFR1ZSwgQXVnIDE4LCAyMDIwIGF0IDk6NTUgUE0gQW51
-cCBQYXRlbCA8YW51cEBicmFpbmZhdWx0Lm9yZz4gd3JvdGU6DQo+PiBPbiBUdWUsIEF1ZyAxOCwg
-MjAyMCBhdCA2OjM5IFBNIDxDeXJpbC5KZWFuQG1pY3JvY2hpcC5jb20+IHdyb3RlOg0KPj4+IE9u
-IDgvMTgvMjAgNzoxNyBBTSwgQW51cCBQYXRlbCB3cm90ZToNCj4+Pj4gRVhURVJOQUwgRU1BSUw6
-IERvIG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVubGVzcyB5b3Uga25vdyB0
-aGUgY29udGVudCBpcyBzYWZlDQo+Pj4+DQo+Pj4+IE9uIFR1ZSwgQXVnIDE4LCAyMDIwIGF0IDE6
-MjMgQU0gPEN5cmlsLkplYW5AbWljcm9jaGlwLmNvbT4gd3JvdGU6DQo+Pj4+PiBPbiA4LzE3LzIw
-IDg6MjggUE0sIEFsaXN0YWlyIEZyYW5jaXMgd3JvdGU6DQo+Pj4+Pj4gRVhURVJOQUwgRU1BSUw6
-IERvIG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVubGVzcyB5b3Uga25vdyB0
-aGUgY29udGVudCBpcyBzYWZlDQo+Pj4+Pj4NCj4+Pj4+PiBPbiBNb24sIEF1ZyAxNywgMjAyMCBh
-dCAxMToxMiBBTSB2aWEgPHFlbXUtZGV2ZWxAbm9uZ251Lm9yZz4gd3JvdGU6DQo+Pj4+Pj4+IEhp
-IEFudXAsDQo+Pj4+Pj4+DQo+Pj4+Pj4+IE9uIDgvMTcvMjAgMTE6MzAgQU0sIEJpbiBNZW5nIHdy
-b3RlOg0KPj4+Pj4+Pj4gRVhURVJOQUwgRU1BSUw6IERvIG5vdCBjbGljayBsaW5rcyBvciBvcGVu
-IGF0dGFjaG1lbnRzIHVubGVzcyB5b3Uga25vdyB0aGUgY29udGVudCBpcyBzYWZlDQo+Pj4+Pj4+
-Pg0KPj4+Pj4+Pj4gSGkgQW51cCwNCj4+Pj4+Pj4+DQo+Pj4+Pj4+PiBPbiBTYXQsIEF1ZyAxNSwg
-MjAyMCBhdCAxOjQ0IEFNIEFudXAgUGF0ZWwgPGFudXBAYnJhaW5mYXVsdC5vcmc+IHdyb3RlOg0K
-Pj4+Pj4+Pj4+IE9uIEZyaSwgQXVnIDE0LCAyMDIwIGF0IDEwOjEyIFBNIEJpbiBNZW5nIDxibWVu
-Zy5jbkBnbWFpbC5jb20+IHdyb3RlOg0KPj4+Pj4+Pj4+PiBGcm9tOiBCaW4gTWVuZyA8YmluLm1l
-bmdAd2luZHJpdmVyLmNvbT4NCj4+Pj4+Pj4+Pj4NCj4+Pj4+Pj4+Pj4gVGhpcyBhZGRzIHN1cHBv
-cnQgZm9yIE1pY3JvY2hpcCBQb2xhckZpcmUgU29DIEljaWNsZSBLaXQgYm9hcmQuDQo+Pj4+Pj4+
-Pj4+IFRoZSBJY2ljbGUgS2l0IGJvYXJkIGludGVncmF0ZXMgYSBQb2xhckZpcmUgU29DLCB3aXRo
-IG9uZSBTaUZpdmUncw0KPj4+Pj4+Pj4+PiBFNTEgcGx1cyBmb3VyIFU1NCBjb3JlcyBhbmQgbWFu
-eSBvbi1jaGlwIHBlcmlwaGVyYWxzIGFuZCBhbiBGUEdBLg0KPj4+Pj4+Pj4+IE5pY2UgV29yayAh
-ISEgVGhpcyBpcyB2ZXJ5IGhlbHBmdWwuDQo+Pj4+Pj4+PiBUaGFua3MhDQo+Pj4+Pj4+Pg0KPj4+
-Pj4+Pj4+IFRoZSBNaWNyb2NoaXAgSFNTIGlzIHF1aXRlIGNvbnZvbHV0ZWQuIEl0IGhhczoNCj4+
-Pj4+Pj4+PiAxLiBERFIgSW5pdA0KPj4+Pj4+Pj4+IDIuIEJvb3QgZGV2aWNlIHN1cHBvcnQNCj4+
-Pj4+Pj4+PiAzLiBTQkkgc3VwcG9ydCB1c2luZyBPcGVuU0JJIGFzIGxpYnJhcnkNCj4+Pj4+Pj4+
-PiA0LiBTaW1wbGUgVEVFIHN1cHBvcnQNCj4+Pj4+Pj4+Pg0KPj4+Pj4+Pj4+IEkgdGhpbmsgcG9p
-bnQgMSkgYW5kIDIpIGFib3ZlIHNob3VsZCBiZSBwYXJ0IG9mIFUtQm9vdCBTUEwuDQo+Pj4+Pj4+
-Pj4gVGhlIHBvaW50IDMpIGNhbiBiZSBPcGVuU0JJIEZXX0RZTkFNSUMuDQo+Pj4+Pj4+Pj4NCj4+
-Pj4+Pj4+PiBMYXN0bHksZm9yIHBvaW50IDQpLCB3ZSBhcmUgd29ya2luZyBvbiBhIG5ldyBPcGVu
-U0JJIGZlYXR1cmUgdXNpbmcNCj4+Pj4+Pj4+PiB3aGljaCB3ZSBjYW4gcnVuIGluZGVwZW5kZW50
-IFNlY3VyZSBPUyBhbmQgTm9uLVNlY3VyZSBPUyB1c2luZw0KPj4+Pj4+Pj4+IFUtQm9vdF9TUEwr
-T3BlblNCSSAoZm9yIGJvdGggU2lGaXZlIFVubGVhc2hlZCBhbmQgTWljcm9jaGlwDQo+Pj4+Pj4+
-Pj4gUG9sYXJGaXJlKS4NCj4+Pj4+Pj4+Pg0KPj4+Pj4+Pj4+IERvIHlvdSBoYXZlIHBsYW5zIGZv
-ciBhZGRpbmcgVS1Cb290IFNQTCBzdXBwb3J0IGZvciB0aGlzIGJvYXJkID8/DQo+Pj4+Pj4+PiAr
-IEN5cmlsIEplYW4gZnJvbSBNaWNyb2NoaXANCj4+Pj4+Pj4+DQo+Pj4+Pj4+PiBJIHdpbGwgaGF2
-ZSB0byBsZWF2ZSB0aGlzIHF1ZXN0aW9uIHRvIEN5cmlsIHRvIGNvbW1lbnQuDQo+Pj4+Pj4+Pg0K
-Pj4+Pj4+PiBJIGN1cnJlbnRseSBkbyBub3QgaGF2ZSBhIHBsYW4gdG8gc3VwcG9ydCBVLUJvb3Qg
-U1BMLiBUaGUgaWRlYSBvZiB0aGUNCj4+Pj4+Pj4gSFNTIGlzIHRvIGNvbnRhaW4gYWxsIHRoZSBz
-aWxpY29uIHNwZWNpZmljIGluaXRpYWxpemF0aW9uIGFuZA0KPj4+Pj4+PiBjb25maWd1cmF0aW9u
-IGNvZGUgd2l0aGluIHRoZSBIU1MgYmVmb3JlIGp1bXBpbmcgdG8gVS1Cb290IFMtbW9kZS4gSQ0K
-Pj4+Pj4+PiB3b3VsZCByYXRoZXIga2VlcCBhbGwgdGhpcyB3aXRoaW4gdGhlIEhTUyBmb3IgdGhl
-IHRpbWUgYmVpbmcuIEkgd291bGQNCj4+Pj4+Pj4gd2FpdCB1bnRpbCB3ZSByZWFjaCBwcm9kdWN0
-aW9uIHNpbGljb24gYmVmb3JlIGF0dGVtcHRpbmcgdG8gbW92ZSB0aGlzIHRvDQo+Pj4+Pj4+IFUt
-Qm9vdCBTUEwgYXMgdGhlIEhTUyBpcyBsaWtlbHkgdG8gY29udGFpbiBzb21lIG9wYXF1ZSBzaWxp
-Y29uIHJlbGF0ZWQNCj4+Pj4+Pj4gY2hhbmdlcyBmb3IgYW5vdGhlciB3aGlsZS4NCj4+Pj4+PiBU
-aGF0IGlzIHVuZm9ydHVuYXRlLCBhIGxvdCBvZiB3b3JrIGhhcyBnb25lIGludG8gbWFraW5nIHRo
-ZSBib290IGZsb3cNCj4+Pj4+PiBzaW1wbGUgYW5kIGVhc3kgdG8gdXNlLg0KPj4+Pj4+DQo+Pj4+
-Pj4gUUVNVSBub3cgaW5jbHVkZXMgT3BlblNCSSBieSBkZWZhdWx0IHRvIG1ha2UgaXQgZWFzeSBm
-b3IgdXNlcnMgdG8gYm9vdA0KPj4+Pj4+IExpbnV4LiBUaGUgSWNpY2xlIEtpdCBib2FyZCBpcyBu
-b3cgdGhlIG1vc3QgZGlmZmljdWx0IFFFTVUgYm9hcmQgdG8NCj4+Pj4+PiBib290IExpbnV4IG9u
-LiBOb3QgdG8gbWVudGlvbiBpdCBtYWtlcyBpdCBoYXJkIHRvIGltcG9zc2libGUgdG8NCj4+Pj4+
-PiBzdXBwb3J0IGl0IGluIHN0YW5kYXJkIHRvb2wgZmxvd3Mgc3VjaCBhcyBtZXRhLXJpc2N2Lg0K
-Pj4+Pj4+DQo+Pj4+Pj4gQWxpc3RhaXINCj4+Pj4+IElmIGl0IGlzIHN1Y2ggYSBwcm9ibGVtIHdl
-IGNhbiBhZGQgYSBVLUJvb3QgU1BMIHN0YWdlIGFuZCB0aGUgSFNTIGNhbiBiZQ0KPj4+Pj4gdHJl
-YXRlZCBhcyBzdGFuZGFyZCBTb0MgUk9NIGNvZGUuDQo+Pj4+IEl0J3Mgbm90IG1hbmRhdG9yeSBm
-b3IgVS1Cb290IFNQTCB0byBoYXZlIHN0YWJsZSBEUkFNIGNhbGlicmF0aW9uIHNldHRpbmdzDQo+
-Pj4+IGZyb20gdGhlIHN0YXJ0IGl0c2VsZi4gVGhlIGluaXRpYWwgVS1Cb290IFNQTCBzdXBwb3J0
-IGZvciBtb3N0DQo+Pj4+IHBsYXRmb3JtcyAoYWNjcm9zcw0KPj4+PiBhcmNoaXRlY3R1cmVzKSB1
-c3VhbGx5IGluY2x1ZGUgYmFzaWMgd29ya2luZyBEUkFNIGNhbGlicmF0aW9uIHNldHRpbmdzIHdo
-aWNoDQo+Pj4+IGlzIGxhdGVyIG9uIHVwZGF0ZWQgd2l0aCBzZXBhcmF0ZSBwYXRjaGVzLiBBbHNv
-LCB3ZSBkb24ndCBuZWVkIGFsbCBVLUJvb3QNCj4+Pj4gZHJpdmVycyB0byBiZSB1cHN0cmVhbWVk
-IGluIG9uZS1nbyBhcyB0aGlzIGNhbiBiZSBkb25lIGluIHBoYXNlcy4NCj4+Pj4NCj4+Pj4gVGhl
-IGFkdmFudGFnZSB3ZSBoYXZlIHdpdGggUG9sYXJGaXJlIFNvQyBJY2ljbGUgYm9hcmQgaXMgdGhh
-dCB3ZSBhbHJlYWR5DQo+Pj4+IGhhdmUgYSBVLUJvb3QgUy1tb2RlLiBhbmQgd2UgYmVsaWV2ZSB0
-aGUgT3BlblNCSSBnZW5lcmljIHBsYXRmb3JtIHdpbGwNCj4+Pj4gd29yayBmaW5lIGZvciBQb2xh
-ckZpcmUgU29DIEljaWNsZSBib2FyZCBzbyB0aGUgb25seSB0aGluZyBtaXNzaW5nIHJpZ2h0IG5v
-dw0KPj4+PiBpcyB0aGUgVS1Cb290IFNQTCBzdXBwb3J0IGZvciBPcGVuU291cmNlIGJvb3QtZmxv
-dy4NCj4+Pj4NCj4+Pj4gSXQgd2lsbCBjZXJ0YWlubHkgYWNjZWxlcmF0ZSBvcGVuLXNvdXJjZSBk
-ZXZlbG9wbWVudCBpZiB3ZSBoYXZlIGJvb3QtZmxvdw0KPj4+PiBVLUJvb3RfU1BMID0+IE9wZW5T
-QkkgKEZXX0RZTkFNSUMpID0+IFUtQm9vdF9TLW1vZGUgd29ya2luZw0KPj4+PiBvbiBQb2xhckZp
-cmUgU29DIEljaWNsZSBib2FyZC4gSW5pdGlhbGx5LCB3ZSBqdXN0IG5lZWQgRFJBTSwgU0QvZU1N
-QywNCj4+Pj4gYW5kIFNlcmlhbCBwb3J0IHN1cHBvcnQgZm9yIFUtQm9vdCBTUEwgYW5kIFUtQm9v
-dCBTLW1vZGUuIExhdGVyIG9uLA0KPj4+PiBtb3JlIHBhdGNoZXMgY2FuIGFkZCBldGhlcm5ldCBh
-bmQgb3RoZXIgYm9vdGluZyBkZXZpY2UgZHJpdmVycyB0byBVLUJvb3QuDQo+Pj4+DQo+Pj4+IFJl
-Z2FyZGluZyBzZWN1cml0eSBzZXJ2aWNlcyBvZiBIU1MsIHdlIGFyZSB3b3JraW5nIG9uIGEgT3Bl
-blNCSQ0KPj4+PiBmZWF0dXJlIHdoaWNoIHdpbGwgYWxsb3cgSFNTIHNlY3VyaXR5IHNlcnZpY2Vz
-IHRvIHJ1biBhcyBpbmRlcGVuZGVudA0KPj4+PiBiaW5hcnkgaW4gTS1tb2RlIChub3QgbGlua2Vk
-IHRvIE9wZW5TQkkpIGFuZCBPcGVuU0JJIEZXX0RZTkFNSUMNCj4+Pj4gd2lsbCBiZSBhIHNlcGFy
-YXRlIGJpbmFyeSBhY3RpbmcgYXMgYSBzZWN1cmUgbW9uaXRvci4NCj4+Pj4NCj4+Pj4gUmVnYXJk
-cywNCj4+Pj4gQW51cA0KPj4+IFdoYXQgSSBoYXZlIGluIG1pbmQgaXMgdGhhdCB0aGUgZXh0ZXJu
-YWwgbWVtb3J5IHdpbGwgYmUgdXAgYW5kIHJ1bm5pbmcNCj4+PiBieSB0aGUgdGltZSB3ZSBnZXQg
-dG8gVS1Cb290IFNQTC4gSW4gdGhlIGNhc2Ugb2YgUG9sYXJGaXJlIFNvQyB0aGUgUk9NDQo+Pj4g
-Y29kZSBlcXVpdmFsZW50IGJyaW5ncyB1cCB0aGUgRERSIG1lbW9yeSBpbnRlcmZhY2Ugc28gd2Ug
-ZG8gbm90IG5lZWQgdG8NCj4+PiB3b3JyeSBhYm91dCB0aGlzIGFzIHBhcnQgb2YgVS1Cb290Lg0K
-Pj4gS2VlcGluZyBEUkFNIGNvbmZpZ3VyYXRpb24gYXMgcGFydCBvZiBhIHNlcGFyYXRlIFJPTSBi
-b290aW5nIHN0YWdlIHByaW9yDQo+PiB0byB0aGUgVS1Cb290IFNQTCBzb3VuZHMgZ29vZCB0byBt
-ZS4gVGhpcyB3aWxsIGxlYWQgdG8gZm9sbG93aW5nIGJvb3QtZmxvdzoNCj4+DQo+PiBST00vSFNT
-IChNLW1vZGUpID0+IFUtQm9vdCBTUEwgKE0tbW9kZSkgPT4gT3BlblNCSSAoTS1tb2RlKSA9PiBV
-LUJvb3QgUy1tb2RlDQo+IElmIHdlIHdhbnQgdG8ga2VlcCB0aGUgSFNTLCBtZWFuaW5nIHRoYXQg
-RERSIG1lbW9yeSBpcyBhbHJlYWR5DQo+IGluaXRpYWxpemVkLCB0aGVuIHRoZXJlIGlzIG5vIG5l
-ZWQgdG8gY3JlYXRlIGFuIGFkZGl0aW9uYWwgc3RlcCBvZg0KPiBVLUJvb3QgU1BMIHBoYXNlLCBi
-ZWNhdXNlIHRoZXJlIGlzIG5vIHNpemUgbGltaXRhdGlvbiBhbnkgbW9yZS4NCj4NCj4gUmlnaHQg
-bm93LCB0aGUgYm9vdCB3b3JrZmxvdyBvbiBQb2xhckZpcmUgaXM6DQo+DQo+IEhTUyArIE9wZW5T
-QkkgKGFzIGEgbGlicmFyeSkgKE0tbW9kZSkgPT4gVS1Cb290IFMtbW9kZQ0KPg0KPiBJdCdzIGp1
-c3Qgbm90IHRoZSBjYW5vbmljYWwgd2F5IGJlY2F1c2Ugb2YgdGhlIEhTUyBhbmQgT3BlblNCSSBh
-cyBhIGxpYnJhcnkuDQo+DQo+IEEgY2Fub25pY2FsIHdheSBzaG91bGQgYmU6DQo+DQo+IFUtQm9v
-dCBTUEwgKE0tbW9kZSkgPT4gT3BlblNCSSBkeW5hbWljIChNLW1vZGUpID0+IFUtQm9vdCBTLW1v
-ZGUNCj4NCj4gU28gd2Ugc2hvdWxkIGJlIGFpbWluZyB0byByZXBsYWNlIEhTUyB3aXRoIFUtQm9v
-dCBTUEwuDQo+DQo+Pj4gU291bmRzIHRvIG1lIHRoZSBjb21wb25lbnQgdGhhdCBuZWVkcyB0byBi
-ZSB1cHN0cmVhbWVkIG5leHQgaXMgdGhlIGVNTUMNCj4+PiBzdXBwb3J0IHNvIHRoYXQgaXQgY2Fu
-IGJlIHVzZWQgYXMgcGFydCBvZiBVLUJvb3QgU1BMLiBDb3JyZWN0Pw0KPj4gTWF5YmUgYXMgYSBQ
-SEFTRTEgcGF0Y2ggc2VyaWVzIGZvciBQb2xhckZpcmUgVS1Cb290IHN1cHBvcnQgY2FuDQo+PiB0
-YXJnZXQgdGhlIGZvbGxvd2luZzoNCj4+IDEuIE1pbmltYWwgVS1Cb290IGJvYXJkIHN1cHBvcnQg
-Zm9yIFBvbGFyRmlyZSBJY0ljbGUgQm9hcmQgd2l0aA0KPj4gc2luZ2xlIGRlZmNvbmZpZyB0byBi
-dWlsZCBib3RoIFUtQm9vdCBTUEwgYW5kIFUtQm9vdCBTLW1vZGUNCj4+IDIuIFNlcmlhbCBwb3J0
-IGRyaXZlciAocHJvYmFibHkgcmUtdXNlIGV4aXN0aW5nIGRyaXZlcikNCj4+IDMuIFNEIGFuZCBl
-TU1DIGRyaXZlcg0KPj4NCj4+IFN1cHBvcnRpbmcgU0QgYm9vdGluZyBpcyBoaWdobHkgZGVzaXJh
-YmxlIGZvciBQSEFTRTEuIEF0IGxlYXN0LA0KPj4gVS1Cb290IFNQTCwgT3BlblNCSSwgVS1Cb290
-IFMtbW9kZSwgYW5kIExpbnV4IHNob3VsZCBjb21lDQo+PiBhcyBzZXBhcmF0ZSBpbWFnZXMgZnJv
-bSBTRCBjYXJkLiBUaGUgUk9NL0hTUyBjYW4gcmVzaWRlIGFuZA0KPj4gYm9vdCBmcm9tIG9uLWJv
-YXJkIGZsYXNoL2VNTUMuDQo+Pg0KPj4gQWJvdmUgaXMgbXkgc3VnZ2VzdGlvbiBiYXNlZCBvbiBl
-eHBlcmllbmNlIHdpdGggU2lGaXZlIFVubGVhc2hlZC4NCj4+DQo+PiBUaGUgZ2VuZXJhbCBpZGVh
-IGJlaGluZCBPcGVuU291cmNlIGJvb3QtZmxvdyBpcyB0byBoYXZlIGVhY2gNCj4+IGJvb3Rpbmcg
-c3RhZ2UgYXMgYSBzZXBhcmF0ZSBiaW5hcnkgc28gdGhhdCB1c2VycyBjYW4gc2VsZWN0aXZlbHkN
-Cj4+IHVwZ3JhZGUgYSBwYXJ0aWN1bGFyIGJvb3Rpbmcgc3RhZ2Ugd2l0aG91dCByZS1jb21waWxp
-bmcvcmUtZmxhc2hpbmcNCj4+IG90aGVyIGJvb3Rpbmcgc3RhZ2VzLg0KPj4NCj4+IFZhcmlvdXMg
-ZGlzdHJvcyBhbmQgeW9jdG8gYWxyZWFkeSBzdXBwb3J0IGJ1aWxkaW5nIG1vc3Qgb2YgdGhlIGFi
-b3ZlDQo+PiBib290aW5nIHN0YWdlcyAoVS1Cb290LCBPcGVuU0JJLCBMaW51eCwgZXRjKSBzbyB3
-ZSBjYW4gcmV1c2UgYSBsb3QNCj4+IG9mIGV4aXN0aW5nIHdvcmsuIEV2ZW50dWFsbHksIEkgYW0g
-Y29uZmlkZW50IHdlIHdpbGwgZW5kdXAgbW92aW5nDQo+PiBtb3JlIHN0dWZmIGZyb20gUk9NL0hT
-UyB0byBVLUJvb3QgU1BMIGZvciBlYXNlIGluIG1haW50ZW5hbmNlLg0KPiBSZWdhcmRzLA0KPiBC
-aW4NCg0KSSBhbSBPSyB3aXRoIHN1cHBvcnRpbmcgVS1Cb290IFNQTCBhcyBhIGNvbW11bml0eSBi
-b290IGZsb3cgYnV0IHRoZSBIU1MgDQppcyBub3QgZ29pbmcgdG8gZGlzYXBwZWFyIGNvbXBsZXRl
-bHkgZm9yIG1hbnkgUG9sYXJGaXJlIFNvQyBkZXBsb3ltZW50cy4gDQpXZSBuZWVkIHRvIGhhdmUg
-dGhlIEhTUyBydW5uaW5nIG9uIHRoZSBtb25pdG9yIGNvcmUgYWZ0ZXIgdGhlIHN5c3RlbSBoYXMg
-DQpib290ZWQgZm9yIHZhcmlvdXMgcmVhc29ucy4gU29tZSBvZiB0aGUgY3VycmVudCBIU1MgZnVu
-Y3Rpb25hbGl0aWVzIGNhbiANCmJlIG1pZ3JhdGVkIGF0IGEgbGF0ZXIgdGltZS4NCg0KVGhlIEhT
-UyB3YXMgZGVzaWduZWQgdG8gZWFzaWx5IGVuYWJsZSBhbmQgZGlzYWJsZSBmZWF0dXJlcyB0aHJv
-dWdoIA0KS2NvbmZpZyB3aGljaCBzaG91bGQgYWxsb3cgdG8gYXNzaWduIGZlYXR1cmVzIHRvIGRp
-ZmZlcmVudCBib290IHN0YWdlcyANCmRlcGVuZGluZyBvbiB0aGUgb3ZlcmFsbCBzeXN0ZW0gZGVw
-bG95bWVudC4gS2VlcGluZyB0aGUgSFNTIGFzIFJPTSBjb2RlIA0KY2FwYWJsZSBvZiBzdGFydGlu
-ZyB2YXJpb3VzIGVhcmx5IGJvb3Qgc3RhZ2VzIGluIGVpdGhlciBNIG1vZGUgb3IgUyBtb2RlIA0K
-YWxsb3dzIHVzIChNaWNyb2NoaXAgZW5naW5lZXJpbmcgYW5kIG5vbiBwdXJlIExpbnV4IHVzZXJz
-KSB0byBtaXggDQpkaWZmZXJlbnQgb3BlcmF0aW5nIHN5c3RlbXMgb24gdGhlIHNhbWUgcGxhdGZv
-cm0gYW5kIG1vcmUgZWFzaWx5IGRlYnVnIA0KaGFyZHdhcmUgYnJpbmctdXAuDQoNCldoYXQgSSBh
-bSB0cnlpbmcgdG8gZ2V0IGF0IGlzIHRoYXQgd2UgbmVlZCB0byBiYWxhbmNlIHRoZSBRRU1VIGVh
-c2Ugb2YgDQp1c2Ugd2l0aCB0aGUgYWJpbGl0eSB0byBicmluZy11cCBhbmQgZGVidWcgYWN0dWFs
-IGhhcmR3YXJlLiBNeSBwcmVmZXJyZWQgDQphcHByb2FjaCBpcyB0byBrZWVwIGFsbCB0aGUgaGFy
-ZHdhcmUgYnJpbmcgdXAgaW4gb25lIHBsYWNlLCB0aGUgSFNTLCBzbyANCnRoYXQgeW91IGRvIG5v
-dCBoYXZlIHRvIHdvcnJ5IGFib3V0IG9ic2N1cmUgc2lsaWNvbiBpZGlvc3luY3Jhc2llcyBvbmNl
-IA0KeW91IHJlYWNoIHRoZSBvcGVuIHNvdXJjZSBib290IGZsb3cuIFNpbGljb24vYm9hcmQgYnJp
-bmcgdXAgDQpzdGVwcy9mZWF0dXJlcyBjYW4gYmUgYnJvdWdodCBvdXQgb2YgdGhlIEhTUyBpbnRv
-IHRoZSBvcGVuIHNvdXJjZSBib290IA0Kc3RhZ2VzIG9uY2UgdGhlc2Ugc3RlcHMgYXJlIG1hdHVy
-ZS4NCg0KUG9sYXJGaXJlIFNvQyBpcyB0aGUgdGhpcmQgZmFtaWx5IG9mIFNvQyBGUEdBIEkgaGF2
-ZSB3b3JrZWQgb24uIFNvIEkgDQpoYXZlIGEgZmFpciBpZGVhIG9mIHRoZSBhbW91bnQgb2YgcGFp
-biBpbiBmcm9udCBvZiBtZSB0byBicmluZyB0aGUgDQplbnRpcmUgZGV2aWNlIGZhbWlseSB0byBt
-YXJrZXQgOi0pIFdlIGRlY2lkZWQgZWFybHkgb24gaW4gdGhlIA0KYXJjaGl0ZWN0dXJlIG9mIFBv
-bGFyRmlyZSBTb0MgdGhhdCB3ZSB3b3VsZCBtYWtlIGFsbCBjb2RlIGV4ZWN1dGluZyBvbiANCnRo
-ZSBSSVNDLVYgcHJvY2Vzc29ycyBvcGVuIHNvdXJjZSBhbmQgdXNlciBtb2RpZmlhYmxlLiBUaGlz
-IGluY2x1ZGVzIGFsbCANCmNvZGUgdHlwaWNhbGx5IGhpZGRlbiBhd2F5IGluIHlvdXIgdHlwaWNh
-bCBTb0MgUk9NIGNvZGUuIFRoaXMgaXMgd2h5IA0KUG9sYXJGaXJlIFNvQyBoYXMgb24tY2hpcCBm
-bGFzaCBtZW1vcnkgdXNlZCB0byBzdG9yZSB0aGUgSFNTIGFuZCB3aHkgdGhlIA0KSFNTIHNob3Vs
-ZCBiZSB0aG91Z2h0IGFzIGluY2x1ZGluZyBST00gY29kZS4gVGhlIGN1cnJlbnQgSWNpY2xlIEtp
-dCB1c2VzIA0KZW5naW5lZXJpbmcgc2FtcGxlcyBmcm9tIHRoZSBmaXJzdCBkZXZpY2UgaW4gdGhl
-IFBvbGFyRmlyZSBTb0MgZmFtaWx5LiANClNvIHdlIGFyZSByZWFsbHkgYXQgdGhlIGJlZ2lubmlu
-ZyBvZiB0aGUgcHJvY2VzcyBvZiB2YWxpZGF0aW5nIHZlcnkgDQplYXJseSBib290IHN0ZXBzIG9u
-IGEgc2lnbmlmaWNhbnQgbnVtYmVyIG9mIGRldmljZXMuIEkgZG8gbm90IHdhbnQgdG8gDQpleHBv
-c2UgdGhlIG9wZW4gc291cmNlIGNvbW11bml0eSB0byB0aGUgcGFpbiBvZiBicmluZ2luZyB1cCBh
-IGZhbWlseSBvZiANCmRldmljZXMgYmVjYXVzZSBvZiB0aGUgZGVjaXNpb24gdG8gb3BlbiBzb3Vy
-Y2UgYWxsIGNvZGUuIFNvIEkgYW0gYXNraW5nIA0KeW91IHRvIG5vdCBydXNoIGluIHRyeWluZyB0
-byBtaWdyYXRlIGNvbXBvbmVudHMgZnJvbSB0aGUgSFNTIHRvIGEgbGF0ZXIgDQpib290IHN0YWdl
-IGp1c3QgeWV0LiBJdCBjYW4gYmUgZG9uZSBidXQgYmFzZWQgb24gZXhwZXJpZW5jZSBJIHRoaW5r
-IHRoYXQgDQpub3cgaXMgbm90IHRoZSByaWdodCB0aW1lIHlldC4NCg0KUmVnYXJkcywNCg0KQ3ly
-aWwuDQoNCg==
+The rename of all *_do_interrupt functions to *_do_interrupt_locked
+is preparation for pushing the BQL lock around these functions
+down into the per-arch implementation of *_do_interrupt.
+In a later patch which pushes down the lock, we will add
+a new *_do_interrupt function which grabs the BQL and calls to
+*_do_interrupt_locked.
+
+This is the first patch in a series of transitions to move the
+BQL down into the do_interrupt per arch function.  This set of
+transitions is needed to maintain bisectability.
+
+The purpose of this set of changes is to set the groundwork
+so that an arch could move towards removing
+the BQL from the cpu_handle_interrupt/exception paths.
+
+This approach was suggested by Paolo Bonzini.
+For reference, here are key posts in the discussion, explaining
+the reasoning/benefits of this approach.
+
+https://lists.gnu.org/archive/html/qemu-devel/2020-08/msg00784.html
+https://lists.gnu.org/archive/html/qemu-devel/2020-08/msg01517.html
+https://lists.gnu.org/archive/html/qemu-devel/2020-07/msg08731.html
+https://lists.gnu.org/archive/html/qemu-devel/2020-08/msg00044.html
+
+Signed-off-by: Robert Foley <robert.foley@linaro.org>
+---
+ hw/ppc/spapr_events.c           |  2 +-
+ target/alpha/cpu.c              |  2 +-
+ target/alpha/cpu.h              |  2 +-
+ target/alpha/helper.c           |  4 ++--
+ target/arm/cpu.c                |  2 +-
+ target/arm/cpu.h                |  4 ++--
+ target/arm/cpu_tcg.c            |  2 +-
+ target/arm/helper.c             |  2 +-
+ target/arm/m_helper.c           |  2 +-
+ target/avr/cpu.c                |  2 +-
+ target/avr/cpu.h                |  2 +-
+ target/avr/helper.c             |  2 +-
+ target/cris/cpu.c               | 12 ++++++------
+ target/cris/cpu.h               |  4 ++--
+ target/cris/helper.c            | 10 +++++-----
+ target/hppa/cpu.c               |  2 +-
+ target/hppa/cpu.h               |  2 +-
+ target/hppa/int_helper.c        |  4 ++--
+ target/i386/cpu.c               |  2 +-
+ target/i386/cpu.h               |  2 +-
+ target/i386/seg_helper.c        |  2 +-
+ target/lm32/cpu.c               |  2 +-
+ target/lm32/cpu.h               |  2 +-
+ target/lm32/helper.c            |  4 ++--
+ target/m68k/cpu.c               |  2 +-
+ target/m68k/cpu.h               |  2 +-
+ target/m68k/op_helper.c         |  4 ++--
+ target/microblaze/cpu.c         |  2 +-
+ target/microblaze/cpu.h         |  2 +-
+ target/microblaze/helper.c      |  6 +++---
+ target/mips/cpu.c               |  2 +-
+ target/mips/helper.c            |  4 ++--
+ target/mips/internal.h          |  2 +-
+ target/moxie/cpu.c              |  2 +-
+ target/moxie/cpu.h              |  2 +-
+ target/moxie/helper.c           |  2 +-
+ target/nios2/cpu.c              |  4 ++--
+ target/nios2/cpu.h              |  2 +-
+ target/nios2/helper.c           |  4 ++--
+ target/openrisc/cpu.c           |  2 +-
+ target/openrisc/cpu.h           |  2 +-
+ target/openrisc/interrupt.c     |  4 ++--
+ target/ppc/cpu.h                |  2 +-
+ target/ppc/excp_helper.c        |  4 ++--
+ target/ppc/kvm.c                |  2 +-
+ target/ppc/translate_init.inc.c |  2 +-
+ target/riscv/cpu.c              |  2 +-
+ target/riscv/cpu.h              |  2 +-
+ target/riscv/cpu_helper.c       |  4 ++--
+ target/rx/cpu.c                 |  2 +-
+ target/rx/cpu.h                 |  2 +-
+ target/rx/helper.c              |  4 ++--
+ target/s390x/cpu.c              |  2 +-
+ target/s390x/excp_helper.c      |  6 +++---
+ target/s390x/internal.h         |  2 +-
+ target/sh4/cpu.c                |  2 +-
+ target/sh4/cpu.h                |  2 +-
+ target/sh4/helper.c             |  6 +++---
+ target/sparc/cpu.c              |  4 ++--
+ target/sparc/cpu.h              |  2 +-
+ target/sparc/int32_helper.c     |  2 +-
+ target/sparc/int64_helper.c     |  2 +-
+ target/tilegx/cpu.c             |  6 +++---
+ target/unicore32/cpu.c          |  2 +-
+ target/unicore32/cpu.h          |  2 +-
+ target/unicore32/helper.c       |  2 +-
+ target/unicore32/softmmu.c      |  2 +-
+ target/xtensa/cpu.c             |  2 +-
+ target/xtensa/cpu.h             |  2 +-
+ target/xtensa/exc_helper.c      |  6 +++---
+ 70 files changed, 103 insertions(+), 103 deletions(-)
+
+diff --git a/hw/ppc/spapr_events.c b/hw/ppc/spapr_events.c
+index 1069d0197b..b281022e20 100644
+--- a/hw/ppc/spapr_events.c
++++ b/hw/ppc/spapr_events.c
+@@ -879,7 +879,7 @@ void spapr_mce_req_event(PowerPCCPU *cpu, bool recovered)
+     if (spapr->fwnmi_machine_check_addr == -1) {
+         /* Non-FWNMI case, deliver it like an architected CPU interrupt. */
+         cs->exception_index = POWERPC_EXCP_MCHECK;
+-        ppc_cpu_do_interrupt(cs);
++        ppc_cpu_do_interrupt_locked(cs);
+         return;
+     }
+ 
+diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
+index 09677c6c44..cb1074e0f9 100644
+--- a/target/alpha/cpu.c
++++ b/target/alpha/cpu.c
+@@ -217,7 +217,7 @@ static void alpha_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = alpha_cpu_class_by_name;
+     cc->has_work = alpha_cpu_has_work;
+-    cc->do_interrupt = alpha_cpu_do_interrupt;
++    cc->do_interrupt = alpha_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = alpha_cpu_exec_interrupt;
+     cc->dump_state = alpha_cpu_dump_state;
+     cc->set_pc = alpha_cpu_set_pc;
+diff --git a/target/alpha/cpu.h b/target/alpha/cpu.h
+index be29bdd530..4c6753df34 100644
+--- a/target/alpha/cpu.h
++++ b/target/alpha/cpu.h
+@@ -276,7 +276,7 @@ struct AlphaCPU {
+ extern const VMStateDescription vmstate_alpha_cpu;
+ #endif
+ 
+-void alpha_cpu_do_interrupt(CPUState *cpu);
++void alpha_cpu_do_interrupt_locked(CPUState *cpu);
+ bool alpha_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void alpha_cpu_dump_state(CPUState *cs, FILE *f, int flags);
+ hwaddr alpha_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+diff --git a/target/alpha/helper.c b/target/alpha/helper.c
+index 55d7274d94..ff9a2a7765 100644
+--- a/target/alpha/helper.c
++++ b/target/alpha/helper.c
+@@ -295,7 +295,7 @@ bool alpha_cpu_tlb_fill(CPUState *cs, vaddr addr, int size,
+ }
+ #endif /* USER_ONLY */
+ 
+-void alpha_cpu_do_interrupt(CPUState *cs)
++void alpha_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     AlphaCPU *cpu = ALPHA_CPU(cs);
+     CPUAlphaState *env = &cpu->env;
+@@ -445,7 +445,7 @@ bool alpha_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     if (idx >= 0) {
+         cs->exception_index = idx;
+         env->error_code = 0;
+-        alpha_cpu_do_interrupt(cs);
++        alpha_cpu_do_interrupt_locked(cs);
+         return true;
+     }
+     return false;
+diff --git a/target/arm/cpu.c b/target/arm/cpu.c
+index 401832ea95..46c1d92080 100644
+--- a/target/arm/cpu.c
++++ b/target/arm/cpu.c
+@@ -2224,7 +2224,7 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
+     cc->gdb_read_register = arm_cpu_gdb_read_register;
+     cc->gdb_write_register = arm_cpu_gdb_write_register;
+ #ifndef CONFIG_USER_ONLY
+-    cc->do_interrupt = arm_cpu_do_interrupt;
++    cc->do_interrupt = arm_cpu_do_interrupt_locked;
+     cc->get_phys_page_attrs_debug = arm_cpu_get_phys_page_attrs_debug;
+     cc->asidx_from_attrs = arm_asidx_from_attrs;
+     cc->vmsd = &vmstate_arm_cpu;
+diff --git a/target/arm/cpu.h b/target/arm/cpu.h
+index 9e8ed423ea..1f522964b5 100644
+--- a/target/arm/cpu.h
++++ b/target/arm/cpu.h
+@@ -991,8 +991,8 @@ uint64_t arm_cpu_mp_affinity(int idx, uint8_t clustersz);
+ extern const VMStateDescription vmstate_arm_cpu;
+ #endif
+ 
+-void arm_cpu_do_interrupt(CPUState *cpu);
+-void arm_v7m_cpu_do_interrupt(CPUState *cpu);
++void arm_cpu_do_interrupt_locked(CPUState *cpu);
++void arm_v7m_cpu_do_interrupt_locked(CPUState *cpu);
+ bool arm_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ 
+ hwaddr arm_cpu_get_phys_page_attrs_debug(CPUState *cpu, vaddr addr,
+diff --git a/target/arm/cpu_tcg.c b/target/arm/cpu_tcg.c
+index 00b0e08f33..2fc7a29340 100644
+--- a/target/arm/cpu_tcg.c
++++ b/target/arm/cpu_tcg.c
+@@ -601,7 +601,7 @@ static void arm_v7m_class_init(ObjectClass *oc, void *data)
+ 
+     acc->info = data;
+ #ifndef CONFIG_USER_ONLY
+-    cc->do_interrupt = arm_v7m_cpu_do_interrupt;
++    cc->do_interrupt = arm_v7m_cpu_do_interrupt_locked;
+ #endif
+ 
+     cc->cpu_exec_interrupt = arm_v7m_cpu_exec_interrupt;
+diff --git a/target/arm/helper.c b/target/arm/helper.c
+index 0ef0ef65dd..e07924daf5 100644
+--- a/target/arm/helper.c
++++ b/target/arm/helper.c
+@@ -9845,7 +9845,7 @@ static void handle_semihosting(CPUState *cs)
+  * to the AArch64-entry or AArch32-entry function depending on the
+  * target exception level's register width.
+  */
+-void arm_cpu_do_interrupt(CPUState *cs)
++void arm_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+diff --git a/target/arm/m_helper.c b/target/arm/m_helper.c
+index 036454234c..ca65b89fae 100644
+--- a/target/arm/m_helper.c
++++ b/target/arm/m_helper.c
+@@ -2039,7 +2039,7 @@ gen_invep:
+     return false;
+ }
+ 
+-void arm_v7m_cpu_do_interrupt(CPUState *cs)
++void arm_v7m_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+index 5d9c4ad5bf..d856069230 100644
+--- a/target/avr/cpu.c
++++ b/target/avr/cpu.c
+@@ -197,7 +197,7 @@ static void avr_cpu_class_init(ObjectClass *oc, void *data)
+     cc->class_by_name = avr_cpu_class_by_name;
+ 
+     cc->has_work = avr_cpu_has_work;
+-    cc->do_interrupt = avr_cpu_do_interrupt;
++    cc->do_interrupt = avr_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = avr_cpu_exec_interrupt;
+     cc->dump_state = avr_cpu_dump_state;
+     cc->set_pc = avr_cpu_set_pc;
+diff --git a/target/avr/cpu.h b/target/avr/cpu.h
+index d148e8c75a..66a26f08ef 100644
+--- a/target/avr/cpu.h
++++ b/target/avr/cpu.h
+@@ -156,7 +156,7 @@ typedef struct AVRCPU {
+ 
+ extern const struct VMStateDescription vms_avr_cpu;
+ 
+-void avr_cpu_do_interrupt(CPUState *cpu);
++void avr_cpu_do_interrupt_locked(CPUState *cpu);
+ bool avr_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ hwaddr avr_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ int avr_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+diff --git a/target/avr/helper.c b/target/avr/helper.c
+index d96d14372b..096bc35945 100644
+--- a/target/avr/helper.c
++++ b/target/avr/helper.c
+@@ -56,7 +56,7 @@ bool avr_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     return ret;
+ }
+ 
+-void avr_cpu_do_interrupt(CPUState *cs)
++void avr_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     AVRCPU *cpu = AVR_CPU(cs);
+     CPUAVRState *env = &cpu->env;
+diff --git a/target/cris/cpu.c b/target/cris/cpu.c
+index 6d7e266042..40b110f161 100644
+--- a/target/cris/cpu.c
++++ b/target/cris/cpu.c
+@@ -199,7 +199,7 @@ static void crisv8_cpu_class_init(ObjectClass *oc, void *data)
+     CRISCPUClass *ccc = CRIS_CPU_CLASS(oc);
+ 
+     ccc->vr = 8;
+-    cc->do_interrupt = crisv10_cpu_do_interrupt;
++    cc->do_interrupt = crisv10_cpu_do_interrupt_locked;
+     cc->gdb_read_register = crisv10_cpu_gdb_read_register;
+     cc->tcg_initialize = cris_initialize_crisv10_tcg;
+ }
+@@ -210,7 +210,7 @@ static void crisv9_cpu_class_init(ObjectClass *oc, void *data)
+     CRISCPUClass *ccc = CRIS_CPU_CLASS(oc);
+ 
+     ccc->vr = 9;
+-    cc->do_interrupt = crisv10_cpu_do_interrupt;
++    cc->do_interrupt = crisv10_cpu_do_interrupt_locked;
+     cc->gdb_read_register = crisv10_cpu_gdb_read_register;
+     cc->tcg_initialize = cris_initialize_crisv10_tcg;
+ }
+@@ -221,7 +221,7 @@ static void crisv10_cpu_class_init(ObjectClass *oc, void *data)
+     CRISCPUClass *ccc = CRIS_CPU_CLASS(oc);
+ 
+     ccc->vr = 10;
+-    cc->do_interrupt = crisv10_cpu_do_interrupt;
++    cc->do_interrupt = crisv10_cpu_do_interrupt_locked;
+     cc->gdb_read_register = crisv10_cpu_gdb_read_register;
+     cc->tcg_initialize = cris_initialize_crisv10_tcg;
+ }
+@@ -232,7 +232,7 @@ static void crisv11_cpu_class_init(ObjectClass *oc, void *data)
+     CRISCPUClass *ccc = CRIS_CPU_CLASS(oc);
+ 
+     ccc->vr = 11;
+-    cc->do_interrupt = crisv10_cpu_do_interrupt;
++    cc->do_interrupt = crisv10_cpu_do_interrupt_locked;
+     cc->gdb_read_register = crisv10_cpu_gdb_read_register;
+     cc->tcg_initialize = cris_initialize_crisv10_tcg;
+ }
+@@ -243,7 +243,7 @@ static void crisv17_cpu_class_init(ObjectClass *oc, void *data)
+     CRISCPUClass *ccc = CRIS_CPU_CLASS(oc);
+ 
+     ccc->vr = 17;
+-    cc->do_interrupt = crisv10_cpu_do_interrupt;
++    cc->do_interrupt = crisv10_cpu_do_interrupt_locked;
+     cc->gdb_read_register = crisv10_cpu_gdb_read_register;
+     cc->tcg_initialize = cris_initialize_crisv10_tcg;
+ }
+@@ -268,7 +268,7 @@ static void cris_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = cris_cpu_class_by_name;
+     cc->has_work = cris_cpu_has_work;
+-    cc->do_interrupt = cris_cpu_do_interrupt;
++    cc->do_interrupt = cris_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = cris_cpu_exec_interrupt;
+     cc->dump_state = cris_cpu_dump_state;
+     cc->set_pc = cris_cpu_set_pc;
+diff --git a/target/cris/cpu.h b/target/cris/cpu.h
+index 8f08d7628b..597ccd6451 100644
+--- a/target/cris/cpu.h
++++ b/target/cris/cpu.h
+@@ -187,8 +187,8 @@ struct CRISCPU {
+ extern const VMStateDescription vmstate_cris_cpu;
+ #endif
+ 
+-void cris_cpu_do_interrupt(CPUState *cpu);
+-void crisv10_cpu_do_interrupt(CPUState *cpu);
++void cris_cpu_do_interrupt_locked(CPUState *cpu);
++void crisv10_cpu_do_interrupt_locked(CPUState *cpu);
+ bool cris_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ 
+ void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags);
+diff --git a/target/cris/helper.c b/target/cris/helper.c
+index 67946d9246..e0ee6b4e05 100644
+--- a/target/cris/helper.c
++++ b/target/cris/helper.c
+@@ -40,7 +40,7 @@
+ 
+ #if defined(CONFIG_USER_ONLY)
+ 
+-void cris_cpu_do_interrupt(CPUState *cs)
++void cris_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     CRISCPU *cpu = CRIS_CPU(cs);
+     CPUCRISState *env = &cpu->env;
+@@ -49,9 +49,9 @@ void cris_cpu_do_interrupt(CPUState *cs)
+     env->pregs[PR_ERP] = env->pc;
+ }
+ 
+-void crisv10_cpu_do_interrupt(CPUState *cs)
++void crisv10_cpu_do_interrupt_locked(CPUState *cs)
+ {
+-    cris_cpu_do_interrupt(cs);
++    cris_cpu_do_interrupt_locked(cs);
+ }
+ 
+ bool cris_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+@@ -123,7 +123,7 @@ bool cris_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     cpu_loop_exit(cs);
+ }
+ 
+-void crisv10_cpu_do_interrupt(CPUState *cs)
++void crisv10_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     CRISCPU *cpu = CRIS_CPU(cs);
+     CPUCRISState *env = &cpu->env;
+@@ -185,7 +185,7 @@ void crisv10_cpu_do_interrupt(CPUState *cs)
+                   env->pregs[PR_ERP]);
+ }
+ 
+-void cris_cpu_do_interrupt(CPUState *cs)
++void cris_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     CRISCPU *cpu = CRIS_CPU(cs);
+     CPUCRISState *env = &cpu->env;
+diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
+index 287055f96e..7241ffbd7f 100644
+--- a/target/hppa/cpu.c
++++ b/target/hppa/cpu.c
+@@ -139,7 +139,7 @@ static void hppa_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = hppa_cpu_class_by_name;
+     cc->has_work = hppa_cpu_has_work;
+-    cc->do_interrupt = hppa_cpu_do_interrupt;
++    cc->do_interrupt = hppa_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = hppa_cpu_exec_interrupt;
+     cc->dump_state = hppa_cpu_dump_state;
+     cc->set_pc = hppa_cpu_set_pc;
+diff --git a/target/hppa/cpu.h b/target/hppa/cpu.h
+index 801a4fb1ba..7fc7682ca8 100644
+--- a/target/hppa/cpu.h
++++ b/target/hppa/cpu.h
+@@ -323,7 +323,7 @@ int cpu_hppa_signal_handler(int host_signum, void *pinfo, void *puc);
+ hwaddr hppa_cpu_get_phys_page_debug(CPUState *cs, vaddr addr);
+ int hppa_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int hppa_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+-void hppa_cpu_do_interrupt(CPUState *cpu);
++void hppa_cpu_do_interrupt_locked(CPUState *cpu);
+ bool hppa_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void hppa_cpu_dump_state(CPUState *cs, FILE *f, int);
+ bool hppa_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+diff --git a/target/hppa/int_helper.c b/target/hppa/int_helper.c
+index 462747baf8..31fce959d6 100644
+--- a/target/hppa/int_helper.c
++++ b/target/hppa/int_helper.c
+@@ -90,7 +90,7 @@ void HELPER(write_eiem)(CPUHPPAState *env, target_ureg val)
+ }
+ #endif /* !CONFIG_USER_ONLY */
+ 
+-void hppa_cpu_do_interrupt(CPUState *cs)
++void hppa_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     HPPACPU *cpu = HPPA_CPU(cs);
+     CPUHPPAState *env = &cpu->env;
+@@ -255,7 +255,7 @@ bool hppa_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     /* If interrupts are requested and enabled, raise them.  */
+     if ((env->psw & PSW_I) && (interrupt_request & CPU_INTERRUPT_HARD)) {
+         cs->exception_index = EXCP_EXT_INTERRUPT;
+-        hppa_cpu_do_interrupt(cs);
++        hppa_cpu_do_interrupt_locked(cs);
+         return true;
+     }
+ #endif
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 592aa0baf7..fdb8ae11b6 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -7297,7 +7297,7 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
+     cc->parse_features = x86_cpu_parse_featurestr;
+     cc->has_work = x86_cpu_has_work;
+ #ifdef CONFIG_TCG
+-    cc->do_interrupt = x86_cpu_do_interrupt;
++    cc->do_interrupt = x86_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = x86_cpu_exec_interrupt;
+ #endif
+     cc->dump_state = x86_cpu_dump_state;
+diff --git a/target/i386/cpu.h b/target/i386/cpu.h
+index d784eeaf29..8d4dac129b 100644
+--- a/target/i386/cpu.h
++++ b/target/i386/cpu.h
+@@ -1770,7 +1770,7 @@ extern VMStateDescription vmstate_x86_cpu;
+  * x86_cpu_do_interrupt:
+  * @cpu: vCPU the interrupt is to be handled by.
+  */
+-void x86_cpu_do_interrupt(CPUState *cpu);
++void x86_cpu_do_interrupt_locked(CPUState *cpu);
+ bool x86_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ int x86_cpu_pending_interrupt(CPUState *cs, int interrupt_request);
+ 
+diff --git a/target/i386/seg_helper.c b/target/i386/seg_helper.c
+index 818f65f35f..0d8464abec 100644
+--- a/target/i386/seg_helper.c
++++ b/target/i386/seg_helper.c
+@@ -1280,7 +1280,7 @@ static void do_interrupt_all(X86CPU *cpu, int intno, int is_int,
+ #endif
+ }
+ 
+-void x86_cpu_do_interrupt(CPUState *cs)
++void x86_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     X86CPU *cpu = X86_CPU(cs);
+     CPUX86State *env = &cpu->env;
+diff --git a/target/lm32/cpu.c b/target/lm32/cpu.c
+index 9e7d8ca929..93da742520 100644
+--- a/target/lm32/cpu.c
++++ b/target/lm32/cpu.c
+@@ -222,7 +222,7 @@ static void lm32_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = lm32_cpu_class_by_name;
+     cc->has_work = lm32_cpu_has_work;
+-    cc->do_interrupt = lm32_cpu_do_interrupt;
++    cc->do_interrupt = lm32_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = lm32_cpu_exec_interrupt;
+     cc->dump_state = lm32_cpu_dump_state;
+     cc->set_pc = lm32_cpu_set_pc;
+diff --git a/target/lm32/cpu.h b/target/lm32/cpu.h
+index 01d408eb55..cd96a2905e 100644
+--- a/target/lm32/cpu.h
++++ b/target/lm32/cpu.h
+@@ -198,7 +198,7 @@ struct LM32CPU {
+ extern const VMStateDescription vmstate_lm32_cpu;
+ #endif
+ 
+-void lm32_cpu_do_interrupt(CPUState *cpu);
++void lm32_cpu_do_interrupt_locked(CPUState *cpu);
+ bool lm32_cpu_exec_interrupt(CPUState *cs, int int_req);
+ void lm32_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ hwaddr lm32_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+diff --git a/target/lm32/helper.c b/target/lm32/helper.c
+index 1130fc8884..8599a59df2 100644
+--- a/target/lm32/helper.c
++++ b/target/lm32/helper.c
+@@ -148,7 +148,7 @@ void lm32_debug_excp_handler(CPUState *cs)
+     }
+ }
+ 
+-void lm32_cpu_do_interrupt(CPUState *cs)
++void lm32_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     LM32CPU *cpu = LM32_CPU(cs);
+     CPULM32State *env = &cpu->env;
+@@ -205,7 +205,7 @@ bool lm32_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ 
+     if ((interrupt_request & CPU_INTERRUPT_HARD) && (env->ie & IE_IE)) {
+         cs->exception_index = EXCP_IRQ;
+-        lm32_cpu_do_interrupt(cs);
++        lm32_cpu_do_interrupt_locked(cs);
+         return true;
+     }
+     return false;
+diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
+index f2585154f5..6ac0dd87a6 100644
+--- a/target/m68k/cpu.c
++++ b/target/m68k/cpu.c
+@@ -277,7 +277,7 @@ static void m68k_cpu_class_init(ObjectClass *c, void *data)
+ 
+     cc->class_by_name = m68k_cpu_class_by_name;
+     cc->has_work = m68k_cpu_has_work;
+-    cc->do_interrupt = m68k_cpu_do_interrupt;
++    cc->do_interrupt = m68k_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = m68k_cpu_exec_interrupt;
+     cc->dump_state = m68k_cpu_dump_state;
+     cc->set_pc = m68k_cpu_set_pc;
+diff --git a/target/m68k/cpu.h b/target/m68k/cpu.h
+index 521ac67cdd..1afbe94570 100644
+--- a/target/m68k/cpu.h
++++ b/target/m68k/cpu.h
+@@ -164,7 +164,7 @@ struct M68kCPU {
+ };
+ 
+ 
+-void m68k_cpu_do_interrupt(CPUState *cpu);
++void m68k_cpu_do_interrupt_locked(CPUState *cpu);
+ bool m68k_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void m68k_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ hwaddr m68k_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+diff --git a/target/m68k/op_helper.c b/target/m68k/op_helper.c
+index 4a032a150e..8fd6481883 100644
+--- a/target/m68k/op_helper.c
++++ b/target/m68k/op_helper.c
+@@ -25,7 +25,7 @@
+ 
+ #if defined(CONFIG_USER_ONLY)
+ 
+-void m68k_cpu_do_interrupt(CPUState *cs)
++void m68k_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     cs->exception_index = -1;
+ }
+@@ -443,7 +443,7 @@ static void do_interrupt_all(CPUM68KState *env, int is_hw)
+     cf_interrupt_all(env, is_hw);
+ }
+ 
+-void m68k_cpu_do_interrupt(CPUState *cs)
++void m68k_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     M68kCPU *cpu = M68K_CPU(cs);
+     CPUM68KState *env = &cpu->env;
+diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
+index ce70f7d281..b19e386bcf 100644
+--- a/target/microblaze/cpu.c
++++ b/target/microblaze/cpu.c
+@@ -316,7 +316,7 @@ static void mb_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = mb_cpu_class_by_name;
+     cc->has_work = mb_cpu_has_work;
+-    cc->do_interrupt = mb_cpu_do_interrupt;
++    cc->do_interrupt = mb_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = mb_cpu_exec_interrupt;
+     cc->dump_state = mb_cpu_dump_state;
+     cc->set_pc = mb_cpu_set_pc;
+diff --git a/target/microblaze/cpu.h b/target/microblaze/cpu.h
+index a31134b65c..7617565a0c 100644
+--- a/target/microblaze/cpu.h
++++ b/target/microblaze/cpu.h
+@@ -315,7 +315,7 @@ struct MicroBlazeCPU {
+ };
+ 
+ 
+-void mb_cpu_do_interrupt(CPUState *cs);
++void mb_cpu_do_interrupt_locked(CPUState *cs);
+ bool mb_cpu_exec_interrupt(CPUState *cs, int int_req);
+ void mb_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ hwaddr mb_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+diff --git a/target/microblaze/helper.c b/target/microblaze/helper.c
+index ab2ceeb055..263cdf59be 100644
+--- a/target/microblaze/helper.c
++++ b/target/microblaze/helper.c
+@@ -28,7 +28,7 @@
+ 
+ #if defined(CONFIG_USER_ONLY)
+ 
+-void mb_cpu_do_interrupt(CPUState *cs)
++void mb_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     MicroBlazeCPU *cpu = MICROBLAZE_CPU(cs);
+     CPUMBState *env = &cpu->env;
+@@ -108,7 +108,7 @@ bool mb_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     cpu_loop_exit_restore(cs, retaddr);
+ }
+ 
+-void mb_cpu_do_interrupt(CPUState *cs)
++void mb_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     MicroBlazeCPU *cpu = MICROBLAZE_CPU(cs);
+     CPUMBState *env = &cpu->env;
+@@ -297,7 +297,7 @@ bool mb_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+         && !(env->sregs[SR_MSR] & (MSR_EIP | MSR_BIP))
+         && !(env->iflags & (D_FLAG | IMM_FLAG))) {
+         cs->exception_index = EXCP_IRQ;
+-        mb_cpu_do_interrupt(cs);
++        mb_cpu_do_interrupt_locked(cs);
+         return true;
+     }
+     return false;
+diff --git a/target/mips/cpu.c b/target/mips/cpu.c
+index ec9dde5100..c616a0ef5a 100644
+--- a/target/mips/cpu.c
++++ b/target/mips/cpu.c
+@@ -196,7 +196,7 @@ static void mips_cpu_class_init(ObjectClass *c, void *data)
+ 
+     cc->class_by_name = mips_cpu_class_by_name;
+     cc->has_work_with_iothread_lock = mips_cpu_has_work;
+-    cc->do_interrupt = mips_cpu_do_interrupt;
++    cc->do_interrupt = mips_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = mips_cpu_exec_interrupt;
+     cc->dump_state = mips_cpu_dump_state;
+     cc->set_pc = mips_cpu_set_pc;
+diff --git a/target/mips/helper.c b/target/mips/helper.c
+index afd78b1990..a85c4057d0 100644
+--- a/target/mips/helper.c
++++ b/target/mips/helper.c
+@@ -1083,7 +1083,7 @@ static inline void set_badinstr_registers(CPUMIPSState *env)
+ }
+ #endif
+ 
+-void mips_cpu_do_interrupt(CPUState *cs)
++void mips_cpu_do_interrupt_locked(CPUState *cs)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+     MIPSCPU *cpu = MIPS_CPU(cs);
+@@ -1409,7 +1409,7 @@ bool mips_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+             /* Raise it */
+             cs->exception_index = EXCP_EXT_INTERRUPT;
+             env->error_code = 0;
+-            mips_cpu_do_interrupt(cs);
++            mips_cpu_do_interrupt_locked(cs);
+             return true;
+         }
+     }
+diff --git a/target/mips/internal.h b/target/mips/internal.h
+index 7f159a9230..fb0181c095 100644
+--- a/target/mips/internal.h
++++ b/target/mips/internal.h
+@@ -80,7 +80,7 @@ enum CPUMIPSMSADataFormat {
+     DF_DOUBLE
+ };
+ 
+-void mips_cpu_do_interrupt(CPUState *cpu);
++void mips_cpu_do_interrupt_locked(CPUState *cpu);
+ bool mips_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void mips_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ hwaddr mips_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+diff --git a/target/moxie/cpu.c b/target/moxie/cpu.c
+index f823eb234d..bba886cfe1 100644
+--- a/target/moxie/cpu.c
++++ b/target/moxie/cpu.c
+@@ -107,7 +107,7 @@ static void moxie_cpu_class_init(ObjectClass *oc, void *data)
+     cc->class_by_name = moxie_cpu_class_by_name;
+ 
+     cc->has_work = moxie_cpu_has_work;
+-    cc->do_interrupt = moxie_cpu_do_interrupt;
++    cc->do_interrupt = moxie_cpu_do_interrupt_locked;
+     cc->dump_state = moxie_cpu_dump_state;
+     cc->set_pc = moxie_cpu_set_pc;
+     cc->tlb_fill = moxie_cpu_tlb_fill;
+diff --git a/target/moxie/cpu.h b/target/moxie/cpu.h
+index 455553b794..1a47ce4d8c 100644
+--- a/target/moxie/cpu.h
++++ b/target/moxie/cpu.h
+@@ -88,7 +88,7 @@ typedef struct MoxieCPU {
+ } MoxieCPU;
+ 
+ 
+-void moxie_cpu_do_interrupt(CPUState *cs);
++void moxie_cpu_do_interrupt_locked(CPUState *cs);
+ void moxie_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ hwaddr moxie_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ void moxie_translate_init(void);
+diff --git a/target/moxie/helper.c b/target/moxie/helper.c
+index b1919f62b3..c222895ca5 100644
+--- a/target/moxie/helper.c
++++ b/target/moxie/helper.c
+@@ -95,7 +95,7 @@ bool moxie_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     cpu_loop_exit_restore(cs, retaddr);
+ }
+ 
+-void moxie_cpu_do_interrupt(CPUState *cs)
++void moxie_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     switch (cs->exception_index) {
+     case MOXIE_EX_BREAK:
+diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
+index fe5fd9adfd..cc813181a4 100644
+--- a/target/nios2/cpu.c
++++ b/target/nios2/cpu.c
+@@ -106,7 +106,7 @@ static bool nios2_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     if ((interrupt_request & CPU_INTERRUPT_HARD) &&
+         (env->regs[CR_STATUS] & CR_STATUS_PIE)) {
+         cs->exception_index = EXCP_IRQ;
+-        nios2_cpu_do_interrupt(cs);
++        nios2_cpu_do_interrupt_locked(cs);
+         return true;
+     }
+     return false;
+@@ -192,7 +192,7 @@ static void nios2_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = nios2_cpu_class_by_name;
+     cc->has_work = nios2_cpu_has_work;
+-    cc->do_interrupt = nios2_cpu_do_interrupt;
++    cc->do_interrupt = nios2_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = nios2_cpu_exec_interrupt;
+     cc->dump_state = nios2_cpu_dump_state;
+     cc->set_pc = nios2_cpu_set_pc;
+diff --git a/target/nios2/cpu.h b/target/nios2/cpu.h
+index 4dddf9c3a1..dcf1715092 100644
+--- a/target/nios2/cpu.h
++++ b/target/nios2/cpu.h
+@@ -195,7 +195,7 @@ typedef struct Nios2CPU {
+ 
+ 
+ void nios2_tcg_init(void);
+-void nios2_cpu_do_interrupt(CPUState *cs);
++void nios2_cpu_do_interrupt_locked(CPUState *cs);
+ int cpu_nios2_signal_handler(int host_signum, void *pinfo, void *puc);
+ void dump_mmu(CPUNios2State *env);
+ void nios2_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+diff --git a/target/nios2/helper.c b/target/nios2/helper.c
+index 57c97bde3c..25c6c6d4d8 100644
+--- a/target/nios2/helper.c
++++ b/target/nios2/helper.c
+@@ -30,7 +30,7 @@
+ 
+ #if defined(CONFIG_USER_ONLY)
+ 
+-void nios2_cpu_do_interrupt(CPUState *cs)
++void nios2_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     Nios2CPU *cpu = NIOS2_CPU(cs);
+     CPUNios2State *env = &cpu->env;
+@@ -48,7 +48,7 @@ bool nios2_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+ 
+ #else /* !CONFIG_USER_ONLY */
+ 
+-void nios2_cpu_do_interrupt(CPUState *cs)
++void nios2_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     Nios2CPU *cpu = NIOS2_CPU(cs);
+     CPUNios2State *env = &cpu->env;
+diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
+index fd2da39124..e428946dc2 100644
+--- a/target/openrisc/cpu.c
++++ b/target/openrisc/cpu.c
+@@ -154,7 +154,7 @@ static void openrisc_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = openrisc_cpu_class_by_name;
+     cc->has_work = openrisc_cpu_has_work;
+-    cc->do_interrupt = openrisc_cpu_do_interrupt;
++    cc->do_interrupt = openrisc_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = openrisc_cpu_exec_interrupt;
+     cc->dump_state = openrisc_cpu_dump_state;
+     cc->set_pc = openrisc_cpu_set_pc;
+diff --git a/target/openrisc/cpu.h b/target/openrisc/cpu.h
+index f37a52e153..e77f075cd9 100644
+--- a/target/openrisc/cpu.h
++++ b/target/openrisc/cpu.h
+@@ -316,7 +316,7 @@ typedef struct OpenRISCCPU {
+ 
+ 
+ void cpu_openrisc_list(void);
+-void openrisc_cpu_do_interrupt(CPUState *cpu);
++void openrisc_cpu_do_interrupt_locked(CPUState *cpu);
+ bool openrisc_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void openrisc_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ hwaddr openrisc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+diff --git a/target/openrisc/interrupt.c b/target/openrisc/interrupt.c
+index 3eab771dcd..f95289444f 100644
+--- a/target/openrisc/interrupt.c
++++ b/target/openrisc/interrupt.c
+@@ -26,7 +26,7 @@
+ #include "hw/loader.h"
+ #endif
+ 
+-void openrisc_cpu_do_interrupt(CPUState *cs)
++void openrisc_cpu_do_interrupt_locked(CPUState *cs)
+ {
+ #ifndef CONFIG_USER_ONLY
+     OpenRISCCPU *cpu = OPENRISC_CPU(cs);
+@@ -115,7 +115,7 @@ bool openrisc_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     }
+     if (idx >= 0) {
+         cs->exception_index = idx;
+-        openrisc_cpu_do_interrupt(cs);
++        openrisc_cpu_do_interrupt_locked(cs);
+         return true;
+     }
+     return false;
+diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
+index e7d382ac10..ed297acdb4 100644
+--- a/target/ppc/cpu.h
++++ b/target/ppc/cpu.h
+@@ -1231,7 +1231,7 @@ struct PPCVirtualHypervisorClass {
+                      TYPE_PPC_VIRTUAL_HYPERVISOR)
+ #endif /* CONFIG_USER_ONLY */
+ 
+-void ppc_cpu_do_interrupt(CPUState *cpu);
++void ppc_cpu_do_interrupt_locked(CPUState *cpu);
+ bool ppc_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void ppc_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ void ppc_cpu_dump_statistics(CPUState *cpu, int flags);
+diff --git a/target/ppc/excp_helper.c b/target/ppc/excp_helper.c
+index bf9e1e27e9..fe9b122fd0 100644
+--- a/target/ppc/excp_helper.c
++++ b/target/ppc/excp_helper.c
+@@ -38,7 +38,7 @@
+ /*****************************************************************************/
+ /* Exception processing */
+ #if defined(CONFIG_USER_ONLY)
+-void ppc_cpu_do_interrupt(CPUState *cs)
++void ppc_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     PowerPCCPU *cpu = POWERPC_CPU(cs);
+     CPUPPCState *env = &cpu->env;
+@@ -865,7 +865,7 @@ static inline void powerpc_excp(PowerPCCPU *cpu, int excp_model, int excp)
+     powerpc_set_excp_state(cpu, vector, new_msr);
+ }
+ 
+-void ppc_cpu_do_interrupt(CPUState *cs)
++void ppc_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     PowerPCCPU *cpu = POWERPC_CPU(cs);
+     CPUPPCState *env = &cpu->env;
+diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
+index f94c45a508..5f0ab06daa 100644
+--- a/target/ppc/kvm.c
++++ b/target/ppc/kvm.c
+@@ -1650,7 +1650,7 @@ static int kvm_handle_debug(PowerPCCPU *cpu, struct kvm_run *run)
+     env->nip += 4;
+     cs->exception_index = POWERPC_EXCP_PROGRAM;
+     env->error_code = POWERPC_EXCP_INVAL;
+-    ppc_cpu_do_interrupt(cs);
++    ppc_cpu_do_interrupt_locked(cs);
+ 
+     return DEBUG_RETURN_GUEST;
+ }
+diff --git a/target/ppc/translate_init.inc.c b/target/ppc/translate_init.inc.c
+index 27ae7fa195..653b04aef6 100644
+--- a/target/ppc/translate_init.inc.c
++++ b/target/ppc/translate_init.inc.c
+@@ -10885,7 +10885,7 @@ static void ppc_cpu_class_init(ObjectClass *oc, void *data)
+     pcc->parent_parse_features = cc->parse_features;
+     cc->parse_features = ppc_cpu_parse_featurestr;
+     cc->has_work_with_iothread_lock = ppc_cpu_has_work;
+-    cc->do_interrupt = ppc_cpu_do_interrupt;
++    cc->do_interrupt = ppc_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = ppc_cpu_exec_interrupt;
+     cc->dump_state = ppc_cpu_dump_state;
+     cc->dump_statistics = ppc_cpu_dump_statistics;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 832171c360..833e6d4f1e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -537,7 +537,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+ 
+     cc->class_by_name = riscv_cpu_class_by_name;
+     cc->has_work_with_iothread_lock = riscv_cpu_has_work;
+-    cc->do_interrupt = riscv_cpu_do_interrupt;
++    cc->do_interrupt = riscv_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = riscv_cpu_exec_interrupt;
+     cc->dump_state = riscv_cpu_dump_state;
+     cc->set_pc = riscv_cpu_set_pc;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index a804a5d0ba..372005b79c 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -312,7 +312,7 @@ extern const char * const riscv_fpr_regnames[];
+ extern const char * const riscv_excp_names[];
+ extern const char * const riscv_intr_names[];
+ 
+-void riscv_cpu_do_interrupt(CPUState *cpu);
++void riscv_cpu_do_interrupt_locked(CPUState *cpu);
+ int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 75d2ae3434..477cf66b66 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -85,7 +85,7 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+         int interruptno = riscv_cpu_local_irq_pending(env);
+         if (interruptno >= 0) {
+             cs->exception_index = RISCV_EXCP_INT_FLAG | interruptno;
+-            riscv_cpu_do_interrupt(cs);
++            riscv_cpu_do_interrupt_locked(cs);
+             return true;
+         }
+     }
+@@ -820,7 +820,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+  * Adapted from Spike's processor_t::take_trap.
+  *
+  */
+-void riscv_cpu_do_interrupt(CPUState *cs)
++void riscv_cpu_do_interrupt_locked(CPUState *cs)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+ 
+diff --git a/target/rx/cpu.c b/target/rx/cpu.c
+index 219e05397b..51e10da7cc 100644
+--- a/target/rx/cpu.c
++++ b/target/rx/cpu.c
+@@ -185,7 +185,7 @@ static void rx_cpu_class_init(ObjectClass *klass, void *data)
+ 
+     cc->class_by_name = rx_cpu_class_by_name;
+     cc->has_work = rx_cpu_has_work;
+-    cc->do_interrupt = rx_cpu_do_interrupt;
++    cc->do_interrupt = rx_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = rx_cpu_exec_interrupt;
+     cc->dump_state = rx_cpu_dump_state;
+     cc->set_pc = rx_cpu_set_pc;
+diff --git a/target/rx/cpu.h b/target/rx/cpu.h
+index d1fb1ef3ca..d188e7d43f 100644
+--- a/target/rx/cpu.h
++++ b/target/rx/cpu.h
+@@ -125,7 +125,7 @@ typedef RXCPU ArchCPU;
+ #define CPU_RESOLVING_TYPE TYPE_RX_CPU
+ 
+ const char *rx_crname(uint8_t cr);
+-void rx_cpu_do_interrupt(CPUState *cpu);
++void rx_cpu_do_interrupt_locked(CPUState *cpu);
+ bool rx_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void rx_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ int rx_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+diff --git a/target/rx/helper.c b/target/rx/helper.c
+index a6a337a311..332f89435a 100644
+--- a/target/rx/helper.c
++++ b/target/rx/helper.c
+@@ -42,7 +42,7 @@ void rx_cpu_unpack_psw(CPURXState *env, uint32_t psw, int rte)
+ }
+ 
+ #define INT_FLAGS (CPU_INTERRUPT_HARD | CPU_INTERRUPT_FIR)
+-void rx_cpu_do_interrupt(CPUState *cs)
++void rx_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     RXCPU *cpu = RXCPU(cs);
+     CPURXState *env = &cpu->env;
+@@ -137,7 +137,7 @@ bool rx_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+         accept = 1;
+     }
+     if (accept) {
+-        rx_cpu_do_interrupt(cs);
++        rx_cpu_do_interrupt_locked(cs);
+         return true;
+     }
+     return false;
+diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
+index 4d0d323cf9..eb23d64f36 100644
+--- a/target/s390x/cpu.c
++++ b/target/s390x/cpu.c
+@@ -493,7 +493,7 @@ static void s390_cpu_class_init(ObjectClass *oc, void *data)
+     cc->class_by_name = s390_cpu_class_by_name,
+     cc->has_work_with_iothread_lock = s390_cpu_has_work;
+ #ifdef CONFIG_TCG
+-    cc->do_interrupt = s390_cpu_do_interrupt;
++    cc->do_interrupt = s390_cpu_do_interrupt_locked;
+ #endif
+     cc->dump_state = s390_cpu_dump_state;
+     cc->set_pc = s390_cpu_set_pc;
+diff --git a/target/s390x/excp_helper.c b/target/s390x/excp_helper.c
+index dde7afc2f0..a663127f17 100644
+--- a/target/s390x/excp_helper.c
++++ b/target/s390x/excp_helper.c
+@@ -85,7 +85,7 @@ void HELPER(data_exception)(CPUS390XState *env, uint32_t dxc)
+ 
+ #if defined(CONFIG_USER_ONLY)
+ 
+-void s390_cpu_do_interrupt(CPUState *cs)
++void s390_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     cs->exception_index = -1;
+ }
+@@ -464,7 +464,7 @@ static void do_mchk_interrupt(CPUS390XState *env)
+     load_psw(env, mask, addr);
+ }
+ 
+-void s390_cpu_do_interrupt(CPUState *cs)
++void s390_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     QEMUS390FLICState *flic = QEMU_S390_FLIC(s390_get_flic());
+     S390CPU *cpu = S390_CPU(cs);
+@@ -555,7 +555,7 @@ bool s390_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+             return false;
+         }
+         if (s390_cpu_has_int(cpu)) {
+-            s390_cpu_do_interrupt(cs);
++            s390_cpu_do_interrupt_locked(cs);
+             return true;
+         }
+         if (env->psw.mask & PSW_MASK_WAIT) {
+diff --git a/target/s390x/internal.h b/target/s390x/internal.h
+index b1e0ebf67f..6ab0fb481a 100644
+--- a/target/s390x/internal.h
++++ b/target/s390x/internal.h
+@@ -268,7 +268,7 @@ ObjectClass *s390_cpu_class_by_name(const char *name);
+ 
+ /* excp_helper.c */
+ void s390x_cpu_debug_excp_handler(CPUState *cs);
+-void s390_cpu_do_interrupt(CPUState *cpu);
++void s390_cpu_do_interrupt_locked(CPUState *cpu);
+ bool s390_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ bool s390_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                        MMUAccessType access_type, int mmu_idx,
+diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
+index 18f3448183..5e5921a220 100644
+--- a/target/sh4/cpu.c
++++ b/target/sh4/cpu.c
+@@ -218,7 +218,7 @@ static void superh_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = superh_cpu_class_by_name;
+     cc->has_work = superh_cpu_has_work;
+-    cc->do_interrupt = superh_cpu_do_interrupt;
++    cc->do_interrupt = superh_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = superh_cpu_exec_interrupt;
+     cc->dump_state = superh_cpu_dump_state;
+     cc->set_pc = superh_cpu_set_pc;
+diff --git a/target/sh4/cpu.h b/target/sh4/cpu.h
+index dbe58c7888..2ae3dd132b 100644
+--- a/target/sh4/cpu.h
++++ b/target/sh4/cpu.h
+@@ -204,7 +204,7 @@ struct SuperHCPU {
+ };
+ 
+ 
+-void superh_cpu_do_interrupt(CPUState *cpu);
++void superh_cpu_do_interrupt_locked(CPUState *cpu);
+ bool superh_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void superh_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ hwaddr superh_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+diff --git a/target/sh4/helper.c b/target/sh4/helper.c
+index 1e32365c75..2d61f65d50 100644
+--- a/target/sh4/helper.c
++++ b/target/sh4/helper.c
+@@ -45,7 +45,7 @@
+ 
+ #if defined(CONFIG_USER_ONLY)
+ 
+-void superh_cpu_do_interrupt(CPUState *cs)
++void superh_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     cs->exception_index = -1;
+ }
+@@ -58,7 +58,7 @@ int cpu_sh4_is_cached(CPUSH4State *env, target_ulong addr)
+ 
+ #else /* !CONFIG_USER_ONLY */
+ 
+-void superh_cpu_do_interrupt(CPUState *cs)
++void superh_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     SuperHCPU *cpu = SUPERH_CPU(cs);
+     CPUSH4State *env = &cpu->env;
+@@ -792,7 +792,7 @@ bool superh_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+         if (env->flags & DELAY_SLOT_MASK) {
+             return false;
+         } else {
+-            superh_cpu_do_interrupt(cs);
++            superh_cpu_do_interrupt_locked(cs);
+             return true;
+         }
+     }
+diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
+index 20c7c0c434..4c8842adcf 100644
+--- a/target/sparc/cpu.c
++++ b/target/sparc/cpu.c
+@@ -89,7 +89,7 @@ static bool sparc_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ 
+             if (type != TT_EXTINT || cpu_pil_allowed(env, pil)) {
+                 cs->exception_index = env->interrupt_index;
+-                sparc_cpu_do_interrupt(cs);
++                sparc_cpu_do_interrupt_locked(cs);
+                 return true;
+             }
+         }
+@@ -863,7 +863,7 @@ static void sparc_cpu_class_init(ObjectClass *oc, void *data)
+     cc->class_by_name = sparc_cpu_class_by_name;
+     cc->parse_features = sparc_cpu_parse_features;
+     cc->has_work_with_iothread_lock = sparc_cpu_has_work;
+-    cc->do_interrupt = sparc_cpu_do_interrupt;
++    cc->do_interrupt = sparc_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = sparc_cpu_exec_interrupt;
+     cc->dump_state = sparc_cpu_dump_state;
+ #if !defined(TARGET_SPARC64) && !defined(CONFIG_USER_ONLY)
+diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
+index b9369398f2..3563e65d73 100644
+--- a/target/sparc/cpu.h
++++ b/target/sparc/cpu.h
+@@ -568,7 +568,7 @@ struct SPARCCPU {
+ extern const VMStateDescription vmstate_sparc_cpu;
+ #endif
+ 
+-void sparc_cpu_do_interrupt(CPUState *cpu);
++void sparc_cpu_do_interrupt_locked(CPUState *cpu);
+ void sparc_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ hwaddr sparc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ int sparc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+diff --git a/target/sparc/int32_helper.c b/target/sparc/int32_helper.c
+index 9a71e1abd8..90f4aa4a78 100644
+--- a/target/sparc/int32_helper.c
++++ b/target/sparc/int32_helper.c
+@@ -65,7 +65,7 @@ static const char *excp_name_str(int32_t exception_index)
+     return excp_names[exception_index];
+ }
+ 
+-void sparc_cpu_do_interrupt(CPUState *cs)
++void sparc_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     SPARCCPU *cpu = SPARC_CPU(cs);
+     CPUSPARCState *env = &cpu->env;
+diff --git a/target/sparc/int64_helper.c b/target/sparc/int64_helper.c
+index f3e7f32de6..b81b4abaa8 100644
+--- a/target/sparc/int64_helper.c
++++ b/target/sparc/int64_helper.c
+@@ -62,7 +62,7 @@ static const char * const excp_names[0x80] = {
+ };
+ #endif
+ 
+-void sparc_cpu_do_interrupt(CPUState *cs)
++void sparc_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     SPARCCPU *cpu = SPARC_CPU(cs);
+     CPUSPARCState *env = &cpu->env;
+diff --git a/target/tilegx/cpu.c b/target/tilegx/cpu.c
+index 1fee87c094..a2ff335977 100644
+--- a/target/tilegx/cpu.c
++++ b/target/tilegx/cpu.c
+@@ -105,7 +105,7 @@ static void tilegx_cpu_initfn(Object *obj)
+     cpu_set_cpustate_pointers(cpu);
+ }
+ 
+-static void tilegx_cpu_do_interrupt(CPUState *cs)
++static void tilegx_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     cs->exception_index = -1;
+ }
+@@ -128,7 +128,7 @@ static bool tilegx_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+ static bool tilegx_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ {
+     if (interrupt_request & CPU_INTERRUPT_HARD) {
+-        tilegx_cpu_do_interrupt(cs);
++        tilegx_cpu_do_interrupt_locked(cs);
+         return true;
+     }
+     return false;
+@@ -147,7 +147,7 @@ static void tilegx_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = tilegx_cpu_class_by_name;
+     cc->has_work = tilegx_cpu_has_work;
+-    cc->do_interrupt = tilegx_cpu_do_interrupt;
++    cc->do_interrupt = tilegx_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = tilegx_cpu_exec_interrupt;
+     cc->dump_state = tilegx_cpu_dump_state;
+     cc->set_pc = tilegx_cpu_set_pc;
+diff --git a/target/unicore32/cpu.c b/target/unicore32/cpu.c
+index 06bf4b4b63..a96077d666 100644
+--- a/target/unicore32/cpu.c
++++ b/target/unicore32/cpu.c
+@@ -131,7 +131,7 @@ static void uc32_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = uc32_cpu_class_by_name;
+     cc->has_work = uc32_cpu_has_work;
+-    cc->do_interrupt = uc32_cpu_do_interrupt;
++    cc->do_interrupt = uc32_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = uc32_cpu_exec_interrupt;
+     cc->dump_state = uc32_cpu_dump_state;
+     cc->set_pc = uc32_cpu_set_pc;
+diff --git a/target/unicore32/cpu.h b/target/unicore32/cpu.h
+index 7a32e086ed..d948392ff3 100644
+--- a/target/unicore32/cpu.h
++++ b/target/unicore32/cpu.h
+@@ -75,7 +75,7 @@ struct UniCore32CPU {
+ };
+ 
+ 
+-void uc32_cpu_do_interrupt(CPUState *cpu);
++void uc32_cpu_do_interrupt_locked(CPUState *cpu);
+ bool uc32_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void uc32_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ hwaddr uc32_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+diff --git a/target/unicore32/helper.c b/target/unicore32/helper.c
+index 54c26871fe..f024b83bc8 100644
+--- a/target/unicore32/helper.c
++++ b/target/unicore32/helper.c
+@@ -175,7 +175,7 @@ bool uc32_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ 
+         if (!(env->uncached_asr & ASR_I)) {
+             cs->exception_index = UC32_EXCP_INTR;
+-            uc32_cpu_do_interrupt(cs);
++            uc32_cpu_do_interrupt_locked(cs);
+             return true;
+         }
+     }
+diff --git a/target/unicore32/softmmu.c b/target/unicore32/softmmu.c
+index 9660bd2a27..a12526a8ca 100644
+--- a/target/unicore32/softmmu.c
++++ b/target/unicore32/softmmu.c
+@@ -75,7 +75,7 @@ void switch_mode(CPUUniCore32State *env, int mode)
+ }
+ 
+ /* Handle a CPU exception.  */
+-void uc32_cpu_do_interrupt(CPUState *cs)
++void uc32_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     UniCore32CPU *cpu = UNICORE32_CPU(cs);
+     CPUUniCore32State *env = &cpu->env;
+diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
+index 0f96483563..7962bc66a8 100644
+--- a/target/xtensa/cpu.c
++++ b/target/xtensa/cpu.c
+@@ -190,7 +190,7 @@ static void xtensa_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = xtensa_cpu_class_by_name;
+     cc->has_work_with_iothread_lock = xtensa_cpu_has_work;
+-    cc->do_interrupt = xtensa_cpu_do_interrupt;
++    cc->do_interrupt = xtensa_cpu_do_interrupt_locked;
+     cc->cpu_exec_interrupt = xtensa_cpu_exec_interrupt;
+     cc->dump_state = xtensa_cpu_dump_state;
+     cc->set_pc = xtensa_cpu_set_pc;
+diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
+index 32749378bf..c02f531b64 100644
+--- a/target/xtensa/cpu.h
++++ b/target/xtensa/cpu.h
+@@ -563,7 +563,7 @@ struct XtensaCPU {
+ bool xtensa_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                          MMUAccessType access_type, int mmu_idx,
+                          bool probe, uintptr_t retaddr);
+-void xtensa_cpu_do_interrupt(CPUState *cpu);
++void xtensa_cpu_do_interrupt_locked(CPUState *cpu);
+ bool xtensa_cpu_exec_interrupt(CPUState *cpu, int interrupt_request);
+ void xtensa_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
+                                       unsigned size, MMUAccessType access_type,
+diff --git a/target/xtensa/exc_helper.c b/target/xtensa/exc_helper.c
+index 01d1e56feb..10d4762f36 100644
+--- a/target/xtensa/exc_helper.c
++++ b/target/xtensa/exc_helper.c
+@@ -195,7 +195,7 @@ static void handle_interrupt(CPUXtensaState *env)
+ }
+ 
+ /* Called from cpu_handle_interrupt with BQL held */
+-void xtensa_cpu_do_interrupt(CPUState *cs)
++void xtensa_cpu_do_interrupt_locked(CPUState *cs)
+ {
+     XtensaCPU *cpu = XTENSA_CPU(cs);
+     CPUXtensaState *env = &cpu->env;
+@@ -254,7 +254,7 @@ void xtensa_cpu_do_interrupt(CPUState *cs)
+     check_interrupts(env);
+ }
+ #else
+-void xtensa_cpu_do_interrupt(CPUState *cs)
++void xtensa_cpu_do_interrupt_locked(CPUState *cs)
+ {
+ }
+ #endif
+@@ -263,7 +263,7 @@ bool xtensa_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ {
+     if (interrupt_request & CPU_INTERRUPT_HARD) {
+         cs->exception_index = EXC_IRQ;
+-        xtensa_cpu_do_interrupt(cs);
++        xtensa_cpu_do_interrupt_locked(cs);
+         return true;
+     }
+     return false;
+-- 
+2.17.1
+
 
