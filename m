@@ -1,73 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k8YCX-0005HS-P0
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Aug 2020 20:13:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49086)
+	id 1k8f2H-0007CC-Ry
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Aug 2020 03:30:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36162)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1k8YCU-00058E-8B
- for qemu-riscv@nongnu.org; Wed, 19 Aug 2020 20:13:02 -0400
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:45465
- helo=us-smtp-delivery-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1k8YCP-0002I2-KM
- for qemu-riscv@nongnu.org; Wed, 19 Aug 2020 20:13:01 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1597882376;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=biFYq4yuQQylQiggtPshbcTn+lEXl9Qdj8GtTyi4jo4=;
- b=MUWAWiEa6JsJYwA6vvD5EFB8ZYW5xB7SNJx3Kt6uFwVJP0mZDxz0vyguiCHfGK0gRuDh7I
- povUeZb6695X9hs9hXN1TyIAWbFYewg+aNjWEAw9oXAaO0oMMEOQvZBRb2H6SLneXbsY/i
- mgdB0TIfHKds8mCusnQzhwbTXSGSRmo=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-349-Lx7RIasDOXG4qFz7F96Riw-1; Wed, 19 Aug 2020 20:12:55 -0400
-X-MC-Unique: Lx7RIasDOXG4qFz7F96Riw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EFF40801AE7;
- Thu, 20 Aug 2020 00:12:53 +0000 (UTC)
-Received: from localhost (ovpn-117-244.rdu2.redhat.com [10.10.117.244])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7E92810013C4;
- Thu, 20 Aug 2020 00:12:53 +0000 (UTC)
-From: Eduardo Habkost <ehabkost@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- "Daniel P. Berrange" <berrange@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org
-Subject: [PATCH v2 08/58] sifive_e: Rename memmap enum constants
-Date: Wed, 19 Aug 2020 20:11:46 -0400
-Message-Id: <20200820001236.1284548-9-ehabkost@redhat.com>
-In-Reply-To: <20200820001236.1284548-1-ehabkost@redhat.com>
-References: <20200820001236.1284548-1-ehabkost@redhat.com>
-MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
-X-Mimecast-Spam-Score: 0.001
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=207.211.31.81; envelope-from=ehabkost@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/19 20:12:44
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -40
-X-Spam_score: -4.1
-X-Spam_bar: ----
-X-Spam_report: (-4.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1k8f2G-0007BM-19
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2020 03:30:56 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:35698)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1k8f2C-0005mQ-W8
+ for qemu-riscv@nongnu.org; Thu, 20 Aug 2020 03:30:55 -0400
+Received: by mail-pl1-x634.google.com with SMTP id r4so648133pls.2
+ for <qemu-riscv@nongnu.org>; Thu, 20 Aug 2020 00:30:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=1NmJoi+qqIfXrOoepDAaLjrD1ikERAOmDGxOO08bd3M=;
+ b=M8z7+eJlvLjJMp0gzUEIdEQ4IIfW1t3Io/eiy/O/EKtGnyRW6A8q1doEOwrurMMKvM
+ f5gNlxB9c49TLGP8UU5nY6quyKHklVzHjiX1mOIe8fnV8FPEdwQhc5xul2DbpykYfKIs
+ rf1Ex+n6Yh0FMPsvmPir8BXeRaCyyMNJi7J7lbWs4gw/BayhXiieMxOEdGLRUXo5Iya6
+ 1VdIojm0epG/xMG6oPaelJWg5Ij4P3dR9OCRSFoEMJcwZgh/+eT2jUgAkrJDyXmKSoeZ
+ 6eExwo2sBMv2EVMp85IwN/3x/mmgcRz+DyjrjSXTzItCO5QPcvX4Bs85CmCl4dixsp3V
+ JxOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=1NmJoi+qqIfXrOoepDAaLjrD1ikERAOmDGxOO08bd3M=;
+ b=ZOvwOIN5q6PGzSA/CT0PuDONz2eTbXTubvvJah5Xd4gQOTP1N716HrS3JKQ8EYa7Np
+ M7saXMddKubwwt9GR+LwPnGZ8bGg+czhdJWN6DEq+eRD/qLxXE3rh6LchxMMsbnGUDSg
+ pZxrA9XDxg9qpNIWNneZ97NU85oOpX41OyAFDX6poWGTroMxvehLGbZVD1z+X0JrQnz1
+ VdBEauSJEqYM0DGqKf0S1fLZqZytE8nI28kq/+m47bSkDIOOjQFB0QAgO935vEOwwSNm
+ DPxmC7rvvYe1RTmdZdZD+WTfkdAKTIM6kCsn+ml27/WwQ0/if4z14GIsXH9LZsgiucYs
+ gwCg==
+X-Gm-Message-State: AOAM532r/Z5Q8/+1QAhlCx9XRLT1ZBX1TJZNl5p1OGaRQi7eqs4u5IEL
+ T0B+VAKT7+XpwVt9RQN7kwclZA==
+X-Google-Smtp-Source: ABdhPJxSFeruhMBW8AnG5GgXLPa/OAyvOP2RSHJrco/16rYUCBeLEXHn1waQfFHNebnJWjLyAUQCsA==
+X-Received: by 2002:a17:902:a50e:: with SMTP id
+ s14mr1581080plq.164.1597908648122; 
+ Thu, 20 Aug 2020 00:30:48 -0700 (PDT)
+Received: from gamma11.internal.sifive.com ([64.62.193.194])
+ by smtp.gmail.com with ESMTPSA id 205sm1721766pfy.9.2020.08.20.00.30.47
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 20 Aug 2020 00:30:47 -0700 (PDT)
+From: Chih-Min Chao <chihmin.chao@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Chih-Min Chao <chihmin.chao@sifive.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: [PATCH v2] softfloat: add alternative sNaN propagation for fmax/fmin
+Date: Thu, 20 Aug 2020 00:30:40 -0700
+Message-Id: <1597908641-6293-1-git-send-email-chihmin.chao@sifive.com>
+X-Mailer: git-send-email 2.7.4
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=chihmin.chao@sifive.com; helo=mail-pl1-x634.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,235 +76,185 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2020 00:13:02 -0000
+X-List-Received-Date: Thu, 20 Aug 2020 07:30:56 -0000
 
-Some of the enum constant names conflict with a QOM type check
-macro (SIFIVE_E_PRCI).  This needs to be addressed to allow us to
-transform the QOM type check macros into functions generated by
-OBJECT_DECLARE_TYPE().
+For "fmax/fmin ft0, ft1, ft2" and if one of the inputs is sNaN,
+  The original logic
+    return NaN and set invalid flag if ft1 == sNaN || ft2 == sNan
 
-Rename all the constants to SIFIVE_E_DEV_*, to avoid conflicts.
+  The alternative path
+    set invalid flag and return the non-NaN value if ft1 == sNaN || ft2 == sNaN
+    return NaN if ft1 == sNaN && ft2 == sNaN
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
+   The ieee754 spec allows both implementation and some architecture such
+   as riscv choose differenct defintion in two spec versions.
+   (riscv-spec-v2.2 use original version, riscv-spec-20191213 changes to
+    alternative)
+
+Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
 ---
-Changes v1 -> v2:
-* Added more details to commit message
+ fpu/softfloat.c         | 75 +++++++++++++++++++++++++++++++------------------
+ include/fpu/softfloat.h |  6 ++++
+ 2 files changed, 54 insertions(+), 27 deletions(-)
 
----
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org
----
- include/hw/riscv/sifive_e.h | 38 ++++++++---------
- hw/riscv/sifive_e.c         | 82 ++++++++++++++++++-------------------
- 2 files changed, 60 insertions(+), 60 deletions(-)
-
-diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-index 637414130b..7c2eb70189 100644
---- a/include/hw/riscv/sifive_e.h
-+++ b/include/hw/riscv/sifive_e.h
-@@ -53,25 +53,25 @@ typedef struct SiFiveEState {
-     OBJECT_CHECK(SiFiveEState, (obj), TYPE_RISCV_E_MACHINE)
- 
- enum {
--    SIFIVE_E_DEBUG,
--    SIFIVE_E_MROM,
--    SIFIVE_E_OTP,
--    SIFIVE_E_CLINT,
--    SIFIVE_E_PLIC,
--    SIFIVE_E_AON,
--    SIFIVE_E_PRCI,
--    SIFIVE_E_OTP_CTRL,
--    SIFIVE_E_GPIO0,
--    SIFIVE_E_UART0,
--    SIFIVE_E_QSPI0,
--    SIFIVE_E_PWM0,
--    SIFIVE_E_UART1,
--    SIFIVE_E_QSPI1,
--    SIFIVE_E_PWM1,
--    SIFIVE_E_QSPI2,
--    SIFIVE_E_PWM2,
--    SIFIVE_E_XIP,
--    SIFIVE_E_DTIM
-+    SIFIVE_E_DEV_DEBUG,
-+    SIFIVE_E_DEV_MROM,
-+    SIFIVE_E_DEV_OTP,
-+    SIFIVE_E_DEV_CLINT,
-+    SIFIVE_E_DEV_PLIC,
-+    SIFIVE_E_DEV_AON,
-+    SIFIVE_E_DEV_PRCI,
-+    SIFIVE_E_DEV_OTP_CTRL,
-+    SIFIVE_E_DEV_GPIO0,
-+    SIFIVE_E_DEV_UART0,
-+    SIFIVE_E_DEV_QSPI0,
-+    SIFIVE_E_DEV_PWM0,
-+    SIFIVE_E_DEV_UART1,
-+    SIFIVE_E_DEV_QSPI1,
-+    SIFIVE_E_DEV_PWM1,
-+    SIFIVE_E_DEV_QSPI2,
-+    SIFIVE_E_DEV_PWM2,
-+    SIFIVE_E_DEV_XIP,
-+    SIFIVE_E_DEV_DTIM
- };
- 
- enum {
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index c8b060486a..88b4524117 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -54,25 +54,25 @@ static const struct MemmapEntry {
-     hwaddr base;
-     hwaddr size;
- } sifive_e_memmap[] = {
--    [SIFIVE_E_DEBUG] =    {        0x0,     0x1000 },
--    [SIFIVE_E_MROM] =     {     0x1000,     0x2000 },
--    [SIFIVE_E_OTP] =      {    0x20000,     0x2000 },
--    [SIFIVE_E_CLINT] =    {  0x2000000,    0x10000 },
--    [SIFIVE_E_PLIC] =     {  0xc000000,  0x4000000 },
--    [SIFIVE_E_AON] =      { 0x10000000,     0x8000 },
--    [SIFIVE_E_PRCI] =     { 0x10008000,     0x8000 },
--    [SIFIVE_E_OTP_CTRL] = { 0x10010000,     0x1000 },
--    [SIFIVE_E_GPIO0] =    { 0x10012000,     0x1000 },
--    [SIFIVE_E_UART0] =    { 0x10013000,     0x1000 },
--    [SIFIVE_E_QSPI0] =    { 0x10014000,     0x1000 },
--    [SIFIVE_E_PWM0] =     { 0x10015000,     0x1000 },
--    [SIFIVE_E_UART1] =    { 0x10023000,     0x1000 },
--    [SIFIVE_E_QSPI1] =    { 0x10024000,     0x1000 },
--    [SIFIVE_E_PWM1] =     { 0x10025000,     0x1000 },
--    [SIFIVE_E_QSPI2] =    { 0x10034000,     0x1000 },
--    [SIFIVE_E_PWM2] =     { 0x10035000,     0x1000 },
--    [SIFIVE_E_XIP] =      { 0x20000000, 0x20000000 },
--    [SIFIVE_E_DTIM] =     { 0x80000000,     0x4000 }
-+    [SIFIVE_E_DEV_DEBUG] =    {        0x0,     0x1000 },
-+    [SIFIVE_E_DEV_MROM] =     {     0x1000,     0x2000 },
-+    [SIFIVE_E_DEV_OTP] =      {    0x20000,     0x2000 },
-+    [SIFIVE_E_DEV_CLINT] =    {  0x2000000,    0x10000 },
-+    [SIFIVE_E_DEV_PLIC] =     {  0xc000000,  0x4000000 },
-+    [SIFIVE_E_DEV_AON] =      { 0x10000000,     0x8000 },
-+    [SIFIVE_E_DEV_PRCI] =     { 0x10008000,     0x8000 },
-+    [SIFIVE_E_DEV_OTP_CTRL] = { 0x10010000,     0x1000 },
-+    [SIFIVE_E_DEV_GPIO0] =    { 0x10012000,     0x1000 },
-+    [SIFIVE_E_DEV_UART0] =    { 0x10013000,     0x1000 },
-+    [SIFIVE_E_DEV_QSPI0] =    { 0x10014000,     0x1000 },
-+    [SIFIVE_E_DEV_PWM0] =     { 0x10015000,     0x1000 },
-+    [SIFIVE_E_DEV_UART1] =    { 0x10023000,     0x1000 },
-+    [SIFIVE_E_DEV_QSPI1] =    { 0x10024000,     0x1000 },
-+    [SIFIVE_E_DEV_PWM1] =     { 0x10025000,     0x1000 },
-+    [SIFIVE_E_DEV_QSPI2] =    { 0x10034000,     0x1000 },
-+    [SIFIVE_E_DEV_PWM2] =     { 0x10035000,     0x1000 },
-+    [SIFIVE_E_DEV_XIP] =      { 0x20000000, 0x20000000 },
-+    [SIFIVE_E_DEV_DTIM] =     { 0x80000000,     0x4000 }
- };
- 
- static void sifive_e_machine_init(MachineState *machine)
-@@ -90,9 +90,9 @@ static void sifive_e_machine_init(MachineState *machine)
- 
-     /* Data Tightly Integrated Memory */
-     memory_region_init_ram(main_mem, NULL, "riscv.sifive.e.ram",
--        memmap[SIFIVE_E_DTIM].size, &error_fatal);
-+        memmap[SIFIVE_E_DEV_DTIM].size, &error_fatal);
-     memory_region_add_subregion(sys_mem,
--        memmap[SIFIVE_E_DTIM].base, main_mem);
-+        memmap[SIFIVE_E_DEV_DTIM].base, main_mem);
- 
-     /* Mask ROM reset vector */
-     uint32_t reset_vec[4];
-@@ -111,7 +111,7 @@ static void sifive_e_machine_init(MachineState *machine)
-         reset_vec[i] = cpu_to_le32(reset_vec[i]);
-     }
-     rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
--                          memmap[SIFIVE_E_MROM].base, &address_space_memory);
-+                          memmap[SIFIVE_E_DEV_MROM].base, &address_space_memory);
- 
-     if (machine->kernel_filename) {
-         riscv_load_kernel(machine->kernel_filename, NULL);
-@@ -194,12 +194,12 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
- 
-     /* Mask ROM */
-     memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom",
--                           memmap[SIFIVE_E_MROM].size, &error_fatal);
-+                           memmap[SIFIVE_E_DEV_MROM].size, &error_fatal);
-     memory_region_add_subregion(sys_mem,
--        memmap[SIFIVE_E_MROM].base, &s->mask_rom);
-+        memmap[SIFIVE_E_DEV_MROM].base, &s->mask_rom);
- 
-     /* MMIO */
--    s->plic = sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
-+    s->plic = sifive_plic_create(memmap[SIFIVE_E_DEV_PLIC].base,
-         (char *)SIFIVE_E_PLIC_HART_CONFIG,
-         SIFIVE_E_PLIC_NUM_SOURCES,
-         SIFIVE_E_PLIC_NUM_PRIORITIES,
-@@ -209,13 +209,13 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
-         SIFIVE_E_PLIC_ENABLE_STRIDE,
-         SIFIVE_E_PLIC_CONTEXT_BASE,
-         SIFIVE_E_PLIC_CONTEXT_STRIDE,
--        memmap[SIFIVE_E_PLIC].size);
--    sifive_clint_create(memmap[SIFIVE_E_CLINT].base,
--        memmap[SIFIVE_E_CLINT].size, ms->smp.cpus,
-+        memmap[SIFIVE_E_DEV_PLIC].size);
-+    sifive_clint_create(memmap[SIFIVE_E_DEV_CLINT].base,
-+        memmap[SIFIVE_E_DEV_CLINT].size, ms->smp.cpus,
-         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE, false);
-     create_unimplemented_device("riscv.sifive.e.aon",
--        memmap[SIFIVE_E_AON].base, memmap[SIFIVE_E_AON].size);
--    sifive_e_prci_create(memmap[SIFIVE_E_PRCI].base);
-+        memmap[SIFIVE_E_DEV_AON].base, memmap[SIFIVE_E_DEV_AON].size);
-+    sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
- 
-     /* GPIO */
- 
-@@ -224,7 +224,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
-     }
- 
-     /* Map GPIO registers */
--    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio), 0, memmap[SIFIVE_E_GPIO0].base);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio), 0, memmap[SIFIVE_E_DEV_GPIO0].base);
- 
-     /* Pass all GPIOs to the SOC layer so they are available to the board */
-     qdev_pass_gpios(DEVICE(&s->gpio), dev, NULL);
-@@ -236,27 +236,27 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
-                                             SIFIVE_E_GPIO0_IRQ0 + i));
-     }
- 
--    sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART0].base,
-+    sifive_uart_create(sys_mem, memmap[SIFIVE_E_DEV_UART0].base,
-         serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART0_IRQ));
-     create_unimplemented_device("riscv.sifive.e.qspi0",
--        memmap[SIFIVE_E_QSPI0].base, memmap[SIFIVE_E_QSPI0].size);
-+        memmap[SIFIVE_E_DEV_QSPI0].base, memmap[SIFIVE_E_DEV_QSPI0].size);
-     create_unimplemented_device("riscv.sifive.e.pwm0",
--        memmap[SIFIVE_E_PWM0].base, memmap[SIFIVE_E_PWM0].size);
--    sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART1].base,
-+        memmap[SIFIVE_E_DEV_PWM0].base, memmap[SIFIVE_E_DEV_PWM0].size);
-+    sifive_uart_create(sys_mem, memmap[SIFIVE_E_DEV_UART1].base,
-         serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART1_IRQ));
-     create_unimplemented_device("riscv.sifive.e.qspi1",
--        memmap[SIFIVE_E_QSPI1].base, memmap[SIFIVE_E_QSPI1].size);
-+        memmap[SIFIVE_E_DEV_QSPI1].base, memmap[SIFIVE_E_DEV_QSPI1].size);
-     create_unimplemented_device("riscv.sifive.e.pwm1",
--        memmap[SIFIVE_E_PWM1].base, memmap[SIFIVE_E_PWM1].size);
-+        memmap[SIFIVE_E_DEV_PWM1].base, memmap[SIFIVE_E_DEV_PWM1].size);
-     create_unimplemented_device("riscv.sifive.e.qspi2",
--        memmap[SIFIVE_E_QSPI2].base, memmap[SIFIVE_E_QSPI2].size);
-+        memmap[SIFIVE_E_DEV_QSPI2].base, memmap[SIFIVE_E_DEV_QSPI2].size);
-     create_unimplemented_device("riscv.sifive.e.pwm2",
--        memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
-+        memmap[SIFIVE_E_DEV_PWM2].base, memmap[SIFIVE_E_DEV_PWM2].size);
- 
-     /* Flash memory */
-     memory_region_init_rom(&s->xip_mem, OBJECT(dev), "riscv.sifive.e.xip",
--                           memmap[SIFIVE_E_XIP].size, &error_fatal);
--    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
-+                           memmap[SIFIVE_E_DEV_XIP].size, &error_fatal);
-+    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_DEV_XIP].base,
-         &s->xip_mem);
+diff --git a/fpu/softfloat.c b/fpu/softfloat.c
+index 79be4f5..4466ece 100644
+--- a/fpu/softfloat.c
++++ b/fpu/softfloat.c
+@@ -870,11 +870,16 @@ static FloatParts return_nan(FloatParts a, float_status *s)
+     return a;
  }
  
+-static FloatParts pick_nan(FloatParts a, FloatParts b, float_status *s)
++static void set_snan_flag(FloatParts a, FloatParts b, float_status *s)
+ {
+     if (is_snan(a.cls) || is_snan(b.cls)) {
+         s->float_exception_flags |= float_flag_invalid;
+     }
++}
++
++static FloatParts pick_nan(FloatParts a, FloatParts b, float_status *s)
++{
++    set_snan_flag(a, b, s);
+ 
+     if (s->default_nan_mode) {
+         return parts_default_nan(s);
+@@ -2743,23 +2748,32 @@ float64 uint16_to_float64(uint16_t a, float_status *status)
+  * and minNumMag() from the IEEE-754 2008.
+  */
+ static FloatParts minmax_floats(FloatParts a, FloatParts b, bool ismin,
+-                                bool ieee, bool ismag, float_status *s)
++                                bool ieee, bool ismag, bool issnan_prop,
++                                float_status *s)
+ {
+     if (unlikely(is_nan(a.cls) || is_nan(b.cls))) {
+         if (ieee) {
+             /* Takes two floating-point values `a' and `b', one of
+              * which is a NaN, and returns the appropriate NaN
+              * result. If either `a' or `b' is a signaling NaN,
+-             * the invalid exception is raised.
++             * the invalid exception is raised but the NaN
++             * propagation is 'shall'.
+              */
+             if (is_snan(a.cls) || is_snan(b.cls)) {
+-                return pick_nan(a, b, s);
+-            } else if (is_nan(a.cls) && !is_nan(b.cls)) {
++                if (issnan_prop) {
++                    return pick_nan(a, b, s);
++                } else {
++                    set_snan_flag(a, b, s);
++                }
++            }
++
++            if (is_nan(a.cls) && !is_nan(b.cls)) {
+                 return b;
+             } else if (is_nan(b.cls) && !is_nan(a.cls)) {
+                 return a;
+             }
+         }
++
+         return pick_nan(a, b, s);
+     } else {
+         int a_exp, b_exp;
+@@ -2813,37 +2827,44 @@ static FloatParts minmax_floats(FloatParts a, FloatParts b, bool ismin,
+     }
+ }
+ 
+-#define MINMAX(sz, name, ismin, isiee, ismag)                           \
++#define MINMAX(sz, name, ismin, isiee, ismag, issnan_prop)              \
+ float ## sz float ## sz ## _ ## name(float ## sz a, float ## sz b,      \
+                                      float_status *s)                   \
+ {                                                                       \
+     FloatParts pa = float ## sz ## _unpack_canonical(a, s);             \
+     FloatParts pb = float ## sz ## _unpack_canonical(b, s);             \
+-    FloatParts pr = minmax_floats(pa, pb, ismin, isiee, ismag, s);      \
++    FloatParts pr = minmax_floats(pa, pb, ismin, isiee, ismag,          \
++                                  issnan_prop, s);                      \
+                                                                         \
+     return float ## sz ## _round_pack_canonical(pr, s);                 \
+ }
+ 
+-MINMAX(16, min, true, false, false)
+-MINMAX(16, minnum, true, true, false)
+-MINMAX(16, minnummag, true, true, true)
+-MINMAX(16, max, false, false, false)
+-MINMAX(16, maxnum, false, true, false)
+-MINMAX(16, maxnummag, false, true, true)
+-
+-MINMAX(32, min, true, false, false)
+-MINMAX(32, minnum, true, true, false)
+-MINMAX(32, minnummag, true, true, true)
+-MINMAX(32, max, false, false, false)
+-MINMAX(32, maxnum, false, true, false)
+-MINMAX(32, maxnummag, false, true, true)
+-
+-MINMAX(64, min, true, false, false)
+-MINMAX(64, minnum, true, true, false)
+-MINMAX(64, minnummag, true, true, true)
+-MINMAX(64, max, false, false, false)
+-MINMAX(64, maxnum, false, true, false)
+-MINMAX(64, maxnummag, false, true, true)
++MINMAX(16, min, true, false, false, true)
++MINMAX(16, minnum, true, true, false, true)
++MINMAX(16, minnum_noprop, true, true, false, false)
++MINMAX(16, minnummag, true, true, true, true)
++MINMAX(16, max, false, false, false, true)
++MINMAX(16, maxnum, false, true, false, true)
++MINMAX(16, maxnum_noprop, false, true, false, false)
++MINMAX(16, maxnummag, false, true, true, true)
++
++MINMAX(32, min, true, false, false, true)
++MINMAX(32, minnum, true, true, false, true)
++MINMAX(32, minnum_noprop, true, true, false, false)
++MINMAX(32, minnummag, true, true, true, true)
++MINMAX(32, max, false, false, false, true)
++MINMAX(32, maxnum, false, true, false, true)
++MINMAX(32, maxnum_noprop, false, true, false, false)
++MINMAX(32, maxnummag, false, true, true, true)
++
++MINMAX(64, min, true, false, false, true)
++MINMAX(64, minnum, true, true, false, true)
++MINMAX(64, minnum_noprop, true, true, false, false)
++MINMAX(64, minnummag, true, true, true, true)
++MINMAX(64, max, false, false, false, true)
++MINMAX(64, maxnum, false, true, false, true)
++MINMAX(64, maxnum_noprop, false, true, false, false)
++MINMAX(64, maxnummag, false, true, true, true)
+ 
+ #undef MINMAX
+ 
+diff --git a/include/fpu/softfloat.h b/include/fpu/softfloat.h
+index 659218b..0883510 100644
+--- a/include/fpu/softfloat.h
++++ b/include/fpu/softfloat.h
+@@ -231,6 +231,8 @@ float16 float16_minnum(float16, float16, float_status *status);
+ float16 float16_maxnum(float16, float16, float_status *status);
+ float16 float16_minnummag(float16, float16, float_status *status);
+ float16 float16_maxnummag(float16, float16, float_status *status);
++float16 float16_minnum_noprop(float16, float16, float_status *status);
++float16 float16_maxnum_noprop(float16, float16, float_status *status);
+ float16 float16_sqrt(float16, float_status *status);
+ FloatRelation float16_compare(float16, float16, float_status *status);
+ FloatRelation float16_compare_quiet(float16, float16, float_status *status);
+@@ -351,6 +353,8 @@ float32 float32_minnum(float32, float32, float_status *status);
+ float32 float32_maxnum(float32, float32, float_status *status);
+ float32 float32_minnummag(float32, float32, float_status *status);
+ float32 float32_maxnummag(float32, float32, float_status *status);
++float32 float32_minnum_noprop(float32, float32, float_status *status);
++float32 float32_maxnum_noprop(float32, float32, float_status *status);
+ bool float32_is_quiet_nan(float32, float_status *status);
+ bool float32_is_signaling_nan(float32, float_status *status);
+ float32 float32_silence_nan(float32, float_status *status);
+@@ -540,6 +544,8 @@ float64 float64_minnum(float64, float64, float_status *status);
+ float64 float64_maxnum(float64, float64, float_status *status);
+ float64 float64_minnummag(float64, float64, float_status *status);
+ float64 float64_maxnummag(float64, float64, float_status *status);
++float64 float64_minnum_noprop(float64, float64, float_status *status);
++float64 float64_maxnum_noprop(float64, float64, float_status *status);
+ bool float64_is_quiet_nan(float64 a, float_status *status);
+ bool float64_is_signaling_nan(float64, float_status *status);
+ float64 float64_silence_nan(float64, float_status *status);
 -- 
-2.26.2
+2.7.4
 
 
