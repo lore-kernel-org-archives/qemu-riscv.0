@@ -1,71 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1k9Brp-0006Qk-8F
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Aug 2020 14:34:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47996)
+	id 1k9CE0-0007Ql-PZ
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Aug 2020 14:57:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52578)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k9Brl-0006Pg-Fv; Fri, 21 Aug 2020 14:34:17 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:42645)
+ id 1k9CDt-0007QP-Vg; Fri, 21 Aug 2020 14:57:10 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:46969)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1k9Brh-0001Uo-Ki; Fri, 21 Aug 2020 14:34:16 -0400
-Received: by mail-il1-x144.google.com with SMTP id t13so2196371ile.9;
- Fri, 21 Aug 2020 11:34:13 -0700 (PDT)
+ id 1k9CDs-0004Ig-5o; Fri, 21 Aug 2020 14:57:09 -0400
+Received: by mail-io1-xd41.google.com with SMTP id 4so2712772ion.13;
+ Fri, 21 Aug 2020 11:57:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=xY2cZoHLVY9m/I7gbmOoXcPqllngxC+c5eWN9Pv7Abk=;
- b=mvhgjR3BOSpDT8MixyhqoKkZZY3CkDwkugN1xZxAXhJEi3xgyLcQUMsAL5iE3Gq6Mg
- u9iHwncb8eM0V8OPMrjjpUhTPsUFqQFXa5o5aZQFWnMCHNoRpFjUeVlojY453Ax7CbLj
- xysxT1S2jUZ6CacNAPYOK08k2eoy7LPV9IWEymdcWqBq9H1n3jLK6HYx+9Fbiz8nZyZC
- 7O6anB/dh5U4gQ8w53CFiziSA/LrRrqXz3QPy8MSxG0lkm9HQRhQzR3gng+FrNGPtRJp
- rmH8mD3Il/8v99hwNM8HqECAuRE1ql1kFSLRRUwfqjXoOxxm+xx7YasBPxdWDp3bf41i
- 2a4A==
+ :cc; bh=/7TCHOUJN5psz1qKuB5aTkaFDEXQBiISdiUA2hpBvVo=;
+ b=aKabJKGaH60pRdfMNqGWVl8YIOjQcwvvkQ2UWZdb++nVtNtE8iA6LP4hUquIlLtKWC
+ Jgu2+scpzmfHcwTSUfZg0ykleJEyRx5Gr09pFH8nmnkHX6AffALK3ie7Y6L9wp1KKiTF
+ ENRZmFUPbtoqdvpGAY7d+F54AZMvaOQikHEaQPjF0bv0RSptNf2Rcc7LiS72zLxqMvBA
+ d5BA0Np+fH0GKRwKAwCBGetcnLpu2X+IfwNcfFR5c5+NW4uVXoYx2Zg+ZTo+6CXz21Sj
+ eOzO53F40KbrgKCxHcq2LIlArqgVD7uazwb30sXY4AmPMlINLNVI9NJNp5BSqZ3duUWK
+ SrGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=xY2cZoHLVY9m/I7gbmOoXcPqllngxC+c5eWN9Pv7Abk=;
- b=n/yiM8kpheM/Qex+8rkvGDy73gGFS15eiKhOGQ5VlJgs+bnejvJL3ziA1U54rvTAsK
- rHcSapDsduCzFTkhOqb6+WCSUX51QPYLqjdF24dMHTrPVPi/UwBobwf14Ote8+OSt3Rx
- AggQIIwkvMmLayG18BlIoQpBdaMQHhm5GstQ9+4c1jGC6YzZUHBT/ehi65WZnBKUjBD9
- kpfNYtpbBxuQfUsfnB5amM285MH/jcfDJFMGmZu0QyuzgQ5Nk/EGfejOQyQGjT/TXOh0
- qovihSVmvhZOEkpWm9wcYaQYpFx/gkimUphuyHgIuEAKS0p7bno6/3XG9ZV8Wdw0cKoz
- UBgg==
-X-Gm-Message-State: AOAM532QHzh1Pc2Ou7X+4s31+66DGJqk7z4WnfTJPJT1gl28eEb1cZJx
- K1TsZw+LPwQX/JHIahZDMCoJI3onZV2drJny80g=
-X-Google-Smtp-Source: ABdhPJxcenQS4oT97mcUVACyvOgX8Sl/y64/2riUqA5ElAL/lNKCHNPOxYYmYH44nXt9fLaSDsvXPob9dcmT6RaT8qo=
-X-Received: by 2002:a05:6e02:ed4:: with SMTP id
- i20mr3578160ilk.267.1598034851990; 
- Fri, 21 Aug 2020 11:34:11 -0700 (PDT)
+ bh=/7TCHOUJN5psz1qKuB5aTkaFDEXQBiISdiUA2hpBvVo=;
+ b=EJHMvh2JIgX6Bu854mPYHI4wfdQqHCgvResS8mFebwCGu/t/rFZFuVF3Jgrsr7gjH1
+ gifQ/+rjWIcndZ/k26T0RxNj/TONkoIFcvNOCHNt8i9qYbwGuW/BOQRbFyq0AMWX6OD5
+ VPbWOmV9t6chWaJboRnPH1HhffbLa17Irr+5Z5k2p2vB4MRCMCPWnEW4jJP84vEOLOCR
+ axZwhFFDRinewtoUKqRHWUUi13ECyCUbNfxPo/XDdWUfoTJZtgjzbz6I38/QUbdPn7or
+ sCWjMjRB5L8TIhlOTcmCoUmXaXTHRyKfW3Vg/VCt588gLLAUsXWNFRSzKmsQvO433IbM
+ xkWA==
+X-Gm-Message-State: AOAM530SknYVZrJ9V+FjpbWOZKJ98AhSGXtkszzOdFaicESJNSfJi3Rr
+ Fs2TS1ggEmezzt0mQAsVySwcVizd9fzmULZY3cE=
+X-Google-Smtp-Source: ABdhPJzjf8PiKtGJGk1VVHuHCsdhiEA809LtQK2XLoyqvJM5CJvGZtWAku5Ioxewsn5+cFo7avjPYVZJHdSozJuumCo=
+X-Received: by 2002:a02:84c1:: with SMTP id f59mr3845481jai.106.1598036226512; 
+ Fri, 21 Aug 2020 11:57:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <1597423256-14847-1-git-send-email-bmeng.cn@gmail.com>
- <CAAhSdy2D=TcENAJDja4r6pnhz0LRi-T+A9k3Btrs_EuB4x0e4w@mail.gmail.com>
- <CAEUhbmV5=B5xKhYqMj1MQb61nt5cNUJG1MXT++C1w1YMYTfLCQ@mail.gmail.com>
- <202949f7-c9d5-4d4d-3ebe-53727f4fa169@microchip.com>
- <CAKmqyKM3nm0rhxgDvWKWfO+4b23ZLSkHW2TzmcVZ_ZFy4L7MRg@mail.gmail.com>
- <d3f61c2c-a489-887e-0143-4d9a1e66e6f2@microchip.com>
- <CAAhSdy32owLO0KytyYsg-zH6JyyfNfGofa4vanqTFJLntPq0=g@mail.gmail.com>
- <1f17cc4c-83f8-a024-ebef-79e28fab9a32@microchip.com>
- <CAAhSdy1MTvjfpHZEAs2YVHXdPBaEMQxUNdP_yc7br0C2p9kfng@mail.gmail.com>
- <CAEUhbmUWcTxv70yuLMXwniGXB6zkadcpB4YTq=8F9UcXRK72+g@mail.gmail.com>
- <9d6dd97b-20de-2be1-68eb-6ea2cf5b3ffc@microchip.com>
-In-Reply-To: <9d6dd97b-20de-2be1-68eb-6ea2cf5b3ffc@microchip.com>
+ <1597423256-14847-16-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1597423256-14847-16-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 21 Aug 2020 11:23:34 -0700
-Message-ID: <CAKmqyKMp70-JzmmyMujpZpk=eL595Cme7edx3ktqHuBoYt8KxQ@mail.gmail.com>
-Subject: Re: [PATCH 00/18] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
- board support
-To: Cyril.Jean@microchip.com
-Cc: Bin Meng <bmeng.cn@gmail.com>, Anup Patel <anup@brainfault.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
+Date: Fri, 21 Aug 2020 11:46:29 -0700
+Message-ID: <CAKmqyKNV02XKsf4oGS8cguC7=+mofj-EpEmsHG6a73BR_6YqMA@mail.gmail.com>
+Subject: Re: [PATCH 15/18] hw/riscv: microchip_pfsoc: Connect 2 Cadence GEMs
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmerdabbelt@google.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Jason Wang <jasowang@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Atish Patra <Atish.Patra@wdc.com>
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -74,8 +63,8 @@ X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_BLOCKED=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -88,250 +77,160 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2020 18:34:18 -0000
+X-List-Received-Date: Fri, 21 Aug 2020 18:57:10 -0000
 
-On Wed, Aug 19, 2020 at 3:13 AM <Cyril.Jean@microchip.com> wrote:
+On Fri, Aug 14, 2020 at 9:51 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On 8/19/20 2:34 AM, Bin Meng wrote:
-> > EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
-> >
-> > On Tue, Aug 18, 2020 at 9:55 PM Anup Patel <anup@brainfault.org> wrote:
-> >> On Tue, Aug 18, 2020 at 6:39 PM <Cyril.Jean@microchip.com> wrote:
-> >>> On 8/18/20 7:17 AM, Anup Patel wrote:
-> >>>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
-> >>>>
-> >>>> On Tue, Aug 18, 2020 at 1:23 AM <Cyril.Jean@microchip.com> wrote:
-> >>>>> On 8/17/20 8:28 PM, Alistair Francis wrote:
-> >>>>>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
-> >>>>>>
-> >>>>>> On Mon, Aug 17, 2020 at 11:12 AM via <qemu-devel@nongnu.org> wrote:
-> >>>>>>> Hi Anup,
-> >>>>>>>
-> >>>>>>> On 8/17/20 11:30 AM, Bin Meng wrote:
-> >>>>>>>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
-> >>>>>>>>
-> >>>>>>>> Hi Anup,
-> >>>>>>>>
-> >>>>>>>> On Sat, Aug 15, 2020 at 1:44 AM Anup Patel <anup@brainfault.org> wrote:
-> >>>>>>>>> On Fri, Aug 14, 2020 at 10:12 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >>>>>>>>>> From: Bin Meng <bin.meng@windriver.com>
-> >>>>>>>>>>
-> >>>>>>>>>> This adds support for Microchip PolarFire SoC Icicle Kit board.
-> >>>>>>>>>> The Icicle Kit board integrates a PolarFire SoC, with one SiFive's
-> >>>>>>>>>> E51 plus four U54 cores and many on-chip peripherals and an FPGA.
-> >>>>>>>>> Nice Work !!! This is very helpful.
-> >>>>>>>> Thanks!
-> >>>>>>>>
-> >>>>>>>>> The Microchip HSS is quite convoluted. It has:
-> >>>>>>>>> 1. DDR Init
-> >>>>>>>>> 2. Boot device support
-> >>>>>>>>> 3. SBI support using OpenSBI as library
-> >>>>>>>>> 4. Simple TEE support
-> >>>>>>>>>
-> >>>>>>>>> I think point 1) and 2) above should be part of U-Boot SPL.
-> >>>>>>>>> The point 3) can be OpenSBI FW_DYNAMIC.
-> >>>>>>>>>
-> >>>>>>>>> Lastly,for point 4), we are working on a new OpenSBI feature using
-> >>>>>>>>> which we can run independent Secure OS and Non-Secure OS using
-> >>>>>>>>> U-Boot_SPL+OpenSBI (for both SiFive Unleashed and Microchip
-> >>>>>>>>> PolarFire).
-> >>>>>>>>>
-> >>>>>>>>> Do you have plans for adding U-Boot SPL support for this board ??
-> >>>>>>>> + Cyril Jean from Microchip
-> >>>>>>>>
-> >>>>>>>> I will have to leave this question to Cyril to comment.
-> >>>>>>>>
-> >>>>>>> I currently do not have a plan to support U-Boot SPL. The idea of the
-> >>>>>>> HSS is to contain all the silicon specific initialization and
-> >>>>>>> configuration code within the HSS before jumping to U-Boot S-mode. I
-> >>>>>>> would rather keep all this within the HSS for the time being. I would
-> >>>>>>> wait until we reach production silicon before attempting to move this to
-> >>>>>>> U-Boot SPL as the HSS is likely to contain some opaque silicon related
-> >>>>>>> changes for another while.
-> >>>>>> That is unfortunate, a lot of work has gone into making the boot flow
-> >>>>>> simple and easy to use.
-> >>>>>>
-> >>>>>> QEMU now includes OpenSBI by default to make it easy for users to boot
-> >>>>>> Linux. The Icicle Kit board is now the most difficult QEMU board to
-> >>>>>> boot Linux on. Not to mention it makes it hard to impossible to
-> >>>>>> support it in standard tool flows such as meta-riscv.
-> >>>>>>
-> >>>>>> Alistair
-> >>>>> If it is such a problem we can add a U-Boot SPL stage and the HSS can be
-> >>>>> treated as standard SoC ROM code.
-> >>>> It's not mandatory for U-Boot SPL to have stable DRAM calibration settings
-> >>>> from the start itself. The initial U-Boot SPL support for most
-> >>>> platforms (accross
-> >>>> architectures) usually include basic working DRAM calibration settings which
-> >>>> is later on updated with separate patches. Also, we don't need all U-Boot
-> >>>> drivers to be upstreamed in one-go as this can be done in phases.
-> >>>>
-> >>>> The advantage we have with PolarFire SoC Icicle board is that we already
-> >>>> have a U-Boot S-mode. and we believe the OpenSBI generic platform will
-> >>>> work fine for PolarFire SoC Icicle board so the only thing missing right now
-> >>>> is the U-Boot SPL support for OpenSource boot-flow.
-> >>>>
-> >>>> It will certainly accelerate open-source development if we have boot-flow
-> >>>> U-Boot_SPL => OpenSBI (FW_DYNAMIC) => U-Boot_S-mode working
-> >>>> on PolarFire SoC Icicle board. Initially, we just need DRAM, SD/eMMC,
-> >>>> and Serial port support for U-Boot SPL and U-Boot S-mode. Later on,
-> >>>> more patches can add ethernet and other booting device drivers to U-Boot.
-> >>>>
-> >>>> Regarding security services of HSS, we are working on a OpenSBI
-> >>>> feature which will allow HSS security services to run as independent
-> >>>> binary in M-mode (not linked to OpenSBI) and OpenSBI FW_DYNAMIC
-> >>>> will be a separate binary acting as a secure monitor.
-> >>>>
-> >>>> Regards,
-> >>>> Anup
-> >>> What I have in mind is that the external memory will be up and running
-> >>> by the time we get to U-Boot SPL. In the case of PolarFire SoC the ROM
-> >>> code equivalent brings up the DDR memory interface so we do not need to
-> >>> worry about this as part of U-Boot.
-> >> Keeping DRAM configuration as part of a separate ROM booting stage prior
-> >> to the U-Boot SPL sounds good to me. This will lead to following boot-flow:
-> >>
-> >> ROM/HSS (M-mode) => U-Boot SPL (M-mode) => OpenSBI (M-mode) => U-Boot S-mode
-> > If we want to keep the HSS, meaning that DDR memory is already
-> > initialized, then there is no need to create an additional step of
-> > U-Boot SPL phase, because there is no size limitation any more.
-> >
-> > Right now, the boot workflow on PolarFire is:
-> >
-> > HSS + OpenSBI (as a library) (M-mode) => U-Boot S-mode
-> >
-> > It's just not the canonical way because of the HSS and OpenSBI as a library.
-> >
-> > A canonical way should be:
-> >
-> > U-Boot SPL (M-mode) => OpenSBI dynamic (M-mode) => U-Boot S-mode
-> >
-> > So we should be aiming to replace HSS with U-Boot SPL.
-> >
-> >>> Sounds to me the component that needs to be upstreamed next is the eMMC
-> >>> support so that it can be used as part of U-Boot SPL. Correct?
-> >> Maybe as a PHASE1 patch series for PolarFire U-Boot support can
-> >> target the following:
-> >> 1. Minimal U-Boot board support for PolarFire IcIcle Board with
-> >> single defconfig to build both U-Boot SPL and U-Boot S-mode
-> >> 2. Serial port driver (probably re-use existing driver)
-> >> 3. SD and eMMC driver
-> >>
-> >> Supporting SD booting is highly desirable for PHASE1. At least,
-> >> U-Boot SPL, OpenSBI, U-Boot S-mode, and Linux should come
-> >> as separate images from SD card. The ROM/HSS can reside and
-> >> boot from on-board flash/eMMC.
-> >>
-> >> Above is my suggestion based on experience with SiFive Unleashed.
-> >>
-> >> The general idea behind OpenSource boot-flow is to have each
-> >> booting stage as a separate binary so that users can selectively
-> >> upgrade a particular booting stage without re-compiling/re-flashing
-> >> other booting stages.
-> >>
-> >> Various distros and yocto already support building most of the above
-> >> booting stages (U-Boot, OpenSBI, Linux, etc) so we can reuse a lot
-> >> of existing work. Eventually, I am confident we will endup moving
-> >> more stuff from ROM/HSS to U-Boot SPL for ease in maintenance.
-> > Regards,
-> > Bin
+> From: Bin Meng <bin.meng@windriver.com>
 >
-> I am OK with supporting U-Boot SPL as a community boot flow but the HSS
-> is not going to disappear completely for many PolarFire SoC deployments.
-> We need to have the HSS running on the monitor core after the system has
-> booted for various reasons. Some of the current HSS functionalities can
-> be migrated at a later time.
+> Microchip PolarFire SoC integrates 2 Candence GEMs to provide
+> IEEE 802.3 standard-compliant 10/100/1000 Mbps ethernet interface.
 >
-> The HSS was designed to easily enable and disable features through
-> Kconfig which should allow to assign features to different boot stages
-> depending on the overall system deployment. Keeping the HSS as ROM code
-> capable of starting various early boot stages in either M mode or S mode
-> allows us (Microchip engineering and non pure Linux users) to mix
-> different operating systems on the same platform and more easily debug
-> hardware bring-up.
-
-Thanks for explaining this.
-
-I have changed the CC list a bit to be a little more targeted.
-
+> On the Icicle Kit board, GEM0 connects to a PHY at address 8 while
+> GEM1 connects to a PHY at address 9.
 >
-> What I am trying to get at is that we need to balance the QEMU ease of
-> use with the ability to bring-up and debug actual hardware. My preferred
-
-Agreed. I don't think anyone has been saying that these changes should
-be for QEMU only. All of the changes talked about apply to both the
-QEMU model and the hardware.
-
-> approach is to keep all the hardware bring up in one place, the HSS, so
-> that you do not have to worry about obscure silicon idiosyncrasies once
-> you reach the open source boot flow. Silicon/board bring up
-
-That is a noble goal, but doesn't HSS currently pull in the OpenSBI
-library, so it's doing more than just dealing with silicon bugs. As
-well as that HSS is not supported by distros, so distros can't build
-or ship it. For example OE won't build it in the meta-riscv layer,
-meaning that the Icle board just isn't supported. This means the board
-misses out on core work, for example it won't be able to utilise the
-RISC-V AGL work that has started.
-
-Also, how are users expected to update HSS as bugs and vulnerabilities
-are found if it isn't shipped by distros?
-
-> steps/features can be brought out of the HSS into the open source boot
-> stages once these steps are mature.
+> The 2nd stage bootloader (U-Boot) is using GEM1 by default, so we
+> must specify 2 '-nic' options from the command line in order to get
+> a working ethernet.
 >
-> PolarFire SoC is the third family of SoC FPGA I have worked on. So I
-> have a fair idea of the amount of pain in front of me to bring the
-> entire device family to market :-) We decided early on in the
-> architecture of PolarFire SoC that we would make all code executing on
-> the RISC-V processors open source and user modifiable. This includes all
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Awesome!!! That is so great to hear.
-
-> code typically hidden away in your typical SoC ROM code. This is why
-
-Again, this is just awesome!
-
-> PolarFire SoC has on-chip flash memory used to store the HSS and why the
-> HSS should be thought as including ROM code. The current Icicle Kit uses
-
-If we could change it to be more like a traditional ROM in terms of
-features then that would be really helpful. In that case we wouldn't
-need it for QEMU and only use it for hardware. It would only handle
-basic hardware boot up and then hand it over to U-Boot SPL/OpenSBI.
-
-> engineering samples from the first device in the PolarFire SoC family.
-> So we are really at the beginning of the process of validating very
-> early boot steps on a significant number of devices. I do not want to
-> expose the open source community to the pain of bringing up a family of
-> devices because of the decision to open source all code. So I am asking
-
-I understand what you mean. In saying that it is usually easiest to
-start with the goal of upstreaming and then work towards that. That
-way all of the architectures decisions are made in that context. Maybe
-at first you have a fork while everything is in flux, but then it's
-really helpful to have the work upstreamed.
-
-I think we have all seen too many "open source" projects that just
-fork everything, dump their code and never contribute back.
-Unfortunately when that happens we end up with duplicate work and
-frustrated engineers. As well as that the original project misses out
-on all the advantages of open source as they aren't benefiting from
-others work as well.
-
-> you to not rush in trying to migrate components from the HSS to a later
-> boot stage just yet. It can be done but based on experience I think that
-> now is not the right time yet.
-
-The open source focus is great to hear. I think we are all really glad
-that MicroChip is doing this. It's a great first step, but it doesn't
-end there.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
 >
-> Regards,
+>  hw/riscv/microchip_pfsoc.c         | 39 ++++++++++++++++++++++++++++++++++++++
+>  include/hw/riscv/microchip_pfsoc.h |  7 +++++++
+>  2 files changed, 46 insertions(+)
 >
-> Cyril.
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index 1c67cbc..625b511 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -14,6 +14,7 @@
+>   * 3) MMUARTs (Multi-Mode UART)
+>   * 4) Cadence eMMC/SDHC controller and an SD card connected to it
+>   * 5) DMA (Direct Memory Access Controller)
+> + * 6) GEM (Gigabit Ethernet MAC Controller)
+>   *
+>   * This board currently generates devicetree dynamically that indicates at least
+>   * two harts and up to five harts.
+> @@ -59,6 +60,9 @@
+>  #define BIOS_FILENAME   "hss.bin"
+>  #define RESET_VECTOR    0x20220000
+>
+> +/* GEM version */
+> +#define GEM_REVISION    0x0107010c
+> +
+>  static const struct MemmapEntry {
+>      hwaddr base;
+>      hwaddr size;
+> @@ -83,6 +87,8 @@ static const struct MemmapEntry {
+>      [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
+>      [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
+>      [MICROCHIP_PFSOC_MMUART4] =         { 0x20106000,     0x1000 },
+> +    [MICROCHIP_PFSOC_GEM0] =            { 0x20110000,     0x2000 },
+> +    [MICROCHIP_PFSOC_GEM1] =            { 0x20112000,     0x2000 },
+>      [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
+>      [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
+>      [MICROCHIP_PFSOC_IOSCB_CFG] =       { 0x37080000,     0x1000 },
+> @@ -119,6 +125,9 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
+>      object_initialize_child(obj, "dma-controller", &s->dma,
+>                              TYPE_MCHP_PFSOC_DMA);
+>
+> +    object_initialize_child(obj, "gem0", &s->gem0, TYPE_CADENCE_GEM);
+> +    object_initialize_child(obj, "gem1", &s->gem1, TYPE_CADENCE_GEM);
+> +
+>      object_initialize_child(obj, "sd-controller", &s->sdhci,
+>                              TYPE_CADENCE_SDHCI);
+>      object_initialize_child(OBJECT(&s->sdhci), "sd-controller.sdhci",
+> @@ -136,6 +145,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>      MemoryRegion *envm_data = g_new(MemoryRegion, 1);
+>      char *plic_hart_config;
+>      size_t plic_hart_config_len;
+> +    NICInfo *nd;
+>      int i;
+>
+>      sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
+> @@ -269,6 +279,35 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>          qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART4_IRQ),
+>          serial_hd(4));
+>
+> +    /* GEMs */
+> +
+> +    nd = &nd_table[0];
+> +    if (nd->used) {
+> +        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+> +        qdev_set_nic_properties(DEVICE(&s->gem0), nd);
+> +    }
+> +    nd = &nd_table[1];
+> +    if (nd->used) {
+> +        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+> +        qdev_set_nic_properties(DEVICE(&s->gem1), nd);
+> +    }
+> +
+> +    object_property_set_int(OBJECT(&s->gem0), "revision", GEM_REVISION, errp);
+> +    object_property_set_int(OBJECT(&s->gem0), "phy-addr", 8, errp);
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->gem0), errp);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gem0), 0,
+> +                    memmap[MICROCHIP_PFSOC_GEM0].base);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(&s->gem0), 0,
+> +        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_GEM0_IRQ));
+> +
+> +    object_property_set_int(OBJECT(&s->gem1), "revision", GEM_REVISION, errp);
+> +    object_property_set_int(OBJECT(&s->gem1), "phy-addr", 9, errp);
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->gem1), errp);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gem1), 0,
+> +                    memmap[MICROCHIP_PFSOC_GEM1].base);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(&s->gem1), 0,
+> +        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_GEM1_IRQ));
+> +
+>      /* eNVM */
+>      memory_region_init_rom(envm_data, OBJECT(dev), "microchip.pfsoc.envm.data",
+>                             memmap[MICROCHIP_PFSOC_ENVM_DATA].size,
+> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+> index 7825935..60f994c 100644
+> --- a/include/hw/riscv/microchip_pfsoc.h
+> +++ b/include/hw/riscv/microchip_pfsoc.h
+> @@ -24,6 +24,7 @@
+>
+>  #include "hw/char/mchp_pfsoc_mmuart.h"
+>  #include "hw/dma/mchp_pfsoc_dma.h"
+> +#include "hw/net/cadence_gem.h"
+>  #include "hw/sd/cadence_sdhci.h"
+>
+>  typedef struct MicrochipPFSoCState {
+> @@ -42,6 +43,8 @@ typedef struct MicrochipPFSoCState {
+>      MchpPfSoCMMUartState *serial3;
+>      MchpPfSoCMMUartState *serial4;
+>      MchpPfSoCDMAState dma;
+> +    CadenceGEMState gem0;
+> +    CadenceGEMState gem1;
+>      CadenceSDHCIState sdhci;
+>  } MicrochipPFSoCState;
+>
+> @@ -84,6 +87,8 @@ enum {
+>      MICROCHIP_PFSOC_MMUART2,
+>      MICROCHIP_PFSOC_MMUART3,
+>      MICROCHIP_PFSOC_MMUART4,
+> +    MICROCHIP_PFSOC_GEM0,
+> +    MICROCHIP_PFSOC_GEM1,
+>      MICROCHIP_PFSOC_ENVM_CFG,
+>      MICROCHIP_PFSOC_ENVM_DATA,
+>      MICROCHIP_PFSOC_IOSCB_CFG,
+> @@ -91,6 +96,8 @@ enum {
+>  };
+>
+>  enum {
+> +    MICROCHIP_PFSOC_GEM0_IRQ = 64,
+> +    MICROCHIP_PFSOC_GEM1_IRQ = 70,
+>      MICROCHIP_PFSOC_EMMC_SD_IRQ = 88,
+>      MICROCHIP_PFSOC_MMUART0_IRQ = 90,
+>      MICROCHIP_PFSOC_MMUART1_IRQ = 91,
+> --
+> 2.7.4
+>
 >
 
