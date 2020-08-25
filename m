@@ -1,41 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kAWq1-00062v-Or
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Aug 2020 07:10:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39614)
+	id 1kAWqM-0006iJ-Pk
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Aug 2020 07:10:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39760)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1kAWpz-00060Q-O8
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2020 07:09:59 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:27008)
+ id 1kAWqK-0006eb-Lb
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2020 07:10:20 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:41211)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1kAWpy-0003t2-88
- for qemu-riscv@nongnu.org; Tue, 25 Aug 2020 07:09:59 -0400
+ id 1kAWqJ-00040B-14
+ for qemu-riscv@nongnu.org; Tue, 25 Aug 2020 07:10:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1598353797;
+ s=mimecast20190719; t=1598353818;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=xR/N81p6moXX/as16V7a6mUT151ykYBDSqieWTNqmFc=;
- b=gcvX/QAtLuuSuzU8qZJc3EnmZr/uVRqC9mCL2LvsgMl5jFX8rI4Iu2jglMjeeDEbuE0kxt
- lRRhWLqSjTqxmMvIkCT7K8vsPLttJ9WWiAt6IQjDegp6Yg4zL1OQvjKshuA3J8Xp+2tRmo
- hy7LykCUZ9wyUYK0rkxqIVleM6yAMUM=
+ bh=wmTRlbgsdI3Kr2CanzzPAjEJPUBb0uKHHwJJcCa4RlI=;
+ b=USuT06NrTSvYkMExdbQKj9y2ICE39CB7IrycdCxi4Si4uURpF7+dcdw8VaLsV5x/k/qulp
+ REidWs5NRbw5vymjYcvvaKcBicR5RxlfGFsRfM3PoOW0kGOl27WkFVSpyZCXNl/puWeagQ
+ BVJ/rND/SQGgrhu1xNbobeBMd/ZiAdQ=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-282-AbMnGYSpPbajsmcJY1M6lw-1; Tue, 25 Aug 2020 07:09:53 -0400
-X-MC-Unique: AbMnGYSpPbajsmcJY1M6lw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ us-mta-277-YvsvoefuMdG9vIBrBIj5Tg-1; Tue, 25 Aug 2020 07:10:14 -0400
+X-MC-Unique: YvsvoefuMdG9vIBrBIj5Tg-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DAB371DDF7;
- Tue, 25 Aug 2020 11:09:51 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0F15E1009443;
+ Tue, 25 Aug 2020 11:10:13 +0000 (UTC)
 Received: from redhat.com (ovpn-114-231.ams2.redhat.com [10.36.114.231])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id B118810013D5;
- Tue, 25 Aug 2020 11:09:49 +0000 (UTC)
-Date: Tue, 25 Aug 2020 12:09:46 +0100
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 0895760FC2;
+ Tue, 25 Aug 2020 11:10:10 +0000 (UTC)
+Date: Tue, 25 Aug 2020 12:10:07 +0100
 From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 To: Eduardo Habkost <ehabkost@redhat.com>
 Cc: qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
@@ -43,15 +43,15 @@ Cc: qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org
-Subject: Re: [PATCH v2 07/58] opentitan: Rename memmap enum constants
-Message-ID: <20200825110946.GO107278@redhat.com>
+Subject: Re: [PATCH v2 08/58] sifive_e: Rename memmap enum constants
+Message-ID: <20200825111007.GP107278@redhat.com>
 Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 References: <20200820001236.1284548-1-ehabkost@redhat.com>
- <20200820001236.1284548-8-ehabkost@redhat.com>
+ <20200820001236.1284548-9-ehabkost@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200820001236.1284548-8-ehabkost@redhat.com>
+In-Reply-To: <20200820001236.1284548-9-ehabkost@redhat.com>
 User-Agent: Mutt/1.14.6 (2020-07-11)
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=berrange@redhat.com
 X-Mimecast-Spam-Score: 0.001
@@ -59,9 +59,9 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 Content-Disposition: inline
-Received-SPF: pass client-ip=63.128.21.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/25 06:38:59
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/25 02:03:58
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -30
 X-Spam_score: -3.1
@@ -82,15 +82,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2020 11:09:59 -0000
+X-List-Received-Date: Tue, 25 Aug 2020 11:10:20 -0000
 
-On Wed, Aug 19, 2020 at 08:11:45PM -0400, Eduardo Habkost wrote:
-> Some of the enum constant names conflict with the QOM type check
-> macros (IBEX_PLIC, IBEX_UART).  This needs to be addressed to
-> allow us to transform the QOM type check macros into functions
-> generated by OBJECT_DECLARE_TYPE().
+On Wed, Aug 19, 2020 at 08:11:46PM -0400, Eduardo Habkost wrote:
+> Some of the enum constant names conflict with a QOM type check
+> macro (SIFIVE_E_PRCI).  This needs to be addressed to allow us to
+> transform the QOM type check macros into functions generated by
+> OBJECT_DECLARE_TYPE().
 > 
-> Rename all the constants to IBEX_DEV_*, to avoid conflicts.
+> Rename all the constants to SIFIVE_E_DEV_*, to avoid conflicts.
 > 
 > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
@@ -99,16 +99,16 @@ On Wed, Aug 19, 2020 at 08:11:45PM -0400, Eduardo Habkost wrote:
 > * Added more details to commit message
 > 
 > ---
-> Cc: Alistair Francis <Alistair.Francis@wdc.com>
 > Cc: Palmer Dabbelt <palmer@dabbelt.com>
+> Cc: Alistair Francis <Alistair.Francis@wdc.com>
 > Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
 > Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 > Cc: qemu-riscv@nongnu.org
 > Cc: qemu-devel@nongnu.org
 > ---
->  include/hw/riscv/opentitan.h | 38 ++++++++--------
->  hw/riscv/opentitan.c         | 84 ++++++++++++++++++------------------
->  2 files changed, 61 insertions(+), 61 deletions(-)
+>  include/hw/riscv/sifive_e.h | 38 ++++++++---------
+>  hw/riscv/sifive_e.c         | 82 ++++++++++++++++++-------------------
+>  2 files changed, 60 insertions(+), 60 deletions(-)
 
 Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
 
