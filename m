@@ -1,72 +1,92 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kAheJ-0000zQ-GB
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Aug 2020 18:42:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58332)
+	id 1kAvfM-0002he-A4
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Aug 2020 09:40:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59208)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kAheH-0000z6-Kg; Tue, 25 Aug 2020 18:42:37 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:36043)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kAheG-0005vh-30; Tue, 25 Aug 2020 18:42:37 -0400
-Received: by mail-il1-x141.google.com with SMTP id f75so171927ilh.3;
- Tue, 25 Aug 2020 15:42:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=aMdNCsXgjW6uG5fd7uc9SJ1TfO0QhFu+yDtNH7/bqiY=;
- b=B6jNk1mLYvhVL14779B+kk6568ROMDnUwBbSMKZ7/8wHWUHotDd4Q17yIhgwFP+YOk
- GnubxYLsczY9rGov1Pgmi/9DV2P+P10BLzNp0B3G15Y0MSUes+7hKdVX0YNf+2srWdCn
- VeB6cys0jrM7rNGd5D6vK4IlQg+J/724a3V/xZOWIXrx8bg5JCc2L3yXbcRfYYsANSQq
- PMbaijVta/UdupU55A37NEUJpzuu44jYu5oDvBcr3FkA4xSTK7V3y7tLo07uZP3peUwJ
- M7VS/lLRdXfVQatPNCQmkHtP/HXkLNsmEcXfJeyXl9/h9te3mwzOD+oCZoCAsf4bBaif
- LKiA==
+ (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
+ id 1kAqR5-0000B0-W3
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2020 04:05:36 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:52584)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
+ id 1kAqR4-0004bI-8m
+ for qemu-riscv@nongnu.org; Wed, 26 Aug 2020 04:05:35 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1598429133;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=qFDWzhffgHT0QS8qC9AD7o9JYYlIaLMf7gtouYw5uzA=;
+ b=jVKMk8fzn4RHI+ljAUw7Fkaz3MOpkAgqO70VTT8IpEOWGczypb5PtMhjjsMLdN0kwOeywG
+ co2f2vRBrzhCI68s4DD6zRyGBbDPEbWBVonrb+aNXK/KNAJtQKP1dyaRMkTsEa09kFnQzP
+ 3Bz7dk3MHGPCZSn6s4G4XDuAUiOEwXM=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-25-cQ-l_gz4NwqwFTVIwnjafQ-1; Wed, 26 Aug 2020 04:05:31 -0400
+X-MC-Unique: cQ-l_gz4NwqwFTVIwnjafQ-1
+Received: by mail-wr1-f72.google.com with SMTP id c17so231482wrt.12
+ for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2020 01:05:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=aMdNCsXgjW6uG5fd7uc9SJ1TfO0QhFu+yDtNH7/bqiY=;
- b=j8D376M8u3InKF3+M72BfvC3IxZyYTAGs6BMZ8E5ZmFI4dx8SPWqH0E4Kwkws5y91S
- rMXGzfQBNN6G7X15pqPkSJfyRNr6UViwMK38LRILSBPbm0LSTmVVGyCjDjO4rP7tZUAg
- UA3qowVb5A9iq1mwtRMoIrX7Y61Z1iAXuD8P+bn+TunUvpH6yFRGJCI98VTJiRP/VenU
- gJ95dwqhwdcGqOFad/61C49UlUmoXIsVTa3GXkM5UZfU5BbCHspgC8EqW11iEO9b7Zlx
- egpdnCdAOkMIImnZked764q+EVcy90gi19JncmCSASYZ9LkYqSU6dgrryDfTCyk8LW6N
- K9sw==
-X-Gm-Message-State: AOAM533Ra0QM4LEw+xlPkGZBMp8b8ELUP2ee8lLgxEkC/6pqSHGNGoPU
- 6yBXf4bxai7NsJk/rDR0F2diQHfLyTrJ3zUWpXo=
-X-Google-Smtp-Source: ABdhPJzBsRzUeI9iSy4gMsR5OyFeMqpLfddhdzokAN3iJ9TJQ1L2vq/VyyADiZfkBYnLXsNYN6RjZsNglFiaKA3IRVE=
-X-Received: by 2002:a05:6e02:ed4:: with SMTP id
- i20mr11204879ilk.267.1598395354455; 
- Tue, 25 Aug 2020 15:42:34 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:in-reply-to:references
+ :user-agent:reply-to:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=NImKQq5ezsHefkpdy9SfbA9+4hFpj3XxE5AoedYCYBg=;
+ b=WgrEUIQ5v7KBx6Cl8V81S/W6iJvAh0RunaplfyPyEQQZT46Qotct++UR8qanXuV4Dj
+ NvK6lcDkVqjeyQZKVr8XKXoLT6cmtpU7hU9xboRsRWy5q5S9QAxXkdKqPsrERXbsJOla
+ 1uXtiHanlw2UB163FiLovp/3SO9+ms++v6ccv2AcKaS1NeChNgsPkOxz8uGa/P219Hii
+ e1frAu0CusFDEkERCJtC3llJH43MxfgZ69raj0qcjfJI32/nWnfpcvjK/KvqvpT6IIaP
+ 46K/nT6+ovAee9OoZmcEEgn13lO6JdBp4VEygOrzMOo90DgwXMNWc0tzjGL0OgEyXUcI
+ Mfqg==
+X-Gm-Message-State: AOAM530IP1ZjLAxwMGKTeVtZF9CwHFchtx6M3nIqMgsoG74H+3y1FzhU
+ qseFCzdfVPvfXfhATMGVLjy7rNzjMM12c+e7uVKuRTOumnlCfdwsVZGdMFa3Rz9WwsE/IEQDNx1
+ at8ujMWPD+qrR0zA=
+X-Received: by 2002:adf:eec4:: with SMTP id a4mr14022208wrp.325.1598429130568; 
+ Wed, 26 Aug 2020 01:05:30 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxgV0qEJw4SvfJJWICezdAreWgvFDuo0MZfhubnxoYYQuYepB/xRHiBkFBXO890vClnc3da7Q==
+X-Received: by 2002:adf:eec4:: with SMTP id a4mr14022174wrp.325.1598429130323; 
+ Wed, 26 Aug 2020 01:05:30 -0700 (PDT)
+Received: from localhost (trasno.trasno.org. [83.165.45.250])
+ by smtp.gmail.com with ESMTPSA id d11sm4063512wrw.77.2020.08.26.01.05.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Aug 2020 01:05:29 -0700 (PDT)
+From: Juan Quintela <quintela@redhat.com>
+To: Eduardo Habkost <ehabkost@redhat.com>
+Cc: qemu-devel@nongnu.org,  qemu-arm@nongnu.org,
+ qemu-block@nongnu.org,  qemu-s390x@nongnu.org,  qemu-ppc@nongnu.org,
+ kvm@vger.kernel.org,  xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v3 64/74] [automated] Move QOM typedefs and add missing
+ includes
+In-Reply-To: <20200825192110.3528606-65-ehabkost@redhat.com> (Eduardo
+ Habkost's message of "Tue, 25 Aug 2020 15:21:00 -0400")
+References: <20200825192110.3528606-1-ehabkost@redhat.com>
+ <20200825192110.3528606-65-ehabkost@redhat.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.3 (gnu/linux)
+Reply-To: quintela@redhat.com
+Date: Wed, 26 Aug 2020 10:05:28 +0200
+Message-ID: <87o8mxygqf.fsf@secure.mitica>
 MIME-Version: 1.0
-References: <20200811002325.46056-1-weiying_hou@outlook.com>
- <SG2PR02MB2634D85E5DF0C2BB540AE1BB93450@SG2PR02MB2634.apcprd02.prod.outlook.com>
-In-Reply-To: <SG2PR02MB2634D85E5DF0C2BB540AE1BB93450@SG2PR02MB2634.apcprd02.prod.outlook.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 25 Aug 2020 15:31:51 -0700
-Message-ID: <CAKmqyKMQZ_KYU-ZN60tqfLPdxa4pka6fxqtS6s2a-tCP4_1JFA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] Define ePMP mseccfg
-To: Hou Weiying <weiying_hou@outlook.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Hongzheng-Li <Ethan.Lee.QNL@gmail.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Myriad-Dreamin <camiyoru@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=quintela@redhat.com
+X-Mimecast-Spam-Score: 0.002
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=quintela@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/25 23:30:47
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.958,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 26 Aug 2020 09:40:38 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -78,58 +98,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2020 22:42:37 -0000
+X-List-Received-Date: Wed, 26 Aug 2020 08:05:36 -0000
 
-On Mon, Aug 10, 2020 at 5:25 PM Hou Weiying <weiying_hou@outlook.com> wrote:
+
+[dropped people from CC]
+
+Eduardo Habkost <ehabkost@redhat.com> wrote:
+> Some typedefs and macros are defined after the type check macros.
+> This makes it difficult to automatically replace their
+> definitions with OBJECT_DECLARE_TYPE.
 >
-> Currently using 0x390 and 0x391 for x-epmp (experimental). This may change in the future spec.
+> Patch generated using:
 >
-> Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
-> Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
-> Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
+>  $ ./scripts/codeconverter/converter.py -i \
+>    --pattern=3DQOMStructTypedefSplit $(git grep -l '' -- '*.[ch]')
+>
+> which will split "typdef struct { ... } TypedefName"
+> declarations.
+>
+> Followed by:
+>
+>  $ ./scripts/codeconverter/converter.py -i --pattern=3DMoveSymbols \
+>     $(git grep -l '' -- '*.[ch]')
+>
+> which will:
+> - move the typedefs and #defines above the type check macros
+> - add missing #include "qom/object.h" lines if necessary
+>
+> Reviewed-by: Daniel P. Berrang=C3=A9 <berrange@redhat.com>
+> Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
 > ---
->  target/riscv/cpu_bits.h | 3 +++
->  target/riscv/gdbstub.c  | 2 ++
->  2 files changed, 5 insertions(+)
+> Changes v2 -> v3:
+> * Removed hunks due to rebase conflicts: hw/arm/integratorcp.c
+>   hw/arm/versatilepb.c hw/arm/vexpress.c hw/sd/pl181.c
+>   include/hw/ppc/xive.h
+> * Removed hunks due to conflicts with other patches in this
+>   series: include/hw/block/swim.h include/hw/display/macfb.h
+>   include/hw/rdma/rdma.h migration/migration.h
+>   target/rx/cpu-qom.h
+> * Reviewed-by line from Daniel was kept, as no additional hunks
+>   are introduced in this version
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 8117e8b5a7..9c35179983 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -229,6 +229,9 @@
->  #define CSR_MTINST          0x34a
->  #define CSR_MTVAL2          0x34b
+> Changes v1 -> v2:
+> * Re-ran script after moving a few macros and typedefs.  Now the
+>   patch also changes:
+>   - SysbusAHCIState at hw/ide/ahci.h
+>   - VhostUserGPU at hw/virtio/virtio-gpu.h
+>   - I8257State at hw/dma/i8257.h
+>   - AllwinnerAHCIState at hw/ide/ahci.h
+>   - ISAKBDState at hw/input/i8042.h
+>   - PIIXState at hw/southbridge/piix.h
+>   - VFIOPCIDevice at hw/vfio/pci.h
+>   - missing include at hw/net/rocker/rocker.h
+>   - missing include at hw/scsi/mptsas.h
+>   - missing include at include/hw/arm/pxa.h
+>   - missing include at include/sysemu/kvm.h
 >
-> +/* Enhanced PMP */
-> +#define CSR_MSECCFG         0x390
-> +#define CSR_MSECCFGH        0x391
+> Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
 
-I was hoping that this address would be set by this time, but that
-doesn't seem to have happened. I'll try and get this going.
+> diff --git a/migration/rdma.c b/migration/rdma.c
+> index 15ad985d26..e3eac913bc 100644
+> --- a/migration/rdma.c
+> +++ b/migration/rdma.c
+> @@ -35,6 +35,7 @@
+>  #include <arpa/inet.h>
+>  #include <rdma/rdma_cma.h>
+>  #include "trace.h"
+> +#include "qom/object.h"
+> =20
+>  /*
+>   * Print and error on both the Monitor and the Log file.
+> @@ -397,10 +398,10 @@ typedef struct RDMAContext {
+>  } RDMAContext;
+> =20
+>  #define TYPE_QIO_CHANNEL_RDMA "qio-channel-rdma"
+> +typedef struct QIOChannelRDMA QIOChannelRDMA;
+>  #define QIO_CHANNEL_RDMA(obj)                                     \
+>      OBJECT_CHECK(QIOChannelRDMA, (obj), TYPE_QIO_CHANNEL_RDMA)
+> =20
+> -typedef struct QIOChannelRDMA QIOChannelRDMA;
+> =20
+> =20
+>  struct QIOChannelRDMA {
 
-I think we will have to wait for the address to be finalised before
-this can be merged.
+Reviewed-by: Juan Quintela <quintela@redhat.com>
 
-Alistair
-
->  /* Physical Memory Protection */
->  #define CSR_PMPCFG0         0x3a0
->  #define CSR_PMPCFG1         0x3a1
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index eba12a86f2..de5551604a 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -132,6 +132,8 @@ static int csr_register_map[] = {
->      CSR_MIP,
->      CSR_MTINST,
->      CSR_MTVAL2,
-> +    CSR_MSECCFG,
-> +    CSR_MSECCFGH,
->      CSR_PMPCFG0,
->      CSR_PMPCFG1,
->      CSR_PMPCFG2,
-> --
-> 2.20.1
->
->
 
