@@ -1,92 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kAvfM-0002jJ-SW
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Aug 2020 09:40:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60302)
+	id 1kAyib-0001Zj-Q3
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Aug 2020 12:56:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57380)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
- id 1kAqUV-0003xJ-Vt
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2020 04:09:07 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:47059
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
- id 1kAqUT-0004xX-BT
- for qemu-riscv@nongnu.org; Wed, 26 Aug 2020 04:09:07 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1598429344;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=WLP42d08jlqtDdnGGiR1ac66izB7N8sAvplYxoFxlws=;
- b=N0k1wnyj08k5oeTkDbhkDAJ1cqKjMNHLMW5RbUwqUhw7ClQ2uT6wrbf1ym6BlvzJOgZYBe
- wtyN64weHHpBLGaBI47tjN/OLRPPYz/IsgmJlA00Eu2AynIESdMbhUar8K71dApqCO/JPV
- HF3rn/ZGLrdBoJ5rebH8Dsy3FVvAJ/k=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-481-s7PHlSO6MTyck4QpdW85tQ-1; Wed, 26 Aug 2020 04:09:02 -0400
-X-MC-Unique: s7PHlSO6MTyck4QpdW85tQ-1
-Received: by mail-wr1-f69.google.com with SMTP id l14so237648wrp.9
- for <qemu-riscv@nongnu.org>; Wed, 26 Aug 2020 01:09:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kAyiZ-0001Wu-M1; Wed, 26 Aug 2020 12:56:11 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:45778)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kAyiW-0003Bn-V4; Wed, 26 Aug 2020 12:56:11 -0400
+Received: by mail-il1-x143.google.com with SMTP id k4so2365219ilr.12;
+ Wed, 26 Aug 2020 09:56:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=1yctldKr0wzYTBMSQmLZXZK7xKPnrNzao1VcYREm7EA=;
+ b=jBniptICDuPEWiigXMZg6ofwiWoUzUBsTGb4CHLNx226xOrvqcK5Ui3fPZtGC9EfJ3
+ HC8TT/ZT52FvqLnWo/zFRRb4Hfx1Tu6bPqrBIv6PWLUGbjA3cDq4r8KnOTjdM5fxTf/s
+ nkBW6xYoiHJGfSc3jFA3/50y0R6JorP4G0sylrez8HnAJxUrDG72MvxPBwmcbKd+zzq+
+ qs6wXCSAJbM5+LlQ5aDFEtsDX9Cy2QSQgqQb13oJ45UfpB5vj9+ij6dT2de6b0SZVE/C
+ +pa+/9eqKDZ/KUzj0wxdk2OyJYTgkiGepPGupEqdoW52GiR98LYRsGIbICl+L73on26X
+ 4asg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:in-reply-to:references
- :user-agent:reply-to:date:message-id:mime-version
- :content-transfer-encoding;
- bh=kLIsu+nEc3aBl1VyG4Sd867PXkn1bWp9ManfPK6FPHs=;
- b=De2Zas7Y2R+dF5LS9l2Rlz6VwVlfPSzQ+uA5LFm2odgFlO56s+VEj3vKLqSQMV4LT1
- kTqfXaxviQOOANRvpfUhLjnCG9OWp9/ANEeD77QcrmpKQzdDWthWf03g0SyN1sDaL3c0
- +sNiMxQym6kOPgaO8WooOKVUNZkpPA6+pHDqPvvCeSiXspLP2mocsjHoORAabOmpbjFP
- dzZS6dWTOMfcmKadAYyM/5iI8JRCNi2BEkrIyXxhqRpWTKRTpck8hlHWasZg8On9Mvui
- 1cKpXt9nihYt3k3crW/abNTb8/DypO/1UUvvckPr+kZmhJI6xaWBoypZ7q880po/jjC4
- Kv8w==
-X-Gm-Message-State: AOAM5310Y7UgRutNhXZIye42UxflTLtkjqGWc8O+X3R2kNvBd2my31Cl
- kOOryV033t23jhXKb1qWmbp47ZMgFhCsFpLwmZzYvr5EnItoP+jnKQ12XNBM/Sogv9Nubfl/d8O
- PSLU81eAkm3mExDU=
-X-Received: by 2002:adf:9e8d:: with SMTP id a13mr13566871wrf.94.1598429341765; 
- Wed, 26 Aug 2020 01:09:01 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzT9BIXEipC0KHHms1/LKk2MRcW/qT6UlqJ2yHzgxQ4Cz3Ybar/ud7Phbq6goZoBDpiyvRYng==
-X-Received: by 2002:adf:9e8d:: with SMTP id a13mr13566848wrf.94.1598429341511; 
- Wed, 26 Aug 2020 01:09:01 -0700 (PDT)
-Received: from localhost (trasno.trasno.org. [83.165.45.250])
- by smtp.gmail.com with ESMTPSA id z9sm3613141wmg.46.2020.08.26.01.09.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Aug 2020 01:09:00 -0700 (PDT)
-From: Juan Quintela <quintela@redhat.com>
-To: Eduardo Habkost <ehabkost@redhat.com>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, kvm@vger.kernel.org,
- xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org
-Subject: Re: [PATCH v3 66/74] [automated] Use DECLARE_*CHECKER* macros
-In-Reply-To: <20200825192110.3528606-67-ehabkost@redhat.com> (Eduardo
- Habkost's message of "Tue, 25 Aug 2020 15:21:02 -0400")
-References: <20200825192110.3528606-1-ehabkost@redhat.com>
- <20200825192110.3528606-67-ehabkost@redhat.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.3 (gnu/linux)
-Reply-To: quintela@redhat.com
-Date: Wed, 26 Aug 2020 10:08:59 +0200
-Message-ID: <87ft89ygkk.fsf@secure.mitica>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=1yctldKr0wzYTBMSQmLZXZK7xKPnrNzao1VcYREm7EA=;
+ b=P/KgtZVhjSRDqM9HDpev1RIXzIo+65Nk8KPKMxb4J6Iopa/8CHdlsBoKkhySghodWg
+ yrz/YIqDOKAKXqzhSjvXtb8LgdXKFZRfNeKPUs5DQ+ReyxyEhRWWJ+0C3A/QKd4L9izt
+ LpNOyvGiXVBLlvCclkIVD3snEnGE+YcwoZOWRll8jWyJZJyqXavDdN0C6yxz8vVZoY00
+ rx+YgX7G5jxx7xeu5w3jJg6or2ezdO3Vs4E/HKDJGo1wBs2kpxsoqrgrjS1VYNP2scZ/
+ 2N4V7rMfUxIrYP+PPQOa75WVCNWnrx7P7ex1cW6vOA3oxGczCJyr/mwGfYMNy+wfWc/s
+ ifUA==
+X-Gm-Message-State: AOAM5303wvaANc9E3VrWoL9pThXyp+Gd1eQbkXesf13KaKz2QABl02ds
+ WsuKObMh5t4FnGl8D3aNklWoP1Y9Faox5PLC6Z4=
+X-Google-Smtp-Source: ABdhPJx9Y3T0Gz0Ny6XIs4fhZeXVLFKdNlBzaJ6bD/PT8K11nW70BXBRAndgAb0fRXU6MlC8XsW+Lg4zcJnBtcQDL9s=
+X-Received: by 2002:a92:c7d4:: with SMTP id g20mr14214722ilk.40.1598460966560; 
+ Wed, 26 Aug 2020 09:56:06 -0700 (PDT)
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=quintela@redhat.com
-X-Mimecast-Spam-Score: 0.002
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=207.211.31.120; envelope-from=quintela@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/26 03:56:58
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -30
-X-Spam_score: -3.1
-X-Spam_bar: ---
-X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.958,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+References: <20200817084955.28793-1-frank.chang@sifive.com>
+ <CAE_xrPjmrmwVW3YOTXLVuVpvT=mT+gnwKJy+yYjo6t24xC8ZDg@mail.gmail.com>
+In-Reply-To: <CAE_xrPjmrmwVW3YOTXLVuVpvT=mT+gnwKJy+yYjo6t24xC8ZDg@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 26 Aug 2020 09:45:22 -0700
+Message-ID: <CAKmqyKOU8MUAaiCadAEp4YwArJOpsPRbd_sQmmTDO8g=v-Nw2g@mail.gmail.com>
+Subject: Re: [RFC v4 00/70] support vector extension v1.0
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 26 Aug 2020 09:40:38 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -98,42 +72,179 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2020 08:09:08 -0000
+X-List-Received-Date: Wed, 26 Aug 2020 16:56:12 -0000
 
-Eduardo Habkost <ehabkost@redhat.com> wrote:
->  $ ./scripts/codeconverter/converter.py -i \
->    --pattern=3DTypeCheckMacro $(git grep -l '' -- '*.[ch]')
+On Tue, Aug 25, 2020 at 1:29 AM Frank Chang <frank.chang@sifive.com> wrote:
 >
-> Reviewed-by: Daniel P. Berrang=C3=A9 <berrange@redhat.com>
-> Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
-> ---
-> Changes v2 -> v3:
-> * Removed hunks due to rebase conflicts:
->   hw/arm/integratorcp.c hw/arm/versatilepb.c hw/sd/pl181.c
->   include/hw/ppc/xive.h
-> * Reviewed-by line from Daniel was kept, as no additional hunks
->   are introduced in this version
+> On Mon, Aug 17, 2020 at 4:50 PM <frank.chang@sifive.com> wrote:
+>>
+>> From: Frank Chang <frank.chang@sifive.com>
+>>
+>> This patchset implements the vector extension v1.0 for RISC-V on QEMU.
+>>
+>> This patchset is sent as RFC because RVV v1.0 is still in draft state.
+>> v2 patchset was sent for RVV v0.9 and bumped to RVV v1.0 since v3 patchset.
+>>
+>> The port is available here:
+>> https://github.com/sifive/qemu/tree/rvv-1.0-upstream-v4
+>>
+>> You can change the cpu argument: vext_spec to v1.0 (i.e. vext_spec=v1.0)
+>> to run with RVV v1.0 instructions.
+>>
+>> Note: This patchset depends on two other patchsets listed in Based-on
+>>       section below so it might not able to be built unless those two
+>>       patchsets are applied.
+>>
+>> Changelog:
+>>
+>> v4
+>>   * remove explicit float flmul variable in DisasContext.
+>>   * replace floating-point calculations with shift operations to
+>>     improve performance.
+>>   * relax RV_VLEN_MAX to 512-bits.
+>>
+>> v3
+>>   * apply nan-box helpers from Richard Henderson.
+>>   * remove fp16 api changes as they are sent independently in another
+>>     pathcset by Chih-Min Chao.
+>>   * remove all tail elements clear functions as tail elements can
+>>     retain unchanged for either VTA set to undisturbed or agnostic.
+>>   * add fp16 nan-box check generator function.
+>>   * add floating-point rounding mode enum.
+>>   * replace flmul arithmetic with shifts to avoid floating-point
+>>     conversions.
+>>   * add Zvqmac extension.
+>>   * replace gdbstub vector register xml files with dynamic generator.
+>>   * bumped to RVV v1.0.
+>>   * RVV v1.0 related changes:
+>>     * add vl<nf>re<eew>.v and vs<nf>r.v vector whole register
+>>       load/store instructions
+>>     * add vrgatherei16 instruction.
+>>     * rearranged bits in vtype to make vlmul bits into a contiguous
+>>       field.
+>>
+>> v2
+>>   * drop v0.7.1 support.
+>>   * replace invisible return check macros with functions.
+>>   * move mark_vs_dirty() to translators.
+>>   * add SSTATUS_VS flag for s-mode.
+>>   * nan-box scalar fp register for floating-point operations.
+>>   * add gdbstub files for vector registers to allow system-mode
+>>     debugging with GDB.
+>>
+>> Based-on: <20200724002807.441147-1-richard.henderson@linaro.org/>
+>> Based-on: <1596102747-20226-1-git-send-email-chihmin.chao@sifive.com/>
+>>
+>> Frank Chang (62):
+>>   target/riscv: drop vector 0.7.1 and add 1.0 support
+>>   target/riscv: Use FIELD_EX32() to extract wd field
+>>   target/riscv: rvv-1.0: introduce writable misa.v field
+>>   target/riscv: rvv-1.0: remove rvv related codes from fcsr registers
+>>   target/riscv: rvv-1.0: check MSTATUS_VS when accessing vector csr
+>>     registers
+>>   target/riscv: rvv-1.0: remove MLEN calculations
+>>   target/riscv: rvv-1.0: add fractional LMUL
+>>   target/riscv: rvv-1.0: add VMA and VTA
+>>   target/riscv: rvv-1.0: update check functions
+>>   target/riscv: introduce more imm value modes in translator functions
+>>   target/riscv: rvv:1.0: add translation-time nan-box helper function
+>>   target/riscv: rvv-1.0: configure instructions
+>>   target/riscv: rvv-1.0: stride load and store instructions
+>>   target/riscv: rvv-1.0: index load and store instructions
+>>   target/riscv: rvv-1.0: fix address index overflow bug of indexed
+>>     load/store insns
+>>   target/riscv: rvv-1.0: fault-only-first unit stride load
+>>   target/riscv: rvv-1.0: amo operations
+>>   target/riscv: rvv-1.0: load/store whole register instructions
+>>   target/riscv: rvv-1.0: update vext_max_elems() for load/store insns
+>>   target/riscv: rvv-1.0: take fractional LMUL into vector max elements
+>>     calculation
+>>   target/riscv: rvv-1.0: floating-point square-root instruction
+>>   target/riscv: rvv-1.0: floating-point classify instructions
+>>   target/riscv: rvv-1.0: mask population count instruction
+>>   target/riscv: rvv-1.0: find-first-set mask bit instruction
+>>   target/riscv: rvv-1.0: set-X-first mask bit instructions
+>>   target/riscv: rvv-1.0: iota instruction
+>>   target/riscv: rvv-1.0: element index instruction
+>>   target/riscv: rvv-1.0: allow load element with sign-extended
+>>   target/riscv: rvv-1.0: register gather instructions
+>>   target/riscv: rvv-1.0: integer scalar move instructions
+>>   target/riscv: rvv-1.0: floating-point move instruction
+>>   target/riscv: rvv-1.0: floating-point scalar move instructions
+>>   target/riscv: rvv-1.0: whole register move instructions
+>>   target/riscv: rvv-1.0: integer extension instructions
+>>   target/riscv: rvv-1.0: single-width averaging add and subtract
+>>     instructions
+>>   target/riscv: rvv-1.0: single-width bit shift instructions
+>>   target/riscv: rvv-1.0: integer add-with-carry/subtract-with-borrow
+>>   target/riscv: rvv-1.0: narrowing integer right shift instructions
+>>   target/riscv: rvv-1.0: widening integer multiply-add instructions
+>>   target/riscv: rvv-1.0: add Zvqmac extension
+>>   target/riscv: rvv-1.0: quad-widening integer multiply-add instructions
+>>   target/riscv: rvv-1.0: single-width saturating add and subtract
+>>     instructions
+>>   target/riscv: rvv-1.0: integer comparison instructions
+>>   target/riscv: use softfloat lib float16 comparison functions
+>>   target/riscv: rvv-1.0: floating-point compare instructions
+>>   target/riscv: rvv-1.0: mask-register logical instructions
+>>   target/riscv: rvv-1.0: slide instructions
+>>   target/riscv: rvv-1.0: floating-point slide instructions
+>>   target/riscv: rvv-1.0: narrowing fixed-point clip instructions
+>>   target/riscv: rvv-1.0: single-width floating-point reduction
+>>   target/riscv: rvv-1.0: widening floating-point reduction instructions
+>>   target/riscv: rvv-1.0: single-width scaling shift instructions
+>>   target/riscv: rvv-1.0: remove widening saturating scaled multiply-add
+>>   target/riscv: rvv-1.0: remove vmford.vv and vmford.vf
+>>   target/riscv: rvv-1.0: remove integer extract instruction
+>>   target/riscv: rvv-1.0: floating-point min/max instructions
+>>   target/riscv: introduce floating-point rounding mode enum
+>>   target/riscv: rvv-1.0: floating-point/integer type-convert
+>>     instructions
+>>   target/riscv: rvv-1.0: widening floating-point/integer type-convert
+>>   target/riscv: add "set round to odd" rounding mode helper function
+>>   target/riscv: rvv-1.0: narrowing floating-point/integer type-convert
+>>   target/riscv: rvv-1.0: relax RV_VLEN_MAX to 512-bits
+>>
+>> Greentime Hu (2):
+>>   target/riscv: rvv-1.0: add vlenb register
+>>   target/riscv: gdb: support vector registers for rv32
+>>
+>> Hsiangkai Wang (2):
+>>   target/riscv: gdb: modify gdb csr xml file to align with csr register
+>>     map
+>>   target/riscv: gdb: support vector registers for rv64
+>>
+>> LIU Zhiwei (4):
+>>   target/riscv: rvv-1.0: add mstatus VS field
+>>   target/riscv: rvv-1.0: add sstatus VS field
+>>   target/riscv: rvv-1.0: add translation-time vector context status
+>>   target/riscv: rvv-1.0: add vcsr register
+>>
+>>  gdb-xml/riscv-32bit-csr.xml             |   18 +-
+>>  gdb-xml/riscv-64bit-csr.xml             |   18 +-
+>>  target/riscv/cpu.c                      |   12 +-
+>>  target/riscv/cpu.h                      |   97 +-
+>>  target/riscv/cpu_bits.h                 |   10 +
+>>  target/riscv/cpu_helper.c               |   16 +-
+>>  target/riscv/csr.c                      |   73 +-
+>>  target/riscv/fpu_helper.c               |   17 +-
+>>  target/riscv/gdbstub.c                  |  126 +-
+>>  target/riscv/helper.h                   |  523 ++--
+>>  target/riscv/insn32-64.decode           |   18 +-
+>>  target/riscv/insn32.decode              |  295 +-
+>>  target/riscv/insn_trans/trans_rvv.inc.c | 2366 ++++++++++------
+>>  target/riscv/internals.h                |   19 +-
+>>  target/riscv/translate.c                |   68 +-
+>>  target/riscv/vector_helper.c            | 3269 +++++++++++------------
+>>  16 files changed, 4051 insertions(+), 2894 deletions(-)
+>>
+>> --
+>> 2.17.1
+>>
+>
+> ping~
 
-[Dropeed CC'd]
+I wasn't really following too closely, but didn't Richard give comments?
 
-...
-
-> diff --git a/migration/rdma.c b/migration/rdma.c
-> index e3eac913bc..87cb277d05 100644
-> --- a/migration/rdma.c
-> +++ b/migration/rdma.c
-> @@ -399,8 +399,8 @@ typedef struct RDMAContext {
-> =20
->  #define TYPE_QIO_CHANNEL_RDMA "qio-channel-rdma"
->  typedef struct QIOChannelRDMA QIOChannelRDMA;
-> -#define QIO_CHANNEL_RDMA(obj)                                     \
-> -    OBJECT_CHECK(QIOChannelRDMA, (obj), TYPE_QIO_CHANNEL_RDMA)
-> +DECLARE_INSTANCE_CHECKER(QIOChannelRDMA, QIO_CHANNEL_RDMA,
-> +                         TYPE_QIO_CHANNEL_RDMA)
-> =20
-> =20
-> =20
-
-Reviewed-by: Juan Quintela <quintela@redhat.com>
-
+Alistair
 
