@@ -1,79 +1,105 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kBKwm-0005sQ-Ft
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Aug 2020 12:40:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45904)
+	id 1kBMUR-0000Yc-OP
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Aug 2020 14:19:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43844)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <natechancellor@gmail.com>)
- id 1kBKwk-0005q1-Jr; Thu, 27 Aug 2020 12:40:18 -0400
-Received: from mail-qk1-x741.google.com ([2607:f8b0:4864:20::741]:41833)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <natechancellor@gmail.com>)
- id 1kBKwi-0002OH-Lr; Thu, 27 Aug 2020 12:40:18 -0400
-Received: by mail-qk1-x741.google.com with SMTP id o196so5913435qke.8;
- Thu, 27 Aug 2020 09:40:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=wz36r75++jBDk+X7iGm/asgKhKsbHqYMGXvCaatim6U=;
- b=TN5d/aOEwJ/ij0To/bsaMXOjoqadHAdUo5Ucf9ed8qA1w/rV4mCH0waFGp4kb5vmJz
- DMtQGGUH6kddZv2dZ4CM85uunk2n/DtnOXSXfC+OY3gfVtWv+3b1z+LKu8MIiuM9fkI+
- Um0Jh24t0lf8gSnWe7BXiLsBFTHNS1X12mfuZKXQbX9QsvsRQeELvGEjtavTgtRaxZ8A
- 3YCrk4wig2Wyu7E36YYwFAjevUV1m/IGKTi5Wva4j0mACz9EHo0ajyKP1V61QHvf73nH
- Wx9Z3YshwSpPjaJjLzVeGSEK6+wHbLn76uxvGKbKCd9ZkeVBlgVDV9dQURpLFPR6GDtc
- P0+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=wz36r75++jBDk+X7iGm/asgKhKsbHqYMGXvCaatim6U=;
- b=I1skD5/bpSR0YjRJvXqmlKdsemze7uT7SMP5x+s2EBiRQ4Uk4Tg1b8KWLtkgbQ3CFO
- SPsO2juXpFwURWIRRKIAiXL148o4r0/AVkhrAgR7FY2PenBV2xd1uRaJSjHsLHowlNfk
- l8VDRoqSCGg6QX9uhPfQaFJzLzvP40xAGqFGyx/vl6vxZCgJ60ISYpIwQmG11dxSNs3/
- N/eTZ9N3K4I4tJzBnyvVgv6LsZhz5/ygNV6z6Uu4zg+eaQB3A2NNuygWh6Qn513yO+I4
- 7B0V6nc+RfHy8AC1Ek4aQsuhjYq7ncP6H0/vF7PWW4NS8sO+QyRkhm8ABvebME4+Xbpx
- ujbA==
-X-Gm-Message-State: AOAM530TxyAW7AkmNWeHqrv3XG2CH9Mw7uJsDaCfGEx+4kbMxEQesRrt
- Y0bRky5PrpWshqegNNJwstk=
-X-Google-Smtp-Source: ABdhPJwFLzspB9/inqOMDTndDTQNViYJJdQc6tHXmOwmAhianK1XFUAUubxcliMe5xQDaLycNiFgEg==
-X-Received: by 2002:a05:620a:a05:: with SMTP id
- i5mr4375180qka.102.1598546414842; 
- Thu, 27 Aug 2020 09:40:14 -0700 (PDT)
-Received: from ubuntu-n2-xlarge-x86 ([2604:1380:45d1:2600::1])
- by smtp.gmail.com with ESMTPSA id z23sm2076194qkj.118.2020.08.27.09.40.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Aug 2020 09:40:14 -0700 (PDT)
-Date: Thu, 27 Aug 2020 09:40:12 -0700
-From: Nathan Chancellor <natechancellor@gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1kBMUP-0000Tc-Pd
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2020 14:19:09 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:24059
+ helo=us-smtp-1.mimecast.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1kBMUL-00083M-ED
+ for qemu-riscv@nongnu.org; Thu, 27 Aug 2020 14:19:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1598552344;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=xq67xF1Ah1SkuP7oFrCV75JxzXmfxpuV8L0SN/RmBDk=;
+ b=UrcTPrXfMF47d9Fe4smV3Ogp+Qg9KmYkxbkLVxjucpUEYmci8z/hmBFsUqr5GPNp6ZJ6++
+ TzswGUs7NiHepqTfiCNvDIfX6gWeKA3aY+nYz4Y2YtUzKkQYjxczZRMpFNGPflEM9zbo8U
+ +4NZNeOF6YwwhefX7goACDL4MdfCCK4=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-47-L87QBkKKNdqtVT7o2Yd_Pg-1; Thu, 27 Aug 2020 14:18:39 -0400
+X-MC-Unique: L87QBkKKNdqtVT7o2Yd_Pg-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 79FCE1074650;
+ Thu, 27 Aug 2020 18:18:33 +0000 (UTC)
+Received: from localhost (unknown [10.10.67.254])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 233C35D9E8;
+ Thu, 27 Aug 2020 18:18:17 +0000 (UTC)
+Date: Thu, 27 Aug 2020 14:18:16 -0400
+From: Eduardo Habkost <ehabkost@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ "Daniel P. Berrange" <berrange@redhat.com>,
+ =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
+ Laurent Vivier <laurent@vivier.eu>, David Hildenbrand <david@redhat.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ Cornelia Huck <cohuck@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
+ Roman Bolshakov <r.bolshakov@yadro.com>,
+ Jason Wang <jasowang@redhat.com>, Fam Zheng <fam@euphon.net>,
+ Hannes Reinecke <hare@suse.com>, qemu-block@nongnu.org,
+ Dmitry Fleytman <dmitry.fleytman@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Andrew Jeffery <andrew@aj.id.au>, Joel Stanley <joel@jms.id.au>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Paolo Bonzini <pbonzini@redhat.com>, Richard Henderson <rth@twiddle.net>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- qemu-stable@nongnu.org
-Subject: Re: [PATCH] memory: Revert "memory: accept mismatching sizes in
- memory_region_access_valid"
-Message-ID: <20200827164012.GA2392870@ubuntu-n2-xlarge-x86>
-References: <20200610134731.1514409-1-mst@redhat.com>
- <20200827053216.GA1515751@ubuntu-n2-xlarge-x86>
- <CAKmqyKNYrpkN+JjDja+2YuSBTg9hVjTZsr+Zej0AFC-KWJr_eA@mail.gmail.com>
+ qemu-riscv@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Richard Henderson <rth@twiddle.net>, Thomas Huth <thuth@redhat.com>,
+ qemu-s390x@nongnu.org, Cameron Esfahani <dirty@apple.com>,
+ Sven Schnelle <svens@stackframe.org>,
+ Alberto Garcia <berto@igalia.com>, Kevin Wolf <kwolf@redhat.com>,
+ Max Reitz <mreitz@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Thomas Huth <huth@tuxfamily.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-ppc@nongnu.org,
+ =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
+ John Snow <jsnow@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
+ Amit Shah <amit@kernel.org>,
+ =?iso-8859-1?Q?Herv=E9?= Poussineau <hpoussin@reactos.org>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Jiri Pirko <jiri@resnulli.us>,
+ Andrzej Zaborowski <balrogg@gmail.com>, kvm@vger.kernel.org,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Juan Quintela <quintela@redhat.com>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>
+Subject: Re: [PATCH v3 00/74] qom: Automated conversion of type checking
+ boilerplate
+Message-ID: <20200827181816.GI642093@habkost.net>
+References: <20200825192110.3528606-1-ehabkost@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAKmqyKNYrpkN+JjDja+2YuSBTg9hVjTZsr+Zej0AFC-KWJr_eA@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::741;
- envelope-from=natechancellor@gmail.com; helo=mail-qk1-x741.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <20200825192110.3528606-1-ehabkost@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Received-SPF: pass client-ip=207.211.31.120; envelope-from=ehabkost@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/27 02:56:52
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.959,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -86,141 +112,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2020 16:40:18 -0000
+X-List-Received-Date: Thu, 27 Aug 2020 18:19:10 -0000
 
-On Thu, Aug 27, 2020 at 08:53:30AM -0700, Alistair Francis wrote:
-> On Wed, Aug 26, 2020 at 11:26 PM Nathan Chancellor
-> <natechancellor@gmail.com> wrote:
-> >
-> > Hi all,
-> >
-> > Sorry for the duplicate reply, my first one was rejected by a mailing
-> > list administrator for being too long so I resent it with the error logs
-> > as a link instead of inline.
-> >
-> > On Wed, Jun 10, 2020 at 09:47:49AM -0400, Michael S. Tsirkin wrote:
-> > > Memory API documentation documents valid .min_access_size and .max_access_size
-> > > fields and explains that any access outside these boundaries is blocked.
-> > >
-> > > This is what devices seem to assume.
-> > >
-> > > However this is not what the implementation does: it simply
-> > > ignores the boundaries unless there's an "accepts" callback.
-> > >
-> > > Naturally, this breaks a bunch of devices.
-> > >
-> > > Revert to the documented behaviour.
-> > >
-> > > Devices that want to allow any access can just drop the valid field,
-> > > or add the impl field to have accesses converted to appropriate
-> > > length.
-> > >
-> > > Cc: qemu-stable@nongnu.org
-> > > Reviewed-by: Richard Henderson <rth@twiddle.net>
-> > > Fixes: CVE-2020-13754
-> > > Fixes: https://bugzilla.redhat.com/show_bug.cgi?id=1842363
-> > > Fixes: a014ed07bd5a ("memory: accept mismatching sizes in memory_region_access_valid")
-> > > Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-> > > ---
-> > >  memory.c | 29 +++++++++--------------------
-> > >  1 file changed, 9 insertions(+), 20 deletions(-)
-> > >
-> > > diff --git a/memory.c b/memory.c
-> > > index 91ceaf9fcf..3e9388fb74 100644
-> > > --- a/memory.c
-> > > +++ b/memory.c
-> > > @@ -1352,35 +1352,24 @@ bool memory_region_access_valid(MemoryRegion *mr,
-> > >                                  bool is_write,
-> > >                                  MemTxAttrs attrs)
-> > >  {
-> > > -    int access_size_min, access_size_max;
-> > > -    int access_size, i;
-> > > +    if (mr->ops->valid.accepts
-> > > +        && !mr->ops->valid.accepts(mr->opaque, addr, size, is_write, attrs)) {
-> > > +        return false;
-> > > +    }
-> > >
-> > >      if (!mr->ops->valid.unaligned && (addr & (size - 1))) {
-> > >          return false;
-> > >      }
-> > >
-> > > -    if (!mr->ops->valid.accepts) {
-> > > +    /* Treat zero as compatibility all valid */
-> > > +    if (!mr->ops->valid.max_access_size) {
-> > >          return true;
-> > >      }
-> > >
-> > > -    access_size_min = mr->ops->valid.min_access_size;
-> > > -    if (!mr->ops->valid.min_access_size) {
-> > > -        access_size_min = 1;
-> > > +    if (size > mr->ops->valid.max_access_size
-> > > +        || size < mr->ops->valid.min_access_size) {
-> > > +        return false;
-> > >      }
-> > > -
-> > > -    access_size_max = mr->ops->valid.max_access_size;
-> > > -    if (!mr->ops->valid.max_access_size) {
-> > > -        access_size_max = 4;
-> > > -    }
-> > > -
-> > > -    access_size = MAX(MIN(size, access_size_max), access_size_min);
-> > > -    for (i = 0; i < size; i += access_size) {
-> > > -        if (!mr->ops->valid.accepts(mr->opaque, addr + i, access_size,
-> > > -                                    is_write, attrs)) {
-> > > -            return false;
-> > > -        }
-> > > -    }
-> > > -
-> > >      return true;
-> > >  }
-> > >
-> > > --
-> > > MST
-> > >
-> > >
-> >
-> > I just ran into a regression with booting RISC-V kernels due to this
-> > commit. I can reproduce it with QEMU 5.1.0 and latest tip of tree
-> > (25f6dc28a3a8dd231c2c092a0e65bd796353c769 at the time of initially
-> > writing this).
-> >
-> > The error message, commands, and bisect logs are available here:
-> >
-> > https://gist.githubusercontent.com/nathanchance/c106dd22ec0c0e00f6a25daba106a1b9/raw/d929f2fff6da9126ded156affb0f19f359e9f693/qemu-5.1.0-issue-terminal-log.txt
+On Tue, Aug 25, 2020 at 03:19:56PM -0400, Eduardo Habkost wrote:
+> git tree for this series:
+> https://github.com/ehabkost/qemu-hacks/tree/work/qom-macros-autoconvert
 > 
-> From what I can tell the problem happens when you try to reboot the board right?
-
-Yes, sorry, should have made that clear. All the rootfs does is print
-the version string and then runs 'poweroff' (not 'reboot'):
-
-https://github.com/ClangBuiltLinux/boot-utils/blob/master/buildroot/overlay-poweroff/etc/init.d/S50yolo
-
-> You might want to try changing this line from 4 to 8:
-> https://github.com/qemu/qemu/blob/master/hw/riscv/sifive_test.c#L63
-
-Unfortunately, that did not work. For the record, I tried changing that
-field in all drivers in hw/riscv:
-
-$ sed -i 's/ \.max_access_size = .*/ \.max_access_size = 8/' hw/riscv/* &&
-./configure &&
-make -j"$(nproc)"
-
-> >
-> > I have attached the rootfs and kernel image used for these tests. If for
-> > some reason there is a problem receiving them, the kernel is just an
-> > arch/riscv/configs/defconfig kernel at Linux 5.9-rc2 and the rootfs is
-> > available here:
-> >
-> > https://github.com/ClangBuiltLinux/boot-utils/blob/3b21a5b71451742866349ba4f18638c5a754e660/images/riscv/rootfs.cpio.zst
-> >
-> > Please let me know if I can provide any follow up information or if I am
-> > doing something wrong.
+> This is an extension of the series previously submitted by
+> Daniel[1], including a script that will convert existing type
+> checker macros automatically.
 > 
-> Thanks for providing so much information and doing a bisect.
-> 
-> Alistair
-> 
-> >
-> > Cheers,
-> > Nathan
+> [1] https://lore.kernel.org/qemu-devel/20200723181410.3145233-1-berrange@redh=
+> at.com/
+
+I'm queueing the following patches on machine-next:
+
+[PATCH v3 01/74] e1000: Rename QOM class cast macros
+[PATCH v3 02/74] megasas: Rename QOM class cast macros
+[PATCH v3 03/74] vmw_pvscsi: Rename QOM class cast macros
+[PATCH v3 04/74] pl110: Rename pl110_version enum values
+[PATCH v3 05/74] allwinner-h3: Rename memmap enum constants
+[PATCH v3 06/74] aspeed_soc: Rename memmap/irqmap enum constants
+[PATCH v3 07/74] opentitan: Rename memmap enum constants
+[PATCH v3 10/74] aspeed_timer: Fix ASPEED_TIMER macro definition
+[PATCH v3 11/74] versatile: Fix typo in PCI_VPB_HOST definition
+[PATCH v3 12/74] virtio-ccw: Fix definition of VIRTIO_CCW_BUS_GET_CLASS
+[PATCH v3 13/74] hvf: Add missing include
+[PATCH v3 14/74] hcd-dwc2: Rename USB_*CLASS macros for consistency
+[PATCH v3 15/74] tulip: Move TulipState typedef to header
+[PATCH v3 16/74] throttle-groups: Move ThrottleGroup typedef to header
+[PATCH v3 17/74] pci: Move PCIBusClass typedef to pci.h
+[PATCH v3 18/74] i8254: Move PITCommonState/PITCommonClass typedefs to i8254.h
+[PATCH v3 19/74] hvf: Move HVFState typedef to hvf.h
+[PATCH v3 20/74] mcf_fec: Move mcf_fec_state typedef to header
+[PATCH v3 21/74] s390_flic: Move KVMS390FLICState typedef to header
+[PATCH v3 22/74] can_emu: Delete macros for non-existing typedef
+[PATCH v3 23/74] nubus: Delete unused NUBUS_BRIDGE macro
+[PATCH v3 24/74] platform-bus: Delete macros for non-existing typedef
+[PATCH v3 25/74] armsse: Rename QOM macros to avoid conflicts
+[PATCH v3 26/74] xen-legacy-backend: Add missing typedef XenLegacyDevice
+[PATCH v3 27/74] spapr: Move typedef SpaprMachineState to spapr.h
+[PATCH v3 28/74] s390x: Move typedef SCLPEventFacility to event-facility.h
+[PATCH v3 29/74] vhost-user-gpu: Move QOM macro to header
+[PATCH v3 30/74] ahci: Move QOM macros to header
+[PATCH v3 31/74] i8257: Move QOM macro to header
+[PATCH v3 32/74] ahci: Move QOM macro to header
+[PATCH v3 33/74] pckbd: Move QOM macro to header
+[PATCH v3 34/74] vmbus: Move QOM macros to vmbus.h
+[PATCH v3 35/74] virtio-serial-bus: Move QOM macros to header
+[PATCH v3 36/74] piix: Move QOM macros to header
+[PATCH v3 37/74] auxbus: Move QOM macros to header
+[PATCH v3 38/74] rocker: Move QOM macros to header
+[PATCH v3 39/74] pxa2xx: Move QOM macros to header
+[PATCH v3 40/74] mptsas: Move QOM macros to header
+[PATCH v3 41/74] kvm: Move QOM macros to kvm.h
+[PATCH v3 42/74] vfio/pci: Move QOM macros to header
+[PATCH v3 43/74] nubus: Rename class type checking macros
+[PATCH v3 48/74] s390-virtio-ccw: Rename S390_MACHINE_CLASS macro
+[PATCH v3 49/74] swim: Rename struct SWIM to Swim
+[PATCH v3 50/74] migration: Rename class type checking macros
+
+-- 
+Eduardo
+
 
