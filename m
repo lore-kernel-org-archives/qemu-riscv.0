@@ -1,49 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kBE7X-0003Ba-BR
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Aug 2020 05:23:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57082)
+	id 1kBKNy-0004N4-5m
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Aug 2020 12:04:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35216)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kBE7Q-0002rn-Nk; Thu, 27 Aug 2020 05:22:52 -0400
-Received: from szxga04-in.huawei.com ([45.249.212.190]:4661 helo=huawei.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kBE7L-0003G3-Jw; Thu, 27 Aug 2020 05:22:52 -0400
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id A9564DBC4605A4C958E9;
- Thu, 27 Aug 2020 17:22:42 +0800 (CST)
-Received: from huawei.com (10.174.187.31) by DGGEMS402-HUB.china.huawei.com
- (10.3.19.202) with Microsoft SMTP Server id 14.3.487.0; Thu, 27 Aug 2020
- 17:22:32 +0800
-From: Yifei Jiang <jiangyifei@huawei.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
- <libvir-list@redhat.com>, <anup.patel@wdc.com>, <palmer@dabbelt.com>,
- <Alistair.Francis@wdc.com>, <sagark@eecs.berkeley.edu>,
- <kbastian@mail.uni-paderborn.de>, <victor.zhangxiaofeng@huawei.com>,
- <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
- <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
- <jiangyifei@huawei.com>
-Subject: [PATCH RFC v3 09/14] target/riscv: Add host cpu type
-Date: Thu, 27 Aug 2020 17:21:32 +0800
-Message-ID: <20200827092137.479-10-jiangyifei@huawei.com>
-X-Mailer: git-send-email 2.26.2.windows.1
-In-Reply-To: <20200827092137.479-1-jiangyifei@huawei.com>
-References: <20200827092137.479-1-jiangyifei@huawei.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kBKNw-0004KY-Pz; Thu, 27 Aug 2020 12:04:20 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:46118)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kBKNu-0004aw-JE; Thu, 27 Aug 2020 12:04:20 -0400
+Received: by mail-io1-xd42.google.com with SMTP id d18so6325007iop.13;
+ Thu, 27 Aug 2020 09:04:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=0Tx9S6uoPdFyNTRBfxNdyFFit/3TUwXl/QcWG9Wflwk=;
+ b=DTKk4rWCZX3JSxTpaurUtd3mMNvJjBEbkK1MiK38I0lxoS5NTH3FtQbLHZEavi+7Oj
+ fp6gZpcF//Ckfs6dVxni9avQ/WWjiWHfp6WCFNb5gOXAj6QZIDMo0NPTkbx5imb1Oe7v
+ zUP39zJ3M/uhuckMt0Wha4D6Z2UKldkLKw7luHpmahipcSRtjCzFh7fvFO1QFrnPtBzh
+ AI+vBjxc7RNQ0VrhS+27XOhh0TPGSB2zAO7q5j4mCaihuuOfNq/W+tIQiF5Pv2jjIZVr
+ lTcUqTyCmPjynN9hhGaBI+huTAr6WIlLmWTBZjVO/68MVi4qnhMhACAatFJv0gFibJHK
+ Z7nQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=0Tx9S6uoPdFyNTRBfxNdyFFit/3TUwXl/QcWG9Wflwk=;
+ b=ssOWsNvdWcnUYqVzYF5EOPbqkTsF3qDSW2XYy3ka4eFhnSEaalPUkCK+N+GOXSd1Yc
+ 1xfwREjHPrjV1paU3AJ1X4gEpqPXPv76qtA7xvEdiquAHOPZ4jIqOB1Flk3FWIlqYx/7
+ 00hNBVSyQLssyV/w0a6Hy0Dy3bhGf+bLB/d9TBIOYe1OtS9YPcf6erAfsQGq6GpEOBIU
+ mEqEw7BYSO0qm/kNTuAPrl2+GPCy0QeYm+IF7NelXl76bAPWOnwIgz2AEBQbHUpJ86oN
+ ltwfrViBf6ia9q9n1Zx8JO7tKts6rJcfqv9cM5z6/p+KBLhf/XwWYKe6Ox8xLe0rbcHB
+ SvPg==
+X-Gm-Message-State: AOAM5317efm8QJid+n5JS7ZE6rXZEIR5eb4XDAOLXbOCdYyJvux8tWjf
+ Ldhz/llQBPh8kHKO1qeIJXirjuiPdgs/LN9z9tg=
+X-Google-Smtp-Source: ABdhPJx8XjY0lXhhWIfKF7ooPB6U1ybUpVizT+9AZT8Py06Z5KEmGz2MT9enknGSaltHtRc1FK1iBnfGdjPbRxNBCkk=
+X-Received: by 2002:a5d:995a:: with SMTP id v26mr17363630ios.176.1598544256063; 
+ Thu, 27 Aug 2020 09:04:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain
-X-Originating-IP: [10.174.187.31]
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.190;
- envelope-from=jiangyifei@huawei.com; helo=huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/27 02:12:47
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
+References: <20200610134731.1514409-1-mst@redhat.com>
+ <20200827053216.GA1515751@ubuntu-n2-xlarge-x86>
+In-Reply-To: <20200827053216.GA1515751@ubuntu-n2-xlarge-x86>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 27 Aug 2020 08:53:30 -0700
+Message-ID: <CAKmqyKNYrpkN+JjDja+2YuSBTg9hVjTZsr+Zej0AFC-KWJr_eA@mail.gmail.com>
+Subject: Re: [PATCH] memory: Revert "memory: accept mismatching sizes in
+ memory_region_access_valid"
+To: Nathan Chancellor <natechancellor@gmail.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Richard Henderson <rth@twiddle.net>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ qemu-stable@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -57,59 +79,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2020 09:22:53 -0000
+X-List-Received-Date: Thu, 27 Aug 2020 16:04:21 -0000
 
-Currently, host cpu is inherited simply.
+On Wed, Aug 26, 2020 at 11:26 PM Nathan Chancellor
+<natechancellor@gmail.com> wrote:
+>
+> Hi all,
+>
+> Sorry for the duplicate reply, my first one was rejected by a mailing
+> list administrator for being too long so I resent it with the error logs
+> as a link instead of inline.
+>
+> On Wed, Jun 10, 2020 at 09:47:49AM -0400, Michael S. Tsirkin wrote:
+> > Memory API documentation documents valid .min_access_size and .max_access_size
+> > fields and explains that any access outside these boundaries is blocked.
+> >
+> > This is what devices seem to assume.
+> >
+> > However this is not what the implementation does: it simply
+> > ignores the boundaries unless there's an "accepts" callback.
+> >
+> > Naturally, this breaks a bunch of devices.
+> >
+> > Revert to the documented behaviour.
+> >
+> > Devices that want to allow any access can just drop the valid field,
+> > or add the impl field to have accesses converted to appropriate
+> > length.
+> >
+> > Cc: qemu-stable@nongnu.org
+> > Reviewed-by: Richard Henderson <rth@twiddle.net>
+> > Fixes: CVE-2020-13754
+> > Fixes: https://bugzilla.redhat.com/show_bug.cgi?id=1842363
+> > Fixes: a014ed07bd5a ("memory: accept mismatching sizes in memory_region_access_valid")
+> > Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> > ---
+> >  memory.c | 29 +++++++++--------------------
+> >  1 file changed, 9 insertions(+), 20 deletions(-)
+> >
+> > diff --git a/memory.c b/memory.c
+> > index 91ceaf9fcf..3e9388fb74 100644
+> > --- a/memory.c
+> > +++ b/memory.c
+> > @@ -1352,35 +1352,24 @@ bool memory_region_access_valid(MemoryRegion *mr,
+> >                                  bool is_write,
+> >                                  MemTxAttrs attrs)
+> >  {
+> > -    int access_size_min, access_size_max;
+> > -    int access_size, i;
+> > +    if (mr->ops->valid.accepts
+> > +        && !mr->ops->valid.accepts(mr->opaque, addr, size, is_write, attrs)) {
+> > +        return false;
+> > +    }
+> >
+> >      if (!mr->ops->valid.unaligned && (addr & (size - 1))) {
+> >          return false;
+> >      }
+> >
+> > -    if (!mr->ops->valid.accepts) {
+> > +    /* Treat zero as compatibility all valid */
+> > +    if (!mr->ops->valid.max_access_size) {
+> >          return true;
+> >      }
+> >
+> > -    access_size_min = mr->ops->valid.min_access_size;
+> > -    if (!mr->ops->valid.min_access_size) {
+> > -        access_size_min = 1;
+> > +    if (size > mr->ops->valid.max_access_size
+> > +        || size < mr->ops->valid.min_access_size) {
+> > +        return false;
+> >      }
+> > -
+> > -    access_size_max = mr->ops->valid.max_access_size;
+> > -    if (!mr->ops->valid.max_access_size) {
+> > -        access_size_max = 4;
+> > -    }
+> > -
+> > -    access_size = MAX(MIN(size, access_size_max), access_size_min);
+> > -    for (i = 0; i < size; i += access_size) {
+> > -        if (!mr->ops->valid.accepts(mr->opaque, addr + i, access_size,
+> > -                                    is_write, attrs)) {
+> > -            return false;
+> > -        }
+> > -    }
+> > -
+> >      return true;
+> >  }
+> >
+> > --
+> > MST
+> >
+> >
+>
+> I just ran into a regression with booting RISC-V kernels due to this
+> commit. I can reproduce it with QEMU 5.1.0 and latest tip of tree
+> (25f6dc28a3a8dd231c2c092a0e65bd796353c769 at the time of initially
+> writing this).
+>
+> The error message, commands, and bisect logs are available here:
+>
+> https://gist.githubusercontent.com/nathanchance/c106dd22ec0c0e00f6a25daba106a1b9/raw/d929f2fff6da9126ded156affb0f19f359e9f693/qemu-5.1.0-issue-terminal-log.txt
 
-Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
----
- target/riscv/cpu.c | 6 ++++++
- target/riscv/cpu.h | 1 +
- 2 files changed, 7 insertions(+)
+From what I can tell the problem happens when you try to reboot the board right?
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 266e70cc47..d8c32a8f84 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -179,6 +179,10 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
- 
- #endif
- 
-+static void riscv_host_cpu_init(Object *obj)
-+{
-+}
-+
- static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
- {
-     ObjectClass *oc;
-@@ -635,10 +639,12 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rvxx_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32_imafcu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rvxx_sifive_u_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
- #elif defined(TARGET_RISCV64)
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           riscv_base_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rvxx_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rvxx_sifive_u_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
- #endif
- };
- 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index d4cafe37e1..7795e7ae13 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -42,6 +42,7 @@
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
- #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
-+#define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
- 
- #define RV32 ((target_ulong)1 << (TARGET_LONG_BITS - 2))
- #define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
--- 
-2.19.1
+You might want to try changing this line from 4 to 8:
+https://github.com/qemu/qemu/blob/master/hw/riscv/sifive_test.c#L63
 
+>
+> I have attached the rootfs and kernel image used for these tests. If for
+> some reason there is a problem receiving them, the kernel is just an
+> arch/riscv/configs/defconfig kernel at Linux 5.9-rc2 and the rootfs is
+> available here:
+>
+> https://github.com/ClangBuiltLinux/boot-utils/blob/3b21a5b71451742866349ba4f18638c5a754e660/images/riscv/rootfs.cpio.zst
+>
+> Please let me know if I can provide any follow up information or if I am
+> doing something wrong.
 
+Thanks for providing so much information and doing a bisect.
+
+Alistair
+
+>
+> Cheers,
+> Nathan
 
