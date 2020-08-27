@@ -1,20 +1,20 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kBE7V-00037Z-U7
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Aug 2020 05:22:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57022)
+	id 1kBE7W-00038J-3u
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Aug 2020 05:22:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57046)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kBE7N-0002i2-EW; Thu, 27 Aug 2020 05:22:49 -0400
-Received: from szxga05-in.huawei.com ([45.249.212.191]:4274 helo=huawei.com)
+ id 1kBE7O-0002lN-Iy; Thu, 27 Aug 2020 05:22:50 -0400
+Received: from szxga04-in.huawei.com ([45.249.212.190]:4660 helo=huawei.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kBE7I-0003FE-Ug; Thu, 27 Aug 2020 05:22:49 -0400
+ id 1kBE7L-0003G4-Fc; Thu, 27 Aug 2020 05:22:50 -0400
 Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id D58A74862EF1E1423524;
- Thu, 27 Aug 2020 17:22:34 +0800 (CST)
+ by Forcepoint Email with ESMTP id A2193869D6D927573166;
+ Thu, 27 Aug 2020 17:22:42 +0800 (CST)
 Received: from huawei.com (10.174.187.31) by DGGEMS402-HUB.china.huawei.com
  (10.3.19.202) with Microsoft SMTP Server id 14.3.487.0; Thu, 27 Aug 2020
- 17:22:25 +0800
+ 17:22:35 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
@@ -24,18 +24,21 @@ CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
  <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
  <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
  <jiangyifei@huawei.com>
-Subject: [PATCH RFC v3 00/14] Add riscv kvm accel support
-Date: Thu, 27 Aug 2020 17:21:23 +0800
-Message-ID: <20200827092137.479-1-jiangyifei@huawei.com>
+Subject: [PATCH RFC v3 13/14] target/riscv: Implement virtual time adjusting
+ with vm state changing
+Date: Thu, 27 Aug 2020 17:21:36 +0800
+Message-ID: <20200827092137.479-14-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
+In-Reply-To: <20200827092137.479-1-jiangyifei@huawei.com>
+References: <20200827092137.479-1-jiangyifei@huawei.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain
 X-Originating-IP: [10.174.187.31]
 X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.191;
+Received-SPF: pass client-ip=45.249.212.190;
  envelope-from=jiangyifei@huawei.com; helo=huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/27 02:09:23
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/27 02:12:47
 X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
 X-Spam_score_int: -41
 X-Spam_score: -4.2
@@ -55,103 +58,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2020 09:22:50 -0000
+X-List-Received-Date: Thu, 27 Aug 2020 09:22:51 -0000
 
-This series adds both riscv32 and riscv64 kvm support, and implements
-migration based on riscv. It is based on temporarily unaccepted kvm:
-https://github.com/kvm-riscv/linux
+We hope that virtual time adjusts with vm state changing. When a vm
+is stopped, guest virtual time should stop counting and kvm_timer
+should be stopped. When the vm is resumed, guest virtual time should
+continue to count and kvm_timer should be restored.
 
-Compared to RFC v2, the migration is supported in this series. The new
-added migration feature also requires the following patches:
-[1]
-[PATCH RFC 0/2] Add log dirty support
-https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2284945.html
+Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+---
+ target/riscv/kvm.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-[2]
-[PATCH] target/riscv: raise exception to HS-mode at get_physical_address
-https://patchew.org/QEMU/20200824084158.1769-1-jiangyifei@huawei.com/
-
-Several steps to use this:
-1. Build emulation
-$ ./configure --target-list=riscv64-softmmu
-$ make -j$(nproc)
-
-2. Build kernel
-https://github.com/kvm-riscv/linux
-
-3. Build QEMU VM
-I cross built in riscv toolchain.
-$ PKG_CONFIG_LIBDIR=<toolchain pkgconfig path>
-$ export PKG_CONFIG_SYSROOT_DIR=<toolchain sysroot path>
-$ ./configure --target-list=riscv64-softmmu --enable-kvm \
---cross-prefix=riscv64-linux-gnu- --disable-libiscsi --disable-glusterfs \
---disable-libusb --disable-usb-redir --audio-drv-list= --disable-opengl \
---disable-libxml2
-$ make -j$(nproc)
-
-4. Start emulation
-$ ./qemu-system-riscv64 -M virt -m 4096M -cpu rv64,x-h=true -nographic \
-        -name guest=riscv-hyp,debug-threads=on \
-        -smp 4 \
-        -bios ./fw_jump.bin \
-        -kernel ./Image \
-        -drive file=./hyp.img,format=raw,id=hd0 \
-        -device virtio-blk-device,drive=hd0 \
-        -append "root=/dev/vda rw console=ttyS0 earlycon=sbi"
-
-5. Start kvm-acceled QEMU VM in emulation
-$ ./qemu-system-riscv64 -M virt,accel=kvm -m 1024M -cpu host -nographic \
-        -name guest=riscv-guset \
-        -smp 2 \
-        -bios none \
-        -kernel ./Image \
-        -drive file=./guest.img,format=raw,id=hd0 \
-        -device virtio-blk-device,drive=hd0 \
-        -append "root=/dev/vda rw console=ttyS0 earlycon=sbi"
-
-This following link describes the details about live migration steps:
-https://gitee.com/openeuler/qemu/wikis/Live%20migration?sort_id=2767831
-
-Changes since RFC v2
-1. Fix checkpatch error at target/riscv/sbi_ecall_interface.h.
-2. Add riscv migration support.
-
-Changes since RFC v1
-1. Add separate SBI ecall interface header.
-2. Add riscv32 kvm accel support.
-
-Yifei Jiang (14):
-  linux-header: Update linux/kvm.h
-  target/riscv: Add target/riscv/kvm.c to place the public kvm interface
-  target/riscv: Implement function kvm_arch_init_vcpu
-  target/riscv: Implement kvm_arch_get_registers
-  arget/riscv: Implement kvm_arch_put_registers
-  target/riscv: Support start kernel directly by KVM
-  hw/riscv: PLIC update external interrupt by KVM when kvm enabled
-  target/riscv: Handler KVM_EXIT_RISCV_SBI exit
-  target/riscv: Add host cpu type
-  target/riscv: Add sifive_plic vmstate
-  target/riscv: Support riscv cpu vmstate
-  target/riscv: Add kvm_riscv_get/put_regs_timer
-  target/riscv: Implement virtual time adjusting with vm state changing
-  target/riscv: Support virtual time context synchronization
-
- configure                          |   1 +
- hw/riscv/sifive_plic.c             |  55 ++-
- hw/riscv/virt.c                    |   8 +
- include/hw/riscv/sifive_plic.h     |   1 +
- linux-headers/linux/kvm.h          |   8 +
- target/riscv/cpu.c                 |  41 +-
- target/riscv/cpu.h                 |  10 +
- target/riscv/kvm.c                 | 599 +++++++++++++++++++++++++++++
- target/riscv/kvm_riscv.h           |  25 ++
- target/riscv/meson.build           |   1 +
- target/riscv/sbi_ecall_interface.h |  72 ++++
- 11 files changed, 809 insertions(+), 12 deletions(-)
- create mode 100644 target/riscv/kvm.c
- create mode 100644 target/riscv/kvm_riscv.h
- create mode 100644 target/riscv/sbi_ecall_interface.h
-
+diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+index 59c537b1cb..943d733539 100644
+--- a/target/riscv/kvm.c
++++ b/target/riscv/kvm.c
+@@ -40,6 +40,7 @@
+ #include "kvm_riscv.h"
+ #include "sbi_ecall_interface.h"
+ #include "chardev/char-fe.h"
++#include "sysemu/runstate.h"
+ 
+ static __u64 kvm_riscv_reg_id(__u64 type, __u64 idx)
+ {
+@@ -448,6 +449,17 @@ unsigned long kvm_arch_vcpu_id(CPUState *cpu)
+     return cpu->cpu_index;
+ }
+ 
++static void kvm_riscv_vm_state_change(void *opaque, int running, RunState state)
++{
++    CPUState *cs = opaque;
++
++    if (running) {
++        kvm_riscv_put_regs_timer(cs);
++    } else {
++        kvm_riscv_get_regs_timer(cs);
++    }
++}
++
+ void kvm_arch_init_irq_routing(KVMState *s)
+ {
+ }
+@@ -459,6 +471,8 @@ int kvm_arch_init_vcpu(CPUState *cs)
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     __u64 id;
+ 
++    qemu_add_vm_change_state_handler(kvm_riscv_vm_state_change, cs);
++
+     id = kvm_riscv_reg_id(KVM_REG_RISCV_CONFIG, KVM_REG_RISCV_CONFIG_REG(isa));
+     ret = kvm_get_one_reg(cs, id, &isa);
+     if (ret) {
 -- 
 2.19.1
 
