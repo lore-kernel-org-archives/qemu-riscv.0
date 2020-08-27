@@ -1,20 +1,20 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kBE7T-0002zk-DH
+	id 1kBE7T-00030V-Kf
 	for mharc-qemu-riscv@gnu.org; Thu, 27 Aug 2020 05:22:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57014)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57030)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kBE7N-0002hU-70; Thu, 27 Aug 2020 05:22:49 -0400
-Received: from szxga05-in.huawei.com ([45.249.212.191]:4275 helo=huawei.com)
+ id 1kBE7N-0002ig-Lo; Thu, 27 Aug 2020 05:22:49 -0400
+Received: from szxga04-in.huawei.com ([45.249.212.190]:4659 helo=huawei.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kBE7J-0003Fn-J2; Thu, 27 Aug 2020 05:22:48 -0400
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id CD915463E7D6D7E0E19C;
+ id 1kBE7L-0003G5-Eb; Thu, 27 Aug 2020 05:22:49 -0400
+Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id B030E6AA5F5D63F4845C;
  Thu, 27 Aug 2020 17:22:42 +0800 (CST)
 Received: from huawei.com (10.174.187.31) by DGGEMS402-HUB.china.huawei.com
  (10.3.19.202) with Microsoft SMTP Server id 14.3.487.0; Thu, 27 Aug 2020
- 17:22:34 +0800
+ 17:22:36 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
@@ -24,9 +24,10 @@ CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
  <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
  <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
  <jiangyifei@huawei.com>
-Subject: [PATCH RFC v3 11/14] target/riscv: Support riscv cpu vmstate
-Date: Thu, 27 Aug 2020 17:21:34 +0800
-Message-ID: <20200827092137.479-12-jiangyifei@huawei.com>
+Subject: [PATCH RFC v3 14/14] target/riscv: Support virtual time context
+ synchronization
+Date: Thu, 27 Aug 2020 17:21:37 +0800
+Message-ID: <20200827092137.479-15-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
 In-Reply-To: <20200827092137.479-1-jiangyifei@huawei.com>
 References: <20200827092137.479-1-jiangyifei@huawei.com>
@@ -35,9 +36,9 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain
 X-Originating-IP: [10.174.187.31]
 X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.191;
+Received-SPF: pass client-ip=45.249.212.190;
  envelope-from=jiangyifei@huawei.com; helo=huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/27 02:09:23
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/27 02:12:47
 X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
 X-Spam_score_int: -41
 X-Spam_score: -4.2
@@ -57,54 +58,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2020 09:22:49 -0000
+X-List-Received-Date: Thu, 27 Aug 2020 09:22:50 -0000
 
-Describe gpr, fpr and csr in vmstate_riscv_cpu.
+Add virtual time context description to vmstate_riscv_cpu. After cpu being
+loaded, virtual time context is updated to KVM.
 
 Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
 ---
- target/riscv/cpu.c | 20 ++++++++++++++++++--
- 1 file changed, 18 insertions(+), 2 deletions(-)
+ target/riscv/cpu.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d8c32a8f84..b698f4adbb 100644
+index b698f4adbb..c6b207d201 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -26,7 +26,7 @@
- #include "qapi/error.h"
- #include "qemu/error-report.h"
- #include "hw/qdev-properties.h"
--#include "migration/vmstate.h"
-+#include "migration/cpu.h"
- #include "fpu/softfloat-helpers.h"
- #include "kvm_riscv.h"
+@@ -496,11 +496,19 @@ static void riscv_cpu_init(Object *obj)
+     cpu_set_cpustate_pointers(cpu);
+ }
  
-@@ -499,7 +499,23 @@ static void riscv_cpu_init(Object *obj)
++static int cpu_post_load(void *opaque, int version_id)
++{
++    RISCVCPU *cpu = opaque;
++    cpu->env.kvm_timer_dirty = true;
++    return 0;
++}
++
  #ifndef CONFIG_USER_ONLY
  static const VMStateDescription vmstate_riscv_cpu = {
      .name = "cpu",
--    .unmigratable = 1,
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-+        VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
-+        VMSTATE_UINTTL(env.pc, RISCVCPU),
-+        VMSTATE_UINTTL(env.mstatus, RISCVCPU),
-+        VMSTATE_UINTTL(env.mie, RISCVCPU),
-+        VMSTATE_UINTTL(env.stvec, RISCVCPU),
-+        VMSTATE_UINTTL(env.sscratch, RISCVCPU),
-+        VMSTATE_UINTTL(env.sepc, RISCVCPU),
-+        VMSTATE_UINTTL(env.scause, RISCVCPU),
-+        VMSTATE_UINTTL(env.sbadaddr, RISCVCPU),
-+        VMSTATE_UINTTL(env.mip, RISCVCPU),
-+        VMSTATE_UINTTL(env.satp, RISCVCPU),
-+        VMSTATE_END_OF_LIST()
-+    }
+     .version_id = 1,
+     .minimum_version_id = 1,
++    .post_load = cpu_post_load,
+     .fields = (VMStateField[]) {
+         VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+         VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
+@@ -514,6 +522,9 @@ static const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_UINTTL(env.sbadaddr, RISCVCPU),
+         VMSTATE_UINTTL(env.mip, RISCVCPU),
+         VMSTATE_UINTTL(env.satp, RISCVCPU),
++        VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
++        VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
++        VMSTATE_UINT64(env.kvm_timer_state, RISCVCPU),
+         VMSTATE_END_OF_LIST()
+     }
  };
- #endif
- 
 -- 
 2.19.1
 
