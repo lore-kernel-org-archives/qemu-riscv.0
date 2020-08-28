@@ -1,105 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kBMUR-0000Yc-OP
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Aug 2020 14:19:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43844)
+	id 1kBdtz-000849-Tp
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Aug 2020 08:54:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43256)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1kBMUP-0000Tc-Pd
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2020 14:19:09 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:24059
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1kBMUL-00083M-ED
- for qemu-riscv@nongnu.org; Thu, 27 Aug 2020 14:19:09 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1598552344;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=xq67xF1Ah1SkuP7oFrCV75JxzXmfxpuV8L0SN/RmBDk=;
- b=UrcTPrXfMF47d9Fe4smV3Ogp+Qg9KmYkxbkLVxjucpUEYmci8z/hmBFsUqr5GPNp6ZJ6++
- TzswGUs7NiHepqTfiCNvDIfX6gWeKA3aY+nYz4Y2YtUzKkQYjxczZRMpFNGPflEM9zbo8U
- +4NZNeOF6YwwhefX7goACDL4MdfCCK4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-47-L87QBkKKNdqtVT7o2Yd_Pg-1; Thu, 27 Aug 2020 14:18:39 -0400
-X-MC-Unique: L87QBkKKNdqtVT7o2Yd_Pg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 79FCE1074650;
- Thu, 27 Aug 2020 18:18:33 +0000 (UTC)
-Received: from localhost (unknown [10.10.67.254])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 233C35D9E8;
- Thu, 27 Aug 2020 18:18:17 +0000 (UTC)
-Date: Thu, 27 Aug 2020 14:18:16 -0400
-From: Eduardo Habkost <ehabkost@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- "Daniel P. Berrange" <berrange@redhat.com>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
- Laurent Vivier <laurent@vivier.eu>, David Hildenbrand <david@redhat.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>,
- Niek Linnenbank <nieklinnenbank@gmail.com>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Cornelia Huck <cohuck@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
- Roman Bolshakov <r.bolshakov@yadro.com>,
- Jason Wang <jasowang@redhat.com>, Fam Zheng <fam@euphon.net>,
- Hannes Reinecke <hare@suse.com>, qemu-block@nongnu.org,
- Dmitry Fleytman <dmitry.fleytman@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
- Beniamino Galvani <b.galvani@gmail.com>,
- Andrew Jeffery <andrew@aj.id.au>, Joel Stanley <joel@jms.id.au>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Richard Henderson <rth@twiddle.net>, Thomas Huth <thuth@redhat.com>,
- qemu-s390x@nongnu.org, Cameron Esfahani <dirty@apple.com>,
- Sven Schnelle <svens@stackframe.org>,
- Alberto Garcia <berto@igalia.com>, Kevin Wolf <kwolf@redhat.com>,
- Max Reitz <mreitz@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Thomas Huth <huth@tuxfamily.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org,
- David Gibson <david@gibson.dropbear.id.au>, qemu-ppc@nongnu.org,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- John Snow <jsnow@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
- Amit Shah <amit@kernel.org>,
- =?iso-8859-1?Q?Herv=E9?= Poussineau <hpoussin@reactos.org>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Jiri Pirko <jiri@resnulli.us>,
- Andrzej Zaborowski <balrogg@gmail.com>, kvm@vger.kernel.org,
- Alex Williamson <alex.williamson@redhat.com>,
- Juan Quintela <quintela@redhat.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>
-Subject: Re: [PATCH v3 00/74] qom: Automated conversion of type checking
- boilerplate
-Message-ID: <20200827181816.GI642093@habkost.net>
-References: <20200825192110.3528606-1-ehabkost@redhat.com>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kBdtx-00083g-Eo; Fri, 28 Aug 2020 08:54:41 -0400
+Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:36574)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kBdtv-0007W7-M1; Fri, 28 Aug 2020 08:54:41 -0400
+Received: by mail-yb1-xb43.google.com with SMTP id 189so481792ybw.3;
+ Fri, 28 Aug 2020 05:54:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=RJWERyVloyJGtlnk41IfZJGiOTaDdKFPngYVc79VY2o=;
+ b=fDneK6Hz7UqHwZ8FPNfKUZ++wvUS/7+ipE5UEPHZrMB51GbX77jPtPPochYu3+2u8m
+ 4DoNd9/H+hm0LOiQA6squF500pDH0Gc+B7Gg9SliDcEwv2lF7ZZmOAZnCltNfqD9nwzv
+ do+RBb+ZALv95R0f+UgsIQndJGS5eEz1QAd7e2BgkhiKDFWiF6M+zt5Ohk6RZ7RX/rqw
+ Cpq3Sh+f1C1R/cCEMwc652ghaOSptBZqMqsErsqHEzAv6TPyqnkMc1h7SaoeIXhVxacs
+ dnJ1p7CDy10yWRILfFtZoN8zr8fQcY/suYMAZmrEvmIA5SmIfFx83rs2b5uqiBs3jyTJ
+ QZXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=RJWERyVloyJGtlnk41IfZJGiOTaDdKFPngYVc79VY2o=;
+ b=pK7UGIGnFQ1w4Mlu2R6arUoKRhzulhZnrLSgaE2j0Vbk7sl3uFucL4ByiXh4t8flEV
+ UO4J/FlAEQvbYmdInc4xdKTQ+Wrb+So0ucbo69rVRnQqc88TcumfJyvjehPIb+4cQG2m
+ gvF7JodkKNbSbivgWf6KYWkm35VHhNqma7eT1UIEGeDXkdQukeU+X8u6Si8iMLjXjYXF
+ N8y5d+jTDLn6LKpihCrxfdzvXeGstSGL9kmAdsYs04ejtv8I/s1qbRXX7xH4Mri4biua
+ AMZUe6B30ghmUHAPEnMRD97lO0rslLzeZUazo8+VK4Huwf8M8om+7oq2pjKoeniZb3iv
+ n1WA==
+X-Gm-Message-State: AOAM531/IIlksdd39eqYYdEI4kGCVePrkwOSrfKdK3fO6EEDrM+J0eMO
+ RpFcBlZLLl7D2sp9/4BtQA68nEyuQvu9pv6YPvs=
+X-Google-Smtp-Source: ABdhPJxtEOchSRKwVThqFQuU9RGQMVGYmdLieMKyD3xWj0++K+Y6x0vKAaqZ9Xhep/l1Ed7eVL2NnNy9Rgf8G3Al+mQ=
+X-Received: by 2002:a25:810a:: with SMTP id o10mr2256394ybk.239.1598619277418; 
+ Fri, 28 Aug 2020 05:54:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200825192110.3528606-1-ehabkost@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Received-SPF: pass client-ip=207.211.31.120; envelope-from=ehabkost@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/27 02:56:52
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -30
-X-Spam_score: -3.1
-X-Spam_bar: ---
-X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.959,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+References: <20200827074638.21451-1-green.wan@sifive.com>
+ <20200827074638.21451-2-green.wan@sifive.com>
+In-Reply-To: <20200827074638.21451-2-green.wan@sifive.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 28 Aug 2020 20:54:26 +0800
+Message-ID: <CAEUhbmUXDiBHzy=CMQAYVzt0NY-JK_KVn-QL-Equw6pRxEiu8w@mail.gmail.com>
+Subject: Re: [RFC PATCH v4 1/2] hw/riscv: sifive_u: Add backend drive support
+To: Green Wan <green.wan@sifive.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -112,67 +75,146 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2020 18:19:10 -0000
+X-List-Received-Date: Fri, 28 Aug 2020 12:54:41 -0000
 
-On Tue, Aug 25, 2020 at 03:19:56PM -0400, Eduardo Habkost wrote:
-> git tree for this series:
-> https://github.com/ehabkost/qemu-hacks/tree/work/qom-macros-autoconvert
-> 
-> This is an extension of the series previously submitted by
-> Daniel[1], including a script that will convert existing type
-> checker macros automatically.
-> 
-> [1] https://lore.kernel.org/qemu-devel/20200723181410.3145233-1-berrange@redh=
-> at.com/
+Hi Green,
 
-I'm queueing the following patches on machine-next:
+On Thu, Aug 27, 2020 at 3:47 PM Green Wan <green.wan@sifive.com> wrote:
+>
+> Add '-drive' support to OTP device. Allow users to assign a raw file
+> as OTP image.
+>
+> Signed-off-by: Green Wan <green.wan@sifive.com>
+> ---
+>  hw/riscv/sifive_u_otp.c         | 50 +++++++++++++++++++++++++++++++++
+>  include/hw/riscv/sifive_u_otp.h |  2 ++
+>  2 files changed, 52 insertions(+)
+>
+> diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
+> index f6ecbaa2ca..aab2220494 100644
+> --- a/hw/riscv/sifive_u_otp.c
+> +++ b/hw/riscv/sifive_u_otp.c
+> @@ -24,6 +24,8 @@
+>  #include "qemu/log.h"
+>  #include "qemu/module.h"
+>  #include "hw/riscv/sifive_u_otp.h"
+> +#include "sysemu/blockdev.h"
+> +#include "sysemu/block-backend.h"
+>
+>  static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
+>  {
+> @@ -46,6 +48,16 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
+>          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
+>              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
+>              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
+> +
+> +            /* read from backend */
+> +            if (s->blk) {
+> +                int32_t buf;
+> +
+> +                blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
+> +                          SIFIVE_U_OTP_FUSE_WORD);
+> +                return buf;
+> +            }
+> +
+>              return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
+>          } else {
+>              return 0xff;
+> @@ -123,6 +135,12 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
+>          s->ptrim = val32;
+>          break;
+>      case SIFIVE_U_OTP_PWE:
+> +        /* write to backend */
+> +        if (s->blk) {
+> +            blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &val32,
 
-[PATCH v3 01/74] e1000: Rename QOM class cast macros
-[PATCH v3 02/74] megasas: Rename QOM class cast macros
-[PATCH v3 03/74] vmw_pvscsi: Rename QOM class cast macros
-[PATCH v3 04/74] pl110: Rename pl110_version enum values
-[PATCH v3 05/74] allwinner-h3: Rename memmap enum constants
-[PATCH v3 06/74] aspeed_soc: Rename memmap/irqmap enum constants
-[PATCH v3 07/74] opentitan: Rename memmap enum constants
-[PATCH v3 10/74] aspeed_timer: Fix ASPEED_TIMER macro definition
-[PATCH v3 11/74] versatile: Fix typo in PCI_VPB_HOST definition
-[PATCH v3 12/74] virtio-ccw: Fix definition of VIRTIO_CCW_BUS_GET_CLASS
-[PATCH v3 13/74] hvf: Add missing include
-[PATCH v3 14/74] hcd-dwc2: Rename USB_*CLASS macros for consistency
-[PATCH v3 15/74] tulip: Move TulipState typedef to header
-[PATCH v3 16/74] throttle-groups: Move ThrottleGroup typedef to header
-[PATCH v3 17/74] pci: Move PCIBusClass typedef to pci.h
-[PATCH v3 18/74] i8254: Move PITCommonState/PITCommonClass typedefs to i8254.h
-[PATCH v3 19/74] hvf: Move HVFState typedef to hvf.h
-[PATCH v3 20/74] mcf_fec: Move mcf_fec_state typedef to header
-[PATCH v3 21/74] s390_flic: Move KVMS390FLICState typedef to header
-[PATCH v3 22/74] can_emu: Delete macros for non-existing typedef
-[PATCH v3 23/74] nubus: Delete unused NUBUS_BRIDGE macro
-[PATCH v3 24/74] platform-bus: Delete macros for non-existing typedef
-[PATCH v3 25/74] armsse: Rename QOM macros to avoid conflicts
-[PATCH v3 26/74] xen-legacy-backend: Add missing typedef XenLegacyDevice
-[PATCH v3 27/74] spapr: Move typedef SpaprMachineState to spapr.h
-[PATCH v3 28/74] s390x: Move typedef SCLPEventFacility to event-facility.h
-[PATCH v3 29/74] vhost-user-gpu: Move QOM macro to header
-[PATCH v3 30/74] ahci: Move QOM macros to header
-[PATCH v3 31/74] i8257: Move QOM macro to header
-[PATCH v3 32/74] ahci: Move QOM macro to header
-[PATCH v3 33/74] pckbd: Move QOM macro to header
-[PATCH v3 34/74] vmbus: Move QOM macros to vmbus.h
-[PATCH v3 35/74] virtio-serial-bus: Move QOM macros to header
-[PATCH v3 36/74] piix: Move QOM macros to header
-[PATCH v3 37/74] auxbus: Move QOM macros to header
-[PATCH v3 38/74] rocker: Move QOM macros to header
-[PATCH v3 39/74] pxa2xx: Move QOM macros to header
-[PATCH v3 40/74] mptsas: Move QOM macros to header
-[PATCH v3 41/74] kvm: Move QOM macros to kvm.h
-[PATCH v3 42/74] vfio/pci: Move QOM macros to header
-[PATCH v3 43/74] nubus: Rename class type checking macros
-[PATCH v3 48/74] s390-virtio-ccw: Rename S390_MACHINE_CLASS macro
-[PATCH v3 49/74] swim: Rename struct SWIM to Swim
-[PATCH v3 50/74] migration: Rename class type checking macros
+The logic looks wrong to me. According to the U-Boot driver
+(sifive-otp.c) the content to be written to the OTP memory comes from
+s->pdin bit by bit. Here val32 represents whether to disable write or
+enable write.
 
--- 
-Eduardo
+I think we should arrange patches like this:
 
+patch 1 to add OTP write functionality, to the existing s->fuse[] mechanism
+patch 2 to add file based backend write support
+
+> +                       SIFIVE_U_OTP_FUSE_WORD, 0);
+> +        }
+> +
+>          s->pwe = val32;
+>          break;
+>      default:
+> @@ -143,16 +161,48 @@ static const MemoryRegionOps sifive_u_otp_ops = {
+>
+>  static Property sifive_u_otp_properties[] = {
+>      DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
+> +    DEFINE_PROP_DRIVE("drive", SiFiveUOTPState, blk),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+>
+>  static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
+>  {
+>      SiFiveUOTPState *s = SIFIVE_U_OTP(dev);
+> +    DriveInfo *dinfo;
+>
+>      memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_u_otp_ops, s,
+>                            TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
+>      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
+> +
+> +    dinfo = drive_get_next(IF_NONE);
+> +    if (dinfo) {
+> +        int ret;
+> +        uint64_t perm;
+> +        int filesize;
+> +        BlockBackend *blk;
+> +
+> +        blk = blk_by_legacy_dinfo(dinfo);
+> +        filesize = SIFIVE_U_OTP_NUM_FUSES * SIFIVE_U_OTP_FUSE_WORD;
+> +        if (blk_getlength(blk) < filesize) {
+> +            qemu_log_mask(LOG_GUEST_ERROR, "OTP drive size < 16K\n");
+> +            return;
+> +        }
+> +
+> +        qdev_prop_set_drive(dev, "drive", blk);
+> +
+> +        perm = BLK_PERM_CONSISTENT_READ |
+> +                        (blk_is_read_only(s->blk) ? 0 : BLK_PERM_WRITE);
+> +        ret = blk_set_perm(s->blk, perm, BLK_PERM_ALL, errp);
+> +        if (ret < 0) {
+> +            qemu_log_mask(LOG_GUEST_ERROR, "set perm error.");
+> +        }
+> +
+> +        if (blk_pread(s->blk, 0, s->fuse, filesize) != filesize) {
+> +            qemu_log_mask(LOG_GUEST_ERROR,
+> +                          "failed to read the initial flash content");
+> +            return;
+> +        }
+> +    }
+>  }
+>
+>  static void sifive_u_otp_reset(DeviceState *dev)
+> diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
+> index 639297564a..13d2552e43 100644
+> --- a/include/hw/riscv/sifive_u_otp.h
+> +++ b/include/hw/riscv/sifive_u_otp.h
+> @@ -43,6 +43,7 @@
+>
+>  #define SIFIVE_U_OTP_PA_MASK        0xfff
+>  #define SIFIVE_U_OTP_NUM_FUSES      0x1000
+> +#define SIFIVE_U_OTP_FUSE_WORD      4
+>  #define SIFIVE_U_OTP_SERIAL_ADDR    0xfc
+>
+>  #define SIFIVE_U_OTP_REG_SIZE       0x1000
+> @@ -75,6 +76,7 @@ typedef struct SiFiveUOTPState {
+>      uint32_t fuse[SIFIVE_U_OTP_NUM_FUSES];
+>      /* config */
+>      uint32_t serial;
+> +    BlockBackend *blk;
+>  } SiFiveUOTPState;
+>
+>  #endif /* HW_SIFIVE_U_OTP_H */
+> --
+
+Regards,
+Bin
 
