@@ -1,46 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kC2d5-0001Fl-4a
-	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 11:18:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44624)
+	id 1kC2d8-0001L8-UN
+	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 11:18:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44638)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kC2d0-00018t-Kl; Sat, 29 Aug 2020 11:18:51 -0400
-Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342]:46343)
+ id 1kC2d5-0001Hd-SM; Sat, 29 Aug 2020 11:18:56 -0400
+Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342]:32862)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kC2cz-0005E1-32; Sat, 29 Aug 2020 11:18:50 -0400
-Received: by mail-ot1-x342.google.com with SMTP id j3so1758504otk.13;
- Sat, 29 Aug 2020 08:18:47 -0700 (PDT)
+ id 1kC2d4-0005EL-4A; Sat, 29 Aug 2020 11:18:55 -0400
+Received: by mail-ot1-x342.google.com with SMTP id t7so1819697otp.0;
+ Sat, 29 Aug 2020 08:18:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=XSd6UA9oGJXgO/Kcn28mrye1Vbs4EU3WILT/MQkdqmw=;
- b=iRPM103u4ZZKHaEFmDRJvt+VAJIsRj9fNeEZGzCBpYoBz+d4HF+5AThuaNOf2Jcfqn
- EzkCbCUjw8Kb+XEWJ0j3+xF2jnYUlxMQpxzh2hFy9nBOehtFxWSmzRfjaXP72aijCxdl
- FcStNKlHNkOHkJ9F+OOeGodMY+rF/wwGXV9G12tdPRHstKXx2fnYSlOq1xDWIxpx3Ilf
- c137FI9SFXqX7LWBiPdoRBiu1LRx3ecKZRGXpFdfZVh2nim0GijCzXBCKKgs3KGUzVaG
- y1OjyeRrUF5SplLXGCL8B5+wFZDBM6qSj6dkeFlfVCBNeuQ5koUWhcUAXztBMI46bGIe
- ZFhg==
+ bh=Ij4Fa5djbJIx/Myvpw/aDERYC9Ay8jdmYeDXjuiJA28=;
+ b=C7Ig8tyD6UItRRKFw1lbBgqf+wXkj4pVryyVnqyQDXiW+VCxNEygzFU62lJHABEIjA
+ b20s7hzjRNYdthDWuMbq5lngPt/xbuT/73gBEk5LaTI7lniYkHwy1dMH1sFZbfMqyLWP
+ BbIxnemECfu1WRHs4xzauPKQ9880rjT/GQoRAOJbQuf5a9rlagKbUr9gv59/aj80CTgf
+ dcIZLuJoiMaB90XtjwunGUXmcZwPG2UkOBC5KD8qQquPZdmHZAZzVleFRN0KFIyQoSl/
+ mp1NOwAmsMFcRlNKJYbUM3XJtDTc+8a87a1g1uJwjVpZo3rZK/mTdpLnCKM1fjh4I4WG
+ lN4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=XSd6UA9oGJXgO/Kcn28mrye1Vbs4EU3WILT/MQkdqmw=;
- b=qyRnVqbNhYdhumThil8DTtQI+52SgCzgeVT0aXDN5BlaX6ScUp5exGGDM1bVxN0j4z
- lKsHmc9OM+uh4nfefmtF3w9MV0wbTnaL0azoJvKcvNkGEHsdp3Fm0ELSb5LhI8lAvCTP
- 3Sga9bsDfNNmxtwxYAI6r7WEBdhom1ezMGRRxWbcM/lnp9Ipk8JKC3h+LMzzObp9kFxz
- GLc+dXHMSVxCmO+WU53sA7TOlsVGFRixs+scvaygPNraYDP73TcTJsWIcZ6ITpYRKBff
- tdJ8EZj9RnZ90/gyrUo/zUW+gp9iTaMbMCn+gp/U8NCYiJKz6zimp16EWLyOOPNG2VYV
- DUqw==
-X-Gm-Message-State: AOAM5333Oou7/KtZUiaPJ31tEBS8CgI92XYGYfnBg+unMKmw5ixCYXEF
- 41rn3M1iYozjbqM41HgFaeg=
-X-Google-Smtp-Source: ABdhPJxFJ5+5X/585nlnrqDj/BnFVtTsIdfFQCiS8zzjPqZbTrAVx+1rS/bx/xkMeNHZQVtZobCTJA==
-X-Received: by 2002:a9d:4b01:: with SMTP id q1mr2311635otf.15.1598714327353;
- Sat, 29 Aug 2020 08:18:47 -0700 (PDT)
+ bh=Ij4Fa5djbJIx/Myvpw/aDERYC9Ay8jdmYeDXjuiJA28=;
+ b=EvdNyqriH1+h/Z2c1zJFG3AapjtCFtbc1buCEFYjoAfnRW39G45fK2PZcRY6llktP0
+ 661HzajfEPnBuPnosWzeDE03PiP4+MugAzG1C0KpJvn9FKCTABZjfcyN5T9Z6UM8P/KJ
+ G/2q2nZL8RgYCWJ9Y553e0DUFQK0qMQk7gaCJ/umSYOBLQOeI/w29fQMLEHO5wiAOlNh
+ X9Ym8k7jYp3/lrff1xamaJ1DwoEXv+VqmYjJztoHYd4xTQmCNfg6BVZzKDBYjaM6DBZ8
+ hJbZgYPQgsb6BxLJ4yzMWKYf8Y7NEyXGFOb9pwc7kaCb1iVwfQszMsOcCsANlq6evKdF
+ zQFQ==
+X-Gm-Message-State: AOAM532VEqLQSBJRPWW9cyJ1fb1L9PdAGVAY60Eza4tANkViC472uKOo
+ 8kUi4TNkel347xiQ/7ZrUc/dirxt528=
+X-Google-Smtp-Source: ABdhPJxO7JnGywZSleA7Og55l7T4KD9D1TclrG891Fd45zIu/+mIdxbM38iI626tvV1/2JOtnxJ7Mw==
+X-Received: by 2002:a9d:734a:: with SMTP id l10mr2346965otk.240.1598714331283; 
+ Sat, 29 Aug 2020 08:18:51 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
  [147.11.146.144])
- by smtp.gmail.com with ESMTPSA id f50sm58181otf.47.2020.08.29.08.18.43
+ by smtp.gmail.com with ESMTPSA id f50sm58181otf.47.2020.08.29.08.18.47
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 29 Aug 2020 08:18:46 -0700 (PDT)
+ Sat, 29 Aug 2020 08:18:50 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
@@ -51,9 +51,10 @@ Cc: Bin Meng <bin.meng@windriver.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Jason Wang <jasowang@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
  qemu-arm@nongnu.org
-Subject: [PATCH v2 11/16] hw/net: cadence_gem: Add a new 'phy-addr' property
-Date: Sat, 29 Aug 2020 23:17:35 +0800
-Message-Id: <1598714261-8320-12-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH v2 12/16] hw/arm: xlnx: Set all boards' GEM 'phy-addr'
+ property value to 23
+Date: Sat, 29 Aug 2020 23:17:36 +0800
+Message-Id: <1598714261-8320-13-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1598714261-8320-1-git-send-email-bmeng.cn@gmail.com>
 References: <1598714261-8320-1-git-send-email-bmeng.cn@gmail.com>
@@ -80,49 +81,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Aug 2020 15:18:53 -0000
+X-List-Received-Date: Sat, 29 Aug 2020 15:18:57 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-At present the PHY address of the PHY connected to GEM is hard-coded
-to either 23 (BOARD_PHY_ADDRESS) or 0. This might not be the case for
-all boards. Add a new 'phy-addr' property so that board can specify
-the PHY address for each GEM instance.
+When cadence_gem model was created for Xilinx boards, the PHY address
+was hard-coded to 23 in the GEM model. Now that we have introduced a
+property we can use that to tell GEM model what our PHY address is.
+Change all boards' GEM 'phy-addr' property value to 23, and set the
+PHY address default value to 0 in the GEM model.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
-
 ---
 
-Changes in v2:
-- change "phy-addr" default value to BOARD_PHY_ADDRESS
+(no changes since v1)
 
- include/hw/net/cadence_gem.h | 2 ++
- hw/net/cadence_gem.c         | 5 +++--
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ hw/arm/xilinx_zynq.c | 1 +
+ hw/arm/xlnx-versal.c | 1 +
+ hw/arm/xlnx-zynqmp.c | 1 +
+ hw/net/cadence_gem.c | 6 +++---
+ 4 files changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/include/hw/net/cadence_gem.h b/include/hw/net/cadence_gem.h
-index 54e646f..01c6189 100644
---- a/include/hw/net/cadence_gem.h
-+++ b/include/hw/net/cadence_gem.h
-@@ -73,6 +73,8 @@ typedef struct CadenceGEMState {
-     /* Mask of register bits which are write 1 to clear */
-     uint32_t regs_w1c[CADENCE_GEM_MAXREG];
- 
-+    /* PHY address */
-+    uint8_t phy_addr;
-     /* PHY registers backing store */
-     uint16_t phy_regs[32];
- 
+diff --git a/hw/arm/xilinx_zynq.c b/hw/arm/xilinx_zynq.c
+index 969ef07..9ffcc56 100644
+--- a/hw/arm/xilinx_zynq.c
++++ b/hw/arm/xilinx_zynq.c
+@@ -119,6 +119,7 @@ static void gem_init(NICInfo *nd, uint32_t base, qemu_irq irq)
+         qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
+         qdev_set_nic_properties(dev, nd);
+     }
++    object_property_set_int(OBJECT(dev), "phy-addr", 23, &error_abort);
+     s = SYS_BUS_DEVICE(dev);
+     sysbus_realize_and_unref(s, &error_fatal);
+     sysbus_mmio_map(s, 0, base);
+diff --git a/hw/arm/xlnx-versal.c b/hw/arm/xlnx-versal.c
+index e3aa4bd..12ba6c4 100644
+--- a/hw/arm/xlnx-versal.c
++++ b/hw/arm/xlnx-versal.c
+@@ -165,6 +165,7 @@ static void versal_create_gems(Versal *s, qemu_irq *pic)
+             qemu_check_nic_model(nd, "cadence_gem");
+             qdev_set_nic_properties(dev, nd);
+         }
++        object_property_set_int(OBJECT(dev), "phy-addr", 23, &error_abort);
+         object_property_set_int(OBJECT(dev), "num-priority-queues", 2,
+                                 &error_abort);
+         object_property_set_link(OBJECT(dev), "dma", OBJECT(&s->mr_ps),
+diff --git a/hw/arm/xlnx-zynqmp.c b/hw/arm/xlnx-zynqmp.c
+index c435b9d..a85ef4b 100644
+--- a/hw/arm/xlnx-zynqmp.c
++++ b/hw/arm/xlnx-zynqmp.c
+@@ -460,6 +460,7 @@ static void xlnx_zynqmp_realize(DeviceState *dev, Error **errp)
+         }
+         object_property_set_int(OBJECT(&s->gem[i]), "revision", GEM_REVISION,
+                                 &error_abort);
++        object_property_set_int(OBJECT(dev), "phy-addr", 23, &error_abort);
+         object_property_set_int(OBJECT(&s->gem[i]), "num-priority-queues", 2,
+                                 &error_abort);
+         if (!sysbus_realize(SYS_BUS_DEVICE(&s->gem[i]), errp)) {
 diff --git a/hw/net/cadence_gem.c b/hw/net/cadence_gem.c
-index a93b5c0..d80096b 100644
+index d80096b..7a53469 100644
 --- a/hw/net/cadence_gem.c
 +++ b/hw/net/cadence_gem.c
+@@ -250,7 +250,7 @@
+ #define GEM_PHYMNTNC_REG_SHIFT 18
+ 
+ /* Marvell PHY definitions */
+-#define BOARD_PHY_ADDRESS    23 /* PHY address we will emulate a device at */
++#define BOARD_PHY_ADDRESS    0 /* PHY address we will emulate a device at */
+ 
+ #define PHY_REG_CONTROL      0
+ #define PHY_REG_STATUS       1
 @@ -1446,7 +1446,7 @@ static uint64_t gem_read(void *opaque, hwaddr offset, unsigned size)
              uint32_t phy_addr, reg_num;
  
              phy_addr = (retval & GEM_PHYMNTNC_ADDR) >> GEM_PHYMNTNC_ADDR_SHFT;
--            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0) {
-+            if (phy_addr == s->phy_addr || phy_addr == 0) {
+-            if (phy_addr == s->phy_addr || phy_addr == 0) {
++            if (phy_addr == s->phy_addr) {
                  reg_num = (retval & GEM_PHYMNTNC_REG) >> GEM_PHYMNTNC_REG_SHIFT;
                  retval &= 0xFFFF0000;
                  retval |= gem_phy_read(s, reg_num);
@@ -130,19 +164,11 @@ index a93b5c0..d80096b 100644
              uint32_t phy_addr, reg_num;
  
              phy_addr = (val & GEM_PHYMNTNC_ADDR) >> GEM_PHYMNTNC_ADDR_SHFT;
--            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0) {
-+            if (phy_addr == s->phy_addr || phy_addr == 0) {
+-            if (phy_addr == s->phy_addr || phy_addr == 0) {
++            if (phy_addr == s->phy_addr) {
                  reg_num = (val & GEM_PHYMNTNC_REG) >> GEM_PHYMNTNC_REG_SHIFT;
                  gem_phy_write(s, reg_num, val);
              }
-@@ -1682,6 +1682,7 @@ static Property gem_properties[] = {
-     DEFINE_NIC_PROPERTIES(CadenceGEMState, conf),
-     DEFINE_PROP_UINT32("revision", CadenceGEMState, revision,
-                        GEM_MODID_VALUE),
-+    DEFINE_PROP_UINT8("phy-addr", CadenceGEMState, phy_addr, BOARD_PHY_ADDRESS),
-     DEFINE_PROP_UINT8("num-priority-queues", CadenceGEMState,
-                       num_priority_queues, 1),
-     DEFINE_PROP_UINT8("num-type1-screeners", CadenceGEMState,
 -- 
 2.7.4
 
