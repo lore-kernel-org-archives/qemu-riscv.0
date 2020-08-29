@@ -1,59 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kBe7o-0001Ng-NL
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Aug 2020 09:09:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48704)
+	id 1kC2cO-0000B4-Ff
+	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 11:18:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44354)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kBe7m-0001Mu-Vp; Fri, 28 Aug 2020 09:08:58 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:32845)
+ id 1kC2cM-0000AB-Oj; Sat, 29 Aug 2020 11:18:10 -0400
+Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:40366)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kBe7l-0001D9-Aw; Fri, 28 Aug 2020 09:08:58 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id p191so515635ybg.0;
- Fri, 28 Aug 2020 06:08:56 -0700 (PDT)
+ id 1kC2cK-00059p-JO; Sat, 29 Aug 2020 11:18:10 -0400
+Received: by mail-ot1-x341.google.com with SMTP id e23so1789727otk.7;
+ Sat, 29 Aug 2020 08:18:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=RZO7WDhW/ftkCphDDT8tMwIE4qGVJGj+Q8SeLBQiZ0k=;
- b=TZ0nPyC36Y0eD6bAsrNbuPX4kcrDdEfRil4eeKrGjLKb6nF5ZXoVI1o7CQdFkqdEBO
- 948YPGbKB9eaertN99xlsthKCD9igA9VwLDVYo5edU0R+uqrylk4cY8ltGDcpmhLcrT8
- ZDsOqgAvbfzoGzxoCsovs4+cYe3k/jC21+TJ37HO4VC04WJ1yeFV3QYoqlzYjNFtPEsx
- +yLLyDuXFJXK5mL0I6Znrnf6OERlzKmAx6kKzkVF/iFRN/+ibXSsnpB2WIHMy8ATieEo
- joSMV02QIMeLdS+iO7GQL7JiPI1wZHuXMqc74daqkf4suYOoA/TiZj1r5aZ0rl7lYDAK
- nEVA==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=R5qVG5jOKGSbnO0xWX+6JYcxuQjGVPGCR7TKX+uYaUE=;
+ b=gKALEd8i7/vNIaZeuxrF/NqG7D4bhA2XIrDTu3EnCwUwGGy15htX8xZEFjCsTsVXEx
+ wAlLa/FYh7KF7nEp8eCLKhA7dZW2aWgAzlGct3KDoUr6Mu3xQM8zalvX5wTgQlVfkj+r
+ 8s2ugUDk/schA2SrHqdLtfOXCtACyYZ2n8slbCOeeb83BW9CevR9zwt9YNimqx0ODjD3
+ UPUsXDEJIqrAhoTxqXP9PnCipfpLdpPFZBPfVN6a80ZSb3zCBeVnwds0r3BKszv3i/SE
+ OrpSbhZoY9mMMzSnpY7NSZQ7ZBhc4Qy1UTu3yaYIgkqnyEARnx56OFCLKi06L6IhUkBx
+ noDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=RZO7WDhW/ftkCphDDT8tMwIE4qGVJGj+Q8SeLBQiZ0k=;
- b=KeKnShAk9DM2eSmjz0XenFec6X4AKlCpDaFGLFS6qj5jygGMesBYCQiixzEXGhZlp2
- pgg17RLrQSzEquNOPWS0Cu3D9a8Qlw4WvVRmNxE95x1HVAFsGbVo5VntBqfVyxBMiR7+
- EJUpYKry36aQkV7DYUa6oM0CltcAwUt+iu5dNBmWHlA8Q7S3uBDVv3xPg05rfdy0kNxf
- SE4HXPsaY5TgmqRisEN9u6TlX0+Glt2hZ1w5M7H9hCHZ1dCac1PIPKEijodfF6RGX+rl
- nYpHwoZOq5+nYs2yeRamwY3eFZtx3JbrJGzX/8BdynJ+mnuGc6j/8i5GzTaeJbKohatM
- S2cA==
-X-Gm-Message-State: AOAM530jC7NtcePK7oge7uTUttQB4nxctoRMVIWlZ3tM/7gedbBAckxd
- zIXYYWvLPe/zvsI+fOHaKSmscWaY2qKv5YHCZLI=
-X-Google-Smtp-Source: ABdhPJwTVDPXYIVoyp3KY0e8UI660AKHbTU1fBEK63vcLMge837VjKx0ME/GU55+/J1eUHU5ATmuu0fePV21hqR9ZLk=
-X-Received: by 2002:a25:9cc7:: with SMTP id z7mr2476120ybo.387.1598620135347; 
- Fri, 28 Aug 2020 06:08:55 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200827074638.21451-1-green.wan@sifive.com>
- <20200827074638.21451-3-green.wan@sifive.com>
-In-Reply-To: <20200827074638.21451-3-green.wan@sifive.com>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=R5qVG5jOKGSbnO0xWX+6JYcxuQjGVPGCR7TKX+uYaUE=;
+ b=Ln/abFRUEa5evpCz7K2d9i2l/F9lN1pFR7rdp48FxpoJwee5s7oHiN3b7s/tDkteSA
+ K5VKKysAFho5QOYKA1b0ACyBuNX8/JPfjssOowUL7y6yuXBZ+ZJB+UoE7ShtGsefagQx
+ q2RIMNT+PzA5QNc2hSB+cVwPJMCBQiul3zhAnwoecZ51KtKk/Y6ANKNjTYkidjYWZX8f
+ yoSOWNX9VbE1ieEziolh58Qloaqb+qWzZyM9YVSA9iOra+b6QD7aLq/XPhZPK86ajRf+
+ 3AzxHtnsdq69DxLThe+/811dKm0aut2niHoLZ8Rh1Tn81udVe8Yf2IBTKt+dzGTHXM7m
+ zs6w==
+X-Gm-Message-State: AOAM531GacmyetQfzeNpgDGon2M+g65T/7iQknSt+dks4QVm0t/14+jU
+ 2pXdDSYvaye+0I5AUC0MdX4=
+X-Google-Smtp-Source: ABdhPJzL9gDBspOh2MmemcOhs6/gUt7DOiVWotj+oZnKe+CflIyO5yq+CxZ/D00VXtHpKNEWtY2xmA==
+X-Received: by 2002:a05:6830:1be4:: with SMTP id
+ k4mr2350117otb.319.1598714286479; 
+ Sat, 29 Aug 2020 08:18:06 -0700 (PDT)
+Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
+ [147.11.146.144])
+ by smtp.gmail.com with ESMTPSA id f50sm58181otf.47.2020.08.29.08.18.01
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Sat, 29 Aug 2020 08:18:05 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 28 Aug 2020 21:08:44 +0800
-Message-ID: <CAEUhbmX_g+8V=5qVeD9oFn+YWxjAveJxiWKYyy3_kLzRMtsOCA@mail.gmail.com>
-Subject: Re: [RFC PATCH v4 2/2] hw/riscv: sifive_u: Add write-once protection
-To: Green Wan <green.wan@sifive.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+To: Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair@alistair23.me>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Jason Wang <jasowang@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-arm@nongnu.org
+Subject: [PATCH v2 00/16] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
+ board support
+Date: Sat, 29 Aug 2020 23:17:24 +0800
+Message-Id: <1598714261-8320-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::341;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ot1-x341.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -75,93 +88,151 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Aug 2020 13:08:59 -0000
+X-List-Received-Date: Sat, 29 Aug 2020 15:18:11 -0000
 
-Hi Green,
+From: Bin Meng <bin.meng@windriver.com>
 
-On Thu, Aug 27, 2020 at 3:47 PM Green Wan <green.wan@sifive.com> wrote:
->
-> Add array to store the 'written' status for all bit of OTP to block
-> the write operation to the same bit. Ignore the control register
-> offset from 0x0 to 0x38 of OTP memory mapping.
->
-> Signed-off-by: Green Wan <green.wan@sifive.com>
-> ---
->  hw/riscv/sifive_u_otp.c         | 21 +++++++++++++++++++++
->  include/hw/riscv/sifive_u_otp.h |  1 +
->  2 files changed, 22 insertions(+)
->
-> diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
-> index aab2220494..e9605b9ae9 100644
-> --- a/hw/riscv/sifive_u_otp.c
-> +++ b/hw/riscv/sifive_u_otp.c
-> @@ -27,6 +27,12 @@
->  #include "sysemu/blockdev.h"
->  #include "sysemu/block-backend.h"
->
-> +#define SET_WRITTEN_BIT(map, idx, bit)    \
-> +    (map[idx] |= (0x1 << bit))
-> +
-> +#define GET_WRITTEN_BIT(map, idx, bit)    \
-> +    ((map[idx] >> bit) & 0x1)
-> +
->  static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
->  {
->      SiFiveUOTPState *s = opaque;
-> @@ -135,6 +141,18 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
->          s->ptrim = val32;
->          break;
->      case SIFIVE_U_OTP_PWE:
-> +        /* Keep written state for data only and PWE is enabled. Ignore PAS=1 */
-> +        if ((s->pa > SIFIVE_U_OTP_PWE) && (val32 & 0x1) && !s->pas) {
+This adds support for Microchip PolarFire SoC Icicle Kit board.
+The Icicle Kit board integrates a PolarFire SoC, with one SiFive's
+E51 plus four U54 cores and many on-chip peripherals and an FPGA.
 
-s->pa represents the OTP memory address, and it has nothing to do with
-the OTP controller register SIFIVE_U_OTP_PWE.
+For more details about Microchip PolarFire SoC, please see:
+https://www.microsemi.com/product-directory/soc-fpgas/5498-polarfire-soc-fpga
 
-Please replace 0x1 with a macro like SIFIVE_U_OTP_PWE_EN.
+The Icicle Kit board information can be found here:
+https://www.microsemi.com/existing-parts/parts/152514
 
-> +            if (GET_WRITTEN_BIT(s->fuse_wo, s->pa, s->paio)) {
-> +                qemu_log_mask(LOG_GUEST_ERROR,
-> +                              "Error: write idx<%u>, bit<%u>\n",
-> +                              s->pa, s->paio);
-> +                break;
-> +            }
-> +
-> +            SET_WRITTEN_BIT(s->fuse_wo, s->pa, s->paio);
+Unlike SiFive FU540, the RISC-V core resect vector is at 0x20220000.
+The RISC-V CPU and HART codes has been updated to set the core's
+reset vector based on a configurable property from machine codes.
 
-Note this only protects 1 bit, so you should probably change the write
-operation to operate on a bit basis instead of 4 bytes
-(SIFIVE_U_OTP_FUSE_WORD).
+The following perepherals are created as an unimplemented device:
 
-> +        }
-> +
->          /* write to backend */
->          if (s->blk) {
->              blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &val32,
-> @@ -215,6 +233,9 @@ static void sifive_u_otp_reset(DeviceState *dev)
->      /* Make a valid content of serial number */
->      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR] = s->serial;
->      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR + 1] = ~(s->serial);
-> +
-> +    /* Initialize write-once map */
-> +    memset(s->fuse_wo, 0x00, sizeof(s->fuse_wo));
->  }
->
->  static void sifive_u_otp_class_init(ObjectClass *klass, void *data)
-> diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
-> index 13d2552e43..49d40a6430 100644
-> --- a/include/hw/riscv/sifive_u_otp.h
-> +++ b/include/hw/riscv/sifive_u_otp.h
-> @@ -74,6 +74,7 @@ typedef struct SiFiveUOTPState {
->      uint32_t ptrim;
->      uint32_t pwe;
->      uint32_t fuse[SIFIVE_U_OTP_NUM_FUSES];
-> +    uint32_t fuse_wo[SIFIVE_U_OTP_NUM_FUSES];
->      /* config */
->      uint32_t serial;
->      BlockBackend *blk;
-> --
+- Bus Error Uint 0/1/2/3/4
+- L2 cache controller
+- SYSREG
+- MPUCFG
+- IOSCBCFG
+- GPIO
 
-Regards,
-Bin
+The following perepherals are emulated:
+- SiFive CLINT
+- SiFive PLIC
+- PolarFire SoC Multi-Mode UART
+- SiFive PDMA
+- Cadence eMMC/SDHCI controller
+- Cadence Gigabit Ethernet MAC
+
+The BIOS image used by this machine is hss.bin, aka Hart Software
+Services, which can be built from:
+https://github.com/polarfire-soc/hart-software-services
+
+To launch this machine:
+$ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
+    -bios path/to/hss.bin -sd path/to/sdcard.img \
+    -nic tap,ifname=tap,script=no,model=cadence_gem \
+    -display none -serial stdio \
+    -chardev socket,id=serial1,path=serial1.sock,server,wait \
+    -serial chardev:serial1
+
+The memory is set to 1 GiB by default to match the hardware.
+A sanity check on ram size is performed in the machine init routine
+to prompt user to increase the RAM size to > 1 GiB when less than
+1 GiB ram is detected.
+
+HSS output is on the first serial port (stdio) and U-Boot/Linux
+outputs on the 2nd serial port. OpenSBI outputs on a random serial
+port due to the lottery mechanism used during the multi-core boot.
+
+Please check the QEMU WiKi page for the target specific information:
+https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
+
+Changes in v2:
+- change to update hw/char/meson.build
+- add impl.min_access_size and impl.max_access_size as part of
+  MemoryRegionOps and remove the allignment check
+- change to update hw/sd/meson.build
+- change the name to "generic-sdhci" when calling object_initialize_child()
+- add a container MR to simplify out-of-bounds access checks
+- do not initialize TYPE_SYSBUS_SDHCI in the SoC instance_init(),
+  instead move that to the cadence_sdhci model
+- do not access generic-sdhci's state directly,
+  instead move that to the cadence_sdhci model
+- change to update hw/dma/meson.build
+- rename the file names to sifive_pdma.[c|h]
+- update irq number to 8 per the SiFive FU540 manual
+- fix the register offset for channel 1/2/3 in the read/write ops
+- connect 8 IRQs to the PLIC
+- change "phy-addr" default value to BOARD_PHY_ADDRESS
+
+Bin Meng (16):
+  target/riscv: cpu: Add a new 'resetvec' property
+  hw/riscv: hart: Add a new 'resetvec' property
+  target/riscv: cpu: Set reset vector based on the configured property
+    value
+  hw/riscv: Initial support for Microchip PolarFire SoC Icicle Kit board
+  hw/char: Add Microchip PolarFire SoC MMUART emulation
+  hw/riscv: microchip_pfsoc: Connect 5 MMUARTs
+  hw/sd: Add Cadence SDHCI emulation
+  hw/riscv: microchip_pfsoc: Connect a Cadence SDHCI controller and an
+    SD card
+  hw/dma: Add SiFive platform DMA controller emulation
+  hw/riscv: microchip_pfsoc: Connect a DMA controller
+  hw/net: cadence_gem: Add a new 'phy-addr' property
+  hw/arm: xlnx: Set all boards' GEM 'phy-addr' property value to 23
+  hw/riscv: microchip_pfsoc: Connect 2 Cadence GEMs
+  hw/riscv: microchip_pfsoc: Hook GPIO controllers
+  hw/riscv: clint: Avoid using hard-coded timebase frequency
+  hw/riscv: sifive_u: Connect a DMA controller
+
+ default-configs/riscv64-softmmu.mak |   1 +
+ include/hw/char/mchp_pfsoc_mmuart.h |  61 +++++
+ include/hw/dma/sifive_pdma.h        |  57 +++++
+ include/hw/net/cadence_gem.h        |   2 +
+ include/hw/riscv/microchip_pfsoc.h  | 133 +++++++++++
+ include/hw/riscv/riscv_hart.h       |   1 +
+ include/hw/riscv/sifive_clint.h     |   4 +-
+ include/hw/riscv/sifive_u.h         |  11 +
+ include/hw/sd/cadence_sdhci.h       |  47 ++++
+ target/riscv/cpu.h                  |   7 +-
+ hw/arm/xilinx_zynq.c                |   1 +
+ hw/arm/xlnx-versal.c                |   1 +
+ hw/arm/xlnx-zynqmp.c                |   1 +
+ hw/char/mchp_pfsoc_mmuart.c         |  86 +++++++
+ hw/dma/sifive_pdma.c                | 313 ++++++++++++++++++++++++++
+ hw/net/cadence_gem.c                |   7 +-
+ hw/riscv/microchip_pfsoc.c          | 437 ++++++++++++++++++++++++++++++++++++
+ hw/riscv/opentitan.c                |   1 +
+ hw/riscv/riscv_hart.c               |   3 +
+ hw/riscv/sifive_clint.c             |  26 ++-
+ hw/riscv/sifive_e.c                 |   4 +-
+ hw/riscv/sifive_u.c                 |  35 ++-
+ hw/riscv/spike.c                    |   3 +-
+ hw/riscv/virt.c                     |   3 +-
+ hw/sd/cadence_sdhci.c               | 193 ++++++++++++++++
+ target/riscv/cpu.c                  |   8 +-
+ target/riscv/cpu_helper.c           |   4 +-
+ target/riscv/csr.c                  |   4 +-
+ MAINTAINERS                         |   9 +
+ hw/char/Kconfig                     |   3 +
+ hw/char/meson.build                 |   1 +
+ hw/dma/Kconfig                      |   3 +
+ hw/dma/meson.build                  |   1 +
+ hw/riscv/Kconfig                    |  10 +
+ hw/riscv/meson.build                |   1 +
+ hw/sd/Kconfig                       |   4 +
+ hw/sd/meson.build                   |   1 +
+ 37 files changed, 1458 insertions(+), 29 deletions(-)
+ create mode 100644 include/hw/char/mchp_pfsoc_mmuart.h
+ create mode 100644 include/hw/dma/sifive_pdma.h
+ create mode 100644 include/hw/riscv/microchip_pfsoc.h
+ create mode 100644 include/hw/sd/cadence_sdhci.h
+ create mode 100644 hw/char/mchp_pfsoc_mmuart.c
+ create mode 100644 hw/dma/sifive_pdma.c
+ create mode 100644 hw/riscv/microchip_pfsoc.c
+ create mode 100644 hw/sd/cadence_sdhci.c
+
+-- 
+2.7.4
+
 
