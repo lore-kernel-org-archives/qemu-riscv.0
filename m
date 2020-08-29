@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kC5ik-00072X-4x
-	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 14:36:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50260)
+	id 1kC5vo-0002LU-AL
+	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 14:50:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52260)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kC5ii-00072L-V1
- for qemu-riscv@nongnu.org; Sat, 29 Aug 2020 14:36:56 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:38753)
+ id 1kC5vl-0002KH-7X
+ for qemu-riscv@nongnu.org; Sat, 29 Aug 2020 14:50:25 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633]:34487)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kC5ig-0004x9-Qn
- for qemu-riscv@nongnu.org; Sat, 29 Aug 2020 14:36:56 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id ls14so1008753pjb.3
- for <qemu-riscv@nongnu.org>; Sat, 29 Aug 2020 11:36:54 -0700 (PDT)
+ id 1kC5vh-0006J1-MN
+ for qemu-riscv@nongnu.org; Sat, 29 Aug 2020 14:50:24 -0400
+Received: by mail-pl1-x633.google.com with SMTP id v16so1171249plo.1
+ for <qemu-riscv@nongnu.org>; Sat, 29 Aug 2020 11:50:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=Rf28wSybrAI0hplIS6QnqC/KFGhUM93cnTBNSrUtaig=;
- b=wDtk+PIOBvwPgfEHB7FeQjuT5NeIc9rQcg5OO8Etzrq55EU3G/2xNzwjSjTpsbpaqZ
- a3JxZgbgFxti4+41tJptlWgRtaRc/FEj8UhoiHKL5Mj1k/ljZFzuiT5G9UU9td/zb9gp
- 6DFZnRrlwcUYHgZI02Q8pQ+yTN9EFhfDae04NqjKuUceY/AMQg9H4zBes/9xRHLU7GrW
- cDO678BZtPeAQ3QYZDKO6d+v9cIOSUHJrgyLWUOPhJ8VIMraIsNOi+yhdmkzqXi/IdU7
- 6qCZWu1PYQF82JkA8DRh3SQqXRWWyyhRiRLZyMJbkjTy1WVXCO8Z7O/JhPs8/J4Ne8Eq
- 7v1w==
+ bh=VCZOcskORWKnMglI/hHMrkHWQr5rJTv1J15iAIy58Z0=;
+ b=a9zoILvSJ1NDqFbWM4u5YfSdfe3HiTwLPllhyziuUqDdmoO8kd3lTgna0zSKjhh9jP
+ ljIQgzfVphIWNrV814tcjcTmohcrd4/uDLMgpMA/ycxSh5p7fDP9EZU00nPNcmt5FELk
+ r1URXZKN46GFn4thrQ6z2ZplHsuivQHjt00rA5FNMr1EalqTTgY204oLmwE/o0X9zATw
+ IQjPfMAvYF4cpRRFW6Qp/IfD2B/rSy9sfKYuxFFVWOotBM+A+fWMlvWalQdehIm86Pym
+ uDOGl+vSOPXlrPg9kdWTyM6jKcXTP0rBbE0gKiUDVBjrk9indUDNs+UlJy5kgRefKnHc
+ OH4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=Rf28wSybrAI0hplIS6QnqC/KFGhUM93cnTBNSrUtaig=;
- b=aCUuUS9nM/my4I2N0uEhhEDR8TdLURMqj9Fv37E2rSxJJnOuDZH2ESnXPJPKdDoLlX
- nZ7SwFbDu07KCrSuDAIn85we8g6lOMEZg/5X5aEOqYUtF3BcxjoasdjpmnY33C2punH1
- PLhHD3r/b2x9E57HbKGJ22brXENu+gKjKsSqZxZ5718QlsfwOJwbgeJ4W8b6oAJGcASL
- bFE7i6NlsztmWOcki5C4uvXHCZpFNs6lIikF2yiX7babbwQztW4B3t6dsi7Bky9ehaj/
- mA/JMbhOug3U+hXCZh5Z1bMckx2krSL/FIzwC1YlOLL1xwFJGR9MwbvHCCYxoQxWk3PI
- 9Ydw==
-X-Gm-Message-State: AOAM5314Qql4lW5TIB2n9JITwzX58s4dcB8UZUq5jCS6Nb+K83VTJAix
- 7KFVwdH3ugZwplyh9Di9le7uc90qjLa4iQ==
-X-Google-Smtp-Source: ABdhPJz02AJKofqdDliL4uN3XpV9n5k1Vet0PnDbXL0RG7y3RPtiQ2nCbeVwseVi5UMqEsJKP6nh+g==
-X-Received: by 2002:a17:90a:88:: with SMTP id a8mr3931144pja.196.1598726213320; 
- Sat, 29 Aug 2020 11:36:53 -0700 (PDT)
+ bh=VCZOcskORWKnMglI/hHMrkHWQr5rJTv1J15iAIy58Z0=;
+ b=BjE9sP/Pl1FtSp2NJYF8s0y9HNBbD1CYN4U6Jhm1/tNoNXelF2Jl6rTtexiF6VpOOb
+ e1G9yVF0wKpvTYo8BEG/xaXcCvS2cZEH/Ul1mRI6bj8ummOUZVF3k3RUcy9GzhsBrUq5
+ 8C5SiPWWdZmsBY3bR3vOlyNdVGJ0rpTrROWHvoVSl5YDJC7cmYDxipzu6y0cr1Q9e4HN
+ W1okAfgOjdxFWjyE0Hehc7Yw6EhJnX3FlTRD4CvnGalmvJ4r2bbd79/neWKmlHaExQnl
+ rSdBJ34A/0ujPIrux+1tZ+anfsqfJxkhgV2L6L1jtjksEiAxuGHGToXrbuU4sjjJ0eVF
+ wDrA==
+X-Gm-Message-State: AOAM530HyLIobBYWrj2bUbZT0vvfyJgSu+6Vo9DPk57N7USzepNKmSPM
+ rEMdasnau99SaaNjeFWUQJU3kw==
+X-Google-Smtp-Source: ABdhPJwrOgqc/Ql5VQoDDTOGUOhIKitbSIC7oe/dIV2K219/gCO0J7/wKjLYtymmVbWSEpoNdmNrRg==
+X-Received: by 2002:a17:90b:4acd:: with SMTP id
+ mh13mr4056856pjb.147.1598727020062; 
+ Sat, 29 Aug 2020 11:50:20 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id y126sm3300806pfy.138.2020.08.29.11.36.52
+ by smtp.gmail.com with ESMTPSA id l20sm3659353pfc.72.2020.08.29.11.50.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 29 Aug 2020 11:36:52 -0700 (PDT)
-Subject: Re: [RFC v4 21/70] target/riscv: rvv-1.0: fault-only-first unit
- stride load
+ Sat, 29 Aug 2020 11:50:19 -0700 (PDT)
+Subject: Re: [RFC v4 22/70] target/riscv: rvv-1.0: amo operations
 To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 References: <20200817084955.28793-1-frank.chang@sifive.com>
- <20200817084955.28793-22-frank.chang@sifive.com>
+ <20200817084955.28793-23-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <911cd1de-e22c-3637-fc01-dae6e6f0c21f@linaro.org>
-Date: Sat, 29 Aug 2020 11:36:50 -0700
+Message-ID: <30dcedd1-84e3-70c4-7b8b-d985608b81c5@linaro.org>
+Date: Sat, 29 Aug 2020 11:50:17 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200817084955.28793-22-frank.chang@sifive.com>
+In-Reply-To: <20200817084955.28793-23-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x633.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -28
@@ -73,7 +73,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.809,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -86,20 +86,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Aug 2020 18:36:57 -0000
+X-List-Received-Date: Sat, 29 Aug 2020 18:50:25 -0000
 
 On 8/17/20 1:49 AM, frank.chang@sifive.com wrote:
-> From: Frank Chang <frank.chang@sifive.com>
-> 
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> ---
->  target/riscv/helper.h                   | 27 +++---------
->  target/riscv/insn32.decode              | 14 +++----
->  target/riscv/insn_trans/trans_rvv.inc.c | 31 ++++----------
->  target/riscv/vector_helper.c            | 56 +++++++++----------------
->  4 files changed, 38 insertions(+), 90 deletions(-)
+> +static bool vext_check_amo(DisasContext *s, int vd, int vs2,
+> +                           int wd, int vm, uint8_t eew)
+> +{
+> +    int8_t emul = ctzl(eew) - (s->sew + 3) + s->lmul;
+> +    bool ret = has_ext(s, RVA) &&
+> +               (1 << s->sew >= 4) &&
+> +               (1 << s->sew <= sizeof(target_ulong)) &&
+> +               (eew <= (sizeof(target_ulong) << 3))  &&
+> +               require_align(vd, 1 << s->lmul) &&
+> +               require_align(vs2, 1 << emul) &&
+> +               (emul >= -3 && emul <= 3);
+> +    if (wd) {
+> +        ret &= require_vm(vm, vd);
+> +        if (eew > (1 << (s->sew + 3))) {
+> +            if (vd != vs2) {
+> +                ret &= require_noover(vd, 1 << s->lmul, vs2, 1 << emul);
+> +            }
+> +        } else if (eew < (1 << (s->sew + 3))) {
+> +            if (emul < 0) {
+> +                ret &= require_noover(vd, 1 << s->lmul, vs2, 1 << emul);
+> +            } else {
+> +                ret &= require_noover_widen(vd, 1 << s->lmul, vs2, 1 << emul);
+> +            }
+> +        }
+> +    }
+> +    return ret;
+> +}
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Same comments for EEW and require_noover.
 
 r~
 
