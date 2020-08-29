@@ -1,71 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kCAbq-000464-Nn
-	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 19:50:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35400)
+	id 1kCAc9-0004Kk-UK
+	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 19:50:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35448)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kCAbo-00045W-LZ
- for qemu-riscv@nongnu.org; Sat, 29 Aug 2020 19:50:08 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:56313)
+ id 1kCAc7-0004Ja-FW
+ for qemu-riscv@nongnu.org; Sat, 29 Aug 2020 19:50:28 -0400
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e]:36469)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kCAbm-0003Zr-So
- for qemu-riscv@nongnu.org; Sat, 29 Aug 2020 19:50:08 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id 2so1227606pjx.5
- for <qemu-riscv@nongnu.org>; Sat, 29 Aug 2020 16:50:05 -0700 (PDT)
+ id 1kCAc5-0003gs-Bc
+ for qemu-riscv@nongnu.org; Sat, 29 Aug 2020 19:50:27 -0400
+Received: by mail-pg1-x52e.google.com with SMTP id p37so2282041pgl.3
+ for <qemu-riscv@nongnu.org>; Sat, 29 Aug 2020 16:50:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=pEQ3yQMM+Hpe+4Vkqh2p8O9EAykOnajxJUueinR52p8=;
- b=YZnLobdquO/1b0kcNythHwq5muJJ3Dm6AZLBru3kp96B+HLEoox+7Bg/frFwabflpv
- 2g0LXbwn5aN1BgQ6pA2o+dmeOscmSMg6edcDq+d/68zuecvZw1s+MnRD0biGdsISlepv
- ptFQFYRa5yy//QsWkd5xisbovrsbHJlHK72x+uiNvbwidBJJ0z9OadssDO8Hxl0FY+JB
- i9o9WTaccDGm6FOn7b6NISdbVbeBNyWTWke6C5xA2AEhgyI1O6orSq+3QR67LVWzKrHc
- IqkIUIDL9wHLrcpPNzDQJFXYgadTY11dlbDP0X/3qJDVaUVn35cTOoIXrpB5RT2MS0t8
- Kc8Q==
+ bh=QOfMSXyS3q8pxkOv4O778P/4TaggW6qIpuGKPww5NUA=;
+ b=C1pwgv+y+JZKeOiJoHO3FOJ2MRSkvmmpPs2f03Kuy6ZN9y8N35db+qQaX6Wo0yW2YM
+ lnbZ1sKw2byXgs6U3hWV+YZRMizbexuis+8vahYt1qCSBRrlFSkRGdSrOC5hoidkCKbF
+ LGBU8uhLgpc50IyTGehc2zj6trh2GHszzVdmMu7bfXPxt7Fod64mPn9BMAd5uCKc20LH
+ burrhF6+Dac5oI3DKBgyEzaUxBnUzXM8XPL+7gMjIrTJJUU17lCoh5KuEk3/MwlLPsla
+ IKzLumc0Te6A9MLhFZLbeHA2VmecBloOLTR4sw4AqAPZO0RhWspxukzb6fad/pfcZ6MR
+ inpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=pEQ3yQMM+Hpe+4Vkqh2p8O9EAykOnajxJUueinR52p8=;
- b=OplklD88Y0P+Z0kahkw6TcOI3BJ1VebjhLfDUqwmZRkct7Bnh5DtdjVVxQGbNt1uWU
- iqt/q0NnbgDw/cdMMzTEQDYEKHWKqPd9pLzbq+xH7dx8NVe1AJi2kE7gB67U4EL4+403
- mFhUKd27zLm4l0SMFcSeq7+ZF1kI5qfnwmmY8y9moKU5XhTCxQ4biJq/fOFmqAY8tgsM
- 2Y46kuwe+zTrq9ZdSwJvCh/PS0x+6l8e6GmUnIQ45RLnHlsq1y6UjUeeMnYC6iPAW29S
- hM5mSrZ3wNTrhrDTW0HzpAaoE4MqcQ857Gmv2TFHvVCoQ+jf8OItjUHWSsfSzgxGM4AR
- M6mg==
-X-Gm-Message-State: AOAM530Gr++jxE6bfCyB+czl128khVYPvxHoqNtUXxaPJ1Q1ZOwRDNKe
- OGbONJmfWgYAc99od0fjKs4m8A==
-X-Google-Smtp-Source: ABdhPJxbkOG8oT9t3H3HQbsIun0WJJNob12Rj/i18DuybgNuhu0MUvbX75otcMa2PQ3H/KdNro15eA==
-X-Received: by 2002:a17:902:eb0b:: with SMTP id
- l11mr4041574plb.57.1598745004758; 
- Sat, 29 Aug 2020 16:50:04 -0700 (PDT)
+ bh=QOfMSXyS3q8pxkOv4O778P/4TaggW6qIpuGKPww5NUA=;
+ b=KhHTT9/jnOcF3mJIDIS0zn2JPYTPuAyXhmoxA3pn25gOu4atJmMMdEwoNyDiiX4W1+
+ ZFHilBjgkRn9IRT2Gh1WDjqVO2sqYbPQJK3JeYPFRsa6/6w0Vhg+Nt9V+hyAI4OP0HyS
+ BjvcmgiGjoyoubTxyZwF0Ce3+y/xN524Q2ODRWIFaGAIxCH5KOEGzbyBgR4QCgyDWf7/
+ N3E/3C8gaVmMmR4UGBOjQ4oavvuiIslNGhsWUFghjL2rQGYmhk2+ssJD499jtlLnLH/k
+ Js9PmQ8hkhw3ASXLGt+LDEAOo2irHjnE5rJ0uuQMFfJ6ch/u+1UbscINR2pvFCVzFW1N
+ nzaA==
+X-Gm-Message-State: AOAM532XCwuUGs/KeUhovYVlUCjQRcSgHWRSBaC+4H705iKxwtnYRXqW
+ Y4IqWiV7F+znFzv6uUYz4z/MHg==
+X-Google-Smtp-Source: ABdhPJzmJBvVyDZZF9GUJUunJHeL5Dq1WgWcahRmDM0tT4HX3o490g3WuDrS3S/B5O3TbMRcZugYlg==
+X-Received: by 2002:a65:6286:: with SMTP id f6mr3863358pgv.0.1598745023915;
+ Sat, 29 Aug 2020 16:50:23 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id t25sm3413083pgn.13.2020.08.29.16.50.03
+ by smtp.gmail.com with ESMTPSA id d23sm3007445pjz.44.2020.08.29.16.50.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 29 Aug 2020 16:50:04 -0700 (PDT)
-Subject: Re: [RFC v4 55/70] target/riscv: rvv-1.0: single-width floating-point
- reduction
+ Sat, 29 Aug 2020 16:50:23 -0700 (PDT)
+Subject: Re: [RFC v4 56/70] target/riscv: rvv-1.0: widening floating-point
+ reduction instructions
 To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 References: <20200817084955.28793-1-frank.chang@sifive.com>
- <20200817084955.28793-56-frank.chang@sifive.com>
+ <20200817084955.28793-57-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <d94182cc-8846-9eb6-6a93-87968d0d32c1@linaro.org>
-Date: Sat, 29 Aug 2020 16:50:01 -0700
+Message-ID: <98e9f405-8648-7e65-3703-32616fdbd609@linaro.org>
+Date: Sat, 29 Aug 2020 16:50:21 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200817084955.28793-56-frank.chang@sifive.com>
+In-Reply-To: <20200817084955.28793-57-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1033.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52e.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -28
@@ -74,7 +73,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.809,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -87,25 +86,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Aug 2020 23:50:08 -0000
+X-List-Received-Date: Sat, 29 Aug 2020 23:50:28 -0000
 
 On 8/17/20 1:49 AM, frank.chang@sifive.com wrote:
 > From: Frank Chang <frank.chang@sifive.com>
 > 
 > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 > ---
->  target/riscv/vector_helper.c | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
+>  target/riscv/insn_trans/trans_rvv.inc.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-The one sentence in the manual is quite poor for this, and needs improvement:
-
-> Floating-point max and min reductions should return the same final> value and raise the same exception flags regardless of operation
-> order.
-
-It doesn't actually say anything about the way in which we've implemented the
-*_noprop functions.
-
-Anyway,
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
