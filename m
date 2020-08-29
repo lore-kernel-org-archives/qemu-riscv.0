@@ -1,71 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kC2dM-0001c5-5z
-	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 11:19:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44736)
+	id 1kC36z-0002OA-3h
+	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 11:49:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49584)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kC2dJ-0001Ze-Sv; Sat, 29 Aug 2020 11:19:10 -0400
-Received: from mail-ot1-x343.google.com ([2607:f8b0:4864:20::343]:39751)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kC36v-0002Nh-TV
+ for qemu-riscv@nongnu.org; Sat, 29 Aug 2020 11:49:46 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:45143)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kC2dH-0005GY-ED; Sat, 29 Aug 2020 11:19:09 -0400
-Received: by mail-ot1-x343.google.com with SMTP id r8so1787245ota.6;
- Sat, 29 Aug 2020 08:19:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=1beGznQG533V78BCqqj/QrYnc/FOqiQEqa+BFrJTWkg=;
- b=eOszRc5Fc7QJ3MIwf3cQzyhNTnh9WAucm2ZiNb1I9mYc5vh5D3SGM5WXindwbKqKhV
- oUidBrRkuUbW7PTi1OYjcCY5wCSdw0RxpimE2x51b7w6xUAb2NZGVI1IUqoxSJpA2jd4
- Er5ePi9kRRMyzJMKT1dGnFoMOk9th2y3oOFxOIyaL5j9yRaoQxLluQ3Bc80UU01NMIUG
- +Fza7sE8KcA2YNPXk0Q9hS9S8YVcVFbh8BRxQtLfdlUOMD7/+jzezBs8OGm8vCBw4rRJ
- +ubbWKxatCG8FtdYABc03hMKAVUHmXZL/1YIEq7swErRFh7g9Yh2a7Cbg4jEhF+z+a4o
- WRVg==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kC36t-00010S-Nu
+ for qemu-riscv@nongnu.org; Sat, 29 Aug 2020 11:49:45 -0400
+Received: by mail-pf1-x435.google.com with SMTP id k15so2190169pfc.12
+ for <qemu-riscv@nongnu.org>; Sat, 29 Aug 2020 08:49:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=Aadjgswy8Xi829IBXImVRmJTQUamQv5BeSPiLCgcTg0=;
+ b=gsgJIRZehH2RNWJiCFA+Z+yxKgvIeTgUnYSCBKnvZhT9A4rySh1HjsP1At9Gw8XCAy
+ AShQb1DpLmnsc4KVoaizt5lGdr8lZSGWFhFsw5nX0T0hIg8RsgAgg6r4TGyQzTSrGf6K
+ d2tX+aiUSn+bQ3rXMfVjeCx+rn98TAtP+Fe8TuX02qRRLwKxW0VViTwX5PTVTFLjkGIg
+ RtnJhYEa8vth9Pgugu5o2ouDhPpsKtQfltPdFcS0kqLyrESw+H18adHmY9XM88EO9tw6
+ TWm2Dv5rUqzcAwBkKKg7M/XzbaVEx4oswgqfoiNqAIqQKOQoNLLrd8SgjhUzG58C5dvP
+ dUJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=1beGznQG533V78BCqqj/QrYnc/FOqiQEqa+BFrJTWkg=;
- b=t8vdtfUEGrZWSPiXZNn/5Hz9KvWJahiOiObD6Z4FHxxA+tyFkA9asfAdGCNXc7kCVX
- /yN8VRAULq8ctZ+Dlc4493Ai69o4uIsw6DVuUw6s6rD1vcqqTije09Rae1oTXM/3q/iw
- 0J3m4P30ZgrREw1VSAfig3P26hKXUQSvI+1T73Pl7L0WxyDtC4nu2rKcoiV4VxWWMCq6
- 1NZujOurzkGQE5L1A2pkIkC4ufrf4PL2zZdUe+vqAsvoU74E3eh95PabbUD79VlgUhCX
- h2yXUkulkCu0GoljTgP82T2NC1sbMcmdZLfqfo8ukMjo82YVV4mK6EdqE4sGdMsOzncA
- BYOQ==
-X-Gm-Message-State: AOAM532rW8+Br0DVwvPYE22uZ923TLC+3GzfYXT31oWKPhNVcrrUYYQ5
- wBcZsfrNEF6abWdgZd0In4c=
-X-Google-Smtp-Source: ABdhPJxkJEKrovky7WqcAuj0baoA+P6Oql2fQLA1vBijunm/ZhRAzpesBEwgbMdwGULaCJvEuFl0BA==
-X-Received: by 2002:a05:6830:20d5:: with SMTP id
- z21mr2310929otq.169.1598714346059; 
- Sat, 29 Aug 2020 08:19:06 -0700 (PDT)
-Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
- [147.11.146.144])
- by smtp.gmail.com with ESMTPSA id f50sm58181otf.47.2020.08.29.08.19.02
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 29 Aug 2020 08:19:05 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- Palmer Dabbelt <palmerdabbelt@google.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=Aadjgswy8Xi829IBXImVRmJTQUamQv5BeSPiLCgcTg0=;
+ b=EMH2ys0f0pLOqQ1StAfjBXJZof9C7dwKJuOuJyPGs06ga1zT2j3Az4ds/s/YBPi9Hl
+ Pw4PFCeZIRwRtAtVFWi8YdZazmwBjuyWCD0rMrxi0go4J5vTMo9b3xoIQxzjm0L2/dOH
+ HUuIgARAoDOao71i2X3GEimUi6/vgjcPY8qvfcMyErxaG+gPNxnQZlmF4K1uYwY8mY6X
+ czlZEAefDAbMx0RQo/GbOLsRe3e2jJgCUc6OZp7pBKVQ5aWSin+xlGn+cvgNzlVXzmaM
+ IzWSyleCaMQxW2+lDd4FfjlRYUegrKEzPhSKh+J6igxy9ILOgAH2AEjtwPNinXewUp9a
+ HAww==
+X-Gm-Message-State: AOAM533U/Hv/cWsEBAAYKKKnpM4OMnqpID8B5CpbYp/BhnFnyEBp8zzA
+ LoZZQxhkpuPn3eDu7b/RN6KAmg==
+X-Google-Smtp-Source: ABdhPJzr5vrX9Af7iVe+bp7W9o/3nPZJUGahB05Ju2AGAmaqufsG1CzLiJ+7AbXTgI1W72hJk5Dm5A==
+X-Received: by 2002:a62:1684:: with SMTP id 126mr3301939pfw.37.1598716181091; 
+ Sat, 29 Aug 2020 08:49:41 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.141.89])
+ by smtp.gmail.com with ESMTPSA id i7sm2784821pgh.58.2020.08.29.08.49.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 29 Aug 2020 08:49:40 -0700 (PDT)
+Subject: Re: [RFC v4 07/70] target/riscv: rvv-1.0: remove rvv related codes
+ from fcsr registers
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-Subject: [PATCH v2 16/16] hw/riscv: sifive_u: Connect a DMA controller
-Date: Sat, 29 Aug 2020 23:17:40 +0800
-Message-Id: <1598714261-8320-17-git-send-email-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1598714261-8320-1-git-send-email-bmeng.cn@gmail.com>
-References: <1598714261-8320-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::343;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ot1-x343.google.com
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+References: <20200817084955.28793-1-frank.chang@sifive.com>
+ <20200817084955.28793-8-frank.chang@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <cebc4878-b213-d212-28b1-5c6f78e5541a@linaro.org>
+Date: Sat, 29 Aug 2020 08:49:38 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <20200817084955.28793-8-frank.chang@sifive.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x435.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Spam_score_int: -28
+X-Spam_score: -2.9
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.809,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -80,149 +86,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Aug 2020 15:19:10 -0000
+X-List-Received-Date: Sat, 29 Aug 2020 15:49:46 -0000
 
-From: Bin Meng <bin.meng@windriver.com>
+On 8/17/20 1:48 AM, frank.chang@sifive.com wrote:
+> From: Frank Chang <frank.chang@sifive.com>
+> 
+> * Remove VXRM and VXSAT fields from FCSR register as they are only
+>   presented in VCSR register.
+> * Remove RVV loose check in fs() predicate function.
+> 
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  target/riscv/csr.c | 13 -------------
+>  1 file changed, 13 deletions(-)
 
-SiFive FU540 SoC integrates a platform DMA controller with 4 DMA
-channels. This connects the exsiting SiFive PDMA model to the SoC,
-and adds its device tree data as well.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Signed-off-by: Bin Meng <bin.meng@windriver.com>
----
-
-(no changes since v1)
-
- include/hw/riscv/sifive_u.h | 11 +++++++++++
- hw/riscv/sifive_u.c         | 30 ++++++++++++++++++++++++++++++
- hw/riscv/Kconfig            |  1 +
- 3 files changed, 42 insertions(+)
-
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index d3c0c00..793000a 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -19,6 +19,7 @@
- #ifndef HW_SIFIVE_U_H
- #define HW_SIFIVE_U_H
- 
-+#include "hw/dma/sifive_pdma.h"
- #include "hw/net/cadence_gem.h"
- #include "hw/riscv/riscv_hart.h"
- #include "hw/riscv/sifive_cpu.h"
-@@ -43,6 +44,7 @@ typedef struct SiFiveUSoCState {
-     SiFiveUPRCIState prci;
-     SIFIVEGPIOState gpio;
-     SiFiveUOTPState otp;
-+    SiFivePDMAState dma;
-     CadenceGEMState gem;
- 
-     uint32_t serial;
-@@ -72,6 +74,7 @@ enum {
-     SIFIVE_U_MROM,
-     SIFIVE_U_CLINT,
-     SIFIVE_U_L2CC,
-+    SIFIVE_U_PDMA,
-     SIFIVE_U_L2LIM,
-     SIFIVE_U_PLIC,
-     SIFIVE_U_PRCI,
-@@ -108,6 +111,14 @@ enum {
-     SIFIVE_U_GPIO_IRQ13 = 20,
-     SIFIVE_U_GPIO_IRQ14 = 21,
-     SIFIVE_U_GPIO_IRQ15 = 22,
-+    SIFIVE_U_PDMA_IRQ0 = 23,
-+    SIFIVE_U_PDMA_IRQ1 = 24,
-+    SIFIVE_U_PDMA_IRQ2 = 25,
-+    SIFIVE_U_PDMA_IRQ3 = 26,
-+    SIFIVE_U_PDMA_IRQ4 = 27,
-+    SIFIVE_U_PDMA_IRQ5 = 28,
-+    SIFIVE_U_PDMA_IRQ6 = 29,
-+    SIFIVE_U_PDMA_IRQ7 = 30,
-     SIFIVE_U_GEM_IRQ = 0x35
- };
- 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 2bc3992..7997537 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -14,6 +14,7 @@
-  * 4) GPIO (General Purpose Input/Output Controller)
-  * 5) OTP (One-Time Programmable) memory with stored serial number
-  * 6) GEM (Gigabit Ethernet Controller) and management block
-+ * 7) DMA (Direct Memory Access Controller)
-  *
-  * This board currently generates devicetree dynamically that indicates at least
-  * two harts and up to five harts.
-@@ -73,6 +74,7 @@ static const struct MemmapEntry {
-     [SIFIVE_U_MROM] =     {     0x1000,     0xf000 },
-     [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
-     [SIFIVE_U_L2CC] =     {  0x2010000,     0x1000 },
-+    [SIFIVE_U_PDMA] =     {  0x3000000,   0x100000 },
-     [SIFIVE_U_L2LIM] =    {  0x8000000,  0x2000000 },
-     [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
-     [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
-@@ -303,6 +305,22 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-     qemu_fdt_setprop_string(fdt, nodename, "compatible", "gpio-restart");
-     g_free(nodename);
- 
-+    nodename = g_strdup_printf("/soc/dma@%lx",
-+        (long)memmap[SIFIVE_U_PDMA].base);
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_cell(fdt, nodename, "#dma-cells", 1);
-+    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
-+        SIFIVE_U_PDMA_IRQ0, SIFIVE_U_PDMA_IRQ1, SIFIVE_U_PDMA_IRQ2,
-+        SIFIVE_U_PDMA_IRQ3, SIFIVE_U_PDMA_IRQ4, SIFIVE_U_PDMA_IRQ5,
-+        SIFIVE_U_PDMA_IRQ6, SIFIVE_U_PDMA_IRQ7);
-+    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
-+    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-+        0x0, memmap[SIFIVE_U_PDMA].base,
-+        0x0, memmap[SIFIVE_U_PDMA].size);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-+                            "sifive,fu540-c000-pdma");
-+    g_free(nodename);
-+
-     nodename = g_strdup_printf("/soc/cache-controller@%lx",
-         (long)memmap[SIFIVE_U_L2CC].base);
-     qemu_fdt_add_subnode(fdt, nodename);
-@@ -627,6 +645,7 @@ static void sifive_u_soc_instance_init(Object *obj)
-     object_initialize_child(obj, "otp", &s->otp, TYPE_SIFIVE_U_OTP);
-     object_initialize_child(obj, "gem", &s->gem, TYPE_CADENCE_GEM);
-     object_initialize_child(obj, "gpio", &s->gpio, TYPE_SIFIVE_GPIO);
-+    object_initialize_child(obj, "pdma", &s->dma, TYPE_SIFIVE_PDMA);
- }
- 
- static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
-@@ -730,6 +749,17 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
-                                             SIFIVE_U_GPIO_IRQ0 + i));
-     }
- 
-+    /* PDMA */
-+    sysbus_realize(SYS_BUS_DEVICE(&s->dma), errp);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->dma), 0, memmap[SIFIVE_U_PDMA].base);
-+
-+    /* Connect PDMA interrupts to the PLIC */
-+    for (i = 0; i < SIFIVE_PDMA_IRQS; i++) {
-+        sysbus_connect_irq(SYS_BUS_DEVICE(&s->dma), i,
-+                           qdev_get_gpio_in(DEVICE(s->plic),
-+                                            SIFIVE_U_PDMA_IRQ0 + i));
-+    }
-+
-     qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->otp), errp)) {
-         return;
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 9032cb0..e53ab1e 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -22,6 +22,7 @@ config SIFIVE_U
-     select CADENCE
-     select HART
-     select SIFIVE
-+    select SIFIVE_PDMA
-     select UNIMP
- 
- config SPIKE
--- 
-2.7.4
+r~
 
 
