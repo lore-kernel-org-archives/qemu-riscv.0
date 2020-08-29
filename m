@@ -1,47 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kC2dA-0001Nh-Es
-	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 11:19:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44662)
+	id 1kC2dF-0001R6-0D
+	for mharc-qemu-riscv@gnu.org; Sat, 29 Aug 2020 11:19:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44710)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kC2d8-0001Jv-4R; Sat, 29 Aug 2020 11:18:58 -0400
-Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:39748)
+ id 1kC2dD-0001PM-Lg; Sat, 29 Aug 2020 11:19:03 -0400
+Received: from mail-oi1-x241.google.com ([2607:f8b0:4864:20::241]:42104)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kC2d6-0005FZ-7d; Sat, 29 Aug 2020 11:18:57 -0400
-Received: by mail-ot1-x341.google.com with SMTP id r8so1786994ota.6;
- Sat, 29 Aug 2020 08:18:55 -0700 (PDT)
+ id 1kC2dA-0005G2-4X; Sat, 29 Aug 2020 11:19:03 -0400
+Received: by mail-oi1-x241.google.com with SMTP id j7so3322683oij.9;
+ Sat, 29 Aug 2020 08:18:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=7R2QHjsRNu1SOw4Rj8O1LUx16kxOsEkbJPfU0SAk6Zs=;
- b=nc8sIGfZSHaIGKP+cLm23YJBisnqMrA9L/rqfR6UEwUInIpJxDBBa7JGLX1v7mJSnd
- 1OaKYxd7MYG9/2LS+hznYIPgN2/zM51bG1oAdsYjEDuLYepcFN5iw7fLit2JI3Tc3vHi
- CQ/K7KPXkNyIbCJ+tN0wQH+Uok7uVK/7MQgbXFbU+CSDYmxSz/cD7800r6RS18F8LmaI
- bj+klCax23HvffSD3Hq25vTOT6lOEXXqs4SQRf+d25yYe+SUG88ELU+8LUdinwXc8u5l
- 2Ph5N/YG4umYkDkQ+oULZJyFTV07ZUkT/ZBxacQJgERU3G+mmoGWrccuXgNo2kgOSuRn
- dF5A==
+ bh=vguI5U0bhxwSlVEjuemI3fZ5Fw5Lf5dy0E2vha1rC8E=;
+ b=iuuDT7epacLK9ZYu/D25eeFlZw4rqt7AXQBYuKEcI3TLvH0HnfwkvEo5/ofsEuX+Lf
+ CAeDfgTHcZ2S2B3WsD5yB5vbii6OK4p2uL/NHiewCGmGNAvedW3srqqtn7tUER4Vxj/o
+ KVX7A3flPOoFx70n4pcpPHMrPw/ONuYzpXWPKyzzrlmVIObi7b7yY8dUfDTOQNKaEuSB
+ V04/n1dp8EDOx75v5RE37L66/a3qkNSDB4fjd7Y6gG0X0uO1/G6dnq6Pw4QvzMV+VumD
+ KGmoAu1qx3g1exJRMqgKfe2Mn8XzuITeuJXa5MtVrHEDlc/6ISCaaBDowXZMiQ4kGmmZ
+ 2Byw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=7R2QHjsRNu1SOw4Rj8O1LUx16kxOsEkbJPfU0SAk6Zs=;
- b=UqxcYEwB3NTfag1j2JJisES6ZdwQ2oiH+9+kPSWOqNiaYAq6GN26vW31QY+KOalyU9
- veq8XCBbLVEMZPBDT2sr6p4LVaF9qH1uoG5G2ENe+6Ki/b/MA6BTRMa2CvXdBUluwFuv
- 47wPsvlepjkJobLh4cKKzpNFvbTpXfIsLZwXPmRMP5eTOmzBLAD/FNd25dheps/4Qcqf
- JgisB0foIFOLgyV+mtcbuEEIlW4Xd/OoqXEWT5XyZfqSDEicRpTDtxbxw4RzwvlPdInc
- j5ZorORPC1QL1hjPjYHPwItztR5PfpnExh3C6UaY5YgP6Jy5GAGDn3rzfyjKB+dQhFS6
- eSNg==
-X-Gm-Message-State: AOAM530A4FxhCOTjjTJaxISSLIWK/YXxPFSvy/k81ikygMVlM5ek8QFo
- fDRFAeFZnKp868UADKVoR5o=
-X-Google-Smtp-Source: ABdhPJy2M+T0Sj6Nxm1uEeX6o0IKwYngHc7muFE8DQmMHSihB1A2d1tsDpr0Otq/hH2UZhI8mdCV2Q==
-X-Received: by 2002:a05:6830:314c:: with SMTP id
- c12mr2314528ots.133.1598714334896; 
- Sat, 29 Aug 2020 08:18:54 -0700 (PDT)
+ bh=vguI5U0bhxwSlVEjuemI3fZ5Fw5Lf5dy0E2vha1rC8E=;
+ b=uHZjXsILkRYZL24/nTOkieJ/NZKmed2rk1YdSMaIAvwJum2A6NQUnnrZE38uYoYuZv
+ QJLb5lzM9lrEw53rV/uyvnojtEQkorU6xS/SU3N9xKcAxb6bqfCfLvx97dNKVQPBLQ70
+ 9cRJFarRFxjRBnEGq77XNJ8CquVVV6wMhPVzB0O/UtgcDWX/6P768vQ9p4jw99dn56e3
+ jnPIOZel8NGAWyn+liN1lyqK8KT65w9L5ZtdVcyDdcTBXtzbrT5FCosAO1pYoJVzBXEj
+ CILd+gJnUZa5CzYRUcEOPBB0Y8oThKwmMSUfKH8rBvH2pmMgEFKhWs9Nx5n1C94SuOkk
+ 60Fg==
+X-Gm-Message-State: AOAM533CYi2PGbaG91ZzuoaZeatz4ohwpNf6KUdnXfOL6zJ5Q1uegjrZ
+ lJ2QIwJ2XUgm7jpNRwvDTdg=
+X-Google-Smtp-Source: ABdhPJyd5G4NFygo/nDdwr/Snnz3Bb5I55RfvelEgwfTFNWxyl1Kb/bY17bwDvlyf/bEgJ4juUbFfw==
+X-Received: by 2002:aca:53c4:: with SMTP id h187mr2209520oib.126.1598714338791; 
+ Sat, 29 Aug 2020 08:18:58 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
  [147.11.146.144])
- by smtp.gmail.com with ESMTPSA id f50sm58181otf.47.2020.08.29.08.18.51
+ by smtp.gmail.com with ESMTPSA id f50sm58181otf.47.2020.08.29.08.18.55
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 29 Aug 2020 08:18:54 -0700 (PDT)
+ Sat, 29 Aug 2020 08:18:58 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
@@ -51,14 +50,14 @@ Cc: Bin Meng <bin.meng@windriver.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>
-Subject: [PATCH v2 13/16] hw/riscv: microchip_pfsoc: Connect 2 Cadence GEMs
-Date: Sat, 29 Aug 2020 23:17:37 +0800
-Message-Id: <1598714261-8320-14-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH v2 14/16] hw/riscv: microchip_pfsoc: Hook GPIO controllers
+Date: Sat, 29 Aug 2020 23:17:38 +0800
+Message-Id: <1598714261-8320-15-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1598714261-8320-1-git-send-email-bmeng.cn@gmail.com>
 References: <1598714261-8320-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::341;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ot1-x341.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::241;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-oi1-x241.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -80,19 +79,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Aug 2020 15:18:58 -0000
+X-List-Received-Date: Sat, 29 Aug 2020 15:19:04 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Microchip PolarFire SoC integrates 2 Candence GEMs to provide
-IEEE 802.3 standard-compliant 10/100/1000 Mbps ethernet interface.
+Microchip PolarFire SoC integrates 3 GPIOs controllers. It seems
+enough to create unimplemented devices to cover their register
+spaces at this point.
 
-On the Icicle Kit board, GEM0 connects to a PHY at address 8 while
-GEM1 connects to a PHY at address 9.
+With this commit, QEMU can boot to U-Boot (2nd stage bootloader)
+all the way to the Linux shell login prompt, with a modified HSS
+(1st stage bootloader).
 
-The 2nd stage bootloader (U-Boot) is using GEM1 by default, so we
-must specify 2 '-nic' options from the command line in order to get
-a working ethernet.
+For detailed instructions on how to create images for the Icicle
+Kit board, please check QEMU RISC-V WiKi page at:
+https://wiki.qemu.org/Documentation/Platforms/RISCV
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -100,130 +101,52 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 (no changes since v1)
 
- include/hw/riscv/microchip_pfsoc.h |  7 +++++++
- hw/riscv/microchip_pfsoc.c         | 39 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 46 insertions(+)
+ include/hw/riscv/microchip_pfsoc.h |  3 +++
+ hw/riscv/microchip_pfsoc.c         | 14 ++++++++++++++
+ 2 files changed, 17 insertions(+)
 
 diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-index 63e7860..6d20853 100644
+index 6d20853..8bfc7e1 100644
 --- a/include/hw/riscv/microchip_pfsoc.h
 +++ b/include/hw/riscv/microchip_pfsoc.h
-@@ -24,6 +24,7 @@
- 
- #include "hw/char/mchp_pfsoc_mmuart.h"
- #include "hw/dma/sifive_pdma.h"
-+#include "hw/net/cadence_gem.h"
- #include "hw/sd/cadence_sdhci.h"
- 
- typedef struct MicrochipPFSoCState {
-@@ -42,6 +43,8 @@ typedef struct MicrochipPFSoCState {
-     MchpPfSoCMMUartState *serial3;
-     MchpPfSoCMMUartState *serial4;
-     SiFivePDMAState dma;
-+    CadenceGEMState gem0;
-+    CadenceGEMState gem1;
-     CadenceSDHCIState sdhci;
- } MicrochipPFSoCState;
- 
-@@ -84,6 +87,8 @@ enum {
-     MICROCHIP_PFSOC_MMUART2,
-     MICROCHIP_PFSOC_MMUART3,
+@@ -89,6 +89,9 @@ enum {
      MICROCHIP_PFSOC_MMUART4,
-+    MICROCHIP_PFSOC_GEM0,
-+    MICROCHIP_PFSOC_GEM1,
+     MICROCHIP_PFSOC_GEM0,
+     MICROCHIP_PFSOC_GEM1,
++    MICROCHIP_PFSOC_GPIO0,
++    MICROCHIP_PFSOC_GPIO1,
++    MICROCHIP_PFSOC_GPIO2,
      MICROCHIP_PFSOC_ENVM_CFG,
      MICROCHIP_PFSOC_ENVM_DATA,
      MICROCHIP_PFSOC_IOSCB_CFG,
-@@ -99,6 +104,8 @@ enum {
-     MICROCHIP_PFSOC_DMA_IRQ5 = 10,
-     MICROCHIP_PFSOC_DMA_IRQ6 = 11,
-     MICROCHIP_PFSOC_DMA_IRQ7 = 12,
-+    MICROCHIP_PFSOC_GEM0_IRQ = 64,
-+    MICROCHIP_PFSOC_GEM1_IRQ = 70,
-     MICROCHIP_PFSOC_EMMC_SD_IRQ = 88,
-     MICROCHIP_PFSOC_MMUART0_IRQ = 90,
-     MICROCHIP_PFSOC_MMUART1_IRQ = 91,
 diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index d8ec973..7f25609 100644
+index 7f25609..11ebdd1 100644
 --- a/hw/riscv/microchip_pfsoc.c
 +++ b/hw/riscv/microchip_pfsoc.c
-@@ -14,6 +14,7 @@
-  * 3) MMUARTs (Multi-Mode UART)
-  * 4) Cadence eMMC/SDHC controller and an SD card connected to it
-  * 5) SiFive Platform DMA (Direct Memory Access Controller)
-+ * 6) GEM (Gigabit Ethernet MAC Controller)
-  *
-  * This board currently generates devicetree dynamically that indicates at least
-  * two harts and up to five harts.
-@@ -59,6 +60,9 @@
- #define BIOS_FILENAME   "hss.bin"
- #define RESET_VECTOR    0x20220000
- 
-+/* GEM version */
-+#define GEM_REVISION    0x0107010c
-+
- static const struct MemmapEntry {
-     hwaddr base;
-     hwaddr size;
-@@ -83,6 +87,8 @@ static const struct MemmapEntry {
-     [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
-     [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
+@@ -89,6 +89,9 @@ static const struct MemmapEntry {
      [MICROCHIP_PFSOC_MMUART4] =         { 0x20106000,     0x1000 },
-+    [MICROCHIP_PFSOC_GEM0] =            { 0x20110000,     0x2000 },
-+    [MICROCHIP_PFSOC_GEM1] =            { 0x20112000,     0x2000 },
+     [MICROCHIP_PFSOC_GEM0] =            { 0x20110000,     0x2000 },
+     [MICROCHIP_PFSOC_GEM1] =            { 0x20112000,     0x2000 },
++    [MICROCHIP_PFSOC_GPIO0] =           { 0x20120000,     0x1000 },
++    [MICROCHIP_PFSOC_GPIO1] =           { 0x20121000,     0x1000 },
++    [MICROCHIP_PFSOC_GPIO2] =           { 0x20122000,     0x1000 },
      [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
      [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
      [MICROCHIP_PFSOC_IOSCB_CFG] =       { 0x37080000,     0x1000 },
-@@ -119,6 +125,9 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
-     object_initialize_child(obj, "dma-controller", &s->dma,
-                             TYPE_SIFIVE_PDMA);
+@@ -311,6 +314,17 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->gem1), 0,
+         qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_GEM1_IRQ));
  
-+    object_initialize_child(obj, "gem0", &s->gem0, TYPE_CADENCE_GEM);
-+    object_initialize_child(obj, "gem1", &s->gem1, TYPE_CADENCE_GEM);
-+
-     object_initialize_child(obj, "sd-controller", &s->sdhci,
-                             TYPE_CADENCE_SDHCI);
- }
-@@ -134,6 +143,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     MemoryRegion *envm_data = g_new(MemoryRegion, 1);
-     char *plic_hart_config;
-     size_t plic_hart_config_len;
-+    NICInfo *nd;
-     int i;
- 
-     sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
-@@ -272,6 +282,35 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-         qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART4_IRQ),
-         serial_hd(4));
- 
-+    /* GEMs */
-+
-+    nd = &nd_table[0];
-+    if (nd->used) {
-+        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
-+        qdev_set_nic_properties(DEVICE(&s->gem0), nd);
-+    }
-+    nd = &nd_table[1];
-+    if (nd->used) {
-+        qemu_check_nic_model(nd, TYPE_CADENCE_GEM);
-+        qdev_set_nic_properties(DEVICE(&s->gem1), nd);
-+    }
-+
-+    object_property_set_int(OBJECT(&s->gem0), "revision", GEM_REVISION, errp);
-+    object_property_set_int(OBJECT(&s->gem0), "phy-addr", 8, errp);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->gem0), errp);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gem0), 0,
-+                    memmap[MICROCHIP_PFSOC_GEM0].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->gem0), 0,
-+        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_GEM0_IRQ));
-+
-+    object_property_set_int(OBJECT(&s->gem1), "revision", GEM_REVISION, errp);
-+    object_property_set_int(OBJECT(&s->gem1), "phy-addr", 9, errp);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->gem1), errp);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gem1), 0,
-+                    memmap[MICROCHIP_PFSOC_GEM1].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->gem1), 0,
-+        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_GEM1_IRQ));
++    /* GPIOs */
++    create_unimplemented_device("microchip.pfsoc.gpio0",
++        memmap[MICROCHIP_PFSOC_GPIO0].base,
++        memmap[MICROCHIP_PFSOC_GPIO0].size);
++    create_unimplemented_device("microchip.pfsoc.gpio1",
++        memmap[MICROCHIP_PFSOC_GPIO1].base,
++        memmap[MICROCHIP_PFSOC_GPIO1].size);
++    create_unimplemented_device("microchip.pfsoc.gpio2",
++        memmap[MICROCHIP_PFSOC_GPIO2].base,
++        memmap[MICROCHIP_PFSOC_GPIO2].size);
 +
      /* eNVM */
      memory_region_init_rom(envm_data, OBJECT(dev), "microchip.pfsoc.envm.data",
