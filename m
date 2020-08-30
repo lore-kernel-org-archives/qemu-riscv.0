@@ -1,86 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kCGgK-0006UO-Li
-	for mharc-qemu-riscv@gnu.org; Sun, 30 Aug 2020 02:19:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52552)
+	id 1kCGi2-0007fC-2S
+	for mharc-qemu-riscv@gnu.org; Sun, 30 Aug 2020 02:20:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52674)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1kCGgJ-0006Sg-1K
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2020 02:19:11 -0400
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:29639
- helo=us-smtp-delivery-1.mimecast.com)
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1kCGi0-0007cg-7H
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2020 02:20:56 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:37190
+ helo=us-smtp-1.mimecast.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1kCGgF-0008SD-NB
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2020 02:19:10 -0400
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1kCGhs-0000Gb-K3
+ for qemu-riscv@nongnu.org; Sun, 30 Aug 2020 02:20:52 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1598768346;
- h=from:from:sender:sender:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
+ s=mimecast20190719; t=1598768447;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=qdueEY1/oWbqO+TNfreaWrPud9o32Z+0RhfvHMpp+90=;
- b=H+dq0xAe0eZfyZq2nBZebEXsaBVQfNhNO/TLVUtwEjagENJo/A5fqdbqFLuamOuDAG+7iq
- XcNls5EPosaqCMaUqcrIih3P+FYKDiPS8dI35jRvbMK1ngc9xi8ODoEep6Zgkz6ptCghQh
- 9+eEcg1YV0nSjyXVfGEpsvIp6RCr2ig=
+ bh=dtDWKcW89q+Ftt9uCoYc7tBBrjmqgHOx8mIB74jVTtc=;
+ b=Ty7bl0dqikGQ/6zzDTid3E781BFDyg653+5n6P8CJ18ZTx1OoLHTzSt72HtsfOA194Q45J
+ +r286cIcyqfUcmNnAguVJNUgrQFiTCIfxxWW0eFCy88dx/xFN35jGBGtagInx8ANEo7gPj
+ K1NE21edYas3ZCheoth1OklfvoxquVY=
 Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
  [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-341-1WpkUfsbPU-NIPNzhjSamw-1; Sun, 30 Aug 2020 02:18:46 -0400
-X-MC-Unique: 1WpkUfsbPU-NIPNzhjSamw-1
-Received: by mail-wr1-f72.google.com with SMTP id l15so726758wro.10
- for <qemu-riscv@nongnu.org>; Sat, 29 Aug 2020 23:18:46 -0700 (PDT)
+ us-mta-190-hPJF3_iEOte_qDZ-W1N_QQ-1; Sun, 30 Aug 2020 02:20:43 -0400
+X-MC-Unique: hPJF3_iEOte_qDZ-W1N_QQ-1
+Received: by mail-wr1-f72.google.com with SMTP id l15so728295wro.10
+ for <qemu-riscv@nongnu.org>; Sat, 29 Aug 2020 23:20:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:from:date:to:cc:subject:message-id
- :references:mime-version:content-disposition
- :content-transfer-encoding:in-reply-to;
- bh=V2nCr2RPn1NrqT0tvAO1gfWK3iizlxVGfbl5BGyE7jU=;
- b=Sx7nbVf3kLsu1vAimVnJTf4rndkZZ7YfeOCjkEhFHcYUPi3+hpPhpEWWGNJutJgbr7
- 4dwede8BFfUGvSqVuRzFK7MTxSU9LcoXdET6T3k0Oe8u56huTKdqYBObDZYvOD61cAxu
- y5s4s9K2qyVvnx5Tk61SRkX7OQY4XJvze1lsJLNrGse2zPVb+7XWBHmD5C6IvUPB76VB
- 7c+GqWBiVaZEeu2dNsmYUE88d/B4u5KZEVw4gtQn6xHbaJbGG8fyRVCdcLA1ZLYR8pYV
- B3OFLQ3wecEJ8e+dehCbbB99Iq4uIHUSL3QosWIyVY1jjcCSINqXwN8ZjfKmEYjlJLT2
- 1/Lw==
-X-Gm-Message-State: AOAM530sVI8cHY8Xh9ttf3Hy1J8c3DDaiZgW2NG5GurDM2a7p59EtXgh
- Bnqw9rDWGRq2Qmz41Xq57McS2ptMMG7GE8x2FNRc/G2H6vY9QTQN176iHF8elsl1fuSEX/GJBb3
- rtvsL/FypEH+5+bQ=
-X-Received: by 2002:adf:ebcf:: with SMTP id v15mr6592367wrn.372.1598768325165; 
- Sat, 29 Aug 2020 23:18:45 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyMdNUWHYDZ+ZN1B+yAZiYvgu/Qp49U3uXeyQ4EQlJCL6Y2267ynJAyLbzzzcVVUqLu0CZzUA==
-X-Received: by 2002:adf:ebcf:: with SMTP id v15mr6592335wrn.372.1598768324811; 
- Sat, 29 Aug 2020 23:18:44 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=dtDWKcW89q+Ftt9uCoYc7tBBrjmqgHOx8mIB74jVTtc=;
+ b=W6tZ9zloORAOPOdDB1QbwkXgiYoTT4//xOiYWuJhvY6+Re65XH7HutfPeqjf10RV5f
+ gYirdvKX5uCOPdmf/usgHU5tSkWP0+h457emVvhTHd9wtOkSjSUzxX3xaQ0ldGR1cbr9
+ VQW1m8BwIxBiJWHcojGANLvfmXL5ysQRRqgyO6MsuzALu8fj9Y6gRK5bOoF0OLfpITMl
+ CrKJAinyN6+kpmbuH0NYlhLQHZu+Ha0Pbx/nyNI3aK1omem9yaPDQFE9Cc/YWMSGOAR2
+ nUTUl4g8oxAsQAv3g5qCloZowkJoAORoa7PtLqoCR1Q/Xm1Kx5gKBAEiHkCZyVGHb1YQ
+ pjog==
+X-Gm-Message-State: AOAM530e4FRyyFHZXFF3J6I9hGYGQv270QW7HnxlGtUyUbv3kEetoCRQ
+ R9CWIRLhPqE0tUgi//M39OlRjSxTExm9nAXMYZn5cxyo89BMhaW2/FooFdCNVg/AY21E8T7CpJ4
+ BCqasr2Rs2/dtZMg=
+X-Received: by 2002:adf:a287:: with SMTP id s7mr6672363wra.103.1598768442200; 
+ Sat, 29 Aug 2020 23:20:42 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJw5YbtoHXF+no8PKTlSCp8iIGRC9w0k9TFJ4KzQNYA+vKlrfrOKlKILb6kClJuLPeYO3hS7Tw==
+X-Received: by 2002:adf:a287:: with SMTP id s7mr6672336wra.103.1598768441891; 
+ Sat, 29 Aug 2020 23:20:41 -0700 (PDT)
 Received: from redhat.com (bzq-109-64-136-54.red.bezeqint.net. [109.64.136.54])
- by smtp.gmail.com with ESMTPSA id n8sm6215160wra.32.2020.08.29.23.18.41
+ by smtp.gmail.com with ESMTPSA id z11sm576426wru.88.2020.08.29.23.20.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 29 Aug 2020 23:18:43 -0700 (PDT)
-Sender: Michael Tsirkin <mtsirkin@redhat.com>
-From: mst@redhat.com
-X-Google-Original-From: "Michael S. Tsirkin" <mst@redhat.com>,
- Nathan Chancellor <natechancellor@gmail.com>
-Date: Sun, 30 Aug 2020 02:18:39 -0400
-To: Bug 1892540 <1892540@bugs.launchpad.net>,
- "Michael S. Tsirkin" <mst@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Sat, 29 Aug 2020 23:20:41 -0700 (PDT)
+Date: Sun, 30 Aug 2020 02:20:38 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Nathan Chancellor <natechancellor@gmail.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
  qemu-stable@nongnu.org, Richard Henderson <rth@twiddle.net>,
  qemu-riscv@nongnu.org
-Subject: Re: [Bug 1892540] [RFC PATCH v2] hw/display/tcx: Allow 64-bit
- accesses to framebuffer stippler and blitter
-Message-ID: <20200830021257-mutt-send-email-mst@kernel.org>
-References: <159803735569.2614.10182276398047269277.malonedeb@chaenomeles.canonical.com>
- <20200822142127.1316231-1-f4bug@amsat.org>
+Subject: Re: [PATCH] memory: Revert "memory: accept mismatching sizes in
+ memory_region_access_valid"
+Message-ID: <20200830021939-mutt-send-email-mst@kernel.org>
+References: <20200610134731.1514409-1-mst@redhat.com>
+ <20200827053216.GA1515751@ubuntu-n2-xlarge-x86>
 MIME-Version: 1.0
-In-Reply-To: <20200822142127.1316231-1-f4bug@amsat.org>
+In-Reply-To: <20200827053216.GA1515751@ubuntu-n2-xlarge-x86>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0.002
+X-Mimecast-Spam-Score: 0.003
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Received-SPF: pass client-ip=207.211.31.81; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/30 02:19:06
+Received-SPF: pass client-ip=205.139.110.120; envelope-from=mst@redhat.com;
+ helo=us-smtp-1.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/30 02:07:05
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -30
 X-Spam_score: -3.1
@@ -101,40 +94,122 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Aug 2020 06:19:11 -0000
+X-List-Received-Date: Sun, 30 Aug 2020 06:20:56 -0000
 
-On Sat, Aug 22, 2020 at 02:21:27PM -0000, Philippe Mathieu-Daudé wrote:
-> The S24/TCX datasheet is listed as "Unable to locate" on [1].
+On Wed, Aug 26, 2020 at 10:32:16PM -0700, Nathan Chancellor wrote:
+> Hi all,
 > 
-> However the NetBSD revision 1.32 of the driver introduced
-> 64-bit accesses to the stippler and blitter [2]. It is safe
-> to assume these memory regions are 64-bit accessible.
-> QEMU implementation is 32-bit, so fill the 'impl' fields.
+> Sorry for the duplicate reply, my first one was rejected by a mailing
+> list administrator for being too long so I resent it with the error logs
+> as a link instead of inline.
 > 
-> [1] http://web.archive.org/web/20111209011516/http://wikis.sun.com/display/FOSSdocs/Home
-> [2] http://cvsweb.netbsd.org/bsdweb.cgi/src/sys/dev/sbus/tcx.c.diff?r1=1.31&r2=1.32
+> On Wed, Jun 10, 2020 at 09:47:49AM -0400, Michael S. Tsirkin wrote:
+> > Memory API documentation documents valid .min_access_size and .max_access_size
+> > fields and explains that any access outside these boundaries is blocked.
+> > 
+> > This is what devices seem to assume.
+> > 
+> > However this is not what the implementation does: it simply
+> > ignores the boundaries unless there's an "accepts" callback.
+> > 
+> > Naturally, this breaks a bunch of devices.
+> > 
+> > Revert to the documented behaviour.
+> > 
+> > Devices that want to allow any access can just drop the valid field,
+> > or add the impl field to have accesses converted to appropriate
+> > length.
+> > 
+> > Cc: qemu-stable@nongnu.org
+> > Reviewed-by: Richard Henderson <rth@twiddle.net>
+> > Fixes: CVE-2020-13754
+> > Fixes: https://bugzilla.redhat.com/show_bug.cgi?id=1842363
+> > Fixes: a014ed07bd5a ("memory: accept mismatching sizes in memory_region_access_valid")
+> > Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> > ---
+> >  memory.c | 29 +++++++++--------------------
+> >  1 file changed, 9 insertions(+), 20 deletions(-)
+> > 
+> > diff --git a/memory.c b/memory.c
+> > index 91ceaf9fcf..3e9388fb74 100644
+> > --- a/memory.c
+> > +++ b/memory.c
+> > @@ -1352,35 +1352,24 @@ bool memory_region_access_valid(MemoryRegion *mr,
+> >                                  bool is_write,
+> >                                  MemTxAttrs attrs)
+> >  {
+> > -    int access_size_min, access_size_max;
+> > -    int access_size, i;
+> > +    if (mr->ops->valid.accepts
+> > +        && !mr->ops->valid.accepts(mr->opaque, addr, size, is_write, attrs)) {
+> > +        return false;
+> > +    }
+> >  
+> >      if (!mr->ops->valid.unaligned && (addr & (size - 1))) {
+> >          return false;
+> >      }
+> >  
+> > -    if (!mr->ops->valid.accepts) {
+> > +    /* Treat zero as compatibility all valid */
+> > +    if (!mr->ops->valid.max_access_size) {
+> >          return true;
+> >      }
+> >  
+> > -    access_size_min = mr->ops->valid.min_access_size;
+> > -    if (!mr->ops->valid.min_access_size) {
+> > -        access_size_min = 1;
+> > +    if (size > mr->ops->valid.max_access_size
+> > +        || size < mr->ops->valid.min_access_size) {
+> > +        return false;
+> >      }
+> > -
+> > -    access_size_max = mr->ops->valid.max_access_size;
+> > -    if (!mr->ops->valid.max_access_size) {
+> > -        access_size_max = 4;
+> > -    }
+> > -
+> > -    access_size = MAX(MIN(size, access_size_max), access_size_min);
+> > -    for (i = 0; i < size; i += access_size) {
+> > -        if (!mr->ops->valid.accepts(mr->opaque, addr + i, access_size,
+> > -                                    is_write, attrs)) {
+> > -            return false;
+> > -        }
+> > -    }
+> > -
+> >      return true;
+> >  }
+> >  
+> > -- 
+> > MST
+> > 
+> > 
 > 
-> Reported-by: Andreas Gustafsson <gson@gson.org>
-> Buglink: https://bugs.launchpad.net/bugs/1892540
-> Fixes: 55d7bfe2293 ("tcx: Implement hardware acceleration")
-> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+> I just ran into a regression with booting RISC-V kernels due to this
+> commit. I can reproduce it with QEMU 5.1.0 and latest tip of tree
+> (25f6dc28a3a8dd231c2c092a0e65bd796353c769 at the time of initially
+> writing this).
+> 
+> The error message, commands, and bisect logs are available here:
+> 
+> https://gist.githubusercontent.com/nathanchance/c106dd22ec0c0e00f6a25daba106a1b9/raw/d929f2fff6da9126ded156affb0f19f359e9f693/qemu-5.1.0-issue-terminal-log.txt
+> 
+> I have attached the rootfs and kernel image used for these tests. If for
+> some reason there is a problem receiving them, the kernel is just an
+> arch/riscv/configs/defconfig kernel at Linux 5.9-rc2 and the rootfs is
+> available here:
+> 
+> https://github.com/ClangBuiltLinux/boot-utils/blob/3b21a5b71451742866349ba4f18638c5a754e660/images/riscv/rootfs.cpio.zst
+> 
+> Please let me know if I can provide any follow up information or if I am
+> doing something wrong.
+> 
+> Cheers,
+> Nathan
 
-Philippe, did you submit the patch on the mailing list
-normally too? I don't seem to see it there.
 
-the patch seems to work for me:
+The following patch was proposed to fix the issue:
 
-Tested-by: Michael S. Tsirkin <mst@redhat.com>
-
-
-CC Nathan who reported a similar failure.
-
-Nathan, does the patch below fix the issue for you?
-
-> ---
-> Since v1:
-> - added missing uncommitted staged changes... (tcx_blit_ops)
-> ---
+-----------------------------------------------------------
  hw/display/tcx.c | 18 +++++++++++++++---
  1 file changed, 15 insertions(+), 3 deletions(-)
 
@@ -193,9 +268,7 @@ index 1fb45b1aab8..96c6898b149 100644
 
 -----------------------------------------------------------
 
-I think you shouldn't specify .min_access_size in impl, since
-that also allows 1 and 2 byte accesses from guest.
-
+does this fix the issue for you?
 
 
 > -- 
@@ -240,5 +313,7 @@ that also allows 1 and 2 byte accesses from guest.
 > 
 > To manage notifications about this bug go to:
 > https://bugs.launchpad.net/qemu/+bug/1892540/+subscriptions
+
+
 
 
