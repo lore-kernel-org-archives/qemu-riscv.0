@@ -1,85 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kCWrh-0001JY-6N
-	for mharc-qemu-riscv@gnu.org; Sun, 30 Aug 2020 19:36:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43478)
+	id 1kCmWR-0004iK-FF
+	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 12:19:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37370)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <leif@nuviainc.com>) id 1kCWrg-0001IH-5L
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2020 19:36:00 -0400
-Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:50555)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kCmWP-0004dj-PI; Mon, 31 Aug 2020 12:19:05 -0400
+Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:39475)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <leif@nuviainc.com>) id 1kCWrd-0005dv-5h
- for qemu-riscv@nongnu.org; Sun, 30 Aug 2020 19:35:59 -0400
-Received: by mail-wm1-x342.google.com with SMTP id e17so3662804wme.0
- for <qemu-riscv@nongnu.org>; Sun, 30 Aug 2020 16:35:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nuviainc-com.20150623.gappssmtp.com; s=20150623;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=RASHodX0lMfHYt83QbTf2ezLNOxfAhKMutmXcqjpFuQ=;
- b=j8RBtorqaVEsLOmNgpW3EzUGHsToCN3xfe46gSDMurZJGFNEg18k0GvZKdOoScuO0k
- zlYrwS0pah7kXPLGqgfPBRxHOJGPX3hbhsI3IsaXdMIBVLnNEv98mTUVFnReYcAAxGPs
- sMg/fgdjTuC5L4ZV/psfBJMxu1gMdqqaZwLDPxgr1QUuEQZ1by7JTpF3LXNIgls9bR52
- fbo1mee/ZsECNW5HqyQcko3TlbS/htkuGhXweyfG8AEFHcNh24jV/7Uzha0LIsCp77WY
- 2j0lJeqJ5X2rWl35Ys3SW/QIPjgsfGETi4kpiHBODBy2jWGW/fLNKVxR38vIVBxqD2wL
- Tfhw==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kCmWO-0007VX-3E; Mon, 31 Aug 2020 12:19:05 -0400
+Received: by mail-il1-x144.google.com with SMTP id e14so238642ile.6;
+ Mon, 31 Aug 2020 09:19:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=qLWwmNK/+rVx/1LFPymqX5sgTpx4sJfNRhvArNptifI=;
+ b=kKZDteuV6eflCOtcsdtjYVB3uZ64Ku/zMJHuDVdIHZWSd3HY6K8kjRn3UYq2bqcsIR
+ q3/PSzSB1RbhUsO+YePK3AwXEjtLOoOPo6/S+k5LAPcCpkmgJvjTQm/9h5mJSWmBN4JL
+ b/ljgggouYcu5HGJpC3ej8zsD0hOK77YN9gZE18DWAb92BVk1ekosg7+XUMUCmCajsRU
+ xBos2UL/IGGxs6lDna7OZH1L3XTKjGmLL3nFb+v758J4ADyzT6o/O/meqfTE2ps9jewJ
+ EV69Ey8+/oKqXqUI1Y9sWCgV1L2jq268/+iGImuj4LQ+5v577MKJDoPeOT2rXI7HPVT+
+ br9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=RASHodX0lMfHYt83QbTf2ezLNOxfAhKMutmXcqjpFuQ=;
- b=MOAjxUO4vQhKenDwrOqb6a3HH0hlHQTmxV0008V8GhuTahtWBhSVqEcXXeIdfqmCIx
- RrimnfOGYA9zyDneVBzADR1seto0zGL2n8xASu/m5NfY5vAxJUodldjfjl0dw59YXcad
- NRSqk6mXkLuWo2LWC8quZW3FSYPf7zLS6ZYAI7Kw8w4FmxPTmZQX9EGWq8xXZzPyEpde
- V0NHo2S7YcX2Cl76mrPSzCcOFpHHK8bSWHclDLxmoRgWULR1ZqwShT4TBeImi5Iclohf
- Osly+pu4oqnKfzj/i8mGOn28dQnX0+7itJSO9T02YYJpGnKPDTa+jJeiJ2NVdF2DoJEQ
- u7ng==
-X-Gm-Message-State: AOAM531D5BG4B1Sq25qnl4zDwJp6O42xX8+fvvx0xtBOE3WnrLQhC1xh
- UvdMO3Wx5aiHmYBNf09bkdZHTA==
-X-Google-Smtp-Source: ABdhPJxnrUjQW5Yi/f20qAyShWbhd5YUVdj0/CuqpJzH0j7u25Md01wYnJ7zSCsxCVI2pBPRk9H3XQ==
-X-Received: by 2002:a1c:4d12:: with SMTP id o18mr342678wmh.177.1598830555254; 
- Sun, 30 Aug 2020 16:35:55 -0700 (PDT)
-Received: from vanye ([2001:470:1f09:12f0:b26e:bfff:fea9:f1b8])
- by smtp.gmail.com with ESMTPSA id z6sm9218591wml.41.2020.08.30.16.35.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Aug 2020 16:35:54 -0700 (PDT)
-Date: Mon, 31 Aug 2020 00:35:52 +0100
-From: Leif Lindholm <leif@nuviainc.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>,
- Palmer Dabbelt <palmerdabbelt@google.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <alistair@alistair23.me>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Jason Wang <jasowang@redhat.com>, Bin Meng <bin.meng@windriver.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-arm <qemu-arm@nongnu.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>
-Subject: Re: [PATCH v2 00/16] hw/riscv: Add Microchip PolarFire SoC Icicle
- Kit board support
-Message-ID: <20200830233552.GG20124@vanye>
-References: <1598714261-8320-1-git-send-email-bmeng.cn@gmail.com>
- <20200830125659.GD20124@vanye>
- <CAEUhbmVYpSVE+C+KyEa2Ono5p-SLtC1vE=YwE_3FJK6POEJCCg@mail.gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=qLWwmNK/+rVx/1LFPymqX5sgTpx4sJfNRhvArNptifI=;
+ b=UZovwVKu9xbHAgg13REJ3WzRRIOAnxOi23vANBGi+c2A2JaC3MnoutEacc1h7YmbXq
+ bHwgHDMsRNf6x5yriCZcRAV26j8nrfMPc4kYHbnx2W3EUt6t5wdkAx3X8WW+sXaxuf1t
+ kGRZhmDRycyBTSLE3OJZNPiMOq44oblCBl4yCp6csmBlH81iEjeFbaYqVfyCq9bUomj1
+ Z0AxcukXVA6iP1tO8lclNimidvrpdDVHWqtlzk6VSf4shCk5rQrN3KPU8aBFYnbKG8S6
+ oTgZNOa8GWKGRSGO0KhEzNWDHIEcZTsmItAX0zZYTQk/lEdE3wSlVjGBHnCbC8ib6obz
+ k+jw==
+X-Gm-Message-State: AOAM533qRMSoNNVW2uElxc3XZWZBJSVRwpAZhVyZ/G17xyBchKpyh8H/
+ sDV261QuZ2rTDR9eeZWLbOo0T5wv77OctFWDL58=
+X-Google-Smtp-Source: ABdhPJwx6IxZGPa0Pl/WgRLrnBrjrror/rWorXUNouMAc5gn/GIoA9J4qME9uHmboWoyVm4UMieKSF1ch52LwA1DB/Q=
+X-Received: by 2002:a92:189:: with SMTP id 131mr2059884ilb.40.1598890741969;
+ Mon, 31 Aug 2020 09:19:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAEUhbmVYpSVE+C+KyEa2Ono5p-SLtC1vE=YwE_3FJK6POEJCCg@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Received-SPF: pass client-ip=2a00:1450:4864:20::342;
- envelope-from=leif@nuviainc.com; helo=mail-wm1-x342.google.com
+References: <20200610134731.1514409-1-mst@redhat.com>
+ <20200827053216.GA1515751@ubuntu-n2-xlarge-x86>
+ <20200830021939-mutt-send-email-mst@kernel.org>
+ <20200830064944.GA1073664@ubuntu-n2-xlarge-x86>
+ <2fd7a1df-db2b-9edd-1d73-7efa18312ace@ilande.co.uk>
+In-Reply-To: <2fd7a1df-db2b-9edd-1d73-7efa18312ace@ilande.co.uk>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 31 Aug 2020 09:08:10 -0700
+Message-ID: <CAKmqyKPguBdfRr7hi3+HWYy9Xdyq44juEjEiBzx32hVDtTPRTQ@mail.gmail.com>
+Subject: Re: [PATCH] memory: Revert "memory: accept mismatching sizes in
+ memory_region_access_valid"
+To: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Cc: Nathan Chancellor <natechancellor@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ qemu-stable@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Richard Henderson <rth@twiddle.net>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -92,56 +83,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Aug 2020 23:36:00 -0000
+X-List-Received-Date: Mon, 31 Aug 2020 16:19:06 -0000
 
-On Mon, Aug 31, 2020 at 06:15:52 +0800, Bin Meng wrote:
-> Hi Leif,
-> 
-> > > The following perepherals are emulated:
-> > > - SiFive CLINT
-> > > - SiFive PLIC
-> > > - PolarFire SoC Multi-Mode UART
-> > > - SiFive PDMA
-> > > - Cadence eMMC/SDHCI controller
-> > > - Cadence Gigabit Ethernet MAC
-> > >
-> > > The BIOS image used by this machine is hss.bin, aka Hart Software
-> > > Services, which can be built from:
-> > > https://github.com/polarfire-soc/hart-software-services
+On Sun, Aug 30, 2020 at 12:24 AM Mark Cave-Ayland
+<mark.cave-ayland@ilande.co.uk> wrote:
+>
+> On 30/08/2020 07:49, Nathan Chancellor wrote:
+>
+> > Unfortunately, it does not. I applied it on top of latest
+> > git (ac8b279f13865d1a4f1958d3bf34240c1c3af90d) and I can still
+> > reproduce my failure. Is it possible that type of fix is needed
+> > in a RISC-V specific driver?
 > >
-> > Are there any version requirements, or additional qemu patches, that
-> > need to be taken into account. Should I expect to see output on stdio?
-> 
-> Thanks for trying!
-> 
-> Did you apply the patch to skip the DDR memory initialization
-> mentioned in this page?
-> https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
+> > Would you like me to comment on the Launchpad bug as well?
+>
+> Hi Nathan,
+>
+> I came up with a quick patch to enable some logging to catch memory accesses being
+> refused for a similar bug report at
+> https://bugs.launchpad.net/qemu/+bug/1886318/comments/13.
 
-I did, but in honesty only after I sent the previous email :)
-(Since it made no difference, I didn't bother following up.)
+Can we apply this to QEMU master to print this is guest error logging
+is on? This seems like a common-ish problem and it would be nice to
+allow users to debug it themselves.
 
-> > I tried to build hss 3faaaaf8ce0d, using
-> > https://github.com/riscv/riscv-gnu-toolchain (7f1f4ab5b0e0), which
-> > ends up being a gcc 10.1. That caused me to raise
-> > https://github.com/polarfire-soc/hart-software-services/issues/2.
-> 
-> Yes, GCC 10 does not build is a known issue. Currently I am using GCC
-> 9 to build HSS.
+Alistair
 
-Right, I can confirm that with commit 93f82dc18e1d riscv-gnu-toolchain
-(the last before changing to gcc 10.1), I generate a 9.2.0 gcc that
-builds a hss.bin that boots successfully with the minimal command line
-
-qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -bios hss.bin \
-  -display none -serial stdio
-
-Thanks!
-
-(I haven't looked any further than the hss.bin yet, but I'm now
-unblocked to do so.)
-
-Best Regards,
-
-Leif
+>
+> Can you apply the same change to your tree and report any messages on stderr as you
+> do your board reboot test?
+>
+>
+> ATB,
+>
+> Mark.
+>
 
