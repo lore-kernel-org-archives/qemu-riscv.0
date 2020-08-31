@@ -1,75 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kCot5-0002U2-En
-	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 14:50:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42686)
+	id 1kCr2n-0005G1-KD
+	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 17:08:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44932)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
- id 1kCot3-0002PS-Cm
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 14:50:37 -0400
-Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:38294)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
- id 1kCosy-0008W5-0U
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 14:50:37 -0400
-Received: by mail-il1-x12a.google.com with SMTP id w3so2087211ilh.5
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2020 11:50:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7MUXZC+mXIJp+jIPw0KzkHr23yG7+1R5ua9TjhMwqb0=;
- b=Ef6TE1MJVsCbjcmxnR2UgtfbYZw8ib6XFNlplAuJ/iioz+KJrV3p9C610fgRN0ijvz
- 0eY/DfkKFYbNiww0yglQ32uyyb2iXQJp/xpvFd6wAhnYP42o10MtUXMyF/kmTr3rW6Wj
- CrvzJe3w3Gg2Gj/at9AA5m71BPaUnEvqeqFWZeMohsXtH8xyaZxxa517Paq2EQOWTjst
- CjmzxmjTD9t2NUD4hCLA9CWDf8JjUuHHrCwiDTHBdPgW/B/3CpvzIdToCMIZUB0BbyHd
- LtlEBKgTbf9t0S+JSwxQjhJtWBjUe9KxSYibzw38pFj55NPxbomlIVX85hyUbcBXffp1
- nndA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=7MUXZC+mXIJp+jIPw0KzkHr23yG7+1R5ua9TjhMwqb0=;
- b=cmbajqTpe4oI36KJ0ybfuyBx7hSiBFshvxX+wrJNnMXjGdDiJwUY68wVW4jkhe4l01
- do53zkQWxEnablokNUxE+E329s5rdSg7Bc9CeqB8bYT/8vwdJCAkl5W1+bLizimvICf8
- iLANNkEmCNyLZBtm6yZqgIweHMQY866vT84HblZUnSKXVihvbTNi4tqwcfas8xI3hUM5
- W+6BY5qVc3SWkyTesfrbFB8xlKD6mWjEE1PdUdKhG7X0XMWGSWFUjn593ZT9HJTYC0LC
- Luv7GKry2TLn4RdaoXIBVk9aXNXtzcd6miDpp+gsZtBP58KwMFCo1xp0egFSbJDtjeO2
- +Wrg==
-X-Gm-Message-State: AOAM533xF7lqPRVwbJ5ogOwIWZLv9jRhfNHD5lscV8ORDQy82ILZIPPh
- Hm0uivu3C8mi307lziOHXFn0snoOedZO4WsE8act/Q==
-X-Google-Smtp-Source: ABdhPJz3H82KNXgLh681T0VBPAE8qqEQ4LwDqsWUskZMFwv8IXi2uNwToRE8itt1ATIgdN79Pbb2ilqjKoUg/tHqD6I=
-X-Received: by 2002:a05:6e02:c2e:: with SMTP id
- q14mr2654604ilg.286.1598899830406; 
- Mon, 31 Aug 2020 11:50:30 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200817084955.28793-1-frank.chang@sifive.com>
- <20200817084955.28793-56-frank.chang@sifive.com>
- <d94182cc-8846-9eb6-6a93-87968d0d32c1@linaro.org>
- <2cbf253f-8fe1-d840-50f1-582767bf600c@linaro.org>
-In-Reply-To: <2cbf253f-8fe1-d840-50f1-582767bf600c@linaro.org>
-From: Chih-Min Chao <chihmin.chao@sifive.com>
-Date: Tue, 1 Sep 2020 02:50:19 +0800
-Message-ID: <CAEiOBXXY4ZMoCfo2tmLw3g6hmj6EjDXMzm_ybHd-ENC3=zTwAg@mail.gmail.com>
-Subject: Re: [RFC v4 55/70] target/riscv: rvv-1.0: single-width floating-point
- reduction
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Frank Chang <frank.chang@sifive.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1kCr2l-00059J-8a
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 17:08:47 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:56431)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1kCr2j-0000BJ-2w
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 17:08:46 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1598908123;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Drboy62O1LBCh7uah3AZ0Zl6FneOi0JiDtImU/qB8Yk=;
+ b=Mq0LffGKfDeGXiJ6EJIUoIEUyEzs+DwrkiYgeMrKyMEwu54Mo2Ui7s22BqtxhzUspRy3e4
+ Az/z781C1DeH5i3l8YW15d2pwiic28um2KJX6aOj7PPIosrINbDT3dKWQVDZuLgtp2zRPR
+ l2QcQQtDKj9uDCIuuRhtV5IeVdKsdlM=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-451-MH3ZqCvYNoSPf-v-uik8Iw-1; Mon, 31 Aug 2020 17:08:39 -0400
+X-MC-Unique: MH3ZqCvYNoSPf-v-uik8Iw-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C73971074644;
+ Mon, 31 Aug 2020 21:08:37 +0000 (UTC)
+Received: from localhost (ovpn-66-226.rdu2.redhat.com [10.10.66.226])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 9CE055D9D3;
+ Mon, 31 Aug 2020 21:08:34 +0000 (UTC)
+From: Eduardo Habkost <ehabkost@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ "Daniel P. Berrange" <berrange@redhat.com>,
+ Richard Henderson <rth@twiddle.net>, Helge Deller <deller@gmx.de>,
+ Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Content-Type: multipart/alternative; boundary="0000000000006c7ec905ae30e07a"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
- envelope-from=chihmin.chao@sifive.com; helo=mail-il1-x12a.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Raphael Norwitz <raphael.norwitz@nutanix.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v4 10/18] [automated] Move QOM typedefs and add missing
+ includes (pass 3)
+Date: Mon, 31 Aug 2020 17:07:32 -0400
+Message-Id: <20200831210740.126168-11-ehabkost@redhat.com>
+In-Reply-To: <20200831210740.126168-1-ehabkost@redhat.com>
+References: <20200831210740.126168-1-ehabkost@redhat.com>
+MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
+X-Mimecast-Spam-Score: 0.001
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=ehabkost@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/08/31 15:34:32
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,62 +84,198 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2020 18:50:37 -0000
+X-List-Received-Date: Mon, 31 Aug 2020 21:08:47 -0000
 
---0000000000006c7ec905ae30e07a
-Content-Type: text/plain; charset="UTF-8"
+Some typedefs and macros are defined after the type check macros.
+This makes it difficult to automatically replace their
+definitions with OBJECT_DECLARE_TYPE.
 
-On Sun, Aug 30, 2020 at 7:58 AM Richard Henderson <
-richard.henderson@linaro.org> wrote:
+Patch generated using:
 
-> On 8/29/20 4:50 PM, Richard Henderson wrote:
-> > It doesn't actually say anything about the way in which we've
-> implemented the
-> > *_noprop functions.
->
-> Ho hum.  It seems v2.2 has changed fmin/fmax for the fpu as well.
->
-> We really should fix that too...
->
->
-> r~
->
->
-The noprop is implemented in below patch and could  be applied to scalar
-part
-https://patchew.org/QEMU/1597908641-6293-1-git-send-email-chihmin.chao@sifive.com/
+ $ ./scripts/codeconverter/converter.py -i \
+   --pattern=QOMStructTypedefSplit $(git grep -l '' -- '*.[ch]')
 
-Chih-Min Chao
+which will split "typdef struct { ... } TypedefName"
+declarations.
 
---0000000000006c7ec905ae30e07a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Followed by:
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br clear=3D"all"><div><div dir=3D"ltr" c=
-lass=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr=
-"><br></div></div></div></div><br><div class=3D"gmail_quote"><div dir=3D"lt=
-r" class=3D"gmail_attr">On Sun, Aug 30, 2020 at 7:58 AM Richard Henderson &=
-lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.henderson@linaro=
-.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
-ex">On 8/29/20 4:50 PM, Richard Henderson wrote:<br>
-&gt; It doesn&#39;t actually say anything about the way in which we&#39;ve =
-implemented the<br>
-&gt; *_noprop functions.<br>
-<br>
-Ho hum.=C2=A0 It seems v2.2 has changed fmin/fmax for the fpu as well.<br>
-<br>
-We really should fix that too...<br>
-<br>
-<br>
-r~<br>
-<br></blockquote><div><br></div><div>The noprop is implemented in below pat=
-ch and could=C2=A0 be applied to scalar part<br><a href=3D"https://patchew.=
-org/QEMU/1597908641-6293-1-git-send-email-chihmin.chao@sifive.com/">https:/=
-/patchew.org/QEMU/1597908641-6293-1-git-send-email-chihmin.chao@sifive.com/=
-</a><br></div><div><br></div><div><span style=3D"color:rgb(136,136,136)">Ch=
-ih-Min Chao</span><div style=3D"color:rgb(136,136,136)"><br></div></div></d=
-iv></div>
+ $ ./scripts/codeconverter/converter.py -i --pattern=MoveSymbols \
+    $(git grep -l '' -- '*.[ch]')
 
---0000000000006c7ec905ae30e07a--
+which will:
+- move the typedefs and #defines above the type check macros
+- add missing #include "qom/object.h" lines if necessary
+
+Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
+---
+Changes series v3 -> v4: this is a new patch added in series v4
+
+The script was re-run after series rebase.
+
+This is being submitted as a separate patch to make review
+easier, but it can be squashed into the previous patch once it
+gets reviewed.
+---
+Cc: Richard Henderson <rth@twiddle.net>
+Cc: Helge Deller <deller@gmx.de>
+Cc: Peter Maydell <peter.maydell@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Cc: Raphael Norwitz <raphael.norwitz@nutanix.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org
+Cc: qemu-riscv@nongnu.org
+---
+ include/hw/arm/armsse.h            | 11 +++++++----
+ include/hw/riscv/spike.h           |  6 ++++--
+ include/hw/virtio/vhost-user-blk.h |  6 ++++--
+ hw/hppa/lasi.c                     |  6 ++++--
+ 4 files changed, 19 insertions(+), 10 deletions(-)
+
+diff --git a/include/hw/arm/armsse.h b/include/hw/arm/armsse.h
+index 347b977ae5..e5788e9d3c 100644
+--- a/include/hw/arm/armsse.h
++++ b/include/hw/arm/armsse.h
+@@ -105,8 +105,11 @@
+ #include "hw/or-irq.h"
+ #include "hw/core/split-irq.h"
+ #include "hw/cpu/cluster.h"
++#include "qom/object.h"
+ 
+ #define TYPE_ARM_SSE "arm-sse"
++typedef struct ARMSSE ARMSSE;
++typedef struct ARMSSEClass ARMSSEClass;
+ #define ARM_SSE(obj) OBJECT_CHECK(ARMSSE, (obj), TYPE_ARM_SSE)
+ 
+ /*
+@@ -140,7 +143,7 @@
+ #define RAM3_PPU 6
+ #define NUM_PPUS 7
+ 
+-typedef struct ARMSSE {
++struct ARMSSE {
+     /*< private >*/
+     SysBusDevice parent_obj;
+ 
+@@ -215,14 +218,14 @@ typedef struct ARMSSE {
+     uint32_t init_svtor;
+     bool cpu_fpu[SSE_MAX_CPUS];
+     bool cpu_dsp[SSE_MAX_CPUS];
+-} ARMSSE;
++};
+ 
+ typedef struct ARMSSEInfo ARMSSEInfo;
+ 
+-typedef struct ARMSSEClass {
++struct ARMSSEClass {
+     SysBusDeviceClass parent_class;
+     const ARMSSEInfo *info;
+-} ARMSSEClass;
++};
+ 
+ #define ARM_SSE_CLASS(klass) \
+     OBJECT_CLASS_CHECK(ARMSSEClass, (klass), TYPE_ARM_SSE)
+diff --git a/include/hw/riscv/spike.h b/include/hw/riscv/spike.h
+index b0a18a9c94..121396d07a 100644
+--- a/include/hw/riscv/spike.h
++++ b/include/hw/riscv/spike.h
+@@ -21,15 +21,17 @@
+ 
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/sysbus.h"
++#include "qom/object.h"
+ 
+ #define SPIKE_CPUS_MAX 8
+ #define SPIKE_SOCKETS_MAX 8
+ 
+ #define TYPE_SPIKE_MACHINE MACHINE_TYPE_NAME("spike")
++typedef struct SpikeState SpikeState;
+ #define SPIKE_MACHINE(obj) \
+     OBJECT_CHECK(SpikeState, (obj), TYPE_SPIKE_MACHINE)
+ 
+-typedef struct {
++struct SpikeState {
+     /*< private >*/
+     MachineState parent;
+ 
+@@ -37,7 +39,7 @@ typedef struct {
+     RISCVHartArrayState soc[SPIKE_SOCKETS_MAX];
+     void *fdt;
+     int fdt_size;
+-} SpikeState;
++};
+ 
+ enum {
+     SPIKE_MROM,
+diff --git a/include/hw/virtio/vhost-user-blk.h b/include/hw/virtio/vhost-user-blk.h
+index 292d17147c..9d38877907 100644
+--- a/include/hw/virtio/vhost-user-blk.h
++++ b/include/hw/virtio/vhost-user-blk.h
+@@ -20,14 +20,16 @@
+ #include "chardev/char-fe.h"
+ #include "hw/virtio/vhost.h"
+ #include "hw/virtio/vhost-user.h"
++#include "qom/object.h"
+ 
+ #define TYPE_VHOST_USER_BLK "vhost-user-blk"
++typedef struct VHostUserBlk VHostUserBlk;
+ #define VHOST_USER_BLK(obj) \
+         OBJECT_CHECK(VHostUserBlk, (obj), TYPE_VHOST_USER_BLK)
+ 
+ #define VHOST_USER_BLK_AUTO_NUM_QUEUES UINT16_MAX
+ 
+-typedef struct VHostUserBlk {
++struct VHostUserBlk {
+     VirtIODevice parent_obj;
+     CharBackend chardev;
+     int32_t bootindex;
+@@ -41,6 +43,6 @@ typedef struct VHostUserBlk {
+     struct vhost_virtqueue *vhost_vqs;
+     VirtQueue **virtqs;
+     bool connected;
+-} VHostUserBlk;
++};
+ 
+ #endif
+diff --git a/hw/hppa/lasi.c b/hw/hppa/lasi.c
+index 194aa3e619..1acb9ce631 100644
+--- a/hw/hppa/lasi.c
++++ b/hw/hppa/lasi.c
+@@ -26,6 +26,7 @@
+ #include "hw/input/lasips2.h"
+ #include "exec/address-spaces.h"
+ #include "migration/vmstate.h"
++#include "qom/object.h"
+ 
+ #define TYPE_LASI_CHIP "lasi-chip"
+ 
+@@ -52,10 +53,11 @@
+ #define ICR_BUS_ERROR_BIT  LASI_BIT(8)  /* bit 8 in ICR */
+ #define ICR_TOC_BIT        LASI_BIT(1)  /* bit 1 in ICR */
+ 
++typedef struct LasiState LasiState;
+ #define LASI_CHIP(obj) \
+     OBJECT_CHECK(LasiState, (obj), TYPE_LASI_CHIP)
+ 
+-typedef struct LasiState {
++struct LasiState {
+     PCIHostState parent_obj;
+ 
+     uint32_t irr;
+@@ -70,7 +72,7 @@ typedef struct LasiState {
+     time_t rtc_ref;
+ 
+     MemoryRegion this_mem;
+-} LasiState;
++};
+ 
+ static bool lasi_chip_mem_valid(void *opaque, hwaddr addr,
+                                 unsigned size, bool is_write,
+-- 
+2.26.2
+
 
