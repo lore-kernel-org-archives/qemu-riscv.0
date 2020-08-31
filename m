@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kCrdW-0000DY-KZ
-	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 17:46:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53566)
+	id 1kCs1t-0007lI-Uk
+	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 18:11:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58308)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kCrdU-00008t-27
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 17:46:44 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:45234)
+ id 1kCs1s-0007kU-6e
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 18:11:56 -0400
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:52474)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kCrdR-0004uH-1R
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 17:46:43 -0400
-Received: by mail-pg1-x544.google.com with SMTP id 67so1452297pgd.12
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2020 14:46:40 -0700 (PDT)
+ id 1kCs1p-0007fa-Nv
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 18:11:55 -0400
+Received: by mail-pj1-x1042.google.com with SMTP id o16so656629pjr.2
+ for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2020 15:11:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=DAMvSkP3ycghdbPfao8tjevb03zNd12UoRVFNvmY36E=;
- b=iPsWc6iQv7QsltWoK3+ijsoP1moLRxpImZEue8X7GtJcystyO4zIlXWNfSM09ZyQ1W
- KObxSCIK7DAYzLxueNwh479O9PGvts2PRq+Med7mv8vZPKxH0ZomSiDXToUuH41rwCdy
- HSgc9DmDv4pc65o9X2pjCaVgXOuZ1KymoXli/ujb7Zs/2637Sms3Omh3BEv2CTFga1/S
- kV+TW/21x1hCGafCNv2ekSBaKal/Ov6PYK52e9NjGNPjv9OfKuMsh5smsTmethxyZf8f
- 5CkZicR9T2CRI2shE+gRFuf1OKVugZezEDrlXXddGN4iPXttG0yLvfBDbXWxZ4AGJejO
- DFww==
+ bh=PH2RCbNEIaLhQ86NxGfy7qBIeGRthZo3i/8Dmi3lax0=;
+ b=KvnRRUTnd/5QvDOn6OMc5rfq5gF7hJSDAC4DssiiKpDawFgv/IjxYfzaPuueMJK1dw
+ cRuaY+H1utJG+L/oyhWvZsyShv7WMEwK4lmKw8QJ9+W3hiMwbLyKYyDNNQr1yG1B5a3q
+ 7FNPxs88Eq0Glz9weNy0J+E5x+/YXFGQTPh8pNdqr3BIk+Ydtzvuv1+t1GDLpOVquovq
+ +bSwMx8jTqfXHDZzbG/E5FCqsweQrUSLyGoD+GDpCyzDB0kQVlsM82yJdOwOa8Zly+Uq
+ /TasIU9Q7OvkxqPUSW5e09fkeJOH/cysg9SH79ptf530yVeiuMnFRDfOztoGf5x9EVAj
+ 7fjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=DAMvSkP3ycghdbPfao8tjevb03zNd12UoRVFNvmY36E=;
- b=YK7bLHRakx0lxWE3UHvGWlXH1n0CfohnMqWA/Z+7ZMFsL97keB6otUkz2krCLrYiYq
- uS/qKiQ4MjCYjTTZB7CGNFKqZfiaeQ1RKKzptROhtsVx+NdjzBzpDV4fQqyCmz6Zzhth
- rW6Yptkqw4XpZ4RjgLkx9HBztyhA/Bbv797ukIBkxf3dchBN4RUcgZ7ismLTQ9AlPK8e
- VwyDK4rIrd07rZeDfzIsZHtYFZe5iWXQ/x0oVvlN0Rxq/F49WHeYoFpHN9HDwvT+xnOQ
- gWAGbvKzBhfzLZXZJ398MeD4/CB4XM6ybuotZQN50tWI3YrWfPdITgUiNP1KbF+AM48E
- jvOg==
-X-Gm-Message-State: AOAM533ZAbOuZdJcLkiY1gAWuSrOkrcqT4sdswz3r0X9JNCka9o/dxxI
- j/5myO0kyDkmS8TsrYvbbT8XsA==
-X-Google-Smtp-Source: ABdhPJwVMWj8oUCpSfve9TEoH3FHJ80jj1Hv+2mD0LUDgJqyvyFzzmUWM1IPifEPUU//Q9eLHkn1CA==
-X-Received: by 2002:a62:444:: with SMTP id 65mr2964961pfe.86.1598910399504;
- Mon, 31 Aug 2020 14:46:39 -0700 (PDT)
+ bh=PH2RCbNEIaLhQ86NxGfy7qBIeGRthZo3i/8Dmi3lax0=;
+ b=MG4SHVm1I13YiWasx9mzC+18dbB6/6qHeSxFVh8tm1Ur+SL91istCotBNGKZHqwTJh
+ JMogKSFZs7ld1p79E3dUHJ8XAwx9sVh1lJOnT+glW84msfB2Q4b0TxgN3GuQz30JItmN
+ 6ZiXTX0USlBpSgDNId4VCLvyi9Jt+W+4aJLeQOmJWp8rvqRQHXfxc3TNKlF+jlQedHNj
+ zvCOiMow1YvPQtIlHI9NfeU2YYUYpkUleeBArJA4vsG1dWiNTU/4HoHjSbWUlnUEjAsb
+ 3ZXQXZnaejloW5iGxvlON7lbEqLbxoXyzR4dnhp+/mTafsdV0PMYSmY14jspPoa4ZvPB
+ 9q1g==
+X-Gm-Message-State: AOAM532pdNiHhsXRf8Ay0yXPQdN/+Edo+38ePI6XmU/5Fyf3WYYPgvfP
+ MnF1ssrkVkWYWP9NRnWPXc0Cgg==
+X-Google-Smtp-Source: ABdhPJyHeAhyq90Hw33BP93AMzx+wEo1MdvVb9FmV0StgvoewtulFfAzNG2O4KMOTxThoXtAhLT44g==
+X-Received: by 2002:a17:902:6ac9:: with SMTP id
+ i9mr2726606plt.128.1598911912064; 
+ Mon, 31 Aug 2020 15:11:52 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id gm3sm535739pjb.31.2020.08.31.14.46.37
+ by smtp.gmail.com with ESMTPSA id 2sm590033pjg.32.2020.08.31.15.11.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Aug 2020 14:46:38 -0700 (PDT)
-Subject: Re: [PATCH v2 6/7] target: rename all *_cpu_exec_interrupt functions
- to *_cpu_exec_interrupt_locked
+ Mon, 31 Aug 2020 15:11:50 -0700 (PDT)
+Subject: Re: [PATCH v2 7/7] target: Push BQL on ->cpu_exec_interrupt down into
+ per-arch implementation
 To: Robert Foley <robert.foley@linaro.org>, qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Sarah Harris <S.E.Harris@kent.ac.uk>, Cornelia Huck <cohuck@redhat.com>,
@@ -62,7 +63,7 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
  Richard Henderson <rth@twiddle.net>, Artyom Tarasenko <atar4qemu@gmail.com>,
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- "open list:S390 general arch..." <qemu-s390x@nongnu.org>,
+ "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>,
  "open list:ARM TCG CPUs" <qemu-arm@nongnu.org>,
  Michael Rolnik <mrolnik@gmail.com>, pbonzini@redhat.com,
  Stafford Horne <shorne@gmail.com>, alex.bennee@linaro.org,
@@ -73,19 +74,19 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Michael Walle <michael@walle.cc>, Palmer Dabbelt <palmer@dabbelt.com>,
  peter.puhov@linaro.org, Aurelien Jarno <aurelien@aurel32.net>
 References: <20200819182856.4893-1-robert.foley@linaro.org>
- <20200819182856.4893-7-robert.foley@linaro.org>
+ <20200819182856.4893-8-robert.foley@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <0ef04de1-4dd0-e432-d1c1-b5672d276e1b@linaro.org>
-Date: Mon, 31 Aug 2020 14:46:36 -0700
+Message-ID: <42dc8454-9835-fc52-a7e2-73835672f3f9@linaro.org>
+Date: Mon, 31 Aug 2020 15:11:48 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200819182856.4893-7-robert.foley@linaro.org>
+In-Reply-To: <20200819182856.4893-8-robert.foley@linaro.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x544.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1042;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1042.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -41
@@ -107,38 +108,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2020 21:46:44 -0000
+X-List-Received-Date: Mon, 31 Aug 2020 22:11:56 -0000
 
 On 8/19/20 11:28 AM, Robert Foley wrote:
-> The rename of all *_cpu_exec_interrupt functions to
-> *_cpu_exec_interrupt_locked is preparation for pushing the BQL lock
-> around these functions down into the per-arch implementation of
-> *_cpu_exec_interrupt.  In a later patch, which pushes down the lock,
-> we will add a new *_cpu_exec_interrupt function, which grabs the BQL
-> and calls to *_cpu_exec_interrupt_locked.
-> 
-> This patch is part of a series of transitions to move the
-> BQL down into the cpu_exec_interrupt per arch functions.  This set of
-> transitions is needed to maintain bisectability.
-> 
-> The purpose of this set of changes is to set the groundwork
-> so that an arch could move towards removing
-> the BQL from the cpu_handle_interrupt/exception paths.
-> 
-> This approach was suggested by Paolo Bonzini.
-> For reference, here are key posts in the discussion, explaining
-> the reasoning/benefits of this approach.
-> https://lists.gnu.org/archive/html/qemu-devel/2020-08/msg00784.html
-> https://lists.gnu.org/archive/html/qemu-devel/2020-08/msg01517.html
-> https://lists.gnu.org/archive/html/qemu-devel/2020-07/msg08731.html
-> https://lists.gnu.org/archive/html/qemu-devel/2020-08/msg00044.html
-> 
-> Signed-off-by: Robert Foley <robert.foley@linaro.org>
-> ---
+> diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+> index 499a8bdc5e..c4e54baa6f 100644
+> --- a/accel/tcg/cpu-exec.c
+> +++ b/accel/tcg/cpu-exec.c
+> @@ -599,7 +599,6 @@ static inline bool cpu_handle_interrupt(CPUState *cpu,
+>             True when it is, and we should restart on a new TB,
+>             and via longjmp via cpu_loop_exit.  */
+>          else {
+> -            qemu_mutex_lock_iothread();
+>              if (cc->cpu_exec_interrupt(cpu, interrupt_request)) {
+>                  replay_interrupt();
+>                  /*
+> @@ -614,7 +613,6 @@ static inline bool cpu_handle_interrupt(CPUState *cpu,
+>              /* The target hook may have updated the 'cpu->interrupt_request';
+>               * reload the 'interrupt_request' value */
+>              interrupt_request = cpu_interrupt_request(cpu);
+> -            qemu_mutex_unlock_iothread();
+>          }
+>          if (interrupt_request & CPU_INTERRUPT_EXITTB) {
+>              cpu_reset_interrupt(cpu, CPU_INTERRUPT_EXITTB);
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+I think you need a change to patch 5, because this patch reduces the scope
+further, around cpu_interrupt_request, etc.
+
+I think patch 5 should have
+
++    bool success;
++    qemu_mutex_lock_iothread();
++    success = cc->cpu_exec_interrupt(cpu, interrupt_request);
++    qemu_mutex_unlok_iothread();
++    if (success) {
+-    if (cc->cpu_exec_interrupt(cpu, interrupt_request)) {
+
+That way this patch maintains the scope of the lock.
 
 
 r~
-
 
