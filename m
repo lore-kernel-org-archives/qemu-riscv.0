@@ -1,66 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kCmWR-0004iK-FF
-	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 12:19:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37370)
+	id 1kCmfO-0000CS-0Q
+	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 12:28:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39306)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kCmWP-0004dj-PI; Mon, 31 Aug 2020 12:19:05 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:39475)
+ id 1kCmfM-00008d-L3; Mon, 31 Aug 2020 12:28:20 -0400
+Received: from mail-qk1-x742.google.com ([2607:f8b0:4864:20::742]:38325)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kCmWO-0007VX-3E; Mon, 31 Aug 2020 12:19:05 -0400
-Received: by mail-il1-x144.google.com with SMTP id e14so238642ile.6;
- Mon, 31 Aug 2020 09:19:02 -0700 (PDT)
+ id 1kCmfK-0000FY-L8; Mon, 31 Aug 2020 12:28:20 -0400
+Received: by mail-qk1-x742.google.com with SMTP id d20so3879744qka.5;
+ Mon, 31 Aug 2020 09:28:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=qLWwmNK/+rVx/1LFPymqX5sgTpx4sJfNRhvArNptifI=;
- b=kKZDteuV6eflCOtcsdtjYVB3uZ64Ku/zMJHuDVdIHZWSd3HY6K8kjRn3UYq2bqcsIR
- q3/PSzSB1RbhUsO+YePK3AwXEjtLOoOPo6/S+k5LAPcCpkmgJvjTQm/9h5mJSWmBN4JL
- b/ljgggouYcu5HGJpC3ej8zsD0hOK77YN9gZE18DWAb92BVk1ekosg7+XUMUCmCajsRU
- xBos2UL/IGGxs6lDna7OZH1L3XTKjGmLL3nFb+v758J4ADyzT6o/O/meqfTE2ps9jewJ
- EV69Ey8+/oKqXqUI1Y9sWCgV1L2jq268/+iGImuj4LQ+5v577MKJDoPeOT2rXI7HPVT+
- br9w==
+ :cc; bh=cayOxeiuwE5lJ1Ui4eIej3QnVuzqOYfwH+FP/dKeq0A=;
+ b=Hxc4LY7aitHw9myf2hptFhZNCSIgtONkdM47ansKbOUXLlUGTuA8yxcs0U1N7tDpfP
+ QA9Fp4Qs+6R/xJS9Ibn+X+9qTd95vH3qr5tIPG+RQkFAH0G2aXMkJ+xqeKVtPHyt7Qbs
+ P6/yfh2vUyBMqHZQOLw8CAH+yPHIZ0jH7Q6rVJBjl17rqD91ouiBjMs73yvnZZ7F4k43
+ U4oBEEsDcTMPj2BzPbQcVs8CtA60+l+6Q6I6ELFxZ5BSPYbAylNWqrXgfvz6xC5sHCmo
+ JG97RyhagoAFL+u39dfs+k0wPpq3AXWs/TdWBrPmh0a921E1cbNvtRP2h8nbnGE7AB6G
+ FScA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=qLWwmNK/+rVx/1LFPymqX5sgTpx4sJfNRhvArNptifI=;
- b=UZovwVKu9xbHAgg13REJ3WzRRIOAnxOi23vANBGi+c2A2JaC3MnoutEacc1h7YmbXq
- bHwgHDMsRNf6x5yriCZcRAV26j8nrfMPc4kYHbnx2W3EUt6t5wdkAx3X8WW+sXaxuf1t
- kGRZhmDRycyBTSLE3OJZNPiMOq44oblCBl4yCp6csmBlH81iEjeFbaYqVfyCq9bUomj1
- Z0AxcukXVA6iP1tO8lclNimidvrpdDVHWqtlzk6VSf4shCk5rQrN3KPU8aBFYnbKG8S6
- oTgZNOa8GWKGRSGO0KhEzNWDHIEcZTsmItAX0zZYTQk/lEdE3wSlVjGBHnCbC8ib6obz
- k+jw==
-X-Gm-Message-State: AOAM533qRMSoNNVW2uElxc3XZWZBJSVRwpAZhVyZ/G17xyBchKpyh8H/
- sDV261QuZ2rTDR9eeZWLbOo0T5wv77OctFWDL58=
-X-Google-Smtp-Source: ABdhPJwx6IxZGPa0Pl/WgRLrnBrjrror/rWorXUNouMAc5gn/GIoA9J4qME9uHmboWoyVm4UMieKSF1ch52LwA1DB/Q=
-X-Received: by 2002:a92:189:: with SMTP id 131mr2059884ilb.40.1598890741969;
- Mon, 31 Aug 2020 09:19:01 -0700 (PDT)
+ bh=cayOxeiuwE5lJ1Ui4eIej3QnVuzqOYfwH+FP/dKeq0A=;
+ b=q0NclDoK9HN4eayNDgbgK9XHvLQyFavxjTRJFKghcm6BQrd5lm22ZfDKr9vVy58xni
+ Jul6YwYOwUomNSSI+YpXFpPtANRzSwZXXwZdHY4Z064Vvutl4R3tW6mMnRYTKcXZEhQX
+ RujHl/AMlYetTf/PfYeE0hHYzYL7PHcVFpNpehd3AmukOUVZIsC5yrsjhlFVb97uRESF
+ 4csOpQxD+Je+mGyzE1igv4HhGU+0YgXCe00/FXfnYTevb46Tz6PKV/bei6od4P1FM61l
+ GgWVEVv8dwEAjnbxbgeCnSDbiCjegoO+CgF3GXuJHeFaRdrTgyILEEtOBjpsBFoPG7M1
+ Duqw==
+X-Gm-Message-State: AOAM5316g5LSiOtf4t0l5TtodBmtW/aKObnlLGoSSSp8KD1P9wTsSncV
+ 8Y51w0p0vl307r3wXfpKG3kjHtQj2rDKKP9CXfo=
+X-Google-Smtp-Source: ABdhPJyqb+3s+FzbNm70ffyv/q1yKGz65njLm1o8zP8JCaqfs9gSjkk7KPGjoON65TrAxn+4oLSybW26bu1lo95xtNU=
+X-Received: by 2002:a05:620a:567:: with SMTP id
+ p7mr2261056qkp.164.1598891297059; 
+ Mon, 31 Aug 2020 09:28:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200610134731.1514409-1-mst@redhat.com>
  <20200827053216.GA1515751@ubuntu-n2-xlarge-x86>
  <20200830021939-mutt-send-email-mst@kernel.org>
  <20200830064944.GA1073664@ubuntu-n2-xlarge-x86>
  <2fd7a1df-db2b-9edd-1d73-7efa18312ace@ilande.co.uk>
-In-Reply-To: <2fd7a1df-db2b-9edd-1d73-7efa18312ace@ilande.co.uk>
+ <20200830074304.GA2406902@ubuntu-n2-xlarge-x86>
+In-Reply-To: <20200830074304.GA2406902@ubuntu-n2-xlarge-x86>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 31 Aug 2020 09:08:10 -0700
-Message-ID: <CAKmqyKPguBdfRr7hi3+HWYy9Xdyq44juEjEiBzx32hVDtTPRTQ@mail.gmail.com>
+Date: Mon, 31 Aug 2020 09:17:24 -0700
+Message-ID: <CAKmqyKNHMtjyYYWU5R_m5xFQ8tdbjFyQyfjbpUbpPpKtHsvOkw@mail.gmail.com>
 Subject: Re: [PATCH] memory: Revert "memory: accept mismatching sizes in
  memory_region_access_valid"
-To: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Cc: Nathan Chancellor <natechancellor@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, 
+To: Nathan Chancellor <natechancellor@gmail.com>
+Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
  "open list:RISC-V" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-stable@nongnu.org, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- qemu-stable@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Richard Henderson <rth@twiddle.net>
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Richard Henderson <rth@twiddle.net>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::742;
+ envelope-from=alistair23@gmail.com; helo=mail-qk1-x742.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -83,39 +85,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2020 16:19:06 -0000
+X-List-Received-Date: Mon, 31 Aug 2020 16:28:21 -0000
 
-On Sun, Aug 30, 2020 at 12:24 AM Mark Cave-Ayland
-<mark.cave-ayland@ilande.co.uk> wrote:
+On Sun, Aug 30, 2020 at 12:43 AM Nathan Chancellor
+<natechancellor@gmail.com> wrote:
 >
-> On 30/08/2020 07:49, Nathan Chancellor wrote:
->
-> > Unfortunately, it does not. I applied it on top of latest
-> > git (ac8b279f13865d1a4f1958d3bf34240c1c3af90d) and I can still
-> > reproduce my failure. Is it possible that type of fix is needed
-> > in a RISC-V specific driver?
+> On Sun, Aug 30, 2020 at 08:24:15AM +0100, Mark Cave-Ayland wrote:
+> > On 30/08/2020 07:49, Nathan Chancellor wrote:
 > >
-> > Would you like me to comment on the Launchpad bug as well?
+> > > Unfortunately, it does not. I applied it on top of latest
+> > > git (ac8b279f13865d1a4f1958d3bf34240c1c3af90d) and I can still
+> > > reproduce my failure. Is it possible that type of fix is needed
+> > > in a RISC-V specific driver?
+> > >
+> > > Would you like me to comment on the Launchpad bug as well?
+> >
+> > Hi Nathan,
+> >
+> > I came up with a quick patch to enable some logging to catch memory accesses being
+> > refused for a similar bug report at
+> > https://bugs.launchpad.net/qemu/+bug/1886318/comments/13.
+> >
+> > Can you apply the same change to your tree and report any messages on stderr as you
+> > do your board reboot test?
+> >
+> >
+> > ATB,
+> >
+> > Mark.
 >
-> Hi Nathan,
+> Thanks Mark, that helped.
 >
-> I came up with a quick patch to enable some logging to catch memory accesses being
-> refused for a similar bug report at
-> https://bugs.launchpad.net/qemu/+bug/1886318/comments/13.
+> ...
+> [    3.807738] reboot: Power down
+> invalid size: riscv.sifive.test addr 0 size: 2
+> sbi_trap_error: hart0: trap handler failed (error -2)
+> sbi_trap_error: hart0: mcause=0x0000000000000007 mtval=0x0000000000100000
+> sbi_trap_error: hart0: mepc=0x000000008000d4cc mstatus=0x0000000000001822
+> sbi_trap_error: hart0: ra=0x000000008000999e sp=0x0000000080015c78
+> sbi_trap_error: hart0: gp=0xffffffe000e765d0 tp=0xffffffe0081c0000
+> sbi_trap_error: hart0: s0=0x0000000080015c88 s1=0x0000000000000040
+> sbi_trap_error: hart0: a0=0x0000000000000000 a1=0x0000000080004024
+> sbi_trap_error: hart0: a2=0x0000000080004024 a3=0x0000000080004024
+> sbi_trap_error: hart0: a4=0x0000000000100000 a5=0x0000000000005555
+> sbi_trap_error: hart0: a6=0x0000000000004024 a7=0x0000000080011158
+> sbi_trap_error: hart0: s2=0x0000000000000000 s3=0x0000000080016000
+> sbi_trap_error: hart0: s4=0x0000000000000000 s5=0x0000000000000000
+> sbi_trap_error: hart0: s6=0x0000000000000001 s7=0x0000000000000000
+> sbi_trap_error: hart0: s8=0x0000000000000000 s9=0x0000000000000000
+> sbi_trap_error: hart0: s10=0x0000000000000000 s11=0x0000000000000008
+> sbi_trap_error: hart0: t0=0x0000000000000000 t1=0x0000000000000000
+> sbi_trap_error: hart0: t2=0x0000000000000000 t3=0x0000000000000000
+> sbi_trap_error: hart0: t4=0x0000000000000000 t5=0x0000000000000000
+> sbi_trap_error: hart0: t6=0x0000000000000000
+>
+> With this diff, I can successfully shut down the board. No idea if that
+> is valid or not though.
 
-Can we apply this to QEMU master to print this is guest error logging
-is on? This seems like a common-ish problem and it would be nice to
-allow users to debug it themselves.
+The SiFive test is not a real device, so there is no documentation to
+check against, at least none that I can find.
+
+If the mainline Linux kernel does a 16-bit write then that should be
+correct as it does the same thing on hardware and SiFive's
+simulations.
+
+Do you mind sending a patch?
 
 Alistair
 
 >
-> Can you apply the same change to your tree and report any messages on stderr as you
-> do your board reboot test?
+> Cheers,
+> Nathan
 >
+> ============================================================
 >
-> ATB,
+> diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
+> index 0c78fb2c93..8c70dd69df 100644
+> --- a/hw/riscv/sifive_test.c
+> +++ b/hw/riscv/sifive_test.c
+> @@ -59,7 +59,7 @@ static const MemoryRegionOps sifive_test_ops = {
+>      .write = sifive_test_write,
+>      .endianness = DEVICE_NATIVE_ENDIAN,
+>      .valid = {
+> -        .min_access_size = 4,
+> +        .min_access_size = 2,
+>          .max_access_size = 4
+>      }
+>  };
 >
-> Mark.
 >
 
