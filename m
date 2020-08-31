@@ -1,78 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kCmfO-0000CS-0Q
-	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 12:28:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39306)
+	id 1kCot5-0002U2-En
+	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 14:50:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42686)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kCmfM-00008d-L3; Mon, 31 Aug 2020 12:28:20 -0400
-Received: from mail-qk1-x742.google.com ([2607:f8b0:4864:20::742]:38325)
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1kCot3-0002PS-Cm
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 14:50:37 -0400
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:38294)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kCmfK-0000FY-L8; Mon, 31 Aug 2020 12:28:20 -0400
-Received: by mail-qk1-x742.google.com with SMTP id d20so3879744qka.5;
- Mon, 31 Aug 2020 09:28:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.90_1) (envelope-from <chihmin.chao@sifive.com>)
+ id 1kCosy-0008W5-0U
+ for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 14:50:37 -0400
+Received: by mail-il1-x12a.google.com with SMTP id w3so2087211ilh.5
+ for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2020 11:50:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=cayOxeiuwE5lJ1Ui4eIej3QnVuzqOYfwH+FP/dKeq0A=;
- b=Hxc4LY7aitHw9myf2hptFhZNCSIgtONkdM47ansKbOUXLlUGTuA8yxcs0U1N7tDpfP
- QA9Fp4Qs+6R/xJS9Ibn+X+9qTd95vH3qr5tIPG+RQkFAH0G2aXMkJ+xqeKVtPHyt7Qbs
- P6/yfh2vUyBMqHZQOLw8CAH+yPHIZ0jH7Q6rVJBjl17rqD91ouiBjMs73yvnZZ7F4k43
- U4oBEEsDcTMPj2BzPbQcVs8CtA60+l+6Q6I6ELFxZ5BSPYbAylNWqrXgfvz6xC5sHCmo
- JG97RyhagoAFL+u39dfs+k0wPpq3AXWs/TdWBrPmh0a921E1cbNvtRP2h8nbnGE7AB6G
- FScA==
+ :cc; bh=7MUXZC+mXIJp+jIPw0KzkHr23yG7+1R5ua9TjhMwqb0=;
+ b=Ef6TE1MJVsCbjcmxnR2UgtfbYZw8ib6XFNlplAuJ/iioz+KJrV3p9C610fgRN0ijvz
+ 0eY/DfkKFYbNiww0yglQ32uyyb2iXQJp/xpvFd6wAhnYP42o10MtUXMyF/kmTr3rW6Wj
+ CrvzJe3w3Gg2Gj/at9AA5m71BPaUnEvqeqFWZeMohsXtH8xyaZxxa517Paq2EQOWTjst
+ CjmzxmjTD9t2NUD4hCLA9CWDf8JjUuHHrCwiDTHBdPgW/B/3CpvzIdToCMIZUB0BbyHd
+ LtlEBKgTbf9t0S+JSwxQjhJtWBjUe9KxSYibzw38pFj55NPxbomlIVX85hyUbcBXffp1
+ nndA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=cayOxeiuwE5lJ1Ui4eIej3QnVuzqOYfwH+FP/dKeq0A=;
- b=q0NclDoK9HN4eayNDgbgK9XHvLQyFavxjTRJFKghcm6BQrd5lm22ZfDKr9vVy58xni
- Jul6YwYOwUomNSSI+YpXFpPtANRzSwZXXwZdHY4Z064Vvutl4R3tW6mMnRYTKcXZEhQX
- RujHl/AMlYetTf/PfYeE0hHYzYL7PHcVFpNpehd3AmukOUVZIsC5yrsjhlFVb97uRESF
- 4csOpQxD+Je+mGyzE1igv4HhGU+0YgXCe00/FXfnYTevb46Tz6PKV/bei6od4P1FM61l
- GgWVEVv8dwEAjnbxbgeCnSDbiCjegoO+CgF3GXuJHeFaRdrTgyILEEtOBjpsBFoPG7M1
- Duqw==
-X-Gm-Message-State: AOAM5316g5LSiOtf4t0l5TtodBmtW/aKObnlLGoSSSp8KD1P9wTsSncV
- 8Y51w0p0vl307r3wXfpKG3kjHtQj2rDKKP9CXfo=
-X-Google-Smtp-Source: ABdhPJyqb+3s+FzbNm70ffyv/q1yKGz65njLm1o8zP8JCaqfs9gSjkk7KPGjoON65TrAxn+4oLSybW26bu1lo95xtNU=
-X-Received: by 2002:a05:620a:567:: with SMTP id
- p7mr2261056qkp.164.1598891297059; 
- Mon, 31 Aug 2020 09:28:17 -0700 (PDT)
+ bh=7MUXZC+mXIJp+jIPw0KzkHr23yG7+1R5ua9TjhMwqb0=;
+ b=cmbajqTpe4oI36KJ0ybfuyBx7hSiBFshvxX+wrJNnMXjGdDiJwUY68wVW4jkhe4l01
+ do53zkQWxEnablokNUxE+E329s5rdSg7Bc9CeqB8bYT/8vwdJCAkl5W1+bLizimvICf8
+ iLANNkEmCNyLZBtm6yZqgIweHMQY866vT84HblZUnSKXVihvbTNi4tqwcfas8xI3hUM5
+ W+6BY5qVc3SWkyTesfrbFB8xlKD6mWjEE1PdUdKhG7X0XMWGSWFUjn593ZT9HJTYC0LC
+ Luv7GKry2TLn4RdaoXIBVk9aXNXtzcd6miDpp+gsZtBP58KwMFCo1xp0egFSbJDtjeO2
+ +Wrg==
+X-Gm-Message-State: AOAM533xF7lqPRVwbJ5ogOwIWZLv9jRhfNHD5lscV8ORDQy82ILZIPPh
+ Hm0uivu3C8mi307lziOHXFn0snoOedZO4WsE8act/Q==
+X-Google-Smtp-Source: ABdhPJz3H82KNXgLh681T0VBPAE8qqEQ4LwDqsWUskZMFwv8IXi2uNwToRE8itt1ATIgdN79Pbb2ilqjKoUg/tHqD6I=
+X-Received: by 2002:a05:6e02:c2e:: with SMTP id
+ q14mr2654604ilg.286.1598899830406; 
+ Mon, 31 Aug 2020 11:50:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200610134731.1514409-1-mst@redhat.com>
- <20200827053216.GA1515751@ubuntu-n2-xlarge-x86>
- <20200830021939-mutt-send-email-mst@kernel.org>
- <20200830064944.GA1073664@ubuntu-n2-xlarge-x86>
- <2fd7a1df-db2b-9edd-1d73-7efa18312ace@ilande.co.uk>
- <20200830074304.GA2406902@ubuntu-n2-xlarge-x86>
-In-Reply-To: <20200830074304.GA2406902@ubuntu-n2-xlarge-x86>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 31 Aug 2020 09:17:24 -0700
-Message-ID: <CAKmqyKNHMtjyYYWU5R_m5xFQ8tdbjFyQyfjbpUbpPpKtHsvOkw@mail.gmail.com>
-Subject: Re: [PATCH] memory: Revert "memory: accept mismatching sizes in
- memory_region_access_valid"
-To: Nathan Chancellor <natechancellor@gmail.com>
-Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "Michael S. Tsirkin" <mst@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-stable@nongnu.org, 
+References: <20200817084955.28793-1-frank.chang@sifive.com>
+ <20200817084955.28793-56-frank.chang@sifive.com>
+ <d94182cc-8846-9eb6-6a93-87968d0d32c1@linaro.org>
+ <2cbf253f-8fe1-d840-50f1-582767bf600c@linaro.org>
+In-Reply-To: <2cbf253f-8fe1-d840-50f1-582767bf600c@linaro.org>
+From: Chih-Min Chao <chihmin.chao@sifive.com>
+Date: Tue, 1 Sep 2020 02:50:19 +0800
+Message-ID: <CAEiOBXXY4ZMoCfo2tmLw3g6hmj6EjDXMzm_ybHd-ENC3=zTwAg@mail.gmail.com>
+Subject: Re: [RFC v4 55/70] target/riscv: rvv-1.0: single-width floating-point
+ reduction
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Frank Chang <frank.chang@sifive.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Richard Henderson <rth@twiddle.net>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::742;
- envelope-from=alistair23@gmail.com; helo=mail-qk1-x742.google.com
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Content-Type: multipart/alternative; boundary="0000000000006c7ec905ae30e07a"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
+ envelope-from=chihmin.chao@sifive.com; helo=mail-il1-x12a.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -85,93 +82,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2020 16:28:21 -0000
+X-List-Received-Date: Mon, 31 Aug 2020 18:50:37 -0000
 
-On Sun, Aug 30, 2020 at 12:43 AM Nathan Chancellor
-<natechancellor@gmail.com> wrote:
->
-> On Sun, Aug 30, 2020 at 08:24:15AM +0100, Mark Cave-Ayland wrote:
-> > On 30/08/2020 07:49, Nathan Chancellor wrote:
-> >
-> > > Unfortunately, it does not. I applied it on top of latest
-> > > git (ac8b279f13865d1a4f1958d3bf34240c1c3af90d) and I can still
-> > > reproduce my failure. Is it possible that type of fix is needed
-> > > in a RISC-V specific driver?
-> > >
-> > > Would you like me to comment on the Launchpad bug as well?
-> >
-> > Hi Nathan,
-> >
-> > I came up with a quick patch to enable some logging to catch memory accesses being
-> > refused for a similar bug report at
-> > https://bugs.launchpad.net/qemu/+bug/1886318/comments/13.
-> >
-> > Can you apply the same change to your tree and report any messages on stderr as you
-> > do your board reboot test?
-> >
-> >
-> > ATB,
-> >
-> > Mark.
->
-> Thanks Mark, that helped.
->
-> ...
-> [    3.807738] reboot: Power down
-> invalid size: riscv.sifive.test addr 0 size: 2
-> sbi_trap_error: hart0: trap handler failed (error -2)
-> sbi_trap_error: hart0: mcause=0x0000000000000007 mtval=0x0000000000100000
-> sbi_trap_error: hart0: mepc=0x000000008000d4cc mstatus=0x0000000000001822
-> sbi_trap_error: hart0: ra=0x000000008000999e sp=0x0000000080015c78
-> sbi_trap_error: hart0: gp=0xffffffe000e765d0 tp=0xffffffe0081c0000
-> sbi_trap_error: hart0: s0=0x0000000080015c88 s1=0x0000000000000040
-> sbi_trap_error: hart0: a0=0x0000000000000000 a1=0x0000000080004024
-> sbi_trap_error: hart0: a2=0x0000000080004024 a3=0x0000000080004024
-> sbi_trap_error: hart0: a4=0x0000000000100000 a5=0x0000000000005555
-> sbi_trap_error: hart0: a6=0x0000000000004024 a7=0x0000000080011158
-> sbi_trap_error: hart0: s2=0x0000000000000000 s3=0x0000000080016000
-> sbi_trap_error: hart0: s4=0x0000000000000000 s5=0x0000000000000000
-> sbi_trap_error: hart0: s6=0x0000000000000001 s7=0x0000000000000000
-> sbi_trap_error: hart0: s8=0x0000000000000000 s9=0x0000000000000000
-> sbi_trap_error: hart0: s10=0x0000000000000000 s11=0x0000000000000008
-> sbi_trap_error: hart0: t0=0x0000000000000000 t1=0x0000000000000000
-> sbi_trap_error: hart0: t2=0x0000000000000000 t3=0x0000000000000000
-> sbi_trap_error: hart0: t4=0x0000000000000000 t5=0x0000000000000000
-> sbi_trap_error: hart0: t6=0x0000000000000000
->
-> With this diff, I can successfully shut down the board. No idea if that
-> is valid or not though.
+--0000000000006c7ec905ae30e07a
+Content-Type: text/plain; charset="UTF-8"
 
-The SiFive test is not a real device, so there is no documentation to
-check against, at least none that I can find.
+On Sun, Aug 30, 2020 at 7:58 AM Richard Henderson <
+richard.henderson@linaro.org> wrote:
 
-If the mainline Linux kernel does a 16-bit write then that should be
-correct as it does the same thing on hardware and SiFive's
-simulations.
+> On 8/29/20 4:50 PM, Richard Henderson wrote:
+> > It doesn't actually say anything about the way in which we've
+> implemented the
+> > *_noprop functions.
+>
+> Ho hum.  It seems v2.2 has changed fmin/fmax for the fpu as well.
+>
+> We really should fix that too...
+>
+>
+> r~
+>
+>
+The noprop is implemented in below patch and could  be applied to scalar
+part
+https://patchew.org/QEMU/1597908641-6293-1-git-send-email-chihmin.chao@sifive.com/
 
-Do you mind sending a patch?
+Chih-Min Chao
 
-Alistair
+--0000000000006c7ec905ae30e07a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
->
-> Cheers,
-> Nathan
->
-> ============================================================
->
-> diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
-> index 0c78fb2c93..8c70dd69df 100644
-> --- a/hw/riscv/sifive_test.c
-> +++ b/hw/riscv/sifive_test.c
-> @@ -59,7 +59,7 @@ static const MemoryRegionOps sifive_test_ops = {
->      .write = sifive_test_write,
->      .endianness = DEVICE_NATIVE_ENDIAN,
->      .valid = {
-> -        .min_access_size = 4,
-> +        .min_access_size = 2,
->          .max_access_size = 4
->      }
->  };
->
->
+<div dir=3D"ltr"><div dir=3D"ltr"><br clear=3D"all"><div><div dir=3D"ltr" c=
+lass=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr=
+"><br></div></div></div></div><br><div class=3D"gmail_quote"><div dir=3D"lt=
+r" class=3D"gmail_attr">On Sun, Aug 30, 2020 at 7:58 AM Richard Henderson &=
+lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.henderson@linaro=
+.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
+gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
+ex">On 8/29/20 4:50 PM, Richard Henderson wrote:<br>
+&gt; It doesn&#39;t actually say anything about the way in which we&#39;ve =
+implemented the<br>
+&gt; *_noprop functions.<br>
+<br>
+Ho hum.=C2=A0 It seems v2.2 has changed fmin/fmax for the fpu as well.<br>
+<br>
+We really should fix that too...<br>
+<br>
+<br>
+r~<br>
+<br></blockquote><div><br></div><div>The noprop is implemented in below pat=
+ch and could=C2=A0 be applied to scalar part<br><a href=3D"https://patchew.=
+org/QEMU/1597908641-6293-1-git-send-email-chihmin.chao@sifive.com/">https:/=
+/patchew.org/QEMU/1597908641-6293-1-git-send-email-chihmin.chao@sifive.com/=
+</a><br></div><div><br></div><div><span style=3D"color:rgb(136,136,136)">Ch=
+ih-Min Chao</span><div style=3D"color:rgb(136,136,136)"><br></div></div></d=
+iv></div>
+
+--0000000000006c7ec905ae30e07a--
 
