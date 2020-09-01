@@ -1,72 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kD2uu-0002VH-2L
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 05:49:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42578)
+	id 1kD39C-0005eq-VV
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 06:04:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46838)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kD2us-0002Tl-QB; Tue, 01 Sep 2020 05:49:26 -0400
-Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:38400)
+ id 1kD39A-0005ZW-NK; Tue, 01 Sep 2020 06:04:12 -0400
+Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:42523)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kD2ur-0002tv-0L; Tue, 01 Sep 2020 05:49:26 -0400
-Received: by mail-wm1-x342.google.com with SMTP id l9so516784wme.3;
- Tue, 01 Sep 2020 02:49:23 -0700 (PDT)
+ id 1kD397-000542-CA; Tue, 01 Sep 2020 06:04:12 -0400
+Received: by mail-wr1-x441.google.com with SMTP id c18so811364wrm.9;
+ Tue, 01 Sep 2020 03:04:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=CyyMESLdqm+L4Z3bYhzecc7rV/eRyNkyF63EHZKY3dU=;
- b=Ep7ZXTe/UJoXUGAx2uGUKhDJrA5vbrxPDNJWrDGU+OlgULA4suSb7gIpRMKbY9N+Bc
- jbGwdWIx/9hiYtCC44BlBaJ5ykobDlk/es+Y/CU42Tfek+dzDdNBu+MWb0JZuYOUdKLV
- X6MAEecBt14rrUTzuhzv3o9RCxqT9RnOTHH33PmFOnt7kjYB/w8HGJFc39X+6G0vx9j/
- +WV7cGmHXzd8Ohwgj8Sf22AQe7mNUTNGpzdMRDgvqZtG/dcgbhYNJhErQPui+ZyAl6oc
- 1MpiM1Oqg4kx/LwawMKl5C1YeqVA5/FWjq8mYTpWWNVQRbsK5R9nMOCMbGJ7aOSHcymv
- DHRA==
+ bh=1M9Jaqvo6r7BX6FEljqlQp1pDlkpsFMcYy47H0RrXEM=;
+ b=Vl+F7pjrsg3TaRXO5j3nx5Y5+/CoZomCkr7K6bzmphswSnGd5W6xIXpyYbHuY+4T1O
+ YLrx9WRUs/a0QGuK2svjaRjtw2kcvGNL0/X44ewzeI5y1cC4hUmCCpCztjMq4e6uWFd2
+ hCZded5izm/NNVxMqEuf3i1xTnKNhmUdR8Q6cxyVV10sKtKdvLhWcpCDW+q8u8WW4LBX
+ AIkGQlzXni5fGfiPibGtDLxhs7t/yPbGYbZAQlWg+K8YZZWmxkLZNiGXc/l8v3QI5z81
+ goOc1DXzBKBAJPl/Uk1JMxMtAYkSx4OKs+t8VTteQwB/TQZGGUN2EnSezsu0tuSxAgTp
+ wgvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=CyyMESLdqm+L4Z3bYhzecc7rV/eRyNkyF63EHZKY3dU=;
- b=G9et1dpqTbX2nAwgBdv/TFmdkXqc9+JbAMyXs1kLJbwBuztflF6APx/oD4ZA32Avof
- I4DYCNmMYwrYEUtNgA2MO6a7Hp9lYoAUUxoG5U3tjcrgRxEgUhHuWWqaSwugHhRx+6gn
- i+gCakJ5pJRBUQjCME6YSFziwjgumSHs71DOZdfsN/qFx+TD8gw5pk8AAMrdM22EqmTh
- ZO73qMP9SnfHxbm2ihOdTa3OOGsU9nafDtT6DQeJ0dnpgX7t8kma6ZmKe7pmYv2p8TGf
- UGK7QnkZ7Cfq5/YEWEX9mnz/ffcDEIK8xMqWvwwVxYlafU1ReDls6a4GpOYD6SkbbNV7
- 0HYA==
-X-Gm-Message-State: AOAM530fmOvJgcPINymO23HBqDyvXUMtQ0WF85iN1Yyi8PZ1qSifDUyo
- oNPp96oDttII9CW+bwif4Ao=
-X-Google-Smtp-Source: ABdhPJzmAbh/tHRCwU8ETW+3K5asY7pzdnvy/ZF4Y91Tszyn5f0sykDiTq+QC2TLXdHGhCtJPXeraA==
-X-Received: by 2002:a1c:541b:: with SMTP id i27mr921321wmb.179.1598953762373; 
- Tue, 01 Sep 2020 02:49:22 -0700 (PDT)
+ bh=1M9Jaqvo6r7BX6FEljqlQp1pDlkpsFMcYy47H0RrXEM=;
+ b=JdZl8ZpZ0sH1FYHUupmroDQSVX1NtF3xhTDPtIal9l1YUKZdfKgEAEcSep59zF8qWv
+ XKsu7peFzcLiAFWtHi0qEQRPoYZSQTlUukiW/aZ09V2wA4n2ZeaxWWOq5RL11FHrUKJX
+ eYIcUiWPCLUtjXkJL47Kofp3PaVISLLC656mewPMeph1KrWeZjWGro+5LT047k48H+3C
+ 2rvARnTH9FKQQYUQUidpIsTAh6SNrjhcAwfw/hicOjgX4b/0EePNq7KQ0k3KZrqqi1F7
+ G4RG+8Mjqzo9NtvkFA8YK04YNryXJJsyOxrCJQYtik6Cz9PRcqrqGcoEOLXrMrKTdbak
+ GC7g==
+X-Gm-Message-State: AOAM533vIUnWdK3YUvuzb9XZT/g1UUk1OiJudXdV2mvDlq0uEiW40c5d
+ AIOoF8DN3iGSPLGHwbspWegmeXdYgCI=
+X-Google-Smtp-Source: ABdhPJwmF9/zukIvZ6IwRhTzT+yvqvcd2qd4ScSvxryDt2uLiDIvYmrCi/Hm/Ct/3O+iduylQGe5yQ==
+X-Received: by 2002:adf:ef0a:: with SMTP id e10mr1022685wro.362.1598954646947; 
+ Tue, 01 Sep 2020 03:04:06 -0700 (PDT)
 Received: from [192.168.1.36] (50.red-83-52-54.dynamicip.rima-tde.net.
  [83.52.54.50])
- by smtp.gmail.com with ESMTPSA id v24sm1665974wrd.6.2020.09.01.02.49.21
+ by smtp.gmail.com with ESMTPSA id k13sm1179219wmj.14.2020.09.01.03.04.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2020 02:49:21 -0700 (PDT)
+ Tue, 01 Sep 2020 03:04:06 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v3 15/16] hw/riscv: clint: Avoid using hard-coded timebase
- frequency
-To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
- <Alistair.Francis@wdc.com>, Palmer Dabbelt <palmerdabbelt@google.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
- <1598924352-89526-16-git-send-email-bmeng.cn@gmail.com>
+Subject: Re: [Bug 1892540] [RFC PATCH v2] hw/display/tcx: Allow 64-bit
+ accesses to framebuffer stippler and blitter
+To: mst@redhat.com, Bug 1892540 <1892540@bugs.launchpad.net>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Richard Henderson <rth@twiddle.net>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, qemu-stable@nongnu.org
+References: <159803735569.2614.10182276398047269277.malonedeb@chaenomeles.canonical.com>
+ <20200822142127.1316231-1-f4bug@amsat.org>
+ <20200830021257-mutt-send-email-mst@kernel.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <35e929ff-95e6-9c35-fb91-c931573e04f9@amsat.org>
-Date: Tue, 1 Sep 2020 11:49:20 +0200
+Message-ID: <2656bffb-9717-2d41-29d2-98334c0a8180@amsat.org>
+Date: Tue, 1 Sep 2020 12:04:05 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <1598924352-89526-16-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <20200830021257-mutt-send-email-mst@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::342;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x342.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::441;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x441.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -38
@@ -89,57 +91,154 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2020 09:49:27 -0000
+X-List-Received-Date: Tue, 01 Sep 2020 10:04:13 -0000
 
-On 9/1/20 3:39 AM, Bin Meng wrote:
-> From: Bin Meng <bin.meng@windriver.com>
+On 8/30/20 8:18 AM, mst@redhat.com wrote:
+> On Sat, Aug 22, 2020 at 02:21:27PM -0000, Philippe Mathieu-DaudÃƒÆ’Ã‚Â© wrote:
+>> The S24/TCX datasheet is listed as "Unable to locate" on [1].
+>>
+>> However the NetBSD revision 1.32 of the driver introduced
+>> 64-bit accesses to the stippler and blitter [2]. It is safe
+>> to assume these memory regions are 64-bit accessible.
+>> QEMU implementation is 32-bit, so fill the 'impl' fields.
+>>
+>> [1] http://web.archive.org/web/20111209011516/http://wikis.sun.com/display/FOSSdocs/Home
+>> [2] http://cvsweb.netbsd.org/bsdweb.cgi/src/sys/dev/sbus/tcx.c.diff?r1=1.31&r2=1.32
+>>
+>> Reported-by: Andreas Gustafsson <gson@gson.org>
+>> Buglink: https://bugs.launchpad.net/bugs/1892540
+>> Fixes: 55d7bfe2293 ("tcx: Implement hardware acceleration")
+>> Signed-off-by: Philippe Mathieu-DaudÃƒÆ’Ã‚Â© <f4bug@amsat.org>
 > 
-> At present the CLINT timestamp is using a hard-coded timebase
-> frequency value SIFIVE_CLINT_TIMEBASE_FREQ. This might not be
-> true for all boards.
+> Philippe, did you submit the patch on the mailing list
+> normally too? I don't seem to see it there.
+
+Yes, Message-id: <20200822142127.1316231-1-f4bug@amsat.org>
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg732515.html
+
 > 
-> Add a new 'timebase-freq' property to the CLINT device, and
-> update various functions to accept this as a parameter.
+> the patch seems to work for me:
 > 
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Tested-by: Michael S. Tsirkin <mst@redhat.com>
+
+Thanks!
+
 > 
-> ---
 > 
-> (no changes since v1)
+> CC Nathan who reported a similar failure.
 > 
->  include/hw/riscv/sifive_clint.h |  4 +++-
->  target/riscv/cpu.h              |  6 ++++--
->  hw/riscv/microchip_pfsoc.c      |  6 +++++-
->  hw/riscv/sifive_clint.c         | 26 +++++++++++++++-----------
->  hw/riscv/sifive_e.c             |  3 ++-
->  hw/riscv/sifive_u.c             |  3 ++-
->  hw/riscv/spike.c                |  3 ++-
->  hw/riscv/virt.c                 |  3 ++-
->  target/riscv/cpu_helper.c       |  4 +++-
->  target/riscv/csr.c              |  4 ++--
->  10 files changed, 40 insertions(+), 22 deletions(-)
+> Nathan, does the patch below fix the issue for you?
 > 
-> diff --git a/include/hw/riscv/sifive_clint.h b/include/hw/riscv/sifive_clint.h
-> index 9f5fb3d..a30be0f 100644
-> --- a/include/hw/riscv/sifive_clint.h
-> +++ b/include/hw/riscv/sifive_clint.h
-> @@ -39,11 +39,13 @@ typedef struct SiFiveCLINTState {
->      uint32_t timecmp_base;
->      uint32_t time_base;
->      uint32_t aperture_size;
-> +    uint32_t timebase_freq;
->  } SiFiveCLINTState;
+>> ---
+>> Since v1:
+>> - added missing uncommitted staged changes... (tcx_blit_ops)
+>> ---
+>  hw/display/tcx.c | 18 +++++++++++++++---
+>  1 file changed, 15 insertions(+), 3 deletions(-)
+> 
+> diff --git a/hw/display/tcx.c b/hw/display/tcx.c
+> index 1fb45b1aab8..96c6898b149 100644
+> --- a/hw/display/tcx.c
+> +++ b/hw/display/tcx.c
+> @@ -548,20 +548,28 @@ static const MemoryRegionOps tcx_stip_ops = {
+>      .read = tcx_stip_readl,
+>      .write = tcx_stip_writel,
+>      .endianness = DEVICE_NATIVE_ENDIAN,
+> -    .valid = {
+> +    .impl = {
+>          .min_access_size = 4,
+>          .max_access_size = 4,
+>      },
+> +    .valid = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 8,
+> +    },
+>  };
 >  
->  DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
->      uint32_t hartid_base, uint32_t num_harts, uint32_t sip_base,
-> -    uint32_t timecmp_base, uint32_t time_base, bool provide_rdtime);
-> +    uint32_t timecmp_base, uint32_t time_base, uint32_t timebase_freq,
-> +    bool provide_rdtime);
+>  static const MemoryRegionOps tcx_rstip_ops = {
+>      .read = tcx_stip_readl,
+>      .write = tcx_rstip_writel,
+>      .endianness = DEVICE_NATIVE_ENDIAN,
+> -    .valid = {
+> +    .impl = {
+>          .min_access_size = 4,
+>          .max_access_size = 4,
+>      },
+> +    .valid = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 8,
+> +    },
+>  };
+>  
+>  static uint64_t tcx_blit_readl(void *opaque, hwaddr addr,
+> @@ -650,10 +658,14 @@ static const MemoryRegionOps tcx_rblit_ops = {
+>      .read = tcx_blit_readl,
+>      .write = tcx_rblit_writel,
+>      .endianness = DEVICE_NATIVE_ENDIAN,
+> -    .valid = {
+> +    .impl = {
+>          .min_access_size = 4,
+>          .max_access_size = 4,
+>      },
+> +    .valid = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 8,
+> +    },
+>  };
+>  
+>  static void tcx_invalidate_cursor_position(TCXState *s)
+> 
+> 
+> -----------------------------------------------------------
+> 
+> I think you shouldn't specify .min_access_size in impl, since
+> that also allows 1 and 2 byte accesses from guest.
+> 
+> 
+> 
+>> -- 
+>> 2.26.2
+>>
+>> -- 
+>> You received this bug notification because you are subscribed to the bug
+>> report.
+>> https://bugs.launchpad.net/bugs/1892540
+>>
+>> Title:
+>>   qemu can no longer boot NetBSD/sparc
+>>
+>> Status in QEMU:
+>>   New
+>>
+>> Bug description:
+>>   Booting NetBSD/sparc in qemu no longer works.  It broke between qemu
+>>   version 5.0.0 and 5.1.0, and a bisection identified the following as
+>>   the offending commit:
+>>
+>>     [5d971f9e672507210e77d020d89e0e89165c8fc9] memory: Revert "memory:
+>>   accept mismatching sizes in memory_region_access_valid"
+>>
+>>   It's still broken as of 7fd51e68c34fcefdb4d6fd646ed3346f780f89f4.
+>>
+>>   To reproduce, run
+>>
+>>     wget http://ftp.netbsd.org/pub/NetBSD/NetBSD-9.0/images/NetBSD-9.0-sparc.iso
+>>     qemu-system-sparc -nographic -cdrom NetBSD-9.0-sparc.iso -boot d
+>>
+>>   The expected behavior is that the guest boots to the prompt
+>>
+>>     Installation medium to load the additional utilities from:
+>>
+>>   The observed behavior is a panic:
+>>
+>>     [   1.0000050] system[0]: trap 0x29: pc=0xf0046b14 sfsr=0xb6 sfva=0x54000000
+>>     [   1.0000050] cpu0: data fault: pc=0xf0046b14 addr=0x54000000 sfsr=0xb6<PERR=0x0,LVL=0x0,AT=0x5,FT=0x5,FAV,OW>
+>>     [   1.0000050] panic: kernel fault
+>>     [   1.0000050] halted
+>>
+>> To manage notifications about this bug go to:
+>> https://bugs.launchpad.net/qemu/+bug/1892540/+subscriptions
+> 
+> 
 
-As an future improvement, consider using the recently introduced Clock API.
-
-Regards,
-
-Phil.
 
