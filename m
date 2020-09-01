@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kD2t9-0007j8-Hb
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 05:47:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42162)
+	id 1kD2uu-0002VH-2L
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 05:49:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42578)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kD2t7-0007f6-Ir; Tue, 01 Sep 2020 05:47:37 -0400
-Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:37190)
+ id 1kD2us-0002Tl-QB; Tue, 01 Sep 2020 05:49:26 -0400
+Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:38400)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kD2t5-0002ig-PP; Tue, 01 Sep 2020 05:47:37 -0400
-Received: by mail-wm1-x341.google.com with SMTP id a9so517848wmm.2;
- Tue, 01 Sep 2020 02:47:35 -0700 (PDT)
+ id 1kD2ur-0002tv-0L; Tue, 01 Sep 2020 05:49:26 -0400
+Received: by mail-wm1-x342.google.com with SMTP id l9so516784wme.3;
+ Tue, 01 Sep 2020 02:49:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=ZePfW9CcemER40jOd+bMBYSyfW5we0kwkJmWKxNpKDs=;
- b=gS/jAMi8Np0QgQQ2XyEELwcQ8cGA5N4xud7r9iYZIn64K6qk/ir+3HZ+jcLo4ra9Y8
- CzeCmWShJItDKjkhY2vxgxoiVtNgn+Nq5AQo7Dy5kA2sKcZ3OeOB2RMYW7TnRY4fvC7/
- 2neAwTksFyaBKioyzhFsmycCG1S/oyaa/Zd8RTb+QcfQbT83wuJQL+r5/m4xhQUghNGQ
- C2fDqLSmBIAJL1BQ4FPPcSyBw+0ocNtwOWvToqeMKNuKSVSM7HXQHP/XT1LosyqGdc1a
- 3qMBD5FhSJw23hPSTErkgoS0pcyQqMPKix8VUhu+nY1A2zgYRObGyL7nd7VMwwShNotk
- 8zwg==
+ bh=CyyMESLdqm+L4Z3bYhzecc7rV/eRyNkyF63EHZKY3dU=;
+ b=Ep7ZXTe/UJoXUGAx2uGUKhDJrA5vbrxPDNJWrDGU+OlgULA4suSb7gIpRMKbY9N+Bc
+ jbGwdWIx/9hiYtCC44BlBaJ5ykobDlk/es+Y/CU42Tfek+dzDdNBu+MWb0JZuYOUdKLV
+ X6MAEecBt14rrUTzuhzv3o9RCxqT9RnOTHH33PmFOnt7kjYB/w8HGJFc39X+6G0vx9j/
+ +WV7cGmHXzd8Ohwgj8Sf22AQe7mNUTNGpzdMRDgvqZtG/dcgbhYNJhErQPui+ZyAl6oc
+ 1MpiM1Oqg4kx/LwawMKl5C1YeqVA5/FWjq8mYTpWWNVQRbsK5R9nMOCMbGJ7aOSHcymv
+ DHRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=ZePfW9CcemER40jOd+bMBYSyfW5we0kwkJmWKxNpKDs=;
- b=f7i0YmonCPdlGzCiYJCQrtQJeqRElDbdSSxq3O5JRIowJ8AMYTdK7UhnAoffJHSx9d
- JtiqHab1JbBu37l8QO5hNMlTWoVsZEjxKCtH+hk1HE7bdf5wa111el9WtiK/LyRcCyjv
- UYldHjQZ6XNHPvPHPYceYK4mPv6EcAe9mhYCxqO1alMtGryMW9+5wnYgsPhlogCGiGcH
- fUgZmm3QjAYrs4un8m2Nsbh8b2skB7vNB/TylbqolPpVYP1KVSEpLCw+bifhiUpdS9R5
- Ovx+4N5eedrdKVHtv02G9KD90kEPuMWLtxZjsONvF2r8N4/eNYl6bzw5XbiaP4IuDEtO
- G5Qg==
-X-Gm-Message-State: AOAM531Hm18rcb/JUaoNsTUidmIsiJGbce7LLz6oUP6m/ph/3oceX4PW
- ejwnlCy7YZ2F7DTtHOqjuUA=
-X-Google-Smtp-Source: ABdhPJz0RlZtBJUvqcHvcCIqR4leg5nOcmSodqqzFEo5sXX39TSCnQ0+0z7vrZr6StQUr/HVWFVcrA==
-X-Received: by 2002:a1c:c906:: with SMTP id f6mr1004374wmb.5.1598953654100;
- Tue, 01 Sep 2020 02:47:34 -0700 (PDT)
+ bh=CyyMESLdqm+L4Z3bYhzecc7rV/eRyNkyF63EHZKY3dU=;
+ b=G9et1dpqTbX2nAwgBdv/TFmdkXqc9+JbAMyXs1kLJbwBuztflF6APx/oD4ZA32Avof
+ I4DYCNmMYwrYEUtNgA2MO6a7Hp9lYoAUUxoG5U3tjcrgRxEgUhHuWWqaSwugHhRx+6gn
+ i+gCakJ5pJRBUQjCME6YSFziwjgumSHs71DOZdfsN/qFx+TD8gw5pk8AAMrdM22EqmTh
+ ZO73qMP9SnfHxbm2ihOdTa3OOGsU9nafDtT6DQeJ0dnpgX7t8kma6ZmKe7pmYv2p8TGf
+ UGK7QnkZ7Cfq5/YEWEX9mnz/ffcDEIK8xMqWvwwVxYlafU1ReDls6a4GpOYD6SkbbNV7
+ 0HYA==
+X-Gm-Message-State: AOAM530fmOvJgcPINymO23HBqDyvXUMtQ0WF85iN1Yyi8PZ1qSifDUyo
+ oNPp96oDttII9CW+bwif4Ao=
+X-Google-Smtp-Source: ABdhPJzmAbh/tHRCwU8ETW+3K5asY7pzdnvy/ZF4Y91Tszyn5f0sykDiTq+QC2TLXdHGhCtJPXeraA==
+X-Received: by 2002:a1c:541b:: with SMTP id i27mr921321wmb.179.1598953762373; 
+ Tue, 01 Sep 2020 02:49:22 -0700 (PDT)
 Received: from [192.168.1.36] (50.red-83-52-54.dynamicip.rima-tde.net.
  [83.52.54.50])
- by smtp.gmail.com with ESMTPSA id b1sm1344670wru.54.2020.09.01.02.47.33
+ by smtp.gmail.com with ESMTPSA id v24sm1665974wrd.6.2020.09.01.02.49.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2020 02:47:33 -0700 (PDT)
+ Tue, 01 Sep 2020 02:49:21 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v3 14/16] hw/riscv: microchip_pfsoc: Hook GPIO controllers
+Subject: Re: [PATCH v3 15/16] hw/riscv: clint: Avoid using hard-coded timebase
+ frequency
 To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
  <Alistair.Francis@wdc.com>, Palmer Dabbelt <palmerdabbelt@google.com>,
  qemu-devel@nongnu.org, qemu-riscv@nongnu.org
@@ -53,19 +54,19 @@ Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>
 References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
- <1598924352-89526-15-git-send-email-bmeng.cn@gmail.com>
+ <1598924352-89526-16-git-send-email-bmeng.cn@gmail.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <9d7ae348-bd80-0d74-7eb1-5148d7f5cb78@amsat.org>
-Date: Tue, 1 Sep 2020 11:47:32 +0200
+Message-ID: <35e929ff-95e6-9c35-fb91-c931573e04f9@amsat.org>
+Date: Tue, 1 Sep 2020 11:49:20 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <1598924352-89526-15-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1598924352-89526-16-git-send-email-bmeng.cn@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::341;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x341.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::342;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x342.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -38
@@ -88,32 +89,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2020 09:47:37 -0000
+X-List-Received-Date: Tue, 01 Sep 2020 09:49:27 -0000
 
 On 9/1/20 3:39 AM, Bin Meng wrote:
 > From: Bin Meng <bin.meng@windriver.com>
 > 
-> Microchip PolarFire SoC integrates 3 GPIOs controllers. It seems
-> enough to create unimplemented devices to cover their register
-> spaces at this point.
+> At present the CLINT timestamp is using a hard-coded timebase
+> frequency value SIFIVE_CLINT_TIMEBASE_FREQ. This might not be
+> true for all boards.
 > 
-> With this commit, QEMU can boot to U-Boot (2nd stage bootloader)
-> all the way to the Linux shell login prompt, with a modified HSS
-> (1st stage bootloader).
-> 
-> For detailed instructions on how to create images for the Icicle
-> Kit board, please check QEMU RISC-V WiKi page at:
-> https://wiki.qemu.org/Documentation/Platforms/RISCV
+> Add a new 'timebase-freq' property to the CLINT device, and
+> update various functions to accept this as a parameter.
 > 
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> 
 > ---
 > 
 > (no changes since v1)
 > 
->  include/hw/riscv/microchip_pfsoc.h |  3 +++
->  hw/riscv/microchip_pfsoc.c         | 14 ++++++++++++++
->  2 files changed, 17 insertions(+)
+>  include/hw/riscv/sifive_clint.h |  4 +++-
+>  target/riscv/cpu.h              |  6 ++++--
+>  hw/riscv/microchip_pfsoc.c      |  6 +++++-
+>  hw/riscv/sifive_clint.c         | 26 +++++++++++++++-----------
+>  hw/riscv/sifive_e.c             |  3 ++-
+>  hw/riscv/sifive_u.c             |  3 ++-
+>  hw/riscv/spike.c                |  3 ++-
+>  hw/riscv/virt.c                 |  3 ++-
+>  target/riscv/cpu_helper.c       |  4 +++-
+>  target/riscv/csr.c              |  4 ++--
+>  10 files changed, 40 insertions(+), 22 deletions(-)
+> 
+> diff --git a/include/hw/riscv/sifive_clint.h b/include/hw/riscv/sifive_clint.h
+> index 9f5fb3d..a30be0f 100644
+> --- a/include/hw/riscv/sifive_clint.h
+> +++ b/include/hw/riscv/sifive_clint.h
+> @@ -39,11 +39,13 @@ typedef struct SiFiveCLINTState {
+>      uint32_t timecmp_base;
+>      uint32_t time_base;
+>      uint32_t aperture_size;
+> +    uint32_t timebase_freq;
+>  } SiFiveCLINTState;
+>  
+>  DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
+>      uint32_t hartid_base, uint32_t num_harts, uint32_t sip_base,
+> -    uint32_t timecmp_base, uint32_t time_base, bool provide_rdtime);
+> +    uint32_t timecmp_base, uint32_t time_base, uint32_t timebase_freq,
+> +    bool provide_rdtime);
 
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+As an future improvement, consider using the recently introduced Clock API.
+
+Regards,
+
+Phil.
 
