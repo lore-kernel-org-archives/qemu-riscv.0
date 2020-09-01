@@ -1,74 +1,87 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kD8Vf-0002Ki-2m
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 11:47:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55234)
+	id 1kDAW1-0001ZO-0d
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 13:56:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38254)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
- id 1kD8Vd-0002GP-9e
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2020 11:47:45 -0400
-Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642]:36228)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kDAVx-0001VX-KB; Tue, 01 Sep 2020 13:56:13 -0400
+Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442]:42740)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
- id 1kD8Vb-00026h-FO
- for qemu-riscv@nongnu.org; Tue, 01 Sep 2020 11:47:44 -0400
-Received: by mail-pl1-x642.google.com with SMTP id y6so733466plt.3
- for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2020 08:47:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=Dka4kGmZfMcbFE4G/5IsI7nQ8gtf9IAo5wRmBXJcgzA=;
- b=FxjfpQyHEdjUQ2UKZUinwwi/zNqDX7YQ4XSlDjIplvJteba8JM40xdPF8EHFQknvUV
- yEGL6M2T9ATkyos33QH2Fun4kdJYaBEIsH27EsJP/XGQcDiE4fj6QEE3pk7d1/LcMc4e
- 29X5K/UB8VfVBgUgz2fEiOZu3fG/aOz62ugnozjCB1heA7SWA7hjYr7s7Ru3QeZgQv3s
- qRVjGID6sx3Acd/QuBVQ45fYf7/m6asuDaFS2//3QemMLLIczckME8AOEqiYNWJsKTNV
- c1SQe0KFNlFxUXZeeHDWQUn50Ds8uwIfwDts4bSbRS1CA4b9FlnrBaNymgA05aYFWWgt
- IMTg==
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kDAVv-0003Oz-IP; Tue, 01 Sep 2020 13:56:13 -0400
+Received: by mail-wr1-x442.google.com with SMTP id c18so2508367wrm.9;
+ Tue, 01 Sep 2020 10:56:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=+bafO/jfhpRM9QFCfvQkY2QTmuQbQL9vKpfHrgKafq4=;
+ b=SB43E6N3XEeDpfuSnw2GRr4Azoos5GtWcohehpfjAfSBB+VM/SP4zaXG/pU9hgGhF+
+ VxMpGPw4X4vew1gOw7UFQYgCA4fiXSiO6t/sADgbOwPlAiY3zNSlZXK5/fjJ8iubO4YG
+ SxLcYa6TSWeafPo7EnWQUu7VPBkxV+E0p2Y4o31LV4PGQT0RD3KNGatERL6nfnEGrj43
+ mtyOpc4ZUB6x6Fb4tKxb6sqEFXja0fCo4Y4WUWl2M6UXvekcePB1oer0e5f/U4d04EiN
+ c2cIjs1egH/fzYgXbj+cwZXKH3W+PHWcCRUa0oK5tgOVUDhpfJXRq93WEF8qZBzdiGGO
+ 9/sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=Dka4kGmZfMcbFE4G/5IsI7nQ8gtf9IAo5wRmBXJcgzA=;
- b=DKL3NpHrh8rKRLPV9cWOKTurUE2HGm8xTx+Tb4C/NJwgdfHvX1cWauP+0uGVbe1xSi
- KxrwSvU6Qo/01JEOf+CWkiYAlN3X9+0LYOKRfey5W4A+ffKc6lgZjhNXcqUPGMCiPNoV
- vgdETLIjao+VTuSmG/EMfqKFQRJK5t8gDS23CPr8WlWjO0b/ZiOxevvYUiC3lUapCyvQ
- UinhDjsD25OrqZ9hmFzCb9VSepGxAezjVIAQmSHiPDA2vF7/lpPgjI5KzuaR2kB9w1At
- 9OJForHFXDqlw9LwZYIvMUuu0mgW35GNtMpnevcSSrkP6zs5PgCf777WZon5i0kVACZ4
- HkQg==
-X-Gm-Message-State: AOAM530mlqz9dtHJ86oOlbILij7ZdF5i8DouIgzBawhmK78PD9dfeugu
- 1Lj4AQ/KJXE+rs68UpoHC+bpJA==
-X-Google-Smtp-Source: ABdhPJwuZaYYkJSIQ7Qox7m2qFd3c6hdvqfw489NgESG+2Qau1UJoTI8STjSfRfy4hIQmsmXakp2ow==
-X-Received: by 2002:a17:90b:282:: with SMTP id
- az2mr2224329pjb.66.1598975261902; 
- Tue, 01 Sep 2020 08:47:41 -0700 (PDT)
-Received: from localhost.localdomain (111-241-104-82.dynamic-ip.hinet.net.
- [111.241.104.82])
- by smtp.gmail.com with ESMTPSA id e17sm2485344pfm.60.2020.09.01.08.47.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Sep 2020 08:47:41 -0700 (PDT)
-From: Green Wan <green.wan@sifive.com>
-To: 
-Cc: bmeng.cn@gmail.com, Green Wan <green.wan@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=+bafO/jfhpRM9QFCfvQkY2QTmuQbQL9vKpfHrgKafq4=;
+ b=Tobk/leb6btWS1fp5MnCIIDU+rTeCgFYi+caasVmUZ8Sh4m6O7+Pis2MTv8r6XrpcK
+ xZKKrtLHOu4/ntb0QL7gl2XUMuAdmNiARvQVqqxkmFzlCGum7iU91e9YK38MUXSkYV9u
+ 7jJ4nyTwQvDf09fCm5PZtjUiuwxdasVNHmt4nrzEqWjussGOQv8IDFlk9FfFB68DYThD
+ AgPITPJjj4YgFp8VyGQUK1YivEuSYPBg6iNiRUIyyKocA7/b68S8NnuGLEtGXAOzMlTj
+ iutUaxb3m1dpqzM2I2g1GGqcqljxyE+rhU8E69DnKXHS4QldQ1dipKlWGxirhbxwxito
+ aBeg==
+X-Gm-Message-State: AOAM530FneMEJNA2X121EHYHxFzAPk9FNrd9aWHWbruPWU+SW0dz8L38
+ qpdTaCsLc73l9kp1IQLLaFY=
+X-Google-Smtp-Source: ABdhPJwoIbyXPbhW+ooN6eulg0jb7bgg7Hs1e1FXFHKPLEmJxHIYJp7ubM+q36l8Kpj4iEwLaU3V2w==
+X-Received: by 2002:a5d:45c9:: with SMTP id b9mr3037964wrs.283.1598982969355; 
+ Tue, 01 Sep 2020 10:56:09 -0700 (PDT)
+Received: from [192.168.1.36] (50.red-83-52-54.dynamicip.rima-tde.net.
+ [83.52.54.50])
+ by smtp.gmail.com with ESMTPSA id o5sm2551533wmc.33.2020.09.01.10.56.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Sep 2020 10:56:08 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH v3 08/16] hw/riscv: microchip_pfsoc: Connect a Cadence
+ SDHCI controller and an SD card
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Palmer Dabbelt <palmerdabbelt@google.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: [RFC PATCH v5 2/2] hw/riscv: sifive_u: Add backend drive support
-Date: Tue,  1 Sep 2020 23:47:11 +0800
-Message-Id: <20200901154711.18457-3-green.wan@sifive.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200901154711.18457-1-green.wan@sifive.com>
-References: <20200901154711.18457-1-green.wan@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::642;
- envelope-from=green.wan@sifive.com; helo=mail-pl1-x642.google.com
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Bin Meng <bin.meng@windriver.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
+ <1598924352-89526-9-git-send-email-bmeng.cn@gmail.com>
+ <df726657-6bac-dcfb-31b2-9293787957d7@amsat.org>
+ <CAEUhbmVJZ_3-STFL6JQsfYkhxN+2BaN0gWaKXWrNBfs_akjJjQ@mail.gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <b0c4f1f4-4cc5-2163-443b-927b700f8e20@amsat.org>
+Date: Tue, 1 Sep 2020 19:56:07 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
+MIME-Version: 1.0
+In-Reply-To: <CAEUhbmVJZ_3-STFL6JQsfYkhxN+2BaN0gWaKXWrNBfs_akjJjQ@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::442;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x442.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_score_int: -38
+X-Spam_score: -3.9
+X-Spam_bar: ---
+X-Spam_report: (-3.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.001, NICE_REPLY_A=-2.13,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,130 +94,160 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2020 15:47:45 -0000
+X-List-Received-Date: Tue, 01 Sep 2020 17:56:14 -0000
 
-Add '-drive' support to OTP device. Allow users to assign a raw file
-as OTP image.
+On 9/1/20 12:27 PM, Bin Meng wrote:
+> Hi Philippe,
+> 
+> On Tue, Sep 1, 2020 at 5:42 PM Philippe Mathieu-Daudé <f4bug@amsat.org> wrote:
+>>
+>> On 9/1/20 3:39 AM, Bin Meng wrote:
+>>> From: Bin Meng <bin.meng@windriver.com>
+>>>
+>>> Microchip PolarFire SoC integrates one Cadence SDHCI controller.
+>>> On the Icicle Kit board, one eMMC chip and an external SD card
+>>> connect to this controller depending on different configuration.
+>>>
+>>> As QEMU does not support eMMC yet, we just emulate the SD card
+>>> configuration. To test this, the Hart Software Services (HSS)
+>>> should choose the SD card configuration:
+>>>
+>>> $ cp boards/icicle-kit-es/def_config.sdcard .config
+>>> $ make BOARD=icicle-kit-es
+>>>
+>>> The SD card image can be built from the Yocto BSP at:
+>>> https://github.com/polarfire-soc/meta-polarfire-soc-yocto-bsp
+>>>
+>>> Note the generated SD card image should be resized before use:
+>>> $ qemu-img resize /path/to/sdcard.img 4G
+>>>
+>>> Launch QEMU with the following command:
+>>> $ qemu-system-riscv64 -nographic -M microchip-icicle-kit -sd sdcard.img
+>>>
+>>> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+>>>
+>>> ---
+>>>
+>>> (no changes since v2)
+>>>
+>>> Changes in v2:
+>>> - do not initialize TYPE_SYSBUS_SDHCI in the SoC instance_init(),
+>>>   instead move that to the cadence_sdhci model
+>>> - do not access generic-sdhci's state directly,
+>>>   instead move that to the cadence_sdhci model
+>>>
+>>>  include/hw/riscv/microchip_pfsoc.h |  4 ++++
+>>>  hw/riscv/microchip_pfsoc.c         | 23 +++++++++++++++++++++++
+>>>  hw/riscv/Kconfig                   |  1 +
+>>>  3 files changed, 28 insertions(+)
+>>>
+>>> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+>>> index a5efa1d..d810ee8 100644
+>>> --- a/include/hw/riscv/microchip_pfsoc.h
+>>> +++ b/include/hw/riscv/microchip_pfsoc.h
+>>> @@ -23,6 +23,7 @@
+>>>  #define HW_MICROCHIP_PFSOC_H
+>>>
+>>>  #include "hw/char/mchp_pfsoc_mmuart.h"
+>>> +#include "hw/sd/cadence_sdhci.h"
+>>>
+>>>  typedef struct MicrochipPFSoCState {
+>>>      /*< private >*/
+>>> @@ -39,6 +40,7 @@ typedef struct MicrochipPFSoCState {
+>>>      MchpPfSoCMMUartState *serial2;
+>>>      MchpPfSoCMMUartState *serial3;
+>>>      MchpPfSoCMMUartState *serial4;
+>>> +    CadenceSDHCIState sdhci;
+>>>  } MicrochipPFSoCState;
+>>>
+>>>  #define TYPE_MICROCHIP_PFSOC    "microchip.pfsoc"
+>>> @@ -74,6 +76,7 @@ enum {
+>>>      MICROCHIP_PFSOC_MMUART0,
+>>>      MICROCHIP_PFSOC_SYSREG,
+>>>      MICROCHIP_PFSOC_MPUCFG,
+>>> +    MICROCHIP_PFSOC_EMMC_SD,
+>>>      MICROCHIP_PFSOC_MMUART1,
+>>>      MICROCHIP_PFSOC_MMUART2,
+>>>      MICROCHIP_PFSOC_MMUART3,
+>>> @@ -85,6 +88,7 @@ enum {
+>>>  };
+>>>
+>>>  enum {
+>>> +    MICROCHIP_PFSOC_EMMC_SD_IRQ = 88,
+>>>      MICROCHIP_PFSOC_MMUART0_IRQ = 90,
+>>>      MICROCHIP_PFSOC_MMUART1_IRQ = 91,
+>>>      MICROCHIP_PFSOC_MMUART2_IRQ = 92,
+>>> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+>>> index cee959a..0b2e9ca 100644
+>>> --- a/hw/riscv/microchip_pfsoc.c
+>>> +++ b/hw/riscv/microchip_pfsoc.c
+>>> @@ -12,6 +12,7 @@
+>>>   * 1) PLIC (Platform Level Interrupt Controller)
+>>>   * 2) eNVM (Embedded Non-Volatile Memory)
+>>>   * 3) MMUARTs (Multi-Mode UART)
+>>> + * 4) Cadence eMMC/SDHC controller and an SD card connected to it
+>>>   *
+>>>   * This board currently generates devicetree dynamically that indicates at least
+>>>   * two harts and up to five harts.
+>>> @@ -75,6 +76,7 @@ static const struct MemmapEntry {
+>>>      [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
+>>>      [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
+>>>      [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
+>>> +    [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
+>>>      [MICROCHIP_PFSOC_MMUART1] =         { 0x20100000,     0x1000 },
+>>>      [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
+>>>      [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
+>>> @@ -111,6 +113,9 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
+>>>      qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type",
+>>>                           TYPE_RISCV_CPU_SIFIVE_U54);
+>>>      qdev_prop_set_uint64(DEVICE(&s->u_cpus), "resetvec", RESET_VECTOR);
+>>> +
+>>> +    object_initialize_child(obj, "sd-controller", &s->sdhci,
+>>> +                            TYPE_CADENCE_SDHCI);
+>>>  }
+>>>
+>>>  static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>>> @@ -223,6 +228,13 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>>>          memmap[MICROCHIP_PFSOC_MPUCFG].base,
+>>>          memmap[MICROCHIP_PFSOC_MPUCFG].size);
+>>>
+>>> +    /* SDHCI */
+>>> +    sysbus_realize(SYS_BUS_DEVICE(&s->sdhci), errp);
+>>> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci), 0,
+>>> +                    memmap[MICROCHIP_PFSOC_EMMC_SD].base);
+>>> +    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sdhci), 0,
+>>> +        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_EMMC_SD_IRQ));
+>>> +
+>>>      /* MMUARTs */
+>>>      s->serial0 = mchp_pfsoc_mmuart_create(system_memory,
+>>>          memmap[MICROCHIP_PFSOC_MMUART0].base,
+>>> @@ -290,6 +302,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>>>      MicrochipIcicleKitState *s = MICROCHIP_ICICLE_KIT_MACHINE(machine);
+>>>      MemoryRegion *system_memory = get_system_memory();
+>>>      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+>>> +    DriveInfo *dinfo = drive_get_next(IF_SD);
+>>
+>> Ideally this part should be in the machine, not the soc.
+>>
+>> Maybe you can alias the "drive" property as "sd-drive" in the soc,
+>> and move the card attach to the machine?
+> 
+> Thanks for the review.
+> 
+> I am not sure I understand your suggestion. Currently the SD card
+> attach codes are already in the machine codes
+> microchip_icicle_kit_machine_init()
 
-Signed-off-by: Green Wan <green.wan@sifive.com>
----
- hw/riscv/sifive_u_otp.c         | 50 +++++++++++++++++++++++++++++++++
- include/hw/riscv/sifive_u_otp.h |  2 ++
- 2 files changed, 52 insertions(+)
+Ah I have been confuse, since the file is named "microchip_pfsoc.c"
+I was expecting the machine code in another file, now I realize both
+machine + soc are altogether here. No problem then!
 
-diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
-index b8369e9035..477c54c7b8 100644
---- a/hw/riscv/sifive_u_otp.c
-+++ b/hw/riscv/sifive_u_otp.c
-@@ -24,6 +24,8 @@
- #include "qemu/log.h"
- #include "qemu/module.h"
- #include "hw/riscv/sifive_u_otp.h"
-+#include "sysemu/blockdev.h"
-+#include "sysemu/block-backend.h"
- 
- #define WRITTEN_BIT_ON 0x1
- 
-@@ -54,6 +56,16 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
-         if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
-             (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
-             (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
-+
-+            /* read from backend */
-+            if (s->blk) {
-+                int32_t buf;
-+
-+                blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
-+                          SIFIVE_U_OTP_FUSE_WORD);
-+                return buf;
-+            }
-+
-             return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
-         } else {
-             return 0xff;
-@@ -145,6 +157,12 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
-             /* write bit data */
-             SET_FUSEARRAY_BIT(s->fuse, s->pa, s->paio, s->pdin);
- 
-+            /* write to backend */
-+            if (s->blk) {
-+                blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &val32,
-+                           SIFIVE_U_OTP_FUSE_WORD, 0);
-+            }
-+
-             /* update written bit */
-             SET_FUSEARRAY_BIT(s->fuse_wo, s->pa, s->paio, WRITTEN_BIT_ON);
-         }
-@@ -168,16 +186,48 @@ static const MemoryRegionOps sifive_u_otp_ops = {
- 
- static Property sifive_u_otp_properties[] = {
-     DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
-+    DEFINE_PROP_DRIVE("drive", SiFiveUOTPState, blk),
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
- static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
- {
-     SiFiveUOTPState *s = SIFIVE_U_OTP(dev);
-+    DriveInfo *dinfo;
- 
-     memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_u_otp_ops, s,
-                           TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-+
-+    dinfo = drive_get_next(IF_NONE);
-+    if (dinfo) {
-+        int ret;
-+        uint64_t perm;
-+        int filesize;
-+        BlockBackend *blk;
-+
-+        blk = blk_by_legacy_dinfo(dinfo);
-+        filesize = SIFIVE_U_OTP_NUM_FUSES * SIFIVE_U_OTP_FUSE_WORD;
-+        if (blk_getlength(blk) < filesize) {
-+            qemu_log_mask(LOG_GUEST_ERROR, "OTP drive size < 16K\n");
-+            return;
-+        }
-+
-+        qdev_prop_set_drive(dev, "drive", blk);
-+
-+        perm = BLK_PERM_CONSISTENT_READ |
-+                        (blk_is_read_only(s->blk) ? 0 : BLK_PERM_WRITE);
-+        ret = blk_set_perm(s->blk, perm, BLK_PERM_ALL, errp);
-+        if (ret < 0) {
-+            qemu_log_mask(LOG_GUEST_ERROR, "set perm error.");
-+        }
-+
-+        if (blk_pread(s->blk, 0, s->fuse, filesize) != filesize) {
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "failed to read the initial flash content");
-+            return;
-+        }
-+    }
- }
- 
- static void sifive_u_otp_reset(DeviceState *dev)
-diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
-index 4a5a0acf48..9bc781fd4f 100644
---- a/include/hw/riscv/sifive_u_otp.h
-+++ b/include/hw/riscv/sifive_u_otp.h
-@@ -45,6 +45,7 @@
- 
- #define SIFIVE_U_OTP_PA_MASK        0xfff
- #define SIFIVE_U_OTP_NUM_FUSES      0x1000
-+#define SIFIVE_U_OTP_FUSE_WORD      4
- #define SIFIVE_U_OTP_SERIAL_ADDR    0xfc
- 
- #define SIFIVE_U_OTP_REG_SIZE       0x1000
-@@ -78,6 +79,7 @@ typedef struct SiFiveUOTPState {
-     uint32_t fuse_wo[SIFIVE_U_OTP_NUM_FUSES];
-     /* config */
-     uint32_t serial;
-+    BlockBackend *blk;
- } SiFiveUOTPState;
- 
- #endif /* HW_SIFIVE_U_OTP_H */
--- 
-2.17.1
-
+> 
+>>
+>> Can be done later if you prefer:
+>> Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+> 
+> Regards,
+> Bin
+> 
 
