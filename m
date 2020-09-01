@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kD2it-0005oM-Bo
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 05:37:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40154)
+	id 1kD2j6-0005ul-Mn
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 05:37:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40208)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kD2ir-0005lr-K9; Tue, 01 Sep 2020 05:37:01 -0400
-Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:53550)
+ id 1kD2j5-0005ti-AU; Tue, 01 Sep 2020 05:37:15 -0400
+Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:42183)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kD2iq-0001WV-2U; Tue, 01 Sep 2020 05:37:01 -0400
-Received: by mail-wm1-x341.google.com with SMTP id u18so467405wmc.3;
- Tue, 01 Sep 2020 02:36:59 -0700 (PDT)
+ id 1kD2j3-0001Xh-OD; Tue, 01 Sep 2020 05:37:15 -0400
+Received: by mail-wr1-x443.google.com with SMTP id c18so716451wrm.9;
+ Tue, 01 Sep 2020 02:37:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=ALob3r9bFnYkN7EHAZCiCAj+Y+B16qSRzKe+iBuntqo=;
- b=DkCGWcUhkNv/jbB5Fb6kbxXQMN7BaA0qx+eq966uT5luSrkvOH+9SM9XOGxnf+OmUx
- qTdPWIwiG0c6xU67duW2D/N/h0B0+ARx8qNkwuPrenttexO8zC0fTcvFoXNxkHjEQsGV
- zpHnR+rJFY2aBXdmZFapV+9DJQbXdD3+onGh2U2ao54yemmT0h2ldHrlwUvi32/uf/zZ
- wtrzCOPkw+Yy2eYQFUGde+1r8cNHd6Tz3TD/OPeMjMuBQRJT5O5ZM8GicWQqlSOg1Dx+
- sN181MFWQiIVrugqs/L4BXMEoOlVkefFLV0QVbrW4WTpYAMDUd+2pErKMNw/FDOXNsJJ
- qQZA==
+ bh=IyzL7jyhMcu6eGehfaT5P8dSwD+lmQVa3PMr1t3AYME=;
+ b=evlxLmVbzEGL0nVPm5WzGxZ4WxIDdnYfUSVqfofRSm8zvIKpCG/WJBj3f4l3GFse/3
+ U97Q97n/GE9c7ONcXYSiRtFl7WvS2VhnOPy6y5zePmeTMmFoGDCgR45R9TdnWs2qpiJu
+ 2B4vpMOrxh2l2D0Cr+hRig4TgOEcGRKs5m1DjT7i5JQ3K3HMrhrjZR4AvEFAbs2Ekg1+
+ WOx9zYGKmexAYWQe7O8kKtFCldWjlr6+eztKRqH7kPMRE+GiTuiKA7Whi8WPURkG/FdV
+ jePA2E2Rz0d03rL0HkwD1GqisQn99sWtKjwNiKZwho6GIU9VHVOSADaHAVr+5yvZSA27
+ IZOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=ALob3r9bFnYkN7EHAZCiCAj+Y+B16qSRzKe+iBuntqo=;
- b=ctrioyPguwu/KeLyafDkrsbTcRxddKANB5122OyBxqB7lDFvBLlECpZ9UMxdJ6RrRQ
- xXs0KMM6Qii0OLTePkRz+gEJ39OkakXLUxa8X1sIMR6eMGqufdL9V2cFlKPZ3MPNO+fs
- 79WfUEx+xa2jcBKbwZQgcFNuEsMtMRQTkAbvyKo9T1sjx51O0DE3EgstiBnCCU0ri+J8
- aUrOwON9PsV24XmVdWtpTY6ZqqBslNy7bpQraLl+eOMuGW8kgZTaZEdtnQMptyCdcuWY
- 7Vf60Ppr/S5S5gPYKggrjT5ko11nBb/NW/2qPuLNKxcGED9N0tc+PyWkbz/AZGKhVQS5
- HrWg==
-X-Gm-Message-State: AOAM532yHF9GD7roFzElQ9bZlaK7NJDjB2I3ytuR3gbeR1qDX9/8wKYx
- SpZYSWknkctZR+xWYRa8PhY=
-X-Google-Smtp-Source: ABdhPJzaPjXt9c3PuMzsZkVKhW5rlspsuRG+Ua/2DviniWFA6abaRL77aMoiiyxwESV+aX14Z1VD3w==
-X-Received: by 2002:a1c:cc0d:: with SMTP id h13mr891944wmb.44.1598953018312;
- Tue, 01 Sep 2020 02:36:58 -0700 (PDT)
+ bh=IyzL7jyhMcu6eGehfaT5P8dSwD+lmQVa3PMr1t3AYME=;
+ b=obvfKCUq1FofvuFJM7uXp9fzf42ltKX3rVYPzMGnv2g5FbZ0fuhXHgx4u2WE4vZsPx
+ BTGmHI81hzfWH3oahoT3O2QsTef5/K5sAepnIHvESb1q1Gte4SGAQodj/nS37/2ncAMR
+ DpQA+lE/cdd/gpMZBFrQAeccYIH+tZYBAVsmPbnQj8P7k1vVoCAl4dKBDk5nya66PVBr
+ G688bDfhG1XcGOqa1KftvOSFz4xcspzw1ynWU2caSCJFpLlLp5xkGypbqu9ltZcTn0mv
+ BYgFSY1Q1Ju9OU4mauUyTiiagQ2It8hNcWXmxX3pJ4jz8HW4QoccD17YqE1kpaB+F3QZ
+ YYAA==
+X-Gm-Message-State: AOAM533G0X/EcUMifpizinfvananNY7GmvGLcG/8SD8NDQoxmlpVFPxe
+ pgqdr9+YxHxhzx7OBU8bZg0=
+X-Google-Smtp-Source: ABdhPJzPpNSOXg61rHeoJI0GkoEL10EpDw1pPZRTKOV6sOuaOz57/5GLehBVW+ne7fHpGfQmNV5Zzg==
+X-Received: by 2002:a5d:4c88:: with SMTP id z8mr935183wrs.218.1598953032096;
+ Tue, 01 Sep 2020 02:37:12 -0700 (PDT)
 Received: from [192.168.1.36] (50.red-83-52-54.dynamicip.rima-tde.net.
  [83.52.54.50])
- by smtp.gmail.com with ESMTPSA id f1sm1451725wrt.20.2020.09.01.02.36.57
+ by smtp.gmail.com with ESMTPSA id h184sm1082283wmh.41.2020.09.01.02.37.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2020 02:36:57 -0700 (PDT)
+ Tue, 01 Sep 2020 02:37:11 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v3 01/16] target/riscv: cpu: Add a new 'resetvec' property
+Subject: Re: [PATCH v3 02/16] hw/riscv: hart: Add a new 'resetvec' property
 To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
  <Alistair.Francis@wdc.com>, Palmer Dabbelt <palmerdabbelt@google.com>,
  qemu-devel@nongnu.org, qemu-riscv@nongnu.org
@@ -53,19 +53,19 @@ Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>
 References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
- <1598924352-89526-2-git-send-email-bmeng.cn@gmail.com>
+ <1598924352-89526-3-git-send-email-bmeng.cn@gmail.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <7f36f344-28a4-79fa-e68c-5e6e667b48f4@amsat.org>
-Date: Tue, 1 Sep 2020 11:36:56 +0200
+Message-ID: <e69feefa-49d4-79a5-8319-738c6da61f28@amsat.org>
+Date: Tue, 1 Sep 2020 11:37:10 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <1598924352-89526-2-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1598924352-89526-3-git-send-email-bmeng.cn@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::341;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x341.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::443;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x443.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -38
@@ -88,19 +88,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2020 09:37:01 -0000
+X-List-Received-Date: Tue, 01 Sep 2020 09:37:15 -0000
 
 On 9/1/20 3:38 AM, Bin Meng wrote:
 > From: Bin Meng <bin.meng@windriver.com>
 > 
-> Currently the reset vector address is hard-coded in a RISC-V CPU's
-> instance_init() routine. In a real world we can have 2 exact same
-> CPUs except for the reset vector address, which is pretty common in
-> the RISC-V core IP licensing business.
-> 
-> Normally reset vector address is a configurable parameter. Let's
-> create a 64-bit property to store the reset vector address which
-> covers both 32-bit and 64-bit CPUs.
+> RISC-V machines do not instantiate RISC-V CPUs directly, instead
+> they do that via the hart array. Add a new property for the reset
+> vector address to allow the value to be passed to the CPU, before
+> CPU is realized.
 > 
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -108,10 +104,9 @@ On 9/1/20 3:38 AM, Bin Meng wrote:
 > 
 > (no changes since v1)
 > 
->  target/riscv/cpu.h | 1 +
->  target/riscv/cpu.c | 1 +
->  2 files changed, 2 insertions(+)
+>  include/hw/riscv/riscv_hart.h | 1 +
+>  hw/riscv/riscv_hart.c         | 3 +++
+>  2 files changed, 4 insertions(+)
 
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-
 
