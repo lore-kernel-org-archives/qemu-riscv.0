@@ -1,73 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kD2qk-0003cD-Bx
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 05:45:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41546)
+	id 1kD2sa-0006jA-QY
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 05:47:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42004)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kD2qi-0003YV-9h; Tue, 01 Sep 2020 05:45:08 -0400
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:44343)
+ id 1kD2sZ-0006fV-Bq; Tue, 01 Sep 2020 05:47:03 -0400
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:55420)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kD2qg-0002KC-IQ; Tue, 01 Sep 2020 05:45:08 -0400
-Received: by mail-wr1-x441.google.com with SMTP id c15so740663wrs.11;
- Tue, 01 Sep 2020 02:45:05 -0700 (PDT)
+ id 1kD2sW-0002e0-Px; Tue, 01 Sep 2020 05:47:02 -0400
+Received: by mail-wm1-x343.google.com with SMTP id a65so489169wme.5;
+ Tue, 01 Sep 2020 02:47:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=Ak1MELy64MVFTjZtGG5oZHevqS7oZZr0pksQQpBgw3Y=;
- b=eFzfNtaTeZDUe7avJJpEJRi8X2aKN70Pw1Cztdqdq5xa+4DkmgJTb1XZbA33irPMsd
- n6kTcjpnlU7Dj9SrjwSUiyhwMkiZO9BoPXSH0L1VBqwWnxD3PSCWMQrV+9IxrTdx3/i4
- UqX87eWW8cu2SUqJDNTSIi7mMrZBi63BRZOrXoSbRC89mYbrDnU+sFYlGNDonNGIqaOD
- bZSllu/jbJrSFu55+EKEU0s3UO/sW7SPCxpCQZNKeDTOelXGMSOtd0HJtByY8uDnpF1Y
- 4k3NwSKY68DmsHePT/9xB7Qi1awbd4jvF6iuSgNsYNM1g+eDMtkaoCuQAzHbSuLhaXyG
- 9lPg==
+ bh=pMHxOd1xmexKs5hKKnIg6aoAiTlQCCuJV5AAWGMAY/4=;
+ b=C685N7n5s//4oDC3bUiXd+EiYrSQaW/V8j9gyXsIfXAX2KoZumEQ3AVGLsFGN0u664
+ fuY5L/iMUw171bCqq3uJ2+yAgD+KeEF5F37sFz+swr7q+qlhrpUyp78356oqd2umfp4P
+ 24Hzyag3bG4mtM4LImJYvpyVZSjjbb3ch8SAy/ObwlMl7mL8IaZOfS0LImn4kn+/7jPh
+ VHEpIIPa4R+sn+uGDLwbc06lqJQqMX9zemhHlPm7ACukXagCIs+Uaoz8wZbCFs/alvBE
+ G2Q1cqXJaadk0IzZMysUy7HLg1eElSJrKiJM1RXjV4t4fUoBN/ytk8ohS3FhBYwkZpmu
+ wRyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=Ak1MELy64MVFTjZtGG5oZHevqS7oZZr0pksQQpBgw3Y=;
- b=AmJ4nkXkUaoerYPesQePn8BQV2X/kaIUtEALweORljolbyL0vwE2PDia5fDHbpMFih
- 1a68LY8ZZ5wPQIrU+04ymo8s2mMpgyfxDqyk6ndnnBpNF/ayaTQuBR05HNjF8UnpsTTo
- vWZxJBcYwggpX5LYEQdc6DFSxZSrvVKGU2RuVcxBGpo7X3G0KHOyNiSbmUQR13oQkPVB
- t4ytAIcIAzJVnj47MZ8pHP7KLQEWm/Erb+Q9cmvuB3EhIpDTyYqzVS/NgumEsi/gDMYc
- jOu+aF7pcMZnEhfTwldXC1kcUFwGDBzBObaVQfcOCY7O4YwSo7zgBbp2yQd7efsBPQ0o
- ty5w==
-X-Gm-Message-State: AOAM532l6bKWfo9tlXdc0XwSx67cmZK6h5+F7voCLcC+9NAu2k/PVagX
- T7TRnTDUMjmdRJDVSvtaa2Y=
-X-Google-Smtp-Source: ABdhPJzZu5dLEd5ReCUReHJCEUSG2jvoTvmvHJa8GyaH5SzFgIXNTHPR6QzDBMlnSUtWTDXGOjEdrQ==
-X-Received: by 2002:a5d:5704:: with SMTP id a4mr939876wrv.318.1598953504454;
- Tue, 01 Sep 2020 02:45:04 -0700 (PDT)
+ bh=pMHxOd1xmexKs5hKKnIg6aoAiTlQCCuJV5AAWGMAY/4=;
+ b=TOYCZ1/FniJJxLER0YPTvXs7imgJVHNyNeyxPW1rlEcbDYKmKHSTQO7WwDjTEr3V6K
+ ItzcNA727CjAJ8g44PtiCme+gOA4RJNGucq39seyPPcrgOX2rZfeVKYM/x1Gcm2fPJRj
+ FFfTgPHAKSBsPSfpHq9F2KLc9h6o7Uiq41NPBmtPFSeBipuLcAhAsWPIyh/2BbXHi0lZ
+ Hh1fGGAvwA+fZPYs0AYS7hgR/WyT9x8aTZJkk3gcpSNccA/EHrgGB3y0ddsXSskMJaTs
+ hG4fOODPDJ+sOSMjLsinFhvDK9Kqu0+smuxUwVMjHJkDAco7F5H6bjZxSiDMsiXdDPRO
+ W3lw==
+X-Gm-Message-State: AOAM533imD2cE90+wcgg+rqULNIizacw+WaBiwEi1N55phNF8e3c9/Ms
+ hLjhLK4s4IxEL5kqHDN+V3Q=
+X-Google-Smtp-Source: ABdhPJzEh8NeHpY6Ec+Vl87vK9bdLEp9C4l4dQ7Mwxlo7einF6AwCfUmpXC5lL2H080st9yYuS6B5Q==
+X-Received: by 2002:a7b:c255:: with SMTP id b21mr933972wmj.17.1598953618870;
+ Tue, 01 Sep 2020 02:46:58 -0700 (PDT)
 Received: from [192.168.1.36] (50.red-83-52-54.dynamicip.rima-tde.net.
  [83.52.54.50])
- by smtp.gmail.com with ESMTPSA id l8sm1443299wrx.22.2020.09.01.02.45.03
+ by smtp.gmail.com with ESMTPSA id m8sm1335593wro.75.2020.09.01.02.46.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Sep 2020 02:45:03 -0700 (PDT)
+ Tue, 01 Sep 2020 02:46:58 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v3 12/16] hw/arm: xlnx: Set all boards' GEM 'phy-addr'
- property value to 23
+Subject: Re: [PATCH v3 13/16] hw/riscv: microchip_pfsoc: Connect 2 Cadence GEMs
 To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
  <Alistair.Francis@wdc.com>, Palmer Dabbelt <palmerdabbelt@google.com>,
  qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <alistair@alistair23.me>, Jason Wang <jasowang@redhat.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-arm@nongnu.org,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
 References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
- <1598924352-89526-13-git-send-email-bmeng.cn@gmail.com>
+ <1598924352-89526-14-git-send-email-bmeng.cn@gmail.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <7df18804-3a54-321b-8aa5-4e07a93a1318@amsat.org>
-Date: Tue, 1 Sep 2020 11:45:03 +0200
+Message-ID: <b29eb839-30ee-ef0f-4241-540f16295e45@amsat.org>
+Date: Tue, 1 Sep 2020 11:46:57 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <1598924352-89526-13-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1598924352-89526-14-git-send-email-bmeng.cn@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::441;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x441.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::343;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x343.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -38
@@ -90,30 +88,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2020 09:45:08 -0000
+X-List-Received-Date: Tue, 01 Sep 2020 09:47:03 -0000
 
 On 9/1/20 3:39 AM, Bin Meng wrote:
 > From: Bin Meng <bin.meng@windriver.com>
 > 
-> When cadence_gem model was created for Xilinx boards, the PHY address
-> was hard-coded to 23 in the GEM model. Now that we have introduced a
-> property we can use that to tell GEM model what our PHY address is.
-> Change all boards' GEM 'phy-addr' property value to 23, and set the
-> PHY address default value to 0 in the GEM model.
+> Microchip PolarFire SoC integrates 2 Candence GEMs to provide
+> IEEE 802.3 standard-compliant 10/100/1000 Mbps ethernet interface.
+> 
+> On the Icicle Kit board, GEM0 connects to a PHY at address 8 while
+> GEM1 connects to a PHY at address 9.
+> 
+> The 2nd stage bootloader (U-Boot) is using GEM1 by default, so we
+> must specify 2 '-nic' options from the command line in order to get
+> a working ethernet.
 > 
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> 
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
 > 
-> Changes in v3:
-> - use the correct (Object *) to set the 'phy-addr' in xlnx-zynqmp.c
+> (no changes since v1)
 > 
->  hw/arm/xilinx_zynq.c | 1 +
->  hw/arm/xlnx-versal.c | 1 +
->  hw/arm/xlnx-zynqmp.c | 2 ++
->  hw/net/cadence_gem.c | 6 +++---
->  4 files changed, 7 insertions(+), 3 deletions(-)
-> 
+>  include/hw/riscv/microchip_pfsoc.h |  7 +++++++
+>  hw/riscv/microchip_pfsoc.c         | 39 ++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 46 insertions(+)
 
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
