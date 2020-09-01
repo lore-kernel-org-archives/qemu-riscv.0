@@ -1,101 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kCs1t-0007lI-Uk
-	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 18:11:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58308)
+	id 1kCvHj-0003tS-LQ
+	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 21:40:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40796)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kCs1s-0007kU-6e
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 18:11:56 -0400
-Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:52474)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kCvHh-0003qx-Kt; Mon, 31 Aug 2020 21:40:29 -0400
+Received: from mail-pj1-x1043.google.com ([2607:f8b0:4864:20::1043]:55723)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kCs1p-0007fa-Nv
- for qemu-riscv@nongnu.org; Mon, 31 Aug 2020 18:11:55 -0400
-Received: by mail-pj1-x1042.google.com with SMTP id o16so656629pjr.2
- for <qemu-riscv@nongnu.org>; Mon, 31 Aug 2020 15:11:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=PH2RCbNEIaLhQ86NxGfy7qBIeGRthZo3i/8Dmi3lax0=;
- b=KvnRRUTnd/5QvDOn6OMc5rfq5gF7hJSDAC4DssiiKpDawFgv/IjxYfzaPuueMJK1dw
- cRuaY+H1utJG+L/oyhWvZsyShv7WMEwK4lmKw8QJ9+W3hiMwbLyKYyDNNQr1yG1B5a3q
- 7FNPxs88Eq0Glz9weNy0J+E5x+/YXFGQTPh8pNdqr3BIk+Ydtzvuv1+t1GDLpOVquovq
- +bSwMx8jTqfXHDZzbG/E5FCqsweQrUSLyGoD+GDpCyzDB0kQVlsM82yJdOwOa8Zly+Uq
- /TasIU9Q7OvkxqPUSW5e09fkeJOH/cysg9SH79ptf530yVeiuMnFRDfOztoGf5x9EVAj
- 7fjQ==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kCvHf-0005UN-Go; Mon, 31 Aug 2020 21:40:29 -0400
+Received: by mail-pj1-x1043.google.com with SMTP id 2so869496pjx.5;
+ Mon, 31 Aug 2020 18:40:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=wQPHkilrQMomooaP59G9Mj9MFPTLkFKqNxNAUzMzLLQ=;
+ b=FJLu19TdNxkNdrY2bQ2PnClhkGo/DTGn9wtJwrXRp88oletXjX250ORXLGNdv/z1k4
+ pBRMl0FfCS5AAS+mZChW70iOJvTaXEIhEbGnatTL/Ay/vmP6KDrYvHbi6zClpUcgNDos
+ Cteh1t74jmUVf5Nct+4BsOI1fBrAe+zfxy58FTrsoNcXjGCtUj5JzE+BZFPrTt77dahO
+ cKrawI6OTBwRoheuEv31/oT3/gGsxayf1aGiTJu43GJdrLrxszsH280a1YMSbO2PIWMo
+ iDH1+jtXuFERUf8fg0jykrcMJ+MS/8EdF4t0eex5x35dDAOexxSIKswq/lTsg0Cfjcjh
+ vENg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=PH2RCbNEIaLhQ86NxGfy7qBIeGRthZo3i/8Dmi3lax0=;
- b=MG4SHVm1I13YiWasx9mzC+18dbB6/6qHeSxFVh8tm1Ur+SL91istCotBNGKZHqwTJh
- JMogKSFZs7ld1p79E3dUHJ8XAwx9sVh1lJOnT+glW84msfB2Q4b0TxgN3GuQz30JItmN
- 6ZiXTX0USlBpSgDNId4VCLvyi9Jt+W+4aJLeQOmJWp8rvqRQHXfxc3TNKlF+jlQedHNj
- zvCOiMow1YvPQtIlHI9NfeU2YYUYpkUleeBArJA4vsG1dWiNTU/4HoHjSbWUlnUEjAsb
- 3ZXQXZnaejloW5iGxvlON7lbEqLbxoXyzR4dnhp+/mTafsdV0PMYSmY14jspPoa4ZvPB
- 9q1g==
-X-Gm-Message-State: AOAM532pdNiHhsXRf8Ay0yXPQdN/+Edo+38ePI6XmU/5Fyf3WYYPgvfP
- MnF1ssrkVkWYWP9NRnWPXc0Cgg==
-X-Google-Smtp-Source: ABdhPJyHeAhyq90Hw33BP93AMzx+wEo1MdvVb9FmV0StgvoewtulFfAzNG2O4KMOTxThoXtAhLT44g==
-X-Received: by 2002:a17:902:6ac9:: with SMTP id
- i9mr2726606plt.128.1598911912064; 
- Mon, 31 Aug 2020 15:11:52 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id 2sm590033pjg.32.2020.08.31.15.11.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Aug 2020 15:11:50 -0700 (PDT)
-Subject: Re: [PATCH v2 7/7] target: Push BQL on ->cpu_exec_interrupt down into
- per-arch implementation
-To: Robert Foley <robert.foley@linaro.org>, qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Sarah Harris <S.E.Harris@kent.ac.uk>, Cornelia Huck <cohuck@redhat.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- David Hildenbrand <david@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Thomas Huth <thuth@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Max Filippov <jcmvbkbc@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Guan Xuetao <gxt@mprc.pku.edu.cn>, Eduardo Habkost <ehabkost@redhat.com>,
- Marek Vasut <marex@denx.de>, Yoshinori Sato <ysato@users.sourceforge.jp>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
- Richard Henderson <rth@twiddle.net>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>,
- "open list:ARM TCG CPUs" <qemu-arm@nongnu.org>,
- Michael Rolnik <mrolnik@gmail.com>, pbonzini@redhat.com,
- Stafford Horne <shorne@gmail.com>, alex.bennee@linaro.org,
- David Gibson <david@gibson.dropbear.id.au>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ bh=wQPHkilrQMomooaP59G9Mj9MFPTLkFKqNxNAUzMzLLQ=;
+ b=sObikaPm6PYHvzioaQvSWV/zp+RhRV94Q9fQA6S3LRa/MlMV7fkEtQBaIRgLIfdE1p
+ tPeniN910g2CkJ8cQOxBsx8ncw+WbtUv+28s63WWoQpr67RERQ7MdNJQi1sVbGpM6RVB
+ +SkXu9nFD+NbKnvWnRevFN7T1kyU1CX9MqTk8yJU01eP9VGR6T+ffQ4PgLxqyUf0ZxK+
+ bndyTFHUF1IxvklYwjQ9Xv/5QaCK02hjhMcWOFGHbrky1TuR4gPPVkiUbKqOZ0GOVFV1
+ FFSW+XmU/S+sAw2eP69D66WXNrcipTOW3I4OvFaX+p56bwa3yqJKC3UFUsDiBq4MRjps
+ pWRQ==
+X-Gm-Message-State: AOAM531+j2gQ3e+lvoUgBqAv/p1e18P4+Okc8Rr2vpVgccqJVaLC6zhm
+ AyFbh3Nz2gryspASb1kFSXs=
+X-Google-Smtp-Source: ABdhPJxWCkDKVN5uLWEFtn5UytjeR8AGK3wDy6lRRNlihvVal9b8mvFC24GOUEbBGYFNC8rr2yaWqw==
+X-Received: by 2002:a17:902:bc87:: with SMTP id
+ bb7mr3331774plb.146.1598924424998; 
+ Mon, 31 Aug 2020 18:40:24 -0700 (PDT)
+Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
+ [147.11.146.144])
+ by smtp.gmail.com with ESMTPSA id l13sm8887520pgq.33.2020.08.31.18.40.20
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 31 Aug 2020 18:40:24 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair@alistair23.me>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Chris Wulff <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
- Michael Walle <michael@walle.cc>, Palmer Dabbelt <palmer@dabbelt.com>,
- peter.puhov@linaro.org, Aurelien Jarno <aurelien@aurel32.net>
-References: <20200819182856.4893-1-robert.foley@linaro.org>
- <20200819182856.4893-8-robert.foley@linaro.org>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <42dc8454-9835-fc52-a7e2-73835672f3f9@linaro.org>
-Date: Mon, 31 Aug 2020 15:11:48 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Jason Wang <jasowang@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-arm@nongnu.org
+Subject: [PATCH v3 00/16] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
+ board support
+Date: Tue,  1 Sep 2020 09:38:55 +0800
+Message-Id: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <20200819182856.4893-8-robert.foley@linaro.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1042;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1042.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1043;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1043.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.13,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -108,44 +88,156 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2020 22:11:56 -0000
+X-List-Received-Date: Tue, 01 Sep 2020 01:40:30 -0000
 
-On 8/19/20 11:28 AM, Robert Foley wrote:
-> diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-> index 499a8bdc5e..c4e54baa6f 100644
-> --- a/accel/tcg/cpu-exec.c
-> +++ b/accel/tcg/cpu-exec.c
-> @@ -599,7 +599,6 @@ static inline bool cpu_handle_interrupt(CPUState *cpu,
->             True when it is, and we should restart on a new TB,
->             and via longjmp via cpu_loop_exit.  */
->          else {
-> -            qemu_mutex_lock_iothread();
->              if (cc->cpu_exec_interrupt(cpu, interrupt_request)) {
->                  replay_interrupt();
->                  /*
-> @@ -614,7 +613,6 @@ static inline bool cpu_handle_interrupt(CPUState *cpu,
->              /* The target hook may have updated the 'cpu->interrupt_request';
->               * reload the 'interrupt_request' value */
->              interrupt_request = cpu_interrupt_request(cpu);
-> -            qemu_mutex_unlock_iothread();
->          }
->          if (interrupt_request & CPU_INTERRUPT_EXITTB) {
->              cpu_reset_interrupt(cpu, CPU_INTERRUPT_EXITTB);
+From: Bin Meng <bin.meng@windriver.com>
 
-I think you need a change to patch 5, because this patch reduces the scope
-further, around cpu_interrupt_request, etc.
+This adds support for Microchip PolarFire SoC Icicle Kit board.
+The Icicle Kit board integrates a PolarFire SoC, with one SiFive's
+E51 plus four U54 cores and many on-chip peripherals and an FPGA.
 
-I think patch 5 should have
+For more details about Microchip PolarFire SoC, please see:
+https://www.microsemi.com/product-directory/soc-fpgas/5498-polarfire-soc-fpga
 
-+    bool success;
-+    qemu_mutex_lock_iothread();
-+    success = cc->cpu_exec_interrupt(cpu, interrupt_request);
-+    qemu_mutex_unlok_iothread();
-+    if (success) {
--    if (cc->cpu_exec_interrupt(cpu, interrupt_request)) {
+The Icicle Kit board information can be found here:
+https://www.microsemi.com/existing-parts/parts/152514
 
-That way this patch maintains the scope of the lock.
+Unlike SiFive FU540, the RISC-V core resect vector is at 0x20220000.
+The RISC-V CPU and HART codes has been updated to set the core's
+reset vector based on a configurable property from machine codes.
 
+The following perepherals are created as an unimplemented device:
 
-r~
+- Bus Error Uint 0/1/2/3/4
+- L2 cache controller
+- SYSREG
+- MPUCFG
+- IOSCBCFG
+- GPIO
+
+The following perepherals are emulated:
+- SiFive CLINT
+- SiFive PLIC
+- PolarFire SoC Multi-Mode UART
+- SiFive PDMA
+- Cadence eMMC/SDHCI controller
+- Cadence Gigabit Ethernet MAC
+
+The BIOS image used by this machine is hss.bin, aka Hart Software
+Services, which can be built from:
+https://github.com/polarfire-soc/hart-software-services
+
+To launch this machine:
+$ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
+    -bios path/to/hss.bin -sd path/to/sdcard.img \
+    -nic tap,ifname=tap,script=no,model=cadence_gem \
+    -display none -serial stdio \
+    -chardev socket,id=serial1,path=serial1.sock,server,wait \
+    -serial chardev:serial1
+
+The memory is set to 1 GiB by default to match the hardware.
+A sanity check on ram size is performed in the machine init routine
+to prompt user to increase the RAM size to > 1 GiB when less than
+1 GiB ram is detected.
+
+HSS output is on the first serial port (stdio) and U-Boot/Linux
+outputs on the 2nd serial port. OpenSBI outputs on a random serial
+port due to the lottery mechanism used during the multi-core boot.
+
+Please check the QEMU WiKi page for the target specific information:
+https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
+
+Changes in v3:
+- rebase on qemu/master
+- change MCHP_PFSOC_DMA to SIFIVE_PDMA
+- use the correct (Object *) to set the 'phy-addr' in xlnx-zynqmp.c
+
+Changes in v2:
+- change to update hw/char/meson.build
+- add impl.min_access_size and impl.max_access_size as part of
+  MemoryRegionOps and remove the allignment check
+- change to update hw/sd/meson.build
+- change the name to "generic-sdhci" when calling object_initialize_child()
+- add a container MR to simplify out-of-bounds access checks
+- do not initialize TYPE_SYSBUS_SDHCI in the SoC instance_init(),
+  instead move that to the cadence_sdhci model
+- do not access generic-sdhci's state directly,
+  instead move that to the cadence_sdhci model
+- change to update hw/dma/meson.build
+- rename the file names to sifive_pdma.[c|h]
+- update irq number to 8 per the SiFive FU540 manual
+- fix the register offset for channel 1/2/3 in the read/write ops
+- connect 8 IRQs to the PLIC
+- change "phy-addr" default value to BOARD_PHY_ADDRESS
+
+Bin Meng (16):
+  target/riscv: cpu: Add a new 'resetvec' property
+  hw/riscv: hart: Add a new 'resetvec' property
+  target/riscv: cpu: Set reset vector based on the configured property
+    value
+  hw/riscv: Initial support for Microchip PolarFire SoC Icicle Kit board
+  hw/char: Add Microchip PolarFire SoC MMUART emulation
+  hw/riscv: microchip_pfsoc: Connect 5 MMUARTs
+  hw/sd: Add Cadence SDHCI emulation
+  hw/riscv: microchip_pfsoc: Connect a Cadence SDHCI controller and an
+    SD card
+  hw/dma: Add SiFive platform DMA controller emulation
+  hw/riscv: microchip_pfsoc: Connect a DMA controller
+  hw/net: cadence_gem: Add a new 'phy-addr' property
+  hw/arm: xlnx: Set all boards' GEM 'phy-addr' property value to 23
+  hw/riscv: microchip_pfsoc: Connect 2 Cadence GEMs
+  hw/riscv: microchip_pfsoc: Hook GPIO controllers
+  hw/riscv: clint: Avoid using hard-coded timebase frequency
+  hw/riscv: sifive_u: Connect a DMA controller
+
+ default-configs/riscv64-softmmu.mak |   1 +
+ include/hw/char/mchp_pfsoc_mmuart.h |  61 +++++
+ include/hw/dma/sifive_pdma.h        |  57 +++++
+ include/hw/net/cadence_gem.h        |   2 +
+ include/hw/riscv/microchip_pfsoc.h  | 133 +++++++++++
+ include/hw/riscv/riscv_hart.h       |   1 +
+ include/hw/riscv/sifive_clint.h     |   4 +-
+ include/hw/riscv/sifive_u.h         |  11 +
+ include/hw/sd/cadence_sdhci.h       |  47 ++++
+ target/riscv/cpu.h                  |   7 +-
+ hw/arm/xilinx_zynq.c                |   1 +
+ hw/arm/xlnx-versal.c                |   1 +
+ hw/arm/xlnx-zynqmp.c                |   2 +
+ hw/char/mchp_pfsoc_mmuart.c         |  86 +++++++
+ hw/dma/sifive_pdma.c                | 313 ++++++++++++++++++++++++++
+ hw/net/cadence_gem.c                |   7 +-
+ hw/riscv/microchip_pfsoc.c          | 437 ++++++++++++++++++++++++++++++++++++
+ hw/riscv/opentitan.c                |   1 +
+ hw/riscv/riscv_hart.c               |   3 +
+ hw/riscv/sifive_clint.c             |  26 ++-
+ hw/riscv/sifive_e.c                 |   4 +-
+ hw/riscv/sifive_u.c                 |  35 ++-
+ hw/riscv/spike.c                    |   3 +-
+ hw/riscv/virt.c                     |   3 +-
+ hw/sd/cadence_sdhci.c               | 193 ++++++++++++++++
+ target/riscv/cpu.c                  |   8 +-
+ target/riscv/cpu_helper.c           |   4 +-
+ target/riscv/csr.c                  |   4 +-
+ MAINTAINERS                         |   9 +
+ hw/char/Kconfig                     |   3 +
+ hw/char/meson.build                 |   1 +
+ hw/dma/Kconfig                      |   3 +
+ hw/dma/meson.build                  |   1 +
+ hw/riscv/Kconfig                    |  10 +
+ hw/riscv/meson.build                |   1 +
+ hw/sd/Kconfig                       |   4 +
+ hw/sd/meson.build                   |   1 +
+ 37 files changed, 1459 insertions(+), 29 deletions(-)
+ create mode 100644 include/hw/char/mchp_pfsoc_mmuart.h
+ create mode 100644 include/hw/dma/sifive_pdma.h
+ create mode 100644 include/hw/riscv/microchip_pfsoc.h
+ create mode 100644 include/hw/sd/cadence_sdhci.h
+ create mode 100644 hw/char/mchp_pfsoc_mmuart.c
+ create mode 100644 hw/dma/sifive_pdma.c
+ create mode 100644 hw/riscv/microchip_pfsoc.c
+ create mode 100644 hw/sd/cadence_sdhci.c
+
+-- 
+2.7.4
+
 
