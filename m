@@ -1,73 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kCzKH-0007P1-VF
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 01:59:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40744)
+	id 1kD0cv-0004OY-RA
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Sep 2020 03:22:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57820)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <natechancellor@gmail.com>)
- id 1kCzKF-0007MQ-Gp; Tue, 01 Sep 2020 01:59:23 -0400
-Received: from mail-qk1-x742.google.com ([2607:f8b0:4864:20::742]:43755)
+ (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
+ id 1kD0cu-0004O5-Ph
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2020 03:22:44 -0400
+Received: from mail-qk1-x744.google.com ([2607:f8b0:4864:20::744]:37199)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <natechancellor@gmail.com>)
- id 1kCzKD-0006zw-UE; Tue, 01 Sep 2020 01:59:23 -0400
-Received: by mail-qk1-x742.google.com with SMTP id o64so8444654qkb.10;
- Mon, 31 Aug 2020 22:59:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ATehQTFPQGDP5m0IRjqr98dUqF4iMmiSLriTP7c5fYg=;
- b=uuM+jyk94GY6iqWA9IFSCCFLcRL1DjWzwMFmC2GvU5HgxjO+mseZ0XDi93dnmduNNP
- XtNo8NyUexmkM1XWUSIdRQDB9HoDDnhPESy+eAY5qZbq/qV19DXdp3wsQERLH6Y9BHoa
- 9AderZSFFcAY9I6wYGgOqpziptLR6KlZehmPRSx5hTfgfoiH+J+YIBRPxuMtT5SENStc
- Zq05NWUYuJgPN3dfmv3EO6+byGsijw3slkyTe+z9jySt9V99ajNDMN/xIuAdGASgdPZD
- nmVBfzQZdclvKCr9/WNH3pZDW7fkAh+cal9OAjHPKdq3Gur4WGbmqT6uM/5w6uHqetpv
- mWIw==
+ (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
+ id 1kD0cs-0008NY-Rj
+ for qemu-riscv@nongnu.org; Tue, 01 Sep 2020 03:22:44 -0400
+Received: by mail-qk1-x744.google.com with SMTP id b14so96902qkn.4
+ for <qemu-riscv@nongnu.org>; Tue, 01 Sep 2020 00:22:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Fzl3V/fzSJoJLMxxy5h00MuVHG+2CUth3EhTKYo7jC4=;
+ b=B27VaGb0SeupYxUdMeRH4eyn3Cr9MH4ELQYYy8+7IN/v7jjiA80st+HaRyEeeIqnxx
+ wC5tAJr/vfIZX0foCQDVPdsnemvC4vDceNI+JQ3UZgYTASi4TgJtc0U0dNAfH2ZLo6Mm
+ 6kRKnH4xAwYjGagutLNRYiugbZ8PhWyXcWbegw+NpxqNJ3Z0qbmLa2pXLjAAecKwrCA1
+ eyFjir3RlbBXCfVzwLH2SUtjoNmQT25+Je2fw03UWr+Z15strD1cH33kKWXcS3APZxaw
+ JRklU5iTtbTnZjDWAe2jPiHY/iumEgnClMNMPwM6x8PR89tMPaKKA59hHV/oufAFcTWU
+ fNEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ATehQTFPQGDP5m0IRjqr98dUqF4iMmiSLriTP7c5fYg=;
- b=nqyeFdm9QWmr/ErS5XjCeyYKy7ijxH0r9BeEeIms/TeKN+kqX8cShC4ZFrlf7yDW6Z
- 3tG9T7rnd1biiZvZYP2f1McHq4kj0G9xqYWBiqO+vWKbi+YTJzLJWD5OIcEarEUYVjpi
- qwbIRRkZl66GYKuRaQhV8HieMYU9YCcUnz4BbmTWrZjNTjGrorJh1ZLZllkLlbM2TNkQ
- 7EfbPumF997Z5t4j1/cmzP6QjOl+ntuO2yhhYcXBCeacK1nY1EBJMtt9uzLZ+H4SKsIz
- gWc6iu4CkVYuRxoQFi/jfkzishN8xzNXYBkqjalpg638iw3QB3xatXFqKe7FLSV3PT7o
- N3QQ==
-X-Gm-Message-State: AOAM5332lfY3cTX9GZBAq9hdGc7StgD8EnvudQMbLw2N0T1LmnmamjrL
- w84tDuHKwjor/xnme18a15U=
-X-Google-Smtp-Source: ABdhPJz7AXvxYGepdIbRBFn52dQ+6eeq5XBhKmR+ZTBXbCWFp6FHVzQ6ReLBNRL/FZOTete79ZcNPw==
-X-Received: by 2002:a05:620a:21d2:: with SMTP id
- h18mr253737qka.407.1598939959567; 
- Mon, 31 Aug 2020 22:59:19 -0700 (PDT)
-Received: from localhost.localdomain ([2604:1380:45d1:2600::1])
- by smtp.gmail.com with ESMTPSA id b9sm129026qtt.39.2020.08.31.22.59.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Aug 2020 22:59:18 -0700 (PDT)
-From: Nathan Chancellor <natechancellor@gmail.com>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Nathan Chancellor <natechancellor@gmail.com>,
- qemu-stable@nongnu.org
-Subject: [PATCH] riscv: sifive_test: Allow 16-bit writes to memory region
-Date: Mon, 31 Aug 2020 22:58:23 -0700
-Message-Id: <20200901055822.2721209-1-natechancellor@gmail.com>
-X-Mailer: git-send-email 2.28.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Fzl3V/fzSJoJLMxxy5h00MuVHG+2CUth3EhTKYo7jC4=;
+ b=j257VLOy+to4tTa/1ttx8MEeMVOYZceSJFv0P2A7bKUccb0P+pV2ajQCstZgDHC+c6
+ B7eykN2q7w2Xu9aiVwRFVmiqij/GObOIqjemyyuZRK9RG2m0xo5TgBtg3IE1gkpZ7qR+
+ 3IvaBK+HArGuNtgJJ463Og5fDu65x/6P5pRNWhP71MhRvBqnhCbLrasEyhEc5KGUzeFj
+ rw7MlsTphC6czUtgVyPGuLFli/bz5B82x9QjDCbX7m7thMNa2SNgR+Vu1qtB2iqgUxWI
+ ZNQV2joJ68FHyDTxkX4vVbHmxQn2pfXizXyA6TOnf3XcUmh1ct6za0rSUvv4p1XOdZHd
+ GayQ==
+X-Gm-Message-State: AOAM530QNjK26/PZjOeZ96yow4ROwmnFn8bB6Z4oFMTN3LrTLY2tTHkb
+ e9RudDNC4EOxWCWbNnHIGEOfICjGt9Kly9X1+zMKEg==
+X-Google-Smtp-Source: ABdhPJxiMDGTn1eUGPaccpP1jLAmLec+ihmGiexxVFXJCigwP8cviCxd0AoQbr5WXZirHr1b/Zr3MHARsY6LJi4W0aY=
+X-Received: by 2002:a05:620a:15ac:: with SMTP id
+ f12mr509657qkk.19.1598944961109; 
+ Tue, 01 Sep 2020 00:22:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::742;
- envelope-from=natechancellor@gmail.com; helo=mail-qk1-x742.google.com
+References: <20200827074638.21451-1-green.wan@sifive.com>
+ <20200827074638.21451-2-green.wan@sifive.com>
+ <CAEUhbmUXDiBHzy=CMQAYVzt0NY-JK_KVn-QL-Equw6pRxEiu8w@mail.gmail.com>
+In-Reply-To: <CAEUhbmUXDiBHzy=CMQAYVzt0NY-JK_KVn-QL-Equw6pRxEiu8w@mail.gmail.com>
+From: Green Wan <green.wan@sifive.com>
+Date: Tue, 1 Sep 2020 15:22:30 +0800
+Message-ID: <CAJivOr564gqdmTdFe=3REXYYbW29Sg_1VOOpYZMFP8GPyvascw@mail.gmail.com>
+Subject: Re: [RFC PATCH v4 1/2] hw/riscv: sifive_u: Add backend drive support
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::744;
+ envelope-from=green.wan@sifive.com; helo=mail-qk1-x744.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,70 +79,157 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2020 05:59:23 -0000
+X-List-Received-Date: Tue, 01 Sep 2020 07:22:45 -0000
 
-When shutting down the machine running a mainline Linux kernel, the
-following error happens:
+Hi Bin,
 
-$ build/riscv64-softmmu/qemu-system-riscv64 -bios default -M virt \
-    -display none -initrd rootfs.cpio -kernel Image -m 512m \
-    -nodefaults -serial mon:stdio
-...
-Requesting system poweroff
-[    4.999630] reboot: Power down
-sbi_trap_error: hart0: trap handler failed (error -2)
-sbi_trap_error: hart0: mcause=0x0000000000000007 mtval=0x0000000000100000
-sbi_trap_error: hart0: mepc=0x000000008000d4cc mstatus=0x0000000000001822
-sbi_trap_error: hart0: ra=0x000000008000999e sp=0x0000000080015c78
-sbi_trap_error: hart0: gp=0xffffffe000e76610 tp=0xffffffe0081b89c0
-sbi_trap_error: hart0: s0=0x0000000080015c88 s1=0x0000000000000040
-sbi_trap_error: hart0: a0=0x0000000000000000 a1=0x0000000080004024
-sbi_trap_error: hart0: a2=0x0000000080004024 a3=0x0000000080004024
-sbi_trap_error: hart0: a4=0x0000000000100000 a5=0x0000000000005555
-sbi_trap_error: hart0: a6=0x0000000000004024 a7=0x0000000080011158
-sbi_trap_error: hart0: s2=0x0000000000000000 s3=0x0000000080016000
-sbi_trap_error: hart0: s4=0x0000000000000000 s5=0x0000000000000000
-sbi_trap_error: hart0: s6=0x0000000000000001 s7=0x0000000000000000
-sbi_trap_error: hart0: s8=0x0000000000000000 s9=0x0000000000000000
-sbi_trap_error: hart0: s10=0x0000000000000000 s11=0x0000000000000008
-sbi_trap_error: hart0: t0=0x0000000000000000 t1=0x0000000000000000
-sbi_trap_error: hart0: t2=0x0000000000000000 t3=0x0000000000000000
-sbi_trap_error: hart0: t4=0x0000000000000000 t5=0x0000000000000000
-sbi_trap_error: hart0: t6=0x0000000000000000
+Thanks for the remindings. I didn't notice the write operation and
+will add the write functionality based on bit by bit mechanism.
 
-The kernel does a 16-bit write when powering off the machine, which
-was allowed before commit 5d971f9e67 ("memory: Revert "memory: accept
-mismatching sizes in memory_region_access_valid""). Make min_access_size
-match reality so that the machine can shut down properly now.
+Regards,
+Green
 
-Cc: qemu-stable@nongnu.org
-Fixes: 88a07990fa ("SiFive RISC-V Test Finisher")
-Fixes: 5d971f9e67 ("memory: Revert "memory: accept mismatching sizes in memory_region_access_valid"")
-Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
----
 
-Please let me know if the tags are wrong or inappropriate, this is my
-first QEMU patch.
-
- hw/riscv/sifive_test.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
-index 0c78fb2c93..8c70dd69df 100644
---- a/hw/riscv/sifive_test.c
-+++ b/hw/riscv/sifive_test.c
-@@ -59,7 +59,7 @@ static const MemoryRegionOps sifive_test_ops = {
-     .write = sifive_test_write,
-     .endianness = DEVICE_NATIVE_ENDIAN,
-     .valid = {
--        .min_access_size = 4,
-+        .min_access_size = 2,
-         .max_access_size = 4
-     }
- };
-
-base-commit: 2f4c51c0f384d7888a04b4815861e6d5fd244d75
--- 
-2.28.0
-
+On Fri, Aug 28, 2020 at 8:54 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> Hi Green,
+>
+> On Thu, Aug 27, 2020 at 3:47 PM Green Wan <green.wan@sifive.com> wrote:
+> >
+> > Add '-drive' support to OTP device. Allow users to assign a raw file
+> > as OTP image.
+> >
+> > Signed-off-by: Green Wan <green.wan@sifive.com>
+> > ---
+> >  hw/riscv/sifive_u_otp.c         | 50 +++++++++++++++++++++++++++++++++
+> >  include/hw/riscv/sifive_u_otp.h |  2 ++
+> >  2 files changed, 52 insertions(+)
+> >
+> > diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
+> > index f6ecbaa2ca..aab2220494 100644
+> > --- a/hw/riscv/sifive_u_otp.c
+> > +++ b/hw/riscv/sifive_u_otp.c
+> > @@ -24,6 +24,8 @@
+> >  #include "qemu/log.h"
+> >  #include "qemu/module.h"
+> >  #include "hw/riscv/sifive_u_otp.h"
+> > +#include "sysemu/blockdev.h"
+> > +#include "sysemu/block-backend.h"
+> >
+> >  static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
+> >  {
+> > @@ -46,6 +48,16 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
+> >          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
+> >              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
+> >              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
+> > +
+> > +            /* read from backend */
+> > +            if (s->blk) {
+> > +                int32_t buf;
+> > +
+> > +                blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
+> > +                          SIFIVE_U_OTP_FUSE_WORD);
+> > +                return buf;
+> > +            }
+> > +
+> >              return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
+> >          } else {
+> >              return 0xff;
+> > @@ -123,6 +135,12 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
+> >          s->ptrim = val32;
+> >          break;
+> >      case SIFIVE_U_OTP_PWE:
+> > +        /* write to backend */
+> > +        if (s->blk) {
+> > +            blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &val32,
+>
+> The logic looks wrong to me. According to the U-Boot driver
+> (sifive-otp.c) the content to be written to the OTP memory comes from
+> s->pdin bit by bit. Here val32 represents whether to disable write or
+> enable write.
+>
+> I think we should arrange patches like this:
+>
+> patch 1 to add OTP write functionality, to the existing s->fuse[] mechanism
+> patch 2 to add file based backend write support
+>
+> > +                       SIFIVE_U_OTP_FUSE_WORD, 0);
+> > +        }
+> > +
+> >          s->pwe = val32;
+> >          break;
+> >      default:
+> > @@ -143,16 +161,48 @@ static const MemoryRegionOps sifive_u_otp_ops = {
+> >
+> >  static Property sifive_u_otp_properties[] = {
+> >      DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
+> > +    DEFINE_PROP_DRIVE("drive", SiFiveUOTPState, blk),
+> >      DEFINE_PROP_END_OF_LIST(),
+> >  };
+> >
+> >  static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
+> >  {
+> >      SiFiveUOTPState *s = SIFIVE_U_OTP(dev);
+> > +    DriveInfo *dinfo;
+> >
+> >      memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_u_otp_ops, s,
+> >                            TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
+> >      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
+> > +
+> > +    dinfo = drive_get_next(IF_NONE);
+> > +    if (dinfo) {
+> > +        int ret;
+> > +        uint64_t perm;
+> > +        int filesize;
+> > +        BlockBackend *blk;
+> > +
+> > +        blk = blk_by_legacy_dinfo(dinfo);
+> > +        filesize = SIFIVE_U_OTP_NUM_FUSES * SIFIVE_U_OTP_FUSE_WORD;
+> > +        if (blk_getlength(blk) < filesize) {
+> > +            qemu_log_mask(LOG_GUEST_ERROR, "OTP drive size < 16K\n");
+> > +            return;
+> > +        }
+> > +
+> > +        qdev_prop_set_drive(dev, "drive", blk);
+> > +
+> > +        perm = BLK_PERM_CONSISTENT_READ |
+> > +                        (blk_is_read_only(s->blk) ? 0 : BLK_PERM_WRITE);
+> > +        ret = blk_set_perm(s->blk, perm, BLK_PERM_ALL, errp);
+> > +        if (ret < 0) {
+> > +            qemu_log_mask(LOG_GUEST_ERROR, "set perm error.");
+> > +        }
+> > +
+> > +        if (blk_pread(s->blk, 0, s->fuse, filesize) != filesize) {
+> > +            qemu_log_mask(LOG_GUEST_ERROR,
+> > +                          "failed to read the initial flash content");
+> > +            return;
+> > +        }
+> > +    }
+> >  }
+> >
+> >  static void sifive_u_otp_reset(DeviceState *dev)
+> > diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
+> > index 639297564a..13d2552e43 100644
+> > --- a/include/hw/riscv/sifive_u_otp.h
+> > +++ b/include/hw/riscv/sifive_u_otp.h
+> > @@ -43,6 +43,7 @@
+> >
+> >  #define SIFIVE_U_OTP_PA_MASK        0xfff
+> >  #define SIFIVE_U_OTP_NUM_FUSES      0x1000
+> > +#define SIFIVE_U_OTP_FUSE_WORD      4
+> >  #define SIFIVE_U_OTP_SERIAL_ADDR    0xfc
+> >
+> >  #define SIFIVE_U_OTP_REG_SIZE       0x1000
+> > @@ -75,6 +76,7 @@ typedef struct SiFiveUOTPState {
+> >      uint32_t fuse[SIFIVE_U_OTP_NUM_FUSES];
+> >      /* config */
+> >      uint32_t serial;
+> > +    BlockBackend *blk;
+> >  } SiFiveUOTPState;
+> >
+> >  #endif /* HW_SIFIVE_U_OTP_H */
+> > --
+>
+> Regards,
+> Bin
 
