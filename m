@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kCvHy-0004Tm-O9
-	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 21:40:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40872)
+	id 1kCvI1-0004ZM-Uf
+	for mharc-qemu-riscv@gnu.org; Mon, 31 Aug 2020 21:40:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40884)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kCvHx-0004Ru-IY; Mon, 31 Aug 2020 21:40:45 -0400
-Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044]:52562)
+ id 1kCvI0-0004XI-Nk; Mon, 31 Aug 2020 21:40:48 -0400
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:38563)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kCvHv-0005XV-9l; Mon, 31 Aug 2020 21:40:45 -0400
-Received: by mail-pj1-x1044.google.com with SMTP id o16so877014pjr.2;
- Mon, 31 Aug 2020 18:40:42 -0700 (PDT)
+ id 1kCvHy-0005ZR-QT; Mon, 31 Aug 2020 21:40:48 -0400
+Received: by mail-pg1-x544.google.com with SMTP id l191so1761439pgd.5;
+ Mon, 31 Aug 2020 18:40:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=WT5WFwffkEHlQ4n2tCtBx5gPoLvgfcj7uh9M96XbE44=;
- b=CmTC4U6Pi/awR25Nq779Xy01Px+P0BinbQkoJdhSYnvNeKJwvXoc8VlITwixLuJglu
- XI/oF9sAqMl8vasFOJ+yWzhC/X+hc8Uuc6ct5eui3Sr4kpXm/T+TELN9MN7P5lNh6Irl
- 9cA+PgIlwTLvp1XrohxtlRsk/i4WYSPwY3s2DKloOPx3TQedqpyRKtUCG+aK7GU+J2o/
- xBohK2q10Z3vxCoe9QybnnPMiMv3IC5ual5ns8DfjggkA8WrcdabscmVGAeviGn5wviv
- uJuBuezEwY04e6/QedmBF/s6KKNkVDQJqU878SWGkbUDI+GCELhwbLn9M8BqekiyVxKr
- 9jvA==
+ bh=vnuiw/muM6soC9Fx9pcU+x5ClmS6jV/SRavwXbyBRhw=;
+ b=QmPKbgOWBmRVAfYidRDv/LGT+DnPGY+hnS6bseMZuNGbi3GiV662WlJuZCU482dUtx
+ fnBX58Hiyo0QAZonX8tIZd+mBM3nzioD0HJdgvMpi/DjWsUTm+ABlKwJJxHzIAL7Z91n
+ Ss47Y8qySX5jStuxmTzHwK1HtgOqRBf0BXSxxKyA/7hJjCBkRYKNBYipIWdfl7GjT8CD
+ iY5de6nIISll/ysR4CYixswg2eGkYgllysEonvJ1wy/3480XRdCUusJBhugXClCA+SFL
+ mtmzfXqQUGXtx3nMbOYAg+XR1yoZg6fkZ/QOPzIbT2JOg1/Hb1yxZH+v0geFj4LnKvgg
+ /3rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=WT5WFwffkEHlQ4n2tCtBx5gPoLvgfcj7uh9M96XbE44=;
- b=OtaIIrScuJQcQBlUlryTyaKJDgKQPeHn3Ea7ZQfPjqGJmPLYHy9Xcc6ngHmRzM3ANw
- FWbPsN1nGxRB8NETsuUFA8eyIsIc6Je8Vso83CQRHY4BW6u0V3APlq5S/tw6nk6CbcEy
- IxHeAApZwNQADliU/SP2Vhyqs9Ndee3BmUPaWxvuvZ2mG3wfSMYytDz2AxvIeGk7wFrj
- E3YEbezm+9e6AKrmovIG8AlEEY7ffjlPuUVeO4oiK3iGbuwfScD4yJOw74KPRYW4vAZl
- BlMfpUOowyl2dfZu9FDRV7WFaYcPDRbJdfPpZstQ9Bt0mvaSCm/bnvbXvqXyxMAR1MGk
- OMsQ==
-X-Gm-Message-State: AOAM530JvWGoVOJMQYurVW49YOzMwjBL58qcok7FsOe5urbO5TpUN5PL
- fAedjP0JFva8SfgiHw/f1BI=
-X-Google-Smtp-Source: ABdhPJxYxFjouOZTQS9mryBkMN6v0fMJcVG4r2yPGUIhxruI4d02+75q9CuUPNkeMoEeHGDUTlZJXQ==
-X-Received: by 2002:a17:90a:ab02:: with SMTP id
- m2mr2037161pjq.42.1598924441432; 
- Mon, 31 Aug 2020 18:40:41 -0700 (PDT)
+ bh=vnuiw/muM6soC9Fx9pcU+x5ClmS6jV/SRavwXbyBRhw=;
+ b=GYvJv2gy54NigoNMm5rrW+uyy0A+Jm4vvCIs7MCZLziLMx3Sd4nP0/RtVkGgEb5FYz
+ dalEcDBhEMgUxBN6imcIZfv3jeYvrStLKdTmrhO1pVBJdrCkgSF4KAJZmalaR46FOZei
+ FDr8UJ4ebyXwUqH6dMz5Fak6D4sNAhlzmZMrTv4hBu/+Kw9AwZRxV1klX5sP5x8qtUbi
+ OxOkU3QgBu6burUUbgNOe/UKClMWUXIxzvbWNAC47sjKvroxSpbUq4+XxiPq5vz07+xG
+ 7/UEuRqr7jql4g4NoZzdKmik0/jcnsOPRamYaeWCQwy7hMIDvQpbYyVVFLX1FRxcHP6x
+ icVg==
+X-Gm-Message-State: AOAM532hlS3+38M2rh9uQCWnKmaYK2qo6cShSAH+XYQtbvf6R06qKDEX
+ ecEXp+gAb5ZfH6bFFWfV2Q0=
+X-Google-Smtp-Source: ABdhPJwro1lybONehXhgi200UJPcI88LSpoEBRJQw9g/+cnbMQpfnZeD7P6Czb7qYehly25VoMT5Aw==
+X-Received: by 2002:a05:6a00:14d0:: with SMTP id
+ w16mr3642594pfu.39.1598924445035; 
+ Mon, 31 Aug 2020 18:40:45 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
  [147.11.146.144])
- by smtp.gmail.com with ESMTPSA id l13sm8887520pgq.33.2020.08.31.18.40.38
+ by smtp.gmail.com with ESMTPSA id l13sm8887520pgq.33.2020.08.31.18.40.41
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 31 Aug 2020 18:40:40 -0700 (PDT)
+ Mon, 31 Aug 2020 18:40:44 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Palmer Dabbelt <palmerdabbelt@google.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PATCH v3 05/16] hw/char: Add Microchip PolarFire SoC MMUART emulation
-Date: Tue,  1 Sep 2020 09:39:00 +0800
-Message-Id: <1598924352-89526-6-git-send-email-bmeng.cn@gmail.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Subject: [PATCH v3 06/16] hw/riscv: microchip_pfsoc: Connect 5 MMUARTs
+Date: Tue,  1 Sep 2020 09:39:01 +0800
+Message-Id: <1598924352-89526-7-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
 References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1044.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x544.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,230 +80,157 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2020 01:40:46 -0000
+X-List-Received-Date: Tue, 01 Sep 2020 01:40:49 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Microchip PolarFire SoC MMUART is ns16550 compatible, with some
-additional registers. Create a simple MMUART model built on top
-of the existing ns16550 model.
+Microchip PolarFire SoC has 5 MMUARTs, and the Icicle Kit board
+wires 4 of them out. Let's connect all 5 MMUARTs.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
-
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- change to update hw/char/meson.build
-- add impl.min_access_size and impl.max_access_size as part of
-  MemoryRegionOps and remove the allignment check
+ include/hw/riscv/microchip_pfsoc.h | 20 ++++++++++++++++++++
+ hw/riscv/microchip_pfsoc.c         | 30 ++++++++++++++++++++++++++++++
+ hw/riscv/Kconfig                   |  1 +
+ 3 files changed, 51 insertions(+)
 
- include/hw/char/mchp_pfsoc_mmuart.h | 61 ++++++++++++++++++++++++++
- hw/char/mchp_pfsoc_mmuart.c         | 86 +++++++++++++++++++++++++++++++++++++
- MAINTAINERS                         |  2 +
- hw/char/Kconfig                     |  3 ++
- hw/char/meson.build                 |  1 +
- 5 files changed, 153 insertions(+)
- create mode 100644 include/hw/char/mchp_pfsoc_mmuart.h
- create mode 100644 hw/char/mchp_pfsoc_mmuart.c
-
-diff --git a/include/hw/char/mchp_pfsoc_mmuart.h b/include/hw/char/mchp_pfsoc_mmuart.h
-new file mode 100644
-index 0000000..f619902
---- /dev/null
-+++ b/include/hw/char/mchp_pfsoc_mmuart.h
-@@ -0,0 +1,61 @@
-+/*
-+ * Microchip PolarFire SoC MMUART emulation
-+ *
-+ * Copyright (c) 2020 Wind River Systems, Inc.
-+ *
-+ * Author:
-+ *   Bin Meng <bin.meng@windriver.com>
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a copy
-+ * of this software and associated documentation files (the "Software"), to deal
-+ * in the Software without restriction, including without limitation the rights
-+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-+ * copies of the Software, and to permit persons to whom the Software is
-+ * furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-+ * THE SOFTWARE.
-+ */
-+
-+#ifndef HW_MCHP_PFSOC_MMUART_H
-+#define HW_MCHP_PFSOC_MMUART_H
-+
-+#include "hw/char/serial.h"
-+
-+#define MCHP_PFSOC_MMUART_REG_SIZE  52
-+
-+typedef struct MchpPfSoCMMUartState {
-+    MemoryRegion iomem;
-+    hwaddr base;
-+    qemu_irq irq;
-+
-+    SerialMM *serial;
-+
-+    uint32_t reg[MCHP_PFSOC_MMUART_REG_SIZE / sizeof(uint32_t)];
-+} MchpPfSoCMMUartState;
-+
-+/**
-+ * mchp_pfsoc_mmuart_create - Create a Microchip PolarFire SoC MMUART
-+ *
-+ * This is a helper routine for board to create a MMUART device that is
-+ * compatible with Microchip PolarFire SoC.
-+ *
-+ * @sysmem: system memory region to map
-+ * @base: base address of the MMUART registers
-+ * @irq: IRQ number of the MMUART device
-+ * @chr: character device to associate to
-+ *
-+ * @return: a pointer to the device specific control structure
-+ */
-+MchpPfSoCMMUartState *mchp_pfsoc_mmuart_create(MemoryRegion *sysmem,
-+    hwaddr base, qemu_irq irq, Chardev *chr);
-+
-+#endif /* HW_MCHP_PFSOC_MMUART_H */
-diff --git a/hw/char/mchp_pfsoc_mmuart.c b/hw/char/mchp_pfsoc_mmuart.c
-new file mode 100644
-index 0000000..8a002b0
---- /dev/null
-+++ b/hw/char/mchp_pfsoc_mmuart.c
-@@ -0,0 +1,86 @@
-+/*
-+ * Microchip PolarFire SoC MMUART emulation
-+ *
-+ * Copyright (c) 2020 Wind River Systems, Inc.
-+ *
-+ * Author:
-+ *   Bin Meng <bin.meng@windriver.com>
-+ *
-+ * This program is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU General Public License as
-+ * published by the Free Software Foundation; either version 2 or
-+ * (at your option) version 3 of the License.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along
-+ * with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/log.h"
-+#include "chardev/char.h"
-+#include "exec/address-spaces.h"
+diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+index 1953ef1..a5efa1d 100644
+--- a/include/hw/riscv/microchip_pfsoc.h
++++ b/include/hw/riscv/microchip_pfsoc.h
+@@ -22,6 +22,8 @@
+ #ifndef HW_MICROCHIP_PFSOC_H
+ #define HW_MICROCHIP_PFSOC_H
+ 
 +#include "hw/char/mchp_pfsoc_mmuart.h"
 +
-+static uint64_t mchp_pfsoc_mmuart_read(void *opaque, hwaddr addr, unsigned size)
-+{
-+    MchpPfSoCMMUartState *s = opaque;
-+
-+    if (addr >= MCHP_PFSOC_MMUART_REG_SIZE) {
-+        qemu_log_mask(LOG_GUEST_ERROR, "%s: read: addr=0x%" HWADDR_PRIx "\n",
-+                      __func__, addr);
-+        return 0;
-+    }
-+
-+    return s->reg[addr / sizeof(uint32_t)];
-+}
-+
-+static void mchp_pfsoc_mmuart_write(void *opaque, hwaddr addr,
-+                                    uint64_t value, unsigned size)
-+{
-+    MchpPfSoCMMUartState *s = opaque;
-+    uint32_t val32 = (uint32_t)value;
-+
-+    if (addr >= MCHP_PFSOC_MMUART_REG_SIZE) {
-+        qemu_log_mask(LOG_GUEST_ERROR, "%s: bad write: addr=0x%" HWADDR_PRIx
-+                      " v=0x%x\n", __func__, addr, val32);
-+        return;
-+    }
-+
-+    s->reg[addr / sizeof(uint32_t)] = val32;
-+}
-+
-+static const MemoryRegionOps mchp_pfsoc_mmuart_ops = {
-+    .read = mchp_pfsoc_mmuart_read,
-+    .write = mchp_pfsoc_mmuart_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .impl = {
-+        .min_access_size = 4,
-+        .max_access_size = 4,
-+    },
+ typedef struct MicrochipPFSoCState {
+     /*< private >*/
+     DeviceState parent_obj;
+@@ -32,6 +34,11 @@ typedef struct MicrochipPFSoCState {
+     RISCVHartArrayState e_cpus;
+     RISCVHartArrayState u_cpus;
+     DeviceState *plic;
++    MchpPfSoCMMUartState *serial0;
++    MchpPfSoCMMUartState *serial1;
++    MchpPfSoCMMUartState *serial2;
++    MchpPfSoCMMUartState *serial3;
++    MchpPfSoCMMUartState *serial4;
+ } MicrochipPFSoCState;
+ 
+ #define TYPE_MICROCHIP_PFSOC    "microchip.pfsoc"
+@@ -64,14 +71,27 @@ enum {
+     MICROCHIP_PFSOC_L2CC,
+     MICROCHIP_PFSOC_L2LIM,
+     MICROCHIP_PFSOC_PLIC,
++    MICROCHIP_PFSOC_MMUART0,
+     MICROCHIP_PFSOC_SYSREG,
+     MICROCHIP_PFSOC_MPUCFG,
++    MICROCHIP_PFSOC_MMUART1,
++    MICROCHIP_PFSOC_MMUART2,
++    MICROCHIP_PFSOC_MMUART3,
++    MICROCHIP_PFSOC_MMUART4,
+     MICROCHIP_PFSOC_ENVM_CFG,
+     MICROCHIP_PFSOC_ENVM_DATA,
+     MICROCHIP_PFSOC_IOSCB_CFG,
+     MICROCHIP_PFSOC_DRAM,
+ };
+ 
++enum {
++    MICROCHIP_PFSOC_MMUART0_IRQ = 90,
++    MICROCHIP_PFSOC_MMUART1_IRQ = 91,
++    MICROCHIP_PFSOC_MMUART2_IRQ = 92,
++    MICROCHIP_PFSOC_MMUART3_IRQ = 93,
++    MICROCHIP_PFSOC_MMUART4_IRQ = 94,
 +};
 +
-+MchpPfSoCMMUartState *mchp_pfsoc_mmuart_create(MemoryRegion *sysmem,
-+    hwaddr base, qemu_irq irq, Chardev *chr)
-+{
-+    MchpPfSoCMMUartState *s;
-+
-+    s = g_new0(MchpPfSoCMMUartState, 1);
-+
-+    memory_region_init_io(&s->iomem, NULL, &mchp_pfsoc_mmuart_ops, s,
-+                          "mchp.pfsoc.mmuart", 0x1000);
-+
-+    s->base = base;
-+    s->irq = irq;
-+
-+    s->serial = serial_mm_init(sysmem, base, 2, irq, 399193, chr,
-+                               DEVICE_LITTLE_ENDIAN);
-+
-+    memory_region_add_subregion(sysmem, base + 0x20, &s->iomem);
-+
-+    return s;
-+}
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 5359b39..4002d51 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1320,7 +1320,9 @@ M: Bin Meng <bin.meng@windriver.com>
- L: qemu-riscv@nongnu.org
- S: Supported
- F: hw/riscv/microchip_pfsoc.c
-+F: hw/char/mchp_pfsoc_mmuart.c
- F: include/hw/riscv/microchip_pfsoc.h
-+F: include/hw/char/mchp_pfsoc_mmuart.h
+ #define MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT    1
+ #define MICROCHIP_PFSOC_COMPUTE_CPU_COUNT       4
  
- RX Machines
- -----------
-diff --git a/hw/char/Kconfig b/hw/char/Kconfig
-index b7e0e4d..1d64555 100644
---- a/hw/char/Kconfig
-+++ b/hw/char/Kconfig
-@@ -52,3 +52,6 @@ config RENESAS_SCI
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index d946b2a..cee959a 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -11,6 +11,7 @@
+  * 0) CLINT (Core Level Interruptor)
+  * 1) PLIC (Platform Level Interrupt Controller)
+  * 2) eNVM (Embedded Non-Volatile Memory)
++ * 3) MMUARTs (Multi-Mode UART)
+  *
+  * This board currently generates devicetree dynamically that indicates at least
+  * two harts and up to five harts.
+@@ -38,6 +39,7 @@
+ #include "hw/irq.h"
+ #include "hw/loader.h"
+ #include "hw/sysbus.h"
++#include "chardev/char.h"
+ #include "hw/cpu/cluster.h"
+ #include "target/riscv/cpu.h"
+ #include "hw/misc/unimp.h"
+@@ -46,6 +48,7 @@
+ #include "hw/riscv/sifive_clint.h"
+ #include "hw/riscv/sifive_plic.h"
+ #include "hw/riscv/microchip_pfsoc.h"
++#include "sysemu/sysemu.h"
  
- config AVR_USART
-     bool
+ /*
+  * The BIOS image used by this machine is called Hart Software Services (HSS).
+@@ -69,8 +72,13 @@ static const struct MemmapEntry {
+     [MICROCHIP_PFSOC_L2CC] =            {  0x2010000,     0x1000 },
+     [MICROCHIP_PFSOC_L2LIM] =           {  0x8000000,  0x2000000 },
+     [MICROCHIP_PFSOC_PLIC] =            {  0xc000000,  0x4000000 },
++    [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
+     [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
+     [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
++    [MICROCHIP_PFSOC_MMUART1] =         { 0x20100000,     0x1000 },
++    [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
++    [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
++    [MICROCHIP_PFSOC_MMUART4] =         { 0x20106000,     0x1000 },
+     [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
+     [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
+     [MICROCHIP_PFSOC_IOSCB_CFG] =       { 0x37080000,     0x1000 },
+@@ -215,6 +223,28 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+         memmap[MICROCHIP_PFSOC_MPUCFG].base,
+         memmap[MICROCHIP_PFSOC_MPUCFG].size);
+ 
++    /* MMUARTs */
++    s->serial0 = mchp_pfsoc_mmuart_create(system_memory,
++        memmap[MICROCHIP_PFSOC_MMUART0].base,
++        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART0_IRQ),
++        serial_hd(0));
++    s->serial1 = mchp_pfsoc_mmuart_create(system_memory,
++        memmap[MICROCHIP_PFSOC_MMUART1].base,
++        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART1_IRQ),
++        serial_hd(1));
++    s->serial2 = mchp_pfsoc_mmuart_create(system_memory,
++        memmap[MICROCHIP_PFSOC_MMUART2].base,
++        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART2_IRQ),
++        serial_hd(2));
++    s->serial3 = mchp_pfsoc_mmuart_create(system_memory,
++        memmap[MICROCHIP_PFSOC_MMUART3].base,
++        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART3_IRQ),
++        serial_hd(3));
++    s->serial4 = mchp_pfsoc_mmuart_create(system_memory,
++        memmap[MICROCHIP_PFSOC_MMUART4].base,
++        qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART4_IRQ),
++        serial_hd(4));
 +
-+config MCHP_PFSOC_MMUART
-+    bool
-diff --git a/hw/char/meson.build b/hw/char/meson.build
-index e888215..ae27932 100644
---- a/hw/char/meson.build
-+++ b/hw/char/meson.build
-@@ -32,6 +32,7 @@ softmmu_ss.add(when: 'CONFIG_RASPI', if_true: files('bcm2835_aux.c'))
- softmmu_ss.add(when: 'CONFIG_RENESAS_SCI', if_true: files('renesas_sci.c'))
- softmmu_ss.add(when: 'CONFIG_SH4', if_true: files('sh_serial.c'))
- softmmu_ss.add(when: 'CONFIG_STM32F2XX_USART', if_true: files('stm32f2xx_usart.c'))
-+softmmu_ss.add(when: 'CONFIG_MCHP_PFSOC_MMUART', if_true: files('mchp_pfsoc_mmuart.c'))
- 
- specific_ss.add(when: 'CONFIG_TERMINAL3270', if_true: files('terminal3270.c'))
- specific_ss.add(when: 'CONFIG_VIRTIO', if_true: files('virtio-serial-bus.c'))
+     /* eNVM */
+     memory_region_init_rom(envm_data, OBJECT(dev), "microchip.pfsoc.envm.data",
+                            memmap[MICROCHIP_PFSOC_ENVM_DATA].size,
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index 3292fae..ceb7c16 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -54,3 +54,4 @@ config MICROCHIP_PFSOC
+     select HART
+     select SIFIVE
+     select UNIMP
++    select MCHP_PFSOC_MMUART
 -- 
 2.7.4
 
