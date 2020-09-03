@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kDmfi-0005gp-Sc
-	for mharc-qemu-riscv@gnu.org; Thu, 03 Sep 2020 06:40:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55176)
+	id 1kDmfk-0005kh-AL
+	for mharc-qemu-riscv@gnu.org; Thu, 03 Sep 2020 06:40:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55194)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kDmfg-0005dc-Tb; Thu, 03 Sep 2020 06:40:48 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:34323)
+ id 1kDmfi-0005ff-6f; Thu, 03 Sep 2020 06:40:50 -0400
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:44698)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kDmff-0002B1-2E; Thu, 03 Sep 2020 06:40:48 -0400
-Received: by mail-pf1-x441.google.com with SMTP id v196so2010881pfc.1;
- Thu, 03 Sep 2020 03:40:45 -0700 (PDT)
+ id 1kDmfg-0002EK-94; Thu, 03 Sep 2020 06:40:49 -0400
+Received: by mail-pf1-x444.google.com with SMTP id o20so1981375pfp.11;
+ Thu, 03 Sep 2020 03:40:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=8Zj7s7kXmzr2lI2HnuVfE43cFixL7CM5rG/130yS5Ic=;
- b=J0hROt1ICD0aLJOruYu7Q1yyNWjz4OBJLkZjq/LIrJAjeSNRKrmDDkHVeSmT/i/VVM
- bF31KIQXJcleYHVDJ8E/FSmTpjwVQd9vKfsix9EnQvOyX+o7VUJ57maytuY7LSio/FXT
- ra2Qxtx1sh0GD9O1U7hBs0qcdkQTCfb7WD0njgSV21ay/JoqMwZPjv/Xknbc4I5lKPjV
- 63Nrmq16BDraOxtdE2x/j2yAh41lPxFSdH2afSSOoxPBUd/9B6EwRIpeKLdxSdFciwrw
- BvWNW64ToYWZjxYVzOthLqjnCc0KlwQGt9Kq+woNo+GS833E70gCUfDAAoEKmDyxEDFY
- DRzg==
+ bh=UwDaAVEiFSZ9mLDfhLuxqgfHtEhiPD/jjAdGrjSJZeM=;
+ b=MUJOZ5EkSuzdSHnunCuf5vMZ9Zij4XlZmFWBqs/Cpe0Y8PwLvzpiK7lwEYNc5guKzX
+ SFAwi2gF7BLR01tYb7VRdSod6OZ7ONeheIA/yRKQHGZKX93VH4352geQsgSSbUt00lo6
+ AITjWNwX347UMB4hoJOgBFEADb4GWGAc8pgT83AG+5DN3S9XJZOpX5/vm8Iru1ycDVSr
+ zLC44udY/gBfb+6bYaOQZTrOnD4p4L0fOcZPEPF6cO5ZNQYdOlVbCg4PktWn75dkUoom
+ Kt9ZTExf3ZA3sOdGYcNvDEWYrwFhevqGU8uB9yOP3ozoPRIZvvi8OK21Tf/WzJwTH/j9
+ srxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=8Zj7s7kXmzr2lI2HnuVfE43cFixL7CM5rG/130yS5Ic=;
- b=FeaDxyKgT6+H3bg5dz3EV8W0EvVM35L5ifU3gWlgtOYKoANyWS8L2HBENzePB62OV5
- Y+yVKiAaSmjQfHGeEHHyR1P4y4jHxmuRuxdVqYlFO5vfkL2GrcM7anMy/875zQLcw4EB
- sDH7g+XJYaYoVOl3ynexoSMsMHxQzp9wu3nTTqJq5FOOAiUXVsEhaIhjLsDQkcwtKKu2
- Ls1JME+vyXfeIedoYFzMjJOSgoB/JBCGtSmEvmenVQcPM5ckrztcdJhbNH4rYkvBzQGY
- OBQzKX+ixQE3ASzTLNjv/3uwft3cq5kLPtnRyXUlicUix+UeERNlUWR8banRTJ4hAKUX
- JCIA==
-X-Gm-Message-State: AOAM5333DEiOVilzZFvH3DidIQGqNBEoGEhaNMGmjt8VGtOM/0ZNGg8k
- yhKQprL75KCrBKb5oWggPls=
-X-Google-Smtp-Source: ABdhPJwbiaMobmHaTg3eucQm8X2JetEdR1wfmEZhkHmGV877kXpPhLy6BhOx0dtfvUhLxAwLQUYKdg==
-X-Received: by 2002:a17:902:6bc2:: with SMTP id
- m2mr3303704plt.114.1599129644320; 
- Thu, 03 Sep 2020 03:40:44 -0700 (PDT)
+ bh=UwDaAVEiFSZ9mLDfhLuxqgfHtEhiPD/jjAdGrjSJZeM=;
+ b=Wh3Y2mrcfifkXYXFF5pyNbGkcWu5VADb6wQ0qNZ6b6boFYv02PwtQp0NV3/j0W5Hei
+ sG6QVamJ4gXsYxkmQs+bh0FAlpgwY9egVgaaAw5Vg74MPz0EQkG3MxRbamKcvONcgvTW
+ xBmHOpaDs05FUQLTZMfvjGduq87HfulhU4CNtqhyqZVSx1nI6T2VYQmDi/BHBNgFxVMK
+ 2swe/qYVG1763O08jWOGQ7w+DaWHOdAAPEM9RdqDmkB0k1JTx8UyYU4GRf9+3Nj1Oeil
+ Es+cpj1c1dWfzChXoPKUEsCHWqknZeUorLc3qiorXiob+6Q9oFvhoihYD4cpaLULHuX+
+ 1qbw==
+X-Gm-Message-State: AOAM532eYXvJ4hfV/OCUHgbOy2umMKey+3T5BAI3KlC76NUXZysgCFy3
+ /E/90D1ld2ZHaFOnOkE3eZc=
+X-Google-Smtp-Source: ABdhPJwE+YW1cApRQ1X0cI4T4yjYdV5t8GsN7v7Er02oDQpSQOloAngYX78gXhSxx+TZy7RDIy+gkw==
+X-Received: by 2002:a17:902:ed13:b029:d0:89f1:9e32 with SMTP id
+ b19-20020a170902ed13b02900d089f19e32mr1798757pld.14.1599129646795; 
+ Thu, 03 Sep 2020 03:40:46 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
  [147.11.146.144])
- by smtp.gmail.com with ESMTPSA id b18sm2137098pjq.3.2020.09.03.03.40.42
+ by smtp.gmail.com with ESMTPSA id b18sm2137098pjq.3.2020.09.03.03.40.44
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 03 Sep 2020 03:40:43 -0700 (PDT)
+ Thu, 03 Sep 2020 03:40:46 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 02/12] hw/riscv: Move sifive_u_prci model to hw/misc
-Date: Thu,  3 Sep 2020 18:40:13 +0800
-Message-Id: <1599129623-68957-3-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH 03/12] hw/riscv: Move sifive_u_otp model to hw/misc
+Date: Thu,  3 Sep 2020 18:40:14 +0800
+Message-Id: <1599129623-68957-4-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1599129623-68957-1-git-send-email-bmeng.cn@gmail.com>
 References: <1599129623-68957-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x441.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::444;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x444.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -75,107 +75,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Sep 2020 10:40:49 -0000
+X-List-Received-Date: Thu, 03 Sep 2020 10:40:50 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
 This is an effort to clean up the hw/riscv directory. Ideally it
 should only contain the RISC-V SoC / machine codes plus generic
-codes. Let's move sifive_u_prci model to hw/misc directory.
+codes. Let's move sifive_u_otp model to hw/misc directory.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- include/hw/{riscv => misc}/sifive_u_prci.h | 0
- include/hw/riscv/sifive_u.h                | 2 +-
- hw/{riscv => misc}/sifive_u_prci.c         | 2 +-
- hw/misc/Kconfig                            | 3 +++
- hw/misc/meson.build                        | 1 +
- hw/riscv/Kconfig                           | 1 +
- hw/riscv/meson.build                       | 1 -
+ include/hw/{riscv => misc}/sifive_u_otp.h | 0
+ include/hw/riscv/sifive_u.h               | 2 +-
+ hw/{riscv => misc}/sifive_u_otp.c         | 2 +-
+ hw/misc/Kconfig                           | 3 +++
+ hw/misc/meson.build                       | 1 +
+ hw/riscv/Kconfig                          | 1 +
+ hw/riscv/meson.build                      | 1 -
  7 files changed, 7 insertions(+), 3 deletions(-)
- rename include/hw/{riscv => misc}/sifive_u_prci.h (100%)
- rename hw/{riscv => misc}/sifive_u_prci.c (99%)
+ rename include/hw/{riscv => misc}/sifive_u_otp.h (100%)
+ rename hw/{riscv => misc}/sifive_u_otp.c (99%)
 
-diff --git a/include/hw/riscv/sifive_u_prci.h b/include/hw/misc/sifive_u_prci.h
+diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/misc/sifive_u_otp.h
 similarity index 100%
-rename from include/hw/riscv/sifive_u_prci.h
-rename to include/hw/misc/sifive_u_prci.h
+rename from include/hw/riscv/sifive_u_otp.h
+rename to include/hw/misc/sifive_u_otp.h
 diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 793000a..cbeb228 100644
+index cbeb228..936a3bd 100644
 --- a/include/hw/riscv/sifive_u.h
 +++ b/include/hw/riscv/sifive_u.h
-@@ -24,8 +24,8 @@
+@@ -24,7 +24,7 @@
  #include "hw/riscv/riscv_hart.h"
  #include "hw/riscv/sifive_cpu.h"
  #include "hw/riscv/sifive_gpio.h"
--#include "hw/riscv/sifive_u_prci.h"
- #include "hw/riscv/sifive_u_otp.h"
-+#include "hw/misc/sifive_u_prci.h"
+-#include "hw/riscv/sifive_u_otp.h"
++#include "hw/misc/sifive_u_otp.h"
+ #include "hw/misc/sifive_u_prci.h"
  
  #define TYPE_RISCV_U_SOC "riscv.sifive.u.soc"
- #define RISCV_U_SOC(obj) \
-diff --git a/hw/riscv/sifive_u_prci.c b/hw/misc/sifive_u_prci.c
+diff --git a/hw/riscv/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
 similarity index 99%
-rename from hw/riscv/sifive_u_prci.c
-rename to hw/misc/sifive_u_prci.c
-index 4fa590c..5d9d446 100644
---- a/hw/riscv/sifive_u_prci.c
-+++ b/hw/misc/sifive_u_prci.c
-@@ -22,7 +22,7 @@
+rename from hw/riscv/sifive_u_otp.c
+rename to hw/misc/sifive_u_otp.c
+index f6ecbaa..c2f3c8e 100644
+--- a/hw/riscv/sifive_u_otp.c
++++ b/hw/misc/sifive_u_otp.c
+@@ -23,7 +23,7 @@
  #include "hw/sysbus.h"
  #include "qemu/log.h"
  #include "qemu/module.h"
--#include "hw/riscv/sifive_u_prci.h"
-+#include "hw/misc/sifive_u_prci.h"
+-#include "hw/riscv/sifive_u_otp.h"
++#include "hw/misc/sifive_u_otp.h"
  
- static uint64_t sifive_u_prci_read(void *opaque, hwaddr addr, unsigned int size)
+ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
  {
 diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-index 5073986..65f3fdd 100644
+index 65f3fdd..fa3d0f4 100644
 --- a/hw/misc/Kconfig
 +++ b/hw/misc/Kconfig
-@@ -137,4 +137,7 @@ config AVR_POWER
+@@ -137,6 +137,9 @@ config AVR_POWER
  config SIFIVE_E_PRCI
      bool
  
-+config SIFIVE_U_PRCI
++config SIFIVE_U_OTP
 +    bool
 +
- source macio/Kconfig
+ config SIFIVE_U_PRCI
+     bool
+ 
 diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index b6b2e57..9e9550e 100644
+index 9e9550e..018a88c 100644
 --- a/hw/misc/meson.build
 +++ b/hw/misc/meson.build
 @@ -23,6 +23,7 @@ softmmu_ss.add(when: 'CONFIG_MOS6522', if_true: files('mos6522.c'))
  
  # RISC-V devices
  softmmu_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
-+softmmu_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
++softmmu_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
+ softmmu_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
  
  # PKUnity SoC devices
- softmmu_ss.add(when: 'CONFIG_PUV3', if_true: files('puv3_pm.c'))
 diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 5855e99..109364b 100644
+index 109364b..76eaf77 100644
 --- a/hw/riscv/Kconfig
 +++ b/hw/riscv/Kconfig
 @@ -24,6 +24,7 @@ config SIFIVE_U
      select HART
      select SIFIVE
      select SIFIVE_PDMA
-+    select SIFIVE_U_PRCI
++    select SIFIVE_U_OTP
+     select SIFIVE_U_PRCI
      select UNIMP
  
- config SPIKE
 diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index d73ea99..e6c8af0 100644
+index e6c8af0..2ba4757 100644
 --- a/hw/riscv/meson.build
 +++ b/hw/riscv/meson.build
-@@ -12,7 +12,6 @@ riscv_ss.add(when: 'CONFIG_SIFIVE', if_true: files('sifive_uart.c'))
+@@ -11,7 +11,6 @@ riscv_ss.add(when: 'CONFIG_SIFIVE', if_true: files('sifive_test.c'))
+ riscv_ss.add(when: 'CONFIG_SIFIVE', if_true: files('sifive_uart.c'))
  riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
  riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
- riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u_otp.c'))
--riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u_prci.c'))
+-riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u_otp.c'))
  riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('riscv_htif.c'))
  riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
  riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
