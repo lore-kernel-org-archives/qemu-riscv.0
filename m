@@ -1,147 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kDW61-0006cU-Q0
-	for mharc-qemu-riscv@gnu.org; Wed, 02 Sep 2020 12:58:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44300)
+	id 1kDmfh-0005eP-FE
+	for mharc-qemu-riscv@gnu.org; Thu, 03 Sep 2020 06:40:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55148)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1kDW60-0006c5-29
- for qemu-riscv@nongnu.org; Wed, 02 Sep 2020 12:58:52 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:35788
- helo=us-smtp-1.mimecast.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1kDW5y-0008B9-3g
- for qemu-riscv@nongnu.org; Wed, 02 Sep 2020 12:58:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599065929;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=GuwnEfz3+aHD+oGsjoQKFlJwr0H33ODfNHTd1UmoxIQ=;
- b=eH4FyIKVg/mSPK8C7nY0CTGiH4t1aM3O85e4iInzH5VdjkM7aByQPkWst3zxWXypl1Jt20
- TOMMDTQRI88mA7CAM91WvNmImBLVzH47v13vXka7MTa+XMWoDnojniw9YxYehvcFyas/Rg
- 6UIf9qERx1OwoZtUfSjZ8BwpuoIab9o=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-101--CInyBDfNde0D3vu_crBNQ-1; Wed, 02 Sep 2020 12:58:29 -0400
-X-MC-Unique: -CInyBDfNde0D3vu_crBNQ-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8D1EA18BFEC2;
- Wed,  2 Sep 2020 16:58:22 +0000 (UTC)
-Received: from localhost (ovpn-66-226.rdu2.redhat.com [10.10.66.226])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C37307E315;
- Wed,  2 Sep 2020 16:57:49 +0000 (UTC)
-Date: Wed, 2 Sep 2020 12:57:49 -0400
-From: Eduardo Habkost <ehabkost@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>,
- "Daniel P. Berrange" <berrange@redhat.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>,
- Juan Quintela <quintela@redhat.com>, Richard Henderson <rth@twiddle.net>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
- Stefan Berger <stefanb@linux.ibm.com>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Greg Kurz <groug@kaod.org>,
- Christian Schoenebeck <qemu_oss@crudebyte.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Peter Maydell <peter.maydell@linaro.org>,
- Rob Herring <robh@kernel.org>, Joel Stanley <joel@jms.id.au>,
- Jan Kiszka <jan.kiszka@web.de>, Andrzej Zaborowski <balrogg@gmail.com>,
- Andrew Baumann <Andrew.Baumann@microsoft.com>,
- Radoslaw Biernacki <rad@semihalf.com>, Leif Lindholm <leif@nuviainc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>,
- Gerd Hoffmann <kraxel@redhat.com>, Michael Walle <michael@walle.cc>,
- Sarah Harris <S.E.Harris@kent.ac.uk>,
- Michael Rolnik <mrolnik@gmail.com>, John Snow <jsnow@redhat.com>,
- Kevin Wolf <kwolf@redhat.com>, Max Reitz <mreitz@redhat.com>,
- Keith Busch <kbusch@kernel.org>, Igor Mitsyanko <i.mitsyanko@gmail.com>,
- Fabien Chouteau <chouteau@adacore.com>,
- KONRAD Frederic <frederic.konrad@adacore.com>,
- Alberto Garcia <berto@igalia.com>, Thomas Huth <huth@tuxfamily.org>,
- Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- =?iso-8859-1?Q?Herv=E9?= Poussineau <hpoussin@reactos.org>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- BALATON Zoltan <balaton@eik.bme.hu>,
- Guan Xuetao <gxt@mprc.pku.edu.cn>, Helge Deller <deller@gmx.de>,
- Corey Minyard <cminyard@mvista.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>,
- Paul Durrant <paul@xen.org>, Huacai Chen <chenhc@lemote.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
- Paul Burton <pburton@wavecomp.com>, Jiri Slaby <jslaby@suse.cz>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
- Andrew Jeffery <andrew@aj.id.au>, Jason Wang <jasowang@redhat.com>,
- Dmitry Fleytman <dmitry.fleytman@gmail.com>,
- Max Filippov <jcmvbkbc@gmail.com>, Jiri Pirko <jiri@resnulli.us>,
- Sven Schnelle <svens@stackframe.org>,
- Yuval Shaia <yuval.shaia.ml@gmail.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- David Hildenbrand <david@redhat.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>, Fam Zheng <fam@euphon.net>,
- Hannes Reinecke <hare@suse.com>, Beniamino Galvani <b.galvani@gmail.com>,
- Tony Krowiak <akrowiak@linux.ibm.com>, Pierre Morel <pmorel@linux.ibm.com>,
- Alex Williamson <alex.williamson@redhat.com>,
- Raphael Norwitz <raphael.norwitz@nutanix.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, Eric Auger <eric.auger@redhat.com>,
- Ben Warren <ben@skyportsystems.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>,
- Antony Pavlov <antonynpavlov@gmail.com>,
- Jean-Christophe Dubois <jcd@tribudubois.net>,
- Peter Chubb <peter.chubb@nicta.com.au>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Magnus Damm <magnus.damm@gmail.com>, Peter Xu <peterx@redhat.com>,
- Sergio Lopez <slp@redhat.com>,
- Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
- Laszlo Ersek <lersek@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Anup Patel <anup.patel@wdc.com>, Eric Farman <farman@linux.ibm.com>,
- Cameron Esfahani <dirty@apple.com>,
- Roman Bolshakov <r.bolshakov@yadro.com>, Zhang Chen <chen.zhang@intel.com>,
- Li Zhijian <lizhijian@cn.fujitsu.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Anthony Green <green@moxielogic.com>,
- Stafford Horne <shorne@gmail.com>, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
- kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
- qemu-riscv@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
- Alistair Francis <Alistair.Francis@wdc.com>, Thomas Huth <thuth@redhat.com>
-Subject: Re: [PATCH v4 00/18] qom: Automated conversion of type checking
- boilerplate
-Message-ID: <20200902165749.GF4940@habkost.net>
-References: <20200831210740.126168-1-ehabkost@redhat.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200831210740.126168-1-ehabkost@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Received-SPF: pass client-ip=207.211.31.120; envelope-from=ehabkost@redhat.com;
- helo=us-smtp-1.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/09/02 02:07:24
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kDmff-0005ct-1N; Thu, 03 Sep 2020 06:40:47 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:39928)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kDmfa-00028w-RA; Thu, 03 Sep 2020 06:40:46 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id s2so1267907pjr.4;
+ Thu, 03 Sep 2020 03:40:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id;
+ bh=q+lC995TWsBOdTSeX0ILDYm1c6nuuvXYuwarWFueNus=;
+ b=BIrNAAfCsN7oAfgF6HOCZ7VdBqktOSLeziIN3havX/zCBO8Hvxxam+5yJAweXoAhN5
+ cdZKsw24Eo9rpfbbe6wMIBwRZOVRa/NFkU1Y0claseGuAabjKAVb15lmgpxZUpHz8//R
+ QhBPjxyezHPRdtxFKDHBwyBtTmHL/lPkUzkUGlZ5fcr7HJfoqoWxRZSwvsRBLwaw3XYs
+ vkTQ6AcEw//U9UYcfw7VG2P6Vo49GZ3T74h6Rlg5aQRm8It9ZJ21THnwL/l6OPrYK+Hn
+ I1GKbwdIaod1mIyaHgETYgE35KMSLjBFEvGSLIyW7jOnpUNT2vpJStH/GY8Q3QV3FWwO
+ IqZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=q+lC995TWsBOdTSeX0ILDYm1c6nuuvXYuwarWFueNus=;
+ b=nDsuGvlg2UmvYW3DQk4UHp0liGJdOcHveRM+B6CAtYhQXgcQvACoKWjYC1wG9xJj5T
+ YNF7FGemDLpIjl/M3+fPAzkgMOrf0V+h0OKvG1MdGfMZ0R103sw76oww5k37uyrWK6Kn
+ 48lauL6kZDxpCULNMBM4kdi1a98rlQUPwzxY2Gqo/eKULCjMfemwhQmyNQT5RHyrGLXU
+ yaaXqYhdtI4cIFWNc25eCzymaAqQbhgEkRaa+WAZ0UM5r+i1N2B/Gb20D87h0ro39eRs
+ ggOEyWwlPMWT2cbyxBCihX36Mn4r0VgS4BJonoSpmy1rFwhyxR/DfaXvP8h+NG1x0TsY
+ mTtA==
+X-Gm-Message-State: AOAM53068kdr8jMd1czun788d9g3VKGuRfh9zDewgyYJkRDoOA1oSxLd
+ m/vhCEkxYesTJ52JYjK8YYM=
+X-Google-Smtp-Source: ABdhPJxyzCBI/FpGwtwOx2Wx2kBC2JQmH88AFWNgBfIzitXSHZJGACd6UCbepJnQ1B9a21xCKsIG4A==
+X-Received: by 2002:a17:90a:8c84:: with SMTP id
+ b4mr2767820pjo.82.1599129639620; 
+ Thu, 03 Sep 2020 03:40:39 -0700 (PDT)
+Received: from pek-vx-bsp2.wrs.com (unknown-146-144.windriver.com.
+ [147.11.146.144])
+ by smtp.gmail.com with ESMTPSA id b18sm2137098pjq.3.2020.09.03.03.40.37
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 03 Sep 2020 03:40:39 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH 00/12] hw/riscv: Clean up the directory
+Date: Thu,  3 Sep 2020 18:40:11 +0800
+Message-Id: <1599129623-68957-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1029.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -155,25 +72,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Sep 2020 16:58:52 -0000
+X-List-Received-Date: Thu, 03 Sep 2020 10:40:47 -0000
 
-On Mon, Aug 31, 2020 at 05:07:22PM -0400, Eduardo Habkost wrote:
-> Latest version of this series can be found at the branch:
-> https://github.com/ehabkost/qemu-hacks/tree/work/qom-macros-autoconvert
-> 
-> This is an extension of the series previously submitted by
-> Daniel[1], including a script that will convert existing type
-> checker macros automatically.
-> 
-> [1] https://lore.kernel.org/qemu-devel/20200723181410.3145233-1-berrange@redh=
-> at.com/
-> 
-> Link to series v4:
-> https://github.com/ehabkost/qemu-hacks/tree/work/qom-macros-autoconvert-v4
+From: Bin Meng <bin.meng@windriver.com>
 
-I'm queueing this on machine-next.
+This is an effort to clean up the hw/riscv directory. Ideally it
+should only contain the RISC-V SoC / machine codes plus generic
+codes. Peripheral models for a specific SoC are moved to its
+corresponding hw/* subdirectories.
+
+This series should be applied after the PolarFire SoC series:
+http://patchwork.ozlabs.org/project/qemu-devel/list/?series=198727
+
+
+Bin Meng (12):
+  hw/riscv: Move sifive_e_prci model to hw/misc
+  hw/riscv: Move sifive_u_prci model to hw/misc
+  hw/riscv: Move sifive_u_otp model to hw/misc
+  hw/riscv: Move sifive_gpio model to hw/gpio
+  hw/riscv: Move sifive_clint model to hw/intc
+  hw/riscv: Move sifive_plic model to hw/intc
+  hw/riscv: Move riscv_htif model to hw/char
+  hw/riscv: Move sifive_uart model to hw/char
+  hw/riscv: Move sifive_test model to hw/misc
+  hw/riscv: Always build riscv_hart.c
+  hw/riscv: Drop CONFIG_SIFIVE
+  hw/riscv: Sort the Kconfig options in alphabetical order
+
+ {include/hw/riscv => hw/intc}/sifive_plic.h |  0
+ hw/riscv/trace.h                            |  1 -
+ include/hw/{riscv => char}/riscv_htif.h     |  0
+ include/hw/{riscv => char}/sifive_uart.h    |  0
+ include/hw/{riscv => gpio}/sifive_gpio.h    |  0
+ include/hw/{riscv => intc}/sifive_clint.h   |  0
+ include/hw/{riscv => misc}/sifive_e_prci.h  |  0
+ include/hw/{riscv => misc}/sifive_test.h    |  0
+ include/hw/{riscv => misc}/sifive_u_otp.h   |  0
+ include/hw/{riscv => misc}/sifive_u_prci.h  |  0
+ include/hw/riscv/sifive_e.h                 |  2 +-
+ include/hw/riscv/sifive_u.h                 |  6 +--
+ hw/{riscv => char}/riscv_htif.c             |  2 +-
+ hw/{riscv => char}/sifive_uart.c            |  2 +-
+ hw/{riscv => gpio}/sifive_gpio.c            |  2 +-
+ hw/{riscv => intc}/sifive_clint.c           |  2 +-
+ hw/{riscv => intc}/sifive_plic.c            |  2 +-
+ hw/{riscv => misc}/sifive_e_prci.c          |  2 +-
+ hw/{riscv => misc}/sifive_test.c            |  2 +-
+ hw/{riscv => misc}/sifive_u_otp.c           |  2 +-
+ hw/{riscv => misc}/sifive_u_prci.c          |  2 +-
+ hw/riscv/microchip_pfsoc.c                  |  4 +-
+ hw/riscv/sifive_e.c                         |  8 ++--
+ hw/riscv/sifive_u.c                         |  6 +--
+ hw/riscv/spike.c                            |  4 +-
+ hw/riscv/virt.c                             |  6 +--
+ hw/char/Kconfig                             |  6 +++
+ hw/char/meson.build                         |  2 +
+ hw/gpio/Kconfig                             |  3 ++
+ hw/gpio/meson.build                         |  1 +
+ hw/gpio/trace-events                        |  6 +++
+ hw/intc/Kconfig                             |  6 +++
+ hw/intc/meson.build                         |  2 +
+ hw/misc/Kconfig                             | 12 +++++
+ hw/misc/meson.build                         |  6 +++
+ hw/riscv/Kconfig                            | 74 +++++++++++++++--------------
+ hw/riscv/meson.build                        | 11 +----
+ hw/riscv/trace-events                       |  7 ---
+ meson.build                                 |  1 -
+ 39 files changed, 110 insertions(+), 82 deletions(-)
+ rename {include/hw/riscv => hw/intc}/sifive_plic.h (100%)
+ delete mode 100644 hw/riscv/trace.h
+ rename include/hw/{riscv => char}/riscv_htif.h (100%)
+ rename include/hw/{riscv => char}/sifive_uart.h (100%)
+ rename include/hw/{riscv => gpio}/sifive_gpio.h (100%)
+ rename include/hw/{riscv => intc}/sifive_clint.h (100%)
+ rename include/hw/{riscv => misc}/sifive_e_prci.h (100%)
+ rename include/hw/{riscv => misc}/sifive_test.h (100%)
+ rename include/hw/{riscv => misc}/sifive_u_otp.h (100%)
+ rename include/hw/{riscv => misc}/sifive_u_prci.h (100%)
+ rename hw/{riscv => char}/riscv_htif.c (99%)
+ rename hw/{riscv => char}/sifive_uart.c (99%)
+ rename hw/{riscv => gpio}/sifive_gpio.c (99%)
+ rename hw/{riscv => intc}/sifive_clint.c (99%)
+ rename hw/{riscv => intc}/sifive_plic.c (99%)
+ rename hw/{riscv => misc}/sifive_e_prci.c (99%)
+ rename hw/{riscv => misc}/sifive_test.c (98%)
+ rename hw/{riscv => misc}/sifive_u_otp.c (99%)
+ rename hw/{riscv => misc}/sifive_u_prci.c (99%)
+ delete mode 100644 hw/riscv/trace-events
 
 -- 
-Eduardo
+2.7.4
 
 
