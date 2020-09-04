@@ -1,84 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kDzgx-0003Is-Pm
-	for mharc-qemu-riscv@gnu.org; Thu, 03 Sep 2020 20:34:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60776)
+	id 1kEFcO-0004o0-VG
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Sep 2020 13:35:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51372)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <flukshun@gmail.com>)
- id 1kDwQN-0003iu-Q5; Thu, 03 Sep 2020 17:05:39 -0400
-Received: from mail-oi1-x241.google.com ([2607:f8b0:4864:20::241]:43392)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kEFcN-0004mo-A5; Fri, 04 Sep 2020 13:35:19 -0400
+Received: from mail-qv1-xf42.google.com ([2607:f8b0:4864:20::f42]:38127)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <flukshun@gmail.com>)
- id 1kDwQL-0008NQ-Is; Thu, 03 Sep 2020 17:05:39 -0400
-Received: by mail-oi1-x241.google.com with SMTP id i17so4511016oig.10;
- Thu, 03 Sep 2020 14:05:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kEFcL-0006JD-FG; Fri, 04 Sep 2020 13:35:18 -0400
+Received: by mail-qv1-xf42.google.com with SMTP id x7so3398074qvi.5;
+ Fri, 04 Sep 2020 10:35:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:mime-version:content-transfer-encoding:to:from:in-reply-to
- :cc:references:message-id:user-agent:subject:date;
- bh=bMJNqiDHdknljJquNb2m0jVP2VmgDAr1mvv+CHjwIEw=;
- b=mG7ImM2DW7zXAIVgUmhfG8qyF4GCL4ktcVafMZ8kY6bzTGaG7dhVdcaEFNBts/C1PU
- 7xI/dcQhMO2UoMRbFKueyk8pkEANIgS/U6EaCG5NNzkGGO9RrCiw2hXIzhb896lwnbq/
- rLIA5i1DPLJZrSyh4C97Ne2XB0agbO9no50Pq32e1ZQoZfRqAg+ASP3t79FiQEVHTFTQ
- iVggugL1GtFIk4IhVop8IDL82kTuCKdtnAsgLsMgKxKMbfyESG4auH7xlniluNKQPst6
- u3SSJZD6z71URisDKEPw9cSa+A0n90hUcX8B3XzoMBcyN81q3KM9HxX7ipJ6ABetDktt
- aKTw==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=at1s6EaHojkmloPxxcNCr1MyzhednyNzJ4U7vYLY1+s=;
+ b=LAkYmUU2S2IQyurHQxkpjgd9HhIrQn5MKdsd4cyycJ4pZbnzEZQUhQRz9DWZsC9OEI
+ 7uE6CQTmYZmYZ1bUiKhrz+oSKfCI/mgMv+EJ1akh5lAiN1pK+8vtEBYiLp/mQyDXc88u
+ YGkJszyMndUSdNHnOUG2vMciUMqRUnJnNk51SoA8vnDHCizMl90W2gtWl8V7zjVPYVgG
+ muNU7VtxD3EaHd39Mn+IGtwJneCLUyuGuP/SBhkFVmurAgkKlVKpctEIwuDyU29nAc/9
+ S9koq6GhVkB0/d81PW4Zo7+xdTw+an2JpAUDVUcqbnAwc8KyWTpNgiP0ptbTpfW9pi5h
+ tSbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:mime-version:content-transfer-encoding:to
- :from:in-reply-to:cc:references:message-id:user-agent:subject:date;
- bh=bMJNqiDHdknljJquNb2m0jVP2VmgDAr1mvv+CHjwIEw=;
- b=WqYzd/iqfNVZD9JbtZvWVuok9FB4YJDbHRlBNTtyFrEAwhCD7ABzGXiXfjpvF2Dtpx
- 3QO/n3Bu2t3fhlFrNIIBU9G2e34LijdimL76GK77gQOeXGpL2nlWb/2zNj940bBAb/de
- bZ+z6cyGmboMjz3EKaym5qjqAg+q4ToXv/BA4IW5orsT02JbEa755QbG9dzSVTGp3XFj
- 9Ofo1CPN7LeK4WnWs7uJhqYJXZi4dbOAAn2EBVHO3frkxBxurF8x8Yu+cApRR0KoytEO
- Bv4tu41Q4+2W3coSV4WdfArQjrvDinjU37G1nhvZ+ngt+yFiPHPSYMF/kajTjO3KcTdZ
- lFwA==
-X-Gm-Message-State: AOAM532avqrQnrErQfQ/AcWPcGF05e1BuBMnCtYwsGrpql81HwOmRvPh
- KXkLdtdty2zOJEHfYs5kWtI=
-X-Google-Smtp-Source: ABdhPJy/jC45YHnEbU3Hlpx+459cA93LqgJnvpGNbJoHNQM0i+CE3PDZ5PkRlirWHRfdSGRUkGKLqw==
-X-Received: by 2002:a05:6808:60f:: with SMTP id
- y15mr3371060oih.137.1599167135372; 
- Thu, 03 Sep 2020 14:05:35 -0700 (PDT)
-Received: from localhost (76-251-165-188.lightspeed.austtx.sbcglobal.net.
- [76.251.165.188])
- by smtp.gmail.com with ESMTPSA id r21sm722901oie.15.2020.09.03.14.05.34
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Thu, 03 Sep 2020 14:05:34 -0700 (PDT)
-Sender: fluxion <flukshun@gmail.com>
-Content-Type: text/plain; charset="utf-8"
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=at1s6EaHojkmloPxxcNCr1MyzhednyNzJ4U7vYLY1+s=;
+ b=uVsZ19VAXRd4ns8Ke9ec89ImXwqy5AzCPS8DqPWyz88gTzirtGgo+Rh/lDP277tbmJ
+ OTl7zluc23fNUwkwJ/DULuPU3FrcsmAPrGDpYvrXoU6TdIUgiit+AbvShM/EkVbVoTRB
+ 16IMqTy61qAqjODkmX7S/1oOKdjrgFIx4xlM/Z+0NeaPGW5KXtTI5KmAMEL979xY6ZAX
+ DBuwnkB1/UGmfHBlix/vjlSqtGx9ya1toW2FNvOAy5/pPz3bf2oy1b6jIE7bwQ/gBuUm
+ woAjvwT7Kh6eA5bnX3cm4EIcudGMmnYNfFy1iX9HHdABdKs4t8XIKiDNpXHEBJZf9Ky6
+ oizw==
+X-Gm-Message-State: AOAM530i7fgetHtZZkkFqMaP/mB81LzI4SIu4uOiam0wF1RL0Ly9/K+g
+ 0DKWypRn77ObQ3EN7hDiFCHWi7cy+wSL6tpojtg=
+X-Google-Smtp-Source: ABdhPJyvvgNz0d3HqR4R1Kak17OQKz7gpjsdZYNe+fWQc9skq1kY8PqSC28BAiWiJ4iagoMdQ7I+7jmTfO181Kc/BFE=
+X-Received: by 2002:a05:6214:1784:: with SMTP id
+ ct4mr8001974qvb.10.1599240915620; 
+ Fri, 04 Sep 2020 10:35:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-To: Alistair Francis <alistair23@gmail.com>,
- Nathan Chancellor <natechancellor@gmail.com>
-From: Michael Roth <mdroth@linux.vnet.ibm.com>
-In-Reply-To: <CAKmqyKNRMmJgmZSPK6wqqNQW41QLHwChPi+1cjqao_x1Q_iryQ@mail.gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+References: <1599129623-68957-1-git-send-email-bmeng.cn@gmail.com>
+ <1599129623-68957-2-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1599129623-68957-2-git-send-email-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 4 Sep 2020 10:24:20 -0700
+Message-ID: <CAKmqyKMFu3dZ0JO9xvwo7BYi6ptyV6r5sZb53r-HAww6u9-H1g@mail.gmail.com>
+Subject: Re: [PATCH 01/12] hw/riscv: Move sifive_e_prci model to hw/misc
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- qemu-stable@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20200901055822.2721209-1-natechancellor@gmail.com>
- <CAKmqyKNRMmJgmZSPK6wqqNQW41QLHwChPi+1cjqao_x1Q_iryQ@mail.gmail.com>
-Message-ID: <159916712670.15432.11504227918284494914@sif>
-User-Agent: alot/0.7
-Subject: Re: [PATCH] riscv: sifive_test: Allow 16-bit writes to memory region
-Date: Thu, 03 Sep 2020 16:05:26 -0500
-Received-SPF: pass client-ip=2607:f8b0:4864:20::241;
- envelope-from=flukshun@gmail.com; helo=mail-oi1-x241.google.com
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f42;
+ envelope-from=alistair23@gmail.com; helo=mail-qv1-xf42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 03 Sep 2020 20:34:58 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -90,95 +75,121 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Sep 2020 21:05:40 -0000
+X-List-Received-Date: Fri, 04 Sep 2020 17:35:19 -0000
 
-Quoting Alistair Francis (2020-09-01 18:59:29)
-> On Mon, Aug 31, 2020 at 10:59 PM Nathan Chancellor
-> <natechancellor@gmail.com> wrote:
-> >
-> > When shutting down the machine running a mainline Linux kernel, the
-> > following error happens:
-> >
-> > $ build/riscv64-softmmu/qemu-system-riscv64 -bios default -M virt \
-> >     -display none -initrd rootfs.cpio -kernel Image -m 512m \
-> >     -nodefaults -serial mon:stdio
-> > ...
-> > Requesting system poweroff
-> > [    4.999630] reboot: Power down
-> > sbi_trap_error: hart0: trap handler failed (error -2)
-> > sbi_trap_error: hart0: mcause=3D0x0000000000000007 mtval=3D0x0000000000=
-100000
-> > sbi_trap_error: hart0: mepc=3D0x000000008000d4cc mstatus=3D0x0000000000=
-001822
-> > sbi_trap_error: hart0: ra=3D0x000000008000999e sp=3D0x0000000080015c78
-> > sbi_trap_error: hart0: gp=3D0xffffffe000e76610 tp=3D0xffffffe0081b89c0
-> > sbi_trap_error: hart0: s0=3D0x0000000080015c88 s1=3D0x0000000000000040
-> > sbi_trap_error: hart0: a0=3D0x0000000000000000 a1=3D0x0000000080004024
-> > sbi_trap_error: hart0: a2=3D0x0000000080004024 a3=3D0x0000000080004024
-> > sbi_trap_error: hart0: a4=3D0x0000000000100000 a5=3D0x0000000000005555
-> > sbi_trap_error: hart0: a6=3D0x0000000000004024 a7=3D0x0000000080011158
-> > sbi_trap_error: hart0: s2=3D0x0000000000000000 s3=3D0x0000000080016000
-> > sbi_trap_error: hart0: s4=3D0x0000000000000000 s5=3D0x0000000000000000
-> > sbi_trap_error: hart0: s6=3D0x0000000000000001 s7=3D0x0000000000000000
-> > sbi_trap_error: hart0: s8=3D0x0000000000000000 s9=3D0x0000000000000000
-> > sbi_trap_error: hart0: s10=3D0x0000000000000000 s11=3D0x0000000000000008
-> > sbi_trap_error: hart0: t0=3D0x0000000000000000 t1=3D0x0000000000000000
-> > sbi_trap_error: hart0: t2=3D0x0000000000000000 t3=3D0x0000000000000000
-> > sbi_trap_error: hart0: t4=3D0x0000000000000000 t5=3D0x0000000000000000
-> > sbi_trap_error: hart0: t6=3D0x0000000000000000
-> >
-> > The kernel does a 16-bit write when powering off the machine, which
-> > was allowed before commit 5d971f9e67 ("memory: Revert "memory: accept
-> > mismatching sizes in memory_region_access_valid""). Make min_access_size
-> > match reality so that the machine can shut down properly now.
-> >
-> > Cc: qemu-stable@nongnu.org
-> > Fixes: 88a07990fa ("SiFive RISC-V Test Finisher")
-> > Fixes: 5d971f9e67 ("memory: Revert "memory: accept mismatching sizes in=
- memory_region_access_valid"")
-> > Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
-> =
+On Thu, Sep 3, 2020 at 3:42 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> This is an effort to clean up the hw/riscv directory. Ideally it
+> should only contain the RISC-V SoC / machine codes plus generic
+> codes. Let's move sifive_e_prci model to hw/misc directory.
+>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-> Thanks!
-> =
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-> Applied to riscv-to-apply.next
+Alistair
 
-FYI, I'm hoping to pull this patch into the upcoming 5.0.1 stable
-release. The freeze is scheduled for 2020-09-20, I will apply this if it
-hits master before then.
-
-> =
-
-> Alistair
-> =
-
-> > ---
-> >
-> > Please let me know if the tags are wrong or inappropriate, this is my
-> > first QEMU patch.
-> >
-> >  hw/riscv/sifive_test.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
-> > index 0c78fb2c93..8c70dd69df 100644
-> > --- a/hw/riscv/sifive_test.c
-> > +++ b/hw/riscv/sifive_test.c
-> > @@ -59,7 +59,7 @@ static const MemoryRegionOps sifive_test_ops =3D {
-> >      .write =3D sifive_test_write,
-> >      .endianness =3D DEVICE_NATIVE_ENDIAN,
-> >      .valid =3D {
-> > -        .min_access_size =3D 4,
-> > +        .min_access_size =3D 2,
-> >          .max_access_size =3D 4
-> >      }
-> >  };
-> >
-> > base-commit: 2f4c51c0f384d7888a04b4815861e6d5fd244d75
-> > --
-> > 2.28.0
-> >
-> >
->=20
+> ---
+>
+>  include/hw/{riscv => misc}/sifive_e_prci.h | 0
+>  hw/{riscv => misc}/sifive_e_prci.c         | 2 +-
+>  hw/riscv/sifive_e.c                        | 2 +-
+>  hw/misc/Kconfig                            | 3 +++
+>  hw/misc/meson.build                        | 3 +++
+>  hw/riscv/Kconfig                           | 1 +
+>  hw/riscv/meson.build                       | 1 -
+>  7 files changed, 9 insertions(+), 3 deletions(-)
+>  rename include/hw/{riscv => misc}/sifive_e_prci.h (100%)
+>  rename hw/{riscv => misc}/sifive_e_prci.c (99%)
+>
+> diff --git a/include/hw/riscv/sifive_e_prci.h b/include/hw/misc/sifive_e_prci.h
+> similarity index 100%
+> rename from include/hw/riscv/sifive_e_prci.h
+> rename to include/hw/misc/sifive_e_prci.h
+> diff --git a/hw/riscv/sifive_e_prci.c b/hw/misc/sifive_e_prci.c
+> similarity index 99%
+> rename from hw/riscv/sifive_e_prci.c
+> rename to hw/misc/sifive_e_prci.c
+> index 17dfa74..8ec4ee4 100644
+> --- a/hw/riscv/sifive_e_prci.c
+> +++ b/hw/misc/sifive_e_prci.c
+> @@ -24,7 +24,7 @@
+>  #include "qemu/log.h"
+>  #include "qemu/module.h"
+>  #include "hw/hw.h"
+> -#include "hw/riscv/sifive_e_prci.h"
+> +#include "hw/misc/sifive_e_prci.h"
+>
+>  static uint64_t sifive_e_prci_read(void *opaque, hwaddr addr, unsigned int size)
+>  {
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index 36ccfb2..7f43ed9 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -43,8 +43,8 @@
+>  #include "hw/riscv/sifive_clint.h"
+>  #include "hw/riscv/sifive_uart.h"
+>  #include "hw/riscv/sifive_e.h"
+> -#include "hw/riscv/sifive_e_prci.h"
+>  #include "hw/riscv/boot.h"
+> +#include "hw/misc/sifive_e_prci.h"
+>  #include "chardev/char.h"
+>  #include "sysemu/arch_init.h"
+>  #include "sysemu/sysemu.h"
+> diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
+> index 92c397c..5073986 100644
+> --- a/hw/misc/Kconfig
+> +++ b/hw/misc/Kconfig
+> @@ -134,4 +134,7 @@ config MAC_VIA
+>  config AVR_POWER
+>      bool
+>
+> +config SIFIVE_E_PRCI
+> +    bool
+> +
+>  source macio/Kconfig
+> diff --git a/hw/misc/meson.build b/hw/misc/meson.build
+> index e1576b8..b6b2e57 100644
+> --- a/hw/misc/meson.build
+> +++ b/hw/misc/meson.build
+> @@ -21,6 +21,9 @@ softmmu_ss.add(when: 'CONFIG_ARM11SCU', if_true: files('arm11scu.c'))
+>  # Mac devices
+>  softmmu_ss.add(when: 'CONFIG_MOS6522', if_true: files('mos6522.c'))
+>
+> +# RISC-V devices
+> +softmmu_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
+> +
+>  # PKUnity SoC devices
+>  softmmu_ss.add(when: 'CONFIG_PUV3', if_true: files('puv3_pm.c'))
+>
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index e53ab1e..5855e99 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -15,6 +15,7 @@ config SIFIVE_E
+>      bool
+>      select HART
+>      select SIFIVE
+> +    select SIFIVE_E_PRCI
+>      select UNIMP
+>
+>  config SIFIVE_U
+> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+> index cf1aa99..d73ea99 100644
+> --- a/hw/riscv/meson.build
+> +++ b/hw/riscv/meson.build
+> @@ -10,7 +10,6 @@ riscv_ss.add(when: 'CONFIG_SIFIVE', if_true: files('sifive_plic.c'))
+>  riscv_ss.add(when: 'CONFIG_SIFIVE', if_true: files('sifive_test.c'))
+>  riscv_ss.add(when: 'CONFIG_SIFIVE', if_true: files('sifive_uart.c'))
+>  riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
+> -riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e_prci.c'))
+>  riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
+>  riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u_otp.c'))
+>  riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u_prci.c'))
+> --
+> 2.7.4
+>
+>
 
