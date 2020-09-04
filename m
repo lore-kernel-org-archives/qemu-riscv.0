@@ -1,63 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kEHeE-0001gV-EX
-	for mharc-qemu-riscv@gnu.org; Fri, 04 Sep 2020 15:45:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48650)
+	id 1kEHgd-0003Uh-19
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Sep 2020 15:47:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48974)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kEHeC-0001f1-ED; Fri, 04 Sep 2020 15:45:20 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:37058)
+ id 1kEHgb-0003Qu-3q; Fri, 04 Sep 2020 15:47:49 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:36576)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kEHeA-0005QM-Rx; Fri, 04 Sep 2020 15:45:20 -0400
-Received: by mail-io1-xd42.google.com with SMTP id b16so8321291ioj.4;
- Fri, 04 Sep 2020 12:45:17 -0700 (PDT)
+ id 1kEHgY-0005ez-Uf; Fri, 04 Sep 2020 15:47:48 -0400
+Received: by mail-il1-x143.google.com with SMTP id p13so7400117ils.3;
+ Fri, 04 Sep 2020 12:47:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jti0ZuYCgmfytFFLQngxNpTZ1nIGb6XcsfBSNsJvqJU=;
- b=mqxam5ohJk+U/eBwRnBW2lIZRj0GdAIic3BwqHeqotkHRp2RLHLpL2tp+FgLB7EFMK
- fl7s+H6Qd0s+KyPPHAXA8svROQ8aewJadPkBwbMp7Y4k9kbtwOnAuE9xmg+ERuB4XvcL
- p5t3fCA3IM31ryw180SQyC58MGt7gotaHg966hor3f3M5lABhmM+okrW1uh1scgiwJtQ
- mzCxgEw9mkhj65tKjRaM6Mu4JTHjeEYF9Ngw0PlyTCliKix4HVfRd/xJmBSy8dv1UO5U
- J8nYKVD0zCD9m/XtSZVhhOrWRDAfzrfFKwlEHZwt93R51fT6+e9MNkqki+2tDNJ72Eax
- /htA==
+ :cc; bh=Y/7BEGdDmB1KinVoVuLSRtc/+pMk2QLRHR4+GOO40r4=;
+ b=UEpJk+24C0Ys/JUuZZYIDVYj+cqSUvosehU/IcsDfFSM0OECxeiqFlSptAPK9J8/ek
+ 7hncs5c+8kWLxTil6qGso+zk+0pEGjGsiZXpZIcLgIJyiYON7As+BdI/ANHuYkAFm0RD
+ OqNnp74RVbcz7wGMsk38UabpdvUl0SRXaFM1fyZreFz/xdskrXRxmiG2v57bpNlKAiw7
+ WV57fPN06TqgOhG49oEyOaVnj++E/xbULB1Ne8kOXtAla/RLwKbhP/ZLe4eMD/vj8dqp
+ cIRoUwwvx0YEFhTsU3V0Kieck9L1VhiCmgWNuqtrooWq/+3xKQ+65EO0i+ilAMMnwLfV
+ Yrpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=jti0ZuYCgmfytFFLQngxNpTZ1nIGb6XcsfBSNsJvqJU=;
- b=n3KK4YYhf72p3ROFp2MrSPBo2oAuyrfwtCUMQvePJOVdkJdJ+XHO7jUQ0Zlx7LvybB
- g5/u2b6FZxG+zgdSOQ770RiXgRcXoOG7n3aoX29/2klDxsyZ/SAypNz8jhmC1ERUuctj
- 5a08+0Wwn2DGi3FE1WpfzxE+lqINpio5m+XnDfDEBsQB1t2xo0y/wO0GjUa+q/vwzsOl
- 7U3sBdP1vGWjeVToJ0bUke8cYGzPnPAKAxGDplDn5nfqtn9Jmgs/6G9satnJkg/oqQaK
- wQlCGAt5OXLjegoF5uCI1AwaHq7hgYcBRW/zCKsm01B6qVfOg2OTksapcl03Ety+u9Jr
- NIaQ==
-X-Gm-Message-State: AOAM532xsy2ebHGO/Na8L0K/F/CdSuHp+x2wX03Ypk1ULAkPTbroBT+2
- tSpIojd540ad6P7UZ6TP7T+hPZeeJ5XjPJRKviI=
-X-Google-Smtp-Source: ABdhPJzPTpx9K8fHTc06Wnev6lldC2jSWJfTrPuk6p0/Su7PhIUFFIpWDMKrcpMq/+5Tdxv0IW8PhhuR5z6MKtnYFgc=
-X-Received: by 2002:a5d:995a:: with SMTP id v26mr8839340ios.176.1599248717185; 
- Fri, 04 Sep 2020 12:45:17 -0700 (PDT)
+ bh=Y/7BEGdDmB1KinVoVuLSRtc/+pMk2QLRHR4+GOO40r4=;
+ b=LKjuOMKwa45sMaxYWG/eiY56w5Qh+WDGWF6iBRDQq5yYbEXrupTDS6ela5NdFOC/Zn
+ obH3XFiHYjK9KUuzABO9xjB6CcSBZohc7oiEbqFszrRfaLAk0iJR/kJQeUcAxwSBWHPN
+ V8hUCyDmLO5MjCZUP9j9Wzv18PdI5sPcxwuxdT24H9Dyu7n7vpH0vpBNj218uRf0KkSg
+ +ee7Jw6MI5UnEQJM+lwgHo32GQDBzCytxHNq3BlRbuRM2MLjyYrsH+FJCChP2y6Mpqft
+ d8NCd3vqfaCcijk7yOm+cAxKpsfFkJBQ5CGsgDnChhGdF1yBIv19kf2AdyyN5RhsHPrl
+ VG+g==
+X-Gm-Message-State: AOAM532vj+Oxw6pu/bGD3Ncoj8odKya296+LePCWwgGZFUdfKvmyB/2W
+ nmsZx8bFVDq+H/SsRyztwGtlALpTgaYLXiyb2bw=
+X-Google-Smtp-Source: ABdhPJwxMJfUSF3fIHqw6RtqYHMiDA7deeywxNYrJOb0UTkdP8NlWNOogJWdUllF5JNQa75N2wPHcGLwIKv0+dvGUVs=
+X-Received: by 2002:a92:8b52:: with SMTP id i79mr9788670ild.177.1599248865300; 
+ Fri, 04 Sep 2020 12:47:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
- <1598924352-89526-12-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1598924352-89526-12-git-send-email-bmeng.cn@gmail.com>
+ <1598924352-89526-17-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1598924352-89526-17-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 4 Sep 2020 12:34:22 -0700
-Message-ID: <CAKmqyKM_m7hHnyGwf7e9WJivwra8ANM2Z8mXRhtjRjgkPek=VQ@mail.gmail.com>
-Subject: Re: [PATCH v3 11/16] hw/net: cadence_gem: Add a new 'phy-addr'
- property
+Date: Fri, 4 Sep 2020 12:36:50 -0700
+Message-ID: <CAKmqyKPu-3qgGy2G_Rfo5DNA4FoFXQKG38hhjWmnqa=Tyq3DCw@mail.gmail.com>
+Subject: Re: [PATCH v3 16/16] hw/riscv: sifive_u: Connect a DMA controller
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
  Palmer Dabbelt <palmerdabbelt@google.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <alistair@alistair23.me>, 
- Jason Wang <jasowang@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
- qemu-arm <qemu-arm@nongnu.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -80,16 +78,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2020 19:45:20 -0000
+X-List-Received-Date: Fri, 04 Sep 2020 19:47:49 -0000
 
-On Mon, Aug 31, 2020 at 6:42 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Aug 31, 2020 at 6:46 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> At present the PHY address of the PHY connected to GEM is hard-coded
-> to either 23 (BOARD_PHY_ADDRESS) or 0. This might not be the case for
-> all boards. Add a new 'phy-addr' property so that board can specify
-> the PHY address for each GEM instance.
+> SiFive FU540 SoC integrates a platform DMA controller with 4 DMA
+> channels. This connects the exsiting SiFive PDMA model to the SoC,
+> and adds its device tree data as well.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
@@ -97,61 +94,139 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
 > ---
 >
-> (no changes since v2)
+> (no changes since v1)
 >
-> Changes in v2:
-> - change "phy-addr" default value to BOARD_PHY_ADDRESS
+>  include/hw/riscv/sifive_u.h | 11 +++++++++++
+>  hw/riscv/sifive_u.c         | 30 ++++++++++++++++++++++++++++++
+>  hw/riscv/Kconfig            |  1 +
+>  3 files changed, 42 insertions(+)
 >
->  include/hw/net/cadence_gem.h | 2 ++
->  hw/net/cadence_gem.c         | 5 +++--
->  2 files changed, 5 insertions(+), 2 deletions(-)
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index d3c0c00..793000a 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -19,6 +19,7 @@
+>  #ifndef HW_SIFIVE_U_H
+>  #define HW_SIFIVE_U_H
 >
-> diff --git a/include/hw/net/cadence_gem.h b/include/hw/net/cadence_gem.h
-> index 54e646f..01c6189 100644
-> --- a/include/hw/net/cadence_gem.h
-> +++ b/include/hw/net/cadence_gem.h
-> @@ -73,6 +73,8 @@ typedef struct CadenceGEMState {
->      /* Mask of register bits which are write 1 to clear */
->      uint32_t regs_w1c[CADENCE_GEM_MAXREG];
+> +#include "hw/dma/sifive_pdma.h"
+>  #include "hw/net/cadence_gem.h"
+>  #include "hw/riscv/riscv_hart.h"
+>  #include "hw/riscv/sifive_cpu.h"
+> @@ -43,6 +44,7 @@ typedef struct SiFiveUSoCState {
+>      SiFiveUPRCIState prci;
+>      SIFIVEGPIOState gpio;
+>      SiFiveUOTPState otp;
+> +    SiFivePDMAState dma;
+>      CadenceGEMState gem;
 >
-> +    /* PHY address */
-> +    uint8_t phy_addr;
->      /* PHY registers backing store */
->      uint16_t phy_regs[32];
+>      uint32_t serial;
+> @@ -72,6 +74,7 @@ enum {
+>      SIFIVE_U_MROM,
+>      SIFIVE_U_CLINT,
+>      SIFIVE_U_L2CC,
+> +    SIFIVE_U_PDMA,
+>      SIFIVE_U_L2LIM,
+>      SIFIVE_U_PLIC,
+>      SIFIVE_U_PRCI,
+> @@ -108,6 +111,14 @@ enum {
+>      SIFIVE_U_GPIO_IRQ13 = 20,
+>      SIFIVE_U_GPIO_IRQ14 = 21,
+>      SIFIVE_U_GPIO_IRQ15 = 22,
+> +    SIFIVE_U_PDMA_IRQ0 = 23,
+> +    SIFIVE_U_PDMA_IRQ1 = 24,
+> +    SIFIVE_U_PDMA_IRQ2 = 25,
+> +    SIFIVE_U_PDMA_IRQ3 = 26,
+> +    SIFIVE_U_PDMA_IRQ4 = 27,
+> +    SIFIVE_U_PDMA_IRQ5 = 28,
+> +    SIFIVE_U_PDMA_IRQ6 = 29,
+> +    SIFIVE_U_PDMA_IRQ7 = 30,
+>      SIFIVE_U_GEM_IRQ = 0x35
+>  };
 >
-> diff --git a/hw/net/cadence_gem.c b/hw/net/cadence_gem.c
-> index a93b5c0..d80096b 100644
-> --- a/hw/net/cadence_gem.c
-> +++ b/hw/net/cadence_gem.c
-> @@ -1446,7 +1446,7 @@ static uint64_t gem_read(void *opaque, hwaddr offset, unsigned size)
->              uint32_t phy_addr, reg_num;
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 2bc3992..7997537 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -14,6 +14,7 @@
+>   * 4) GPIO (General Purpose Input/Output Controller)
+>   * 5) OTP (One-Time Programmable) memory with stored serial number
+>   * 6) GEM (Gigabit Ethernet Controller) and management block
+> + * 7) DMA (Direct Memory Access Controller)
+>   *
+>   * This board currently generates devicetree dynamically that indicates at least
+>   * two harts and up to five harts.
+> @@ -73,6 +74,7 @@ static const struct MemmapEntry {
+>      [SIFIVE_U_MROM] =     {     0x1000,     0xf000 },
+>      [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
+>      [SIFIVE_U_L2CC] =     {  0x2010000,     0x1000 },
+> +    [SIFIVE_U_PDMA] =     {  0x3000000,   0x100000 },
+>      [SIFIVE_U_L2LIM] =    {  0x8000000,  0x2000000 },
+>      [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
+>      [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
+> @@ -303,6 +305,22 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>      qemu_fdt_setprop_string(fdt, nodename, "compatible", "gpio-restart");
+>      g_free(nodename);
 >
->              phy_addr = (retval & GEM_PHYMNTNC_ADDR) >> GEM_PHYMNTNC_ADDR_SHFT;
-> -            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0) {
-> +            if (phy_addr == s->phy_addr || phy_addr == 0) {
->                  reg_num = (retval & GEM_PHYMNTNC_REG) >> GEM_PHYMNTNC_REG_SHIFT;
->                  retval &= 0xFFFF0000;
->                  retval |= gem_phy_read(s, reg_num);
-> @@ -1569,7 +1569,7 @@ static void gem_write(void *opaque, hwaddr offset, uint64_t val,
->              uint32_t phy_addr, reg_num;
+> +    nodename = g_strdup_printf("/soc/dma@%lx",
+> +        (long)memmap[SIFIVE_U_PDMA].base);
+> +    qemu_fdt_add_subnode(fdt, nodename);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "#dma-cells", 1);
+> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
+> +        SIFIVE_U_PDMA_IRQ0, SIFIVE_U_PDMA_IRQ1, SIFIVE_U_PDMA_IRQ2,
+> +        SIFIVE_U_PDMA_IRQ3, SIFIVE_U_PDMA_IRQ4, SIFIVE_U_PDMA_IRQ5,
+> +        SIFIVE_U_PDMA_IRQ6, SIFIVE_U_PDMA_IRQ7);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
+> +    qemu_fdt_setprop_cells(fdt, nodename, "reg",
+> +        0x0, memmap[SIFIVE_U_PDMA].base,
+> +        0x0, memmap[SIFIVE_U_PDMA].size);
+> +    qemu_fdt_setprop_string(fdt, nodename, "compatible",
+> +                            "sifive,fu540-c000-pdma");
+> +    g_free(nodename);
+> +
+>      nodename = g_strdup_printf("/soc/cache-controller@%lx",
+>          (long)memmap[SIFIVE_U_L2CC].base);
+>      qemu_fdt_add_subnode(fdt, nodename);
+> @@ -627,6 +645,7 @@ static void sifive_u_soc_instance_init(Object *obj)
+>      object_initialize_child(obj, "otp", &s->otp, TYPE_SIFIVE_U_OTP);
+>      object_initialize_child(obj, "gem", &s->gem, TYPE_CADENCE_GEM);
+>      object_initialize_child(obj, "gpio", &s->gpio, TYPE_SIFIVE_GPIO);
+> +    object_initialize_child(obj, "pdma", &s->dma, TYPE_SIFIVE_PDMA);
+>  }
 >
->              phy_addr = (val & GEM_PHYMNTNC_ADDR) >> GEM_PHYMNTNC_ADDR_SHFT;
-> -            if (phy_addr == BOARD_PHY_ADDRESS || phy_addr == 0) {
-> +            if (phy_addr == s->phy_addr || phy_addr == 0) {
->                  reg_num = (val & GEM_PHYMNTNC_REG) >> GEM_PHYMNTNC_REG_SHIFT;
->                  gem_phy_write(s, reg_num, val);
->              }
-> @@ -1682,6 +1682,7 @@ static Property gem_properties[] = {
->      DEFINE_NIC_PROPERTIES(CadenceGEMState, conf),
->      DEFINE_PROP_UINT32("revision", CadenceGEMState, revision,
->                         GEM_MODID_VALUE),
-> +    DEFINE_PROP_UINT8("phy-addr", CadenceGEMState, phy_addr, BOARD_PHY_ADDRESS),
->      DEFINE_PROP_UINT8("num-priority-queues", CadenceGEMState,
->                        num_priority_queues, 1),
->      DEFINE_PROP_UINT8("num-type1-screeners", CadenceGEMState,
+>  static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+> @@ -730,6 +749,17 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>                                              SIFIVE_U_GPIO_IRQ0 + i));
+>      }
+>
+> +    /* PDMA */
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->dma), errp);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->dma), 0, memmap[SIFIVE_U_PDMA].base);
+> +
+> +    /* Connect PDMA interrupts to the PLIC */
+> +    for (i = 0; i < SIFIVE_PDMA_IRQS; i++) {
+> +        sysbus_connect_irq(SYS_BUS_DEVICE(&s->dma), i,
+> +                           qdev_get_gpio_in(DEVICE(s->plic),
+> +                                            SIFIVE_U_PDMA_IRQ0 + i));
+> +    }
+> +
+>      qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
+>      if (!sysbus_realize(SYS_BUS_DEVICE(&s->otp), errp)) {
+>          return;
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index 9032cb0..e53ab1e 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -22,6 +22,7 @@ config SIFIVE_U
+>      select CADENCE
+>      select HART
+>      select SIFIVE
+> +    select SIFIVE_PDMA
+>      select UNIMP
+>
+>  config SPIKE
 > --
 > 2.7.4
 >
