@@ -1,57 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kEFu8-0003Lx-Gf
-	for mharc-qemu-riscv@gnu.org; Fri, 04 Sep 2020 13:53:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55150)
+	id 1kEFvg-0005QE-UA
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Sep 2020 13:55:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55490)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kEFu6-0003IK-HM; Fri, 04 Sep 2020 13:53:38 -0400
-Received: from mail-qk1-x743.google.com ([2607:f8b0:4864:20::743]:38481)
+ id 1kEFve-0005Mi-L5; Fri, 04 Sep 2020 13:55:14 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:40559)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kEFu4-0008UP-TI; Fri, 04 Sep 2020 13:53:38 -0400
-Received: by mail-qk1-x743.google.com with SMTP id d20so7129422qka.5;
- Fri, 04 Sep 2020 10:53:36 -0700 (PDT)
+ id 1kEFvc-0000Kl-LP; Fri, 04 Sep 2020 13:55:14 -0400
+Received: by mail-il1-x142.google.com with SMTP id y2so7113996ilp.7;
+ Fri, 04 Sep 2020 10:55:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=wBrp3TnUSMyLp9o5msShmUSefqGRodLAR/NbpDDlF7Q=;
- b=VUe3dYOQensytIuDt0aCPB2PZTGFb4GaJjGXXibq9ZOCpfEOs58BTYI91QUJgoJJlp
- AGDoPUWOHJIX28uVis9hf8UJDZYk4slKtFzJZhjohlFyxYz+GDHjOBFQpaTmpgDd6vKb
- 0x8iv/IIVSFz04ycEefyCbNsjBeJHfFKmIKmh9tfv4DVD0jt3edk+WK/8dzubJ35rEoY
- qrdlY8EdzDzv8PF172dplN/Sb1W0M2ik7J/Ojz+LlY3gV4pcTq8S8PIPxzx60tqSloWN
- Nq/3YLuj0t+BP+CStr/QMXbpNBv6gpyhHnLdD4bS54kqIFOJ3JVMZX8r/OzV3aj4BRtE
- 7Z2w==
+ :cc; bh=rrRlxU6Tivxrej0Hui6en392JxWhEXAjJvXhKYn4ySM=;
+ b=DpnBUy+Xf5FDTWrpzcUKC9VP4gZ05lU23armx0tLxBzZC9HpQg94WafW9FVtG5446X
+ bFBw22PKLr4xLze2NR+vIE8u5tAgByTUGHnxOX5lrR6m6Uh5imtxFcr5f3aFQMJTeZPp
+ Dn/6QiJC1cwMjgp5xAjXDhWOE/QNR4aZrYZckwEMSQQGhxejutZMzLhcheYEIXrZVt7j
+ 5LcUYvR9qkaEh4+/3ul/jJU2sdQl74m1B3eFXMtxVGwDajWeZs03o/+FM0BsZCcz9Pg0
+ pXH34MaABepKPVv/oNbI+FJDR2fkV+MeOykqEoFzm3eonSS1zkqJkdKkKo3w3r630fOP
+ NwVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=wBrp3TnUSMyLp9o5msShmUSefqGRodLAR/NbpDDlF7Q=;
- b=SoHH7cYVWtFgL0gm58OsIVFyKfB/Q3JIaRDZgk3myQEubx+Fy9k29Jc9hD0bkIKmA9
- Kf3bffiLigaoDSPl8GrsFfWXNZm+uWaQT+AHCI0FBXibRzKSkNpjt9SUkpTNW3jTdomI
- UY4ZB+hyoMWOWWW/39vsLx4VixCkSDc7b4trg+v/VFkTeQb1iWlXtkdQxZmvyaz9nXlG
- faIonT5Lsa9JcGLJ8IxHdnU0VztTzCwYeMoA72QrIUxbsi03sTAifDhfrPPrWIelhFxb
- nGYy/1b02pd3AnAJnePDOd4Sg4ZBNPn0yP4Lgh7pjq3x5LMAae6AoLQMIjb5mtvsfTqg
- IM0g==
-X-Gm-Message-State: AOAM533I+gm2RLhj5rWMTD7pwJ4IMYxBGFv6iz1QuEluuE3R9WVlWV1B
- NBqZUMi/kdVBC+kq5iyJSXIwam1/Ljy5df9DpNw=
-X-Google-Smtp-Source: ABdhPJy3+/ZUv+eRxqdpCZIJnc6ogidl2EJZrt+87ohc9RvTFWLMYDRfSJrvhUyD5vTxbfdsJpxB04rXYrudGV93NGE=
-X-Received: by 2002:a37:a5ca:: with SMTP id o193mr9064865qke.126.1599242015740; 
- Fri, 04 Sep 2020 10:53:35 -0700 (PDT)
+ bh=rrRlxU6Tivxrej0Hui6en392JxWhEXAjJvXhKYn4ySM=;
+ b=XdZiE5uRK6WEniFMp+wLtDdHPVCRoAKo0YtdmeVKtpxn5Ws86lieOkIZr2Ga7aipkE
+ XL/xYd38z3dG9BgMPAKW7fz4po0RprgayK51vuWMqP3xJRAly5Q6Qh+7QIiCdj9KUjTf
+ osZ+DrfelOudnbwFgT+CsqlBH+aQzdgiki2/cbeXV+uveZsrCvBplAYa7Fp12LZ1ulRC
+ lafRRftDrixi+v4VD2olpjxinzPqLMctCxV0ZUBGi+J0IiRGIBRP6r63dAdD1KxqlHlU
+ Q1TqzLPRMH/APrXGqlY38AY5acsBu1BdyhvffncXKTPewP65Xar4ntU0lgt5eanYQP6n
+ 4QsQ==
+X-Gm-Message-State: AOAM530UyA9JCOy4mJzN4aCWdeT8uPjwvoThYlKPv2IoMhILMukVOnx5
+ 2PsrtcPaNtjM+GYuMoIQETCTIJouKO6L48C5fbY=
+X-Google-Smtp-Source: ABdhPJwzy1rORMQ22zIKKtoQtBR41CsZAbDC0CQs18NzxJsZ7PwrUIK2/tFWO8coy5iDWMjEFVC033jtPHowWbTKJFc=
+X-Received: by 2002:a92:189:: with SMTP id 131mr9313806ilb.40.1599242111094;
+ Fri, 04 Sep 2020 10:55:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <1599129623-68957-1-git-send-email-bmeng.cn@gmail.com>
- <1599129623-68957-12-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1599129623-68957-12-git-send-email-bmeng.cn@gmail.com>
+ <1599129623-68957-13-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1599129623-68957-13-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 4 Sep 2020 10:42:40 -0700
-Message-ID: <CAKmqyKOQfB8c5xhCpuNC_8oVjuEsdg55qXDuNA+gcEpPodpXTw@mail.gmail.com>
-Subject: Re: [PATCH 11/12] hw/riscv: Drop CONFIG_SIFIVE
+Date: Fri, 4 Sep 2020 10:44:16 -0700
+Message-ID: <CAKmqyKM6gKcuvJF2REMA9OvwLKuTZb_n1GdhbAJSumH9wGsp1w@mail.gmail.com>
+Subject: Re: [PATCH 12/12] hw/riscv: Sort the Kconfig options in alphabetical
+ order
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::743;
- envelope-from=alistair23@gmail.com; helo=mail-qk1-x743.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -74,15 +75,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2020 17:53:38 -0000
+X-List-Received-Date: Fri, 04 Sep 2020 17:55:15 -0000
 
-On Thu, Sep 3, 2020 at 3:49 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Thu, Sep 3, 2020 at 3:43 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> The name SIFIVE is too vague to convey the required component of
-> MSI_NONBROKEN. Let's drop the option, and select MSI_NONBROKEN in
-> each machine instead.
+> At present the Kconfig file is in disorder. Let's sort the options.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
@@ -90,71 +89,106 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+>
 > ---
 >
->  hw/riscv/Kconfig | 14 +++++---------
->  1 file changed, 5 insertions(+), 9 deletions(-)
+>  hw/riscv/Kconfig | 58 ++++++++++++++++++++++++++++----------------------------
+>  1 file changed, 29 insertions(+), 29 deletions(-)
 >
 > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 7d017bc..e152fdc 100644
+> index e152fdc..2df978f 100644
 > --- a/hw/riscv/Kconfig
 > +++ b/hw/riscv/Kconfig
-> @@ -1,13 +1,9 @@
+> @@ -1,36 +1,16 @@
 >  config IBEX
 >      bool
 >
-> -config SIFIVE
+> -config SIFIVE_E
 > -    bool
 > -    select MSI_NONBROKEN
+> -    select SIFIVE_CLINT
+> -    select SIFIVE_GPIO
+> -    select SIFIVE_PLIC
+> -    select SIFIVE_UART
+> -    select SIFIVE_E_PRCI
+> -    select UNIMP
 > -
->  config SIFIVE_E
+> -config SIFIVE_U
+> +config MICROCHIP_PFSOC
 >      bool
-> -    select SIFIVE
-> +    select MSI_NONBROKEN
+> -    select CADENCE
+> +    select CADENCE_SDHCI
+> +    select MCHP_PFSOC_MMUART
+>      select MSI_NONBROKEN
 >      select SIFIVE_CLINT
->      select SIFIVE_GPIO
->      select SIFIVE_PLIC
-> @@ -18,7 +14,7 @@ config SIFIVE_E
->  config SIFIVE_U
->      bool
->      select CADENCE
-> -    select SIFIVE
-> +    select MSI_NONBROKEN
->      select SIFIVE_CLINT
->      select SIFIVE_GPIO
+> -    select SIFIVE_GPIO
 >      select SIFIVE_PDMA
-> @@ -31,7 +27,7 @@ config SIFIVE_U
->  config SPIKE
->      bool
->      select HTIF
-> -    select SIFIVE
-> +    select MSI_NONBROKEN
->      select SIFIVE_CLINT
 >      select SIFIVE_PLIC
+> -    select SIFIVE_UART
+> -    select SIFIVE_U_OTP
+> -    select SIFIVE_U_PRCI
+>      select UNIMP
 >
-> @@ -44,20 +40,20 @@ config RISCV_VIRT
+> -config SPIKE
+> -    bool
+> -    select HTIF
+> -    select MSI_NONBROKEN
+> -    select SIFIVE_CLINT
+> -    select SIFIVE_PLIC
+> -
+>  config OPENTITAN
+>      bool
+>      select IBEX
+> @@ -40,23 +20,43 @@ config RISCV_VIRT
 >      bool
 >      imply PCI_DEVICES
 >      imply TEST_DEVICES
-> +    select MSI_NONBROKEN
+> +    select GOLDFISH_RTC
+>      select MSI_NONBROKEN
 >      select PCI
->      select SERIAL
->      select GOLDFISH_RTC
->      select VIRTIO_MMIO
+> -    select SERIAL
+> -    select GOLDFISH_RTC
+> -    select VIRTIO_MMIO
 >      select PCI_EXPRESS_GENERIC_BRIDGE
 >      select PFLASH_CFI01
-> -    select SIFIVE
+> +    select SERIAL
 >      select SIFIVE_CLINT
 >      select SIFIVE_PLIC
 >      select SIFIVE_TEST
+> +    select VIRTIO_MMIO
 >
->  config MICROCHIP_PFSOC
+> -config MICROCHIP_PFSOC
+> +config SIFIVE_E
 >      bool
-> -    select SIFIVE
-> +    select MSI_NONBROKEN
+>      select MSI_NONBROKEN
 >      select SIFIVE_CLINT
+> +    select SIFIVE_GPIO
+> +    select SIFIVE_PLIC
+> +    select SIFIVE_UART
+> +    select SIFIVE_E_PRCI
 >      select UNIMP
->      select MCHP_PFSOC_MMUART
+> -    select MCHP_PFSOC_MMUART
+> +
+> +config SIFIVE_U
+> +    bool
+> +    select CADENCE
+> +    select MSI_NONBROKEN
+> +    select SIFIVE_CLINT
+> +    select SIFIVE_GPIO
+>      select SIFIVE_PDMA
+>      select SIFIVE_PLIC
+> -    select CADENCE_SDHCI
+> +    select SIFIVE_UART
+> +    select SIFIVE_U_OTP
+> +    select SIFIVE_U_PRCI
+> +    select UNIMP
+> +
+> +config SPIKE
+> +    bool
+> +    select HTIF
+> +    select MSI_NONBROKEN
+> +    select SIFIVE_CLINT
+> +    select SIFIVE_PLIC
 > --
 > 2.7.4
 >
