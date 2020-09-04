@@ -1,62 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kEIRz-0002OL-3N
-	for mharc-qemu-riscv@gnu.org; Fri, 04 Sep 2020 16:36:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57468)
+	id 1kEIVj-0004gx-3b
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Sep 2020 16:40:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58056)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kEIRx-0002NI-3M; Fri, 04 Sep 2020 16:36:45 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:44476)
+ id 1kEIVh-0004g0-Eb; Fri, 04 Sep 2020 16:40:37 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:37842)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kEIRu-0002z5-IW; Fri, 04 Sep 2020 16:36:44 -0400
-Received: by mail-io1-xd42.google.com with SMTP id g128so8397166iof.11;
- Fri, 04 Sep 2020 13:36:41 -0700 (PDT)
+ id 1kEIVf-0003YT-An; Fri, 04 Sep 2020 16:40:37 -0400
+Received: by mail-io1-xd41.google.com with SMTP id b16so8459801ioj.4;
+ Fri, 04 Sep 2020 13:40:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vgCnJrRSAAjSpnwfLoGGmlYF88ToELrhPBc6j85A9oo=;
- b=Vw/H4GKC5bieHv5iy4z2V9nrSrryz9ppx4AyoKuiZ4y8+OX6ZHbpBpzpltCeCJA5fd
- QqHKdPxRRa193WwyJBCXPxqFKj6WNqBKdFisxUV/IOp74iiOb3lg8Oa4hMrLQv+shfOq
- TTGtSuW7bOM4GLsEhftV7YfkFBevXqm4rK2bjj8bHE95HO8remUD9V5ewwCb52xQURth
- GsBjUitd858JaRvHm/ttBQZ/pl9xYx/DDQBRxdy8r71S+8kuLRQJxV7xLBwKMpqBBzYu
- xL3JgZiSudZvBPSNphYHn24t25G69KMG0BfW4q6SBaSp2ISmGLe+5FCRmbsmEPbAC3Z0
- 0uhg==
+ :cc; bh=NSE2tS/nw3P0aS0OxukRx1bpLQa1R9SRVuYz3RLOyDE=;
+ b=vNMDCwS1ifxwUI9bZV1BoaqJvwqtcYxW7GRA+O1PJRzzT7RlMWALZRRGOK0QxRt0uK
+ K0nZVpnSvyvd0ZADERdZuUhyXw7MzvdwbamVHz1qKBq55FG6gIDuw8BH9tUMn7zqOwbp
+ my8afQaj4xKux6vcq+fLDyKrBqWToJSwvrdd56Oa8Nu87G2YSQpZvSm9k46oIMmlBmf5
+ ASqOwFs8RcAOud6LkF8uB7qsrOzVgdzqCgR5w32gJy+1oLGUnwRgsuuSztnQZUlyTK/E
+ eNSyO6NKE2UXWi2CY/cErhZZY7f05ZectgiA1u+00acC2N6lT6ytfCWdATtQvTuyaqnG
+ 6jtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=vgCnJrRSAAjSpnwfLoGGmlYF88ToELrhPBc6j85A9oo=;
- b=IBE+6Kfg/Vu3djBj8Vmn6RIsIuc5gt8CaM2brX3Ao5kayYhhLhS0r/z8+6SmJyvnhJ
- zzlJnWK2mgqKvd/1eFe4PjTuEqH/43oqzcoY4hm/39Ji8dWzHHyikWStvUFnAoj/S4nZ
- q/vMmlNjZ3RQj84RKDx41XvzHhhwnVBGaNj1x6RmFdXmf3CtBjF3324QDO0/3QgRm9Y2
- 20ZCMq8vK7bEopKvRkdI3QgPTnxyLaPIBTsWcfezwUJaq+52taRK8INg82mdiWR9A/v/
- TfVr+ZYLTznwQms6cktDHJh9F40pNTp9aQAsctt84C1uCmh+BrdHobUSJdiquIR+2XLG
- Tvsg==
-X-Gm-Message-State: AOAM533D4b7cRXf8/tlCOXiXBhKbzcstJ+Is8KG1tF3j+QJg0smoglHf
- r1EsbOkiaA4OeWB1/ol9PIg/ww3hwehawx1f670=
-X-Google-Smtp-Source: ABdhPJwTq2oAznfl3KywGwZnbDXQdHLn9+Ltn8Tps9HqUnSnLXJs8NH9RAYiy6Z6XFdoRCJ/fwgYQXBX4yiJ/cCIdBc=
-X-Received: by 2002:a05:6602:2f88:: with SMTP id
- u8mr8924130iow.175.1599251800980; 
- Fri, 04 Sep 2020 13:36:40 -0700 (PDT)
+ bh=NSE2tS/nw3P0aS0OxukRx1bpLQa1R9SRVuYz3RLOyDE=;
+ b=ekZaZB0gBQJWwl6g46ZSVwI5Al3OkqrFvS6J4tGA+xDebV7RXZEiV8sJo5n0B9d2Z9
+ A36OoAHTffyj+tuB0ibNZ80o/hVTVi6u0xIfwuOyl0ui0zNWC2K/fZwo6DBnH5ZR2XoL
+ ueztyLuGbUIB7WPwYHtzsgBWMFdf0ZDQiJz1QX8wWVN6K88vjFA4dEBf8Jf7gEub71ht
+ CQYenT8qMftXGcshbMU7My8RXqQpIo/iKJfg3Io9ws1v90ACTAjO8nV7en1lLYjOOnJ8
+ 3uPZK5WM48zxBxEhPbKETcGVK4J6DR+nF7DcVclkG3N4brh+5gKyIOeDNw250GwY/G+O
+ 4BXw==
+X-Gm-Message-State: AOAM5319Z0AvDh19qZsNz5Cdug6vW3PkWf/vOh3lFzY1Np5o2jCM/6qD
+ agjSvJXOc8ExDrHAw5iIiC1z9uo39mUV4lTkdRs=
+X-Google-Smtp-Source: ABdhPJw8zfPTjz9532ClqfYSYN2z9dEGX4fuOHOLGxzALVV2TdWSvU89ey9g/6Tw76EbBJ5IRC5bViIKvifYPYLPS6Q=
+X-Received: by 2002:a02:3213:: with SMTP id j19mr3545947jaa.135.1599252033503; 
+ Fri, 04 Sep 2020 13:40:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
- <1598924352-89526-10-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1598924352-89526-10-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 4 Sep 2020 13:25:46 -0700
-Message-ID: <CAKmqyKMw6DfNQHrit1W0WTcANLJX-jXQQ-ULGHbPhq-mNiSF4A@mail.gmail.com>
-Subject: Re: [PATCH v3 09/16] hw/dma: Add SiFive platform DMA controller
- emulation
+Date: Fri, 4 Sep 2020 13:29:38 -0700
+Message-ID: <CAKmqyKMDhpaKT2QjP2zpqLny5pH+X7seYg04Dopz3DEUgoutgg@mail.gmail.com>
+Subject: Re: [PATCH v3 00/16] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
+ board support
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
  Palmer Dabbelt <palmerdabbelt@google.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>
+ Peter Maydell <peter.maydell@linaro.org>,
+ Alistair Francis <alistair@alistair23.me>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Jason Wang <jasowang@redhat.com>, 
+ Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-arm <qemu-arm@nongnu.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -79,447 +84,164 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2020 20:36:45 -0000
+X-List-Received-Date: Fri, 04 Sep 2020 20:40:37 -0000
 
-On Mon, Aug 31, 2020 at 6:48 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Aug 31, 2020 at 6:40 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> Microchip PolarFire SoC integrates a DMA engine that supports:
-> * Independent concurrent DMA transfers using 4 DMA channels
-> * Generation of interrupts on various conditions during execution
-> which is actually an IP reused from the SiFive FU540 chip.
+> This adds support for Microchip PolarFire SoC Icicle Kit board.
+> The Icicle Kit board integrates a PolarFire SoC, with one SiFive's
+> E51 plus four U54 cores and many on-chip peripherals and an FPGA.
 >
-> This creates a model to support both polling and interrupt modes.
+> For more details about Microchip PolarFire SoC, please see:
+> https://www.microsemi.com/product-directory/soc-fpgas/5498-polarfire-soc-fpga
 >
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+> The Icicle Kit board information can be found here:
+> https://www.microsemi.com/existing-parts/parts/152514
 >
-> ---
+> Unlike SiFive FU540, the RISC-V core resect vector is at 0x20220000.
+> The RISC-V CPU and HART codes has been updated to set the core's
+> reset vector based on a configurable property from machine codes.
+>
+> The following perepherals are created as an unimplemented device:
+>
+> - Bus Error Uint 0/1/2/3/4
+> - L2 cache controller
+> - SYSREG
+> - MPUCFG
+> - IOSCBCFG
+> - GPIO
+>
+> The following perepherals are emulated:
+> - SiFive CLINT
+> - SiFive PLIC
+> - PolarFire SoC Multi-Mode UART
+> - SiFive PDMA
+> - Cadence eMMC/SDHCI controller
+> - Cadence Gigabit Ethernet MAC
+>
+> The BIOS image used by this machine is hss.bin, aka Hart Software
+> Services, which can be built from:
+> https://github.com/polarfire-soc/hart-software-services
+>
+> To launch this machine:
+> $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
+>     -bios path/to/hss.bin -sd path/to/sdcard.img \
+>     -nic tap,ifname=tap,script=no,model=cadence_gem \
+>     -display none -serial stdio \
+>     -chardev socket,id=serial1,path=serial1.sock,server,wait \
+>     -serial chardev:serial1
+>
+> The memory is set to 1 GiB by default to match the hardware.
+> A sanity check on ram size is performed in the machine init routine
+> to prompt user to increase the RAM size to > 1 GiB when less than
+> 1 GiB ram is detected.
+>
+> HSS output is on the first serial port (stdio) and U-Boot/Linux
+> outputs on the 2nd serial port. OpenSBI outputs on a random serial
+> port due to the lottery mechanism used during the multi-core boot.
+>
+> Please check the QEMU WiKi page for the target specific information:
+> https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
 >
 > Changes in v3:
+> - rebase on qemu/master
 > - change MCHP_PFSOC_DMA to SIFIVE_PDMA
+> - use the correct (Object *) to set the 'phy-addr' in xlnx-zynqmp.c
 >
 > Changes in v2:
+> - change to update hw/char/meson.build
+> - add impl.min_access_size and impl.max_access_size as part of
+>   MemoryRegionOps and remove the allignment check
+> - change to update hw/sd/meson.build
+> - change the name to "generic-sdhci" when calling object_initialize_child()
+> - add a container MR to simplify out-of-bounds access checks
+> - do not initialize TYPE_SYSBUS_SDHCI in the SoC instance_init(),
+>   instead move that to the cadence_sdhci model
+> - do not access generic-sdhci's state directly,
+>   instead move that to the cadence_sdhci model
 > - change to update hw/dma/meson.build
 > - rename the file names to sifive_pdma.[c|h]
 > - update irq number to 8 per the SiFive FU540 manual
 > - fix the register offset for channel 1/2/3 in the read/write ops
+> - connect 8 IRQs to the PLIC
+> - change "phy-addr" default value to BOARD_PHY_ADDRESS
 >
->  include/hw/dma/sifive_pdma.h |  57 ++++++++
->  hw/dma/sifive_pdma.c         | 313 +++++++++++++++++++++++++++++++++++++++++++
->  hw/dma/Kconfig               |   3 +
->  hw/dma/meson.build           |   1 +
->  4 files changed, 374 insertions(+)
+> Bin Meng (16):
+>   target/riscv: cpu: Add a new 'resetvec' property
+>   hw/riscv: hart: Add a new 'resetvec' property
+>   target/riscv: cpu: Set reset vector based on the configured property
+>     value
+>   hw/riscv: Initial support for Microchip PolarFire SoC Icicle Kit board
+>   hw/char: Add Microchip PolarFire SoC MMUART emulation
+>   hw/riscv: microchip_pfsoc: Connect 5 MMUARTs
+>   hw/sd: Add Cadence SDHCI emulation
+>   hw/riscv: microchip_pfsoc: Connect a Cadence SDHCI controller and an
+>     SD card
+>   hw/dma: Add SiFive platform DMA controller emulation
+>   hw/riscv: microchip_pfsoc: Connect a DMA controller
+>   hw/net: cadence_gem: Add a new 'phy-addr' property
+>   hw/arm: xlnx: Set all boards' GEM 'phy-addr' property value to 23
+>   hw/riscv: microchip_pfsoc: Connect 2 Cadence GEMs
+>   hw/riscv: microchip_pfsoc: Hook GPIO controllers
+>   hw/riscv: clint: Avoid using hard-coded timebase frequency
+>   hw/riscv: sifive_u: Connect a DMA controller
+
+Thanks!
+
+Applied to riscv-to-apply.next
+
+Alistair
+
+>
+>  default-configs/riscv64-softmmu.mak |   1 +
+>  include/hw/char/mchp_pfsoc_mmuart.h |  61 +++++
+>  include/hw/dma/sifive_pdma.h        |  57 +++++
+>  include/hw/net/cadence_gem.h        |   2 +
+>  include/hw/riscv/microchip_pfsoc.h  | 133 +++++++++++
+>  include/hw/riscv/riscv_hart.h       |   1 +
+>  include/hw/riscv/sifive_clint.h     |   4 +-
+>  include/hw/riscv/sifive_u.h         |  11 +
+>  include/hw/sd/cadence_sdhci.h       |  47 ++++
+>  target/riscv/cpu.h                  |   7 +-
+>  hw/arm/xilinx_zynq.c                |   1 +
+>  hw/arm/xlnx-versal.c                |   1 +
+>  hw/arm/xlnx-zynqmp.c                |   2 +
+>  hw/char/mchp_pfsoc_mmuart.c         |  86 +++++++
+>  hw/dma/sifive_pdma.c                | 313 ++++++++++++++++++++++++++
+>  hw/net/cadence_gem.c                |   7 +-
+>  hw/riscv/microchip_pfsoc.c          | 437 ++++++++++++++++++++++++++++++++++++
+>  hw/riscv/opentitan.c                |   1 +
+>  hw/riscv/riscv_hart.c               |   3 +
+>  hw/riscv/sifive_clint.c             |  26 ++-
+>  hw/riscv/sifive_e.c                 |   4 +-
+>  hw/riscv/sifive_u.c                 |  35 ++-
+>  hw/riscv/spike.c                    |   3 +-
+>  hw/riscv/virt.c                     |   3 +-
+>  hw/sd/cadence_sdhci.c               | 193 ++++++++++++++++
+>  target/riscv/cpu.c                  |   8 +-
+>  target/riscv/cpu_helper.c           |   4 +-
+>  target/riscv/csr.c                  |   4 +-
+>  MAINTAINERS                         |   9 +
+>  hw/char/Kconfig                     |   3 +
+>  hw/char/meson.build                 |   1 +
+>  hw/dma/Kconfig                      |   3 +
+>  hw/dma/meson.build                  |   1 +
+>  hw/riscv/Kconfig                    |  10 +
+>  hw/riscv/meson.build                |   1 +
+>  hw/sd/Kconfig                       |   4 +
+>  hw/sd/meson.build                   |   1 +
+>  37 files changed, 1459 insertions(+), 29 deletions(-)
+>  create mode 100644 include/hw/char/mchp_pfsoc_mmuart.h
 >  create mode 100644 include/hw/dma/sifive_pdma.h
+>  create mode 100644 include/hw/riscv/microchip_pfsoc.h
+>  create mode 100644 include/hw/sd/cadence_sdhci.h
+>  create mode 100644 hw/char/mchp_pfsoc_mmuart.c
 >  create mode 100644 hw/dma/sifive_pdma.c
+>  create mode 100644 hw/riscv/microchip_pfsoc.c
+>  create mode 100644 hw/sd/cadence_sdhci.c
 >
-> diff --git a/include/hw/dma/sifive_pdma.h b/include/hw/dma/sifive_pdma.h
-> new file mode 100644
-> index 0000000..e319bbd
-> --- /dev/null
-> +++ b/include/hw/dma/sifive_pdma.h
-> @@ -0,0 +1,57 @@
-> +/*
-> + * SiFive Platform DMA emulation
-> + *
-> + * Copyright (c) 2020 Wind River Systems, Inc.
-> + *
-> + * Author:
-> + *   Bin Meng <bin.meng@windriver.com>
-> + *
-> + * This program is free software; you can redistribute it and/or
-> + * modify it under the terms of the GNU General Public License as
-> + * published by the Free Software Foundation; either version 2 or
-> + * (at your option) version 3 of the License.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along
-> + * with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef SIFIVE_PDMA_H
-> +#define SIFIVE_PDMA_H
-> +
-> +struct sifive_pdma_chan {
-> +    uint32_t control;
-> +    uint32_t next_config;
-> +    uint64_t next_bytes;
-> +    uint64_t next_dst;
-> +    uint64_t next_src;
-> +    uint32_t exec_config;
-> +    uint64_t exec_bytes;
-> +    uint64_t exec_dst;
-> +    uint64_t exec_src;
-> +    int state;
-> +};
-> +
-> +#define SIFIVE_PDMA_CHANS           4
-> +#define SIFIVE_PDMA_IRQS            (SIFIVE_PDMA_CHANS * 2)
-> +#define SIFIVE_PDMA_REG_SIZE        0x100000
-> +#define SIFIVE_PDMA_CHAN_NO(reg)    ((reg & (SIFIVE_PDMA_REG_SIZE - 1)) >> 12)
-> +
-> +typedef struct SiFivePDMAState {
-> +    SysBusDevice parent;
-> +    MemoryRegion iomem;
-> +    qemu_irq irq[SIFIVE_PDMA_IRQS];
-> +
-> +    struct sifive_pdma_chan chan[SIFIVE_PDMA_CHANS];
-> +} SiFivePDMAState;
-> +
-> +#define TYPE_SIFIVE_PDMA    "sifive.pdma"
-> +
-> +#define SIFIVE_PDMA(obj)    \
-> +    OBJECT_CHECK(SiFivePDMAState, (obj), TYPE_SIFIVE_PDMA)
-> +
-> +#endif /* SIFIVE_PDMA_H */
-> diff --git a/hw/dma/sifive_pdma.c b/hw/dma/sifive_pdma.c
-> new file mode 100644
-> index 0000000..e1f6fed
-> --- /dev/null
-> +++ b/hw/dma/sifive_pdma.c
-> @@ -0,0 +1,313 @@
-> +/*
-> + * SiFive Platform DMA emulation
-> + *
-> + * Copyright (c) 2020 Wind River Systems, Inc.
-> + *
-> + * Author:
-> + *   Bin Meng <bin.meng@windriver.com>
-> + *
-> + * This program is free software; you can redistribute it and/or
-> + * modify it under the terms of the GNU General Public License as
-> + * published by the Free Software Foundation; either version 2 or
-> + * (at your option) version 3 of the License.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along
-> + * with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "qemu/bitops.h"
-> +#include "qemu/log.h"
-> +#include "qapi/error.h"
-> +#include "hw/hw.h"
-> +#include "hw/irq.h"
-> +#include "hw/qdev-properties.h"
-> +#include "hw/sysbus.h"
-> +#include "migration/vmstate.h"
-> +#include "sysemu/dma.h"
-> +#include "hw/dma/sifive_pdma.h"
-> +
-> +#define DMA_CONTROL         0x000
-> +#define   CONTROL_CLAIM     BIT(0)
-> +#define   CONTROL_RUN       BIT(1)
-> +#define   CONTROL_DONE_IE   BIT(14)
-> +#define   CONTROL_ERR_IE    BIT(15)
-> +#define   CONTROL_DONE      BIT(30)
-> +#define   CONTROL_ERR       BIT(31)
-> +
-> +#define DMA_NEXT_CONFIG     0x004
-> +#define   CONFIG_REPEAT     BIT(2)
-> +#define   CONFIG_ORDER      BIT(3)
-> +#define   CONFIG_WRSZ_SHIFT 24
-> +#define   CONFIG_RDSZ_SHIFT 28
-> +#define   CONFIG_SZ_MASK    0xf
-> +
-> +#define DMA_NEXT_BYTES      0x008
-> +#define DMA_NEXT_DST        0x010
-> +#define DMA_NEXT_SRC        0x018
-> +#define DMA_EXEC_CONFIG     0x104
-> +#define DMA_EXEC_BYTES      0x108
-> +#define DMA_EXEC_DST        0x110
-> +#define DMA_EXEC_SRC        0x118
-> +
-> +enum dma_chan_state {
-> +    DMA_CHAN_STATE_IDLE,
-> +    DMA_CHAN_STATE_STARTED,
-> +    DMA_CHAN_STATE_ERROR,
-> +    DMA_CHAN_STATE_DONE
-> +};
-> +
-> +static void sifive_pdma_run(SiFivePDMAState *s, int ch)
-> +{
-> +    uint64_t bytes = s->chan[ch].next_bytes;
-> +    uint64_t dst = s->chan[ch].next_dst;
-> +    uint64_t src = s->chan[ch].next_src;
-> +    uint32_t config = s->chan[ch].next_config;
-> +    int wsize, rsize, size;
-> +    uint8_t buf[64];
-> +    int n;
-> +
-> +    /* do nothing if bytes to transfer is zero */
-> +    if (!bytes) {
-> +        goto error;
-> +    }
-> +
-> +    /*
-> +     * The manual does not describe how the hardware behaviors when
-> +     * config.wsize and config.rsize are given different values.
-> +     * A common case is memory to memory DMA, and in this case they
-> +     * are normally the same. Abort if this expectation fails.
-> +     */
-> +    wsize = (config >> CONFIG_WRSZ_SHIFT) & CONFIG_SZ_MASK;
-> +    rsize = (config >> CONFIG_RDSZ_SHIFT) & CONFIG_SZ_MASK;
-> +    if (wsize != rsize) {
-> +        goto error;
-> +    }
-> +
-> +    /*
-> +     * Calculate the transaction size
-> +     *
-> +     * size field is base 2 logarithm of DMA transaction size,
-> +     * but there is an upper limit of 64 bytes per transaction.
-> +     */
-> +    size = wsize;
-> +    if (size > 6) {
-> +        size = 6;
-> +    }
-> +    size = 1 << size;
-> +
-> +    /* the bytes to transfer should be multiple of transaction size */
-> +    if (bytes % size) {
-> +        goto error;
-> +    }
-> +
-> +    /* indicate a DMA transfer is started */
-> +    s->chan[ch].state = DMA_CHAN_STATE_STARTED;
-> +    s->chan[ch].control &= ~CONTROL_DONE;
-> +    s->chan[ch].control &= ~CONTROL_ERR;
-> +
-> +    /* load the next_ registers into their exec_ counterparts */
-> +    s->chan[ch].exec_config = config;
-> +    s->chan[ch].exec_bytes = bytes;
-> +    s->chan[ch].exec_dst = dst;
-> +    s->chan[ch].exec_src = src;
-> +
-> +    for (n = 0; n < bytes / size; n++) {
-> +        cpu_physical_memory_read(s->chan[ch].exec_src, buf, size);
-> +        cpu_physical_memory_write(s->chan[ch].exec_dst, buf, size);
-> +        s->chan[ch].exec_src += size;
-> +        s->chan[ch].exec_dst += size;
-> +        s->chan[ch].exec_bytes -= size;
-> +    }
-> +
-> +    /* indicate a DMA transfer is done */
-> +    s->chan[ch].state = DMA_CHAN_STATE_DONE;
-> +    s->chan[ch].control &= ~CONTROL_RUN;
-> +    s->chan[ch].control |= CONTROL_DONE;
-> +
-> +    /* reload exec_ registers if repeat is required */
-> +    if (s->chan[ch].next_config & CONFIG_REPEAT) {
-> +        s->chan[ch].exec_bytes = bytes;
-> +        s->chan[ch].exec_dst = dst;
-> +        s->chan[ch].exec_src = src;
-> +    }
-> +
-> +    return;
-> +
-> +error:
-> +    s->chan[ch].state = DMA_CHAN_STATE_ERROR;
-> +    s->chan[ch].control |= CONTROL_ERR;
-> +    return;
-> +}
-> +
-> +static inline void sifive_pdma_update_irq(SiFivePDMAState *s, int ch)
-> +{
-> +    bool done_ie, err_ie;
-> +
-> +    done_ie = !!(s->chan[ch].control & CONTROL_DONE_IE);
-> +    err_ie = !!(s->chan[ch].control & CONTROL_ERR_IE);
-> +
-> +    if (done_ie && (s->chan[ch].control & CONTROL_DONE)) {
-> +        qemu_irq_raise(s->irq[ch * 2]);
-> +    } else {
-> +        qemu_irq_lower(s->irq[ch * 2]);
-> +    }
-> +
-> +    if (err_ie && (s->chan[ch].control & CONTROL_ERR)) {
-> +        qemu_irq_raise(s->irq[ch * 2 + 1]);
-> +    } else {
-> +        qemu_irq_lower(s->irq[ch * 2 + 1]);
-> +    }
-> +
-> +    s->chan[ch].state = DMA_CHAN_STATE_IDLE;
-> +}
-> +
-> +static uint64_t sifive_pdma_read(void *opaque, hwaddr offset, unsigned size)
-> +{
-> +    SiFivePDMAState *s = opaque;
-> +    int ch = SIFIVE_PDMA_CHAN_NO(offset);
-> +    uint64_t val = 0;
-> +
-> +    if (ch >= SIFIVE_PDMA_CHANS) {
-> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid channel no %d\n",
-> +                      __func__, ch);
-> +        return 0;
-> +    }
-> +
-> +    offset &= 0xfff;
-> +    switch (offset) {
-> +    case DMA_CONTROL:
-> +        val = s->chan[ch].control;
-> +        break;
-> +    case DMA_NEXT_CONFIG:
-> +        val = s->chan[ch].next_config;
-> +        break;
-> +    case DMA_NEXT_BYTES:
-> +        val = s->chan[ch].next_bytes;
-> +        break;
-> +    case DMA_NEXT_DST:
-> +        val = s->chan[ch].next_dst;
-> +        break;
-> +    case DMA_NEXT_SRC:
-> +        val = s->chan[ch].next_src;
-> +        break;
-> +    case DMA_EXEC_CONFIG:
-> +        val = s->chan[ch].exec_config;
-> +        break;
-> +    case DMA_EXEC_BYTES:
-> +        val = s->chan[ch].exec_bytes;
-> +        break;
-> +    case DMA_EXEC_DST:
-> +        val = s->chan[ch].exec_dst;
-> +        break;
-> +    case DMA_EXEC_SRC:
-> +        val = s->chan[ch].exec_src;
-> +        break;
-> +    default:
-> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: Bad offset 0x%" HWADDR_PRIX "\n",
-> +                      __func__, offset);
-> +        break;
-> +    }
-> +
-> +    return val;
-> +}
-> +
-> +static void sifive_pdma_write(void *opaque, hwaddr offset,
-> +                              uint64_t value, unsigned size)
-> +{
-> +    SiFivePDMAState *s = opaque;
-> +    int ch = SIFIVE_PDMA_CHAN_NO(offset);
-> +
-> +    if (ch >= SIFIVE_PDMA_CHANS) {
-> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid channel no %d\n",
-> +                      __func__, ch);
-> +        return;
-> +    }
-> +
-> +    offset &= 0xfff;
-> +    switch (offset) {
-> +    case DMA_CONTROL:
-> +        s->chan[ch].control = value;
-> +
-> +        if (value & CONTROL_RUN) {
-> +            sifive_pdma_run(s, ch);
-> +        }
-> +
-> +        sifive_pdma_update_irq(s, ch);
-> +        break;
-> +    case DMA_NEXT_CONFIG:
-> +        s->chan[ch].next_config = value;
-> +        break;
-> +    case DMA_NEXT_BYTES:
-> +        s->chan[ch].next_bytes = value;
-> +        break;
-> +    case DMA_NEXT_DST:
-> +        s->chan[ch].next_dst = value;
-> +        break;
-> +    case DMA_NEXT_SRC:
-> +        s->chan[ch].next_src = value;
-> +        break;
-> +    case DMA_EXEC_CONFIG:
-> +    case DMA_EXEC_BYTES:
-> +    case DMA_EXEC_DST:
-> +    case DMA_EXEC_SRC:
-> +        /* these are read-only registers */
-> +        break;
-> +    default:
-> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: Bad offset 0x%" HWADDR_PRIX "\n",
-> +                      __func__, offset);
-> +        break;
-> +    }
-> +}
-> +
-> +static const MemoryRegionOps sifive_pdma_ops = {
-> +    .read = sifive_pdma_read,
-> +    .write = sifive_pdma_write,
-> +    .endianness = DEVICE_LITTLE_ENDIAN,
-> +    /* there are 32-bit and 64-bit wide registers */
-> +    .impl = {
-> +        .min_access_size = 4,
-> +        .max_access_size = 8,
-> +    }
-> +};
-> +
-> +static void sifive_pdma_realize(DeviceState *dev, Error **errp)
-> +{
-> +    SiFivePDMAState *s = SIFIVE_PDMA(dev);
-> +    int i;
-> +
-> +    memory_region_init_io(&s->iomem, OBJECT(dev), &sifive_pdma_ops, s,
-> +                          TYPE_SIFIVE_PDMA, SIFIVE_PDMA_REG_SIZE);
-> +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->iomem);
-> +
-> +    for (i = 0; i < SIFIVE_PDMA_IRQS; i++) {
-> +        sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq[i]);
-> +    }
-> +}
-> +
-> +static void sifive_pdma_class_init(ObjectClass *klass, void *data)
-> +{
-> +    DeviceClass *dc = DEVICE_CLASS(klass);
-> +
-> +    dc->desc = "SiFive Platform DMA controller";
-> +    dc->realize = sifive_pdma_realize;
-> +}
-> +
-> +static const TypeInfo sifive_pdma_info = {
-> +    .name          = TYPE_SIFIVE_PDMA,
-> +    .parent        = TYPE_SYS_BUS_DEVICE,
-> +    .instance_size = sizeof(SiFivePDMAState),
-> +    .class_init    = sifive_pdma_class_init,
-> +};
-> +
-> +static void sifive_pdma_register_types(void)
-> +{
-> +    type_register_static(&sifive_pdma_info);
-> +}
-> +
-> +type_init(sifive_pdma_register_types)
-> diff --git a/hw/dma/Kconfig b/hw/dma/Kconfig
-> index 5c61b67..d67492d 100644
-> --- a/hw/dma/Kconfig
-> +++ b/hw/dma/Kconfig
-> @@ -20,3 +20,6 @@ config ZYNQ_DEVCFG
->
->  config STP2000
->      bool
-> +
-> +config SIFIVE_PDMA
-> +    bool
-> diff --git a/hw/dma/meson.build b/hw/dma/meson.build
-> index ff5bb37..b991d76 100644
-> --- a/hw/dma/meson.build
-> +++ b/hw/dma/meson.build
-> @@ -13,3 +13,4 @@ softmmu_ss.add(when: 'CONFIG_XLNX_ZYNQMP_ARM', if_true: files('xlnx-zdma.c'))
->  softmmu_ss.add(when: 'CONFIG_OMAP', if_true: files('omap_dma.c', 'soc_dma.c'))
->  softmmu_ss.add(when: 'CONFIG_PXA2XX', if_true: files('pxa2xx_dma.c'))
->  softmmu_ss.add(when: 'CONFIG_RASPI', if_true: files('bcm2835_dma.c'))
-> +softmmu_ss.add(when: 'CONFIG_SIFIVE_PDMA', if_true: files('sifive_pdma.c'))
 > --
 > 2.7.4
 >
