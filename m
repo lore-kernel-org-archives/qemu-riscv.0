@@ -1,61 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kEHgd-0003Uh-19
-	for mharc-qemu-riscv@gnu.org; Fri, 04 Sep 2020 15:47:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48974)
+	id 1kEIRz-0002OL-3N
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Sep 2020 16:36:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57468)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kEHgb-0003Qu-3q; Fri, 04 Sep 2020 15:47:49 -0400
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:36576)
+ id 1kEIRx-0002NI-3M; Fri, 04 Sep 2020 16:36:45 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:44476)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kEHgY-0005ez-Uf; Fri, 04 Sep 2020 15:47:48 -0400
-Received: by mail-il1-x143.google.com with SMTP id p13so7400117ils.3;
- Fri, 04 Sep 2020 12:47:46 -0700 (PDT)
+ id 1kEIRu-0002z5-IW; Fri, 04 Sep 2020 16:36:44 -0400
+Received: by mail-io1-xd42.google.com with SMTP id g128so8397166iof.11;
+ Fri, 04 Sep 2020 13:36:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Y/7BEGdDmB1KinVoVuLSRtc/+pMk2QLRHR4+GOO40r4=;
- b=UEpJk+24C0Ys/JUuZZYIDVYj+cqSUvosehU/IcsDfFSM0OECxeiqFlSptAPK9J8/ek
- 7hncs5c+8kWLxTil6qGso+zk+0pEGjGsiZXpZIcLgIJyiYON7As+BdI/ANHuYkAFm0RD
- OqNnp74RVbcz7wGMsk38UabpdvUl0SRXaFM1fyZreFz/xdskrXRxmiG2v57bpNlKAiw7
- WV57fPN06TqgOhG49oEyOaVnj++E/xbULB1Ne8kOXtAla/RLwKbhP/ZLe4eMD/vj8dqp
- cIRoUwwvx0YEFhTsU3V0Kieck9L1VhiCmgWNuqtrooWq/+3xKQ+65EO0i+ilAMMnwLfV
- Yrpg==
+ :cc; bh=vgCnJrRSAAjSpnwfLoGGmlYF88ToELrhPBc6j85A9oo=;
+ b=Vw/H4GKC5bieHv5iy4z2V9nrSrryz9ppx4AyoKuiZ4y8+OX6ZHbpBpzpltCeCJA5fd
+ QqHKdPxRRa193WwyJBCXPxqFKj6WNqBKdFisxUV/IOp74iiOb3lg8Oa4hMrLQv+shfOq
+ TTGtSuW7bOM4GLsEhftV7YfkFBevXqm4rK2bjj8bHE95HO8remUD9V5ewwCb52xQURth
+ GsBjUitd858JaRvHm/ttBQZ/pl9xYx/DDQBRxdy8r71S+8kuLRQJxV7xLBwKMpqBBzYu
+ xL3JgZiSudZvBPSNphYHn24t25G69KMG0BfW4q6SBaSp2ISmGLe+5FCRmbsmEPbAC3Z0
+ 0uhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Y/7BEGdDmB1KinVoVuLSRtc/+pMk2QLRHR4+GOO40r4=;
- b=LKjuOMKwa45sMaxYWG/eiY56w5Qh+WDGWF6iBRDQq5yYbEXrupTDS6ela5NdFOC/Zn
- obH3XFiHYjK9KUuzABO9xjB6CcSBZohc7oiEbqFszrRfaLAk0iJR/kJQeUcAxwSBWHPN
- V8hUCyDmLO5MjCZUP9j9Wzv18PdI5sPcxwuxdT24H9Dyu7n7vpH0vpBNj218uRf0KkSg
- +ee7Jw6MI5UnEQJM+lwgHo32GQDBzCytxHNq3BlRbuRM2MLjyYrsH+FJCChP2y6Mpqft
- d8NCd3vqfaCcijk7yOm+cAxKpsfFkJBQ5CGsgDnChhGdF1yBIv19kf2AdyyN5RhsHPrl
- VG+g==
-X-Gm-Message-State: AOAM532vj+Oxw6pu/bGD3Ncoj8odKya296+LePCWwgGZFUdfKvmyB/2W
- nmsZx8bFVDq+H/SsRyztwGtlALpTgaYLXiyb2bw=
-X-Google-Smtp-Source: ABdhPJwxMJfUSF3fIHqw6RtqYHMiDA7deeywxNYrJOb0UTkdP8NlWNOogJWdUllF5JNQa75N2wPHcGLwIKv0+dvGUVs=
-X-Received: by 2002:a92:8b52:: with SMTP id i79mr9788670ild.177.1599248865300; 
- Fri, 04 Sep 2020 12:47:45 -0700 (PDT)
+ bh=vgCnJrRSAAjSpnwfLoGGmlYF88ToELrhPBc6j85A9oo=;
+ b=IBE+6Kfg/Vu3djBj8Vmn6RIsIuc5gt8CaM2brX3Ao5kayYhhLhS0r/z8+6SmJyvnhJ
+ zzlJnWK2mgqKvd/1eFe4PjTuEqH/43oqzcoY4hm/39Ji8dWzHHyikWStvUFnAoj/S4nZ
+ q/vMmlNjZ3RQj84RKDx41XvzHhhwnVBGaNj1x6RmFdXmf3CtBjF3324QDO0/3QgRm9Y2
+ 20ZCMq8vK7bEopKvRkdI3QgPTnxyLaPIBTsWcfezwUJaq+52taRK8INg82mdiWR9A/v/
+ TfVr+ZYLTznwQms6cktDHJh9F40pNTp9aQAsctt84C1uCmh+BrdHobUSJdiquIR+2XLG
+ Tvsg==
+X-Gm-Message-State: AOAM533D4b7cRXf8/tlCOXiXBhKbzcstJ+Is8KG1tF3j+QJg0smoglHf
+ r1EsbOkiaA4OeWB1/ol9PIg/ww3hwehawx1f670=
+X-Google-Smtp-Source: ABdhPJwTq2oAznfl3KywGwZnbDXQdHLn9+Ltn8Tps9HqUnSnLXJs8NH9RAYiy6Z6XFdoRCJ/fwgYQXBX4yiJ/cCIdBc=
+X-Received: by 2002:a05:6602:2f88:: with SMTP id
+ u8mr8924130iow.175.1599251800980; 
+ Fri, 04 Sep 2020 13:36:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
- <1598924352-89526-17-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1598924352-89526-17-git-send-email-bmeng.cn@gmail.com>
+ <1598924352-89526-10-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1598924352-89526-10-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 4 Sep 2020 12:36:50 -0700
-Message-ID: <CAKmqyKPu-3qgGy2G_Rfo5DNA4FoFXQKG38hhjWmnqa=Tyq3DCw@mail.gmail.com>
-Subject: Re: [PATCH v3 16/16] hw/riscv: sifive_u: Connect a DMA controller
+Date: Fri, 4 Sep 2020 13:25:46 -0700
+Message-ID: <CAKmqyKMw6DfNQHrit1W0WTcANLJX-jXQQ-ULGHbPhq-mNiSF4A@mail.gmail.com>
+Subject: Re: [PATCH v3 09/16] hw/dma: Add SiFive platform DMA controller
+ emulation
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
  Palmer Dabbelt <palmerdabbelt@google.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -78,155 +79,447 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2020 19:47:49 -0000
+X-List-Received-Date: Fri, 04 Sep 2020 20:36:45 -0000
 
-On Mon, Aug 31, 2020 at 6:46 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Aug 31, 2020 at 6:48 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> SiFive FU540 SoC integrates a platform DMA controller with 4 DMA
-> channels. This connects the exsiting SiFive PDMA model to the SoC,
-> and adds its device tree data as well.
+> Microchip PolarFire SoC integrates a DMA engine that supports:
+> * Independent concurrent DMA transfers using 4 DMA channels
+> * Generation of interrupts on various conditions during execution
+> which is actually an IP reused from the SiFive FU540 chip.
+>
+> This creates a model to support both polling and interrupt modes.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+>
 > ---
 >
-> (no changes since v1)
+> Changes in v3:
+> - change MCHP_PFSOC_DMA to SIFIVE_PDMA
 >
->  include/hw/riscv/sifive_u.h | 11 +++++++++++
->  hw/riscv/sifive_u.c         | 30 ++++++++++++++++++++++++++++++
->  hw/riscv/Kconfig            |  1 +
->  3 files changed, 42 insertions(+)
+> Changes in v2:
+> - change to update hw/dma/meson.build
+> - rename the file names to sifive_pdma.[c|h]
+> - update irq number to 8 per the SiFive FU540 manual
+> - fix the register offset for channel 1/2/3 in the read/write ops
 >
-> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> index d3c0c00..793000a 100644
-> --- a/include/hw/riscv/sifive_u.h
-> +++ b/include/hw/riscv/sifive_u.h
-> @@ -19,6 +19,7 @@
->  #ifndef HW_SIFIVE_U_H
->  #define HW_SIFIVE_U_H
+>  include/hw/dma/sifive_pdma.h |  57 ++++++++
+>  hw/dma/sifive_pdma.c         | 313 +++++++++++++++++++++++++++++++++++++++++++
+>  hw/dma/Kconfig               |   3 +
+>  hw/dma/meson.build           |   1 +
+>  4 files changed, 374 insertions(+)
+>  create mode 100644 include/hw/dma/sifive_pdma.h
+>  create mode 100644 hw/dma/sifive_pdma.c
 >
+> diff --git a/include/hw/dma/sifive_pdma.h b/include/hw/dma/sifive_pdma.h
+> new file mode 100644
+> index 0000000..e319bbd
+> --- /dev/null
+> +++ b/include/hw/dma/sifive_pdma.h
+> @@ -0,0 +1,57 @@
+> +/*
+> + * SiFive Platform DMA emulation
+> + *
+> + * Copyright (c) 2020 Wind River Systems, Inc.
+> + *
+> + * Author:
+> + *   Bin Meng <bin.meng@windriver.com>
+> + *
+> + * This program is free software; you can redistribute it and/or
+> + * modify it under the terms of the GNU General Public License as
+> + * published by the Free Software Foundation; either version 2 or
+> + * (at your option) version 3 of the License.
+> + *
+> + * This program is distributed in the hope that it will be useful,
+> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
+> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+> + * GNU General Public License for more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along
+> + * with this program; if not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#ifndef SIFIVE_PDMA_H
+> +#define SIFIVE_PDMA_H
+> +
+> +struct sifive_pdma_chan {
+> +    uint32_t control;
+> +    uint32_t next_config;
+> +    uint64_t next_bytes;
+> +    uint64_t next_dst;
+> +    uint64_t next_src;
+> +    uint32_t exec_config;
+> +    uint64_t exec_bytes;
+> +    uint64_t exec_dst;
+> +    uint64_t exec_src;
+> +    int state;
+> +};
+> +
+> +#define SIFIVE_PDMA_CHANS           4
+> +#define SIFIVE_PDMA_IRQS            (SIFIVE_PDMA_CHANS * 2)
+> +#define SIFIVE_PDMA_REG_SIZE        0x100000
+> +#define SIFIVE_PDMA_CHAN_NO(reg)    ((reg & (SIFIVE_PDMA_REG_SIZE - 1)) >> 12)
+> +
+> +typedef struct SiFivePDMAState {
+> +    SysBusDevice parent;
+> +    MemoryRegion iomem;
+> +    qemu_irq irq[SIFIVE_PDMA_IRQS];
+> +
+> +    struct sifive_pdma_chan chan[SIFIVE_PDMA_CHANS];
+> +} SiFivePDMAState;
+> +
+> +#define TYPE_SIFIVE_PDMA    "sifive.pdma"
+> +
+> +#define SIFIVE_PDMA(obj)    \
+> +    OBJECT_CHECK(SiFivePDMAState, (obj), TYPE_SIFIVE_PDMA)
+> +
+> +#endif /* SIFIVE_PDMA_H */
+> diff --git a/hw/dma/sifive_pdma.c b/hw/dma/sifive_pdma.c
+> new file mode 100644
+> index 0000000..e1f6fed
+> --- /dev/null
+> +++ b/hw/dma/sifive_pdma.c
+> @@ -0,0 +1,313 @@
+> +/*
+> + * SiFive Platform DMA emulation
+> + *
+> + * Copyright (c) 2020 Wind River Systems, Inc.
+> + *
+> + * Author:
+> + *   Bin Meng <bin.meng@windriver.com>
+> + *
+> + * This program is free software; you can redistribute it and/or
+> + * modify it under the terms of the GNU General Public License as
+> + * published by the Free Software Foundation; either version 2 or
+> + * (at your option) version 3 of the License.
+> + *
+> + * This program is distributed in the hope that it will be useful,
+> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
+> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+> + * GNU General Public License for more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along
+> + * with this program; if not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "qemu/bitops.h"
+> +#include "qemu/log.h"
+> +#include "qapi/error.h"
+> +#include "hw/hw.h"
+> +#include "hw/irq.h"
+> +#include "hw/qdev-properties.h"
+> +#include "hw/sysbus.h"
+> +#include "migration/vmstate.h"
+> +#include "sysemu/dma.h"
 > +#include "hw/dma/sifive_pdma.h"
->  #include "hw/net/cadence_gem.h"
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/riscv/sifive_cpu.h"
-> @@ -43,6 +44,7 @@ typedef struct SiFiveUSoCState {
->      SiFiveUPRCIState prci;
->      SIFIVEGPIOState gpio;
->      SiFiveUOTPState otp;
-> +    SiFivePDMAState dma;
->      CadenceGEMState gem;
->
->      uint32_t serial;
-> @@ -72,6 +74,7 @@ enum {
->      SIFIVE_U_MROM,
->      SIFIVE_U_CLINT,
->      SIFIVE_U_L2CC,
-> +    SIFIVE_U_PDMA,
->      SIFIVE_U_L2LIM,
->      SIFIVE_U_PLIC,
->      SIFIVE_U_PRCI,
-> @@ -108,6 +111,14 @@ enum {
->      SIFIVE_U_GPIO_IRQ13 = 20,
->      SIFIVE_U_GPIO_IRQ14 = 21,
->      SIFIVE_U_GPIO_IRQ15 = 22,
-> +    SIFIVE_U_PDMA_IRQ0 = 23,
-> +    SIFIVE_U_PDMA_IRQ1 = 24,
-> +    SIFIVE_U_PDMA_IRQ2 = 25,
-> +    SIFIVE_U_PDMA_IRQ3 = 26,
-> +    SIFIVE_U_PDMA_IRQ4 = 27,
-> +    SIFIVE_U_PDMA_IRQ5 = 28,
-> +    SIFIVE_U_PDMA_IRQ6 = 29,
-> +    SIFIVE_U_PDMA_IRQ7 = 30,
->      SIFIVE_U_GEM_IRQ = 0x35
->  };
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 2bc3992..7997537 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -14,6 +14,7 @@
->   * 4) GPIO (General Purpose Input/Output Controller)
->   * 5) OTP (One-Time Programmable) memory with stored serial number
->   * 6) GEM (Gigabit Ethernet Controller) and management block
-> + * 7) DMA (Direct Memory Access Controller)
->   *
->   * This board currently generates devicetree dynamically that indicates at least
->   * two harts and up to five harts.
-> @@ -73,6 +74,7 @@ static const struct MemmapEntry {
->      [SIFIVE_U_MROM] =     {     0x1000,     0xf000 },
->      [SIFIVE_U_CLINT] =    {  0x2000000,    0x10000 },
->      [SIFIVE_U_L2CC] =     {  0x2010000,     0x1000 },
-> +    [SIFIVE_U_PDMA] =     {  0x3000000,   0x100000 },
->      [SIFIVE_U_L2LIM] =    {  0x8000000,  0x2000000 },
->      [SIFIVE_U_PLIC] =     {  0xc000000,  0x4000000 },
->      [SIFIVE_U_PRCI] =     { 0x10000000,     0x1000 },
-> @@ -303,6 +305,22 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
->      qemu_fdt_setprop_string(fdt, nodename, "compatible", "gpio-restart");
->      g_free(nodename);
->
-> +    nodename = g_strdup_printf("/soc/dma@%lx",
-> +        (long)memmap[SIFIVE_U_PDMA].base);
-> +    qemu_fdt_add_subnode(fdt, nodename);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "#dma-cells", 1);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
-> +        SIFIVE_U_PDMA_IRQ0, SIFIVE_U_PDMA_IRQ1, SIFIVE_U_PDMA_IRQ2,
-> +        SIFIVE_U_PDMA_IRQ3, SIFIVE_U_PDMA_IRQ4, SIFIVE_U_PDMA_IRQ5,
-> +        SIFIVE_U_PDMA_IRQ6, SIFIVE_U_PDMA_IRQ7);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-> +        0x0, memmap[SIFIVE_U_PDMA].base,
-> +        0x0, memmap[SIFIVE_U_PDMA].size);
-> +    qemu_fdt_setprop_string(fdt, nodename, "compatible",
-> +                            "sifive,fu540-c000-pdma");
-> +    g_free(nodename);
 > +
->      nodename = g_strdup_printf("/soc/cache-controller@%lx",
->          (long)memmap[SIFIVE_U_L2CC].base);
->      qemu_fdt_add_subnode(fdt, nodename);
-> @@ -627,6 +645,7 @@ static void sifive_u_soc_instance_init(Object *obj)
->      object_initialize_child(obj, "otp", &s->otp, TYPE_SIFIVE_U_OTP);
->      object_initialize_child(obj, "gem", &s->gem, TYPE_CADENCE_GEM);
->      object_initialize_child(obj, "gpio", &s->gpio, TYPE_SIFIVE_GPIO);
-> +    object_initialize_child(obj, "pdma", &s->dma, TYPE_SIFIVE_PDMA);
->  }
->
->  static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
-> @@ -730,6 +749,17 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
->                                              SIFIVE_U_GPIO_IRQ0 + i));
->      }
->
-> +    /* PDMA */
-> +    sysbus_realize(SYS_BUS_DEVICE(&s->dma), errp);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->dma), 0, memmap[SIFIVE_U_PDMA].base);
+> +#define DMA_CONTROL         0x000
+> +#define   CONTROL_CLAIM     BIT(0)
+> +#define   CONTROL_RUN       BIT(1)
+> +#define   CONTROL_DONE_IE   BIT(14)
+> +#define   CONTROL_ERR_IE    BIT(15)
+> +#define   CONTROL_DONE      BIT(30)
+> +#define   CONTROL_ERR       BIT(31)
 > +
-> +    /* Connect PDMA interrupts to the PLIC */
-> +    for (i = 0; i < SIFIVE_PDMA_IRQS; i++) {
-> +        sysbus_connect_irq(SYS_BUS_DEVICE(&s->dma), i,
-> +                           qdev_get_gpio_in(DEVICE(s->plic),
-> +                                            SIFIVE_U_PDMA_IRQ0 + i));
+> +#define DMA_NEXT_CONFIG     0x004
+> +#define   CONFIG_REPEAT     BIT(2)
+> +#define   CONFIG_ORDER      BIT(3)
+> +#define   CONFIG_WRSZ_SHIFT 24
+> +#define   CONFIG_RDSZ_SHIFT 28
+> +#define   CONFIG_SZ_MASK    0xf
+> +
+> +#define DMA_NEXT_BYTES      0x008
+> +#define DMA_NEXT_DST        0x010
+> +#define DMA_NEXT_SRC        0x018
+> +#define DMA_EXEC_CONFIG     0x104
+> +#define DMA_EXEC_BYTES      0x108
+> +#define DMA_EXEC_DST        0x110
+> +#define DMA_EXEC_SRC        0x118
+> +
+> +enum dma_chan_state {
+> +    DMA_CHAN_STATE_IDLE,
+> +    DMA_CHAN_STATE_STARTED,
+> +    DMA_CHAN_STATE_ERROR,
+> +    DMA_CHAN_STATE_DONE
+> +};
+> +
+> +static void sifive_pdma_run(SiFivePDMAState *s, int ch)
+> +{
+> +    uint64_t bytes = s->chan[ch].next_bytes;
+> +    uint64_t dst = s->chan[ch].next_dst;
+> +    uint64_t src = s->chan[ch].next_src;
+> +    uint32_t config = s->chan[ch].next_config;
+> +    int wsize, rsize, size;
+> +    uint8_t buf[64];
+> +    int n;
+> +
+> +    /* do nothing if bytes to transfer is zero */
+> +    if (!bytes) {
+> +        goto error;
 > +    }
 > +
->      qdev_prop_set_uint32(DEVICE(&s->otp), "serial", s->serial);
->      if (!sysbus_realize(SYS_BUS_DEVICE(&s->otp), errp)) {
->          return;
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 9032cb0..e53ab1e 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -22,6 +22,7 @@ config SIFIVE_U
->      select CADENCE
->      select HART
->      select SIFIVE
-> +    select SIFIVE_PDMA
->      select UNIMP
+> +    /*
+> +     * The manual does not describe how the hardware behaviors when
+> +     * config.wsize and config.rsize are given different values.
+> +     * A common case is memory to memory DMA, and in this case they
+> +     * are normally the same. Abort if this expectation fails.
+> +     */
+> +    wsize = (config >> CONFIG_WRSZ_SHIFT) & CONFIG_SZ_MASK;
+> +    rsize = (config >> CONFIG_RDSZ_SHIFT) & CONFIG_SZ_MASK;
+> +    if (wsize != rsize) {
+> +        goto error;
+> +    }
+> +
+> +    /*
+> +     * Calculate the transaction size
+> +     *
+> +     * size field is base 2 logarithm of DMA transaction size,
+> +     * but there is an upper limit of 64 bytes per transaction.
+> +     */
+> +    size = wsize;
+> +    if (size > 6) {
+> +        size = 6;
+> +    }
+> +    size = 1 << size;
+> +
+> +    /* the bytes to transfer should be multiple of transaction size */
+> +    if (bytes % size) {
+> +        goto error;
+> +    }
+> +
+> +    /* indicate a DMA transfer is started */
+> +    s->chan[ch].state = DMA_CHAN_STATE_STARTED;
+> +    s->chan[ch].control &= ~CONTROL_DONE;
+> +    s->chan[ch].control &= ~CONTROL_ERR;
+> +
+> +    /* load the next_ registers into their exec_ counterparts */
+> +    s->chan[ch].exec_config = config;
+> +    s->chan[ch].exec_bytes = bytes;
+> +    s->chan[ch].exec_dst = dst;
+> +    s->chan[ch].exec_src = src;
+> +
+> +    for (n = 0; n < bytes / size; n++) {
+> +        cpu_physical_memory_read(s->chan[ch].exec_src, buf, size);
+> +        cpu_physical_memory_write(s->chan[ch].exec_dst, buf, size);
+> +        s->chan[ch].exec_src += size;
+> +        s->chan[ch].exec_dst += size;
+> +        s->chan[ch].exec_bytes -= size;
+> +    }
+> +
+> +    /* indicate a DMA transfer is done */
+> +    s->chan[ch].state = DMA_CHAN_STATE_DONE;
+> +    s->chan[ch].control &= ~CONTROL_RUN;
+> +    s->chan[ch].control |= CONTROL_DONE;
+> +
+> +    /* reload exec_ registers if repeat is required */
+> +    if (s->chan[ch].next_config & CONFIG_REPEAT) {
+> +        s->chan[ch].exec_bytes = bytes;
+> +        s->chan[ch].exec_dst = dst;
+> +        s->chan[ch].exec_src = src;
+> +    }
+> +
+> +    return;
+> +
+> +error:
+> +    s->chan[ch].state = DMA_CHAN_STATE_ERROR;
+> +    s->chan[ch].control |= CONTROL_ERR;
+> +    return;
+> +}
+> +
+> +static inline void sifive_pdma_update_irq(SiFivePDMAState *s, int ch)
+> +{
+> +    bool done_ie, err_ie;
+> +
+> +    done_ie = !!(s->chan[ch].control & CONTROL_DONE_IE);
+> +    err_ie = !!(s->chan[ch].control & CONTROL_ERR_IE);
+> +
+> +    if (done_ie && (s->chan[ch].control & CONTROL_DONE)) {
+> +        qemu_irq_raise(s->irq[ch * 2]);
+> +    } else {
+> +        qemu_irq_lower(s->irq[ch * 2]);
+> +    }
+> +
+> +    if (err_ie && (s->chan[ch].control & CONTROL_ERR)) {
+> +        qemu_irq_raise(s->irq[ch * 2 + 1]);
+> +    } else {
+> +        qemu_irq_lower(s->irq[ch * 2 + 1]);
+> +    }
+> +
+> +    s->chan[ch].state = DMA_CHAN_STATE_IDLE;
+> +}
+> +
+> +static uint64_t sifive_pdma_read(void *opaque, hwaddr offset, unsigned size)
+> +{
+> +    SiFivePDMAState *s = opaque;
+> +    int ch = SIFIVE_PDMA_CHAN_NO(offset);
+> +    uint64_t val = 0;
+> +
+> +    if (ch >= SIFIVE_PDMA_CHANS) {
+> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid channel no %d\n",
+> +                      __func__, ch);
+> +        return 0;
+> +    }
+> +
+> +    offset &= 0xfff;
+> +    switch (offset) {
+> +    case DMA_CONTROL:
+> +        val = s->chan[ch].control;
+> +        break;
+> +    case DMA_NEXT_CONFIG:
+> +        val = s->chan[ch].next_config;
+> +        break;
+> +    case DMA_NEXT_BYTES:
+> +        val = s->chan[ch].next_bytes;
+> +        break;
+> +    case DMA_NEXT_DST:
+> +        val = s->chan[ch].next_dst;
+> +        break;
+> +    case DMA_NEXT_SRC:
+> +        val = s->chan[ch].next_src;
+> +        break;
+> +    case DMA_EXEC_CONFIG:
+> +        val = s->chan[ch].exec_config;
+> +        break;
+> +    case DMA_EXEC_BYTES:
+> +        val = s->chan[ch].exec_bytes;
+> +        break;
+> +    case DMA_EXEC_DST:
+> +        val = s->chan[ch].exec_dst;
+> +        break;
+> +    case DMA_EXEC_SRC:
+> +        val = s->chan[ch].exec_src;
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: Bad offset 0x%" HWADDR_PRIX "\n",
+> +                      __func__, offset);
+> +        break;
+> +    }
+> +
+> +    return val;
+> +}
+> +
+> +static void sifive_pdma_write(void *opaque, hwaddr offset,
+> +                              uint64_t value, unsigned size)
+> +{
+> +    SiFivePDMAState *s = opaque;
+> +    int ch = SIFIVE_PDMA_CHAN_NO(offset);
+> +
+> +    if (ch >= SIFIVE_PDMA_CHANS) {
+> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid channel no %d\n",
+> +                      __func__, ch);
+> +        return;
+> +    }
+> +
+> +    offset &= 0xfff;
+> +    switch (offset) {
+> +    case DMA_CONTROL:
+> +        s->chan[ch].control = value;
+> +
+> +        if (value & CONTROL_RUN) {
+> +            sifive_pdma_run(s, ch);
+> +        }
+> +
+> +        sifive_pdma_update_irq(s, ch);
+> +        break;
+> +    case DMA_NEXT_CONFIG:
+> +        s->chan[ch].next_config = value;
+> +        break;
+> +    case DMA_NEXT_BYTES:
+> +        s->chan[ch].next_bytes = value;
+> +        break;
+> +    case DMA_NEXT_DST:
+> +        s->chan[ch].next_dst = value;
+> +        break;
+> +    case DMA_NEXT_SRC:
+> +        s->chan[ch].next_src = value;
+> +        break;
+> +    case DMA_EXEC_CONFIG:
+> +    case DMA_EXEC_BYTES:
+> +    case DMA_EXEC_DST:
+> +    case DMA_EXEC_SRC:
+> +        /* these are read-only registers */
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: Bad offset 0x%" HWADDR_PRIX "\n",
+> +                      __func__, offset);
+> +        break;
+> +    }
+> +}
+> +
+> +static const MemoryRegionOps sifive_pdma_ops = {
+> +    .read = sifive_pdma_read,
+> +    .write = sifive_pdma_write,
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +    /* there are 32-bit and 64-bit wide registers */
+> +    .impl = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 8,
+> +    }
+> +};
+> +
+> +static void sifive_pdma_realize(DeviceState *dev, Error **errp)
+> +{
+> +    SiFivePDMAState *s = SIFIVE_PDMA(dev);
+> +    int i;
+> +
+> +    memory_region_init_io(&s->iomem, OBJECT(dev), &sifive_pdma_ops, s,
+> +                          TYPE_SIFIVE_PDMA, SIFIVE_PDMA_REG_SIZE);
+> +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->iomem);
+> +
+> +    for (i = 0; i < SIFIVE_PDMA_IRQS; i++) {
+> +        sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq[i]);
+> +    }
+> +}
+> +
+> +static void sifive_pdma_class_init(ObjectClass *klass, void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(klass);
+> +
+> +    dc->desc = "SiFive Platform DMA controller";
+> +    dc->realize = sifive_pdma_realize;
+> +}
+> +
+> +static const TypeInfo sifive_pdma_info = {
+> +    .name          = TYPE_SIFIVE_PDMA,
+> +    .parent        = TYPE_SYS_BUS_DEVICE,
+> +    .instance_size = sizeof(SiFivePDMAState),
+> +    .class_init    = sifive_pdma_class_init,
+> +};
+> +
+> +static void sifive_pdma_register_types(void)
+> +{
+> +    type_register_static(&sifive_pdma_info);
+> +}
+> +
+> +type_init(sifive_pdma_register_types)
+> diff --git a/hw/dma/Kconfig b/hw/dma/Kconfig
+> index 5c61b67..d67492d 100644
+> --- a/hw/dma/Kconfig
+> +++ b/hw/dma/Kconfig
+> @@ -20,3 +20,6 @@ config ZYNQ_DEVCFG
 >
->  config SPIKE
+>  config STP2000
+>      bool
+> +
+> +config SIFIVE_PDMA
+> +    bool
+> diff --git a/hw/dma/meson.build b/hw/dma/meson.build
+> index ff5bb37..b991d76 100644
+> --- a/hw/dma/meson.build
+> +++ b/hw/dma/meson.build
+> @@ -13,3 +13,4 @@ softmmu_ss.add(when: 'CONFIG_XLNX_ZYNQMP_ARM', if_true: files('xlnx-zdma.c'))
+>  softmmu_ss.add(when: 'CONFIG_OMAP', if_true: files('omap_dma.c', 'soc_dma.c'))
+>  softmmu_ss.add(when: 'CONFIG_PXA2XX', if_true: files('pxa2xx_dma.c'))
+>  softmmu_ss.add(when: 'CONFIG_RASPI', if_true: files('bcm2835_dma.c'))
+> +softmmu_ss.add(when: 'CONFIG_SIFIVE_PDMA', if_true: files('sifive_pdma.c'))
 > --
 > 2.7.4
 >
