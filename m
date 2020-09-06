@@ -1,77 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kEIVj-0004gx-3b
-	for mharc-qemu-riscv@gnu.org; Fri, 04 Sep 2020 16:40:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58056)
+	id 1kEjAU-0008Ka-Bh
+	for mharc-qemu-riscv@gnu.org; Sat, 05 Sep 2020 21:08:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58494)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kEIVh-0004g0-Eb; Fri, 04 Sep 2020 16:40:37 -0400
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:37842)
+ (Exim 4.90_1) (envelope-from <leif@nuviainc.com>) id 1kEjAS-0008JK-R2
+ for qemu-riscv@nongnu.org; Sat, 05 Sep 2020 21:08:28 -0400
+Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:51840)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kEIVf-0003YT-An; Fri, 04 Sep 2020 16:40:37 -0400
-Received: by mail-io1-xd41.google.com with SMTP id b16so8459801ioj.4;
- Fri, 04 Sep 2020 13:40:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NSE2tS/nw3P0aS0OxukRx1bpLQa1R9SRVuYz3RLOyDE=;
- b=vNMDCwS1ifxwUI9bZV1BoaqJvwqtcYxW7GRA+O1PJRzzT7RlMWALZRRGOK0QxRt0uK
- K0nZVpnSvyvd0ZADERdZuUhyXw7MzvdwbamVHz1qKBq55FG6gIDuw8BH9tUMn7zqOwbp
- my8afQaj4xKux6vcq+fLDyKrBqWToJSwvrdd56Oa8Nu87G2YSQpZvSm9k46oIMmlBmf5
- ASqOwFs8RcAOud6LkF8uB7qsrOzVgdzqCgR5w32gJy+1oLGUnwRgsuuSztnQZUlyTK/E
- eNSyO6NKE2UXWi2CY/cErhZZY7f05ZectgiA1u+00acC2N6lT6ytfCWdATtQvTuyaqnG
- 6jtQ==
+ (Exim 4.90_1) (envelope-from <leif@nuviainc.com>) id 1kEjAM-0004zz-CU
+ for qemu-riscv@nongnu.org; Sat, 05 Sep 2020 21:08:28 -0400
+Received: by mail-wm1-x341.google.com with SMTP id w2so9976952wmi.1
+ for <qemu-riscv@nongnu.org>; Sat, 05 Sep 2020 18:08:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=nuviainc-com.20150623.gappssmtp.com; s=20150623;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=uNRqwkv8hT3eCpKnBnomPKbDQRB6vtwjP0a/+dQsLns=;
+ b=WD0FM9dcybQ8PnYxP8TGa/02MVbknHObn8wkUrC/dqD+gk8Ggruw81/bXJ03tMmJim
+ 1H9Q9NifB0tPw4G45vaWL+H6xMNqinkUYvKbIDXokoveahsK6g3UllA61T5AN+D6BuQb
+ dGj9+X3BkMxZFp2rEWLIqrDNbVlZJm5ShAgl4raRvM0jsV+E90Wf8o2bG5dIYYp5hud9
+ deFeeaiknosopOCxWepEY15nW9kuH7zbzw+p8GSo/diHq4RtXG3DahilhA306zYp/CY2
+ To8LM9VUpaTTI+4bwcYNIBESIU+MuNzcPusKAxAQiDLFdchdcdKSuGyOxak9Y3zzbPYK
+ 9cew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=NSE2tS/nw3P0aS0OxukRx1bpLQa1R9SRVuYz3RLOyDE=;
- b=ekZaZB0gBQJWwl6g46ZSVwI5Al3OkqrFvS6J4tGA+xDebV7RXZEiV8sJo5n0B9d2Z9
- A36OoAHTffyj+tuB0ibNZ80o/hVTVi6u0xIfwuOyl0ui0zNWC2K/fZwo6DBnH5ZR2XoL
- ueztyLuGbUIB7WPwYHtzsgBWMFdf0ZDQiJz1QX8wWVN6K88vjFA4dEBf8Jf7gEub71ht
- CQYenT8qMftXGcshbMU7My8RXqQpIo/iKJfg3Io9ws1v90ACTAjO8nV7en1lLYjOOnJ8
- 3uPZK5WM48zxBxEhPbKETcGVK4J6DR+nF7DcVclkG3N4brh+5gKyIOeDNw250GwY/G+O
- 4BXw==
-X-Gm-Message-State: AOAM5319Z0AvDh19qZsNz5Cdug6vW3PkWf/vOh3lFzY1Np5o2jCM/6qD
- agjSvJXOc8ExDrHAw5iIiC1z9uo39mUV4lTkdRs=
-X-Google-Smtp-Source: ABdhPJw8zfPTjz9532ClqfYSYN2z9dEGX4fuOHOLGxzALVV2TdWSvU89ey9g/6Tw76EbBJ5IRC5bViIKvifYPYLPS6Q=
-X-Received: by 2002:a02:3213:: with SMTP id j19mr3545947jaa.135.1599252033503; 
- Fri, 04 Sep 2020 13:40:33 -0700 (PDT)
-MIME-Version: 1.0
-References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 4 Sep 2020 13:29:38 -0700
-Message-ID: <CAKmqyKMDhpaKT2QjP2zpqLny5pH+X7seYg04Dopz3DEUgoutgg@mail.gmail.com>
-Subject: Re: [PATCH v3 00/16] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
- board support
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=uNRqwkv8hT3eCpKnBnomPKbDQRB6vtwjP0a/+dQsLns=;
+ b=CEChpHyZSAGfE+63OBp+WPiZYjs8JmHFxRbfS4nESZ7LvwNrbbQJ4JsqOEY4iJCX1X
+ pAEVUmdwnam2VnKfHmvNxMNzTnQTmXNY4JI97E7LdhGN1Bc6D/HvnIv3rXGdpnjXEvPZ
+ LF9vEF1ELcDIyFMT1LhWemExLMJ1SgBFRGChE+Lk11K6/XZS+F9JG68zcT8zWCDQhuSk
+ 2PEJGHcAjAlH3TMJ0BGK6rwaRNCTkEzGkPXJZbvmlKxkC/fpq6FD4vlVhGWAj/Pvm1Ov
+ cQcS6Ua59Mv1lGb6qpTvios7jywbWja0lfJ3hA+eb3+OMAyJfJVRvHBpDYEVxK/6v1H4
+ ercQ==
+X-Gm-Message-State: AOAM530/Ri7RQML7v+b5mq15WM03qWdv/MnTqyIUIeuR3FD8t9fj6eFs
+ yqh3isGvYVeRBUijOUCoTzC6UA==
+X-Google-Smtp-Source: ABdhPJyYdb7fiuzogvMmX0bOmniZPhikXlC2qoiZfcgBQutD2xrMk5nBPrvL3I8YTQW0+h5bWRnhWw==
+X-Received: by 2002:a1c:9a57:: with SMTP id c84mr13894906wme.136.1599354500402; 
+ Sat, 05 Sep 2020 18:08:20 -0700 (PDT)
+Received: from vanye ([2001:470:1f09:12f0:7853:73ff:fecf:b3e3])
+ by smtp.gmail.com with ESMTPSA id v3sm19452423wmh.6.2020.09.05.18.08.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 05 Sep 2020 18:08:19 -0700 (PDT)
+Date: Sun, 6 Sep 2020 02:08:11 +0100
+From: Leif Lindholm <leif@nuviainc.com>
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Palmer Dabbelt <palmerdabbelt@google.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <alistair@alistair23.me>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>,
+ Palmer Dabbelt <palmerdabbelt@google.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ Alistair Francis <alistair@alistair23.me>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Jason Wang <jasowang@redhat.com>, 
- Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-arm <qemu-arm@nongnu.org>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
+ Jason Wang <jasowang@redhat.com>, Bin Meng <bin.meng@windriver.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-arm@nongnu.org,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>
+Subject: Re: [PATCH v3 00/16] hw/riscv: Add Microchip PolarFire SoC Icicle
+ Kit board support
+Message-ID: <20200906010811.GA1546@vanye>
+References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Received-SPF: pass client-ip=2a00:1450:4864:20::341;
+ envelope-from=leif@nuviainc.com; helo=mail-wm1-x341.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,35 +88,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2020 20:40:37 -0000
+X-List-Received-Date: Sun, 06 Sep 2020 01:08:29 -0000
 
-On Mon, Aug 31, 2020 at 6:40 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
+On Tue, Sep 01, 2020 at 09:38:55 +0800, Bin Meng wrote:
 > From: Bin Meng <bin.meng@windriver.com>
->
+> 
 > This adds support for Microchip PolarFire SoC Icicle Kit board.
 > The Icicle Kit board integrates a PolarFire SoC, with one SiFive's
 > E51 plus four U54 cores and many on-chip peripherals and an FPGA.
->
+> 
 > For more details about Microchip PolarFire SoC, please see:
 > https://www.microsemi.com/product-directory/soc-fpgas/5498-polarfire-soc-fpga
->
+> 
 > The Icicle Kit board information can be found here:
 > https://www.microsemi.com/existing-parts/parts/152514
->
+> 
 > Unlike SiFive FU540, the RISC-V core resect vector is at 0x20220000.
 > The RISC-V CPU and HART codes has been updated to set the core's
 > reset vector based on a configurable property from machine codes.
->
+> 
 > The following perepherals are created as an unimplemented device:
->
+> 
 > - Bus Error Uint 0/1/2/3/4
 > - L2 cache controller
 > - SYSREG
 > - MPUCFG
 > - IOSCBCFG
 > - GPIO
->
+> 
 > The following perepherals are emulated:
 > - SiFive CLINT
 > - SiFive PLIC
@@ -120,11 +123,11 @@ On Mon, Aug 31, 2020 at 6:40 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 > - SiFive PDMA
 > - Cadence eMMC/SDHCI controller
 > - Cadence Gigabit Ethernet MAC
->
+> 
 > The BIOS image used by this machine is hss.bin, aka Hart Software
 > Services, which can be built from:
 > https://github.com/polarfire-soc/hart-software-services
->
+> 
 > To launch this machine:
 > $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
 >     -bios path/to/hss.bin -sd path/to/sdcard.img \
@@ -132,24 +135,47 @@ On Mon, Aug 31, 2020 at 6:40 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >     -display none -serial stdio \
 >     -chardev socket,id=serial1,path=serial1.sock,server,wait \
 >     -serial chardev:serial1
->
+
+I finally got around to building the sd image from
+https://github.com/polarfire-soc/polarfire-soc-buildroot-sdk,
+and I can successfully boot to prompt using that, and the (hacked)
+hss.bin I verified previously - also with this v3.
+
+However, unless I add the "-nic user,model=cadence_gem \" shown in
+https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
+but not here, I do not have functioning networking. (It is not obvious
+to me why this is needed.)
+
 > The memory is set to 1 GiB by default to match the hardware.
+
+Which hardware is this?
+https://www.crowdsupply.com/microchip/polarfire-soc-icicle-kit lists
+2GiB.
+
 > A sanity check on ram size is performed in the machine init routine
 > to prompt user to increase the RAM size to > 1 GiB when less than
 > 1 GiB ram is detected.
->
+
+There is currently no visible effect in firmware from setting memory size to >
+1GiB (hss says 1GB, u-boot says 1GB, Linux sees 1GB).
+Are there any plans to address this in future versions?
+
+Best Regards,
+
+Leif
+
 > HSS output is on the first serial port (stdio) and U-Boot/Linux
 > outputs on the 2nd serial port. OpenSBI outputs on a random serial
 > port due to the lottery mechanism used during the multi-core boot.
->
+> 
 > Please check the QEMU WiKi page for the target specific information:
 > https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
->
+> 
 > Changes in v3:
 > - rebase on qemu/master
 > - change MCHP_PFSOC_DMA to SIFIVE_PDMA
 > - use the correct (Object *) to set the 'phy-addr' in xlnx-zynqmp.c
->
+> 
 > Changes in v2:
 > - change to update hw/char/meson.build
 > - add impl.min_access_size and impl.max_access_size as part of
@@ -167,7 +193,7 @@ On Mon, Aug 31, 2020 at 6:40 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 > - fix the register offset for channel 1/2/3 in the read/write ops
 > - connect 8 IRQs to the PLIC
 > - change "phy-addr" default value to BOARD_PHY_ADDRESS
->
+> 
 > Bin Meng (16):
 >   target/riscv: cpu: Add a new 'resetvec' property
 >   hw/riscv: hart: Add a new 'resetvec' property
@@ -187,14 +213,7 @@ On Mon, Aug 31, 2020 at 6:40 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >   hw/riscv: microchip_pfsoc: Hook GPIO controllers
 >   hw/riscv: clint: Avoid using hard-coded timebase frequency
 >   hw/riscv: sifive_u: Connect a DMA controller
-
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
->
+> 
 >  default-configs/riscv64-softmmu.mak |   1 +
 >  include/hw/char/mchp_pfsoc_mmuart.h |  61 +++++
 >  include/hw/dma/sifive_pdma.h        |  57 +++++
@@ -241,9 +260,9 @@ Alistair
 >  create mode 100644 hw/dma/sifive_pdma.c
 >  create mode 100644 hw/riscv/microchip_pfsoc.c
 >  create mode 100644 hw/sd/cadence_sdhci.c
->
-> --
+> 
+> -- 
 > 2.7.4
->
->
+> 
+> 
 
