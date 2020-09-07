@@ -1,64 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kExLZ-0002xE-Ez
-	for mharc-qemu-riscv@gnu.org; Sun, 06 Sep 2020 12:16:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42442)
+	id 1kFEJy-00042Z-Of
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Sep 2020 06:24:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49370)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kExLY-0002x1-AT; Sun, 06 Sep 2020 12:16:52 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:38790)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kFEJx-00042G-3P; Mon, 07 Sep 2020 06:24:21 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:34140)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kExLW-0007XS-Cj; Sun, 06 Sep 2020 12:16:51 -0400
-Received: by mail-io1-xd43.google.com with SMTP id h4so11754739ioe.5;
- Sun, 06 Sep 2020 09:16:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kFEJv-0002K3-5j; Mon, 07 Sep 2020 06:24:20 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id u6so9093714ybf.1;
+ Mon, 07 Sep 2020 03:24:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=aIpmbdaLWoPexlIzZVbHNWpQNe4CUFhooFPjYEtny8A=;
- b=BhtE8O7WCUJOBd0JCDNm+lgZaVPUXSOymH3tdUECKDEQ4MKjCMROtZYnOyNs2Y6/kZ
- 3CG9A85G5WJKCF//hylTQINk1CyINFwRCfqW1F3NzNFB5oCFjKq39u14B4CwcBcXQB4Y
- 0EV2lWiqP7aVDBvwSxjSBEonk75bffrEEESMJZlY61e9wacLoZNp+Wtx8mwnUxy2LDd/
- b8NUc2cNVTCBMn8+5SbRzR3yOOshtNh1T16Jg990MBGY9CyXgiB/b09fHEdgcsWx5ozD
- EQFqkDmIISEQ8JCPkh8TApDbiwisuj5BcimbnsPwxWL2lMYwaxI4J2b2jlYf9zvo6v2a
- K4Kw==
+ :cc; bh=+tWDOOsjdkNUtA6oKk1HUkDL7Sde311gZREuKt9c2PE=;
+ b=osBjK2qdGWemDOHmSepH7A/dPh3hf/g5Pxzyn0uznvnUD+lJIrY9KV6J4Pw6mbEZuR
+ 1HiHvRrvuyp+uFZFJW9tg7NUUq42r35SmKioZ0fSRzFD7wFXRgNdHngIBrASbiCBwW2b
+ vkBQDNdH2psn4sxj5iXUFR4tVPAf11IG3pQ8xyJ7AoMonRszeBIigWjNB81VMx0RZmJf
+ 1mZCz/AmgSCbpMOAW3d9oNiISdYkBQxtfmXLOgji/Rte/kqEoISFHgHSjYlh1m8ECGIf
+ XYZi9oAkgOey9AEWYGJwEGR2Y65gq7Agii+QmXrU2v+1FNAkuDkaewBNzEApDYcwdawN
+ EtMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=aIpmbdaLWoPexlIzZVbHNWpQNe4CUFhooFPjYEtny8A=;
- b=QW/FNXSVupztJ7oURxktXE/6+b9j7YgQruYgvaQHxUjRp2cRgAVhCrxHvxyTwqBj5r
- TyUy+t81cyD4iwKUgkMkjpMtXFspPusuMriUgDt9wFkjl66NDoAdJv7Sv7BSf0tQNjll
- 8Fao+Btv70zZrNfrvbqtZhqAG/LDle0TSBN8T7zdWA2qxszyo5UL4Dm+gGxfkY9w9u4G
- FH6xh0H2z2VeV6Yj9385hCP0yHQIWcodeiTeypa1ypWh44sJ5PR0Hnk0FOnRvgwRjOfM
- UutRIq0/6Oq9JptA5b+ObeUn+bOKixz5Trkj95saa5LYDP5ikNM/7bq3c8Ly80MU9lmy
- 6PUw==
-X-Gm-Message-State: AOAM5328VO++Kx8syivtQ8LzXBIVm5bPfh4UZbmIOQGq2je6H5V2dNVv
- nFF6CgGpV+sC/4IkMlFr+FAnyo3Ts+6HX5BVPzk=
-X-Google-Smtp-Source: ABdhPJwbGk/miDL/6u+Z/P2GZg4RW3ciZGyFVr6koAe4qJmLduV30hulMUWuqZNoilACyJftC+g9pOHqyZhvpa3vGvE=
-X-Received: by 2002:a5d:995a:: with SMTP id v26mr14476320ios.176.1599409008587; 
- Sun, 06 Sep 2020 09:16:48 -0700 (PDT)
+ bh=+tWDOOsjdkNUtA6oKk1HUkDL7Sde311gZREuKt9c2PE=;
+ b=BCrMcLR3dyTXFTjAziAyslhLPjDKynaYuRhtof5PU98nTpJr50kp3UQproRDzHP2ve
+ ZvCJ1uHgbS0EQcGdD7KhchShz22TfE7U4P6cn5rELNdb1Cs0I55sCa7FwAV7b82p7gHe
+ dheE7pQt3InOKWc9MdwX+2x+ZYSJDrFeGVOwwcOLqf58Q1da1Jz4OaqayWlVuK1+kWOK
+ Lf074kJqrqfcsBiPgyx5ysBMDgSfd6FLf7vK2D4E3ADu5FcXYH2KCwDaRNdj7IjQj4oY
+ 6O/DcadnJQDPcRUJvU2nDSqOj1c2FN2gAoxaq62stMD1KfQBb4yWL47nEsT/saIW1FbC
+ dTlQ==
+X-Gm-Message-State: AOAM533IY2OOmOC0ZXNgNwDG4/UwpI17U19VCo6i3rTFpukCNU45MA7o
+ BtsQRV1nSXv4qdnXUJtg/7OTOGU46rO4HdVJsc8=
+X-Google-Smtp-Source: ABdhPJxQ+nng2R8lamJlB/1HY6a+LPnOyJyvAbZgxVUHQ+FQzq0bhnmgiFnQ0qhMd9Mogucj3DyvEO35KYmARy95Ukw=
+X-Received: by 2002:a25:cfd2:: with SMTP id f201mr5091035ybg.122.1599474256814; 
+ Mon, 07 Sep 2020 03:24:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <1599129623-68957-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1599129623-68957-1-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Sun, 6 Sep 2020 09:05:50 -0700
-Message-ID: <CAKmqyKMOoSn6rgTvK7KF5f48PpsWberDtAmUyGJ1M3zXHquomA@mail.gmail.com>
-Subject: Re: [PATCH 00/12] hw/riscv: Clean up the directory
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+References: <1598924352-89526-1-git-send-email-bmeng.cn@gmail.com>
+ <20200906010811.GA1546@vanye>
+In-Reply-To: <20200906010811.GA1546@vanye>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 7 Sep 2020 18:24:06 +0800
+Message-ID: <CAEUhbmVfSPwO5CHO2G5Vd5fA6NA4dRCp-e_KGJhSO7nYAPmi1w@mail.gmail.com>
+Subject: Re: [PATCH v3 00/16] hw/riscv: Add Microchip PolarFire SoC Icicle Kit
+ board support
+To: Leif Lindholm <leif@nuviainc.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
+ Palmer Dabbelt <palmerdabbelt@google.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
+ Peter Maydell <peter.maydell@linaro.org>,
+ Alistair Francis <alistair@alistair23.me>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Jason Wang <jasowang@redhat.com>, 
+ Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-arm <qemu-arm@nongnu.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -73,105 +84,102 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Sep 2020 16:16:52 -0000
+X-List-Received-Date: Mon, 07 Sep 2020 10:24:21 -0000
 
-On Thu, Sep 3, 2020 at 3:41 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> This is an effort to clean up the hw/riscv directory. Ideally it
-> should only contain the RISC-V SoC / machine codes plus generic
-> codes. Peripheral models for a specific SoC are moved to its
-> corresponding hw/* subdirectories.
->
-> This series should be applied after the PolarFire SoC series:
-> http://patchwork.ozlabs.org/project/qemu-devel/list/?series=198727
->
->
-> Bin Meng (12):
->   hw/riscv: Move sifive_e_prci model to hw/misc
->   hw/riscv: Move sifive_u_prci model to hw/misc
->   hw/riscv: Move sifive_u_otp model to hw/misc
->   hw/riscv: Move sifive_gpio model to hw/gpio
->   hw/riscv: Move sifive_clint model to hw/intc
->   hw/riscv: Move sifive_plic model to hw/intc
->   hw/riscv: Move riscv_htif model to hw/char
->   hw/riscv: Move sifive_uart model to hw/char
->   hw/riscv: Move sifive_test model to hw/misc
->   hw/riscv: Always build riscv_hart.c
->   hw/riscv: Drop CONFIG_SIFIVE
->   hw/riscv: Sort the Kconfig options in alphabetical order
+Hi Leif,
 
-Thanks!
 
-Applied to riscv-to-apply.next
+On Sun, Sep 6, 2020 at 9:08 AM Leif Lindholm <leif@nuviainc.com> wrote:
+>
+> On Tue, Sep 01, 2020 at 09:38:55 +0800, Bin Meng wrote:
+> > From: Bin Meng <bin.meng@windriver.com>
+> >
+> > This adds support for Microchip PolarFire SoC Icicle Kit board.
+> > The Icicle Kit board integrates a PolarFire SoC, with one SiFive's
+> > E51 plus four U54 cores and many on-chip peripherals and an FPGA.
+> >
+> > For more details about Microchip PolarFire SoC, please see:
+> > https://www.microsemi.com/product-directory/soc-fpgas/5498-polarfire-soc-fpga
+> >
+> > The Icicle Kit board information can be found here:
+> > https://www.microsemi.com/existing-parts/parts/152514
+> >
+> > Unlike SiFive FU540, the RISC-V core resect vector is at 0x20220000.
+> > The RISC-V CPU and HART codes has been updated to set the core's
+> > reset vector based on a configurable property from machine codes.
+> >
+> > The following perepherals are created as an unimplemented device:
+> >
+> > - Bus Error Uint 0/1/2/3/4
+> > - L2 cache controller
+> > - SYSREG
+> > - MPUCFG
+> > - IOSCBCFG
+> > - GPIO
+> >
+> > The following perepherals are emulated:
+> > - SiFive CLINT
+> > - SiFive PLIC
+> > - PolarFire SoC Multi-Mode UART
+> > - SiFive PDMA
+> > - Cadence eMMC/SDHCI controller
+> > - Cadence Gigabit Ethernet MAC
+> >
+> > The BIOS image used by this machine is hss.bin, aka Hart Software
+> > Services, which can be built from:
+> > https://github.com/polarfire-soc/hart-software-services
+> >
+> > To launch this machine:
+> > $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
+> >     -bios path/to/hss.bin -sd path/to/sdcard.img \
+> >     -nic tap,ifname=tap,script=no,model=cadence_gem \
+> >     -display none -serial stdio \
+> >     -chardev socket,id=serial1,path=serial1.sock,server,wait \
+> >     -serial chardev:serial1
+>
+> I finally got around to building the sd image from
+> https://github.com/polarfire-soc/polarfire-soc-buildroot-sdk,
+> and I can successfully boot to prompt using that, and the (hacked)
+> hss.bin I verified previously - also with this v3.
+>
 
-Alistair
+Good to know!
+
+> However, unless I add the "-nic user,model=cadence_gem \" shown in
+> https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
+> but not here, I do not have functioning networking. (It is not obvious
+> to me why this is needed.)
+>
+
+Sorry I don't understand what the issue is?
+
+> > The memory is set to 1 GiB by default to match the hardware.
+>
+> Which hardware is this?
+> https://www.crowdsupply.com/microchip/polarfire-soc-icicle-kit lists
+> 2GiB.
+
+It's this same board. But I believe the crowdsupply webpage has the
+wrong information. The board I got only has 1GB memory.
 
 >
->  {include/hw/riscv => hw/intc}/sifive_plic.h |  0
->  hw/riscv/trace.h                            |  1 -
->  include/hw/{riscv => char}/riscv_htif.h     |  0
->  include/hw/{riscv => char}/sifive_uart.h    |  0
->  include/hw/{riscv => gpio}/sifive_gpio.h    |  0
->  include/hw/{riscv => intc}/sifive_clint.h   |  0
->  include/hw/{riscv => misc}/sifive_e_prci.h  |  0
->  include/hw/{riscv => misc}/sifive_test.h    |  0
->  include/hw/{riscv => misc}/sifive_u_otp.h   |  0
->  include/hw/{riscv => misc}/sifive_u_prci.h  |  0
->  include/hw/riscv/sifive_e.h                 |  2 +-
->  include/hw/riscv/sifive_u.h                 |  6 +--
->  hw/{riscv => char}/riscv_htif.c             |  2 +-
->  hw/{riscv => char}/sifive_uart.c            |  2 +-
->  hw/{riscv => gpio}/sifive_gpio.c            |  2 +-
->  hw/{riscv => intc}/sifive_clint.c           |  2 +-
->  hw/{riscv => intc}/sifive_plic.c            |  2 +-
->  hw/{riscv => misc}/sifive_e_prci.c          |  2 +-
->  hw/{riscv => misc}/sifive_test.c            |  2 +-
->  hw/{riscv => misc}/sifive_u_otp.c           |  2 +-
->  hw/{riscv => misc}/sifive_u_prci.c          |  2 +-
->  hw/riscv/microchip_pfsoc.c                  |  4 +-
->  hw/riscv/sifive_e.c                         |  8 ++--
->  hw/riscv/sifive_u.c                         |  6 +--
->  hw/riscv/spike.c                            |  4 +-
->  hw/riscv/virt.c                             |  6 +--
->  hw/char/Kconfig                             |  6 +++
->  hw/char/meson.build                         |  2 +
->  hw/gpio/Kconfig                             |  3 ++
->  hw/gpio/meson.build                         |  1 +
->  hw/gpio/trace-events                        |  6 +++
->  hw/intc/Kconfig                             |  6 +++
->  hw/intc/meson.build                         |  2 +
->  hw/misc/Kconfig                             | 12 +++++
->  hw/misc/meson.build                         |  6 +++
->  hw/riscv/Kconfig                            | 74 +++++++++++++++--------------
->  hw/riscv/meson.build                        | 11 +----
->  hw/riscv/trace-events                       |  7 ---
->  meson.build                                 |  1 -
->  39 files changed, 110 insertions(+), 82 deletions(-)
->  rename {include/hw/riscv => hw/intc}/sifive_plic.h (100%)
->  delete mode 100644 hw/riscv/trace.h
->  rename include/hw/{riscv => char}/riscv_htif.h (100%)
->  rename include/hw/{riscv => char}/sifive_uart.h (100%)
->  rename include/hw/{riscv => gpio}/sifive_gpio.h (100%)
->  rename include/hw/{riscv => intc}/sifive_clint.h (100%)
->  rename include/hw/{riscv => misc}/sifive_e_prci.h (100%)
->  rename include/hw/{riscv => misc}/sifive_test.h (100%)
->  rename include/hw/{riscv => misc}/sifive_u_otp.h (100%)
->  rename include/hw/{riscv => misc}/sifive_u_prci.h (100%)
->  rename hw/{riscv => char}/riscv_htif.c (99%)
->  rename hw/{riscv => char}/sifive_uart.c (99%)
->  rename hw/{riscv => gpio}/sifive_gpio.c (99%)
->  rename hw/{riscv => intc}/sifive_clint.c (99%)
->  rename hw/{riscv => intc}/sifive_plic.c (99%)
->  rename hw/{riscv => misc}/sifive_e_prci.c (99%)
->  rename hw/{riscv => misc}/sifive_test.c (98%)
->  rename hw/{riscv => misc}/sifive_u_otp.c (99%)
->  rename hw/{riscv => misc}/sifive_u_prci.c (99%)
->  delete mode 100644 hw/riscv/trace-events
+> > A sanity check on ram size is performed in the machine init routine
+> > to prompt user to increase the RAM size to > 1 GiB when less than
+> > 1 GiB ram is detected.
 >
-> --
-> 2.7.4
+> There is currently no visible effect in firmware from setting memory size to >
+> 1GiB (hss says 1GB, u-boot says 1GB, Linux sees 1GB).
+> Are there any plans to address this in future versions?
 >
->
+
+HSS is using hardcoded 1GB memory size and that's why in QEMU the
+minimum required memory size is 1GB. Setting less than 1GB size blocks
+HSS to load the 2nd stage bootloader U-Boot into the memory. Both
+U-Boot and Linux DTS files set the memory size to 1GB, so that's why
+both of them see only 1GB. Setting memory >1G does not affect U-Boot
+and Linux though. You can however manually edit the U-Boot and Linux
+DTS files to have a large RAM size to match QEMU -m option.
+
+Regards,
+Bin
 
