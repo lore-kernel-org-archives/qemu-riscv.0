@@ -1,80 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kFxDQ-00006E-BB
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Sep 2020 06:20:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36796)
+	id 1kG4OS-00045e-1C
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Sep 2020 14:00:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45100)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stefanha@gmail.com>)
- id 1kFxDN-0008Tg-Rt; Wed, 09 Sep 2020 06:20:33 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:36057)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kG4OP-00044t-7b; Wed, 09 Sep 2020 14:00:25 -0400
+Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:36839)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <stefanha@gmail.com>)
- id 1kFxDL-0003Wn-M3; Wed, 09 Sep 2020 06:20:33 -0400
-Received: by mail-pf1-x444.google.com with SMTP id d9so1761867pfd.3;
- Wed, 09 Sep 2020 03:20:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kG4OM-0001YT-Pe; Wed, 09 Sep 2020 14:00:24 -0400
+Received: by mail-il1-x144.google.com with SMTP id p13so3206325ils.3;
+ Wed, 09 Sep 2020 11:00:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ZLkT7w98LPmkCt3TSXG6BXZLILHPsUd1j02KoxHSXhc=;
- b=UDAJuKRqNxabaEIoLX9z2fi8tvoYMCRsFa4BMheB4VHfGylM6V9/AgEd5yS+BlKiy1
- 5I3QcMIYi7Ehvx7CH+Wab4RfxDPVm04nl7OjCr21W5KBC/SrdNvCt4p+NGqoqAriLuY0
- yAmNoWR5a1VHaERb9ZK/2KWL045nySUbk95cZaKKq+Vaewb5NnK3eAJeF0x3TgegurK4
- GGobWL3fNdNkP58v/4GG3S75J8q9JDnxZlGH+Um1wBVKjelBtuBe+ZwkwKiHnB2Lnwbj
- wE+InLu3nghTzKGLt6Hp727XXZo5Cyd7kLQzXYAwnNwf6RE3DkZsoCkTdW7EAH/0cRpA
- 4PKg==
+ :cc; bh=CX+wa3Cw6K12KtlfLiQRHHsZ0quSOvcZN3FfrH23N+Y=;
+ b=gomWyIAbQhN0XgcsfPXyYmUh9FAib1iXf7ynvlRy1cNQJ8T6sHJyTDdj5hvn3+smqE
+ RyNQ9ZnxR0DrroUDkIiB2EU2z4KsgW4X0xoFk4lcEqot5+DtFp06DXfqjhpv9jyFflAV
+ 7G2FM3zE+h4R2zlBFCod6Kov4iyJCGCPoeexFJdFwGYS6qH0alQofqeWdZRBzPCLTdfh
+ caHnZ2+UZezyvxZWPS0v2iM5AAmUO6DUg6vJfGbciRIrWRHsbD4ZA9Nk+W6P2llbh5E/
+ EuuSWCqBu8LTeo0hukeT5HMKExUlHpxAPODff4mj43xiX8nc6iVl57Cb9PWR1iEKrPfY
+ 9QWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ZLkT7w98LPmkCt3TSXG6BXZLILHPsUd1j02KoxHSXhc=;
- b=UrChvJryWR0remJ68wCm8lwchrhdzPrlwNRfXYtg2PWGT/YXOc44tAWj5nivBSCpQC
- iF2zJxbtMKiMmmbSlt1LM3o33A6TW9H6DRVoyhQ03RmEvkL+/hGw/vdBUk/9ZqlvkLgi
- JtPo3TX7KpR98zAVwdWa2HI4jg4rNnZCdTMld6MybSsRUejTfm8wSbHORhWl2e36G+Ll
- hkprViZ1CHNsUB0T24KLIvFAaNzI7PlfAHJSWXnodqPrvC3coOrn4cjP7iI72cgLLnz4
- R0nbJgQ+3uz0IiKxl4NFGieijgVF+M1z+1KVJIA+ENr7BuKU7JVimYNVeGB1a0mJe6/J
- MeeQ==
-X-Gm-Message-State: AOAM530CtooQU+RYiuXOQSb69Se6aXBoroEhsBuR66fo4M2RcZwRf5lD
- MiPvAkA9/oO1IPQv9NiPgra6PB4lhoh0lls0DuA=
-X-Google-Smtp-Source: ABdhPJwhZQ0MR7oxhR5BVCF4Nuy3oFvUgkm+RuYuMp7nG+cAOVB42Z9mUTceJ7lx4fs7ZIL2Pugdec6HoVEMDz9h9i8=
-X-Received: by 2002:a17:902:7895:b029:d0:89f4:621c with SMTP id
- q21-20020a1709027895b02900d089f4621cmr255144pll.4.1599646829254; Wed, 09 Sep
- 2020 03:20:29 -0700 (PDT)
+ bh=CX+wa3Cw6K12KtlfLiQRHHsZ0quSOvcZN3FfrH23N+Y=;
+ b=lOBH9/mPhVJLdcQ0klIh5+N0TxnjNoKZxcEhJbewtYkusrtqxHJHsjEUXabInmzFc6
+ Dw/DDTwXtj9Sr8uvzfsAh4giHRDqXbHY8bpvtC/GrR+5wJcTaWbV5VYfUVzmNB5n+76M
+ CTV9/iyNykvOTj6B0DxSQ3z9ggm9eJ4trDWNuS5LXI+PRFDEsRdCFKcTIuJtGVCm7wWN
+ KvM9NuPe3irAin5D7W002jmbe5OnMeAVYamwTrjEzDCrmCOSBLiRnymN4HTijwkyYwAb
+ z22xC5vYpzqTUtFWTb+g1ESbNOGcif1IfW08UU8i6XuMG+bRNnOrjbcbLA5Gqztf9hqi
+ gCNw==
+X-Gm-Message-State: AOAM5321JmgrrwQHm0FV1ohhd/0iXyw4h6lIuDOOINeUpnUQ5mR0lP/b
+ hmX1Xo8/YhGhzXjECE98fdnFgRyRQUPiHyzxMuc=
+X-Google-Smtp-Source: ABdhPJzsg3B0ctEMLtGUh3SfgRVIZ4Lj6H1GEjOxjR/gP/0iEE5zP/rcaZqpVEuSnwycaWOte1GCa8ZpvO9VWpu3eQs=
+X-Received: by 2002:a92:d94b:: with SMTP id l11mr5000880ilq.131.1599674420340; 
+ Wed, 09 Sep 2020 11:00:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200813052257.226142-1-stefanha@redhat.com>
- <CAFEAcA-OMwaMbrp60Gd3URMykAxOxd0+_SogW13VCRCnhn6JHw@mail.gmail.com>
-In-Reply-To: <CAFEAcA-OMwaMbrp60Gd3URMykAxOxd0+_SogW13VCRCnhn6JHw@mail.gmail.com>
-From: Stefan Hajnoczi <stefanha@gmail.com>
-Date: Wed, 9 Sep 2020 11:20:17 +0100
-Message-ID: <CAJSP0QWBk0=8d78VrpSFvbBEnYdzR_cWmvYXibYnQWGnAPTShA@mail.gmail.com>
-Subject: Re: [PULL 0/9] Tracing patches
+References: <cover.1590704015.git.alistair.francis@wdc.com>
+ <0ab3cecbe801f9e14ad1a5447d02483b9008fdbb.1590704015.git.alistair.francis@wdc.com>
+ <CAFEAcA83=4=EhtQLmGJn5Z_PVZaDyo7pMwdX-9fTVUkVKe7Acw@mail.gmail.com>
+In-Reply-To: <CAFEAcA83=4=EhtQLmGJn5Z_PVZaDyo7pMwdX-9fTVUkVKe7Acw@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 9 Sep 2020 10:49:20 -0700
+Message-ID: <CAKmqyKPryJP5g4RXq1uCbYKQX3C+9yzjjqEH4i88L6Vf2gW7Zg@mail.gmail.com>
+Subject: Re: [PATCH v5 06/11] riscv: Initial commit of OpenTitan machine
 To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Stefan Hajnoczi <stefanha@redhat.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
- QEMU Developers <qemu-devel@nongnu.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Li Zhijian <lizhijian@cn.fujitsu.com>, Qemu-block <qemu-block@nongnu.org>, 
- Juan Quintela <quintela@redhat.com>, David Hildenbrand <david@redhat.com>, 
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Alex Williamson <alex.williamson@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, David Gibson <david@gibson.dropbear.id.au>,
- Kevin Wolf <kwolf@redhat.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Reitz <mreitz@redhat.com>, 
- Zhang Chen <chen.zhang@intel.com>, qemu-ppc <qemu-ppc@nongnu.org>, 
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>, 
- Stefan Berger <stefanb@linux.ibm.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ QEMU Developers <qemu-devel@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::444;
- envelope-from=stefanha@gmail.com; helo=mail-pf1-x444.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -89,34 +75,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2020 10:20:34 -0000
+X-List-Received-Date: Wed, 09 Sep 2020 18:00:26 -0000
 
-On Fri, Aug 21, 2020 at 5:26 PM Peter Maydell <peter.maydell@linaro.org> wrote:
+On Tue, Sep 8, 2020 at 7:52 AM Peter Maydell <peter.maydell@linaro.org> wrote:
 >
-> On Thu, 13 Aug 2020 at 08:44, Stefan Hajnoczi <stefanha@redhat.com> wrote:
+> On Thu, 28 May 2020 at 23:31, Alistair Francis <alistair.francis@wdc.com> wrote:
 > >
-> > The following changes since commit d0ed6a69d399ae193959225cdeaa9382746c91cc:
+> > This adds a barebone OpenTitan machine to QEMU.
 > >
-> >   Update version for v5.1.0 release (2020-08-11 17:07:03 +0100)
-> >
-> > are available in the Git repository at:
-> >
-> >   https://github.com/stefanha/qemu.git tags/tracing-pull-request
-> >
-> > for you to fetch changes up to bd6c9e56aba2e1b9a307642c72375386afbcf1f2:
-> >
-> >   trace-events: Fix attribution of trace points to source (2020-08-12 20:28:5=
-> > 4 +0100)
-> >
-> > ----------------------------------------------------------------
-> > Pull request
-> >
-> > macOS dtrace support and cleanups.
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > Reviewed-by: Bin Meng <bin.meng@windriver.com>
+> > ---
+> >  default-configs/riscv32-softmmu.mak |   1 +
+> >  default-configs/riscv64-softmmu.mak |  11 +-
 >
-> Hi; this conflicts with the meson buildsystem merge, I'm
-> afraid -- can you rebase and resend, please?
+> Just noticed this, but:
+>
+> > diff --git a/default-configs/riscv32-softmmu.mak b/default-configs/riscv32-softmmu.mak
+> > index 1ae077ed87..94a236c9c2 100644
+> > --- a/default-configs/riscv32-softmmu.mak
+> > +++ b/default-configs/riscv32-softmmu.mak
+> > @@ -10,3 +10,4 @@ CONFIG_SPIKE=y
+> >  CONFIG_SIFIVE_E=y
+> >  CONFIG_SIFIVE_U=y
+> >  CONFIG_RISCV_VIRT=y
+> > +CONFIG_OPENTITAN=y
+> > diff --git a/default-configs/riscv64-softmmu.mak b/default-configs/riscv64-softmmu.mak
+> > index 235c6f473f..aaf6d735bb 100644
+> > --- a/default-configs/riscv64-softmmu.mak
+> > +++ b/default-configs/riscv64-softmmu.mak
+> > @@ -1,3 +1,12 @@
+> >  # Default configuration for riscv64-softmmu
+> >
+> > -include riscv32-softmmu.mak
+> > +# Uncomment the following lines to disable these optional devices:
+> > +#
+> > +#CONFIG_PCI_DEVICES=n
+> > +
+> > +# Boards:
+> > +#
+> > +CONFIG_SPIKE=y
+> > +CONFIG_SIFIVE_E=y
+> > +CONFIG_SIFIVE_U=y
+> > +CONFIG_RISCV_VIRT=y
+>
+> ...shouldn't the riscv64-softmmu config have CONFIG_OPENTITAN too?
+> The usual principle is that the 64-bit executable can run the
+> 32-bit boards too.
 
-Sure, I will resend it.
+I didn't know that was the general case. I'll send a patch to enable this.
 
-Stefan
+Alistair
+
+>
+> thanks
+> -- PMM
 
