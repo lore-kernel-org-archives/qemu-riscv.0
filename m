@@ -1,63 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kGRCz-0006Dz-03
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Sep 2020 14:22:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58274)
+	id 1kGRmo-0004OS-Dz
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Sep 2020 14:59:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39776)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kGRCr-0005wc-B3; Thu, 10 Sep 2020 14:22:02 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:33769)
+ id 1kGRml-0004JT-Sg; Thu, 10 Sep 2020 14:59:07 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:45509)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kGRCd-00037R-Q1; Thu, 10 Sep 2020 14:22:00 -0400
-Received: by mail-il1-x142.google.com with SMTP id x2so6640556ilm.0;
- Thu, 10 Sep 2020 11:21:46 -0700 (PDT)
+ id 1kGRmk-0000k6-58; Thu, 10 Sep 2020 14:59:07 -0400
+Received: by mail-io1-xd41.google.com with SMTP id u126so8303692iod.12;
+ Thu, 10 Sep 2020 11:59:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=EDPigblih1cjap7Oi4kVPhbl5AZCj10BtXDekneIKSQ=;
- b=UH3DlfDODyCHmCM0+yL8UILR1TN0nA+CDFWE5X/KUnUZTIfVWQO7K9p1OibfTepqam
- tEM5uSxa8hDrA06QVaxWcr4tPJH5qmQQ75IdZi46Gy2+fMtMWuKjfa4jaP31Gq9WDLwQ
- EgUt9AuFKHB3PNZPYZ5M3pX2VimAbmpuafFV7/WTdWmTh+6PcIp00Q9zTRwcRf+j5cPy
- y6GJ8FwX0g4QJ1r2lKGdcS0QLuDMqUImX+LwYGn8hgRpICVqgFBnass23fbQc4m2sh/r
- xdVvErtTPmRX6LMj+QbsgIA05mxCHw9o1Rgh3Twd7WLRRY3tokuh+4L74/QrQqLiE1BC
- 44FQ==
+ :cc; bh=f3i9UdW14qknfifNwkoRYPMhlcCxUFd3MCQEswGN9eU=;
+ b=IWEByQHHl6g+qkq7nKUfyL8XXtfN72Rxrsj7Ck1VrzqJxExu2834GyT7L1mW1ft4n2
+ ZC/R+0xm7lHYvO76+wK/FHNfDpvaTaQMhcS1h+uAi1mrHfkcjePBgwx0WZLZGSi0fZzQ
+ SWLDd08+aNo9lRDntiZd2SvQjW8+KWBrbkFPS5ZZH1VJW8CPmJgA3wMG9uxCjpaPUtet
+ P1hNm8brVlU6mFXPWFv+UHM2Leao6fIlaRLs+PEXn/NzxMpTEskZkh6wiLX6+GruiM3C
+ k9kqVbbDEUeqAsP6HGNzi2rpLfOGwNCBb9VSh6PenMmNAle6/FhVuswPoEkEscm/lfWS
+ CuIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=EDPigblih1cjap7Oi4kVPhbl5AZCj10BtXDekneIKSQ=;
- b=ACii+CqCi49rzWy6fi/2hyWci0KA4j+4wBEbWSrF3ZqrRSefSiUbXkhC5ca9voIHGy
- /4Bdpoj/KzXVp5JZk34O1h50PLxjWb2q5rf1Sq8WZreW3FLJaOABPXWZlSFL9tY5aAh8
- JAe/FaeOuG6TzLv/I6D+O2JzOGLbO5T3QMQLhkgxkPKppt2yj0Eg03v7obLYtLljp4VM
- 6f03yTfXD2Pec9Lu9/eM5Aksj3NxXb+NiJv9yFCy8zkEtbVuwBpJuEDksKAav80qgyN1
- vDo+btsPNQi1d1nuzEVICmfniiKVm60CpMwCHIZ+Z3HdB09QefA5E3uFS8mdMAd0+ZUR
- AJXQ==
-X-Gm-Message-State: AOAM530ixOLfXEGqhn5+OlLTqo7/iFEaQh6ktcirhFKi0DNCuTlVR8Qc
- F8KekmyhbWo9iLsAN0glCQ2YgViTc8fvrwFJlXg=
-X-Google-Smtp-Source: ABdhPJyYCz/ZUSBXQcrAX6irGOO9WCvzVftUPng7j3JLK20JyHnooG373q70zAgc/QnFt/cEj7D8mvUpI/7X5mOAvZc=
-X-Received: by 2002:a92:c8d1:: with SMTP id c17mr2510027ilq.131.1599762105327; 
- Thu, 10 Sep 2020 11:21:45 -0700 (PDT)
+ bh=f3i9UdW14qknfifNwkoRYPMhlcCxUFd3MCQEswGN9eU=;
+ b=h7qxIRGbsk/aT0PGW5onnxCOpq7fmSAf9PvAFOAVksj1Slti8Dp5i6t/WVa+lU0nBR
+ HVMVpp1YHckEKGRu3B+Zs3NESa0psT5saTKjKcVATmEDsn4qUlRA3OyacbJmfyf0fVEt
+ 81wjS429RYgZARCB9EoOWV2YaW7V3ZkjEnyO22vUF0F1N5eA1lkIkio3uF0hGvA12U75
+ oIYF9X0miLyQOceX8T8PnyPeMQlXU7IHhSeAG9s7WAuaQ/sFAZDDoCfK5FL8d85wbEnH
+ QKMl/Cb4kdU1O/hdmIDM5qKyDXXqfFxkCjoGJ04dp7MDJH236AjIwLpzZUi2N5SEjsfn
+ W1bg==
+X-Gm-Message-State: AOAM532PaVJdz/+cLivRJUdvNCyvgQvUQDkWBxnRl6NihiFz0YBLpAGs
+ V+u33hkn75IaoAuQWbj/LVuDd1VDJEHhht1hd2w=
+X-Google-Smtp-Source: ABdhPJwf+/i+E5pjDSoyPdR265wJ4juCUAdU6EsQPb6gK4ppON1Tau+aMX4uDO0oD9TRmWsCbkQfxAyvA1wF+zlSdUk=
+X-Received: by 2002:a02:3213:: with SMTP id j19mr9725079jaa.135.1599764344597; 
+ Thu, 10 Sep 2020 11:59:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200901055822.2721209-1-natechancellor@gmail.com>
- <CAKmqyKNRMmJgmZSPK6wqqNQW41QLHwChPi+1cjqao_x1Q_iryQ@mail.gmail.com>
- <159916712670.15432.11504227918284494914@sif>
-In-Reply-To: <159916712670.15432.11504227918284494914@sif>
+References: <CAFEAcA9RcbWeM=hhUNH=Exdp_QT4s0GcCJdrpcvWkv2ea+o7cQ@mail.gmail.com>
+ <mhng-13d2ebf6-70bc-4130-9e11-6fa4391c64db@palmerdabbelt-glaptop1>
+In-Reply-To: <mhng-13d2ebf6-70bc-4130-9e11-6fa4391c64db@palmerdabbelt-glaptop1>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 10 Sep 2020 11:10:43 -0700
-Message-ID: <CAKmqyKMYKiM4Q-geEsNR3Us4vOn_u52omr6h2vcodbsr1hFW2g@mail.gmail.com>
-Subject: Re: [PATCH] riscv: sifive_test: Allow 16-bit writes to memory region
-To: Michael Roth <mdroth@linux.vnet.ibm.com>
-Cc: Nathan Chancellor <natechancellor@gmail.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+Date: Thu, 10 Sep 2020 11:48:03 -0700
+Message-ID: <CAKmqyKPmOCikT3OYr9Bq0OeBpm41jpNd_7EQrZ-91AokPDG4SQ@mail.gmail.com>
+Subject: Re: [PATCH v5 06/11] riscv: Initial commit of OpenTitan machine
+To: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- qemu-stable@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -80,95 +74,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2020 18:22:03 -0000
+X-List-Received-Date: Thu, 10 Sep 2020 18:59:08 -0000
 
-On Thu, Sep 3, 2020 at 2:05 PM Michael Roth <mdroth@linux.vnet.ibm.com> wrote:
+On Wed, Sep 9, 2020 at 12:51 PM Palmer Dabbelt <palmer@dabbelt.com> wrote:
 >
-> Quoting Alistair Francis (2020-09-01 18:59:29)
-> > On Mon, Aug 31, 2020 at 10:59 PM Nathan Chancellor
-> > <natechancellor@gmail.com> wrote:
-> > >
-> > > When shutting down the machine running a mainline Linux kernel, the
-> > > following error happens:
-> > >
-> > > $ build/riscv64-softmmu/qemu-system-riscv64 -bios default -M virt \
-> > >     -display none -initrd rootfs.cpio -kernel Image -m 512m \
-> > >     -nodefaults -serial mon:stdio
-> > > ...
-> > > Requesting system poweroff
-> > > [    4.999630] reboot: Power down
-> > > sbi_trap_error: hart0: trap handler failed (error -2)
-> > > sbi_trap_error: hart0: mcause=0x0000000000000007 mtval=0x0000000000100000
-> > > sbi_trap_error: hart0: mepc=0x000000008000d4cc mstatus=0x0000000000001822
-> > > sbi_trap_error: hart0: ra=0x000000008000999e sp=0x0000000080015c78
-> > > sbi_trap_error: hart0: gp=0xffffffe000e76610 tp=0xffffffe0081b89c0
-> > > sbi_trap_error: hart0: s0=0x0000000080015c88 s1=0x0000000000000040
-> > > sbi_trap_error: hart0: a0=0x0000000000000000 a1=0x0000000080004024
-> > > sbi_trap_error: hart0: a2=0x0000000080004024 a3=0x0000000080004024
-> > > sbi_trap_error: hart0: a4=0x0000000000100000 a5=0x0000000000005555
-> > > sbi_trap_error: hart0: a6=0x0000000000004024 a7=0x0000000080011158
-> > > sbi_trap_error: hart0: s2=0x0000000000000000 s3=0x0000000080016000
-> > > sbi_trap_error: hart0: s4=0x0000000000000000 s5=0x0000000000000000
-> > > sbi_trap_error: hart0: s6=0x0000000000000001 s7=0x0000000000000000
-> > > sbi_trap_error: hart0: s8=0x0000000000000000 s9=0x0000000000000000
-> > > sbi_trap_error: hart0: s10=0x0000000000000000 s11=0x0000000000000008
-> > > sbi_trap_error: hart0: t0=0x0000000000000000 t1=0x0000000000000000
-> > > sbi_trap_error: hart0: t2=0x0000000000000000 t3=0x0000000000000000
-> > > sbi_trap_error: hart0: t4=0x0000000000000000 t5=0x0000000000000000
-> > > sbi_trap_error: hart0: t6=0x0000000000000000
-> > >
-> > > The kernel does a 16-bit write when powering off the machine, which
-> > > was allowed before commit 5d971f9e67 ("memory: Revert "memory: accept
-> > > mismatching sizes in memory_region_access_valid""). Make min_access_size
-> > > match reality so that the machine can shut down properly now.
-> > >
-> > > Cc: qemu-stable@nongnu.org
-> > > Fixes: 88a07990fa ("SiFive RISC-V Test Finisher")
-> > > Fixes: 5d971f9e67 ("memory: Revert "memory: accept mismatching sizes in memory_region_access_valid"")
-> > > Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
+> On Wed, 09 Sep 2020 12:00:07 PDT (-0700), Peter Maydell wrote:
+> > On Wed, 9 Sep 2020 at 19:00, Alistair Francis <alistair23@gmail.com> wrote:
+> >>
+> >> On Tue, Sep 8, 2020 at 7:52 AM Peter Maydell <peter.maydell@linaro.org> wrote:
+> >> > ...shouldn't the riscv64-softmmu config have CONFIG_OPENTITAN too?
+> >> > The usual principle is that the 64-bit executable can run the
+> >> > 32-bit boards too.
+> >>
+> >> I didn't know that was the general case. I'll send a patch to enable this.
 > >
-> > Thanks!
-> >
-> > Applied to riscv-to-apply.next
->
-> FYI, I'm hoping to pull this patch into the upcoming 5.0.1 stable
-> release. The freeze is scheduled for 2020-09-20, I will apply this if it
-> hits master before then.
+> > Somebody on IRC suggested that the riscv code currently
+> > assumes that #ifdef TARGET_RISCV64 implies a 64-bit CPU,
+> > ie that the 32-bit CPUs don't actually behave correctly
+> > if built into the qemu-system-riscv64 process, so you might
+> > want to check that things seem to work when you enable it...
 
-I just sent a PR with this patch. Is this still on track to make it into 5.0.1?
+Yep, we don't even build the 32-bit CPUs for 64-bit.
+
+I'm going to leave this config disabled and we can add a TODO of
+fixing up riscv64-softmmu to support 32-bit and 64-bit.
+
+>
+> IIRC there's a whole bunch of that floating around the RISC-V port, so just
+> tossing a 32-bit CPU into qemu-system-riscv64 is going to result in garbage.
+> At the time we originally did the port we though we weren't goin to have
+> mixed-XLEN systems, but the ISA now allows for it so in theory we should go fix
+> all that.
+
+Dynamically changing XLEN is then another can of worms. Although there
+isn't much interest, it becomes more useful with the Hypervisor
+extensions supporting 32-bit guests on 64-bit systems.
 
 Alistair
 
 >
-> >
-> > Alistair
-> >
-> > > ---
-> > >
-> > > Please let me know if the tags are wrong or inappropriate, this is my
-> > > first QEMU patch.
-> > >
-> > >  hw/riscv/sifive_test.c | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
-> > > index 0c78fb2c93..8c70dd69df 100644
-> > > --- a/hw/riscv/sifive_test.c
-> > > +++ b/hw/riscv/sifive_test.c
-> > > @@ -59,7 +59,7 @@ static const MemoryRegionOps sifive_test_ops = {
-> > >      .write = sifive_test_write,
-> > >      .endianness = DEVICE_NATIVE_ENDIAN,
-> > >      .valid = {
-> > > -        .min_access_size = 4,
-> > > +        .min_access_size = 2,
-> > >          .max_access_size = 4
-> > >      }
-> > >  };
-> > >
-> > > base-commit: 2f4c51c0f384d7888a04b4815861e6d5fd244d75
-> > > --
-> > > 2.28.0
-> > >
-> > >
-> >
+> I don't think anyone has looked into doing it, though, as there isn't much
+> interest in mixed-XLEN systems (though oddly enough there was a glibc post
+> yesterday about them).
 
