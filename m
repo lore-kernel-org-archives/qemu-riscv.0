@@ -1,72 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kG67y-000272-AB
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Sep 2020 15:51:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45148)
+	id 1kGRCz-0006Dz-03
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Sep 2020 14:22:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58274)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1kG67w-00025H-PE
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2020 15:51:32 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:36894)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kGRCr-0005wc-B3; Thu, 10 Sep 2020 14:22:02 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:33769)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1kG67u-0000AZ-NP
- for qemu-riscv@nongnu.org; Wed, 09 Sep 2020 15:51:32 -0400
-Received: by mail-pf1-x441.google.com with SMTP id w7so3105175pfi.4
- for <qemu-riscv@nongnu.org>; Wed, 09 Sep 2020 12:51:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=PM6b8NvEPBftJFD5nS5xU2vW5iS1qMZHydV4wpfZ2Ks=;
- b=Fj2o1ndfPnbw9g1z+lZCzE4jUvVrW0FXm4YWYZjtxjis9MV9d2M8ve7BWMXFsLqZy/
- heK9GoUmX/DMCMvEWVHZJc5UMDUfZj7bIThIEV40+FBjCBm/6Pv9HBTOq8X4fIAgUDFn
- n9X3K8oOjp3UBuKDIcoce58cnXjFd6QIkvvoUOKXmvdMvWSG8ljka6a8UBlJOVNtH43V
- N9avig1JNbaqKiDDt+cS4btehzWKPxg0MBvnHddhNyOx+ouw3NAtREaVZNNiRYVlY97S
- OVjrJ/eWfLQbMsOI7tOztv5mCF2axoSILHflvFof3OtrE0J/E6PbhE3sswKLLGdw+O36
- gf+A==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kGRCd-00037R-Q1; Thu, 10 Sep 2020 14:22:00 -0400
+Received: by mail-il1-x142.google.com with SMTP id x2so6640556ilm.0;
+ Thu, 10 Sep 2020 11:21:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=EDPigblih1cjap7Oi4kVPhbl5AZCj10BtXDekneIKSQ=;
+ b=UH3DlfDODyCHmCM0+yL8UILR1TN0nA+CDFWE5X/KUnUZTIfVWQO7K9p1OibfTepqam
+ tEM5uSxa8hDrA06QVaxWcr4tPJH5qmQQ75IdZi46Gy2+fMtMWuKjfa4jaP31Gq9WDLwQ
+ EgUt9AuFKHB3PNZPYZ5M3pX2VimAbmpuafFV7/WTdWmTh+6PcIp00Q9zTRwcRf+j5cPy
+ y6GJ8FwX0g4QJ1r2lKGdcS0QLuDMqUImX+LwYGn8hgRpICVqgFBnass23fbQc4m2sh/r
+ xdVvErtTPmRX6LMj+QbsgIA05mxCHw9o1Rgh3Twd7WLRRY3tokuh+4L74/QrQqLiE1BC
+ 44FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=PM6b8NvEPBftJFD5nS5xU2vW5iS1qMZHydV4wpfZ2Ks=;
- b=mNcQ1HZ8ZZrmYcj2i2nuFXBCwdzbSAcX0HSGlnP2w5w0PjL7Wlt5uj3kZMSdGjyk3u
- +PYd4t6od0XEIIUUnMyycZxAAj+taOEWNdVksMCuWdPkk0XZLbRdgd/iyIBA/c4dUZ+/
- UZ9QivtdCxOQP7gfEZajiW45s2NVoN4VKD/CHCFnXsaIwUUHohXMXoxanGjePejezqNZ
- MefYyMD3qpp0OKrLj57+5Jq4vphXlhhdZwB4Y3RYrX/65Oi9hCRqhaDVWlgagZk22Fvo
- dz8gRJEQBEifv4zLqxiDBx5FFju0LIyJTuLCpuBQ/+jVAvAaNtQ5Pvsl6IECAeoB7rb7
- nYFw==
-X-Gm-Message-State: AOAM530lZ1xYFEb52DhrDUsp1+9KQlpZ+P/GH/4FCJRJXDWcB1xfiDXD
- yez/G+S2YVelKzA23Eub24kXCw==
-X-Google-Smtp-Source: ABdhPJx3H+tDCjsvCpsPJ5n+D++fl/UlP2tqDT6Hqstd4QxfvzasrR26Egq+rOysnGLEY3pJxzzSfg==
-X-Received: by 2002:a17:902:d201:b029:d0:cbe1:e7a4 with SMTP id
- t1-20020a170902d201b02900d0cbe1e7a4mr2346068ply.21.1599681088198; 
- Wed, 09 Sep 2020 12:51:28 -0700 (PDT)
-Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
- [76.210.143.223])
- by smtp.gmail.com with ESMTPSA id l9sm3152769pgg.29.2020.09.09.12.51.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Sep 2020 12:51:27 -0700 (PDT)
-Date: Wed, 09 Sep 2020 12:51:27 -0700 (PDT)
-X-Google-Original-Date: Wed, 09 Sep 2020 12:51:26 PDT (-0700)
-Subject: Re: [PATCH v5 06/11] riscv: Initial commit of OpenTitan machine
-In-Reply-To: <CAFEAcA9RcbWeM=hhUNH=Exdp_QT4s0GcCJdrpcvWkv2ea+o7cQ@mail.gmail.com>
-CC: alistair23@gmail.com, Alistair Francis <Alistair.Francis@wdc.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, bmeng.cn@gmail.com
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Message-ID: <mhng-13d2ebf6-70bc-4130-9e11-6fa4391c64db@palmerdabbelt-glaptop1>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
- envelope-from=palmer@dabbelt.com; helo=mail-pf1-x441.google.com
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=EDPigblih1cjap7Oi4kVPhbl5AZCj10BtXDekneIKSQ=;
+ b=ACii+CqCi49rzWy6fi/2hyWci0KA4j+4wBEbWSrF3ZqrRSefSiUbXkhC5ca9voIHGy
+ /4Bdpoj/KzXVp5JZk34O1h50PLxjWb2q5rf1Sq8WZreW3FLJaOABPXWZlSFL9tY5aAh8
+ JAe/FaeOuG6TzLv/I6D+O2JzOGLbO5T3QMQLhkgxkPKppt2yj0Eg03v7obLYtLljp4VM
+ 6f03yTfXD2Pec9Lu9/eM5Aksj3NxXb+NiJv9yFCy8zkEtbVuwBpJuEDksKAav80qgyN1
+ vDo+btsPNQi1d1nuzEVICmfniiKVm60CpMwCHIZ+Z3HdB09QefA5E3uFS8mdMAd0+ZUR
+ AJXQ==
+X-Gm-Message-State: AOAM530ixOLfXEGqhn5+OlLTqo7/iFEaQh6ktcirhFKi0DNCuTlVR8Qc
+ F8KekmyhbWo9iLsAN0glCQ2YgViTc8fvrwFJlXg=
+X-Google-Smtp-Source: ABdhPJyYCz/ZUSBXQcrAX6irGOO9WCvzVftUPng7j3JLK20JyHnooG373q70zAgc/QnFt/cEj7D8mvUpI/7X5mOAvZc=
+X-Received: by 2002:a92:c8d1:: with SMTP id c17mr2510027ilq.131.1599762105327; 
+ Thu, 10 Sep 2020 11:21:45 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200901055822.2721209-1-natechancellor@gmail.com>
+ <CAKmqyKNRMmJgmZSPK6wqqNQW41QLHwChPi+1cjqao_x1Q_iryQ@mail.gmail.com>
+ <159916712670.15432.11504227918284494914@sif>
+In-Reply-To: <159916712670.15432.11504227918284494914@sif>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 10 Sep 2020 11:10:43 -0700
+Message-ID: <CAKmqyKMYKiM4Q-geEsNR3Us4vOn_u52omr6h2vcodbsr1hFW2g@mail.gmail.com>
+Subject: Re: [PATCH] riscv: sifive_test: Allow 16-bit writes to memory region
+To: Michael Roth <mdroth@linux.vnet.ibm.com>
+Cc: Nathan Chancellor <natechancellor@gmail.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ "Michael S. Tsirkin" <mst@redhat.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ qemu-stable@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -80,31 +80,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2020 19:51:33 -0000
+X-List-Received-Date: Thu, 10 Sep 2020 18:22:03 -0000
 
-On Wed, 09 Sep 2020 12:00:07 PDT (-0700), Peter Maydell wrote:
-> On Wed, 9 Sep 2020 at 19:00, Alistair Francis <alistair23@gmail.com> wrote:
->>
->> On Tue, Sep 8, 2020 at 7:52 AM Peter Maydell <peter.maydell@linaro.org> wrote:
->> > ...shouldn't the riscv64-softmmu config have CONFIG_OPENTITAN too?
->> > The usual principle is that the 64-bit executable can run the
->> > 32-bit boards too.
->>
->> I didn't know that was the general case. I'll send a patch to enable this.
+On Thu, Sep 3, 2020 at 2:05 PM Michael Roth <mdroth@linux.vnet.ibm.com> wrote:
 >
-> Somebody on IRC suggested that the riscv code currently
-> assumes that #ifdef TARGET_RISCV64 implies a 64-bit CPU,
-> ie that the 32-bit CPUs don't actually behave correctly
-> if built into the qemu-system-riscv64 process, so you might
-> want to check that things seem to work when you enable it...
+> Quoting Alistair Francis (2020-09-01 18:59:29)
+> > On Mon, Aug 31, 2020 at 10:59 PM Nathan Chancellor
+> > <natechancellor@gmail.com> wrote:
+> > >
+> > > When shutting down the machine running a mainline Linux kernel, the
+> > > following error happens:
+> > >
+> > > $ build/riscv64-softmmu/qemu-system-riscv64 -bios default -M virt \
+> > >     -display none -initrd rootfs.cpio -kernel Image -m 512m \
+> > >     -nodefaults -serial mon:stdio
+> > > ...
+> > > Requesting system poweroff
+> > > [    4.999630] reboot: Power down
+> > > sbi_trap_error: hart0: trap handler failed (error -2)
+> > > sbi_trap_error: hart0: mcause=0x0000000000000007 mtval=0x0000000000100000
+> > > sbi_trap_error: hart0: mepc=0x000000008000d4cc mstatus=0x0000000000001822
+> > > sbi_trap_error: hart0: ra=0x000000008000999e sp=0x0000000080015c78
+> > > sbi_trap_error: hart0: gp=0xffffffe000e76610 tp=0xffffffe0081b89c0
+> > > sbi_trap_error: hart0: s0=0x0000000080015c88 s1=0x0000000000000040
+> > > sbi_trap_error: hart0: a0=0x0000000000000000 a1=0x0000000080004024
+> > > sbi_trap_error: hart0: a2=0x0000000080004024 a3=0x0000000080004024
+> > > sbi_trap_error: hart0: a4=0x0000000000100000 a5=0x0000000000005555
+> > > sbi_trap_error: hart0: a6=0x0000000000004024 a7=0x0000000080011158
+> > > sbi_trap_error: hart0: s2=0x0000000000000000 s3=0x0000000080016000
+> > > sbi_trap_error: hart0: s4=0x0000000000000000 s5=0x0000000000000000
+> > > sbi_trap_error: hart0: s6=0x0000000000000001 s7=0x0000000000000000
+> > > sbi_trap_error: hart0: s8=0x0000000000000000 s9=0x0000000000000000
+> > > sbi_trap_error: hart0: s10=0x0000000000000000 s11=0x0000000000000008
+> > > sbi_trap_error: hart0: t0=0x0000000000000000 t1=0x0000000000000000
+> > > sbi_trap_error: hart0: t2=0x0000000000000000 t3=0x0000000000000000
+> > > sbi_trap_error: hart0: t4=0x0000000000000000 t5=0x0000000000000000
+> > > sbi_trap_error: hart0: t6=0x0000000000000000
+> > >
+> > > The kernel does a 16-bit write when powering off the machine, which
+> > > was allowed before commit 5d971f9e67 ("memory: Revert "memory: accept
+> > > mismatching sizes in memory_region_access_valid""). Make min_access_size
+> > > match reality so that the machine can shut down properly now.
+> > >
+> > > Cc: qemu-stable@nongnu.org
+> > > Fixes: 88a07990fa ("SiFive RISC-V Test Finisher")
+> > > Fixes: 5d971f9e67 ("memory: Revert "memory: accept mismatching sizes in memory_region_access_valid"")
+> > > Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
+> >
+> > Thanks!
+> >
+> > Applied to riscv-to-apply.next
+>
+> FYI, I'm hoping to pull this patch into the upcoming 5.0.1 stable
+> release. The freeze is scheduled for 2020-09-20, I will apply this if it
+> hits master before then.
 
-IIRC there's a whole bunch of that floating around the RISC-V port, so just
-tossing a 32-bit CPU into qemu-system-riscv64 is going to result in garbage.
-At the time we originally did the port we though we weren't goin to have
-mixed-XLEN systems, but the ISA now allows for it so in theory we should go fix
-all that.
+I just sent a PR with this patch. Is this still on track to make it into 5.0.1?
 
-I don't think anyone has looked into doing it, though, as there isn't much
-interest in mixed-XLEN systems (though oddly enough there was a glibc post
-yesterday about them).
+Alistair
+
+>
+> >
+> > Alistair
+> >
+> > > ---
+> > >
+> > > Please let me know if the tags are wrong or inappropriate, this is my
+> > > first QEMU patch.
+> > >
+> > >  hw/riscv/sifive_test.c | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
+> > > index 0c78fb2c93..8c70dd69df 100644
+> > > --- a/hw/riscv/sifive_test.c
+> > > +++ b/hw/riscv/sifive_test.c
+> > > @@ -59,7 +59,7 @@ static const MemoryRegionOps sifive_test_ops = {
+> > >      .write = sifive_test_write,
+> > >      .endianness = DEVICE_NATIVE_ENDIAN,
+> > >      .valid = {
+> > > -        .min_access_size = 4,
+> > > +        .min_access_size = 2,
+> > >          .max_access_size = 4
+> > >      }
+> > >  };
+> > >
+> > > base-commit: 2f4c51c0f384d7888a04b4815861e6d5fd244d75
+> > > --
+> > > 2.28.0
+> > >
+> > >
+> >
 
