@@ -1,75 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kHrBh-0007MB-NZ
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Sep 2020 12:18:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58386)
+	id 1kHrGF-0003fx-JN
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Sep 2020 12:23:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59250)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kHrBf-0007Gm-Dz; Mon, 14 Sep 2020 12:18:39 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:37701)
+ (Exim 4.90_1) (envelope-from <dilfridge@gentoo.org>)
+ id 1kHrGE-0003cB-36
+ for qemu-riscv@nongnu.org; Mon, 14 Sep 2020 12:23:22 -0400
+Received: from dev.gentoo.org ([2001:470:ea4a:1:5054:ff:fec7:86e4]:46515
+ helo=smtp.gentoo.org)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kHrBb-0004cn-Uh; Mon, 14 Sep 2020 12:18:39 -0400
-Received: by mail-il1-x142.google.com with SMTP id q4so121652ils.4;
- Mon, 14 Sep 2020 09:18:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=PQeAiaC8mluiiMfFGiBUhJP0TbcSw2y2dsOB8nows7E=;
- b=SaxpNpvB7cNNqwaxx2R2f1Rjfs2fMVGSRwFSZ37VgtEiSqobdYF/TbquYaaVQKWTXM
- GuwGns7uQKcBV++EdKmWdFWNAd4KveY2GXFMyZ5jN0E4/vQWicXHCBJ69axVB9czNY51
- L+uoMajbfau1jdDtyA60TzhusvXTyl8+rVZSWjqiYwxomeQqFAJ+0R5AXo8/nznh/AF2
- 1dyI+mIbV1RkzeZ1GVGhSkFJvCzOi0t/dXA0Gn5eR/tbw8FGLE7mokLRnc/VRNGwG0/q
- 9/R52QrqUiDSenhohpFUgDDG60Op+I7AEYRQOdcey8dfTmlEfVmB1bLZoIiF2TtUNtgj
- sphQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=PQeAiaC8mluiiMfFGiBUhJP0TbcSw2y2dsOB8nows7E=;
- b=GB5YbH/C+fpXB48Cm0ltk2ooQGlvBH3RMQnmPmDegsMcguJCllhDANSyqmALkjY3jq
- CzQDI0D7eFKSw5Vljb2OO2j5Ex9wO68feODqGbYywMYdQFFmzxRfZi05szgqvnGOe8Wm
- b16A4oHahftU4cYM1UCzplKZz80PX3eoXceZvwfLK56vfpDpovG4KNsGo6uqSmBt2ekJ
- KsTgkioECzpQsE5Fvh4dpPJfBz9UnFsYs8ogkT6cKUv1dUuj4cvRhgdAaUFFLTjz4O+X
- U8j6BEAe+0Tf0XZQODDfOSorfiznUt1NTV4OBsYO4ilFS0LZ/bXhA2MYWXDOsKl7m5y8
- mzNA==
-X-Gm-Message-State: AOAM531MjEzBzXwAfL7XHF2g4ZoGoSsqYzHpRIVo02b/uwh6j9YqWcTK
- M+up+nEpTlOiJ4/REbPHkcov88WMKi8M6q5ZVf0=
-X-Google-Smtp-Source: ABdhPJzmvulZ90q3pUwKsc488yLiyFFkivzsTPWRUHHr30J86YdbgM+Z4p3zWcBqtYa/AL7vvhJV8Fgtgofa7Y2ri8o=
-X-Received: by 2002:a92:4a08:: with SMTP id m8mr1124586ilf.227.1600100313644; 
- Mon, 14 Sep 2020 09:18:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dilfridge@gentoo.org>)
+ id 1kHrGC-0005JJ-4T
+ for qemu-riscv@nongnu.org; Mon, 14 Sep 2020 12:23:21 -0400
+From: "Andreas K. Huettel" <dilfridge@gentoo.org>
+To: qemu-riscv@nongnu.org
+Subject: Fwd: riscv32 wait() problem, qemu or glibc?
+Date: Mon, 14 Sep 2020 19:23:10 +0300
+Message-ID: <2107152.vFx2qVVIhK@noumea>
+Organization: Gentoo Linux
 MIME-Version: 1.0
-References: <20200901055822.2721209-1-natechancellor@gmail.com>
- <CAKmqyKNRMmJgmZSPK6wqqNQW41QLHwChPi+1cjqao_x1Q_iryQ@mail.gmail.com>
- <159916712670.15432.11504227918284494914@sif>
- <CAKmqyKMYKiM4Q-geEsNR3Us4vOn_u52omr6h2vcodbsr1hFW2g@mail.gmail.com>
- <159982720259.29065.11121265558750623606@sif>
-In-Reply-To: <159982720259.29065.11121265558750623606@sif>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 14 Sep 2020 09:07:26 -0700
-Message-ID: <CAKmqyKNvatCfS_gPoxLu-K+6anNjbfP4Ad=MA--3pQQ9h-mBRA@mail.gmail.com>
-Subject: Re: [PATCH] riscv: sifive_test: Allow 16-bit writes to memory region
-To: Michael Roth <mdroth@linux.vnet.ibm.com>
-Cc: Nathan Chancellor <natechancellor@gmail.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- qemu-stable@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Content-Type: multipart/signed; boundary="nextPart2504681.lGaqSPkdTl";
+ micalg="pgp-sha256"; protocol="application/pgp-signature"
+Received-SPF: pass client-ip=2001:470:ea4a:1:5054:ff:fec7:86e4;
+ envelope-from=dilfridge@gentoo.org; helo=smtp.gentoo.org
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/09/14 12:23:18
+X-ACL-Warn: Detected OS   = ???
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,110 +42,106 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Sep 2020 16:18:39 -0000
+X-List-Received-Date: Mon, 14 Sep 2020 16:23:22 -0000
 
-On Fri, Sep 11, 2020 at 5:26 AM Michael Roth <mdroth@linux.vnet.ibm.com> wrote:
->
-> Quoting Alistair Francis (2020-09-10 13:10:43)
-> > On Thu, Sep 3, 2020 at 2:05 PM Michael Roth <mdroth@linux.vnet.ibm.com> wrote:
-> > >
-> > > Quoting Alistair Francis (2020-09-01 18:59:29)
-> > > > On Mon, Aug 31, 2020 at 10:59 PM Nathan Chancellor
-> > > > <natechancellor@gmail.com> wrote:
-> > > > >
-> > > > > When shutting down the machine running a mainline Linux kernel, the
-> > > > > following error happens:
-> > > > >
-> > > > > $ build/riscv64-softmmu/qemu-system-riscv64 -bios default -M virt \
-> > > > >     -display none -initrd rootfs.cpio -kernel Image -m 512m \
-> > > > >     -nodefaults -serial mon:stdio
-> > > > > ...
-> > > > > Requesting system poweroff
-> > > > > [    4.999630] reboot: Power down
-> > > > > sbi_trap_error: hart0: trap handler failed (error -2)
-> > > > > sbi_trap_error: hart0: mcause=0x0000000000000007 mtval=0x0000000000100000
-> > > > > sbi_trap_error: hart0: mepc=0x000000008000d4cc mstatus=0x0000000000001822
-> > > > > sbi_trap_error: hart0: ra=0x000000008000999e sp=0x0000000080015c78
-> > > > > sbi_trap_error: hart0: gp=0xffffffe000e76610 tp=0xffffffe0081b89c0
-> > > > > sbi_trap_error: hart0: s0=0x0000000080015c88 s1=0x0000000000000040
-> > > > > sbi_trap_error: hart0: a0=0x0000000000000000 a1=0x0000000080004024
-> > > > > sbi_trap_error: hart0: a2=0x0000000080004024 a3=0x0000000080004024
-> > > > > sbi_trap_error: hart0: a4=0x0000000000100000 a5=0x0000000000005555
-> > > > > sbi_trap_error: hart0: a6=0x0000000000004024 a7=0x0000000080011158
-> > > > > sbi_trap_error: hart0: s2=0x0000000000000000 s3=0x0000000080016000
-> > > > > sbi_trap_error: hart0: s4=0x0000000000000000 s5=0x0000000000000000
-> > > > > sbi_trap_error: hart0: s6=0x0000000000000001 s7=0x0000000000000000
-> > > > > sbi_trap_error: hart0: s8=0x0000000000000000 s9=0x0000000000000000
-> > > > > sbi_trap_error: hart0: s10=0x0000000000000000 s11=0x0000000000000008
-> > > > > sbi_trap_error: hart0: t0=0x0000000000000000 t1=0x0000000000000000
-> > > > > sbi_trap_error: hart0: t2=0x0000000000000000 t3=0x0000000000000000
-> > > > > sbi_trap_error: hart0: t4=0x0000000000000000 t5=0x0000000000000000
-> > > > > sbi_trap_error: hart0: t6=0x0000000000000000
-> > > > >
-> > > > > The kernel does a 16-bit write when powering off the machine, which
-> > > > > was allowed before commit 5d971f9e67 ("memory: Revert "memory: accept
-> > > > > mismatching sizes in memory_region_access_valid""). Make min_access_size
-> > > > > match reality so that the machine can shut down properly now.
-> > > > >
-> > > > > Cc: qemu-stable@nongnu.org
-> > > > > Fixes: 88a07990fa ("SiFive RISC-V Test Finisher")
-> > > > > Fixes: 5d971f9e67 ("memory: Revert "memory: accept mismatching sizes in memory_region_access_valid"")
-> > > > > Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
-> > > >
-> > > > Thanks!
-> > > >
-> > > > Applied to riscv-to-apply.next
-> > >
-> > > FYI, I'm hoping to pull this patch into the upcoming 5.0.1 stable
-> > > release. The freeze is scheduled for 2020-09-20, I will apply this if it
-> > > hits master before then.
-> >
-> > I just sent a PR with this patch. Is this still on track to make it into 5.0.1?
->
-> Since it's not likely to invalidate any testing on my end outside of the
-> ones built into QEMU I can probably still slip it in if it hits master
-> by Monday, or maybe just grab it from your tree.
+--nextPart2504681.lGaqSPkdTl
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-This is in master now, I hope that's enough time to make it in.
+[forwarding this also to qemu-riscv, not sure what's the right list]
+An: qemu-devel@nongnu.org, libc-alpha@sourceware.org
 
-Let me know if you want me to do anything else.
+Hi,=20
 
-Alistair
+first of all, sorry for crossposting, but I'm dealing with many moving and=
+=20
+experimental parts here...=20
 
->
-> >
-> > Alistair
-> >
-> > >
-> > > >
-> > > > Alistair
-> > > >
-> > > > > ---
-> > > > >
-> > > > > Please let me know if the tags are wrong or inappropriate, this is my
-> > > > > first QEMU patch.
-> > > > >
-> > > > >  hw/riscv/sifive_test.c | 2 +-
-> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
-> > > > > index 0c78fb2c93..8c70dd69df 100644
-> > > > > --- a/hw/riscv/sifive_test.c
-> > > > > +++ b/hw/riscv/sifive_test.c
-> > > > > @@ -59,7 +59,7 @@ static const MemoryRegionOps sifive_test_ops = {
-> > > > >      .write = sifive_test_write,
-> > > > >      .endianness = DEVICE_NATIVE_ENDIAN,
-> > > > >      .valid = {
-> > > > > -        .min_access_size = 4,
-> > > > > +        .min_access_size = 2,
-> > > > >          .max_access_size = 4
-> > > > >      }
-> > > > >  };
-> > > > >
-> > > > > base-commit: 2f4c51c0f384d7888a04b4815861e6d5fd244d75
-> > > > > --
-> > > > > 2.28.0
-> > > > >
-> > > > >
-> > > >
+Situation: riscv32 (ilp32) qemu-user [1] chroot, Linux [2], glibc [3], gcc =
+[4]
+
+The following small program outputs "child exited with status 40", which is=
+=20
+rather unexpected (it should be 42). Any idea what is going on?
+
+(This is a simplified version of code in a configure test. The test has oth=
+er=20
+potential issues [5], but in any case it cant produce useful results on=20
+riscv32 right now.)
+
+TIA,=20
+Andreas
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/wait.h>
+
+main(c, v)
+     int c;
+     char **v;
+{
+  pid_t pid, p;
+  int s, i, n;
+
+  s =3D 0;
+  pid =3D fork();
+  if (pid =3D=3D 0)
+    exit (42);
+
+  /* wait for the process */
+  p =3D wait(&s);
+  if (p !=3D pid)
+    exit (255);
+
+  if (WIFEXITED(s))
+  {
+     int r=3DWEXITSTATUS(s);
+     printf("child exited with status %i\n",r);
+  }
+}
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+[1] qemu built from git master, Sep 12, 2020 16:30:37 EEST
+[2] host kernel is 5.8.8
+[3] glibc-2.32 with the rv32 patch series backported from master
+[4] (Gentoo 10.2.0-r1 p2)
+[5] https://lists.gnu.org/archive/html/bug-bash/2020-09/msg00033.html
+
+=2D-=20
+Andreas K. H=FCttel
+dilfridge@gentoo.org
+Gentoo Linux developer=20
+(council, qa, toolchain, base-system, perl, libreoffice)
+
+--nextPart2504681.lGaqSPkdTl
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEE2dlecvcVU8/ThuQ/jJJgxvbXoxAFAl9fmO4ACgkQjJJgxvbX
+oxAS+Q/9HTMxXOl7GOBjHOo+4NUt4jH3kPShv6MWEbf47tho+YzCKtsdkMruJMZt
+mgpD9LoXrFdeYEQZPIvun8DUSfjx48+v567mJlVgoYm99kW6Rhbv0Pc7V25iZBG8
+j7F5wwfDJj0/1Cv2gsCVw7fmOUKo0k9fkFQ9gd2uUyUjEqNKOQejNT0rOeJ9ICkP
+AG4pggyWTKxb1Zv11qNvhzaP2M9tH2fFWw5YOhLFF+FrsKXc1Jyovk5YGbRxuZLG
+OdUQjjxK42SgMrKA6kKHKF5dxj5HeTiBFAhjn+1q7W8qsNcRfKCgdbylfminhVmR
+r7GTD/00DNNQQfuOZT1WqbHr+lpgrKQ952aSQ39+4qO8BI+gHOCMTapRD+nRAF0G
+Ryuu3UX7mbXZcrh6ghJR06+TvRkhNiYPZlCZpkyF1RdjH7prUsKt98YDlBuxKQFa
+75SsLfltNASwsYY97HRaLvXkU2wNoh0WGk13eBxG6cUvar4OFMHl1fqn8NRWJnly
+RqSKOTUocOAqKJ5U4etlYcTMq5GfN2roz+X29YGlkbaG7srFAo2l7ml9QmEnSGeq
+EWlmURU6r/C6sTtTeWC5J8KZts7YHUBxyzUKIteqa+8lo2gryH2BxEcbQK7qYWKd
+1chrfIqpYxx+jHx0rADDBV7HQT73syjNmSsS99EFHCCA2zMPUKM=
+=Mc4r
+-----END PGP SIGNATURE-----
+
+--nextPart2504681.lGaqSPkdTl--
+
+
+
 
