@@ -1,60 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kGpuo-00061T-NF
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Sep 2020 16:45:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33414)
+	id 1kHrBh-0007MB-NZ
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Sep 2020 12:18:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58386)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kGpuk-0005yl-MV; Fri, 11 Sep 2020 16:44:58 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:46021)
+ id 1kHrBf-0007Gm-Dz; Mon, 14 Sep 2020 12:18:39 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:37701)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kGpui-0002V2-9s; Fri, 11 Sep 2020 16:44:58 -0400
-Received: by mail-il1-x141.google.com with SMTP id q6so10147999ild.12;
- Fri, 11 Sep 2020 13:44:55 -0700 (PDT)
+ id 1kHrBb-0004cn-Uh; Mon, 14 Sep 2020 12:18:39 -0400
+Received: by mail-il1-x142.google.com with SMTP id q4so121652ils.4;
+ Mon, 14 Sep 2020 09:18:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=HpXTP/+SmNkssT90bNZUWkzIdENfgbzep3XREQYHbb8=;
- b=UF2ADd7JpzIxsSoT8lUei/FEh5IMfbvrCwPJn8a9nsPXv0wq6QPcpjEGSJAD35ac0N
- Y/M4wVMZTTzBiZOttyNnpYFAsdUodZhaXtoaFchtfU3XQp+RSWVz5mGBpIuWYBn+xOus
- VSnEuyjBKV41ZwBZwIVgM49ZmDE0qjmZ3oZ8rCqs/4AqCnCDBjRNatE2cLLkSFrdJfTS
- k5zsrZ8DbhEpvGq7bCjgRYhb5dwKBQPxF19S7hh7Asp9+RV/cHCV2DxFhQ6pEvGVqR2q
- /xGvbhfj6zTd0Vb7ZzHBWY3E8rF8rZc318OAYQnU0tDrmLW6982QIYoQaAIv8hEKELKO
- nckg==
+ :cc; bh=PQeAiaC8mluiiMfFGiBUhJP0TbcSw2y2dsOB8nows7E=;
+ b=SaxpNpvB7cNNqwaxx2R2f1Rjfs2fMVGSRwFSZ37VgtEiSqobdYF/TbquYaaVQKWTXM
+ GuwGns7uQKcBV++EdKmWdFWNAd4KveY2GXFMyZ5jN0E4/vQWicXHCBJ69axVB9czNY51
+ L+uoMajbfau1jdDtyA60TzhusvXTyl8+rVZSWjqiYwxomeQqFAJ+0R5AXo8/nznh/AF2
+ 1dyI+mIbV1RkzeZ1GVGhSkFJvCzOi0t/dXA0Gn5eR/tbw8FGLE7mokLRnc/VRNGwG0/q
+ 9/R52QrqUiDSenhohpFUgDDG60Op+I7AEYRQOdcey8dfTmlEfVmB1bLZoIiF2TtUNtgj
+ sphQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=HpXTP/+SmNkssT90bNZUWkzIdENfgbzep3XREQYHbb8=;
- b=LNoXW7LeaiP7HaSCFImYHcO9IcjkLpUCDG936VKvAvhxnOHT4tCLLlNXYI75RZOfOu
- cBZAT2mi9xcxouXfbaaLvJ0H2B9y1uzmXSKJVI+QFWvbu1izBj2T18QU3TOgNFmTu3WB
- HPNgEXCVlwozNnhq04VbzExTfyyUdQwhlTIhxQXBbpj2v+dAebdbUZiCGOJ0iuXDjjsv
- OLekgqpwjhEEwtm1Y5gSobnx2uOENCD4l4ruueLQAb7IUHQtyRxW4OwkEB4ywZPb3hUH
- coa6kWp5u1o2UPUSQlDOSZJH+5VgyE8wxCZFF953nJ8PKU/lxZ0IlgBaj6exxwb5jpZv
- 9Yvw==
-X-Gm-Message-State: AOAM5324I0HytPgYZ8gEcgn29p1cpi8NfPU7sERa/fDYq+JW0vtU/RlN
- QZEFSfvf8swrrgxVeffqMi6DN+ohPoGOlDmsdiM=
-X-Google-Smtp-Source: ABdhPJzXbDOdewxvjW/baSU6tPEunVgqG1OdU4Ad8YR2aIp0v8A9AwoJac/FYSDB+g0YHvTVw+TWotGiP6qIQPBgngs=
-X-Received: by 2002:a92:189:: with SMTP id 131mr3384800ilb.40.1599857095183;
- Fri, 11 Sep 2020 13:44:55 -0700 (PDT)
+ bh=PQeAiaC8mluiiMfFGiBUhJP0TbcSw2y2dsOB8nows7E=;
+ b=GB5YbH/C+fpXB48Cm0ltk2ooQGlvBH3RMQnmPmDegsMcguJCllhDANSyqmALkjY3jq
+ CzQDI0D7eFKSw5Vljb2OO2j5Ex9wO68feODqGbYywMYdQFFmzxRfZi05szgqvnGOe8Wm
+ b16A4oHahftU4cYM1UCzplKZz80PX3eoXceZvwfLK56vfpDpovG4KNsGo6uqSmBt2ekJ
+ KsTgkioECzpQsE5Fvh4dpPJfBz9UnFsYs8ogkT6cKUv1dUuj4cvRhgdAaUFFLTjz4O+X
+ U8j6BEAe+0Tf0XZQODDfOSorfiznUt1NTV4OBsYO4ilFS0LZ/bXhA2MYWXDOsKl7m5y8
+ mzNA==
+X-Gm-Message-State: AOAM531MjEzBzXwAfL7XHF2g4ZoGoSsqYzHpRIVo02b/uwh6j9YqWcTK
+ M+up+nEpTlOiJ4/REbPHkcov88WMKi8M6q5ZVf0=
+X-Google-Smtp-Source: ABdhPJzmvulZ90q3pUwKsc488yLiyFFkivzsTPWRUHHr30J86YdbgM+Z4p3zWcBqtYa/AL7vvhJV8Fgtgofa7Y2ri8o=
+X-Received: by 2002:a92:4a08:: with SMTP id m8mr1124586ilf.227.1600100313644; 
+ Mon, 14 Sep 2020 09:18:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200911173447.165713-1-ehabkost@redhat.com>
- <20200911173447.165713-2-ehabkost@redhat.com>
-In-Reply-To: <20200911173447.165713-2-ehabkost@redhat.com>
+References: <20200901055822.2721209-1-natechancellor@gmail.com>
+ <CAKmqyKNRMmJgmZSPK6wqqNQW41QLHwChPi+1cjqao_x1Q_iryQ@mail.gmail.com>
+ <159916712670.15432.11504227918284494914@sif>
+ <CAKmqyKMYKiM4Q-geEsNR3Us4vOn_u52omr6h2vcodbsr1hFW2g@mail.gmail.com>
+ <159982720259.29065.11121265558750623606@sif>
+In-Reply-To: <159982720259.29065.11121265558750623606@sif>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Sep 2020 13:33:52 -0700
-Message-ID: <CAKmqyKNiY48_bN+8tmQXdO6aJKqgFJgr=xkS=8pmQ+je+fkOkA@mail.gmail.com>
-Subject: Re: [PATCH v4 1/2] sifive_e: Rename memmap enum constants
-To: Eduardo Habkost <ehabkost@redhat.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "Daniel P. Berrange" <berrange@redhat.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+Date: Mon, 14 Sep 2020 09:07:26 -0700
+Message-ID: <CAKmqyKNvatCfS_gPoxLu-K+6anNjbfP4Ad=MA--3pQQ9h-mBRA@mail.gmail.com>
+Subject: Re: [PATCH] riscv: sifive_test: Allow 16-bit writes to memory region
+To: Michael Roth <mdroth@linux.vnet.ibm.com>
+Cc: Nathan Chancellor <natechancellor@gmail.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ "Michael S. Tsirkin" <mst@redhat.com>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ qemu-stable@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -77,250 +82,110 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Sep 2020 20:44:59 -0000
+X-List-Received-Date: Mon, 14 Sep 2020 16:18:39 -0000
 
-On Fri, Sep 11, 2020 at 10:35 AM Eduardo Habkost <ehabkost@redhat.com> wrote:
+On Fri, Sep 11, 2020 at 5:26 AM Michael Roth <mdroth@linux.vnet.ibm.com> wrote:
 >
-> Some of the enum constant names conflict with a QOM type check
-> macro (SIFIVE_E_PRCI).  This needs to be addressed to allow us to
-> transform the QOM type check macros into functions generated by
-> OBJECT_DECLARE_TYPE().
+> Quoting Alistair Francis (2020-09-10 13:10:43)
+> > On Thu, Sep 3, 2020 at 2:05 PM Michael Roth <mdroth@linux.vnet.ibm.com> wrote:
+> > >
+> > > Quoting Alistair Francis (2020-09-01 18:59:29)
+> > > > On Mon, Aug 31, 2020 at 10:59 PM Nathan Chancellor
+> > > > <natechancellor@gmail.com> wrote:
+> > > > >
+> > > > > When shutting down the machine running a mainline Linux kernel, the
+> > > > > following error happens:
+> > > > >
+> > > > > $ build/riscv64-softmmu/qemu-system-riscv64 -bios default -M virt \
+> > > > >     -display none -initrd rootfs.cpio -kernel Image -m 512m \
+> > > > >     -nodefaults -serial mon:stdio
+> > > > > ...
+> > > > > Requesting system poweroff
+> > > > > [    4.999630] reboot: Power down
+> > > > > sbi_trap_error: hart0: trap handler failed (error -2)
+> > > > > sbi_trap_error: hart0: mcause=0x0000000000000007 mtval=0x0000000000100000
+> > > > > sbi_trap_error: hart0: mepc=0x000000008000d4cc mstatus=0x0000000000001822
+> > > > > sbi_trap_error: hart0: ra=0x000000008000999e sp=0x0000000080015c78
+> > > > > sbi_trap_error: hart0: gp=0xffffffe000e76610 tp=0xffffffe0081b89c0
+> > > > > sbi_trap_error: hart0: s0=0x0000000080015c88 s1=0x0000000000000040
+> > > > > sbi_trap_error: hart0: a0=0x0000000000000000 a1=0x0000000080004024
+> > > > > sbi_trap_error: hart0: a2=0x0000000080004024 a3=0x0000000080004024
+> > > > > sbi_trap_error: hart0: a4=0x0000000000100000 a5=0x0000000000005555
+> > > > > sbi_trap_error: hart0: a6=0x0000000000004024 a7=0x0000000080011158
+> > > > > sbi_trap_error: hart0: s2=0x0000000000000000 s3=0x0000000080016000
+> > > > > sbi_trap_error: hart0: s4=0x0000000000000000 s5=0x0000000000000000
+> > > > > sbi_trap_error: hart0: s6=0x0000000000000001 s7=0x0000000000000000
+> > > > > sbi_trap_error: hart0: s8=0x0000000000000000 s9=0x0000000000000000
+> > > > > sbi_trap_error: hart0: s10=0x0000000000000000 s11=0x0000000000000008
+> > > > > sbi_trap_error: hart0: t0=0x0000000000000000 t1=0x0000000000000000
+> > > > > sbi_trap_error: hart0: t2=0x0000000000000000 t3=0x0000000000000000
+> > > > > sbi_trap_error: hart0: t4=0x0000000000000000 t5=0x0000000000000000
+> > > > > sbi_trap_error: hart0: t6=0x0000000000000000
+> > > > >
+> > > > > The kernel does a 16-bit write when powering off the machine, which
+> > > > > was allowed before commit 5d971f9e67 ("memory: Revert "memory: accept
+> > > > > mismatching sizes in memory_region_access_valid""). Make min_access_size
+> > > > > match reality so that the machine can shut down properly now.
+> > > > >
+> > > > > Cc: qemu-stable@nongnu.org
+> > > > > Fixes: 88a07990fa ("SiFive RISC-V Test Finisher")
+> > > > > Fixes: 5d971f9e67 ("memory: Revert "memory: accept mismatching sizes in memory_region_access_valid"")
+> > > > > Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
+> > > >
+> > > > Thanks!
+> > > >
+> > > > Applied to riscv-to-apply.next
+> > >
+> > > FYI, I'm hoping to pull this patch into the upcoming 5.0.1 stable
+> > > release. The freeze is scheduled for 2020-09-20, I will apply this if it
+> > > hits master before then.
+> >
+> > I just sent a PR with this patch. Is this still on track to make it into 5.0.1?
 >
-> Rename all the constants to SIFIVE_E_DEV_*, to avoid conflicts.
->
-> Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
+> Since it's not likely to invalidate any testing on my end outside of the
+> ones built into QEMU I can probably still slip it in if it hits master
+> by Monday, or maybe just grab it from your tree.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This is in master now, I hope that's enough time to make it in.
+
+Let me know if you want me to do anything else.
 
 Alistair
 
-> ---
-> Changes v3 -> v4:
-> * Patch recreated, rebased to tags/pull-riscv-to-apply-20200910
 >
-> Link to v3:
-> https://lore.kernel.org/qemu-devel/20200825192110.3528606-9-ehabkost@redhat.com/
->
-> Changes v2 -> v3: none
->
-> Changes v1 -> v2:
-> * Added more details to commit message
-> ---
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
-> Cc: Alistair Francis <Alistair.Francis@wdc.com>
-> Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
-> Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> Cc: qemu-riscv@nongnu.org
-> Cc: qemu-devel@nongnu.org
-> ---
->  include/hw/riscv/sifive_e.h | 38 ++++++++---------
->  hw/riscv/sifive_e.c         | 82 ++++++++++++++++++-------------------
->  2 files changed, 60 insertions(+), 60 deletions(-)
->
-> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> index b1400843c2..83604da805 100644
-> --- a/include/hw/riscv/sifive_e.h
-> +++ b/include/hw/riscv/sifive_e.h
-> @@ -53,25 +53,25 @@ typedef struct SiFiveEState {
->      OBJECT_CHECK(SiFiveEState, (obj), TYPE_RISCV_E_MACHINE)
->
->  enum {
-> -    SIFIVE_E_DEBUG,
-> -    SIFIVE_E_MROM,
-> -    SIFIVE_E_OTP,
-> -    SIFIVE_E_CLINT,
-> -    SIFIVE_E_PLIC,
-> -    SIFIVE_E_AON,
-> -    SIFIVE_E_PRCI,
-> -    SIFIVE_E_OTP_CTRL,
-> -    SIFIVE_E_GPIO0,
-> -    SIFIVE_E_UART0,
-> -    SIFIVE_E_QSPI0,
-> -    SIFIVE_E_PWM0,
-> -    SIFIVE_E_UART1,
-> -    SIFIVE_E_QSPI1,
-> -    SIFIVE_E_PWM1,
-> -    SIFIVE_E_QSPI2,
-> -    SIFIVE_E_PWM2,
-> -    SIFIVE_E_XIP,
-> -    SIFIVE_E_DTIM
-> +    SIFIVE_E_DEV_DEBUG,
-> +    SIFIVE_E_DEV_MROM,
-> +    SIFIVE_E_DEV_OTP,
-> +    SIFIVE_E_DEV_CLINT,
-> +    SIFIVE_E_DEV_PLIC,
-> +    SIFIVE_E_DEV_AON,
-> +    SIFIVE_E_DEV_PRCI,
-> +    SIFIVE_E_DEV_OTP_CTRL,
-> +    SIFIVE_E_DEV_GPIO0,
-> +    SIFIVE_E_DEV_UART0,
-> +    SIFIVE_E_DEV_QSPI0,
-> +    SIFIVE_E_DEV_PWM0,
-> +    SIFIVE_E_DEV_UART1,
-> +    SIFIVE_E_DEV_QSPI1,
-> +    SIFIVE_E_DEV_PWM1,
-> +    SIFIVE_E_DEV_QSPI2,
-> +    SIFIVE_E_DEV_PWM2,
-> +    SIFIVE_E_DEV_XIP,
-> +    SIFIVE_E_DEV_DTIM
->  };
->
->  enum {
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 40bbf530d4..759059cd7b 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -54,25 +54,25 @@ static const struct MemmapEntry {
->      hwaddr base;
->      hwaddr size;
->  } sifive_e_memmap[] = {
-> -    [SIFIVE_E_DEBUG] =    {        0x0,     0x1000 },
-> -    [SIFIVE_E_MROM] =     {     0x1000,     0x2000 },
-> -    [SIFIVE_E_OTP] =      {    0x20000,     0x2000 },
-> -    [SIFIVE_E_CLINT] =    {  0x2000000,    0x10000 },
-> -    [SIFIVE_E_PLIC] =     {  0xc000000,  0x4000000 },
-> -    [SIFIVE_E_AON] =      { 0x10000000,     0x8000 },
-> -    [SIFIVE_E_PRCI] =     { 0x10008000,     0x8000 },
-> -    [SIFIVE_E_OTP_CTRL] = { 0x10010000,     0x1000 },
-> -    [SIFIVE_E_GPIO0] =    { 0x10012000,     0x1000 },
-> -    [SIFIVE_E_UART0] =    { 0x10013000,     0x1000 },
-> -    [SIFIVE_E_QSPI0] =    { 0x10014000,     0x1000 },
-> -    [SIFIVE_E_PWM0] =     { 0x10015000,     0x1000 },
-> -    [SIFIVE_E_UART1] =    { 0x10023000,     0x1000 },
-> -    [SIFIVE_E_QSPI1] =    { 0x10024000,     0x1000 },
-> -    [SIFIVE_E_PWM1] =     { 0x10025000,     0x1000 },
-> -    [SIFIVE_E_QSPI2] =    { 0x10034000,     0x1000 },
-> -    [SIFIVE_E_PWM2] =     { 0x10035000,     0x1000 },
-> -    [SIFIVE_E_XIP] =      { 0x20000000, 0x20000000 },
-> -    [SIFIVE_E_DTIM] =     { 0x80000000,     0x4000 }
-> +    [SIFIVE_E_DEV_DEBUG] =    {        0x0,     0x1000 },
-> +    [SIFIVE_E_DEV_MROM] =     {     0x1000,     0x2000 },
-> +    [SIFIVE_E_DEV_OTP] =      {    0x20000,     0x2000 },
-> +    [SIFIVE_E_DEV_CLINT] =    {  0x2000000,    0x10000 },
-> +    [SIFIVE_E_DEV_PLIC] =     {  0xc000000,  0x4000000 },
-> +    [SIFIVE_E_DEV_AON] =      { 0x10000000,     0x8000 },
-> +    [SIFIVE_E_DEV_PRCI] =     { 0x10008000,     0x8000 },
-> +    [SIFIVE_E_DEV_OTP_CTRL] = { 0x10010000,     0x1000 },
-> +    [SIFIVE_E_DEV_GPIO0] =    { 0x10012000,     0x1000 },
-> +    [SIFIVE_E_DEV_UART0] =    { 0x10013000,     0x1000 },
-> +    [SIFIVE_E_DEV_QSPI0] =    { 0x10014000,     0x1000 },
-> +    [SIFIVE_E_DEV_PWM0] =     { 0x10015000,     0x1000 },
-> +    [SIFIVE_E_DEV_UART1] =    { 0x10023000,     0x1000 },
-> +    [SIFIVE_E_DEV_QSPI1] =    { 0x10024000,     0x1000 },
-> +    [SIFIVE_E_DEV_PWM1] =     { 0x10025000,     0x1000 },
-> +    [SIFIVE_E_DEV_QSPI2] =    { 0x10034000,     0x1000 },
-> +    [SIFIVE_E_DEV_PWM2] =     { 0x10035000,     0x1000 },
-> +    [SIFIVE_E_DEV_XIP] =      { 0x20000000, 0x20000000 },
-> +    [SIFIVE_E_DEV_DTIM] =     { 0x80000000,     0x4000 }
->  };
->
->  static void sifive_e_machine_init(MachineState *machine)
-> @@ -90,9 +90,9 @@ static void sifive_e_machine_init(MachineState *machine)
->
->      /* Data Tightly Integrated Memory */
->      memory_region_init_ram(main_mem, NULL, "riscv.sifive.e.ram",
-> -        memmap[SIFIVE_E_DTIM].size, &error_fatal);
-> +        memmap[SIFIVE_E_DEV_DTIM].size, &error_fatal);
->      memory_region_add_subregion(sys_mem,
-> -        memmap[SIFIVE_E_DTIM].base, main_mem);
-> +        memmap[SIFIVE_E_DEV_DTIM].base, main_mem);
->
->      /* Mask ROM reset vector */
->      uint32_t reset_vec[4];
-> @@ -111,7 +111,7 @@ static void sifive_e_machine_init(MachineState *machine)
->          reset_vec[i] = cpu_to_le32(reset_vec[i]);
->      }
->      rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
-> -                          memmap[SIFIVE_E_MROM].base, &address_space_memory);
-> +                          memmap[SIFIVE_E_DEV_MROM].base, &address_space_memory);
->
->      if (machine->kernel_filename) {
->          riscv_load_kernel(machine->kernel_filename, NULL);
-> @@ -195,12 +195,12 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
->
->      /* Mask ROM */
->      memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom",
-> -                           memmap[SIFIVE_E_MROM].size, &error_fatal);
-> +                           memmap[SIFIVE_E_DEV_MROM].size, &error_fatal);
->      memory_region_add_subregion(sys_mem,
-> -        memmap[SIFIVE_E_MROM].base, &s->mask_rom);
-> +        memmap[SIFIVE_E_DEV_MROM].base, &s->mask_rom);
->
->      /* MMIO */
-> -    s->plic = sifive_plic_create(memmap[SIFIVE_E_PLIC].base,
-> +    s->plic = sifive_plic_create(memmap[SIFIVE_E_DEV_PLIC].base,
->          (char *)SIFIVE_E_PLIC_HART_CONFIG, 0,
->          SIFIVE_E_PLIC_NUM_SOURCES,
->          SIFIVE_E_PLIC_NUM_PRIORITIES,
-> @@ -210,14 +210,14 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
->          SIFIVE_E_PLIC_ENABLE_STRIDE,
->          SIFIVE_E_PLIC_CONTEXT_BASE,
->          SIFIVE_E_PLIC_CONTEXT_STRIDE,
-> -        memmap[SIFIVE_E_PLIC].size);
-> -    sifive_clint_create(memmap[SIFIVE_E_CLINT].base,
-> -        memmap[SIFIVE_E_CLINT].size, 0, ms->smp.cpus,
-> +        memmap[SIFIVE_E_DEV_PLIC].size);
-> +    sifive_clint_create(memmap[SIFIVE_E_DEV_CLINT].base,
-> +        memmap[SIFIVE_E_DEV_CLINT].size, 0, ms->smp.cpus,
->          SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
->          SIFIVE_CLINT_TIMEBASE_FREQ, false);
->      create_unimplemented_device("riscv.sifive.e.aon",
-> -        memmap[SIFIVE_E_AON].base, memmap[SIFIVE_E_AON].size);
-> -    sifive_e_prci_create(memmap[SIFIVE_E_PRCI].base);
-> +        memmap[SIFIVE_E_DEV_AON].base, memmap[SIFIVE_E_DEV_AON].size);
-> +    sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
->
->      /* GPIO */
->
-> @@ -226,7 +226,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
->      }
->
->      /* Map GPIO registers */
-> -    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio), 0, memmap[SIFIVE_E_GPIO0].base);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio), 0, memmap[SIFIVE_E_DEV_GPIO0].base);
->
->      /* Pass all GPIOs to the SOC layer so they are available to the board */
->      qdev_pass_gpios(DEVICE(&s->gpio), dev, NULL);
-> @@ -238,27 +238,27 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
->                                              SIFIVE_E_GPIO0_IRQ0 + i));
->      }
->
-> -    sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART0].base,
-> +    sifive_uart_create(sys_mem, memmap[SIFIVE_E_DEV_UART0].base,
->          serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART0_IRQ));
->      create_unimplemented_device("riscv.sifive.e.qspi0",
-> -        memmap[SIFIVE_E_QSPI0].base, memmap[SIFIVE_E_QSPI0].size);
-> +        memmap[SIFIVE_E_DEV_QSPI0].base, memmap[SIFIVE_E_DEV_QSPI0].size);
->      create_unimplemented_device("riscv.sifive.e.pwm0",
-> -        memmap[SIFIVE_E_PWM0].base, memmap[SIFIVE_E_PWM0].size);
-> -    sifive_uart_create(sys_mem, memmap[SIFIVE_E_UART1].base,
-> +        memmap[SIFIVE_E_DEV_PWM0].base, memmap[SIFIVE_E_DEV_PWM0].size);
-> +    sifive_uart_create(sys_mem, memmap[SIFIVE_E_DEV_UART1].base,
->          serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART1_IRQ));
->      create_unimplemented_device("riscv.sifive.e.qspi1",
-> -        memmap[SIFIVE_E_QSPI1].base, memmap[SIFIVE_E_QSPI1].size);
-> +        memmap[SIFIVE_E_DEV_QSPI1].base, memmap[SIFIVE_E_DEV_QSPI1].size);
->      create_unimplemented_device("riscv.sifive.e.pwm1",
-> -        memmap[SIFIVE_E_PWM1].base, memmap[SIFIVE_E_PWM1].size);
-> +        memmap[SIFIVE_E_DEV_PWM1].base, memmap[SIFIVE_E_DEV_PWM1].size);
->      create_unimplemented_device("riscv.sifive.e.qspi2",
-> -        memmap[SIFIVE_E_QSPI2].base, memmap[SIFIVE_E_QSPI2].size);
-> +        memmap[SIFIVE_E_DEV_QSPI2].base, memmap[SIFIVE_E_DEV_QSPI2].size);
->      create_unimplemented_device("riscv.sifive.e.pwm2",
-> -        memmap[SIFIVE_E_PWM2].base, memmap[SIFIVE_E_PWM2].size);
-> +        memmap[SIFIVE_E_DEV_PWM2].base, memmap[SIFIVE_E_DEV_PWM2].size);
->
->      /* Flash memory */
->      memory_region_init_rom(&s->xip_mem, OBJECT(dev), "riscv.sifive.e.xip",
-> -                           memmap[SIFIVE_E_XIP].size, &error_fatal);
-> -    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_XIP].base,
-> +                           memmap[SIFIVE_E_DEV_XIP].size, &error_fatal);
-> +    memory_region_add_subregion(sys_mem, memmap[SIFIVE_E_DEV_XIP].base,
->          &s->xip_mem);
->  }
->
-> --
-> 2.26.2
->
->
+> >
+> > Alistair
+> >
+> > >
+> > > >
+> > > > Alistair
+> > > >
+> > > > > ---
+> > > > >
+> > > > > Please let me know if the tags are wrong or inappropriate, this is my
+> > > > > first QEMU patch.
+> > > > >
+> > > > >  hw/riscv/sifive_test.c | 2 +-
+> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > >
+> > > > > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
+> > > > > index 0c78fb2c93..8c70dd69df 100644
+> > > > > --- a/hw/riscv/sifive_test.c
+> > > > > +++ b/hw/riscv/sifive_test.c
+> > > > > @@ -59,7 +59,7 @@ static const MemoryRegionOps sifive_test_ops = {
+> > > > >      .write = sifive_test_write,
+> > > > >      .endianness = DEVICE_NATIVE_ENDIAN,
+> > > > >      .valid = {
+> > > > > -        .min_access_size = 4,
+> > > > > +        .min_access_size = 2,
+> > > > >          .max_access_size = 4
+> > > > >      }
+> > > > >  };
+> > > > >
+> > > > > base-commit: 2f4c51c0f384d7888a04b4815861e6d5fd244d75
+> > > > > --
+> > > > > 2.28.0
+> > > > >
+> > > > >
+> > > >
 
