@@ -1,85 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kHvjm-0006Ln-Cs
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Sep 2020 17:10:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42946)
+	id 1kIF2V-0001ac-Qt
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Sep 2020 13:46:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52130)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <flukshun@gmail.com>)
- id 1kHvjk-0006LY-UJ; Mon, 14 Sep 2020 17:10:08 -0400
-Received: from mail-oi1-x244.google.com ([2607:f8b0:4864:20::244]:41679)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kIF2R-0001Yf-FX
+ for qemu-riscv@nongnu.org; Tue, 15 Sep 2020 13:46:43 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:37501)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <flukshun@gmail.com>)
- id 1kHvjj-0001qn-0r; Mon, 14 Sep 2020 17:10:08 -0400
-Received: by mail-oi1-x244.google.com with SMTP id x69so1373871oia.8;
- Mon, 14 Sep 2020 14:10:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:mime-version:content-transfer-encoding:to:from:in-reply-to
- :cc:references:message-id:user-agent:subject:date;
- bh=TcHpIKoPDO33ffoJktqBevTPNMjQSBbzECnpS1rtBTI=;
- b=kRNbiPXo5NbkTnC355467wZXGv6qqbbLpDxsFzvjQwvPh5f7BE1GkfCDEpVgx7kPBd
- Q3dfIbKvN2gG7QeDvNOaVbBueiD3wB5jBjE7fyKzF9EfaqHR0RyDU6qvu2QwqtYpWZTO
- zHJTovvIqX3HNpPZyRq48RnWYm1IW5qDyJJezz5OoinofzrKQIcTDXtsr6bV4kWepEeK
- iLyPBBoq+fri3Zt+HvhU1pF8sx9JYs/xP3TS14xrR4H9GuKYqj7Cayi2c7+YGbA1KPMx
- peJWoe8xRNMnIwjMOqNjaIYIqx92Hf1lp74OAKYizbQUupowuwS3IkX5UimnQIat58rG
- qPbw==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kIF2N-0007Dy-2T
+ for qemu-riscv@nongnu.org; Tue, 15 Sep 2020 13:46:42 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id w7so2391934pfi.4
+ for <qemu-riscv@nongnu.org>; Tue, 15 Sep 2020 10:46:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=4J/C0CgMtD1LdsmM6ACDCgEWX06co4iTUlmwkoRNuL8=;
+ b=BGKA3JlfigwPFD1yg3nqZxSGvmznZexDHC6tx+LFwUjnYJNrRl/F8pG63TA8dvpzxI
+ qIpFvIm3fyBGIi7GveCv1O5Xj+e3xJEvYKO8VQKfPsZAOJAAdEUhwF3ORm4PNz6EiBAn
+ H2RiCMjAu5kQWMQSAULlQWnf1BY80dPzdnIhGymT2HdY7eqInNDRXDuuqYabrEyUY/6m
+ yqd9qGpg9oYnAyM5B5KESH1nYjECXGiMPVxnrsS4Eg0c41OdVGT8Qmw+4dyFK05bxPE4
+ SFSu12r706ReiomTQrZ5BhrDZYkHTnhTFgQrd1Svq24Q0C9VfYC5sYgL3KYD2l47U3Hz
+ JFuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:mime-version:content-transfer-encoding:to
- :from:in-reply-to:cc:references:message-id:user-agent:subject:date;
- bh=TcHpIKoPDO33ffoJktqBevTPNMjQSBbzECnpS1rtBTI=;
- b=oPMIPhPmuy9lb6MI8VakDt7c8BeSIoG0q/pswrRI6MXly5vd94VVwNHsMPdUF+ZR1h
- SPJjDPX8fHwkufbFtHrk110dgr7nwy3gwtDdRLZgOOI9eKS1UnjsvUxxlNyYmAir69ss
- gg8ghxyMUYOC65MdFrUMkkADs7AY2QmJ72fCgDoK0KPd1IVCR0h2J2oyWFqEdhFaCmAe
- 0/jziosDwIMcyiK46CSwZnrwT4WUEeCwJpKV0YY+ZrEksLsN97g4b9Rb66qjSUFGf/QC
- C5dDw1Ak0BuPL8vVwck8YhtZ299TIqpsM/rfxp8YINlLZ4Pd8EZT+jRUv3E2jFbbi+en
- OhTA==
-X-Gm-Message-State: AOAM533+LdPJg70h/JLD6vNXLO8PCSTmvyoxunMJMN1QWcP7XFaDKB3d
- ItVtJivNMGj/Z8S+9wl3Y8Q=
-X-Google-Smtp-Source: ABdhPJzqSjKb66s5WL6XVcVqrND2zoofNROWnoXtMGrCHeWTx7fC7V5RM/j5egtnrPv5pdAxD5lJuw==
-X-Received: by 2002:aca:4b85:: with SMTP id y127mr909032oia.52.1600117804822; 
- Mon, 14 Sep 2020 14:10:04 -0700 (PDT)
-Received: from localhost (76-251-165-188.lightspeed.austtx.sbcglobal.net.
- [76.251.165.188])
- by smtp.gmail.com with ESMTPSA id g21sm5065205oos.36.2020.09.14.14.10.03
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Mon, 14 Sep 2020 14:10:03 -0700 (PDT)
-Sender: fluxion <flukshun@gmail.com>
-Content-Type: text/plain; charset="utf-8"
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=4J/C0CgMtD1LdsmM6ACDCgEWX06co4iTUlmwkoRNuL8=;
+ b=fWdSc7voaV45it6bLv6v/MLvbWdrH4eEQ4nNWGIXHNYPpWKaXd4KUWfYz5+v1IGoJI
+ PZbN+LguXO75qu38rqfn3+6UKPeA3WqubnUF6f/Y6X5oqyzlvOtbmYulVmC1FFnSN806
+ 5w3t0GBWE97eFy7aONjU3NmaUdPenDAPs7ItODiYmMKr2Td6E83harv/6K0cZ5GUDHs3
+ YJS4Qw2hYlklHxL3xb2FTIzh6iuyh4M4gdul5olm9Mcw05qIOw+DF7LstCaZNEwBETOe
+ ypNJOfT69rhSaapPjFp4cQNgi1XILZIuKqqJK9IRm9U9afy2S0XWCQ2GByNbPIUos/Q/
+ kMWg==
+X-Gm-Message-State: AOAM532hYq31T0Ru26uds2Voij9CccHIFZiP+cPiOUY0vSO7bw+8pH6x
+ vWSic8FWgNJ09rKh+FVepMLBXQ==
+X-Google-Smtp-Source: ABdhPJywZS5SLDX5laTosDiEBzMBPNRjGIBnlpXeOCMQPoGbNQlSXXhz4yjU8OdM7Nw87BqzVITYWg==
+X-Received: by 2002:a63:c343:: with SMTP id e3mr14492145pgd.288.1600191996919; 
+ Tue, 15 Sep 2020 10:46:36 -0700 (PDT)
+Received: from localhost.localdomain ([71.212.141.89])
+ by smtp.gmail.com with ESMTPSA id cf7sm147896pjb.52.2020.09.15.10.46.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Sep 2020 10:46:36 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ David Hildenbrand <david@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org
+Subject: [PATCH 0/5] qom: Allow object to be aligned
+Date: Tue, 15 Sep 2020 10:46:30 -0700
+Message-Id: <20200915174635.2333553-1-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-To: Alistair Francis <alistair23@gmail.com>
-From: Michael Roth <mdroth@linux.vnet.ibm.com>
-In-Reply-To: <CAKmqyKNvatCfS_gPoxLu-K+6anNjbfP4Ad=MA--3pQQ9h-mBRA@mail.gmail.com>
-Cc: Nathan Chancellor <natechancellor@gmail.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- qemu-stable@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20200901055822.2721209-1-natechancellor@gmail.com>
- <CAKmqyKNRMmJgmZSPK6wqqNQW41QLHwChPi+1cjqao_x1Q_iryQ@mail.gmail.com>
- <159916712670.15432.11504227918284494914@sif>
- <CAKmqyKMYKiM4Q-geEsNR3Us4vOn_u52omr6h2vcodbsr1hFW2g@mail.gmail.com>
- <159982720259.29065.11121265558750623606@sif>
- <CAKmqyKNvatCfS_gPoxLu-K+6anNjbfP4Ad=MA--3pQQ9h-mBRA@mail.gmail.com>
-Message-ID: <160011779946.29065.10046255082586906138@sif>
-User-Agent: alot/0.7
-Subject: Re: [PATCH] riscv: sifive_test: Allow 16-bit writes to memory region
-Date: Mon, 14 Sep 2020 16:09:59 -0500
-Received-SPF: pass client-ip=2607:f8b0:4864:20::244;
- envelope-from=flukshun@gmail.com; helo=mail-oi1-x244.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42f.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.248,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -92,152 +84,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Sep 2020 21:10:09 -0000
+X-List-Received-Date: Tue, 15 Sep 2020 17:46:44 -0000
 
-Quoting Alistair Francis (2020-09-14 11:07:26)
-> On Fri, Sep 11, 2020 at 5:26 AM Michael Roth <mdroth@linux.vnet.ibm.com> =
-wrote:
-> >
-> > Quoting Alistair Francis (2020-09-10 13:10:43)
-> > > On Thu, Sep 3, 2020 at 2:05 PM Michael Roth <mdroth@linux.vnet.ibm.co=
-m> wrote:
-> > > >
-> > > > Quoting Alistair Francis (2020-09-01 18:59:29)
-> > > > > On Mon, Aug 31, 2020 at 10:59 PM Nathan Chancellor
-> > > > > <natechancellor@gmail.com> wrote:
-> > > > > >
-> > > > > > When shutting down the machine running a mainline Linux kernel,=
- the
-> > > > > > following error happens:
-> > > > > >
-> > > > > > $ build/riscv64-softmmu/qemu-system-riscv64 -bios default -M vi=
-rt \
-> > > > > >     -display none -initrd rootfs.cpio -kernel Image -m 512m \
-> > > > > >     -nodefaults -serial mon:stdio
-> > > > > > ...
-> > > > > > Requesting system poweroff
-> > > > > > [    4.999630] reboot: Power down
-> > > > > > sbi_trap_error: hart0: trap handler failed (error -2)
-> > > > > > sbi_trap_error: hart0: mcause=3D0x0000000000000007 mtval=3D0x00=
-00000000100000
-> > > > > > sbi_trap_error: hart0: mepc=3D0x000000008000d4cc mstatus=3D0x00=
-00000000001822
-> > > > > > sbi_trap_error: hart0: ra=3D0x000000008000999e sp=3D0x000000008=
-0015c78
-> > > > > > sbi_trap_error: hart0: gp=3D0xffffffe000e76610 tp=3D0xffffffe00=
-81b89c0
-> > > > > > sbi_trap_error: hart0: s0=3D0x0000000080015c88 s1=3D0x000000000=
-0000040
-> > > > > > sbi_trap_error: hart0: a0=3D0x0000000000000000 a1=3D0x000000008=
-0004024
-> > > > > > sbi_trap_error: hart0: a2=3D0x0000000080004024 a3=3D0x000000008=
-0004024
-> > > > > > sbi_trap_error: hart0: a4=3D0x0000000000100000 a5=3D0x000000000=
-0005555
-> > > > > > sbi_trap_error: hart0: a6=3D0x0000000000004024 a7=3D0x000000008=
-0011158
-> > > > > > sbi_trap_error: hart0: s2=3D0x0000000000000000 s3=3D0x000000008=
-0016000
-> > > > > > sbi_trap_error: hart0: s4=3D0x0000000000000000 s5=3D0x000000000=
-0000000
-> > > > > > sbi_trap_error: hart0: s6=3D0x0000000000000001 s7=3D0x000000000=
-0000000
-> > > > > > sbi_trap_error: hart0: s8=3D0x0000000000000000 s9=3D0x000000000=
-0000000
-> > > > > > sbi_trap_error: hart0: s10=3D0x0000000000000000 s11=3D0x0000000=
-000000008
-> > > > > > sbi_trap_error: hart0: t0=3D0x0000000000000000 t1=3D0x000000000=
-0000000
-> > > > > > sbi_trap_error: hart0: t2=3D0x0000000000000000 t3=3D0x000000000=
-0000000
-> > > > > > sbi_trap_error: hart0: t4=3D0x0000000000000000 t5=3D0x000000000=
-0000000
-> > > > > > sbi_trap_error: hart0: t6=3D0x0000000000000000
-> > > > > >
-> > > > > > The kernel does a 16-bit write when powering off the machine, w=
-hich
-> > > > > > was allowed before commit 5d971f9e67 ("memory: Revert "memory: =
-accept
-> > > > > > mismatching sizes in memory_region_access_valid""). Make min_ac=
-cess_size
-> > > > > > match reality so that the machine can shut down properly now.
-> > > > > >
-> > > > > > Cc: qemu-stable@nongnu.org
-> > > > > > Fixes: 88a07990fa ("SiFive RISC-V Test Finisher")
-> > > > > > Fixes: 5d971f9e67 ("memory: Revert "memory: accept mismatching =
-sizes in memory_region_access_valid"")
-> > > > > > Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
-> > > > >
-> > > > > Thanks!
-> > > > >
-> > > > > Applied to riscv-to-apply.next
-> > > >
-> > > > FYI, I'm hoping to pull this patch into the upcoming 5.0.1 stable
-> > > > release. The freeze is scheduled for 2020-09-20, I will apply this =
-if it
-> > > > hits master before then.
-> > >
-> > > I just sent a PR with this patch. Is this still on track to make it i=
-nto 5.0.1?
-> >
-> > Since it's not likely to invalidate any testing on my end outside of the
-> > ones built into QEMU I can probably still slip it in if it hits master
-> > by Monday, or maybe just grab it from your tree.
-> =
+I've seen some failures on arm and s390x hosts after
+enabling host vector support.  It turns out that the
+malloc for these hosts does not provide 16-byte alignment.
 
-> This is in master now, I hope that's enough time to make it in.
+We already have a function that can alloc with alignment,
+but we need to pass this down from the structure.  We also
+don't want to use this function unconditionally, because
+the windows version does page allocation, which would be
+overkill for the vast majority of the objects allocated.
 
-Yes I pulled it in yesterday:
 
-  https://github.com/mdroth/qemu/commits/stable-5.0-staging
+r~
 
-> =
 
-> Let me know if you want me to do anything else.
+Cc: Paolo Bonzini <pbonzini@redhat.com>
+Cc: "Daniel P. Berrangé" <berrange@redhat.com>
+Cc: Eduardo Habkost <ehabkost@redhat.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>
+Cc: David Gibson <david@gibson.dropbear.id.au>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>
+Cc: David Hildenbrand <david@redhat.com>
+Cc: Cornelia Huck <cohuck@redhat.com>
+Cc: qemu-arm@nongnu.org
+Cc: qemu-ppc@nongnu.org
+Cc: qemu-riscv@nongnu.org
+Cc: qemu-s390x@nongnu.org
 
-Thanks!
 
-> =
+Richard Henderson (5):
+  qom: Allow objects to be allocated with increased alignment
+  target/arm: Set instance_align on CPUARM TypeInfo
+  target/ppc: Set instance_align on PowerPCCPU TypeInfo
+  target/riscv: Set instance_align on RISCVCPU TypeInfo
+  target/s390x: Set instance_align on S390CPU TypeInfo
 
-> Alistair
-> =
+ include/qom/object.h            |  4 ++++
+ qom/object.c                    | 16 +++++++++++++---
+ target/arm/cpu.c                |  2 ++
+ target/riscv/cpu.c              |  1 +
+ target/s390x/cpu.c              |  1 +
+ target/ppc/translate_init.c.inc |  1 +
+ 6 files changed, 22 insertions(+), 3 deletions(-)
 
-> >
-> > >
-> > > Alistair
-> > >
-> > > >
-> > > > >
-> > > > > Alistair
-> > > > >
-> > > > > > ---
-> > > > > >
-> > > > > > Please let me know if the tags are wrong or inappropriate, this=
- is my
-> > > > > > first QEMU patch.
-> > > > > >
-> > > > > >  hw/riscv/sifive_test.c | 2 +-
-> > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > >
-> > > > > > diff --git a/hw/riscv/sifive_test.c b/hw/riscv/sifive_test.c
-> > > > > > index 0c78fb2c93..8c70dd69df 100644
-> > > > > > --- a/hw/riscv/sifive_test.c
-> > > > > > +++ b/hw/riscv/sifive_test.c
-> > > > > > @@ -59,7 +59,7 @@ static const MemoryRegionOps sifive_test_ops =
-=3D {
-> > > > > >      .write =3D sifive_test_write,
-> > > > > >      .endianness =3D DEVICE_NATIVE_ENDIAN,
-> > > > > >      .valid =3D {
-> > > > > > -        .min_access_size =3D 4,
-> > > > > > +        .min_access_size =3D 2,
-> > > > > >          .max_access_size =3D 4
-> > > > > >      }
-> > > > > >  };
-> > > > > >
-> > > > > > base-commit: 2f4c51c0f384d7888a04b4815861e6d5fd244d75
-> > > > > > --
-> > > > > > 2.28.0
-> > > > > >
-> > > > > >
-> > > > >
+-- 
+2.25.1
+
 
