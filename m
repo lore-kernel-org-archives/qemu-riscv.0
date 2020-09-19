@@ -1,59 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kJfZq-0004Xw-RE
-	for mharc-qemu-riscv@gnu.org; Sat, 19 Sep 2020 12:19:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45652)
+	id 1kJjYA-00036r-7w
+	for mharc-qemu-riscv@gnu.org; Sat, 19 Sep 2020 16:33:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40970)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phantom0308@zju.edu.cn>)
- id 1kJerC-0006Sf-Mp
- for qemu-riscv@nongnu.org; Sat, 19 Sep 2020 11:33:03 -0400
-Received: from mail.zju.edu.cn ([61.164.42.155]:30646 helo=zju.edu.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <phantom0308@zju.edu.cn>) id 1kJer3-0003Zv-Mt
- for qemu-riscv@nongnu.org; Sat, 19 Sep 2020 11:32:56 -0400
-Received: by ajax-webmail-mail-app3 (Coremail) ; Sat, 19 Sep 2020 23:32:32
- +0800 (GMT+08:00)
-X-Originating-IP: [10.15.192.126]
-Date: Sat, 19 Sep 2020 23:32:32 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: Jinyan <phantom0308@zju.edu.cn>
-To: qemu-riscv@nongnu.org
-Subject: Rom regions overlap
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.12 build 20200616(0f5d8152)
- Copyright (c) 2002-2020 www.mailtech.cn zju.edu.cn
-Content-Type: multipart/alternative; 
- boundary="----=_Part_268889_840823713.1600529552459"
-MIME-Version: 1.0
-Message-ID: <26e4803b.146f7.174a6fed44b.Coremail.phantom0308@zju.edu.cn>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: cC_KCgAH0t6QJGZfK3KaBA--.14136W
-X-CM-SenderInfo: qtrwiiaqrrjlo62m3hxhgxhubq/1tbiAwIHD1NG3AEz2wAIsh
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJTRUUUblCS07vEb7Iv0x
- C_Cr1lV2xY67kC6x804xWlV2xY67CY07I20VC2zVCF04k26cxKx2IYs7xG6rWj6s0DMIAI
- bVAFxVCF77xC64kEw24lV2xY67C26IkvcIIF6IxKo4kEV4ylV2xY628lY4IE4IxF12IF4w
- CS07vE84x0c7CEj48ve4kI8wCS07vE84ACjcxK6xIIjxv20xvE14v26w1j6s0DMIAIbVA2
- z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UMIAIbVA2z4x0Y4vEx4A2jsIE14v26r
- xl6s0DMIAIbVA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1lV2xY62AIxVAIcxkEcVAq
- 07x20xvEncxIr21lV2xY6c02F40EFcxC0VAKzVAqx4xG6I80ewCS07vEYx0E2Ix0cI8IcV
- AFwI0_Jr0_Jr4lV2xY6cIj6I8E87Iv67AKxVWUJVW8JwCS07vEOx8S6xCaFVCjc4AY6r1j
- 6r4UMIAIbVCjxxvEw4WlV2xY6xkI7II2jI8vz4vEwIxGrwCS07vE42xK82IY6x8ErcxFaV
- Av8VW8uw4UJr1UMIAIbVCF72vE77IF4wCS07vE4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lV2xY
- 6I8I3I0E5I8CrVAFwI0_JrI_JrWlV2xY6I8I3I0E7480Y4vE14v26r106r1rMIAIbVC2zV
- AF1VAY17CE14v26r1j6r15MIAIbVCI42IY6xIIjxv20xvE14v26r1j6r1xMIAIbVCI42IY
- 6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lV2xY6IIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s
- 0DMIAIbVCI42IY6I8E87Iv67AKxVWUJVW8JwCS07vEIxAIcVC2z280aVCY1x0267AKxVWU
- JVW8JbIYCTnIWIevJa73U
-Received-SPF: pass client-ip=61.164.42.155;
- envelope-from=phantom0308@zju.edu.cn; helo=zju.edu.cn
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/09/19 11:32:37
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1kJjY9-00036l-9b
+ for qemu-riscv@nongnu.org; Sat, 19 Sep 2020 16:33:37 -0400
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:36626)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1kJjY6-0005Fw-R1
+ for qemu-riscv@nongnu.org; Sat, 19 Sep 2020 16:33:37 -0400
+Received: by mail-pl1-x644.google.com with SMTP id k13so4822214plk.3
+ for <qemu-riscv@nongnu.org>; Sat, 19 Sep 2020 13:33:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=KW9dizA5K9D0ay5CbQov3kkorUzg9sE5lKwlRj1tkjI=;
+ b=xQzAqUCfhZ7Pgep7LJZrFgxApN+lWbUbkXM0H0KsBQb9GhTCid4EUBhFKBkF2lNgwg
+ sLNqtPpOWfJVmZ7m+CBATdXFUJo9Vp8/5mtaE2QwXfqadO8ZJvMZJOwboj1WkBoCv7dD
+ yUiqgUsFbgd4xIM2FYhn3EnoZacZ2vIpV+LvN2TnF+qXScu4IfHArj9s7fLAdSBy/Iq/
+ ud6drnTJGQZAO+vvwQ3JDBRoX/LhyDQsI6wvE39ud6TGoH19f56w8Vtl5RkJAPfQK42U
+ rfFyX8eC46L57Ig8AoL0H/dPPVehetYV/WFwv/q3jpwt1+twohLREq9Cj8bZSMARI/hu
+ 3iTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=KW9dizA5K9D0ay5CbQov3kkorUzg9sE5lKwlRj1tkjI=;
+ b=oKqMkygPp4aj0fh2qXCH+ccTaMCxtyue2/VEEM2IjCg7tan8vmQlXYfjZynLWMotol
+ lZBk1BK5V3PaVVzvEk6dtCeRRsuus3EzLsUyuaN71Kwpl0skBRgpMiJsHGm5ceW1lS++
+ NEfTWNH3GIi8vkNmC7QL9q/c9Esbxow+AzW/3Ro1cMpyGmZFE+17+p70HYuEWghv+ZsK
+ wbdXCdXVJjwdwCzSUSVOHEnh+TzoCFRMspLL1mX9NJEdMcHf8DgSm33LHu7axRjTR4D4
+ bzgDHUdBpL7GA3CwO+4KvMCUeIIz9VjJeaXtahICtqMw1FUEn0aTS61hxU/D/6q28h8l
+ hUIg==
+X-Gm-Message-State: AOAM531XbFSPguLkChLP7nBcjlnM43B+m7TtUpxTfEkTlKzb/+TapDPm
+ tUfc8pH2cUETDREKE29xdQ5Az+6RTwU7VvV1
+X-Google-Smtp-Source: ABdhPJxWCr/6NPOur8oYkAKErsERDVniAmbrKnKH/jfgUW2yk5dmHyQOfeK1LvV6yExoQd3kIqPa+g==
+X-Received: by 2002:a17:90a:9912:: with SMTP id
+ b18mr19508176pjp.192.1600547611732; 
+ Sat, 19 Sep 2020 13:33:31 -0700 (PDT)
+Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
+ [76.210.143.223])
+ by smtp.gmail.com with ESMTPSA id gw1sm6603688pjb.36.2020.09.19.13.33.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 19 Sep 2020 13:33:31 -0700 (PDT)
+Date: Sat, 19 Sep 2020 13:33:31 -0700 (PDT)
+X-Google-Original-Date: Sat, 19 Sep 2020 13:33:29 PDT (-0700)
+Subject: Re: Fwd: riscv32 wait() problem, qemu or glibc?
+In-Reply-To: <2107152.vFx2qVVIhK@noumea>
+CC: qemu-riscv@nongnu.org
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: dilfridge@gentoo.org
+Message-ID: <mhng-a7087781-d72b-4824-b649-2535cf70327e@palmerdabbelt-glaptop1>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::644;
+ envelope-from=palmer@dabbelt.com; helo=mail-pl1-x644.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 19 Sep 2020 12:19:05 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,39 +79,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Sep 2020 15:33:04 -0000
+X-List-Received-Date: Sat, 19 Sep 2020 20:33:37 -0000
 
-------=_Part_268889_840823713.1600529552459
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
+On Mon, 14 Sep 2020 09:23:10 PDT (-0700), dilfridge@gentoo.org wrote:
+> [forwarding this also to qemu-riscv, not sure what's the right list]
+> An: qemu-devel@nongnu.org, libc-alpha@sourceware.org
+>
+> Hi, 
+>
+> first of all, sorry for crossposting, but I'm dealing with many moving and 
+> experimental parts here... 
+>
+> Situation: riscv32 (ilp32) qemu-user [1] chroot, Linux [2], glibc [3], gcc [4]
+>
+> The following small program outputs "child exited with status 40", which is 
+> rather unexpected (it should be 42). Any idea what is going on?
+>
+> (This is a simplified version of code in a configure test. The test has other 
+> potential issues [5], but in any case it cant produce useful results on 
+> riscv32 right now.)
+>
+> TIA, 
+> Andreas
+>
+> ====================================
+> #include <stdlib.h>
+> #include <unistd.h>
+> #include <stdio.h>
+> #include <sys/wait.h>
+>
+> main(c, v)
+>      int c;
+>      char **v;
+> {
+>   pid_t pid, p;
+>   int s, i, n;
+>
+>   s = 0;
+>   pid = fork();
+>   if (pid == 0)
+>     exit (42);
+>
+>   /* wait for the process */
+>   p = wait(&s);
+>   if (p != pid)
+>     exit (255);
+>
+>   if (WIFEXITED(s))
+>   {
+>      int r=WEXITSTATUS(s);
+>      printf("child exited with status %i\n",r);
+>   }
+> }
+> ====================================
+>
+>
+> [1] qemu built from git master, Sep 12, 2020 16:30:37 EEST
+> [2] host kernel is 5.8.8
+> [3] glibc-2.32 with the rv32 patch series backported from master
+> [4] (Gentoo 10.2.0-r1 p2)
+> [5] https://lists.gnu.org/archive/html/bug-bash/2020-09/msg00033.html
+>
+> -- 
+> Andreas K. Hüttel
+> dilfridge@gentoo.org
+> Gentoo Linux developer 
+> (council, qa, toolchain, base-system, perl, libreoffice)
 
-SGksIEkgdXNlZCB0byB1c2UgYmJsIHRvIGxvYWQga2VybmVsLCBsaWtlIGZvbGxvd2luZzoKCnFl
-bXUtc3lzdGVtLXJpc2N2NjQgLW5vZ3JhcGhpYyAtbWFjaGluZSB2aXJ0IC1rZXJuZWwgYmJsIC1k
-cml2ZSBmaWxlPXJvb3Rmcy5iaW4sZm9ybWF0PXJhdyxpZD1oZDAgLWRldmljZSB2aXJ0aW8tYmxr
-LWRldmljZSxkcml2ZT1oZDAgLW5ldGRldiB1c2VyLGlkPW5ldDAgLWRldmljZSB2aXJ0aW8tbmV0
-LWRldmljZSxuZXRkZXY9bmV0MAoKVGhlc2UgZGF5cyBJIHVwc3RyZWFtIG15IHFlbXUsIGJ1dCBJ
-IGdvdCB0aGUgZm9sbG93aW5nIGVycm9yczoKCnJvbTogcmVxdWVzdGVkIHJlZ2lvbnMgb3Zlcmxh
-cCAocm9tIHBoZHIgIzA6IGJibC4gZnJlZT0weDAwMDAwMDAwODAwMTE0ODgsIGFkZHI9MHgwMDAw
-MDAwMDgwMDAwMDAwKQoKCkhvdyB0byBydW4gbGludXggb24gcmlzY3YtcWVtdSB3aXRoIDUuMS41
-MCBub3cgPyBEbyB3ZSBkbyBub3QgbmVlZCBiYmwgdG8gbG9hZCBrZXJuZWwgbm93ID8KClRoYW5r
-cwoKCg==
-------=_Part_268889_840823713.1600529552459
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: base64
-
-PHA+CglIaSwgSSB1c2VkIHRvIHVzZSBiYmwgdG8gbG9hZCBrZXJuZWwsIGxpa2UgZm9sbG93aW5n
-Ogo8L3A+CjxwPgoJcWVtdS1zeXN0ZW0tcmlzY3Y2NCAtbm9ncmFwaGljIC1tYWNoaW5lIHZpcnQg
-LWtlcm5lbCBiYmwmbmJzcDs8c3BhbiBzdHlsZT0id2hpdGUtc3BhY2U6cHJlOyI+IDwvc3Bhbj4t
-ZHJpdmUgZmlsZT1yb290ZnMuYmluLGZvcm1hdD1yYXcsaWQ9aGQwJm5ic3A7PHNwYW4gc3R5bGU9
-IndoaXRlLXNwYWNlOnByZTsiPiA8L3NwYW4+LWRldmljZSB2aXJ0aW8tYmxrLWRldmljZSxkcml2
-ZT1oZDAmbmJzcDstbmV0ZGV2IHVzZXIsaWQ9bmV0MCAtZGV2aWNlIHZpcnRpby1uZXQtZGV2aWNl
-LG5ldGRldj1uZXQwCjwvcD4KPHA+CglUaGVzZSBkYXlzIEkgdXBzdHJlYW0gbXkgcWVtdSwgYnV0
-IEkgZ290IHRoZSBmb2xsb3dpbmcgZXJyb3JzOgo8L3A+CjxwPgoJcm9tOiByZXF1ZXN0ZWQgcmVn
-aW9ucyBvdmVybGFwIChyb20gcGhkciAjMDogYmJsLiBmcmVlPTB4MDAwMDAwMDA4MDAxMTQ4OCwg
-YWRkcj0weDAwMDAwMDAwODAwMDAwMDApPGJyPgoJPC9wPjxwPgoJCUhvdyB0byBydW4gbGludXgg
-b24gcmlzY3YtcWVtdSB3aXRoIDUuMS41MCBub3cgPyBEbyB3ZSBkbyBub3QgbmVlZCBiYmwgdG8g
-bG9hZCBrZXJuZWwgbm93ID8KCTwvcD4KCTxwPgoJCVRoYW5rcwoJPC9wPgoKPHA+Cgk8YnI+Cjwv
-cD4=
-------=_Part_268889_840823713.1600529552459--
-
+I don't see any replies to this, but for some reason I remember having seen
+some.  Did this get resolved in some other thread?  I'd bet that it's a bug in
+rv32 user-mode emulation, as that's been only lightly used so far.
 
