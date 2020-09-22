@@ -1,41 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kKc3a-0002YN-JP
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Sep 2020 02:45:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56514)
+	id 1kKcDv-0002jE-UA
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Sep 2020 02:56:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58620)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1kKc3X-0002Wa-PI
- for qemu-riscv@nongnu.org; Tue, 22 Sep 2020 02:45:39 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:33696)
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1kKcDu-0002fv-Hu
+ for qemu-riscv@nongnu.org; Tue, 22 Sep 2020 02:56:22 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:51107)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1kKc3U-0002sc-BP
- for qemu-riscv@nongnu.org; Tue, 22 Sep 2020 02:45:39 -0400
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1kKcDp-0003w3-NJ
+ for qemu-riscv@nongnu.org; Tue, 22 Sep 2020 02:56:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1600757135;
+ s=mimecast20190719; t=1600757772;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=qaYBU8dnedHzBMwC8QbJyxgWaOeesr8taPRMn/hh93U=;
- b=UveQvhLDeT71z4hFl7FpqeAroURcEQX/0xgtjTURLD8ZkmOgrhBSILImvWCgUIlRgFCjgT
- OVzHhuNOe3g1sVhBKXNx4Kh1xk1+Jns5bJI+uGN5P6wed2U7fkaUnZbSRH4RnM6g3zmM3g
- 5osW75cIc12Jw2ZKFn65HzCXayMJOKk=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-62-H0Fp-s2JNPewqo54DJB3YA-1; Tue, 22 Sep 2020 02:45:32 -0400
-X-MC-Unique: H0Fp-s2JNPewqo54DJB3YA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5D8CD801F9A;
- Tue, 22 Sep 2020 06:45:27 +0000 (UTC)
-Received: from [10.36.113.20] (ovpn-113-20.ams2.redhat.com [10.36.113.20])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 941257368D;
- Tue, 22 Sep 2020 06:45:03 +0000 (UTC)
+ in-reply-to:in-reply-to:references:references;
+ bh=fdmGL0X3kZ623XBvGj6grePr2oGnneoqjceqFQ7hFKo=;
+ b=at6z70HW5tCbgi3xJG5Q0Vf6k0pqi42z6kBqVe6XLBHmpKVn+z6+qzWHpmVyZVx3E7p3Ls
+ fBlYwucAC7o6VSg3Y1RuqhzMDuleG+KDW96uLVPFL5LesF3+er8SORgOkzJldz1SbSYfer
+ Ag/+jfP4G3O90amWlSoWgkSJeJn+L0o=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-537-5upEJcc1Miur6CrMtbHcSg-1; Tue, 22 Sep 2020 02:56:10 -0400
+X-MC-Unique: 5upEJcc1Miur6CrMtbHcSg-1
+Received: by mail-wr1-f72.google.com with SMTP id g6so7027305wrv.3
+ for <qemu-riscv@nongnu.org>; Mon, 21 Sep 2020 23:56:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=fdmGL0X3kZ623XBvGj6grePr2oGnneoqjceqFQ7hFKo=;
+ b=ft2bZMrJPj5lZ4ozcxDyvuCnlz3TgfwvjulwiN5RcqtLhxOc/Dc3X0U66sPAFGOzik
+ teThRZRKcGR3LlYsSE4vD0xY4Gz7xKvlMRdbMqsSVNtCU49Minxv7jUm0G9twvsOOp9g
+ LpTkIyRCPNWAUilqB+cw2FN7rCehiNchcz6LsaAWRdf/wwfzJL4XFdN7erLEySbBxVVn
+ pbIMW3bgmNRgnwYXXJUmse9gAHeVNS7ERchlBnuzuBSV8SGgk52EWiljAOEL/91Y6bvv
+ 9SkA7Mq3WR/LTsjxz/h2oJVW2KtbMDdAieSp89F8Q4NR07zYmX7nbavJZ9a10sAyd4iQ
+ 9KQg==
+X-Gm-Message-State: AOAM5338jk7JSbX5UaxYaKLljTRBZDgohOdT3GaqUVsFeZ1guFFMTLqw
+ VZP5+DaL1JLZPM+ShmZJ0r3y+/egxB0zuGMU4WNQrfv82Cp/PTMS78xsQc9yfVeVGg7dBPgP0Ky
+ 61iNXrVAdWG3qPpM=
+X-Received: by 2002:adf:8187:: with SMTP id 7mr3658798wra.266.1600757769266;
+ Mon, 21 Sep 2020 23:56:09 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyKFFt/QRb04H8kSIfdQ5jqG5B6jsQvAnc25MIGryjLgYDuFqTx9G3VVN2PDZNnPRD+beCn4A==
+X-Received: by 2002:adf:8187:: with SMTP id 7mr3658757wra.266.1600757769000;
+ Mon, 21 Sep 2020 23:56:09 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:d153:8d0f:94cf:5114?
+ ([2001:b07:6468:f312:d153:8d0f:94cf:5114])
+ by smtp.gmail.com with ESMTPSA id g131sm3054048wmf.25.2020.09.21.23.56.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Sep 2020 23:56:08 -0700 (PDT)
 Subject: Re: [PATCH] qemu/atomic.h: prefix qemu_ to solve <stdatomic.h>
  collisions
-To: Paolo Bonzini <pbonzini@redhat.com>, Stefan Hajnoczi
- <stefanha@redhat.com>, qemu-devel@nongnu.org
+To: David Hildenbrand <david@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Fam Zheng <fam@euphon.net>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Alberto Garcia <berto@igalia.com>, Jiri Slaby <jslaby@suse.cz>,
@@ -75,65 +95,24 @@ Cc: qemu-riscv@nongnu.org, Fam Zheng <fam@euphon.net>,
  Hailiang Zhang <zhang.zhanghailiang@huawei.com>
 References: <20200921162346.188997-1-stefanha@redhat.com>
  <c8892b73-6cee-9fd3-54b0-289149926041@redhat.com>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
- WNyWQQ==
-Organization: Red Hat GmbH
-Message-ID: <52b8a46e-ab9e-1645-163d-497122ece907@redhat.com>
-Date: Tue, 22 Sep 2020 08:45:02 +0200
+ <52b8a46e-ab9e-1645-163d-497122ece907@redhat.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <8610ca0e-0b3f-6d95-43b9-e2e49571e311@redhat.com>
+Date: Tue, 22 Sep 2020 08:56:06 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <c8892b73-6cee-9fd3-54b0-289149926041@redhat.com>
+In-Reply-To: <52b8a46e-ab9e-1645-163d-497122ece907@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pbonzini@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Received-SPF: pass client-ip=63.128.21.124; envelope-from=david@redhat.com;
+Content-Language: en-US
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=pbonzini@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/09/22 02:07:04
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/09/22 00:31:51
 X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -35
 X-Spam_score: -3.6
@@ -155,44 +134,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Sep 2020 06:45:40 -0000
+X-List-Received-Date: Tue, 22 Sep 2020 06:56:22 -0000
 
-On 22.09.20 08:27, Paolo Bonzini wrote:
-> On 21/09/20 18:23, Stefan Hajnoczi wrote:
->> clang's C11 atomic_fetch_*() functions only take a C11 atomic type
->> pointer argument. QEMU uses direct types (int, etc) and this causes a
->> compiler error when a QEMU code calls these functions in a source file
->> that also included <stdatomic.h> via a system header file:
+On 22/09/20 08:45, David Hildenbrand wrote:
+>> It's certainly a good idea but it's quite verbose.
 >>
->>   $ CC=clang CXX=clang++ ./configure ... && make
->>   ../util/async.c:79:17: error: address argument to atomic operation must be a pointer to _Atomic type ('unsigned int *' invalid)
->>
->> Avoid using atomic_*() names in QEMU's atomic.h since that namespace is
->> used by <stdatomic.h>. Prefix QEMU's APIs with qemu_ so that atomic.h
->> and <stdatomic.h> can co-exist.
->>
->> This patch was generated using:
->>
->>   $ git diff | grep -o '\<atomic_[a-z0-9_]\+' | sort -u >/tmp/changed_identifiers
->>   $ for identifier in $(</tmp/changed_identifiers64); do \
->>        sed -i "s%\<$identifier\>%qemu_$identifier%" $(git grep -l "\<$identifier\>") \
->>     done
-> 
-> It's certainly a good idea but it's quite verbose.
-> 
-> What about using atomic__* as the prefix?  It is not very common in QEMU
-> but there are some cases (and I cannot think of anything better).
-> 
+>> What about using atomic__* as the prefix?  It is not very common in QEMU
+>> but there are some cases (and I cannot think of anything better).
+>
+> aqomic_*, lol :)
 
-aqomic_*, lol :)
+Actually qatomic_ would be a good one, wouldn't it?
 
-> Paolo
-> 
-
-
--- 
-Thanks,
-
-David / dhildenb
+Paolo
 
 
