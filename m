@@ -1,84 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kLsV5-00016A-3e
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Sep 2020 14:31:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50396)
+	id 1kLvXu-00008h-Sy
+	for mharc-qemu-riscv@gnu.org; Fri, 25 Sep 2020 17:46:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33636)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kLsV0-00015d-9x
- for qemu-riscv@nongnu.org; Fri, 25 Sep 2020 14:31:14 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c]:38891)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kLvXq-00006l-Kf; Fri, 25 Sep 2020 17:46:23 -0400
+Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:45943)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kLsUx-00076R-43
- for qemu-riscv@nongnu.org; Fri, 25 Sep 2020 14:31:13 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id l126so4000059pfd.5
- for <qemu-riscv@nongnu.org>; Fri, 25 Sep 2020 11:31:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=lhZEn1PnlgT2KXGEnl0nEzNyvxivF4IWqU0gtYFSDig=;
- b=jdmjQFe4b9tiSs9qr/PWbPaDd7xYP/Gkj2JT2CBGVssWMJFn0d/aLKs/RPrc/EF589
- +YSG+VneMWo+GwDX/LaIlVEmAANHuaLzAftxXCEZ9/cejLu2dtpTGJJlZLP7ZrGcDct6
- SITDvShmsf2vRc79b4y+dNw+n/Sd8tZ7XerIwy9bjqbCzqWdNdr+seaHKAonK2WhGB9V
- w2frx/zIF4bD9l6WyxAYD69BBj88rHUtSeutFmDApFmO0w6/dx8tSsdEZ/kyz41+110l
- CBVyPvMzNZmzBO6pXJaA7CKpOP8U7PIeFvi4191CNn7Up4hokLyS73yqWNwAK1RFbk91
- FdDA==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kLvXm-00056b-Ii; Fri, 25 Sep 2020 17:46:22 -0400
+Received: by mail-il1-x141.google.com with SMTP id h2so3721676ilo.12;
+ Fri, 25 Sep 2020 14:46:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=KZP6HHc7D1KN/3c3zHXsoXBSpiAUHPQAxY5YqCpgxbg=;
+ b=ryjkH5ohbZYBFYIBtGH2YhzIar+CNBpYvh+nfG6GqoaQOTlKaHnVsRRzyBTbPbWKTG
+ SDEH2w274Nr82eBbtq6+pkw/NqCiTDio5I/XjbpuIbnKsQNty2qr7rQvB9NJCgCUO/KW
+ 2m5w7BV3s2BusS+E63WbM66oB02QiW9K3zylR5r9MpvNhupdW2cJV6BZI7isjbjx86du
+ WEWFQPEI+Pvaoh85dCFHZXw+vWK7csQSzVSciToNGAnxZbTic6VBq/8pZm2d1SLee+da
+ HMrTR56qnLqCPUjr0mfZPua+nGQEEqf+ZDtltToAjq8sP3F3sVNrwXdl9QzJZe94wOGz
+ 7Xmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=lhZEn1PnlgT2KXGEnl0nEzNyvxivF4IWqU0gtYFSDig=;
- b=PrJDFEAIKy/li+Qiqp/iZIhhu8cs1A3eOtaUP4GGUYsSk5ad5c6cw4sQSIcrxRTCUG
- zr4pRVnFDaALtNuqq4/QdZ9Z0dPAjZZk9SBxGxLmsB1xMCsT+vORv1uCC8GtyEVhJMs9
- sGOcvN3MK0mvi/dvlVwf61EEEUhiAOl0egFKEjw9QEZzLOms4qH/jnx/LPRxHRB7qqFZ
- VMShYPBChaLncDEpFDIGDAHr6gVJrIj6nSf1e1/GZi9969db3jXX3A/C8lv4mGwyVuGz
- g5Drd9pxtvIohXKabiwizDT0pIkuvI72KBWCdO0/WbhhfA+J/4KGFVAbs4roYdbGFR3w
- S72w==
-X-Gm-Message-State: AOAM5329NWENUJ9TW/ojf/DJeoQLfwqqym+KzmFv1Mj+GviuAoAZykwt
- 7vCJE8RWcM8UMj2PpSw42ucaZg==
-X-Google-Smtp-Source: ABdhPJxKkPlkE2yQutrXS2NNLbvB2+xipHEVg9FEIS5f1O9+s4/7whSbSkulIyA8ZXh+gN9i54O+jA==
-X-Received: by 2002:aa7:96bb:0:b029:142:440c:6ebc with SMTP id
- g27-20020aa796bb0000b0290142440c6ebcmr665872pfk.22.1601058669621; 
- Fri, 25 Sep 2020 11:31:09 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id gg19sm2647920pjb.49.2020.09.25.11.31.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Sep 2020 11:31:08 -0700 (PDT)
-Subject: Re: [RFC v4 53/70] target/riscv: rvv-1.0: floating-point slide
- instructions
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-References: <20200817084955.28793-1-frank.chang@sifive.com>
- <20200817084955.28793-54-frank.chang@sifive.com>
- <96b9fa44-5a1b-2ac0-04ae-fa4d2857096e@linaro.org>
- <CAE_xrPhUXcMrBmRDwVBwmwA0m3QgaSAm56pYCs5QCJHOeK+S2Q@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <90fabd0c-24d4-aa56-7817-fdc528d713ac@linaro.org>
-Date: Fri, 25 Sep 2020 11:31:06 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=KZP6HHc7D1KN/3c3zHXsoXBSpiAUHPQAxY5YqCpgxbg=;
+ b=XiiSwtgmWgoc3j8mxpa1Z2K8PHEKfhxMdqSLBlg1PhjnU7Z6UZl0jo8WEV62c3uXDv
+ 9UUXTEzwvmUwXkDYXgkYGzi7Uqtub4iLA4ZZ/DkEB038Hk4Izk1BR2qYNuPA5u6xDE0G
+ xiKY8tdPgQabFdIOW56VlmYk2w44onGaB0IRrpWX2Qor5EtPA1YQ2Id9uq+hN05i2M7q
+ i89ItWfHDVjbhaF/526vMttuNAGbos8Ifti2Kut0YrdaiqwWtfZm3lqIY2RJ9pdAMHH5
+ XlN+t9kp7gJhy96s8hFm3ra0OFGD3R1sBjB/iZs1mHScEIa3n7Yx45swKbiI+T5QehGJ
+ CRLg==
+X-Gm-Message-State: AOAM5308lWICm8zL81dMcu1rqF8AQwKnlld3HngVhGtKELEaexkPIgNM
+ SuUM9EApBX+PvzdhMah+Hu/iIruUsEiYdAifj8w=
+X-Google-Smtp-Source: ABdhPJy6Px89pdEr2c6xaXc24/e/e+WOoNXK+prEYtPCdAQoPzrzAxZeuSDzJFqIvc9XybnL98K1QQGxz4GjrbpSXIw=
+X-Received: by 2002:a92:8b52:: with SMTP id i79mr1953065ild.177.1601070375035; 
+ Fri, 25 Sep 2020 14:46:15 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAE_xrPhUXcMrBmRDwVBwmwA0m3QgaSAm56pYCs5QCJHOeK+S2Q@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42c.google.com
+References: <20200901154711.18457-1-green.wan@sifive.com>
+ <20200901154711.18457-2-green.wan@sifive.com>
+In-Reply-To: <20200901154711.18457-2-green.wan@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 25 Sep 2020 14:34:56 -0700
+Message-ID: <CAKmqyKO0Y1s_8tOfD1qr6iBDN9J+yYrE5PR06ezTJfuEf0jo+g@mail.gmail.com>
+Subject: Re: [RFC PATCH v5 1/2] hw/riscv: sifive_u: Add write operation and
+ write-once protection
+To: Green Wan <green.wan@sifive.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -22
-X-Spam_score: -2.3
-X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.238,
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -91,26 +77,103 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Sep 2020 18:31:14 -0000
+X-List-Received-Date: Fri, 25 Sep 2020 21:46:23 -0000
 
-On 9/25/20 1:21 AM, Frank Chang wrote:
-> I'm happy to reuse vslide1up_vx helper functions.
-> 
-> However, opfvf_trans() takes helper prototype of:
-> /typedef void gen_helper_opfvf(TCGv_ptr, TCGv_ptr, TCGv_i64, TCGv_ptr,
->                               TCGv_env, TCGv_i32);/
-> but vslide1up_vx helper function's prototype is:
-> /typedef void gen_helper_opivx(TCGv_ptr, TCGv_ptr, TCGv, TCGv_ptr,
->                               TCGv_env, TCGv_i32);/
-> 
-> The third argument has different types, not sure if it's worth it to sync them
-> all to TCGv_i64.
+On Tue, Sep 1, 2020 at 9:09 AM Green Wan <green.wan@sifive.com> wrote:
+>
+>  - Add write operation to update fuse data bit when PWE bit is on.
+>  - Add array, fuse_wo, to store the 'written' status for all bits
+>    of OTP to block the write operation.
+>
+> Signed-off-by: Green Wan <green.wan@sifive.com>
 
-Ah, yes.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-It could be useful to always widen to TCGv_i64 -- that's what gvec does in
-general.  But I certainly won't insist.
+Alistair
 
-
-r~
+> ---
+>  hw/riscv/sifive_u_otp.c         | 30 +++++++++++++++++++++++++++++-
+>  include/hw/riscv/sifive_u_otp.h |  3 +++
+>  2 files changed, 32 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
+> index f6ecbaa2ca..b8369e9035 100644
+> --- a/hw/riscv/sifive_u_otp.c
+> +++ b/hw/riscv/sifive_u_otp.c
+> @@ -25,6 +25,14 @@
+>  #include "qemu/module.h"
+>  #include "hw/riscv/sifive_u_otp.h"
+>
+> +#define WRITTEN_BIT_ON 0x1
+> +
+> +#define SET_FUSEARRAY_BIT(map, i, off, bit)    \
+> +    map[i] = bit ? (map[i] | bit << off) : (map[i] & ~(bit << off))
+> +
+> +#define GET_FUSEARRAY_BIT(map, i, off)    \
+> +    ((map[i] >> off) & 0x1)
+> +
+>  static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
+>  {
+>      SiFiveUOTPState *s = opaque;
+> @@ -123,7 +131,24 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
+>          s->ptrim = val32;
+>          break;
+>      case SIFIVE_U_OTP_PWE:
+> -        s->pwe = val32;
+> +        s->pwe = val32 & SIFIVE_U_OTP_PWE_EN;
+> +
+> +        /* PWE is enabled. Ignore PAS=1 (no redundancy cell) */
+> +        if (s->pwe && !s->pas) {
+> +            if (GET_FUSEARRAY_BIT(s->fuse_wo, s->pa, s->paio)) {
+> +                qemu_log_mask(LOG_GUEST_ERROR,
+> +                              "Error: write idx<%u>, bit<%u>\n",
+> +                              s->pa, s->paio);
+> +                break;
+> +            }
+> +
+> +            /* write bit data */
+> +            SET_FUSEARRAY_BIT(s->fuse, s->pa, s->paio, s->pdin);
+> +
+> +            /* update written bit */
+> +            SET_FUSEARRAY_BIT(s->fuse_wo, s->pa, s->paio, WRITTEN_BIT_ON);
+> +        }
+> +
+>          break;
+>      default:
+>          qemu_log_mask(LOG_GUEST_ERROR, "%s: bad write: addr=0x%" HWADDR_PRIx
+> @@ -165,6 +190,9 @@ static void sifive_u_otp_reset(DeviceState *dev)
+>      /* Make a valid content of serial number */
+>      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR] = s->serial;
+>      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR + 1] = ~(s->serial);
+> +
+> +    /* Initialize write-once map */
+> +    memset(s->fuse_wo, 0x00, sizeof(s->fuse_wo));
+>  }
+>
+>  static void sifive_u_otp_class_init(ObjectClass *klass, void *data)
+> diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
+> index 639297564a..4a5a0acf48 100644
+> --- a/include/hw/riscv/sifive_u_otp.h
+> +++ b/include/hw/riscv/sifive_u_otp.h
+> @@ -35,6 +35,8 @@
+>  #define SIFIVE_U_OTP_PTRIM      0x34
+>  #define SIFIVE_U_OTP_PWE        0x38
+>
+> +#define SIFIVE_U_OTP_PWE_EN     (1 << 0)
+> +
+>  #define SIFIVE_U_OTP_PCE_EN     (1 << 0)
+>
+>  #define SIFIVE_U_OTP_PDSTB_EN   (1 << 0)
+> @@ -73,6 +75,7 @@ typedef struct SiFiveUOTPState {
+>      uint32_t ptrim;
+>      uint32_t pwe;
+>      uint32_t fuse[SIFIVE_U_OTP_NUM_FUSES];
+> +    uint32_t fuse_wo[SIFIVE_U_OTP_NUM_FUSES];
+>      /* config */
+>      uint32_t serial;
+>  } SiFiveUOTPState;
+> --
+> 2.17.1
+>
+>
 
