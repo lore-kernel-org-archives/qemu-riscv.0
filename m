@@ -1,72 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kMXC3-0000FX-3e
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Sep 2020 09:58:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39758)
+	id 1kMZS2-0006Fo-Sp
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Sep 2020 12:23:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34642)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=5325bd5c7=alistair.francis@wdc.com>)
- id 1kMXC0-0000Dw-Hr; Sun, 27 Sep 2020 09:58:20 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:7099)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=5325bd5c7=alistair.francis@wdc.com>)
- id 1kMXBy-0000RQ-7O; Sun, 27 Sep 2020 09:58:20 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1601215098; x=1632751098;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=ZCcrT5YMrpdRhbHJhpIScGh+bM4d/wBPd7bfiV9lqEk=;
- b=K3bdBpluvvLD/0JPZyIQcnBd9uWFauZ7TdPm5roZvxzQLHPLdkrj/heD
- Diqsn712SjgYTE5aTsnFdWcL6rXWrJ+tORY4ySpyRpYCvqcxTBbTYikzq
- e8yWiQ/mkce7E+XYaOgyBJdZonEqnUq2lKcE5xf2IX4OWiXcrj9vAJwut
- BRZs0qAVe4ZmriKflOpCsSWPDMbz9VqHuGRW2P/11ydSxPlhQ1m8kM38H
- 6Df0NpMK3alvmmQpmBC5cPD0+C361u7uwbtxu7JEl8D7MazRAyGyuDN+T
- v6CUA9IvfbVS8qUcIZUH4yU1GcV4O2XSUhzbzaPj1UVDeeRrFlvDECnlX w==;
-IronPort-SDR: BtZku4Lax1clj4qCoLu3trF5PQDgErM8Rvm2aA3C7ZxEtPt9wi9q7JOLtRu5n/5fBghCOCENQ4
- CvHL/TsuT/56wkp4VVxqqbKGBEJdZKiv9tDFEjVPFqdUPzM1yNtDJ9ZlRNVwNfenlCGiNS7iw7
- x8bEiVBIxzERfMenZszHwikvUanC35uz+oNJYLYRtEfjVSl7yCDi+qokHIEgdYvoSKPEI3ye4q
- vQPLlhU1rQgQEHt3fjWeCLp2TDssRYkn7yIFkZEbyMJ49BCpWhBp1swEEgzVM8s99cx9tx13rW
- tnw=
-X-IronPort-AV: E=Sophos;i="5.77,310,1596470400"; d="scan'208";a="148291543"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 27 Sep 2020 21:58:16 +0800
-IronPort-SDR: 1KsMsqWD+/BNgF+JRm3J3yRqUy+r9KnzJUH+npUGOlSMYWiXoAiUALzA8hFLiAbrDkOpRH506f
- vQUAwyyivZ7g==
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 Sep 2020 06:45:13 -0700
-IronPort-SDR: +HltbB0QGWRVDTc4DEgUiNbDRdA5MYyrvBOQBd1GjwtMngjlNaMYrQOnVRcI85KVvl6nzSG0EX
- E2dELgWO+6Ew==
-WDCIronportException: Internal
-Received: from usa003000.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.60.38])
- by uls-op-cesaip02.wdc.com with ESMTP; 27 Sep 2020 06:58:17 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com,
-	alistair.francis@wdc.com,
-	alistair23@gmail.com
-Subject: [PATCH v1 1/1] riscv: Convert interrupt logs to use qemu_log_mask()
-Date: Sun, 27 Sep 2020 06:47:20 -0700
-Message-Id: <20e41bdc81dbde7f9b3fdc1c768510ea99e8f565.1601214416.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.28.0
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kMZS0-0006DV-J0; Sun, 27 Sep 2020 12:23:00 -0400
+Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:33206)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kMZRz-0002uW-2s; Sun, 27 Sep 2020 12:23:00 -0400
+Received: by mail-wr1-x441.google.com with SMTP id m6so9186946wrn.0;
+ Sun, 27 Sep 2020 09:22:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=M68JkmRXaozYjBHt+u+yslwOFge8Z0KksyRMqb7/+0s=;
+ b=YR2K4n0QJwvqsKRBYC/4WFcK5nYw9IDqJJ5pEnINzTS4gR4etAmer5isyw+58zUoqN
+ iqvYONIfwx23M69FAkbLCvm+39+c2V88RSqUBynoWBdQa8prRPkVeT9ThTupiwdxKWLb
+ zTlQ2hTunTgCUKZMGZEtrP+Oe3sdW9zrkTsOtIsz3retSDHuV44blVWcgBoAw0YNDmmL
+ Xth3mF7H17kle4u126DJ2Ae+ncpxV/HH87Wlt1O7mkGQYiyzjbBfKvG6WMclvvzjAmXs
+ MOzoJ6bU1AB4AeqnuGImYN5PQUtvNP1LgAGENofYvGsglz5j8w0JkFfNAPGnwMQ5GEK3
+ aaJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=M68JkmRXaozYjBHt+u+yslwOFge8Z0KksyRMqb7/+0s=;
+ b=C9XfMzNBedJIqF+o6lyhOMFKLh2Nw86Rvx9G8rqEYZMMUQJAVWVGqudqJ/fid01DoN
+ GtuKDo38xaC+H0LOmm+y3J6kh5/BMiFdrkdXc6kAp41hFeVwsBvUppg+2rG+5KdbPUvD
+ l+4s+ZedpLdUlfoyNQUm/sMDW0FCAWl7990g/iQS17+/sold0NdNPRfcOzEOLdG3ZDB8
+ jpRj7xgnJ/r57Gg1ioKXZ7wti8ws3ngIxnFJfboMBn1WUM57cyxOFlHXedbXsU8S5DXZ
+ BpG07Jf9TyxzKaZDHWwTm8O6Bsf72IdViCtwKsFlRh7yAvxY8lMoYNBHTkaB9Gt+m/tu
+ KyTw==
+X-Gm-Message-State: AOAM530ykiaNAoBWIjbeZ4LfRCnP8Kcwx0/OLVYJwxS8LOaCFiEtY+iN
+ dYK1R2xsomYmEnr2LsVrjvE=
+X-Google-Smtp-Source: ABdhPJw8kE79NGJ8Gq0sRe249T4iu7rz6SGwGb45jAxrdgOUtONGymnS0GdeiIdNjHy8IaTuexG/ng==
+X-Received: by 2002:adf:9e43:: with SMTP id v3mr14999956wre.306.1601223777306; 
+ Sun, 27 Sep 2020 09:22:57 -0700 (PDT)
+Received: from [192.168.1.36] (74.red-83-53-161.dynamicip.rima-tde.net.
+ [83.53.161.74])
+ by smtp.gmail.com with ESMTPSA id m185sm6069286wmf.5.2020.09.27.09.22.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 27 Sep 2020 09:22:56 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH v1 1/1] riscv: Convert interrupt logs to use
+ qemu_log_mask()
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair23@gmail.com
+References: <20e41bdc81dbde7f9b3fdc1c768510ea99e8f565.1601214416.git.alistair.francis@wdc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <9ac03d37-b899-c9ae-fa48-4f30e3c3d82f@amsat.org>
+Date: Sun, 27 Sep 2020 18:22:55 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
+In-Reply-To: <20e41bdc81dbde7f9b3fdc1c768510ea99e8f565.1601214416.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.154.42;
- envelope-from=prvs=5325bd5c7=alistair.francis@wdc.com;
- helo=esa4.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/09/27 09:57:06
-X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::441;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x441.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.078, NICE_REPLY_A=-0.011,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,65 +85,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Sep 2020 13:58:21 -0000
+X-List-Received-Date: Sun, 27 Sep 2020 16:23:00 -0000
 
-Currently we log interrupts and exceptions using the trace backed in
-riscv_cpu_do_interrupt(). We also log execptions using the interrupt log
-mask (-d int) in riscv_raise_exception().
+On 9/27/20 3:47 PM, Alistair Francis wrote:
+> Currently we log interrupts and exceptions using the trace backed in
 
-This PR converts riscv_cpu_do_interrupt() to log both interrupts and
-exceptions with the interrupt log mask, so that both are printed when a
-user runs QEMU with -d int.
+s/backed/backend/
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu_helper.c | 7 +++++--
- target/riscv/op_helper.c  | 1 -
- target/riscv/trace-events | 3 ---
- 3 files changed, 5 insertions(+), 6 deletions(-)
+> riscv_cpu_do_interrupt(). We also log execptions using the interrupt log
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 904899054d..9df3238213 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -894,8 +894,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         }
-     }
- 
--    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval,
--        riscv_cpu_get_trap_name(cause, async));
-+    qemu_log_mask(CPU_LOG_INT,
-+                  "%s: hart:"TARGET_FMT_ld", async:%d, cause:"TARGET_FMT_lx", "
-+                  "epc:0x"TARGET_FMT_lx", tval:0x"TARGET_FMT_lx", desc=%s\n",
-+                  __func__, env->mhartid, async, cause, env->pc, tval,
-+                  riscv_cpu_get_trap_name(cause, async));
- 
-     if (env->priv <= PRV_S &&
-             cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 9b9ada45a9..e987bd262f 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -29,7 +29,6 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
-                                           uint32_t exception, uintptr_t pc)
- {
-     CPUState *cs = env_cpu(env);
--    qemu_log_mask(CPU_LOG_INT, "%s: %d\n", __func__, exception);
-     cs->exception_index = exception;
-     cpu_loop_exit_restore(cs, pc);
- }
-diff --git a/target/riscv/trace-events b/target/riscv/trace-events
-index b7e371ee97..6be2147c8f 100644
---- a/target/riscv/trace-events
-+++ b/target/riscv/trace-events
-@@ -1,6 +1,3 @@
--# cpu_helper.c
--riscv_trap(uint64_t hartid, bool async, uint64_t cause, uint64_t epc, uint64_t tval, const char *desc) "hart:%"PRId64", async:%d, cause:%"PRId64", epc:0x%"PRIx64", tval:0x%"PRIx64", desc=%s"
--
- # pmp.c
- pmpcfg_csr_read(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": read reg%" PRIu32", val: 0x%" PRIx64
- pmpcfg_csr_write(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": write reg%" PRIu32", val: 0x%" PRIx64
--- 
-2.28.0
+Typo "exceptions".
+
+> mask (-d int) in riscv_raise_exception().
+> 
+> This PR converts riscv_cpu_do_interrupt() to log both interrupts and
+
+s/PR/patch/
+
+> exceptions with the interrupt log mask, so that both are printed when a
+> user runs QEMU with -d int.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu_helper.c | 7 +++++--
+>  target/riscv/op_helper.c  | 1 -
+>  target/riscv/trace-events | 3 ---
+>  3 files changed, 5 insertions(+), 6 deletions(-)
+> 
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 904899054d..9df3238213 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -894,8 +894,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          }
+>      }
+>  
+> -    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval,
+> -        riscv_cpu_get_trap_name(cause, async));
+> +    qemu_log_mask(CPU_LOG_INT,
+> +                  "%s: hart:"TARGET_FMT_ld", async:%d, cause:"TARGET_FMT_lx", "
+> +                  "epc:0x"TARGET_FMT_lx", tval:0x"TARGET_FMT_lx", desc=%s\n",
+> +                  __func__, env->mhartid, async, cause, env->pc, tval,
+> +                  riscv_cpu_get_trap_name(cause, async));
+
+Maybe you want to keep the trace event, as the trace framework allow you
+to select traced events at runtime, events come with timestamp and for
+some backends the events are machine-parsable.
+
+Regardless:
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+
+>  
+>      if (env->priv <= PRV_S &&
+>              cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 9b9ada45a9..e987bd262f 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -29,7 +29,6 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
+>                                            uint32_t exception, uintptr_t pc)
+>  {
+>      CPUState *cs = env_cpu(env);
+> -    qemu_log_mask(CPU_LOG_INT, "%s: %d\n", __func__, exception);
+>      cs->exception_index = exception;
+>      cpu_loop_exit_restore(cs, pc);
+>  }
+> diff --git a/target/riscv/trace-events b/target/riscv/trace-events
+> index b7e371ee97..6be2147c8f 100644
+> --- a/target/riscv/trace-events
+> +++ b/target/riscv/trace-events
+> @@ -1,6 +1,3 @@
+> -# cpu_helper.c
+> -riscv_trap(uint64_t hartid, bool async, uint64_t cause, uint64_t epc, uint64_t tval, const char *desc) "hart:%"PRId64", async:%d, cause:%"PRId64", epc:0x%"PRIx64", tval:0x%"PRIx64", desc=%s"
+> -
+>  # pmp.c
+>  pmpcfg_csr_read(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": read reg%" PRIu32", val: 0x%" PRIx64
+>  pmpcfg_csr_write(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": write reg%" PRIu32", val: 0x%" PRIx64
+> 
 
 
