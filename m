@@ -1,66 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kMRW1-0001Gn-Cj
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Sep 2020 03:54:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40156)
+	id 1kMXC3-0000FX-3e
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Sep 2020 09:58:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39758)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kMRVz-0001Ex-NK; Sun, 27 Sep 2020 03:54:35 -0400
-Received: from szxga01-in.huawei.com ([45.249.212.187]:2936 helo=huawei.com)
+ (Exim 4.90_1)
+ (envelope-from <prvs=5325bd5c7=alistair.francis@wdc.com>)
+ id 1kMXC0-0000Dw-Hr; Sun, 27 Sep 2020 09:58:20 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:7099)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kMRVx-00030z-Ef; Sun, 27 Sep 2020 03:54:35 -0400
-Received: from DGGEMM406-HUB.china.huawei.com (unknown [172.30.72.55])
- by Forcepoint Email with ESMTP id C64D7766811F0C375C72;
- Sun, 27 Sep 2020 15:54:13 +0800 (CST)
-Received: from dggpemm000003.china.huawei.com (7.185.36.128) by
- DGGEMM406-HUB.china.huawei.com (10.3.20.214) with Microsoft SMTP Server (TLS)
- id 14.3.487.0; Sun, 27 Sep 2020 15:54:13 +0800
-Received: from dggpemm000001.china.huawei.com (7.185.36.245) by
- dggpemm000003.china.huawei.com (7.185.36.128) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1913.5; Sun, 27 Sep 2020 15:54:13 +0800
-Received: from dggpemm000001.china.huawei.com ([7.185.36.245]) by
- dggpemm000001.china.huawei.com ([7.185.36.245]) with mapi id 15.01.1913.007;
- Sun, 27 Sep 2020 15:54:13 +0800
-From: Jiangyifei <jiangyifei@huawei.com>
-To: Alistair Francis <alistair23@gmail.com>
-CC: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, "open
- list:RISC-V" <qemu-riscv@nongnu.org>, Zhanghailiang
- <zhang.zhanghailiang@huawei.com>, Sagar Karandikar
- <sagark@eecs.berkeley.edu>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>, "Zhangxiaofeng (F)"
- <victor.zhangxiaofeng@huawei.com>, Alistair Francis
- <Alistair.Francis@wdc.com>, yinyipeng <yinyipeng1@huawei.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, "Wubin (H)" <wu.wubin@huawei.com>, "dengkai (A)"
- <dengkai1@huawei.com>
-Subject: RE: [PATCH] target/riscv: raise exception to HS-mode at
- get_physical_address
-Thread-Topic: [PATCH] target/riscv: raise exception to HS-mode at
- get_physical_address
-Thread-Index: AQHWefKN/OgGU8CPl0ibaJ0/byQAGql5myUAgAK0+QA=
-Date: Sun, 27 Sep 2020 07:54:13 +0000
-Message-ID: <c1273b7d24f5488c845d81153e495b69@huawei.com>
-References: <20200824084158.1769-1-jiangyifei@huawei.com>
- <CAKmqyKOAAzhBqosJCFq9ww0T44EUZV1zqG+T1UPYAuebYbR1KQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKOAAzhBqosJCFq9ww0T44EUZV1zqG+T1UPYAuebYbR1KQ@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.174.187.31]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1)
+ (envelope-from <prvs=5325bd5c7=alistair.francis@wdc.com>)
+ id 1kMXBy-0000RQ-7O; Sun, 27 Sep 2020 09:58:20 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1601215098; x=1632751098;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=ZCcrT5YMrpdRhbHJhpIScGh+bM4d/wBPd7bfiV9lqEk=;
+ b=K3bdBpluvvLD/0JPZyIQcnBd9uWFauZ7TdPm5roZvxzQLHPLdkrj/heD
+ Diqsn712SjgYTE5aTsnFdWcL6rXWrJ+tORY4ySpyRpYCvqcxTBbTYikzq
+ e8yWiQ/mkce7E+XYaOgyBJdZonEqnUq2lKcE5xf2IX4OWiXcrj9vAJwut
+ BRZs0qAVe4ZmriKflOpCsSWPDMbz9VqHuGRW2P/11ydSxPlhQ1m8kM38H
+ 6Df0NpMK3alvmmQpmBC5cPD0+C361u7uwbtxu7JEl8D7MazRAyGyuDN+T
+ v6CUA9IvfbVS8qUcIZUH4yU1GcV4O2XSUhzbzaPj1UVDeeRrFlvDECnlX w==;
+IronPort-SDR: BtZku4Lax1clj4qCoLu3trF5PQDgErM8Rvm2aA3C7ZxEtPt9wi9q7JOLtRu5n/5fBghCOCENQ4
+ CvHL/TsuT/56wkp4VVxqqbKGBEJdZKiv9tDFEjVPFqdUPzM1yNtDJ9ZlRNVwNfenlCGiNS7iw7
+ x8bEiVBIxzERfMenZszHwikvUanC35uz+oNJYLYRtEfjVSl7yCDi+qokHIEgdYvoSKPEI3ye4q
+ vQPLlhU1rQgQEHt3fjWeCLp2TDssRYkn7yIFkZEbyMJ49BCpWhBp1swEEgzVM8s99cx9tx13rW
+ tnw=
+X-IronPort-AV: E=Sophos;i="5.77,310,1596470400"; d="scan'208";a="148291543"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 27 Sep 2020 21:58:16 +0800
+IronPort-SDR: 1KsMsqWD+/BNgF+JRm3J3yRqUy+r9KnzJUH+npUGOlSMYWiXoAiUALzA8hFLiAbrDkOpRH506f
+ vQUAwyyivZ7g==
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Sep 2020 06:45:13 -0700
+IronPort-SDR: +HltbB0QGWRVDTc4DEgUiNbDRdA5MYyrvBOQBd1GjwtMngjlNaMYrQOnVRcI85KVvl6nzSG0EX
+ E2dELgWO+6Ew==
+WDCIronportException: Internal
+Received: from usa003000.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.60.38])
+ by uls-op-cesaip02.wdc.com with ESMTP; 27 Sep 2020 06:58:17 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	alistair23@gmail.com
+Subject: [PATCH v1 1/1] riscv: Convert interrupt logs to use qemu_log_mask()
+Date: Sun, 27 Sep 2020 06:47:20 -0700
+Message-Id: <20e41bdc81dbde7f9b3fdc1c768510ea99e8f565.1601214416.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.187;
- envelope-from=jiangyifei@huawei.com; helo=huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/09/27 03:54:14
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -41
-X-Spam_score: -4.2
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.154.42;
+ envelope-from=prvs=5325bd5c7=alistair.francis@wdc.com;
+ helo=esa4.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/09/27 09:57:06
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
 X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -73,80 +79,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Sep 2020 07:54:36 -0000
+X-List-Received-Date: Sun, 27 Sep 2020 13:58:21 -0000
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogQWxpc3RhaXIgRnJhbmNp
-cyBbbWFpbHRvOmFsaXN0YWlyMjNAZ21haWwuY29tXQ0KPiBTZW50OiBTYXR1cmRheSwgU2VwdGVt
-YmVyIDI2LCAyMDIwIDY6MjQgQU0NCj4gVG86IEppYW5neWlmZWkgPGppYW5neWlmZWlAaHVhd2Vp
-LmNvbT4NCj4gQ2M6IHFlbXUtZGV2ZWxAbm9uZ251Lm9yZyBEZXZlbG9wZXJzIDxxZW11LWRldmVs
-QG5vbmdudS5vcmc+OyBvcGVuDQo+IGxpc3Q6UklTQy1WIDxxZW11LXJpc2N2QG5vbmdudS5vcmc+
-OyBaaGFuZ2hhaWxpYW5nDQo+IDx6aGFuZy56aGFuZ2hhaWxpYW5nQGh1YXdlaS5jb20+OyBTYWdh
-ciBLYXJhbmRpa2FyDQo+IDxzYWdhcmtAZWVjcy5iZXJrZWxleS5lZHU+OyBCYXN0aWFuIEtvcHBl
-bG1hbm4NCj4gPGtiYXN0aWFuQG1haWwudW5pLXBhZGVyYm9ybi5kZT47IFpoYW5neGlhb2Zlbmcg
-KEYpDQo+IDx2aWN0b3Iuemhhbmd4aWFvZmVuZ0BodWF3ZWkuY29tPjsgQWxpc3RhaXIgRnJhbmNp
-cw0KPiA8QWxpc3RhaXIuRnJhbmNpc0B3ZGMuY29tPjsgeWlueWlwZW5nIDx5aW55aXBlbmcxQGh1
-YXdlaS5jb20+OyBQYWxtZXINCj4gRGFiYmVsdCA8cGFsbWVyQGRhYmJlbHQuY29tPjsgV3ViaW4g
-KEgpIDx3dS53dWJpbkBodWF3ZWkuY29tPjsNCj4gZGVuZ2thaSAoQSkgPGRlbmdrYWkxQGh1YXdl
-aS5jb20+DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0hdIHRhcmdldC9yaXNjdjogcmFpc2UgZXhjZXB0
-aW9uIHRvIEhTLW1vZGUgYXQNCj4gZ2V0X3BoeXNpY2FsX2FkZHJlc3MNCj4gDQo+IE9uIE1vbiwg
-QXVnIDI0LCAyMDIwIGF0IDE6NDMgQU0gWWlmZWkgSmlhbmcgPGppYW5neWlmZWlAaHVhd2VpLmNv
-bT4gd3JvdGU6DQo+ID4NCj4gPiBWUy1zdGFnZSB0cmFuc2xhdGlvbiBhdCBnZXRfcGh5c2ljYWxf
-YWRkcmVzcyBuZWVkcyB0byB0cmFuc2xhdGUgcHRlDQo+ID4gYWRkcmVzcyBieSBHLXN0YWdlIHRy
-YW5zbGF0aW9uLiBCdXQgdGhlIEctc3RhZ2UgdHJhbnNsYXRpb24gZXJyb3IgY2FuDQo+ID4gbm90
-IGJlIGRpc3Rpbmd1aXNoZWQgZnJvbSBWUy1zdGFnZSB0cmFuc2xhdGlvbiBlcnJvciBpbg0KPiA+
-IHJpc2N2X2NwdV90bGJfZmlsbC4gT24gbWlncmF0aW9uLCBkZXN0aW5hdGlvbiBuZWVkcyB0byBy
-ZWJ1aWxkIHB0ZSwNCj4gPiBhbmQgdGhpcyBHLXN0YWdlIHRyYW5zbGF0aW9uIGVycm9yIG11c3Qg
-YmUgaGFuZGxlZCBieSBIUy1tb2RlLiBTbw0KPiA+IGludHJvZHVjZSBUUkFOU0xBVEVfU1RBR0Uy
-X0ZBSUwgc28gdGhhdCByaXNjdl9jcHVfdGxiX2ZpbGwgY291bGQNCj4gPiBkaXN0aW5ndWlzaCBh
-bmQgcmFpc2UgaXQgdG8gSFMtbW9kZS4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IFlpZmVpIEpp
-YW5nIDxqaWFuZ3lpZmVpQGh1YXdlaS5jb20+DQo+ID4gU2lnbmVkLW9mZi1ieTogWWlwZW5nIFlp
-biA8eWlueWlwZW5nMUBodWF3ZWkuY29tPg0KPiANCj4gVGhhbmtzIGZvciB0aGUgcGF0Y2ghDQo+
-IA0KPiBTb3JyeSBmb3IgdGhlIGRlbGF5IGhlcmUuDQo+IA0KPiA+IC0tLQ0KPiA+ICB0YXJnZXQv
-cmlzY3YvY3B1LmggICAgICAgIHwgIDEgKw0KPiA+ICB0YXJnZXQvcmlzY3YvY3B1X2hlbHBlci5j
-IHwgMTIgKysrKysrKysrKy0tDQo+ID4gIDIgZmlsZXMgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygr
-KSwgMiBkZWxldGlvbnMoLSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3YvY3B1
-LmggYi90YXJnZXQvcmlzY3YvY3B1LmggaW5kZXgNCj4gPiBhODA0YTVkMGJhLi44YjNiMzY4ZDZh
-IDEwMDY0NA0KPiA+IC0tLSBhL3RhcmdldC9yaXNjdi9jcHUuaA0KPiA+ICsrKyBiL3RhcmdldC9y
-aXNjdi9jcHUuaA0KPiA+IEBAIC04NSw2ICs4NSw3IEBAIGVudW0gew0KPiA+ICAjZGVmaW5lIFRS
-QU5TTEFURV9GQUlMIDENCj4gPiAgI2RlZmluZSBUUkFOU0xBVEVfU1VDQ0VTUyAwDQo+ID4gICNk
-ZWZpbmUgTU1VX1VTRVJfSURYIDMNCj4gPiArI2RlZmluZSBUUkFOU0xBVEVfR19TVEFHRV9GQUlM
-IDQNCj4gPg0KPiA+ICAjZGVmaW5lIE1BWF9SSVNDVl9QTVBTICgxNikNCj4gPg0KPiA+IGRpZmYg
-LS1naXQgYS90YXJnZXQvcmlzY3YvY3B1X2hlbHBlci5jIGIvdGFyZ2V0L3Jpc2N2L2NwdV9oZWxw
-ZXIuYw0KPiA+IGluZGV4IGZkMWQzNzNiNmYuLjE2MzViMDljNDEgMTAwNjQ0DQo+ID4gLS0tIGEv
-dGFyZ2V0L3Jpc2N2L2NwdV9oZWxwZXIuYw0KPiA+ICsrKyBiL3RhcmdldC9yaXNjdi9jcHVfaGVs
-cGVyLmMNCj4gPiBAQCAtNDQwLDcgKzQ0MCwxMCBAQCByZXN0YXJ0Og0KPiA+ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbW11X2lkeCwNCj4gZmFsc2Us
-DQo+ID4gdHJ1ZSk7DQo+ID4NCj4gPiAgICAgICAgICAgICAgaWYgKHZiYXNlX3JldCAhPSBUUkFO
-U0xBVEVfU1VDQ0VTUykgew0KPiA+IC0gICAgICAgICAgICAgICAgcmV0dXJuIHZiYXNlX3JldDsN
-Cj4gPiArICAgICAgICAgICAgICAgIGVudi0+Z3Vlc3RfcGh5c19mYXVsdF9hZGRyID0gKGJhc2Ug
-fA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKGFk
-ZHIgJg0KPiA+ICsNCj4gKFRBUkdFVF9QQUdFX1NJWkUgLQ0KPiA+ICsgMSkpKSA+PiAyOw0KPiAN
-Cj4gQ2FuIHdlIHNldCBndWVzdF9waHlzX2ZhdWx0X2FkZHIgaW4gcmlzY3ZfY3B1X3RsYl9maWxs
-KCkgaW5zdGVhZD8NCg0KSGkgQWxpc3RhaXIsDQoNCkl0J3Mgbm90IGVhc3kgdG8gZG8gdGhhdC4g
-VGhlIGtleSBpcyB0aGF0IHRoZSB3cm9uZyBhZGRyZXNzKHRoZSBgYmFzZWAgdmFyaWFibGUpIGlz
-IG5vdCB2aXNpYmxlIHRvIHJpc2N2X2NwdV90bGJfZmlsbCgpLg0KQmVjYXVzZSB0aGUgd3Jvbmcg
-YWRkcmVzcyBtYXkgYmUgZnJvbSBhbnkgbGV2ZWwgb2YgUFRFIHdoaWNoIGNhbid0IGJlIGVhc2ls
-eSBvYnRhaW5lZCBieSByaXNjdl9jcHVfdGxiX2ZpbGwoKS4NClRoZSBhbHRlcm5hdGl2ZSBpcyB0
-byBhZGQgYW4gb3V0IHBhcmFtZXRlciBpbiBnZXRfcGh5c2ljYWxfYWRkcmVzcygpLiBCdXQgaXQg
-aXMgbm90IGVpdGhlciBlbGVnYW50Lg0KV2hhdCBpcyB5b3VyIGFkdmljZT8NCg0KQmVzdCBSZWdh
-cmRzLA0KWWlmZWkNCg0KPiANCj4gPiArICAgICAgICAgICAgICAgIHJldHVybiBUUkFOU0xBVEVf
-R19TVEFHRV9GQUlMOw0KPiA+ICAgICAgICAgICAgICB9DQo+ID4NCj4gPiAgICAgICAgICAgICAg
-cHRlX2FkZHIgPSB2YmFzZSArIGlkeCAqIHB0ZXNpemU7IEBAIC03MjgsMTIgKzczMSwxNyBAQA0K
-PiA+IGJvb2wgcmlzY3ZfY3B1X3RsYl9maWxsKENQVVN0YXRlICpjcywgdmFkZHIgYWRkcmVzcywg
-aW50IHNpemUsDQo+ID4gICAgICAgICAgcmV0ID0gZ2V0X3BoeXNpY2FsX2FkZHJlc3MoZW52LCAm
-cGEsICZwcm90LCBhZGRyZXNzLA0KPiBhY2Nlc3NfdHlwZSwNCj4gPiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBtbXVfaWR4LCB0cnVlLCB0cnVlKTsNCj4gPg0KPiA+ICsgICAg
-ICAgIGlmIChyZXQgPT0gVFJBTlNMQVRFX0dfU1RBR0VfRkFJTCkgew0KPiA+ICsgICAgICAgICAg
-ICBmaXJzdF9zdGFnZV9lcnJvciA9IGZhbHNlOw0KPiA+ICsgICAgICAgICAgICBhY2Nlc3NfdHlw
-ZSA9IE1NVV9EQVRBX0xPQUQ7DQo+ID4gKyAgICAgICAgfQ0KPiA+ICsNCj4gPiAgICAgICAgICBx
-ZW11X2xvZ19tYXNrKENQVV9MT0dfTU1VLA0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIiVz
-IDFzdC1zdGFnZSBhZGRyZXNzPSUiIFZBRERSX1BSSXggIg0KPiByZXQgJWQgcGh5c2ljYWwgIg0K
-PiA+ICAgICAgICAgICAgICAgICAgICAgICAgVEFSR0VUX0ZNVF9wbHggIiBwcm90ICVkXG4iLA0K
-PiA+ICAgICAgICAgICAgICAgICAgICAgICAgX19mdW5jX18sIGFkZHJlc3MsIHJldCwgcGEsIHBy
-b3QpOw0KPiA+DQo+ID4gLSAgICAgICAgaWYgKHJldCAhPSBUUkFOU0xBVEVfRkFJTCkgew0KPiA+
-ICsgICAgICAgIGlmIChyZXQgIT0gVFJBTlNMQVRFX0ZBSUwgJiYgcmV0ICE9IFRSQU5TTEFURV9H
-X1NUQUdFX0ZBSUwpIHsNCj4gDQo+IE90aGVyd2lzZSB0aGlzIHBhdGNoIGxvb2tzIGNvcnJlY3Qu
-DQo+IA0KPiBBbGlzdGFpcg0KPiANCj4gPiAgICAgICAgICAgICAgLyogU2Vjb25kIHN0YWdlIGxv
-b2t1cCAqLw0KPiA+ICAgICAgICAgICAgICBpbV9hZGRyZXNzID0gcGE7DQo+ID4NCj4gPiAtLQ0K
-PiA+IDIuMTkuMQ0KPiA+DQo+ID4NCj4gPg0K
+Currently we log interrupts and exceptions using the trace backed in
+riscv_cpu_do_interrupt(). We also log execptions using the interrupt log
+mask (-d int) in riscv_raise_exception().
+
+This PR converts riscv_cpu_do_interrupt() to log both interrupts and
+exceptions with the interrupt log mask, so that both are printed when a
+user runs QEMU with -d int.
+
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu_helper.c | 7 +++++--
+ target/riscv/op_helper.c  | 1 -
+ target/riscv/trace-events | 3 ---
+ 3 files changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 904899054d..9df3238213 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -894,8 +894,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         }
+     }
+ 
+-    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval,
+-        riscv_cpu_get_trap_name(cause, async));
++    qemu_log_mask(CPU_LOG_INT,
++                  "%s: hart:"TARGET_FMT_ld", async:%d, cause:"TARGET_FMT_lx", "
++                  "epc:0x"TARGET_FMT_lx", tval:0x"TARGET_FMT_lx", desc=%s\n",
++                  __func__, env->mhartid, async, cause, env->pc, tval,
++                  riscv_cpu_get_trap_name(cause, async));
+ 
+     if (env->priv <= PRV_S &&
+             cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 9b9ada45a9..e987bd262f 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -29,7 +29,6 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
+                                           uint32_t exception, uintptr_t pc)
+ {
+     CPUState *cs = env_cpu(env);
+-    qemu_log_mask(CPU_LOG_INT, "%s: %d\n", __func__, exception);
+     cs->exception_index = exception;
+     cpu_loop_exit_restore(cs, pc);
+ }
+diff --git a/target/riscv/trace-events b/target/riscv/trace-events
+index b7e371ee97..6be2147c8f 100644
+--- a/target/riscv/trace-events
++++ b/target/riscv/trace-events
+@@ -1,6 +1,3 @@
+-# cpu_helper.c
+-riscv_trap(uint64_t hartid, bool async, uint64_t cause, uint64_t epc, uint64_t tval, const char *desc) "hart:%"PRId64", async:%d, cause:%"PRId64", epc:0x%"PRIx64", tval:0x%"PRIx64", desc=%s"
+-
+ # pmp.c
+ pmpcfg_csr_read(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": read reg%" PRIu32", val: 0x%" PRIx64
+ pmpcfg_csr_write(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": write reg%" PRIu32", val: 0x%" PRIx64
+-- 
+2.28.0
+
 
