@@ -1,78 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kMZS2-0006Fo-Sp
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Sep 2020 12:23:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34642)
+	id 1kMpIl-000668-44
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Sep 2020 05:18:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47564)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kMZS0-0006DV-J0; Sun, 27 Sep 2020 12:23:00 -0400
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:33206)
+ (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
+ id 1kMpIi-000642-7C
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2020 05:18:28 -0400
+Received: from mail-qk1-x744.google.com ([2607:f8b0:4864:20::744]:37628)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kMZRz-0002uW-2s; Sun, 27 Sep 2020 12:23:00 -0400
-Received: by mail-wr1-x441.google.com with SMTP id m6so9186946wrn.0;
- Sun, 27 Sep 2020 09:22:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=M68JkmRXaozYjBHt+u+yslwOFge8Z0KksyRMqb7/+0s=;
- b=YR2K4n0QJwvqsKRBYC/4WFcK5nYw9IDqJJ5pEnINzTS4gR4etAmer5isyw+58zUoqN
- iqvYONIfwx23M69FAkbLCvm+39+c2V88RSqUBynoWBdQa8prRPkVeT9ThTupiwdxKWLb
- zTlQ2hTunTgCUKZMGZEtrP+Oe3sdW9zrkTsOtIsz3retSDHuV44blVWcgBoAw0YNDmmL
- Xth3mF7H17kle4u126DJ2Ae+ncpxV/HH87Wlt1O7mkGQYiyzjbBfKvG6WMclvvzjAmXs
- MOzoJ6bU1AB4AeqnuGImYN5PQUtvNP1LgAGENofYvGsglz5j8w0JkFfNAPGnwMQ5GEK3
- aaJQ==
+ (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
+ id 1kMpIf-0002ii-8q
+ for qemu-riscv@nongnu.org; Mon, 28 Sep 2020 05:18:27 -0400
+Received: by mail-qk1-x744.google.com with SMTP id 16so309734qkf.4
+ for <qemu-riscv@nongnu.org>; Mon, 28 Sep 2020 02:18:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=zydUDfHqvBBYKXIwxde4mSeIqQaIEeuMG9Pyz0aVv9Q=;
+ b=JF3ZR2PVmpxinZYu92P1VJ9K13Q7tzg5PvaNqER/L8KMxwGceNTZO7neGuD+qW7jR3
+ qLV3i5J+nr8SCBULEIMMps2urVoN2hUf1xKNR3duRFc5a63D1zOL+/ZF0GkiGgDllHKS
+ HUyhKjzI7ZdV6zR/TIZjMij5PN64H6c6cEQ3Ji5QpUI6boblLw9aN37oKodIUP773BPF
+ tYkklLozXmnrQHRkgh0DcnSb/jCYni5XJY4BMzqAjmiMwnaOWYpngtcw2+Vfva2W24Xf
+ 7BWg/8idwyupvs7QtXAfHgydlDNZPc+UkU8po2c9/1V5B9HBL2M6gneY1+mHqaOdYTge
+ MnVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=M68JkmRXaozYjBHt+u+yslwOFge8Z0KksyRMqb7/+0s=;
- b=C9XfMzNBedJIqF+o6lyhOMFKLh2Nw86Rvx9G8rqEYZMMUQJAVWVGqudqJ/fid01DoN
- GtuKDo38xaC+H0LOmm+y3J6kh5/BMiFdrkdXc6kAp41hFeVwsBvUppg+2rG+5KdbPUvD
- l+4s+ZedpLdUlfoyNQUm/sMDW0FCAWl7990g/iQS17+/sold0NdNPRfcOzEOLdG3ZDB8
- jpRj7xgnJ/r57Gg1ioKXZ7wti8ws3ngIxnFJfboMBn1WUM57cyxOFlHXedbXsU8S5DXZ
- BpG07Jf9TyxzKaZDHWwTm8O6Bsf72IdViCtwKsFlRh7yAvxY8lMoYNBHTkaB9Gt+m/tu
- KyTw==
-X-Gm-Message-State: AOAM530ykiaNAoBWIjbeZ4LfRCnP8Kcwx0/OLVYJwxS8LOaCFiEtY+iN
- dYK1R2xsomYmEnr2LsVrjvE=
-X-Google-Smtp-Source: ABdhPJw8kE79NGJ8Gq0sRe249T4iu7rz6SGwGb45jAxrdgOUtONGymnS0GdeiIdNjHy8IaTuexG/ng==
-X-Received: by 2002:adf:9e43:: with SMTP id v3mr14999956wre.306.1601223777306; 
- Sun, 27 Sep 2020 09:22:57 -0700 (PDT)
-Received: from [192.168.1.36] (74.red-83-53-161.dynamicip.rima-tde.net.
- [83.53.161.74])
- by smtp.gmail.com with ESMTPSA id m185sm6069286wmf.5.2020.09.27.09.22.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 27 Sep 2020 09:22:56 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v1 1/1] riscv: Convert interrupt logs to use
- qemu_log_mask()
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair23@gmail.com
-References: <20e41bdc81dbde7f9b3fdc1c768510ea99e8f565.1601214416.git.alistair.francis@wdc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <9ac03d37-b899-c9ae-fa48-4f30e3c3d82f@amsat.org>
-Date: Sun, 27 Sep 2020 18:22:55 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=zydUDfHqvBBYKXIwxde4mSeIqQaIEeuMG9Pyz0aVv9Q=;
+ b=cGNRvTh/VWNmjS/pKelofZupfXfU8GC2bFslPHsulBNXnR539UxLlDbZJuF9QCfUMN
+ 0bmDb1SQSGllvQajsDjpFZR7QfpK7HvhaL/GLOMAH6SnZZzEIn++UvnrvgPqVZNeNUGV
+ xF6nVbvOg5IgdferlfT8CDcygCdmP7D+NeD255J5aNbNE5xWY5BByMfvPPK23hJCb5GN
+ MPOAvvhFlZM455rDoqsjnUatWmlIFLtufq1amNwq9BxgzQuT2icKbQAIufj5NdwpMSn/
+ Xp1eFoQhdxaV+ySGPVKLkxSvFhkM41i9SdEwsd8W1lOeHC9CBlS6fLp+48Uh54yN9EJW
+ 44Ig==
+X-Gm-Message-State: AOAM533x6x1yQ5ozX32c63XMhc0iknIyYuwxBw5SaYd6prVt11DYbLo3
+ elEpORETswfe87YRSL5WI+pS3B3VsZeblM0jmm5uwA==
+X-Google-Smtp-Source: ABdhPJxd9ogz4hpvfQ2DAEO7nBUIkN6Z1qOxwylFBzaBEypn1PVDfNfliDriLwSmWBSWHEal8Q16+gDdAUQzZqLC2J0=
+X-Received: by 2002:a37:5a47:: with SMTP id o68mr505918qkb.234.1601284702925; 
+ Mon, 28 Sep 2020 02:18:22 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20e41bdc81dbde7f9b3fdc1c768510ea99e8f565.1601214416.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::441;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x441.google.com
+References: <20200901154711.18457-1-green.wan@sifive.com>
+ <20200901154711.18457-3-green.wan@sifive.com>
+ <CAKmqyKOqQgE0X3T100Zzi6_8X5d9XVEjam01bhCZSU=-FL-ecw@mail.gmail.com>
+In-Reply-To: <CAKmqyKOqQgE0X3T100Zzi6_8X5d9XVEjam01bhCZSU=-FL-ecw@mail.gmail.com>
+From: Green Wan <green.wan@sifive.com>
+Date: Mon, 28 Sep 2020 17:18:11 +0800
+Message-ID: <CAJivOr4xLP1n4eVFyWHi=ckg17C_j76f=+o+YPztsYuaPDwCCw@mail.gmail.com>
+Subject: Re: [RFC PATCH v5 2/2] hw/riscv: sifive_u: Add backend drive support
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::744;
+ envelope-from=green.wan@sifive.com; helo=mail-qk1-x744.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.078, NICE_REPLY_A=-0.011,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -85,82 +78,193 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Sep 2020 16:23:00 -0000
+X-List-Received-Date: Mon, 28 Sep 2020 09:18:28 -0000
 
-On 9/27/20 3:47 PM, Alistair Francis wrote:
-> Currently we log interrupts and exceptions using the trace backed in
+Hi Alistair,
 
-s/backed/backend/
+Thanks for the review. See the reply inline below.
 
-> riscv_cpu_do_interrupt(). We also log execptions using the interrupt log
 
-Typo "exceptions".
+On Sat, Sep 26, 2020 at 5:52 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Tue, Sep 1, 2020 at 8:49 AM Green Wan <green.wan@sifive.com> wrote:
+> >
+> > Add '-drive' support to OTP device. Allow users to assign a raw file
+> > as OTP image.
+>
+> Do you mind writing an example command line argument in the commit message?
+>
+> Also, do you have a test case for this? I would like to add it to my CI.
+>
 
-> mask (-d int) in riscv_raise_exception().
-> 
-> This PR converts riscv_cpu_do_interrupt() to log both interrupts and
+Do you mean qtest? I run uboot and use uboot driver to test it and
+didn't create a qemu test case.
+Here is the command I use:
 
-s/PR/patch/
+$ qemu-system-riscv64 -M sifive_u -m 256M -nographic -bios none
+-kernel ../opensbi/build/platform/sifive/fu540/firmware/fw_payload.elf
+-d guest_errors -drive if=none,format=raw,file=otp.img
 
-> exceptions with the interrupt log mask, so that both are printed when a
-> user runs QEMU with -d int.
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu_helper.c | 7 +++++--
->  target/riscv/op_helper.c  | 1 -
->  target/riscv/trace-events | 3 ---
->  3 files changed, 5 insertions(+), 6 deletions(-)
-> 
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 904899054d..9df3238213 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -894,8 +894,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->          }
->      }
->  
-> -    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval,
-> -        riscv_cpu_get_trap_name(cause, async));
-> +    qemu_log_mask(CPU_LOG_INT,
-> +                  "%s: hart:"TARGET_FMT_ld", async:%d, cause:"TARGET_FMT_lx", "
-> +                  "epc:0x"TARGET_FMT_lx", tval:0x"TARGET_FMT_lx", desc=%s\n",
-> +                  __func__, env->mhartid, async, cause, env->pc, tval,
-> +                  riscv_cpu_get_trap_name(cause, async));
+I'll check how to create a test case but maybe not that soon in the next patch.
 
-Maybe you want to keep the trace event, as the trace framework allow you
-to select traced events at runtime, events come with timestamp and for
-some backends the events are machine-parsable.
+> >
+> > Signed-off-by: Green Wan <green.wan@sifive.com>
+> > ---
+> >  hw/riscv/sifive_u_otp.c         | 50 +++++++++++++++++++++++++++++++++
+> >  include/hw/riscv/sifive_u_otp.h |  2 ++
+> >  2 files changed, 52 insertions(+)
+> >
+> > diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
+> > index b8369e9035..477c54c7b8 100644
+> > --- a/hw/riscv/sifive_u_otp.c
+> > +++ b/hw/riscv/sifive_u_otp.c
+> > @@ -24,6 +24,8 @@
+> >  #include "qemu/log.h"
+> >  #include "qemu/module.h"
+> >  #include "hw/riscv/sifive_u_otp.h"
+> > +#include "sysemu/blockdev.h"
+> > +#include "sysemu/block-backend.h"
+> >
+> >  #define WRITTEN_BIT_ON 0x1
+> >
+> > @@ -54,6 +56,16 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
+> >          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
+> >              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
+> >              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
+> > +
+> > +            /* read from backend */
+> > +            if (s->blk) {
+> > +                int32_t buf;
+> > +
+> > +                blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
+> > +                          SIFIVE_U_OTP_FUSE_WORD);
+> > +                return buf;
+> > +            }
+> > +
+> >              return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
+> >          } else {
+> >              return 0xff;
+> > @@ -145,6 +157,12 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
+> >              /* write bit data */
+> >              SET_FUSEARRAY_BIT(s->fuse, s->pa, s->paio, s->pdin);
+> >
+> > +            /* write to backend */
+> > +            if (s->blk) {
+> > +                blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &val32,
+> > +                           SIFIVE_U_OTP_FUSE_WORD, 0);
+> > +            }
+> > +
+> >              /* update written bit */
+> >              SET_FUSEARRAY_BIT(s->fuse_wo, s->pa, s->paio, WRITTEN_BIT_ON);
+> >          }
+> > @@ -168,16 +186,48 @@ static const MemoryRegionOps sifive_u_otp_ops = {
+> >
+> >  static Property sifive_u_otp_properties[] = {
+> >      DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
+> > +    DEFINE_PROP_DRIVE("drive", SiFiveUOTPState, blk),
+> >      DEFINE_PROP_END_OF_LIST(),
+> >  };
+> >
+> >  static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
+> >  {
+> >      SiFiveUOTPState *s = SIFIVE_U_OTP(dev);
+> > +    DriveInfo *dinfo;
+> >
+> >      memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_u_otp_ops, s,
+> >                            TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
+> >      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
+> > +
+> > +    dinfo = drive_get_next(IF_NONE);
+> > +    if (dinfo) {
+> > +        int ret;
+> > +        uint64_t perm;
+> > +        int filesize;
+> > +        BlockBackend *blk;
+> > +
+> > +        blk = blk_by_legacy_dinfo(dinfo);
+>
+> I think this should be:
+>
+> blk = dinfo ? blk_by_legacy_dinfo(dinfo) : NULL;
+>
 
-Regardless:
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+The previous code, "if (dinfo)", should check NULL already. But we can
+add more checks for blk such as qdev_prop_set_drive_err().
 
->  
->      if (env->priv <= PRV_S &&
->              cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 9b9ada45a9..e987bd262f 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -29,7 +29,6 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
->                                            uint32_t exception, uintptr_t pc)
->  {
->      CPUState *cs = env_cpu(env);
-> -    qemu_log_mask(CPU_LOG_INT, "%s: %d\n", __func__, exception);
->      cs->exception_index = exception;
->      cpu_loop_exit_restore(cs, pc);
->  }
-> diff --git a/target/riscv/trace-events b/target/riscv/trace-events
-> index b7e371ee97..6be2147c8f 100644
-> --- a/target/riscv/trace-events
-> +++ b/target/riscv/trace-events
-> @@ -1,6 +1,3 @@
-> -# cpu_helper.c
-> -riscv_trap(uint64_t hartid, bool async, uint64_t cause, uint64_t epc, uint64_t tval, const char *desc) "hart:%"PRId64", async:%d, cause:%"PRId64", epc:0x%"PRIx64", tval:0x%"PRIx64", desc=%s"
-> -
->  # pmp.c
->  pmpcfg_csr_read(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": read reg%" PRIu32", val: 0x%" PRIx64
->  pmpcfg_csr_write(uint64_t mhartid, uint32_t reg_index, uint64_t val) "hart %" PRIu64 ": write reg%" PRIu32", val: 0x%" PRIx64
-> 
+> > +        filesize = SIFIVE_U_OTP_NUM_FUSES * SIFIVE_U_OTP_FUSE_WORD;
+> > +        if (blk_getlength(blk) < filesize) {
+> > +            qemu_log_mask(LOG_GUEST_ERROR, "OTP drive size < 16K\n");
+>
+> You should probably be setting errp instead.
+>
+> If a user specified a -drive argument, they probably want to error if
+> we aren't going to use it.
+>
 
+Will set an errp.
+
+> > +            return;
+> > +        }
+> > +
+> > +        qdev_prop_set_drive(dev, "drive", blk);
+> > +
+> > +        perm = BLK_PERM_CONSISTENT_READ |
+> > +                        (blk_is_read_only(s->blk) ? 0 : BLK_PERM_WRITE);
+> > +        ret = blk_set_perm(s->blk, perm, BLK_PERM_ALL, errp);
+> > +        if (ret < 0) {
+> > +            qemu_log_mask(LOG_GUEST_ERROR, "set perm error.");
+>
+> Is it worth printing the error?
+>
+Probably add it when I test it. Will remove it.
+
+> > +        }
+> > +
+> > +        if (blk_pread(s->blk, 0, s->fuse, filesize) != filesize) {
+> > +            qemu_log_mask(LOG_GUEST_ERROR,
+> > +                          "failed to read the initial flash content");
+> > +            return;
+>
+> You don't need a return here.
+>
+k, will remove it and set errp.
+
+> Is this error fatal?
+>
+This shouldn't be fatal but it might lead to unknown state if the
+content is read partially.
+But the checking, "filesize < 16K", is fatal. It leads qemu to abort.
+
+
+> Alistair
+>
+> > +        }
+> > +    }
+> >  }
+> >
+> >  static void sifive_u_otp_reset(DeviceState *dev)
+> > diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
+> > index 4a5a0acf48..9bc781fd4f 100644
+> > --- a/include/hw/riscv/sifive_u_otp.h
+> > +++ b/include/hw/riscv/sifive_u_otp.h
+> > @@ -45,6 +45,7 @@
+> >
+> >  #define SIFIVE_U_OTP_PA_MASK        0xfff
+> >  #define SIFIVE_U_OTP_NUM_FUSES      0x1000
+> > +#define SIFIVE_U_OTP_FUSE_WORD      4
+> >  #define SIFIVE_U_OTP_SERIAL_ADDR    0xfc
+> >
+> >  #define SIFIVE_U_OTP_REG_SIZE       0x1000
+> > @@ -78,6 +79,7 @@ typedef struct SiFiveUOTPState {
+> >      uint32_t fuse_wo[SIFIVE_U_OTP_NUM_FUSES];
+> >      /* config */
+> >      uint32_t serial;
+> > +    BlockBackend *blk;
+> >  } SiFiveUOTPState;
+> >
+> >  #endif /* HW_SIFIVE_U_OTP_H */
+> > --
+> > 2.17.1
+> >
+> >
 
