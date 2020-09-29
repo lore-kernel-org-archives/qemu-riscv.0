@@ -1,20 +1,20 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kN50M-0004uM-EK
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Sep 2020 22:04:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40636)
+	id 1kN50O-0004vP-GZ
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Sep 2020 22:04:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40642)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kN50B-0004qe-N3; Mon, 28 Sep 2020 22:04:23 -0400
-Received: from szxga06-in.huawei.com ([45.249.212.32]:51140 helo=huawei.com)
+ id 1kN50J-0004tk-3C; Mon, 28 Sep 2020 22:04:32 -0400
+Received: from szxga06-in.huawei.com ([45.249.212.32]:51386 helo=huawei.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kN507-0002wm-E8; Mon, 28 Sep 2020 22:04:23 -0400
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id C135571F64CF45F35389;
- Tue, 29 Sep 2020 10:03:59 +0800 (CST)
+ id 1kN507-0002xk-19; Mon, 28 Sep 2020 22:04:30 -0400
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 0AD9ED44556F085003C0;
+ Tue, 29 Sep 2020 10:04:10 +0800 (CST)
 Received: from huawei.com (10.174.187.31) by DGGEMS407-HUB.china.huawei.com
  (10.3.19.207) with Microsoft SMTP Server id 14.3.487.0; Tue, 29 Sep 2020
- 10:03:52 +0800
+ 10:04:00 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
@@ -22,10 +22,12 @@ CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
  <victor.zhangxiaofeng@huawei.com>, <wu.wubin@huawei.com>,
  <zhang.zhanghailiang@huawei.com>, <dengkai1@huawei.com>,
  <yinyipeng1@huawei.com>, Yifei Jiang <jiangyifei@huawei.com>
-Subject: [PATCH 0/5] Support RISC-V migration
-Date: Tue, 29 Sep 2020 10:03:32 +0800
-Message-ID: <20200929020337.1559-1-jiangyifei@huawei.com>
+Subject: [PATCH 5/5] target/riscv: Add sifive_plic vmstate
+Date: Tue, 29 Sep 2020 10:03:37 +0800
+Message-ID: <20200929020337.1559-6-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
+In-Reply-To: <20200929020337.1559-1-jiangyifei@huawei.com>
+References: <20200929020337.1559-1-jiangyifei@huawei.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain
@@ -53,34 +55,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2020 02:04:25 -0000
+X-List-Received-Date: Tue, 29 Sep 2020 02:04:34 -0000
 
-This patches supported RISC-V migration based on tcg accel. And we have
-verified related migration features such as snapshot and live migration.
+Add sifive_plic vmstate for supporting sifive_plic migration.
+Current vmstate framework only supports one structure parameter
+as num field to describe variable length arrays, so introduce
+num_enables.
 
-A few weeks ago, we submitted RFC patches about supporting RISC-V migration
-based on kvm accel: https://www.spinics.net/lists/kvm/msg223605.html.
-And we found that tcg accelerated migration can be supported with a few
-changes. Most of the devices have already implemented the migration
-interface, so, to achieve the tcg accelerated migration, we just need to
-add vmstate of both cpu and sifive_plic.
+Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+---
+ hw/intc/sifive_plic.c | 26 +++++++++++++++++++++++++-
+ hw/intc/sifive_plic.h |  1 +
+ 2 files changed, 26 insertions(+), 1 deletion(-)
 
-Yifei Jiang (5):
-  target/riscv: Add basic vmstate description of CPU
-  target/riscv: Add PMP state description
-  target/riscv: Add H extention state description
-  target/riscv: Add V extention state description
-  target/riscv: Add sifive_plic vmstate
-
- hw/intc/sifive_plic.c    |  26 +++++-
- hw/intc/sifive_plic.h    |   1 +
- target/riscv/cpu.c       |   7 --
- target/riscv/cpu.h       |   4 +
- target/riscv/machine.c   | 184 +++++++++++++++++++++++++++++++++++++++
- target/riscv/meson.build |   3 +-
- 6 files changed, 214 insertions(+), 9 deletions(-)
- create mode 100644 target/riscv/machine.c
-
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index f42fd695d8..97a1a27a9a 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -30,6 +30,7 @@
+ #include "hw/intc/sifive_plic.h"
+ #include "target/riscv/cpu.h"
+ #include "sysemu/sysemu.h"
++#include "migration/vmstate.h"
+ 
+ #define RISCV_DEBUG_PLIC 0
+ 
+@@ -448,11 +449,12 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
+                           TYPE_SIFIVE_PLIC, plic->aperture_size);
+     parse_hart_config(plic);
+     plic->bitfield_words = (plic->num_sources + 31) >> 5;
++    plic->num_enables = plic->bitfield_words * plic->num_addrs;
+     plic->source_priority = g_new0(uint32_t, plic->num_sources);
+     plic->target_priority = g_new(uint32_t, plic->num_addrs);
+     plic->pending = g_new0(uint32_t, plic->bitfield_words);
+     plic->claimed = g_new0(uint32_t, plic->bitfield_words);
+-    plic->enable = g_new0(uint32_t, plic->bitfield_words * plic->num_addrs);
++    plic->enable = g_new0(uint32_t, plic->num_enables);
+     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &plic->mmio);
+     qdev_init_gpio_in(dev, sifive_plic_irq_request, plic->num_sources);
+ 
+@@ -472,12 +474,34 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
+     msi_nonbroken = true;
+ }
+ 
++static const VMStateDescription vmstate_sifive_plic = {
++    .name = "riscv_sifive_plic",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (VMStateField[]) {
++            VMSTATE_VARRAY_UINT32(source_priority, SiFivePLICState,
++                                  num_sources, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_VARRAY_UINT32(target_priority, SiFivePLICState,
++                                  num_addrs, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_VARRAY_UINT32(pending, SiFivePLICState, bitfield_words, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_VARRAY_UINT32(claimed, SiFivePLICState, bitfield_words, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_VARRAY_UINT32(enable, SiFivePLICState, num_enables, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_END_OF_LIST()
++        }
++};
++
+ static void sifive_plic_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
+ 
+     device_class_set_props(dc, sifive_plic_properties);
+     dc->realize = sifive_plic_realize;
++    dc->vmsd = &vmstate_sifive_plic;
+ }
+ 
+ static const TypeInfo sifive_plic_info = {
+diff --git a/hw/intc/sifive_plic.h b/hw/intc/sifive_plic.h
+index b75b1f145d..1e451a270c 100644
+--- a/hw/intc/sifive_plic.h
++++ b/hw/intc/sifive_plic.h
+@@ -52,6 +52,7 @@ struct SiFivePLICState {
+     uint32_t num_addrs;
+     uint32_t num_harts;
+     uint32_t bitfield_words;
++    uint32_t num_enables;
+     PLICAddr *addr_config;
+     uint32_t *source_priority;
+     uint32_t *target_priority;
 -- 
 2.19.1
 
