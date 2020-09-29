@@ -1,54 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kMrYz-0000Sc-EL
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Sep 2020 07:43:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35752)
+	id 1kN50B-0004qS-EH
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Sep 2020 22:04:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40586)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1kMrYx-0000Pe-9o; Mon, 28 Sep 2020 07:43:23 -0400
-Resent-Date: Mon, 28 Sep 2020 07:43:23 -0400
-Resent-Message-Id: <E1kMrYx-0000Pe-9o@lists.gnu.org>
-Received: from sender4-of-o53.zoho.com ([136.143.188.53]:21365)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kN509-0004pz-8D; Mon, 28 Sep 2020 22:04:21 -0400
+Received: from szxga05-in.huawei.com ([45.249.212.191]:4768 helo=huawei.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1kMrYu-0006y6-JY; Mon, 28 Sep 2020 07:43:22 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1601293394; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=nSWxRWWN46vpUv7AjjRasehN58PVgFx//Lf4kOUxhmMPerrRI1l2FjCZkYXOZLwYCOGFeKb2KNI5doANqJfR+lOh6hFCHg0iBEQfUNfOLr8Z1RSPiGgPu5RTJY+hD48yWjG9JOe7DvkhqwgGjnaRTBV9Ffesxca/tIvktxI+ZsQ=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1601293394;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=+m7IGoVzsKDVozFaJnPHxISyEsSnBE1c4L8JJrhEjU8=; 
- b=e3fmPxM2s0S+QcTBalkW/CsQtFOULLIuXTBO1xU0nSWWi39hCMPjdMiPFMChccjKdhASboHG/tAQdAtyCv93rrrnwK3Mr9gB2huJz8Xv9DYKQ7NnHQNqPNgjLbH/uwjO+gELd8qdJ/PVTBhbutYK0/izbpZPYgSMgwihwi/08oI=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1601293392237749.6817197566769;
- Mon, 28 Sep 2020 04:43:12 -0700 (PDT)
-Subject: Re: [RFC PATCH v6 0/2] Add file-backed and write-once features to OTP
-Message-ID: <160129339083.10465.9119328542748826342@66eaa9a8a123>
-Reply-To: <qemu-devel@nongnu.org>
-In-Reply-To: <20200928101146.12786-1-green.wan@sifive.com>
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kN504-0002xA-DX; Mon, 28 Sep 2020 22:04:20 -0400
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id DD018375FF28FF7FFFAE;
+ Tue, 29 Sep 2020 10:04:04 +0800 (CST)
+Received: from huawei.com (10.174.187.31) by DGGEMS407-HUB.china.huawei.com
+ (10.3.19.207) with Microsoft SMTP Server id 14.3.487.0; Tue, 29 Sep 2020
+ 10:03:55 +0800
+From: Yifei Jiang <jiangyifei@huawei.com>
+To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
+CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
+ <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
+ <victor.zhangxiaofeng@huawei.com>, <wu.wubin@huawei.com>,
+ <zhang.zhanghailiang@huawei.com>, <dengkai1@huawei.com>,
+ <yinyipeng1@huawei.com>, Yifei Jiang <jiangyifei@huawei.com>
+Subject: [PATCH 2/5] target/riscv: Add PMP state description
+Date: Tue, 29 Sep 2020 10:03:34 +0800
+Message-ID: <20200929020337.1559-3-jiangyifei@huawei.com>
+X-Mailer: git-send-email 2.26.2.windows.1
+In-Reply-To: <20200929020337.1559-1-jiangyifei@huawei.com>
+References: <20200929020337.1559-1-jiangyifei@huawei.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: green.wan@sifive.com
-Cc: alistair23@gmail.com, bmeng.cn@gmail.com, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, green.wan@sifive.com
-Date: Mon, 28 Sep 2020 04:43:12 -0700 (PDT)
-X-ZohoMailClient: External
-Received-SPF: pass client-ip=136.143.188.53; envelope-from=no-reply@patchew.org;
- helo=sender4-of-o53.zoho.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/09/28 07:08:07
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.174.187.31]
+X-CFilter-Loop: Reflected
+Received-SPF: pass client-ip=45.249.212.191;
+ envelope-from=jiangyifei@huawei.com; helo=huawei.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/09/28 22:04:05
 X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -62,54 +55,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Sep 2020 11:43:23 -0000
+X-List-Received-Date: Tue, 29 Sep 2020 02:04:21 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMDkyODEwMTE0Ni4xMjc4
-Ni0xLWdyZWVuLndhbkBzaWZpdmUuY29tLwoKCgpIaSwKClRoaXMgc2VyaWVzIGZhaWxlZCB0aGUg
-ZG9ja2VyLXF1aWNrQGNlbnRvczcgYnVpbGQgdGVzdC4gUGxlYXNlIGZpbmQgdGhlIHRlc3Rpbmcg
-Y29tbWFuZHMgYW5kCnRoZWlyIG91dHB1dCBiZWxvdy4gSWYgeW91IGhhdmUgRG9ja2VyIGluc3Rh
-bGxlZCwgeW91IGNhbiBwcm9iYWJseSByZXByb2R1Y2UgaXQKbG9jYWxseS4KCj09PSBURVNUIFND
-UklQVCBCRUdJTiA9PT0KIyEvYmluL2Jhc2gKbWFrZSBkb2NrZXItaW1hZ2UtY2VudG9zNyBWPTEg
-TkVUV09SSz0xCnRpbWUgbWFrZSBkb2NrZXItdGVzdC1xdWlja0BjZW50b3M3IFNIT1dfRU5WPTEg
-Sj0xNCBORVRXT1JLPTEKPT09IFRFU1QgU0NSSVBUIEVORCA9PT0KCkMgbGlua2VyIGZvciB0aGUg
-aG9zdCBtYWNoaW5lOiBjYyBsZC5iZmQgMi4yNy00MwpIb3N0IG1hY2hpbmUgY3B1IGZhbWlseTog
-eDg2XzY0Ckhvc3QgbWFjaGluZSBjcHU6IHg4Nl82NAouLi9zcmMvbWVzb24uYnVpbGQ6MTA6IFdB
-Uk5JTkc6IE1vZHVsZSB1bnN0YWJsZS1rZXl2YWwgaGFzIG5vIGJhY2t3YXJkcyBvciBmb3J3YXJk
-cyBjb21wYXRpYmlsaXR5IGFuZCBtaWdodCBub3QgZXhpc3QgaW4gZnV0dXJlIHJlbGVhc2VzLgpQ
-cm9ncmFtIHNoIGZvdW5kOiBZRVMKUHJvZ3JhbSBweXRob24zIGZvdW5kOiBZRVMgKC91c3IvYmlu
-L3B5dGhvbjMpCkNvbmZpZ3VyaW5nIG5pbmphdG9vbCB1c2luZyBjb25maWd1cmF0aW9uCi0tLQpV
-c2luZyBleHBlY3RlZCBmaWxlICd0ZXN0cy9kYXRhL2FjcGkvdmlydC9EU0RULm1lbWhwJwpzb2Nr
-ZXRfYWNjZXB0IGZhaWxlZDogUmVzb3VyY2UgdGVtcG9yYXJpbHkgdW5hdmFpbGFibGUKKioKRVJS
-T1I6Li4vc3JjL3Rlc3RzL3F0ZXN0L2xpYnF0ZXN0LmM6MzAxOnF0ZXN0X2luaXRfd2l0aG91dF9x
-bXBfaGFuZHNoYWtlOiBhc3NlcnRpb24gZmFpbGVkOiAocy0+ZmQgPj0gMCAmJiBzLT5xbXBfZmQg
-Pj0gMCkKLi4vc3JjL3Rlc3RzL3F0ZXN0L2xpYnF0ZXN0LmM6MTY2OiBraWxsX3FlbXUoKSB0cmll
-ZCB0byB0ZXJtaW5hdGUgUUVNVSBwcm9jZXNzIGJ1dCBlbmNvdW50ZXJlZCBleGl0IHN0YXR1cyAx
-IChleHBlY3RlZCAwKQpFUlJPUiBxdGVzdC14ODZfNjQ6IGJpb3MtdGFibGVzLXRlc3QgLSBCYWls
-IG91dCEgRVJST1I6Li4vc3JjL3Rlc3RzL3F0ZXN0L2xpYnF0ZXN0LmM6MzAxOnF0ZXN0X2luaXRf
-d2l0aG91dF9xbXBfaGFuZHNoYWtlOiBhc3NlcnRpb24gZmFpbGVkOiAocy0+ZmQgPj0gMCAmJiBz
-LT5xbXBfZmQgPj0gMCkKICBURVNUICAgIGlvdGVzdC1xY293MjogMDI0Cm1ha2U6ICoqKiBbcnVu
-LXRlc3QtMTM4XSBFcnJvciAxCm1ha2U6ICoqKiBXYWl0aW5nIGZvciB1bmZpbmlzaGVkIGpvYnMu
-Li4uCiAgVEVTVCAgICBpb3Rlc3QtcWNvdzI6IDAyNQogIFRFU1QgICAgaW90ZXN0LXFjb3cyOiAw
-MjcKLS0tCiAgICByYWlzZSBDYWxsZWRQcm9jZXNzRXJyb3IocmV0Y29kZSwgY21kKQpzdWJwcm9j
-ZXNzLkNhbGxlZFByb2Nlc3NFcnJvcjogQ29tbWFuZCAnWydzdWRvJywgJy1uJywgJ2RvY2tlcics
-ICdydW4nLCAnLS1ybScsICctLWxhYmVsJywgJ2NvbS5xZW11Lmluc3RhbmNlLnV1aWQ9MWE0MzUx
-ZmIzZjkwNDg5ZWJmY2E3NjNiNDVmM2Q1ZTEnLCAnLXUnLCAnMTAwMScsICctLXNlY3VyaXR5LW9w
-dCcsICdzZWNjb21wPXVuY29uZmluZWQnLCAnLWUnLCAnVEFSR0VUX0xJU1Q9JywgJy1lJywgJ0VY
-VFJBX0NPTkZJR1VSRV9PUFRTPScsICctZScsICdWPScsICctZScsICdKPTE0JywgJy1lJywgJ0RF
-QlVHPScsICctZScsICdTSE9XX0VOVj0xJywgJy1lJywgJ0NDQUNIRV9ESVI9L3Zhci90bXAvY2Nh
-Y2hlJywgJy12JywgJy9ob21lL3BhdGNoZXcvLmNhY2hlL3FlbXUtZG9ja2VyLWNjYWNoZTovdmFy
-L3RtcC9jY2FjaGU6eicsICctdicsICcvdmFyL3RtcC9wYXRjaGV3LXRlc3Rlci10bXAta3UzenE1
-eXovc3JjL2RvY2tlci1zcmMuMjAyMC0wOS0yOC0wNy4yNS4zMy4xOTMzMjovdmFyL3RtcC9xZW11
-Onoscm8nLCAncWVtdS9jZW50b3M3JywgJy92YXIvdG1wL3FlbXUvcnVuJywgJ3Rlc3QtcXVpY2sn
-XScgcmV0dXJuZWQgbm9uLXplcm8gZXhpdCBzdGF0dXMgMi4KZmlsdGVyPS0tZmlsdGVyPWxhYmVs
-PWNvbS5xZW11Lmluc3RhbmNlLnV1aWQ9MWE0MzUxZmIzZjkwNDg5ZWJmY2E3NjNiNDVmM2Q1ZTEK
-bWFrZVsxXTogKioqIFtkb2NrZXItcnVuXSBFcnJvciAxCm1ha2VbMV06IExlYXZpbmcgZGlyZWN0
-b3J5IGAvdmFyL3RtcC9wYXRjaGV3LXRlc3Rlci10bXAta3UzenE1eXovc3JjJwptYWtlOiAqKiog
-W2RvY2tlci1ydW4tdGVzdC1xdWlja0BjZW50b3M3XSBFcnJvciAyCgpyZWFsICAgIDE3bTM1LjMw
-MXMKdXNlciAgICAwbTE1LjkyMXMKCgpUaGUgZnVsbCBsb2cgaXMgYXZhaWxhYmxlIGF0Cmh0dHA6
-Ly9wYXRjaGV3Lm9yZy9sb2dzLzIwMjAwOTI4MTAxMTQ2LjEyNzg2LTEtZ3JlZW4ud2FuQHNpZml2
-ZS5jb20vdGVzdGluZy5kb2NrZXItcXVpY2tAY2VudG9zNy8/dHlwZT1tZXNzYWdlLgotLS0KRW1h
-aWwgZ2VuZXJhdGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0Y2hldyBbaHR0cHM6Ly9wYXRjaGV3Lm9y
-Zy9dLgpQbGVhc2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRvIHBhdGNoZXctZGV2ZWxAcmVkaGF0LmNv
-bQ==
+In the case of supporting PMP feature, add PMP state description
+to vmstate_riscv_cpu.
+
+Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+---
+ target/riscv/machine.c | 49 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
+
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 3451b888b1..b1fc839b43 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -4,6 +4,51 @@
+ #include "sysemu/kvm.h"
+ #include "migration/cpu.h"
+ 
++static bool pmp_needed(void *opaque)
++{
++    RISCVCPU *cpu = opaque;
++    CPURISCVState *env = &cpu->env;
++
++    return riscv_feature(env, RISCV_FEATURE_PMP);
++}
++
++static const VMStateDescription vmstate_pmp_entry = {
++    .name = "cpu/pmp/entry",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (VMStateField[]) {
++        VMSTATE_UINTTL(addr_reg, pmp_entry_t),
++        VMSTATE_UINT8(cfg_reg, pmp_entry_t),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
++static const VMStateDescription vmstate_pmp_addr = {
++    .name = "cpu/pmp/addr",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (VMStateField[]) {
++        VMSTATE_UINTTL(sa, pmp_addr_t),
++        VMSTATE_UINTTL(ea, pmp_addr_t),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
++static const VMStateDescription vmstate_pmp = {
++    .name = "cpu/pmp",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .needed = pmp_needed,
++    .fields = (VMStateField[]) {
++        VMSTATE_STRUCT_ARRAY(env.pmp_state.pmp, RISCVCPU, MAX_RISCV_PMPS,
++                             0, vmstate_pmp_entry, pmp_entry_t),
++        VMSTATE_STRUCT_ARRAY(env.pmp_state.addr, RISCVCPU, MAX_RISCV_PMPS,
++                             0, vmstate_pmp_addr, pmp_addr_t),
++        VMSTATE_UINT32(env.pmp_state.num_rules, RISCVCPU),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
+ const VMStateDescription vmstate_riscv_cpu = {
+     .name = "cpu",
+     .version_id = 1,
+@@ -55,5 +100,9 @@ const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_UINTTL(env.mstatush, RISCVCPU),
+ #endif
+         VMSTATE_END_OF_LIST()
++    },
++    .subsections = (const VMStateDescription * []) {
++        &vmstate_pmp,
++        NULL
+     }
+ };
+-- 
+2.19.1
+
 
