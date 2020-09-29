@@ -1,64 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kNKxj-00052O-0z
-	for mharc-qemu-riscv@gnu.org; Tue, 29 Sep 2020 15:06:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44096)
+	id 1kNKxn-0005D8-OC
+	for mharc-qemu-riscv@gnu.org; Tue, 29 Sep 2020 15:06:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44124)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kNKxh-0004xr-7U
- for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:06:53 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:37744)
+ id 1kNKxl-00057t-CR
+ for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:06:57 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:41097)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kNKxe-00028a-Nk
- for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:06:52 -0400
-Received: by mail-pf1-x429.google.com with SMTP id w7so5537890pfi.4
- for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2020 12:06:50 -0700 (PDT)
+ id 1kNKxj-000296-Eu
+ for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:06:56 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id 197so4627664pge.8
+ for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2020 12:06:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=rkiw3APuABfBa23cqFC0hN5yY79R/Z9co/HW0WOplcA=;
- b=eNGb1N34raAWMu2HV/a229Z+JV71Bc/ZSocmQTFiaC1WjeG9yGvuxSjhuGDJTkwdk6
- Ccen7KnSk4He7QwUAJwJ+tV7aZ0adjtm3EOJmwRE6nqJ7fb8Y7EXBDbcbhmZquU6kLV6
- EsII+xQe9UjmO+40usx9ZXIJ563FlJdSoN+Xk/9H+usDGkDxBRngoi701S6Epnwv8h4N
- pMc/qHWvUloCwT/DMf5lDhoGfxqbW9BGrcx59sDMgdWxH9Jfr3j7d8HXVC2cb/hjajgc
- cOYrUSSuuJfHlZWbQijblcaerZ8opto9DmP0ylIWQiVKS7FCsr2xhhQqhZ38fUPO7sCA
- Bshw==
+ bh=meqS5rEIqJ3lN5z0vmhA1onzO2c+vRq1ulNO1cDYlvo=;
+ b=a/pXlaqsOfL3u8qLNjjuw19NzjYQ6sSmaIEGDa2W5kx2PwnmB8m5JUMNOCiVRe20PR
+ FN93tYkmRUmOgNS8GPQkMBGlBUHsGQAcY0OLFozsz4oMcSwYYAJN9DwZXGLG2wxVIiBw
+ ZibGypl6vAN8p1DfGvTkaScJHW0SoCFGmifLcbDV1c1M9bUz5C8VPpxsljrL5ye/kCOd
+ GwPbIvw0Jp5KCwdtKbLd+v9THpaaj0w47OF0olB5q1p2WEY2wL4P0LcZ6Gpn7hon4Fsp
+ c6axfKvHgSuYwE9y6CXDVIFGfvV1W1NyebYhNxpQeAqSBfHK2uyeUfu4EShzWGD0fRxJ
+ BM5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=rkiw3APuABfBa23cqFC0hN5yY79R/Z9co/HW0WOplcA=;
- b=uFOu+K/2Bqrn7glSlx0CpPbouOlTuD3EBtraBuLpI7yiFa5wtlXtxUXtyHzZ6T2LJs
- r/rAuJsghdqsIlgvxRq27Jk625ePv27AuJhzp/6HLEP89guyKYHc0iXu7HZC7J3XP9cu
- r795sUUc9NKOsMue8X9DMJCSm5zHBF3YDcAe5jJkP/6BoXRcaaANMXVTEZgAHSBIT7MJ
- mjwisnPrQ8OXgOvA+s6+elmdBOLCYzs/X0i48UamDu8/wPY4jslwugJXKZEEdwgd/Dfq
- WCpW2EGOwcFL0/uMDpbY0oT+JHGRCLl31sn5H/hD2BdWnUwSIddhBj0gyV5ETn00yaC/
- J92Q==
-X-Gm-Message-State: AOAM531GaZFfWxFxZNRuGuyDfAOxnwZe/hCVwMsHqKtMli3zB8XW5kGg
- cMZ8LMBOkT23+Jxv5p6gACtEVg==
-X-Google-Smtp-Source: ABdhPJxXXSdEe8OvyccLtqdyQlEKclMepHBMRcuHgLvEevw3I/qc0WHkhg8EDIT8Uw6rCIfvgDb3rw==
-X-Received: by 2002:a63:5d09:: with SMTP id r9mr4046641pgb.397.1601406409487; 
- Tue, 29 Sep 2020 12:06:49 -0700 (PDT)
+ bh=meqS5rEIqJ3lN5z0vmhA1onzO2c+vRq1ulNO1cDYlvo=;
+ b=MXl59HSmpIpAnTL5Qh0teoQBlaAM2Gn0fla2rlNucGCMcvIjp5HZwfCp2RLzI9i+Vj
+ Vl/Rvgsx/nC/tuuoI2428H89Hor+65mD7Rk0oTnMQjzyz4EbZI1E0q4xnS/Y+tQOdTjw
+ eAUJEsf64RTb+bgaiFec6+xmUS0a2lX9G1p6+edKLV5wffGU5hX+Q9w5OATN+U7o4kL/
+ BG8oDUT8wZaso/eWIrODRlSbd44hShCaw98PLJJF9SMdKTYiaE6bNkWZ5fZQxE8CqyEF
+ gRrTlvx/NSlbHAwQ18Qz9CHpNN3Kvn0sRzoV97fR5W2JE8HjHWpoytHF4i7VkeFexGq/
+ hgFA==
+X-Gm-Message-State: AOAM531MLB9Q6a9CU/19EGqX5gdoRKvOt5jjMB8edakumyMW7+MPfv2C
+ kxYdbusJDGPd6npHHm2ANJ4w0w==
+X-Google-Smtp-Source: ABdhPJwQQO8BShIbOYkf696aejPX+caAw3FjHS+mOM/H5C/n9woa99caGjRROw4GggsRANjomBl67g==
+X-Received: by 2002:a65:6801:: with SMTP id l1mr4345570pgt.154.1601406414271; 
+ Tue, 29 Sep 2020 12:06:54 -0700 (PDT)
 Received: from localhost.localdomain (122-116-72-36.HINET-IP.hinet.net.
  [122.116.72.36])
- by smtp.gmail.com with ESMTPSA id v8sm6003950pgg.58.2020.09.29.12.06.47
+ by smtp.gmail.com with ESMTPSA id v8sm6003950pgg.58.2020.09.29.12.06.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Sep 2020 12:06:49 -0700 (PDT)
+ Tue, 29 Sep 2020 12:06:53 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v5 27/68] target/riscv: rvv-1.0: floating-point classify
- instructions
-Date: Wed, 30 Sep 2020 03:04:02 +0800
-Message-Id: <20200929190448.31116-28-frank.chang@sifive.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [RFC v5 28/68] target/riscv: rvv-1.0: mask population count
+ instruction
+Date: Wed, 30 Sep 2020 03:04:03 +0800
+Message-Id: <20200929190448.31116-29-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200929190448.31116-1-frank.chang@sifive.com>
 References: <20200929190448.31116-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52b.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -80,29 +82,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2020 19:06:53 -0000
+X-List-Received-Date: Tue, 29 Sep 2020 19:06:57 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn32.decode | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/helper.h                   | 2 +-
+ target/riscv/insn32.decode              | 2 +-
+ target/riscv/insn_trans/trans_rvv.c.inc | 7 ++++---
+ target/riscv/vector_helper.c            | 6 +++---
+ 4 files changed, 9 insertions(+), 8 deletions(-)
 
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 50cca2952c..e046591a42 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1070,7 +1070,7 @@ DEF_HELPER_6(vmnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vmornot_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vmxnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ 
+-DEF_HELPER_4(vmpopc_m, tl, ptr, ptr, env, i32)
++DEF_HELPER_4(vpopc_m, tl, ptr, ptr, env, i32)
+ 
+ DEF_HELPER_4(vmfirst_m, tl, ptr, ptr, env, i32)
+ 
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 6c95a3460a..958914458d 100644
+index 958914458d..0cb76682a0 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -561,7 +561,7 @@ vmfgt_vf        011101 . ..... ..... 101 ..... 1010111 @r_vm
- vmfge_vf        011111 . ..... ..... 101 ..... 1010111 @r_vm
- vmford_vv       011010 . ..... ..... 001 ..... 1010111 @r_vm
- vmford_vf       011010 . ..... ..... 101 ..... 1010111 @r_vm
--vfclass_v       100011 . ..... 10000 001 ..... 1010111 @r2_vm
-+vfclass_v       010011 . ..... 10000 001 ..... 1010111 @r2_vm
- vfmerge_vfm     010111 0 ..... ..... 101 ..... 1010111 @r_vm_0
- vfmv_v_f        010111 1 00000 ..... 101 ..... 1010111 @r2
- vfcvt_xu_f_v    100010 . ..... 00000 001 ..... 1010111 @r2_vm
+@@ -602,7 +602,7 @@ vmor_mm         011010 - ..... ..... 010 ..... 1010111 @r
+ vmnor_mm        011110 - ..... ..... 010 ..... 1010111 @r
+ vmornot_mm      011100 - ..... ..... 010 ..... 1010111 @r
+ vmxnor_mm       011111 - ..... ..... 010 ..... 1010111 @r
+-vmpopc_m        010100 . ..... ----- 010 ..... 1010111 @r2_vm
++vpopc_m         010000 . ..... 10000 010 ..... 1010111 @r2_vm
+ vmfirst_m       010101 . ..... ----- 010 ..... 1010111 @r2_vm
+ vmsbf_m         010110 . ..... 00001 010 ..... 1010111 @r2_vm
+ vmsif_m         010110 . ..... 00011 010 ..... 1010111 @r2_vm
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 1cd0f9b8d1..f9d280b0c5 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -2911,8 +2911,8 @@ GEN_MM_TRANS(vmnor_mm)
+ GEN_MM_TRANS(vmornot_mm)
+ GEN_MM_TRANS(vmxnor_mm)
+ 
+-/* Vector mask population count vmpopc */
+-static bool trans_vmpopc_m(DisasContext *s, arg_rmr *a)
++/* Vector mask population count vpopc */
++static bool trans_vpopc_m(DisasContext *s, arg_rmr *a)
+ {
+     if (require_rvv(s) &&
+         vext_check_isa_ill(s)) {
+@@ -2931,13 +2931,14 @@ static bool trans_vmpopc_m(DisasContext *s, arg_rmr *a)
+         tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, a->rs2));
+         tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
+ 
+-        gen_helper_vmpopc_m(dst, mask, src2, cpu_env, desc);
++        gen_helper_vpopc_m(dst, mask, src2, cpu_env, desc);
+         gen_set_gpr(a->rd, dst);
+ 
+         tcg_temp_free_ptr(mask);
+         tcg_temp_free_ptr(src2);
+         tcg_temp_free(dst);
+         tcg_temp_free_i32(desc);
++
+         return true;
+     }
+     return false;
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 8556ab3b0d..517e7344b9 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -4420,9 +4420,9 @@ GEN_VEXT_MASK_VV(vmnor_mm, DO_NOR)
+ GEN_VEXT_MASK_VV(vmornot_mm, DO_ORNOT)
+ GEN_VEXT_MASK_VV(vmxnor_mm, DO_XNOR)
+ 
+-/* Vector mask population count vmpopc */
+-target_ulong HELPER(vmpopc_m)(void *v0, void *vs2, CPURISCVState *env,
+-                              uint32_t desc)
++/* Vector mask population count vpopc */
++target_ulong HELPER(vpopc_m)(void *v0, void *vs2, CPURISCVState *env,
++                             uint32_t desc)
+ {
+     target_ulong cnt = 0;
+     uint32_t vm = vext_vm(desc);
 -- 
 2.17.1
 
