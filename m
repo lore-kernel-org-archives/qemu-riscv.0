@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kNKx1-0003iW-U1
-	for mharc-qemu-riscv@gnu.org; Tue, 29 Sep 2020 15:06:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43602)
+	id 1kNKx5-0003qK-51
+	for mharc-qemu-riscv@gnu.org; Tue, 29 Sep 2020 15:06:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43660)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kNKwz-0003e9-VQ
- for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:06:10 -0400
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:44283)
+ id 1kNKx3-0003nQ-QF
+ for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:06:13 -0400
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:44285)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kNKwx-00020R-G4
- for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:06:09 -0400
-Received: by mail-pf1-x441.google.com with SMTP id o20so5511879pfp.11
- for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2020 12:06:07 -0700 (PDT)
+ id 1kNKx1-000212-6K
+ for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:06:13 -0400
+Received: by mail-pf1-x442.google.com with SMTP id o20so5512071pfp.11
+ for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2020 12:06:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=MjasRKnGqoqlf7LGreS7AtisRFwWibRAZrUgTzxvOlk=;
- b=Ueore2zn0QAsGKEhEi97p1VxgVxvkr9fwOOk271tlTahWRp+ZwRzKa84MnxGepMvZC
- h34HcWBzWBLUVyqPMsSPdUNNekBbFWvW9vVhuufHbKxras4twJ8vL4hpxG+KaJ5QDoQ1
- rd0FtvGNvZCDRiBzj+qcCxu2aa+210wAMXhoY6scGaOw2BQrkoUwjHY29yi5AwYdmIMQ
- SIuZerRO/onMC+WOJibMKIDv15KY7pNb7z5ojb1zJ91TG864zowv40zVCEjzKezRHdqG
- pWzIURkVOqujGOOiqvAne+ETZjHyOH/MnxZlDlc3JELyV0kWVQSjug2SyHFbGTA1PerU
- o1Tg==
+ bh=mYsNRzBja9wi6R3wGGFfDuBgDU0yq0FoEjL3w6eA9o8=;
+ b=Rmx/FdeUdwAZCDB7QtGZ0fRhviWRrzGFQ2TFumPHpXyOVATjNOOkgXDI0GffSrcPdd
+ XAv5kL57dkmK9gAKC0eS2rcT9HZzFud0Z26EFOtA2WRv60A2rlvT51RunOWakA3xpFeq
+ yAYucMgFQpJv+hN8LqkKSI4ZtPRARfsy3NLxFuQlF5U7VkeKVHQdTqzGJi071Vb6WZdq
+ ssY2BZL8Jio2LH28TlCxFGhcKj7eWSQDcBe5+vryxUXoUju3weBZIY0q1xjCfAwLuzd2
+ CWn6BRVyS45/trY1CNAw79UOj4drePa3slELKVqZLB83nFjZMIOgjlsvU4u4XPjH9b4w
+ mXpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=MjasRKnGqoqlf7LGreS7AtisRFwWibRAZrUgTzxvOlk=;
- b=AFZdzSh0YYGO2czvyT9S3AzkZ/Cg6jCtvl7Z4HEmAcLXvq8lQLAuytgVOvgvjSuxw+
- jigCNh2/KWfE+oafV6lnUHbti54aqZax9CHpdK9u+vsOwxHwPONQvo8syxzrvSHcKdSx
- mB6VOCJXOSQ3skkWgmpgxI3VyA9PWvXMaVu3+0G8rMDc73JCoyKXGX53dNUPoXpp2SAl
- LH4TP25nj2d/0TGUTUC9r2iQcK4ekIDHL4fPOixQO8LL/iGJo2NTOQDdGzcMp0gCUI+n
- 0EGdp5iDEd2D6/WYWjRbHx2LCAnYnbjoHFMKLnVCRe8sKSIVKDIHH6bbVDbbt/0IfP+9
- /RPA==
-X-Gm-Message-State: AOAM530ZXiY+w+MKLh8e9rrcw992KhjWMgSap8mD4cskS4OdVXekax77
- 2BUuapvaSGri2EKoddEE52YA9+6R4JStlQ==
-X-Google-Smtp-Source: ABdhPJwQjkW13Tk3gcTPwiABWSNo7Qyq+e/YIFAEwwUA9jEI+TvMgtEEOyhZF8ZE88Y7WFYKB3/WaA==
-X-Received: by 2002:a05:6a00:7ce:b029:142:2501:35ea with SMTP id
- n14-20020a056a0007ceb0290142250135eamr5518286pfu.74.1601406366090; 
- Tue, 29 Sep 2020 12:06:06 -0700 (PDT)
+ bh=mYsNRzBja9wi6R3wGGFfDuBgDU0yq0FoEjL3w6eA9o8=;
+ b=c84K3O8IScByRPruFfm358jt2UkcvVXLuQm+DdUEwoGOzvhmRYCWO1fOD1F9CBovGL
+ 752+XNN9D8eT9tyinDBjrvTJhQBDBpu0ch9uF7jRNDKvzUQSvj2tN7w9HJkFu2p+7zV6
+ GCXTSJBc0g/PECQfyOjbUlZkjxlDu7JLJseo2lHY1znzMSYL5hK7NcesTIdW5RqR5oQY
+ Zthg5Vl6L0ZFosoWTcxLV6p6wd3CYKs4u+HSbJ5M9U7ieexUA6nfBTKXxAfJqhXbWBHS
+ 6kvL7Ns0nygEYXCgTA+LSe8yCSFyYgEc/mBJBTrg7RFijqaMfi56V9dpunNH5PjxjDeA
+ YefA==
+X-Gm-Message-State: AOAM530AFoA08+DQkG8CssbJYtoPn1CsQtIHrGWz3xIefd9XDrE+C117
+ bZCFAOYnIMTLx6OIMntwi3D2TA==
+X-Google-Smtp-Source: ABdhPJxNiSmc/nnudljLvSK8q8nQkMSc1XssZQVyGG4gW+/qNWS9Mh6KtPTv6OuJCBAtzXJYFs2vnQ==
+X-Received: by 2002:aa7:9dd2:0:b029:13e:d13d:a109 with SMTP id
+ g18-20020aa79dd20000b029013ed13da109mr5230805pfq.37.1601406369943; 
+ Tue, 29 Sep 2020 12:06:09 -0700 (PDT)
 Received: from localhost.localdomain (122-116-72-36.HINET-IP.hinet.net.
  [122.116.72.36])
- by smtp.gmail.com with ESMTPSA id v8sm6003950pgg.58.2020.09.29.12.06.03
+ by smtp.gmail.com with ESMTPSA id v8sm6003950pgg.58.2020.09.29.12.06.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Sep 2020 12:06:05 -0700 (PDT)
+ Tue, 29 Sep 2020 12:06:09 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -53,15 +53,15 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Richard Henderson <richard.henderson@linaro.org>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [RFC v5 15/68] target/riscv: introduce more imm value modes in
- translator functions
-Date: Wed, 30 Sep 2020 03:03:50 +0800
-Message-Id: <20200929190448.31116-16-frank.chang@sifive.com>
+Subject: [RFC v5 16/68] target/riscv: rvv:1.0: add translation-time nan-box
+ helper function
+Date: Wed, 30 Sep 2020 03:03:51 +0800
+Message-Id: <20200929190448.31116-17-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200929190448.31116-1-frank.chang@sifive.com>
 References: <20200929190448.31116-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x441.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::442;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x442.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -83,299 +83,109 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2020 19:06:10 -0000
+X-List-Received-Date: Tue, 29 Sep 2020 19:06:14 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Immediate value in translator function is extended not only
-zero-extended and sign-extended but with more modes to be applicable
-with multiple formats of vector instructions.
-
-* IMM_ZX:         Zero-extended
-* IMM_SX:         Sign-extended
-* IMM_TRUNC_SEW:  Truncate to log(SEW) bit
-* IMM_TRUNC_2SEW: Truncate to log(2*SEW) bit
+* Add fp16 nan-box check generator function, if a 16-bit input is not
+  properly nanboxed, then the input is replaced with the default qnan.
+* Add do_nanbox() helper function to utilize gen_check_nanbox_X() to
+  generate the NaN-boxed floating-point values based on SEW setting.
+* Apply nanbox helper in opfvf_trans().
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 115 ++++++++++++++----------
- 1 file changed, 66 insertions(+), 49 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 35 ++++++++++++++++++++++++-
+ target/riscv/translate.c                | 10 +++++++
+ 2 files changed, 44 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 91a08d4faf..ee84fa9585 100644
+index ee84fa9585..5ade7adc83 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1308,8 +1308,32 @@ static void tcg_gen_gvec_rsubs(unsigned vece, uint32_t dofs, uint32_t aofs,
- 
- GEN_OPIVX_GVEC_TRANS(vrsub_vx, rsubs)
- 
-+typedef enum {
-+    IMM_ZX,         /* Zero-extended */
-+    IMM_SX,         /* Sign-extended */
-+    IMM_TRUNC_SEW,  /* Truncate to log(SEW) bits */
-+    IMM_TRUNC_2SEW, /* Truncate to log(2*SEW) bits */
-+} imm_mode_t;
+@@ -2101,6 +2101,33 @@ GEN_OPIVI_NARROW_TRANS(vnclip_vi, IMM_ZX, vnclip_vx)
+ /*
+  *** Vector Float Point Arithmetic Instructions
+  */
 +
-+static int64_t extract_imm(DisasContext *s, uint32_t imm, imm_mode_t imm_mode)
++/*
++ * As RVF-only cpus always have values NaN-boxed to 64-bits,
++ * RVF and RVD can be treated equally.
++ * We don't have to deal with the cases of: SEW > FLEN.
++ *
++ * If SEW < FLEN, check whether input fp register is a valid
++ * NaN-boxed value, in which case the least-significant SEW bits
++ * of the f regsiter are used, else the canonical NaN value is used.
++ */
++static void do_nanbox(DisasContext *s, TCGv_i64 out, TCGv_i64 in)
 +{
-+    switch (imm_mode) {
-+    case IMM_ZX:
-+        return extract64(imm, 0, 5);
-+    case IMM_SX:
-+        return sextract64(imm, 0, 5);
-+    case IMM_TRUNC_SEW:
-+        return extract64(imm, 0, s->sew + 3);
-+    case IMM_TRUNC_2SEW:
-+        return extract64(imm, 0, s->sew + 4);
++    switch (s->sew) {
++    case 1:
++        gen_check_nanbox_h(out, in);
++        break;
++    case 2:
++        gen_check_nanbox_s(out, in);
++        break;
++    case 3:
++        tcg_gen_mov_i64(out, in);
++        break;
 +    default:
 +        g_assert_not_reached();
 +    }
 +}
 +
- static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
--                        gen_helper_opivx *fn, DisasContext *s, int zx)
-+                        gen_helper_opivx *fn, DisasContext *s,
-+                        imm_mode_t imm_mode)
+ /* Vector Single-Width Floating-Point Add/Subtract Instructions */
+ 
+ /*
+@@ -2153,6 +2180,7 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
  {
      TCGv_ptr dest, src2, mask;
-     TCGv src1;
-@@ -1322,11 +1346,8 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
-     dest = tcg_temp_new_ptr();
-     mask = tcg_temp_new_ptr();
-     src2 = tcg_temp_new_ptr();
--    if (zx) {
--        src1 = tcg_const_tl(imm);
--    } else {
--        src1 = tcg_const_tl(sextract64(imm, 0, 5));
--    }
-+    src1 = tcg_const_tl(extract_imm(s, imm, imm_mode));
+     TCGv_i32 desc;
++    TCGv_i64 t1;
+ 
+     TCGLabel *over = gen_new_label();
+     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+@@ -2166,12 +2194,17 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
+     tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, vs2));
+     tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
+ 
+-    fn(dest, mask, cpu_fpr[rs1], src2, cpu_env, desc);
++    /* NaN-box f[rs1] */
++    t1 = tcg_temp_new_i64();
++    do_nanbox(s, t1, cpu_fpr[rs1]);
 +
-     data = FIELD_DP32(data, VDATA, VM, vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-     desc = tcg_const_i32(simd_desc(0, s->vlen / 8, data));
-@@ -1352,28 +1373,23 @@ typedef void GVecGen2iFn(unsigned, uint32_t, uint32_t, int64_t,
++    fn(dest, mask, t1, src2, cpu_env, desc);
  
- static inline bool
- do_opivi_gvec(DisasContext *s, arg_rmrr *a, GVecGen2iFn *gvec_fn,
--              gen_helper_opivx *fn, int zx)
-+              gen_helper_opivx *fn, imm_mode_t imm_mode)
- {
-     if (!opivx_check(s, a)) {
-         return false;
-     }
- 
-     if (a->vm && s->vl_eq_vlmax) {
--        if (zx) {
--            gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
--                    extract64(a->rs1, 0, 5), MAXSZ(s), MAXSZ(s));
--        } else {
--            gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
--                    sextract64(a->rs1, 0, 5), MAXSZ(s), MAXSZ(s));
--        }
-+        gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
-+                extract_imm(s, a->rs1, imm_mode), MAXSZ(s), MAXSZ(s));
-         mark_vs_dirty(s);
-         return true;
-     }
--    return opivi_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, zx);
-+    return opivi_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, imm_mode);
- }
- 
- /* OPIVI with GVEC IR */
--#define GEN_OPIVI_GVEC_TRANS(NAME, ZX, OPIVX, SUF) \
-+#define GEN_OPIVI_GVEC_TRANS(NAME, IMM_MODE, OPIVX, SUF) \
- static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
- {                                                                  \
-     static gen_helper_opivx * const fns[4] = {                     \
-@@ -1381,10 +1397,10 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
-         gen_helper_##OPIVX##_w, gen_helper_##OPIVX##_d,            \
-     };                                                             \
-     return do_opivi_gvec(s, a, tcg_gen_gvec_##SUF,                 \
--                         fns[s->sew], ZX);                         \
-+                         fns[s->sew], IMM_MODE);                   \
- }
- 
--GEN_OPIVI_GVEC_TRANS(vadd_vi, 0, vadd_vx, addi)
-+GEN_OPIVI_GVEC_TRANS(vadd_vi, IMM_SX, vadd_vx, addi)
- 
- static void tcg_gen_gvec_rsubi(unsigned vece, uint32_t dofs, uint32_t aofs,
-                                int64_t c, uint32_t oprsz, uint32_t maxsz)
-@@ -1394,7 +1410,7 @@ static void tcg_gen_gvec_rsubi(unsigned vece, uint32_t dofs, uint32_t aofs,
-     tcg_temp_free_i64(tmp);
- }
- 
--GEN_OPIVI_GVEC_TRANS(vrsub_vi, 0, vrsub_vx, rsubi)
-+GEN_OPIVI_GVEC_TRANS(vrsub_vi, IMM_SX, vrsub_vx, rsubi)
- 
- /* Vector Widening Integer Add/Subtract */
- 
-@@ -1649,7 +1665,7 @@ GEN_OPIVX_TRANS(vmadc_vxm, opivx_vmadc_check)
- GEN_OPIVX_TRANS(vmsbc_vxm, opivx_vmadc_check)
- 
- /* OPIVI without GVEC IR */
--#define GEN_OPIVI_TRANS(NAME, ZX, OPIVX, CHECK)                          \
-+#define GEN_OPIVI_TRANS(NAME, IMM_MODE, OPIVX, CHECK)                    \
- static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
- {                                                                        \
-     if (CHECK(s, a)) {                                                   \
-@@ -1658,13 +1674,13 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
-             gen_helper_##OPIVX##_w, gen_helper_##OPIVX##_d,              \
-         };                                                               \
-         return opivi_trans(a->rd, a->rs1, a->rs2, a->vm,                 \
--                           fns[s->sew], s, ZX);                          \
-+                           fns[s->sew], s, IMM_MODE);                    \
-     }                                                                    \
-     return false;                                                        \
- }
- 
--GEN_OPIVI_TRANS(vadc_vim, 0, vadc_vxm, opivx_vadc_check)
--GEN_OPIVI_TRANS(vmadc_vim, 0, vmadc_vxm, opivx_vmadc_check)
-+GEN_OPIVI_TRANS(vadc_vim, IMM_SX, vadc_vxm, opivx_vadc_check)
-+GEN_OPIVI_TRANS(vmadc_vim, IMM_SX, vmadc_vxm, opivx_vmadc_check)
- 
- /* Vector Bitwise Logical Instructions */
- GEN_OPIVV_GVEC_TRANS(vand_vv, and)
-@@ -1673,9 +1689,9 @@ GEN_OPIVV_GVEC_TRANS(vxor_vv, xor)
- GEN_OPIVX_GVEC_TRANS(vand_vx, ands)
- GEN_OPIVX_GVEC_TRANS(vor_vx,  ors)
- GEN_OPIVX_GVEC_TRANS(vxor_vx, xors)
--GEN_OPIVI_GVEC_TRANS(vand_vi, 0, vand_vx, andi)
--GEN_OPIVI_GVEC_TRANS(vor_vi, 0, vor_vx,  ori)
--GEN_OPIVI_GVEC_TRANS(vxor_vi, 0, vxor_vx, xori)
-+GEN_OPIVI_GVEC_TRANS(vand_vi, IMM_SX, vand_vx, andi)
-+GEN_OPIVI_GVEC_TRANS(vor_vi, IMM_SX, vor_vx,  ori)
-+GEN_OPIVI_GVEC_TRANS(vxor_vi, IMM_SX, vxor_vx, xori)
- 
- /* Vector Single-Width Bit Shift Instructions */
- GEN_OPIVV_GVEC_TRANS(vsll_vv,  shlv)
-@@ -1726,9 +1742,9 @@ GEN_OPIVX_GVEC_SHIFT_TRANS(vsll_vx,  shls)
- GEN_OPIVX_GVEC_SHIFT_TRANS(vsrl_vx,  shrs)
- GEN_OPIVX_GVEC_SHIFT_TRANS(vsra_vx,  sars)
- 
--GEN_OPIVI_GVEC_TRANS(vsll_vi, 1, vsll_vx,  shli)
--GEN_OPIVI_GVEC_TRANS(vsrl_vi, 1, vsrl_vx,  shri)
--GEN_OPIVI_GVEC_TRANS(vsra_vi, 1, vsra_vx,  sari)
-+GEN_OPIVI_GVEC_TRANS(vsll_vi, IMM_ZX, vsll_vx, shli)
-+GEN_OPIVI_GVEC_TRANS(vsrl_vi, IMM_ZX, vsrl_vx, shri)
-+GEN_OPIVI_GVEC_TRANS(vsra_vi, IMM_ZX, vsra_vx, sari)
- 
- /* Vector Narrowing Integer Right Shift Instructions */
- static bool opivv_narrow_check(DisasContext *s, arg_rmrr *a)
-@@ -1793,7 +1809,7 @@ GEN_OPIVX_NARROW_TRANS(vnsra_vx)
- GEN_OPIVX_NARROW_TRANS(vnsrl_vx)
- 
- /* OPIVI with NARROW */
--#define GEN_OPIVI_NARROW_TRANS(NAME, ZX, OPIVX)                          \
-+#define GEN_OPIVI_NARROW_TRANS(NAME, IMM_MODE, OPIVX)                    \
- static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
- {                                                                        \
-     if (opivx_narrow_check(s, a)) {                                      \
-@@ -1803,13 +1819,13 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
-             gen_helper_##OPIVX##_w,                                      \
-         };                                                               \
-         return opivi_trans(a->rd, a->rs1, a->rs2, a->vm,                 \
--                           fns[s->sew], s, ZX);                          \
-+                           fns[s->sew], s, IMM_MODE);                    \
-     }                                                                    \
-     return false;                                                        \
- }
- 
--GEN_OPIVI_NARROW_TRANS(vnsra_vi, 1, vnsra_vx)
--GEN_OPIVI_NARROW_TRANS(vnsrl_vi, 1, vnsrl_vx)
-+GEN_OPIVI_NARROW_TRANS(vnsra_vi, IMM_ZX, vnsra_vx)
-+GEN_OPIVI_NARROW_TRANS(vnsrl_vi, IMM_ZX, vnsrl_vx)
- 
- /* Vector Integer Comparison Instructions */
- /*
-@@ -1847,12 +1863,12 @@ GEN_OPIVX_TRANS(vmsle_vx, opivx_cmp_check)
- GEN_OPIVX_TRANS(vmsgtu_vx, opivx_cmp_check)
- GEN_OPIVX_TRANS(vmsgt_vx, opivx_cmp_check)
- 
--GEN_OPIVI_TRANS(vmseq_vi, 0, vmseq_vx, opivx_cmp_check)
--GEN_OPIVI_TRANS(vmsne_vi, 0, vmsne_vx, opivx_cmp_check)
--GEN_OPIVI_TRANS(vmsleu_vi, 1, vmsleu_vx, opivx_cmp_check)
--GEN_OPIVI_TRANS(vmsle_vi, 0, vmsle_vx, opivx_cmp_check)
--GEN_OPIVI_TRANS(vmsgtu_vi, 1, vmsgtu_vx, opivx_cmp_check)
--GEN_OPIVI_TRANS(vmsgt_vi, 0, vmsgt_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmseq_vi, IMM_SX, vmseq_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmsne_vi, IMM_SX, vmsne_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmsleu_vi, IMM_ZX, vmsleu_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmsle_vi, IMM_SX, vmsle_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmsgtu_vi, IMM_ZX, vmsgtu_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmsgt_vi, IMM_SX, vmsgt_vx, opivx_cmp_check)
- 
- /* Vector Integer Min/Max Instructions */
- GEN_OPIVV_GVEC_TRANS(vminu_vv, umin)
-@@ -2028,7 +2044,7 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
- 
- GEN_OPIVV_TRANS(vmerge_vvm, opivv_vadc_check)
- GEN_OPIVX_TRANS(vmerge_vxm, opivx_vadc_check)
--GEN_OPIVI_TRANS(vmerge_vim, 0, vmerge_vxm, opivx_vadc_check)
-+GEN_OPIVI_TRANS(vmerge_vim, IMM_SX, vmerge_vxm, opivx_vadc_check)
- 
- /*
-  *** Vector Fixed-Point Arithmetic Instructions
-@@ -2043,8 +2059,8 @@ GEN_OPIVX_TRANS(vsaddu_vx,  opivx_check)
- GEN_OPIVX_TRANS(vsadd_vx,  opivx_check)
- GEN_OPIVX_TRANS(vssubu_vx,  opivx_check)
- GEN_OPIVX_TRANS(vssub_vx,  opivx_check)
--GEN_OPIVI_TRANS(vsaddu_vi, 1, vsaddu_vx, opivx_check)
--GEN_OPIVI_TRANS(vsadd_vi, 0, vsadd_vx, opivx_check)
-+GEN_OPIVI_TRANS(vsaddu_vi, IMM_ZX, vsaddu_vx, opivx_check)
-+GEN_OPIVI_TRANS(vsadd_vi, IMM_SX, vsadd_vx, opivx_check)
- 
- /* Vector Single-Width Averaging Add and Subtract */
- GEN_OPIVV_TRANS(vaadd_vv, opivv_check)
-@@ -2071,16 +2087,16 @@ GEN_OPIVV_TRANS(vssrl_vv, opivv_check)
- GEN_OPIVV_TRANS(vssra_vv, opivv_check)
- GEN_OPIVX_TRANS(vssrl_vx,  opivx_check)
- GEN_OPIVX_TRANS(vssra_vx,  opivx_check)
--GEN_OPIVI_TRANS(vssrl_vi, 1, vssrl_vx, opivx_check)
--GEN_OPIVI_TRANS(vssra_vi, 0, vssra_vx, opivx_check)
-+GEN_OPIVI_TRANS(vssrl_vi, IMM_ZX, vssrl_vx, opivx_check)
-+GEN_OPIVI_TRANS(vssra_vi, IMM_SX, vssra_vx, opivx_check)
- 
- /* Vector Narrowing Fixed-Point Clip Instructions */
- GEN_OPIVV_NARROW_TRANS(vnclipu_vv)
- GEN_OPIVV_NARROW_TRANS(vnclip_vv)
- GEN_OPIVX_NARROW_TRANS(vnclipu_vx)
- GEN_OPIVX_NARROW_TRANS(vnclip_vx)
--GEN_OPIVI_NARROW_TRANS(vnclipu_vi, 1, vnclipu_vx)
--GEN_OPIVI_NARROW_TRANS(vnclip_vi, 1, vnclip_vx)
-+GEN_OPIVI_NARROW_TRANS(vnclipu_vi, IMM_ZX, vnclipu_vx)
-+GEN_OPIVI_NARROW_TRANS(vnclip_vi, IMM_ZX, vnclip_vx)
- 
- /*
-  *** Vector Float Point Arithmetic Instructions
-@@ -3055,7 +3071,7 @@ static bool slideup_check(DisasContext *s, arg_rmrr *a)
- 
- GEN_OPIVX_TRANS(vslideup_vx, slideup_check)
- GEN_OPIVX_TRANS(vslide1up_vx, slideup_check)
--GEN_OPIVI_TRANS(vslideup_vi, 1, vslideup_vx, slideup_check)
-+GEN_OPIVI_TRANS(vslideup_vi, IMM_ZX, vslideup_vx, slideup_check)
- 
- static bool slidedown_check(DisasContext *s, arg_rmrr *a)
- {
-@@ -3066,7 +3082,7 @@ static bool slidedown_check(DisasContext *s, arg_rmrr *a)
- 
- GEN_OPIVX_TRANS(vslidedown_vx, slidedown_check)
- GEN_OPIVX_TRANS(vslide1down_vx, slidedown_check)
--GEN_OPIVI_TRANS(vslidedown_vi, 1, vslidedown_vx, slidedown_check)
-+GEN_OPIVI_TRANS(vslidedown_vi, IMM_ZX, vslidedown_vx, slidedown_check)
- 
- /* Vector Register Gather Instruction */
- static bool vrgather_vv_check(DisasContext *s, arg_rmrr *a)
-@@ -3145,7 +3161,8 @@ static bool trans_vrgather_vi(DisasContext *s, arg_rmrr *a)
-             gen_helper_vrgather_vx_b, gen_helper_vrgather_vx_h,
-             gen_helper_vrgather_vx_w, gen_helper_vrgather_vx_d
-         };
--        return opivi_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s, 1);
-+        return opivi_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew],
-+                           s, IMM_ZX);
-     }
+     tcg_temp_free_ptr(dest);
+     tcg_temp_free_ptr(mask);
+     tcg_temp_free_ptr(src2);
+     tcg_temp_free_i32(desc);
++    tcg_temp_free_i64(t1);
+     mark_vs_dirty(s);
+     gen_set_label(over);
      return true;
- }
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index b54952c688..2d12b8adc4 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -121,6 +121,16 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+  *
+  * Here, the result is always nan-boxed, even the canonical nan.
+  */
++static void gen_check_nanbox_h(TCGv_i64 out, TCGv_i64 in)
++{
++    TCGv_i64 t_max = tcg_const_i64(0xffffffffffff0000ull);
++    TCGv_i64 t_nan = tcg_const_i64(0xffffffffffff7e00ull);
++
++    tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
++    tcg_temp_free_i64(t_max);
++    tcg_temp_free_i64(t_nan);
++}
++
+ static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+ {
+     TCGv_i64 t_max = tcg_const_i64(0xffffffff00000000ull);
 -- 
 2.17.1
 
