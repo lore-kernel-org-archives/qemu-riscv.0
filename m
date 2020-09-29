@@ -1,65 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kNKyk-0006cK-HE
-	for mharc-qemu-riscv@gnu.org; Tue, 29 Sep 2020 15:07:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44706)
+	id 1kNKyo-0006lg-F7
+	for mharc-qemu-riscv@gnu.org; Tue, 29 Sep 2020 15:08:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44742)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kNKyj-0006ZW-Am
- for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:07:57 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:56315)
+ id 1kNKyn-0006iN-4S
+ for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:08:01 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:36183)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kNKyh-0002Kd-Ks
- for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:07:56 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id q4so3178781pjh.5
- for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2020 12:07:55 -0700 (PDT)
+ id 1kNKyl-0002L4-Bv
+ for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:08:00 -0400
+Received: by mail-pf1-x435.google.com with SMTP id d9so5547151pfd.3
+ for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2020 12:07:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=ixyI25Op3UHIzQVDkZuN65LzcuGaVJwh7enn2EMY8MY=;
- b=UJPgziaPA2ImJGp5jiwHyxecAiA3RNTInVrU1A4nWJavYiUbei3ESo7YfyZ14ZjlfK
- djXr+qsHtRMSk7ETbdDwuKMoyBEfhYoDj1+l2k4fz0fu/CymvIOvypW7LP1erHv96yma
- lqIjFS+7by1lWmVGRDz3whjvUWeKQUM05bGH1c2QTRjCrodlSOi40emBStVjbGEKo0qB
- bnq6w7AgkuQ6RgkHR0ye/expAuDz19gEvagoc0dg/xmrTV87N+qxBf8zCb7OzGCzAYz6
- mDzE+bx4gaL79ZN3vUH99zI3xxjTtgULfl8aJNM8NNKjZ2Ee0Qzl2DjGphkl9dPd/JIW
- j/xg==
+ bh=dKXFHFiIXP9JYtyVSpnpgKdh+GGJff1eG/Jdv4eJQdA=;
+ b=G/uPhAfrEjiQeaFt8vphLIpubrGPlS3A4DdD5YHgYNtpSen2bEmEZfBepL65M4ImBJ
+ 7L6cLBLXgl2/PbGvkY17ERJseqRUAg0ZTvSP8qIadK6+enFjWqhOcAYgPyF3wiujuoNp
+ Go0bdg77LQMRS8Ss6Z+JNZ644DuT+nBYiWb+ds+BcxS98FeJ2Vs38s2kZ6A/Lk+uw/2j
+ NkwKoz6u8LZElj3ID5fbJNwYsdsgQ8wbzanWToUCslI/22J4UUbIWrR+YKWFEoN9QEzG
+ sKmCtCQwxe0qBrH1CjhYSB0s8UcTHAOQuJMxJnWcoo3MDArP/keT7UJW31Vi1ZBZ3YNs
+ GcYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=ixyI25Op3UHIzQVDkZuN65LzcuGaVJwh7enn2EMY8MY=;
- b=UIjtUB+wGieGbgr3K52+DOJBC3aiZBiOGwLJIoS7DIKOZLYTLokn6Nsmyp4OAxlFSz
- ZGNr7cGAUFFfvzCGRP4pBI/Ag9r8sKWPJPPkkLlfzOOw21Ed6KZeIjZ37WAk/lWjqHsB
- t1efy2KcyTT82S+8YpmbjYKfzhSwxomeB6jRkQ3fuosSxCkjP7t0I+6UqVK81Re+DpSH
- 8BbW/HLaXeZQ1bmDdHkgaFhLy7oBCNbuS2jfoiysceUu98s6nt79nGcMlIScI0gvvU8x
- 1VnZQdnL9186jr8Cwx5ZeyloTHrTH2aEhvB0PHbp8UrBDe8GM4CaA2qHhW3HdFb3kD6c
- 1vrg==
-X-Gm-Message-State: AOAM5312awTkrWmN1HUEzB8vRzDMM88eMaxQXPqHEoZyTHh8yMQvF/t0
- ZLDoXqjumNvPmBnjUqx0aHpTlg==
-X-Google-Smtp-Source: ABdhPJy5njKl2XEwmYqGhbSE3b3X3KPrbycmmmUVrGmQ55+LiXpsqriQr5NoP3YM1edcWcHHyRblwA==
-X-Received: by 2002:a17:90b:1050:: with SMTP id
- gq16mr5464581pjb.234.1601406474460; 
- Tue, 29 Sep 2020 12:07:54 -0700 (PDT)
+ bh=dKXFHFiIXP9JYtyVSpnpgKdh+GGJff1eG/Jdv4eJQdA=;
+ b=DKCtQNm2NSjN5tkyecxu+v2aA7Ep3RfGva5QEXToqvNclkYPfxg+GR+6zGgiAJAF3x
+ hVGxYclU1SvDTxGbVSI9HeD9084YnIPGM6iDftkoGFP9XQzM+b5mJa2x3DAQSNSyBETj
+ UIXuJStcNZeM+0UZGlwLkR26vXHHAQjbWQ3dABxWmzG5iXjUSwlRM4RzxYj3oIiAli+9
+ wvQ87U6bORLQSpa/CiupdlCRA423XajASzkUVKf+6cA3lxTXGAYvkwbc/TcVtb2w4PZW
+ NiH2n3IdHpkGPLw3NG6P3YaWGKtIbkXcdI4wTJclBbU6J4skvh2Kb/BYjJlDpXc0BHrq
+ WhsA==
+X-Gm-Message-State: AOAM530clRMNOaq1BlWbsId9HWnNHLnJLpebcGsipbYZtpj1q789h8hH
+ LAV5JzfPjUOCm2Bn4SDJPTSGtw==
+X-Google-Smtp-Source: ABdhPJw3xaPyYcZqyFLOhPzrQGkTFiQZCIHD93fsd/i+B4aQHPXGiLbHVY6HzYwATgZAoe3z95p1aA==
+X-Received: by 2002:aa7:8a46:0:b029:142:2501:398a with SMTP id
+ n6-20020aa78a460000b02901422501398amr5252752pfa.79.1601406478028; 
+ Tue, 29 Sep 2020 12:07:58 -0700 (PDT)
 Received: from localhost.localdomain (122-116-72-36.HINET-IP.hinet.net.
  [122.116.72.36])
- by smtp.gmail.com with ESMTPSA id v8sm6003950pgg.58.2020.09.29.12.07.52
+ by smtp.gmail.com with ESMTPSA id v8sm6003950pgg.58.2020.09.29.12.07.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Sep 2020 12:07:53 -0700 (PDT)
+ Tue, 29 Sep 2020 12:07:57 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v5 44/68] target/riscv: rvv-1.0: widening integer multiply-add
- instructions
-Date: Wed, 30 Sep 2020 03:04:19 +0800
-Message-Id: <20200929190448.31116-45-frank.chang@sifive.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [RFC v5 45/68] target/riscv: rvv-1.0: single-width saturating add and
+ subtract instructions
+Date: Wed, 30 Sep 2020 03:04:20 +0800
+Message-Id: <20200929190448.31116-46-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200929190448.31116-1-frank.chang@sifive.com>
 References: <20200929190448.31116-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x435.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -81,33 +83,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2020 19:07:57 -0000
+X-List-Received-Date: Tue, 29 Sep 2020 19:08:01 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
+
+Sign-extend vsaddu.vi immediate value.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn32.decode | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 4517f8ed54..c75d728fc5 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -449,9 +449,9 @@ vwmaccu_vv      111100 . ..... ..... 010 ..... 1010111 @r_vm
- vwmaccu_vx      111100 . ..... ..... 110 ..... 1010111 @r_vm
- vwmacc_vv       111101 . ..... ..... 010 ..... 1010111 @r_vm
- vwmacc_vx       111101 . ..... ..... 110 ..... 1010111 @r_vm
--vwmaccsu_vv     111110 . ..... ..... 010 ..... 1010111 @r_vm
--vwmaccsu_vx     111110 . ..... ..... 110 ..... 1010111 @r_vm
--vwmaccus_vx     111111 . ..... ..... 110 ..... 1010111 @r_vm
-+vwmaccsu_vv     111111 . ..... ..... 010 ..... 1010111 @r_vm
-+vwmaccsu_vx     111111 . ..... ..... 110 ..... 1010111 @r_vm
-+vwmaccus_vx     111110 . ..... ..... 110 ..... 1010111 @r_vm
- vmv_v_v         010111 1 00000 ..... 000 ..... 1010111 @r2
- vmv_v_x         010111 1 00000 ..... 100 ..... 1010111 @r2
- vmv_v_i         010111 1 00000 ..... 011 ..... 1010111 @r2
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 746db60337..16f051a8d7 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -2249,7 +2249,7 @@ GEN_OPIVX_TRANS(vsaddu_vx,  opivx_check)
+ GEN_OPIVX_TRANS(vsadd_vx,  opivx_check)
+ GEN_OPIVX_TRANS(vssubu_vx,  opivx_check)
+ GEN_OPIVX_TRANS(vssub_vx,  opivx_check)
+-GEN_OPIVI_TRANS(vsaddu_vi, IMM_ZX, vsaddu_vx, opivx_check)
++GEN_OPIVI_TRANS(vsaddu_vi, IMM_SX, vsaddu_vx, opivx_check)
+ GEN_OPIVI_TRANS(vsadd_vi, IMM_SX, vsadd_vx, opivx_check)
+ 
+ /* Vector Single-Width Averaging Add and Subtract */
 -- 
 2.17.1
 
