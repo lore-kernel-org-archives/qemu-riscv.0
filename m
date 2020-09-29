@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kNKyo-0006lg-F7
-	for mharc-qemu-riscv@gnu.org; Tue, 29 Sep 2020 15:08:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44742)
+	id 1kNKys-0006uQ-Dd
+	for mharc-qemu-riscv@gnu.org; Tue, 29 Sep 2020 15:08:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44782)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kNKyn-0006iN-4S
- for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:08:01 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:36183)
+ id 1kNKyq-0006rB-Sr
+ for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:08:04 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:53349)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kNKyl-0002L4-Bv
- for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:08:00 -0400
-Received: by mail-pf1-x435.google.com with SMTP id d9so5547151pfd.3
- for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2020 12:07:58 -0700 (PDT)
+ id 1kNKyo-0002LU-W7
+ for qemu-riscv@nongnu.org; Tue, 29 Sep 2020 15:08:04 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id t7so3186563pjd.3
+ for <qemu-riscv@nongnu.org>; Tue, 29 Sep 2020 12:08:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=dKXFHFiIXP9JYtyVSpnpgKdh+GGJff1eG/Jdv4eJQdA=;
- b=G/uPhAfrEjiQeaFt8vphLIpubrGPlS3A4DdD5YHgYNtpSen2bEmEZfBepL65M4ImBJ
- 7L6cLBLXgl2/PbGvkY17ERJseqRUAg0ZTvSP8qIadK6+enFjWqhOcAYgPyF3wiujuoNp
- Go0bdg77LQMRS8Ss6Z+JNZ644DuT+nBYiWb+ds+BcxS98FeJ2Vs38s2kZ6A/Lk+uw/2j
- NkwKoz6u8LZElj3ID5fbJNwYsdsgQ8wbzanWToUCslI/22J4UUbIWrR+YKWFEoN9QEzG
- sKmCtCQwxe0qBrH1CjhYSB0s8UcTHAOQuJMxJnWcoo3MDArP/keT7UJW31Vi1ZBZ3YNs
- GcYw==
+ bh=16oHEl1NxN00cp2dlLbq5l1EITT6tr89WGs7ZTyJaMc=;
+ b=aWEIjEfSu1MM4GxkEAqGt8Q1lDWUN+XuaIhj5h98K1bppNQacYedYFGKRCFWr7NxdX
+ u8hlE9Kyb509tA6wU9yevOnw0wvQz/Ob+2ea01dH9SWNIkgauwkoPRqUQsXJaWnt8kK7
+ N1oSfMxh1VEniO1pdZrcZijBC9DsMc4YNbT+bddO0mptm4U5fQw7dC06mSUDtfIAhb8U
+ G9yzG31DXsefI5sp+6SDEBPSy/qfPvrfAfmmD9rOJS1c5pu6KGrll7G9LiL5k5o4cqvi
+ rM7P4H7Aeh/Ps+37sENI6Q6GXpkJjQohims+BWC0wI1+ruRkIV6VJrtL0tauarCgMpyF
+ H/vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=dKXFHFiIXP9JYtyVSpnpgKdh+GGJff1eG/Jdv4eJQdA=;
- b=DKCtQNm2NSjN5tkyecxu+v2aA7Ep3RfGva5QEXToqvNclkYPfxg+GR+6zGgiAJAF3x
- hVGxYclU1SvDTxGbVSI9HeD9084YnIPGM6iDftkoGFP9XQzM+b5mJa2x3DAQSNSyBETj
- UIXuJStcNZeM+0UZGlwLkR26vXHHAQjbWQ3dABxWmzG5iXjUSwlRM4RzxYj3oIiAli+9
- wvQ87U6bORLQSpa/CiupdlCRA423XajASzkUVKf+6cA3lxTXGAYvkwbc/TcVtb2w4PZW
- NiH2n3IdHpkGPLw3NG6P3YaWGKtIbkXcdI4wTJclBbU6J4skvh2Kb/BYjJlDpXc0BHrq
- WhsA==
-X-Gm-Message-State: AOAM530clRMNOaq1BlWbsId9HWnNHLnJLpebcGsipbYZtpj1q789h8hH
- LAV5JzfPjUOCm2Bn4SDJPTSGtw==
-X-Google-Smtp-Source: ABdhPJw3xaPyYcZqyFLOhPzrQGkTFiQZCIHD93fsd/i+B4aQHPXGiLbHVY6HzYwATgZAoe3z95p1aA==
-X-Received: by 2002:aa7:8a46:0:b029:142:2501:398a with SMTP id
- n6-20020aa78a460000b02901422501398amr5252752pfa.79.1601406478028; 
- Tue, 29 Sep 2020 12:07:58 -0700 (PDT)
+ bh=16oHEl1NxN00cp2dlLbq5l1EITT6tr89WGs7ZTyJaMc=;
+ b=foT0pqB1ycTze1L21IBJ/EgLZ935/6DhGhvcKQVi5RJlZnHtflYftkJHHUAHjxtlBJ
+ pWsiGe08goXtBv1Txgjzk4bWwxCjYn+jSsF3QmWEccpUoS9iEGTFss0GchgI9QLWPx/x
+ qffDsNLTj6u27jEMdyXUo91eXepKYqj+fXwJhnhKbLjRksVj4RGjtMxD5I5c+Cj7RYev
+ kgKyYgkW2D9ddCQCBuZWNncEG9RU7sWiJ7itXnyzYzRvBSju5qStHZAyDZWOvisvDu/7
+ CoBXfMGvuR2vkVfJr9q/BiUAVZtUCU0fdjtvmT3gotkwQx4jB1rykvdb0hDr9t0yQrPu
+ qlLw==
+X-Gm-Message-State: AOAM533q5MBM8AKq/rIdbq+WZYRejYueXQYP15lc+orBWXK7gyP591Ly
+ aDbZOpxYasj1hspKcj2xYxbfND+ON22BJA==
+X-Google-Smtp-Source: ABdhPJzMq124zqZQd5uvNyiJ03ADxOrYTa7q/HLp6KVUNWw1Ld4wQNOja6oBEviZcrGh0Utyi09z5w==
+X-Received: by 2002:a17:90a:ea08:: with SMTP id
+ w8mr4965676pjy.41.1601406481801; 
+ Tue, 29 Sep 2020 12:08:01 -0700 (PDT)
 Received: from localhost.localdomain (122-116-72-36.HINET-IP.hinet.net.
  [122.116.72.36])
- by smtp.gmail.com with ESMTPSA id v8sm6003950pgg.58.2020.09.29.12.07.56
+ by smtp.gmail.com with ESMTPSA id v8sm6003950pgg.58.2020.09.29.12.07.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Sep 2020 12:07:57 -0700 (PDT)
+ Tue, 29 Sep 2020 12:08:01 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -53,15 +53,14 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Richard Henderson <richard.henderson@linaro.org>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [RFC v5 45/68] target/riscv: rvv-1.0: single-width saturating add and
- subtract instructions
-Date: Wed, 30 Sep 2020 03:04:20 +0800
-Message-Id: <20200929190448.31116-46-frank.chang@sifive.com>
+Subject: [RFC v5 46/68] target/riscv: rvv-1.0: integer comparison instructions
+Date: Wed, 30 Sep 2020 03:04:21 +0800
+Message-Id: <20200929190448.31116-47-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200929190448.31116-1-frank.chang@sifive.com>
 References: <20200929190448.31116-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x435.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1033.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -83,31 +82,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2020 19:08:01 -0000
+X-List-Received-Date: Tue, 29 Sep 2020 19:08:05 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Sign-extend vsaddu.vi immediate value.
+* Sign-extend vmselu.vi and vmsgtu.vi immediate values.
+* Remove "set tail elements to zeros" as tail elements can be unchanged
+  for either VTA to have undisturbed or agnostic setting.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 4 ++--
+ target/riscv/vector_helper.c            | 8 --------
+ 2 files changed, 2 insertions(+), 10 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 746db60337..16f051a8d7 100644
+index 16f051a8d7..b1f0fa76b2 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2249,7 +2249,7 @@ GEN_OPIVX_TRANS(vsaddu_vx,  opivx_check)
- GEN_OPIVX_TRANS(vsadd_vx,  opivx_check)
- GEN_OPIVX_TRANS(vssubu_vx,  opivx_check)
- GEN_OPIVX_TRANS(vssub_vx,  opivx_check)
--GEN_OPIVI_TRANS(vsaddu_vi, IMM_ZX, vsaddu_vx, opivx_check)
-+GEN_OPIVI_TRANS(vsaddu_vi, IMM_SX, vsaddu_vx, opivx_check)
- GEN_OPIVI_TRANS(vsadd_vi, IMM_SX, vsadd_vx, opivx_check)
+@@ -2055,9 +2055,9 @@ GEN_OPIVX_TRANS(vmsgt_vx, opivx_cmp_check)
  
- /* Vector Single-Width Averaging Add and Subtract */
+ GEN_OPIVI_TRANS(vmseq_vi, IMM_SX, vmseq_vx, opivx_cmp_check)
+ GEN_OPIVI_TRANS(vmsne_vi, IMM_SX, vmsne_vx, opivx_cmp_check)
+-GEN_OPIVI_TRANS(vmsleu_vi, IMM_ZX, vmsleu_vx, opivx_cmp_check)
++GEN_OPIVI_TRANS(vmsleu_vi, IMM_SX, vmsleu_vx, opivx_cmp_check)
+ GEN_OPIVI_TRANS(vmsle_vi, IMM_SX, vmsle_vx, opivx_cmp_check)
+-GEN_OPIVI_TRANS(vmsgtu_vi, IMM_ZX, vmsgtu_vx, opivx_cmp_check)
++GEN_OPIVI_TRANS(vmsgtu_vi, IMM_SX, vmsgtu_vx, opivx_cmp_check)
+ GEN_OPIVI_TRANS(vmsgt_vi, IMM_SX, vmsgt_vx, opivx_cmp_check)
+ 
+ /* Vector Integer Min/Max Instructions */
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index e14626b40b..5622fb23f8 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -1399,7 +1399,6 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
+ {                                                             \
+     uint32_t vm = vext_vm(desc);                              \
+     uint32_t vl = env->vl;                                    \
+-    uint32_t vlmax = vext_maxsz(desc) / sizeof(ETYPE);        \
+     uint32_t i;                                               \
+                                                               \
+     for (i = 0; i < vl; i++) {                                \
+@@ -1410,9 +1409,6 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
+         }                                                     \
+         vext_set_elem_mask(vd, i, DO_OP(s2, s1));             \
+     }                                                         \
+-    for (; i < vlmax; i++) {                                  \
+-        vext_set_elem_mask(vd, i, 0);                         \
+-    }                                                         \
+ }
+ 
+ GEN_VEXT_CMP_VV(vmseq_vv_b, uint8_t,  H1, DO_MSEQ)
+@@ -1451,7 +1447,6 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,   \
+ {                                                                   \
+     uint32_t vm = vext_vm(desc);                                    \
+     uint32_t vl = env->vl;                                          \
+-    uint32_t vlmax = vext_maxsz(desc) / sizeof(ETYPE);              \
+     uint32_t i;                                                     \
+                                                                     \
+     for (i = 0; i < vl; i++) {                                      \
+@@ -1462,9 +1457,6 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,   \
+         vext_set_elem_mask(vd, i,                                   \
+                 DO_OP(s2, (ETYPE)(target_long)s1));                 \
+     }                                                               \
+-    for (; i < vlmax; i++) {                                        \
+-        vext_set_elem_mask(vd, i, 0);                               \
+-    }                                                               \
+ }
+ 
+ GEN_VEXT_CMP_VX(vmseq_vx_b, uint8_t,  H1, DO_MSEQ)
 -- 
 2.17.1
 
