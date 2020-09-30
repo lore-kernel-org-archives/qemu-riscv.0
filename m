@@ -1,74 +1,90 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kNWG5-0005Vg-UZ
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Sep 2020 03:10:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34844)
+	id 1kNZAd-0007Q7-4s
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Sep 2020 06:17:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44986)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
- id 1kNWG4-0005UX-Oy
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2020 03:10:36 -0400
-Received: from mail-qk1-x741.google.com ([2607:f8b0:4864:20::741]:33463)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kNZAS-0007Ot-DE; Wed, 30 Sep 2020 06:17:03 -0400
+Received: from mail-wr1-x444.google.com ([2a00:1450:4864:20::444]:36048)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
- id 1kNWG1-00024Q-Qm
- for qemu-riscv@nongnu.org; Wed, 30 Sep 2020 03:10:36 -0400
-Received: by mail-qk1-x741.google.com with SMTP id s131so481880qke.0
- for <qemu-riscv@nongnu.org>; Wed, 30 Sep 2020 00:10:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UxhyX4Yrj3ng/x68SSB52f605eZ6Pyfq3YQ5aWvE5BE=;
- b=BdOS3aKsBNS3kf3ZtFK3DAkpTG2SGmk4z7wR4U80+ib4dYFRwSDUrBfslY7+ZDdLxm
- NjkSD9E7kUuSM+v2IZPVkW9vTbn4/eKXoZca0JsWxQQ+Q2rInz/pljEoaLbZzPBtGYhR
- WnCrs4FSUa7XWi8N8LDRf+ypGkGa7YVqhU5aHz48LVmj6mBkT0AS2OnUFGl7qoG7aJFy
- 8bCgPnryWXz7AgW8gmIe1/Y3ZNEvj11JWxjvS4ydLdboI0oQJ/P/9M80iQ+/odhyP8Z7
- 8rEMtTiPyNgu6tAFM+mNddX4ctSvncku9seSjskmTXgNM2I4gE1QhmHRQtSDjmXP8h9q
- yA+w==
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kNZAQ-0006JX-O6; Wed, 30 Sep 2020 06:17:00 -0400
+Received: by mail-wr1-x444.google.com with SMTP id z1so1149112wrt.3;
+ Wed, 30 Sep 2020 03:16:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=mQ4zkt5fbex5IpwN676Z7zynsHhcMMWVl8k6oyU7Mf4=;
+ b=aMzBnYCIAkKV3MrvK/o0b1M87OI2b16xb7NiTlHgWwyaZj/WwNstzBuilgZUf4Z+wC
+ SsnjbFA3I05HVCBecsbNLyPI0GId0A2tLLVaUuDjkA/mtI2Eu0ySpRTOq96egeQgV9Ux
+ 2X+tnsTU+VmixWxrHbbbiA5bXcV6z1o1s5rA03dmB/a0MAmKA9f5ixINaUCpJFmgDPda
+ 73AF00t6HWFQ23MhxqrcZXBBVQ9e7x05RN5fqnk8eTfMMBezyW7kNq993oZwL9I6Go98
+ mxnc0x1g0lyhOzyn1qlHziEo9t/Redg++QIzuEMscCt94s8sQLiaIElvXDTiq2qt/3Xe
+ HWQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=UxhyX4Yrj3ng/x68SSB52f605eZ6Pyfq3YQ5aWvE5BE=;
- b=e3w09B8iwgVnsIcU3LnHjWcCJfKPFFC39U+tDAjgPfd7eTKXI2eD4oZrcJaSw/VmIP
- TCv8ORVhSR+e4BeOOGF5jPuHlHdAynk2IkGpq3np1C5ecK1+5HHP423FBH7asdqXHGZg
- B7G9kjh1ua955I3Z4kmiK8r8wftbp/OALZ4LleRTqxGLXGOYqTWY3uHvIi4SaTIgf9vE
- z+Jv7Mz+H6d2OSbEmGhEcXz1kwtuck6S1S86RF0Lk4tD4UYbW+hxz4eTbviOPzFNU5vQ
- RvfzquXyAgdBnmkqOwz5P6jBBXXtfwEFH2Y19YkDRQBBuEZJoW1O24yY9sD7V3R8urGq
- 8wrA==
-X-Gm-Message-State: AOAM532gpyntLWQGlrmc/QZuC5Ly7ZdHljLUoFCXfbQ47tLog4QCw/7d
- 52ZEN66v3bccw82y8qg77k79fLP4y1Nq/dvU/C/8/A==
-X-Google-Smtp-Source: ABdhPJwVPlWqJEdeVDuOe74ZNitzE6SLngrGFVdDdGtUxZIdvm0c2wKUKGropt5ooH2CDlozDSXG8jqgihCaEUOLGmA=
-X-Received: by 2002:a05:620a:1411:: with SMTP id
- d17mr1193281qkj.325.1601449831903; 
- Wed, 30 Sep 2020 00:10:31 -0700 (PDT)
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=mQ4zkt5fbex5IpwN676Z7zynsHhcMMWVl8k6oyU7Mf4=;
+ b=CdtlYkwksyk3xpMdKqH+i1Fjx3Yj71ot8pv9FLBBRW/7p8ojiXiaPW+KWdI5s32fpg
+ ypwldU50g0Wp3mkvAXb+n5PUG6rxcvT1AeYXIiawuriMUhIC69osuAZ90dEKA/0/Oh2M
+ Bi44I9PVxVZh5aHXYHCvT9h6WW6ORtfNg6jNrq9K8CyCvsp1N32UyE4hrrt/3PzkHugI
+ FCQZS/aqL6FbtnekMxTEmP9vSUaImw9OPsGjeJdp70lwqLi7DCjhzvMdbMl2HWnclAF4
+ D9dILrpgKbXa1WqGjmkSgVhelszja1hTAfVawSf+y3SFeOMtNPgD8LUZDhkrmkXWmxza
+ 6LeQ==
+X-Gm-Message-State: AOAM533iD0CJtdx+ax+3qCNIGRmqnHZazfa8Vf4Kq2pG5YkG24z8jnkZ
+ oPG6K1lvLmgaSNPuOuOxHHjgzn5fGDQ=
+X-Google-Smtp-Source: ABdhPJz4ZFgqEzfwlBUmPFOkNITtiiGGwRpTp1JBE7pskTT8xXXolQBji0fXXLXD7gcpJSvtGgOq4A==
+X-Received: by 2002:adf:ab54:: with SMTP id r20mr2278116wrc.293.1601461015844; 
+ Wed, 30 Sep 2020 03:16:55 -0700 (PDT)
+Received: from [192.168.1.36] (74.red-83-53-161.dynamicip.rima-tde.net.
+ [83.53.161.74])
+ by smtp.gmail.com with ESMTPSA id i14sm2016572wml.24.2020.09.30.03.16.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Sep 2020 03:16:55 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH 01/16] hw/core/cpu: Let CPU object have a clock source
+To: Igor Mammedov <imammedo@redhat.com>
+Cc: qemu-devel@nongnu.org, Damien Hedde <damien.hedde@greensocs.com>,
+ Huacai Chen <zltjiangshi@gmail.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, Paul Burton <paulburton@kernel.org>,
+ "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ =?UTF-8?Q?Herv=c3=a9_Poussineau?= <hpoussin@reactos.org>,
+ Cleber Rosa <crosa@redhat.com>, Huacai Chen <chenhc@lemote.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Richard Henderson <rth@twiddle.net>,
+ qemu-arm <qemu-arm@nongnu.org>, "qemu-riscv@nongnu.org"
+ <qemu-riscv@nongnu.org>, qemu-ppc <qemu-ppc@nongnu.org>
+References: <20200928171539.788309-1-f4bug@amsat.org>
+ <20200928171539.788309-2-f4bug@amsat.org>
+ <20200930094313.1120a040@redhat.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <da7248f7-5098-188b-d274-e122c87bb498@amsat.org>
+Date: Wed, 30 Sep 2020 12:16:53 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-References: <20200901154711.18457-1-green.wan@sifive.com>
- <20200901154711.18457-3-green.wan@sifive.com>
- <CAKmqyKOqQgE0X3T100Zzi6_8X5d9XVEjam01bhCZSU=-FL-ecw@mail.gmail.com>
- <CAJivOr4xLP1n4eVFyWHi=ckg17C_j76f=+o+YPztsYuaPDwCCw@mail.gmail.com>
- <CAKmqyKPFbfbXSryWW40kW=RF-mx4V_nVqmdOveQ-fuLQgFbARQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKPFbfbXSryWW40kW=RF-mx4V_nVqmdOveQ-fuLQgFbARQ@mail.gmail.com>
-From: Green Wan <green.wan@sifive.com>
-Date: Wed, 30 Sep 2020 15:10:20 +0800
-Message-ID: <CAJivOr7PVXi430SzPgbyFtFPqAsufy_xs1O7gfWQAS1ktTwb1A@mail.gmail.com>
-Subject: Re: [RFC PATCH v5 2/2] hw/riscv: sifive_u: Add backend drive support
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::741;
- envelope-from=green.wan@sifive.com; helo=mail-qk1-x741.google.com
+In-Reply-To: <20200930094313.1120a040@redhat.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::444;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x444.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_score_int: -15
+X-Spam_score: -1.6
+X-Spam_bar: -
+X-Spam_report: (-1.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.199, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,227 +97,116 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Sep 2020 07:10:37 -0000
+X-List-Received-Date: Wed, 30 Sep 2020 10:17:07 -0000
 
-On Wed, Sep 30, 2020 at 1:08 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Mon, Sep 28, 2020 at 2:18 AM Green Wan <green.wan@sifive.com> wrote:
-> >
-> > Hi Alistair,
-> >
-> > Thanks for the review. See the reply inline below.
-> >
-> >
-> > On Sat, Sep 26, 2020 at 5:52 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > >
-> > > On Tue, Sep 1, 2020 at 8:49 AM Green Wan <green.wan@sifive.com> wrote:
-> > > >
-> > > > Add '-drive' support to OTP device. Allow users to assign a raw file
-> > > > as OTP image.
-> > >
-> > > Do you mind writing an example command line argument in the commit message?
-> > >
-> > > Also, do you have a test case for this? I would like to add it to my CI.
-> > >
-> >
-> > Do you mean qtest? I run uboot and use uboot driver to test it and
-> > didn't create a qemu test case.
->
-> No, I just mean how are you running and testing this.
->
-> So you are booting U-Boot, then how do you test it in U-Boot?
++arm/ppc/riscv folks
 
-Correct, I just enabled the configuration for
-./drivers/misc/sifive-otp.c in uboot for normal booting access to OTP.
-And manually modify some failures write case to test write-once
-feature.
+On 9/30/20 9:43 AM, Igor Mammedov wrote:
+> On Mon, 28 Sep 2020 19:15:24 +0200
+> Philippe Mathieu-Daudé <f4bug@amsat.org> wrote:
+> 
+>> Let CPUState have a clock source (named 'clk') and CPUClass
+>> have a clock_update() callback. The clock can be optionally
+>> set Using qdev_connect_clock_in() from the Clock API.
+>> If the clock changes, the optional clock_update() will be
+>> called.
+> 
+> the sole user of it is mips cpu, so question is why
+> you are making it part of generic CPUm instead of
+> MIPSCPUClass/MIPSCPU?
 
->
-> > Here is the command I use:
-> >
-> > $ qemu-system-riscv64 -M sifive_u -m 256M -nographic -bios none
-> > -kernel ../opensbi/build/platform/sifive/fu540/firmware/fw_payload.elf
-> > -d guest_errors -drive if=none,format=raw,file=otp.img
-> >
-> > I'll check how to create a test case but maybe not that soon in the next patch.
-> >
-> > > >
-> > > > Signed-off-by: Green Wan <green.wan@sifive.com>
-> > > > ---
-> > > >  hw/riscv/sifive_u_otp.c         | 50 +++++++++++++++++++++++++++++++++
-> > > >  include/hw/riscv/sifive_u_otp.h |  2 ++
-> > > >  2 files changed, 52 insertions(+)
-> > > >
-> > > > diff --git a/hw/riscv/sifive_u_otp.c b/hw/riscv/sifive_u_otp.c
-> > > > index b8369e9035..477c54c7b8 100644
-> > > > --- a/hw/riscv/sifive_u_otp.c
-> > > > +++ b/hw/riscv/sifive_u_otp.c
-> > > > @@ -24,6 +24,8 @@
-> > > >  #include "qemu/log.h"
-> > > >  #include "qemu/module.h"
-> > > >  #include "hw/riscv/sifive_u_otp.h"
-> > > > +#include "sysemu/blockdev.h"
-> > > > +#include "sysemu/block-backend.h"
-> > > >
-> > > >  #define WRITTEN_BIT_ON 0x1
-> > > >
-> > > > @@ -54,6 +56,16 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
-> > > >          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
-> > > >              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
-> > > >              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
-> > > > +
-> > > > +            /* read from backend */
-> > > > +            if (s->blk) {
-> > > > +                int32_t buf;
-> > > > +
-> > > > +                blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
-> > > > +                          SIFIVE_U_OTP_FUSE_WORD);
-> > > > +                return buf;
-> > > > +            }
-> > > > +
-> > > >              return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
-> > > >          } else {
-> > > >              return 0xff;
-> > > > @@ -145,6 +157,12 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
-> > > >              /* write bit data */
-> > > >              SET_FUSEARRAY_BIT(s->fuse, s->pa, s->paio, s->pdin);
-> > > >
-> > > > +            /* write to backend */
-> > > > +            if (s->blk) {
-> > > > +                blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &val32,
-> > > > +                           SIFIVE_U_OTP_FUSE_WORD, 0);
-> > > > +            }
-> > > > +
-> > > >              /* update written bit */
-> > > >              SET_FUSEARRAY_BIT(s->fuse_wo, s->pa, s->paio, WRITTEN_BIT_ON);
-> > > >          }
-> > > > @@ -168,16 +186,48 @@ static const MemoryRegionOps sifive_u_otp_ops = {
-> > > >
-> > > >  static Property sifive_u_otp_properties[] = {
-> > > >      DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
-> > > > +    DEFINE_PROP_DRIVE("drive", SiFiveUOTPState, blk),
-> > > >      DEFINE_PROP_END_OF_LIST(),
-> > > >  };
-> > > >
-> > > >  static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
-> > > >  {
-> > > >      SiFiveUOTPState *s = SIFIVE_U_OTP(dev);
-> > > > +    DriveInfo *dinfo;
-> > > >
-> > > >      memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_u_otp_ops, s,
-> > > >                            TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
-> > > >      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-> > > > +
-> > > > +    dinfo = drive_get_next(IF_NONE);
-> > > > +    if (dinfo) {
-> > > > +        int ret;
-> > > > +        uint64_t perm;
-> > > > +        int filesize;
-> > > > +        BlockBackend *blk;
-> > > > +
-> > > > +        blk = blk_by_legacy_dinfo(dinfo);
-> > >
-> > > I think this should be:
-> > >
-> > > blk = dinfo ? blk_by_legacy_dinfo(dinfo) : NULL;
-> > >
-> >
-> > The previous code, "if (dinfo)", should check NULL already. But we can
-> > add more checks for blk such as qdev_prop_set_drive_err().
->
-> You are right, but I don't see a fallback if !dinfo
->
-Not sure whether we need it. Originally, I also added '!dinfo' check
-logic and turned out I found it can be handled like without "-drive"
-case. It just does a fallback to use the fuse[] array in memory. For
-example,
-"qemu-system-riscv64 -M sifive_u -m 256M -nographic -bios none -kernel
-../opensbi/build/platform/sifive/fu540/firmware/fw_payload.elf"
+This is a feature of the CPU, regardless its architecture.
 
+I expect the other archs to start using it soon.
 
-> >
-> > > > +        filesize = SIFIVE_U_OTP_NUM_FUSES * SIFIVE_U_OTP_FUSE_WORD;
-> > > > +        if (blk_getlength(blk) < filesize) {
-> > > > +            qemu_log_mask(LOG_GUEST_ERROR, "OTP drive size < 16K\n");
-> > >
-> > > You should probably be setting errp instead.
-> > >
-> > > If a user specified a -drive argument, they probably want to error if
-> > > we aren't going to use it.
-> > >
-> >
-> > Will set an errp.
->
-> Great!
->
-> >
-> > > > +            return;
-> > > > +        }
-> > > > +
-> > > > +        qdev_prop_set_drive(dev, "drive", blk);
-> > > > +
-> > > > +        perm = BLK_PERM_CONSISTENT_READ |
-> > > > +                        (blk_is_read_only(s->blk) ? 0 : BLK_PERM_WRITE);
-> > > > +        ret = blk_set_perm(s->blk, perm, BLK_PERM_ALL, errp);
-> > > > +        if (ret < 0) {
-> > > > +            qemu_log_mask(LOG_GUEST_ERROR, "set perm error.");
-> > >
-> > > Is it worth printing the error?
-> > >
-> > Probably add it when I test it. Will remove it.
->
-> Thanks
->
-> Alistair
->
-> >
-> > > > +        }
-> > > > +
-> > > > +        if (blk_pread(s->blk, 0, s->fuse, filesize) != filesize) {
-> > > > +            qemu_log_mask(LOG_GUEST_ERROR,
-> > > > +                          "failed to read the initial flash content");
-> > > > +            return;
-> > >
-> > > You don't need a return here.
-> > >
-> > k, will remove it and set errp.
-> >
-> > > Is this error fatal?
-> > >
-> > This shouldn't be fatal but it might lead to unknown state if the
-> > content is read partially.
-> > But the checking, "filesize < 16K", is fatal. It leads qemu to abort.
-> >
-> >
-> > > Alistair
-> > >
-> > > > +        }
-> > > > +    }
-> > > >  }
-> > > >
-> > > >  static void sifive_u_otp_reset(DeviceState *dev)
-> > > > diff --git a/include/hw/riscv/sifive_u_otp.h b/include/hw/riscv/sifive_u_otp.h
-> > > > index 4a5a0acf48..9bc781fd4f 100644
-> > > > --- a/include/hw/riscv/sifive_u_otp.h
-> > > > +++ b/include/hw/riscv/sifive_u_otp.h
-> > > > @@ -45,6 +45,7 @@
-> > > >
-> > > >  #define SIFIVE_U_OTP_PA_MASK        0xfff
-> > > >  #define SIFIVE_U_OTP_NUM_FUSES      0x1000
-> > > > +#define SIFIVE_U_OTP_FUSE_WORD      4
-> > > >  #define SIFIVE_U_OTP_SERIAL_ADDR    0xfc
-> > > >
-> > > >  #define SIFIVE_U_OTP_REG_SIZE       0x1000
-> > > > @@ -78,6 +79,7 @@ typedef struct SiFiveUOTPState {
-> > > >      uint32_t fuse_wo[SIFIVE_U_OTP_NUM_FUSES];
-> > > >      /* config */
-> > > >      uint32_t serial;
-> > > > +    BlockBackend *blk;
-> > > >  } SiFiveUOTPState;
-> > > >
-> > > >  #endif /* HW_SIFIVE_U_OTP_H */
-> > > > --
-> > > > 2.17.1
-> > > >
-> > > >
+> 
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+>> ---
+>>  include/hw/core/cpu.h |  5 +++++
+>>  hw/core/cpu.c         | 12 ++++++++++++
+>>  2 files changed, 17 insertions(+)
+>>
+>> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+>> index 6c34798c8b3..6989d90c193 100644
+>> --- a/include/hw/core/cpu.h
+>> +++ b/include/hw/core/cpu.h
+>> @@ -31,6 +31,7 @@
+>>  #include "qemu/thread.h"
+>>  #include "qemu/plugin.h"
+>>  #include "qom/object.h"
+>> +#include "hw/clock.h"
+>>  
+>>  typedef int (*WriteCoreDumpFunction)(const void *buf, size_t size,
+>>                                       void *opaque);
+>> @@ -155,6 +156,7 @@ struct TranslationBlock;
+>>   * @disas_set_info: Setup architecture specific components of disassembly info
+>>   * @adjust_watchpoint_address: Perform a target-specific adjustment to an
+>>   * address before attempting to match it against watchpoints.
+>> + * @clock_update: Callback for input clock changes
+>>   *
+>>   * Represents a CPU family or model.
+>>   */
+>> @@ -176,6 +178,7 @@ struct CPUClass {
+>>                                    unsigned size, MMUAccessType access_type,
+>>                                    int mmu_idx, MemTxAttrs attrs,
+>>                                    MemTxResult response, uintptr_t retaddr);
+>> +    void (*clock_update)(CPUState *cpu);
+>>      bool (*virtio_is_big_endian)(CPUState *cpu);
+>>      int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
+>>                             uint8_t *buf, int len, bool is_write);
+>> @@ -316,6 +319,7 @@ struct qemu_work_item;
+>>   *   QOM parent.
+>>   * @nr_cores: Number of cores within this CPU package.
+>>   * @nr_threads: Number of threads within this CPU.
+>> + * @clock: this CPU source clock (an output clock of another device)
+>>   * @running: #true if CPU is currently running (lockless).
+>>   * @has_waiter: #true if a CPU is currently waiting for the cpu_exec_end;
+>>   * valid under cpu_list_lock.
+>> @@ -400,6 +404,7 @@ struct CPUState {
+>>      int num_ases;
+>>      AddressSpace *as;
+>>      MemoryRegion *memory;
+>> +    Clock *clock;
+>>  
+>>      void *env_ptr; /* CPUArchState */
+>>      IcountDecr *icount_decr_ptr;
+>> diff --git a/hw/core/cpu.c b/hw/core/cpu.c
+>> index c55c09f734c..37fcff3ec64 100644
+>> --- a/hw/core/cpu.c
+>> +++ b/hw/core/cpu.c
+>> @@ -30,6 +30,7 @@
+>>  #include "qemu/qemu-print.h"
+>>  #include "sysemu/tcg.h"
+>>  #include "hw/boards.h"
+>> +#include "hw/qdev-clock.h"
+>>  #include "hw/qdev-properties.h"
+>>  #include "trace/trace-root.h"
+>>  #include "qemu/plugin.h"
+>> @@ -247,6 +248,16 @@ void cpu_reset(CPUState *cpu)
+>>      trace_guest_cpu_reset(cpu);
+>>  }
+>>  
+>> +static void cpu_clk_update(void *opaque)
+>> +{
+>> +    CPUState *cpu = opaque;
+>> +    CPUClass *cc = CPU_GET_CLASS(cpu);
+>> +
+>> +    if (cc->clock_update) {
+>> +        cc->clock_update(cpu);
+>> +    }
+>> +}
+>> +
+>>  static void cpu_common_reset(DeviceState *dev)
+>>  {
+>>      CPUState *cpu = CPU(dev);
+>> @@ -367,6 +378,7 @@ static void cpu_common_initfn(Object *obj)
+>>      /* the default value is changed by qemu_init_vcpu() for softmmu */
+>>      cpu->nr_cores = 1;
+>>      cpu->nr_threads = 1;
+>> +    cpu->clock = qdev_init_clock_in(DEVICE(obj), "clk", cpu_clk_update, cpu);
+>>  
+>>      qemu_mutex_init(&cpu->work_mutex);
+>>      QSIMPLEQ_INIT(&cpu->work_list);
+> 
 
