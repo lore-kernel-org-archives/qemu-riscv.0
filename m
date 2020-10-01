@@ -1,60 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kNfd7-0003Oq-9C
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Sep 2020 13:11:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45540)
+	id 1kNmCE-00073G-C6
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Sep 2020 20:11:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55844)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kNfd6-0003Mi-4B; Wed, 30 Sep 2020 13:11:00 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:39699)
+ id 1kNmCC-0006zF-6W; Wed, 30 Sep 2020 20:11:40 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:45655)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kNfd1-0000lA-OG; Wed, 30 Sep 2020 13:10:59 -0400
-Received: by mail-il1-x142.google.com with SMTP id q1so2479167ilt.6;
- Wed, 30 Sep 2020 10:10:52 -0700 (PDT)
+ id 1kNmCA-0007Nm-F7; Wed, 30 Sep 2020 20:11:39 -0400
+Received: by mail-io1-xd43.google.com with SMTP id y74so4626082iof.12;
+ Wed, 30 Sep 2020 17:11:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=LxorGA+RJxSkR8LDrDhoTR09mRuUxTjcGL5cjrEl0E4=;
- b=CIvD3czZlyuJpurDT7OTayYUlF/7NsWxILX/X2llUbjBTE2W8rQnQK1917EC5RFCF1
- 5+jD4239c+khc3WYleUwXV5dJCKkbwHituq+cu9rQhCJZ90DaYQGjgDKFH+I9cMy2m+w
- ocjS43rdT9JRz2ddwMdvDdxtAUzAdloyOBSsX36h3Ud2n1Ypyx0FTGhIGXn3L5/8zuIJ
- Nc51TTXssNhQnNWH0bT7QHrMmw3ZCI9C3i4n9LsZvQhUtHm9IHB321eP4l1TsRlMnn1V
- lJ1MakLg/o6Do0Xqp7/+kAQyQb4QBNTdwYMRD6Bylz6sZE3sCenQ/pHmXlJykTa2X0+b
- 5OuQ==
+ :cc; bh=ltOTc556RBt4jaX9hvbCi56xw/ZS5a78LIlu62T3V30=;
+ b=d8tSKMM3wyfOUk2af1bL19XEMEXwUSnsfmkqT2guYmeMtwfNcaG6hduEVY4D0N9vqS
+ oFjCcXaROptoqKEmvabOCRsdDzkWfLPwWV9dr29cxIPs97xB0zuxUSEkKqAaaGCihh8A
+ fmaRs3LTbhjZ2TqzgsDXvSJLKtbns2Lkx0ijbTuv6OzMB22aOEKGaxyGkJZNmRC24/IR
+ ejO9Xq3dEeXLi6vGmHFGv6argjckbxiOQUtZGMoufDlnsF3cahv24eXrZ1trSfVYe8UW
+ tPp69p8HHSzvj4D3Xj91yf/CKRXiNGWpKS57uJLrxweTpWEBTir7lnrWtVue6xuI0jh6
+ oGiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=LxorGA+RJxSkR8LDrDhoTR09mRuUxTjcGL5cjrEl0E4=;
- b=teWkQhTPf9fCX61JRlXpXTb42VJBU3dJBb3tD5UQsfqHtkPjWHLS3qfEuPFZPMD2HF
- Yg3ekfBdbes1sXTanmGEw9eTmNUDHP0mMfBSPRGYfZPM+wsSvynMhr9uJhIdfeFf5yf/
- LOC793FIUSPJyt/bjDQO+JfNOB+cxAXr1Y6YLeuydH6dyw0b/HaY1Yl87WP/obWw7v+v
- 3n+ivC6e33BkiR3ilYeAaukXY7kJqjhEoKHDL8YEPiIJzdzgDx3vkZ7s4kznICUX+oYh
- GFsuIkwa8q8GnxR1KSObYwRGuGqAVLZyDW20Pk+wL2K0Crf0bIfJJItdmT3pO2WxhXgP
- 7h8w==
-X-Gm-Message-State: AOAM533fEPM68QWNrHaJVejRbk/CYGRwvb3IWvT3YZFCAc4bbOhWLhjc
- gbabAtJjySMUPzLSD0R/v32l52KtIrjlFrAQy6w=
-X-Google-Smtp-Source: ABdhPJwTJ4FlF72er+xZSOfJie8SzUr/XZYwKASF8VW3E2c45N0I5LFMUr7kJZbFgmohh3dgQe28GIlq68QicQ+7FSM=
-X-Received: by 2002:a92:c94a:: with SMTP id i10mr3009298ilq.267.1601485851863; 
- Wed, 30 Sep 2020 10:10:51 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=ltOTc556RBt4jaX9hvbCi56xw/ZS5a78LIlu62T3V30=;
+ b=LsD+1JKMak+dN6DNEUVDE3jTmkVyVe1/6/dGItejwhbITnI907+HCSQPA+2XOJIG4G
+ mMlHDfdZtnW9WOC5A1GEWq0DDxOQ4a8U5XCNZ0nt6jCwz+8I2GxzvksykXkIZOjv3Nyn
+ b4L/10nmjPKcq7ts2VC3e59FZPsDxzTNpYGqxmZiFK2eziqChxq6/aJKvxiyO0VvLmjV
+ L1hRThbAV1oq76SdDKW+VsGHUfmESzrx9Kw6wqcMQG4LlWi+NeAtOq1Cf2KaLkjFnF8D
+ B//FYtRQHSDfEmPhsGAOJojjF5BTULSFqx0/wKW1Ck+E1/FQcejNvVxBnEhskfoGCGBZ
+ 5jAQ==
+X-Gm-Message-State: AOAM533l0mAOdwF1X4dnU+CbicfrpYMoP7Ao4e1JFyvTRiKTh2Uu2Dcz
+ rFvktzW7sThYscnqNiT3vd199R9jN8C4SX1JsEs=
+X-Google-Smtp-Source: ABdhPJwY1iKvTpZ+si8qFD/Ci5BnUPqY8FDmk3dIQ+BlZqZDrDLzgn7u9igcfPdoNN8rvEYXMYAi3cmJRA9/4n7b2lc=
+X-Received: by 2002:a05:6602:15c5:: with SMTP id
+ f5mr3567890iow.42.1601511096932; 
+ Wed, 30 Sep 2020 17:11:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20e41bdc81dbde7f9b3fdc1c768510ea99e8f565.1601214416.git.alistair.francis@wdc.com>
- <9ac03d37-b899-c9ae-fa48-4f30e3c3d82f@amsat.org>
-In-Reply-To: <9ac03d37-b899-c9ae-fa48-4f30e3c3d82f@amsat.org>
+References: <20200824084158.1769-1-jiangyifei@huawei.com>
+ <CAKmqyKOAAzhBqosJCFq9ww0T44EUZV1zqG+T1UPYAuebYbR1KQ@mail.gmail.com>
+ <c1273b7d24f5488c845d81153e495b69@huawei.com>
+In-Reply-To: <c1273b7d24f5488c845d81153e495b69@huawei.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 30 Sep 2020 09:59:29 -0700
-Message-ID: <CAKmqyKMN3SZ3S5kbEZWi5qazN_OqUbxk4q+wd9qkjJdZFmp_3Q@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] riscv: Convert interrupt logs to use
- qemu_log_mask()
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Wed, 30 Sep 2020 17:00:14 -0700
+Message-ID: <CAKmqyKO4w9WhMwCOE0A7WrA+QOxmO7=hVuzmDYBu3sYHLQOppA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: raise exception to HS-mode at
+ get_physical_address
+To: Jiangyifei <jiangyifei@huawei.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+ Zhanghailiang <zhang.zhanghailiang@huawei.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "Zhangxiaofeng (F)" <victor.zhangxiaofeng@huawei.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, yinyipeng <yinyipeng1@huawei.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, "Wubin (H)" <wu.wubin@huawei.com>, 
+ "dengkai (A)" <dengkai1@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -77,105 +82,136 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Sep 2020 17:11:00 -0000
+X-List-Received-Date: Thu, 01 Oct 2020 00:11:40 -0000
 
-On Sun, Sep 27, 2020 at 9:22 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
-g> wrote:
+On Sun, Sep 27, 2020 at 12:54 AM Jiangyifei <jiangyifei@huawei.com> wrote:
 >
-> On 9/27/20 3:47 PM, Alistair Francis wrote:
-> > Currently we log interrupts and exceptions using the trace backed in
 >
-> s/backed/backend/
 >
-> > riscv_cpu_do_interrupt(). We also log execptions using the interrupt lo=
-g
->
-> Typo "exceptions".
->
-> > mask (-d int) in riscv_raise_exception().
+> > -----Original Message-----
+> > From: Alistair Francis [mailto:alistair23@gmail.com]
+> > Sent: Saturday, September 26, 2020 6:24 AM
+> > To: Jiangyifei <jiangyifei@huawei.com>
+> > Cc: qemu-devel@nongnu.org Developers <qemu-devel@nongnu.org>; open
+> > list:RISC-V <qemu-riscv@nongnu.org>; Zhanghailiang
+> > <zhang.zhanghailiang@huawei.com>; Sagar Karandikar
+> > <sagark@eecs.berkeley.edu>; Bastian Koppelmann
+> > <kbastian@mail.uni-paderborn.de>; Zhangxiaofeng (F)
+> > <victor.zhangxiaofeng@huawei.com>; Alistair Francis
+> > <Alistair.Francis@wdc.com>; yinyipeng <yinyipeng1@huawei.com>; Palmer
+> > Dabbelt <palmer@dabbelt.com>; Wubin (H) <wu.wubin@huawei.com>;
+> > dengkai (A) <dengkai1@huawei.com>
+> > Subject: Re: [PATCH] target/riscv: raise exception to HS-mode at
+> > get_physical_address
 > >
-> > This PR converts riscv_cpu_do_interrupt() to log both interrupts and
->
-> s/PR/patch/
-
-Fixed!
-
->
-> > exceptions with the interrupt log mask, so that both are printed when a
-> > user runs QEMU with -d int.
+> > On Mon, Aug 24, 2020 at 1:43 AM Yifei Jiang <jiangyifei@huawei.com> wrote:
+> > >
+> > > VS-stage translation at get_physical_address needs to translate pte
+> > > address by G-stage translation. But the G-stage translation error can
+> > > not be distinguished from VS-stage translation error in
+> > > riscv_cpu_tlb_fill. On migration, destination needs to rebuild pte,
+> > > and this G-stage translation error must be handled by HS-mode. So
+> > > introduce TRANSLATE_STAGE2_FAIL so that riscv_cpu_tlb_fill could
+> > > distinguish and raise it to HS-mode.
+> > >
+> > > Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+> > > Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
 > >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  target/riscv/cpu_helper.c | 7 +++++--
-> >  target/riscv/op_helper.c  | 1 -
-> >  target/riscv/trace-events | 3 ---
-> >  3 files changed, 5 insertions(+), 6 deletions(-)
+> > Thanks for the patch!
 > >
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index 904899054d..9df3238213 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -894,8 +894,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-> >          }
-> >      }
+> > Sorry for the delay here.
 > >
-> > -    trace_riscv_trap(env->mhartid, async, cause, env->pc, tval,
-> > -        riscv_cpu_get_trap_name(cause, async));
-> > +    qemu_log_mask(CPU_LOG_INT,
-> > +                  "%s: hart:"TARGET_FMT_ld", async:%d, cause:"TARGET_F=
-MT_lx", "
-> > +                  "epc:0x"TARGET_FMT_lx", tval:0x"TARGET_FMT_lx", desc=
-=3D%s\n",
-> > +                  __func__, env->mhartid, async, cause, env->pc, tval,
-> > +                  riscv_cpu_get_trap_name(cause, async));
+> > > ---
+> > >  target/riscv/cpu.h        |  1 +
+> > >  target/riscv/cpu_helper.c | 12 ++++++++++--
+> > >  2 files changed, 11 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h index
+> > > a804a5d0ba..8b3b368d6a 100644
+> > > --- a/target/riscv/cpu.h
+> > > +++ b/target/riscv/cpu.h
+> > > @@ -85,6 +85,7 @@ enum {
+> > >  #define TRANSLATE_FAIL 1
+> > >  #define TRANSLATE_SUCCESS 0
+> > >  #define MMU_USER_IDX 3
+> > > +#define TRANSLATE_G_STAGE_FAIL 4
+> > >
+> > >  #define MAX_RISCV_PMPS (16)
+> > >
+> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > > index fd1d373b6f..1635b09c41 100644
+> > > --- a/target/riscv/cpu_helper.c
+> > > +++ b/target/riscv/cpu_helper.c
+> > > @@ -440,7 +440,10 @@ restart:
+> > >                                                   mmu_idx,
+> > false,
+> > > true);
+> > >
+> > >              if (vbase_ret != TRANSLATE_SUCCESS) {
+> > > -                return vbase_ret;
+> > > +                env->guest_phys_fault_addr = (base |
+> > > +                                              (addr &
+> > > +
+> > (TARGET_PAGE_SIZE -
+> > > + 1))) >> 2;
+> >
+> > Can we set guest_phys_fault_addr in riscv_cpu_tlb_fill() instead?
 >
-> Maybe you want to keep the trace event, as the trace framework allow you
-> to select traced events at runtime, events come with timestamp and for
-> some backends the events are machine-parsable.
-
-Good point, I have kept this in.
-
+> Hi Alistair,
 >
-> Regardless:
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> It's not easy to do that. The key is that the wrong address(the `base` variable) is not visible to riscv_cpu_tlb_fill().
+> Because the wrong address may be from any level of PTE which can't be easily obtained by riscv_cpu_tlb_fill().
+> The alternative is to add an out parameter in get_physical_address(). But it is not either elegant.
+> What is your advice?
 
-Thanks!
+You are right. Good call.
+
+In which case this looks like the right way to do this. Can you add a
+small comment in riscv_cpu_tlb_fill() to indicate that
+guest_phys_fault_addr has already been set when handling the error?
+The TLB filling code is pretty complex so the more documentation the
+better.
 
 Alistair
 
 >
-> >
-> >      if (env->priv <=3D PRV_S &&
-> >              cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
-> > diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> > index 9b9ada45a9..e987bd262f 100644
-> > --- a/target/riscv/op_helper.c
-> > +++ b/target/riscv/op_helper.c
-> > @@ -29,7 +29,6 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVStat=
-e *env,
-> >                                            uint32_t exception, uintptr_=
-t pc)
-> >  {
-> >      CPUState *cs =3D env_cpu(env);
-> > -    qemu_log_mask(CPU_LOG_INT, "%s: %d\n", __func__, exception);
-> >      cs->exception_index =3D exception;
-> >      cpu_loop_exit_restore(cs, pc);
-> >  }
-> > diff --git a/target/riscv/trace-events b/target/riscv/trace-events
-> > index b7e371ee97..6be2147c8f 100644
-> > --- a/target/riscv/trace-events
-> > +++ b/target/riscv/trace-events
-> > @@ -1,6 +1,3 @@
-> > -# cpu_helper.c
-> > -riscv_trap(uint64_t hartid, bool async, uint64_t cause, uint64_t epc, =
-uint64_t tval, const char *desc) "hart:%"PRId64", async:%d, cause:%"PRId64"=
-, epc:0x%"PRIx64", tval:0x%"PRIx64", desc=3D%s"
-> > -
-> >  # pmp.c
-> >  pmpcfg_csr_read(uint64_t mhartid, uint32_t reg_index, uint64_t val) "h=
-art %" PRIu64 ": read reg%" PRIu32", val: 0x%" PRIx64
-> >  pmpcfg_csr_write(uint64_t mhartid, uint32_t reg_index, uint64_t val) "=
-hart %" PRIu64 ": write reg%" PRIu32", val: 0x%" PRIx64
-> >
+> Best Regards,
+> Yifei
 >
+> >
+> > > +                return TRANSLATE_G_STAGE_FAIL;
+> > >              }
+> > >
+> > >              pte_addr = vbase + idx * ptesize; @@ -728,12 +731,17 @@
+> > > bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+> > >          ret = get_physical_address(env, &pa, &prot, address,
+> > access_type,
+> > >                                     mmu_idx, true, true);
+> > >
+> > > +        if (ret == TRANSLATE_G_STAGE_FAIL) {
+> > > +            first_stage_error = false;
+> > > +            access_type = MMU_DATA_LOAD;
+> > > +        }
+> > > +
+> > >          qemu_log_mask(CPU_LOG_MMU,
+> > >                        "%s 1st-stage address=%" VADDR_PRIx "
+> > ret %d physical "
+> > >                        TARGET_FMT_plx " prot %d\n",
+> > >                        __func__, address, ret, pa, prot);
+> > >
+> > > -        if (ret != TRANSLATE_FAIL) {
+> > > +        if (ret != TRANSLATE_FAIL && ret != TRANSLATE_G_STAGE_FAIL) {
+> >
+> > Otherwise this patch looks correct.
+> >
+> > Alistair
+> >
+> > >              /* Second stage lookup */
+> > >              im_address = pa;
+> > >
+> > > --
+> > > 2.19.1
+> > >
+> > >
+> > >
 
