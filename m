@@ -1,120 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kOdDO-0000w6-AO
-	for mharc-qemu-riscv@gnu.org; Sat, 03 Oct 2020 04:48:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58458)
+	id 1kP89X-0005Nr-OR
+	for mharc-qemu-riscv@gnu.org; Sun, 04 Oct 2020 13:50:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43268)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1kOdDI-0000rb-I7
- for qemu-riscv@nongnu.org; Sat, 03 Oct 2020 04:48:20 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:28203)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1kOdDG-0003dJ-8d
- for qemu-riscv@nongnu.org; Sat, 03 Oct 2020 04:48:20 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1601714897;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/yD2Xg+heLEf/P4MLYz+dS5vx/J1O0Ekd2CO4abRGUI=;
- b=IZBvuzTz3/gX1eODDowjdNzWz67prVyS566rsBHR6xJ6z39WoXCxpU9GBnILNG2YlvqG70
- Gmh4CaT9dInJiN/Da7Fko3okm7sBShHdYy7PKMrmlh5IFXY/STGLvWV1dV/ZjsEuCBcBDQ
- EpQDldvLOW7ykK9dupD0BxBluagVTJg=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-245-KfV9BJDqOxertk0H-Izwwg-1; Sat, 03 Oct 2020 04:48:13 -0400
-X-MC-Unique: KfV9BJDqOxertk0H-Izwwg-1
-Received: by mail-wm1-f69.google.com with SMTP id y6so943734wmi.7
- for <qemu-riscv@nongnu.org>; Sat, 03 Oct 2020 01:48:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kP89W-0005Nk-Ow
+ for qemu-riscv@nongnu.org; Sun, 04 Oct 2020 13:50:30 -0400
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130]:42443)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kP89U-0006cE-Tm
+ for qemu-riscv@nongnu.org; Sun, 04 Oct 2020 13:50:30 -0400
+Received: by mail-lf1-x130.google.com with SMTP id b12so8172840lfp.9
+ for <qemu-riscv@nongnu.org>; Sun, 04 Oct 2020 10:50:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=G4BPbaq5D2iIH/73ntUEhqvsKUgBGudcKQHqcZPzIws=;
+ b=TRk7seLlnT6wb0czIyazdD52zyjgkWWh6ZTPCsA2jvAn2zzx5/menr7XIRsJfxCS1q
+ 80BYaDli/iLvJAYVrzzi7neOGzQUw2VyJCwRYRFEFjm6Bsvr1VrgYwILUBoY6loNh3hj
+ Y/kjgA3t3j0M2D4u+pXSybX5XdTeDNVInScjaugCLrvuERXPVixQ8TVnark27KK747Ge
+ L4Ma/9bvjVaz+SffgZheeKKw146KISBLLPj0M5EiaYG1AdU8ceAQ2oRjCs0k0E+jvJlM
+ q2qvWPL3lwSL/3cxfKi55g/pMBEazIVkvLHf2O0OsQPS2bRrZM0jwxHGQXDSSQEWJRlN
+ FMVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=/yD2Xg+heLEf/P4MLYz+dS5vx/J1O0Ekd2CO4abRGUI=;
- b=ofmuYK2ocvML8COUlAlE+i3UoYnB2FGevPApJkGCs76Yh4oRoZ9kvq3q3nq0MuHLeg
- cYG1eSx8+PEjjq5Ii7p7SZe+wtHXiSh0uYYORxveGYdVyXBihe8xs4e+gCSxIPXE9bz6
- ZwBM2DhRxgU77U0r1c2wZnwPNRqc4dvZtVsLNNTZPyls6jikSzbjaqDGoSIBzfi0byE1
- kFPOE4s6QBNKRQKlzK+9iZUjOkKc+3ZPEI4D1gyb5a4r0NvfbvBIXiF/ourF+gExfyrY
- /HQWe36fIdM/M0SKTypkeVxTSUhnheYi1a1tTj8WFlykMOoR/9y19lXLZ21YXPsATeBq
- ndaQ==
-X-Gm-Message-State: AOAM5309qWKlX4wI0VjV9AG8qvW3/PT2XqnFtS2aIUlpeaXLMF8KSlbj
- M6JLGfC8SsN+7fyW0kD1jo+bS52QvWmSJjxAisHVeQlaUm9Ck34r2N1J6canzp0J9QMKb3iri9d
- G9UAfif6qmB+YJaQ=
-X-Received: by 2002:a5d:55c8:: with SMTP id i8mr7276923wrw.331.1601714892044; 
- Sat, 03 Oct 2020 01:48:12 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwAIX0iUFCBJ4wyETu7XcFXy583sWva8tpa1gx50dhNU0Dwz4oNCcxqQkasJf6KRmPiXxW7Lw==
-X-Received: by 2002:a5d:55c8:: with SMTP id i8mr7276871wrw.331.1601714891730; 
- Sat, 03 Oct 2020 01:48:11 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:f6ef:6259:374d:b794?
- ([2001:b07:6468:f312:f6ef:6259:374d:b794])
- by smtp.gmail.com with ESMTPSA id u81sm1344487wmg.43.2020.10.03.01.48.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 03 Oct 2020 01:48:11 -0700 (PDT)
-Subject: Re: [PATCH v3] qemu/atomic.h: rename atomic_ to qatomic_
-To: Matthew Rosato <mjrosato@linux.ibm.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
-Cc: Fam Zheng <fam@euphon.net>, Peter Maydell <peter.maydell@linaro.org>,
- sheepdog@lists.wpkg.org, Paul Durrant <paul@xen.org>,
- Jason Wang <jasowang@redhat.com>, David Hildenbrand <david@redhat.com>,
- Yuval Shaia <yuval.shaia.ml@gmail.com>, Markus Armbruster
- <armbru@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Huacai Chen <chenhc@lemote.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Alberto Garcia <berto@igalia.com>, kvm@vger.kernel.org,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Juan Quintela <quintela@redhat.com>, Jiri Slaby <jslaby@suse.cz>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Michael Roth <mdroth@linux.vnet.ibm.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- Liu Yuan <namei.unix@gmail.com>, Richard Henderson <rth@twiddle.net>,
- Thomas Huth <thuth@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>,
- Stefan Weil <sw@weilnetz.de>, Peter Lieven <pl@kamp.de>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>, qemu-s390x@nongnu.org,
- qemu-arm@nongnu.org, xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
- Sunil Muthuswamy <sunilmut@microsoft.com>, John Snow <jsnow@redhat.com>,
- Hailiang Zhang <zhang.zhanghailiang@huawei.com>,
- Kevin Wolf <kwolf@redhat.com>, =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?=
- <berrange@redhat.com>, qemu-block@nongnu.org,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
- Max Reitz <mreitz@redhat.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Aurelien Jarno <aurelien@aurel32.net>
-References: <20200923105646.47864-1-stefanha@redhat.com>
- <4e65d6fa-0a7e-015b-eb6f-5dd1cc3ddd91@linux.ibm.com>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <45ba3626-0e06-96c7-5ed8-ea561ae20f15@redhat.com>
-Date: Sat, 3 Oct 2020 10:48:08 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=G4BPbaq5D2iIH/73ntUEhqvsKUgBGudcKQHqcZPzIws=;
+ b=a6pagCy7DVZe2UuUNKkP5cLZcH4wolRDsF9UWG2H9csCNoa4+SYwIMsrplKvpdtEa2
+ Ho4KNwopnnCcWpaopftbae6SYzWbOdxuCk1LsFUjB037MMkMAzq5u5dlF8/YVN2Zx9O0
+ UbUfnX/en8fwPLk6IrdWHi9sZ0ukWNzcyT0Pif2WxRizy0Xl7UdaO2oKbicifwnuSkAc
+ DHfdbDKSoCuNj0iIKF1TH/kclZc4NfmSdDL4AcKoxbgHDlMJCMM6YOnNgdEH1oMIHIrf
+ OnwS1UcjCeXEWhXRu4lTL3b7Sv1tA72NLN4pneTiCVkINY22Iu1TXVmA6oqNuVm8FnJS
+ GroA==
+X-Gm-Message-State: AOAM5305pJYCN9QtD0Lz5zRDM31khGmVrzlgNgGYRbprYtSqgFL9awf3
+ 89L2ooiHaBp9UhbFVg2BqCl9zMCCOSbMIqlxyJDKODnnlf4xJw==
+X-Google-Smtp-Source: ABdhPJzQDs1Xc6qSXeyi2J6U5anSDqoR0axUH0NAnIR5z50+CNnYNR3O61meV4kAUw/wiKWm0/MOAgLUMSC1r8Sw118=
+X-Received: by 2002:a19:6419:: with SMTP id y25mr3942972lfb.333.1601833826264; 
+ Sun, 04 Oct 2020 10:50:26 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <4e65d6fa-0a7e-015b-eb6f-5dd1cc3ddd91@linux.ibm.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pbonzini@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/03 04:48:16
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+From: Alexey Baturo <baturo.alexey@gmail.com>
+Date: Sun, 4 Oct 2020 20:50:15 +0300
+Message-ID: <CAFukJ-Cra_MELxo6Xr=g2S90UvpNg=m6XLjNWQs1hF4iK3mmYA@mail.gmail.com>
+Subject: Pointer Masking prototype for RISC-V QEMU
+To: qemu-riscv@nongnu.org
+Cc: Dave Smith <kupokupokupopo@gmail.com>, richard.henderson@linaro.org
+Content-Type: multipart/alternative; boundary="00000000000034287205b0dc00da"
+Received-SPF: pass client-ip=2a00:1450:4864:20::130;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x130.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- NICE_REPLY_A=-0.256, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001,
- RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -127,68 +68,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Oct 2020 08:48:20 -0000
+X-List-Received-Date: Sun, 04 Oct 2020 17:50:31 -0000
 
-On 02/10/20 18:43, Matthew Rosato wrote:
->> diff --git
->> a/include/standard-headers/drivers/infiniband/hw/vmw_pvrdma/pvrdma_ring.h
->> b/include/standard-headers/drivers/infiniband/hw/vmw_pvrdma/pvrdma_ring.h
->> index acd4c8346d..7b4062a1a1 100644
->> ---
->> a/include/standard-headers/drivers/infiniband/hw/vmw_pvrdma/pvrdma_ring.h
->> +++
->> b/include/standard-headers/drivers/infiniband/hw/vmw_pvrdma/pvrdma_ring.h
->> @@ -68,7 +68,7 @@ static inline int pvrdma_idx_valid(uint32_t idx,
->> uint32_t max_elems)
->>     static inline int32_t pvrdma_idx(int *var, uint32_t max_elems)
->>   {
->> -    const unsigned int idx = atomic_read(var);
->> +    const unsigned int idx = qatomic_read(var);
->>         if (pvrdma_idx_valid(idx, max_elems))
->>           return idx & (max_elems - 1);
->> @@ -77,17 +77,17 @@ static inline int32_t pvrdma_idx(int *var,
->> uint32_t max_elems)
->>     static inline void pvrdma_idx_ring_inc(int *var, uint32_t max_elems)
->>   {
->> -    uint32_t idx = atomic_read(var) + 1;    /* Increment. */
->> +    uint32_t idx = qatomic_read(var) + 1;    /* Increment. */
->>         idx &= (max_elems << 1) - 1;        /* Modulo size, flip gen. */
->> -    atomic_set(var, idx);
->> +    qatomic_set(var, idx);
->>   }
->>     static inline int32_t pvrdma_idx_ring_has_space(const struct
->> pvrdma_ring *r,
->>                             uint32_t max_elems, uint32_t *out_tail)
->>   {
->> -    const uint32_t tail = atomic_read(&r->prod_tail);
->> -    const uint32_t head = atomic_read(&r->cons_head);
->> +    const uint32_t tail = qatomic_read(&r->prod_tail);
->> +    const uint32_t head = qatomic_read(&r->cons_head);
->>         if (pvrdma_idx_valid(tail, max_elems) &&
->>           pvrdma_idx_valid(head, max_elems)) {
->> @@ -100,8 +100,8 @@ static inline int32_t
->> pvrdma_idx_ring_has_space(const struct pvrdma_ring *r,
->>   static inline int32_t pvrdma_idx_ring_has_data(const struct
->> pvrdma_ring *r,
->>                            uint32_t max_elems, uint32_t *out_head)
->>   {
->> -    const uint32_t tail = atomic_read(&r->prod_tail);
->> -    const uint32_t head = atomic_read(&r->cons_head);
->> +    const uint32_t tail = qatomic_read(&r->prod_tail);
->> +    const uint32_t head = qatomic_read(&r->cons_head);
->>         if (pvrdma_idx_valid(tail, max_elems) &&
->>           pvrdma_idx_valid(head, max_elems)) {
-> 
-> 
-> It looks like the changes in this file are going to get reverted the
-> next time someone does a linux header sync.
+--00000000000034287205b0dc00da
+Content-Type: text/plain; charset="UTF-8"
 
-Source code should not be at all imported from Linux.  The hacks that
-accomodate pvrdma in update-linux-headers.sh (like s/atomic_t/u32/)
-really have no place there; the files in
-include/standard-headers/drivers/infiniband/hw/vmw_pvrdma should all be
-moved in hw/.
+Hi folks,
 
-Paolo
+I've implemented support for RISC-V Pointer Masking proposal developed by
+J-ext workgroup. The initial prototype was for QEMU 4.1 and later I moved
+it to the current vesrsion(5.1).
+Could you please help me to clarify some things:
+- I'd like to commit this functionality to the QEMU(mainline or separate
+branch), do you think it's possible at this stage?
+- Could you please describe the proper process of commiting such new
+functionality to QEMU?
+- What are the requirements for test coverage of this new functionality and
+what test infra should be used to measure it?
+- If this functionality is deemed to be acceptable for QEMU, how does the
+review process looks like?
+- Also it's possible to implement Memory Tagging extension similarly as
+ARMv8.5 has: it would reuse a lot of part from Pointer Masking. I've done
+initial prototype of such extension, does it make sence to try to push such
+experimetal features to qemu? If yes, what are the prerequisites?
 
+Thanks!
+
+--00000000000034287205b0dc00da
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi folks,<br><br>I&#39;ve implemented support for RISC-V P=
+ointer Masking proposal developed by J-ext workgroup. The initial prototype=
+ was for QEMU 4.1 and later I moved it to the current vesrsion(5.1).<br>Cou=
+ld you please help me to clarify some things:<br>- I&#39;d like to commit t=
+his functionality to the QEMU(mainline or separate branch), do you think it=
+&#39;s possible at this stage?<br>- Could you please describe the proper pr=
+ocess of commiting such new functionality to QEMU?<br>- What are the requir=
+ements for test coverage of this new functionality and what test infra shou=
+ld be used to measure it?<br>- If this functionality is deemed to be accept=
+able for QEMU, how does the review process looks like?<br>- Also it&#39;s p=
+ossible to implement Memory Tagging extension similarly as ARMv8.5 has: it =
+would reuse a lot of part from Pointer Masking. I&#39;ve done initial proto=
+type of such extension, does it make sence to try to push such experimetal =
+features to qemu? If yes, what are the prerequisites?<br><br>Thanks!<br></d=
+iv>
+
+--00000000000034287205b0dc00da--
 
