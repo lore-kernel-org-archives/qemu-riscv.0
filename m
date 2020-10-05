@@ -1,74 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kPRCo-00018M-1D
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Oct 2020 10:11:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58854)
+	id 1kPTXK-0001xz-9R
+	for mharc-qemu-riscv@gnu.org; Mon, 05 Oct 2020 12:40:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43686)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kPRCm-00015O-Aa
- for qemu-riscv@nongnu.org; Mon, 05 Oct 2020 10:11:08 -0400
-Received: from mail-oi1-x235.google.com ([2607:f8b0:4864:20::235]:41999)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kPRCi-0002Yn-EF
- for qemu-riscv@nongnu.org; Mon, 05 Oct 2020 10:11:07 -0400
-Received: by mail-oi1-x235.google.com with SMTP id 16so1197878oix.9
- for <qemu-riscv@nongnu.org>; Mon, 05 Oct 2020 07:11:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vn3cWMzj8No0YOUDRVC0yjTlOvcUrXvU8SxYLuZ/ifk=;
- b=EjwjLuPoaqkXcQo5R94b+YbIP0HU7b0m7VctbkYSYR/W3uKDb84YqvnanC8iJFRn4k
- dEFam5+0Pung7Pq9Ze6F1kqcKDQJXA1asamaPA23qDSGyzEzApUwalYTyy6xLR3gaLlp
- LyqT0zsyf9TqeJUj37BQ00Js6S4ZKdXPIuEwJcJiIvURSmKTyUExe19Y4M9T1dPEWBUr
- OK4HHuwHih5XctFMkbQW+yN0A4IELYF7p/cj0FN9ZGVdnoA21RINRqZtRoF434GqakGt
- zNio2ekRBi5pBpXMILs3+SrwXWlJ+OFqvxIyz4aVmvpW1tUk22Lt+Rd1hK3dO81co8an
- 2iNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=vn3cWMzj8No0YOUDRVC0yjTlOvcUrXvU8SxYLuZ/ifk=;
- b=ltNy/zxSvNx4RwoHOWTfZIoZOw5BXj2nqTEQzpGOize4LB614SoQQyLwZfJmP36xHu
- JsAxU81526O5IPBGrrGIOQR/WTjnKqkZ09iwjSj4ShYk3wR8XNQF5zMg9UnYXR6JXXf6
- lnA8n81kW5F8IoHzBhDbQG/1s9rpTooewZeKCMh2pPI8iRK6JrQAOslr+s6WxskqyoAr
- QfRTvpdc0yAcXF56C0V7I8iRPiKJYWzxOxjmsJSnrm8N4eimOMZ4BE5X0tkdmpGbHTnt
- NmkLSh5i/1T5YOebUS79JCUFqCCLdQDvA1fYeNWtXhgONPQvQX3FP2w22eUCVlzQ5NaU
- B69Q==
-X-Gm-Message-State: AOAM531wRRN/0cPulTSUwhifdVpbq5df+A+Y3D8ElABdMYMOQ96qGd4T
- 6mbXsusIEIrXeHyKhUtjO+12AyhsIzL8j9Dz3judkA==
-X-Google-Smtp-Source: ABdhPJxf2Im1XGuoze5D/sgcmdIfYftLwb6C0QsjJsa23Cdi3qiWyyrQCCPrmg9Y5CB1Czp0qyIH+KWs4sVoWSjOUvk=
-X-Received: by 2002:aca:4c0d:: with SMTP id z13mr4488018oia.78.1601907062963; 
- Mon, 05 Oct 2020 07:11:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1kPTXI-0001u7-FC
+ for qemu-riscv@nongnu.org; Mon, 05 Oct 2020 12:40:28 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:25225)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1kPTXG-00009c-9K
+ for qemu-riscv@nongnu.org; Mon, 05 Oct 2020 12:40:28 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1601916025;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=OK4Zm+CDihcj7rnMnXkHEuEcrJFYNjGqyRUOrY+EdNY=;
+ b=iutmgm4q+bslFL46pIJslADbUaWfHx32kp+1ii4o56TCnk5Oehha2l3Q9y+AkqABNEZfJN
+ FvjSdIzggfQ/VWXjNRE7tNgGViZih06t7UaD6XfzJW1e4iVH593qUDiTVKsRqCZ9437m8W
+ v8eh+LJ59tE9Vp5KL+06c3MQyF2JYsA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-67-3hj0ReY8O5OU_QQPhm2HCA-1; Mon, 05 Oct 2020 12:40:21 -0400
+X-MC-Unique: 3hj0ReY8O5OU_QQPhm2HCA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 737CFE0040;
+ Mon,  5 Oct 2020 16:40:19 +0000 (UTC)
+Received: from localhost (unknown [10.40.208.52])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 49D545C221;
+ Mon,  5 Oct 2020 16:40:11 +0000 (UTC)
+Date: Mon, 5 Oct 2020 18:40:09 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <f4bug@amsat.org>
+Cc: Damien Hedde <damien.hedde@greensocs.com>, Huacai Chen
+ <zltjiangshi@gmail.com>, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, Eduardo Habkost
+ <ehabkost@redhat.com>, Paul Burton <paulburton@kernel.org>, qemu-ppc
+ <qemu-ppc@nongnu.org>, qemu-devel@nongnu.org, Wainer dos Santos Moschetta
+ <wainersm@redhat.com>, Aleksandar Markovic
+ <aleksandar.qemu.devel@gmail.com>, qemu-arm <qemu-arm@nongnu.org>,
+ =?UTF-8?B?SGVydsOp?= Poussineau <hpoussin@reactos.org>, Cleber Rosa
+ <crosa@redhat.com>, Huacai Chen <chenhc@lemote.com>, "Edgar E . Iglesias"
+ <edgar.iglesias@gmail.com>, Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?=
+ <philmd@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>, Richard
+ Henderson <rth@twiddle.net>
+Subject: Re: [PATCH 01/16] hw/core/cpu: Let CPU object have a clock source
+Message-ID: <20201005184009.493629b0@redhat.com>
+In-Reply-To: <da7248f7-5098-188b-d274-e122c87bb498@amsat.org>
+References: <20200928171539.788309-1-f4bug@amsat.org>
+ <20200928171539.788309-2-f4bug@amsat.org>
+ <20200930094313.1120a040@redhat.com>
+ <da7248f7-5098-188b-d274-e122c87bb498@amsat.org>
 MIME-Version: 1.0
-References: <20200929190448.31116-1-frank.chang@sifive.com>
- <20200929190448.31116-7-frank.chang@sifive.com>
- <ad28385b-3e36-e33a-03c2-dabaaaea80bc@linaro.org>
- <CAE_xrPgK0ROiWo+Evan9uGFoBo8t0hV8vt0A2DxDb_Sws55-Ng@mail.gmail.com>
- <246985bc-98ff-0975-20d4-66c5864abc63@linaro.org>
-In-Reply-To: <246985bc-98ff-0975-20d4-66c5864abc63@linaro.org>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Mon, 5 Oct 2020 22:10:52 +0800
-Message-ID: <CAE_xrPiaSqGVTK4sjsSbgWAQyC4vua170FEuqAjmnuYShNbuzw@mail.gmail.com>
-Subject: Re: [RFC v5 06/68] target/riscv: rvv-1.0: add translation-time vector
- context status
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- LIU Zhiwei <zhiwei_liu@c-sky.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Content-Type: multipart/alternative; boundary="0000000000007396f305b0ed0df3"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::235;
- envelope-from=frank.chang@sifive.com; helo=mail-oi1-x235.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=imammedo@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/05 02:11:31
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.733,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,119 +87,132 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Oct 2020 14:11:08 -0000
+X-List-Received-Date: Mon, 05 Oct 2020 16:40:28 -0000
 
---0000000000007396f305b0ed0df3
-Content-Type: text/plain; charset="UTF-8"
+On Wed, 30 Sep 2020 12:16:53 +0200
+Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> wrote:
 
-On Mon, Oct 5, 2020 at 10:00 PM Richard Henderson <
-richard.henderson@linaro.org> wrote:
+> +arm/ppc/riscv folks
+>=20
+> On 9/30/20 9:43 AM, Igor Mammedov wrote:
+> > On Mon, 28 Sep 2020 19:15:24 +0200
+> > Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> wrote:
+> >  =20
+> >> Let CPUState have a clock source (named 'clk') and CPUClass
+> >> have a clock_update() callback. The clock can be optionally
+> >> set Using qdev_connect_clock_in() from the Clock API.
+> >> If the clock changes, the optional clock_update() will be
+> >> called. =20
+> >=20
+> > the sole user of it is mips cpu, so question is why
+> > you are making it part of generic CPUm instead of
+> > MIPSCPUClass/MIPSCPU? =20
+>=20
+> This is a feature of the CPU, regardless its architecture.
+>=20
+> I expect the other archs to start using it soon.
 
-> On 10/5/20 2:12 AM, Frank Chang wrote:
-> >     I think you want to be sharing the code between vsetvl and vsetvli
-> now.  Just
-> >     pass in a TCGv value to a common helper.
-> >
-> >
-> > The only difference now between vsetvl and vsetvli is the format of zimm
-> and s2
-> > fields.
-> > But they have different formats and are queried by different functions,
-> > i.e. s2 = tcg_const_tl(a->zimm); and gen_get_gpr(s2, a->rs2);
-> >
-> > Is there any elegant way to retrieve the values of zimm and s2 by shared
-> common
-> > codes?
->
-> Yes, like I (too briefly) described:
->
-> static bool do_vsetvl(DisasContext *ctx,
->                       int rd, int rs1, TCGv s2)
-> {
->     // existing contents of trans_vsetvl
->     // do continue to free s2.
-> }
->
-> static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
-> {
->     TCGv s2 = tcg_temp_new();
->     gen_get_gpr(s2, a->rs2);
->     return do_vsetvl(ctx, a->rd, a->rs1, s2);
-> }
->
-> static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)
-> {
->     TCGv s2 = tcg_const_tl(a->zimm);
->     return do_vsetvl(ctx, a->rd, a->rs1, s2);
-> }
->
->
-> r~
->
+if there aren't any plans to actually to do that,
+I'd keep it to MIPS class and generalize later when there is demand.
+=20
+>=20
+> >  =20
+> >>
+> >> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> >> ---
+> >>  include/hw/core/cpu.h |  5 +++++
+> >>  hw/core/cpu.c         | 12 ++++++++++++
+> >>  2 files changed, 17 insertions(+)
+> >>
+> >> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+> >> index 6c34798c8b3..6989d90c193 100644
+> >> --- a/include/hw/core/cpu.h
+> >> +++ b/include/hw/core/cpu.h
+> >> @@ -31,6 +31,7 @@
+> >>  #include "qemu/thread.h"
+> >>  #include "qemu/plugin.h"
+> >>  #include "qom/object.h"
+> >> +#include "hw/clock.h"
+> >> =20
+> >>  typedef int (*WriteCoreDumpFunction)(const void *buf, size_t size,
+> >>                                       void *opaque);
+> >> @@ -155,6 +156,7 @@ struct TranslationBlock;
+> >>   * @disas_set_info: Setup architecture specific components of disasse=
+mbly info
+> >>   * @adjust_watchpoint_address: Perform a target-specific adjustment t=
+o an
+> >>   * address before attempting to match it against watchpoints.
+> >> + * @clock_update: Callback for input clock changes
+> >>   *
+> >>   * Represents a CPU family or model.
+> >>   */
+> >> @@ -176,6 +178,7 @@ struct CPUClass {
+> >>                                    unsigned size, MMUAccessType access=
+_type,
+> >>                                    int mmu_idx, MemTxAttrs attrs,
+> >>                                    MemTxResult response, uintptr_t ret=
+addr);
+> >> +    void (*clock_update)(CPUState *cpu);
+> >>      bool (*virtio_is_big_endian)(CPUState *cpu);
+> >>      int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
+> >>                             uint8_t *buf, int len, bool is_write);
+> >> @@ -316,6 +319,7 @@ struct qemu_work_item;
+> >>   *   QOM parent.
+> >>   * @nr_cores: Number of cores within this CPU package.
+> >>   * @nr_threads: Number of threads within this CPU.
+> >> + * @clock: this CPU source clock (an output clock of another device)
+> >>   * @running: #true if CPU is currently running (lockless).
+> >>   * @has_waiter: #true if a CPU is currently waiting for the cpu_exec_=
+end;
+> >>   * valid under cpu_list_lock.
+> >> @@ -400,6 +404,7 @@ struct CPUState {
+> >>      int num_ases;
+> >>      AddressSpace *as;
+> >>      MemoryRegion *memory;
+> >> +    Clock *clock;
+> >> =20
+> >>      void *env_ptr; /* CPUArchState */
+> >>      IcountDecr *icount_decr_ptr;
+> >> diff --git a/hw/core/cpu.c b/hw/core/cpu.c
+> >> index c55c09f734c..37fcff3ec64 100644
+> >> --- a/hw/core/cpu.c
+> >> +++ b/hw/core/cpu.c
+> >> @@ -30,6 +30,7 @@
+> >>  #include "qemu/qemu-print.h"
+> >>  #include "sysemu/tcg.h"
+> >>  #include "hw/boards.h"
+> >> +#include "hw/qdev-clock.h"
+> >>  #include "hw/qdev-properties.h"
+> >>  #include "trace/trace-root.h"
+> >>  #include "qemu/plugin.h"
+> >> @@ -247,6 +248,16 @@ void cpu_reset(CPUState *cpu)
+> >>      trace_guest_cpu_reset(cpu);
+> >>  }
+> >> =20
+> >> +static void cpu_clk_update(void *opaque)
+> >> +{
+> >> +    CPUState *cpu =3D opaque;
+> >> +    CPUClass *cc =3D CPU_GET_CLASS(cpu);
+> >> +
+> >> +    if (cc->clock_update) {
+> >> +        cc->clock_update(cpu);
+> >> +    }
+> >> +}
+> >> +
+> >>  static void cpu_common_reset(DeviceState *dev)
+> >>  {
+> >>      CPUState *cpu =3D CPU(dev);
+> >> @@ -367,6 +378,7 @@ static void cpu_common_initfn(Object *obj)
+> >>      /* the default value is changed by qemu_init_vcpu() for softmmu *=
+/
+> >>      cpu->nr_cores =3D 1;
+> >>      cpu->nr_threads =3D 1;
+> >> +    cpu->clock =3D qdev_init_clock_in(DEVICE(obj), "clk", cpu_clk_upd=
+ate, cpu);
+> >> =20
+> >>      qemu_mutex_init(&cpu->work_mutex);
+> >>      QSIMPLEQ_INIT(&cpu->work_list); =20
+> >  =20
+>=20
 
-Oops, I misunderstood what the "helper function" you meant.
-I thought it was the helper function in vector_helper.c.
-I'll update the codes in the next version patchset.
-
-Thanks,
-Frank Chang
-
---0000000000007396f305b0ed0df3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Mon, Oct 5, 2020 at 10:00 PM Richard H=
-enderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hender=
-son@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">On 10/5/20 2:12 AM, Frank Chang wr=
-ote:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0I think you want to be sharing the code between vse=
-tvl and vsetvli now.=C2=A0 Just<br>
-&gt;=C2=A0 =C2=A0 =C2=A0pass in a TCGv value to a common helper.<br>
-&gt; <br>
-&gt; <br>
-&gt; The only difference now between vsetvl=C2=A0and vsetvli is the format =
-of zimm and s2<br>
-&gt; fields.<br>
-&gt; But they have different formats and are queried by different functions=
-,<br>
-&gt; i.e. s2 =3D tcg_const_tl(a-&gt;zimm); and gen_get_gpr(s2, a-&gt;rs2);<=
-br>
-&gt; <br>
-&gt; Is there any elegant way to retrieve the values of zimm and s2 by shar=
-ed common<br>
-&gt; codes?<br>
-<br>
-Yes, like I (too briefly) described:<br>
-<br>
-static bool do_vsetvl(DisasContext *ctx,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 int rd, int rs1, TCGv s2)<br>
-{<br>
-=C2=A0 =C2=A0 // existing contents of trans_vsetvl<br>
-=C2=A0 =C2=A0 // do continue to free s2.<br>
-}<br>
-<br>
-static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)<br>
-{<br>
-=C2=A0 =C2=A0 TCGv s2 =3D tcg_temp_new();<br>
-=C2=A0 =C2=A0 gen_get_gpr(s2, a-&gt;rs2);<br>
-=C2=A0 =C2=A0 return do_vsetvl(ctx, a-&gt;rd, a-&gt;rs1, s2);<br>
-}<br>
-<br>
-static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)<br>
-{<br>
-=C2=A0 =C2=A0 TCGv s2 =3D tcg_const_tl(a-&gt;zimm);<br>
-=C2=A0 =C2=A0 return do_vsetvl(ctx, a-&gt;rd, a-&gt;rs1, s2);<br>
-}<br>
-<br>
-<br>
-r~<br></blockquote><div><br></div><div>Oops, I misunderstood what the &quot=
-;helper function&quot; you meant.</div><div>I thought=C2=A0it was the helpe=
-r function in vector_helper.c.</div><div>I&#39;ll update the codes in the n=
-ext version patchset.</div><div><br></div><div>Thanks,</div><div>Frank Chan=
-g=C2=A0<br></div></div></div>
-
---0000000000007396f305b0ed0df3--
 
