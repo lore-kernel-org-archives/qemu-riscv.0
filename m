@@ -1,71 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kQSja-0003A8-FP
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Oct 2020 06:01:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59352)
+	id 1kQXdp-0001GY-Kd
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Oct 2020 11:15:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49496)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1kQSjY-00039h-Md
- for qemu-riscv@nongnu.org; Thu, 08 Oct 2020 06:01:12 -0400
-Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c]:33844)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1kQSjV-0001VZ-NN
- for qemu-riscv@nongnu.org; Thu, 08 Oct 2020 06:01:12 -0400
-Received: by mail-ej1-x62c.google.com with SMTP id u8so7260924ejg.1
- for <qemu-riscv@nongnu.org>; Thu, 08 Oct 2020 03:01:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=eloJToFC63NRjpwM8VbhiW+S7qE4fG6bP32gqbRdD+k=;
- b=QnK0u8W+wVMbGRCeazs2dDyNdOlbNEzt8uirEZsCt5ypeiw/supPdgEebDQ0A7m2Ri
- EmCEDXKJbcdFadyNZdPk7pNAVxARHckeoW5eEjZePyhICgpo6DPjcSxEh/2Dq7O0H4tu
- CH6vcR7saT5SWbvzvZBXxLNpAYxWDb5pl+74UTJvBVmqRqS1pXkb8OovFkODyNGXj5nj
- Oe9rpXZencEiyGRLIChDA9LuGCCZe0hcuzrHY7s1gX+we3kbIYXFNSYvGKNCWhpGP3qD
- xr6ra93x8kQ2d6xOU9kQpzxPIX48dZmVnvAPoD7IcJfXdFLap3zN19sWX9e682t1PMx4
- M8RQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=eloJToFC63NRjpwM8VbhiW+S7qE4fG6bP32gqbRdD+k=;
- b=kXbTV6RnvMv97g6k08H8/kn2igZ+YhTA6JvXu4z0W4MX5b+MGneUF8oYTvh3sHscUM
- TXen6jcHVfPnIMqb2CktnMmFMSxX7Gu3t7liWD0GYkfOAjy730rrBmSK1QoidFSmobuz
- 6Sbs/2KaJgOz0P9kXLWVyXcd4EFHg7NuF+HcLkSOgZN+JkdJS1n9IFDDvGMNk9slVjld
- 47aKofEQu77TqWucEuSWwi+n5h49Q8qBM1B44Nul+dADyjV8fJFY/1PEJktcmr/fz0aQ
- srPtbjWoAzKHqx9ubfs00676MexglDO3/+6okDkRxGraFRhqe0bhsskrkr/7LieGPp+L
- nWZQ==
-X-Gm-Message-State: AOAM5337HjIEfnmmPLyMVbPd1gRQshYD167uYntuXVRcs76cbZsjNDTW
- miwQm/SEgBzcTTe119q+nq4yWXeOxsvLgnOr/8gh7g==
-X-Google-Smtp-Source: ABdhPJwILtXqid7N8FtTtnQcgK4rxvfw8FVqz6Bw3uEo5KF0fO3M1LOMZKZJdUQa/MQFavFueafAq4pQzuwuQ4A0xB0=
-X-Received: by 2002:a17:907:4365:: with SMTP id
- nd5mr8128802ejb.56.1602151265968; 
- Thu, 08 Oct 2020 03:01:05 -0700 (PDT)
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1kQXdn-0001Fp-Lg
+ for qemu-riscv@nongnu.org; Thu, 08 Oct 2020 11:15:35 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:31740)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1kQXdf-0005Z4-JK
+ for qemu-riscv@nongnu.org; Thu, 08 Oct 2020 11:15:33 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1602170126;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=LsTxGd52RpL1Rni+Ium1WEhbiIOmWYcR8IimClkGF6I=;
+ b=KrZ02n2x4/cxPS5SJk4eYhrGLo72JEazkw2ZWiG39ZZ5ueZR5kCM0CzvKfsETAFHPcTraK
+ v0DS0jmudv1kTfrZ7PIsIyuYBKN6Qwy1o1LIfmSAFbzsh6hZtFOZUrzVlTwiSEl8ZXwK91
+ NBM0SCBvHvOoTlGW7i1brVns1wXtkas=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-55-CraWXUl-OCKPyA_r2ZyarA-1; Thu, 08 Oct 2020 11:15:24 -0400
+X-MC-Unique: CraWXUl-OCKPyA_r2ZyarA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B976E427C4;
+ Thu,  8 Oct 2020 15:15:22 +0000 (UTC)
+Received: from localhost (ovpn-119-102.rdu2.redhat.com [10.10.119.102])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 651FD5D9D5;
+ Thu,  8 Oct 2020 15:15:22 +0000 (UTC)
+Date: Thu, 8 Oct 2020 11:15:21 -0400
+From: Eduardo Habkost <ehabkost@redhat.com>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>,
+ qemu-arm <qemu-arm@nongnu.org>, qemu-ppc <qemu-ppc@nongnu.org>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ "Daniel P. Berrange" <berrange@redhat.com>, John Snow <jsnow@redhat.com>
+Subject: Re: Purpose of QOM properties registered at realize time?
+Message-ID: <20201008151521.GB7303@habkost.net>
 References: <20201006220647.GR7303@habkost.net>
  <CAFEAcA_se7jErv9AFM2D7UdDMurB9Lb6W9aAXD6648spQ6idKg@mail.gmail.com>
  <87mu0xyrtn.fsf@dusky.pond.sub.org>
+MIME-Version: 1.0
 In-Reply-To: <87mu0xyrtn.fsf@dusky.pond.sub.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 8 Oct 2020 11:00:54 +0100
-Message-ID: <CAFEAcA_txULmHTGipXp=7PW9gkM-JFf=5WT9h=BNKKpLcr+uEQ@mail.gmail.com>
-Subject: Re: Purpose of QOM properties registered at realize time?
-To: Markus Armbruster <armbru@redhat.com>
-Cc: Eduardo Habkost <ehabkost@redhat.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- QEMU Developers <qemu-devel@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>, 
- qemu-ppc <qemu-ppc@nongnu.org>, Paolo Bonzini <pbonzini@redhat.com>, 
- "Daniel P. Berrange" <berrange@redhat.com>, John Snow <jsnow@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
- envelope-from=peter.maydell@linaro.org; helo=mail-ej1-x62c.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=ehabkost@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/08 02:56:27
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -78,16 +79,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2020 10:01:13 -0000
+X-List-Received-Date: Thu, 08 Oct 2020 15:15:35 -0000
 
-On Thu, 8 Oct 2020 at 10:45, Markus Armbruster <armbru@redhat.com> wrote:
-> In real hardware, the number of GPIOs and such is fixed.
+On Thu, Oct 08, 2020 at 11:45:08AM +0200, Markus Armbruster wrote:
+> A first class static array property, where the size of the array is part
+> of the value could perhaps cover this case.
 
-That depends on your point of view. Often this kind of
-parameter is configurable in the hardware also, as a
-parameter to the RTL, so different boards/SoCs using the
-same device may vary in how they choose to configure it.
+This is an interesting idea, I think we should explore that.
 
-thanks
--- PMM
+qdev_pass_gpios() would become unnecessary and could be replaced
+by a single (static) alias property.
+
+-- 
+Eduardo
+
 
