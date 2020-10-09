@@ -1,65 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kQnqT-0001hA-Ib
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 04:33:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48724)
+	id 1kQp5f-0000WP-3z
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 05:53:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37340)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kQnqR-0001gu-P5; Fri, 09 Oct 2020 04:33:43 -0400
-Received: from szxga01-in.huawei.com ([45.249.212.187]:2938 helo=huawei.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kQnqP-0005h0-Kt; Fri, 09 Oct 2020 04:33:43 -0400
-Received: from DGGEMM406-HUB.china.huawei.com (unknown [172.30.72.57])
- by Forcepoint Email with ESMTP id 26A08E0B1F0D74EC38CF;
- Fri,  9 Oct 2020 16:33:37 +0800 (CST)
-Received: from dggemm752-chm.china.huawei.com (10.1.198.58) by
- DGGEMM406-HUB.china.huawei.com (10.3.20.214) with Microsoft SMTP Server (TLS)
- id 14.3.487.0; Fri, 9 Oct 2020 16:33:36 +0800
-Received: from dggpemm000001.china.huawei.com (7.185.36.245) by
- dggemm752-chm.china.huawei.com (10.1.198.58) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1913.5; Fri, 9 Oct 2020 16:33:36 +0800
-Received: from dggpemm000001.china.huawei.com ([7.185.36.245]) by
- dggpemm000001.china.huawei.com ([7.185.36.245]) with mapi id 15.01.1913.007;
- Fri, 9 Oct 2020 16:33:36 +0800
-From: Jiangyifei <jiangyifei@huawei.com>
-To: Alistair Francis <alistair23@gmail.com>
-CC: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, "open
- list:RISC-V" <qemu-riscv@nongnu.org>, Zhanghailiang
- <zhang.zhanghailiang@huawei.com>, Sagar Karandikar
- <sagark@eecs.berkeley.edu>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>, "Zhangxiaofeng (F)"
- <victor.zhangxiaofeng@huawei.com>, Alistair Francis
- <Alistair.Francis@wdc.com>, yinyipeng <yinyipeng1@huawei.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, "Wubin (H)" <wu.wubin@huawei.com>, "dengkai (A)"
- <dengkai1@huawei.com>
-Subject: RE: [PATCH 2/5] target/riscv: Add PMP state description
-Thread-Topic: [PATCH 2/5] target/riscv: Add PMP state description
-Thread-Index: AQHWlgTPdwzJAFmCmEa/JKusRGLC9amJFpIAgAXqceA=
-Date: Fri, 9 Oct 2020 08:33:36 +0000
-Message-ID: <f867553f20c744f6a4d0c0da639ca86d@huawei.com>
-References: <20200929020337.1559-1-jiangyifei@huawei.com>
- <20200929020337.1559-3-jiangyifei@huawei.com>
- <CAKmqyKMXdiTJYoNbATTfGTO-FT1+Ke9bHk_kGwpT0mH26xsSVg@mail.gmail.com>
-In-Reply-To: <CAKmqyKMXdiTJYoNbATTfGTO-FT1+Ke9bHk_kGwpT0mH26xsSVg@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.174.185.47]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kQp5e-0000W1-24; Fri, 09 Oct 2020 05:53:30 -0400
+Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:38121)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kQp5c-0006vQ-FE; Fri, 09 Oct 2020 05:53:29 -0400
+Received: by mail-yb1-xb43.google.com with SMTP id b138so4491095yba.5;
+ Fri, 09 Oct 2020 02:53:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=b0E/WK1vMmXZmROGbiNd4mcOr4Ugxgo4UbBiD55Y3Bc=;
+ b=RHrjJQLcNtC/0ngMMi+0PIFlatLgFvSL0DK7Zk+FCPF9cVGmcbALjVtxAHUXbGA2wB
+ BSTitmO5GJIwIDiiEtAY6gQfXAqQLcEBHFi22sCQc4ZUJWSI9nD6gmmfmZVIOk7VTm37
+ NvojjWTw2qPKItJzhp3CjwPq1OtxEGbRcNCqMEFzP/Gs5dS92ES7kUF0MGURRdlJi0Ec
+ 0QGJQJdiNNkMGV++OEvn0BeOIBvsHDZcigCMZ1vWEIT1ueicDpXvpqyICENBxIIREd9v
+ 7sHMyEqaVQytKr1YhWP5WLiKyFkerBxUWFC7HPRj8QjoKF9b1I7t0s0lWe29Uyf236a+
+ onxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=b0E/WK1vMmXZmROGbiNd4mcOr4Ugxgo4UbBiD55Y3Bc=;
+ b=iBmRKP169otg7bfUhLoq75PDWRTw4AyX8z9NdwVzrhN9H4uwNJ5MN2sqJkbxdq5LIr
+ yXQbwPDvbatb6tENfjwIqs4Y1Hn8wJLOHe5VicAOQXqR31MUNGPTZru50TUuuVvbaH6Z
+ +oRMzgDblmda7FMWkdOYN29KX/F7pi86Yy2Z5W5HLxnhVrzg0dNqEZm/qKyoDxQyBdAU
+ QS6HyF4zVp5Q+YU7ZGGfSuIvxpVIldnbW9JftVRxzzmiWlJZuuZPajQi+FMBL0GTook/
+ tnYZvZuAdq327Pu2s9cpJrPDR3VoM8JRYuz1PCu0ydR+AIucM+f6oyXX0JkPqMGWVEM0
+ yUzA==
+X-Gm-Message-State: AOAM532QQFYOsPkyMpo2uRKG6VskGaFKUULp9vEBiEA6/jd+fucrl3jl
+ Uh7fhate2iYLD8sonMzZjDY8aiK9g1RhLoUSLv4=
+X-Google-Smtp-Source: ABdhPJxdSvAGp+8+RDp6YyZDmH3xz8MHlVVq6ZoAoL7EOwIDuzj3UzFtRwoBp/zp1ieNzuoJH5g8ipccDva3DLw7vp0=
+X-Received: by 2002:a25:2ac8:: with SMTP id
+ q191mr16582156ybq.306.1602237207070; 
+ Fri, 09 Oct 2020 02:53:27 -0700 (PDT)
 MIME-Version: 1.0
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.187;
- envelope-from=jiangyifei@huawei.com; helo=huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/09 04:33:37
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <cover.1601652616.git.alistair.francis@wdc.com>
+In-Reply-To: <cover.1601652616.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 9 Oct 2020 17:53:15 +0800
+Message-ID: <CAEUhbmXhFv8m3uFQ8z7XeEcXnTCJLCVokWp5ZQ-C3PDHdXJn1Q@mail.gmail.com>
+Subject: Re: [PATCH v1 0/4] Allow loading a no MMU kernel
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -72,73 +72,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2020 08:33:44 -0000
+X-List-Received-Date: Fri, 09 Oct 2020 09:53:30 -0000
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogQWxpc3RhaXIgRnJhbmNp
-cyBbbWFpbHRvOmFsaXN0YWlyMjNAZ21haWwuY29tXQ0KPiBTZW50OiBUdWVzZGF5LCBPY3RvYmVy
-IDYsIDIwMjAgNjoxMSBBTQ0KPiBUbzogSmlhbmd5aWZlaSA8amlhbmd5aWZlaUBodWF3ZWkuY29t
-Pg0KPiBDYzogcWVtdS1kZXZlbEBub25nbnUub3JnIERldmVsb3BlcnMgPHFlbXUtZGV2ZWxAbm9u
-Z251Lm9yZz47IG9wZW4NCj4gbGlzdDpSSVNDLVYgPHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz47IFpo
-YW5naGFpbGlhbmcNCj4gPHpoYW5nLnpoYW5naGFpbGlhbmdAaHVhd2VpLmNvbT47IFNhZ2FyIEth
-cmFuZGlrYXINCj4gPHNhZ2Fya0BlZWNzLmJlcmtlbGV5LmVkdT47IEJhc3RpYW4gS29wcGVsbWFu
-bg0KPiA8a2Jhc3RpYW5AbWFpbC51bmktcGFkZXJib3JuLmRlPjsgWmhhbmd4aWFvZmVuZyAoRikN
-Cj4gPHZpY3Rvci56aGFuZ3hpYW9mZW5nQGh1YXdlaS5jb20+OyBBbGlzdGFpciBGcmFuY2lzDQo+
-IDxBbGlzdGFpci5GcmFuY2lzQHdkYy5jb20+OyB5aW55aXBlbmcgPHlpbnlpcGVuZzFAaHVhd2Vp
-LmNvbT47IFBhbG1lcg0KPiBEYWJiZWx0IDxwYWxtZXJAZGFiYmVsdC5jb20+OyBXdWJpbiAoSCkg
-PHd1Lnd1YmluQGh1YXdlaS5jb20+Ow0KPiBkZW5na2FpIChBKSA8ZGVuZ2thaTFAaHVhd2VpLmNv
-bT4NCj4gU3ViamVjdDogUmU6IFtQQVRDSCAyLzVdIHRhcmdldC9yaXNjdjogQWRkIFBNUCBzdGF0
-ZSBkZXNjcmlwdGlvbg0KPiANCj4gT24gTW9uLCBTZXAgMjgsIDIwMjAgYXQgNzowNSBQTSBZaWZl
-aSBKaWFuZyA8amlhbmd5aWZlaUBodWF3ZWkuY29tPiB3cm90ZToNCj4gPg0KPiA+IEluIHRoZSBj
-YXNlIG9mIHN1cHBvcnRpbmcgUE1QIGZlYXR1cmUsIGFkZCBQTVAgc3RhdGUgZGVzY3JpcHRpb24g
-dG8NCj4gPiB2bXN0YXRlX3Jpc2N2X2NwdS4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IFlpZmVp
-IEppYW5nIDxqaWFuZ3lpZmVpQGh1YXdlaS5jb20+DQo+ID4gU2lnbmVkLW9mZi1ieTogWWlwZW5n
-IFlpbiA8eWlueWlwZW5nMUBodWF3ZWkuY29tPg0KPiA+IC0tLQ0KPiA+ICB0YXJnZXQvcmlzY3Yv
-bWFjaGluZS5jIHwgNDkNCj4gPiArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysNCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDQ5IGluc2VydGlvbnMoKykNCj4gPg0KPiA+IGRp
-ZmYgLS1naXQgYS90YXJnZXQvcmlzY3YvbWFjaGluZS5jIGIvdGFyZ2V0L3Jpc2N2L21hY2hpbmUu
-YyBpbmRleA0KPiA+IDM0NTFiODg4YjEuLmIxZmM4MzliNDMgMTAwNjQ0DQo+ID4gLS0tIGEvdGFy
-Z2V0L3Jpc2N2L21hY2hpbmUuYw0KPiA+ICsrKyBiL3RhcmdldC9yaXNjdi9tYWNoaW5lLmMNCj4g
-PiBAQCAtNCw2ICs0LDUxIEBADQo+ID4gICNpbmNsdWRlICJzeXNlbXUva3ZtLmgiDQo+ID4gICNp
-bmNsdWRlICJtaWdyYXRpb24vY3B1LmgiDQo+ID4NCj4gPiArc3RhdGljIGJvb2wgcG1wX25lZWRl
-ZCh2b2lkICpvcGFxdWUpDQo+ID4gK3sNCj4gPiArICAgIFJJU0NWQ1BVICpjcHUgPSBvcGFxdWU7
-DQo+ID4gKyAgICBDUFVSSVNDVlN0YXRlICplbnYgPSAmY3B1LT5lbnY7DQo+ID4gKw0KPiA+ICsg
-ICAgcmV0dXJuIHJpc2N2X2ZlYXR1cmUoZW52LCBSSVNDVl9GRUFUVVJFX1BNUCk7IH0NCj4gPiAr
-DQo+ID4gK3N0YXRpYyBjb25zdCBWTVN0YXRlRGVzY3JpcHRpb24gdm1zdGF0ZV9wbXBfZW50cnkg
-PSB7DQo+ID4gKyAgICAubmFtZSA9ICJjcHUvcG1wL2VudHJ5IiwNCj4gPiArICAgIC52ZXJzaW9u
-X2lkID0gMSwNCj4gPiArICAgIC5taW5pbXVtX3ZlcnNpb25faWQgPSAxLA0KPiA+ICsgICAgLmZp
-ZWxkcyA9IChWTVN0YXRlRmllbGRbXSkgew0KPiA+ICsgICAgICAgIFZNU1RBVEVfVUlOVFRMKGFk
-ZHJfcmVnLCBwbXBfZW50cnlfdCksDQo+ID4gKyAgICAgICAgVk1TVEFURV9VSU5UOChjZmdfcmVn
-LCBwbXBfZW50cnlfdCksDQo+ID4gKyAgICAgICAgVk1TVEFURV9FTkRfT0ZfTElTVCgpDQo+ID4g
-KyAgICB9DQo+ID4gK307DQo+ID4gKw0KPiA+ICtzdGF0aWMgY29uc3QgVk1TdGF0ZURlc2NyaXB0
-aW9uIHZtc3RhdGVfcG1wX2FkZHIgPSB7DQo+ID4gKyAgICAubmFtZSA9ICJjcHUvcG1wL2FkZHIi
-LA0KPiA+ICsgICAgLnZlcnNpb25faWQgPSAxLA0KPiA+ICsgICAgLm1pbmltdW1fdmVyc2lvbl9p
-ZCA9IDEsDQo+ID4gKyAgICAuZmllbGRzID0gKFZNU3RhdGVGaWVsZFtdKSB7DQo+ID4gKyAgICAg
-ICAgVk1TVEFURV9VSU5UVEwoc2EsIHBtcF9hZGRyX3QpLA0KPiA+ICsgICAgICAgIFZNU1RBVEVf
-VUlOVFRMKGVhLCBwbXBfYWRkcl90KSwNCj4gPiArICAgICAgICBWTVNUQVRFX0VORF9PRl9MSVNU
-KCkNCj4gPiArICAgIH0NCj4gPiArfTsNCj4gPiArDQo+ID4gK3N0YXRpYyBjb25zdCBWTVN0YXRl
-RGVzY3JpcHRpb24gdm1zdGF0ZV9wbXAgPSB7DQo+ID4gKyAgICAubmFtZSA9ICJjcHUvcG1wIiwN
-Cj4gPiArICAgIC52ZXJzaW9uX2lkID0gMSwNCj4gPiArICAgIC5taW5pbXVtX3ZlcnNpb25faWQg
-PSAxLA0KPiA+ICsgICAgLm5lZWRlZCA9IHBtcF9uZWVkZWQsDQo+ID4gKyAgICAuZmllbGRzID0g
-KFZNU3RhdGVGaWVsZFtdKSB7DQo+ID4gKyAgICAgICAgVk1TVEFURV9TVFJVQ1RfQVJSQVkoZW52
-LnBtcF9zdGF0ZS5wbXAsIFJJU0NWQ1BVLA0KPiBNQVhfUklTQ1ZfUE1QUywNCj4gPiArICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAwLCB2bXN0YXRlX3BtcF9lbnRyeSwgcG1wX2VudHJ5X3Qp
-LA0KPiA+ICsgICAgICAgIFZNU1RBVEVfU1RSVUNUX0FSUkFZKGVudi5wbXBfc3RhdGUuYWRkciwg
-UklTQ1ZDUFUsDQo+IE1BWF9SSVNDVl9QTVBTLA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIDAsIHZtc3RhdGVfcG1wX2FkZHIsIHBtcF9hZGRyX3QpLA0KPiA+ICsgICAgICAgIFZN
-U1RBVEVfVUlOVDMyKGVudi5wbXBfc3RhdGUubnVtX3J1bGVzLCBSSVNDVkNQVSksDQo+IA0KPiBJ
-IHdvdWxkIHByZWZlciB0byByZS1nZW5lcmF0ZSB0aGVzZSBmcm9tIHRoZSBQTVAgQ1NScyBwb3N0
-IGxvYWQuDQo+IA0KPiBBbGlzdGFpcg0KPiANCg0KVGhhbmtzIGZvciB5b3VyIGFkdmljZS4gWWVz
-LCB5b3UgYXJlIHJpZ2h0Lg0Kdm1zdGF0ZV9wbXBfZW50cnkgY2Fubm90IGJlIHJlZ2VuZXJhdGVk
-LCBidXQgdm1zdGF0ZV9wbXBfYWRkciBhbmQgbnVtX3J1bGVzIGNvdWxkIGJlIHJlZ2VuZXJhdGVk
-Lg0KDQpJJ2xsIGFkZCBwb3N0X2xvYWQgaG9vayBmb3IgcmVnZW5lcmF0aW5nIHZtc3RhdGVfcG1w
-X2FkZHIgYW5kIG51bV9ydWxlcyBpbiB0aGUgbmV4dCBzZXJpZXMuDQoNCllpZmVpDQoNCj4gPiAr
-ICAgICAgICBWTVNUQVRFX0VORF9PRl9MSVNUKCkNCj4gPiArICAgIH0NCj4gPiArfTsNCj4gPiAr
-DQo+ID4gIGNvbnN0IFZNU3RhdGVEZXNjcmlwdGlvbiB2bXN0YXRlX3Jpc2N2X2NwdSA9IHsNCj4g
-PiAgICAgIC5uYW1lID0gImNwdSIsDQo+ID4gICAgICAudmVyc2lvbl9pZCA9IDEsDQo+ID4gQEAg
-LTU1LDUgKzEwMCw5IEBAIGNvbnN0IFZNU3RhdGVEZXNjcmlwdGlvbiB2bXN0YXRlX3Jpc2N2X2Nw
-dSA9IHsNCj4gPiAgICAgICAgICBWTVNUQVRFX1VJTlRUTChlbnYubXN0YXR1c2gsIFJJU0NWQ1BV
-KSwgICNlbmRpZg0KPiA+ICAgICAgICAgIFZNU1RBVEVfRU5EX09GX0xJU1QoKQ0KPiA+ICsgICAg
-fSwNCj4gPiArICAgIC5zdWJzZWN0aW9ucyA9IChjb25zdCBWTVN0YXRlRGVzY3JpcHRpb24gKiBb
-XSkgew0KPiA+ICsgICAgICAgICZ2bXN0YXRlX3BtcCwNCj4gPiArICAgICAgICBOVUxMDQo+ID4g
-ICAgICB9DQo+ID4gIH07DQo+ID4gLS0NCj4gPiAyLjE5LjENCj4gPg0KPiA+DQo=
+Hi Alistair,
+
+On Fri, Oct 2, 2020 at 11:50 PM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> This series allows loading a noMMU kernel using the -kernel option.
+> Currently if using -kernel QEMU assumes you also have firmware and loads
+> the kernel at a hardcoded offset. This series changes that so we only
+> load the kernel at an offset if a firmware (-bios) was loaded.
+>
+> This series also adds a function to check if the CPU is 32-bit. This is
+> a step towards running 32-bit and 64-bit CPUs on the 64-bit RISC-V build
+> by using run time checks instead of compile time checks. We also allow
+> the user to sepcify a CPU for the sifive_u machine.
+
+Could you please provide test scenarios for this series? I want to
+have a try. Thanks.
+
+>
+> Alistair Francis (4):
+>   hw/riscv: sifive_u: Allow specifying the CPU
+>   hw/riscv: Return the end address of the loaded firmware
+>   hw/riscv: Add a riscv_is_32_bit() function
+>   hw/riscv: Load the kernel after the firmware
+>
+>  include/hw/riscv/boot.h     | 11 +++++----
+>  include/hw/riscv/sifive_u.h |  1 +
+>  hw/riscv/boot.c             | 47 ++++++++++++++++++++++++-------------
+>  hw/riscv/opentitan.c        |  3 ++-
+>  hw/riscv/sifive_e.c         |  3 ++-
+>  hw/riscv/sifive_u.c         | 31 ++++++++++++++++++------
+>  hw/riscv/spike.c            | 14 ++++++++---
+>  hw/riscv/virt.c             | 14 ++++++++---
+>  8 files changed, 89 insertions(+), 35 deletions(-)
+
+Regards,
+Bin
 
