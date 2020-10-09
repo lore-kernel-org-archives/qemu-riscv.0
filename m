@@ -1,82 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kQsG2-0004wP-SB
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 09:16:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50166)
+	id 1kQsPi-00017a-Ku
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 09:26:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58742)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kQsFz-0004sU-R5; Fri, 09 Oct 2020 09:16:23 -0400
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:38886)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kQsFu-0006JL-63; Fri, 09 Oct 2020 09:16:23 -0400
-Received: by mail-wr1-x441.google.com with SMTP id n18so10265476wrs.5;
- Fri, 09 Oct 2020 06:16:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=BCBRkd7SY1UGBTvNjwTUZiHdR4k7LgdAwwkOsNr4HZc=;
- b=HmitRWhVocYgSOtXwuynB0laV7+779gNP5WyPmGsnLmV0Wdr1AOxYCB//YgqMJMDYd
- YBKnylVN4WkCwNelgHbEV0ebCkrI4XV2V6qVA1iEmFf2dE3vhgwdOveSaiobqsO+R5NC
- VXd0gSG+GKjQjVGg+EvTNUr9Tis8ujquK8ViJdScF0zugPQTebioMi8Q09ppaVSkbw03
- LQc4e225Z7w+F4gttVuZK86R5HKKr+ItjBISoKaBRr6xz3OelbTe1lYrv5Sv0R3b1C0c
- 0R7Hz/qGEH9RHiabNj8CKw0j+nYV9dV7/VEBrw2oUihRIJr91BeBjAKMDoaiuEDgqWOk
- CJCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=BCBRkd7SY1UGBTvNjwTUZiHdR4k7LgdAwwkOsNr4HZc=;
- b=bsSV411EaFJ0vCZI6OvhAhVs861XQmjCXcVZZzmtTC9nAvCkyDwIDuEnkLNzbWST4j
- JYnooWuAZQp0JeCYTN/SNS8K6sh3VsVVPr+CWSu3+OlizVptd57ZaMFqMB7Q7kiDJaCM
- Lndov6y9xGB0t2KNe5vGJ208QIlDo3gzDRSonWPHUd9xRTpO4cb5xQ9fUjEIqaivS9/Z
- 9D6HKCJht9FQEZ9WyF8TANW84qZIgzJkUxc9EiaRksOb6rV8fmHDq0GhNDux0YFv2DEX
- BUzttU67SLB7gPUxNGI+PWe++pKT5oflxpp4kM/3/VXAy4WZKTuQRItHV6iT7fp/pcxZ
- wEaA==
-X-Gm-Message-State: AOAM533oI/QcME0GNptwrt7DFsYJajXBzp8q7K2gwvrBwViPS2GQfqpB
- /UZcxXyGKqhyeIvmatxwWyE=
-X-Google-Smtp-Source: ABdhPJx43Sc1uffzDRFdDFnR7yJXhv8U6uF6XLhW8Y5iGr/UPkQiLkVVfgOiblm7b7nvYqS+PhbNwQ==
-X-Received: by 2002:adf:a345:: with SMTP id d5mr16166666wrb.55.1602249375258; 
- Fri, 09 Oct 2020 06:16:15 -0700 (PDT)
-Received: from [192.168.1.36] (106.red-83-59-162.dynamicip.rima-tde.net.
- [83.59.162.106])
- by smtp.gmail.com with ESMTPSA id m1sm11297366wmm.34.2020.10.09.06.16.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 09 Oct 2020 06:16:14 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 1/2] hw/char/serial: remove duplicate .class_init in
- serial_mm_info
-To: Laurent Vivier <lvivier@redhat.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
- qemu-trivial@nongnu.org, Anup Patel <anup.patel@wdc.com>,
+ (Exim 4.90_1) (envelope-from <lvivier@redhat.com>)
+ id 1kQqjf-0006tG-47
+ for qemu-riscv@nongnu.org; Fri, 09 Oct 2020 07:38:55 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:34899)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <lvivier@redhat.com>)
+ id 1kQqjc-0002uR-DN
+ for qemu-riscv@nongnu.org; Fri, 09 Oct 2020 07:38:54 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1602243530;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=X4T+XUE+9fRRwHkmRqYdpenn9rrKvTmF6DF8BxeGGnY=;
+ b=QuxRN1VoMr2mV4qOnojjrvgiM3KXxxTpBidy/wbQqskjgA9zkiOUcLWK5pC1FiXw9x6EWQ
+ uaVi83AV7AyVLSc6RyGzGGYN7AWGQFqKFOD7wCK7cEivuSgagOcCJN/ZxsrUxoCvZY3K19
+ 3TU9YyOlPIuEa1WCPLGy60iAPJKkgEg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-15-L67iVjnhOQaFe7nofx5CUw-1; Fri, 09 Oct 2020 07:38:48 -0400
+X-MC-Unique: L67iVjnhOQaFe7nofx5CUw-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D88FA8DA194;
+ Fri,  9 Oct 2020 11:38:46 +0000 (UTC)
+Received: from thinkpad.redhat.com (ovpn-115-120.ams2.redhat.com
+ [10.36.115.120])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 820B76266E;
+ Fri,  9 Oct 2020 11:38:44 +0000 (UTC)
+From: Laurent Vivier <lvivier@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, qemu-trivial@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>
-References: <20201009113843.60995-1-lvivier@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <8ddff8d3-752b-2219-dd49-bfe53b925c43@amsat.org>
-Date: Fri, 9 Oct 2020 15:16:13 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.1
+ Anup Patel <anup.patel@wdc.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>
+Subject: [PATCH 1/2] hw/char/serial: remove duplicate .class_init in
+ serial_mm_info
+Date: Fri,  9 Oct 2020 13:38:42 +0200
+Message-Id: <20201009113843.60995-1-lvivier@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20201009113843.60995-1-lvivier@redhat.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lvivier@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::441;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x441.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+Content-Type: text/plain; charset="US-ASCII"
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=lvivier@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/09 02:34:37
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-0.208,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 09 Oct 2020 09:26:25 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -88,36 +78,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2020 13:16:24 -0000
+X-List-Received-Date: Fri, 09 Oct 2020 11:38:55 -0000
 
-On 10/9/20 1:38 PM, Laurent Vivier wrote:
-> .class_init is already set to serial_mm_class_init.
-> 
-> Remove the duplicate entry.
-> 
-> Fixes: 17fd1a6490b1 ("serial-mm: add "regshift" property")
-> Cc: marcandre.lureau@redhat.com
+.class_init is already set to serial_mm_class_init.
 
-I was going to send exactly the same one tomorrow =)
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+Remove the duplicate entry.
 
-> Signed-off-by: Laurent Vivier <lvivier@redhat.com>
-> ---
->   hw/char/serial.c | 1 -
->   1 file changed, 1 deletion(-)
-> 
-> diff --git a/hw/char/serial.c b/hw/char/serial.c
-> index 4386adabd466..97f71879ff2a 100644
-> --- a/hw/char/serial.c
-> +++ b/hw/char/serial.c
-> @@ -1120,7 +1120,6 @@ static const TypeInfo serial_mm_info = {
->       .class_init = serial_mm_class_init,
->       .instance_init = serial_mm_instance_init,
->       .instance_size = sizeof(SerialMM),
-> -    .class_init = serial_mm_class_init,
->   };
->   
->   static void serial_register_types(void)
-> 
+Fixes: 17fd1a6490b1 ("serial-mm: add "regshift" property")
+Cc: marcandre.lureau@redhat.com
+Signed-off-by: Laurent Vivier <lvivier@redhat.com>
+---
+ hw/char/serial.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/hw/char/serial.c b/hw/char/serial.c
+index 4386adabd466..97f71879ff2a 100644
+--- a/hw/char/serial.c
++++ b/hw/char/serial.c
+@@ -1120,7 +1120,6 @@ static const TypeInfo serial_mm_info = {
+     .class_init = serial_mm_class_init,
+     .instance_init = serial_mm_instance_init,
+     .instance_size = sizeof(SerialMM),
+-    .class_init = serial_mm_class_init,
+ };
+ 
+ static void serial_register_types(void)
+-- 
+2.26.2
 
 
