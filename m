@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kQp5f-0000WP-3z
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 05:53:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37340)
+	id 1kQpFS-0005ND-3B
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 06:03:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39290)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kQp5e-0000W1-24; Fri, 09 Oct 2020 05:53:30 -0400
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:38121)
+ id 1kQpFP-0005MF-JX; Fri, 09 Oct 2020 06:03:35 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:44744)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kQp5c-0006vQ-FE; Fri, 09 Oct 2020 05:53:29 -0400
-Received: by mail-yb1-xb43.google.com with SMTP id b138so4491095yba.5;
- Fri, 09 Oct 2020 02:53:27 -0700 (PDT)
+ id 1kQpFN-00084P-Td; Fri, 09 Oct 2020 06:03:35 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id h6so6801296ybi.11;
+ Fri, 09 Oct 2020 03:03:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=b0E/WK1vMmXZmROGbiNd4mcOr4Ugxgo4UbBiD55Y3Bc=;
- b=RHrjJQLcNtC/0ngMMi+0PIFlatLgFvSL0DK7Zk+FCPF9cVGmcbALjVtxAHUXbGA2wB
- BSTitmO5GJIwIDiiEtAY6gQfXAqQLcEBHFi22sCQc4ZUJWSI9nD6gmmfmZVIOk7VTm37
- NvojjWTw2qPKItJzhp3CjwPq1OtxEGbRcNCqMEFzP/Gs5dS92ES7kUF0MGURRdlJi0Ec
- 0QGJQJdiNNkMGV++OEvn0BeOIBvsHDZcigCMZ1vWEIT1ueicDpXvpqyICENBxIIREd9v
- 7sHMyEqaVQytKr1YhWP5WLiKyFkerBxUWFC7HPRj8QjoKF9b1I7t0s0lWe29Uyf236a+
- onxw==
+ :cc; bh=xgIVgcSvNiq9ko2zl0VAm8q6i/rdbH6kO6NGC+2Rj0Q=;
+ b=BRaLNvCd7ycZEZO0nC5jCKb6A5IokQZCtQn34B5JKR1/djOVB8xlqXLufvb1ucCJWO
+ ls5lJ1RV9QG4FCrszYf3GQh0b8X11hu/y8TeN472nfD8OQ0nnRhbjYwr8JlU5KRIe7PN
+ BlUd+n5eYFaGNaP3R3xuOia60R5Hs8QtMdKDsW40Rhok/WIcSG+weWOLrdrNX0T0gZDG
+ n9DajwUVnfoFFzC6M9kEL2w1khs3h1rGh8ztZwlVol21jz5zvgqzw1ivUMtoAO6Fekd7
+ GsZjhhtc1Lnb8xT7f0szGbcvibzTY1+U4qQniBPOg341DdO+KHt214YhlBvFz9RTekiv
+ JiEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=b0E/WK1vMmXZmROGbiNd4mcOr4Ugxgo4UbBiD55Y3Bc=;
- b=iBmRKP169otg7bfUhLoq75PDWRTw4AyX8z9NdwVzrhN9H4uwNJ5MN2sqJkbxdq5LIr
- yXQbwPDvbatb6tENfjwIqs4Y1Hn8wJLOHe5VicAOQXqR31MUNGPTZru50TUuuVvbaH6Z
- +oRMzgDblmda7FMWkdOYN29KX/F7pi86Yy2Z5W5HLxnhVrzg0dNqEZm/qKyoDxQyBdAU
- QS6HyF4zVp5Q+YU7ZGGfSuIvxpVIldnbW9JftVRxzzmiWlJZuuZPajQi+FMBL0GTook/
- tnYZvZuAdq327Pu2s9cpJrPDR3VoM8JRYuz1PCu0ydR+AIucM+f6oyXX0JkPqMGWVEM0
- yUzA==
-X-Gm-Message-State: AOAM532QQFYOsPkyMpo2uRKG6VskGaFKUULp9vEBiEA6/jd+fucrl3jl
- Uh7fhate2iYLD8sonMzZjDY8aiK9g1RhLoUSLv4=
-X-Google-Smtp-Source: ABdhPJxdSvAGp+8+RDp6YyZDmH3xz8MHlVVq6ZoAoL7EOwIDuzj3UzFtRwoBp/zp1ieNzuoJH5g8ipccDva3DLw7vp0=
-X-Received: by 2002:a25:2ac8:: with SMTP id
- q191mr16582156ybq.306.1602237207070; 
- Fri, 09 Oct 2020 02:53:27 -0700 (PDT)
+ bh=xgIVgcSvNiq9ko2zl0VAm8q6i/rdbH6kO6NGC+2Rj0Q=;
+ b=YnEP3qH461S5+2O9j3PPaCphIvITMl+RkMuqmxHM1/9cCp58wlUAI415WB0w3iD6rn
+ ojx9X3Io5bMvjGWXoUgzccxrUEa6GALTKjxBjYhVnrymFIUR3PQIeMsHlZb3+EXGCgOG
+ WMD5NolrB7gydh75DSX5339hSC/OuSRTQyhM3pXf0+iCASASLIR5evK9rw+HnD0MC1x+
+ vH/yc1wxW9P118c3sGrZG1tWdIMryxosunhIAUhAoeXXKWqV6Ixj1TfXk/nyZCzfTp78
+ ackjFOankDznffT5SQxxIya679OfsJMJucGgv7SCfMzIai8K5181mnQ+Ggiorvj9AghV
+ wPag==
+X-Gm-Message-State: AOAM533Rgv20C+PrB0GAp8ui/DPl6d/GyAuiBjIebLuHMnqSUkOr9hUV
+ v6D6AL7H1Hws4Ec2/7403cGou1cRJkoPll5rOGg=
+X-Google-Smtp-Source: ABdhPJyOlqvpeHFpPZ9e9JWF82+O3wbi77D092lX71aYZT4hNz/OC3lD7YiERsBlVb3QTb3R35uGFuYH/FxXonda7fo=
+X-Received: by 2002:a25:b78d:: with SMTP id n13mr16710774ybh.152.1602237812665; 
+ Fri, 09 Oct 2020 03:03:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1601652616.git.alistair.francis@wdc.com>
-In-Reply-To: <cover.1601652616.git.alistair.francis@wdc.com>
+ <3b114129fbe4416dce88c454b03c31d8405cc141.1601652616.git.alistair.francis@wdc.com>
+In-Reply-To: <3b114129fbe4416dce88c454b03c31d8405cc141.1601652616.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 9 Oct 2020 17:53:15 +0800
-Message-ID: <CAEUhbmXhFv8m3uFQ8z7XeEcXnTCJLCVokWp5ZQ-C3PDHdXJn1Q@mail.gmail.com>
-Subject: Re: [PATCH v1 0/4] Allow loading a no MMU kernel
+Date: Fri, 9 Oct 2020 18:03:21 +0800
+Message-ID: <CAEUhbmU77T5XCtj0hLbpKVqYqurPA-XQOSsy2NeCpx3BBqZm7Q@mail.gmail.com>
+Subject: Re: [PATCH v1 1/4] hw/riscv: sifive_u: Allow specifying the CPU
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -72,43 +72,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2020 09:53:30 -0000
+X-List-Received-Date: Fri, 09 Oct 2020 10:03:37 -0000
 
-Hi Alistair,
-
-On Fri, Oct 2, 2020 at 11:50 PM Alistair Francis
+On Fri, Oct 2, 2020 at 11:52 PM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
-> This series allows loading a noMMU kernel using the -kernel option.
-> Currently if using -kernel QEMU assumes you also have firmware and loads
-> the kernel at a hardcoded offset. This series changes that so we only
-> load the kernel at an offset if a firmware (-bios) was loaded.
+> Allow the user to specify the main application CPU for the sifive_u
+> machine.
 >
-> This series also adds a function to check if the CPU is 32-bit. This is
-> a step towards running 32-bit and 64-bit CPUs on the 64-bit RISC-V build
-> by using run time checks instead of compile time checks. We also allow
-> the user to sepcify a CPU for the sifive_u machine.
-
-Could you please provide test scenarios for this series? I want to
-have a try. Thanks.
-
->
-> Alistair Francis (4):
->   hw/riscv: sifive_u: Allow specifying the CPU
->   hw/riscv: Return the end address of the loaded firmware
->   hw/riscv: Add a riscv_is_32_bit() function
->   hw/riscv: Load the kernel after the firmware
->
->  include/hw/riscv/boot.h     | 11 +++++----
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
 >  include/hw/riscv/sifive_u.h |  1 +
->  hw/riscv/boot.c             | 47 ++++++++++++++++++++++++-------------
->  hw/riscv/opentitan.c        |  3 ++-
->  hw/riscv/sifive_e.c         |  3 ++-
->  hw/riscv/sifive_u.c         | 31 ++++++++++++++++++------
->  hw/riscv/spike.c            | 14 ++++++++---
->  hw/riscv/virt.c             | 14 ++++++++---
->  8 files changed, 89 insertions(+), 35 deletions(-)
+>  hw/riscv/sifive_u.c         | 18 +++++++++++++-----
+>  2 files changed, 14 insertions(+), 5 deletions(-)
+>
 
-Regards,
-Bin
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
 
