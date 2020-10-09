@@ -1,58 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kQpPa-0000Cj-PE
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 06:14:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41786)
+	id 1kQpeg-00076L-9p
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 06:29:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45314)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kQpPZ-0000Ca-BU; Fri, 09 Oct 2020 06:14:05 -0400
-Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:40396)
+ id 1kQpee-000724-Ed; Fri, 09 Oct 2020 06:29:40 -0400
+Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:38486)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kQpPX-0001CD-Ru; Fri, 09 Oct 2020 06:14:04 -0400
-Received: by mail-yb1-xb41.google.com with SMTP id n142so6841950ybf.7;
- Fri, 09 Oct 2020 03:14:03 -0700 (PDT)
+ id 1kQpeZ-00030Z-CC; Fri, 09 Oct 2020 06:29:40 -0400
+Received: by mail-yb1-xb43.google.com with SMTP id b138so4562135yba.5;
+ Fri, 09 Oct 2020 03:29:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NuQN3GzTaTLEVjmLmeXYzh4mGyUEA6Z6LXCQHNzqEU8=;
- b=tYEJZrOlttnYjDYLEGGi6pE8Erb/myK1caJ6sxmveT3B8un59f5riC6HclA+GHk9ji
- rvdEnyrSbZwhz+1CGsXWZKu5PvY8HYZj29fTTLbBjzJ/njAKBwnf5K8k8QcsY6whF++9
- roE4iuySFwdCYSx2ZLP1AR0i+/qjoleKGliYBUzgZR1J8emeqKn8IvstaLYBLfOkMpyG
- g1hSI5yQ7phC5DeOC6WmIYVujOzjIzWQOwACKqAX8o6vzqYiOP58s+N4TI3YlYJOiKlV
- W0gUYRVGRqjpTfs3e3QS/TzscQ81PpXnGHqHLRcbNLnijG7dfT9Y3KBklr037F3PxNUC
- pNsA==
+ :cc; bh=jdHLZ5UmuisLtiQ9SxzUGpfnMAV0yxeWHep9vOJ1Tz8=;
+ b=eLAFeX2giI6/Oe1JSgSWVvtfeZsFMqs5Q3UyUczkqNdcOolOJ1DR5Erjqxh3FLvnVg
+ cyZrDunzIQJpoojc/4td9rN3yX6+GZ7tWYIXXkXpftmHMeKa22NID6YCcvJfwpXrO5+H
+ ov4V1Uurf2vlOxnuASR6VA3V3w4XyJwgZtAi+SK11E5cC55PMoXNx4mShFDw4tAN9orj
+ TJHqGU3l2TLk5Q7nuvObmJWjzOquTfA3IX8t740fONbvrpv0FgZDIB322LdYG+iQUIfj
+ upYVOARzk8r/FsvglaMcv8Mblga1FFdBdi2p80Jg1xnvo0Xcaa2WG/8+OGiVPkuvKtGg
+ cqbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=NuQN3GzTaTLEVjmLmeXYzh4mGyUEA6Z6LXCQHNzqEU8=;
- b=VU8tmBVsyRhY8zsVU3d/TuE1l/WDGajYos15KEvha4kLXYgIlaJQNf2t4hDn8rZ4wd
- nvI8qlxbIAohAoITl2bEErEcGMFW9OZHhYZ9+ioffdt2R27apcmn10c+KWA2xcd0eBiR
- P7DFOrixv0n/OflQd4p9yBSCjRUKaNh77uRibGNjywItSWtaR+pnNdYbej/nPdO0ibkJ
- ALplBa4VMRqnB+GZhKwU3EsnFul/KUiKuoTZJTv7gRWL5nf1wtsYuv7RDEIEpjmKVJ/Q
- A9zrX3mEqAsJnQj1rSj7td3Gcv2A8tu1Hk8lk8s+xSezjXHsXCPFGlGkmWiijld44TpU
- zZUw==
-X-Gm-Message-State: AOAM53054zBe/+3TZUSN7EGbugNtqyYSanuGQMDKHLGx5N6sz07jjrBa
- mi5D7gup1Zk3ts2IlczNo9WzmmFjbIrGPPcC6IQ=
-X-Google-Smtp-Source: ABdhPJxhav/wiO/AEIJMtzYWKCTW36c3OSneb7A5YOZk9prQxZacYHgd11y0gASGqmbuS80H8Xp/VOIvN/gq97rEumM=
-X-Received: by 2002:a05:6902:690:: with SMTP id
- i16mr15806312ybt.122.1602238442487; 
- Fri, 09 Oct 2020 03:14:02 -0700 (PDT)
+ bh=jdHLZ5UmuisLtiQ9SxzUGpfnMAV0yxeWHep9vOJ1Tz8=;
+ b=Do5r8fwaP9jPAUTosTM8aDED4MdoyoLB8Hle/49dHMak6uVe8FdG4/epnZxNO3BkqN
+ zc+WbtHQlAvQvkzt+n42qr5yBeKuCZsldjWZR22r8pgL/Sdm3W+VqYjnW4rAkDvraU6j
+ MnnHzWi0xKx6LCz4fP8LmlBdKHn9ymQNpjLlMTbNJQG5fl8wabuIsD3NMwh35OoERMR3
+ y7g/tqi/rnHFhfpfUR9X9ndbY5ubxIpzV1L7KmKKuw9moYOLBuAeeSjWhnPmPg11cZda
+ zHcyqG/BWvVpAwC0vv35ZC1ReihMs7mRlsV7hLy7WYI0WnPNT2+XMR2VdmhWYkHuOo3P
+ svHA==
+X-Gm-Message-State: AOAM5314UyfHjP+/bt/ZiQ7c0vXMWUPRbNYJizPcwnWG9fl6bc/bc61W
+ cTlL7kZteOOT6+q7exebgaVLq8JBJBJAqoPdAPA=
+X-Google-Smtp-Source: ABdhPJwnduWavKJzL4lZqB6mXNXkBFVtZYLfu/rV8H9BYfg3jV0LlyH6x7M7ZPZi31GDKxgiM63B208YyELjchUVqwM=
+X-Received: by 2002:a25:b78d:: with SMTP id n13mr16817451ybh.152.1602239373602; 
+ Fri, 09 Oct 2020 03:29:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1601652616.git.alistair.francis@wdc.com>
- <dc18ce8e762658aa80337a97e6e9c978ab9e1696.1601652616.git.alistair.francis@wdc.com>
-In-Reply-To: <dc18ce8e762658aa80337a97e6e9c978ab9e1696.1601652616.git.alistair.francis@wdc.com>
+ <4f272c9fab34bedc34b22adb8f9e2fb2dbd338d2.1601652616.git.alistair.francis@wdc.com>
+In-Reply-To: <4f272c9fab34bedc34b22adb8f9e2fb2dbd338d2.1601652616.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 9 Oct 2020 18:13:51 +0800
-Message-ID: <CAEUhbmVdv_7onVjDes6_Tw0h2F4FqVnuiofFkRm5tHLO4GE6Kg@mail.gmail.com>
-Subject: Re: [PATCH v1 2/4] hw/riscv: Return the end address of the loaded
- firmware
+Date: Fri, 9 Oct 2020 18:29:22 +0800
+Message-ID: <CAEUhbmVZt1D=eFzb=cRP51URGyzrRLeRCeUevhHWaua6_aBHZw@mail.gmail.com>
+Subject: Re: [PATCH v1 4/4] hw/riscv: Load the kernel after the firmware
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -74,22 +72,218 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2020 10:14:05 -0000
+X-List-Received-Date: Fri, 09 Oct 2020 10:29:40 -0000
 
-On Fri, Oct 2, 2020 at 11:42 PM Alistair Francis
+On Fri, Oct 2, 2020 at 11:55 PM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 
-It merits some commit message to explain why the return value of
-riscv_load_firmware() was changed from firmware entry address to
-firmware end address.
+Please put some commit message to explain why the changes are necessary.
 
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  include/hw/riscv/boot.h |  8 ++++----
->  hw/riscv/boot.c         | 28 +++++++++++++++++-----------
->  2 files changed, 21 insertions(+), 15 deletions(-)
+>  include/hw/riscv/boot.h |  1 +
+>  hw/riscv/boot.c         | 10 +++++-----
+>  hw/riscv/opentitan.c    |  3 ++-
+>  hw/riscv/sifive_e.c     |  3 ++-
+>  hw/riscv/sifive_u.c     | 13 +++++++++++--
+>  hw/riscv/spike.c        | 14 +++++++++++---
+>  hw/riscv/virt.c         | 14 +++++++++++---
+>  7 files changed, 43 insertions(+), 15 deletions(-)
 >
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index 2975ed1a31..85d3227ea6 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -34,6 +34,7 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+>                                   hwaddr firmware_load_addr,
+>                                   symbol_fn_t sym_cb);
+>  target_ulong riscv_load_kernel(const char *kernel_filename,
+> +                               target_ulong firmware_end_addr,
+>                                 symbol_fn_t sym_cb);
+>  hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+>                           uint64_t kernel_entry, hwaddr *start);
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 5dea644f47..f8e55ca16a 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -33,10 +33,8 @@
+>  #include <libfdt.h>
+>
+>  #if defined(TARGET_RISCV32)
+> -# define KERNEL_BOOT_ADDRESS 0x80400000
+>  #define fw_dynamic_info_data(__val)     cpu_to_le32(__val)
+>  #else
+> -# define KERNEL_BOOT_ADDRESS 0x80200000
+>  #define fw_dynamic_info_data(__val)     cpu_to_le64(__val)
+>  #endif
+>
+> @@ -123,7 +121,9 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+>      exit(1);
+>  }
+>
+> -target_ulong riscv_load_kernel(const char *kernel_filename, symbol_fn_t sym_cb)
+> +target_ulong riscv_load_kernel(const char *kernel_filename,
+> +                               target_ulong kernel_start_addr,
+> +                               symbol_fn_t sym_cb)
+>  {
+>      uint64_t kernel_entry;
+>
+> @@ -138,9 +138,9 @@ target_ulong riscv_load_kernel(const char *kernel_filename, symbol_fn_t sym_cb)
+>          return kernel_entry;
+>      }
+>
+> -    if (load_image_targphys_as(kernel_filename, KERNEL_BOOT_ADDRESS,
+> +    if (load_image_targphys_as(kernel_filename, kernel_start_addr,
+>                                 ram_size, NULL) > 0) {
+> -        return KERNEL_BOOT_ADDRESS;
+> +        return kernel_start_addr;
+>      }
+>
+>      error_report("could not load kernel '%s'", kernel_filename);
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index 0531bd879b..cc758b78b8 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -75,7 +75,8 @@ static void opentitan_board_init(MachineState *machine)
+>      }
+>
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine->kernel_filename, NULL);
+> +        riscv_load_kernel(machine->kernel_filename,
+> +                          memmap[IBEX_DEV_RAM].base, NULL);
+>      }
+>  }
+>
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index fcfac16816..59bac4cc9a 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -114,7 +114,8 @@ static void sifive_e_machine_init(MachineState *machine)
+>                            memmap[SIFIVE_E_DEV_MROM].base, &address_space_memory);
+>
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine->kernel_filename, NULL);
+> +        riscv_load_kernel(machine->kernel_filename,
+> +                          memmap[SIFIVE_E_DEV_DTIM].base, NULL);
+>      }
+>  }
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 5f3ad9bc0f..08b0a3937d 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -415,6 +415,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+>      MemoryRegion *flash0 = g_new(MemoryRegion, 1);
+>      target_ulong start_addr = memmap[SIFIVE_U_DEV_DRAM].base;
+> +    target_ulong firmware_end_addr, kernel_start_addr;
+>      uint32_t start_addr_hi32 = 0x00000000;
+>      int i;
+>      uint32_t fdt_load_addr;
+> @@ -474,10 +475,18 @@ static void sifive_u_machine_init(MachineState *machine)
+>          break;
+>      }
+>
+> -    riscv_find_and_load_firmware(machine, BIOS_FILENAME, start_addr, NULL);
+> +    firmware_end_addr = riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> +                                                     start_addr, NULL);
+>
+>      if (machine->kernel_filename) {
+> -        kernel_entry = riscv_load_kernel(machine->kernel_filename, NULL);
+> +        if (riscv_is_32_bit(machine)) {
+> +            kernel_start_addr = QEMU_ALIGN_UP(firmware_end_addr, 0x400000);
+
+Use 4 * MiB
+
+> +        } else {
+> +            kernel_start_addr = QEMU_ALIGN_UP(firmware_end_addr, 0x200000);
+
+2 * MiB
+
+> +        }
+> +
+> +        kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> +                                         kernel_start_addr, NULL);
+>
+>          if (machine->initrd_filename) {
+>              hwaddr start;
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 3fd152a035..280fb1f328 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -195,6 +195,7 @@ static void spike_board_init(MachineState *machine)
+>      MemoryRegion *system_memory = get_system_memory();
+>      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+>      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+> +    target_ulong firmware_end_addr, kernel_start_addr;
+>      uint32_t fdt_load_addr;
+>      uint64_t kernel_entry;
+>      char *soc_name;
+> @@ -261,12 +262,19 @@ static void spike_board_init(MachineState *machine)
+>      memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
+>                                  mask_rom);
+>
+> -    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> -                                 memmap[SPIKE_DRAM].base,
+> -                                 htif_symbol_callback);
+> +    firmware_end_addr = riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> +                                                     memmap[SPIKE_DRAM].base,
+> +                                                     htif_symbol_callback);
+>
+>      if (machine->kernel_filename) {
+> +        if (riscv_is_32_bit(machine)) {
+> +            kernel_start_addr = QEMU_ALIGN_UP(firmware_end_addr, 0x400000);
+
+Ditto
+
+It looks like this same code logic is added in several machine codes,
+perhaps a new helper function in riscv/boot.c is needed to determine
+the kernel start address based on the firmware end address.
+
+> +        } else {
+> +            kernel_start_addr = QEMU_ALIGN_UP(firmware_end_addr, 0x200000);
+> +        }
+> +
+>          kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> +                                         kernel_start_addr,
+>                                           htif_symbol_callback);
+>
+>          if (machine->initrd_filename) {
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 41bd2f38ba..bf22d28eef 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -493,6 +493,7 @@ static void virt_machine_init(MachineState *machine)
+>      char *plic_hart_config, *soc_name;
+>      size_t plic_hart_config_len;
+>      target_ulong start_addr = memmap[VIRT_DRAM].base;
+> +    target_ulong firmware_end_addr, kernel_start_addr;
+>      uint32_t fdt_load_addr;
+>      uint64_t kernel_entry;
+>      DeviceState *mmio_plic, *virtio_plic, *pcie_plic;
+> @@ -602,11 +603,18 @@ static void virt_machine_init(MachineState *machine)
+>      memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
+>                                  mask_rom);
+>
+> -    riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> -                                 memmap[VIRT_DRAM].base, NULL);
+> +    firmware_end_addr = riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> +                                                     start_addr, NULL);
+>
+>      if (machine->kernel_filename) {
+> -        kernel_entry = riscv_load_kernel(machine->kernel_filename, NULL);
+> +        if (riscv_is_32_bit(machine)) {
+> +            kernel_start_addr = QEMU_ALIGN_UP(firmware_end_addr, 0x400000);
+> +        } else {
+> +            kernel_start_addr = QEMU_ALIGN_UP(firmware_end_addr, 0x200000);
+> +        }
+> +
+> +        kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> +                                         kernel_start_addr, NULL);
+>
+>          if (machine->initrd_filename) {
+>              hwaddr start;
 
 Regards,
 Bin
