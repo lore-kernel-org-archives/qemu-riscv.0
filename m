@@ -1,39 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kQsPi-00017a-Ku
+	id 1kQsPi-000181-RK
 	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 09:26:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58742)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58802)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lvivier@redhat.com>)
- id 1kQqjf-0006tG-47
- for qemu-riscv@nongnu.org; Fri, 09 Oct 2020 07:38:55 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:34899)
+ id 1kQqji-0006xq-6e
+ for qemu-riscv@nongnu.org; Fri, 09 Oct 2020 07:38:58 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:34375)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <lvivier@redhat.com>)
- id 1kQqjc-0002uR-DN
- for qemu-riscv@nongnu.org; Fri, 09 Oct 2020 07:38:54 -0400
+ id 1kQqjg-0002va-JJ
+ for qemu-riscv@nongnu.org; Fri, 09 Oct 2020 07:38:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1602243530;
+ s=mimecast20190719; t=1602243535;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=X4T+XUE+9fRRwHkmRqYdpenn9rrKvTmF6DF8BxeGGnY=;
- b=QuxRN1VoMr2mV4qOnojjrvgiM3KXxxTpBidy/wbQqskjgA9zkiOUcLWK5pC1FiXw9x6EWQ
- uaVi83AV7AyVLSc6RyGzGGYN7AWGQFqKFOD7wCK7cEivuSgagOcCJN/ZxsrUxoCvZY3K19
- 3TU9YyOlPIuEa1WCPLGy60iAPJKkgEg=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tmtaFGBBD9kx7zPOiiuXAOzBlxm5zZEjKDsygjdRty0=;
+ b=OeKKINquY8jZFrEBToiAqHhH0amrEEYOt0AEOmJ+6Wfh8Ii42c7ifBETPz5nyivFunMsrf
+ Uhq8EyCPhpG+G/6OpQFbLC6gVsE4HIiGIoXGr1h1qXH10nArIyxAeiZcXAznkXx8BGMgQz
+ QpFcJlw4ZowJsxmtkrQaLs2maDsHFEg=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-15-L67iVjnhOQaFe7nofx5CUw-1; Fri, 09 Oct 2020 07:38:48 -0400
-X-MC-Unique: L67iVjnhOQaFe7nofx5CUw-1
+ us-mta-267-gVnWMQQeMMewGMZGupT0yQ-1; Fri, 09 Oct 2020 07:38:52 -0400
+X-MC-Unique: gVnWMQQeMMewGMZGupT0yQ-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D88FA8DA194;
- Fri,  9 Oct 2020 11:38:46 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A24001030938;
+ Fri,  9 Oct 2020 11:38:50 +0000 (UTC)
 Received: from thinkpad.redhat.com (ovpn-115-120.ams2.redhat.com
  [10.36.115.120])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 820B76266E;
- Fri,  9 Oct 2020 11:38:44 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 3C68255760;
+ Fri,  9 Oct 2020 11:38:47 +0000 (UTC)
 From: Laurent Vivier <lvivier@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-trivial@nongnu.org,
@@ -41,11 +42,13 @@ Cc: qemu-riscv@nongnu.org, qemu-trivial@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Anup Patel <anup.patel@wdc.com>, "Michael S. Tsirkin" <mst@redhat.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>
-Subject: [PATCH 1/2] hw/char/serial: remove duplicate .class_init in
- serial_mm_info
-Date: Fri,  9 Oct 2020 13:38:42 +0200
-Message-Id: <20201009113843.60995-1-lvivier@redhat.com>
+ Laurent Vivier <lvivier@redhat.com>, Anup.Patel@wdc.com
+Subject: [PATCH 2/2] goldfish_rtc: change MemoryRegionOps endianness to
+ DEVICE_NATIVE_ENDIAN
+Date: Fri,  9 Oct 2020 13:38:43 +0200
+Message-Id: <20201009113843.60995-2-lvivier@redhat.com>
+In-Reply-To: <20201009113843.60995-1-lvivier@redhat.com>
+References: <20201009113843.60995-1-lvivier@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 Authentication-Results: relay.mimecast.com;
@@ -64,7 +67,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Fri, 09 Oct 2020 09:26:25 -0400
 X-BeenThere: qemu-riscv@nongnu.org
@@ -78,31 +81,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2020 11:38:55 -0000
+X-List-Received-Date: Fri, 09 Oct 2020 11:38:58 -0000
 
-.class_init is already set to serial_mm_class_init.
+The doc [1] doesn't define the endianness, but the kernel driver
+uses readl() to access the registers, so we can guess it depends
+on the architecture endianness.
 
-Remove the duplicate entry.
+As riscv architecture endianness is little it might not change anything
+for it.
 
-Fixes: 17fd1a6490b1 ("serial-mm: add "regshift" property")
-Cc: marcandre.lureau@redhat.com
+Moreover, android implementation uses DEVICE_NATIVE_ENDIAN [2]
+
+[1] https://android.googlesource.com/platform/external/qemu/+/master/docs/GOLDFISH-VIRTUAL-HARDWARE.TXT
+[2] https://android.googlesource.com/platform/external/qemu/+/refs/heads/emu-master-dev/hw/timer/goldfish_timer.c#177
+
+Fixes: 9a5b40b84279 ("hw: rtc: Add Goldfish RTC device")
+Cc: Anup.Patel@wdc.com
 Signed-off-by: Laurent Vivier <lvivier@redhat.com>
 ---
- hw/char/serial.c | 1 -
- 1 file changed, 1 deletion(-)
+ hw/rtc/goldfish_rtc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/char/serial.c b/hw/char/serial.c
-index 4386adabd466..97f71879ff2a 100644
---- a/hw/char/serial.c
-+++ b/hw/char/serial.c
-@@ -1120,7 +1120,6 @@ static const TypeInfo serial_mm_info = {
-     .class_init = serial_mm_class_init,
-     .instance_init = serial_mm_instance_init,
-     .instance_size = sizeof(SerialMM),
--    .class_init = serial_mm_class_init,
- };
- 
- static void serial_register_types(void)
+diff --git a/hw/rtc/goldfish_rtc.c b/hw/rtc/goldfish_rtc.c
+index 6ddd45cce039..0f4e8185a796 100644
+--- a/hw/rtc/goldfish_rtc.c
++++ b/hw/rtc/goldfish_rtc.c
+@@ -217,7 +217,7 @@ static int goldfish_rtc_post_load(void *opaque, int version_id)
+ static const MemoryRegionOps goldfish_rtc_ops = {
+     .read = goldfish_rtc_read,
+     .write = goldfish_rtc_write,
+-    .endianness = DEVICE_LITTLE_ENDIAN,
++    .endianness = DEVICE_NATIVE_ENDIAN,
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 4
 -- 
 2.26.2
 
