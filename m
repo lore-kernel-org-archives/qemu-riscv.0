@@ -1,56 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kQpFS-0005ND-3B
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 06:03:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39290)
+	id 1kQpPa-0000Cj-PE
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 06:14:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41786)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kQpFP-0005MF-JX; Fri, 09 Oct 2020 06:03:35 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:44744)
+ id 1kQpPZ-0000Ca-BU; Fri, 09 Oct 2020 06:14:05 -0400
+Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:40396)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kQpFN-00084P-Td; Fri, 09 Oct 2020 06:03:35 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id h6so6801296ybi.11;
- Fri, 09 Oct 2020 03:03:33 -0700 (PDT)
+ id 1kQpPX-0001CD-Ru; Fri, 09 Oct 2020 06:14:04 -0400
+Received: by mail-yb1-xb41.google.com with SMTP id n142so6841950ybf.7;
+ Fri, 09 Oct 2020 03:14:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=xgIVgcSvNiq9ko2zl0VAm8q6i/rdbH6kO6NGC+2Rj0Q=;
- b=BRaLNvCd7ycZEZO0nC5jCKb6A5IokQZCtQn34B5JKR1/djOVB8xlqXLufvb1ucCJWO
- ls5lJ1RV9QG4FCrszYf3GQh0b8X11hu/y8TeN472nfD8OQ0nnRhbjYwr8JlU5KRIe7PN
- BlUd+n5eYFaGNaP3R3xuOia60R5Hs8QtMdKDsW40Rhok/WIcSG+weWOLrdrNX0T0gZDG
- n9DajwUVnfoFFzC6M9kEL2w1khs3h1rGh8ztZwlVol21jz5zvgqzw1ivUMtoAO6Fekd7
- GsZjhhtc1Lnb8xT7f0szGbcvibzTY1+U4qQniBPOg341DdO+KHt214YhlBvFz9RTekiv
- JiEw==
+ :cc; bh=NuQN3GzTaTLEVjmLmeXYzh4mGyUEA6Z6LXCQHNzqEU8=;
+ b=tYEJZrOlttnYjDYLEGGi6pE8Erb/myK1caJ6sxmveT3B8un59f5riC6HclA+GHk9ji
+ rvdEnyrSbZwhz+1CGsXWZKu5PvY8HYZj29fTTLbBjzJ/njAKBwnf5K8k8QcsY6whF++9
+ roE4iuySFwdCYSx2ZLP1AR0i+/qjoleKGliYBUzgZR1J8emeqKn8IvstaLYBLfOkMpyG
+ g1hSI5yQ7phC5DeOC6WmIYVujOzjIzWQOwACKqAX8o6vzqYiOP58s+N4TI3YlYJOiKlV
+ W0gUYRVGRqjpTfs3e3QS/TzscQ81PpXnGHqHLRcbNLnijG7dfT9Y3KBklr037F3PxNUC
+ pNsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=xgIVgcSvNiq9ko2zl0VAm8q6i/rdbH6kO6NGC+2Rj0Q=;
- b=YnEP3qH461S5+2O9j3PPaCphIvITMl+RkMuqmxHM1/9cCp58wlUAI415WB0w3iD6rn
- ojx9X3Io5bMvjGWXoUgzccxrUEa6GALTKjxBjYhVnrymFIUR3PQIeMsHlZb3+EXGCgOG
- WMD5NolrB7gydh75DSX5339hSC/OuSRTQyhM3pXf0+iCASASLIR5evK9rw+HnD0MC1x+
- vH/yc1wxW9P118c3sGrZG1tWdIMryxosunhIAUhAoeXXKWqV6Ixj1TfXk/nyZCzfTp78
- ackjFOankDznffT5SQxxIya679OfsJMJucGgv7SCfMzIai8K5181mnQ+Ggiorvj9AghV
- wPag==
-X-Gm-Message-State: AOAM533Rgv20C+PrB0GAp8ui/DPl6d/GyAuiBjIebLuHMnqSUkOr9hUV
- v6D6AL7H1Hws4Ec2/7403cGou1cRJkoPll5rOGg=
-X-Google-Smtp-Source: ABdhPJyOlqvpeHFpPZ9e9JWF82+O3wbi77D092lX71aYZT4hNz/OC3lD7YiERsBlVb3QTb3R35uGFuYH/FxXonda7fo=
-X-Received: by 2002:a25:b78d:: with SMTP id n13mr16710774ybh.152.1602237812665; 
- Fri, 09 Oct 2020 03:03:32 -0700 (PDT)
+ bh=NuQN3GzTaTLEVjmLmeXYzh4mGyUEA6Z6LXCQHNzqEU8=;
+ b=VU8tmBVsyRhY8zsVU3d/TuE1l/WDGajYos15KEvha4kLXYgIlaJQNf2t4hDn8rZ4wd
+ nvI8qlxbIAohAoITl2bEErEcGMFW9OZHhYZ9+ioffdt2R27apcmn10c+KWA2xcd0eBiR
+ P7DFOrixv0n/OflQd4p9yBSCjRUKaNh77uRibGNjywItSWtaR+pnNdYbej/nPdO0ibkJ
+ ALplBa4VMRqnB+GZhKwU3EsnFul/KUiKuoTZJTv7gRWL5nf1wtsYuv7RDEIEpjmKVJ/Q
+ A9zrX3mEqAsJnQj1rSj7td3Gcv2A8tu1Hk8lk8s+xSezjXHsXCPFGlGkmWiijld44TpU
+ zZUw==
+X-Gm-Message-State: AOAM53054zBe/+3TZUSN7EGbugNtqyYSanuGQMDKHLGx5N6sz07jjrBa
+ mi5D7gup1Zk3ts2IlczNo9WzmmFjbIrGPPcC6IQ=
+X-Google-Smtp-Source: ABdhPJxhav/wiO/AEIJMtzYWKCTW36c3OSneb7A5YOZk9prQxZacYHgd11y0gASGqmbuS80H8Xp/VOIvN/gq97rEumM=
+X-Received: by 2002:a05:6902:690:: with SMTP id
+ i16mr15806312ybt.122.1602238442487; 
+ Fri, 09 Oct 2020 03:14:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1601652616.git.alistair.francis@wdc.com>
- <3b114129fbe4416dce88c454b03c31d8405cc141.1601652616.git.alistair.francis@wdc.com>
-In-Reply-To: <3b114129fbe4416dce88c454b03c31d8405cc141.1601652616.git.alistair.francis@wdc.com>
+ <dc18ce8e762658aa80337a97e6e9c978ab9e1696.1601652616.git.alistair.francis@wdc.com>
+In-Reply-To: <dc18ce8e762658aa80337a97e6e9c978ab9e1696.1601652616.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 9 Oct 2020 18:03:21 +0800
-Message-ID: <CAEUhbmU77T5XCtj0hLbpKVqYqurPA-XQOSsy2NeCpx3BBqZm7Q@mail.gmail.com>
-Subject: Re: [PATCH v1 1/4] hw/riscv: sifive_u: Allow specifying the CPU
+Date: Fri, 9 Oct 2020 18:13:51 +0800
+Message-ID: <CAEUhbmVdv_7onVjDes6_Tw0h2F4FqVnuiofFkRm5tHLO4GE6Kg@mail.gmail.com>
+Subject: Re: [PATCH v1 2/4] hw/riscv: Return the end address of the loaded
+ firmware
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -72,20 +74,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2020 10:03:37 -0000
+X-List-Received-Date: Fri, 09 Oct 2020 10:14:05 -0000
 
-On Fri, Oct 2, 2020 at 11:52 PM Alistair Francis
+On Fri, Oct 2, 2020 at 11:42 PM Alistair Francis
 <alistair.francis@wdc.com> wrote:
->
-> Allow the user to specify the main application CPU for the sifive_u
-> machine.
+
+It merits some commit message to explain why the return value of
+riscv_load_firmware() was changed from firmware entry address to
+firmware end address.
+
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  include/hw/riscv/sifive_u.h |  1 +
->  hw/riscv/sifive_u.c         | 18 +++++++++++++-----
->  2 files changed, 14 insertions(+), 5 deletions(-)
+>  include/hw/riscv/boot.h |  8 ++++----
+>  hw/riscv/boot.c         | 28 +++++++++++++++++-----------
+>  2 files changed, 21 insertions(+), 15 deletions(-)
 >
 
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
+Regards,
+Bin
 
