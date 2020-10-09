@@ -1,70 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kQY3I-00082p-KB
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Oct 2020 11:42:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56312)
+	id 1kQnIA-000705-Fs
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 03:58:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40822)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1kQY3G-00081K-I9
- for qemu-riscv@nongnu.org; Thu, 08 Oct 2020 11:41:54 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e]:36267)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1kQY3C-0001TE-HP
- for qemu-riscv@nongnu.org; Thu, 08 Oct 2020 11:41:54 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id l16so6321568eds.3
- for <qemu-riscv@nongnu.org>; Thu, 08 Oct 2020 08:41:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=r64ZZx9bjWtXBdUUIcYa87604w1d3wlv8wpaQqXSNBs=;
- b=NEDom/NUNRHB0eufjsiezHXHVVl45V0GGbwJhWvFJMChVLUzwWm0LdtQyUx/2kLUW2
- 3mjJUN5twjjA3D2j5hFMD//sTd69aSj9rYgGf02FsR8q+GXyPPAdXWly5nyDm2ZRLPV/
- Hdq6MulXotThxagrGzZ9KWlnhTCDCv+ylinS/ZuK718DmBMcCyrhQ4XxTWz4CcV+riFS
- EeZMUrKrcPEWoGjr6lf5J5bo98Af/6WKffzgUSYvUc3jMcyrGJJ7GMbW8rd8s7p8HV/6
- ShVo7y+ADjpjynyEnuDDKSgCGA8ezToXcjg5WH9lZk6Xskoz767JIHj2xOQwLvnDWEze
- O2wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=r64ZZx9bjWtXBdUUIcYa87604w1d3wlv8wpaQqXSNBs=;
- b=VjTh+x0ufag6jXQi79eDndc6Zax7MqgcxY4N9Fbt4cVqFXy+GvfHjlGG9Ch3YPXl6m
- +Fy3ChpXDLg6EH/EOOuweYGL7vfnOiKMzhTIrzj9YglpaG/WpKSN8g5rBES/7x/xIddp
- z9WgRbZKWnVe/MFEKZN1WQnmf75NpZqzTfwpuTAwuw43lpVON2rS8NFkrDDPXSaJE/P3
- hLQaYqvgIcgSBYYvwzLcNkmkbTxYolobfigN3KXRn+HgQktZAfmNVA7inNg4BBn+bvNl
- sB5PNFZ+FQcHReEAZdfRTKNlYOFUgT2WiJXKFtRLfSrsy/h90+0dSlfkFF02gNRMS+1J
- yNLg==
-X-Gm-Message-State: AOAM530YxECgsmxBYPOY55DZB0UwCikF1rzPwpBEm/pPXt0PlcvnqJnO
- mNklUhsX4a655PuOobvffifWLIYmLiZ5MBiTXA2sHw==
-X-Google-Smtp-Source: ABdhPJymr1L5xyunOcy4oj3bbm8HgyYr61RxhBc7l7QJilRUQfiAJFgGnhWuhtR/KZxpBVlq/CL6OcBGzcAMuDYbO/w=
-X-Received: by 2002:aa7:dd4b:: with SMTP id o11mr9421777edw.251.1602171708747; 
- Thu, 08 Oct 2020 08:41:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kQnI8-0006xj-3a; Fri, 09 Oct 2020 03:58:16 -0400
+Received: from szxga07-in.huawei.com ([45.249.212.35]:40920 helo=huawei.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kQnI5-00012V-JT; Fri, 09 Oct 2020 03:58:15 -0400
+Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 441313AAF4FEEA558ADA;
+ Fri,  9 Oct 2020 15:57:58 +0800 (CST)
+Received: from huawei.com (10.174.185.47) by DGGEMS410-HUB.china.huawei.com
+ (10.3.19.210) with Microsoft SMTP Server id 14.3.487.0; Fri, 9 Oct 2020
+ 15:57:49 +0800
+From: Yifei Jiang <jiangyifei@huawei.com>
+To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
+CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
+ <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
+ <victor.zhangxiaofeng@huawei.com>, <wu.wubin@huawei.com>,
+ <zhang.zhanghailiang@huawei.com>, <dengkai1@huawei.com>,
+ <yinyipeng1@huawei.com>, Yifei Jiang <jiangyifei@huawei.com>
+Subject: [PATCH V2] target/riscv: raise exception to HS-mode at
+ get_physical_address
+Date: Fri, 9 Oct 2020 15:57:40 +0800
+Message-ID: <20201009075740.688-1-jiangyifei@huawei.com>
+X-Mailer: git-send-email 2.26.2.windows.1
 MIME-Version: 1.0
-References: <20201006220647.GR7303@habkost.net>
- <CAFEAcA_se7jErv9AFM2D7UdDMurB9Lb6W9aAXD6648spQ6idKg@mail.gmail.com>
- <87mu0xyrtn.fsf@dusky.pond.sub.org> <20201008151521.GB7303@habkost.net>
-In-Reply-To: <20201008151521.GB7303@habkost.net>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 8 Oct 2020 16:41:37 +0100
-Message-ID: <CAFEAcA_=uScLjGR6vHbjsQK0-jgNuwNK+jcNf-u1yAh-863+2A@mail.gmail.com>
-Subject: Re: Purpose of QOM properties registered at realize time?
-To: Eduardo Habkost <ehabkost@redhat.com>
-Cc: Markus Armbruster <armbru@redhat.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- QEMU Developers <qemu-devel@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>, 
- qemu-ppc <qemu-ppc@nongnu.org>, Paolo Bonzini <pbonzini@redhat.com>, 
- "Daniel P. Berrange" <berrange@redhat.com>, John Snow <jsnow@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52e.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.174.185.47]
+X-CFilter-Loop: Reflected
+Received-SPF: pass client-ip=45.249.212.35; envelope-from=jiangyifei@huawei.com;
+ helo=huawei.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/09 02:46:07
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,25 +54,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2020 15:41:54 -0000
+X-List-Received-Date: Fri, 09 Oct 2020 07:58:16 -0000
 
-On Thu, 8 Oct 2020 at 16:15, Eduardo Habkost <ehabkost@redhat.com> wrote:
->
-> On Thu, Oct 08, 2020 at 11:45:08AM +0200, Markus Armbruster wrote:
-> > A first class static array property, where the size of the array is part
-> > of the value could perhaps cover this case.
->
-> This is an interesting idea, I think we should explore that.
->
-> qdev_pass_gpios() would become unnecessary and could be replaced
-> by a single (static) alias property.
+VS-stage translation at get_physical_address needs to translate pte
+address by G-stage translation. But the G-stage translation error
+can not be distinguished from VS-stage translation error in
+riscv_cpu_tlb_fill. On migration, destination needs to rebuild pte,
+and this G-stage translation error must be handled by HS-mode. So
+introduce TRANSLATE_STAGE2_FAIL so that riscv_cpu_tlb_fill could
+distinguish and raise it to HS-mode.
 
-At least in the current implementation, aliasing properties
-is not the only thing qdev_pass_gpios() does -- it also
-updates the NamedGPIOList data structures. It might be
-possible to reimplement it so that we really are just
-aliasing properties, though.
+Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+---
+ target/riscv/cpu.h        |  1 +
+ target/riscv/cpu_helper.c | 17 +++++++++++++++--
+ 2 files changed, 16 insertions(+), 2 deletions(-)
 
-thanks
--- PMM
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index de275782e6..8b856d518e 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -86,6 +86,7 @@ enum {
+ #define TRANSLATE_FAIL 1
+ #define TRANSLATE_SUCCESS 0
+ #define MMU_USER_IDX 3
++#define TRANSLATE_G_STAGE_FAIL 4
+ 
+ #define MAX_RISCV_PMPS (16)
+ 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 904899054d..096006dc00 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -451,7 +451,10 @@ restart:
+                                                  mmu_idx, false, true);
+ 
+             if (vbase_ret != TRANSLATE_SUCCESS) {
+-                return vbase_ret;
++                env->guest_phys_fault_addr = (base |
++                                              (addr &
++                                               (TARGET_PAGE_SIZE - 1))) >> 2;
++                return TRANSLATE_G_STAGE_FAIL;
+             }
+ 
+             pte_addr = vbase + idx * ptesize;
+@@ -730,12 +733,22 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+         ret = get_physical_address(env, &pa, &prot, address, access_type,
+                                    mmu_idx, true, true);
+ 
++        /*
++         * A G-stage exception may be triggered during VS-stage translation.
++         * And the env->guest_phys_fault_addr has already been set in
++         * get_physical_address().
++         */
++        if (ret == TRANSLATE_G_STAGE_FAIL) {
++            first_stage_error = false;
++            access_type = MMU_DATA_LOAD;
++        }
++
+         qemu_log_mask(CPU_LOG_MMU,
+                       "%s 1st-stage address=%" VADDR_PRIx " ret %d physical "
+                       TARGET_FMT_plx " prot %d\n",
+                       __func__, address, ret, pa, prot);
+ 
+-        if (ret != TRANSLATE_FAIL) {
++        if (ret != TRANSLATE_FAIL && ret != TRANSLATE_G_STAGE_FAIL) {
+             /* Second stage lookup */
+             im_address = pa;
+ 
+-- 
+2.19.1
+
 
