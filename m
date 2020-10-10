@@ -1,67 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kR17e-0006Do-VT
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Oct 2020 18:44:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58558)
+	id 1kR9u1-0000E7-UV
+	for mharc-qemu-riscv@gnu.org; Sat, 10 Oct 2020 04:06:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42688)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kR17d-0006D2-Cv; Fri, 09 Oct 2020 18:44:21 -0400
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:40035)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kR17b-0000MV-EY; Fri, 09 Oct 2020 18:44:21 -0400
-Received: by mail-il1-x143.google.com with SMTP id y16so6609782ila.7;
- Fri, 09 Oct 2020 15:44:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=6JlNophxr07QZAYQYDmAIRDy73nN1wG4j7eAmQEPDFY=;
- b=E3yk3blIy1iPfYeIodca52obg3s0HKMKqXbBTQwFKiA2vAeoPmc4HwZM71tch8JtaH
- phX4D03R6fkiWOMOFTghDeoe54N/anr3xYwLo0eLnXFYqHmickbteHQ/AF98wWobp5sd
- CUB1Ra3UHVhzYgZwX5Y8PMC1ssiIQj+/Ac0IQ2lYdkx0XeKpMAk0xx91aYcIlVRCyDts
- sBCjpuYICMnOLin6EA3hEGfX28bksqbdkt7Rv9rHmCS2hV8yOq3tYGe45MFXRnVA3VJS
- ZcvNHx7LAj62uh7UT5eDSvwwoZExsAgM2OU48nX9Ti+k78S/y1+YSycNn7DA7nKhZ99z
- q6Ag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=6JlNophxr07QZAYQYDmAIRDy73nN1wG4j7eAmQEPDFY=;
- b=X9zUFo8UmJrk2f/CuOx0hOO+WC1Hz1eAGF3qPLBhsNazdIBre73AugWw0H18ha/Dou
- ptbw8i5PVpZBbBpOhhUPsWS1IGZD8SkoViijcYszZvGQ7M+pSanhRrFildtxAojyEm3U
- qxd/Q/CNayI0bZLtw9v2vY/Xy/xdOUiNAIl8GwCMoBNAbtLxMdISHtT9g0qF6S87xmTO
- VuOgEO7LGgdthAEaDT/lQAqwme4NFhe1E41wHKv5avDoAborInUHnGee8PGrrxD7wxtk
- LbAQ20SPWxoHA0biygwXutZsoB58krMOUwEjBJ9WufLRi+qCVKCUuOmttUvNuWBmOCdd
- RSyg==
-X-Gm-Message-State: AOAM533qTzLrq8kPJXyHsbHP6EuXE3LBzTdrrfc6Db5816YrFiLo+SIO
- rifpwmv3mGLxQJhB4gupaJhfU1KBz7fNX+Y9GNk=
-X-Google-Smtp-Source: ABdhPJwNRczg//TSUrHknCJtS66SxtZ8jI9sC/03V7Accw020bj8wdNyWYZWShpJy8JgqvrMT3/Se1RYvz0f37ziQb4=
-X-Received: by 2002:a05:6e02:49:: with SMTP id
- i9mr12303929ilr.40.1602283457977; 
- Fri, 09 Oct 2020 15:44:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kR9tz-00007W-G7; Sat, 10 Oct 2020 04:06:51 -0400
+Received: from szxga05-in.huawei.com ([45.249.212.191]:5214 helo=huawei.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kR9tx-0007nU-7I; Sat, 10 Oct 2020 04:06:51 -0400
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 29E402EAB6008F810988;
+ Sat, 10 Oct 2020 16:06:37 +0800 (CST)
+Received: from huawei.com (10.174.185.47) by DGGEMS408-HUB.china.huawei.com
+ (10.3.19.208) with Microsoft SMTP Server id 14.3.487.0; Sat, 10 Oct 2020
+ 16:06:26 +0800
+From: Yifei Jiang <jiangyifei@huawei.com>
+To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
+CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
+ <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
+ <richard.henderson@linaro.org>, <victor.zhangxiaofeng@huawei.com>,
+ <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
+ <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
+ <jiangyifei@huawei.com>
+Subject: [PATCH V2 0/5] Support RISC-V migration
+Date: Sat, 10 Oct 2020 16:06:18 +0800
+Message-ID: <20201010080623.768-1-jiangyifei@huawei.com>
+X-Mailer: git-send-email 2.26.2.windows.1
 MIME-Version: 1.0
-References: <cover.1601652616.git.alistair.francis@wdc.com>
- <CAEUhbmXhFv8m3uFQ8z7XeEcXnTCJLCVokWp5ZQ-C3PDHdXJn1Q@mail.gmail.com>
-In-Reply-To: <CAEUhbmXhFv8m3uFQ8z7XeEcXnTCJLCVokWp5ZQ-C3PDHdXJn1Q@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 9 Oct 2020 15:32:44 -0700
-Message-ID: <CAKmqyKPSkso+81kxXMBkJXu9stUTTLb+iH+3=07X+nOYWWi73w@mail.gmail.com>
-Subject: Re: [PATCH v1 0/4] Allow loading a no MMU kernel
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.174.185.47]
+X-CFilter-Loop: Reflected
+Received-SPF: pass client-ip=45.249.212.191;
+ envelope-from=jiangyifei@huawei.com; helo=huawei.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/10 04:06:37
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -75,74 +54,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2020 22:44:21 -0000
+X-List-Received-Date: Sat, 10 Oct 2020 08:06:52 -0000
 
-On Fri, Oct 9, 2020 at 2:53 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> Hi Alistair,
->
-> On Fri, Oct 2, 2020 at 11:50 PM Alistair Francis
-> <alistair.francis@wdc.com> wrote:
-> >
-> > This series allows loading a noMMU kernel using the -kernel option.
-> > Currently if using -kernel QEMU assumes you also have firmware and loads
-> > the kernel at a hardcoded offset. This series changes that so we only
-> > load the kernel at an offset if a firmware (-bios) was loaded.
-> >
-> > This series also adds a function to check if the CPU is 32-bit. This is
-> > a step towards running 32-bit and 64-bit CPUs on the 64-bit RISC-V build
-> > by using run time checks instead of compile time checks. We also allow
-> > the user to sepcify a CPU for the sifive_u machine.
->
-> Could you please provide test scenarios for this series? I want to
-> have a try. Thanks.
+This patches supported RISC-V migration based on tcg accel. And we have
+verified related migration features such as snapshot and live migration.
 
-Yep.
+A few weeks ago, we submitted RFC patches about supporting RISC-V migration
+based on kvm accel: https://www.spinics.net/lists/kvm/msg223605.html.
+And we found that tcg accelerated migration can be supported with a few
+changes. Most of the devices have already implemented the migration
+interface, so, to achieve the tcg accelerated migration, we just need to
+add vmstate of both cpu and sifive_plic.
 
-Build a noMMU kernel (you need the latest master commit a78c6f5956a9):
-$ CROSS_COMPILE=riscv64-elf- ARCH=riscv make nommu_virt_defconfig
-$ CROSS_COMPILE=riscv64-elf- ARCH=riscv make -j
+Changes since v1:
+1. Add license head to target/riscv/machine.c.
+2. Regenerate some state of PMP at post_load hook.
 
-Build a noMMU RISC-V userspace
-$ git clonehttps://github.com/damien-lemoal/buildroot.git
-$ make kendryte_k210_defconfig
-$ make
+Yifei Jiang (5):
+  target/riscv: Add basic vmstate description of CPU
+  target/riscv: Add PMP state description
+  target/riscv: Add H extension state description
+  target/riscv: Add V extension state description
+  target/riscv: Add sifive_plic vmstate
 
-Run QEMU:
-./build/riscv64-softmmu/qemu-system-riscv64 -machine virt -m 64M \
--cpu rv64,mmu=false \
--serial mon:stdio -serial null -nographic \
--append "root=/dev/vda rw highres=off  console=ttyS0 mem=1G ip=dhcp
-earlycon=sbi" \
--device virtio-net-device,netdev=net0,mac=52:54:00:12:34:02 -netdev
-user,id=net0 \
--object rng-random,filename=/dev/urandom,id=rng0 -device
-virtio-rng-device,rng=rng0 \
--smp 1 -d guest_errors \
--kernel ./Image \
--drive id=disk0,file=./nommu-rootfs.ext2,if=none,format=raw -device
-virtio-blk-device,drive=disk0 -bios none
+ hw/intc/sifive_plic.c    |  26 ++++-
+ hw/intc/sifive_plic.h    |   1 +
+ target/riscv/cpu.c       |   7 --
+ target/riscv/cpu.h       |   4 +
+ target/riscv/machine.c   | 203 +++++++++++++++++++++++++++++++++++++++
+ target/riscv/meson.build |   3 +-
+ target/riscv/pmp.c       |  29 +++---
+ target/riscv/pmp.h       |   2 +
+ 8 files changed, 255 insertions(+), 20 deletions(-)
+ create mode 100644 target/riscv/machine.c
 
-Alistair
+-- 
+2.19.1
 
->
-> >
-> > Alistair Francis (4):
-> >   hw/riscv: sifive_u: Allow specifying the CPU
-> >   hw/riscv: Return the end address of the loaded firmware
-> >   hw/riscv: Add a riscv_is_32_bit() function
-> >   hw/riscv: Load the kernel after the firmware
-> >
-> >  include/hw/riscv/boot.h     | 11 +++++----
-> >  include/hw/riscv/sifive_u.h |  1 +
-> >  hw/riscv/boot.c             | 47 ++++++++++++++++++++++++-------------
-> >  hw/riscv/opentitan.c        |  3 ++-
-> >  hw/riscv/sifive_e.c         |  3 ++-
-> >  hw/riscv/sifive_u.c         | 31 ++++++++++++++++++------
-> >  hw/riscv/spike.c            | 14 ++++++++---
-> >  hw/riscv/virt.c             | 14 ++++++++---
-> >  8 files changed, 89 insertions(+), 35 deletions(-)
->
-> Regards,
-> Bin
 
