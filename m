@@ -1,48 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kR9uB-0000eL-Er
-	for mharc-qemu-riscv@gnu.org; Sat, 10 Oct 2020 04:07:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42778)
+	id 1kREq9-0007xt-IT
+	for mharc-qemu-riscv@gnu.org; Sat, 10 Oct 2020 09:23:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35110)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kR9u9-0000Zg-Le; Sat, 10 Oct 2020 04:07:01 -0400
-Received: from szxga07-in.huawei.com ([45.249.212.35]:50078 helo=huawei.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kR9u7-0007nd-Iy; Sat, 10 Oct 2020 04:07:01 -0400
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 397B85DEFBE87D393B27;
- Sat, 10 Oct 2020 16:06:42 +0800 (CST)
-Received: from huawei.com (10.174.185.47) by DGGEMS408-HUB.china.huawei.com
- (10.3.19.208) with Microsoft SMTP Server id 14.3.487.0; Sat, 10 Oct 2020
- 16:06:35 +0800
-From: Yifei Jiang <jiangyifei@huawei.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
- <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
- <richard.henderson@linaro.org>, <victor.zhangxiaofeng@huawei.com>,
- <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
- <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
- <jiangyifei@huawei.com>
-Subject: [PATCH V2 2/5] target/riscv: Add PMP state description
-Date: Sat, 10 Oct 2020 16:06:20 +0800
-Message-ID: <20201010080623.768-3-jiangyifei@huawei.com>
-X-Mailer: git-send-email 2.26.2.windows.1
-In-Reply-To: <20201010080623.768-1-jiangyifei@huawei.com>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kREq8-0007vZ-78
+ for qemu-riscv@nongnu.org; Sat, 10 Oct 2020 09:23:12 -0400
+Received: from mail-ot1-x344.google.com ([2607:f8b0:4864:20::344]:42570)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kREq6-0000SP-EU
+ for qemu-riscv@nongnu.org; Sat, 10 Oct 2020 09:23:11 -0400
+Received: by mail-ot1-x344.google.com with SMTP id m13so11550815otl.9
+ for <qemu-riscv@nongnu.org>; Sat, 10 Oct 2020 06:23:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=kLvZ3Ba9N5ZK4eb+Ofd69hXQfdMvwMbkzGHm6B1jLS0=;
+ b=ReC90+/km+k4j/1D1jY1VoluypW3L/fPuQtv0jUsRc8jWcZnhEFY4okjUFOR5Cx4ki
+ QxmO+gpG4t1ZS4NXPCFpNWbKoTfm0DNuy2F69WWuw07Mdd+kZGNWcytmG1lcgfBCNKLV
+ /jSs6S2L+Og+XIxZv5JRiqa0RLlAYzPpUFSeTM9bQFVh5mxwbka6iOM4MfQoTXqxKd9s
+ tb/yJRn3ayItY5o8vL+5j2yNoSvD/z03LSsBH80VoHeRB1uLmy0oA0vFHvE6e0hsLofc
+ tLVokRToMgLkNNljBc17R9/hgbB+CXdJRzmRNXdkaS0wbFwIjsMBFP21pQFbTmsuYJjm
+ frsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=kLvZ3Ba9N5ZK4eb+Ofd69hXQfdMvwMbkzGHm6B1jLS0=;
+ b=YCoB/WmTYlt9lW71RjOKSAki/Xf5fSUCOq6ZrXx/yXsOOaoKnPanNBDwDcEN49Zik2
+ 8mkU7jTur2kEhcj9Vsu+vCE0fYpUH5Ql/HXL/u6gyuhM5+EfXS6TLiCACTjMZBLQ5Igs
+ lsqIkNLkogzvpklLgaNb89zkcCbB5t8g0dqxe8Ph66fCbV1vLSfmJ2J5WjhrRB6KwNZ7
+ dPRgL3TKuFKFinaxqaCKpX3eBIOIf7BQ/I6MJXrEMvmStRtaZc8RpYYLPRRaywsuhdnX
+ H4S2r8foo/Q6nWT4erFsgnSJnwYkCnFuSCyXvArjMeXaq9vqmZYmGrGUF2bNbGbkVOFV
+ ICEg==
+X-Gm-Message-State: AOAM5323ovByw0BGTdon/E/MbYejEm9zrb1Bcx1HYxd87HvvgeUgts+m
+ OLBoIbfegxp632mW488fvjEYiA==
+X-Google-Smtp-Source: ABdhPJx6cjfGBU4Wo9GMmGQvpNwEvUqUwvPKCYuoDJ7sNFig/l49Wum+aQ3CI7Y0XPKIrgag7gEqMA==
+X-Received: by 2002:a9d:6349:: with SMTP id y9mr11521312otk.246.1602336188532; 
+ Sat, 10 Oct 2020 06:23:08 -0700 (PDT)
+Received: from [172.24.51.127] (168.189-204-159.bestelclientes.com.mx.
+ [189.204.159.168])
+ by smtp.gmail.com with ESMTPSA id q8sm7001868otf.7.2020.10.10.06.23.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 10 Oct 2020 06:23:07 -0700 (PDT)
+Subject: Re: [PATCH V2 1/5] target/riscv: Add basic vmstate description of CPU
+To: Yifei Jiang <jiangyifei@huawei.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, victor.zhangxiaofeng@huawei.com,
+ wu.wubin@huawei.com, zhang.zhanghailiang@huawei.com, dengkai1@huawei.com,
+ yinyipeng1@huawei.com
 References: <20201010080623.768-1-jiangyifei@huawei.com>
+ <20201010080623.768-2-jiangyifei@huawei.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <0bc022ca-35f6-8579-51f1-65005e89a9a3@linaro.org>
+Date: Sat, 10 Oct 2020 08:23:04 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <20201010080623.768-2-jiangyifei@huawei.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain
-X-Originating-IP: [10.174.185.47]
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.35; envelope-from=jiangyifei@huawei.com;
- helo=huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/10 04:06:42
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::344;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x344.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -22
+X-Spam_score: -2.3
+X-Spam_bar: --
+X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.207,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -56,161 +87,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Oct 2020 08:07:02 -0000
+X-List-Received-Date: Sat, 10 Oct 2020 13:23:12 -0000
 
-In the case of supporting PMP feature, add PMP state description
-to vmstate_riscv_cpu.
+On 10/10/20 3:06 AM, Yifei Jiang wrote:
+> +++ b/target/riscv/cpu.h
+> @@ -311,6 +311,10 @@ extern const char * const riscv_fpr_regnames[];
+>  extern const char * const riscv_excp_names[];
+>  extern const char * const riscv_intr_names[];
+>  
+> +#ifndef CONFIG_USER_ONLY
+> +extern const VMStateDescription vmstate_riscv_cpu;
+> +#endif
+> +
 
-'vmstate_pmp_addr' and 'num_rules' could be regenerated by
-pmp_update_rule(). But there exists the problem of updating
-num_rules repeatedly in pmp_update_rule(). So here extracts
-pmp_update_rule_addr() and pmp_update_rule_nums() to update
-'vmstate_pmp_addr' and 'num_rules' respectively.
+This is not part of the public interface to RISCVCPU, so it should go in
+internals.h.
 
-Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
----
- target/riscv/machine.c | 50 ++++++++++++++++++++++++++++++++++++++++++
- target/riscv/pmp.c     | 29 ++++++++++++++----------
- target/riscv/pmp.h     |  2 ++
- 3 files changed, 70 insertions(+), 11 deletions(-)
+Not that there aren't other things in cpu.h that don't belong.  No target has
+been perfect in differentiating what's interface and what's implementation.
 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index af2828a80a..8fffd2db3f 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -22,6 +22,52 @@
- #include "sysemu/kvm.h"
- #include "migration/cpu.h"
- 
-+static bool pmp_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+    CPURISCVState *env = &cpu->env;
-+
-+    return riscv_feature(env, RISCV_FEATURE_PMP);
-+}
-+
-+static int pmp_post_load(void *opaque, int version_id)
-+{
-+    RISCVCPU *cpu = opaque;
-+    CPURISCVState *env = &cpu->env;
-+    int i;
-+
-+    for (i = 0; i < MAX_RISCV_PMPS; i++) {
-+        pmp_update_rule_addr(env, i);
-+    }
-+    pmp_update_rule_nums(env);
-+
-+    return 0;
-+}
-+
-+static const VMStateDescription vmstate_pmp_entry = {
-+    .name = "cpu/pmp/entry",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINTTL(addr_reg, pmp_entry_t),
-+        VMSTATE_UINT8(cfg_reg, pmp_entry_t),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+static const VMStateDescription vmstate_pmp = {
-+    .name = "cpu/pmp",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = pmp_needed,
-+    .post_load = pmp_post_load,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_STRUCT_ARRAY(env.pmp_state.pmp, RISCVCPU, MAX_RISCV_PMPS,
-+                             0, vmstate_pmp_entry, pmp_entry_t),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 1,
-@@ -73,5 +119,9 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UINTTL(env.mstatush, RISCVCPU),
- #endif
-         VMSTATE_END_OF_LIST()
-+    },
-+    .subsections = (const VMStateDescription * []) {
-+        &vmstate_pmp,
-+        NULL
-     }
- };
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index c394e867f8..2eda8e1e2f 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -136,18 +136,8 @@ static void pmp_decode_napot(target_ulong a, target_ulong *sa, target_ulong *ea)
-     }
- }
- 
--
--/* Convert cfg/addr reg values here into simple 'sa' --> start address and 'ea'
-- *   end address values.
-- *   This function is called relatively infrequently whereas the check that
-- *   an address is within a pmp rule is called often, so optimise that one
-- */
--static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index)
-+void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index)
- {
--    int i;
--
--    env->pmp_state.num_rules = 0;
--
-     uint8_t this_cfg = env->pmp_state.pmp[pmp_index].cfg_reg;
-     target_ulong this_addr = env->pmp_state.pmp[pmp_index].addr_reg;
-     target_ulong prev_addr = 0u;
-@@ -186,7 +176,13 @@ static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index)
- 
-     env->pmp_state.addr[pmp_index].sa = sa;
-     env->pmp_state.addr[pmp_index].ea = ea;
-+}
- 
-+void pmp_update_rule_nums(CPURISCVState *env)
-+{
-+    int i;
-+
-+    env->pmp_state.num_rules = 0;
-     for (i = 0; i < MAX_RISCV_PMPS; i++) {
-         const uint8_t a_field =
-             pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg);
-@@ -196,6 +192,17 @@ static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index)
-     }
- }
- 
-+/* Convert cfg/addr reg values here into simple 'sa' --> start address and 'ea'
-+ *   end address values.
-+ *   This function is called relatively infrequently whereas the check that
-+ *   an address is within a pmp rule is called often, so optimise that one
-+ */
-+static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index)
-+{
-+    pmp_update_rule_addr(env, pmp_index);
-+    pmp_update_rule_nums(env);
-+}
-+
- static int pmp_is_in_range(CPURISCVState *env, int pmp_index, target_ulong addr)
- {
-     int result = 0;
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index 6a8f072871..6c6b4c9bef 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -62,5 +62,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-     target_ulong size, pmp_priv_t priv, target_ulong mode);
- bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
-                          target_ulong *tlb_size);
-+void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
-+void pmp_update_rule_nums(CPURISCVState *env);
- 
- #endif
--- 
-2.19.1
+> +
+> +#ifdef TARGET_RISCV32
+> +        VMSTATE_UINTTL(env.mstatush, RISCVCPU),
+> +#endif
 
+Would this be a good time to expand mstatus to uint64_t instead of target_ulong
+so that it can be saved as one unit and reduce some ifdefs in the code base?
+
+Similarly with some of the other status registers that are two halved for riscv32.
+
+
+r~
 
