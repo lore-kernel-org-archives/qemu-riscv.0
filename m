@@ -1,78 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSFZy-0006CI-Vz
-	for mharc-qemu-riscv@gnu.org; Tue, 13 Oct 2020 04:22:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53158)
+	id 1kSFcO-000817-RF
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Oct 2020 04:25:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53970)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kSFZw-00069b-RP; Tue, 13 Oct 2020 04:22:40 -0400
-Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342]:36514)
+ id 1kSFcJ-0007xp-83; Tue, 13 Oct 2020 04:25:10 -0400
+Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:36671)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kSFZu-0003Df-PU; Tue, 13 Oct 2020 04:22:40 -0400
-Received: by mail-wm1-x342.google.com with SMTP id e2so20824271wme.1;
- Tue, 13 Oct 2020 01:22:36 -0700 (PDT)
+ id 1kSFcH-0003Vk-QL; Tue, 13 Oct 2020 04:25:06 -0400
+Received: by mail-wr1-x443.google.com with SMTP id x7so14290965wrl.3;
+ Tue, 13 Oct 2020 01:25:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ h=sender:subject:to:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=h1E2HVic7xBh6Dv/vkSYBNUycLf7aL4E08DCiV+4DuM=;
- b=lr908fvi2z0y6gQ+AbecEGAqGgXHzH1C08STQnODk7S92Zp2drVW9wEQVMYog9SsoH
- KOyYRuPcqBNKMq9CuaLaZcy0tdKa7R0tNhOfbEsJQsd45lTWJfwCt3QJB2z+TM+qcTMP
- csxX0suMlg2NoU8tiUHuDMaADZ8+5EUSm3eQnVzYcBoq0DDEffDWsUQMgFrVhGpSAbKR
- CW3eC/IVUnKBEH4w6OkFgWua88l2rb34nxG3TFzex3RiYSpCLjAu0RnG3fSabY5TLAiq
- r9lK81JZeHFsfcoEzZ9zMXaLk24jNwrwRaDjlgKNqZHJAs0FAmmlqHi5X+3zFMlXsIea
- IkeQ==
+ bh=+/akLS4HgcKb/+GVxTP1sipY/A+eHMQumuOweWL/vL4=;
+ b=EXJ4H/IsjlpQ9qvkhB9h9Mbm8KYl27sTFcEXdnR7BdkBNeLMS6i4X9t2XL1ZHwv9xj
+ sG6AwhKjR39S1pIhi6UuVbC9F3EFOZWnNwxS96NvIBhI8KB0CANcPwfo2Rsjo7x4c/Kp
+ pU3rhyQUQfdRQkGSMgeyfxZ0+hBSuj2kgWcIGSSlJXvI4mZAUt3OAAg6sIjZ1GjdLqQX
+ Imf6P+0MHa8R6OFSspnUA+AV1We5zxtPrqhfck+APx186Yr21HXNVnZj0tJUNwqK9Nv3
+ /Q6ENTrg5JTCwg/Lc1WgoIgLxSZVmZPXHA3wO3TKowjgG7/p/Uv+OODH/QYo9bwWvy6/
+ /ZGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ h=x-gm-message-state:sender:subject:to:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=h1E2HVic7xBh6Dv/vkSYBNUycLf7aL4E08DCiV+4DuM=;
- b=PCB9/JxkuL5RLKiS9kWQBC/bV6lZW6EW/mayYNt5oMhwxGXEVPCJBYZJFH8mUwhJDY
- BZQwfcfExKhyhAJgy0+BjdDYKfWcnV2jKSROV/S0iEyrFUIYjxFzTN9Vm7MYdFIcb39S
- 58yPLd4OVXmV+QPh4I/p2AAcCtdWkU9decCZXmuIic4Bgr6JYJcRB3lLF85i5FVO17hH
- QyWkNu6yKS+uBkQ1E+Tptf6LIPmhAqdEaoQVak5czhxVSBdtVOQK1EqsZiy+K7V/o+Ap
- 2t4vXAvnFO3LiSljvwbbOkKGycSrf/kW8RAEVbPM0BDb4RnpwcfgljbffJ+1lzRcQKhS
- p1uw==
-X-Gm-Message-State: AOAM531jJqSf954kDZQMJKkl62bKw4DF671+Y+rY9/7FKw6uSN7W5Tm0
- RuDYjvHE0+NegDQwCQ5Pj9Q=
-X-Google-Smtp-Source: ABdhPJx5rOBC8YVSo8jiyNaXxZyph+CyVmG0RQ7d0QuSB4gDJGORHNSd+ki7P9A2KMijMwtfYJYB9w==
-X-Received: by 2002:a1c:9e0e:: with SMTP id h14mr14258587wme.18.1602577355716; 
- Tue, 13 Oct 2020 01:22:35 -0700 (PDT)
+ bh=+/akLS4HgcKb/+GVxTP1sipY/A+eHMQumuOweWL/vL4=;
+ b=L/J5qNLpWM7DauH2gbw1Ong3BjywnqbGV7bv1Xah2DcvQn9d1pNk1vS0RQxZY57hC4
+ pAoLgojJwg+dyTyKMhputsSPSbGqmiFFNMVTvQ9pqaL7RJQOG49I+3cbdHkOohyKWDND
+ nAc9vpaSkrUMTKhbjjI4Q2hfUdFfXl/EgCEGt2DwU1+/NHfojffxpSJ+N5cuGYCve0E7
+ nHkBS11OLC/hBgXrZiBlKJNRxwB5rLyDqSEWMkunGlokgorlTfSdO6XCLXGS+wamtjfL
+ 7V3hZ/bgla1CK4LB1aSFK43R2cXpwsqPqPHVXmz+rGhbrlOTvqt+6QhrUxSW6brDHt6S
+ ZNqw==
+X-Gm-Message-State: AOAM532K/VhZKyab0EBYxXLzR4jgvS1gk/vWU/vwZau0zGwveGlVp62u
+ 8OndvOxSDXNMYfZexJ6wjfQKZDCZsLQ=
+X-Google-Smtp-Source: ABdhPJxcCDkt0dnrUHMMIYv6iO3jLjLrj66R7jBwLONO18Ttdzjgpbkesb9rpUoVaxlAUkl6yuoJ4w==
+X-Received: by 2002:adf:bbca:: with SMTP id z10mr15848574wrg.403.1602577503801; 
+ Tue, 13 Oct 2020 01:25:03 -0700 (PDT)
 Received: from [192.168.1.36] (106.red-83-59-162.dynamicip.rima-tde.net.
  [83.59.162.106])
- by smtp.gmail.com with ESMTPSA id z11sm27610905wrh.70.2020.10.13.01.22.33
+ by smtp.gmail.com with ESMTPSA id i126sm27840244wmi.0.2020.10.13.01.25.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Oct 2020 01:22:34 -0700 (PDT)
+ Tue, 13 Oct 2020 01:25:03 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 07/10] tcg: implement bulletproof JIT
-To: Joelle van Dyne <j@getutm.app>, qemu-devel@nongnu.org
-Cc: Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- "open list:RISC-V TCG target" <qemu-riscv@nongnu.org>,
- Stefan Weil <sw@weilnetz.de>,
- "open list:S390 TCG target" <qemu-s390x@nongnu.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- "open list:AArch64 TCG target" <qemu-arm@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, Huacai Chen <chenhc@lemote.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Andrzej Zaborowski <balrogg@gmail.com>, Aurelien Jarno
- <aurelien@aurel32.net>, Richard Henderson <rth@twiddle.net>
-References: <20201012232939.48481-1-j@getutm.app>
- <20201012232939.48481-8-j@getutm.app>
+Subject: Re: [PATCH] hw/intc: Move sifive_plic.h to the include directory
+To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <1602577156-66090-1-git-send-email-bin.meng@windriver.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <f836dc90-99bc-d3ce-dd33-e0d51bb4b979@amsat.org>
-Date: Tue, 13 Oct 2020 10:22:33 +0200
+Message-ID: <b9e1770f-531a-7c6f-0fcd-f8d2da4deb94@amsat.org>
+Date: Tue, 13 Oct 2020 10:25:02 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.3.1
 MIME-Version: 1.0
-In-Reply-To: <20201012232939.48481-8-j@getutm.app>
+In-Reply-To: <1602577156-66090-1-git-send-email-bin.meng@windriver.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::342;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x342.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::443;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x443.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -14
@@ -95,67 +83,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Oct 2020 08:22:41 -0000
+X-List-Received-Date: Tue, 13 Oct 2020 08:25:11 -0000
 
-Hi Joelle,
+On 10/13/20 10:19 AM, Bin Meng wrote:
+> sifive_plic.h should be put in the include directory.
 
-On 10/13/20 1:29 AM, Joelle van Dyne wrote:
-> From: osy <osy86@users.noreply.github.com>
-> 
-> On iOS, we cannot allocate RWX pages without special entitlements. As a
-> workaround, we can a RX region and then mirror map it to a separate RX
-> region. Then we can write to one region and execute from the other one.
-> 
-> To better keep track of pointers to RW/RX memory, we mark any tcg_insn_unit
-> pointers as `const` if they will never be written to. We also define a new
-> macro `TCG_CODE_PTR_RW` that returns a pointer to RW memory. Only the
-> difference between the two regions is stored in the TCG context.
+Maybe:
 
-^ one change,
+"Since sifive_plic.h is used by hw/intc/sifive_plic.c,
+  it has to be in the public include directory. Move it."
 
-v another change. Consider splitting in 2 patches to ease review.
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
 > 
-> To ensure cache coherency, we flush the data cache in the RW mapping and
-> then invalidate the instruction cache in the RX mapping (where applicable).
-> Because data cache flush is OS defined on some architectures, we do not
-> provide implementations for non iOS platforms (ARM/x86).
-> 
-> Signed-off-by: Joelle van Dyne <j@getutm.app>
+> Fixes: 84fcf3c15111 ("hw/riscv: Move sifive_plic model to hw/intc")
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 > ---
->   accel/tcg/cpu-exec.c         |  7 +++-
->   accel/tcg/translate-all.c    | 78 ++++++++++++++++++++++++++++++++++--
->   configure                    |  1 +
->   docs/devel/ios.rst           | 40 ++++++++++++++++++
->   include/exec/exec-all.h      |  8 ++++
->   include/tcg/tcg.h            | 18 +++++++--
->   tcg/aarch64/tcg-target.c.inc | 48 +++++++++++++---------
->   tcg/aarch64/tcg-target.h     | 13 +++++-
->   tcg/arm/tcg-target.c.inc     | 33 ++++++++-------
->   tcg/arm/tcg-target.h         |  9 ++++-
->   tcg/i386/tcg-target.c.inc    | 28 ++++++-------
->   tcg/i386/tcg-target.h        | 24 ++++++++++-
->   tcg/mips/tcg-target.c.inc    | 64 +++++++++++++++++------------
->   tcg/mips/tcg-target.h        |  8 +++-
->   tcg/ppc/tcg-target.c.inc     | 55 ++++++++++++++++---------
->   tcg/ppc/tcg-target.h         |  8 +++-
->   tcg/riscv/tcg-target.c.inc   | 51 +++++++++++++----------
->   tcg/riscv/tcg-target.h       |  9 ++++-
->   tcg/s390/tcg-target.c.inc    | 25 ++++++------
->   tcg/s390/tcg-target.h        | 13 +++++-
->   tcg/sparc/tcg-target.c.inc   | 33 +++++++++------
->   tcg/sparc/tcg-target.h       |  8 +++-
->   tcg/tcg-ldst.c.inc           |  2 +-
->   tcg/tcg-pool.c.inc           |  9 +++--
->   tcg/tcg.c                    | 60 +++++++++++++++++----------
->   tcg/tci/tcg-target.c.inc     |  8 ++--
->   tcg/tci/tcg-target.h         |  9 ++++-
->   27 files changed, 481 insertions(+), 188 deletions(-)
->   create mode 100644 docs/devel/ios.rst
+> 
+>   {hw => include/hw}/intc/sifive_plic.h | 0
+>   1 file changed, 0 insertions(+), 0 deletions(-)
+>   rename {hw => include/hw}/intc/sifive_plic.h (100%)
+> 
+> diff --git a/hw/intc/sifive_plic.h b/include/hw/intc/sifive_plic.h
+> similarity index 100%
+> rename from hw/intc/sifive_plic.h
+> rename to include/hw/intc/sifive_plic.h
+> 
 
-When posting big series, consider using scripts/git.orderfile.
-
-Regards,
-
-Phil.
 
