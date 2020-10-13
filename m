@@ -1,25 +1,26 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSO0X-0007HS-10
-	for mharc-qemu-riscv@gnu.org; Tue, 13 Oct 2020 13:22:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38292)
+	id 1kSO8j-0002iF-Qx
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Oct 2020 13:31:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40206)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <georg.kotheimer@kernkonzept.com>)
- id 1kSO0V-0007G1-Jr; Tue, 13 Oct 2020 13:22:39 -0400
-Received: from serv1.kernkonzept.com ([2a01:4f8:1c1c:b490::2]:42221
+ id 1kSO8e-0002gB-Lk; Tue, 13 Oct 2020 13:31:05 -0400
+Received: from serv1.kernkonzept.com ([2a01:4f8:1c1c:b490::2]:43311
  helo=mx.kernkonzept.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <georg.kotheimer@kernkonzept.com>)
- id 1kSO0T-0001LA-T9; Tue, 13 Oct 2020 13:22:39 -0400
+ id 1kSO8c-0002S3-Ni; Tue, 13 Oct 2020 13:31:04 -0400
 Received: from [86.56.119.37] (helo=george-laptop.lan)
  by mx.kernkonzept.com with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) id 1kSO0Q-0000MC-Ek; Tue, 13 Oct 2020 19:22:34 +0200
+ (Exim 4.92) id 1kSO8Y-0000P0-Tb; Tue, 13 Oct 2020 19:30:58 +0200
 From: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
-Subject: [PATCH] target/riscv: Fix implementation of HLVX.WU instruction
-Date: Tue, 13 Oct 2020 19:22:23 +0200
-Message-Id: <20201013172223.443645-1-georg.kotheimer@kernkonzept.com>
+Subject: [PATCH] target/riscv: Fix update of hstatus.GVA in
+ riscv_cpu_do_interrupt
+Date: Tue, 13 Oct 2020 19:30:54 +0200
+Message-Id: <20201013173054.451135-1-georg.kotheimer@kernkonzept.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -44,36 +45,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Oct 2020 17:22:40 -0000
+X-List-Received-Date: Tue, 13 Oct 2020 17:31:06 -0000
 
-The HLVX.WU instruction is supposed to read a machine word,
-but prior to this change it read a byte instead.
+The hstatus.GVA bit was not set if the faulting guest virtual address
+was zero.
 
 Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
 ---
- target/riscv/op_helper.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ target/riscv/cpu_helper.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 9b9ada45a9..3b7bd6ee88 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -334,12 +334,12 @@ target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
-         riscv_cpu_set_two_stage_lookup(env, true);
- 
-         switch (memop) {
--        case MO_TEUL:
--            pte = cpu_ldub_data_ra(env, address, GETPC());
--            break;
-         case MO_TEUW:
-             pte = cpu_lduw_data_ra(env, address, GETPC());
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 904899054d..c5852ce1b7 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -852,6 +852,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+     bool async = !!(cs->exception_index & RISCV_EXCP_INT_FLAG);
+     target_ulong cause = cs->exception_index & RISCV_EXCP_INT_MASK;
+     target_ulong deleg = async ? env->mideleg : env->medeleg;
++    bool write_tval = false;
+     target_ulong tval = 0;
+     target_ulong htval = 0;
+     target_ulong mtval2 = 0;
+@@ -873,6 +874,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         case RISCV_EXCP_INST_PAGE_FAULT:
+         case RISCV_EXCP_LOAD_PAGE_FAULT:
+         case RISCV_EXCP_STORE_PAGE_FAULT:
++            write_tval  = true;
+             tval = env->badaddr;
              break;
-+        case MO_TEUL:
-+            pte = cpu_ldl_data_ra(env, address, GETPC());
-+            break;
          default:
-             g_assert_not_reached();
-         }
+@@ -904,7 +906,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+             target_ulong hdeleg = async ? env->hideleg : env->hedeleg;
+ 
+             if ((riscv_cpu_virt_enabled(env) ||
+-                 riscv_cpu_two_stage_lookup(env)) && tval) {
++                 riscv_cpu_two_stage_lookup(env)) && write_tval) {
+                 /*
+                  * If we are writing a guest virtual address to stval, set
+                  * this to 1. If we are trapping to VS we will set this to 0
 -- 
 2.25.1
 
