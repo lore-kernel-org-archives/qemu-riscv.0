@@ -1,76 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSFcO-000817-RF
-	for mharc-qemu-riscv@gnu.org; Tue, 13 Oct 2020 04:25:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53970)
+	id 1kSFhO-00052B-5W
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Oct 2020 04:30:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55008)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kSFcJ-0007xp-83; Tue, 13 Oct 2020 04:25:10 -0400
-Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:36671)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kSFhM-0004zO-A0; Tue, 13 Oct 2020 04:30:20 -0400
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042]:32983)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kSFcH-0003Vk-QL; Tue, 13 Oct 2020 04:25:06 -0400
-Received: by mail-wr1-x443.google.com with SMTP id x7so14290965wrl.3;
- Tue, 13 Oct 2020 01:25:05 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kSFhK-0004Bf-EQ; Tue, 13 Oct 2020 04:30:19 -0400
+Received: by mail-pj1-x1042.google.com with SMTP id p3so192175pjd.0;
+ Tue, 13 Oct 2020 01:30:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=+/akLS4HgcKb/+GVxTP1sipY/A+eHMQumuOweWL/vL4=;
- b=EXJ4H/IsjlpQ9qvkhB9h9Mbm8KYl27sTFcEXdnR7BdkBNeLMS6i4X9t2XL1ZHwv9xj
- sG6AwhKjR39S1pIhi6UuVbC9F3EFOZWnNwxS96NvIBhI8KB0CANcPwfo2Rsjo7x4c/Kp
- pU3rhyQUQfdRQkGSMgeyfxZ0+hBSuj2kgWcIGSSlJXvI4mZAUt3OAAg6sIjZ1GjdLqQX
- Imf6P+0MHa8R6OFSspnUA+AV1We5zxtPrqhfck+APx186Yr21HXNVnZj0tJUNwqK9Nv3
- /Q6ENTrg5JTCwg/Lc1WgoIgLxSZVmZPXHA3wO3TKowjgG7/p/Uv+OODH/QYo9bwWvy6/
- /ZGA==
+ h=from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=6Sgy3rHvTN4jCcntej3MnMJNBmjZHwYNF6EFKidYoio=;
+ b=IyShGAle7UWgHDPYY0p261aJjIzXUPMJqJHCfW9WhYEEiXDWg7IyaEg2BBvpnXKZjU
+ LAGWysGlnBed5ZTuyVUCtUt7FIEc8Z4x4Xs6i3158VFVNNkYYGQ9EMZICTsF/kG7+Wbu
+ w3+4+RHRzQYgns/pQE+DAQ2+z1a+jDweeXMMEMeMsJ8YEouCUNxKmDyhNbxJrnsXDI0A
+ 4yHnAQFPjm+nDJjTJJT2vCIUZwquLF0CJY89tYCriB909eCsrmnw7LKqgshHMZ9SEajc
+ MSF4Vbz2WjjaQtFdqdWo4cz5hlc+L0OehtD4cz0/wS0YmnkcQpOuHewMyArVYtB5Kgm5
+ POoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=+/akLS4HgcKb/+GVxTP1sipY/A+eHMQumuOweWL/vL4=;
- b=L/J5qNLpWM7DauH2gbw1Ong3BjywnqbGV7bv1Xah2DcvQn9d1pNk1vS0RQxZY57hC4
- pAoLgojJwg+dyTyKMhputsSPSbGqmiFFNMVTvQ9pqaL7RJQOG49I+3cbdHkOohyKWDND
- nAc9vpaSkrUMTKhbjjI4Q2hfUdFfXl/EgCEGt2DwU1+/NHfojffxpSJ+N5cuGYCve0E7
- nHkBS11OLC/hBgXrZiBlKJNRxwB5rLyDqSEWMkunGlokgorlTfSdO6XCLXGS+wamtjfL
- 7V3hZ/bgla1CK4LB1aSFK43R2cXpwsqPqPHVXmz+rGhbrlOTvqt+6QhrUxSW6brDHt6S
- ZNqw==
-X-Gm-Message-State: AOAM532K/VhZKyab0EBYxXLzR4jgvS1gk/vWU/vwZau0zGwveGlVp62u
- 8OndvOxSDXNMYfZexJ6wjfQKZDCZsLQ=
-X-Google-Smtp-Source: ABdhPJxcCDkt0dnrUHMMIYv6iO3jLjLrj66R7jBwLONO18Ttdzjgpbkesb9rpUoVaxlAUkl6yuoJ4w==
-X-Received: by 2002:adf:bbca:: with SMTP id z10mr15848574wrg.403.1602577503801; 
- Tue, 13 Oct 2020 01:25:03 -0700 (PDT)
-Received: from [192.168.1.36] (106.red-83-59-162.dynamicip.rima-tde.net.
- [83.59.162.106])
- by smtp.gmail.com with ESMTPSA id i126sm27840244wmi.0.2020.10.13.01.25.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Oct 2020 01:25:03 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH] hw/intc: Move sifive_plic.h to the include directory
-To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
- <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <1602577156-66090-1-git-send-email-bin.meng@windriver.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <b9e1770f-531a-7c6f-0fcd-f8d2da4deb94@amsat.org>
-Date: Tue, 13 Oct 2020 10:25:02 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.1
+ bh=6Sgy3rHvTN4jCcntej3MnMJNBmjZHwYNF6EFKidYoio=;
+ b=C6pl+Dbv+LEyQ2ftRGO+uCwdfOdX/OUrtjJi5xUH+3F9ZS3Z7lusZTcfvJGufhBPKQ
+ RnxWC4ptZG4PoaIwg73sX7wIXTCQgZLhUW0d7WWqF1Z3JNmeuqpZGJuGVGjzSHURjaFY
+ P/nKzsulezxpeCYua7MA9A0lzTgCj2IKo40ctRCx7ZVi4GJ2Ye98oWlCp2EMVUTbhqXA
+ CccSkMjfouoBmvjTVFOakIW2oiqVmQOqirppg9DTPtuHeC0XtVJlr6SSyMN82SByoLya
+ pH4owDyfQNyg/Re1mN7MsHrCJe+LCXU5sO/CzGZbzj7dkls+XlAUFVcxrVjHD2u5lxip
+ mUrQ==
+X-Gm-Message-State: AOAM5324k1ZdfoWAZij/oqewm2h+v37ERLdN2hKYvR/Wr7DhYMkmR/CW
+ WG9Xy1I9mx/4uDeLuYsXRsk=
+X-Google-Smtp-Source: ABdhPJxeuObfPx1CWxPMM4B4B2wHjST4q7H6Ow64I750jdXE8+H75yXMbce/KPHsYsyg6F1ULraORA==
+X-Received: by 2002:a17:90a:bd97:: with SMTP id
+ z23mr25507639pjr.191.1602577816043; 
+ Tue, 13 Oct 2020 01:30:16 -0700 (PDT)
+Received: from pek-vx-bsp2.wrs.com (unknown-224-80.windriver.com.
+ [147.11.224.80])
+ by smtp.gmail.com with ESMTPSA id m11sm22271419pfa.69.2020.10.13.01.30.14
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 13 Oct 2020 01:30:15 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+X-Google-Original-From: Bin Meng <bin.meng@windriver.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Subject: [PATCH v2] hw/intc: Move sifive_plic.h to the include directory
+Date: Tue, 13 Oct 2020 16:30:11 +0800
+Message-Id: <1602577811-67343-1-git-send-email-bin.meng@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <1602577156-66090-1-git-send-email-bin.meng@windriver.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::443;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x443.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1042;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1042.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -83,31 +78,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Oct 2020 08:25:11 -0000
+X-List-Received-Date: Tue, 13 Oct 2020 08:30:20 -0000
 
-On 10/13/20 10:19 AM, Bin Meng wrote:
-> sifive_plic.h should be put in the include directory.
+Since sifive_plic.h is used by hw/intc/sifive_plic.c,
+it has to be in the public include directory. Move it.
 
-Maybe:
-
-"Since sifive_plic.h is used by hw/intc/sifive_plic.c,
-  it has to be in the public include directory. Move it."
-
+Fixes: 84fcf3c15111 ("hw/riscv: Move sifive_plic model to hw/intc")
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
-> 
-> Fixes: 84fcf3c15111 ("hw/riscv: Move sifive_plic model to hw/intc")
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> ---
-> 
->   {hw => include/hw}/intc/sifive_plic.h | 0
->   1 file changed, 0 insertions(+), 0 deletions(-)
->   rename {hw => include/hw}/intc/sifive_plic.h (100%)
-> 
-> diff --git a/hw/intc/sifive_plic.h b/include/hw/intc/sifive_plic.h
-> similarity index 100%
-> rename from hw/intc/sifive_plic.h
-> rename to include/hw/intc/sifive_plic.h
-> 
+---
+
+Changes in v2:
+- reword the commit message as Philippe suggested
+
+ {hw => include/hw}/intc/sifive_plic.h | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename {hw => include/hw}/intc/sifive_plic.h (100%)
+
+diff --git a/hw/intc/sifive_plic.h b/include/hw/intc/sifive_plic.h
+similarity index 100%
+rename from hw/intc/sifive_plic.h
+rename to include/hw/intc/sifive_plic.h
+-- 
+2.7.4
 
 
