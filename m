@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSUf7-0000P8-6h
+	id 1kSUf8-0000Pf-DV
 	for mharc-qemu-riscv@gnu.org; Tue, 13 Oct 2020 20:29:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51144)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51142)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=549b5cc2b=alistair.francis@wdc.com>)
- id 1kSUet-0000Mi-UL; Tue, 13 Oct 2020 20:28:49 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47552)
+ id 1kSUet-0000Mh-TK; Tue, 13 Oct 2020 20:28:49 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47545)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=549b5cc2b=alistair.francis@wdc.com>)
- id 1kSUen-0003z6-1h; Tue, 13 Oct 2020 20:28:47 -0400
+ id 1kSUek-0003yw-F9; Tue, 13 Oct 2020 20:28:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1602635320; x=1634171320;
+ t=1602635318; x=1634171318;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=iRlx/qzb5H3O+z1NtwCW9n3IpqBQRkhelMspOXd68ZM=;
- b=LfKvTiyNxQN+1BeTWN7mV73KHZVqez5QZx+dweiJuBAMuEnljbyu4EKG
- VV65RJsuEMn8joRyOX2Sx2mSU0gGSBHgnYfu2M+adAG/PpS/GzvWpISfh
- PcBiohiVYYS8/CRAoFwOlWx1tz/8v/mazB/+YtC3WS2YWy0yAl6aHYaBf
- rQYihF+GB/ky7U6hvL76EmMHX19W9h8b5j1opzdrt29JrBuV0qv3rhDFO
- rdnqpCW8Xn+iSSs/+cmbJD9IU42YnJThY9X7z8yGplbXEbPc5+xoIxePb
- pogNNQz9Edus/OkcW37hm4WQ+tzqlqPwXrwlhJMbdt3ruwR5IZQpPYdvA Q==;
-IronPort-SDR: VPuPQijy4uddo7iUzIH5BvQIcDRhfik9SD2DwEWd8pkqUpgUE+Hcr20pPpGlivatVMY7JLKotk
- hpd35q6EUI0NV3Pz0lOheokIv6DMDyvmIP4osv3BrvNm65v7Qs6Dd5sQ+Qh2/eebPPAkBC2AVs
- nNKVQQ+Fm15k5sWP34ZYiUVRaELjj0RRyIYgwlj84s7lxJxEGSiKp/tF+C+/QEgqg4T55RnKWh
- e5Z1fyIrblVHHGfZviJBDsI+HLePJFltUziNvEt8+PxiTiyIwtfXOaBJ+vT2lOiJp8c01Epvdw
- 1c0=
-X-IronPort-AV: E=Sophos;i="5.77,372,1596470400"; d="scan'208";a="259612087"
+ bh=0fkUNXJQx/5v3ALiauIASwlTjXXnN9687TC81glFriI=;
+ b=V/Epmk6Drx5fvdopQaecrgs2et0lad/2DUnHZdcuhA3s+XRuim/91ccf
+ GCne93mGB5gP2D+qgJ1pbdIJFUx9QtdxWzBM1+pKgJvhA+uQKyJHe4zNn
+ p77DYCaIpacvf6G+Dl79vZ8CROxLPc+h0SDlcLmiyQqXswICISB2SWlBO
+ hp2NVOdhHH9URSkZ37MZwNXXI4bxJYu4bPYLhccGr5BiuRq5KBVpzdrOD
+ Vt/gwUReuvU5z88tNkC3iLW/0Lf0S2LQHSvFo91ZXPblT5C5UtRo+IwK/
+ +5ssXzpDg4oH6C8s3rROK81qHrexhmztQ92K2wPYeUEYkgNKec9hz2heS Q==;
+IronPort-SDR: 6YywJ+mx/PJStG3aUstJJBZbiyojop8p8GwLqw8/ZL86Oi3LPj1jAEGHQeptBXa9qqWMN/VSfd
+ fp8CgNBH19OEyVFwDYfzNdl44br33YVTUJIqg8JgrOgvUQjcpW2NM0m/OC57KZbuf5VGii5BV9
+ BH1aEuUy758PHi7GQSAFrT207CmYy184IfLbU1f1UrpuR51N9C+8QO1TA5aKRjL/yIxA7hnE0x
+ rmBdtkStYsgTbihJT0OrhMWHdEjaeYiGTkDE0wRhRTwuqCsNu3wkiJmnzLmP3y3XyUu/Ki+4b9
+ +S8=
+X-IronPort-AV: E=Sophos;i="5.77,372,1596470400"; d="scan'208";a="259612084"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 14 Oct 2020 08:28:38 +0800
-IronPort-SDR: RoQPgEjzvgnqWgGA0OdxW+H8Ep55h8x0aEVJOI8AbwidN8BKZGsUn+ik2aAbRWBwFhgD8qZ/Ps
- NQIB2QrGRwkSNEfX0PZC9Al2C4sATcoLtzL8JdnufKZurQCeZQO8BDKl36Y5V5qmaR7Dm3lwSH
- AjjeWMlXjVRk/HZDRQguHgypxxcimlrdM6QLac4T5sR/sx6w37SEcJ+xNUfhfxNI6W/+v2en+R
- bLCxJFw9y1dfH/MdLXMN34zPdVJDwOv5TiLa1Bii5vQn+RWaOb4HecVP7t25KxGPj7YHX1LFId
- wgc2JgDzru+f/LIpRB8bxFSP
+ by ob1.hgst.iphmx.com with ESMTP; 14 Oct 2020 08:28:36 +0800
+IronPort-SDR: q/T3A70sJC5fOIhjQfRRdbkOmNM5X2JBvUfQwwWvoe+TwCXkoMpP4GU485ICoccUVdtP+JM+I+
+ Zn2+sGK+vm8vsYtRs7l1u+eLT5FAQ54tTneILjVp349gfOtsNxUIxeaSCj6JP+aAinCP5qKFMD
+ Q09INvQxtG9U86H7KmZDEGaFtvdNpH1fnTfN+dFR3jJZJ8ewt8FSw861bDDiJ7iKZ5G4OSDIIk
+ pMYgPhL8M5ePJyvvGh0cq/iwbWQnz/fIZNPtWolprGQk7xoVI8Gckm8MkQ+z1UAw4QuYOCwSzu
+ 9TJlAgLiJH/anEqMa5jfKAhT
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Oct 2020 17:15:12 -0700
-IronPort-SDR: CX2lR5f6NkZdaViH0xEC8GtDWyoMnOKswefunDliBno1UXsUMG6KBCu2ab3XVN8WPncO1RyQF0
- rz1zdLB2qLFmoRVwjozSjlCjjLklZ6/mCHVhgxONcRvogaH8/DOijiyCNQWh5f0b7uSaMq3tV0
- R7hBYZBxAsthYIV6YQy7mjZT4+5EnpbhbZ4ZV7Pu7H3mGD1VuU3xt4atgr+As/+KSL/2nUmCyK
- eB5PAGyMSW2MGHW68+jcdou52lpxH3dGyBt91SdsIABmSIqPePL0i94Z8VifH56qnHsCV9NzeK
- 4aw=
+ 13 Oct 2020 17:15:09 -0700
+IronPort-SDR: PEi/9g+VNwzXt9PyJ6aYcmET4zhfgWGPDuetBB8WuIk153MLyfxoWUaq+L3EX36dOioKXl+RX3
+ FuLrtjw3MGkofwhqWGoJoYO6bhYxRE8ZFbj0CQat+Mw2lYZUCQVMbk00WMmbik3fFT5LOTCJma
+ dLyfDjQhcjzkGSyrqNAc9LKKXUd7FQwDKW3GFcJTGvZrmIug9kzrK/TY2qexZtk6j9/GG4nMoM
+ XYsVTlxikhCzYvDjum+NxgOLFO3IQUucJjlZmxzFK9au6h2bJtiToBuH+hcIPMTo7GaI5FWZGp
+ 9XY=
 WDCIronportException: Internal
 Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.60.55])
- by uls-op-cesaip02.wdc.com with ESMTP; 13 Oct 2020 17:28:39 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 13 Oct 2020 17:28:36 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v2 2/4] hw/riscv: Return the end address of the loaded firmware
-Date: Tue, 13 Oct 2020 17:17:28 -0700
-Message-Id: <558cf67162342d65a23262248b040563716628b2.1602634524.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 1/4] hw/riscv: sifive_u: Allow specifying the CPU
+Date: Tue, 13 Oct 2020 17:17:25 -0700
+Message-Id: <b8412086c8aea0eff30fb7a17f0acf2943381b6a.1602634524.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <cover.1602634524.git.alistair.francis@wdc.com>
 References: <cover.1602634524.git.alistair.francis@wdc.com>
@@ -88,101 +88,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 14 Oct 2020 00:28:54 -0000
 
-Instead of returning the unused entry address from riscv_load_firmware()
-instead return the end address. Also return the end address from
-riscv_find_and_load_firmware().
-
-This tells the caller if a firmware was loaded and how big it is. This
-can be used to determine the load address of the next image (usually the
-kernel).
+Allow the user to specify the main application CPU for the sifive_u
+machine.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
 ---
- include/hw/riscv/boot.h |  8 ++++----
- hw/riscv/boot.c         | 28 +++++++++++++++++-----------
- 2 files changed, 21 insertions(+), 15 deletions(-)
+ include/hw/riscv/sifive_u.h |  1 +
+ hw/riscv/sifive_u.c         | 18 +++++++++++++-----
+ 2 files changed, 14 insertions(+), 5 deletions(-)
 
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index 451338780a..0acbd8aa6e 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -23,10 +23,10 @@
- #include "exec/cpu-defs.h"
- #include "hw/loader.h"
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index 22e7e6efa1..a9f7b4a084 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -48,6 +48,7 @@ typedef struct SiFiveUSoCState {
+     CadenceGEMState gem;
  
--void riscv_find_and_load_firmware(MachineState *machine,
--                                  const char *default_machine_firmware,
--                                  hwaddr firmware_load_addr,
--                                  symbol_fn_t sym_cb);
-+target_ulong riscv_find_and_load_firmware(MachineState *machine,
-+                                          const char *default_machine_firmware,
-+                                          hwaddr firmware_load_addr,
-+                                          symbol_fn_t sym_cb);
- char *riscv_find_firmware(const char *firmware_filename);
- target_ulong riscv_load_firmware(const char *firmware_filename,
-                                  hwaddr firmware_load_addr,
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 21adaae56e..fa699308a0 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -40,12 +40,13 @@
- #define fw_dynamic_info_data(__val)     cpu_to_le64(__val)
- #endif
+     uint32_t serial;
++    char *cpu_type;
+ } SiFiveUSoCState;
  
--void riscv_find_and_load_firmware(MachineState *machine,
--                                  const char *default_machine_firmware,
--                                  hwaddr firmware_load_addr,
--                                  symbol_fn_t sym_cb)
-+target_ulong riscv_find_and_load_firmware(MachineState *machine,
-+                                          const char *default_machine_firmware,
-+                                          hwaddr firmware_load_addr,
-+                                          symbol_fn_t sym_cb)
+ #define TYPE_RISCV_U_MACHINE MACHINE_TYPE_NAME("sifive_u")
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 6ad975d692..5f3ad9bc0f 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -424,6 +424,8 @@ static void sifive_u_machine_init(MachineState *machine)
+     object_initialize_child(OBJECT(machine), "soc", &s->soc, TYPE_RISCV_U_SOC);
+     object_property_set_uint(OBJECT(&s->soc), "serial", s->serial,
+                              &error_abort);
++    object_property_set_str(OBJECT(&s->soc), "cpu-type", machine->cpu_type,
++                             &error_abort);
+     qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
+ 
+     /* register RAM */
+@@ -590,6 +592,11 @@ static void sifive_u_machine_class_init(ObjectClass *oc, void *data)
+     mc->init = sifive_u_machine_init;
+     mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
+     mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
++#if defined(TARGET_RISCV32)
++    mc->default_cpu_type = TYPE_RISCV_CPU_SIFIVE_U34;
++#elif defined(TARGET_RISCV64)
++    mc->default_cpu_type = TYPE_RISCV_CPU_SIFIVE_U54;
++#endif
+     mc->default_cpus = mc->min_cpus;
+ 
+     object_class_property_add_bool(oc, "start-in-flash",
+@@ -618,7 +625,6 @@ type_init(sifive_u_machine_init_register_types)
+ 
+ static void sifive_u_soc_instance_init(Object *obj)
  {
-     char *firmware_filename = NULL;
-+    target_ulong firmware_end_addr = firmware_load_addr;
+-    MachineState *ms = MACHINE(qdev_get_machine());
+     SiFiveUSoCState *s = RISCV_U_SOC(obj);
  
-     if ((!machine->firmware) || (!strcmp(machine->firmware, "default"))) {
-         /*
-@@ -60,9 +61,12 @@ void riscv_find_and_load_firmware(MachineState *machine,
+     object_initialize_child(obj, "e-cluster", &s->e_cluster, TYPE_CPU_CLUSTER);
+@@ -636,10 +642,6 @@ static void sifive_u_soc_instance_init(Object *obj)
  
-     if (firmware_filename) {
-         /* If not "none" load the firmware */
--        riscv_load_firmware(firmware_filename, firmware_load_addr, sym_cb);
-+        firmware_end_addr = riscv_load_firmware(firmware_filename,
-+                                                firmware_load_addr, sym_cb);
-         g_free(firmware_filename);
-     }
+     object_initialize_child(OBJECT(&s->u_cluster), "u-cpus", &s->u_cpus,
+                             TYPE_RISCV_HART_ARRAY);
+-    qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
+-    qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
+-    qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", SIFIVE_U_CPU);
+-    qdev_prop_set_uint64(DEVICE(&s->u_cpus), "resetvec", 0x1004);
+ 
+     object_initialize_child(obj, "prci", &s->prci, TYPE_SIFIVE_U_PRCI);
+     object_initialize_child(obj, "otp", &s->otp, TYPE_SIFIVE_U_OTP);
+@@ -661,6 +663,11 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     int i;
+     NICInfo *nd = &nd_table[0];
+ 
++    qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
++    qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
++    qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", s->cpu_type);
++    qdev_prop_set_uint64(DEVICE(&s->u_cpus), "resetvec", 0x1004);
 +
-+    return firmware_end_addr;
- }
+     sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
+     sysbus_realize(SYS_BUS_DEVICE(&s->u_cpus), &error_abort);
+     /*
+@@ -792,6 +799,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
  
- char *riscv_find_firmware(const char *firmware_filename)
-@@ -91,17 +95,19 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
-                                  hwaddr firmware_load_addr,
-                                  symbol_fn_t sym_cb)
- {
--    uint64_t firmware_entry;
-+    uint64_t firmware_entry, firmware_size, firmware_end;
+ static Property sifive_u_soc_props[] = {
+     DEFINE_PROP_UINT32("serial", SiFiveUSoCState, serial, OTP_SERIAL),
++    DEFINE_PROP_STRING("cpu-type", SiFiveUSoCState, cpu_type),
+     DEFINE_PROP_END_OF_LIST()
+ };
  
-     if (load_elf_ram_sym(firmware_filename, NULL, NULL, NULL,
--                         &firmware_entry, NULL, NULL, NULL,
-+                         &firmware_entry, NULL, &firmware_end, NULL,
-                          0, EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
--        return firmware_entry;
-+        return firmware_end;
-     }
- 
--    if (load_image_targphys_as(firmware_filename, firmware_load_addr,
--                               ram_size, NULL) > 0) {
--        return firmware_load_addr;
-+    firmware_size = load_image_targphys_as(firmware_filename,
-+                                           firmware_load_addr, ram_size, NULL);
-+
-+    if (firmware_size > 0) {
-+        return firmware_load_addr + firmware_size;
-     }
- 
-     error_report("could not load firmware '%s'", firmware_filename);
 -- 
 2.28.0
 
