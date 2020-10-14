@@ -1,76 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSQBr-0008V0-49
-	for mharc-qemu-riscv@gnu.org; Tue, 13 Oct 2020 15:42:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43854)
+	id 1kSUet-0000Md-Nz
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Oct 2020 20:28:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51126)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kSQBp-0008UY-8P; Tue, 13 Oct 2020 15:42:29 -0400
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:39913)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kSQBn-0002bz-Q6; Tue, 13 Oct 2020 15:42:28 -0400
-Received: by mail-wm1-x343.google.com with SMTP id d3so980115wma.4;
- Tue, 13 Oct 2020 12:42:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=zsXmAvnfkQETc8sVboNjaVziLCDUeIESwvOimu3F67Q=;
- b=rGBNX7oQnJMsGnwgubOA6lCWIdXeayBxw0qS3lVS0xeOeMOdFv21TX17Bd3uX8skPN
- IcF4785AYtUURcvNUytus/D7RSxuhykV9k5NEjKndKggcf5LQxebZidOpvam51eKfV8p
- jRQlH6ikdpupjjOb2ngWHuGA8S6S+iItgINfu6T4M+/d/zaLxX0y+crkpvT64o6W3TKx
- +WFOXUsJqZ16fyJ2alLSNgYLJOvd70bF1G1+VY7Jvd/8tZirwjjeJbI8I+EeYF1TEUA4
- CJhS7jqzdb/nF2YQm0ADdrQHFIpHHs6sAXXF0NIx5ayxrN1J9+ArEU/QDXH9tNVI9ShZ
- /Shg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=zsXmAvnfkQETc8sVboNjaVziLCDUeIESwvOimu3F67Q=;
- b=TuqTC82UR9zg3wrK9UktENZOzZqWcYYD0yw3ZL0d03pmdgSzyJCgZt218QcGzxLjr9
- SV8hedBbJ2A1ll0qbftqGnSdBauq7+uvyMSONcGbzLanN2n+ZoyRhiTBxjqnvVTy2R3h
- ZrXDPzZct3GnhXUo52HCMoOsN38kEm/TRgfqLjDPzYZ94fhCBNhiBDtyDa3Edzrnk7ws
- eEmEdiY3dE6WpsU+dO0nv0A93SKIUo1OsX8pz+LarCjwTYpMJRISM56ixVNNnu52XkBl
- SGwWH2vIFBrf5ZMZD7VPfumf8ZFxJWwOSjTqd0VlX1cCTY8gopcMG0QxBMX4/N3GcnHt
- 4HbA==
-X-Gm-Message-State: AOAM533A8dKrO+0yunA9Oy+zl2tEhQu/WShUBDBBgVgDftXZNRWdbZZe
- 3KtwYG5uLMlByRSb5FkEz5deOoDB7/s=
-X-Google-Smtp-Source: ABdhPJyg92VCCOgi1aoXffqAJxLDW22lXZd/vM1RgR//XV4BAosQLJv5R9pMm6L77cgSTJs2QhH0Yw==
-X-Received: by 2002:a1c:e1d7:: with SMTP id y206mr1381687wmg.48.1602618145287; 
- Tue, 13 Oct 2020 12:42:25 -0700 (PDT)
-Received: from [192.168.1.36] (106.red-83-59-162.dynamicip.rima-tde.net.
- [83.59.162.106])
- by smtp.gmail.com with ESMTPSA id h16sm856555wre.87.2020.10.13.12.42.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Oct 2020 12:42:24 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix implementation of HLVX.WU instruction
-To: Georg Kotheimer <georg.kotheimer@kernkonzept.com>, qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org
-References: <20201013172223.443645-1-georg.kotheimer@kernkonzept.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <ab7cb33b-e650-2ce8-8b04-f984accb9eb3@amsat.org>
-Date: Tue, 13 Oct 2020 21:42:21 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.1
+ (Exim 4.90_1)
+ (envelope-from <prvs=549b5cc2b=alistair.francis@wdc.com>)
+ id 1kSUeo-0000Ls-Dz; Tue, 13 Oct 2020 20:28:44 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:47540)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=549b5cc2b=alistair.francis@wdc.com>)
+ id 1kSUek-0003yq-9r; Tue, 13 Oct 2020 20:28:42 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1602635318; x=1634171318;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=Y9uCuQAV8k/TTIl06remNd53GOz8LPRtW4uDnWkWZ9I=;
+ b=MiCtNoUaLwrNsm5L7KSv7ZqjMD1tgo6RrTQsg4KjYhNIes3rrR+Li8nM
+ gDLjxeQigxrZEGl99VX9Iye/Ev0gMsyAcMCGB2W9l1iQfLjxABm1LGQfr
+ upQmOyHKLE2pq9lFmwu33KlnVH7hWFpLnmyHHjGPu5xFStp07ZnBxZ2Rr
+ hlbXIyB5oMBniNhIirKQJ+MxFsjcViw2pS9tFjWuGIVAJXuqlONH870SO
+ 7UHIquHNbMs0aHx8axhvGgOh+BMDZCSgM+drMHe652FGKgakxkTN5q0ji
+ 5duLL53XXvvWN2NUIyEudp6VO1ENzgaFedyZevb0lxEU2kciBxkfCXPkq Q==;
+IronPort-SDR: FVxJSIHURUK/YoCkNZAisicxsYx/TRVtD2I/fibRKBFda1CSafg32e4zZKVCcPPL+Em/cbCO+r
+ xBN5Lc5PHatD0MvWXzxPfJYRHCTKGPOj5rRD8/XDQ/hJoo6wkFqtpQcggPTLC2P9Wqll+IxqZQ
+ obhvs/DJK+yq1l+e9YUBw3rivF6kemSeHAIkxXu2IF2Jw0aD1/fKnEP52HjyJdLN0mzmJsji1E
+ gXr3QSbjjUvI+300nSNHBtcUMWEoLpwrleKBSeAubDY0L8uX4BJLV1EAQqXAeZUKcQ0pSXQ4FN
+ eKA=
+X-IronPort-AV: E=Sophos;i="5.77,372,1596470400"; d="scan'208";a="259612079"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 14 Oct 2020 08:28:33 +0800
+IronPort-SDR: z1hoIkKFC+ND08+pJ4Ox+VM4KEdm5Vlipdie0Was/SkBb0UrYwFsKk1a1jZDHw9PShVid3u/ho
+ vLM0HK1bva3rB2Qf92YlabXC/WVW8Ue9L4+9d8de4LFOdoQnDqLG52jyoPJeHFyZOcZme7+NZY
+ c2bv+lq7XUSYnzi571Qgjpmm7ormlhA/eXHnbktS2MUdQozrLIqJlbwiJTMy/tl3mM1GpVeHtN
+ Wgcj3LL1yqllgxX87EqHdRsJ0BJDy1pexYQBw/qBzNfzk4CFnh6bHz/ARIzsSzcNAhfWJruJvg
+ 3Np3G2fb4/KviXnWwrfaeDnP
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 Oct 2020 17:15:07 -0700
+IronPort-SDR: zKNu6hGjRo7kSvl8ye2lg22qC6YsVVgkTlWggQlwr6QuStjs/WlLwMLqsJQBztil/zsSF9D9tm
+ XtGLG9rNbyUPUdd1HhZvv+M9uKvtdL3yEHDhi1sB+ERRGzLoUecIMs4DEL3k+NJnN0v/vwaeCK
+ u/AK8mtBoL7BzFXUug1+VGD3SpS/RmX+fRRMXTucRZEhsa+WeRZPJsf2cYXBnvN/7YA8NKNw6J
+ w12lVe0CJ56nBWX3wQY8V3DhIiu5RuEuQGYCf+N+pu/lffQFT3hN8x7j7nnCuh89fpzBkGIE0f
+ TBA=
+WDCIronportException: Internal
+Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.60.55])
+ by uls-op-cesaip02.wdc.com with ESMTP; 13 Oct 2020 17:28:33 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com
+Subject: [PATCH v2 0/4]  Allow loading a no MMU kernel
+Date: Tue, 13 Oct 2020 17:17:22 -0700
+Message-Id: <cover.1602634524.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-In-Reply-To: <20201013172223.443645-1-georg.kotheimer@kernkonzept.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::343;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x343.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=68.232.141.245;
+ envelope-from=prvs=549b5cc2b=alistair.francis@wdc.com;
+ helo=esa1.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/13 20:28:34
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -83,42 +84,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Oct 2020 19:42:29 -0000
+X-List-Received-Date: Wed, 14 Oct 2020 00:28:45 -0000
 
-On 10/13/20 7:22 PM, Georg Kotheimer wrote:
-> The HLVX.WU instruction is supposed to read a machine word,
-> but prior to this change it read a byte instead.
-> 
+This series allows loading a noMMU kernel using the -kernel option.
+Currently if using -kernel QEMU assumes you also have firmware and loads
+the kernel at a hardcoded offset. This series changes that so we only
+load the kernel at an offset if a firmware (-bios) was loaded.
 
-Fixes: 8c5362acb57 ("target/riscv: Allow generating hlv/hlvx/hsv 
-instructions")
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+This series also adds a function to check if the CPU is 32-bit. This is
+a step towards running 32-bit and 64-bit CPUs on the 64-bit RISC-V build
+by using run time checks instead of compile time checks. We also allow
+the user to sepcify a CPU for the sifive_u machine.
 
-> Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
-> ---
->   target/riscv/op_helper.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 9b9ada45a9..3b7bd6ee88 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -334,12 +334,12 @@ target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
->           riscv_cpu_set_two_stage_lookup(env, true);
->   
->           switch (memop) {
-> -        case MO_TEUL:
-> -            pte = cpu_ldub_data_ra(env, address, GETPC());
-> -            break;
->           case MO_TEUW:
->               pte = cpu_lduw_data_ra(env, address, GETPC());
->               break;
-> +        case MO_TEUL:
-> +            pte = cpu_ldl_data_ra(env, address, GETPC());
-> +            break;
->           default:
->               g_assert_not_reached();
->           }
-> 
+Alistair Francis (4):
+  hw/riscv: sifive_u: Allow specifying the CPU
+  hw/riscv: Return the end address of the loaded firmware
+  hw/riscv: Add a riscv_is_32_bit() function
+  hw/riscv: Load the kernel after the firmware
+
+ include/hw/riscv/boot.h     | 13 ++++++---
+ include/hw/riscv/sifive_u.h |  1 +
+ hw/riscv/boot.c             | 56 ++++++++++++++++++++++++++-----------
+ hw/riscv/opentitan.c        |  3 +-
+ hw/riscv/sifive_e.c         |  3 +-
+ hw/riscv/sifive_u.c         | 28 ++++++++++++++-----
+ hw/riscv/spike.c            | 11 ++++++--
+ hw/riscv/virt.c             | 11 ++++++--
+ 8 files changed, 91 insertions(+), 35 deletions(-)
+
+-- 
+2.28.0
 
 
