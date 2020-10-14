@@ -1,50 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSmy4-0003qu-CO
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 16:01:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48962)
+	id 1kSn6p-0002Kj-CC
+	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 16:10:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50818)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kSmxx-0003qB-Kh; Wed, 14 Oct 2020 16:01:46 -0400
-Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135]:46002)
+ id 1kSn6n-0002IM-P2; Wed, 14 Oct 2020 16:10:49 -0400
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:43877)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kSmxt-0006eu-GC; Wed, 14 Oct 2020 16:01:41 -0400
-Received: by mail-lf1-x135.google.com with SMTP id r127so798130lff.12;
- Wed, 14 Oct 2020 13:01:35 -0700 (PDT)
+ id 1kSn6l-0007dl-Nl; Wed, 14 Oct 2020 16:10:49 -0400
+Received: by mail-lj1-x241.google.com with SMTP id d24so731563ljg.10;
+ Wed, 14 Oct 2020 13:10:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3APxZco9hgu6w5JH6mAukHW0NDibRfskrsn/17uHKhY=;
- b=rKoCpF3wffiMg8PeHoDNfjyy39VTz9/wcWBj5tKzupLtcwI+mm6ReaMTMPWjGvYruR
- jqD/n5hdMEUm0XgY3E6KWN4B/6OQAVLHZyNXx00hzdaVxeZza/gfcqim+lbXkqJn3nqB
- 1SbC37Y3zdsMFnv22g++S84a64+SKlFCB9K+l3Mvr2W5M/rwSmKPTOJDDuKHQ+5M4UyP
- Mxkc1x4W96sp+OwSWKcAp7dU1iP1mWKE3XGZG4E6Weza3xlFyoiZEV8XuCWy3lFtBPCl
- tLyILW8NcH4Ev4XczTKOy198XhHHHFmDnGA3KNMQ4SL96ZiUIhsEjLGGm/E5bpEy8SZ6
- tq9A==
+ :cc; bh=72SZ9cxwkRtG3NXL2bJ4mQ0D58nPjicBnNam220smc8=;
+ b=kI0AOCUq7aEEbff5uNkOYDBvDDgmOGUnN6cBF8z/eo8ruHkgEzXhhYu4yEH5SutVMV
+ aNvmMfHaF5B3zTbcntGgmcGLYHXJl/oj6kdpJ/Ebc+n3iLn9F+jRIB9iqYSMkbO5z2a6
+ XetOlhAEZ/e8+Dby2qngsGSDnyXOcTwunLqpdCvZ1wTova4qQK51RHdMY/nyEIHZY3ng
+ GKErvwLURxmEYULEFqY43z9Q0881Vpjlur9vUQlL8C3cmwsGeUnG27Lr1EfSg5BhVfRy
+ izWidtsVZJh9ecgJ0O30nbo5XvF5Y8uwFfuUyHj87MAxYgJex5ciFIJoVy0TTD/3jsFg
+ PYnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=3APxZco9hgu6w5JH6mAukHW0NDibRfskrsn/17uHKhY=;
- b=S8QgSTvB0Wrr8VSo5RlG3+rIr+ye94Qqjp05rKVZyBqmoiKTwEk5iqeWvaNHV+6bvV
- yP3AKaHIMP8V+z6S4Ffk5RAb1PnbUCPLk7qbxvRQmpUKsePTVw+dYUWDj/ebLlIwMxf2
- 6rqE9fhiAU1DoGmwRsO57GLHPOrXsQkmDuaEoOJa8tkSIWGvWM41mc/LA29iPQynfwuZ
- KxM9kokrfHNgUK7gKTxw3CN2bMe0HNi4kgvCErC2SAUs6NsmvnXkqXX2h2w5PpHpRJa0
- 3BJJMmsRrdGiuc30l55aWMp5KkHG3Zus6Bewqyp11RhpJ77x2nFikKB2S2I/OIlO2S3/
- 8/Wg==
-X-Gm-Message-State: AOAM533lxQdnmHqWYaL34mgum5eTrtbb2v0dq5O7bFW3UfFDeEYuYmjp
- L1mJ5ydYHw5DGIe/k/87W6v7rIRmgeHG7EyAx8E=
-X-Google-Smtp-Source: ABdhPJx6GfKNRq0dUN74SClA9HCzeqLV4+XpfKK4x6NnORSys8UpW4ZVqqW1D4Wx1JnKk0cxduJAwGNp7tnBsTDctVc=
-X-Received: by 2002:ac2:5506:: with SMTP id j6mr257720lfk.290.1602705693255;
- Wed, 14 Oct 2020 13:01:33 -0700 (PDT)
+ bh=72SZ9cxwkRtG3NXL2bJ4mQ0D58nPjicBnNam220smc8=;
+ b=ioGa5vp/gEa8C1L0EHdsW/7h3QhtMGYanagKioF8NbxesWW+yjikB1F7qQNVHpD9Ny
+ UoaDZFA2DIOduVOLPSRRqQZjlDcFPR+JywnMOx1PjtCcuQrC6aiaHZUm9tP7l/+LtbPw
+ UWz0Tn1ez+uS5mRVWPs2FrAJYwCE3BTbC9SzJkhYSKFeAEpwHDyiSA/J3d9FiQgyb24X
+ b9gpiYZgWrXhQS6yzw2ym3xlgJ08P8fpgrs5V7ozAWw7AGvkyvRAAugM7wgd1CNBLVVz
+ gAXWsrFfrF9vfxG4e8cv66z8hQgtBJGmjCgj1T8c1AEYpf5n/nMM5GbyXILOOkaZL/wa
+ 0zsA==
+X-Gm-Message-State: AOAM530qTDxLZWYKERjgpXbC+HfzPvMP/u464e8x72i0UxE38T5tJbar
+ bbZqOzWLHWyP8zkPZgUbvK/aympjXXynIXH0syM=
+X-Google-Smtp-Source: ABdhPJy0sSudl1dMowxSfzUlgWYCGXYQnS4atzCvMbWQVbJjZ6RSPtp5KkfHPqdWuKDD8dFiKLSutZiLdsBkTwzh8bU=
+X-Received: by 2002:a2e:6a19:: with SMTP id f25mr139187ljc.386.1602706244232; 
+ Wed, 14 Oct 2020 13:10:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20201014170159.26932-1-space.monkey.delivers@gmail.com>
- <20201014170159.26932-4-space.monkey.delivers@gmail.com>
- <3395cef5-79d4-078a-29ad-48639e4cd56d@linaro.org>
-In-Reply-To: <3395cef5-79d4-078a-29ad-48639e4cd56d@linaro.org>
+ <20201014170159.26932-5-space.monkey.delivers@gmail.com>
+ <b13721d7-241a-3d81-fa8d-5d7cc0e780b7@linaro.org>
+In-Reply-To: <b13721d7-241a-3d81-fa8d-5d7cc0e780b7@linaro.org>
 From: Alexey Baturo <baturo.alexey@gmail.com>
-Date: Wed, 14 Oct 2020 23:01:22 +0300
-Message-ID: <CAFukJ-CQ0VKiCerbAK4LZ8Dkn2PutFZXv0iJQe-Z-tweKThj4w@mail.gmail.com>
-Subject: Re: [PATCH 3/5] [RISCV_PM] Print new PM CSRs in QEMU logs
+Date: Wed, 14 Oct 2020 23:10:33 +0300
+Message-ID: <CAFukJ-DM1WJ1H6_FvSbgC8TpHmxjZFCMhSOopnfCF5mey9JaCQ@mail.gmail.com>
+Subject: Re: [PATCH 4/5] [RISCV_PM] Add address masking functions required for
+ RISC-V Pointer Masking extension
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
@@ -52,10 +53,11 @@ Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
  "open list:All patches CC here" <qemu-devel@nongnu.org>, 
  "space.monkey.delivers@gmail.com" <space.monkey.delivers@gmail.com>, 
  Alistair Francis <Alistair.Francis@wdc.com>,
+ Anatoly Parshintsev <kupokupokupopo@gmail.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: multipart/alternative; boundary="00000000000086aae705b1a6ff29"
-Received-SPF: pass client-ip=2a00:1450:4864:20::135;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x135.google.com
+Content-Type: multipart/alternative; boundary="0000000000005de7e205b1a720f6"
+Received-SPF: pass client-ip=2a00:1450:4864:20::241;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lj1-x241.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -77,91 +79,249 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2020 20:01:47 -0000
+X-List-Received-Date: Wed, 14 Oct 2020 20:10:50 -0000
 
---00000000000086aae705b1a6ff29
+--0000000000005de7e205b1a720f6
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-First of all thank you so much for reviewing these patches!
+> I suggest adding a stub version of this function to patch 5, and then
+swap patch 4 and patch 5.
+Thanks, will do.
 
->RVJ.
-Thanks, I missed this typo, will fix it.
+>This bakes in values from ENV without adding any way to verify that those
+values are still current.
+If I correctly get your idea, you're talking about the situation, when
+DisasContext was initialized with some values, which at some point got
+changed, so this could lead to incorrect address masking. I tried to handle
+this situation by dropping the translation cache in case different values
+are written in any of the PM CSRs, which I assumed would lead to refilling
+the DIsasContext structure.
+This is obviously not the best way to do it, since it may lead to
+performance degradation in some cases, so let me process your suggestion
+and try to implement it.
 
->Probably you only want to dump the set that's current.
-I don't know for sure how anyone would be using this while debugging PM
-related code, but I like the idea, so I'll try to do it, thanks!
+Thanks!
 
-=D1=81=D1=80, 14 =D0=BE=D0=BA=D1=82. 2020 =D0=B3. =D0=B2 21:41, Richard Hen=
+=D1=81=D1=80, 14 =D0=BE=D0=BA=D1=82. 2020 =D0=B3. =D0=B2 22:19, Richard Hen=
 derson <richard.henderson@linaro.org
 >:
 
 > On 10/14/20 10:01 AM, Alexey Baturo wrote:
-> > +    if (riscv_has_ext(env, RVH)) {
+> > +static TCGv_i64 apply_pointer_masking(DisasContext *s, TCGv_i64 addr)
+> > +{
+> > +    gen_pm_adjust_address(s, addr, addr);
+> > +    return addr;
+> > +}
 >
-> RVJ.
+> This function is unused in this patch, which means the series as a whole =
+is
+> non-bisectable.
 >
-> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mmte    ",
-> env->mmte);
-> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmbase ",
-> env->upmbase);
-> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmbase ",
-> env->spmbase);
-> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmbase ",
-> env->mpmbase);
-> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmmask ",
-> env->upmmask);
-> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmmask ",
-> env->spmmask);
-> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmmask ",
-> env->mpmmask);
+> Rather than merge the two, I suggest adding a stub version of this
+> function to
+> patch 5, and then swap patch 4 and patch 5.  So you will add uses of
+> apply_pointer_masking without actually implementing it yet.  Which should
+> be fine.
 >
-> Probably you only want to dump the set that's current.
+> > @@ -800,8 +836,36 @@ static void riscv_tr_init_disas_context
+> >      } else {
+> >          ctx->virt_enabled =3D false;
+> >      }
+> > +    if (riscv_has_ext(env, RVJ)) {
+> > +        switch (env->priv) {
+> > +        case PRV_U:
+> > +            ctx->pm_enabled =3D get_field(env->mmte, UMTE_U_PM_ENABLE)=
+;
+> > +            ctx->pm_mask =3D env->upmmask;
+> > +            ctx->pm_base =3D env->upmbase;
+> > +            break;
+> > +        case PRV_S:
+> > +            ctx->pm_enabled =3D get_field(env->mmte, SMTE_S_PM_ENABLE)=
+;
+> > +            ctx->pm_mask =3D env->spmmask;
+> > +            ctx->pm_base =3D env->spmbase;
+> > +            break;
+> > +        case PRV_M:
+> > +            ctx->pm_enabled =3D get_field(env->mmte, MMTE_M_PM_ENABLE)=
+;
+> > +            ctx->pm_mask =3D env->mpmmask;
+>
+> You can't read env like this.
+>
+> This bakes in values from ENV without adding any way to verify that those
+> values are still current.
+>
+> The one thing that you must bake into the generated code is the state of
+> PM_ENABLE.  Anything else would penalize normal risc-v emulation.
+>
+> You do that in cpu_get_tb_cpu_state().  Allocate one bit to hold
+> the current state of the flag.  E.g.
+>
+> FIELD(TB_FLAGS, PM_ENABLED, 9, 1)
+>
+> then fill it in from the correct mmte bit for priv (which itself is
+> encoded by
+> cpu_mmu_index()).
+>
+> Except for special cases, the mask and base variables cannot be placed in=
+to
+> TB_FLAGS.  For now, I think it's best to ignore the special cases and
+> implement
+> them all as tcg globals.  Which means that we do *not* bake in a particul=
+ar
+> value, but instead read the value from env at runtime.
+>
+> So, in riscv_translate_init, you create new globals for each of the mask
+> and
+> base.  In riscv_tr_init_disas_context you examine priv (via mmu_index) an=
+d
+> assign one pair of the globals to DisasContext, so that you don't have to
+> keep
+> looking them up.
+>
+> Then you have
+>
+> static void gen_pm_adjust_address(DisasContext *s,
+>                                   TCGv_i64 dst,
+>                                   TCGv_i64 src)
+> {
+>     if (s->pm_enabled =3D=3D 0) {
+>         /* Load unmodified address */
+>         tcg_gen_mov_i64(dst, src);
+>     } else {
+>         tcg_gen_andc_i64(dst, src, s->pm_mask);
+>         tcg_gen_or_i64(dst, dst, s->pm_base);
+>     }
+> }
 >
 >
 > r~
 >
 
---00000000000086aae705b1a6ff29
+--0000000000005de7e205b1a720f6
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>First of all thank you so much for reviewing these pa=
-tches!</div><div><br></div>&gt;RVJ.<div>Thanks, I missed this typo, will fi=
-x it.</div><div><br></div><div>&gt;Probably you only want to dump the set t=
-hat&#39;s current.</div><div>I don&#39;t know for sure how anyone would be =
-using this while debugging PM related code, but I like the idea, so I&#39;l=
-l try to do it, thanks!</div></div><br><div class=3D"gmail_quote"><div dir=
-=3D"ltr" class=3D"gmail_attr">=D1=81=D1=80, 14 =D0=BE=D0=BA=D1=82. 2020 =D0=
-=B3. =D0=B2 21:41, Richard Henderson &lt;<a href=3D"mailto:richard.henderso=
-n@linaro.org">richard.henderson@linaro.org</a>&gt;:<br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
- rgb(204,204,204);padding-left:1ex">On 10/14/20 10:01 AM, Alexey Baturo wro=
-te:<br>
-&gt; +=C2=A0 =C2=A0 if (riscv_has_ext(env, RVH)) {<br>
+<div dir=3D"ltr">&gt; I suggest adding a stub version of this function to p=
+atch 5, and then swap patch 4 and patch 5.<div>Thanks, will do.</div><div><=
+br></div><div>&gt;This bakes in values from ENV without adding any way to v=
+erify that those values are still current.</div><div>If I correctly get you=
+r idea, you&#39;re talking about the situation, when DisasContext was initi=
+alized with some values, which at some point got changed, so this could lea=
+d to incorrect address masking. I tried to handle this situation by droppin=
+g the translation cache in case different values are written in any of the =
+PM CSRs, which I assumed would lead to refilling the DIsasContext structure=
+.</div><div>This is obviously not the best way to do it, since it may lead =
+to performance degradation in some cases, so let me process your suggestion=
+ and try to implement it.</div><div><br></div><div>Thanks!</div></div><br><=
+div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">=D1=81=D1=
+=80, 14 =D0=BE=D0=BA=D1=82. 2020 =D0=B3. =D0=B2 22:19, Richard Henderson &l=
+t;<a href=3D"mailto:richard.henderson@linaro.org">richard.henderson@linaro.=
+org</a>&gt;:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On =
+10/14/20 10:01 AM, Alexey Baturo wrote:<br>
+&gt; +static TCGv_i64 apply_pointer_masking(DisasContext *s, TCGv_i64 addr)=
 <br>
-RVJ.<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 gen_pm_adjust_address(s, addr, addr);<br>
+&gt; +=C2=A0 =C2=A0 return addr;<br>
+&gt; +}<br>
 <br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
-MT_lx &quot;\n&quot;, &quot;mmte=C2=A0 =C2=A0 &quot;, env-&gt;mmte);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
-MT_lx &quot;\n&quot;, &quot;upmbase &quot;, env-&gt;upmbase);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
-MT_lx &quot;\n&quot;, &quot;spmbase &quot;, env-&gt;spmbase);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
-MT_lx &quot;\n&quot;, &quot;mpmbase &quot;, env-&gt;mpmbase);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
-MT_lx &quot;\n&quot;, &quot;upmmask &quot;, env-&gt;upmmask);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
-MT_lx &quot;\n&quot;, &quot;spmmask &quot;, env-&gt;spmmask);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
-MT_lx &quot;\n&quot;, &quot;mpmmask &quot;, env-&gt;mpmmask);<br>
+This function is unused in this patch, which means the series as a whole is=
 <br>
-Probably you only want to dump the set that&#39;s current.<br>
+non-bisectable.<br>
+<br>
+Rather than merge the two, I suggest adding a stub version of this function=
+ to<br>
+patch 5, and then swap patch 4 and patch 5.=C2=A0 So you will add uses of<b=
+r>
+apply_pointer_masking without actually implementing it yet.=C2=A0 Which sho=
+uld be fine.<br>
+<br>
+&gt; @@ -800,8 +836,36 @@ static void riscv_tr_init_disas_context<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 } else {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ctx-&gt;virt_enabled =3D false;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 if (riscv_has_ext(env, RVJ)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (env-&gt;priv) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 case PRV_U:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ctx-&gt;pm_enabled =3D get_=
+field(env-&gt;mmte, UMTE_U_PM_ENABLE);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ctx-&gt;pm_mask =3D env-&gt=
+;upmmask;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ctx-&gt;pm_base =3D env-&gt=
+;upmbase;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 case PRV_S:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ctx-&gt;pm_enabled =3D get_=
+field(env-&gt;mmte, SMTE_S_PM_ENABLE);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ctx-&gt;pm_mask =3D env-&gt=
+;spmmask;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ctx-&gt;pm_base =3D env-&gt=
+;spmbase;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 case PRV_M:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ctx-&gt;pm_enabled =3D get_=
+field(env-&gt;mmte, MMTE_M_PM_ENABLE);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ctx-&gt;pm_mask =3D env-&gt=
+;mpmmask;<br>
+<br>
+You can&#39;t read env like this.<br>
+<br>
+This bakes in values from ENV without adding any way to verify that those<b=
+r>
+values are still current.<br>
+<br>
+The one thing that you must bake into the generated code is the state of<br=
+>
+PM_ENABLE.=C2=A0 Anything else would penalize normal risc-v emulation.<br>
+<br>
+You do that in cpu_get_tb_cpu_state().=C2=A0 Allocate one bit to hold<br>
+the current state of the flag.=C2=A0 E.g.<br>
+<br>
+FIELD(TB_FLAGS, PM_ENABLED, 9, 1)<br>
+<br>
+then fill it in from the correct mmte bit for priv (which itself is encoded=
+ by<br>
+cpu_mmu_index()).<br>
+<br>
+Except for special cases, the mask and base variables cannot be placed into=
+<br>
+TB_FLAGS.=C2=A0 For now, I think it&#39;s best to ignore the special cases =
+and implement<br>
+them all as tcg globals.=C2=A0 Which means that we do *not* bake in a parti=
+cular<br>
+value, but instead read the value from env at runtime.<br>
+<br>
+So, in riscv_translate_init, you create new globals for each of the mask an=
+d<br>
+base.=C2=A0 In riscv_tr_init_disas_context you examine priv (via mmu_index)=
+ and<br>
+assign one pair of the globals to DisasContext, so that you don&#39;t have =
+to keep<br>
+looking them up.<br>
+<br>
+Then you have<br>
+<br>
+static void gen_pm_adjust_address(DisasContext *s,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 TCGv_i64 dst,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 TCGv_i64 src)<br>
+{<br>
+=C2=A0 =C2=A0 if (s-&gt;pm_enabled =3D=3D 0) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Load unmodified address */<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_mov_i64(dst, src);<br>
+=C2=A0 =C2=A0 } else {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_andc_i64(dst, src, s-&gt;pm_mask);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_or_i64(dst, dst, s-&gt;pm_base);<br>
+=C2=A0 =C2=A0 }<br>
+}<br>
 <br>
 <br>
 r~<br>
 </blockquote></div>
 
---00000000000086aae705b1a6ff29--
+--0000000000005de7e205b1a720f6--
 
