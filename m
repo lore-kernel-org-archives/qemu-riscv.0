@@ -1,68 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSb2H-0004bt-E4
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 03:17:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48498)
+	id 1kSdl7-000837-2g
+	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 06:11:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56716)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kSb2E-0004ay-AQ; Wed, 14 Oct 2020 03:17:18 -0400
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:43083)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kSb2A-0007vL-Mg; Wed, 14 Oct 2020 03:17:18 -0400
-Received: by mail-yb1-xb43.google.com with SMTP id n65so1805721ybg.10;
- Wed, 14 Oct 2020 00:17:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gA29hb0tm8ZMMLazNEeo1g2xvNBk96X0AemPcKzZOfM=;
- b=sLG8UjTSP2l61u9VFTkgcLNVtcnAJ707MD1BJChi4zQUITxHb09JmGOnkjFdp+vtk5
- H2Jhg8Y86d9ap9wt6/0tZ5YXsZy4Xu4Eiw45Ww/yZZ+lLSUFGWFQJv6yaNMHkMLi8G1T
- 79g/rE18RIBQ+/BnwCUb2GNODboeQ2UIcHxGFPQ8DavBudLuQfr3p8q9esNskGOn+SYy
- 2yKQ359xPvAVNfxPJ9Y3EZm3lnMsjdequgdrxVh+VbY5EzfiQXCnof9ORiQUpHNtWgZ/
- 5OEqWbJWWscsc/QrWzA71kfw/tilBJU5Q9ITn0AoHw7QRgghXZHyBOropAmCkmEsfuiM
- hbAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=gA29hb0tm8ZMMLazNEeo1g2xvNBk96X0AemPcKzZOfM=;
- b=BXHQNiwUZeA6KKySpVrShhWIcAcSRj15Ia6UbYK8Hm1jROr+mSbmD3sA+IjqdhVNri
- VEDh42RIIxXXaAznReMB+H8NxaH8WbwYWq0GO16z+1QQtxqnrc6I53P/8OfTV4kxoKrw
- JfKQ9c8OQ8nYGkCVJtddIQhoPkTNxPKUCVIYtc2DiRKHJ9NmGsiIDIhQk1tMaXdj6/9N
- 3hAUlAiM3TVhyZC/NFnCKULr53I+AYE3Nwve5jUBzPWyUM9CbWtpJEuUMSQAbiGB2hv/
- x4Ssf6W3Aq9P1D3s5W6gUKQckh2e6ZKOyG/C3HeuOmutE6oDMXVvnit1AFB+W/TcmzUR
- 8aWQ==
-X-Gm-Message-State: AOAM530N4uM5AppYw3aPhn01/UlElanXETKNs9USazoStAlcD8GA0HBD
- NBWNjm0XJDIVzVfWiPu1Nwx2RhxPmZwQeKncA9o=
-X-Google-Smtp-Source: ABdhPJx90l0tmGhomX2RhVj4pYwWfakRzHW1NNnS9wk8JBsSjCsDP8sqgeKfZukjKbRJFY9IVRjTIWWrmtzKqWk9fnk=
-X-Received: by 2002:a25:bb01:: with SMTP id z1mr5661176ybg.387.1602659833149; 
- Wed, 14 Oct 2020 00:17:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kSdl5-00082t-3B; Wed, 14 Oct 2020 06:11:47 -0400
+Received: from szxga08-in.huawei.com ([45.249.212.255]:46518 helo=huawei.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kSdl1-0004aJ-SU; Wed, 14 Oct 2020 06:11:46 -0400
+Received: from DGGEMM401-HUB.china.huawei.com (unknown [172.30.72.54])
+ by Forcepoint Email with ESMTP id EAB0B478FCF32D31E9A9;
+ Wed, 14 Oct 2020 18:11:26 +0800 (CST)
+Received: from dggemm753-chm.china.huawei.com (10.1.198.59) by
+ DGGEMM401-HUB.china.huawei.com (10.3.20.209) with Microsoft SMTP Server (TLS)
+ id 14.3.487.0; Wed, 14 Oct 2020 18:11:21 +0800
+Received: from dggpemm000001.china.huawei.com (7.185.36.245) by
+ dggemm753-chm.china.huawei.com (10.1.198.59) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.1913.5; Wed, 14 Oct 2020 18:11:21 +0800
+Received: from dggpemm000001.china.huawei.com ([7.185.36.245]) by
+ dggpemm000001.china.huawei.com ([7.185.36.245]) with mapi id 15.01.1913.007;
+ Wed, 14 Oct 2020 18:11:21 +0800
+From: Jiangyifei <jiangyifei@huawei.com>
+To: Richard Henderson <richard.henderson@linaro.org>, "qemu-devel@nongnu.org"
+ <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+CC: Zhanghailiang <zhang.zhanghailiang@huawei.com>, "sagark@eecs.berkeley.edu"
+ <sagark@eecs.berkeley.edu>, "kbastian@mail.uni-paderborn.de"
+ <kbastian@mail.uni-paderborn.de>, "Zhangxiaofeng (F)"
+ <victor.zhangxiaofeng@huawei.com>, "Alistair.Francis@wdc.com"
+ <Alistair.Francis@wdc.com>, yinyipeng <yinyipeng1@huawei.com>,
+ "palmer@dabbelt.com" <palmer@dabbelt.com>, "Wubin (H)" <wu.wubin@huawei.com>, 
+ "dengkai (A)" <dengkai1@huawei.com>
+Subject: RE: [PATCH V2] target/riscv: raise exception to HS-mode at
+ get_physical_address
+Thread-Topic: [PATCH V2] target/riscv: raise exception to HS-mode at
+ get_physical_address
+Thread-Index: AQHWnhHnXPtMgSAunEGXhyDV2VmGsamO0FUAgAgXmEA=
+Date: Wed, 14 Oct 2020 10:11:21 +0000
+Message-ID: <ae815b3a9fda468e839cecf6fbfc0a6e@huawei.com>
+References: <20201009075740.688-1-jiangyifei@huawei.com>
+ <26316865-1a25-0e12-ee65-76d79e26603d@linaro.org>
+In-Reply-To: <26316865-1a25-0e12-ee65-76d79e26603d@linaro.org>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.174.185.47]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20200928101146.12786-1-green.wan@sifive.com>
- <20200928101146.12786-2-green.wan@sifive.com>
- <CAEUhbmWxPmhZhEFECXO5oLTbf+r1E-rBuFQrC_e+D6YbmMDmag@mail.gmail.com>
- <CAJivOr7mr_poapw5Okga1uLo7Zq+gs3oiJxuMPpbnAsQMNgzfg@mail.gmail.com>
-In-Reply-To: <CAJivOr7mr_poapw5Okga1uLo7Zq+gs3oiJxuMPpbnAsQMNgzfg@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 14 Oct 2020 15:17:01 +0800
-Message-ID: <CAEUhbmVUSJd1E9r4O+ziVbbH3RgSqaLe7q0CtgCqbhD+mjCurQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v6 1/2] hw/misc/sifive_u_otp: Add write function and
- write-once protection
-To: Green Wan <green.wan@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-CFilter-Loop: Reflected
+Received-SPF: pass client-ip=45.249.212.255;
+ envelope-from=jiangyifei@huawei.com; helo=huawei.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/14 06:11:27
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -75,104 +72,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2020 07:17:19 -0000
+X-List-Received-Date: Wed, 14 Oct 2020 10:11:47 -0000
 
-Hi Green,
-
-On Wed, Oct 14, 2020 at 3:02 PM Green Wan <green.wan@sifive.com> wrote:
->
-> On Wed, Oct 14, 2020 at 1:37 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > Hi Green,
-> >
-> > On Mon, Sep 28, 2020 at 6:12 PM Green Wan <green.wan@sifive.com> wrote:
-> > >
-> > >  - Add write operation to update fuse data bit when PWE bit is on.
-> > >  - Add array, fuse_wo, to store the 'written' status for all bits
-> > >    of OTP to block the write operation.
-> > >
-> > > Signed-off-by: Green Wan <green.wan@sifive.com>
-> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > ---
-> > >  hw/misc/sifive_u_otp.c         | 30 +++++++++++++++++++++++++++++-
-> > >  include/hw/misc/sifive_u_otp.h |  3 +++
-> > >  2 files changed, 32 insertions(+), 1 deletion(-)
-> > >
-> >
-> > I am not sure how you tested this. I wrote a simple U-Boot command to
-> > call U-Boot sifive-otp driver to test the write functionality, but it
-> > failed.
-> >
-> > => misc write otp@10070000 0 80200000 10
->                                                       ^^^^^^^^^
-> Quick ask, how about 'md 80200000'?
->
-> I didn't use 'misc write' command. I can check afterward.
-
-Note 'misc write' is a new U-Boot command I just added for testing
-this QEMU functionality. Please use the U-Boot patch below:
-http://patchwork.ozlabs.org/project/uboot/patch/1602657292-82815-1-git-send-email-bmeng.cn@gmail.com/
-
->
-> > => misc read  otp@10070000 0 80400000 10
-> > => md 80400000
-> > 80400000: ffffffff ffffffff ffffffff ffffffff    ................
-> > 80400010: 00000000 00000000 00000000 00000000    ................
-> > 80400020: 00000000 00000000 00000000 00000000    ................
-> > 80400030: 00000000 00000000 00000000 00000000    ................
-> > 80400040: 00000000 00000000 00000000 00000000    ................
-> > 80400050: 00000000 00000000 00000000 00000000    ................
-> > 80400060: 00000000 00000000 00000000 00000000    ................
-> > 80400070: 00000000 00000000 00000000 00000000    ................
-> > 80400080: 00000000 00000000 00000000 00000000    ................
-> > 80400090: 00000000 00000000 00000000 00000000    ................
-> > 804000a0: 00000000 00000000 00000000 00000000    ................
-> > 804000b0: 00000000 00000000 00000000 00000000    ................
-> > 804000c0: 00000000 00000000 00000000 00000000    ................
-> > 804000d0: 00000000 00000000 00000000 00000000    ................
-> > 804000e0: 00000000 00000000 00000000 00000000    ................
-> > 804000f0: 00000000 00000000 00000000 00000000    ................
-> > => misc write otp@10070000 0 80200010 10
-> > => misc read  otp@10070000 0 80400010 10
-> > => md 80400000
-> > 80400000: ffffffff ffffffff ffffffff ffffffff    ................
-> > 80400010: ffffffff ffffffff ffffffff ffffffff    ................
-> > 80400020: 00000000 00000000 00000000 00000000    ................
-> > 80400030: 00000000 00000000 00000000 00000000    ................
-> > 80400040: 00000000 00000000 00000000 00000000    ................
-> > 80400050: 00000000 00000000 00000000 00000000    ................
-> > 80400060: 00000000 00000000 00000000 00000000    ................
-> > 80400070: 00000000 00000000 00000000 00000000    ................
-> > 80400080: 00000000 00000000 00000000 00000000    ................
-> > 80400090: 00000000 00000000 00000000 00000000    ................
-> > 804000a0: 00000000 00000000 00000000 00000000    ................
-> > 804000b0: 00000000 00000000 00000000 00000000    ................
-> > 804000c0: 00000000 00000000 00000000 00000000    ................
-> > 804000d0: 00000000 00000000 00000000 00000000    ................
-> > 804000e0: 00000000 00000000 00000000 00000000    ................
-> > 804000f0: 00000000 00000000 00000000 00000000    ................
-> >
-> > But it can read the serial number at offset 0x3f0
-> >
-> > => misc read  otp@10070000 3f0 80400010 10
-> > => md 80400000
-> > 80400000: ffffffff ffffffff ffffffff ffffffff    ................
-> > 80400010: 00000001 fffffffe ffffffff ffffffff    ................
-> > 80400020: 00000000 00000000 00000000 00000000    ................
-> > 80400030: 00000000 00000000 00000000 00000000    ................
-> > 80400040: 00000000 00000000 00000000 00000000    ................
-> > 80400050: 00000000 00000000 00000000 00000000    ................
-> > 80400060: 00000000 00000000 00000000 00000000    ................
-> > 80400070: 00000000 00000000 00000000 00000000    ................
-> > 80400080: 00000000 00000000 00000000 00000000    ................
-> > 80400090: 00000000 00000000 00000000 00000000    ................
-> > 804000a0: 00000000 00000000 00000000 00000000    ................
-> > 804000b0: 00000000 00000000 00000000 00000000    ................
-> > 804000c0: 00000000 00000000 00000000 00000000    ................
-> > 804000d0: 00000000 00000000 00000000 00000000    ................
-> > 804000e0: 00000000 00000000 00000000 00000000    ................
-> > 804000f0: 00000000 00000000 00000000 00000000    ................
-
-Regards,
-Bin
+DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFJpY2hhcmQgSGVuZGVyc29u
+IFttYWlsdG86cmljaGFyZC5oZW5kZXJzb25AbGluYXJvLm9yZ10NCj4gU2VudDogRnJpZGF5LCBP
+Y3RvYmVyIDksIDIwMjAgMTA6MzQgUE0NCj4gVG86IEppYW5neWlmZWkgPGppYW5neWlmZWlAaHVh
+d2VpLmNvbT47IHFlbXUtZGV2ZWxAbm9uZ251Lm9yZzsNCj4gcWVtdS1yaXNjdkBub25nbnUub3Jn
+DQo+IENjOiBaaGFuZ2hhaWxpYW5nIDx6aGFuZy56aGFuZ2hhaWxpYW5nQGh1YXdlaS5jb20+Ow0K
+PiBzYWdhcmtAZWVjcy5iZXJrZWxleS5lZHU7IGtiYXN0aWFuQG1haWwudW5pLXBhZGVyYm9ybi5k
+ZTsgWmhhbmd4aWFvZmVuZw0KPiAoRikgPHZpY3Rvci56aGFuZ3hpYW9mZW5nQGh1YXdlaS5jb20+
+OyBBbGlzdGFpci5GcmFuY2lzQHdkYy5jb207IHlpbnlpcGVuZw0KPiA8eWlueWlwZW5nMUBodWF3
+ZWkuY29tPjsgcGFsbWVyQGRhYmJlbHQuY29tOyBXdWJpbiAoSCkNCj4gPHd1Lnd1YmluQGh1YXdl
+aS5jb20+OyBkZW5na2FpIChBKSA8ZGVuZ2thaTFAaHVhd2VpLmNvbT4NCj4gU3ViamVjdDogUmU6
+IFtQQVRDSCBWMl0gdGFyZ2V0L3Jpc2N2OiByYWlzZSBleGNlcHRpb24gdG8gSFMtbW9kZSBhdA0K
+PiBnZXRfcGh5c2ljYWxfYWRkcmVzcw0KPiANCj4gT24gMTAvOS8yMCAyOjU3IEFNLCBZaWZlaSBK
+aWFuZyB3cm90ZToNCj4gPiAgI2RlZmluZSBUUkFOU0xBVEVfRkFJTCAxDQo+ID4gICNkZWZpbmUg
+VFJBTlNMQVRFX1NVQ0NFU1MgMA0KPiA+ICAjZGVmaW5lIE1NVV9VU0VSX0lEWCAzDQo+ID4gKyNk
+ZWZpbmUgVFJBTlNMQVRFX0dfU1RBR0VfRkFJTCA0DQo+IA0KPiBOb3RlIHRoYXQgeW91J3JlIGlu
+dGVybGVhdmluZyBUUkFOU0xBVEVfKiBhcm91bmQgYW4gdW5yZWxhdGVkIGRlZmluZS4NCj4gUGVy
+aGFwcyByZWFycmFuZ2UgdG8NCj4gDQo+IGVudW0gew0KPiAgICAgVFJBTlNMQVRFX1NVQ0NFU1Mg
+PSAwLA0KPiAgICAgVFJBTlNMQVRFX0ZBSUwsDQo+ICAgICBUUkFOU0xBVEVfUE1QX0ZBSUwsDQo+
+ICAgICBUUkFOU0xBVEVfR19TVEFHRV9GQUlMLA0KPiB9Ow0KPiANCg0KT0sNCg0KPiANCj4gPiAr
+KysgYi90YXJnZXQvcmlzY3YvY3B1X2hlbHBlci5jDQo+ID4gQEAgLTQ1MSw3ICs0NTEsMTAgQEAg
+cmVzdGFydDoNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIG1tdV9pZHgsDQo+IGZhbHNlLA0KPiA+IHRydWUpOw0KPiA+DQo+ID4gICAgICAgICAg
+ICAgIGlmICh2YmFzZV9yZXQgIT0gVFJBTlNMQVRFX1NVQ0NFU1MpIHsNCj4gPiAtICAgICAgICAg
+ICAgICAgIHJldHVybiB2YmFzZV9yZXQ7DQo+ID4gKyAgICAgICAgICAgICAgICBlbnYtPmd1ZXN0
+X3BoeXNfZmF1bHRfYWRkciA9IChiYXNlIHwNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIChhZGRyICYNCj4gPiArDQo+IChUQVJHRVRfUEFHRV9TSVpF
+IC0gMSkpKSA+PiAyOw0KPiA+ICsgICAgICAgICAgICAgICAgcmV0dXJuIFRSQU5TTEFURV9HX1NU
+QUdFX0ZBSUw7DQo+ID4gICAgICAgICAgICAgIH0NCj4gDQo+IEkgZG9uJ3QgdGhpbmsgeW91IGNh
+biBtYWtlIHRoaXMgY2hhbmdlIHRvIGNwdSBzdGF0ZSwgYXMgdGhpcyBmdW5jdGlvbiBpcyBhbHNv
+IHVzZWQNCj4gYnkgZ2RiLiAgSSB0aGluayB5b3UnbGwgbmVlZCB0byBhZGQgYSBuZXcgKHRhcmdl
+dF91bG9uZyAqKSBwYXJhbWV0ZXIgdG8NCj4gZ2V0X3BoeXNpY2FsX2FkZHJlc3MgdG8gcmV0dXJu
+IHRoaXMuDQo+IA0KPiBUaGUgdXNhZ2UgaW4gcmlzY3ZfY3B1X3RsYl9maWxsIGNvdWxkIHBhc3Mg
+JmVudi0+Z3Vlc3RfcGh5c19mYXVsdF9hZGRyLCBhbmQNCj4gdGhlIHVzYWdlIGluIHJpc2N2X2Nw
+dV9nZXRfcGh5c19wYWdlX2RlYnVnIGNvdWxkIHBhc3MgdGhlIGFkZHJlc3Mgb2YgYSBsb2NhbA0K
+PiB2YXJpYWJsZSAod2hpY2ggaXQgdGhlbiBpZ25vcmVzKS4NCj4gDQoNCk9LDQoNCj4gQWxzbywg
+aXNuJ3QgdGhlIG9mZnNldCBtb3JlIG5hdHVyYWxseSB3cml0dGVuIGlkeCAqIHB0ZXNpemUsIGFz
+IHNlZW4ganVzdCBhIGZldw0KPiBsaW5lcyBiZWxvdz8NCg0KT0sNCg0KPiANCj4gPiArICAgICAg
+ICBpZiAocmV0ICE9IFRSQU5TTEFURV9GQUlMICYmIHJldCAhPSBUUkFOU0xBVEVfR19TVEFHRV9G
+QUlMKSB7DQo+IA0KPiBTaG91bGQgdGhpcyBub3QgYmUgcmV0ID09IFRSQU5TTEFURV9TVUNDRVNT
+Pw0KPiBUaGlzIGxvb2tzIGJ1Z2d5IHdpdGggVFJBTlNMQVRFX1BNUF9GQUlMLi4uDQoNCk9uIFRS
+QU5TTEFURV9QTVBfRkFJTCwgaXQgc2hvdWxkIG5vdCBleGVjdXRlIEctc3RhZ2UgdHJhbnNsYXRp
+b24uDQpTbyBJIHRoaW5rIGl0IGlzIG9rIGZvciAncmV0ID09IFRSQU5TTEFURV9TVUNDRVNTJw0K
+DQpJIHdpbGwgc2VuZCBWMy4NCg0KWWlmZWkNCg0KPiANCj4gDQo+IHJ+DQo=
 
