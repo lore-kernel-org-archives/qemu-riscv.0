@@ -1,69 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSkBY-0004AO-Md
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 13:03:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42944)
+	id 1kSlig-0008W7-RW
+	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 14:41:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33560)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kSkBW-00047D-Nl; Wed, 14 Oct 2020 13:03:30 -0400
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:39853)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kSlif-0008V5-43
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2020 14:41:49 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:39267)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kSkBU-0000tY-UO; Wed, 14 Oct 2020 13:03:30 -0400
-Received: by mail-ed1-x542.google.com with SMTP id t21so204798eds.6;
- Wed, 14 Oct 2020 10:03:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=92nNHGekcXjozElp8/v0sBJL6HAmOeJklotiQRx2fgQ=;
- b=NUaQnseqI6umX1GzsB96aYyBNvuzjrIygLTaWEaKHl5S8a8rpWhExAvuIykobz22TO
- ckmm+47wKJGTqQ2gbPSRitny6E+EdKs+dnL8GBh8pWPzBKsocHbEm6d31lMWdzIxCXIr
- g7MKGZbxu2vh/SYhtQ85N/YntTxy7xOc0G9aGZaxXdnOyhZk4oCzO/yRUzZRljnjA9CV
- uqs/ntYghmUDJ2lm9n9BhUKt0PvXNtum5o3BAPP1I64jmPwMgJleiDR5JhrfzzzlfmZe
- NK6+25THojWdBS77IJZu0bEqk609cYCo+cNL2eT4LGHdrr0k/oWvq7102xgqgMD1yymq
- mv3Q==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kSlid-0004kV-FV
+ for qemu-riscv@nongnu.org; Wed, 14 Oct 2020 14:41:48 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id gv6so246478pjb.4
+ for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2020 11:41:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=i0vAYObnpIFH4p12o6pJGrseH5Je/UJA9BTxb3ZRME8=;
+ b=c8/OVvYakMGe4rmPIMuvQLaksWk1X4XPWEREM15eCaSyXATvd2zr45lm8Hb40xpcuB
+ mQOJxye1FsCIrQ45OCXof25odPVF/CUCJGR3Cpl8dUW2GBLAoRycm0yLrXhnZoHhMs87
+ +6M5cS02iFcdGHFW0uw9UajEb8p/42G1Svuf5/Iyq+OgQRQjLhxDlBBTAGsBIztWgj75
+ n5Z1idodHsYyMCT0XKqPPE+whHRkeRjjtdTy3pk22RvgCG4zP/Rb/slLLHmuhBT0HTma
+ Afi5FKS9m9oMpcW1O7bskYe8qj1h/78xre1AT4Ti4VoJLMozNZFOpHlNqcFGJTszGZuA
+ 0vNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=92nNHGekcXjozElp8/v0sBJL6HAmOeJklotiQRx2fgQ=;
- b=PUNd7CfBX2uXOaEuYZWv35JzMwFDPvgMgdxE2395cH80El3hzs7hOZysbMJW8x3dQ7
- bFGygt+I35kxOL7yCWm35MndgfqdK0sap9C5iTirjM4cKN9Y4E0z+1eUXRcqBiEP7DxF
- fgJqxjaoMWdJnjLaluO+uFITYHwWMOiJJbXuzduQgFyNOmlh/pUPED+IFbmrQlww9BhP
- y1T372P4rp6rlm63UFT1L7fas0idM+qnvWcG0hGoH+A7176Ua2MV/6JL6rMcba71bTny
- 23VZatjAeLCWk9NNMGUI5uAGOux8BgWpANa9eQPDC//P2pxMG0R4PDxbqul69dmBnd43
- s6cw==
-X-Gm-Message-State: AOAM530I8xZllkEtoExEAWLGuigNlFpShOWmwOHtw09qTzxyuCdrzLLY
- oxlZVAFdxqudaSR+N5wML4O2ClXdbLFoBNYR
-X-Google-Smtp-Source: ABdhPJyv+LorvONxX2+4OfPTae8mFrDlXG0zSmahZl7y5xynRxSRvNI2quLk6wBU8JS77FehYkbWDg==
-X-Received: by 2002:aa7:d988:: with SMTP id u8mr6601312eds.64.1602695007107;
- Wed, 14 Oct 2020 10:03:27 -0700 (PDT)
-Received: from neptune.lab ([46.39.229.194])
- by smtp.googlemail.com with ESMTPSA id c17sm2675ejb.15.2020.10.14.10.03.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2020 10:03:26 -0700 (PDT)
-From: Alexey Baturo <baturo.alexey@gmail.com>
-X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH 0/5] RISC-V Pointer Masking implementation
-Date: Wed, 14 Oct 2020 20:03:23 +0300
-Message-Id: <20201014170323.27348-1-space.monkey.delivers@gmail.com>
-X-Mailer: git-send-email 2.20.1
+ bh=i0vAYObnpIFH4p12o6pJGrseH5Je/UJA9BTxb3ZRME8=;
+ b=rbTmZo9mthhZOKMhUQjLVviQ8w1ict8Lm4us+li7yXcKPfISEUHEPOvM6Ibcl2eY7q
+ A5lNXMbQK4bNNdH/FwLomYO2j3BZQkMvqNm/8JcpyTkbSA/jPcjm8at+ND3N0kU4j3dr
+ r2ydII4EuFibCZhjvviuGDAHqyieg+KINb3ivw5Splgl2Q0O6Je/0oP7xraXf6Mkg7JD
+ dwQuOlv+s6Fzu6egdrLEkDLF3mgC9g1ofbIdyJS9R39RE6hTurF5rX5jEY0rUcUQ4noL
+ 29TIi//h402emu2kkI7WE1ynLIOhRXv3hhS5mE64aWK12oRXe2Bt4d+u/4boP5eJrAkv
+ 1e9g==
+X-Gm-Message-State: AOAM531+wMicd/9K5zYP8vsnXDj0CcxKxXNWL7ACZ6A4NnVXraAuw56+
+ 8QidEiOlN+InQSQVj/7yvY2KaQ==
+X-Google-Smtp-Source: ABdhPJwlzouQwkpgLuppffpK7HIb87c+D8BnClYecn6cJF3B3RVOAPVimvpu1nIuAr/dy8ne7meBrA==
+X-Received: by 2002:a17:902:7c93:b029:d4:e1c3:bde0 with SMTP id
+ y19-20020a1709027c93b02900d4e1c3bde0mr359548pll.85.1602700905283; 
+ Wed, 14 Oct 2020 11:41:45 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.141.89])
+ by smtp.gmail.com with ESMTPSA id fy24sm227781pjb.35.2020.10.14.11.41.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Oct 2020 11:41:44 -0700 (PDT)
+Subject: Re: [PATCH 3/5] [RISCV_PM] Print new PM CSRs in QEMU logs
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:All patches CC here" <qemu-devel@nongnu.org>,
+ space.monkey.delivers@gmail.com, Alistair Francis
+ <Alistair.Francis@wdc.com>, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20201014170159.26932-1-space.monkey.delivers@gmail.com>
+ <20201014170159.26932-4-space.monkey.delivers@gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <3395cef5-79d4-078a-29ad-48639e4cd56d@linaro.org>
+Date: Wed, 14 Oct 2020 11:41:42 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::542;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x542.google.com
+In-Reply-To: <20201014170159.26932-4-space.monkey.delivers@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,46 +88,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2020 17:03:31 -0000
+X-List-Received-Date: Wed, 14 Oct 2020 18:41:49 -0000
 
-Hi folks,
+On 10/14/20 10:01 AM, Alexey Baturo wrote:
+> +    if (riscv_has_ext(env, RVH)) {
 
-These patches implement Pointer Masking proposal which is developed by J-ext group.
-This proposal is not yet ratified, but I hope QEMU implementation is done.
-The proposal itself could be found here: https://github.com/riscv/riscv-j-extension
-This functionality is submitted as experimental, as Richard Henderson suggested, thus there're some obvious issues:
-- Introducing J extension is not the 100% correct way as I see it, but no Zname has been assigned and on J WG meeting we agreed to go with J ext for now
-- CSR numbers for PM are not yet ratified, so they're subject to change
-- No CSR have been implemented for recent hypervisor spec update. I didn't have enough time to get familiar with it, so I'll add it later
-- No compliance tests for PM exist in RISC-V compliance infra, however in order to check it I did some simple asm tests(https://github.com/gattaca-lab/riscv_pm) and we have LLVM HWASAN enabled for RISC-V that relies on this PM implementation(https://github.com/gattaca-lab/riscv_hwasan)
-This is my first QEMU patch submission, so please tell me if I'm doing something wrong.
+RVJ.
 
-Thanks
+> +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mmte    ", env->mmte);
+> +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmbase ", env->upmbase);
+> +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmbase ", env->spmbase);
+> +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmbase ", env->mpmbase);
+> +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmmask ", env->upmmask);
+> +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmmask ", env->spmmask);
+> +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmmask ", env->mpmmask);
 
-Alexey Baturo (4):
-  [RISCV_PM] Add J-extension into RISC-V
-  [RISCV_PM] Support CSRs required for RISC-V PM extension except for
-    ones in hypervisor mode
-  [RISCV_PM] Print new PM CSRs in QEMU logs
-  [RISCV_PM] Support pointer masking for RISC-V for i/c/f/d/a types of
-    instructions
+Probably you only want to dump the set that's current.
 
-Anatoly Parshintsev (1):
-  [RISCV_PM] Add address masking functions required for RISC-V Pointer
-    Masking extension
 
- target/riscv/cpu.c                      |  14 ++
- target/riscv/cpu.h                      |  13 +
- target/riscv/cpu_bits.h                 |  66 ++++++
- target/riscv/csr.c                      | 302 ++++++++++++++++++++++++
- target/riscv/insn_trans/trans_rva.c.inc |   9 +
- target/riscv/insn_trans/trans_rvd.c.inc |   6 +
- target/riscv/insn_trans/trans_rvf.c.inc |   6 +
- target/riscv/insn_trans/trans_rvi.c.inc |   6 +
- target/riscv/translate.c                |  77 ++++++
- 9 files changed, 499 insertions(+)
-
--- 
-2.20.1
-
+r~
 
