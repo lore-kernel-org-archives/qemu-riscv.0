@@ -1,64 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSmpX-0000P1-3g
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 15:52:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47814)
+	id 1kSmy4-0003qu-CO
+	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 16:01:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48962)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kSmpV-0000Ne-98; Wed, 14 Oct 2020 15:52:57 -0400
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:37328)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kSmxx-0003qB-Kh; Wed, 14 Oct 2020 16:01:46 -0400
+Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135]:46002)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kSmpT-0005io-Lr; Wed, 14 Oct 2020 15:52:56 -0400
-Received: by mail-il1-x143.google.com with SMTP id j13so789063ilc.4;
- Wed, 14 Oct 2020 12:52:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kSmxt-0006eu-GC; Wed, 14 Oct 2020 16:01:41 -0400
+Received: by mail-lf1-x135.google.com with SMTP id r127so798130lff.12;
+ Wed, 14 Oct 2020 13:01:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zkHkfuHZJnTiYMXWjW2JQkehntyeBbIil8/ZyhDIFCw=;
- b=fBIOkZgwcNrDiWXJi7FMZooyaazdw7xwNP63aaI/pw/XrkyCsMEmf+FGME0yr4gdfl
- IZEgXnH1iuhROkMI/0tLEwQ8MeJ29qjbUPFjHppzuqZY0ISeB/RC46jnFGS/N8L6E3h/
- XSvyYDy8qzm7IIHUAibti/qr+E/2SVIlOigK0eKXkh7XH0pUY8oXpquj728gYmaPXah8
- zDExdoCkE7lXmTh9WmXOLZ0z9jQAaZVWNnxU1jSJNw8NQjtWduMTEXEMmLq1IK36Ickg
- Le7Eg1Jywz0stmV+pK6b3Acc5IbJz5HtzMCr62d9xuwUNBJo5iQzFPixiCLgGXofM4IJ
- h5Uw==
+ :cc; bh=3APxZco9hgu6w5JH6mAukHW0NDibRfskrsn/17uHKhY=;
+ b=rKoCpF3wffiMg8PeHoDNfjyy39VTz9/wcWBj5tKzupLtcwI+mm6ReaMTMPWjGvYruR
+ jqD/n5hdMEUm0XgY3E6KWN4B/6OQAVLHZyNXx00hzdaVxeZza/gfcqim+lbXkqJn3nqB
+ 1SbC37Y3zdsMFnv22g++S84a64+SKlFCB9K+l3Mvr2W5M/rwSmKPTOJDDuKHQ+5M4UyP
+ Mxkc1x4W96sp+OwSWKcAp7dU1iP1mWKE3XGZG4E6Weza3xlFyoiZEV8XuCWy3lFtBPCl
+ tLyILW8NcH4Ev4XczTKOy198XhHHHFmDnGA3KNMQ4SL96ZiUIhsEjLGGm/E5bpEy8SZ6
+ tq9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=zkHkfuHZJnTiYMXWjW2JQkehntyeBbIil8/ZyhDIFCw=;
- b=gd5QgXM1sXDv41NGPIl8NpnF/RE9AarK7tqPsbBEHs5J5yNTcyfw2cmXHT4RKX9UxO
- t6RMh8zGmC+jSGj+zBT8ARaRjZtUX0NbfvKyebiuuYVkGiC1iJI5beSsyds/DgBaD0TL
- EYcXBspAUDuVfJ+jqbapb+Bymra76XypVgGmUt2MXGLH3Br9+1am/Sp/FeTPBStLmjHO
- kwx+yl88yj0m4HGTLJfJNHPPk7512ID4TCEs7dd82onu5TWv4sGlcuGun/uq0belqTO6
- PeBzySBXsYzOkG6I8y51nhuZ8QskVItoXVkNM+p1Qa9J7cEiD5Yv6xT+CwzhhDdRcM58
- CeKA==
-X-Gm-Message-State: AOAM532UzYUAerYXb3lenyiwjHG2F5lI5D+daCLyIWWIWOcPJMvmnXy2
- p8LLG6cq04VacbYUPCul6Z/sqxcPXF4vDgZ+LQ0=
-X-Google-Smtp-Source: ABdhPJyQnKstD/gKJPc62MqJDQfbvhPBaabcwFHnMijW9dVAVGUct+MReGeRcdBmXrx5HkQ3gO9831MuG9VWiKNKcxY=
-X-Received: by 2002:a05:6e02:1241:: with SMTP id
- j1mr666264ilq.267.1602705174239; 
- Wed, 14 Oct 2020 12:52:54 -0700 (PDT)
+ bh=3APxZco9hgu6w5JH6mAukHW0NDibRfskrsn/17uHKhY=;
+ b=S8QgSTvB0Wrr8VSo5RlG3+rIr+ye94Qqjp05rKVZyBqmoiKTwEk5iqeWvaNHV+6bvV
+ yP3AKaHIMP8V+z6S4Ffk5RAb1PnbUCPLk7qbxvRQmpUKsePTVw+dYUWDj/ebLlIwMxf2
+ 6rqE9fhiAU1DoGmwRsO57GLHPOrXsQkmDuaEoOJa8tkSIWGvWM41mc/LA29iPQynfwuZ
+ KxM9kokrfHNgUK7gKTxw3CN2bMe0HNi4kgvCErC2SAUs6NsmvnXkqXX2h2w5PpHpRJa0
+ 3BJJMmsRrdGiuc30l55aWMp5KkHG3Zus6Bewqyp11RhpJ77x2nFikKB2S2I/OIlO2S3/
+ 8/Wg==
+X-Gm-Message-State: AOAM533lxQdnmHqWYaL34mgum5eTrtbb2v0dq5O7bFW3UfFDeEYuYmjp
+ L1mJ5ydYHw5DGIe/k/87W6v7rIRmgeHG7EyAx8E=
+X-Google-Smtp-Source: ABdhPJx6GfKNRq0dUN74SClA9HCzeqLV4+XpfKK4x6NnORSys8UpW4ZVqqW1D4Wx1JnKk0cxduJAwGNp7tnBsTDctVc=
+X-Received: by 2002:ac2:5506:: with SMTP id j6mr257720lfk.290.1602705693255;
+ Wed, 14 Oct 2020 13:01:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20201013172223.443645-1-georg.kotheimer@kernkonzept.com>
-In-Reply-To: <20201013172223.443645-1-georg.kotheimer@kernkonzept.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 14 Oct 2020 12:41:15 -0700
-Message-ID: <CAKmqyKMmVn6oDjcHVywToNe4mkRxUru2jH_pP43y4moJyXwxBQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix implementation of HLVX.WU instruction
-To: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
+References: <20201014170159.26932-1-space.monkey.delivers@gmail.com>
+ <20201014170159.26932-4-space.monkey.delivers@gmail.com>
+ <3395cef5-79d4-078a-29ad-48639e4cd56d@linaro.org>
+In-Reply-To: <3395cef5-79d4-078a-29ad-48639e4cd56d@linaro.org>
+From: Alexey Baturo <baturo.alexey@gmail.com>
+Date: Wed, 14 Oct 2020 23:01:22 +0300
+Message-ID: <CAFukJ-CQ0VKiCerbAK4LZ8Dkn2PutFZXv0iJQe-Z-tweKThj4w@mail.gmail.com>
+Subject: Re: [PATCH 3/5] [RISCV_PM] Print new PM CSRs in QEMU logs
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "open list:All patches CC here" <qemu-devel@nongnu.org>, 
+ "space.monkey.delivers@gmail.com" <space.monkey.delivers@gmail.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: multipart/alternative; boundary="00000000000086aae705b1a6ff29"
+Received-SPF: pass client-ip=2a00:1450:4864:20::135;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x135.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -72,50 +77,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2020 19:52:57 -0000
+X-List-Received-Date: Wed, 14 Oct 2020 20:01:47 -0000
 
-On Tue, Oct 13, 2020 at 10:23 AM Georg Kotheimer
-<georg.kotheimer@kernkonzept.com> wrote:
+--00000000000086aae705b1a6ff29
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+First of all thank you so much for reviewing these patches!
+
+>RVJ.
+Thanks, I missed this typo, will fix it.
+
+>Probably you only want to dump the set that's current.
+I don't know for sure how anyone would be using this while debugging PM
+related code, but I like the idea, so I'll try to do it, thanks!
+
+=D1=81=D1=80, 14 =D0=BE=D0=BA=D1=82. 2020 =D0=B3. =D0=B2 21:41, Richard Hen=
+derson <richard.henderson@linaro.org
+>:
+
+> On 10/14/20 10:01 AM, Alexey Baturo wrote:
+> > +    if (riscv_has_ext(env, RVH)) {
 >
-> The HLVX.WU instruction is supposed to read a machine word,
-> but prior to this change it read a byte instead.
+> RVJ.
 >
-> Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
-> ---
->  target/riscv/op_helper.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mmte    ",
+> env->mmte);
+> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmbase ",
+> env->upmbase);
+> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmbase ",
+> env->spmbase);
+> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmbase ",
+> env->mpmbase);
+> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmmask ",
+> env->upmmask);
+> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmmask ",
+> env->spmmask);
+> > +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmmask ",
+> env->mpmmask);
 >
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 9b9ada45a9..3b7bd6ee88 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -334,12 +334,12 @@ target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
->          riscv_cpu_set_two_stage_lookup(env, true);
->
->          switch (memop) {
-> -        case MO_TEUL:
-> -            pte = cpu_ldub_data_ra(env, address, GETPC());
-> -            break;
->          case MO_TEUW:
->              pte = cpu_lduw_data_ra(env, address, GETPC());
->              break;
-> +        case MO_TEUL:
-> +            pte = cpu_ldl_data_ra(env, address, GETPC());
-> +            break;
->          default:
->              g_assert_not_reached();
->          }
-> --
-> 2.25.1
+> Probably you only want to dump the set that's current.
 >
 >
+> r~
+>
+
+--00000000000086aae705b1a6ff29
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>First of all thank you so much for reviewing these pa=
+tches!</div><div><br></div>&gt;RVJ.<div>Thanks, I missed this typo, will fi=
+x it.</div><div><br></div><div>&gt;Probably you only want to dump the set t=
+hat&#39;s current.</div><div>I don&#39;t know for sure how anyone would be =
+using this while debugging PM related code, but I like the idea, so I&#39;l=
+l try to do it, thanks!</div></div><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr" class=3D"gmail_attr">=D1=81=D1=80, 14 =D0=BE=D0=BA=D1=82. 2020 =D0=
+=B3. =D0=B2 21:41, Richard Henderson &lt;<a href=3D"mailto:richard.henderso=
+n@linaro.org">richard.henderson@linaro.org</a>&gt;:<br></div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
+ rgb(204,204,204);padding-left:1ex">On 10/14/20 10:01 AM, Alexey Baturo wro=
+te:<br>
+&gt; +=C2=A0 =C2=A0 if (riscv_has_ext(env, RVH)) {<br>
+<br>
+RVJ.<br>
+<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
+MT_lx &quot;\n&quot;, &quot;mmte=C2=A0 =C2=A0 &quot;, env-&gt;mmte);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
+MT_lx &quot;\n&quot;, &quot;upmbase &quot;, env-&gt;upmbase);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
+MT_lx &quot;\n&quot;, &quot;spmbase &quot;, env-&gt;spmbase);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
+MT_lx &quot;\n&quot;, &quot;mpmbase &quot;, env-&gt;mpmbase);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
+MT_lx &quot;\n&quot;, &quot;upmmask &quot;, env-&gt;upmmask);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
+MT_lx &quot;\n&quot;, &quot;spmmask &quot;, env-&gt;spmmask);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fprintf(f, &quot; %s &quot; TARGET_F=
+MT_lx &quot;\n&quot;, &quot;mpmmask &quot;, env-&gt;mpmmask);<br>
+<br>
+Probably you only want to dump the set that&#39;s current.<br>
+<br>
+<br>
+r~<br>
+</blockquote></div>
+
+--00000000000086aae705b1a6ff29--
 
