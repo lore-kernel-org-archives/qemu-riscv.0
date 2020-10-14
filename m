@@ -1,67 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSmNc-0001tz-DF
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 15:24:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42096)
+	id 1kSmOG-00036a-Nc
+	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 15:24:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42282)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kSmNY-0001se-Oc; Wed, 14 Oct 2020 15:24:04 -0400
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:38909)
+ id 1kSmOD-00032x-9Z; Wed, 14 Oct 2020 15:24:45 -0400
+Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:35900)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kSmNX-00025j-0f; Wed, 14 Oct 2020 15:24:04 -0400
-Received: by mail-il1-x143.google.com with SMTP id p16so638384ilq.5;
- Wed, 14 Oct 2020 12:24:02 -0700 (PDT)
+ id 1kSmOB-0002AA-Aj; Wed, 14 Oct 2020 15:24:44 -0400
+Received: by mail-io1-xd41.google.com with SMTP id u19so506917ion.3;
+ Wed, 14 Oct 2020 12:24:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=47ncXARBBUogvJeqAUK8leawSEH7PX2pI1ulDIol+5U=;
- b=KoMd3eDUB8EFy8rOUMrZC0YNLul7ArHcz96eM4lv9akQDt0gi8VV54xih4Lh5+vwEm
- esAu49j78ON7NzwFeyiSXoaXKhuNGqDRKyVw8Ka/ePDn1us0l/F2NHUn6os6ck/7fOkz
- pXDiHiqPeX1oPFiQkJ/tROqA9N4AW8YyniB/LPNKbSKkKRfx2CVsVOmLyKFcuuUVa/KO
- LXZdumsMbXN+gLcfWySuEQygK5eYDatfm7fL/94ph/t6KrrcFJDaXgLGHQs3AxztpvZa
- FPr/WaCMfuGk4o9zRdGC7x71jM0TdKKCFB73A3dqE5JC52WdU1lUa5/kjt7c8VnYWtYV
- euAQ==
+ :cc:content-transfer-encoding;
+ bh=/huUIpXmrpJ/eA8kfnT88Q/NcUfZRZKSu/X4oQZ4dns=;
+ b=FCIWyvGdOBMGNtz6IGK/B7ZDy8reE+nrZq87Z9BLyqcGc/o6NJZ0Rs/NE+4d2GYFWp
+ qC6WR+NkErfPYvyHH4OvbPeqeFFGVi8cxH6X33bpKkpSAL13J4QocC5arLzMXNMmaQm9
+ 1QuqQweN8sYk2Hn117i4sia01RsR6qTH6dUzNV15okvhEcDNxHLY+Pd7jOLkwRURthIe
+ BVnca5TQcATgF07i6Q8dCmOLXLmsaKhtNJvPfxV74anvGCIPSINuh7JgfmZ0s3fWRs1V
+ 7U6bYoPgsBw2OwJs4+v3PLTJef2eJC6D2BuMAFmenCxllGAk7qoKCP+CsOuTgxTAoFVY
+ lMoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=47ncXARBBUogvJeqAUK8leawSEH7PX2pI1ulDIol+5U=;
- b=aWXd5YNWP+WVr/IejAfzv6GNCPPHSjVsbjdeWBnhBeIfEVE9QzqyI5XsBSEYLj6x9A
- sKg82QpFMQXwg0MRmqG/z5qco4F7OSFDD8cDIc1Y4vkQrIHfpb4tcZS8b7i8Ab8xoGSe
- 2iHaGiL6kzSbamLD2zvybnxRXdah4yNgHNR7wlYcvmx3nxYTXaKQoXaNJTt6kc/nK15H
- nSvaoBb9FKFbMoPKwkO3S6NKgxeWZ1D7A9Tk6LLQLhRL2inCX2lLY8isgCkXfGXbc86G
- COi7FbP/mNeIst/qgDsZph36gjdzoJN2GXQOR8kpAlL7fgD/FdTihiD/rOMQlQu9okZ3
- gaHw==
-X-Gm-Message-State: AOAM533iE533WDZ+Bw5hqGc72L20ENCQlfMIH4whkp6Mn2+UYbLZqPGx
- gGY6xLCDXqMEkGSPpeGIvbeRvVGJNVXXmo9Erbk=
-X-Google-Smtp-Source: ABdhPJwCz1oqcGLKY/faEsqchsfX5WZYAufv0laopp2Ay5L+c6rchQoURhPSd2/ar2tdzDIB21z5eY/u/zOuMGibbcI=
-X-Received: by 2002:a92:dd0f:: with SMTP id n15mr601457ilm.227.1602703441365; 
- Wed, 14 Oct 2020 12:24:01 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=/huUIpXmrpJ/eA8kfnT88Q/NcUfZRZKSu/X4oQZ4dns=;
+ b=fKSSvq4D8TYJFQT/xlyixoKSYl+ZQAbV8X94FS6yDce/GMlTYr5CwdXzrSnMbIkSLb
+ x6EhOypIsduJqSWZs+frA6rgfcK1JbFzIsEbUCEUKCRQt1JI9UNDI0pubrt7FAccsBXg
+ 9NlOiPn/BzeiKdpErWWNi9WkX+pZyPMzxsOcgnCsomSpEsZ0K7G9Ad4gru7tddsFyr9X
+ u+Uo2oUeO1j0z9VvG37SmWmS+bXV344WqRLUEw5TYDbWkYaQ6NOXqgu9FDOgX56azZO8
+ CjDcrlR8zvzPVu95J00opcI6sBbMbiy9o+Xh2hKPaVyWq2HFAuutl+wbI10qhLBm3ikb
+ yCcA==
+X-Gm-Message-State: AOAM531PzMXCKpiEFomURotNg3kFFN284rO7LkgGxRRQcPD3zQlalznD
+ LoRWuZbS6uxeD18jFKGxXWZEXmZatir9Qgr0JRw=
+X-Google-Smtp-Source: ABdhPJyFWLBbbFuMF2sREiVbTIj32xe4KJ73QJAQcNJNRUK+xx25ui9NVRKrqAUfKT+ByWMsvuMWTyD1tNC+o3wBr9I=
+X-Received: by 2002:a5e:9b11:: with SMTP id j17mr739802iok.176.1602703481512; 
+ Wed, 14 Oct 2020 12:24:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20201010080623.768-1-jiangyifei@huawei.com>
- <20201010080623.768-2-jiangyifei@huawei.com>
- <0bc022ca-35f6-8579-51f1-65005e89a9a3@linaro.org>
- <cbbaee32aaca498294e599ba7768279a@huawei.com>
- <0d4fa7cd-b534-5635-302a-6ef0c4b8426a@linaro.org>
-In-Reply-To: <0d4fa7cd-b534-5635-302a-6ef0c4b8426a@linaro.org>
+References: <1602577811-67343-1-git-send-email-bin.meng@windriver.com>
+In-Reply-To: <1602577811-67343-1-git-send-email-bin.meng@windriver.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 14 Oct 2020 12:12:23 -0700
-Message-ID: <CAKmqyKPcK9jKCF4VrVsSuPMpTJXjkOdhmRc0jPqkFVyRLA1qUQ@mail.gmail.com>
-Subject: Re: [PATCH V2 1/5] target/riscv: Add basic vmstate description of CPU
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Jiangyifei <jiangyifei@huawei.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- Zhanghailiang <zhang.zhanghailiang@huawei.com>, 
- "sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>, 
- "kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>, 
- "Zhangxiaofeng (F)" <victor.zhangxiaofeng@huawei.com>, 
- "Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>,
- yinyipeng <yinyipeng1@huawei.com>, 
- "palmer@dabbelt.com" <palmer@dabbelt.com>, "Wubin (H)" <wu.wubin@huawei.com>, 
- "dengkai (A)" <dengkai1@huawei.com>
+Date: Wed, 14 Oct 2020 12:13:03 -0700
+Message-ID: <CAKmqyKMTSSUwk5DPzkfaOZUqm8vtcqqZj4J_EsxuK3=UEfF5Tg@mail.gmail.com>
+Subject: Re: [PATCH v2] hw/intc: Move sifive_plic.h to the include directory
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d41;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -84,33 +75,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2020 19:24:05 -0000
+X-List-Received-Date: Wed, 14 Oct 2020 19:24:45 -0000
 
-On Wed, Oct 14, 2020 at 8:45 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Tue, Oct 13, 2020 at 1:31 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On 10/14/20 3:21 AM, Jiangyifei wrote:
-> >> Would this be a good time to expand mstatus to uint64_t instead of
-> >> target_ulong so that it can be saved as one unit and reduce some ifdefs in the
-> >> code base?
-> >>
-> >> Similarly with some of the other status registers that are two halved for
-> >> riscv32.
-> >
-> > I agree with you that it should be rearranged.
-> > But I hope this series will focus on achieving migration.
-> > Can I send another patch to rearrange it later?
+> Since sifive_plic.h is used by hw/intc/sifive_plic.c,
+> it has to be in the public include directory. Move it.
 >
-> Well, that changes the bit layout for migration.
-> While we could bump the version number, it seemed
-> easier to change the representation first.
+> Fixes: 84fcf3c15111 ("hw/riscv: Move sifive_plic model to hw/intc")
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 
-+1 it would be great to consolidate these.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 >
+> ---
 >
-> r~
+> Changes in v2:
+> - reword the commit message as Philippe suggested
+>
+>  {hw =3D> include/hw}/intc/sifive_plic.h | 0
+>  1 file changed, 0 insertions(+), 0 deletions(-)
+>  rename {hw =3D> include/hw}/intc/sifive_plic.h (100%)
+>
+> diff --git a/hw/intc/sifive_plic.h b/include/hw/intc/sifive_plic.h
+> similarity index 100%
+> rename from hw/intc/sifive_plic.h
+> rename to include/hw/intc/sifive_plic.h
+> --
+> 2.7.4
+>
 >
 
