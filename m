@@ -1,86 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSiy7-0006eV-Ib
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 11:45:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54758)
+	id 1kSkAL-0002mx-Sh
+	for mharc-qemu-riscv@gnu.org; Wed, 14 Oct 2020 13:02:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42700)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kSiy5-0006ae-Cx
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2020 11:45:33 -0400
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:41371)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kSkAJ-0002kZ-GJ; Wed, 14 Oct 2020 13:02:15 -0400
+Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:37031)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kSiy3-0007gq-9J
- for qemu-riscv@nongnu.org; Wed, 14 Oct 2020 11:45:33 -0400
-Received: by mail-pg1-x542.google.com with SMTP id n9so2234797pgt.8
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2020 08:45:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=bekVVwx3fg5RyV2lzAVABqy3iI2WaUm9OTRp1uhf2Uo=;
- b=hg6k+uO0U0vAdj8r5W5MdEloBMX3A3VeU4AZB0lODmE2OfD6srAIawlRPuZerUV6Ea
- gv0pwHlaYYMmTA3t+MtO3AqQEb8Cq7Dcu6bNvAPgowuU3jJZ4stniwQ5HXP0vp+wexk6
- jGxCEhi7L98BmhDpR6+jfmUB8QRjEgfgUa0fo92Z0QXXEVJ/j3PF9+EIf1nLac24lrTD
- AbM4NDmqsXh47grRbGzp0c8w9SKxaMLDHQ08d8W0LZ7HW0WJSzS9e6xncERumcS+D9YE
- R94iKppz3HglhQE8aABJaRL7beNySLciTp1KyWXkhMjFODxT7SKUVT9Z0MElEc0Dad50
- 6OIw==
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kSkAH-0000nV-FA; Wed, 14 Oct 2020 13:02:15 -0400
+Received: by mail-ed1-x542.google.com with SMTP id o18so210690edq.4;
+ Wed, 14 Oct 2020 10:02:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=aJ0KQb6Ozzm+TKAEStsx77t+LpGGqIZVP5UuxdMy3MY=;
+ b=XpqNSJ9ujbXfuJhTtjLOFcHXa52vlNLLRyjRy2EvXJL+QNSwZONNGN3tdQfgKZDDZ/
+ 8ll0PCZksSOmgrK4pb5kXdncWID3UzRtmMRG+Uz1U8lZM69o1pdynWRixKNzLPuVe1pi
+ 8EHh4hag+Xh27lXk6tXylovn2feSgr+iTOmfle50e1/OTUMpi4SVcIozorPhoNC2k5xX
+ TOtN9WzwcozT2eoTMbeAhE/0dVNU/HPB0EizXoQF8g878BO22sGTF0l3HTR6qsbwy6B9
+ rcPnRXMZMM9m4H0Ok8lVxoRVVe48lWohRaTdtAmhVUOgRF3I3hA2ac3DY613x/Eu5EZO
+ YXLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=bekVVwx3fg5RyV2lzAVABqy3iI2WaUm9OTRp1uhf2Uo=;
- b=jfkXu9HGIg/uVklGMwhNEX5jamYTIdroH8JKqUaZMdbsfq3TxUWTJp5YNcCOowt3g7
- R3RcJhwvFghtBp6KORJ9/kg6uiLAlFd61P9fxy4U1P6g1H11xdccBMCU+YKtAndgPzbL
- R0NcbTtrP1aTZ48UdJwZJ20NR5B1CDbWgbm4eY5gz0H0YSBWGjeWRZLGHcLysqvPnmHN
- T4XLyDzQyDi3fXyfOlemnjWInNvXPJBDcHVb5rk3BuFX5VCHuOg9EwAseAbd5nJCWMY2
- hLpfQS9UPTeVcMXi5O/J7y+q/pAqpHac46177kfcta+sC6AFsi1jZYHfWDKXG/0w+dOF
- RsgQ==
-X-Gm-Message-State: AOAM533LLB3kYkkZy2JWO/SBy6SClPvnKrBPNYGcfnjLSkPsMImes1iu
- wRkJOOtQxA59uz0zUczeAylaeA==
-X-Google-Smtp-Source: ABdhPJyhBCLjYPXrat9Hj/b/h7B5hxSrFg+VMwaeiDUv/CSryJFB1Y6GBoE+IXP8Bj1NAj+zfhjS4g==
-X-Received: by 2002:a63:ab07:: with SMTP id p7mr4358636pgf.326.1602690329555; 
- Wed, 14 Oct 2020 08:45:29 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id t9sm3937411pgp.90.2020.10.14.08.45.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Oct 2020 08:45:28 -0700 (PDT)
-Subject: Re: [PATCH V2 1/5] target/riscv: Add basic vmstate description of CPU
-To: Jiangyifei <jiangyifei@huawei.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Cc: "palmer@dabbelt.com" <palmer@dabbelt.com>,
- "Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>,
- "sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>,
- "kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>,
- "Zhangxiaofeng (F)" <victor.zhangxiaofeng@huawei.com>,
- "Wubin (H)" <wu.wubin@huawei.com>,
- Zhanghailiang <zhang.zhanghailiang@huawei.com>,
- "dengkai (A)" <dengkai1@huawei.com>, yinyipeng <yinyipeng1@huawei.com>
-References: <20201010080623.768-1-jiangyifei@huawei.com>
- <20201010080623.768-2-jiangyifei@huawei.com>
- <0bc022ca-35f6-8579-51f1-65005e89a9a3@linaro.org>
- <cbbaee32aaca498294e599ba7768279a@huawei.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <0d4fa7cd-b534-5635-302a-6ef0c4b8426a@linaro.org>
-Date: Wed, 14 Oct 2020 08:45:26 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=aJ0KQb6Ozzm+TKAEStsx77t+LpGGqIZVP5UuxdMy3MY=;
+ b=cZUy5Hle4iNmIk81dnaVJ2u/Qt7e+P1sQ/wIA9vtxti3xLSLvC+H5m9eOKs+6o15jY
+ fKt28OgWQSYJkJgH2/jLp2+9tV9R+kVYgjNlnFSM8aL3gLmYcAJucfv45BHUDl/rY8ob
+ wOtJ4fRWuwAmDDs0c+da2VUgUcfHBwLXZcSCS+ZSL5v3IqKHTcurh7R/lBCLozREpjby
+ d5ItWIduVRnzN5+NH+V34r8aW6GGi/UpeSXdCdl/hnJhuHa0BNVMg96GF1+INn11Eaka
+ 2e5Zx9bsGEILUZSyDftjjIEcOP/ggxN1bac6wng1opvQnA2r9KKywfPgFHjy12/eE6ul
+ njWA==
+X-Gm-Message-State: AOAM5316Zfxu77cLKFUVCrSk7tsFEGQAJbxMe8L2dvtCl/o1893uMwrF
+ XFatyMDFv9ncazfLCGn/7gI=
+X-Google-Smtp-Source: ABdhPJzMcESu5Cbx/Bm26PisXXb7ZZwoEnDbyx0Z2S+ITP+5j3TnYCXDCPVUJswl8ArWoRKXLmmuoQ==
+X-Received: by 2002:aa7:c256:: with SMTP id y22mr6475707edo.324.1602694930983; 
+ Wed, 14 Oct 2020 10:02:10 -0700 (PDT)
+Received: from neptune.lab ([46.39.229.194])
+ by smtp.googlemail.com with ESMTPSA id g3sm76012edy.12.2020.10.14.10.02.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 14 Oct 2020 10:02:10 -0700 (PDT)
+From: Alexey Baturo <baturo.alexey@gmail.com>
+X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
+To: 
+Cc: baturo.alexey@gmail.com, space.monkey.delivers@gmail.com,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
+ qemu-devel@nongnu.org (open list:All patches CC here)
+Subject: [PATCH 1/5] [RISCV_PM] Add J-extension into RISC-V
+Date: Wed, 14 Oct 2020 20:01:55 +0300
+Message-Id: <20201014170159.26932-2-space.monkey.delivers@gmail.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201014170159.26932-1-space.monkey.delivers@gmail.com>
+References: <20201014170159.26932-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <cbbaee32aaca498294e599ba7768279a@huawei.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::542;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x542.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::542;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x542.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -93,24 +82,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Oct 2020 15:45:33 -0000
+X-List-Received-Date: Wed, 14 Oct 2020 17:02:15 -0000
 
-On 10/14/20 3:21 AM, Jiangyifei wrote:
->> Would this be a good time to expand mstatus to uint64_t instead of
->> target_ulong so that it can be saved as one unit and reduce some ifdefs in the
->> code base?
->>
->> Similarly with some of the other status registers that are two halved for
->> riscv32.
-> 
-> I agree with you that it should be rearranged.
-> But I hope this series will focus on achieving migration.
-> Can I send another patch to rearrange it later?
+Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
+---
+ target/riscv/cpu.c | 4 ++++
+ target/riscv/cpu.h | 2 ++
+ 2 files changed, 6 insertions(+)
 
-Well, that changes the bit layout for migration.
-While we could bump the version number, it seemed
-easier to change the representation first.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 0bbfd7f457..fe6bab4a52 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -438,6 +438,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         if (cpu->cfg.ext_h) {
+             target_misa |= RVH;
+         }
++        if (cpu->cfg.ext_j) {
++            target_misa |= RVJ;
++        }
+         if (cpu->cfg.ext_v) {
+             target_misa |= RVV;
+             if (!is_power_of_2(cpu->cfg.vlen)) {
+@@ -516,6 +519,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+     /* This is experimental so mark with 'x-' */
+     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
++    DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
+     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index de275782e6..eca611a367 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -66,6 +66,7 @@
+ #define RVS RV('S')
+ #define RVU RV('U')
+ #define RVH RV('H')
++#define RVJ RV('J')
+ 
+ /* S extension denotes that Supervisor mode exists, however it is possible
+    to have a core that support S mode but does not have an MMU and there
+@@ -277,6 +278,7 @@ struct RISCVCPU {
+         bool ext_s;
+         bool ext_u;
+         bool ext_h;
++        bool ext_j;
+         bool ext_v;
+         bool ext_counters;
+         bool ext_ifencei;
+-- 
+2.20.1
 
-
-r~
 
