@@ -1,56 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSyCt-0005zr-Q0
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Oct 2020 04:01:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44128)
+	id 1kT54j-0007LD-8p
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Oct 2020 11:21:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49852)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kSyCl-0005vV-1R; Thu, 15 Oct 2020 04:01:48 -0400
-Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:38961)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kT54h-0007Gr-D7; Thu, 15 Oct 2020 11:21:51 -0400
+Received: from mail-ed1-x543.google.com ([2a00:1450:4864:20::543]:35983)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kSyCh-0003cd-QK; Thu, 15 Oct 2020 04:01:42 -0400
-Received: by mail-yb1-xb41.google.com with SMTP id 67so1521465ybt.6;
- Thu, 15 Oct 2020 01:01:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kT54f-00060E-J5; Thu, 15 Oct 2020 11:21:50 -0400
+Received: by mail-ed1-x543.google.com with SMTP id l16so3519930eds.3;
+ Thu, 15 Oct 2020 08:21:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=dSleulQX0RwtcXZiIWA1dhV78s+u5MuOjfDT7DxLzLY=;
- b=QBYiCyQ/DZIL8f3qzbRMTgbTRpEiy0DUPaZFjJGtzoQ/JbwtvX6fr58++l+p19Cwza
- iwtb6ybkB2P5O+AcvTI8tAo/OkjyV0/wS3/9rg/T/RRHwqmE5JZcj6y1skkUOdykbEJL
- f2WnPbn6gAjuUTrPEAYviPmrWb//Atx04khBkIES9+XOghge2KHEwGHE4/4eEzwSnp7R
- xsj9+xk8Phx15e8R8o6nMt02pVECt6R1YPtEN3XCv/bgDF9IsAbIIl9odgReHz95W9Sk
- ph7B/Vrsi/vCBC+1PHGudUriSgPVXpfezwu87lnIadxGyo4ubd9wkSVVpHA7jp1qyy0F
- Nc4Q==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=aJ0KQb6Ozzm+TKAEStsx77t+LpGGqIZVP5UuxdMy3MY=;
+ b=OXVszxVLFimgwpIqc1n0s1xqtuShZsq5Xrpbqa/ixMYQ/4Ow2UfcRIVTYuTWNZ7D7H
+ g937XVt7oSZHMfzBC84e6Uy4m8iIb+m0b6Z+OB+tSacT5ZAe562W6qF0wBaDli22rVkM
+ 0fIplViQQ0L2yy7U4MsCu04UZ8bY9cS9VjDvYlc3/SuN3C8GRP8R13sWAuhdyxJI6Bxx
+ uc9VQQfWzKC9CHOiw5fKW64PyQ2qcZQ6pOaYIf0hSvPMlYrNfzZoMOOnk4HCBcTljtP+
+ mcLYlGzSDI5rueElXo/JvE7n9QUK0Ijp7orF4WsicfeMcpA8BNaqUHlTb+Q/JniSjx3r
+ iL3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=dSleulQX0RwtcXZiIWA1dhV78s+u5MuOjfDT7DxLzLY=;
- b=Ml9ql+kW2/DhxWvtKkJ4L8Up1LPwbmAI/xpxdkDCH3z34QyajztXxBsxpjhjkoCuGr
- v/dhW9VrghJkxyPrFx/zwvb8BAR3F8TJaIBddkjS5HTB8RqQ6gnDBKy8moXrjESt+plE
- w7ZlG3srJtF2VepLHyE+shcRvPtGYalciwmgzwu881ikCI+3mZ8Yh/rOt5495lk+BILU
- cbb3yfeuMCG710mBgcJ3g/c0gwMoUzT5/aIjpOr6+RRXV1iNTYaXD0vtuuNR9H01/hnk
- r50EXEGTtU3o14m0B2UVs2spUSfV1urRErkYPa4sWjlnU3CMTPhg/DzRj+MMZRbQv42d
- UBFA==
-X-Gm-Message-State: AOAM530cHR7NU448l0kjpKggPpCMSMpbfwfqDPF76KHKlrRsNPVvth3V
- iaGk7ToEf1R321+WBYDJWII7bQydRJvJ81rX+jc=
-X-Google-Smtp-Source: ABdhPJxlZzuSnQnkPzAdqtv554wyjHOIqbI4sxtDTT5pCNCf7jqPc3f4X4GEgrhgg451mhVZmSAByNF1VAdr2vg9wis=
-X-Received: by 2002:a25:328a:: with SMTP id y132mr3698245yby.306.1602748898487; 
- Thu, 15 Oct 2020 01:01:38 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=aJ0KQb6Ozzm+TKAEStsx77t+LpGGqIZVP5UuxdMy3MY=;
+ b=r8QZlKDrgVE3zqOPSGbgR4xFStv43RsQe82ozMVwfk7T5Eu8z7n3f0o9yOJsTZOyLb
+ Z1V+/fHsj9vD7XMWVFA47yC+SaAeZi004mjSzU/EAD8ZCe4v0uLfgM/9vaFtn7vZJ+31
+ Z3HNrL+Ok9IvxK1W4SU3UeB8UBlX993TbVTxec3IZs2xhbuSNSIPlNUrTGVJt3QBoYKj
+ jAPZG2DR7Gea/ZAWbTtnmOmEJtBELc6VD/LWBFY/RJqcZsL+q+iu59TDNOSlNTnxkVA3
+ +wp4I7aT38dNluF3TwIF2i7jOUxYCUPL/X4PMeu/eRQLTkDv/1uDqRTEZXYqU6WzHM0Q
+ iI7g==
+X-Gm-Message-State: AOAM5331+WaosFqm8pG6GEgVGmSpUs/57fHf20ipv7PFHejB2kRZYo/w
+ tCD1ylneW3DBb1RBIOZSnds=
+X-Google-Smtp-Source: ABdhPJwjOE6fLykMsgqYNOifFoQZHHMaKuXVXgVVJtsxkKgnimUPMRtS4MdkOFb6f7NtaJrY19SP6g==
+X-Received: by 2002:aa7:c948:: with SMTP id h8mr4691523edt.171.1602775307533; 
+ Thu, 15 Oct 2020 08:21:47 -0700 (PDT)
+Received: from neptune.lab ([46.39.229.194])
+ by smtp.googlemail.com with ESMTPSA id i5sm1819539ejv.54.2020.10.15.08.21.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Oct 2020 08:21:46 -0700 (PDT)
+From: Alexey Baturo <baturo.alexey@gmail.com>
+X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v2 1/5] [RISCV_PM] Add J-extension into RISC-V
+Date: Thu, 15 Oct 2020 18:21:35 +0300
+Message-Id: <20201015152139.28903-1-space.monkey.delivers@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20201015041424.23090-1-green.wan@sifive.com>
- <20201015041424.23090-3-green.wan@sifive.com>
-In-Reply-To: <20201015041424.23090-3-green.wan@sifive.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 15 Oct 2020 16:01:27 +0800
-Message-ID: <CAEUhbmXZ5wXWyPqMwfwMoRUzmuKzj7-7QAXGd10MYhKanQhwbg@mail.gmail.com>
-Subject: Re: [RFC PATCH v7 2/2] hw/misc/sifive_u_otp: Add backend drive support
-To: Green Wan <green.wan@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::543;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x543.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -72,99 +78,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2020 08:01:50 -0000
+X-List-Received-Date: Thu, 15 Oct 2020 15:21:51 -0000
 
-On Thu, Oct 15, 2020 at 12:15 PM Green Wan <green.wan@sifive.com> wrote:
->
-> Add '-drive' support to OTP device. Allow users to assign a raw file
-> as OTP image.
->
-> test commands for 16k otp.img filled with zero:
->
-> $ dd if=/dev/zero of=./otp.img bs=1k count=16
-> $ ./qemu-system-riscv64 -M sifive_u -m 256M -nographic -bios none \
-> -kernel ../opensbi/build/platform/sifive/fu540/firmware/fw_payload.elf \
-> -d guest_errors -drive if=none,format=raw,file=otp.img
->
-> Signed-off-by: Green Wan <green.wan@sifive.com>
-> ---
->  hw/misc/sifive_u_otp.c         | 67 +++++++++++++++++++++++++++++++++-
->  include/hw/misc/sifive_u_otp.h |  2 +
->  2 files changed, 68 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
-> index 565eec082f..60066375ab 100644
-> --- a/hw/misc/sifive_u_otp.c
-> +++ b/hw/misc/sifive_u_otp.c
-> @@ -19,11 +19,14 @@
->   */
->
->  #include "qemu/osdep.h"
-> +#include "qapi/error.h"
->  #include "hw/qdev-properties.h"
->  #include "hw/sysbus.h"
->  #include "qemu/log.h"
->  #include "qemu/module.h"
->  #include "hw/misc/sifive_u_otp.h"
-> +#include "sysemu/blockdev.h"
-> +#include "sysemu/block-backend.h"
->
->  #define WRITTEN_BIT_ON 0x1
->
-> @@ -54,6 +57,16 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
->          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
->              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
->              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
-> +
-> +            /* read from backend */
-> +            if (s->blk) {
-> +                int32_t buf;
-> +
-> +                blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
-> +                          SIFIVE_U_OTP_FUSE_WORD);
-> +                return buf;
-> +            }
-> +
->              return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
->          } else {
->              return 0xff;
-> @@ -137,7 +150,7 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
->          if (s->pwe && !s->pas) {
->              if (GET_FUSEARRAY_BIT(s->fuse_wo, s->pa, s->paio)) {
->                  qemu_log_mask(LOG_GUEST_ERROR,
-> -                              "Error: write idx<%u>, bit<%u>\n",
-> +                              "write once error: idx<%u>, bit<%u>\n",
+Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
+---
+ target/riscv/cpu.c | 4 ++++
+ target/riscv/cpu.h | 2 ++
+ 2 files changed, 6 insertions(+)
 
-This should be in the patch 1.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 0bbfd7f457..fe6bab4a52 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -438,6 +438,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         if (cpu->cfg.ext_h) {
+             target_misa |= RVH;
+         }
++        if (cpu->cfg.ext_j) {
++            target_misa |= RVJ;
++        }
+         if (cpu->cfg.ext_v) {
+             target_misa |= RVV;
+             if (!is_power_of_2(cpu->cfg.vlen)) {
+@@ -516,6 +519,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+     /* This is experimental so mark with 'x-' */
+     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
++    DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
+     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index de275782e6..eca611a367 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -66,6 +66,7 @@
+ #define RVS RV('S')
+ #define RVU RV('U')
+ #define RVH RV('H')
++#define RVJ RV('J')
+ 
+ /* S extension denotes that Supervisor mode exists, however it is possible
+    to have a core that support S mode but does not have an MMU and there
+@@ -277,6 +278,7 @@ struct RISCVCPU {
+         bool ext_s;
+         bool ext_u;
+         bool ext_h;
++        bool ext_j;
+         bool ext_v;
+         bool ext_counters;
+         bool ext_ifencei;
+-- 
+2.20.1
 
->                                s->pa, s->paio);
->                  break;
->              }
-> @@ -145,6 +158,12 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
->              /* write bit data */
->              SET_FUSEARRAY_BIT(s->fuse, s->pa, s->paio, s->pdin);
->
-> +            /* write to backend */
-> +            if (s->blk) {
-> +                blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD,
-> +                           &s->fuse[s->pa], SIFIVE_U_OTP_FUSE_WORD, 0);
-> +            }
-> +
->              /* update written bit */
->              SET_FUSEARRAY_BIT(s->fuse_wo, s->pa, s->paio, WRITTEN_BIT_ON);
->          }
-> @@ -168,16 +187,48 @@ static const MemoryRegionOps sifive_u_otp_ops = {
->
->  static Property sifive_u_otp_properties[] = {
->      DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
-> +    DEFINE_PROP_DRIVE("drive", SiFiveUOTPState, blk),
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
-
-Otherwise,
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
-Tested-by: Bin Meng <bin.meng@windriver.com>
-
-You can drop the "RFC" tag in the next version.
 
