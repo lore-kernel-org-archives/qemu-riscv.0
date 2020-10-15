@@ -1,70 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kSufd-0006Y1-Dh
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Oct 2020 00:15:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60992)
+	id 1kSwnT-0001j2-Po
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Oct 2020 02:31:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53736)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
- id 1kSufb-0006VF-Pl
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2020 00:15:15 -0400
-Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044]:39577)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kSwnS-0001iU-9h; Thu, 15 Oct 2020 02:31:30 -0400
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:44008)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <green.wan@sifive.com>)
- id 1kSufY-0006s1-OF
- for qemu-riscv@nongnu.org; Thu, 15 Oct 2020 00:15:15 -0400
-Received: by mail-pj1-x1044.google.com with SMTP id gv6so1119147pjb.4
- for <qemu-riscv@nongnu.org>; Wed, 14 Oct 2020 21:15:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=Htn/B8k+1/JpRIVNx3cFS6HMpNPM26t880PCz9769ik=;
- b=jt1v3hzmh7qtX18sJtd3U6q6TydqJqpR94Fdubg03KVkWeboDwNN+ccek3O0EUSSJQ
- K8SrqSRpRPLF1YcejX96j4zkxcetrc4WGmeTaeoIQkyNqiL0gBjFBiAgkAm3P3z+Ytnk
- CXJFbd7Lg3vKUctmE7tt7fagqEotnqfTlSH1DGsBZkmAFbpazlZkzXLrB47T0fkk/CFI
- 4TA5lssF4MBDFzlnQatduttUpnWT/tFoabSSqi70uzoS4BMG7B4LHF9UtSMO1Ihp8Yry
- 0Rm3TesT08sVZEI/Q0KKtnirtnlzZ89jTSB7QqstCvPP4+7EhYBLGRZgeFGj+XvNcRhy
- Ts6Q==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kSwnQ-0004U4-9H; Thu, 15 Oct 2020 02:31:30 -0400
+Received: by mail-yb1-xb42.google.com with SMTP id d15so1333140ybl.10;
+ Wed, 14 Oct 2020 23:31:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=wjzs4KefBlOF2UaMlc9Vs3cFWbQkoCK4ngM2/Q6EWyk=;
+ b=WEbHBVk+fTH3UQJLM7/VGZ9GX5mof430k7+sCUoUeRfviKRrl2Yi5sxWycgZJeC+Pw
+ KDQOFjEIW+9zv746MpaW4xcwpPTwlw+gP2yJcsP4uaGW7H8lt2WbFBjKeQBVX7Mxc41q
+ TBm5qhJlbe3QrscBttqMWSt7tOWaXyiuPft9aheGQLi8nvqHLHzCt8903xrsQlZBsNMW
+ yaAD6jOjbIOfftcA/MRKsIx5mWCoI6ivuDdjbwABhjtqBvKMqaZJbMJKkFaHVikWWk0q
+ /WS4x3KG7SStBlVX6r6p/z0M/7gj0pjx0OIsAkZTYhyyTpwrZRrSq9IyoXiIgNmMpEVB
+ aCwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=Htn/B8k+1/JpRIVNx3cFS6HMpNPM26t880PCz9769ik=;
- b=k/PL6o5QDtECS2m/d+pstjM5HPCRBY9g61/A9K9lUc5oXSxfJSR6hBJ8clu82bsH+X
- aAc6P9exw6mzhYLZs7UewqSjOGY/uBErQPGWGGVWtuQQX9Kt/QWrM6m0QyjYwCeKcKt3
- zoLwcOLMtqZX676QRxEKv01fdlWk33iWRSaWq3Fs9DDaav1lSx5Jm/4z04LYLfqNpsH7
- U6w1atnxH/MzxqS5VkkSyNqNUtHeuhqZ8MULEb3wkIjoXBC8VX6ZTRgV6P7zqmj20TYP
- Ef3AKsJmyBaYjGr8VAhb9rbQmV7PK+t2jwtYF60q1Z/UKLXXxUfMdmobZoZeBMNfXkBU
- D9pw==
-X-Gm-Message-State: AOAM530A+aya6iQbIl6UiV7/VqSIjD4lDlPxAd2hXkLadOmgF4yPybOm
- oACkxoaMIhHDhZQ/jwOO7vajQg==
-X-Google-Smtp-Source: ABdhPJxZKLyd6nBG7vk+OLdDnl7AH1knA36A4fllD6CbW9htrJRBXszIRALJerV9pj3DgQdW+vYL2g==
-X-Received: by 2002:a17:90b:30d2:: with SMTP id
- hi18mr2552799pjb.86.1602735311314; 
- Wed, 14 Oct 2020 21:15:11 -0700 (PDT)
-Received: from localhost.localdomain (111-241-103-134.dynamic-ip.hinet.net.
- [111.241.103.134])
- by smtp.gmail.com with ESMTPSA id gd14sm1250191pjb.31.2020.10.14.21.15.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2020 21:15:10 -0700 (PDT)
-From: Green Wan <green.wan@sifive.com>
-To: 
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, bmeng.cn@gmail.com,
- alistair23@gmail.com, green.wan@sifive.com
-Subject: [RFC PATCH v7 2/2] hw/misc/sifive_u_otp: Add backend drive support
-Date: Thu, 15 Oct 2020 12:14:24 +0800
-Message-Id: <20201015041424.23090-3-green.wan@sifive.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201015041424.23090-1-green.wan@sifive.com>
-References: <20201015041424.23090-1-green.wan@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
- envelope-from=green.wan@sifive.com; helo=mail-pj1-x1044.google.com
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=wjzs4KefBlOF2UaMlc9Vs3cFWbQkoCK4ngM2/Q6EWyk=;
+ b=tx/X7lHOUozHwp3SomVN+J26NwzXKdZ+Y/u8MnlqeepVYZiuQcdvkQbeNDNpJOYldh
+ muC+O72OvDE27VEeBy8WzaQJiRvoYq48W1jDZ1SuXk3dyqnc3xosPlAhUhrejPfk89LP
+ l5ldnsY7Yl0qD6yXov0rkEW3WuYOMpDLdqMfTj1L2B1aYY6j07chZapqAJ/f+adUrnKj
+ LbkDigNf4jEftrXDKX2qxZ2x9xLz6jCjS/DvgV2kACTFuRz5dq2c+pZ/a+GeiU/cwEJs
+ 8wgwsXeb8Q3kR88ZS8jvn++kff4Ja0r555SZKvNqVlqEQrkOCuid9zAAX/zDQfsPe/Tb
+ YlUw==
+X-Gm-Message-State: AOAM533FFe/eQ4dbQrAkiPek10zdiPtJPWNRhf5JicTmOoH/zR0vTBC8
+ SzE4ghtJ9nkGngEjPlzULW50AG5HcurzmVZBWnk=
+X-Google-Smtp-Source: ABdhPJyyC1tqR/esw+bh0b5NRS86TAU5nRU9+rlc+NfzIens0LTpBDOwrbDs91LgIgzw/Md3ibCdUXQHwFPjTiHo5Og=
+X-Received: by 2002:a25:f81e:: with SMTP id u30mr3407191ybd.332.1602743486650; 
+ Wed, 14 Oct 2020 23:31:26 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200901154711.18457-1-green.wan@sifive.com>
+ <20200901154711.18457-3-green.wan@sifive.com>
+ <CAKmqyKOqQgE0X3T100Zzi6_8X5d9XVEjam01bhCZSU=-FL-ecw@mail.gmail.com>
+ <CAJivOr4xLP1n4eVFyWHi=ckg17C_j76f=+o+YPztsYuaPDwCCw@mail.gmail.com>
+ <CAKmqyKPFbfbXSryWW40kW=RF-mx4V_nVqmdOveQ-fuLQgFbARQ@mail.gmail.com>
+ <CAJivOr7PVXi430SzPgbyFtFPqAsufy_xs1O7gfWQAS1ktTwb1A@mail.gmail.com>
+ <CAKmqyKNC5K5MEvVGaZPisTEyrePNV3jWrSYzuUcY3p62ws2VXg@mail.gmail.com>
+ <CAEUhbmWJsrcvShaeb-q8Q5W25yhPKtsQaKEYRqgyGgCogrFaQg@mail.gmail.com>
+ <CAKmqyKPnk7ZGH_XQvywb1zvC1UqQ8Yab3P37QMwNWtTS-OsD_A@mail.gmail.com>
+In-Reply-To: <CAKmqyKPnk7ZGH_XQvywb1zvC1UqQ8Yab3P37QMwNWtTS-OsD_A@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 15 Oct 2020 14:31:15 +0800
+Message-ID: <CAEUhbmW9xpxhFSkU+NU5VbSEKume5MvqPOTEA3v1vKz2yBuikg@mail.gmail.com>
+Subject: Re: [RFC PATCH v5 2/2] hw/riscv: sifive_u: Add backend drive support
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Green Wan <green.wan@sifive.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,173 +83,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2020 04:15:16 -0000
+X-List-Received-Date: Thu, 15 Oct 2020 06:31:30 -0000
 
-Add '-drive' support to OTP device. Allow users to assign a raw file
-as OTP image.
+Hi Alistair,
 
-test commands for 16k otp.img filled with zero:
+On Thu, Oct 15, 2020 at 2:51 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Wed, Oct 14, 2020 at 8:02 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > Hi Alistair,
+> >
+> > On Wed, Oct 14, 2020 at 10:46 PM Alistair Francis <alistair23@gmail.com> wrote:
+> > >
+> > > On Wed, Sep 30, 2020 at 12:10 AM Green Wan <green.wan@sifive.com> wrote:
+> > > >
+> > > > On Wed, Sep 30, 2020 at 1:08 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > > > >
+> > > > > On Mon, Sep 28, 2020 at 2:18 AM Green Wan <green.wan@sifive.com> wrote:
+> > > > > >
+> > > > > > Hi Alistair,
+> > > > > >
+> > > > > > Thanks for the review. See the reply inline below.
+> > > > > >
+> > > > > >
+> > > > > > On Sat, Sep 26, 2020 at 5:52 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > > > > > >
+> > > > > > > On Tue, Sep 1, 2020 at 8:49 AM Green Wan <green.wan@sifive.com> wrote:
+> > > > > > > >
+> > > > > > > > Add '-drive' support to OTP device. Allow users to assign a raw file
+> > > > > > > > as OTP image.
+> > > > > > >
+> > > > > > > Do you mind writing an example command line argument in the commit message?
+> > > > > > >
+> > > > > > > Also, do you have a test case for this? I would like to add it to my CI.
+> > > > > > >
+> > > > > >
+> > > > > > Do you mean qtest? I run uboot and use uboot driver to test it and
+> > > > > > didn't create a qemu test case.
+> > > > >
+> > > > > No, I just mean how are you running and testing this.
+> > > > >
+> > > > > So you are booting U-Boot, then how do you test it in U-Boot?
+> > >
+> > > Hey,
+> > >
+> > > Sorry, this email didn't send and I only just noticed.
+> > >
+> > > >
+> > > > Correct, I just enabled the configuration for
+> > > > ./drivers/misc/sifive-otp.c in uboot for normal booting access to OTP.
+> > > > And manually modify some failures write case to test write-once
+> > > > feature.
+> > >
+> > > Can you document this? I would like to include this in my tests.
+> > >
+> >
+> > See `QEMU Specific Instructions` in
+> > https://github.com/riscv/opensbi/blob/master/docs/platform/sifive_fu540.md
+>
+> Hmm... I am missing something. I don't see any details on how you
+> access the OTP and verify that reads/writes have occured. That link
+> just seems to document how to build OpenSBI with a U-boot payload.
+>
+> Does U-Boot run the tests automatically after boot?
 
-$ dd if=/dev/zero of=./otp.img bs=1k count=16
-$ ./qemu-system-riscv64 -M sifive_u -m 256M -nographic -bios none \
--kernel ../opensbi/build/platform/sifive/fu540/firmware/fw_payload.elf \
--d guest_errors -drive if=none,format=raw,file=otp.img
+So far U-Boot only performs the OTP content read during boot, because
+U-Boot needs to determine its MAC address based on the serial number
+programmed in the OTP. In normal situations, U-Boot does not perform
+any write to OTP. That's why I posted a U-Boot patch to test this QEMU
+functionality of OTP write. The U-Boot patch is a shell command to
+test the reading / writing of the OTP content. So what you need to do
+to test this, is to follow the instructions documented in the OpenSBI
+doc, then use my patch to test the OTP write.
 
-Signed-off-by: Green Wan <green.wan@sifive.com>
----
- hw/misc/sifive_u_otp.c         | 67 +++++++++++++++++++++++++++++++++-
- include/hw/misc/sifive_u_otp.h |  2 +
- 2 files changed, 68 insertions(+), 1 deletion(-)
-
-diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
-index 565eec082f..60066375ab 100644
---- a/hw/misc/sifive_u_otp.c
-+++ b/hw/misc/sifive_u_otp.c
-@@ -19,11 +19,14 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qapi/error.h"
- #include "hw/qdev-properties.h"
- #include "hw/sysbus.h"
- #include "qemu/log.h"
- #include "qemu/module.h"
- #include "hw/misc/sifive_u_otp.h"
-+#include "sysemu/blockdev.h"
-+#include "sysemu/block-backend.h"
- 
- #define WRITTEN_BIT_ON 0x1
- 
-@@ -54,6 +57,16 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
-         if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
-             (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
-             (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
-+
-+            /* read from backend */
-+            if (s->blk) {
-+                int32_t buf;
-+
-+                blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
-+                          SIFIVE_U_OTP_FUSE_WORD);
-+                return buf;
-+            }
-+
-             return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
-         } else {
-             return 0xff;
-@@ -137,7 +150,7 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
-         if (s->pwe && !s->pas) {
-             if (GET_FUSEARRAY_BIT(s->fuse_wo, s->pa, s->paio)) {
-                 qemu_log_mask(LOG_GUEST_ERROR,
--                              "Error: write idx<%u>, bit<%u>\n",
-+                              "write once error: idx<%u>, bit<%u>\n",
-                               s->pa, s->paio);
-                 break;
-             }
-@@ -145,6 +158,12 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
-             /* write bit data */
-             SET_FUSEARRAY_BIT(s->fuse, s->pa, s->paio, s->pdin);
- 
-+            /* write to backend */
-+            if (s->blk) {
-+                blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD,
-+                           &s->fuse[s->pa], SIFIVE_U_OTP_FUSE_WORD, 0);
-+            }
-+
-             /* update written bit */
-             SET_FUSEARRAY_BIT(s->fuse_wo, s->pa, s->paio, WRITTEN_BIT_ON);
-         }
-@@ -168,16 +187,48 @@ static const MemoryRegionOps sifive_u_otp_ops = {
- 
- static Property sifive_u_otp_properties[] = {
-     DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
-+    DEFINE_PROP_DRIVE("drive", SiFiveUOTPState, blk),
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
- static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
- {
-     SiFiveUOTPState *s = SIFIVE_U_OTP(dev);
-+    DriveInfo *dinfo;
- 
-     memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_u_otp_ops, s,
-                           TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-+
-+    dinfo = drive_get_next(IF_NONE);
-+    if (dinfo) {
-+        int ret;
-+        uint64_t perm;
-+        int filesize;
-+        BlockBackend *blk;
-+
-+        blk = blk_by_legacy_dinfo(dinfo);
-+        filesize = SIFIVE_U_OTP_NUM_FUSES * SIFIVE_U_OTP_FUSE_WORD;
-+        if (blk_getlength(blk) < filesize) {
-+            error_setg(errp, "OTP drive size < 16K");
-+            return;
-+        }
-+
-+        qdev_prop_set_drive_err(dev, "drive", blk, errp);
-+
-+        if (s->blk) {
-+            perm = BLK_PERM_CONSISTENT_READ |
-+                   (blk_is_read_only(s->blk) ? 0 : BLK_PERM_WRITE);
-+            ret = blk_set_perm(s->blk, perm, BLK_PERM_ALL, errp);
-+            if (ret < 0) {
-+                return;
-+            }
-+
-+            if (blk_pread(s->blk, 0, s->fuse, filesize) != filesize) {
-+                error_setg(errp, "failed to read the initial flash content");
-+            }
-+        }
-+    }
- }
- 
- static void sifive_u_otp_reset(DeviceState *dev)
-@@ -191,6 +242,20 @@ static void sifive_u_otp_reset(DeviceState *dev)
-     s->fuse[SIFIVE_U_OTP_SERIAL_ADDR] = s->serial;
-     s->fuse[SIFIVE_U_OTP_SERIAL_ADDR + 1] = ~(s->serial);
- 
-+    if (s->blk) {
-+        /* Put serial number to backend as well*/
-+        uint32_t serial_data;
-+        int index = SIFIVE_U_OTP_SERIAL_ADDR;
-+
-+        serial_data = s->serial;
-+        blk_pwrite(s->blk, index * SIFIVE_U_OTP_FUSE_WORD,
-+                   &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0);
-+
-+        serial_data = ~(s->serial);
-+        blk_pwrite(s->blk, (index + 1) * SIFIVE_U_OTP_FUSE_WORD,
-+                   &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0);
-+    }
-+
-     /* Initialize write-once map */
-     memset(s->fuse_wo, 0x00, sizeof(s->fuse_wo));
- }
-diff --git a/include/hw/misc/sifive_u_otp.h b/include/hw/misc/sifive_u_otp.h
-index ebffbc1fa5..5d0d7df455 100644
---- a/include/hw/misc/sifive_u_otp.h
-+++ b/include/hw/misc/sifive_u_otp.h
-@@ -46,6 +46,7 @@
- 
- #define SIFIVE_U_OTP_PA_MASK        0xfff
- #define SIFIVE_U_OTP_NUM_FUSES      0x1000
-+#define SIFIVE_U_OTP_FUSE_WORD      4
- #define SIFIVE_U_OTP_SERIAL_ADDR    0xfc
- 
- #define SIFIVE_U_OTP_REG_SIZE       0x1000
-@@ -80,6 +81,7 @@ struct SiFiveUOTPState {
-     uint32_t fuse_wo[SIFIVE_U_OTP_NUM_FUSES];
-     /* config */
-     uint32_t serial;
-+    BlockBackend *blk;
- };
- 
- #endif /* HW_SIFIVE_U_OTP_H */
--- 
-2.17.1
-
+Regards,
+Bin
 
