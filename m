@@ -1,66 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kTW6I-0002f1-5D
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Oct 2020 16:13:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47646)
+	id 1kTXOF-0001g9-9V
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Oct 2020 17:35:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41684)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kTW6D-0002dB-TO; Fri, 16 Oct 2020 16:13:14 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:44691)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kTW6B-00061G-JF; Fri, 16 Oct 2020 16:13:13 -0400
-Received: by mail-il1-x142.google.com with SMTP id z2so3995884ilh.11;
- Fri, 16 Oct 2020 13:13:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=v4qxiVPIRF1H7xS8eC0WSYVLrVWqHmrpyrYaqNGeG68=;
- b=koyaSkX5r3YZRSgpNn3BYwFDsUqJy3sdzzKV4PlKbpxbtCaIF9G/gPzMXZWFheeggn
- fKHg2xstOKdN/gF4VAplPbx0+vNxQ+K3A7kEnV1Wky5dyrg3i7Q+M4OCisf9ir2mAeFq
- lECQaKdGCqhz45ZDB2hEekubbTiJOp7d0HDJCeUvMLBZMM/pjxEbfBMcg/MBc3aad1/W
- tr6fzI9HsZMzfl+4x0Zy5pKb1mXY/lpwwvD3mX0/mipNh+6NSHmHyK4ggANcOQlTY1bj
- ibjCo8aj7VQfqP8bbhQ7/3PnMCsrneJ0VgoB/rx/VuN4w3PjRGZlcwTk2hLMIMD999Mh
- lJbw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=v4qxiVPIRF1H7xS8eC0WSYVLrVWqHmrpyrYaqNGeG68=;
- b=NvB6YOi5tEqq/hpzy/8agDEJlpFHq+Tewy68/cxIRd0rA/+9rXzkJyGZ8myvghpXLi
- 7RPlYMfCpBmn8bM1ki1xOINwZd34kMJJ691EqVxGUgR+zaWb+gTFDoWVDMQ/M9m0uzql
- tPu8b5hauz5aOOowOIJHbicpRK8ogQjMwC73JYrLHAOl5KmzvjHN75HGEBw619Sx1rD0
- 2/SdrlZoEbmQuH9YrY2nUde76F4z5tR4XzXlalmM3wsdIROcYBJjN20xnlxArpRUfHwk
- 3SAsqB/sPJlP+1aTpvoxAX+//VFyOxCeZyGtzelbOCYRXsdpua0Sc+n4TCseuz0KNynS
- mauw==
-X-Gm-Message-State: AOAM531O+5mD6OU5MQumkTMben8s+WL2hV7nf27QQbdB3HVZbdc0608V
- ruoHxLKn7lVcdj11cK1FIumU5VB6P+O14lyHG4g=
-X-Google-Smtp-Source: ABdhPJxacrUH2y6MrA2LwJmn26Gjh4bwtLLe4YAY89FPCRT253V5UEY2rBlsExMWv1LeMdXUr3gEQgMXnpptit7vCjg=
-X-Received: by 2002:a05:6e02:1241:: with SMTP id
- j1mr4286658ilq.267.1602879189785; 
- Fri, 16 Oct 2020 13:13:09 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201016181548.1096112-1-laurent@vivier.eu>
-In-Reply-To: <20201016181548.1096112-1-laurent@vivier.eu>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 16 Oct 2020 13:01:30 -0700
-Message-ID: <CAKmqyKMPDJj=_=_Vw_gjbut+8eKUAojmHigWmgx2WWVTm04Y0A@mail.gmail.com>
-Subject: Re: [PATCH] goldfish_rtc: re-arm the alarm after migration
-To: Laurent Vivier <laurent@vivier.eu>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Anup Patel <anup.patel@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+ (Exim 4.90_1) (envelope-from <adelt@hni.upb.de>)
+ id 1kTXOC-0001fd-0k; Fri, 16 Oct 2020 17:35:52 -0400
+Received: from shirlock.uni-paderborn.de ([2001:638:502:c003::15]:56930)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <adelt@hni.upb.de>)
+ id 1kTXO6-0007yH-MW; Fri, 16 Oct 2020 17:35:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=hni.uni-paderborn.de; s=20170601; h=To:References:Message-Id:
+ Content-Transfer-Encoding:Cc:Date:In-Reply-To:From:Subject:Mime-Version:
+ Content-Type:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=JsbfTRET59b9lal5XyZFPyehhRCO8KQPDSpRIIGz39E=; b=CFbWIPqzRUbV+t2w2Qh+i1pSP0
+ 33iMwEJ0cXkcszfmARdccQ3eaKYyciCvV2UeP9kD+F6zZ7ttkhSXh5ysltEHXEANgFyg4yQCESxz+
+ y14NWfGXKLwsU++N1AXznGjjCVRfoUg8hI4XvN6FGNCY2AP/Oy5DL+EG5pWaRuepU9FY=;
+Content-Type: text/plain;
+	charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.15\))
+Subject: Re: HTIF tohost symbol size check always fails
+From: Peer Adelt <adelt@hni.upb.de>
+In-Reply-To: <CAKmqyKPnnLHuTvosMLs+4A8QqR-XvuxgRU33c0f1Q92LJ_x8CA@mail.gmail.com>
+Date: Fri, 16 Oct 2020 23:35:37 +0200
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <7F36EF66-D48D-418C-94D2-AA66D86C38CA@hni.upb.de>
+References: <B96DF081-AEDD-470E-A99C-8A9536E0A8CE@hni.upb.de>
+ <CAKmqyKPnnLHuTvosMLs+4A8QqR-XvuxgRU33c0f1Q92LJ_x8CA@mail.gmail.com>
+To: Alistair Francis <alistair23@gmail.com>
+X-Mailer: Apple Mail (2.3445.104.15)
+X-IMT-Spam-Score: 0.0 ()
+X-Sophos-SenderHistory: ip=37.24.125.142, fs=43378715, da=90493203, mc=242,
+ sc=1, hc=241, sp=0, fso=43378715, re=0, sd=0, hd=0
+X-PMX-Version: 6.4.9.2830568, Antispam-Engine: 2.7.2.2107409,
+ Antispam-Data: 2020.10.16.212417, AntiVirus-Engine: 5.77.0,
+ AntiVirus-Data: 2020.10.16.5770002
+X-IMT-Authenticated-Sender: uid=adelt,ou=People,o=upb,c=de
+Received-SPF: neutral client-ip=2001:638:502:c003::15;
+ envelope-from=adelt@hni.upb.de; helo=shirlock.uni-paderborn.de
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001,
+ SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -73,38 +63,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2020 20:13:16 -0000
+X-List-Received-Date: Fri, 16 Oct 2020 21:35:52 -0000
 
-On Fri, Oct 16, 2020 at 11:16 AM Laurent Vivier <laurent@vivier.eu> wrote:
->
-> After a migration the clock offset is updated, but we also
-> need to re-arm the alarm if needed.
->
-> Signed-off-by: Laurent Vivier <laurent@vivier.eu>
+The solution was even easier: I forgot to load the proxy kernel. As soon =
+as I replaced the command-line parameter "-kernel <ELF>" with "-kernel =
+<PK> -append <ELF>", everything was working as expected.=20
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Without your hint about my possibly misconfigured toolchain I would have =
+probably continued to search for the error in the QEMU HTIF device. But =
+in fact it was due to the wrong binary.
 
-Alistair
+Thanks a lot! :-)
 
-> ---
->  hw/rtc/goldfish_rtc.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/hw/rtc/goldfish_rtc.c b/hw/rtc/goldfish_rtc.c
-> index 0f4e8185a796..e07ff0164e0c 100644
-> --- a/hw/rtc/goldfish_rtc.c
-> +++ b/hw/rtc/goldfish_rtc.c
-> @@ -211,6 +211,8 @@ static int goldfish_rtc_post_load(void *opaque, int version_id)
->              qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
->      s->tick_offset = s->tick_offset_vmstate - delta;
->
-> +    goldfish_rtc_set_alarm(s);
-> +
->      return 0;
->  }
->
-> --
-> 2.26.2
->
->
+> On 16. Oct 2020, at 20:03, Alistair Francis <alistair23@gmail.com> =
+wrote:
+>=20
+> On Fri, Oct 16, 2020 at 7:59 AM Peer Adelt <adelt@hni.upb.de> wrote:
+>>=20
+>> Hi,
+>>=20
+>> I have a problem with the RISC-V HTIF device.
+>>=20
+>> Every binary I have compiled for Spike on riscv32 fails with the =
+following error message: "HTIF tohost must be 8 bytes"
+>>=20
+>> This happens regardless of which program I have translated for Spike. =
+This is also the case with the official riscv-compliance tests, for =
+example.
+>>=20
+>> The query "if (st_size !=3D 8)" in the HTIF device always fails, =
+because st_size seems to be always 0.
+>>=20
+>> To be able to reproduce it:
+>> - QEMU GIT Hash: d0ed6a69d399ae193959225cdeaa9382746c91cc (tag =
+"v5.1.0")
+>=20
+> I just checked with this hash and with the current master and on both
+> I can run a ELF executable on the Spike machine for RV32.
+>=20
+>> - System: Mac OS 10.14.6 (Darwin Kernel Version 18.7.0)
+>> - Compiler: Latest SiFive Build for GCC under OSX
+>=20
+> Maybe try using an official toolchain instead of a vendor fork.
+>=20
+> Alistair
+>=20
+>> - Command: qemu-system-riscv32 -M spike -nographic -bios none -kernel =
+<ANY_SPIKE_ELF_FILE>
+>>=20
+>> Best regards,
+>> Peer Adelt
+
 
