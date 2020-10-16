@@ -1,83 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kTTKy-0007NU-Tc
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Oct 2020 13:16:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36840)
+	id 1kTTqU-0004dy-IG
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Oct 2020 13:48:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43668)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kTTKr-0007KZ-TB
- for qemu-riscv@nongnu.org; Fri, 16 Oct 2020 13:16:09 -0400
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542]:37755)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kTTqT-0004dg-73; Fri, 16 Oct 2020 13:48:49 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:33950)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kTTKp-000827-EI
- for qemu-riscv@nongnu.org; Fri, 16 Oct 2020 13:16:09 -0400
-Received: by mail-pg1-x542.google.com with SMTP id h6so1833486pgk.4
- for <qemu-riscv@nongnu.org>; Fri, 16 Oct 2020 10:16:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=3u22fuaUAC4emaWKLqxyzZ3iv7mrxTzsyPsdWnCshfA=;
- b=aAbj9O+e+hncOYXIE//uCEsIdUE/2v5mFQrinnTdWvP/VIz6qU5YdUAYjDi6c6/gyk
- MgwlTmHRcwJWgfdOKJcYnbgpATMB9kVhZDh7zlD1JNz+cSLaMs79HLh1A4CLpkDWwn4Q
- ksMNRH63PicW0NXlHEfLfcgk4On9P1J0LPUv+EpjNRvvfdf1sCKC0E03WtekALDymQVl
- 8iItQ/7J6UNn70/e+TDIdc1yOW0LvHuecotarxQYhlOCxpzTE8hwbvvRoraZRhKuzm3h
- FG01PbZ7kU6e7eLTXRbg3L+NO8DRNeOU0RugcCmy2liRxS2kt/qTMgOpWc0qAQNbWjuB
- xk7A==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kTTqR-0003bl-Dr; Fri, 16 Oct 2020 13:48:48 -0400
+Received: by mail-io1-xd42.google.com with SMTP id m17so4955387ioo.1;
+ Fri, 16 Oct 2020 10:48:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=gT2hfcXVnuoEGL7argOkM4KGTVL7vjeDNNn/xmhpkVo=;
+ b=nvC6AEXSEmHQ1h4sYskDt2cNwzGkD+EXn7i5083le4igl3aKouCqOnQMzrv5FVA36L
+ drovp5RFJv1nr9hblmNyOcloR99hO/aC10Zj4apwb9ZIyKCkLyQuqb/7vEVxXBUNwTNG
+ WMUeuvh3G6V7EVJLWmee6o3A2V7QVkBzxtJZr+MhR8eDZAOrUdHsdzPfUxMRSoLFdXBl
+ 4FDxUNJXQ8PqbyywNebhrLs2rKYJOKUzWlJ8xa89hh3v2Jqb69Y1FzgXuBoED67/VH7G
+ Usg1X7iF4xXxI6cuGtlUvck9Eo3ZdmPg3EcO7tFfQn+7j10D9OX4gfvSgian5ZuigqFv
+ ZKog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=3u22fuaUAC4emaWKLqxyzZ3iv7mrxTzsyPsdWnCshfA=;
- b=cb46T0aj6TO2si5XdD/+Yhv8L1eMluIgU160M3/XC6zbGjYZgvelaOKsr/CXz9Vcbh
- zecvyZ+Ld5IDAU+eyBi5KAHfHOxFYOQtlnfed0J/IupwYCluN3LQaFHvZ5mLAC3uz/Rr
- usPQuZODKIT+aomRx29OTo4/z//a9f7CcehRPjjGjzjzuDUlIb0T7nUsXdRjJ87L1bE8
- CHzyS+/ATUumoWzj5zO+hCoWuj7rIQNzjMIiH+RDntlQKWom70fqCrp5uKFT2nD/KuyR
- p03zFF5qfRkS0jjhxu2boC5PO9udO2Cp03X4TuR640eqVWBzuaCqVUSJc+RH/wu5oQqk
- kQcA==
-X-Gm-Message-State: AOAM531fmJTTIFr+myW3vdo5rsZ/ZiyAWk7K4No5QAxNs8qpZWdb9NKB
- 7Ls/Zj6Wwihgmm5Cu3ghgXosKw5ucgrBvQ==
-X-Google-Smtp-Source: ABdhPJxxKpWWWX60mXIUMRNkSeF4LGHxgofXDwd5A+qMudQpjuTe/wtTsVg3+/SIYQ4ZMNeggCathw==
-X-Received: by 2002:a63:1212:: with SMTP id h18mr3934041pgl.196.1602868565079; 
- Fri, 16 Oct 2020 10:16:05 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id m4sm3317748pgv.87.2020.10.16.10.16.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Oct 2020 10:16:03 -0700 (PDT)
-Subject: Re: [PATCH v2 2/5] [RISCV_PM] Support CSRs required for RISC-V PM
- extension except for ones in hypervisor mode
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: "space.monkey.delivers@gmail.com" <space.monkey.delivers@gmail.com>,
- Dave Smith <kupokupokupopo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "open list:All patches CC here" <qemu-devel@nongnu.org>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20201015152139.28903-1-space.monkey.delivers@gmail.com>
- <20201015152139.28903-2-space.monkey.delivers@gmail.com>
- <d39e0c59-3b04-6401-aaac-8e202fb5036a@linaro.org>
- <CAFukJ-BwbtRyCYFW3+v4f8xmri3+Yk5ayhgZYen-6fj1xjmD9g@mail.gmail.com>
- <CAFukJ-AYk6VjC=8h83+Y==XbTwXODP34_JMzndW6_taD2uu4+g@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <65746626-278a-d380-7df6-4cd71366344a@linaro.org>
-Date: Fri, 16 Oct 2020 10:16:01 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=gT2hfcXVnuoEGL7argOkM4KGTVL7vjeDNNn/xmhpkVo=;
+ b=Ho2xAl1xJV+t5WtEKSTL26C/nYskpP1GIAZ0900ylZY1tGuvxE608zoFr56xsjc+eq
+ 7h86aA7Q/axrijAFV+k9uDjG/8tiJSMUemyef/WzERd1piqI6MpgUUN7javPtOA+Blw+
+ TUJDOeheIIkysT33IwYv1POAfwN8GdCWDK5qwzi1oKUZtuvI6lY1b3NvY0fGrFimhQco
+ /7UWNrcfeEkpj9HvEo9FFdItZvyHFsFB6e+4M9ZFMWFn2mphAvN9nWc4gS+C2pbfFZ5f
+ 8XeBsvM05zuqZ+0+xUNDxc/FwvfLLBhOxCWdCBWrtzO2KexP2IVbV317qCJkGLhOjN9q
+ Do3A==
+X-Gm-Message-State: AOAM533KYdss87ihDwNvPCd9nRIIb4HsExKevbk/SHfuPP0B8KCE6hQ+
+ rOgz9ksZn7XMNURGpYd3xl5770eQnz2nhm5YlJM=
+X-Google-Smtp-Source: ABdhPJzYIHAWC7yYKwXAPt2bCie6mEFWXwOJMja3DhYUhD7i44XOABxtkbmJ9dGc2wZ6ZTl9cfzMsE+t4TkF9xGTEPc=
+X-Received: by 2002:a6b:c9c9:: with SMTP id z192mr3258828iof.175.1602870525589; 
+ Fri, 16 Oct 2020 10:48:45 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAFukJ-AYk6VjC=8h83+Y==XbTwXODP34_JMzndW6_taD2uu4+g@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::542;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x542.google.com
+References: <CAKmqyKODEgnkw4zBbsNK1zQ7qaiKWEAZBpwhnHzEetjgWpxtzQ@mail.gmail.com>
+ <20201016171000.21240-1-ivan.griffin@emdalo.com>
+In-Reply-To: <20201016171000.21240-1-ivan.griffin@emdalo.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 16 Oct 2020 10:37:06 -0700
+Message-ID: <CAKmqyKPbw_Pf2DtjU=LYNM4YJhxkaTB7ukbZb56NZDR9BUtzAQ@mail.gmail.com>
+Subject: Re: [PATCH v2] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap entry
+To: Ivan Griffin <ivan.griffin@emdalo.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ QEMU Trivial <qemu-trivial@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.253,
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -92,14 +73,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2020 17:16:10 -0000
+X-List-Received-Date: Fri, 16 Oct 2020 17:48:49 -0000
 
-On 10/15/20 11:05 AM, Alexey Baturo wrote:
-> Meanwhile, do you think applying **MTE *masks while reading CSR values is a
-> good solution for now?
+On Fri, Oct 16, 2020 at 10:10 AM Ivan Griffin <ivan.griffin@emdalo.com> wrote:
+>
+> Adding the PolarFire SoC IOSCBCTRL memory region to prevent QEMU
+> reporting a STORE/AMO Access Fault.
+>
+> This region is used by the PolarFire SoC port of U-Boot to
+> interact with the FPGA system controller.
+>
+> Signed-off-by: Ivan Griffin <ivan.griffin@emdalo.com>
 
-Yes.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
+Alistair
 
-r~
+> ---
+>  hw/riscv/microchip_pfsoc.c         | 10 ++++++++++
+>  include/hw/riscv/microchip_pfsoc.h |  1 +
+>  2 files changed, 11 insertions(+)
+>
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index 4627179cd3..9aaa276ee2 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -97,6 +97,7 @@ static const struct MemmapEntry {
+>      [MICROCHIP_PFSOC_GPIO2] =           { 0x20122000,     0x1000 },
+>      [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
+>      [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
+> +    [MICROCHIP_PFSOC_IOSCB_CTRL] =      { 0x37020000,     0x1000 },
+>      [MICROCHIP_PFSOC_IOSCB_CFG] =       { 0x37080000,     0x1000 },
+>      [MICROCHIP_PFSOC_DRAM] =            { 0x80000000,        0x0 },
+>  };
+> @@ -341,6 +342,15 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>      create_unimplemented_device("microchip.pfsoc.ioscb.cfg",
+>          memmap[MICROCHIP_PFSOC_IOSCB_CFG].base,
+>          memmap[MICROCHIP_PFSOC_IOSCB_CFG].size);
+> +
+> +    /* IOSCBCTRL
+> +     *
+> +     * These registers are not documented in the official documentation
+> +     * but used by the polarfire-soc-bare-meta-library code
+> +     */
+> +    create_unimplemented_device("microchip.pfsoc.ioscb.ctrl",
+> +        memmap[MICROCHIP_PFSOC_IOSCB_CTRL].base,
+> +        memmap[MICROCHIP_PFSOC_IOSCB_CTRL].size);
+>  }
+>
+>  static void microchip_pfsoc_soc_class_init(ObjectClass *oc, void *data)
+> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+> index 8bfc7e1a85..3f1874b162 100644
+> --- a/include/hw/riscv/microchip_pfsoc.h
+> +++ b/include/hw/riscv/microchip_pfsoc.h
+> @@ -95,6 +95,7 @@ enum {
+>      MICROCHIP_PFSOC_ENVM_CFG,
+>      MICROCHIP_PFSOC_ENVM_DATA,
+>      MICROCHIP_PFSOC_IOSCB_CFG,
+> +    MICROCHIP_PFSOC_IOSCB_CTRL,
+>      MICROCHIP_PFSOC_DRAM,
+>  };
+>
+> --
+> 2.17.1
+>
 
