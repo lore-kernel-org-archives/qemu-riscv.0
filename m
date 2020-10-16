@@ -1,56 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kTXOF-0001g9-9V
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Oct 2020 17:35:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41684)
+	id 1kTXx8-000361-DN
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Oct 2020 18:12:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48814)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <adelt@hni.upb.de>)
- id 1kTXOC-0001fd-0k; Fri, 16 Oct 2020 17:35:52 -0400
-Received: from shirlock.uni-paderborn.de ([2001:638:502:c003::15]:56930)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <adelt@hni.upb.de>)
- id 1kTXO6-0007yH-MW; Fri, 16 Oct 2020 17:35:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=hni.uni-paderborn.de; s=20170601; h=To:References:Message-Id:
- Content-Transfer-Encoding:Cc:Date:In-Reply-To:From:Subject:Mime-Version:
- Content-Type:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JsbfTRET59b9lal5XyZFPyehhRCO8KQPDSpRIIGz39E=; b=CFbWIPqzRUbV+t2w2Qh+i1pSP0
- 33iMwEJ0cXkcszfmARdccQ3eaKYyciCvV2UeP9kD+F6zZ7ttkhSXh5ysltEHXEANgFyg4yQCESxz+
- y14NWfGXKLwsU++N1AXznGjjCVRfoUg8hI4XvN6FGNCY2AP/Oy5DL+EG5pWaRuepU9FY=;
-Content-Type: text/plain;
-	charset=us-ascii
-Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.15\))
-Subject: Re: HTIF tohost symbol size check always fails
-From: Peer Adelt <adelt@hni.upb.de>
-In-Reply-To: <CAKmqyKPnnLHuTvosMLs+4A8QqR-XvuxgRU33c0f1Q92LJ_x8CA@mail.gmail.com>
-Date: Fri, 16 Oct 2020 23:35:37 +0200
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <7F36EF66-D48D-418C-94D2-AA66D86C38CA@hni.upb.de>
-References: <B96DF081-AEDD-470E-A99C-8A9536E0A8CE@hni.upb.de>
- <CAKmqyKPnnLHuTvosMLs+4A8QqR-XvuxgRU33c0f1Q92LJ_x8CA@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-X-Mailer: Apple Mail (2.3445.104.15)
-X-IMT-Spam-Score: 0.0 ()
-X-Sophos-SenderHistory: ip=37.24.125.142, fs=43378715, da=90493203, mc=242,
- sc=1, hc=241, sp=0, fso=43378715, re=0, sd=0, hd=0
-X-PMX-Version: 6.4.9.2830568, Antispam-Engine: 2.7.2.2107409,
- Antispam-Data: 2020.10.16.212417, AntiVirus-Engine: 5.77.0,
- AntiVirus-Data: 2020.10.16.5770002
-X-IMT-Authenticated-Sender: uid=adelt,ou=People,o=upb,c=de
-Received-SPF: neutral client-ip=2001:638:502:c003::15;
- envelope-from=adelt@hni.upb.de; helo=shirlock.uni-paderborn.de
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kTXx4-00034N-Jm; Fri, 16 Oct 2020 18:11:54 -0400
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:35498)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kTXwy-0004GO-8m; Fri, 16 Oct 2020 18:11:51 -0400
+Received: by mail-lf1-x144.google.com with SMTP id 77so5065399lfl.2;
+ Fri, 16 Oct 2020 15:11:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=THF7FWhjYVDTkO5fO/fdIAKdtpkLYhfyetBbNjSmlW4=;
+ b=I8SUAPgT0/PmvU9yiYoRbwywu/P3hiLXz6mXykLMuPkFMimJPzMvD/Bq+HoLeBp5yR
+ dechzXki0gXX8BXKrYU7/iLswphEMnIgVltQXrX8LQ9ygmvWUGR+DDcpaccLCHIueTjY
+ /LTI9aXS7l70nup5D1N1rgZp/pZtE/gLM/D1n3lo5si9nGQzNs0IlM6gPHOmlkaABAhE
+ Tv0avloCsv5WgsJzxqx2bs2YKiYR51s6XScBk0u+1TQ9cLseEhPpyZSoyJgf/81YctBq
+ hHO6WTBjIk1HMDZLEj4pw7I1CUYLcjtyYReVjYwrmWAg6vjmt8f8Dkjfo4ZiDOvaF3AP
+ Pxqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=THF7FWhjYVDTkO5fO/fdIAKdtpkLYhfyetBbNjSmlW4=;
+ b=g+5d4hguKJORG8sE+9oa8foyJM/uZzxF+reM+LyCQ9c1wr23Js+TTR6fEgLywEalzv
+ FXAWMAHee0ez1W/aBED4Lsb+sMDFfHNODt2BtEale9/KFSmWGKOrt2DOArLVOQrvUxRq
+ gLQgRQP4NPpQou78p5FZ341KyVPdjHf29MfQJzSNMk2MzkK0KEON51OCsHXT0QRgLRUz
+ Ha5gSF4+aN010c+vkHjxL+FQ8CrnD7XXY41Waex/KTCCjP6cVdg5p12/XVMMf45YJeXt
+ 0un2ltRPGu0c8FR0vi9/lDkRZ/XxqtRMDm82t8MOwiKCyIXs6oaAmm9rgBVFUCBgqs2c
+ K9NQ==
+X-Gm-Message-State: AOAM5317gK6o0IaGdwbPPlSLpaJVstMhGbNCRBFWNOkPS2em4gxnSmKs
+ Ff4Z+5719goZNlm+CteH2V0=
+X-Google-Smtp-Source: ABdhPJzk0LlVouqYVefXllv01hS+mtONG3FguF/hKCKSnqfe2/+ilZMJs0+jZHJQqF4Equs4kGH1CA==
+X-Received: by 2002:a05:6512:360e:: with SMTP id
+ f14mr2097481lfs.44.1602886304601; 
+ Fri, 16 Oct 2020 15:11:44 -0700 (PDT)
+Received: from neptune.lab ([46.39.229.194])
+ by smtp.googlemail.com with ESMTPSA id d6sm1303010lja.63.2020.10.16.15.11.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 Oct 2020 15:11:43 -0700 (PDT)
+From: Alexey Baturo <baturo.alexey@gmail.com>
+X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v3 0/5] RISC-V Pointer Masking implementation
+Date: Sat, 17 Oct 2020 01:11:32 +0300
+Message-Id: <20201016221138.10371-1-space.monkey.delivers@gmail.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::144;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x144.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001,
- SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -63,55 +79,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2020 21:35:52 -0000
+X-List-Received-Date: Fri, 16 Oct 2020 22:11:55 -0000
 
-The solution was even easier: I forgot to load the proxy kernel. As soon =
-as I replaced the command-line parameter "-kernel <ELF>" with "-kernel =
-<PK> -append <ELF>", everything was working as expected.=20
+Hi folks,
 
-Without your hint about my possibly misconfigured toolchain I would have =
-probably continued to search for the error in the QEMU HTIF device. But =
-in fact it was due to the wrong binary.
+This is third iteration of patches to support Pointer Masking for RISC-V.
+Most of suggestions have been addressed, however some of them not:
+- applying mask for return value while reading PM CSR has been kept to mask higher priv level bits
+- check_pm_current_disabled is not placed into CSR predicate, since the spec expects to read zero from PM CSR if no PM extenstion is present
 
-Thanks a lot! :-)
+Thanks
 
-> On 16. Oct 2020, at 20:03, Alistair Francis <alistair23@gmail.com> =
-wrote:
->=20
-> On Fri, Oct 16, 2020 at 7:59 AM Peer Adelt <adelt@hni.upb.de> wrote:
->>=20
->> Hi,
->>=20
->> I have a problem with the RISC-V HTIF device.
->>=20
->> Every binary I have compiled for Spike on riscv32 fails with the =
-following error message: "HTIF tohost must be 8 bytes"
->>=20
->> This happens regardless of which program I have translated for Spike. =
-This is also the case with the official riscv-compliance tests, for =
-example.
->>=20
->> The query "if (st_size !=3D 8)" in the HTIF device always fails, =
-because st_size seems to be always 0.
->>=20
->> To be able to reproduce it:
->> - QEMU GIT Hash: d0ed6a69d399ae193959225cdeaa9382746c91cc (tag =
-"v5.1.0")
->=20
-> I just checked with this hash and with the current master and on both
-> I can run a ELF executable on the Spike machine for RV32.
->=20
->> - System: Mac OS 10.14.6 (Darwin Kernel Version 18.7.0)
->> - Compiler: Latest SiFive Build for GCC under OSX
->=20
-> Maybe try using an official toolchain instead of a vendor fork.
->=20
-> Alistair
->=20
->> - Command: qemu-system-riscv32 -M spike -nographic -bios none -kernel =
-<ANY_SPIKE_ELF_FILE>
->>=20
->> Best regards,
->> Peer Adelt
+Alexey Baturo (4):
+  [RISCV_PM] Add J-extension into RISC-V
+  [RISCV_PM] Support CSRs required for RISC-V PM extension except for
+    ones in hypervisor mode
+  [RISCV_PM] Print new PM CSRs in QEMU logs
+  [RISCV_PM] Support pointer masking for RISC-V for i/c/f/d/a types of
+    instructions
+
+Anatoly Parshintsev (1):
+  [RISCV_PM] Implement address masking functions required for RISC-V
+    Pointer Masking extension
+
+ target/riscv/cpu.c                      |  24 +++
+ target/riscv/cpu.h                      |  32 +++
+ target/riscv/cpu_bits.h                 |  66 ++++++
+ target/riscv/csr.c                      | 264 ++++++++++++++++++++++++
+ target/riscv/insn_trans/trans_rva.c.inc |   3 +
+ target/riscv/insn_trans/trans_rvd.c.inc |   2 +
+ target/riscv/insn_trans/trans_rvf.c.inc |   2 +
+ target/riscv/insn_trans/trans_rvi.c.inc |   2 +
+ target/riscv/translate.c                |  44 ++++
+ 9 files changed, 439 insertions(+)
+
+-- 
+2.20.1
 
 
