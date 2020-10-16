@@ -1,53 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kTTqU-0004dy-IG
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Oct 2020 13:48:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43668)
+	id 1kTUFr-0003nj-3H
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Oct 2020 14:15:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49730)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kTTqT-0004dg-73; Fri, 16 Oct 2020 13:48:49 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:33950)
+ id 1kTUFo-0003kw-Um; Fri, 16 Oct 2020 14:15:00 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:33498)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kTTqR-0003bl-Dr; Fri, 16 Oct 2020 13:48:48 -0400
-Received: by mail-io1-xd42.google.com with SMTP id m17so4955387ioo.1;
- Fri, 16 Oct 2020 10:48:46 -0700 (PDT)
+ id 1kTUFZ-0006vG-TY; Fri, 16 Oct 2020 14:14:59 -0400
+Received: by mail-io1-xd42.google.com with SMTP id r4so5068791ioh.0;
+ Fri, 16 Oct 2020 11:14:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gT2hfcXVnuoEGL7argOkM4KGTVL7vjeDNNn/xmhpkVo=;
- b=nvC6AEXSEmHQ1h4sYskDt2cNwzGkD+EXn7i5083le4igl3aKouCqOnQMzrv5FVA36L
- drovp5RFJv1nr9hblmNyOcloR99hO/aC10Zj4apwb9ZIyKCkLyQuqb/7vEVxXBUNwTNG
- WMUeuvh3G6V7EVJLWmee6o3A2V7QVkBzxtJZr+MhR8eDZAOrUdHsdzPfUxMRSoLFdXBl
- 4FDxUNJXQ8PqbyywNebhrLs2rKYJOKUzWlJ8xa89hh3v2Jqb69Y1FzgXuBoED67/VH7G
- Usg1X7iF4xXxI6cuGtlUvck9Eo3ZdmPg3EcO7tFfQn+7j10D9OX4gfvSgian5ZuigqFv
- ZKog==
+ :cc; bh=dwb5ihYTqb/d3Z/kATsMaRbOI5NT+d9ZY5pwhqdx504=;
+ b=Yt01a2LVoq9lmtuXrLzp3gC+qAIDpAUjtD/Dtz2yd821dYmRpPTHgHtNHcGwXTZaJz
+ JB+I7KGc8HD8oJrnQ9kZDHvKyRpn5FSKe9hLTne+zsYURKZ33dsHT6sz6E4qAaRl04LS
+ pwV+tegPOq+ynCYVXsWnchKmrzM7R5t/Oub17k2VfMocVHD6b8anQnB+SSOiMEQjQxRG
+ zHauH78UJkAMS7ptzPrRgkeE4sLwyDnOxpSclZ9XR0gMJw3Cb8qTZUEhES609/kk+unq
+ aKwOG65e0H8ORkPl7YatUrkm8r8+rNOJvgsyrdfdGDRvBdpz3JfasPVbCCjYDSwQftxc
+ 9prw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=gT2hfcXVnuoEGL7argOkM4KGTVL7vjeDNNn/xmhpkVo=;
- b=Ho2xAl1xJV+t5WtEKSTL26C/nYskpP1GIAZ0900ylZY1tGuvxE608zoFr56xsjc+eq
- 7h86aA7Q/axrijAFV+k9uDjG/8tiJSMUemyef/WzERd1piqI6MpgUUN7javPtOA+Blw+
- TUJDOeheIIkysT33IwYv1POAfwN8GdCWDK5qwzi1oKUZtuvI6lY1b3NvY0fGrFimhQco
- /7UWNrcfeEkpj9HvEo9FFdItZvyHFsFB6e+4M9ZFMWFn2mphAvN9nWc4gS+C2pbfFZ5f
- 8XeBsvM05zuqZ+0+xUNDxc/FwvfLLBhOxCWdCBWrtzO2KexP2IVbV317qCJkGLhOjN9q
- Do3A==
-X-Gm-Message-State: AOAM533KYdss87ihDwNvPCd9nRIIb4HsExKevbk/SHfuPP0B8KCE6hQ+
- rOgz9ksZn7XMNURGpYd3xl5770eQnz2nhm5YlJM=
-X-Google-Smtp-Source: ABdhPJzYIHAWC7yYKwXAPt2bCie6mEFWXwOJMja3DhYUhD7i44XOABxtkbmJ9dGc2wZ6ZTl9cfzMsE+t4TkF9xGTEPc=
-X-Received: by 2002:a6b:c9c9:: with SMTP id z192mr3258828iof.175.1602870525589; 
- Fri, 16 Oct 2020 10:48:45 -0700 (PDT)
+ bh=dwb5ihYTqb/d3Z/kATsMaRbOI5NT+d9ZY5pwhqdx504=;
+ b=AWZkmEHOo3og5AFFsvVYx3a8hT8wMd96xk1+8YihZZuRSvWcL3Ir1GJTCP0RYzNTEk
+ sQZJ0n1Lk3UGKt+DxyalEQyV87xIuSDu442mBdyaIul97L5d7DIa5UOa9v2Du/OVIlEE
+ egQ1r+XHDRuVxs6TKXZjK8rtWRgoxltNXaDzITRjrY0smHSpoqnG61Tdh9jAGbi0WIsZ
+ ePAtaIsqwqa4hjdK7WKqH4iW8xdzxAAuPgiGkijHslXQobjrhvB1sBl4eX3ENKEM3j69
+ nKH8BjUUS8zye/crcFrFHyUHfB11STNqFcNwCHardbh9ZxKj18Fb1TYKASHs/iwtxeWe
+ 6k6g==
+X-Gm-Message-State: AOAM5325bouFKDk85TeXL5il1gpiMMprKxE53ijH2zQl9KrDe8sjFnqC
+ W8tyuhF6KJZ1dxOzmmiAIYwdgYFkuRdorY8fMf4=
+X-Google-Smtp-Source: ABdhPJyKzZyKY45eqJSmT0AgwdSvvnnDwTvKUdWOJu9jQJAg2TzgceLVpxoBZxLR1Tl5MgnOvm1YZGeI+7sr0ikloFM=
+X-Received: by 2002:a05:6638:a90:: with SMTP id
+ 16mr3713868jas.91.1602872081497; 
+ Fri, 16 Oct 2020 11:14:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAKmqyKODEgnkw4zBbsNK1zQ7qaiKWEAZBpwhnHzEetjgWpxtzQ@mail.gmail.com>
- <20201016171000.21240-1-ivan.griffin@emdalo.com>
-In-Reply-To: <20201016171000.21240-1-ivan.griffin@emdalo.com>
+References: <B96DF081-AEDD-470E-A99C-8A9536E0A8CE@hni.upb.de>
+In-Reply-To: <B96DF081-AEDD-470E-A99C-8A9536E0A8CE@hni.upb.de>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 16 Oct 2020 10:37:06 -0700
-Message-ID: <CAKmqyKPbw_Pf2DtjU=LYNM4YJhxkaTB7ukbZb56NZDR9BUtzAQ@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap entry
-To: Ivan Griffin <ivan.griffin@emdalo.com>
+Date: Fri, 16 Oct 2020 11:03:02 -0700
+Message-ID: <CAKmqyKPnnLHuTvosMLs+4A8QqR-XvuxgRU33c0f1Q92LJ_x8CA@mail.gmail.com>
+Subject: Re: HTIF tohost symbol size check always fails
+To: Peer Adelt <adelt@hni.upb.de>
 Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- QEMU Trivial <qemu-trivial@nongnu.org>
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
 Content-Type: text/plain; charset="UTF-8"
 Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
  envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
@@ -73,68 +73,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2020 17:48:49 -0000
+X-List-Received-Date: Fri, 16 Oct 2020 18:15:01 -0000
 
-On Fri, Oct 16, 2020 at 10:10 AM Ivan Griffin <ivan.griffin@emdalo.com> wrote:
+On Fri, Oct 16, 2020 at 7:59 AM Peer Adelt <adelt@hni.upb.de> wrote:
 >
-> Adding the PolarFire SoC IOSCBCTRL memory region to prevent QEMU
-> reporting a STORE/AMO Access Fault.
+> Hi,
 >
-> This region is used by the PolarFire SoC port of U-Boot to
-> interact with the FPGA system controller.
+> I have a problem with the RISC-V HTIF device.
 >
-> Signed-off-by: Ivan Griffin <ivan.griffin@emdalo.com>
+> Every binary I have compiled for Spike on riscv32 fails with the following error message: "HTIF tohost must be 8 bytes"
+>
+> This happens regardless of which program I have translated for Spike. This is also the case with the official riscv-compliance tests, for example.
+>
+> The query "if (st_size != 8)" in the HTIF device always fails, because st_size seems to be always 0.
+>
+> To be able to reproduce it:
+> - QEMU GIT Hash: d0ed6a69d399ae193959225cdeaa9382746c91cc (tag "v5.1.0")
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I just checked with this hash and with the current master and on both
+I can run a ELF executable on the Spike machine for RV32.
+
+> - System: Mac OS 10.14.6 (Darwin Kernel Version 18.7.0)
+> - Compiler: Latest SiFive Build for GCC under OSX
+
+Maybe try using an official toolchain instead of a vendor fork.
 
 Alistair
 
-> ---
->  hw/riscv/microchip_pfsoc.c         | 10 ++++++++++
->  include/hw/riscv/microchip_pfsoc.h |  1 +
->  2 files changed, 11 insertions(+)
+> - Command: qemu-system-riscv32 -M spike -nographic -bios none -kernel <ANY_SPIKE_ELF_FILE>
 >
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index 4627179cd3..9aaa276ee2 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -97,6 +97,7 @@ static const struct MemmapEntry {
->      [MICROCHIP_PFSOC_GPIO2] =           { 0x20122000,     0x1000 },
->      [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
->      [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
-> +    [MICROCHIP_PFSOC_IOSCB_CTRL] =      { 0x37020000,     0x1000 },
->      [MICROCHIP_PFSOC_IOSCB_CFG] =       { 0x37080000,     0x1000 },
->      [MICROCHIP_PFSOC_DRAM] =            { 0x80000000,        0x0 },
->  };
-> @@ -341,6 +342,15 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
->      create_unimplemented_device("microchip.pfsoc.ioscb.cfg",
->          memmap[MICROCHIP_PFSOC_IOSCB_CFG].base,
->          memmap[MICROCHIP_PFSOC_IOSCB_CFG].size);
-> +
-> +    /* IOSCBCTRL
-> +     *
-> +     * These registers are not documented in the official documentation
-> +     * but used by the polarfire-soc-bare-meta-library code
-> +     */
-> +    create_unimplemented_device("microchip.pfsoc.ioscb.ctrl",
-> +        memmap[MICROCHIP_PFSOC_IOSCB_CTRL].base,
-> +        memmap[MICROCHIP_PFSOC_IOSCB_CTRL].size);
->  }
->
->  static void microchip_pfsoc_soc_class_init(ObjectClass *oc, void *data)
-> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-> index 8bfc7e1a85..3f1874b162 100644
-> --- a/include/hw/riscv/microchip_pfsoc.h
-> +++ b/include/hw/riscv/microchip_pfsoc.h
-> @@ -95,6 +95,7 @@ enum {
->      MICROCHIP_PFSOC_ENVM_CFG,
->      MICROCHIP_PFSOC_ENVM_DATA,
->      MICROCHIP_PFSOC_IOSCB_CFG,
-> +    MICROCHIP_PFSOC_IOSCB_CTRL,
->      MICROCHIP_PFSOC_DRAM,
->  };
->
-> --
-> 2.17.1
->
+> Best regards,
+> Peer Adelt
 
