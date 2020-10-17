@@ -1,46 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kTgO0-0002Uq-TT
-	for mharc-qemu-riscv@gnu.org; Sat, 17 Oct 2020 03:12:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36842)
+	id 1kTgO1-0002W0-9L
+	for mharc-qemu-riscv@gnu.org; Sat, 17 Oct 2020 03:12:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36828)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kTgNt-0002La-Ct; Sat, 17 Oct 2020 03:12:09 -0400
-Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:43311)
+ id 1kTgNr-0002K4-G9; Sat, 17 Oct 2020 03:12:07 -0400
+Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:44554)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kTgNp-0003lF-6i; Sat, 17 Oct 2020 03:12:09 -0400
-Received: by mail-lf1-x141.google.com with SMTP id l28so6249126lfp.10;
- Sat, 17 Oct 2020 00:12:04 -0700 (PDT)
+ id 1kTgNn-0003kH-NO; Sat, 17 Oct 2020 03:12:07 -0400
+Received: by mail-lf1-x144.google.com with SMTP id b1so6248953lfp.11;
+ Sat, 17 Oct 2020 00:12:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=Lc9QIvOC4BQ5aEV3wggBnbdGYDm7vcPEJjFI1O17k4M=;
- b=ji0W6mX2C5dsWJ5Jc4KfU5qN8J6valFn9cIH20BjDlia5PNJjOhrCGrfWeXN5QHwM0
- ZhZrdSKr+ZsVzh4jiOtxo6WRzILemChReCige29ftJwybtbT6C5Y19ACH7IL7JvAb0ej
- LrWC2SsNtmI7PKofJwacknEjjyKjPxf+Gtw5PXxjB/u5OU/11V6TErF2OzhUezv+Vx9p
- TvcgkIVqNstd2CjjQkMV6IQqu5EsgatZQ4pIF9Wh6PLgHQCW/jXNfgavN9kZ81uCgls2
- pysWH9myzUJGLWNZUtxSsNi+Kc2E9qpYtzkiFBH5w96kPYFCr8B0brhDkSklCN5G5Z3+
- BZDA==
+ bh=qrQtqAjUROe7fmEpS/MuFCEtm0EhCZVesv3G9r8oUO8=;
+ b=TpPNff02TOxLwWO6oL5lNcgUNqKVWKVMUPXF/A7L9FjENEzL0IzywwJb3pYTmsGJDZ
+ FevJbwY5IzTdB6ijeiWxIJaGfs2aWDEqZXitPXq/XGGETf/KNmMl5aaSkFqxSuu+nUx1
+ OK9lAnwP8QGA626SF3O1u/CfZnotOdb12r+87ITXYLdtlEzQqwgdbZJ9pO2jujxGxVLO
+ e46CH1ts7erQBoNMXp/kXBuHg/FK0PkxJy7AnqMT+5SVR3cBElY9JlUvIXEQ0u3LsPcG
+ JNwMPr7iF9MTtuUIOEjnX0hSNPN8uBnuaxi9VWEvztkx3HzMUWFWIxgwBDm2+PS6sSI+
+ OueA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=Lc9QIvOC4BQ5aEV3wggBnbdGYDm7vcPEJjFI1O17k4M=;
- b=mCSM47wAZ1w5r8yzVhVtofM3UM//AZRGexTJklAWhycsmIWYjbN6UdWdK/AgUFnsiq
- pbRvtSjLt07kvmpnu9gqnlJz8lLJeENcDaSgX9e1TzW5QVVVOE6ZMcE5iW1ND4pYEj1a
- CBQ4zmsisb/967S7+8n/T/YfqSyo0i369pv3jtohZ/c9v8dfgoNiE0mGwzPtvLa/76Hr
- 24r6K2JEQzxn0qJP9ivt28V8IuloNocdOU0f+cUA3wlIxwNmHPlizxVU4lBsCtuG+vD1
- DrcojiIcAVYu9IIGxH7YQtQ9eJ9at2NHWkaneeImPDveZDI5BqBRriWDs/nPcAZ5IwVP
- yoPA==
-X-Gm-Message-State: AOAM533gdOGwj4Ww9dBUR5kcPLiAHQENZjarfrwIlbZkxJbGdSjykL8L
- ll9g+4TmaOaBg3xMa0c4LpE=
-X-Google-Smtp-Source: ABdhPJy2tLjS3HqMGLCBUkaekxD/kpuNiL597GYgRQJo9qkhRQQ2ooKLrV/vXc4mIKXsuumPnbBA+Q==
-X-Received: by 2002:a19:3859:: with SMTP id d25mr3058111lfj.179.1602918723203; 
- Sat, 17 Oct 2020 00:12:03 -0700 (PDT)
-Received: from neptune.lab ([46.39.229.194])
- by smtp.googlemail.com with ESMTPSA id 184sm1626905lfh.232.2020.10.17.00.12.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ bh=qrQtqAjUROe7fmEpS/MuFCEtm0EhCZVesv3G9r8oUO8=;
+ b=qSflEEmrl5UftfcmlPHwwlPAqfIxZgZJnFfp81NXGriLf1ab4R4IzlazwoA5M+HgxH
+ +4JlPXxMcNKPJ2EI6uQ8pGP/7zHudujpEtkh0ikeiaWs4Q5s8iHaJ+UfnKIrlmQsXd0f
+ LWCmEmWVTCsFVShk1HDhuk+ePDBPjnaTlku56y5dyMqyXAHx+BhLufXcX2IpNxbPjVm1
+ zur8QbHzHx0An2hqYqB52Y8PT3hDpAKxfj03w1ufImaAve0CK+lSzZoFbC/uXZ0baAEt
+ y2Cd7r3vY2HfQZre2Z+RrPx5YQ99fMfxEaJkwS7Y5yKa25msB56jqqUIm0pDj4f0r/zq
+ FKWg==
+X-Gm-Message-State: AOAM5327H0nqUL8q1J39dOZxtTAYXealqKQaxLraMBrdFve9RrJJaZ/U
+ 74YlS4WUG6d8y9iPtmFzsuk=
+X-Google-Smtp-Source: ABdhPJw3odaR8vKrk7K5H/ias+iFy1AuJt3spB3r2aOIl8zFfN6BNTCBTq8jdYpK008Y5XJ523a+hg==
+X-Received: by 2002:a19:8c17:: with SMTP id o23mr2531938lfd.279.1602918722065; 
  Sat, 17 Oct 2020 00:12:02 -0700 (PDT)
+Received: from neptune.lab ([46.39.229.194])
+ by smtp.googlemail.com with ESMTPSA id 184sm1626905lfh.232.2020.10.17.00.12.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 17 Oct 2020 00:12:01 -0700 (PDT)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
 To: 
@@ -49,25 +49,24 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v4 4/5] [RISCV_PM] Support pointer masking for RISC-V for
- i/c/f/d/a types of instructions
-Date: Sat, 17 Oct 2020 10:11:53 +0300
-Message-Id: <20201017071154.20642-5-space.monkey.delivers@gmail.com>
+Subject: [PATCH v4 3/5] [RISCV_PM] Print new PM CSRs in QEMU logs
+Date: Sat, 17 Oct 2020 10:11:52 +0300
+Message-Id: <20201017071154.20642-4-space.monkey.delivers@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201017071154.20642-1-space.monkey.delivers@gmail.com>
 References: <20201017071154.20642-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::141;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x141.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::144;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x144.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- GAPPY_SUBJECT=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -81,158 +80,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Oct 2020 07:12:09 -0000
+X-List-Received-Date: Sat, 17 Oct 2020 07:12:08 -0000
 
 Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
 ---
- target/riscv/insn_trans/trans_rva.c.inc |  3 +++
- target/riscv/insn_trans/trans_rvd.c.inc |  2 ++
- target/riscv/insn_trans/trans_rvf.c.inc |  2 ++
- target/riscv/insn_trans/trans_rvi.c.inc |  2 ++
- target/riscv/translate.c                | 14 ++++++++++++++
- 5 files changed, 23 insertions(+)
+ target/riscv/cpu.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
-index be8a9f06dd..5559e347ba 100644
---- a/target/riscv/insn_trans/trans_rva.c.inc
-+++ b/target/riscv/insn_trans/trans_rva.c.inc
-@@ -26,6 +26,7 @@ static inline bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     if (a->rl) {
-         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index d63031eb08..5916ebe5c2 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -255,6 +255,31 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval ", env->htval);
+         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2 ", env->mtval2);
      }
-+    gen_pm_adjust_address(ctx, src1, src1);
-     tcg_gen_qemu_ld_tl(load_val, src1, ctx->mem_idx, mop);
-     if (a->aq) {
-         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
-@@ -46,6 +47,7 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     TCGLabel *l2 = gen_new_label();
++    if (riscv_has_ext(env, RVJ)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mmte    ", env->mmte);
++        switch (env->priv) {
++        case PRV_U:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmbase ",
++                         env->upmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmmask ",
++                         env->upmmask);
++            break;
++        case PRV_S:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmbase ",
++                         env->spmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmmask ",
++                         env->spmmask);
++            break;
++        case PRV_M:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmbase ",
++                         env->mpmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmmask ",
++                         env->mpmmask);
++            break;
++        default:
++            assert(0 && "Unreachable");
++        }
++    }
+ #endif
  
-     gen_get_gpr(src1, a->rs1);
-+    gen_pm_adjust_address(ctx, src1, src1);
-     tcg_gen_brcond_tl(TCG_COND_NE, load_res, src1, l1);
- 
-     gen_get_gpr(src2, a->rs2);
-@@ -91,6 +93,7 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
-     gen_get_gpr(src1, a->rs1);
-     gen_get_gpr(src2, a->rs2);
- 
-+    gen_pm_adjust_address(ctx, src1, src1);
-     (*func)(src2, src1, src2, ctx->mem_idx, mop);
- 
-     gen_set_gpr(a->rd, src2);
-diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-index 4f832637fa..935342f66d 100644
---- a/target/riscv/insn_trans/trans_rvd.c.inc
-+++ b/target/riscv/insn_trans/trans_rvd.c.inc
-@@ -25,6 +25,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
-     TCGv t0 = tcg_temp_new();
-     gen_get_gpr(t0, a->rs1);
-     tcg_gen_addi_tl(t0, t0, a->imm);
-+    gen_pm_adjust_address(ctx, t0, t0);
- 
-     tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], t0, ctx->mem_idx, MO_TEQ);
- 
-@@ -40,6 +41,7 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
-     TCGv t0 = tcg_temp_new();
-     gen_get_gpr(t0, a->rs1);
-     tcg_gen_addi_tl(t0, t0, a->imm);
-+    gen_pm_adjust_address(ctx, t0, t0);
- 
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], t0, ctx->mem_idx, MO_TEQ);
- 
-diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-index 3dfec8211d..04b3c3eb3d 100644
---- a/target/riscv/insn_trans/trans_rvf.c.inc
-+++ b/target/riscv/insn_trans/trans_rvf.c.inc
-@@ -30,6 +30,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
-     TCGv t0 = tcg_temp_new();
-     gen_get_gpr(t0, a->rs1);
-     tcg_gen_addi_tl(t0, t0, a->imm);
-+    gen_pm_adjust_address(ctx, t0, t0);
- 
-     tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], t0, ctx->mem_idx, MO_TEUL);
-     gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
-@@ -47,6 +48,7 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
-     gen_get_gpr(t0, a->rs1);
- 
-     tcg_gen_addi_tl(t0, t0, a->imm);
-+    gen_pm_adjust_address(ctx, t0, t0);
- 
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], t0, ctx->mem_idx, MO_TEUL);
- 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index d04ca0394c..bee7f6be46 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -141,6 +141,7 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-     TCGv t1 = tcg_temp_new();
-     gen_get_gpr(t0, a->rs1);
-     tcg_gen_addi_tl(t0, t0, a->imm);
-+    gen_pm_adjust_address(ctx, t0, t0);
- 
-     tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx, memop);
-     gen_set_gpr(a->rd, t1);
-@@ -180,6 +181,7 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-     TCGv dat = tcg_temp_new();
-     gen_get_gpr(t0, a->rs1);
-     tcg_gen_addi_tl(t0, t0, a->imm);
-+    gen_pm_adjust_address(ctx, t0, t0);
-     gen_get_gpr(dat, a->rs2);
- 
-     tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx, memop);
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 79dca2291b..a7cbf909f3 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -101,6 +101,16 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
-     tcg_gen_ori_i64(out, in, MAKE_64BIT_MASK(32, 32));
- }
- 
-+/*
-+ * Temp stub: generates address adjustment for PointerMasking
-+ */
-+static void gen_pm_adjust_address(DisasContext *s,
-+                                  TCGv_i64      dst,
-+                                  TCGv_i64      src)
-+{
-+    tcg_gen_mov_i64(dst, src);
-+}
-+
- /*
-  * A narrow n-bit operation, where n < FLEN, checks that input operands
-  * are correctly Nan-boxed, i.e., all upper FLEN - n bits are 1.
-@@ -380,6 +390,7 @@ static void gen_load_c(DisasContext *ctx, uint32_t opc, int rd, int rs1,
-     TCGv t1 = tcg_temp_new();
-     gen_get_gpr(t0, rs1);
-     tcg_gen_addi_tl(t0, t0, imm);
-+    gen_pm_adjust_address(ctx, t0, t0);
-     int memop = tcg_memop_lookup[(opc >> 12) & 0x7];
- 
-     if (memop < 0) {
-@@ -400,6 +411,7 @@ static void gen_store_c(DisasContext *ctx, uint32_t opc, int rs1, int rs2,
-     TCGv dat = tcg_temp_new();
-     gen_get_gpr(t0, rs1);
-     tcg_gen_addi_tl(t0, t0, imm);
-+    gen_pm_adjust_address(ctx, t0, t0);
-     gen_get_gpr(dat, rs2);
-     int memop = tcg_memop_lookup[(opc >> 12) & 0x7];
- 
-@@ -459,6 +471,7 @@ static void gen_fp_load(DisasContext *ctx, uint32_t opc, int rd,
-     t0 = tcg_temp_new();
-     gen_get_gpr(t0, rs1);
-     tcg_gen_addi_tl(t0, t0, imm);
-+    gen_pm_adjust_address(ctx, t0, t0);
- 
-     switch (opc) {
-     case OPC_RISC_FLW:
-@@ -498,6 +511,7 @@ static void gen_fp_store(DisasContext *ctx, uint32_t opc, int rs1,
-     t0 = tcg_temp_new();
-     gen_get_gpr(t0, rs1);
-     tcg_gen_addi_tl(t0, t0, imm);
-+    gen_pm_adjust_address(ctx, t0, t0);
- 
-     switch (opc) {
-     case OPC_RISC_FSW:
+     for (i = 0; i < 32; i++) {
 -- 
 2.20.1
 
