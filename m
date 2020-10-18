@@ -1,73 +1,38 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kTgO1-0002W0-9L
-	for mharc-qemu-riscv@gnu.org; Sat, 17 Oct 2020 03:12:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36828)
+	id 1kU7PU-00083N-V2
+	for mharc-qemu-riscv@gnu.org; Sun, 18 Oct 2020 08:03:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47206)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kTgNr-0002K4-G9; Sat, 17 Oct 2020 03:12:07 -0400
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:44554)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kTgNn-0003kH-NO; Sat, 17 Oct 2020 03:12:07 -0400
-Received: by mail-lf1-x144.google.com with SMTP id b1so6248953lfp.11;
- Sat, 17 Oct 2020 00:12:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=qrQtqAjUROe7fmEpS/MuFCEtm0EhCZVesv3G9r8oUO8=;
- b=TpPNff02TOxLwWO6oL5lNcgUNqKVWKVMUPXF/A7L9FjENEzL0IzywwJb3pYTmsGJDZ
- FevJbwY5IzTdB6ijeiWxIJaGfs2aWDEqZXitPXq/XGGETf/KNmMl5aaSkFqxSuu+nUx1
- OK9lAnwP8QGA626SF3O1u/CfZnotOdb12r+87ITXYLdtlEzQqwgdbZJ9pO2jujxGxVLO
- e46CH1ts7erQBoNMXp/kXBuHg/FK0PkxJy7AnqMT+5SVR3cBElY9JlUvIXEQ0u3LsPcG
- JNwMPr7iF9MTtuUIOEjnX0hSNPN8uBnuaxi9VWEvztkx3HzMUWFWIxgwBDm2+PS6sSI+
- OueA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=qrQtqAjUROe7fmEpS/MuFCEtm0EhCZVesv3G9r8oUO8=;
- b=qSflEEmrl5UftfcmlPHwwlPAqfIxZgZJnFfp81NXGriLf1ab4R4IzlazwoA5M+HgxH
- +4JlPXxMcNKPJ2EI6uQ8pGP/7zHudujpEtkh0ikeiaWs4Q5s8iHaJ+UfnKIrlmQsXd0f
- LWCmEmWVTCsFVShk1HDhuk+ePDBPjnaTlku56y5dyMqyXAHx+BhLufXcX2IpNxbPjVm1
- zur8QbHzHx0An2hqYqB52Y8PT3hDpAKxfj03w1ufImaAve0CK+lSzZoFbC/uXZ0baAEt
- y2Cd7r3vY2HfQZre2Z+RrPx5YQ99fMfxEaJkwS7Y5yKa25msB56jqqUIm0pDj4f0r/zq
- FKWg==
-X-Gm-Message-State: AOAM5327H0nqUL8q1J39dOZxtTAYXealqKQaxLraMBrdFve9RrJJaZ/U
- 74YlS4WUG6d8y9iPtmFzsuk=
-X-Google-Smtp-Source: ABdhPJw3odaR8vKrk7K5H/ias+iFy1AuJt3spB3r2aOIl8zFfN6BNTCBTq8jdYpK008Y5XJ523a+hg==
-X-Received: by 2002:a19:8c17:: with SMTP id o23mr2531938lfd.279.1602918722065; 
- Sat, 17 Oct 2020 00:12:02 -0700 (PDT)
-Received: from neptune.lab ([46.39.229.194])
- by smtp.googlemail.com with ESMTPSA id 184sm1626905lfh.232.2020.10.17.00.12.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Oct 2020 00:12:01 -0700 (PDT)
-From: Alexey Baturo <baturo.alexey@gmail.com>
-X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v4 3/5] [RISCV_PM] Print new PM CSRs in QEMU logs
-Date: Sat, 17 Oct 2020 10:11:52 +0300
-Message-Id: <20201017071154.20642-4-space.monkey.delivers@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201017071154.20642-1-space.monkey.delivers@gmail.com>
-References: <20201017071154.20642-1-space.monkey.delivers@gmail.com>
+ (Exim 4.90_1) (envelope-from <georg.kotheimer@kernkonzept.com>)
+ id 1kU7PS-00081Z-FQ; Sun, 18 Oct 2020 08:03:34 -0400
+Received: from serv1.kernkonzept.com ([2a01:4f8:1c1c:b490::2]:45575
+ helo=mx.kernkonzept.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <georg.kotheimer@kernkonzept.com>)
+ id 1kU7PP-0003UH-2o; Sun, 18 Oct 2020 08:03:34 -0400
+Received: from [89.16.142.204] (helo=george-laptop.lan)
+ by mx.kernkonzept.com with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) id 1kU7PK-000089-AN; Sun, 18 Oct 2020 14:03:26 +0200
+From: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
+Subject: [PATCH] target/riscv: Adjust privilege level for HLV(X)/HSV
+ instructions
+Date: Sun, 18 Oct 2020 14:03:08 +0200
+Message-Id: <20201018120308.1712054-1-georg.kotheimer@kernkonzept.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::144;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x144.google.com
+Received-SPF: softfail client-ip=2a01:4f8:1c1c:b490::2;
+ envelope-from=georg.kotheimer@kernkonzept.com; helo=mx.kernkonzept.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -7
+X-Spam_score: -0.8
+X-Spam_bar: /
+X-Spam_report: (-0.8 / 5.0 requ) BAYES_00=-1.9, KHOP_HELO_FCRDNS=0.399,
+ SPF_HELO_NONE=0.001, SPF_SOFTFAIL=0.665 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,50 +45,206 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Oct 2020 07:12:08 -0000
+X-List-Received-Date: Sun, 18 Oct 2020 12:03:34 -0000
 
-Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
+According to the specification the "field SPVP of hstatus controls the
+privilege level of the access" for the hypervisor virtual-machine load
+and store instructions HLV, HLVX and HSV.
+
+We introduce the new virtualization register field HS_HYP_LD_ST,
+similar to HS_TWO_STAGE, which tracks whether we are currently
+executing a hypervisor virtual-macine load or store instruction.
+
+Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
 ---
- target/riscv/cpu.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ target/riscv/cpu.h        |  2 ++
+ target/riscv/cpu_bits.h   |  1 +
+ target/riscv/cpu_helper.c | 60 ++++++++++++++++++++++++++++++---------
+ target/riscv/op_helper.c  |  7 +++++
+ 4 files changed, 56 insertions(+), 14 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d63031eb08..5916ebe5c2 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -255,6 +255,31 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval ", env->htval);
-         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2 ", env->mtval2);
-     }
-+    if (riscv_has_ext(env, RVJ)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mmte    ", env->mmte);
-+        switch (env->priv) {
-+        case PRV_U:
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmbase ",
-+                         env->upmbase);
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmmask ",
-+                         env->upmmask);
-+            break;
-+        case PRV_S:
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmbase ",
-+                         env->spmbase);
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmmask ",
-+                         env->spmmask);
-+            break;
-+        case PRV_M:
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmbase ",
-+                         env->mpmbase);
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmmask ",
-+                         env->mpmmask);
-+            break;
-+        default:
-+            assert(0 && "Unreachable");
-+        }
-+    }
- #endif
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index de275782e6..a39674a84d 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -323,6 +323,8 @@ bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
+ void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable);
+ bool riscv_cpu_two_stage_lookup(CPURISCVState *env);
+ void riscv_cpu_set_two_stage_lookup(CPURISCVState *env, bool enable);
++bool riscv_cpu_hyp_load_store_inst(CPURISCVState *env);
++void riscv_cpu_set_hyp_load_store_inst(CPURISCVState *env, bool enable);
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
+ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index bd36062877..0983ec6471 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -481,6 +481,7 @@
+  */
+ #define FORCE_HS_EXCEP      2
+ #define HS_TWO_STAGE        4
++#define HS_HYP_LD_ST        8
  
-     for (i = 0; i < 32; i++) {
+ /* RV32 satp CSR field masks */
+ #define SATP32_MODE         0x80000000
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 904899054d..58d1fa2675 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -238,6 +238,24 @@ void riscv_cpu_set_two_stage_lookup(CPURISCVState *env, bool enable)
+     env->virt = set_field(env->virt, HS_TWO_STAGE, enable);
+ }
+ 
++bool riscv_cpu_hyp_load_store_inst(CPURISCVState *env)
++{
++    if (!riscv_has_ext(env, RVH)) {
++        return false;
++    }
++
++    return get_field(env->virt, HS_HYP_LD_ST);
++}
++
++void riscv_cpu_set_hyp_load_store_inst(CPURISCVState *env, bool enable)
++{
++    if (!riscv_has_ext(env, RVH)) {
++        return;
++    }
++
++    env->virt = set_field(env->virt, HS_HYP_LD_ST, enable);
++}
++
+ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+ {
+     CPURISCVState *env = &cpu->env;
+@@ -346,7 +364,11 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+         use_background = true;
+     }
+ 
+-    if (mode == PRV_M && access_type != MMU_INST_FETCH) {
++    /* MPRV does not affect the virtual-machine load/store
++       instructions, HLV, HLVX, and HSV. */
++    if (riscv_cpu_hyp_load_store_inst(env)) {
++        mode = get_field(env->hstatus, HSTATUS_SPVP);
++    } else if (mode == PRV_M && access_type != MMU_INST_FETCH) {
+         if (get_field(env->mstatus, MSTATUS_MPRV)) {
+             mode = get_field(env->mstatus, MSTATUS_MPP);
+         }
+@@ -711,17 +733,21 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+                   __func__, address, access_type, mmu_idx);
+ 
+-    if (mode == PRV_M && access_type != MMU_INST_FETCH) {
++    /* MPRV does not affect the virtual-machine load/store
++       instructions, HLV, HLVX, and HSV. */
++    if (riscv_cpu_hyp_load_store_inst(env)) {
++        mode = get_field(env->hstatus, HSTATUS_SPVP);
++    } else if (mode == PRV_M && access_type != MMU_INST_FETCH) {
+         if (get_field(env->mstatus, MSTATUS_MPRV)) {
+             mode = get_field(env->mstatus, MSTATUS_MPP);
+         }
+-    }
+ 
+-    if (riscv_has_ext(env, RVH) && env->priv == PRV_M &&
+-        access_type != MMU_INST_FETCH &&
+-        get_field(env->mstatus, MSTATUS_MPRV) &&
+-        MSTATUS_MPV_ISSET(env)) {
+-        riscv_cpu_set_two_stage_lookup(env, true);
++        if (riscv_has_ext(env, RVH) && env->priv == PRV_M &&
++            access_type != MMU_INST_FETCH &&
++            get_field(env->mstatus, MSTATUS_MPRV) &&
++            MSTATUS_MPV_ISSET(env)) {
++            riscv_cpu_set_two_stage_lookup(env, true);
++        }
+     }
+ 
+     if (riscv_cpu_virt_enabled(env) ||
+@@ -777,12 +803,16 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                       __func__, address, ret, pa, prot);
+     }
+ 
+-    /* We did the two stage lookup based on MPRV, unset the lookup */
+-    if (riscv_has_ext(env, RVH) && env->priv == PRV_M &&
+-        access_type != MMU_INST_FETCH &&
+-        get_field(env->mstatus, MSTATUS_MPRV) &&
+-        MSTATUS_MPV_ISSET(env)) {
+-        riscv_cpu_set_two_stage_lookup(env, false);
++    /* MPRV does not affect the virtual-machine load/store
++       instructions, HLV, HLVX, and HSV. */
++    if (!riscv_cpu_hyp_load_store_inst(env)) {
++        /* We did the two stage lookup based on MPRV, unset the lookup */
++        if (riscv_has_ext(env, RVH) && env->priv == PRV_M &&
++            access_type != MMU_INST_FETCH &&
++            get_field(env->mstatus, MSTATUS_MPRV) &&
++            MSTATUS_MPV_ISSET(env)) {
++            riscv_cpu_set_two_stage_lookup(env, false);
++        }
+     }
+ 
+     if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+@@ -949,6 +979,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                 riscv_cpu_set_two_stage_lookup(env, false);
+                 htval = env->guest_phys_fault_addr;
+             }
++
++            riscv_cpu_set_hyp_load_store_inst(env, false);
+         }
+ 
+         s = env->mstatus;
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 9b9ada45a9..905a924255 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -240,6 +240,7 @@ target_ulong helper_hyp_load(CPURISCVState *env, target_ulong address,
+             get_field(env->hstatus, HSTATUS_HU))) {
+         target_ulong pte;
+ 
++        riscv_cpu_set_hyp_load_store_inst(env, true);
+         riscv_cpu_set_two_stage_lookup(env, true);
+ 
+         switch (memop) {
+@@ -269,6 +270,7 @@ target_ulong helper_hyp_load(CPURISCVState *env, target_ulong address,
+         }
+ 
+         riscv_cpu_set_two_stage_lookup(env, false);
++        riscv_cpu_set_hyp_load_store_inst(env, false);
+ 
+         return pte;
+     }
+@@ -288,6 +290,8 @@ void helper_hyp_store(CPURISCVState *env, target_ulong address,
+         (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+         (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
+             get_field(env->hstatus, HSTATUS_HU))) {
++
++        riscv_cpu_set_hyp_load_store_inst(env, true);
+         riscv_cpu_set_two_stage_lookup(env, true);
+ 
+         switch (memop) {
+@@ -311,6 +315,7 @@ void helper_hyp_store(CPURISCVState *env, target_ulong address,
+         }
+ 
+         riscv_cpu_set_two_stage_lookup(env, false);
++        riscv_cpu_set_hyp_load_store_inst(env, false);
+ 
+         return;
+     }
+@@ -331,6 +336,7 @@ target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
+             get_field(env->hstatus, HSTATUS_HU))) {
+         target_ulong pte;
+ 
++        riscv_cpu_set_hyp_load_store_inst(env, true);
+         riscv_cpu_set_two_stage_lookup(env, true);
+ 
+         switch (memop) {
+@@ -345,6 +351,7 @@ target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
+         }
+ 
+         riscv_cpu_set_two_stage_lookup(env, false);
++        riscv_cpu_set_hyp_load_store_inst(env, false);
+ 
+         return pte;
+     }
 -- 
-2.20.1
+2.25.1
 
 
