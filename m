@@ -1,102 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kUQki-00019w-J2
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Oct 2020 04:42:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36698)
+	id 1kUTem-0004NN-1a
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Oct 2020 07:48:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48922)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ivan.griffin@emdalo.com>)
- id 1kUQkg-00019I-Vq; Mon, 19 Oct 2020 04:42:47 -0400
-Received: from mail-vi1eur05on2070.outbound.protection.outlook.com
- ([40.107.21.70]:26464 helo=EUR05-VI1-obe.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1kUTeg-0004Lb-23; Mon, 19 Oct 2020 07:48:49 -0400
+Received: from zero.eik.bme.hu ([152.66.115.2]:63840)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ivan.griffin@emdalo.com>)
- id 1kUQke-0000ZT-32; Mon, 19 Oct 2020 04:42:46 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Smqi6sZFu7mUWoqGZdnwfe2/jfWQDq2SKhTR0QK+u02AuIjXFTZd78DuOzJuiFrG2wizxc+lTV+k1F0lEAJxbvLu0da8lQQGh4L0g31zKPlfMtvPWck22B0SFIFt7ZUNFOduD6Odeb/8kq0YhClqb1puSmTGD+Hphch/d6aiTkRCq52E1aqGImjtWX0mY4Wil0He9ZtxLWmI0ybm7nBSQABAI+8BV6RvcvjLVJqPaRjVh0FNT09LndCDxqYJGKEIZekIPjlOtw6p3gjy2lciZM2cfQLjWBYHnCljFMfQdI2nbA3uey6mwcjM3JLwwx6qyddMH4X7UCxiGE1oCRIeNA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FEFyZ2e8PK8EMYbcta6sgHFpMWfpxY3RRa9KuonGcXs=;
- b=ZgZhuxa86/vvNqcjJICQWCbQYcBRF/HFHta4LF2he/f8RtFfAiS2ECHxoPuVRkcjCNFpJErMzkQT16jQa8S1nWuFH/kMVYFR1GVFDB2mUm+d7UheJyLwjSrmGUnut87UQUv4SD7bLrLINP6KMz5Vg350WNJKx06q89NjIJL7U1aqmSieVxbEp7aoz41x+aAFPNTCCtMFftzwJfYMAESQ5RNY0crZaDV92N+B6Lmj5lOupyhKKjVcZnQ+bNRIjWgIn/vgS6V9jgICoFdscP3HG7hfxDeQXMvHwMVuqfyoVCEJR+o2X8umrr+vy8u2TVsCOLJxqik4NyVTfHzro55XCg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=emdalo.com; dmarc=pass action=none header.from=emdalo.com;
- dkim=pass header.d=emdalo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=emdalo.onmicrosoft.com; s=selector2-emdalo-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FEFyZ2e8PK8EMYbcta6sgHFpMWfpxY3RRa9KuonGcXs=;
- b=DrmUwhmoyiO/Pc/77fzD3o0pw4hpP8E5OrpOaM77wzaTx7CjC2kXM88s0o909obtAMQRfObOWFszm9KRwS+1yB2XNozbizzJCvrNdSgwKCj43C4MPzvEAkN/vKcrO2MXHXfcDSY1Oi2tGOyXp+57C8H8lK1w9VkMxvz+6r8eI0o=
-Received: from DB7PR10MB1915.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:5:e::24) by
- DB8PR10MB3500.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:139::17) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3477.20; Mon, 19 Oct 2020 08:42:39 +0000
-Received: from DB7PR10MB1915.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::2cbe:c29d:d77f:e65f]) by DB7PR10MB1915.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::2cbe:c29d:d77f:e65f%7]) with mapi id 15.20.3477.028; Mon, 19 Oct 2020
- 08:42:39 +0000
-From: Ivan Griffin <ivan.griffin@emdalo.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-CC: Alistair Francis <alistair23@gmail.com>, QEMU Trivial
- <qemu-trivial@nongnu.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Subject: Re: [PATCH] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap entry
-Thread-Topic: [PATCH] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap entry
-Thread-Index: AQHWo7koTlHYzPX6kkGBi37eK2QKsqmaZYWAgAAFWCCAA8Y+AIAAZ4/kgAAGQICAAADJrQ==
-Date: Mon, 19 Oct 2020 08:42:39 +0000
-Message-ID: <DB7PR10MB19156652F022AF0FB502A976FE1E0@DB7PR10MB1915.EURPRD10.PROD.OUTLOOK.COM>
-References: <20201016123737.8118-1-ivan.griffin@emdalo.com>
- <CAKmqyKNykruYK2AQ05KZyGCGD0rUsqQOVBbnccY+ELATBF=Ozg@mail.gmail.com>
- <DB7PR10MB191544AA04D0B3ECF82C57CDFE030@DB7PR10MB1915.EURPRD10.PROD.OUTLOOK.COM>
- <CAEUhbmVPzOuP3kuMhZB2JgN47nnzL7p9+meyhyBK7kRAhu5BCw@mail.gmail.com>
- <DB7PR10MB1915CB83F5FD388871B4D841FE1E0@DB7PR10MB1915.EURPRD10.PROD.OUTLOOK.COM>,
- <CAEUhbmXmmtpZx9WUFBLgdDMm31QVc+vUFNmizfph8DEiu9Cjuw@mail.gmail.com>
-In-Reply-To: <CAEUhbmXmmtpZx9WUFBLgdDMm31QVc+vUFNmizfph8DEiu9Cjuw@mail.gmail.com>
-Accept-Language: en-IE, en-US
-Content-Language: en-IE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=emdalo.com;
-x-originating-ip: [86.45.25.24]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: bfb2b4fe-c852-49b2-6d75-08d8740af006
-x-ms-traffictypediagnostic: DB8PR10MB3500:
-x-microsoft-antispam-prvs: <DB8PR10MB3500B56378B6519FA2F1F6F1FE1E0@DB8PR10MB3500.EURPRD10.PROD.OUTLOOK.COM>
-x-ms-oob-tlc-oobclassifiers: OLM:7219;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: JxTZpQoDfYmAXjF35nyQ1b+wXQmSfHhHCG3UvAzojCV+vSyeSEPmXxgu3DEwY4Q4Y4dj+ZLFODiRBQTxqW8jwyN4AtCdX1uC0WZZ6i1iuuPRHuQvNdNCX+tonuG044DvbE/qNV9IuEknC2qZj4BfVTaxmay6vwo4pp9Cm1BTT3mIzOBOumCRIicSLj9uEsGESvX+7X188vlQqCRT8TRicj560Wj8BueIcw5ObZZIbdii2Z5dmKSHXZm6WeH1t1ESjeXt/a1rG5O7yzFVdsoM2OJAxBjWmA+2FDfIRFB0Q6YqMWAUNwj7xMq6oZhb52hW8v7ZSgLnfIhXq7sGaLlCemlcKHVsOp8QHNfmwiVHnPysmv/1NVvAohzjp0anL00IGy7ptggeq6PswpdpeH93aA==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB7PR10MB1915.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(366004)(346002)(39830400003)(376002)(136003)(396003)(71200400001)(2906002)(19627405001)(8676002)(478600001)(5660300002)(8936002)(186003)(52536014)(33656002)(966005)(54906003)(44832011)(76116006)(66446008)(64756008)(6506007)(53546011)(6916009)(7696005)(316002)(166002)(83380400001)(66946007)(66556008)(26005)(4326008)(86362001)(55016002)(66476007)(9686003);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata: m7gBSHeklwoN55gZoFukuT0vORnFSr5FEl3LKxo6ajx9L6LRyNV3U+Y3bkEjYeGAAaXaxapihE1UXMKhUJD85DSuV27nzW9CByp5L8Hn5id73cz8j6/CTYyxTRr9bLCJcc6MgnkKz1igoqQGfEf5s0U+A85amxROp63T3QfeoVzbhO/AbTQXi2UDzDbKZ84P4nFM5leR5KFQOO0NiJQh5maqNMakJkuWrws9Zqbmt33lHRTM4Vlw/WdHN6AJAHr9y6qSJm3VqujEjkFzNNaeUMlNh3siAh1tNiJA9gsKVPqReIjOI9eeX3TEhdfP/fCJECHMYJI6DVImt9eMpcDNHoDLB2jwXXnHcpd2opsWIMBvjUbKL6DFJNOFb1L48ZLNvB6aP11fO+Xw71u67MaoMtbnSry1yAQ8w/OnoB2quXvgViyaRw0W1/2E0pT8k0Cploy66UQQTgqQHiOK1B9Bt4yghVHvEfkusfA+aKYsdcHnvK70yRBdBW3ijPuq5WLrFyACVHFy8UYtrXQntiLpG+WMj8jEqHiOpPBbuyW+XEwYXzxDVzUFn3Ql4yqK+zZNYkl2nfDbTvOVhSCniaY4B7yd5yjBkAjRmjJVs+8UA3q/qPephHRSp8IXuTgxVewaaimdy6d9o4gMHsAqF2R/Jw==
-x-ms-exchange-transport-forked: True
-Content-Type: multipart/alternative;
- boundary="_000_DB7PR10MB19156652F022AF0FB502A976FE1E0DB7PR10MB1915EURP_"
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1kUTeZ-0000cI-PG; Mon, 19 Oct 2020 07:48:45 -0400
+Received: from zero.eik.bme.hu (blah.eik.bme.hu [152.66.115.182])
+ by localhost (Postfix) with SMTP id C0DD0747603;
+ Mon, 19 Oct 2020 13:48:28 +0200 (CEST)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id 5F906747600; Mon, 19 Oct 2020 13:48:28 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id 5B208747602;
+ Mon, 19 Oct 2020 13:48:28 +0200 (CEST)
+Date: Mon, 19 Oct 2020 13:48:28 +0200 (CEST)
+From: BALATON Zoltan <balaton@eik.bme.hu>
+To: Joelle van Dyne <j@getutm.app>
+cc: qemu-devel@nongnu.org, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
+ "open list:RISC-V TCG target" <qemu-riscv@nongnu.org>, 
+ Stefan Weil <sw@weilnetz.de>, 
+ "open list:S390 TCG target" <qemu-s390x@nongnu.org>, 
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>, 
+ "open list:AArch64 TCG target" <qemu-arm@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Huacai Chen <chenhc@lemote.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, Richard Henderson <rth@twiddle.net>
+Subject: Re: [PATCH v2 6/9] tcg: implement mirror mapped JIT for iOS
+In-Reply-To: <20201019013928.72770-7-j@getutm.app>
+Message-ID: <aa4c227-c33-72dc-92c6-75792f60b58e@eik.bme.hu>
+References: <20201019013928.72770-1-j@getutm.app>
+ <20201019013928.72770-7-j@getutm.app>
 MIME-Version: 1.0
-X-OriginatorOrg: emdalo.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB7PR10MB1915.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: bfb2b4fe-c852-49b2-6d75-08d8740af006
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Oct 2020 08:42:39.7823 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 12485e48-c3f6-4e74-8f2d-9058be9b6951
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: EDJ98qkJThHIRalrZcamHifYqCN9TyAgLggM/M3L3cJMpsKet4RfEijQTbAHqk9ej9qVQQleji9OAVb/uMI/jA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3500
-Received-SPF: pass client-ip=40.107.21.70;
- envelope-from=ivan.griffin@emdalo.com;
- helo=EUR05-VI1-obe.outbound.protection.outlook.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/19 04:42:41
-X-ACL-Warn: Detected OS   = Windows NT kernel [generic] [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; format=flowed; charset=US-ASCII
+X-Spam-Probability: 8%
+Received-SPF: pass client-ip=152.66.115.2; envelope-from=balaton@eik.bme.hu;
+ helo=zero.eik.bme.hu
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/19 07:11:43
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -109,280 +59,1549 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2020 08:42:47 -0000
+X-List-Received-Date: Mon, 19 Oct 2020 11:48:50 -0000
 
---_000_DB7PR10MB19156652F022AF0FB502A976FE1E0DB7PR10MB1915EURP_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-Yes, it could be.
-
-But the "Physical Address" column, in my mind, should be the 0x37020000 add=
-ress.  At least when I check other peripherals, their physical address valu=
-es in the register map HTML corresponds to the source code.
-
-Cheers,
-Ivan.
-
-________________________________
-From: Bin Meng <bmeng.cn@gmail.com>
-Sent: Monday 19 October 2020 09:38
-To: Ivan Griffin <ivan.griffin@emdalo.com>
-Cc: Alistair Francis <alistair23@gmail.com>; QEMU Trivial <qemu-trivial@non=
-gnu.org>; open list:RISC-V <qemu-riscv@nongnu.org>; qemu-devel@nongnu.org D=
-evelopers <qemu-devel@nongnu.org>
-Subject: Re: [PATCH] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap entry
-
-Hi Ivan,
-
-On Mon, Oct 19, 2020 at 4:17 PM Ivan Griffin <ivan.griffin@emdalo.com> wrot=
-e:
+On Sun, 18 Oct 2020, Joelle van Dyne wrote:
+> From: osy <osy86@users.noreply.github.com>
 >
-> Hi Bin,
+> On iOS, we cannot allocate RWX pages without special entitlements. As a
+> workaround, we can allocate a RX region and then mirror map it to a separate
+> RX region. Then we can write to one region and execute from the other one.
 >
-> Well spotted with the register map. I grepped it for 0x37020000 and didn'=
-t find it, but it seems the address (incorrectly) is 0x07020000 in the docu=
-mentation.
+> We also define `tcg_mirror_ptr_rw` and `tcg_code_ptr_rw` to return a pointer
+> to RW memory. The difference between the RW and RX regions is stored in the
+> TCG context.
 >
+> To ensure cache coherency, we flush the data cache in the RW mapping and
+> then invalidate the instruction cache in the RX mapping (where applicable).
+> Because data cache flush is OS defined on some architectures, we do not
+> provide implementations for non iOS platforms (ARM/x86).
+>
+> Signed-off-by: Joelle van Dyne <j@getutm.app>
+> ---
+> docs/devel/ios.rst           | 40 +++++++++++++++++++
+> configure                    |  1 +
+> include/exec/exec-all.h      |  8 ++++
+> include/tcg/tcg.h            | 17 ++++++++
+> tcg/aarch64/tcg-target.h     | 13 +++++-
+> tcg/arm/tcg-target.h         |  9 ++++-
+> tcg/i386/tcg-target.h        | 24 ++++++++++-
+> tcg/mips/tcg-target.h        |  8 +++-
+> tcg/ppc/tcg-target.h         |  8 +++-
+> tcg/riscv/tcg-target.h       |  9 ++++-
+> tcg/s390/tcg-target.h        | 13 +++++-
+> tcg/sparc/tcg-target.h       |  8 +++-
+> tcg/tci/tcg-target.h         |  9 ++++-
+> accel/tcg/cpu-exec.c         |  7 +++-
+> accel/tcg/translate-all.c    | 77 ++++++++++++++++++++++++++++++++++--
+> tcg/tcg.c                    | 56 +++++++++++++++++---------
+> tcg/aarch64/tcg-target.c.inc | 33 ++++++++++------
+> tcg/arm/tcg-target.c.inc     | 25 ++++++------
+> tcg/i386/tcg-target.c.inc    | 18 ++++-----
+> tcg/mips/tcg-target.c.inc    | 35 +++++++++-------
+> tcg/ppc/tcg-target.c.inc     | 38 +++++++++++-------
+> tcg/riscv/tcg-target.c.inc   | 40 +++++++++++--------
+> tcg/s390/tcg-target.c.inc    | 16 ++++----
+> tcg/sparc/tcg-target.c.inc   | 23 +++++++----
+> tcg/tcg-pool.c.inc           |  9 +++--
+> tcg/tci/tcg-target.c.inc     |  6 +--
+> 26 files changed, 416 insertions(+), 134 deletions(-)
+> create mode 100644 docs/devel/ios.rst
+>
+> diff --git a/docs/devel/ios.rst b/docs/devel/ios.rst
+> new file mode 100644
+> index 0000000000..dba9fdd868
+> --- /dev/null
+> +++ b/docs/devel/ios.rst
+> @@ -0,0 +1,40 @@
+> +===========
+> +iOS Support
+> +===========
+> +
+> +To run qemu on the iOS platform, some modifications were required. Most of the
+> +modifications are conditioned on the ``CONFIG_IOS`` and ``CONFIG_IOS_JIT``
+> +configuration variables.
+> +
+> +Build support
+> +-------------
+> +
+> +For the code to compile, certain changes in the block driver and the slirp
+> +driver had to be made. There is no ``system()`` call, so code requiring it had
+> +to be disabled.
+> +
+> +``ucontext`` support is broken on iOS. The implementation from ``libucontext``
+> +is used instead.
+> +
+> +Because ``fork()`` is not allowed on iOS apps, the option to build qemu and the
+> +utilities as shared libraries is added. Note that because qemu does not perform
+> +resource cleanup in most cases (open files, allocated memory, etc), it is
+> +advisable that the user implements a proxy layer for syscalls so resources can
+> +be kept track by the app that uses qemu as a shared library.
+> +
+> +JIT support
+> +-----------
+> +
+> +On iOS, allocating RWX pages require special entitlements not usually granted to
+> +apps. However, it is possible to use `bulletproof JIT`_ with a development
+> +certificate. This means that we need to allocate one chunk of memory with RX
+> +permissions and then mirror map the same memory with RW permissions. We generate
+> +code to the mirror mapping and execute the original mapping.
+> +
+> +With ``CONFIG_IOS_JIT`` defined, we store inside the TCG context the difference
+> +between the two mappings. Then, we make sure that any writes to JIT memory is
+> +done to the pointer + the difference (in order to get a pointer to the mirror
+> +mapped space). Additionally, we make sure to flush the data cache before we
+> +invalidate the instruction cache so the changes are seen in both mappings.
+> +
+> +.. _bulletproof JIT: https://www.blackhat.com/docs/us-16/materials/us-16-Krstic.pdf
+> diff --git a/configure b/configure
+> index 0b7e25e7a5..93d6fd5ce2 100755
+> --- a/configure
+> +++ b/configure
+> @@ -6214,6 +6214,7 @@ fi
+>
+> if test "$ios" = "yes" ; then
+>   echo "CONFIG_IOS=y" >> $config_host_mak
+> +  echo "CONFIG_IOS_JIT=y" >> $config_host_mak
+> fi
+>
+> if test "$solaris" = "yes" ; then
+> diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
+> index 66f9b4cca6..2db155a772 100644
+> --- a/include/exec/exec-all.h
+> +++ b/include/exec/exec-all.h
+> @@ -483,6 +483,14 @@ struct TranslationBlock {
+>     uintptr_t jmp_list_head;
+>     uintptr_t jmp_list_next[2];
+>     uintptr_t jmp_dest[2];
+> +
+> +#if defined(CONFIG_IOS_JIT)
+> +    /*
+> +     * Store difference to writable mirror
+> +     * We need this when patching the jump instructions
+> +     */
+> +    ptrdiff_t code_rw_mirror_diff;
+> +#endif
+> };
+>
+> extern bool parallel_cpus;
+> diff --git a/include/tcg/tcg.h b/include/tcg/tcg.h
+> index 79c5ff8dab..ade01d2e41 100644
+> --- a/include/tcg/tcg.h
+> +++ b/include/tcg/tcg.h
+> @@ -627,6 +627,9 @@ struct TCGContext {
+>     size_t code_gen_buffer_size;
+>     void *code_gen_ptr;
+>     void *data_gen_ptr;
+> +#if defined(CONFIG_IOS_JIT)
+> +    ptrdiff_t code_rw_mirror_diff;
+> +#endif
+>
+>     /* Threshold to flush the translated code buffer.  */
+>     void *code_gen_highwater;
+> @@ -677,6 +680,20 @@ struct TCGContext {
+>     target_ulong gen_insn_data[TCG_MAX_INSNS][TARGET_INSN_START_WORDS];
+> };
+>
+> +static inline void *tcg_mirror_ptr_rw(TCGContext *s, const void *rx)
+> +{
+> +#if defined(CONFIG_IOS_JIT)
+> +    return (void *)rx + s->code_rw_mirror_diff;
+> +#else
+> +    return (void *)rx;
+> +#endif
+> +}
+> +
+> +static inline tcg_insn_unit *tcg_code_ptr_rw(TCGContext *s, const void *rx)
+> +{
+> +    return (tcg_insn_unit *)tcg_mirror_ptr_rw(s, rx);
+> +}
 
-I believe the documented offset 0x07020000 is the offset into the
-IOSCB block, not the final one that is mapped into the system memory.
+Explicit cast may not be needed here so this could be a macro if caling it 
+differently helps or why don't you just use tcg_mirror_prr_rw directly 
+everywhere?
+
+> +
+> extern TCGContext tcg_init_ctx;
+> extern __thread TCGContext *tcg_ctx;
+> extern TCGv_env cpu_env;
+> diff --git a/tcg/aarch64/tcg-target.h b/tcg/aarch64/tcg-target.h
+> index a2b22b4305..78c97460a1 100644
+> --- a/tcg/aarch64/tcg-target.h
+> +++ b/tcg/aarch64/tcg-target.h
+> @@ -150,6 +150,7 @@ typedef enum {
+>
+> #if defined(__APPLE__)
+> void sys_icache_invalidate(void *start, size_t len);
+> +void sys_dcache_flush(void *start, size_t len);
+> #endif
+>
+> static inline void flush_icache_range(uintptr_t start, uintptr_t stop)
+> @@ -163,7 +164,17 @@ static inline void flush_icache_range(uintptr_t start, uintptr_t stop)
+> #endif
+> }
+>
+> -void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t);
+> +void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+> +#if defined(CONFIG_IOS_JIT)
+> +static inline void flush_dcache_range(uintptr_t start, uintptr_t stop)
+> +{
+> +#if defined(__APPLE__)
+> +    sys_dcache_flush((char *)start, stop - start);
+> +#else
+> +#error "Missing function to flush data cache"
+> +#endif
+> +}
+> +#endif
+>
+> #ifdef CONFIG_SOFTMMU
+> #define TCG_TARGET_NEED_LDST_LABELS
+> diff --git a/tcg/arm/tcg-target.h b/tcg/arm/tcg-target.h
+> index 17e771374d..d8d7e7e239 100644
+> --- a/tcg/arm/tcg-target.h
+> +++ b/tcg/arm/tcg-target.h
+> @@ -139,8 +139,15 @@ static inline void flush_icache_range(uintptr_t start, uintptr_t stop)
+>     __builtin___clear_cache((char *) start, (char *) stop);
+> }
+>
+> +#if defined(CONFIG_IOS_JIT)
+
+Is that !defined or are you missing an implementation and #else here?
+
+Maybe this patch could be split up some more, making the RW offset 
+handling and cache management separate patches even if they don't work 
+separately just to make it easier to review.
 
 Regards,
-Bin
+BALATON Zoltan
 
-> ________________________________
-> From: Bin Meng <bmeng.cn@gmail.com>
-> Sent: Monday 19 October 2020 03:05
-> To: Ivan Griffin <ivan.griffin@emdalo.com>
-> Cc: Alistair Francis <alistair23@gmail.com>; QEMU Trivial <qemu-trivial@n=
-ongnu.org>; Bin Meng <bin.meng@windriver.com>; open list:RISC-V <qemu-riscv=
-@nongnu.org>; qemu-devel@nongnu.org Developers <qemu-devel@nongnu.org>
-> Subject: Re: [PATCH] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap entry
+> +static inline void flush_dcache_range(uintptr_t start, uintptr_t stop)
+> +{
+> +#error "Unimplemented dcache flush function"
+> +}
+> +#endif
+> +
+> /* not defined -- call should be eliminated at compile time */
+> -void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t);
+> +void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
 >
-> Hi Ivan,
+> #ifdef CONFIG_SOFTMMU
+> #define TCG_TARGET_NEED_LDST_LABELS
+> diff --git a/tcg/i386/tcg-target.h b/tcg/i386/tcg-target.h
+> index abd4ac7fc0..cdc440ce36 100644
+> --- a/tcg/i386/tcg-target.h
+> +++ b/tcg/i386/tcg-target.h
+> @@ -206,16 +206,36 @@ extern bool have_avx2;
+> #define TCG_TARGET_extract_i64_valid(ofs, len) \
+>     (((ofs) == 8 && (len) == 8) || ((ofs) + (len)) == 32)
 >
-> On Sat, Oct 17, 2020 at 12:31 AM Ivan Griffin <ivan.griffin@emdalo.com> w=
-rote:
-> >
-> > I don't know why it isn't documented in that PDF (or in the register ma=
-p), but if you check https://github.com/polarfire-soc/polarfire-soc-bare-me=
-tal-library/blob/master/src/platform/drivers/mss_sys_services/mss_sys_servi=
-ces.h you'll see the following
-> >
-> > ```
-> > typedef struct
-> > {
-> >     volatile uint32_t SOFT_RESET;
-> >     volatile uint32_t VDETECTOR;
-> >     volatile uint32_t TVS_CONTROL;
-> >     volatile uint32_t TVS_TEMP_A;
-> >     volatile uint32_t TVS_TEMP_B;
-> >     volatile uint32_t TVS_TEMP_C;
-> >     volatile uint32_t TVS_VOLT_A;
-> >     volatile uint32_t TVS_VOLT_B;
-> >     volatile uint32_t TVS_VOLT_C;
-> >     volatile uint32_t TVS_OUTPUT0;
-> >     volatile uint32_t TVS_OUTPUT1;
-> >     volatile uint32_t TVS_TRIGGER;
-> >     volatile uint32_t TRIM_VDET1P05;
-> >     volatile uint32_t TRIM_VDET1P8;
-> >     volatile uint32_t TRIM_VDET2P5;
-> >     volatile uint32_t TRIM_TVS;
-> >     volatile uint32_t TRIM_GDET1P05;
-> >     volatile uint32_t RESERVED0;
-> >     volatile uint32_t RESERVED1;
-> >     volatile uint32_t RESERVED2;
-> >     volatile uint32_t SERVICES_CR;
-> >     volatile uint32_t SERVICES_SR;
-> >     volatile uint32_t USER_DETECTOR_SR;
-> >     volatile uint32_t USER_DETECTOR_CR;
-> >     volatile uint32_t MSS_SPI_CR;
-> >
-> > } SCBCTRL_TypeDef;
-> >
-> > #define MSS_SCBCTRL                    ((SCBCTRL_TypeDef*) (0x37020000U=
-L))
-> >
-> > /*2kB bytes long mailbox.*/
-> > #define MSS_SCBMAILBOX                 ((uint32_t*) (0x37020800UL))
-> > ```
-> >
-> > And in https://github.com/polarfire-soc/polarfire-soc-bare-metal-librar=
-y/blob/master/src/platform/drivers/mss_sys_services/mss_sys_services.c you'=
-ll see MSS_SCB and MSS_SCBMAILBOX used in many places to interact with the =
-FPGA system controller to perform various services.
+> +#ifdef __APPLE__
+> +void sys_dcache_flush(void *start, size_t len);
+> +#endif
+> +
+> static inline void flush_icache_range(uintptr_t start, uintptr_t stop)
+> {
+> }
 >
-> It's actually documented, but not in the PDF file. I also spent some
-> time locating the doc when I do the DDR controller modeling work.
+> +#if defined(CONFIG_IOS_JIT)
+> +static inline void flush_dcache_range(uintptr_t start, uintptr_t stop)
+> +{
+> +#if defined(__APPLE__)
+> +    sys_dcache_flush((char *)start, stop - start);
+> +#else
+> +#error "Missing function to flush data cache"
+> +#endif
+> +}
+> +#endif
+> +
+> static inline void tb_target_set_jmp_target(uintptr_t tc_ptr,
+> -                                            uintptr_t jmp_addr, uintptr_t addr)
+> +                                            uintptr_t jmp_addr, uintptr_t addr,
+> +                                            uintptr_t wr_addr)
+> {
+>     /* patch the branch destination */
+> -    qatomic_set((int32_t *)jmp_addr, addr - (jmp_addr + 4));
+> +    qatomic_set((int32_t *)wr_addr, addr - (jmp_addr + 4));
+>     /* no need to flush icache explicitly */
+> +#if defined(CONFIG_IOS_JIT)
+> +    /* we do need to flush mirror dcache */
+> +    flush_dcache_range(wr_addr, wr_addr + 4);
+> +#endif
+> }
 >
-> See Register Map/PF_SoC_RegMap_V1_1/MPFS250T/pfsoc_control_scb.htm in
-> https://www.microsemi.com/document-portal/doc_download/1244581-polarfire-=
-soc-register-map
-
---_000_DB7PR10MB19156652F022AF0FB502A976FE1E0DB7PR10MB1915EURP_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
-Yes, it could be.</div>
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
-<br>
-</div>
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
-But the &quot;Physical Address&quot; column, in my mind, should be the 0x37=
-020000 address.&nbsp; At least when I check other peripherals, their physic=
-al address values in the register map HTML corresponds to the source code.<=
-/div>
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
-<br>
-</div>
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
-Cheers,</div>
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
-Ivan.</div>
-<div>
-<div id=3D"appendonsend"></div>
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0);">
-<br>
-</div>
-<hr tabindex=3D"-1" style=3D"display:inline-block; width:98%">
-<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" co=
-lor=3D"#000000" style=3D"font-size: 11pt;"><b>From:</b> Bin Meng &lt;bmeng.=
-cn@gmail.com&gt;<br>
-<b>Sent:</b> Monday 19 October 2020 09:38<br>
-<b>To:</b> Ivan Griffin &lt;ivan.griffin@emdalo.com&gt;<br>
-<b>Cc:</b> Alistair Francis &lt;alistair23@gmail.com&gt;; QEMU Trivial &lt;=
-qemu-trivial@nongnu.org&gt;; open list:RISC-V &lt;qemu-riscv@nongnu.org&gt;=
-; qemu-devel@nongnu.org Developers &lt;qemu-devel@nongnu.org&gt;<br>
-<b>Subject:</b> Re: [PATCH] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap ent=
-ry</font>
-<div>&nbsp;</div>
-</div>
-<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt"=
+> /* This defines the natural memory order supported by this
+> diff --git a/tcg/mips/tcg-target.h b/tcg/mips/tcg-target.h
+> index c6b091d849..80dcba5358 100644
+> --- a/tcg/mips/tcg-target.h
+> +++ b/tcg/mips/tcg-target.h
+> @@ -212,7 +212,13 @@ static inline void flush_icache_range(uintptr_t start, uintptr_t stop)
+>     cacheflush ((void *)start, stop-start, ICACHE);
+> }
 >
-<div class=3D"PlainText">Hi Ivan,<br>
-<br>
-On Mon, Oct 19, 2020 at 4:17 PM Ivan Griffin &lt;ivan.griffin@emdalo.com&gt=
-; wrote:<br>
-&gt;<br>
-&gt; Hi Bin,<br>
-&gt;<br>
-&gt; Well spotted with the register map. I grepped it for 0x37020000 and di=
-dn't find it, but it seems the address (incorrectly) is 0x07020000 in the d=
-ocumentation.<br>
-&gt;<br>
-<br>
-I believe the documented offset 0x07020000 is the offset into the<br>
-IOSCB block, not the final one that is mapped into the system memory.<br>
-<br>
-Regards,<br>
-Bin<br>
-<br>
-&gt; ________________________________<br>
-&gt; From: Bin Meng &lt;bmeng.cn@gmail.com&gt;<br>
-&gt; Sent: Monday 19 October 2020 03:05<br>
-&gt; To: Ivan Griffin &lt;ivan.griffin@emdalo.com&gt;<br>
-&gt; Cc: Alistair Francis &lt;alistair23@gmail.com&gt;; QEMU Trivial &lt;qe=
-mu-trivial@nongnu.org&gt;; Bin Meng &lt;bin.meng@windriver.com&gt;; open li=
-st:RISC-V &lt;qemu-riscv@nongnu.org&gt;; qemu-devel@nongnu.org Developers &=
-lt;qemu-devel@nongnu.org&gt;<br>
-&gt; Subject: Re: [PATCH] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap entry=
-<br>
-&gt;<br>
-&gt; Hi Ivan,<br>
-&gt;<br>
-&gt; On Sat, Oct 17, 2020 at 12:31 AM Ivan Griffin &lt;ivan.griffin@emdalo.=
-com&gt; wrote:<br>
-&gt; &gt;<br>
-&gt; &gt; I don't know why it isn't documented in that PDF (or in the regis=
-ter map), but if you check
-<a href=3D"https://github.com/polarfire-soc/polarfire-soc-bare-metal-librar=
-y/blob/master/src/platform/drivers/mss_sys_services/mss_sys_services.h">
-https://github.com/polarfire-soc/polarfire-soc-bare-metal-library/blob/mast=
-er/src/platform/drivers/mss_sys_services/mss_sys_services.h</a> you'll see =
-the following<br>
-&gt; &gt;<br>
-&gt; &gt; ```<br>
-&gt; &gt; typedef struct<br>
-&gt; &gt; {<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t SOFT_RESET;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t VDETECTOR;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TVS_CONTROL;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TVS_TEMP_A;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TVS_TEMP_B;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TVS_TEMP_C;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TVS_VOLT_A;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TVS_VOLT_B;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TVS_VOLT_C;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TVS_OUTPUT0;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TVS_OUTPUT1;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TVS_TRIGGER;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TRIM_VDET1P05;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TRIM_VDET1P8;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TRIM_VDET2P5;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TRIM_TVS;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t TRIM_GDET1P05;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t RESERVED0;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t RESERVED1;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t RESERVED2;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t SERVICES_CR;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t SERVICES_SR;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t USER_DETECTOR_SR;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t USER_DETECTOR_CR;<br>
-&gt; &gt;&nbsp;&nbsp;&nbsp;&nbsp; volatile uint32_t MSS_SPI_CR;<br>
-&gt; &gt;<br>
-&gt; &gt; } SCBCTRL_TypeDef;<br>
-&gt; &gt;<br>
-&gt; &gt; #define MSS_SCBCTRL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ((SCBC=
-TRL_TypeDef*) (0x37020000UL))<br>
-&gt; &gt;<br>
-&gt; &gt; /*2kB bytes long mailbox.*/<br>
-&gt; &gt; #define MSS_SCBMAILBOX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ((uint32_t*) (0x37020=
-800UL))<br>
-&gt; &gt; ```<br>
-&gt; &gt;<br>
-&gt; &gt; And in <a href=3D"https://github.com/polarfire-soc/polarfire-soc-=
-bare-metal-library/blob/master/src/platform/drivers/mss_sys_services/mss_sy=
-s_services.c">
-https://github.com/polarfire-soc/polarfire-soc-bare-metal-library/blob/mast=
-er/src/platform/drivers/mss_sys_services/mss_sys_services.c</a> you'll see =
-MSS_SCB and MSS_SCBMAILBOX used in many places to interact with the FPGA sy=
-stem controller to perform various
- services.<br>
-&gt;<br>
-&gt; It's actually documented, but not in the PDF file. I also spent some<b=
-r>
-&gt; time locating the doc when I do the DDR controller modeling work.<br>
-&gt;<br>
-&gt; See Register Map/PF_SoC_RegMap_V1_1/MPFS250T/pfsoc_control_scb.htm in<=
-br>
-&gt; <a href=3D"https://www.microsemi.com/document-portal/doc_download/1244=
-581-polarfire-soc-register-map">
-https://www.microsemi.com/document-portal/doc_download/1244581-polarfire-so=
-c-register-map</a><br>
-</div>
-</span></font></div>
-</div>
-</body>
-</html>
-
---_000_DB7PR10MB19156652F022AF0FB502A976FE1E0DB7PR10MB1915EURP_--
+> -void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t);
+> +void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+> +#if defined(CONFIG_IOS_JIT)
+> +static inline void flush_dcache_range(uintptr_t start, uintptr_t stop)
+> +{
+> +#error "Unimplemented dcache flush function"
+> +}
+> +#endif
+>
+> #ifdef CONFIG_SOFTMMU
+> #define TCG_TARGET_NEED_LDST_LABELS
+> diff --git a/tcg/ppc/tcg-target.h b/tcg/ppc/tcg-target.h
+> index be10363956..23d7a337c9 100644
+> --- a/tcg/ppc/tcg-target.h
+> +++ b/tcg/ppc/tcg-target.h
+> @@ -176,7 +176,13 @@ extern bool have_vsx;
+> #define TCG_TARGET_HAS_cmpsel_vec       0
+>
+> void flush_icache_range(uintptr_t start, uintptr_t stop);
+> -void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t);
+> +void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+> +#if defined(CONFIG_IOS_JIT)
+> +static inline void flush_dcache_range(uintptr_t start, uintptr_t stop)
+> +{
+> +#error "Unimplemented dcache flush function"
+> +}
+> +#endif
+>
+> #define TCG_TARGET_DEFAULT_MO (0)
+> #define TCG_TARGET_HAS_MEMORY_BSWAP     1
+> diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
+> index 032439d806..d42b361991 100644
+> --- a/tcg/riscv/tcg-target.h
+> +++ b/tcg/riscv/tcg-target.h
+> @@ -164,8 +164,15 @@ static inline void flush_icache_range(uintptr_t start, uintptr_t stop)
+>     __builtin___clear_cache((char *)start, (char *)stop);
+> }
+>
+> +#if defined(CONFIG_IOS_JIT)
+> +static inline void flush_dcache_range(uintptr_t start, uintptr_t stop)
+> +{
+> +#error "Unimplemented dcache flush function"
+> +}
+> +#endif
+> +
+> /* not defined -- call should be eliminated at compile time */
+> -void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t);
+> +void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+>
+> #define TCG_TARGET_DEFAULT_MO (0)
+>
+> diff --git a/tcg/s390/tcg-target.h b/tcg/s390/tcg-target.h
+> index 63c8797bd3..d67632512d 100644
+> --- a/tcg/s390/tcg-target.h
+> +++ b/tcg/s390/tcg-target.h
+> @@ -149,13 +149,24 @@ static inline void flush_icache_range(uintptr_t start, uintptr_t stop)
+> {
+> }
+>
+> +#if defined(CONFIG_IOS_JIT)
+> +static inline void flush_dcache_range(uintptr_t start, uintptr_t stop)
+> +{
+> +#error "Unimplemented dcache flush function"
+> +}
+> +#endif
+> +
+> static inline void tb_target_set_jmp_target(uintptr_t tc_ptr,
+> -                                            uintptr_t jmp_addr, uintptr_t addr)
+> +                                            uintptr_t jmp_addr, uintptr_t addr,
+> +                                            uintptr_t wr_addr)
+> {
+>     /* patch the branch destination */
+>     intptr_t disp = addr - (jmp_addr - 2);
+>     qatomic_set((int32_t *)jmp_addr, disp / 2);
+>     /* no need to flush icache explicitly */
+> +#if defined(CONFIG_IOS_JIT)
+> +    flush_dcache_range(wr_addr, wr_addr + 4);
+> +#endif
+> }
+>
+> #ifdef CONFIG_SOFTMMU
+> diff --git a/tcg/sparc/tcg-target.h b/tcg/sparc/tcg-target.h
+> index 633841ebf2..d102e13692 100644
+> --- a/tcg/sparc/tcg-target.h
+> +++ b/tcg/sparc/tcg-target.h
+> @@ -176,7 +176,13 @@ static inline void flush_icache_range(uintptr_t start, uintptr_t stop)
+>     }
+> }
+>
+> -void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t);
+> +void tb_target_set_jmp_target(uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+> +#if defined(CONFIG_IOS_JIT)
+> +static inline void flush_dcache_range(uintptr_t start, uintptr_t stop)
+> +{
+> +#error "Unimplemented dcache flush function"
+> +}
+> +#endif
+>
+> #define TCG_TARGET_NEED_POOL_LABELS
+>
+> diff --git a/tcg/tci/tcg-target.h b/tcg/tci/tcg-target.h
+> index 8c1c1d265d..2a258ea350 100644
+> --- a/tcg/tci/tcg-target.h
+> +++ b/tcg/tci/tcg-target.h
+> @@ -195,6 +195,12 @@ static inline void flush_icache_range(uintptr_t start, uintptr_t stop)
+> {
+> }
+>
+> +#if defined(CONFIG_IOS_JIT)
+> +static inline void flush_dcache_range(uintptr_t start, uintptr_t stop)
+> +{
+> +}
+> +#endif
+> +
+> /* We could notice __i386__ or __s390x__ and reduce the barriers depending
+>    on the host.  But if you want performance, you use the normal backend.
+>    We prefer consistency across hosts on this.  */
+> @@ -203,7 +209,8 @@ static inline void flush_icache_range(uintptr_t start, uintptr_t stop)
+> #define TCG_TARGET_HAS_MEMORY_BSWAP     1
+>
+> static inline void tb_target_set_jmp_target(uintptr_t tc_ptr,
+> -                                            uintptr_t jmp_addr, uintptr_t addr)
+> +                                            uintptr_t jmp_addr, uintptr_t addr,
+> +                                            uintptr_t wr_addr)
+> {
+>     /* patch the branch destination */
+>     qatomic_set((int32_t *)jmp_addr, addr - (jmp_addr + 4));
+> diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+> index 58aea605d8..821aefdea2 100644
+> --- a/accel/tcg/cpu-exec.c
+> +++ b/accel/tcg/cpu-exec.c
+> @@ -354,7 +354,12 @@ void tb_set_jmp_target(TranslationBlock *tb, int n, uintptr_t addr)
+>     if (TCG_TARGET_HAS_direct_jump) {
+>         uintptr_t offset = tb->jmp_target_arg[n];
+>         uintptr_t tc_ptr = (uintptr_t)tb->tc.ptr;
+> -        tb_target_set_jmp_target(tc_ptr, tc_ptr + offset, addr);
+> +#if defined(CONFIG_IOS_JIT)
+> +        uintptr_t wr_addr = tc_ptr + offset + tb->code_rw_mirror_diff;
+> +#else
+> +        uintptr_t wr_addr = tc_ptr + offset;
+> +#endif
+> +        tb_target_set_jmp_target(tc_ptr, tc_ptr + offset, addr, wr_addr);
+>     } else {
+>         tb->jmp_target_arg[n] = addr;
+>     }
+> diff --git a/accel/tcg/translate-all.c b/accel/tcg/translate-all.c
+> index d76097296d..eb1d8fbe2f 100644
+> --- a/accel/tcg/translate-all.c
+> +++ b/accel/tcg/translate-all.c
+> @@ -60,6 +60,22 @@
+> #include "sysemu/cpu-timers.h"
+> #include "sysemu/tcg.h"
+>
+> +#if defined(CONFIG_IOS_JIT)
+> +#include <mach/mach.h>
+> +extern kern_return_t mach_vm_remap(vm_map_t target_task,
+> +                                   mach_vm_address_t *target_address,
+> +                                   mach_vm_size_t size,
+> +                                   mach_vm_offset_t mask,
+> +                                   int flags,
+> +                                   vm_map_t src_task,
+> +                                   mach_vm_address_t src_address,
+> +                                   boolean_t copy,
+> +                                   vm_prot_t *cur_protection,
+> +                                   vm_prot_t *max_protection,
+> +                                   vm_inherit_t inheritance
+> +                                  );
+> +#endif
+> +
+> /* #define DEBUG_TB_INVALIDATE */
+> /* #define DEBUG_TB_FLUSH */
+> /* make various TB consistency checks */
+> @@ -302,10 +318,12 @@ static target_long decode_sleb128(uint8_t **pp)
+>
+> static int encode_search(TranslationBlock *tb, uint8_t *block)
+> {
+> -    uint8_t *highwater = tcg_ctx->code_gen_highwater;
+> -    uint8_t *p = block;
+> +    const uint8_t *highwater, *start;
+> +    uint8_t *p;
+>     int i, j, n;
+>
+> +    highwater = tcg_mirror_ptr_rw(tcg_ctx, tcg_ctx->code_gen_highwater);
+> +    start = p = tcg_mirror_ptr_rw(tcg_ctx, block);
+>     for (i = 0, n = tb->icount; i < n; ++i) {
+>         target_ulong prev;
+>
+> @@ -329,7 +347,7 @@ static int encode_search(TranslationBlock *tb, uint8_t *block)
+>         }
+>     }
+>
+> -    return p - block;
+> +    return p - start;
+> }
+>
+> /* The cpu state corresponding to 'searched_pc' is restored.
+> @@ -1067,7 +1085,11 @@ static inline void *alloc_code_gen_buffer(void)
+> #else
+> static inline void *alloc_code_gen_buffer(void)
+> {
+> +#if defined(CONFIG_IOS_JIT)
+> +    int prot = PROT_READ | PROT_EXEC;
+> +#else
+>     int prot = PROT_WRITE | PROT_READ | PROT_EXEC;
+> +#endif
+>     int flags = MAP_PRIVATE | MAP_ANONYMOUS;
+>     size_t size = tcg_ctx->code_gen_buffer_size;
+>     void *buf;
+> @@ -1118,6 +1140,39 @@ static inline void *alloc_code_gen_buffer(void)
+> }
+> #endif /* USE_STATIC_CODE_GEN_BUFFER, WIN32, POSIX */
+>
+> +#if defined(CONFIG_IOS_JIT)
+> +static inline void *alloc_jit_rw_mirror(void *base, size_t size)
+> +{
+> +    kern_return_t ret;
+> +    mach_vm_address_t mirror;
+> +    vm_prot_t cur_prot, max_prot;
+> +
+> +    mirror = 0;
+> +    ret = mach_vm_remap(mach_task_self(),
+> +                        &mirror,
+> +                        size,
+> +                        0,
+> +                        VM_FLAGS_ANYWHERE | VM_FLAGS_RANDOM_ADDR,
+> +                        mach_task_self(),
+> +                        (mach_vm_address_t)base,
+> +                        false,
+> +                        &cur_prot,
+> +                        &max_prot,
+> +                        VM_INHERIT_NONE
+> +                       );
+> +    if (ret != KERN_SUCCESS) {
+> +        return NULL;
+> +    }
+> +
+> +    if (mprotect((void *)mirror, size, PROT_READ | PROT_WRITE) != 0) {
+> +        munmap((void *)mirror, size);
+> +        return NULL;
+> +    }
+> +
+> +    return (void *)mirror;
+> +}
+> +#endif /* CONFIG_IOS_JIT */
+> +
+> static inline void code_gen_alloc(size_t tb_size)
+> {
+>     tcg_ctx->code_gen_buffer_size = size_code_gen_buffer(tb_size);
+> @@ -1126,6 +1181,19 @@ static inline void code_gen_alloc(size_t tb_size)
+>         fprintf(stderr, "Could not allocate dynamic translator buffer\n");
+>         exit(1);
+>     }
+> +#if defined(CONFIG_IOS_JIT)
+> +    void *mirror;
+> +
+> +    /* For iOS JIT we need a mirror mapping for code execution */
+> +    mirror = alloc_jit_rw_mirror(tcg_ctx->code_gen_buffer,
+> +                                 tcg_ctx->code_gen_buffer_size
+> +                                );
+> +    if (mirror == NULL) {
+> +        fprintf(stderr, "Could not remap code buffer mirror\n");
+> +        exit(1);
+> +    }
+> +    tcg_ctx->code_rw_mirror_diff = mirror - tcg_ctx->code_gen_buffer;
+> +#endif /* CONFIG_IOS_JIT */
+> }
+>
+> static bool tb_cmp(const void *ap, const void *bp)
+> @@ -1721,6 +1789,9 @@ TranslationBlock *tb_gen_code(CPUState *cpu,
+>         cpu_loop_exit(cpu);
+>     }
+>
+> +#if defined(CONFIG_IOS_JIT)
+> +    tb->code_rw_mirror_diff = tcg_ctx->code_rw_mirror_diff;
+> +#endif
+>     gen_code_buf = tcg_ctx->code_gen_ptr;
+>     tb->tc.ptr = gen_code_buf;
+>     tb->pc = pc;
+> diff --git a/tcg/tcg.c b/tcg/tcg.c
+> index bb890c506d..6cf70c33b0 100644
+> --- a/tcg/tcg.c
+> +++ b/tcg/tcg.c
+> @@ -70,7 +70,7 @@
+> static void tcg_target_init(TCGContext *s);
+> static const TCGTargetOpDef *tcg_target_op_def(TCGOpcode);
+> static void tcg_target_qemu_prologue(TCGContext *s);
+> -static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+> +static bool patch_reloc(TCGContext *s, tcg_insn_unit *code_ptr, int type,
+>                         intptr_t value, intptr_t addend);
+>
+> /* The CIE and FDE header definitions will be common to all hosts.  */
+> @@ -203,13 +203,15 @@ static TCGRegSet tcg_target_call_clobber_regs;
+> #if TCG_TARGET_INSN_UNIT_SIZE == 1
+> static __attribute__((unused)) inline void tcg_out8(TCGContext *s, uint8_t v)
+> {
+> -    *s->code_ptr++ = v;
+> +    *tcg_code_ptr_rw(s, s->code_ptr) = v;
+> +    s->code_ptr++;
+> }
+>
+> -static __attribute__((unused)) inline void tcg_patch8(tcg_insn_unit *p,
+> +static __attribute__((unused)) inline void tcg_patch8(TCGContext *s,
+> +                                                      tcg_insn_unit *p,
+>                                                       uint8_t v)
+> {
+> -    *p = v;
+> +    *tcg_code_ptr_rw(s, p) = v;
+> }
+> #endif
+>
+> @@ -217,21 +219,23 @@ static __attribute__((unused)) inline void tcg_patch8(tcg_insn_unit *p,
+> static __attribute__((unused)) inline void tcg_out16(TCGContext *s, uint16_t v)
+> {
+>     if (TCG_TARGET_INSN_UNIT_SIZE == 2) {
+> -        *s->code_ptr++ = v;
+> +        *tcg_code_ptr_rw(s, s->code_ptr) = v;
+> +        s->code_ptr++;
+>     } else {
+>         tcg_insn_unit *p = s->code_ptr;
+> -        memcpy(p, &v, sizeof(v));
+> +        memcpy(tcg_code_ptr_rw(s, p), &v, sizeof(v));
+>         s->code_ptr = p + (2 / TCG_TARGET_INSN_UNIT_SIZE);
+>     }
+> }
+>
+> -static __attribute__((unused)) inline void tcg_patch16(tcg_insn_unit *p,
+> +static __attribute__((unused)) inline void tcg_patch16(TCGContext *s,
+> +                                                       tcg_insn_unit *p,
+>                                                        uint16_t v)
+> {
+>     if (TCG_TARGET_INSN_UNIT_SIZE == 2) {
+> -        *p = v;
+> +        *tcg_code_ptr_rw(s, p) = v;
+>     } else {
+> -        memcpy(p, &v, sizeof(v));
+> +        memcpy(tcg_code_ptr_rw(s, p), &v, sizeof(v));
+>     }
+> }
+> #endif
+> @@ -240,21 +244,23 @@ static __attribute__((unused)) inline void tcg_patch16(tcg_insn_unit *p,
+> static __attribute__((unused)) inline void tcg_out32(TCGContext *s, uint32_t v)
+> {
+>     if (TCG_TARGET_INSN_UNIT_SIZE == 4) {
+> -        *s->code_ptr++ = v;
+> +        *tcg_code_ptr_rw(s, s->code_ptr) = v;
+> +        s->code_ptr++;
+>     } else {
+>         tcg_insn_unit *p = s->code_ptr;
+> -        memcpy(p, &v, sizeof(v));
+> +        memcpy(tcg_code_ptr_rw(s, p), &v, sizeof(v));
+>         s->code_ptr = p + (4 / TCG_TARGET_INSN_UNIT_SIZE);
+>     }
+> }
+>
+> -static __attribute__((unused)) inline void tcg_patch32(tcg_insn_unit *p,
+> +static __attribute__((unused)) inline void tcg_patch32(TCGContext *s,
+> +                                                       tcg_insn_unit *p,
+>                                                        uint32_t v)
+> {
+>     if (TCG_TARGET_INSN_UNIT_SIZE == 4) {
+>         *p = v;
+>     } else {
+> -        memcpy(p, &v, sizeof(v));
+> +        memcpy(tcg_code_ptr_rw(s, p), &v, sizeof(v));
+>     }
+> }
+> #endif
+> @@ -263,21 +269,23 @@ static __attribute__((unused)) inline void tcg_patch32(tcg_insn_unit *p,
+> static __attribute__((unused)) inline void tcg_out64(TCGContext *s, uint64_t v)
+> {
+>     if (TCG_TARGET_INSN_UNIT_SIZE == 8) {
+> -        *s->code_ptr++ = v;
+> +        *tcg_code_ptr_rw(s, s->code_ptr) = v;
+> +        s->code_ptr++;
+>     } else {
+>         tcg_insn_unit *p = s->code_ptr;
+> -        memcpy(p, &v, sizeof(v));
+> +        memcpy(tcg_code_ptr_rw(s, p), &v, sizeof(v));
+>         s->code_ptr = p + (8 / TCG_TARGET_INSN_UNIT_SIZE);
+>     }
+> }
+>
+> -static __attribute__((unused)) inline void tcg_patch64(tcg_insn_unit *p,
+> +static __attribute__((unused)) inline void tcg_patch64(TCGContext *s,
+> +                                                       tcg_insn_unit *p,
+>                                                        uint64_t v)
+> {
+>     if (TCG_TARGET_INSN_UNIT_SIZE == 8) {
+>         *p = v;
+>     } else {
+> -        memcpy(p, &v, sizeof(v));
+> +        memcpy(tcg_code_ptr_rw(s, p), &v, sizeof(v));
+>     }
+> }
+> #endif
+> @@ -325,7 +333,7 @@ static bool tcg_resolve_relocs(TCGContext *s)
+>         uintptr_t value = l->u.value;
+>
+>         QSIMPLEQ_FOREACH(r, &l->relocs, next) {
+> -            if (!patch_reloc(r->ptr, r->type, value, r->addend)) {
+> +            if (!patch_reloc(s, r->ptr, r->type, value, r->addend)) {
+>                 return false;
+>             }
+>         }
+> @@ -1039,7 +1047,7 @@ TranslationBlock *tcg_tb_alloc(TCGContext *s)
+>     }
+>     qatomic_set(&s->code_gen_ptr, next);
+>     s->data_gen_ptr = NULL;
+> -    return tb;
+> +    return (TranslationBlock *)tcg_mirror_ptr_rw(s, tb);
+> }
+>
+> void tcg_prologue_init(TCGContext *s)
+> @@ -1076,6 +1084,10 @@ void tcg_prologue_init(TCGContext *s)
+> #endif
+>
+>     buf1 = s->code_ptr;
+> +#if defined(CONFIG_IOS_JIT)
+> +    flush_dcache_range((uintptr_t)tcg_mirror_ptr_rw(s, buf0),
+> +                       (uintptr_t)tcg_mirror_ptr_rw(s, buf1));
+> +#endif
+>     flush_icache_range((uintptr_t)buf0, (uintptr_t)buf1);
+>
+>     /* Deduct the prologue from the buffer.  */
+> @@ -4267,6 +4279,12 @@ int tcg_gen_code(TCGContext *s, TranslationBlock *tb)
+>         return -2;
+>     }
+>
+> +#if defined(CONFIG_IOS_JIT)
+> +    /* flush data cache on mirror */
+> +    flush_dcache_range((uintptr_t)tcg_mirror_ptr_rw(s, s->code_buf),
+> +                       (uintptr_t)tcg_mirror_ptr_rw(s, s->code_ptr));
+> +#endif
+> +
+>     /* flush instruction cache */
+>     flush_icache_range((uintptr_t)s->code_buf, (uintptr_t)s->code_ptr);
+>
+> diff --git a/tcg/aarch64/tcg-target.c.inc b/tcg/aarch64/tcg-target.c.inc
+> index 1aa5f37fc6..ea3c06e917 100644
+> --- a/tcg/aarch64/tcg-target.c.inc
+> +++ b/tcg/aarch64/tcg-target.c.inc
+> @@ -78,40 +78,44 @@ static const int tcg_target_call_oarg_regs[1] = {
+> #define TCG_REG_GUEST_BASE TCG_REG_X28
+> #endif
+>
+> -static inline bool reloc_pc26(tcg_insn_unit *code_ptr,
+> +static inline bool reloc_pc26(TCGContext *s,
+> +                              tcg_insn_unit *code_ptr,
+>                               const tcg_insn_unit *target)
+> {
+>     ptrdiff_t offset = target - code_ptr;
+>     if (offset == sextract64(offset, 0, 26)) {
+>         /* read instruction, mask away previous PC_REL26 parameter contents,
+>            set the proper offset, then write back the instruction. */
+> -        *code_ptr = deposit32(*code_ptr, 0, 26, offset);
+> +        *tcg_code_ptr_rw(s, code_ptr) =
+> +            deposit32(*tcg_code_ptr_rw(s, code_ptr), 0, 26, offset);
+>         return true;
+>     }
+>     return false;
+> }
+>
+> -static inline bool reloc_pc19(tcg_insn_unit *code_ptr,
+> +static inline bool reloc_pc19(TCGContext *s,
+> +                              tcg_insn_unit *code_ptr,
+>                               const tcg_insn_unit *target)
+> {
+>     ptrdiff_t offset = target - code_ptr;
+>     if (offset == sextract64(offset, 0, 19)) {
+> -        *code_ptr = deposit32(*code_ptr, 5, 19, offset);
+> +        *tcg_code_ptr_rw(s, code_ptr) =
+> +            deposit32(*tcg_code_ptr_rw(s, code_ptr), 5, 19, offset);
+>         return true;
+>     }
+>     return false;
+> }
+>
+> -static inline bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+> +static inline bool patch_reloc(TCGContext *s, tcg_insn_unit *code_ptr, int type,
+>                                intptr_t value, intptr_t addend)
+> {
+>     tcg_debug_assert(addend == 0);
+>     switch (type) {
+>     case R_AARCH64_JUMP26:
+>     case R_AARCH64_CALL26:
+> -        return reloc_pc26(code_ptr, (tcg_insn_unit *)value);
+> +        return reloc_pc26(s, code_ptr, (tcg_insn_unit *)value);
+>     case R_AARCH64_CONDBR19:
+> -        return reloc_pc19(code_ptr, (tcg_insn_unit *)value);
+> +        return reloc_pc19(s, code_ptr, (tcg_insn_unit *)value);
+>     default:
+>         g_assert_not_reached();
+>     }
+> @@ -1343,7 +1347,7 @@ static inline void tcg_out_call(TCGContext *s, const tcg_insn_unit *target)
+> }
+>
+> void tb_target_set_jmp_target(uintptr_t tc_ptr, uintptr_t jmp_addr,
+> -                              uintptr_t addr)
+> +                              uintptr_t addr, uintptr_t wr_addr)
+> {
+>     tcg_insn_unit i1, i2;
+>     TCGType rt = TCG_TYPE_I64;
+> @@ -1364,7 +1368,10 @@ void tb_target_set_jmp_target(uintptr_t tc_ptr, uintptr_t jmp_addr,
+>         i2 = I3401_ADDI | rt << 31 | (addr & 0xfff) << 10 | rd << 5 | rd;
+>     }
+>     pair = (uint64_t)i2 << 32 | i1;
+> -    qatomic_set((uint64_t *)jmp_addr, pair);
+> +    qatomic_set((uint64_t *)wr_addr, pair);
+> +#if defined(CONFIG_IOS_JIT)
+> +    flush_dcache_range(wr_addr, wr_addr + 8);
+> +#endif
+>     flush_icache_range(jmp_addr, jmp_addr + 8);
+> }
+>
+> @@ -1583,7 +1590,7 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
+>     MemOp opc = get_memop(oi);
+>     MemOp size = opc & MO_SIZE;
+>
+> -    if (!reloc_pc19(lb->label_ptr[0], s->code_ptr)) {
+> +    if (!reloc_pc19(s, lb->label_ptr[0], s->code_ptr)) {
+>         return false;
+>     }
+>
+> @@ -1608,7 +1615,7 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
+>     MemOp opc = get_memop(oi);
+>     MemOp size = opc & MO_SIZE;
+>
+> -    if (!reloc_pc19(lb->label_ptr[0], s->code_ptr)) {
+> +    if (!reloc_pc19(s, lb->label_ptr[0], s->code_ptr)) {
+>         return false;
+>     }
+>
+> @@ -2919,11 +2926,11 @@ static void tcg_target_qemu_prologue(TCGContext *s)
+>     tcg_out_insn(s, 3207, RET, TCG_REG_LR);
+> }
+>
+> -static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
+> +static void tcg_out_nop_fill(TCGContext *s, tcg_insn_unit *p, int count)
+> {
+>     int i;
+>     for (i = 0; i < count; ++i) {
+> -        p[i] = NOP;
+> +        (tcg_code_ptr_rw(s, p))[i] = NOP;
+>     }
+> }
+>
+> diff --git a/tcg/arm/tcg-target.c.inc b/tcg/arm/tcg-target.c.inc
+> index 5ceb06a971..ee8ab72c2e 100644
+> --- a/tcg/arm/tcg-target.c.inc
+> +++ b/tcg/arm/tcg-target.c.inc
+> @@ -187,18 +187,21 @@ static const uint8_t tcg_cond_to_arm_cond[] = {
+>     [TCG_COND_GTU] = COND_HI,
+> };
+>
+> -static inline bool reloc_pc24(tcg_insn_unit *code_ptr,
+> +static inline bool reloc_pc24(TCGContext *s,
+> +                              tcg_insn_unit *code_ptr,
+>                               const tcg_insn_unit *target)
+> {
+>     ptrdiff_t offset = (tcg_ptr_byte_diff(target, code_ptr) - 8) >> 2;
+>     if (offset == sextract32(offset, 0, 24)) {
+> -        *code_ptr = (*code_ptr & ~0xffffff) | (offset & 0xffffff);
+> +        *tcg_code_ptr_rw(s, code_ptr) =
+> +            (*tcg_code_ptr_rw(s, code_ptr) & ~0xffffff) | (offset & 0xffffff);
+>         return true;
+>     }
+>     return false;
+> }
+>
+> -static inline bool reloc_pc13(tcg_insn_unit *code_ptr,
+> +static inline bool reloc_pc13(TCGContext *s,
+> +                              tcg_insn_unit *code_ptr,
+>                               const tcg_insn_unit *target)
+> {
+>     ptrdiff_t offset = tcg_ptr_byte_diff(target, code_ptr) - 8;
+> @@ -211,21 +214,21 @@ static inline bool reloc_pc13(tcg_insn_unit *code_ptr,
+>         }
+>         insn = deposit32(insn, 23, 1, u);
+>         insn = deposit32(insn, 0, 12, offset);
+> -        *code_ptr = insn;
+> +        *tcg_code_ptr_rw(s, code_ptr) = insn;
+>         return true;
+>     }
+>     return false;
+> }
+>
+> -static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+> +static bool patch_reloc(TCGContext *s, tcg_insn_unit *code_ptr, int type,
+>                         intptr_t value, intptr_t addend)
+> {
+>     tcg_debug_assert(addend == 0);
+>
+>     if (type == R_ARM_PC24) {
+> -        return reloc_pc24(code_ptr, (tcg_insn_unit *)value);
+> +        return reloc_pc24(s, code_ptr, (tcg_insn_unit *)value);
+>     } else if (type == R_ARM_PC13) {
+> -        return reloc_pc13(code_ptr, (tcg_insn_unit *)value);
+> +        return reloc_pc13(s, code_ptr, (tcg_insn_unit *)value);
+>     } else {
+>         g_assert_not_reached();
+>     }
+> @@ -1350,7 +1353,7 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
+>     MemOp opc = get_memop(oi);
+>     void *func;
+>
+> -    if (!reloc_pc24(lb->label_ptr[0], s->code_ptr)) {
+> +    if (!reloc_pc24(s, lb->label_ptr[0], s->code_ptr)) {
+>         return false;
+>     }
+>
+> @@ -1413,7 +1416,7 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
+>     TCGMemOpIdx oi = lb->oi;
+>     MemOp opc = get_memop(oi);
+>
+> -    if (!reloc_pc24(lb->label_ptr[0], s->code_ptr)) {
+> +    if (!reloc_pc24(s, lb->label_ptr[0], s->code_ptr)) {
+>         return false;
+>     }
+>
+> @@ -2257,11 +2260,11 @@ static inline void tcg_out_movi(TCGContext *s, TCGType type,
+>     tcg_out_movi32(s, COND_AL, ret, arg);
+> }
+>
+> -static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
+> +static void tcg_out_nop_fill(TCGContext *s, tcg_insn_unit *p, int count)
+> {
+>     int i;
+>     for (i = 0; i < count; ++i) {
+> -        p[i] = INSN_NOP;
+> +        (tcg_code_ptr_rw(s, p))[i] = INSN_NOP;
+>     }
+> }
+>
+> diff --git a/tcg/i386/tcg-target.c.inc b/tcg/i386/tcg-target.c.inc
+> index 69acb51f5d..76bdaf748f 100644
+> --- a/tcg/i386/tcg-target.c.inc
+> +++ b/tcg/i386/tcg-target.c.inc
+> @@ -167,7 +167,7 @@ static bool have_lzcnt;
+>
+> static const tcg_insn_unit *tb_ret_addr;
+>
+> -static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+> +static bool patch_reloc(TCGContext *s, tcg_insn_unit *code_ptr, int type,
+>                         intptr_t value, intptr_t addend)
+> {
+>     value += addend;
+> @@ -179,14 +179,14 @@ static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+>         }
+>         /* FALLTHRU */
+>     case R_386_32:
+> -        tcg_patch32(code_ptr, value);
+> +        tcg_patch32(s, code_ptr, value);
+>         break;
+>     case R_386_PC8:
+>         value -= (uintptr_t)code_ptr;
+>         if (value != (int8_t)value) {
+>             return false;
+>         }
+> -        tcg_patch8(code_ptr, value);
+> +        tcg_patch8(s, code_ptr, value);
+>         break;
+>     default:
+>         tcg_abort();
+> @@ -1805,9 +1805,9 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+>     int rexw = (l->type == TCG_TYPE_I64 ? P_REXW : 0);
+>
+>     /* resolve label address */
+> -    tcg_patch32(label_ptr[0], s->code_ptr - label_ptr[0] - 4);
+> +    tcg_patch32(s, label_ptr[0], s->code_ptr - label_ptr[0] - 4);
+>     if (TARGET_LONG_BITS > TCG_TARGET_REG_BITS) {
+> -        tcg_patch32(label_ptr[1], s->code_ptr - label_ptr[1] - 4);
+> +        tcg_patch32(s, label_ptr[1], s->code_ptr - label_ptr[1] - 4);
+>     }
+>
+>     if (TCG_TARGET_REG_BITS == 32) {
+> @@ -1890,9 +1890,9 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+>     TCGReg retaddr;
+>
+>     /* resolve label address */
+> -    tcg_patch32(label_ptr[0], s->code_ptr - label_ptr[0] - 4);
+> +    tcg_patch32(s, label_ptr[0], s->code_ptr - label_ptr[0] - 4);
+>     if (TARGET_LONG_BITS > TCG_TARGET_REG_BITS) {
+> -        tcg_patch32(label_ptr[1], s->code_ptr - label_ptr[1] - 4);
+> +        tcg_patch32(s, label_ptr[1], s->code_ptr - label_ptr[1] - 4);
+>     }
+>
+>     if (TCG_TARGET_REG_BITS == 32) {
+> @@ -3842,9 +3842,9 @@ static void tcg_target_qemu_prologue(TCGContext *s)
+>     tcg_out_opc(s, OPC_RET, 0, 0, 0);
+> }
+>
+> -static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
+> +static void tcg_out_nop_fill(TCGContext *s, tcg_insn_unit *p, int count)
+> {
+> -    memset(p, 0x90, count);
+> +    memset(tcg_code_ptr_rw(s, p), 0x90, count);
+> }
+>
+> static void tcg_target_init(TCGContext *s)
+> diff --git a/tcg/mips/tcg-target.c.inc b/tcg/mips/tcg-target.c.inc
+> index ace413afde..d4389f7135 100644
+> --- a/tcg/mips/tcg-target.c.inc
+> +++ b/tcg/mips/tcg-target.c.inc
+> @@ -153,10 +153,12 @@ static inline uint32_t reloc_pc16_val(const tcg_insn_unit *pc,
+>     return disp & 0xffff;
+> }
+>
+> -static inline void reloc_pc16(tcg_insn_unit *pc,
+> +static inline void reloc_pc16(TCGContext *s,
+> +                              tcg_insn_unit *pc,
+>                               const tcg_insn_unit *target)
+> {
+> -    *pc = deposit32(*pc, 0, 16, reloc_pc16_val(pc, target));
+> +    *tcg_code_ptr_rw(s, pc) =
+> +        deposit32(*tcg_code_ptr_rw(s, pc), 0, 16, reloc_pc16_val(pc, target));
+> }
+>
+> static inline uint32_t reloc_26_val(const tcg_insn_unit *pc,
+> @@ -166,18 +168,20 @@ static inline uint32_t reloc_26_val(const tcg_insn_unit *pc,
+>     return ((uintptr_t)target >> 2) & 0x3ffffff;
+> }
+>
+> -static inline void reloc_26(tcg_insn_unit *pc,
+> +static inline void reloc_26(TCGContext *s,
+> +                            tcg_insn_unit *pc,
+>                             const tcg_insn_unit *target)
+> {
+> -    *pc = deposit32(*pc, 0, 26, reloc_26_val(pc, target));
+> +    *tcg_code_ptr_rw(s, pc) =
+> +        deposit32(*tcg_code_ptr_rw(s, pc), 0, 26, reloc_26_val(pc, target));
+> }
+>
+> -static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+> +static bool patch_reloc(TCGContext *s, tcg_insn_unit *code_ptr, int type,
+>                         intptr_t value, intptr_t addend)
+> {
+>     tcg_debug_assert(type == R_MIPS_PC16);
+>     tcg_debug_assert(addend == 0);
+> -    reloc_pc16(code_ptr, (tcg_insn_unit *)value);
+> +    reloc_pc16(s, code_ptr, (tcg_insn_unit *)value);
+>     return true;
+> }
+>
+> @@ -929,7 +933,7 @@ static void tcg_out_brcond(TCGContext *s, TCGCond cond, TCGReg arg1,
+>
+>     tcg_out_opc_br(s, b_opc, arg1, arg2);
+>     if (l->has_value) {
+> -        reloc_pc16(s->code_ptr - 1, l->u.value_ptr);
+> +        reloc_pc16(s, s->code_ptr - 1, l->u.value_ptr);
+>     } else {
+>         tcg_out_reloc(s, s->code_ptr - 1, R_MIPS_PC16, l, 0);
+>     }
+> @@ -1320,9 +1324,9 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+>     int i;
+>
+>     /* resolve label address */
+> -    reloc_pc16(l->label_ptr[0], s->code_ptr);
+> +    reloc_pc16(s, l->label_ptr[0], s->code_ptr);
+>     if (TCG_TARGET_REG_BITS < TARGET_LONG_BITS) {
+> -        reloc_pc16(l->label_ptr[1], s->code_ptr);
+> +        reloc_pc16(s, l->label_ptr[1], s->code_ptr);
+>     }
+>
+>     i = 1;
+> @@ -1350,7 +1354,7 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+>     }
+>
+>     tcg_out_opc_br(s, OPC_BEQ, TCG_REG_ZERO, TCG_REG_ZERO);
+> -    reloc_pc16(s->code_ptr - 1, l->raddr);
+> +    reloc_pc16(s, s->code_ptr - 1, l->raddr);
+>
+>     /* delay slot */
+>     if (TCG_TARGET_REG_BITS == 64 && l->type == TCG_TYPE_I32) {
+> @@ -1370,9 +1374,9 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+>     int i;
+>
+>     /* resolve label address */
+> -    reloc_pc16(l->label_ptr[0], s->code_ptr);
+> +    reloc_pc16(s, l->label_ptr[0], s->code_ptr);
+>     if (TCG_TARGET_REG_BITS < TARGET_LONG_BITS) {
+> -        reloc_pc16(l->label_ptr[1], s->code_ptr);
+> +        reloc_pc16(s, l->label_ptr[1], s->code_ptr);
+>     }
+>
+>     i = 1;
+> @@ -2662,9 +2666,12 @@ static void tcg_target_init(TCGContext *s)
+> }
+>
+> void tb_target_set_jmp_target(uintptr_t tc_ptr, uintptr_t jmp_addr,
+> -                              uintptr_t addr)
+> +                              uintptr_t addr, uintptr_t wr_addr)
+> {
+> -    qatomic_set((uint32_t *)jmp_addr, deposit32(OPC_J, 0, 26, addr >> 2));
+> +    qatomic_set((uint32_t *)wr_addr, deposit32(OPC_J, 0, 26, addr >> 2));
+> +#if defined(CONFIG_IOS_JIT)
+> +    flush_dcache_range(wr_addr, wr_addr + 4);
+> +#endif
+>     flush_icache_range(jmp_addr, jmp_addr + 4);
+> }
+>
+> diff --git a/tcg/ppc/tcg-target.c.inc b/tcg/ppc/tcg-target.c.inc
+> index 289388b603..50d72529d2 100644
+> --- a/tcg/ppc/tcg-target.c.inc
+> +++ b/tcg/ppc/tcg-target.c.inc
+> @@ -192,12 +192,14 @@ static uint32_t reloc_pc24_val(const tcg_insn_unit *pc,
+>     return disp & 0x3fffffc;
+> }
+>
+> -static bool reloc_pc24(tcg_insn_unit *pc,
+> +static bool reloc_pc24(TCGContext *s,
+> +                       tcg_insn_unit *pc,
+>                        const tcg_insn_unit *target)
+> {
+>     ptrdiff_t disp = tcg_ptr_byte_diff(target, pc);
+>     if (in_range_b(disp)) {
+> -        *pc = (*pc & ~0x3fffffc) | (disp & 0x3fffffc);
+> +        *tcg_code_ptr_rw(s, pc) =
+> +            (*tcg_code_ptr_rw(s, pc) & ~0x3fffffc) | (disp & 0x3fffffc);
+>         return true;
+>     }
+>     return false;
+> @@ -211,12 +213,14 @@ static uint16_t reloc_pc14_val(const tcg_insn_unit *pc,
+>     return disp & 0xfffc;
+> }
+>
+> -static bool reloc_pc14(tcg_insn_unit *pc,
+> +static bool reloc_pc14(TCGContext *s,
+> +                       tcg_insn_unit *pc,
+>                        const tcg_insn_unit *target)
+> {
+>     ptrdiff_t disp = tcg_ptr_byte_diff(target, pc);
+>     if (disp == (int16_t) disp) {
+> -        *pc = (*pc & ~0xfffc) | (disp & 0xfffc);
+> +        *tcg_code_ptr_rw(s, pc) =
+> +            (*tcg_code_ptr_rw(s, pc) & ~0xfffc) | (disp & 0xfffc);
+>         return true;
+>     }
+>     return false;
+> @@ -674,7 +678,7 @@ static const uint32_t tcg_to_isel[] = {
+>     [TCG_COND_GTU] = ISEL | BC_(7, CR_GT),
+> };
+>
+> -static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+> +static bool patch_reloc(TCGContext *s, tcg_insn_unit *code_ptr, int type,
+>                         intptr_t value, intptr_t addend)
+> {
+>     tcg_insn_unit *target;
+> @@ -686,9 +690,9 @@ static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+>
+>     switch (type) {
+>     case R_PPC_REL14:
+> -        return reloc_pc14(code_ptr, target);
+> +        return reloc_pc14(s, code_ptr, target);
+>     case R_PPC_REL24:
+> -        return reloc_pc24(code_ptr, target);
+> +        return reloc_pc24(s, code_ptr, target);
+>     case R_PPC_ADDR16:
+>         /*
+>          * We are (slightly) abusing this relocation type.  In particular,
+> @@ -1727,7 +1731,7 @@ static void tcg_out_mb(TCGContext *s, TCGArg a0)
+> }
+>
+> void tb_target_set_jmp_target(uintptr_t tc_ptr, uintptr_t jmp_addr,
+> -                              uintptr_t addr)
+> +                              uintptr_t addr, uintptr_t wr_addr)
+> {
+>     if (TCG_TARGET_REG_BITS == 64) {
+>         tcg_insn_unit i1, i2;
+> @@ -1756,12 +1760,18 @@ void tb_target_set_jmp_target(uintptr_t tc_ptr, uintptr_t jmp_addr,
+>
+>         /* As per the enclosing if, this is ppc64.  Avoid the _Static_assert
+>            within qatomic_set that would fail to build a ppc32 host.  */
+> -        qatomic_set__nocheck((uint64_t *)jmp_addr, pair);
+> +        qatomic_set__nocheck((uint64_t *)wr_addr, pair);
+> +#if defined(CONFIG_IOS_JIT)
+> +        flush_dcache_range(wr_addr, wr_addr + 8);
+> +#endif
+>         flush_icache_range(jmp_addr, jmp_addr + 8);
+>     } else {
+>         intptr_t diff = addr - jmp_addr;
+>         tcg_debug_assert(in_range_b(diff));
+> -        qatomic_set((uint32_t *)jmp_addr, B | (diff & 0x3fffffc));
+> +        qatomic_set((uint32_t *)wr_addr, B | (diff & 0x3fffffc));
+> +#if defined(CONFIG_IOS_JIT)
+> +        flush_dcache_range(wr_addr, wr_addr + 8);
+> +#endif
+>         flush_icache_range(jmp_addr, jmp_addr + 4);
+>     }
+> }
+> @@ -2012,7 +2022,7 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
+>     MemOp opc = get_memop(oi);
+>     TCGReg hi, lo, arg = TCG_REG_R3;
+>
+> -    if (!reloc_pc14(lb->label_ptr[0], s->code_ptr)) {
+> +    if (!reloc_pc14(s, lb->label_ptr[0], s->code_ptr)) {
+>         return false;
+>     }
+>
+> @@ -2060,7 +2070,7 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
+>     MemOp s_bits = opc & MO_SIZE;
+>     TCGReg hi, lo, arg = TCG_REG_R3;
+>
+> -    if (!reloc_pc14(lb->label_ptr[0], s->code_ptr)) {
+> +    if (!reloc_pc14(s, lb->label_ptr[0], s->code_ptr)) {
+>         return false;
+>     }
+>
+> @@ -2257,11 +2267,11 @@ static void tcg_out_qemu_st(TCGContext *s, const TCGArg *args, bool is_64)
+> #endif
+> }
+>
+> -static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
+> +static void tcg_out_nop_fill(TCGContext *s, tcg_insn_unit *p, int count)
+> {
+>     int i;
+>     for (i = 0; i < count; ++i) {
+> -        p[i] = NOP;
+> +        (tcg_code_ptr_rw(s, p))[i] = NOP;
+>     }
+> }
+>
+> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+> index 5432ee89db..19882db57f 100644
+> --- a/tcg/riscv/tcg-target.c.inc
+> +++ b/tcg/riscv/tcg-target.c.inc
+> @@ -413,11 +413,11 @@ static void tcg_out_opc_jump(TCGContext *s, RISCVInsn opc,
+>     tcg_out32(s, encode_uj(opc, rd, imm));
+> }
+>
+> -static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
+> +static void tcg_out_nop_fill(TCGContext *s, tcg_insn_unit *p, int count)
+> {
+>     int i;
+>     for (i = 0; i < count; ++i) {
+> -        p[i] = encode_i(OPC_ADDI, TCG_REG_ZERO, TCG_REG_ZERO, 0);
+> +        (tcg_code_ptr_rw(s, p))[i] = encode_i(OPC_ADDI, TCG_REG_ZERO, TCG_REG_ZERO, 0);
+>     }
+> }
+>
+> @@ -425,46 +425,52 @@ static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
+>  * Relocations
+>  */
+>
+> -static bool reloc_sbimm12(tcg_insn_unit *code_ptr, tcg_insn_unit *target)
+> +static bool reloc_sbimm12(TCGContext *s,
+> +                          tcg_insn_unit *code_ptr,
+> +                          const tcg_insn_unit *target)
+> {
+>     intptr_t offset = (intptr_t)target - (intptr_t)code_ptr;
+>
+>     if (offset == sextreg(offset, 1, 12) << 1) {
+> -        code_ptr[0] |= encode_sbimm12(offset);
+> +        (tcg_code_ptr_rw(s, code_ptr))[0] |= encode_sbimm12(offset);
+>         return true;
+>     }
+>
+>     return false;
+> }
+>
+> -static bool reloc_jimm20(tcg_insn_unit *code_ptr, tcg_insn_unit *target)
+> +static bool reloc_jimm20(TCGContext *s,
+> +                         tcg_insn_unit *code_ptr,
+> +                         const tcg_insn_unit *target)
+> {
+>     intptr_t offset = (intptr_t)target - (intptr_t)code_ptr;
+>
+>     if (offset == sextreg(offset, 1, 20) << 1) {
+> -        code_ptr[0] |= encode_ujimm20(offset);
+> +        (tcg_code_ptr_rw(s, code_ptr))[0] |= encode_ujimm20(offset);
+>         return true;
+>     }
+>
+>     return false;
+> }
+>
+> -static bool reloc_call(tcg_insn_unit *code_ptr, tcg_insn_unit *target)
+> +static bool reloc_call(TCGContext *s,
+> +                       tcg_insn_unit *code_ptr,
+> +                       const tcg_insn_unit *target)
+> {
+>     intptr_t offset = (intptr_t)target - (intptr_t)code_ptr;
+>     int32_t lo = sextreg(offset, 0, 12);
+>     int32_t hi = offset - lo;
+>
+>     if (offset == hi + lo) {
+> -        code_ptr[0] |= encode_uimm20(hi);
+> -        code_ptr[1] |= encode_imm12(lo);
+> +        (tcg_code_ptr_rw(s, code_ptr))[0] |= encode_uimm20(hi);
+> +        (tcg_code_ptr_rw(s, code_ptr))[1] |= encode_imm12(lo);
+>         return true;
+>     }
+>
+>     return false;
+> }
+>
+> -static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+> +static bool patch_reloc(TCGContext *s, tcg_insn_unit *code_ptr, int type,
+>                         intptr_t value, intptr_t addend)
+> {
+>     uint32_t insn = *code_ptr;
+> @@ -478,7 +484,7 @@ static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+>         diff = value - (uintptr_t)code_ptr;
+>         short_jmp = diff == sextreg(diff, 0, 12);
+>         if (short_jmp) {
+> -            return reloc_sbimm12(code_ptr, (tcg_insn_unit *)value);
+> +            return reloc_sbimm12(s, code_ptr, (tcg_insn_unit *)value);
+>         } else {
+>             /* Invert the condition */
+>             insn = insn ^ (1 << 12);
+> @@ -499,9 +505,9 @@ static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+>         }
+>         break;
+>     case R_RISCV_JAL:
+> -        return reloc_jimm20(code_ptr, (tcg_insn_unit *)value);
+> +        return reloc_jimm20(s, code_ptr, (tcg_insn_unit *)value);
+>     case R_RISCV_CALL:
+> -        return reloc_call(code_ptr, (tcg_insn_unit *)value);
+> +        return reloc_call(s, code_ptr, (tcg_insn_unit *)value);
+>     default:
+>         tcg_abort();
+>     }
+> @@ -557,7 +563,7 @@ static void tcg_out_movi(TCGContext *s, TCGType type, TCGReg rd,
+>     if (tmp == (int32_t)tmp) {
+>         tcg_out_opc_upper(s, OPC_AUIPC, rd, 0);
+>         tcg_out_opc_imm(s, OPC_ADDI, rd, rd, 0);
+> -        ret = reloc_call(s->code_ptr - 2, (tcg_insn_unit *)val);
+> +        ret = reloc_call(s, s->code_ptr - 2, (tcg_insn_unit *)val);
+>         tcg_debug_assert(ret == true);
+>         return;
+>     }
+> @@ -875,7 +881,7 @@ static void tcg_out_call_int(TCGContext *s, const tcg_insn_unit *arg, bool tail)
+>         /* long jump: -2147483646 to 2147483648 */
+>         tcg_out_opc_upper(s, OPC_AUIPC, TCG_REG_TMP0, 0);
+>         tcg_out_opc_imm(s, OPC_JALR, link, TCG_REG_TMP0, 0);
+> -        ret = reloc_call(s->code_ptr - 2, arg);\
+> +        ret = reloc_call(s, s->code_ptr - 2, arg);\
+>         tcg_debug_assert(ret == true);
+>     } else if (TCG_TARGET_REG_BITS == 64) {
+>         /* far jump: 64-bit */
+> @@ -1053,7 +1059,7 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+>     }
+>
+>     /* resolve label address */
+> -    if (!patch_reloc(l->label_ptr[0], R_RISCV_BRANCH,
+> +    if (!patch_reloc(s, l->label_ptr[0], R_RISCV_BRANCH,
+>                      (intptr_t) s->code_ptr, 0)) {
+>         return false;
+>     }
+> @@ -1088,7 +1094,7 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+>     }
+>
+>     /* resolve label address */
+> -    if (!patch_reloc(l->label_ptr[0], R_RISCV_BRANCH,
+> +    if (!patch_reloc(s, l->label_ptr[0], R_RISCV_BRANCH,
+>                      (intptr_t) s->code_ptr, 0)) {
+>         return false;
+>     }
+> diff --git a/tcg/s390/tcg-target.c.inc b/tcg/s390/tcg-target.c.inc
+> index 7c6917f3c4..f9498ddf63 100644
+> --- a/tcg/s390/tcg-target.c.inc
+> +++ b/tcg/s390/tcg-target.c.inc
+> @@ -366,7 +366,7 @@ static void * const qemu_st_helpers[16] = {
+> static const tcg_insn_unit *tb_ret_addr;
+> uint64_t s390_facilities;
+>
+> -static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+> +static bool patch_reloc(TCGContext *s, tcg_insn_unit *code_ptr, int type,
+>                         intptr_t value, intptr_t addend)
+> {
+>     intptr_t pcrel2;
+> @@ -378,13 +378,13 @@ static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+>     switch (type) {
+>     case R_390_PC16DBL:
+>         if (pcrel2 == (int16_t)pcrel2) {
+> -            tcg_patch16(code_ptr, pcrel2);
+> +            tcg_patch16(s, code_ptr, pcrel2);
+>             return true;
+>         }
+>         break;
+>     case R_390_PC32DBL:
+>         if (pcrel2 == (int32_t)pcrel2) {
+> -            tcg_patch32(code_ptr, pcrel2);
+> +            tcg_patch32(s, code_ptr, pcrel2);
+>             return true;
+>         }
+>         break;
+> @@ -392,7 +392,7 @@ static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+>         if (value == sextract64(value, 0, 20)) {
+>             old = *(uint32_t *)code_ptr & 0xf00000ff;
+>             old |= ((value & 0xfff) << 16) | ((value & 0xff000) >> 4);
+> -            tcg_patch32(code_ptr, old);
+> +            tcg_patch32(s, code_ptr, old);
+>             return true;
+>         }
+>         break;
+> @@ -1613,7 +1613,7 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
+>     TCGMemOpIdx oi = lb->oi;
+>     MemOp opc = get_memop(oi);
+>
+> -    if (!patch_reloc(lb->label_ptr[0], R_390_PC16DBL,
+> +    if (!patch_reloc(s, lb->label_ptr[0], R_390_PC16DBL,
+>                      (intptr_t)s->code_ptr, 2)) {
+>         return false;
+>     }
+> @@ -1638,7 +1638,7 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
+>     TCGMemOpIdx oi = lb->oi;
+>     MemOp opc = get_memop(oi);
+>
+> -    if (!patch_reloc(lb->label_ptr[0], R_390_PC16DBL,
+> +    if (!patch_reloc(s, lb->label_ptr[0], R_390_PC16DBL,
+>                      (intptr_t)s->code_ptr, 2)) {
+>         return false;
+>     }
+> @@ -2576,9 +2576,9 @@ static void tcg_target_qemu_prologue(TCGContext *s)
+>     tcg_out_insn(s, RR, BCR, S390_CC_ALWAYS, TCG_REG_R14);
+> }
+>
+> -static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
+> +static void tcg_out_nop_fill(TCGContext *s, tcg_insn_unit *p, int count)
+> {
+> -    memset(p, 0x07, count * sizeof(tcg_insn_unit));
+> +    memset(tcg_code_ptr_rw(s, p), 0x07, count * sizeof(tcg_insn_unit));
+> }
+>
+> typedef struct {
+> diff --git a/tcg/sparc/tcg-target.c.inc b/tcg/sparc/tcg-target.c.inc
+> index 5eac18b719..41dbd21cb4 100644
+> --- a/tcg/sparc/tcg-target.c.inc
+> +++ b/tcg/sparc/tcg-target.c.inc
+> @@ -291,14 +291,14 @@ static inline int check_fit_i32(int32_t val, unsigned int bits)
+> # define check_fit_ptr  check_fit_i32
+> #endif
+>
+> -static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+> +static bool patch_reloc(TCGContext *s, tcg_insn_unit *code_ptr, int type,
+>                         intptr_t value, intptr_t addend)
+> {
+>     uint32_t insn = *code_ptr;
+>     intptr_t pcrel;
+>
+>     value += addend;
+> -    pcrel = tcg_ptr_byte_diff((tcg_insn_unit *)value, code_ptr);
+> +    pcrel = tcg_ptr_byte_diff((const tcg_insn_unit *)value, code_ptr);
+>
+>     switch (type) {
+>     case R_SPARC_WDISP16:
+> @@ -1048,11 +1048,11 @@ static void tcg_target_qemu_prologue(TCGContext *s)
+> #endif
+> }
+>
+> -static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
+> +static void tcg_out_nop_fill(TCGContext *s, tcg_insn_unit *p, int count)
+> {
+>     int i;
+>     for (i = 0; i < count; ++i) {
+> -        p[i] = NOP;
+> +        (tcg_code_ptr_rw(s, p))[i] = NOP;
+>     }
+> }
+>
+> @@ -1226,7 +1226,8 @@ static void tcg_out_qemu_ld(TCGContext *s, TCGReg data, TCGReg addr,
+>         }
+>     }
+>
+> -    *label_ptr |= INSN_OFF19(tcg_ptr_byte_diff(s->code_ptr, label_ptr));
+> +    *tcg_code_ptr_rw(s, label_ptr) |=
+> +        INSN_OFF19(tcg_ptr_byte_diff(s->code_ptr, label_ptr));
+> #else
+>     if (SPARC64 && TARGET_LONG_BITS == 32) {
+>         tcg_out_arithi(s, TCG_REG_T1, addr, 0, SHIFT_SRL);
+> @@ -1822,7 +1823,7 @@ void tcg_register_jit(void *buf, size_t buf_size)
+> }
+>
+> void tb_target_set_jmp_target(uintptr_t tc_ptr, uintptr_t jmp_addr,
+> -                              uintptr_t addr)
+> +                              uintptr_t addr, uintptr_t wr_addr)
+> {
+>     intptr_t tb_disp = addr - tc_ptr;
+>     intptr_t br_disp = addr - jmp_addr;
+> @@ -1834,8 +1835,11 @@ void tb_target_set_jmp_target(uintptr_t tc_ptr, uintptr_t jmp_addr,
+>     tcg_debug_assert(br_disp == (int32_t)br_disp);
+>
+>     if (!USE_REG_TB) {
+> -        qatomic_set((uint32_t *)jmp_addr,
+> +        qatomic_set((uint32_t *)wr_addr,
+> 		    deposit32(CALL, 0, 30, br_disp >> 2));
+> +#if defined(CONFIG_IOS_JIT)
+> +        flush_dcache_range(wr_addr, wr_addr + 4);
+> +#endif
+>         flush_icache_range(jmp_addr, jmp_addr + 4);
+>         return;
+>     }
+> @@ -1859,6 +1863,9 @@ void tb_target_set_jmp_target(uintptr_t tc_ptr, uintptr_t jmp_addr,
+>               | INSN_IMM13((tb_disp & 0x3ff) | -0x400));
+>     }
+>
+> -    qatomic_set((uint64_t *)jmp_addr, deposit64(i2, 32, 32, i1));
+> +    qatomic_set((uint64_t *)wr_addr, deposit64(i2, 32, 32, i1));
+> +#if defined(CONFIG_IOS_JIT)
+> +    flush_dcache_range(wr_addr, wr_addr + 8);
+> +#endif
+>     flush_icache_range(jmp_addr, jmp_addr + 8);
+> }
+> diff --git a/tcg/tcg-pool.c.inc b/tcg/tcg-pool.c.inc
+> index 82cbcc89bd..8434496e72 100644
+> --- a/tcg/tcg-pool.c.inc
+> +++ b/tcg/tcg-pool.c.inc
+> @@ -119,7 +119,7 @@ static inline void new_pool_l8(TCGContext *s, int rtype, tcg_insn_unit *label,
+> }
+>
+> /* To be provided by cpu/tcg-target.c.inc.  */
+> -static void tcg_out_nop_fill(tcg_insn_unit *p, int count);
+> +static void tcg_out_nop_fill(TCGContext *s, tcg_insn_unit *p, int count);
+>
+> static int tcg_out_pool_finalize(TCGContext *s)
+> {
+> @@ -135,7 +135,7 @@ static int tcg_out_pool_finalize(TCGContext *s)
+>        again when allocating the next TranslationBlock structure.  */
+>     a = (void *)ROUND_UP((uintptr_t)s->code_ptr,
+>                          sizeof(tcg_target_ulong) * p->nlong);
+> -    tcg_out_nop_fill(s->code_ptr, (tcg_insn_unit *)a - s->code_ptr);
+> +    tcg_out_nop_fill(s, s->code_ptr, (tcg_insn_unit *)a - s->code_ptr);
+>     s->data_gen_ptr = a;
+>
+>     for (; p != NULL; p = p->next) {
+> @@ -144,11 +144,12 @@ static int tcg_out_pool_finalize(TCGContext *s)
+>             if (unlikely(a > s->code_gen_highwater)) {
+>                 return -1;
+>             }
+> -            memcpy(a, p->data, size);
+> +            memcpy(tcg_mirror_ptr_rw(s, a), p->data, size);
+>             a += size;
+>             l = p;
+>         }
+> -        if (!patch_reloc(p->label, p->rtype, (intptr_t)a - size, p->addend)) {
+> +        if (!patch_reloc(s, p->label, p->rtype,
+> +                         (intptr_t)a - size, p->addend)) {
+>             return -2;
+>         }
+>     }
+> diff --git a/tcg/tci/tcg-target.c.inc b/tcg/tci/tcg-target.c.inc
+> index d5a4d9d37c..133213be3a 100644
+> --- a/tcg/tci/tcg-target.c.inc
+> +++ b/tcg/tci/tcg-target.c.inc
+> @@ -369,7 +369,7 @@ static const char *const tcg_target_reg_names[TCG_TARGET_NB_REGS] = {
+> };
+> #endif
+>
+> -static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+> +static bool patch_reloc(TCGContext *s, tcg_insn_unit *code_ptr, int type,
+>                         intptr_t value, intptr_t addend)
+> {
+>     /* tcg_out_reloc always uses the same type, addend. */
+> @@ -377,9 +377,9 @@ static bool patch_reloc(tcg_insn_unit *code_ptr, int type,
+>     tcg_debug_assert(addend == 0);
+>     tcg_debug_assert(value != 0);
+>     if (TCG_TARGET_REG_BITS == 32) {
+> -        tcg_patch32(code_ptr, value);
+> +        tcg_patch32(s, code_ptr, value);
+>     } else {
+> -        tcg_patch64(code_ptr, value);
+> +        tcg_patch64(s, code_ptr, value);
+>     }
+>     return true;
+> }
+>
 
