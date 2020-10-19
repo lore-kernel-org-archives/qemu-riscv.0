@@ -1,57 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kUKRB-0000fJ-Uh
-	for mharc-qemu-riscv@gnu.org; Sun, 18 Oct 2020 21:58:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52960)
+	id 1kUKYE-0004wq-4e
+	for mharc-qemu-riscv@gnu.org; Sun, 18 Oct 2020 22:05:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53958)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kUKR9-0000eB-RU; Sun, 18 Oct 2020 21:58:11 -0400
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:34731)
+ id 1kUKYC-0004vJ-QR; Sun, 18 Oct 2020 22:05:28 -0400
+Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:35897)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kUKR8-0002Bs-4G; Sun, 18 Oct 2020 21:58:11 -0400
-Received: by mail-yb1-xb42.google.com with SMTP id o70so7547427ybc.1;
- Sun, 18 Oct 2020 18:58:08 -0700 (PDT)
+ id 1kUKYA-0002rR-Vv; Sun, 18 Oct 2020 22:05:28 -0400
+Received: by mail-yb1-xb43.google.com with SMTP id f140so7542307ybg.3;
+ Sun, 18 Oct 2020 19:05:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=FpZ1UF+lf54rlJAxvV7Z1Wh7VrzUbPpn0uPzdr3tScs=;
- b=VIsw8A0ymNrGBoVxy3lEllpc96HY2SC88s6TtyztmshZFY6d01SeI6bXN1aKz4cDrO
- 1uL4HpTLPdn0RdXy7QLv/9GVPFDBObUJPqECailTfbpFGidw5bqcol9FpNc3Q9Wl7PlS
- LPVRl7ZxuoGvXNM0ClbbSCY1QXUxTcW/7CbGxmAt2BgxKqYib1oxq81lkAL37sBS3B/6
- ODDLfHLVPk+r4SFgK69kfaEUEyjc6BsW+5bsGhau+XcJ+UUF+jJkcJXWPXC5mmxq2DLz
- Gq1orpY+rXw7fvQnuvXTtZwIYDc2IzYwNFl9ch3U0jwe/XnfYgUd+2eBRSWyvHmpxAZN
- p/VA==
+ :cc:content-transfer-encoding;
+ bh=23Cikbh05ukXkcHCv9z0Pt7LyTI4adA1SHYWMMMzxZI=;
+ b=Kjx64Qu2H6zPmdz2XOuf6SKzTotcTH6thnJe/q5+iX7JBXMx7O7h1Ecj1Jz9cRfB+H
+ 5AX43YVGxdQwWSlLhYQjTqtaTh/qoCFrFNiwgPvouGifhwPAfGZOTE2nKY6kwL6XKXuD
+ 92098R9q+ks51yTuZcNv5gUZNqRknHJd9qzga3tD0KlIEe1+Mwx7Ll0hwm17qWf+eDTm
+ bqRSbBa2YTEbGC5syWwOdKsS46GRid8SLIAAyWXKcIMyFMry4KSOrzXLntiJng5hjNbq
+ cgyC5PVaoqAaKjDWewSgKOl0xkpVJrW85vA4s4HHn233Qf7IRFwsuNEflBIghlNSfRY7
+ iN9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=FpZ1UF+lf54rlJAxvV7Z1Wh7VrzUbPpn0uPzdr3tScs=;
- b=rFKECitmnI/zXphgLxkm1G6KAd3XEEnwUx0o9CHu0s/60Jz1Pe7F2v0fJVP7PUNuXp
- sanSVSs4z42UmmROEmMSWuN9dNJ9LzDQFrtLo/zopd39ZpD3IR5SUPl4srBGAyH8wN6g
- Oo/LQnx+gGeHdfnDqMuQFkgY6m2s8ZAwLCiBkERUElRD9bLnjc3AUg5vzQaAANg2hMhw
- kczDq10XWAJLsFYQp8rPm7etSi4xdy9pB7bxR18LqY2Vyxy3Ubv3oHDcqnkXN8tqLqW0
- TuG7mZm0smy0CVDyep0SpsGUFIXTRakxdft3KAeNx56ld1AONUAQ+MFz48bXmqRYcvqs
- uRNQ==
-X-Gm-Message-State: AOAM5301rEyzqM4Vh0MHmhyQUQ/wTseMadK1esIgDdFH4/9GFlpFKFJr
- 9XleoPljvDHItdrjs2KPmdldlQvcgWCGt+qjiI4=
-X-Google-Smtp-Source: ABdhPJyuFP080uB61Gx1obnE5i9SMrW1L2+Gc1MtXBXsdHokd1Mw9Tx90Yy5EZwnu6jlurM6tBpuuF9SGgYRGLLXo/w=
-X-Received: by 2002:a25:328a:: with SMTP id
- y132mr18208024yby.306.1603072687932; 
- Sun, 18 Oct 2020 18:58:07 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=23Cikbh05ukXkcHCv9z0Pt7LyTI4adA1SHYWMMMzxZI=;
+ b=qb8sir3xzb7/LNoQw4P/WMkwj/Be3mkkATuS8TPphg7MQ0KCVvc/LYZZMZf4pgOtg7
+ Mrg/whU7ADtbsZhsGyb5Oze2Tz+qLIkMfYgkZFUomo1OTR0u0Xv9o0MLnwp9oYdX0GHH
+ xmtZGj7m+0nzWuvVpGYozDohRM94r697wwjsvsLZc00HZ0R/OBDNIj2mnx1oP4gJotFq
+ 0Qrt9jeh08oXvpWEdm2VsHevungtnbtzaFqbgIBqDOukkQHBNwXOr1wSzVdMvQ318rfZ
+ tLctMLZbPTFqySTMzTeYDB/yD7r2uDFsdFZzm41R3MxIcm3bOMO0+2OUxOVUeg/eNAD/
+ DkXw==
+X-Gm-Message-State: AOAM530poyoqfRi0IwSK0vmGxRoMh5v+PLo6RtipnrVgQKzNGkDlmPgZ
+ MhVkXQzaZieYCnk9HVh9czAE70T0YkddqFW3Evs=
+X-Google-Smtp-Source: ABdhPJzuP0crXM5Dtk7hdVDjD/YG4wC5QjvnoHN7tr8aRMrV2IsFbtvspfe/84I5TICv3PGocGqEJjjqUqkPv6gjtcw=
+X-Received: by 2002:a25:705:: with SMTP id 5mr18975685ybh.239.1603073123878;
+ Sun, 18 Oct 2020 19:05:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAKmqyKODEgnkw4zBbsNK1zQ7qaiKWEAZBpwhnHzEetjgWpxtzQ@mail.gmail.com>
- <20201016171000.21240-1-ivan.griffin@emdalo.com>
-In-Reply-To: <20201016171000.21240-1-ivan.griffin@emdalo.com>
+References: <20201016123737.8118-1-ivan.griffin@emdalo.com>
+ <CAKmqyKNykruYK2AQ05KZyGCGD0rUsqQOVBbnccY+ELATBF=Ozg@mail.gmail.com>
+ <DB7PR10MB191544AA04D0B3ECF82C57CDFE030@DB7PR10MB1915.EURPRD10.PROD.OUTLOOK.COM>
+In-Reply-To: <DB7PR10MB191544AA04D0B3ECF82C57CDFE030@DB7PR10MB1915.EURPRD10.PROD.OUTLOOK.COM>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 19 Oct 2020 09:57:55 +0800
-Message-ID: <CAEUhbmV5V9gXeyn1Bp-u3L4FGwU_+m0CT-vomL7W8WGY9yt_nQ@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap entry
+Date: Mon, 19 Oct 2020 10:05:12 +0800
+Message-ID: <CAEUhbmVPzOuP3kuMhZB2JgN47nnzL7p9+meyhyBK7kRAhu5BCw@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap entry
 To: Ivan Griffin <ivan.griffin@emdalo.com>
-Cc: Alistair Francis <alistair23@gmail.com>, qemu-trivial@nongnu.org, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Cc: Alistair Francis <alistair23@gmail.com>,
+ QEMU Trivial <qemu-trivial@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -73,69 +76,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2020 01:58:12 -0000
+X-List-Received-Date: Mon, 19 Oct 2020 02:05:29 -0000
 
 Hi Ivan,
 
-On Sat, Oct 17, 2020 at 1:10 AM Ivan Griffin <ivan.griffin@emdalo.com> wrote:
+On Sat, Oct 17, 2020 at 12:31 AM Ivan Griffin <ivan.griffin@emdalo.com> wro=
+te:
 >
-> Adding the PolarFire SoC IOSCBCTRL memory region to prevent QEMU
-> reporting a STORE/AMO Access Fault.
+> I don't know why it isn't documented in that PDF (or in the register map)=
+, but if you check https://github.com/polarfire-soc/polarfire-soc-bare-meta=
+l-library/blob/master/src/platform/drivers/mss_sys_services/mss_sys_service=
+s.h you'll see the following
 >
-> This region is used by the PolarFire SoC port of U-Boot to
-> interact with the FPGA system controller.
+> ```
+> typedef struct
+> {
+>     volatile uint32_t SOFT_RESET;
+>     volatile uint32_t VDETECTOR;
+>     volatile uint32_t TVS_CONTROL;
+>     volatile uint32_t TVS_TEMP_A;
+>     volatile uint32_t TVS_TEMP_B;
+>     volatile uint32_t TVS_TEMP_C;
+>     volatile uint32_t TVS_VOLT_A;
+>     volatile uint32_t TVS_VOLT_B;
+>     volatile uint32_t TVS_VOLT_C;
+>     volatile uint32_t TVS_OUTPUT0;
+>     volatile uint32_t TVS_OUTPUT1;
+>     volatile uint32_t TVS_TRIGGER;
+>     volatile uint32_t TRIM_VDET1P05;
+>     volatile uint32_t TRIM_VDET1P8;
+>     volatile uint32_t TRIM_VDET2P5;
+>     volatile uint32_t TRIM_TVS;
+>     volatile uint32_t TRIM_GDET1P05;
+>     volatile uint32_t RESERVED0;
+>     volatile uint32_t RESERVED1;
+>     volatile uint32_t RESERVED2;
+>     volatile uint32_t SERVICES_CR;
+>     volatile uint32_t SERVICES_SR;
+>     volatile uint32_t USER_DETECTOR_SR;
+>     volatile uint32_t USER_DETECTOR_CR;
+>     volatile uint32_t MSS_SPI_CR;
 >
-> Signed-off-by: Ivan Griffin <ivan.griffin@emdalo.com>
-> ---
->  hw/riscv/microchip_pfsoc.c         | 10 ++++++++++
->  include/hw/riscv/microchip_pfsoc.h |  1 +
->  2 files changed, 11 insertions(+)
+> } SCBCTRL_TypeDef;
 >
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index 4627179cd3..9aaa276ee2 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -97,6 +97,7 @@ static const struct MemmapEntry {
->      [MICROCHIP_PFSOC_GPIO2] =           { 0x20122000,     0x1000 },
->      [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
->      [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
-> +    [MICROCHIP_PFSOC_IOSCB_CTRL] =      { 0x37020000,     0x1000 },
->      [MICROCHIP_PFSOC_IOSCB_CFG] =       { 0x37080000,     0x1000 },
->      [MICROCHIP_PFSOC_DRAM] =            { 0x80000000,        0x0 },
->  };
-> @@ -341,6 +342,15 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
->      create_unimplemented_device("microchip.pfsoc.ioscb.cfg",
->          memmap[MICROCHIP_PFSOC_IOSCB_CFG].base,
->          memmap[MICROCHIP_PFSOC_IOSCB_CFG].size);
-> +
-> +    /* IOSCBCTRL
-> +     *
-> +     * These registers are not documented in the official documentation
-> +     * but used by the polarfire-soc-bare-meta-library code
-> +     */
-> +    create_unimplemented_device("microchip.pfsoc.ioscb.ctrl",
-> +        memmap[MICROCHIP_PFSOC_IOSCB_CTRL].base,
-> +        memmap[MICROCHIP_PFSOC_IOSCB_CTRL].size);
->  }
+> #define MSS_SCBCTRL                    ((SCBCTRL_TypeDef*) (0x37020000UL)=
+)
 >
->  static void microchip_pfsoc_soc_class_init(ObjectClass *oc, void *data)
-> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-> index 8bfc7e1a85..3f1874b162 100644
-> --- a/include/hw/riscv/microchip_pfsoc.h
-> +++ b/include/hw/riscv/microchip_pfsoc.h
-> @@ -95,6 +95,7 @@ enum {
->      MICROCHIP_PFSOC_ENVM_CFG,
->      MICROCHIP_PFSOC_ENVM_DATA,
->      MICROCHIP_PFSOC_IOSCB_CFG,
-> +    MICROCHIP_PFSOC_IOSCB_CTRL,
->      MICROCHIP_PFSOC_DRAM,
->  };
+> /*2kB bytes long mailbox.*/
+> #define MSS_SCBMAILBOX                 ((uint32_t*) (0x37020800UL))
+> ```
+>
+> And in https://github.com/polarfire-soc/polarfire-soc-bare-metal-library/=
+blob/master/src/platform/drivers/mss_sys_services/mss_sys_services.c you'll=
+ see MSS_SCB and MSS_SCBMAILBOX used in many places to interact with the FP=
+GA system controller to perform various services.
 
-Thank you for the patch!
+It's actually documented, but not in the PDF file. I also spent some
+time locating the doc when I do the DDR controller modeling work.
 
-I am currently adding the DDR controller modeling support to PolarFire
-SoC which will cover this memory map. With my patch series, your patch
-is no longer needed.
+See Register Map/PF_SoC_RegMap_V1_1/MPFS250T/pfsoc_control_scb.htm in
+https://www.microsemi.com/document-portal/doc_download/1244581-polarfire-so=
+c-register-map
 
 Regards,
 Bin
