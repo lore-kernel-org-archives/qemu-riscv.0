@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kUiA3-0007ZU-0v
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Oct 2020 23:18:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42652)
+	id 1kUiA4-0007c7-4F
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Oct 2020 23:18:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42654)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kUiA1-0007Vg-1q; Mon, 19 Oct 2020 23:18:05 -0400
-Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:36253)
+ id 1kUiA1-0007XJ-Po; Mon, 19 Oct 2020 23:18:05 -0400
+Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:36253)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kUi9w-0007DX-Vb; Mon, 19 Oct 2020 23:18:04 -0400
-Received: by mail-yb1-xb44.google.com with SMTP id f140so600575ybg.3;
- Mon, 19 Oct 2020 20:17:59 -0700 (PDT)
+ id 1kUi9z-0007Fg-Gb; Mon, 19 Oct 2020 23:18:05 -0400
+Received: by mail-yb1-xb43.google.com with SMTP id f140so600674ybg.3;
+ Mon, 19 Oct 2020 20:18:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=SSAlBJvmnb9l6h4y8x9yUgigt7ohOFgtsYS7nWixtnE=;
- b=thtxZtySis3+5AxUz052A60skhJSVuZYK24zjTWJ1JsR3Dfib2lruIvRkeZOChj7h2
- hV1n7GbdZQlT2H5oDiVFOiPH8PLvRMAw6o5Y+FYUKRgqrEQmOpmKHFxcxSSvFGXk0RX6
- qMeGaybtCiC3WMcbFw5xog5ypjglz2MbDYr4Hh/Sni8/e+usmDyxyeGcYisBzuQSMfRq
- Bievh82k01uXJ9PWmBgedUPzSoWOqH2jsQdI+Twa+m26st/MJUpM/uxdTzxEYW8ZH5bS
- J0ihkYM1ncDEizpfdISOyWGQU+vfqFHvcHpgD6xJpsCH3e72RL5eawg+I93TXwnL9glU
- pELg==
+ :cc; bh=fGCnhvWM4FjynnI+oYyv9G1XvGkzJ7Ii5/lP6+ItKL8=;
+ b=Kfr1Lwz/vFfgdZdTDn7NZaNkFgPGYncqfBeqRMWlFIgKqbbsZc2pYlVkBaYG11yU5k
+ 8/LHHXRzZUcGDAnNkcG3Op7iHDUbCPElZQxaEk75muoglMgmN/IIoLxyYPtiWph0iuOR
+ bTSY7odfnEyATNBAjGu+PpnGIVKT1e/ZnBh1IoaifoU6tZ1r0Kk+gGk1fWvZW9z8zqdP
+ DASkClBrJhUzCrUUIx/1O7n+1jDvt3f43DewCs9OSJvjRZcTNwgMY0wvhnc2Dd33ewUV
+ Pi8AdFKHVXp7DquYE3OrCQz+O4VCptFcqPmu4eETegfljz3dEGnbTKmMoLdWHlQmCm4z
+ anew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=SSAlBJvmnb9l6h4y8x9yUgigt7ohOFgtsYS7nWixtnE=;
- b=DfNeE8FPdeo33uBf9dQYMP5aLAoJidFbF/iyeqpPid3ZrVJxrTMiNr25cb3r6z9Qzc
- enpYH0gVvdw5i8YQ7JWeroP8LrHZKZoGATC5aOgsqhMgtH9rr9Chq9BQQcy8eO7jADiK
- 6rS/vrpSTQiaKO+mVHPrZ4QHg5Z88c1VJHoqc8xhhJzZxHBOdchtLNm/HiagMhYbgtai
- 0kL22YLRdKl/LOZpZqVYK95QqgvP+7JWwdyyYRIOkutCzlfMWP1gTdKocP8wyxPryTEg
- HB9190uvnOtc7ud2SH15YVewelaUQ7kpQO8M0YTPvzlawSEJHWd1hYEXGdRqD9dtMkRs
- VlwA==
-X-Gm-Message-State: AOAM533SCbPbemuvwfeLlGZc0CYZz4+LD1U6lQ7uq7c3NPixauBTjdBa
- OeblHc0ihzjh1Nxvm87+XBTjsX/EvHy298C4EGifI7LW
-X-Google-Smtp-Source: ABdhPJykk/+OygvOTuMvQfTs9o7+7MwagKPwLP6ezyWm8PDZUJjTJWnx9MbNgj0M3OvE878TYCeg4v8LkVuI4W5DOFs=
-X-Received: by 2002:a25:f81e:: with SMTP id u30mr1350994ybd.332.1603163879088; 
- Mon, 19 Oct 2020 20:17:59 -0700 (PDT)
+ bh=fGCnhvWM4FjynnI+oYyv9G1XvGkzJ7Ii5/lP6+ItKL8=;
+ b=U+NJX63IFceelE00emcVgepGqHdB1S6Su4zbybe31VSVeXBWW3/Tno5ULzpxqF37gJ
+ zbn/y7nXKhx470R4altUb+17dm8rxHtsM7rNFdQ1n0/tAQtyXVMnt3ycpWCVXaJ1MHGK
+ fZoQgAuMtvfa6lIYkTSvpIJAa4a4qMotB+XYE/kt9IqwkfGawmd6ejpaE04vQKyYuC/G
+ jDREF08JDUXKRmBlp8hOMotNuEkZALZGAs21xl89dZWSRYVyTIOt1qjwxf7lDOs/QJRN
+ 2gxm/B3h8GFn2+7SWdqtRInw84G6j5lSdQeX31mLLjpEqK5PEtuG8pOw8q9O57U5rXYL
+ XOuw==
+X-Gm-Message-State: AOAM532IEYV9OPswS2p9+o4WqZspbpYjK+Aw89otD7YscWjiejgJFE3k
+ oiMtVJ0dN4pVbmpPCbFrDstZ17Pq+RODQXf8xxI=
+X-Google-Smtp-Source: ABdhPJww8M8qIHg6QpbpEpGJU8Xc2R37dTPG7k1FA82zi1zmAZnjkAnLJg5Zelc/Wc4CcRhBvV28laWpS9rcXYYolhs=
+X-Received: by 2002:a25:c1c1:: with SMTP id r184mr1126766ybf.517.1603163882213; 
+ Mon, 19 Oct 2020 20:18:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1602634524.git.alistair.francis@wdc.com>
- <558cf67162342d65a23262248b040563716628b2.1602634524.git.alistair.francis@wdc.com>
-In-Reply-To: <558cf67162342d65a23262248b040563716628b2.1602634524.git.alistair.francis@wdc.com>
+ <4c6a85dfb6dd470aa79356ebc1b02f479c2758e0.1602634524.git.alistair.francis@wdc.com>
+In-Reply-To: <4c6a85dfb6dd470aa79356ebc1b02f479c2758e0.1602634524.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 20 Oct 2020 11:17:47 +0800
-Message-ID: <CAEUhbmV26nFAKWSbJNuKDrL9drYZN+G=WKkgmBKULo5-eKExOw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] hw/riscv: Return the end address of the loaded
- firmware
+Date: Tue, 20 Oct 2020 11:17:50 +0800
+Message-ID: <CAEUhbmU-jqu6x+1tYsLAVASFchV-LqwkuWsjMHLa5DLuH0UOZg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] hw/riscv: Add a riscv_is_32_bit() function
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b44;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb44.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -73,24 +72,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Oct 2020 03:18:05 -0000
+X-List-Received-Date: Tue, 20 Oct 2020 03:18:06 -0000
 
 On Wed, Oct 14, 2020 at 8:28 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
-> Instead of returning the unused entry address from riscv_load_firmware()
-> instead return the end address. Also return the end address from
-> riscv_find_and_load_firmware().
->
-> This tells the caller if a firmware was loaded and how big it is. This
-> can be used to determine the load address of the next image (usually the
-> kernel).
->
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  include/hw/riscv/boot.h |  8 ++++----
->  hw/riscv/boot.c         | 28 +++++++++++++++++-----------
->  2 files changed, 21 insertions(+), 15 deletions(-)
+>  include/hw/riscv/boot.h | 2 ++
+>  hw/riscv/boot.c         | 9 +++++++++
+>  2 files changed, 11 insertions(+)
 >
 
 Reviewed-by: Bin Meng <bin.meng@windriver.com>
