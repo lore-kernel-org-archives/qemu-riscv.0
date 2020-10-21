@@ -1,83 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVHbd-0001N9-71
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Oct 2020 13:08:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43588)
+	id 1kVJr0-0005Y2-Bv
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Oct 2020 15:32:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50738)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1kVHbb-0001K2-Je
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2020 13:08:55 -0400
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:53779)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kVJqy-0005Xk-Rc; Wed, 21 Oct 2020 15:32:56 -0400
+Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:36778)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1kVHbZ-0002Lz-5h
- for qemu-riscv@nongnu.org; Wed, 21 Oct 2020 13:08:55 -0400
-Received: by mail-wm1-x343.google.com with SMTP id d78so2911050wmd.3
- for <qemu-riscv@nongnu.org>; Wed, 21 Oct 2020 10:08:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=H1zBaXIPUFkoRX522wNIGvBuniNlrLtU+nW3sIqZkhk=;
- b=RBPepdQz9kw2Kch54mcIFJd9NEI5anhJJEJbjGHVrh8qJXr8Gk7VKjH9h0PNKMxJsL
- /yjP6bQUVRR3d0dOEva2zh9Km3dKMBUbhJx1bJDsqPdZ0jqh8chRuIYKwnnEEiFA1b1G
- kg5s+xFPuXoisq+dpl2NwDP3yzVQoBDPY+7LPBT5duV6sDJe+lFkcxWDNp8t1ktjV2rV
- Yz6huyaeCz6leOqAXx+I8YXzIbw3rAiPdt4kMslLOSMVgYsTumquYEeymW2N4XNlZvlV
- y/UZNTJ4fu1m9LIWwxVMGa6Oa6xWGucNyNyz16zOoUa6B0y/4OfLRv3xB9BKpRWUY1Rq
- 5bDA==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kVJqw-0004gO-V8; Wed, 21 Oct 2020 15:32:56 -0400
+Received: by mail-il1-x141.google.com with SMTP id p10so3640619ile.3;
+ Wed, 21 Oct 2020 12:32:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=UVBGRVqXtb9qyDZKTva0g6fGnQk+yo3i+XjcadbRUMY=;
+ b=hS1BaLANYgREUNmbAtvI50W6MXUH/hbFqkRvmhUYx9G8zRLAXW13hXqyat37uX9Lop
+ LhD4QLWymFQmZ0hXM3RDsFymIMwgSwodyiJ9Ea16CAGfxjTZdrUrGMCVcmilDjaiFWX7
+ 8VMGbS7dICm5+PZCPwjVZ3Vc9Nci27yCxZ74PP8m/6TJeCXN5e4/R6xOPpXeI6S99oBx
+ Alj094o8ZWLxyUntElZdB32QJXH9wvwDufNpCeJSCVOsAGYDR6b4hQ+grXGH/2YD7lz2
+ 8HaVkYJKH9tEqLmNJzzTOs0VCwNvuSn5h+MC6U+xY69rb13CZTDJc6+/Jsjie/s0qsVb
+ O+HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=H1zBaXIPUFkoRX522wNIGvBuniNlrLtU+nW3sIqZkhk=;
- b=Wy18svld/iSKo1dUWwKabe/TZ09Av01V2joD+pbd7cfW1nOuG5C5zela1rKrMytL9M
- FLtVgxQJq1TiUgQqME8itPXO6f7GcntogcXRJYWVVAmxDSR8Dr8Kkj6Tl4oI6Eoy2j3Z
- 4VzSAi+Ph6nd/3P5bBgmFsW4MHlNSzIKs6YdpBKb5SGTedGVKse3xi6AHvSJjUB3Z6Wx
- MP1Rnq9rwOP4jdk1SomKcl1s4I+E0YE2vLyMH9/ZywJqjgBblLHcs2Jg50Pjrf2VRkMj
- 98iIpIsgR0x/YXHq3BlIxKlrMqw7ZD1qTogNUHqrjYu1d5wDSUKiwIZ42qvr5ZmK04bx
- HiQQ==
-X-Gm-Message-State: AOAM530voXccplISmi+O+DeGhISvx54fl3Tt3kvPaj6iRDDAF4NMf+D2
- UVOySY72OdRxBarOZKRkr/Cxsg==
-X-Google-Smtp-Source: ABdhPJztTxmd4J+aGRrRXnwDl/57unRcgNdCJ8looxP28yeJjAttTIAgMuf0i4rt7IRBtskkk7r4YQ==
-X-Received: by 2002:a1c:66d5:: with SMTP id a204mr4474374wmc.62.1603300131688; 
- Wed, 21 Oct 2020 10:08:51 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id c130sm4503880wma.17.2020.10.21.10.08.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Oct 2020 10:08:44 -0700 (PDT)
-Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 1D4AF1FF8C;
- Wed, 21 Oct 2020 18:08:43 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: julien@xen.org, stefano.stabellini@linaro.org,
- stefano.stabellini@xilinx.com, masami.hiramatsu@linaro.org,
- takahiro.akashi@linaro.org, andre.przywara@arm.com,
- stratos-dev@op-lists.linaro.org,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH  v1 2/4] hw/riscv: migrate fdt field to generic MachineState
-Date: Wed, 21 Oct 2020 18:08:40 +0100
-Message-Id: <20201021170842.25762-3-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201021170842.25762-1-alex.bennee@linaro.org>
-References: <20201021170842.25762-1-alex.bennee@linaro.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=UVBGRVqXtb9qyDZKTva0g6fGnQk+yo3i+XjcadbRUMY=;
+ b=hxrdiiBVF/kGNVNRCVF/+5DB2wYZxmfDCNpPrx38jnkhBzsQRHJ4D8brYalBahcdFo
+ /m3rdgvxURztUTl97uGJcmpzFwCp0ph0crnIorL76INZD2dC6qAmRtKpQ6sQ4QTQr/Ie
+ hwA4OMlQs74TMQ8Hj5cIdp9utm35HVA4/YlRmi8ca2vfDmIxL5xMcd0W2fRDBnWevqQD
+ Hp9InayuxXUNTrE7pvSWcnAuC1WwSU0DHISOzsQeR3/6xwAcHqYTCA7GOBbwGY4J45jw
+ 3wGpRnFM8xFa4Scv4+CKwMGG8S6TSkS5QyzGhtey61aN8wFSTMRK2BI8FLi5CfUju8th
+ LhKA==
+X-Gm-Message-State: AOAM531T0WGn49cBbDMaw8Rfkqw1Ww4xxM5VA3m8+cXr27YoRjSTr7np
+ jiBPTU06a9zgP11yJ2YHWNEloX6HxG5K2jDXv4M=
+X-Google-Smtp-Source: ABdhPJwRSNUUizuMFwQKwYeY2wi5YRh+zpgCagccW4u1SDvAsjHRIyZXxqVI+ejORvixyg9eRjDE/hXxPG4iFMDwjNA=
+X-Received: by 2002:a05:6e02:c:: with SMTP id
+ h12mr3810938ilr.177.1603308768532; 
+ Wed, 21 Oct 2020 12:32:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::343;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x343.google.com
+References: <20201018120308.1712054-1-georg.kotheimer@kernkonzept.com>
+ <bb17cae6-68eb-af14-0d08-1140e83cabcd@linaro.org>
+In-Reply-To: <bb17cae6-68eb-af14-0d08-1140e83cabcd@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 21 Oct 2020 12:21:04 -0700
+Message-ID: <CAKmqyKOaTEX0G5AxW31rYXfHi8rH1jjj6OQFtmmAUJaurPFtJQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Adjust privilege level for HLV(X)/HSV
+ instructions
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Georg Kotheimer <georg.kotheimer@kernkonzept.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -90,86 +76,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2020 17:08:55 -0000
+X-List-Received-Date: Wed, 21 Oct 2020 19:32:57 -0000
 
-This is a mechanical change to make the fdt available through
-MachineState.
+On Sun, Oct 18, 2020 at 8:58 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 10/18/20 5:03 AM, Georg Kotheimer wrote:
+> > According to the specification the "field SPVP of hstatus controls the
+> > privilege level of the access" for the hypervisor virtual-machine load
+> > and store instructions HLV, HLVX and HSV.
+> >
+> > We introduce the new virtualization register field HS_HYP_LD_ST,
+> > similar to HS_TWO_STAGE, which tracks whether we are currently
+> > executing a hypervisor virtual-macine load or store instruction.
+> >
+> > Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
+>
+> Well, let me start by mentioning the existing implementation of hyp_load et al
+> is broken.  I guess I wasn't paying attention when Alistair implemented them.
+>
+> Here's the problem: When you change how riscv_cpu_tlb_fill works, as you are by
+> modifying get_physical_address, you have to remember that those results are
+> *saved* in the qemu tlb.
+>
+> So by setting some flags, performing one memory operation, and resetting the
+> flags, we have in fact corrupted the tlb for the next operation without those
+> flags.
+>
+> You need to either:
+>
+> (1) perform the memory operation *without* using the qemu tlb machinery (i.e.
+> use get_physical_address directly, then use address_space_ld/st), or
+>
+> (2) add a new mmu index for the HLV/HSV operation, with all of the differences
+> implied.
+>
+> The second is imo preferable, as it means that helper_hyp_load et al can go
+> away and become normal qemu_ld/st opcodes with the new mmu indexes.
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- include/hw/riscv/virt.h |  1 -
- hw/riscv/virt.c         | 18 +++++++++---------
- 2 files changed, 9 insertions(+), 10 deletions(-)
+Ok, I have some patches to fix this. I'll send them soon.
 
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index b4ed9a32eb..6505ae8d23 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -41,7 +41,6 @@ struct RISCVVirtState {
-     DeviceState *plic[VIRT_SOCKETS_MAX];
-     PFlashCFI01 *flash[2];
- 
--    void *fdt;
-     int fdt_size;
- };
- 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 41bd2f38ba..17c0706156 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -194,7 +194,7 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-     hwaddr flashsize = virt_memmap[VIRT_FLASH].size / 2;
-     hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
- 
--    fdt = s->fdt = create_device_tree(&s->fdt_size);
-+    fdt = mc->fdt = create_device_tree(&s->fdt_size);
-     if (!fdt) {
-         error_report("create_device_tree() failed");
-         exit(1);
-@@ -434,12 +434,12 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
-     g_free(name);
- 
-     name = g_strdup_printf("/soc/flash@%" PRIx64, flashbase);
--    qemu_fdt_add_subnode(s->fdt, name);
--    qemu_fdt_setprop_string(s->fdt, name, "compatible", "cfi-flash");
--    qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
-+    qemu_fdt_add_subnode(mc->fdt, name);
-+    qemu_fdt_setprop_string(mc->fdt, name, "compatible", "cfi-flash");
-+    qemu_fdt_setprop_sized_cells(mc->fdt, name, "reg",
-                                  2, flashbase, 2, flashsize,
-                                  2, flashbase + flashsize, 2, flashsize);
--    qemu_fdt_setprop_cell(s->fdt, name, "bank-width", 4);
-+    qemu_fdt_setprop_cell(mc->fdt, name, "bank-width", 4);
-     g_free(name);
- }
- 
-@@ -613,9 +613,9 @@ static void virt_machine_init(MachineState *machine)
-             hwaddr end = riscv_load_initrd(machine->initrd_filename,
-                                            machine->ram_size, kernel_entry,
-                                            &start);
--            qemu_fdt_setprop_cell(s->fdt, "/chosen",
-+            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
-                                   "linux,initrd-start", start);
--            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
-+            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
-                                   end);
-         }
-     } else {
-@@ -636,11 +636,11 @@ static void virt_machine_init(MachineState *machine)
- 
-     /* Compute the fdt load address in dram */
-     fdt_load_addr = riscv_load_fdt(memmap[VIRT_DRAM].base,
--                                   machine->ram_size, s->fdt);
-+                                   machine->ram_size, machine->fdt);
-     /* load the reset vector */
-     riscv_setup_rom_reset_vec(start_addr, virt_memmap[VIRT_MROM].base,
-                               virt_memmap[VIRT_MROM].size, kernel_entry,
--                              fdt_load_addr, s->fdt);
-+                              fdt_load_addr, machine->fdt);
- 
-     /* SiFive Test MMIO device */
-     sifive_test_create(memmap[VIRT_TEST].base);
--- 
-2.20.1
 
+>
+> Annoyingly, for the moment you wouldn't be able to remove helper_hyp_x_load,
+> because there's no qemu_ld variant that uses execute permission.  But it can be
+> done with helpers.  I'll note that the current implementation is broken,
+> because it uses cpu_lduw_data_ra, and not cpu_lduw_code_ra, which is exactly
+> the difference that uses execute permissions.  After the conversion to the new
+
+I have tried to fix this as well, but it seems to break a virtual
+Linux guest booting.
+
+> mmuidx, you would use cpu_lduw_mmuidx_ra.  I would also split the function into
+> two, so that one performs HLVX.HU and the other HLVX.WU, so that you don't have
+> to pass the size as a parameter.
+
+I'm not clear what you mean here.
+
+Alistair
+
+>
+> Finally, this patch, changing behaviour when hstatus.SPVP changes... depends on
+> how often this bit is expected to be toggled.
+>
+> If the bit toggles frequently, e.g. around some small section of kernel code,
+> then one might copy the SPVP bit into tlb_flags and use two different mmu
+> indexes to imply the state of the SPVP bit.
+>
+> If the bit does not toggle frequently, e.g. whatever bit of kernel code runs
+> infrequently, or it only happens around priv level changes, then simply
+> flushing the qemu tlb when the SPVP bit changes is sufficient.  You then get to
+> look at SPVP directly within tlb_fill.
+>
+>
+> r~
+>
 
