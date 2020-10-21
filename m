@@ -1,59 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVJr0-0005Y2-Bv
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Oct 2020 15:32:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50738)
+	id 1kVKSW-0004q3-HC
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Oct 2020 16:11:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58706)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kVJqy-0005Xk-Rc; Wed, 21 Oct 2020 15:32:56 -0400
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:36778)
+ id 1kVKSV-0004ps-PO; Wed, 21 Oct 2020 16:11:43 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:33319)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kVJqw-0004gO-V8; Wed, 21 Oct 2020 15:32:56 -0400
-Received: by mail-il1-x141.google.com with SMTP id p10so3640619ile.3;
- Wed, 21 Oct 2020 12:32:49 -0700 (PDT)
+ id 1kVKSS-0001EF-Oc; Wed, 21 Oct 2020 16:11:43 -0400
+Received: by mail-il1-x142.google.com with SMTP id j8so3753810ilk.0;
+ Wed, 21 Oct 2020 13:11:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UVBGRVqXtb9qyDZKTva0g6fGnQk+yo3i+XjcadbRUMY=;
- b=hS1BaLANYgREUNmbAtvI50W6MXUH/hbFqkRvmhUYx9G8zRLAXW13hXqyat37uX9Lop
- LhD4QLWymFQmZ0hXM3RDsFymIMwgSwodyiJ9Ea16CAGfxjTZdrUrGMCVcmilDjaiFWX7
- 8VMGbS7dICm5+PZCPwjVZ3Vc9Nci27yCxZ74PP8m/6TJeCXN5e4/R6xOPpXeI6S99oBx
- Alj094o8ZWLxyUntElZdB32QJXH9wvwDufNpCeJSCVOsAGYDR6b4hQ+grXGH/2YD7lz2
- 8HaVkYJKH9tEqLmNJzzTOs0VCwNvuSn5h+MC6U+xY69rb13CZTDJc6+/Jsjie/s0qsVb
- O+HA==
+ :cc; bh=93q7BQqx5rUbCi70bvvfoPbKm2H2zHdRENnENNFvy5s=;
+ b=D3raUR92l8bVNU2JsLy6zNZLVMSVFg8e4Ket9thTArbcxd7Z4CEYy0DbDqAiCdLo2x
+ XfJQMzbJ5m0r2PHUUOC24MSnQRGvZpwgt6oOce6WbTUvE2oY6EpZbEfSdPKw6Aufksjt
+ TxcMzHxNIs9rce9wyA047i/EWnTsYoaUog/8RCpovnpkb3pBVBnUF+IGbbhPVqjjSmdJ
+ xfuBsBrdPk3PG/8SenRE+jrrsptnzTBnFc0HEIixJXo+1he9hlTerNQ/ClbjXkAt9U/p
+ GkPc1RD2pnWPP5sk4SOf7f6Z5fHwPV0kX/AlqG2f4Kgdj00CxN/WjEJCztFp9dR/kd2K
+ TQ0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=UVBGRVqXtb9qyDZKTva0g6fGnQk+yo3i+XjcadbRUMY=;
- b=hxrdiiBVF/kGNVNRCVF/+5DB2wYZxmfDCNpPrx38jnkhBzsQRHJ4D8brYalBahcdFo
- /m3rdgvxURztUTl97uGJcmpzFwCp0ph0crnIorL76INZD2dC6qAmRtKpQ6sQ4QTQr/Ie
- hwA4OMlQs74TMQ8Hj5cIdp9utm35HVA4/YlRmi8ca2vfDmIxL5xMcd0W2fRDBnWevqQD
- Hp9InayuxXUNTrE7pvSWcnAuC1WwSU0DHISOzsQeR3/6xwAcHqYTCA7GOBbwGY4J45jw
- 3wGpRnFM8xFa4Scv4+CKwMGG8S6TSkS5QyzGhtey61aN8wFSTMRK2BI8FLi5CfUju8th
- LhKA==
-X-Gm-Message-State: AOAM531T0WGn49cBbDMaw8Rfkqw1Ww4xxM5VA3m8+cXr27YoRjSTr7np
- jiBPTU06a9zgP11yJ2YHWNEloX6HxG5K2jDXv4M=
-X-Google-Smtp-Source: ABdhPJwRSNUUizuMFwQKwYeY2wi5YRh+zpgCagccW4u1SDvAsjHRIyZXxqVI+ejORvixyg9eRjDE/hXxPG4iFMDwjNA=
+ bh=93q7BQqx5rUbCi70bvvfoPbKm2H2zHdRENnENNFvy5s=;
+ b=YXvmkqVWTBGqrM9fEjfvtJU+7XYoZrTfPt4mugq8CLf/XeBiPqgvJ5SI+l+zWPzHwH
+ ntkEkAVCUb3UuaVyEfUnkC6pMFtT9caP5cNDbaoC3ZNQ15mdpqHE8kPp9619Ci48ce0R
+ NoCilYs9mZx+QTtgiHrkz57pkgb0wSywBdP9SXR8akkd3E7CFobwjYvXyKOo/AuCWQnJ
+ JMm9Exw7QWLfdzGDBZ7MxDXRJSgGgSJOkR0649U2AJOFfY4lxjhGyg5Hi9eXkZi8kc6f
+ ULaEMuNSC/DqlhAVLxCHpLuyHMDtIa/1JorFM3giaTLtfBrQBCYxKhS9jpDxK9ADfS+0
+ 5saQ==
+X-Gm-Message-State: AOAM533dG2qFS/K8h9oyJkiLJZKUnLFPXu0jmYSvJFiJ196uCv6W4pXB
+ cMhu7Ov35RlJ1BwCNkKAo80OsrJzUM3JaUAyu2o=
+X-Google-Smtp-Source: ABdhPJwjROsPed2/X+rDU/kuJEv3Vl84ovNtdKKx8rrmYOMF5WuvvN1L0J5iIoQrJECKYyM/ab464UEKrC7ozsMdiEs=
 X-Received: by 2002:a05:6e02:c:: with SMTP id
- h12mr3810938ilr.177.1603308768532; 
- Wed, 21 Oct 2020 12:32:48 -0700 (PDT)
+ h12mr3906995ilr.177.1603311098965; 
+ Wed, 21 Oct 2020 13:11:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20201018120308.1712054-1-georg.kotheimer@kernkonzept.com>
- <bb17cae6-68eb-af14-0d08-1140e83cabcd@linaro.org>
-In-Reply-To: <bb17cae6-68eb-af14-0d08-1140e83cabcd@linaro.org>
+References: <20201014101728.848-1-jiangyifei@huawei.com>
+ <ee4b99ec-5842-6638-ecff-54096ec0b0e8@linaro.org>
+ <cd12acc6aa7b4f1d84859f14200cf75d@huawei.com>
+In-Reply-To: <cd12acc6aa7b4f1d84859f14200cf75d@huawei.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 21 Oct 2020 12:21:04 -0700
-Message-ID: <CAKmqyKOaTEX0G5AxW31rYXfHi8rH1jjj6OQFtmmAUJaurPFtJQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Adjust privilege level for HLV(X)/HSV
- instructions
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Georg Kotheimer <georg.kotheimer@kernkonzept.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>
+Date: Wed, 21 Oct 2020 12:59:54 -0700
+Message-ID: <CAKmqyKMQ+Kood7dO=esi9J5eTVYZPPq2QiVzSgHfEHta_cpZ+g@mail.gmail.com>
+Subject: Re: [PATCH V3] target/riscv: raise exception to HS-mode at
+ get_physical_address
+To: Jiangyifei <jiangyifei@huawei.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>, 
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+ Zhanghailiang <zhang.zhanghailiang@huawei.com>, 
+ "sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>, 
+ "kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>, 
+ "Zhangxiaofeng (F)" <victor.zhangxiaofeng@huawei.com>, 
+ "Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>,
+ yinyipeng <yinyipeng1@huawei.com>, 
+ "palmer@dabbelt.com" <palmer@dabbelt.com>, "Wubin (H)" <wu.wubin@huawei.com>, 
+ "dengkai (A)" <dengkai1@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -76,79 +84,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2020 19:32:57 -0000
+X-List-Received-Date: Wed, 21 Oct 2020 20:11:44 -0000
 
-On Sun, Oct 18, 2020 at 8:58 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Wed, Oct 14, 2020 at 6:59 PM Jiangyifei <jiangyifei@huawei.com> wrote:
 >
-> On 10/18/20 5:03 AM, Georg Kotheimer wrote:
-> > According to the specification the "field SPVP of hstatus controls the
-> > privilege level of the access" for the hypervisor virtual-machine load
-> > and store instructions HLV, HLVX and HSV.
+>
+> > -----Original Message-----
+> > From: Richard Henderson [mailto:richard.henderson@linaro.org]
+> > Sent: Thursday, October 15, 2020 4:22 AM
+> > To: Jiangyifei <jiangyifei@huawei.com>; qemu-devel@nongnu.org;
+> > qemu-riscv@nongnu.org
+> > Cc: palmer@dabbelt.com; Alistair.Francis@wdc.com;
+> > sagark@eecs.berkeley.edu; kbastian@mail.uni-paderborn.de; Zhangxiaofeng
+> > (F) <victor.zhangxiaofeng@huawei.com>; Wubin (H) <wu.wubin@huawei.com>;
+> > Zhanghailiang <zhang.zhanghailiang@huawei.com>; dengkai (A)
+> > <dengkai1@huawei.com>; yinyipeng <yinyipeng1@huawei.com>
+> > Subject: Re: [PATCH V3] target/riscv: raise exception to HS-mode at
+> > get_physical_address
 > >
-> > We introduce the new virtualization register field HS_HYP_LD_ST,
-> > similar to HS_TWO_STAGE, which tracks whether we are currently
-> > executing a hypervisor virtual-macine load or store instruction.
+> > On 10/14/20 3:17 AM, Yifei Jiang wrote:
+> > > +                if (fault_pte_addr) {
+> > > +                    *fault_pte_addr = (base + idx * ptesize) >> 2;
 > >
-> > Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
+> > The shift is wrong.  It should be exactly like...
+> >
 >
-> Well, let me start by mentioning the existing implementation of hyp_load et al
-> is broken.  I guess I wasn't paying attention when Alistair implemented them.
+> We have tested in the VM migration.
 >
-> Here's the problem: When you change how riscv_cpu_tlb_fill works, as you are by
-> modifying get_physical_address, you have to remember that those results are
-> *saved* in the qemu tlb.
+> fault_pte_addr will eventually be assigned to htval register.
 >
-> So by setting some flags, performing one memory operation, and resetting the
-> flags, we have in fact corrupted the tlb for the next operation without those
-> flags.
->
-> You need to either:
->
-> (1) perform the memory operation *without* using the qemu tlb machinery (i.e.
-> use get_physical_address directly, then use address_space_ld/st), or
->
-> (2) add a new mmu index for the HLV/HSV operation, with all of the differences
-> implied.
->
-> The second is imo preferable, as it means that helper_hyp_load et al can go
-> away and become normal qemu_ld/st opcodes with the new mmu indexes.
+> Description of htval register according to the specification:
+> When a guest-page-fault trap is taken into HS-mode, htval is written with either zero
+> or the guest physical address that faulted, shifted right by 2 bits.
 
-Ok, I have some patches to fix this. I'll send them soon.
+Yep, I agree that the shift is correct, it's what we do when we set
+guest_phys_fault_addr in other places.
 
+It is a little confusing that we shift it in get_physical_address(),
+instead of when guest_phys_fault_addr is set. In this case you are
+setting guest_phys_fault_addr directly when calling
+get_physical_address(... &env->guest_phys_fault_addr ...).
 
->
-> Annoyingly, for the moment you wouldn't be able to remove helper_hyp_x_load,
-> because there's no qemu_ld variant that uses execute permission.  But it can be
-> done with helpers.  I'll note that the current implementation is broken,
-> because it uses cpu_lduw_data_ra, and not cpu_lduw_code_ra, which is exactly
-> the difference that uses execute permissions.  After the conversion to the new
+I have added this comment to make sure it's clear and applied it, I
+hope that's ok.
 
-I have tried to fix this as well, but it seems to break a virtual
-Linux guest booting.
-
-> mmuidx, you would use cpu_lduw_mmuidx_ra.  I would also split the function into
-> two, so that one performs HLVX.HU and the other HLVX.WU, so that you don't have
-> to pass the size as a parameter.
-
-I'm not clear what you mean here.
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 4ea9510c07..4652082df1 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -318,6 +318,7 @@ void riscv_cpu_set_mode(CPURISCVState *env,
+target_ulong newpriv)
+  * @addr: The virtual address to be translated
+  * @fault_pte_addr: If not NULL, this will be set to fault pte address
+  *                  when a error occurs on pte address translation.
++ *                  This will already be shifted to match htval.
+  * @access_type: The type of MMU access
+  * @mmu_idx: Indicates current privilege level
+  * @first_stage: Are we in first stage translation?
 
 Alistair
 
 >
-> Finally, this patch, changing behaviour when hstatus.SPVP changes... depends on
-> how often this bit is expected to be toggled.
+> In addition, fault_pte_addr is named after env->guest_phys_fault_addr, which makes
+> sense in a sense.
 >
-> If the bit toggles frequently, e.g. around some small section of kernel code,
-> then one might copy the SPVP bit into tlb_flags and use two different mmu
-> indexes to imply the state of the SPVP bit.
+> Yifei
 >
-> If the bit does not toggle frequently, e.g. whatever bit of kernel code runs
-> infrequently, or it only happens around priv level changes, then simply
-> flushing the qemu tlb when the SPVP bit changes is sufficient.  You then get to
-> look at SPVP directly within tlb_fill.
->
->
-> r~
->
+> > > +                }
+> > > +                return TRANSLATE_G_STAGE_FAIL;
+> > >              }
+> > >
+> > >              pte_addr = vbase + idx * ptesize;
+> >
+> > ... this.
+> >
+> >
+> > r~
 
