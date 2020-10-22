@@ -1,70 +1,121 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVKo2-0004cQ-Qm
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Oct 2020 16:33:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35470)
+	id 1kVTDn-0003Kq-Ez
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Oct 2020 01:33:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37254)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kVKny-0004bA-2G; Wed, 21 Oct 2020 16:33:54 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:45580)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kVKnr-0003x8-MR; Wed, 21 Oct 2020 16:33:53 -0400
-Received: by mail-il1-x144.google.com with SMTP id g7so3742432ilr.12;
- Wed, 21 Oct 2020 13:33:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UfnLJVxvS7tlgzkX75GEVoAMSTkpG0UmfBuTjtue+Fg=;
- b=SAYXmDJO7+9Pd/r/7XMZXHd3StO8dsxpDF77JJvz2+tuVkxy8Pgo4Q0j/NiWjwkLql
- hmX2HCZRwM8ghH4TEBDEl3gISxoqIR/cGO6ED73n0XX8S0kSQG3xeQViAny79X5Mlst1
- YwuePtOMnBPdcHqhVoqpXJs2rvvroETJC/vTjN9t3UAJBZ/q9k901s/uJxgmnRjrd23d
- FPGoE32ACZ0fOvN8v9xZRzTK41VfynrFf4K3YVe64KFQazJgo8yCkM1U7+Bz/NT9gcQ+
- xnl3VSIEaEqCrlnT3KM5O5qch3Je1DOA2SDfq7jlMwFtlbSWRveHssCr9XJ93NMAIwNF
- LQbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=UfnLJVxvS7tlgzkX75GEVoAMSTkpG0UmfBuTjtue+Fg=;
- b=c5/UwnC+a8WAzt/yBvG9HjOtumBiNyJ6e7+79jVItb2Wrgh0oe2YCLBTz16hUoxoqa
- 4XAz3qUjo9BtyivSbdcmN1WRqQTbfQIJtmHp51fr2x63UyOrw63Zl7lRaz0TQwlA+Ue9
- APjGoHU2zP/SfqQXIO//TLOSXjLhQ9+r8jvoXMR8bPbOXuVsXKq3fFWrU8KD4oSJfMyl
- oI9WMfjR3ZyhL3W0ULKvAWMTyWkX6fnTtYfkkbkOF2JqYxBJ6GFSIwys3euMlZ02gpGp
- +XgnN4LqrFV2maS9uXg4tYf1qL3dOrYJdZ+OUrQ+SYFDnRWqDBwFnei/LjQ7FKx1Xg0V
- cshw==
-X-Gm-Message-State: AOAM530D1tVP5mVt3gE3HApMKy8ytmZNf0ycmWMSQBZAGke98vRTHJJ0
- TZxsUtarBP6WsWSMyYZy4e9DDPybFzIREEIoam0=
-X-Google-Smtp-Source: ABdhPJzkFHoo5or1zZlgbNWRfFgXLG+49i5yQcHpODhZvqtsHPsZn9f4Yc8nnwiG+w4alqDMvZ7saxyBOQgh5Fr85w0=
-X-Received: by 2002:a92:c5ce:: with SMTP id s14mr3961681ilt.40.1603312426041; 
- Wed, 21 Oct 2020 13:33:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <prvs=557099d69=Anup.Patel@wdc.com>)
+ id 1kVTDl-0003KS-DO; Thu, 22 Oct 2020 01:33:05 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:55748)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <prvs=557099d69=Anup.Patel@wdc.com>)
+ id 1kVTDi-00031Y-IG; Thu, 22 Oct 2020 01:33:05 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1603344782; x=1634880782;
+ h=from:to:cc:subject:date:message-id:
+ content-transfer-encoding:mime-version;
+ bh=UOT+6+YwQKFaGF9dGGePpVcHmQwu3fb313Oke9fBcbo=;
+ b=g8E5j1GJ82q3sB4KIn3XaDpVDUT7hCkDel44MO/qFj9qqpNlLSrqcHJt
+ SLGrkbDRFX1SWBDwHm7KDz3br7KS2OM6Zvq2m2eZ3p7/WTlfdd6Fjy2Cv
+ 3Cbi2aysc95ABD3GE11p+nkNBbaiqDh1xpxwVI11n7pNDuTZjauaW64SU
+ jxVxkscr6sEIfv532A+fHIne5ppGNI5Qkke8gbsX/rlqEqSKnxFobEhKb
+ 8Mw5c/G8JrTfoZd4Ubk6MKTYYjoq0OFt8iYrgCTWacq7CFzkUUzl7n9fC
+ 3XAYtoo2LNgz1quHxjE1NWzrQihJ1F+oBmZWgbR+q2QqpAAUaNFkY4AqT Q==;
+IronPort-SDR: xSAGQbDILOOISC04HgMAysvZ9YmgV/pSEd5hCnhh3qviLxg3oM4laa4KynahhEvIF8naN/luun
+ hu1p2+SzIBl+4G7g6eqmbkIVECLUq7+NBqomZb3wnq4WsMUuAu9lEDBdSMuJKP5zUaLyNQoRou
+ jYCTrjOg/95ibdA4pjNwdQC1DAnMirJ2sxLrFDBNfNYD60QkGmQSSt37FgE3NCuRckDBZTjjwm
+ m+OfgT8hWOdWSEJjUSYGYc5Ioo7NLhHVAkksb9OH1VC+9K0p+Kz2bSM+9AkGimlkMCH02gMsyM
+ mp0=
+X-IronPort-AV: E=Sophos;i="5.77,403,1596470400"; d="scan'208";a="155025555"
+Received: from mail-bl2nam02lp2054.outbound.protection.outlook.com (HELO
+ NAM02-BL2-obe.outbound.protection.outlook.com) ([104.47.38.54])
+ by ob1.hgst.iphmx.com with ESMTP; 22 Oct 2020 13:32:53 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jDS7Gfq86SZ0K3+IFs/k/7lHXyfgrg0x6DOEKqItF577NN+mKZ3uV72bIxwxXdSv2miDL37IqdkRiC8/ZO85vqfmZ5xBXe7H9lJdi4230gG6U7/oY0x58z2T74gXG/8GZovjqTaUo5AKZACzPVxMRn5yyqgN3GL5azqAeg7sFbkp+k4ZnN+zQTlAP9BtyhkieSOxHju3f9+Yq4g7XbV/drJQUQwd4JP5qIKnsZKQlPLis3fWNzHIPR1juxQccStCE/VMg3FESI+UCM3hpc0aVxRMQrASAZkfOERCdqxMBEQvzmDr99616yDbW9rtzS6rKEK9gBLyPVw1Aptoc9IFgw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=n/yPYBI3qV0mLaT8Zi4oPUUDkaYwoJSxccurVTac3BI=;
+ b=IcJm8XMSqVVgUQPDWtQLIR4HbcFdEWcw+R5lyrBOAbH6sGJ8mQR8jZGESayDNHMrTgGjhaiXlJRpHP0Hd0+2Az7waJiC6jWaxGBNJmyJ8B/4XJ0QnxpqMRYnnB009bTFIQJSbWYq6UMhGTN0/A7UBj9edvVMUk1T4U8kiUOgUPMG3/3e39vfZUmdjPiMzxnkHAIk1/fvV7h8qxu4qKvzdA1j7mkRTzx99Wyhn9Vw9K7XQjUhfYPO+tT72BKgPxFqTqQFHz0hFWUm5/F3rgm4J12cDyaGXzMWlL4lejrMFEcDtscw8KawpivDRZW0DbotDG2Qo9ONTDJ1xvnUOPikWg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=n/yPYBI3qV0mLaT8Zi4oPUUDkaYwoJSxccurVTac3BI=;
+ b=sBkFas71sQejjW67La4TUYs7+XSvdaWqR0STNgxiwIL6aTjRBsIVl70Lt9KTwonUXLU1TjRRQBiizk6uM7oUOpZnQ0CISKumYHi3MpcMUbCXwUmT/vqvVSs3yGUpP0w10tf4mE4cPoTudLt12xfUVdRuXLBb36tsjzhUzRuOICw=
+Authentication-Results: linaro.org; dkim=none (message not signed)
+ header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
+Received: from DM6PR04MB6201.namprd04.prod.outlook.com (2603:10b6:5:127::32)
+ by DM5PR0401MB3509.namprd04.prod.outlook.com (2603:10b6:4:78::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3455.26; Thu, 22 Oct
+ 2020 05:32:51 +0000
+Received: from DM6PR04MB6201.namprd04.prod.outlook.com
+ ([fe80::d035:e2c6:c11:51dd]) by DM6PR04MB6201.namprd04.prod.outlook.com
+ ([fe80::d035:e2c6:c11:51dd%6]) with mapi id 15.20.3477.028; Thu, 22 Oct 2020
+ 05:32:50 +0000
+From: Anup Patel <anup.patel@wdc.com>
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Anup Patel <anup.patel@wdc.com>
+Subject: [PATCH 1/2] hw/riscv: sifive_u: Allow passing custom DTB
+Date: Thu, 22 Oct 2020 11:02:24 +0530
+Message-Id: <20201022053225.2596110-1-anup.patel@wdc.com>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [122.179.78.74]
+X-ClientProxiedBy: MA1PR01CA0139.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a00:35::33) To DM6PR04MB6201.namprd04.prod.outlook.com
+ (2603:10b6:5:127::32)
 MIME-Version: 1.0
-References: <20201017071154.20642-1-space.monkey.delivers@gmail.com>
- <20201017071154.20642-2-space.monkey.delivers@gmail.com>
-In-Reply-To: <20201017071154.20642-2-space.monkey.delivers@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 21 Oct 2020 13:22:02 -0700
-Message-ID: <CAKmqyKPdsmfZwnnTpGM70BZ3nQMZ8_5sS9NiVswj8vrfQpSHgg@mail.gmail.com>
-Subject: Re: [PATCH v4 1/5] [RISCV_PM] Add J-extension into RISC-V
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- space.monkey.delivers@gmail.com, 
- Alistair Francis <Alistair.Francis@wdc.com>, kupokupokupopo@gmail.com, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from wdc.com (122.179.78.74) by
+ MA1PR01CA0139.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:35::33) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3499.18 via Frontend Transport; Thu, 22 Oct 2020 05:32:47 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 863e50c2-c25f-44cd-9578-08d8764beaca
+X-MS-TrafficTypeDiagnostic: DM5PR0401MB3509:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM5PR0401MB3509B3ACBD6015C605B024028D1D0@DM5PR0401MB3509.namprd04.prod.outlook.com>
+WDCIPOUTBOUND: EOP-TRUE
+X-MS-Oob-TLC-OOBClassifiers: OLM:33;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: f26FqLwjjiiaWo68J9uQanf7zg3CX4L9eVmI3bfSgxPPC9/6aWR8JPxJIUVAm9wcKcj1Yf4zbjJsW1NgfAOcCknYcSmdwxzGrLJIdtPwq8w+JD7dfUxdrUJlLPXVy6I7/cNR+eseIqEL6phNjRWiOldhPuedzUBkrg9+Lv5En/TmhLFTLFZjsDyNdsctdtSOKon9bZ3iaeingpIGN2CsJxAvsj5Dl92I/GBCPIE6mK5/VWeQTczLo/JqyYZWD0H4syUXwxLJW0w+ujLaq71etJv2ntukIjI+XWEWmRqna/vJ/nOdVF2A01/E9rm5E39DWdq7RcNAaPK8qRqBNHetVQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR04MB6201.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(366004)(376002)(346002)(396003)(136003)(39860400002)(7696005)(52116002)(4326008)(1076003)(55016002)(6666004)(44832011)(8886007)(110136005)(2906002)(5660300002)(54906003)(83380400001)(316002)(66946007)(26005)(86362001)(2616005)(8936002)(956004)(66556008)(36756003)(478600001)(66476007)(186003)(16526019)(8676002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData: Sk6cTnaPIRg9l5ukdIZDhB25NeKUmixzpD06TF/ymyKW2ARIkWnyAK5nCnImks42wNDq4z5y0OVqtRdPP44YvP3hvx4Fyon7m2X66tFFyueiqg6yTsRc4LtExnaAVshwNnmnJYqGpWcUs4PPMijJ/KLe9BzZbIFECd8y6iJGPFa4hgnX1vxRstDK/GoDWsxfEyBfbkw23cRT6E64jxW+0hgZSgc0pTFq2VsJqH3FUB0DAz0cMVqcRlSBJ64suIfdyPTbfiC6SDpr/LD6cTC5r96OgY4YMvQ0th2sWWeO3htqDC8+zXr7yGgCByaeH09ynBrXyruOhQu/AIhFBSE7Bkg+yuxGTjfRHPTAeYxTntAgR+MQ+4VSbgebH8zCEqEtm8DobL3ppEGHVQSKJZV81LH5SNqOEU9yxQCmkN9W9leJiz1/mqamZNRZd1JK7YoJopOgn/cczvs5NdIMH4DX0g1UADWsSm2ijG44/qgSa0eoCY7dnnjC0ifpYRZw0/APqq78fwHEqOoOVlA1Cafgn2T1lyf7l0W1wdQxrgfBOX6qufSeuRVoQSOhNOuaH0pJcbuxfB5nFdDCqTPCWj+fgkiRGTjwICQLJyThpGMEApRHGLOByu5DNKBmq38TbwRThydawt9H4II7YGljFZgUYQ==
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 863e50c2-c25f-44cd-9578-08d8764beaca
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR04MB6201.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2020 05:32:50.8533 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Lq2ldipKKPHHLZrixzKlvYLI3+jx454CQOik1bwtiL4SQ5kLYuOxElqTvyCteiKQ2KggpIdGAsgkSyYrJUm6Rw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR0401MB3509
+Received-SPF: pass client-ip=216.71.153.141;
+ envelope-from=prvs=557099d69=Anup.Patel@wdc.com; helo=esa3.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/22 01:32:54
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ MSGID_FROM_MTA_HEADER=0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -78,68 +129,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2020 20:33:54 -0000
+X-List-Received-Date: Thu, 22 Oct 2020 05:33:05 -0000
 
-On Sat, Oct 17, 2020 at 12:15 AM Alexey Baturo <baturo.alexey@gmail.com> wrote:
->
-> Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
-> ---
->  target/riscv/cpu.c | 4 ++++
->  target/riscv/cpu.h | 2 ++
->  2 files changed, 6 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 0bbfd7f457..fe6bab4a52 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -438,6 +438,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->          if (cpu->cfg.ext_h) {
->              target_misa |= RVH;
->          }
-> +        if (cpu->cfg.ext_j) {
-> +            target_misa |= RVJ;
-> +        }
->          if (cpu->cfg.ext_v) {
->              target_misa |= RVV;
->              if (!is_power_of_2(cpu->cfg.vlen)) {
-> @@ -516,6 +519,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
->      /* This is experimental so mark with 'x-' */
->      DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-> +    DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+Extend sifive_u machine to allow passing custom DTB using "-dtb"
+command-line parameter. This will help users pass modified DTB
+or Linux SiFive DTB to sifive_u machine.
 
-Usually you only want to allow the user to enable the extension at the
-end of the series. That way if someone checks out QEMU between patch 1
-and patch 5 they don't have a half working implementation (it will be
-there, but they can't enable it).
+Signed-off-by: Anup Patel <anup.patel@wdc.com>
+---
+ hw/riscv/sifive_u.c | 28 ++++++++++++++++++++--------
+ 1 file changed, 20 insertions(+), 8 deletions(-)
 
-Alistair
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 6ad975d692..554e38abf0 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -100,14 +100,25 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+     int cpu;
+     uint32_t *cells;
+     char *nodename;
++    const char *dtb_filename;
+     char ethclk_names[] = "pclk\0hclk";
+     uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle = 1;
+     uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
+ 
+-    fdt = s->fdt = create_device_tree(&s->fdt_size);
+-    if (!fdt) {
+-        error_report("create_device_tree() failed");
+-        exit(1);
++    dtb_filename = qemu_opt_get(qemu_get_machine_opts(), "dtb");
++    if (dtb_filename) {
++        fdt = s->fdt = load_device_tree(dtb_filename, &s->fdt_size);
++        if (!fdt) {
++            error_report("load_device_tree() failed");
++            exit(1);
++        }
++        goto update_bootargs;
++    } else {
++        fdt = s->fdt = create_device_tree(&s->fdt_size);
++        if (!fdt) {
++            error_report("create_device_tree() failed");
++            exit(1);
++        }
+     }
+ 
+     qemu_fdt_setprop_string(fdt, "/", "model", "SiFive HiFive Unleashed A00");
+@@ -390,13 +401,14 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+ 
+     qemu_fdt_add_subnode(fdt, "/chosen");
+     qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", nodename);
+-    if (cmdline) {
+-        qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+-    }
+-
+     qemu_fdt_setprop_string(fdt, "/aliases", "serial0", nodename);
+ 
+     g_free(nodename);
++
++update_bootargs:
++    if (cmdline) {
++        qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
++    }
+ }
+ 
+ static void sifive_u_machine_reset(void *opaque, int n, int level)
+-- 
+2.25.1
 
->      DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
->      DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
->      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index de275782e6..eca611a367 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -66,6 +66,7 @@
->  #define RVS RV('S')
->  #define RVU RV('U')
->  #define RVH RV('H')
-> +#define RVJ RV('J')
->
->  /* S extension denotes that Supervisor mode exists, however it is possible
->     to have a core that support S mode but does not have an MMU and there
-> @@ -277,6 +278,7 @@ struct RISCVCPU {
->          bool ext_s;
->          bool ext_u;
->          bool ext_h;
-> +        bool ext_j;
->          bool ext_v;
->          bool ext_counters;
->          bool ext_ifencei;
-> --
-> 2.20.1
->
->
 
