@@ -1,46 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVVGD-0001Dd-IX
+	id 1kVVGD-0001EE-O4
 	for mharc-qemu-riscv@gnu.org; Thu, 22 Oct 2020 03:43:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37796)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37794)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kVVG1-00013V-FP; Thu, 22 Oct 2020 03:43:34 -0400
-Received: from mail-lf1-x144.google.com ([2a00:1450:4864:20::144]:44568)
+ id 1kVVG0-00013S-VM; Thu, 22 Oct 2020 03:43:34 -0400
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:44568)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kVVFn-0007cz-Fq; Thu, 22 Oct 2020 03:43:31 -0400
-Received: by mail-lf1-x144.google.com with SMTP id b1so1009021lfp.11;
- Thu, 22 Oct 2020 00:43:17 -0700 (PDT)
+ id 1kVVFp-0007dI-CT; Thu, 22 Oct 2020 03:43:30 -0400
+Received: by mail-lf1-x143.google.com with SMTP id b1so1009123lfp.11;
+ Thu, 22 Oct 2020 00:43:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=EMHtwtlOhgQ1h5Kmz8jinmABS0h3Twjiwzgmx6BiYTU=;
- b=tvOAhnqUEF1HR4dLtrw58AK6xtuIa2JtxZJ1MFWLmXr6bn5I2O02Dxl506H6tiQ59a
- gyFjDcOtUJmZYHOK9ZOTh9n1gRUBPZ5dUAXuZL93gCwbfGRlpvWl5eQAblWPAlfs9VgD
- mULMrldSLBAYC7PjF1YTBrxyK9DxXZaQRn3QPmk5NFnnVEbMddVd/Zy3tH9EpJXw2p3A
- QKL0gJJ2Gk8N5oXBLuc2tHz3eKyIH60wNEPIeE0tUjT5puQGRV709G+XeRpTvRLyEv1/
- eWrHiXkVwAtI3R0zgJLOR1Lw7CwCt1WpBwWybXa171QHSVOzJd42+z8ZroBcf+iDMLSO
- b2Iw==
+ bh=iGcClsENfMRlEEj1DdXzesuzsrG1w6qHhs9fkCduQVY=;
+ b=fbUlSsoNarvg6cRPA/XasjZJdKwbAF8Uif/N50wZWi9TrLuCwdlXS0Cis0ycV6PHKo
+ bJ8Fag//1YASkwSt4ikcUItrhgDd7UaJN4JGrnfCUXFNYRL2HfnicnDkWHrPLweyuDz/
+ F7ehlRny9CIbukczYpSa+jjSK3cyB2komcZReI6tSPbhBenGdlSE/D2vJrgLBGREYqKt
+ WKO8a8GXq8t4NxpQ81+S0rpdx6sN/hWrKK814ECg/toohMEn0kczASovt52mBS0clF1g
+ QraoG527c93icI9IX36rcROlgHkfDemL1cmv6d9yJcWWzaLaQo6CH2Mdp+B5iX9NV+9V
+ ntxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=EMHtwtlOhgQ1h5Kmz8jinmABS0h3Twjiwzgmx6BiYTU=;
- b=VGIdFaobhwf/OR3Vv3xXBWsQjxc0Qq4ExUjIekIMILKv/vF5BqzDV0pySengWyNzvJ
- MaKtEeKFUN275/hXObtO+HUxUbJ4QDT8FRtPLZ/lf1jR6S9lOpMFAfMo4JrLzkxgmBN+
- RYH7K5frJMH9bPiXtMp1qj+/D1t9zhbJVPTk43VdG5kMRWD1oXGgueQlNQ05tavu99Vv
- zHzs6KzCID2VaK+CmGQGcBQwm8S0ii93I3piCpYimhX1TSKaTTPmxRUOzznDYc+3Q9T+
- Qv5kDYCBtTdlBinn9cfyukW2V6bLJHeK+AlhbJpkUxHhCvUzGvgfRPRNrdeR4J2GGSFY
- Kcqw==
-X-Gm-Message-State: AOAM533ACh5nZ/deZ3LtdKgpUNIArdmyUJHcQK1fVoVbYGxrnZEmTcEK
- Cgk/uoT3eVj1TlT62OyGEBQqboVUVJbPc/Ie1Ok=
-X-Google-Smtp-Source: ABdhPJyd/QwastSqdAsDDFHUsfUCjskdU96trIYqGFLW2H70YzG7Ze6Bfysdz/jIgYSu9CflfxT1lw==
-X-Received: by 2002:a19:7e53:: with SMTP id z80mr376945lfc.72.1603352596199;
- Thu, 22 Oct 2020 00:43:16 -0700 (PDT)
+ bh=iGcClsENfMRlEEj1DdXzesuzsrG1w6qHhs9fkCduQVY=;
+ b=GMQnI4I9wpyWVOLAz3Paj1hCrYaJZGw0MHlOMNX/0ZgKql59l/Q3iTkKZZKAlQ5Yfb
+ +fuYcaC8Pr07f7TNOoNaKmINVHZojVPqJTddAlxpZIKUOdQZLWUy/mEfA9Hnaf+p8EA7
+ vao2J/6TTqUP4TnKnzmZUriB1+rC2fvqL6pCu9HtUaxf7vgG+ICHAOfh24gY2ETDUIfA
+ MgReul7JLd4z0bmXRnATom1ijelGgTvlm6QiSSTodCHyPpQh0IAhAE7ZiPmRrETs8K4Z
+ ++NaWpfQb5Ja/viApPcPZODM6OyNFh1dLFutR8Vi1RJQOKAB8J+c55fTRQh4vOytLMpV
+ zCWA==
+X-Gm-Message-State: AOAM533pv5Pnf8TAsA+nUtGK2A17tf190VrGqk4gArcfHyVCAcKqmSnp
+ jroYY5SnYpguQZ0rH6cUntQ=
+X-Google-Smtp-Source: ABdhPJyET/SiBiKPYXFwBOv5uwKOKQlweJRhx7u33e1gxtaLrJP6Dn8+0UygCCrcufHxJAA+b2FEQg==
+X-Received: by 2002:ac2:5dea:: with SMTP id z10mr452470lfq.468.1603352598322; 
+ Thu, 22 Oct 2020 00:43:18 -0700 (PDT)
 Received: from neptune.lab ([46.39.229.104])
- by smtp.googlemail.com with ESMTPSA id n19sm138887lfe.142.2020.10.22.00.43.15
+ by smtp.googlemail.com with ESMTPSA id n19sm138887lfe.142.2020.10.22.00.43.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Oct 2020 00:43:15 -0700 (PDT)
+ Thu, 22 Oct 2020 00:43:17 -0700 (PDT)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
 To: 
@@ -49,16 +49,16 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v5 1/6] [RISCV_PM] Add J-extension into RISC-V
-Date: Thu, 22 Oct 2020 10:43:04 +0300
-Message-Id: <20201022074309.3210-2-space.monkey.delivers@gmail.com>
+Subject: [PATCH v5 3/6] [RISCV_PM] Print new PM CSRs in QEMU logs
+Date: Thu, 22 Oct 2020 10:43:06 +0300
+Message-Id: <20201022074309.3210-4-space.monkey.delivers@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201022074309.3210-1-space.monkey.delivers@gmail.com>
 References: <20201022074309.3210-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::144;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x144.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::143;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x143.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -67,7 +67,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,43 +82,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 22 Oct 2020 07:43:35 -0000
 
+Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
 ---
- target/riscv/cpu.c | 1 +
- target/riscv/cpu.h | 2 ++
- 2 files changed, 3 insertions(+)
+ target/riscv/cpu.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0bbfd7f457..4e305249b3 100644
+index db72f5cf59..1c00d9ea26 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -516,6 +516,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-     /* This is experimental so mark with 'x-' */
-     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-+    DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index de275782e6..eca611a367 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -66,6 +66,7 @@
- #define RVS RV('S')
- #define RVU RV('U')
- #define RVH RV('H')
-+#define RVJ RV('J')
+@@ -255,6 +255,31 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval ", env->htval);
+         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2 ", env->mtval2);
+     }
++    if (riscv_has_ext(env, RVJ)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mmte    ", env->mmte);
++        switch (env->priv) {
++        case PRV_U:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmbase ",
++                         env->upmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmmask ",
++                         env->upmmask);
++            break;
++        case PRV_S:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmbase ",
++                         env->spmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmmask ",
++                         env->spmmask);
++            break;
++        case PRV_M:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmbase ",
++                         env->mpmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmmask ",
++                         env->mpmmask);
++            break;
++        default:
++            assert(0 && "Unreachable");
++        }
++    }
+ #endif
  
- /* S extension denotes that Supervisor mode exists, however it is possible
-    to have a core that support S mode but does not have an MMU and there
-@@ -277,6 +278,7 @@ struct RISCVCPU {
-         bool ext_s;
-         bool ext_u;
-         bool ext_h;
-+        bool ext_j;
-         bool ext_v;
-         bool ext_counters;
-         bool ext_ifencei;
+     for (i = 0; i < 32; i++) {
 -- 
 2.20.1
 
