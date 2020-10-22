@@ -1,72 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVVGD-0001EE-O4
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Oct 2020 03:43:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37794)
+	id 1kVVUB-0005rw-Ad
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Oct 2020 03:58:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41124)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kVVG0-00013S-VM; Thu, 22 Oct 2020 03:43:34 -0400
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:44568)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1kVVFp-0007dI-CT; Thu, 22 Oct 2020 03:43:30 -0400
-Received: by mail-lf1-x143.google.com with SMTP id b1so1009123lfp.11;
- Thu, 22 Oct 2020 00:43:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=iGcClsENfMRlEEj1DdXzesuzsrG1w6qHhs9fkCduQVY=;
- b=fbUlSsoNarvg6cRPA/XasjZJdKwbAF8Uif/N50wZWi9TrLuCwdlXS0Cis0ycV6PHKo
- bJ8Fag//1YASkwSt4ikcUItrhgDd7UaJN4JGrnfCUXFNYRL2HfnicnDkWHrPLweyuDz/
- F7ehlRny9CIbukczYpSa+jjSK3cyB2komcZReI6tSPbhBenGdlSE/D2vJrgLBGREYqKt
- WKO8a8GXq8t4NxpQ81+S0rpdx6sN/hWrKK814ECg/toohMEn0kczASovt52mBS0clF1g
- QraoG527c93icI9IX36rcROlgHkfDemL1cmv6d9yJcWWzaLaQo6CH2Mdp+B5iX9NV+9V
- ntxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=iGcClsENfMRlEEj1DdXzesuzsrG1w6qHhs9fkCduQVY=;
- b=GMQnI4I9wpyWVOLAz3Paj1hCrYaJZGw0MHlOMNX/0ZgKql59l/Q3iTkKZZKAlQ5Yfb
- +fuYcaC8Pr07f7TNOoNaKmINVHZojVPqJTddAlxpZIKUOdQZLWUy/mEfA9Hnaf+p8EA7
- vao2J/6TTqUP4TnKnzmZUriB1+rC2fvqL6pCu9HtUaxf7vgG+ICHAOfh24gY2ETDUIfA
- MgReul7JLd4z0bmXRnATom1ijelGgTvlm6QiSSTodCHyPpQh0IAhAE7ZiPmRrETs8K4Z
- ++NaWpfQb5Ja/viApPcPZODM6OyNFh1dLFutR8Vi1RJQOKAB8J+c55fTRQh4vOytLMpV
- zCWA==
-X-Gm-Message-State: AOAM533pv5Pnf8TAsA+nUtGK2A17tf190VrGqk4gArcfHyVCAcKqmSnp
- jroYY5SnYpguQZ0rH6cUntQ=
-X-Google-Smtp-Source: ABdhPJyET/SiBiKPYXFwBOv5uwKOKQlweJRhx7u33e1gxtaLrJP6Dn8+0UygCCrcufHxJAA+b2FEQg==
-X-Received: by 2002:ac2:5dea:: with SMTP id z10mr452470lfq.468.1603352598322; 
- Thu, 22 Oct 2020 00:43:18 -0700 (PDT)
-Received: from neptune.lab ([46.39.229.104])
- by smtp.googlemail.com with ESMTPSA id n19sm138887lfe.142.2020.10.22.00.43.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Oct 2020 00:43:17 -0700 (PDT)
-From: Alexey Baturo <baturo.alexey@gmail.com>
-X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v5 3/6] [RISCV_PM] Print new PM CSRs in QEMU logs
-Date: Thu, 22 Oct 2020 10:43:06 +0300
-Message-Id: <20201022074309.3210-4-space.monkey.delivers@gmail.com>
-X-Mailer: git-send-email 2.20.1
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1kVVU8-0005ne-Uc; Thu, 22 Oct 2020 03:58:08 -0400
+Resent-Date: Thu, 22 Oct 2020 03:58:08 -0400
+Resent-Message-Id: <E1kVVU8-0005ne-Uc@lists.gnu.org>
+Received: from sender4-of-o57.zoho.com ([136.143.188.57]:21746)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1kVVU6-0004Wz-9e; Thu, 22 Oct 2020 03:58:08 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1603353466; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=TMJQS2b/H1/dUorQs0rypTWeQV0hqyNcH3hL9Qe6vwW5qRLdhu/eEKu2+O+rioNt5+g/fYA3BaYrkES1UzzyC2cScpI8E8dJfQF8LYNV8laoRAlAC3+xI2phayKn7gIRmKdqL0XtiKkxFBj0UtEvysEZhrmq7mOO5yPCu3JtigY=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1603353466;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
+ bh=Agw1BmAkyR9fOmBWzkX2bfJnMP1FtLVlbOgRnLjlSow=; 
+ b=npTiaDj9USR2YofIKTWdwJm4Bo2W+9RB7+fc6p5UnPca2wvLgd9sv0sREAkZopvbcN+1LgAbyt/aAVJCXxCsryeCtxNlyksD/ou134WWiBM5hyQxsFOx7I/T0DNrJdD2xsnWa3quQaib6bIhVkekc+pCXnagUiDy2CCNnM0Ax4E=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 1603353463609125.03576959874738;
+ Thu, 22 Oct 2020 00:57:43 -0700 (PDT)
+Subject: Re: [PATCH v5 0/6] RISC-V Pointer Masking implementation
+Message-ID: <160335346176.17333.13931347745695572993@66eaa9a8a123>
+Reply-To: <qemu-devel@nongnu.org>
 In-Reply-To: <20201022074309.3210-1-space.monkey.delivers@gmail.com>
-References: <20201022074309.3210-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::143;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x143.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: baturo.alexey@gmail.com
+Cc: baturo.alexey@gmail.com, qemu-riscv@nongnu.org, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, richard.henderson@linaro.org,
+ qemu-devel@nongnu.org, space.monkey.delivers@gmail.com,
+ Alistair.Francis@wdc.com, kupokupokupopo@gmail.com, palmer@dabbelt.com
+Date: Thu, 22 Oct 2020 00:57:43 -0700 (PDT)
+X-ZohoMailClient: External
+Received-SPF: pass client-ip=136.143.188.57; envelope-from=no-reply@patchew.org;
+ helo=sender4-of-o57.zoho.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/22 03:58:03
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -80,50 +64,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2020 07:43:35 -0000
+X-List-Received-Date: Thu, 22 Oct 2020 07:58:09 -0000
 
-Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
----
- target/riscv/cpu.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index db72f5cf59..1c00d9ea26 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -255,6 +255,31 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval ", env->htval);
-         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2 ", env->mtval2);
-     }
-+    if (riscv_has_ext(env, RVJ)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mmte    ", env->mmte);
-+        switch (env->priv) {
-+        case PRV_U:
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmbase ",
-+                         env->upmbase);
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmmask ",
-+                         env->upmmask);
-+            break;
-+        case PRV_S:
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmbase ",
-+                         env->spmbase);
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmmask ",
-+                         env->spmmask);
-+            break;
-+        case PRV_M:
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmbase ",
-+                         env->mpmbase);
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmmask ",
-+                         env->mpmmask);
-+            break;
-+        default:
-+            assert(0 && "Unreachable");
-+        }
-+    }
- #endif
- 
-     for (i = 0; i < 32; i++) {
--- 
-2.20.1
-
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMTAyMjA3NDMwOS4zMjEw
+LTEtc3BhY2UubW9ua2V5LmRlbGl2ZXJzQGdtYWlsLmNvbS8KCgoKSGksCgpUaGlzIHNlcmllcyBz
+ZWVtcyB0byBoYXZlIHNvbWUgY29kaW5nIHN0eWxlIHByb2JsZW1zLiBTZWUgb3V0cHV0IGJlbG93
+IGZvcgptb3JlIGluZm9ybWF0aW9uOgoKVHlwZTogc2VyaWVzCk1lc3NhZ2UtaWQ6IDIwMjAxMDIy
+MDc0MzA5LjMyMTAtMS1zcGFjZS5tb25rZXkuZGVsaXZlcnNAZ21haWwuY29tClN1YmplY3Q6IFtQ
+QVRDSCB2NSAwLzZdIFJJU0MtViBQb2ludGVyIE1hc2tpbmcgaW1wbGVtZW50YXRpb24KCj09PSBU
+RVNUIFNDUklQVCBCRUdJTiA9PT0KIyEvYmluL2Jhc2gKZ2l0IHJldi1wYXJzZSBiYXNlID4gL2Rl
+di9udWxsIHx8IGV4aXQgMApnaXQgY29uZmlnIC0tbG9jYWwgZGlmZi5yZW5hbWVsaW1pdCAwCmdp
+dCBjb25maWcgLS1sb2NhbCBkaWZmLnJlbmFtZXMgVHJ1ZQpnaXQgY29uZmlnIC0tbG9jYWwgZGlm
+Zi5hbGdvcml0aG0gaGlzdG9ncmFtCi4vc2NyaXB0cy9jaGVja3BhdGNoLnBsIC0tbWFpbGJhY2sg
+YmFzZS4uCj09PSBURVNUIFNDUklQVCBFTkQgPT09CgpVcGRhdGluZyAzYzhjZjVhOWMyMWZmODc4
+MjE2NGQxZGVmN2Y0NGJkODg4NzEzMzg0CkZyb20gaHR0cHM6Ly9naXRodWIuY29tL3BhdGNoZXct
+cHJvamVjdC9xZW11CiAtIFt0YWcgdXBkYXRlXSAgICAgIHBhdGNoZXcvMjAyMDEwMjExNjMxMzYu
+MjczMjQtMS1hbGV4LmJlbm5lZUBsaW5hcm8ub3JnIC0+IHBhdGNoZXcvMjAyMDEwMjExNjMxMzYu
+MjczMjQtMS1hbGV4LmJlbm5lZUBsaW5hcm8ub3JnCiAtIFt0YWcgdXBkYXRlXSAgICAgIHBhdGNo
+ZXcvMjAyMDEwMjEyMTI3MjEuNDQwMzczLTEtcGV0ZXJ4QHJlZGhhdC5jb20gLT4gcGF0Y2hldy8y
+MDIwMTAyMTIxMjcyMS40NDAzNzMtMS1wZXRlcnhAcmVkaGF0LmNvbQogKiBbbmV3IHRhZ10gICAg
+ICAgICBwYXRjaGV3LzIwMjAxMDIyMDc0MzA5LjMyMTAtMS1zcGFjZS5tb25rZXkuZGVsaXZlcnNA
+Z21haWwuY29tIC0+IHBhdGNoZXcvMjAyMDEwMjIwNzQzMDkuMzIxMC0xLXNwYWNlLm1vbmtleS5k
+ZWxpdmVyc0BnbWFpbC5jb20KU3dpdGNoZWQgdG8gYSBuZXcgYnJhbmNoICd0ZXN0JwowNDdkODBi
+IEFsbG93IGV4cGVyaW1lbnRhbCBKLWV4dCB0byBiZSB0dXJuZWQgb24KMmY3YTg5NSBJbXBsZW1l
+bnQgYWRkcmVzcyBtYXNraW5nIGZ1bmN0aW9ucyByZXF1aXJlZCBmb3IgUklTQy1WIFBvaW50ZXIg
+TWFza2luZyBleHRlbnNpb24KNjhkMzVjMiBTdXBwb3J0IHBvaW50ZXIgbWFza2luZyBmb3IgUklT
+Qy1WIGZvciBpL2MvZi9kL2EgdHlwZXMgb2YgaW5zdHJ1Y3Rpb25zCjE5YjYxN2YgUHJpbnQgbmV3
+IFBNIENTUnMgaW4gUUVNVSBsb2dzCjk3YmZlZjEgU3VwcG9ydCBDU1JzIHJlcXVpcmVkIGZvciBS
+SVNDLVYgUE0gZXh0ZW5zaW9uIGV4Y2VwdCBmb3Igb25lcyBpbiBoeXBlcnZpc29yIG1vZGUKYTAy
+ODEzYyBBZGQgSi1leHRlbnNpb24gaW50byBSSVNDLVYKCj09PSBPVVRQVVQgQkVHSU4gPT09CjEv
+NiBDaGVja2luZyBjb21taXQgYTAyODEzYzA1ZGFjIChBZGQgSi1leHRlbnNpb24gaW50byBSSVND
+LVYpCkVSUk9SOiBNaXNzaW5nIFNpZ25lZC1vZmYtYnk6IGxpbmUocykKCnRvdGFsOiAxIGVycm9y
+cywgMCB3YXJuaW5ncywgMjEgbGluZXMgY2hlY2tlZAoKUGF0Y2ggMS82IGhhcyBzdHlsZSBwcm9i
+bGVtcywgcGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBv
+c2l0aXZlcyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4g
+TUFJTlRBSU5FUlMuCgoyLzYgQ2hlY2tpbmcgY29tbWl0IDk3YmZlZjE4NDI5OSAoU3VwcG9ydCBD
+U1JzIHJlcXVpcmVkIGZvciBSSVNDLVYgUE0gZXh0ZW5zaW9uIGV4Y2VwdCBmb3Igb25lcyBpbiBo
+eXBlcnZpc29yIG1vZGUpCjMvNiBDaGVja2luZyBjb21taXQgMTliNjE3ZmMyZDQwIChQcmludCBu
+ZXcgUE0gQ1NScyBpbiBRRU1VIGxvZ3MpCjQvNiBDaGVja2luZyBjb21taXQgNjhkMzVjMjRlMGQ0
+IChTdXBwb3J0IHBvaW50ZXIgbWFza2luZyBmb3IgUklTQy1WIGZvciBpL2MvZi9kL2EgdHlwZXMg
+b2YgaW5zdHJ1Y3Rpb25zKQo1LzYgQ2hlY2tpbmcgY29tbWl0IDJmN2E4OTU5NDliOCAoSW1wbGVt
+ZW50IGFkZHJlc3MgbWFza2luZyBmdW5jdGlvbnMgcmVxdWlyZWQgZm9yIFJJU0MtViBQb2ludGVy
+IE1hc2tpbmcgZXh0ZW5zaW9uKQo2LzYgQ2hlY2tpbmcgY29tbWl0IDA0N2Q4MGJhNjRhNCAoQWxs
+b3cgZXhwZXJpbWVudGFsIEotZXh0IHRvIGJlIHR1cm5lZCBvbikKPT09IE9VVFBVVCBFTkQgPT09
+CgpUZXN0IGNvbW1hbmQgZXhpdGVkIHdpdGggY29kZTogMQoKClRoZSBmdWxsIGxvZyBpcyBhdmFp
+bGFibGUgYXQKaHR0cDovL3BhdGNoZXcub3JnL2xvZ3MvMjAyMDEwMjIwNzQzMDkuMzIxMC0xLXNw
+YWNlLm1vbmtleS5kZWxpdmVyc0BnbWFpbC5jb20vdGVzdGluZy5jaGVja3BhdGNoLz90eXBlPW1l
+c3NhZ2UuCi0tLQpFbWFpbCBnZW5lcmF0ZWQgYXV0b21hdGljYWxseSBieSBQYXRjaGV3IFtodHRw
+czovL3BhdGNoZXcub3JnL10uClBsZWFzZSBzZW5kIHlvdXIgZmVlZGJhY2sgdG8gcGF0Y2hldy1k
+ZXZlbEByZWRoYXQuY29t
 
