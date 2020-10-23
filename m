@@ -1,63 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVz8J-0000EU-RX
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:37:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35144)
+	id 1kVz8K-0000F0-2X
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:37:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35130)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVz8D-0000CF-3b; Fri, 23 Oct 2020 11:37:29 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:38916)
+ id 1kVz8B-0000BK-9z; Fri, 23 Oct 2020 11:37:28 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:38922)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVz88-0002pW-33; Fri, 23 Oct 2020 11:37:28 -0400
+ id 1kVz88-0002ph-FX; Fri, 23 Oct 2020 11:37:26 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1603467443; x=1635003443;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=+kH0HRDVSR6+Oeh5CZ+4ncx3E9IpH2mTPisXyYIn8rA=;
- b=dQDTbPOJpz7awwhFk6N9hKekTmOcG/HJIoM5/AR9g4RAbfx1yY05VNTP
- M2vzMo9K7pA6PBwy+Q2+5jNLTB5lxXxfPlhIw1PO+ErGxFLufNFbs64ne
- vdQFtqc0aupuzMK8tRnNQFz+a86sUwKZWmECcxP2qOI4272YIPfQPIYj6
- r8XZP2nUrEod/IbN9/0KPhn1GO2pBrV+vYjWITzdMFFFtR8fD74efxL2I
- 0AKC4fm6tzn/KAU/S8vIiUSAsYzB2qK70oFJIPidhcAIg6F1PzU2dLyxp
- ZU7vHtu0DL+gl+aQujhdCHhA45PUTSWjrcXgq54vv3wBOT7+bG80o79+N A==;
-IronPort-SDR: UNLYX+M3OWNpxvLOlrAf2hY/UA/9+aW/tcuKs3Kf3JaJx/ggRHa4ukskEfi4I90UGRRj+Vsu8u
- Y9zXvGsBLLIEHUMjsppkBoQqpGd7hK0KFSlmPYRXWW1Q5UWyPnXdKV6Z1lG5EMDiPYn0XTShBj
- Dv4WWfZbZOtytyChqvYpv0J23l25z4cJJxBXcHgiM1GtTNFS5TIbtHtuAN9jM4n5Ji6uqc6jxW
- gc5IvOXd3oLWo2Dh5x4ie32ehu+iz8hz5jsPU93WuDwd1qnZmLuAMDkS7Fyk1ANHCvReSzffS4
- +jc=
-X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="260636257"
+ t=1603467444; x=1635003444;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=Gv/v2qUHT3RQ9WsyYe/7AJZc4P3ax+SAKTeS6rhbV1o=;
+ b=ak5WI1nuLHEzpToJIJl8k0Pe66wqqnxRoE5C/RdYQNOgt+dRJri1nDnq
+ wve4McADs+kU3NmcUuiGB68R4IecQfoR1V5F6wc+blEuCbWv3DoB4pNAI
+ MdeUaItcMfx84H7qnxq/V2D4TOQJKuGGehvsd5czAKr+Ou5XRdn89DCTD
+ vRo/GPfUNAPJspqwlXBBsbKs8zXdNB6FtaLdxw0kiGzVsFzW/iCEVN0XK
+ 1Yg7YkV9pPtCdfalvFwJ8TMsBJnaqtPKPnaK+ZxVMtnQ+Y1QPFHIZgvUm
+ I6YHI7c1qYZ4tb1S3/EcXOqVHqPl8TJoPE6JeUik2rysjP9Tunp7y7Osr w==;
+IronPort-SDR: en04BjEpHnlWO/LXhI6/EBG9psYbR5u7TdgglpiyLAoh4NUxD3hdvX/KdPTUEtwnWr+IzDKrMs
+ 1G8oyPj3hhdf9paDaCTiR/ZPlRHoBCNrKWhxDd9C5lwbMs1j9CjJ+Jf5Kk5fCuwzEcSD563Eox
+ mE5WfKeo2/XRhHp12hOHLs8oJz5+i1PSQSPsU7ugiYlrkH1KjxpDbjVwE0lgSdF9A10RcBeby9
+ xbgIZm6H8BBF8Q4G/IPQuPKRMZSJsBp4IUbauWK410P60T3yznm/IQVmgY6oxV/EiVUtfSv0WE
+ 9p8=
+X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="260636261"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:37:19 +0800
-IronPort-SDR: fpkBGz/Qi7tu3UGtxG1ZpIpcCeQ1nzA4sJDhgvrdoq/GmC/nubpn81n73meMCS068UdEgN7c+H
- F5Mi32tR199nkEA4KPa50F0I/audKMgHGm36wO/HPizec3JFkB641Xy5FUmoA05eHczy7uUa/H
- STt1NAM7E2ERQjt/ydosLej08vPzIjd1YPMzjcDFbDMm42dSR32781gzcKUza3fAvkN7jc8Oyg
- /rEvmlTa4rWq0dF0UI91HLiGS0K3isRAboS0ErpETz8FsySLLpq5vVbiLt+vDWvjmeV7O77rCN
- dmc6bSQ4uxcKNXJaFUcT8jHF
+ by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:37:22 +0800
+IronPort-SDR: dvbxy3ehYfy3ufIoWFw5+3IwkBw7BE5wbTzmW2QcYhITo4B4L5iCBe21J/uoUuMSkxdxnEyKUi
+ iOhnwNJ7nXGXayPoS2fWgQLNgbRrsITcbrutuOx2XcGJ6D6RhxPqDHBumNZtyDFvxSgsyxaP21
+ 2I3wn01BlM3sL2crA/XTEANU0P8o58JQKcOBJ0bffn4/r2O2MaI9yInooXGmhxb0YbNmjz+2Yt
+ FZlqP2YqPkC3LkxSyWQnqfRFHxt4AkFL7j7B5IhtohTxGqLvniFnSNGodefupYVCVwcl32yoXw
+ CKF8mhQ76/NtEBiDsbhFKJdY
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Oct 2020 08:23:42 -0700
-IronPort-SDR: CTzIUKX5P/dQ2il1GVAxigr2o2aiqXEc/GGubgLci8OKpnRduyMmfFxxRGLayRCuqeB07OUarQ
- JSn4PqL0D/cAqCFaLFtjnnkaFkEDe2r4wCmM/lmRZIHKZ9gR+ezzitPPgR1aM/EvvuZOzYbvaS
- DN8Tl4HdeiaPJ3MbLLpVCHD0JVl6YVB5DP9lMRrNqc9W/BJAg0ovyUSjC/IMrj6H0Fc2XtPYHj
- wHq9ldhG0aYTj1m/kj5HSisqDCbJbT0LjjQF5UQi7gCgx+3jVPE9ljbg7DsrOwh2ARJzfh4JPK
- fms=
+ 23 Oct 2020 08:23:44 -0700
+IronPort-SDR: 3yLSBvu5kFcoJ8weIUHVZK6cPHs+r5vdDpgjqlIgjvtwkC7gJ6cJVYCC/FvXtNu9qnlfpgZe+7
+ t/iwgMBhw8A2d6anSGPC+nlN7QX8YjBTDL6Hi28WNuwvye++zco0BWWF8rE0ZmwOnmtgAzfn6H
+ Mr/Tem2ETZLu0z6NIOL50txh9dLIdbjUhZMVnpp6i40mxDd1DG+kcAEmeLJPSfeLFrDKoQP3tx
+ X1LXm9KcQAMV2l1HcsbUo7XtIamaXOD+9QtW5k/X5M9XvmlaRF8C9xn3DvZp1yWmns4eGGyYAS
+ 1zc=
 WDCIronportException: Internal
 Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.60.46])
- by uls-op-cesaip02.wdc.com with ESMTP; 23 Oct 2020 08:37:20 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 23 Oct 2020 08:37:22 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com, richard.henderson@linaro.org
-Subject: [PATCH v1 0/5]  Fix the Hypervisor access functions
-Date: Fri, 23 Oct 2020 08:25:59 -0700
-Message-Id: <cover.1603466725.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 1/5] target/riscv: Add a virtualised MMU Mode
+Date: Fri, 23 Oct 2020 08:26:01 -0700
+Message-Id: <16213739a6232aa4824c5a008e2f669e6e58fbcf.1603466725.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <cover.1603466725.git.alistair.francis@wdc.com>
+References: <cover.1603466725.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=68.232.141.245;
@@ -86,28 +88,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 23 Oct 2020 15:37:30 -0000
 
-Richard pointed out that the Hypervisor access functions don't work
-correctly, see:
-https://www.mail-archive.com/qemu-devel@nongnu.org/msg751540.html.
-This seris fixes them up by adding a new MMU index for the virtualised
-state.
+Add a new MMU mode that includes the current virt mode.
 
-Alistair Francis (5):
-  target/riscv: Add a virtualised MMU Mode
-  target/riscv: Set the virtualised MMU mode when doing hyp accesses
-  target/riscv: Remove the HS_TWO_STAGE flag
-  target/riscv: Remove the hyp load and store functions
-  target/riscv: Split the Hypervisor execute load helpers
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu-param.h  | 2 +-
+ target/riscv/cpu.h        | 4 +++-
+ target/riscv/cpu_helper.c | 6 +++++-
+ 3 files changed, 9 insertions(+), 3 deletions(-)
 
- target/riscv/cpu-param.h                |   2 +-
- target/riscv/cpu.h                      |   7 +-
- target/riscv/cpu_bits.h                 |   1 -
- target/riscv/helper.h                   |   6 +-
- target/riscv/cpu_helper.c               |  67 ++++++-------
- target/riscv/op_helper.c                |  90 ++---------------
- target/riscv/insn_trans/trans_rvh.c.inc | 127 +++++++-----------------
- 7 files changed, 82 insertions(+), 218 deletions(-)
-
+diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
+index 664fc1d371..502ed6489e 100644
+--- a/target/riscv/cpu-param.h
++++ b/target/riscv/cpu-param.h
+@@ -18,6 +18,6 @@
+ # define TARGET_VIRT_ADDR_SPACE_BITS 32 /* sv32 */
+ #endif
+ #define TARGET_PAGE_BITS 12 /* 4 KiB Pages */
+-#define NB_MMU_MODES 4
++#define NB_MMU_MODES 8
+ 
+ #endif
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index de4705bb57..8ac01f3a64 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -365,7 +365,9 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
+ target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
+ void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
+ 
+-#define TB_FLAGS_MMU_MASK   3
++#define TB_FLAGS_MMU_MASK   7
++#define TB_FLAGS_PRIV_MMU_MASK                3
++#define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
+ #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
+ 
+ typedef CPURISCVState CPUArchState;
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 4652082df1..46b62a0f37 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -30,6 +30,10 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+ #ifdef CONFIG_USER_ONLY
+     return 0;
+ #else
++    if (riscv_cpu_virt_enabled(env)) {
++        return env->priv | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
++    }
++
+     return env->priv;
+ #endif
+ }
+@@ -336,7 +340,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+      * (riscv_cpu_do_interrupt) is correct */
+     MemTxResult res;
+     MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
+-    int mode = mmu_idx;
++    int mode = mmu_idx & 0x3;
+     bool use_background = false;
+ 
+     /*
 -- 
 2.28.0
 
