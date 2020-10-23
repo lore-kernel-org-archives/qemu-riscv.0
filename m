@@ -1,66 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVtZc-0006nH-Ea
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 05:41:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59644)
+	id 1kVz8J-0000EU-RX
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:37:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35144)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kVtZa-0006mI-BB; Fri, 23 Oct 2020 05:41:22 -0400
-Received: from szxga01-in.huawei.com ([45.249.212.187]:2945 helo=huawei.com)
+ (Exim 4.90_1)
+ (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
+ id 1kVz8D-0000CF-3b; Fri, 23 Oct 2020 11:37:29 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:38916)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kVtZX-0006Dk-HT; Fri, 23 Oct 2020 05:41:21 -0400
-Received: from DGGEMM405-HUB.china.huawei.com (unknown [172.30.72.57])
- by Forcepoint Email with ESMTP id 26E749EBEFB06B6A1720;
- Fri, 23 Oct 2020 17:41:09 +0800 (CST)
-Received: from dggemm754-chm.china.huawei.com (10.1.198.60) by
- DGGEMM405-HUB.china.huawei.com (10.3.20.213) with Microsoft SMTP Server (TLS)
- id 14.3.487.0; Fri, 23 Oct 2020 17:41:08 +0800
-Received: from dggpemm000001.china.huawei.com (7.185.36.245) by
- dggemm754-chm.china.huawei.com (10.1.198.60) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1913.5; Fri, 23 Oct 2020 17:41:08 +0800
-Received: from dggpemm000001.china.huawei.com ([7.185.36.245]) by
- dggpemm000001.china.huawei.com ([7.185.36.245]) with mapi id 15.01.1913.007;
- Fri, 23 Oct 2020 17:41:08 +0800
-From: Jiangyifei <jiangyifei@huawei.com>
-To: "Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>
-CC: "palmer@dabbelt.com" <palmer@dabbelt.com>, "sagark@eecs.berkeley.edu"
- <sagark@eecs.berkeley.edu>, "kbastian@mail.uni-paderborn.de"
- <kbastian@mail.uni-paderborn.de>, "richard.henderson@linaro.org"
- <richard.henderson@linaro.org>, "Zhangxiaofeng (F)"
- <victor.zhangxiaofeng@huawei.com>, "Wubin (H)" <wu.wubin@huawei.com>,
- Zhanghailiang <zhang.zhanghailiang@huawei.com>, "dengkai (A)"
- <dengkai1@huawei.com>, yinyipeng <yinyipeng1@huawei.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
- <qemu-riscv@nongnu.org>
-Subject: RE: [PATCH V3 1/6] target/riscv: Merge m/vsstatus and m/vsstatush
- into one uint64_t unit
-Thread-Topic: [PATCH V3 1/6] target/riscv: Merge m/vsstatus and m/vsstatush
- into one uint64_t unit
-Thread-Index: AQHWqRys4dCH1TwnVkqlZ+p9iNToy6mk7YzQ
-Date: Fri, 23 Oct 2020 09:41:08 +0000
-Message-ID: <6b5533929fa74311b3e5264b126a1d18@huawei.com>
-References: <20201023091225.224-1-jiangyifei@huawei.com>
- <20201023091225.224-2-jiangyifei@huawei.com>
-In-Reply-To: <20201023091225.224-2-jiangyifei@huawei.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.174.186.209]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ (Exim 4.90_1)
+ (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
+ id 1kVz88-0002pW-33; Fri, 23 Oct 2020 11:37:28 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1603467443; x=1635003443;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=+kH0HRDVSR6+Oeh5CZ+4ncx3E9IpH2mTPisXyYIn8rA=;
+ b=dQDTbPOJpz7awwhFk6N9hKekTmOcG/HJIoM5/AR9g4RAbfx1yY05VNTP
+ M2vzMo9K7pA6PBwy+Q2+5jNLTB5lxXxfPlhIw1PO+ErGxFLufNFbs64ne
+ vdQFtqc0aupuzMK8tRnNQFz+a86sUwKZWmECcxP2qOI4272YIPfQPIYj6
+ r8XZP2nUrEod/IbN9/0KPhn1GO2pBrV+vYjWITzdMFFFtR8fD74efxL2I
+ 0AKC4fm6tzn/KAU/S8vIiUSAsYzB2qK70oFJIPidhcAIg6F1PzU2dLyxp
+ ZU7vHtu0DL+gl+aQujhdCHhA45PUTSWjrcXgq54vv3wBOT7+bG80o79+N A==;
+IronPort-SDR: UNLYX+M3OWNpxvLOlrAf2hY/UA/9+aW/tcuKs3Kf3JaJx/ggRHa4ukskEfi4I90UGRRj+Vsu8u
+ Y9zXvGsBLLIEHUMjsppkBoQqpGd7hK0KFSlmPYRXWW1Q5UWyPnXdKV6Z1lG5EMDiPYn0XTShBj
+ Dv4WWfZbZOtytyChqvYpv0J23l25z4cJJxBXcHgiM1GtTNFS5TIbtHtuAN9jM4n5Ji6uqc6jxW
+ gc5IvOXd3oLWo2Dh5x4ie32ehu+iz8hz5jsPU93WuDwd1qnZmLuAMDkS7Fyk1ANHCvReSzffS4
+ +jc=
+X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="260636257"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:37:19 +0800
+IronPort-SDR: fpkBGz/Qi7tu3UGtxG1ZpIpcCeQ1nzA4sJDhgvrdoq/GmC/nubpn81n73meMCS068UdEgN7c+H
+ F5Mi32tR199nkEA4KPa50F0I/audKMgHGm36wO/HPizec3JFkB641Xy5FUmoA05eHczy7uUa/H
+ STt1NAM7E2ERQjt/ydosLej08vPzIjd1YPMzjcDFbDMm42dSR32781gzcKUza3fAvkN7jc8Oyg
+ /rEvmlTa4rWq0dF0UI91HLiGS0K3isRAboS0ErpETz8FsySLLpq5vVbiLt+vDWvjmeV7O77rCN
+ dmc6bSQ4uxcKNXJaFUcT8jHF
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 23 Oct 2020 08:23:42 -0700
+IronPort-SDR: CTzIUKX5P/dQ2il1GVAxigr2o2aiqXEc/GGubgLci8OKpnRduyMmfFxxRGLayRCuqeB07OUarQ
+ JSn4PqL0D/cAqCFaLFtjnnkaFkEDe2r4wCmM/lmRZIHKZ9gR+ezzitPPgR1aM/EvvuZOzYbvaS
+ DN8Tl4HdeiaPJ3MbLLpVCHD0JVl6YVB5DP9lMRrNqc9W/BJAg0ovyUSjC/IMrj6H0Fc2XtPYHj
+ wHq9ldhG0aYTj1m/kj5HSisqDCbJbT0LjjQF5UQi7gCgx+3jVPE9ljbg7DsrOwh2ARJzfh4JPK
+ fms=
+WDCIronportException: Internal
+Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.60.46])
+ by uls-op-cesaip02.wdc.com with ESMTP; 23 Oct 2020 08:37:20 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com, richard.henderson@linaro.org
+Subject: [PATCH v1 0/5]  Fix the Hypervisor access functions
+Date: Fri, 23 Oct 2020 08:25:59 -0700
+Message-Id: <cover.1603466725.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.187;
- envelope-from=jiangyifei@huawei.com; helo=huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 05:41:09
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -41
-X-Spam_score: -4.2
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=68.232.141.245;
+ envelope-from=prvs=558518344=alistair.francis@wdc.com;
+ helo=esa1.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 11:37:20
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
 X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -73,61 +84,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2020 09:41:22 -0000
+X-List-Received-Date: Fri, 23 Oct 2020 15:37:30 -0000
 
+Richard pointed out that the Hypervisor access functions don't work
+correctly, see:
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg751540.html.
+This seris fixes them up by adding a new MMU index for the virtualised
+state.
 
-> -----Original Message-----
-> From: Jiangyifei
-> Sent: Friday, October 23, 2020 5:12 PM
-> To: qemu-devel@nongnu.org; qemu-riscv@nongnu.org
-> Cc: palmer@dabbelt.com; Alistair.Francis@wdc.com;
-> sagark@eecs.berkeley.edu; kbastian@mail.uni-paderborn.de;
-> richard.henderson@linaro.org; Zhangxiaofeng (F)
-> <victor.zhangxiaofeng@huawei.com>; Wubin (H) <wu.wubin@huawei.com>;
-> Zhanghailiang <zhang.zhanghailiang@huawei.com>; dengkai (A)
-> <dengkai1@huawei.com>; yinyipeng <yinyipeng1@huawei.com>; Jiangyifei
-> <jiangyifei@huawei.com>
-> Subject: [PATCH V3 1/6] target/riscv: Merge m/vsstatus and m/vsstatush in=
-to
-> one uint64_t unit
->=20
-> mstatus/mstatush and vsstatus/vsstatush are two halved for RISCV32.
-> This patch expands mstatus and vsstatus to uint64_t instead of target_ulo=
-ng
-> so that it can be saved as one unit and reduce some ifdefs in the code.
->=20
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-> Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
-> ---
-......
->  static int write_mstatush(CPURISCVState *env, int csrno, target_ulong va=
-l)
-> {
-> -    if ((val ^ env->mstatush) & (MSTATUS_MPV)) {
-> +    uint64_t valh =3D (uint64_t)val << 32;
-> +    uint64_t mask =3D MSTATUS_MPV | MSTATUS_GVA;
-> +
-> +    if ((valh ^ env->mstatus) & (MSTATUS_MPV)) {
->          tlb_flush(env_cpu(env));
->      }
->=20
-> -    val &=3D MSTATUS_MPV | MSTATUS_GVA;
-> -
-> -    env->mstatush =3D val;
-> +    env->mstatus =3D (env->mstatus & ~mask) | (valh & mask);
->=20
->      return 0;
->  }
+Alistair Francis (5):
+  target/riscv: Add a virtualised MMU Mode
+  target/riscv: Set the virtualised MMU mode when doing hyp accesses
+  target/riscv: Remove the HS_TWO_STAGE flag
+  target/riscv: Remove the hyp load and store functions
+  target/riscv: Split the Hypervisor execute load helpers
 
-Hi Alistair,
+ target/riscv/cpu-param.h                |   2 +-
+ target/riscv/cpu.h                      |   7 +-
+ target/riscv/cpu_bits.h                 |   1 -
+ target/riscv/helper.h                   |   6 +-
+ target/riscv/cpu_helper.c               |  67 ++++++-------
+ target/riscv/op_helper.c                |  90 ++---------------
+ target/riscv/insn_trans/trans_rvh.c.inc | 127 +++++++-----------------
+ 7 files changed, 82 insertions(+), 218 deletions(-)
 
-It's a little different here.
-
-Previously, except for MPV and GVA, other bits were cleared.
-Now, except for MPV and GVA, other bits are reserved.
-Refer to write_mstatus () and specification, I think it's better now.
-How does it sound?
-
-Yifei
+-- 
+2.28.0
 
 
