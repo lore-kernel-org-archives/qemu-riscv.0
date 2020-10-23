@@ -1,71 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVzFM-0002DF-I9
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:44:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37038)
+	id 1kVzFN-0002Gm-Qy
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:44:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37076)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVzFG-00024v-9a; Fri, 23 Oct 2020 11:44:47 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:43662)
+ id 1kVzFL-0002AO-EM; Fri, 23 Oct 2020 11:44:51 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:3951)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVzFE-0003gp-DR; Fri, 23 Oct 2020 11:44:46 -0400
+ id 1kVzFJ-0003h7-IN; Fri, 23 Oct 2020 11:44:51 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1603467884; x=1635003884;
+ t=1603467889; x=1635003889;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=mO2KDDBwgipSRnDouZyuQauB4BvzjCpnifeQek8HSUw=;
- b=gwB+N8uOGX8LXNCTaKG+DhY3y70QQdlfOZY8RBdUMUeDp86dcw6YI9y9
- ZJQ4bTzP0YR08MJl0v5PkVmgMjS0XXu85IdOpjqUDYJXNRezVabCGf43p
- vDqZY4P69+BlpFO4+/JEpqDtxrL3Pk/1emWS6QrtTbbz2sh7H/1CCTS5C
- zpfllFM/HMlJqE/49izyA5s9nVBl34ITdpDGlY+0LmU4+L2PHnnVD9Vre
- c/3+WB4rHIUV+PfLA/Uh1Yj5fCNLgtwx1EFYGw+erEtKRwdcKecUP/IKJ
- C4AFALR+pKwbBNxhfZydu9npW5f/GxQzoaRkXuSbviv4KtHdkmu0WZy7h A==;
-IronPort-SDR: XmUK2ZMPxSlvQtw/O/cCpLZ5qTLVkJ54xDLdoUdg+dnIJ0JGtPG9oeuqV3OWqwdXd7LeGpSL0q
- ND7gTm3s/3f3vWa3wbTeQBS/D8gEZxUD7BlmKfj1nmbHusntpXu5OLT7/2deRPCylefI0BFzar
- I61xyEv92NBntWg9ehleDi19pQQxkZY8a+pmCeOxp3Hd0o6lO2iPI8d/vfd21mbgfQTCKvRLdG
- cAr40i3FWJjjrb9QaCijbI7GxVB9x5Y+rX7aNfqoDHpg1P2qN8v84TJO0YTqjqwPRQHy6kWPYI
- MtE=
-X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="150812572"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ bh=/smQkHEQ02cPvnJeFsp8cH82tHAXNAZPq9pGxFHQWBk=;
+ b=jquRFi6ozdt80PaS5cMCDzUT9JXGfTdofDWWR1wOnEmdeUCEys++vwVd
+ JnYLs/MdxHBdOzQRdXyon8ZZu0AT3D1+Uwlf03+Do/Ec6OeogIXqGJp6r
+ d9SFn1NdUUyLcwvgKzjqpdpPZkYA5iLH/ML1IBFIHQo+qdP3u9OA5hGix
+ CJq7V33uMUrG5spl+/lqPw4A2+LWKJ0YFp9hCtJJd88pSTp2SL8x39lKx
+ tUU0HmUk3LnPraiFPaEYU3h/qbtn1oaw09rN0z6b29ipG0zSe6DDSidBG
+ robLk1GTWR0NaRvZobQeJCCBgbl3Wbm2hiRufqiD6yaADbWg/Pw7tlY5u g==;
+IronPort-SDR: 2rZY9ppoVtyWgt8n5CFvHz0yDTvyliiNPjPmbks3/kigAt9ZelL3Fw16aYXGVqYEeJFAsH7SS3
+ MMoMl3zvuusjE22OGX92tae8w/gD2IfNp02BPhV9FZm8azwAg4u9Tez1LE68H4YwXiXmrrg/1G
+ plz+gbZVb+CyQUQJRItVBi2fK/Gbtb9HqSYbiDJC4du+OcYZupQknbhBSFbU92lui0UebRjGKw
+ 0qHDOep+4ybTpeO1F65qq6nv7seoWJhknqXz0/xBdJRSUub6oJQ1wbe6ScTFvpf6txwSBUUtbx
+ +VA=
+X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="155168720"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:44:42 +0800
-IronPort-SDR: XyNvr5gYUPKDB2zY+GKE9voYnvcHG59slZkwkqMble4rx3JdvQhyVVVFKO7IW24KCs5tYHMC3p
- QS03QoqF6rl5h3xJY4JiS0WAd8DYMksbGuzYmUGiDhkMhMhYOn6LWqdu9TqNSIaIHQOUH4Fd1D
- B0K9nx+uTDfkZ53ofb92XcyCKfflnTwQA++UPE1vvT8iFM4AcPkEVHYpiuMkO3ffA9RGceg9m0
- /52fLVFtyG4zy3F4k5A9PA9ggE1JXZ7QfP69cx3NoZXErcEN3LS2yNtpNjUdvGBGiwEOblbpT2
- 66+b9QbiT0JVnOd3QXBtbVCF
+ by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:44:47 +0800
+IronPort-SDR: 7IiLzuDZS1EspGlxGLMBV/OewB46cjh0MhUsaDxhpxgAHPJXhKQm8Uv5IN75fuGmPpM7b1uUZa
+ /OEYuBbxTtLszqYkuyK4p+oKGl/G1IUWMeR6Jacrot0+WROmWB3Szzie057HoUb+JikOKAaij6
+ ISZz6RbYbRYHkktcFB3H7g8rtU7bRGuFmmKx/3wzRO7UHqRry5t2JZ94cJbxsfSkp2XgA3ivw6
+ G+vekff/z5aw+OwdeGUw85CfyxXYVI6b0UfxXP5CIlfOZ8PH8/rKyuhHDTNY4OrpDGdHdDSknS
+ F91Gxog5jhvGB7AdPSXY3u6n
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Oct 2020 08:29:57 -0700
-IronPort-SDR: UZkSApcc2+K/I5TtgOdQXy8kX025DKJPNpVAB9NfwyGdHepyLZYfLxvpxWgrmSUYcHy4NRJjxa
- 8B2lyXL/RYROEkM6bs2dy9/6MjmjI2B/zrGi+CntNIKNSGlgz61faxxegDdCOTHZU8YZ74rAjL
- DwQJdxiQmGCnxXaRgId50Jy7aSFJz0U5PR3FqTWYwL6Zij/rLu0nCBNDMgOATEOxcRRtG7SQzR
- 4NxSdrJu3ukKjxDKyl+VS0zFK3fpsJMoXzfdv3toKvmx1eb/g2Yk2ZnGpJMCGTNfeMc4geriiR
- HqQ=
+ 23 Oct 2020 08:30:02 -0700
+IronPort-SDR: S4Mr4Mozst6bZSAPIbd5qOe+y+3vliysa/gtUBoMO29uwsyGVg425uZ0GvL0TjTqUCv8E4aGOw
+ n/qFkVrDcyEflzMEFYwausZYBiB3OGP5IPBm4MWqtqr50zXlCpfz1cbLh5bRp7vkk4TWMF3Alw
+ D5ZBg0Vv7UoYmdEdNA8JF0nmGTKGAYsZj5KzGZxF+xzm6uX1zvPpcOWllM1L+th0441EKlf6cT
+ RDsUJdiYs7xO27JyvdQPN7lqhYh5rlLyuYyFCYu5TPzJC38rMN0xcDfDdEhS6wvKVBloVXUrKe
+ GXU=
 WDCIronportException: Internal
 Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.60.46])
- by uls-op-cesaip01.wdc.com with ESMTP; 23 Oct 2020 08:44:42 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 23 Oct 2020 08:44:47 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v1 03/16] riscv: virt: Remove target macro conditionals
-Date: Fri, 23 Oct 2020 08:33:21 -0700
-Message-Id: <9710f7917b7a1fcffce2d926005efc3bb84c0152.1603467169.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 05/16] hw/riscv: virt: Remove compile time XLEN checks
+Date: Fri, 23 Oct 2020 08:33:26 -0700
+Message-Id: <c1ea88d79c585a0c1af70acd16ce859d6d9154ba.1603467169.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <cover.1603467169.git.alistair.francis@wdc.com>
 References: <cover.1603467169.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.144;
+Received-SPF: pass client-ip=216.71.153.141;
  envelope-from=prvs=558518344=alistair.francis@wdc.com;
- helo=esa5.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 11:44:42
+ helo=esa3.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 11:44:48
 X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
 X-Spam_score_int: -43
 X-Spam_score: -4.4
@@ -86,42 +86,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2020 15:44:50 -0000
+X-List-Received-Date: Fri, 23 Oct 2020 15:44:51 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- include/hw/riscv/virt.h | 6 ------
- hw/riscv/virt.c         | 2 +-
- 2 files changed, 1 insertion(+), 7 deletions(-)
+ hw/riscv/virt.c | 32 +++++++++++++++++---------------
+ 1 file changed, 17 insertions(+), 15 deletions(-)
 
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index b4ed9a32eb..84b7a3848f 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -89,10 +89,4 @@ enum {
- #define FDT_INT_MAP_WIDTH     (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + 1 + \
-                                FDT_PLIC_ADDR_CELLS + FDT_PLIC_INT_CELLS)
- 
--#if defined(TARGET_RISCV32)
--#define VIRT_CPU TYPE_RISCV_CPU_BASE32
--#elif defined(TARGET_RISCV64)
--#define VIRT_CPU TYPE_RISCV_CPU_BASE64
--#endif
--
- #endif
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 6bfd10dfc7..5f1fcebdc6 100644
+index 192138cc76..e76c0a32b9 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -693,7 +693,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     mc->desc = "RISC-V VirtIO board";
-     mc->init = virt_machine_init;
-     mc->max_cpus = VIRT_CPUS_MAX;
--    mc->default_cpu_type = VIRT_CPU;
-+    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
-     mc->pci_allow_0_address = true;
-     mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
-     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
+@@ -43,12 +43,6 @@
+ #include "hw/pci/pci.h"
+ #include "hw/pci-host/gpex.h"
+ 
+-#if defined(TARGET_RISCV32)
+-# define BIOS_FILENAME "opensbi-riscv32-generic-fw_dynamic.bin"
+-#else
+-# define BIOS_FILENAME "opensbi-riscv64-generic-fw_dynamic.bin"
+-#endif
+-
+ static const struct MemmapEntry {
+     hwaddr base;
+     hwaddr size;
+@@ -177,7 +171,7 @@ static void create_pcie_irq_map(void *fdt, char *nodename,
+ }
+ 
+ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+-    uint64_t mem_size, const char *cmdline)
++                       uint64_t mem_size, const char *cmdline, bool is_32_bit)
+ {
+     void *fdt;
+     int i, cpu, socket;
+@@ -231,11 +225,11 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+             cpu_name = g_strdup_printf("/cpus/cpu@%d",
+                 s->soc[socket].hartid_base + cpu);
+             qemu_fdt_add_subnode(fdt, cpu_name);
+-#if defined(TARGET_RISCV32)
+-            qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
+-#else
+-            qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv48");
+-#endif
++            if (is_32_bit) {
++                qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
++            } else {
++                qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv48");
++            }
+             name = riscv_isa_string(&s->soc[socket].harts[cpu]);
+             qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa", name);
+             g_free(name);
+@@ -595,7 +589,8 @@ static void virt_machine_init(MachineState *machine)
+         main_mem);
+ 
+     /* create device tree */
+-    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
++    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
++               riscv_is_32_bit(machine));
+ 
+     /* boot rom */
+     memory_region_init_rom(mask_rom, NULL, "riscv_virt_board.mrom",
+@@ -603,8 +598,15 @@ static void virt_machine_init(MachineState *machine)
+     memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
+                                 mask_rom);
+ 
+-    firmware_end_addr = riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+-                                                     start_addr, NULL);
++    if (riscv_is_32_bit(machine)) {
++        firmware_end_addr = riscv_find_and_load_firmware(machine,
++                                    "opensbi-riscv32-generic-fw_dynamic.bin",
++                                    start_addr, NULL);
++    } else {
++        firmware_end_addr = riscv_find_and_load_firmware(machine,
++                                    "opensbi-riscv64-generic-fw_dynamic.bin",
++                                    start_addr, NULL);
++    }
+ 
+     if (machine->kernel_filename) {
+         kernel_start_addr = riscv_calc_kernel_start_addr(machine,
 -- 
 2.28.0
 
