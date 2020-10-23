@@ -1,20 +1,20 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVt8A-0004dP-2S
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 05:13:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54460)
+	id 1kVt8C-0004hq-Iy
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 05:13:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54412)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kVt88-0004a6-4C; Fri, 23 Oct 2020 05:13:00 -0400
-Received: from szxga04-in.huawei.com ([45.249.212.190]:5207 helo=huawei.com)
+ id 1kVt86-0004YF-QA; Fri, 23 Oct 2020 05:12:58 -0400
+Received: from szxga07-in.huawei.com ([45.249.212.35]:46356 helo=huawei.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kVt85-0004kg-LV; Fri, 23 Oct 2020 05:12:59 -0400
-Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 48C1243186EAF3CA9A72;
- Fri, 23 Oct 2020 17:12:51 +0800 (CST)
+ id 1kVt84-0004iS-Gw; Fri, 23 Oct 2020 05:12:58 -0400
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 3A7BEE5D4DABAAD73618;
+ Fri, 23 Oct 2020 17:12:46 +0800 (CST)
 Received: from huawei.com (10.174.186.209) by DGGEMS406-HUB.china.huawei.com
  (10.3.19.206) with Microsoft SMTP Server id 14.3.487.0; Fri, 23 Oct 2020
- 17:12:44 +0800
+ 17:12:37 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
@@ -23,20 +23,18 @@ CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
  <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
  <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
  <jiangyifei@huawei.com>
-Subject: [PATCH V3 4/6] target/riscv: Add H extension state description
-Date: Fri, 23 Oct 2020 17:12:23 +0800
-Message-ID: <20201023091225.224-5-jiangyifei@huawei.com>
+Subject: [PATCH V3 0/6] Support RISC-V migration
+Date: Fri, 23 Oct 2020 17:12:19 +0800
+Message-ID: <20201023091225.224-1-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
-In-Reply-To: <20201023091225.224-1-jiangyifei@huawei.com>
-References: <20201023091225.224-1-jiangyifei@huawei.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain
 X-Originating-IP: [10.174.186.209]
 X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.190;
- envelope-from=jiangyifei@huawei.com; helo=huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 05:12:52
+Received-SPF: pass client-ip=45.249.212.35; envelope-from=jiangyifei@huawei.com;
+ helo=huawei.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 05:12:47
 X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
 X-Spam_score_int: -41
 X-Spam_score: -4.2
@@ -56,82 +54,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2020 09:13:00 -0000
+X-List-Received-Date: Fri, 23 Oct 2020 09:12:59 -0000
 
-In the case of supporting H extension, add H extension description
-to vmstate_riscv_cpu.
+This patches supported RISC-V migration based on tcg accel. And we have
+verified related migration features such as snapshot and live migration.
 
-Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
----
- target/riscv/machine.c | 47 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 47 insertions(+)
+A few weeks ago, we submitted RFC patches about supporting RISC-V migration
+based on kvm accel: https://www.spinics.net/lists/kvm/msg223605.html.
+And we found that tcg accelerated migration can be supported with a few
+changes. Most of the devices have already implemented the migration
+interface, so, to achieve the tcg accelerated migration, we just need to
+add vmstate of both cpu and sifive_plic.
 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index fc1461d88e..ae60050898 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -68,6 +68,52 @@ static const VMStateDescription vmstate_pmp = {
-     }
- };
- 
-+static bool hyper_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+    CPURISCVState *env = &cpu->env;
-+
-+    return riscv_has_ext(env, RVH);
-+}
-+
-+static const VMStateDescription vmstate_hyper = {
-+    .name = "cpu/hyper",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = hyper_needed,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINTTL(env.hstatus, RISCVCPU),
-+        VMSTATE_UINTTL(env.hedeleg, RISCVCPU),
-+        VMSTATE_UINTTL(env.hideleg, RISCVCPU),
-+        VMSTATE_UINTTL(env.hcounteren, RISCVCPU),
-+        VMSTATE_UINTTL(env.htval, RISCVCPU),
-+        VMSTATE_UINTTL(env.htinst, RISCVCPU),
-+        VMSTATE_UINTTL(env.hgatp, RISCVCPU),
-+        VMSTATE_UINT64(env.htimedelta, RISCVCPU),
-+
-+        VMSTATE_UINT64(env.vsstatus, RISCVCPU),
-+        VMSTATE_UINTTL(env.vstvec, RISCVCPU),
-+        VMSTATE_UINTTL(env.vsscratch, RISCVCPU),
-+        VMSTATE_UINTTL(env.vsepc, RISCVCPU),
-+        VMSTATE_UINTTL(env.vscause, RISCVCPU),
-+        VMSTATE_UINTTL(env.vstval, RISCVCPU),
-+        VMSTATE_UINTTL(env.vsatp, RISCVCPU),
-+
-+        VMSTATE_UINTTL(env.mtval2, RISCVCPU),
-+        VMSTATE_UINTTL(env.mtinst, RISCVCPU),
-+
-+        VMSTATE_UINTTL(env.stvec_hs, RISCVCPU),
-+        VMSTATE_UINTTL(env.sscratch_hs, RISCVCPU),
-+        VMSTATE_UINTTL(env.sepc_hs, RISCVCPU),
-+        VMSTATE_UINTTL(env.scause_hs, RISCVCPU),
-+        VMSTATE_UINTTL(env.stval_hs, RISCVCPU),
-+        VMSTATE_UINTTL(env.satp_hs, RISCVCPU),
-+        VMSTATE_UINT64(env.mstatus_hs, RISCVCPU),
-+
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 1,
-@@ -119,6 +165,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-     },
-     .subsections = (const VMStateDescription * []) {
-         &vmstate_pmp,
-+        &vmstate_hyper,
-         NULL
-     }
- };
+Changes since v2:
+1. Move vmstate_riscv_cpu declaration to internals.h.
+2. Merge m/vsstatus and m/vsstatush into one uint64_t unit.
+
+Changes since v1:
+1. Add license head to target/riscv/machine.c.
+2. Regenerate some state of PMP at post_load hook.
+
+Yifei Jiang (6):
+  target/riscv: Merge m/vsstatus and m/vsstatush into one uint64_t unit
+  target/riscv: Add basic vmstate description of CPU
+  target/riscv: Add PMP state description
+  target/riscv: Add H extension state description
+  target/riscv: Add V extension state description
+  target/riscv: Add sifive_plic vmstate
+
+ hw/intc/sifive_plic.c     |  26 ++++-
+ hw/intc/sifive_plic.h     |   1 +
+ target/riscv/cpu.c        |  16 ++--
+ target/riscv/cpu.h        |  16 +---
+ target/riscv/cpu_bits.h   |  16 ++--
+ target/riscv/cpu_helper.c |  72 ++++++--------
+ target/riscv/csr.c        |  28 +++---
+ target/riscv/internals.h  |   4 +
+ target/riscv/machine.c    | 196 ++++++++++++++++++++++++++++++++++++++
+ target/riscv/meson.build  |   3 +-
+ target/riscv/op_helper.c  |  49 +++++-----
+ target/riscv/pmp.c        |  29 +++---
+ target/riscv/pmp.h        |   2 +
+ 13 files changed, 331 insertions(+), 127 deletions(-)
+ create mode 100644 target/riscv/machine.c
+
 -- 
 2.19.1
 
