@@ -1,71 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVz8P-0000P3-UJ
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:37:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35240)
+	id 1kVzFC-00023Q-TD
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:44:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36994)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVz8N-0000MG-Lu; Fri, 23 Oct 2020 11:37:40 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:38922)
+ id 1kVzF8-0001zk-Rn; Fri, 23 Oct 2020 11:44:38 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:6144)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVz8K-0002ph-6k; Fri, 23 Oct 2020 11:37:39 -0400
+ id 1kVzF5-0003gF-Uy; Fri, 23 Oct 2020 11:44:38 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1603467455; x=1635003455;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=JsNotCWqPXtMQJDMNM26RihKvw3OoLKQuyN0cv5sLG8=;
- b=aI/4embrgNRVvBa4ojH4isHunvqNNnj4EAviP14iVpARWIQy2276nHQ/
- IO/a03BaZl4DYlZxfsUuOBionRqHe0L9NKfymEoL4sSCnqFGu4Xyzxrfw
- J8BagRQNU9kMvnb66juvqSsax8By01gBJ0bsi/YUYLNae9OBR/z/oQ66U
- qbBDrDAgjYg4th3VgHZZ2xsDGl5BeJiHTgilDLhRZFa42sjcXaR1RsgXU
- F+LIadBB6z+T2jVypyQoSzMVI35c3aYgUrxwsOylSk5ivOz6hn7z/SfEl
- rKRL32zlbjROeHADnepk+XO+ttGebePQOKUdz2jBH1MDaXEUi+1441o2+ w==;
-IronPort-SDR: F9cW3A5GhgHSPSnTE9SXiCai4jSzH0A8MXaZQvekV8T/XQzBFMY+BlYiWo0TH01+p5UVPaLSS6
- E8Q4zw6OF3XvOWq9L34csxBpdRqlwZsKIo2XMsmr2WLOoX93qoCVeD0hhZVPi3l3kEGOZLJSyq
- BvacW8H0w00tzfRchpgUFgnwUb5wycKIF75mq7UNuVYXaysfqM54qI2ILWU9OH6Fy+vZzaGNd2
- PMGLFbUqQ7dHuKLjTWjboZdCs5bhUuSkpnDB4c8PH5lgxayjuWkthEWv4El+ctY8B4QrtjFE8i
- 9+w=
-X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="260636284"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ t=1603467876; x=1635003876;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=u23rg6vBDGmDEewsmSCU+NOvC8v3UBs+iesU7HWgke0=;
+ b=CoFzHsldvQ/FTUJkQ37RruFq1e7ZhrSXi8TfdDuKkf5lbzrGVmPa6+X7
+ pYyI+5msqP7LXKqtenqKizeUR8+eIPR+yYiBFoo9FdmusG/C1d6qxzziy
+ 077wada/3uZqwCmMCQrI1uRUX0AVTtvhZIOFGIQmePEsRTgOsaewM6Zv/
+ CoQO4BLkyAzixtaax5LeIq6FqCcRZEDipg4r+gJPg3Wsn/xm69qTAoywp
+ V+yw8gPSXkqT2S1vmVKs7MGQIXmsstU2YkiaV9pYIpFWJ97WvOXUuDWjN
+ ScIX4Ly/tcfGyR8Cqra8t6X8hFGriylzur7ykstYRg98Pb2OZijRBiW5v Q==;
+IronPort-SDR: rwXXBF3ruf3KyE0T+PFqKF1WimZy49vyTrQQP2ctC99G1JjQLx7luCDvA1DVHuqfLqpd48TQDN
+ qMzlYTW3aikmfBWnnJCi15nofxBkCrR1ql5Yw+P1HPkVB8XTwOspB1mY/ZfD1RBnuXJsbmOFU2
+ blGzOa0yJRx7gOtLJTg7qbo+kIsLYiNy2z37imEolqX+0iO/nDjU2d/pemL515rCoU/3tLqvTW
+ xvYDBtuVaJGf+dhVo0nEp8RbqmFSyAlYWGopQC2Rosa9SpJZjOAi45p4TAQw4sxtZjKHja9xNx
+ xB4=
+X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="151960140"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:37:33 +0800
-IronPort-SDR: 57ls42kE9sR7HTXaKorJXBclfpOz2fCLH0sDMSwXva5eMzK9HqeEID8VUgCmpePthKtYdBA1Nr
- 0iTmy7Eolm5ZfKaVjRs4wZVLv1c/vxYyDG/QS14/IzaNYOiQ3EyiFF3O5bi/ptdU2Lk8dlEa/v
- 2ojF5xbAxOGRY4gtXyAdE+bWL5/O9qCshxMmLQmJZ2Ef1qN1ra84T6bxdZUOd3fQT2SCvWciji
- i8J1vSAf15NHvDIRwbjLO7IRwEXUeRpBzaLqOfDLfzDMC90E/3jHz9CFS4bC4+x21wRfsa7z45
- T+lkquuGp0yBcRyli6FzRv59
+ by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:44:34 +0800
+IronPort-SDR: ixlmnr7PScScj/u/Fm6iWHgwTPDSg50zk6V4W8Myguf7CgqndkUgNfApTKkI388Ochxdii71SI
+ h+NObqC1dGqsBGaP3bpHffsxfnPcHHiaUOp2ojgdaggFHGM2gBJu2QhA7h/xyzQSIKux1PPqzy
+ mwAFr33L7AD3Hfo1aRdKE20XxX9qvsygCT2lQNyaK9uT+Kk0bNrpYBjKCtoje5WhxQXTsGxBoT
+ kK0WKbbQz9G9PN6WLbdrxnL9YAy1RGFVCTdqjETday3dV5y48PAxI6ibhnmAtpS8P+V+t/WVKq
+ dbGq8wHMaGhOXRhlNFhZNwWd
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Oct 2020 08:23:56 -0700
-IronPort-SDR: oU2wtARq1RddWBFXtDA2OPRyAOXHq2ihqRC4UgEhQROnXM2boXaZeS18aRXfb6UhEe3LnZ7HQC
- WwIvy2BmaAQEoRXd5PctQ1GqWfX55uGO4BYE7OAOV9jcH0m1ub1TUeEq5e04n6JTRH7GgQ4/hD
- ZEhX0mDTaTRrt9gyzYdqdvmG3UBW8s716x0gTSXnzbLuSZFW6LCnP/y7bBxAmUdein85k7Mkte
- 1cQy76l8HBko15JS2WeVxle2mspk0KGkxRJVHukkIvhSIZtiXN5Co8rJMPOMfEi+noXdWKI5Bg
- Xk8=
+ 23 Oct 2020 08:30:56 -0700
+IronPort-SDR: LTJCRavRIiELbkhAUHysGlgtljIbz+0KZC8Q8TxKQRJk6PLvGdeaeYyt1IqJBl3IaWYSJxCNWQ
+ 4qlqDtIe5+rr6nH90LFa2W4LbCO5NFyyzP57b9wWi1VAdIXEjRJgIrJTh2wrw2FFTVOz6u9QUo
+ t/6/weKnbtEqRPtdeZqILFw0T2pK+3o1zHvC8ayiY10RoBtuiZGQdCUB1YPeVJGLyjaUwjEnkG
+ x4e1hI5+KN+tdi+25hl67AyoKh1EW2PGiMbopw6wJff5InvZqIVykT2W3i62974JD2JXrDwnQT
+ dj4=
 WDCIronportException: Internal
 Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.60.46])
- by uls-op-cesaip02.wdc.com with ESMTP; 23 Oct 2020 08:37:34 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 23 Oct 2020 08:44:34 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com, richard.henderson@linaro.org
-Subject: [PATCH v1 5/5] target/riscv: Split the Hypervisor execute load helpers
-Date: Fri, 23 Oct 2020 08:26:13 -0700
-Message-Id: <0baa57b4d690d5022bbfe488b93d1a7e552ae7a1.1603466725.git.alistair.francis@wdc.com>
+ alistair23@gmail.com
+Subject: [PATCH v1 00/16]  RISC-V: Start to remove xlen preprocess
+Date: Fri, 23 Oct 2020 08:33:13 -0700
+Message-Id: <cover.1603467169.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.28.0
-In-Reply-To: <cover.1603466725.git.alistair.francis@wdc.com>
-References: <cover.1603466725.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.141.245;
+Received-SPF: pass client-ip=216.71.154.45;
  envelope-from=prvs=558518344=alistair.francis@wdc.com;
- helo=esa1.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 11:37:20
+ helo=esa6.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 11:44:34
 X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
 X-Spam_score_int: -43
 X-Spam_score: -4.4
@@ -86,135 +84,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2020 15:37:41 -0000
+X-List-Received-Date: Fri, 23 Oct 2020 15:44:40 -0000
 
-Split the hypervisor execute load functions into two seperate functions.
-This avoids us having to pass the memop to the C helper functions.
+The RISC-V QEMU port currently has lot of preprocessor directives that
+check if we are targetting a 32-bit or 64-bit CPU. This means that the
+64-bit RISC-V target can not run 32-bit CPUs. This is different to most
+other QEMU architectures and doesn't allow us to mix xlens (such as when
+running Hypervisors with different xlen guests).
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/helper.h                   |  3 +-
- target/riscv/op_helper.c                | 38 ++++++++++++++-----------
- target/riscv/insn_trans/trans_rvh.c.inc | 16 ++---------
- 3 files changed, 26 insertions(+), 31 deletions(-)
+This series is a step toward removing some of those to allow us to use
+32-bit CPUs on 64-bit RISC-V targets.
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 7dbdd117d2..ae50730273 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -82,7 +82,8 @@ DEF_HELPER_1(tlb_flush, void, env)
- DEF_HELPER_1(hyp_tlb_flush, void, env)
- DEF_HELPER_1(hyp_gvma_tlb_flush, void, env)
- DEF_HELPER_1(hyp_access_check, void, env)
--DEF_HELPER_4(hyp_x_load, tl, env, tl, tl, tl)
-+DEF_HELPER_2(hyp_hlvx_hu, tl, env, tl)
-+DEF_HELPER_2(hyp_hlvx_wu, tl, env, tl)
- #endif
- 
- /* Vector functions */
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 95281db3ec..065aa57d97 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -246,28 +246,34 @@ void helper_hyp_access_check(CPURISCVState *env)
-     }
- }
- 
--target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
--                               target_ulong attrs, target_ulong memop)
-+target_ulong helper_hyp_hlvx_hu(CPURISCVState *env, target_ulong address)
- {
-     if (env->priv == PRV_M ||
-         (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
-         (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
-             get_field(env->hstatus, HSTATUS_HU))) {
--        target_ulong pte;
--        int mmu_idx = cpu_mmu_index(env, false) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
--
--        switch (memop) {
--        case MO_TEUW:
--            pte = cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
--            break;
--        case MO_TEUL:
--            pte = cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
--            break;
--        default:
--            g_assert_not_reached();
--        }
-+        int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-+
-+        return cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
-+    }
-+
-+    if (riscv_cpu_virt_enabled(env)) {
-+        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
-+    } else {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+    }
-+    return 0;
-+}
-+
-+target_ulong helper_hyp_hlvx_wu(CPURISCVState *env, target_ulong address)
-+{
-+    if (env->priv == PRV_M ||
-+        (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
-+        (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
-+            get_field(env->hstatus, HSTATUS_HU))) {
-+        int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
- 
--        return pte;
-+        return cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
-     }
- 
-     if (riscv_cpu_virt_enabled(env)) {
-diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
-index 79968701e9..f3ffd742d3 100644
---- a/target/riscv/insn_trans/trans_rvh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvh.c.inc
-@@ -265,20 +265,14 @@ static bool trans_hlvx_hu(DisasContext *ctx, arg_hlvx_hu *a)
- #ifndef CONFIG_USER_ONLY
-     TCGv t0 = tcg_temp_new();
-     TCGv t1 = tcg_temp_new();
--    TCGv mem_idx = tcg_temp_new();
--    TCGv memop = tcg_temp_new();
- 
-     gen_get_gpr(t0, a->rs1);
--    tcg_gen_movi_tl(mem_idx, ctx->mem_idx);
--    tcg_gen_movi_tl(memop, MO_TEUW);
- 
--    gen_helper_hyp_x_load(t1, cpu_env, t0, mem_idx, memop);
-+    gen_helper_hyp_hlvx_hu(t1, cpu_env, t0);
-     gen_set_gpr(a->rd, t1);
- 
-     tcg_temp_free(t0);
-     tcg_temp_free(t1);
--    tcg_temp_free(mem_idx);
--    tcg_temp_free(memop);
-     return true;
- #else
-     return false;
-@@ -291,20 +285,14 @@ static bool trans_hlvx_wu(DisasContext *ctx, arg_hlvx_wu *a)
- #ifndef CONFIG_USER_ONLY
-     TCGv t0 = tcg_temp_new();
-     TCGv t1 = tcg_temp_new();
--    TCGv mem_idx = tcg_temp_new();
--    TCGv memop = tcg_temp_new();
- 
-     gen_get_gpr(t0, a->rs1);
--    tcg_gen_movi_tl(mem_idx, ctx->mem_idx);
--    tcg_gen_movi_tl(memop, MO_TEUL);
- 
--    gen_helper_hyp_x_load(t1, cpu_env, t0, mem_idx, memop);
-+    gen_helper_hyp_hlvx_wu(t1, cpu_env, t0);
-     gen_set_gpr(a->rd, t1);
- 
-     tcg_temp_free(t0);
-     tcg_temp_free(t1);
--    tcg_temp_free(mem_idx);
--    tcg_temp_free(memop);
-     return true;
- #else
-     return false;
+Alistair Francis (16):
+  target/riscv: Add a TYPE_RISCV_CPU_BASE CPU
+  riscv: spike: Remove target macro conditionals
+  riscv: virt: Remove target macro conditionals
+  hw/riscv: boot: Remove compile time XLEN checks
+  hw/riscv: virt: Remove compile time XLEN checks
+  hw/riscv: spike: Remove compile time XLEN checks
+  hw/riscv: sifive_u: Remove compile time XLEN checks
+  target/riscv: fpu_helper: Match function defs in HELPER macros
+  target/riscv: Add a riscv_cpu_is_32bit() helper function
+  target/riscv: Specify the XLEN for CPUs
+  target/riscv: cpu: Remove compile time XLEN checks
+  target/riscv: cpu_helper: Remove compile time XLEN checks
+  target/riscv: csr: Remove compile time XLEN checks
+  target/riscv: cpu: Set XLEN independently from target
+  target/riscv: Convert the get/set_field() to support 64-bit values
+  target/riscv: Consolidate *statush registers
+
+ include/hw/riscv/boot.h   |   8 +-
+ include/hw/riscv/spike.h  |   6 --
+ include/hw/riscv/virt.h   |   6 --
+ target/riscv/cpu.h        |  36 ++++---
+ target/riscv/cpu_bits.h   |  24 ++---
+ hw/riscv/boot.c           |  55 ++++++-----
+ hw/riscv/sifive_u.c       |  59 ++++++------
+ hw/riscv/spike.c          |  50 +++++-----
+ hw/riscv/virt.c           |  36 +++----
+ target/riscv/cpu.c        |  83 ++++++++++------
+ target/riscv/cpu_helper.c |  47 +++------
+ target/riscv/csr.c        | 197 ++++++++++++++++++++------------------
+ target/riscv/fpu_helper.c |  16 ++--
+ target/riscv/op_helper.c  |  11 +--
+ 14 files changed, 328 insertions(+), 306 deletions(-)
+
 -- 
 2.28.0
 
