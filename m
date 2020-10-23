@@ -1,74 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVzI2-00052e-3S
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:47:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37942)
+	id 1kW0Lt-0006Ie-IO
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 12:55:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55194)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kVzHy-0004ys-3K; Fri, 23 Oct 2020 11:47:34 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:37529)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kW0Lr-0006Fe-PF
+ for qemu-riscv@nongnu.org; Fri, 23 Oct 2020 12:55:39 -0400
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e]:40125)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kVzHv-0004Az-UZ; Fri, 23 Oct 2020 11:47:33 -0400
-Received: by mail-io1-xd42.google.com with SMTP id q25so2323382ioh.4;
- Fri, 23 Oct 2020 08:47:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=Q0zhBuJwVfaqWFxVDvRV6NmbWfYwQwjqyLOvb6HnaOo=;
- b=BPXWEqqwSKCrYmOPf2dmlb/NdjOA+3/T1KBwcxXbKvrezDVt/U6Rwey1JIg0LSqFPR
- fiELqCyuIvHWp8z9qz0laUB7UvsodIWIq3d4Rmnzr2INwP6UdgQqFMjtgwnAmK3pviLc
- 2rBl5H3jo1+8Rh9biHM3QFTPRN3P3bsWti1hMu3lhgCnYKHXJqa8h0btcOe0oJb6Rkop
- fQdUqMAZoSmNBX/tq5/sv15i63ZkkafBycmEYnxP+hj6R6axV1qMpT6rLDuBA4mD+P3k
- W2hiT4eDMMs/ZrKqdeq5QNee3BgnaMUjVr1S9tykskJQka7LYYx08cL22QJuXMqz9cDd
- 4GUA==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kW0Lq-0004kT-4p
+ for qemu-riscv@nongnu.org; Fri, 23 Oct 2020 12:55:39 -0400
+Received: by mail-pg1-x52e.google.com with SMTP id x13so1700630pgp.7
+ for <qemu-riscv@nongnu.org>; Fri, 23 Oct 2020 09:55:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=gLvUfrphDwZ2K++jmWO2A1JJHtXH+x3MhJqdTjBYNjE=;
+ b=VGICWJQlWWp4aPXV96ePhgji9wf6WSv/exuSyeqZq8zotPP86u6pevsdJjLeuvALKb
+ X9IpeqIzVFnTE0K8VRdLNHpQKh3IzRvKm7dcW0yVJwXocywB+TsVs4dKYzH+tu2wkcA+
+ w5egXZwGhdTGADTILUEQhA8fp0WDFjPTscZ59WiMahriQw9JqpyV8ZS8T9fkXVzsJGV3
+ yKiR2j0UBuCKXCjo5/G9a/l6+0M87DssseR56J8V4nl+fTo1KHS+HQ3/xoxd55fmFZvl
+ dkd2/1QnSTSdhmGX/pVSufut4fCgGOR/sNEBIVnKiwU4Pu0V8yo6EMKkImYew6fIInrS
+ I1aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=Q0zhBuJwVfaqWFxVDvRV6NmbWfYwQwjqyLOvb6HnaOo=;
- b=R1MVDbiFuAiIxpF68vOLjEdCbKF+zwVdmCqisDapXWCsQRGvieU4JKpCkgMefAsrGC
- HpAE8Tg0VoKFIaLPw2UzTkgRT0viAs39z25zAPPQEUthHu7Oe7+cN41IEUn4QKx6axsN
- vMjmWmU2muQ9giWNNI3Exq7YY6SqxZXVqj5Jc73n5yCWF6nOd3bD06TUzNSwG+B+WccK
- sIhORNX/XFdckMyrKgAIijju5qtx4kJlwMWf3bQX9o/YAcPcHE33bRdJDaN8EmVx2Pgv
- VaTBIWUL226tkAF3gIfftzH4QSwg5m5qyT8jRIWjxvcBStKKUeo5mDIyFpJQ84ianP6d
- Z4gA==
-X-Gm-Message-State: AOAM533EGbw6ta3bsP18fM3CZBg1TTPamsjdS/0+/s5C+nNXI3afMl7A
- UdgR4lt9ybv8+Pv+cdO/FA3lRF3LAC4JpDlUa8k=
-X-Google-Smtp-Source: ABdhPJw3usEvnAShsrwsaSGjnr7oHPjh0r00VfbjESsA//+BSur0QqlIQyc1UMWcLOwlejxXM1TufgcvT11xjQ21BuE=
-X-Received: by 2002:a05:6638:1696:: with SMTP id
- f22mr2586337jat.8.1603468050333; 
- Fri, 23 Oct 2020 08:47:30 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=gLvUfrphDwZ2K++jmWO2A1JJHtXH+x3MhJqdTjBYNjE=;
+ b=ma5jubeFzOYoPzbhLjMEGs713idP5QQX5fCIAAgFPazI2BynLRgApwMvXlogQou7FT
+ DC0QuAKfLLFHSxJ6iE/MBdP/t2RcgLIyPNxnQ0cByLCfUADfrhqnWoYfoNxN4PXspvzX
+ 26tnXwnC1qumotr+/ujP3DSJEQJlyqLVc8chlC7zwn4UuGQl7+lVNAPFt8lP9TCl6bJE
+ EjPV9AMwLjdVpiOXpuWCJTBf13Gv20ctLcGCIpzlKgBh/1ii17p+vi40qa+dbGXetmcI
+ OfNKuc9jRAudnxvNd3CC1WvScHM39WgpkkvMxadDXtXx7Y5dk/eNgKslrAOknPftvOcj
+ hrnA==
+X-Gm-Message-State: AOAM530vRnp6LyMuFjgthT/nLIVLQANxD74kNIiuBdQXrgvj8UqcMTt8
+ yHII++OgL5r4uh+E/SFif4dZGA==
+X-Google-Smtp-Source: ABdhPJx5dj7VAvfjFLTtUZiGdWTwELic4Aa4AoXUwALk33KYPtXzZHNhE+dh52CM0nchZPpds+WY6Q==
+X-Received: by 2002:a62:644c:0:b029:155:fdf4:52ed with SMTP id
+ y73-20020a62644c0000b0290155fdf452edmr97002pfb.9.1603472136259; 
+ Fri, 23 Oct 2020 09:55:36 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.141.89])
+ by smtp.gmail.com with ESMTPSA id h21sm2459692pgi.88.2020.10.23.09.55.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 23 Oct 2020 09:55:35 -0700 (PDT)
+Subject: Re: [PATCH v1 16/16] target/riscv: Consolidate *statush registers
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
+References: <cover.1603467169.git.alistair.francis@wdc.com>
+ <ce9e33fdd36df39878df6657ecdc10e42c629b85.1603467169.git.alistair.francis@wdc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <8c6d868d-6ce1-0b8c-587b-f555f35a636e@linaro.org>
+Date: Fri, 23 Oct 2020 09:55:33 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20201021170842.25762-1-alex.bennee@linaro.org>
- <20201021170842.25762-3-alex.bennee@linaro.org>
-In-Reply-To: <20201021170842.25762-3-alex.bennee@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Oct 2020 08:35:43 -0700
-Message-ID: <CAKmqyKNdUQ4cEOzm4Ldd9nyPkiALktz-m0YKAo+vtkn4t8QcOg@mail.gmail.com>
-Subject: Re: [PATCH v1 2/4] hw/riscv: migrate fdt field to generic MachineState
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, julien@xen.org,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Masami Hiramatsu <masami.hiramatsu@linaro.org>, 
- andre.przywara@arm.com, stefano.stabellini@linaro.org, 
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>, stefano.stabellini@xilinx.com, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- stratos-dev@op-lists.linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+In-Reply-To: <ce9e33fdd36df39878df6657ecdc10e42c629b85.1603467169.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52e.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.108,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -83,101 +84,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2020 15:47:34 -0000
+X-List-Received-Date: Fri, 23 Oct 2020 16:55:40 -0000
 
-On Wed, Oct 21, 2020 at 10:13 AM Alex Benn=C3=A9e <alex.bennee@linaro.org> =
-wrote:
->
-> This is a mechanical change to make the fdt available through
-> MachineState.
->
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+On 10/23/20 8:33 AM, Alistair Francis wrote:
+> +        qemu_fprintf(f, " %s %016lx\n", "vsstatus ", env->vsstatus);
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+You need PRIx64 here.
 
-Alistair
 
-> ---
->  include/hw/riscv/virt.h |  1 -
->  hw/riscv/virt.c         | 18 +++++++++---------
->  2 files changed, 9 insertions(+), 10 deletions(-)
->
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index b4ed9a32eb..6505ae8d23 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -41,7 +41,6 @@ struct RISCVVirtState {
->      DeviceState *plic[VIRT_SOCKETS_MAX];
->      PFlashCFI01 *flash[2];
->
-> -    void *fdt;
->      int fdt_size;
->  };
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 41bd2f38ba..17c0706156 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -194,7 +194,7 @@ static void create_fdt(RISCVVirtState *s, const struc=
-t MemmapEntry *memmap,
->      hwaddr flashsize =3D virt_memmap[VIRT_FLASH].size / 2;
->      hwaddr flashbase =3D virt_memmap[VIRT_FLASH].base;
->
-> -    fdt =3D s->fdt =3D create_device_tree(&s->fdt_size);
-> +    fdt =3D mc->fdt =3D create_device_tree(&s->fdt_size);
->      if (!fdt) {
->          error_report("create_device_tree() failed");
->          exit(1);
-> @@ -434,12 +434,12 @@ static void create_fdt(RISCVVirtState *s, const str=
-uct MemmapEntry *memmap,
->      g_free(name);
->
->      name =3D g_strdup_printf("/soc/flash@%" PRIx64, flashbase);
-> -    qemu_fdt_add_subnode(s->fdt, name);
-> -    qemu_fdt_setprop_string(s->fdt, name, "compatible", "cfi-flash");
-> -    qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
-> +    qemu_fdt_add_subnode(mc->fdt, name);
-> +    qemu_fdt_setprop_string(mc->fdt, name, "compatible", "cfi-flash");
-> +    qemu_fdt_setprop_sized_cells(mc->fdt, name, "reg",
->                                   2, flashbase, 2, flashsize,
->                                   2, flashbase + flashsize, 2, flashsize)=
-;
-> -    qemu_fdt_setprop_cell(s->fdt, name, "bank-width", 4);
-> +    qemu_fdt_setprop_cell(mc->fdt, name, "bank-width", 4);
->      g_free(name);
->  }
->
-> @@ -613,9 +613,9 @@ static void virt_machine_init(MachineState *machine)
->              hwaddr end =3D riscv_load_initrd(machine->initrd_filename,
->                                             machine->ram_size, kernel_ent=
-ry,
->                                             &start);
-> -            qemu_fdt_setprop_cell(s->fdt, "/chosen",
-> +            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
->                                    "linux,initrd-start", start);
-> -            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
-> +            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd=
--end",
->                                    end);
->          }
->      } else {
-> @@ -636,11 +636,11 @@ static void virt_machine_init(MachineState *machine=
-)
->
->      /* Compute the fdt load address in dram */
->      fdt_load_addr =3D riscv_load_fdt(memmap[VIRT_DRAM].base,
-> -                                   machine->ram_size, s->fdt);
-> +                                   machine->ram_size, machine->fdt);
->      /* load the reset vector */
->      riscv_setup_rom_reset_vec(start_addr, virt_memmap[VIRT_MROM].base,
->                                virt_memmap[VIRT_MROM].size, kernel_entry,
-> -                              fdt_load_addr, s->fdt);
-> +                              fdt_load_addr, machine->fdt);
->
->      /* SiFive Test MMIO device */
->      sifive_test_create(memmap[VIRT_TEST].base);
-> --
-> 2.20.1
->
->
+r~
 
