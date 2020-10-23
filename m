@@ -1,64 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVfXQ-0002HA-Gx
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Oct 2020 14:42:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54494)
+	id 1kVt88-0004b5-Sk
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 05:13:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54416)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kVfXI-0002Ci-D8; Thu, 22 Oct 2020 14:42:05 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:36032)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kVfXG-0005ep-7O; Thu, 22 Oct 2020 14:42:04 -0400
-Received: by mail-il1-x144.google.com with SMTP id p10so2665476ile.3;
- Thu, 22 Oct 2020 11:42:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=RRQirIiF1yuIgWCad5dqcb+mARLJmIJ+lMNO+sRWVAg=;
- b=nbGjXqepvlht+dXj31z3XCL9Fbv681ZdI6mJDcocc+chH9ZcKRwH02I5gCsJxmIfQ4
- /0NnumDDpEsROIEyO76BVKbLB2BMz8cvw5wbyq82QvL6xZ9iEJ70BPaF2MtpeDYN5O3u
- elYogTPq51izcVxEsHqSOwb68MRVqrACoKxGEmOgXItn71NEJVY2T05UPMwpyKbTIYv2
- czcDiDNPEVRL4643QYHw3qVrqmjh79TJ/ivjOjhrvfzl4M3Tlq7D0u/h24cgLcqIu+AY
- DKIecIuHhbxx5R4n9gtRtf+AmaEU+78bEOEE99RrQoCZp36fXPlB1eH1LmsCDluGlL4W
- VuMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=RRQirIiF1yuIgWCad5dqcb+mARLJmIJ+lMNO+sRWVAg=;
- b=R+iz2+9HTytn4wNMGPTisSXlnC2fj8sCDLfremgrCC7Vqj0f8uGFManu4ja4wKEpLU
- 3ipoV74+ABE56oGTEbbtlSQEicFj7SbPgJXWZcgloZB5hGTN4tgUAxZbF+4yEkY/U9PU
- kOO54hjXoPTDRqjy3NnAc1pyJNTZI7B2K7zO8FqL94AiNbX0fXHvsG71pCzFrr/OBpe4
- 3oHgOCfGRPg2FqEe1DhUwpPFj9DF5KjilV5f69Igpy3AskGY7Ppab1s37t6+QBebwTXv
- bu0VI62X/ulWbzrUz7QRH6dYUpVtX5SQcPBNjeMTYkpa10LVlgDIiqbEQZqAdO0+/S8I
- tkqA==
-X-Gm-Message-State: AOAM530enPMnYcV6+qHKG6eyl/r3z85M1D46/Ej7e3gDccMfGfNof/Z4
- 1paUxOZjLApscWOkd08vWg+JeyMOzEx6urEEADg=
-X-Google-Smtp-Source: ABdhPJwM8/mRl8r/0YBqv6FC8eh8NbuLzL3gvpPHq18u5hsC643Ug+xMDdmtyLcOVBw3fiksD9nXmlCIafL0EBPe6Hs=
-X-Received: by 2002:a92:dd0f:: with SMTP id n15mr3069665ilm.227.1603392119593; 
- Thu, 22 Oct 2020 11:41:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kVt86-0004YH-Su; Fri, 23 Oct 2020 05:12:58 -0400
+Received: from szxga07-in.huawei.com ([45.249.212.35]:46358 helo=huawei.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kVt84-0004iT-Gw; Fri, 23 Oct 2020 05:12:58 -0400
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 3456A240EFD79865E185;
+ Fri, 23 Oct 2020 17:12:46 +0800 (CST)
+Received: from huawei.com (10.174.186.209) by DGGEMS406-HUB.china.huawei.com
+ (10.3.19.206) with Microsoft SMTP Server id 14.3.487.0; Fri, 23 Oct 2020
+ 17:12:40 +0800
+From: Yifei Jiang <jiangyifei@huawei.com>
+To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
+CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
+ <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
+ <richard.henderson@linaro.org>, <victor.zhangxiaofeng@huawei.com>,
+ <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
+ <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
+ <jiangyifei@huawei.com>
+Subject: [PATCH V3 2/6] target/riscv: Add basic vmstate description of CPU
+Date: Fri, 23 Oct 2020 17:12:21 +0800
+Message-ID: <20201023091225.224-3-jiangyifei@huawei.com>
+X-Mailer: git-send-email 2.26.2.windows.1
+In-Reply-To: <20201023091225.224-1-jiangyifei@huawei.com>
+References: <20201023091225.224-1-jiangyifei@huawei.com>
 MIME-Version: 1.0
-References: <20201020033732.12921-1-green.wan@sifive.com>
- <20201020033732.12921-3-green.wan@sifive.com>
-In-Reply-To: <20201020033732.12921-3-green.wan@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 22 Oct 2020 11:30:14 -0700
-Message-ID: <CAKmqyKM=ePemA8XL8fY_VnuGp+_B7YySa+Dw524o-PWYuWw8mA@mail.gmail.com>
-Subject: Re: [PATCH v8 2/2] hw/misc/sifive_u_otp: Add backend drive support
-To: Green Wan <green.wan@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.174.186.209]
+X-CFilter-Loop: Reflected
+Received-SPF: pass client-ip=45.249.212.35; envelope-from=jiangyifei@huawei.com;
+ helo=huawei.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 05:12:47
+X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -72,173 +56,156 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2020 18:42:09 -0000
+X-List-Received-Date: Fri, 23 Oct 2020 09:12:59 -0000
 
-On Mon, Oct 19, 2020 at 8:37 PM Green Wan <green.wan@sifive.com> wrote:
->
-> Add '-drive' support to OTP device. Allow users to assign a raw file
-> as OTP image.
->
-> test commands for 16k otp.img filled with zero:
->
-> $ dd if=/dev/zero of=./otp.img bs=1k count=16
-> $ ./qemu-system-riscv64 -M sifive_u -m 256M -nographic -bios none \
-> -kernel ../opensbi/build/platform/sifive/fu540/firmware/fw_payload.elf \
-> -d guest_errors -drive if=none,format=raw,file=otp.img
->
-> Signed-off-by: Green Wan <green.wan@sifive.com>
-> Reviewed-by: Bin Meng <bin.meng@windriver.com>
-> Tested-by: Bin Meng <bin.meng@windriver.com>
+Add basic CPU state description to the newly created machine.c
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+---
+ target/riscv/cpu.c       |  8 +----
+ target/riscv/internals.h |  4 +++
+ target/riscv/machine.c   | 74 ++++++++++++++++++++++++++++++++++++++++
+ target/riscv/meson.build |  3 +-
+ 4 files changed, 81 insertions(+), 8 deletions(-)
+ create mode 100644 target/riscv/machine.c
 
-Alistair
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index dd05a220c7..6a0264fc6b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -22,6 +22,7 @@
+ #include "qemu/ctype.h"
+ #include "qemu/log.h"
+ #include "cpu.h"
++#include "internals.h"
+ #include "exec/exec-all.h"
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+@@ -498,13 +499,6 @@ static void riscv_cpu_init(Object *obj)
+     cpu_set_cpustate_pointers(cpu);
+ }
+ 
+-#ifndef CONFIG_USER_ONLY
+-static const VMStateDescription vmstate_riscv_cpu = {
+-    .name = "cpu",
+-    .unmigratable = 1,
+-};
+-#endif
+-
+ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
+     DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
+diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+index f1a546dba6..b15ad394bb 100644
+--- a/target/riscv/internals.h
++++ b/target/riscv/internals.h
+@@ -38,6 +38,10 @@ target_ulong fclass_d(uint64_t frs1);
+ #define SEW32 2
+ #define SEW64 3
+ 
++#ifndef CONFIG_USER_ONLY
++extern const VMStateDescription vmstate_riscv_cpu;
++#endif
++
+ static inline uint64_t nanbox_s(float32 f)
+ {
+     return f | MAKE_64BIT_MASK(32, 32);
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+new file mode 100644
+index 0000000000..32edbcba7c
+--- /dev/null
++++ b/target/riscv/machine.c
+@@ -0,0 +1,74 @@
++/*
++ * RISC-V VMState Description
++ *
++ * Copyright (c) 2020 Huawei Technologies Co., Ltd
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "qemu/osdep.h"
++#include "cpu.h"
++#include "qemu/error-report.h"
++#include "sysemu/kvm.h"
++#include "migration/cpu.h"
++
++const VMStateDescription vmstate_riscv_cpu = {
++    .name = "cpu",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (VMStateField[]) {
++        VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
++        VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
++        VMSTATE_UINTTL(env.pc, RISCVCPU),
++        VMSTATE_UINTTL(env.load_res, RISCVCPU),
++        VMSTATE_UINTTL(env.load_val, RISCVCPU),
++        VMSTATE_UINTTL(env.frm, RISCVCPU),
++        VMSTATE_UINTTL(env.badaddr, RISCVCPU),
++        VMSTATE_UINTTL(env.guest_phys_fault_addr, RISCVCPU),
++        VMSTATE_UINTTL(env.priv_ver, RISCVCPU),
++        VMSTATE_UINTTL(env.vext_ver, RISCVCPU),
++        VMSTATE_UINTTL(env.misa, RISCVCPU),
++        VMSTATE_UINTTL(env.misa_mask, RISCVCPU),
++        VMSTATE_UINT32(env.features, RISCVCPU),
++        VMSTATE_UINTTL(env.priv, RISCVCPU),
++        VMSTATE_UINTTL(env.virt, RISCVCPU),
++        VMSTATE_UINTTL(env.resetvec, RISCVCPU),
++        VMSTATE_UINTTL(env.mhartid, RISCVCPU),
++        VMSTATE_UINT64(env.mstatus, RISCVCPU),
++        VMSTATE_UINTTL(env.mip, RISCVCPU),
++        VMSTATE_UINT32(env.miclaim, RISCVCPU),
++        VMSTATE_UINTTL(env.mie, RISCVCPU),
++        VMSTATE_UINTTL(env.mideleg, RISCVCPU),
++        VMSTATE_UINTTL(env.sptbr, RISCVCPU),
++        VMSTATE_UINTTL(env.satp, RISCVCPU),
++        VMSTATE_UINTTL(env.sbadaddr, RISCVCPU),
++        VMSTATE_UINTTL(env.mbadaddr, RISCVCPU),
++        VMSTATE_UINTTL(env.medeleg, RISCVCPU),
++        VMSTATE_UINTTL(env.stvec, RISCVCPU),
++        VMSTATE_UINTTL(env.sepc, RISCVCPU),
++        VMSTATE_UINTTL(env.scause, RISCVCPU),
++        VMSTATE_UINTTL(env.mtvec, RISCVCPU),
++        VMSTATE_UINTTL(env.mepc, RISCVCPU),
++        VMSTATE_UINTTL(env.mcause, RISCVCPU),
++        VMSTATE_UINTTL(env.mtval, RISCVCPU),
++        VMSTATE_UINTTL(env.scounteren, RISCVCPU),
++        VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
++        VMSTATE_UINTTL(env.sscratch, RISCVCPU),
++        VMSTATE_UINTTL(env.mscratch, RISCVCPU),
++        VMSTATE_UINT64(env.mfromhost, RISCVCPU),
++        VMSTATE_UINT64(env.mtohost, RISCVCPU),
++        VMSTATE_UINT64(env.timecmp, RISCVCPU),
++
++        VMSTATE_END_OF_LIST()
++    }
++};
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index abd647fea1..14a5c62dac 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -27,7 +27,8 @@ riscv_ss.add(files(
+ riscv_softmmu_ss = ss.source_set()
+ riscv_softmmu_ss.add(files(
+   'pmp.c',
+-  'monitor.c'
++  'monitor.c',
++  'machine.c'
+ ))
+ 
+ target_arch += {'riscv': riscv_ss}
+-- 
+2.19.1
 
-> ---
->  hw/misc/sifive_u_otp.c         | 65 ++++++++++++++++++++++++++++++++++
->  include/hw/misc/sifive_u_otp.h |  2 ++
->  2 files changed, 67 insertions(+)
->
-> diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
-> index b9238d64cb..60066375ab 100644
-> --- a/hw/misc/sifive_u_otp.c
-> +++ b/hw/misc/sifive_u_otp.c
-> @@ -19,11 +19,14 @@
->   */
->
->  #include "qemu/osdep.h"
-> +#include "qapi/error.h"
->  #include "hw/qdev-properties.h"
->  #include "hw/sysbus.h"
->  #include "qemu/log.h"
->  #include "qemu/module.h"
->  #include "hw/misc/sifive_u_otp.h"
-> +#include "sysemu/blockdev.h"
-> +#include "sysemu/block-backend.h"
->
->  #define WRITTEN_BIT_ON 0x1
->
-> @@ -54,6 +57,16 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
->          if ((s->pce & SIFIVE_U_OTP_PCE_EN) &&
->              (s->pdstb & SIFIVE_U_OTP_PDSTB_EN) &&
->              (s->ptrim & SIFIVE_U_OTP_PTRIM_EN)) {
-> +
-> +            /* read from backend */
-> +            if (s->blk) {
-> +                int32_t buf;
-> +
-> +                blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
-> +                          SIFIVE_U_OTP_FUSE_WORD);
-> +                return buf;
-> +            }
-> +
->              return s->fuse[s->pa & SIFIVE_U_OTP_PA_MASK];
->          } else {
->              return 0xff;
-> @@ -145,6 +158,12 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
->              /* write bit data */
->              SET_FUSEARRAY_BIT(s->fuse, s->pa, s->paio, s->pdin);
->
-> +            /* write to backend */
-> +            if (s->blk) {
-> +                blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD,
-> +                           &s->fuse[s->pa], SIFIVE_U_OTP_FUSE_WORD, 0);
-> +            }
-> +
->              /* update written bit */
->              SET_FUSEARRAY_BIT(s->fuse_wo, s->pa, s->paio, WRITTEN_BIT_ON);
->          }
-> @@ -168,16 +187,48 @@ static const MemoryRegionOps sifive_u_otp_ops = {
->
->  static Property sifive_u_otp_properties[] = {
->      DEFINE_PROP_UINT32("serial", SiFiveUOTPState, serial, 0),
-> +    DEFINE_PROP_DRIVE("drive", SiFiveUOTPState, blk),
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
->  static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
->  {
->      SiFiveUOTPState *s = SIFIVE_U_OTP(dev);
-> +    DriveInfo *dinfo;
->
->      memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_u_otp_ops, s,
->                            TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
->      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-> +
-> +    dinfo = drive_get_next(IF_NONE);
-> +    if (dinfo) {
-> +        int ret;
-> +        uint64_t perm;
-> +        int filesize;
-> +        BlockBackend *blk;
-> +
-> +        blk = blk_by_legacy_dinfo(dinfo);
-> +        filesize = SIFIVE_U_OTP_NUM_FUSES * SIFIVE_U_OTP_FUSE_WORD;
-> +        if (blk_getlength(blk) < filesize) {
-> +            error_setg(errp, "OTP drive size < 16K");
-> +            return;
-> +        }
-> +
-> +        qdev_prop_set_drive_err(dev, "drive", blk, errp);
-> +
-> +        if (s->blk) {
-> +            perm = BLK_PERM_CONSISTENT_READ |
-> +                   (blk_is_read_only(s->blk) ? 0 : BLK_PERM_WRITE);
-> +            ret = blk_set_perm(s->blk, perm, BLK_PERM_ALL, errp);
-> +            if (ret < 0) {
-> +                return;
-> +            }
-> +
-> +            if (blk_pread(s->blk, 0, s->fuse, filesize) != filesize) {
-> +                error_setg(errp, "failed to read the initial flash content");
-> +            }
-> +        }
-> +    }
->  }
->
->  static void sifive_u_otp_reset(DeviceState *dev)
-> @@ -191,6 +242,20 @@ static void sifive_u_otp_reset(DeviceState *dev)
->      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR] = s->serial;
->      s->fuse[SIFIVE_U_OTP_SERIAL_ADDR + 1] = ~(s->serial);
->
-> +    if (s->blk) {
-> +        /* Put serial number to backend as well*/
-> +        uint32_t serial_data;
-> +        int index = SIFIVE_U_OTP_SERIAL_ADDR;
-> +
-> +        serial_data = s->serial;
-> +        blk_pwrite(s->blk, index * SIFIVE_U_OTP_FUSE_WORD,
-> +                   &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0);
-> +
-> +        serial_data = ~(s->serial);
-> +        blk_pwrite(s->blk, (index + 1) * SIFIVE_U_OTP_FUSE_WORD,
-> +                   &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0);
-> +    }
-> +
->      /* Initialize write-once map */
->      memset(s->fuse_wo, 0x00, sizeof(s->fuse_wo));
->  }
-> diff --git a/include/hw/misc/sifive_u_otp.h b/include/hw/misc/sifive_u_otp.h
-> index ebffbc1fa5..5d0d7df455 100644
-> --- a/include/hw/misc/sifive_u_otp.h
-> +++ b/include/hw/misc/sifive_u_otp.h
-> @@ -46,6 +46,7 @@
->
->  #define SIFIVE_U_OTP_PA_MASK        0xfff
->  #define SIFIVE_U_OTP_NUM_FUSES      0x1000
-> +#define SIFIVE_U_OTP_FUSE_WORD      4
->  #define SIFIVE_U_OTP_SERIAL_ADDR    0xfc
->
->  #define SIFIVE_U_OTP_REG_SIZE       0x1000
-> @@ -80,6 +81,7 @@ struct SiFiveUOTPState {
->      uint32_t fuse_wo[SIFIVE_U_OTP_NUM_FUSES];
->      /* config */
->      uint32_t serial;
-> +    BlockBackend *blk;
->  };
->
->  #endif /* HW_SIFIVE_U_OTP_H */
-> --
-> 2.17.1
->
 
