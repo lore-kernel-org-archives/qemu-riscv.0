@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVz8K-0000F0-2X
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:37:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35130)
+	id 1kVz8N-0000Lp-Ii
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:37:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35176)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVz8B-0000BK-9z; Fri, 23 Oct 2020 11:37:28 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:38922)
+ id 1kVz8E-0000DB-QA; Fri, 23 Oct 2020 11:37:32 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:38929)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVz88-0002ph-FX; Fri, 23 Oct 2020 11:37:26 -0400
+ id 1kVz8B-0002qB-91; Fri, 23 Oct 2020 11:37:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1603467444; x=1635003444;
+ t=1603467447; x=1635003447;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=Gv/v2qUHT3RQ9WsyYe/7AJZc4P3ax+SAKTeS6rhbV1o=;
- b=ak5WI1nuLHEzpToJIJl8k0Pe66wqqnxRoE5C/RdYQNOgt+dRJri1nDnq
- wve4McADs+kU3NmcUuiGB68R4IecQfoR1V5F6wc+blEuCbWv3DoB4pNAI
- MdeUaItcMfx84H7qnxq/V2D4TOQJKuGGehvsd5czAKr+Ou5XRdn89DCTD
- vRo/GPfUNAPJspqwlXBBsbKs8zXdNB6FtaLdxw0kiGzVsFzW/iCEVN0XK
- 1Yg7YkV9pPtCdfalvFwJ8TMsBJnaqtPKPnaK+ZxVMtnQ+Y1QPFHIZgvUm
- I6YHI7c1qYZ4tb1S3/EcXOqVHqPl8TJoPE6JeUik2rysjP9Tunp7y7Osr w==;
-IronPort-SDR: en04BjEpHnlWO/LXhI6/EBG9psYbR5u7TdgglpiyLAoh4NUxD3hdvX/KdPTUEtwnWr+IzDKrMs
- 1G8oyPj3hhdf9paDaCTiR/ZPlRHoBCNrKWhxDd9C5lwbMs1j9CjJ+Jf5Kk5fCuwzEcSD563Eox
- mE5WfKeo2/XRhHp12hOHLs8oJz5+i1PSQSPsU7ugiYlrkH1KjxpDbjVwE0lgSdF9A10RcBeby9
- xbgIZm6H8BBF8Q4G/IPQuPKRMZSJsBp4IUbauWK410P60T3yznm/IQVmgY6oxV/EiVUtfSv0WE
- 9p8=
-X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="260636261"
+ bh=fVH3yJDP92d88/TMEtwm9Tro9Lrx+BKom1+AbX5QU0M=;
+ b=GmXd243UmzX0hqNbE7AZ5Ck7GW9c5fRoUXZToNuMW+9TSgYcO9JODPJ9
+ L/il8n9JS8jTBfNzpzj4J36gLepLnLjt/xtvKqkIZvPHVvAEHz3atGjwF
+ ilIH21pZWoA99YIrv3iysZ68dZ8NmWthVksn3NC7vPsdznxzjBvWQQZ57
+ 3mr76bUFUm2NCQWhcIgzPv6vSMKr/GGEZAzr81OjVsl172U7QqPgQnkcg
+ wzcJmF0r19Oikbexsq2qE8IZqK0/BsPdH2Ipz2+uJkwMh6+RBxP48gvFg
+ GNEMPZEseKv1FO9eCo2L9+0vE/laT4eCjgJl3VqJe2Npzs9F5TZkpzMNl A==;
+IronPort-SDR: TsuN3FRp4U5yUqhODmYsdpOPJjEyrBOFF60GFeC/M6hx9F/Tdj3pi58UReFrbRkkAi+1NPzpjr
+ duVwVKQntBVj1b7Xaxe12uGleyuFOjt+8cGyz83hUVJx9UIYOaF1ad5yH0bkkhxTotBY7Tsyyp
+ P+0Q+dlEaytKSSD6aEtLuqLFwgxlQzSnse96XD33zeFqoBhIU9VJC+mRG3uCzl5FiZwIg0BYYI
+ 6KFvuQ+C9ni3EnUZWyFXOLTMXQ+1c7s5Q19nTV1mpeCNrf4uoX4Aszkz45HdKwx8FVV1saQyXh
+ S7E=
+X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="260636267"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:37:22 +0800
-IronPort-SDR: dvbxy3ehYfy3ufIoWFw5+3IwkBw7BE5wbTzmW2QcYhITo4B4L5iCBe21J/uoUuMSkxdxnEyKUi
- iOhnwNJ7nXGXayPoS2fWgQLNgbRrsITcbrutuOx2XcGJ6D6RhxPqDHBumNZtyDFvxSgsyxaP21
- 2I3wn01BlM3sL2crA/XTEANU0P8o58JQKcOBJ0bffn4/r2O2MaI9yInooXGmhxb0YbNmjz+2Yt
- FZlqP2YqPkC3LkxSyWQnqfRFHxt4AkFL7j7B5IhtohTxGqLvniFnSNGodefupYVCVwcl32yoXw
- CKF8mhQ76/NtEBiDsbhFKJdY
+ by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:37:25 +0800
+IronPort-SDR: O2TJtcsEFgMqe2MiGM483JCJAJdmbJiuXwYvEuDQLMJBfsQ/KOwDEaOK41ciAvcW78eem3ofwD
+ nLvfda7++X4haHYKnuDuP9ZPdtMO6tezoU3aVakQ0grhfAnmgepWVZ7CNt+x00H8Negd0evJsr
+ pa0rkgrX0FLT4as5+jBWo18uHmkiPOC20ktpU+MosSNIP6d9nc4GkrMkV55N9yq953kU0FBEIE
+ b2Y2+htCDZbZp9W3DByclV3o7Q6QN2Pi7XShF4nIlMO6KDcE5imbr4Al6yb7dLumSdwEOv6YoU
+ 345u4NkSd8qxDP3TQgFdYZMp
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Oct 2020 08:23:44 -0700
-IronPort-SDR: 3yLSBvu5kFcoJ8weIUHVZK6cPHs+r5vdDpgjqlIgjvtwkC7gJ6cJVYCC/FvXtNu9qnlfpgZe+7
- t/iwgMBhw8A2d6anSGPC+nlN7QX8YjBTDL6Hi28WNuwvye++zco0BWWF8rE0ZmwOnmtgAzfn6H
- Mr/Tem2ETZLu0z6NIOL50txh9dLIdbjUhZMVnpp6i40mxDd1DG+kcAEmeLJPSfeLFrDKoQP3tx
- X1LXm9KcQAMV2l1HcsbUo7XtIamaXOD+9QtW5k/X5M9XvmlaRF8C9xn3DvZp1yWmns4eGGyYAS
- 1zc=
+ 23 Oct 2020 08:23:47 -0700
+IronPort-SDR: cpqGxKW/3+r2CxmWPPe3kYRJA3cr/k29NtTTmNApX1pRwOxHaz55Ooo++LRGO3eFozc1qHUr1Q
+ ziP+AWSq7PA8/JKFs38+5Jz+fYxbNSkW3lkUkCedkPWsJUg7uHP3MTM+C25a2Dk4bwXYQwgT/G
+ DsE5BZyL5DTfOvPVZS99qy7qI7IqDqiMxwNqYko1VJUWHE9Fim3AzFU1eIPjivgoKzdlNvgbaH
+ L3Wd2Qm6GouAT9rHexAtjB6AVBKGiVxIC+Cpj9SHOBYEqdAIkB+oVWL0ObPI0ck31rdiXjF3it
+ Ro0=
 WDCIronportException: Internal
 Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.60.46])
- by uls-op-cesaip02.wdc.com with ESMTP; 23 Oct 2020 08:37:22 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 23 Oct 2020 08:37:25 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com, richard.henderson@linaro.org
-Subject: [PATCH v1 1/5] target/riscv: Add a virtualised MMU Mode
-Date: Fri, 23 Oct 2020 08:26:01 -0700
-Message-Id: <16213739a6232aa4824c5a008e2f669e6e58fbcf.1603466725.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 2/5] target/riscv: Set the virtualised MMU mode when doing
+ hyp accesses
+Date: Fri, 23 Oct 2020 08:26:04 -0700
+Message-Id: <0231a2792b6653c9399d91a6605874b001641a02.1603466725.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <cover.1603466725.git.alistair.francis@wdc.com>
 References: <cover.1603466725.git.alistair.francis@wdc.com>
@@ -86,68 +87,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2020 15:37:30 -0000
+X-List-Received-Date: Fri, 23 Oct 2020 15:37:34 -0000
 
-Add a new MMU mode that includes the current virt mode.
+When performing the hypervisor load/store operations set the MMU mode to
+indicate that we are virtualised.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu-param.h  | 2 +-
- target/riscv/cpu.h        | 4 +++-
- target/riscv/cpu_helper.c | 6 +++++-
- 3 files changed, 9 insertions(+), 3 deletions(-)
+ target/riscv/op_helper.c | 30 +++++++++++++++++-------------
+ 1 file changed, 17 insertions(+), 13 deletions(-)
 
-diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
-index 664fc1d371..502ed6489e 100644
---- a/target/riscv/cpu-param.h
-+++ b/target/riscv/cpu-param.h
-@@ -18,6 +18,6 @@
- # define TARGET_VIRT_ADDR_SPACE_BITS 32 /* sv32 */
- #endif
- #define TARGET_PAGE_BITS 12 /* 4 KiB Pages */
--#define NB_MMU_MODES 4
-+#define NB_MMU_MODES 8
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 4ce73575a7..bc6df6c8c9 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -238,30 +238,31 @@ target_ulong helper_hyp_load(CPURISCVState *env, target_ulong address,
+         (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
+             get_field(env->hstatus, HSTATUS_HU))) {
+         target_ulong pte;
++        int mmu_idx = cpu_mmu_index(env, false) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
  
- #endif
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index de4705bb57..8ac01f3a64 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -365,7 +365,9 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
- target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
- void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
+         riscv_cpu_set_two_stage_lookup(env, true);
  
--#define TB_FLAGS_MMU_MASK   3
-+#define TB_FLAGS_MMU_MASK   7
-+#define TB_FLAGS_PRIV_MMU_MASK                3
-+#define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
- #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
- 
- typedef CPURISCVState CPUArchState;
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 4652082df1..46b62a0f37 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -30,6 +30,10 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
- #ifdef CONFIG_USER_ONLY
-     return 0;
- #else
-+    if (riscv_cpu_virt_enabled(env)) {
-+        return env->priv | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-+    }
+         switch (memop) {
+         case MO_SB:
+-            pte = cpu_ldsb_data_ra(env, address, GETPC());
++            pte = cpu_ldsb_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_UB:
+-            pte = cpu_ldub_data_ra(env, address, GETPC());
++            pte = cpu_ldub_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TESW:
+-            pte = cpu_ldsw_data_ra(env, address, GETPC());
++            pte = cpu_ldsw_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TEUW:
+-            pte = cpu_lduw_data_ra(env, address, GETPC());
++            pte = cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TESL:
+-            pte = cpu_ldl_data_ra(env, address, GETPC());
++            pte = cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TEUL:
+-            pte = cpu_ldl_data_ra(env, address, GETPC());
++            pte = cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TEQ:
+-            pte = cpu_ldq_data_ra(env, address, GETPC());
++            pte = cpu_ldq_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         default:
+             g_assert_not_reached();
+@@ -287,23 +288,25 @@ void helper_hyp_store(CPURISCVState *env, target_ulong address,
+         (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+         (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
+             get_field(env->hstatus, HSTATUS_HU))) {
++        int mmu_idx = cpu_mmu_index(env, false) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
 +
-     return env->priv;
- #endif
- }
-@@ -336,7 +340,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-      * (riscv_cpu_do_interrupt) is correct */
-     MemTxResult res;
-     MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
--    int mode = mmu_idx;
-+    int mode = mmu_idx & 0x3;
-     bool use_background = false;
+         riscv_cpu_set_two_stage_lookup(env, true);
  
-     /*
+         switch (memop) {
+         case MO_SB:
+         case MO_UB:
+-            cpu_stb_data_ra(env, address, val, GETPC());
++            cpu_stb_mmuidx_ra(env, address, val, mmu_idx, GETPC());
+             break;
+         case MO_TESW:
+         case MO_TEUW:
+-            cpu_stw_data_ra(env, address, val, GETPC());
++            cpu_stw_mmuidx_ra(env, address, val, mmu_idx, GETPC());
+             break;
+         case MO_TESL:
+         case MO_TEUL:
+-            cpu_stl_data_ra(env, address, val, GETPC());
++            cpu_stl_mmuidx_ra(env, address, val, mmu_idx, GETPC());
+             break;
+         case MO_TEQ:
+-            cpu_stq_data_ra(env, address, val, GETPC());
++            cpu_stq_mmuidx_ra(env, address, val, mmu_idx, GETPC());
+             break;
+         default:
+             g_assert_not_reached();
+@@ -329,15 +332,16 @@ target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
+         (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
+             get_field(env->hstatus, HSTATUS_HU))) {
+         target_ulong pte;
++        int mmu_idx = cpu_mmu_index(env, false) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+ 
+         riscv_cpu_set_two_stage_lookup(env, true);
+ 
+         switch (memop) {
+         case MO_TEUW:
+-            pte = cpu_lduw_data_ra(env, address, GETPC());
++            pte = cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TEUL:
+-            pte = cpu_ldl_data_ra(env, address, GETPC());
++            pte = cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         default:
+             g_assert_not_reached();
 -- 
 2.28.0
 
