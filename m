@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVzFG-00024z-Gz
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:44:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37008)
+	id 1kVzFK-00026D-3V
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:44:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37024)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVzFA-00021a-KO; Fri, 23 Oct 2020 11:44:42 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:6152)
+ id 1kVzFC-00022t-HY; Fri, 23 Oct 2020 11:44:44 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:6144)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVzF8-0003gM-Sd; Fri, 23 Oct 2020 11:44:40 -0400
+ id 1kVzFA-0003gF-HX; Fri, 23 Oct 2020 11:44:42 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1603467879; x=1635003879;
+ t=1603467881; x=1635003881;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=BUW2O3MQzdbWJXlqLo0/WE3+BwAoJgBRDfL3DEvuyg4=;
- b=i3Z7GomTiSermdqZNNGc7BoGFIs9KobiDyM08pY18dh4LrbgQ6SuSCNk
- WpzWrExUPo8v7Q9pvnv+urB9dBZIyQn+d3h1b7BDd0AqXcwNV+gM1NMO8
- qI62YnsLQ93JJtjL7NLjZaFnMmOmQ3ucHPcQGaceEHzI/NIw1IMGpISam
- 5oGsmJfWc618xnqyqfpsMuO6Ye7eYJcSOtjTw+4E/y32TN9y6N3F+cTRm
- GO4Ek61fXkZGhT3NZw6jeSDbJOKehau3aghYyhdHNRi2Syj1gLRVO+fAY
- Cv1+XehEFEjZ6riOajd9vrUDZWttZOktLcAjMMsA4XW1MikdyIEL0LdKy A==;
-IronPort-SDR: 4jtoasyk9ithrbxQ33pELpXo/6cPoupWf61WUhJX6Pghm1k377LvOtfsboekUV3iyjDzoV5Tpk
- qXd/gzY+ARgxS01NlUAGY6hIAkRQJ901n34UWpuYlIlxE/4fMEiiW5fn/HzqDWWPIMY8oBnFk5
- 4ORYl4DWQCMfktMAkkYx3I1N27UmtxYDqqpJ3MPzBM9qEZd0pB1+79828e0+VpVnIzO3fANs0U
- rRSZfSvi9xVTtNZ3coo9mD5EsKzlWt70GRNSj822+Vkwh2avey22Vs5e3FZCrXuHQZUi4hyOHd
- NbQ=
-X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="151960147"
+ bh=tVeLQH5d/2Mry1kB+Oc8jJWYNBfxFWaNX19V7lAW+bs=;
+ b=prMEvlm5K7b4rjOEWn/jRsGMTXHz9XhZ0dnVCXwQBIRjSWjg2grp6ILP
+ ey30X1ycSYlXJw/jNh2ifY4gFP2fidsMUeqqeEQOY7OiT8+n8qttLM6Pv
+ CoxLJ4i1oVMIHYCsjpQFp+5vCujn9FvBN6ZTO1BrFF4Vduz2pqBs4rYOb
+ sOLyRQTugVQFM0Lt4zCJjplCP3kxayxhtig1s8DxsQTsy7wpwYOFl+v+p
+ zCQiInUXthzgaHH688hG4+bSXMgJeEfitUz49pVvjD89lw8YzWVGGV3ju
+ f6pgEP6Y3MDXWSGtuRJXRea3V2WGyVDUL6YUCFFmbbmmjskMbuIYxfa0u w==;
+IronPort-SDR: d3xymO1EL4XrqP1P/qbJre2UcUDawZ2ZPJ4k86/IcksfJ3D4RqPMsv2EamAsnBM05P4YBRQ5XT
+ M+gZZY+qXt07eOVpCzqQYOuFV4DkjMO2HBHPU1eRgPdYrpt0Y3Z5+OYtiqEmZk6mm6KwfrLdmh
+ H8Q9MS/XORQBMCc9LDluAWxkq/nRpUqNFe2XLqhstyjuhhrP070MKUWYbpPMQQolXTQjA8aEcZ
+ nYooaTLtABI/Ufc7f+IyLltluDuSZrWmYL+RT7VLa65U94lc1svQ+wD3KUms1PDL3rb0fnUlDA
+ PgI=
+X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="151960153"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:44:37 +0800
-IronPort-SDR: C9jmEFCbWytfRAtiWbMH2oYXsaYTpsKS2RGqM4IoARnpU5ULSHZYi9v6v/qENur2TVMwwRQyQm
- Mg3va/E5NHpgsIHG4BCstCNBQcQPZ9Q4OWN4vuOm9cEztyJD0pl3hGOINdvK3O5H+GL3uGs2TJ
- XfD2oEKoqWdmLboojqZI0MAEzsejDkzz1O11ayfuu4N596BGl0TxScVwB7uLt4st1abNtz7mU2
- nm9KOZhtgsY29DaKGY7AYFAMr5NX2Ppq+trcbK1tbD721caL3JRRMxc/8B240AeGCdsEotsAGh
- WbhRjyBuPD45NWzlXUUP201z
+ by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:44:40 +0800
+IronPort-SDR: FZ0U56zvdIWhzJXm7DzBj4hqc3NKH7+SdZ0THwvlSSx4txJULuwQrkaa6tIoyRPg7t/eP0yrMO
+ AEr628ObRUHDWggS1+Vimds4EvMz2JD/dvK3oUkoUPW+MqGgfmf4CdRCb2OCrveCh1dD4PF0F7
+ BhIdEeHhH2zaBRB1mCdz1p//0GXTACN0LFBXGnw0PuU4WSS2dkubHpNXclMOMvRYNJNIs9q6ww
+ Vpt6EdKDewzFaxC+YImcM/FCP0mb6NlP5/XwVOhVIjAoza16Ap1+V+D89DdKDPAoz+kkV/zlq+
+ X+kviG/9hXCB/w9Gk9aapa86
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Oct 2020 08:30:59 -0700
-IronPort-SDR: rvdmG/UKbkExbWsfhTm88Wmvrasv4I/baScGhpc4uvcAk9clQYnfuA8pSU6SDXhVhx4M5hqLAM
- VpGo8GfmcAYw9aAm00EhMnpghFyg6oHMbPOSBrzOtx38GzjMqyynN1wyLTYhYkyMsWSv1nDmD7
- CsUm0dXUiYcnwhFUpu7hoYJK3cPUa7y3iVKOHfAH8mfdVEg5zHGnpiHidSjYgDaODLfPd21a7d
- 9SYO+2nX6XYlZEzgOQ8wOrMzeq/N23HLBZzVjqah/EqZTCDUsBgJOCuXDn37p3vg4evfy7CDpu
- 0PQ=
+ 23 Oct 2020 08:31:01 -0700
+IronPort-SDR: uyjIx8T53X8w1vm+0Md1+RQdsr9PyE/420kgkdvHtoYLlotvazEzKm50oari98EuMlz2mycAPp
+ hANlagEvjABGhk0DiGUKMEPc9oinD9z/Ym3mp5AjdcSOs2Dzj1Ullxnn5l/h25/efUwYZQ/hSt
+ BhDg+5VO9X2hguzZXuw7z/eJWx8D1S3vAIq+qRf4L3B9DrAkWZDMjCS+WM9iWf0xd8rMFiDzKB
+ Mf+OBA2uB8E84fMjNFqlHb4gmmU5DSnt5mfivpMY/nvvltC/dwGxk5vA9btbjAl0yw/Yno1EmU
+ fao=
 WDCIronportException: Internal
 Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.60.46])
- by uls-op-cesaip02.wdc.com with ESMTP; 23 Oct 2020 08:44:37 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 23 Oct 2020 08:44:39 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v1 01/16] target/riscv: Add a TYPE_RISCV_CPU_BASE CPU
-Date: Fri, 23 Oct 2020 08:33:16 -0700
-Message-Id: <67626d271ea0b75a3c5479f3aaf07c565b1d1d83.1603467169.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 02/16] riscv: spike: Remove target macro conditionals
+Date: Fri, 23 Oct 2020 08:33:18 -0700
+Message-Id: <2f7f2621dda197492b848fcf186f1cb6fb3eb53d.1603467169.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <cover.1603467169.git.alistair.francis@wdc.com>
 References: <cover.1603467169.git.alistair.francis@wdc.com>
@@ -86,30 +86,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2020 15:44:42 -0000
+X-List-Received-Date: Fri, 23 Oct 2020 15:44:46 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.h | 6 ++++++
- 1 file changed, 6 insertions(+)
+ include/hw/riscv/spike.h | 6 ------
+ hw/riscv/spike.c         | 2 +-
+ 2 files changed, 1 insertion(+), 7 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index de4705bb57..74a236d4bc 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -44,6 +44,12 @@
- #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
+diff --git a/include/hw/riscv/spike.h b/include/hw/riscv/spike.h
+index cddeca2e77..cdd1a13011 100644
+--- a/include/hw/riscv/spike.h
++++ b/include/hw/riscv/spike.h
+@@ -47,10 +47,4 @@ enum {
+     SPIKE_DRAM
+ };
  
-+#if defined(TARGET_RISCV32)
-+# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
-+#elif defined(TARGET_RISCV64)
-+# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
-+#endif
-+
- #define RV32 ((target_ulong)1 << (TARGET_LONG_BITS - 2))
- #define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
- 
+-#if defined(TARGET_RISCV32)
+-#define SPIKE_V1_10_0_CPU TYPE_RISCV_CPU_BASE32
+-#elif defined(TARGET_RISCV64)
+-#define SPIKE_V1_10_0_CPU TYPE_RISCV_CPU_BASE64
+-#endif
+-
+ #endif
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index facac6e7d2..29f07f47b1 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -317,7 +317,7 @@ static void spike_machine_class_init(ObjectClass *oc, void *data)
+     mc->init = spike_board_init;
+     mc->max_cpus = SPIKE_CPUS_MAX;
+     mc->is_default = true;
+-    mc->default_cpu_type = SPIKE_V1_10_0_CPU;
++    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
+     mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
+     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
+     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
 -- 
 2.28.0
 
