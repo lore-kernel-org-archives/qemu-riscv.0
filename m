@@ -1,72 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kVzFU-0002XV-OJ
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:45:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37126)
+	id 1kVzFY-0002h9-Ut
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 11:45:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37142)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVzFS-0002TU-TW; Fri, 23 Oct 2020 11:44:58 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:21438)
+ id 1kVzFW-0002b5-4l; Fri, 23 Oct 2020 11:45:02 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17148)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=558518344=alistair.francis@wdc.com>)
- id 1kVzFQ-0003hI-W0; Fri, 23 Oct 2020 11:44:58 -0400
+ id 1kVzFU-0003hs-6n; Fri, 23 Oct 2020 11:45:01 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1603468982; x=1635004982;
+ t=1603467900; x=1635003900;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=vTHanwPQHpUU4UIL54mFbOGiG50hWJKmpPnONYHIZGU=;
- b=n5hSvp4qiUlaJ0RrV/FOou+5GjOfvzictOgvETU61LbMoOH9y4YBFtHt
- 6gP02aQlZYpuV1L1m1KsiJGQ87UQ61E9YgJ855vPU2LyOhp52Z0brBILo
- OLDvhjDXOdLdnRgvTHYFNmJLvRfgolSrsRMfwbaoxKvqL4YLPh4CWhGUP
- u6KA0iEW9kFSfbB4dPNTWtzg//mpq/eJKPXtZ6I0xlq1f50ylFNVjIK00
- I5EaMH/VUjpgTHqFeVG7pa9Zyrp2vAKGU9nn3rFEKRl+1JtVfCARPiWN0
- fgPNvqLb1VHt1CAfIGhTaX3LU10Bj7hb3UfTw2Xn4RSCcpg94YD0SJX39 Q==;
-IronPort-SDR: K6zSXinnUANiXm5d71uhgjE6xcWiXvLskQSv1N7a9wL5EkONnTRkWq0dYEfqZdAGEvUXOwmxxp
- tanbIEkRStEy1MXKdkYghnBVME9XbXTLViKS+Jg4mS90xZvb5MLpzfHe6aWN/bDDex6WB28XSG
- +LEHlnGaa37wS0FSdxvyAiFW1u23CDk6Ant2AvqRfM/DnE9p3p3lwQpMXUnLOM6tWemdPrGvbe
- 8n5R4/zKyMupUGB2SbV/x0R01TOcofxiYnAXLHBfSZBlfGwGv9zXcKuWCDrwUHgMgYZtCcikrG
- 0sk=
-X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="254245090"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 24 Oct 2020 00:03:01 +0800
-IronPort-SDR: aCl1VED6W3W2QJ0vuF0AfEBS0kFUDCIwbvsNKIBFWFKWUYxkhEmT0tzs2C/fQCZiL3RHmieJgf
- rptM67s6LZsrAyLiHBTR01rq3DWeHSybBL1shyZSxUFQ7ShEjZNgFQRKnJgfjsKWmY5tgLOGTo
- R9YYY+DcFW3cMNh6hdAT7aOP8rnlz56d8dWCwmkoQG3UfJxq+BzbXPehIH7ezpsXqoWOHlIFwe
- Gclvzahet9HMAtT6mlvolReIagSSGUp0LIoFHCzL/HZ8/5iQj9m9E7oM4RprPeN5nLT7wc/9B0
- MDmkIh7QxSu4iVEo7Y/m4uqd
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Oct 2020 08:31:18 -0700
-IronPort-SDR: 7s8sa0mq/kdQ4M27qo0PuY2NuAP25ua82pE40uxNSqFqHdXrXjuDHxCW/NEG7aGxzzSOAvggTR
- mC4wxGTIus5izNQziIg26aaJ54tbjvTDfAaDPHJyM0qJ944v8b+WKCeBBmzNmmEtQQgCgssr77
- 9zo+gJtvgd4WUWT8/MY28/g4VVU24z0dd+O0s9VMfQIPirbdk7fUKUm24OPbBQJ6UR/7cuzmjQ
- 6bhg73ZOcdcEPnawToKYPAASQgOHXhCGUKPYOQA8dkFZ/3KFxMkvqmeKjNDqTM8PKgKOOKVwB7
- hq8=
+ bh=YLxMCvSaaacd6zqMTliOHR4YoYXTbdCac9rZmNQyna4=;
+ b=Q5s2JV+hJYkR1Inud8/AEWGSVLYlt6a4SOTUs5nvYeh9h7Wlyo8+8hph
+ kOUgtSt4Qd9bAtVxRme7B1T1DMaOipKJ/cZNFn8NnNxctyTD9Sk3rlySY
+ hEmx9qPh/pMk6+NIUGXWXlll3hi2E9ooTjk4S6wk2WLkpVjyuQn25hc5y
+ DGwurvS2QkJliq+Ak51O4W+DaXtPtrqz3pmCFwxKoftpJGWz7u7mRP+pz
+ gm+xaCVkAwJiV7HApmL5yUD7j082vvGhYsY2nxZZKLvbraIJwWGMPnlnD
+ cvVOZihUrdoO7kirK1aTs8od3xAnZqLBCODxin5E5BgFwrDVgCFyJ2/ud Q==;
+IronPort-SDR: QFL1dtSfIIgvrJ+MklPugQBENVwwe+lT2J96oLGBTDcOV8F7A4o4kPX1/WwZVmyoNPDwYMtRr4
+ otd0p1WqNPDyiqcPhCQo9GeagQs7+S/m1eOi49PuInLmuX77ZWeZYjVNoyLolCWpU7QwpHmCIQ
+ 7J0t+dgoL0tgyHMUjBc2VG2KE2218V2uJBx9bnju/IJo3jak6vR7wIbtKtNs26iaBrdSD99gOc
+ 60ssCtXcIJ7oEIwyf7cJIMCwsrU0GUOhqTyIR5Pes1FuJz5awsHRKgGzAsTLk98BJXPmGbsGw0
+ cQo=
+X-IronPort-AV: E=Sophos;i="5.77,408,1596470400"; d="scan'208";a="150653285"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2020 23:44:58 +0800
+IronPort-SDR: 8cLqfF6zPaOqDCSvaAdnPmaPnYQGLDKUv8L0CbA9Bk9jGdZW8CxeWp6N0AYq474bGx/HZEjpxU
+ eXz9Ju2k33S36qwBf2z1CDW1vXWGZRwfUkYv/3ryNeRRhCbnGqbSEBqv/8jEf0R+XhN71QBYgH
+ TeQo07etanXezf/pUETvbPs6BLPgLK9A6WkU1l0Rq5zURdKIIAzIjKuMbKa58pxCanFraYDJYD
+ BpGlolUQwTBa8rmcQBJxRvcB6XO9S6tlCj2aMWGQPCyuQhgtKk5011d08Wrx+ursavjrvAm12x
+ xBqXMyit0V/8NmTXwLpj5+ix
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 23 Oct 2020 08:30:13 -0700
+IronPort-SDR: sFpvcQ47bR0fW9UDcqxO5jmzd+wOMD1kGGwXwgNfuXjV/s1C8PUjMKA8ymktzmgHOV0RuVRZIy
+ 0+09W+OQWGVQ4uqnN6iFZcJyaakdpQ6ggwjzPsjtwqZ0sO3295LCXwBKLrxhbROscvHSf6ozWC
+ D4kav14ryctqhaR/szPQMhhVtEILLQ/wLjrZMy5JN3i5jfvPWAkooa/CV2hlUHSTTBeDjDdzvC
+ jcXe4350r7y4fUNJ6m7S2T9Z5LObghLqXVQ8lbc6b2PCsxZQ+vipIF1cpzlJI8B/PcEX0rlQ/f
+ 6jw=
 WDCIronportException: Internal
 Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.60.46])
- by uls-op-cesaip02.wdc.com with ESMTP; 23 Oct 2020 08:44:56 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 23 Oct 2020 08:44:58 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v1 08/16] target/riscv: fpu_helper: Match function defs in
- HELPER macros
-Date: Fri, 23 Oct 2020 08:33:35 -0700
-Message-Id: <8786fd77439c26f677eeac2eccedf75ba3b68bb4.1603467169.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 09/16] target/riscv: Add a riscv_cpu_is_32bit() helper
+ function
+Date: Fri, 23 Oct 2020 08:33:37 -0700
+Message-Id: <6adfabd1e61f13932b99d7a9f6839a5c87ad8ce7.1603467169.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <cover.1603467169.git.alistair.francis@wdc.com>
 References: <cover.1603467169.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.143.124;
+Received-SPF: pass client-ip=216.71.154.42;
  envelope-from=prvs=558518344=alistair.francis@wdc.com;
- helo=esa2.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 11:44:50
+ helo=esa4.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/23 11:27:42
 X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
 X-Spam_score_int: -43
 X-Spam_score: -4.4
@@ -87,78 +87,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2020 15:44:59 -0000
+X-List-Received-Date: Fri, 23 Oct 2020 15:45:03 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/fpu_helper.c | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ target/riscv/cpu.h | 2 ++
+ target/riscv/cpu.c | 9 +++++++++
+ 2 files changed, 11 insertions(+)
 
-diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-index bb346a8249..507d7fe7fa 100644
---- a/target/riscv/fpu_helper.c
-+++ b/target/riscv/fpu_helper.c
-@@ -224,13 +224,13 @@ target_ulong helper_fcvt_wu_s(CPURISCVState *env, uint64_t rs1)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 74a236d4bc..86b063543d 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -383,6 +383,8 @@ FIELD(TB_FLAGS, LMUL, 3, 2)
+ FIELD(TB_FLAGS, SEW, 5, 3)
+ FIELD(TB_FLAGS, VILL, 8, 1)
+ 
++bool riscv_cpu_is_32bit(CPURISCVState *env);
++
+ /*
+  * A simplification for VLMAX
+  * = (1 << LMUL) * VLEN / (8 * (1 << SEW))
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 0bbfd7f457..32234d4a70 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -107,6 +107,15 @@ const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
+     }
  }
  
- #if defined(TARGET_RISCV64)
--uint64_t helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
-+target_ulong helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
++bool riscv_cpu_is_32bit(CPURISCVState *env)
++{
++    if (env->misa & RV64) {
++        return false;
++    }
++
++    return true;
++}
++
+ static void set_misa(CPURISCVState *env, target_ulong misa)
  {
-     float32 frs1 = check_nanbox_s(rs1);
-     return float32_to_int64(frs1, &env->fp_status);
- }
- 
--uint64_t helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
-+target_ulong helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
- {
-     float32 frs1 = check_nanbox_s(rs1);
-     return float32_to_uint64(frs1, &env->fp_status);
-@@ -248,12 +248,12 @@ uint64_t helper_fcvt_s_wu(CPURISCVState *env, target_ulong rs1)
- }
- 
- #if defined(TARGET_RISCV64)
--uint64_t helper_fcvt_s_l(CPURISCVState *env, uint64_t rs1)
-+uint64_t helper_fcvt_s_l(CPURISCVState *env, target_ulong rs1)
- {
-     return nanbox_s(int64_to_float32(rs1, &env->fp_status));
- }
- 
--uint64_t helper_fcvt_s_lu(CPURISCVState *env, uint64_t rs1)
-+uint64_t helper_fcvt_s_lu(CPURISCVState *env, target_ulong rs1)
- {
-     return nanbox_s(uint64_to_float32(rs1, &env->fp_status));
- }
-@@ -337,12 +337,12 @@ target_ulong helper_fcvt_wu_d(CPURISCVState *env, uint64_t frs1)
- }
- 
- #if defined(TARGET_RISCV64)
--uint64_t helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
-+target_ulong helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
- {
-     return float64_to_int64(frs1, &env->fp_status);
- }
- 
--uint64_t helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
-+target_ulong helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
- {
-     return float64_to_uint64(frs1, &env->fp_status);
- }
-@@ -359,12 +359,12 @@ uint64_t helper_fcvt_d_wu(CPURISCVState *env, target_ulong rs1)
- }
- 
- #if defined(TARGET_RISCV64)
--uint64_t helper_fcvt_d_l(CPURISCVState *env, uint64_t rs1)
-+uint64_t helper_fcvt_d_l(CPURISCVState *env, target_ulong rs1)
- {
-     return int64_to_float64(rs1, &env->fp_status);
- }
- 
--uint64_t helper_fcvt_d_lu(CPURISCVState *env, uint64_t rs1)
-+uint64_t helper_fcvt_d_lu(CPURISCVState *env, target_ulong rs1)
- {
-     return uint64_to_float64(rs1, &env->fp_status);
- }
+     env->misa_mask = env->misa = misa;
 -- 
 2.28.0
 
