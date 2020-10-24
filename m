@@ -1,69 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kW7Yu-0007Df-EP
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Oct 2020 20:37:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58922)
+	id 1kWCXj-0007Rr-Nx
+	for mharc-qemu-riscv@gnu.org; Sat, 24 Oct 2020 01:56:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42988)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kW7Yr-0007C1-7h; Fri, 23 Oct 2020 20:37:33 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:36774)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kW7Yo-0001mm-8E; Fri, 23 Oct 2020 20:37:32 -0400
-Received: by mail-io1-xd42.google.com with SMTP id u19so4087068ion.3;
- Fri, 23 Oct 2020 17:37:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=oUPaDzjwip3gqAOWaDlVyXRqP5E8rvfi/0vb2jasy+g=;
- b=Lw0IfgDc+TNGAVXzxPAkMMEaPrAS3sKXq1lPjm79mXs2euVHVPlEiJqzFcwcBPEZ8A
- yeaWlZ8zrTYvFgwUo89T5MBcznLPna4fFsYT6iW5SmzRhTWZ68icyxI8zfPrRkCpMLbo
- TSolSyfmuMgdiDLgTD8N16cm/ifFDEOn3tdKXTz/htaQT9xUEIWmvAHx7B4s15EOuNsh
- kLrBo6MeS3UK79/QgpAop9ydXEhk92xmVZuFcHKCvCzbuu13xmAO9zOVyk/5RnbgAXRT
- a1nuw39hrIlXxc0Q2NXQwEiAGZs8ANQhkedzI9BPfnQYJ0xZYDmy7xi6u0C88Drc0aI+
- MOIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=oUPaDzjwip3gqAOWaDlVyXRqP5E8rvfi/0vb2jasy+g=;
- b=CA6p4VItG5sBXcQ/5t1V0CO+9uCnLCuMAgYtQdD34KoZNkwaZ0OSaoFwzXlvQjNSME
- lmtQANf7TM/FJR2weEO534QleZoyk8MVB1qI2IEvhPHbvtVMi9sOCRtmqrKKW3ZgvZLr
- 430GswZ97ef8Wpgvbu2tGIQpOw6ePYu6XLi3bpwPlPqfXO00fE5OMFJyjx7o4Rre/Gwn
- oOPb2noIBf5yF/aPhvqxl3jbw6i7pcmNyoT+Zxi23x7CK2wBnV8xWy/oi/iq7yJkObV4
- uDoeMOPWLhSD/pc8Lqs+dmQktsV7F59vDPScI1BsuZaXlva1f2CUO2XQG0r9oJ26NNmH
- PiJg==
-X-Gm-Message-State: AOAM530i7ABesBJxgiXYvkMJQhBSErGiQ6hhj98U1B6PaULrdnV+Csxq
- DvMiqfvFK2Dv19hC7m1SZYgRVyTKTBfm1qcTNkI=
-X-Google-Smtp-Source: ABdhPJwWaF+TIrGvf4i5TJjl/0ms5lxVQfhTN43f5o9bt9UPT7nucBptBru7Tjfiwmv+GjkWdA2rYv4MIDLMP0lhkDI=
-X-Received: by 2002:a6b:c9c9:: with SMTP id z192mr3666549iof.175.1603499848043; 
- Fri, 23 Oct 2020 17:37:28 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
+ id 1kWCXh-0007Oy-Os; Sat, 24 Oct 2020 01:56:41 -0400
+Received: from home.keithp.com ([63.227.221.253]:43576 helo=elaine.keithp.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
+ id 1kWCXe-0008AJ-W7; Sat, 24 Oct 2020 01:56:41 -0400
+Received: from localhost (localhost [127.0.0.1])
+ by elaine.keithp.com (Postfix) with ESMTP id CFA423F2DD1A;
+ Fri, 23 Oct 2020 22:56:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
+ t=1603518994; bh=odGSmqp2ghZEK5ZFFkDKegBnKIYotPgjDCacNA7OVrs=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=PxQDgR9vqaMJr9zhjBwK+/jDc/GAkUExK5IUpTq6DW/w5B4BKGj/kZsWHRN+4kmvU
+ xRKwL3c5pLNvQybaIueqTObItwTeR1s+xsTDXXsSDMDb2jrgLIcg0GeQxJjJS1xrFF
+ bmWpVS5K3eUyiulO7xAxgAx3y4IwtIT5DfGqE27PwYgvVi27/0thz/4qX0GajWMKtY
+ lRNF5DG4fXqL7eZVZMWCWp0E9OO6VEW3Xf5F6Q8tW6EY1GjxsK42UBgnQaqYlpfsW7
+ moYQf5gPJXA9OOVQgeo/KX9oCmOhGX0vsmwM/btJFVe4wJwcapbrR747dLlaC+aQuo
+ o6+vsIiNUIKow==
+X-Virus-Scanned: Debian amavisd-new at keithp.com
+Received: from elaine.keithp.com ([127.0.0.1])
+ by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
+ with LMTP id i09BShfMcetq; Fri, 23 Oct 2020 22:56:33 -0700 (PDT)
+Received: from keithp.com (koto.keithp.com [10.0.0.2])
+ by elaine.keithp.com (Postfix) with ESMTPSA id 3D1FF3F2DD12;
+ Fri, 23 Oct 2020 22:56:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
+ t=1603518993; bh=odGSmqp2ghZEK5ZFFkDKegBnKIYotPgjDCacNA7OVrs=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=QHMmRsLP0X/OWrZ6+OieiVMDgE2ry4cBqzeimh/Cz5Z15DQ00nPSeaLYOuu0Ptt9P
+ 3YbZwPdqCGjmBa1/26pyiDjVy825ViEwl0QXHdqBzC422F1YPg32KpLOlTbtNZkuju
+ Hcyfkw+Hm9LM0tLuafDCOchKPZ7H8JfzB/u66KXSEMoFgk46sIqShD+/VFeY0mAZus
+ 4cf6AyDGoVufSbPc5quyXTlpIvZD+aUdrt0v9Ry/C/wH1EmV4rokHEfVdgGM/2W8IH
+ Sjl0dsk06+8oWPx9C4FH0LNHwEBfDMUUdrCn437e/L+vMblRXYmlo1kNYVEe7ZmBIu
+ iR7JbnHkvHAQQ==
+Received: by keithp.com (Postfix, from userid 1000)
+ id 1595F15821A3; Fri, 23 Oct 2020 22:56:33 -0700 (PDT)
+From: "Keith Packard" <keithp@keithp.com>
+To: Alistair Francis <alistair23@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel\@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list\:RISC-V" <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH] riscv: Add semihosting support [v8]
+In-Reply-To: <CAKmqyKMzHARF7C9Lo8SYFBbPNa_=ibbWBNnedwFbe8AY=DdXVA@mail.gmail.com>
+References: <20201023214940.917885-1-keithp@keithp.com>
+ <CAKmqyKMzHARF7C9Lo8SYFBbPNa_=ibbWBNnedwFbe8AY=DdXVA@mail.gmail.com>
+Date: Fri, 23 Oct 2020 22:56:32 -0700
+Message-ID: <8736246ub3.fsf@keithp.com>
 MIME-Version: 1.0
-References: <20201022080440.10069-1-space.monkey.delivers@gmail.com>
-In-Reply-To: <20201022080440.10069-1-space.monkey.delivers@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Oct 2020 17:25:41 -0700
-Message-ID: <CAKmqyKO1AdNOynNLDBFR0=x3mbcRn4No_iw7DA8anGOnPwmwVw@mail.gmail.com>
-Subject: Re: [PATCH v6 0/6] RISC-V Pointer Masking implementation
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- space.monkey.delivers@gmail.com, 
- Alistair Francis <Alistair.Francis@wdc.com>, kupokupokupopo@gmail.com, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Type: multipart/signed; boundary="=-=-=";
+ micalg=pgp-sha256; protocol="application/pgp-signature"
+Received-SPF: pass client-ip=63.227.221.253; envelope-from=keithp@keithp.com;
+ helo=elaine.keithp.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/24 01:56:35
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -77,52 +79,148 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Oct 2020 00:37:34 -0000
+X-List-Received-Date: Sat, 24 Oct 2020 05:56:42 -0000
 
-On Thu, Oct 22, 2020 at 1:04 AM Alexey Baturo <baturo.alexey@gmail.com> wrote:
->
-> Hi,
->
-> Added missing sign-off on the first patch.
->
-> Thanks
->
-> Alexey Baturo (5):
->   [RISCV_PM] Add J-extension into RISC-V
->   [RISCV_PM] Support CSRs required for RISC-V PM extension except for
->     ones in hypervisor mode
->   [RISCV_PM] Print new PM CSRs in QEMU logs
->   [RISCV_PM] Support pointer masking for RISC-V for i/c/f/d/a types of
->     instructions
->   [RISCV_PM] Allow experimental J-ext to be turned on
->
-> Anatoly Parshintsev (1):
->   [RISCV_PM] Implement address masking functions required for RISC-V
->     Pointer Masking extension
+--=-=-=
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-Thanks for the patches!
+Alistair Francis <alistair23@gmail.com> writes:
 
-I don't know a lot about the J-extension, so it will take me some time
-to read into it before I can review this.
+Thanks much for taking time to review this patch in detail. I've left
+the indicated changes in a new version of my riscv-semihost branch here:
 
-Maybe you can convince Richard to review it for you :P
+        https://github.com/keith-packard/qemu/tree/riscv-semihost
 
-Alistair
+I'll post a new version once we've wound up discussion on the remaining
+issues.
 
+>> +M: Keith Packard <keithp@keithp.com>
 >
->  target/riscv/cpu.c                      |  30 +++
->  target/riscv/cpu.h                      |  33 +++
->  target/riscv/cpu_bits.h                 |  66 ++++++
->  target/riscv/csr.c                      | 271 ++++++++++++++++++++++++
->  target/riscv/insn_trans/trans_rva.c.inc |   3 +
->  target/riscv/insn_trans/trans_rvd.c.inc |   2 +
->  target/riscv/insn_trans/trans_rvf.c.inc |   2 +
->  target/riscv/insn_trans/trans_rvi.c.inc |   2 +
->  target/riscv/translate.c                |  44 ++++
->  9 files changed, 453 insertions(+)
+> I don't think you should be a maintainer just yet. In general people
+> have to be actively reviewing patches to be listed as a maintainer.
+
+Cool, I'm glad to not be listed. checkpatch.pl suggested that I might
+need to add something here, so I went ahead and included it in case it
+was necessary. (I probably should do some patch review though; SiFive is
+rather dependent on QEMU continuing to be a great RISC-V emulator)
+
+>> +#include "exec/cpu-all.h"
 >
-> --
-> 2.20.1
+> This isn't used in the header so it shouldn't be here.
+
+Worse than that -- it's already included in this file. I suspect
+this is left over from a previous version and have removed it.
+
+>> +#define RISCV_EXCP_SEMIHOST                      0x10
 >
+> I don't see this in the RISC-V spec, it seems to just be reserved, not
+> for semihosting.
+
+Hrm. It's entirely an internal implementation detail in QEMU and matches
+how semihosting works in the ARM implementation -- the presence of the
+semihosting breakpoint raises this exception which is then handled in
+the usual exception processing path.
+
+If there is ever a real exception that uses this number, we can
+re-define this to something else. Or if you have a favorite number you'd
+like to use instead, that'd be great.
+
+>> + *  ARM Semihosting is documented in:
+>> + *     Semihosting for AArch32 and AArch64 Release 2.0
+>> + *     https://static.docs.arm.com/100863/0200/semihosting.pdf
 >
+> Maybe just point to the RISC-V doc instead.
+
+Good suggestion. Fixed.
+
+> Could we split all of the shared code out somewhere?
+
+Yes, that seems like a reasonable suggestion. I haven't done so because
+that brings a lot of additional obligations on the patch to not impact
+the ARM implementation, and means that future changes to either the
+RISC-V or ARM specifications would need to be careful to not impact the
+other architecture as the code is modified.
+
+Benjamin Herrenschmidt started a thread back in January about creating a
+common semihosting implementation to be shared across ARM, RISC-V and
+PPC. I'm not sure he ever published the resulting code, but we can
+probably get whatever he's done and see if we want to go that way. I
+suspect the biggest impact will be to the ARM maintainers who will end
+up on the hook for reviewing the code to make sure it doesn't break
+anything for them.
+
+I can expand the semihost testing which picolibc currently performs
+under QEMU on ARM, AARCH64 and RISC-V; that might help catch regressions
+caused by this rework.
+
+>> --- a/target/riscv/translate.c
+>> +++ b/target/riscv/translate.c
+>> @@ -63,6 +63,7 @@ typedef struct DisasContext {
+>>      uint16_t vlen;
+>>      uint16_t mlen;
+>>      bool vl_eq_vlmax;
+>> +    CPUState *cs;
+>
+> I'm not sure we should do this.
+
+Yeah, the RISC-V semihosting requirement that three instructions be
+compared to determine a valid 'sequence' is the least pleasing part of
+the specification. This is the second version of this particular piece
+of code.
+
+We also changed the semihosting specification to require that all three
+instructions lie on the same page to make sure they are all available if
+any are available. In the application implementation, all that was
+required to meet that was to put the sequence in a function and align
+that to a 16-byte boundary as the function consists of four 32-bit
+instructions:
+
+        .global sys_semihost
+        .balign 16
+        .option push
+        .option norvc
+sys_semihost:
+        slli zero, zero, 0x1f
+        ebreak
+        srai zero, zero, 0x7
+        ret
+        .option pop
+
+>> +static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+>> +{
+>> +    DisasContext *ctx =3D container_of(dcbase, DisasContext, base);
+>> +    CPUState *cpu =3D ctx->cs;
+>> +    CPURISCVState *env =3D cpu->env_ptr;
+>> +
+>> +    return cpu_ldl_code(env, pc);
+>
+> @Richard Henderson is this ok?
+
+Let me know if you've got a better plan, or even some suggestions on how
+it might be improved as it seems like it a layering violation to me.
+
+=2D-=20
+=2Dkeith
+
+--=-=-=
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAl+TwhAACgkQ2yIaaQAA
+ABGtMxAAsjM1k3GaDnygFOl+zUcS3wyJaCxdJJeroTzqE00IQhs54yKVStspzKyD
+30smcWbb4KO9vSIEATCKfYV1vyJaas0vXnYYcrI77Eqki9YZrKG4nzQmLe8JWcyJ
+/28a8jq+ZZt3LUIDoL66byZ38bwWeySb2CEqMZ2ToHvqBdnTYl1bCiP3mNsfvflQ
+owA5W9EbTglV7kpvyC1DMANRMI/mOZDqW47eQXwCCf00z7sarfelt1Pw/+Vg0rpi
+NeUp6p4VdxWy6KaW/tcBG1dux2jwt9al40udyxv/pgbSJp71AsbfjbOb1TAJnsKY
+RKn83FeeGNtSik/TDWc/tdv9Lug8wPLQVn9y4GSABU2rcfc0pIBbewiwKCqz2KMT
+7LmqFIccVMFI46ZWdAxkXw4k1DQwNC9Ojpd43eRORo0n5MLDEbPN5099/yoCFWcS
+B+u/HIQg8U7kxw+v36OBnd1/+6Zg4PiCh+ZV/6IWkxTeFVCej7Nl/W13Yju5F4Ky
+/2g5I14HTvUkiyJziQf9GvnwDa4R9wSaZk5/eZCM1sAxOAepkISc9/ZAKPkLhd3y
+4NZ5lffhBfjg4aDbLzCRWQOY46viynttAT7MVVDj/+Ojzu5/OVbPeseGIEszIukf
+fHjpL5zJf/GwWnvIxRLc/ywY/eVfYmIADJ5QG0BKC5yXrEXwSWo=
+=uX4S
+-----END PGP SIGNATURE-----
+--=-=-=--
 
