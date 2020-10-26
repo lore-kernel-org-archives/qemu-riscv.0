@@ -1,46 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kX16a-0000qp-RT
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Oct 2020 07:56:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38864)
+	id 1kX4Lk-0007BI-NC
+	for mharc-qemu-riscv@gnu.org; Mon, 26 Oct 2020 11:23:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38898)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kX16V-0000cj-Gi; Mon, 26 Oct 2020 07:55:59 -0400
-Received: from szxga04-in.huawei.com ([45.249.212.190]:2300)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kX16P-0000hd-JO; Mon, 26 Oct 2020 07:55:59 -0400
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CKYFJ0y2nzkZZh;
- Mon, 26 Oct 2020 19:55:48 +0800 (CST)
-Received: from huawei.com (10.174.186.209) by DGGEMS402-HUB.china.huawei.com
- (10.3.19.202) with Microsoft SMTP Server id 14.3.487.0; Mon, 26 Oct 2020
- 19:55:33 +0800
-From: Yifei Jiang <jiangyifei@huawei.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
- <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
- <richard.henderson@linaro.org>, <victor.zhangxiaofeng@huawei.com>,
- <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
- <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
- <jiangyifei@huawei.com>
-Subject: [PATCH V4 0/6] Support RISC-V migration
-Date: Mon, 26 Oct 2020 19:55:24 +0800
-Message-ID: <20201026115530.304-1-jiangyifei@huawei.com>
-X-Mailer: git-send-email 2.26.2.windows.1
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kX4Lj-0007B3-S3; Mon, 26 Oct 2020 11:23:55 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:44840)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kX4Li-0007SB-0A; Mon, 26 Oct 2020 11:23:55 -0400
+Received: by mail-io1-xd42.google.com with SMTP id z17so10469817iog.11;
+ Mon, 26 Oct 2020 08:23:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=byLw1xQybCC0iKjKZLnDibY6WpaHJtmccGbhtFBNZDg=;
+ b=PYwAbau/D1VbLcV92e6todQ+7VQuCFDq5MVhySuvax42JIz+mOLS2LTut/L6CL8286
+ Trahv/ZEqrvOE/giqv87i0IpTflvp3G0cbXp8SxTDVXY7NhzZaQhsqlGDu6DZ6iBvu+q
+ HTweC21Y5tPgQnJrVooRdSZdBuWM5v9gZaiweSNbsBEGeO26I1noyFXAReBcU1L3AlAy
+ NcSPB0SUUJEcASkvPifShWAUowR6z/KvIrgOvnyKtjfdYLs1VlMx9FUmxNVTLV6dqH1r
+ Ezl8DYnp2r4/euBOP1g7bdl5+1Rci3JbbAEexgSRRRqGZyOM9njQpDeUcXvMz3qUHNg8
+ H39A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=byLw1xQybCC0iKjKZLnDibY6WpaHJtmccGbhtFBNZDg=;
+ b=NzVOM8BmrvN/zf2Stalvp4FjvurH3/g0f2kdLARbT2KEe7ZpMrBpyiyHlhoHn/GMrT
+ bPN9NqDpRz2E68GsxrgX2watGmxy7s27gPMdfvW1mwy6RnxmL3ligHUjatS9uaNgiyRL
+ hLOL6hIxsijRH4UGn5xxMQYow2NQM5bakYOYBUn1CQ+F5C9wQqj3cLc2nqhpngzmreGf
+ ElaDj9uICM0fCDbzEgLIDm6GQ2J7fvcAw/IDVPwCSqsrxWacl/FtjZnKviuC17hAm1w9
+ qdrwbDvmk25pMV9WOgd8njEmMHI50RrBuKkXM1ZHxHExjjpdaIg1HzA6fKy8mN1GFekh
+ SpBA==
+X-Gm-Message-State: AOAM5320MBykSqTFMe4eGSgvI4e5D9bq7eBWDZol4bDfQED/gPGAZJMG
+ LN4awVGXahDGnOgPI0ksZkCKV9rkBEXjj/P46KvVR2Nz8EQ=
+X-Google-Smtp-Source: ABdhPJyr/Ldb/rhuj3/uUv8HNYLWoxKe2wilDn0aMmEzZjknMTk6J0SQMbpzQzCZjg3JUY9/ju7EN/s11nDa19wf12o=
+X-Received: by 2002:a05:6602:2ac3:: with SMTP id
+ m3mr11105537iov.105.1603725831888; 
+ Mon, 26 Oct 2020 08:23:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain
-X-Originating-IP: [10.174.186.209]
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.190;
- envelope-from=jiangyifei@huawei.com; helo=szxga04-in.huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/26 07:55:44
-X-ACL-Warn: Detected OS   = Linux 3.1-3.10 [fuzzy]
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+References: <cover.1603467169.git.alistair.francis@wdc.com>
+ <7ce5ff70057b2fad2d455887d048c419a7e42746.1603467169.git.alistair.francis@wdc.com>
+ <CAEUhbmXVDj0AJ9-0WC3G_Gk4jA6B78hQoFz6KX0SGdCPPCsVTQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmXVDj0AJ9-0WC3G_Gk4jA6B78hQoFz6KX0SGdCPPCsVTQ@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 26 Oct 2020 08:12:04 -0700
+Message-ID: <CAKmqyKOVzrJZMdNUMqtiohQG8ihKkGDW-cCEnEE-GmOQToG1Qg@mail.gmail.com>
+Subject: Re: [PATCH v1 07/16] hw/riscv: sifive_u: Remove compile time XLEN
+ checks
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -54,57 +77,153 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2020 11:56:00 -0000
+X-List-Received-Date: Mon, 26 Oct 2020 15:23:56 -0000
 
-This patches supported RISC-V migration based on tcg accel. And we have
-verified related migration features such as snapshot and live migration.
+On Mon, Oct 26, 2020 at 1:56 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Fri, Oct 23, 2020 at 11:44 PM Alistair Francis
+> <alistair.francis@wdc.com> wrote:
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  hw/riscv/sifive_u.c | 57 ++++++++++++++++++++++++---------------------
+> >  1 file changed, 31 insertions(+), 26 deletions(-)
+> >
+> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> > index 978cfedd24..3bc32c9225 100644
+> > --- a/hw/riscv/sifive_u.c
+> > +++ b/hw/riscv/sifive_u.c
+> > @@ -60,12 +60,6 @@
+> >
+> >  #include <libfdt.h>
+> >
+> > -#if defined(TARGET_RISCV32)
+> > -# define BIOS_FILENAME "opensbi-riscv32-generic-fw_dynamic.bin"
+> > -#else
+> > -# define BIOS_FILENAME "opensbi-riscv64-generic-fw_dynamic.bin"
+> > -#endif
+> > -
+> >  static const struct MemmapEntry {
+> >      hwaddr base;
+> >      hwaddr size;
+> > @@ -93,7 +87,7 @@ static const struct MemmapEntry {
+> >  #define GEM_REVISION        0x10070109
+> >
+> >  static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+> > -    uint64_t mem_size, const char *cmdline)
+> > +                       uint64_t mem_size, const char *cmdline, bool is_32_bit)
+> >  {
+> >      MachineState *ms = MACHINE(qdev_get_machine());
+> >      void *fdt;
+> > @@ -167,11 +161,11 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+> >          qemu_fdt_add_subnode(fdt, nodename);
+> >          /* cpu 0 is the management hart that does not have mmu */
+> >          if (cpu != 0) {
+> > -#if defined(TARGET_RISCV32)
+> > -            qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
+> > -#else
+> > -            qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
+> > -#endif
+> > +            if (is_32_bit) {
+> > +                qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
+> > +            } else {
+> > +                qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
+> > +            }
+> >              isa = riscv_isa_string(&s->soc.u_cpus.harts[cpu - 1]);
+> >          } else {
+> >              isa = riscv_isa_string(&s->soc.e_cpus.harts[0]);
+> > @@ -414,7 +408,7 @@ static void sifive_u_machine_init(MachineState *machine)
+> >      MemoryRegion *system_memory = get_system_memory();
+> >      MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+> >      MemoryRegion *flash0 = g_new(MemoryRegion, 1);
+> > -    target_ulong start_addr = memmap[SIFIVE_U_DEV_DRAM].base;
+> > +    uint64_t start_addr = memmap[SIFIVE_U_DEV_DRAM].base;
+>
+> Why is this change necessary? If yes, should we do the same change to virt.c?
 
-A few weeks ago, we submitted RFC patches about supporting RISC-V migration
-based on kvm accel: https://www.spinics.net/lists/kvm/msg223605.html.
-And we found that tcg accelerated migration can be supported with a few
-changes. Most of the devices have already implemented the migration
-interface, so, to achieve the tcg accelerated migration, we just need to
-add vmstate of both cpu and sifive_plic.
+Good catch, this isn't required.
 
-changes since v3
-1. Apply Alistair's patch to exend get/set_field():
-   https://www.mail-archive.com/qemu-devel@nongnu.org/msg753575.html
-2. Remake the patch: Merge m/vsstatus and m/vsstatush into one uint64_t
-   unit.
+I have removed this diff.
 
-Changes since v2:
-1. Move vmstate_riscv_cpu declaration to internals.h.
-2. Merge m/vsstatus and m/vsstatush into one uint64_t unit.
+Alistair
 
-Changes since v1:
-1. Add license head to target/riscv/machine.c.
-2. Regenerate some state of PMP at post_load hook.
-
-Yifei Jiang (6):
-  target/riscv: Merge m/vsstatus and m/vsstatush into one uint64_t unit
-  target/riscv: Add basic vmstate description of CPU
-  target/riscv: Add PMP state description
-  target/riscv: Add H extension state description
-  target/riscv: Add V extension state description
-  target/riscv: Add sifive_plic vmstate
-
- hw/intc/sifive_plic.c     |  26 ++++-
- hw/intc/sifive_plic.h     |   1 +
- target/riscv/cpu.c        |  16 ++--
- target/riscv/cpu.h        |  24 +++--
- target/riscv/cpu_bits.h   |  19 +---
- target/riscv/cpu_helper.c |  35 ++-----
- target/riscv/csr.c        |  18 ++--
- target/riscv/internals.h  |   4 +
- target/riscv/machine.c    | 196 ++++++++++++++++++++++++++++++++++++++
- target/riscv/meson.build  |   3 +-
- target/riscv/op_helper.c  |  11 +--
- target/riscv/pmp.c        |  29 +++---
- target/riscv/pmp.h        |   2 +
- 13 files changed, 290 insertions(+), 94 deletions(-)
- create mode 100644 target/riscv/machine.c
-
--- 
-2.19.1
-
+>
+> >      target_ulong firmware_end_addr, kernel_start_addr;
+> >      uint32_t start_addr_hi32 = 0x00000000;
+> >      int i;
+> > @@ -446,7 +440,8 @@ static void sifive_u_machine_init(MachineState *machine)
+> >                            qemu_allocate_irq(sifive_u_machine_reset, NULL, 0));
+> >
+> >      /* create device tree */
+> > -    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
+> > +    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
+> > +               riscv_is_32_bit(machine));
+> >
+> >      if (s->start_in_flash) {
+> >          /*
+> > @@ -475,8 +470,15 @@ static void sifive_u_machine_init(MachineState *machine)
+> >          break;
+> >      }
+> >
+> > -    firmware_end_addr = riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> > -                                                     start_addr, NULL);
+> > +    if (riscv_is_32_bit(machine)) {
+> > +        firmware_end_addr = riscv_find_and_load_firmware(machine,
+> > +                                    "opensbi-riscv32-generic-fw_dynamic.bin",
+> > +                                    start_addr, NULL);
+> > +    } else {
+> > +        firmware_end_addr = riscv_find_and_load_firmware(machine,
+> > +                                    "opensbi-riscv64-generic-fw_dynamic.bin",
+> > +                                    start_addr, NULL);
+> > +    }
+> >
+> >      if (machine->kernel_filename) {
+> >          kernel_start_addr = riscv_calc_kernel_start_addr(machine,
+> > @@ -506,9 +508,9 @@ static void sifive_u_machine_init(MachineState *machine)
+> >      /* Compute the fdt load address in dram */
+> >      fdt_load_addr = riscv_load_fdt(memmap[SIFIVE_U_DEV_DRAM].base,
+> >                                     machine->ram_size, s->fdt);
+> > -    #if defined(TARGET_RISCV64)
+> > -    start_addr_hi32 = start_addr >> 32;
+> > -    #endif
+> > +    if (!riscv_is_32_bit(machine)) {
+> > +        start_addr_hi32 = start_addr >> 32;
+> > +    }
+> >
+> >      /* reset vector */
+> >      uint32_t reset_vec[11] = {
+> > @@ -516,13 +518,8 @@ static void sifive_u_machine_init(MachineState *machine)
+> >          0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
+> >          0x02828613,                    /*     addi   a2, t0, %pcrel_lo(1b) */
+> >          0xf1402573,                    /*     csrr   a0, mhartid  */
+> > -#if defined(TARGET_RISCV32)
+> > -        0x0202a583,                    /*     lw     a1, 32(t0) */
+> > -        0x0182a283,                    /*     lw     t0, 24(t0) */
+> > -#elif defined(TARGET_RISCV64)
+> > -        0x0202b583,                    /*     ld     a1, 32(t0) */
+> > -        0x0182b283,                    /*     ld     t0, 24(t0) */
+> > -#endif
+> > +        0,
+> > +        0,
+> >          0x00028067,                    /*     jr     t0 */
+> >          start_addr,                    /* start: .dword */
+> >          start_addr_hi32,
+> > @@ -530,6 +527,14 @@ static void sifive_u_machine_init(MachineState *machine)
+> >          0x00000000,
+> >                                         /* fw_dyn: */
+> >      };
+> > +    if (riscv_is_32_bit(machine)) {
+> > +        reset_vec[4] = 0x0202a583;     /*     lw     a1, 32(t0) */
+> > +        reset_vec[5] = 0x0182a283;     /*     lw     t0, 24(t0) */
+> > +    } else {
+> > +        reset_vec[4] = 0x0202b583;     /*     ld     a1, 32(t0) */
+> > +        reset_vec[5] = 0x0182b283;     /*     ld     t0, 24(t0) */
+> > +    }
+> > +
+> >
+> >      /* copy in the reset vector in little_endian byte order */
+> >      for (i = 0; i < ARRAY_SIZE(reset_vec); i++) {
+>
+> Regards,
+> Bin
 
