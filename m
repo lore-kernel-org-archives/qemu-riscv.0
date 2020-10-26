@@ -1,58 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kWyJ1-0002VL-8B
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Oct 2020 04:56:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50624)
+	id 1kWyJ2-0002Z7-KN
+	for mharc-qemu-riscv@gnu.org; Mon, 26 Oct 2020 04:56:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50596)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kWyIy-0002R6-A8; Mon, 26 Oct 2020 04:56:40 -0400
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:44687)
+ id 1kWyIu-0002On-BW; Mon, 26 Oct 2020 04:56:37 -0400
+Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:39062)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kWyIv-0005qF-V5; Mon, 26 Oct 2020 04:56:40 -0400
-Received: by mail-yb1-xb43.google.com with SMTP id h6so6978445ybi.11;
- Mon, 26 Oct 2020 01:56:35 -0700 (PDT)
+ id 1kWyIq-0005p5-ER; Mon, 26 Oct 2020 04:56:36 -0400
+Received: by mail-yb1-xb41.google.com with SMTP id 67so7004184ybt.6;
+ Mon, 26 Oct 2020 01:56:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=mvExcYMn6d5AGLYRzy6Xnbw5G+UujgsZbLBTIOKD6Jw=;
- b=dj4Domk9P2sgp31yeKXgqC8qGFsfUzjrgTyK/PZQ2AmXXywXeHr8dUfUohANUTOeeM
- XTkOlIWYXGrCIOF00VdGgaLL9HfHHutKKdMpvQAf98uiN204WB5SLJecsAXPUQJjGvZV
- SdSwlKIC5rvL76SvbcNoKkLx4dBRPqbKwsXFil8V+KXo06gJYBAnodYkuIcr/U9lYEff
- mR4HrB/3Atsb+2Y34GX5lsIlo+Qa/MGLBtBEOP57S3Ysc8hkqd/0bV1g7AjNpWjM0Mfb
- QzIuVyNLv2WRgprYjWXSA8YfGYjpl4dAHcm6Ch72zmRHmiRA7xihU9Mqfc2qvnPBHOzr
- wrPQ==
+ :cc; bh=eExcM98DT1qtbKtYttuIhUJRd0xDON2inxmRL9zaqp0=;
+ b=pZfhRMZ+164AeohYd+6grqG+H1kupdsoS7chrJsNIIij/n6nqUm+OX2qVxH6p/IOO/
+ sh3mSp41S8pB3KWULm7tehg21/EauO8OhiXsqj1eFDuih+SuzILb3XY5LSnJUNfma2CE
+ XFu5AUfzXB6kKTQeEcBVNuxVcuesnqNxqAxrPXgXfaR3zmjvIgaYwpk5Pi5YW7QCrW3V
+ Ucxkld8l5TBDaUBVipOcAihW96I4HbH1ljpWThXYad1HlwVzOczM97pLzkBPKomAVFdz
+ Br5XwtE5/1iRRmE3SsxJh8887w8XZlWiQ0Qej5MCAp0iLaVeYWaY5ZxT8VvAQL1TiI4/
+ s5Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=mvExcYMn6d5AGLYRzy6Xnbw5G+UujgsZbLBTIOKD6Jw=;
- b=tlrXu7uPyu5e3zdCA9AYyfDvuuoufJA5qqb7AYpV39CnKMkUn0pDjTzv41iwTWPeYF
- npOripXBQuOCYQLfCBPAWjLUq9ETyyyIznFhjMOPL4QAAofHYvigvqp0k6Yn3i8CltGS
- Er+V5bqBvY1S0OOGsNBubORoXP9/lnnYRxh8tZAZpcmtKgMI49BPpqzH3YtGOQIS3CeL
- ddzrDiCQW+QaI37XcvtQp9SAvinjtH3N8yiSWJpBhxXtExWGqIw/9u58dCHlhnvNDmFr
- uaAaFNQ6eo6f+otPjvfK5Xrm9IC6a1hbtkrlikw0RPMqEKh6Ns5N7RyazNLjSwKcBNIw
- v9UA==
-X-Gm-Message-State: AOAM530SlLUx4YYJIgC9vy7405JxszhDwT4pWSj+jlQrgSovlZ7RU/vb
- uPOtNPigYktqfcRHJGediE803tsjlAbosYo1tpcATA4g
-X-Google-Smtp-Source: ABdhPJxcLFwgUXhgqiDRi1m+3PvB7WQHDcNBinNfpnJ014LSQ1LhCSv5Rdkq9gmdcngYhI3jKUdzgeMjP3s1QiGogso=
-X-Received: by 2002:a25:328a:: with SMTP id
- y132mr18123435yby.306.1603702595338; 
- Mon, 26 Oct 2020 01:56:35 -0700 (PDT)
+ bh=eExcM98DT1qtbKtYttuIhUJRd0xDON2inxmRL9zaqp0=;
+ b=XHZ2Q9YTtQ5LlrP1t0Q6orm3WZ47JAHM+stq2Cyx61Zd2Pod3ECwst9vyQBtfTTDxn
+ 9rDUaWE7ZsnNg+hsgkcPZeeHJ2xLOe7qwDB8B5yQZTQEeoqfeoNgGju+oCEUp0ES8+Eq
+ 61MXdLBnYHRmchs69MDoZ887JXK7Z1v8SS3xEwz3yvf1p9Mv6ZNHmRGWFZI/9Y4XFJ28
+ uM4QA0b3ImceIdV3vM7Mv8/OTgQ4VtnTNvEX1u9BEpyjVMc4MKIY6Z+yUZekvbywSItk
+ 7gfEdLpYzRZ/YdVIRbxpkokC7D4pGJ24+BjY0muiG/2lYW1e/soNEMtsgwsiMSl21mxJ
+ FoFg==
+X-Gm-Message-State: AOAM533qCQcfcILmJfW0+JE0XsjLU4tvR+8c7+pi8HiopMUa1NDzWwu8
+ ePhittpF96jfm6opbPu1zrJ+/jPE/xTeUoocTes=
+X-Google-Smtp-Source: ABdhPJy2c2hZ2Twpw6rsDiiwDtt32laRd/+RoaHftR9HvhR27SkjtH/8hc7HFopKyH6WlNjS+NtQN/auf4VpdnO0FuI=
+X-Received: by 2002:a25:4113:: with SMTP id o19mr18733027yba.314.1603702589563; 
+ Mon, 26 Oct 2020 01:56:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1603467169.git.alistair.francis@wdc.com>
- <0316e1e7b7d81d1e6265fc125983a1e2872c0fe1.1603467169.git.alistair.francis@wdc.com>
-In-Reply-To: <0316e1e7b7d81d1e6265fc125983a1e2872c0fe1.1603467169.git.alistair.francis@wdc.com>
+ <6b17e9aff7bd6823574a94dc0d615117ce6edef6.1603467169.git.alistair.francis@wdc.com>
+In-Reply-To: <6b17e9aff7bd6823574a94dc0d615117ce6edef6.1603467169.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 26 Oct 2020 16:56:24 +0800
-Message-ID: <CAEUhbmVaAsj6w=q3+ry5Y3OaLbfV53Eq4Vw786wVnqd5K=f2Mw@mail.gmail.com>
-Subject: Re: [PATCH v1 14/16] target/riscv: cpu: Set XLEN independently from
- target
+Date: Mon, 26 Oct 2020 16:56:18 +0800
+Message-ID: <CAEUhbmVtYUro2QBKKhDkQNF3go7HjNr-QBj0=msvG9_hhhHYgg@mail.gmail.com>
+Subject: Re: [PATCH v1 12/16] target/riscv: cpu_helper: Remove compile time
+ XLEN checks
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -74,17 +73,139 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2020 08:56:42 -0000
+X-List-Received-Date: Mon, 26 Oct 2020 08:56:40 -0000
 
 On Fri, Oct 23, 2020 at 11:45 PM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.c | 25 ++++++++++++++++---------
->  1 file changed, 16 insertions(+), 9 deletions(-)
+>  target/riscv/cpu.h        |  6 ++---
+>  target/riscv/cpu_helper.c | 52 ++++++++++++++++++++-------------------
+>  2 files changed, 29 insertions(+), 29 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 6096243aed..8bde15544d 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -194,9 +194,8 @@ struct CPURISCVState {
+>      target_ulong vscause;
+>      target_ulong vstval;
+>      target_ulong vsatp;
+> -#ifdef TARGET_RISCV32
+> +    /* This is RV32 only */
+>      target_ulong vsstatush;
+
+nits: could we move the definition to the line just below where
+vsstatus is defined in this structure, like other similar *h members?
+
+> -#endif
+>
+>      target_ulong mtval2;
+>      target_ulong mtinst;
+> @@ -209,9 +208,8 @@ struct CPURISCVState {
+>      target_ulong stval_hs;
+>      target_ulong satp_hs;
+>      target_ulong mstatus_hs;
+> -#ifdef TARGET_RISCV32
+> +    /* This is RV32 only */
+>      target_ulong mstatush_hs;
+> -#endif
+>
+>      target_ulong scounteren;
+>      target_ulong mcounteren;
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 4652082df1..62aed24feb 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -126,10 +126,10 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
+>          env->mstatus &= ~mstatus_mask;
+>          env->mstatus |= env->mstatus_hs;
+>
+> -#if defined(TARGET_RISCV32)
+> -        env->vsstatush = env->mstatush;
+> -        env->mstatush |= env->mstatush_hs;
+> -#endif
+> +        if (riscv_cpu_is_32bit(env)) {
+> +            env->vsstatush = env->mstatush;
+> +            env->mstatush |= env->mstatush_hs;
+> +        }
+>
+>          env->vstvec = env->stvec;
+>          env->stvec = env->stvec_hs;
+> @@ -154,10 +154,10 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
+>          env->mstatus &= ~mstatus_mask;
+>          env->mstatus |= env->vsstatus;
+>
+> -#if defined(TARGET_RISCV32)
+> -        env->mstatush_hs = env->mstatush;
+> -        env->mstatush |= env->vsstatush;
+> -#endif
+> +        if (riscv_cpu_is_32bit(env)) {
+> +            env->mstatush_hs = env->mstatush;
+> +            env->mstatush |= env->vsstatush;
+> +        }
+>
+>          env->stvec_hs = env->stvec;
+>          env->stvec = env->vstvec;
+> @@ -472,11 +472,13 @@ restart:
+>              return TRANSLATE_PMP_FAIL;
+>          }
+>
+> -#if defined(TARGET_RISCV32)
+> -        target_ulong pte = address_space_ldl(cs->as, pte_addr, attrs, &res);
+> -#elif defined(TARGET_RISCV64)
+> -        target_ulong pte = address_space_ldq(cs->as, pte_addr, attrs, &res);
+> -#endif
+> +        target_ulong pte;
+> +        if (riscv_cpu_is_32bit(env)) {
+> +            pte = address_space_ldl(cs->as, pte_addr, attrs, &res);
+> +        } else {
+> +            pte = address_space_ldq(cs->as, pte_addr, attrs, &res);
+> +        }
+> +
+>          if (res != MEMTX_OK) {
+>              return TRANSLATE_FAIL;
+>          }
+> @@ -995,19 +997,19 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>              if (riscv_cpu_virt_enabled(env)) {
+>                  riscv_cpu_swap_hypervisor_regs(env);
+>              }
+> -#ifdef TARGET_RISCV32
+> -            env->mstatush = set_field(env->mstatush, MSTATUS_MPV,
+> -                                       riscv_cpu_virt_enabled(env));
+> -            if (riscv_cpu_virt_enabled(env) && tval) {
+> -                env->mstatush = set_field(env->mstatush, MSTATUS_GVA, 1);
+> -            }
+> -#else
+> -            env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
+> -                                      riscv_cpu_virt_enabled(env));
+> -            if (riscv_cpu_virt_enabled(env) && tval) {
+> -                env->mstatus = set_field(env->mstatus, MSTATUS_GVA, 1);
+> +            if (riscv_cpu_is_32bit(env)) {
+> +                env->mstatush = set_field(env->mstatush, MSTATUS_MPV,
+> +                                           riscv_cpu_virt_enabled(env));
+
+nits: looks the alignment is not on the left parenthesis
+
+> +                if (riscv_cpu_virt_enabled(env) && tval) {
+> +                    env->mstatush = set_field(env->mstatush, MSTATUS_GVA, 1);
+> +                }
+> +            } else {
+> +                env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
+> +                                          riscv_cpu_virt_enabled(env));
+
+ditto
+
+> +                if (riscv_cpu_virt_enabled(env) && tval) {
+> +                    env->mstatus = set_field(env->mstatus, MSTATUS_GVA, 1);
+> +                }
+>              }
+> -#endif
+>
+>              mtval2 = env->guest_phys_fault_addr;
 >
 
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
-Tested-by: Bin Meng <bin.meng@windriver.com>
+Regards,
+Bin
 
