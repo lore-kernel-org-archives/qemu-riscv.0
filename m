@@ -1,64 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kWyJ3-0002cF-OW
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Oct 2020 04:56:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50656)
+	id 1kX16U-0000ai-QR
+	for mharc-qemu-riscv@gnu.org; Mon, 26 Oct 2020 07:55:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38802)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kWyJ2-0002Xu-7K; Mon, 26 Oct 2020 04:56:44 -0400
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:39065)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kWyIy-0005qp-De; Mon, 26 Oct 2020 04:56:43 -0400
-Received: by mail-yb1-xb43.google.com with SMTP id 67so7004496ybt.6;
- Mon, 26 Oct 2020 01:56:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=6q5bc2kz6AL0MJMl1NwUl97vIeJkfZOGOm7yR8gkkHw=;
- b=ARIsSqhj+ak7I+txH4k0JdWnV+YBva9KFV7L1bdRWz0HofSaHFGuNAq5+LQgquA6EM
- l+XjzN9hM0d++FSqbZUoOdAyIPezAV/fXcQwGCyyrGzGeN4I/HTdKcnG75AJFAXS3UGf
- h7bnFf38vSJbVryP1323ZflvDH20RpI/heZkouRmS5klIfnuXO7La4B+4Xd3enOESOBj
- tiNXB+HFJJOoH48scNsaDelrJPMubwG51TzIBUwrNv4BllE6ZPkcc7ViE2zb3bg9IIK+
- umI4Aueb/PJOf//3SPfBXHufqiEZPD+fJ5WGBaOqHxbRfCR67doNt6XUxVZipbwXyePb
- rhng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=6q5bc2kz6AL0MJMl1NwUl97vIeJkfZOGOm7yR8gkkHw=;
- b=CCQ11s6N3HQSS4agDMYJVrrtR+pRBLsbuDZ76mJskigBTz6j4rYxZd199F0s5x2ep8
- IhhkpmcJZZQOZhShksJKpVMKnpxzkjC92Tq/gUQrF9Rjw6WXVnISCY71hYnpXiEqrb+b
- 0FU2dHPx/ly6o5aCwoTfczloV3BdDI5v7OW6gepsvZaLk4LLRzF+Z1mdi1/fh+123pw2
- lxYFsiIBlw8RTssJ5W0oXzNbheqwmYh6b46p1r7MbpgHoQIFX9pZA6Ptcx5c+6gW84Ly
- tqUZfkIm3kE6ENVaMnYri6H1tpqAs9zdY66criHZ+mGvuPfW8a4OdEGCAf6o44XxzJlU
- sN9Q==
-X-Gm-Message-State: AOAM531DlCTj+NwUCjT/T933hCn1v3fYYFtE8d+4njjVS+N4x/je+KcT
- gDGU05dpe2pE6S2gidDY6OubzaPkJ5SA0FUTG4Q=
-X-Google-Smtp-Source: ABdhPJzHJKdlWRyu1T6PQIr6ho3iqkyr9mLbmA4+cAAPrxCnjIwkyN8Is0l+1bF8JatLVIbdsUGdS9tGzxjUzr3k6n4=
-X-Received: by 2002:a25:520a:: with SMTP id g10mr18954464ybb.152.1603702598087; 
- Mon, 26 Oct 2020 01:56:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kX16S-0000Z1-5g; Mon, 26 Oct 2020 07:55:56 -0400
+Received: from szxga04-in.huawei.com ([45.249.212.190]:2360)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kX16O-0000hq-Qk; Mon, 26 Oct 2020 07:55:55 -0400
+Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CKYFP0Xrfz15MVn;
+ Mon, 26 Oct 2020 19:55:53 +0800 (CST)
+Received: from huawei.com (10.174.186.209) by DGGEMS402-HUB.china.huawei.com
+ (10.3.19.202) with Microsoft SMTP Server id 14.3.487.0; Mon, 26 Oct 2020
+ 19:55:38 +0800
+From: Yifei Jiang <jiangyifei@huawei.com>
+To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
+CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
+ <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
+ <richard.henderson@linaro.org>, <victor.zhangxiaofeng@huawei.com>,
+ <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
+ <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
+ <jiangyifei@huawei.com>, Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH V4 3/6] target/riscv: Add PMP state description
+Date: Mon, 26 Oct 2020 19:55:27 +0800
+Message-ID: <20201026115530.304-4-jiangyifei@huawei.com>
+X-Mailer: git-send-email 2.26.2.windows.1
+In-Reply-To: <20201026115530.304-1-jiangyifei@huawei.com>
+References: <20201026115530.304-1-jiangyifei@huawei.com>
 MIME-Version: 1.0
-References: <cover.1603467169.git.alistair.francis@wdc.com>
- <ce9e33fdd36df39878df6657ecdc10e42c629b85.1603467169.git.alistair.francis@wdc.com>
-In-Reply-To: <ce9e33fdd36df39878df6657ecdc10e42c629b85.1603467169.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 26 Oct 2020 16:56:26 +0800
-Message-ID: <CAEUhbmWfzJ-1R5TMLg5p888L6FbxAQ4bMssw0CbwPEc6UH1NSw@mail.gmail.com>
-Subject: Re: [PATCH v1 16/16] target/riscv: Consolidate *statush registers
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.174.186.209]
+X-CFilter-Loop: Reflected
+Received-SPF: pass client-ip=45.249.212.190;
+ envelope-from=jiangyifei@huawei.com; helo=szxga04-in.huawei.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/26 07:55:44
+X-ACL-Warn: Detected OS   = Linux 3.1-3.10 [fuzzy]
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -72,300 +56,162 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2020 08:56:44 -0000
+X-List-Received-Date: Mon, 26 Oct 2020 11:55:56 -0000
 
-On Fri, Oct 23, 2020 at 11:45 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu.h        | 24 ++++++++++++++---------
->  target/riscv/cpu_bits.h   | 14 ++-----------
->  target/riscv/cpu.c        |  7 ++-----
->  target/riscv/cpu_helper.c | 41 ++++++++++-----------------------------
->  target/riscv/csr.c        | 15 ++++++++------
->  target/riscv/op_helper.c  | 11 ++++-------
->  6 files changed, 42 insertions(+), 70 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 8bde15544d..de864a947b 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -150,9 +150,11 @@ struct CPURISCVState {
->      target_ulong resetvec;
->
->      target_ulong mhartid;
-> -    target_ulong mstatus;
-> -    /* This is RV32 only */
-> -    target_ulong mstatush;
-> +    /*
-> +     * For RV32 this is 32-bit mstatus and 32-bit mstatush.
-> +     * For RV64 this is a 64-bit mstatus.
-> +     */
-> +    uint64_t mstatus;
->
->      target_ulong mip;
->
-> @@ -187,15 +189,17 @@ struct CPURISCVState {
->      uint64_t htimedelta;
->
->      /* Virtual CSRs */
-> -    target_ulong vsstatus;
->      target_ulong vstvec;
->      target_ulong vsscratch;
->      target_ulong vsepc;
->      target_ulong vscause;
->      target_ulong vstval;
->      target_ulong vsatp;
-> -    /* This is RV32 only */
-> -    target_ulong vsstatush;
-> +    /*
-> +     * For RV32 this is 32-bit mstatus and 32-bit mstatush.
-> +     * For RV64 this is a 64-bit mstatus.
-> +     */
-> +    uint64_t vsstatus;
->
->      target_ulong mtval2;
->      target_ulong mtinst;
-> @@ -207,9 +211,11 @@ struct CPURISCVState {
->      target_ulong scause_hs;
->      target_ulong stval_hs;
->      target_ulong satp_hs;
-> -    target_ulong mstatus_hs;
-> -    /* This is RV32 only */
-> -    target_ulong mstatush_hs;
-> +    /*
-> +     * For RV32 this is 32-bit mstatus and 32-bit mstatush.
-> +     * For RV64 this is a 64-bit mstatus.
-> +     */
-> +    uint64_t mstatus_hs;
->
->      target_ulong scounteren;
->      target_ulong mcounteren;
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index db46739b1c..4b75d2766e 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -381,19 +381,9 @@
->  #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
->  #define MSTATUS_TW          0x20000000 /* since: priv-1.10 */
->  #define MSTATUS_TSR         0x40000000 /* since: priv-1.10 */
-> -#if defined(TARGET_RISCV64)
-> -#define MSTATUS_GVA         0x4000000000ULL
-> -#define MSTATUS_MPV         0x8000000000ULL
-> -#elif defined(TARGET_RISCV32)
-> -#define MSTATUS_GVA         0x00000040
-> -#define MSTATUS_MPV         0x00000080
-> -#endif
->
-> -#ifdef TARGET_RISCV32
-> -# define MSTATUS_MPV_ISSET(env)  get_field(env->mstatush, MSTATUS_MPV)
-> -#else
-> -# define MSTATUS_MPV_ISSET(env)  get_field(env->mstatus, MSTATUS_MPV)
-> -#endif
-> +#define MSTATUS_GVA      0x4000000000ULL
-> +#define MSTATUS_MPV      0x8000000000ULL
+In the case of supporting PMP feature, add PMP state description
+to vmstate_riscv_cpu.
 
-nits: the indentation level is not aligned to other macros around
+'vmstate_pmp_addr' and 'num_rules' could be regenerated by
+pmp_update_rule(). But there exists the problem of updating
+num_rules repeatedly in pmp_update_rule(). So here extracts
+pmp_update_rule_addr() and pmp_update_rule_nums() to update
+'vmstate_pmp_addr' and 'num_rules' respectively.
 
->
->  #define MSTATUS64_UXL       0x0000000300000000ULL
->  #define MSTATUS64_SXL       0x0000000C00000000ULL
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index c77687ccb2..74c5ac5777 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -245,13 +245,10 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
->      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "pc      ", env->pc);
->  #ifndef CONFIG_USER_ONLY
->      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
-> -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", env->mstatus);
-> -    if (riscv_cpu_is_32bit(env)) {
-> -        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatush ", env->mstatush);
-> -    }
-> +    qemu_fprintf(f, " %s %016lx\n", "mstatus ", env->mstatus);
->      if (riscv_has_ext(env, RVH)) {
->          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hstatus ", env->hstatus);
-> -        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ", env->vsstatus);
-> +        qemu_fprintf(f, " %s %016lx\n", "vsstatus ", env->vsstatus);
->      }
->      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip);
->      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 62aed24feb..b109529ace 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -110,27 +110,19 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
->
->  void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
->  {
-> -    target_ulong mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
-> -                                MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE;
-> +    uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
-> +                            MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE |
-> +                            MSTATUS64_UXL;
->      bool current_virt = riscv_cpu_virt_enabled(env);
->
->      g_assert(riscv_has_ext(env, RVH));
->
-> -#if defined(TARGET_RISCV64)
-> -    mstatus_mask |= MSTATUS64_UXL;
-> -#endif
-> -
->      if (current_virt) {
->          /* Current V=1 and we are about to change to V=0 */
->          env->vsstatus = env->mstatus & mstatus_mask;
->          env->mstatus &= ~mstatus_mask;
->          env->mstatus |= env->mstatus_hs;
->
-> -        if (riscv_cpu_is_32bit(env)) {
-> -            env->vsstatush = env->mstatush;
-> -            env->mstatush |= env->mstatush_hs;
-> -        }
-> -
->          env->vstvec = env->stvec;
->          env->stvec = env->stvec_hs;
->
-> @@ -154,11 +146,6 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
->          env->mstatus &= ~mstatus_mask;
->          env->mstatus |= env->vsstatus;
->
-> -        if (riscv_cpu_is_32bit(env)) {
-> -            env->mstatush_hs = env->mstatush;
-> -            env->mstatush |= env->vsstatush;
-> -        }
-> -
->          env->stvec_hs = env->stvec;
->          env->stvec = env->vstvec;
->
-> @@ -729,7 +716,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->      if (riscv_has_ext(env, RVH) && env->priv == PRV_M &&
->          access_type != MMU_INST_FETCH &&
->          get_field(env->mstatus, MSTATUS_MPRV) &&
-> -        MSTATUS_MPV_ISSET(env)) {
-> +        get_field(env->mstatus, MSTATUS_MPV)) {
->          riscv_cpu_set_two_stage_lookup(env, true);
->      }
->
-> @@ -801,7 +788,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->      if (riscv_has_ext(env, RVH) && env->priv == PRV_M &&
->          access_type != MMU_INST_FETCH &&
->          get_field(env->mstatus, MSTATUS_MPRV) &&
-> -        MSTATUS_MPV_ISSET(env)) {
-> +        get_field(env->mstatus, MSTATUS_MPV)) {
->          riscv_cpu_set_two_stage_lookup(env, false);
->      }
->
-> @@ -864,7 +851,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      CPURISCVState *env = &cpu->env;
->      bool force_hs_execp = riscv_cpu_force_hs_excep_enabled(env);
-> -    target_ulong s;
-> +    uint64_t s;
->
->      /* cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
->       * so we mask off the MSB and separate into trap type and cause.
-> @@ -997,18 +984,10 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->              if (riscv_cpu_virt_enabled(env)) {
->                  riscv_cpu_swap_hypervisor_regs(env);
->              }
-> -            if (riscv_cpu_is_32bit(env)) {
-> -                env->mstatush = set_field(env->mstatush, MSTATUS_MPV,
-> -                                           riscv_cpu_virt_enabled(env));
-> -                if (riscv_cpu_virt_enabled(env) && tval) {
-> -                    env->mstatush = set_field(env->mstatush, MSTATUS_GVA, 1);
-> -                }
-> -            } else {
-> -                env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
-> -                                          riscv_cpu_virt_enabled(env));
-> -                if (riscv_cpu_virt_enabled(env) && tval) {
-> -                    env->mstatus = set_field(env->mstatus, MSTATUS_GVA, 1);
-> -                }
-> +            env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
-> +                                     riscv_cpu_virt_enabled(env));
-> +            if (riscv_cpu_virt_enabled(env) && tval) {
-> +                env->mstatus = set_field(env->mstatus, MSTATUS_GVA, 1);
->              }
->
->              mtval2 = env->guest_phys_fault_addr;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index b153cdfec3..7132a9bcd0 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -473,8 +473,8 @@ static int validate_vm(CPURISCVState *env, target_ulong vm)
->
->  static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
->  {
-> -    target_ulong mstatus = env->mstatus;
-> -    target_ulong mask = 0;
-> +    uint64_t mstatus = env->mstatus;
-> +    uint64_t mask = 0;
->      int dirty;
->
->      /* flush tlb on mstatus fields that affect VM */
-> @@ -507,19 +507,22 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
->
->  static int read_mstatush(CPURISCVState *env, int csrno, target_ulong *val)
->  {
-> -    *val = env->mstatush;
-> +    *val = env->mstatus >> 32;
->      return 0;
->  }
->
->  static int write_mstatush(CPURISCVState *env, int csrno, target_ulong val)
->  {
-> -    if ((val ^ env->mstatush) & (MSTATUS_MPV)) {
-> +    uint64_t val64 = (uint64_t) val << 32;
-> +
-> +    if ((val64 ^ env->mstatus) & (MSTATUS_MPV)) {
->          tlb_flush(env_cpu(env));
->      }
->
-> -    val &= MSTATUS_MPV | MSTATUS_GVA;
-> +    val64 &= MSTATUS_MPV | MSTATUS_GVA;
->
-> -    env->mstatush = val;
-> +    env->mstatus &= 0xFFFFFFFF;
-> +    env->mstatus |= val64;
->
->      return 0;
->  }
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 4ce73575a7..f9361e3af8 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -78,7 +78,8 @@ target_ulong helper_csrrc(CPURISCVState *env, target_ulong src,
->
->  target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
->  {
-> -    target_ulong prev_priv, prev_virt, mstatus;
-> +    target_ulong prev_priv, prev_virt;
-> +    uint64_t mstatus;
->
->      if (!(env->priv >= PRV_S)) {
->          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> @@ -147,18 +148,14 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
->          riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
->      }
->
-> -    target_ulong mstatus = env->mstatus;
-> +    uint64_t mstatus = env->mstatus;
->      target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
-> -    target_ulong prev_virt = MSTATUS_MPV_ISSET(env);
-> +    target_ulong prev_virt = !!get_field(env->mstatus, MSTATUS_MPV);
->      mstatus = set_field(mstatus, MSTATUS_MIE,
->                          get_field(mstatus, MSTATUS_MPIE));
->      mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
->      mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
-> -#ifdef TARGET_RISCV32
-> -    env->mstatush = set_field(env->mstatush, MSTATUS_MPV, 0);
-> -#else
->      mstatus = set_field(mstatus, MSTATUS_MPV, 0);
-> -#endif
->      env->mstatus = mstatus;
->      riscv_cpu_set_mode(env, prev_priv);
->
+Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/machine.c | 50 ++++++++++++++++++++++++++++++++++++++++++
+ target/riscv/pmp.c     | 29 ++++++++++++++----------
+ target/riscv/pmp.h     |  2 ++
+ 3 files changed, 70 insertions(+), 11 deletions(-)
 
-Regards,
-Bin
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 32edbcba7c..fc1461d88e 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -22,6 +22,52 @@
+ #include "sysemu/kvm.h"
+ #include "migration/cpu.h"
+ 
++static bool pmp_needed(void *opaque)
++{
++    RISCVCPU *cpu = opaque;
++    CPURISCVState *env = &cpu->env;
++
++    return riscv_feature(env, RISCV_FEATURE_PMP);
++}
++
++static int pmp_post_load(void *opaque, int version_id)
++{
++    RISCVCPU *cpu = opaque;
++    CPURISCVState *env = &cpu->env;
++    int i;
++
++    for (i = 0; i < MAX_RISCV_PMPS; i++) {
++        pmp_update_rule_addr(env, i);
++    }
++    pmp_update_rule_nums(env);
++
++    return 0;
++}
++
++static const VMStateDescription vmstate_pmp_entry = {
++    .name = "cpu/pmp/entry",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (VMStateField[]) {
++        VMSTATE_UINTTL(addr_reg, pmp_entry_t),
++        VMSTATE_UINT8(cfg_reg, pmp_entry_t),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
++static const VMStateDescription vmstate_pmp = {
++    .name = "cpu/pmp",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .needed = pmp_needed,
++    .post_load = pmp_post_load,
++    .fields = (VMStateField[]) {
++        VMSTATE_STRUCT_ARRAY(env.pmp_state.pmp, RISCVCPU, MAX_RISCV_PMPS,
++                             0, vmstate_pmp_entry, pmp_entry_t),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
+ const VMStateDescription vmstate_riscv_cpu = {
+     .name = "cpu",
+     .version_id = 1,
+@@ -70,5 +116,9 @@ const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_UINT64(env.timecmp, RISCVCPU),
+ 
+         VMSTATE_END_OF_LIST()
++    },
++    .subsections = (const VMStateDescription * []) {
++        &vmstate_pmp,
++        NULL
+     }
+ };
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index c394e867f8..2eda8e1e2f 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -136,18 +136,8 @@ static void pmp_decode_napot(target_ulong a, target_ulong *sa, target_ulong *ea)
+     }
+ }
+ 
+-
+-/* Convert cfg/addr reg values here into simple 'sa' --> start address and 'ea'
+- *   end address values.
+- *   This function is called relatively infrequently whereas the check that
+- *   an address is within a pmp rule is called often, so optimise that one
+- */
+-static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index)
++void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index)
+ {
+-    int i;
+-
+-    env->pmp_state.num_rules = 0;
+-
+     uint8_t this_cfg = env->pmp_state.pmp[pmp_index].cfg_reg;
+     target_ulong this_addr = env->pmp_state.pmp[pmp_index].addr_reg;
+     target_ulong prev_addr = 0u;
+@@ -186,7 +176,13 @@ static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index)
+ 
+     env->pmp_state.addr[pmp_index].sa = sa;
+     env->pmp_state.addr[pmp_index].ea = ea;
++}
+ 
++void pmp_update_rule_nums(CPURISCVState *env)
++{
++    int i;
++
++    env->pmp_state.num_rules = 0;
+     for (i = 0; i < MAX_RISCV_PMPS; i++) {
+         const uint8_t a_field =
+             pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg);
+@@ -196,6 +192,17 @@ static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index)
+     }
+ }
+ 
++/* Convert cfg/addr reg values here into simple 'sa' --> start address and 'ea'
++ *   end address values.
++ *   This function is called relatively infrequently whereas the check that
++ *   an address is within a pmp rule is called often, so optimise that one
++ */
++static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index)
++{
++    pmp_update_rule_addr(env, pmp_index);
++    pmp_update_rule_nums(env);
++}
++
+ static int pmp_is_in_range(CPURISCVState *env, int pmp_index, target_ulong addr)
+ {
+     int result = 0;
+diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+index 6a8f072871..6c6b4c9bef 100644
+--- a/target/riscv/pmp.h
++++ b/target/riscv/pmp.h
+@@ -62,5 +62,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+     target_ulong size, pmp_priv_t priv, target_ulong mode);
+ bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+                          target_ulong *tlb_size);
++void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
++void pmp_update_rule_nums(CPURISCVState *env);
+ 
+ #endif
+-- 
+2.19.1
+
 
