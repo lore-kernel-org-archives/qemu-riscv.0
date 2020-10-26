@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kWyIh-0002IT-NN
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Oct 2020 04:56:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50470)
+	id 1kWyIq-0002NB-Ua
+	for mharc-qemu-riscv@gnu.org; Mon, 26 Oct 2020 04:56:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50524)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kWyIf-0002FL-Vg; Mon, 26 Oct 2020 04:56:22 -0400
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:36673)
+ id 1kWyIk-0002KO-NX; Mon, 26 Oct 2020 04:56:28 -0400
+Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:42871)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kWyIe-0005lK-80; Mon, 26 Oct 2020 04:56:21 -0400
-Received: by mail-yb1-xb43.google.com with SMTP id f140so7015822ybg.3;
- Mon, 26 Oct 2020 01:56:19 -0700 (PDT)
+ id 1kWyIh-0005mM-7n; Mon, 26 Oct 2020 04:56:26 -0400
+Received: by mail-yb1-xb44.google.com with SMTP id a12so6990620ybg.9;
+ Mon, 26 Oct 2020 01:56:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=44qrQ8NNE+/WRWF6a1v2WjNNEx9zyyXSgAqeuTAea5M=;
- b=u9iUaqPdBYsuyEa5rRFpo8xQGSB8PntyJDuYXVjO0IFxn8W0dpPoNXedbi0lWgjqfE
- 0YuKZmy+J/cT5qlSuQwSz8W3ChbuPv7eSTPuOEzq7KNkaYW6pOBGfIrMwfbo3wKzEosW
- YGy8Kvb+iWOK2UOiVD50CSEye5wmNPUdO29yzISvFLG5IDCza4pankopDJpsqArJaA23
- nfV/PLMO2SDHjroYLXmHiKBN8Y49h5Rz2kjIym2wgyqr7eBmcW7CCJozwwzYQtbFIOq4
- emCZcPznHkmPCL/kc9yFpmK2MjW/F+qoflcadGeQKTfLSg/6C0cZXUG1STkcCGUcVeaC
- MBvw==
+ :cc; bh=FfLOAjahncpkasQDDGDvZM/uLsegQerJKNZCielFNfY=;
+ b=J0hRADVocArcCo61AV3MvcXIBzTSHjuxEifrKz9bMphIn3u5e0gFGHlXQM5XosOgD7
+ ZDyCBn6Ih7oA2IgrfUAtFd9V+YZkN9UK9qVTsZOSaZupc3nzj4RGiI101UU0GeCGvplj
+ aR21TArpix7ZnnDVua9SFU30eiFSFf0dlvreG41leefEdMoNS4khtd5duaN9ImT9eDOF
+ Mo7Hd5+XDRUk6ddJyt7z3anJB+ri9zAhB32S72a/z6qxM3/XOTwHIpUJEMncNnPosQaL
+ 7bxYkw2LNDrTPfj0OYfcFXbw/xVF8DsQRbh+A/fPGyx5FRch/vCt9W3/HKqmpHWbxly7
+ 2DMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=44qrQ8NNE+/WRWF6a1v2WjNNEx9zyyXSgAqeuTAea5M=;
- b=R3yf2qXNZ/umIwkYpXmuXkLPvqtTtXhvG2ve5kESCjRrRrMMWPIzE6SQAjDUZ7H0Ie
- /JvQ08We7x3T9hKLuSbhCvyIuylcSUqEesMa1OEkb4VF4aOnUnwOMPZzIJzsuTrED+Ov
- IOC5okOgYkZP93niCvTTrd+JHi6uAscYq2C5TMESm3NEb6RP0+iAqAq8I13ufBaJx4Sl
- 4pi2P8Sil93XLkmwUisoNdLMkUPhs88IrUiJmjUstD7l5YSNAYn1vj/PvEbBs255d0qP
- 1wCJC1P/qBjzzTWQVFXxHy6WkVAhoLQfd0Kae9DpoVq2TbDDpIdqLKka+ITygkrMiwWh
- rWag==
-X-Gm-Message-State: AOAM532698HcgThd6aibQOSwqltXE67jL3q/g+eKXMwb5uWVJ15ZFCHs
- 1R9uO3cCIru7UuEcL3z4sC3xE3NhnHem+Ec6JRg=
-X-Google-Smtp-Source: ABdhPJyEgM04AI3oh8A1o317FY92efNKSdJl3h7CeC7z6iXCD3R8fWqdXmfxVz7yhFzFLf8R2c7Tn+MYtSF1/7kBwH8=
-X-Received: by 2002:a25:520a:: with SMTP id g10mr18953468ybb.152.1603702579069; 
- Mon, 26 Oct 2020 01:56:19 -0700 (PDT)
+ bh=FfLOAjahncpkasQDDGDvZM/uLsegQerJKNZCielFNfY=;
+ b=tBkIB649r+6DeNpciIdIUbz84LLwIi/Vutkq1IC+LgiiT13FEVf4UDFm4kl9tumK7M
+ 3YYEh27v3DMu4Ypf/Xusg/3YoxNBWWPBf0Kzx+AA/w9mxvgoKbabYCZmwgLOsuWdy2P8
+ tH3EzNASH4DPQM/9jw2ETVjMDPOOj9fHsBUWumK0G4iv3MAD+ElcT3RlyYDD6nO1B7V7
+ 1OXWhJUeHCT5u0d+yQgllv+Pex2kcXqUMBU9slJl6qeOJGXnGtlSBwe224T1gJgdaMAo
+ J5+Co2xX/LEMKtmXnPaHEh+NFdRC2nLzaReegn01F2Ho4xSfI3Ih5DEF93Vlu8wUkr/M
+ SxVw==
+X-Gm-Message-State: AOAM530QWDDBd0LFhCSU44ZfZ4Q/2iHcmV1g3O65RYcFAra9ca1tduIG
+ jMOG5K2hA7A62hfuv8ZT7WKSGxNgHPFW7ThBick=
+X-Google-Smtp-Source: ABdhPJzBoHZP7ifCxxny1hM+9EEXe2FrFvxMZ7kguuHD6dyv+9ELYhYnbk2Yqi1MuvvKwXyo7+Det0RP0dlYUnOBRDI=
+X-Received: by 2002:a25:f81e:: with SMTP id u30mr21674516ybd.332.1603702581983; 
+ Mon, 26 Oct 2020 01:56:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1603467169.git.alistair.francis@wdc.com>
- <8786fd77439c26f677eeac2eccedf75ba3b68bb4.1603467169.git.alistair.francis@wdc.com>
-In-Reply-To: <8786fd77439c26f677eeac2eccedf75ba3b68bb4.1603467169.git.alistair.francis@wdc.com>
+ <6adfabd1e61f13932b99d7a9f6839a5c87ad8ce7.1603467169.git.alistair.francis@wdc.com>
+In-Reply-To: <6adfabd1e61f13932b99d7a9f6839a5c87ad8ce7.1603467169.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 26 Oct 2020 16:56:08 +0800
-Message-ID: <CAEUhbmUotC9UXgSH2GiipxZ6nrzHvWMFgYqjGE4AF8mO3JSAmw@mail.gmail.com>
-Subject: Re: [PATCH v1 08/16] target/riscv: fpu_helper: Match function defs in
- HELPER macros
+Date: Mon, 26 Oct 2020 16:56:10 +0800
+Message-ID: <CAEUhbmW-zXeH4Ldo1HYtmDH-fYt_aik_4iXQHxzn_+9jMzWYmQ@mail.gmail.com>
+Subject: Re: [PATCH v1 09/16] target/riscv: Add a riscv_cpu_is_32bit() helper
+ function
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b44;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb44.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -73,87 +73,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2020 08:56:22 -0000
+X-List-Received-Date: Mon, 26 Oct 2020 08:56:31 -0000
 
-On Fri, Oct 23, 2020 at 11:44 PM Alistair Francis
+On Fri, Oct 23, 2020 at 11:45 PM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
-
-Could you please put some details as to why changing uint64_t to
-target_ulong (and vice versa) is needed?
-
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/fpu_helper.c | 16 ++++++++--------
->  1 file changed, 8 insertions(+), 8 deletions(-)
+>  target/riscv/cpu.h | 2 ++
+>  target/riscv/cpu.c | 9 +++++++++
+>  2 files changed, 11 insertions(+)
 >
-> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-> index bb346a8249..507d7fe7fa 100644
-> --- a/target/riscv/fpu_helper.c
-> +++ b/target/riscv/fpu_helper.c
-> @@ -224,13 +224,13 @@ target_ulong helper_fcvt_wu_s(CPURISCVState *env, uint64_t rs1)
->  }
->
->  #if defined(TARGET_RISCV64)
-> -uint64_t helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
-> +target_ulong helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
->  {
->      float32 frs1 = check_nanbox_s(rs1);
->      return float32_to_int64(frs1, &env->fp_status);
->  }
->
-> -uint64_t helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
-> +target_ulong helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
->  {
->      float32 frs1 = check_nanbox_s(rs1);
->      return float32_to_uint64(frs1, &env->fp_status);
-> @@ -248,12 +248,12 @@ uint64_t helper_fcvt_s_wu(CPURISCVState *env, target_ulong rs1)
->  }
->
->  #if defined(TARGET_RISCV64)
-> -uint64_t helper_fcvt_s_l(CPURISCVState *env, uint64_t rs1)
-> +uint64_t helper_fcvt_s_l(CPURISCVState *env, target_ulong rs1)
->  {
->      return nanbox_s(int64_to_float32(rs1, &env->fp_status));
->  }
->
-> -uint64_t helper_fcvt_s_lu(CPURISCVState *env, uint64_t rs1)
-> +uint64_t helper_fcvt_s_lu(CPURISCVState *env, target_ulong rs1)
->  {
->      return nanbox_s(uint64_to_float32(rs1, &env->fp_status));
->  }
-> @@ -337,12 +337,12 @@ target_ulong helper_fcvt_wu_d(CPURISCVState *env, uint64_t frs1)
->  }
->
->  #if defined(TARGET_RISCV64)
-> -uint64_t helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
-> +target_ulong helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
->  {
->      return float64_to_int64(frs1, &env->fp_status);
->  }
->
-> -uint64_t helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
-> +target_ulong helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
->  {
->      return float64_to_uint64(frs1, &env->fp_status);
->  }
-> @@ -359,12 +359,12 @@ uint64_t helper_fcvt_d_wu(CPURISCVState *env, target_ulong rs1)
->  }
->
->  #if defined(TARGET_RISCV64)
-> -uint64_t helper_fcvt_d_l(CPURISCVState *env, uint64_t rs1)
-> +uint64_t helper_fcvt_d_l(CPURISCVState *env, target_ulong rs1)
->  {
->      return int64_to_float64(rs1, &env->fp_status);
->  }
->
-> -uint64_t helper_fcvt_d_lu(CPURISCVState *env, uint64_t rs1)
-> +uint64_t helper_fcvt_d_lu(CPURISCVState *env, target_ulong rs1)
->  {
->      return uint64_to_float64(rs1, &env->fp_status);
->  }
-> --
 
-Regards,
-Bin
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
+Tested-by: Bin Meng <bin.meng@windriver.com>
 
