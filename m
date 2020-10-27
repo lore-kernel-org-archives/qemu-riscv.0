@@ -1,68 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXWCX-0003bW-U0
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 17:08:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43160)
+	id 1kXWOp-0002FL-Dr
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 17:20:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46230)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXWCW-0003Yy-Du; Tue, 27 Oct 2020 17:08:16 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:44036)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1kXWOl-0002E0-Um
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2020 17:20:56 -0400
+Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:39717)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXWCU-0001vk-Nk; Tue, 27 Oct 2020 17:08:16 -0400
-Received: by mail-il1-x142.google.com with SMTP id z2so2790388ilh.11;
- Tue, 27 Oct 2020 14:08:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1kXWOi-0003wy-SK
+ for qemu-riscv@nongnu.org; Tue, 27 Oct 2020 17:20:55 -0400
+Received: by mail-ed1-x544.google.com with SMTP id a6so2965034edx.6
+ for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2020 14:20:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=OFt45wZBSTHDWzJGnz4sMYVyBAla/d9gKrF9yfbNNFE=;
- b=o1zCS5bb8cd7rD4inxz5qnT8JDzudke29C0nwTR7nbalQ0+kximfE77/vIyHdXJ0/i
- mWi3RKZEGr5q9a8QDjMgmvYEbyqL9yVQ0u7dMyBpCclaOf50tMz6hBQ9NcNMC/oz9Mnq
- B0xcRUcjb4OWTr8r9mOP1x88T96Ii4UvZ0cD5sB8dsY6i/euiOpFQ1TV1Hc2+SwJGD4L
- VS1rnY9pzewJ/x5zIbv2kdKEEBcppQzv7Eo9ew5oItTbRjsztqydGfE7IpQC90YeFwG6
- LsRdfElgJW5DZmttrpdKU49WwUOJCP4lg0rJrREhJ8H7bPW3/TVFN+WVHwyw2XzJJXVy
- WDcQ==
+ :cc; bh=d0UbQvo8Vb3wDc/aJyL7VyV7Y6DvIzJ3l15+MRR+t/M=;
+ b=ru1c9M3EPVQKRU7OXH0NpPO9pQ7KwB+L4L/EQSJA3KWr8bk55h7RZD92/QoRflod6q
+ gLLU00LoyqQIP9A4dRp3Zbg/Jnp5XLqRzkdP8jm/5UOAUWadPM1h8m0d35uQBs9twpnD
+ MJcf1kI2ZVb4U6gx4jhvcHKMEevJm65bIpQBz99JYY+VwNW/SUnZLURbf9gbmotoMXLn
+ DM3s9dy4F8O9RtSZpMJHJRNbdnCNAKOEDVQlxJl560Dp7QQTVW1w1XrelLgF+NZgp3+s
+ LqbdMzsIkk43DwEWEGXqjF/1LaNhT6Rmz6Qh/olIUP/8DRxTFM77w3MAl0o8/I5+P8Ik
+ vAFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=OFt45wZBSTHDWzJGnz4sMYVyBAla/d9gKrF9yfbNNFE=;
- b=rwi8jR/eZQRNq9nQf57M+5Gkc5vBg01GW37XA50jzPUpAWeNB5xmpwN2cQPSXM83Ky
- ikcW4klzWhK6clA7QzMrObhfaEeTWlmNHFe0VjRURamnmNbUzAqRX2TtHd3wGxVp1WlF
- MH6JKu1USgUKTlAFeco7IpoSO21PYDQ3YblHeAy/M1krQt1IvQd4Cz8s4ayh2+HubvBX
- TUCb/9GYk3UUz1aWcJP5pNoZJ4BROw4zUwSl1IhcDD7EASbeOmzHy2edXWCFsPh+ACHx
- U5f0IsWjsJhR+IdSxX9b1SeCmg5n0om088FoN0hmdudMv5fNsZzv4NRgP5lbbk/Or0Pq
- U2EA==
-X-Gm-Message-State: AOAM531hfAHH9bQu4Sfav6k2tzgBxwSHIYdGKEYpOh2XyPGgllhQlgEt
- zvANz94aApfaPAUzOPqzdr0AUe+uQndi0tJ0Wm1NbAOKuNc=
-X-Google-Smtp-Source: ABdhPJxaXpJAM5KFQUXxUWrfD0VRlJ4oAy5elLMk5YSJhxXCPSqhaq7lN/QYLbJ5k+3rquZtEnWZZda1H7495Q6Wopc=
-X-Received: by 2002:a92:c5ce:: with SMTP id s14mr3622676ilt.40.1603832892910; 
- Tue, 27 Oct 2020 14:08:12 -0700 (PDT)
+ bh=d0UbQvo8Vb3wDc/aJyL7VyV7Y6DvIzJ3l15+MRR+t/M=;
+ b=qLDkegLHHBbWfTlluCsk28FdhjZ5G9uTQSB+jJk5rcG53zClHkEqRy6Zc7LaGvj2qN
+ fqKMcXZIOB+BOkku75uZyYTAzjtpP/LpzaIA5x1PbwCqLQkAnaItjRfnKFIxxUNSgYb+
+ 6HGnt8BZUrBFakN5AK0pCnnaKIwuQZxeRuyJTSeIaoJshzzyuTGKDkKcAv5/6NWnrRlD
+ oEkO6EEXMzAmvIEKgK46DjuKx5ww9AiMzixuS5QXnkMlPd21fKfB8QCHZLSJxyhD9Bkx
+ ffC1+O9r5nKX7GqESZpZa/74srYOW3Cnyn+K4Nr5bSPQkvTcuyV4b4NG5VjxunbOICCU
+ wPbQ==
+X-Gm-Message-State: AOAM530zW4jbu4Y6LNVgCF1PcJsA7XRyTKR3QJubeiqI/V1tnFzrIkoz
+ EEhvVCQzPjAq+dOHAS20eQ2xREFcTsROAHrmv7MLag==
+X-Google-Smtp-Source: ABdhPJxhKBsnrlh4qEzVXJOYba0Kccwr+goxR7w8UfSVC7voQImgwhCSMfw3fM3ek3Te8BbZ9eI+0eZquslGeeVBQEc=
+X-Received: by 2002:a50:f41a:: with SMTP id r26mr4258583edm.251.1603833651094; 
+ Tue, 27 Oct 2020 14:20:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAKmqyKODEgnkw4zBbsNK1zQ7qaiKWEAZBpwhnHzEetjgWpxtzQ@mail.gmail.com>
- <20201016171000.21240-1-ivan.griffin@emdalo.com>
- <CAEUhbmV5V9gXeyn1Bp-u3L4FGwU_+m0CT-vomL7W8WGY9yt_nQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmV5V9gXeyn1Bp-u3L4FGwU_+m0CT-vomL7W8WGY9yt_nQ@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 27 Oct 2020 13:56:22 -0700
-Message-ID: <CAKmqyKPQf74rJfYrbWXV1HO=mevyg8DvMYc85dNgPkiaOCyOKA@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/riscv: microchip_pfsoc: IOSCBCTRL memmap entry
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Ivan Griffin <ivan.griffin@emdalo.com>,
- QEMU Trivial <qemu-trivial@nongnu.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+References: <20201026212853.92880-1-keithp@keithp.com>
+ <20201026212853.92880-2-keithp@keithp.com>
+In-Reply-To: <20201026212853.92880-2-keithp@keithp.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 27 Oct 2020 21:20:39 +0000
+Message-ID: <CAFEAcA-0_WLMP1Y1sgcu7Ng+0w8Ovt9DVWzYU8ZA_FA2+bwcUw@mail.gmail.com>
+Subject: Re: [PATCH 1/4] semihosting: Move ARM semihosting code to shared
+ directories
+To: Keith Packard <keithp@keithp.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Laurent Vivier <laurent@vivier.eu>, qemu-arm <qemu-arm@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::544;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x544.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -75,79 +80,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2020 21:08:16 -0000
+X-List-Received-Date: Tue, 27 Oct 2020 21:20:56 -0000
 
-On Sun, Oct 18, 2020 at 6:58 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, 26 Oct 2020 at 21:29, Keith Packard <keithp@keithp.com> wrote:
 >
-> Hi Ivan,
+> This commit renames two files which provide ARM semihosting support so
+> that they can be shared by other architectures:
 >
-> On Sat, Oct 17, 2020 at 1:10 AM Ivan Griffin <ivan.griffin@emdalo.com> wrote:
-> >
-> > Adding the PolarFire SoC IOSCBCTRL memory region to prevent QEMU
-> > reporting a STORE/AMO Access Fault.
-> >
-> > This region is used by the PolarFire SoC port of U-Boot to
-> > interact with the FPGA system controller.
-> >
-> > Signed-off-by: Ivan Griffin <ivan.griffin@emdalo.com>
-> > ---
-> >  hw/riscv/microchip_pfsoc.c         | 10 ++++++++++
-> >  include/hw/riscv/microchip_pfsoc.h |  1 +
-> >  2 files changed, 11 insertions(+)
-> >
-> > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> > index 4627179cd3..9aaa276ee2 100644
-> > --- a/hw/riscv/microchip_pfsoc.c
-> > +++ b/hw/riscv/microchip_pfsoc.c
-> > @@ -97,6 +97,7 @@ static const struct MemmapEntry {
-> >      [MICROCHIP_PFSOC_GPIO2] =           { 0x20122000,     0x1000 },
-> >      [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
-> >      [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
-> > +    [MICROCHIP_PFSOC_IOSCB_CTRL] =      { 0x37020000,     0x1000 },
-> >      [MICROCHIP_PFSOC_IOSCB_CFG] =       { 0x37080000,     0x1000 },
-> >      [MICROCHIP_PFSOC_DRAM] =            { 0x80000000,        0x0 },
-> >  };
-> > @@ -341,6 +342,15 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-> >      create_unimplemented_device("microchip.pfsoc.ioscb.cfg",
-> >          memmap[MICROCHIP_PFSOC_IOSCB_CFG].base,
-> >          memmap[MICROCHIP_PFSOC_IOSCB_CFG].size);
-> > +
-> > +    /* IOSCBCTRL
-> > +     *
-> > +     * These registers are not documented in the official documentation
-> > +     * but used by the polarfire-soc-bare-meta-library code
-> > +     */
-> > +    create_unimplemented_device("microchip.pfsoc.ioscb.ctrl",
-> > +        memmap[MICROCHIP_PFSOC_IOSCB_CTRL].base,
-> > +        memmap[MICROCHIP_PFSOC_IOSCB_CTRL].size);
-> >  }
-> >
-> >  static void microchip_pfsoc_soc_class_init(ObjectClass *oc, void *data)
-> > diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-> > index 8bfc7e1a85..3f1874b162 100644
-> > --- a/include/hw/riscv/microchip_pfsoc.h
-> > +++ b/include/hw/riscv/microchip_pfsoc.h
-> > @@ -95,6 +95,7 @@ enum {
-> >      MICROCHIP_PFSOC_ENVM_CFG,
-> >      MICROCHIP_PFSOC_ENVM_DATA,
-> >      MICROCHIP_PFSOC_IOSCB_CFG,
-> > +    MICROCHIP_PFSOC_IOSCB_CTRL,
-> >      MICROCHIP_PFSOC_DRAM,
-> >  };
+>  1. target/arm/arm-semi.c     -> hw/semihosting/common-semi.c
+>  2. linux-user/arm/semihost.c -> linux-user/semihost.c
 >
-> Thank you for the patch!
+> The build system was modified to reflect this change, but the contents
+> of the two files are unchanged.
 >
-> I am currently adding the DDR controller modeling support to PolarFire
-> SoC which will cover this memory map. With my patch series, your patch
-> is no longer needed.
+> Signed-off-by: Keith Packard <keithp@keithp.com>
+> ---
+> diff --git a/target/arm/arm-semi.c b/hw/semihosting/common-semi.c
+> similarity index 100%
+> rename from target/arm/arm-semi.c
+> rename to hw/semihosting/common-semi.c
+> diff --git a/hw/semihosting/meson.build b/hw/semihosting/meson.build
+> index f40ac574c4..fbd2841e59 100644
+> --- a/hw/semihosting/meson.build
+> +++ b/hw/semihosting/meson.build
+> @@ -2,3 +2,5 @@ specific_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
+>    'config.c',
+>    'console.c',
+>  ))
+> +
+> +specific_ss.add(when: 'CONFIG_TCG', if_true: files ('common-semi.c'))
 
-I forgot to apply this, and Bin just sent his series. So if it's ok
-with you Ivan I'm just going to apply Bin's series instead. Sorry
-about that.
+I think this adds this file to the compilation for all TCG targets;
+you only want it for targets which have Arm-semihosting-ABI compatible
+semihosting. (Various other targets either don't have semihosting
+or have their own ABI.)
 
-Alistair
-
->
-> Regards,
-> Bin
+thanks
+-- PMM
 
