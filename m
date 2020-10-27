@@ -1,73 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXWOp-0002FL-Dr
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 17:20:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46230)
+	id 1kXWx1-0004JP-59
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 17:56:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53946)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1kXWOl-0002E0-Um
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2020 17:20:56 -0400
-Received: from mail-ed1-x544.google.com ([2a00:1450:4864:20::544]:39717)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1kXWOi-0003wy-SK
- for qemu-riscv@nongnu.org; Tue, 27 Oct 2020 17:20:55 -0400
-Received: by mail-ed1-x544.google.com with SMTP id a6so2965034edx.6
- for <qemu-riscv@nongnu.org>; Tue, 27 Oct 2020 14:20:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=d0UbQvo8Vb3wDc/aJyL7VyV7Y6DvIzJ3l15+MRR+t/M=;
- b=ru1c9M3EPVQKRU7OXH0NpPO9pQ7KwB+L4L/EQSJA3KWr8bk55h7RZD92/QoRflod6q
- gLLU00LoyqQIP9A4dRp3Zbg/Jnp5XLqRzkdP8jm/5UOAUWadPM1h8m0d35uQBs9twpnD
- MJcf1kI2ZVb4U6gx4jhvcHKMEevJm65bIpQBz99JYY+VwNW/SUnZLURbf9gbmotoMXLn
- DM3s9dy4F8O9RtSZpMJHJRNbdnCNAKOEDVQlxJl560Dp7QQTVW1w1XrelLgF+NZgp3+s
- LqbdMzsIkk43DwEWEGXqjF/1LaNhT6Rmz6Qh/olIUP/8DRxTFM77w3MAl0o8/I5+P8Ik
- vAFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=d0UbQvo8Vb3wDc/aJyL7VyV7Y6DvIzJ3l15+MRR+t/M=;
- b=qLDkegLHHBbWfTlluCsk28FdhjZ5G9uTQSB+jJk5rcG53zClHkEqRy6Zc7LaGvj2qN
- fqKMcXZIOB+BOkku75uZyYTAzjtpP/LpzaIA5x1PbwCqLQkAnaItjRfnKFIxxUNSgYb+
- 6HGnt8BZUrBFakN5AK0pCnnaKIwuQZxeRuyJTSeIaoJshzzyuTGKDkKcAv5/6NWnrRlD
- oEkO6EEXMzAmvIEKgK46DjuKx5ww9AiMzixuS5QXnkMlPd21fKfB8QCHZLSJxyhD9Bkx
- ffC1+O9r5nKX7GqESZpZa/74srYOW3Cnyn+K4Nr5bSPQkvTcuyV4b4NG5VjxunbOICCU
- wPbQ==
-X-Gm-Message-State: AOAM530zW4jbu4Y6LNVgCF1PcJsA7XRyTKR3QJubeiqI/V1tnFzrIkoz
- EEhvVCQzPjAq+dOHAS20eQ2xREFcTsROAHrmv7MLag==
-X-Google-Smtp-Source: ABdhPJxhKBsnrlh4qEzVXJOYba0Kccwr+goxR7w8UfSVC7voQImgwhCSMfw3fM3ek3Te8BbZ9eI+0eZquslGeeVBQEc=
-X-Received: by 2002:a50:f41a:: with SMTP id r26mr4258583edm.251.1603833651094; 
- Tue, 27 Oct 2020 14:20:51 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201026212853.92880-1-keithp@keithp.com>
- <20201026212853.92880-2-keithp@keithp.com>
-In-Reply-To: <20201026212853.92880-2-keithp@keithp.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 27 Oct 2020 21:20:39 +0000
-Message-ID: <CAFEAcA-0_WLMP1Y1sgcu7Ng+0w8Ovt9DVWzYU8ZA_FA2+bwcUw@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
+ id 1kXWww-0004GT-6g; Tue, 27 Oct 2020 17:56:14 -0400
+Received: from home.keithp.com ([63.227.221.253]:43966 helo=elaine.keithp.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
+ id 1kXWwt-0000PN-Gz; Tue, 27 Oct 2020 17:56:13 -0400
+Received: from localhost (localhost [127.0.0.1])
+ by elaine.keithp.com (Postfix) with ESMTP id D45213F2DD88;
+ Tue, 27 Oct 2020 14:56:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
+ t=1603835762; bh=LFRed8aLrEhFr9/H0YfC2FHgLemVaokq/v9X3p0bp+M=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=cAx+ERVBgsVYaJnPv1wxQ10jPAhBgdInxCU9S6Dw0zhIeHuZd78D4Y3YcHRUDVrJ5
+ dVF4t29HTGEOm9UpWQBKqT/p4q0i63o1wizr80O0d7oCm/2U5Tq4sdfnvsjGSLJH42
+ T0qQpkbgiBvA+rmLU+kyeTLVQPigF8n4fdFmtjgM6kiAYM4WDAfUlsQmZp5w0vdrXQ
+ ZJ+1fFrsUuO7N0BzPofOaPjRyMqENXReCyBLDgm/D9ewYvt+C1IC7weuXWTMMck0Qj
+ ECsQTciR8kdTOB3c3YwVzqZ6pVoJBaOVXcdBntyzdeZ8bbi5E9XhlRZPrHOq1DnRB/
+ 5ZTbLTNGETOSg==
+X-Virus-Scanned: Debian amavisd-new at keithp.com
+Received: from elaine.keithp.com ([127.0.0.1])
+ by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
+ with LMTP id Q0jRHPqt_1AB; Tue, 27 Oct 2020 14:56:02 -0700 (PDT)
+Received: from keithp.com (koto.keithp.com [10.0.0.2])
+ by elaine.keithp.com (Postfix) with ESMTPSA id 6F4573F2DD87;
+ Tue, 27 Oct 2020 14:56:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
+ t=1603835762; bh=LFRed8aLrEhFr9/H0YfC2FHgLemVaokq/v9X3p0bp+M=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=cAx+ERVBgsVYaJnPv1wxQ10jPAhBgdInxCU9S6Dw0zhIeHuZd78D4Y3YcHRUDVrJ5
+ dVF4t29HTGEOm9UpWQBKqT/p4q0i63o1wizr80O0d7oCm/2U5Tq4sdfnvsjGSLJH42
+ T0qQpkbgiBvA+rmLU+kyeTLVQPigF8n4fdFmtjgM6kiAYM4WDAfUlsQmZp5w0vdrXQ
+ ZJ+1fFrsUuO7N0BzPofOaPjRyMqENXReCyBLDgm/D9ewYvt+C1IC7weuXWTMMck0Qj
+ ECsQTciR8kdTOB3c3YwVzqZ6pVoJBaOVXcdBntyzdeZ8bbi5E9XhlRZPrHOq1DnRB/
+ 5ZTbLTNGETOSg==
+Received: by keithp.com (Postfix, from userid 1000)
+ id 419C21582210; Tue, 27 Oct 2020 14:56:02 -0700 (PDT)
+From: "Keith Packard" <keithp@keithp.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: QEMU Developers <qemu-devel@nongnu.org>, Alex =?utf-8?Q?Benn=C3=A9e?=
+ <alex.bennee@linaro.org>, Laurent Vivier <laurent@vivier.eu>, qemu-arm
+ <qemu-arm@nongnu.org>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair
+ Francis <Alistair.Francis@wdc.com>, Sagar Karandikar
+ <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>
 Subject: Re: [PATCH 1/4] semihosting: Move ARM semihosting code to shared
  directories
-To: Keith Packard <keithp@keithp.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Laurent Vivier <laurent@vivier.eu>, qemu-arm <qemu-arm@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::544;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x544.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
+In-Reply-To: <CAFEAcA-0_WLMP1Y1sgcu7Ng+0w8Ovt9DVWzYU8ZA_FA2+bwcUw@mail.gmail.com>
+References: <20201026212853.92880-1-keithp@keithp.com>
+ <20201026212853.92880-2-keithp@keithp.com>
+ <CAFEAcA-0_WLMP1Y1sgcu7Ng+0w8Ovt9DVWzYU8ZA_FA2+bwcUw@mail.gmail.com>
+Date: Tue, 27 Oct 2020 14:56:01 -0700
+Message-ID: <87pn53e3ke.fsf@keithp.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; boundary="=-=-=";
+ micalg=pgp-sha256; protocol="application/pgp-signature"
+Received-SPF: pass client-ip=63.227.221.253; envelope-from=keithp@keithp.com;
+ helo=elaine.keithp.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/27 17:56:03
+X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,41 +81,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2020 21:20:56 -0000
+X-List-Received-Date: Tue, 27 Oct 2020 21:56:15 -0000
 
-On Mon, 26 Oct 2020 at 21:29, Keith Packard <keithp@keithp.com> wrote:
->
-> This commit renames two files which provide ARM semihosting support so
-> that they can be shared by other architectures:
->
->  1. target/arm/arm-semi.c     -> hw/semihosting/common-semi.c
->  2. linux-user/arm/semihost.c -> linux-user/semihost.c
->
-> The build system was modified to reflect this change, but the contents
-> of the two files are unchanged.
->
-> Signed-off-by: Keith Packard <keithp@keithp.com>
-> ---
-> diff --git a/target/arm/arm-semi.c b/hw/semihosting/common-semi.c
-> similarity index 100%
-> rename from target/arm/arm-semi.c
-> rename to hw/semihosting/common-semi.c
-> diff --git a/hw/semihosting/meson.build b/hw/semihosting/meson.build
-> index f40ac574c4..fbd2841e59 100644
-> --- a/hw/semihosting/meson.build
-> +++ b/hw/semihosting/meson.build
-> @@ -2,3 +2,5 @@ specific_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
->    'config.c',
->    'console.c',
->  ))
-> +
-> +specific_ss.add(when: 'CONFIG_TCG', if_true: files ('common-semi.c'))
+--=-=-=
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-I think this adds this file to the compilation for all TCG targets;
-you only want it for targets which have Arm-semihosting-ABI compatible
-semihosting. (Various other targets either don't have semihosting
-or have their own ABI.)
+Peter Maydell <peter.maydell@linaro.org> writes:
 
-thanks
--- PMM
+>> +specific_ss.add(when: 'CONFIG_TCG', if_true: files ('common-semi.c'))
+>
+> I think this adds this file to the compilation for all TCG targets;
+> you only want it for targets which have Arm-semihosting-ABI compatible
+> semihosting. (Various other targets either don't have semihosting
+> or have their own ABI.)
+
+Right. These should have been target-specific source sets so that the
+file was only added to those targets:
+
+        arm_ss.add(when: 'CONFIG_TCG', if_true: files ('common-semi.c'))
+        riscv_ss.add(files('common-semi.c'))
+
+This appears to work in my testing (building arm, risc-v and x86_64
+configs).
+
+=2D-=20
+=2Dkeith
+
+--=-=-=
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAl+Yl3IACgkQ2yIaaQAA
+ABF23hAAshIh90c2syeOD7e72vZAmKyR3UdxiwRRaobis2M5HEosF8bVTuuYoP+Z
+TOE4wV1NK5Z0V2tWcLQ9cJwqwG467Idw5ZGQxgXwe/4D1jf7x9QZZiXhqgqdcb8A
++4AUkGLjFVZMn/hoOt7MWLhLSmBIu2AeZmEfdxEwZN67sb5db8kj1nL429+2g8J5
+8bYpoOsbWSGkrYWvm30QbLNiyzndSau0rErgbLf5cRbFDna/saKTKu+t5S+zXt1R
+BVu1rFUAD7QgICp8eTOtdmBIt5coNGbk6oQMBlj/TRVatWPl57L34rA+6l1/mrWc
+fQjBwe8+BHYxjNaSRN6mMYs/5CxcaNlPNXUTFI2TLIpy9IS6DzzuY2IjHw6qoaz8
+y5krhOXkkBQ3Q4riz7zpF/VlH+MEn+Ipmc1wMAgTT+3OP8cKropWIwk//qF00HMy
+oAkJpZrYNfTvyMVfHGseg3HvrySxsomMWq6X8StXqSG9Y99f3jCOvpL1bF2UCX0m
+lsBNAfU2F3kFcv96lB21tMy+ED9SgagV6q/kVzgiDOarGlxDr9MwHs88LvI2J9JL
+61pV/LIQIp1RueHtExqxQ5427e9uEP0f/c57gFUY/J296pDiVqwhe7aGPjlpZ998
+SMkwmYTRz1N4SPnnd9Bd5THWOyVtM/znBBmWXAd2qGRf+oQHXlw=
+=/2q0
+-----END PGP SIGNATURE-----
+--=-=-=--
 
