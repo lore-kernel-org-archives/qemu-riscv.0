@@ -1,56 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXAGg-0003LH-4L
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Oct 2020 17:43:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33664)
+	id 1kXPeo-0007Cw-Ip
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 10:09:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39902)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1kXAGd-0003EY-HK; Mon, 26 Oct 2020 17:43:03 -0400
-Resent-Date: Mon, 26 Oct 2020 17:43:03 -0400
-Resent-Message-Id: <E1kXAGd-0003EY-HK@lists.gnu.org>
-Received: from sender4-of-o57.zoho.com ([136.143.188.57]:21757)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
- id 1kXAGa-0002Mz-I1; Mon, 26 Oct 2020 17:43:03 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1603748569; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=gJrClKVGhHtrZaCDtyb/U1zYjlkju1l1KEOd9GlMnZb4yowpmn+352DnIIISk/YvRqwtGwIeslBOTl5I+hndXwqC8q+5k2nHoi2x7lIMa9NbhHFJGogzOIWLHP1Z/uSQjmLsSOPlk0GbI3GkjRyDELYbhROB5hm9GiE40PMZ0o4=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1603748569;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
- bh=CFPafFmQFAsRUELl+V3vgWfrs1FXjjV1Aw7XDn8nCOE=; 
- b=j94/ZotjSqglD/nQCOUFIarB7ySE37tRaEw6yYSMAw6dMSD4OKnS91toeyJf/8yO9bkV/pZvXq5EyiQqoezSyP5kC49nkBWsCRrz9bG/PrH4cmLgcvvcvOFLee0CS5W4Q6A0H90Nh/Ai87I/ymXTZw4w57LX92nolsZqzNmwolQ=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- spf=pass  smtp.mailfrom=no-reply@patchew.org;
- dmarc=pass header.from=<no-reply@patchew.org>
- header.from=<no-reply@patchew.org>
-Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
- mx.zohomail.com with SMTPS id 1603748567918939.6933389170448;
- Mon, 26 Oct 2020 14:42:47 -0700 (PDT)
-Subject: Re: [PATCH 0/4] riscv: Add semihosting support [v10]
-Message-ID: <160374856633.1984.15781594896255988773@66eaa9a8a123>
-Reply-To: <qemu-devel@nongnu.org>
-In-Reply-To: <20201026212853.92880-1-keithp@keithp.com>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kXPej-0007AX-1C; Tue, 27 Oct 2020 10:08:58 -0400
+Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541]:38487)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kXPeh-0006IL-4J; Tue, 27 Oct 2020 10:08:56 -0400
+Received: by mail-pg1-x541.google.com with SMTP id i26so856426pgl.5;
+ Tue, 27 Oct 2020 07:08:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=OVPJ9OkO7wG7zNrQOHCRpGMpBXnhHoydn8Z+MKwMPzM=;
+ b=NNnRSjDHvDNF6PvERkRmkUaEC3shqvWQ24rF4vOrV0AqVFdUbKypNJb9KQ/tjnTxd9
+ PNEIzveVgwksLyl3HGs97i1wQRw2fqPVbH4RGqKEEqP7qsgL2GwouXYxdfPEYf/XsVDp
+ 1KDTOFsFZLaR5N8Tz0VA9yQi76rBJTeln/CPMrrhdHsU+h6zBKDUFXh85fq0YCTnx4lo
+ iNlgTfYQdOfxm6HYTA6pf+XyDi1/6uCew4E2Jt1auBM80VvG5n3xvdNqPAVzadmRo6Og
+ MBUEel+zHGNVeEUaeUkIrTpOyJAaU8RlNn4PEPiv9Wb6qF0RN5R59MQUWyckuDAc0oHH
+ hMYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=OVPJ9OkO7wG7zNrQOHCRpGMpBXnhHoydn8Z+MKwMPzM=;
+ b=erfax+iyh62X9F4ulhRFTBB0EGp5zLuEjexgEWkE8I2En98nDNV19G0tye9O9m2yYN
+ t8rhx5mdWZ13737FlLwLNq1zh8s1xCPGH0y6r1KYG8Ebj8zsL4vEMlgySzUIHFce5DsH
+ zFGkqzdjlcHZaamG7lE2bAbM/+JRXj/XxdKmgHi9iEy7VOIDouxQVDFQVUykwU4M+Nu6
+ oodJzZlF6hkoYCtFl34kIu7ycGBJP/gxwHwZ8uRumbnRVC3R+KWUT9rJ5UpR1OHWcOLf
+ r5ZOOSqRQdqWrpM0IZMp7JwPC/GLK534ua25fx2NoZQf77kB+7AsF2CBM+aZiXvI40IP
+ f/OA==
+X-Gm-Message-State: AOAM532Z13w3p6BxF4IjFWkPIFr55d5SiIGy/GwTPvCMjxqXhH8HINlM
+ VghCdtYhtNi1atNatO0YPw0=
+X-Google-Smtp-Source: ABdhPJynPJ0ZChMLMOQvGZjsMC3pgreGolsKpI/18whJqd42fU6apmpCBwZEDR16ZM4OqgtsYAWI9w==
+X-Received: by 2002:a62:8c81:0:b029:164:3789:5478 with SMTP id
+ m123-20020a628c810000b029016437895478mr2160178pfd.44.1603807732586; 
+ Tue, 27 Oct 2020 07:08:52 -0700 (PDT)
+Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
+ [144.168.56.201])
+ by smtp.gmail.com with ESMTPSA id r22sm2540856pfg.51.2020.10.27.07.08.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 Oct 2020 07:08:52 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+X-Google-Original-From: Bin Meng <bin.meng@windriver.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Anup Patel <anup.patel@wdc.com>, Atish Patra <atish.patra@wdc.com>,
+ Ivan Griffin <ivan.griffin@emdalo.com>, Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH 0/9] hw/riscv: microchip_pfsoc: Support factory HSS boot out
+ of the box
+Date: Tue, 27 Oct 2020 22:08:31 +0800
+Message-Id: <20201027140840.18030-1-bin.meng@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Resent-From: 
-From: no-reply@patchew.org
-To: qemu-devel@nongnu.org
-Cc: qemu-devel@nongnu.org, alex.bennee@linaro.org, laurent@vivier.eu,
- peter.maydell@linaro.org, qemu-arm@nongnu.org, palmer@dabbelt.com,
- Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-riscv@nongnu.org
-Date: Mon, 26 Oct 2020 14:42:47 -0700 (PDT)
-X-ZohoMailClient: External
-Received-SPF: pass client-ip=136.143.188.57; envelope-from=no-reply@patchew.org;
- helo=sender4-of-o57.zoho.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/26 16:54:56
-X-ACL-Warn: Detected OS   = Linux 3.11 and newer [fuzzy]
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::541;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x541.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -64,98 +79,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2020 21:43:04 -0000
+X-List-Received-Date: Tue, 27 Oct 2020 14:08:58 -0000
 
-UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIwMTAyNjIxMjg1My45Mjg4
-MC0xLWtlaXRocEBrZWl0aHAuY29tLwoKCgpIaSwKClRoaXMgc2VyaWVzIHNlZW1zIHRvIGhhdmUg
-c29tZSBjb2Rpbmcgc3R5bGUgcHJvYmxlbXMuIFNlZSBvdXRwdXQgYmVsb3cgZm9yCm1vcmUgaW5m
-b3JtYXRpb246CgpUeXBlOiBzZXJpZXMKTWVzc2FnZS1pZDogMjAyMDEwMjYyMTI4NTMuOTI4ODAt
-MS1rZWl0aHBAa2VpdGhwLmNvbQpTdWJqZWN0OiBbUEFUQ0ggMC80XSByaXNjdjogQWRkIHNlbWlo
-b3N0aW5nIHN1cHBvcnQgW3YxMF0KCj09PSBURVNUIFNDUklQVCBCRUdJTiA9PT0KIyEvYmluL2Jh
-c2gKZ2l0IHJldi1wYXJzZSBiYXNlID4gL2Rldi9udWxsIHx8IGV4aXQgMApnaXQgY29uZmlnIC0t
-bG9jYWwgZGlmZi5yZW5hbWVsaW1pdCAwCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLnJlbmFtZXMg
-VHJ1ZQpnaXQgY29uZmlnIC0tbG9jYWwgZGlmZi5hbGdvcml0aG0gaGlzdG9ncmFtCi4vc2NyaXB0
-cy9jaGVja3BhdGNoLnBsIC0tbWFpbGJhY2sgYmFzZS4uCj09PSBURVNUIFNDUklQVCBFTkQgPT09
-CgpVcGRhdGluZyAzYzhjZjVhOWMyMWZmODc4MjE2NGQxZGVmN2Y0NGJkODg4NzEzMzg0CkZyb20g
-aHR0cHM6Ly9naXRodWIuY29tL3BhdGNoZXctcHJvamVjdC9xZW11CiAqIFtuZXcgdGFnXSAgICAg
-ICAgIHBhdGNoZXcvMjAyMDEwMjYyMTI4NTMuOTI4ODAtMS1rZWl0aHBAa2VpdGhwLmNvbSAtPiBw
-YXRjaGV3LzIwMjAxMDI2MjEyODUzLjkyODgwLTEta2VpdGhwQGtlaXRocC5jb20KU3dpdGNoZWQg
-dG8gYSBuZXcgYnJhbmNoICd0ZXN0JwplMTNhMWE2IHJpc2N2OiBBZGQgc2VtaWhvc3Rpbmcgc3Vw
-cG9ydCBbdjEwXQozZWNkYmEzIHNlbWlob3N0aW5nOiBDaGFuZ2UgaW50ZXJuYWwgY29tbW9uLXNl
-bWkgaW50ZXJmYWNlcyB0byB1c2UgQ1BVU3RhdGUgKgplZTZiYzE5IHNlbWlob3N0aW5nOiBDaGFu
-Z2UgY29tbW9uLXNlbWkgQVBJIHRvIGJlIGFyY2hpdGVjdHVyZS1pbmRlcGVuZGVudAo1NTY1YzYy
-IHNlbWlob3N0aW5nOiBNb3ZlIEFSTSBzZW1paG9zdGluZyBjb2RlIHRvIHNoYXJlZCBkaXJlY3Rv
-cmllcwoKPT09IE9VVFBVVCBCRUdJTiA9PT0KMS80IENoZWNraW5nIGNvbW1pdCA1NTY1YzYyZWJi
-MWEgKHNlbWlob3N0aW5nOiBNb3ZlIEFSTSBzZW1paG9zdGluZyBjb2RlIHRvIHNoYXJlZCBkaXJl
-Y3RvcmllcykKV0FSTklORzogYWRkZWQsIG1vdmVkIG9yIGRlbGV0ZWQgZmlsZShzKSwgZG9lcyBN
-QUlOVEFJTkVSUyBuZWVkIHVwZGF0aW5nPwojMjE6IApyZW5hbWUgZnJvbSB0YXJnZXQvYXJtL2Fy
-bS1zZW1pLmMKCnRvdGFsOiAwIGVycm9ycywgMSB3YXJuaW5ncywgMjcgbGluZXMgY2hlY2tlZAoK
-UGF0Y2ggMS80IGhhcyBzdHlsZSBwcm9ibGVtcywgcGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0
-aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBvc2l0aXZlcyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRh
-aW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4gTUFJTlRBSU5FUlMuCjIvNCBDaGVja2luZyBjb21taXQg
-ZWU2YmMxOWQzNmRkIChzZW1paG9zdGluZzogQ2hhbmdlIGNvbW1vbi1zZW1pIEFQSSB0byBiZSBh
-cmNoaXRlY3R1cmUtaW5kZXBlbmRlbnQpCldBUk5JTkc6IGFkZGVkLCBtb3ZlZCBvciBkZWxldGVk
-IGZpbGUocyksIGRvZXMgTUFJTlRBSU5FUlMgbmVlZCB1cGRhdGluZz8KIzY2OiAKbmV3IGZpbGUg
-bW9kZSAxMDA2NDQKCnRvdGFsOiAwIGVycm9ycywgMSB3YXJuaW5ncywgMTYzIGxpbmVzIGNoZWNr
-ZWQKClBhdGNoIDIvNCBoYXMgc3R5bGUgcHJvYmxlbXMsIHBsZWFzZSByZXZpZXcuICBJZiBhbnkg
-b2YgdGhlc2UgZXJyb3JzCmFyZSBmYWxzZSBwb3NpdGl2ZXMgcmVwb3J0IHRoZW0gdG8gdGhlIG1h
-aW50YWluZXIsIHNlZQpDSEVDS1BBVENIIGluIE1BSU5UQUlORVJTLgozLzQgQ2hlY2tpbmcgY29t
-bWl0IDNlY2RiYTM3MzNjZiAoc2VtaWhvc3Rpbmc6IENoYW5nZSBpbnRlcm5hbCBjb21tb24tc2Vt
-aSBpbnRlcmZhY2VzIHRvIHVzZSBDUFVTdGF0ZSAqKQpFUlJPUjogYnJhY2VzIHt9IGFyZSBuZWNl
-c3NhcnkgZm9yIGFsbCBhcm1zIG9mIHRoaXMgc3RhdGVtZW50CiM4NjogRklMRTogaHcvc2VtaWhv
-c3RpbmcvY29tbW9uLXNlbWkuYzoxNDI6CisgICAgaWYgKGlzX2E2NChlbnYpKQpbLi4uXQorICAg
-IGVsc2UKWy4uLl0KCkVSUk9SOiBicmFjZXMge30gYXJlIG5lY2Vzc2FyeSBmb3IgYWxsIGFybXMg
-b2YgdGhpcyBzdGF0ZW1lbnQKIzk3OiBGSUxFOiBody9zZW1paG9zdGluZy9jb21tb24tc2VtaS5j
-OjE1MzoKKyAgICBpZiAoaXNfYTY0KGVudikpClsuLi5dCisgICAgZWxzZQpbLi4uXQoKV0FSTklO
-RzogbGluZSBvdmVyIDgwIGNoYXJhY3RlcnMKIzIwNTogRklMRTogaHcvc2VtaWhvc3RpbmcvY29t
-bW9uLXNlbWkuYzozNDY6CitzdGF0aWMgdm9pZCBjb21tb25fc2VtaV9mbGVuX2NiKENQVVN0YXRl
-ICpjcywgdGFyZ2V0X3Vsb25nIHJldCwgdGFyZ2V0X3Vsb25nIGVycikKCldBUk5JTkc6IGxpbmUg
-b3ZlciA4MCBjaGFyYWN0ZXJzCiMyMTM6IEZJTEU6IGh3L3NlbWlob3N0aW5nL2NvbW1vbi1zZW1p
-LmM6MzUxOgorICAgIGNwdV9tZW1vcnlfcndfZGVidWcoY3MsIGNvbW1vbl9zZW1pX2ZsZW5fYnVm
-KGNzKSArIDMyLCAodWludDhfdCAqKSZzaXplLCA0LCAwKTsKCldBUk5JTkc6IGxpbmUgb3ZlciA4
-MCBjaGFyYWN0ZXJzCiMyMzA6IEZJTEU6IGh3L3NlbWlob3N0aW5nL2NvbW1vbi1zZW1pLmM6MzYw
-Ogorc3RhdGljIHZvaWQgY29tbW9uX3NlbWlfb3Blbl9jYihDUFVTdGF0ZSAqY3MsIHRhcmdldF91
-bG9uZyByZXQsIHRhcmdldF91bG9uZyBlcnIpCgpXQVJOSU5HOiBsaW5lIG92ZXIgODAgY2hhcmFj
-dGVycwojMjU3OiBGSUxFOiBody9zZW1paG9zdGluZy9jb21tb24tc2VtaS5jOjM3MzoKK3N0YXRp
-YyB0YXJnZXRfdWxvbmcgY29tbW9uX3NlbWlfZ2RiX3N5c2NhbGwoQ1BVU3RhdGUgKmNzLCBnZGJf
-c3lzY2FsbF9jb21wbGV0ZV9jYiBjYiwKCldBUk5JTkc6IGxpbmUgb3ZlciA4MCBjaGFyYWN0ZXJz
-CiM1OTk6IEZJTEU6IGh3L3NlbWlob3N0aW5nL2NvbW1vbi1zZW1pLmM6NzY1OgorICAgICAgICAg
-ICAgcmV0ID0gY29tbW9uX3NlbWlfZ2RiX3N5c2NhbGwoY3MsIGNvbW1vbl9zZW1pX29wZW5fY2Is
-ICJvcGVuLCVzLCV4LDFhNCIsIGFyZzAsCgpXQVJOSU5HOiBsaW5lIG92ZXIgODAgY2hhcmFjdGVy
-cwojNjAwOiBGSUxFOiBody9zZW1paG9zdGluZy9jb21tb24tc2VtaS5jOjc2NjoKKyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChpbnQpYXJnMisxLCBnZGJfb3Blbl9t
-b2RlZmxhZ3NbYXJnMV0pOwoKRVJST1I6IHNwYWNlcyByZXF1aXJlZCBhcm91bmQgdGhhdCAnKycg
-KGN0eDpWeFYpCiM2MDA6IEZJTEU6IGh3L3NlbWlob3N0aW5nL2NvbW1vbi1zZW1pLmM6NzY2Ogor
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKGludClhcmcyKzEsIGdk
-Yl9vcGVuX21vZGVmbGFnc1thcmcxXSk7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBeCgpFUlJPUjogc3BhY2VzIHJlcXVpcmVkIGFyb3VuZCB0aGF0
-ICcrJyAoY3R4OlZ4VikKIzcwMjogRklMRTogaHcvc2VtaWhvc3RpbmcvY29tbW9uLXNlbWkuYzo4
-NjM6CisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcmcwLCAoaW50
-KWFyZzErMSk7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBeCgpXQVJOSU5HOiBsaW5lIG92ZXIgODAgY2hhcmFjdGVycwojNzIyOiBGSUxF
-OiBody9zZW1paG9zdGluZy9jb21tb24tc2VtaS5jOjg4MToKKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBhcmcwLCAoaW50KWFyZzErMSwgYXJnMiwgKGludClhcmcz
-KzEpOwoKRVJST1I6IHNwYWNlcyByZXF1aXJlZCBhcm91bmQgdGhhdCAnKycgKGN0eDpWeFYpCiM3
-MjI6IEZJTEU6IGh3L3NlbWlob3N0aW5nL2NvbW1vbi1zZW1pLmM6ODgxOgorICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGFyZzAsIChpbnQpYXJnMSsxLCBhcmcyLCAo
-aW50KWFyZzMrMSk7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgXgoKRVJST1I6IHNwYWNlcyByZXF1aXJlZCBhcm91bmQgdGhhdCAnKycg
-KGN0eDpWeFYpCiM3MjI6IEZJTEU6IGh3L3NlbWlob3N0aW5nL2NvbW1vbi1zZW1pLmM6ODgxOgor
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGFyZzAsIChpbnQpYXJn
-MSsxLCBhcmcyLCAoaW50KWFyZzMrMSk7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KCkVSUk9SOiBz
-cGFjZXMgcmVxdWlyZWQgYXJvdW5kIHRoYXQgJysnIChjdHg6VnhWKQojNzUwOiBGSUxFOiBody9z
-ZW1paG9zdGluZy9jb21tb24tc2VtaS5jOjkwNzoKKyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBhcmcwLCAoaW50KWFyZzErMSk7CiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXgoKdG90YWw6IDcgZXJyb3Jz
-LCA3IHdhcm5pbmdzLCA3NjcgbGluZXMgY2hlY2tlZAoKUGF0Y2ggMy80IGhhcyBzdHlsZSBwcm9i
-bGVtcywgcGxlYXNlIHJldmlldy4gIElmIGFueSBvZiB0aGVzZSBlcnJvcnMKYXJlIGZhbHNlIHBv
-c2l0aXZlcyByZXBvcnQgdGhlbSB0byB0aGUgbWFpbnRhaW5lciwgc2VlCkNIRUNLUEFUQ0ggaW4g
-TUFJTlRBSU5FUlMuCgo0LzQgQ2hlY2tpbmcgY29tbWl0IGUxM2ExYTYwZWNjNyAocmlzY3Y6IEFk
-ZCBzZW1paG9zdGluZyBzdXBwb3J0IFt2MTBdKQo9PT0gT1VUUFVUIEVORCA9PT0KClRlc3QgY29t
-bWFuZCBleGl0ZWQgd2l0aCBjb2RlOiAxCgoKVGhlIGZ1bGwgbG9nIGlzIGF2YWlsYWJsZSBhdApo
-dHRwOi8vcGF0Y2hldy5vcmcvbG9ncy8yMDIwMTAyNjIxMjg1My45Mjg4MC0xLWtlaXRocEBrZWl0
-aHAuY29tL3Rlc3RpbmcuY2hlY2twYXRjaC8/dHlwZT1tZXNzYWdlLgotLS0KRW1haWwgZ2VuZXJh
-dGVkIGF1dG9tYXRpY2FsbHkgYnkgUGF0Y2hldyBbaHR0cHM6Ly9wYXRjaGV3Lm9yZy9dLgpQbGVh
-c2Ugc2VuZCB5b3VyIGZlZWRiYWNrIHRvIHBhdGNoZXctZGV2ZWxAcmVkaGF0LmNvbQ==
+At present the DDR memory controller is not modeled, hence the factory
+HSS firmware does not boot out of the box on QEMU. A modified HSS is
+required per the instructions on [1].
+
+This series adds the missing DDR memory controller support to PolarFire
+SoC, as well as adding various misc models to support the DDR memory
+initialization done by HSS.
+
+With this series, the unmodified HSS image can boot on QEMU out of the
+box. The latest SD card image [2] released by Microchip was used for
+testing which includes the pre-built U-Boot, device tree blob and Linux
+kernel for the Icicle Kit. The instructions on [1] have been updated to
+include the information on HSS and SD card image.
+
+[1] https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
+[2] ftp://ftpsoc.microsemi.com/outgoing/core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic.gz
+
+
+Bin Meng (9):
+  hw/misc: Add Microchip PolarFire SoC DDR Memory Controller support
+  hw/riscv: microchip_pfsoc: Connect DDR memory controller modules
+  hw/misc: Add Microchip PolarFire SoC IOSCB module support
+  hw/riscv: microchip_pfsoc: Connect the IOSCB module
+  hw/misc: Add Microchip PolarFire SoC SYSREG module support
+  hw/riscv: microchip_pfsoc: Connect the SYSREG module
+  hw/riscv: microchip_pfsoc: Map debug memory
+  hw/riscv: microchip_pfsoc: Correct DDR memory map
+  hw/riscv: microchip_pfsoc: Hook the I2C1 controller
+
+ MAINTAINERS                         |   6 +
+ hw/misc/Kconfig                     |   9 ++
+ hw/misc/mchp_pfsoc_dmc.c            | 216 +++++++++++++++++++++++++
+ hw/misc/mchp_pfsoc_ioscb.c          | 242 ++++++++++++++++++++++++++++
+ hw/misc/mchp_pfsoc_sysreg.c         |  99 ++++++++++++
+ hw/misc/meson.build                 |   3 +
+ hw/riscv/Kconfig                    |   3 +
+ hw/riscv/microchip_pfsoc.c          | 103 ++++++++++--
+ include/hw/misc/mchp_pfsoc_dmc.h    |  56 +++++++
+ include/hw/misc/mchp_pfsoc_ioscb.h  |  50 ++++++
+ include/hw/misc/mchp_pfsoc_sysreg.h |  39 +++++
+ include/hw/riscv/microchip_pfsoc.h  |  17 +-
+ 12 files changed, 828 insertions(+), 15 deletions(-)
+ create mode 100644 hw/misc/mchp_pfsoc_dmc.c
+ create mode 100644 hw/misc/mchp_pfsoc_ioscb.c
+ create mode 100644 hw/misc/mchp_pfsoc_sysreg.c
+ create mode 100644 include/hw/misc/mchp_pfsoc_dmc.h
+ create mode 100644 include/hw/misc/mchp_pfsoc_ioscb.h
+ create mode 100644 include/hw/misc/mchp_pfsoc_sysreg.h
+
+-- 
+2.25.1
+
 
