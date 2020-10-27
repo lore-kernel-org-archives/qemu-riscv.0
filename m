@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXPo7-0002n5-E0
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 10:18:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42766)
+	id 1kXPo9-0002rC-4G
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 10:18:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42790)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kXPo4-0002gb-Qp; Tue, 27 Oct 2020 10:18:36 -0400
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:37158)
+ id 1kXPo6-0002m1-Tl; Tue, 27 Oct 2020 10:18:38 -0400
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:43349)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kXPo2-0007i7-2p; Tue, 27 Oct 2020 10:18:36 -0400
-Received: by mail-pj1-x1032.google.com with SMTP id lt2so823043pjb.2;
- Tue, 27 Oct 2020 07:18:33 -0700 (PDT)
+ id 1kXPo4-0007iN-U9; Tue, 27 Oct 2020 10:18:38 -0400
+Received: by mail-pf1-x441.google.com with SMTP id a200so983144pfa.10;
+ Tue, 27 Oct 2020 07:18:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=Ls26fnfG9ZZq/yQ/l/9wvw2sQVViaGDjGlmHXraWck8=;
- b=sYQOfLzLrPuKwPRzc7UfqGogFg4oj+ji3MPSAbiik/YWNZG1DrD44Wadr2JqSU3GTB
- 0q5Cl/aek5e/fSngl3DG76OFaRqwpARexDNRrpui/Xf7/MEu1M9C0tamlmZ09JjQ0B73
- bbyYPDpqFtV1/V2ksKPSWmJK6FDXppKFhW4VNP5p8xEY/CK8mZ+7Mfto9pQiAYUPpzRr
- GtWL/NAw1zar45vMBw6mEoyulQ6ZdBz8ll9YsKF02vQtd4lO98W3Padq29mE7myBabKm
- ELpwegDpm/UuXH8f0F5xKvvjdqWnElrPcp4IyrRb0CRo1XkmdefDjyGhsAhk8ZS04WvE
- yo1w==
+ bh=9QPmyC2GPrREndFVaDnqrrStKAbAUa+Ljt8oIR0tH5Q=;
+ b=W815xAK+SLsN8IZX+YzJgAumTpkStuVAcC//c7ooJkyzXr0MXgcwykQ9d4aiWJlLyo
+ D6fmAfUROozIepAY0FstL7TWnHak+8Xu/jy7N6uUpBBDooAwxo7uUJsTD7G4UQ3lrPhH
+ BXF2xKVC32NJFozpFoCpQIjLak1oeeuGAL9sFdHlrbzaqc+/MEFHSxlGSKmdfnL/uwtu
+ SRJ8NQebXjP2353/sYU2v2Ln447TdUVCf0NN5u4/7rnjkbtmycb/aVLFfPwhCf/ztyI7
+ BSLcWZIPuuqKlQb/VIoEvy7THDwfKYfdIaeoUw6RfGTcnmWwC47SD3umsZGhssQb6WN7
+ +P1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=Ls26fnfG9ZZq/yQ/l/9wvw2sQVViaGDjGlmHXraWck8=;
- b=OxtBna7bYHSHfs1UntzO3RFbp6z3TuihMvRhtsl6n3HOsgSR8bDN2sc8k2Gy5wf/w8
- cNZKXIpzVUReSHmoou3BildfckAE9OLjnNvHHNHM6zBKzzBfRZiwEnyH7WFTtPDNDQtS
- yBea/kbBfFCDfNYU0/Gvrcsnf8VB32B+2wlm6dyXmmkrmfod0p40419zKfVLgBQmxfHm
- NhJeJcChZmEngyT8ktZAWRKjsXhhYe0etM8vbKcD4KxdrkhJIE9VYQDGhEKGSQEuZhUp
- oMpegSwu4EvbyDjCP2LLmQthkFoLvy1oLabydpEPAI3rpLqC9W2JeWI8Q5MCvv8OLPkj
- a7Bw==
-X-Gm-Message-State: AOAM532kC7Jf4YN2AeY8T9NDLRlydv9PLbMNVvieeqgCkCjxj33OSKXd
- ys6bLggfQU2QwnpxsI9uylw=
-X-Google-Smtp-Source: ABdhPJwKyG06HEG6ehWXpb5JiiaJ+Ii7cpdxkawC5F+SX1m1BGw3o27J+aYA9sM4GrrWFCkVPsdifg==
-X-Received: by 2002:a17:90a:e656:: with SMTP id
- ep22mr2261624pjb.107.1603808312362; 
- Tue, 27 Oct 2020 07:18:32 -0700 (PDT)
+ bh=9QPmyC2GPrREndFVaDnqrrStKAbAUa+Ljt8oIR0tH5Q=;
+ b=MhE0kKZJh9ktRWcDwJCeGmz62lqUzhImrxXoXfMv56MAGt43ZgvdhfaZUKfQVjPM93
+ wsaVGlpcs6Zu3MkNa6vcwkjaSbaqawExh4NDasleBBc8v/DEnJrsrcecAcTgzTkEpeZx
+ 0Ukcz3/CBAvGeq9Kw9Sv8V5aRigYBWo69GFQhg3BzEcuIXpO1RMOEgsEH7ZppTSqbzBx
+ O4wLGst0uqc7eNpJObhdtpEibgPxdfFd3/dtNyvle062m5N4Kn0+jOhcACt4i9Xi1RGx
+ Eh4GYOCCePLtuhVP7iMNKYRg9F7TbJQmgq14RW0l9JtvkOEIMYXiEx3Mkz5WxRvbaN6Z
+ XGqA==
+X-Gm-Message-State: AOAM5335OGMW4NTQMj0np91GdJZGztxUWIryOxtqczyCCA4N2ZRWMmB+
+ AoQhb0gC4QGF2QrB0+lru1A=
+X-Google-Smtp-Source: ABdhPJyRDTNWpxbu5zXmSVhXFJNPpfHWGIGeblurs15AnkDICtxfhBwQsFUKdq9DjJEA9mpgqYJzSw==
+X-Received: by 2002:aa7:9f4c:0:b029:164:4278:cae7 with SMTP id
+ h12-20020aa79f4c0000b02901644278cae7mr1550490pfr.11.1603808315097; 
+ Tue, 27 Oct 2020 07:18:35 -0700 (PDT)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id mn15sm1600297pjb.21.2020.10.27.07.18.29
+ by smtp.gmail.com with ESMTPSA id mn15sm1600297pjb.21.2020.10.27.07.18.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Oct 2020 07:18:31 -0700 (PDT)
+ Tue, 27 Oct 2020 07:18:34 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Anup Patel <anup.patel@wdc.com>, Atish Patra <atish.patra@wdc.com>,
  Ivan Griffin <ivan.griffin@emdalo.com>, Bin Meng <bin.meng@windriver.com>
-Subject: [RESEND PATCH 6/9] hw/riscv: microchip_pfsoc: Connect the SYSREG
- module
-Date: Tue, 27 Oct 2020 22:17:37 +0800
-Message-Id: <20201027141740.18336-7-bmeng.cn@gmail.com>
+Subject: [RESEND PATCH 7/9] hw/riscv: microchip_pfsoc: Map debug memory
+Date: Tue, 27 Oct 2020 22:17:38 +0800
+Message-Id: <20201027141740.18336-8-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201027141740.18336-1-bmeng.cn@gmail.com>
 References: <20201027141740.18336-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1032.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x441.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -80,80 +79,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2020 14:18:37 -0000
+X-List-Received-Date: Tue, 27 Oct 2020 14:18:39 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Previously SYSREG was created as an unimplemented device. Now that
-we have a simple SYSREG module, connect it.
+Somehow HSS needs to access address 0 [1] for the DDR calibration data
+which is in the chipset's debug memory. Let's map the debug memory.
+
+[1] See the config_copy() calls in various places in ddr_setup() in
+    the HSS source codes.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- hw/riscv/Kconfig                   | 1 +
- hw/riscv/microchip_pfsoc.c         | 9 ++++++---
- include/hw/riscv/microchip_pfsoc.h | 2 ++
- 3 files changed, 9 insertions(+), 3 deletions(-)
+ hw/riscv/microchip_pfsoc.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 8f043e38e0..facb0cbacc 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -7,6 +7,7 @@ config MICROCHIP_PFSOC
-     select MCHP_PFSOC_DMC
-     select MCHP_PFSOC_IOSCB
-     select MCHP_PFSOC_MMUART
-+    select MCHP_PFSOC_SYSREG
-     select MSI_NONBROKEN
-     select SIFIVE_CLINT
-     select SIFIVE_PDMA
 diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index 05fb5004a1..69117c6000 100644
+index 69117c6000..b9c2f73e7c 100644
 --- a/hw/riscv/microchip_pfsoc.c
 +++ b/hw/riscv/microchip_pfsoc.c
-@@ -135,6 +135,9 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
-     object_initialize_child(obj, "dma-controller", &s->dma,
-                             TYPE_SIFIVE_PDMA);
+@@ -158,6 +158,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     MicrochipPFSoCState *s = MICROCHIP_PFSOC(dev);
+     const struct MemmapEntry *memmap = microchip_pfsoc_memmap;
+     MemoryRegion *system_memory = get_system_memory();
++    MemoryRegion *debug_mem = g_new(MemoryRegion, 1);
+     MemoryRegion *e51_dtim_mem = g_new(MemoryRegion, 1);
+     MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
+     MemoryRegion *envm_data = g_new(MemoryRegion, 1);
+@@ -177,6 +178,13 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     qdev_realize(DEVICE(&s->e_cluster), NULL, &error_abort);
+     qdev_realize(DEVICE(&s->u_cluster), NULL, &error_abort);
  
-+    object_initialize_child(obj, "sysreg", &s->sysreg,
-+                            TYPE_MCHP_PFSOC_SYSREG);
++    /* Debug */
++    memory_region_init_ram(debug_mem, NULL, "microchip.pfsoc.debug_mem",
++                           memmap[MICROCHIP_PFSOC_DEBUG].size, &error_fatal);
++    memory_region_add_subregion(system_memory,
++                                memmap[MICROCHIP_PFSOC_DEBUG].base,
++                                debug_mem);
 +
-     object_initialize_child(obj, "ddr-sgmii-phy", &s->ddr_sgmii_phy,
-                             TYPE_MCHP_PFSOC_DDR_SGMII_PHY);
-     object_initialize_child(obj, "ddr-cfg", &s->ddr_cfg,
-@@ -262,9 +265,9 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     }
- 
-     /* SYSREG */
--    create_unimplemented_device("microchip.pfsoc.sysreg",
--        memmap[MICROCHIP_PFSOC_SYSREG].base,
--        memmap[MICROCHIP_PFSOC_SYSREG].size);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->sysreg), errp);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sysreg), 0,
-+                    memmap[MICROCHIP_PFSOC_SYSREG].base);
- 
-     /* MPUCFG */
-     create_unimplemented_device("microchip.pfsoc.mpucfg",
-diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-index a244ae6d39..245c82db61 100644
---- a/include/hw/riscv/microchip_pfsoc.h
-+++ b/include/hw/riscv/microchip_pfsoc.h
-@@ -26,6 +26,7 @@
- #include "hw/dma/sifive_pdma.h"
- #include "hw/misc/mchp_pfsoc_dmc.h"
- #include "hw/misc/mchp_pfsoc_ioscb.h"
-+#include "hw/misc/mchp_pfsoc_sysreg.h"
- #include "hw/net/cadence_gem.h"
- #include "hw/sd/cadence_sdhci.h"
- 
-@@ -47,6 +48,7 @@ typedef struct MicrochipPFSoCState {
-     MchpPfSoCMMUartState *serial2;
-     MchpPfSoCMMUartState *serial3;
-     MchpPfSoCMMUartState *serial4;
-+    MchpPfSoCSysregState sysreg;
-     SiFivePDMAState dma;
-     CadenceGEMState gem0;
-     CadenceGEMState gem1;
+     /* E51 DTIM */
+     memory_region_init_ram(e51_dtim_mem, NULL, "microchip.pfsoc.e51_dtim_mem",
+                            memmap[MICROCHIP_PFSOC_E51_DTIM].size, &error_fatal);
 -- 
 2.25.1
 
