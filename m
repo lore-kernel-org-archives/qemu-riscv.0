@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXPo6-0002kj-Cr
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 10:18:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42750)
+	id 1kXPo7-0002n5-E0
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 10:18:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42766)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kXPo1-0002Y4-45; Tue, 27 Oct 2020 10:18:33 -0400
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:41126)
+ id 1kXPo4-0002gb-Qp; Tue, 27 Oct 2020 10:18:36 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:37158)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kXPny-0007hp-Gd; Tue, 27 Oct 2020 10:18:32 -0400
-Received: by mail-pf1-x444.google.com with SMTP id c20so989775pfr.8;
- Tue, 27 Oct 2020 07:18:29 -0700 (PDT)
+ id 1kXPo2-0007i7-2p; Tue, 27 Oct 2020 10:18:36 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id lt2so823043pjb.2;
+ Tue, 27 Oct 2020 07:18:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=S8aFeiwXcL7jj5E1nZldB4D5f90iqiRclf6j3tcuFGI=;
- b=VzPZUaeIsMICLPA0u4FaJaSAQ2dynQMkB3TvbbLwTzI8k4SbhHrjfTNE/vCG8k2x3A
- NlJUmW+CLUnsS180ppDoXvsu/guziEahW4o63TUViH61G8N9rAoCiWC/Zc74/MW7lhaO
- p8ogxgzhDoQTXj7syuYwnzPSWCeJSQRgjIykUN1ghaYhwEYil/HbjY8YQkTmaHSxzMsx
- VpB3Y5I2OUoCsoGvLqlHBnOAYgWW3TT7S8SioNKNSMRjYWtxSibS7HqBHVHivXznHTm4
- lhPnR8Vlqz3W+X2r6z1S1mAcMKlquPEFhMJzuFxYVWVkK0RiwIUSVGWQnoNRJTt6CSPD
- 312w==
+ bh=Ls26fnfG9ZZq/yQ/l/9wvw2sQVViaGDjGlmHXraWck8=;
+ b=sYQOfLzLrPuKwPRzc7UfqGogFg4oj+ji3MPSAbiik/YWNZG1DrD44Wadr2JqSU3GTB
+ 0q5Cl/aek5e/fSngl3DG76OFaRqwpARexDNRrpui/Xf7/MEu1M9C0tamlmZ09JjQ0B73
+ bbyYPDpqFtV1/V2ksKPSWmJK6FDXppKFhW4VNP5p8xEY/CK8mZ+7Mfto9pQiAYUPpzRr
+ GtWL/NAw1zar45vMBw6mEoyulQ6ZdBz8ll9YsKF02vQtd4lO98W3Padq29mE7myBabKm
+ ELpwegDpm/UuXH8f0F5xKvvjdqWnElrPcp4IyrRb0CRo1XkmdefDjyGhsAhk8ZS04WvE
+ yo1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=S8aFeiwXcL7jj5E1nZldB4D5f90iqiRclf6j3tcuFGI=;
- b=jjVtijoE8NohU9jljyJBHhls2Jk2fEpCnkSgVvjt5v7D5XS6M4zrl+zk5Oew9ZK1Rf
- 55P+VjeMQ3zsRDk1R0mGJCxWvl084E/yhh/58bhJoXGJ6Zi5dcgPfjwO6+XZo8Ejxug9
- d8Wz2G0eEMNzZrbelSjd+uV2DORuCaDKheDoc28XH39xUFg8lDZHE8oV0DIoHEzLdc/1
- 9v0BZwhlaHlYBePsLN3D1lhvGzg2iX8L3JQDCTdhlaCMLnMtMtDIucYipodA5s+rgJgJ
- y00i9X+2yWdR0yUocADzmJ6fUqHXFHjDxOQvZef1qo6hvsxPGvPOr512UBCx6jVV0HO3
- Vy0g==
-X-Gm-Message-State: AOAM530xPuKiAGQEII2ROvCV52eFkfG/3CTvf7NoiKqCImCjr08p0Ucp
- A3mcQO+0NzSrk498vt91KFg=
-X-Google-Smtp-Source: ABdhPJz2UlpZ0nGHcjOBuD1PZVBkkpKkOzkRV1lw6s63+Qt+X42+Nabd6nkK2b70onY9eer8QEvWXw==
-X-Received: by 2002:a65:62d5:: with SMTP id m21mr2137566pgv.226.1603808308939; 
- Tue, 27 Oct 2020 07:18:28 -0700 (PDT)
+ bh=Ls26fnfG9ZZq/yQ/l/9wvw2sQVViaGDjGlmHXraWck8=;
+ b=OxtBna7bYHSHfs1UntzO3RFbp6z3TuihMvRhtsl6n3HOsgSR8bDN2sc8k2Gy5wf/w8
+ cNZKXIpzVUReSHmoou3BildfckAE9OLjnNvHHNHM6zBKzzBfRZiwEnyH7WFTtPDNDQtS
+ yBea/kbBfFCDfNYU0/Gvrcsnf8VB32B+2wlm6dyXmmkrmfod0p40419zKfVLgBQmxfHm
+ NhJeJcChZmEngyT8ktZAWRKjsXhhYe0etM8vbKcD4KxdrkhJIE9VYQDGhEKGSQEuZhUp
+ oMpegSwu4EvbyDjCP2LLmQthkFoLvy1oLabydpEPAI3rpLqC9W2JeWI8Q5MCvv8OLPkj
+ a7Bw==
+X-Gm-Message-State: AOAM532kC7Jf4YN2AeY8T9NDLRlydv9PLbMNVvieeqgCkCjxj33OSKXd
+ ys6bLggfQU2QwnpxsI9uylw=
+X-Google-Smtp-Source: ABdhPJwKyG06HEG6ehWXpb5JiiaJ+Ii7cpdxkawC5F+SX1m1BGw3o27J+aYA9sM4GrrWFCkVPsdifg==
+X-Received: by 2002:a17:90a:e656:: with SMTP id
+ ep22mr2261624pjb.107.1603808312362; 
+ Tue, 27 Oct 2020 07:18:32 -0700 (PDT)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id mn15sm1600297pjb.21.2020.10.27.07.18.26
+ by smtp.gmail.com with ESMTPSA id mn15sm1600297pjb.21.2020.10.27.07.18.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Oct 2020 07:18:28 -0700 (PDT)
+ Tue, 27 Oct 2020 07:18:31 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Anup Patel <anup.patel@wdc.com>, Atish Patra <atish.patra@wdc.com>,
  Ivan Griffin <ivan.griffin@emdalo.com>, Bin Meng <bin.meng@windriver.com>
-Subject: [RESEND PATCH 5/9] hw/misc: Add Microchip PolarFire SoC SYSREG module
- support
-Date: Tue, 27 Oct 2020 22:17:36 +0800
-Message-Id: <20201027141740.18336-6-bmeng.cn@gmail.com>
+Subject: [RESEND PATCH 6/9] hw/riscv: microchip_pfsoc: Connect the SYSREG
+ module
+Date: Tue, 27 Oct 2020 22:17:37 +0800
+Message-Id: <20201027141740.18336-7-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201027141740.18336-1-bmeng.cn@gmail.com>
 References: <20201027141740.18336-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::444;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x444.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1032.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -79,219 +80,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2020 14:18:33 -0000
+X-List-Received-Date: Tue, 27 Oct 2020 14:18:37 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-This creates a minimum model for Microchip PolarFire SoC SYSREG
-module. It only implements the ENVM_CR register to tell guest
-software that eNVM is running at the configured divider rate.
+Previously SYSREG was created as an unimplemented device. Now that
+we have a simple SYSREG module, connect it.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- MAINTAINERS                         |  2 +
- hw/misc/Kconfig                     |  3 +
- hw/misc/mchp_pfsoc_sysreg.c         | 99 +++++++++++++++++++++++++++++
- hw/misc/meson.build                 |  1 +
- include/hw/misc/mchp_pfsoc_sysreg.h | 39 ++++++++++++
- 5 files changed, 144 insertions(+)
- create mode 100644 hw/misc/mchp_pfsoc_sysreg.c
- create mode 100644 include/hw/misc/mchp_pfsoc_sysreg.h
+ hw/riscv/Kconfig                   | 1 +
+ hw/riscv/microchip_pfsoc.c         | 9 ++++++---
+ include/hw/riscv/microchip_pfsoc.h | 2 ++
+ 3 files changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ebbc62a62f..e82f2b35e8 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1328,10 +1328,12 @@ F: hw/riscv/microchip_pfsoc.c
- F: hw/char/mchp_pfsoc_mmuart.c
- F: hw/misc/mchp_pfsoc_dmc.c
- F: hw/misc/mchp_pfsoc_ioscb.c
-+F: hw/misc/mchp_pfsoc_sysreg.c
- F: include/hw/riscv/microchip_pfsoc.h
- F: include/hw/char/mchp_pfsoc_mmuart.h
- F: include/hw/misc/mchp_pfsoc_dmc.h
- F: include/hw/misc/mchp_pfsoc_ioscb.h
-+F: include/hw/misc/mchp_pfsoc_sysreg.h
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index 8f043e38e0..facb0cbacc 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -7,6 +7,7 @@ config MICROCHIP_PFSOC
+     select MCHP_PFSOC_DMC
+     select MCHP_PFSOC_IOSCB
+     select MCHP_PFSOC_MMUART
++    select MCHP_PFSOC_SYSREG
+     select MSI_NONBROKEN
+     select SIFIVE_CLINT
+     select SIFIVE_PDMA
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index 05fb5004a1..69117c6000 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -135,6 +135,9 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
+     object_initialize_child(obj, "dma-controller", &s->dma,
+                             TYPE_SIFIVE_PDMA);
  
- RX Machines
- -----------
-diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-index 3db15e06b4..546e2fab9b 100644
---- a/hw/misc/Kconfig
-+++ b/hw/misc/Kconfig
-@@ -140,6 +140,9 @@ config MCHP_PFSOC_DMC
- config MCHP_PFSOC_IOSCB
-     bool
- 
-+config MCHP_PFSOC_SYSREG
-+    bool
++    object_initialize_child(obj, "sysreg", &s->sysreg,
++                            TYPE_MCHP_PFSOC_SYSREG);
 +
- config SIFIVE_TEST
-     bool
+     object_initialize_child(obj, "ddr-sgmii-phy", &s->ddr_sgmii_phy,
+                             TYPE_MCHP_PFSOC_DDR_SGMII_PHY);
+     object_initialize_child(obj, "ddr-cfg", &s->ddr_cfg,
+@@ -262,9 +265,9 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     }
  
-diff --git a/hw/misc/mchp_pfsoc_sysreg.c b/hw/misc/mchp_pfsoc_sysreg.c
-new file mode 100644
-index 0000000000..248a313345
---- /dev/null
-+++ b/hw/misc/mchp_pfsoc_sysreg.c
-@@ -0,0 +1,99 @@
-+/*
-+ * Microchip PolarFire SoC SYSREG module emulation
-+ *
-+ * Copyright (c) 2020 Wind River Systems, Inc.
-+ *
-+ * Author:
-+ *   Bin Meng <bin.meng@windriver.com>
-+ *
-+ * This program is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU General Public License as
-+ * published by the Free Software Foundation; either version 2 or
-+ * (at your option) version 3 of the License.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along
-+ * with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/bitops.h"
-+#include "qemu/log.h"
-+#include "qapi/error.h"
-+#include "hw/hw.h"
-+#include "hw/sysbus.h"
+     /* SYSREG */
+-    create_unimplemented_device("microchip.pfsoc.sysreg",
+-        memmap[MICROCHIP_PFSOC_SYSREG].base,
+-        memmap[MICROCHIP_PFSOC_SYSREG].size);
++    sysbus_realize(SYS_BUS_DEVICE(&s->sysreg), errp);
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sysreg), 0,
++                    memmap[MICROCHIP_PFSOC_SYSREG].base);
+ 
+     /* MPUCFG */
+     create_unimplemented_device("microchip.pfsoc.mpucfg",
+diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+index a244ae6d39..245c82db61 100644
+--- a/include/hw/riscv/microchip_pfsoc.h
++++ b/include/hw/riscv/microchip_pfsoc.h
+@@ -26,6 +26,7 @@
+ #include "hw/dma/sifive_pdma.h"
+ #include "hw/misc/mchp_pfsoc_dmc.h"
+ #include "hw/misc/mchp_pfsoc_ioscb.h"
 +#include "hw/misc/mchp_pfsoc_sysreg.h"
-+
-+#define ENVM_CR         0xb8
-+
-+static uint64_t mchp_pfsoc_sysreg_read(void *opaque, hwaddr offset,
-+                                       unsigned size)
-+{
-+    uint32_t val = 0;
-+
-+    switch (offset) {
-+    case ENVM_CR:
-+        /* Indicate the eNVM is running at the configured divider rate */
-+        val = BIT(6);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
-+                      "(size %d, offset 0x%" HWADDR_PRIx ")\n",
-+                      __func__, size, offset);
-+        break;
-+    }
-+
-+    return val;
-+}
-+
-+static void mchp_pfsoc_sysreg_write(void *opaque, hwaddr offset,
-+                                    uint64_t value, unsigned size)
-+{
-+    qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
-+                  "(size %d, value 0x%" PRIx64
-+                  ", offset 0x%" HWADDR_PRIx ")\n",
-+                  __func__, size, value, offset);
-+}
-+
-+static const MemoryRegionOps mchp_pfsoc_sysreg_ops = {
-+    .read = mchp_pfsoc_sysreg_read,
-+    .write = mchp_pfsoc_sysreg_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+};
-+
-+static void mchp_pfsoc_sysreg_realize(DeviceState *dev, Error **errp)
-+{
-+    MchpPfSoCSysregState *s = MCHP_PFSOC_SYSREG(dev);
-+
-+    memory_region_init_io(&s->sysreg, OBJECT(dev),
-+                          &mchp_pfsoc_sysreg_ops, s,
-+                          "mchp.pfsoc.sysreg",
-+                          MCHP_PFSOC_SYSREG_REG_SIZE);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->sysreg);
-+}
-+
-+static void mchp_pfsoc_sysreg_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    dc->desc = "Microchip PolarFire SoC SYSREG module";
-+    dc->realize = mchp_pfsoc_sysreg_realize;
-+}
-+
-+static const TypeInfo mchp_pfsoc_sysreg_info = {
-+    .name          = TYPE_MCHP_PFSOC_SYSREG,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(MchpPfSoCSysregState),
-+    .class_init    = mchp_pfsoc_sysreg_class_init,
-+};
-+
-+static void mchp_pfsoc_sysreg_register_types(void)
-+{
-+    type_register_static(&mchp_pfsoc_sysreg_info);
-+}
-+
-+type_init(mchp_pfsoc_sysreg_register_types)
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index 6d3c1a3455..8ed75254c4 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -24,6 +24,7 @@ softmmu_ss.add(when: 'CONFIG_MOS6522', if_true: files('mos6522.c'))
- # RISC-V devices
- softmmu_ss.add(when: 'CONFIG_MCHP_PFSOC_DMC', if_true: files('mchp_pfsoc_dmc.c'))
- softmmu_ss.add(when: 'CONFIG_MCHP_PFSOC_IOSCB', if_true: files('mchp_pfsoc_ioscb.c'))
-+softmmu_ss.add(when: 'CONFIG_MCHP_PFSOC_SYSREG', if_true: files('mchp_pfsoc_sysreg.c'))
- softmmu_ss.add(when: 'CONFIG_SIFIVE_TEST', if_true: files('sifive_test.c'))
- softmmu_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
- softmmu_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
-diff --git a/include/hw/misc/mchp_pfsoc_sysreg.h b/include/hw/misc/mchp_pfsoc_sysreg.h
-new file mode 100644
-index 0000000000..546ba68f6a
---- /dev/null
-+++ b/include/hw/misc/mchp_pfsoc_sysreg.h
-@@ -0,0 +1,39 @@
-+/*
-+ * Microchip PolarFire SoC SYSREG module emulation
-+ *
-+ * Copyright (c) 2020 Wind River Systems, Inc.
-+ *
-+ * Author:
-+ *   Bin Meng <bin.meng@windriver.com>
-+ *
-+ * This program is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU General Public License as
-+ * published by the Free Software Foundation; either version 2 or
-+ * (at your option) version 3 of the License.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along
-+ * with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef MCHP_PFSOC_SYSREG_H
-+#define MCHP_PFSOC_SYSREG_H
-+
-+#define MCHP_PFSOC_SYSREG_REG_SIZE  0x2000
-+
-+typedef struct MchpPfSoCSysregState {
-+    SysBusDevice parent;
-+    MemoryRegion sysreg;
-+} MchpPfSoCSysregState;
-+
-+#define TYPE_MCHP_PFSOC_SYSREG "mchp.pfsoc.sysreg"
-+
-+#define MCHP_PFSOC_SYSREG(obj) \
-+    OBJECT_CHECK(MchpPfSoCSysregState, (obj), \
-+                 TYPE_MCHP_PFSOC_SYSREG)
-+
-+#endif /* MCHP_PFSOC_SYSREG_H */
+ #include "hw/net/cadence_gem.h"
+ #include "hw/sd/cadence_sdhci.h"
+ 
+@@ -47,6 +48,7 @@ typedef struct MicrochipPFSoCState {
+     MchpPfSoCMMUartState *serial2;
+     MchpPfSoCMMUartState *serial3;
+     MchpPfSoCMMUartState *serial4;
++    MchpPfSoCSysregState sysreg;
+     SiFivePDMAState dma;
+     CadenceGEMState gem0;
+     CadenceGEMState gem1;
 -- 
 2.25.1
 
