@@ -1,50 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXSp5-0001s5-RP
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 13:31:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40378)
+	id 1kXSzS-00053Z-Vh
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 13:42:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43750)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXSp2-0001rW-Oi; Tue, 27 Oct 2020 13:31:48 -0400
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:40414)
+ id 1kXSzN-00051y-Hk; Tue, 27 Oct 2020 13:42:29 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:42224)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXSp0-0002e8-71; Tue, 27 Oct 2020 13:31:48 -0400
-Received: by mail-io1-xd44.google.com with SMTP id r9so2413993ioo.7;
- Tue, 27 Oct 2020 10:31:45 -0700 (PDT)
+ id 1kXSzK-0004GJ-PH; Tue, 27 Oct 2020 13:42:29 -0400
+Received: by mail-io1-xd43.google.com with SMTP id k21so2445709ioa.9;
+ Tue, 27 Oct 2020 10:42:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=PT1FEr/VqIwLp4Z5yd/80qY0i7T/ZN4CO95FsozCujc=;
- b=Xcni4zakLFdwevgfriejdhw5XNfjPWeIYEQpWTRHD1Po/XJIZam/XYPgJabCc3T9eU
- P5ziCMji8A/2ROYvXOMCCcr4zVk/y47O7hpPdqyqHZp4anvEeyHOKVKhYlslF/gTzrWL
- BwhUAAlTmnMd6P3oQTmlYEiduD0jiV2Eaze/FvRQwoUi4KGhVzqONnmZEOaaS2CYmjFp
- 0h24QpP8+cldSPkRHrmb8aaCWJlfGnChAC6YIhExJGEbqGteeECYRMVrtgLCCjkaBlAs
- sDILh+4PT256U8+FD5eKgqFgq/6p/fLGoOikGMzXSnxCao/PcKRHuQo6UJs30CjRStLt
- H30g==
+ :cc; bh=P2YFMNrVt0KtTz+rNAgd0A8fNm+bJ5Y3j6JqD4NXvhs=;
+ b=XRuuYyjc3nFPlrUicnp9GdAJD5QcAWbhbIhLx71jlFGLjEK8XEx0cfI3atBB2RvZ2D
+ +tQhRACocaa9pK9JEdTTh1XtLWsNlMPPCmrxFlwSCZRlwm0WAKh0jwlUzyMgdbXJ8N2o
+ uPbLPb6HuVnvDzwnRjZ5sh/zhTnkVY2rapzAvIBIJMU7pxhn/waYOg+vaz43DVbKcYwh
+ RqQiDKN+TCGBC94uyBa3cLBC+xHPqZf+GsfLC/N40Qgizdgl63iHQi7kFwbR2Oh8E30B
+ jV57Zsc+2y4sSGP1+/8DRyu63XQpHxUAQ+DNTbnEAey2v8Ct6Xml2e0lsqOhjCPHIo6V
+ 5qRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=PT1FEr/VqIwLp4Z5yd/80qY0i7T/ZN4CO95FsozCujc=;
- b=q3cuCPwTLB5gAIFJETmMdV9exAAuWSRTv0fLlX7gEXiwXoMFAwJAg9gqQgnh2y7A6K
- 8RarH7Nh045OQLtryYVAk7QPrzFDCSlPgZ0epdBbgz4oRlB2/TgbHn7pF1rlRCIJPBSe
- QlC2FTpT+CHWWSns4oYuZHsmfyXBydM+/gAXTaQJL/9UmjObGbxBK4CXUZSBYnvOsxbn
- 2HxllQ6NQSEThs+P3J+NV7elD9f9ZdAAeCIBeHQ82D3Lw/K3J4piisK1BjovPm3Dg2CU
- pTo3YUguxwo6YV9H5vkJahnHT62StLA+7rrXniSOSRAhpm8tzWIBDlfvdTLm6PwrDhLj
- JSjA==
-X-Gm-Message-State: AOAM532MSYiHr2oKjhqKGE37G+j+ulH4Ii2EuSWo1jcLleG+BMNVQKAV
- eMMtWo64+KCc8dtd3qTnnyW6ll4lEIitHM9V998=
-X-Google-Smtp-Source: ABdhPJz6Osd3uwkpFaOm5utJoOCxoaEK9ZkTlOGp5sSzcJpZ7FcpCbudXE/97dEpBUowiSeXh+MRueAHFKhzje2WMhk=
-X-Received: by 2002:a02:84c3:: with SMTP id f61mr3670030jai.8.1603819904378;
- Tue, 27 Oct 2020 10:31:44 -0700 (PDT)
+ bh=P2YFMNrVt0KtTz+rNAgd0A8fNm+bJ5Y3j6JqD4NXvhs=;
+ b=dZQRbWeF2KDD0S3iQ2HkYLu+HAqMdEv5sgzsUWbkeUn4Ce5ovvc+YgpptwywQdLzlX
+ OICOfFR30OwjTHINo9EGJIFQXVsOWfzrdT5IWk/0IhSAY3IUE7/Wp+vz7VDhLDMWx8SZ
+ PTKOAXcr09071T1/NragrEWhALcrS9TPxxizIh1BXR7Nqi71EERzmmw7fSDIhwVXF07D
+ m4t4Vkql/j+OtBHRP8bIWErsvzchx/jpct3p/ozxa2ZtyBFhovHgPDdhesnGC3+N/Lsj
+ RGPQfQqA984R0wuoKdyBlQbWw0C1T3SMAY99+fh6E2pbgKwDnHL1Il4XIrJSXmpepvwI
+ Ax+A==
+X-Gm-Message-State: AOAM5337M6pP/R29CxCkUiHipz4tp3bOcgV1Ol+92meCAeelwbTuvgYG
+ u+/Otu/joGeejoriGf6zN+lEIBxvWIy/dD6O7TU=
+X-Google-Smtp-Source: ABdhPJzQmZRNc3aZ04yHqGAkuC4zNoQc7MP+NVdmrVa6s9NCiaBr5WgbxjAdpIzQNNuNlWCsWVq9A6TRMvj1GEJEf1M=
+X-Received: by 2002:a02:84c3:: with SMTP id f61mr3713303jai.8.1603820544780;
+ Tue, 27 Oct 2020 10:42:24 -0700 (PDT)
 MIME-Version: 1.0
 References: <20201027141740.18336-1-bmeng.cn@gmail.com>
- <20201027141740.18336-10-bmeng.cn@gmail.com>
-In-Reply-To: <20201027141740.18336-10-bmeng.cn@gmail.com>
+ <20201027141740.18336-8-bmeng.cn@gmail.com>
+In-Reply-To: <20201027141740.18336-8-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 27 Oct 2020 10:19:55 -0700
-Message-ID: <CAKmqyKO63H9m-wwp45sGxzEwduv9WtwoY8dvPkMMVhTet=FyOg@mail.gmail.com>
-Subject: Re: [RESEND PATCH 9/9] hw/riscv: microchip_pfsoc: Hook the I2C1
- controller
+Date: Tue, 27 Oct 2020 10:30:35 -0700
+Message-ID: <CAKmqyKNVUgV6Go6RdogLxhE5hOBr7aboe1indWTEaodep4MJLg@mail.gmail.com>
+Subject: Re: [RESEND PATCH 7/9] hw/riscv: microchip_pfsoc: Map debug memory
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -52,8 +51,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Atish Patra <atish.patra@wdc.com>, 
  Anup Patel <anup.patel@wdc.com>, Ivan Griffin <ivan.griffin@emdalo.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -76,71 +75,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2020 17:31:49 -0000
+X-List-Received-Date: Tue, 27 Oct 2020 17:42:33 -0000
 
-On Tue, Oct 27, 2020 at 7:55 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, Oct 27, 2020 at 7:53 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> The latest SD card image [1] released by Microchip ships a Linux
-> kernel with built-in PolarFire SoC I2C driver support. The device
-> tree file includes the description for the I2C1 node hence kernel
-> tries to probe the I2C1 device during boot.
+> Somehow HSS needs to access address 0 [1] for the DDR calibration data
+> which is in the chipset's debug memory. Let's map the debug memory.
 >
-> It is enough to create an unimplemented device for I2C1 to allow
-> the kernel to continue booting to the shell.
->
-> [1] ftp://ftpsoc.microsemi.com/outgoing/core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic.gz
+> [1] See the config_copy() calls in various places in ddr_setup() in
+>     the HSS source codes.
+
+Really? This is reserved memory that they just read and write to? That's crazy.
+
+If we really need this can you add a comment saying that the
+documentation is wrong (again) and that this needs to be here.
+
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> ---
+>
+>  hw/riscv/microchip_pfsoc.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index 69117c6000..b9c2f73e7c 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -158,6 +158,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>      MicrochipPFSoCState *s = MICROCHIP_PFSOC(dev);
+>      const struct MemmapEntry *memmap = microchip_pfsoc_memmap;
+>      MemoryRegion *system_memory = get_system_memory();
+> +    MemoryRegion *debug_mem = g_new(MemoryRegion, 1);
+>      MemoryRegion *e51_dtim_mem = g_new(MemoryRegion, 1);
+>      MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
+>      MemoryRegion *envm_data = g_new(MemoryRegion, 1);
+> @@ -177,6 +178,13 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>      qdev_realize(DEVICE(&s->e_cluster), NULL, &error_abort);
+>      qdev_realize(DEVICE(&s->u_cluster), NULL, &error_abort);
+>
+> +    /* Debug */
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This doesn't seem right.
+
+Debug should start at 0x0000_0100 (it seems like what is currently in
+tree is wrong).
+
+Address 0x00 is marked as reserved in the documentation.
+
+Do you mind updating the memory map to fix the debug address? Then
+just add a reserved region as well.
 
 Alistair
 
->
-> ---
->
->  hw/riscv/microchip_pfsoc.c         | 6 ++++++
->  include/hw/riscv/microchip_pfsoc.h | 1 +
->  2 files changed, 7 insertions(+)
->
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index c595c9c967..4e878c2836 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -94,6 +94,7 @@ static const struct MemmapEntry {
->      [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
->      [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
->      [MICROCHIP_PFSOC_MMUART4] =         { 0x20106000,     0x1000 },
-> +    [MICROCHIP_PFSOC_I2C1] =            { 0x2010b000,     0x1000 },
->      [MICROCHIP_PFSOC_GEM0] =            { 0x20110000,     0x2000 },
->      [MICROCHIP_PFSOC_GEM1] =            { 0x20112000,     0x2000 },
->      [MICROCHIP_PFSOC_GPIO0] =           { 0x20120000,     0x1000 },
-> @@ -324,6 +325,11 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
->          qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART4_IRQ),
->          serial_hd(4));
->
-> +    /* I2C1 */
-> +    create_unimplemented_device("microchip.pfsoc.i2c1",
-> +        memmap[MICROCHIP_PFSOC_I2C1].base,
-> +        memmap[MICROCHIP_PFSOC_I2C1].size);
+> +    memory_region_init_ram(debug_mem, NULL, "microchip.pfsoc.debug_mem",
+> +                           memmap[MICROCHIP_PFSOC_DEBUG].size, &error_fatal);
+> +    memory_region_add_subregion(system_memory,
+> +                                memmap[MICROCHIP_PFSOC_DEBUG].base,
+> +                                debug_mem);
 > +
->      /* GEMs */
->
->      nd = &nd_table[0];
-> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-> index dc05688d94..74ae789c03 100644
-> --- a/include/hw/riscv/microchip_pfsoc.h
-> +++ b/include/hw/riscv/microchip_pfsoc.h
-> @@ -96,6 +96,7 @@ enum {
->      MICROCHIP_PFSOC_MMUART2,
->      MICROCHIP_PFSOC_MMUART3,
->      MICROCHIP_PFSOC_MMUART4,
-> +    MICROCHIP_PFSOC_I2C1,
->      MICROCHIP_PFSOC_GEM0,
->      MICROCHIP_PFSOC_GEM1,
->      MICROCHIP_PFSOC_GPIO0,
+>      /* E51 DTIM */
+>      memory_region_init_ram(e51_dtim_mem, NULL, "microchip.pfsoc.e51_dtim_mem",
+>                             memmap[MICROCHIP_PFSOC_E51_DTIM].size, &error_fatal);
 > --
 > 2.25.1
 >
