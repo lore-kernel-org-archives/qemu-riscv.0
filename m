@@ -1,49 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXSzS-00053Z-Vh
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 13:42:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43750)
+	id 1kXT64-0005vO-KX
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 13:49:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47182)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXSzN-00051y-Hk; Tue, 27 Oct 2020 13:42:29 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:42224)
+ id 1kXT5v-0005t8-6P; Tue, 27 Oct 2020 13:49:15 -0400
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:38047)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXSzK-0004GJ-PH; Tue, 27 Oct 2020 13:42:29 -0400
-Received: by mail-io1-xd43.google.com with SMTP id k21so2445709ioa.9;
- Tue, 27 Oct 2020 10:42:25 -0700 (PDT)
+ id 1kXT5q-0005Q9-GN; Tue, 27 Oct 2020 13:49:14 -0400
+Received: by mail-io1-xd42.google.com with SMTP id y20so2486040iod.5;
+ Tue, 27 Oct 2020 10:49:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=P2YFMNrVt0KtTz+rNAgd0A8fNm+bJ5Y3j6JqD4NXvhs=;
- b=XRuuYyjc3nFPlrUicnp9GdAJD5QcAWbhbIhLx71jlFGLjEK8XEx0cfI3atBB2RvZ2D
- +tQhRACocaa9pK9JEdTTh1XtLWsNlMPPCmrxFlwSCZRlwm0WAKh0jwlUzyMgdbXJ8N2o
- uPbLPb6HuVnvDzwnRjZ5sh/zhTnkVY2rapzAvIBIJMU7pxhn/waYOg+vaz43DVbKcYwh
- RqQiDKN+TCGBC94uyBa3cLBC+xHPqZf+GsfLC/N40Qgizdgl63iHQi7kFwbR2Oh8E30B
- jV57Zsc+2y4sSGP1+/8DRyu63XQpHxUAQ+DNTbnEAey2v8Ct6Xml2e0lsqOhjCPHIo6V
- 5qRg==
+ :cc; bh=onx8aWS3JSsRvz7twCqULyHhgjMXYAppBpKGCxhrckE=;
+ b=kSOn6IeX4AGvX0A/GeF2TNlXkt96NO8ci5+MWufwDdyl7n3RJhnjDgrh9ktbGq+hqK
+ NnLpec0LIdxrjz0uckpLGBA43VuRqpAu65eSPj5ZvBMWN6LNg4vQzG2JJgJ9GT2yAztf
+ Yq3zqx/TxuzjC8xUi8xyKhTW6n+Nz2UFpG6MrShONgGUPrbcVM+cFCCYLKylsIUJDyoW
+ WiQbARt00RzHOZzdD6tmRoLXveKeaGXY//Rj3p0xlDnMBvETQKvQwdtC2bbMo3tnM1PV
+ QeZ/1o15RG8lWTQ6as0W8pNnU6m3fYBaif7dR7ij2pJSkQ2KX9dCDK8mN6niIzq90bk2
+ ghMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=P2YFMNrVt0KtTz+rNAgd0A8fNm+bJ5Y3j6JqD4NXvhs=;
- b=dZQRbWeF2KDD0S3iQ2HkYLu+HAqMdEv5sgzsUWbkeUn4Ce5ovvc+YgpptwywQdLzlX
- OICOfFR30OwjTHINo9EGJIFQXVsOWfzrdT5IWk/0IhSAY3IUE7/Wp+vz7VDhLDMWx8SZ
- PTKOAXcr09071T1/NragrEWhALcrS9TPxxizIh1BXR7Nqi71EERzmmw7fSDIhwVXF07D
- m4t4Vkql/j+OtBHRP8bIWErsvzchx/jpct3p/ozxa2ZtyBFhovHgPDdhesnGC3+N/Lsj
- RGPQfQqA984R0wuoKdyBlQbWw0C1T3SMAY99+fh6E2pbgKwDnHL1Il4XIrJSXmpepvwI
- Ax+A==
-X-Gm-Message-State: AOAM5337M6pP/R29CxCkUiHipz4tp3bOcgV1Ol+92meCAeelwbTuvgYG
- u+/Otu/joGeejoriGf6zN+lEIBxvWIy/dD6O7TU=
-X-Google-Smtp-Source: ABdhPJzQmZRNc3aZ04yHqGAkuC4zNoQc7MP+NVdmrVa6s9NCiaBr5WgbxjAdpIzQNNuNlWCsWVq9A6TRMvj1GEJEf1M=
-X-Received: by 2002:a02:84c3:: with SMTP id f61mr3713303jai.8.1603820544780;
- Tue, 27 Oct 2020 10:42:24 -0700 (PDT)
+ bh=onx8aWS3JSsRvz7twCqULyHhgjMXYAppBpKGCxhrckE=;
+ b=aFxkef2KqWZFP4M5qfcyQnjnn6rT3UPdTfD+sEd4zuCbsUgrQJeOU0e3ZW/zX/rasS
+ cRetymWSYTEExqTdHEyzQ1zc8qw3yENb/rIGFGggcUAMm4Hp2lLYOwzN0q04OiJnZ0RL
+ 09Cj8S62fRQ6tG9vTNx6uX8d0sUozUGk4PwKDE2k5mbp4Alhwe95nzBg3NlcED2rC7j1
+ 6Umqbs9JcKzXRpK+10UBxw0v1C6B1Ze1hPs/mVqKs8NmWEcATdpRmpPjHpF/YIkCq46V
+ RLO6/DtdUpMUM9z8asmg9nHQ2oTCnRfkvI8qV+nz92ZUfa0/A74z5+h4PT4CoWKGc+6X
+ AuYg==
+X-Gm-Message-State: AOAM53004//+wIX1Tes8QTqqZi9yLvrsZRzNLzccgwp7V78W/iuqZcqF
+ L18LfIyguHQOVeDNacZMwZPAe+Q10gq9QsO6DuY=
+X-Google-Smtp-Source: ABdhPJwpj2K6YlNvETSSPo6xOrJtbFhoVA0BDMgohqG+ziy4JyAkiXr2T4DQBqdtod6jGS3681CrThJ6kb9g0wARgIo=
+X-Received: by 2002:a05:6638:ec3:: with SMTP id
+ q3mr2032119jas.106.1603820948092; 
+ Tue, 27 Oct 2020 10:49:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20201027141740.18336-1-bmeng.cn@gmail.com>
- <20201027141740.18336-8-bmeng.cn@gmail.com>
-In-Reply-To: <20201027141740.18336-8-bmeng.cn@gmail.com>
+ <20201027141740.18336-3-bmeng.cn@gmail.com>
+In-Reply-To: <20201027141740.18336-3-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 27 Oct 2020 10:30:35 -0700
-Message-ID: <CAKmqyKNVUgV6Go6RdogLxhE5hOBr7aboe1indWTEaodep4MJLg@mail.gmail.com>
-Subject: Re: [RESEND PATCH 7/9] hw/riscv: microchip_pfsoc: Map debug memory
+Date: Tue, 27 Oct 2020 10:37:18 -0700
+Message-ID: <CAKmqyKMyHCZCLZOqVVZ4n4C0_rAY-WO5-J+Y=dqi0qtZsLXjpw@mail.gmail.com>
+Subject: Re: [RESEND PATCH 2/9] hw/riscv: microchip_pfsoc: Connect DDR memory
+ controller modules
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -51,8 +53,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Atish Patra <atish.patra@wdc.com>, 
  Anup Patel <anup.patel@wdc.com>, Ivan Griffin <ivan.griffin@emdalo.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -75,69 +77,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2020 17:42:33 -0000
+X-List-Received-Date: Tue, 27 Oct 2020 17:49:18 -0000
 
-On Tue, Oct 27, 2020 at 7:53 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, Oct 27, 2020 at 7:46 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> Somehow HSS needs to access address 0 [1] for the DDR calibration data
-> which is in the chipset's debug memory. Let's map the debug memory.
->
-> [1] See the config_copy() calls in various places in ddr_setup() in
->     the HSS source codes.
-
-Really? This is reserved memory that they just read and write to? That's crazy.
-
-If we really need this can you add a comment saying that the
-documentation is wrong (again) and that this needs to be here.
-
+> Connect DDR SGMII PHY module and CFG module to the PolarFire SoC.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 > ---
 >
->  hw/riscv/microchip_pfsoc.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
+>  hw/riscv/Kconfig                   |  1 +
+>  hw/riscv/microchip_pfsoc.c         | 18 ++++++++++++++++++
+>  include/hw/riscv/microchip_pfsoc.h |  5 +++++
+>  3 files changed, 24 insertions(+)
 >
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index 2df978fe8d..c8e50bde99 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -4,6 +4,7 @@ config IBEX
+>  config MICROCHIP_PFSOC
+>      bool
+>      select CADENCE_SDHCI
+> +    select MCHP_PFSOC_DMC
+>      select MCHP_PFSOC_MMUART
+>      select MSI_NONBROKEN
+>      select SIFIVE_CLINT
 > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index 69117c6000..b9c2f73e7c 100644
+> index 4627179cd3..85be2bcde8 100644
 > --- a/hw/riscv/microchip_pfsoc.c
 > +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -158,6 +158,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
->      MicrochipPFSoCState *s = MICROCHIP_PFSOC(dev);
->      const struct MemmapEntry *memmap = microchip_pfsoc_memmap;
->      MemoryRegion *system_memory = get_system_memory();
-> +    MemoryRegion *debug_mem = g_new(MemoryRegion, 1);
->      MemoryRegion *e51_dtim_mem = g_new(MemoryRegion, 1);
->      MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
->      MemoryRegion *envm_data = g_new(MemoryRegion, 1);
-> @@ -177,6 +178,13 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
->      qdev_realize(DEVICE(&s->e_cluster), NULL, &error_abort);
->      qdev_realize(DEVICE(&s->u_cluster), NULL, &error_abort);
->
-> +    /* Debug */
+> @@ -15,6 +15,7 @@
+>   * 4) Cadence eMMC/SDHC controller and an SD card connected to it
+>   * 5) SiFive Platform DMA (Direct Memory Access Controller)
+>   * 6) GEM (Gigabit Ethernet MAC Controller)
+> + * 7) DMC (DDR Memory Controller)
+>   *
+>   * This board currently generates devicetree dynamically that indicates at least
+>   * two harts and up to five harts.
+> @@ -85,7 +86,9 @@ static const struct MemmapEntry {
+>      [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
+>      [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
+>      [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
+> +    [MICROCHIP_PFSOC_DDR_SGMII_PHY] =   { 0x20007000,     0x1000 },
+>      [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
+> +    [MICROCHIP_PFSOC_DDR_CFG] =         { 0x20080000,    0x40000 },
 
-This doesn't seem right.
+Neither of these are documented....
 
-Debug should start at 0x0000_0100 (it seems like what is currently in
-tree is wrong).
+Maybe just add a single comment above the memory layout clarifying
+that this is not what is documented from the SoC but is instead based
+on what guests do?
 
-Address 0x00 is marked as reserved in the documentation.
-
-Do you mind updating the memory map to fix the debug address? Then
-just add a reserved region as well.
+It seems to be a constant problem with this board, unless I am really
+misreading the memory map.
 
 Alistair
 
-> +    memory_region_init_ram(debug_mem, NULL, "microchip.pfsoc.debug_mem",
-> +                           memmap[MICROCHIP_PFSOC_DEBUG].size, &error_fatal);
-> +    memory_region_add_subregion(system_memory,
-> +                                memmap[MICROCHIP_PFSOC_DEBUG].base,
-> +                                debug_mem);
+>      [MICROCHIP_PFSOC_MMUART1] =         { 0x20100000,     0x1000 },
+>      [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
+>      [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
+> @@ -131,6 +134,11 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
+>      object_initialize_child(obj, "dma-controller", &s->dma,
+>                              TYPE_SIFIVE_PDMA);
+>
+> +    object_initialize_child(obj, "ddr-sgmii-phy", &s->ddr_sgmii_phy,
+> +                            TYPE_MCHP_PFSOC_DDR_SGMII_PHY);
+> +    object_initialize_child(obj, "ddr-cfg", &s->ddr_cfg,
+> +                            TYPE_MCHP_PFSOC_DDR_CFG);
 > +
->      /* E51 DTIM */
->      memory_region_init_ram(e51_dtim_mem, NULL, "microchip.pfsoc.e51_dtim_mem",
->                             memmap[MICROCHIP_PFSOC_E51_DTIM].size, &error_fatal);
+>      object_initialize_child(obj, "gem0", &s->gem0, TYPE_CADENCE_GEM);
+>      object_initialize_child(obj, "gem1", &s->gem1, TYPE_CADENCE_GEM);
+>
+> @@ -260,6 +268,16 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>          memmap[MICROCHIP_PFSOC_MPUCFG].base,
+>          memmap[MICROCHIP_PFSOC_MPUCFG].size);
+>
+> +    /* DDR SGMII PHY */
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->ddr_sgmii_phy), errp);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddr_sgmii_phy), 0,
+> +                    memmap[MICROCHIP_PFSOC_DDR_SGMII_PHY].base);
+> +
+> +    /* DDR CFG */
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->ddr_cfg), errp);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddr_cfg), 0,
+> +                    memmap[MICROCHIP_PFSOC_DDR_CFG].base);
+> +
+>      /* SDHCI */
+>      sysbus_realize(SYS_BUS_DEVICE(&s->sdhci), errp);
+>      sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci), 0,
+> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+> index 8bfc7e1a85..5b81e26241 100644
+> --- a/include/hw/riscv/microchip_pfsoc.h
+> +++ b/include/hw/riscv/microchip_pfsoc.h
+> @@ -24,6 +24,7 @@
+>
+>  #include "hw/char/mchp_pfsoc_mmuart.h"
+>  #include "hw/dma/sifive_pdma.h"
+> +#include "hw/misc/mchp_pfsoc_dmc.h"
+>  #include "hw/net/cadence_gem.h"
+>  #include "hw/sd/cadence_sdhci.h"
+>
+> @@ -37,6 +38,8 @@ typedef struct MicrochipPFSoCState {
+>      RISCVHartArrayState e_cpus;
+>      RISCVHartArrayState u_cpus;
+>      DeviceState *plic;
+> +    MchpPfSoCDdrSgmiiPhyState ddr_sgmii_phy;
+> +    MchpPfSoCDdrCfgState ddr_cfg;
+>      MchpPfSoCMMUartState *serial0;
+>      MchpPfSoCMMUartState *serial1;
+>      MchpPfSoCMMUartState *serial2;
+> @@ -82,7 +85,9 @@ enum {
+>      MICROCHIP_PFSOC_MMUART0,
+>      MICROCHIP_PFSOC_SYSREG,
+>      MICROCHIP_PFSOC_MPUCFG,
+> +    MICROCHIP_PFSOC_DDR_SGMII_PHY,
+>      MICROCHIP_PFSOC_EMMC_SD,
+> +    MICROCHIP_PFSOC_DDR_CFG,
+>      MICROCHIP_PFSOC_MMUART1,
+>      MICROCHIP_PFSOC_MMUART2,
+>      MICROCHIP_PFSOC_MMUART3,
 > --
 > 2.25.1
 >
