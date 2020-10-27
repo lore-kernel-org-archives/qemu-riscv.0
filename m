@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXVjL-0005za-08
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 16:38:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36396)
+	id 1kXVpc-0001bp-1b
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 16:44:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37956)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXVjI-0005uu-Dt; Tue, 27 Oct 2020 16:38:04 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:39461)
+ id 1kXVpa-0001bK-IR; Tue, 27 Oct 2020 16:44:34 -0400
+Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:43327)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXVjG-00066L-Le; Tue, 27 Oct 2020 16:38:04 -0400
-Received: by mail-il1-x142.google.com with SMTP id q1so2728642ilt.6;
- Tue, 27 Oct 2020 13:38:01 -0700 (PDT)
+ id 1kXVpY-00076f-MP; Tue, 27 Oct 2020 16:44:34 -0400
+Received: by mail-il1-x143.google.com with SMTP id k1so2737780ilc.10;
+ Tue, 27 Oct 2020 13:44:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UDJbHXkiDmfKXG5N7PxBPFhTE3mwZeImbNwXAbE1OYM=;
- b=c8YmZX9uMoA1FMwYu9DPt6ql33JVwHPCpyggmy1FD1zwKz2YG/fY5vsJTqOCS4DsHX
- kN6wgT/LkTMQcdmdHFcoEBAMzIYNDvZhn9buP739j7gjWZlAgpH4RQtLdQO+WeomM5yu
- ddq6gPEtLtg9q8dJl+PnwwHAXntdWPwGPDnNYrdYj2eIDTBmJxYxAxWI5Hekrr0O+uIB
- ZWfB/BRkKD4hA4Ac88GSp+ge3aX4x8mzREIRq1IcbS2+lYVFIb1aszIiiisWNF0XrJ1p
- PMtZ1KaFdOCijMmBf3hb0pAojQIhhbptizr3LqOu+V4WSw4rzzQNnSdN7AaaWYF+22xB
- swYg==
+ :cc; bh=geKCiEuVs4Vr5RFHereyk+gtB55kHNUfsY0dTfRlKTU=;
+ b=IWGM/oVbSNgJ4SPQ0iYUo96HuJjPDiDezcjt1bWKy01J9BJHWEo8VkwYyxAOOQ+egt
+ PUWYxcoS/b+n9GJtEhRw2yZqBWPnKITadQGwAAhCo0U3pr2jH/K1lT0HJ2VklAjQ1Oh5
+ DJchF2rTHZJrzqxcLZLGkW+CKfY7i6BR4LQylSGy4nn7cAfCU+8KQG/TAt1Oj/ViWl0d
+ R9S8+ujgqDJNyMjHFLFlUq/lMQyFX1O+6j7D6o1hPcTI9mRgMs+Y0P0PdNwtzUxFq6C6
+ 3NTA1RKzC8d2qZGwkC31P9Nu7J9fm6gGQUeTgCZvn+9QB+h2sWTMHCMs7fmrt7mjD9AN
+ 3Ftg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=UDJbHXkiDmfKXG5N7PxBPFhTE3mwZeImbNwXAbE1OYM=;
- b=tQdhnUjNtcacs5WgknZnWin6mVljXbA0kN0Sjryr/W97PlJY4DnFn154cxn0aoo6tt
- rw9Rwdsx0fjiLpH6BUChuSyKeIYFGC4gkqGXob7FCEpbJ458CytAw1/bASS1hDtTmJ4W
- 66lIgX2PScSthLptz6aZb0GcDObNSeG2Yvo5syvDZ1h+oVX3Hs/6m8wGg4zd5xspV7/e
- OBRSOc672PgLmGImZQhSLfvIcWjyrJrMXgHI2BbfA+ONHev3YHxZ1bpdYXgOlN5ANQc1
- jKLx8O9c1CO59Mo5jw3Ch1x9hr9253kjdA6rrwSDL7UJ39KN6nqc6f34FHf8DQjtHRjZ
- kjUw==
-X-Gm-Message-State: AOAM532NPxlHa9NcvINkX+qSYwPNyYgDjQUiwvfxhYRRr/onkKSIn+Sv
- CJe6ZSvdGuxWVm03izITs3gkzY/bAyZYYXKDdwk=
-X-Google-Smtp-Source: ABdhPJywwk5s2cewqIrf0st6pZqC9JfX+4iOaAWdhVX8M5UAcKT2ckqsi+r5nm+taKQyYoHVnZbtpILbCn1320/XpA4=
-X-Received: by 2002:a05:6e02:f41:: with SMTP id
- y1mr3567885ilj.267.1603831081514; 
- Tue, 27 Oct 2020 13:38:01 -0700 (PDT)
+ bh=geKCiEuVs4Vr5RFHereyk+gtB55kHNUfsY0dTfRlKTU=;
+ b=KBRJa7/xsDjiAUqoNHL5rNYKzgLTOtHyZu0nCCHSPem8fYRCbnoTVo12xvRoEIqRjT
+ u5Tz91CGxAzvWdJmuLbYPLBb5ATPWWrX3xU/5GnSrS2m6c1mycuJClW5smB/I2ln0NFx
+ joRPQMzMzju9ZFz4z4uHgMJF/nSDjemU4/2V4uH9x7KZoxxyyRnUSuJdSopGoAKK9sAg
+ WWOA2m4TiARj32JC8Igkp3ervJX9IDZ/AviNxQBvgO1ozstZpTebcvU1tJ/3anO6SmNR
+ njQXGTfIb0zJc9vD+qiIbgQIyldX5NL/dsfcIa87lHETKyldQMdoOj+6xcY3oCWeVOOG
+ 4iGQ==
+X-Gm-Message-State: AOAM533bQHA6dEJ4DAfI9TV1nxzjyuU1D6QtRTrPofEFAKsNgcAwZZ5H
+ 78Js0WPR1PuTGcz3LJE7XqmpnT5Kfjfb4Y3SMEI=
+X-Google-Smtp-Source: ABdhPJwnqLZsLikrq+Hmvm9NLslm4HdoWMQ4BnKfLW2n0tA+GJETTLLbMb1eCw5FGI0UgjDSbbcVpx/TWZors3eW29M=
+X-Received: by 2002:a05:6e02:c:: with SMTP id
+ h12mr3585818ilr.177.1603831470526; 
+ Tue, 27 Oct 2020 13:44:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20201026115530.304-1-jiangyifei@huawei.com>
-In-Reply-To: <20201026115530.304-1-jiangyifei@huawei.com>
+References: <20201026212853.92880-1-keithp@keithp.com>
+ <20201026212853.92880-2-keithp@keithp.com>
+In-Reply-To: <20201026212853.92880-2-keithp@keithp.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 27 Oct 2020 13:26:12 -0700
-Message-ID: <CAKmqyKM-de168rpmH9Qk1R=FoaQht2VWckEMEq=0dnyO2PFOgg@mail.gmail.com>
-Subject: Re: [PATCH V4 0/6] Support RISC-V migration
-To: Yifei Jiang <jiangyifei@huawei.com>
+Date: Tue, 27 Oct 2020 13:32:40 -0700
+Message-ID: <CAKmqyKPFAz=UhDAYC7frbeNgPOUYST_wcKO5u_5hugwRRZanMg@mail.gmail.com>
+Subject: Re: [PATCH 1/4] semihosting: Move ARM semihosting code to shared
+ directories
+To: Keith Packard <keithp@keithp.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Zhanghailiang <zhang.zhanghailiang@huawei.com>, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Laurent Vivier <laurent@vivier.eu>, Peter Maydell <peter.maydell@linaro.org>, 
+ qemu-arm <qemu-arm@nongnu.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "Zhangxiaofeng (F)" <victor.zhangxiaofeng@huawei.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- yinyipeng <yinyipeng1@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "Wubin (H)" <wu.wubin@huawei.com>, "dengkai (A)" <dengkai1@huawei.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::143;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x143.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -80,67 +80,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2020 20:38:04 -0000
+X-List-Received-Date: Tue, 27 Oct 2020 20:44:35 -0000
 
-On Mon, Oct 26, 2020 at 4:58 AM Yifei Jiang <jiangyifei@huawei.com> wrote:
+On Mon, Oct 26, 2020 at 2:34 PM Keith Packard via <qemu-devel@nongnu.org> wrote:
 >
-> This patches supported RISC-V migration based on tcg accel. And we have
-> verified related migration features such as snapshot and live migration.
+> This commit renames two files which provide ARM semihosting support so
+> that they can be shared by other architectures:
 >
-> A few weeks ago, we submitted RFC patches about supporting RISC-V migration
-> based on kvm accel: https://www.spinics.net/lists/kvm/msg223605.html.
-> And we found that tcg accelerated migration can be supported with a few
-> changes. Most of the devices have already implemented the migration
-> interface, so, to achieve the tcg accelerated migration, we just need to
-> add vmstate of both cpu and sifive_plic.
+>  1. target/arm/arm-semi.c     -> hw/semihosting/common-semi.c
+>  2. linux-user/arm/semihost.c -> linux-user/semihost.c
 >
-> changes since v3
-> 1. Apply Alistair's patch to exend get/set_field():
->    https://www.mail-archive.com/qemu-devel@nongnu.org/msg753575.html
-> 2. Remake the patch: Merge m/vsstatus and m/vsstatush into one uint64_t
->    unit.
+> The build system was modified to reflect this change, but the contents
+> of the two files are unchanged.
 >
-> Changes since v2:
-> 1. Move vmstate_riscv_cpu declaration to internals.h.
-> 2. Merge m/vsstatus and m/vsstatush into one uint64_t unit.
->
-> Changes since v1:
-> 1. Add license head to target/riscv/machine.c.
-> 2. Regenerate some state of PMP at post_load hook.
->
-> Yifei Jiang (6):
->   target/riscv: Merge m/vsstatus and m/vsstatush into one uint64_t unit
->   target/riscv: Add basic vmstate description of CPU
->   target/riscv: Add PMP state description
->   target/riscv: Add H extension state description
->   target/riscv: Add V extension state description
->   target/riscv: Add sifive_plic vmstate
+> Signed-off-by: Keith Packard <keithp@keithp.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/arm/arm-semi.c => hw/semihosting/common-semi.c | 0
+>  hw/semihosting/meson.build                            | 2 ++
+>  linux-user/arm/meson.build                            | 3 ---
+>  linux-user/meson.build                                | 2 ++
+>  linux-user/{arm => }/semihost.c                       | 0
+>  target/arm/meson.build                                | 2 --
+>  6 files changed, 4 insertions(+), 5 deletions(-)
+>  rename target/arm/arm-semi.c => hw/semihosting/common-semi.c (100%)
+>  rename linux-user/{arm => }/semihost.c (100%)
 >
->  hw/intc/sifive_plic.c     |  26 ++++-
->  hw/intc/sifive_plic.h     |   1 +
->  target/riscv/cpu.c        |  16 ++--
->  target/riscv/cpu.h        |  24 +++--
->  target/riscv/cpu_bits.h   |  19 +---
->  target/riscv/cpu_helper.c |  35 ++-----
->  target/riscv/csr.c        |  18 ++--
->  target/riscv/internals.h  |   4 +
->  target/riscv/machine.c    | 196 ++++++++++++++++++++++++++++++++++++++
->  target/riscv/meson.build  |   3 +-
->  target/riscv/op_helper.c  |  11 +--
->  target/riscv/pmp.c        |  29 +++---
->  target/riscv/pmp.h        |   2 +
->  13 files changed, 290 insertions(+), 94 deletions(-)
->  create mode 100644 target/riscv/machine.c
+> diff --git a/target/arm/arm-semi.c b/hw/semihosting/common-semi.c
+> similarity index 100%
+> rename from target/arm/arm-semi.c
+> rename to hw/semihosting/common-semi.c
+> diff --git a/hw/semihosting/meson.build b/hw/semihosting/meson.build
+> index f40ac574c4..fbd2841e59 100644
+> --- a/hw/semihosting/meson.build
+> +++ b/hw/semihosting/meson.build
+> @@ -2,3 +2,5 @@ specific_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
+>    'config.c',
+>    'console.c',
+>  ))
+> +
+> +specific_ss.add(when: 'CONFIG_TCG', if_true: files ('common-semi.c'))
+> diff --git a/linux-user/arm/meson.build b/linux-user/arm/meson.build
+> index 432984b58e..5a93c925cf 100644
+> --- a/linux-user/arm/meson.build
+> +++ b/linux-user/arm/meson.build
+> @@ -1,6 +1,3 @@
+> -linux_user_ss.add(when: 'TARGET_AARCH64', if_true: files('semihost.c'))
+> -linux_user_ss.add(when: 'TARGET_ARM', if_true: files('semihost.c'))
+> -
+>  subdir('nwfpe')
 >
+>  syscall_nr_generators += {
+> diff --git a/linux-user/meson.build b/linux-user/meson.build
+> index 2b94e4ba24..2fdd12cee5 100644
+> --- a/linux-user/meson.build
+> +++ b/linux-user/meson.build
+> @@ -17,6 +17,8 @@ linux_user_ss.add(rt)
+>  linux_user_ss.add(when: 'TARGET_HAS_BFLT', if_true: files('flatload.c'))
+>  linux_user_ss.add(when: 'TARGET_I386', if_true: files('vm86.c'))
+>
+> +linux_user_ss.add(when: 'TARGET_AARCH64', if_true: files('semihost.c'))
+> +linux_user_ss.add(when: 'TARGET_ARM', if_true: files('semihost.c'))
+>
+>  syscall_nr_generators = {}
+>
+> diff --git a/linux-user/arm/semihost.c b/linux-user/semihost.c
+> similarity index 100%
+> rename from linux-user/arm/semihost.c
+> rename to linux-user/semihost.c
+> diff --git a/target/arm/meson.build b/target/arm/meson.build
+> index f5de2a77b8..15b936c101 100644
+> --- a/target/arm/meson.build
+> +++ b/target/arm/meson.build
+> @@ -32,8 +32,6 @@ arm_ss.add(files(
+>  ))
+>  arm_ss.add(zlib)
+>
+> -arm_ss.add(when: 'CONFIG_TCG', if_true: files('arm-semi.c'))
+> -
+>  arm_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c', 'kvm64.c'), if_false: files('kvm-stub.c'))
+>
+>  arm_ss.add(when: 'TARGET_AARCH64', if_true: files(
 > --
-> 2.19.1
+> 2.28.0
 >
 >
 
