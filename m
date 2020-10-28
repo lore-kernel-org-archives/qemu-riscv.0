@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXaVN-0006bg-PT
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 21:44:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42970)
+	id 1kXarh-0001TD-Du
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 22:07:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48336)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kXaVK-0006aY-Cz; Tue, 27 Oct 2020 21:43:58 -0400
-Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:41112)
+ id 1kXare-0001S7-Vr; Tue, 27 Oct 2020 22:07:03 -0400
+Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:42638)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kXaVI-0005p3-2r; Tue, 27 Oct 2020 21:43:58 -0400
-Received: by mail-yb1-xb44.google.com with SMTP id c129so2921598yba.8;
- Tue, 27 Oct 2020 18:43:55 -0700 (PDT)
+ id 1kXard-0000i3-1G; Tue, 27 Oct 2020 22:07:02 -0400
+Received: by mail-yb1-xb44.google.com with SMTP id a12so2956370ybg.9;
+ Tue, 27 Oct 2020 19:06:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=M1V7yTmf01n72tWMAPoF7C/PVSHWxT2o5lfXqxy5Y0w=;
- b=drDiAbTUHIesFv3cMDUl1WWLhH3LkszjSyLyFhiuho1Ze9BaSG0usrrjjPKPCxmT82
- VWKHMm/O621cBy7H+4mjhsYQUoylzUXKxNDJ1Sl5sM3Via5zBrUo8WyIq1+vftSrYWOS
- roiAhUwc1LygHFBCTRdzZymbkOFLyJ2KBjvz5eLLcAKxlBHYxRLRVIOReQ0a7r3o5Nm+
- b4EmLHp1uB/uBYbSm33B6Jl3B/PvB2VSNWMKTK/OxF3j+zASb+f4+nnxJbQ2lRGi/+Xh
- 3LGwpoI/Ko+DaUmk8XimvIg/wtAbJYCnRr8x0x3tWtF9uFZvqDzLkrcgd3i65PXWS/j/
- Npjw==
+ :cc; bh=GCTuKbs0MTqN0jlRoij574zIRN4+H2PXsJGuJwuOpfA=;
+ b=O3Ftg153nJbDmshzEMf16K2DLuzfFS9P4+vrXvV6YpqcSlHlz3UJXryS137vcfHwPs
+ 0trI+andkraIFP/+88CaN01k62WXRY1Q7kpY3X3wcuDXAloUk1xUxSbEepxtdkbbhHrq
+ APXgTlSH/iaLy1t9ka4MWKgQz+Ignj7ikb5vAQQ/w25+r4SC3/st/5KxFRpjK1PA/sBM
+ X+xBaQXPxFpTJkt+jJc5wr302dmkbvwx+odMxFx2maS2WtLItIi0EfOvL0GSSzIhPism
+ 8wfGQkA6E+C1zJ3Rm/nXsQGYmGduTHyR3JuKb3Klr1hlHQ1xt286RNgeN2XEme4uKSkL
+ 9dUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=M1V7yTmf01n72tWMAPoF7C/PVSHWxT2o5lfXqxy5Y0w=;
- b=uB6HcBcvbuU6rJKf3x4WvOPaK5DIlNLpDkjsl2bC7e2BWzHs5XfeeGSn1i3lIZ+Atm
- 3XriknSAg5dv26qYD/8FMR842RxV+PGNFwi/3xDU1AU+HFGHHbzdk0sGWdv4jzbGXySN
- LSbHzESfAPRE7XxHoYbIXGVEBvkj7NbsWt8kRrT8xGep81/82n0KJ0hNYOCbEKgN0bTZ
- DDF+1nPDogkwk4PB7ifdDNrFlPGEH/LHRld5mrtm0OFpsYjBknUi+Q88NNOAP+HZztcO
- bmi2427q0p2eFhmi3UlPKpJYjC7nMKX/AqktaMi1hriOJ1AJoQbuHXcvoChhYmu9afxE
- pgog==
-X-Gm-Message-State: AOAM533DI9Q3dlS//yOIMjDH6E9nJdacxBqtvnV4aeXIxp468s8tMYU3
- wB3EhsXRfzt5vSs9CLZsr1IqOgG1mtERRHPoLoU=
-X-Google-Smtp-Source: ABdhPJzD8sg6kUVWOXrqbIEibHH/UIbA74pZDUl8AH4e/4UbZFuJgW0Bq0nPHKq9a5m0pb2dhfRjDx4zNY91us7I+pY=
-X-Received: by 2002:a25:386:: with SMTP id 128mr7131481ybd.122.1603849434625; 
- Tue, 27 Oct 2020 18:43:54 -0700 (PDT)
+ bh=GCTuKbs0MTqN0jlRoij574zIRN4+H2PXsJGuJwuOpfA=;
+ b=C7l5iJibFwBH+1st4Lo3ghl0er1HoQ3XOF5wtoJ5ntBjoqWcWuzy7Gat8um3sBvVE6
+ nKukh3uLHVZng40sHD9hDRqmqgFiHRwJ1uVX6982AImQf1q1aeO62nq+xTRXDqEJMwH0
+ xeIoynOWmXwafyeisnzYHtgnafoRYW1PXvKwFQXVu/VNRnhnkY+lpMjr198ZdOKX1dL5
+ UF08eZcntQkYOPF9ax1rcFAw75uLTTyw8DxdrfwE/bQMmaJjkiJ+h/YLbFlBToDRLggk
+ mI1ciEj6SiL/KzCKd9aqMeYDITAWjZS2LKds+iJSO2JD2G7164o6ecIkuONrEKqjCpr/
+ vkPQ==
+X-Gm-Message-State: AOAM530d8bkTvXsrOSCtyvsmd7KS81EhXXegwhFjEXYqyYPYhhPxddLe
+ m7MI2CxqB0vegtySO9t7pT/tcTPnq5PD2YJEjNc=
+X-Google-Smtp-Source: ABdhPJwQzvnrUuUewcRxjYuKrPiWX/ULjZSyf90K8scw4Nq8Dd1kS17Xoue2V5ZWIrRaqmYgbvNuwUKbebO+4Z+7uE4=
+X-Received: by 2002:a25:386:: with SMTP id 128mr7213003ybd.122.1603850819320; 
+ Tue, 27 Oct 2020 19:06:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20201027141740.18336-1-bmeng.cn@gmail.com>
- <20201027141740.18336-3-bmeng.cn@gmail.com>
- <CAKmqyKMyHCZCLZOqVVZ4n4C0_rAY-WO5-J+Y=dqi0qtZsLXjpw@mail.gmail.com>
-In-Reply-To: <CAKmqyKMyHCZCLZOqVVZ4n4C0_rAY-WO5-J+Y=dqi0qtZsLXjpw@mail.gmail.com>
+ <20201027141740.18336-9-bmeng.cn@gmail.com>
+ <CAKmqyKPx0GeMCtBsPJ_VXf7ukMKemXMebEMaXSCABg+qN7va9Q@mail.gmail.com>
+In-Reply-To: <CAKmqyKPx0GeMCtBsPJ_VXf7ukMKemXMebEMaXSCABg+qN7va9Q@mail.gmail.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 28 Oct 2020 09:43:42 +0800
-Message-ID: <CAEUhbmWqoP71uKYRhYdmb=Hxx=FNOYcfL6EkEChn9x1Qq9CddQ@mail.gmail.com>
-Subject: Re: [RESEND PATCH 2/9] hw/riscv: microchip_pfsoc: Connect DDR memory
- controller modules
+Date: Wed, 28 Oct 2020 10:06:48 +0800
+Message-ID: <CAEUhbmUj8ETrtvLnxPeqLrrs8igFm=qbrJpE+_z=u8yt5VYbMQ@mail.gmail.com>
+Subject: Re: [RESEND PATCH 8/9] hw/riscv: microchip_pfsoc: Correct DDR memory
+ map
 To: Alistair Francis <alistair23@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -76,76 +76,104 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 01:43:59 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 02:07:03 -0000
 
 Hi Alistair,
 
-On Wed, Oct 28, 2020 at 1:49 AM Alistair Francis <alistair23@gmail.com> wrote:
+On Wed, Oct 28, 2020 at 5:07 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> On Tue, Oct 27, 2020 at 7:46 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> On Tue, Oct 27, 2020 at 7:48 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 > >
 > > From: Bin Meng <bin.meng@windriver.com>
 > >
-> > Connect DDR SGMII PHY module and CFG module to the PolarFire SoC.
+> > When system memory is larger than 1 GiB (high memory), PolarFire SoC
+> > maps it at address 0x10_0000_0000. Address 0xC000_0000 and above is
+> > aliased to the same 1 GiB low memory with different cache attributes.
+> >
+> > At present QEMU maps the system memory contiguously from 0x8000_0000.
+> > This corrects the wrong QEMU logic. Note address 0x14_0000_0000 is
+> > the alias to the high memory, and even physical memory is only 1 GiB,
+> > the HSS codes still tries to probe the high memory alias address.
+> > It seems there is no issue on the real hardware, so we will have to
+> > take that into the consideration in our emulation.
 > >
 > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 > > ---
 > >
-> >  hw/riscv/Kconfig                   |  1 +
-> >  hw/riscv/microchip_pfsoc.c         | 18 ++++++++++++++++++
-> >  include/hw/riscv/microchip_pfsoc.h |  5 +++++
-> >  3 files changed, 24 insertions(+)
+> >  hw/riscv/microchip_pfsoc.c         | 49 +++++++++++++++++++++++++++---
+> >  include/hw/riscv/microchip_pfsoc.h |  5 ++-
+> >  2 files changed, 48 insertions(+), 6 deletions(-)
 > >
-> > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> > index 2df978fe8d..c8e50bde99 100644
-> > --- a/hw/riscv/Kconfig
-> > +++ b/hw/riscv/Kconfig
-> > @@ -4,6 +4,7 @@ config IBEX
-> >  config MICROCHIP_PFSOC
-> >      bool
-> >      select CADENCE_SDHCI
-> > +    select MCHP_PFSOC_DMC
-> >      select MCHP_PFSOC_MMUART
-> >      select MSI_NONBROKEN
-> >      select SIFIVE_CLINT
 > > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> > index 4627179cd3..85be2bcde8 100644
+> > index b9c2f73e7c..c595c9c967 100644
 > > --- a/hw/riscv/microchip_pfsoc.c
 > > +++ b/hw/riscv/microchip_pfsoc.c
-> > @@ -15,6 +15,7 @@
-> >   * 4) Cadence eMMC/SDHC controller and an SD card connected to it
-> >   * 5) SiFive Platform DMA (Direct Memory Access Controller)
-> >   * 6) GEM (Gigabit Ethernet MAC Controller)
-> > + * 7) DMC (DDR Memory Controller)
-> >   *
-> >   * This board currently generates devicetree dynamically that indicates at least
-> >   * two harts and up to five harts.
-> > @@ -85,7 +86,9 @@ static const struct MemmapEntry {
-> >      [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
-> >      [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
-> >      [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
-> > +    [MICROCHIP_PFSOC_DDR_SGMII_PHY] =   { 0x20007000,     0x1000 },
-> >      [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
-> > +    [MICROCHIP_PFSOC_DDR_CFG] =         { 0x20080000,    0x40000 },
+> > @@ -102,7 +102,10 @@ static const struct MemmapEntry {
+> >      [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
+> >      [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
+> >      [MICROCHIP_PFSOC_IOSCB] =           { 0x30000000, 0x10000000 },
+> > -    [MICROCHIP_PFSOC_DRAM] =            { 0x80000000,        0x0 },
+> > +    [MICROCHIP_PFSOC_DRAM_LO] =         { 0x80000000, 0x40000000 },
+> > +    [MICROCHIP_PFSOC_DRAM_LO_ALIAS] =   { 0xc0000000, 0x40000000 },
+> > +    [MICROCHIP_PFSOC_DRAM_HI] =       { 0x1000000000,        0x0 },
+> > +    [MICROCHIP_PFSOC_DRAM_HI_ALIAS] = { 0x1400000000,        0x0 },
+> >  };
+> >
+> >  static void microchip_pfsoc_soc_instance_init(Object *obj)
+> > @@ -405,7 +408,11 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+> >      const struct MemmapEntry *memmap = microchip_pfsoc_memmap;
+> >      MicrochipIcicleKitState *s = MICROCHIP_ICICLE_KIT_MACHINE(machine);
+> >      MemoryRegion *system_memory = get_system_memory();
+> > -    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+> > +    MemoryRegion *mem_low = g_new(MemoryRegion, 1);
+> > +    MemoryRegion *mem_low_alias = g_new(MemoryRegion, 1);
+> > +    MemoryRegion *mem_high = g_new(MemoryRegion, 1);
+> > +    MemoryRegion *mem_high_alias = g_new(MemoryRegion, 1);
+> > +    uint64_t mem_high_size;
+> >      DriveInfo *dinfo = drive_get_next(IF_SD);
+> >
+> >      /* Sanity check on RAM size */
+> > @@ -422,10 +429,42 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+> >      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
+> >
+> >      /* Register RAM */
+> > -    memory_region_init_ram(main_mem, NULL, "microchip.icicle.kit.ram",
+> > -                           machine->ram_size, &error_fatal);
+> > +    memory_region_init_ram(mem_low, NULL, "microchip.icicle.kit.ram_low",
+> > +                           memmap[MICROCHIP_PFSOC_DRAM_LO].size,
+> > +                           &error_fatal);
+> > +    memory_region_init_alias(mem_low_alias, NULL,
+> > +                             "microchip.icicle.kit.ram_low.alias",
+> > +                             mem_low, 0,
+> > +                             memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].size);
+> > +    memory_region_add_subregion(system_memory,
+> > +                                memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+> > +                                mem_low);
+> > +    memory_region_add_subregion(system_memory,
+> > +                                memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].base,
+> > +                                mem_low_alias);
+> > +
+> > +    /*
+> > +     * Map 1 GiB high memory because HSS will do memory test against the high
+> > +     * memory address range regardless of physical memory installed.
+> > +     *
+> > +     * See memory_tests() in mss_ddr.c in the HSS source code.
+> > +     */
+> > +    mem_high_size = machine->ram_size - 1 * GiB;
+> > +    if (mem_high_size < 1 * GiB) {
+> > +        mem_high_size = 1 * GiB;
 >
-> Neither of these are documented....
+> This now means that the machine requires at least 2GB of memory!
 
-It's documented in the "Register
-Map/PF_SoC_RegMap_V1_1/pfsoc_regmap.htm" in
-https://www.microsemi.com/document-portal/doc_download/1244581-polarfire-soc-register-map
+Yes, unfortunately :(
 
 >
-> Maybe just add a single comment above the memory layout clarifying
-> that this is not what is documented from the SoC but is instead based
-> on what guests do?
+> Can you increase the default_ram_size so we will return an error if
+> the user specified less than 2GB instead of just increasing it without
+> their knowledge?
 >
 
-I can add a link to the Microchip website that documents the memory
-map above the memory layout.
-
-> It seems to be a constant problem with this board, unless I am really
-> misreading the memory map.
->
+Sure.
 
 Regards,
 Bin
