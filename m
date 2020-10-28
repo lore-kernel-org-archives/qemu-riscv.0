@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXsGf-0003Ca-3X
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 16:42:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57350)
+	id 1kXsbL-0001Fi-1n
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 17:03:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34586)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXsGc-0003CE-Ge; Wed, 28 Oct 2020 16:41:58 -0400
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:33480)
+ id 1kXsbH-0001Cj-63; Wed, 28 Oct 2020 17:03:19 -0400
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:37587)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXsGa-0002U0-I8; Wed, 28 Oct 2020 16:41:58 -0400
-Received: by mail-il1-x144.google.com with SMTP id f16so848206ilr.0;
- Wed, 28 Oct 2020 13:41:54 -0700 (PDT)
+ id 1kXsbF-0005Rj-9t; Wed, 28 Oct 2020 17:03:18 -0400
+Received: by mail-io1-xd44.google.com with SMTP id q25so966375ioh.4;
+ Wed, 28 Oct 2020 14:03:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=u6c1IvoLU1jJNSxai7R5+aEhshY9g0/9xRcDZ6WYzTg=;
- b=ZTE0SvbEQ3HInXFAxUjyXve4siCm2UeS+FgeeF1uKC7EJpXKb4REqpQBepVtFK2SJs
- nuSP88klMVQIiplO74pFKVRUK1E2wcMhW+VaQxmOmDhHwE35gDndpVCyOVLS1mX5N+8m
- Ltw3xChHcUyKrvfVMlRApwgKnxpDn+9Nq9TBhqnTSlZfdl2IT7K0flUwIUIN+GDpYUOF
- QKo2jHzrqc9o5DMJF/d0RMYcPw4cqut21XdRmjv27KRx9H1Snl4vAzrcf86gFfW8sqcX
- F1uAo0z7gj82Leo35VsEHoFZmTZFw9lKO34H1rMpjNKnTG5X2TJ9HI9VS6wQy2U1POUD
- cXQQ==
+ :cc; bh=TsL3Jj41MNVM8Xv1or+fBZGng4LvzbPF6efeJYcIiKY=;
+ b=HdiPOUQ5cXzaOGMZOAOz0kkZN0VHmTAIEpczqCyEtHszBkjzmXIghy4Ikvb3O++7+r
+ szR1bPVYB06EX70vPHl5NpOoGAHjLHenR8OxR6dzdbMkGY8xF1TDJza23kyWwJyZ1Cqw
+ ILme91lNHkfKgv7X+jGgRKSbRfGWNyDTE0ketE2iKhg8rnu1/s4X6xB+T6jUOChFFD71
+ /Y3Y8jl5Lnki5FZJjB9Yga6Nb/MzqV1CdxAKP7P0VtuCFWN0XF95LSIk7we3YPeo5k2w
+ uNSV+h2KkvLhq9nSApKAAx4x2J0jd2BDI/E+inmpUBsxBTaa7ZhKussYuW7eHES5r7h2
+ 0AAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=u6c1IvoLU1jJNSxai7R5+aEhshY9g0/9xRcDZ6WYzTg=;
- b=O8WH3RRlzQRhPMeJkydjvbJ3dV95TrYY3TsIiCWj12zvDysKBoXMx3MOSMPtlUrzl5
- 6tE2QK+g3rCMIjVMqSKeR/VYdeLtSTc9hq6E+M9cll80OU2T0/Q7rekpGYKitoN9y4+o
- skbbe/b4nATSXpb7XDEue+KfL9Awp+B+dgwdfH00pZ4P4+6OyMtHhNFTHLyAfyHB15r2
- AegfGS8V7j+Cm2EHbxgaOW92EIkI/nxYXgh3FkB9Cs62sxKh8EOCayu0QoV/pfi1+i6W
- LpVCfsFlQqT5hg2zRnLrb1TM/ge9qOmy8mGfRp+sqF+HolmOOSX6LcJv6HbG/ty83get
- gcCw==
-X-Gm-Message-State: AOAM531744xmLPapITUo+5gKItD1/fnWT1969rYh/0gF3NJw5AJ61dwF
- tvWrIQUS2kqB2rMl9PoPbR5UooTVdPqLuB+k6Tw=
-X-Google-Smtp-Source: ABdhPJxMQR+2dGyIHO82nsbZwJHWIIIhwchhZyVa7fZlWRX2JjUfUgNxForkM0quaCKaIu2zgXTZQmYT1LVA025gtO8=
-X-Received: by 2002:a05:6e02:c:: with SMTP id h12mr737929ilr.177.1603917713603; 
- Wed, 28 Oct 2020 13:41:53 -0700 (PDT)
+ bh=TsL3Jj41MNVM8Xv1or+fBZGng4LvzbPF6efeJYcIiKY=;
+ b=tdqzU5O3rdITWqfgLhJ1EawPvGfbBG10OQnIiBW2iCofmxtKX3hyeMxGw26z1LlCWy
+ CYx4gI6GL2qqb4NkhgIXBJnGD9IaHge1uDcBOYKmMOdmgrQ5pd/gdpnGzfCOyDnSePvv
+ ucz5BFpE99BaW79OycPJWHxgm7plNUqEVgGlUnqYKGwP6YAIW0tidzD9uWemph8kKmyf
+ oX/fYiM4WirG78cHs4xT4J7jQTkG1ki23maGqak6p1D4NrnKxZ6VGmRzG3Os7mATLoPa
+ cPaG+Rk/9B2Cauaa/DkfC7BqMjBijyUAymqZNfAMt5E0lK6p4fNMD3/oLUB/H4vadylJ
+ CiXA==
+X-Gm-Message-State: AOAM533Zy6qOr/XTLB5c27/c0J1/2jEnD205OYSKEuXC4g9bZQRVTW6Z
+ C6zN8Wqcov/e/K0/rk/WNmx5fdh+TEU3A5OVCng=
+X-Google-Smtp-Source: ABdhPJw6/hcUlT7eSaNf5LsZMWhrsZOXWJGPoTg3azvY41fsKTIpAfnCeClrSaXZ86YvuR+X5R6YCUtYWJ/fD7lGRcI=
+X-Received: by 2002:a6b:c9c9:: with SMTP id z192mr1003942iof.175.1603918995970; 
+ Wed, 28 Oct 2020 14:03:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
+References: <cover.1603896075.git.alistair.francis@wdc.com>
+ <d0eeb9ea64462044a67f5b803d6cb62dd10e017a.1603896075.git.alistair.francis@wdc.com>
+ <f8c23bed-3b6c-e01d-cb04-ce945d509970@linaro.org>
+In-Reply-To: <f8c23bed-3b6c-e01d-cb04-ce945d509970@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 28 Oct 2020 13:30:02 -0700
-Message-ID: <CAKmqyKP42vEZvLHM4r=XQSa-DttHcJNBw0uCgUZwBvBsc8kijw@mail.gmail.com>
-Subject: Re: [PATCH v2 00/10] hw/riscv: microchip_pfsoc: Support factory HSS
- boot out of the box
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+Date: Wed, 28 Oct 2020 13:51:24 -0700
+Message-ID: <CAKmqyKNGUcz+WkNNY6dac5d0cypAw4jFiBQFvxAwTQyK0mkGtw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] target/riscv: Add a virtualised MMU Mode
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Atish Patra <atish.patra@wdc.com>, 
- Anup Patel <anup.patel@wdc.com>, Ivan Griffin <ivan.griffin@emdalo.com>
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -75,76 +75,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 20:41:58 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 21:03:19 -0000
 
-On Tue, Oct 27, 2020 at 10:31 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Oct 28, 2020 at 8:13 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> From: Bin Meng <bin.meng@windriver.com>
+> On 10/28/20 7:42 AM, Alistair Francis wrote:
+> > Add a new MMU mode that includes the current virt mode.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  target/riscv/cpu-param.h  | 10 +++++++++-
+> >  target/riscv/cpu.h        |  4 +++-
+> >  target/riscv/cpu_helper.c |  6 +++++-
+> >  3 files changed, 17 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
+> > index 664fc1d371..0db6e23140 100644
+> > --- a/target/riscv/cpu-param.h
+> > +++ b/target/riscv/cpu-param.h
+> > @@ -18,6 +18,14 @@
+> >  # define TARGET_VIRT_ADDR_SPACE_BITS 32 /* sv32 */
+> >  #endif
+> >  #define TARGET_PAGE_BITS 12 /* 4 KiB Pages */
+> > -#define NB_MMU_MODES 4
+> > +/*
+> > + * The current MMU Modes are:
+> > + *  - U  mode 0b000
+> > + *  - S  mode 0b001
+> > + *  - M  mode 0b011
+> > + *  - HU mode 0b100
+> > + *  - HS mode 0b101
+> > + */
+> > +#define NB_MMU_MODES 6
+> >
+> >  #endif
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index 87b68affa8..5d8e54c426 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -363,7 +363,9 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
+> >  target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
+> >  void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
+> >
+> > -#define TB_FLAGS_MMU_MASK   3
+> > +#define TB_FLAGS_MMU_MASK   7
+> > +#define TB_FLAGS_PRIV_MMU_MASK                3
+> > +#define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
+> >  #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
+> >
+> >  typedef CPURISCVState CPUArchState;
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 3eb3a034db..453e4c6d8a 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -30,6 +30,10 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+> >  #ifdef CONFIG_USER_ONLY
+> >      return 0;
+> >  #else
+> > +    if (riscv_cpu_virt_enabled(env)) {
+> > +        return env->priv | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+> > +    }
 >
-> At present the DDR memory controller is not modeled, hence the factory
-> HSS firmware does not boot out of the box on QEMU. A modified HSS is
-> required per the instructions on [1].
->
-> This series adds the missing DDR memory controller support to PolarFire
-> SoC, as well as adding various misc models to support the DDR memory
-> initialization done by HSS.
->
-> With this series, the unmodified HSS image can boot on QEMU out of the
-> box. The latest SD card image [2] released by Microchip was used for
-> testing which includes the pre-built U-Boot, device tree blob and Linux
-> kernel. The instructions on [1] have been updated to latest information.
->
-> [1] https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
-> [2] ftp://ftpsoc.microsemi.com/outgoing/core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic.gz
->
-> Changes in v2:
-> - new patch: Document where to look at the PolarFire SoC memory maps
-> - change to map the reserved memory at address 0 instead of debug memory
-> - Increase the default memory size to 2 GiB
->
-> Bin Meng (10):
->   hw/riscv: microchip_pfsoc: Document where to look at the SoC memory
->     maps
->   hw/misc: Add Microchip PolarFire SoC DDR Memory Controller support
->   hw/riscv: microchip_pfsoc: Connect DDR memory controller modules
->   hw/misc: Add Microchip PolarFire SoC IOSCB module support
->   hw/riscv: microchip_pfsoc: Connect the IOSCB module
->   hw/misc: Add Microchip PolarFire SoC SYSREG module support
->   hw/riscv: microchip_pfsoc: Connect the SYSREG module
->   hw/riscv: microchip_pfsoc: Map the reserved memory at address 0
->   hw/riscv: microchip_pfsoc: Correct DDR memory map
->   hw/riscv: microchip_pfsoc: Hook the I2C1 controller
+> This is wrong.  You only want to set this flag in response to one of the
+> hypervisor special instructions.  This is setting it any time virt is enabled.
 
-Thanks!
+Isn't that ok though? I thought this was the correct approach.
 
-Applied to riscv-to-apply.next
+Now we have a MMU context for Virtual guests (VS) which have different
+contexts to the hypervisor (S). It also then means that when doing the
+hypervisor access load/stores we can re-use the existing MMU context
+from when the Hypervisor guest was running.
 
 Alistair
 
-
->
->  MAINTAINERS                         |   6 +
->  hw/misc/Kconfig                     |   9 ++
->  hw/misc/mchp_pfsoc_dmc.c            | 216 ++++++++++++++++++++++++++++++++
->  hw/misc/mchp_pfsoc_ioscb.c          | 242 ++++++++++++++++++++++++++++++++++++
->  hw/misc/mchp_pfsoc_sysreg.c         |  99 +++++++++++++++
->  hw/misc/meson.build                 |   3 +
->  hw/riscv/Kconfig                    |   3 +
->  hw/riscv/microchip_pfsoc.c          | 123 +++++++++++++++---
->  include/hw/misc/mchp_pfsoc_dmc.h    |  56 +++++++++
->  include/hw/misc/mchp_pfsoc_ioscb.h  |  50 ++++++++
->  include/hw/misc/mchp_pfsoc_sysreg.h |  39 ++++++
->  include/hw/riscv/microchip_pfsoc.h  |  18 ++-
->  12 files changed, 847 insertions(+), 17 deletions(-)
->  create mode 100644 hw/misc/mchp_pfsoc_dmc.c
->  create mode 100644 hw/misc/mchp_pfsoc_ioscb.c
->  create mode 100644 hw/misc/mchp_pfsoc_sysreg.c
->  create mode 100644 include/hw/misc/mchp_pfsoc_dmc.h
->  create mode 100644 include/hw/misc/mchp_pfsoc_ioscb.h
->  create mode 100644 include/hw/misc/mchp_pfsoc_sysreg.h
->
-> --
-> 2.7.4
 >
 >
+> r~
 
