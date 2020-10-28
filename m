@@ -1,77 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXqub-0003OT-Hv
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 15:15:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35254)
+	id 1kXsGf-0003Ca-3X
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 16:42:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57350)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1kXquY-0003NL-6e; Wed, 28 Oct 2020 15:15:06 -0400
-Received: from home.keithp.com ([63.227.221.253]:47664 helo=elaine.keithp.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1kXquU-0007BB-MW; Wed, 28 Oct 2020 15:15:05 -0400
-Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id 9DCB43F2DDAC;
- Wed, 28 Oct 2020 12:14:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1603912497; bh=15AVrp7vyPKovp+JUmmgOjjbkG5b36Rdgg5pRySikf4=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=dLey65VJwjuSS+DXkhpBWfbyHvLyQiOAeGulUDSP+Mang9Lldm3/qbzWrUha60GBY
- cAVHpxeU6fQSkLwWJpx2CiahvXOE1w3C/VBIiSjQv0ba0lnLe/u4SZiVEksGrw51FG
- UqgD6Bwy9gE3O2x9vo3OIE6ZEQI/1FpGWoA4y6pOmd8RmgO8l1lJSfN9YWeeNbXgZD
- T8NwO9c5N43A8DrmNZUtJXVcRvo6p5J1QXgFnPhBqONqaCBIVvm9yB4yY8+fTo2P5J
- /YRh77kr4eQ4SKCfWJtOfI3rRCHZBEmk1dlOJ34cCpGNu9Tb5fZfQm5cRbUjwB+iC/
- gLevWNNJeVIrQ==
-X-Virus-Scanned: Debian amavisd-new at keithp.com
-Received: from elaine.keithp.com ([127.0.0.1])
- by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id UGHBryi3ZMdv; Wed, 28 Oct 2020 12:14:57 -0700 (PDT)
-Received: from keithp.com (koto.keithp.com [10.0.0.2])
- by elaine.keithp.com (Postfix) with ESMTPSA id 37F213F2DDAA;
- Wed, 28 Oct 2020 12:14:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1603912497; bh=15AVrp7vyPKovp+JUmmgOjjbkG5b36Rdgg5pRySikf4=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=dLey65VJwjuSS+DXkhpBWfbyHvLyQiOAeGulUDSP+Mang9Lldm3/qbzWrUha60GBY
- cAVHpxeU6fQSkLwWJpx2CiahvXOE1w3C/VBIiSjQv0ba0lnLe/u4SZiVEksGrw51FG
- UqgD6Bwy9gE3O2x9vo3OIE6ZEQI/1FpGWoA4y6pOmd8RmgO8l1lJSfN9YWeeNbXgZD
- T8NwO9c5N43A8DrmNZUtJXVcRvo6p5J1QXgFnPhBqONqaCBIVvm9yB4yY8+fTo2P5J
- /YRh77kr4eQ4SKCfWJtOfI3rRCHZBEmk1dlOJ34cCpGNu9Tb5fZfQm5cRbUjwB+iC/
- gLevWNNJeVIrQ==
-Received: by keithp.com (Postfix, from userid 1000)
- id 074E41582210; Wed, 28 Oct 2020 12:14:57 -0700 (PDT)
-From: "Keith Packard" <keithp@keithp.com>
-To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: Peter Maydell <peter.maydell@linaro.org>, QEMU Developers
- <qemu-devel@nongnu.org>, Laurent Vivier <laurent@vivier.eu>,
- "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair
- Francis <Alistair.Francis@wdc.com>, Sagar Karandikar
- <sagark@eecs.berkeley.edu>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH 1/4] semihosting: Move ARM semihosting code to shared
- directories
-In-Reply-To: <87lffqmwi6.fsf@linaro.org>
-References: <20201026212853.92880-1-keithp@keithp.com>
- <20201026212853.92880-2-keithp@keithp.com>
- <CAFEAcA-0_WLMP1Y1sgcu7Ng+0w8Ovt9DVWzYU8ZA_FA2+bwcUw@mail.gmail.com>
- <87pn53e3ke.fsf@keithp.com>
- <CAFEAcA8Sha5QYbO25dtzBZHoXUeiGVv8aojPFTMrst8nbVDAdg@mail.gmail.com>
- <87k0vbdthq.fsf@keithp.com> <87lffqmwi6.fsf@linaro.org>
-Date: Wed, 28 Oct 2020 12:14:56 -0700
-Message-ID: <87pn52cgcv.fsf@keithp.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kXsGc-0003CE-Ge; Wed, 28 Oct 2020 16:41:58 -0400
+Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:33480)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kXsGa-0002U0-I8; Wed, 28 Oct 2020 16:41:58 -0400
+Received: by mail-il1-x144.google.com with SMTP id f16so848206ilr.0;
+ Wed, 28 Oct 2020 13:41:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=u6c1IvoLU1jJNSxai7R5+aEhshY9g0/9xRcDZ6WYzTg=;
+ b=ZTE0SvbEQ3HInXFAxUjyXve4siCm2UeS+FgeeF1uKC7EJpXKb4REqpQBepVtFK2SJs
+ nuSP88klMVQIiplO74pFKVRUK1E2wcMhW+VaQxmOmDhHwE35gDndpVCyOVLS1mX5N+8m
+ Ltw3xChHcUyKrvfVMlRApwgKnxpDn+9Nq9TBhqnTSlZfdl2IT7K0flUwIUIN+GDpYUOF
+ QKo2jHzrqc9o5DMJF/d0RMYcPw4cqut21XdRmjv27KRx9H1Snl4vAzrcf86gFfW8sqcX
+ F1uAo0z7gj82Leo35VsEHoFZmTZFw9lKO34H1rMpjNKnTG5X2TJ9HI9VS6wQy2U1POUD
+ cXQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=u6c1IvoLU1jJNSxai7R5+aEhshY9g0/9xRcDZ6WYzTg=;
+ b=O8WH3RRlzQRhPMeJkydjvbJ3dV95TrYY3TsIiCWj12zvDysKBoXMx3MOSMPtlUrzl5
+ 6tE2QK+g3rCMIjVMqSKeR/VYdeLtSTc9hq6E+M9cll80OU2T0/Q7rekpGYKitoN9y4+o
+ skbbe/b4nATSXpb7XDEue+KfL9Awp+B+dgwdfH00pZ4P4+6OyMtHhNFTHLyAfyHB15r2
+ AegfGS8V7j+Cm2EHbxgaOW92EIkI/nxYXgh3FkB9Cs62sxKh8EOCayu0QoV/pfi1+i6W
+ LpVCfsFlQqT5hg2zRnLrb1TM/ge9qOmy8mGfRp+sqF+HolmOOSX6LcJv6HbG/ty83get
+ gcCw==
+X-Gm-Message-State: AOAM531744xmLPapITUo+5gKItD1/fnWT1969rYh/0gF3NJw5AJ61dwF
+ tvWrIQUS2kqB2rMl9PoPbR5UooTVdPqLuB+k6Tw=
+X-Google-Smtp-Source: ABdhPJxMQR+2dGyIHO82nsbZwJHWIIIhwchhZyVa7fZlWRX2JjUfUgNxForkM0quaCKaIu2zgXTZQmYT1LVA025gtO8=
+X-Received: by 2002:a05:6e02:c:: with SMTP id h12mr737929ilr.177.1603917713603; 
+ Wed, 28 Oct 2020 13:41:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="=-=-=";
- micalg=pgp-sha256; protocol="application/pgp-signature"
-Received-SPF: pass client-ip=63.227.221.253; envelope-from=keithp@keithp.com;
- helo=elaine.keithp.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/28 14:57:36
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+References: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 28 Oct 2020 13:30:02 -0700
+Message-ID: <CAKmqyKP42vEZvLHM4r=XQSa-DttHcJNBw0uCgUZwBvBsc8kijw@mail.gmail.com>
+Subject: Re: [PATCH v2 00/10] hw/riscv: microchip_pfsoc: Support factory HSS
+ boot out of the box
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, Atish Patra <atish.patra@wdc.com>, 
+ Anup Patel <anup.patel@wdc.com>, Ivan Griffin <ivan.griffin@emdalo.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,44 +75,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 19:15:06 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 20:41:58 -0000
 
---=-=-=
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On Tue, Oct 27, 2020 at 10:31 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> At present the DDR memory controller is not modeled, hence the factory
+> HSS firmware does not boot out of the box on QEMU. A modified HSS is
+> required per the instructions on [1].
+>
+> This series adds the missing DDR memory controller support to PolarFire
+> SoC, as well as adding various misc models to support the DDR memory
+> initialization done by HSS.
+>
+> With this series, the unmodified HSS image can boot on QEMU out of the
+> box. The latest SD card image [2] released by Microchip was used for
+> testing which includes the pre-built U-Boot, device tree blob and Linux
+> kernel. The instructions on [1] have been updated to latest information.
+>
+> [1] https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
+> [2] ftp://ftpsoc.microsemi.com/outgoing/core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic.gz
+>
+> Changes in v2:
+> - new patch: Document where to look at the PolarFire SoC memory maps
+> - change to map the reserved memory at address 0 instead of debug memory
+> - Increase the default memory size to 2 GiB
+>
+> Bin Meng (10):
+>   hw/riscv: microchip_pfsoc: Document where to look at the SoC memory
+>     maps
+>   hw/misc: Add Microchip PolarFire SoC DDR Memory Controller support
+>   hw/riscv: microchip_pfsoc: Connect DDR memory controller modules
+>   hw/misc: Add Microchip PolarFire SoC IOSCB module support
+>   hw/riscv: microchip_pfsoc: Connect the IOSCB module
+>   hw/misc: Add Microchip PolarFire SoC SYSREG module support
+>   hw/riscv: microchip_pfsoc: Connect the SYSREG module
+>   hw/riscv: microchip_pfsoc: Map the reserved memory at address 0
+>   hw/riscv: microchip_pfsoc: Correct DDR memory map
+>   hw/riscv: microchip_pfsoc: Hook the I2C1 controller
 
-Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
+Thanks!
 
->   specific_ss.add(when: 'CONFIG_ARM_STYLE_SEMIHOSTING',
->                   if_true: files ('common-semi.c'))
+Applied to riscv-to-apply.next
 
-I've sent another version of the series using this plan. It does look a
-bit nicer as the only changes required when adding support to another
-target is to place this option in the config file.
+Alistair
 
-Thanks for the suggestion, and thanks for helping review this patch!
 
-=2D-=20
-=2Dkeith
-
---=-=-=
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAl+ZwzAACgkQ2yIaaQAA
-ABFKfRAAoNNSBmk9FrsTXQWVoNV5Lee3o2z3Azr2etFFYs/2piRt9f0ewsZPJNn4
-sZKOI/G1ShBYsPKulb/JBWPsdh6uN7+8cr9GE8MGr7VIRsDZOxKJNh1cDSACVhva
-yxu8A4r4tjNDfTG4L/J8HPpOlTpqM459F3fAwEQoPkOtwOp7J9mMHKKcPgCCVoUe
-QzZHZZoDrrK3VQSvzgZPjVuBeFqrWrIyy9LETeMD6PYl7gwz+EJmjm+1/VbKU8dO
-pJ70JO7tECiF4ZMw/AjZKtPkl4HDaXvbn8ajyyJuUnKTpP0uywtw9vHyQl5za7ep
-b/2QzJF+HxircBU5t5VtPj6xT2C40KetqJBOB1ADroAQ2Xp5DJsQhKf+jxVulBv+
-qGIR/pK6ToGYnvUFxTP345dywInUp8WOcZ022ElnhFEdDLMz7iZUeCxTdg+QxXr4
-2GJewp5ij+bU8E4Py51+4r5MzuVVJwVnfQtt/RW0u2c78fj3Zzuk26yj4T1KkFQc
-3K+W9pqmxsJWlPbAto6OYz+ek/+VeG3wSu28KPclCmJE66Qmp3IEG6cPBamvcb2R
-cC6K3QEPpTjT2/nYSLRVisy+zsuWcjLD5OnLIhg/HS90Ge050r7pSWY3qmLUfPVA
-hbPUAb9QadLefOnbkjRhXbproOGEd90NJX+8gI+bqlYTltWhZxs=
-=pnGw
------END PGP SIGNATURE-----
---=-=-=--
+>
+>  MAINTAINERS                         |   6 +
+>  hw/misc/Kconfig                     |   9 ++
+>  hw/misc/mchp_pfsoc_dmc.c            | 216 ++++++++++++++++++++++++++++++++
+>  hw/misc/mchp_pfsoc_ioscb.c          | 242 ++++++++++++++++++++++++++++++++++++
+>  hw/misc/mchp_pfsoc_sysreg.c         |  99 +++++++++++++++
+>  hw/misc/meson.build                 |   3 +
+>  hw/riscv/Kconfig                    |   3 +
+>  hw/riscv/microchip_pfsoc.c          | 123 +++++++++++++++---
+>  include/hw/misc/mchp_pfsoc_dmc.h    |  56 +++++++++
+>  include/hw/misc/mchp_pfsoc_ioscb.h  |  50 ++++++++
+>  include/hw/misc/mchp_pfsoc_sysreg.h |  39 ++++++
+>  include/hw/riscv/microchip_pfsoc.h  |  18 ++-
+>  12 files changed, 847 insertions(+), 17 deletions(-)
+>  create mode 100644 hw/misc/mchp_pfsoc_dmc.c
+>  create mode 100644 hw/misc/mchp_pfsoc_ioscb.c
+>  create mode 100644 hw/misc/mchp_pfsoc_sysreg.c
+>  create mode 100644 include/hw/misc/mchp_pfsoc_dmc.h
+>  create mode 100644 include/hw/misc/mchp_pfsoc_ioscb.h
+>  create mode 100644 include/hw/misc/mchp_pfsoc_sysreg.h
+>
+> --
+> 2.7.4
+>
+>
 
