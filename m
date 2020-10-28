@@ -1,78 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXmpu-0002Dh-Vt
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 10:54:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38590)
+	id 1kXmzJ-0002mX-9a
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 11:03:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40874)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=563b96974=alistair.francis@wdc.com>)
- id 1kXmps-00027m-9a; Wed, 28 Oct 2020 10:54:00 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:10516)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=563b96974=alistair.francis@wdc.com>)
- id 1kXmpq-00036U-4d; Wed, 28 Oct 2020 10:53:59 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1603896838; x=1635432838;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=KntYN7zGHoqvB6l1jjDFFz/dW+GlIx3yJAuj7ZeGIxQ=;
- b=dalxqAwhFAG1Kib+VgIcE29h99CfuM3J7kBei1gC4RIB3IkFm7cAaoOQ
- LTKu8gOs/SezrYajCEkX30JD24n83jRNDDKbodezJYs0t5UPaf/yPNIg/
- e5ZmtpP7KANMiEWxUTpXwRTYzNOjsmyzu0lF60aeX7Z3f9qOEWjyLPAlp
- wjyCofnwjm2BCHYtmfydKn1UlfgeuB95z5sL9FrvWXbUO6rnnBAXNvyC8
- +GyszDj+xo/EdIAQzZzCd5FKQnm3Ufy99IZSitSUT7parsimEZ6vFR5py
- 713XCZRU53xs5/W7CRq0B55416pmk7y3HA3qtxE4rBnFwOlerY1xDwwP+ A==;
-IronPort-SDR: Vs5vlnNIsUCbGdPBeRL6Mh5ZSEDtzbz3sCmy24ZbAlwEapxlbE9BomClHbQFB/AZuku3+oXlgB
- bbPAytBYvWbWNUFeMGQh/509zAV/cj5MLTCJLAmB1Jq50HQ8BuVJRyNdvZWr6F7hhhZpNYKFif
- hPXkKxoW5LO6Pu/PreFtWPWZpPzt/c6YVi6RRsAIU4kDgvJcqY8KFQ0pzoO+1ztM5H9kI68fxX
- i/Z71uJ7pb8og+mx8hM20ffgNgid8YUBeejA9twOpg+gnR/PLyVDpjItv/g0KbdQr+ZKFEM2GQ
- OE8=
-X-IronPort-AV: E=Sophos;i="5.77,426,1596470400"; d="scan'208";a="151200426"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 28 Oct 2020 22:53:56 +0800
-IronPort-SDR: GjHRHJtWv/aNblOWAAIZwAIHILKVr6qLaTnFP7KXh4JXW/jPvqjwABnT/GHvuX4Lz2/ctQGrpe
- +3PEJ1XEmnMebapUcGzgfxnmPowMV1gbCgmibZZSMpb4TbsNFgsVF+nnt9eWYG6lfZ5IHZANtW
- C00PW3drAAGGjsel7FIOR8aU+ZCQDvP27P6QibWGzAAyskjqq5/OnCsIsA1lwylS9DlpAWfGgT
- gEDZ3iCWB9HH0JumFHrzOjscWdWP736sIQ4cfmHc+2uq8jcH1wCwM5gNqKOXwI86hM+AuBkyRd
- ID12WWjdRjDc161kwRtMd9Tf
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Oct 2020 07:39:06 -0700
-IronPort-SDR: gussgivtZe/vtadAsAVF0pj2KSg1IdV79cpfJ/vwDgMB51aQ1/guWDJDLj5DJ/lqJctgkI9yg/
- btmfxKAqsnPwy6LASwc4Gf7+f52bX52EpTzlcnh6ruAUhCnBjOOm2Wf7VFQuWE8HPrMuBjLjXT
- grb9AdrOBsVpzjY6YF95yyREKc1IdLhZrT/g8FkAUrhfTRdEeUu4N/hP73WN4vfLZTrGiWcqQZ
- Enz5SpTjRq0xn7TKDOSKz6uEJcXem2SktaTi0jnQQoYh453xcN+QKEGtyT6zlSe5pWjo6RGXq0
- Xt4=
-WDCIronportException: Internal
-Received: from usa003000.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.60.131])
- by uls-op-cesaip02.wdc.com with ESMTP; 28 Oct 2020 07:53:57 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com, richard.henderson@linaro.org
-Subject: [PATCH v2 5/5] target/riscv: Split the Hypervisor execute load helpers
-Date: Wed, 28 Oct 2020 07:42:31 -0700
-Message-Id: <a88d9bdcebe49ada0d0a69b37ac532124971c91c.1603896076.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <cover.1603896075.git.alistair.francis@wdc.com>
-References: <cover.1603896075.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kXmzG-0002jj-Uz; Wed, 28 Oct 2020 11:03:42 -0400
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:43215)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kXmzF-0004LQ-6d; Wed, 28 Oct 2020 11:03:42 -0400
+Received: by mail-io1-xd44.google.com with SMTP id h21so5646937iob.10;
+ Wed, 28 Oct 2020 08:03:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=/2iRcRlGqky2TLFd0C5KAzKIRtplTwX92ZY/erxF9RI=;
+ b=GoqbDGYBaBiBKYYe6GXyJbzwE3XnLeogvKkHP+oJEUU0HcwUHbUBYwkaX/22J9rIdl
+ o1BVBCuKPkmxeS/uSUidcdb0CS2Xmc5L8cm4FFrSn24oPD//erZDw5op31GkrhYM/35N
+ pSP8qflSn6Sw9eq5ILQ76WBIVm+f3d3xC0q2juZz1LRxKqpP434uHufxdXMMuyQHZCwc
+ CRj2PsiNG+MSsKeZigdAJF0ix6MTK/H2qn6qnBMc0IUpYp39MJJ/Y0lSX94MOgX/Gjed
+ 9ESZJI+XG8x445G4XPPOWZ9qDv0w+9UuWj57kuRRKzKCjquFw/bHLT0jptIi+ihM2ap5
+ LW4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=/2iRcRlGqky2TLFd0C5KAzKIRtplTwX92ZY/erxF9RI=;
+ b=nxlQkcDjSoyQEmTn/CcppblCP/RzkU4Ifvd5btwHcJ8/NlJxjX0TvQGyvuafWtyIIl
+ VqoPEbJZsnRzuUXyO0BbOTyIGR8Wgcqazpcnx4M/Fb51LYLQWtgLC51J3/NZAMe/V4MI
+ W3l3YWxLu0ZFio4yopQjOI8iVgEur1uB2GZTb+6v1NGo0rq3Z0j6is/OOwmZCZj/e9XR
+ ygG+EdKdKKEKTdPxnJeo+Of/pXU4puG+EEhxkIZZuKy1q+Oz2jo+FdKHnEJBu5aO4EBs
+ o6ETGNgGRo/QlSzAsMiw6/Mq1FRReBsaQDaw+lKQQHfUBc/ePIDZ8SIfiatpB9jiYYzI
+ 2qCA==
+X-Gm-Message-State: AOAM530W5EvXUxjXhpiUR3urAE5Fxwse8C/1opUU5vNFYQO7u4VSQ90H
+ mvPs3Kr5smjvQ7ZllxHRTrFixQHvWK3qySbhbZM=
+X-Google-Smtp-Source: ABdhPJz42qV2JxKhO1Zhy7CanV3pS6cFURslhmGLwjzVJp29+ol1YjgcKigVjF38iiK7wWIwH3BftLGqv27Kswybrxk=
+X-Received: by 2002:a02:84c3:: with SMTP id f61mr7334749jai.8.1603897419776;
+ Wed, 28 Oct 2020 08:03:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.144;
- envelope-from=prvs=563b96974=alistair.francis@wdc.com;
- helo=esa5.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/28 10:53:43
-X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
+ <1603863010-15807-9-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1603863010-15807-9-git-send-email-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 28 Oct 2020 07:51:48 -0700
+Message-ID: <CAKmqyKOcKsvbKcniZipe8qq4E=HAc3UAFYxkQRwdcfJyT-h2hg@mail.gmail.com>
+Subject: Re: [PATCH v2 08/10] hw/riscv: microchip_pfsoc: Map the reserved
+ memory at address 0
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, Atish Patra <atish.patra@wdc.com>, 
+ Anup Patel <anup.patel@wdc.com>, Ivan Griffin <ivan.griffin@emdalo.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -86,136 +76,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 14:54:00 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 15:03:43 -0000
 
-Split the hypervisor execute load functions into two seperate functions.
-This avoids us having to pass the memop to the C helper functions.
+On Tue, Oct 27, 2020 at 10:36 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> Somehow HSS needs to access address 0 [1] for the DDR calibration data
+> which is in the chipset's reserved memory. Let's map it.
+>
+> [1] See the config_copy() calls in various places in ddr_setup() in
+>     the HSS source codes.
+>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/helper.h                   |  3 +-
- target/riscv/op_helper.c                | 38 ++++++++++++++-----------
- target/riscv/insn_trans/trans_rvh.c.inc | 16 ++---------
- 3 files changed, 26 insertions(+), 31 deletions(-)
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 7dbdd117d2..ae50730273 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -82,7 +82,8 @@ DEF_HELPER_1(tlb_flush, void, env)
- DEF_HELPER_1(hyp_tlb_flush, void, env)
- DEF_HELPER_1(hyp_gvma_tlb_flush, void, env)
- DEF_HELPER_1(hyp_access_check, void, env)
--DEF_HELPER_4(hyp_x_load, tl, env, tl, tl, tl)
-+DEF_HELPER_2(hyp_hlvx_hu, tl, env, tl)
-+DEF_HELPER_2(hyp_hlvx_wu, tl, env, tl)
- #endif
- 
- /* Vector functions */
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index d81d8282cc..ff4426cf4d 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -243,28 +243,34 @@ void helper_hyp_access_check(CPURISCVState *env)
-     }
- }
- 
--target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
--                               target_ulong attrs, target_ulong memop)
-+target_ulong helper_hyp_hlvx_hu(CPURISCVState *env, target_ulong address)
- {
-     if (env->priv == PRV_M ||
-         (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
-         (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
-             get_field(env->hstatus, HSTATUS_HU))) {
--        target_ulong pte;
--        int mmu_idx = cpu_mmu_index(env, false) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
--
--        switch (memop) {
--        case MO_TEUW:
--            pte = cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
--            break;
--        case MO_TEUL:
--            pte = cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
--            break;
--        default:
--            g_assert_not_reached();
--        }
-+        int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-+
-+        return cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
-+    }
-+
-+    if (riscv_cpu_virt_enabled(env)) {
-+        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
-+    } else {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+    }
-+    return 0;
-+}
-+
-+target_ulong helper_hyp_hlvx_wu(CPURISCVState *env, target_ulong address)
-+{
-+    if (env->priv == PRV_M ||
-+        (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
-+        (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
-+            get_field(env->hstatus, HSTATUS_HU))) {
-+        int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
- 
--        return pte;
-+        return cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
-     }
- 
-     if (riscv_cpu_virt_enabled(env)) {
-diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
-index 79968701e9..f3ffd742d3 100644
---- a/target/riscv/insn_trans/trans_rvh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvh.c.inc
-@@ -265,20 +265,14 @@ static bool trans_hlvx_hu(DisasContext *ctx, arg_hlvx_hu *a)
- #ifndef CONFIG_USER_ONLY
-     TCGv t0 = tcg_temp_new();
-     TCGv t1 = tcg_temp_new();
--    TCGv mem_idx = tcg_temp_new();
--    TCGv memop = tcg_temp_new();
- 
-     gen_get_gpr(t0, a->rs1);
--    tcg_gen_movi_tl(mem_idx, ctx->mem_idx);
--    tcg_gen_movi_tl(memop, MO_TEUW);
- 
--    gen_helper_hyp_x_load(t1, cpu_env, t0, mem_idx, memop);
-+    gen_helper_hyp_hlvx_hu(t1, cpu_env, t0);
-     gen_set_gpr(a->rd, t1);
- 
-     tcg_temp_free(t0);
-     tcg_temp_free(t1);
--    tcg_temp_free(mem_idx);
--    tcg_temp_free(memop);
-     return true;
- #else
-     return false;
-@@ -291,20 +285,14 @@ static bool trans_hlvx_wu(DisasContext *ctx, arg_hlvx_wu *a)
- #ifndef CONFIG_USER_ONLY
-     TCGv t0 = tcg_temp_new();
-     TCGv t1 = tcg_temp_new();
--    TCGv mem_idx = tcg_temp_new();
--    TCGv memop = tcg_temp_new();
- 
-     gen_get_gpr(t0, a->rs1);
--    tcg_gen_movi_tl(mem_idx, ctx->mem_idx);
--    tcg_gen_movi_tl(memop, MO_TEUL);
- 
--    gen_helper_hyp_x_load(t1, cpu_env, t0, mem_idx, memop);
-+    gen_helper_hyp_hlvx_wu(t1, cpu_env, t0);
-     gen_set_gpr(a->rd, t1);
- 
-     tcg_temp_free(t0);
-     tcg_temp_free(t1);
--    tcg_temp_free(mem_idx);
--    tcg_temp_free(memop);
-     return true;
- #else
-     return false;
--- 
-2.28.0
+Alistair
 
+>
+> ---
+>
+> Changes in v2:
+> - change to map the reserved memory at address 0 instead of debug memory
+>
+>  hw/riscv/microchip_pfsoc.c         | 11 ++++++++++-
+>  include/hw/riscv/microchip_pfsoc.h |  1 +
+>  2 files changed, 11 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index bc908e0..44a8473 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -90,7 +90,8 @@ static const struct MemmapEntry {
+>      hwaddr base;
+>      hwaddr size;
+>  } microchip_pfsoc_memmap[] = {
+> -    [MICROCHIP_PFSOC_DEBUG] =           {        0x0,     0x1000 },
+> +    [MICROCHIP_PFSOC_RSVD0] =           {        0x0,      0x100 },
+> +    [MICROCHIP_PFSOC_DEBUG] =           {      0x100,      0xf00 },
+>      [MICROCHIP_PFSOC_E51_DTIM] =        {  0x1000000,     0x2000 },
+>      [MICROCHIP_PFSOC_BUSERR_UNIT0] =    {  0x1700000,     0x1000 },
+>      [MICROCHIP_PFSOC_BUSERR_UNIT1] =    {  0x1701000,     0x1000 },
+> @@ -176,6 +177,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>      MicrochipPFSoCState *s = MICROCHIP_PFSOC(dev);
+>      const struct MemmapEntry *memmap = microchip_pfsoc_memmap;
+>      MemoryRegion *system_memory = get_system_memory();
+> +    MemoryRegion *rsvd0_mem = g_new(MemoryRegion, 1);
+>      MemoryRegion *e51_dtim_mem = g_new(MemoryRegion, 1);
+>      MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
+>      MemoryRegion *envm_data = g_new(MemoryRegion, 1);
+> @@ -195,6 +197,13 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>      qdev_realize(DEVICE(&s->e_cluster), NULL, &error_abort);
+>      qdev_realize(DEVICE(&s->u_cluster), NULL, &error_abort);
+>
+> +    /* Reserved Memory at address 0 */
+> +    memory_region_init_ram(rsvd0_mem, NULL, "microchip.pfsoc.rsvd0_mem",
+> +                           memmap[MICROCHIP_PFSOC_RSVD0].size, &error_fatal);
+> +    memory_region_add_subregion(system_memory,
+> +                                memmap[MICROCHIP_PFSOC_RSVD0].base,
+> +                                rsvd0_mem);
+> +
+>      /* E51 DTIM */
+>      memory_region_init_ram(e51_dtim_mem, NULL, "microchip.pfsoc.e51_dtim_mem",
+>                             memmap[MICROCHIP_PFSOC_E51_DTIM].size, &error_fatal);
+> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+> index 245c82d..f34a6b3 100644
+> --- a/include/hw/riscv/microchip_pfsoc.h
+> +++ b/include/hw/riscv/microchip_pfsoc.h
+> @@ -74,6 +74,7 @@ typedef struct MicrochipIcicleKitState {
+>                   TYPE_MICROCHIP_ICICLE_KIT_MACHINE)
+>
+>  enum {
+> +    MICROCHIP_PFSOC_RSVD0,
+>      MICROCHIP_PFSOC_DEBUG,
+>      MICROCHIP_PFSOC_E51_DTIM,
+>      MICROCHIP_PFSOC_BUSERR_UNIT0,
+> --
+> 2.7.4
+>
+>
 
