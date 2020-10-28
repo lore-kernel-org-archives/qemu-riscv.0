@@ -1,50 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXmJm-0003rU-QB
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 10:20:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58670)
+	id 1kXmOS-0008VY-0V
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 10:25:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59756)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXmJf-0003nS-Ax; Wed, 28 Oct 2020 10:20:44 -0400
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:44988)
+ id 1kXmOP-0008TN-Gn; Wed, 28 Oct 2020 10:25:37 -0400
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:35705)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXmJb-0006wA-MQ; Wed, 28 Oct 2020 10:20:42 -0400
-Received: by mail-io1-xd42.google.com with SMTP id z17so5473707iog.11;
- Wed, 28 Oct 2020 07:20:36 -0700 (PDT)
+ id 1kXmON-0007az-L3; Wed, 28 Oct 2020 10:25:37 -0400
+Received: by mail-il1-x142.google.com with SMTP id k6so4836840ilq.2;
+ Wed, 28 Oct 2020 07:25:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=w2yWf7divgcX0hOBgLXcDpemaHcbR2900vMAlldyl10=;
- b=EzsZ8sRhplGYqHlovIwbYH6zb2BEpvzfOmgqqVrbvdfI2Bs79lytqLog2D79/PaT/D
- 16TDi9gxLfaVa0bR93AHDnXd/kbH70HoSFQoVjwq4evqltX07DnzZeOgFD+8Z26ap7Pk
- 3pvo9TzpoVnNQ1RwIdU0AOtIVWvvsRfgDD+LzBy9K3Le9uSunq/UFBmBT3g7AZ7BHyRV
- lcK+lQmUXcQ9tHQW+3vzOk6UYzAM97VKIwbtT0EEc59dy1UA2QAZGviKzzWrqYWTuSw9
- 7FIlxxu0JSz8GdkRz5DKYygUnDjzopxY0ivl+SmDez0z4VDuk7mww0mCrg6mdY63xJF4
- 7bxg==
+ :cc; bh=7tIFXOKTy4ESMiYe7mqtZ282NIlBLpj2pKJmHgxHfCw=;
+ b=UFqdcmmUDj9ovwvIIqwGImsJcR0xnqllkJz84cw33dYEUOPyoiHc0Nx+SYfaTQhXIJ
+ GzoO4+SxI+26b8L7rZUWqof9ih6yIy0qOKQKS89eK2O9UKCt98/0/RAef2vDWsfhi/Sn
+ AKoxJxyQbMdeH3RY7Bt8kSB2McdOLTwWhF9HgIo9Y8BnnzPyjsp4jnO2Lt28ozz/eNYV
+ BPLxJDAtocnJlJgdlM2a1u1xe1XuC+ar0wya93Aa1IIUbrrSvdQ7IPIx3GpBopvbYMNH
+ y1ilCFisnPv3gzkowTV+No93CH8k0KgOkTtDIgplOmu8TwEuNUIgnBbd0I4sTi4qaO9L
+ mWIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=w2yWf7divgcX0hOBgLXcDpemaHcbR2900vMAlldyl10=;
- b=fp7cli3gh8sDelQYgrL+ux4Ju/w/oHsy5wjBlDY4ZSbN7tmooChVebTezkxsc7pIJg
- EB5ECedhRa7ChH0W4lpgrKwIRrOv4rJh8JEY9WbmkCNCXAVuU0w0O1/gwOHnxnitGVgR
- eTz5eNVZHtG2dBmYcRVXrCeFaXYK00iIOFbu9mA2lS6FeN4f2RQ1/4DBYuiyb9baXTZp
- NbljpLrdunkcvb/9Qq333gCd3JVLfafKCddFdOOkd0uyufEATB499Yl1UbRjjPtz5uZH
- IPliD0xTYNBHlNMTRVb3xtDPWBtGQg1vtt9r6zS8GSHCwNs0xKRjO54M1G0nWAv3HpFU
- 5X2g==
-X-Gm-Message-State: AOAM5316kbPbyMboiGZRApQX7FVffKRH5qUYX494TUzah3a1S3nyVRG5
- nBN3Mx4G2TuY+ngiHrhi3NeRQIfEVLBgyf3Ty+I=
-X-Google-Smtp-Source: ABdhPJxud1IFcJ6DDQmk1bY5SF5iw3WS5SD4sWm1yVUtVsMU5h0Lfhk5bi2/kwlOC1rO5rdwHucMpNCqflSyTW7dYhk=
-X-Received: by 2002:a05:6638:ec3:: with SMTP id
- q3mr5438972jas.106.1603894835881; 
- Wed, 28 Oct 2020 07:20:35 -0700 (PDT)
+ bh=7tIFXOKTy4ESMiYe7mqtZ282NIlBLpj2pKJmHgxHfCw=;
+ b=NELuJsu+sGq5klewKDWxx4PTVxbFy+ujZI9hHPBCIU3LT/ja2BblwYzltChchiPlxe
+ Wi7c1Kg68xOhePvbdk79FSucnDRQdkCXQTX7J7OiHAZTxL/harZ0mR+lMmns+GCObt/I
+ d/erx/AdQecCDUvVp0JUNodoY2GU5aQzSMQSF/r8sjwCL2f2c4E9svK9jNYg/QArF02H
+ RYlYyvgzNtg3pZF5QCzXZFvHO7j9jKtme12DWc5ZsTT7AQnj/4oTuqtI2I8x/0n8/rpD
+ Up54aFe0YdF8V95s5W5J+NVJ3MNJRKwXKceikrH3TerXTIFmcNDSvcTT/3ahOkt/YBzB
+ w4wA==
+X-Gm-Message-State: AOAM530l5GlXC3BvTM13gcOuPnRY75ujKHQVJ7t2wPwEM7InF5uq4YdL
+ 9wGEbDcZG9jXNO5OlIGgHAtbSO69qaD8DH/YAQ4=
+X-Google-Smtp-Source: ABdhPJxWsPLVfcwGsgklxXWJFiCeFyPMGYEHgKSSTbsyTRam8cZBzoxef3uC+U8CQfVmjWcp7bDQIAhJgeiBMsAjYTk=
+X-Received: by 2002:a05:6e02:c:: with SMTP id
+ h12mr6216554ilr.177.1603895133621; 
+ Wed, 28 Oct 2020 07:25:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
- <1603863010-15807-4-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1603863010-15807-4-git-send-email-bmeng.cn@gmail.com>
+References: <20201027141740.18336-1-bmeng.cn@gmail.com>
+ <20201027141740.18336-3-bmeng.cn@gmail.com>
+ <CAKmqyKMyHCZCLZOqVVZ4n4C0_rAY-WO5-J+Y=dqi0qtZsLXjpw@mail.gmail.com>
+ <CAEUhbmWqoP71uKYRhYdmb=Hxx=FNOYcfL6EkEChn9x1Qq9CddQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmWqoP71uKYRhYdmb=Hxx=FNOYcfL6EkEChn9x1Qq9CddQ@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 28 Oct 2020 07:08:44 -0700
-Message-ID: <CAKmqyKMeeFrZOznHbzZZabEY1gs6ZwKMwCGs-6+Dxp5=83nB+w@mail.gmail.com>
-Subject: Re: [PATCH v2 03/10] hw/riscv: microchip_pfsoc: Connect DDR memory
+Date: Wed, 28 Oct 2020 07:13:42 -0700
+Message-ID: <CAKmqyKPVOt+uRHW77YuBeaR5bDfwFPNWtR7JYDWPdfa5TayFZQ@mail.gmail.com>
+Subject: Re: [RESEND PATCH 2/9] hw/riscv: microchip_pfsoc: Connect DDR memory
  controller modules
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
@@ -53,8 +55,8 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Atish Patra <atish.patra@wdc.com>, 
  Anup Patel <anup.patel@wdc.com>, Ivan Griffin <ivan.griffin@emdalo.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -17
@@ -77,125 +79,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 14:20:44 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 14:25:38 -0000
 
-On Tue, Oct 27, 2020 at 10:34 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, Oct 27, 2020 at 6:43 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> From: Bin Meng <bin.meng@windriver.com>
+> Hi Alistair,
 >
-> Connect DDR SGMII PHY module and CFG module to the PolarFire SoC.
+> On Wed, Oct 28, 2020 at 1:49 AM Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Tue, Oct 27, 2020 at 7:46 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >
+> > > From: Bin Meng <bin.meng@windriver.com>
+> > >
+> > > Connect DDR SGMII PHY module and CFG module to the PolarFire SoC.
+> > >
+> > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> > > ---
+> > >
+> > >  hw/riscv/Kconfig                   |  1 +
+> > >  hw/riscv/microchip_pfsoc.c         | 18 ++++++++++++++++++
+> > >  include/hw/riscv/microchip_pfsoc.h |  5 +++++
+> > >  3 files changed, 24 insertions(+)
+> > >
+> > > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> > > index 2df978fe8d..c8e50bde99 100644
+> > > --- a/hw/riscv/Kconfig
+> > > +++ b/hw/riscv/Kconfig
+> > > @@ -4,6 +4,7 @@ config IBEX
+> > >  config MICROCHIP_PFSOC
+> > >      bool
+> > >      select CADENCE_SDHCI
+> > > +    select MCHP_PFSOC_DMC
+> > >      select MCHP_PFSOC_MMUART
+> > >      select MSI_NONBROKEN
+> > >      select SIFIVE_CLINT
+> > > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> > > index 4627179cd3..85be2bcde8 100644
+> > > --- a/hw/riscv/microchip_pfsoc.c
+> > > +++ b/hw/riscv/microchip_pfsoc.c
+> > > @@ -15,6 +15,7 @@
+> > >   * 4) Cadence eMMC/SDHC controller and an SD card connected to it
+> > >   * 5) SiFive Platform DMA (Direct Memory Access Controller)
+> > >   * 6) GEM (Gigabit Ethernet MAC Controller)
+> > > + * 7) DMC (DDR Memory Controller)
+> > >   *
+> > >   * This board currently generates devicetree dynamically that indicates at least
+> > >   * two harts and up to five harts.
+> > > @@ -85,7 +86,9 @@ static const struct MemmapEntry {
+> > >      [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
+> > >      [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
+> > >      [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
+> > > +    [MICROCHIP_PFSOC_DDR_SGMII_PHY] =   { 0x20007000,     0x1000 },
+> > >      [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
+> > > +    [MICROCHIP_PFSOC_DDR_CFG] =         { 0x20080000,    0x40000 },
+> >
+> > Neither of these are documented....
 >
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> It's documented in the "Register
+> Map/PF_SoC_RegMap_V1_1/pfsoc_regmap.htm" in
+> https://www.microsemi.com/document-portal/doc_download/1244581-polarfire-soc-register-map
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+That doesn't seem to be an official version controled doc though and
+it seems to conflict with the other UG document.
+
+>
+> >
+> > Maybe just add a single comment above the memory layout clarifying
+> > that this is not what is documented from the SoC but is instead based
+> > on what guests do?
+> >
+>
+> I can add a link to the Microchip website that documents the memory
+> map above the memory layout.
+
+Thanks, that's at least something.
 
 Alistair
 
-> ---
 >
-> (no changes since v1)
+> > It seems to be a constant problem with this board, unless I am really
+> > misreading the memory map.
+> >
 >
->  hw/riscv/Kconfig                   |  1 +
->  hw/riscv/microchip_pfsoc.c         | 18 ++++++++++++++++++
->  include/hw/riscv/microchip_pfsoc.h |  5 +++++
->  3 files changed, 24 insertions(+)
->
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 2df978f..c8e50bd 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -4,6 +4,7 @@ config IBEX
->  config MICROCHIP_PFSOC
->      bool
->      select CADENCE_SDHCI
-> +    select MCHP_PFSOC_DMC
->      select MCHP_PFSOC_MMUART
->      select MSI_NONBROKEN
->      select SIFIVE_CLINT
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index 6aac849..3c504f7 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -15,6 +15,7 @@
->   * 4) Cadence eMMC/SDHC controller and an SD card connected to it
->   * 5) SiFive Platform DMA (Direct Memory Access Controller)
->   * 6) GEM (Gigabit Ethernet MAC Controller)
-> + * 7) DMC (DDR Memory Controller)
->   *
->   * This board currently generates devicetree dynamically that indicates at least
->   * two harts and up to five harts.
-> @@ -103,7 +104,9 @@ static const struct MemmapEntry {
->      [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
->      [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
->      [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
-> +    [MICROCHIP_PFSOC_DDR_SGMII_PHY] =   { 0x20007000,     0x1000 },
->      [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
-> +    [MICROCHIP_PFSOC_DDR_CFG] =         { 0x20080000,    0x40000 },
->      [MICROCHIP_PFSOC_MMUART1] =         { 0x20100000,     0x1000 },
->      [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
->      [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
-> @@ -149,6 +152,11 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
->      object_initialize_child(obj, "dma-controller", &s->dma,
->                              TYPE_SIFIVE_PDMA);
->
-> +    object_initialize_child(obj, "ddr-sgmii-phy", &s->ddr_sgmii_phy,
-> +                            TYPE_MCHP_PFSOC_DDR_SGMII_PHY);
-> +    object_initialize_child(obj, "ddr-cfg", &s->ddr_cfg,
-> +                            TYPE_MCHP_PFSOC_DDR_CFG);
-> +
->      object_initialize_child(obj, "gem0", &s->gem0, TYPE_CADENCE_GEM);
->      object_initialize_child(obj, "gem1", &s->gem1, TYPE_CADENCE_GEM);
->
-> @@ -278,6 +286,16 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
->          memmap[MICROCHIP_PFSOC_MPUCFG].base,
->          memmap[MICROCHIP_PFSOC_MPUCFG].size);
->
-> +    /* DDR SGMII PHY */
-> +    sysbus_realize(SYS_BUS_DEVICE(&s->ddr_sgmii_phy), errp);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddr_sgmii_phy), 0,
-> +                    memmap[MICROCHIP_PFSOC_DDR_SGMII_PHY].base);
-> +
-> +    /* DDR CFG */
-> +    sysbus_realize(SYS_BUS_DEVICE(&s->ddr_cfg), errp);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddr_cfg), 0,
-> +                    memmap[MICROCHIP_PFSOC_DDR_CFG].base);
-> +
->      /* SDHCI */
->      sysbus_realize(SYS_BUS_DEVICE(&s->sdhci), errp);
->      sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci), 0,
-> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-> index 8bfc7e1..5b81e26 100644
-> --- a/include/hw/riscv/microchip_pfsoc.h
-> +++ b/include/hw/riscv/microchip_pfsoc.h
-> @@ -24,6 +24,7 @@
->
->  #include "hw/char/mchp_pfsoc_mmuart.h"
->  #include "hw/dma/sifive_pdma.h"
-> +#include "hw/misc/mchp_pfsoc_dmc.h"
->  #include "hw/net/cadence_gem.h"
->  #include "hw/sd/cadence_sdhci.h"
->
-> @@ -37,6 +38,8 @@ typedef struct MicrochipPFSoCState {
->      RISCVHartArrayState e_cpus;
->      RISCVHartArrayState u_cpus;
->      DeviceState *plic;
-> +    MchpPfSoCDdrSgmiiPhyState ddr_sgmii_phy;
-> +    MchpPfSoCDdrCfgState ddr_cfg;
->      MchpPfSoCMMUartState *serial0;
->      MchpPfSoCMMUartState *serial1;
->      MchpPfSoCMMUartState *serial2;
-> @@ -82,7 +85,9 @@ enum {
->      MICROCHIP_PFSOC_MMUART0,
->      MICROCHIP_PFSOC_SYSREG,
->      MICROCHIP_PFSOC_MPUCFG,
-> +    MICROCHIP_PFSOC_DDR_SGMII_PHY,
->      MICROCHIP_PFSOC_EMMC_SD,
-> +    MICROCHIP_PFSOC_DDR_CFG,
->      MICROCHIP_PFSOC_MMUART1,
->      MICROCHIP_PFSOC_MMUART2,
->      MICROCHIP_PFSOC_MMUART3,
-> --
-> 2.7.4
->
->
+> Regards,
+> Bin
 
