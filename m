@@ -1,66 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXe32-0005bR-9z
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 01:31:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32856)
+	id 1kXmIF-0001wW-Kd
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 10:19:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58404)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kXe2z-0005V0-Mf; Wed, 28 Oct 2020 01:30:57 -0400
-Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:39216)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kXmIE-0001tX-B1; Wed, 28 Oct 2020 10:19:14 -0400
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:35291)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kXe2y-0000jr-2h; Wed, 28 Oct 2020 01:30:57 -0400
-Received: by mail-pf1-x442.google.com with SMTP id e15so2258406pfh.6;
- Tue, 27 Oct 2020 22:30:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kXmIB-0006j9-99; Wed, 28 Oct 2020 10:19:13 -0400
+Received: by mail-io1-xd43.google.com with SMTP id k6so5505421ior.2;
+ Wed, 28 Oct 2020 07:19:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=XybP5xo4qhD8pmZoNkGDTq4nka9pB/45dbl0jm7hTcE=;
- b=rwvHIMb+jQmHAbC/mmzpp1QjH/Wgp0exoRb9q0YL8ObrkizvxGIz1Nkz89RyosUdPT
- AemxRnj7wyJEgixbRsS4FUkGWLjEaLk/GfLF8SJznOM3WjfCxMIpxccZj31WuZt3KdTL
- peoyM/nsadH6Gxl22oZ8Oh+KVjnuNEcCrPMZVNhifcGYuuH7VOFxLuqxslD7ohbuekSE
- kMS3JAUprFQp//5FYNfFe3HCfBuytpA5xyWPi7ZWPQ2cMGre/KyVanyN+wiNHzgtpxco
- KZi6G5fpiAk/SXgfK9pC2RcCyFwxYvmgOfKFWLDKbO6TI6oeF1R4SjnTLeYAy6l2CZz9
- BiFw==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=bSgEQ8rqHi5Q5mtm1n6ven7ZPrARrwvFnMnbHSoiGmc=;
+ b=IvPzTn2gNhJ2XITZUWPZPi+kJpUgINPS1fbPc0RCBosTLCSf577pB/591R6HoSXAwv
+ Fu2kO4kM7cgsSf3Ize/T5Fp7qCoCeNfxcVGHbVsl0ToO/XnDI/oUwMoHsutWCmiR8kQg
+ M0sXMbTwhtALvfM8V7uSFlBsONaQfX3eBj55MmFKWHfLMZSvnCeW+CIRTyJgo9O5lebz
+ V/iNBawKqfoHCKRe0apJY/73p/e+DXCh8V24wMGXXfqXbhkxtibZ7YFRopMjl6Rjmnwp
+ SefKvUfoFuLd85Sg5nTlxJbGsXwhXRv/g1TdnDpcrCvuMwF519NF7KFJgiEVbpyH7VdG
+ tbng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=XybP5xo4qhD8pmZoNkGDTq4nka9pB/45dbl0jm7hTcE=;
- b=qAI/cS7IPrgcuKRSYMsexRH3jsVFHWEbcGRWDa7elYx+PP1tdSeY/pBwd9vwrTTCFA
- DiYwiOhtTsSqVUWV1Yev2FAXNy92Qp2vfQnJzx6QjPDsmMBbet/fhN1WDY3VjmxBFGiV
- Cj97qU2Id9HoEUdKtqcHIWKVhFAOowY/MQ3almE1M4oFkdmU/x8W+dNZEHY4ecSaYLLN
- oiAIQuz5MQLLTkRC17TPqjMr//mNVxP2hQivWHRvzK9tEJSEz+w/zfJKTKz1ktGsXLMJ
- WBqP0+yjzqdAvNtXpE1AHTIpUeL62Wqp/xbfX/pSXOTb61ILQTa/PRC0qFLwLafzVgBR
- F1Xg==
-X-Gm-Message-State: AOAM533FmbUZTFr6luet9kWwVM5OcKxnCJlsDg44Bof06Bgz19a+7Lba
- eJUKcISVzAYhu80NIjtOVXk=
-X-Google-Smtp-Source: ABdhPJyDWu07WXxcw0JVjxl2C5q4uUCQ2V28paxYmv57bbbz+ijWrqvdioaq4vKEwasPHPWDJnHBpw==
-X-Received: by 2002:a63:530c:: with SMTP id h12mr5036918pgb.424.1603863054654; 
- Tue, 27 Oct 2020 22:30:54 -0700 (PDT)
-Received: from pek-vx-bsp2.wrs.com (unknown-224-80.windriver.com.
- [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id 9sm5031887pjs.1.2020.10.27.22.30.51
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 27 Oct 2020 22:30:54 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Anup Patel <anup.patel@wdc.com>, Atish Patra <atish.patra@wdc.com>,
- Ivan Griffin <ivan.griffin@emdalo.com>, Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v2 10/10] hw/riscv: microchip_pfsoc: Hook the I2C1 controller
-Date: Wed, 28 Oct 2020 13:30:10 +0800
-Message-Id: <1603863010-15807-11-git-send-email-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=bSgEQ8rqHi5Q5mtm1n6ven7ZPrARrwvFnMnbHSoiGmc=;
+ b=MlBNLK9mIEJ48zA/9X3abqEKidHT6XnpwWFpDBP/qsjw8vVO3594PfGuM5WWoQpEQ3
+ 5AoCX8sHjL4knRAi6BvJ3mMDFLqV53s6GUVUh6dL1AynVKCMGrLlKvR2+b07F38qvAj2
+ QKzewB2nEQkiBwuZSTh/DnKUYMyv2tE++3uRStiYHEn9quAJtu0nn4DJZH23eDVZ8A9Z
+ lr9x2tu3gPOieExBz1tD3rD892DkwyMBzw5SU3kKXEZ6s1AT15VJ/eZoHWeZvWaOX93W
+ pl01nbYZ+bt1StYFWdTmM7cfUspE5znhNph8IKcp2CHH8nu+uq6GR9fJb2JRRKEuQujh
+ dIdQ==
+X-Gm-Message-State: AOAM531GxQhSoQFD+ouJy4WUk5rG6zM/h75lHOnTVtzWj53zfmhsUNof
+ 8YE0/VPDpvomTBPgjnDy5apc0eYLwGPXSez0Wu8=
+X-Google-Smtp-Source: ABdhPJzDAuFR5YC1KS/MNG/cp2gk/kiND753CrhInPIJiLUuJPw+BmBi3z1WQStemfD+ByYJQkS4MOHWv9XGWtqe8KQ=
+X-Received: by 2002:a6b:8ec7:: with SMTP id q190mr6285321iod.42.1603894749376; 
+ Wed, 28 Oct 2020 07:19:09 -0700 (PDT)
+MIME-Version: 1.0
 References: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::442;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x442.google.com
+ <1603863010-15807-2-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1603863010-15807-2-git-send-email-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 28 Oct 2020 07:07:18 -0700
+Message-ID: <CAKmqyKNLThFvp8CuueC7L7bcEdN6QS62k54ZRitTrcZdpvR-9w@mail.gmail.com>
+Subject: Re: [PATCH v2 01/10] hw/riscv: microchip_pfsoc: Document where to
+ look at the SoC memory maps
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, Atish Patra <atish.patra@wdc.com>, 
+ Anup Patel <anup.patel@wdc.com>, Ivan Griffin <ivan.griffin@emdalo.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -75,68 +76,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 05:30:58 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 14:19:15 -0000
 
-From: Bin Meng <bin.meng@windriver.com>
+On Tue, Oct 27, 2020 at 10:31 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> It is not easy to find out the memory map for a specific component
+> in the PolarFire SoC as the information is scattered in different
+> documents. Add some comments so that people can know where to get
+> such information from the Microchip website.
+>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-The latest SD card image [1] released by Microchip ships a Linux
-kernel with built-in PolarFire SoC I2C driver support. The device
-tree file includes the description for the I2C1 node hence kernel
-tries to probe the I2C1 device during boot.
-
-It is enough to create an unimplemented device for I2C1 to allow
-the kernel to continue booting to the shell.
-
-[1] ftp://ftpsoc.microsemi.com/outgoing/core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic.gz
-
-Signed-off-by: Bin Meng <bin.meng@windriver.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
----
+Alistair
 
-(no changes since v1)
-
- hw/riscv/microchip_pfsoc.c         | 6 ++++++
- include/hw/riscv/microchip_pfsoc.h | 1 +
- 2 files changed, 7 insertions(+)
-
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index 5e31b84..d13d6ba 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -113,6 +113,7 @@ static const struct MemmapEntry {
-     [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
-     [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
-     [MICROCHIP_PFSOC_MMUART4] =         { 0x20106000,     0x1000 },
-+    [MICROCHIP_PFSOC_I2C1] =            { 0x2010b000,     0x1000 },
-     [MICROCHIP_PFSOC_GEM0] =            { 0x20110000,     0x2000 },
-     [MICROCHIP_PFSOC_GEM1] =            { 0x20112000,     0x2000 },
-     [MICROCHIP_PFSOC_GPIO0] =           { 0x20120000,     0x1000 },
-@@ -343,6 +344,11 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-         qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART4_IRQ),
-         serial_hd(4));
- 
-+    /* I2C1 */
-+    create_unimplemented_device("microchip.pfsoc.i2c1",
-+        memmap[MICROCHIP_PFSOC_I2C1].base,
-+        memmap[MICROCHIP_PFSOC_I2C1].size);
-+
-     /* GEMs */
- 
-     nd = &nd_table[0];
-diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-index db77e9c..51d4463 100644
---- a/include/hw/riscv/microchip_pfsoc.h
-+++ b/include/hw/riscv/microchip_pfsoc.h
-@@ -97,6 +97,7 @@ enum {
-     MICROCHIP_PFSOC_MMUART2,
-     MICROCHIP_PFSOC_MMUART3,
-     MICROCHIP_PFSOC_MMUART4,
-+    MICROCHIP_PFSOC_I2C1,
-     MICROCHIP_PFSOC_GEM0,
-     MICROCHIP_PFSOC_GEM1,
-     MICROCHIP_PFSOC_GPIO0,
--- 
-2.7.4
-
+>
+> ---
+>
+> Changes in v2:
+> - new patch: Document where to look at the PolarFire SoC memory maps
+>
+>  hw/riscv/microchip_pfsoc.c | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+>
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index 4627179..6aac849 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -66,6 +66,24 @@
+>  /* GEM version */
+>  #define GEM_REVISION    0x0107010c
+>
+> +/*
+> + * The complete description of the whole PolarFire SoC memory map is scattered
+> + * in different documents. There are several places to look at for memory maps:
+> + *
+> + * 1 Chapter 11 "MSS Memory Map", in the doc "UG0880: PolarFire SoC FPGA
+> + *   Microprocessor Subsystem (MSS) User Guide", which can be downloaded from
+> + *   https://www.microsemi.com/document-portal/doc_download/
+> + *   1244570-ug0880-polarfire-soc-fpga-microprocessor-subsystem-mss-user-guide,
+> + *   describes the whole picture of the PolarFire SoC memory map.
+> + *
+> + * 2 A zip file for PolarFire soC memory map, which can be downloaded from
+> + *   https://www.microsemi.com/document-portal/doc_download/
+> + *   1244581-polarfire-soc-register-map, contains the following 2 major parts:
+> + *   - Register Map/PF_SoC_RegMap_V1_1/pfsoc_regmap.htm
+> + *     describes the complete integrated peripherals memory map
+> + *   - Register Map/PF_SoC_RegMap_V1_1/MPFS250T/mpfs250t_ioscb_memmap_dri.htm
+> + *     describes the complete IOSCB modules memory maps
+> + */
+>  static const struct MemmapEntry {
+>      hwaddr base;
+>      hwaddr size;
+> --
+> 2.7.4
+>
+>
 
