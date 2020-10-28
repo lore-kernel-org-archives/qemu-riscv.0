@@ -1,63 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXmpk-0001oe-KY
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 10:53:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38490)
+	id 1kXmpm-0001si-9S
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 10:53:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38514)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=563b96974=alistair.francis@wdc.com>)
- id 1kXmpi-0001mM-CX; Wed, 28 Oct 2020 10:53:50 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:10510)
+ id 1kXmpk-0001ng-8B; Wed, 28 Oct 2020 10:53:52 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:10516)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=563b96974=alistair.francis@wdc.com>)
- id 1kXmpe-00035L-T3; Wed, 28 Oct 2020 10:53:49 -0400
+ id 1kXmpi-00036U-Bv; Wed, 28 Oct 2020 10:53:51 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1603896826; x=1635432826;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=gqN1q0ztY/K8RVas54tv6M76H9c7ztlUkarYiaGvMjo=;
- b=Svg8a8d2L6Sa/2qjFgTa+1COmhYpbcan/W2Ptc/w0Em/fdnNtC3ucAwy
- 76seA/t7ABL9yIYb5NEqt29+YnpWZ27Ll/LGar+tS3qKVzNk/a0KDRWPe
- nBX3vim7IR0+bhI+bnG1TqoZk0oL1M7S96SLYDRDtVRkvVeSDrgWtaBSD
- PeVJBKQKEGQC44Sal9fv/Ae9xur8Gpq+fAz/a/WL4Seerf33Icna3NhHP
- I0IzY0i/aOQa7W9A96sRBt2FWp4jvNgh+MDNWVqxqyTqlEK+RqM+0i5Xt
- Xfl8zoKj/8U7yEJiu1XYHR3kNzvS4eGB90lt/dqTIbuixKDod8luUIPRT g==;
-IronPort-SDR: dpCxKSoAqB4F7oDtlCRpBPiMB5TWrwn7Us0W9O2QRsVacfj6kD0Ldmn00gLUqltbLAPO6AGZXo
- JfFsjVsSmCoJqP55MoLAWE9Y+nvBKjPpM0lH6eghhCOdxYrbaRkfakSC1JBnG0MQgsShTQ9VfK
- TRPwPCsao9GBaxgr5Fq4duQWt3vpKtZpsq/bYdIyqJvP8lqCxTUSdny02gY/fKzprikepSpWyR
- iyp5gk0DJXixUMRlZblyykuuDXiVJIbZT4Q7poxoz1yG2qGfGJxIms0+xOhVofQSfbNu/q+dat
- 1Rg=
-X-IronPort-AV: E=Sophos;i="5.77,426,1596470400"; d="scan'208";a="151200349"
+ t=1603896830; x=1635432830;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=1d/Pc82dQ4fgFa8gXxhoCsb7iNK2pBewRrK+00Mlt+o=;
+ b=RLMvOGp+QbaxJqy+/5jyp4XU5iC/cTtS4kXNP4R+5YlUN+LmYHYoAZOy
+ sXe66Vh2AKZhBZXEeOW0+nFeqwey5ujtQKPfphRv5niFEqHOZZGTURZDS
+ Dt4Q4OavxZ+QYU/f282oNpQ3Efr7x73r5e+tgTPBaKjj9X7OYBTK++Z9W
+ qOYUbcOBGONqd1GDpR8AXv2P/vxH2uWdrxbxaAtpfX9N+Y7d9mNWcytYP
+ FAOcEeUpbj0SltaxtK8muI6kkoDGnAe/8IQeBcBLf91qbHGrvYEoAdsbc
+ qlqC6saybPSUmixC0OA3NiZJDjqgENXJxaUAP4PCpNeYhRCV0mujiqkaW Q==;
+IronPort-SDR: Y7Abz3bGNl4wgbLgtaodAF0oJNSzakfY7nBPHDiZBWvZRotCmXKiXPr7yA814QXhcVcNyMBBn8
+ jWUbwBh1omUaDzEXUzMswZtETOi4NAGZ0JhHz0KG7jCVIBHiB8jvZJqF8Y0NnXAmQaA+oWY1TF
+ scrv0LMxdlbJbc6oBR6gUrS8qBzAgCnLN7ubGfd0RsBE0/QaBjmR3QdR4DJMbLReCebCGgXXcY
+ MkY9lBG1J0/zbncV2DJaNBwzH8faenfucLloDQhDFi/P9TGR9kKQmQ63UVk8cGuLQnkWHEuTgX
+ fFM=
+X-IronPort-AV: E=Sophos;i="5.77,426,1596470400"; d="scan'208";a="151200379"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 28 Oct 2020 22:53:42 +0800
-IronPort-SDR: 0GDFh3BZkpsvrNTc3Pbvz4uvaQ4yP0PFCJIccg8/BqpBmsSwAllAKWc7iGA/9VNjqaXVwIBGqe
- A/Zt5E9TvwKefy0MToKYhX3zGQ3AGaaV7RfVUdVM7dH2akl3xzBXbBedRQpWGNRn7xMUdgXg6T
- iCG7AeRCkjLKqwDRv7l/7+mweWm0+9ut4piU3IAtO3o3mkdXWoX2mwjV1IatoLzHNpGf4blhoa
- dB0TTuIZSy2C3mU5rWcgc+lxCZZDAhGIs0zZfX1qyqJv0xNoiilz0zo3lvmUb+Y+pkjYBgNVl6
- roeQjp80sHjjWsHk8j47ELeK
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by ob1.hgst.iphmx.com with ESMTP; 28 Oct 2020 22:53:48 +0800
+IronPort-SDR: YjVpCiR/xMkcwzDB45HPiOd316SuKqF22VwXfuXxI1Ly48SXpqXWk5Jm+9do/fgeo91BEWun0s
+ Cb0aUsO5gpd4Tu/fYOC3gfBtfLmqghiHGeMif8DJnJ0z7HyFWdsl+fM2RKOu5p35/q31atPP2o
+ qbLtNbqKmarEp369dmrQOksXYtBbQulZJLv9N7QmVZB2ZiH2mT+oQbOOkTGODaZ2dthc+NdB6C
+ 5+SQRNg2YzEXrQbIRSCynSapiMZrP/oTqiy4cm+RHTjzfGTcRTBRAEoQTi/BVYz0Bc5rP1nHYX
+ L1F8GnCXxn8WPcTy9vWkrT7v
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Oct 2020 07:38:52 -0700
-IronPort-SDR: HVQq0fEz9xzhRh072atpqA3GVNB+QagwK7sUVP2+iD16oHMd4lrk5Z0NYT3VB0lSBehuTViCd6
- jDC8hDi/wQ9eEqeanrR8kbwl2pbHJxy+3uHm+RwrLB7IUh2ewK5o80tDB4b2DhwzB9OfmURQfD
- euJsiV8F2GlPXIodJEtLsARhvqea9P2Vxim/mmOkBFMRIz6s8A8bEFtMI3ANFEZzx0b3dvgUP2
- 0V/YAocMHctfD1J0YjM0Ta+EQckLnzy96DzeZ3NMC1NV37/GCh7TRz8Xzvv/A6qRuXz7R+HtHe
- oZ4=
+ 28 Oct 2020 07:38:58 -0700
+IronPort-SDR: zzoOC2sZNKh9S/ZA3v3cgCTF6zN0aIqRqydjTLlcGjXnGQRYuxp0pPQkn/a4f4x3nSZHfhDrrw
+ Dh4Sr3sZGkhDhi5iomAq+h1RsMAU3e/6OLKbcMrIPOkVqLHqHzX/wiw+YrO8wIHTtY6OqnuUMY
+ a0BaQVDwS4tqs1Ah1YZNjFYpzIuMOnXBFjpHT9qp1VuATcmkO0U6fs+t+92ZHBKvgYMT3B2wjf
+ 5iEbUO+gLQFPym/he3xm1XflWCrLO2DTostM03jjtq+kTM9F0J2IRQqX0wDa3Eo9XECFWBkYgj
+ q1w=
 WDCIronportException: Internal
 Received: from usa003000.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.60.131])
- by uls-op-cesaip02.wdc.com with ESMTP; 28 Oct 2020 07:53:43 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 28 Oct 2020 07:53:48 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com, richard.henderson@linaro.org
-Subject: [PATCH v2 0/5]  Fix the Hypervisor access functions
-Date: Wed, 28 Oct 2020 07:42:17 -0700
-Message-Id: <cover.1603896075.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 2/5] target/riscv: Set the virtualised MMU mode when doing
+ hyp accesses
+Date: Wed, 28 Oct 2020 07:42:23 -0700
+Message-Id: <3f5666c9eb72758011c14a660de99ba86a0b6561.1603896075.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <cover.1603896075.git.alistair.francis@wdc.com>
+References: <cover.1603896075.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=216.71.153.144;
@@ -84,34 +87,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 14:53:50 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 14:53:52 -0000
 
-Richard pointed out that the Hypervisor access functions don't work
-correctly, see:
-https://www.mail-archive.com/qemu-devel@nongnu.org/msg751540.html.
+When performing the hypervisor load/store operations set the MMU mode to
+indicate that we are virtualised.
 
-This seris fixes them up by adding a new MMU index for the virtualised
-state.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/op_helper.c | 30 +++++++++++++++++-------------
+ 1 file changed, 17 insertions(+), 13 deletions(-)
 
-v2:
- - Use only 6 MMU modes instead of 8
-
-Alistair Francis (5):
-  target/riscv: Add a virtualised MMU Mode
-  target/riscv: Set the virtualised MMU mode when doing hyp accesses
-  target/riscv: Remove the HS_TWO_STAGE flag
-  target/riscv: Remove the hyp load and store functions
-  target/riscv: Split the Hypervisor execute load helpers
-
- target/riscv/cpu-param.h                |  10 +-
- target/riscv/cpu.h                      |   7 +-
- target/riscv/cpu_bits.h                 |   1 -
- target/riscv/helper.h                   |   6 +-
- target/riscv/cpu_helper.c               |  67 ++++++-------
- target/riscv/op_helper.c                |  90 ++---------------
- target/riscv/insn_trans/trans_rvh.c.inc | 127 +++++++-----------------
- 7 files changed, 90 insertions(+), 218 deletions(-)
-
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index e20d56dcb8..548c5851ec 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -235,30 +235,31 @@ target_ulong helper_hyp_load(CPURISCVState *env, target_ulong address,
+         (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
+             get_field(env->hstatus, HSTATUS_HU))) {
+         target_ulong pte;
++        int mmu_idx = cpu_mmu_index(env, false) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+ 
+         riscv_cpu_set_two_stage_lookup(env, true);
+ 
+         switch (memop) {
+         case MO_SB:
+-            pte = cpu_ldsb_data_ra(env, address, GETPC());
++            pte = cpu_ldsb_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_UB:
+-            pte = cpu_ldub_data_ra(env, address, GETPC());
++            pte = cpu_ldub_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TESW:
+-            pte = cpu_ldsw_data_ra(env, address, GETPC());
++            pte = cpu_ldsw_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TEUW:
+-            pte = cpu_lduw_data_ra(env, address, GETPC());
++            pte = cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TESL:
+-            pte = cpu_ldl_data_ra(env, address, GETPC());
++            pte = cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TEUL:
+-            pte = cpu_ldl_data_ra(env, address, GETPC());
++            pte = cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TEQ:
+-            pte = cpu_ldq_data_ra(env, address, GETPC());
++            pte = cpu_ldq_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         default:
+             g_assert_not_reached();
+@@ -284,23 +285,25 @@ void helper_hyp_store(CPURISCVState *env, target_ulong address,
+         (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+         (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
+             get_field(env->hstatus, HSTATUS_HU))) {
++        int mmu_idx = cpu_mmu_index(env, false) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
++
+         riscv_cpu_set_two_stage_lookup(env, true);
+ 
+         switch (memop) {
+         case MO_SB:
+         case MO_UB:
+-            cpu_stb_data_ra(env, address, val, GETPC());
++            cpu_stb_mmuidx_ra(env, address, val, mmu_idx, GETPC());
+             break;
+         case MO_TESW:
+         case MO_TEUW:
+-            cpu_stw_data_ra(env, address, val, GETPC());
++            cpu_stw_mmuidx_ra(env, address, val, mmu_idx, GETPC());
+             break;
+         case MO_TESL:
+         case MO_TEUL:
+-            cpu_stl_data_ra(env, address, val, GETPC());
++            cpu_stl_mmuidx_ra(env, address, val, mmu_idx, GETPC());
+             break;
+         case MO_TEQ:
+-            cpu_stq_data_ra(env, address, val, GETPC());
++            cpu_stq_mmuidx_ra(env, address, val, mmu_idx, GETPC());
+             break;
+         default:
+             g_assert_not_reached();
+@@ -326,15 +329,16 @@ target_ulong helper_hyp_x_load(CPURISCVState *env, target_ulong address,
+         (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
+             get_field(env->hstatus, HSTATUS_HU))) {
+         target_ulong pte;
++        int mmu_idx = cpu_mmu_index(env, false) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+ 
+         riscv_cpu_set_two_stage_lookup(env, true);
+ 
+         switch (memop) {
+         case MO_TEUW:
+-            pte = cpu_lduw_data_ra(env, address, GETPC());
++            pte = cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         case MO_TEUL:
+-            pte = cpu_ldl_data_ra(env, address, GETPC());
++            pte = cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
+             break;
+         default:
+             g_assert_not_reached();
 -- 
 2.28.0
 
