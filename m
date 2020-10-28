@@ -1,75 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXaLT-00030l-1g
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 21:33:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41226)
+	id 1kXaVN-0006bg-PT
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Oct 2020 21:44:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42970)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1kXaLR-000309-99; Tue, 27 Oct 2020 21:33:45 -0400
-Received: from home.keithp.com ([63.227.221.253]:44678 helo=elaine.keithp.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1kXaLO-0004Wc-Nu; Tue, 27 Oct 2020 21:33:44 -0400
-Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id C4DA53F2DD87;
- Tue, 27 Oct 2020 18:33:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1603848818; bh=DlddCx9B00ZgsLS0DimPBQMwugUwvBncKW7lGIGUX/o=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=qOAs9+X5HFMhscSvDGKoTy7h/uQAmsLYPTcevfO+2bWEIUbRtESfKNVZPQzJLoCC3
- BGZF+XieeTc5dp5blocazje74is56zvhfmit6L4gX8UcqAWa+CTesUUqDnRj8Qbga5
- X2m63RDnuncbUE5iHX3PObuUnfBKfAtHseepTKmTQbYhTBYMIdwzUVM4R89oib1oR/
- wXBp8pQP7EXCEHLwadZ6O+U29FfvINJ9/B8Nj5ECNmGbwa5byxrU7mgP6ZR9I3xYnd
- NGT/lOOuFDn4R9UcIutaICLSEsSu1AXgBH6gpDS0F0Er0eflmJAiwPTCLd1bYX+IB1
- aaZ9u+nNbeRgQ==
-X-Virus-Scanned: Debian amavisd-new at keithp.com
-Received: from elaine.keithp.com ([127.0.0.1])
- by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id nrbUSEkdNccG; Tue, 27 Oct 2020 18:33:38 -0700 (PDT)
-Received: from keithp.com (koto.keithp.com [10.0.0.2])
- by elaine.keithp.com (Postfix) with ESMTPSA id 367BD3F2D926;
- Tue, 27 Oct 2020 18:33:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1603848818; bh=DlddCx9B00ZgsLS0DimPBQMwugUwvBncKW7lGIGUX/o=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=qOAs9+X5HFMhscSvDGKoTy7h/uQAmsLYPTcevfO+2bWEIUbRtESfKNVZPQzJLoCC3
- BGZF+XieeTc5dp5blocazje74is56zvhfmit6L4gX8UcqAWa+CTesUUqDnRj8Qbga5
- X2m63RDnuncbUE5iHX3PObuUnfBKfAtHseepTKmTQbYhTBYMIdwzUVM4R89oib1oR/
- wXBp8pQP7EXCEHLwadZ6O+U29FfvINJ9/B8Nj5ECNmGbwa5byxrU7mgP6ZR9I3xYnd
- NGT/lOOuFDn4R9UcIutaICLSEsSu1AXgBH6gpDS0F0Er0eflmJAiwPTCLd1bYX+IB1
- aaZ9u+nNbeRgQ==
-Received: by keithp.com (Postfix, from userid 1000)
- id A16831582210; Tue, 27 Oct 2020 18:33:37 -0700 (PDT)
-From: "Keith Packard" <keithp@keithp.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: QEMU Developers <qemu-devel@nongnu.org>, Alex =?utf-8?Q?Benn=C3=A9e?=
- <alex.bennee@linaro.org>, Laurent Vivier <laurent@vivier.eu>, qemu-arm
- <qemu-arm@nongnu.org>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair
- Francis <Alistair.Francis@wdc.com>, Sagar Karandikar
- <sagark@eecs.berkeley.edu>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH 1/4] semihosting: Move ARM semihosting code to shared
- directories
-In-Reply-To: <CAFEAcA8Sha5QYbO25dtzBZHoXUeiGVv8aojPFTMrst8nbVDAdg@mail.gmail.com>
-References: <20201026212853.92880-1-keithp@keithp.com>
- <20201026212853.92880-2-keithp@keithp.com>
- <CAFEAcA-0_WLMP1Y1sgcu7Ng+0w8Ovt9DVWzYU8ZA_FA2+bwcUw@mail.gmail.com>
- <87pn53e3ke.fsf@keithp.com>
- <CAFEAcA8Sha5QYbO25dtzBZHoXUeiGVv8aojPFTMrst8nbVDAdg@mail.gmail.com>
-Date: Tue, 27 Oct 2020 18:33:37 -0700
-Message-ID: <87k0vbdthq.fsf@keithp.com>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kXaVK-0006aY-Cz; Tue, 27 Oct 2020 21:43:58 -0400
+Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:41112)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kXaVI-0005p3-2r; Tue, 27 Oct 2020 21:43:58 -0400
+Received: by mail-yb1-xb44.google.com with SMTP id c129so2921598yba.8;
+ Tue, 27 Oct 2020 18:43:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=M1V7yTmf01n72tWMAPoF7C/PVSHWxT2o5lfXqxy5Y0w=;
+ b=drDiAbTUHIesFv3cMDUl1WWLhH3LkszjSyLyFhiuho1Ze9BaSG0usrrjjPKPCxmT82
+ VWKHMm/O621cBy7H+4mjhsYQUoylzUXKxNDJ1Sl5sM3Via5zBrUo8WyIq1+vftSrYWOS
+ roiAhUwc1LygHFBCTRdzZymbkOFLyJ2KBjvz5eLLcAKxlBHYxRLRVIOReQ0a7r3o5Nm+
+ b4EmLHp1uB/uBYbSm33B6Jl3B/PvB2VSNWMKTK/OxF3j+zASb+f4+nnxJbQ2lRGi/+Xh
+ 3LGwpoI/Ko+DaUmk8XimvIg/wtAbJYCnRr8x0x3tWtF9uFZvqDzLkrcgd3i65PXWS/j/
+ Npjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=M1V7yTmf01n72tWMAPoF7C/PVSHWxT2o5lfXqxy5Y0w=;
+ b=uB6HcBcvbuU6rJKf3x4WvOPaK5DIlNLpDkjsl2bC7e2BWzHs5XfeeGSn1i3lIZ+Atm
+ 3XriknSAg5dv26qYD/8FMR842RxV+PGNFwi/3xDU1AU+HFGHHbzdk0sGWdv4jzbGXySN
+ LSbHzESfAPRE7XxHoYbIXGVEBvkj7NbsWt8kRrT8xGep81/82n0KJ0hNYOCbEKgN0bTZ
+ DDF+1nPDogkwk4PB7ifdDNrFlPGEH/LHRld5mrtm0OFpsYjBknUi+Q88NNOAP+HZztcO
+ bmi2427q0p2eFhmi3UlPKpJYjC7nMKX/AqktaMi1hriOJ1AJoQbuHXcvoChhYmu9afxE
+ pgog==
+X-Gm-Message-State: AOAM533DI9Q3dlS//yOIMjDH6E9nJdacxBqtvnV4aeXIxp468s8tMYU3
+ wB3EhsXRfzt5vSs9CLZsr1IqOgG1mtERRHPoLoU=
+X-Google-Smtp-Source: ABdhPJzD8sg6kUVWOXrqbIEibHH/UIbA74pZDUl8AH4e/4UbZFuJgW0Bq0nPHKq9a5m0pb2dhfRjDx4zNY91us7I+pY=
+X-Received: by 2002:a25:386:: with SMTP id 128mr7131481ybd.122.1603849434625; 
+ Tue, 27 Oct 2020 18:43:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="=-=-=";
- micalg=pgp-sha256; protocol="application/pgp-signature"
-Received-SPF: pass client-ip=63.227.221.253; envelope-from=keithp@keithp.com;
- helo=elaine.keithp.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/27 21:33:39
-X-ACL-Warn: Detected OS   = Linux 2.2.x-3.x [generic] [fuzzy]
+References: <20201027141740.18336-1-bmeng.cn@gmail.com>
+ <20201027141740.18336-3-bmeng.cn@gmail.com>
+ <CAKmqyKMyHCZCLZOqVVZ4n4C0_rAY-WO5-J+Y=dqi0qtZsLXjpw@mail.gmail.com>
+In-Reply-To: <CAKmqyKMyHCZCLZOqVVZ4n4C0_rAY-WO5-J+Y=dqi0qtZsLXjpw@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 28 Oct 2020 09:43:42 +0800
+Message-ID: <CAEUhbmWqoP71uKYRhYdmb=Hxx=FNOYcfL6EkEChn9x1Qq9CddQ@mail.gmail.com>
+Subject: Re: [RESEND PATCH 2/9] hw/riscv: microchip_pfsoc: Connect DDR memory
+ controller modules
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, Atish Patra <atish.patra@wdc.com>, 
+ Anup Patel <anup.patel@wdc.com>, Ivan Griffin <ivan.griffin@emdalo.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b44;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb44.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,77 +76,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 01:33:45 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 01:43:59 -0000
 
---=-=-=
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+Hi Alistair,
 
-Peter Maydell <peter.maydell@linaro.org> writes:
-
->>         arm_ss.add(when: 'CONFIG_TCG', if_true: files ('common-semi.c'))
->>         riscv_ss.add(files('common-semi.c'))
->>
->> This appears to work in my testing (building arm, risc-v and x86_64
->> configs).
+On Wed, Oct 28, 2020 at 1:49 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> I'm not a kconfig expert but it might be preferable to have
-> a new CONFIG_ for arm-semihosting-ABI which the relevant
-> targets enable. Somebody else may be able to advise.
+> On Tue, Oct 27, 2020 at 7:46 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > From: Bin Meng <bin.meng@windriver.com>
+> >
+> > Connect DDR SGMII PHY module and CFG module to the PolarFire SoC.
+> >
+> > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> > ---
+> >
+> >  hw/riscv/Kconfig                   |  1 +
+> >  hw/riscv/microchip_pfsoc.c         | 18 ++++++++++++++++++
+> >  include/hw/riscv/microchip_pfsoc.h |  5 +++++
+> >  3 files changed, 24 insertions(+)
+> >
+> > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> > index 2df978fe8d..c8e50bde99 100644
+> > --- a/hw/riscv/Kconfig
+> > +++ b/hw/riscv/Kconfig
+> > @@ -4,6 +4,7 @@ config IBEX
+> >  config MICROCHIP_PFSOC
+> >      bool
+> >      select CADENCE_SDHCI
+> > +    select MCHP_PFSOC_DMC
+> >      select MCHP_PFSOC_MMUART
+> >      select MSI_NONBROKEN
+> >      select SIFIVE_CLINT
+> > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> > index 4627179cd3..85be2bcde8 100644
+> > --- a/hw/riscv/microchip_pfsoc.c
+> > +++ b/hw/riscv/microchip_pfsoc.c
+> > @@ -15,6 +15,7 @@
+> >   * 4) Cadence eMMC/SDHC controller and an SD card connected to it
+> >   * 5) SiFive Platform DMA (Direct Memory Access Controller)
+> >   * 6) GEM (Gigabit Ethernet MAC Controller)
+> > + * 7) DMC (DDR Memory Controller)
+> >   *
+> >   * This board currently generates devicetree dynamically that indicates at least
+> >   * two harts and up to five harts.
+> > @@ -85,7 +86,9 @@ static const struct MemmapEntry {
+> >      [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
+> >      [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
+> >      [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
+> > +    [MICROCHIP_PFSOC_DDR_SGMII_PHY] =   { 0x20007000,     0x1000 },
+> >      [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
+> > +    [MICROCHIP_PFSOC_DDR_CFG] =         { 0x20080000,    0x40000 },
+>
+> Neither of these are documented....
 
-The change above makes this do exactly what the old code did -- add this
-file to the arm_ss sourceset whenever CONFIG_TCG is true. arm_ss is
-only used to build ARM targets, so this file gets added only for those
-targets. Here's what the patch to target/arm/meson.build and
-hw/semihosting/meson.build looks like now.
+It's documented in the "Register
+Map/PF_SoC_RegMap_V1_1/pfsoc_regmap.htm" in
+https://www.microsemi.com/document-portal/doc_download/1244581-polarfire-soc-register-map
 
-diff --git a/target/arm/meson.build b/target/arm/meson.build
-index f5de2a77b8..15b936c101 100644
-=2D-- a/target/arm/meson.build
-+++ b/target/arm/meson.build
-@@ -32,8 +32,6 @@ arm_ss.add(files(
- ))
- arm_ss.add(zlib)
-=20
-=2Darm_ss.add(when: 'CONFIG_TCG', if_true: files('arm-semi.c'))
-=2D
- arm_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c', 'kvm64.c'), if_fals=
-e: files('kvm-stub.c'))
-=20
- arm_ss.add(when: 'TARGET_AARCH64', if_true: files(
+>
+> Maybe just add a single comment above the memory layout clarifying
+> that this is not what is documented from the SoC but is instead based
+> on what guests do?
+>
 
-diff --git a/hw/semihosting/meson.build b/hw/semihosting/meson.build
-index f40ac574c4..26538e81e7 100644
-=2D-- a/hw/semihosting/meson.build
-+++ b/hw/semihosting/meson.build
-@@ -2,3 +2,5 @@ specific_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
-   'config.c',
-   'console.c',
- ))
-+
-+arm_ss.add(when: 'CONFIG_TCG', if_true: files ('common-semi.c'))
+I can add a link to the Microchip website that documents the memory
+map above the memory layout.
 
-=2D-=20
-=2Dkeith
+> It seems to be a constant problem with this board, unless I am really
+> misreading the memory map.
+>
 
---=-=-=
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAl+YynEACgkQ2yIaaQAA
-ABHpGQ//aNlybBfsN7SE8dZjtOa8qjztPHMCozcjrBgGlqK2LLa6sesSXbcFgtIn
-ulbK63AZV14rtJvZi0puhWvGatchidYh/32amSLk8isZ1pHTOkvlv+ua5XXhYebS
-EuXwg+6mqEBXI4ZXLfP8+iVP1l05qCXbW/hc7K3mZNRXKpguyh9p7jtEI16WwEcb
-NKUX+ubJPiEXjWRILWuNQx/4lO67I1tER4KrGm8Bmr/6i/Wp1MzHla7+ODBIz+hm
-jVpR1PpChnGsDIiACq6XiWs7OfYk7XbpR/pHf1d8rGRRmLBMaYMvQbDm+IdqfCli
-OASvL8+UPvdoDdanNMd6/OjTaUiR0v094c9Gp4mHQm6X8i7ffIfT3PB9lCXsqs8i
-RQpML1OFLWhqEUiPuQe2uaSWl4Bl71C5dDjtOHuSnYc0kYjkXThEdi80VkPZdRR6
-FbDxhx122oXe21xBz5SzMqhrhkOHxVFVQGGYinmoyTlQYQEzc3GBHcl5UjIjRfS+
-C6re9XQ4H+D271KPpQN5bIUN04XPmf8VvwuJgtY2tDoFlhEUQMiq/3QjOQULcNdT
-NUAwQA36B7KQeC0gRMi3TvF0xlcPVXuCvJz3JhvdpPtb4xWKFVo8xZ7llFwSAUIm
-HHrhbzE/DKi6cDGoRC2Xnr1e4dvst7GaR2rRml8O2xfJ1u03vg4=
-=Zp/R
------END PGP SIGNATURE-----
---=-=-=--
+Regards,
+Bin
 
