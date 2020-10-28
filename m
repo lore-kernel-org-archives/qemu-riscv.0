@@ -1,64 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXnDm-0001pY-Ka
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 11:18:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44904)
+	id 1kXnHf-0005Tv-52
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 11:22:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45950)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kXnDh-0001lv-Hd
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2020 11:18:41 -0400
-Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:35531)
+ id 1kXnHa-0005RF-39
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2020 11:22:39 -0400
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641]:34367)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kXnDf-0006IV-5s
- for qemu-riscv@nongnu.org; Wed, 28 Oct 2020 11:18:37 -0400
-Received: by mail-pl1-x641.google.com with SMTP id 1so2630293ple.2
- for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2020 08:18:32 -0700 (PDT)
+ id 1kXnHX-0006og-H2
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2020 11:22:37 -0400
+Received: by mail-pl1-x641.google.com with SMTP id r3so2638581plo.1
+ for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2020 08:22:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=Hmt0eMVnOApsZe864FbdLsRBKwDMNvLVNFCzZm8tFlk=;
- b=ZkB+ARPxAgfYzNE07EeqhjYYaxwfWsql0e/r/VGnNtZfLnQXhO+G3o2dtPZiYLx8WH
- p2kBInRvcOh97fbrU6qhc40+7596JHx9P3yABICwMK/tRvj5m78vgiAGjmzD49SIx+jE
- Pp8LMon5QF7U9ZLotazGPTArhUTbN/gV6JPhC+jmZZGN7zGFy7UoEAewIWDNhUOJwzxK
- xFy1U4MJ+9jeawI97/fivLgGhcj/GcIQBpIpwYOYctedBWkQMYwGHsJRYc1gZ7cvWShy
- lXWGEgrfop9hXWrfCyxLxX6ryDvBI6PjVmaPYLQCYl5UJtSAHEG1eNFwFJciZkPNp4xu
- bzhw==
+ bh=tRIDLUSNGtzNRczBIMOLPFujWfWDdVx3YveTpcJNWtM=;
+ b=k7O0G0RA7AqV94Hsj0RGZLrOkr4At7CjF9r+g92yXDlTNkZluUfKrfF4vWRldNlQi3
+ sxmUEko6X5/RmhnTIisgswF1j0ipRPg7KRt+2DFeTxytUJX/8c1T0X+i2vMFaYcJ/yvE
+ Wz76NwcHMse+23GTsnaQk13iprrN/9wBmvtoQaFd8JBN+VFbeUnfVCyw/XKxMvagFPY2
+ jsR+RzjPIspsvN4ULsDJOEMX3V0MPCxbRfewvlkqBR8xMCMbXV7EPLzXLVQ2/dtWNsvU
+ Z8P7eO4v/77KU5VHHxanWkv8Rvinjk8Dw2FzNm3eF7kB4R9UqPxEIiogx6Zr85w73btB
+ 58Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=Hmt0eMVnOApsZe864FbdLsRBKwDMNvLVNFCzZm8tFlk=;
- b=g7CphQoWHWTgwqRXAHL9C2yynJdbTjXwhzop37ye+4u/TwoMA0FFcWkdWKkoY3vhEB
- MTBD2kUZYBcHgiX8390g86bumEhH30zrmTmIjPWUcE6IIR+0YQDaPaIx6vuT0Wb8n3AZ
- 2xF9Y7rq6SZVqrU4TBcP0spr9LJo4ntF2Bp8K59KEvdl/oLljKPrz/gsEwMc5B4G58Vg
- /tLsYy9Is46Lzy0ESsgm2qHU2W1am1FAxLp6eknu6HbhCqHkqWCmXKpd10+uP6vltBCs
- POm6i1y52Rh+BtwndLNoyK2IVb6EDQwICLjprqnEbT9pFK6pCXWWQ5Aex+Kcn/rxsKrT
- pVPQ==
-X-Gm-Message-State: AOAM531G0v7f5n5PrsgVtp3S3vAmkIc8bumLOKExhSHyLyE4xgpxXvUS
- bFSSUkpZZ3CYu29HKXRG+ASsLw==
-X-Google-Smtp-Source: ABdhPJzImGz/Gl+Thm5KsKY/TQA34pjDzoxjBhETLRyrwDYLbQFl+1bQ1SuwzYEhBrnccDh/yObrfw==
-X-Received: by 2002:a17:902:7c14:b029:d4:d894:7eed with SMTP id
- x20-20020a1709027c14b02900d4d8947eedmr8150255pll.81.1603898311102; 
- Wed, 28 Oct 2020 08:18:31 -0700 (PDT)
+ bh=tRIDLUSNGtzNRczBIMOLPFujWfWDdVx3YveTpcJNWtM=;
+ b=VrONslhO/Cqity7PnqQ8tBwiMiGYHNbY1OvOXofSdylaax5Aob8ibQjgr4E548S8Vq
+ g2uaEqAJMs8tOqmissiIwuq0Mqimd8aY8fO8NJBWFZc46zYXWcJypQ51ynYnIPkoy3C1
+ L7SeLqJAy/OkS2JMOykc5E0jyEpyd+irKqyLyRWkqEGLiuik7FvJLYPweJn+r8+9T+xP
+ pxGKkxzcAXuBdctuYxKmQ7pV8vHJPtuzg1DJQ+RwxlUs9ZKYaVrtQWOFwvClVtE0UGiJ
+ l7sp1jPhMI7pQb4xPxgZTJy/jVtQmmVrtTEWrQxiFQW4MIu2t2zmtN7G0BMYLSrwCSZT
+ 2G2A==
+X-Gm-Message-State: AOAM530XimkF9stGIl1ybYJKieJDvqZFMbeg+0E/sB8LHGExugZ2tR3S
+ U7lFABrhjGFvl1lmDQDBr37ymw==
+X-Google-Smtp-Source: ABdhPJyO5/l8nv6NTA272Ev3cLxUsAufqrjF4MeoWRLMNOYgOaaQ3xxwcA2UDEPGzlhtKajVNXCbKw==
+X-Received: by 2002:a17:90a:4684:: with SMTP id
+ z4mr7132020pjf.97.1603898552258; 
+ Wed, 28 Oct 2020 08:22:32 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.141.89])
- by smtp.gmail.com with ESMTPSA id h4sm5745057pgc.13.2020.10.28.08.18.29
+ by smtp.gmail.com with ESMTPSA id f4sm6263037pfc.63.2020.10.28.08.22.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2020 08:18:29 -0700 (PDT)
-Subject: Re: [PATCH v2 4/5] target/riscv: Remove the hyp load and store
- functions
+ Wed, 28 Oct 2020 08:22:31 -0700 (PDT)
+Subject: Re: [PATCH v2 5/5] target/riscv: Split the Hypervisor execute load
+ helpers
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
 References: <cover.1603896075.git.alistair.francis@wdc.com>
- <5ead43dea141994823a113a2e7f1494df12d32dd.1603896076.git.alistair.francis@wdc.com>
+ <a88d9bdcebe49ada0d0a69b37ac532124971c91c.1603896076.git.alistair.francis@wdc.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <8706b460-7a44-2b89-d736-c0e0274f77c1@linaro.org>
-Date: Wed, 28 Oct 2020 08:18:27 -0700
+Message-ID: <66b758d2-395f-142c-aa66-ba197c926364@linaro.org>
+Date: Wed, 28 Oct 2020 08:22:29 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <5ead43dea141994823a113a2e7f1494df12d32dd.1603896076.git.alistair.francis@wdc.com>
+In-Reply-To: <a88d9bdcebe49ada0d0a69b37ac532124971c91c.1603896076.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -85,24 +85,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 15:18:41 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 15:22:39 -0000
 
 On 10/28/20 7:42 AM, Alistair Francis wrote:
-> +void helper_hyp_access_check(CPURISCVState *env)
+> +target_ulong helper_hyp_hlvx_hu(CPURISCVState *env, target_ulong address)
 >  {
 >      if (env->priv == PRV_M ||
 >          (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
 >          (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
 >              get_field(env->hstatus, HSTATUS_HU))) {
->          return;
+> +        int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+> +
+> +        return cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
+> +    }
+> +
+> +    if (riscv_cpu_virt_enabled(env)) {
+> +        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+> +    } else {
+> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> +    }
+> +    return 0;
+> +}
+> +
+> +target_ulong helper_hyp_hlvx_wu(CPURISCVState *env, target_ulong address)
+> +{
+> +    if (env->priv == PRV_M ||
+> +        (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+> +        (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
+> +            get_field(env->hstatus, HSTATUS_HU))) {
+> +        int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+>  
+> +        return cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
 >      }
 
-While this works, I think it would be better to compute this into one bit of
-TBFLAGS.  Then you can test it during translate and do not need an external
-helper at all for the data accesses.
+Do not replicate the PRV tests.
 
-It also means that patch 5 can be simplified...
+My first suggestion is to compute this into TBFLAGS and test it at translate
+time, so that these functions just become the one cpu_ld* call.
 
+But failing that, at least split out the test + exception into a common helper
+function.
 
 r~
 
