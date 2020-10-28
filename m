@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXe2w-0005Pe-1B
+	id 1kXe2w-0005QM-8l
 	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 01:30:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60980)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32802)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kXe2l-0005Ip-3J; Wed, 28 Oct 2020 01:30:44 -0400
-Received: from mail-pj1-x1041.google.com ([2607:f8b0:4864:20::1041]:51746)
+ id 1kXe2q-0005KP-Gl; Wed, 28 Oct 2020 01:30:48 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433]:34654)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kXe2h-0000cn-Eg; Wed, 28 Oct 2020 01:30:42 -0400
-Received: by mail-pj1-x1041.google.com with SMTP id a17so1975609pju.1;
- Tue, 27 Oct 2020 22:30:37 -0700 (PDT)
+ id 1kXe2o-0000ef-3d; Wed, 28 Oct 2020 01:30:48 -0400
+Received: by mail-pf1-x433.google.com with SMTP id o129so2273493pfb.1;
+ Tue, 27 Oct 2020 22:30:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=1yfW8ZyF/XKB6FRemHmqM+FcBY5fJa85/VUlM9Ax0zI=;
- b=VgtIRaxSXp9RcUdEooDTYx4bFSaSp+XGl5QOF8xOsVA4imoU+f2haiH4u+jp/87ALK
- 9hO+wo4wJQgUOZkFF46XjtYRCV/SLQ3FRL7Lqj14kskZ2eujg5x+6URuWj7YU79WHfWf
- 7aXRpHUoatx1nSpUD7YeGLVh8idrFOnGDTG3++ndNeGMT6Gkbs5df+ZSBKhZ+cHozABp
- q2o20XXbf8oPC7W/CFUK9Elso/64NWQeogMZDbD5ho7EHWf4lsNj5HO1ahjgm/HZtiCh
- SV1dRgpQkfQnSQWM6gAg143p43eCJFKBjt50UQgyXGvKb4R6jGNttAGdzGsQ/KmPvLlT
- IOpw==
+ bh=ljqm7mDbejdOxFlxqdgG44/ktrepZx5NKv48fsnDllU=;
+ b=eaceE4R4Kp3/bfqW9j6+MVneVHksNBgfIw5h3Me6/CvP/AHijZcLst3cdJeg5gsyw6
+ HzK1rHX2MSgFpCL3rqBNQHEc8YF4G12ZToK81Elvyy2IvZLiLqHohWXYpbXI1dAinx+y
+ 5ZUMizqZFUs47E7KPOE2l1w+iZhfJY++0w5AOC1lyjUEB2XSrlHXsyFSWwQme3dBg6dY
+ yeerkfhW0nw97fttp7THt2DydzgREfZ15FF1nir2pYUIpaXXsJqyhUO3ga+oWICXaQvU
+ TZPk0fUVMfhDYlOWADZl85Ut3uC/OwTGzyTTtdvs8RFDy6gnSn+91zlSkISGcZd1t0y6
+ dhwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=1yfW8ZyF/XKB6FRemHmqM+FcBY5fJa85/VUlM9Ax0zI=;
- b=jI4qpQTxdJE+m4VZDTmlNB7MmDsQx29qnZHsYd9EkyoQTMHPAYMeiF4TPFLCAUDQzV
- gfCeIY9WjangaI7CdgcQ0YKetPN9udAMxWoT9a91DFfPg+2m+r2IgkuLcc05beN/ZItT
- mnrf1DLt2pTr7KHEyZGglsVS9bHd8Aulhd5FerFD4rkCoSUJgY+MRvHCBs95BL/GCWkx
- Q1QARVs3ay/Z9toyJtoh1Y5q094YM4cy7sBA+u70MJj0xO8m/bGGOu8m3aByzoS7bNSL
- ffYOQMKSvz5W6XaECCu9OGZb4PkroEnuJfFVgMD5ymkz0DM96C3JaSILiqmwZK+teQyj
- ERqg==
-X-Gm-Message-State: AOAM533RjpH/R+vWuHeSB0ous6MTk7v1uCmlN1bKA7lhfXf+6Zch+/7J
- DnM76gGiAwg7iaEhHLYmEX4=
-X-Google-Smtp-Source: ABdhPJxbgXUjuS1lM+MRvxowadk7vlCOkilLUd0iZ+5vWse24t8k8dzrwCFaeUMPT6qIfJRPEEDfjg==
-X-Received: by 2002:a17:90a:488c:: with SMTP id
- b12mr5221287pjh.204.1603863037143; 
- Tue, 27 Oct 2020 22:30:37 -0700 (PDT)
+ bh=ljqm7mDbejdOxFlxqdgG44/ktrepZx5NKv48fsnDllU=;
+ b=kwjfq7NI/9Tvb/+9ro5+xJCNY1lKAcfMBk4D3Ll2H6UYaeaLC84gjzn73VXAah7jVJ
+ /ToJz2IVB5EWio/vhMYxNNiO8329j4ve8yu/H0/3evt/0E6isDjh9L8cYKjQP6LHZ07S
+ 5LkSjPcFxgwLhdUdqplwmeiISeZhMAbt1Esrri3BVxJ9dTA3frd+bY5HVpsAet65dTCI
+ AMgw5m62VaRC6QR5aCImLo9qjxtYKK5uG04yH+T5d+bhDWSrUcCLNaIMr+Ba64+zqSR/
+ iWxy4ncrnuOoZwcQ4nraNyN5H562H+HIRe+3bvQJxAskp4fFpEqO0FUVbEByY8jY7ziC
+ yVwA==
+X-Gm-Message-State: AOAM530aLrPgJ4ZNO1Vfz2wldaP2oLFGU781uetPIaQ1hzEhYKt/mFa+
+ IVCyeG7Yu3r8gZxNOAgDCwk=
+X-Google-Smtp-Source: ABdhPJy9S4SV5ju49odRmlD1vTmI9VsBkQe1oKfsh2lAy9a0s5N8Uk6Dmmkshua7APlLeLlVHxz0lA==
+X-Received: by 2002:a62:1844:0:b029:152:80d3:8647 with SMTP id
+ 65-20020a6218440000b029015280d38647mr4955543pfy.18.1603863044516; 
+ Tue, 27 Oct 2020 22:30:44 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-224-80.windriver.com.
  [147.11.224.80])
- by smtp.gmail.com with ESMTPSA id 9sm5031887pjs.1.2020.10.27.22.30.34
+ by smtp.gmail.com with ESMTPSA id 9sm5031887pjs.1.2020.10.27.22.30.41
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 27 Oct 2020 22:30:36 -0700 (PDT)
+ Tue, 27 Oct 2020 22:30:44 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Anup Patel <anup.patel@wdc.com>, Atish Patra <atish.patra@wdc.com>,
  Ivan Griffin <ivan.griffin@emdalo.com>, Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v2 05/10] hw/riscv: microchip_pfsoc: Connect the IOSCB module
-Date: Wed, 28 Oct 2020 13:30:05 +0800
-Message-Id: <1603863010-15807-6-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH v2 07/10] hw/riscv: microchip_pfsoc: Connect the SYSREG module
+Date: Wed, 28 Oct 2020 13:30:07 +0800
+Message-Id: <1603863010-15807-8-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
 References: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1041;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1041.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x433.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -76,14 +76,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 05:30:46 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 05:30:49 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Previously IOSCB_CFG was created as an unimplemented device. With
-the new IOSCB model, its memory range is already covered by the
-IOSCB hence remove the previous unimplemented device creation in
-the SoC codes.
+Previously SYSREG was created as an unimplemented device. Now that
+we have a simple SYSREG module, connect it.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -91,97 +89,70 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 (no changes since v1)
 
- hw/riscv/Kconfig                   |  1 +
- hw/riscv/microchip_pfsoc.c         | 13 ++++++++-----
- include/hw/riscv/microchip_pfsoc.h |  4 +++-
- 3 files changed, 12 insertions(+), 6 deletions(-)
+ hw/riscv/Kconfig                   | 1 +
+ hw/riscv/microchip_pfsoc.c         | 9 ++++++---
+ include/hw/riscv/microchip_pfsoc.h | 2 ++
+ 3 files changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index c8e50bd..8f043e3 100644
+index 8f043e3..facb0cb 100644
 --- a/hw/riscv/Kconfig
 +++ b/hw/riscv/Kconfig
-@@ -5,6 +5,7 @@ config MICROCHIP_PFSOC
-     bool
-     select CADENCE_SDHCI
+@@ -7,6 +7,7 @@ config MICROCHIP_PFSOC
      select MCHP_PFSOC_DMC
-+    select MCHP_PFSOC_IOSCB
+     select MCHP_PFSOC_IOSCB
      select MCHP_PFSOC_MMUART
++    select MCHP_PFSOC_SYSREG
      select MSI_NONBROKEN
      select SIFIVE_CLINT
+     select SIFIVE_PDMA
 diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index 3c504f7..438e0c4 100644
+index 438e0c4..bc908e0 100644
 --- a/hw/riscv/microchip_pfsoc.c
 +++ b/hw/riscv/microchip_pfsoc.c
-@@ -16,6 +16,7 @@
-  * 5) SiFive Platform DMA (Direct Memory Access Controller)
-  * 6) GEM (Gigabit Ethernet MAC Controller)
-  * 7) DMC (DDR Memory Controller)
-+ * 8) IOSCB modules
-  *
-  * This board currently generates devicetree dynamically that indicates at least
-  * two harts and up to five harts.
-@@ -118,7 +119,7 @@ static const struct MemmapEntry {
-     [MICROCHIP_PFSOC_GPIO2] =           { 0x20122000,     0x1000 },
-     [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
-     [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
--    [MICROCHIP_PFSOC_IOSCB_CFG] =       { 0x37080000,     0x1000 },
-+    [MICROCHIP_PFSOC_IOSCB] =           { 0x30000000, 0x10000000 },
-     [MICROCHIP_PFSOC_DRAM] =            { 0x80000000,        0x0 },
- };
+@@ -153,6 +153,9 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
+     object_initialize_child(obj, "dma-controller", &s->dma,
+                             TYPE_SIFIVE_PDMA);
  
-@@ -162,6 +163,8 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
- 
-     object_initialize_child(obj, "sd-controller", &s->sdhci,
-                             TYPE_CADENCE_SDHCI);
++    object_initialize_child(obj, "sysreg", &s->sysreg,
++                            TYPE_MCHP_PFSOC_SYSREG);
 +
-+    object_initialize_child(obj, "ioscb", &s->ioscb, TYPE_MCHP_PFSOC_IOSCB);
- }
+     object_initialize_child(obj, "ddr-sgmii-phy", &s->ddr_sgmii_phy,
+                             TYPE_MCHP_PFSOC_DDR_SGMII_PHY);
+     object_initialize_child(obj, "ddr-cfg", &s->ddr_cfg,
+@@ -280,9 +283,9 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     }
  
- static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-@@ -373,10 +376,10 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-                                 memmap[MICROCHIP_PFSOC_ENVM_DATA].base,
-                                 envm_data);
+     /* SYSREG */
+-    create_unimplemented_device("microchip.pfsoc.sysreg",
+-        memmap[MICROCHIP_PFSOC_SYSREG].base,
+-        memmap[MICROCHIP_PFSOC_SYSREG].size);
++    sysbus_realize(SYS_BUS_DEVICE(&s->sysreg), errp);
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->sysreg), 0,
++                    memmap[MICROCHIP_PFSOC_SYSREG].base);
  
--    /* IOSCBCFG */
--    create_unimplemented_device("microchip.pfsoc.ioscb.cfg",
--        memmap[MICROCHIP_PFSOC_IOSCB_CFG].base,
--        memmap[MICROCHIP_PFSOC_IOSCB_CFG].size);
-+    /* IOSCB */
-+    sysbus_realize(SYS_BUS_DEVICE(&s->ioscb), errp);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ioscb), 0,
-+                    memmap[MICROCHIP_PFSOC_IOSCB].base);
- }
- 
- static void microchip_pfsoc_soc_class_init(ObjectClass *oc, void *data)
+     /* MPUCFG */
+     create_unimplemented_device("microchip.pfsoc.mpucfg",
 diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-index 5b81e26..a244ae6 100644
+index a244ae6..245c82d 100644
 --- a/include/hw/riscv/microchip_pfsoc.h
 +++ b/include/hw/riscv/microchip_pfsoc.h
-@@ -25,6 +25,7 @@
- #include "hw/char/mchp_pfsoc_mmuart.h"
+@@ -26,6 +26,7 @@
  #include "hw/dma/sifive_pdma.h"
  #include "hw/misc/mchp_pfsoc_dmc.h"
-+#include "hw/misc/mchp_pfsoc_ioscb.h"
+ #include "hw/misc/mchp_pfsoc_ioscb.h"
++#include "hw/misc/mchp_pfsoc_sysreg.h"
  #include "hw/net/cadence_gem.h"
  #include "hw/sd/cadence_sdhci.h"
  
-@@ -40,6 +41,7 @@ typedef struct MicrochipPFSoCState {
-     DeviceState *plic;
-     MchpPfSoCDdrSgmiiPhyState ddr_sgmii_phy;
-     MchpPfSoCDdrCfgState ddr_cfg;
-+    MchpPfSoCIoscbState ioscb;
-     MchpPfSoCMMUartState *serial0;
-     MchpPfSoCMMUartState *serial1;
+@@ -47,6 +48,7 @@ typedef struct MicrochipPFSoCState {
      MchpPfSoCMMUartState *serial2;
-@@ -99,7 +101,7 @@ enum {
-     MICROCHIP_PFSOC_GPIO2,
-     MICROCHIP_PFSOC_ENVM_CFG,
-     MICROCHIP_PFSOC_ENVM_DATA,
--    MICROCHIP_PFSOC_IOSCB_CFG,
-+    MICROCHIP_PFSOC_IOSCB,
-     MICROCHIP_PFSOC_DRAM,
- };
- 
+     MchpPfSoCMMUartState *serial3;
+     MchpPfSoCMMUartState *serial4;
++    MchpPfSoCSysregState sysreg;
+     SiFivePDMAState dma;
+     CadenceGEMState gem0;
+     CadenceGEMState gem1;
 -- 
 2.7.4
 
