@@ -1,68 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXn02-0003zf-1U
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 11:04:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41088)
+	id 1kXn43-0007NR-65
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 11:08:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42288)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXn00-0003x8-Fk; Wed, 28 Oct 2020 11:04:28 -0400
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:42102)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kXn41-0007Kj-U4
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2020 11:08:37 -0400
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:37075)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXmzy-0004Qn-8u; Wed, 28 Oct 2020 11:04:28 -0400
-Received: by mail-io1-xd43.google.com with SMTP id k21so5642325ioa.9;
- Wed, 28 Oct 2020 08:04:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=PdY6Lfe4ddvy5l91d2DAnCZEe+9Bqj/3hIc6pUQMYxE=;
- b=EJovQ2ZK3+qBBDSFNuTHTBQDNNiDSd4C5oMtkEVt+R6QLVt5LhSX9Zh+LnScoVy01S
- lnfNfJHs/g7aFIpkoSFHlbD+4OeDD3VmEHt0Cgi2MVqFdeiAW4t3SzVU2qXMr8apheCS
- /bZo7LvGdcNb9onm8YB66fsOnCLx6WFOYTLSzy/sF3q/8QIWCVNJE5rPrmO0UNFalCMz
- mUqxd6iDs2+o5kNU7E1xwoQphX9JRb2vMB5oCljrbK+l1bHDzWuSPyBpQrFw9uuZYEiG
- P36QWi0M86gXYUccz5Qkiq/0hOaj3Oxsh5U4Vk4hIbHmGb8V7rAeNqT6YvkK/JsQ4cOq
- 1Nbw==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kXn3z-0004zE-7A
+ for qemu-riscv@nongnu.org; Wed, 28 Oct 2020 11:08:37 -0400
+Received: by mail-pf1-x441.google.com with SMTP id 126so3091897pfu.4
+ for <qemu-riscv@nongnu.org>; Wed, 28 Oct 2020 08:08:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=sr01ZlkeVZ2zfK5nVSf4EVkQPl53h8E2U0fJuuquGgI=;
+ b=ihp7HfYcgMjlqTnUGSRDqA3W0h5fqVs6nj4DF486fBNmS+tyy/3Vb9LXzu3hLCqMv7
+ oYsFHpZxgIvyaQK6+GOSobYZbt9xd2xjvs7TYWgiPEx1tU6rvhqc/dAEV7smgWs51Jq6
+ XSMOmVv9bylwE2/1TG02yBUmpDKFGeKdKPDyvMTQoRE8vmec/Ko4cPd2rYdEWtBpsUuh
+ 1/zVc1ev/1lmnBB2SL8Zp3X9ZO9Jq5ABnQryZha9CITjtqQ+YYZ91Bl7sn+R5eWxThoK
+ cgWpv9Wkzd9bTFI2OhSTg/uqKPph6U6ZstDheh1+spQ6/2eL08NhDumjmj2oDMl7Vd3l
+ QJ2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=PdY6Lfe4ddvy5l91d2DAnCZEe+9Bqj/3hIc6pUQMYxE=;
- b=M9c4HtsJBZ+FU4BxHNGFPLfh5PggA2R49+dggXnCP6+cX2OHHhmcHiKHhM65TJrV9s
- xGNbg8kajr0AyPQ8HT/0O/FqEplX0pNFnTaXzT+ruwcBeBim9bxs8mWvkgcNviJO1qSj
- WXsHOK5jNAMsCAANf8rL5tvUGOtZNxouMiBtSPXEdnFrSl6Qwq6UfL/WMix2jCB9yB9M
- JxT+XqxffwbEQbO9z+NQFYEGWuas5tc5GmUQcyzfZtBL7Oj+v5qrs/I2rafq0k5wUG9L
- tEDPQ83bhv9UbPkOMtUmGFEl14N4tPMRpwr0E4Bgsh7JSSwCRh6PNmuFtk1RWAq7doxN
- oOjg==
-X-Gm-Message-State: AOAM5320O4V12CV+I5ZqIuJLbHqGvqVIyDY14gQmNoVKYsBmcSxi2J+S
- Be5zug2TtL4lVajMk5kfpytaDd/8gLy95FBpcUg=
-X-Google-Smtp-Source: ABdhPJyEg1CdVUEwrdDbeuySxI/zr7cYSfEHkSY2iYzGZTPEnoFSp9RzzWHkBsb322B6t4292PUEO/5IfSsBTEDRU8Q=
-X-Received: by 2002:a5d:9a8d:: with SMTP id c13mr6237735iom.176.1603897464786; 
- Wed, 28 Oct 2020 08:04:24 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=sr01ZlkeVZ2zfK5nVSf4EVkQPl53h8E2U0fJuuquGgI=;
+ b=JeOmO1521NK9C8UpdQjMNF434sFFQ6Ax+FuRaVQ0pe8N2aBIPuP607j50G6i9+pwHK
+ X8q6w/0SYvtZ4cK/swjKORvEB0BB9VbnH5BLd9QF/kKa9x/2ad2pwrck5cWnHa7H/tUm
+ vx5adtbNcuJSKB5DDZPTsk/+HRmEgIMQfLgETanPEk9v41m4kuaOFhmh+YHZkWR46Q0C
+ AMLhgK9GoXsdtlhUC96u+kwTI/8awcxpOYjb0efKKNAWM869/xcUtBk97Oc6m7gLdK7n
+ kqpU//VxEP2HlTK7fqP56T+jbLHB/l/WfeE4NX4q6bglFHSVDG2yzcMgJoQwmmppko25
+ V3fg==
+X-Gm-Message-State: AOAM532DmVNtm/hGCv5KgcR7QUcM8WgClSu8b6ypnRNgLyUeUbjbCr1+
+ QLSQU+V4BLUEwKt4zOlYH1FeLg==
+X-Google-Smtp-Source: ABdhPJyhoAhXEVZnd6cIJpjD1WBd4OAATXtDS9eCw2/Y4IGYilWRh+6jD1cdTioUCv2AOF7+0k38gw==
+X-Received: by 2002:a62:7d4d:0:b029:152:1b09:f34 with SMTP id
+ y74-20020a627d4d0000b02901521b090f34mr8166217pfc.76.1603897713503; 
+ Wed, 28 Oct 2020 08:08:33 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.141.89])
+ by smtp.gmail.com with ESMTPSA id l13sm5568767pgp.25.2020.10.28.08.08.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 28 Oct 2020 08:08:30 -0700 (PDT)
+Subject: Re: [PATCH v2 2/5] target/riscv: Set the virtualised MMU mode when
+ doing hyp accesses
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
+References: <cover.1603896075.git.alistair.francis@wdc.com>
+ <3f5666c9eb72758011c14a660de99ba86a0b6561.1603896075.git.alistair.francis@wdc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <7a193d98-b55b-c53d-09bc-7d205a27b357@linaro.org>
+Date: Wed, 28 Oct 2020 08:08:27 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <1603863010-15807-1-git-send-email-bmeng.cn@gmail.com>
- <1603863010-15807-10-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1603863010-15807-10-git-send-email-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 28 Oct 2020 07:52:34 -0700
-Message-ID: <CAKmqyKOtJ+MCREujF-iUR1Q=xKL_ke_faN9RR_2aiNR_0hqj+Q@mail.gmail.com>
-Subject: Re: [PATCH v2 09/10] hw/riscv: microchip_pfsoc: Correct DDR memory map
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Atish Patra <atish.patra@wdc.com>, 
- Anup Patel <anup.patel@wdc.com>, Ivan Griffin <ivan.griffin@emdalo.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
+In-Reply-To: <3f5666c9eb72758011c14a660de99ba86a0b6561.1603896075.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x441.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -29
+X-Spam_score: -3.0
+X-Spam_bar: ---
+X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.921,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -75,140 +85,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 15:04:29 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 15:08:38 -0000
 
-On Tue, Oct 27, 2020 at 10:37 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> When system memory is larger than 1 GiB (high memory), PolarFire SoC
-> maps it at address 0x10_0000_0000. Address 0xC000_0000 and above is
-> aliased to the same 1 GiB low memory with different cache attributes.
->
-> At present QEMU maps the system memory contiguously from 0x8000_0000.
-> This corrects the wrong QEMU logic. Note address 0x14_0000_0000 is
-> the alias to the high memory, and even physical memory is only 1 GiB,
-> the HSS codes still tries to probe the high memory alias address.
-> It seems there is no issue on the real hardware, so we will have to
-> take that into the consideration in our emulation. Due to this, we
-> we increase the default system memory size to 2 GiB so that user gets
-> notified an error when less than 2 GiB is specified.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
->
+On 10/28/20 7:42 AM, Alistair Francis wrote:
+> When performing the hypervisor load/store operations set the MMU mode to
+> indicate that we are virtualised.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->
-> Changes in v2:
-> - Increase the default memory size to 2 GiB
->
->  hw/riscv/microchip_pfsoc.c         | 48 +++++++++++++++++++++++++++++++++-----
->  include/hw/riscv/microchip_pfsoc.h |  5 +++-
->  2 files changed, 46 insertions(+), 7 deletions(-)
->
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index 44a8473..5e31b84 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -121,7 +121,10 @@ static const struct MemmapEntry {
->      [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
->      [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
->      [MICROCHIP_PFSOC_IOSCB] =           { 0x30000000, 0x10000000 },
-> -    [MICROCHIP_PFSOC_DRAM] =            { 0x80000000,        0x0 },
-> +    [MICROCHIP_PFSOC_DRAM_LO] =         { 0x80000000, 0x40000000 },
-> +    [MICROCHIP_PFSOC_DRAM_LO_ALIAS] =   { 0xc0000000, 0x40000000 },
-> +    [MICROCHIP_PFSOC_DRAM_HI] =       { 0x1000000000,        0x0 },
-> +    [MICROCHIP_PFSOC_DRAM_HI_ALIAS] = { 0x1400000000,        0x0 },
->  };
->
->  static void microchip_pfsoc_soc_instance_init(Object *obj)
-> @@ -424,7 +427,11 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
->      const struct MemmapEntry *memmap = microchip_pfsoc_memmap;
->      MicrochipIcicleKitState *s = MICROCHIP_ICICLE_KIT_MACHINE(machine);
->      MemoryRegion *system_memory = get_system_memory();
-> -    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-> +    MemoryRegion *mem_low = g_new(MemoryRegion, 1);
-> +    MemoryRegion *mem_low_alias = g_new(MemoryRegion, 1);
-> +    MemoryRegion *mem_high = g_new(MemoryRegion, 1);
-> +    MemoryRegion *mem_high_alias = g_new(MemoryRegion, 1);
-> +    uint64_t mem_high_size;
->      DriveInfo *dinfo = drive_get_next(IF_SD);
->
->      /* Sanity check on RAM size */
-> @@ -441,10 +448,39 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
->      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
->
->      /* Register RAM */
-> -    memory_region_init_ram(main_mem, NULL, "microchip.icicle.kit.ram",
-> -                           machine->ram_size, &error_fatal);
-> +    memory_region_init_ram(mem_low, NULL, "microchip.icicle.kit.ram_low",
-> +                           memmap[MICROCHIP_PFSOC_DRAM_LO].size,
-> +                           &error_fatal);
-> +    memory_region_init_alias(mem_low_alias, NULL,
-> +                             "microchip.icicle.kit.ram_low.alias",
-> +                             mem_low, 0,
-> +                             memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].size);
-> +    memory_region_add_subregion(system_memory,
-> +                                memmap[MICROCHIP_PFSOC_DRAM_LO].base,
-> +                                mem_low);
-> +    memory_region_add_subregion(system_memory,
-> +                                memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].base,
-> +                                mem_low_alias);
-> +
-> +    /*
-> +     * Map 1 GiB high memory because HSS will do memory test against the high
-> +     * memory address range regardless of physical memory installed.
-> +     *
-> +     * See memory_tests() in mss_ddr.c in the HSS source code.
-> +     */
-> +    mem_high_size = machine->ram_size - 1 * GiB;
-> +
-> +    memory_region_init_ram(mem_high, NULL, "microchip.icicle.kit.ram_high",
-> +                           mem_high_size, &error_fatal);
-> +    memory_region_init_alias(mem_high_alias, NULL,
-> +                             "microchip.icicle.kit.ram_high.alias",
-> +                             mem_high, 0, mem_high_size);
-> +    memory_region_add_subregion(system_memory,
-> +                                memmap[MICROCHIP_PFSOC_DRAM_HI].base,
-> +                                mem_high);
->      memory_region_add_subregion(system_memory,
-> -                                memmap[MICROCHIP_PFSOC_DRAM].base, main_mem);
-> +                                memmap[MICROCHIP_PFSOC_DRAM_HI_ALIAS].base,
-> +                                mem_high_alias);
->
->      /* Load the firmware */
->      riscv_find_and_load_firmware(machine, BIOS_FILENAME, RESET_VECTOR, NULL);
-> @@ -470,7 +506,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc, void *data)
->                     MICROCHIP_PFSOC_COMPUTE_CPU_COUNT;
->      mc->min_cpus = MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT + 1;
->      mc->default_cpus = mc->min_cpus;
-> -    mc->default_ram_size = 1 * GiB;
-> +    mc->default_ram_size = 2 * GiB;
->  }
->
->  static const TypeInfo microchip_icicle_kit_machine_typeinfo = {
-> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-> index f34a6b3..db77e9c 100644
-> --- a/include/hw/riscv/microchip_pfsoc.h
-> +++ b/include/hw/riscv/microchip_pfsoc.h
-> @@ -105,7 +105,10 @@ enum {
->      MICROCHIP_PFSOC_ENVM_CFG,
->      MICROCHIP_PFSOC_ENVM_DATA,
->      MICROCHIP_PFSOC_IOSCB,
-> -    MICROCHIP_PFSOC_DRAM,
-> +    MICROCHIP_PFSOC_DRAM_LO,
-> +    MICROCHIP_PFSOC_DRAM_LO_ALIAS,
-> +    MICROCHIP_PFSOC_DRAM_HI,
-> +    MICROCHIP_PFSOC_DRAM_HI_ALIAS
->  };
->
->  enum {
-> --
-> 2.7.4
->
->
+>  target/riscv/op_helper.c | 30 +++++++++++++++++-------------
+>  1 file changed, 17 insertions(+), 13 deletions(-)
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+
+r~
 
