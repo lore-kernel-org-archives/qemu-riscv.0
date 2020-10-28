@@ -1,71 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kXmOS-0008VY-0V
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 10:25:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59756)
+	id 1kXmpj-0001mv-Rj
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Oct 2020 10:53:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38492)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXmOP-0008TN-Gn; Wed, 28 Oct 2020 10:25:37 -0400
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:35705)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kXmON-0007az-L3; Wed, 28 Oct 2020 10:25:37 -0400
-Received: by mail-il1-x142.google.com with SMTP id k6so4836840ilq.2;
- Wed, 28 Oct 2020 07:25:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7tIFXOKTy4ESMiYe7mqtZ282NIlBLpj2pKJmHgxHfCw=;
- b=UFqdcmmUDj9ovwvIIqwGImsJcR0xnqllkJz84cw33dYEUOPyoiHc0Nx+SYfaTQhXIJ
- GzoO4+SxI+26b8L7rZUWqof9ih6yIy0qOKQKS89eK2O9UKCt98/0/RAef2vDWsfhi/Sn
- AKoxJxyQbMdeH3RY7Bt8kSB2McdOLTwWhF9HgIo9Y8BnnzPyjsp4jnO2Lt28ozz/eNYV
- BPLxJDAtocnJlJgdlM2a1u1xe1XuC+ar0wya93Aa1IIUbrrSvdQ7IPIx3GpBopvbYMNH
- y1ilCFisnPv3gzkowTV+No93CH8k0KgOkTtDIgplOmu8TwEuNUIgnBbd0I4sTi4qaO9L
- mWIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=7tIFXOKTy4ESMiYe7mqtZ282NIlBLpj2pKJmHgxHfCw=;
- b=NELuJsu+sGq5klewKDWxx4PTVxbFy+ujZI9hHPBCIU3LT/ja2BblwYzltChchiPlxe
- Wi7c1Kg68xOhePvbdk79FSucnDRQdkCXQTX7J7OiHAZTxL/harZ0mR+lMmns+GCObt/I
- d/erx/AdQecCDUvVp0JUNodoY2GU5aQzSMQSF/r8sjwCL2f2c4E9svK9jNYg/QArF02H
- RYlYyvgzNtg3pZF5QCzXZFvHO7j9jKtme12DWc5ZsTT7AQnj/4oTuqtI2I8x/0n8/rpD
- Up54aFe0YdF8V95s5W5J+NVJ3MNJRKwXKceikrH3TerXTIFmcNDSvcTT/3ahOkt/YBzB
- w4wA==
-X-Gm-Message-State: AOAM530l5GlXC3BvTM13gcOuPnRY75ujKHQVJ7t2wPwEM7InF5uq4YdL
- 9wGEbDcZG9jXNO5OlIGgHAtbSO69qaD8DH/YAQ4=
-X-Google-Smtp-Source: ABdhPJxWsPLVfcwGsgklxXWJFiCeFyPMGYEHgKSSTbsyTRam8cZBzoxef3uC+U8CQfVmjWcp7bDQIAhJgeiBMsAjYTk=
-X-Received: by 2002:a05:6e02:c:: with SMTP id
- h12mr6216554ilr.177.1603895133621; 
- Wed, 28 Oct 2020 07:25:33 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=563b96974=alistair.francis@wdc.com>)
+ id 1kXmpi-0001mO-5d; Wed, 28 Oct 2020 10:53:50 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:10513)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=563b96974=alistair.francis@wdc.com>)
+ id 1kXmpf-00035l-Mq; Wed, 28 Oct 2020 10:53:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1603896827; x=1635432827;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=1m/uJoL+53mnBQz9EVIpdmTHpWP0VnXUqGjtcq/apck=;
+ b=n80A/y59H/ARwEkKP1qXs4KWJB1o5heKNUzJkXf8EIWZM8J4pfum5yK0
+ Zc3Of5EB5CtaSPlye0R6wv3QqXYLH3J0NRqaB1oxZGGFKAdHF6zv6d0g+
+ 8QCZKErO30hT5B139Mag283zPrkoz0P30rkS5yvvF55Nbu1nAXJkC80LA
+ 1rIwuvUZFkcKzCvIrPsWi06OcDKpiDcr0ftv93QSOb/s3h9GcnyczUEwt
+ OLi/HslRrp11jCz1hUd3wy2LVRuw7558TUYr9cQTGfhMU1z2Rb/vAW4RN
+ mIEH8druF7sqeyOWoycnH/N2I+XPB/h0951brUJeaAb7LQrXC3YKUwKp7 A==;
+IronPort-SDR: 8udSw06UGFWoPsjxlHJpJ0uJhPCC2syDuTCnvdWB2r4+wKKcTl41WjW9gbhLiw4J7TDbyu21CK
+ 1EFRRGmsb61cAWHo0195TWjduK8LbNCZSFA4yzq39QoLuljSJsoqSnBojMBTR/5AVtxsL9mHfx
+ TkQbn7c1frlOs7MWdZL3caLCVsvAhNU7MUl8mqSI7tgBadZIm+Ob5qOhhRzQrTDkkiAOa5zvW3
+ pblBHizttmFithiLcSraQAt4OELq+8igg/o8tXCEhH/QdtoM9V8jETFj9YASPqkG49VmciEJG5
+ dok=
+X-IronPort-AV: E=Sophos;i="5.77,426,1596470400"; d="scan'208";a="151200363"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 28 Oct 2020 22:53:45 +0800
+IronPort-SDR: fh8lP5nth2vCp8GKJNJXxuH7Xz4BtD0v6QUZnssKtR8dEoxXE2vVLXdZCfsVbpFl2h43TiUiKi
+ xtB14UaLEA9AHDB7tPh2fqASGxRlUsX/pNmm4CoeSu1un3+zKuqzMEPTuUvVONBUWmtc1VRgeZ
+ /+KcAdwlCwVHLTr7E0E6nx7eKX/crxppJ+ad67zqyoJequg1JX72klNsYky7sMYWrgezmhkjfN
+ m7tE7iw39JbL1W85+JjFHRuwaNgN6KTmTZhZNhrvpsfRa2hQ4bphOovV2mIpFs7htCUfQ/bDYb
+ xkeeuAYffucymrfIcOWAWmG/
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Oct 2020 07:38:55 -0700
+IronPort-SDR: iwf4uBidU2hz+jSOULmo4t82ScoJIbYFCa4BXbcO3CCsiVfBQqqAyGqDv8hPfzM+ek7aaoclpZ
+ c4g4E57Xb/nDmI5tmHtdjKDdgTd3QxTeXVOMZuyvBrjXtpfG6qwQO8SYzPGQqYS4nLqdyHjfKC
+ xTAnfEKqTAtsnLIlYEQbZffyNPLqv3ZUZW1ipFAGI3vuuJtJm7zM+Ru8xPRwOT25f00rNN6AXc
+ cOEz4IZ+UYfccvHokVNYFAF4VAoB0fCOcxfI9hJVpe4uYpC0tosz+l6fZH18HOrgz40uAYv1HY
+ vWk=
+WDCIronportException: Internal
+Received: from usa003000.ad.shared (HELO risc6-mainframe.hgst.com)
+ ([10.86.60.131])
+ by uls-op-cesaip01.wdc.com with ESMTP; 28 Oct 2020 07:53:45 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com, richard.henderson@linaro.org
+Subject: [PATCH v2 1/5] target/riscv: Add a virtualised MMU Mode
+Date: Wed, 28 Oct 2020 07:42:20 -0700
+Message-Id: <d0eeb9ea64462044a67f5b803d6cb62dd10e017a.1603896075.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.28.0
+In-Reply-To: <cover.1603896075.git.alistair.francis@wdc.com>
+References: <cover.1603896075.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
-References: <20201027141740.18336-1-bmeng.cn@gmail.com>
- <20201027141740.18336-3-bmeng.cn@gmail.com>
- <CAKmqyKMyHCZCLZOqVVZ4n4C0_rAY-WO5-J+Y=dqi0qtZsLXjpw@mail.gmail.com>
- <CAEUhbmWqoP71uKYRhYdmb=Hxx=FNOYcfL6EkEChn9x1Qq9CddQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmWqoP71uKYRhYdmb=Hxx=FNOYcfL6EkEChn9x1Qq9CddQ@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 28 Oct 2020 07:13:42 -0700
-Message-ID: <CAKmqyKPVOt+uRHW77YuBeaR5bDfwFPNWtR7JYDWPdfa5TayFZQ@mail.gmail.com>
-Subject: Re: [RESEND PATCH 2/9] hw/riscv: microchip_pfsoc: Connect DDR memory
- controller modules
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Atish Patra <atish.patra@wdc.com>, 
- Anup Patel <anup.patel@wdc.com>, Ivan Griffin <ivan.griffin@emdalo.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.153.144;
+ envelope-from=prvs=563b96974=alistair.francis@wdc.com;
+ helo=esa5.hgst.iphmx.com
+X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/28 10:53:43
+X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,88 +86,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2020 14:25:38 -0000
+X-List-Received-Date: Wed, 28 Oct 2020 14:53:50 -0000
 
-On Tue, Oct 27, 2020 at 6:43 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> Hi Alistair,
->
-> On Wed, Oct 28, 2020 at 1:49 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Tue, Oct 27, 2020 at 7:46 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > From: Bin Meng <bin.meng@windriver.com>
-> > >
-> > > Connect DDR SGMII PHY module and CFG module to the PolarFire SoC.
-> > >
-> > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> > > ---
-> > >
-> > >  hw/riscv/Kconfig                   |  1 +
-> > >  hw/riscv/microchip_pfsoc.c         | 18 ++++++++++++++++++
-> > >  include/hw/riscv/microchip_pfsoc.h |  5 +++++
-> > >  3 files changed, 24 insertions(+)
-> > >
-> > > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> > > index 2df978fe8d..c8e50bde99 100644
-> > > --- a/hw/riscv/Kconfig
-> > > +++ b/hw/riscv/Kconfig
-> > > @@ -4,6 +4,7 @@ config IBEX
-> > >  config MICROCHIP_PFSOC
-> > >      bool
-> > >      select CADENCE_SDHCI
-> > > +    select MCHP_PFSOC_DMC
-> > >      select MCHP_PFSOC_MMUART
-> > >      select MSI_NONBROKEN
-> > >      select SIFIVE_CLINT
-> > > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> > > index 4627179cd3..85be2bcde8 100644
-> > > --- a/hw/riscv/microchip_pfsoc.c
-> > > +++ b/hw/riscv/microchip_pfsoc.c
-> > > @@ -15,6 +15,7 @@
-> > >   * 4) Cadence eMMC/SDHC controller and an SD card connected to it
-> > >   * 5) SiFive Platform DMA (Direct Memory Access Controller)
-> > >   * 6) GEM (Gigabit Ethernet MAC Controller)
-> > > + * 7) DMC (DDR Memory Controller)
-> > >   *
-> > >   * This board currently generates devicetree dynamically that indicates at least
-> > >   * two harts and up to five harts.
-> > > @@ -85,7 +86,9 @@ static const struct MemmapEntry {
-> > >      [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
-> > >      [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
-> > >      [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
-> > > +    [MICROCHIP_PFSOC_DDR_SGMII_PHY] =   { 0x20007000,     0x1000 },
-> > >      [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
-> > > +    [MICROCHIP_PFSOC_DDR_CFG] =         { 0x20080000,    0x40000 },
-> >
-> > Neither of these are documented....
->
-> It's documented in the "Register
-> Map/PF_SoC_RegMap_V1_1/pfsoc_regmap.htm" in
-> https://www.microsemi.com/document-portal/doc_download/1244581-polarfire-soc-register-map
+Add a new MMU mode that includes the current virt mode.
 
-That doesn't seem to be an official version controled doc though and
-it seems to conflict with the other UG document.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu-param.h  | 10 +++++++++-
+ target/riscv/cpu.h        |  4 +++-
+ target/riscv/cpu_helper.c |  6 +++++-
+ 3 files changed, 17 insertions(+), 3 deletions(-)
 
->
-> >
-> > Maybe just add a single comment above the memory layout clarifying
-> > that this is not what is documented from the SoC but is instead based
-> > on what guests do?
-> >
->
-> I can add a link to the Microchip website that documents the memory
-> map above the memory layout.
+diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
+index 664fc1d371..0db6e23140 100644
+--- a/target/riscv/cpu-param.h
++++ b/target/riscv/cpu-param.h
+@@ -18,6 +18,14 @@
+ # define TARGET_VIRT_ADDR_SPACE_BITS 32 /* sv32 */
+ #endif
+ #define TARGET_PAGE_BITS 12 /* 4 KiB Pages */
+-#define NB_MMU_MODES 4
++/*
++ * The current MMU Modes are:
++ *  - U  mode 0b000
++ *  - S  mode 0b001
++ *  - M  mode 0b011
++ *  - HU mode 0b100
++ *  - HS mode 0b101
++ */
++#define NB_MMU_MODES 6
+ 
+ #endif
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 87b68affa8..5d8e54c426 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -363,7 +363,9 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
+ target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
+ void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
+ 
+-#define TB_FLAGS_MMU_MASK   3
++#define TB_FLAGS_MMU_MASK   7
++#define TB_FLAGS_PRIV_MMU_MASK                3
++#define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
+ #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
+ 
+ typedef CPURISCVState CPUArchState;
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 3eb3a034db..453e4c6d8a 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -30,6 +30,10 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+ #ifdef CONFIG_USER_ONLY
+     return 0;
+ #else
++    if (riscv_cpu_virt_enabled(env)) {
++        return env->priv | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
++    }
++
+     return env->priv;
+ #endif
+ }
+@@ -323,7 +327,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+      * (riscv_cpu_do_interrupt) is correct */
+     MemTxResult res;
+     MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
+-    int mode = mmu_idx;
++    int mode = mmu_idx & TB_FLAGS_PRIV_MMU_MASK;
+     bool use_background = false;
+ 
+     /*
+-- 
+2.28.0
 
-Thanks, that's at least something.
-
-Alistair
-
->
-> > It seems to be a constant problem with this board, unless I am really
-> > misreading the memory map.
-> >
->
-> Regards,
-> Bin
 
