@@ -1,46 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kYJ2x-000532-32
-	for mharc-qemu-riscv@gnu.org; Thu, 29 Oct 2020 21:17:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46712)
+	id 1kYQVN-0005WY-Sd
+	for mharc-qemu-riscv@gnu.org; Fri, 30 Oct 2020 05:15:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57122)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhangxinhao1@huawei.com>)
- id 1kYIbn-00048P-Nj; Thu, 29 Oct 2020 20:49:36 -0400
-Received: from szxga04-in.huawei.com ([45.249.212.190]:2369)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhangxinhao1@huawei.com>)
- id 1kYIbi-0001p3-5k; Thu, 29 Oct 2020 20:49:35 -0400
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CMkGY6YhGz15LX2;
- Fri, 30 Oct 2020 08:49:25 +0800 (CST)
-Received: from huawei.com (10.175.101.6) by DGGEMS411-HUB.china.huawei.com
- (10.3.19.211) with Microsoft SMTP Server id 14.3.487.0; Fri, 30 Oct 2020
- 08:49:18 +0800
-From: Xinhao Zhang <zhangxinhao1@huawei.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
- <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
- <dengkai1@huawei.com>, <alex.chen@huawei.com>, <qemu-trivial@nongnu.org>
-Subject: [PATCH] target/riscv/csr.c : add space before the open parenthesis '('
-Date: Fri, 30 Oct 2020 08:48:15 +0800
-Message-ID: <20201030004815.4172849-1-zhangxinhao1@huawei.com>
-X-Mailer: git-send-email 2.29.0-rc1
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kYQVM-0005Uh-Az; Fri, 30 Oct 2020 05:15:28 -0400
+Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:39775)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kYQVI-0008Ih-Sq; Fri, 30 Oct 2020 05:15:27 -0400
+Received: by mail-yb1-xb43.google.com with SMTP id 67so4539100ybt.6;
+ Fri, 30 Oct 2020 02:15:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fTmzJ/jElPGt3FUJEPmktOZo3WNUdJ8tMml+rQeBq28=;
+ b=CbJg6KQnWwSSUA+3V3qGxh8WxhviH8NXtjMZcCFRlJj+vLaOnTLCO8drVFSGV7zAEb
+ G0Q/21keK738qYjHfgzNT0zH12sMPgjhrgMeY3kRXFne/RaKjDU49mRa2d4xwupdEEXf
+ ybEfQDTEe/PNGcCMKmQyyC1pV5JQooZM8ykEm4+nIKowULE5Uv3d5ezuYoBBcf1knI+A
+ 8V8WoXo+jbHPZWlVloTL6WPHIYmHQvgFxP84QLx5pzo999wS2A6onZZVO7BI/HQpoB+J
+ PNu0QfLOcsOTgnNndjwsvjL7mbQ32WotPBUQPrp6TI+vXLFwCFMiNhj6zw2TIn079vF6
+ YU0w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fTmzJ/jElPGt3FUJEPmktOZo3WNUdJ8tMml+rQeBq28=;
+ b=nfTiV6tvLhsSLZKwrk+GWHPvkTN7Zb5ZiS+mzMpwbE8h1pZKYJhM9dq+zz+QIkXVHU
+ Zdla9OQ8IpTXffBSH95WCjPW7aY6jguswsDHQlDQeHR1Tqj+kKACJrFtGbtt4WyDW5x+
+ rKNbrH7q3/AOuWA+OYe8C8oOOeNtnWwucVy8hg46ypwX03kHSpo3wasaJwks4RAeGIrd
+ VVilGCoNHQG454w4CG8y/AYeW3RAWz8kZtPdPLn4byi+bpLLZXbzTEU2iNqCSdQidwzn
+ lBxIfhYzh9Ndu1ZnH1/hHI6nIWJAfffotf7eba4mytyY5N+xPbTY3KQehMTBhcAekJsO
+ 5REA==
+X-Gm-Message-State: AOAM533+mraZ/DqKt3NvGXuns+ZXkSAdab1J37M7yiY8WXWOZH//AX6R
+ aFdtM7+Ye/8FZ8Yz+DQJDUdyyQSVQmC0pJm1Zo0=
+X-Google-Smtp-Source: ABdhPJzyaz3TLdkBpdY/WAo8jRIPqU6hJM+zgBm4GcJo0talYxJXicMoju6vPSqN+oVYAB2CDoFXCIb5oNB0MM0Ai9U=
+X-Received: by 2002:a25:f81e:: with SMTP id u30mr2269160ybd.332.1604049310069; 
+ Fri, 30 Oct 2020 02:15:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.175.101.6]
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.190;
- envelope-from=zhangxinhao1@huawei.com; helo=szxga04-in.huawei.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/10/29 20:41:14
-X-ACL-Warn: Detected OS   = Linux 3.1-3.10 [fuzzy]
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+References: <20201030004815.4172849-1-zhangxinhao1@huawei.com>
+In-Reply-To: <20201030004815.4172849-1-zhangxinhao1@huawei.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 30 Oct 2020 17:14:59 +0800
+Message-ID: <CAEUhbmXNRkFSvtPg8AQhCmN1X-VYow2JiEypeZFZFnswFB9BUg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv/csr.c : add space before the open
+ parenthesis '('
+To: Xinhao Zhang <zhangxinhao1@huawei.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ QEMU Trivial <qemu-trivial@nongnu.org>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, alex.chen@huawei.com, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, dengkai1@huawei.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 29 Oct 2020 21:17:37 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,31 +76,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2020 00:49:38 -0000
+X-List-Received-Date: Fri, 30 Oct 2020 09:15:28 -0000
 
-Fix code style. Space required before the open parenthesis '('.
+On Fri, Oct 30, 2020 at 8:58 AM Xinhao Zhang <zhangxinhao1@huawei.com> wrote:
+>
+> Fix code style. Space required before the open parenthesis '('.
+>
+> Signed-off-by: Xinhao Zhang <zhangxinhao1@huawei.com>
+> Signed-off-by: Kai Deng <dengkai1@huawei.com>
+> Reported-by: Euler Robot <euler.robot@huawei.com>
+> ---
+>  target/riscv/csr.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
 
-Signed-off-by: Xinhao Zhang <zhangxinhao1@huawei.com>
-Signed-off-by: Kai Deng <dengkai1@huawei.com>
-Reported-by: Euler Robot <euler.robot@huawei.com>
----
- target/riscv/csr.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index aaef6c6f20..e8b149f0d2 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -881,7 +881,7 @@ static int write_satp(CPURISCVState *env, int csrno, target_ulong val)
-         if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-             return -RISCV_EXCP_ILLEGAL_INST;
-         } else {
--            if((val ^ env->satp) & SATP_ASID) {
-+            if ((val ^ env->satp) & SATP_ASID) {
-                 tlb_flush(env_cpu(env));
-             }
-             env->satp = val;
--- 
-2.29.0-rc1
-
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
 
