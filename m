@@ -1,67 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ka2nF-0001NA-DB
-	for mharc-qemu-riscv@gnu.org; Tue, 03 Nov 2020 15:20:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39656)
+	id 1ka2t2-0005Ry-0K
+	for mharc-qemu-riscv@gnu.org; Tue, 03 Nov 2020 15:26:36 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40738)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ka2nC-0001M4-RC
- for qemu-riscv@nongnu.org; Tue, 03 Nov 2020 15:20:36 -0500
-Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:46075)
+ id 1ka2t0-0005Qc-Fg
+ for qemu-riscv@nongnu.org; Tue, 03 Nov 2020 15:26:34 -0500
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:40388)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ka2nA-0004xQ-Hd
- for qemu-riscv@nongnu.org; Tue, 03 Nov 2020 15:20:34 -0500
-Received: by mail-pf1-x444.google.com with SMTP id e7so15243566pfn.12
- for <qemu-riscv@nongnu.org>; Tue, 03 Nov 2020 12:20:31 -0800 (PST)
+ id 1ka2sx-0005aB-U2
+ for qemu-riscv@nongnu.org; Tue, 03 Nov 2020 15:26:34 -0500
+Received: by mail-pf1-x441.google.com with SMTP id 72so8591083pfv.7
+ for <qemu-riscv@nongnu.org>; Tue, 03 Nov 2020 12:26:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=Ke3lctFHdN1c5swx2n6i37eMkPk0/YRz6LTlj2i+b78=;
- b=Kdr6jbnCHh5K6ip4ntUwUQ7yEzjp1sY8qKwqyr+1OGoBXQedqoDaIKoTk0CXMyKtDb
- pW26pnjPruv3YmgTaeWjLDVzlNijmtI5VzoOpXaqgDHA/6G4eWcgxarsb18s1KEl7ANL
- xr4kr7tWM2TgSctdVGlI47VBRK8OPdrnjTB19k9oCV+sEVz2WFKN33E7QpTlsU+MFpmQ
- OjdJf9o5Dr+8nVwB/paKbNYffgn+8bkBc1hl0YORnvzbRyAnXoiBqrg4L4I3muRvBf60
- SaMmpFOYMQ7RL8IC+FwgMEy+aLVM16/qafBXGVXh2wPlrjZAd/LfVF8qcgToPDWU3/oA
- Kfvg==
+ bh=U/Uei+qPLVAylKTCp4I39SRQJ7A4ay1htT2bpasu1HU=;
+ b=IXdZ9vqLynEuub7SxC1BkQ65XxYSWZL3tr7N+XsHYRXjYhida8USYEV5j+PU8di0RE
+ aiwo2saPFHUC5Mx9UL63mc3WT5Ueq+KZ0CwxMztoIPaOyb5LFmXK4+gbjgICYKwMSFMa
+ Oms6UznQ8mobirYxWF1Yi8eWaVpvtD9/+uGK3CUKRduLKbx/it2WQ6yvlNBzkeC11FNb
+ Q94XNryyWQVA0y8S1V7IvEIQQQLs4nNZHSu+KQkt+mQmOijFBnaD5MkLDYBF3j6fQz5e
+ hgGHo3yrvhkHXrLRwWNB/Me4pR52L8L86TJ6GFI7ZHnMAUfHYxANxTKkTC3gPz+mS22a
+ F+Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=Ke3lctFHdN1c5swx2n6i37eMkPk0/YRz6LTlj2i+b78=;
- b=qiYospT1/UDPl4dF6K6HWX3lzuMi4bJYbpAyP++lFjcP0nsd4ScaDTYo2vTJGVgCDy
- /JOjeOPGgjniEEMhWF4o868R6FH94GfFN7GtpkxH8nz6M4aOH5uA2eD2uluO4P5x1JZw
- 3C0lngopRH9Evc6wriQmda4dB2jm6UBXXRLavdWZyXgWGMnS54MJLDkKFFTV0ijC4CL8
- 8/WvXEg2/y3EXCbLm3MCnUZD+mLS1tduLwPUJuQRhux4/jv7laumnbHKRLEC+g8zsO2N
- s5Mxame+6ovmYJhn004vmTChv2IobyrvcMPsD6dVEAQsE8OEEkqymvgYvLd0HTLb2BUN
- dAQg==
-X-Gm-Message-State: AOAM530V3yvaDq3AJhURwjvpiISndf5FSQzWBLN85I9h0tGPBozRHKSH
- qXU1zOPlKrxMoz4KDiYYsLItWw==
-X-Google-Smtp-Source: ABdhPJzI1JjEn95qgLD15C+eOrLEPMVWjuiZRom7/vRABcCNJQNua7tsx7TbRm+58C3r15QOPuxGFg==
-X-Received: by 2002:a63:5154:: with SMTP id r20mr18862228pgl.340.1604434830117; 
- Tue, 03 Nov 2020 12:20:30 -0800 (PST)
+ bh=U/Uei+qPLVAylKTCp4I39SRQJ7A4ay1htT2bpasu1HU=;
+ b=AHGutVd1tVjm7iPFINvHVFtWb5jBtuf/s5gnAeZVNqxHLX/BU24EYBHN7hFY2yUZhO
+ 0809L0YZ6JmYbo1zTi/wHb2tdI85hRbEdV/M4pT7ittsE37zaz0nN2sz45rox62d+wF/
+ zxh8JVEM7aY/SWfLD2Qw+xgD1bfTY9/pHGU5rk9ac11S9uxaKYEnXumS9faUIhU3a6KL
+ k8WIsT25Sa4yqp085yVlqmK7aPtGwV0Dw2PYi8fMGiO0OjiX0I2j+sXiIGU+ifu3siXi
+ vsVHvHboumjtPECwYVY0PNdleCbZSJbJSNoZxGpK4SFUupCAbWBXadKtBOJIZExdVZ91
+ +DEg==
+X-Gm-Message-State: AOAM5310QaawW4lgdnmlHFp8XQBLCYSAHyVcz/9O1pTlHsVYoCd5nq+g
+ A9X6i2GTfwcZFo9GaopiSHhBnw==
+X-Google-Smtp-Source: ABdhPJxBZE8V0G0tTtQGRYe4jttP7vvbZLcwU6qkLX66UCkZb9ijVQKhJGUbkHPypi5LX1UiayAl2Q==
+X-Received: by 2002:a63:5804:: with SMTP id m4mr17980628pgb.31.1604435190335; 
+ Tue, 03 Nov 2020 12:26:30 -0800 (PST)
 Received: from [172.16.1.221] (76-14-210-194.or.wavecable.com. [76.14.210.194])
- by smtp.gmail.com with ESMTPSA id h184sm17735745pfe.161.2020.11.03.12.20.29
+ by smtp.gmail.com with ESMTPSA id k5sm13385pjs.14.2020.11.03.12.26.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Nov 2020 12:20:29 -0800 (PST)
-Subject: Re: [PATCH v3 2/7] target/riscv: Add a virtualised MMU Mode
+ Tue, 03 Nov 2020 12:26:29 -0800 (PST)
+Subject: Re: [PATCH v3 6/7] target/riscv: Remove the Hypervisor access check
+ function
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
 References: <cover.1604432950.git.alistair.francis@wdc.com>
- <5f25069661040bb96f945358bd7fa047f5b462ce.1604432950.git.alistair.francis@wdc.com>
+ <b379985cf25b2e46fac1377aa0c37e6a16c864d2.1604432950.git.alistair.francis@wdc.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <29320e1d-6abf-a6bb-fc6e-43a3b17fca36@linaro.org>
-Date: Tue, 3 Nov 2020 12:20:27 -0800
+Message-ID: <7b627323-6361-6ed9-dd8f-63bd054bf551@linaro.org>
+Date: Tue, 3 Nov 2020 12:26:27 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <5f25069661040bb96f945358bd7fa047f5b462ce.1604432950.git.alistair.francis@wdc.com>
+In-Reply-To: <b379985cf25b2e46fac1377aa0c37e6a16c864d2.1604432950.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::444;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x444.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x441.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -83,18 +84,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Nov 2020 20:20:36 -0000
+X-List-Received-Date: Tue, 03 Nov 2020 20:26:34 -0000
 
-On 11/3/20 11:50 AM, Alistair Francis wrote:
-> @@ -30,6 +30,10 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
->  #ifdef CONFIG_USER_ONLY
->      return 0;
->  #else
-> +    if (riscv_cpu_virt_enabled(env)) {
-> +        return env->priv | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+On 11/3/20 11:51 AM, Alistair Francis wrote:
+> @@ -199,7 +271,16 @@ static bool trans_hlv_wu(DisasContext *ctx, arg_hlv_wu *a)
+>      TCGv t0 = tcg_temp_new();
+>      TCGv t1 = tcg_temp_new();
+>  
+> -    gen_helper_hyp_access_check(cpu_env);
+> +    if (!ctx->hlsx) {
+> +        if (ctx->virt_enabled) {
+> +            generate_exception(ctx, RISCV_EXCP_VIRT_INSTRUCTION_FAULT);
+> +        } else {
+> +            generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST);
+> +        }
+> +        exit_tb(ctx); /* no chaining */
+> +        ctx->base.is_jmp = DISAS_NORETURN;
+> +        return false;
 > +    }
+>  
+>      gen_get_gpr(t0, a->rs1);
+>  
+> @@ -221,7 +302,16 @@ static bool trans_hlv_d(DisasContext *ctx, arg_hlv_d *a)
+>      TCGv t0 = tcg_temp_new();
+>      TCGv t1 = tcg_temp_new();
+>  
+> -    gen_helper_hyp_access_check(cpu_env);
+> +    if (!ctx->hlsx) {
+> +        if (ctx->virt_enabled) {
+> +            generate_exception(ctx, RISCV_EXCP_VIRT_INSTRUCTION_FAULT);
+> +        } else {
+> +            generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST);
+> +        }
+> +        exit_tb(ctx); /* no chaining */
+> +        ctx->base.is_jmp = DISAS_NORETURN;
 
-Still setting this bit here, incorrectly.
+generate_exception already is noreturn.  The exit_tb is unreachable.  You
+should extract this to a helper function anyway, instead of 6 copies.
+
+I would squash this with the previous, so that you don't add
+helper_hyp_access_check and then remove it in the next patch.
 
 
 r~
