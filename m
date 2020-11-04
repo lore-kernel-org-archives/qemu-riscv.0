@@ -1,78 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kaAp4-00047w-Vd
-	for mharc-qemu-riscv@gnu.org; Tue, 03 Nov 2020 23:55:02 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60130)
+	id 1kaAp6-0004BD-3F
+	for mharc-qemu-riscv@gnu.org; Tue, 03 Nov 2020 23:55:04 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60154)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=57073d1dd=alistair.francis@wdc.com>)
- id 1kaAp3-000430-0D; Tue, 03 Nov 2020 23:55:01 -0500
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17614)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=57073d1dd=alistair.francis@wdc.com>)
- id 1kaAoy-0005iz-2B; Tue, 03 Nov 2020 23:55:00 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1604465695; x=1636001695;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=RisuKMhLqPB7mhA2jscmhvu/EDaATgNa1/SbhqIyQWg=;
- b=XWI60Lc15rHzeVQAYnZyiBIyHBRCYo/xYJ6RE84fARXHg1ya4SP20uXD
- WHc9BbJwaGdLQYsbGwq3cyxgmcr+T3bEZ+yqayrShlhtuWF94TQOGeCh7
- iwng3CxCpDX0YmE/dUSkFNbOCyGSBvFJo2IUQvQd4iO1NYe6+4j6jp2dL
- uZI6GldkwGpGX7vqTuFiWJ3qjeJZ38bzM1KVxrUy0iZo5xnXEP8p/1UoP
- lePsDznYCARHPh9wc2YxctCU8vuWtrMkCnuUixIYT8/TtXI6pAnqZTcxN
- 69z0Ar2lWPYKaci8HdNv3bw38VmUn/Y+TrWbobZCHiqsUY6GZccx9yUz/ g==;
-IronPort-SDR: VUyVQOYT2vuzoZFqM1BNbFS0XMyhSgxsArTvgvKc/hCtHGAjVA9KkSXRrXVt1ERXe6N92oVoUn
- k+cxl5l7Xk+KY88yp0TMQ1ob+bKxvaiYQmP0HNumg8LRYwsMAuQP4Qd+JCXojNWwCxbULSUd9s
- ONDUBrLp2ej83tvZ7E6foWjeoCm8mQranPAK5XuTf56z8bRA4LY3sY1n2OiYFBJ42JNKnbEobM
- HZQm+nYLn+qZEBdbWxt/hQWQOKv7y9jq2l97StNtgc64/6hPuKPj9+2Mc7V198pEolg7yU2bD7
- 4b0=
-X-IronPort-AV: E=Sophos;i="5.77,449,1596470400"; d="scan'208";a="151656927"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 04 Nov 2020 12:54:54 +0800
-IronPort-SDR: B5wgJZncStMPBuEBii5s7GQAfWYs0Fh0/7Dc6DRLsiVJJsTINYOqo19bVQLaPHBNr5y4C9OVR8
- q3mblVnrb7iFl4asxajkopUwnt5ow4+xUsZWqJSgxfDdA0+/Ic2fMFbkt+mD5ozLsD5DHZPGKW
- h44MajNmYsUDViI+B48Twn5BsjCVT9nDBVzc5ZtbFYSGKp1YuJaQAFib4LYI0YQ2eSb8KgN8GM
- BmVADkLcmHb5Sd5eaorHmVbe0cHGh4t1VFRy/9fXE6xPWsqc31slXSLCA/Z5Rf0/RwfpIGpaeA
- i0OK48xEmaFmPnUbGLK8Z56c
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Nov 2020 20:41:02 -0800
-IronPort-SDR: EeS4b9xAsleFAb0WXJvbYMLmdz2mrxHL6Q24JNLWdo4SJBzAmy1TMCX9bfeUMjez2PEhIx7we0
- JbIzxZQ2ApA42YFh7hByllIyK1cVg5LEz5LFlygI8Qe+CCpldwEAR9QhHCQkGx350ftBHlQUvI
- rVeuT90ZCorWyHejp9B2a3QLBVslAzdzIRcdCtBESeZMHKgEXGuuJaZZbsXsyqX4JP/PGCrVgZ
- wZdmeiGsBiKTrg4KM9muKmL/9X3EPX9fq4L3fh9S8410qTx2q8LiksXwpEiD2fwssWfInoH5dl
- BZE=
-WDCIronportException: Internal
-Received: from usa003000.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.60.113])
- by uls-op-cesaip01.wdc.com with ESMTP; 03 Nov 2020 20:54:54 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com, richard.henderson@linaro.org
-Subject: [PATCH v4 1/5] target/riscv: Add a virtualised MMU Mode
-Date: Tue,  3 Nov 2020 20:43:23 -0800
-Message-Id: <4b301bc0ea36da962fc1605371b65019ac3073df.1604464950.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <cover.1604464950.git.alistair.francis@wdc.com>
-References: <cover.1604464950.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kaAp4-00046m-KW; Tue, 03 Nov 2020 23:55:02 -0500
+Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:44705)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kaAp2-0005jA-MK; Tue, 03 Nov 2020 23:55:02 -0500
+Received: by mail-il1-x141.google.com with SMTP id z2so18188604ilh.11;
+ Tue, 03 Nov 2020 20:54:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=J4efl48tawioznZ2bjfbrXOXeSNn+t0icjBdX9B6f+U=;
+ b=cDqtQCiebZkY7y+G8m8tJqiHZN+7SWja/wS4spxmlfG5FRn0lZ0M7qAQ84ws+G4N1f
+ QN6LT8GHG4V7AKx8hRf0k4YNOepU49dr5O9ZyqtofW2PsE1CEU0uoc5LQ6l9hhry2SMY
+ VjExQeflSrcEB6My1MNCH/RxCqQOud5NnX+iR4JgK2L+nriSLJZ1LUX1UZ4tEaGVIIwj
+ LnSVmbpi/UqGAqCoco2wbEiaDLrPQYNYm5c+7QLAIJ605vFUg53U8FUjTv777pSQbWuK
+ nQ7f4hy46Z6tPRJgyHzyhwOTBCNyg4pdqITwVUQnnNA21VKye8HixG6z9l7cETDxtoQ7
+ 0Oig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=J4efl48tawioznZ2bjfbrXOXeSNn+t0icjBdX9B6f+U=;
+ b=uVL7yD2OXZsasA7gHZAhnl3HiI4xa5Sh0QuXs4ecrnF3oUDeUJW9kMc0jD88G06qzw
+ VlUoln+DLmp/xFn7USavmCubjzCh4KjUOiqVXqT7R/XOw6MNaDuiKPYz95HlyqBYvQP8
+ hbVed3rC87bl7vA8zl1+j4L0aYSA0r8YkehE68gSdDBSzbD/LMsLGTo1xFcPv8iygrQX
+ /GT7zSUhqzLFpfvQTjEQCm2CJU4C/OJG75jWnsa2AMlPVQtdcD4bEdQyATHcHiQ9U3HP
+ OER7MiRLPr+BjVrCMVm9vMibRFL+slxMLJaTsF0eixoLCiX+3oajnalLY3C35aHnQKMI
+ /Jjg==
+X-Gm-Message-State: AOAM532cDJmrUnEOxqh7rGobIbycu2vhcG1CebgvTPz/dWBrAmm1v1Do
+ PXokrYm51UZYlU0xJbF6wHW+hFiTwdhmMrEbOmk=
+X-Google-Smtp-Source: ABdhPJyKwrnd+1hYzDRH/bDVmNKpJHO6MC7KXGBfAL9bySApLa6YbIXRlb+/0xKcv8cwWqe4x94zWH3kzT4WgMjbjxA=
+X-Received: by 2002:a92:d991:: with SMTP id r17mr15433131iln.227.1604465695987; 
+ Tue, 03 Nov 2020 20:54:55 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.154.42;
- envelope-from=prvs=57073d1dd=alistair.francis@wdc.com;
- helo=esa4.hgst.iphmx.com
-X-detected-operating-system: by eggs.gnu.org: First seen = 2020/11/03 23:54:51
-X-ACL-Warn: Detected OS   = FreeBSD 9.x or newer [fuzzy]
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <cover.1604432950.git.alistair.francis@wdc.com>
+ <5f25069661040bb96f945358bd7fa047f5b462ce.1604432950.git.alistair.francis@wdc.com>
+ <29320e1d-6abf-a6bb-fc6e-43a3b17fca36@linaro.org>
+In-Reply-To: <29320e1d-6abf-a6bb-fc6e-43a3b17fca36@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 3 Nov 2020 20:42:59 -0800
+Message-ID: <CAKmqyKNmXR3bvf-Dvx6mfbxymwqppBEzPkAsY7A4utuEXE-t=w@mail.gmail.com>
+Subject: Re: [PATCH v3 2/7] target/riscv: Add a virtualised MMU Mode
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
+ That's all we know.
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -86,67 +75,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2020 04:55:01 -0000
+X-List-Received-Date: Wed, 04 Nov 2020 04:55:03 -0000
 
-Add a new MMU mode that includes the current virt mode.
+On Tue, Nov 3, 2020 at 12:20 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 11/3/20 11:50 AM, Alistair Francis wrote:
+> > @@ -30,6 +30,10 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+> >  #ifdef CONFIG_USER_ONLY
+> >      return 0;
+> >  #else
+> > +    if (riscv_cpu_virt_enabled(env)) {
+> > +        return env->priv | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+> > +    }
+>
+> Still setting this bit here, incorrectly.
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu-param.h  | 11 ++++++++++-
- target/riscv/cpu.h        |  4 +++-
- target/riscv/cpu_helper.c |  2 +-
- 3 files changed, 14 insertions(+), 3 deletions(-)
+Argh! I must have dreamed fixing it. Sending a new version now.
 
-diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
-index 664fc1d371..e4cf3c01eb 100644
---- a/target/riscv/cpu-param.h
-+++ b/target/riscv/cpu-param.h
-@@ -18,6 +18,15 @@
- # define TARGET_VIRT_ADDR_SPACE_BITS 32 /* sv32 */
- #endif
- #define TARGET_PAGE_BITS 12 /* 4 KiB Pages */
--#define NB_MMU_MODES 4
-+/*
-+ * The current MMU Modes are:
-+ *  - U mode 0b000
-+ *  - S mode 0b001
-+ *  - M mode 0b011
-+ *  - U mode HLV/HLVX/HSV 0b100
-+ *  - S mode HLV/HLVX/HSV 0b101
-+ *  - M mode HLV/HLVX/HSV 0b111
-+ */
-+#define NB_MMU_MODES 6
- 
- #endif
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 87b68affa8..5d8e54c426 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -363,7 +363,9 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
- target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
- void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
- 
--#define TB_FLAGS_MMU_MASK   3
-+#define TB_FLAGS_MMU_MASK   7
-+#define TB_FLAGS_PRIV_MMU_MASK                3
-+#define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
- #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
- 
- typedef CPURISCVState CPUArchState;
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 3eb3a034db..9dfa7af401 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -323,7 +323,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-      * (riscv_cpu_do_interrupt) is correct */
-     MemTxResult res;
-     MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
--    int mode = mmu_idx;
-+    int mode = mmu_idx & TB_FLAGS_PRIV_MMU_MASK;
-     bool use_background = false;
- 
-     /*
--- 
-2.28.0
+Alistair
 
+>
+>
+> r~
 
