@@ -1,77 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kazzC-0005hj-GV
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Nov 2020 06:32:54 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45530)
+	id 1kb2bV-0007ci-IC
+	for mharc-qemu-riscv@gnu.org; Fri, 06 Nov 2020 09:20:37 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50984)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kazzB-0005hW-6K; Fri, 06 Nov 2020 06:32:53 -0500
-Received: from mail-yb1-xb41.google.com ([2607:f8b0:4864:20::b41]:38938)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kb2bT-0007bV-5e; Fri, 06 Nov 2020 09:20:35 -0500
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:50273)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kazz9-0001GV-KN; Fri, 06 Nov 2020 06:32:52 -0500
-Received: by mail-yb1-xb41.google.com with SMTP id g15so855444ybq.6;
- Fri, 06 Nov 2020 03:32:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kb2bR-00020s-GO; Fri, 06 Nov 2020 09:20:34 -0500
+Received: by mail-wm1-x343.google.com with SMTP id h2so1589551wmm.0;
+ Fri, 06 Nov 2020 06:20:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=YaXkzWp6lrQ9pt0zOFXkNHeJ/MJkfV8IzcAxDIc+QOg=;
- b=KQ1B6HPSn/FxDOe+b99WbRAdifSySSt8MlD8TMfjo4Nzj71C7krS3yzXuoCl3qdOGQ
- 0m0Lf70pdf+55VjvaqT3Vtw0zmk+uiXm6fwVHL8mmPwsltUVHPcCp8gJtrQOLo/oWwly
- fhy2Zs0ZxZU0K+ThyHuK1kutxG2Z5SpI+IdvrKzTpc7FxEQzgB8EwGcl0FVnvxYZL1Do
- 1qUv63O4wRPODQagB261Ww0CiKXS8RHJGPcDWsh2RfUKqtz4dOQRPL0SPPKNF/zhf3cU
- 2oOW6A6giIkdc65Ycq6CYjOtAp3rW5dvIgwq/lPncYWGYrguIeJVpwMI3kWdnGg0qR01
- f52A==
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=bO4JwNgzfLfxGdMgIq4N8FPUJUUU1BWyvxBJwMRwNOU=;
+ b=FpFXKo9hd2kma/8h8Oy/1fKAf7+cCLBcx2puq+XF8OMejXgN0WyHVnOFhEM2vtK1T8
+ FmHh8zDnNVmXvGrD3gbQ5Uq+ITl+1b9pdgb6Qf4qWcrvTnoKWE/fncJrW8baHB1wN/uM
+ lziu4ZkeZE4johUMHC3WQaFpiYEMhWd+g9trLj8FokSAkeK9Ep/ODXRU7wZuaQT48xTO
+ krKvtFF4UIuFRxbdZEF8LJIHu96c2zbbiv4DXuru3oy8mogFku+BcZp8Xwqxw/zb4qq9
+ 4KLH+1qrtBaVf54EFzIv0DFSQR4bqMBYNofimWyr7q6GSaI+JTnX/XfQQsTQed7T7BMg
+ 3Zsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=YaXkzWp6lrQ9pt0zOFXkNHeJ/MJkfV8IzcAxDIc+QOg=;
- b=He4R6ooB50XaCa5U1rwU/G593DzOKIQ47mB1M6B5HF/ZTkVJwOsl+e3eYfK4T+X0Wi
- 5EqlzmAoPpOtU8AQxHwjCEAVGju2UWeKXBYBjaZfDX0rR/NRan9Wl9oOx7z5ogM/KSEM
- lGdX8D4WjyCj1iCLaSoXY9/4AiuIFt982CcJvx9Vm+r/WeHmVIkZVvtT3n7uv5CMflbd
- Z2/oHAAmQLmE8Og6BCzpzTY+FEZDMo5JqCOSnrTuU8RzIYtzOxRcP8qNNuloy7TdKi89
- Yp2WjdAWonTVVDlk0rTgN+2cPXSEJ0BmdI62nRVD8Uk52Mic1BU1qgbIBo5joW7pnOkD
- hi3w==
-X-Gm-Message-State: AOAM5314w/hDt1I4cCJY9ySpkOFgmJPwXUOrAGvY6yzeOypfF2uVWNKU
- loGfY9Cl+fPpgLywyLvSwOPwq6/Cdu97PM0kEPg=
-X-Google-Smtp-Source: ABdhPJy2Ge/luctSUvOIM+68rpQgpNRW0g+lAZocRsQ43hHM48OLdHs5oov+1Nh/8AgCOZ/l2ub6+GqF2WIWRt2FJcs=
-X-Received: by 2002:a25:386:: with SMTP id 128mr2065928ybd.122.1604662370299; 
- Fri, 06 Nov 2020 03:32:50 -0800 (PST)
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=bO4JwNgzfLfxGdMgIq4N8FPUJUUU1BWyvxBJwMRwNOU=;
+ b=C26lbIQZEwYituyV1URkzRkCcYJP+4fBR7X9XJtc6qwBrKR6YKO97tEqL6Fu0DqNfi
+ mu9DLCc+x37spm/WtDQhA497/F8b0ijQeF3Lmr/hXx4lc2nA/Bxtl/AnXtRH4a+XSDYA
+ nt7q7wVUF1I4U0wD0UdkkmvjTABI5RM2O2MaptJf1AQVrpPUuVg0gjDhfTYZAEgYm6JH
+ xsIcNecWsUpVFLr5x3Ydy/bxp3DiVaTGfNOvMqekLDzCNEw4G68lRQtGQfE+qgpDs588
+ Q1UWzCBYrJwvGvwX4F5w3beBys2pAvAN7XSswjMq4vu0HVaATOJ0CjIAdqw37+xdxpPU
+ 2MKg==
+X-Gm-Message-State: AOAM533VDjTPmx2ZVr9M3lH+KG+rIQc0EQfnTmFGjKG/ytxUsH9m4DA/
+ 0cJYxEceCGsCGoJgujCyKMI=
+X-Google-Smtp-Source: ABdhPJy8GG5nj6kuSbHXapX7cA3uavUfmQx34quK9o+rN7jE8j0lBi7RcY0RwIICrCsTv2jzXGV2NQ==
+X-Received: by 2002:a7b:c0cc:: with SMTP id s12mr2724913wmh.41.1604672431031; 
+ Fri, 06 Nov 2020 06:20:31 -0800 (PST)
+Received: from [192.168.1.36] (234.red-83-42-66.dynamicip.rima-tde.net.
+ [83.42.66.234])
+ by smtp.gmail.com with ESMTPSA id d3sm2557753wrg.16.2020.11.06.06.20.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Nov 2020 06:20:30 -0800 (PST)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH v1 1/1] hw/intc/ibex_plic: Clear the claim register when
+ read
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
+References: <68d4575deef2559b7a747f3bda193fcf43af4558.1604629928.git.alistair.francis@wdc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <1ef9a373-9c67-d12f-014a-9a88520b9635@amsat.org>
+Date: Fri, 6 Nov 2020 15:20:29 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.3.1
 MIME-Version: 1.0
-References: <20201105175153.30489-1-alex.bennee@linaro.org>
- <20201105175153.30489-3-alex.bennee@linaro.org>
- <CAEUhbmUkwq318FW=8cTuU1fcPk8U46EEUr5f6P9QJTdonNZHJA@mail.gmail.com>
- <874km2bxbm.fsf@linaro.org>
-In-Reply-To: <874km2bxbm.fsf@linaro.org>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 6 Nov 2020 19:32:39 +0800
-Message-ID: <CAEUhbmVu64nQp-+dq=Vbvs0MZov-HcV3AW4j_ZFDP71hGcRrPA@mail.gmail.com>
-Subject: Re: [RFC PATCH 02/15] hw/riscv: migrate fdt field to generic
- MachineState
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, julien@xen.org,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Masami Hiramatsu <masami.hiramatsu@linaro.org>, 
- Andre Przywara <andre.przywara@arm.com>, stefano.stabellini@linaro.org, 
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@dabbelt.com>, stefano.stabellini@xilinx.com, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- stratos-dev@op-lists.linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b41;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb41.google.com
+In-Reply-To: <68d4575deef2559b7a747f3bda193fcf43af4558.1604629928.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::343;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x343.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+X-Spam_score_int: -14
+X-Spam_score: -1.5
+X-Spam_bar: -
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,36 +85,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2020 11:32:53 -0000
+X-List-Received-Date: Fri, 06 Nov 2020 14:20:35 -0000
 
-On Fri, Nov 6, 2020 at 6:21 PM Alex Benn=C3=A9e <alex.bennee@linaro.org> wr=
-ote:
->
->
-> Bin Meng <bmeng.cn@gmail.com> writes:
->
-> > On Fri, Nov 6, 2020 at 1:57 AM Alex Benn=C3=A9e <alex.bennee@linaro.org=
-> wrote:
-> >>
-> >> This is a mechanical change to make the fdt available through
-> >> MachineState.
-> >>
-> >> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> >> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> >> Message-Id: <20201021170842.25762-3-alex.bennee@linaro.org>
-> >> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> >> ---
-> >>  include/hw/riscv/virt.h |  1 -
-> >>  hw/riscv/virt.c         | 20 ++++++++++----------
-> >>  2 files changed, 10 insertions(+), 11 deletions(-)
-> >
-> > What about the 'sifive_u' and 'spike' machines?
->
-> If they support direct -kernel loading then we could certainly do the
-> same for them.
+On 11/6/20 3:32 AM, Alistair Francis wrote:
+> After claiming the interrupt by reading the claim register we want to
+> clear the register to make sure the interrupt doesn't appear at the next
+> read.
+> 
+> This matches the documentation for the claim register as it clears the
+> pending bit (which we already do): https://docs.opentitan.org/hw/ip/rv_plic/doc/index.html
 
-Yes, they do.
+"When an interrupt is claimed by a target the relevant bit of IP is
+cleared." Correct.
 
-Regards,
-Bin
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+
+> 
+> This also matches the current hardware.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  hw/intc/ibex_plic.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
+> index f49fa67c91..235e6b88ff 100644
+> --- a/hw/intc/ibex_plic.c
+> +++ b/hw/intc/ibex_plic.c
+> @@ -139,6 +139,9 @@ static uint64_t ibex_plic_read(void *opaque, hwaddr addr,
+>          /* Return the current claimed interrupt */
+>          ret = s->claim;
+>  
+> +        /* Clear the claimed interrupt */
+> +        s->claim = 0x00000000;
+> +
+>          /* Update the interrupt status after the claim */
+>          ibex_plic_update(s);
+>      }
+> 
+
 
