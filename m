@@ -1,78 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kb2bV-0007ci-IC
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Nov 2020 09:20:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50984)
+	id 1kcGVe-0000T9-1q
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Nov 2020 18:23:38 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57484)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kb2bT-0007bV-5e; Fri, 06 Nov 2020 09:20:35 -0500
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:50273)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kcGVc-0000SN-1n; Mon, 09 Nov 2020 18:23:36 -0500
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:40212)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kb2bR-00020s-GO; Fri, 06 Nov 2020 09:20:34 -0500
-Received: by mail-wm1-x343.google.com with SMTP id h2so1589551wmm.0;
- Fri, 06 Nov 2020 06:20:32 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kcGVa-0002yZ-6X; Mon, 09 Nov 2020 18:23:35 -0500
+Received: by mail-io1-xd44.google.com with SMTP id r9so11667718ioo.7;
+ Mon, 09 Nov 2020 15:23:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=bO4JwNgzfLfxGdMgIq4N8FPUJUUU1BWyvxBJwMRwNOU=;
- b=FpFXKo9hd2kma/8h8Oy/1fKAf7+cCLBcx2puq+XF8OMejXgN0WyHVnOFhEM2vtK1T8
- FmHh8zDnNVmXvGrD3gbQ5Uq+ITl+1b9pdgb6Qf4qWcrvTnoKWE/fncJrW8baHB1wN/uM
- lziu4ZkeZE4johUMHC3WQaFpiYEMhWd+g9trLj8FokSAkeK9Ep/ODXRU7wZuaQT48xTO
- krKvtFF4UIuFRxbdZEF8LJIHu96c2zbbiv4DXuru3oy8mogFku+BcZp8Xwqxw/zb4qq9
- 4KLH+1qrtBaVf54EFzIv0DFSQR4bqMBYNofimWyr7q6GSaI+JTnX/XfQQsTQed7T7BMg
- 3Zsg==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=/CiICKz+2B4vpnhgWNO7lP4LrrkBoaFELKFIpWJ8nuQ=;
+ b=sxDThbvMD6h4roH6euJWOZGUlF4OW3I6WBktBVEnIKGCYQp0cOpcUJ9YzlEyA1iRCK
+ peRsLJlle2CTTTv/kGDx9e/JsVbdeFDVyMQzat+VwV4uM8JwFgt0NOL6vcoKZNf2Hwzv
+ eqaRdEQu+GTTQv+qnhC4Pe35nML7Ymmqe+r2I70FPfte/fxGyGXr+akUG+MMITmOhiI4
+ SKgTJLz5NdWcAmciXJ2i3AqdwJdfCduAA2xJi1aSxgPLI0bX0VVHNypC2oF+YLcUDVkb
+ dIzLbwHlFhR+g90bnpkK6/+T/2j8LUHEHrP6RvYMsJ7eU/CGo2J6hRVVYjdAwnWtWF4M
+ 7/Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=bO4JwNgzfLfxGdMgIq4N8FPUJUUU1BWyvxBJwMRwNOU=;
- b=C26lbIQZEwYituyV1URkzRkCcYJP+4fBR7X9XJtc6qwBrKR6YKO97tEqL6Fu0DqNfi
- mu9DLCc+x37spm/WtDQhA497/F8b0ijQeF3Lmr/hXx4lc2nA/Bxtl/AnXtRH4a+XSDYA
- nt7q7wVUF1I4U0wD0UdkkmvjTABI5RM2O2MaptJf1AQVrpPUuVg0gjDhfTYZAEgYm6JH
- xsIcNecWsUpVFLr5x3Ydy/bxp3DiVaTGfNOvMqekLDzCNEw4G68lRQtGQfE+qgpDs588
- Q1UWzCBYrJwvGvwX4F5w3beBys2pAvAN7XSswjMq4vu0HVaATOJ0CjIAdqw37+xdxpPU
- 2MKg==
-X-Gm-Message-State: AOAM533VDjTPmx2ZVr9M3lH+KG+rIQc0EQfnTmFGjKG/ytxUsH9m4DA/
- 0cJYxEceCGsCGoJgujCyKMI=
-X-Google-Smtp-Source: ABdhPJy8GG5nj6kuSbHXapX7cA3uavUfmQx34quK9o+rN7jE8j0lBi7RcY0RwIICrCsTv2jzXGV2NQ==
-X-Received: by 2002:a7b:c0cc:: with SMTP id s12mr2724913wmh.41.1604672431031; 
- Fri, 06 Nov 2020 06:20:31 -0800 (PST)
-Received: from [192.168.1.36] (234.red-83-42-66.dynamicip.rima-tde.net.
- [83.42.66.234])
- by smtp.gmail.com with ESMTPSA id d3sm2557753wrg.16.2020.11.06.06.20.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 06 Nov 2020 06:20:30 -0800 (PST)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=/CiICKz+2B4vpnhgWNO7lP4LrrkBoaFELKFIpWJ8nuQ=;
+ b=Ub7OxHM5jmgqMk636FXWs4i5/c2LAUKWOZDbtZGuEvTEsJB5baVHMmZsdbaDLrPOln
+ uDpmH6QdlReCgkdzAMxDzgJ3JL8lrvNx9B7E84L0K16Re1JoZKXWJICuLUoID1Cz8jSK
+ Squ9YPTCCQbxEa/VeEsfjIzRHKjVPIl09uW/mPbTD2IAyGCOqWBllaoyyaWfe9VpVlIv
+ SF0Eg5FRyq2gZxk0UVs8O5KWDUg3JjNHfGlH8Yr3Jbd7mf4w8xqfFcHmwrrkX/HOHKfa
+ PltxRVcWnCJMR/euI9MTPqLVZ3IDAuR40/2r9zYkD85q5yZE8cYP9ut10IdpCX4Ms7sw
+ EGuA==
+X-Gm-Message-State: AOAM533vV+7Wh7v8ODDODF/0F1jza+k380CMoVPtB5DR8N5C3n4IJlq4
+ K4tvsalJTxQjknXj/IIgvLJ49ynmPoE9ptYzlXQ=
+X-Google-Smtp-Source: ABdhPJxaBO50xD8Wc31vTN9B1vm/hK1RntMTsv2LnyvfGmhQyXy8JavfwX+2dVD4WzLUYGjzmc1Oell7dwcEI8xyguc=
+X-Received: by 2002:a02:6c09:: with SMTP id w9mr1476298jab.135.1604964212294; 
+ Mon, 09 Nov 2020 15:23:32 -0800 (PST)
+MIME-Version: 1.0
+References: <68d4575deef2559b7a747f3bda193fcf43af4558.1604629928.git.alistair.francis@wdc.com>
+ <1ef9a373-9c67-d12f-014a-9a88520b9635@amsat.org>
+In-Reply-To: <1ef9a373-9c67-d12f-014a-9a88520b9635@amsat.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 9 Nov 2020 15:11:31 -0800
+Message-ID: <CAKmqyKPLg+-gmGBj0iKryOYz8VfCWFZqPccS+qLZa2qAoAwggQ@mail.gmail.com>
 Subject: Re: [PATCH v1 1/1] hw/intc/ibex_plic: Clear the claim register when
  read
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
-References: <68d4575deef2559b7a747f3bda193fcf43af4558.1604629928.git.alistair.francis@wdc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <1ef9a373-9c67-d12f-014a-9a88520b9635@amsat.org>
-Date: Fri, 6 Nov 2020 15:20:29 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.1
-MIME-Version: 1.0
-In-Reply-To: <68d4575deef2559b7a747f3bda193fcf43af4558.1604629928.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::343;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x343.google.com
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
-X-Spam_score_int: -14
-X-Spam_score: -1.5
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -85,43 +77,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2020 14:20:35 -0000
+X-List-Received-Date: Mon, 09 Nov 2020 23:23:36 -0000
 
-On 11/6/20 3:32 AM, Alistair Francis wrote:
-> After claiming the interrupt by reading the claim register we want to
-> clear the register to make sure the interrupt doesn't appear at the next
-> read.
-> 
-> This matches the documentation for the claim register as it clears the
-> pending bit (which we already do): https://docs.opentitan.org/hw/ip/rv_plic/doc/index.html
+On Fri, Nov 6, 2020 at 6:20 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org=
+> wrote:
+>
+> On 11/6/20 3:32 AM, Alistair Francis wrote:
+> > After claiming the interrupt by reading the claim register we want to
+> > clear the register to make sure the interrupt doesn't appear at the nex=
+t
+> > read.
+> >
+> > This matches the documentation for the claim register as it clears the
+> > pending bit (which we already do): https://docs.opentitan.org/hw/ip/rv_=
+plic/doc/index.html
+>
+> "When an interrupt is claimed by a target the relevant bit of IP is
+> cleared." Correct.
 
-"When an interrupt is claimed by a target the relevant bit of IP is
-cleared." Correct.
+Yep, I improved this.
 
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 
-> 
-> This also matches the current hardware.
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/intc/ibex_plic.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
-> index f49fa67c91..235e6b88ff 100644
-> --- a/hw/intc/ibex_plic.c
-> +++ b/hw/intc/ibex_plic.c
-> @@ -139,6 +139,9 @@ static uint64_t ibex_plic_read(void *opaque, hwaddr addr,
->          /* Return the current claimed interrupt */
->          ret = s->claim;
->  
-> +        /* Clear the claimed interrupt */
-> +        s->claim = 0x00000000;
-> +
->          /* Update the interrupt status after the claim */
->          ibex_plic_update(s);
->      }
-> 
+Thanks
 
+Alistair
+
+>
+> >
+> > This also matches the current hardware.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  hw/intc/ibex_plic.c | 3 +++
+> >  1 file changed, 3 insertions(+)
+> >
+> > diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
+> > index f49fa67c91..235e6b88ff 100644
+> > --- a/hw/intc/ibex_plic.c
+> > +++ b/hw/intc/ibex_plic.c
+> > @@ -139,6 +139,9 @@ static uint64_t ibex_plic_read(void *opaque, hwaddr=
+ addr,
+> >          /* Return the current claimed interrupt */
+> >          ret =3D s->claim;
+> >
+> > +        /* Clear the claimed interrupt */
+> > +        s->claim =3D 0x00000000;
+> > +
+> >          /* Update the interrupt status after the claim */
+> >          ibex_plic_update(s);
+> >      }
+> >
+>
 
