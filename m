@@ -1,61 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kecuY-0007aj-9H
-	for mharc-qemu-riscv@gnu.org; Mon, 16 Nov 2020 06:43:06 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49162)
+	id 1kfIsk-0000Ne-3z
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Nov 2020 03:32:02 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50242)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <emmanuel.blot@sifive.com>)
- id 1kecuW-0007Yq-OJ
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2020 06:43:04 -0500
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:45978)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1kfIsi-0000Ko-KF
+ for qemu-riscv@nongnu.org; Wed, 18 Nov 2020 03:32:00 -0500
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:34914)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <emmanuel.blot@sifive.com>)
- id 1kecuV-0005Fw-3b
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2020 06:43:04 -0500
-Received: by mail-wr1-x441.google.com with SMTP id p1so18302578wrf.12
- for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2020 03:43:02 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1kfIsg-0004j1-8o
+ for qemu-riscv@nongnu.org; Wed, 18 Nov 2020 03:32:00 -0500
+Received: by mail-pl1-x636.google.com with SMTP id x15so607231pll.2
+ for <qemu-riscv@nongnu.org>; Wed, 18 Nov 2020 00:31:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version; bh=0rXA8XZn7JkWwVstde3HldUwSc7whHaNTQ9ecd8UQZ4=;
- b=bez9Ev+jt6QIFIyJlrOJi44jl1sk33LV8RkSqun/AP1yn9rnO6qRjLhOHcUX/+VRK2
- dbZ6EqYm2wIEBK4zBrAoC4DbJ416juUeEJ3HAZe3f5YyCNH7im4fWlmN+xGuWuYI9Y4w
- HowmNMx+Jr2WwOdyXY5jNOUsmq/IL4a4PczbhuvYqcUpFJ/Kl8SkPIcX9rWbO3r7Rk12
- PaAoDXgP133nJXRRV0J+9ywuxV8dvgDSOmPRTXxLO69DQ1ZlxBGFqRe/QO/L3Qjw4pVN
- yExm9Mzc+H/SqiAmcGHH244FXwfp29SUkgTvPd7QsZ23mhe92r51bXgoWtFGQRjWFq2+
- fpug==
+ h=from:to:cc:subject:date:message-id;
+ bh=dMGEEcdAdGtvuOZ3lpGvjYdytytph7Url81YTIf6eKY=;
+ b=CpaVYEr2lzRghrPaPLPV5B8KL+xKQTS33Mc4vx3JLKwi+lQFffUkjpZjVEXraopjyP
+ tQD9pO9cHhFeCSSQcGaCWABCgKPfdx8Ev1X+g4zA8N9E9bNIId2fv26A2gETYC+VD2Kb
+ TMok00MBrSnnCZYawTnB0VP5m2v5kq4o8pF428ozu0E7cVLI0QwqQD3F/dLZLoYmoVcm
+ fOsK9pzazBTuhgH/ULV0jujMciCi9s7JUhp1UDvD/FqakQLMXoYdpPiF1719kEuIwq2I
+ mk/quZ9QClo9mAkoWqAyCqv7in6m16XpqpdBV81OQ7VH6wGu8lH55Cpq5gX67U0b8sWU
+ ogeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version;
- bh=0rXA8XZn7JkWwVstde3HldUwSc7whHaNTQ9ecd8UQZ4=;
- b=LKzczW/VPa3ohZT3pyip898TkbT+wZJX6tCaEmf70qiN568/99gRNyOF88nvZCL2b/
- rrlyelvIdj2iWfPGSX24T1Wms/4sXPae4CYSLNlVoVus2037ksnulNRsYDy7q3lekna9
- z7u3yKcCHDEcFxDi5kRvEF08/xcBII4jgY6I2dVm9Ch4jIWjAZ3dUq++PvAEq0vrYVC4
- GN6QcHD38pZgOiejXMs2DjeIC63z+ulf29SYwd/o4BahGTT/TVdFPwxpOYmdhqKUeo15
- M8lwRdSOG3A0UnaQ6lhYIfcFUu863FYgek8hP2KTegKRLK6gLtOoXvnpDJcg6pyQI6Qm
- b3mA==
-X-Gm-Message-State: AOAM531N5YwsNlng/oVBRH/jwbc/ifpibJLoNQqHjwTD99D53e4+aLNe
- B1+NAdW5TEsbBOp6hnIqeubPxQb+9mvuF9/H
-X-Google-Smtp-Source: ABdhPJy0RE9RlVzw9rGFyO3bzrCCcLoKdTgFAfhpqHjWUFO9PqwKUoS/h3rMZ4H5ExN0KsaCDO7YjA==
-X-Received: by 2002:adf:9124:: with SMTP id j33mr18140459wrj.376.1605526980807; 
- Mon, 16 Nov 2020 03:43:00 -0800 (PST)
-Received: from [192.168.2.1] (net.iroazh.eu. [109.190.73.171])
- by smtp.gmail.com with ESMTPSA id 36sm6158411wrf.94.2020.11.16.03.42.59
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 16 Nov 2020 03:43:00 -0800 (PST)
-From: "Emmanuel Blot" <emmanuel.blot@sifive.com>
-To: qemu-riscv@nongnu.org
-Cc: "Alistair Francis" <Alistair.Francis@wdc.com>
-Subject: Re: [PATCH 0/1] CLINT timebase frequency is invalid for sifive
- machines
-Date: Mon, 16 Nov 2020 12:42:58 +0100
-X-Mailer: MailMate (1.13.2r5673)
-Message-ID: <F8D11E62-3FF4-45F9-8EFA-303228B55808@sifive.com>
-In-Reply-To: <20201103153844.91458-1-emmanuel.blot@sifive.com>
-References: <20201103153844.91458-1-emmanuel.blot@sifive.com>
-MIME-Version: 1.0
-Content-Type: text/plain; format=flowed; markup=markdown
-Received-SPF: pass client-ip=2a00:1450:4864:20::441;
- envelope-from=emmanuel.blot@sifive.com; helo=mail-wr1-x441.google.com
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=dMGEEcdAdGtvuOZ3lpGvjYdytytph7Url81YTIf6eKY=;
+ b=tr/Im1LpilLTv77YFLjRWb6tag0hqc+fuP/5/DCISrL67OvID5coDBRaDMaq5SiqbA
+ MyGyKjSj5X+vSh/pGTwcOaWZfhgySljO0zDU38pp2bONd6FIUo0GhytSM25xvInz2T4z
+ fNW0U4XeUAKT3mvcRl7wUM+cOMzH32YwP/1Dsbr0Os9IKmnLfGJGrT7ECEhUfxA0NzAG
+ 43MS2ACRvddhJwbb+wILFaSQblkzhhYyVgFgznggns9F8+wjXLdYQIw7TwCl9kuP1Ymx
+ DNy5eJXagJ9yIw3gVLxvYKx+gamBgtndEKcmtlAnbVTN+dBcxyPpqsCHGcal2sVHyrWo
+ wHMQ==
+X-Gm-Message-State: AOAM531cMq+2Rm6X7l1cl/kV6BcIyWIF/FhlRn7prnD5IK5lWL+gqUrR
+ h+QGwXt+eW5CBT93Ba4tEak3xw==
+X-Google-Smtp-Source: ABdhPJxJHTM6fsrZpsJ28UOG7WERcQUJc86TnV0dgx/suMJkUTQxA3tBfz+CqboywVc0nnTba1rmxw==
+X-Received: by 2002:a17:90b:38e:: with SMTP id
+ ga14mr2863244pjb.45.1605688315913; 
+ Wed, 18 Nov 2020 00:31:55 -0800 (PST)
+Received: from frankchang-ThinkPad-T490.internal.sifive.com
+ (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
+ by smtp.gmail.com with ESMTPSA id y10sm1618407pjm.34.2020.11.18.00.31.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Nov 2020 00:31:55 -0800 (PST)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>
+Subject: [RFC 00/15] support subsets of bitmanip extension
+Date: Wed, 18 Nov 2020 16:29:38 +0800
+Message-Id: <20201118083044.13992-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x636.google.com
 X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
  That's all we know.
 X-Spam_score_int: -20
@@ -64,7 +61,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,34 +74,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2020 11:43:05 -0000
+X-List-Received-Date: Wed, 18 Nov 2020 08:32:01 -0000
 
-On 3 Nov 2020, at 16:38, Emmanuel Blot wrote:
+From: Frank Chang <frank.chang@sifive.com>
 
-ping
+This patchset implements RISC-V B-extension latest draft version
+(2020.10.26) Zbb, Zbs and Zba subset instructions.
 
-> CLINT mtime is a 64-bit read-write register that contains the number 
-> of cycles
-> counted from the rtcclk input. rtcclk clock for sifive machines is 
-> currently
-> defined as 10MHz, while the real HW use a 32.768KHz RTC clock source 
-> on FU310
-> (sifive_e) and 1MHz on FU540 (sifive_u).
->
-> Emmanuel Blot (1):
->   hw/riscv: clint: timebase-freq is machine-specific
->
->  hw/riscv/sifive_e.c            | 2 +-
->  hw/riscv/sifive_u.c            | 4 ++--
->  hw/riscv/spike.c               | 4 ++--
->  hw/riscv/virt.c                | 4 ++--
->  include/hw/intc/sifive_clint.h | 4 ----
->  include/hw/riscv/sifive_e.h    | 2 ++
->  include/hw/riscv/sifive_u.h    | 2 ++
->  include/hw/riscv/spike.h       | 2 ++
->  include/hw/riscv/virt.h        | 2 ++
->  9 files changed, 15 insertions(+), 11 deletions(-)
->
-> -- 
-> 2.28.0
+Specification:
+https://github.com/riscv/riscv-bitmanip/blob/master/bitmanip-draft.pdf
+
+The port is available here:
+https://github.com/sifive/qemu/tree/rvb-upstream-v1
+
+To test rvb implementation, specify cpu argument with 'x-b=true' to
+enable B-extension support.
+
+
+Frank Chang (2):
+  target/riscv: rvb: generalized reverse
+  target/riscv: rvb: generalized or-combine
+
+Kito Cheng (13):
+  target/riscv: reformat @sh format encoding for B-extension
+  target/riscv: rvb: count leading/trailing zeros
+  target/riscv: rvb: count bits set
+  target/riscv: rvb: logic-with-negate
+  target/riscv: rvb: pack two words into one register
+  target/riscv: rvb: min/max instructions
+  target/riscv: rvb: sign-extend instructions
+  target/riscv: rvb: single-bit instructions
+  target/riscv: rvb: shift ones
+  target/riscv: rvb: rotate (left/right)
+  target/riscv: rvb: address calculation
+  target/riscv: rvb: add/sub with postfix zero-extend
+  target/riscv: rvb: support and turn on B-extension from command line
+
+ target/riscv/bitmanip_helper.c          | 128 +++++
+ target/riscv/cpu.c                      |   4 +
+ target/riscv/cpu.h                      |   2 +
+ target/riscv/helper.h                   |   9 +
+ target/riscv/insn32-64.decode           |  37 ++
+ target/riscv/insn32.decode              |  54 ++-
+ target/riscv/insn_trans/trans_rvb.c.inc | 475 +++++++++++++++++++
+ target/riscv/meson.build                |   1 +
+ target/riscv/translate.c                | 597 ++++++++++++++++++++++++
+ 9 files changed, 1301 insertions(+), 6 deletions(-)
+ create mode 100644 target/riscv/bitmanip_helper.c
+ create mode 100644 target/riscv/insn_trans/trans_rvb.c.inc
+
+--
+2.17.1
+
 
