@@ -1,74 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kfIuA-0002mB-US
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Nov 2020 03:33:30 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50944)
+	id 1kfpDn-0000Zy-3O
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Nov 2020 14:03:55 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39992)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kfIu1-0002jr-Ev
- for qemu-riscv@nongnu.org; Wed, 18 Nov 2020 03:33:21 -0500
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:46055)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kfpDl-0000Za-Om
+ for qemu-riscv@nongnu.org; Thu, 19 Nov 2020 14:03:53 -0500
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529]:44882)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kfItx-0004uv-PK
- for qemu-riscv@nongnu.org; Wed, 18 Nov 2020 03:33:20 -0500
-Received: by mail-pl1-x62c.google.com with SMTP id 35so581678ple.12
- for <qemu-riscv@nongnu.org>; Wed, 18 Nov 2020 00:33:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=MgJNQhLt/SKFFCYwY2lhOXrS0IzY7NOkAfWFLkGpiVU=;
- b=LxydiKLQ/HeaeImgKvSp1Iyw9CXOpcLHye+GZ4Fi8AJnBhtjxj1Nf4RWFjYvCS83mB
- JtX5K2uAOcaVRInFdg5T403WxyhPVBpXW7HB4Mvl+wew8Dol8uzcSoLH+DQZrHIvPErd
- KNhLN+ki7xvR2LjBpV9KIIYLRBwQ6H0mGhjCq5thJ90aQs1FoxxxcsnEZG0AWnVZTML3
- aMeYkvSMsd2wOgq3QO9k98Df+l+L2eTrrAIJRC4xfwvdQ22VWXXtLDGpE+qtXfJkqqxJ
- FJgSwBM81XRtb7E4pmnRIM21akUJGau4o7SZAFNc3cKJQIwiDtqvihO928kPeC6N2H/S
- FyZg==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kfpDk-0008Fl-0v
+ for qemu-riscv@nongnu.org; Thu, 19 Nov 2020 14:03:53 -0500
+Received: by mail-pg1-x529.google.com with SMTP id q34so5052121pgb.11
+ for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2020 11:03:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=cHe1QsYXTPzUAnKoByANSg/4AbkSooIq8bZgA3/5xhs=;
+ b=v8SdT88eoKozonH7BynRIJ5CwcCryYY+b+qFrmdoYeR1Zlo/ir5REwRf2wZMiXm98X
+ 2e2fsxVYCHtl+nIMngQM5Rv64MbEjQvjc8Y/2ELcDu7B1t1NQMA2zBArEKcElrnTvHiQ
+ QDOSY0boXGi+zg2DBuR08mKgJOXArJy2iHfAmpoQbLE0k91Hk3IBVAuriM9po/gKZz2n
+ jcZeJT1ZWlzPzcUv5oC/aOzS1bRn37Dd14DIYHXYEhbIfGnnBKitStmFvQ4wpBcB09lI
+ +UhURsMd2WBFjOP39xEV/Q3mf01hv13/OaZE3gKVKGZhXnPz+1E4sxsI/AhFvkA7Osjs
+ OLng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=MgJNQhLt/SKFFCYwY2lhOXrS0IzY7NOkAfWFLkGpiVU=;
- b=AfOQsCIoSCTYpilqX57gFZGeepm7X7SWS9tVK2+lfFRJPtm8VmOdrsfKQ6McifqEl8
- uyzmyD7q7lgKj2DlfEg/H5jyLp+4RvCvoqfwHv/bLYRMt0nxZRXJb8PEP2a3QzWzO5dW
- T857Ij0tLdcUP+4UNGEQiMkcOeiAGBxyZwhWiDy9eAfxELuZWkWyhxQJlgyKokNoG2Gq
- o3uMvUCBMAWHtI+GPmb2tifCSnPZ4On5pIWSz9d4ifdD59HkC6keTof+aymdKfxeRUDj
- Zj+9apdcQp5yZtRm1lf6Vvs62NWZ0n2436kKhiYR3KakWV42JMalbc5faulvu1mXdfzM
- /YWg==
-X-Gm-Message-State: AOAM532WRgB4Qy7dhCMALvXvJxx1MHlJwwLBioWQKdadjSe7o9BVphqm
- Xua/aIR/hIN3J+2wd6uKqcR8Ig==
-X-Google-Smtp-Source: ABdhPJzCu1wvW/c/by5tkKkFUntMC+WVL3kKH5gk0Ieg0/vFRT5M3J4oYVPVsMSKxU/q0MThlNfKfQ==
-X-Received: by 2002:a17:90a:de89:: with SMTP id
- n9mr3050085pjv.224.1605688396444; 
- Wed, 18 Nov 2020 00:33:16 -0800 (PST)
-Received: from frankchang-ThinkPad-T490.internal.sifive.com
- (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id y10sm1618407pjm.34.2020.11.18.00.33.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Nov 2020 00:33:16 -0800 (PST)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Kito Cheng <kito.cheng@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=cHe1QsYXTPzUAnKoByANSg/4AbkSooIq8bZgA3/5xhs=;
+ b=eby7rVq4HDb3Jbt74CNvj2YkiSvdN4Bfi6XWnQXfXLli2daLGP2RkmIeBaIm2d+s/0
+ fbZ0fbi+TNPx08qXzccqWLcpogmDkRLV9Swo+kw5x6c6mYdCdKLXpT6PlYOinE54TEJM
+ W/b1VxQAIHltNncHETIpIBGpd1kVLhfbbvwY42GjwDJqIfFfp9aYAWBGe7yxgKg35A23
+ uEFrnV5JctKwYNpkj2tXP/iARaWTluuOwuvj6E5ys8HN6M74IJK/5W/u4M0pUng5kTFm
+ LkPZAacwBFGmtgh/WuaDYZyj5fhnb8ARdwVHvCgaFyhiooHO700rGmPh33wF8/Hhr4tM
+ cBmw==
+X-Gm-Message-State: AOAM532rdnsBRAsa4GFJw1b8weZKvgR+fFTxaEn6aNWhycXLmLwoie9b
+ ne3D5k/MU0vFDaNAVILflEqHsQ==
+X-Google-Smtp-Source: ABdhPJyZiEnLSpw+68GrnIiEUNwgInScnNAfo1FiSIf3fzm3x9cM2JoUWzpQbKyl3bTnRt8GW4cNJg==
+X-Received: by 2002:a63:f24f:: with SMTP id d15mr13727569pgk.276.1605812630281; 
+ Thu, 19 Nov 2020 11:03:50 -0800 (PST)
+Received: from [192.168.1.11] ([71.212.141.89])
+ by smtp.gmail.com with ESMTPSA id y5sm394023pja.52.2020.11.19.11.03.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Nov 2020 11:03:49 -0800 (PST)
+Subject: Re: [RFC 01/15] target/riscv: reformat @sh format encoding for
+ B-extension
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Kito Cheng <kito.cheng@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC 15/15] target/riscv: rvb: support and turn on B-extension from
- command line
-Date: Wed, 18 Nov 2020 16:29:53 +0800
-Message-Id: <20201118083044.13992-16-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201118083044.13992-1-frank.chang@sifive.com>
 References: <20201118083044.13992-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62c.google.com
-X-detected-operating-system: by eggs.gnu.org: No matching host in p0f cache.
- That's all we know.
+ <20201118083044.13992-2-frank.chang@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <5aeb4fd2-ecfe-8ddc-457d-d6feb9e533b4@linaro.org>
+Date: Thu, 19 Nov 2020 11:03:46 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <20201118083044.13992-2-frank.chang@sifive.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,62 +84,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2020 08:33:22 -0000
+X-List-Received-Date: Thu, 19 Nov 2020 19:03:54 -0000
 
-From: Kito Cheng <kito.cheng@sifive.com>
+On 11/18/20 12:29 AM, frank.chang@sifive.com wrote:
+> -slli     00.... ......    ..... 001 ..... 0010011 @sh
+> -srli     00.... ......    ..... 101 ..... 0010011 @sh
+> -srai     01.... ......    ..... 101 ..... 0010011 @sh
+> +slli     000000 ......    ..... 001 ..... 0010011 @sh
+> +srli     000000 ......    ..... 101 ..... 0010011 @sh
+> +srai     010000 ......    ..... 101 ..... 0010011 @sh
 
-B-extension is default off, use cpu rv32 or rv64 with x-b=true to
-enable B-extension.
+We need at least 7 bits here for rv128, if we ever get around to it.  The code
+in trans_slli et al already eliminates numbers that are two large.
 
-Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
----
- target/riscv/cpu.c | 4 ++++
- target/riscv/cpu.h | 2 ++
- 2 files changed, 6 insertions(+)
+In the rvb draft, only 5 bits are used in the uppermost field.  Let's leave it
+at that.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0bbfd7f4574..bc29e118c6d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -438,6 +438,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         if (cpu->cfg.ext_h) {
-             target_misa |= RVH;
-         }
-+        if (cpu->cfg.ext_b) {
-+            target_misa |= RVB;
-+        }
-         if (cpu->cfg.ext_v) {
-             target_misa |= RVV;
-             if (!is_power_of_2(cpu->cfg.vlen)) {
-@@ -515,6 +518,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
-     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-     /* This is experimental so mark with 'x-' */
-+    DEFINE_PROP_BOOL("x-b", RISCVCPU, cfg.ext_b, true),
-     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index de4705bb578..c1c77c58a87 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -66,6 +66,7 @@
- #define RVS RV('S')
- #define RVU RV('U')
- #define RVH RV('H')
-+#define RVB RV('B')
- 
- /* S extension denotes that Supervisor mode exists, however it is possible
-    to have a core that support S mode but does not have an MMU and there
-@@ -278,6 +279,7 @@ struct RISCVCPU {
-         bool ext_f;
-         bool ext_d;
-         bool ext_c;
-+        bool ext_b;
-         bool ext_s;
-         bool ext_u;
-         bool ext_h;
--- 
-2.17.1
 
+r~
 
