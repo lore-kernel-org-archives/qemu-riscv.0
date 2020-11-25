@@ -1,44 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ki2T1-0002RP-67
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Nov 2020 16:36:47 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37064)
+	id 1ki2T2-0002Vc-Ey
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Nov 2020 16:36:48 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37102)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1ki2St-0002GV-7Z; Wed, 25 Nov 2020 16:36:39 -0500
-Received: from home.keithp.com ([63.227.221.253]:36982 helo=elaine.keithp.com)
+ id 1ki2Su-0002HN-5I; Wed, 25 Nov 2020 16:36:40 -0500
+Received: from home.keithp.com ([63.227.221.253]:36996 helo=elaine.keithp.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1ki2Sp-0001Ba-Dy; Wed, 25 Nov 2020 16:36:39 -0500
+ id 1ki2Sq-0001Bf-52; Wed, 25 Nov 2020 16:36:39 -0500
 Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id 238413F2E28A;
+ by elaine.keithp.com (Postfix) with ESMTP id 89F463F2E287;
  Wed, 25 Nov 2020 13:36:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1606340193; bh=DRJ6/DHicq2mSvhQCrjSykm8dwPaSFkW7Nr657PAZLg=;
+ t=1606340193; bh=ucNKh77OzVLNS+gUqg/sKa8VObA3ffyFcmQtQOpJAL0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ltRYGmdQMPo0ekJr9k9RKUdwE4pwasHuOvPS9Mnn28p0aMe+1Wkop5sJ7UzZq2sU0
- 6m9FTSYfqI6tpJKnhylr0/4KNcwYsDBi2qVQ0a7agoHnsdfvdhkzIhpyn+3CIb5+V+
- /BilTgxQQf/fuAf9FVzSIdIlTm1bqLknpzhSjwdkWCUkH+3hMvZTOCZZ/sU9lbVona
- l0wkKq1/LUVo8DOvTcgFDlAr4NPSo8RbmXC+9GdRUJkoT0L027sa32XdCh2FhlTwO3
- wqnkU9yoeJR5MywK0jz1Y3RffW7QIP4AinjOowqjaqOcIEb+lZ6SbFo3HSeXF1kJIk
- RfrNwCpXkQg2Q==
+ b=rhFnNMVkhEJOQ/G1NT7POTePOprhKNysFFopmn+K1uIu70lqsZmimvMpXQ/RzXcYX
+ hJUUsWGNSPRQr2iCAs7D6ZC9EdCqjE5mdjAS69FOX289AFupI4h06HUczU8dXmLSJi
+ fxtAZI3vMEdnC7Z1nMrQRkQ5n3ZwDD4e5M2KMuEEvP31Ww8/ZXQWACrDizzIHTSZhv
+ Gbuvk9InfLVjSFkiGDcGQwTXvWEWbWK1DIkOdfKka8CPweoJr4J7wPwzoiaFEmmnl1
+ Hr2P71Oc+NteyCzDv5Z8yJngHdTPPQxew1b4yPdtdNHyZRKfIxx8rPjKN2pRtdHnrl
+ QQCpe1al1eMHQ==
 X-Virus-Scanned: Debian amavisd-new at keithp.com
 Received: from elaine.keithp.com ([127.0.0.1])
  by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id MjbXJGeWx0Cg; Wed, 25 Nov 2020 13:36:32 -0800 (PST)
+ with LMTP id qw-sEiOuqp2k; Wed, 25 Nov 2020 13:36:32 -0800 (PST)
 Received: from keithp.com (koto.keithp.com [10.0.0.2])
- by elaine.keithp.com (Postfix) with ESMTPSA id 9C2873F2E287;
+ by elaine.keithp.com (Postfix) with ESMTPSA id BD7F33F2E28C;
  Wed, 25 Nov 2020 13:36:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1606340191; bh=DRJ6/DHicq2mSvhQCrjSykm8dwPaSFkW7Nr657PAZLg=;
+ t=1606340191; bh=ucNKh77OzVLNS+gUqg/sKa8VObA3ffyFcmQtQOpJAL0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Y9kBG99nG6Rbnwzm8WG13EVYOhkZdQJPQazbHLV3vw+d4KZUPz+XBIp21dA4RAGoX
- gIILxSocTLZv+rvpMzmWEAL+uZvEVcFoInevg7gw4zkuSGVt3s0nhC8qkc90qIzO+m
- Vlku7qN16pqXwCItbQT2JWJi0VyldYrzN7N1giC/Ru2qzMhktRsB5l0CQQ03yQojmR
- 2D0XXqsnaYCiOdGuglsC6tC8T14PW/fuf62bmP8CbnuPioPQ+SF/QOlF0bL79Ou1rs
- 0xX1llKukjq6KcRLVdy9TehJnLBbv2NEhAQ9AOYPBR6D9zHZIFnOjCrR34iOkQPdI/
- T46+7oN3wSeQA==
+ b=SsPwryINOiFi5KhyzLlUW7ZS+i3LsWCB3FW6Sb7Wp5j8FgjUoQRqSC0k2ntQpJyCN
+ ze38eGyHEmsOB2kVDUrXpvnm6JKw2rdiwZGCfn5iNrmSADL1PeKHFlsvr1WoEhORHa
+ RIN0f6CAQsJkkplX7dkJhEbUEZMBPAymljLAchRtHlTSClgt4guAPqMc7PpeR5jkxx
+ 2/dCEAbRWBoHWahf6bxtSj1SiAXqicy9YwZOqm54bJfQKt3J0kfHJrMl93V5aYk3ua
+ NZs9PgNG5duwCp0c810jO1ykOyc7uosA6tZEU1kPuEin5NlVRRlCYm78H1sAc/xZXz
+ DxLxX5hXZ3oDQ==
 Received: by keithp.com (Postfix, from userid 1000)
- id 8C00E15821B9; Wed, 25 Nov 2020 13:36:31 -0800 (PST)
+ id A4CB615821C5; Wed, 25 Nov 2020 13:36:31 -0800 (PST)
 From: Keith Packard <keithp@keithp.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -47,12 +47,10 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
  Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Keith Packard <keithp@keithp.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 1/8] semihosting: Move ARM semihosting code to shared
- directories [v3]
-Date: Wed, 25 Nov 2020 13:36:10 -0800
-Message-Id: <20201125213617.2496935-2-keithp@keithp.com>
+ Keith Packard <keithp@keithp.com>
+Subject: [PATCH 5/8] riscv: Add semihosting support [v13]
+Date: Wed, 25 Nov 2020 13:36:14 -0800
+Message-Id: <20201125213617.2496935-6-keithp@keithp.com>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201125213617.2496935-1-keithp@keithp.com>
 References: <20201125213617.2496935-1-keithp@keithp.com>
@@ -78,139 +76,483 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2020 21:36:39 -0000
+X-List-Received-Date: Wed, 25 Nov 2020 21:36:40 -0000
 
-This commit renames two files which provide ARM semihosting support so
-that they can be shared by other architectures:
+Adapt the arm semihosting support code for RISCV. This implementation
+is based on the standard for RISC-V semihosting version 0.2 as
+documented in
 
- 1. target/arm/arm-semi.c     -> hw/semihosting/common-semi.c
- 2. linux-user/arm/semihost.c -> linux-user/semihost.c
-
-The build system was modified use a new config variable,
-CONFIG_ARM_COMPATIBLE_SEMIHOSTING, which has been added to the ARM
-softmmu and linux-user default configs. The contents of the source
-files has not been changed in this patch.
+   https://github.com/riscv/riscv-semihosting-spec/releases/tag/0.2
 
 Signed-off-by: Keith Packard <keithp@keithp.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-----
-
-v2
-	Place common-semi.c name in arm_ss, just as arm-semi.c was
-
-v3
-	Create CONFIG_ARM_COMPATIBLE_SEMIHOSTING and assign in
-	arm config files
 ---
- default-configs/devices/arm-softmmu.mak               | 1 +
- default-configs/targets/aarch64-linux-user.mak        | 1 +
- default-configs/targets/arm-linux-user.mak            | 1 +
- hw/semihosting/Kconfig                                | 3 +++
- target/arm/arm-semi.c => hw/semihosting/common-semi.c | 0
- hw/semihosting/meson.build                            | 3 +++
- linux-user/arm/meson.build                            | 3 ---
- linux-user/meson.build                                | 1 +
- linux-user/{arm => }/semihost.c                       | 0
- target/arm/meson.build                                | 2 --
- 10 files changed, 10 insertions(+), 5 deletions(-)
- rename target/arm/arm-semi.c => hw/semihosting/common-semi.c (100%)
- rename linux-user/{arm => }/semihost.c (100%)
 
-diff --git a/default-configs/devices/arm-softmmu.mak b/default-configs/devices/arm-softmmu.mak
-index 08a32123b4..0500156a0c 100644
---- a/default-configs/devices/arm-softmmu.mak
-+++ b/default-configs/devices/arm-softmmu.mak
-@@ -42,4 +42,5 @@ CONFIG_FSL_IMX25=y
- CONFIG_FSL_IMX7=y
- CONFIG_FSL_IMX6UL=y
- CONFIG_SEMIHOSTING=y
+v2:
+	Update PC after exception is handled to follow
+	change in the ARM version for SYS_READC
+
+v3:
+	Disallow semihosting in user mode; report a regular
+	breakpoint in that case.
+
+v4:
+	Fix errors reported by checkpatch
+
+v5:
+	Reference current RISC-V semihosting specification
+
+v6:
+	Add support for semihosting in riscv64-linux-user and
+	riscv32-linux-user
+
+v7:
+	Add meson build support
+
+v8:
+	Fix errors reported by checkpatch that crept in.
+
+v9:
+	Changes suggested by Alistair Francis <alistair23@gmail.com>:
+	Don't add me to the MAINTAINERS file.
+	Remove duplicate #include in target/riscv/cpu.h
+	Reference RISC-V semihosting spec in target/riscv/riscv-semi.c
+
+v10:
+	Use common semihosting implementation instead of a separate copy.
+
+	Make sure addresses of the three breakpoint-signaling
+	instructions all lie within the same page. Change suggested by
+	Richard Henderson <richard.henderson@linaro.org>
+
+v11:
+	Use CONFIG_ARM_COMPATIBLE_SEMIHOSTING
+
+v12:
+	Fix bug in SYS_EXIT support on rv64
+
+v13:
+	Add common_semi_rambase implementation. This locates the
+	memory region containing the stack and uses the base of that.
+
+	Fix SET_ARG and GET_ARG on rv64 targets to operate on 64-bit
+	values rather than 32-bit. Put_user_ual/get_user_ual are
+	confusingly defined by softmmu-semi.h as being equivalent to
+	put_user_u32/get_user_u32.
+---
+ default-configs/devices/riscv32-softmmu.mak   |  2 +
+ default-configs/devices/riscv64-softmmu.mak   |  2 +
+ .../targets/riscv32-linux-user.mak            |  1 +
+ .../targets/riscv64-linux-user.mak            |  1 +
+ hw/semihosting/common-semi.c                  | 82 ++++++++++++++++++-
+ hw/semihosting/common-semi.h                  |  5 +-
+ linux-user/qemu.h                             |  4 +-
+ linux-user/semihost.c                         |  8 +-
+ qemu-options.hx                               | 10 ++-
+ target/riscv/cpu_bits.h                       |  1 +
+ target/riscv/cpu_helper.c                     | 10 +++
+ .../riscv/insn_trans/trans_privileged.c.inc   | 37 ++++++++-
+ target/riscv/translate.c                      | 11 +++
+ 13 files changed, 162 insertions(+), 12 deletions(-)
+
+diff --git a/default-configs/devices/riscv32-softmmu.mak b/default-configs/devices/riscv32-softmmu.mak
+index 94a236c9c2..d847bd5692 100644
+--- a/default-configs/devices/riscv32-softmmu.mak
++++ b/default-configs/devices/riscv32-softmmu.mak
+@@ -3,6 +3,8 @@
+ # Uncomment the following lines to disable these optional devices:
+ #
+ #CONFIG_PCI_DEVICES=n
++CONFIG_SEMIHOSTING=y
 +CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
- CONFIG_ALLWINNER_H3=y
-diff --git a/default-configs/targets/aarch64-linux-user.mak b/default-configs/targets/aarch64-linux-user.mak
-index 163c9209f4..4713253709 100644
---- a/default-configs/targets/aarch64-linux-user.mak
-+++ b/default-configs/targets/aarch64-linux-user.mak
-@@ -2,3 +2,4 @@ TARGET_ARCH=aarch64
- TARGET_BASE_ARCH=arm
- TARGET_XML_FILES= gdb-xml/aarch64-core.xml gdb-xml/aarch64-fpu.xml gdb-xml/arm-core.xml gdb-xml/arm-vfp.xml gdb-xml/arm-vfp3.xml gdb-xml/arm-neon.xml gdb-xml/arm-m-profile.xml
- TARGET_HAS_BFLT=y
-+CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
-diff --git a/default-configs/targets/arm-linux-user.mak b/default-configs/targets/arm-linux-user.mak
-index c7cd872e86..e741ffd4d3 100644
---- a/default-configs/targets/arm-linux-user.mak
-+++ b/default-configs/targets/arm-linux-user.mak
-@@ -3,3 +3,4 @@ TARGET_SYSTBL_ABI=common,oabi
- TARGET_SYSTBL=syscall.tbl
- TARGET_XML_FILES= gdb-xml/arm-core.xml gdb-xml/arm-vfp.xml gdb-xml/arm-vfp3.xml gdb-xml/arm-neon.xml gdb-xml/arm-m-profile.xml
- TARGET_HAS_BFLT=y
-+CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
-diff --git a/hw/semihosting/Kconfig b/hw/semihosting/Kconfig
-index efe0a30734..4c30dc6b16 100644
---- a/hw/semihosting/Kconfig
-+++ b/hw/semihosting/Kconfig
-@@ -1,3 +1,6 @@
  
- config SEMIHOSTING
-        bool
+ # Boards:
+ #
+diff --git a/default-configs/devices/riscv64-softmmu.mak b/default-configs/devices/riscv64-softmmu.mak
+index 76b6195648..d5eec75f05 100644
+--- a/default-configs/devices/riscv64-softmmu.mak
++++ b/default-configs/devices/riscv64-softmmu.mak
+@@ -3,6 +3,8 @@
+ # Uncomment the following lines to disable these optional devices:
+ #
+ #CONFIG_PCI_DEVICES=n
++CONFIG_SEMIHOSTING=y
++CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+ 
+ # Boards:
+ #
+diff --git a/default-configs/targets/riscv32-linux-user.mak b/default-configs/targets/riscv32-linux-user.mak
+index dfb259e8aa..6a9d1b1bc1 100644
+--- a/default-configs/targets/riscv32-linux-user.mak
++++ b/default-configs/targets/riscv32-linux-user.mak
+@@ -2,3 +2,4 @@ TARGET_ARCH=riscv32
+ TARGET_BASE_ARCH=riscv
+ TARGET_ABI_DIR=riscv
+ TARGET_XML_FILES= gdb-xml/riscv-32bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-32bit-csr.xml gdb-xml/riscv-32bit-virtual.xml
++CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+diff --git a/default-configs/targets/riscv64-linux-user.mak b/default-configs/targets/riscv64-linux-user.mak
+index b13895f3b0..0a92849a1b 100644
+--- a/default-configs/targets/riscv64-linux-user.mak
++++ b/default-configs/targets/riscv64-linux-user.mak
+@@ -2,3 +2,4 @@ TARGET_ARCH=riscv64
+ TARGET_BASE_ARCH=riscv
+ TARGET_ABI_DIR=riscv
+ TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-csr.xml gdb-xml/riscv-64bit-virtual.xml
++CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+diff --git a/hw/semihosting/common-semi.c b/hw/semihosting/common-semi.c
+index ddfa448cc2..2b6a3fd9fd 100644
+--- a/hw/semihosting/common-semi.c
++++ b/hw/semihosting/common-semi.c
+@@ -1,6 +1,6 @@
+ /*
+  *  Semihosting support for systems modeled on the Arm "Angel"
+- *  semihosting syscalls design.
++ *  semihosting syscalls design. This includes Arm and RISC-V processors
+  *
+  *  Copyright (c) 2005, 2007 CodeSourcery.
+  *  Copyright (c) 2019 Linaro
+@@ -25,6 +25,10 @@
+  *  ARM Semihosting is documented in:
+  *     Semihosting for AArch32 and AArch64 Release 2.0
+  *     https://static.docs.arm.com/100863/0200/semihosting.pdf
++ *
++ *  RISC-V Semihosting is documented in:
++ *     RISC-V Semihosting
++ *     https://github.com/riscv/riscv-semihosting-spec/blob/main/riscv-semihosting-spec.adoc
+  */
+ 
+ #include "qemu/osdep.h"
+@@ -217,6 +221,42 @@ common_semi_rambase(CPUState *cs)
+ 
+ #endif /* TARGET_ARM */
+ 
++#ifdef TARGET_RISCV
++static inline target_ulong
++common_semi_arg(CPUState *cs, int argno)
++{
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    CPURISCVState *env = &cpu->env;
++    return env->gpr[xA0 + argno];
++}
 +
-+config ARM_COMPATIBLE_SEMIHOSTING
-+       bool
-diff --git a/target/arm/arm-semi.c b/hw/semihosting/common-semi.c
-similarity index 100%
-rename from target/arm/arm-semi.c
-rename to hw/semihosting/common-semi.c
-diff --git a/hw/semihosting/meson.build b/hw/semihosting/meson.build
-index f40ac574c4..5b4a170270 100644
---- a/hw/semihosting/meson.build
-+++ b/hw/semihosting/meson.build
-@@ -2,3 +2,6 @@ specific_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
-   'config.c',
-   'console.c',
- ))
++static inline void
++common_semi_set_ret(CPUState *cs, target_ulong ret)
++{
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    CPURISCVState *env = &cpu->env;
++    env->gpr[xA0] = ret;
++}
 +
-+specific_ss.add(when: ['CONFIG_ARM_COMPATIBLE_SEMIHOSTING'],
-+		if_true: files('common-semi.c'))
-diff --git a/linux-user/arm/meson.build b/linux-user/arm/meson.build
-index 432984b58e..5a93c925cf 100644
---- a/linux-user/arm/meson.build
-+++ b/linux-user/arm/meson.build
-@@ -1,6 +1,3 @@
--linux_user_ss.add(when: 'TARGET_AARCH64', if_true: files('semihost.c'))
--linux_user_ss.add(when: 'TARGET_ARM', if_true: files('semihost.c'))
--
- subdir('nwfpe')
++static inline bool
++common_semi_sys_exit_extended(CPUState *cs, int nr)
++{
++    return (nr == TARGET_SYS_EXIT_EXTENDED || sizeof(target_ulong) == 8);
++}
++
++#ifndef CONFIG_USER_ONLY
++
++static inline target_ulong
++common_semi_rambase(CPUState *cs)
++{
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    CPURISCVState *env = &cpu->env;
++    return common_semi_find_region_base(env->gpr[xSP]);
++}
++#endif
++
++#endif
++
+ /*
+  * Allocate a new guest file descriptor and return it; if we
+  * couldn't allocate a new fd then return -1.
+@@ -393,6 +433,12 @@ static target_ulong common_semi_flen_buf(CPUState *cs)
+         sp = env->regs[13];
+     }
+ #endif
++#ifdef TARGET_RISCV
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    CPURISCVState *env = &cpu->env;
++
++    sp = env->gpr[xSP];
++#endif
  
- syscall_nr_generators += {
-diff --git a/linux-user/meson.build b/linux-user/meson.build
-index 2b94e4ba24..7fe28d659e 100644
---- a/linux-user/meson.build
-+++ b/linux-user/meson.build
-@@ -16,6 +16,7 @@ linux_user_ss.add(rt)
+     return sp - 64;
+ }
+@@ -736,6 +782,37 @@ static const GuestFDFunctions guestfd_fns[] = {
+      put_user_u32(val, args + (n) * 4))
+ #endif
  
- linux_user_ss.add(when: 'TARGET_HAS_BFLT', if_true: files('flatload.c'))
- linux_user_ss.add(when: 'TARGET_I386', if_true: files('vm86.c'))
-+linux_user_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING', if_true: files('semihost.c'))
++#ifdef TARGET_RISCV
++
++/*
++ * get_user_ual is defined as get_user_u32 in softmmu-semi.h,
++ * we need a macro that fetches a target_ulong
++ */
++#define get_user_utl(arg, p)                    \
++    ((sizeof(target_ulong) == 8) ?              \
++     get_user_u64(arg, p) :                     \
++     get_user_u32(arg, p))
++
++/*
++ * put_user_ual is defined as put_user_u32 in softmmu-semi.h,
++ * we need a macro that stores a target_ulong
++ */
++#define put_user_utl(arg, p)                    \
++    ((sizeof(target_ulong) == 8) ?              \
++     put_user_u64(arg, p) :                     \
++     put_user_u32(arg, p))
++
++#define GET_ARG(n) do {                                                 \
++        if (get_user_utl(arg ## n, args + (n) * sizeof(target_ulong))) { \
++            errno = EFAULT;                                             \
++            return set_swi_errno(cs, -1);                              \
++        }                                                               \
++    } while (0)
++
++#define SET_ARG(n, val)                                 \
++    put_user_utl(val, args + (n) * sizeof(target_ulong))
++#endif
++
+ /*
+  * Do a semihosting call.
+  *
+@@ -1174,6 +1251,9 @@ target_ulong do_common_semihosting(CPUState *cs)
+         if (is_a64(cs->env_ptr)) {
+             return 0;
+         }
++#endif
++#ifdef TARGET_RISCV
++        return 0;
+ #endif
+         /* fall through -- invalid for A32/T32 */
+     default:
+diff --git a/hw/semihosting/common-semi.h b/hw/semihosting/common-semi.h
+index bc53e92c79..0bfab1c669 100644
+--- a/hw/semihosting/common-semi.h
++++ b/hw/semihosting/common-semi.h
+@@ -1,6 +1,6 @@
+ /*
+  *  Semihosting support for systems modeled on the Arm "Angel"
+- *  semihosting syscalls design.
++ *  semihosting syscalls design. This includes Arm and RISC-V processors
+  *
+  *  Copyright (c) 2005, 2007 CodeSourcery.
+  *  Copyright (c) 2019 Linaro
+@@ -26,6 +26,9 @@
+  *     Semihosting for AArch32 and AArch64 Release 2.0
+  *     https://static.docs.arm.com/100863/0200/semihosting.pdf
+  *
++ *  RISC-V Semihosting is documented in:
++ *     RISC-V Semihosting
++ *     https://github.com/riscv/riscv-semihosting-spec/blob/main/riscv-semihosting-spec.adoc
+  */
  
+ #ifndef COMMON_SEMI_H
+diff --git a/linux-user/qemu.h b/linux-user/qemu.h
+index 534753ca12..17aa992165 100644
+--- a/linux-user/qemu.h
++++ b/linux-user/qemu.h
+@@ -109,6 +109,8 @@ typedef struct TaskState {
+     /* FPA state */
+     FPA11 fpa;
+ # endif
++#endif
++#if defined(TARGET_ARM) || defined(TARGET_RISCV)
+     int swi_errno;
+ #endif
+ #if defined(TARGET_I386) && !defined(TARGET_X86_64)
+@@ -122,7 +124,7 @@ typedef struct TaskState {
+ #ifdef TARGET_M68K
+     abi_ulong tp_value;
+ #endif
+-#if defined(TARGET_ARM) || defined(TARGET_M68K)
++#if defined(TARGET_ARM) || defined(TARGET_M68K) || defined(TARGET_RISCV)
+     /* Extra fields for semihosted binaries.  */
+     abi_ulong heap_base;
+     abi_ulong heap_limit;
+diff --git a/linux-user/semihost.c b/linux-user/semihost.c
+index a1f0f6050e..c0015ee7f6 100644
+--- a/linux-user/semihost.c
++++ b/linux-user/semihost.c
+@@ -1,11 +1,11 @@
+ /*
+- * ARM Semihosting Console Support
++ * ARM Compatible Semihosting Console Support.
+  *
+  * Copyright (c) 2019 Linaro Ltd
+  *
+- * Currently ARM is unique in having support for semihosting support
+- * in linux-user. So for now we implement the common console API but
+- * just for arm linux-user.
++ * Currently ARM and RISC-V are unique in having support for
++ * semihosting support in linux-user. So for now we implement the
++ * common console API but just for arm and risc-v linux-user.
+  *
+  * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+diff --git a/qemu-options.hx b/qemu-options.hx
+index 104632ea34..22b4d704b6 100644
+--- a/qemu-options.hx
++++ b/qemu-options.hx
+@@ -4186,10 +4186,10 @@ ERST
+ DEF("semihosting", 0, QEMU_OPTION_semihosting,
+     "-semihosting    semihosting mode\n",
+     QEMU_ARCH_ARM | QEMU_ARCH_M68K | QEMU_ARCH_XTENSA | QEMU_ARCH_LM32 |
+-    QEMU_ARCH_MIPS | QEMU_ARCH_NIOS2)
++    QEMU_ARCH_MIPS | QEMU_ARCH_NIOS2 | QEMU_ARCH_RISCV)
+ SRST
+ ``-semihosting``
+-    Enable semihosting mode (ARM, M68K, Xtensa, MIPS, Nios II only).
++    Enable semihosting mode (ARM, M68K, Xtensa, MIPS, Nios II, RISC-V only).
  
- syscall_nr_generators = {}
-diff --git a/linux-user/arm/semihost.c b/linux-user/semihost.c
-similarity index 100%
-rename from linux-user/arm/semihost.c
-rename to linux-user/semihost.c
-diff --git a/target/arm/meson.build b/target/arm/meson.build
-index f5de2a77b8..15b936c101 100644
---- a/target/arm/meson.build
-+++ b/target/arm/meson.build
-@@ -32,8 +32,6 @@ arm_ss.add(files(
- ))
- arm_ss.add(zlib)
+     Note that this allows guest direct access to the host filesystem, so
+     should only be used with a trusted guest OS.
+@@ -4201,10 +4201,10 @@ DEF("semihosting-config", HAS_ARG, QEMU_OPTION_semihosting_config,
+     "-semihosting-config [enable=on|off][,target=native|gdb|auto][,chardev=id][,arg=str[,...]]\n" \
+     "                semihosting configuration\n",
+ QEMU_ARCH_ARM | QEMU_ARCH_M68K | QEMU_ARCH_XTENSA | QEMU_ARCH_LM32 |
+-QEMU_ARCH_MIPS | QEMU_ARCH_NIOS2)
++QEMU_ARCH_MIPS | QEMU_ARCH_NIOS2 | QEMU_ARCH_RISCV)
+ SRST
+ ``-semihosting-config [enable=on|off][,target=native|gdb|auto][,chardev=id][,arg=str[,...]]``
+-    Enable and configure semihosting (ARM, M68K, Xtensa, MIPS, Nios II
++    Enable and configure semihosting (ARM, M68K, Xtensa, MIPS, Nios II, RISC-V
+     only).
  
--arm_ss.add(when: 'CONFIG_TCG', if_true: files('arm-semi.c'))
--
- arm_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c', 'kvm64.c'), if_false: files('kvm-stub.c'))
+     Note that this allows guest direct access to the host filesystem, so
+@@ -4219,6 +4219,8 @@ SRST
+     open/read/write/seek/select. Tensilica baremetal libc for ISS and
+     linux platform "sim" use this interface.
  
- arm_ss.add(when: 'TARGET_AARCH64', if_true: files(
++    On RISC-V this implements the standard semihosting API, version 0.2.
++
+     ``target=native|gdb|auto``
+         Defines where the semihosting calls will be addressed, to QEMU
+         (``native``) or to GDB (``gdb``). The default is ``auto``, which
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 24b24c69c5..f0d3d1c07e 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -544,6 +544,7 @@
+ #define RISCV_EXCP_INST_PAGE_FAULT               0xc /* since: priv-1.10.0 */
+ #define RISCV_EXCP_LOAD_PAGE_FAULT               0xd /* since: priv-1.10.0 */
+ #define RISCV_EXCP_STORE_PAGE_FAULT              0xf /* since: priv-1.10.0 */
++#define RISCV_EXCP_SEMIHOST                      0x10
+ #define RISCV_EXCP_INST_GUEST_PAGE_FAULT         0x14
+ #define RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT       0x15
+ #define RISCV_EXCP_VIRT_INSTRUCTION_FAULT        0x16
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index a2787b1d48..e730fd1fe9 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -24,6 +24,7 @@
+ #include "exec/exec-all.h"
+ #include "tcg/tcg-op.h"
+ #include "trace.h"
++#include "hw/semihosting/common-semi.h"
+ 
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+ {
+@@ -844,6 +845,15 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+     target_ulong htval = 0;
+     target_ulong mtval2 = 0;
+ 
++    if  (cause == RISCV_EXCP_SEMIHOST) {
++        if (env->priv >= PRV_S) {
++            env->gpr[xA0] = do_common_semihosting(cs);
++            env->pc += 4;
++            return;
++        }
++        cause = RISCV_EXCP_BREAKPOINT;
++    }
++
+     if (!async) {
+         /* set tval to badaddr for traps with address information */
+         switch (cause) {
+diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+index 2a61a853bf..32312be202 100644
+--- a/target/riscv/insn_trans/trans_privileged.c.inc
++++ b/target/riscv/insn_trans/trans_privileged.c.inc
+@@ -29,7 +29,42 @@ static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
+ 
+ static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
+ {
+-    generate_exception(ctx, RISCV_EXCP_BREAKPOINT);
++    target_ulong    ebreak_addr = ctx->base.pc_next;
++    target_ulong    pre_addr = ebreak_addr - 4;
++    target_ulong    post_addr = ebreak_addr + 4;
++    uint32_t pre    = 0;
++    uint32_t ebreak = 0;
++    uint32_t post   = 0;
++
++    /*
++     * The RISC-V semihosting spec specifies the following
++     * three-instruction sequence to flag a semihosting call:
++     *
++     *      slli zero, zero, 0x1f       0x01f01013
++     *      ebreak                      0x00100073
++     *      srai zero, zero, 0x7        0x40705013
++     *
++     * The two shift operations on the zero register are no-ops, used
++     * here to signify a semihosting exception, rather than a breakpoint.
++     *
++     * Uncompressed instructions are required so that the sequence is easy
++     * to validate.
++     *
++     * The three instructions are required to lie in the same page so
++     * that no exception will be raised when fetching them.
++     */
++
++    if ((pre_addr & TARGET_PAGE_MASK) == (post_addr & TARGET_PAGE_MASK)) {
++        pre    = opcode_at(&ctx->base, pre_addr);
++        ebreak = opcode_at(&ctx->base, ebreak_addr);
++        post   = opcode_at(&ctx->base, post_addr);
++    }
++
++    if  (pre == 0x01f01013 && ebreak == 0x00100073 && post == 0x40705013) {
++        generate_exception(ctx, RISCV_EXCP_SEMIHOST);
++    } else {
++        generate_exception(ctx, RISCV_EXCP_BREAKPOINT);
++    }
+     exit_tb(ctx); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 554d52a4be..0f28b5f41e 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -64,6 +64,7 @@ typedef struct DisasContext {
+     uint16_t vlen;
+     uint16_t mlen;
+     bool vl_eq_vlmax;
++    CPUState *cs;
+ } DisasContext;
+ 
+ #ifdef TARGET_RISCV64
+@@ -747,6 +748,15 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+     return true;
+ }
+ 
++static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
++{
++    DisasContext *ctx = container_of(dcbase, DisasContext, base);
++    CPUState *cpu = ctx->cs;
++    CPURISCVState *env = cpu->env_ptr;
++
++    return cpu_ldl_code(env, pc);
++}
++
+ /* Include insn module translation function */
+ #include "insn_trans/trans_rvi.c.inc"
+ #include "insn_trans/trans_rvm.c.inc"
+@@ -814,6 +824,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
+     ctx->mlen = 1 << (ctx->sew  + 3 - ctx->lmul);
+     ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
++    ctx->cs = cs;
+ }
+ 
+ static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
 -- 
 2.29.2
 
