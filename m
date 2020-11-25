@@ -1,72 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ki1qY-0000Px-Gn
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Nov 2020 15:57:02 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51956)
+	id 1ki1qv-0000ld-Tb
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Nov 2020 15:57:26 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52120)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1ki1qX-0000N8-0o
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2020 15:57:01 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:59846)
+ id 1ki1qr-0000jf-ER
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2020 15:57:22 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:27653)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1ki1qT-0003LR-IE
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2020 15:57:00 -0500
+ id 1ki1qm-0003S8-5Z
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2020 15:57:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1606337816;
+ s=mimecast20190719; t=1606337835;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=v2/00TLrnhb1EAZoELCRZkrRxl7+zesQjlzM1dccqtI=;
- b=A1jOzawt3HE83Q48bcKhsSm2YTTQDhXoSqVfU2ALI0f9nWo43WgtFr/npGo8PL0AkNYfTz
- Od3sfdAW3JS/gp3H/XQecbfok2K2Y2oEKVidkQMl58VjIdn5TTCQjQZqXBnub2PhgyqHpm
- I0ZU9jmEyZvNARD7j6Jf7uFSdsuciuw=
+ bh=nRCLA0xq815Y9v0x/1g5uhpoFl19bKTWQZqVIylZffQ=;
+ b=fl2f1vjD6CSmjv4AIAVdcLoccdFZLI7DeVOe72k7wqUQ/RjQSIgukwx++NnnbkJ6MLTDFc
+ /cPp7KHXVQX2wYkhPwDl3kWVP3JxC1o7Sn426f5SJVQfW726Bjnxk9y5SigJX+hWaK3Buc
+ k6PO2s6kA8epNKIoHHO6R3hjIKfXO/I=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-387-sK7tNT8SM3apCRfJKGpRKw-1; Wed, 25 Nov 2020 15:56:54 -0500
-X-MC-Unique: sK7tNT8SM3apCRfJKGpRKw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
+ us-mta-99-xdv5yKIONGOtWvCQQzov7g-1; Wed, 25 Nov 2020 15:57:11 -0500
+X-MC-Unique: xdv5yKIONGOtWvCQQzov7g-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2B529100C616;
- Wed, 25 Nov 2020 20:56:49 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5F02E108BC03;
+ Wed, 25 Nov 2020 20:57:08 +0000 (UTC)
 Received: from localhost (unknown [10.10.67.22])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B5D7F60854;
- Wed, 25 Nov 2020 20:56:42 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B700F5D6AC;
+ Wed, 25 Nov 2020 20:56:57 +0000 (UTC)
 From: Eduardo Habkost <ehabkost@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Gerd Hoffmann <kraxel@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Michael Rolnik <mrolnik@gmail.com>, Sarah Harris <S.E.Harris@kent.ac.uk>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Michael Walle <michael@walle.cc>,
- Laurent Vivier <laurent@vivier.eu>,
+ Paolo Bonzini <pbonzini@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Aurelien Jarno <aurelien@aurel32.net>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Anthony Green <green@moxielogic.com>, Chris Wulff <crwulff@gmail.com>,
- Marek Vasut <marex@denx.de>, Stafford Horne <shorne@gmail.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Markus Armbruster <armbru@redhat.com>,
  David Hildenbrand <david@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Guan Xuetao <gxt@mprc.pku.edu.cn>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH v2 1/6] arch_init: Move QEMU_ARCH definitions to cpu.h
-Date: Wed, 25 Nov 2020 15:56:31 -0500
-Message-Id: <20201125205636.3305257-2-ehabkost@redhat.com>
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Subject: [PATCH v2 5/6] Remove unnecessary usage of arch_init.h
+Date: Wed, 25 Nov 2020 15:56:35 -0500
+Message-Id: <20201125205636.3305257-6-ehabkost@redhat.com>
 In-Reply-To: <20201125205636.3305257-1-ehabkost@redhat.com>
 References: <20201125205636.3305257-1-ehabkost@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -81,7 +76,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -94,395 +89,257 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2020 20:57:01 -0000
+X-List-Received-Date: Wed, 25 Nov 2020 20:57:22 -0000
 
-Instead of a collection of #ifdefs on arch_init.c, define
-QEMU_ARCH inside each cpu.h file.
+The only declarations in arch_init.h are the `arch_type` variable
+and the QEMU_ARCH_* constants.  Stop including arch_init.h from
+code that don't use neither.
+
+Patch generated automatically using the command:
+
+ $ sed -i -e '/#include "sysemu.arch_init.h"/d' \
+   $(comm -23 \
+      <(git grep -l arch_init.h | sort) \
+      <((git grep -l -w 'arch_type'; g grep -l QEMU_ARCH;) | sort -u))
 
 Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
 ---
 Cc: Richard Henderson <richard.henderson@linaro.org>
-Cc: Peter Maydell <peter.maydell@linaro.org>
-Cc: Michael Rolnik <mrolnik@gmail.com>
-Cc: Sarah Harris <S.E.Harris@kent.ac.uk>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
 Cc: Paolo Bonzini <pbonzini@redhat.com>
 Cc: Eduardo Habkost <ehabkost@redhat.com>
-Cc: Michael Walle <michael@walle.cc>
-Cc: Laurent Vivier <laurent@vivier.eu>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Cc: "Hervé Poussineau" <hpoussin@reactos.org>
+Cc: Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>
 Cc: "Philippe Mathieu-Daudé" <f4bug@amsat.org>
 Cc: Aurelien Jarno <aurelien@aurel32.net>
 Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>
-Cc: Anthony Green <green@moxielogic.com>
-Cc: Chris Wulff <crwulff@gmail.com>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Stafford Horne <shorne@gmail.com>
 Cc: David Gibson <david@gibson.dropbear.id.au>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>
 Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
 Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: Yoshinori Sato <ysato@users.sourceforge.jp>
+Cc: Markus Armbruster <armbru@redhat.com>
 Cc: David Hildenbrand <david@redhat.com>
 Cc: Cornelia Huck <cohuck@redhat.com>
 Cc: Thomas Huth <thuth@redhat.com>
-Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Cc: Artyom Tarasenko <atar4qemu@gmail.com>
-Cc: Guan Xuetao <gxt@mprc.pku.edu.cn>
-Cc: Max Filippov <jcmvbkbc@gmail.com>
+Cc: Halil Pasic <pasic@linux.ibm.com>
+Cc: Christian Borntraeger <borntraeger@de.ibm.com>
 Cc: qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org
 Cc: qemu-ppc@nongnu.org
 Cc: qemu-riscv@nongnu.org
 Cc: qemu-s390x@nongnu.org
 ---
- target/alpha/cpu.h      |  1 +
- target/arm/cpu.h        |  1 +
- target/avr/cpu.h        |  1 +
- target/cris/cpu.h       |  1 +
- target/hppa/cpu.h       |  1 +
- target/i386/cpu.h       |  1 +
- target/lm32/cpu.h       |  1 +
- target/m68k/cpu.h       |  1 +
- target/microblaze/cpu.h |  1 +
- target/mips/cpu.h       |  1 +
- target/moxie/cpu.h      |  1 +
- target/nios2/cpu.h      |  1 +
- target/openrisc/cpu.h   |  1 +
- target/ppc/cpu.h        |  1 +
- target/riscv/cpu.h      |  1 +
- target/rx/cpu.h         |  1 +
- target/s390x/cpu.h      |  1 +
- target/sh4/cpu.h        |  1 +
- target/sparc/cpu.h      |  1 +
- target/tricore/cpu.h    |  1 +
- target/unicore32/cpu.h  |  1 +
- target/xtensa/cpu.h     |  1 +
- softmmu/arch_init.c     | 46 -----------------------------------------
- 23 files changed, 22 insertions(+), 46 deletions(-)
+ accel/accel.c                   | 1 -
+ hw/i386/pc.c                    | 1 -
+ hw/i386/pc_piix.c               | 1 -
+ hw/i386/pc_q35.c                | 1 -
+ hw/mips/jazz.c                  | 1 -
+ hw/mips/malta.c                 | 1 -
+ hw/ppc/prep.c                   | 1 -
+ hw/riscv/sifive_e.c             | 1 -
+ hw/riscv/sifive_u.c             | 1 -
+ hw/riscv/spike.c                | 1 -
+ hw/riscv/virt.c                 | 1 -
+ monitor/qmp-cmds.c              | 1 -
+ target/i386/cpu.c               | 1 -
+ target/s390x/cpu.c              | 1 -
+ target/s390x/cpu_models.c       | 1 -
+ target/ppc/translate_init.c.inc | 1 -
+ 16 files changed, 16 deletions(-)
 
-diff --git a/target/alpha/cpu.h b/target/alpha/cpu.h
-index 82df108967..313a4e456e 100644
---- a/target/alpha/cpu.h
-+++ b/target/alpha/cpu.h
-@@ -438,6 +438,7 @@ void alpha_translate_init(void);
- #define ALPHA_CPU_TYPE_SUFFIX "-" TYPE_ALPHA_CPU
- #define ALPHA_CPU_TYPE_NAME(model) model ALPHA_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_ALPHA_CPU
-+#define QEMU_ARCH QEMU_ARCH_ALPHA
+diff --git a/accel/accel.c b/accel/accel.c
+index 4a64a2b38a..3e567a001f 100644
+--- a/accel/accel.c
++++ b/accel/accel.c
+@@ -26,7 +26,6 @@
+ #include "qemu/osdep.h"
+ #include "sysemu/accel.h"
+ #include "hw/boards.h"
+-#include "sysemu/arch_init.h"
+ #include "sysemu/sysemu.h"
+ #include "qom/object.h"
  
- void alpha_cpu_list(void);
- /* you can call this signal handler from your SIGBUS and SIGSEGV
-diff --git a/target/arm/cpu.h b/target/arm/cpu.h
-index e5514c8286..3f469a6485 100644
---- a/target/arm/cpu.h
-+++ b/target/arm/cpu.h
-@@ -2822,6 +2822,7 @@ bool write_cpustate_to_list(ARMCPU *cpu, bool kvm_sync);
- #define ARM_CPU_TYPE_SUFFIX "-" TYPE_ARM_CPU
- #define ARM_CPU_TYPE_NAME(name) (name ARM_CPU_TYPE_SUFFIX)
- #define CPU_RESOLVING_TYPE TYPE_ARM_CPU
-+#define QEMU_ARCH QEMU_ARCH_ARM
+diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+index 17b514d1da..48a5fb0798 100644
+--- a/hw/i386/pc.c
++++ b/hw/i386/pc.c
+@@ -67,7 +67,6 @@
+ #include "ui/qemu-spice.h"
+ #include "exec/memory.h"
+ #include "exec/address-spaces.h"
+-#include "sysemu/arch_init.h"
+ #include "qemu/bitmap.h"
+ #include "qemu/config-file.h"
+ #include "qemu/error-report.h"
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 13d1628f13..95ee1f39d8 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -44,7 +44,6 @@
+ #include "hw/kvm/clock.h"
+ #include "sysemu/sysemu.h"
+ #include "hw/sysbus.h"
+-#include "sysemu/arch_init.h"
+ #include "hw/i2c/smbus_eeprom.h"
+ #include "hw/xen/xen-x86.h"
+ #include "exec/memory.h"
+diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
+index a3f4959c43..cf85b240bc 100644
+--- a/hw/i386/pc_q35.c
++++ b/hw/i386/pc_q35.c
+@@ -31,7 +31,6 @@
+ #include "qemu/osdep.h"
+ #include "qemu/units.h"
+ #include "hw/loader.h"
+-#include "sysemu/arch_init.h"
+ #include "hw/i2c/smbus_eeprom.h"
+ #include "hw/rtc/mc146818rtc.h"
+ #include "sysemu/kvm.h"
+diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
+index 71448f72ac..6fee2a4ec0 100644
+--- a/hw/mips/jazz.c
++++ b/hw/mips/jazz.c
+@@ -34,7 +34,6 @@
+ #include "hw/isa/isa.h"
+ #include "hw/block/fdc.h"
+ #include "sysemu/sysemu.h"
+-#include "sysemu/arch_init.h"
+ #include "hw/boards.h"
+ #include "net/net.h"
+ #include "hw/scsi/esp.h"
+diff --git a/hw/mips/malta.c b/hw/mips/malta.c
+index 9d1a3b50b7..6b4387c179 100644
+--- a/hw/mips/malta.c
++++ b/hw/mips/malta.c
+@@ -38,7 +38,6 @@
+ #include "hw/mips/cpudevs.h"
+ #include "hw/pci/pci.h"
+ #include "sysemu/sysemu.h"
+-#include "sysemu/arch_init.h"
+ #include "qemu/log.h"
+ #include "hw/mips/bios.h"
+ #include "hw/ide.h"
+diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
+index 4a0cb434a6..5c9ec45749 100644
+--- a/hw/ppc/prep.c
++++ b/hw/ppc/prep.c
+@@ -43,7 +43,6 @@
+ #include "hw/rtc/mc146818rtc.h"
+ #include "hw/isa/pc87312.h"
+ #include "hw/qdev-properties.h"
+-#include "sysemu/arch_init.h"
+ #include "sysemu/kvm.h"
+ #include "sysemu/qtest.h"
+ #include "sysemu/reset.h"
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 59bac4cc9a..6185872127 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -46,7 +46,6 @@
+ #include "hw/intc/sifive_plic.h"
+ #include "hw/misc/sifive_e_prci.h"
+ #include "chardev/char.h"
+-#include "sysemu/arch_init.h"
+ #include "sysemu/sysemu.h"
+ #include "exec/address-spaces.h"
  
- #define cpu_signal_handler cpu_arm_signal_handler
- #define cpu_list arm_cpu_list
-diff --git a/target/avr/cpu.h b/target/avr/cpu.h
-index d148e8c75a..98f5df0ad7 100644
---- a/target/avr/cpu.h
-+++ b/target/avr/cpu.h
-@@ -31,6 +31,7 @@
- #define AVR_CPU_TYPE_SUFFIX "-" TYPE_AVR_CPU
- #define AVR_CPU_TYPE_NAME(name) (name AVR_CPU_TYPE_SUFFIX)
- #define CPU_RESOLVING_TYPE TYPE_AVR_CPU
-+#define QEMU_ARCH QEMU_ARCH_AVR
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 2f19a9cda2..53b62284ab 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -53,7 +53,6 @@
+ #include "hw/intc/sifive_plic.h"
+ #include "chardev/char.h"
+ #include "net/eth.h"
+-#include "sysemu/arch_init.h"
+ #include "sysemu/device_tree.h"
+ #include "sysemu/runstate.h"
+ #include "sysemu/sysemu.h"
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index facac6e7d2..660fcfcfed 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -38,7 +38,6 @@
+ #include "hw/char/riscv_htif.h"
+ #include "hw/intc/sifive_clint.h"
+ #include "chardev/char.h"
+-#include "sysemu/arch_init.h"
+ #include "sysemu/device_tree.h"
+ #include "sysemu/qtest.h"
+ #include "sysemu/sysemu.h"
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 25cea7aa67..cfce799ffe 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -37,7 +37,6 @@
+ #include "hw/intc/sifive_plic.h"
+ #include "hw/misc/sifive_test.h"
+ #include "chardev/char.h"
+-#include "sysemu/arch_init.h"
+ #include "sysemu/device_tree.h"
+ #include "sysemu/sysemu.h"
+ #include "hw/pci/pci.h"
+diff --git a/monitor/qmp-cmds.c b/monitor/qmp-cmds.c
+index ac5b8a97d7..64ed976fac 100644
+--- a/monitor/qmp-cmds.c
++++ b/monitor/qmp-cmds.c
+@@ -26,7 +26,6 @@
+ #include "ui/vnc.h"
+ #include "sysemu/kvm.h"
+ #include "sysemu/runstate.h"
+-#include "sysemu/arch_init.h"
+ #include "sysemu/blockdev.h"
+ #include "sysemu/block-backend.h"
+ #include "qapi/error.h"
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 5a8c96072e..e5a42a8663 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -44,7 +44,6 @@
+ #include "qapi/qmp/qerror.h"
+ #include "qapi/visitor.h"
+ #include "qom/qom-qobject.h"
+-#include "sysemu/arch_init.h"
+ #include "qapi/qapi-commands-machine-target.h"
  
- #define TCG_GUEST_DEFAULT_MO 0
- 
-diff --git a/target/cris/cpu.h b/target/cris/cpu.h
-index d3b6492909..2482915699 100644
---- a/target/cris/cpu.h
-+++ b/target/cris/cpu.h
-@@ -249,6 +249,7 @@ enum {
- #define CRIS_CPU_TYPE_SUFFIX "-" TYPE_CRIS_CPU
- #define CRIS_CPU_TYPE_NAME(name) (name CRIS_CPU_TYPE_SUFFIX)
- #define CPU_RESOLVING_TYPE TYPE_CRIS_CPU
-+#define QEMU_ARCH QEMU_ARCH_CRIS
- 
- #define cpu_signal_handler cpu_cris_signal_handler
- 
-diff --git a/target/hppa/cpu.h b/target/hppa/cpu.h
-index 61178fa6a2..74d813289b 100644
---- a/target/hppa/cpu.h
-+++ b/target/hppa/cpu.h
-@@ -242,6 +242,7 @@ static inline int cpu_mmu_index(CPUHPPAState *env, bool ifetch)
- void hppa_translate_init(void);
- 
- #define CPU_RESOLVING_TYPE TYPE_HPPA_CPU
-+#define QEMU_ARCH QEMU_ARCH_HPPA
- 
- static inline target_ulong hppa_form_gva_psw(target_ureg psw, uint64_t spc,
-                                              target_ureg off)
-diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-index 88e8586f8f..03202f610c 100644
---- a/target/i386/cpu.h
-+++ b/target/i386/cpu.h
-@@ -1971,6 +1971,7 @@ uint64_t cpu_get_tsc(CPUX86State *env);
- #define X86_CPU_TYPE_SUFFIX "-" TYPE_X86_CPU
- #define X86_CPU_TYPE_NAME(name) (name X86_CPU_TYPE_SUFFIX)
- #define CPU_RESOLVING_TYPE TYPE_X86_CPU
-+#define QEMU_ARCH QEMU_ARCH_I386
- 
- #ifdef TARGET_X86_64
- #define TARGET_DEFAULT_CPU_TYPE X86_CPU_TYPE_NAME("qemu64")
-diff --git a/target/lm32/cpu.h b/target/lm32/cpu.h
-index ea7c01ca8b..169c0ff19d 100644
---- a/target/lm32/cpu.h
-+++ b/target/lm32/cpu.h
-@@ -238,6 +238,7 @@ bool lm32_cpu_do_semihosting(CPUState *cs);
- #define LM32_CPU_TYPE_SUFFIX "-" TYPE_LM32_CPU
- #define LM32_CPU_TYPE_NAME(model) model LM32_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_LM32_CPU
-+#define QEMU_ARCH QEMU_ARCH_LM32
- 
- #define cpu_list lm32_cpu_list
- #define cpu_signal_handler cpu_lm32_signal_handler
-diff --git a/target/m68k/cpu.h b/target/m68k/cpu.h
-index 521ac67cdd..87b5324b2c 100644
---- a/target/m68k/cpu.h
-+++ b/target/m68k/cpu.h
-@@ -514,6 +514,7 @@ enum {
- #define M68K_CPU_TYPE_SUFFIX "-" TYPE_M68K_CPU
- #define M68K_CPU_TYPE_NAME(model) model M68K_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_M68K_CPU
-+#define QEMU_ARCH QEMU_ARCH_M68K
- 
- #define cpu_signal_handler cpu_m68k_signal_handler
- #define cpu_list m68k_cpu_list
-diff --git a/target/microblaze/cpu.h b/target/microblaze/cpu.h
-index c1c264199f..cbe60fbf58 100644
---- a/target/microblaze/cpu.h
-+++ b/target/microblaze/cpu.h
-@@ -378,6 +378,7 @@ int cpu_mb_signal_handler(int host_signum, void *pinfo,
-                           void *puc);
- 
- #define CPU_RESOLVING_TYPE TYPE_MICROBLAZE_CPU
-+#define QEMU_ARCH QEMU_ARCH_MICROBLAZE
- 
- #define cpu_signal_handler cpu_mb_signal_handler
- 
-diff --git a/target/mips/cpu.h b/target/mips/cpu.h
-index 23f8c6f96c..8a6707aa81 100644
---- a/target/mips/cpu.h
-+++ b/target/mips/cpu.h
-@@ -1285,6 +1285,7 @@ int cpu_mips_signal_handler(int host_signum, void *pinfo, void *puc);
- #define MIPS_CPU_TYPE_SUFFIX "-" TYPE_MIPS_CPU
- #define MIPS_CPU_TYPE_NAME(model) model MIPS_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_MIPS_CPU
-+#define QEMU_ARCH QEMU_ARCH_MIPS
- 
- bool cpu_supports_cps_smp(const char *cpu_type);
- bool cpu_supports_isa(const char *cpu_type, uint64_t isa);
-diff --git a/target/moxie/cpu.h b/target/moxie/cpu.h
-index bd6ab66084..f638509381 100644
---- a/target/moxie/cpu.h
-+++ b/target/moxie/cpu.h
-@@ -95,6 +95,7 @@ int cpu_moxie_signal_handler(int host_signum, void *pinfo,
- #define MOXIE_CPU_TYPE_SUFFIX "-" TYPE_MOXIE_CPU
- #define MOXIE_CPU_TYPE_NAME(model) model MOXIE_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_MOXIE_CPU
-+#define QEMU_ARCH QEMU_ARCH_MOXIE
- 
- #define cpu_signal_handler cpu_moxie_signal_handler
- 
-diff --git a/target/nios2/cpu.h b/target/nios2/cpu.h
-index 86bbe1d867..b8fabdfb60 100644
---- a/target/nios2/cpu.h
-+++ b/target/nios2/cpu.h
-@@ -207,6 +207,7 @@ void nios2_check_interrupts(CPUNios2State *env);
- void do_nios2_semihosting(CPUNios2State *env);
- 
- #define CPU_RESOLVING_TYPE TYPE_NIOS2_CPU
-+#define QEMU_ARCH QEMU_ARCH_NIOS2
- 
- #define cpu_gen_code cpu_nios2_gen_code
- #define cpu_signal_handler cpu_nios2_signal_handler
-diff --git a/target/openrisc/cpu.h b/target/openrisc/cpu.h
-index bd42faf144..68ff1d06c9 100644
---- a/target/openrisc/cpu.h
-+++ b/target/openrisc/cpu.h
-@@ -348,6 +348,7 @@ void cpu_openrisc_count_stop(OpenRISCCPU *cpu);
- #define OPENRISC_CPU_TYPE_SUFFIX "-" TYPE_OPENRISC_CPU
- #define OPENRISC_CPU_TYPE_NAME(model) model OPENRISC_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_OPENRISC_CPU
-+#define QEMU_ARCH QEMU_ARCH_OPENRISC
- 
- typedef CPUOpenRISCState CPUArchState;
- typedef OpenRISCCPU ArchCPU;
-diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
-index 2609e4082e..fd870c4cf4 100644
---- a/target/ppc/cpu.h
-+++ b/target/ppc/cpu.h
-@@ -1334,6 +1334,7 @@ int ppc_dcr_write(ppc_dcr_t *dcr_env, int dcrn, uint32_t val);
- #define POWERPC_CPU_TYPE_SUFFIX "-" TYPE_POWERPC_CPU
- #define POWERPC_CPU_TYPE_NAME(model) model POWERPC_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_POWERPC_CPU
-+#define QEMU_ARCH QEMU_ARCH_PPC
- 
- #define cpu_signal_handler cpu_ppc_signal_handler
- #define cpu_list ppc_cpu_list
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index c0a326c843..3f566b1c7f 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -33,6 +33,7 @@
- #define RISCV_CPU_TYPE_SUFFIX "-" TYPE_RISCV_CPU
- #define RISCV_CPU_TYPE_NAME(name) (name RISCV_CPU_TYPE_SUFFIX)
- #define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
-+#define QEMU_ARCH QEMU_ARCH_RISCV
- 
- #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
- #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
-diff --git a/target/rx/cpu.h b/target/rx/cpu.h
-index 0b4b998c7b..05c195962a 100644
---- a/target/rx/cpu.h
-+++ b/target/rx/cpu.h
-@@ -122,6 +122,7 @@ typedef RXCPU ArchCPU;
- #define RX_CPU_TYPE_SUFFIX "-" TYPE_RX_CPU
- #define RX_CPU_TYPE_NAME(model) model RX_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_RX_CPU
-+#define QEMU_ARCH QEMU_ARCH_RX
- 
- const char *rx_crname(uint8_t cr);
- void rx_cpu_do_interrupt(CPUState *cpu);
-diff --git a/target/s390x/cpu.h b/target/s390x/cpu.h
-index 60d434d5ed..d528d18b6d 100644
---- a/target/s390x/cpu.h
-+++ b/target/s390x/cpu.h
-@@ -797,6 +797,7 @@ void s390_set_qemu_cpu_model(uint16_t type, uint8_t gen, uint8_t ec_ga,
- #define S390_CPU_TYPE_SUFFIX "-" TYPE_S390_CPU
- #define S390_CPU_TYPE_NAME(name) (name S390_CPU_TYPE_SUFFIX)
- #define CPU_RESOLVING_TYPE TYPE_S390_CPU
-+#define QEMU_ARCH QEMU_ARCH_S390X
- 
- /* you can call this signal handler from your SIGBUS and SIGSEGV
-    signal handlers to inform the virtual CPU of exceptions. non zero
-diff --git a/target/sh4/cpu.h b/target/sh4/cpu.h
-index 714e3b5641..f0314774f8 100644
---- a/target/sh4/cpu.h
-+++ b/target/sh4/cpu.h
-@@ -249,6 +249,7 @@ void cpu_load_tlb(CPUSH4State * env);
- #define SUPERH_CPU_TYPE_SUFFIX "-" TYPE_SUPERH_CPU
- #define SUPERH_CPU_TYPE_NAME(model) model SUPERH_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_SUPERH_CPU
-+#define QEMU_ARCH QEMU_ARCH_SH4
- 
- #define cpu_signal_handler cpu_sh4_signal_handler
- #define cpu_list sh4_cpu_list
-diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
-index b9369398f2..9d80f8b500 100644
---- a/target/sparc/cpu.h
-+++ b/target/sparc/cpu.h
-@@ -662,6 +662,7 @@ int cpu_sparc_signal_handler(int host_signum, void *pinfo, void *puc);
- #define SPARC_CPU_TYPE_SUFFIX "-" TYPE_SPARC_CPU
- #define SPARC_CPU_TYPE_NAME(model) model SPARC_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_SPARC_CPU
-+#define QEMU_ARCH QEMU_ARCH_SPARC
- 
- #define cpu_signal_handler cpu_sparc_signal_handler
- #define cpu_list sparc_cpu_list
-diff --git a/target/tricore/cpu.h b/target/tricore/cpu.h
-index b82349d1b1..28c86f77b0 100644
---- a/target/tricore/cpu.h
-+++ b/target/tricore/cpu.h
-@@ -402,6 +402,7 @@ static inline void cpu_get_tb_cpu_state(CPUTriCoreState *env, target_ulong *pc,
- #define TRICORE_CPU_TYPE_SUFFIX "-" TYPE_TRICORE_CPU
- #define TRICORE_CPU_TYPE_NAME(model) model TRICORE_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_TRICORE_CPU
-+#define QEMU_ARCH QEMU_ARCH_TRICORE
- 
- /* helpers.c */
- bool tricore_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-diff --git a/target/unicore32/cpu.h b/target/unicore32/cpu.h
-index 7a32e086ed..6c0d88aa9b 100644
---- a/target/unicore32/cpu.h
-+++ b/target/unicore32/cpu.h
-@@ -147,6 +147,7 @@ typedef UniCore32CPU ArchCPU;
- #define UNICORE32_CPU_TYPE_SUFFIX "-" TYPE_UNICORE32_CPU
- #define UNICORE32_CPU_TYPE_NAME(model) model UNICORE32_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_UNICORE32_CPU
-+#define QEMU_ARCH QEMU_ARCH_UNICORE32
- 
- static inline void cpu_get_tb_cpu_state(CPUUniCore32State *env, target_ulong *pc,
-                                         target_ulong *cs_base, uint32_t *flags)
-diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
-index 3bd4f691c1..c7a503b01d 100644
---- a/target/xtensa/cpu.h
-+++ b/target/xtensa/cpu.h
-@@ -589,6 +589,7 @@ void xtensa_cpu_do_unaligned_access(CPUState *cpu, vaddr addr,
- #define XTENSA_CPU_TYPE_SUFFIX "-" TYPE_XTENSA_CPU
- #define XTENSA_CPU_TYPE_NAME(model) model XTENSA_CPU_TYPE_SUFFIX
- #define CPU_RESOLVING_TYPE TYPE_XTENSA_CPU
-+#define QEMU_ARCH QEMU_ARCH_XTENSA
- 
- #ifdef TARGET_WORDS_BIGENDIAN
- #define XTENSA_DEFAULT_CPU_MODEL "fsf"
-diff --git a/softmmu/arch_init.c b/softmmu/arch_init.c
-index 7fd5c09b2b..7ef32a98b9 100644
---- a/softmmu/arch_init.c
-+++ b/softmmu/arch_init.c
-@@ -48,52 +48,6 @@ int graphic_depth = 32;
+ #include "standard-headers/asm-x86/kvm_para.h"
+diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
+index 7b66718c44..c1e336c760 100644
+--- a/target/s390x/cpu.c
++++ b/target/s390x/cpu.c
+@@ -39,7 +39,6 @@
+ #ifndef CONFIG_USER_ONLY
+ #include "hw/s390x/pv.h"
+ #include "hw/boards.h"
+-#include "sysemu/arch_init.h"
+ #include "sysemu/sysemu.h"
+ #include "sysemu/tcg.h"
  #endif
- 
- 
--#if defined(TARGET_ALPHA)
--#define QEMU_ARCH QEMU_ARCH_ALPHA
--#elif defined(TARGET_ARM)
--#define QEMU_ARCH QEMU_ARCH_ARM
--#elif defined(TARGET_CRIS)
--#define QEMU_ARCH QEMU_ARCH_CRIS
--#elif defined(TARGET_HPPA)
--#define QEMU_ARCH QEMU_ARCH_HPPA
--#elif defined(TARGET_I386)
--#define QEMU_ARCH QEMU_ARCH_I386
--#elif defined(TARGET_LM32)
--#define QEMU_ARCH QEMU_ARCH_LM32
--#elif defined(TARGET_M68K)
--#define QEMU_ARCH QEMU_ARCH_M68K
--#elif defined(TARGET_MICROBLAZE)
--#define QEMU_ARCH QEMU_ARCH_MICROBLAZE
--#elif defined(TARGET_MIPS)
--#define QEMU_ARCH QEMU_ARCH_MIPS
--#elif defined(TARGET_MOXIE)
--#define QEMU_ARCH QEMU_ARCH_MOXIE
--#elif defined(TARGET_NIOS2)
--#define QEMU_ARCH QEMU_ARCH_NIOS2
--#elif defined(TARGET_OPENRISC)
--#define QEMU_ARCH QEMU_ARCH_OPENRISC
--#elif defined(TARGET_PPC)
--#define QEMU_ARCH QEMU_ARCH_PPC
--#elif defined(TARGET_RISCV)
--#define QEMU_ARCH QEMU_ARCH_RISCV
--#elif defined(TARGET_RX)
--#define QEMU_ARCH QEMU_ARCH_RX
--#elif defined(TARGET_S390X)
--#define QEMU_ARCH QEMU_ARCH_S390X
--#elif defined(TARGET_SH4)
--#define QEMU_ARCH QEMU_ARCH_SH4
--#elif defined(TARGET_SPARC)
--#define QEMU_ARCH QEMU_ARCH_SPARC
--#elif defined(TARGET_TRICORE)
--#define QEMU_ARCH QEMU_ARCH_TRICORE
--#elif defined(TARGET_UNICORE32)
--#define QEMU_ARCH QEMU_ARCH_UNICORE32
--#elif defined(TARGET_XTENSA)
--#define QEMU_ARCH QEMU_ARCH_XTENSA
--#elif defined(TARGET_AVR)
--#define QEMU_ARCH QEMU_ARCH_AVR
--#endif
--
- const uint32_t arch_type = QEMU_ARCH;
- 
- int kvm_available(void)
+diff --git a/target/s390x/cpu_models.c b/target/s390x/cpu_models.c
+index b5abff8bef..04896560ad 100644
+--- a/target/s390x/cpu_models.c
++++ b/target/s390x/cpu_models.c
+@@ -25,7 +25,6 @@
+ #include "qapi/qobject-input-visitor.h"
+ #include "qapi/qmp/qdict.h"
+ #ifndef CONFIG_USER_ONLY
+-#include "sysemu/arch_init.h"
+ #include "hw/pci/pci.h"
+ #endif
+ #include "qapi/qapi-commands-machine-target.h"
+diff --git a/target/ppc/translate_init.c.inc b/target/ppc/translate_init.c.inc
+index 78cc8f043b..df66852a74 100644
+--- a/target/ppc/translate_init.c.inc
++++ b/target/ppc/translate_init.c.inc
+@@ -21,7 +21,6 @@
+ #include "disas/dis-asm.h"
+ #include "exec/gdbstub.h"
+ #include "kvm_ppc.h"
+-#include "sysemu/arch_init.h"
+ #include "sysemu/cpus.h"
+ #include "sysemu/hw_accel.h"
+ #include "sysemu/tcg.h"
 -- 
 2.28.0
 
