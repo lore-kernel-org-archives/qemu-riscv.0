@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ki2T6-0002gK-1L
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Nov 2020 16:36:52 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37128)
+	id 1ki69Z-0005vZ-Ot
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Nov 2020 20:32:58 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58132)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1ki2Sw-0002Kc-2O; Wed, 25 Nov 2020 16:36:45 -0500
-Received: from home.keithp.com ([63.227.221.253]:37062 helo=elaine.keithp.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1ki2St-0001Cz-AN; Wed, 25 Nov 2020 16:36:41 -0500
-Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id 959963F2E291;
- Wed, 25 Nov 2020 13:36:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1606340193; bh=J0co6Q1vvgc8Jd0e8SYQj/3vWhrlTCZVfePzl9fHZPs=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YL6SMk4Tx+GNfe1/7NISeGih86kPAnHHKLyNGDkffUDURhh6jKVzFmTccYW8t6Xok
- tVnDcT2XwFSJ2940afIaZoZa69VPhaJoTl5coVJkoJBNSSEImP9TG7gTrxXTGUPpPr
- cTwxNLk/Ya7+KbVMIQ7SpHLqrN47GRHLiXM2BVMUt5TZTebGGqAX+6UK/0dokKpjPn
- g410F2SsGqPgQHqa6I2SpQR3KXS6FlzZAC+02OZsx1TROms3c0oCT+QO/9KVHUjqp1
- Hv4TI83IFhKnI4MIZpUSLMyOr+yo3bxN1xdjyN7kG3qsAVPMdZko1uI67OA2o22w8U
- J1GuqSOp92zGw==
-X-Virus-Scanned: Debian amavisd-new at keithp.com
-Received: from elaine.keithp.com ([127.0.0.1])
- by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id vPNEEQmJ2HBk; Wed, 25 Nov 2020 13:36:33 -0800 (PST)
-Received: from keithp.com (koto.keithp.com [10.0.0.2])
- by elaine.keithp.com (Postfix) with ESMTPSA id BAC323F2E28B;
- Wed, 25 Nov 2020 13:36:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1606340191; bh=J0co6Q1vvgc8Jd0e8SYQj/3vWhrlTCZVfePzl9fHZPs=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=AybZBxEdusU8xZeG2JNQSQPKtFwQCEt12ZT8pVigybZVDBIx6AGD5wqgPO8TuASEK
- wUy/i9mXJx9UIsDt1Y3ldIvKkO+ZH2DygPHIU/z/h2XbAxD/u7SpkDcl3rb9F1n8BZ
- NiDtlKMrssVg7bgZtOF7nySvVa68eEhFoBjb0adFJkdNpayqH2bK4+wyxuPLI2GTc3
- /dXhnzI34ApKoezKVwY+d9/oU/B4fdZHt+K7I5p0fo2YVy9LnXQyVTLGlCmWN7axv2
- szYqCqqgWILwrezbJopw889KvhEqKan4BQ6YIeRy79eukofAJRD8ywmVDJLsf2fB09
- 7Jsi37+B3uPoA==
-Received: by keithp.com (Postfix, from userid 1000)
- id 9CC4115821C4; Wed, 25 Nov 2020 13:36:31 -0800 (PST)
-From: Keith Packard <keithp@keithp.com>
-To: qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Keith Packard <keithp@keithp.com>
-Subject: [PATCH 4/8] semihosting: Support SYS_HEAPINFO when env->boot_info is
- not set
-Date: Wed, 25 Nov 2020 13:36:13 -0800
-Message-Id: <20201125213617.2496935-5-keithp@keithp.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201125213617.2496935-1-keithp@keithp.com>
-References: <20201125213617.2496935-1-keithp@keithp.com>
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1ki69U-0005ue-2y
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2020 20:32:52 -0500
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:46677)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1ki69Q-0007pU-7C
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2020 20:32:50 -0500
+Received: by mail-pf1-x442.google.com with SMTP id s21so128681pfu.13
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2020 17:32:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=KGSQCqgotQ42M6KFwrQdymZpDfNmZuevBXjkkhHB2WE=;
+ b=qEUhRxkx9yoZN1NSFALVVxkaNm7eHlGurfRbVUE4JUiwJGdcq4lN7Y3TZG5kpQJr67
+ AO82guOL9ydXyPCUtwKhmYKD8hKozJWA7VpG57lINABm1iHQtfflk41BQHX4w8Fdt9TZ
+ dOBr91Ow1/q52SqPB95cVTAvatB10AsGGH7ObtLlzywk5jT4ICas2FUqyyHzXH8NTm0H
+ +NbMAvPpVQ06xjztuMcTT8CjtcCmHm3GQ3yYAmrJZsV1MYtQXMD8jwgcbXUv4/GCyU1y
+ /yDR0dYAzGrT1qkZT+PLFpXlB3wvBanb76QHbN3sYPrJk2PFxSB6GpGGoShTPdoW8uHS
+ qhZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=KGSQCqgotQ42M6KFwrQdymZpDfNmZuevBXjkkhHB2WE=;
+ b=EarB+PZNuTQIBre1UeXKqv7duAg6ZL7LS//O22TP5KVZYwZ175Nx32ZiXDVdAPqIC/
+ QgK7pNisNLMGFYity3MWnFWFporVxlSqvvus3jbCnAAft8prXTSDltsEnMXITN0EuiYP
+ mUCkHrFy68jhBM1S6dvzWv1d4W/Mnxbf43esgvVbCyZ4aUQvOA5eVuqLcHj5bj4xZEVg
+ Txg1WMwnV0jK+bZynsvDWgZ8Inj0pVvs/q/PeRgUbv9672A3na8VNjOKAOydCs8ndmVP
+ qqeO7nWvTvzKM+binQzO/nCj+gYEx2HPuumqj7vVecl65wTSRE2ieEYEUPZfo9eX2pSU
+ Q2tA==
+X-Gm-Message-State: AOAM533M+d8QozOFPQwgmNDZDLmhP9x6qrLQUtMnDrQU6lEy2AGTq9ky
+ rsMXTYuVFyuui3p5d6G+15VKuHMRqALu2nNb
+X-Google-Smtp-Source: ABdhPJwLsxYg7y5PDFqDfbCYNMF2OrpCS5W5Om6WbMhOBjWRNkojK4JFsWw+D0sCx5F7spm+vaPqTA==
+X-Received: by 2002:a17:90a:d916:: with SMTP id
+ c22mr711740pjv.71.1606354365210; 
+ Wed, 25 Nov 2020 17:32:45 -0800 (PST)
+Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
+ [76.210.143.223])
+ by smtp.gmail.com with ESMTPSA id e2sm3883288pjv.10.2020.11.25.17.32.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Nov 2020 17:32:44 -0800 (PST)
+Date: Wed, 25 Nov 2020 17:32:44 -0800 (PST)
+X-Google-Original-Date: Wed, 25 Nov 2020 17:32:37 PST (-0800)
+Subject: Re: [PATCH 1/1] hw/riscv: clint: timebase-freq is machine-specific
+In-Reply-To: <20201103153844.91458-2-emmanuel.blot@sifive.com>
+CC: qemu-riscv@nongnu.org, emmanuel.blot@sifive.com
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: emmanuel.blot@sifive.com
+Message-ID: <mhng-51837baa-e2f5-4d57-9a3d-9ab39910b77e@palmerdabbelt-glaptop1>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=63.227.221.253; envelope-from=keithp@keithp.com;
- helo=elaine.keithp.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::442;
+ envelope-from=palmer@dabbelt.com; helo=mail-pf1-x442.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -77,79 +77,173 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2020 21:36:45 -0000
+X-List-Received-Date: Thu, 26 Nov 2020 01:32:52 -0000
 
-env->boot_info is only set in some ARM startup paths, so we cannot
-rely on it to support the SYS_HEAPINFO semihosting function. When not
-available, fallback to finding a RAM memory region containing the
-current stack and use the base of that.
+On Tue, 03 Nov 2020 07:38:44 PST (-0800), emmanuel.blot@sifive.com wrote:
+> * sifive_e (HiFive1 platform) uses a RTC clock running at 32.768 KHz
+> * sifive_u (HiFive Unleashed platform) uses a RTC clock running at 1 MHz
 
-Signed-off-by: Keith Packard <keithp@keithp.com>
----
- hw/semihosting/common-semi.c | 42 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 41 insertions(+), 1 deletion(-)
+This is a bit oddly done (usually it's sentences as opposed to bullets), but
+otherwise
 
-diff --git a/hw/semihosting/common-semi.c b/hw/semihosting/common-semi.c
-index 27bdfd0e83..ddfa448cc2 100644
---- a/hw/semihosting/common-semi.c
-+++ b/hw/semihosting/common-semi.c
-@@ -133,6 +133,35 @@ typedef struct GuestFD {
- 
- static GArray *guestfd_array;
- 
-+#ifndef CONFIG_USER_ONLY
-+#include "exec/address-spaces.h"
-+/*
-+ * Find the base of a RAM region containing the specified address
-+ */
-+static inline hwaddr
-+common_semi_find_region_base(hwaddr addr)
-+{
-+    MemoryRegion *subregion;
-+
-+    /*
-+     * Find the chunk of R/W memory containing the address.  This is
-+     * used for the SYS_HEAPINFO semihosting call, which should
-+     * probably be using information from the loaded application.
-+     */
-+    QTAILQ_FOREACH(subregion, &get_system_memory()->subregions,
-+                   subregions_link) {
-+        if (subregion->ram && !subregion->readonly) {
-+            Int128 top128 = int128_add(int128_make64(subregion->addr),
-+                                       subregion->size);
-+            if (subregion->addr <= addr && int128_lt(addr, top128)) {
-+                return subregion->addr;
-+            }
-+        }
-+    }
-+    return 0;
-+}
-+#endif
-+
- #ifdef TARGET_ARM
- static inline target_ulong
- common_semi_arg(CPUState *cs, int argno)
-@@ -171,7 +200,18 @@ common_semi_rambase(CPUState *cs)
- {
-     CPUArchState *env = cs->env_ptr;
-     const struct arm_boot_info *info = env->boot_info;
--    return info->loader_start;
-+    target_ulong sp;
-+
-+    if (info) {
-+        return info->loader_start;
-+    }
-+
-+    if (is_a64(env)) {
-+        sp = env->xregs[31];
-+    } else {
-+        sp = env->regs[13];
-+    }
-+    return common_semi_find_region_base(sp);
- }
- #endif
- 
--- 
-2.29.2
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Acked-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
+Thanks!
+
+> Signed-off-by: Emmanuel Blot <emmanuel.blot@sifive.com>
+> ---
+>  hw/riscv/sifive_e.c            | 2 +-
+>  hw/riscv/sifive_u.c            | 4 ++--
+>  hw/riscv/spike.c               | 4 ++--
+>  hw/riscv/virt.c                | 4 ++--
+>  include/hw/intc/sifive_clint.h | 4 ----
+>  include/hw/riscv/sifive_e.h    | 2 ++
+>  include/hw/riscv/sifive_u.h    | 2 ++
+>  include/hw/riscv/spike.h       | 2 ++
+>  include/hw/riscv/virt.h        | 2 ++
+>  9 files changed, 15 insertions(+), 11 deletions(-)
+>
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index 59bac4cc9a..89d0fe74b6 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -216,7 +216,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
+>      sifive_clint_create(memmap[SIFIVE_E_DEV_CLINT].base,
+>          memmap[SIFIVE_E_DEV_CLINT].size, 0, ms->smp.cpus,
+>          SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
+> -        SIFIVE_CLINT_TIMEBASE_FREQ, false);
+> +        SIFIVE_E_CLINT_TIMEBASE_FREQ, false);
+>      create_unimplemented_device("riscv.sifive.e.aon",
+>          memmap[SIFIVE_E_DEV_AON].base, memmap[SIFIVE_E_DEV_AON].size);
+>      sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index b2472c6627..403f614eca 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -155,7 +155,7 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
+>
+>      qemu_fdt_add_subnode(fdt, "/cpus");
+>      qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
+> -        SIFIVE_CLINT_TIMEBASE_FREQ);
+> +        SIFIVE_U_CLINT_TIMEBASE_FREQ);
+>      qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
+>      qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
+>
+> @@ -739,7 +739,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>      sifive_clint_create(memmap[SIFIVE_U_DEV_CLINT].base,
+>          memmap[SIFIVE_U_DEV_CLINT].size, 0, ms->smp.cpus,
+>          SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
+> -        SIFIVE_CLINT_TIMEBASE_FREQ, false);
+> +        SIFIVE_U_CLINT_TIMEBASE_FREQ, false);
+>
+>      if (!sysbus_realize(SYS_BUS_DEVICE(&s->prci), errp)) {
+>          return;
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index facac6e7d2..4beeeb4ef6 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -98,7 +98,7 @@ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
+>
+>      qemu_fdt_add_subnode(fdt, "/cpus");
+>      qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
+> -        SIFIVE_CLINT_TIMEBASE_FREQ);
+> +        SPIKE_CLINT_TIMEBASE_FREQ);
+>      qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
+>      qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
+>      qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
+> @@ -244,7 +244,7 @@ static void spike_board_init(MachineState *machine)
+>              memmap[SPIKE_CLINT].base + i * memmap[SPIKE_CLINT].size,
+>              memmap[SPIKE_CLINT].size, base_hartid, hart_count,
+>              SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
+> -            SIFIVE_CLINT_TIMEBASE_FREQ, false);
+> +            SPIKE_CLINT_TIMEBASE_FREQ, false);
+>      }
+>
+>      /* register system main memory (actual RAM) */
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 6bfd10dfc7..837368696c 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -213,7 +213,7 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+>
+>      qemu_fdt_add_subnode(fdt, "/cpus");
+>      qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
+> -                          SIFIVE_CLINT_TIMEBASE_FREQ);
+> +                          VIRT_CLINT_TIMEBASE_FREQ);
+>      qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
+>      qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
+>      qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
+> @@ -543,7 +543,7 @@ static void virt_machine_init(MachineState *machine)
+>              memmap[VIRT_CLINT].base + i * memmap[VIRT_CLINT].size,
+>              memmap[VIRT_CLINT].size, base_hartid, hart_count,
+>              SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
+> -            SIFIVE_CLINT_TIMEBASE_FREQ, true);
+> +            VIRT_CLINT_TIMEBASE_FREQ, true);
+>
+>          /* Per-socket PLIC hart topology configuration string */
+>          plic_hart_config_len =
+> diff --git a/include/hw/intc/sifive_clint.h b/include/hw/intc/sifive_clint.h
+> index a30be0f3d6..04856fd04b 100644
+> --- a/include/hw/intc/sifive_clint.h
+> +++ b/include/hw/intc/sifive_clint.h
+> @@ -53,8 +53,4 @@ enum {
+>      SIFIVE_TIME_BASE    = 0xBFF8
+>  };
+>
+> -enum {
+> -    SIFIVE_CLINT_TIMEBASE_FREQ = 10000000
+> -};
+> -
+>  #endif
+> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> index 83604da805..dbaba7f205 100644
+> --- a/include/hw/riscv/sifive_e.h
+> +++ b/include/hw/riscv/sifive_e.h
+> @@ -80,6 +80,8 @@ enum {
+>      SIFIVE_E_GPIO0_IRQ0 = 8
+>  };
+>
+> +#define SIFIVE_E_CLINT_TIMEBASE_FREQ 32768
+> +
+>  #define SIFIVE_E_PLIC_HART_CONFIG "M"
+>  #define SIFIVE_E_PLIC_NUM_SOURCES 127
+>  #define SIFIVE_E_PLIC_NUM_PRIORITIES 7
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index a9f7b4a084..dcdc708799 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -137,6 +137,8 @@ enum {
+>  #define SIFIVE_U_MANAGEMENT_CPU_COUNT   1
+>  #define SIFIVE_U_COMPUTE_CPU_COUNT      4
+>
+> +#define SIFIVE_U_CLINT_TIMEBASE_FREQ 1000000
+> +
+>  #define SIFIVE_U_PLIC_HART_CONFIG "MS"
+>  #define SIFIVE_U_PLIC_NUM_SOURCES 54
+>  #define SIFIVE_U_PLIC_NUM_PRIORITIES 7
+> diff --git a/include/hw/riscv/spike.h b/include/hw/riscv/spike.h
+> index cddeca2e77..d131bf4091 100644
+> --- a/include/hw/riscv/spike.h
+> +++ b/include/hw/riscv/spike.h
+> @@ -53,4 +53,6 @@ enum {
+>  #define SPIKE_V1_10_0_CPU TYPE_RISCV_CPU_BASE64
+>  #endif
+>
+> +#define SPIKE_CLINT_TIMEBASE_FREQ 10000000
+> +
+>  #endif
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index b4ed9a32eb..d9e417852a 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -70,6 +70,8 @@ enum {
+>      VIRTIO_NDEV = 0x35 /* Arbitrary maximum number of interrupts */
+>  };
+>
+> +#define VIRT_CLINT_TIMEBASE_FREQ 10000000
+> +
+>  #define VIRT_PLIC_HART_CONFIG "MS"
+>  #define VIRT_PLIC_NUM_SOURCES 127
+>  #define VIRT_PLIC_NUM_PRIORITIES 7
 
