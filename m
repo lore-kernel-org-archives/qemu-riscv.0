@@ -1,43 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kjXzb-00054K-0L
-	for mharc-qemu-riscv@gnu.org; Sun, 29 Nov 2020 20:28:39 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49900)
+	id 1kjmYu-0006Wk-BY
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Nov 2020 12:02:04 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39452)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kjXzZ-00053h-8X; Sun, 29 Nov 2020 20:28:37 -0500
-Received: from szxga04-in.huawei.com ([45.249.212.190]:2809)
+ (Exim 4.90_1) (envelope-from <alr48@hermes.cam.ac.uk>)
+ id 1kjmYs-0006Ua-5p; Mon, 30 Nov 2020 12:02:03 -0500
+Received: from ppsw-40.csi.cam.ac.uk ([131.111.8.140]:36026)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kjXzW-0006eW-JC; Sun, 29 Nov 2020 20:28:36 -0500
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CknfZ1m9rzkj76;
- Mon, 30 Nov 2020 09:27:50 +0800 (CST)
-Received: from huawei.com (10.174.186.236) by DGGEMS412-HUB.china.huawei.com
- (10.3.19.212) with Microsoft SMTP Server id 14.3.487.0; Mon, 30 Nov 2020
- 09:28:13 +0800
-From: Yifei Jiang <jiangyifei@huawei.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
- <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
- <victor.zhangxiaofeng@huawei.com>, <wu.wubin@huawei.com>,
- <zhang.zhanghailiang@huawei.com>, <dengkai1@huawei.com>,
- <yinyipeng1@huawei.com>, Yifei Jiang <jiangyifei@huawei.com>
-Subject: [PATCH] target/riscv: Fix the bug of HLVX/HLV/HSV
-Date: Mon, 30 Nov 2020 09:28:10 +0800
-Message-ID: <20201130012810.899-1-jiangyifei@huawei.com>
-X-Mailer: git-send-email 2.26.2.windows.1
+ (Exim 4.90_1) (envelope-from <alr48@hermes.cam.ac.uk>)
+ id 1kjmYe-0006H5-Su; Mon, 30 Nov 2020 12:02:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cam.ac.uk; 
+ s=20180806.ppsw;
+ h=Sender:Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Reply-To:Content-Type:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=NOEpV6CZKeGUY0MSrfRAXq4X54rBPjUzgadK25fXuQc=; b=nihs4+fhItuXKJ9eJSS0/v5sBx
+ GKzA1cgdzKfc2fwWoVnWVLVrDb5Vrr63WIy0SOiG/Y3P2AHwPk5YqmdA++eH87TVj3nR0hrSuIAor
+ zB41B4Pqa0LvuR4WWRQlWrQCBwbAaadRvpuWJUsPZvOtpqyU40Ztn0mVQkRzsKjA8EfQ=;
+X-Cam-AntiVirus: no malware found
+X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
+Received: from host86-156-62-101.range86-156.btcentralplus.com
+ ([86.156.62.101]:56575 helo=Alexs-MBP-10.home)
+ by ppsw-40.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.158]:587)
+ with esmtpsa (LOGIN:alr48) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ id 1kjmYX-000pBy-lU (Exim 4.92.3)
+ (return-path <alr48@hermes.cam.ac.uk>); Mon, 30 Nov 2020 17:01:41 +0000
+From: Alex Richardson <Alexander.Richardson@cl.cam.ac.uk>
+To: 
+Cc: Alex Richardson <Alexander.Richardson@cl.cam.ac.uk>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
+ qemu-devel@nongnu.org (open list:All patches CC here)
+Subject: [PATCH] target/riscv: Fix definition of MSTATUS_TW and MSTATUS_TSR
+Date: Mon, 30 Nov 2020 17:01:17 +0000
+Message-Id: <20201130170117.71281-1-Alexander.Richardson@cl.cam.ac.uk>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain
-X-Originating-IP: [10.174.186.236]
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.190;
- envelope-from=jiangyifei@huawei.com; helo=szxga04-in.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Sender: "A.L. Richardson" <alr48@hermes.cam.ac.uk>
+Received-SPF: pass client-ip=131.111.8.140;
+ envelope-from=alr48@hermes.cam.ac.uk; helo=ppsw-40.csi.cam.ac.uk
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_MSPIKE_H3=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -51,39 +64,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Nov 2020 01:28:37 -0000
+X-List-Received-Date: Mon, 30 Nov 2020 17:02:03 -0000
 
-We found that the hypervisor virtual-machine load and store instructions, 
-included HLVX/HLV/HSV, couldn't access guest userspace memory.
+The TW and TSR fields should be bits 21 and 22 and not 30/29.
+This was found while comparing QEMU behaviour against the sail formal
+model (https://github.com/rems-project/sail-riscv/).
 
-In the riscv-privileged spec, HLVX/HLV/HSV is defined as follow: 
-"As usual when V=1, two-stage address translation is applied, and
-the HS-level sstatus.SUM is ignored."
-
-But get_physical_address() doesn't ignore sstatus.SUM, when HLVX/HLV/HSV
-accesses guest userspace memory. So this patch fixes it.
-
-Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+Signed-off-by: Alex Richardson <Alexander.Richardson@cl.cam.ac.uk>
 ---
- target/riscv/cpu_helper.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ target/riscv/cpu_bits.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index a2787b1d48..7274f971a4 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -367,7 +367,8 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-         vm = get_field(env->hgatp, HGATP_MODE);
-         widened = 2;
-     }
--    sum = get_field(env->mstatus, MSTATUS_SUM);
-+    /* status.SUM will be ignored if execute on background */
-+    sum = get_field(env->mstatus, MSTATUS_SUM) || use_background;
-     switch (vm) {
-     case VM_1_10_SV32:
-       levels = 2; ptidxbits = 10; ptesize = 4; break;
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 24b24c69c5..92147332c6 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -379,8 +379,8 @@
+ #define MSTATUS_MXR         0x00080000
+ #define MSTATUS_VM          0x1F000000 /* until: priv-1.9.1 */
+ #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
+-#define MSTATUS_TW          0x20000000 /* since: priv-1.10 */
+-#define MSTATUS_TSR         0x40000000 /* since: priv-1.10 */
++#define MSTATUS_TW          0x00200000 /* since: priv-1.10 */
++#define MSTATUS_TSR         0x00400000 /* since: priv-1.10 */
+ #define MSTATUS_GVA         0x4000000000ULL
+ #define MSTATUS_MPV         0x8000000000ULL
+ 
 -- 
-2.19.1
+2.29.2
 
 
