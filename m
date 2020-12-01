@@ -1,61 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kjvDF-0004S5-U5
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Nov 2020 21:16:18 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32832)
+	id 1kjvIr-0006iN-Bn
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Nov 2020 21:22:05 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34026)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kjvDC-0004Rd-U1; Mon, 30 Nov 2020 21:16:14 -0500
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:34135)
+ id 1kjvIp-0006gh-2v; Mon, 30 Nov 2020 21:22:03 -0500
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:44958)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kjvDA-0001dS-2L; Mon, 30 Nov 2020 21:16:14 -0500
-Received: by mail-il1-x141.google.com with SMTP id x15so193856ilq.1;
- Mon, 30 Nov 2020 18:16:10 -0800 (PST)
+ id 1kjvIn-0002Do-E7; Mon, 30 Nov 2020 21:22:02 -0500
+Received: by mail-io1-xd43.google.com with SMTP id z5so68379iob.11;
+ Mon, 30 Nov 2020 18:22:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=z3vjHFKy7KBmImLMItewectQEZhcQ2INzp7i8mHmpBs=;
- b=bjDmCA6mZMWYv1VxF1BVf1Y6z+0EbBckM4sKH82lz0NskJ38s0RXBQngIDW8rM6sq0
- d8s6i9Sx3AxnLr/mGozppHZPyVRhz+PsrhT+C1tIllBvho8/i9Ilg4/uxyiRgRXyWbWC
- 37///QkHNwLzSVxfGHxA0PgwUOljC90svEbXzcWiMpFND4ELaJZqLtPTy4F8O4DlUzkh
- lbtP+IB6FG+RMQ+FnPQ3OksjbUWesYSfuVlQaMf56k68hVbdvzWVEo/Wxazmnd8W2ULL
- Wy7dK5AFsb277yNtV2nAU+DHNIB8RigKF9bFyNkFHAvwRmRprfuCplpH8ozZekrpwAqi
- 2eSw==
+ :cc; bh=rGbLsEdi2R+UiZrVOPjH3eDKw5FeTdINDqXk+4b9J58=;
+ b=bLDW2vQApu73zv7cwk0EpdDIfD62Hi1YPfZ0Zc2Jqm0sluISozTtWtLBsjRj0Wshrd
+ 5o10H8fzQ4l70iv//LUaCncci2xGb6O/5dCVTjveiJN6YTyPsy27oG/0Rl5tMWm25N16
+ PUYWX7OS1rogcaapAXsWfQVDMuAllKOMKdqdqhj8aYYg/6yxCkEV+jvPyBp1g4w8aumc
+ OSduVjBbnPwfx7AGIHsdE3304vnedZNz+bjHzSTKDzfU/5wP8H12StF1Qv+/o8uEcJQW
+ g3BZFmcXlubW6jW91FCgkn5ZFEs/ZWLXhfiD57AKnDvxaqLPlIWnmoBJuu4H8qq2b0L2
+ L9Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=z3vjHFKy7KBmImLMItewectQEZhcQ2INzp7i8mHmpBs=;
- b=PPypy1f0k+SWd84QhOZuxvn1iLz6V1MAkiYzKAq3nkYTEabfwpHU6JzGYcmYvh5tRu
- 9zwNWAVEsrpav/L41QjGD+9OxgwVoqiBavq3sKOeOjCPk0dRPW5QnSwhEh8pJlQBXCrZ
- b5nppyrY4DcZzhfcIM7WXqSjllXbi4b7EUc7pcrCtU6292Z3TrROF3WDSiBHH6Po0pAZ
- 78xI72F8UkCkrLC/kY8u0ByLjlQaLxB6MFDWUyTsS2wBIU/2A7P1J7puPUdVdGVHnwmr
- lMVO2m4mBDjJTI0+odQ0YfUkPVkFg8fzyZhTayoTKXH+RyreBf1ljXvNQOou1bzXQrSd
- OGlQ==
-X-Gm-Message-State: AOAM530jXdqBbTrtm74IiKPLSNA7+9lz2/F5TZoCf+nk7cnXZ1+WLYHF
- /iJ4UIfcMGex3awL0eKjKmPk45ClDkXT3YBec7Q=
-X-Google-Smtp-Source: ABdhPJw5gt9m1MACxXDI8CLV3qYvtZqc5kfxkwx/mSNwRgqJSPxJbF9cZuSLZNQgxjfBSOImyXogODv1b51lfcfHaOM=
-X-Received: by 2002:a92:4c3:: with SMTP id 186mr654029ile.177.1606788970132;
- Mon, 30 Nov 2020 18:16:10 -0800 (PST)
+ bh=rGbLsEdi2R+UiZrVOPjH3eDKw5FeTdINDqXk+4b9J58=;
+ b=E66MFWzv3Mb24ddWOcOIt5ubsmgiHXqwGGh/YTaobj2rLWMBGlYEu7f7cRljFh3YHr
+ kf0QxRr17zuVUjjOR1nUVkzbfDpMnAF0TSID+tF1lKJecbhn7ZUNujtOHcOF1dlmFcE4
+ 2iisy/y+9YpZybwod1349I2U0o7XW5Y0OOl3DM3uFdOz4ZClOBK0q5p5jt6ZUBCbgLSY
+ Z7abm6NhA9z6yAcBmyqsyJS7+KqomirCVdkqLEbWXPktVbXqbPt9/CzbH2Fwbg7TJYGu
+ VfgF4DybdhfZeFmL9mcqg/GSDUoCbkaViVNMI/bkwJKyknpNIBEjghzgT3/9YXDJLXlY
+ gSyA==
+X-Gm-Message-State: AOAM5320B8fb7U1ZX0IVTpGsGc0nya3zq/fuP3eleivnnyc3D0upsMxq
+ YI5AaYs/hdXXd3zUsTykj5KHYkzNXpo7VSfXKsM=
+X-Google-Smtp-Source: ABdhPJy61t+ySj22zo/e9iY2/YeMOZ8O+tH6kWr8DT3HEv+/ENf4qy3NJYxlRipJHRS37Wu4HW1Yk7eTc6WyspyHD5U=
+X-Received: by 2002:a02:6c09:: with SMTP id w9mr696980jab.135.1606789320348;
+ Mon, 30 Nov 2020 18:22:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20201130012810.899-1-jiangyifei@huawei.com>
-In-Reply-To: <20201130012810.899-1-jiangyifei@huawei.com>
+References: <20201130170117.71281-1-Alexander.Richardson@cl.cam.ac.uk>
+In-Reply-To: <20201130170117.71281-1-Alexander.Richardson@cl.cam.ac.uk>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 30 Nov 2020 18:03:53 -0800
-Message-ID: <CAKmqyKOp1uP3uqrOp0hib34nSO1NKxRY13Uq5en90gKtzT-p3Q@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix the bug of HLVX/HLV/HSV
-To: Yifei Jiang <jiangyifei@huawei.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Zhanghailiang <zhang.zhanghailiang@huawei.com>, 
+Date: Mon, 30 Nov 2020 18:09:40 -0800
+Message-ID: <CAKmqyKMD3c5dD8-V9kfYS5aizE1fm3N+ot37kPgyb10km7gmsA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Fix definition of MSTATUS_TW and MSTATUS_TSR
+To: Alex Richardson <Alexander.Richardson@cl.cam.ac.uk>
+Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "Zhangxiaofeng (F)" <victor.zhangxiaofeng@huawei.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, yinyipeng <yinyipeng1@huawei.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, "Wubin (H)" <wu.wubin@huawei.com>, 
- "dengkai (A)" <dengkai1@huawei.com>
+ "open list:All patches CC here" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,47 +73,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2020 02:16:16 -0000
+X-List-Received-Date: Tue, 01 Dec 2020 02:22:03 -0000
 
-On Sun, Nov 29, 2020 at 5:37 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
+On Mon, Nov 30, 2020 at 9:07 AM Alex Richardson
+<Alexander.Richardson@cl.cam.ac.uk> wrote:
 >
-> We found that the hypervisor virtual-machine load and store instructions,
-> included HLVX/HLV/HSV, couldn't access guest userspace memory.
+> The TW and TSR fields should be bits 21 and 22 and not 30/29.
+> This was found while comparing QEMU behaviour against the sail formal
+> model (https://github.com/rems-project/sail-riscv/).
 >
-> In the riscv-privileged spec, HLVX/HLV/HSV is defined as follow:
-> "As usual when V=1, two-stage address translation is applied, and
-> the HS-level sstatus.SUM is ignored."
->
-> But get_physical_address() doesn't ignore sstatus.SUM, when HLVX/HLV/HSV
-> accesses guest userspace memory. So this patch fixes it.
->
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-> Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+> Signed-off-by: Alex Richardson <Alexander.Richardson@cl.cam.ac.uk>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu_helper.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  target/riscv/cpu_bits.h | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index a2787b1d48..7274f971a4 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -367,7 +367,8 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->          vm = get_field(env->hgatp, HGATP_MODE);
->          widened = 2;
->      }
-> -    sum = get_field(env->mstatus, MSTATUS_SUM);
-> +    /* status.SUM will be ignored if execute on background */
-> +    sum = get_field(env->mstatus, MSTATUS_SUM) || use_background;
->      switch (vm) {
->      case VM_1_10_SV32:
->        levels = 2; ptidxbits = 10; ptesize = 4; break;
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 24b24c69c5..92147332c6 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -379,8 +379,8 @@
+>  #define MSTATUS_MXR         0x00080000
+>  #define MSTATUS_VM          0x1F000000 /* until: priv-1.9.1 */
+>  #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
+> -#define MSTATUS_TW          0x20000000 /* since: priv-1.10 */
+> -#define MSTATUS_TSR         0x40000000 /* since: priv-1.10 */
+> +#define MSTATUS_TW          0x00200000 /* since: priv-1.10 */
+> +#define MSTATUS_TSR         0x00400000 /* since: priv-1.10 */
+>  #define MSTATUS_GVA         0x4000000000ULL
+>  #define MSTATUS_MPV         0x8000000000ULL
+>
 > --
-> 2.19.1
+> 2.29.2
 >
 >
 
