@@ -1,45 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kjwMy-0001Oq-7m
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Nov 2020 22:30:24 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46266)
+	id 1kk12J-0003Fs-FW
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Dec 2020 03:29:23 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38840)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kjwMw-0001N2-NN; Mon, 30 Nov 2020 22:30:22 -0500
-Received: from szxga05-in.huawei.com ([45.249.212.191]:2984)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kjwMt-0001Oc-Tu; Mon, 30 Nov 2020 22:30:22 -0500
-Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4ClSJl6yM6zhjMS;
- Tue,  1 Dec 2020 11:29:43 +0800 (CST)
-Received: from huawei.com (10.174.186.236) by DGGEMS401-HUB.china.huawei.com
- (10.3.19.201) with Microsoft SMTP Server id 14.3.487.0; Tue, 1 Dec 2020
- 11:30:00 +0800
-From: Yifei Jiang <jiangyifei@huawei.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: <palmer@dabbelt.com>, <Alistair.Francis@wdc.com>,
- <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
- <victor.zhangxiaofeng@huawei.com>, <wu.wubin@huawei.com>,
- <zhang.zhanghailiang@huawei.com>, <dengkai1@huawei.com>,
- <limingwang@huawei.com>, Yifei Jiang <jiangyifei@huawei.com>
-Subject: [PATCH 1/1] target-riscv: support QMP dump-guest-memory
-Date: Tue, 1 Dec 2020 11:29:36 +0800
-Message-ID: <20201201032936.1213-2-jiangyifei@huawei.com>
-X-Mailer: git-send-email 2.26.2.windows.1
-In-Reply-To: <20201201032936.1213-1-jiangyifei@huawei.com>
-References: <20201201032936.1213-1-jiangyifei@huawei.com>
+ (Exim 4.90_1) (envelope-from <emmanuel.blot@sifive.com>)
+ id 1kk12H-0003EZ-MQ
+ for qemu-riscv@nongnu.org; Tue, 01 Dec 2020 03:29:21 -0500
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:34879)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <emmanuel.blot@sifive.com>)
+ id 1kk12F-0001YL-VC
+ for qemu-riscv@nongnu.org; Tue, 01 Dec 2020 03:29:21 -0500
+Received: by mail-wm1-x343.google.com with SMTP id e25so3221070wme.0
+ for <qemu-riscv@nongnu.org>; Tue, 01 Dec 2020 00:29:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:subject:date:message-id:references:mime-version;
+ bh=dLxmvSHeayY4n8oHQJrHPbeg+2Pf37O5ZJqkV3gPCVM=;
+ b=g+15TZzYSKY30YH1kcse5+yF7pJjCFbokwlsifUbZURIrPqbcBYhFrYfwySv9ylJHH
+ R6ETbme7ZwTq4gao/+loY72kKEvNb/58aJX+rvnsmdXv4rw31MAYKy/TDM2ISP6eHuz7
+ qLq4SmzQz9eeO7mHOBvQw90PBBbIimJyYmNyeB+4Rp0WxrctmFeub2T8NVW/WI8Zy+Iu
+ 8w+DlvD8VdHkrxxti0EejR/zhuWaCckCCqQB+DecQ4fzAcrpvjub2QdT/meyJnLg4fbs
+ Sw5rKoDORNjRrX8RkacInYXzSwb8wrLQgNrk7Oa/M40psZpr3KaMD6ljVaD8BhiXT2SN
+ IiBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:subject:date:message-id:references
+ :mime-version;
+ bh=dLxmvSHeayY4n8oHQJrHPbeg+2Pf37O5ZJqkV3gPCVM=;
+ b=Uq6bw5t4YTJheuSxJq7vwUh9J15phbMGiK/CG+/FjPgAZq7turdLtlzIbTTrxcYw8l
+ qQEEYK0eYzrYl2LYn7zmDBA3G6vIqoxq6k+DuXfH8P46nw5yGozGgBlrpX2Bd3FFQPe2
+ qmdPeHq4Wa4eLwFRuzEb9bXLNEi0BQ37j0Pd2gDM0RxUf9py5+w15FipyNP0Qk8HP91T
+ fvGeWq3ZXh3kKakkMLy6HZ5lq3eH8qOuiYRl73y6BuP5roVrB11vjzdGGF3N818NXwgA
+ x8EF/k+eEbya0mjLlEvMPICASzADshj68R3TAzcKrzkrLGrD8pVvHFNYUJ3brcAKQTw1
+ zQMw==
+X-Gm-Message-State: AOAM531Q3fZfVKq5fnu5crIN/d2G74P//+bWEILhHITRaStOOrS2oKPz
+ 2x87v5GC4E3/qhnC3u2bzQmSU4Ez/TkrvBjx
+X-Google-Smtp-Source: ABdhPJzlnx6RcRw/9Z7T8EOGsPw9c2PxUbF+/B4OoTXBkwltGQqgYudM6atHMklPDvjMMC7t0QdXZA==
+X-Received: by 2002:a1c:4c11:: with SMTP id z17mr1502978wmf.13.1606811357831; 
+ Tue, 01 Dec 2020 00:29:17 -0800 (PST)
+Received: from [192.168.2.1] (net.iroazh.eu. [109.190.73.171])
+ by smtp.gmail.com with ESMTPSA id w21sm1551037wmi.29.2020.12.01.00.29.16
+ for <qemu-riscv@nongnu.org>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 01 Dec 2020 00:29:17 -0800 (PST)
+From: "Emmanuel Blot" <emmanuel.blot@sifive.com>
+To: qemu-riscv@nongnu.org
+Subject: Fwd: [PATCH 0/2] Fix PLIC issues
+Date: Tue, 01 Dec 2020 09:29:15 +0100
+X-Mailer: MailMate (1.13.2r5673)
+Message-ID: <AFB0EE63-BDB7-4E5B-B670-1E5B95F24234@sifive.com>
+References: <20201103152920.90957-1-emmanuel.blot@sifive.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain
-X-Originating-IP: [10.174.186.236]
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.191;
- envelope-from=jiangyifei@huawei.com; helo=szxga05-in.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; format=flowed; markup=markdown
+Received-SPF: pass client-ip=2a00:1450:4864:20::343;
+ envelope-from=emmanuel.blot@sifive.com; helo=mail-wm1-x343.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -53,270 +73,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2020 03:30:23 -0000
+X-List-Received-Date: Tue, 01 Dec 2020 08:29:21 -0000
 
-Add the support needed for creating prstatus elf notes. Now elf notes
-only contains user_regs. This allows us to use QMP dump-guest-memory.
+ping
 
-Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-Signed-off-by: Mingwang Li <limingwang@huawei.com>
----
- target/riscv/arch_dump.c | 189 +++++++++++++++++++++++++++++++++++++++
- target/riscv/cpu.c       |   2 +
- target/riscv/cpu.h       |   4 +
- target/riscv/cpu_bits.h  |   1 +
- target/riscv/meson.build |   1 +
- 5 files changed, 197 insertions(+)
- create mode 100644 target/riscv/arch_dump.c
+Forwarded message:
 
-diff --git a/target/riscv/arch_dump.c b/target/riscv/arch_dump.c
-new file mode 100644
-index 0000000000..b89ddf18c7
---- /dev/null
-+++ b/target/riscv/arch_dump.c
-@@ -0,0 +1,189 @@
-+/* Support for writing ELF notes for RISC-V architectures
-+ *
-+ * Copyright (C) 2020 Huawei Technologies Co., Ltd
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "cpu.h"
-+#include "elf.h"
-+#include "sysemu/dump.h"
-+
-+/* struct user_regs_struct from arch/riscv/include/uapi/asm/ptrace.h */
-+struct riscv_user_regs {
-+    target_ulong pc;
-+    target_ulong regs[31];
-+} QEMU_PACKED;
-+
-+/* struct elf_prstatus from include/uapi/linux/elfcore.h */
-+struct riscv64_elf_prstatus {
-+    char pad1[32]; /* 32 == offsetof(struct elf_prstatus, pr_pid) */
-+    uint32_t pr_pid;
-+    char pad2[76]; /* 76 == offsetof(struct elf_prstatus, pr_reg) -
-+                            offsetof(struct elf_prstatus, pr_ppid) */
-+    struct riscv_user_regs pr_reg;
-+    char pad3[8];
-+} QEMU_PACKED;
-+
-+struct riscv64_note {
-+    Elf64_Nhdr hdr;
-+    char name[8]; /* align_up(sizeof("CORE"), 4) */
-+    struct riscv64_elf_prstatus prstatus;
-+} QEMU_PACKED;
-+
-+#define RISCV64_NOTE_HEADER_SIZE offsetof(struct riscv64_note, prstatus)
-+#define RISCV64_PRSTATUS_NOTE_SIZE \
-+            (RISCV64_NOTE_HEADER_SIZE + sizeof(struct riscv64_elf_prstatus))
-+
-+static void riscv64_note_init(struct riscv64_note *note, DumpState *s,
-+                              const char *name, Elf64_Word namesz,
-+                              Elf64_Word type, Elf64_Word descsz)
-+{
-+    memset(note, 0, sizeof(*note));
-+
-+    note->hdr.n_namesz = cpu_to_dump32(s, namesz);
-+    note->hdr.n_descsz = cpu_to_dump32(s, descsz);
-+    note->hdr.n_type = cpu_to_dump32(s, type);
-+
-+    memcpy(note->name, name, namesz);
-+}
-+
-+int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-+                               int cpuid, void *opaque)
-+{
-+    struct riscv64_note note;
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-+    DumpState *s = opaque;
-+    int ret, i = 0;
-+    const char name[] = "CORE";
-+
-+    riscv64_note_init(&note, s, name, sizeof(name),
-+                      NT_PRSTATUS, sizeof(note.prstatus));
-+
-+    note.prstatus.pr_pid = cpu_to_dump32(s, cpuid);
-+
-+    note.prstatus.pr_reg.pc = cpu_to_dump64(s, env->pc);
-+
-+    for (i = 0; i < 31; i++) {
-+        note.prstatus.pr_reg.regs[i] = cpu_to_dump64(s, env->gpr[i + 1]);
-+    }
-+
-+    ret = f(&note, RISCV64_PRSTATUS_NOTE_SIZE, s);
-+    if (ret < 0) {
-+        return -1;
-+    }
-+
-+    return ret;
-+}
-+
-+struct riscv32_elf_prstatus {
-+    char pad1[24]; /* 24 == offsetof(struct elf_prstatus, pr_pid) */
-+    uint32_t pr_pid;
-+    char pad2[44]; /* 44 == offsetof(struct elf_prstatus, pr_reg) -
-+                            offsetof(struct elf_prstatus, pr_ppid) */
-+    struct riscv_user_regs pr_reg;
-+    char pad3[4];
-+} QEMU_PACKED;
-+
-+struct riscv32_note {
-+    Elf32_Nhdr hdr;
-+    char name[8]; /* align_up(sizeof("CORE"), 4) */
-+    struct riscv32_elf_prstatus prstatus;
-+} QEMU_PACKED;
-+
-+#define RISCV32_NOTE_HEADER_SIZE offsetof(struct riscv32_note, prstatus)
-+#define RISCV32_PRSTATUS_NOTE_SIZE \
-+            (RISCV32_NOTE_HEADER_SIZE + sizeof(struct riscv32_elf_prstatus))
-+
-+static void riscv32_note_init(struct riscv32_note *note, DumpState *s,
-+                              const char *name, Elf32_Word namesz,
-+                              Elf32_Word type, Elf32_Word descsz)
-+{
-+    memset(note, 0, sizeof(*note));
-+
-+    note->hdr.n_namesz = cpu_to_dump32(s, namesz);
-+    note->hdr.n_descsz = cpu_to_dump32(s, descsz);
-+    note->hdr.n_type = cpu_to_dump32(s, type);
-+
-+    memcpy(note->name, name, namesz);
-+}
-+
-+int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
-+                               int cpuid, void *opaque)
-+{
-+    struct riscv32_note note;
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-+    DumpState *s = opaque;
-+    int ret, i;
-+    const char name[] = "CORE";
-+
-+    riscv32_note_init(&note, s, name, sizeof(name),
-+                      NT_PRSTATUS, sizeof(note.prstatus));
-+
-+    note.prstatus.pr_pid = cpu_to_dump32(s, cpuid);
-+
-+    note.prstatus.pr_reg.pc = cpu_to_dump32(s, env->pc);
-+
-+    for (i = 0; i < 31; i++) {
-+        note.prstatus.pr_reg.regs[i] = cpu_to_dump32(s, env->gpr[i + 1]);
-+    }
-+
-+    ret = f(&note, RISCV32_PRSTATUS_NOTE_SIZE, s);
-+    if (ret < 0) {
-+        return -1;
-+    }
-+
-+    return ret;
-+}
-+
-+int cpu_get_dump_info(ArchDumpInfo *info,
-+                      const GuestPhysBlockList *guest_phys_blocks)
-+{
-+    RISCVCPU *cpu;
-+    CPURISCVState *env;
-+
-+    if (first_cpu == NULL) {
-+        return -1;
-+    }
-+    cpu = RISCV_CPU(first_cpu);
-+    env = &cpu->env;
-+
-+    info->d_machine = EM_RISCV;
-+
-+#if defined(TARGET_RISCV64)
-+    info->d_class = ELFCLASS64;
-+#else
-+    info->d_class = ELFCLASS32;
-+#endif
-+
-+    info->d_endian = (env->mstatus & MSTATUS_UBE) != 0
-+                     ? ELFDATA2MSB : ELFDATA2LSB;
-+
-+    return 0;
-+}
-+
-+ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
-+{
-+    size_t note_size;
-+
-+    if (class == ELFCLASS64) {
-+        note_size = RISCV64_PRSTATUS_NOTE_SIZE;
-+    } else {
-+        note_size = RISCV32_PRSTATUS_NOTE_SIZE;
-+    }
-+
-+    return note_size * nr_cpus;
-+}
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6a0264fc6b..52399d83b4 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -544,6 +544,8 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     cc->dump_state = riscv_cpu_dump_state;
-     cc->set_pc = riscv_cpu_set_pc;
-     cc->synchronize_from_tb = riscv_cpu_synchronize_from_tb;
-+    cc->write_elf64_note = riscv_cpu_write_elf64_note;
-+    cc->write_elf32_note = riscv_cpu_write_elf32_note;
-     cc->gdb_read_register = riscv_cpu_gdb_read_register;
-     cc->gdb_write_register = riscv_cpu_gdb_write_register;
-     cc->gdb_num_core_regs = 33;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index c0a326c843..4a340b0c73 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -315,6 +315,10 @@ extern const char * const riscv_intr_names[];
- 
- const char *riscv_cpu_get_trap_name(target_ulong cause, bool async);
- void riscv_cpu_do_interrupt(CPUState *cpu);
-+int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-+                               int cpuid, void *opaque);
-+int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
-+                               int cpuid, void *opaque);
- int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
- int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
- bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 24b24c69c5..d7259561e7 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -368,6 +368,7 @@
- #define MSTATUS_MIE         0x00000008
- #define MSTATUS_UPIE        0x00000010
- #define MSTATUS_SPIE        0x00000020
-+#define MSTATUS_UBE         0x00000040
- #define MSTATUS_MPIE        0x00000080
- #define MSTATUS_SPP         0x00000100
- #define MSTATUS_MPP         0x00001800
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index 14a5c62dac..88ab850682 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -26,6 +26,7 @@ riscv_ss.add(files(
- 
- riscv_softmmu_ss = ss.source_set()
- riscv_softmmu_ss.add(files(
-+  'arch_dump.c',
-   'pmp.c',
-   'monitor.c',
-   'machine.c'
--- 
-2.19.1
-
+> From: Emmanuel Blot <emmanuel.blot@sifive.com>
+> To: qemu-riscv@nongnu.org
+> Cc: Emmanuel Blot <emmanuel.blot@sifive.com>
+> Subject: [PATCH 0/2] Fix PLIC issues
+> Date: Tue,  3 Nov 2020 16:29:17 +0100
+>
+> PLIC may trigger a buffer overflow when the highest IRQ source is 
+> signalled.
+> IRQ0 being treated as "non-existent" IRQ, N+1 slot should be allocated 
+> and
+> handled.
+>
+> Emmanuel Blot (2):
+>   hw/riscv: plic: Fix highest IRQ source slot
+>   hw/riscv: plic: Make IRQ slot 0 part of the IRQ priority array
+>
+>  hw/intc/sifive_plic.c              | 27 +++++++++++++++------------
+>  include/hw/riscv/microchip_pfsoc.h |  2 +-
+>  include/hw/riscv/sifive_e.h        |  2 +-
+>  include/hw/riscv/sifive_u.h        |  2 +-
+>  include/hw/riscv/virt.h            |  2 +-
+>  5 files changed, 19 insertions(+), 16 deletions(-)
+>
+> -- 
+> 2.28.0
 
