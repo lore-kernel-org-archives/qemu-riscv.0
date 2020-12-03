@@ -1,20 +1,20 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kko1Y-0004VM-5A
-	for mharc-qemu-riscv@gnu.org; Thu, 03 Dec 2020 07:47:52 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45220)
+	id 1kko1b-0004es-Pa
+	for mharc-qemu-riscv@gnu.org; Thu, 03 Dec 2020 07:47:55 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45254)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kko1V-0004Pc-W6; Thu, 03 Dec 2020 07:47:50 -0500
-Received: from szxga04-in.huawei.com ([45.249.212.190]:2820)
+ id 1kko1Z-0004aX-Vu; Thu, 03 Dec 2020 07:47:54 -0500
+Received: from szxga07-in.huawei.com ([45.249.212.35]:2162)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kko1T-0006w2-7G; Thu, 03 Dec 2020 07:47:49 -0500
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CmwZz2XJ5zkkt8;
- Thu,  3 Dec 2020 20:47:07 +0800 (CST)
+ id 1kko1X-0006x8-Ey; Thu, 03 Dec 2020 07:47:53 -0500
+Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4CmwbD30yNz777t;
+ Thu,  3 Dec 2020 20:47:20 +0800 (CST)
 Received: from huawei.com (10.174.186.236) by DGGEMS403-HUB.china.huawei.com
  (10.3.19.203) with Microsoft SMTP Server id 14.3.487.0; Thu, 3 Dec 2020
- 20:47:31 +0800
+ 20:47:40 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
@@ -24,9 +24,10 @@ CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
  <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
  <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
  <jiangyifei@huawei.com>
-Subject: [PATCH RFC v4 09/15] target/riscv: Add host cpu type
-Date: Thu, 3 Dec 2020 20:46:57 +0800
-Message-ID: <20201203124703.168-10-jiangyifei@huawei.com>
+Subject: [PATCH RFC v4 14/15] target/riscv: Synchronize vcpu's frequency with
+ KVM
+Date: Thu, 3 Dec 2020 20:47:02 +0800
+Message-ID: <20201203124703.168-15-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
 In-Reply-To: <20201203124703.168-1-jiangyifei@huawei.com>
 References: <20201203124703.168-1-jiangyifei@huawei.com>
@@ -35,8 +36,8 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain
 X-Originating-IP: [10.174.186.236]
 X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.190;
- envelope-from=jiangyifei@huawei.com; helo=szxga04-in.huawei.com
+Received-SPF: pass client-ip=45.249.212.35; envelope-from=jiangyifei@huawei.com;
+ helo=szxga07-in.huawei.com
 X-Spam_score_int: -41
 X-Spam_score: -4.2
 X-Spam_bar: ----
@@ -55,57 +56,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Dec 2020 12:47:50 -0000
+X-List-Received-Date: Thu, 03 Dec 2020 12:47:54 -0000
 
-Currently, host cpu is inherited simply.
+If vcpu's frequency is specified by cpu option 'frequency', it
+will be set into KVM by KVM_SET_ONE_REG ioctl. Otherwise, vcpu's
+frequency will follow KVM by KVM_GET_ONE_REG ioctl.
 
 Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
 ---
- target/riscv/cpu.c | 6 ++++++
- target/riscv/cpu.h | 1 +
- 2 files changed, 7 insertions(+)
+ target/riscv/kvm.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index faee98a58c..439dc89ee7 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -186,6 +186,10 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
- 
- #endif
- 
-+static void riscv_host_cpu_init(Object *obj)
-+{
-+}
-+
- static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
+diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+index 1e16d24544..3499efd4eb 100644
+--- a/target/riscv/kvm.c
++++ b/target/riscv/kvm.c
+@@ -409,6 +409,8 @@ int kvm_arch_get_registers(CPUState *cs)
+ int kvm_arch_put_registers(CPUState *cs, int level)
  {
-     ObjectClass *oc;
-@@ -641,10 +645,12 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rvxx_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32_imafcu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rvxx_sifive_u_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
- #elif defined(TARGET_RISCV64)
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           riscv_base_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rvxx_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rvxx_sifive_u_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
- #endif
- };
+     int ret = 0;
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    CPURISCVState *env = &cpu->env;
  
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index ad1c90f798..4288898019 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -43,6 +43,7 @@
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
- #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
-+#define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+     ret = kvm_riscv_put_regs_core(cs);
+     if (ret) {
+@@ -425,6 +427,10 @@ int kvm_arch_put_registers(CPUState *cs, int level)
+         return ret;
+     }
  
- #define RV32 ((target_ulong)1 << (TARGET_LONG_BITS - 2))
- #define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
++    if (env->frequency) {
++        ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(frequency), &env->frequency);
++    }
++
+     return ret;
+ }
+ 
+@@ -481,6 +487,17 @@ int kvm_arch_init_vcpu(CPUState *cs)
+     }
+     env->misa = isa;
+ 
++    /*
++     * Synchronize vcpu's frequency with KVM. If vcpu's frequency is specified
++     * by cpu option 'frequency', this will be set to KVM. Otherwise, vcpu's
++     * frequency will follow KVM.
++     */
++    if (env->user_frequency) {
++        ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(frequency), &env->frequency);
++    } else {
++        ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(frequency), &env->frequency);
++    }
++
+     return ret;
+ }
+ 
 -- 
 2.19.1
 
