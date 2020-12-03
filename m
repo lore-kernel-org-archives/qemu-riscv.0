@@ -1,20 +1,20 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kko1P-00049F-Ht
-	for mharc-qemu-riscv@gnu.org; Thu, 03 Dec 2020 07:47:43 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45120)
+	id 1kko1S-0004Fr-6g
+	for mharc-qemu-riscv@gnu.org; Thu, 03 Dec 2020 07:47:46 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45138)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kko1N-00042y-1A; Thu, 03 Dec 2020 07:47:41 -0500
-Received: from szxga06-in.huawei.com ([45.249.212.32]:2546)
+ id 1kko1Q-0004A2-0D; Thu, 03 Dec 2020 07:47:44 -0500
+Received: from szxga06-in.huawei.com ([45.249.212.32]:2545)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1kko1K-0006pr-Fh; Thu, 03 Dec 2020 07:47:40 -0500
+ id 1kko1M-0006pq-M8; Thu, 03 Dec 2020 07:47:43 -0500
 Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4CmwZy083rzhm7C;
- Thu,  3 Dec 2020 20:47:06 +0800 (CST)
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4CmwZx6xVHzhl6C;
+ Thu,  3 Dec 2020 20:47:05 +0800 (CST)
 Received: from huawei.com (10.174.186.236) by DGGEMS403-HUB.china.huawei.com
  (10.3.19.203) with Microsoft SMTP Server id 14.3.487.0; Thu, 3 Dec 2020
- 20:47:20 +0800
+ 20:47:18 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
@@ -24,9 +24,10 @@ CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
  <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
  <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
  <jiangyifei@huawei.com>
-Subject: [PATCH RFC v4 04/15] target/riscv: Implement kvm_arch_get_registers
-Date: Thu, 3 Dec 2020 20:46:52 +0800
-Message-ID: <20201203124703.168-5-jiangyifei@huawei.com>
+Subject: [PATCH RFC v4 03/15] target/riscv: Implement function
+ kvm_arch_init_vcpu
+Date: Thu, 3 Dec 2020 20:46:51 +0800
+Message-ID: <20201203124703.168-4-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
 In-Reply-To: <20201203124703.168-1-jiangyifei@huawei.com>
 References: <20201203124703.168-1-jiangyifei@huawei.com>
@@ -55,183 +56,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Dec 2020 12:47:41 -0000
+X-List-Received-Date: Thu, 03 Dec 2020 12:47:44 -0000
 
-Get GPR CSR and FP registers from kvm by KVM_GET_ONE_REG ioctl.
+Get isa info from kvm while kvm init.
 
 Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
 ---
- target/riscv/kvm.c | 150 ++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 149 insertions(+), 1 deletion(-)
+ target/riscv/kvm.c | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-index 86660ba81b..e679619e79 100644
+index 8c386d9acf..86660ba81b 100644
 --- a/target/riscv/kvm.c
 +++ b/target/riscv/kvm.c
-@@ -50,13 +50,161 @@ static __u64 kvm_riscv_reg_id(__u64 type, __u64 idx)
-     return id;
- }
+@@ -38,6 +38,18 @@
+ #include "qemu/log.h"
+ #include "hw/loader.h"
  
-+#define RISCV_CORE_REG(name)  kvm_riscv_reg_id(KVM_REG_RISCV_CORE, \
-+                 KVM_REG_RISCV_CORE_REG(name))
-+
-+#define RISCV_CSR_REG(name)  kvm_riscv_reg_id(KVM_REG_RISCV_CSR, \
-+                 KVM_REG_RISCV_CSR_REG(name))
-+
-+#define RISCV_FP_F_REG(idx)  kvm_riscv_reg_id(KVM_REG_RISCV_FP_F, idx)
-+
-+#define RISCV_FP_D_REG(idx)  kvm_riscv_reg_id(KVM_REG_RISCV_FP_D, idx)
-+
-+static int kvm_riscv_get_regs_core(CPUState *cs)
++static __u64 kvm_riscv_reg_id(__u64 type, __u64 idx)
 +{
-+    int ret = 0;
-+    int i;
-+    target_ulong reg;
-+    CPURISCVState *env = &RISCV_CPU(cs)->env;
++    __u64 id = KVM_REG_RISCV | type | idx;
 +
-+    ret = kvm_get_one_reg(cs, RISCV_CORE_REG(regs.pc), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->pc = reg;
-+
-+    for (i = 1; i < 32; i++) {
-+        __u64 id = kvm_riscv_reg_id(KVM_REG_RISCV_CORE, i);
-+        ret = kvm_get_one_reg(cs, id, &reg);
-+        if (ret) {
-+            return ret;
-+        }
-+        env->gpr[i] = reg;
-+    }
-+
-+    return ret;
-+}
-+
-+static int kvm_riscv_get_regs_csr(CPUState *cs)
-+{
-+    int ret = 0;
-+    target_ulong reg;
-+    CPURISCVState *env = &RISCV_CPU(cs)->env;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_CSR_REG(sstatus), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->mstatus = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_CSR_REG(sie), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->mie = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_CSR_REG(stvec), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->stvec = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_CSR_REG(sscratch), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->sscratch = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_CSR_REG(sepc), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->sepc = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_CSR_REG(scause), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->scause = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_CSR_REG(stval), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->sbadaddr = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_CSR_REG(sip), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->mip = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_CSR_REG(satp), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->satp = reg;
-+
-+    return ret;
-+}
-+
-+static int kvm_riscv_get_regs_fp(CPUState *cs)
-+{
-+    int ret = 0;
-+    int i;
-+    CPURISCVState *env = &RISCV_CPU(cs)->env;
-+
-+    if (riscv_has_ext(env, RVD)) {
-+        uint64_t reg;
-+        for (i = 0; i < 32; i++) {
-+            ret = kvm_get_one_reg(cs, RISCV_FP_D_REG(i), &reg);
-+            if (ret) {
-+                return ret;
-+            }
-+            env->fpr[i] = reg;
-+        }
-+        return ret;
-+    }
-+
-+    if (riscv_has_ext(env, RVF)) {
-+        uint32_t reg;
-+        for (i = 0; i < 32; i++) {
-+            ret = kvm_get_one_reg(cs, RISCV_FP_F_REG(i), &reg);
-+            if (ret) {
-+                return ret;
-+            }
-+            env->fpr[i] = reg;
-+        }
-+        return ret;
-+    }
-+
-+    return ret;
++#if defined(TARGET_RISCV32)
++    id |= KVM_REG_SIZE_U32;
++#elif defined(TARGET_RISCV64)
++    id |= KVM_REG_SIZE_U64;
++#endif
++    return id;
 +}
 +
  const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
      KVM_CAP_LAST_INFO
  };
+@@ -79,7 +91,20 @@ void kvm_arch_init_irq_routing(KVMState *s)
  
- int kvm_arch_get_registers(CPUState *cs)
+ int kvm_arch_init_vcpu(CPUState *cs)
  {
 -    return 0;
 +    int ret = 0;
++    target_ulong isa;
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    CPURISCVState *env = &cpu->env;
++    __u64 id;
 +
-+    ret = kvm_riscv_get_regs_core(cs);
++    id = kvm_riscv_reg_id(KVM_REG_RISCV_CONFIG, KVM_REG_RISCV_CONFIG_REG(isa));
++    ret = kvm_get_one_reg(cs, id, &isa);
 +    if (ret) {
 +        return ret;
 +    }
-+
-+    ret = kvm_riscv_get_regs_csr(cs);
-+    if (ret) {
-+        return ret;
-+    }
-+
-+    ret = kvm_riscv_get_regs_fp(cs);
-+    if (ret) {
-+        return ret;
-+    }
++    env->misa = isa;
 +
 +    return ret;
  }
  
- int kvm_arch_put_registers(CPUState *cs, int level)
+ int kvm_arch_msi_data_to_gsi(uint32_t data)
 -- 
 2.19.1
 
