@@ -1,68 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kkAsZ-000795-E5
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Dec 2020 13:59:59 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34116)
+	id 1kko1M-00041k-7U
+	for mharc-qemu-riscv@gnu.org; Thu, 03 Dec 2020 07:47:40 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45078)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kkAsY-00078v-3I; Tue, 01 Dec 2020 13:59:58 -0500
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:45096)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kkAsW-0008Be-KY; Tue, 01 Dec 2020 13:59:57 -0500
-Received: by mail-il1-x142.google.com with SMTP id w8so2704205ilg.12;
- Tue, 01 Dec 2020 10:59:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0bGi9m/M4rZxFjJJOpypxeDjrPAVzqd4MtssdNi2ss8=;
- b=pfS+j64ucbUnAnG7nRMAhyIBYm5D9TK1ms5caty7HtvZVgMfbuhaKeY9pgQZWZDQVN
- dMFuGsF0lo1GilAG1Effqd6cmNMcNSh1Hy1BRnG37ifReh9pkzDNDGSn5381JKpxMJAf
- 6YfU0GwwpinCq0v+hRzMJllIdXdAJs4hzPSTQ49P3gk8E0kk4+Q13H4GnHB6g/aj6CR+
- /iz7PKVG7+GUoO0T5cTJIrhx0tI8tQ1AuHzaLbQk9qvUbZeIeqJvscX4DPgZMdIlPB+E
- wCxjkXmGknW2JPaLNdxzdlOE1n7+9mqvVA7wwUJYcA1O7dK8JjLNDTsLMo0Mtkhswu8u
- IJbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=0bGi9m/M4rZxFjJJOpypxeDjrPAVzqd4MtssdNi2ss8=;
- b=Rq73e7ImLSUX99jGs7C/SHKedywHHkwsV0MMYwOo39fFqIIuz6eaWckIjOpowYcS9x
- QSwpOAdLiwOQkV2ViO3KvOA//m83aIwS3fOsCuAtsPH011sfKGo5gnUj4CbADJz8KSbj
- 4YPnPgomUACD0z9pnzpr0lEZshOqaugYy9NFKGXmYyVlkR4k5ZZaAOI5XHbMo5lrUQV/
- r/ElR68bZ/T47TsQ8h5m9Fpiee2g7gCZZTwYaENxMx0CsERl1cU66AlGdEma4artxqQL
- MQc5ibDNZdJAnqrTwYLvc57LEElxHvMkzlKVOmgKrafy5nRZi9bokULh+q0TnD1ccq1E
- xT6w==
-X-Gm-Message-State: AOAM533L5p3mVm/mAZ+bzBW7raE/GT503kQckdeTM5/CGZEPVDEjVTZU
- 5wWu/4Fx4TOTsanLaFxY9pqLkg/S88Rc82LPIC8=
-X-Google-Smtp-Source: ABdhPJwGB4ATOYqzj41WJMjdgPClJvfw+CVDoBAdylRHUjekA9EBVp2t6lRW2jmH5XL/sVCdFvxXL2SPYvY40HpDzdU=
-X-Received: by 2002:a92:5eda:: with SMTP id f87mr4209933ilg.131.1606849195144; 
- Tue, 01 Dec 2020 10:59:55 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kko1K-00041F-E5; Thu, 03 Dec 2020 07:47:38 -0500
+Received: from szxga04-in.huawei.com ([45.249.212.190]:2877)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kko1H-0006oq-MI; Thu, 03 Dec 2020 07:47:38 -0500
+Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.60])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4CmwZk5Mrdz15X06;
+ Thu,  3 Dec 2020 20:46:54 +0800 (CST)
+Received: from huawei.com (10.174.186.236) by DGGEMS403-HUB.china.huawei.com
+ (10.3.19.203) with Microsoft SMTP Server id 14.3.487.0; Thu, 3 Dec 2020
+ 20:47:14 +0800
+From: Yifei Jiang <jiangyifei@huawei.com>
+To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
+CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
+ <libvir-list@redhat.com>, <anup.patel@wdc.com>, <palmer@dabbelt.com>,
+ <Alistair.Francis@wdc.com>, <sagark@eecs.berkeley.edu>,
+ <kbastian@mail.uni-paderborn.de>, <victor.zhangxiaofeng@huawei.com>,
+ <wu.wubin@huawei.com>, <zhang.zhanghailiang@huawei.com>,
+ <dengkai1@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
+ <jiangyifei@huawei.com>
+Subject: [PATCH RFC v4 01/15] linux-header: Update linux/kvm.h
+Date: Thu, 3 Dec 2020 20:46:49 +0800
+Message-ID: <20201203124703.168-2-jiangyifei@huawei.com>
+X-Mailer: git-send-email 2.26.2.windows.1
+In-Reply-To: <20201203124703.168-1-jiangyifei@huawei.com>
+References: <20201203124703.168-1-jiangyifei@huawei.com>
 MIME-Version: 1.0
-References: <20201130012810.899-1-jiangyifei@huawei.com>
-In-Reply-To: <20201130012810.899-1-jiangyifei@huawei.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 1 Dec 2020 10:47:37 -0800
-Message-ID: <CAKmqyKOe2XnNMecs5x1xctGUHHGUdpAOrvxF_LQy6ZbObWDtjA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix the bug of HLVX/HLV/HSV
-To: Yifei Jiang <jiangyifei@huawei.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Zhanghailiang <zhang.zhanghailiang@huawei.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "Zhangxiaofeng (F)" <victor.zhangxiaofeng@huawei.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, yinyipeng <yinyipeng1@huawei.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, "Wubin (H)" <wu.wubin@huawei.com>, 
- "dengkai (A)" <dengkai1@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::142;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x142.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.174.186.236]
+X-CFilter-Loop: Reflected
+Received-SPF: pass client-ip=45.249.212.190;
+ envelope-from=jiangyifei@huawei.com; helo=szxga04-in.huawei.com
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -76,49 +55,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2020 18:59:58 -0000
+X-List-Received-Date: Thu, 03 Dec 2020 12:47:38 -0000
 
-On Sun, Nov 29, 2020 at 5:37 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
->
-> We found that the hypervisor virtual-machine load and store instructions,
-> included HLVX/HLV/HSV, couldn't access guest userspace memory.
->
-> In the riscv-privileged spec, HLVX/HLV/HSV is defined as follow:
-> "As usual when V=1, two-stage address translation is applied, and
-> the HS-level sstatus.SUM is ignored."
->
-> But get_physical_address() doesn't ignore sstatus.SUM, when HLVX/HLV/HSV
-> accesses guest userspace memory. So this patch fixes it.
->
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-> Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+Update linux-headers/linux/kvm.h from
+https://github.com/avpatel/linux/tree/riscv_kvm_v15.
+Only use this header file, so here do not update all linux headers by
+update-linux-headers.sh before above KVM series is accepted.
 
-Thanks!
+Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+---
+ linux-headers/linux/kvm.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Applied to riscv-to-apply.next
+diff --git a/linux-headers/linux/kvm.h b/linux-headers/linux/kvm.h
+index 56ce14ad20..ddeedcf3df 100644
+--- a/linux-headers/linux/kvm.h
++++ b/linux-headers/linux/kvm.h
+@@ -250,6 +250,7 @@ struct kvm_hyperv_exit {
+ #define KVM_EXIT_ARM_NISV         28
+ #define KVM_EXIT_X86_RDMSR        29
+ #define KVM_EXIT_X86_WRMSR        30
++#define KVM_EXIT_RISCV_SBI        31
+ 
+ /* For KVM_EXIT_INTERNAL_ERROR */
+ /* Emulate instruction failed. */
+@@ -426,6 +427,13 @@ struct kvm_run {
+ 			__u32 index; /* kernel -> user */
+ 			__u64 data; /* kernel <-> user */
+ 		} msr;
++		/* KVM_EXIT_RISCV_SBI */
++		struct {
++			unsigned long extension_id;
++			unsigned long function_id;
++			unsigned long args[6];
++			unsigned long ret[2];
++		} riscv_sbi;
+ 		/* Fix the size of the union. */
+ 		char padding[256];
+ 	};
+-- 
+2.19.1
 
-Alistair
-
-> ---
->  target/riscv/cpu_helper.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index a2787b1d48..7274f971a4 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -367,7 +367,8 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->          vm = get_field(env->hgatp, HGATP_MODE);
->          widened = 2;
->      }
-> -    sum = get_field(env->mstatus, MSTATUS_SUM);
-> +    /* status.SUM will be ignored if execute on background */
-> +    sum = get_field(env->mstatus, MSTATUS_SUM) || use_background;
->      switch (vm) {
->      case VM_1_10_SV32:
->        levels = 2; ptidxbits = 10; ptesize = 4; break;
-> --
-> 2.19.1
->
->
 
