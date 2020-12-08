@@ -1,56 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kmluU-0008D0-LO
+	id 1kmluU-0008DX-Rm
 	for mharc-qemu-riscv@gnu.org; Tue, 08 Dec 2020 17:56:42 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39768)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39806)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=6040d5def=alistair.francis@wdc.com>)
- id 1kmluL-000843-Jt; Tue, 08 Dec 2020 17:56:33 -0500
+ id 1kmluP-00086Q-9s; Tue, 08 Dec 2020 17:56:37 -0500
 Received: from esa4.hgst.iphmx.com ([216.71.154.42]:31149)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=6040d5def=alistair.francis@wdc.com>)
- id 1kmluI-0004Ed-5y; Tue, 08 Dec 2020 17:56:33 -0500
+ id 1kmluN-0004Ed-0A; Tue, 08 Dec 2020 17:56:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1607468190; x=1639004190;
+ t=1607468194; x=1639004194;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=eANmSz4V+BEHTBhleAxmLkZ/PJSqoSJqjipx+t7A4H8=;
- b=aAk4wr2RPdZrUIDzTi7c/WRmZOnFTxtjvsdGyjjHuulubs2lcGU5H9cB
- Fvjx7AGbxy4Ee6EwZ4k8HMwhJ5+pfBNbYcHvjsNIKRJw8FCEVssPPC0q7
- 5r49xPYsHCZ9kZyFCluw9odbU4D1cII1bxk9H66bq42tAsVvDz9qvDmiC
- KD+xMDMjz/4VcumlYgCKeHpKrmGKtxdMpr9LryIeRqW3NNd2uMV1S0NR0
- C1IPC7ab9Drg5KQ78+3KqDLBijzGJQ8pHSLFYgp7vu4X9wwwzEu32r78G
- bI3pbjPq6rscqfxjvLSQYGFKk+9xk6ewWIlBiYy/vOdIrcmNxd+Sf7nVT w==;
-IronPort-SDR: VRNspE4aXC8KxX21Odx/S+CNbHKYZh8AG6OGXCx2Lum8akrxcA4P47uFTnFutr2JkvsM/VQjLI
- Q0SFvKshL6oGl7k7w3v3Ff5k3pBxEGOqDdc1vsMGZb1u2iAhPTsrlyeVa6QpP7a5qnj4ghjkAq
- 64ECnCtdULLYFcHPd4q3potIjzzgDzX7Ta/lw88pGZpcQOFqiwmIvx27aa4yVDl2vNaBQ+7AEf
- di/kpxh1C89g4q8FVrYZ8KNr5/inWPFnVWKHP0u2lzd3G2UKy5NNnYcf3XvgMR4WFxN39PEfec
- OMM=
-X-IronPort-AV: E=Sophos;i="5.78,404,1599494400"; d="scan'208";a="154713812"
+ bh=MHa1GnDebIQgBXx8Add4PvqiAFA7dwxIKpm/+VpY/2Q=;
+ b=R2kfSA9QgLWGwKBcNJhR5S1jlBPT9PQcpYj/AXn0pym5/jUUsAjj6k0+
+ VzbREtRqZzGOFKH0TQz0SGmUp1QKj49nS6xXSwRBNEhgiGZBjn9QWu+Ls
+ 8/LflvG0iVvKVn1Po57CyK5UVHvdW4hnPK9BOdvKBXn0+RbXLzlJEGzUo
+ PXIORxpl5eazLDBUdXFzpdTqQ1922F8k6MxnjoCL35FQdYrPMXe4gEi0O
+ urH7WDqeZ1+8n+WtdPeshCyqTv2leZiAZsda9WV26e7NHtXFGiVquF/l9
+ NvFKa/dQ7kurNHZzknwXicpUcfaKkGFdRq/ccc1Q+Q/iLm7p9wjP0DHKI Q==;
+IronPort-SDR: bQqAri7I+hNvNuOYgRGay9FNwLQ/0aPXFvbHQd6TolzMRK81evgWBi72lyrLqVdvk41Vw9XTM7
+ BHNP+TPeJERuuQLMpi48xIc2Y3b/BT67yQkVm0WMP/yKzDBJsrr+TThDOLKAiHdCl2vfhO9jw7
+ posJq4+2jmLNEMF8DZV0G5hScFtzsfT5WoxPfmhQx03tnsNMp4iAsQvjy3/XL+/XZIGSEZgDIL
+ G1K/jSI1tUTX3Xdg5qd30nYFlNP8qOkAcIkuiJ47lknvS0Y22qqp/2QILsQkzBGVksmwG50A8h
+ tI0=
+X-IronPort-AV: E=Sophos;i="5.78,404,1599494400"; d="scan'208";a="154713826"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 09 Dec 2020 06:56:28 +0800
-IronPort-SDR: UxanTJ9TAQt9KE8/i1s2/KwIZJOqt0VsQ0jVntokCpeENIZQNLG+7XjI5IxIuI3phFxn689uv0
- c4YiYJWX6PiqPu+rl56JnnxD6CxbZPilI=
+ by ob1.hgst.iphmx.com with ESMTP; 09 Dec 2020 06:56:33 +0800
+IronPort-SDR: 3rJfl0/mdK+DtoA0m/gJ7vT+VuuNIyRKfi/pQldn2/PsZHWw6yTu9lHIccov9aND6eH/FeHOfa
+ +8HQkixgO0XH5a5q0ieJirvCJ+zVBtOQE=
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Dec 2020 14:41:55 -0800
-IronPort-SDR: hK28RSEyV4ehUYypT8WlXIJByyIIdXcW516EV/XzYtbWGNYSbHkj1lnG96froEy9HYj5hLmMXF
- ogDPJY/L/WNA==
+ 08 Dec 2020 14:42:01 -0800
+IronPort-SDR: RtMsNJo4DVQ5Dkmow1G+M+EvzEW02my6ACrSFD+O60e6isK8eSr4YUvlERpT4SbuECT9Lc+eA+
+ 6Zna2s/4Kqhw==
 WDCIronportException: Internal
 Received: from usa001386.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.61.239])
- by uls-op-cesaip02.wdc.com with ESMTP; 08 Dec 2020 14:56:29 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 08 Dec 2020 14:56:34 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v2 07/15] hw/riscv: spike: Remove compile time XLEN checks
-Date: Tue,  8 Dec 2020 14:56:28 -0800
-Message-Id: <8a7bcb8cb5e5ec1e90544b86a2ec280fdd2fec37.1607467819.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 09/15] target/riscv: fpu_helper: Match function defs in
+ HELPER macros
+Date: Tue,  8 Dec 2020 14:56:33 -0800
+Message-Id: <1b78dbf9afd11bc9e47ce112a0096521a744133c.1607467819.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <cover.1607467819.git.alistair.francis@wdc.com>
 References: <cover.1607467819.git.alistair.francis@wdc.com>
@@ -78,98 +79,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Dec 2020 22:56:35 -0000
+X-List-Received-Date: Tue, 08 Dec 2020 22:56:38 -0000
+
+The helper functions defined in helper.h specify that the argument is of
+type target_long. Let's change the implementation to match the header
+definition.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
 ---
- hw/riscv/spike.c | 45 ++++++++++++++++++++++++---------------------
- 1 file changed, 24 insertions(+), 21 deletions(-)
+ target/riscv/fpu_helper.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 875f371f0f..3e47e4579d 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -43,17 +43,6 @@
- #include "sysemu/qtest.h"
- #include "sysemu/sysemu.h"
+diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+index bb346a8249..507d7fe7fa 100644
+--- a/target/riscv/fpu_helper.c
++++ b/target/riscv/fpu_helper.c
+@@ -224,13 +224,13 @@ target_ulong helper_fcvt_wu_s(CPURISCVState *env, uint64_t rs1)
+ }
  
--/*
-- * Not like other RISC-V machines that use plain binary bios images,
-- * keeping ELF files here was intentional because BIN files don't work
-- * for the Spike machine as HTIF emulation depends on ELF parsing.
-- */
--#if defined(TARGET_RISCV32)
--# define BIOS_FILENAME "opensbi-riscv32-generic-fw_dynamic.elf"
--#else
--# define BIOS_FILENAME "opensbi-riscv64-generic-fw_dynamic.elf"
--#endif
--
- static const struct MemmapEntry {
-     hwaddr base;
-     hwaddr size;
-@@ -64,7 +53,7 @@ static const struct MemmapEntry {
- };
- 
- static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
--    uint64_t mem_size, const char *cmdline)
-+                       uint64_t mem_size, const char *cmdline, bool is_32_bit)
+ #if defined(TARGET_RISCV64)
+-uint64_t helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
++target_ulong helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
  {
-     void *fdt;
-     uint64_t addr, size;
-@@ -115,11 +104,11 @@ static void create_fdt(SpikeState *s, const struct MemmapEntry *memmap,
-             cpu_name = g_strdup_printf("/cpus/cpu@%d",
-                 s->soc[socket].hartid_base + cpu);
-             qemu_fdt_add_subnode(fdt, cpu_name);
--#if defined(TARGET_RISCV32)
--            qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
--#else
--            qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv48");
--#endif
-+            if (is_32_bit) {
-+                qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
-+            } else {
-+                qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv48");
-+            }
-             name = riscv_isa_string(&s->soc[socket].harts[cpu]);
-             qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa", name);
-             g_free(name);
-@@ -254,7 +243,8 @@ static void spike_board_init(MachineState *machine)
-         main_mem);
+     float32 frs1 = check_nanbox_s(rs1);
+     return float32_to_int64(frs1, &env->fp_status);
+ }
  
-     /* create device tree */
--    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
-+    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-+               riscv_is_32_bit(machine));
+-uint64_t helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
++target_ulong helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
+ {
+     float32 frs1 = check_nanbox_s(rs1);
+     return float32_to_uint64(frs1, &env->fp_status);
+@@ -248,12 +248,12 @@ uint64_t helper_fcvt_s_wu(CPURISCVState *env, target_ulong rs1)
+ }
  
-     /* boot rom */
-     memory_region_init_rom(mask_rom, NULL, "riscv.spike.mrom",
-@@ -262,9 +252,22 @@ static void spike_board_init(MachineState *machine)
-     memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
-                                 mask_rom);
+ #if defined(TARGET_RISCV64)
+-uint64_t helper_fcvt_s_l(CPURISCVState *env, uint64_t rs1)
++uint64_t helper_fcvt_s_l(CPURISCVState *env, target_ulong rs1)
+ {
+     return nanbox_s(int64_to_float32(rs1, &env->fp_status));
+ }
  
--    firmware_end_addr = riscv_find_and_load_firmware(machine, BIOS_FILENAME,
--                                                     memmap[SPIKE_DRAM].base,
--                                                     htif_symbol_callback);
-+    /*
-+     * Not like other RISC-V machines that use plain binary bios images,
-+     * keeping ELF files here was intentional because BIN files don't work
-+     * for the Spike machine as HTIF emulation depends on ELF parsing.
-+     */
-+    if (riscv_is_32_bit(machine)) {
-+        firmware_end_addr = riscv_find_and_load_firmware(machine,
-+                                    "opensbi-riscv32-generic-fw_dynamic.elf",
-+                                    memmap[SPIKE_DRAM].base,
-+                                    htif_symbol_callback);
-+    } else {
-+        firmware_end_addr = riscv_find_and_load_firmware(machine,
-+                                    "opensbi-riscv64-generic-fw_dynamic.elf",
-+                                    memmap[SPIKE_DRAM].base,
-+                                    htif_symbol_callback);
-+    }
+-uint64_t helper_fcvt_s_lu(CPURISCVState *env, uint64_t rs1)
++uint64_t helper_fcvt_s_lu(CPURISCVState *env, target_ulong rs1)
+ {
+     return nanbox_s(uint64_to_float32(rs1, &env->fp_status));
+ }
+@@ -337,12 +337,12 @@ target_ulong helper_fcvt_wu_d(CPURISCVState *env, uint64_t frs1)
+ }
  
-     if (machine->kernel_filename) {
-         kernel_start_addr = riscv_calc_kernel_start_addr(machine,
+ #if defined(TARGET_RISCV64)
+-uint64_t helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
++target_ulong helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
+ {
+     return float64_to_int64(frs1, &env->fp_status);
+ }
+ 
+-uint64_t helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
++target_ulong helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
+ {
+     return float64_to_uint64(frs1, &env->fp_status);
+ }
+@@ -359,12 +359,12 @@ uint64_t helper_fcvt_d_wu(CPURISCVState *env, target_ulong rs1)
+ }
+ 
+ #if defined(TARGET_RISCV64)
+-uint64_t helper_fcvt_d_l(CPURISCVState *env, uint64_t rs1)
++uint64_t helper_fcvt_d_l(CPURISCVState *env, target_ulong rs1)
+ {
+     return int64_to_float64(rs1, &env->fp_status);
+ }
+ 
+-uint64_t helper_fcvt_d_lu(CPURISCVState *env, uint64_t rs1)
++uint64_t helper_fcvt_d_lu(CPURISCVState *env, target_ulong rs1)
+ {
+     return uint64_to_float64(rs1, &env->fp_status);
+ }
 -- 
 2.29.2
 
