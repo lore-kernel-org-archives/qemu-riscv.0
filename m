@@ -1,45 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kmZ4O-0006XJ-Fk
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Dec 2020 04:14:04 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41880)
+	id 1kmlFn-00089U-8i
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Dec 2020 17:14:39 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57078)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ruinland@andestech.com>)
- id 1kmZ4M-0006X8-A1
- for qemu-riscv@nongnu.org; Tue, 08 Dec 2020 04:14:02 -0500
-Received: from atcsqr.andestech.com ([60.248.187.195]:61735)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ruinland@andestech.com>)
- id 1kmZ4G-0004bM-Oj
- for qemu-riscv@nongnu.org; Tue, 08 Dec 2020 04:14:01 -0500
-Received: from mail.andestech.com (atcpcs16.andestech.com [10.0.1.222])
- by ATCSQR.andestech.com with ESMTP id 0B89DQHX019120
- for <qemu-riscv@nongnu.org>; Tue, 8 Dec 2020 17:13:26 +0800 (GMT-8)
- (envelope-from ruinland@andestech.com)
-Received: from APC301.andestech.com (10.0.12.128) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.487.0; Tue, 8 Dec 2020
- 17:13:32 +0800
-Date: Tue, 8 Dec 2020 17:11:57 +0800
-From: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
-To: <qemu-riscv@nongnu.org>
-CC: <ruinland@andestech.com>, <alankao@andestech.com>, <dylan@andestech.com>, 
- <rick@andestech.com>
-Subject: Policy on adding custom instructions/extensions and upcoming Andes
- RV variants
-Message-ID: <20201208091157.GB23039@APC301.andestech.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kmlFe-000854-BW; Tue, 08 Dec 2020 17:14:30 -0500
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:39131)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kmlFZ-0006XB-TP; Tue, 08 Dec 2020 17:14:30 -0500
+Received: by mail-io1-xd42.google.com with SMTP id d9so100790iob.6;
+ Tue, 08 Dec 2020 14:14:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=vDhpagymtzefWB/r5VG7ra2ZItwjDxoOaj88vM8lSpI=;
+ b=adGqN+ZpghBajeFeRhtFx0ax7BS/LkHFIdwKeAM/RHXsWoXGNnUz8ZGllSSV+vCDgl
+ 6/9giI894+si87qHAT4cCqwIOhk5+8FduLyNNVwvZ0OJh1iIXMF+w6CPil5i0wm33U1z
+ wz1oGKfNzC60mb6ynMq12+Px24H146uiAgNetslNE3nJ5YZLgacM5Epdr7zMqN2dnnY0
+ J0Zc4nnrnJyl9XukXY7KEYbpdT90UhiO36Y36TLdBJZpQyfu6mOEhRRf3+f3vg1PQziY
+ ERKib6Zjvg189Z/Kp50um5pxo7Nm2Pg7EVT5cBxkwVjlw8SSf4yTD6HglUdXc5g6KFGd
+ x0XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=vDhpagymtzefWB/r5VG7ra2ZItwjDxoOaj88vM8lSpI=;
+ b=YZSGxi1luVgWZLtFafg0oJ5TukqCjw1GQPWlvB2evKtnaUq1U3Af3y8x7gvquadd/6
+ aK57zKeQa5Pe3eSsmcoLR2z+8gUQ93SRIkPfwQaSfy2sJoaEjI5kW5S+a1aE5bFtTTwm
+ hNBPdocqdmhoYWZgURGVk/sXI21Fbl2k4zcdEmJfIkEQ2pOpZNPevNVK3njHWNX1G5Co
+ k+CN3/zPq5y9P2W16V5kMG6s5W1LoMOfjS9Ijacf+4BefNl5lq5m9UnYmm73R4fVlDt6
+ EdEuikOtngYGx+QvjoTNvJ1Z8+LblmpvSAc+KmIxSTztMrHJW4is1AjawECz5Av70Jqm
+ ZX7w==
+X-Gm-Message-State: AOAM532QDWrx+JY/V9ryRRW13iH2fPwSFJeQ2KY/8s0RApVUSflXCmci
+ sk4fozsX/51vSMCT6dFoDBsNjp971Gcfjh2hQ/M=
+X-Google-Smtp-Source: ABdhPJxaoNHS+3cxjoivZFinPoi/B19lNAFgA0xdURtMwzg4Zm45evCCCE49Hz9dImEMzTZCna0lA1oW/PQKBc9OqpI=
+X-Received: by 2002:a02:5148:: with SMTP id s69mr29004326jaa.8.1607465662194; 
+ Tue, 08 Dec 2020 14:14:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Originating-IP: [10.0.12.128]
-X-DNSRBL: 
-X-MAIL: ATCSQR.andestech.com 0B89DQHX019120
-Received-SPF: pass client-ip=60.248.187.195;
- envelope-from=ruinland@andestech.com; helo=ATCSQR.andestech.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20201203124703.168-1-jiangyifei@huawei.com>
+ <20201203124703.168-4-jiangyifei@huawei.com>
+In-Reply-To: <20201203124703.168-4-jiangyifei@huawei.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 8 Dec 2020 14:13:56 -0800
+Message-ID: <CAKmqyKNE1JU3KJscNfg78dGW9Avs2nvTVt-qr417g5noTbCAYQ@mail.gmail.com>
+Subject: Re: [PATCH RFC v4 03/15] target/riscv: Implement function
+ kvm_arch_init_vcpu
+To: Yifei Jiang <jiangyifei@huawei.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "Zhangxiaofeng (F)" <victor.zhangxiaofeng@huawei.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ "open list:Overall" <kvm@vger.kernel.org>, libvir-list@redhat.com, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Anup Patel <anup.patel@wdc.com>, 
+ yinyipeng <yinyipeng1@huawei.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ kvm-riscv@lists.infradead.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ "dengkai (A)" <dengkai1@huawei.com>, "Wubin (H)" <wu.wubin@huawei.com>, 
+ Zhanghailiang <zhang.zhanghailiang@huawei.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -53,76 +80,72 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Dec 2020 09:14:02 -0000
+X-List-Received-Date: Tue, 08 Dec 2020 22:14:32 -0000
 
+On Thu, Dec 3, 2020 at 4:55 AM Yifei Jiang <jiangyifei@huawei.com> wrote:
+>
+> Get isa info from kvm while kvm init.
+>
+> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+> Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+> ---
+>  target/riscv/kvm.c | 27 ++++++++++++++++++++++++++-
+>  1 file changed, 26 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> index 8c386d9acf..86660ba81b 100644
+> --- a/target/riscv/kvm.c
+> +++ b/target/riscv/kvm.c
+> @@ -38,6 +38,18 @@
+>  #include "qemu/log.h"
+>  #include "hw/loader.h"
+>
+> +static __u64 kvm_riscv_reg_id(__u64 type, __u64 idx)
+> +{
+> +    __u64 id = KVM_REG_RISCV | type | idx;
+> +
+> +#if defined(TARGET_RISCV32)
+> +    id |= KVM_REG_SIZE_U32;
+> +#elif defined(TARGET_RISCV64)
+> +    id |= KVM_REG_SIZE_U64;
+> +#endif
 
-Hi Palmer, Alistair and all,
+There is a series on list (I'll send a v2 out later today) that starts
+to remove these #ifdef for the RISC-V XLEN. Next time you rebase it
+would be great if you can use that and hopefully remove this.
 
-As RISC-V platforms thrives, there are many custom instructions appear
-like bamboo shoots.
+Alistair
 
-We, the Andes Technology, has been determined to contribute our RISC-V
-platform into QEMU upstream, namely our Linux-capable AE350 platform
-and our A series RISC-V CPU core product line, which we have already
-upstreamed our U-Boot an OpenSBI port.
-
-Some of our efforts get ratified into standard extension, just as the
-P-Extension has made its way. And there are still many other
-enhancement/additions to original extensions - -
-Our odyssey on optimizing code size and branch performance ends up as
-our very own "Andes Extended Instructions" and "Advanced CoDense™
-technology." Both of them are the bedrock which makes our customers
-have delightful experience on transisting into RISC-V ecosystem. [1]
-
-We firmly believe by making them accessible to the public could benefit
-each other from many perspectives.
-
-Somehow, as we dive deeply to the current code base, we have some
-issues which we would like to inquire with the community first and
-ask around if there are prior discussions.
-
-That is, we are curious about how QEMU regards on adding new
-instructions/extensions, and to be more specific, the upcoming
-"-Xandes" CPU variants ?
-
-The existing extensions/instructions are now listed in :
-`target/riscv/*.decode`.
-
-If a new extension gets ratified, then it won't be a problem for us just
-to add its instructions into corresponding decode file.
-Nonetheless, what if we want to add some custom instructions that are
-widely adopted custom standards ?
-
-Since we cannot disclose too much at this time being, let's take
-CV32E40P, a.k.a. RIS5Y, from PULP Platform as an example, it has been
-taped out by NXP as RV32M1 and they are publicly available. The
-implementation has Post-Incrementing Load &Store Instruction[1],
-and some of them are landed as enhancement to vanilla RV32I - -
-
-p.lb  rD, rs2(rs1)
-p.lbu rD, rs2(rs1)
-......
-
-they have the same opcode as ordinary lb,lh ... (000 0011).
-
-What will be the most desired way for QEMU upstream to encompass such
-feature ?
-
-Will it be suitable to just add them into `insn32.decode` and use
-definition guard at compile time to toggle such feature or should there
-be a duplicated new decode file which end up as a new decoder for 
-decode_opc() to invoke and gets setup during QEMU startup ?
-
-And to be aggressive, if ones made modification on the existing opcode
-encoding, duplicating decode file seemed to be inevitable ?
-
-Certainly, these might be too detailed to ask before we put our code
-here. Still we would like to know the policy first so we can cooperate
-more smoothly.
-
-Cordially Yours,
-Ruinland ChuanTzu Tsai
-
-[1] https://www.andestech.com/en/products-solutions/andestar-architecture/
-[2] https://pulp-platform.org/docs/ri5cy_user_manual.pdf (Section 14.1.2)
+> +    return id;
+> +}
+> +
+>  const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
+>      KVM_CAP_LAST_INFO
+>  };
+> @@ -79,7 +91,20 @@ void kvm_arch_init_irq_routing(KVMState *s)
+>
+>  int kvm_arch_init_vcpu(CPUState *cs)
+>  {
+> -    return 0;
+> +    int ret = 0;
+> +    target_ulong isa;
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    CPURISCVState *env = &cpu->env;
+> +    __u64 id;
+> +
+> +    id = kvm_riscv_reg_id(KVM_REG_RISCV_CONFIG, KVM_REG_RISCV_CONFIG_REG(isa));
+> +    ret = kvm_get_one_reg(cs, id, &isa);
+> +    if (ret) {
+> +        return ret;
+> +    }
+> +    env->misa = isa;
+> +
+> +    return ret;
+>  }
+>
+>  int kvm_arch_msi_data_to_gsi(uint32_t data)
+> --
+> 2.19.1
+>
+>
 
