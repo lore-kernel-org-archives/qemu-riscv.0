@@ -1,58 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kn7yG-0007i5-JA
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Dec 2020 17:30:04 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54000)
+	id 1kn83F-0000rN-Nf
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Dec 2020 17:35:14 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55162)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kn7yF-0007hk-1I; Wed, 09 Dec 2020 17:30:03 -0500
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:35978)
+ id 1kn83C-0000qm-6u; Wed, 09 Dec 2020 17:35:10 -0500
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:36014)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kn7yD-0000qs-Cj; Wed, 09 Dec 2020 17:30:02 -0500
-Received: by mail-io1-xd42.google.com with SMTP id z136so3407393iof.3;
- Wed, 09 Dec 2020 14:30:00 -0800 (PST)
+ id 1kn837-0001dL-Gs; Wed, 09 Dec 2020 17:35:09 -0500
+Received: by mail-io1-xd43.google.com with SMTP id z136so3420099iof.3;
+ Wed, 09 Dec 2020 14:35:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=LPSiVGA1mi0uz7KfoFUUGfLPlcPXJD1Lil0t5jswboM=;
- b=cHkDWTObYKWwVRfqEphIqZ+DUGPysovPb4PhO4s++yrhGQRaGO91WpLQ3geCipvLKB
- 5JVTZvlWxjZT1SnSWjj9+g9Z4C2eyXfPaXPfEk02jOK9zxUByQ6Y1+kAyrNt8tfvKjcG
- EkkmZfSd8iiYbzo183hPUgngV6YOl7KS+0xGkRNEtKZoS2RPv6XcHHnkwLkZuf/ZxD4U
- TerdNhbqsjNvy1XZW5GdE2Ac2Kwxb3ZTr380fTzuHV+HhudUb0fats3geM2v82PRYG7Q
- sCA0oaAJmb1w0SCg3YsIrU/e1+qtemoRhXTk0zl8Saw7do2VHu/C4QvyyqMlL5dn/Rtq
- 1YNw==
+ :cc; bh=XL4cCsOBVXs7f2Royc+YVynPM7yi4LEYQ+qJoRigKXU=;
+ b=iiByqgnq8pj/G7VQs7J9R9s/4N6Bvs9ySBws28PGOoFSfn88PbqKSaGhH1+VLgk9a4
+ 2YqSMlBIxSW87AkRpjzWNu6n+TgeGmK7HwO6JwxgJ29NmgFEe6RNk3ewsDSwjKLMxKQT
+ Groo9Vr2BTJCGk0/4zOB85x2eDV9pj6o8C5m4lei9FtdoWeB90HCIAEyhJux6YGaEzRp
+ FbkXI7IvA0yyoxBYAjrbcV8MQOU+8b9h2NGyHDVbyLN/hDAr0AWEfTu2UtgUY/053mt7
+ zeIr+lOGRVUJb77NjimvKj20zrmFldn8PCeckoTzYGod1T5DjDqq2WvQ7dcxdCVmWhJK
+ fpsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=LPSiVGA1mi0uz7KfoFUUGfLPlcPXJD1Lil0t5jswboM=;
- b=UR8clFKdkA/iPKPwXlVGpcTauxDbo5m4W4CMhZ0A/IUXXo/EfDYM+YUD+6EpWjDFqn
- XSF73kT+AGSpS2xJ5ENzWpF04AAbBTc0VjNpijwt2xG0Y7/CgPgyf1LmMxI1lI3iaDnt
- L2W7kVZ//S8iUlEpNGiLzdH2pea38VCQZqXPmWsVgXsS/fCq5ltTF0LmbxuAk+6Hz8JK
- AKjNkSb93ke74wkSCkAKmuvsdBvoW3DgQC8Yj5FqHOFbxsDQnC38f0wkPKt2GVgtf5WU
- toAhUxM56J/1PKK+nWUaZL7pQpJn8YhfjMpqfGR+tYZLwsckKPOMD7uvec2gsuJGBZYQ
- /ciA==
-X-Gm-Message-State: AOAM531m014DhWtlDuUgCD04X8IAW9tJIm8bCzI04/pg8qzTvWW9pvIN
- rQSkfEzaTPMUFVT9bKeMYXkzzWs/m61vJnzqEW/Hihs0aLo=
-X-Google-Smtp-Source: ABdhPJzHjZt+rlT1yzBRrQVSS5uL6BinzkWsvuiNN5VoSWKogzC3rJ9hw9G0bA8KppQPRWeLKhP6ha+EWZja9PmWrxo=
-X-Received: by 2002:a02:a419:: with SMTP id c25mr5921118jal.91.1607553000044; 
- Wed, 09 Dec 2020 14:30:00 -0800 (PST)
+ bh=XL4cCsOBVXs7f2Royc+YVynPM7yi4LEYQ+qJoRigKXU=;
+ b=QefpZlUAkkbGQbiE+R/aea1nL0fKVDcwnqEsb/gqxRYhGKk4c29Ugxfebiy4fJM2AP
+ 87zBPS7zMaaJn9hI0bvi/Jy9WLmGItJAziRfq0gvxHcMbrspKHgAU7TnHOPmFB13Hlr1
+ bFlAV7LG5w+uSrHSTm8b/H65ckNe8iy+CcLvUHVFFWUxjVo88iP47X9qq0s686fqrEz/
+ BGWRem/6Dr/xcrn6mPOHjsNcor+GdyPOgKlY/JI5INi6ZB6gGDJXkBPaup6/AMvqWj5P
+ 26YuGu5+kjlXKxe8+GOVwpcbaeMDQ8edBYTCn8TAHkiIoVqPbWlQlB1f316OuVlzR+Jk
+ J5lA==
+X-Gm-Message-State: AOAM533l3LcbCCLGq2JwXZjpmDkTO/h7yGuI6iRim01Wc/V8f4vBRAJo
+ TzxmW0k4N3nFZ+xAzfCXoxh3uD6kxnys/KEN708=
+X-Google-Smtp-Source: ABdhPJyNCulFQquzTjND2z4ZH3VNsdH4w5ChF6cNrzxYwTqJyPCy2NTpDQf9XQ2/vkbg7mrfSXAea4Je2HJVUrJXh3k=
+X-Received: by 2002:a6b:7d42:: with SMTP id d2mr5815705ioq.176.1607553303042; 
+ Wed, 09 Dec 2020 14:35:03 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1607467819.git.alistair.francis@wdc.com>
- <3f1ff73c70b003826bf436ae4c937b62cac79bdc.1607467819.git.alistair.francis@wdc.com>
- <1de03a6f-47d9-6032-ec66-eddea15b1760@linaro.org>
-In-Reply-To: <1de03a6f-47d9-6032-ec66-eddea15b1760@linaro.org>
+ <7d7d148b9d4a3bcc86387d7b0d8005f114ade8be.1607467819.git.alistair.francis@wdc.com>
+ <e0dcaf5f-a41d-d578-273a-34de2da034d3@linaro.org>
+In-Reply-To: <e0dcaf5f-a41d-d578-273a-34de2da034d3@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 9 Dec 2020 14:29:33 -0800
-Message-ID: <CAKmqyKOFepUsgYcYO9P+Drira0WqVP-yDXhWHRstNB5mh6BBTQ@mail.gmail.com>
-Subject: Re: [PATCH v2 11/15] target/riscv: Specify the XLEN for CPUs
+Date: Wed, 9 Dec 2020 14:34:37 -0800
+Message-ID: <CAKmqyKM8gT8n8ZYFkQJCWeyYiYtzTBLHNVdes5+_0Hj4dRLGmw@mail.gmail.com>
+Subject: Re: [PATCH v2 14/15] target/riscv: csr: Remove compile time XLEN
+ checks
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,45 +74,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2020 22:30:03 -0000
+X-List-Received-Date: Wed, 09 Dec 2020 22:35:10 -0000
 
-On Wed, Dec 9, 2020 at 8:03 AM Richard Henderson
+On Wed, Dec 9, 2020 at 9:34 AM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
 > On 12/8/20 4:56 PM, Alistair Francis wrote:
-> > +#ifdef TARGET_RISCV64
-> > +static void rv64_sifive_u_cpu_init(Object *obj)
-> >  {
-> >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> > -    set_misa(env, RVXLEN | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-> > +    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-> >      set_priv_version(env, PRIV_VERSION_1_10_0);
-> >  }
+> > @@ -1053,11 +1077,11 @@ static int read_htimedelta(CPURISCVState *env, int csrno, target_ulong *val)
+> >          return -RISCV_EXCP_ILLEGAL_INST;
+> >      }
 > >
-> > -static void rvxx_sifive_e_cpu_init(Object *obj)
-> > +static void rv64_sifive_e_cpu_init(Object *obj)
-> >  {
-> >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> > -    set_misa(env, RVXLEN | RVI | RVM | RVA | RVC | RVU);
-> > +    set_misa(env, RV64 | RVI | RVM | RVA | RVC | RVU);
-> >      set_priv_version(env, PRIV_VERSION_1_10_0);
-> >      qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+> > -#if defined(TARGET_RISCV32)
+> > -    *val = env->htimedelta & 0xffffffff;
+> > -#else
+> > -    *val = env->htimedelta;
+> > -#endif
+> > +    if (riscv_cpu_is_32bit(env)) {
+> > +        *val = env->htimedelta & 0xffffffff;
+> > +    } else {
+> > +        *val = env->htimedelta;
+> > +    }
+> >      return 0;
 > >  }
-> > +#else
 >
-> I guess it isn't much duplication, but you could retain the rvxx functions and
-> pass in xlen as an argument.  Either way,
-
-Good idea, this file still needs more work in the future. So I'll do
-that when fixing it up.
-
+> Certainly this mask was useless before the patch, because of the ifdef and
+> target_ulong.
 >
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Afterward, target_ulong may be larger than uint32_t... but what does the rest
+> of the value, and the register into which it is stored, represent?
+>
+> Are you going to keep the register values sign-extended, as-if by addw et al,
+> in which case casting to int32_t would be better.  Are you going to simply
+> ignore the upper 32 bits, in which case dropping the masking entirely would be
+> better.
 
-Thanks.
+We are just going to ignore the top half, so I'll drop the mask.
 
 Alistair
 
+>
 >
 > r~
 
