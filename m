@@ -1,58 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kn7oK-000333-NM
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Dec 2020 17:19:48 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51600)
+	id 1kn7rR-0004Yd-2e
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Dec 2020 17:23:01 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52286)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kn7oH-00032l-Qg; Wed, 09 Dec 2020 17:19:46 -0500
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:35908)
+ id 1kn7rP-0004YR-RY; Wed, 09 Dec 2020 17:22:59 -0500
+Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:34157)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kn7oE-0007yS-Oy; Wed, 09 Dec 2020 17:19:45 -0500
-Received: by mail-io1-xd44.google.com with SMTP id z136so3375356iof.3;
- Wed, 09 Dec 2020 14:19:41 -0800 (PST)
+ id 1kn7rN-00005N-2m; Wed, 09 Dec 2020 17:22:59 -0500
+Received: by mail-il1-x144.google.com with SMTP id x15so3236311ilq.1;
+ Wed, 09 Dec 2020 14:22:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7vfY1/zFQM28B3wC4xTWhKqmMIvMJ1vOwkRbrzZeXjk=;
- b=vOOigCjkP+zg1VwfgPfQ4PRcoFputKi48WlafZby6rwr9WQHqwL1izkorEuTEYKsTO
- yk2Vzgf0FgHutqg5X7q6e/OT8TSNXU69mS3b2oCaWnX8CWp85Uj+UoKSPsBYDLmSWuXu
- 1alRPV0qnZQyQGv0u7qRx1pU8ES79NTUl9WkliMQuiY9/hBGESlw1kck85aaVy1HZOAg
- ow1JIs5wHjqkuAMMMg3FnDplqFeyTb6KuwcyUyJkWFUNSg5LdUr/QDT4tRsX9fGTsqaw
- a3srjHST4/2+CoUfk3g5Le5UnXZQH0keR4LONP82cBq9uNF1uqNQnqE7drxNLLAHiWSJ
- UsiA==
+ :cc; bh=lhNvrWVF467g3EnfZyoM3nhmkLN1QnInMXkXHQW2a84=;
+ b=Uvf4FoQO2/dL8nWVDzgDHJs0WyiLfR5v6Liek7kM3hRMRxSXhCP3L7U+NYgUeSCxTX
+ inGOSNF0iELQsnt1gVKfJBDOzlQXBuOEgmzp/a3S100bFOWM4KYHjEOVcC0tQ/fsSO6l
+ OJEoGTd2KRRgMOk2ie1mE/9HqbMVp5LBEneIu7RA2vtmdvWWsvGIzfl5eu3f2g9PCZ4Q
+ oCBxuX11DDm96MmDvhthjpxMBTCOmXLeULZqCPAFHiYUWs4JAjTYMZkG1lDoX5zca2Pd
+ 3yW3ODzx5+DOMQpghMGQvaXQy56A4I6cuAZWzk5ickdG78zvI3QAlY66rkCW1Ys8k1np
+ JuUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=7vfY1/zFQM28B3wC4xTWhKqmMIvMJ1vOwkRbrzZeXjk=;
- b=FwIBPNsQDsUaMKKzdUbsj59DWozjwmSE2mU+vUCKCyt+mxp/HzOa5MRn7bZUpP8Fwn
- vYMsv7ZxV/C3fOMOs2PQzb3tDV1Xkp8kypKD3g54en6aoGyccIThZQ+aEdXMu6mF0npZ
- KDXLhhwg4XpyrZZs4ZjnncKInv5w/nh9ybq9i2sogcay6XisgcsExjpnXuhIbqz/LvT/
- IBNWh6ws2M4SdcawP4+E6WlC4Z7zb8QxQ4tf3hgC+Zsb0HscX8C8WTt6XMXfnRWQ7Wie
- TGx/f1Qlk7HqpaawSAO3Vnj7k1sNA7019HFeTk7FYGtI8w3pYm9+7MMDkU5Q/G2QX2kl
- BGNg==
-X-Gm-Message-State: AOAM5325UETOlNUDrWd0vxYhX3f34I+cgE0R+wwEbMJLgIo/KLNn2rjr
- XfEvJhXOaW2rSn8O+hoCzf7KL5TTEHNY3x+Ymfg=
-X-Google-Smtp-Source: ABdhPJwIJu+mcU+s1TiHhwdlT6kzu/IROXoLEpGRkOmu9yIYn9gM1F/XtS5rmjUUvPpz2eEVkdrENscNyopGBQyuIHE=
-X-Received: by 2002:a02:6c09:: with SMTP id w9mr5891393jab.135.1607552380949; 
- Wed, 09 Dec 2020 14:19:40 -0800 (PST)
+ bh=lhNvrWVF467g3EnfZyoM3nhmkLN1QnInMXkXHQW2a84=;
+ b=UAULISgjjddMubrg3hexSN+JadI22J38PMIUjKoe1wbI/AI7cF4ryOXbPb8XlQMZei
+ XjQzaN0YKnyDNvgNvc3m5zs6OdRWQnFSqzU1Q7zyY0nE36P2donTcUvtk9MJeQ9UePaB
+ bthkOWrYksoWaLXY4yzp0WX/SVJ7Ez7A6lF/emvSpaqBIPJYAb3VvQVV/3iqoLIYK8Yx
+ nfeKpKFnVMRwnIFc4nvhKjxr0NdLSm3t0rS39p14Ob7BplwfmQ8t4c0WyEr0GjZY0qsh
+ Jia5Qbbxq5ZYaMXq7NEoX8NLwcQsXPDyIMiuCGX2OtEa9wnpx0/TmiV0+oO74VxDSdq7
+ k7Jw==
+X-Gm-Message-State: AOAM533f1HKdShjLVbKhFq8q6BfZqswdTLftvMFeMhiu37r49XucPuIz
+ bu8gsrcsZS3jao4Mpn9fpRiQJnMQxikFOqiPlXY=
+X-Google-Smtp-Source: ABdhPJwz0u7deW7MUmOx3rxxpX/3gA3nni5OD+0/Kb/wWDJeR2xwYc5c25odAf7eiL7iS3yb50teG0H9EPy6ZSurJb0=
+X-Received: by 2002:a92:cb44:: with SMTP id f4mr5413945ilq.131.1607552575563; 
+ Wed, 09 Dec 2020 14:22:55 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1607467819.git.alistair.francis@wdc.com>
- <64d6afcb62eb7b27b863436219cf1a4e28018de1.1607467819.git.alistair.francis@wdc.com>
- <b19249c1-2aef-ae9c-8109-d6d5d0a4425c@linaro.org>
-In-Reply-To: <b19249c1-2aef-ae9c-8109-d6d5d0a4425c@linaro.org>
+ <1b78dbf9afd11bc9e47ce112a0096521a744133c.1607467819.git.alistair.francis@wdc.com>
+ <65e90c9b-ca1b-a1c4-78ea-63500ce59ece@linaro.org>
+In-Reply-To: <65e90c9b-ca1b-a1c4-78ea-63500ce59ece@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 9 Dec 2020 14:19:14 -0800
-Message-ID: <CAKmqyKMpM2Q9++_2NCDNVA_uKMWbK+pWZo2stY9Pf95X-tAh6Q@mail.gmail.com>
-Subject: Re: [PATCH v2 05/15] hw/riscv: boot: Remove compile time XLEN checks
+Date: Wed, 9 Dec 2020 14:22:29 -0800
+Message-ID: <CAKmqyKPfvFxZiW1U-Gd+PFZyKnhZb6e-DNTWeS7fhJmb=P-kng@mail.gmail.com>
+Subject: Re: [PATCH v2 09/15] target/riscv: fpu_helper: Match function defs in
+ HELPER macros
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d44;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd44.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,28 +74,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2020 22:19:46 -0000
+X-List-Received-Date: Wed, 09 Dec 2020 22:23:00 -0000
 
-On Wed, Dec 9, 2020 at 7:51 AM Richard Henderson
+On Wed, Dec 9, 2020 at 7:57 AM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
 > On 12/8/20 4:56 PM, Alistair Francis wrote:
-> > +    if (riscv_is_32_bit(machine)) {
-> > +        dinfo.magic = cpu_to_le32(FW_DYNAMIC_INFO_MAGIC_VALUE);
-> > +        dinfo.version = cpu_to_le32(FW_DYNAMIC_INFO_VERSION);
-> > +        dinfo.next_mode = cpu_to_le32(FW_DYNAMIC_INFO_NEXT_MODE_S);
-> > +        dinfo.next_addr = cpu_to_le32(kernel_entry);
-> > +    } else {
-> > +        dinfo.magic = cpu_to_le64(FW_DYNAMIC_INFO_MAGIC_VALUE);
-> > +        dinfo.version = cpu_to_le64(FW_DYNAMIC_INFO_VERSION);
-> > +        dinfo.next_mode = cpu_to_le64(FW_DYNAMIC_INFO_NEXT_MODE_S);
-> > +        dinfo.next_addr = cpu_to_le64(kernel_entry);
-> > +    }
+> > The helper functions defined in helper.h specify that the argument is of
+> > type target_long. Let's change the implementation to match the header
+> > definition.
 >
-> This looks like it's still based on the TARGET, but via the types in
-> fw_dynamic_info.  So far it would be clearer with sizeof(dinfo.magic) or something.
+> Given that these are riscv64 specific, you could alternately change the header
+> definition.  Dunno if that's clearer or not, considering an implementation like
+> float32_to_int64 -- is it immediately obvious whether or not we are truncating
+> the result?
 
-Fixed.
+I suspect the headers are going to have to be changed before we have
+full dynamic xlen support. This series is already pretty large so here
+I just wanted to get it to compile without warnings. I  think the FPU
+will take more work so I'm just going to put header changes off until
+then.
 
 Alistair
 
