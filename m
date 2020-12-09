@@ -1,59 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kn7rR-0004Yd-2e
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Dec 2020 17:23:01 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52286)
+	id 1kn7us-0006Mb-08
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Dec 2020 17:26:34 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53190)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kn7rP-0004YR-RY; Wed, 09 Dec 2020 17:22:59 -0500
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:34157)
+ id 1kn7up-0006M9-A5; Wed, 09 Dec 2020 17:26:31 -0500
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:43523)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kn7rN-00005N-2m; Wed, 09 Dec 2020 17:22:59 -0500
-Received: by mail-il1-x144.google.com with SMTP id x15so3236311ilq.1;
- Wed, 09 Dec 2020 14:22:56 -0800 (PST)
+ id 1kn7um-0000bM-Vd; Wed, 09 Dec 2020 17:26:30 -0500
+Received: by mail-io1-xd43.google.com with SMTP id n14so3358477iom.10;
+ Wed, 09 Dec 2020 14:26:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=lhNvrWVF467g3EnfZyoM3nhmkLN1QnInMXkXHQW2a84=;
- b=Uvf4FoQO2/dL8nWVDzgDHJs0WyiLfR5v6Liek7kM3hRMRxSXhCP3L7U+NYgUeSCxTX
- inGOSNF0iELQsnt1gVKfJBDOzlQXBuOEgmzp/a3S100bFOWM4KYHjEOVcC0tQ/fsSO6l
- OJEoGTd2KRRgMOk2ie1mE/9HqbMVp5LBEneIu7RA2vtmdvWWsvGIzfl5eu3f2g9PCZ4Q
- oCBxuX11DDm96MmDvhthjpxMBTCOmXLeULZqCPAFHiYUWs4JAjTYMZkG1lDoX5zca2Pd
- 3yW3ODzx5+DOMQpghMGQvaXQy56A4I6cuAZWzk5ickdG78zvI3QAlY66rkCW1Ys8k1np
- JuUQ==
+ :cc; bh=8Re5j94SdPWaRytZbzThMkw+G7JB4JtvvDNG3Oa1OHc=;
+ b=FNNiKLns30AR/F+QtCOlkWL31Yz9jvCooyHo/tCF/8gg0p9rNNJ67mRQBuvAseNqZD
+ +bJ/8IR5IPIxVNJBYrlyQmb/dW9DoHp5N9W+k8GqvmOI6ZHXNd9RmEqNaa0PCOlJ4asC
+ orM3Dwae52RDZUvKP3DxAKto7K6RKEnz7Y2eD9IQ/o2VUhSBCOONgmRTRIOazDe70enR
+ auKXC1gt88rLNdQAPJhbXTDYA44LkCTkifpoGPaDwbWg51505KLw77fohGrVBAJJ2tTn
+ 9EiOZ5yzKE84FzFIhlmi3hfjSw06PBwavjFYA5NRokgxi6v70+KWRGPWxO+MiVXv3pRD
+ mDmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=lhNvrWVF467g3EnfZyoM3nhmkLN1QnInMXkXHQW2a84=;
- b=UAULISgjjddMubrg3hexSN+JadI22J38PMIUjKoe1wbI/AI7cF4ryOXbPb8XlQMZei
- XjQzaN0YKnyDNvgNvc3m5zs6OdRWQnFSqzU1Q7zyY0nE36P2donTcUvtk9MJeQ9UePaB
- bthkOWrYksoWaLXY4yzp0WX/SVJ7Ez7A6lF/emvSpaqBIPJYAb3VvQVV/3iqoLIYK8Yx
- nfeKpKFnVMRwnIFc4nvhKjxr0NdLSm3t0rS39p14Ob7BplwfmQ8t4c0WyEr0GjZY0qsh
- Jia5Qbbxq5ZYaMXq7NEoX8NLwcQsXPDyIMiuCGX2OtEa9wnpx0/TmiV0+oO74VxDSdq7
- k7Jw==
-X-Gm-Message-State: AOAM533f1HKdShjLVbKhFq8q6BfZqswdTLftvMFeMhiu37r49XucPuIz
- bu8gsrcsZS3jao4Mpn9fpRiQJnMQxikFOqiPlXY=
-X-Google-Smtp-Source: ABdhPJwz0u7deW7MUmOx3rxxpX/3gA3nni5OD+0/Kb/wWDJeR2xwYc5c25odAf7eiL7iS3yb50teG0H9EPy6ZSurJb0=
-X-Received: by 2002:a92:cb44:: with SMTP id f4mr5413945ilq.131.1607552575563; 
- Wed, 09 Dec 2020 14:22:55 -0800 (PST)
+ bh=8Re5j94SdPWaRytZbzThMkw+G7JB4JtvvDNG3Oa1OHc=;
+ b=NptV96kjoVkeRpJj7LzE9vGBfQEKqaT9fDGR/PsdbTs9dghyZ2JISGDVLP1GTedmbG
+ 4GGdmHSYuj9thYPMC0Jfb9wSH1hUmwR+XZ+evGkilY+4vpwdiHL5ntTuBkC9FQhGOxFE
+ 1JH3KEDdxXn1YhfOYlVjws9cFNkkKL5U2N51rNHBoGHVOb1j0gi2+GfYy6OnCZurC2+z
+ vDcPJUqeVpwudxxbtSO6x4FL4AzjcyQ0zIhSZ42Mq06ITBJPJCTC4VIcBVRAEKkoTlqL
+ AWXTkWXf+dSZY1IGztFJw+admgeZTJwuUDrE4TpcVYzBQi1NxaDZMiW4LiYsdSeBdJN9
+ ChSQ==
+X-Gm-Message-State: AOAM531W6Kt38417TgtyabFeiUoHHSrf0ZUWWlqmMkKo+eMo1IBzFUtE
+ JB2fzo9/YDpwU9+hnekpS9n+e3TTwiPdWAKFyOM=
+X-Google-Smtp-Source: ABdhPJxBWRQd71Kk61PaHBKFbSdL5a/0hXbsQ6FQ+A7+ECKGHDGoNlCPqrHnyaiZSIwPWcbYf0cSLskADn0WmjilywE=
+X-Received: by 2002:a05:6638:d4e:: with SMTP id
+ d14mr5997284jak.26.1607552787329; 
+ Wed, 09 Dec 2020 14:26:27 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1607467819.git.alistair.francis@wdc.com>
- <1b78dbf9afd11bc9e47ce112a0096521a744133c.1607467819.git.alistair.francis@wdc.com>
- <65e90c9b-ca1b-a1c4-78ea-63500ce59ece@linaro.org>
-In-Reply-To: <65e90c9b-ca1b-a1c4-78ea-63500ce59ece@linaro.org>
+ <22761a83664e100f962532cfa82b25d1a0a89ba3.1607467819.git.alistair.francis@wdc.com>
+ <06b5d390-7929-3357-5e14-005808ab9a4c@linaro.org>
+In-Reply-To: <06b5d390-7929-3357-5e14-005808ab9a4c@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 9 Dec 2020 14:22:29 -0800
-Message-ID: <CAKmqyKPfvFxZiW1U-Gd+PFZyKnhZb6e-DNTWeS7fhJmb=P-kng@mail.gmail.com>
-Subject: Re: [PATCH v2 09/15] target/riscv: fpu_helper: Match function defs in
- HELPER macros
+Date: Wed, 9 Dec 2020 14:26:01 -0800
+Message-ID: <CAKmqyKMU8KmULX8mMn782qrPKDFZdJ8BXixtGB8LDS37zRcxEQ@mail.gmail.com>
+Subject: Re: [PATCH v2 10/15] target/riscv: Add a riscv_cpu_is_32bit() helper
+ function
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d43;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd43.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,29 +75,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2020 22:23:00 -0000
+X-List-Received-Date: Wed, 09 Dec 2020 22:26:31 -0000
 
-On Wed, Dec 9, 2020 at 7:57 AM Richard Henderson
+On Wed, Dec 9, 2020 at 7:59 AM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
 > On 12/8/20 4:56 PM, Alistair Francis wrote:
-> > The helper functions defined in helper.h specify that the argument is of
-> > type target_long. Let's change the implementation to match the header
-> > definition.
+> > +bool riscv_cpu_is_32bit(CPURISCVState *env)
+> > +{
+> > +    if (env->misa & RV64) {
+> > +        return false;
+> > +    }
+> > +
+> > +    return true;
 >
-> Given that these are riscv64 specific, you could alternately change the header
-> definition.  Dunno if that's clearer or not, considering an implementation like
-> float32_to_int64 -- is it immediately obvious whether or not we are truncating
-> the result?
+> Is this ever going to more than
+>
+>     return !(env->misa & RV64);
 
-I suspect the headers are going to have to be changed before we have
-full dynamic xlen support. This series is already pretty large so here
-I just wanted to get it to compile without warnings. I  think the FPU
-will take more work so I'm just going to put header changes off until
-then.
+Eventually this could also depend on mstatus, to allow a 32-bit kernel
+to run on a 64-bit firmware.
+
+It will also hopefully one day be configurable by hypervisors.
 
 Alistair
 
+>
+> ?
 >
 >
 > r~
