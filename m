@@ -1,69 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1knA0i-0008Rr-PU
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Dec 2020 19:40:44 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55906)
+	id 1knCnt-000870-8f
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Dec 2020 22:39:41 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35776)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1knA0b-0008QN-SD; Wed, 09 Dec 2020 19:40:38 -0500
-Received: from mail-il1-x144.google.com ([2607:f8b0:4864:20::144]:40179)
+ (Exim 4.90_1) (envelope-from <npickito@gmail.com>)
+ id 1knCnm-000837-Iq; Wed, 09 Dec 2020 22:39:34 -0500
+Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341]:40288)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1knA0V-0007vf-Kk; Wed, 09 Dec 2020 19:40:36 -0500
-Received: by mail-il1-x144.google.com with SMTP id g1so3499671ilk.7;
- Wed, 09 Dec 2020 16:40:30 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <npickito@gmail.com>)
+ id 1knCnk-00042l-TQ; Wed, 09 Dec 2020 22:39:34 -0500
+Received: by mail-wm1-x341.google.com with SMTP id a3so3829941wmb.5;
+ Wed, 09 Dec 2020 19:39:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=INb4vK0opERmR5bDP1DxSpaftrvOYAggkLQkvXmoIqU=;
- b=NgJ6s87tsGTWQVtrbvZANbl+uCO4VbKdR591HFN1SO4tbytNDMx1hFs5fKOnpcbe+2
- XNFtlmyG7G3I7FVr/96T8NMWmw0MPUcEPctQvHSmTVb9irhNRFjXPwyaNYfS+Sv8/M+2
- kvzYHv61o2KqsRLDacwpdQ+nh7MXEaSzwehFT/oz69wggDKVB7AQHCJRKUF7d0KaoRKu
- cln3qmj+AK9+q3buSK3sM9mfiem/F2hAwTmijsglpYqv/lr0GAHJOF6p+G2ffjTeXTZs
- jWbXuNFVxvX68qp8pVyv/qMrLf4TYOyS3zxff6Bb0eK774SiLLVSuM5m8ACwI8EaEVR2
- iUcQ==
+ :cc; bh=Z5d9TBTvx+BrjDrYNZfyHcLW2iP9KNHH88askXsDz00=;
+ b=CGSkPkaMNtXyAxAMo8w81C07vDV9Mz59tSefQT/Qm2FsCeetPYLREb1+pR5eh0SV3S
+ EeLmJEo8ZCDYCIkrWqFqvy7SwnQQkFZqfUzpnzsA50fkymghyWTNOCjqMAsTQojojxj9
+ ecKXqTerOBZZBjUYE1k3eCNhe+7ZWZgN0bYTJwhwNt+h51SouI8RyBP8owJteCIPjgV4
+ w15Y/akQxX1QPZzeevPA/HpxS2xefQ3R6DvHZsav+Vn+MhqbcMVY5lpKGZ5AR6so/BZd
+ fqpuPCFmdgBa2wOWQOdPw8pxa3S8oU8+xwBaR7eAmLZlBMkNXI5dMa2kXXdtrlJ93TC6
+ ifkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=INb4vK0opERmR5bDP1DxSpaftrvOYAggkLQkvXmoIqU=;
- b=lvYNzXQoO2JHridvGPSgiN4RyNG7EoUGe5bzPP4dBjHIhlcn5PweOx+Z5NIgiC61Lf
- GCnOxzqikltJfo0QdSTCj+RROhNfWI9KeJmEYjB4O1mRUlNQokt1MMwjMtVesfZANw3+
- 14hni/8t1Z3U3G99JCv31heTlaeHrb127RSbbBSwUJ4+0yYtnnHSaltnsiuPdAPrNxqr
- I57vo/QqAHl9UFccd5viHf1v3YcuRN7lhyvk4E1xNLFgmRwS1+c3Ab4KFDyIhJq+Ve9l
- 8BBGWFjex+2VA3FTxUnSbVf+2aq7R7nFMcPmg/4IxAW07zo6idypOYtvVkJGnYU2WzEF
- CKow==
-X-Gm-Message-State: AOAM5338fOluppwmn9lC+0IfV4VsDcf3Nul+PAbqsi7jd3BEenZtwbAF
- PJrME0tV5Jd2BRKtoW6PSz24QyLvhZg2P3mwb90=
-X-Google-Smtp-Source: ABdhPJxVu1s3kJiwINavpLcnf7u9tuQ5BJMJWzU5W5XTqDX+Heh/TrxNX9+5BGamLZcS7G2YP1pTcXcpnGO5pU+CMMY=
-X-Received: by 2002:a92:490d:: with SMTP id w13mr6643548ila.227.1607560829795; 
- Wed, 09 Dec 2020 16:40:29 -0800 (PST)
+ bh=Z5d9TBTvx+BrjDrYNZfyHcLW2iP9KNHH88askXsDz00=;
+ b=F63PNTnnmvuRH8624/quzi5v5LgBQ7qpTqu/BKFBO71KtJTy1GzT6C23wnkGO/44Q9
+ 1Pzg2JMbKZo3ACZI/KaQVpO8YbkCym5ikFXG7dARecFxxOvszlPfdDtbKo3CWx0mUyAx
+ 0Z5KNGChgB/7/Qyz8Goxydgi9HlPqvEY5v+1dxGLhbZ1vPGFaKasgkWY/UEVicqm1zit
+ zDaYmBhn+Zmv5GrFycDNP/pmgTM6k09EHPgpOuwv/2I1LEfjFm6HVi1Y6vCkyrPt2aCw
+ GRVuaadMQp2X3gIvzpTMolNka5BjlrFlh/TG9tu8uyCR9ZfAfUiCNtk8uOzk5DSwDyPb
+ AhTw==
+X-Gm-Message-State: AOAM531uoAaxVElHz3Fp36RdLBSrb8tD179niOC6KiY9H/o3zBSrWM6i
+ bY5OHc/yjNzXGDORHJ3utKVvokk+oJCS65dheC0=
+X-Google-Smtp-Source: ABdhPJy3t0yqduZbqTK+CWFHcIMePNKlf1S6Sr/0F768Pq8MCEoOcfn5f+G2IJ9cxtu9Vjh1QAwSw3KojQAvffc7cnE=
+X-Received: by 2002:a7b:cc16:: with SMTP id f22mr5885750wmh.154.1607571570716; 
+ Wed, 09 Dec 2020 19:39:30 -0800 (PST)
 MIME-Version: 1.0
-References: <20201201032936.1213-1-jiangyifei@huawei.com>
- <20201201032936.1213-2-jiangyifei@huawei.com>
-In-Reply-To: <20201201032936.1213-2-jiangyifei@huawei.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 9 Dec 2020 16:40:03 -0800
-Message-ID: <CAKmqyKOOqNJroVhs2aPNj7DioLaf2YmKmFLTJ5M=q0=anJcsxQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] target-riscv: support QMP dump-guest-memory
-To: Yifei Jiang <jiangyifei@huawei.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Zhanghailiang <zhang.zhanghailiang@huawei.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "Zhangxiaofeng (F)" <victor.zhangxiaofeng@huawei.com>,
- "limingwang (A)" <limingwang@huawei.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- "Wubin (H)" <wu.wubin@huawei.com>, "dengkai (A)" <dengkai1@huawei.com>
+References: <20201125213617.2496935-1-keithp@keithp.com>
+ <20201125213617.2496935-6-keithp@keithp.com>
+ <CA+yXCZC038LfuswrAo6W3gHXfGkwPscMEKDQJvutV7xcoC+wPw@mail.gmail.com>
+ <87r1nz6iz4.fsf@keithp.com>
+In-Reply-To: <87r1nz6iz4.fsf@keithp.com>
+From: Kito Cheng <kito.cheng@gmail.com>
+Date: Thu, 10 Dec 2020 11:39:19 +0800
+Message-ID: <CA+yXCZA7XhLXDN7ZDk8D90eyXOLCzsrzwUyego1Sn=D9x3BGMQ@mail.gmail.com>
+Subject: Re: [PATCH 5/8] riscv: Add semihosting support [v13]
+To: Keith Packard <keithp@keithp.com>
+Cc: qemu-devel@nongnu.org,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Laurent Vivier <laurent@vivier.eu>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell <peter.maydell@linaro.org>,
+ qemu-arm@nongnu.org, 
+ qemu-riscv@nongnu.org, Sagar Karandikar <sagark@eecs.berkeley.edu>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::144;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x144.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::341;
+ envelope-from=npickito@gmail.com; helo=mail-wm1-x341.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,278 +77,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Dec 2020 00:40:40 -0000
+X-List-Received-Date: Thu, 10 Dec 2020 03:39:38 -0000
 
-On Mon, Nov 30, 2020 at 7:32 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
->
-> Add the support needed for creating prstatus elf notes. Now elf notes
-> only contains user_regs. This allows us to use QMP dump-guest-memory.
->
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-> Signed-off-by: Mingwang Li <limingwang@huawei.com>
+Hi Keith:
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks for your reply, but it seems like we need some more modification in
+ linux-user/riscv/cpu_loop.c to enable that, I guess I should post that in mail
+rather than attachment :)
 
-Alistair
+Patch here:
 
-> ---
->  target/riscv/arch_dump.c | 189 +++++++++++++++++++++++++++++++++++++++
->  target/riscv/cpu.c       |   2 +
->  target/riscv/cpu.h       |   4 +
->  target/riscv/cpu_bits.h  |   1 +
->  target/riscv/meson.build |   1 +
->  5 files changed, 197 insertions(+)
->  create mode 100644 target/riscv/arch_dump.c
+From 2f1eb5825a6dda177d3289106970eab05cb08445 Mon Sep 17 00:00:00 2001
+From: Kito Cheng <kito.cheng@sifive.com>
+Date: Wed, 9 Dec 2020 14:24:51 +0800
+Subject: [PATCH] riscv: Add semihosting support for user mode
+
+This could make testing easier and ARM/AArch64 has support on
+their linux user mode too, so I think it should be reasonable.
+
+Verified GCC testsuite with newlib/semihosting.
+
+Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
+---
+ linux-user/riscv/cpu_loop.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+index aa9e437875..9665dabb09 100644
+--- a/linux-user/riscv/cpu_loop.c
++++ b/linux-user/riscv/cpu_loop.c
+@@ -23,6 +23,7 @@
+ #include "qemu.h"
+ #include "cpu_loop-common.h"
+ #include "elf.h"
++#include "hw/semihosting/common-semi.h"
+
+ void cpu_loop(CPURISCVState *env)
+ {
+@@ -91,6 +92,10 @@ void cpu_loop(CPURISCVState *env)
+             sigcode = TARGET_SEGV_MAPERR;
+             sigaddr = env->badaddr;
+             break;
++        case RISCV_EXCP_SEMIHOST:
++            env->gpr[xA0] = do_common_semihosting(cs);
++            env->pc += 4;
++            break;
+         case EXCP_DEBUG:
+         gdbstep:
+             signum = TARGET_SIGTRAP;
+-- 
+2.29.2
+
+On Thu, Dec 10, 2020 at 12:30 AM Keith Packard via
+<qemu-devel@nongnu.org> wrote:
 >
-> diff --git a/target/riscv/arch_dump.c b/target/riscv/arch_dump.c
-> new file mode 100644
-> index 0000000000..b89ddf18c7
-> --- /dev/null
-> +++ b/target/riscv/arch_dump.c
-> @@ -0,0 +1,189 @@
-> +/* Support for writing ELF notes for RISC-V architectures
-> + *
-> + * Copyright (C) 2020 Huawei Technologies Co., Ltd
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "cpu.h"
-> +#include "elf.h"
-> +#include "sysemu/dump.h"
-> +
-> +/* struct user_regs_struct from arch/riscv/include/uapi/asm/ptrace.h */
-> +struct riscv_user_regs {
-> +    target_ulong pc;
-> +    target_ulong regs[31];
-> +} QEMU_PACKED;
-> +
-> +/* struct elf_prstatus from include/uapi/linux/elfcore.h */
-> +struct riscv64_elf_prstatus {
-> +    char pad1[32]; /* 32 == offsetof(struct elf_prstatus, pr_pid) */
-> +    uint32_t pr_pid;
-> +    char pad2[76]; /* 76 == offsetof(struct elf_prstatus, pr_reg) -
-> +                            offsetof(struct elf_prstatus, pr_ppid) */
-> +    struct riscv_user_regs pr_reg;
-> +    char pad3[8];
-> +} QEMU_PACKED;
-> +
-> +struct riscv64_note {
-> +    Elf64_Nhdr hdr;
-> +    char name[8]; /* align_up(sizeof("CORE"), 4) */
-> +    struct riscv64_elf_prstatus prstatus;
-> +} QEMU_PACKED;
-> +
-> +#define RISCV64_NOTE_HEADER_SIZE offsetof(struct riscv64_note, prstatus)
-> +#define RISCV64_PRSTATUS_NOTE_SIZE \
-> +            (RISCV64_NOTE_HEADER_SIZE + sizeof(struct riscv64_elf_prstatus))
-> +
-> +static void riscv64_note_init(struct riscv64_note *note, DumpState *s,
-> +                              const char *name, Elf64_Word namesz,
-> +                              Elf64_Word type, Elf64_Word descsz)
-> +{
-> +    memset(note, 0, sizeof(*note));
-> +
-> +    note->hdr.n_namesz = cpu_to_dump32(s, namesz);
-> +    note->hdr.n_descsz = cpu_to_dump32(s, descsz);
-> +    note->hdr.n_type = cpu_to_dump32(s, type);
-> +
-> +    memcpy(note->name, name, namesz);
-> +}
-> +
-> +int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-> +                               int cpuid, void *opaque)
-> +{
-> +    struct riscv64_note note;
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +    CPURISCVState *env = &cpu->env;
-> +    DumpState *s = opaque;
-> +    int ret, i = 0;
-> +    const char name[] = "CORE";
-> +
-> +    riscv64_note_init(&note, s, name, sizeof(name),
-> +                      NT_PRSTATUS, sizeof(note.prstatus));
-> +
-> +    note.prstatus.pr_pid = cpu_to_dump32(s, cpuid);
-> +
-> +    note.prstatus.pr_reg.pc = cpu_to_dump64(s, env->pc);
-> +
-> +    for (i = 0; i < 31; i++) {
-> +        note.prstatus.pr_reg.regs[i] = cpu_to_dump64(s, env->gpr[i + 1]);
-> +    }
-> +
-> +    ret = f(&note, RISCV64_PRSTATUS_NOTE_SIZE, s);
-> +    if (ret < 0) {
-> +        return -1;
-> +    }
-> +
-> +    return ret;
-> +}
-> +
-> +struct riscv32_elf_prstatus {
-> +    char pad1[24]; /* 24 == offsetof(struct elf_prstatus, pr_pid) */
-> +    uint32_t pr_pid;
-> +    char pad2[44]; /* 44 == offsetof(struct elf_prstatus, pr_reg) -
-> +                            offsetof(struct elf_prstatus, pr_ppid) */
-> +    struct riscv_user_regs pr_reg;
-> +    char pad3[4];
-> +} QEMU_PACKED;
-> +
-> +struct riscv32_note {
-> +    Elf32_Nhdr hdr;
-> +    char name[8]; /* align_up(sizeof("CORE"), 4) */
-> +    struct riscv32_elf_prstatus prstatus;
-> +} QEMU_PACKED;
-> +
-> +#define RISCV32_NOTE_HEADER_SIZE offsetof(struct riscv32_note, prstatus)
-> +#define RISCV32_PRSTATUS_NOTE_SIZE \
-> +            (RISCV32_NOTE_HEADER_SIZE + sizeof(struct riscv32_elf_prstatus))
-> +
-> +static void riscv32_note_init(struct riscv32_note *note, DumpState *s,
-> +                              const char *name, Elf32_Word namesz,
-> +                              Elf32_Word type, Elf32_Word descsz)
-> +{
-> +    memset(note, 0, sizeof(*note));
-> +
-> +    note->hdr.n_namesz = cpu_to_dump32(s, namesz);
-> +    note->hdr.n_descsz = cpu_to_dump32(s, descsz);
-> +    note->hdr.n_type = cpu_to_dump32(s, type);
-> +
-> +    memcpy(note->name, name, namesz);
-> +}
-> +
-> +int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
-> +                               int cpuid, void *opaque)
-> +{
-> +    struct riscv32_note note;
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +    CPURISCVState *env = &cpu->env;
-> +    DumpState *s = opaque;
-> +    int ret, i;
-> +    const char name[] = "CORE";
-> +
-> +    riscv32_note_init(&note, s, name, sizeof(name),
-> +                      NT_PRSTATUS, sizeof(note.prstatus));
-> +
-> +    note.prstatus.pr_pid = cpu_to_dump32(s, cpuid);
-> +
-> +    note.prstatus.pr_reg.pc = cpu_to_dump32(s, env->pc);
-> +
-> +    for (i = 0; i < 31; i++) {
-> +        note.prstatus.pr_reg.regs[i] = cpu_to_dump32(s, env->gpr[i + 1]);
-> +    }
-> +
-> +    ret = f(&note, RISCV32_PRSTATUS_NOTE_SIZE, s);
-> +    if (ret < 0) {
-> +        return -1;
-> +    }
-> +
-> +    return ret;
-> +}
-> +
-> +int cpu_get_dump_info(ArchDumpInfo *info,
-> +                      const GuestPhysBlockList *guest_phys_blocks)
-> +{
-> +    RISCVCPU *cpu;
-> +    CPURISCVState *env;
-> +
-> +    if (first_cpu == NULL) {
-> +        return -1;
-> +    }
-> +    cpu = RISCV_CPU(first_cpu);
-> +    env = &cpu->env;
-> +
-> +    info->d_machine = EM_RISCV;
-> +
-> +#if defined(TARGET_RISCV64)
-> +    info->d_class = ELFCLASS64;
-> +#else
-> +    info->d_class = ELFCLASS32;
-> +#endif
-> +
-> +    info->d_endian = (env->mstatus & MSTATUS_UBE) != 0
-> +                     ? ELFDATA2MSB : ELFDATA2LSB;
-> +
-> +    return 0;
-> +}
-> +
-> +ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
-> +{
-> +    size_t note_size;
-> +
-> +    if (class == ELFCLASS64) {
-> +        note_size = RISCV64_PRSTATUS_NOTE_SIZE;
-> +    } else {
-> +        note_size = RISCV32_PRSTATUS_NOTE_SIZE;
-> +    }
-> +
-> +    return note_size * nr_cpus;
-> +}
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6a0264fc6b..52399d83b4 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -544,6 +544,8 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
->      cc->dump_state = riscv_cpu_dump_state;
->      cc->set_pc = riscv_cpu_set_pc;
->      cc->synchronize_from_tb = riscv_cpu_synchronize_from_tb;
-> +    cc->write_elf64_note = riscv_cpu_write_elf64_note;
-> +    cc->write_elf32_note = riscv_cpu_write_elf32_note;
->      cc->gdb_read_register = riscv_cpu_gdb_read_register;
->      cc->gdb_write_register = riscv_cpu_gdb_write_register;
->      cc->gdb_num_core_regs = 33;
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index c0a326c843..4a340b0c73 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -315,6 +315,10 @@ extern const char * const riscv_intr_names[];
+> Kito Cheng <kito.cheng@gmail.com> writes:
 >
->  const char *riscv_cpu_get_trap_name(target_ulong cause, bool async);
->  void riscv_cpu_do_interrupt(CPUState *cpu);
-> +int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-> +                               int cpuid, void *opaque);
-> +int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
-> +                               int cpuid, void *opaque);
->  int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
->  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
->  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 24b24c69c5..d7259561e7 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -368,6 +368,7 @@
->  #define MSTATUS_MIE         0x00000008
->  #define MSTATUS_UPIE        0x00000010
->  #define MSTATUS_SPIE        0x00000020
-> +#define MSTATUS_UBE         0x00000040
->  #define MSTATUS_MPIE        0x00000080
->  #define MSTATUS_SPP         0x00000100
->  #define MSTATUS_MPP         0x00001800
-> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-> index 14a5c62dac..88ab850682 100644
-> --- a/target/riscv/meson.build
-> +++ b/target/riscv/meson.build
-> @@ -26,6 +26,7 @@ riscv_ss.add(files(
+> > Hi Keith:
+> >
+> > Thanks for the patch, I've verified with newlib semihosting support
+> > which is contributed by Craig Blackmore from embecosm,
+> > and I would like to add semihosting to user mode, do you mind add this
+> > patch into this patch series?
 >
->  riscv_softmmu_ss = ss.source_set()
->  riscv_softmmu_ss.add(files(
-> +  'arch_dump.c',
->    'pmp.c',
->    'monitor.c',
->    'machine.c'
+> I tried to add that already, but I admit that I haven't tested it in a
+> while. You should find that there are patches to linux-user/semihost.c
+> and linux-user/qemu.h to enable it.
+>
 > --
-> 2.19.1
->
->
+> -keith
 
