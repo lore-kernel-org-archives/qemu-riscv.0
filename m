@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kou7a-0000mh-D1
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 15:07:02 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40388)
+	id 1kou7z-00014f-RP
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 15:07:27 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40528)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1kou7Y-0000mE-I3; Mon, 14 Dec 2020 15:07:00 -0500
-Received: from home.keithp.com ([63.227.221.253]:51690 helo=elaine.keithp.com)
+ id 1kou7v-00012A-BD; Mon, 14 Dec 2020 15:07:23 -0500
+Received: from home.keithp.com ([63.227.221.253]:51712 helo=elaine.keithp.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1kou7V-0004CX-Si; Mon, 14 Dec 2020 15:07:00 -0500
+ id 1kou7s-0004Fc-8W; Mon, 14 Dec 2020 15:07:23 -0500
 Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id E8C733F2D6F1;
- Mon, 14 Dec 2020 12:06:51 -0800 (PST)
+ by elaine.keithp.com (Postfix) with ESMTP id 211EA3F2E393;
+ Mon, 14 Dec 2020 12:07:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1607976411; bh=5V1bigVxEuJjLuQkNQxMsgsuiXxEmEsEJ6n2ArsDgqY=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=jk4jsl8V3FqSP0VOUIKVDyaVRQOGUI0OYEbX40mZvsrTl5vmcIpJiYjypfNp2hyFC
- jvioZ/GVrrUY2CwT5QmhBeMKnYqC2b05o08WchRqPn83FOngcedSQoB7Md/dHkKAnY
- iVHWxghoaF+MPRp7y8lTeX8zkA9buHinf+hLciBeVzYJoP4vspRRcfWDe4N+vVbhnE
- xmStgMpIGIa5kBIe6bD1xqTncTRhEeorLI9FzO8jQh6hmYTQG/pBg8ZH+a1WcaYMqE
- aFsVTY4W0cT/Sw0w84N+vxYhcm3fZmIGlw2N/jKmSiGBLRoY/NI+fRjHecGP0IBZmx
- CGM40OtehjQxg==
+ t=1607976438; bh=8haCYnZ52jXxxy78j8fypuNz+2Y8rEl1NEqgcLh4ORM=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=ebrUsY/brx6OjNpoxolM4bbxy/nQy6RGE3hJ8UKBe2lzs/cE6e6oomZSQhnAUWDyg
+ vq5y6hVZ73AvYunlHPB9H0S/ndGFFW3D67e1hikTEOyMV6OyrWQ/kVjqi5sG9FqX6j
+ pgI8GtxqvupHJjcq0JlSk62ux/2bmyuJoDBuPfIA/lkiaV3DEAE2XH/IEZQNpcUp0x
+ Phnzlwkg8Ha+XgeThXzSiBt99BoUmUlB/AwF+Li6t5I3aGLsY9eHX0illij8hR91HC
+ gyJEJYGyKLFGnmiryruHRzoMPWtjoyy29gx8RF6pUkDamJtTlRmEp+9ARn4nC1APYz
+ ijWiuXaevpRDw==
 X-Virus-Scanned: Debian amavisd-new at keithp.com
 Received: from elaine.keithp.com ([127.0.0.1])
  by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id Z0Yuyjx_olgg; Mon, 14 Dec 2020 12:06:51 -0800 (PST)
+ with LMTP id GHliSzEgtfof; Mon, 14 Dec 2020 12:07:17 -0800 (PST)
 Received: from keithp.com (koto.keithp.com [10.0.0.2])
- by elaine.keithp.com (Postfix) with ESMTPSA id 874F53F2D6D3;
- Mon, 14 Dec 2020 12:06:51 -0800 (PST)
+ by elaine.keithp.com (Postfix) with ESMTPSA id 7816F3F2D6F1;
+ Mon, 14 Dec 2020 12:07:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1607976411; bh=5V1bigVxEuJjLuQkNQxMsgsuiXxEmEsEJ6n2ArsDgqY=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=jk4jsl8V3FqSP0VOUIKVDyaVRQOGUI0OYEbX40mZvsrTl5vmcIpJiYjypfNp2hyFC
- jvioZ/GVrrUY2CwT5QmhBeMKnYqC2b05o08WchRqPn83FOngcedSQoB7Md/dHkKAnY
- iVHWxghoaF+MPRp7y8lTeX8zkA9buHinf+hLciBeVzYJoP4vspRRcfWDe4N+vVbhnE
- xmStgMpIGIa5kBIe6bD1xqTncTRhEeorLI9FzO8jQh6hmYTQG/pBg8ZH+a1WcaYMqE
- aFsVTY4W0cT/Sw0w84N+vxYhcm3fZmIGlw2N/jKmSiGBLRoY/NI+fRjHecGP0IBZmx
- CGM40OtehjQxg==
+ t=1607976437; bh=8haCYnZ52jXxxy78j8fypuNz+2Y8rEl1NEqgcLh4ORM=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=wYIoBcYtjBDc05zvyqpV+F6NqqILFE43y12UsOcSxQAvc/11JoR1nVL+42x9cK8NQ
+ fMk3fw7KqxP3CLZk4gs/okQ0A/M10En2jtVyI8CTnVT3rc02//AzlZSZw+15PbA4G1
+ ZnTKo7rIlRasCy2jUNwjk4cjBvRnKJ5Xq4yKp4CXAhUUzRusw5xiR9WfyD4GaeuEne
+ IDuA94WCVntPKXMVt6wGb1O8alUs6MdTY62k8o5mQhDNDpNCYu4bXu7XkOpEmyff8d
+ WcoFmNqgk5AoZshTHCmyeTUGocrENJ7zJVk8qKJ8W3KoWmGnlCsh1DerWmkRri+N7e
+ iTsqy0+bTvqkw==
 Received: by keithp.com (Postfix, from userid 1000)
- id 67DC315820DB; Mon, 14 Dec 2020 12:06:51 -0800 (PST)
+ id 3015E15820DB; Mon, 14 Dec 2020 12:07:17 -0800 (PST)
 From: Keith Packard <keithp@keithp.com>
-To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Laurent Vivier
- <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
- <peter.maydell@linaro.org>, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-Subject: Re: [PATCH 0/8] Add RISC-V semihosting 0.2. Finish ARM semihosting 2.0
+To: qemu-devel@nongnu.org
+Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org, Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Keith Packard <keithp@keithp.com>
+Subject: [PATCH 0/9] Add RISC-V semihosting 0.2. Finish ARM semihosting 2.0
+Date: Mon, 14 Dec 2020 12:07:04 -0800
+Message-Id: <20201214200713.3886611-1-keithp@keithp.com>
+X-Mailer: git-send-email 2.29.2
 In-Reply-To: <87wnxktost.fsf@linaro.org>
-References: <20201125213617.2496935-1-keithp@keithp.com>
- <873608vde9.fsf@linaro.org> <87wnxktost.fsf@linaro.org>
-Date: Mon, 14 Dec 2020 12:06:50 -0800
-Message-ID: <87sg88kv8l.fsf@keithp.com>
+References: <87wnxktost.fsf@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="=-=-=";
- micalg=pgp-sha256; protocol="application/pgp-signature"
+Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=63.227.221.253; envelope-from=keithp@keithp.com;
  helo=elaine.keithp.com
 X-Spam_score_int: -20
@@ -75,62 +76,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2020 20:07:01 -0000
+X-List-Received-Date: Mon, 14 Dec 2020 20:07:26 -0000
 
---=-=-=
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+This series adds support for RISC-V Semihosting, version 0.2 as
+specified here:
 
-Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
+	https://github.com/riscv/riscv-semihosting-spec/releases/tag/0.2
 
-> Hmm scratch that... it fails in a number of linux-user only builds with:
->
->   /usr/bin/ld: libqemu-aarch64_be-linux-user.fa.p/linux-user_aarch64_cpu_=
-loop.c.o: in function `cpu_loop':
->   /builds/stsquad/qemu/build/../linux-user/aarch64/cpu_loop.c:133: undefi=
-ned reference to `do_common_semihosting'
->   collect2: error: ld returned 1 exit status
->   [651/2871] Compiling C object libqemu-alpha-linux-user.fa.p/target_alph=
-a_translate.c.o
->   ninja: build stopped: subcommand failed.
+This specification references the ARM semihosting release 2.0 as specified here:
 
-I missed changing default-configs/targets/aarch64_be-linux-user.mak.
+	https://static.docs.arm.com/100863/0200/semihosting.pdf
 
->   https://gitlab.com/stsquad/qemu/-/pipelines/229443833/failures
+That specification includes several semihosting calls which were not
+previously implemented. This series includes implementations for the
+remaining calls so that both RISC-V and ARM versions are now complete.
 
-Some of these were caused by a missing explicit cast to Int128, which is
-needed on hosts without compiler support for 128-bit ints. The rest
-app to have been the same problem with aarch64_be-linux-user.
+Tests for release 2.0 can be found in picolibc on the semihost-2.0-all
+branch:
 
-> On the next re-spin could you include Kito Cheng's patch for linux-user
-> support and also drop the version numbering from the commit titles so I
-> don't have to file them off again.
+	https://github.com/picolibc/picolibc/tree/semihost-2.0-all
 
-Yup, all done. Thanks much for the review and for getting these tests
-run. I've rebased on current master and fixed the problems identified
-above.
+These tests uncovered a bug in the SYS_HEAPINFO implementation for
+ARM, which has been fixed in this series as well.
 
-=2D-=20
-=2Dkeith
+The series is structured as follows:
 
---=-=-=
-Content-Type: application/pgp-signature; name="signature.asc"
+ 1. Move shared semihosting files
+ 2. Change public common semihosting APIs
+ 3. Change internal semihosting interfaces
+ 4. Fix SYS_HEAPINFO crash on ARM
+ 5-6. Add RISC-V semihosting implementation
+ 7-9. Add missing semihosting operations from release 2.0
 
------BEGIN PGP SIGNATURE-----
+Signed-off-by: Keith Packard <keithp@keithp.com>
 
-iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAl/XxdsACgkQ2yIaaQAA
-ABGi0xAAoCmjzGuCvpEWqx3i6M0Nsozlz/xkU1y3XzHlRyXa/xwTXGD+yHofWIlb
-wRwkhTTJXymAKhUJJe9NR3uQvdqNMnyIGD7+5+RRA6KyCr3wqRh5opU6IYCSPNa6
-Ndfp16Z0EJLf5DBT+yHywR9HAeTNrwWi0pWx/9obSrbTT4KjDx0B2x2mO7mAGTZ9
-cm8s1Un4X+KsiI2AHRA/AF9irp4oOxGg+QRY7uBeZtY/fZUp4PayN1xzWoh6aNl/
-mDtARbwxiDiRDrUyKg5c4rAfzMrPmN85Ixp5JIsrYuI6c/HyLW6F7U3GrBQrKIXu
-9cX+eVPQ/PtCd9RZszSCUmcz+F7Rf0HyOCTPXlpzIvBctOGoVAOne27/NgmFrIYM
-prbuJVRI97UdAaoZReSRyORaiKQMrm/lLp5qwiwz2y9nVMwSMECH8yvJO+ZncjrU
-4taIhXUsvwEjaY/zlFAKol9q+yeHfRIC3BFUB23+7jpwDvuYmRyIdCXEWSObklDa
-FD8mIe2dg9qlRYh2oY5wbsE+MJmW+UuojUqDcVfAhb3SXUbJUdrXIzRwCHIrLo+B
-HRT/9bhN3JmOEmVq7U07Ib0vgc7Ka9h6r3b9hasrM6iLdp05Mhe532VVSHp7r5Le
-becy3SLndwQ8V+ojUzS8nOzmnbOuh076n3X1ZO8KPf8SOlyJhHQ=
-=9MMN
------END PGP SIGNATURE-----
---=-=-=--
+
 
