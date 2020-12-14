@@ -1,76 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1koly1-00023v-UK
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 06:24:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56184)
+	id 1kom59-0004Q8-B4
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 06:31:59 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57964)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1koly0-000235-RQ
- for qemu-riscv@nongnu.org; Mon, 14 Dec 2020 06:24:36 -0500
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343]:54274)
+ id 1kom57-0004Nx-EZ
+ for qemu-riscv@nongnu.org; Mon, 14 Dec 2020 06:31:57 -0500
+Received: from mail-wr1-x443.google.com ([2a00:1450:4864:20::443]:40096)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1kolxx-0000gS-UA
- for qemu-riscv@nongnu.org; Mon, 14 Dec 2020 06:24:36 -0500
-Received: by mail-wm1-x343.google.com with SMTP id c133so1366354wme.4
- for <qemu-riscv@nongnu.org>; Mon, 14 Dec 2020 03:24:33 -0800 (PST)
+ id 1kom55-0001yu-LY
+ for qemu-riscv@nongnu.org; Mon, 14 Dec 2020 06:31:57 -0500
+Received: by mail-wr1-x443.google.com with SMTP id 91so16106586wrj.7
+ for <qemu-riscv@nongnu.org>; Mon, 14 Dec 2020 03:31:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=references:user-agent:from:to:cc:subject:date:in-reply-to
  :message-id:mime-version:content-transfer-encoding;
- bh=/NSCbVd6e+qy7O5FsCXeMvWhTocDoPTA0meXlZiMzKs=;
- b=aRrUqYobwatuHi3+9cDc9iVJGCqBEx/OELizaPOvMviYNarPJOlHlFuHM2j8IgbkLN
- Bm/EiTvD0znwCxZ5nV+BaAZIEi2EoC1pVDMi7eW73OKYuLlGCziQC2qoXPCZTLFcMRxP
- YI5sru7kH+Ct7XLEIQ4pngv3ZstC1RRDFAn6lXUyWbkTveKUiW0lZwwj33LXHfqIGr+R
- KA98c4h/iHzVDtqqxuz3hkMwNEb9OlMTXWZLZoZHuqMvu1oq/j1rqjQmvWIvqyb3YzFc
- KW3bKk1NmcvqX6Mc1XPErkFEPlp3Y1rZ+N4Zab+J4+sRwamZ3TnGix6sfhYFD0Pyoy4H
- w3aA==
+ bh=55uNDgTmjQTqFAUux/gfXayylv0Wg8SpovOrEt4m9jQ=;
+ b=FLBK9z9bSNvR+14zjeXzvQZyPiMvIIIOdK3g2Nm8JyQojHf2yZZ8+gfmBkQLYHy5Zb
+ IthDehjrNqRGuP0/wQCWKiQmxu/02LZGbpF4zykwiajhAyGDyL9b5ghWpR2gBx6KYUWb
+ kEmiwoH7JhLT0WnyGkc8F8KUV7yatBPicUiAkwYv/czRLrm7hRLC4AeMYws7kET/AHMJ
+ i3owe2dUw2zYrnUhQD2T61N9iwRR10292GfN1TO61xAc2jAR26WlvCCZcasBT69kAoB8
+ v+3Z7KbWZ4fDCrmcIodrNYM63dWsVAJj/L9CTbtBDUJ5Pdl9qSU8MwR1zWtUw1sT1Nz2
+ mViQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
  :in-reply-to:message-id:mime-version:content-transfer-encoding;
- bh=/NSCbVd6e+qy7O5FsCXeMvWhTocDoPTA0meXlZiMzKs=;
- b=bgnOcL1kHv99MSSz8wCglxUWiZVqHLHgW/nZJhUGau8M1naQWFfQos3zwY9y/dqFEt
- ddrEw9+MWF87XgOMqsPj/1+sNyF+6HjMdTZ3xXp+1xt5VmXhuARUPBZHIh1Lds8qVU6N
- knXJR9VrDWM/XLiIAg/z6kZ7DS5ZrSZ7vjnYPwnUCGQ7ZtOuMjfIE30afH9IhTw8QY7o
- 1pGN5MIRa6JEQJgm99qLhACqAhVfYr5IaMgwDmsiIeXMNqobBjj/8U9B/JqgAD97YDea
- 1NqWkkYDp9WAVl3x6RmfSIpnxgF7WJs/MAsaNaBMtBpW1o2QAx8qRNEq8ON940WUqlkl
- /bjw==
-X-Gm-Message-State: AOAM531LBnHg3x5lCskM7usT8Ug4cJQdeTuWpiVya0prZb6Lcu7sAs+m
- TsurgrSFJy5d0fOb4XKALFN+pA==
-X-Google-Smtp-Source: ABdhPJxDXaswVqVsM0ax+x3tQzf8x3zaSBsmlR+J2v6KKfevaSAm5B/vu+/MlzTVUWcXfly3BLeQaA==
-X-Received: by 2002:a7b:c925:: with SMTP id h5mr26756072wml.43.1607945072176; 
- Mon, 14 Dec 2020 03:24:32 -0800 (PST)
+ bh=55uNDgTmjQTqFAUux/gfXayylv0Wg8SpovOrEt4m9jQ=;
+ b=jQ6JcA7rwCrtr5293O7KvTmUqH1ujYnkSqUo9jz281wpI36OBgBBG6HHwZyV0bYhkV
+ N9P479dWILbUKlZM1tAxaKaDWHroCrJy2SsSh9VuYH6MPQ2ePU13Y5pvcIBFAG/auq2/
+ 7J9uVKLXzxMsBvSAyZMCbU3x4wSvHbwqhJ42umEycopOY0A3G+o6Vy6c+zqydTarjh1S
+ qpy6frFdec+B5Q0bbhQzrgJzxaL4mWF1Rq27oEdbEwAuQqTRnEmi3EE1TbCtXVgaQwV0
+ 7DX4zk7yEmMxki8YNjq8dgb97SbsA5P7aJaTI+p5KZWzFfOPRDcL0E06Fr9j51+tpPcP
+ 5arg==
+X-Gm-Message-State: AOAM532dvO+lGeeeLIdcxcyCxlF//beljcwRisEf6sp+u2LknMxofTIN
+ /+YldULaPW3RvKc7H1fQZtKWIg==
+X-Google-Smtp-Source: ABdhPJxCDJbf4G6bmPAaE5OwWN6TT2lWdNZ00T3FdqqWX+y7KknqRgMS3tTku9bmHXDzCd1fpQkhrg==
+X-Received: by 2002:a5d:4587:: with SMTP id p7mr22263050wrq.178.1607945513810; 
+ Mon, 14 Dec 2020 03:31:53 -0800 (PST)
 Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id u10sm28839144wmd.43.2020.12.14.03.24.30
+ by smtp.gmail.com with ESMTPSA id 125sm31425025wmc.27.2020.12.14.03.31.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Dec 2020 03:24:30 -0800 (PST)
+ Mon, 14 Dec 2020 03:31:52 -0800 (PST)
 Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 285731FF7E;
- Mon, 14 Dec 2020 11:24:30 +0000 (GMT)
+ by zen.linaroharston (Postfix) with ESMTP id B78771FF7E;
+ Mon, 14 Dec 2020 11:31:51 +0000 (GMT)
 References: <20201125213617.2496935-1-keithp@keithp.com>
+ <20201125213617.2496935-6-keithp@keithp.com>
+ <CA+yXCZC038LfuswrAo6W3gHXfGkwPscMEKDQJvutV7xcoC+wPw@mail.gmail.com>
+ <87r1nz6iz4.fsf@keithp.com>
+ <CA+yXCZA7XhLXDN7ZDk8D90eyXOLCzsrzwUyego1Sn=D9x3BGMQ@mail.gmail.com>
 User-agent: mu4e 1.5.7; emacs 28.0.50
 From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Keith Packard <keithp@keithp.com>
-Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Laurent Vivier
- <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
+To: Kito Cheng <kito.cheng@gmail.com>
+Cc: Keith Packard <keithp@keithp.com>, qemu-devel@nongnu.org, Alistair
+ Francis <Alistair.Francis@wdc.com>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, Laurent Vivier <laurent@vivier.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
  <peter.maydell@linaro.org>, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Sagar Karandikar <sagark@eecs.berkeley.edu>
-Subject: Re: [PATCH 0/8] Add RISC-V semihosting 0.2. Finish ARM semihosting 2.0
-Date: Mon, 14 Dec 2020 11:24:23 +0000
-In-reply-to: <20201125213617.2496935-1-keithp@keithp.com>
-Message-ID: <873608vde9.fsf@linaro.org>
+Subject: Re: [PATCH 5/8] riscv: Add semihosting support [v13]
+Date: Mon, 14 Dec 2020 11:29:35 +0000
+In-reply-to: <CA+yXCZA7XhLXDN7ZDk8D90eyXOLCzsrzwUyego1Sn=D9x3BGMQ@mail.gmail.com>
+Message-ID: <87zh2gtyhk.fsf@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::343;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x343.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::443;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x443.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -83,45 +88,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2020 11:24:37 -0000
+X-List-Received-Date: Mon, 14 Dec 2020 11:31:57 -0000
 
 
-Keith Packard <keithp@keithp.com> writes:
+Kito Cheng <kito.cheng@gmail.com> writes:
 
-> This series adds support for RISC-V Semihosting, version 0.2 as
-> specified here:
+> Hi Keith:
 >
-> 	https://github.com/riscv/riscv-semihosting-spec/releases/tag/0.2
+> Thanks for your reply, but it seems like we need some more modification in
+>  linux-user/riscv/cpu_loop.c to enable that, I guess I should post that i=
+n mail
+> rather than attachment :)
 >
-> This specification references the ARM semihosting release 2.0 as specifie=
-d here:
+> Patch here:
 >
-> 	https://static.docs.arm.com/100863/0200/semihosting.pdf
+> From 2f1eb5825a6dda177d3289106970eab05cb08445 Mon Sep 17 00:00:00 2001
+> From: Kito Cheng <kito.cheng@sifive.com>
+> Date: Wed, 9 Dec 2020 14:24:51 +0800
+> Subject: [PATCH] riscv: Add semihosting support for user mode
 >
-> That specification includes several semihosting calls which were not
-> previously implemented. This series includes implementations for the
-> remaining calls so that both RISC-V and ARM versions are now complete.
+> This could make testing easier and ARM/AArch64 has support on
+> their linux user mode too, so I think it should be reasonable.
 >
-> Tests for release 2.0 can be found in picolibc on the semihost-2.0-all
-> branch:
+> Verified GCC testsuite with newlib/semihosting.
 >
-> 	https://github.com/picolibc/picolibc/tree/semihost-2.0-all
->
-> These tests uncovered a bug in the SYS_HEAPINFO implementation for
-> ARM, which has been fixed in this series as well.
->
-> The series is structured as follows:
->
->  1. Move shared semihosting files
->  2. Change public common semihosting APIs
->  3. Change internal semihosting interfaces
->  4. Fix SYS_HEAPINFO crash on ARM
->  5. Add RISC-V semihosting implementation
->  6-8. Add missing semihosting operations from release 2.0
->
-> Signed-off-by: Keith Packard <keithp@keithp.com>
+> Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
 
-Queued to semihosting/next, thanks.
+If the riscv linux-user maintainer is happy with it I'll take it through
+semihosting/next. It certainly has a use case in the ARM case.
+
+> ---
+>  linux-user/riscv/cpu_loop.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+> index aa9e437875..9665dabb09 100644
+> --- a/linux-user/riscv/cpu_loop.c
+> +++ b/linux-user/riscv/cpu_loop.c
+> @@ -23,6 +23,7 @@
+>  #include "qemu.h"
+>  #include "cpu_loop-common.h"
+>  #include "elf.h"
+> +#include "hw/semihosting/common-semi.h"
+>
+>  void cpu_loop(CPURISCVState *env)
+>  {
+> @@ -91,6 +92,10 @@ void cpu_loop(CPURISCVState *env)
+>              sigcode =3D TARGET_SEGV_MAPERR;
+>              sigaddr =3D env->badaddr;
+>              break;
+> +        case RISCV_EXCP_SEMIHOST:
+> +            env->gpr[xA0] =3D do_common_semihosting(cs);
+> +            env->pc +=3D 4;
+> +            break;
+>          case EXCP_DEBUG:
+>          gdbstep:
+>              signum =3D TARGET_SIGTRAP;
+
 
 --=20
 Alex Benn=C3=A9e
