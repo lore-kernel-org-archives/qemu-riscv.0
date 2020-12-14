@@ -1,77 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kopLj-0006cd-6J
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 10:01:19 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49278)
+	id 1kou7a-0000mh-D1
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 15:07:02 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40388)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1kopLg-0006Vu-MV
- for qemu-riscv@nongnu.org; Mon, 14 Dec 2020 10:01:16 -0500
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441]:39969)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1kopLb-0002Oz-4j
- for qemu-riscv@nongnu.org; Mon, 14 Dec 2020 10:01:16 -0500
-Received: by mail-wr1-x441.google.com with SMTP id 91so16724484wrj.7
- for <qemu-riscv@nongnu.org>; Mon, 14 Dec 2020 07:01:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=references:user-agent:from:to:cc:subject:date:in-reply-to
- :message-id:mime-version:content-transfer-encoding;
- bh=LJIJ4+pRMUODPJruA4OpUhe/H02AhG/uC1x2CC83eLQ=;
- b=wdhkvJMPOWfqkRSmi2M4CURsU3kj0vvo9CoIgAZRhRHpop3zIURs+qcNs/uxTMxLNp
- jlgP8+1pqdXZ/ksCgWK6Hvc1lxxH41JOwrspmYZZC7+qXXWtDC7IupuPqfL87Q0BlROQ
- CbvhNI58o4C2pkVWVe0hxmnimflWcQOpAw/9KIXKizOwg6yVp+167EvdKrhFkB/Ke2ag
- 2boaImlYTdplutZKICr774K5wTVsX0QM5lX3Zl73EUe/U53uxXHlV6ciaJRqXI486/f3
- 7Vp2aVvfUkgdop2jivKiMGm+N59WTqrDaaLI3cMsStCDzfZcnS5BYQ0fLKGI9InBqpnT
- eOBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
- :in-reply-to:message-id:mime-version:content-transfer-encoding;
- bh=LJIJ4+pRMUODPJruA4OpUhe/H02AhG/uC1x2CC83eLQ=;
- b=mdJMHNq9SEDaPvKa0iRGovOPmb0AxlWUmb4DojELvIoOpvH7qML3qbXH52QYLUw6U/
- U602voDWG6GpXRp1y+LGkUgP9UMoHLQJMWotwRGpjr/UDf/UmgfjSjxHLOeFxQqYYcY/
- b129g7LOZxmS1pH87fEZYnpYA2ubS2mG1BcHtOJ/6P2F9trNfPQiccNAzv5WaxVO62bt
- PcxBuVX8DWfRQ89rWEepCXfPv6ciAaz9GG/TzJTDCVWEr20StBkZbmfeVOn8l6vLYqEe
- aV+SYVDXvMPqLN4UX6feNy5R7PvqdmCjwPlRo/Ldgl1U9wHj5VmELq8UF2M0NSaHCHnR
- MwwQ==
-X-Gm-Message-State: AOAM533WdcnpBeeJgIJ+Seejc0CNMovk05tGNmsPMwJXg3ncvMVJ1ngc
- 4hmaxiIpMj8x3/N+PvswlyvfZQ==
-X-Google-Smtp-Source: ABdhPJxA4grzuDavuzGNoGOJkjj6/qFDQoh5Y9E5Tw0luS64wz69o1Di+Iihth2UG7yIKG6raMSxhg==
-X-Received: by 2002:adf:f891:: with SMTP id u17mr7660654wrp.253.1607958069224; 
- Mon, 14 Dec 2020 07:01:09 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id i7sm19387803wrv.12.2020.12.14.07.01.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Dec 2020 07:01:07 -0800 (PST)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id E6DCE1FF7E;
- Mon, 14 Dec 2020 15:01:06 +0000 (GMT)
-References: <20201125213617.2496935-1-keithp@keithp.com>
- <873608vde9.fsf@linaro.org>
-User-agent: mu4e 1.5.7; emacs 28.0.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Keith Packard <keithp@keithp.com>
+ (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
+ id 1kou7Y-0000mE-I3; Mon, 14 Dec 2020 15:07:00 -0500
+Received: from home.keithp.com ([63.227.221.253]:51690 helo=elaine.keithp.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
+ id 1kou7V-0004CX-Si; Mon, 14 Dec 2020 15:07:00 -0500
+Received: from localhost (localhost [127.0.0.1])
+ by elaine.keithp.com (Postfix) with ESMTP id E8C733F2D6F1;
+ Mon, 14 Dec 2020 12:06:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
+ t=1607976411; bh=5V1bigVxEuJjLuQkNQxMsgsuiXxEmEsEJ6n2ArsDgqY=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=jk4jsl8V3FqSP0VOUIKVDyaVRQOGUI0OYEbX40mZvsrTl5vmcIpJiYjypfNp2hyFC
+ jvioZ/GVrrUY2CwT5QmhBeMKnYqC2b05o08WchRqPn83FOngcedSQoB7Md/dHkKAnY
+ iVHWxghoaF+MPRp7y8lTeX8zkA9buHinf+hLciBeVzYJoP4vspRRcfWDe4N+vVbhnE
+ xmStgMpIGIa5kBIe6bD1xqTncTRhEeorLI9FzO8jQh6hmYTQG/pBg8ZH+a1WcaYMqE
+ aFsVTY4W0cT/Sw0w84N+vxYhcm3fZmIGlw2N/jKmSiGBLRoY/NI+fRjHecGP0IBZmx
+ CGM40OtehjQxg==
+X-Virus-Scanned: Debian amavisd-new at keithp.com
+Received: from elaine.keithp.com ([127.0.0.1])
+ by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
+ with LMTP id Z0Yuyjx_olgg; Mon, 14 Dec 2020 12:06:51 -0800 (PST)
+Received: from keithp.com (koto.keithp.com [10.0.0.2])
+ by elaine.keithp.com (Postfix) with ESMTPSA id 874F53F2D6D3;
+ Mon, 14 Dec 2020 12:06:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
+ t=1607976411; bh=5V1bigVxEuJjLuQkNQxMsgsuiXxEmEsEJ6n2ArsDgqY=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=jk4jsl8V3FqSP0VOUIKVDyaVRQOGUI0OYEbX40mZvsrTl5vmcIpJiYjypfNp2hyFC
+ jvioZ/GVrrUY2CwT5QmhBeMKnYqC2b05o08WchRqPn83FOngcedSQoB7Md/dHkKAnY
+ iVHWxghoaF+MPRp7y8lTeX8zkA9buHinf+hLciBeVzYJoP4vspRRcfWDe4N+vVbhnE
+ xmStgMpIGIa5kBIe6bD1xqTncTRhEeorLI9FzO8jQh6hmYTQG/pBg8ZH+a1WcaYMqE
+ aFsVTY4W0cT/Sw0w84N+vxYhcm3fZmIGlw2N/jKmSiGBLRoY/NI+fRjHecGP0IBZmx
+ CGM40OtehjQxg==
+Received: by keithp.com (Postfix, from userid 1000)
+ id 67DC315820DB; Mon, 14 Dec 2020 12:06:51 -0800 (PST)
+From: Keith Packard <keithp@keithp.com>
+To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
 Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Laurent Vivier
  <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
  <peter.maydell@linaro.org>, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Sagar Karandikar <sagark@eecs.berkeley.edu>
 Subject: Re: [PATCH 0/8] Add RISC-V semihosting 0.2. Finish ARM semihosting 2.0
-Date: Mon, 14 Dec 2020 14:58:12 +0000
-In-reply-to: <873608vde9.fsf@linaro.org>
-Message-ID: <87wnxktost.fsf@linaro.org>
+In-Reply-To: <87wnxktost.fsf@linaro.org>
+References: <20201125213617.2496935-1-keithp@keithp.com>
+ <873608vde9.fsf@linaro.org> <87wnxktost.fsf@linaro.org>
+Date: Mon, 14 Dec 2020 12:06:50 -0800
+Message-ID: <87sg88kv8l.fsf@keithp.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::441;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x441.google.com
+Content-Type: multipart/signed; boundary="=-=-=";
+ micalg=pgp-sha256; protocol="application/pgp-signature"
+Received-SPF: pass client-ip=63.227.221.253; envelope-from=keithp@keithp.com;
+ helo=elaine.keithp.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,69 +75,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2020 15:01:17 -0000
+X-List-Received-Date: Mon, 14 Dec 2020 20:07:01 -0000
 
+--=-=-=
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
 Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
 
-> Keith Packard <keithp@keithp.com> writes:
+> Hmm scratch that... it fails in a number of linux-user only builds with:
 >
->> This series adds support for RISC-V Semihosting, version 0.2 as
->> specified here:
->>
->> 	https://github.com/riscv/riscv-semihosting-spec/releases/tag/0.2
->>
->> This specification references the ARM semihosting release 2.0 as specifi=
-ed here:
->>
->> 	https://static.docs.arm.com/100863/0200/semihosting.pdf
->>
->> That specification includes several semihosting calls which were not
->> previously implemented. This series includes implementations for the
->> remaining calls so that both RISC-V and ARM versions are now complete.
->>
->> Tests for release 2.0 can be found in picolibc on the semihost-2.0-all
->> branch:
->>
->> 	https://github.com/picolibc/picolibc/tree/semihost-2.0-all
->>
->> These tests uncovered a bug in the SYS_HEAPINFO implementation for
->> ARM, which has been fixed in this series as well.
->>
->> The series is structured as follows:
->>
->>  1. Move shared semihosting files
->>  2. Change public common semihosting APIs
->>  3. Change internal semihosting interfaces
->>  4. Fix SYS_HEAPINFO crash on ARM
->>  5. Add RISC-V semihosting implementation
->>  6-8. Add missing semihosting operations from release 2.0
->>
->> Signed-off-by: Keith Packard <keithp@keithp.com>
->
-> Queued to semihosting/next, thanks.
+>   /usr/bin/ld: libqemu-aarch64_be-linux-user.fa.p/linux-user_aarch64_cpu_=
+loop.c.o: in function `cpu_loop':
+>   /builds/stsquad/qemu/build/../linux-user/aarch64/cpu_loop.c:133: undefi=
+ned reference to `do_common_semihosting'
+>   collect2: error: ld returned 1 exit status
+>   [651/2871] Compiling C object libqemu-alpha-linux-user.fa.p/target_alph=
+a_translate.c.o
+>   ninja: build stopped: subcommand failed.
 
-Hmm scratch that... it fails in a number of linux-user only builds with:
+I missed changing default-configs/targets/aarch64_be-linux-user.mak.
 
-  /usr/bin/ld: libqemu-aarch64_be-linux-user.fa.p/linux-user_aarch64_cpu_lo=
-op.c.o: in function `cpu_loop':
-  /builds/stsquad/qemu/build/../linux-user/aarch64/cpu_loop.c:133: undefine=
-d reference to `do_common_semihosting'
-  collect2: error: ld returned 1 exit status
-  [651/2871] Compiling C object libqemu-alpha-linux-user.fa.p/target_alpha_=
-translate.c.o
-  ninja: build stopped: subcommand failed.
+>   https://gitlab.com/stsquad/qemu/-/pipelines/229443833/failures
 
-As well as a chunk of the various cross builds, see:
+Some of these were caused by a missing explicit cast to Int128, which is
+needed on hosts without compiler support for 128-bit ints. The rest
+app to have been the same problem with aarch64_be-linux-user.
 
-  https://gitlab.com/stsquad/qemu/-/pipelines/229443833/failures
+> On the next re-spin could you include Kito Cheng's patch for linux-user
+> support and also drop the version numbering from the commit titles so I
+> don't have to file them off again.
 
-On the next re-spin could you include Kito Cheng's patch for linux-user
-support and also drop the version numbering from the commit titles so I
-don't have to file them off again.
+Yup, all done. Thanks much for the review and for getting these tests
+run. I've rebased on current master and fixed the problems identified
+above.
 
-Thanks,
+=2D-=20
+=2Dkeith
 
---=20
-Alex Benn=C3=A9e
+--=-=-=
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAl/XxdsACgkQ2yIaaQAA
+ABGi0xAAoCmjzGuCvpEWqx3i6M0Nsozlz/xkU1y3XzHlRyXa/xwTXGD+yHofWIlb
+wRwkhTTJXymAKhUJJe9NR3uQvdqNMnyIGD7+5+RRA6KyCr3wqRh5opU6IYCSPNa6
+Ndfp16Z0EJLf5DBT+yHywR9HAeTNrwWi0pWx/9obSrbTT4KjDx0B2x2mO7mAGTZ9
+cm8s1Un4X+KsiI2AHRA/AF9irp4oOxGg+QRY7uBeZtY/fZUp4PayN1xzWoh6aNl/
+mDtARbwxiDiRDrUyKg5c4rAfzMrPmN85Ixp5JIsrYuI6c/HyLW6F7U3GrBQrKIXu
+9cX+eVPQ/PtCd9RZszSCUmcz+F7Rf0HyOCTPXlpzIvBctOGoVAOne27/NgmFrIYM
+prbuJVRI97UdAaoZReSRyORaiKQMrm/lLp5qwiwz2y9nVMwSMECH8yvJO+ZncjrU
+4taIhXUsvwEjaY/zlFAKol9q+yeHfRIC3BFUB23+7jpwDvuYmRyIdCXEWSObklDa
+FD8mIe2dg9qlRYh2oY5wbsE+MJmW+UuojUqDcVfAhb3SXUbJUdrXIzRwCHIrLo+B
+HRT/9bhN3JmOEmVq7U07Ib0vgc7Ka9h6r3b9hasrM6iLdp05Mhe532VVSHp7r5Le
+becy3SLndwQ8V+ojUzS8nOzmnbOuh076n3X1ZO8KPf8SOlyJhHQ=
+=9MMN
+-----END PGP SIGNATURE-----
+--=-=-=--
 
