@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kouY4-0001MZ-PQ
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 15:34:24 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46808)
+	id 1kouY8-0001Vu-6i
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 15:34:28 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46868)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=61015ee87=alistair.francis@wdc.com>)
- id 1kouY2-0001HF-Ou; Mon, 14 Dec 2020 15:34:22 -0500
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:60603)
+ id 1kouY5-0001Pu-W9; Mon, 14 Dec 2020 15:34:26 -0500
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:60606)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=61015ee87=alistair.francis@wdc.com>)
- id 1kouY0-0007uP-Tw; Mon, 14 Dec 2020 15:34:22 -0500
+ id 1kouY3-0007ui-01; Mon, 14 Dec 2020 15:34:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1607978060; x=1639514060;
+ t=1607978062; x=1639514062;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=BD2w1JzPAhFnuG/0+v+zaFrsidkLC94J1KLJCbCeLEM=;
- b=dSua5GwOrl+2/8lLdVO+VKGzWOt5LMj+pPhp2kEFs68Nizbxw/evmh1t
- BM+nAx9jnqbqeP/CDHCY1Yd2iV28kIsOqZqeQxY5iep6o1WP5cKaamCE8
- 6EqAoJE4Hi/RSVZHwFnNKFa1gNzO2d9aUwY+74daD3Cx725mUZsx3WiDP
- WXMQtYEYC5kHb7A2lWF5Lh7ASfb2eMBuAqksSydWvUDneQX7lYzBDvt/K
- WdLkQ3v5mDvJj60XY/81OUB0JpekGSfr0wdk7MnzK+/BseDNTECUlxvxt
- UeP9YCfVaCQEMSeXWcrAmDn8W+0Tok1WDHNVtIdy9oZr7Wjb0/l5ipVz/ w==;
-IronPort-SDR: FDslF37ku3pdxsbF5xaqwtrQ+ayV9K6HSZBTZFvDnOAw6rfK3DmXHTxaQbkXkBismzNpllk3mF
- Fuv/yOjqTpp2COWtgiAp8oKgLhPmViEhKVRgyKbqWrf5o6pllArJzqB7Q4Gg5ApBkcBlGwdbzv
- Ot/1merCi0yWlZNZCLhJ/o7qmCVUNHN3/aRhVS8F615PISNbAFCNKDy5oTzX9/lTr3luaHJ2B2
- XydxziqEaqs5NTS+0U2iyO3BzOxmiPVTQJ2QMBV5nPaDob7VqR/rjSLQP3jH5UY2YTqs/yrM4b
- v2U=
-X-IronPort-AV: E=Sophos;i="5.78,420,1599494400"; d="scan'208";a="159585997"
+ bh=MHa1GnDebIQgBXx8Add4PvqiAFA7dwxIKpm/+VpY/2Q=;
+ b=ZSv70RzQBMBx0Gk5/bTTPVP44NxlWFA5LrTd8PxbElcAAJF9gtsHdFiz
+ zNC5GDwmp0x53tV7O2bqhrbyJsZgQZEGyhC85vg0RS3fu4yg0xzReIcAJ
+ mBgl7WVUWSUxbm5lYSj8BDO6LHNGkOBlsKu15+PKm6fRJud/ViRE7qZs1
+ oiVaSMvzJo4PUUfRu58wHnq1AncbgNYhzu1Sfg5lip2vwzrdNbL9Ry04Z
+ mE4s/b04Bi2aTsjYboD4zr35TG5SgzDCKasJq2tONG/PaAP5AMRiWZvEn
+ RIlx067Ulul2CXjYHY4E1A8qMmYpNlnxKZ1BuFlhDQU41YD5ALl/c0nha g==;
+IronPort-SDR: IKzdtg3qjYDTbUGeFK2OFcWbl1UUrO5Df1XupgAVaZZq2SU7o6B6L0CMlcYbC9TvCLOW9pEFXt
+ d6F7t0L5ZmmnRKgBlEodtz/XqxO38VugJx2b5n+fWIJT0b4Yoer1TTHnw7krChjDz28gS1dHMe
+ O1YmexFEBDEBBi5FPl8UBpGmm0jzHaPWjf6IjCo+qT3WiO9VQ3LO5CChPgi/PC90UfbXmXcEx7
+ ThnWRrGfOzjCtBdWyXOmQxDs8gLi36JwRKVFhZS46QWQVeEQLN8PPvI7mg/55E51OQshmmClJT
+ WhE=
+X-IronPort-AV: E=Sophos;i="5.78,420,1599494400"; d="scan'208";a="159586000"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 15 Dec 2020 04:34:18 +0800
-IronPort-SDR: Dt5vcyZhhlArEnADSqfWpmd4hCy3VSM9AnH2CqbZeTPW59bUosvUcRGHpP0eM/DFGgeSJTohuN
- 51a+EwpFlUa6nd6cQz6Ftv8qbURqFwBALvTTD7ATqvzk4VUEN8exoERM0QV6nmYnTcZV6SLjoe
- g7Bm9JVhGCXu0oveKWhqRJia/eGkfIc43D3rXQ0i4MifvwR9w10KkIN2BpC2rWAs3tBY+48UOL
- FA1TvAoVCft+dNm8XbFqZdBMaqJ1yvZCXvdDCB4Tzkhnu3OJ0e7S8vbI7cwmUtmTlR506UsEme
- sEge7BoSvIGkB4CFrZIlNflX
+ by ob1.hgst.iphmx.com with ESMTP; 15 Dec 2020 04:34:21 +0800
+IronPort-SDR: b5DFg4K7ZAild6MVn8Ud66Yg6aSRpHAinHp3b1WQTEGbH9zca1OKanSmy1wTSRkcvLks2SkfPE
+ xkIGPiJlhqPT49ORL6j7+VXW4dsaivdRtgUskIQPWUGhGBLejzukqpl1G03HS9Dl2ktUYnR9an
+ ZXwuXVT4NTKdutsg2qz5mtQdRZZmoApdkzABC8qyIT/I7tl2mN+f3taF/E950mPoo7kolYQR2d
+ mZMeuNYrIVODzkpakdxvmKJa/SBvI0An/xyWEVs6J5zD43uRAsV7/l3Y118cyHPQ4RU3CxNqVB
+ 8fnbC48UJ+UhevpsNWwa+/hU
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Dec 2020 12:18:02 -0800
-IronPort-SDR: kcuEgAA9d9aWLij9a/yYj7gSAER69UhvvNbXdq9xsd+okITssNv7QdT8T4Mo9g3EtUx52LlwSh
- jJCMYnowrW/tHECBCQHKZ5RzobrfWkHivlf543iV7zYhG6/i3abXTkImnWY9PcuB41LCLn3C7j
- eXsMYSpjjEpeOS+U3g+Wb1lHPqZvu/dfRAQkXe2GiyBEj6JTqBCA3ym6pFr7SaOGCMaTuZfvcz
- 2ra2IDrS7+EcM4bUriElzmMUNIwa3CtJMM+StnYu3xg7qsF8aK3WUkzeZ3Jbm0FmzYstQgrROP
- sU8=
+ 14 Dec 2020 12:18:05 -0800
+IronPort-SDR: GybwWlQROHU/OeIpKpIQojx9wrvN7Qk88RdUFM6UmVUV4g22Ht2Dmd5sIJwiBS7pSeb3wk80Hh
+ IMUHQAmPSpzifEVZwXIzSubKppYosI2P2Ge0EODAmPY40md1XQqNpEEzmLvkivZsQoPXZY92QA
+ +u3BCavD8SeWpRn37K9ZH5cnynnYpifBM9ktkXJZL0zQ/SsTzRKNvlKRXJ4fWIzXpNk1Tj20Af
+ qOZg/Uyx50iXCtlAfafjFKCNN6s7GsFOT7I83j5JUF/Thx7J1vZ1EOX6fc5Ql7b76CgunPLUn5
+ gGQ=
 WDCIronportException: Internal
 Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.62.52])
- by uls-op-cesaip02.wdc.com with ESMTP; 14 Dec 2020 12:34:18 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 14 Dec 2020 12:34:21 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v3 08/15] hw/riscv: sifive_u: Remove compile time XLEN checks
-Date: Mon, 14 Dec 2020 12:34:18 -0800
-Message-Id: <b86408181948129347f6bef37b734add89a2f480.1607967113.git.alistair.francis@wdc.com>
+Subject: [PATCH v3 09/15] target/riscv: fpu_helper: Match function defs in
+ HELPER macros
+Date: Mon, 14 Dec 2020 12:34:20 -0800
+Message-Id: <2cffe9cb8055c9451872b3a08192e19fec12fb1a.1607967113.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <cover.1607967113.git.alistair.francis@wdc.com>
 References: <cover.1607967113.git.alistair.francis@wdc.com>
@@ -84,128 +85,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2020 20:34:23 -0000
+X-List-Received-Date: Mon, 14 Dec 2020 20:34:26 -0000
+
+The helper functions defined in helper.h specify that the argument is of
+type target_long. Let's change the implementation to match the header
+definition.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/sifive_u.c | 55 ++++++++++++++++++++++++---------------------
- 1 file changed, 30 insertions(+), 25 deletions(-)
+ target/riscv/fpu_helper.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index d550befadb..7216329237 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -60,12 +60,6 @@
+diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+index bb346a8249..507d7fe7fa 100644
+--- a/target/riscv/fpu_helper.c
++++ b/target/riscv/fpu_helper.c
+@@ -224,13 +224,13 @@ target_ulong helper_fcvt_wu_s(CPURISCVState *env, uint64_t rs1)
+ }
  
- #include <libfdt.h>
- 
--#if defined(TARGET_RISCV32)
--# define BIOS_FILENAME "opensbi-riscv32-generic-fw_dynamic.bin"
--#else
--# define BIOS_FILENAME "opensbi-riscv64-generic-fw_dynamic.bin"
--#endif
--
- static const struct MemmapEntry {
-     hwaddr base;
-     hwaddr size;
-@@ -93,7 +87,7 @@ static const struct MemmapEntry {
- #define GEM_REVISION        0x10070109
- 
- static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
--    uint64_t mem_size, const char *cmdline)
-+                       uint64_t mem_size, const char *cmdline, bool is_32_bit)
+ #if defined(TARGET_RISCV64)
+-uint64_t helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
++target_ulong helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
  {
-     MachineState *ms = MACHINE(qdev_get_machine());
-     void *fdt;
-@@ -178,11 +172,11 @@ static void create_fdt(SiFiveUState *s, const struct MemmapEntry *memmap,
-         qemu_fdt_add_subnode(fdt, nodename);
-         /* cpu 0 is the management hart that does not have mmu */
-         if (cpu != 0) {
--#if defined(TARGET_RISCV32)
--            qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
--#else
--            qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
--#endif
-+            if (is_32_bit) {
-+                qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv32");
-+            } else {
-+                qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
-+            }
-             isa = riscv_isa_string(&s->soc.u_cpus.harts[cpu - 1]);
-         } else {
-             isa = riscv_isa_string(&s->soc.e_cpus.harts[0]);
-@@ -458,7 +452,8 @@ static void sifive_u_machine_init(MachineState *machine)
-                           qemu_allocate_irq(sifive_u_machine_reset, NULL, 0));
+     float32 frs1 = check_nanbox_s(rs1);
+     return float32_to_int64(frs1, &env->fp_status);
+ }
  
-     /* create device tree */
--    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline);
-+    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-+               riscv_is_32_bit(machine));
+-uint64_t helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
++target_ulong helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
+ {
+     float32 frs1 = check_nanbox_s(rs1);
+     return float32_to_uint64(frs1, &env->fp_status);
+@@ -248,12 +248,12 @@ uint64_t helper_fcvt_s_wu(CPURISCVState *env, target_ulong rs1)
+ }
  
-     if (s->start_in_flash) {
-         /*
-@@ -487,8 +482,15 @@ static void sifive_u_machine_init(MachineState *machine)
-         break;
-     }
+ #if defined(TARGET_RISCV64)
+-uint64_t helper_fcvt_s_l(CPURISCVState *env, uint64_t rs1)
++uint64_t helper_fcvt_s_l(CPURISCVState *env, target_ulong rs1)
+ {
+     return nanbox_s(int64_to_float32(rs1, &env->fp_status));
+ }
  
--    firmware_end_addr = riscv_find_and_load_firmware(machine, BIOS_FILENAME,
--                                                     start_addr, NULL);
-+    if (riscv_is_32_bit(machine)) {
-+        firmware_end_addr = riscv_find_and_load_firmware(machine,
-+                                    "opensbi-riscv32-generic-fw_dynamic.bin",
-+                                    start_addr, NULL);
-+    } else {
-+        firmware_end_addr = riscv_find_and_load_firmware(machine,
-+                                    "opensbi-riscv64-generic-fw_dynamic.bin",
-+                                    start_addr, NULL);
-+    }
+-uint64_t helper_fcvt_s_lu(CPURISCVState *env, uint64_t rs1)
++uint64_t helper_fcvt_s_lu(CPURISCVState *env, target_ulong rs1)
+ {
+     return nanbox_s(uint64_to_float32(rs1, &env->fp_status));
+ }
+@@ -337,12 +337,12 @@ target_ulong helper_fcvt_wu_d(CPURISCVState *env, uint64_t frs1)
+ }
  
-     if (machine->kernel_filename) {
-         kernel_start_addr = riscv_calc_kernel_start_addr(machine,
-@@ -518,9 +520,9 @@ static void sifive_u_machine_init(MachineState *machine)
-     /* Compute the fdt load address in dram */
-     fdt_load_addr = riscv_load_fdt(memmap[SIFIVE_U_DEV_DRAM].base,
-                                    machine->ram_size, s->fdt);
--    #if defined(TARGET_RISCV64)
--    start_addr_hi32 = start_addr >> 32;
--    #endif
-+    if (!riscv_is_32_bit(machine)) {
-+        start_addr_hi32 = (uint64_t)start_addr >> 32;
-+    }
+ #if defined(TARGET_RISCV64)
+-uint64_t helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
++target_ulong helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
+ {
+     return float64_to_int64(frs1, &env->fp_status);
+ }
  
-     /* reset vector */
-     uint32_t reset_vec[11] = {
-@@ -528,13 +530,8 @@ static void sifive_u_machine_init(MachineState *machine)
-         0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
-         0x02828613,                    /*     addi   a2, t0, %pcrel_lo(1b) */
-         0xf1402573,                    /*     csrr   a0, mhartid  */
--#if defined(TARGET_RISCV32)
--        0x0202a583,                    /*     lw     a1, 32(t0) */
--        0x0182a283,                    /*     lw     t0, 24(t0) */
--#elif defined(TARGET_RISCV64)
--        0x0202b583,                    /*     ld     a1, 32(t0) */
--        0x0182b283,                    /*     ld     t0, 24(t0) */
--#endif
-+        0,
-+        0,
-         0x00028067,                    /*     jr     t0 */
-         start_addr,                    /* start: .dword */
-         start_addr_hi32,
-@@ -542,6 +539,14 @@ static void sifive_u_machine_init(MachineState *machine)
-         0x00000000,
-                                        /* fw_dyn: */
-     };
-+    if (riscv_is_32_bit(machine)) {
-+        reset_vec[4] = 0x0202a583;     /*     lw     a1, 32(t0) */
-+        reset_vec[5] = 0x0182a283;     /*     lw     t0, 24(t0) */
-+    } else {
-+        reset_vec[4] = 0x0202b583;     /*     ld     a1, 32(t0) */
-+        reset_vec[5] = 0x0182b283;     /*     ld     t0, 24(t0) */
-+    }
-+
+-uint64_t helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
++target_ulong helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
+ {
+     return float64_to_uint64(frs1, &env->fp_status);
+ }
+@@ -359,12 +359,12 @@ uint64_t helper_fcvt_d_wu(CPURISCVState *env, target_ulong rs1)
+ }
  
-     /* copy in the reset vector in little_endian byte order */
-     for (i = 0; i < ARRAY_SIZE(reset_vec); i++) {
+ #if defined(TARGET_RISCV64)
+-uint64_t helper_fcvt_d_l(CPURISCVState *env, uint64_t rs1)
++uint64_t helper_fcvt_d_l(CPURISCVState *env, target_ulong rs1)
+ {
+     return int64_to_float64(rs1, &env->fp_status);
+ }
+ 
+-uint64_t helper_fcvt_d_lu(CPURISCVState *env, uint64_t rs1)
++uint64_t helper_fcvt_d_lu(CPURISCVState *env, target_ulong rs1)
+ {
+     return uint64_to_float64(rs1, &env->fp_status);
+ }
 -- 
 2.29.2
 
