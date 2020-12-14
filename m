@@ -1,63 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kouXq-0000ou-NR
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 15:34:10 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46718)
+	id 1kouXt-0000xe-T3
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 15:34:13 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46732)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=61015ee87=alistair.francis@wdc.com>)
- id 1kouXo-0000kS-Mt; Mon, 14 Dec 2020 15:34:08 -0500
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:42382)
+ id 1kouXr-0000qS-7M; Mon, 14 Dec 2020 15:34:11 -0500
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:42393)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=61015ee87=alistair.francis@wdc.com>)
- id 1kouXg-0007rg-6E; Mon, 14 Dec 2020 15:34:08 -0500
+ id 1kouXp-0007tb-CD; Mon, 14 Dec 2020 15:34:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1607978040; x=1639514040;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=mV3T9pqro5BlXPE6oCDooBs+n8ik+tEjjcPG+wvziMI=;
- b=DFOAGK//+V262R3rteIbpoJjxYqyQztZhz9/+ZndErUALmZ8djGj91H7
- WTqMYcRCtfNthGAGOcptyDi8owcg1R7kKTGHNjQsnlYPSbAs/LiCLZfA2
- pTsSnTP6jPhCFdQLgUrnSdQbApaxcHKvp0ZZH0etlMK94lFeKDm0M+qOn
- IKERLLCxR08scji5uHquiKa+z8ecuyida1LXZS6VMblNeKxfcV75gNAc8
- uNlii2tDtctDvvz3lQbbocvwoRM3LvFy8s+4KlPLxXCoKkFJPKsPLes5Q
- 2TlQEb/vuKzfQ9xA474xmYorsUq0S1XgrIpFmmOFONrERXjx+ZBC/OI5R Q==;
-IronPort-SDR: kZQVi+DBCJFcXt18pWP45+SPhjz/X/a7WmZcvYFt3CjmglqfZPDJgggfswlbUNMh5+7Q8JJDdx
- 8Jph3aeySiFAxbhATBCIJVOqz8qGnkvgfKeyFoKvQLepiXbsZk9C+PXNC+mQKdGzY1tBoArvZD
- qF582Sz780XPkjwPKLzS/adSum1Q9GkZKYj3KOMUT6Du1IfgZEPXdYt92SuVzy16oxJypp0IJO
- 3Hq5y/tXxILW7HFBuT2/+9kUHkzffCktgvPvwv6U8mN8bGsV4OZWjDrYtiYL3ws68rtM/inhY0
- 9ho=
-X-IronPort-AV: E=Sophos;i="5.78,420,1599494400"; d="scan'208";a="156338100"
+ t=1607978049; x=1639514049;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=CTGEz6Ggv50vIsVjqVuctj/ddtwSeDBjNyqazv0Kae8=;
+ b=T34nF4OeEiP7THbRLwFpEAkheqKR7WitQkIfpx0SYLiQ7UQH5EzZkwxm
+ FiQfrRXnPfB5PBJdxKX339YnUPRxcBEIorEzM/iYlB5fKlmWIAh5j4/qd
+ zMTQNIkq6hxMtcj91RlzbK5rh4Lj0s1qJz0nzqoqJNxcFZ2ZgD8iVlpT1
+ lo6xP+29MMg83l7/PvvrpXX5lpO1pzGUPfUsLmUF5Blv3VNkWrMdxdsyM
+ QZPFFuH2DyAyHRh9tZ0dTWExkjdZgMOpcez0Gqir2V8z8CuusWL23ykll
+ OA88iyoA26rjDs/41y8NpvdHnaujl1fOnQkdyLmgDqM1fmEYBlPesDkOW Q==;
+IronPort-SDR: T23XvT1F6henFwrQxD0aTDxSbfj9/1bxjDngnVGtc5mm9SVMeiE6aGJQ2IjyN+/fBBUTlosFQp
+ +aWUSbGtKlNbZNYps2YGy9tQZzhXmQUqaUcnjzHqR+k4TBPVKB1o1xkYhp3J0Rnakj0anrhJnW
+ lT9/0b7fqCOpWBAFwccwozZyPKIQrpLuo9lCe4870gwg2r8QDWQIEL2DUzUMZLKJikVX+aG0bv
+ qaWLWpDD8i9UkgdUUWKsn1FPRfxhoYqdd4cS+7C1CS8dEnhcya8SQIEfJhO4gyEfzs+K/hU4Y6
+ g7U=
+X-IronPort-AV: E=Sophos;i="5.78,420,1599494400"; d="scan'208";a="156338119"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 15 Dec 2020 04:33:57 +0800
-IronPort-SDR: ApbWwqcZ2pIsfbA3dly8geQwUrvznmu9O2rcO4YGW9TbSD7B8OYxfyTcay6Khybxcurg7flvPS
- 6KoG1hSrwx+fKhtUaPZGW8gdU3h6IIDutbEl86XihZGo3S8QhuAYF6B3LmKIMISWbrOb7v/za/
- l0R/0ZsaERC4l0OeGOWIwHuTer2msNsjnA02oquyvUkqbzGhGr0VbRn4RYctSKqNbHPzTgQLEV
- jSxnCjalv2f8lLlL5RkOq0s++eMildgDRZVAy17v79fPv7KqKJ5PxHFDbfXpJhO0MSKkHs86Mf
- RKppBbIG/MKIiHUZhlu31/SX
+ by ob1.hgst.iphmx.com with ESMTP; 15 Dec 2020 04:34:08 +0800
+IronPort-SDR: deyaYdHMeHeHoY9Y5YNost2NVb8Rz4+/bHQq7ZphpLqiM7/4MqeEpsTdEoV8OwhxQa2GpDBlMo
+ dYYfsEThZi2J6eb/KPtDUyh5h5kIiPUPF1as/bAhSXqxxq/0tLpClfTAjYEtZeZdU+oDWeM7hS
+ qVQaEbgI0ZXXbgVCpkWLXAV5rmxYcNoc9Nu4I634DNL9/7H2lN71qNmzDNPPfvKA9PdcWqqCcK
+ 2lBd4Y9BObU/4SIThCuc2JdiIHdM1TCGe2OlnEur9wwtSEWpIWmTBc2xYscC32eI2kOJpSau8c
+ hESQkh5Nwj4qgSgerwPAhGAt
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Dec 2020 12:17:40 -0800
-IronPort-SDR: TonXMkvEKwrmXh9wWmoRUfihFLFkIYxsFhsZPH4p3iYCknq6NgElY6Sqb828kg598DyGUZEDVs
- U6bToDgj2idXfUW2z8ShgvHkSc/A5V6hgy8SgSOgCPl/C6WdSPAH8cGPVuFwEStnHBzOmZVvR0
- EKqxDKReEuvHjC3pUY+JJ5qZhZf72AjP0BVbIWjSpaTMJwmayEL7MecbSlmYm4s2Q9QKmtT9tm
- BrsxSkB5kAyFSHCpHXwhTxwtB6oVCN34xC/AP55XhkmwP6pANI+3NJ/UEXVJKIherOV7nouvOf
- Tq4=
+ 14 Dec 2020 12:17:51 -0800
+IronPort-SDR: 5VNRjjsCFGULiAhh66H855ZHzf3aU1/SbyuJTa1QMBDkWZnH7n9RzbftazsT3niovKj/5I6rli
+ IP5HHR4BpQ7F9Q9aOFJ7+XJuCj+jIaWI+1n+b1efcSHvHKN58O9apGT54PXdEKXlkt4DU/DJJV
+ P9w9xVy4TeZHpZdtXMXaY+qXpevxKlHgTaIMzGUNJH+7BfVo+6bL1xqEFxpUHdSu0NeOpHkSni
+ 0aPUt0P070jd7Nm0zSrEurrjr36AYTfvFhwOzDcKpW0BOHS/nu9+62g4ENdZSDjO0MDMv0YSVa
+ u3Y=
 WDCIronportException: Internal
 Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.62.52])
- by uls-op-cesaip02.wdc.com with ESMTP; 14 Dec 2020 12:33:56 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 14 Dec 2020 12:34:07 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v3 00/15]  RISC-V: Start to remove xlen preprocess
-Date: Mon, 14 Dec 2020 12:33:56 -0800
-Message-Id: <cover.1607967113.git.alistair.francis@wdc.com>
+Subject: [PATCH v3 04/15] riscv: virt: Remove target macro conditionals
+Date: Mon, 14 Dec 2020 12:34:07 -0800
+Message-Id: <3b7f53e0eef69904ec20a6fdcb30ab61672e5322.1607967113.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.29.2
+In-Reply-To: <cover.1607967113.git.alistair.francis@wdc.com>
+References: <cover.1607967113.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=216.71.154.45;
@@ -82,54 +84,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2020 20:34:09 -0000
+X-List-Received-Date: Mon, 14 Dec 2020 20:34:11 -0000
 
-The RISC-V QEMU port currently has lot of preprocessor directives that
-check if we are targetting a 32-bit or 64-bit CPU. This means that the
-64-bit RISC-V target can not run 32-bit CPUs. This is different to most
-other QEMU architectures and doesn't allow us to mix xlens (such as when
-running Hypervisors with different xlen guests).
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
+Tested-by: Bin Meng <bin.meng@windriver.com>
+---
+ include/hw/riscv/virt.h | 6 ------
+ hw/riscv/virt.c         | 2 +-
+ 2 files changed, 1 insertion(+), 7 deletions(-)
 
-This series is a step toward removing some of those to allow us to use
-32-bit CPUs on 64-bit RISC-V targets.
-
-v3:
- - Address Richard's comments
-v2:
- - Rebase on the latest RISC-V tree
-
-Alistair Francis (15):
-  hw/riscv: Expand the is 32-bit check to support more CPUs
-  target/riscv: Add a TYPE_RISCV_CPU_BASE CPU
-  riscv: spike: Remove target macro conditionals
-  riscv: virt: Remove target macro conditionals
-  hw/riscv: boot: Remove compile time XLEN checks
-  hw/riscv: virt: Remove compile time XLEN checks
-  hw/riscv: spike: Remove compile time XLEN checks
-  hw/riscv: sifive_u: Remove compile time XLEN checks
-  target/riscv: fpu_helper: Match function defs in HELPER macros
-  target/riscv: Add a riscv_cpu_is_32bit() helper function
-  target/riscv: Specify the XLEN for CPUs
-  target/riscv: cpu: Remove compile time XLEN checks
-  target/riscv: cpu_helper: Remove compile time XLEN checks
-  target/riscv: csr: Remove compile time XLEN checks
-  target/riscv: cpu: Set XLEN independently from target
-
- include/hw/riscv/boot.h   |   8 +-
- include/hw/riscv/spike.h  |   6 --
- include/hw/riscv/virt.h   |   6 --
- target/riscv/cpu.h        |   8 ++
- target/riscv/cpu_bits.h   |   4 +-
- hw/riscv/boot.c           |  67 +++++++++------
- hw/riscv/sifive_u.c       |  57 ++++++------
- hw/riscv/spike.c          |  50 ++++++-----
- hw/riscv/virt.c           |  36 ++++----
- target/riscv/cpu.c        |  84 ++++++++++++------
- target/riscv/cpu_helper.c |  12 +--
- target/riscv/csr.c        | 176 ++++++++++++++++++++------------------
- target/riscv/fpu_helper.c |  16 ++--
- 13 files changed, 295 insertions(+), 235 deletions(-)
-
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index b4ed9a32eb..84b7a3848f 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -89,10 +89,4 @@ enum {
+ #define FDT_INT_MAP_WIDTH     (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + 1 + \
+                                FDT_PLIC_ADDR_CELLS + FDT_PLIC_INT_CELLS)
+ 
+-#if defined(TARGET_RISCV32)
+-#define VIRT_CPU TYPE_RISCV_CPU_BASE32
+-#elif defined(TARGET_RISCV64)
+-#define VIRT_CPU TYPE_RISCV_CPU_BASE64
+-#endif
+-
+ #endif
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 25cea7aa67..995e1c35f1 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -706,7 +706,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+     mc->desc = "RISC-V VirtIO board";
+     mc->init = virt_machine_init;
+     mc->max_cpus = VIRT_CPUS_MAX;
+-    mc->default_cpu_type = VIRT_CPU;
++    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
+     mc->pci_allow_0_address = true;
+     mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
+     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
 -- 
 2.29.2
 
