@@ -1,76 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kouYM-00026m-G0
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 15:34:42 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47012)
+	id 1koyAP-0004UD-Iy
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 19:26:13 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49026)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=61015ee87=alistair.francis@wdc.com>)
- id 1kouYL-00023H-7e; Mon, 14 Dec 2020 15:34:41 -0500
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:20005)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=61015ee87=alistair.francis@wdc.com>)
- id 1kouYJ-0007wB-8d; Mon, 14 Dec 2020 15:34:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1607978079; x=1639514079;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=uduk8fTiiFBWthDtcgxNC7lo0McDfT8xvXc/N+cyNb8=;
- b=BzLHarVbrUZq1lEe55p24qPeSlTUbQDfBkIWjLcEd2dpyQ60gyh+hC1A
- MDg0OubIF3/NCc4TLbPmkwt1a7tURk3TudqVJtkCkuVqif++JUk3o2/Zl
- W0vWkb+eLOahZZjbFUoMlSjsf/+hLqhn5h+c/0hi98ejFnD+rrVWmAfpn
- +piU2R+qYDA7l8Y9wHr31DyHoN2ABbRwS/fhLrRLCzxvr8n0AVCPv7LLt
- IgxUNvvaG9h6wgbZPTcIbiBLQtIQ8PLUKE0nSj/8BtCvPmsUgwahw966M
- uNdyDm4HRoHCfkwcOoUVwffmjy9BaoOtpaHtcnwTIqvUwkP5CxBAHygpb Q==;
-IronPort-SDR: DVoyZ78YCQRdtAjXKhcbBV3HeGWgiyAQHm7VsZR7/+gnGo9QlU9esktOB6oinx2qcVlH/rzLPi
- hSjOq9xFul+07H+AmAfTPhJBSNLQeXjZc8mozBrl+OEyU7OUWpWIkl3waygfsjvZzN1jSnUTKG
- 7gIYK3fN6iNa3ccZA7mQBrobTVpFNE1x9kELlmc/jQIgtLqWnQY7uzjMGE+sC1SfQyzhCQdaKZ
- sDkXgT++8d+dUOGM5MFmNSP6GxGZx4M/S8B/QCYFu814LNP/4nWLni40RXr5Dk2GzuEq6bYKmt
- Soo=
-X-IronPort-AV: E=Sophos;i="5.78,420,1599494400"; d="scan'208";a="265318163"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 15 Dec 2020 04:34:37 +0800
-IronPort-SDR: zaHA+0jwn5fCKqyVY3fh9aZp0hVN5cYO1VEi/nOyBy+ypiIK9uUSLACshBaYIP7KvO6dp2tEon
- 6h+wnQn9+fIIbZYu9gV4Ogir7QUPK/Lotb9thqzZtxEN2W9fHaYFgaXxokswpclbBkrYgD/Jql
- cRx0s4+QCWpAT5fvHZsAjtJnN+AcvuaGhoLncOHL9ZS0G0ln583FV7mhlKLn+gEJsJAAH7cyt1
- gMnaItXQF5nxTRtKMIReIOOAH+WM8ghL2ht1AjfjzKPAm7PYgxGzhvLSF6TOWeBrc01ceYlwtq
- Yc7SWty0I3LTPVi5tMeb7Ddy
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Dec 2020 12:19:57 -0800
-IronPort-SDR: p4BtJ87rGz1N3HZXKAi6KpTYxc+yUE4b4FjEVhSGbSGK1c3UWbTEj/eMmPV5WZzMZ+AM78zQHa
- qStNiYR6+oqda9fUHLxFSN8P/9UtRf5uNK6m3DADyCWupceVKYegh6Fpu9j5J+YPLXBnPVmllj
- eTIB1eAAHntXobtsvUJZNhzjvjJ3BSYdb/QZyZJ34zxe6Wo/yuXIvv487yc06ONAN8RbVQTfv6
- k5pPA1DVaviT8TGFSx/FIjWZP1T+ppjoFirNSJyNO8znb9cYGzI4lZZfKFstBz2oJmuzTGNLWh
- 8xs=
-WDCIronportException: Internal
-Received: from cnf006900.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.62.52])
- by uls-op-cesaip01.wdc.com with ESMTP; 14 Dec 2020 12:34:38 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v3 15/15] target/riscv: cpu: Set XLEN independently from target
-Date: Mon, 14 Dec 2020 12:34:37 -0800
-Message-Id: <0508789530dc788a1abda41e04bafb65d377a1ad.1607967113.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <cover.1607967113.git.alistair.francis@wdc.com>
-References: <cover.1607967113.git.alistair.francis@wdc.com>
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1koyAN-0004Tg-Ao
+ for qemu-riscv@nongnu.org; Mon, 14 Dec 2020 19:26:11 -0500
+Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:42596)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1koyAI-0004LE-HJ
+ for qemu-riscv@nongnu.org; Mon, 14 Dec 2020 19:26:10 -0500
+Received: by mail-pg1-x544.google.com with SMTP id w16so14009862pga.9
+ for <qemu-riscv@nongnu.org>; Mon, 14 Dec 2020 16:26:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=HYUhfX1zytIqrkUcOpkaMcJQQLgNGL6yx6VjqU6UAoA=;
+ b=YdPjys8NB+Xy5LfKDIJ6nf9rkIw4e2043qlyFFNPh9rnpccCgtTxDW6RbbnKUbU9D+
+ vjCHJGFXTB7J7WiQhdqFAgfQmXShSv+el8NG+zcvT16uND0JIbw7PPBPqCy1Wn7UQynj
+ fOpGf/LFXXulu1gFRhwXm4oFMKvttnM6juaLC2yj6evFmpp8xF+Ady4NQYM5iLBoiOte
+ ztfegKA7dIVwK92zQlvD9ZbCHfXXHvNAJXmYuDWnFS/+z/dRdVLEXviiP0Nl4DuvZg3/
+ 3ZzjibjY8r2iY2jh8VTcOvpmekKZC1bFgSF5JkmLUM4044jRPWuwSjPGpKcLtBOXLm0m
+ /RxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=HYUhfX1zytIqrkUcOpkaMcJQQLgNGL6yx6VjqU6UAoA=;
+ b=ETU3IUBskJvNuk7UrHHtTqBUnxEXHe/Dg3I8CV00KULyJE6RTWoSsxDJEvGHQZuZ7X
+ bFbhTM9GbchwaWdA++aEFKJ+nOI77kd11CTycFvg+FQZq6xtgV4cyFWHGSqWi+cOF9cS
+ hk+W9ZaeP2U0Xb0G+rABNsrKt1FdeDQUL6GVl/U9EfAiCty0gIX+YLCudxuuE20qhZ//
+ p+aGLKPeS4+EccJnxlH3WAXtgld7RXfeR7TsXeXWCsx/Lmb6+9ODi0hqOlLil6ttDf82
+ Jca5q51DXUamon1SfHMqmPWes0WnPkFh2hwmkGsvoT6+cn/U/U0ub8S67d/4Djfxv2Fn
+ jFKA==
+X-Gm-Message-State: AOAM532eDRyYvXD8XJEqPh+XFguksd0fPrUnFlhNu3dPKcr3qarRu41Q
+ xo7Hy3Qg4uUOv8Oa+OawHiSLEQ==
+X-Google-Smtp-Source: ABdhPJzS9wcJzL9357awFtpiGNgMSirLqpXirlGlB4M7E1sbXyaZAF10dhmWWKmIBBsCVIqUM/v6ew==
+X-Received: by 2002:a63:f154:: with SMTP id o20mr26315148pgk.127.1607991964361; 
+ Mon, 14 Dec 2020 16:26:04 -0800 (PST)
+Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
+ [76.210.143.223])
+ by smtp.gmail.com with ESMTPSA id y22sm21101347pgi.35.2020.12.14.16.26.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Dec 2020 16:26:03 -0800 (PST)
+Date: Mon, 14 Dec 2020 16:26:03 -0800 (PST)
+X-Google-Original-Date: Mon, 14 Dec 2020 16:26:01 PST (-0800)
+Subject: Re: [PATCH v2 00/15]  RISC-V: Start to remove xlen preprocess
+In-Reply-To: <cover.1607467819.git.alistair.francis@wdc.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, bmeng.cn@gmail.com,
+ Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>
+Message-ID: <mhng-711fa828-e3ae-408f-a908-76b1aacb67a5@palmerdabbelt-glaptop>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.141.245;
- envelope-from=prvs=61015ee87=alistair.francis@wdc.com;
- helo=esa1.hgst.iphmx.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
+ envelope-from=palmer@dabbelt.com; helo=mail-pg1-x544.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -84,97 +77,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2020 20:34:41 -0000
+X-List-Received-Date: Tue, 15 Dec 2020 00:26:12 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
-Tested-by: Bin Meng <bin.meng@windriver.com>
----
- target/riscv/cpu.c | 25 ++++++++++++++++---------
- 1 file changed, 16 insertions(+), 9 deletions(-)
+On Tue, 08 Dec 2020 14:56:08 PST (-0800), Alistair Francis wrote:
+> The RISC-V QEMU port currently has lot of preprocessor directives that
+> check if we are targetting a 32-bit or 64-bit CPU. This means that the
+> 64-bit RISC-V target can not run 32-bit CPUs. This is different to most
+> other QEMU architectures and doesn't allow us to mix xlens (such as when
+> running Hypervisors with different xlen guests).
+> This series is a step toward removing some of those to allow us to use
+> 32-bit CPUs on 64-bit RISC-V targets.
+> v2:
+>  - Rebase on the latest RISC-V tree
+>
+> Alistair Francis (15):
+>   hw/riscv: Expand the is 32-bit check to support more CPUs
+>   target/riscv: Add a TYPE_RISCV_CPU_BASE CPU
+>   riscv: spike: Remove target macro conditionals
+>   riscv: virt: Remove target macro conditionals
+>   hw/riscv: boot: Remove compile time XLEN checks
+>   hw/riscv: virt: Remove compile time XLEN checks
+>   hw/riscv: spike: Remove compile time XLEN checks
+>   hw/riscv: sifive_u: Remove compile time XLEN checks
+>   target/riscv: fpu_helper: Match function defs in HELPER macros
+>   target/riscv: Add a riscv_cpu_is_32bit() helper function
+>   target/riscv: Specify the XLEN for CPUs
+>   target/riscv: cpu: Remove compile time XLEN checks
+>   target/riscv: cpu_helper: Remove compile time XLEN checks
+>   target/riscv: csr: Remove compile time XLEN checks
+>   target/riscv: cpu: Set XLEN independently from target
+>
+>  include/hw/riscv/boot.h   |   8 +-
+>  include/hw/riscv/spike.h  |   6 --
+>  include/hw/riscv/virt.h   |   6 --
+>  target/riscv/cpu.h        |   8 ++
+>  target/riscv/cpu_bits.h   |   4 +-
+>  hw/riscv/boot.c           |  69 +++++++++------
+>  hw/riscv/sifive_u.c       |  57 ++++++------
+>  hw/riscv/spike.c          |  50 ++++++-----
+>  hw/riscv/virt.c           |  36 ++++----
+>  target/riscv/cpu.c        |  84 ++++++++++++------
+>  target/riscv/cpu_helper.c |  12 +--
+>  target/riscv/csr.c        | 182 ++++++++++++++++++++------------------
+>  target/riscv/fpu_helper.c |  16 ++--
+>  13 files changed, 302 insertions(+), 236 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 47b738c314..254cd83f8b 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -151,14 +151,14 @@ static void riscv_any_cpu_init(Object *obj)
-     set_priv_version(env, PRIV_VERSION_1_11_0);
- }
- 
--static void riscv_base_cpu_init(Object *obj)
-+#if defined(TARGET_RISCV64)
-+static void rv64_base_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-     /* We set this in the realise function */
--    set_misa(env, 0);
-+    set_misa(env, RV64);
- }
- 
--#ifdef TARGET_RISCV64
- static void rv64_sifive_u_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-@@ -174,6 +174,13 @@ static void rv64_sifive_e_cpu_init(Object *obj)
-     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
- }
- #else
-+static void rv32_base_cpu_init(Object *obj)
-+{
-+    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    /* We set this in the realise function */
-+    set_misa(env, RV32);
-+}
-+
- static void rv32_sifive_u_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-@@ -372,7 +379,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-     int priv_version = PRIV_VERSION_1_11_0;
-     int vext_version = VEXT_VERSION_0_07_1;
--    target_ulong target_misa = 0;
-+    target_ulong target_misa = env->misa;
-     Error *local_err = NULL;
- 
-     cpu_exec_realizefn(cs, &local_err);
-@@ -407,8 +414,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
- 
-     set_resetvec(env, cpu->cfg.resetvec);
- 
--    /* If misa isn't set (rv32 and rv64 machines) set it here */
--    if (!env->misa) {
-+    /* If only XLEN is set for misa, then set misa from properties */
-+    if (env->misa == RV32 || env->misa == RV64) {
-         /* Do some ISA extension error checking */
-         if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
-             error_setg(errp,
-@@ -504,7 +511,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             set_vext_version(env, vext_version);
-         }
- 
--        set_misa(env, RVXLEN | target_misa);
-+        set_misa(env, target_misa);
-     }
- 
-     riscv_cpu_register_gdb_regs_for_features(cs);
-@@ -655,13 +662,13 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     },
-     DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
- #if defined(TARGET_RISCV32)
--    DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           riscv_base_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           rv32_base_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32_ibex_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32_imafcu_nommu_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32_sifive_u_cpu_init),
- #elif defined(TARGET_RISCV64)
--    DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           riscv_base_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           rv64_base_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
- #endif
--- 
-2.29.2
+Thanks, this is awesome!  That's always been one of the headaches floating
+around the port that I was hoping to have some time to sort out :).  I just
+gave it a quick look, but
 
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+Acked-by: Palmer Dabbelt <palmerdabbelt@google.com>
+
+as it certainly seems better than before.
 
