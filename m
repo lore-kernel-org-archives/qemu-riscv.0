@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kp6bQ-0007Me-43
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Dec 2020 04:26:40 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57302)
+	id 1kp6mo-0001YE-2T
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Dec 2020 04:38:26 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59470)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kp6bO-0007LY-6W; Tue, 15 Dec 2020 04:26:38 -0500
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:43571)
+ id 1kp6mi-0001X5-TA; Tue, 15 Dec 2020 04:38:23 -0500
+Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:42857)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kp6bM-0001up-K7; Tue, 15 Dec 2020 04:26:37 -0500
-Received: by mail-yb1-xb43.google.com with SMTP id r127so18281381yba.10;
- Tue, 15 Dec 2020 01:26:34 -0800 (PST)
+ id 1kp6mh-0005uV-8M; Tue, 15 Dec 2020 04:38:20 -0500
+Received: by mail-yb1-xb42.google.com with SMTP id j17so18318009ybt.9;
+ Tue, 15 Dec 2020 01:38:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=edWerIJ48mREiTIvEB2cJ/VYO5sih7fadhS7qmEy2tE=;
- b=c69DM4lFtc4PaxM2Ku86s7dNWz/v/g13jKkAF5BwV5tZjHgv3L5CvBLXeKJfJk3Wi7
- cs7AWvCOuL+FgLbucj3V6szlTb+KNr16XfYwzneG4xBpcxsjhGQVrRh656jpofGHgtOA
- lC/72uYMhgDc2VHnvJe9WbQr+DqW9Z7EZNW2vUkrAdtu2svo3wnZnD5oY3RXHS8yLDg/
- aX+YgIGY/zN3f7xPJjI0D/I61nygwi+4SOeYd53cTLivvuX3yIRkAjj0hI2bgRznFKNu
- VfpuAJvGhi7C89egGXCLIfwdU+mvlgrf9rSt+/NAY7bqLxPdjpkcGqX9IbjPEIywmeeg
- iBHQ==
+ :cc; bh=Pph+Y1E2QGiM9vvSTKeuV7rOj4n+JAOwnhbD9mJ2qLo=;
+ b=jh/nxfmBJws3dRLWi2pO9qfJuo2uo/KyfcujnOvXoICC2wh4Ue9T4OwKot2n8OqHqp
+ nnpFYeFTQXeFSqMwT4MsXZaVwOvqvFhlT8dL6Gmuf0KzBSN0iRGHpuQKfv+/wY65W4vS
+ uAI9w1eOf/ItuXLx6eBw31bJk0pabBaJ/ryKrQxawlVGiGY0urVYK+Os0IF8S4sN5Cjf
+ ll6MeauKeuWXdrspjR1SVTEmllCCp+Faqav72AEFXhCyuLByfO3tqpu8C3/+aFjrbzrq
+ ZSu97B0UAJJpYhdrDhN8dcsLynbUCC+ZgYLq+VzXyPBC1IQcCbzOo/VaUp5rfet0+Sj8
+ BYgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=edWerIJ48mREiTIvEB2cJ/VYO5sih7fadhS7qmEy2tE=;
- b=se5MapEGhT+EsaMKSMMbrOcUesHwEa0BLcGfgD8m2cpWDP1cJ56A5C3kmwnAbyS0Ls
- /CsCKcH4bhFDI29d03E7X+IoPZ0N24X7KbcgM2AtBOrlXr4Npr7n0b65CO10s8N5fRgI
- 0HvYROsivYhi7RHWfVOmxmm8vXqGauY847pIeNtUioTQjZpdiEg9DXg1pqNSkZOW+66v
- k3R16BiVU+0rwgaPerqSj8ayeJlfTH2aHOZVZ2WxrigUYCzXhThVtoob01nei2y1XhEh
- srzWyJlu4G/A+QGlhILgwYLlkQvsqQx7ofrJvbgBLzQou/SvQZiFDelWytJOOYOpwraM
- 9CGA==
-X-Gm-Message-State: AOAM533rY6L16T3mQpFLCDTMYAOxxzL/RZQgK8Ocg1Ypd4vEFUUq4lT/
- g8VPQYzNkUv/STJvuod1qIy5+PaM9n36q+f/f54=
-X-Google-Smtp-Source: ABdhPJz+t0wN549A9GcLUkCCgp8nFyxBufLHdUn7AxXTK1Uwpzygf0rzB1fUz1pFSkW3hVUFOJ/OL0kda0VmC1rGSnQ=
-X-Received: by 2002:a25:690b:: with SMTP id e11mr40632566ybc.314.1608024393506; 
- Tue, 15 Dec 2020 01:26:33 -0800 (PST)
+ bh=Pph+Y1E2QGiM9vvSTKeuV7rOj4n+JAOwnhbD9mJ2qLo=;
+ b=uXUn8d73j2ih6tfJcw1dvtHR2qGGoxEFvsa38VRhhnYm67IyvvxhSrlnUBg7MWgDo5
+ TNAp86+okxR06mX0FECL/maplf5cXL1D16LnsFRicvMZhrBbP5b+DKQ43rMv2qUKTiD/
+ 0f0KwTHGihIqiWLONSl/ErkMuWRy/LVjNw1Dj5i3BqiCoNG0MpIMffDvb/4UxGPSIs63
+ WM4Gl6Z/d43mll+/TgHOWKfUc4ffd5LvhCDYMhuUMRZUXCGXUn6qMiGfO+kXasKEJt3e
+ 3li0h6H1qGw4scGlaEHNX8WJ9JELlN1E2IX4MKdPrc4PZRKJDwJun3TgEwPVwGgWIFEs
+ sHVw==
+X-Gm-Message-State: AOAM533amw+Hx9BwMzyiKS66iYwMd0Q+K1BN0wLfpuB5dMqxuK4oSry0
+ sRsmhXpMZvP/AeHl9kQ+QA0J3ARP8OHev5R5Mfw=
+X-Google-Smtp-Source: ABdhPJzZiEQT0nZPYL4IWZ2aZHv2ni/NP2n6tgS06aHibN3YkCROhWGLLLULlyRt2ThO5fOQVsct/Gfrq4TVxLADmy4=
+X-Received: by 2002:a25:4744:: with SMTP id u65mr45722065yba.239.1608025097845; 
+ Tue, 15 Dec 2020 01:38:17 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1607967113.git.alistair.francis@wdc.com>
- <3b6338af937d0d3aa0858ba1a4ad0fd9e759be66.1607967113.git.alistair.francis@wdc.com>
-In-Reply-To: <3b6338af937d0d3aa0858ba1a4ad0fd9e759be66.1607967113.git.alistair.francis@wdc.com>
+ <2cffe9cb8055c9451872b3a08192e19fec12fb1a.1607967113.git.alistair.francis@wdc.com>
+In-Reply-To: <2cffe9cb8055c9451872b3a08192e19fec12fb1a.1607967113.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 15 Dec 2020 17:26:22 +0800
-Message-ID: <CAEUhbmUHE3vSvsz3JCSmgApCpJfs598FJkXsZBYVuP09u8x9tA@mail.gmail.com>
-Subject: Re: [PATCH v3 01/15] hw/riscv: Expand the is 32-bit check to support
- more CPUs
+Date: Tue, 15 Dec 2020 17:38:06 +0800
+Message-ID: <CAEUhbmUhKuhEPU=RyRN3CVYDh=oGoQF1e-tSX=jODw4c2Ub1kA@mail.gmail.com>
+Subject: Re: [PATCH v3 09/15] target/riscv: fpu_helper: Match function defs in
+ HELPER macros
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b43;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb43.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b42;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb42.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -71,47 +71,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2020 09:26:38 -0000
+X-List-Received-Date: Tue, 15 Dec 2020 09:38:24 -0000
+
+Hi Alistair,
 
 On Tue, Dec 15, 2020 at 4:34 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
-> Currently the riscv_is_32_bit() function only supports the generic rv32
-> CPUs. Extend the function to support the SiFive and LowRISC CPUs as
-> well.
+> The helper functions defined in helper.h specify that the argument is of
+
+I can't find the helper.h that declare these functions?
+
+> type target_long. Let's change the implementation to match the header
+> definition.
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/riscv/boot.c | 12 +++++++++++-
->  1 file changed, 11 insertions(+), 1 deletion(-)
+>  target/riscv/fpu_helper.c | 16 ++++++++--------
+>  1 file changed, 8 insertions(+), 8 deletions(-)
 >
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index d62f3dc758..3c70ac75d7 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -41,7 +41,17 @@
+> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+> index bb346a8249..507d7fe7fa 100644
+> --- a/target/riscv/fpu_helper.c
+> +++ b/target/riscv/fpu_helper.c
+> @@ -224,13 +224,13 @@ target_ulong helper_fcvt_wu_s(CPURISCVState *env, uint64_t rs1)
+>  }
 >
->  bool riscv_is_32_bit(MachineState *machine)
+>  #if defined(TARGET_RISCV64)
+> -uint64_t helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
+> +target_ulong helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
 >  {
-> -    if (!strncmp(machine->cpu_type, "rv32", 4)) {
-> +    /*
-> +     * To determine if the CPU is 32-bit we need to check a few different CPUs.
-> +     *
-> +     * If the CPU starts with rv32
-> +     * If the CPU is a sifive 3 seriries CPU (E31, U34)
-> +     * If it's the Ibex CPU
-> +     */
-> +    if (!strncmp(machine->cpu_type, "rv32", 4) ||
-> +        (!strncmp(machine->cpu_type, "sifive", 6) &&
-> +            machine->cpu_type[8] == '3') ||
-> +        !strncmp(machine->cpu_type, "lowrisc-ibex", 12)) {
+>      float32 frs1 = check_nanbox_s(rs1);
+>      return float32_to_int64(frs1, &env->fp_status);
 
-This does not look like a scalable way. With more and more CPU added
-in the future, this may end up with a huge list of strncmps..
+float32_to_int64() returns int64_t, so there is a truncation if
+changing it to target_ulong for 32-bit.
 
->          return true;
->      } else {
->          return false;
+>  }
+>
+> -uint64_t helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
+> +target_ulong helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
+>  {
+>      float32 frs1 = check_nanbox_s(rs1);
+>      return float32_to_uint64(frs1, &env->fp_status);
+> @@ -248,12 +248,12 @@ uint64_t helper_fcvt_s_wu(CPURISCVState *env, target_ulong rs1)
+>  }
+>
+>  #if defined(TARGET_RISCV64)
+> -uint64_t helper_fcvt_s_l(CPURISCVState *env, uint64_t rs1)
+> +uint64_t helper_fcvt_s_l(CPURISCVState *env, target_ulong rs1)
+>  {
+>      return nanbox_s(int64_to_float32(rs1, &env->fp_status));
+>  }
+>
+> -uint64_t helper_fcvt_s_lu(CPURISCVState *env, uint64_t rs1)
+> +uint64_t helper_fcvt_s_lu(CPURISCVState *env, target_ulong rs1)
+>  {
+>      return nanbox_s(uint64_to_float32(rs1, &env->fp_status));
+>  }
+> @@ -337,12 +337,12 @@ target_ulong helper_fcvt_wu_d(CPURISCVState *env, uint64_t frs1)
+>  }
+>
+>  #if defined(TARGET_RISCV64)
+> -uint64_t helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
+> +target_ulong helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
+>  {
+>      return float64_to_int64(frs1, &env->fp_status);
+>  }
+>
+> -uint64_t helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
+> +target_ulong helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
+>  {
+>      return float64_to_uint64(frs1, &env->fp_status);
+>  }
+> @@ -359,12 +359,12 @@ uint64_t helper_fcvt_d_wu(CPURISCVState *env, target_ulong rs1)
+>  }
+>
+>  #if defined(TARGET_RISCV64)
+> -uint64_t helper_fcvt_d_l(CPURISCVState *env, uint64_t rs1)
+> +uint64_t helper_fcvt_d_l(CPURISCVState *env, target_ulong rs1)
+>  {
+>      return int64_to_float64(rs1, &env->fp_status);
+>  }
+>
+> -uint64_t helper_fcvt_d_lu(CPURISCVState *env, uint64_t rs1)
+> +uint64_t helper_fcvt_d_lu(CPURISCVState *env, target_ulong rs1)
+>  {
+>      return uint64_to_float64(rs1, &env->fp_status);
+>  }
 
 Regards,
 Bin
