@@ -1,75 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kozaM-00049w-6a
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Dec 2020 20:57:06 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35874)
+	id 1kp4d3-0001Lo-KL
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Dec 2020 02:20:16 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57062)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=6115b8be4=alistair.francis@wdc.com>)
- id 1kozaJ-00049O-5u; Mon, 14 Dec 2020 20:57:03 -0500
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:10598)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kp4cx-0001K9-Ds; Tue, 15 Dec 2020 02:20:07 -0500
+Received: from szxga03-in.huawei.com ([45.249.212.189]:2186)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=6115b8be4=alistair.francis@wdc.com>)
- id 1kozaF-0005vT-Qa; Mon, 14 Dec 2020 20:57:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1607997420; x=1639533420;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=7hVDMJSX7+4fen5lhkGmd06U0vQq2GxBblUjvWQ54wY=;
- b=ds/blPdMS4N/7fsOhvXBd08vST0tjOXXJyRHdWKkeHWIBvUSHV/O2e+z
- SLorPZZuRwomZ6tA47ucO1pDNo7EdIDJAagbJh2kX2u7/IjSmqfcgh7RR
- 0tls0J/gmFMOXBZbtB1jrRokIzvE6IWM9tCm8GfYFN5NNrCSxNt+C1TQX
- hijokKWdp3MFa07cunG0+h8C+gPPLBpEoy2ZkAPVznPH1e1QfFDa0COk4
- kWE9npDCCodD1Yv+n39q52rLdk8P7AvG0Bg5LEyTGm1da/D4ZEn8pZnho
- UG/nom5l6owzyUhOOtPq2iMfomL/onoeNghfIDt/rBYC7AJGYA7Za7kLW w==;
-IronPort-SDR: M3XevsEdYS7vW4CZJh+ZjHDvsSkX3rea1zCQ0vmp4j915jLVceVlbOVUdK91Oo0ebgM+mvGj5x
- VU4umUNNc5tp3GaJW4Gf3k4jtkP9bGX7psEZVuroxcICGEOCv1InzUYza8RsKBSyPHUjqforo2
- WCZ4sJQZiR2cUmucAJ69F7z3cK4LkY6J1HS+u1FpNA13RmU8QGheG1P8c72XRTaXXp6A6gWim9
- oOGYtQQ2uQSfz1OhE1YTz/DqWr49L5Hks0RxSZTmjAZtfOyvFpGYaRbXJMpn+++GipKwBcPx2h
- LIk=
-X-IronPort-AV: E=Sophos;i="5.78,420,1599494400"; d="scan'208";a="156356085"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 15 Dec 2020 09:56:56 +0800
-IronPort-SDR: P01PXNj7A2bh9+Ab8BukTxY/vLvG6CzaS02lWM1b52Qr4rDqaOcMeIcOkkJdv6cAMR8Z69iHiv
- aUjEU8XAoYCVZPv4LXRfSNsUNBQgkV3oZlDEA1ZnhtWFYnHEq3qTyy3bGGZ7jFmqUcHLVOni2b
- NORmVvhjW0QrHosJGu5znUIBZFGbm1/A1KkFDw13V/Ibh54rncYvng1rC0dLnpW0uHT/cZwyhq
- OkkU3QEJSA+awBhQTHSXZIexwIChBNkx0ZlDmTEOuAAlElnflk6IPnDMUuXvO3MKo3BMw9bj0Z
- U3Lg6hfJKSn8LOR3mS8Wmm8Y
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Dec 2020 17:42:14 -0800
-IronPort-SDR: JzXxxNfw2ualsP7UVAb/BUHfMXlmqOsO4CxGGb5kbmAQ7xwnl+Vabk2Gfn0npWTBf+2BK6DcJQ
- aFDCqEp3MsXvIkH0hekW/NwiqEsav8qscXWKw18pawvo9dhRgUt0Z2qYXqLO2ydGYhoQejWOX6
- 9kWaId/Lq4Vd54X8COpCr4vrOCVK4qPGx7H0h2WAQQ5EbO17X7ll6e/qlNBAbv5wNZ+FuyRPQm
- fLq4flg4fdPRPMIShP5SDibD9y6hps0epta0ScwciXxT1K5JOpOSkfCX2z7xHc1pdvSFaXC5++
- bKM=
-WDCIronportException: Internal
-Received: from usa001914.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.62.33])
- by uls-op-cesaip01.wdc.com with ESMTP; 14 Dec 2020 17:56:54 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v1 1/1] riscv/opentitan: Update the OpenTitan memory layout
-Date: Mon, 14 Dec 2020 17:56:54 -0800
-Message-Id: <8eb65314830a75d0fea3fccf77bc45b8ddd01c42.1607982831.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.29.2
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1kp4ct-0008MQ-1Z; Tue, 15 Dec 2020 02:20:06 -0500
+Received: from DGGEMM406-HUB.china.huawei.com (unknown [172.30.72.54])
+ by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4Cw8kq0KFcz556N;
+ Tue, 15 Dec 2020 15:18:59 +0800 (CST)
+Received: from dggemm753-chm.china.huawei.com (10.1.198.59) by
+ DGGEMM406-HUB.china.huawei.com (10.3.20.214) with Microsoft SMTP Server (TLS)
+ id 14.3.498.0; Tue, 15 Dec 2020 15:19:45 +0800
+Received: from dggpemm000001.china.huawei.com (7.185.36.245) by
+ dggemm753-chm.china.huawei.com (10.1.198.59) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.1913.5; Tue, 15 Dec 2020 15:19:45 +0800
+Received: from dggpemm000001.china.huawei.com ([7.185.36.245]) by
+ dggpemm000001.china.huawei.com ([7.185.36.245]) with mapi id 15.01.1913.007;
+ Tue, 15 Dec 2020 15:19:45 +0800
+From: Jiangyifei <jiangyifei@huawei.com>
+To: Alistair Francis <alistair23@gmail.com>
+CC: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, "open
+ list:RISC-V" <qemu-riscv@nongnu.org>, "Zhangxiaofeng (F)"
+ <victor.zhangxiaofeng@huawei.com>, Sagar Karandikar
+ <sagark@eecs.berkeley.edu>, "open list:Overall" <kvm@vger.kernel.org>,
+ "libvir-list@redhat.com" <libvir-list@redhat.com>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, Anup Patel <anup.patel@wdc.com>, yinyipeng
+ <yinyipeng1@huawei.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ "kvm-riscv@lists.infradead.org" <kvm-riscv@lists.infradead.org>, "Palmer
+ Dabbelt" <palmer@dabbelt.com>, "dengkai (A)" <dengkai1@huawei.com>, "Wubin
+ (H)" <wu.wubin@huawei.com>, Zhanghailiang <zhang.zhanghailiang@huawei.com>
+Subject: RE: [PATCH RFC v4 06/15] target/riscv: Support start kernel directly
+ by KVM
+Thread-Topic: [PATCH RFC v4 06/15] target/riscv: Support start kernel directly
+ by KVM
+Thread-Index: AQHWyXJ3Fi228NdDdEWN5Odmu//VYantR0QAgAqIptA=
+Date: Tue, 15 Dec 2020 07:19:45 +0000
+Message-ID: <5ff41bb0d16247c1bf15cdbb148561d9@huawei.com>
+References: <20201203124703.168-1-jiangyifei@huawei.com>
+ <20201203124703.168-7-jiangyifei@huawei.com>
+ <CAKmqyKO4vsY90DnVVp6wgAvSquoW0auFRr3LLfSHrCqXV6vWcg@mail.gmail.com>
+In-Reply-To: <CAKmqyKO4vsY90DnVVp6wgAvSquoW0auFRr3LLfSHrCqXV6vWcg@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.174.186.236]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.154.45;
- envelope-from=prvs=6115b8be4=alistair.francis@wdc.com;
- helo=esa6.hgst.iphmx.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-CFilter-Loop: Reflected
+Received-SPF: pass client-ip=45.249.212.189;
+ envelope-from=jiangyifei@huawei.com; helo=szxga03-in.huawei.com
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,174 +73,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2020 01:57:03 -0000
+X-List-Received-Date: Tue, 15 Dec 2020 07:20:07 -0000
 
-OpenTitan is currently only avalible on an FPGA platform and the memory
-addresses have changed. Update to use the new memory addresses.
-
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- include/hw/riscv/opentitan.h | 23 +++++++---
- hw/riscv/opentitan.c         | 81 +++++++++++++++++++++++++-----------
- 2 files changed, 74 insertions(+), 30 deletions(-)
-
-diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-index 5ff0c0f85e..a5ea3a5e4e 100644
---- a/include/hw/riscv/opentitan.h
-+++ b/include/hw/riscv/opentitan.h
-@@ -55,19 +55,30 @@ enum {
-     IBEX_DEV_UART,
-     IBEX_DEV_GPIO,
-     IBEX_DEV_SPI,
--    IBEX_DEV_FLASH_CTRL,
-+    IBEX_DEV_I2C,
-+    IBEX_DEV_PATTGEN,
-     IBEX_DEV_RV_TIMER,
--    IBEX_DEV_AES,
--    IBEX_DEV_HMAC,
--    IBEX_DEV_PLIC,
-+    IBEX_DEV_SENSOR_CTRL,
-+    IBEX_DEV_OTP_CTRL,
-     IBEX_DEV_PWRMGR,
-     IBEX_DEV_RSTMGR,
-     IBEX_DEV_CLKMGR,
-     IBEX_DEV_PINMUX,
-+    IBEX_DEV_PADCTRL,
-+    IBEX_DEV_USBDEV,
-+    IBEX_DEV_FLASH_CTRL,
-+    IBEX_DEV_PLIC,
-+    IBEX_DEV_AES,
-+    IBEX_DEV_HMAC,
-+    IBEX_DEV_KMAC,
-+    IBEX_DEV_KEYMGR,
-+    IBEX_DEV_CSRNG,
-+    IBEX_DEV_ENTROPY,
-+    IBEX_DEV_EDNO,
-+    IBEX_DEV_EDN1,
-     IBEX_DEV_ALERT_HANDLER,
-     IBEX_DEV_NMI_GEN,
--    IBEX_DEV_USBDEV,
--    IBEX_DEV_PADCTRL,
-+    IBEX_DEV_OTBN,
- };
- 
- enum {
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index cc758b78b8..af3456932f 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -35,22 +35,33 @@ static const struct MemmapEntry {
-     [IBEX_DEV_ROM] =            {  0x00008000, 16 * KiB },
-     [IBEX_DEV_RAM] =            {  0x10000000,  0x10000 },
-     [IBEX_DEV_FLASH] =          {  0x20000000,  0x80000 },
--    [IBEX_DEV_UART] =           {  0x40000000,  0x10000 },
--    [IBEX_DEV_GPIO] =           {  0x40010000,  0x10000 },
--    [IBEX_DEV_SPI] =            {  0x40020000,  0x10000 },
--    [IBEX_DEV_FLASH_CTRL] =     {  0x40030000,  0x10000 },
--    [IBEX_DEV_PINMUX] =         {  0x40070000,  0x10000 },
--    [IBEX_DEV_RV_TIMER] =       {  0x40080000,  0x10000 },
--    [IBEX_DEV_PLIC] =           {  0x40090000,  0x10000 },
--    [IBEX_DEV_PWRMGR] =         {  0x400A0000,  0x10000 },
--    [IBEX_DEV_RSTMGR] =         {  0x400B0000,  0x10000 },
--    [IBEX_DEV_CLKMGR] =         {  0x400C0000,  0x10000 },
--    [IBEX_DEV_AES] =            {  0x40110000,  0x10000 },
--    [IBEX_DEV_HMAC] =           {  0x40120000,  0x10000 },
--    [IBEX_DEV_ALERT_HANDLER] =  {  0x40130000,  0x10000 },
--    [IBEX_DEV_NMI_GEN] =        {  0x40140000,  0x10000 },
--    [IBEX_DEV_USBDEV] =         {  0x40150000,  0x10000 },
--    [IBEX_DEV_PADCTRL] =        {  0x40160000,  0x10000 }
-+    [IBEX_DEV_UART] =           {  0x40000000,  0x1000  },
-+    [IBEX_DEV_GPIO] =           {  0x40040000,  0x1000  },
-+    [IBEX_DEV_SPI] =            {  0x40050000,  0x1000  },
-+    [IBEX_DEV_I2C] =            {  0x40080000,  0x1000  },
-+    [IBEX_DEV_PATTGEN] =        {  0x400e0000,  0x1000  },
-+    [IBEX_DEV_RV_TIMER] =       {  0x40100000,  0x1000  },
-+    [IBEX_DEV_SENSOR_CTRL] =    {  0x40110000,  0x1000  },
-+    [IBEX_DEV_OTP_CTRL] =       {  0x40130000,  0x4000  },
-+    [IBEX_DEV_PWRMGR] =         {  0x40400000,  0x1000  },
-+    [IBEX_DEV_RSTMGR] =         {  0x40410000,  0x1000  },
-+    [IBEX_DEV_CLKMGR] =         {  0x40420000,  0x1000  },
-+    [IBEX_DEV_PINMUX] =         {  0x40460000,  0x1000  },
-+    [IBEX_DEV_PADCTRL] =        {  0x40470000,  0x1000  },
-+    [IBEX_DEV_USBDEV] =         {  0x40500000,  0x1000  },
-+    [IBEX_DEV_FLASH_CTRL] =     {  0x41000000,  0x1000  },
-+    [IBEX_DEV_PLIC] =           {  0x41010000,  0x1000  },
-+    [IBEX_DEV_AES] =            {  0x41100000,  0x1000  },
-+    [IBEX_DEV_HMAC] =           {  0x41110000,  0x1000  },
-+    [IBEX_DEV_KMAC] =           {  0x41120000,  0x1000  },
-+    [IBEX_DEV_KEYMGR] =         {  0x41130000,  0x1000  },
-+    [IBEX_DEV_CSRNG] =          {  0x41150000,  0x1000  },
-+    [IBEX_DEV_ENTROPY] =        {  0x41160000,  0x1000  },
-+    [IBEX_DEV_EDNO] =           {  0x41170000,  0x1000  },
-+    [IBEX_DEV_EDN1] =           {  0x41180000,  0x1000  },
-+    [IBEX_DEV_ALERT_HANDLER] =  {  0x411b0000,  0x1000  },
-+    [IBEX_DEV_NMI_GEN] =        {  0x411c0000,  0x1000  },
-+    [IBEX_DEV_OTBN] =           {  0x411d0000,  0x10000 },
- };
- 
- static void opentitan_board_init(MachineState *machine)
-@@ -156,30 +167,52 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-         memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.spi",
-         memmap[IBEX_DEV_SPI].base, memmap[IBEX_DEV_SPI].size);
--    create_unimplemented_device("riscv.lowrisc.ibex.flash_ctrl",
--        memmap[IBEX_DEV_FLASH_CTRL].base, memmap[IBEX_DEV_FLASH_CTRL].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.i2c",
-+        memmap[IBEX_DEV_I2C].base, memmap[IBEX_DEV_I2C].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.pattgen",
-+        memmap[IBEX_DEV_PATTGEN].base, memmap[IBEX_DEV_PATTGEN].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.rv_timer",
-         memmap[IBEX_DEV_RV_TIMER].base, memmap[IBEX_DEV_RV_TIMER].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.sensor_ctrl",
-+        memmap[IBEX_DEV_SENSOR_CTRL].base, memmap[IBEX_DEV_SENSOR_CTRL].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.otp_ctrl",
-+        memmap[IBEX_DEV_OTP_CTRL].base, memmap[IBEX_DEV_OTP_CTRL].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.pwrmgr",
-         memmap[IBEX_DEV_PWRMGR].base, memmap[IBEX_DEV_PWRMGR].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.rstmgr",
-         memmap[IBEX_DEV_RSTMGR].base, memmap[IBEX_DEV_RSTMGR].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.clkmgr",
-         memmap[IBEX_DEV_CLKMGR].base, memmap[IBEX_DEV_CLKMGR].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.pinmux",
-+        memmap[IBEX_DEV_PINMUX].base, memmap[IBEX_DEV_PINMUX].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.padctrl",
-+        memmap[IBEX_DEV_PADCTRL].base, memmap[IBEX_DEV_PADCTRL].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.usbdev",
-+        memmap[IBEX_DEV_USBDEV].base, memmap[IBEX_DEV_USBDEV].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.flash_ctrl",
-+        memmap[IBEX_DEV_FLASH_CTRL].base, memmap[IBEX_DEV_FLASH_CTRL].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.aes",
-         memmap[IBEX_DEV_AES].base, memmap[IBEX_DEV_AES].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.hmac",
-         memmap[IBEX_DEV_HMAC].base, memmap[IBEX_DEV_HMAC].size);
--    create_unimplemented_device("riscv.lowrisc.ibex.pinmux",
--        memmap[IBEX_DEV_PINMUX].base, memmap[IBEX_DEV_PINMUX].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.kmac",
-+        memmap[IBEX_DEV_KMAC].base, memmap[IBEX_DEV_KMAC].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.keymgr",
-+        memmap[IBEX_DEV_KEYMGR].base, memmap[IBEX_DEV_KEYMGR].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.csrng",
-+        memmap[IBEX_DEV_CSRNG].base, memmap[IBEX_DEV_CSRNG].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.entropy",
-+        memmap[IBEX_DEV_ENTROPY].base, memmap[IBEX_DEV_ENTROPY].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.edn0",
-+        memmap[IBEX_DEV_EDNO].base, memmap[IBEX_DEV_EDNO].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.edn1",
-+        memmap[IBEX_DEV_EDN1].base, memmap[IBEX_DEV_EDN1].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.alert_handler",
-         memmap[IBEX_DEV_ALERT_HANDLER].base, memmap[IBEX_DEV_ALERT_HANDLER].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.nmi_gen",
-         memmap[IBEX_DEV_NMI_GEN].base, memmap[IBEX_DEV_NMI_GEN].size);
--    create_unimplemented_device("riscv.lowrisc.ibex.usbdev",
--        memmap[IBEX_DEV_USBDEV].base, memmap[IBEX_DEV_USBDEV].size);
--    create_unimplemented_device("riscv.lowrisc.ibex.padctrl",
--        memmap[IBEX_DEV_PADCTRL].base, memmap[IBEX_DEV_PADCTRL].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.otbn",
-+        memmap[IBEX_DEV_OTBN].base, memmap[IBEX_DEV_OTBN].size);
- }
- 
- static void lowrisc_ibex_soc_class_init(ObjectClass *oc, void *data)
--- 
-2.29.2
-
+DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEFsaXN0YWlyIEZyYW5jaXMg
+W21haWx0bzphbGlzdGFpcjIzQGdtYWlsLmNvbV0NCj4gU2VudDogV2VkbmVzZGF5LCBEZWNlbWJl
+ciA5LCAyMDIwIDY6MTkgQU0NCj4gVG86IEppYW5neWlmZWkgPGppYW5neWlmZWlAaHVhd2VpLmNv
+bT4NCj4gQ2M6IHFlbXUtZGV2ZWxAbm9uZ251Lm9yZyBEZXZlbG9wZXJzIDxxZW11LWRldmVsQG5v
+bmdudS5vcmc+OyBvcGVuDQo+IGxpc3Q6UklTQy1WIDxxZW11LXJpc2N2QG5vbmdudS5vcmc+OyBa
+aGFuZ3hpYW9mZW5nIChGKQ0KPiA8dmljdG9yLnpoYW5neGlhb2ZlbmdAaHVhd2VpLmNvbT47IFNh
+Z2FyIEthcmFuZGlrYXINCj4gPHNhZ2Fya0BlZWNzLmJlcmtlbGV5LmVkdT47IG9wZW4gbGlzdDpP
+dmVyYWxsIDxrdm1Admdlci5rZXJuZWwub3JnPjsNCj4gbGlidmlyLWxpc3RAcmVkaGF0LmNvbTsg
+QmFzdGlhbiBLb3BwZWxtYW5uDQo+IDxrYmFzdGlhbkBtYWlsLnVuaS1wYWRlcmJvcm4uZGU+OyBB
+bnVwIFBhdGVsIDxhbnVwLnBhdGVsQHdkYy5jb20+Ow0KPiB5aW55aXBlbmcgPHlpbnlpcGVuZzFA
+aHVhd2VpLmNvbT47IEFsaXN0YWlyIEZyYW5jaXMNCj4gPEFsaXN0YWlyLkZyYW5jaXNAd2RjLmNv
+bT47IGt2bS1yaXNjdkBsaXN0cy5pbmZyYWRlYWQub3JnOyBQYWxtZXIgRGFiYmVsdA0KPiA8cGFs
+bWVyQGRhYmJlbHQuY29tPjsgZGVuZ2thaSAoQSkgPGRlbmdrYWkxQGh1YXdlaS5jb20+OyBXdWJp
+biAoSCkNCj4gPHd1Lnd1YmluQGh1YXdlaS5jb20+OyBaaGFuZ2hhaWxpYW5nIDx6aGFuZy56aGFu
+Z2hhaWxpYW5nQGh1YXdlaS5jb20+DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggUkZDIHY0IDA2LzE1
+XSB0YXJnZXQvcmlzY3Y6IFN1cHBvcnQgc3RhcnQga2VybmVsIGRpcmVjdGx5IGJ5DQo+IEtWTQ0K
+PiANCj4gT24gVGh1LCBEZWMgMywgMjAyMCBhdCA0OjU4IEFNIFlpZmVpIEppYW5nIDxqaWFuZ3lp
+ZmVpQGh1YXdlaS5jb20+IHdyb3RlOg0KPiA+DQo+ID4gR2V0IGtlcm5lbCBhbmQgZmR0IHN0YXJ0
+IGFkZHJlc3MgaW4gdmlydC5jLCBhbmQgcGFzcyB0aGVtIHRvIEtWTSB3aGVuDQo+ID4gY3B1IHJl
+c2V0LiBJbiBhZGRpdGlvbiwgYWRkIGt2bV9yaXNjdi5oIHRvIHBsYWNlIHJpc2N2IHNwZWNpZmlj
+DQo+ID4gaW50ZXJmYWNlLg0KPiANCj4gVGhpcyBkb2Vzbid0IHNlZW0gcmlnaHQuIFdoeSBkbyB3
+ZSBuZWVkIHRvIGRvIHRoaXM/IE90aGVyIGFyY2hpdGVjdHVyZXMgZG9uJ3QNCj4gc2VlbSB0byBk
+byB0aGlzLg0KPiANCj4gV3JpdGluZyB0byB0aGUgQ1BVIGZyb20gdGhlIGJvYXJkIGxpa2UgdGhp
+cyBsb29rcyBmaXNoeSBhbmQgcHJvYmFibHkgYnJlYWtzDQo+IHNvbWUgUU9NIHJ1bGVzLg0KPiAN
+Cj4gQWxpc3RhaXINCj4gDQoNClNvcnJ5IGZvciB0aGUgZGVsYXllZCByZXBseS4NCg0KV2UgbmVl
+ZCB0byBzZXQgdGhlIHN0YXJ0aW5nIGFkZHJlc3Mgb2YgdGhlIGtlcm5lbCBhbmQgZmR0IHRvIHZj
+cHUsIHdoaWNoIGlzIGltcGxlbWVudGVkDQpieSBmaXJtd2FyZSBib290bG9hZGVyIHVuZGVyIG90
+aGVyIGFyY2hpdGVjdHVyZXMgYW5kIFJJU0MtViBlbXVsYXRvcnMuIEhvd2V2ZXIsIHRoZQ0KUklT
+Qy1WIHZpcnR1YWwgbWFjaGluZSBkb2VzIG5vdCBoYXZlIGJvb3Rsb2FkZXIsIHNvIHdlIGJvb3Qg
+dGhlIGtlcm5lbCBkaXJlY3RseS4NCkluIHRoZSBmdXR1cmUsIHdlIHdpbGwgc3VwcG9ydCBmaXJt
+d2FyZSBsb2FkaW5nLg0KDQpCZWZvcmUgc3VwcG9ydGluZyB0aGUgZmlybXdhcmUgYm9vdGxvYWRl
+ciwgd2UgY2FuIGFkZCBhIHB1YmxpYyBpbnRlcmZhY2UgaW5zdGVhZCBvZg0KbW9kaWZ5aW5nIHRo
+ZSBDUFUgaW5zdGFuY2UgZGlyZWN0bHkgdG8gY29tcGx5IHdpdGggdGhlIFFPTSBydWxlcy4NCg0K
+WWlmZWkNCg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogWWlmZWkgSmlhbmcgPGppYW5neWlmZWlA
+aHVhd2VpLmNvbT4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBZaXBlbmcgWWluIDx5aW55aXBlbmcxQGh1
+YXdlaS5jb20+DQo+ID4gLS0tDQo+ID4gIGh3L3Jpc2N2L3ZpcnQuYyAgICAgICAgICB8ICA4ICsr
+KysrKysrDQo+ID4gIHRhcmdldC9yaXNjdi9jcHUuYyAgICAgICB8ICA0ICsrKysNCj4gPiAgdGFy
+Z2V0L3Jpc2N2L2NwdS5oICAgICAgIHwgIDMgKysrDQo+ID4gIHRhcmdldC9yaXNjdi9rdm0uYyAg
+ICAgICB8IDE1ICsrKysrKysrKysrKysrKw0KPiA+ICB0YXJnZXQvcmlzY3Yva3ZtX3Jpc2N2Lmgg
+fCAyNCArKysrKysrKysrKysrKysrKysrKysrKysNCj4gPiAgNSBmaWxlcyBjaGFuZ2VkLCA1NCBp
+bnNlcnRpb25zKCspDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NCB0YXJnZXQvcmlzY3Yva3ZtX3Jp
+c2N2LmgNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9ody9yaXNjdi92aXJ0LmMgYi9ody9yaXNjdi92
+aXJ0LmMgaW5kZXgNCj4gPiAyNWNlYTdhYTY3Li40N2I3MDE4MTkzIDEwMDY0NA0KPiA+IC0tLSBh
+L2h3L3Jpc2N2L3ZpcnQuYw0KPiA+ICsrKyBiL2h3L3Jpc2N2L3ZpcnQuYw0KPiA+IEBAIC00Miw2
+ICs0Miw3IEBADQo+ID4gICNpbmNsdWRlICJzeXNlbXUvc3lzZW11LmgiDQo+ID4gICNpbmNsdWRl
+ICJody9wY2kvcGNpLmgiDQo+ID4gICNpbmNsdWRlICJody9wY2ktaG9zdC9ncGV4LmgiDQo+ID4g
+KyNpbmNsdWRlICJzeXNlbXUva3ZtLmgiDQo+ID4NCj4gPiAgI2lmIGRlZmluZWQoVEFSR0VUX1JJ
+U0NWMzIpDQo+ID4gICMgZGVmaW5lIEJJT1NfRklMRU5BTUUgIm9wZW5zYmktcmlzY3YzMi1nZW5l
+cmljLWZ3X2R5bmFtaWMuYmluIg0KPiA+IEBAIC01MTEsNiArNTEyLDcgQEAgc3RhdGljIHZvaWQg
+dmlydF9tYWNoaW5lX2luaXQoTWFjaGluZVN0YXRlDQo+ICptYWNoaW5lKQ0KPiA+ICAgICAgdWlu
+dDY0X3Qga2VybmVsX2VudHJ5Ow0KPiA+ICAgICAgRGV2aWNlU3RhdGUgKm1taW9fcGxpYywgKnZp
+cnRpb19wbGljLCAqcGNpZV9wbGljOw0KPiA+ICAgICAgaW50IGksIGosIGJhc2VfaGFydGlkLCBo
+YXJ0X2NvdW50Ow0KPiA+ICsgICAgQ1BVU3RhdGUgKmNzOw0KPiA+DQo+ID4gICAgICAvKiBDaGVj
+ayBzb2NrZXQgY291bnQgbGltaXQgKi8NCj4gPiAgICAgIGlmIChWSVJUX1NPQ0tFVFNfTUFYIDwg
+cmlzY3Zfc29ja2V0X2NvdW50KG1hY2hpbmUpKSB7IEBAIC02NjAsNg0KPiA+ICs2NjIsMTIgQEAg
+c3RhdGljIHZvaWQgdmlydF9tYWNoaW5lX2luaXQoTWFjaGluZVN0YXRlICptYWNoaW5lKQ0KPiA+
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2aXJ0X21lbW1hcFtWSVJUX01ST01dLnNp
+emUsDQo+IGtlcm5lbF9lbnRyeSwNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ZmR0X2xvYWRfYWRkciwgcy0+ZmR0KTsNCj4gPg0KPiA+ICsgICAgZm9yIChjcyA9IGZpcnN0X2Nw
+dTsgY3M7IGNzID0gQ1BVX05FWFQoY3MpKSB7DQo+ID4gKyAgICAgICAgUklTQ1ZDUFUgKnJpc2N2
+X2NwdSA9IFJJU0NWX0NQVShjcyk7DQo+ID4gKyAgICAgICAgcmlzY3ZfY3B1LT5lbnYua2VybmVs
+X2FkZHIgPSBrZXJuZWxfZW50cnk7DQo+ID4gKyAgICAgICAgcmlzY3ZfY3B1LT5lbnYuZmR0X2Fk
+ZHIgPSBmZHRfbG9hZF9hZGRyOw0KPiA+ICsgICAgfQ0KPiA+ICsNCj4gPiAgICAgIC8qIFNpRml2
+ZSBUZXN0IE1NSU8gZGV2aWNlICovDQo+ID4gICAgICBzaWZpdmVfdGVzdF9jcmVhdGUobWVtbWFw
+W1ZJUlRfVEVTVF0uYmFzZSk7DQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L2Nw
+dS5jIGIvdGFyZ2V0L3Jpc2N2L2NwdS5jIGluZGV4DQo+ID4gNmEwMjY0ZmM2Yi4uZmFlZTk4YTU4
+YyAxMDA2NDQNCj4gPiAtLS0gYS90YXJnZXQvcmlzY3YvY3B1LmMNCj4gPiArKysgYi90YXJnZXQv
+cmlzY3YvY3B1LmMNCj4gPiBAQCAtMjksNiArMjksNyBAQA0KPiA+ICAjaW5jbHVkZSAiaHcvcWRl
+di1wcm9wZXJ0aWVzLmgiDQo+ID4gICNpbmNsdWRlICJtaWdyYXRpb24vdm1zdGF0ZS5oIg0KPiA+
+ICAjaW5jbHVkZSAiZnB1L3NvZnRmbG9hdC1oZWxwZXJzLmgiDQo+ID4gKyNpbmNsdWRlICJrdm1f
+cmlzY3YuaCINCj4gPg0KPiA+ICAvKiBSSVNDLVYgQ1BVIGRlZmluaXRpb25zICovDQo+ID4NCj4g
+PiBAQCAtMzMwLDYgKzMzMSw5IEBAIHN0YXRpYyB2b2lkIHJpc2N2X2NwdV9yZXNldChEZXZpY2VT
+dGF0ZSAqZGV2KQ0KPiA+ICAgICAgY3MtPmV4Y2VwdGlvbl9pbmRleCA9IEVYQ1BfTk9ORTsNCj4g
+PiAgICAgIGVudi0+bG9hZF9yZXMgPSAtMTsNCj4gPiAgICAgIHNldF9kZWZhdWx0X25hbl9tb2Rl
+KDEsICZlbnYtPmZwX3N0YXR1cyk7DQo+ID4gKyNpZmRlZiBDT05GSUdfS1ZNDQo+ID4gKyAgICBr
+dm1fcmlzY3ZfcmVzZXRfdmNwdShjcHUpOw0KPiA+ICsjZW5kaWYNCj4gPiAgfQ0KPiA+DQo+ID4g
+IHN0YXRpYyB2b2lkIHJpc2N2X2NwdV9kaXNhc19zZXRfaW5mbyhDUFVTdGF0ZSAqcywgZGlzYXNz
+ZW1ibGVfaW5mbw0KPiA+ICppbmZvKSBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L2NwdS5oIGIv
+dGFyZ2V0L3Jpc2N2L2NwdS5oIGluZGV4DQo+ID4gYzBhMzI2Yzg0My4uYWQxYzkwZjc5OCAxMDA2
+NDQNCj4gPiAtLS0gYS90YXJnZXQvcmlzY3YvY3B1LmgNCj4gPiArKysgYi90YXJnZXQvcmlzY3Yv
+Y3B1LmgNCj4gPiBAQCAtMjMzLDYgKzIzMyw5IEBAIHN0cnVjdCBDUFVSSVNDVlN0YXRlIHsNCj4g
+Pg0KPiA+ICAgICAgLyogRmllbGRzIGZyb20gaGVyZSBvbiBhcmUgcHJlc2VydmVkIGFjcm9zcyBD
+UFUgcmVzZXQuICovDQo+ID4gICAgICBRRU1VVGltZXIgKnRpbWVyOyAvKiBJbnRlcm5hbCB0aW1l
+ciAqLw0KPiA+ICsNCj4gPiArICAgIGh3YWRkciBrZXJuZWxfYWRkcjsNCj4gPiArICAgIGh3YWRk
+ciBmZHRfYWRkcjsNCj4gPiAgfTsNCj4gPg0KPiA+ICBPQkpFQ1RfREVDTEFSRV9UWVBFKFJJU0NW
+Q1BVLCBSSVNDVkNQVUNsYXNzLCBkaWZmIC0tZ2l0DQo+ID4gYS90YXJnZXQvcmlzY3Yva3ZtLmMg
+Yi90YXJnZXQvcmlzY3Yva3ZtLmMgaW5kZXggOGIyMDZjZTk5Yy4uNjI1MGNhMGM3ZA0KPiA+IDEw
+MDY0NA0KPiA+IC0tLSBhL3RhcmdldC9yaXNjdi9rdm0uYw0KPiA+ICsrKyBiL3RhcmdldC9yaXNj
+di9rdm0uYw0KPiA+IEBAIC0zNyw2ICszNyw3IEBADQo+ID4gICNpbmNsdWRlICJody9pcnEuaCIN
+Cj4gPiAgI2luY2x1ZGUgInFlbXUvbG9nLmgiDQo+ID4gICNpbmNsdWRlICJody9sb2FkZXIuaCIN
+Cj4gPiArI2luY2x1ZGUgImt2bV9yaXNjdi5oIg0KPiA+DQo+ID4gIHN0YXRpYyBfX3U2NCBrdm1f
+cmlzY3ZfcmVnX2lkKF9fdTY0IHR5cGUsIF9fdTY0IGlkeCkgIHsgQEAgLTQzOSwzDQo+ID4gKzQ0
+MCwxNyBAQCBpbnQga3ZtX2FyY2hfaGFuZGxlX2V4aXQoQ1BVU3RhdGUgKmNzLCBzdHJ1Y3Qga3Zt
+X3J1biAqcnVuKQ0KPiA+IHsNCj4gPiAgICAgIHJldHVybiAwOw0KPiA+ICB9DQo+ID4gKw0KPiA+
+ICt2b2lkIGt2bV9yaXNjdl9yZXNldF92Y3B1KFJJU0NWQ1BVICpjcHUpIHsNCj4gPiArICAgIENQ
+VVJJU0NWU3RhdGUgKmVudiA9ICZjcHUtPmVudjsNCj4gPiArDQo+ID4gKyAgICBpZiAoIWt2bV9l
+bmFibGVkKCkpIHsNCj4gPiArICAgICAgICByZXR1cm47DQo+ID4gKyAgICB9DQo+ID4gKyAgICBl
+bnYtPnBjID0gY3B1LT5lbnYua2VybmVsX2FkZHI7DQo+ID4gKyAgICBlbnYtPmdwclsxMF0gPSBr
+dm1fYXJjaF92Y3B1X2lkKENQVShjcHUpKTsgLyogYTAgKi8NCj4gPiArICAgIGVudi0+Z3ByWzEx
+XSA9IGNwdS0+ZW52LmZkdF9hZGRyOyAgICAgICAgICAvKiBhMSAqLw0KPiA+ICsgICAgZW52LT5z
+YXRwID0gMDsNCj4gPiArfQ0KPiA+ICsNCj4gPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L2t2
+bV9yaXNjdi5oIGIvdGFyZ2V0L3Jpc2N2L2t2bV9yaXNjdi5oIG5ldw0KPiA+IGZpbGUgbW9kZSAx
+MDA2NDQgaW5kZXggMDAwMDAwMDAwMC4uZjM4YzgyYmY1OQ0KPiA+IC0tLSAvZGV2L251bGwNCj4g
+PiArKysgYi90YXJnZXQvcmlzY3Yva3ZtX3Jpc2N2LmgNCj4gPiBAQCAtMCwwICsxLDI0IEBADQo+
+ID4gKy8qDQo+ID4gKyAqIFFFTVUgS1ZNIHN1cHBvcnQgLS0gUklTQy1WIHNwZWNpZmljIGZ1bmN0
+aW9ucy4NCj4gPiArICoNCj4gPiArICogQ29weXJpZ2h0IChjKSAyMDIwIEh1YXdlaSBUZWNobm9s
+b2dpZXMgQ28uLCBMdGQNCj4gPiArICoNCj4gPiArICogVGhpcyBwcm9ncmFtIGlzIGZyZWUgc29m
+dHdhcmU7IHlvdSBjYW4gcmVkaXN0cmlidXRlIGl0IGFuZC9vcg0KPiA+ICttb2RpZnkgaXQNCj4g
+PiArICogdW5kZXIgdGhlIHRlcm1zIGFuZCBjb25kaXRpb25zIG9mIHRoZSBHTlUgR2VuZXJhbCBQ
+dWJsaWMgTGljZW5zZSwNCj4gPiArICogdmVyc2lvbiAyIG9yIGxhdGVyLCBhcyBwdWJsaXNoZWQg
+YnkgdGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbi4NCj4gPiArICoNCj4gPiArICogVGhpcyBw
+cm9ncmFtIGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIGl0IHdpbGwgYmUgdXNlZnVsLCBidXQN
+Cj4gPiArV0lUSE9VVA0KPiA+ICsgKiBBTlkgV0FSUkFOVFk7IHdpdGhvdXQgZXZlbiB0aGUgaW1w
+bGllZCB3YXJyYW50eSBvZg0KPiBNRVJDSEFOVEFCSUxJVFkNCj4gPiArb3INCj4gPiArICogRklU
+TkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuICBTZWUgdGhlIEdOVSBHZW5lcmFsIFB1Ymxp
+Yw0KPiA+ICtMaWNlbnNlIGZvcg0KPiA+ICsgKiBtb3JlIGRldGFpbHMuDQo+ID4gKyAqDQo+ID4g
+KyAqIFlvdSBzaG91bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkgb2YgdGhlIEdOVSBHZW5lcmFsIFB1
+YmxpYyBMaWNlbnNlDQo+ID4gK2Fsb25nIHdpdGgNCj4gPiArICogdGhpcyBwcm9ncmFtLiAgSWYg
+bm90LCBzZWUgPGh0dHA6Ly93d3cuZ251Lm9yZy9saWNlbnNlcy8+Lg0KPiA+ICsgKi8NCj4gPiAr
+DQo+ID4gKyNpZm5kZWYgUUVNVV9LVk1fUklTQ1ZfSA0KPiA+ICsjZGVmaW5lIFFFTVVfS1ZNX1JJ
+U0NWX0gNCj4gPiArDQo+ID4gK3ZvaWQga3ZtX3Jpc2N2X3Jlc2V0X3ZjcHUoUklTQ1ZDUFUgKmNw
+dSk7DQo+ID4gKw0KPiA+ICsjZW5kaWYNCj4gPiAtLQ0KPiA+IDIuMTkuMQ0KPiA+DQo+ID4NCg==
 
