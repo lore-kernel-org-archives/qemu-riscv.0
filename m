@@ -1,65 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kpDvV-0003JJ-E6
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Dec 2020 12:15:53 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52472)
+	id 1kpHpC-0003fN-2t
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Dec 2020 16:25:38 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57562)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kpDvT-0003H6-H5; Tue, 15 Dec 2020 12:15:51 -0500
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:46520)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kpHpA-0003aX-Hr
+ for qemu-riscv@nongnu.org; Tue, 15 Dec 2020 16:25:36 -0500
+Received: from mail-ot1-x344.google.com ([2607:f8b0:4864:20::344]:38496)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kpDvQ-00044j-OR; Tue, 15 Dec 2020 12:15:51 -0500
-Received: by mail-il1-x141.google.com with SMTP id 75so7883806ilv.13;
- Tue, 15 Dec 2020 09:15:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=MaMh6FeKWEDY+vcYgvizLN31RsfQSmVod5BOjrBrmW8=;
- b=Mm+kQI1ktlBACv71FGcsY1MPA9lYcZiEUUiG+kn9BKDMpp38SEDn6dLzvIGsvD9w3Q
- aikixXh/GovjEtwypBcuzOoPPh+HoY7iTzhcuWs9xl25eNF2A3iXEZ40pdlYQ/kWD2J5
- N428MpV5pFbExOKoX6pvfzKrxpimYdQ3YCnhlJs9SnHr3OSrXHbYWnppu8GkasrK95/Q
- CA8vYsRzGLTGUmYBHuAcs4dVWnpf6Z9GVYuPVRT6GB/jo9jlsX1s0HKAh9+5an3yXcKK
- jeTiqhFEOq/VxyURXJYaXWlkJeTArODG4aiKk1O/hkxdOsJ0XZy45FCyubnpc4VYdRp3
- qQQw==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kpHp7-0004ZQ-Bh
+ for qemu-riscv@nongnu.org; Tue, 15 Dec 2020 16:25:35 -0500
+Received: by mail-ot1-x344.google.com with SMTP id j20so16390317otq.5
+ for <qemu-riscv@nongnu.org>; Tue, 15 Dec 2020 13:25:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=K7Hf7CHiG+ksmRY7TLY84Bzu+9ngTwNPS8p7emRz68Q=;
+ b=yZRIZculAj2FRRGCOMXSqgI2inVgDIKrL4TDMXaJM4CnbgV1plWZBin6Oi3yWYnguj
+ tn/oYQ9rKvu1ZmgYGo5A0tW1l/cl3L6PJuxnblezG80+umyClARwhMxpQu2u39BrdxRp
+ cW9gpa3J55GeQFwdxCs3IqB60aZQbLFoVdj1CmenKVCd7kSdcDCGCM8DDlTnqLdHlZZJ
+ doSI7y4wkl1KRE1wCvRO5oP1izJ6J9pHHd66OGiTWl2I5vvhx9XnDOQrxIapZpR/Y+G4
+ ftL8jD4EVBR3aO9mSrm77G7FNM3wSgk/+kiodINjM17dUXwjkQjo4dBxSLS/cF5oZMIK
+ LKCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=MaMh6FeKWEDY+vcYgvizLN31RsfQSmVod5BOjrBrmW8=;
- b=dYoV+hs+GF7ccF+7OIpEoMuSD7RMEZkOs9WqzdIp0xg8yBZN4bz8g7lGBqKHtZ98SF
- h0TGrJY/DvN2LXYduodLdh8msjMKaYIfqobwR/w7+cQTQp1dyslzVMEJc4VPp0dMkxbY
- lfzSJL26ZMclJCNwS+0NxesLjpdJuHeUH+bDgT8UoNr0sg6z47ldm113yR6v1GxjsKi0
- h0aZRFssQqzwAeVsaSfZmYaHUFqSdVnMz+JuCQeM1Yuzz6PVDEDav0gSXMLkCLNua9qt
- OuHjkipFzrWUvMArVPXHO0cGW6lUrXaQkNFpDGPOSCbNef5bRjub95wXAb7EZZOhqD9h
- e/9Q==
-X-Gm-Message-State: AOAM531iwcxGVQ+AaL0Oz9JwzOC0pUC+aMtenntSoMytpMJCFaNO2HCd
- OL1U+JBT8AprvIF0awXYI/4B4dezZHtDYwE8JIA=
-X-Google-Smtp-Source: ABdhPJypJC7VhYjU98GibTk5iOiLPnWcmIGjfLNRnQlWoQNHH3zMCDnVJEbFe5TdRde4ViO8hKU1jqcAZX+3H7cUIcU=
-X-Received: by 2002:a92:dc0f:: with SMTP id t15mr42238258iln.267.1608052547481; 
- Tue, 15 Dec 2020 09:15:47 -0800 (PST)
-MIME-Version: 1.0
-References: <cover.1607967113.git.alistair.francis@wdc.com>
- <2cffe9cb8055c9451872b3a08192e19fec12fb1a.1607967113.git.alistair.francis@wdc.com>
- <CAEUhbmUhKuhEPU=RyRN3CVYDh=oGoQF1e-tSX=jODw4c2Ub1kA@mail.gmail.com>
- <97fe497a-06c0-43e4-3144-eee0c439686a@linaro.org>
-In-Reply-To: <97fe497a-06c0-43e4-3144-eee0c439686a@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 15 Dec 2020 09:15:20 -0800
-Message-ID: <CAKmqyKNKA5jmAcHiJAvBXBFnnk+R9GLxOOLQTxam2KB4hSXmgA@mail.gmail.com>
-Subject: Re: [PATCH v3 09/15] target/riscv: fpu_helper: Match function defs in
- HELPER macros
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=K7Hf7CHiG+ksmRY7TLY84Bzu+9ngTwNPS8p7emRz68Q=;
+ b=YDZEsTiHuZxQ8AEujwosRxSDqjesJE4xdKEZEyM7Jmzb4JMDlpVT0pptc3C6max7P/
+ HhYl+VNqLgvd3sVk/kyM7T48aZwCh+o9QpFRZxDZsGsD7+cAZPuENtDclkaAttwMZ9EI
+ w4c4wQU9wg2iTPgkvpufYNl8rlATAwUyywkSTiUTIcARQ/7CrF5cut9omiAqBAXU2buD
+ +8ootKF7rOOriaagdIQJ5TOdffrsZkraceEUN52tHMOv5nPLXanCBPs+f6nxURgn5Oug
+ qkG6SgFEAOA8ycUfXxxkxcXgOtevMSrv2/FhyS5mJiohcrfOVaOiJuhnWmpKO8hGaikW
+ dV/g==
+X-Gm-Message-State: AOAM530fozfIeUd3dD61gQxlanYgfCsUE6SGcIJm5OGtamuCYlZhf/DD
+ Es2pMSWTrtNiG4GOe0Pkl6KjcQ==
+X-Google-Smtp-Source: ABdhPJzUU76RaBQ1c/UR+Z1Wn+90ylcKQgc4K4FJdElpdbzPOZoElqyJgIksxILoNCcZHsxg4FPWRA==
+X-Received: by 2002:a9d:e91:: with SMTP id 17mr24276665otj.237.1608067532042; 
+ Tue, 15 Dec 2020 13:25:32 -0800 (PST)
+Received: from [10.10.121.52] (fixed-187-189-51-144.totalplay.net.
+ [187.189.51.144])
+ by smtp.gmail.com with ESMTPSA id h93sm19681otb.29.2020.12.15.13.25.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 15 Dec 2020 13:25:31 -0800 (PST)
+Subject: Re: [PATCH v3 01/15] hw/riscv: Expand the is 32-bit check to support
+ more CPUs
+To: Alistair Francis <alistair23@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::141;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x141.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+References: <cover.1607967113.git.alistair.francis@wdc.com>
+ <3b6338af937d0d3aa0858ba1a4ad0fd9e759be66.1607967113.git.alistair.francis@wdc.com>
+ <CAEUhbmUHE3vSvsz3JCSmgApCpJfs598FJkXsZBYVuP09u8x9tA@mail.gmail.com>
+ <CAKmqyKPoe-DLkLik60xW3D3DyuxPetQ=e8ecLUr5AEAV8WBENw@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <759b5711-6b07-819f-4d11-0acf7b6ceed5@linaro.org>
+Date: Tue, 15 Dec 2020 15:25:29 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <CAKmqyKPoe-DLkLik60xW3D3DyuxPetQ=e8ecLUr5AEAV8WBENw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::344;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x344.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -74,31 +87,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2020 17:15:51 -0000
+X-List-Received-Date: Tue, 15 Dec 2020 21:25:36 -0000
 
-On Tue, Dec 15, 2020 at 7:13 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 12/15/20 3:38 AM, Bin Meng wrote:
-> >>  #if defined(TARGET_RISCV64)
-> >> -uint64_t helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
-> >> +target_ulong helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
-> >>  {
-> >>      float32 frs1 = check_nanbox_s(rs1);
-> >>      return float32_to_int64(frs1, &env->fp_status);
-> >
-> > float32_to_int64() returns int64_t, so there is a truncation if
-> > changing it to target_ulong for 32-bit.
->
-> There's not, because this function isn't defined for 32-bit (see first quoted
-> line).  But this point of confusion is exactly what I pointed out vs the
-> previous revision.
+On 12/15/20 10:44 AM, Alistair Francis wrote:
+> On Tue, Dec 15, 2020 at 1:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>>
+>> On Tue, Dec 15, 2020 at 4:34 AM Alistair Francis
+>> <alistair.francis@wdc.com> wrote:
+>>>
+>>> Currently the riscv_is_32_bit() function only supports the generic rv32
+>>> CPUs. Extend the function to support the SiFive and LowRISC CPUs as
+>>> well.
+>>>
+>>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>>> ---
+>>>  hw/riscv/boot.c | 12 +++++++++++-
+>>>  1 file changed, 11 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+>>> index d62f3dc758..3c70ac75d7 100644
+>>> --- a/hw/riscv/boot.c
+>>> +++ b/hw/riscv/boot.c
+>>> @@ -41,7 +41,17 @@
+>>>
+>>>  bool riscv_is_32_bit(MachineState *machine)
+>>>  {
+>>> -    if (!strncmp(machine->cpu_type, "rv32", 4)) {
+>>> +    /*
+>>> +     * To determine if the CPU is 32-bit we need to check a few different CPUs.
+>>> +     *
+>>> +     * If the CPU starts with rv32
+>>> +     * If the CPU is a sifive 3 seriries CPU (E31, U34)
+>>> +     * If it's the Ibex CPU
+>>> +     */
+>>> +    if (!strncmp(machine->cpu_type, "rv32", 4) ||
+>>> +        (!strncmp(machine->cpu_type, "sifive", 6) &&
+>>> +            machine->cpu_type[8] == '3') ||
+>>> +        !strncmp(machine->cpu_type, "lowrisc-ibex", 12)) {
+>>
+>> This does not look like a scalable way. With more and more CPU added
+>> in the future, this may end up with a huge list of strncmps..
+> 
+> Any better ideas?
 
-Ok, I have swapped this to changing helper.h now.
+It doesn't appear as if you need to query this before you've instantiated the
+cpu.  The first dynamic use that I see is create_fdt, which happens after that
+point.
 
-Alistair
+Verified like so:
 
->
->
-> r~
+$ gdb --args ./qemu-system-riscv64 -M virt
+(gdb) b rv64_base_cpu_init
+Breakpoint 1 at 0x548390: file ../qemu/target/riscv/cpu.c, line 156.
+(gdb) b riscv_is_32_bit
+Breakpoint 2 at 0x490dd0: file ../qemu/hw/riscv/boot.c, line 37.
+(gdb) run
+...
+Thread 1 "qemu-system-ris" hit Breakpoint 1, rv64_base_cpu_init
+
+From the machine, you can find the boot cpu, and use the riscv_cpu_is_32bit
+helper on that.
+
+Also, just noticed that the two functions spell "32bit" differently.  :-)
+
+
+r~
 
