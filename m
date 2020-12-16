@@ -1,77 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kpYg0-0005pK-Td
-	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 10:25:18 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40868)
+	id 1kpZNn-0000WO-Ct
+	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 11:10:31 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55816)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpYfy-0005o5-MS
- for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 10:25:14 -0500
-Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234]:33653)
+ id 1kpZNm-0000U5-8o
+ for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 11:10:30 -0500
+Received: from mail-qt1-x82c.google.com ([2607:f8b0:4864:20::82c]:43663)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpYfu-0006gs-AA
- for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 10:25:14 -0500
-Received: by mail-oi1-x234.google.com with SMTP id d203so6700089oia.0
- for <qemu-riscv@nongnu.org>; Wed, 16 Dec 2020 07:25:08 -0800 (PST)
+ id 1kpZNh-0004lV-Tq
+ for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 11:10:29 -0500
+Received: by mail-qt1-x82c.google.com with SMTP id 2so7700669qtt.10
+ for <qemu-riscv@nongnu.org>; Wed, 16 Dec 2020 08:10:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=Kzs6N7vPIGjHsPFBWcJpGYTind6XbEBvmk85TtJ8few=;
- b=mPvhtLnilo+vP9OfVkyypVXuaf8iTm1OCCVZQjASJQIco0CVDdFqnldeOUGlcTclrV
- OMis2bAWhQc++Ojufwjylp3YKdgXP2NogaBb8HR/D+Ru2CjLIRS9MozWMeqWycYxfwXH
- JtWSE3aeZbzpI2HvNLzk4wd0nGJGFRkyZvEQt9058BpvVQtL9jfj5ZMguyMkaDAltHHC
- k8kDtiYVMrIjaueOPnV0Prh+Jtd7vOg5Zp6fnJ7xhxCQXeYaICYujJqteP/vBeCqd84P
- FMpbchaJ7ybgne/REZW9tH194kjuDwbvPJoXNYFdIDY269bHQL5trzSdxqSj9t2zQRW0
- 5aPA==
+ bh=R6n474+xsrljIhxiLI+jMB346FKry3m8jrkOmpjCcyA=;
+ b=wdiGdmQYlpBktrLHFktfhEIxY2xi/OOasz0PbRDZv5mXLqpy+BfMolgEH0Ca/w6+L3
+ kLuAbFpP3c7muDIvdgkMjy6ABVOftPBfeag5weL6XEo9k50+Dp3PxdXkXXdAUhS0EjpA
+ BFn5nQImIEDxtYxt26SlwmCz+gMy+UtnyWJVRbCCBoGGqtHadslYHEOfulP3IBn8mLiM
+ V/5ct4xkiXoMeJTmP1f0YEHdBJmdduXG4zN/ErII6trXeXht/jCwgCMcEr5UeHDWAPM8
+ g3FRFWzn77L4GkvID2thr71JrXq82YnS8ZzedqKzYTqJ5BkcDgNqf9e+s40Btd8AEmDB
+ aEFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=Kzs6N7vPIGjHsPFBWcJpGYTind6XbEBvmk85TtJ8few=;
- b=T4psOhHnltP1lsSYeLKhrplvhaW9g2Yj91fg4rJRBwTsihiXuB3i+q0HqGHTezsHk1
- 1kBvwJ64OVl3NNBcH2q2Hjm8w5nUIxeVPfxuy8QVj/0iIl34aqxMyC1hCSoyUR4nisBF
- jMLoIa4fVclKHhF7pfvXWFLl/QG68kQszrLc3Bh5XP+ToQm8RIyVbUdK7LfB20WQaqWN
- kkUryuq52XNF0aNv8GHGYfPupPvKoAXvvZQ2s8jYSN60uT+55QEK5vkiLwciq1RFfUU0
- Gacaf68IvuP1Rt0muR0WT7cnSDwzjm50QbNXwLmHGa3vuI1wXN4Ow4UrZruwE/63Yy1d
- M49g==
-X-Gm-Message-State: AOAM532to6/Zf4wRl0nEVOGXOZYIcrSjrRv60ost4RscaRklG2dAPjc9
- WlEE5XxC8rzyNt8eeICY78yp6g==
-X-Google-Smtp-Source: ABdhPJwZeoPo9x8omx+s81/54cyOuzAHHrczEqi/4LBb31/NEc+YbqFYrgBCMYpFAXLQ2fhSxkv3Ug==
-X-Received: by 2002:aca:b506:: with SMTP id e6mr2278535oif.119.1608132308042; 
- Wed, 16 Dec 2020 07:25:08 -0800 (PST)
-Received: from [10.10.121.52] (fixed-187-189-51-144.totalplay.net.
- [187.189.51.144])
- by smtp.gmail.com with ESMTPSA id 30sm490279oth.7.2020.12.16.07.25.06
+ bh=R6n474+xsrljIhxiLI+jMB346FKry3m8jrkOmpjCcyA=;
+ b=JCUnYJ9AuCNOlClDG3JeIJBAW7ExTNXZBnX6+poAdzQD5dmtvYqsoWNzPF2cdnGFW9
+ v/arBBCbccy1egrb4mzWAlrj0hqoFW0OhQtuAgdjxcjbdiEviWOcTYhzlbBnnk1KDObl
+ G16zNhI4cJka11ZCFtybM/K2IKOhW0upR2iGbrtwZsbxO+JEgTUPWp9B6E+NM+xabBBV
+ NdAxRtFp84a0g6+QWYDFqMAiZJoR21xhlY6JkN0wEk3LiXjKF3fz4+IiKWBb3JS2+8v7
+ SgK9lP2jUNKXunl1L5555jmKhaf2+4+bGOAS6SWzAcXI6hrhH+vdYrG7rLYqVzCPMPna
+ azGg==
+X-Gm-Message-State: AOAM531O0ZOTcWXYTDD2h79Qq5GWNmrfhKTYFuLQyjFYweo4x60YANTH
+ b26sOplObs3Dfoilntzb6/yYSQ==
+X-Google-Smtp-Source: ABdhPJwTRbi6t9hJLMYREoj3AamZTMU2ii39GcGnLO0JpQTkOkY+ECsjn7yaZCTqlVIBkB7LG5NL8Q==
+X-Received: by 2002:ac8:3987:: with SMTP id v7mr36860756qte.144.1608135024447; 
+ Wed, 16 Dec 2020 08:10:24 -0800 (PST)
+Received: from [192.168.71.34] ([172.58.27.195])
+ by smtp.gmail.com with ESMTPSA id g26sm1334760qkl.60.2020.12.16.08.10.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Dec 2020 07:25:07 -0800 (PST)
-Subject: Re: [RFC v2 04/15] target/riscv: rvb: logic-with-negate
-To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Wed, 16 Dec 2020 08:10:23 -0800 (PST)
+Subject: Re: [PATCH] tcg,riscv: Fix illegal shift instructions
+To: Zihao Yu <yuzihao@ict.ac.cn>, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Kito Cheng <kito.cheng@sifive.com>
-References: <20201216020150.3157-1-frank.chang@sifive.com>
- <20201216020150.3157-5-frank.chang@sifive.com>
+ "open list:All patches CC here" <qemu-devel@nongnu.org>
+References: <20201216081206.9628-1-yuzihao@ict.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <db13a75d-1632-1683-6f3a-af1935fc8b7d@linaro.org>
-Date: Wed, 16 Dec 2020 09:25:04 -0600
+Message-ID: <ab311e75-0689-03aa-adb0-6fe826473511@linaro.org>
+Date: Wed, 16 Dec 2020 10:10:16 -0600
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20201216020150.3157-5-frank.chang@sifive.com>
+In-Reply-To: <20201216081206.9628-1-yuzihao@ict.ac.cn>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::234;
- envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x234.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::82c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-qt1-x82c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,31 +81,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2020 15:25:15 -0000
+X-List-Received-Date: Wed, 16 Dec 2020 16:10:30 -0000
 
-On 12/15/20 8:01 PM, frank.chang@sifive.com wrote:
-> +static void gen_andn(TCGv ret, TCGv arg1, TCGv arg2)
-> +{
-> +    TCGv t = tcg_temp_new();
-> +    tcg_gen_andc_tl(ret, arg1, arg2);
-> +    tcg_temp_free(t);
-> +}
-> +
-> +static void gen_orn(TCGv ret, TCGv arg1, TCGv arg2)
-> +{
-> +    TCGv t = tcg_temp_new();
-> +    tcg_gen_orc_tl(ret, arg1, arg2);
-> +    tcg_temp_free(t);
-> +}
-> +
-> +static void gen_xnor(TCGv ret, TCGv arg1, TCGv arg2)
-> +{
-> +    TCGv t = tcg_temp_new();
-> +    tcg_gen_eqv_tl(ret, arg1, arg2);
-> +    tcg_temp_free(t);
-> +}
+On 12/16/20 2:12 AM, Zihao Yu wrote:
+> * This bug can be reproduced by running the following guest instructions
+>   on a RISC-V host.
+> 
+>   (1) xor %ecx,%ecx
+>   (2) sar %cl,%eax
+>   (3) cmovne %edi,%eax
+> 
+>   After optimization, the tcg instructions of (2) are
+> 
+>   movi_i32 tmp3,$0xffffffffffffffff  pref=all
+>   sar_i32 tmp3,eax,tmp3              dead: 2  pref=all
+>   mov_i32 cc_dst,eax                 sync: 0  dead: 1 pref=0xffc0300
+>   mov_i32 cc_src,tmp3                sync: 0  dead: 0 1  pref=all
+>   movi_i32 cc_op,$0x31               sync: 0  dead: 0  pref=all
+> 
+>   And the target assembly instructions of (2) are
+> 
+>   0x200808d618:  fffa5b9b          illegal
+>   0x200808d61c:  03442423          sw              s4,40(s0)
+>   0x200808d620:  03742623          sw              s7,44(s0)
+>   0x200808d624:  03100b93          addi            s7,zero,49
+>   0x200808d628:  03742a23          sw              s7,52(s0)
+> 
+> * Note that the `illegal` target instruction above should be
+>   `sraiw s7,s4,0x1f` (41fa5b9b).
 
-Drop these functions entirely, along with their unused temporaries.
+More precisely, the 'illegal' instruction should be *anything*, except for
+'illegal'.  The result of the out-of-range shift is undefined, but TCG requires
+that it not trap.  The undefined result should be unused.
+
+In this particular case this is so, because cc_op == 0x31 == CC_OP_CLR, which
+does not use either of cc_dst or cc_src.
+
+We have make the same patch for other hosts, e.g. 1fd959466574 for tcg/sparc/.
+
+I have queued the patch to tcg-next.
 
 
 r~
