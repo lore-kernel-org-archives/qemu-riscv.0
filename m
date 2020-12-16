@@ -1,78 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kpYWS-0000nH-Si
-	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 10:15:24 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37500)
+	id 1kpYcx-0003Bp-Uf
+	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 10:22:07 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39674)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpYWN-0000jC-7w
- for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 10:15:19 -0500
-Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231]:43154)
+ id 1kpYct-0003BM-B0
+ for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 10:22:03 -0500
+Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234]:46192)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpYWJ-0003Tx-BQ
- for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 10:15:18 -0500
-Received: by mail-oi1-x231.google.com with SMTP id q25so27823334oij.10
- for <qemu-riscv@nongnu.org>; Wed, 16 Dec 2020 07:15:14 -0800 (PST)
+ id 1kpYcq-0005gw-KI
+ for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 10:22:03 -0500
+Received: by mail-oi1-x234.google.com with SMTP id q205so15111724oig.13
+ for <qemu-riscv@nongnu.org>; Wed, 16 Dec 2020 07:21:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=QXN6MjN8Ea2iNpDuLmu/O57nxAWwa8JZF33A19pTEZQ=;
- b=N2NP7fe3W12zw5MSm/4M47qXaG4ChsJslBglVbVObvDEQrIajjb7oihQuxe1cgo8HM
- 4qErdxWAeUqTrHwcPrpCpBhyq/Nmu3UfceRCrM7d7VxyxveL8z34BO5ABuU3KSkmU7Gs
- 5J1Asp9VTjdJdDWhnGV+yL2olFhijOF/yKKZr/X9Uhgbl8cN4ezsbwRX+uGCbn2JQgWQ
- a84DjbemWgOzmm69B/uDmrtQ1wHf/ftFnQTOVGD/yL5VAnBR6nftn9hpW/aS/Tp6U3Nm
- EV1ilQBzKVw8/GNy9AhE3m+laWnYwLcy7o0fZ0MF4weq9K0R5PRAj6P6UfCKgaK+5Zso
- vMMQ==
+ bh=aXWm9veIz1PbuRQV/3MNpniXVJe0w/tw/oqyZnnLnFA=;
+ b=TfJ8kNFQrRHaPcZUPLoLypuA8V2cCmkqZCb1P11pwzAVCArQD4d9AURdIvArgVWh5d
+ IKn2AlLfrWrnJOGaQMOGXG/g+093hP8UOtvHCuxoD9rKjoTDMttrdtYYge6UPraj2Isk
+ /374ioSYYBrvLRfQ0sauLi/TiynGMZg4FPpwi1BIU6wh2dCMtfIo0a1B0cpX3JSmUMqT
+ 1XICkpMcWWP1mtaOyINnQ7WOnqR6WUQskXJ2356aD3Cw93pdu9K+22BxO9sVWpIfXZOB
+ t6o7ySf4/qeWH1oKn3lq/zQHxf7IixvNQPQltpH7lN1Ghy8xoub6Y6LGYnsmhkuSeHvo
+ 67KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=QXN6MjN8Ea2iNpDuLmu/O57nxAWwa8JZF33A19pTEZQ=;
- b=Hy43zGzo3xghBpgWo4vLtkBGTQOxwjw/cjyawrVodW4DGW2ADvPyilkG7DsutuYmhL
- eBPQjEeMhVsi9fWBXngt/4sz41bYK4mPGmARq9sQcnkCCYWRIT0Rdz2PQSR03p7S5Pzp
- gpHYqSo1WYqL5DBKpIQvcDaa2fnSCk4RkH/Edx755eG/Heo8kVgzkYZ6ttp3JLXCRmg9
- VFH9eT2rgFZ3kagRM6diy5/zY9WguvJlE0ZfizCCU4VVEpNE0lAVRwpVL+OERw0xe1yx
- 2BNMy17w7WbGc87KTa2Qaz/9WSAWwEcoI87c/ggFCMsLzJlY03sahDlX4XCbiQRov5TR
- j7Zw==
-X-Gm-Message-State: AOAM530nd3Fn/BcR7t4fgVBwYHY/QtkqBN7vAJfXsdilUTi0HPUB+1S9
- f1jbM8cdbHgpRNgnCC7cpI/AXw==
-X-Google-Smtp-Source: ABdhPJxztdjWvQcqH3qDDgsYDRb/ksyUwGGrou8BbUiYcma0FswXdGtNsC2gRZ0kPjBTRK2OpShqNw==
-X-Received: by 2002:aca:4b16:: with SMTP id y22mr2264426oia.148.1608131714038; 
- Wed, 16 Dec 2020 07:15:14 -0800 (PST)
+ bh=aXWm9veIz1PbuRQV/3MNpniXVJe0w/tw/oqyZnnLnFA=;
+ b=rIrYKnSRakE6Vb4fIwqiKrS8AEzy3ceS/394Ce6VUn6ejuhXW+2+PAyqoyPRApFb6O
+ 1IJd6H5e0vH+cHIhfALG4X8mMZCGk490yyJM8PZ7bnNyaIrLvnuNQIxchaqFSy99Tnwd
+ G098zcobhCRjcr6afG4BjyzSEttHOucqeY4OPKqDDKPW5Od8AkriSwS6McMWYnxVXqjB
+ NrR6nLq+Rh+Os9+PCWQIdszJgui36uVjLKtNsJm+lKjfw4UrhULzOZGL0ftQeOL5nywm
+ I3CPukxOMUCMBMUZmvcUeSF187P+8dy8c9SdPMC5cO1+Dna5re8cIYpTeFCwzsJaw5GY
+ qn7A==
+X-Gm-Message-State: AOAM533WlVub7fBGfmIHvPGDmYkJlEPxHv/D3DcdKpI6Tca4uGVKTyjo
+ RMeZgdzZ9q1MZmkNH2tiww9uSA==
+X-Google-Smtp-Source: ABdhPJyTFMq8aGEYpT6IZFIZW6f/p3VpCWs6zTk2B4x4GSt7rUf8pHBH84j0xSA2TH9IeeR20Efr6g==
+X-Received: by 2002:aca:f3d6:: with SMTP id r205mr2299754oih.152.1608132118541; 
+ Wed, 16 Dec 2020 07:21:58 -0800 (PST)
 Received: from [10.10.121.52] (fixed-187-189-51-144.totalplay.net.
  [187.189.51.144])
- by smtp.gmail.com with ESMTPSA id t24sm578851oou.4.2020.12.16.07.15.12
+ by smtp.gmail.com with ESMTPSA id q21sm508877oog.30.2020.12.16.07.21.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Dec 2020 07:15:13 -0800 (PST)
-Subject: Re: [RFC v2 01/15] target/riscv: reformat @sh format encoding for
- B-extension
+ Wed, 16 Dec 2020 07:21:57 -0800 (PST)
+Subject: Re: [RFC v2 02/15] target/riscv: rvb: count leading/trailing zeros
 To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Kito Cheng <kito.cheng@sifive.com>
 References: <20201216020150.3157-1-frank.chang@sifive.com>
- <20201216020150.3157-2-frank.chang@sifive.com>
+ <20201216020150.3157-3-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <e8de8cf1-b888-79e1-93ba-7c157b012930@linaro.org>
-Date: Wed, 16 Dec 2020 09:15:11 -0600
+Message-ID: <29339dfc-e9c4-20ee-8c26-63921083571b@linaro.org>
+Date: Wed, 16 Dec 2020 09:21:55 -0600
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20201216020150.3157-2-frank.chang@sifive.com>
+In-Reply-To: <20201216020150.3157-3-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::231;
- envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x231.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::234;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x234.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -85,7 +84,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2020 15:15:19 -0000
+X-List-Received-Date: Wed, 16 Dec 2020 15:22:03 -0000
 
 On 12/15/20 8:01 PM, frank.chang@sifive.com wrote:
 > From: Kito Cheng <kito.cheng@sifive.com>
@@ -93,10 +92,30 @@ On 12/15/20 8:01 PM, frank.chang@sifive.com wrote:
 > Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
 > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 > ---
->  target/riscv/insn32.decode | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
+>  target/riscv/insn32-64.decode           |  4 +++
+>  target/riscv/insn32.decode              |  7 +++-
+>  target/riscv/insn_trans/trans_rvb.c.inc | 47 +++++++++++++++++++++++++
+>  target/riscv/translate.c                | 42 ++++++++++++++++++++++
+>  4 files changed, 99 insertions(+), 1 deletion(-)
+>  create mode 100644 target/riscv/insn_trans/trans_rvb.c.inc
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+> +static void gen_ctzw(TCGv ret, TCGv arg1)
+> +{
+> +    tcg_gen_ori_i64(ret, arg1, MAKE_64BIT_MASK(32, 32));
+> +    tcg_gen_ctzi_i64(ret, ret, 32);
+> +}
+
+One nit: use clzi_i64(ret, ret, 64).
+
+Most hosts, including x86_64, naturally return the register width for zero.  If
+you use something else, like this, then tcg will generate an extra comparison
+and conditional move.
+
+In this case you know that zero is impossible, because you just set all of the
+high 32 bits, but that knowledge won't be present in the expansion of ctzi.
+
 
 r~
 
