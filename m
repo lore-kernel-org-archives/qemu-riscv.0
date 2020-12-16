@@ -1,78 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kpHpC-0003fN-2t
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Dec 2020 16:25:38 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57562)
+	id 1kpM8f-000614-8S
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Dec 2020 21:02:01 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54224)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpHpA-0003aX-Hr
- for qemu-riscv@nongnu.org; Tue, 15 Dec 2020 16:25:36 -0500
-Received: from mail-ot1-x344.google.com ([2607:f8b0:4864:20::344]:38496)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1kpM8d-00060t-Ow
+ for qemu-riscv@nongnu.org; Tue, 15 Dec 2020 21:01:59 -0500
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:54295)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpHp7-0004ZQ-Bh
- for qemu-riscv@nongnu.org; Tue, 15 Dec 2020 16:25:35 -0500
-Received: by mail-ot1-x344.google.com with SMTP id j20so16390317otq.5
- for <qemu-riscv@nongnu.org>; Tue, 15 Dec 2020 13:25:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=K7Hf7CHiG+ksmRY7TLY84Bzu+9ngTwNPS8p7emRz68Q=;
- b=yZRIZculAj2FRRGCOMXSqgI2inVgDIKrL4TDMXaJM4CnbgV1plWZBin6Oi3yWYnguj
- tn/oYQ9rKvu1ZmgYGo5A0tW1l/cl3L6PJuxnblezG80+umyClARwhMxpQu2u39BrdxRp
- cW9gpa3J55GeQFwdxCs3IqB60aZQbLFoVdj1CmenKVCd7kSdcDCGCM8DDlTnqLdHlZZJ
- doSI7y4wkl1KRE1wCvRO5oP1izJ6J9pHHd66OGiTWl2I5vvhx9XnDOQrxIapZpR/Y+G4
- ftL8jD4EVBR3aO9mSrm77G7FNM3wSgk/+kiodINjM17dUXwjkQjo4dBxSLS/cF5oZMIK
- LKCg==
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1kpM8b-0000qO-Id
+ for qemu-riscv@nongnu.org; Tue, 15 Dec 2020 21:01:59 -0500
+Received: by mail-pj1-x1031.google.com with SMTP id f14so629386pju.4
+ for <qemu-riscv@nongnu.org>; Tue, 15 Dec 2020 18:01:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=rLNQq/+xqdwYJKLRlDvJGIwRXl36/MH0X9u0Rmyy1wk=;
+ b=bR93heYJA35zKR4JS78Me/Wv4U3LXGpPkTbInBF2io/KB4grrWFx88tTbA6ezLJhNy
+ wO8TtCI8udNuQy94pMlB157NVswyEjGMDZdoFET3nxe1tyA7EQtcNUIq6jei5IhrFrCL
+ YCv8ktLxmwEjF2BsUp67i2dZud4BCDIZaW4OfdQN70DNhwq/cA1GCPBEo6X/EMurWYHq
+ VO/y/mTVC5iHO2vGs2MaG897bhneFm7kXZoPmfLhOloee2t2+VLFP1VFL+qOVwEozgbx
+ osDkoM3Nm7IUFthfx15g72t14Htdym9Uk8fpflsCsFb2eITp6XrJoYHdsqX4DcR6/k1+
+ M8Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=K7Hf7CHiG+ksmRY7TLY84Bzu+9ngTwNPS8p7emRz68Q=;
- b=YDZEsTiHuZxQ8AEujwosRxSDqjesJE4xdKEZEyM7Jmzb4JMDlpVT0pptc3C6max7P/
- HhYl+VNqLgvd3sVk/kyM7T48aZwCh+o9QpFRZxDZsGsD7+cAZPuENtDclkaAttwMZ9EI
- w4c4wQU9wg2iTPgkvpufYNl8rlATAwUyywkSTiUTIcARQ/7CrF5cut9omiAqBAXU2buD
- +8ootKF7rOOriaagdIQJ5TOdffrsZkraceEUN52tHMOv5nPLXanCBPs+f6nxURgn5Oug
- qkG6SgFEAOA8ycUfXxxkxcXgOtevMSrv2/FhyS5mJiohcrfOVaOiJuhnWmpKO8hGaikW
- dV/g==
-X-Gm-Message-State: AOAM530fozfIeUd3dD61gQxlanYgfCsUE6SGcIJm5OGtamuCYlZhf/DD
- Es2pMSWTrtNiG4GOe0Pkl6KjcQ==
-X-Google-Smtp-Source: ABdhPJzUU76RaBQ1c/UR+Z1Wn+90ylcKQgc4K4FJdElpdbzPOZoElqyJgIksxILoNCcZHsxg4FPWRA==
-X-Received: by 2002:a9d:e91:: with SMTP id 17mr24276665otj.237.1608067532042; 
- Tue, 15 Dec 2020 13:25:32 -0800 (PST)
-Received: from [10.10.121.52] (fixed-187-189-51-144.totalplay.net.
- [187.189.51.144])
- by smtp.gmail.com with ESMTPSA id h93sm19681otb.29.2020.12.15.13.25.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Dec 2020 13:25:31 -0800 (PST)
-Subject: Re: [PATCH v3 01/15] hw/riscv: Expand the is 32-bit check to support
- more CPUs
-To: Alistair Francis <alistair23@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-References: <cover.1607967113.git.alistair.francis@wdc.com>
- <3b6338af937d0d3aa0858ba1a4ad0fd9e759be66.1607967113.git.alistair.francis@wdc.com>
- <CAEUhbmUHE3vSvsz3JCSmgApCpJfs598FJkXsZBYVuP09u8x9tA@mail.gmail.com>
- <CAKmqyKPoe-DLkLik60xW3D3DyuxPetQ=e8ecLUr5AEAV8WBENw@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <759b5711-6b07-819f-4d11-0acf7b6ceed5@linaro.org>
-Date: Tue, 15 Dec 2020 15:25:29 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <CAKmqyKPoe-DLkLik60xW3D3DyuxPetQ=e8ecLUr5AEAV8WBENw@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::344;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x344.google.com
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=rLNQq/+xqdwYJKLRlDvJGIwRXl36/MH0X9u0Rmyy1wk=;
+ b=S0PF2Zb3q21zyMoPEYQdAGBpUeweMCPISIlFawXZCmL+Qlw2+bzOOJvfS6vFw2OybO
+ huXNY7HjVqdp+RYTlezN7Dg6rknjsQB3W1NBaf+vheSSwwKyXg9JjaYQ2CUulKh8LoVc
+ M82cUY4oJ4fJtPQpx9r4DmR0MESvVrqUnd0wD00D4muPgQgabdYYb5yXMh8jtdCLxOxM
+ WWPyZioyYrdRqdfwhszBwPwVzenDGLm/Kn/Smf3QvmxcBkHKtpBcd2yQFPR/N191JPc/
+ 0nefD/F2GUdMW0tasTGPvTXB/xNBWFotYYr+ys605xsEf9SI5a8c/EOYoLA/UEw1EUac
+ +EOA==
+X-Gm-Message-State: AOAM533ryIeVrFT/A1+E8C8GiFszAtR4L6L2u2fG8Vzl+i0RQfu1AW41
+ SXYgaWiEeNPJ8Taw4kxDQ3nzmg==
+X-Google-Smtp-Source: ABdhPJzKKJBxAFKDqTywyd/0spLObBOWgiSw9xazt0Cr0eVZv4eOmvRxQjAym4vcda+OWmvRMRIpAw==
+X-Received: by 2002:a17:90b:943:: with SMTP id
+ dw3mr1159959pjb.97.1608084115638; 
+ Tue, 15 Dec 2020 18:01:55 -0800 (PST)
+Received: from frankchang-ThinkPad-T490.internal.sifive.com
+ (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
+ by smtp.gmail.com with ESMTPSA id a13sm289150pfr.59.2020.12.15.18.01.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Dec 2020 18:01:54 -0800 (PST)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>
+Subject: [RFC v2 00/15] support subsets of bitmanip extension
+Date: Wed, 16 Dec 2020 10:01:25 +0800
+Message-Id: <20201216020150.3157-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1031.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -87,69 +72,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2020 21:25:36 -0000
+X-List-Received-Date: Wed, 16 Dec 2020 02:02:00 -0000
 
-On 12/15/20 10:44 AM, Alistair Francis wrote:
-> On Tue, Dec 15, 2020 at 1:26 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->>
->> On Tue, Dec 15, 2020 at 4:34 AM Alistair Francis
->> <alistair.francis@wdc.com> wrote:
->>>
->>> Currently the riscv_is_32_bit() function only supports the generic rv32
->>> CPUs. Extend the function to support the SiFive and LowRISC CPUs as
->>> well.
->>>
->>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->>> ---
->>>  hw/riscv/boot.c | 12 +++++++++++-
->>>  1 file changed, 11 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
->>> index d62f3dc758..3c70ac75d7 100644
->>> --- a/hw/riscv/boot.c
->>> +++ b/hw/riscv/boot.c
->>> @@ -41,7 +41,17 @@
->>>
->>>  bool riscv_is_32_bit(MachineState *machine)
->>>  {
->>> -    if (!strncmp(machine->cpu_type, "rv32", 4)) {
->>> +    /*
->>> +     * To determine if the CPU is 32-bit we need to check a few different CPUs.
->>> +     *
->>> +     * If the CPU starts with rv32
->>> +     * If the CPU is a sifive 3 seriries CPU (E31, U34)
->>> +     * If it's the Ibex CPU
->>> +     */
->>> +    if (!strncmp(machine->cpu_type, "rv32", 4) ||
->>> +        (!strncmp(machine->cpu_type, "sifive", 6) &&
->>> +            machine->cpu_type[8] == '3') ||
->>> +        !strncmp(machine->cpu_type, "lowrisc-ibex", 12)) {
->>
->> This does not look like a scalable way. With more and more CPU added
->> in the future, this may end up with a huge list of strncmps..
-> 
-> Any better ideas?
+From: Frank Chang <frank.chang@sifive.com>
 
-It doesn't appear as if you need to query this before you've instantiated the
-cpu.  The first dynamic use that I see is create_fdt, which happens after that
-point.
+This patchset implements RISC-V B-extension draft version Zbb, Zbs and
+Zba subset instructions. Some Zbp instructions are also implemented as
+they have similar behavior with their Zbb-, Zbs- and Zba-family
+instructions or for Zbb pseudo instructions (e.g. rev8, orc.b).
 
-Verified like so:
+Specification:
+https://github.com/riscv/riscv-bitmanip
 
-$ gdb --args ./qemu-system-riscv64 -M virt
-(gdb) b rv64_base_cpu_init
-Breakpoint 1 at 0x548390: file ../qemu/target/riscv/cpu.c, line 156.
-(gdb) b riscv_is_32_bit
-Breakpoint 2 at 0x490dd0: file ../qemu/hw/riscv/boot.c, line 37.
-(gdb) run
-...
-Thread 1 "qemu-system-ris" hit Breakpoint 1, rv64_base_cpu_init
+Summary of current proposals for Zb{abcs}:
+https://lists.riscv.org/g/tech-bitmanip/topic/summary_of_current_proposals/77924315
 
-From the machine, you can find the boot cpu, and use the riscv_cpu_is_32bit
-helper on that.
+The port is available here:
+https://github.com/sifive/qemu/tree/rvb-upstream-v2
 
-Also, just noticed that the two functions spell "32bit" differently.  :-)
+To test rvb implementation, specify cpu argument with 'x-b=true' to
+enable B-extension support.
 
+Changelog:
 
-r~
+v2:
+ * Add gen_shifti(), gen_shiftw(), gen_shiftiw() helper functions.
+ * Remove addwu, subwu and addiwu instructions as they are not longer
+   exist in latest draft.
+ * Optimize implementation with cleaner tcg ops.
+
+Frank Chang (3):
+  target/riscv: rvb: count bits set
+  target/riscv: rvb: generalized reverse
+  target/riscv: rvb: generalized or-combine
+
+Kito Cheng (12):
+  target/riscv: reformat @sh format encoding for B-extension
+  target/riscv: rvb: count leading/trailing zeros
+  target/riscv: rvb: logic-with-negate
+  target/riscv: rvb: pack two words into one register
+  target/riscv: rvb: min/max instructions
+  target/riscv: rvb: sign-extend instructions
+  target/riscv: rvb: single-bit instructions
+  target/riscv: rvb: shift ones
+  target/riscv: rvb: rotate (left/right)
+  target/riscv: rvb: address calculation
+  target/riscv: rvb: add/sub with postfix zero-extend
+  target/riscv: rvb: support and turn on B-extension from command line
+
+ target/riscv/bitmanip_helper.c          | 103 ++++++
+ target/riscv/cpu.c                      |   4 +
+ target/riscv/cpu.h                      |   2 +
+ target/riscv/helper.h                   |   9 +
+ target/riscv/insn32-64.decode           |  33 ++
+ target/riscv/insn32.decode              |  54 ++-
+ target/riscv/insn_trans/trans_rvb.c.inc | 466 ++++++++++++++++++++++++
+ target/riscv/meson.build                |   1 +
+ target/riscv/translate.c                | 337 +++++++++++++++++
+ 9 files changed, 1003 insertions(+), 6 deletions(-)
+ create mode 100644 target/riscv/bitmanip_helper.c
+ create mode 100644 target/riscv/insn_trans/trans_rvb.c.inc
+
+--
+2.17.1
+
 
