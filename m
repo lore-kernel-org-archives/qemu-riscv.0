@@ -1,74 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kpZNn-0000WO-Ct
-	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 11:10:31 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55816)
+	id 1kpZaB-00064C-TL
+	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 11:23:21 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60018)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpZNm-0000U5-8o
- for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 11:10:30 -0500
-Received: from mail-qt1-x82c.google.com ([2607:f8b0:4864:20::82c]:43663)
+ id 1kpZa8-00062v-4a
+ for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 11:23:16 -0500
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:44337)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpZNh-0004lV-Tq
- for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 11:10:29 -0500
-Received: by mail-qt1-x82c.google.com with SMTP id 2so7700669qtt.10
- for <qemu-riscv@nongnu.org>; Wed, 16 Dec 2020 08:10:25 -0800 (PST)
+ id 1kpZa4-0006zg-MQ
+ for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 11:23:15 -0500
+Received: by mail-pf1-x435.google.com with SMTP id f9so16884048pfc.11
+ for <qemu-riscv@nongnu.org>; Wed, 16 Dec 2020 08:23:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=R6n474+xsrljIhxiLI+jMB346FKry3m8jrkOmpjCcyA=;
- b=wdiGdmQYlpBktrLHFktfhEIxY2xi/OOasz0PbRDZv5mXLqpy+BfMolgEH0Ca/w6+L3
- kLuAbFpP3c7muDIvdgkMjy6ABVOftPBfeag5weL6XEo9k50+Dp3PxdXkXXdAUhS0EjpA
- BFn5nQImIEDxtYxt26SlwmCz+gMy+UtnyWJVRbCCBoGGqtHadslYHEOfulP3IBn8mLiM
- V/5ct4xkiXoMeJTmP1f0YEHdBJmdduXG4zN/ErII6trXeXht/jCwgCMcEr5UeHDWAPM8
- g3FRFWzn77L4GkvID2thr71JrXq82YnS8ZzedqKzYTqJ5BkcDgNqf9e+s40Btd8AEmDB
- aEFw==
+ bh=s3B1HB6FcS4tnPvF68sKHeQ6n0VwS9E+jzBx9RtzuQo=;
+ b=fNLe1AxqsFBdyPjWCDZ+P6wnpy3qKld1UlD5Ci/VJdY6wBabY06a3AdgnB7gujpP6E
+ CZX0I8DU1GuevQruO1vPsnA6lvRiF8vVgy7Y0CtgQqvWXQblKgA+2zhSuK5GxfzS1s4v
+ 9Md15xuXGbt3BRi+D8x9K7H9KLVJSkVmDlMyKXGQ4bF7KryqXuV+pY6sa7kjKwgtxMd+
+ IkjA+NmZHHSJDLaeWyFJpwCRlQoZa7IlTFRN4xonAx9Sb2uJDzFgbyC4tnx3YHb0//tS
+ UxI9FcEXwMQkx7gKyst25ulVtRgL/oPkfQ5oUtaShTybmhHOwlUj6Sumym03dYxXc5J6
+ Nv4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=R6n474+xsrljIhxiLI+jMB346FKry3m8jrkOmpjCcyA=;
- b=JCUnYJ9AuCNOlClDG3JeIJBAW7ExTNXZBnX6+poAdzQD5dmtvYqsoWNzPF2cdnGFW9
- v/arBBCbccy1egrb4mzWAlrj0hqoFW0OhQtuAgdjxcjbdiEviWOcTYhzlbBnnk1KDObl
- G16zNhI4cJka11ZCFtybM/K2IKOhW0upR2iGbrtwZsbxO+JEgTUPWp9B6E+NM+xabBBV
- NdAxRtFp84a0g6+QWYDFqMAiZJoR21xhlY6JkN0wEk3LiXjKF3fz4+IiKWBb3JS2+8v7
- SgK9lP2jUNKXunl1L5555jmKhaf2+4+bGOAS6SWzAcXI6hrhH+vdYrG7rLYqVzCPMPna
- azGg==
-X-Gm-Message-State: AOAM531O0ZOTcWXYTDD2h79Qq5GWNmrfhKTYFuLQyjFYweo4x60YANTH
- b26sOplObs3Dfoilntzb6/yYSQ==
-X-Google-Smtp-Source: ABdhPJwTRbi6t9hJLMYREoj3AamZTMU2ii39GcGnLO0JpQTkOkY+ECsjn7yaZCTqlVIBkB7LG5NL8Q==
-X-Received: by 2002:ac8:3987:: with SMTP id v7mr36860756qte.144.1608135024447; 
- Wed, 16 Dec 2020 08:10:24 -0800 (PST)
+ bh=s3B1HB6FcS4tnPvF68sKHeQ6n0VwS9E+jzBx9RtzuQo=;
+ b=qqgE3maDaIsb6tXr3qsko4Du9Pm24M4Eq21q+AbebYS2pSISESEb1VvtSIhzgAciOC
+ Tddzuh7XvhYH8wK2B7lPg49aUk7SILYVF8gh+7389w90UPTdWxvIGg796PLovAbdw4XH
+ VWJ10wMRU2vonCT7urN6PZBLRbZmTscO10s7Iq3W887AkdaINmUhJpFF5xgQcq1R34hG
+ FyI4OM0HYva1Mel7+JqjP+NvSqNDrZc3Y94Z1jMNXf8n2yViJMDxbfZ7+LO5/eDDaYI+
+ qa3VmQKB0MdDdCn/NGyBg85T5qqKksatGDyx7ZpJb9gAAaLlKdXUEJ2c+O0e66uP6Atv
+ SYQA==
+X-Gm-Message-State: AOAM532wtNRxAtzSjT8sz26Wx0PT78Dr56FuY/In7vSg83sLgByq6TJQ
+ Vn20OKYvPbS2FRybCz/AB+pxQQ==
+X-Google-Smtp-Source: ABdhPJxfp9uoEAnMaZKjCrwUtFG2vpqScviuSMltHgNNVh0CBM9WGSfwPM9RYaW8uMQHWfP4ZpbyvA==
+X-Received: by 2002:aa7:860b:0:b029:19e:2827:93b7 with SMTP id
+ p11-20020aa7860b0000b029019e282793b7mr32780891pfn.22.1608135791052; 
+ Wed, 16 Dec 2020 08:23:11 -0800 (PST)
 Received: from [192.168.71.34] ([172.58.27.195])
- by smtp.gmail.com with ESMTPSA id g26sm1334760qkl.60.2020.12.16.08.10.21
+ by smtp.gmail.com with ESMTPSA id z28sm3022436pfr.140.2020.12.16.08.23.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Dec 2020 08:10:23 -0800 (PST)
-Subject: Re: [PATCH] tcg,riscv: Fix illegal shift instructions
-To: Zihao Yu <yuzihao@ict.ac.cn>, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Wed, 16 Dec 2020 08:23:10 -0800 (PST)
+Subject: Re: [RFC v2 05/15] target/riscv: rvb: pack two words into one register
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:All patches CC here" <qemu-devel@nongnu.org>
-References: <20201216081206.9628-1-yuzihao@ict.ac.cn>
+ Palmer Dabbelt <palmer@dabbelt.com>, Kito Cheng <kito.cheng@sifive.com>
+References: <20201216020150.3157-1-frank.chang@sifive.com>
+ <20201216020150.3157-6-frank.chang@sifive.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <ab311e75-0689-03aa-adb0-6fe826473511@linaro.org>
-Date: Wed, 16 Dec 2020 10:10:16 -0600
+Message-ID: <eefc741b-e765-8ee3-6832-6191603b00c1@linaro.org>
+Date: Wed, 16 Dec 2020 10:23:02 -0600
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20201216081206.9628-1-yuzihao@ict.ac.cn>
+In-Reply-To: <20201216020150.3157-6-frank.chang@sifive.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::82c;
- envelope-from=richard.henderson@linaro.org; helo=mail-qt1-x82c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,46 +84,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2020 16:10:30 -0000
+X-List-Received-Date: Wed, 16 Dec 2020 16:23:17 -0000
 
-On 12/16/20 2:12 AM, Zihao Yu wrote:
-> * This bug can be reproduced by running the following guest instructions
->   on a RISC-V host.
+On 12/15/20 8:01 PM, frank.chang@sifive.com wrote:
+> From: Kito Cheng <kito.cheng@sifive.com>
 > 
->   (1) xor %ecx,%ecx
->   (2) sar %cl,%eax
->   (3) cmovne %edi,%eax
-> 
->   After optimization, the tcg instructions of (2) are
-> 
->   movi_i32 tmp3,$0xffffffffffffffff  pref=all
->   sar_i32 tmp3,eax,tmp3              dead: 2  pref=all
->   mov_i32 cc_dst,eax                 sync: 0  dead: 1 pref=0xffc0300
->   mov_i32 cc_src,tmp3                sync: 0  dead: 0 1  pref=all
->   movi_i32 cc_op,$0x31               sync: 0  dead: 0  pref=all
-> 
->   And the target assembly instructions of (2) are
-> 
->   0x200808d618:  fffa5b9b          illegal
->   0x200808d61c:  03442423          sw              s4,40(s0)
->   0x200808d620:  03742623          sw              s7,44(s0)
->   0x200808d624:  03100b93          addi            s7,zero,49
->   0x200808d628:  03742a23          sw              s7,52(s0)
-> 
-> * Note that the `illegal` target instruction above should be
->   `sraiw s7,s4,0x1f` (41fa5b9b).
+> Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  target/riscv/insn32-64.decode           |  3 ++
+>  target/riscv/insn32.decode              |  3 ++
+>  target/riscv/insn_trans/trans_rvb.c.inc | 30 ++++++++++++++++++
+>  target/riscv/translate.c                | 41 +++++++++++++++++++++++++
+>  4 files changed, 77 insertions(+)
 
-More precisely, the 'illegal' instruction should be *anything*, except for
-'illegal'.  The result of the out-of-range shift is undefined, but TCG requires
-that it not trap.  The undefined result should be unused.
-
-In this particular case this is so, because cc_op == 0x31 == CC_OP_CLR, which
-does not use either of cc_dst or cc_src.
-
-We have make the same patch for other hosts, e.g. 1fd959466574 for tcg/sparc/.
-
-I have queued the patch to tcg-next.
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
