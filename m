@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kpM9V-0006pP-Qx
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Dec 2020 21:02:53 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54598)
+	id 1kpM9Y-0006s7-4O
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Dec 2020 21:02:56 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54640)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kpM9U-0006lh-4w
- for qemu-riscv@nongnu.org; Tue, 15 Dec 2020 21:02:52 -0500
-Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a]:33619)
+ id 1kpM9W-0006pr-IM
+ for qemu-riscv@nongnu.org; Tue, 15 Dec 2020 21:02:54 -0500
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b]:43629)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kpM9P-0000wR-3y
- for qemu-riscv@nongnu.org; Tue, 15 Dec 2020 21:02:51 -0500
-Received: by mail-pf1-x42a.google.com with SMTP id h186so5150517pfe.0
- for <qemu-riscv@nongnu.org>; Tue, 15 Dec 2020 18:02:46 -0800 (PST)
+ id 1kpM9T-0000wx-M1
+ for qemu-riscv@nongnu.org; Tue, 15 Dec 2020 21:02:54 -0500
+Received: by mail-pf1-x42b.google.com with SMTP id c12so15606647pfo.10
+ for <qemu-riscv@nongnu.org>; Tue, 15 Dec 2020 18:02:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=xANIL9U+q7VdaNhhAev9PcT5i/fCcTrRk81O4BPTh6g=;
- b=UilA1OcnOajy4PQmYxm7BEu/4uDCWbkBrAJFEsQdrrN3J9fPKu5NrBh4RxzuvOnDJF
- 1dRB4O30VL6H2yOVh+gJi6pqYkiyUqpR2rnSMVrKGtwL4uCalhErSEq1AvKGG0XTRbvH
- IPfNip9/Z5XTiHwyhW6+7W8p9vikVB8AgfI0RJH4vbYbEvivmgq4HshqPjHSmIFrR6e7
- 8Zqq8ggLA4/lTZnN60wbOcyVVPRTS958LF0esa3oWaXm4VipjmFFjpzFTj6P8YUCQ02W
- C+hADvjl+9kq/Wt0TCD+NGwegaoYv54Hc+MAxurQLXnuGC7K9Ibv2z+1o7mxyckMMveN
- DkCw==
+ bh=m9+UgyEv7/CO9wcFF/2mGY7NcDjbZFpPGSL5WyqYbRw=;
+ b=jsfAMlRog6lr6cdtoc9VTj6pNRdzO4yqrLP5tqp+NF246t74gF8RvEeCtItq/IbVkD
+ HUvpdmhBKRrRMz9LXReWPKsnIX76OmS0//ah+cJ+c54FhRWMnYqOcBtiaLdXhgOLM3wG
+ AWDjE2wgfDuiWcDQ6AYp9+quGjTDBT6Gv3mBtqIDcp7tn1LDROjkWd+29y3ePh1h+xs9
+ OYgcz3TAxQPqOmSjAhSEwmkdlfCOHB3F76AAJ8M+Rr9527yLqJMYY4rvA5Uaw7ZJpkoK
+ /iFpSUsZDpmpr0KLIC+pXpWEeN1ItmOSur/r8f6Ur6SoTqhJq2aAI3oMIlE8jBQ2Ach1
+ Bg0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=xANIL9U+q7VdaNhhAev9PcT5i/fCcTrRk81O4BPTh6g=;
- b=m5WhdeAFmA8a+b7qEPqpgbUT47rSeojrcKUl75/D1aJKKKvE1SCc9CP79SsPKUdqSm
- L21Vt8ftEcaBvIk4/KZ8Epq4v7Y+6Hgf0LqOTWZTku9pKzcXVDVSFesZEIJMkZFFHiMY
- VLy4RULeQysdMEVS6V4hPhKx5F41N4ypTYwgwBVrBIdX40O/Rf9FP3ZcPKIpa9b2KEVl
- 8qQYqZxI0n1eLXoPHpGn25pH0tNP5IL2dorWt7FVMGvK2dTCmSTikWKOJ6p+F39Vpyqv
- l5eline5jNEp6+S8zhWfCa9LmANsW0ELZSdGVBJEflJl6gz4HVzxzjyHcG0yHjzDhqJQ
- Wj+A==
-X-Gm-Message-State: AOAM530SWNtV0dLnTdHOt/M/h7Tzhqsl7opKc2YK2kO7KsedDDnBzniQ
- LYh/CbHK3P+xrK1zVufgvMnpCA==
-X-Google-Smtp-Source: ABdhPJyc39VeUpWJF+7G+/jbt+4nSP7zkMKZa0miJTujccRlLYckguZ5ZRr/j6P4enz/orYaPtA6/g==
-X-Received: by 2002:a63:c908:: with SMTP id o8mr8485628pgg.124.1608084165906; 
- Tue, 15 Dec 2020 18:02:45 -0800 (PST)
+ bh=m9+UgyEv7/CO9wcFF/2mGY7NcDjbZFpPGSL5WyqYbRw=;
+ b=FjziVnaKqHQY0+rKdyyHUavftXjY0LFcATDbnSWekrmIwb+xMyZtjvOOhTE3yU+aG5
+ 9JbXhPxx/v5olVWTf/1I38TVhBbrJv2AVAH9U+cZQRQphTurFqlB3dXpC0Jj+DziJXQS
+ mIV7Kk0j30J42PUN8IVwis2M6T/z2fNO42EezmxQEhvJuPbRzUEPeYmUdbTTkCO9Yuo2
+ kjrZmeBque0s7Ntjk+EImalDQ/ulqC7v2HsrEsCCvN3213W+bUQ7T8+0LsPQolMqLNOv
+ /8ANtSLyrM5Wl7eAL1aqRUYuj+wyPLsFTN3vydgFjNgPZUDrnUUPbpNFsZrbyWqlEokP
+ pbTw==
+X-Gm-Message-State: AOAM5328/rem+4eWft0OXEFm0spTJYQ8x8LQy6u8uWMbRqTpn3VPOTHI
+ Xg8DhtB39P5re0HHIdRzSj6kTg==
+X-Google-Smtp-Source: ABdhPJwzeBY1gBzUwhdqUUFhWehU/YRnYD79VWMt1PES/Cywi7zIbVmqItA88iu2AbVoQdD9oiEFMg==
+X-Received: by 2002:a63:2406:: with SMTP id k6mr31526592pgk.453.1608084170397; 
+ Tue, 15 Dec 2020 18:02:50 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id a13sm289150pfr.59.2020.12.15.18.02.43
+ by smtp.gmail.com with ESMTPSA id a13sm289150pfr.59.2020.12.15.18.02.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Dec 2020 18:02:45 -0800 (PST)
+ Tue, 15 Dec 2020 18:02:49 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -51,21 +51,21 @@ Cc: Kito Cheng <kito.cheng@sifive.com>, Frank Chang <frank.chang@sifive.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v2 06/15] target/riscv: rvb: min/max instructions
-Date: Wed, 16 Dec 2020 10:01:31 +0800
-Message-Id: <20201216020150.3157-7-frank.chang@sifive.com>
+Subject: [RFC v2 07/15] target/riscv: rvb: sign-extend instructions
+Date: Wed, 16 Dec 2020 10:01:32 +0800
+Message-Id: <20201216020150.3157-8-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201216020150.3157-1-frank.chang@sifive.com>
 References: <20201216020150.3157-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -78,61 +78,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2020 02:02:52 -0000
+X-List-Received-Date: Wed, 16 Dec 2020 02:02:54 -0000
 
 From: Kito Cheng <kito.cheng@sifive.com>
 
 Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn32.decode              |  4 ++++
- target/riscv/insn_trans/trans_rvb.c.inc | 24 ++++++++++++++++++++++++
- 2 files changed, 28 insertions(+)
+ target/riscv/insn32.decode              |  2 ++
+ target/riscv/insn_trans/trans_rvb.c.inc | 13 +++++++++++++
+ 2 files changed, 15 insertions(+)
 
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index c337aed8ca3..0d6a8a1c0a5 100644
+index 0d6a8a1c0a5..4baafed21f1 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -605,3 +605,7 @@ xnor       0100000 .......... 100 ..... 0110011 @r
- pack       0000100 .......... 100 ..... 0110011 @r
- packu      0100100 .......... 100 ..... 0110011 @r
- packh      0000100 .......... 111 ..... 0110011 @r
-+min        0000101 .......... 100 ..... 0110011 @r
-+minu       0000101 .......... 101 ..... 0110011 @r
-+max        0000101 .......... 110 ..... 0110011 @r
-+maxu       0000101 .......... 111 ..... 0110011 @r
+@@ -598,6 +598,8 @@ vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+ clz        011000 000000 ..... 001 ..... 0010011 @r2
+ ctz        011000 000001 ..... 001 ..... 0010011 @r2
+ pcnt       011000 000010 ..... 001 ..... 0010011 @r2
++sext_b     011000 000100 ..... 001 ..... 0010011 @r2
++sext_h     011000 000101 ..... 001 ..... 0010011 @r2
+ 
+ andn       0100000 .......... 111 ..... 0110011 @r
+ orn        0100000 .......... 110 ..... 0110011 @r
 diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
-index 3da233047a9..bd66c2ad84d 100644
+index bd66c2ad84d..5ea0f0ff81c 100644
 --- a/target/riscv/insn_trans/trans_rvb.c.inc
 +++ b/target/riscv/insn_trans/trans_rvb.c.inc
-@@ -71,6 +71,30 @@ static bool trans_packh(DisasContext *ctx, arg_packh *a)
-     return gen_arith(ctx, a, &gen_packh);
+@@ -95,6 +95,19 @@ static bool trans_maxu(DisasContext *ctx, arg_maxu *a)
+     return gen_arith(ctx, a, &tcg_gen_umax_tl);
  }
  
-+static bool trans_min(DisasContext *ctx, arg_min *a)
++static bool trans_sext_b(DisasContext *ctx, arg_sext_b *a)
 +{
 +    REQUIRE_EXT(ctx, RVB);
-+    return gen_arith(ctx, a, &tcg_gen_smin_tl);
++    return gen_unary(ctx, a, &tcg_gen_ext8s_tl);
 +}
 +
-+static bool trans_max(DisasContext *ctx, arg_max *a)
++static bool trans_sext_h(DisasContext *ctx, arg_sext_h *a)
 +{
 +    REQUIRE_EXT(ctx, RVB);
-+    return gen_arith(ctx, a, &tcg_gen_smax_tl);
++    return gen_unary(ctx, a, &tcg_gen_ext16s_tl);
 +}
 +
-+static bool trans_minu(DisasContext *ctx, arg_minu *a)
 +{
-+    REQUIRE_EXT(ctx, RVB);
-+    return gen_arith(ctx, a, &tcg_gen_umin_tl);
-+}
-+
-+static bool trans_maxu(DisasContext *ctx, arg_maxu *a)
-+{
-+    REQUIRE_EXT(ctx, RVB);
-+    return gen_arith(ctx, a, &tcg_gen_umax_tl);
-+}
-+
  /* RV64-only instructions */
  #ifdef TARGET_RISCV64
  
