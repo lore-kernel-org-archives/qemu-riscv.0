@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kpbS6-0005s0-Ue
-	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 13:23:07 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33748)
+	id 1kpbS8-0005uX-KK
+	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 13:23:08 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33766)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=612374860=alistair.francis@wdc.com>)
- id 1kpbS3-0005nX-51; Wed, 16 Dec 2020 13:23:03 -0500
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:42030)
+ id 1kpbS5-0005pe-2b; Wed, 16 Dec 2020 13:23:05 -0500
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:42037)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=612374860=alistair.francis@wdc.com>)
- id 1kpbRy-0000MW-9h; Wed, 16 Dec 2020 13:23:02 -0500
+ id 1kpbS3-0000NE-9u; Wed, 16 Dec 2020 13:23:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1608143456; x=1639679456;
+ t=1608143464; x=1639679464;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=1zLmtXNN99ByuG6SY7cbVOGEnCnWCQpRWpzJGw+Gb/M=;
- b=DKLC+OumyxEIuXbFrkuLgDXwW4ZU/QXF2xNold/76HnDTeJJcu+PPLAo
- xCWpvZH7rg9tZksajs//avsVa6lCdCkG/iBwzfR+hnUM8Hlqw4r1AV7Nz
- zPOzu7PW20KfP8oE4sp1UsZr8beUTbPo7bey6PmhNa8TXve+gi5+Mm8g7
- Zi5ILKdVUYBFuBrhR352YDaWDNhCgUz4ytvigOiBVivMxIq5TqqEh+ZLh
- ycCp++0hOh1byEqTYrNwSi8el5NzwnOAk/CY8g2f/pf0gXRVUf+Nm4J1y
- d8v9XYMEgVtHsCa9eKYSTC/GjZlFjUO53O3FcprYtthstLDE1uERv8Fbh w==;
-IronPort-SDR: d18NWFSAO3aKh+TZRWNKfFZSyUEUD0bxe7QQ189DhIcIoZX7kSipL4UGsmoOeTe0HQ1AFbvRe8
- mE/YVenU+/IHlWdN6aZjTlPBjobDDCHuWG+WoSPGazm8l/8HSZeJ3fd6JTU9a14gG1sHwthCHH
- 8zfU0OdP/HYPQt86lcqpLPOjLxe8Iy3CUyTnv8kGe1S/U5jWYNFG8O/q5YJ+Eq8X4tYvTE2O79
- f6DXBzii1GMTUfly5Q49R85GazpfZyHL986Cvs/otPtj1YgubvvmFIO5GdtW6sNLKzm8QZkEaG
- plw=
-X-IronPort-AV: E=Sophos;i="5.78,425,1599494400"; d="scan'208";a="259080375"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 17 Dec 2020 02:30:55 +0800
-IronPort-SDR: 7rKkuclalf2fqRI2ROkTG7Ynnzpo9KiGnkS77yyURw7P6buItnGSeXKDwiHcXKu0SWpvyS1N3j
- HcYgYfMauTsJKDziIEdM4nU+4K31tEZr3g2OAeq9mN26YXoZHxbmwJ06TnzDixhrGFF1C9K2H3
- /YwqdkuvJbc+zEH/FyiPG5KZ55ZFLskmZO35iqt47LmjjZGkli2kmvVH5zmzIpS//Rw1idq/Gz
- UQob1FdzhPJ3pX18F3dcUwKg6LuGy291MOWXlZLoOjAsTHHMTploN2yq+moYwNyxJVSGxYxcPg
- ZD0FN174rJja+ImEBMLE8eRL
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Dec 2020 10:06:32 -0800
-IronPort-SDR: 5TU1A5WCHP/OQaRHhRusflQPP/n+L7PtCRFzgSdlyFIsHroiegrtJBU0Tbty1E8Z1OB5aXp3jU
- +knC/X7N2063CQNxoLcqGxr3iq8IU9YO8IuW8KmGA5lzbXwqwQNCY19ZDF87+sceBxoh1rTvFz
- wjCbN/noCFq/OhlaUbTFVdSExhOTRCeooy00nmcq4XOaPcNOhhGAsCbW4Djds7MTX/FAnup4mN
- f903vFwJ2Y0pvIJID0/0VMXrJczlbuObllmY6F7Uy4sjAYoOygrD1OvAhxdBf7ZyUpMu3PYd0R
- mC8=
+ bh=AbpDifj6fxXpSycLYw3+oac50PZ8804aASGpsTDADlk=;
+ b=pK//1/AksSPWSpqneKH2svK7JvPV7yS4k29moCeXy4JqghEv+Brj1WFB
+ TOnj6VksuOWTUnl/9dwQ6tT3BwJEDoqyzjpm+zzd5JB1pTVaRbPsw+1UQ
+ 4+U+QWuvIiHxkO6n8yakqFaFlaIfL38gomq+srACWO4DIaEaGPvy/7o8w
+ dkyiOhyNuwwlnpAHN6okTmwEGluBOP5Bust4pohhQVCkov2AI93PzoMm3
+ R/aZzOuL5lVtq5t1s9ccGN3wbbTA6m+wah9tcw8KPIjawxwsYlFcyR38R
+ nunl/V2mbLl1MLVVmrhIaunAaUqFXl9GSpfZy8eE8PIbc9GHRr9Hhirh1 g==;
+IronPort-SDR: ffFTm8G7LZs5MNEhfBzV8NvRM6i7f9TR8eIYoxqmqjtEpYpZ38ms97+yHszS0u7C0mMlhSuiwS
+ XrjA2K2zGKykaB2DAm6ORL9Mw5btmthyjgK90pk0PRUDPPXLc8vTyCsfsSmisdsFDCpsPDR7JN
+ ww+ERub0mWOToRcApOYRB4UtMv4FfXfPN00RM5per60Eg79isVcyxTVq3dQP2jV4kDZ/W40AZj
+ yVgbSWIbw2m2igEX1xp8seNasBDw/hdIy0HWjLdW5uZF4vJ2WHccI1zRkAqQ5dvEtrwdiCu9JA
+ wnI=
+X-IronPort-AV: E=Sophos;i="5.78,425,1599494400"; d="scan'208";a="259080377"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 17 Dec 2020 02:30:59 +0800
+IronPort-SDR: E93mPdlIZOQqJEvskkIgRHyedaEk+nxil3AieaeVwHJSMzq+7SfDS1wLW532cHGH9tes8xJ+EG
+ vEzLDYc6DQkVGNdEhoyUbMylC2pVvq1cT6Vg+8yRMylQNrV6FbDWGnGCfY4J7UJzKcbTzb4n3n
+ Qang9kPrekVFrQ7SgpRDGLokUQ5ELx4pvbCBVjQPbBlYE3LdnY+gmER9BH4QFVoOL3RJqdkPMq
+ djimz0Yc80lffaFYIhJ61attI3/Uv8ReLa52JvxRLFb8SLMFLT/vk4muxRgNbxgAPCvSgS6dZU
+ 7a73TGEl9sEma28Ca5RqqUWO
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 16 Dec 2020 10:08:17 -0800
+IronPort-SDR: M3/zHRzEJhFYZoMZIlSecToRXgj36oBEXxrkNGtJGwm8QN7INWGhTTnDAE9aWuRN7/EOzt1bVs
+ AMNNLQgbGsKBendRBr73czk52IgI9gcpervSE4nq8DsFCwhzheiwFNIyVV2yRcx15iZm2XNxDl
+ VHAjh35eXFbiuCJVI4PVPSc1RGrd9phHBOmBJq3u+jNLqDdbcnR28bvF7ifKLBjPLOW9sRf46l
+ A551ccks/uHLTMP5ra7U5CDkeBtl1I+aHT5lRtxQGL13jh8MLuo+rY+UKq7kMIuYMqA6lQ7L3x
+ T6c=
 WDCIronportException: Internal
 Received: from 1996l72.ad.shared (HELO risc6-mainframe.hgst.com)
  ([10.86.62.67])
- by uls-op-cesaip02.wdc.com with ESMTP; 16 Dec 2020 10:22:57 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 16 Dec 2020 10:23:00 -0800
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v4 12/16] target/riscv: cpu: Remove compile time XLEN checks
-Date: Wed, 16 Dec 2020 10:22:56 -0800
-Message-Id: <a426ead44db5065a0790066d43e91245683509d7.1608142916.git.alistair.francis@wdc.com>
+Subject: [PATCH v4 13/16] target/riscv: cpu_helper: Remove compile time XLEN
+ checks
+Date: Wed, 16 Dec 2020 10:22:59 -0800
+Message-Id: <872d2dfcd1c7c3914655d677e911b9432eb8f340.1608142916.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <cover.1608142916.git.alistair.francis@wdc.com>
 References: <cover.1608142916.git.alistair.francis@wdc.com>
@@ -84,54 +85,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2020 18:23:04 -0000
+X-List-Received-Date: Wed, 16 Dec 2020 18:23:06 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 Acked-by: Palmer Dabbelt <palmerdabbelt@google.com>
 ---
- target/riscv/cpu.c | 19 ++++++++++---------
- 1 file changed, 10 insertions(+), 9 deletions(-)
+ target/riscv/cpu_helper.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 7d6f032122..47b738c314 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -240,10 +240,10 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- #ifndef CONFIG_USER_ONLY
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", (target_ulong)env->mstatus);
--#ifdef TARGET_RISCV32
--    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatush ",
--                 (target_ulong)(env->mstatus >> 32));
--#endif
-+    if (riscv_cpu_is_32bit(env)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatush ",
-+                     (target_ulong)(env->mstatus >> 32));
-+    }
-     if (riscv_has_ext(env, RVH)) {
-         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hstatus ", env->hstatus);
-         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ",
-@@ -356,11 +356,12 @@ static void riscv_cpu_reset(DeviceState *dev)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index a2787b1d48..1fc9273cea 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -446,11 +446,13 @@ restart:
+             return TRANSLATE_PMP_FAIL;
+         }
  
- static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
- {
 -#if defined(TARGET_RISCV32)
--    info->print_insn = print_insn_riscv32;
+-        target_ulong pte = address_space_ldl(cs->as, pte_addr, attrs, &res);
 -#elif defined(TARGET_RISCV64)
--    info->print_insn = print_insn_riscv64;
+-        target_ulong pte = address_space_ldq(cs->as, pte_addr, attrs, &res);
 -#endif
-+    RISCVCPU *cpu = RISCV_CPU(s);
-+    if (riscv_cpu_is_32bit(&cpu->env)) {
-+        info->print_insn = print_insn_riscv32;
-+    } else {
-+        info->print_insn = print_insn_riscv64;
-+    }
- }
- 
- static void riscv_cpu_realize(DeviceState *dev, Error **errp)
++        target_ulong pte;
++        if (riscv_cpu_is_32bit(env)) {
++            pte = address_space_ldl(cs->as, pte_addr, attrs, &res);
++        } else {
++            pte = address_space_ldq(cs->as, pte_addr, attrs, &res);
++        }
++
+         if (res != MEMTX_OK) {
+             return TRANSLATE_FAIL;
+         }
 -- 
 2.29.2
 
