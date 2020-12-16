@@ -1,75 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kpa2e-0005Cj-Qa
-	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 11:52:44 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39014)
+	id 1kpb3M-00017m-NB
+	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 12:57:32 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56520)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpa2d-00057p-0O
- for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 11:52:43 -0500
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d]:54281)
+ (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
+ id 1kpb3L-00016K-F0
+ for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 12:57:31 -0500
+Received: from mail-io1-xd2e.google.com ([2607:f8b0:4864:20::d2e]:37338)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpa2Z-0002vE-Au
- for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 11:52:41 -0500
-Received: by mail-pj1-x102d.google.com with SMTP id f14so1799624pju.4
- for <qemu-riscv@nongnu.org>; Wed, 16 Dec 2020 08:52:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=O96YMA9+rIQFixqhIxkmC15YbXNyWcSLrfZtwsY9UDg=;
- b=DlxFfv4rMP+xU8GD6k5li/c+STw20lWXcXAJgTpUOKE1p5xJ/F0xgRjw4sVToXlexI
- 4koIzrozL6xdIXID78UwWAIiomVfZXSuACHFXuS5chA8qmdggL2MbBYlhPoQOtbfdUXL
- oi0923X6g2kwYo/DEoi4IJiq3nsnI4CK8uC1xo8hlG84F6mD4K2BDfRKznhBhKRP15rM
- NMeKqREsdhUKPxmh0iXzWDv4AyYma3XeTTKhG1C1Cyi43IBEBjgJCRe1fdgle72gqPiK
- wYXkpKQsLNRHO00p0BZ0qJtAkuhlz+wzvIRhshwCcOeK3x0G6cxbljXC3ZQBbXMRVjpj
- iGng==
+ (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
+ id 1kpb3J-0005m4-E6
+ for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 12:57:31 -0500
+Received: by mail-io1-xd2e.google.com with SMTP id p187so24814786iod.4
+ for <qemu-riscv@nongnu.org>; Wed, 16 Dec 2020 09:57:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=atishpatra.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=xS1MHac8SoJoe4GKos3v2gJOMGVNlLuzMfcAf2FRQIs=;
+ b=sEwNSuIZ7s/T4LGRR6MfEePQmUcQGjyD0fxkoVuGW/xO1kDsqam6918Gy+JiCREtD/
+ g0Qmuiing3vW+cXQsWyBHm8dqr3/clhwxxxPFIFNW4RQqUzDkexAcDz1Ee72MHcgzAGp
+ BrwYVQnS4hh5JEdjYSp/w5HCD1hL07tT8KHk0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=O96YMA9+rIQFixqhIxkmC15YbXNyWcSLrfZtwsY9UDg=;
- b=fQsGwltyMv8lfeZRwZAjx3A8p5COhGsvuQI9Cf68raLa8TOEODUZ/q9wBzTyFggIio
- lhhDt1LQ/wDy92Rl8kYo2RTuzWv86m9YnpKrD6YBgbU7VhSOXqimveEW0vVtzMKxmp7s
- GFWd89y+Z8vHKA0dwuVL/EjfDYBS2WqeYaC22pj0PXZMgEdJeprSoOmPlM5L9ufWibXC
- gLmyWnEit8UWAMrZl93YeKqRe3b4zzdpZ8ZJrqdyFBEKc6G/So9z4jd3285Wt+tdNcmq
- j5RZklrjjgkO5eha2FvarhWCUkNAzU+Orct/ZGoWqD1zFsUtz2Sl8Pmmx1XBW0UoHRZF
- JNeg==
-X-Gm-Message-State: AOAM530yeBQsfenjAMLD3VuB/VFxA08EcTU/PmJanENsL86qkM/XN2ZT
- KIV6lBvJ9tj+rR637HDYcDM5vw==
-X-Google-Smtp-Source: ABdhPJwDVxsyN4C/uvzFcyZ4vCHbif7IQst2zPOko6RdumJrYWOqCr2XA9utCc9Ze92iPPGUfhFoxQ==
-X-Received: by 2002:a17:902:7205:b029:db:d2d5:fe79 with SMTP id
- ba5-20020a1709027205b02900dbd2d5fe79mr2741287plb.30.1608137556699; 
- Wed, 16 Dec 2020 08:52:36 -0800 (PST)
-Received: from [192.168.71.34] ([172.58.27.195])
- by smtp.gmail.com with ESMTPSA id j17sm2887398pfh.183.2020.12.16.08.52.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Dec 2020 08:52:36 -0800 (PST)
-Subject: Re: [RFC v2 11/15] target/riscv: rvb: generalized reverse
-To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Kito Cheng <kito.cheng@sifive.com>
-References: <20201216020150.3157-1-frank.chang@sifive.com>
- <20201216020150.3157-12-frank.chang@sifive.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <678c7e2d-45b8-9363-664f-7f7e9164bfdf@linaro.org>
-Date: Wed, 16 Dec 2020 10:52:28 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=xS1MHac8SoJoe4GKos3v2gJOMGVNlLuzMfcAf2FRQIs=;
+ b=V5o1CcQSep2PQ6zsFQNj5p0QbJVgqJ5lIvSuOsTiTWCz5WkvbdaB8UfZEKko36jGQx
+ JA+IsfEa/65hlmsOLijrbuTetI3X7wdP7I5jkH2fDGvreNMzN3OHmcXYh6zhvxdV3wb7
+ xtUpY5B897S8bz+UjzV9jhgAkIcAtAb3hyWLe8YILiSDMhNQyM0W1NFeVMR0YvJq/xIH
+ gkGT/yTJpkZr4C8ocdp9PakSiqFOhwmWVa4ussqiTg+zTnK8qpQVzptvdwwCiVIhZSt/
+ OPHjkUdEjcW6bK79Yn9Gw8v994xHK3IMDK4euvUmZXvb+rbMT9ECbE3PGcJJw7JAfLaS
+ pdMg==
+X-Gm-Message-State: AOAM533voxlfsyfc2bwWyo1Jp+qzE1C1d4wHirBIzn+uN4Lh2eZQCIkq
+ zjkXKbhwF+ucLb3Iyd9Py5DSUDhEMo/DOp8JreBl
+X-Google-Smtp-Source: ABdhPJxgDSnunJuCjFLW5COV4Z15Lqr9IEKN27KtMvQ3VmKeWBDym1vi5nD17t/6IzOuCYIvu0oV6Xx7hgKQ6XSSjSM=
+X-Received: by 2002:a02:6a0e:: with SMTP id l14mr44761195jac.58.1608141446997; 
+ Wed, 16 Dec 2020 09:57:26 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20201216020150.3157-12-frank.chang@sifive.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102d.google.com
+References: <CAEUhbmX1_3FTO4LwSN37p8itHhsLfUHaJF9qauESEx1E3B1UfA@mail.gmail.com>
+In-Reply-To: <CAEUhbmX1_3FTO4LwSN37p8itHhsLfUHaJF9qauESEx1E3B1UfA@mail.gmail.com>
+From: Atish Patra <atishp@atishpatra.org>
+Date: Wed, 16 Dec 2020 09:57:16 -0800
+Message-ID: <CAOnJCUL-BxTBfMaECVP6+A-m9YyE_371gBUfhVBbddeJybPjNw@mail.gmail.com>
+Subject: Re: OpenSBI fw_dynamic firmware does not boot 32-bit kernel on QEMU
+ 'virt'
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: OpenSBI <opensbi@lists.infradead.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ linux-riscv <linux-riscv@lists.infradead.org>, Anup Patel <anup.patel@wdc.com>,
+ Atish Patra <atish.patra@wdc.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=atishp@atishpatra.org; helo=mail-io1-xd2e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -84,40 +72,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2020 16:52:43 -0000
+X-List-Received-Date: Wed, 16 Dec 2020 17:57:31 -0000
 
-On 12/15/20 8:01 PM, frank.chang@sifive.com wrote:
-> +target_ulong HELPER(grevw)(target_ulong rs1, target_ulong rs2)
-> +{
-> +    return do_grev(rs1, rs2, 32);
-> +}
-> +
-> +#endif
-> +
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+On Wed, Dec 16, 2020 at 1:15 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> Hi,
+>
+> With latest QEMU HEAD, 32-bit kernel with the following kernel commit
+> reverted [1]
+>
+> 1bd14a66ee5200d6a24419cbd2e0a0fccd4da36f ("RISC-V: Remove any memblock
+> representing unusable memory area")
+>
+> still does not boot on QEMU 'virt'. However explicitly specifying
+> -bios to use the fw_jump firmware will allow the kernel to boot.
+>
+> When QEMU switched OpenSBI from fw_jump to fw_dynamic during the 5.2.0
+> development cycle, I remember at that time I tested this on 32-bit
+> machine for both 'virt' and 'sifive_u'. See the following commit
+> message as it indicated 32-bit testing.
+>
+> 2cacd8414daf6a0643926392f05fd397ed1e9b66 "hw/riscv: Use pre-built bios
+> image of generic platform for virt & sifive_u"
+>
+> I don't have too much time to do the debugging. I hope someone could
+> pick this up and identify where the problem is.
+>
+> [1] http://lists.infradead.org/pipermail/linux-riscv/2020-December/003925.html
+>
 
-Stray whitespace at the end of the file.
-checkpatch or git should have complained about this.
+Thanks for reporting the issue. I am going to take a look.
 
-> +static bool gen_grevi(DisasContext *ctx, arg_grevi *a)
-> +{
-> +    TCGv source1 = tcg_temp_new();
-> +    TCGv source2;
-> +
-> +    gen_get_gpr(source1, a->rs1);
-> +
-> +    if (a->shamt == (TARGET_LONG_BITS - 8)) {
-> +        /* rev8, byte swaps */
-> +#ifdef TARGET_RISCV32
-> +        tcg_gen_bswap32_tl(source1, source1);
-> +#else
-> +        tcg_gen_bswap64_tl(source1, source1);
-> +#endif
+> Regards,
+> Bin
+>
+> --
+> opensbi mailing list
+> opensbi@lists.infradead.org
+> http://lists.infradead.org/mailman/listinfo/opensbi
 
-I should add a tcg_gen_bswap_tl define so that this ifdef is not necessary.
-For the to-do list...
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-r~
+-- 
+Regards,
+Atish
 
