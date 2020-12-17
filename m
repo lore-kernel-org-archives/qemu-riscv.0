@@ -1,75 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kpbtY-0001HU-Va
-	for mharc-qemu-riscv@gnu.org; Wed, 16 Dec 2020 13:51:28 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40852)
+	id 1kpmr6-0004v6-3L
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Dec 2020 01:33:40 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39292)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpbtW-0001Dg-Lf
- for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 13:51:26 -0500
-Received: from mail-ot1-x334.google.com ([2607:f8b0:4864:20::334]:35674)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kpmr3-0004ui-Ti; Thu, 17 Dec 2020 01:33:37 -0500
+Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36]:45558)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1kpbtU-0004sS-IG
- for qemu-riscv@nongnu.org; Wed, 16 Dec 2020 13:51:26 -0500
-Received: by mail-ot1-x334.google.com with SMTP id i6so24075349otr.2
- for <qemu-riscv@nongnu.org>; Wed, 16 Dec 2020 10:51:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=CFdJtTdIJY9D1RVwC+Zv+uF0ekcdFvsxzfdCzea0u0I=;
- b=MM8LZ5ikbYNec+0jSoAQZwGwIxQr4BX9vP3xz67FWlD82YR3cBZpouRoz14KcnWku+
- uTGkJHetwx0HA9Z0yTJK+RN9HnvsfOi6h0YPItxR29Piy3N7Zxky7vkBn/pBU2qIyJvN
- Mzmivh52dzDv40IYNyKfycQrV+52NXeIz3JLFI9xXpSHK9b8LBCZPRk1L+/777kIh70c
- vv+1IZhTFrWxUQGJYiybLJzLnI52p1SLvuagAH4r8RnzF/0o1CuMFIbTGHL7L+MIsMdB
- ss/xf7N6r8i8h80K5HkHZ5lXKOrDyANbIyjw/1gwmDX1/h6h2yCJ84nul++AD8GH2zHS
- OO8g==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kpmr2-0003Wb-1O; Thu, 17 Dec 2020 01:33:37 -0500
+Received: by mail-yb1-xb36.google.com with SMTP id k78so24853865ybf.12;
+ Wed, 16 Dec 2020 22:33:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=f3HXvdtwO3Rz3T8qIkIRtlklB+IdDZqls5OxAjD9hgI=;
+ b=ab56UwzTYCE6tM5NLM6PCCr47MLlwfmzo9LZEX+Gq0XY1sQijlzkULpAtRPvbWNAXg
+ ctybGOJ0VGdg6Oh9LGPbgoI8d8ubKTixMSwMb2xl9rxnC4vsOx3rx7ftSySk2AhnIdHu
+ VYjKTjl3R1ugC+USCTujQowoF1jSxBZHw8FcUbt/Sj+Seu0TkcaMmecE80dCTUhbB9aY
+ cY9qXs64NkBgEyzeI8r3A9RUC/Ladh7eLRCNAFmBlPT+w7bzUIvXWaFGkIX2l1r0n43o
+ 1193lhnSResat5esHbSTMvgkLx78ZH0hnae0VqQJpZvBGbMZZNQSEpBVoCxcYhz5FHko
+ 1T/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=CFdJtTdIJY9D1RVwC+Zv+uF0ekcdFvsxzfdCzea0u0I=;
- b=IqDxcOnwiH5Kfp/bpT5N0Nkz6cSxV3iNh4MHQTVW148CYnPhD6TsTS3RqipuT3c+dl
- wsBlMlWOX1TcZ0ZqnCVLew/38+oktYOw2273ZCDxWzwHJ62F3lfV/9UZZSZWtyqjNGWR
- NHDRf1Aje0kmt0YwDUydDlwZFM+Q3ojNbvxeOzebDBKpfwDp0kZadF1RSzgDApMBJqpF
- OBYQX+wDHC9iujinz4Lq2xSqXrLnMDTOw/p3zDIa0YD0B3TMPMBFBu0SNATdhPTD83JD
- lTYo60XsdowBLkoWOzk0tO78IzHfbU7dvoOS1+PuxVlRLSPs9l0lu4Q73J+OIk0Xu6Vf
- xmpw==
-X-Gm-Message-State: AOAM533af1AhKXjWbJLlGUpuM45TLtC4epxbjEgVKPkV6i7qsfjmY/IE
- oVt3kL7Tmbv8l7j8q7Xe4a3AoA==
-X-Google-Smtp-Source: ABdhPJxlPPXEEcL9sioEfnMnrUt8jLkJzEBRofxgtR0R95nn8HJsJQfQQhzJw/dY1cc20wUb8tR+rA==
-X-Received: by 2002:a9d:590c:: with SMTP id t12mr26637779oth.308.1608144683349; 
- Wed, 16 Dec 2020 10:51:23 -0800 (PST)
-Received: from [10.10.121.52] (fixed-187-189-51-144.totalplay.net.
- [187.189.51.144])
- by smtp.gmail.com with ESMTPSA id z9sm622227otj.67.2020.12.16.10.51.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Dec 2020 10:51:22 -0800 (PST)
-Subject: Re: [PATCH v4 16/16] hw/riscv: Use the CPU to determine if 32-bit
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
-References: <cover.1608142916.git.alistair.francis@wdc.com>
- <8ab7614e5df93ab5267788b73dcd75f9f5615e82.1608142916.git.alistair.francis@wdc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <e8bf1977-18aa-d08e-a2ad-efbeef4af3dd@linaro.org>
-Date: Wed, 16 Dec 2020 12:51:17 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=f3HXvdtwO3Rz3T8qIkIRtlklB+IdDZqls5OxAjD9hgI=;
+ b=TauIOf1dAd2CTGYnvRTY0v/arjuF+CvAMdhTCbhghzBV1624qnTlWHMVbxxlXcp2Jf
+ EuJkbFsEhdyr1yZeMKN+10M/Lg7ZyG0FJeVpYi6YyH5dmMOv1rn3CAI/ReGmRN6EhrBJ
+ 4uQ8O9ElL13dx5FaR62RpSFlPEMqFWaJmRTEAUnUQyibNC0Qnjrikqa52/cwCRELpBJq
+ NM2vlCRkJSLdObdSbthXd6SiFik6y3D4Rxk2g+jA3yv8K2rDGJBLu93xRNcsov76DBfS
+ vkGnVvk0maEUlYNvxjk3RthWmf6lguQnv9ABU48ncmyw3agI+Z6xeH9I4F5YDsFRhm/Y
+ eemw==
+X-Gm-Message-State: AOAM533YA7BhZUIPlMCsie3aa5mozR77Sj/uyc6+ZbHU9j6Hf7Txfuj0
+ 4FZroF81Z5alKwgZSmTgVtXKGle+HLOqYXC0ZiQ=
+X-Google-Smtp-Source: ABdhPJy4rC97aPdLxtSL/cfyZUnGqrlkXAYRIUzfEMdQy6s0dTx1B8S+okP6ynNmygfReCRAhyUaUDHrof9JUHW0fks=
+X-Received: by 2002:a25:690b:: with SMTP id e11mr53366779ybc.314.1608186813209; 
+ Wed, 16 Dec 2020 22:33:33 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <8ab7614e5df93ab5267788b73dcd75f9f5615e82.1608142916.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::334;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x334.google.com
+References: <cover.1608142916.git.alistair.francis@wdc.com>
+ <40d6df4dd05302c566e419be3a1fef7799e57c2e.1608142916.git.alistair.francis@wdc.com>
+In-Reply-To: <40d6df4dd05302c566e419be3a1fef7799e57c2e.1608142916.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 17 Dec 2020 14:33:22 +0800
+Message-ID: <CAEUhbmUAwF2R-1-zVZtFTEfWAjSHCaa-UHWbZ5H_NkKGW=UsBQ@mail.gmail.com>
+Subject: Re: [PATCH v4 08/16] hw/riscv: sifive_u: Remove compile time XLEN
+ checks
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb36.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,26 +71,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2020 18:51:27 -0000
+X-List-Received-Date: Thu, 17 Dec 2020 06:33:38 -0000
 
-On 12/16/20 12:23 PM, Alistair Francis wrote:
-> Instead of using string compares to determine if a RISC-V machine is
-> using 32-bit or 64-bit CPUs we can use the initalised CPUs. This avoids
-> us having to maintain a list of CPU names to compare against.
-> 
-> This commit also fixes the name of the function to match the
-> riscv_cpu_is_32bit() function.
-> 
+On Thu, Dec 17, 2020 at 2:22 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+> Acked-by: Palmer Dabbelt <palmerdabbelt@google.com>
 > ---
->  include/hw/riscv/boot.h |  8 +++++---
->  hw/riscv/boot.c         | 31 ++++++++++---------------------
->  hw/riscv/sifive_u.c     | 10 +++++-----
->  hw/riscv/spike.c        |  8 ++++----
->  hw/riscv/virt.c         |  9 +++++----
->  5 files changed, 29 insertions(+), 37 deletions(-)
+>  hw/riscv/sifive_u.c | 55 ++++++++++++++++++++++++---------------------
+>  1 file changed, 30 insertions(+), 25 deletions(-)
+>
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Tested with 64-bit sifive_u
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
+Tested-by: Bin Meng <bin.meng@windriver.com>
 
-r~
+32-bit is blocked by:
+http://lists.infradead.org/pipermail/linux-riscv/2020-December/003927.html
+
+Regards,
+Bin
 
