@@ -1,58 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kpxIh-0008Qj-Qj
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Dec 2020 12:42:51 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45608)
+	id 1kpzoI-0007bk-Tt
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Dec 2020 15:23:38 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55528)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kpxIg-0008Or-9c; Thu, 17 Dec 2020 12:42:50 -0500
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:37526)
+ id 1kpzoH-0007bH-0y; Thu, 17 Dec 2020 15:23:37 -0500
+Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:43239)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kpxId-0002G4-V0; Thu, 17 Dec 2020 12:42:50 -0500
-Received: by mail-il1-x12c.google.com with SMTP id k8so26591765ilr.4;
- Thu, 17 Dec 2020 09:42:47 -0800 (PST)
+ id 1kpzoC-0005ce-CY; Thu, 17 Dec 2020 15:23:36 -0500
+Received: by mail-il1-x132.google.com with SMTP id q5so81863ilc.10;
+ Thu, 17 Dec 2020 12:23:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=DMMOu5qedPUEmi6rXnYHbXL2HHtxppP/f3uZrovbMNg=;
- b=o4TOO39cjTq8Jakup3I3xakkDNJMul2w2SLwgGeoawwyjMrA/qaCQjBfLOlp1uXtrB
- ukJIpJyCCBgHQfCJzRPhiDVRlSS61Sxe2ZeSTMCdd6+Rs9YxCrpOO47VYFOKOht10qHQ
- OjSpsb/+U5TI4csqn/ElWfqYRbkMRqfoUbv2/KGzIowFu8C+0Ro91Psr6Wm7yw2fw/0G
- F7LsFHylDot3/w8SJQ4ltwHbwe+HVPylv7vUQx0t8q0L5akxs1l3c9I2EhXZgab2hbhW
- KCvnXEIz2Fmc72LbWCmmurLp6B+hAxXQ1jgzFXRVktkH9yprD+cL1UqqUkr/pRhDkMf4
- UfKQ==
+ :cc; bh=dZCh9lPo/hhd1AL5JHnv/BsmRruGorlHX2+ygkG21kw=;
+ b=AAwflWB4wODzKo298Hfe6skpVarvI/NghtkBx5gQeBOVuAFYLzO7Lr3LAN0QfrHkjy
+ N/W7iK5nddT/si18lmV5u/CNN4YC+O576IGfT18HK9bSIo9wcIziTmCOTsLH2ivOGqpb
+ Dy2FaN02i2MKVzM1riS4NZ95Qsy2xoh1jcduSWDxSMaQDDWBdANvcpQ8OLZLZxAFp2qO
+ ojjkI3FDXRqB3WvEOZ3dcnQrhMH1tVoN6tnDnehKmKsiBAsb/f9MUN7WZUNH6CBfChq5
+ XnK8nyREz3sdyyHfHn9l/GF6VBLictnUs0dqVx+XzFo+lYk9YhCTOlJDxI2C1qEOPLvf
+ O99Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=DMMOu5qedPUEmi6rXnYHbXL2HHtxppP/f3uZrovbMNg=;
- b=tCtXyZ46Y8VJcZazFWdQuGSeKTrdY2YardWHOlM3fQOscJstWmHiYERa+GSFgV6hZy
- Kso/kgvUbeJ6TM/HIKURSpPljbOe1dSoHyUuY/nvbJsLLYRgqlFr/m95CrO8un0bc6Z7
- 3r62teNZBzhLOneDwIzdKfUvik804QQqpVvg7AGrGBQYPgR4JduYaA7isFqnlVs6A1NH
- nPbBgm/zqYusjhte6VQQvSADrezCfSvInhOGZ0IcpJKi77TDU2hIe230tt3Ln5XoG1Bt
- oZxZbOO8SDyhTLgNIyJD/pmDvTYSgwOTKlN8XTRlt813ZmtpztiLkAWIIWQAB7452R6z
- a8Tg==
-X-Gm-Message-State: AOAM533p/6atnBlgodW9KLvGQtuNiDD9QqH1YOVQsnfZuqRnzgZ/RbCs
- SWO0sZhnopo8/yPrsi834TsNoK5fQGAvkVrifac=
-X-Google-Smtp-Source: ABdhPJwRcqKv2JeQ30H/A6bphrIQjKqrz/icaZti5ybA9NcMDDDfyPVJ8X25HvvYiiIdQcb7PgsTosmcMsPH9z1vaJs=
-X-Received: by 2002:a92:cb44:: with SMTP id f4mr49424742ilq.131.1608226966334; 
- Thu, 17 Dec 2020 09:42:46 -0800 (PST)
+ bh=dZCh9lPo/hhd1AL5JHnv/BsmRruGorlHX2+ygkG21kw=;
+ b=CzWZjS5UINHz10in/w5dfkqA24nMjsYr3LwDILtFqj39hTEh0grlOYu6y91M6RqRZE
+ LOqb/3K2LgUKFNSFpoz8s3lBprIZQDikqoFee0KddvvDNiQw6kpI7osQfB2jPxJTR8OH
+ UlDrxQ3iOvS6CM+iHtUrcWvyK4BRafU84qGTBzW4iHqSJJM8M4jint1ZA2wYMDEcuhHT
+ 28DMp1nw3HThg3QMeYmWTruJlpaaHBubPP5hrQRxgEmTGXA9kRWyP4qPtLTz9RI9yZ+M
+ njRdun89FXmtrqRLY6fchnzlwg1guz2o+5jceVK6Fl9JJomZ6MQO/TQB+eTEqSF27drG
+ CVTQ==
+X-Gm-Message-State: AOAM532CREdZ4P2qAzN7wjDFHYEctsRbCkN1u6ggm5HQ3eFC7BVubZj0
+ JaC0mR22M/PcHXJI7cRcDH8cMm1oIqvdJ/W0UiE=
+X-Google-Smtp-Source: ABdhPJxYuLlOD25i2gbXMPaY5Jd1r/KvO4H3BzImJwApIypCI+/cxs9+g8QMlcHD0o6k0l0Fo/kPMPSrufUJRrBji9Y=
+X-Received: by 2002:a92:dc0f:: with SMTP id t15mr571866iln.267.1608236610566; 
+ Thu, 17 Dec 2020 12:23:30 -0800 (PST)
 MIME-Version: 1.0
-References: <7d2b4053-dbca-faf8-04b2-8da0aab70f29@linaro.org>
- <mhng-18cffb57-6f85-430d-aa0e-bf19e4698c9a@palmerdabbelt-glaptop>
-In-Reply-To: <mhng-18cffb57-6f85-430d-aa0e-bf19e4698c9a@palmerdabbelt-glaptop>
+References: <20201201032936.1213-1-jiangyifei@huawei.com>
+ <20201201032936.1213-2-jiangyifei@huawei.com>
+In-Reply-To: <20201201032936.1213-2-jiangyifei@huawei.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 17 Dec 2020 09:42:20 -0800
-Message-ID: <CAKmqyKNakioM7F0s3C=W5vaUP8UdCoKGo5cXnTwcm3jGCbEsGw@mail.gmail.com>
-Subject: Re: [PATCH v4 16/16] hw/riscv: Use the CPU to determine if 32-bit
-To: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
+Date: Thu, 17 Dec 2020 12:23:04 -0800
+Message-ID: <CAKmqyKNMqtP2HUULF39C1xxyrWj4iECRGavP4Qq7Q+DHZ-c38A@mail.gmail.com>
+Subject: Re: [PATCH 1/1] target-riscv: support QMP dump-guest-memory
+To: Yifei Jiang <jiangyifei@huawei.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+ Zhanghailiang <zhang.zhanghailiang@huawei.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "Zhangxiaofeng (F)" <victor.zhangxiaofeng@huawei.com>,
+ "limingwang (A)" <limingwang@huawei.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ "Wubin (H)" <wu.wubin@huawei.com>, "dengkai (A)" <dengkai1@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x132.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,53 +78,280 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Dec 2020 17:42:50 -0000
+X-List-Received-Date: Thu, 17 Dec 2020 20:23:37 -0000
 
-On Thu, Dec 17, 2020 at 9:25 AM Palmer Dabbelt <palmer@dabbelt.com> wrote:
+On Mon, Nov 30, 2020 at 7:32 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
 >
-> On Thu, 17 Dec 2020 05:58:11 PST (-0800), richard.henderson@linaro.org wrote:
-> > On 12/17/20 12:44 AM, Bin Meng wrote:
-> >> What happens if something like ARM big.LITTLE needs to be supported on RISC-V?
-> >
-> > I'd say it's the board's job to pass the boot heart.
-> > (Though even big.LITTLE doesn't mix 64 and 32-bit cores.)
+> Add the support needed for creating prstatus elf notes. Now elf notes
+> only contains user_regs. This allows us to use QMP dump-guest-memory.
 >
-> I guess we can't stop people from building crazy things, but it does seem like
-> building a system that mixes up base ISAs is unlikely.  IDK if 32-bit
-> compatibility on 64-bit systems is ever going to be important enough to show up
-> on RISC-V, as 32-bit might be defunct in portable systems by the point real
-> RISC-V systems are availiable, but one could imagine systems where only a
-> subset of cores have 32-bit compatibility.  My guess is that they'd all boot
-> into 64-bit mode, though, so that sort of stuff won't be relevant until one
-> tries to get to 32-bit code.
+> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+> Signed-off-by: Mingwang Li <limingwang@huawei.com>
+> ---
+>  target/riscv/arch_dump.c | 189 +++++++++++++++++++++++++++++++++++++++
+>  target/riscv/cpu.c       |   2 +
+>  target/riscv/cpu.h       |   4 +
+>  target/riscv/cpu_bits.h  |   1 +
+>  target/riscv/meson.build |   1 +
+>  5 files changed, 197 insertions(+)
+>  create mode 100644 target/riscv/arch_dump.c
 >
-> Regardless of where that sort of thing goes, it seems reasonable to just ban
-> people from spinning up mixed machine XLEN systems in QEMU for the time being.
-> IIUC that's always been impossible (as it was a #define before), so it's not
-> like we're regressing on any functionality with that constraint.
+> diff --git a/target/riscv/arch_dump.c b/target/riscv/arch_dump.c
+> new file mode 100644
+> index 0000000000..b89ddf18c7
+> --- /dev/null
+> +++ b/target/riscv/arch_dump.c
+> @@ -0,0 +1,189 @@
+> +/* Support for writing ELF notes for RISC-V architectures
+> + *
+> + * Copyright (C) 2020 Huawei Technologies Co., Ltd
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "cpu.h"
+> +#include "elf.h"
+> +#include "sysemu/dump.h"
+> +
+> +/* struct user_regs_struct from arch/riscv/include/uapi/asm/ptrace.h */
+> +struct riscv_user_regs {
+> +    target_ulong pc;
+> +    target_ulong regs[31];
+> +} QEMU_PACKED;
+> +
+> +/* struct elf_prstatus from include/uapi/linux/elfcore.h */
+> +struct riscv64_elf_prstatus {
+> +    char pad1[32]; /* 32 == offsetof(struct elf_prstatus, pr_pid) */
+> +    uint32_t pr_pid;
+> +    char pad2[76]; /* 76 == offsetof(struct elf_prstatus, pr_reg) -
+> +                            offsetof(struct elf_prstatus, pr_ppid) */
+> +    struct riscv_user_regs pr_reg;
+> +    char pad3[8];
+> +} QEMU_PACKED;
+> +
+> +struct riscv64_note {
+> +    Elf64_Nhdr hdr;
+> +    char name[8]; /* align_up(sizeof("CORE"), 4) */
+> +    struct riscv64_elf_prstatus prstatus;
+> +} QEMU_PACKED;
+> +
+> +#define RISCV64_NOTE_HEADER_SIZE offsetof(struct riscv64_note, prstatus)
+> +#define RISCV64_PRSTATUS_NOTE_SIZE \
+> +            (RISCV64_NOTE_HEADER_SIZE + sizeof(struct riscv64_elf_prstatus))
+> +
+> +static void riscv64_note_init(struct riscv64_note *note, DumpState *s,
+> +                              const char *name, Elf64_Word namesz,
+> +                              Elf64_Word type, Elf64_Word descsz)
+> +{
+> +    memset(note, 0, sizeof(*note));
+> +
+> +    note->hdr.n_namesz = cpu_to_dump32(s, namesz);
+> +    note->hdr.n_descsz = cpu_to_dump32(s, descsz);
+> +    note->hdr.n_type = cpu_to_dump32(s, type);
+> +
+> +    memcpy(note->name, name, namesz);
+> +}
+> +
+> +int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
+> +                               int cpuid, void *opaque)
+> +{
+> +    struct riscv64_note note;
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    CPURISCVState *env = &cpu->env;
+> +    DumpState *s = opaque;
+> +    int ret, i = 0;
+> +    const char name[] = "CORE";
+> +
+> +    riscv64_note_init(&note, s, name, sizeof(name),
+> +                      NT_PRSTATUS, sizeof(note.prstatus));
+> +
+> +    note.prstatus.pr_pid = cpu_to_dump32(s, cpuid);
+> +
+> +    note.prstatus.pr_reg.pc = cpu_to_dump64(s, env->pc);
+> +
+> +    for (i = 0; i < 31; i++) {
+> +        note.prstatus.pr_reg.regs[i] = cpu_to_dump64(s, env->gpr[i + 1]);
+> +    }
+> +
+> +    ret = f(&note, RISCV64_PRSTATUS_NOTE_SIZE, s);
+> +    if (ret < 0) {
+> +        return -1;
+> +    }
+> +
+> +    return ret;
+> +}
+> +
+> +struct riscv32_elf_prstatus {
+> +    char pad1[24]; /* 24 == offsetof(struct elf_prstatus, pr_pid) */
+> +    uint32_t pr_pid;
+> +    char pad2[44]; /* 44 == offsetof(struct elf_prstatus, pr_reg) -
+> +                            offsetof(struct elf_prstatus, pr_ppid) */
+> +    struct riscv_user_regs pr_reg;
+> +    char pad3[4];
+> +} QEMU_PACKED;
+> +
+> +struct riscv32_note {
+> +    Elf32_Nhdr hdr;
+> +    char name[8]; /* align_up(sizeof("CORE"), 4) */
+> +    struct riscv32_elf_prstatus prstatus;
+> +} QEMU_PACKED;
+> +
+> +#define RISCV32_NOTE_HEADER_SIZE offsetof(struct riscv32_note, prstatus)
+> +#define RISCV32_PRSTATUS_NOTE_SIZE \
+> +            (RISCV32_NOTE_HEADER_SIZE + sizeof(struct riscv32_elf_prstatus))
+> +
+> +static void riscv32_note_init(struct riscv32_note *note, DumpState *s,
+> +                              const char *name, Elf32_Word namesz,
+> +                              Elf32_Word type, Elf32_Word descsz)
+> +{
+> +    memset(note, 0, sizeof(*note));
+> +
+> +    note->hdr.n_namesz = cpu_to_dump32(s, namesz);
+> +    note->hdr.n_descsz = cpu_to_dump32(s, descsz);
+> +    note->hdr.n_type = cpu_to_dump32(s, type);
+> +
+> +    memcpy(note->name, name, namesz);
+> +}
+> +
+> +int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+> +                               int cpuid, void *opaque)
+> +{
+> +    struct riscv32_note note;
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    CPURISCVState *env = &cpu->env;
+> +    DumpState *s = opaque;
+> +    int ret, i;
+> +    const char name[] = "CORE";
+> +
+> +    riscv32_note_init(&note, s, name, sizeof(name),
+> +                      NT_PRSTATUS, sizeof(note.prstatus));
+> +
+> +    note.prstatus.pr_pid = cpu_to_dump32(s, cpuid);
+> +
+> +    note.prstatus.pr_reg.pc = cpu_to_dump32(s, env->pc);
+> +
+> +    for (i = 0; i < 31; i++) {
+> +        note.prstatus.pr_reg.regs[i] = cpu_to_dump32(s, env->gpr[i + 1]);
+> +    }
+> +
+> +    ret = f(&note, RISCV32_PRSTATUS_NOTE_SIZE, s);
+> +    if (ret < 0) {
+> +        return -1;
+> +    }
+> +
+> +    return ret;
+> +}
+> +
+> +int cpu_get_dump_info(ArchDumpInfo *info,
+> +                      const GuestPhysBlockList *guest_phys_blocks)
+> +{
+> +    RISCVCPU *cpu;
+> +    CPURISCVState *env;
+> +
+> +    if (first_cpu == NULL) {
+> +        return -1;
+> +    }
+> +    cpu = RISCV_CPU(first_cpu);
+> +    env = &cpu->env;
+> +
+> +    info->d_machine = EM_RISCV;
+> +
+> +#if defined(TARGET_RISCV64)
+> +    info->d_class = ELFCLASS64;
+> +#else
+> +    info->d_class = ELFCLASS32;
+> +#endif
+> +
+> +    info->d_endian = (env->mstatus & MSTATUS_UBE) != 0
+> +                     ? ELFDATA2MSB : ELFDATA2LSB;
+> +
+> +    return 0;
+> +}
+> +
+> +ssize_t cpu_get_note_size(int class, int machine, int nr_cpus)
+> +{
+> +    size_t note_size;
+> +
+> +    if (class == ELFCLASS64) {
+> +        note_size = RISCV64_PRSTATUS_NOTE_SIZE;
+> +    } else {
+> +        note_size = RISCV32_PRSTATUS_NOTE_SIZE;
+> +    }
+> +
+> +    return note_size * nr_cpus;
+> +}
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6a0264fc6b..52399d83b4 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -544,6 +544,8 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>      cc->dump_state = riscv_cpu_dump_state;
+>      cc->set_pc = riscv_cpu_set_pc;
+>      cc->synchronize_from_tb = riscv_cpu_synchronize_from_tb;
+> +    cc->write_elf64_note = riscv_cpu_write_elf64_note;
+> +    cc->write_elf32_note = riscv_cpu_write_elf32_note;
 
-I agree. Currently we don't get anywhere close to allowing mixed XLEN systems.
+This fails to build for RISC-V linux user as the functions aren't defined.
 
-Allowing 32-bit and 64-bit CPUs on a system is a useful goal, as for
-example that is what the HiFive 1 has. As richard said though the main
-interest at this point is the boot CPU, which the board can specify
-different harts depending on what it is doing.
-
-This is just the first step to making RISC-V more flexible with XLEN,
-there will be more patches in the future to continue improving this.
-
-I'm going to apply this series today.
+Please fix the build failure and send a new version.
 
 Alistair
 
+>      cc->gdb_read_register = riscv_cpu_gdb_read_register;
+>      cc->gdb_write_register = riscv_cpu_gdb_write_register;
+>      cc->gdb_num_core_regs = 33;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index c0a326c843..4a340b0c73 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -315,6 +315,10 @@ extern const char * const riscv_intr_names[];
 >
-> Other hetergenous ISA/microarctucture stuff seems reasonable to support in
-> QEMU, but also not a high priority.  It doesn't seem that hard to write the
-> early boot stuff in a way such that it only depends on the base ISA -- that's
-> essentially how we're handling stuff like F/D in Linux, you just either probe
-> or handle the traps.  There's already some simple hetergenous stuff floating
-> around (like the non-MMU cores in the SiFive designs) and that all seems to
-> work fine so my guess is we have enough stuff there, but I'm sure there'll be
-> more work do to as more complicated designs start to show up (doubly so as
-> there's no specs for any of this).
+>  const char *riscv_cpu_get_trap_name(target_ulong cause, bool async);
+>  void riscv_cpu_do_interrupt(CPUState *cpu);
+> +int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
+> +                               int cpuid, void *opaque);
+> +int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+> +                               int cpuid, void *opaque);
+>  int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+>  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+>  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 24b24c69c5..d7259561e7 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -368,6 +368,7 @@
+>  #define MSTATUS_MIE         0x00000008
+>  #define MSTATUS_UPIE        0x00000010
+>  #define MSTATUS_SPIE        0x00000020
+> +#define MSTATUS_UBE         0x00000040
+>  #define MSTATUS_MPIE        0x00000080
+>  #define MSTATUS_SPP         0x00000100
+>  #define MSTATUS_MPP         0x00001800
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index 14a5c62dac..88ab850682 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -26,6 +26,7 @@ riscv_ss.add(files(
+>
+>  riscv_softmmu_ss = ss.source_set()
+>  riscv_softmmu_ss.add(files(
+> +  'arch_dump.c',
+>    'pmp.c',
+>    'monitor.c',
+>    'machine.c'
+> --
+> 2.19.1
+>
+>
 
