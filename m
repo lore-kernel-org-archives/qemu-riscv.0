@@ -1,75 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kqghP-0006x6-E6
-	for mharc-qemu-riscv@gnu.org; Sat, 19 Dec 2020 13:11:23 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56924)
+	id 1krKQB-0000ow-IQ
+	for mharc-qemu-riscv@gnu.org; Mon, 21 Dec 2020 07:36:15 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42788)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=615c5f467=alistair.francis@wdc.com>)
- id 1kqghN-0006wg-D3; Sat, 19 Dec 2020 13:11:21 -0500
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:33735)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=615c5f467=alistair.francis@wdc.com>)
- id 1kqghJ-0007mC-Rp; Sat, 19 Dec 2020 13:11:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1608402581; x=1639938581;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=jlabsrObSKLOQZjqeZVqWT3Q4FEuPxFNktmB4r6GAfo=;
- b=B8pvzpLUNINwAYVxJHpGw4IStdYA1MlT5wqF8MVvBKol/DJo7VRRmeAN
- aMXLw3FD+Dv7Z4XJhMWU+KWAvXmh1qsVpHmNOCiy14z/bL5aA54HuPwBj
- IGXRyEsPMnA+P71ylFk09sHJKhrP8lC1p9lh3S4zbV4fQ6H4Fy8XMyuDu
- 1wiEQIpYEWfpLTvGTIltHh8atRdp9TbU2p3WrZvIHTaiX7BBYMVXCny1F
- UjwUq04ed+kmq4EV3OfQo6to01VX+5WXY+D0jc1JOP6DFwP9DTQ0pSAIz
- pA460sC9diEgVcIgh60Fb6mNMQMGzBj7eh+okJ7Pczo53h1DtL8rUfbet g==;
-IronPort-SDR: FFKE3UoRwercJE8JUNheOWhsREp8+PSI9NGIJ7vTErQAMrDa/4qO0RKNNyNGQVyNdQVWFlb0rN
- lf10YjUkT1+9wwPcP8yg59IDFJdtXtR4p4H7sN3uz6Hawl2gLDa5odQUXUBXnBsjWKo1KasSMS
- oFu6MQmlC02Rc+0YD74+YjAqHKuO8D+il2ZeIB3fWnaL+S/COVKRoSqtTgJtkDoEWSMB7oRh/z
- uJC/m9iBLROfT5CNDgujjIhIGL1VDvT422uHedfWuyPmgP0iN7YL7RPGQqjOy9b/OzI2UZb6oJ
- G2E=
-X-IronPort-AV: E=Sophos;i="5.78,433,1599494400"; d="scan'208";a="259365998"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 20 Dec 2020 02:29:36 +0800
-IronPort-SDR: 5xiXQiTjonYSdd01hX7mC3UmL28zvSHmY3r5wtRG/ZyQqLFbFW1YcbQ7gRndklxtrZeeViL80z
- Z+8LfxNihfBDDAAPsKYk5qZuMRE/riBBxtmREnl7eTXFb1blK5/SK1nNEafA9NxDSXmTTUbHBI
- elhN078ey5qzfvZZjNAzIFvFKGnJCT4l6xgR5IwJBdEJtGfnz+Mw9F9zgM29aUSZUp3135BeX8
- pNs5Go1bnUa+dywiY4X/hoLbIJaoxMF/EYRBuTtZdN2TiVzSuB0KnRRyiBWSTfqRlLJ7M+9yVa
- VI5ecq1UGpjxK/kT8KnovxYx
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Dec 2020 09:54:45 -0800
-IronPort-SDR: 04+CJ7MZW/vnu1pQRBqfJJnQZOOlOjhczDguItXOKLa4TAyQh5ECszUXPiL321i1bU/DrBZQ5/
- 2RQs77JuEUDfG+KPhhieZLbvZgdW6KUHvYcVhQQAAhzIHw1QKu8mhJazdc3Y2BM/uZ1avaUFBq
- JOnb20i3ftQTxLWYFpvoNrXYV01O3rw+uK26FrpBZ3BC/gqLYLAyhHwqS/nKYb2lSjjo2JP9kR
- s++MdXJs3JLc1mXwBqTMfmeKeo+R4UPYIylZQ+oy5TFpU2ZiX5Vy4KHaXPvuVsvKA7z7iAFcAB
- GEw=
-WDCIronportException: Internal
-Received: from cnf011319.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.62.76])
- by uls-op-cesaip02.wdc.com with ESMTP; 19 Dec 2020 10:11:15 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v1 1/1] linux-user/signal: Decode waitid si_code
-Date: Sat, 19 Dec 2020 10:11:13 -0800
-Message-Id: <1a4df1b5638d73b64200add175be9d69013418d8.1608401453.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.29.2
+ (Exim 4.90_1) (envelope-from <local.tourist.kiev@gmail.com>)
+ id 1krKQ9-0000on-HX
+ for Qemu-riscv@nongnu.org; Mon, 21 Dec 2020 07:36:13 -0500
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:42913)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <local.tourist.kiev@gmail.com>)
+ id 1krKQ7-0004Og-FT
+ for Qemu-riscv@nongnu.org; Mon, 21 Dec 2020 07:36:13 -0500
+Received: by mail-lf1-x134.google.com with SMTP id b26so13743420lff.9
+ for <Qemu-riscv@nongnu.org>; Mon, 21 Dec 2020 04:36:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=y2VuxIufta//COkZouv7AjslWA/3R6J9klhyvlspvXs=;
+ b=lm3Bn7X0IjO1FUtBvfzvjjd4WsHyNYcjN+gIc7w+Mcgosr2qzwW1DpTuXKzeaz/QTE
+ 3PMFJIQskZmMQTa0tG0G3oZIvdlhxD76OIGIz9UkftJmZMQZ/Kfg9J3wU1XQuBhoefKq
+ oGES8PBMmWjG6SywcPUAsGPKexMZ4qjuPYV+krtqMFmMJikCkrK1AEzqEQjDDyNvEDPy
+ 74CQzgVfUf4uWG8IT/S8YXPphNjKut7E3qIkza1IpMpAq31y/V38dPCxYlDyJ00n2Ltg
+ 7aZrlysqXKp3gOaL8vQ5luo6LPGdjnAotYe2Ft3Z9Q/zy+8YC4Lo0ENJeInJKDhwdqXM
+ lseA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=y2VuxIufta//COkZouv7AjslWA/3R6J9klhyvlspvXs=;
+ b=dyEwPL8NjC9RG1RYZL7q3/TSADJDznlKOJzpDFl9/iZu9mpIYQQ6UNqPAYm8h99NW3
+ /KzJDCZbvogNJwgBe3BwXC7k1egnXHyMz8Ff3ZEq+uEqX9akY3+4fNukLTikzopRxHLT
+ J6hBu/D3EZNygsyKS0IxL/D9Yqny/OAG5CRPlVzE5XM/Z8zCI6bMnhjZlIB5thzmyPQL
+ KMRZ9eFO3rEKitFRRKZQv+dQb+SNKUeE9cz8sR++/o2xnDgWFMRhEtThiRM14PXE3MXk
+ kZTQT1iCyEFQVPzBvjFCWT6GUneVrDzdnSG3HloRODXB+KM9rHOd9EvaljLAYeUV6sL4
+ 4reg==
+X-Gm-Message-State: AOAM530InK+k6UrzGbt3as5VG75OcNsPKz5bL5g1NYZ5ZOHlmSJTU6zz
+ rdKniJXdKasMz1kmRklGKRI2xy4VCu2B3oNMBJ2aYNG2xq9Ylw==
+X-Google-Smtp-Source: ABdhPJxXclZPZ16nj+Pa23ABDP8+cN/kss2ho1m25WvtKddh9uOWaooHqIxXrTD2FXzFtLLtAIh0+cWu0IZervx30VE=
+X-Received: by 2002:a19:651a:: with SMTP id z26mr6418849lfb.306.1608554167687; 
+ Mon, 21 Dec 2020 04:36:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.143.124;
- envelope-from=prvs=615c5f467=alistair.francis@wdc.com;
- helo=esa2.hgst.iphmx.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+From: Ivan Serdyuk <local.tourist.kiev@gmail.com>
+Date: Mon, 21 Dec 2020 14:35:55 +0200
+Message-ID: <CANFCsz82ELUcs9Q6PVvmAE0rcx5NB13Sf1xfzf7AC9dQ-z74Fg@mail.gmail.com>
+Subject: Guaranteed way to identify whether an application is running under
+ qemu-linux-user + nspawn (JeOS)
+To: Qemu-riscv@nongnu.org, adrian@suse.de, schwab@suse.de
+Content-Type: multipart/alternative; boundary="000000000000c45f1505b6f8b3f3"
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=local.tourist.kiev@gmail.com; helo=mail-lf1-x134.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, HTML_OBFUSCATE_05_10=0.26, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,68 +66,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Dec 2020 18:11:22 -0000
+X-List-Received-Date: Mon, 21 Dec 2020 12:36:13 -0000
 
-When mapping the host waitid status to the target status we previously
-just used decoding information in the status value. This doesn't follow
-what the waitid documentation describes, which instead suggests using
-the si_code value for the decoding. This results in the incorrect values
-seen when calling waitid. This is especially apparent on RV32 where all
-wait calls use waitid (see the bug case).
+--000000000000c45f1505b6f8b3f3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This patch uses the si_code value to map the waitid status.
+Hi there.
 
-Buglink: https://bugs.launchpad.net/qemu/+bug/1906193
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- linux-user/signal.c | 26 ++++++++++++++++++++++++--
- 1 file changed, 24 insertions(+), 2 deletions(-)
+I was trying to figure out a proper way to identify whether an application
+is running under rv64gc build of JeOS (currently using
+https://en.opensuse.org/openSUSE:RISC-V - but I could try other "container
+OS" builds, as well).
 
-diff --git a/linux-user/signal.c b/linux-user/signal.c
-index 73de934c65..b6c9326521 100644
---- a/linux-user/signal.c
-+++ b/linux-user/signal.c
-@@ -305,6 +305,7 @@ static inline void host_to_target_siginfo_noswap(target_siginfo_t *tinfo,
-     int sig = host_to_target_signal(info->si_signo);
-     int si_code = info->si_code;
-     int si_type;
-+    int status = info->si_status;
-     tinfo->si_signo = sig;
-     tinfo->si_errno = 0;
-     tinfo->si_code = info->si_code;
-@@ -349,8 +350,29 @@ static inline void host_to_target_siginfo_noswap(target_siginfo_t *tinfo,
-         case TARGET_SIGCHLD:
-             tinfo->_sifields._sigchld._pid = info->si_pid;
-             tinfo->_sifields._sigchld._uid = info->si_uid;
--            tinfo->_sifields._sigchld._status
--                = host_to_target_waitstatus(info->si_status);
-+
-+            /*
-+             * Map host to target signal numbers for the waitid family of
-+             * syscalls. This is similar to the functionality in
-+             * host_to_target_waitstatus() except we use the si_code to
-+             * determine the operation.
-+             */
-+            switch (info->si_code) {
-+            case CLD_KILLED:
-+            case CLD_DUMPED:
-+                tinfo->_sifields._sigchld._status =
-+                    host_to_target_signal(WTERMSIG(status)) |
-+                                          (status & ~0x7f);
-+                break;
-+            case CLD_STOPPED:
-+                tinfo->_sifields._sigchld._status =
-+                (host_to_target_signal(WSTOPSIG(status)) << 8) |
-+                    (status & 0xff);
-+                break;
-+            default:
-+                tinfo->_sifields._sigchld._status = status;
-+            }
-+
-             tinfo->_sifields._sigchld._utime = info->si_utime;
-             tinfo->_sifields._sigchld._stime = info->si_stime;
-             si_type = QEMU_SI_CHLD;
--- 
-2.29.2
+There is an open issue, for Bazel, out here
+<https://github.com/bazelbuild/bazel/issues/12683> - so I might be able to
+submit a patch, for supporting such an environment.
 
+I am stuck on finding a proper way to identify that I am running something
+under qemu-linux-user : checking /proc/cpuinfo would provide the info about
+my host OS (OpenSUSE), not the JeOS.
+
+Please advise something concrete.
+
+CC'ing to Andreas Schwab and Adrian Schr=C3=B6ter.
+
+Thanks in advance.
+Ivan
+
+--000000000000c45f1505b6f8b3f3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi there.<div><br></div><div>I was trying to figure out a =
+proper way to identify whether an application is running under rv64gc build=
+ of JeOS (currently using=C2=A0<a href=3D"https://en.opensuse.org/openSUSE:=
+RISC-V">https://en.opensuse.org/openSUSE:RISC-V</a>=C2=A0- but I could try =
+other &quot;container OS&quot; builds, as well).</div><div><br></div><div>T=
+here is an open issue, for Bazel, <a href=3D"https://github.com/bazelbuild/=
+bazel/issues/12683">out here</a>=C2=A0- so I might be able to submit a patc=
+h, for supporting such an environment.</div><div><br></div><div>I am stuck =
+on finding a proper way to identify that I am running something under qemu-=
+linux-user : checking /proc/cpuinfo would provide the info about my host OS=
+ (OpenSUSE), not the JeOS.</div><div><br></div><div>Please advise something=
+ concrete.</div><div><br></div><div>CC&#39;ing to=C2=A0Andreas Schwab and=
+=C2=A0Adrian Schr=C3=B6ter.</div><div><br></div><div>Thanks in advance.</di=
+v><div>Ivan</div></div>
+
+--000000000000c45f1505b6f8b3f3--
 
