@@ -1,59 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1krKQB-0000ow-IQ
-	for mharc-qemu-riscv@gnu.org; Mon, 21 Dec 2020 07:36:15 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42788)
+	id 1kraKW-0004qL-H9
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Dec 2020 00:35:28 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42896)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <local.tourist.kiev@gmail.com>)
- id 1krKQ9-0000on-HX
- for Qemu-riscv@nongnu.org; Mon, 21 Dec 2020 07:36:13 -0500
-Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:42913)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kraKV-0004py-2M; Tue, 22 Dec 2020 00:35:27 -0500
+Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:34993)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <local.tourist.kiev@gmail.com>)
- id 1krKQ7-0004Og-FT
- for Qemu-riscv@nongnu.org; Mon, 21 Dec 2020 07:36:13 -0500
-Received: by mail-lf1-x134.google.com with SMTP id b26so13743420lff.9
- for <Qemu-riscv@nongnu.org>; Mon, 21 Dec 2020 04:36:09 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kraKS-0001xi-T7; Tue, 22 Dec 2020 00:35:26 -0500
+Received: by mail-yb1-xb32.google.com with SMTP id u203so10783793ybb.2;
+ Mon, 21 Dec 2020 21:35:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=y2VuxIufta//COkZouv7AjslWA/3R6J9klhyvlspvXs=;
- b=lm3Bn7X0IjO1FUtBvfzvjjd4WsHyNYcjN+gIc7w+Mcgosr2qzwW1DpTuXKzeaz/QTE
- 3PMFJIQskZmMQTa0tG0G3oZIvdlhxD76OIGIz9UkftJmZMQZ/Kfg9J3wU1XQuBhoefKq
- oGES8PBMmWjG6SywcPUAsGPKexMZ4qjuPYV+krtqMFmMJikCkrK1AEzqEQjDDyNvEDPy
- 74CQzgVfUf4uWG8IT/S8YXPphNjKut7E3qIkza1IpMpAq31y/V38dPCxYlDyJ00n2Ltg
- 7aZrlysqXKp3gOaL8vQ5luo6LPGdjnAotYe2Ft3Z9Q/zy+8YC4Lo0ENJeInJKDhwdqXM
- lseA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=hl6m/lrjFo2SlIRoqiMxwpRnPz3wYhxiwmpmnwYUSRM=;
+ b=ffnPgRpnPdoKcqdTtwMDTZzdyaNe+26tlBhCByj4m3vnyTKCCAWrFWNxz27DHZ8zM2
+ A/XsZAlAfpVvvbi/LDjkiE/uOldWlNBFHk0TK9jYVGbmxdoPhsuzwL0yioPrkVs6JVsf
+ ASXg4Kgr5dMDGTJ7nvmPAw+KOkwdAJdH3JyCcZUT0jK/Ek6qFhunNkLQkPB5EqddaoKp
+ 86iLN5zJnhWCixgSd23LUEFoKp8Xw2eRMAfp4F0Jc6ue2k1VZW98qTiBAbpLAe4TUxfF
+ Lswy0XNGy+66Ybhs/1Nu2XypfyHyGk5ScjV98t7gIEwReCL8Apncq2OUvD4WYz/DfWc4
+ zU9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=y2VuxIufta//COkZouv7AjslWA/3R6J9klhyvlspvXs=;
- b=dyEwPL8NjC9RG1RYZL7q3/TSADJDznlKOJzpDFl9/iZu9mpIYQQ6UNqPAYm8h99NW3
- /KzJDCZbvogNJwgBe3BwXC7k1egnXHyMz8Ff3ZEq+uEqX9akY3+4fNukLTikzopRxHLT
- J6hBu/D3EZNygsyKS0IxL/D9Yqny/OAG5CRPlVzE5XM/Z8zCI6bMnhjZlIB5thzmyPQL
- KMRZ9eFO3rEKitFRRKZQv+dQb+SNKUeE9cz8sR++/o2xnDgWFMRhEtThiRM14PXE3MXk
- kZTQT1iCyEFQVPzBvjFCWT6GUneVrDzdnSG3HloRODXB+KM9rHOd9EvaljLAYeUV6sL4
- 4reg==
-X-Gm-Message-State: AOAM530InK+k6UrzGbt3as5VG75OcNsPKz5bL5g1NYZ5ZOHlmSJTU6zz
- rdKniJXdKasMz1kmRklGKRI2xy4VCu2B3oNMBJ2aYNG2xq9Ylw==
-X-Google-Smtp-Source: ABdhPJxXclZPZ16nj+Pa23ABDP8+cN/kss2ho1m25WvtKddh9uOWaooHqIxXrTD2FXzFtLLtAIh0+cWu0IZervx30VE=
-X-Received: by 2002:a19:651a:: with SMTP id z26mr6418849lfb.306.1608554167687; 
- Mon, 21 Dec 2020 04:36:07 -0800 (PST)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=hl6m/lrjFo2SlIRoqiMxwpRnPz3wYhxiwmpmnwYUSRM=;
+ b=o/FX5OQfIF9zn52eE7MSrptKbd5GJVm4GSQGucNAk/vY6mOEJlPigWw5VpRqkp1HKC
+ dbQD5s4rplYXP6bI6iK9924jR9KhbDmJ4FWKzZHm9P7nYLLgkampLAl8LcE2h9+H1uSJ
+ H0gR+cCF5tqchVUN2qMQZgNwKxVa3rcqbXTpvbM1QXZF0WQm3mOUKV+aPQL32P6bpf4K
+ vRFlHruND8ZLauVQjkRnugA1EVFj7C03ouQlsnYoi0vPJPBLTnY6i/AnH7MgvrCsdUTH
+ y6qwTX/fVQM4gecSRM8SMGRrbXqa8oBeSpt6uNO605lKyhsSuuxYPoI0A3XlY0fYyiMJ
+ 3jHA==
+X-Gm-Message-State: AOAM531t16F2d/wQWRSxbr0J+PZWKHst5l1BdX7JsDVydU8LeF9MQ0QL
+ 62zUafe9sT0iDEiLpPj/v8w7Av7qJwptLZ6202c=
+X-Google-Smtp-Source: ABdhPJwq3Ayv6W9kX9up82P8bqim/Ku4JYAtR46O60gJuRBZ5oDP1KCZYWAOvb1T6lpOs8JBCvPJ6j+hh4ERoJE4kNw=
+X-Received: by 2002:a25:be87:: with SMTP id i7mr26725046ybk.332.1608615323061; 
+ Mon, 21 Dec 2020 21:35:23 -0800 (PST)
 MIME-Version: 1.0
-From: Ivan Serdyuk <local.tourist.kiev@gmail.com>
-Date: Mon, 21 Dec 2020 14:35:55 +0200
-Message-ID: <CANFCsz82ELUcs9Q6PVvmAE0rcx5NB13Sf1xfzf7AC9dQ-z74Fg@mail.gmail.com>
-Subject: Guaranteed way to identify whether an application is running under
- qemu-linux-user + nspawn (JeOS)
-To: Qemu-riscv@nongnu.org, adrian@suse.de, schwab@suse.de
-Content-Type: multipart/alternative; boundary="000000000000c45f1505b6f8b3f3"
-Received-SPF: pass client-ip=2a00:1450:4864:20::134;
- envelope-from=local.tourist.kiev@gmail.com; helo=mail-lf1-x134.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20201217214826.2094617-1-atish.patra@wdc.com>
+ <CAEUhbmUqJdpuqvZ6V3s9eeW=EUVXrnjbF5GRmygwaZhMGG-6sA@mail.gmail.com>
+ <4f09804c0e35a45fcf3fa78b3f3ed55276d6e10f.camel@wdc.com>
+ <CAEUhbmX16h5S5Y0kFsnDv6t2cnn6we-b-9U_cbnEQkrrckYy0w@mail.gmail.com>
+ <67cbbde886c3ae6e57e837e79f466f4156a910f8.camel@wdc.com>
+ <CAEUhbmVEAxf3OCp=89MCx7qQiN0wKd3QM4k8t20r9Sbq+JA_-w@mail.gmail.com>
+ <df986ea726abea58fedd1a870095378456823d2a.camel@wdc.com>
+In-Reply-To: <df986ea726abea58fedd1a870095378456823d2a.camel@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 22 Dec 2020 13:35:11 +0800
+Message-ID: <CAEUhbmUK95YJ74_AJQ8wu9oBM6mDky2n5=pGR_UQE0AB4eXYtQ@mail.gmail.com>
+Subject: Re: [PATCH] RISC-V: Place DTB at 3GB boundary instead of 4GB
+To: Atish Patra <Atish.Patra@wdc.com>
+Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+ "kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>, 
+ "sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Anup Patel <Anup.Patel@wdc.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
+ "palmer@dabbelt.com" <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, HTML_OBFUSCATE_05_10=0.26, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -66,52 +79,261 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Dec 2020 12:36:13 -0000
+X-List-Received-Date: Tue, 22 Dec 2020 05:35:27 -0000
 
---000000000000c45f1505b6f8b3f3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Atish,
 
-Hi there.
+On Sat, Dec 19, 2020 at 3:46 AM Atish Patra <Atish.Patra@wdc.com> wrote:
+>
+> On Fri, 2020-12-18 at 16:42 +0800, Bin Meng wrote:
+> > Hi Atish,
+> >
+> > On Fri, Dec 18, 2020 at 4:00 PM Atish Patra <Atish.Patra@wdc.com>
+> > wrote:
+> > >
+> > > On Fri, 2020-12-18 at 15:33 +0800, Bin Meng wrote:
+> > > > Hi Atish,
+> > > >
+> > > > On Fri, Dec 18, 2020 at 3:27 PM Atish Patra <Atish.Patra@wdc.com>
+> > > > wrote:
+> > > > >
+> > > > > On Fri, 2020-12-18 at 15:21 +0800, Bin Meng wrote:
+> > > > > > Hi Atish,
+> > > > > >
+> > > > > > On Fri, Dec 18, 2020 at 5:48 AM Atish Patra
+> > > > > > <atish.patra@wdc.com>
+> > > > > > wrote:
+> > > > > > >
+> > > > > > > Currently, we place the DTB at 2MB from 4GB or end of DRAM
+> > > > > > > which
+> > > > > > > ever is
+> > > > > > > lesser. However, Linux kernel can address only 1GB of
+> > > > > > > memory
+> > > > > > > for
+> > > > > > > RV32.
+> > > > > > > Thus, it can not map anything beyond 3GB (assuming 2GB is
+> > > > > > > the
+> > > > > > > starting address).
+> > > > > > > As a result, it can not process DT and panic if opensbi
+> > > > > > > dynamic
+> > > > > > > firmware
+> > > > > > > is used.
+> > > > > > >
+> > > > > > > Fix this by placing the DTB at 2MB from 3GB or end of DRAM
+> > > > > > > whichever is lower.
+> > > > > > >
+> > > > > > > Signed-off-by: Atish Patra <atish.patra@wdc.com>
+> > > > > > > ---
+> > > > > > >  hw/riscv/boot.c | 4 ++--
+> > > > > > >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > > > > > >
+> > > > > >
+> > > > > > With this patch, 32-bit sifive_u still does not boot kernel
+> > > > > > with
+> > > > > > the
+> > > > > > following patch applied on 5.10:
+> > > > > > https://patchwork.kernel.org/project/linux-riscv/patch/20201217074855.1948743-1-atish.patra@wdc.com/
+> > > > > >
+> > > > > > Command I used:
+> > > > > > $ qemu-system-riscv32 -nographic -M sifive_u -m 1G -smp 5 -
+> > > > > > kernel
+> > > > > > arch/riscv/boot/Image
+> > > > > >
+> > > > > > 32-bit virt cannot boot the same kernel image with memory set
+> > > > > > to
+> > > > > > 2G
+> > > > > > either:
+> > > > > > $ qemu-system-riscv32 -nographic -M virt -m 2G -smp 4 -kernel
+> > > > > > arch/riscv/boot/Image
+> > > > > >
+> > > > >
+> > > > > Hi Bin,
+> > > > > As mentioned in the email on the linux mailing list, this patch
+> > > > > only
+> > > > > solves 2GB problem. sifive_u problem is solved by Alistair's
+> > > > > patch[1].
+> > > > >
+> > > > > He is planning to send the PR soon. The issue with sifive_u
+> > > > > boot
+> > > > > was it
+> > > > > was failing the 32 bit test earlier resulting a 2MB aligned
+> > > > > address
+> > > > > instead of 4MB.
+> > > >
+> > > > Ah, I see. However my testing shows that virt with 2G still does
+> > > > not
+> > > > boot with this patch.
+> > > >
+> > >
+> > > Strange. I verified again with following combination with -bios and
+> > > without bios parameter.
+> > >
+> > > 1. virt 32/64 with 1GB/2GB memory
+> > > 2. sifive_u 32/64 bit with 1GB/2GB memory (Alistair's patch
+> > > included)
+> > >
+> > > Can you share the boot log along with the head commit of Qemu and
+> > > commandline ? I am using 5.10 kernel with my kernel fix.
+> > >
+> >
+> > I was using Alistair's QEMU repo for testing and 5.10 kernel with
+> > your
+> > kernel fix:
+> >
+> > $ git checkout -b testing pull-riscv-to-apply-20201217-1
+> > $ apply this patch
+> > $ mkdir build;cd build;../configure
+> > --target-list=riscv64-softmmu,riscv32-softmmu;make -j
+> >
+> > $ ./qemu-system-riscv32 -nographic -M virt -m 2G -smp 4 -kernel
+> > ~/work/git/linux/arch/riscv/boot/Image
+> >
+> > OpenSBI v0.8
+> >    ____                    _____ ____ _____
+> >   / __ \                  / ____|  _ \_   _|
+> >  | |  | |_ __   ___ _ __ | (___ | |_) || |
+> >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+> >  | |__| | |_) |  __/ | | |____) | |_) || |_
+> >   \____/| .__/ \___|_| |_|_____/|____/_____|
+> >         | |
+> >         |_|
+> >
+> > Platform Name       : riscv-virtio,qemu
+> > Platform Features   : timer,mfdeleg
+> > Platform HART Count : 4
+> > Boot HART ID        : 3
+> > Boot HART ISA       : rv32imafdcsu
+> > BOOT HART Features  : pmp,scounteren,mcounteren,time
+> > BOOT HART PMP Count : 16
+> > Firmware Base       : 0x80000000
+> > Firmware Size       : 104 KB
+> > Runtime SBI Version : 0.2
+> >
+> > MIDELEG : 0x00000222
+> > MEDELEG : 0x0000b109
+> > PMP0    : 0x80000000-0x8001ffff (A)
+> > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
+> > <hangs here>
+> >
+> > $ ./qemu-system-riscv32 -nographic -M sifive_u -m 2G -smp 5 -kernel
+> > ~/work/git/linux/arch/riscv/boot/Image
+> >
+> > OpenSBI v0.8
+> >    ____                    _____ ____ _____
+> >   / __ \                  / ____|  _ \_   _|
+> >  | |  | |_ __   ___ _ __ | (___ | |_) || |
+> >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+> >  | |__| | |_) |  __/ | | |____) | |_) || |_
+> >   \____/| .__/ \___|_| |_|_____/|____/_____|
+> >         | |
+> >         |_|
+> >
+> > Platform Name       : SiFive HiFive Unleashed A00
+> > Platform Features   : timer,mfdeleg
+> > Platform HART Count : 5
+> > Boot HART ID        : 4
+> > Boot HART ISA       : rv32imafdcsu
+> > BOOT HART Features  : pmp,scounteren,mcounteren
+> > BOOT HART PMP Count : 16
+> > Firmware Base       : 0x80000000
+> > Firmware Size       : 112 KB
+> > Runtime SBI Version : 0.2
+> >
+> > MIDELEG : 0x00000222
+> > MEDELEG : 0x0000b109
+> > PMP0    : 0x80000000-0x8001ffff (A)
+> > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
+> > <hangs here>
+> >
+> > The following is sifive_u with 1G:
+> >
+> > $ ./qemu-system-riscv32 -nographic -M sifive_u -m 1G -smp 5 -kernel
+> > ~/work/git/linux/arch/riscv/boot/Image
+> >
+> > OpenSBI v0.8
+> >    ____                    _____ ____ _____
+> >   / __ \                  / ____|  _ \_   _|
+> >  | |  | |_ __   ___ _ __ | (___ | |_) || |
+> >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+> >  | |__| | |_) |  __/ | | |____) | |_) || |_
+> >   \____/| .__/ \___|_| |_|_____/|____/_____|
+> >         | |
+> >         |_|
+> >
+> > Platform Name       : SiFive HiFive Unleashed A00
+> > Platform Features   : timer,mfdeleg
+> > Platform HART Count : 5
+> > Boot HART ID        : 3
+> > Boot HART ISA       : rv32imafdcsu
+> > BOOT HART Features  : pmp,scounteren,mcounteren
+> > BOOT HART PMP Count : 16
+> > Firmware Base       : 0x80000000
+> > Firmware Size       : 112 KB
+> > Runtime SBI Version : 0.2
+> >
+> > MIDELEG : 0x00000222
+> > MEDELEG : 0x0000b109
+> > PMP0    : 0x80000000-0x8001ffff (A)
+> > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
+> > [    0.000000] Linux version 5.10.0-00001-gbf0dad61896d
+> > (bmeng@pek-vx-bsp2) (riscv64-linux-gcc (GCC) 8.1.0, GNU ld (GNU
+> > Binutils) 2.30) #1 SMP Thu Dec 17 16:48:13 CST 2020
+> > [    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+> > [    0.000000] efi: UEFI not found.
+> > [    0.000000] Zone ranges:
+> > [    0.000000]   Normal   [mem 0x0000000080400000-0x00000000bfffffff]
+> > [    0.000000] Movable zone start for each node
+> > [    0.000000] Early memory node ranges
+> > [    0.000000]   node   0: [mem 0x0000000080400000-
+> > 0x00000000bfffffff]
+> > [    0.000000] Initmem setup node 0 [mem 0x0000000080400000-
+> > 0x00000000bfffffff]
+> > [    0.000000] SBI specification v0.2 detected
+> > [    0.000000] SBI implementation ID=0x1 Version=0x8
+> > [    0.000000] SBI v0.2 TIME extension detected
+> > [    0.000000] SBI v0.2 IPI extension detected
+> > [    0.000000] SBI v0.2 RFENCE extension detected
+> > [    0.000000] SBI v0.2 HSM extension detected
+> > [    0.000000] CPU with hartid=0 is not available
+> > [    0.000000] CPU with hartid=0 is not available
+> >
+> > Regards,
+> > Bin
+>
+> May be you forgot to apply this patch for 2GB case on top of Alistair's
+> tree? I don't see any issues with exact same setup.
 
-I was trying to figure out a proper way to identify whether an application
-is running under rv64gc build of JeOS (currently using
-https://en.opensuse.org/openSUSE:RISC-V - but I could try other "container
-OS" builds, as well).
+That's really weird. I have:
 
-There is an open issue, for Bazel, out here
-<https://github.com/bazelbuild/bazel/issues/12683> - so I might be able to
-submit a patch, for supporting such an environment.
+$ git log --oneline
+3ced2fb RISC-V: Place DTB at 3GB boundary instead of 4GB
+d31e970 riscv/opentitan: Update the OpenTitan memory layout
+3ed2b8a hw/riscv: Use the CPU to determine if 32-bit
+094b072 target/riscv: cpu: Set XLEN independently from target
+8987cdc4 target/riscv: csr: Remove compile time XLEN checks
 
-I am stuck on finding a proper way to identify that I am running something
-under qemu-linux-user : checking /proc/cpuinfo would provide the info about
-my host OS (OpenSUSE), not the JeOS.
+I just rebuilt the QEMU binaries but still have the same result. 2G
+does not boot on either 'virt' or 'sifive_u'.
 
-Please advise something concrete.
+$ ./qemu-system-riscv32 -version
+QEMU emulator version 5.2.50 (v5.2.0-551-g3ced2fb)
+Copyright (c) 2003-2020 Fabrice Bellard and the QEMU Project developers
 
-CC'ing to Andreas Schwab and Adrian Schr=C3=B6ter.
+Maybe it's toolchain related? I am using kernel.org toolchain
+riscv64-linux-gcc (GCC) 8.1.0. I see you were using
+riscv64-unknown-linux-gnu-gcc (GCC) 10.2.0.
 
-Thanks in advance.
-Ivan
+>
+> Qemu git log
+> ------
+> 851966c92cf5 (HEAD) RISC-V: Place DTB at 3GB boundary instead of 4GB
+> d31e970a01e7 (tag: pull-riscv-to-apply-20201217-1, alistair/riscv-to-
+> apply.next, alistair/riscv-to-apply.for-upstream) riscv/opentitan:
+> Update the OpenTitan memory layout
+> 3ed2b8ac2dac hw/riscv: Use the CPU to determine if 32-bit
+> 094b072c6819 target/riscv: cpu: Set XLEN independently from target
+> -------
 
---000000000000c45f1505b6f8b3f3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi there.<div><br></div><div>I was trying to figure out a =
-proper way to identify whether an application is running under rv64gc build=
- of JeOS (currently using=C2=A0<a href=3D"https://en.opensuse.org/openSUSE:=
-RISC-V">https://en.opensuse.org/openSUSE:RISC-V</a>=C2=A0- but I could try =
-other &quot;container OS&quot; builds, as well).</div><div><br></div><div>T=
-here is an open issue, for Bazel, <a href=3D"https://github.com/bazelbuild/=
-bazel/issues/12683">out here</a>=C2=A0- so I might be able to submit a patc=
-h, for supporting such an environment.</div><div><br></div><div>I am stuck =
-on finding a proper way to identify that I am running something under qemu-=
-linux-user : checking /proc/cpuinfo would provide the info about my host OS=
- (OpenSUSE), not the JeOS.</div><div><br></div><div>Please advise something=
- concrete.</div><div><br></div><div>CC&#39;ing to=C2=A0Andreas Schwab and=
-=C2=A0Adrian Schr=C3=B6ter.</div><div><br></div><div>Thanks in advance.</di=
-v><div>Ivan</div></div>
-
---000000000000c45f1505b6f8b3f3--
+Regards,
+Bin
 
