@@ -1,42 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kraKW-0004qL-H9
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Dec 2020 00:35:28 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42896)
+	id 1krnod-0006LU-Oy
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Dec 2020 14:59:27 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43114)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kraKV-0004py-2M; Tue, 22 Dec 2020 00:35:27 -0500
-Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:34993)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kraKS-0001xi-T7; Tue, 22 Dec 2020 00:35:26 -0500
-Received: by mail-yb1-xb32.google.com with SMTP id u203so10783793ybb.2;
- Mon, 21 Dec 2020 21:35:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hl6m/lrjFo2SlIRoqiMxwpRnPz3wYhxiwmpmnwYUSRM=;
- b=ffnPgRpnPdoKcqdTtwMDTZzdyaNe+26tlBhCByj4m3vnyTKCCAWrFWNxz27DHZ8zM2
- A/XsZAlAfpVvvbi/LDjkiE/uOldWlNBFHk0TK9jYVGbmxdoPhsuzwL0yioPrkVs6JVsf
- ASXg4Kgr5dMDGTJ7nvmPAw+KOkwdAJdH3JyCcZUT0jK/Ek6qFhunNkLQkPB5EqddaoKp
- 86iLN5zJnhWCixgSd23LUEFoKp8Xw2eRMAfp4F0Jc6ue2k1VZW98qTiBAbpLAe4TUxfF
- Lswy0XNGy+66Ybhs/1Nu2XypfyHyGk5ScjV98t7gIEwReCL8Apncq2OUvD4WYz/DfWc4
- zU9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=hl6m/lrjFo2SlIRoqiMxwpRnPz3wYhxiwmpmnwYUSRM=;
- b=o/FX5OQfIF9zn52eE7MSrptKbd5GJVm4GSQGucNAk/vY6mOEJlPigWw5VpRqkp1HKC
- dbQD5s4rplYXP6bI6iK9924jR9KhbDmJ4FWKzZHm9P7nYLLgkampLAl8LcE2h9+H1uSJ
- H0gR+cCF5tqchVUN2qMQZgNwKxVa3rcqbXTpvbM1QXZF0WQm3mOUKV+aPQL32P6bpf4K
- vRFlHruND8ZLauVQjkRnugA1EVFj7C03ouQlsnYoi0vPJPBLTnY6i/AnH7MgvrCsdUTH
- y6qwTX/fVQM4gecSRM8SMGRrbXqa8oBeSpt6uNO605lKyhsSuuxYPoI0A3XlY0fYyiMJ
- 3jHA==
-X-Gm-Message-State: AOAM531t16F2d/wQWRSxbr0J+PZWKHst5l1BdX7JsDVydU8LeF9MQ0QL
- 62zUafe9sT0iDEiLpPj/v8w7Av7qJwptLZ6202c=
-X-Google-Smtp-Source: ABdhPJwq3Ayv6W9kX9up82P8bqim/Ku4JYAtR46O60gJuRBZ5oDP1KCZYWAOvb1T6lpOs8JBCvPJ6j+hh4ERoJE4kNw=
-X-Received: by 2002:a25:be87:: with SMTP id i7mr26725046ybk.332.1608615323061; 
- Mon, 21 Dec 2020 21:35:23 -0800 (PST)
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <prvs=618cf7173=Atish.Patra@wdc.com>)
+ id 1krnob-0006I7-FS; Tue, 22 Dec 2020 14:59:25 -0500
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:54029)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <prvs=618cf7173=Atish.Patra@wdc.com>)
+ id 1krnoX-0005nt-Sg; Tue, 22 Dec 2020 14:59:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1608667161; x=1640203161;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=DZ9Q1zWlNdaZwZuuGuKB9IZhA6F44V12fmSKpD5MbmY=;
+ b=cB5i6oScVOD21CtsvMbEAU1pOf8kMRak5sJanzOOkpm3BFCp30ITCfeY
+ MWrFOfDSnjyvoRkJ3RS+2tH9mKvzeg6/XPKSFTs9+sWMMfcy3oKrltEmx
+ G2LEttyhklUutn+m9OJ0/ZJRWPlfn7wA2p9qqJup5VToPoxf4R8kaDlVp
+ +1NOzSeffsjoZkeUKPTVCZa+pk5idHSVIuHyCt6EKEwR+3dDOGs6qcW+p
+ X1+p5YMSpnU9r0YemSGnqlotRYteBU4rYf24hZmO+vvI37sWuC3k2jk8z
+ VFy0IEyYMfF7cgr5Intoen3wIOZJUUNLWSx01MyKXu75cXHOZvvrVATp0 w==;
+IronPort-SDR: 0LMADkXv46Hrefqmh6uPokPctdNaZpFpasdOm18eXo19+QB8g44JpIMnwwT9NmTMh/Mbp1hhO9
+ zcoEuYLAgB9LhJDsm9aJe8cJlCaJzp8qYK2wWLjgJQ3zVC3OK9HYQXj2puEAmU3tjvgCIXTLxk
+ jEqME5CFC0ZS3hNe76vwZFsE9Pf1If0dUiIx6STu5FgLWd/nAZ+4x+mpZK+miD0v4pwZIcoqE0
+ 6fP8bszOkr0pXo3I0V6boWP76tip28XP3+CJiTCehjb7C1ocBlAM7qLcsPzsxZXNdtonnKeNst
+ Cy0=
+X-IronPort-AV: E=Sophos;i="5.78,440,1599494400"; d="scan'208";a="155842870"
+Received: from mail-mw2nam10lp2108.outbound.protection.outlook.com (HELO
+ NAM10-MW2-obe.outbound.protection.outlook.com) ([104.47.55.108])
+ by ob1.hgst.iphmx.com with ESMTP; 23 Dec 2020 03:59:17 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Q28ztKxsnM2cxhlTc1bjkRBKkWQz4EEFngo4akyd28cmyL6SYpF7p0Xo6t1W2u8uTbGewzDDgZ93YEyK916VAOJhBWIbHYP4m4Db8Gs0KRhKFmVrJzQIYlGovr8ykgfsyYKSOimrPwagsoy247hTitXrIyhh6UwXi9ojmQdIt9fw+zp/KZHM3K8S9shtWuCv7RxzGqVyZEN9lWAj5x+kLph0/7c840vIVjMMvLGW2/nGX1b1HmCppa40h5ZhzEivUT7hxo9vxdRaKcxXltxPLG/DahZChg/XGLmVYp9B56Nys0iLdZggoIWyWaPb6QUOQEljZPZaYf8E8YpACPsHBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DZ9Q1zWlNdaZwZuuGuKB9IZhA6F44V12fmSKpD5MbmY=;
+ b=Zn+Yt+QXavmJ/AYj67CThxexJEMZKZwyydv2ZUHwT3GYk7aLJ3555PGY7v1Fds5Up6tOcpr+gBirKBf7mIjixAPQ5aTEkpI7KSIZRD0jjrSJS1NVSd+AXOj+ImOn+ds9Vwr5Fr7V7dO686M2OtTgC4+/YFuo+XArG/geOCiOmggE3UaPiOjWe4+20Q0oIY3kxncJXH1gj2vGdRyXcT0LJDIkWZAqmSQtppDvn/Japdu+ohVgqAZDoQ9X+Z8hGPDz+tiph+tP1DGOSfpbvNaY/PZTrPZe3akKTFg2Nrs02HSYScjo9dXqzNmEha2Ra0qbJ7oqXm4fwdznixPRjrCpKw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DZ9Q1zWlNdaZwZuuGuKB9IZhA6F44V12fmSKpD5MbmY=;
+ b=ahm80gA+zMiHgH7KyjO/GAmG4R5PQFHD+EIhA/VHkeMEoQRQYfee3tr/8unf2KOyQAJ7pYJeVDsQa83jV4jj+guydrzyA9yBciNR19WnD9Sm+ir2bCRjEIWOz15soogWG8lvsCfM80/sdYcRMU9nCVGOOuIXK3YoshqJAdPqyys=
+Received: from BY5PR04MB6724.namprd04.prod.outlook.com (2603:10b6:a03:219::15)
+ by BY5PR04MB6835.namprd04.prod.outlook.com (2603:10b6:a03:22e::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3676.25; Tue, 22 Dec
+ 2020 19:59:15 +0000
+Received: from BY5PR04MB6724.namprd04.prod.outlook.com
+ ([fe80::6540:dbb1:548a:fc7]) by BY5PR04MB6724.namprd04.prod.outlook.com
+ ([fe80::6540:dbb1:548a:fc7%6]) with mapi id 15.20.3676.033; Tue, 22 Dec 2020
+ 19:59:15 +0000
+From: Atish Patra <Atish.Patra@wdc.com>
+To: "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>
+CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>,
+ "sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>, Alistair Francis
+ <Alistair.Francis@wdc.com>, Anup Patel <Anup.Patel@wdc.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "palmer@dabbelt.com"
+ <palmer@dabbelt.com>
+Subject: Re: [PATCH] RISC-V: Place DTB at 3GB boundary instead of 4GB
+Thread-Topic: [PATCH] RISC-V: Place DTB at 3GB boundary instead of 4GB
+Thread-Index: AQHW1L5ec6Y+NBO69E2DOYgTLRiUVan8c1OAgAABxYCAAAGkgIAAB32AgAALxwCAALltAIAFW4SAgADxaYA=
+Date: Tue, 22 Dec 2020 19:59:15 +0000
+Message-ID: <a33a44ff4ec9f16a5ff7649e2d8ed9d87c6bed64.camel@wdc.com>
 References: <20201217214826.2094617-1-atish.patra@wdc.com>
  <CAEUhbmUqJdpuqvZ6V3s9eeW=EUVXrnjbF5GRmygwaZhMGG-6sA@mail.gmail.com>
  <4f09804c0e35a45fcf3fa78b3f3ed55276d6e10f.camel@wdc.com>
@@ -44,28 +74,76 @@ References: <20201217214826.2094617-1-atish.patra@wdc.com>
  <67cbbde886c3ae6e57e837e79f466f4156a910f8.camel@wdc.com>
  <CAEUhbmVEAxf3OCp=89MCx7qQiN0wKd3QM4k8t20r9Sbq+JA_-w@mail.gmail.com>
  <df986ea726abea58fedd1a870095378456823d2a.camel@wdc.com>
-In-Reply-To: <df986ea726abea58fedd1a870095378456823d2a.camel@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 22 Dec 2020 13:35:11 +0800
-Message-ID: <CAEUhbmUK95YJ74_AJQ8wu9oBM6mDky2n5=pGR_UQE0AB4eXYtQ@mail.gmail.com>
-Subject: Re: [PATCH] RISC-V: Place DTB at 3GB boundary instead of 4GB
-To: Atish Patra <Atish.Patra@wdc.com>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
- "kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>, 
- "sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Anup Patel <Anup.Patel@wdc.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- "palmer@dabbelt.com" <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ <CAEUhbmUK95YJ74_AJQ8wu9oBM6mDky2n5=pGR_UQE0AB4eXYtQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmUK95YJ74_AJQ8wu9oBM6mDky2n5=pGR_UQE0AB4eXYtQ@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.38.2 
+authentication-results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=wdc.com;
+x-originating-ip: [99.13.229.45]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: f467d163-e0ec-4f66-2f5a-08d8a6b40f73
+x-ms-traffictypediagnostic: BY5PR04MB6835:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <BY5PR04MB683579B36E260B1B574098A2FADF0@BY5PR04MB6835.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:245;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 52TAr40+pB/sZb0kv69CGR4HSIe8gbXUauon4+iDM35Z9KxtSV+HDI6r+D87FpWYpdqKOSgzELmpL/nFHqDI2Aq7EfDEdrQgfjxdb6FkXWXCYhquA+zzrTIAAqn7LX7acRs7chDgB7FHOzpAe/BOjkV0PkacIMmcouHVIINOQckqQCVt28rCYsiUisIUG8ujYntT5CMJ4AAzaPWNkejwwp2Gb6lDm7YIzaiv1qMTXihCVIRkDwuzVfXKayCqKAKdQe/e/Vktqp2sRIhJtRSP976sm7QKufiOz2tCinYZWrFujmbVqwnysQFC7G/srQpi4C5vur2QClsKbswSRxl5eC5SBD+/zwkFAknL0HIHgFBKpFqf8LRmNXf1Ww1fxADT0A7dPxoWkOjn/Q6YuVYNYU8ZT+B7lQu9pdL1qS/mAHO6rjUbisBF2n0+AzTzubWfeZC0LMydVC1M69RpPXSh6A==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BY5PR04MB6724.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(376002)(396003)(346002)(366004)(136003)(39860400002)(6486002)(8936002)(6512007)(36756003)(2616005)(53546011)(4326008)(966005)(26005)(54906003)(71200400001)(6506007)(478600001)(186003)(5660300002)(2906002)(76116006)(6916009)(66946007)(86362001)(4001150100001)(66476007)(316002)(64756008)(66556008)(66446008)(8676002)(83380400001);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata: =?utf-8?B?QXhQcDF5SW9GRHA5VGMwU3YyV1lIc1o2cGhEK25tU0xqT0VoN2hHRUkvajU0?=
+ =?utf-8?B?RlBUTERkZVBTL3JCNDdMVTMyQzcydERZNjJiNE1Nak5TcFBMNktHanlPMVU3?=
+ =?utf-8?B?T0pCUVBva0pLY211QkVkNE9NaW1kLzRNVzAvU2dNalFPYjVwUzMxTkMyY013?=
+ =?utf-8?B?RGxDRlZQQzNiWjJSOGxiVlE3UFZWMlppY1BhSWtOTFZubGU2dGVha29tdkdP?=
+ =?utf-8?B?S1NGamJrT2VnVHpnUkRFVG5Qd21LcUhzTjFVY3dhbmFCbnBZd1MyTXJvWS9w?=
+ =?utf-8?B?ckV0dUxYM1BaTURBREE2Q0lVSHI3VUkzVXMvUjViRW9DVXg3WWRxWVNnTFlJ?=
+ =?utf-8?B?blFmTXR3cDZnMXZubzN0bnFCYjJIQ3JYYTVuZVpwOUFyMkJkNmluNFBKNWxO?=
+ =?utf-8?B?eWYvM3ZNTXlhWURXamFBb2xQeVg4UDE5a1Z4RHhEcmtOMmFuY1RkbXNYaGIy?=
+ =?utf-8?B?alZTZlM3anpyM1RLM2tGUXFWcE41SitUMzVqRXpvSlpmdWg3QTJrekFCdi9l?=
+ =?utf-8?B?QmZWMVV2OHhYVlZvYzczZ08wQnRwcDRsZEpKYSs3SmxnWW02bHhZYUlVQys4?=
+ =?utf-8?B?dDlIR2lESnNKMEx3TTd0WjkrUy9oWHhtNDZ0dlVna3lDc3FibU1tVERrU2ox?=
+ =?utf-8?B?M0lxdjFyaVdDNDR4M1ZTRC94UWt2djdNSU1SNUJUTjZMc3ZoK3VFWC9zQW5O?=
+ =?utf-8?B?cU5vMXZUVW03OUIvVFpwMVJNRXlWSUZabmhJbjhhS28xUXZJdGtwVTcwMkwx?=
+ =?utf-8?B?b0dDUHdzU0lmZnRPcnFqYnhEZWlVODVUa0V0ay9BWFRFbCt6VGFGVjMvM1ZX?=
+ =?utf-8?B?TS96bXR6dEhxTVhuM0V0UjFoMEVxUjJ0V1FUU1lzVng4ZXkxSHNBUGNwR1hB?=
+ =?utf-8?B?aWJtY0RJaUZjaDJSUWJOYmYvRzk5NUN3amJHV01PbURtai9BU1NiVWNhZEdC?=
+ =?utf-8?B?Ymo3NUJZNzhjdlZwajdLZC9rdG1TMEpZVndHRm82b2tMOUZMbjZyRDlKUVRB?=
+ =?utf-8?B?ZW1iT3hhbnVMRWdIc0tXR3lydVp0MEVLZzR0aTNKNTZtWjNrRks2QnYzVlJk?=
+ =?utf-8?B?YzVlMkR6Vm9jbEtaOCtLdCtxSEc1bzl6SnlHWUdnNlpFY3BOLzFMOXVFTlho?=
+ =?utf-8?B?Tk9HSklzMllhYXNXR3NZUjg3RVBlcDVGaUlzR3NKNFIya0VKalZCMkkwQThY?=
+ =?utf-8?B?OGMvVEJrdFVMTTFXU1VPYXBuaWZXL3JEcEZwUlFoUTNFa0MrTCtiU1BBZllC?=
+ =?utf-8?B?aXV6UmpXbHZrY0ZjUC8zU0ZNdVpScjVtOGhDS0M1T1B3aVAzaGo2K01RaGlh?=
+ =?utf-8?Q?pT48yQ3hH3cJYM4lyKUXrYNXQ6rdXv6jzT?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <5C488DC22C50AA4F9566B7A990D1BE1C@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR04MB6724.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f467d163-e0ec-4f66-2f5a-08d8a6b40f73
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Dec 2020 19:59:15.5639 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 4x5qsnrsXkYclWOMlahCukAK+hTJSzk3O7+uebTBM38fydEfL6cBm9L/X4XPv6v4WwSw5I6KQqifbvQUTBkpbw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR04MB6835
+Received-SPF: pass client-ip=216.71.153.144;
+ envelope-from=prvs=618cf7173=Atish.Patra@wdc.com; helo=esa5.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,261 +157,194 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2020 05:35:27 -0000
+X-List-Received-Date: Tue, 22 Dec 2020 19:59:26 -0000
 
-Hi Atish,
-
-On Sat, Dec 19, 2020 at 3:46 AM Atish Patra <Atish.Patra@wdc.com> wrote:
->
-> On Fri, 2020-12-18 at 16:42 +0800, Bin Meng wrote:
-> > Hi Atish,
-> >
-> > On Fri, Dec 18, 2020 at 4:00 PM Atish Patra <Atish.Patra@wdc.com>
-> > wrote:
-> > >
-> > > On Fri, 2020-12-18 at 15:33 +0800, Bin Meng wrote:
-> > > > Hi Atish,
-> > > >
-> > > > On Fri, Dec 18, 2020 at 3:27 PM Atish Patra <Atish.Patra@wdc.com>
-> > > > wrote:
-> > > > >
-> > > > > On Fri, 2020-12-18 at 15:21 +0800, Bin Meng wrote:
-> > > > > > Hi Atish,
-> > > > > >
-> > > > > > On Fri, Dec 18, 2020 at 5:48 AM Atish Patra
-> > > > > > <atish.patra@wdc.com>
-> > > > > > wrote:
-> > > > > > >
-> > > > > > > Currently, we place the DTB at 2MB from 4GB or end of DRAM
-> > > > > > > which
-> > > > > > > ever is
-> > > > > > > lesser. However, Linux kernel can address only 1GB of
-> > > > > > > memory
-> > > > > > > for
-> > > > > > > RV32.
-> > > > > > > Thus, it can not map anything beyond 3GB (assuming 2GB is
-> > > > > > > the
-> > > > > > > starting address).
-> > > > > > > As a result, it can not process DT and panic if opensbi
-> > > > > > > dynamic
-> > > > > > > firmware
-> > > > > > > is used.
-> > > > > > >
-> > > > > > > Fix this by placing the DTB at 2MB from 3GB or end of DRAM
-> > > > > > > whichever is lower.
-> > > > > > >
-> > > > > > > Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> > > > > > > ---
-> > > > > > >  hw/riscv/boot.c | 4 ++--
-> > > > > > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > > > > > >
-> > > > > >
-> > > > > > With this patch, 32-bit sifive_u still does not boot kernel
-> > > > > > with
-> > > > > > the
-> > > > > > following patch applied on 5.10:
-> > > > > > https://patchwork.kernel.org/project/linux-riscv/patch/20201217074855.1948743-1-atish.patra@wdc.com/
-> > > > > >
-> > > > > > Command I used:
-> > > > > > $ qemu-system-riscv32 -nographic -M sifive_u -m 1G -smp 5 -
-> > > > > > kernel
-> > > > > > arch/riscv/boot/Image
-> > > > > >
-> > > > > > 32-bit virt cannot boot the same kernel image with memory set
-> > > > > > to
-> > > > > > 2G
-> > > > > > either:
-> > > > > > $ qemu-system-riscv32 -nographic -M virt -m 2G -smp 4 -kernel
-> > > > > > arch/riscv/boot/Image
-> > > > > >
-> > > > >
-> > > > > Hi Bin,
-> > > > > As mentioned in the email on the linux mailing list, this patch
-> > > > > only
-> > > > > solves 2GB problem. sifive_u problem is solved by Alistair's
-> > > > > patch[1].
-> > > > >
-> > > > > He is planning to send the PR soon. The issue with sifive_u
-> > > > > boot
-> > > > > was it
-> > > > > was failing the 32 bit test earlier resulting a 2MB aligned
-> > > > > address
-> > > > > instead of 4MB.
-> > > >
-> > > > Ah, I see. However my testing shows that virt with 2G still does
-> > > > not
-> > > > boot with this patch.
-> > > >
-> > >
-> > > Strange. I verified again with following combination with -bios and
-> > > without bios parameter.
-> > >
-> > > 1. virt 32/64 with 1GB/2GB memory
-> > > 2. sifive_u 32/64 bit with 1GB/2GB memory (Alistair's patch
-> > > included)
-> > >
-> > > Can you share the boot log along with the head commit of Qemu and
-> > > commandline ? I am using 5.10 kernel with my kernel fix.
-> > >
-> >
-> > I was using Alistair's QEMU repo for testing and 5.10 kernel with
-> > your
-> > kernel fix:
-> >
-> > $ git checkout -b testing pull-riscv-to-apply-20201217-1
-> > $ apply this patch
-> > $ mkdir build;cd build;../configure
-> > --target-list=riscv64-softmmu,riscv32-softmmu;make -j
-> >
-> > $ ./qemu-system-riscv32 -nographic -M virt -m 2G -smp 4 -kernel
-> > ~/work/git/linux/arch/riscv/boot/Image
-> >
-> > OpenSBI v0.8
-> >    ____                    _____ ____ _____
-> >   / __ \                  / ____|  _ \_   _|
-> >  | |  | |_ __   ___ _ __ | (___ | |_) || |
-> >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> >  | |__| | |_) |  __/ | | |____) | |_) || |_
-> >   \____/| .__/ \___|_| |_|_____/|____/_____|
-> >         | |
-> >         |_|
-> >
-> > Platform Name       : riscv-virtio,qemu
-> > Platform Features   : timer,mfdeleg
-> > Platform HART Count : 4
-> > Boot HART ID        : 3
-> > Boot HART ISA       : rv32imafdcsu
-> > BOOT HART Features  : pmp,scounteren,mcounteren,time
-> > BOOT HART PMP Count : 16
-> > Firmware Base       : 0x80000000
-> > Firmware Size       : 104 KB
-> > Runtime SBI Version : 0.2
-> >
-> > MIDELEG : 0x00000222
-> > MEDELEG : 0x0000b109
-> > PMP0    : 0x80000000-0x8001ffff (A)
-> > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
-> > <hangs here>
-> >
-> > $ ./qemu-system-riscv32 -nographic -M sifive_u -m 2G -smp 5 -kernel
-> > ~/work/git/linux/arch/riscv/boot/Image
-> >
-> > OpenSBI v0.8
-> >    ____                    _____ ____ _____
-> >   / __ \                  / ____|  _ \_   _|
-> >  | |  | |_ __   ___ _ __ | (___ | |_) || |
-> >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> >  | |__| | |_) |  __/ | | |____) | |_) || |_
-> >   \____/| .__/ \___|_| |_|_____/|____/_____|
-> >         | |
-> >         |_|
-> >
-> > Platform Name       : SiFive HiFive Unleashed A00
-> > Platform Features   : timer,mfdeleg
-> > Platform HART Count : 5
-> > Boot HART ID        : 4
-> > Boot HART ISA       : rv32imafdcsu
-> > BOOT HART Features  : pmp,scounteren,mcounteren
-> > BOOT HART PMP Count : 16
-> > Firmware Base       : 0x80000000
-> > Firmware Size       : 112 KB
-> > Runtime SBI Version : 0.2
-> >
-> > MIDELEG : 0x00000222
-> > MEDELEG : 0x0000b109
-> > PMP0    : 0x80000000-0x8001ffff (A)
-> > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
-> > <hangs here>
-> >
-> > The following is sifive_u with 1G:
-> >
-> > $ ./qemu-system-riscv32 -nographic -M sifive_u -m 1G -smp 5 -kernel
-> > ~/work/git/linux/arch/riscv/boot/Image
-> >
-> > OpenSBI v0.8
-> >    ____                    _____ ____ _____
-> >   / __ \                  / ____|  _ \_   _|
-> >  | |  | |_ __   ___ _ __ | (___ | |_) || |
-> >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> >  | |__| | |_) |  __/ | | |____) | |_) || |_
-> >   \____/| .__/ \___|_| |_|_____/|____/_____|
-> >         | |
-> >         |_|
-> >
-> > Platform Name       : SiFive HiFive Unleashed A00
-> > Platform Features   : timer,mfdeleg
-> > Platform HART Count : 5
-> > Boot HART ID        : 3
-> > Boot HART ISA       : rv32imafdcsu
-> > BOOT HART Features  : pmp,scounteren,mcounteren
-> > BOOT HART PMP Count : 16
-> > Firmware Base       : 0x80000000
-> > Firmware Size       : 112 KB
-> > Runtime SBI Version : 0.2
-> >
-> > MIDELEG : 0x00000222
-> > MEDELEG : 0x0000b109
-> > PMP0    : 0x80000000-0x8001ffff (A)
-> > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
-> > [    0.000000] Linux version 5.10.0-00001-gbf0dad61896d
-> > (bmeng@pek-vx-bsp2) (riscv64-linux-gcc (GCC) 8.1.0, GNU ld (GNU
-> > Binutils) 2.30) #1 SMP Thu Dec 17 16:48:13 CST 2020
-> > [    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
-> > [    0.000000] efi: UEFI not found.
-> > [    0.000000] Zone ranges:
-> > [    0.000000]   Normal   [mem 0x0000000080400000-0x00000000bfffffff]
-> > [    0.000000] Movable zone start for each node
-> > [    0.000000] Early memory node ranges
-> > [    0.000000]   node   0: [mem 0x0000000080400000-
-> > 0x00000000bfffffff]
-> > [    0.000000] Initmem setup node 0 [mem 0x0000000080400000-
-> > 0x00000000bfffffff]
-> > [    0.000000] SBI specification v0.2 detected
-> > [    0.000000] SBI implementation ID=0x1 Version=0x8
-> > [    0.000000] SBI v0.2 TIME extension detected
-> > [    0.000000] SBI v0.2 IPI extension detected
-> > [    0.000000] SBI v0.2 RFENCE extension detected
-> > [    0.000000] SBI v0.2 HSM extension detected
-> > [    0.000000] CPU with hartid=0 is not available
-> > [    0.000000] CPU with hartid=0 is not available
-> >
-> > Regards,
-> > Bin
->
-> May be you forgot to apply this patch for 2GB case on top of Alistair's
-> tree? I don't see any issues with exact same setup.
-
-That's really weird. I have:
-
-$ git log --oneline
-3ced2fb RISC-V: Place DTB at 3GB boundary instead of 4GB
-d31e970 riscv/opentitan: Update the OpenTitan memory layout
-3ed2b8a hw/riscv: Use the CPU to determine if 32-bit
-094b072 target/riscv: cpu: Set XLEN independently from target
-8987cdc4 target/riscv: csr: Remove compile time XLEN checks
-
-I just rebuilt the QEMU binaries but still have the same result. 2G
-does not boot on either 'virt' or 'sifive_u'.
-
-$ ./qemu-system-riscv32 -version
-QEMU emulator version 5.2.50 (v5.2.0-551-g3ced2fb)
-Copyright (c) 2003-2020 Fabrice Bellard and the QEMU Project developers
-
-Maybe it's toolchain related? I am using kernel.org toolchain
-riscv64-linux-gcc (GCC) 8.1.0. I see you were using
-riscv64-unknown-linux-gnu-gcc (GCC) 10.2.0.
-
->
-> Qemu git log
-> ------
-> 851966c92cf5 (HEAD) RISC-V: Place DTB at 3GB boundary instead of 4GB
-> d31e970a01e7 (tag: pull-riscv-to-apply-20201217-1, alistair/riscv-to-
-> apply.next, alistair/riscv-to-apply.for-upstream) riscv/opentitan:
-> Update the OpenTitan memory layout
-> 3ed2b8ac2dac hw/riscv: Use the CPU to determine if 32-bit
-> 094b072c6819 target/riscv: cpu: Set XLEN independently from target
-> -------
-
-Regards,
-Bin
+T24gVHVlLCAyMDIwLTEyLTIyIGF0IDEzOjM1ICswODAwLCBCaW4gTWVuZyB3cm90ZToNCj4gSGkg
+QXRpc2gsDQo+IA0KPiBPbiBTYXQsIERlYyAxOSwgMjAyMCBhdCAzOjQ2IEFNIEF0aXNoIFBhdHJh
+IDxBdGlzaC5QYXRyYUB3ZGMuY29tPg0KPiB3cm90ZToNCj4gPiANCj4gPiBPbiBGcmksIDIwMjAt
+MTItMTggYXQgMTY6NDIgKzA4MDAsIEJpbiBNZW5nIHdyb3RlOg0KPiA+ID4gSGkgQXRpc2gsDQo+
+ID4gPiANCj4gPiA+IE9uIEZyaSwgRGVjIDE4LCAyMDIwIGF0IDQ6MDAgUE0gQXRpc2ggUGF0cmEg
+PEF0aXNoLlBhdHJhQHdkYy5jb20+DQo+ID4gPiB3cm90ZToNCj4gPiA+ID4gDQo+ID4gPiA+IE9u
+IEZyaSwgMjAyMC0xMi0xOCBhdCAxNTozMyArMDgwMCwgQmluIE1lbmcgd3JvdGU6DQo+ID4gPiA+
+ID4gSGkgQXRpc2gsDQo+ID4gPiA+ID4gDQo+ID4gPiA+ID4gT24gRnJpLCBEZWMgMTgsIDIwMjAg
+YXQgMzoyNyBQTSBBdGlzaCBQYXRyYSA8IA0KPiA+ID4gPiA+IEF0aXNoLlBhdHJhQHdkYy5jb20+
+DQo+ID4gPiA+ID4gd3JvdGU6DQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IE9uIEZyaSwgMjAy
+MC0xMi0xOCBhdCAxNToyMSArMDgwMCwgQmluIE1lbmcgd3JvdGU6DQo+ID4gPiA+ID4gPiA+IEhp
+IEF0aXNoLA0KPiA+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+ID4gT24gRnJpLCBEZWMgMTgsIDIw
+MjAgYXQgNTo0OCBBTSBBdGlzaCBQYXRyYQ0KPiA+ID4gPiA+ID4gPiA8YXRpc2gucGF0cmFAd2Rj
+LmNvbT4NCj4gPiA+ID4gPiA+ID4gd3JvdGU6DQo+ID4gPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4g
+PiA+ID4gQ3VycmVudGx5LCB3ZSBwbGFjZSB0aGUgRFRCIGF0IDJNQiBmcm9tIDRHQiBvciBlbmQg
+b2YNCj4gPiA+ID4gPiA+ID4gPiBEUkFNDQo+ID4gPiA+ID4gPiA+ID4gd2hpY2gNCj4gPiA+ID4g
+PiA+ID4gPiBldmVyIGlzDQo+ID4gPiA+ID4gPiA+ID4gbGVzc2VyLiBIb3dldmVyLCBMaW51eCBr
+ZXJuZWwgY2FuIGFkZHJlc3Mgb25seSAxR0Igb2YNCj4gPiA+ID4gPiA+ID4gPiBtZW1vcnkNCj4g
+PiA+ID4gPiA+ID4gPiBmb3INCj4gPiA+ID4gPiA+ID4gPiBSVjMyLg0KPiA+ID4gPiA+ID4gPiA+
+IFRodXMsIGl0IGNhbiBub3QgbWFwIGFueXRoaW5nIGJleW9uZCAzR0IgKGFzc3VtaW5nIDJHQg0K
+PiA+ID4gPiA+ID4gPiA+IGlzDQo+ID4gPiA+ID4gPiA+ID4gdGhlDQo+ID4gPiA+ID4gPiA+ID4g
+c3RhcnRpbmcgYWRkcmVzcykuDQo+ID4gPiA+ID4gPiA+ID4gQXMgYSByZXN1bHQsIGl0IGNhbiBu
+b3QgcHJvY2VzcyBEVCBhbmQgcGFuaWMgaWYgb3BlbnNiaQ0KPiA+ID4gPiA+ID4gPiA+IGR5bmFt
+aWMNCj4gPiA+ID4gPiA+ID4gPiBmaXJtd2FyZQ0KPiA+ID4gPiA+ID4gPiA+IGlzIHVzZWQuDQo+
+ID4gPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiA+ID4gRml4IHRoaXMgYnkgcGxhY2luZyB0aGUg
+RFRCIGF0IDJNQiBmcm9tIDNHQiBvciBlbmQgb2YNCj4gPiA+ID4gPiA+ID4gPiBEUkFNDQo+ID4g
+PiA+ID4gPiA+ID4gd2hpY2hldmVyIGlzIGxvd2VyLg0KPiA+ID4gPiA+ID4gPiA+IA0KPiA+ID4g
+PiA+ID4gPiA+IFNpZ25lZC1vZmYtYnk6IEF0aXNoIFBhdHJhIDxhdGlzaC5wYXRyYUB3ZGMuY29t
+Pg0KPiA+ID4gPiA+ID4gPiA+IC0tLQ0KPiA+ID4gPiA+ID4gPiA+IMKgaHcvcmlzY3YvYm9vdC5j
+IHwgNCArKy0tDQo+ID4gPiA+ID4gPiA+ID4gwqAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25z
+KCspLCAyIGRlbGV0aW9ucygtKQ0KPiA+ID4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gPiANCj4g
+PiA+ID4gPiA+ID4gV2l0aCB0aGlzIHBhdGNoLCAzMi1iaXQgc2lmaXZlX3Ugc3RpbGwgZG9lcyBu
+b3QgYm9vdA0KPiA+ID4gPiA+ID4gPiBrZXJuZWwNCj4gPiA+ID4gPiA+ID4gd2l0aA0KPiA+ID4g
+PiA+ID4gPiB0aGUNCj4gPiA+ID4gPiA+ID4gZm9sbG93aW5nIHBhdGNoIGFwcGxpZWQgb24gNS4x
+MDoNCj4gPiA+ID4gPiA+ID4gIA0KPiA+ID4gPiA+ID4gPiBodHRwczovL3BhdGNod29yay5rZXJu
+ZWwub3JnL3Byb2plY3QvbGludXgtcmlzY3YvcGF0Y2gvMjAyMDEyMTcwNzQ4NTUuMTk0ODc0My0x
+LWF0aXNoLnBhdHJhQHdkYy5jb20vDQo+ID4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gPiBDb21t
+YW5kIEkgdXNlZDoNCj4gPiA+ID4gPiA+ID4gJCBxZW11LXN5c3RlbS1yaXNjdjMyIC1ub2dyYXBo
+aWMgLU0gc2lmaXZlX3UgLW0gMUcgLXNtcCA1DQo+ID4gPiA+ID4gPiA+IC0NCj4gPiA+ID4gPiA+
+ID4ga2VybmVsDQo+ID4gPiA+ID4gPiA+IGFyY2gvcmlzY3YvYm9vdC9JbWFnZQ0KPiA+ID4gPiA+
+ID4gPiANCj4gPiA+ID4gPiA+ID4gMzItYml0IHZpcnQgY2Fubm90IGJvb3QgdGhlIHNhbWUga2Vy
+bmVsIGltYWdlIHdpdGggbWVtb3J5DQo+ID4gPiA+ID4gPiA+IHNldA0KPiA+ID4gPiA+ID4gPiB0
+bw0KPiA+ID4gPiA+ID4gPiAyRw0KPiA+ID4gPiA+ID4gPiBlaXRoZXI6DQo+ID4gPiA+ID4gPiA+
+ICQgcWVtdS1zeXN0ZW0tcmlzY3YzMiAtbm9ncmFwaGljIC1NIHZpcnQgLW0gMkcgLXNtcCA0IC0N
+Cj4gPiA+ID4gPiA+ID4ga2VybmVsDQo+ID4gPiA+ID4gPiA+IGFyY2gvcmlzY3YvYm9vdC9JbWFn
+ZQ0KPiA+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gSGkgQmluLA0KPiA+
+ID4gPiA+ID4gQXMgbWVudGlvbmVkIGluIHRoZSBlbWFpbCBvbiB0aGUgbGludXggbWFpbGluZyBs
+aXN0LCB0aGlzDQo+ID4gPiA+ID4gPiBwYXRjaA0KPiA+ID4gPiA+ID4gb25seQ0KPiA+ID4gPiA+
+ID4gc29sdmVzIDJHQiBwcm9ibGVtLiBzaWZpdmVfdSBwcm9ibGVtIGlzIHNvbHZlZCBieQ0KPiA+
+ID4gPiA+ID4gQWxpc3RhaXIncw0KPiA+ID4gPiA+ID4gcGF0Y2hbMV0uDQo+ID4gPiA+ID4gPiAN
+Cj4gPiA+ID4gPiA+IEhlIGlzIHBsYW5uaW5nIHRvIHNlbmQgdGhlIFBSIHNvb24uIFRoZSBpc3N1
+ZSB3aXRoIHNpZml2ZV91DQo+ID4gPiA+ID4gPiBib290DQo+ID4gPiA+ID4gPiB3YXMgaXQNCj4g
+PiA+ID4gPiA+IHdhcyBmYWlsaW5nIHRoZSAzMiBiaXQgdGVzdCBlYXJsaWVyIHJlc3VsdGluZyBh
+IDJNQiBhbGlnbmVkDQo+ID4gPiA+ID4gPiBhZGRyZXNzDQo+ID4gPiA+ID4gPiBpbnN0ZWFkIG9m
+IDRNQi4NCj4gPiA+ID4gPiANCj4gPiA+ID4gPiBBaCwgSSBzZWUuIEhvd2V2ZXIgbXkgdGVzdGlu
+ZyBzaG93cyB0aGF0IHZpcnQgd2l0aCAyRyBzdGlsbA0KPiA+ID4gPiA+IGRvZXMNCj4gPiA+ID4g
+PiBub3QNCj4gPiA+ID4gPiBib290IHdpdGggdGhpcyBwYXRjaC4NCj4gPiA+ID4gPiANCj4gPiA+
+ID4gDQo+ID4gPiA+IFN0cmFuZ2UuIEkgdmVyaWZpZWQgYWdhaW4gd2l0aCBmb2xsb3dpbmcgY29t
+YmluYXRpb24gd2l0aCAtYmlvcw0KPiA+ID4gPiBhbmQNCj4gPiA+ID4gd2l0aG91dCBiaW9zIHBh
+cmFtZXRlci4NCj4gPiA+ID4gDQo+ID4gPiA+IDEuIHZpcnQgMzIvNjQgd2l0aCAxR0IvMkdCIG1l
+bW9yeQ0KPiA+ID4gPiAyLiBzaWZpdmVfdSAzMi82NCBiaXQgd2l0aCAxR0IvMkdCIG1lbW9yeSAo
+QWxpc3RhaXIncyBwYXRjaA0KPiA+ID4gPiBpbmNsdWRlZCkNCj4gPiA+ID4gDQo+ID4gPiA+IENh
+biB5b3Ugc2hhcmUgdGhlIGJvb3QgbG9nIGFsb25nIHdpdGggdGhlIGhlYWQgY29tbWl0IG9mIFFl
+bXUNCj4gPiA+ID4gYW5kDQo+ID4gPiA+IGNvbW1hbmRsaW5lID8gSSBhbSB1c2luZyA1LjEwIGtl
+cm5lbCB3aXRoIG15IGtlcm5lbCBmaXguDQo+ID4gPiA+IA0KPiA+ID4gDQo+ID4gPiBJIHdhcyB1
+c2luZyBBbGlzdGFpcidzIFFFTVUgcmVwbyBmb3IgdGVzdGluZyBhbmQgNS4xMCBrZXJuZWwgd2l0
+aA0KPiA+ID4geW91cg0KPiA+ID4ga2VybmVsIGZpeDoNCj4gPiA+IA0KPiA+ID4gJCBnaXQgY2hl
+Y2tvdXQgLWIgdGVzdGluZyBwdWxsLXJpc2N2LXRvLWFwcGx5LTIwMjAxMjE3LTENCj4gPiA+ICQg
+YXBwbHkgdGhpcyBwYXRjaA0KPiA+ID4gJCBta2RpciBidWlsZDtjZCBidWlsZDsuLi9jb25maWd1
+cmUNCj4gPiA+IC0tdGFyZ2V0LWxpc3Q9cmlzY3Y2NC1zb2Z0bW11LHJpc2N2MzItc29mdG1tdTtt
+YWtlIC1qDQo+ID4gPiANCj4gPiA+ICQgLi9xZW11LXN5c3RlbS1yaXNjdjMyIC1ub2dyYXBoaWMg
+LU0gdmlydCAtbSAyRyAtc21wIDQgLWtlcm5lbA0KPiA+ID4gfi93b3JrL2dpdC9saW51eC9hcmNo
+L3Jpc2N2L2Jvb3QvSW1hZ2UNCj4gPiA+IA0KPiA+ID4gT3BlblNCSSB2MC44DQo+ID4gPiDCoMKg
+IF9fX1/CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBfX19fXyBfX19fIF9f
+X19fDQo+ID4gPiDCoCAvIF9fIFzCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC8g
+X19fX3zCoCBfIFxfwqDCoCBffA0KPiA+ID4gwqB8IHzCoCB8IHxfIF9fwqDCoCBfX18gXyBfXyB8
+IChfX18gfCB8XykgfHwgfA0KPiA+ID4gwqB8IHzCoCB8IHwgJ18gXCAvIF8gXCAnXyBcIFxfX18g
+XHzCoCBfIDwgfCB8DQo+ID4gPiDCoHwgfF9ffCB8IHxfKSB8wqAgX18vIHwgfCB8X19fXykgfCB8
+XykgfHwgfF8NCj4gPiA+IMKgIFxfX19fL3wgLl9fLyBcX19ffF98IHxffF9fX19fL3xfX19fL19f
+X19ffA0KPiA+ID4gwqDCoMKgwqDCoMKgwqAgfCB8DQo+ID4gPiDCoMKgwqDCoMKgwqDCoCB8X3wN
+Cj4gPiA+IA0KPiA+ID4gUGxhdGZvcm0gTmFtZcKgwqDCoMKgwqDCoCA6IHJpc2N2LXZpcnRpbyxx
+ZW11DQo+ID4gPiBQbGF0Zm9ybSBGZWF0dXJlc8KgwqAgOiB0aW1lcixtZmRlbGVnDQo+ID4gPiBQ
+bGF0Zm9ybSBIQVJUIENvdW50IDogNA0KPiA+ID4gQm9vdCBIQVJUIElEwqDCoMKgwqDCoMKgwqAg
+OiAzDQo+ID4gPiBCb290IEhBUlQgSVNBwqDCoMKgwqDCoMKgIDogcnYzMmltYWZkY3N1DQo+ID4g
+PiBCT09UIEhBUlQgRmVhdHVyZXPCoCA6IHBtcCxzY291bnRlcmVuLG1jb3VudGVyZW4sdGltZQ0K
+PiA+ID4gQk9PVCBIQVJUIFBNUCBDb3VudCA6IDE2DQo+ID4gPiBGaXJtd2FyZSBCYXNlwqDCoMKg
+wqDCoMKgIDogMHg4MDAwMDAwMA0KPiA+ID4gRmlybXdhcmUgU2l6ZcKgwqDCoMKgwqDCoCA6IDEw
+NCBLQg0KPiA+ID4gUnVudGltZSBTQkkgVmVyc2lvbiA6IDAuMg0KPiA+ID4gDQo+ID4gPiBNSURF
+TEVHIDogMHgwMDAwMDIyMg0KPiA+ID4gTUVERUxFRyA6IDB4MDAwMGIxMDkNCj4gPiA+IFBNUDDC
+oMKgwqAgOiAweDgwMDAwMDAwLTB4ODAwMWZmZmYgKEEpDQo+ID4gPiBQTVAxwqDCoMKgIDogMHgw
+MDAwMDAwMC0weGZmZmZmZmZmIChBLFIsVyxYKQ0KPiA+ID4gPGhhbmdzIGhlcmU+DQo+ID4gPiAN
+Cj4gPiA+ICQgLi9xZW11LXN5c3RlbS1yaXNjdjMyIC1ub2dyYXBoaWMgLU0gc2lmaXZlX3UgLW0g
+MkcgLXNtcCA1IC0NCj4gPiA+IGtlcm5lbA0KPiA+ID4gfi93b3JrL2dpdC9saW51eC9hcmNoL3Jp
+c2N2L2Jvb3QvSW1hZ2UNCj4gPiA+IA0KPiA+ID4gT3BlblNCSSB2MC44DQo+ID4gPiDCoMKgIF9f
+X1/CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBfX19fXyBfX19fIF9fX19f
+DQo+ID4gPiDCoCAvIF9fIFzCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC8gX19f
+X3zCoCBfIFxfwqDCoCBffA0KPiA+ID4gwqB8IHzCoCB8IHxfIF9fwqDCoCBfX18gXyBfXyB8IChf
+X18gfCB8XykgfHwgfA0KPiA+ID4gwqB8IHzCoCB8IHwgJ18gXCAvIF8gXCAnXyBcIFxfX18gXHzC
+oCBfIDwgfCB8DQo+ID4gPiDCoHwgfF9ffCB8IHxfKSB8wqAgX18vIHwgfCB8X19fXykgfCB8Xykg
+fHwgfF8NCj4gPiA+IMKgIFxfX19fL3wgLl9fLyBcX19ffF98IHxffF9fX19fL3xfX19fL19fX19f
+fA0KPiA+ID4gwqDCoMKgwqDCoMKgwqAgfCB8DQo+ID4gPiDCoMKgwqDCoMKgwqDCoCB8X3wNCj4g
+PiA+IA0KPiA+ID4gUGxhdGZvcm0gTmFtZcKgwqDCoMKgwqDCoCA6IFNpRml2ZSBIaUZpdmUgVW5s
+ZWFzaGVkIEEwMA0KPiA+ID4gUGxhdGZvcm0gRmVhdHVyZXPCoMKgIDogdGltZXIsbWZkZWxlZw0K
+PiA+ID4gUGxhdGZvcm0gSEFSVCBDb3VudCA6IDUNCj4gPiA+IEJvb3QgSEFSVCBJRMKgwqDCoMKg
+wqDCoMKgIDogNA0KPiA+ID4gQm9vdCBIQVJUIElTQcKgwqDCoMKgwqDCoCA6IHJ2MzJpbWFmZGNz
+dQ0KPiA+ID4gQk9PVCBIQVJUIEZlYXR1cmVzwqAgOiBwbXAsc2NvdW50ZXJlbixtY291bnRlcmVu
+DQo+ID4gPiBCT09UIEhBUlQgUE1QIENvdW50IDogMTYNCj4gPiA+IEZpcm13YXJlIEJhc2XCoMKg
+wqDCoMKgwqAgOiAweDgwMDAwMDAwDQo+ID4gPiBGaXJtd2FyZSBTaXplwqDCoMKgwqDCoMKgIDog
+MTEyIEtCDQo+ID4gPiBSdW50aW1lIFNCSSBWZXJzaW9uIDogMC4yDQo+ID4gPiANCj4gPiA+IE1J
+REVMRUcgOiAweDAwMDAwMjIyDQo+ID4gPiBNRURFTEVHIDogMHgwMDAwYjEwOQ0KPiA+ID4gUE1Q
+MMKgwqDCoCA6IDB4ODAwMDAwMDAtMHg4MDAxZmZmZiAoQSkNCj4gPiA+IFBNUDHCoMKgwqAgOiAw
+eDAwMDAwMDAwLTB4ZmZmZmZmZmYgKEEsUixXLFgpDQo+ID4gPiA8aGFuZ3MgaGVyZT4NCj4gPiA+
+IA0KPiA+ID4gVGhlIGZvbGxvd2luZyBpcyBzaWZpdmVfdSB3aXRoIDFHOg0KPiA+ID4gDQo+ID4g
+PiAkIC4vcWVtdS1zeXN0ZW0tcmlzY3YzMiAtbm9ncmFwaGljIC1NIHNpZml2ZV91IC1tIDFHIC1z
+bXAgNSAtDQo+ID4gPiBrZXJuZWwNCj4gPiA+IH4vd29yay9naXQvbGludXgvYXJjaC9yaXNjdi9i
+b290L0ltYWdlDQo+ID4gPiANCj4gPiA+IE9wZW5TQkkgdjAuOA0KPiA+ID4gwqDCoCBfX19fwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgX19fX18gX19fXyBfX19fXw0KPiA+
+ID4gwqAgLyBfXyBcwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAvIF9fX198wqAg
+XyBcX8KgwqAgX3wNCj4gPiA+IMKgfCB8wqAgfCB8XyBfX8KgwqAgX19fIF8gX18gfCAoX19fIHwg
+fF8pIHx8IHwNCj4gPiA+IMKgfCB8wqAgfCB8ICdfIFwgLyBfIFwgJ18gXCBcX19fIFx8wqAgXyA8
+IHwgfA0KPiA+ID4gwqB8IHxfX3wgfCB8XykgfMKgIF9fLyB8IHwgfF9fX18pIHwgfF8pIHx8IHxf
+DQo+ID4gPiDCoCBcX19fXy98IC5fXy8gXF9fX3xffCB8X3xfX19fXy98X19fXy9fX19fX3wNCj4g
+PiA+IMKgwqDCoMKgwqDCoMKgIHwgfA0KPiA+ID4gwqDCoMKgwqDCoMKgwqAgfF98DQo+ID4gPiAN
+Cj4gPiA+IFBsYXRmb3JtIE5hbWXCoMKgwqDCoMKgwqAgOiBTaUZpdmUgSGlGaXZlIFVubGVhc2hl
+ZCBBMDANCj4gPiA+IFBsYXRmb3JtIEZlYXR1cmVzwqDCoCA6IHRpbWVyLG1mZGVsZWcNCj4gPiA+
+IFBsYXRmb3JtIEhBUlQgQ291bnQgOiA1DQo+ID4gPiBCb290IEhBUlQgSUTCoMKgwqDCoMKgwqDC
+oCA6IDMNCj4gPiA+IEJvb3QgSEFSVCBJU0HCoMKgwqDCoMKgwqAgOiBydjMyaW1hZmRjc3UNCj4g
+PiA+IEJPT1QgSEFSVCBGZWF0dXJlc8KgIDogcG1wLHNjb3VudGVyZW4sbWNvdW50ZXJlbg0KPiA+
+ID4gQk9PVCBIQVJUIFBNUCBDb3VudCA6IDE2DQo+ID4gPiBGaXJtd2FyZSBCYXNlwqDCoMKgwqDC
+oMKgIDogMHg4MDAwMDAwMA0KPiA+ID4gRmlybXdhcmUgU2l6ZcKgwqDCoMKgwqDCoCA6IDExMiBL
+Qg0KPiA+ID4gUnVudGltZSBTQkkgVmVyc2lvbiA6IDAuMg0KPiA+ID4gDQo+ID4gPiBNSURFTEVH
+IDogMHgwMDAwMDIyMg0KPiA+ID4gTUVERUxFRyA6IDB4MDAwMGIxMDkNCj4gPiA+IFBNUDDCoMKg
+wqAgOiAweDgwMDAwMDAwLTB4ODAwMWZmZmYgKEEpDQo+ID4gPiBQTVAxwqDCoMKgIDogMHgwMDAw
+MDAwMC0weGZmZmZmZmZmIChBLFIsVyxYKQ0KPiA+ID4gW8KgwqDCoCAwLjAwMDAwMF0gTGludXgg
+dmVyc2lvbiA1LjEwLjAtMDAwMDEtZ2JmMGRhZDYxODk2ZA0KPiA+ID4gKGJtZW5nQHBlay12eC1i
+c3AyKSAocmlzY3Y2NC1saW51eC1nY2MgKEdDQykgOC4xLjAsIEdOVSBsZCAoR05VDQo+ID4gPiBC
+aW51dGlscykgMi4zMCkgIzEgU01QIFRodSBEZWMgMTcgMTY6NDg6MTMgQ1NUIDIwMjANCj4gPiA+
+IFvCoMKgwqAgMC4wMDAwMDBdIE9GOiBmZHQ6IElnbm9yaW5nIG1lbW9yeSByYW5nZSAweDgwMDAw
+MDAwIC0NCj4gPiA+IDB4ODA0MDAwMDANCj4gPiA+IFvCoMKgwqAgMC4wMDAwMDBdIGVmaTogVUVG
+SSBub3QgZm91bmQuDQo+ID4gPiBbwqDCoMKgIDAuMDAwMDAwXSBab25lIHJhbmdlczoNCj4gPiA+
+IFvCoMKgwqAgMC4wMDAwMDBdwqDCoCBOb3JtYWzCoMKgIFttZW0gMHgwMDAwMDAwMDgwNDAwMDAw
+LQ0KPiA+ID4gMHgwMDAwMDAwMGJmZmZmZmZmXQ0KPiA+ID4gW8KgwqDCoCAwLjAwMDAwMF0gTW92
+YWJsZSB6b25lIHN0YXJ0IGZvciBlYWNoIG5vZGUNCj4gPiA+IFvCoMKgwqAgMC4wMDAwMDBdIEVh
+cmx5IG1lbW9yeSBub2RlIHJhbmdlcw0KPiA+ID4gW8KgwqDCoCAwLjAwMDAwMF3CoMKgIG5vZGXC
+oMKgIDA6IFttZW0gMHgwMDAwMDAwMDgwNDAwMDAwLQ0KPiA+ID4gMHgwMDAwMDAwMGJmZmZmZmZm
+XQ0KPiA+ID4gW8KgwqDCoCAwLjAwMDAwMF0gSW5pdG1lbSBzZXR1cCBub2RlIDAgW21lbSAweDAw
+MDAwMDAwODA0MDAwMDAtDQo+ID4gPiAweDAwMDAwMDAwYmZmZmZmZmZdDQo+ID4gPiBbwqDCoMKg
+IDAuMDAwMDAwXSBTQkkgc3BlY2lmaWNhdGlvbiB2MC4yIGRldGVjdGVkDQo+ID4gPiBbwqDCoMKg
+IDAuMDAwMDAwXSBTQkkgaW1wbGVtZW50YXRpb24gSUQ9MHgxIFZlcnNpb249MHg4DQo+ID4gPiBb
+wqDCoMKgIDAuMDAwMDAwXSBTQkkgdjAuMiBUSU1FIGV4dGVuc2lvbiBkZXRlY3RlZA0KPiA+ID4g
+W8KgwqDCoCAwLjAwMDAwMF0gU0JJIHYwLjIgSVBJIGV4dGVuc2lvbiBkZXRlY3RlZA0KPiA+ID4g
+W8KgwqDCoCAwLjAwMDAwMF0gU0JJIHYwLjIgUkZFTkNFIGV4dGVuc2lvbiBkZXRlY3RlZA0KPiA+
+ID4gW8KgwqDCoCAwLjAwMDAwMF0gU0JJIHYwLjIgSFNNIGV4dGVuc2lvbiBkZXRlY3RlZA0KPiA+
+ID4gW8KgwqDCoCAwLjAwMDAwMF0gQ1BVIHdpdGggaGFydGlkPTAgaXMgbm90IGF2YWlsYWJsZQ0K
+PiA+ID4gW8KgwqDCoCAwLjAwMDAwMF0gQ1BVIHdpdGggaGFydGlkPTAgaXMgbm90IGF2YWlsYWJs
+ZQ0KPiA+ID4gDQo+ID4gPiBSZWdhcmRzLA0KPiA+ID4gQmluDQo+ID4gDQo+ID4gTWF5IGJlIHlv
+dSBmb3Jnb3QgdG8gYXBwbHkgdGhpcyBwYXRjaCBmb3IgMkdCIGNhc2Ugb24gdG9wIG9mDQo+ID4g
+QWxpc3RhaXIncw0KPiA+IHRyZWU/IEkgZG9uJ3Qgc2VlIGFueSBpc3N1ZXMgd2l0aCBleGFjdCBz
+YW1lIHNldHVwLg0KPiANCj4gVGhhdCdzIHJlYWxseSB3ZWlyZC4gSSBoYXZlOg0KPiANCj4gJCBn
+aXQgbG9nIC0tb25lbGluZQ0KPiAzY2VkMmZiIFJJU0MtVjogUGxhY2UgRFRCIGF0IDNHQiBib3Vu
+ZGFyeSBpbnN0ZWFkIG9mIDRHQg0KPiBkMzFlOTcwIHJpc2N2L29wZW50aXRhbjogVXBkYXRlIHRo
+ZSBPcGVuVGl0YW4gbWVtb3J5IGxheW91dA0KPiAzZWQyYjhhIGh3L3Jpc2N2OiBVc2UgdGhlIENQ
+VSB0byBkZXRlcm1pbmUgaWYgMzItYml0DQo+IDA5NGIwNzIgdGFyZ2V0L3Jpc2N2OiBjcHU6IFNl
+dCBYTEVOIGluZGVwZW5kZW50bHkgZnJvbSB0YXJnZXQNCj4gODk4N2NkYzQgdGFyZ2V0L3Jpc2N2
+OiBjc3I6IFJlbW92ZSBjb21waWxlIHRpbWUgWExFTiBjaGVja3MNCj4gDQo+IEkganVzdCByZWJ1
+aWx0IHRoZSBRRU1VIGJpbmFyaWVzIGJ1dCBzdGlsbCBoYXZlIHRoZSBzYW1lIHJlc3VsdC4gMkcN
+Cj4gZG9lcyBub3QgYm9vdCBvbiBlaXRoZXIgJ3ZpcnQnIG9yICdzaWZpdmVfdScuDQo+IA0KPiAk
+IC4vcWVtdS1zeXN0ZW0tcmlzY3YzMiAtdmVyc2lvbg0KPiBRRU1VIGVtdWxhdG9yIHZlcnNpb24g
+NS4yLjUwICh2NS4yLjAtNTUxLWczY2VkMmZiKQ0KPiBDb3B5cmlnaHQgKGMpIDIwMDMtMjAyMCBG
+YWJyaWNlIEJlbGxhcmQgYW5kIHRoZSBRRU1VIFByb2plY3QNCj4gZGV2ZWxvcGVycw0KPiANCj4g
+TWF5YmUgaXQncyB0b29sY2hhaW4gcmVsYXRlZD8gSSBhbSB1c2luZyBrZXJuZWwub3JnIHRvb2xj
+aGFpbg0KPiByaXNjdjY0LWxpbnV4LWdjYyAoR0NDKSA4LjEuMC4gSSBzZWUgeW91IHdlcmUgdXNp
+bmcNCj4gcmlzY3Y2NC11bmtub3duLWxpbnV4LWdudS1nY2MgKEdDQykgMTAuMi4wLg0KPiANCg0K
+U3RyYW5nZS4gSWYgaXQgaXMgYSB0b29sY2hhaW4gcmVsYXRlZCBpc3N1ZSwgdGhlIGNhdXNlIG1p
+Z2h0IGJlDQpjb21wbGV0ZWx5IGRpZmZlcmVudC4gQ2FuIHlvdSBnaXZlIGl0IGEgdHJ5IHRvIHdp
+dGggdXBkYXRlZCB0b29sY2hhaW4gPw0KVGhlIHByZS1idWlsdCB0b29sY2hhaW4gYXZhaWxhYmxl
+IGluIGJvb3RsaW5bMV0gaXMgMTAuMi4wLg0KDQpbMV0gaHR0cHM6Ly90b29sY2hhaW5zLmJvb3Rs
+aW4uY29tLw0KDQpDYW4gSSBkb3dubG9hZCBwcmUtYnVpbHQgZ2NjIDguMS4wIHRvb2xjaGFpbiBm
+cm9tIHNvbWV3aGVyZSA/IA0KDQo+IA0KDQo+ID4gDQo+ID4gUWVtdSBnaXQgbG9nDQo+ID4gLS0t
+LS0tDQo+ID4gODUxOTY2YzkyY2Y1IChIRUFEKSBSSVNDLVY6IFBsYWNlIERUQiBhdCAzR0IgYm91
+bmRhcnkgaW5zdGVhZCBvZg0KPiA+IDRHQg0KPiA+IGQzMWU5NzBhMDFlNyAodGFnOiBwdWxsLXJp
+c2N2LXRvLWFwcGx5LTIwMjAxMjE3LTEsIGFsaXN0YWlyL3Jpc2N2LQ0KPiA+IHRvLQ0KPiA+IGFw
+cGx5Lm5leHQsIGFsaXN0YWlyL3Jpc2N2LXRvLWFwcGx5LmZvci11cHN0cmVhbSkgcmlzY3Yvb3Bl
+bnRpdGFuOg0KPiA+IFVwZGF0ZSB0aGUgT3BlblRpdGFuIG1lbW9yeSBsYXlvdXQNCj4gPiAzZWQy
+YjhhYzJkYWMgaHcvcmlzY3Y6IFVzZSB0aGUgQ1BVIHRvIGRldGVybWluZSBpZiAzMi1iaXQNCj4g
+PiAwOTRiMDcyYzY4MTkgdGFyZ2V0L3Jpc2N2OiBjcHU6IFNldCBYTEVOIGluZGVwZW5kZW50bHkg
+ZnJvbSB0YXJnZXQNCj4gPiAtLS0tLS0tDQo+IA0KPiBSZWdhcmRzLA0KPiBCaW4NCg0KLS0gDQpS
+ZWdhcmRzLA0KQXRpc2gNCg==
 
