@@ -1,73 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1krsph-0005mn-UO
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Dec 2020 20:20:53 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32912)
+	id 1krsr8-0006Hx-Kk
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Dec 2020 20:22:22 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33172)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1krspe-0005iI-10; Tue, 22 Dec 2020 20:20:50 -0500
-Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:37166)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1krspa-00056H-Eq; Tue, 22 Dec 2020 20:20:49 -0500
-Received: by mail-yb1-xb32.google.com with SMTP id d37so13288463ybi.4;
- Tue, 22 Dec 2020 17:20:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=unN07d1QJCsb1dLFtpfYgzja2nZOXbTD0XGI6NFQTKw=;
- b=Kg42lbwSHu69EcvF3u/21ZW3bJ35clxexl2HGLW938Urk5c5PO57tVPWwwMRaV0H0N
- F+jcyHfqEcan0JbfvrMt3dJXnbkb6/TZriZItGpk0Lbw8/ujmPDrpvVDh3SH3XeN65MO
- 3symdlm0L41MlFDjFr0fTbenTnyU6oCIAosER1Bv5j2Zs+KhcmNhnMvO/k1awANF/Bf5
- E/n1zmLmIp40l6E6FHduqdTcX68vUE8n3QESZ6a6gx1qob3tjszDOmMvE31mg6XGRgow
- mithhdV37TOugy9ViUPOHQ/B9YmgLqjIavPU0sANI43cOdbAbGTRSJufL0HUF+KLs76P
- hR3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=unN07d1QJCsb1dLFtpfYgzja2nZOXbTD0XGI6NFQTKw=;
- b=mtttsx07W1EwPo9OV2D+87eXEn4x2dmncsKzi2vjWkAzXWQ++uOncUf5qZgT+NvxQh
- SECb/B3+bLPUEJepDbcpMVixQhvcJGZFAxLyS3qaCDNlRh+ymIddy7VYbYJ7qjEiR2HJ
- 3UKZxQf5FGN5ai+4UDzH9LlK0N2m4IVFVLwj8aeCeWrwvxxEGZJkAtlmdvldcV/NmPPB
- /q42nOU6DcFTYSwAQOD+nKJFt1YRycv9iFMiQX4d1DGZyNfOSrZ0N58l9fcVy0t1gIMt
- mvR6/Z0QXvNapzo7YzJKcy/a01ewX4hOd83PTR2GzYMArvXGdMDjfQaJpVm8ZCwluOX8
- O2pg==
-X-Gm-Message-State: AOAM533RPcjpEOxDdM2u4fF22AlnugF4/rkVrUyh3TxVeMLcasNcejrK
- COU8LzLEsdVr5b3ye47vFc1B+5T2MzhrPLDiCdY=
-X-Google-Smtp-Source: ABdhPJyIfUlCCQ+Eg8UCWALFIPRfMIvSevKQKvNGWWyeFdh1VOOF7yx3lM58Md3cArOUGFMa0lnW1BIb4W5z5afw8l0=
-X-Received: by 2002:a25:4d7:: with SMTP id 206mr34215807ybe.306.1608686445206; 
- Tue, 22 Dec 2020 17:20:45 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <prvs=61943049f=atish.patra@wdc.com>)
+ id 1krsqy-0006Fz-IN; Tue, 22 Dec 2020 20:22:15 -0500
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:36646)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <prvs=61943049f=atish.patra@wdc.com>)
+ id 1krsqu-0005Zd-A2; Tue, 22 Dec 2020 20:22:12 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1608686528; x=1640222528;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=E/VGK8b2YDZcqPNBX8/IqKOXpvt2J1CAIiyJJ938XLY=;
+ b=fmkSwsaPn+Ybiy944I4p5Lmm/BNhqRDRCbAORnwGCxuzw7En6FO74div
+ o4+P8r9CIAM1/eSv60907+xhs6hRAi5Uv6J6+T7wS17G694VkvSC6xNRc
+ lFQ27BWSE/IcjujVcNOi7VBn68CuCSI8AggN1w2yGMwmrQRpzlgAr8aQi
+ qswi4V1De0ncRQvDlZqp+uFqBChMh/5oMc9i3NNQ3Uhjomc9s9oxF6YsP
+ dmKLz46xvK9R8wEH1fAoHKVp2GNqBOfykxB59j3Kb7dFhmJGPK474lajc
+ EeyMNCVuZn1zC0avSYbmIPuvBY6JVkBeCA7Wg4wvzwDDI9ARux50txXpO A==;
+IronPort-SDR: pMd+/xZ1HoEFBsL67EP6PYTBAm8SvbMb+9KFP9f5Kh22cJ0JsFcYsFx1xPlUyj+K2hggja64qD
+ 7MpnKKlsnvPOVXB6ntxBT0By2ck2ispLyrU273XLzqYC9Cx8XM40P7j8majbqfOpudRq1JNLs+
+ OV7Hlvv5hymD58xKgN78eVJGYfA+BScdmS9ZjupatBz/YL3sSoThBnnu2TMNUcC758aCyOYtoD
+ ABD34kWRIVTwHvGJBO9oXC0si6o17f4r5gfC1COmo3fb8sG3JkH45EZ9lD9KcoFMf3wbPw45TG
+ ISw=
+X-IronPort-AV: E=Sophos;i="5.78,440,1599494400"; d="scan'208";a="266055894"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 23 Dec 2020 09:22:04 +0800
+IronPort-SDR: hAxZmZO82LeXYdWIopcob205qe4J6YhHsOUSAhjKqjOyDA3X+QrIZj3aQweLLcGhvMg5zaSJI/
+ SO4OGyEEBa88/6P0OPHr+utpkCRoSZZ7G99zAFX/acz0+UD/Zm+ApHNJ/RW8qxoMvja2BXmDj9
+ cTVByhgqgksPaDxIJgjuxlWHwcyXYWaYfhhcBDxixQFj87Z2QdSAwL1FfN4D6NJc2Tj3ykULay
+ IX7w+sW7JABCp/SAiCdA8xix8L48NWL5+nXhn8hkyXURUosnZGPrW2jDlM8EucSysfimuT1ZPO
+ YPUSkwyobk2nElGmNBBGWcoU
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 22 Dec 2020 17:07:14 -0800
+IronPort-SDR: 2xEY8m3S7LporWD6+2QU5nxKKb5CJ4RRD2UTAgikesMVvZRVwQe6fVTFuE8vPyv87UjmCeaST8
+ IWE7oPOmtEMYyKrOkh4xC/dzc6p0khz1kU/IFE8rdlL1byZsCVCH4dBC0MN0Kc9nq/+flFSlhl
+ fwZOwU4uxNwvtjfsSBJcbya5NwVAVsNyJDyW5K/LvDuAx1ULthXwnsb/jba47CYzFBBBs0oVMC
+ elrNXL06AZ05OXwDf8POGUj/WHYHXcPzhxwuPko6W8FcOrOw4TIB2dR4bOjvsRa9od+PoTmg68
+ GoM=
+WDCIronportException: Internal
+Received: from usa003310.ad.shared (HELO jedi-01.hgst.com) ([10.86.62.100])
+ by uls-op-cesaip02.wdc.com with ESMTP; 22 Dec 2020 17:22:04 -0800
+From: Atish Patra <atish.patra@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Atish Patra <atish.patra@wdc.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Anup Patel <anup.patel@wdc.com>
+Subject: [PATCH] target/riscv/pmp: Raise exception if no PMP entry is
+ configured
+Date: Tue, 22 Dec 2020 17:21:58 -0800
+Message-Id: <20201223012158.4146439-1-atish.patra@wdc.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20201217214826.2094617-1-atish.patra@wdc.com>
- <CAEUhbmUqJdpuqvZ6V3s9eeW=EUVXrnjbF5GRmygwaZhMGG-6sA@mail.gmail.com>
- <4f09804c0e35a45fcf3fa78b3f3ed55276d6e10f.camel@wdc.com>
- <CAEUhbmX16h5S5Y0kFsnDv6t2cnn6we-b-9U_cbnEQkrrckYy0w@mail.gmail.com>
- <67cbbde886c3ae6e57e837e79f466f4156a910f8.camel@wdc.com>
- <CAEUhbmVEAxf3OCp=89MCx7qQiN0wKd3QM4k8t20r9Sbq+JA_-w@mail.gmail.com>
- <df986ea726abea58fedd1a870095378456823d2a.camel@wdc.com>
- <CAEUhbmUK95YJ74_AJQ8wu9oBM6mDky2n5=pGR_UQE0AB4eXYtQ@mail.gmail.com>
- <a33a44ff4ec9f16a5ff7649e2d8ed9d87c6bed64.camel@wdc.com>
-In-Reply-To: <a33a44ff4ec9f16a5ff7649e2d8ed9d87c6bed64.camel@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 23 Dec 2020 09:20:33 +0800
-Message-ID: <CAEUhbmXCyrAZzVzvSMSf+FOt5g-jHpk2X6j=00rQNmJKYoXSAA@mail.gmail.com>
-Subject: Re: [PATCH] RISC-V: Place DTB at 3GB boundary instead of 4GB
-To: Atish Patra <Atish.Patra@wdc.com>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
- "kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>, 
- "sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Anup Patel <Anup.Patel@wdc.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- "palmer@dabbelt.com" <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=68.232.141.245;
+ envelope-from=prvs=61943049f=atish.patra@wdc.com; helo=esa1.hgst.iphmx.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -81,291 +83,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Dec 2020 01:20:51 -0000
+X-List-Received-Date: Wed, 23 Dec 2020 01:22:19 -0000
 
-Hi Atish,
+As per the privilege specification, any access from S/U mode should fail
+if no pmp region is configured.
 
-On Wed, Dec 23, 2020 at 3:59 AM Atish Patra <Atish.Patra@wdc.com> wrote:
->
-> On Tue, 2020-12-22 at 13:35 +0800, Bin Meng wrote:
-> > Hi Atish,
-> >
-> > On Sat, Dec 19, 2020 at 3:46 AM Atish Patra <Atish.Patra@wdc.com>
-> > wrote:
-> > >
-> > > On Fri, 2020-12-18 at 16:42 +0800, Bin Meng wrote:
-> > > > Hi Atish,
-> > > >
-> > > > On Fri, Dec 18, 2020 at 4:00 PM Atish Patra <Atish.Patra@wdc.com>
-> > > > wrote:
-> > > > >
-> > > > > On Fri, 2020-12-18 at 15:33 +0800, Bin Meng wrote:
-> > > > > > Hi Atish,
-> > > > > >
-> > > > > > On Fri, Dec 18, 2020 at 3:27 PM Atish Patra <
-> > > > > > Atish.Patra@wdc.com>
-> > > > > > wrote:
-> > > > > > >
-> > > > > > > On Fri, 2020-12-18 at 15:21 +0800, Bin Meng wrote:
-> > > > > > > > Hi Atish,
-> > > > > > > >
-> > > > > > > > On Fri, Dec 18, 2020 at 5:48 AM Atish Patra
-> > > > > > > > <atish.patra@wdc.com>
-> > > > > > > > wrote:
-> > > > > > > > >
-> > > > > > > > > Currently, we place the DTB at 2MB from 4GB or end of
-> > > > > > > > > DRAM
-> > > > > > > > > which
-> > > > > > > > > ever is
-> > > > > > > > > lesser. However, Linux kernel can address only 1GB of
-> > > > > > > > > memory
-> > > > > > > > > for
-> > > > > > > > > RV32.
-> > > > > > > > > Thus, it can not map anything beyond 3GB (assuming 2GB
-> > > > > > > > > is
-> > > > > > > > > the
-> > > > > > > > > starting address).
-> > > > > > > > > As a result, it can not process DT and panic if opensbi
-> > > > > > > > > dynamic
-> > > > > > > > > firmware
-> > > > > > > > > is used.
-> > > > > > > > >
-> > > > > > > > > Fix this by placing the DTB at 2MB from 3GB or end of
-> > > > > > > > > DRAM
-> > > > > > > > > whichever is lower.
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> > > > > > > > > ---
-> > > > > > > > >  hw/riscv/boot.c | 4 ++--
-> > > > > > > > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > > > > > > > >
-> > > > > > > >
-> > > > > > > > With this patch, 32-bit sifive_u still does not boot
-> > > > > > > > kernel
-> > > > > > > > with
-> > > > > > > > the
-> > > > > > > > following patch applied on 5.10:
-> > > > > > > >
-> > > > > > > > https://patchwork.kernel.org/project/linux-riscv/patch/20201217074855.1948743-1-atish.patra@wdc.com/
-> > > > > > > >
-> > > > > > > > Command I used:
-> > > > > > > > $ qemu-system-riscv32 -nographic -M sifive_u -m 1G -smp 5
-> > > > > > > > -
-> > > > > > > > kernel
-> > > > > > > > arch/riscv/boot/Image
-> > > > > > > >
-> > > > > > > > 32-bit virt cannot boot the same kernel image with memory
-> > > > > > > > set
-> > > > > > > > to
-> > > > > > > > 2G
-> > > > > > > > either:
-> > > > > > > > $ qemu-system-riscv32 -nographic -M virt -m 2G -smp 4 -
-> > > > > > > > kernel
-> > > > > > > > arch/riscv/boot/Image
-> > > > > > > >
-> > > > > > >
-> > > > > > > Hi Bin,
-> > > > > > > As mentioned in the email on the linux mailing list, this
-> > > > > > > patch
-> > > > > > > only
-> > > > > > > solves 2GB problem. sifive_u problem is solved by
-> > > > > > > Alistair's
-> > > > > > > patch[1].
-> > > > > > >
-> > > > > > > He is planning to send the PR soon. The issue with sifive_u
-> > > > > > > boot
-> > > > > > > was it
-> > > > > > > was failing the 32 bit test earlier resulting a 2MB aligned
-> > > > > > > address
-> > > > > > > instead of 4MB.
-> > > > > >
-> > > > > > Ah, I see. However my testing shows that virt with 2G still
-> > > > > > does
-> > > > > > not
-> > > > > > boot with this patch.
-> > > > > >
-> > > > >
-> > > > > Strange. I verified again with following combination with -bios
-> > > > > and
-> > > > > without bios parameter.
-> > > > >
-> > > > > 1. virt 32/64 with 1GB/2GB memory
-> > > > > 2. sifive_u 32/64 bit with 1GB/2GB memory (Alistair's patch
-> > > > > included)
-> > > > >
-> > > > > Can you share the boot log along with the head commit of Qemu
-> > > > > and
-> > > > > commandline ? I am using 5.10 kernel with my kernel fix.
-> > > > >
-> > > >
-> > > > I was using Alistair's QEMU repo for testing and 5.10 kernel with
-> > > > your
-> > > > kernel fix:
-> > > >
-> > > > $ git checkout -b testing pull-riscv-to-apply-20201217-1
-> > > > $ apply this patch
-> > > > $ mkdir build;cd build;../configure
-> > > > --target-list=riscv64-softmmu,riscv32-softmmu;make -j
-> > > >
-> > > > $ ./qemu-system-riscv32 -nographic -M virt -m 2G -smp 4 -kernel
-> > > > ~/work/git/linux/arch/riscv/boot/Image
-> > > >
-> > > > OpenSBI v0.8
-> > > >    ____                    _____ ____ _____
-> > > >   / __ \                  / ____|  _ \_   _|
-> > > >  | |  | |_ __   ___ _ __ | (___ | |_) || |
-> > > >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> > > >  | |__| | |_) |  __/ | | |____) | |_) || |_
-> > > >   \____/| .__/ \___|_| |_|_____/|____/_____|
-> > > >         | |
-> > > >         |_|
-> > > >
-> > > > Platform Name       : riscv-virtio,qemu
-> > > > Platform Features   : timer,mfdeleg
-> > > > Platform HART Count : 4
-> > > > Boot HART ID        : 3
-> > > > Boot HART ISA       : rv32imafdcsu
-> > > > BOOT HART Features  : pmp,scounteren,mcounteren,time
-> > > > BOOT HART PMP Count : 16
-> > > > Firmware Base       : 0x80000000
-> > > > Firmware Size       : 104 KB
-> > > > Runtime SBI Version : 0.2
-> > > >
-> > > > MIDELEG : 0x00000222
-> > > > MEDELEG : 0x0000b109
-> > > > PMP0    : 0x80000000-0x8001ffff (A)
-> > > > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
-> > > > <hangs here>
-> > > >
-> > > > $ ./qemu-system-riscv32 -nographic -M sifive_u -m 2G -smp 5 -
-> > > > kernel
-> > > > ~/work/git/linux/arch/riscv/boot/Image
-> > > >
-> > > > OpenSBI v0.8
-> > > >    ____                    _____ ____ _____
-> > > >   / __ \                  / ____|  _ \_   _|
-> > > >  | |  | |_ __   ___ _ __ | (___ | |_) || |
-> > > >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> > > >  | |__| | |_) |  __/ | | |____) | |_) || |_
-> > > >   \____/| .__/ \___|_| |_|_____/|____/_____|
-> > > >         | |
-> > > >         |_|
-> > > >
-> > > > Platform Name       : SiFive HiFive Unleashed A00
-> > > > Platform Features   : timer,mfdeleg
-> > > > Platform HART Count : 5
-> > > > Boot HART ID        : 4
-> > > > Boot HART ISA       : rv32imafdcsu
-> > > > BOOT HART Features  : pmp,scounteren,mcounteren
-> > > > BOOT HART PMP Count : 16
-> > > > Firmware Base       : 0x80000000
-> > > > Firmware Size       : 112 KB
-> > > > Runtime SBI Version : 0.2
-> > > >
-> > > > MIDELEG : 0x00000222
-> > > > MEDELEG : 0x0000b109
-> > > > PMP0    : 0x80000000-0x8001ffff (A)
-> > > > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
-> > > > <hangs here>
-> > > >
-> > > > The following is sifive_u with 1G:
-> > > >
-> > > > $ ./qemu-system-riscv32 -nographic -M sifive_u -m 1G -smp 5 -
-> > > > kernel
-> > > > ~/work/git/linux/arch/riscv/boot/Image
-> > > >
-> > > > OpenSBI v0.8
-> > > >    ____                    _____ ____ _____
-> > > >   / __ \                  / ____|  _ \_   _|
-> > > >  | |  | |_ __   ___ _ __ | (___ | |_) || |
-> > > >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> > > >  | |__| | |_) |  __/ | | |____) | |_) || |_
-> > > >   \____/| .__/ \___|_| |_|_____/|____/_____|
-> > > >         | |
-> > > >         |_|
-> > > >
-> > > > Platform Name       : SiFive HiFive Unleashed A00
-> > > > Platform Features   : timer,mfdeleg
-> > > > Platform HART Count : 5
-> > > > Boot HART ID        : 3
-> > > > Boot HART ISA       : rv32imafdcsu
-> > > > BOOT HART Features  : pmp,scounteren,mcounteren
-> > > > BOOT HART PMP Count : 16
-> > > > Firmware Base       : 0x80000000
-> > > > Firmware Size       : 112 KB
-> > > > Runtime SBI Version : 0.2
-> > > >
-> > > > MIDELEG : 0x00000222
-> > > > MEDELEG : 0x0000b109
-> > > > PMP0    : 0x80000000-0x8001ffff (A)
-> > > > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
-> > > > [    0.000000] Linux version 5.10.0-00001-gbf0dad61896d
-> > > > (bmeng@pek-vx-bsp2) (riscv64-linux-gcc (GCC) 8.1.0, GNU ld (GNU
-> > > > Binutils) 2.30) #1 SMP Thu Dec 17 16:48:13 CST 2020
-> > > > [    0.000000] OF: fdt: Ignoring memory range 0x80000000 -
-> > > > 0x80400000
-> > > > [    0.000000] efi: UEFI not found.
-> > > > [    0.000000] Zone ranges:
-> > > > [    0.000000]   Normal   [mem 0x0000000080400000-
-> > > > 0x00000000bfffffff]
-> > > > [    0.000000] Movable zone start for each node
-> > > > [    0.000000] Early memory node ranges
-> > > > [    0.000000]   node   0: [mem 0x0000000080400000-
-> > > > 0x00000000bfffffff]
-> > > > [    0.000000] Initmem setup node 0 [mem 0x0000000080400000-
-> > > > 0x00000000bfffffff]
-> > > > [    0.000000] SBI specification v0.2 detected
-> > > > [    0.000000] SBI implementation ID=0x1 Version=0x8
-> > > > [    0.000000] SBI v0.2 TIME extension detected
-> > > > [    0.000000] SBI v0.2 IPI extension detected
-> > > > [    0.000000] SBI v0.2 RFENCE extension detected
-> > > > [    0.000000] SBI v0.2 HSM extension detected
-> > > > [    0.000000] CPU with hartid=0 is not available
-> > > > [    0.000000] CPU with hartid=0 is not available
-> > > >
-> > > > Regards,
-> > > > Bin
-> > >
-> > > May be you forgot to apply this patch for 2GB case on top of
-> > > Alistair's
-> > > tree? I don't see any issues with exact same setup.
-> >
-> > That's really weird. I have:
-> >
-> > $ git log --oneline
-> > 3ced2fb RISC-V: Place DTB at 3GB boundary instead of 4GB
-> > d31e970 riscv/opentitan: Update the OpenTitan memory layout
-> > 3ed2b8a hw/riscv: Use the CPU to determine if 32-bit
-> > 094b072 target/riscv: cpu: Set XLEN independently from target
-> > 8987cdc4 target/riscv: csr: Remove compile time XLEN checks
-> >
-> > I just rebuilt the QEMU binaries but still have the same result. 2G
-> > does not boot on either 'virt' or 'sifive_u'.
-> >
-> > $ ./qemu-system-riscv32 -version
-> > QEMU emulator version 5.2.50 (v5.2.0-551-g3ced2fb)
-> > Copyright (c) 2003-2020 Fabrice Bellard and the QEMU Project
-> > developers
-> >
-> > Maybe it's toolchain related? I am using kernel.org toolchain
-> > riscv64-linux-gcc (GCC) 8.1.0. I see you were using
-> > riscv64-unknown-linux-gnu-gcc (GCC) 10.2.0.
-> >
->
-> Strange. If it is a toolchain related issue, the cause might be
-> completely different. Can you give it a try to with updated toolchain ?
-> The pre-built toolchain available in bootlin[1] is 10.2.0.
->
-> [1] https://toolchains.bootlin.com/
+Signed-off-by: Atish Patra <atish.patra@wdc.com>
+---
+ target/riscv/op_helper.c | 5 +++++
+ target/riscv/pmp.c       | 4 ++--
+ target/riscv/pmp.h       | 1 +
+ 3 files changed, 8 insertions(+), 2 deletions(-)
 
-I will give it a try.
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index d55def76cffd..1eddcb94de7e 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -150,6 +150,11 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+ 
+     uint64_t mstatus = env->mstatus;
+     target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
++
++    if (!pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    }
++
+     target_ulong prev_virt = get_field(env->mstatus, MSTATUS_MPV);
+     mstatus = set_field(mstatus, MSTATUS_MIE,
+                         get_field(mstatus, MSTATUS_MPIE));
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 2eda8e1e2f07..fbc4073fb359 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -74,7 +74,7 @@ static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
+ /*
+  * Count the number of active rules.
+  */
+-static inline uint32_t pmp_get_num_rules(CPURISCVState *env)
++inline uint32_t pmp_get_num_rules(CPURISCVState *env)
+ {
+      return env->pmp_state.num_rules;
+ }
+@@ -237,7 +237,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ 
+     /* Short cut if no rules */
+     if (0 == pmp_get_num_rules(env)) {
+-        return true;
++        return (env->priv == PRV_M) ? true : false;
+     }
+ 
+     if (size == 0) {
+diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+index 6c6b4c9befe8..c8d5ef4a694e 100644
+--- a/target/riscv/pmp.h
++++ b/target/riscv/pmp.h
+@@ -64,5 +64,6 @@ bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+                          target_ulong *tlb_size);
+ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
+ void pmp_update_rule_nums(CPURISCVState *env);
++uint32_t pmp_get_num_rules(CPURISCVState *env);
+ 
+ #endif
+-- 
+2.25.1
 
->
-> Can I download pre-built gcc 8.1.0 toolchain from somewhere ?
-
-Yes, you can download it from
-http://cdn.kernel.org/pub/tools/crosstool/files/bin/x86_64/8.1.0/x86_64-gcc-8.1.0-nolibc-riscv64-linux.tar.xz
-
-Regards,
-Bin
 
