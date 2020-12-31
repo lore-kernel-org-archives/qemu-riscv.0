@@ -1,58 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kuWuz-0007jP-72
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Dec 2020 03:33:17 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46042)
+	id 1kuwAB-0007LG-2P
+	for mharc-qemu-riscv@gnu.org; Thu, 31 Dec 2020 06:30:39 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58164)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuWus-0007ha-Mj; Wed, 30 Dec 2020 03:33:10 -0500
-Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:35956)
+ id 1kuwA9-0007IP-Bi; Thu, 31 Dec 2020 06:30:37 -0500
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a]:40747)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuWur-0007iZ-7K; Wed, 30 Dec 2020 03:33:10 -0500
-Received: by mail-yb1-xb2c.google.com with SMTP id y4so14348468ybn.3;
- Wed, 30 Dec 2020 00:33:08 -0800 (PST)
+ id 1kuwA4-00075A-V2; Thu, 31 Dec 2020 06:30:37 -0500
+Received: by mail-pl1-x62a.google.com with SMTP id q4so9925935plr.7;
+ Thu, 31 Dec 2020 03:30:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WlNQKK08dGVsjYSRErxI4Uebj8KVoXRsIubaR1sFPkQ=;
- b=C5WhHp5ynC3v5xfE6Nz5nNhiH3HHRasjgCRp+VzzYz+JjosopN+Os+Yyre8x1d9Wrr
- zt3Ts7hKF26a6SXxLbtvkmoQNl8ttUtsbbb+Ym9yHwPKOvfRUwNZCsOMBO8psHj5EdWP
- QIf1H9wm772zHrjZ5d+mBiRM1+JUmYNGxjwC4av3J4hMXbgYIVJVPr1xMpGUAglXzMsN
- bowUb9LWk4DWEZRZwgJrgjU/uf7cI73wcwGv8Bs7/CoEv9SzOoY7BveR0GLdQrn50fUi
- FEmz+mTViNJ2Eo2YX85kidVCvUiQJFwxONsFfVvjP0t2hKJ4jO04JKXFUOq9GkFLPocN
- 7j7Q==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8DEv8DwXupmb8HnEx8CFmydHKhBrRkmD+oQGpzXBwfQ=;
+ b=jXFhtBmnXjgGH2w6cEh/Jav2QRcvXWnndvw4laa6sB9feldEb6ku9ChfXUIBxeX4FK
+ YRpKjUS7yfIEw6tQVEAYvsacnfevIJemW1CYvMnYaLEtozAGadBdcELdMRwr3UhrUlKH
+ Sgz68oirgq5yRC26918KMT8maJ5wExcIbgbDbF5QQiez7q95vxhi13He+itXP4sE/R59
+ kdBt2OUrPi60Yc11nxW73/MPBAIlYpoaLm54fdRSda1KX/GHSTZAykQCPsgi/3yGOGZM
+ PhgdhaBTcNTQqWfhlBqBfJ8exBBj+Zk16fbpeNHADtL0jqPSxNxvswsHR3GO3/0APe4s
+ H6JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=WlNQKK08dGVsjYSRErxI4Uebj8KVoXRsIubaR1sFPkQ=;
- b=mU3VihvRQd9g6uUnIEFYmQToAPUg3IxAvAb379g/8fd3zZN1yT690OW/WOPQ1M8Tv3
- MR/atEhCPOWohLmT8Qivwu65OHYEpS8eQtHbD2jdT9sA+CDlm7GwULhWgyNzi1LAr5cc
- WNKICQy8AbNaVS4O03Q/niWkOWpez/7RLkkX898V96jSBYGMz1pHNcpBnpD0l77U5yBP
- meV6o1NvyG9LrARNxovORaIaSzbSR1C4yw0gNmH1uLdUkrcnHvX4XePHX6Rl1WrBGu7l
- Xgz+73IRFR3hH8SVVw7fH9lDxNu9bn3uSRIOXSfCDe103p6HWLe6KVDLm5o0F/eAFEuR
- Hx/g==
-X-Gm-Message-State: AOAM532aLAAKI06kXSxBqS1ixaaztTIXq5LFAVWHwBdlv3sPCEPzm0Ha
- 9mJJLS5esucuu9c+MWPYVDscbYjJf9rV5RvB1JU=
-X-Google-Smtp-Source: ABdhPJwPkOVCbbBCZyoF8zjuwaFdC4Je4riJjrcNG6bek05shoW1nO/wz5MLdGz/acjTtcSf4SOy8xZx5/IWWYttE8U=
-X-Received: by 2002:a25:e70e:: with SMTP id e14mr16651127ybh.332.1609317188023; 
- Wed, 30 Dec 2020 00:33:08 -0800 (PST)
-MIME-Version: 1.0
-References: <CAOkUe-BGMmUTtY8bdTgi2Vrmq-pL2O36bY_kmE5rfbv0SQTJmA@mail.gmail.com>
-In-Reply-To: <CAOkUe-BGMmUTtY8bdTgi2Vrmq-pL2O36bY_kmE5rfbv0SQTJmA@mail.gmail.com>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8DEv8DwXupmb8HnEx8CFmydHKhBrRkmD+oQGpzXBwfQ=;
+ b=KAZ/A18YgBsXc63hpCLQnVzDl242s+/0zhyfpQaai26cLdDFjnJHGhXTDHFvgTL6co
+ l2J98373kla9MlnjbpuufIdIak01BEUhMODuJejzzcmIY+pr/v0rz5ht6KbMulsUVZDY
+ gXp54ItL7y8/ievn3SOnmXY2jYt+yIu83wAv6RyE7GMRAf5qoPOtBG/m3gCDlDPhr27A
+ HGORt1iPlH193iBPeJGeDGncxh3BDxcFKTQAi/cUCrrZdzVB9mUE7r5pcfIqptJf8cnl
+ 6WHy/4ajNf+7FxmYCjsOOyvmVC3gklkLDiWJc/Lab1l/ueNhncthSh1C0pADTFW5Oqke
+ YMag==
+X-Gm-Message-State: AOAM531fdU/5r/6JezAi9GJ6V38i3BdQQOPzmoJIULXw3hW0GMeAYeU0
+ eRlUb+fxEb8Wpfx/ry3HH9E=
+X-Google-Smtp-Source: ABdhPJwy/7LkS4e8xODnE9UnRKEOFJfUYNDs8Dkg/5Rtrpygksr8mfrlHA60W5YqigA2GnboVp8xaA==
+X-Received: by 2002:a17:902:c401:b029:da:6fa4:d208 with SMTP id
+ k1-20020a170902c401b02900da6fa4d208mr32689620plk.33.1609414226907; 
+ Thu, 31 Dec 2020 03:30:26 -0800 (PST)
+Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
+ [144.168.56.201])
+ by smtp.gmail.com with ESMTPSA id t23sm45957591pfc.0.2020.12.31.03.30.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Dec 2020 03:30:26 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 30 Dec 2020 16:32:57 +0800
-Message-ID: <CAEUhbmUL6jvbhOtrq0uLWCFu04rxG2mMpcjZKfQKW3X1S=C+0g@mail.gmail.com>
-Subject: Re: [PATCH v2] gdb: riscv: Add target description
-To: Sylvain Pelissier <sylvain.pelissier@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2c;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2c.google.com
+To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH 00/22] hw/riscv: sifive_u: Add missing SPI support
+Date: Thu, 31 Dec 2020 19:29:48 +0800
+Message-Id: <20201231113010.27108-1-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -72,18 +76,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2020 08:33:11 -0000
+X-List-Received-Date: Thu, 31 Dec 2020 11:30:37 -0000
 
-On Wed, Dec 30, 2020 at 4:25 PM Sylvain Pelissier
-<sylvain.pelissier@gmail.com> wrote:
->
-> Target description is not currently implemented in RISC-V architecture. Thus GDB won't set it properly when attached. The patch implements the target description response.
->
-> Signed-off-by: Sylvain Pelissier <sylvain.pelissier@gmail.com>
-> ---
->  target/riscv/cpu.c | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->
+From: Bin Meng <bin.meng@windriver.com>
 
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
+This adds the missing SPI support to the `sifive_u` machine in the QEMU
+mainline. With this series, upstream U-Boot for the SiFive HiFive Unleashed
+board can boot on QEMU `sifive_u` out of the box. This allows users to
+develop and test the recommended RISC-V boot flow with a real world use
+case: ZSBL (in QEMU) loads U-Boot SPL from SD card or SPI flash to L2LIM,
+then U-Boot SPL loads the payload from SD card or SPI flash that is a
+combination of OpenSBI fw_dynamic firmware and U-Boot proper.
+
+The m25p80 model is updated to support ISSI flash series. A bunch of
+ssi-sd issues are fixed, and writing to SD card in SPI mode is supported.
+
+reST documentation for RISC-V is added. Currently only `sifive_u`
+machine is documented, but more to come.
+
+
+Bin Meng (22):
+  hw/block: m25p80: Add ISSI SPI flash support
+  hw/block: m25p80: Add various ISSI flash information
+  hw/sd: ssi-sd: Fix incorrect card response sequence
+  hw/sd: sd: Support CMD59 for SPI mode
+  hw/sd: sd: Drop sd_crc16()
+  util: Add CRC16 (CCITT) calculation routines
+  hw/sd: ssi-sd: Suffix a data block with CRC16
+  hw/sd: ssi-sd: Support multiple block read (CMD18)
+  hw/sd: ssi-sd: Use macros for the dummy value and tokens in the
+    transfer
+  hw/sd: sd: Remove duplicated codes in single/multiple block read/write
+  hw/sd: sd: Allow single/multiple block write for SPI mode
+  hw/sd: sd.h: Cosmetic change of using spaces
+  hw/sd: Introduce receive_ready() callback
+  hw/sd: ssi-sd: Support single block write
+  hw/sd: ssi-sd: Support multiple block write
+  hw/ssi: Add SiFive SPI controller support
+  hw/riscv: sifive_u: Add QSPI0 controller and connect a flash
+  hw/riscv: sifive_u: Add QSPI2 controller and connect an SD card
+  hw/riscv: sifive_u: Change SIFIVE_U_GEM_IRQ to decimal value
+  docs/system: Sort targets in alphabetical order
+  docs/system: Add RISC-V documentation
+  docs/system: riscv: Add documentation for sifive_u machine
+
+ docs/system/riscv/sifive_u.rst | 336 +++++++++++++++++++++++++++++++++
+ docs/system/target-riscv.rst   |  72 +++++++
+ docs/system/targets.rst        |  20 +-
+ include/hw/riscv/sifive_u.h    |   9 +-
+ include/hw/sd/sd.h             |  44 ++---
+ include/hw/ssi/sifive_spi.h    |  47 +++++
+ include/qemu/crc-ccitt.h       |  33 ++++
+ hw/block/m25p80.c              |  51 ++++-
+ hw/riscv/sifive_u.c            |  91 +++++++++
+ hw/sd/core.c                   |  13 ++
+ hw/sd/sd.c                     |  82 +-------
+ hw/sd/ssi-sd.c                 | 127 +++++++++++--
+ hw/ssi/sifive_spi.c            | 290 ++++++++++++++++++++++++++++
+ util/crc-ccitt.c               | 127 +++++++++++++
+ hw/riscv/Kconfig               |   3 +
+ hw/ssi/Kconfig                 |   4 +
+ hw/ssi/meson.build             |   1 +
+ util/meson.build               |   1 +
+ 18 files changed, 1232 insertions(+), 119 deletions(-)
+ create mode 100644 docs/system/riscv/sifive_u.rst
+ create mode 100644 docs/system/target-riscv.rst
+ create mode 100644 include/hw/ssi/sifive_spi.h
+ create mode 100644 include/qemu/crc-ccitt.h
+ create mode 100644 hw/ssi/sifive_spi.c
+ create mode 100644 util/crc-ccitt.c
+
+-- 
+2.25.1
+
 
