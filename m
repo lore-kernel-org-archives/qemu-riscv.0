@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kuwAo-00083C-Ja
-	for mharc-qemu-riscv@gnu.org; Thu, 31 Dec 2020 06:31:18 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58350)
+	id 1kuwAp-00085d-E3
+	for mharc-qemu-riscv@gnu.org; Thu, 31 Dec 2020 06:31:19 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58402)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuwAe-0007oN-FH; Thu, 31 Dec 2020 06:31:08 -0500
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:35264)
+ id 1kuwAj-0007s9-5m; Thu, 31 Dec 2020 06:31:13 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630]:33829)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuwAS-0007Ix-MX; Thu, 31 Dec 2020 06:31:04 -0500
-Received: by mail-pg1-x52a.google.com with SMTP id n7so12976049pgg.2;
- Thu, 31 Dec 2020 03:30:55 -0800 (PST)
+ id 1kuwAc-0007KH-48; Thu, 31 Dec 2020 06:31:12 -0500
+Received: by mail-pl1-x630.google.com with SMTP id t6so9943761plq.1;
+ Thu, 31 Dec 2020 03:31:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=SSpkkpnZBFUJvtzyVxA8dwObjy/GwlHr5JuKuF1o9i8=;
- b=Yi0R8obiBq+xn3EKoiD9xmBdftJwaP8QLZI1uIlMZySdxcJHXo+YaznL5zg6zI4BY3
- Rgd3quFGxjvPSqaR/zX0PFLmZJHgYOnkI/ebDnctN8plGqXahEAZ9H40HKMYmjlBtSIf
- 7Xm/pUCbqgl/+ay88glQ54ep4d2iq+x3cX8BSR2tRXdFudqwwwAgaA9fCfT0NsJ+NrFV
- LjMx1fg4LKBvCsYmAUxqgaJEz17j47GZM58UUnG+oipMVtmNfyg9QY9CLft3wq8G3aGU
- RL6G55lp2zSB5SdfMEZy1mgPJ5cNCH7pzjjCjsjOkVV3PAy3JAVea8iPw+VKURBgiysN
- OTMw==
+ bh=9NyACXhLTu4f5dkh4QFmGIUbis3QARakLx03R/Yz9iI=;
+ b=lHgrammZLDBf6U/mIyvFKJeWYSyzfb23XFSUwbxY5JErL3EZ6u1YdbPYKYfqUHT/4S
+ otN5OEMt5JtSt4afWu51oJVxS5FADnaO7gnrEJcG+xQZXo90giGL++wMjkFD1aaB3ts3
+ bEX/8OdWkYBhQBPim2JQn90Y8srzGyAX1zGDb+zbzJG0nCKhnRqosVjZdq9g8EJJ675O
+ Mo+8yAELwapvJQRZh+6SLTWN8EWbUMpTjhhJXDl3Pf1TTaqT50ZeC63Iedl1ODSBIYC8
+ KFymoR2hEU4KHqY58O0wkrvHq/p20YklSZpEA4BwevfyWIvcn7wij8JsbKEMuX2eirqP
+ G2Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=SSpkkpnZBFUJvtzyVxA8dwObjy/GwlHr5JuKuF1o9i8=;
- b=X9XF9vLzOLNVFuOfjFxUXZm4l5lmjc3pRMYePWuG9lmubJYBX6fkVBdYH2qCXC/Vuk
- DH0vGKbDIWetqfEvzmpfSQvA2hK+cm/gS8Buswphoi+FdldusTKbaSYAbGfJ/E7SBLJg
- dlj++CfCur8TwgwTeXwbVbLJYaZTCv0UWGOqEwLJ35MGRNcICM/qD+y8/hlW5ppCn6Xb
- 80HU+pAH54RNGOqiF3zd7C4q4At9wFyxXCfHtxhNfdfq3eUK4czYYgK4XsAzhNkaHUPU
- wVRAXmUfbzEEdY3o9+9/mOCwD6VGkCvdMYLYldk4AMfGkUOjFi+8fYtUFIuv9WDnFh9t
- 3X+g==
-X-Gm-Message-State: AOAM531xJrMF2v7NNcNCLMJEXCpNqnmIKmwfUpOR4CNpHdrbzH580Dp9
- lK54LCLFiltnsaUhafLcErdNT8pJwDc=
-X-Google-Smtp-Source: ABdhPJwLnZOmZ2IeFnMcH9w/FKWgC5PG//W052OtddY/HASqhBrsYW8cyRnk8Taq55pK+NK6QWmPMw==
-X-Received: by 2002:a63:d141:: with SMTP id c1mr41370870pgj.75.1609414254432; 
- Thu, 31 Dec 2020 03:30:54 -0800 (PST)
+ bh=9NyACXhLTu4f5dkh4QFmGIUbis3QARakLx03R/Yz9iI=;
+ b=fm8aP1xx/a3kKbDS/hpN36jz0Lq+GxlCUDgKrDyM1LJ/LBecxKTqcOvUQ4YwoP9MrJ
+ JlUMEgsBzqdsDC/NdMZU+ZCRtjZUPNU867rLHfuJzZW/ngdZmTHjpp2jpKFn7htzSeWm
+ tdvWAq0k1i1joasrtYmRHCoMiraucCgj1oJrUGGh5+rnT85lDpij6SIxm2LEqLROk16q
+ xq4ykhLQ1+siQwbFWEccE0TgHJBNsA2eOQ4I3rnY1pJwr9VgDdWBt+zmF59IM0YdJFy0
+ mMd/h2BssZvXB4j0qzj1ta91TQWlP62r381IOrZaklzE94hqW+tIFhHCct1MMK7mv7C9
+ NUtw==
+X-Gm-Message-State: AOAM5310ouIpCknd6kO0Z6WQTLGlIg/CvcbQjOb4tXjZoo5wf3qCMEbD
+ RKLVrMmDbnn4uQ1atcjw5V0=
+X-Google-Smtp-Source: ABdhPJzlKfOCS2440a7bdtGeWd6CbzmXAn5qFMu5SBimKIwdgAkZEzp+d+61+8X09IoWkNZ7lo47GA==
+X-Received: by 2002:a17:902:d202:b029:da:d86b:78be with SMTP id
+ t2-20020a170902d202b02900dad86b78bemr38216753ply.0.1609414262879; 
+ Thu, 31 Dec 2020 03:31:02 -0800 (PST)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id t23sm45957591pfc.0.2020.12.31.03.30.51
+ by smtp.gmail.com with ESMTPSA id t23sm45957591pfc.0.2020.12.31.03.31.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Dec 2020 03:30:54 -0800 (PST)
+ Thu, 31 Dec 2020 03:31:02 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 09/22] hw/sd: ssi-sd: Use macros for the dummy value and
- tokens in the transfer
-Date: Thu, 31 Dec 2020 19:29:57 +0800
-Message-Id: <20201231113010.27108-10-bmeng.cn@gmail.com>
+Subject: [PATCH 12/22] hw/sd: sd.h: Cosmetic change of using spaces
+Date: Thu, 31 Dec 2020 19:30:00 +0800
+Message-Id: <20201231113010.27108-13-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201231113010.27108-1-bmeng.cn@gmail.com>
 References: <20201231113010.27108-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x52a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,103 +77,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Dec 2020 11:31:10 -0000
+X-List-Received-Date: Thu, 31 Dec 2020 11:31:14 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-At present the codes use hardcoded numbers (0xff/0xfe) for the dummy
-value and block start token. Replace them with macros, and add more
-tokens for multiple block write.
+QEMU conding convention prefers spaces over tabs.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- hw/sd/ssi-sd.c | 30 +++++++++++++++++++++---------
- 1 file changed, 21 insertions(+), 9 deletions(-)
+ include/hw/sd/sd.h | 42 +++++++++++++++++++++---------------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
 
-diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
-index 889260bd8f..8eb48550cf 100644
---- a/hw/sd/ssi-sd.c
-+++ b/hw/sd/ssi-sd.c
-@@ -78,6 +78,18 @@ OBJECT_DECLARE_SIMPLE_TYPE(ssi_sd_state, SSI_SD)
- #define SSI_SDR_ADDRESS_ERROR   0x2000
- #define SSI_SDR_PARAMETER_ERROR 0x4000
+diff --git a/include/hw/sd/sd.h b/include/hw/sd/sd.h
+index 59d108d453..05ef9b73e5 100644
+--- a/include/hw/sd/sd.h
++++ b/include/hw/sd/sd.h
+@@ -33,27 +33,27 @@
+ #include "hw/qdev-core.h"
+ #include "qom/object.h"
  
-+/* reading and writing blocks start with these tokens and end with crc16 */
-+
-+/* multiple block write */
-+#define SSI_TOKEN_MULTI_WRITE   0xfc
-+/* terminate multiple block write */
-+#define SSI_TOKEN_STOP_TRAN     0xfd
-+/* single block read/write, multiple block read */
-+#define SSI_TOKEN_SINGLE        0xfe
-+
-+/* dummy value - don't care */
-+#define SSI_DUMMY               0xff
-+
- static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
- {
-     ssi_sd_state *s = SSI_SD(dev);
-@@ -91,14 +103,14 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+-#define OUT_OF_RANGE		(1 << 31)
+-#define ADDRESS_ERROR		(1 << 30)
+-#define BLOCK_LEN_ERROR		(1 << 29)
+-#define ERASE_SEQ_ERROR		(1 << 28)
+-#define ERASE_PARAM		(1 << 27)
+-#define WP_VIOLATION		(1 << 26)
+-#define CARD_IS_LOCKED		(1 << 25)
+-#define LOCK_UNLOCK_FAILED	(1 << 24)
+-#define COM_CRC_ERROR		(1 << 23)
+-#define ILLEGAL_COMMAND		(1 << 22)
+-#define CARD_ECC_FAILED		(1 << 21)
+-#define CC_ERROR		(1 << 20)
+-#define SD_ERROR		(1 << 19)
+-#define CID_CSD_OVERWRITE	(1 << 16)
+-#define WP_ERASE_SKIP		(1 << 15)
+-#define CARD_ECC_DISABLED	(1 << 14)
+-#define ERASE_RESET		(1 << 13)
+-#define CURRENT_STATE		(7 << 9)
+-#define READY_FOR_DATA		(1 << 8)
+-#define APP_CMD			(1 << 5)
+-#define AKE_SEQ_ERROR		(1 << 3)
++#define OUT_OF_RANGE            (1 << 31)
++#define ADDRESS_ERROR           (1 << 30)
++#define BLOCK_LEN_ERROR         (1 << 29)
++#define ERASE_SEQ_ERROR         (1 << 28)
++#define ERASE_PARAM             (1 << 27)
++#define WP_VIOLATION            (1 << 26)
++#define CARD_IS_LOCKED          (1 << 25)
++#define LOCK_UNLOCK_FAILED      (1 << 24)
++#define COM_CRC_ERROR           (1 << 23)
++#define ILLEGAL_COMMAND         (1 << 22)
++#define CARD_ECC_FAILED         (1 << 21)
++#define CC_ERROR                (1 << 20)
++#define SD_ERROR                (1 << 19)
++#define CID_CSD_OVERWRITE       (1 << 16)
++#define WP_ERASE_SKIP           (1 << 15)
++#define CARD_ECC_DISABLED       (1 << 14)
++#define ERASE_RESET             (1 << 13)
++#define CURRENT_STATE           (7 << 9)
++#define READY_FOR_DATA          (1 << 8)
++#define APP_CMD                 (1 << 5)
++#define AKE_SEQ_ERROR           (1 << 3)
  
-     switch (s->mode) {
-     case SSI_SD_CMD:
--        if (val == 0xff) {
-+        if (val == SSI_DUMMY) {
-             DPRINTF("NULL command\n");
--            return 0xff;
-+            return SSI_DUMMY;
-         }
-         s->cmd = val & 0x3f;
-         s->mode = SSI_SD_CMDARG;
-         s->arglen = 0;
--        return 0xff;
-+        return SSI_DUMMY;
-     case SSI_SD_CMDARG:
-         if (s->arglen == 4) {
-             SDRequest request;
-@@ -173,14 +185,14 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
-         } else {
-             s->cmdarg[s->arglen++] = val;
-         }
--        return 0xff;
-+        return SSI_DUMMY;
-     case SSI_SD_PREP_RESP:
-         s->mode = SSI_SD_RESPONSE;
--        return 0xff;
-+        return SSI_DUMMY;
-     case SSI_SD_RESPONSE:
-         if (s->stopping) {
-             s->stopping = 0;
--            return 0xff;
-+            return SSI_DUMMY;
-         }
-         if (s->response_pos < s->arglen) {
-             DPRINTF("Response 0x%02x\n", s->response[s->response_pos]);
-@@ -193,12 +205,12 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
-             DPRINTF("End of command\n");
-             s->mode = SSI_SD_CMD;
-         }
--        return 0xff;
-+        return SSI_DUMMY;
-     case SSI_SD_DATA_START:
-         DPRINTF("Start read block\n");
-         s->mode = SSI_SD_DATA_READ;
-         s->response_pos = 0;
--        return 0xfe;
-+        return SSI_TOKEN_SINGLE;
-     case SSI_SD_DATA_READ:
-         val = sdbus_read_byte(&s->sdbus);
-         s->read_bytes++;
-@@ -225,7 +237,7 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
-         return val;
-     }
-     /* Should never happen.  */
--    return 0xff;
-+    return SSI_DUMMY;
- }
- 
- static int ssi_sd_post_load(void *opaque, int version_id)
+ enum SDPhySpecificationVersion {
+     SD_PHY_SPECv1_10_VERS     = 1,
 -- 
 2.25.1
 
