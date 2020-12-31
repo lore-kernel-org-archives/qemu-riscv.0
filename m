@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kuwAp-00085d-E3
-	for mharc-qemu-riscv@gnu.org; Thu, 31 Dec 2020 06:31:19 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58402)
+	id 1kuwAt-0008Ex-56
+	for mharc-qemu-riscv@gnu.org; Thu, 31 Dec 2020 06:31:23 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58428)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuwAj-0007s9-5m; Thu, 31 Dec 2020 06:31:13 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630]:33829)
+ id 1kuwAo-00083R-Mv; Thu, 31 Dec 2020 06:31:18 -0500
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:40159)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuwAc-0007KH-48; Thu, 31 Dec 2020 06:31:12 -0500
-Received: by mail-pl1-x630.google.com with SMTP id t6so9943761plq.1;
- Thu, 31 Dec 2020 03:31:03 -0800 (PST)
+ id 1kuwAm-0007O4-So; Thu, 31 Dec 2020 06:31:18 -0500
+Received: by mail-pf1-x435.google.com with SMTP id x126so11130465pfc.7;
+ Thu, 31 Dec 2020 03:31:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=9NyACXhLTu4f5dkh4QFmGIUbis3QARakLx03R/Yz9iI=;
- b=lHgrammZLDBf6U/mIyvFKJeWYSyzfb23XFSUwbxY5JErL3EZ6u1YdbPYKYfqUHT/4S
- otN5OEMt5JtSt4afWu51oJVxS5FADnaO7gnrEJcG+xQZXo90giGL++wMjkFD1aaB3ts3
- bEX/8OdWkYBhQBPim2JQn90Y8srzGyAX1zGDb+zbzJG0nCKhnRqosVjZdq9g8EJJ675O
- Mo+8yAELwapvJQRZh+6SLTWN8EWbUMpTjhhJXDl3Pf1TTaqT50ZeC63Iedl1ODSBIYC8
- KFymoR2hEU4KHqY58O0wkrvHq/p20YklSZpEA4BwevfyWIvcn7wij8JsbKEMuX2eirqP
- G2Sw==
+ bh=EmlivLosd2IMSstdGdEwY8MJ34lojrakc2lBg6ahP/o=;
+ b=uohyBcVeMZS8uMAZ4kY/C/T7T+df2jofTIxc7Q+ilvlHmZUb7hUWJ9GakjXUgnHkJI
+ BK4COW3ph8uWa1k/z62ARdkSYhOhL8ioOFeWkkT7b9F8p2VH01ACUSoGvKuvBbHQpB3H
+ I31D1ONyNXxMdl1178Cp4UvktzFyqjEZXWFCry0Tk7LsGqYybrBHxZlfnLo70CvW/SP6
+ amHuwQu9u1MZrqKPxrI+ptOtdGi7qxHSsV/upPXP88Evtm7nDu0NrEU/hA+N7bevOp2R
+ pjEHWjYt9TghkiZXoyx/BjMl3i5a3oUF+PDKKqvJn3IeqEEHyWfDAm5OrOmBdfxbh6TT
+ GMHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=9NyACXhLTu4f5dkh4QFmGIUbis3QARakLx03R/Yz9iI=;
- b=fm8aP1xx/a3kKbDS/hpN36jz0Lq+GxlCUDgKrDyM1LJ/LBecxKTqcOvUQ4YwoP9MrJ
- JlUMEgsBzqdsDC/NdMZU+ZCRtjZUPNU867rLHfuJzZW/ngdZmTHjpp2jpKFn7htzSeWm
- tdvWAq0k1i1joasrtYmRHCoMiraucCgj1oJrUGGh5+rnT85lDpij6SIxm2LEqLROk16q
- xq4ykhLQ1+siQwbFWEccE0TgHJBNsA2eOQ4I3rnY1pJwr9VgDdWBt+zmF59IM0YdJFy0
- mMd/h2BssZvXB4j0qzj1ta91TQWlP62r381IOrZaklzE94hqW+tIFhHCct1MMK7mv7C9
- NUtw==
-X-Gm-Message-State: AOAM5310ouIpCknd6kO0Z6WQTLGlIg/CvcbQjOb4tXjZoo5wf3qCMEbD
- RKLVrMmDbnn4uQ1atcjw5V0=
-X-Google-Smtp-Source: ABdhPJzlKfOCS2440a7bdtGeWd6CbzmXAn5qFMu5SBimKIwdgAkZEzp+d+61+8X09IoWkNZ7lo47GA==
-X-Received: by 2002:a17:902:d202:b029:da:d86b:78be with SMTP id
- t2-20020a170902d202b02900dad86b78bemr38216753ply.0.1609414262879; 
- Thu, 31 Dec 2020 03:31:02 -0800 (PST)
+ bh=EmlivLosd2IMSstdGdEwY8MJ34lojrakc2lBg6ahP/o=;
+ b=o8HoWOp/uE/2m9+YdDDQqCZv5cG2JBjjflIo6e06csDr2jjlHOfVDo4Tf9Gs15iynp
+ e7T2OIhaABrcQYo3vqYO+2gNFvEkrs6Egccj6lQC+j/Q52hZR+oA8Ml/IKMexkoi+IwD
+ t+5cdvhD73iUCUq+hXVIogpOp5ckIhQIbXPdfgKqBw1wFsA3uK6q5EU53J+fG24FDFsN
+ zqcaH6hJswWslFfVHL36r5JRyvASNehzUnsG5QlcCeeXEtMi71I15FNXV1nrstluS9Z8
+ IQj5gYnngtwOBtMsJ2g6xmsPasWd5lOA6AVtv7YcCLV6riDV2SHFfYTjYLhUVJsEpVZS
+ O+lw==
+X-Gm-Message-State: AOAM530WE22owFphSNPGrVHN38iEU7XWqoYkNPi/eREtbRno6fJT3vGj
+ nPA38GpUa7ank1CWtDZmoWM=
+X-Google-Smtp-Source: ABdhPJyHoLL//vNwiS2Z0vOqWI8Yyp30V7LbvaTavaywmCKlm0iWurqIARlJ4XS94xOrdX12WtSkaA==
+X-Received: by 2002:a62:b415:0:b029:1a6:8b06:68f4 with SMTP id
+ h21-20020a62b4150000b02901a68b0668f4mr52849271pfn.43.1609414271520; 
+ Thu, 31 Dec 2020 03:31:11 -0800 (PST)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id t23sm45957591pfc.0.2020.12.31.03.31.00
+ by smtp.gmail.com with ESMTPSA id t23sm45957591pfc.0.2020.12.31.03.31.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Dec 2020 03:31:02 -0800 (PST)
+ Thu, 31 Dec 2020 03:31:11 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 12/22] hw/sd: sd.h: Cosmetic change of using spaces
-Date: Thu, 31 Dec 2020 19:30:00 +0800
-Message-Id: <20201231113010.27108-13-bmeng.cn@gmail.com>
+Subject: [PATCH 15/22] hw/sd: ssi-sd: Support multiple block write
+Date: Thu, 31 Dec 2020 19:30:03 +0800
+Message-Id: <20201231113010.27108-16-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201231113010.27108-1-bmeng.cn@gmail.com>
 References: <20201231113010.27108-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,71 +77,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Dec 2020 11:31:14 -0000
+X-List-Received-Date: Thu, 31 Dec 2020 11:31:19 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-QEMU conding convention prefers spaces over tabs.
+For a multiple block write operation, each block begins with a multi
+write start token. Unlike the SD mode that the multiple block write
+ends when receiving a STOP_TRAN command (CMD12), a special stop tran
+tocken is used to signal the card.
+
+Emulating this by manually sending a CMD12 to the SD card core, to
+bring it out of the receiving data state.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- include/hw/sd/sd.h | 42 +++++++++++++++++++++---------------------
- 1 file changed, 21 insertions(+), 21 deletions(-)
+ hw/sd/ssi-sd.c | 26 ++++++++++++++++++++++++--
+ 1 file changed, 24 insertions(+), 2 deletions(-)
 
-diff --git a/include/hw/sd/sd.h b/include/hw/sd/sd.h
-index 59d108d453..05ef9b73e5 100644
---- a/include/hw/sd/sd.h
-+++ b/include/hw/sd/sd.h
-@@ -33,27 +33,27 @@
- #include "hw/qdev-core.h"
- #include "qom/object.h"
+diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
+index 21a96e91f0..6cf5d749c7 100644
+--- a/hw/sd/ssi-sd.c
++++ b/hw/sd/ssi-sd.c
+@@ -99,6 +99,8 @@ OBJECT_DECLARE_SIMPLE_TYPE(ssi_sd_state, SSI_SD)
+ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+ {
+     ssi_sd_state *s = SSI_SD(dev);
++    SDRequest request;
++    uint8_t longresp[16];
  
--#define OUT_OF_RANGE		(1 << 31)
--#define ADDRESS_ERROR		(1 << 30)
--#define BLOCK_LEN_ERROR		(1 << 29)
--#define ERASE_SEQ_ERROR		(1 << 28)
--#define ERASE_PARAM		(1 << 27)
--#define WP_VIOLATION		(1 << 26)
--#define CARD_IS_LOCKED		(1 << 25)
--#define LOCK_UNLOCK_FAILED	(1 << 24)
--#define COM_CRC_ERROR		(1 << 23)
--#define ILLEGAL_COMMAND		(1 << 22)
--#define CARD_ECC_FAILED		(1 << 21)
--#define CC_ERROR		(1 << 20)
--#define SD_ERROR		(1 << 19)
--#define CID_CSD_OVERWRITE	(1 << 16)
--#define WP_ERASE_SKIP		(1 << 15)
--#define CARD_ECC_DISABLED	(1 << 14)
--#define ERASE_RESET		(1 << 13)
--#define CURRENT_STATE		(7 << 9)
--#define READY_FOR_DATA		(1 << 8)
--#define APP_CMD			(1 << 5)
--#define AKE_SEQ_ERROR		(1 << 3)
-+#define OUT_OF_RANGE            (1 << 31)
-+#define ADDRESS_ERROR           (1 << 30)
-+#define BLOCK_LEN_ERROR         (1 << 29)
-+#define ERASE_SEQ_ERROR         (1 << 28)
-+#define ERASE_PARAM             (1 << 27)
-+#define WP_VIOLATION            (1 << 26)
-+#define CARD_IS_LOCKED          (1 << 25)
-+#define LOCK_UNLOCK_FAILED      (1 << 24)
-+#define COM_CRC_ERROR           (1 << 23)
-+#define ILLEGAL_COMMAND         (1 << 22)
-+#define CARD_ECC_FAILED         (1 << 21)
-+#define CC_ERROR                (1 << 20)
-+#define SD_ERROR                (1 << 19)
-+#define CID_CSD_OVERWRITE       (1 << 16)
-+#define WP_ERASE_SKIP           (1 << 15)
-+#define CARD_ECC_DISABLED       (1 << 14)
-+#define ERASE_RESET             (1 << 13)
-+#define CURRENT_STATE           (7 << 9)
-+#define READY_FOR_DATA          (1 << 8)
-+#define APP_CMD                 (1 << 5)
-+#define AKE_SEQ_ERROR           (1 << 3)
+     /* Special case: allow CMD12 (STOP TRANSMISSION) while reading data.  */
+     if (s->mode == SSI_SD_DATA_READ && val == 0x4c) {
+@@ -115,9 +117,31 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+             return SSI_DUMMY;
+             break;
+         case SSI_TOKEN_SINGLE:
++        case SSI_TOKEN_MULTI_WRITE:
+             DPRINTF("Start write block\n");
+             s->mode = SSI_SD_DATA_WRITE;
+             return SSI_DUMMY;
++        case SSI_TOKEN_STOP_TRAN:
++            DPRINTF("Stop multiple write\n");
++
++            /* manually issue cmd12 to stop the transfer */
++            request.cmd = 12;
++            request.arg = 0;
++            s->arglen = sdbus_do_command(&s->sdbus, &request, longresp);
++            if (s->arglen <= 0) {
++                s->arglen = 1;
++                /* a zero value indicates the card is busy */
++                s->response[0] = 0;
++                DPRINTF("SD card busy\n");
++            } else {
++                s->arglen = 1;
++                /* a non-zero value indicates the card is ready */
++                s->response[0] = SSI_DUMMY;
++            }
++
++            s->mode = SSI_SD_RESPONSE;
++            s->response_pos = 0;
++            return SSI_DUMMY;
+         }
  
- enum SDPhySpecificationVersion {
-     SD_PHY_SPECv1_10_VERS     = 1,
+         s->cmd = val & 0x3f;
+@@ -126,8 +150,6 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+         return SSI_DUMMY;
+     case SSI_SD_CMDARG:
+         if (s->arglen == 4) {
+-            SDRequest request;
+-            uint8_t longresp[16];
+             /* FIXME: Check CRC.  */
+             request.cmd = s->cmd;
+             request.arg = ldl_be_p(s->cmdarg);
 -- 
 2.25.1
 
