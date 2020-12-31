@@ -1,65 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kuwBQ-0000G6-69
+	id 1kuwBQ-0000Gn-DY
 	for mharc-qemu-riscv@gnu.org; Thu, 31 Dec 2020 06:31:56 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58546)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58542)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuwBC-00008V-9p; Thu, 31 Dec 2020 06:31:47 -0500
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:53506)
+ id 1kuwBA-00008P-PC; Thu, 31 Dec 2020 06:31:45 -0500
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a]:46593)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuwB7-0007Ux-VF; Thu, 31 Dec 2020 06:31:42 -0500
-Received: by mail-pj1-x102a.google.com with SMTP id iq13so4802426pjb.3;
- Thu, 31 Dec 2020 03:31:34 -0800 (PST)
+ id 1kuwB2-0007Tn-LT; Thu, 31 Dec 2020 06:31:40 -0500
+Received: by mail-pf1-x42a.google.com with SMTP id s21so11119670pfu.13;
+ Thu, 31 Dec 2020 03:31:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=s9f+W+SDGOPpxs8zo1iLE+1ancEg1S+4Or92WaYKIFw=;
- b=h3jPL/mx0Wr3OsIoUnUATsEUX7Mm9LY4spow+dnTGJV9j7h1hnlr0PCw7OvZQMd4Mz
- FWFlUBWzsQfoSP1j9+wlY87emkxhc0X528U2ZV4Ol783dSYP/yhjquuD9idkxA8cWR+B
- wF5j/bUi+mXG3Btx9u0j6AkxiFUgxfF6K+BckTlA+Ujt68WQH5Y90I0BsBHazLUl2nbn
- L6yzi22YzBrWvAp/7jY5TN6yOw4PY/n2FNldxqLiNJgWML48wXh59KsN+WVYWPubh2ho
- dkBreOZ7twrW7KDunRNNHpFNoSxan57hxV0hBqZUu7iiwHyba5nASBCUBVTA2kYYIkzE
- CBwQ==
+ bh=6e0utY0KIjhH+IijiV7uoV3Zeo2ifURrN+swQx7H6ME=;
+ b=Ff0c4UV+ZsGhWEPZCAFiEheX480enP310Ao2KraLlC9krRV0RKsgKuiIAt0+fYRevF
+ Hp93eH+uA/QJvU1aDmWNUtKJSHuSf63TumBFny1Wdz1RzOmfjLsWKZRBrW0OfLMAiMmQ
+ UwAOOeixUzukWKqmGFoUBwJf3mTBSC+EI86WnkFtMLBAmHQMNtL/hBfuT66QQvJJzIL+
+ sR6OxdmvcVFm/B3sb0WS0A7YMqg3ARlPcJ/fSybRG0PH+Irx6nTvy1n06t9Tvp1MqVBH
+ WMOyB8UkYQ9hHiuBNlSML5gboRWOQAWCUcZomdqP2rbQrB/VvBma3F5YATOAVwqqWA9A
+ EdOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=s9f+W+SDGOPpxs8zo1iLE+1ancEg1S+4Or92WaYKIFw=;
- b=YQgjzsHXJhgUpPAHxZNkdH8n8Dz+vajqAGkdPtBgMCuBNxDSkYrnCIoUYwjWYCtANo
- AHOA6eg048uLuJ+PGE7bMyy9TekfpY2u9oIgicgidhKWD/2Rwuff2ID8IbQ2XE/YS2NL
- VMVtLMnhwC+d+ZSwaG29W00Dxkmphgkn0cU5a72JbGd9kBZ5nOVbH9blbwRJoH06pRMu
- uo6k0hobUJULWKbGPxbXf1e6gNPmmhHJ7y9aHu+dMub/qr59juqqscaNC+tTha5YOnBu
- 2MVXMjfNr+GNLfRAZ/k5h0pfVS5KSk053tQZ48Zxn2ex8uNbk0TdktVPj2L0qDt2Zj/p
- cUew==
-X-Gm-Message-State: AOAM532pR/t5qhh65DS0v3qkWzn8I7d/BmmplUgFiVl++Ong2kmMwwN5
- eGL7Bam7jQwYlHAfhpnvUd0=
-X-Google-Smtp-Source: ABdhPJz0gaOmEXUitOdkAHaO591dv8rp2PW1ODSs4/2lENKiaRxa7v/zntjvHdMnPxdZcBDd2+Fw4Q==
-X-Received: by 2002:a17:902:c104:b029:da:5206:8b9b with SMTP id
- 4-20020a170902c104b02900da52068b9bmr56570099pli.46.1609414293554; 
- Thu, 31 Dec 2020 03:31:33 -0800 (PST)
+ bh=6e0utY0KIjhH+IijiV7uoV3Zeo2ifURrN+swQx7H6ME=;
+ b=kDPgQ0out2PzZwrttNOwxW8YsCLsxz4XhuHTKrnmT+8z2N/Z2Vfp4nm8ymttlmAGAU
+ Mc4hR8JNRDY1XRjKWmCHDPke/UK7qr3+vc+i457lFj5RMZSO7cdQRhtG9HxDhqVqOCKc
+ T19Scw/9mp2m5jYnspdVOS/0ihjot7PPn76yrWKTBLXWUpEPqRjrzJqMrp0MC8YNxxa9
+ z3LKl3ko22VY7BwaAIPNVg12rWes7oXHSmcaC7+HcSnjd/DWPvlK0jIPppzgwvanLwYi
+ NxxErgTXwgk3ryhIj0UFuJ0p1vOIPJxX/52tg9z8P4mSN+T9aQGPH9tMZDfL0c253yAC
+ +Wxw==
+X-Gm-Message-State: AOAM532ggencdpEnkrGzwqV94lbvhT/f73byrjs69jdmrGG3iudlh7k1
+ eytMHqecEGrsyjHizVBt+Ek=
+X-Google-Smtp-Source: ABdhPJyixb7KtaCBInmhRAWdMJg9DftKiOyF3Dv4y0AJTC3IoK7FM3YaH5vyovRL9nZze1NbMDNUIA==
+X-Received: by 2002:a63:520e:: with SMTP id g14mr8459534pgb.378.1609414290529; 
+ Thu, 31 Dec 2020 03:31:30 -0800 (PST)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id t23sm45957591pfc.0.2020.12.31.03.31.30
+ by smtp.gmail.com with ESMTPSA id t23sm45957591pfc.0.2020.12.31.03.31.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Dec 2020 03:31:33 -0800 (PST)
+ Thu, 31 Dec 2020 03:31:30 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 22/22] docs/system: riscv: Add documentation for sifive_u
- machine
-Date: Thu, 31 Dec 2020 19:30:10 +0800
-Message-Id: <20201231113010.27108-23-bmeng.cn@gmail.com>
+Subject: [PATCH 21/22] docs/system: Add RISC-V documentation
+Date: Thu, 31 Dec 2020 19:30:09 +0800
+Message-Id: <20201231113010.27108-22-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201231113010.27108-1-bmeng.cn@gmail.com>
 References: <20201231113010.27108-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,388 +80,98 @@ X-List-Received-Date: Thu, 31 Dec 2020 11:31:51 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-This adds detailed documentation for RISC-V `sifive_u` machine,
-including the following information:
-
-- Supported devices
-- Hardware configuration information
-- Boot options
-- Machine-specific options
-- Running Linux kernel
-- Running VxWorks kernel
-- Running U-Boot, and with an alternate configuration
+Add RISC-V system emulator documentation for generic information.
+`Board-specific documentation` and `RISC-V CPU features` are only
+a placeholder and will be added in the future.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
-
 ---
 
- docs/system/riscv/sifive_u.rst | 336 +++++++++++++++++++++++++++++++++
- docs/system/target-riscv.rst   |  10 +
- 2 files changed, 346 insertions(+)
- create mode 100644 docs/system/riscv/sifive_u.rst
+ docs/system/target-riscv.rst | 62 ++++++++++++++++++++++++++++++++++++
+ docs/system/targets.rst      |  1 +
+ 2 files changed, 63 insertions(+)
+ create mode 100644 docs/system/target-riscv.rst
 
-diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
+diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
 new file mode 100644
-index 0000000000..7e133d8ff3
+index 0000000000..978b96cbdb
 --- /dev/null
-+++ b/docs/system/riscv/sifive_u.rst
-@@ -0,0 +1,336 @@
-+SiFive HiFive Unleashed (``sifive_u``)
-+======================================
++++ b/docs/system/target-riscv.rst
+@@ -0,0 +1,62 @@
++.. _RISC-V-System-emulator:
 +
-+SiFive HiFive Unleashed Development Board is the ultimate RISC‑V development
-+board featuring the Freedom U540 multi-core RISC‑V processor.
++RISC-V System emulator
++======================
 +
-+Supported devices
-+-----------------
++QEMU can emulate both 32-bit and 64-bit RISC-V CPUs. Use the
++``qemu-system-riscv64`` executable to simulate a 64-bit RISC-V machine,
++``qemu-system-riscv32`` executable to simulate a 32-bit RISC-V machine.
 +
-+The ``sifive_u`` machine supports the following devices:
++QEMU has generally good support for RISC-V guests. It has support for
++several different machines. The reason we support so many is that
++RISC-V hardware is much more widely varying than x86 hardware. RISC-V
++CPUs are generally built into "system-on-chip" (SoC) designs created by
++many different companies with different devices, and these SoCs are
++then built into machines which can vary still further even if they use
++the same SoC.
 +
-+ * 1 E51 / E31 core
-+ * Up to 4 U54 / U34 cores
-+ * Core Level Interruptor (CLINT)
-+ * Platform-Level Interrupt Controller (PLIC)
-+ * Power, Reset, Clock, Interrupt (PRCI)
-+ * L2 Loosely Integrated Memory (L2-LIM)
-+ * DDR memory controller
-+ * 2 UARTs
-+ * 1 GEM ethernet controller
-+ * 1 GPIO controller
-+ * 1 One-Time Programmable (OTP) memory with stored serial number
-+ * 1 DMA controller
-+ * 2 QSPI controllers
-+ * 1 ISSI 25WP256 flash
-+ * 1 SD card in SPI mode
++For most boards the CPU type is fixed (matching what the hardware has),
++so typically you don't need to specify the CPU type by hand, except for
++special cases like the ``virt`` board.
 +
-+Please note the real world HiFive Unleashed board has a fixed configuration of
-+1 E51 core and 4 U54 core combination and the RISC-V core boots in 64-bit mode.
-+With QEMU, one can create a machine with 1 E51 core and up to 4 U54 cores. It
-+is also possible to create a 32-bit variant with the same peripherals execpt
-+that the RISC-V cores are replaced by the 32-bit ones (E31 and U34), to help
-+testing of 32-bit guest software.
-+
-+Hardware configuration information
-+----------------------------------
-+
-+The ``sifive_u`` machine automatically generates a device tree blob ("dtb")
-+which it passes to the guest. This provides information about the addresses,
-+interrupt lines and other configuration of the various devices in the system.
-+Guest software should discover the devices that are present in the generated
-+DTB instead of using a DTB for the real hardware, as some of the devices are
-+not modeled by QEMU and trying to access these devices may cause unexpected
-+behavior.
-+
-+Boot options
-+------------
-+
-+The ``sifive_u`` machine can start using the standard -kernel functionality
-+for loading a Linux kernel, a VxWorks kernel, a modified U-Boot bootloader
-+(S-mode) or ELF executable with the default OpenSBI firmware image as the
-+-bios. It also supports booting the unmodified U-Boot bootloader using the
-+standard -bios functionality.
-+
-+Machine-specific options
-+------------------------
-+
-+The following machine-specific options are supported:
-+
-+- serial=nnn
-+
-+  The board serial number. When not given, the default serial number 1 is used.
-+
-+  SiFive reserves the first 1 KiB of the 16 KiB OTP memory for internal use.
-+  The current usage is only used to store the serial number of the board at
-+  offset 0xfc. U-Boot reads the serial number from the OTP memory, and uses
-+  it to generate a unique MAC address to be programmed to the on-chip GEM
-+  ethernet controller. When multiple QEMU ``sifive_u`` machines are created
-+  and connected to the same subnet, they all have the same MAC address hence
-+  it creates a unusable network. In such scenario, user should give different
-+  values to serial= when creating different ``sifive_u`` machines.
-+
-+- start-in-flash
-+
-+  When given, QEMU's ROM codes jump to QSPI memory-mapped flash directly.
-+  Otherwise QEMU will jump to DRAM or L2LIM depending on the msel= value.
-+  When not given, it defaults to direct DRAM booting.
-+
-+- msel=[6|11]
-+
-+  Mode Select (MSEL[3:0]) pins value, used to control where to boot from.
-+
-+  The FU540 SoC supports booting from several sources, which are controlled
-+  using the Mode Select pins on the chip. Typically, the boot process runs
-+  through several stages before it begins execution of user-provided programs.
-+  These stages typically include the following:
-+
-+  1. Zeroth Stage Boot Loader (ZSBL), which is contained in an on-chip mask
-+     ROM and provided by QEMU. Note QEMU implemented ROM codes are not the
-+     same as what is programmed in the hardware. The QEMU one is a simplified
-+     version, but it provides the same functionality as the hardware.
-+  2. First Stage Boot Loader (FSBL), which brings up PLLs and DDR memory.
-+     This is U-Boot SPL.
-+  3. Second Stage Boot Loader (SSBL), which further initializes additional
-+     peripherals as needed. This is U-Boot proper combined with an OpenSBI
-+     fw_dynamic firmware image.
-+
-+  msel=6 means FSBL and SSBL are both on the QSPI flash. msel=11 means FSBL
-+  and SSBL are both on the SD card.
-+
-+Running Linux kernel
-+--------------------
-+
-+Linux mainline v5.10 release is tested at the time of writing. To build a
-+Linux mainline kernel that can be booted by the ``sifive_u`` machine in
-+64-bit mode, simply configure the kernel using the defconfig configuration:
-+
-+.. code-block:: bash
-+
-+  $ export ARCH=riscv
-+  $ export CROSS_COMPILE=riscv64-linux-
-+  $ make defconfig
-+  $ make
-+
-+To boot the newly built Linux kernel in QEMU with the ``sifive_u`` machine:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
-+      -display none -serial stdio \
-+      -kernel arch/riscv/boot/Image \
-+      -initrd /path/to/rootfs.ext4 \
-+      -append "root=/dev/ram"
-+
-+To build a Linux mainline kernel that can be booted by the ``sifive_u`` machine
-+in 32-bit mode, use the rv32_defconfig configuration. A patch is required to
-+fix the 32-bit boot issue for Linux kernel v5.10.
-+
-+.. code-block:: bash
-+
-+  $ export ARCH=riscv
-+  $ export CROSS_COMPILE=riscv64-linux-
-+  $ curl https://patchwork.kernel.org/project/linux-riscv/patch/20201219001356.2887782-1-atish.patra@wdc.com/mbox/ > riscv.patch
-+  $ git am riscv.patch
-+  $ make rv32_defconfig
-+  $ make
-+
-+Replace ``qemu-system-riscv64`` with ``qemu-system-riscv32`` in the command
-+line above to boot the 32-bit Linux kernel. A rootfs image containing 32-bit
-+applications shall be used in order for kernel to boot to user space.
-+
-+Running VxWorks kernel
++Choosing a board model
 +----------------------
 +
-+VxWorks 7 SR0650 release is tested at the time of writing. To build a 64-bit
-+VxWorks mainline kernel that can be booted by the ``sifive_u`` machine, simply
-+create a VxWorks source build project based on the sifive_generic BSP, and a
-+VxWorks image project to generate the bootable VxWorks image, by following the
-+BSP documentation instructions.
++For QEMU's RISC-V system emulation, you must specify which board
++model you want to use with the ``-M`` or ``--machine`` option;
++there is no default.
 +
-+A pre-built 64-bit VxWorks 7 image for HiFive Unleashed board is available as
-+part of the VxWorks SDK for testing as well. Instructions to download the SDK:
++Because RISC-V systems differ so much and in fundamental ways, typically
++operating system or firmware images intended to run on one machine
++will not run at all on any other. This is often surprising for new
++users who are used to the x86 world where every system looks like a
++standard PC. (Once the kernel has booted, most userspace software
++cares much less about the detail of the hardware.)
 +
-+.. code-block:: bash
++If you already have a system image or a kernel that works on hardware
++and you want to boot with QEMU, check whether QEMU lists that machine
++in its ``-machine help`` output. If it is listed, then you can probably
++use that board model. If it is not listed, then unfortunately your image
++will almost certainly not boot on QEMU. (You might be able to
++extract the filesystem and use that with a different kernel which
++boots on a system that QEMU does emulate.)
 +
-+  $ wget https://labs.windriver.com/downloads/wrsdk-vxworks7-sifive-hifive-1.01.tar.bz2
-+  $ tar xvf wrsdk-vxworks7-sifive-hifive-1.01.tar.bz2
-+  $ ls bsps/sifive_generic_1_0_0_0/uboot/uVxWorks
++If you don't care about reproducing the idiosyncrasies of a particular
++bit of hardware, such as small amount of RAM, no PCI or other hard
++disk, etc., and just want to run Linux, the best option is to use the
++``virt`` board. This is a platform which doesn't correspond to any
++real hardware and is designed for use in virtual machines. You'll
++need to compile Linux with a suitable configuration for running on
++the ``virt`` board. ``virt`` supports PCI, virtio, recent CPUs and
++large amounts of RAM. It also supports 64-bit CPUs.
 +
-+To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
++Board-specific documentation
++----------------------------
 +
-+.. code-block:: bash
++Unfortunately many of the RISC-V boards QEMU supports are currently
++undocumented; you can get a complete list by running
++``qemu-system-riscv64 --machine help``, or
++``qemu-system-riscv32 --machine help``.
 +
-+  $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
-+      -display none -serial stdio \
-+      -nic tap,ifname=tap0,script=no,downscript=no \
-+      -kernel /path/to/vxWorks \
-+      -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
-+
-+It is also possible to test 32-bit VxWorks on the ``sifive_u`` machine. Create
-+a 32-bit project to build the 32-bit VxWorks image, and use exact the same
-+command line options with ``qemu-system-riscv32``.
-+
-+Running U-Boot
-+--------------
-+
-+U-Boot mainline v2020.10 release is tested at the time of writing. To build a
-+U-Boot mainline bootloader that can be booted by the ``sifive_u`` machine, use
-+the sifive_fu540_defconfig with similar commands as described above for Linux:
-+
-+.. code-block:: bash
-+
-+  $ export CROSS_COMPILE=riscv64-linux-
-+  $ export OPENSBI=/path/to/opensbi-riscv64-generic-fw_dynamic.bin
-+  $ make sifive_fu540_defconfig
-+
-+You will get spl/u-boot-spl.bin and u-boot.itb file in the build tree.
-+
-+To start U-Boot using the ``sifive_u`` machine, prepare an SPI flash image, or
-+SD card image that is properly partitioned and populated with correct contents.
-+genimage_ can be used to generate these images.
-+
-+A sample configuration file for a 128 MiB SD card image is:
-+
-+.. code-block:: bash
-+
-+  $ cat genimage_sdcard.cfg
-+  image sdcard.img {
-+          size = 128M
-+
-+          hdimage {
-+                  gpt = true
-+          }
-+
-+          partition u-boot-spl {
-+                  image = "u-boot-spl.bin"
-+                  offset = 17K
-+                  partition-type-uuid = 5B193300-FC78-40CD-8002-E86C45580B47
-+          }
-+
-+          partition u-boot {
-+                  image = "u-boot.itb"
-+                  offset = 1041K
-+                  partition-type-uuid = 2E54B353-1271-4842-806F-E436D6AF6985
-+          }
-+  }
-+
-+SPI flash image has slightly different partition offsets, and the size has to
-+be 32 MiB to match the ISSI 25WP256 flash on the real board:
-+
-+.. code-block:: bash
-+
-+  $ cat genimage_spi-nor.cfg
-+  image spi-nor.img {
-+          size = 32M
-+
-+          hdimage {
-+                  gpt = true
-+          }
-+
-+          partition u-boot-spl {
-+                  image = "u-boot-spl.bin"
-+                  offset = 20K
-+                  partition-type-uuid = 5B193300-FC78-40CD-8002-E86C45580B47
-+          }
-+
-+          partition u-boot {
-+                  image = "u-boot.itb"
-+                  offset = 1044K
-+                  partition-type-uuid = 2E54B353-1271-4842-806F-E436D6AF6985
-+          }
-+  }
-+
-+Assume U-Boot binaries are put in the same directory as the config file,
-+we can generate the image by:
-+
-+.. code-block:: bash
-+
-+  $ genimage --config genimage_<boot_src>.cfg --inputpath .
-+
-+Boot U-Boot from SD card, by specifying msel=11 and pass the SD card image
-+to QEMU ``sifive_u`` machine:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M sifive_u,msel=11 -smp 5 -m 8G \
-+      -display none -serial stdio \
-+      -bios /path/to/u-boot-spl.bin \
-+      -drive file=/path/to/sdcard.img,if=sd
-+
-+Changing msel= value to 6, allows booting U-Boot from the SPI flash:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M sifive_u,msel=6 -smp 5 -m 8G \
-+      -display none -serial stdio \
-+      -bios /path/to/u-boot-spl.bin \
-+      -drive file=/path/to/spi-nor.img,if=mtd
-+
-+Note when testing U-Boot, QEMU automatically generated device tree blob is
-+not used because U-Boot itself embeds device tree blobs for U-Boot SPL and
-+U-Boot proper. Hence the number of cores and size of memory have to match
-+the real hardware, ie: 5 cores (-smp 5) and 8 GiB memory (-m 8G).
-+
-+Above use case is to run upstream U-Boot for the SiFive HiFive Unleashed
-+board on QEMU ``sifive_u`` machine out of the box. This allows users to
-+develop and test the recommended RISC-V boot flow with a real world use
-+case: ZSBL (in QEMU) loads U-Boot SPL from SD card or SPI flash to L2LIM,
-+then U-Boot SPL loads the combined payload image of OpenSBI fw_dynamic
-+firmware and U-Boot proper. However sometimes we want to have a quick test
-+of booting U-Boot on QEMU without the needs of preparing the SPI flash or
-+SD card images, an alternate way can be used, which is to create a U-Boot
-+S-mode image by modifying the configuration of U-Boot:
-+
-+.. code-block:: bash
-+
-+  $ make menuconfig
-+
-+then manually select the following configuration in U-Boot:
-+
-+  Device Tree Control > Provider of DTB for DT Control > Prior Stage bootloader DTB
-+
-+This lets U-Boot to use the QEMU generated device tree blob. During the build,
-+a build error will be seen below:
-+
-+.. code-block:: none
-+
-+  MKIMAGE u-boot.img
-+  ./tools/mkimage: Can't open arch/riscv/dts/hifive-unleashed-a00.dtb: No such file or directory
-+  ./tools/mkimage: failed to build FIT
-+  make: *** [Makefile:1440: u-boot.img] Error 1
-+
-+The above errors can be safely ignored as we don't run U-Boot SPL under QEMU
-+in this alternate configuration.
-+
-+Boot the 64-bit U-Boot S-mode image directly:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
-+      -display none -serial stdio \
-+      -kernel /path/to/u-boot.bin
-+
-+It's possible to create a 32-bit U-Boot S-mode image as well.
-+
-+.. code-block:: bash
-+
-+  $ export CROSS_COMPILE=riscv64-linux-
-+  $ make sifive_fu540_defconfig
-+  $ make menuconfig
-+
-+then manually update the following configuration in U-Boot:
-+
-+  Device Tree Control > Provider of DTB for DT Control > Prior Stage bootloader DTB
-+  RISC-V architecure > Base ISA > RV32I
-+  Boot images > Text Base > 0x80400000
-+
-+Use the same command line options to boot the 32-bit U-Boot S-mode image:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv32 -M sifive_u -smp 5 -m 2G \
-+      -display none -serial stdio \
-+      -kernel /path/to/u-boot.bin
-+
-+.. _genimage: https://github.com/pengutronix/genimage
-diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-index 978b96cbdb..c1819580bb 100644
---- a/docs/system/target-riscv.rst
-+++ b/docs/system/target-riscv.rst
-@@ -58,5 +58,15 @@ undocumented; you can get a complete list by running
- ``qemu-system-riscv64 --machine help``, or
- ``qemu-system-riscv32 --machine help``.
- 
-+..
-+   This table of contents should be kept sorted alphabetically
-+   by the title text of each file, which isn't the same ordering
-+   as an alphabetical sort by filename.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   riscv/sifive_u
-+
- RISC-V CPU features
- -------------------
++RISC-V CPU features
++-------------------
+diff --git a/docs/system/targets.rst b/docs/system/targets.rst
+index 564cea9a9b..75ed1087fd 100644
+--- a/docs/system/targets.rst
++++ b/docs/system/targets.rst
+@@ -19,6 +19,7 @@ Contents:
+    target-m68k
+    target-mips
+    target-ppc
++   target-riscv
+    target-rx
+    target-s390x
+    target-sparc
 -- 
 2.25.1
 
