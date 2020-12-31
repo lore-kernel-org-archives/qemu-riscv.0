@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kuwAC-0007P9-SP
-	for mharc-qemu-riscv@gnu.org; Thu, 31 Dec 2020 06:30:40 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58190)
+	id 1kuwAE-0007SJ-8k
+	for mharc-qemu-riscv@gnu.org; Thu, 31 Dec 2020 06:30:42 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58206)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuwAA-0007Km-Qa; Thu, 31 Dec 2020 06:30:38 -0500
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e]:37760)
+ id 1kuwAC-0007OG-EK; Thu, 31 Dec 2020 06:30:40 -0500
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635]:42372)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuwA9-000783-6Z; Thu, 31 Dec 2020 06:30:38 -0500
-Received: by mail-pg1-x52e.google.com with SMTP id z21so12961129pgj.4;
- Thu, 31 Dec 2020 03:30:34 -0800 (PST)
+ id 1kuwAA-0007B2-Nz; Thu, 31 Dec 2020 06:30:40 -0500
+Received: by mail-pl1-x635.google.com with SMTP id s15so9920081plr.9;
+ Thu, 31 Dec 2020 03:30:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=P44WnRT0nGrTO8i23ZSMW5edo7dZWmNn0lvhX81hIgs=;
- b=pIo7vJtBqjHYoVEA6s7u9iSgQMqKP6MLD2lQNSvbAQ+uzGAGaazzyTeRBI5S51PwJv
- RCx8QmY0gVSAg56DeTVHd1srtZXN+XL0p1aJMyC6XILRJeB5kZ7NV7VmObM76ZyPkZ7+
- A7hGqfwlzSbkjwPFgtnhleoRRuPB3r4H2UAaplUJPvKsj8IGZw7DM3z4xR1DtQ7PAFyl
- jUzDl0C37/hD/17PVTLUWE1laszUSe6eqtJ8mvr2iloH1logoP5l6PVc1dh6LSi/lhqj
- X5aPYJ9kvN0PixKdQfDsZvFU1xfyyQXJbiOUsldjRSYWxFPK3IJZgy2TwDwrODzV0Weg
- Njwg==
+ bh=gjJeo+8Q1zYLunlgKoXBxtlmhbiH3R9yfD0wF408HsU=;
+ b=amhdEoGibiP+f7hwdzks57gt1vrNt60w8qr666yBMCRx8SRExewhQSU5l917ytSY6h
+ lPgzc0Ao9uz9HSo5m3KSlNroQ44cCs6zZGbZc9IksiMXSiSW9kYv0hsU98392DEplD2J
+ gslldYQyhvhQdMgIDsqIyO4sTaCiliJf1ijIgLP+JXk2tCdsXjASjrB+3HiUb9YC42yf
+ 9RwcNufKPreZlDQwtTfiD2H30CtqHP+rIR2djwbPmX7AE+di45mVIAda/9Os22lwyl9y
+ i6dqciPS5fmUUW5HspPIx4R+vdwGri2YEi1wtUugWWpXKXp1AzAbrFpYouS2Z/BoOnYO
+ l6SA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=P44WnRT0nGrTO8i23ZSMW5edo7dZWmNn0lvhX81hIgs=;
- b=FN5DfiAbrEettd9RYQJ5GE6nCEccwCjDm21FPqGOCHCSrkzPiBGkKNDPvg0TiLNepz
- daLWsMqrYvluJBNJsscvMzeFvm8LAk0aal9Q1wHmiYyVIlmkNODa2+OrNTNcupJPyCVk
- DmduJEugvqGQnRjkAt9MUQSANmM+P7c+41+JAkvLRTJeqvvdBA1p3DBNY6A4f8pfcUiq
- 15NtCisUgdDzisW6ZBy3raQshIf6K2sS9cXdxC+rX8eC4ZXlzyNyEGtS3jmdBCabJ9pw
- ate8ZX7rbsghEH6i2YlRQb5GUM7H/QkaY+Ql6/jgHi0i9J5VjcwP4FqcSfy26XHSiPhI
- 98wA==
-X-Gm-Message-State: AOAM531ogVOXkhHnSkiPDAwqZhurZuUqs2wf5p7NQXrBbSD42vfHH1Th
- jVZhVfqQrdH/5GcOf1qO25M=
-X-Google-Smtp-Source: ABdhPJxAvgJwz0WcTwrc67ce2WujfzfFKMPTWqOp2h6nLeXcmKp8+/nFU2+GP72iyMdD/zaguv/zCg==
-X-Received: by 2002:a63:fa42:: with SMTP id g2mr32480337pgk.405.1609414233359; 
- Thu, 31 Dec 2020 03:30:33 -0800 (PST)
+ bh=gjJeo+8Q1zYLunlgKoXBxtlmhbiH3R9yfD0wF408HsU=;
+ b=m6ZIjjTn6h2VzZlfWNxGxZq8nX3M7RDI9bPsnlrNsBHw2pCvmnLzaByTDfRi1BheQt
+ oq0YlxAQTDL0koip11cgLQvHCxQ/67NPCBix99QpTd8LMOplAa+3nXtH7G1lUuK0e7pm
+ gMwCqsf1OpNhIt8R55/TxgK+1jbcW7AM7I8AVCSj5RQcvPZzD0sMGRU+jg8oclEPMaIC
+ gl6pJJu2fMHFywjS6koTm3oaKM5FpwXbC4KHbaibuF7qLdF3On0sfEj7JbK0GOjzrS3o
+ T21NMR/XHKyrNXShQdWorttMflI7P0xtQX/+g/At6xBm7+TinIeS5lhgeM4Y681FhNmK
+ 6UTQ==
+X-Gm-Message-State: AOAM533qj0w/HvYrW7IsOSP+K3jobbC0hXMBayLTsp307I8fbCYVIZPK
+ 9pw/uaAdV1jCxr2YXWchcJg=
+X-Google-Smtp-Source: ABdhPJyRNUKyX0IW9ruxB8FwO6rlBvX/B9D3tTFY2oeHe3xDTnrEinQxZS3T9uSDfyafD73MEZ3Bdw==
+X-Received: by 2002:a17:902:ee82:b029:dc:78e:6905 with SMTP id
+ a2-20020a170902ee82b02900dc078e6905mr56639801pld.48.1609414236821; 
+ Thu, 31 Dec 2020 03:30:36 -0800 (PST)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id t23sm45957591pfc.0.2020.12.31.03.30.30
+ by smtp.gmail.com with ESMTPSA id t23sm45957591pfc.0.2020.12.31.03.30.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Dec 2020 03:30:32 -0800 (PST)
+ Thu, 31 Dec 2020 03:30:36 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 02/22] hw/block: m25p80: Add various ISSI flash information
-Date: Thu, 31 Dec 2020 19:29:50 +0800
-Message-Id: <20201231113010.27108-3-bmeng.cn@gmail.com>
+Subject: [PATCH 03/22] hw/sd: ssi-sd: Fix incorrect card response sequence
+Date: Thu, 31 Dec 2020 19:29:51 +0800
+Message-Id: <20201231113010.27108-4-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201231113010.27108-1-bmeng.cn@gmail.com>
 References: <20201231113010.27108-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x52e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -76,43 +77,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Dec 2020 11:30:39 -0000
+X-List-Received-Date: Thu, 31 Dec 2020 11:30:41 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-This updates the flash information table to include various ISSI
-flashes that are supported by upstream U-Boot and Linux kernel.
+Per the "Physical Layer Specification Version 8.00" chapter 7.5.1,
+"Command/Response", there is a minimum 8 clock cycles (Ncr) before
+the card response shows up on the data out line. However current
+implementation jumps directly to the sending response state after
+all 6 bytes command is received, which is a spec violation.
 
+Add a new state PREP_RESP in the ssi-sd state machine to handle it.
+
+Fixes: 775616c3ae8c ("Partial SD card SPI mode support")
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- hw/block/m25p80.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ hw/sd/ssi-sd.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/hw/block/m25p80.c b/hw/block/m25p80.c
-index 8a62bc4bc4..e82deb41c6 100644
---- a/hw/block/m25p80.c
-+++ b/hw/block/m25p80.c
-@@ -209,6 +209,19 @@ static const FlashPartInfo known_devices[] = {
-     { INFO("640s33b",     0x898913,      0,  64 << 10, 128, 0) },
-     { INFO("n25q064",     0x20ba17,      0,  64 << 10, 128, 0) },
- 
-+    /* ISSI */
-+    { INFO("is25lq040b",  0x9d4013,      0,  64 << 10,   8, ER_4K) },
-+    { INFO("is25lp080d",  0x9d6014,      0,  64 << 10,  16, ER_4K) },
-+    { INFO("is25lp016d",  0x9d6015,      0,  64 << 10,  32, ER_4K) },
-+    { INFO("is25lp032",   0x9d6016,      0,  64 << 10,  64, ER_4K) },
-+    { INFO("is25lp064",   0x9d6017,      0,  64 << 10, 128, ER_4K) },
-+    { INFO("is25lp128",   0x9d6018,      0,  64 << 10, 256, ER_4K) },
-+    { INFO("is25lp256",   0x9d6019,      0,  64 << 10, 512, ER_4K) },
-+    { INFO("is25wp032",   0x9d7016,      0,  64 << 10,  64, ER_4K) },
-+    { INFO("is25wp064",   0x9d7017,      0,  64 << 10, 128, ER_4K) },
-+    { INFO("is25wp128",   0x9d7018,      0,  64 << 10, 256, ER_4K) },
-+    { INFO("is25wp256",   0x9d7019,      0,  64 << 10, 512, ER_4K) },
-+
-     /* Macronix */
-     { INFO("mx25l2005a",  0xc22012,      0,  64 << 10,   4, ER_4K) },
-     { INFO("mx25l4005a",  0xc22013,      0,  64 << 10,   8, ER_4K) },
+diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
+index 9a75e0095c..228ce4ddc7 100644
+--- a/hw/sd/ssi-sd.c
++++ b/hw/sd/ssi-sd.c
+@@ -36,6 +36,7 @@ do { fprintf(stderr, "ssi_sd: error: " fmt , ## __VA_ARGS__);} while (0)
+ typedef enum {
+     SSI_SD_CMD = 0,
+     SSI_SD_CMDARG,
++    SSI_SD_PREP_RESP,
+     SSI_SD_RESPONSE,
+     SSI_SD_DATA_START,
+     SSI_SD_DATA_READ,
+@@ -163,12 +164,15 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+                 s->response[1] = status;
+                 DPRINTF("Card status 0x%02x\n", status);
+             }
+-            s->mode = SSI_SD_RESPONSE;
++            s->mode = SSI_SD_PREP_RESP;
+             s->response_pos = 0;
+         } else {
+             s->cmdarg[s->arglen++] = val;
+         }
+         return 0xff;
++    case SSI_SD_PREP_RESP:
++        s->mode = SSI_SD_RESPONSE;
++        return 0xff;
+     case SSI_SD_RESPONSE:
+         if (s->stopping) {
+             s->stopping = 0;
 -- 
 2.25.1
 
