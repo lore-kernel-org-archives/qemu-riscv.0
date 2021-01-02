@@ -1,69 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kuwBQ-0000Gn-DY
-	for mharc-qemu-riscv@gnu.org; Thu, 31 Dec 2020 06:31:56 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58542)
+	id 1kvg03-0007i4-CG
+	for mharc-qemu-riscv@gnu.org; Sat, 02 Jan 2021 07:27:15 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44892)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuwBA-00008P-PC; Thu, 31 Dec 2020 06:31:45 -0500
-Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a]:46593)
+ (Exim 4.90_1) (envelope-from <pragnesh.patel@sifive.com>)
+ id 1kvg01-0007hR-U1
+ for qemu-riscv@nongnu.org; Sat, 02 Jan 2021 07:27:13 -0500
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534]:43608)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kuwB2-0007Tn-LT; Thu, 31 Dec 2020 06:31:40 -0500
-Received: by mail-pf1-x42a.google.com with SMTP id s21so11119670pfu.13;
- Thu, 31 Dec 2020 03:31:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=6e0utY0KIjhH+IijiV7uoV3Zeo2ifURrN+swQx7H6ME=;
- b=Ff0c4UV+ZsGhWEPZCAFiEheX480enP310Ao2KraLlC9krRV0RKsgKuiIAt0+fYRevF
- Hp93eH+uA/QJvU1aDmWNUtKJSHuSf63TumBFny1Wdz1RzOmfjLsWKZRBrW0OfLMAiMmQ
- UwAOOeixUzukWKqmGFoUBwJf3mTBSC+EI86WnkFtMLBAmHQMNtL/hBfuT66QQvJJzIL+
- sR6OxdmvcVFm/B3sb0WS0A7YMqg3ARlPcJ/fSybRG0PH+Irx6nTvy1n06t9Tvp1MqVBH
- WMOyB8UkYQ9hHiuBNlSML5gboRWOQAWCUcZomdqP2rbQrB/VvBma3F5YATOAVwqqWA9A
- EdOw==
+ (Exim 4.90_1) (envelope-from <pragnesh.patel@sifive.com>)
+ id 1kvfzz-00007L-EB
+ for qemu-riscv@nongnu.org; Sat, 02 Jan 2021 07:27:13 -0500
+Received: by mail-ed1-x534.google.com with SMTP id y24so22065074edt.10
+ for <qemu-riscv@nongnu.org>; Sat, 02 Jan 2021 04:27:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=K/htrcXeCpjvrhOLbTXk+fyb4hY+QV9O4MANPprpwYk=;
+ b=TZi7DUWGk4ZG3dPivCJGpJzR5e2J69NiHE5T/VqrntcuZp7N893cyOTmWrKkY3aCky
+ ToJ+LNI01DC3xIvYEXPBdGvdcJ/ygcpCbKm/389flYKqGpwwzhIpZuMrdiK59D+7dif4
+ TJWNeHoK3WVrN612sQKbZr1t6X1DIRaUh9mneFR+HORcE0WKK46nID5yslB679Wh4XQZ
+ em5m9AHqE7sAkd0kXLuY/wLIFGszw+xc38YyM3AMQmMuc290YC9DnDUUpS2EWiH/gg94
+ SswJwiAraW0ce0QE4+OG/wAmIBjWdF2AJ6rmZbo3GMrP1Ss9D9CmcBkOYhJd8bDsyYx7
+ 7/fQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=6e0utY0KIjhH+IijiV7uoV3Zeo2ifURrN+swQx7H6ME=;
- b=kDPgQ0out2PzZwrttNOwxW8YsCLsxz4XhuHTKrnmT+8z2N/Z2Vfp4nm8ymttlmAGAU
- Mc4hR8JNRDY1XRjKWmCHDPke/UK7qr3+vc+i457lFj5RMZSO7cdQRhtG9HxDhqVqOCKc
- T19Scw/9mp2m5jYnspdVOS/0ihjot7PPn76yrWKTBLXWUpEPqRjrzJqMrp0MC8YNxxa9
- z3LKl3ko22VY7BwaAIPNVg12rWes7oXHSmcaC7+HcSnjd/DWPvlK0jIPppzgwvanLwYi
- NxxErgTXwgk3ryhIj0UFuJ0p1vOIPJxX/52tg9z8P4mSN+T9aQGPH9tMZDfL0c253yAC
- +Wxw==
-X-Gm-Message-State: AOAM532ggencdpEnkrGzwqV94lbvhT/f73byrjs69jdmrGG3iudlh7k1
- eytMHqecEGrsyjHizVBt+Ek=
-X-Google-Smtp-Source: ABdhPJyixb7KtaCBInmhRAWdMJg9DftKiOyF3Dv4y0AJTC3IoK7FM3YaH5vyovRL9nZze1NbMDNUIA==
-X-Received: by 2002:a63:520e:: with SMTP id g14mr8459534pgb.378.1609414290529; 
- Thu, 31 Dec 2020 03:31:30 -0800 (PST)
-Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
- [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id t23sm45957591pfc.0.2020.12.31.03.31.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Dec 2020 03:31:30 -0800 (PST)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 21/22] docs/system: Add RISC-V documentation
-Date: Thu, 31 Dec 2020 19:30:09 +0800
-Message-Id: <20201231113010.27108-22-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201231113010.27108-1-bmeng.cn@gmail.com>
-References: <20201231113010.27108-1-bmeng.cn@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=K/htrcXeCpjvrhOLbTXk+fyb4hY+QV9O4MANPprpwYk=;
+ b=W8wLCYa9cArpvPj1G3JzeKes1Xp1KMkeJR7f68f8phA2iDmDeU0aMaucae2qCnd39B
+ BmGHpsji2aovLIyB5p2K66kcSbb2CQEg4uLzeskwe8Imghe8facce6GvQMNBzPu+Plfg
+ qa9Y915z3dKty4EcHgew1vws3fbMk3/acJNbJTfIKfHaVFQwq6jYaRHgkq8PBzwM455m
+ fvJwxbGOHo460kEgSRd0Q3R21qcADIovaOt1+3dgDYJ6hUZ4CzxJ+DPU0tcQjQeBZzVs
+ ml48JwHdAkMH4qyTAclgUjb9zz1MhkQu7kXEoETpNDPEsvftU4QivaFDztiQRE7uxkY1
+ VPuQ==
+X-Gm-Message-State: AOAM530L232J5Rv64//03upk7fWnPL30Ngo+ZaPIDbR1QZ4O7pUoxkQy
+ CIIxaa33t0Ys/AIBSu3LEij4aoFk7/O3bMmfYuL0dA==
+X-Google-Smtp-Source: ABdhPJxIpHG8PtuaKwTfEQ39j/YAA447IE4HHQ2v/KqJUAbJF4H0fURvH+JY4Kp0wW7ZMCr6QAjzEw8bO8BrGACpy6s=
+X-Received: by 2002:aa7:d1c2:: with SMTP id g2mr64152680edp.8.1609590428960;
+ Sat, 02 Jan 2021 04:27:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x42a.google.com
+References: <20201231113010.27108-1-bmeng.cn@gmail.com>
+In-Reply-To: <20201231113010.27108-1-bmeng.cn@gmail.com>
+From: Pragnesh Patel <pragnesh.patel@sifive.com>
+Date: Sat, 2 Jan 2021 17:56:56 +0530
+Message-ID: <CAN8ut8Lt8dbmayZE9YCzVpoddaTefnoFazKqB=CvP9DTAF+n1Q@mail.gmail.com>
+Subject: Re: [PATCH 00/22] hw/riscv: sifive_u: Add missing SPI support
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
+ Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ qemu-devel@nongnu.org, Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=pragnesh.patel@sifive.com; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,103 +72,147 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Dec 2020 11:31:51 -0000
+X-List-Received-Date: Sat, 02 Jan 2021 12:27:14 -0000
 
-From: Bin Meng <bin.meng@windriver.com>
+Hi BIn,
 
-Add RISC-V system emulator documentation for generic information.
-`Board-specific documentation` and `RISC-V CPU features` are only
-a placeholder and will be added in the future.
+1) Please rebase this series on master.
 
-Signed-off-by: Bin Meng <bin.meng@windriver.com>
----
+2) When i tried to boot from SD card image it shows below,
 
- docs/system/target-riscv.rst | 62 ++++++++++++++++++++++++++++++++++++
- docs/system/targets.rst      |  1 +
- 2 files changed, 63 insertions(+)
- create mode 100644 docs/system/target-riscv.rst
+pragneshp:sifive-qemu$ ./build/riscv64-softmmu/qemu-system-riscv64 -M
+sifive_u,msel=11 -m 4G -nographic -bios
+~/opensource/u-boot/spl/u-boot-spl.bin -device
+sd-card,spi=true,drive=mycard -drive
+file=~/opensource/u-boot/fsbl.gpt,id=mycard,format=raw,if=none
+qemu-system-riscv64: -device sd-card,spi=true,drive=mycard: Drive
+'mycard' is already in use by another device
 
-diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-new file mode 100644
-index 0000000000..978b96cbdb
---- /dev/null
-+++ b/docs/system/target-riscv.rst
-@@ -0,0 +1,62 @@
-+.. _RISC-V-System-emulator:
-+
-+RISC-V System emulator
-+======================
-+
-+QEMU can emulate both 32-bit and 64-bit RISC-V CPUs. Use the
-+``qemu-system-riscv64`` executable to simulate a 64-bit RISC-V machine,
-+``qemu-system-riscv32`` executable to simulate a 32-bit RISC-V machine.
-+
-+QEMU has generally good support for RISC-V guests. It has support for
-+several different machines. The reason we support so many is that
-+RISC-V hardware is much more widely varying than x86 hardware. RISC-V
-+CPUs are generally built into "system-on-chip" (SoC) designs created by
-+many different companies with different devices, and these SoCs are
-+then built into machines which can vary still further even if they use
-+the same SoC.
-+
-+For most boards the CPU type is fixed (matching what the hardware has),
-+so typically you don't need to specify the CPU type by hand, except for
-+special cases like the ``virt`` board.
-+
-+Choosing a board model
-+----------------------
-+
-+For QEMU's RISC-V system emulation, you must specify which board
-+model you want to use with the ``-M`` or ``--machine`` option;
-+there is no default.
-+
-+Because RISC-V systems differ so much and in fundamental ways, typically
-+operating system or firmware images intended to run on one machine
-+will not run at all on any other. This is often surprising for new
-+users who are used to the x86 world where every system looks like a
-+standard PC. (Once the kernel has booted, most userspace software
-+cares much less about the detail of the hardware.)
-+
-+If you already have a system image or a kernel that works on hardware
-+and you want to boot with QEMU, check whether QEMU lists that machine
-+in its ``-machine help`` output. If it is listed, then you can probably
-+use that board model. If it is not listed, then unfortunately your image
-+will almost certainly not boot on QEMU. (You might be able to
-+extract the filesystem and use that with a different kernel which
-+boots on a system that QEMU does emulate.)
-+
-+If you don't care about reproducing the idiosyncrasies of a particular
-+bit of hardware, such as small amount of RAM, no PCI or other hard
-+disk, etc., and just want to run Linux, the best option is to use the
-+``virt`` board. This is a platform which doesn't correspond to any
-+real hardware and is designed for use in virtual machines. You'll
-+need to compile Linux with a suitable configuration for running on
-+the ``virt`` board. ``virt`` supports PCI, virtio, recent CPUs and
-+large amounts of RAM. It also supports 64-bit CPUs.
-+
-+Board-specific documentation
-+----------------------------
-+
-+Unfortunately many of the RISC-V boards QEMU supports are currently
-+undocumented; you can get a complete list by running
-+``qemu-system-riscv64 --machine help``, or
-+``qemu-system-riscv32 --machine help``.
-+
-+RISC-V CPU features
-+-------------------
-diff --git a/docs/system/targets.rst b/docs/system/targets.rst
-index 564cea9a9b..75ed1087fd 100644
---- a/docs/system/targets.rst
-+++ b/docs/system/targets.rst
-@@ -19,6 +19,7 @@ Contents:
-    target-m68k
-    target-mips
-    target-ppc
-+   target-riscv
-    target-rx
-    target-s390x
-    target-sparc
--- 
-2.25.1
 
+I hacked the qemu code temporary and able to boot U-Boot from SD card,
+below is my hack
+
+pragneshp:sifive-qemu$ git diff
+diff --git a/block/block-backend.c b/block/block-backend.c
+index ce78d30794..cfa739fa40 100644
+--- a/block/block-backend.c
++++ b/block/block-backend.c
+@@ -888,10 +888,11 @@ void blk_get_perm(BlockBackend *blk, uint64_t
+*perm, uint64_t *shared_perm)
+  */
+ int blk_attach_dev(BlockBackend *blk, DeviceState *dev)
+ {
++#if 0
+     if (blk->dev) {
+         return -EBUSY;
+     }
+-
++#endif
+
+After applying this hack, I was able to boot U-Boot from Sd card
+
+Bootlogs:
+
+pragneshp:sifive-qemu$ ./build/riscv64-softmmu/qemu-system-riscv64 -M
+sifive_u,msel=11 -m 4G -nographic -bios
+~/opensource/u-boot/spl/u-boot-spl.bin -device
+sd-card,spi=true,drive=mycard -drive
+file=~/opensource/u-boot/fsbl.gpt,id=mycard,format=raw,if=none
+
+U-Boot SPL 2020.10-rc5-00007-gf9aadb57b1 (Dec 29 2020 - 17:48:05 +0530)
+Trying to boot from MMC1
+
+
+U-Boot 2020.10-rc5-00007-gf9aadb57b1 (Dec 29 2020 - 17:48:05 +0530)
+
+CPU:   rv64imafdc
+Model: SiFive HiFive Unleashed A00
+DRAM:  4 GiB
+MMC:   spi@10050000:mmc@0: 0
+Loading Environment from SPIFlash... Invalid bus 0 (err=-19)
+*** Warning - spi_flash_probe_bus_cs() failed, using default environment
+
+In:    serial@10010000
+Out:   serial@10010000
+Err:   serial@10010000
+Net:   eth0: ethernet@10090000
+Hit any key to stop autoboot:  0
+=>
+
+Thanks for the series.
+
+On Thu, Dec 31, 2020 at 5:00 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> This adds the missing SPI support to the `sifive_u` machine in the QEMU
+> mainline. With this series, upstream U-Boot for the SiFive HiFive Unleashed
+> board can boot on QEMU `sifive_u` out of the box. This allows users to
+> develop and test the recommended RISC-V boot flow with a real world use
+> case: ZSBL (in QEMU) loads U-Boot SPL from SD card or SPI flash to L2LIM,
+> then U-Boot SPL loads the payload from SD card or SPI flash that is a
+> combination of OpenSBI fw_dynamic firmware and U-Boot proper.
+>
+> The m25p80 model is updated to support ISSI flash series. A bunch of
+> ssi-sd issues are fixed, and writing to SD card in SPI mode is supported.
+>
+> reST documentation for RISC-V is added. Currently only `sifive_u`
+> machine is documented, but more to come.
+>
+>
+> Bin Meng (22):
+>   hw/block: m25p80: Add ISSI SPI flash support
+>   hw/block: m25p80: Add various ISSI flash information
+>   hw/sd: ssi-sd: Fix incorrect card response sequence
+>   hw/sd: sd: Support CMD59 for SPI mode
+>   hw/sd: sd: Drop sd_crc16()
+>   util: Add CRC16 (CCITT) calculation routines
+>   hw/sd: ssi-sd: Suffix a data block with CRC16
+>   hw/sd: ssi-sd: Support multiple block read (CMD18)
+>   hw/sd: ssi-sd: Use macros for the dummy value and tokens in the
+>     transfer
+>   hw/sd: sd: Remove duplicated codes in single/multiple block read/write
+>   hw/sd: sd: Allow single/multiple block write for SPI mode
+>   hw/sd: sd.h: Cosmetic change of using spaces
+>   hw/sd: Introduce receive_ready() callback
+>   hw/sd: ssi-sd: Support single block write
+>   hw/sd: ssi-sd: Support multiple block write
+>   hw/ssi: Add SiFive SPI controller support
+>   hw/riscv: sifive_u: Add QSPI0 controller and connect a flash
+>   hw/riscv: sifive_u: Add QSPI2 controller and connect an SD card
+>   hw/riscv: sifive_u: Change SIFIVE_U_GEM_IRQ to decimal value
+>   docs/system: Sort targets in alphabetical order
+>   docs/system: Add RISC-V documentation
+>   docs/system: riscv: Add documentation for sifive_u machine
+>
+>  docs/system/riscv/sifive_u.rst | 336 +++++++++++++++++++++++++++++++++
+>  docs/system/target-riscv.rst   |  72 +++++++
+>  docs/system/targets.rst        |  20 +-
+>  include/hw/riscv/sifive_u.h    |   9 +-
+>  include/hw/sd/sd.h             |  44 ++---
+>  include/hw/ssi/sifive_spi.h    |  47 +++++
+>  include/qemu/crc-ccitt.h       |  33 ++++
+>  hw/block/m25p80.c              |  51 ++++-
+>  hw/riscv/sifive_u.c            |  91 +++++++++
+>  hw/sd/core.c                   |  13 ++
+>  hw/sd/sd.c                     |  82 +-------
+>  hw/sd/ssi-sd.c                 | 127 +++++++++++--
+>  hw/ssi/sifive_spi.c            | 290 ++++++++++++++++++++++++++++
+>  util/crc-ccitt.c               | 127 +++++++++++++
+>  hw/riscv/Kconfig               |   3 +
+>  hw/ssi/Kconfig                 |   4 +
+>  hw/ssi/meson.build             |   1 +
+>  util/meson.build               |   1 +
+>  18 files changed, 1232 insertions(+), 119 deletions(-)
+>  create mode 100644 docs/system/riscv/sifive_u.rst
+>  create mode 100644 docs/system/target-riscv.rst
+>  create mode 100644 include/hw/ssi/sifive_spi.h
+>  create mode 100644 include/qemu/crc-ccitt.h
+>  create mode 100644 hw/ssi/sifive_spi.c
+>  create mode 100644 util/crc-ccitt.c
+>
+> --
+> 2.25.1
+>
+>
 
