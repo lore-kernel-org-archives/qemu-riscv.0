@@ -1,61 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kwtTz-0007fW-6G
-	for mharc-qemu-riscv@gnu.org; Tue, 05 Jan 2021 16:03:11 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48976)
+	id 1kwtUo-000887-VX
+	for mharc-qemu-riscv@gnu.org; Tue, 05 Jan 2021 16:04:03 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49232)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kwtTv-0007dY-90; Tue, 05 Jan 2021 16:03:07 -0500
-Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c]:36487)
+ id 1kwtUZ-00086M-Q1; Tue, 05 Jan 2021 16:03:52 -0500
+Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:43093)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kwtTt-0002JJ-K7; Tue, 05 Jan 2021 16:03:07 -0500
-Received: by mail-io1-xd2c.google.com with SMTP id u26so696987iof.3;
- Tue, 05 Jan 2021 13:03:04 -0800 (PST)
+ id 1kwtUW-0002Wx-LA; Tue, 05 Jan 2021 16:03:46 -0500
+Received: by mail-il1-x136.google.com with SMTP id q5so1008067ilc.10;
+ Tue, 05 Jan 2021 13:03:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=n9gz2rwYqZFn9JTihht/vRAxKcKDlSeyKKpT50rTLt8=;
- b=hiYe8HY6LQCTryAtd+7jAwSmZSmOHZ6W23BW0NRex4ue0GRH7OsrilfiGiVznVH2Aw
- XbrszRXR3AXnd6dg6GMqKAVen3Z84vmt3cItKetaDqNQz+GIliW2voOfenhSD0M9xfwl
- 7Ag5VBOgJ8Zsn+b/LJrQuD1IxnvsMyLXjYOIcYQcD62nbzCq0O8r2aro1wEl6sS/+ZCM
- 6+wOW7ejCjAe77KVoRUXe/9HCiDSoAeK7BrFr/rrXvoC7TmEtsFdUEtoo0l/8tE9sPsY
- 8Yz/Z3bi0k+XarxiCxivH5EqNwYSxfop17IuV3iQNm4IrWPqDE5GvMcVWultxYnCavnK
- w0QA==
+ :cc; bh=oZAQOGwJ8B4scWwwj1K7v8w6U0Q9XiKl2UAD6YikBQ8=;
+ b=PRK6o1ho+OeFgZtjoegb743VKhof47vCHn6xzvtCK/Wqv1r2BS8iK6mKTP8226tC6Y
+ Hw48LXSq5ikVih4UzzALBiopNfcbTI8gntO+d77ko02mJ7fy6AvDMcXfZK/OtTNUaQPo
+ HR1OrpuLgaz6kFolZIOJaTuWbmMYOYJQmrypbFoUGGunek31kxelqYWwoHorEbN6/rX4
+ a94vfGl3/YUFZLyVDcET1uMwDP2wJUA1lWcrK0ceQxERSgy+nGx0/lHSl7BS7bSW93gB
+ CByH9gWwr/WpMW/5qiitr1XEXYv8H1XyRXe4IyNnxKOu0/isOgeegU9JAq5YmRoGS1oi
+ xtgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=n9gz2rwYqZFn9JTihht/vRAxKcKDlSeyKKpT50rTLt8=;
- b=NCFBt7bgtWYzTWsrqhFDv/xlDSV87vhnXRu3IqmgnjuIaBovpSqIwRzU7kiqcaZVfK
- 3YIsYgmEln+vDGx2SuByBS/pnBMTUD00QkZuBAwlwYkAreJ/Du0ZfGbtzP+kLXb3P3tg
- UQMl6faN4KwvLXRsPjSfLBx5DpvBRJSGymHeRql5QWajO+IPR8JvEr0+jwln7TY3qQLa
- FcnkcQxMF8LZ+eiqwAtMBo24bIZOmEnUkP81jDX7M/20fBx3iG/dAUyYxxIpuil+HCDc
- l2Hk7Df8MJ6jJB/fzfPivfc78QhHhNTC4huPYRcDNbipmlpdoImTqxQs/4ic7ckSCJEs
- q/oQ==
-X-Gm-Message-State: AOAM5316vcN1r9BMtHxEOyJWLZhqbcezOMiOD5HdGVepbVlN6I4c2BaI
- HWwL7hDGfhSKSgo9Jr5SvwfZFFSD66ApVtn5eus=
-X-Google-Smtp-Source: ABdhPJxG8mkZXzboNrEqSqojdJXOzgb+ZSf3UKKUVOft3LLaKWmzxNrTnafZqEj/pFqoLGecq+OMOcs0VT3/AzLjAhQ=
-X-Received: by 2002:a5e:9242:: with SMTP id z2mr717089iop.175.1609880584240;
- Tue, 05 Jan 2021 13:03:04 -0800 (PST)
+ bh=oZAQOGwJ8B4scWwwj1K7v8w6U0Q9XiKl2UAD6YikBQ8=;
+ b=U7HH+TrgPFlqVY//pklXoJ/t7aWcSPtrF3o0Rln+fEa9pmR1tfdGcnnqtGdM36HY4v
+ Nc7AEDvhzydFRXNZs8jPO3uZ+fzxG//hzWHRkL/JsW8W1Dk6RO91IZVABa3dSqe+SCUa
+ 190T5I765kBmGVtvEgcgpewAuJZmQO07z/Hoe6pjV3L5CRXLQBgB7nKcS+4eWiI5k+uP
+ 304qvw8lOpuTWKLavI5e7jbXbmzXJMHu6QDnQOSNZE9oGgbB2BNOYgQKde3ZGa/YB8QS
+ UMl6tiP0nBFU8vRVj/veFVCwsrM0tlnb80WwOWXeiVcRkhQRTO0Wv785ZxlypDaXcSvs
+ 39+A==
+X-Gm-Message-State: AOAM532i1jrW8/zWivKRdMKuPtPKAtlGBbu6H5W7wN14ScZiWnxStsl3
+ Fx1CKlNXw0NvnjrwZiqnA1U5M5O4Kfbc08TwVbc=
+X-Google-Smtp-Source: ABdhPJw2TNZm+1EXP/QYrIMbTfSoQ3M4alVxJ4TLNA6lVlAHShwgaYuTj7AMakRNGyPCxn0yItC1JDAqg85ZmpWxdRs=
+X-Received: by 2002:a92:c942:: with SMTP id i2mr1381203ilq.227.1609880621963; 
+ Tue, 05 Jan 2021 13:03:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20201217214826.2094617-1-atish.patra@wdc.com>
- <CAEUhbmVc_SABW_0PKgDMY8t3zTujo4xUnNW3fz1YuWhqXWnV2A@mail.gmail.com>
-In-Reply-To: <CAEUhbmVc_SABW_0PKgDMY8t3zTujo4xUnNW3fz1YuWhqXWnV2A@mail.gmail.com>
+References: <CAOkUe-BGMmUTtY8bdTgi2Vrmq-pL2O36bY_kmE5rfbv0SQTJmA@mail.gmail.com>
+In-Reply-To: <CAOkUe-BGMmUTtY8bdTgi2Vrmq-pL2O36bY_kmE5rfbv0SQTJmA@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 5 Jan 2021 13:02:37 -0800
-Message-ID: <CAKmqyKPSk4gc2vpqAQmFyhyZkJxvJSWCFRB6bzYsdQTO3UVPQw@mail.gmail.com>
-Subject: Re: [PATCH] RISC-V: Place DTB at 3GB boundary instead of 4GB
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Atish Patra <atish.patra@wdc.com>,
+Date: Tue, 5 Jan 2021 13:03:15 -0800
+Message-ID: <CAKmqyKO-7x9Ea9xKuAAm5Z0b8zLr0Xqhrwya43iqByhxjeDCGw@mail.gmail.com>
+Subject: Re: [PATCH v2] gdb: riscv: Add target description
+To: Sylvain Pelissier <sylvain.pelissier@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Anup Patel <anup.patel@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+ Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,37 +74,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jan 2021 21:03:08 -0000
+X-List-Received-Date: Tue, 05 Jan 2021 21:03:59 -0000
 
-On Mon, Jan 4, 2021 at 7:11 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Dec 30, 2020 at 12:26 AM Sylvain Pelissier
+<sylvain.pelissier@gmail.com> wrote:
 >
-> On Fri, Dec 18, 2020 at 5:48 AM Atish Patra <atish.patra@wdc.com> wrote:
-> >
-> > Currently, we place the DTB at 2MB from 4GB or end of DRAM which ever is
-> > lesser. However, Linux kernel can address only 1GB of memory for RV32.
-> > Thus, it can not map anything beyond 3GB (assuming 2GB is the starting address).
-> > As a result, it can not process DT and panic if opensbi dynamic firmware
-> > is used.
-> >
-> > Fix this by placing the DTB at 2MB from 3GB or end of DRAM whichever is lower.
-> >
+> Target description is not currently implemented in RISC-V architecture. Thus GDB won't set it properly when attached. The patch implements the target description response.
 >
-> Fixes: 66b1205bc5ab ("RISC-V: Copy the fdt in dram instead of ROM")
->
-> > Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> > ---
-> >  hw/riscv/boot.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
->
-> Reviewed-by: Bin Meng <bin.meng@windriver.com>
-> Tested-by: Bin Meng <bin.meng@windriver.com>
+> Signed-off-by: Sylvain Pelissier <sylvain.pelissier@gmail.com>
 
-Thanks!
+Hello,
 
-Applied to riscv-to-apply.next
+This patch fails to apply. How did you send the email?
 
 Alistair
 
+> ---
+>  target/riscv/cpu.c | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
 >
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 254cd83f8b..ed4971978b 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -556,6 +556,18 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+>
+> +static gchar *riscv_gdb_arch_name(CPUState *cs)
+> +{
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    CPURISCVState *env = &cpu->env;
+> +
+> +    if (riscv_cpu_is_32bit(env)) {
+> +        return g_strdup("riscv:rv32");
+> +    } else {
+> +        return g_strdup("riscv:rv64");
+> +    }
+> +}
+> +
+>  static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>  {
+>      RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
+> @@ -591,6 +603,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>      /* For now, mark unmigratable: */
+>      cc->vmsd = &vmstate_riscv_cpu;
+>  #endif
+> +    cc->gdb_arch_name = riscv_gdb_arch_name;
+>  #ifdef CONFIG_TCG
+>      cc->tcg_initialize = riscv_translate_init;
+>      cc->tlb_fill = riscv_cpu_tlb_fill;
+> --
+> 2.25.1
 
