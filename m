@@ -1,70 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kwcgJ-0004MZ-W2
-	for mharc-qemu-riscv@gnu.org; Mon, 04 Jan 2021 22:06:48 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35646)
+	id 1kwcks-0006np-LC
+	for mharc-qemu-riscv@gnu.org; Mon, 04 Jan 2021 22:11:30 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36344)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kwcgI-0004ME-RB; Mon, 04 Jan 2021 22:06:46 -0500
-Received: from mail-yb1-xb29.google.com ([2607:f8b0:4864:20::b29]:35270)
+ id 1kwckr-0006nI-9y; Mon, 04 Jan 2021 22:11:29 -0500
+Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a]:45054)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kwcgC-0000CW-Ot; Mon, 04 Jan 2021 22:06:46 -0500
-Received: by mail-yb1-xb29.google.com with SMTP id u203so27946715ybb.2;
- Mon, 04 Jan 2021 19:06:39 -0800 (PST)
+ id 1kwckp-0001OG-6W; Mon, 04 Jan 2021 22:11:28 -0500
+Received: by mail-yb1-xb2a.google.com with SMTP id x2so27934128ybt.11;
+ Mon, 04 Jan 2021 19:11:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=mQXMT5mh4ntU2gzqVRv04YryteroNq6zIFzMYt/JJ7Y=;
- b=cr8M6hBC7HimM6NQHUgQeqMIdgrxLrsioYHne7JV8UeMq2+4XTFA0qfi2fr2fvB3a8
- m+KxQbHkhRcMQYWwtxhZgwaOyidGI8rXHdVJKzsWhF4StDE1cmGPiG8n1M6GypNEeQoT
- z/i4L9UUjZyebiOkvpnLuMxpRn/dgt1x6lW34nhLRmiKkh7D2I/AS+zieDnaQinBmr7c
- DooDo8RdZZ0/9E4KojKzBcz66IVhjiTYYgsRSndUyPLGXPZ28iY77qeLF7ryqvjOtcRN
- 1FGst9J5Z+iGWzBVQ5Fr1GPnKtUnEQwfJLajMsExxgEcSebc1XQPE+IMdD++MQiel4RB
- mziA==
+ :cc; bh=egblhIiX4k2GzaEB1851HXaymylbzwHL5fGmRNhgG6w=;
+ b=l8H3clxK87PyZBo7zk1AMajekr18wi5uID99F6sgU1ZjjPuhW349EBLj/fA+onuFRv
+ 33MXE9NBLTcXcbnLMvtKRKXkDruDtTNwLTNWvNq4onlr4/ggfcFVsig6Vie3+/tpnWjJ
+ QcOs3D6saLFo2T+h1ZgxfMQKqNcXzhNTHYOmDnPKlYvU/Mqy4O3eEKhXAEb8IFa7lknB
+ WSqZR2uuVnaNiExPpiHJFF1hCcM71IoZ7Mpw3JArxy7+95+nwBTyK8DVQYNFMGetQc87
+ +CSkMRd9aEGw88YQ6Pz2ljIDNX+/i3OAW5Qq7s9dw+l9nMFVfBn/VmvAfZvDUyc2T4r+
+ xGeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=mQXMT5mh4ntU2gzqVRv04YryteroNq6zIFzMYt/JJ7Y=;
- b=W0BexEPqVGawYOJ4Iv6LulsgSeDXMF4/GHuTo1Q6mBKozODu4H9LAh3tnvtU0MK7fM
- T0kRn/7KiKt4MXR0UbQPJoICEnp//e6uMfEzuuGv5gAIJmpb3KKrb9GNPJroCUMsCVev
- oQ2p8ZKbkHGUNCEeodESMNZnFdcNqIaI3CPIdA++fpwd+pxV1R7beQJxFAVvJz+ESFcC
- m6F+JGCVbTxy6FtYNHfv0AWlv86/ls85iF91EN7wYI0GXFJOB+1Hgl0f48XBU9mpvqB7
- 7GelN2utLWrivgB2EAOrTejE9qKowLRTJw60f3TB60M/MuxzerRPWlcB3FZ2YF0Yu+VD
- O/Pw==
-X-Gm-Message-State: AOAM5304RmFOXa3rygFT9XIONccuAMbNsksEYnmjm78/T8HbsGQywa4I
- Lzo90rdhvv2xZDXdlZoZsoc/81P9GLQ/eGviUh8=
-X-Google-Smtp-Source: ABdhPJxsdejT5+qjfG9qXa0fY+O03qhZjXBz7lipw73FxImeejS0NM1O+DxZgKP/jDuM1HZNrBwVoSk4FTGu1esEf7g=
-X-Received: by 2002:a25:e70e:: with SMTP id e14mr50442831ybh.332.1609815998393; 
- Mon, 04 Jan 2021 19:06:38 -0800 (PST)
+ bh=egblhIiX4k2GzaEB1851HXaymylbzwHL5fGmRNhgG6w=;
+ b=FoOE7Yg0cM8ivqv/kLnjgLDocHGAVVOzGc3p3F7Ir6kuX5vH+aRiuRP7ebmg3n/v6F
+ ppISZMvXx1RuZXZsBWxcDNtvQPhmAKwc/qNw6K5RawM/zFacXsxSiW8mHF2KldrxUIsG
+ savEgZWVSpqfeqaqEXC01lqqrV6BLp60FOSM+mcZg7wQ1hyvp784UVXdGoI88Y+NM6zI
+ dEz0DGZjoG+9vIfXIgQrWuPk0YZau+eelGxiRIW8NWsNPakwzUV4bWjrKO61QhokKzEF
+ Ycen3sCqvi1QI/YPRyYJOc4dpr9BSco+5sO0IyGRGpVvODXY5zfV/p5SyXajVhYafmxi
+ I2rA==
+X-Gm-Message-State: AOAM533NLvVNZbjVdCTMWDDHx7nFzxhTyjWJSBZTxS9WOvVu9G1xIBIv
+ +fX8ngUaiUso7mtesOUg9hQnaBatIlmeyD01Y+8=
+X-Google-Smtp-Source: ABdhPJzGMOelxXtYJTduXdqpca1NeYADerCRE+PEWIr9b8D/jK1SZ/3hknM6YUVb4wJ2E5Ui1ufToSkS1z6YEs+l4NQ=
+X-Received: by 2002:a25:5a43:: with SMTP id o64mr55779169ybb.387.1609816285017; 
+ Mon, 04 Jan 2021 19:11:25 -0800 (PST)
 MIME-Version: 1.0
 References: <20201217214826.2094617-1-atish.patra@wdc.com>
- <CAEUhbmUqJdpuqvZ6V3s9eeW=EUVXrnjbF5GRmygwaZhMGG-6sA@mail.gmail.com>
- <4f09804c0e35a45fcf3fa78b3f3ed55276d6e10f.camel@wdc.com>
- <CAEUhbmX16h5S5Y0kFsnDv6t2cnn6we-b-9U_cbnEQkrrckYy0w@mail.gmail.com>
- <67cbbde886c3ae6e57e837e79f466f4156a910f8.camel@wdc.com>
- <CAEUhbmVEAxf3OCp=89MCx7qQiN0wKd3QM4k8t20r9Sbq+JA_-w@mail.gmail.com>
- <df986ea726abea58fedd1a870095378456823d2a.camel@wdc.com>
- <CAEUhbmUK95YJ74_AJQ8wu9oBM6mDky2n5=pGR_UQE0AB4eXYtQ@mail.gmail.com>
- <a33a44ff4ec9f16a5ff7649e2d8ed9d87c6bed64.camel@wdc.com>
- <CAEUhbmXCyrAZzVzvSMSf+FOt5g-jHpk2X6j=00rQNmJKYoXSAA@mail.gmail.com>
- <CAEUhbmWB6RMX8L2YzYYBhFKuKUgFVx2s2jTER1QEAW6j_VsqKQ@mail.gmail.com>
- <4db194da3ea2eebdbe9c31e102faafc3f0e570a4.camel@wdc.com>
-In-Reply-To: <4db194da3ea2eebdbe9c31e102faafc3f0e570a4.camel@wdc.com>
+In-Reply-To: <20201217214826.2094617-1-atish.patra@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 5 Jan 2021 11:06:26 +0800
-Message-ID: <CAEUhbmXVzWf5_arW4ivNd2o1=YdZ456pdXRw5k0HeZovg96aRQ@mail.gmail.com>
+Date: Tue, 5 Jan 2021 11:11:13 +0800
+Message-ID: <CAEUhbmVc_SABW_0PKgDMY8t3zTujo4xUnNW3fz1YuWhqXWnV2A@mail.gmail.com>
 Subject: Re: [PATCH] RISC-V: Place DTB at 3GB boundary instead of 4GB
-To: Atish Patra <Atish.Patra@wdc.com>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
- "kbastian@mail.uni-paderborn.de" <kbastian@mail.uni-paderborn.de>, 
- "sagark@eecs.berkeley.edu" <sagark@eecs.berkeley.edu>,
+To: Atish Patra <atish.patra@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Alistair Francis <Alistair.Francis@wdc.com>, 
- Anup Patel <Anup.Patel@wdc.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- "palmer@dabbelt.com" <palmer@dabbelt.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Anup Patel <anup.patel@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b29;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,351 +72,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jan 2021 03:06:47 -0000
+X-List-Received-Date: Tue, 05 Jan 2021 03:11:29 -0000
 
-Hi Atish,
-
-On Tue, Jan 5, 2021 at 4:24 AM Atish Patra <Atish.Patra@wdc.com> wrote:
+On Fri, Dec 18, 2020 at 5:48 AM Atish Patra <atish.patra@wdc.com> wrote:
 >
-> On Tue, 2020-12-29 at 12:49 +0800, Bin Meng wrote:
-> > Hi Atish,
-> >
-> > On Wed, Dec 23, 2020 at 9:20 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > Hi Atish,
-> > >
-> > > On Wed, Dec 23, 2020 at 3:59 AM Atish Patra <Atish.Patra@wdc.com>
-> > > wrote:
-> > > >
-> > > > On Tue, 2020-12-22 at 13:35 +0800, Bin Meng wrote:
-> > > > > Hi Atish,
-> > > > >
-> > > > > On Sat, Dec 19, 2020 at 3:46 AM Atish Patra <
-> > > > > Atish.Patra@wdc.com>
-> > > > > wrote:
-> > > > > >
-> > > > > > On Fri, 2020-12-18 at 16:42 +0800, Bin Meng wrote:
-> > > > > > > Hi Atish,
-> > > > > > >
-> > > > > > > On Fri, Dec 18, 2020 at 4:00 PM Atish Patra <
-> > > > > > > Atish.Patra@wdc.com>
-> > > > > > > wrote:
-> > > > > > > >
-> > > > > > > > On Fri, 2020-12-18 at 15:33 +0800, Bin Meng wrote:
-> > > > > > > > > Hi Atish,
-> > > > > > > > >
-> > > > > > > > > On Fri, Dec 18, 2020 at 3:27 PM Atish Patra <
-> > > > > > > > > Atish.Patra@wdc.com>
-> > > > > > > > > wrote:
-> > > > > > > > > >
-> > > > > > > > > > On Fri, 2020-12-18 at 15:21 +0800, Bin Meng wrote:
-> > > > > > > > > > > Hi Atish,
-> > > > > > > > > > >
-> > > > > > > > > > > On Fri, Dec 18, 2020 at 5:48 AM Atish Patra
-> > > > > > > > > > > <atish.patra@wdc.com>
-> > > > > > > > > > > wrote:
-> > > > > > > > > > > >
-> > > > > > > > > > > > Currently, we place the DTB at 2MB from 4GB or
-> > > > > > > > > > > > end of
-> > > > > > > > > > > > DRAM
-> > > > > > > > > > > > which
-> > > > > > > > > > > > ever is
-> > > > > > > > > > > > lesser. However, Linux kernel can address only
-> > > > > > > > > > > > 1GB of
-> > > > > > > > > > > > memory
-> > > > > > > > > > > > for
-> > > > > > > > > > > > RV32.
-> > > > > > > > > > > > Thus, it can not map anything beyond 3GB
-> > > > > > > > > > > > (assuming 2GB
-> > > > > > > > > > > > is
-> > > > > > > > > > > > the
-> > > > > > > > > > > > starting address).
-> > > > > > > > > > > > As a result, it can not process DT and panic if
-> > > > > > > > > > > > opensbi
-> > > > > > > > > > > > dynamic
-> > > > > > > > > > > > firmware
-> > > > > > > > > > > > is used.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Fix this by placing the DTB at 2MB from 3GB or
-> > > > > > > > > > > > end of
-> > > > > > > > > > > > DRAM
-> > > > > > > > > > > > whichever is lower.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> > > > > > > > > > > > ---
-> > > > > > > > > > > >  hw/riscv/boot.c | 4 ++--
-> > > > > > > > > > > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > > > > > > > > > > >
-> > > > > > > > > > >
-> > > > > > > > > > > With this patch, 32-bit sifive_u still does not
-> > > > > > > > > > > boot
-> > > > > > > > > > > kernel
-> > > > > > > > > > > with
-> > > > > > > > > > > the
-> > > > > > > > > > > following patch applied on 5.10:
-> > > > > > > > > > >
-> > > > > > > > > > > https://patchwork.kernel.org/project/linux-riscv/patch/20201217074855.1948743-1-atish.patra@wdc.com/
-> > > > > > > > > > >
-> > > > > > > > > > > Command I used:
-> > > > > > > > > > > $ qemu-system-riscv32 -nographic -M sifive_u -m 1G
-> > > > > > > > > > > -smp 5
-> > > > > > > > > > > -
-> > > > > > > > > > > kernel
-> > > > > > > > > > > arch/riscv/boot/Image
-> > > > > > > > > > >
-> > > > > > > > > > > 32-bit virt cannot boot the same kernel image with
-> > > > > > > > > > > memory
-> > > > > > > > > > > set
-> > > > > > > > > > > to
-> > > > > > > > > > > 2G
-> > > > > > > > > > > either:
-> > > > > > > > > > > $ qemu-system-riscv32 -nographic -M virt -m 2G -smp
-> > > > > > > > > > > 4 -
-> > > > > > > > > > > kernel
-> > > > > > > > > > > arch/riscv/boot/Image
-> > > > > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > Hi Bin,
-> > > > > > > > > > As mentioned in the email on the linux mailing list,
-> > > > > > > > > > this
-> > > > > > > > > > patch
-> > > > > > > > > > only
-> > > > > > > > > > solves 2GB problem. sifive_u problem is solved by
-> > > > > > > > > > Alistair's
-> > > > > > > > > > patch[1].
-> > > > > > > > > >
-> > > > > > > > > > He is planning to send the PR soon. The issue with
-> > > > > > > > > > sifive_u
-> > > > > > > > > > boot
-> > > > > > > > > > was it
-> > > > > > > > > > was failing the 32 bit test earlier resulting a 2MB
-> > > > > > > > > > aligned
-> > > > > > > > > > address
-> > > > > > > > > > instead of 4MB.
-> > > > > > > > >
-> > > > > > > > > Ah, I see. However my testing shows that virt with 2G
-> > > > > > > > > still
-> > > > > > > > > does
-> > > > > > > > > not
-> > > > > > > > > boot with this patch.
-> > > > > > > > >
-> > > > > > > >
-> > > > > > > > Strange. I verified again with following combination with
-> > > > > > > > -bios
-> > > > > > > > and
-> > > > > > > > without bios parameter.
-> > > > > > > >
-> > > > > > > > 1. virt 32/64 with 1GB/2GB memory
-> > > > > > > > 2. sifive_u 32/64 bit with 1GB/2GB memory (Alistair's
-> > > > > > > > patch
-> > > > > > > > included)
-> > > > > > > >
-> > > > > > > > Can you share the boot log along with the head commit of
-> > > > > > > > Qemu
-> > > > > > > > and
-> > > > > > > > commandline ? I am using 5.10 kernel with my kernel fix.
-> > > > > > > >
-> > > > > > >
-> > > > > > > I was using Alistair's QEMU repo for testing and 5.10
-> > > > > > > kernel with
-> > > > > > > your
-> > > > > > > kernel fix:
-> > > > > > >
-> > > > > > > $ git checkout -b testing pull-riscv-to-apply-20201217-1
-> > > > > > > $ apply this patch
-> > > > > > > $ mkdir build;cd build;../configure
-> > > > > > > --target-list=riscv64-softmmu,riscv32-softmmu;make -j
-> > > > > > >
-> > > > > > > $ ./qemu-system-riscv32 -nographic -M virt -m 2G -smp 4 -
-> > > > > > > kernel
-> > > > > > > ~/work/git/linux/arch/riscv/boot/Image
-> > > > > > >
-> > > > > > > OpenSBI v0.8
-> > > > > > >    ____                    _____ ____ _____
-> > > > > > >   / __ \                  / ____|  _ \_   _|
-> > > > > > >  | |  | |_ __   ___ _ __ | (___ | |_) || |
-> > > > > > >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> > > > > > >  | |__| | |_) |  __/ | | |____) | |_) || |_
-> > > > > > >   \____/| .__/ \___|_| |_|_____/|____/_____|
-> > > > > > >         | |
-> > > > > > >         |_|
-> > > > > > >
-> > > > > > > Platform Name       : riscv-virtio,qemu
-> > > > > > > Platform Features   : timer,mfdeleg
-> > > > > > > Platform HART Count : 4
-> > > > > > > Boot HART ID        : 3
-> > > > > > > Boot HART ISA       : rv32imafdcsu
-> > > > > > > BOOT HART Features  : pmp,scounteren,mcounteren,time
-> > > > > > > BOOT HART PMP Count : 16
-> > > > > > > Firmware Base       : 0x80000000
-> > > > > > > Firmware Size       : 104 KB
-> > > > > > > Runtime SBI Version : 0.2
-> > > > > > >
-> > > > > > > MIDELEG : 0x00000222
-> > > > > > > MEDELEG : 0x0000b109
-> > > > > > > PMP0    : 0x80000000-0x8001ffff (A)
-> > > > > > > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
-> > > > > > > <hangs here>
-> > > > > > >
-> > > > > > > $ ./qemu-system-riscv32 -nographic -M sifive_u -m 2G -smp 5
-> > > > > > > -
-> > > > > > > kernel
-> > > > > > > ~/work/git/linux/arch/riscv/boot/Image
-> > > > > > >
-> > > > > > > OpenSBI v0.8
-> > > > > > >    ____                    _____ ____ _____
-> > > > > > >   / __ \                  / ____|  _ \_   _|
-> > > > > > >  | |  | |_ __   ___ _ __ | (___ | |_) || |
-> > > > > > >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> > > > > > >  | |__| | |_) |  __/ | | |____) | |_) || |_
-> > > > > > >   \____/| .__/ \___|_| |_|_____/|____/_____|
-> > > > > > >         | |
-> > > > > > >         |_|
-> > > > > > >
-> > > > > > > Platform Name       : SiFive HiFive Unleashed A00
-> > > > > > > Platform Features   : timer,mfdeleg
-> > > > > > > Platform HART Count : 5
-> > > > > > > Boot HART ID        : 4
-> > > > > > > Boot HART ISA       : rv32imafdcsu
-> > > > > > > BOOT HART Features  : pmp,scounteren,mcounteren
-> > > > > > > BOOT HART PMP Count : 16
-> > > > > > > Firmware Base       : 0x80000000
-> > > > > > > Firmware Size       : 112 KB
-> > > > > > > Runtime SBI Version : 0.2
-> > > > > > >
-> > > > > > > MIDELEG : 0x00000222
-> > > > > > > MEDELEG : 0x0000b109
-> > > > > > > PMP0    : 0x80000000-0x8001ffff (A)
-> > > > > > > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
-> > > > > > > <hangs here>
-> > > > > > >
-> > > > > > > The following is sifive_u with 1G:
-> > > > > > >
-> > > > > > > $ ./qemu-system-riscv32 -nographic -M sifive_u -m 1G -smp 5
-> > > > > > > -
-> > > > > > > kernel
-> > > > > > > ~/work/git/linux/arch/riscv/boot/Image
-> > > > > > >
-> > > > > > > OpenSBI v0.8
-> > > > > > >    ____                    _____ ____ _____
-> > > > > > >   / __ \                  / ____|  _ \_   _|
-> > > > > > >  | |  | |_ __   ___ _ __ | (___ | |_) || |
-> > > > > > >  | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
-> > > > > > >  | |__| | |_) |  __/ | | |____) | |_) || |_
-> > > > > > >   \____/| .__/ \___|_| |_|_____/|____/_____|
-> > > > > > >         | |
-> > > > > > >         |_|
-> > > > > > >
-> > > > > > > Platform Name       : SiFive HiFive Unleashed A00
-> > > > > > > Platform Features   : timer,mfdeleg
-> > > > > > > Platform HART Count : 5
-> > > > > > > Boot HART ID        : 3
-> > > > > > > Boot HART ISA       : rv32imafdcsu
-> > > > > > > BOOT HART Features  : pmp,scounteren,mcounteren
-> > > > > > > BOOT HART PMP Count : 16
-> > > > > > > Firmware Base       : 0x80000000
-> > > > > > > Firmware Size       : 112 KB
-> > > > > > > Runtime SBI Version : 0.2
-> > > > > > >
-> > > > > > > MIDELEG : 0x00000222
-> > > > > > > MEDELEG : 0x0000b109
-> > > > > > > PMP0    : 0x80000000-0x8001ffff (A)
-> > > > > > > PMP1    : 0x00000000-0xffffffff (A,R,W,X)
-> > > > > > > [    0.000000] Linux version 5.10.0-00001-gbf0dad61896d
-> > > > > > > (bmeng@pek-vx-bsp2) (riscv64-linux-gcc (GCC) 8.1.0, GNU ld
-> > > > > > > (GNU
-> > > > > > > Binutils) 2.30) #1 SMP Thu Dec 17 16:48:13 CST 2020
-> > > > > > > [    0.000000] OF: fdt: Ignoring memory range 0x80000000 -
-> > > > > > > 0x80400000
-> > > > > > > [    0.000000] efi: UEFI not found.
-> > > > > > > [    0.000000] Zone ranges:
-> > > > > > > [    0.000000]   Normal   [mem 0x0000000080400000-
-> > > > > > > 0x00000000bfffffff]
-> > > > > > > [    0.000000] Movable zone start for each node
-> > > > > > > [    0.000000] Early memory node ranges
-> > > > > > > [    0.000000]   node   0: [mem 0x0000000080400000-
-> > > > > > > 0x00000000bfffffff]
-> > > > > > > [    0.000000] Initmem setup node 0 [mem
-> > > > > > > 0x0000000080400000-
-> > > > > > > 0x00000000bfffffff]
-> > > > > > > [    0.000000] SBI specification v0.2 detected
-> > > > > > > [    0.000000] SBI implementation ID=0x1 Version=0x8
-> > > > > > > [    0.000000] SBI v0.2 TIME extension detected
-> > > > > > > [    0.000000] SBI v0.2 IPI extension detected
-> > > > > > > [    0.000000] SBI v0.2 RFENCE extension detected
-> > > > > > > [    0.000000] SBI v0.2 HSM extension detected
-> > > > > > > [    0.000000] CPU with hartid=0 is not available
-> > > > > > > [    0.000000] CPU with hartid=0 is not available
-> > > > > > >
-> > > > > > > Regards,
-> > > > > > > Bin
-> > > > > >
-> > > > > > May be you forgot to apply this patch for 2GB case on top of
-> > > > > > Alistair's
-> > > > > > tree? I don't see any issues with exact same setup.
-> > > > >
-> > > > > That's really weird. I have:
-> > > > >
-> > > > > $ git log --oneline
-> > > > > 3ced2fb RISC-V: Place DTB at 3GB boundary instead of 4GB
-> > > > > d31e970 riscv/opentitan: Update the OpenTitan memory layout
-> > > > > 3ed2b8a hw/riscv: Use the CPU to determine if 32-bit
-> > > > > 094b072 target/riscv: cpu: Set XLEN independently from target
-> > > > > 8987cdc4 target/riscv: csr: Remove compile time XLEN checks
-> > > > >
-> > > > > I just rebuilt the QEMU binaries but still have the same
-> > > > > result. 2G
-> > > > > does not boot on either 'virt' or 'sifive_u'.
-> > > > >
-> > > > > $ ./qemu-system-riscv32 -version
-> > > > > QEMU emulator version 5.2.50 (v5.2.0-551-g3ced2fb)
-> > > > > Copyright (c) 2003-2020 Fabrice Bellard and the QEMU Project
-> > > > > developers
-> > > > >
-> > > > > Maybe it's toolchain related? I am using kernel.org toolchain
-> > > > > riscv64-linux-gcc (GCC) 8.1.0. I see you were using
-> > > > > riscv64-unknown-linux-gnu-gcc (GCC) 10.2.0.
-> > > > >
-> > > >
-> > > > Strange. If it is a toolchain related issue, the cause might be
-> > > > completely different. Can you give it a try to with updated
-> > > > toolchain ?
-> > > > The pre-built toolchain available in bootlin[1] is 10.2.0.
-> > > >
-> > > > [1] https://toolchains.bootlin.com/
-> > >
-> > > I will give it a try.
-> >
-> > I used the bootlin pre-built 10.2.0 toolchain to build the Linux
-> > kernel. Still, 2GB does not boot on QEMU.
-> >
-> > I looked at your kernel log again, and found:
-> >
-> > [    0.000000] Linux version 5.10.0-00022-ge20097fb37e2-dirty
-> >
-> > It seems you have 22 commits on top of 5.10.
-> >
-> > I only have one commit "RISC-V: Fix usage of
-> > memblock_enforce_memory_limit" on top of 5.10.
-> >
-> > Could you please check?
-> >
+> Currently, we place the DTB at 2MB from 4GB or end of DRAM which ever is
+> lesser. However, Linux kernel can address only 1GB of memory for RV32.
+> Thus, it can not map anything beyond 3GB (assuming 2GB is the starting address).
+> As a result, it can not process DT and panic if opensbi dynamic firmware
+> is used.
 >
-> Sorry for the late reply. I was on vacation. I was using for-next
-> branch on top of 5.10. I just tested with 5.11-rc2 and everything seems
-> to be fine. Can you check with 5.11-rc2 ?
-
-I just tested v5.11-rc2 and "-m 2G" boots now.
-
-> Apologies for the any confusion caused.
+> Fix this by placing the DTB at 2MB from 3GB or end of DRAM whichever is lower.
 >
 
-So it looks there are multiple kernel breakages on 32-bit support.
+Fixes: 66b1205bc5ab ("RISC-V: Copy the fdt in dram instead of ROM")
 
-Could you identify which kernel commit "fixed" things in your "Linux
-version 5.10.0-00022-ge20097fb37e2-dirty" build since there are only
-22 commits on top of 5.10?
+> Signed-off-by: Atish Patra <atish.patra@wdc.com>
+> ---
+>  hw/riscv/boot.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
 
-Regards,
-Bin
+Reviewed-by: Bin Meng <bin.meng@windriver.com>
+Tested-by: Bin Meng <bin.meng@windriver.com>
 
