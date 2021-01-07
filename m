@@ -1,71 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kxFcy-0002Kh-U1
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Jan 2021 15:41:56 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49382)
+	id 1kxPDI-0000UQ-Rj
+	for mharc-qemu-riscv@gnu.org; Thu, 07 Jan 2021 01:56:04 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49564)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sylvain.pelissier@gmail.com>)
- id 1kxFcx-0002K2-HU; Wed, 06 Jan 2021 15:41:55 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:42684)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kxPDH-0000UG-JH; Thu, 07 Jan 2021 01:56:03 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e]:32934)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sylvain.pelissier@gmail.com>)
- id 1kxFct-0002De-5r; Wed, 06 Jan 2021 15:41:55 -0500
-Received: by mail-wr1-x429.google.com with SMTP id m5so3582507wrx.9;
- Wed, 06 Jan 2021 12:41:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kxPDG-0001no-3O; Thu, 07 Jan 2021 01:56:03 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id t30so4564063wrb.0;
+ Wed, 06 Jan 2021 22:56:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=3YmbbzfB9PYrZG7RfZydvNgGFBev0UCWH1pPnTmK/K0=;
- b=HsexDqxxQh7aoYqHj3TirLO8+pCoGqRm22pbPUNlWiMz1ZnoYClWbu89IHOynCDBXD
- eo6zKj5GK2eSOYy8pxSqa//EAEviHmPQ4e6mM1BmN0nGA1en/D8XG0WOgLqb8ZlF49da
- MK3bTzHSldL19GAusC+ut7CPiv5lhmSbyvtyVm0JPvj1NhZJyQnETI2RePiBleb/HYhM
- +EzrvNR+ZBWuFSfhjmeVLrcy/OW+ykcKvYd9HWCdXHRjBNLH0niR8PHW4tNNf3tHAZP9
- cBHXIUCQeykwuxzwmdP/zfdKmUdNxiv83w5bmqZPyqeB9OlVNJ+lOTqNVGe8Po/jjw8o
- ++fA==
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=hOr4beHwQJIGmV1UyQYHqPKWp+njp7zoK3jrg7may0k=;
+ b=kMIxdgxYAVLn6c2lf8WbDpfaXC9Qtqvn/82Qqy7perIbUV7IxEjkflCth69KIHFwW9
+ rdoQeT2ImPylfIRfxD7ZwibboOj/Y3/XECZJBD2eLtceQXQ71Ycp8eTfNP6niS1AucCS
+ NceocQ3S+WK0cPuNsOHome/7FYfVjO5TtBpYmKSqRPUeRmajsxBojr5bJVDGlkxWV34o
+ pWFQdF4/bLhZYUxlD4GE/ZpM9Dheo0DEwk4B3ADiGFSkBkZ8/yarTqcWvXZN4mrMSbDZ
+ tXHdtaDHHs72aiDXbtwO9DQeDlShNlluvlV24pFGlSTp440JbVexK1twvvhMuFgNR0W/
+ +5tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=3YmbbzfB9PYrZG7RfZydvNgGFBev0UCWH1pPnTmK/K0=;
- b=omu0PWOpDhyg4Y0vV22P6AM7qkDFHRQhgfwIvrfLyfFa7c82qp5KUq/Bfk/00b2kNR
- 9/yzJi+TvKhtqQ017fYwlveKVjJMskTEBB2JEGHQ5QubxyIGv7VSCseGBr8NGXn5cFSn
- w+7WkUIP/4bdKJ9poaUtChNDKq4gq22U5tmLbSoQe07IqAFss5rGgS+wcJmZLwJSJaot
- azFZu6DxPbYiivQlgCIC6+KvOqkBCGJuN3Fq7p7k0eB4HPHp1PLaWBp9PVX2BZkGyVu/
- lHt+cBy+dLogjHfhQmXJ0eGdaopX8TioG2lFenfSK4uOV01y3nZpoh0tMgS8HNbpIf77
- 6A2g==
-X-Gm-Message-State: AOAM532RDb2Q+l54+qEkBILZONOC4IFFy29IjzRNDMhngDeqd1vQPD0R
- nrmmUz3mVeQkb18kv4/Adi3a6bSxVYdxinuJ
-X-Google-Smtp-Source: ABdhPJwFGBIGG0EzunDrk0hdhuCqazwqA23MwUrAU4UxsoWs2w4/tnbzOfa3Bk87UO/YRVHJFBm95g==
-X-Received: by 2002:adf:ee90:: with SMTP id b16mr5829849wro.221.1609965708523; 
- Wed, 06 Jan 2021 12:41:48 -0800 (PST)
-Received: from sylvain-MS-7994.lan ([51.154.65.74])
- by smtp.gmail.com with ESMTPSA id f9sm4937680wrw.81.2021.01.06.12.41.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Jan 2021 12:41:47 -0800 (PST)
-From: Sylvain Pelissier <sylvain.pelissier@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Sylvain Pelissier <sylvain.pelissier@gmail.com>,
- Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+ bh=hOr4beHwQJIGmV1UyQYHqPKWp+njp7zoK3jrg7may0k=;
+ b=Xm07ZKyh1HwdUjxERfbfyWHZ6GS8u1LwXxbOKDowoAQBsVCvcbfOG5ycR7F1wkVD0u
+ oxTAOPsNrCKHtQVyEXm6uAx9eTUIoNkBllD9S3lSeXyuhCLFrMOlZfA9Bp05/pcxGezd
+ D/7HtylROycRN1cRS6qTzJhA+/KIu/4U/tBIzOuJrCl+IgnVt7eFVYtdOQJ8/HgRS24D
+ GcW4u+3DKSjYdNTDX4c/kEDw5ufyssUOnyH8/5Hs8UriATs1LaqJmwHrLXZcnf/QWnfm
+ vOtQoDhYNkYMcXOkf5+TpuATKJGJMXaT80dP3S8/vmNWLrp8ZyJd2A3u/qrFqkhuETsg
+ Dyng==
+X-Gm-Message-State: AOAM531wIeR1SOVNjPWl4ynPl3mckeqByc7qM/nZdbcXu+160pcyxSLz
+ ALVUolUvKpiP5iwYcsbju2I=
+X-Google-Smtp-Source: ABdhPJzJ6/9VkoHroy/MfL65k6xd4ChdwWsB8kPABYv/6g2MHbBH9jf2WMACbB3Pn6cqTLdyBSddhA==
+X-Received: by 2002:a5d:6884:: with SMTP id h4mr7439488wru.174.1610002559801; 
+ Wed, 06 Jan 2021 22:55:59 -0800 (PST)
+Received: from [192.168.1.36] (241.red-88-10-103.dynamicip.rima-tde.net.
+ [88.10.103.241])
+ by smtp.gmail.com with ESMTPSA id r16sm7047916wrx.36.2021.01.06.22.55.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 06 Jan 2021 22:55:58 -0800 (PST)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH v4] gdb: riscv: Add target description
+To: Sylvain Pelissier <sylvain.pelissier@gmail.com>, qemu-devel@nongnu.org
+Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v4] gdb: riscv: Add target description
-Date: Wed,  6 Jan 2021 21:41:41 +0100
-Message-Id: <20210106204141.14027-1-sylvain.pelissier@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+References: <20210106204141.14027-1-sylvain.pelissier@gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <e9e863ec-1f88-5d5f-ab00-da318502c321@amsat.org>
+Date: Thu, 7 Jan 2021 07:55:57 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
+In-Reply-To: <20210106204141.14027-1-sylvain.pelissier@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=sylvain.pelissier@gmail.com; helo=mail-wr1-x429.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.249,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -78,51 +85,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2021 20:41:55 -0000
+X-List-Received-Date: Thu, 07 Jan 2021 06:56:03 -0000
 
-Target description is not currently implemented in RISC-V
-architecture. Thus GDB won't set it properly when attached.
-The patch implements the target description response.
+On 1/6/21 9:41 PM, Sylvain Pelissier wrote:
+> Target description is not currently implemented in RISC-V
+> architecture. Thus GDB won't set it properly when attached.
+> The patch implements the target description response.
+> 
+> Signed-off-by: Sylvain Pelissier <sylvain.pelissier@gmail.com>
+> Reviewed-by: Bin Meng <bin.meng@windriver.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.c | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
 
-Signed-off-by: Sylvain Pelissier <sylvain.pelissier@gmail.com>
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 254cd83f8b..ed4971978b 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -556,6 +556,18 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-+static gchar *riscv_gdb_arch_name(CPUState *cs)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-+
-+    if (riscv_cpu_is_32bit(env)) {
-+        return g_strdup("riscv:rv32");
-+    } else {
-+        return g_strdup("riscv:rv64");
-+    }
-+}
-+
- static void riscv_cpu_class_init(ObjectClass *c, void *data)
- {
-     RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
-@@ -591,6 +603,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     /* For now, mark unmigratable: */
-     cc->vmsd = &vmstate_riscv_cpu;
- #endif
-+    cc->gdb_arch_name = riscv_gdb_arch_name;
- #ifdef CONFIG_TCG
-     cc->tcg_initialize = riscv_translate_init;
-     cc->tlb_fill = riscv_cpu_tlb_fill;
--- 
-2.25.1
-
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
