@@ -1,57 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kxYrT-00010V-48
-	for mharc-qemu-riscv@gnu.org; Thu, 07 Jan 2021 12:14:11 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48406)
+	id 1kxYrX-00017A-1J
+	for mharc-qemu-riscv@gnu.org; Thu, 07 Jan 2021 12:14:15 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48458)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <keithp@vr.keithp.com>)
- id 1kxYrO-0000t4-Kl; Thu, 07 Jan 2021 12:14:06 -0500
-Received: from home.keithp.com ([63.227.221.253]:55618 helo=elaine.keithp.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <keithp@vr.keithp.com>)
- id 1kxYrL-0001pg-KI; Thu, 07 Jan 2021 12:14:06 -0500
-Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id 6DD2A3F2E315;
- Thu,  7 Jan 2021 09:07:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1610039246; bh=9BOTQrPtZFuoNkEto83jhRHuzrY24cMlHGqNa4OHSIY=;
- h=From:To:Cc:Subject:Date:From;
- b=gNDedzCS515exhvhhtzTot0CtnkZW1iSO1ZPFPPrW5m/Ib9ji6Fo1jHJEWY1uBSRu
- RNOoegtnZOJnL4ZjlMIJyST5YFHVcLGWdbeVx8YD4EkUHGAr+bdOmeAX8i156tLxMp
- elI6gvNOQ6eef+NF3QnqBKBCDBE4x1p+yPzwvh9nkbIdyoRMzUOOl6ctiaxVFDSfCv
- lJ0NJ5SPm8jO/UFXT1C8DcPE3ewqr5NsMk2p+raA75NrtNl0fAZ/m/8jXdLW7uwrjF
- oJ+LxSQHOgutqov+a86WKz5XkF37+TqGZ2A6qutRriTAvUum6GAqgfmgvVcfP21M5I
- uAWoyrEew4yBA==
-X-Virus-Scanned: Debian amavisd-new at keithp.com
-Received: from elaine.keithp.com ([127.0.0.1])
- by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id JrZe3ojHtXJn; Thu,  7 Jan 2021 09:07:26 -0800 (PST)
-Received: from vr.keithp.com (vr.keithp.com [10.0.0.39])
- by elaine.keithp.com (Postfix) with ESMTP id E5CE53F2E325;
- Thu,  7 Jan 2021 09:07:23 -0800 (PST)
-Received: by vr.keithp.com (Postfix, from userid 1000)
- id 65703742C81; Thu,  7 Jan 2021 09:07:23 -0800 (PST)
-From: Keith Packard <keithp@keithp.com>
-To: qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org, Sagar Karandikar <sagark@eecs.berkeley.edu>
-Subject: [PATCH 0/9] Add RISC-V semihosting 0.2. Finish ARM semihosting 2.0
-Date: Thu,  7 Jan 2021 09:07:08 -0800
-Message-Id: <20210107170717.2098982-1-keithp@keithp.com>
-X-Mailer: git-send-email 2.29.2
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kxYrU-00011c-FI; Thu, 07 Jan 2021 12:14:12 -0500
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:33584)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kxYrS-0001uR-Nt; Thu, 07 Jan 2021 12:14:12 -0500
+Received: by mail-il1-x12a.google.com with SMTP id n9so7464416ili.0;
+ Thu, 07 Jan 2021 09:14:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=CsY937zNikLFI8/eQaFn4+ntRoKacSOmhDOC4WYtSJY=;
+ b=jv4lrxA5iwPlf9hlKYAXNsgpUsc+6v7sG44hB8C+KVikv1buv3p69sRJYAK907uIA3
+ YSTFIdmFr648FIYkVMm/IXBW9VbQmBNlX7mfmhBn/TdiVi9OUFD977f2wQ4VkatrXvh3
+ d9okSflqMbfoUR/j7IaLLIF7OM6sso5M7IQAXYWnWDnmhvoEAk4tozygMDH/RzuL6GOM
+ cTNss/0lhKO6kMAuQsKIW1ZmUiOHkocR1iFo11j5ls8mz9LyXqFHa6R3QAPd6CZsGeq4
+ 9VnUCtw5acDGtFqUVza6kGR+tfbxb7dbOPWeMXrTc9Vk01WTzoLF3l04sqD1zIICuiwN
+ 87yQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=CsY937zNikLFI8/eQaFn4+ntRoKacSOmhDOC4WYtSJY=;
+ b=BFm8Q5Tp5uGTdQWk2nXSQOolZqo0PE+EOYe1cSbUOVLKCXSMkWDMyv4+30bCgs61ax
+ +mXn0ku3xWS3IsD+XhGcJcbHInL2iGtN6Toc/glpJDF0rUOI5hr+4jszgaMK4+kyFfxK
+ ao7zZrIqlDamJUU7JrqsRGdDKWqRR+oxuwFVusCaZZhZzcpCxixHOvBA4CjQ6UWleuM7
+ yJCJFYjWMVKwBK7IsMVFzu8MK5ItELLONxcJeELLjd5bFBT9N3XDSKp3Jyf7g9kKhHtw
+ kMnZGb/X4hkgjScL7ueRpENSC4NYB2mEx7F8HBN0V4I5ZZqVBpF5x+MhpLFoIgj7uGEe
+ x4Mw==
+X-Gm-Message-State: AOAM530cwPbXmB/G1IdTKIk5cNEvDw6W+iNF4TYTwaH76MKozqbL7wuz
+ rxCt7QSN+6XcSDYSeWiXgnXhVBgp6NuQ4NDWiLc=
+X-Google-Smtp-Source: ABdhPJzV99gxITny2DN2PNx8OYDV8tHIs7Bs8ILIJstyEn/WiPH7d5bvFA5HjLrPdzxutlHyTL8+jZl9QEWR4IM7HJ0=
+X-Received: by 2002:a05:6e02:ca5:: with SMTP id 5mr9909621ilg.40.1610039649317; 
+ Thu, 07 Jan 2021 09:14:09 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=63.227.221.253; envelope-from=keithp@vr.keithp.com;
- helo=elaine.keithp.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+References: <20210107091127.3407870-1-atish.patra@wdc.com>
+In-Reply-To: <20210107091127.3407870-1-atish.patra@wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 7 Jan 2021 09:13:42 -0800
+Message-ID: <CAKmqyKPKDx9oW0k_TEPHVtBGW+9-BvWzaq19ug+jgsBOG9LT_g@mail.gmail.com>
+Subject: Re: [v2 PATCH] RISC-V: Place DTB at 3GB boundary instead of 4GB
+To: Atish Patra <atish.patra@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -64,38 +74,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2021 17:14:09 -0000
+X-List-Received-Date: Thu, 07 Jan 2021 17:14:13 -0000
 
-This series adds support for RISC-V Semihosting, version 0.2 as
-specified here:
+On Thu, Jan 7, 2021 at 1:11 AM Atish Patra <atish.patra@wdc.com> wrote:
+>
+> Currently, we place the DTB at 2MB from 4GB or end of DRAM which ever is
+> lesser. However, Linux kernel can address only 1GB of memory for RV32.
+> Thus, it can not map anything beyond 3GB (assuming 2GB is the starting address).
+> As a result, it can not process DT and panic if opensbi dynamic firmware
+> is used. While at it, place the DTB further away to avoid in memory placement
+> issues in future.
+>
+> Fix this by placing the DTB at 16MB from 3GB or end of DRAM whichever is lower.
+>
+> Fixes: 66b1205bc5ab ("RISC-V: Copy the fdt in dram instead of ROM")
+>
+> Reviewed-by: Bin Meng <bin.meng@windriver.com>
+> Tested-by: Bin Meng <bin.meng@windriver.com>
+> Signed-off-by: Atish Patra <atish.patra@wdc.com>
 
-	https://github.com/riscv/riscv-semihosting-spec/releases/tag/0.2
+Thanks!
 
-This specification references the ARM semihosting release 2.0 as
-specified here:
+Applied to riscv-to-apply.next
 
-	https://static.docs.arm.com/100863/0200/semihosting.pdf
+Alistair
 
-That specification includes several semihosting calls which were not
-previously implemented. This series includes implementations for the
-remaining calls so that both RISC-V and ARM versions are now complete.
-
-Tests for release 2.0 can be found in picolibc on the semihost-2.0-all
-branch:
-
-	https://github.com/picolibc/picolibc/tree/semihost-2.0-all
-
-These tests uncovered a bug in the SYS_HEAPINFO implementation for
-ARM, which has been fixed in this series as well.
-
-The series is structured as follows:
-
- 1. Move shared semihosting files
- 2. Change public common semihosting APIs
- 3. Change internal semihosting interfaces
- 4. Fix SYS_HEAPINFO crash on ARM
- 5-6. Add RISC-V semihosting implementation
- 7-9. Add missing semihosting operations from release 2.0
-
-
+> ---
+> Changes from v2->v1
+> 1. Added the fixes tag and updated aligned down address to 16MB.
+> ---
+>  hw/riscv/boot.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index d62f3dc7581e..2ed23c7e9849 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -202,11 +202,11 @@ uint32_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
+>      /*
+>       * We should put fdt as far as possible to avoid kernel/initrd overwriting
+>       * its content. But it should be addressable by 32 bit system as well.
+> -     * Thus, put it at an aligned address that less than fdt size from end of
+> -     * dram or 4GB whichever is lesser.
+> +     * Thus, put it at an 16MB aligned address that less than fdt size from the
+> +     * end of dram or 3GB whichever is lesser.
+>       */
+> -    temp = MIN(dram_end, 4096 * MiB);
+> -    fdt_addr = QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
+> +    temp = MIN(dram_end, 3072 * MiB);
+> +    fdt_addr = QEMU_ALIGN_DOWN(temp - fdtsize, 16 * MiB);
+>
+>      fdt_pack(fdt);
+>      /* copy in the device tree */
+> --
+> 2.25.1
+>
+>
 
