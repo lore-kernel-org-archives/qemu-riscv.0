@@ -1,70 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ky2Mp-0002VD-0s
-	for mharc-qemu-riscv@gnu.org; Fri, 08 Jan 2021 19:44:31 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43384)
+	id 1kyFMN-0002AP-C8
+	for mharc-qemu-riscv@gnu.org; Sat, 09 Jan 2021 09:36:55 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42710)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1ky2Mn-0002Uu-V2; Fri, 08 Jan 2021 19:44:30 -0500
-Received: from home.keithp.com ([63.227.221.253]:35078 helo=elaine.keithp.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <keithp@keithp.com>)
- id 1ky2Mi-0007jS-7d; Fri, 08 Jan 2021 19:44:29 -0500
-Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id 670433F2E5B0;
- Fri,  8 Jan 2021 16:44:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1610153058; bh=kUjl9mivrTbW/TkqoczqwjF/nkzL3deTzPeVcgh3t9s=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=JgJVg/oE5zhxCJCa45olcsjGPSnNqcFtemH7RZXZPGTZzX+epsRqiFEe8QVwhzRy6
- b/qbjXECBrVe2GI9xHALFyqAGftOEUI0OMLTdA97huBr9vVK9sfm8iZUpN7bT2adAt
- tU+25myoHvqxmDt8GJ8P099e/9KiQecH9i16+H2OyraVLfm+euWRqBx5dWMij9yuYd
- SduuSU/yLN7Qjvasr52hKUl5iF39/FfZSNFwcL4hztLstddVGRbEr+Fg9CA1FEF0Gh
- jOf6ptRai3OzFTFiTniJXkUXX4ZaJsKTXhtTYqNVwYPlGG/fxqqZPWSh1W4p5hReUv
- lKwZgGorRQ4vA==
-X-Virus-Scanned: Debian amavisd-new at keithp.com
-Received: from elaine.keithp.com ([127.0.0.1])
- by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id iadNZGcf4_Yx; Fri,  8 Jan 2021 16:44:18 -0800 (PST)
-Received: from keithp.com (koto.keithp.com [10.0.0.2])
- by elaine.keithp.com (Postfix) with ESMTPSA id EA6F53F2E38B;
- Fri,  8 Jan 2021 16:44:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
- t=1610153057; bh=kUjl9mivrTbW/TkqoczqwjF/nkzL3deTzPeVcgh3t9s=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=qaP/3UvyNU/CyEDT9B02YJrFj8MnsehX95BxLqk5Oe6Idto2xDX6vdY6UN2wXhHhC
- KJZAiTTEeozZoaZN8Lbb+z7btpHhzkVkWVs5w2saA2o+Gv0yVoVsoDX+SaOAF2sxTC
- W/Sd4ozLXsn0Bbu8PYd/I34t0rnVILlrL+ndBIsfsb3B7ZA0TLGQ2tx8dYwxZEuWxa
- t3fxYvu4ap4oAmFjco2EPkFOoiS3onfELR1ghRmmDU52OIVSPd/eaqraSSBo6K4wkf
- BxkbiLqGk9/9n++PGkx0nDOMJmh7m0ypfAioggRAdct0moySiyoczvtBoEQNwScYJM
- u2Yg5wiNZgh1Q==
-Received: by keithp.com (Postfix, from userid 1000)
- id B68CC15821D9; Fri,  8 Jan 2021 16:44:17 -0800 (PST)
-From: Keith Packard <keithp@keithp.com>
-To: Alistair Francis <alistair23@gmail.com>, Alex =?utf-8?Q?Benn=C3=A9e?=
- <alex.bennee@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, "open
- list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>, Sagar Karandikar
- <sagark@eecs.berkeley.edu>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>, Laurent Vivier <laurent@vivier.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <Alistair.Francis@wdc.com>
-Subject: Re: [PATCH v1 16/20] riscv: Add semihosting support
-In-Reply-To: <CAKmqyKOLLXqjeGO6-k1d_Y_23Q5Tt1uKYUUwCjPDPPMJB3GXVQ@mail.gmail.com>
-References: <20210108224256.2321-1-alex.bennee@linaro.org>
- <20210108224256.2321-17-alex.bennee@linaro.org>
- <CAKmqyKOLLXqjeGO6-k1d_Y_23Q5Tt1uKYUUwCjPDPPMJB3GXVQ@mail.gmail.com>
-Date: Fri, 08 Jan 2021 16:44:17 -0800
-Message-ID: <87wnwnndlq.fsf@keithp.com>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kyFMM-0002AD-Hd; Sat, 09 Jan 2021 09:36:54 -0500
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:39105)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1kyFMK-0007pD-Vj; Sat, 09 Jan 2021 09:36:54 -0500
+Received: by mail-pj1-x1035.google.com with SMTP id u4so6138494pjn.4;
+ Sat, 09 Jan 2021 06:36:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=x+/f3Rkx1WiTjN9Uya3IVr0xy3ZcyobycCTMjhcA/vs=;
+ b=C+XwxdAwFdNPK9P34XFfinIU0rlo16efNtuyxC3+nul7jRg6nT4CEGxmCBk2br2Py8
+ sPHVDFWs+HXfqfOTKY4rnE6MKHuCyZ/LlI7XtG06DI82o9ATxehleitouSGKq6v8hv5O
+ gf8zrhRGofu4L19GzwBpE+/n8gzwNrWVRtar4iM/EIrJ8SWUroqkv9aELqhsnojCttBJ
+ 9heZgojtYpXfEpW/Wu5LYMa7K+2ooM3+5ILF2x1XGPIWd9nDIrqONg4JCh9p93sBiu9o
+ AoXq5MnY7+aoYNK7p+9OlGbXHNV6Tn5nM6mFUXqD0CKcfw222Fmhiq3bYeTy6ICgjw/S
+ Ukfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=x+/f3Rkx1WiTjN9Uya3IVr0xy3ZcyobycCTMjhcA/vs=;
+ b=o0/4o9bQcv7Qmiqm+D+kRRlVnV6EKIgB70v7UKrSyMHosqWsbZqL4/dUeVLejo59v2
+ 1M5EbV7SmpqdDl/bk+ywCaS89mPlEX/J3P7lqErYIqhPcZtf11dwINQ2o2ZPoQvk4DD5
+ bIXehE4XN1WpFUKGVsbe13haOOtwLSUZQZD0iTo1C/5edan+IOnVdEBDjsp4XLpqyIF8
+ So6twcxdWgQJzqzHXRUfIRh+qPiR7XFVMcwQDiVcTPt+yAWRonhRghUX0CKq2D2RtOEu
+ f0JYS9y4MbL4M1sGbq+VRmHvuZkyMvZnGDi7T6Rvf2EmD3p5mA6XtmmCywK+S0dsXv70
+ PvDg==
+X-Gm-Message-State: AOAM530nh6S80g19D8zSuK6vSB3HrWNrjgR3941bIPFuGGpZgJxiEvRv
+ 3FyKHmq4/fpK0ubU4bAQcfc=
+X-Google-Smtp-Source: ABdhPJyTb8Bkajm/Hx5CYui/U9WS9LNnaPk8lGDFENEyEJvE8AO0IcTrNLq06VxohDPFJZWrvfUoUw==
+X-Received: by 2002:a17:90b:3c7:: with SMTP id
+ go7mr8887048pjb.188.1610203011303; 
+ Sat, 09 Jan 2021 06:36:51 -0800 (PST)
+Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
+ [144.168.56.201])
+ by smtp.gmail.com with ESMTPSA id 37sm8820041pjz.41.2021.01.09.06.36.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 09 Jan 2021 06:36:50 -0800 (PST)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH] hw/riscv: sifive_u: Use SIFIVE_U_CPU for mc->default_cpu_type
+Date: Sat,  9 Jan 2021 22:36:37 +0800
+Message-Id: <20210109143637.29645-1-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="=-=-=";
- micalg=pgp-sha256; protocol="application/pgp-signature"
-Received-SPF: pass client-ip=63.227.221.253; envelope-from=keithp@keithp.com;
- helo=elaine.keithp.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -78,40 +74,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Jan 2021 00:44:30 -0000
+X-List-Received-Date: Sat, 09 Jan 2021 14:36:54 -0000
 
---=-=-=
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+From: Bin Meng <bin.meng@windriver.com>
 
-Alistair Francis <alistair23@gmail.com> writes:
+SIFIVE_U_CPU is conditionally set to SIFIVE_U34 or SIFIVE_U54, hence
+there is no need to use #idef to set the mc->default_cpu_type.
 
-> Whoops, I thought I had already reviewed this commit.
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+---
 
-You had provided quite extensive review with lots of useful comments,
-but never added the magic tag for this commit :-)
+ hw/riscv/sifive_u.c | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-=2D-=20
-=2Dkeith
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index f5c400dd44..e083510e0e 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -628,11 +628,7 @@ static void sifive_u_machine_class_init(ObjectClass *oc, void *data)
+     mc->init = sifive_u_machine_init;
+     mc->max_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + SIFIVE_U_COMPUTE_CPU_COUNT;
+     mc->min_cpus = SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
+-#if defined(TARGET_RISCV32)
+-    mc->default_cpu_type = TYPE_RISCV_CPU_SIFIVE_U34;
+-#elif defined(TARGET_RISCV64)
+-    mc->default_cpu_type = TYPE_RISCV_CPU_SIFIVE_U54;
+-#endif
++    mc->default_cpu_type = SIFIVE_U_CPU;
+     mc->default_cpus = mc->min_cpus;
+ 
+     object_class_property_add_bool(oc, "start-in-flash",
+-- 
+2.25.1
 
---=-=-=
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAl/4/GEACgkQ2yIaaQAA
-ABFsqg/+K59HEjdV86AzCVB6pUIY/QPySX8+gqRhTVsnWJX8NAZtVWCz2WeOClVs
-wZY9C6W71cDOanHEgl1QS8NoHJ1o73HEUZODIkjrrTEKDzpUKawCoaCTVnVqZRTU
-cPrVfyq+GCnnVrBofB4pSxtbKU2axBYTu8seKyyDND0Z2lmtappeb2X5l1SzZaRx
-P3s/1gh1ccafES7+5cD9EoyAJ36JQo/a8fOHoOiiLq7DdPRlIXmee5keOjCDILOF
-KEp/6iZ157TvhNb7MBzHGKdSUvwNAsAwxQc3GoT637ryIGaeS4K0Bhf3rlgI3X/C
-URVOZ4VgdLfE7AF/fW87hm2R2s0j2hCxZha/yS1m1gqNtJDfyxAeLccJNg29XVqF
-VB8AjOTVuXAvbKo3lygcPssq63BxYO5H++1RlAJfpg0OsezSHDiMRr+RAWYinqVU
-5pm6cYBfVMYaQWGD9E4tSZhZqcyZkyFnWYCdTmeiR462agmdZwA58Uo7knEqZ3O5
-ikcqeHugbCdvC8867LSCrYzZ6UY3BUo5QfERz5uLeZ3nZDHnTbSXNQPeJ9fr7u/t
-S2nj3/cqR2CdCNzNZ3fb+/13FEU9QVfmcS71hlqJHsPAmE1J8+DkYXIQxAm95eaw
-i8EUfZ6dl2LWZvdPoaxf6Dr9Kp8aiU+KcU5KgIGtYspkft6+yyQ=
-=NlZq
------END PGP SIGNATURE-----
---=-=-=--
 
