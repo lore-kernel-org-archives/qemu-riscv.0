@@ -1,76 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kyNug-0007ng-Kc
-	for mharc-qemu-riscv@gnu.org; Sat, 09 Jan 2021 18:44:54 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42278)
+	id 1kyfoE-0004q8-Eu
+	for mharc-qemu-riscv@gnu.org; Sun, 10 Jan 2021 13:51:26 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56354)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kyNue-0007nQ-Mv; Sat, 09 Jan 2021 18:44:52 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:41263)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kyfoD-0004pv-FQ; Sun, 10 Jan 2021 13:51:25 -0500
+Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:36372)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kyNuc-0007IZ-92; Sat, 09 Jan 2021 18:44:51 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id a12so12492330wrv.8;
- Sat, 09 Jan 2021 15:44:48 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1kyfoA-0006fg-6y; Sun, 10 Jan 2021 13:51:25 -0500
+Received: by mail-lj1-x22f.google.com with SMTP id n8so1159372ljg.3;
+ Sun, 10 Jan 2021 10:51:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=m2B51YU1ND6bTL8D+R24rsL0MVIflY5eujeOzJPTZ6Y=;
- b=NkVvmTuJe9QsDe6qZGw9cluI9lLRWUyjKZ/lDa4yx6XV8oys7laL7zZR6p9Y2PZc0T
- vp/EqjzbkUPpriG9IsvJLWtACP6VFlU0YACDgz/QLFrC6SVWZ+PHr+DD4BWs1SEMD5iU
- Rijf57D5rBvhsuIja8tyFHe4fLFqVm6isE281ts2gtwkGKlhG90xI/5HZE4PH2lGq6pd
- 2YPHBcShGRff15FoJ4YG+3V71lbjBAyrDUdEFPtWzt1Ah6p5ZeYi/ltc0gks+KJmZyEe
- Wh8y3lDMRhrpkkpDV663OvnCBkhJXglNDti0FvMaXn2E+nL7/uaLceuQqnrIEYcxxA+t
- BCBg==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=OLYCNaD1iAezRjF/bdaLD6qUBIumyCukv8S+0GP2ZGE=;
+ b=iaRrQ4/AQG0F86VuYlIyuLNgHBAVP1XdIEZbHPOvT0kj4lB8ESt9x6W9l6VO0hhhyU
+ Z7LjaBzSoQAAGPvlhtjXAOgi9XAINfhyN6c05clZSp/DChrtL8HXdL/Y41hWnDlYNDrm
+ NdmqdV/io9iDGLzS2pa8ajv33Ye2CsWUBmt6iGCF7wOOz5+SZv+JXdcYUuwzAnLzOisE
+ DQrn58fC02/MrfcaOzCLQqYjMh4A8KIPNNCz2980byNCeQvS59gVnVrO1//ddiGV5VGQ
+ 0nbiYBvM9Xp46pqUb1jdGER8jOlyCNZZSbpexP/9bwtYPSAX6ie9BuQU1QndtExKHiii
+ Zfow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=m2B51YU1ND6bTL8D+R24rsL0MVIflY5eujeOzJPTZ6Y=;
- b=dFY3HXfv99c/goFOnDbNAbhP9zorosU9oRhC1QcZC2L23lz6jyNRvYXJMJDrNN0I6Q
- S3LiaX4wQgyMumsp3CP8lxcMF+IufEm4teO1szYg6LJ5pnLrlh90Tl5iOzF9IaF7nJXI
- cRs85hiRlR10KTm8z7OMURe6MrzxkzYw554l5dVS/aPRHarGo22nUmptKw7fjVQNG7Xo
- ceDGIfTtpEpCp+jyMQLjSevRIqf1SzpVG60/YGdyYIxEJ00Ubsq2zqcrpTEEpWMJMkYY
- p8ESrH0zHKZH80zX0Zza+iI1iFFn7baEXk3UHsV0hsH6NFkpzhkxww6E3ng7ElZ27Xcm
- cZJQ==
-X-Gm-Message-State: AOAM533W5yGi/bmyGKzs5keqB0sIQvss7KOlf93h1XDiz000fm3mPDL2
- 1gVLIAVx+ZVCdM1ubzIRbdq1yk1yTjM=
-X-Google-Smtp-Source: ABdhPJxn3ebwGT64KKY3pcR3a1/WYYorY0G+S94Nv9olgAB90WQJj+qAujpY1HMHCOgi9vj3r2AqDg==
-X-Received: by 2002:adf:d085:: with SMTP id y5mr10127441wrh.41.1610235887683; 
- Sat, 09 Jan 2021 15:44:47 -0800 (PST)
-Received: from [192.168.1.36] (129.red-88-21-205.staticip.rima-tde.net.
- [88.21.205.129])
- by smtp.gmail.com with ESMTPSA id g192sm16852469wme.48.2021.01.09.15.44.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 09 Jan 2021 15:44:46 -0800 (PST)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH] hw/riscv: sifive_u: Use SIFIVE_U_CPU for
- mc->default_cpu_type
-To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
- <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>
-References: <20210109143637.29645-1-bmeng.cn@gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <cc2521ed-9fb7-bd0a-6275-3e90cd6418f6@amsat.org>
-Date: Sun, 10 Jan 2021 00:44:45 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=OLYCNaD1iAezRjF/bdaLD6qUBIumyCukv8S+0GP2ZGE=;
+ b=tnw0Jg75lO/tJqs8aVrcpPMChwfs7mjQsPQJ5BSzZlqkAIwvPpWsn8BsqVIBVvLYRC
+ TmFSY9otYAvjjq6p1D/Q7Hhc8FIXU/8A5AbprK4RBQk0M39m6dG2UTUw6SFrw/DhhJka
+ qZq8F/42EP+wqz6IGtQaYhzAEBbz5o4q91oN3GWyWgJ2Xl4krTikhDFe2qEcTwoxLKHL
+ i0W11LLFgRDXTnWzq9P8HXNibmhV476gyEIyjlQCU+3AJsFYPAZV3elyFnPsUPdO9YWs
+ /KFW9VXy3/Td/TUt/fFAfr3Sah37WFBCUDrdNXJZrHcV1zrXR4LDf/MManE5jrX23/rt
+ dwHg==
+X-Gm-Message-State: AOAM530fnl8KxHu4kV1XEmZe2Cxax195HPOnF+DeYerh/ekLVNCdl10d
+ 73hj5dgUPEg6NKG/+tLVGcA=
+X-Google-Smtp-Source: ABdhPJyRPvoqqzDldGlwd+DhUFTKCJTk16IVAnHX4pKV9UXjugxbDlI88++VbuRXVXeR6fyfkDiEzQ==
+X-Received: by 2002:a2e:9988:: with SMTP id w8mr5565746lji.107.1610304679689; 
+ Sun, 10 Jan 2021 10:51:19 -0800 (PST)
+Received: from neptune.lab ([46.39.229.36])
+ by smtp.googlemail.com with ESMTPSA id l1sm2795267lfk.201.2021.01.10.10.51.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 10 Jan 2021 10:51:19 -0800 (PST)
+From: Alexey Baturo <baturo.alexey@gmail.com>
+X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v7 1/6] [RISCV_PM] Add J-extension into RISC-V
+Date: Sun, 10 Jan 2021 21:51:04 +0300
+Message-Id: <20210110185109.29841-2-space.monkey.delivers@gmail.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210110185109.29841-1-space.monkey.delivers@gmail.com>
+References: <20210110185109.29841-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20210109143637.29645-1-bmeng.cn@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-0.255,
+Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lj1-x22f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -83,19 +78,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Jan 2021 23:44:53 -0000
+X-List-Received-Date: Sun, 10 Jan 2021 18:51:26 -0000
 
-On 1/9/21 3:36 PM, Bin Meng wrote:
-> From: Bin Meng <bin.meng@windriver.com>
-> 
-> SIFIVE_U_CPU is conditionally set to SIFIVE_U34 or SIFIVE_U54, hence
-> there is no need to use #idef to set the mc->default_cpu_type.
-> 
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> ---
-> 
->  hw/riscv/sifive_u.c | 6 +-----
->  1 file changed, 1 insertion(+), 5 deletions(-)
+Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/cpu.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 6339e84819..d152842e37 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -72,6 +72,7 @@
+ #define RVS RV('S')
+ #define RVU RV('U')
+ #define RVH RV('H')
++#define RVJ RV('J')
+ 
+ /* S extension denotes that Supervisor mode exists, however it is possible
+    to have a core that support S mode but does not have an MMU and there
+@@ -285,6 +286,7 @@ struct RISCVCPU {
+         bool ext_s;
+         bool ext_u;
+         bool ext_h;
++        bool ext_j;
+         bool ext_v;
+         bool ext_counters;
+         bool ext_ifencei;
+-- 
+2.20.1
+
 
