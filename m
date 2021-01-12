@@ -1,63 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kzBfc-00019A-CO
-	for mharc-qemu-riscv@gnu.org; Mon, 11 Jan 2021 23:52:40 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51604)
+	id 1kzBhz-0003je-OJ
+	for mharc-qemu-riscv@gnu.org; Mon, 11 Jan 2021 23:55:08 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52114)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kzBfU-00016i-UQ; Mon, 11 Jan 2021 23:52:34 -0500
-Received: from mail-qt1-x832.google.com ([2607:f8b0:4864:20::832]:47085)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kzBhv-0003g8-VC
+ for qemu-riscv@nongnu.org; Mon, 11 Jan 2021 23:55:04 -0500
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434]:32842)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kzBfP-0001mB-1p; Mon, 11 Jan 2021 23:52:32 -0500
-Received: by mail-qt1-x832.google.com with SMTP id h19so817837qtq.13;
- Mon, 11 Jan 2021 20:52:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=QgX6agwUnQmnYZ6ZfDECac9t1Naxg5gpQKV07AZuIAk=;
- b=teZe3iVs0RJFo1SVmfN1EKHVWoxaCryepQg+ea5w55pqt6OBNJsDnYwR9tZc/RRQaf
- bXJSmq8ANXMc5Gs+pjdB5vRbmfndCfossdfAdfs9v1zlZgZEUw9Azc2eClVMYqx8WQDX
- SGnvXrMN4RWRQJZmHES5QM/xlBfTMHJ36v0ZWEg53+RNQc/N/Ug0nXb/c0oCikO3HO0/
- IPqvjCsJzjZsmvgafzG5r9w3xVquDv7tm6DAgtfFir5JLsunj4EzBmI9AAjhsSlw70h5
- vvxNQqxv5uH12dap8tClYzHb3v3qZECGpkhy9pmzmVpG+d97sfSFNBoSwJjsy3c+BA1U
- yNnA==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kzBhs-0002hL-4O
+ for qemu-riscv@nongnu.org; Mon, 11 Jan 2021 23:55:03 -0500
+Received: by mail-pf1-x434.google.com with SMTP id h186so677784pfe.0
+ for <qemu-riscv@nongnu.org>; Mon, 11 Jan 2021 20:54:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=T/UNCIXKrjvOHulEfNmJpqF+Gdm49aMF19TLIaNs8DY=;
+ b=dUTJKJCtKGdznCcHYJxM3/7tfFt/UfTq4tszSud7KRl/rX3OnDwRoYvZFICL6YYxr5
+ KMcuUJZXvPlYNobA5uKpELl0xyIRCARajkOdOz6bFwBDl455aqx82K92X3TWIYqHF5ED
+ TO4YNjC1bTdbL9BDxJcBlghxc+1NXLM3RS5ZQel/73B3y0FnKGv/g9lFDGi5uiUAwLvR
+ dLsafEpdILBLRVb4DcYRUW3qYyzWoPhngFWnbkso4fd3WjHgZ9NyYfRw8NgVteqHerms
+ /ty1NVQzHNBzLApLUmCXoG883HkBEFZVeLhs0X/RO3oz6txcVudGsbMbjOSSRGVSuI2O
+ KjrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=QgX6agwUnQmnYZ6ZfDECac9t1Naxg5gpQKV07AZuIAk=;
- b=bn5awZjAWPfnKEbvtrZZzjTo8euWDkDCQUzJB2/KOc2VTDxRZwYZJw82Uvew/h1Gkq
- e1hi/rVUayGxDyHjXEUu6h0MklRLK2YfjKl5DfZoScBd9ZUbw4j2FW6UCt4JBQ6RWVgC
- utCEsnrUdWQ7wWvH1tU4vRibjAesEJ7vBZNFeczcI0UHnRbyeCMoT+G952Fd0/lCEuy1
- TPNuel4YmGZAeq34l6Ig2JFSKJZdYBk+0GLNaB4L0KOsFdPm1g+evJNmwzkoLYflYk/A
- yuWbXaxiLdwP6j5VOyuGra6SrUTFcOukJ2gVg4NJnPnHYKAZyFtTbkzlL3eYL1ZQmGyO
- 9ujQ==
-X-Gm-Message-State: AOAM532mftQg0hPrzdNpClJPGr7L95hJE8sGyPdTE1dZt6A+nfPQD3gB
- oJVLU3a9MV+Ktwa+mWuOv9M=
-X-Google-Smtp-Source: ABdhPJwNgwq5lHpqyMJsYmVUEVkCWeqM7aj7QGthwRDsTJex3TWOJCXc3pvGtAVDLruLi8idy7UD4Q==
-X-Received: by 2002:aed:3bfb:: with SMTP id s56mr2919478qte.109.1610427145584; 
- Mon, 11 Jan 2021 20:52:25 -0800 (PST)
-Received: from pek-vx-bsp2.wrs.com (unknown-124-94.windriver.com.
- [147.11.124.94])
- by smtp.gmail.com with ESMTPSA id b67sm863814qkc.44.2021.01.11.20.52.21
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 11 Jan 2021 20:52:25 -0800 (PST)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Jim Wilson <jimw@sifive.com>, Alistair Francis <alistair.francis@wdc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 4/4] target/riscv: Remove built-in GDB XML files for CSRs
-Date: Tue, 12 Jan 2021 12:52:04 +0800
-Message-Id: <1610427124-49887-5-git-send-email-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1610427124-49887-1-git-send-email-bmeng.cn@gmail.com>
-References: <1610427124-49887-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::832;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qt1-x832.google.com
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=T/UNCIXKrjvOHulEfNmJpqF+Gdm49aMF19TLIaNs8DY=;
+ b=p7TilGE8bK0ottcObsy30diwwnXoPOI/s20hm/s3G6GqRAYVAJO2u198PghmAq2Qe7
+ SLpEyFAL0vYWUHHYjpCGjAV0ftF9jUYxAFu1Xz3BKfvSBXA0Y1TRZb29vu1fojOKsuv6
+ hoZwwNI4b/f8okaq5H6JyadnZKtXdJEEpLccGW6w8eCtvb7trf1ed86OVCP6Aupu5zTS
+ ebOR+vDvjMSUVRb5XUNUcTS2XfzhHJR9nIsCxKpyz+j2BP1ayU1KTk3KhGCy5IMO5pw/
+ mBbFWcLdBSlYxut/BZtG1AygyGxXWzrth8ol2n3ab3xWdGbgbmEHFlzat+jsVELmp3kt
+ tN9A==
+X-Gm-Message-State: AOAM531vausFZMc9uzcErHJ28z7vz6z2QV2IgchN8icnSw41cIdBP7SC
+ ywsKpcpsO+JtS9lrHrq8bCP5ZQ==
+X-Google-Smtp-Source: ABdhPJwMUwJPqXOlLt7SYMffL7Y3Re8w7vLPi750c3pUYGn08pHwUbeaHWAQLw3Bnvwi0Mmv+/+7Ow==
+X-Received: by 2002:a62:1c16:0:b029:1a6:8b06:68e9 with SMTP id
+ c22-20020a621c160000b02901a68b0668e9mr2769101pfc.45.1610427298413; 
+ Mon, 11 Jan 2021 20:54:58 -0800 (PST)
+Received: from [10.25.18.36] (rrcs-173-197-107-21.west.biz.rr.com.
+ [173.197.107.21])
+ by smtp.gmail.com with ESMTPSA id t5sm1161137pjr.22.2021.01.11.20.54.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 Jan 2021 20:54:57 -0800 (PST)
+Subject: Re: [RFC v3 08/16] target/riscv: add gen_shifti() and gen_shiftiw()
+ helper functions
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20210112022001.20521-1-frank.chang@sifive.com>
+ <20210112022001.20521-9-frank.chang@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <2d0f3c27-8f0d-1386-7ab0-9e6e5e1a6c53@linaro.org>
+Date: Mon, 11 Jan 2021 18:54:54 -1000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <20210112022001.20521-9-frank.chang@sifive.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -72,582 +86,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2021 04:52:35 -0000
+X-List-Received-Date: Tue, 12 Jan 2021 04:55:04 -0000
 
-From: Bin Meng <bin.meng@windriver.com>
+On 1/11/21 4:19 PM, frank.chang@sifive.com wrote:
+>  static bool trans_slli(DisasContext *ctx, arg_slli *a)
+>  {
+> -    if (a->shamt >= TARGET_LONG_BITS) {
+> -        return false;
+> -    }
+> -
+>      if (a->rd != 0) {
+> -        TCGv t = tcg_temp_new();
+> -        gen_get_gpr(t, a->rs1);
+> -
+> -        tcg_gen_shli_tl(t, t, a->shamt);
+> -
+> -        gen_set_gpr(a->rd, t);
+> -        tcg_temp_free(t);
+> +        return gen_shifti(ctx, a, tcg_gen_shl_tl);
+>      } /* NOP otherwise */
+>      return true;
+>  }
+>  
+>  static bool trans_srli(DisasContext *ctx, arg_srli *a)
+>  {
+> -    if (a->shamt >= TARGET_LONG_BITS) {
+> -        return false;
+> -    }
+> -
+>      if (a->rd != 0) {
+> -        TCGv t = tcg_temp_new();
+> -        gen_get_gpr(t, a->rs1);
+> -
+> -        tcg_gen_shri_tl(t, t, a->shamt);
+> -        gen_set_gpr(a->rd, t);
+> -        tcg_temp_free(t);
+> +        return gen_shifti(ctx, a, tcg_gen_shr_tl);
+>      } /* NOP otherwise */
+>      return true;
+>  }
+>  
+>  static bool trans_srai(DisasContext *ctx, arg_srai *a)
+>  {
+> -    if (a->shamt >= TARGET_LONG_BITS) {
+> -        return false;
+> -    }
+> -
+>      if (a->rd != 0) {
+> -        TCGv t = tcg_temp_new();
+> -        gen_get_gpr(t, a->rs1);
+> -
+> -        tcg_gen_sari_tl(t, t, a->shamt);
+> -        gen_set_gpr(a->rd, t);
+> -        tcg_temp_free(t);
+> +        return gen_shifti(ctx, a, tcg_gen_sar_tl);
+>      } /* NOP otherwise */
+>      return true;
+>  }
 
-Now that we have switched to generate the RISC-V CSR XML dynamically,
-remove the built-in hardcoded XML files.
+This removes the illegal instruction check for rd == 0.
 
-Signed-off-by: Bin Meng <bin.meng@windriver.com>
+In general you don't need the rd != 0 check, because gen_set_gpr will handle it
+(and it'll be exceedingly rare, and therefore not worth checking by hand).
 
----
 
- default-configs/targets/riscv32-linux-user.mak |   2 +-
- default-configs/targets/riscv32-softmmu.mak    |   2 +-
- default-configs/targets/riscv64-linux-user.mak |   2 +-
- default-configs/targets/riscv64-softmmu.mak    |   2 +-
- gdb-xml/riscv-32bit-csr.xml                    | 250 -------------------------
- gdb-xml/riscv-64bit-csr.xml                    | 250 -------------------------
- 6 files changed, 4 insertions(+), 504 deletions(-)
- delete mode 100644 gdb-xml/riscv-32bit-csr.xml
- delete mode 100644 gdb-xml/riscv-64bit-csr.xml
-
-diff --git a/default-configs/targets/riscv32-linux-user.mak b/default-configs/targets/riscv32-linux-user.mak
-index dfb259e..07e6ca1 100644
---- a/default-configs/targets/riscv32-linux-user.mak
-+++ b/default-configs/targets/riscv32-linux-user.mak
-@@ -1,4 +1,4 @@
- TARGET_ARCH=riscv32
- TARGET_BASE_ARCH=riscv
- TARGET_ABI_DIR=riscv
--TARGET_XML_FILES= gdb-xml/riscv-32bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-32bit-csr.xml gdb-xml/riscv-32bit-virtual.xml
-+TARGET_XML_FILES= gdb-xml/riscv-32bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-32bit-virtual.xml
-diff --git a/default-configs/targets/riscv32-softmmu.mak b/default-configs/targets/riscv32-softmmu.mak
-index 9446d96..d8b71cd 100644
---- a/default-configs/targets/riscv32-softmmu.mak
-+++ b/default-configs/targets/riscv32-softmmu.mak
-@@ -1,5 +1,5 @@
- TARGET_ARCH=riscv32
- TARGET_BASE_ARCH=riscv
- TARGET_SUPPORTS_MTTCG=y
--TARGET_XML_FILES= gdb-xml/riscv-32bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-32bit-csr.xml gdb-xml/riscv-32bit-virtual.xml
-+TARGET_XML_FILES= gdb-xml/riscv-32bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-32bit-virtual.xml
- TARGET_NEED_FDT=y
-diff --git a/default-configs/targets/riscv64-linux-user.mak b/default-configs/targets/riscv64-linux-user.mak
-index b13895f..191c2c4 100644
---- a/default-configs/targets/riscv64-linux-user.mak
-+++ b/default-configs/targets/riscv64-linux-user.mak
-@@ -1,4 +1,4 @@
- TARGET_ARCH=riscv64
- TARGET_BASE_ARCH=riscv
- TARGET_ABI_DIR=riscv
--TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-csr.xml gdb-xml/riscv-64bit-virtual.xml
-+TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-virtual.xml
-diff --git a/default-configs/targets/riscv64-softmmu.mak b/default-configs/targets/riscv64-softmmu.mak
-index d809bd6..7c0e7ee 100644
---- a/default-configs/targets/riscv64-softmmu.mak
-+++ b/default-configs/targets/riscv64-softmmu.mak
-@@ -1,5 +1,5 @@
- TARGET_ARCH=riscv64
- TARGET_BASE_ARCH=riscv
- TARGET_SUPPORTS_MTTCG=y
--TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-csr.xml gdb-xml/riscv-64bit-virtual.xml
-+TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-virtual.xml
- TARGET_NEED_FDT=y
-diff --git a/gdb-xml/riscv-32bit-csr.xml b/gdb-xml/riscv-32bit-csr.xml
-deleted file mode 100644
-index da1bf19..0000000
---- a/gdb-xml/riscv-32bit-csr.xml
-+++ /dev/null
-@@ -1,250 +0,0 @@
--<?xml version="1.0"?>
--<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
--
--     Copying and distribution of this file, with or without modification,
--     are permitted in any medium without royalty provided the copyright
--     notice and this notice are preserved.  -->
--
--<!DOCTYPE feature SYSTEM "gdb-target.dtd">
--<feature name="org.gnu.gdb.riscv.csr">
--  <reg name="ustatus" bitsize="32"/>
--  <reg name="uie" bitsize="32"/>
--  <reg name="utvec" bitsize="32"/>
--  <reg name="uscratch" bitsize="32"/>
--  <reg name="uepc" bitsize="32"/>
--  <reg name="ucause" bitsize="32"/>
--  <reg name="utval" bitsize="32"/>
--  <reg name="uip" bitsize="32"/>
--  <reg name="fflags" bitsize="32"/>
--  <reg name="frm" bitsize="32"/>
--  <reg name="fcsr" bitsize="32"/>
--  <reg name="cycle" bitsize="32"/>
--  <reg name="time" bitsize="32"/>
--  <reg name="instret" bitsize="32"/>
--  <reg name="hpmcounter3" bitsize="32"/>
--  <reg name="hpmcounter4" bitsize="32"/>
--  <reg name="hpmcounter5" bitsize="32"/>
--  <reg name="hpmcounter6" bitsize="32"/>
--  <reg name="hpmcounter7" bitsize="32"/>
--  <reg name="hpmcounter8" bitsize="32"/>
--  <reg name="hpmcounter9" bitsize="32"/>
--  <reg name="hpmcounter10" bitsize="32"/>
--  <reg name="hpmcounter11" bitsize="32"/>
--  <reg name="hpmcounter12" bitsize="32"/>
--  <reg name="hpmcounter13" bitsize="32"/>
--  <reg name="hpmcounter14" bitsize="32"/>
--  <reg name="hpmcounter15" bitsize="32"/>
--  <reg name="hpmcounter16" bitsize="32"/>
--  <reg name="hpmcounter17" bitsize="32"/>
--  <reg name="hpmcounter18" bitsize="32"/>
--  <reg name="hpmcounter19" bitsize="32"/>
--  <reg name="hpmcounter20" bitsize="32"/>
--  <reg name="hpmcounter21" bitsize="32"/>
--  <reg name="hpmcounter22" bitsize="32"/>
--  <reg name="hpmcounter23" bitsize="32"/>
--  <reg name="hpmcounter24" bitsize="32"/>
--  <reg name="hpmcounter25" bitsize="32"/>
--  <reg name="hpmcounter26" bitsize="32"/>
--  <reg name="hpmcounter27" bitsize="32"/>
--  <reg name="hpmcounter28" bitsize="32"/>
--  <reg name="hpmcounter29" bitsize="32"/>
--  <reg name="hpmcounter30" bitsize="32"/>
--  <reg name="hpmcounter31" bitsize="32"/>
--  <reg name="cycleh" bitsize="32"/>
--  <reg name="timeh" bitsize="32"/>
--  <reg name="instreth" bitsize="32"/>
--  <reg name="hpmcounter3h" bitsize="32"/>
--  <reg name="hpmcounter4h" bitsize="32"/>
--  <reg name="hpmcounter5h" bitsize="32"/>
--  <reg name="hpmcounter6h" bitsize="32"/>
--  <reg name="hpmcounter7h" bitsize="32"/>
--  <reg name="hpmcounter8h" bitsize="32"/>
--  <reg name="hpmcounter9h" bitsize="32"/>
--  <reg name="hpmcounter10h" bitsize="32"/>
--  <reg name="hpmcounter11h" bitsize="32"/>
--  <reg name="hpmcounter12h" bitsize="32"/>
--  <reg name="hpmcounter13h" bitsize="32"/>
--  <reg name="hpmcounter14h" bitsize="32"/>
--  <reg name="hpmcounter15h" bitsize="32"/>
--  <reg name="hpmcounter16h" bitsize="32"/>
--  <reg name="hpmcounter17h" bitsize="32"/>
--  <reg name="hpmcounter18h" bitsize="32"/>
--  <reg name="hpmcounter19h" bitsize="32"/>
--  <reg name="hpmcounter20h" bitsize="32"/>
--  <reg name="hpmcounter21h" bitsize="32"/>
--  <reg name="hpmcounter22h" bitsize="32"/>
--  <reg name="hpmcounter23h" bitsize="32"/>
--  <reg name="hpmcounter24h" bitsize="32"/>
--  <reg name="hpmcounter25h" bitsize="32"/>
--  <reg name="hpmcounter26h" bitsize="32"/>
--  <reg name="hpmcounter27h" bitsize="32"/>
--  <reg name="hpmcounter28h" bitsize="32"/>
--  <reg name="hpmcounter29h" bitsize="32"/>
--  <reg name="hpmcounter30h" bitsize="32"/>
--  <reg name="hpmcounter31h" bitsize="32"/>
--  <reg name="sstatus" bitsize="32"/>
--  <reg name="sedeleg" bitsize="32"/>
--  <reg name="sideleg" bitsize="32"/>
--  <reg name="sie" bitsize="32"/>
--  <reg name="stvec" bitsize="32"/>
--  <reg name="scounteren" bitsize="32"/>
--  <reg name="sscratch" bitsize="32"/>
--  <reg name="sepc" bitsize="32"/>
--  <reg name="scause" bitsize="32"/>
--  <reg name="stval" bitsize="32"/>
--  <reg name="sip" bitsize="32"/>
--  <reg name="satp" bitsize="32"/>
--  <reg name="mvendorid" bitsize="32"/>
--  <reg name="marchid" bitsize="32"/>
--  <reg name="mimpid" bitsize="32"/>
--  <reg name="mhartid" bitsize="32"/>
--  <reg name="mstatus" bitsize="32"/>
--  <reg name="misa" bitsize="32"/>
--  <reg name="medeleg" bitsize="32"/>
--  <reg name="mideleg" bitsize="32"/>
--  <reg name="mie" bitsize="32"/>
--  <reg name="mtvec" bitsize="32"/>
--  <reg name="mcounteren" bitsize="32"/>
--  <reg name="mscratch" bitsize="32"/>
--  <reg name="mepc" bitsize="32"/>
--  <reg name="mcause" bitsize="32"/>
--  <reg name="mtval" bitsize="32"/>
--  <reg name="mip" bitsize="32"/>
--  <reg name="pmpcfg0" bitsize="32"/>
--  <reg name="pmpcfg1" bitsize="32"/>
--  <reg name="pmpcfg2" bitsize="32"/>
--  <reg name="pmpcfg3" bitsize="32"/>
--  <reg name="pmpaddr0" bitsize="32"/>
--  <reg name="pmpaddr1" bitsize="32"/>
--  <reg name="pmpaddr2" bitsize="32"/>
--  <reg name="pmpaddr3" bitsize="32"/>
--  <reg name="pmpaddr4" bitsize="32"/>
--  <reg name="pmpaddr5" bitsize="32"/>
--  <reg name="pmpaddr6" bitsize="32"/>
--  <reg name="pmpaddr7" bitsize="32"/>
--  <reg name="pmpaddr8" bitsize="32"/>
--  <reg name="pmpaddr9" bitsize="32"/>
--  <reg name="pmpaddr10" bitsize="32"/>
--  <reg name="pmpaddr11" bitsize="32"/>
--  <reg name="pmpaddr12" bitsize="32"/>
--  <reg name="pmpaddr13" bitsize="32"/>
--  <reg name="pmpaddr14" bitsize="32"/>
--  <reg name="pmpaddr15" bitsize="32"/>
--  <reg name="mcycle" bitsize="32"/>
--  <reg name="minstret" bitsize="32"/>
--  <reg name="mhpmcounter3" bitsize="32"/>
--  <reg name="mhpmcounter4" bitsize="32"/>
--  <reg name="mhpmcounter5" bitsize="32"/>
--  <reg name="mhpmcounter6" bitsize="32"/>
--  <reg name="mhpmcounter7" bitsize="32"/>
--  <reg name="mhpmcounter8" bitsize="32"/>
--  <reg name="mhpmcounter9" bitsize="32"/>
--  <reg name="mhpmcounter10" bitsize="32"/>
--  <reg name="mhpmcounter11" bitsize="32"/>
--  <reg name="mhpmcounter12" bitsize="32"/>
--  <reg name="mhpmcounter13" bitsize="32"/>
--  <reg name="mhpmcounter14" bitsize="32"/>
--  <reg name="mhpmcounter15" bitsize="32"/>
--  <reg name="mhpmcounter16" bitsize="32"/>
--  <reg name="mhpmcounter17" bitsize="32"/>
--  <reg name="mhpmcounter18" bitsize="32"/>
--  <reg name="mhpmcounter19" bitsize="32"/>
--  <reg name="mhpmcounter20" bitsize="32"/>
--  <reg name="mhpmcounter21" bitsize="32"/>
--  <reg name="mhpmcounter22" bitsize="32"/>
--  <reg name="mhpmcounter23" bitsize="32"/>
--  <reg name="mhpmcounter24" bitsize="32"/>
--  <reg name="mhpmcounter25" bitsize="32"/>
--  <reg name="mhpmcounter26" bitsize="32"/>
--  <reg name="mhpmcounter27" bitsize="32"/>
--  <reg name="mhpmcounter28" bitsize="32"/>
--  <reg name="mhpmcounter29" bitsize="32"/>
--  <reg name="mhpmcounter30" bitsize="32"/>
--  <reg name="mhpmcounter31" bitsize="32"/>
--  <reg name="mcycleh" bitsize="32"/>
--  <reg name="minstreth" bitsize="32"/>
--  <reg name="mhpmcounter3h" bitsize="32"/>
--  <reg name="mhpmcounter4h" bitsize="32"/>
--  <reg name="mhpmcounter5h" bitsize="32"/>
--  <reg name="mhpmcounter6h" bitsize="32"/>
--  <reg name="mhpmcounter7h" bitsize="32"/>
--  <reg name="mhpmcounter8h" bitsize="32"/>
--  <reg name="mhpmcounter9h" bitsize="32"/>
--  <reg name="mhpmcounter10h" bitsize="32"/>
--  <reg name="mhpmcounter11h" bitsize="32"/>
--  <reg name="mhpmcounter12h" bitsize="32"/>
--  <reg name="mhpmcounter13h" bitsize="32"/>
--  <reg name="mhpmcounter14h" bitsize="32"/>
--  <reg name="mhpmcounter15h" bitsize="32"/>
--  <reg name="mhpmcounter16h" bitsize="32"/>
--  <reg name="mhpmcounter17h" bitsize="32"/>
--  <reg name="mhpmcounter18h" bitsize="32"/>
--  <reg name="mhpmcounter19h" bitsize="32"/>
--  <reg name="mhpmcounter20h" bitsize="32"/>
--  <reg name="mhpmcounter21h" bitsize="32"/>
--  <reg name="mhpmcounter22h" bitsize="32"/>
--  <reg name="mhpmcounter23h" bitsize="32"/>
--  <reg name="mhpmcounter24h" bitsize="32"/>
--  <reg name="mhpmcounter25h" bitsize="32"/>
--  <reg name="mhpmcounter26h" bitsize="32"/>
--  <reg name="mhpmcounter27h" bitsize="32"/>
--  <reg name="mhpmcounter28h" bitsize="32"/>
--  <reg name="mhpmcounter29h" bitsize="32"/>
--  <reg name="mhpmcounter30h" bitsize="32"/>
--  <reg name="mhpmcounter31h" bitsize="32"/>
--  <reg name="mhpmevent3" bitsize="32"/>
--  <reg name="mhpmevent4" bitsize="32"/>
--  <reg name="mhpmevent5" bitsize="32"/>
--  <reg name="mhpmevent6" bitsize="32"/>
--  <reg name="mhpmevent7" bitsize="32"/>
--  <reg name="mhpmevent8" bitsize="32"/>
--  <reg name="mhpmevent9" bitsize="32"/>
--  <reg name="mhpmevent10" bitsize="32"/>
--  <reg name="mhpmevent11" bitsize="32"/>
--  <reg name="mhpmevent12" bitsize="32"/>
--  <reg name="mhpmevent13" bitsize="32"/>
--  <reg name="mhpmevent14" bitsize="32"/>
--  <reg name="mhpmevent15" bitsize="32"/>
--  <reg name="mhpmevent16" bitsize="32"/>
--  <reg name="mhpmevent17" bitsize="32"/>
--  <reg name="mhpmevent18" bitsize="32"/>
--  <reg name="mhpmevent19" bitsize="32"/>
--  <reg name="mhpmevent20" bitsize="32"/>
--  <reg name="mhpmevent21" bitsize="32"/>
--  <reg name="mhpmevent22" bitsize="32"/>
--  <reg name="mhpmevent23" bitsize="32"/>
--  <reg name="mhpmevent24" bitsize="32"/>
--  <reg name="mhpmevent25" bitsize="32"/>
--  <reg name="mhpmevent26" bitsize="32"/>
--  <reg name="mhpmevent27" bitsize="32"/>
--  <reg name="mhpmevent28" bitsize="32"/>
--  <reg name="mhpmevent29" bitsize="32"/>
--  <reg name="mhpmevent30" bitsize="32"/>
--  <reg name="mhpmevent31" bitsize="32"/>
--  <reg name="tselect" bitsize="32"/>
--  <reg name="tdata1" bitsize="32"/>
--  <reg name="tdata2" bitsize="32"/>
--  <reg name="tdata3" bitsize="32"/>
--  <reg name="dcsr" bitsize="32"/>
--  <reg name="dpc" bitsize="32"/>
--  <reg name="dscratch" bitsize="32"/>
--  <reg name="hstatus" bitsize="32"/>
--  <reg name="hedeleg" bitsize="32"/>
--  <reg name="hideleg" bitsize="32"/>
--  <reg name="hie" bitsize="32"/>
--  <reg name="htvec" bitsize="32"/>
--  <reg name="hscratch" bitsize="32"/>
--  <reg name="hepc" bitsize="32"/>
--  <reg name="hcause" bitsize="32"/>
--  <reg name="hbadaddr" bitsize="32"/>
--  <reg name="hip" bitsize="32"/>
--  <reg name="mbase" bitsize="32"/>
--  <reg name="mbound" bitsize="32"/>
--  <reg name="mibase" bitsize="32"/>
--  <reg name="mibound" bitsize="32"/>
--  <reg name="mdbase" bitsize="32"/>
--  <reg name="mdbound" bitsize="32"/>
--  <reg name="mucounteren" bitsize="32"/>
--  <reg name="mscounteren" bitsize="32"/>
--  <reg name="mhcounteren" bitsize="32"/>
--</feature>
-diff --git a/gdb-xml/riscv-64bit-csr.xml b/gdb-xml/riscv-64bit-csr.xml
-deleted file mode 100644
-index 6aa4bed..0000000
---- a/gdb-xml/riscv-64bit-csr.xml
-+++ /dev/null
-@@ -1,250 +0,0 @@
--<?xml version="1.0"?>
--<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
--
--     Copying and distribution of this file, with or without modification,
--     are permitted in any medium without royalty provided the copyright
--     notice and this notice are preserved.  -->
--
--<!DOCTYPE feature SYSTEM "gdb-target.dtd">
--<feature name="org.gnu.gdb.riscv.csr">
--  <reg name="ustatus" bitsize="64"/>
--  <reg name="uie" bitsize="64"/>
--  <reg name="utvec" bitsize="64"/>
--  <reg name="uscratch" bitsize="64"/>
--  <reg name="uepc" bitsize="64"/>
--  <reg name="ucause" bitsize="64"/>
--  <reg name="utval" bitsize="64"/>
--  <reg name="uip" bitsize="64"/>
--  <reg name="fflags" bitsize="64"/>
--  <reg name="frm" bitsize="64"/>
--  <reg name="fcsr" bitsize="64"/>
--  <reg name="cycle" bitsize="64"/>
--  <reg name="time" bitsize="64"/>
--  <reg name="instret" bitsize="64"/>
--  <reg name="hpmcounter3" bitsize="64"/>
--  <reg name="hpmcounter4" bitsize="64"/>
--  <reg name="hpmcounter5" bitsize="64"/>
--  <reg name="hpmcounter6" bitsize="64"/>
--  <reg name="hpmcounter7" bitsize="64"/>
--  <reg name="hpmcounter8" bitsize="64"/>
--  <reg name="hpmcounter9" bitsize="64"/>
--  <reg name="hpmcounter10" bitsize="64"/>
--  <reg name="hpmcounter11" bitsize="64"/>
--  <reg name="hpmcounter12" bitsize="64"/>
--  <reg name="hpmcounter13" bitsize="64"/>
--  <reg name="hpmcounter14" bitsize="64"/>
--  <reg name="hpmcounter15" bitsize="64"/>
--  <reg name="hpmcounter16" bitsize="64"/>
--  <reg name="hpmcounter17" bitsize="64"/>
--  <reg name="hpmcounter18" bitsize="64"/>
--  <reg name="hpmcounter19" bitsize="64"/>
--  <reg name="hpmcounter20" bitsize="64"/>
--  <reg name="hpmcounter21" bitsize="64"/>
--  <reg name="hpmcounter22" bitsize="64"/>
--  <reg name="hpmcounter23" bitsize="64"/>
--  <reg name="hpmcounter24" bitsize="64"/>
--  <reg name="hpmcounter25" bitsize="64"/>
--  <reg name="hpmcounter26" bitsize="64"/>
--  <reg name="hpmcounter27" bitsize="64"/>
--  <reg name="hpmcounter28" bitsize="64"/>
--  <reg name="hpmcounter29" bitsize="64"/>
--  <reg name="hpmcounter30" bitsize="64"/>
--  <reg name="hpmcounter31" bitsize="64"/>
--  <reg name="cycleh" bitsize="64"/>
--  <reg name="timeh" bitsize="64"/>
--  <reg name="instreth" bitsize="64"/>
--  <reg name="hpmcounter3h" bitsize="64"/>
--  <reg name="hpmcounter4h" bitsize="64"/>
--  <reg name="hpmcounter5h" bitsize="64"/>
--  <reg name="hpmcounter6h" bitsize="64"/>
--  <reg name="hpmcounter7h" bitsize="64"/>
--  <reg name="hpmcounter8h" bitsize="64"/>
--  <reg name="hpmcounter9h" bitsize="64"/>
--  <reg name="hpmcounter10h" bitsize="64"/>
--  <reg name="hpmcounter11h" bitsize="64"/>
--  <reg name="hpmcounter12h" bitsize="64"/>
--  <reg name="hpmcounter13h" bitsize="64"/>
--  <reg name="hpmcounter14h" bitsize="64"/>
--  <reg name="hpmcounter15h" bitsize="64"/>
--  <reg name="hpmcounter16h" bitsize="64"/>
--  <reg name="hpmcounter17h" bitsize="64"/>
--  <reg name="hpmcounter18h" bitsize="64"/>
--  <reg name="hpmcounter19h" bitsize="64"/>
--  <reg name="hpmcounter20h" bitsize="64"/>
--  <reg name="hpmcounter21h" bitsize="64"/>
--  <reg name="hpmcounter22h" bitsize="64"/>
--  <reg name="hpmcounter23h" bitsize="64"/>
--  <reg name="hpmcounter24h" bitsize="64"/>
--  <reg name="hpmcounter25h" bitsize="64"/>
--  <reg name="hpmcounter26h" bitsize="64"/>
--  <reg name="hpmcounter27h" bitsize="64"/>
--  <reg name="hpmcounter28h" bitsize="64"/>
--  <reg name="hpmcounter29h" bitsize="64"/>
--  <reg name="hpmcounter30h" bitsize="64"/>
--  <reg name="hpmcounter31h" bitsize="64"/>
--  <reg name="sstatus" bitsize="64"/>
--  <reg name="sedeleg" bitsize="64"/>
--  <reg name="sideleg" bitsize="64"/>
--  <reg name="sie" bitsize="64"/>
--  <reg name="stvec" bitsize="64"/>
--  <reg name="scounteren" bitsize="64"/>
--  <reg name="sscratch" bitsize="64"/>
--  <reg name="sepc" bitsize="64"/>
--  <reg name="scause" bitsize="64"/>
--  <reg name="stval" bitsize="64"/>
--  <reg name="sip" bitsize="64"/>
--  <reg name="satp" bitsize="64"/>
--  <reg name="mvendorid" bitsize="64"/>
--  <reg name="marchid" bitsize="64"/>
--  <reg name="mimpid" bitsize="64"/>
--  <reg name="mhartid" bitsize="64"/>
--  <reg name="mstatus" bitsize="64"/>
--  <reg name="misa" bitsize="64"/>
--  <reg name="medeleg" bitsize="64"/>
--  <reg name="mideleg" bitsize="64"/>
--  <reg name="mie" bitsize="64"/>
--  <reg name="mtvec" bitsize="64"/>
--  <reg name="mcounteren" bitsize="64"/>
--  <reg name="mscratch" bitsize="64"/>
--  <reg name="mepc" bitsize="64"/>
--  <reg name="mcause" bitsize="64"/>
--  <reg name="mtval" bitsize="64"/>
--  <reg name="mip" bitsize="64"/>
--  <reg name="pmpcfg0" bitsize="64"/>
--  <reg name="pmpcfg1" bitsize="64"/>
--  <reg name="pmpcfg2" bitsize="64"/>
--  <reg name="pmpcfg3" bitsize="64"/>
--  <reg name="pmpaddr0" bitsize="64"/>
--  <reg name="pmpaddr1" bitsize="64"/>
--  <reg name="pmpaddr2" bitsize="64"/>
--  <reg name="pmpaddr3" bitsize="64"/>
--  <reg name="pmpaddr4" bitsize="64"/>
--  <reg name="pmpaddr5" bitsize="64"/>
--  <reg name="pmpaddr6" bitsize="64"/>
--  <reg name="pmpaddr7" bitsize="64"/>
--  <reg name="pmpaddr8" bitsize="64"/>
--  <reg name="pmpaddr9" bitsize="64"/>
--  <reg name="pmpaddr10" bitsize="64"/>
--  <reg name="pmpaddr11" bitsize="64"/>
--  <reg name="pmpaddr12" bitsize="64"/>
--  <reg name="pmpaddr13" bitsize="64"/>
--  <reg name="pmpaddr14" bitsize="64"/>
--  <reg name="pmpaddr15" bitsize="64"/>
--  <reg name="mcycle" bitsize="64"/>
--  <reg name="minstret" bitsize="64"/>
--  <reg name="mhpmcounter3" bitsize="64"/>
--  <reg name="mhpmcounter4" bitsize="64"/>
--  <reg name="mhpmcounter5" bitsize="64"/>
--  <reg name="mhpmcounter6" bitsize="64"/>
--  <reg name="mhpmcounter7" bitsize="64"/>
--  <reg name="mhpmcounter8" bitsize="64"/>
--  <reg name="mhpmcounter9" bitsize="64"/>
--  <reg name="mhpmcounter10" bitsize="64"/>
--  <reg name="mhpmcounter11" bitsize="64"/>
--  <reg name="mhpmcounter12" bitsize="64"/>
--  <reg name="mhpmcounter13" bitsize="64"/>
--  <reg name="mhpmcounter14" bitsize="64"/>
--  <reg name="mhpmcounter15" bitsize="64"/>
--  <reg name="mhpmcounter16" bitsize="64"/>
--  <reg name="mhpmcounter17" bitsize="64"/>
--  <reg name="mhpmcounter18" bitsize="64"/>
--  <reg name="mhpmcounter19" bitsize="64"/>
--  <reg name="mhpmcounter20" bitsize="64"/>
--  <reg name="mhpmcounter21" bitsize="64"/>
--  <reg name="mhpmcounter22" bitsize="64"/>
--  <reg name="mhpmcounter23" bitsize="64"/>
--  <reg name="mhpmcounter24" bitsize="64"/>
--  <reg name="mhpmcounter25" bitsize="64"/>
--  <reg name="mhpmcounter26" bitsize="64"/>
--  <reg name="mhpmcounter27" bitsize="64"/>
--  <reg name="mhpmcounter28" bitsize="64"/>
--  <reg name="mhpmcounter29" bitsize="64"/>
--  <reg name="mhpmcounter30" bitsize="64"/>
--  <reg name="mhpmcounter31" bitsize="64"/>
--  <reg name="mcycleh" bitsize="64"/>
--  <reg name="minstreth" bitsize="64"/>
--  <reg name="mhpmcounter3h" bitsize="64"/>
--  <reg name="mhpmcounter4h" bitsize="64"/>
--  <reg name="mhpmcounter5h" bitsize="64"/>
--  <reg name="mhpmcounter6h" bitsize="64"/>
--  <reg name="mhpmcounter7h" bitsize="64"/>
--  <reg name="mhpmcounter8h" bitsize="64"/>
--  <reg name="mhpmcounter9h" bitsize="64"/>
--  <reg name="mhpmcounter10h" bitsize="64"/>
--  <reg name="mhpmcounter11h" bitsize="64"/>
--  <reg name="mhpmcounter12h" bitsize="64"/>
--  <reg name="mhpmcounter13h" bitsize="64"/>
--  <reg name="mhpmcounter14h" bitsize="64"/>
--  <reg name="mhpmcounter15h" bitsize="64"/>
--  <reg name="mhpmcounter16h" bitsize="64"/>
--  <reg name="mhpmcounter17h" bitsize="64"/>
--  <reg name="mhpmcounter18h" bitsize="64"/>
--  <reg name="mhpmcounter19h" bitsize="64"/>
--  <reg name="mhpmcounter20h" bitsize="64"/>
--  <reg name="mhpmcounter21h" bitsize="64"/>
--  <reg name="mhpmcounter22h" bitsize="64"/>
--  <reg name="mhpmcounter23h" bitsize="64"/>
--  <reg name="mhpmcounter24h" bitsize="64"/>
--  <reg name="mhpmcounter25h" bitsize="64"/>
--  <reg name="mhpmcounter26h" bitsize="64"/>
--  <reg name="mhpmcounter27h" bitsize="64"/>
--  <reg name="mhpmcounter28h" bitsize="64"/>
--  <reg name="mhpmcounter29h" bitsize="64"/>
--  <reg name="mhpmcounter30h" bitsize="64"/>
--  <reg name="mhpmcounter31h" bitsize="64"/>
--  <reg name="mhpmevent3" bitsize="64"/>
--  <reg name="mhpmevent4" bitsize="64"/>
--  <reg name="mhpmevent5" bitsize="64"/>
--  <reg name="mhpmevent6" bitsize="64"/>
--  <reg name="mhpmevent7" bitsize="64"/>
--  <reg name="mhpmevent8" bitsize="64"/>
--  <reg name="mhpmevent9" bitsize="64"/>
--  <reg name="mhpmevent10" bitsize="64"/>
--  <reg name="mhpmevent11" bitsize="64"/>
--  <reg name="mhpmevent12" bitsize="64"/>
--  <reg name="mhpmevent13" bitsize="64"/>
--  <reg name="mhpmevent14" bitsize="64"/>
--  <reg name="mhpmevent15" bitsize="64"/>
--  <reg name="mhpmevent16" bitsize="64"/>
--  <reg name="mhpmevent17" bitsize="64"/>
--  <reg name="mhpmevent18" bitsize="64"/>
--  <reg name="mhpmevent19" bitsize="64"/>
--  <reg name="mhpmevent20" bitsize="64"/>
--  <reg name="mhpmevent21" bitsize="64"/>
--  <reg name="mhpmevent22" bitsize="64"/>
--  <reg name="mhpmevent23" bitsize="64"/>
--  <reg name="mhpmevent24" bitsize="64"/>
--  <reg name="mhpmevent25" bitsize="64"/>
--  <reg name="mhpmevent26" bitsize="64"/>
--  <reg name="mhpmevent27" bitsize="64"/>
--  <reg name="mhpmevent28" bitsize="64"/>
--  <reg name="mhpmevent29" bitsize="64"/>
--  <reg name="mhpmevent30" bitsize="64"/>
--  <reg name="mhpmevent31" bitsize="64"/>
--  <reg name="tselect" bitsize="64"/>
--  <reg name="tdata1" bitsize="64"/>
--  <reg name="tdata2" bitsize="64"/>
--  <reg name="tdata3" bitsize="64"/>
--  <reg name="dcsr" bitsize="64"/>
--  <reg name="dpc" bitsize="64"/>
--  <reg name="dscratch" bitsize="64"/>
--  <reg name="hstatus" bitsize="64"/>
--  <reg name="hedeleg" bitsize="64"/>
--  <reg name="hideleg" bitsize="64"/>
--  <reg name="hie" bitsize="64"/>
--  <reg name="htvec" bitsize="64"/>
--  <reg name="hscratch" bitsize="64"/>
--  <reg name="hepc" bitsize="64"/>
--  <reg name="hcause" bitsize="64"/>
--  <reg name="hbadaddr" bitsize="64"/>
--  <reg name="hip" bitsize="64"/>
--  <reg name="mbase" bitsize="64"/>
--  <reg name="mbound" bitsize="64"/>
--  <reg name="mibase" bitsize="64"/>
--  <reg name="mibound" bitsize="64"/>
--  <reg name="mdbase" bitsize="64"/>
--  <reg name="mdbound" bitsize="64"/>
--  <reg name="mucounteren" bitsize="64"/>
--  <reg name="mscounteren" bitsize="64"/>
--  <reg name="mhcounteren" bitsize="64"/>
--</feature>
--- 
-2.7.4
-
+r~
 
