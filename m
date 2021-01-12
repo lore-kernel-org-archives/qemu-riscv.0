@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kzGBZ-00044L-TA
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Jan 2021 04:41:57 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37542)
+	id 1kzGBa-000458-5D
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Jan 2021 04:41:58 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37548)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kzGBW-0003vK-KO
- for qemu-riscv@nongnu.org; Tue, 12 Jan 2021 04:41:54 -0500
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d]:33513)
+ id 1kzGBX-0003wc-54
+ for qemu-riscv@nongnu.org; Tue, 12 Jan 2021 04:41:55 -0500
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:38235)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kzGBS-0007dn-MK
+ id 1kzGBV-0007fF-Il
  for qemu-riscv@nongnu.org; Tue, 12 Jan 2021 04:41:54 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id b8so1129189plx.0
- for <qemu-riscv@nongnu.org>; Tue, 12 Jan 2021 01:41:49 -0800 (PST)
+Received: by mail-pj1-x1029.google.com with SMTP id j13so1308301pjz.3
+ for <qemu-riscv@nongnu.org>; Tue, 12 Jan 2021 01:41:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=QFsPDGGstlpNC8yZd2jptms+E2w3nJ4A2M/mfdcapkM=;
- b=noZzlKCDtd7vJh/yiae0g3W58mpdFUDHZyexmMoGVoXZ/DPaWw91fjLq7+Qe0Z02MT
- N3RW1wLrQ/bQxQAtEXBTlLHkSheyCzvNXqpoOIqkEc6YchxPWir2gmaHGqYKiubVbd0Z
- nqismDFU/Cq8TzilsVvj3eKCSVs/2E7as8Hu6HDe46AKO3r09AVcuYxA1kkAnx562HI+
- gfXqfJBomzemyHg3d2A1OgYlFU1ddP+iLrNc6ESrs5U5lVNqBvKlmqkZNCJyosBy81qw
- v7Twd/hpDWmU5VXbKsdWINhQw5mVFaaJj00SF2H+FmtKuq/DxJWXPRWQOADm/Ps5B+WL
- qQsA==
+ bh=YBwtcYDn0OZ4VpML5GbVnXvhvm7p0Lm6u4cPISfe0yE=;
+ b=VlxJaELIK4Ebmq4KYF7XF+J6rZEeYW1+2gIj8T45d8/UXjA8PNSJmhU4xC+dvFI22y
+ xNgsLOE78W9nHbGVHFk2cv0/1WNxfbEIR7yY+YwkEfjqhMEPO0uF4gW+hPejkXHUoDNP
+ QP6ypwHPh1sE1pyYV4beGjmZqM5tJNKaMIFVzDOLkiPydqFk+cRdK+ibC6k9WcOG0OLe
+ 2HwcSlHXU0xpTMOJR2BOWUtPkyeA95FmgQDytT1Z1hK7t/FD7Z/taD2vayKyNejqbVKs
+ i/vGu+E2vuU4PNdr4dAJhHHdCk7MoJgg8EqWsYqiEN2VPPrg+bEIHP8JrzVukx1xi25r
+ Sf5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=QFsPDGGstlpNC8yZd2jptms+E2w3nJ4A2M/mfdcapkM=;
- b=eFTiIg5KwNBypgAlP9Q4dAqGvL8oAeRm/adVJ8Q8kP7I/DZLD0MwVONgTHLkWXXc1T
- DHIZjPsA87GhujR/ngNSvV9jeK3J7ZxmsMlv4yH9WCT5P5Kw1OGAwIxPoWVIr/EcPR5x
- QQqHdeecuxCqobYpk1mBLLqMtxw9de1/xJ7x0ISmaP8jvWY5JE78R813BvCy5G35e+41
- 9aff/cHTGkeixtPxony7FxFrxNhE0mcUF7dt0G1MHscpu9S5ts+2+JDRxB5LHRqk6wDu
- rD63HauU7TH5v7CnKXdSBaGdQV8FxnX5omqxNM4CtB6eIE9KIGcOOePUnbRn8m25vtoE
- TP+g==
-X-Gm-Message-State: AOAM532DgoO2QyowTDgnJM5J5sci+dptjL3Ibu6bp0IXaBrkAy4ZqN8H
- x7AQfX6DwYZ41u0nMPWIi8KPPw==
-X-Google-Smtp-Source: ABdhPJwMgnd2bdrXYrux+WewZgtZXxUhoMNyaOGuj9AZRrGD3FcM46lVjUm9h8s66Ae2O/7lH2MLGA==
-X-Received: by 2002:a17:902:f688:b029:da:a817:1753 with SMTP id
- l8-20020a170902f688b02900daa8171753mr3886490plg.76.1610444508404; 
- Tue, 12 Jan 2021 01:41:48 -0800 (PST)
+ bh=YBwtcYDn0OZ4VpML5GbVnXvhvm7p0Lm6u4cPISfe0yE=;
+ b=sB84EhmLe2V6urHHMG0+bG9YNOb4BDZYep9oyo224J05CxPV9lvcj+ZWQsjTDU37Z8
+ OVvfB1Y9+yTsUQnHmXtcW97iouAgh4xKZqOinnczpX2tX/pf96QeQZE6HEGE25g9np/6
+ O9YRO0O0tnwPCOj8k5dbAXUmu0H48/dj45/KLkz1GKfci+Y1OUVBTPONBDoquXqUzeoi
+ xlwguY1xw+IGXFGI3NMWp5cVQXnbkXMK35BFVUmwT3FhTODodn42fgKRNWOtU1XwUHE5
+ Glr7Ds2pIqPJ+XdypRmnLJGevsSmEW2Bg0fmpLvG7Szz2I3MKhgSW1+K7kRFdgJBtWCL
+ v1cg==
+X-Gm-Message-State: AOAM533FQ8SdkdJc7nOW87oWEFEsFk3Q7WHtH+94IC9jMg+g9xzhC3B8
+ +IH8IkPzfUon3ya0oLQMBDJSdQ==
+X-Google-Smtp-Source: ABdhPJxxW7tZ8mjT5f7scZBwxa0r8R2Ut2RfxQlzKu239z57T69D5oOW8U3CQ2vnmsP2H+hiGie7qA==
+X-Received: by 2002:a17:90a:f0c1:: with SMTP id
+ fa1mr3619104pjb.148.1610444512298; 
+ Tue, 12 Jan 2021 01:41:52 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id h16sm2865664pgd.62.2021.01.12.01.41.46
+ by smtp.gmail.com with ESMTPSA id h16sm2865664pgd.62.2021.01.12.01.41.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Jan 2021 01:41:47 -0800 (PST)
+ Tue, 12 Jan 2021 01:41:51 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -51,15 +51,15 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH v6 26/72] target/riscv: rvv-1.0: floating-point square-root
- instruction
-Date: Tue, 12 Jan 2021 17:39:00 +0800
-Message-Id: <20210112093950.17530-27-frank.chang@sifive.com>
+Subject: [PATCH v6 27/72] target/riscv: rvv-1.0: floating-point classify
+ instructions
+Date: Tue, 12 Jan 2021 17:39:01 +0800
+Message-Id: <20210112093950.17530-28-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210112093950.17530-1-frank.chang@sifive.com>
 References: <20210112093950.17530-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -90,18 +90,18 @@ Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index e11666f16df..c0053cfb828 100644
+index c0053cfb828..a0a47dbceb3 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -538,7 +538,7 @@ vfwmsac_vv      111110 . ..... ..... 001 ..... 1010111 @r_vm
- vfwmsac_vf      111110 . ..... ..... 101 ..... 1010111 @r_vm
- vfwnmsac_vv     111111 . ..... ..... 001 ..... 1010111 @r_vm
- vfwnmsac_vf     111111 . ..... ..... 101 ..... 1010111 @r_vm
--vfsqrt_v        100011 . ..... 00000 001 ..... 1010111 @r2_vm
-+vfsqrt_v        010011 . ..... 00000 001 ..... 1010111 @r2_vm
- vfmin_vv        000100 . ..... ..... 001 ..... 1010111 @r_vm
- vfmin_vf        000100 . ..... ..... 101 ..... 1010111 @r_vm
- vfmax_vv        000110 . ..... ..... 001 ..... 1010111 @r_vm
+@@ -561,7 +561,7 @@ vmfgt_vf        011101 . ..... ..... 101 ..... 1010111 @r_vm
+ vmfge_vf        011111 . ..... ..... 101 ..... 1010111 @r_vm
+ vmford_vv       011010 . ..... ..... 001 ..... 1010111 @r_vm
+ vmford_vf       011010 . ..... ..... 101 ..... 1010111 @r_vm
+-vfclass_v       100011 . ..... 10000 001 ..... 1010111 @r2_vm
++vfclass_v       010011 . ..... 10000 001 ..... 1010111 @r2_vm
+ vfmerge_vfm     010111 0 ..... ..... 101 ..... 1010111 @r_vm_0
+ vfmv_v_f        010111 1 00000 ..... 101 ..... 1010111 @r2
+ vfcvt_xu_f_v    100010 . ..... 00000 001 ..... 1010111 @r2_vm
 -- 
 2.17.1
 
