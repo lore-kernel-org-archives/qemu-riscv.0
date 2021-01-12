@@ -1,86 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kz2j3-0004aJ-M8
-	for mharc-qemu-riscv@gnu.org; Mon, 11 Jan 2021 14:19:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57356)
+	id 1kz9I6-0000Lb-Na
+	for mharc-qemu-riscv@gnu.org; Mon, 11 Jan 2021 21:20:14 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57630)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mrezanin@redhat.com>)
- id 1kyzS1-00008C-Gu
- for qemu-riscv@nongnu.org; Mon, 11 Jan 2021 10:49:49 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:55356)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <mrezanin@redhat.com>)
- id 1kyzRx-00083c-T0
- for qemu-riscv@nongnu.org; Mon, 11 Jan 2021 10:49:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1610380184;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Q6BqBBz/LmyyAaTw3+NjQTsglvnsrykSxnC/U1btFcA=;
- b=JnH1Rz9D1MclnnzsafYZxrOeydZSZZk0AN6KjGgBxUg8r35KAMCaLUCVR36crJhnbuQRb2
- nYsC+yChagMfPfFOeq3tZq4fyO0nuc//MHP0HFZJvypZyjlcJgk8JCO1QHhvbxkqMtx4yD
- VPqt2+a2dhKrcT3p37Hi4dfc0RDN+EU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-521-Gp_AoUSgMXucHrpaH7Rzsw-1; Mon, 11 Jan 2021 10:49:41 -0500
-X-MC-Unique: Gp_AoUSgMXucHrpaH7Rzsw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7A75A803628;
- Mon, 11 Jan 2021 15:49:39 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 1175017C5F;
- Mon, 11 Jan 2021 15:49:39 +0000 (UTC)
-Received: from zmail17.collab.prod.int.phx2.redhat.com
- (zmail17.collab.prod.int.phx2.redhat.com [10.5.83.19])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 9E86F18095C7;
- Mon, 11 Jan 2021 15:49:38 +0000 (UTC)
-Date: Mon, 11 Jan 2021 10:49:37 -0500 (EST)
-From: Miroslav Rezanina <mrezanin@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Cc: qemu-devel@nongnu.org, Huacai Chen <chenhuacai@kernel.org>, 
- Aurelien Jarno <aurelien@aurel32.net>, 
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
- Thomas Huth <thuth@redhat.com>, Stefan Weil <sw@weilnetz.de>, 
- qemu-riscv@nongnu.org, qemu-arm@nongnu.org, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-s390x@nongnu.org, 
- Cornelia Huck <cohuck@redhat.com>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Andrzej Zaborowski <balrogg@gmail.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Message-ID: <245930420.32442484.1610380177977.JavaMail.zimbra@redhat.com>
-In-Reply-To: <20210111150114.1415930-5-f4bug@amsat.org>
-References: <20210111150114.1415930-1-f4bug@amsat.org>
- <20210111150114.1415930-5-f4bug@amsat.org>
-Subject: Re: [RFC PATCH 4/5] tcg: Restrict tcg_out_op() to arrays of
- TCG_MAX_OP_ARGS elements
-MIME-Version: 1.0
-X-Originating-IP: [10.40.192.93, 10.4.195.1]
-Thread-Topic: Restrict tcg_out_op() to arrays of TCG_MAX_OP_ARGS elements
-Thread-Index: NYNXgELFV+TcZBY9QJ2v3tKDyrLcCQ==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mrezanin@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=mrezanin@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -29
-X-Spam_score: -3.0
-X-Spam_bar: ---
-X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.251,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1kz9I5-0000LN-H5
+ for qemu-riscv@nongnu.org; Mon, 11 Jan 2021 21:20:13 -0500
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a]:44314)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1kz9I3-0001wu-60
+ for qemu-riscv@nongnu.org; Mon, 11 Jan 2021 21:20:12 -0500
+Received: by mail-pl1-x62a.google.com with SMTP id r4so547546pls.11
+ for <qemu-riscv@nongnu.org>; Mon, 11 Jan 2021 18:20:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=hMdeLTIobVnnFr9an+png7iZnBio6LlQbfnOtAaUd5s=;
+ b=HMdToB8flngDEnJmgDkpcQPlVD6bSsqZTVHg6/N1wIp27aVEXrO35jqj0fdOlqAF0l
+ eaGlbZ2WDouVJx6D4fyFO8kIpfLRnYVaaaQ2f68uDSzPEau6U6goFqp/2jLcAi18Ophw
+ ce5didCEfTBk+NWk+mom31CWc+QA+RnzTFGqCMCLE+sIrEGkfua5WKHVB05sCyvDrUKm
+ BWxRjh8UNzGYrCZ+OGjy0k5BELcKxTnmDDPUOW5aWS4WCmJSmlmYkrCkfuzj86XTDs0b
+ uO5nU/MmsecoX/dCybkjp/773n2uV7l9hotY89ruKmVG4awPEnKwc/GzrfM4D5o1TSa5
+ nZ4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=hMdeLTIobVnnFr9an+png7iZnBio6LlQbfnOtAaUd5s=;
+ b=iQexnxEoHrlFXgMpgxpqlc3GDC0x9W0Q1PsFnPohiJQv7njQWipTCUT/bGbjxMiUqE
+ V9y6mdQD/e0A4cIRhKRBQRNvRlAh3C8RVWrHmirTMaMVHX+8Ui+kZ1fuqqYHMeU70uVQ
+ eIwkovRoKO0TgNd6P4l8X21O1LnZ2mSSlKPv4QIr98fo9b3Uly0vdASCcQ8rkhDStOS7
+ 7Qfe1drHetjG6PQUvoNvvPGUiLztBGga04/72ocxXAGOL5rM91Mdm7ge8k5Kzjydn9QS
+ mbZIGyEcB1/fJ+4IshV5rlWp5XNsBKAYBf67ERyXApVXGrb6BA5O5WnGc6lqV7NIjSxR
+ bmHw==
+X-Gm-Message-State: AOAM5310R4V8lx/y5QX4nmOWDZoAOb24/KjEDhuI+31Se1gRHfkMvsbm
+ oQEb2hEh0MouT8XL7Yq8295oGw==
+X-Google-Smtp-Source: ABdhPJwkBaB4m2eIVn/p00C7QCXjdeJt1NCPxUu3sAnzsHb3w+OmsI+1JkwYWCoy4qnq8jW6hsjp9g==
+X-Received: by 2002:a17:90a:f00f:: with SMTP id
+ bt15mr1934827pjb.209.1610418008923; 
+ Mon, 11 Jan 2021 18:20:08 -0800 (PST)
+Received: from frankchang-ThinkPad-T490.internal.sifive.com
+ (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
+ by smtp.gmail.com with ESMTPSA id x14sm981326pfp.77.2021.01.11.18.20.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Jan 2021 18:20:08 -0800 (PST)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>
+Subject: [RFC v3 00/16] support subsets of bitmanip extension
+Date: Tue, 12 Jan 2021 10:19:41 +0800
+Message-Id: <20210112022001.20521-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 11 Jan 2021 14:19:32 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -92,161 +72,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2021 15:49:49 -0000
+X-List-Received-Date: Tue, 12 Jan 2021 02:20:13 -0000
 
------ Original Message -----
-> From: "Philippe Mathieu-Daud=C3=A9" <f4bug@amsat.org>
-> To: qemu-devel@nongnu.org
-> Cc: "Huacai Chen" <chenhuacai@kernel.org>, "Aurelien Jarno" <aurelien@aur=
-el32.net>, "Aleksandar Rikalo"
-> <aleksandar.rikalo@syrmia.com>, "Thomas Huth" <thuth@redhat.com>, "Stefan=
- Weil" <sw@weilnetz.de>,
-> qemu-riscv@nongnu.org, qemu-arm@nongnu.org, "Jiaxun Yang" <jiaxun.yang@fl=
-ygoat.com>, qemu-s390x@nongnu.org,
-> "Philippe Mathieu-Daud=C3=A9" <f4bug@amsat.org>, "Cornelia Huck" <cohuck@=
-redhat.com>, "Richard Henderson"
-> <richard.henderson@linaro.org>, "Andrzej Zaborowski" <balrogg@gmail.com>,=
- "Alistair Francis"
-> <Alistair.Francis@wdc.com>, "Palmer Dabbelt" <palmer@dabbelt.com>, "Miros=
-lav Rezanina" <mrezanin@redhat.com>
-> Sent: Monday, January 11, 2021 4:01:13 PM
-> Subject: [RFC PATCH 4/5] tcg: Restrict tcg_out_op() to arrays of TCG_MAX_=
-OP_ARGS elements
->=20
-> tcg_reg_alloc_op() allocates arrays of TCG_MAX_OP_ARGS elements.
->=20
-> The Aarch64 target already does this since commit 8d8db193f25
-> ("tcg-aarch64: Hoist common argument loads in tcg_out_op"),
-> SPARC since commit b357f902bff ("tcg-sparc: Hoist common argument
-> loads in tcg_out_op").
->=20
-> RISCV missed it upon introduction in commit bdf503819ee
-> ("tcg/riscv: Add the out op decoder"), MIPS since commit
-> 22ee3a987d5 ("tcg-mips: Hoist args loads") and i386 since
-> commit 42d5b514928 ("tcg/i386: Hoist common arguments in
-> tcg_out_op").
->=20
-> Provide this information as a hint to the compiler in the function
-> prototype, and update the funtion definitions.
->=20
-> This fixes this warning (using GCC 11):
->=20
->     tcg/aarch64/tcg-target.c.inc:1855:37: error: argument 3 of type 'cons=
-t
->     TCGArg[16]' {aka 'const long unsigned int[16]'} with mismatched bound
->     [-Werror=3Darray-parameter=3D]
->     tcg/aarch64/tcg-target.c.inc:1856:34: error: argument 4 of type 'cons=
-t
->     int[16]' with mismatched bound [-Werror=3Darray-parameter=3D]
->=20
-> Reported-by: Miroslav Rezanina <mrezanin@redhat.com>
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
-> ---
-> RFC because such compiler hint is somehow "new" to me.
->=20
-> Also I expect this to be superseeded by Richard 'tcg constant'
-> branch mentioned here:
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg771401.html
-> ---
->  tcg/tcg.c                  | 5 +++--
->  tcg/i386/tcg-target.c.inc  | 3 ++-
->  tcg/mips/tcg-target.c.inc  | 3 ++-
->  tcg/riscv/tcg-target.c.inc | 3 ++-
->  tcg/tci/tcg-target.c.inc   | 5 +++--
->  5 files changed, 12 insertions(+), 7 deletions(-)
->=20
-> diff --git a/tcg/tcg.c b/tcg/tcg.c
-> index 472bf1755bf..97d074d8fab 100644
-> --- a/tcg/tcg.c
-> +++ b/tcg/tcg.c
-> @@ -110,8 +110,9 @@ static void tcg_out_ld(TCGContext *s, TCGType type,
-> TCGReg ret, TCGReg arg1,
->  static bool tcg_out_mov(TCGContext *s, TCGType type, TCGReg ret, TCGReg
->  arg);
->  static void tcg_out_movi(TCGContext *s, TCGType type,
->                           TCGReg ret, tcg_target_long arg);
-> -static void tcg_out_op(TCGContext *s, TCGOpcode opc, const TCGArg *args,
-> -                       const int *const_args);
-> +static void tcg_out_op(TCGContext *s, TCGOpcode opc,
-> +                       const TCGArg args[TCG_MAX_OP_ARGS],
-> +                       const int const_args[TCG_MAX_OP_ARGS]);
->  #if TCG_TARGET_MAYBE_vec
->  static bool tcg_out_dup_vec(TCGContext *s, TCGType type, unsigned vece,
->                              TCGReg dst, TCGReg src);
-> diff --git a/tcg/i386/tcg-target.c.inc b/tcg/i386/tcg-target.c.inc
-> index 46e856f4421..d121dca8789 100644
-> --- a/tcg/i386/tcg-target.c.inc
-> +++ b/tcg/i386/tcg-target.c.inc
-> @@ -2215,7 +2215,8 @@ static void tcg_out_qemu_st(TCGContext *s, const TC=
-GArg
-> *args, bool is64)
->  }
-> =20
->  static inline void tcg_out_op(TCGContext *s, TCGOpcode opc,
-> -                              const TCGArg *args, const int *const_args)
-> +                              const TCGArg args[TCG_MAX_OP_ARGS],
-> +                              const int const_args[TCG_MAX_OP_ARGS])
->  {
->      TCGArg a0, a1, a2;
->      int c, const_a2, vexop, rexw =3D 0;
-> diff --git a/tcg/mips/tcg-target.c.inc b/tcg/mips/tcg-target.c.inc
-> index add157f6c32..b9bb54f0ecc 100644
-> --- a/tcg/mips/tcg-target.c.inc
-> +++ b/tcg/mips/tcg-target.c.inc
-> @@ -1691,7 +1691,8 @@ static void tcg_out_clz(TCGContext *s, MIPSInsn opc=
-v2,
-> MIPSInsn opcv6,
->  }
-> =20
->  static inline void tcg_out_op(TCGContext *s, TCGOpcode opc,
-> -                              const TCGArg *args, const int *const_args)
-> +                              const TCGArg args[TCG_MAX_OP_ARGS],
-> +                              const int const_args[TCG_MAX_OP_ARGS])
->  {
->      MIPSInsn i1, i2;
->      TCGArg a0, a1, a2;
-> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
-> index c60b91ba58f..5bf0d069532 100644
-> --- a/tcg/riscv/tcg-target.c.inc
-> +++ b/tcg/riscv/tcg-target.c.inc
-> @@ -1238,7 +1238,8 @@ static void tcg_out_qemu_st(TCGContext *s, const TC=
-GArg
-> *args, bool is_64)
->  static const tcg_insn_unit *tb_ret_addr;
-> =20
->  static void tcg_out_op(TCGContext *s, TCGOpcode opc,
-> -                       const TCGArg *args, const int *const_args)
-> +                       const TCGArg args[TCG_MAX_OP_ARGS],
-> +                       const int const_args[TCG_MAX_OP_ARGS])
->  {
->      TCGArg a0 =3D args[0];
->      TCGArg a1 =3D args[1];
-> diff --git a/tcg/tci/tcg-target.c.inc b/tcg/tci/tcg-target.c.inc
-> index d5a4d9d37cf..60464524f3d 100644
-> --- a/tcg/tci/tcg-target.c.inc
-> +++ b/tcg/tci/tcg-target.c.inc
-> @@ -553,8 +553,9 @@ static inline void tcg_out_call(TCGContext *s, const
-> tcg_insn_unit *arg)
->      old_code_ptr[1] =3D s->code_ptr - old_code_ptr;
->  }
-> =20
-> -static void tcg_out_op(TCGContext *s, TCGOpcode opc, const TCGArg *args,
-> -                       const int *const_args)
-> +static void tcg_out_op(TCGContext *s, TCGOpcode opc,
-> +                       const TCGArg args[TCG_MAX_OP_ARGS],
-> +                       const int const_args[TCG_MAX_OP_ARGS])
->  {
->      uint8_t *old_code_ptr =3D s->code_ptr;
-> =20
-> --
-> 2.26.2
->=20
->
+From: Frank Chang <frank.chang@sifive.com>
 
-Reviewed-by: Miroslav Rezanina <mrezanin@redhat.com>=20
+This patchset implements RISC-V B-extension 0.93 version Zbb, Zbs and
+Zba subset instructions. Some Zbp instructions are also implemented as
+they have similar behavior with their Zbb-, Zbs- and Zba-family
+instructions or for Zbb pseudo instructions (e.g. rev8, orc.b).
 
---=20
-Miroslav Rezanina
-Software Engineer - Virtualization Team Maintainer
+Specification:
+https://github.com/riscv/riscv-bitmanip/blob/master/bitmanip-0.93.pdf
+
+The port is available here:
+https://github.com/sifive/qemu/tree/rvb-upstream-v3
+
+To test rvb implementation, specify cpu argument with 'x-b=true' to
+enable B-extension support.
+
+Changelog:
+
+v3:
+ * Convert existing immediate shift instructions to use gen_shifti()
+   and gen_shiftiw() interfaces.
+ * Rename *u.w instructions to *.uw.
+ * Rename sb* instructions to b*.
+ * Rename pcnt* instructions to cpop*.
+
+v2:
+ * Add gen_shifti(), gen_shiftw(), gen_shiftiw() helper functions.
+ * Remove addwu, subwu and addiwu instructions as they are not longer
+   exist in latest draft.
+ * Optimize implementation with cleaner tcg ops.
+
+Frank Chang (4):
+  target/riscv: rvb: count bits set
+  target/riscv: add gen_shifti() and gen_shiftiw() helper functions
+  target/riscv: rvb: generalized reverse
+  target/riscv: rvb: generalized or-combine
+
+Kito Cheng (12):
+  target/riscv: reformat @sh format encoding for B-extension
+  target/riscv: rvb: count leading/trailing zeros
+  target/riscv: rvb: logic-with-negate
+  target/riscv: rvb: pack two words into one register
+  target/riscv: rvb: min/max instructions
+  target/riscv: rvb: sign-extend instructions
+  target/riscv: rvb: single-bit instructions
+  target/riscv: rvb: shift ones
+  target/riscv: rvb: rotate (left/right)
+  target/riscv: rvb: address calculation
+  target/riscv: rvb: add/shift with prefix zero-extend
+  target/riscv: rvb: support and turn on B-extension from command line
+
+ target/riscv/bitmanip_helper.c          | 102 ++++++
+ target/riscv/cpu.c                      |   4 +
+ target/riscv/cpu.h                      |   2 +
+ target/riscv/helper.h                   |   9 +
+ target/riscv/insn32-64.decode           |  33 ++
+ target/riscv/insn32.decode              |  54 ++-
+ target/riscv/insn_trans/trans_rvb.c.inc | 415 ++++++++++++++++++++++++
+ target/riscv/insn_trans/trans_rvi.c.inc |  45 +--
+ target/riscv/meson.build                |   1 +
+ target/riscv/translate.c                | 314 ++++++++++++++++++
+ 10 files changed, 932 insertions(+), 47 deletions(-)
+ create mode 100644 target/riscv/bitmanip_helper.c
+ create mode 100644 target/riscv/insn_trans/trans_rvb.c.inc
+
+--
+2.17.1
 
 
