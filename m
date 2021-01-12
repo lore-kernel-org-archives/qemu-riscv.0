@@ -1,48 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kz9IJ-0000Th-36
-	for mharc-qemu-riscv@gnu.org; Mon, 11 Jan 2021 21:20:27 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57698)
+	id 1kz9IM-0000Zk-3s
+	for mharc-qemu-riscv@gnu.org; Mon, 11 Jan 2021 21:20:30 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57756)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kz9IF-0000Qf-I2
- for qemu-riscv@nongnu.org; Mon, 11 Jan 2021 21:20:23 -0500
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535]:42771)
+ id 1kz9IK-0000WB-EB
+ for qemu-riscv@nongnu.org; Mon, 11 Jan 2021 21:20:28 -0500
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:38822)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kz9IB-0001xY-FT
- for qemu-riscv@nongnu.org; Mon, 11 Jan 2021 21:20:23 -0500
-Received: by mail-pg1-x535.google.com with SMTP id g15so409278pgu.9
- for <qemu-riscv@nongnu.org>; Mon, 11 Jan 2021 18:20:19 -0800 (PST)
+ id 1kz9IG-00020B-DX
+ for qemu-riscv@nongnu.org; Mon, 11 Jan 2021 21:20:28 -0500
+Received: by mail-pl1-x636.google.com with SMTP id 4so563812plk.5
+ for <qemu-riscv@nongnu.org>; Mon, 11 Jan 2021 18:20:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=BgZikz4sJLs+w0Gy/WgD2VLy+0WnxAYabQZ2ZyT4YKc=;
- b=TRRlmN+LPde9lczbR1pRzyQNo8Ybs8E4HljzJKLtPA5Y+9yVhN+tZAmZT++4XYTIxM
- GsUEuFyef/1r6JnQeFwXGEb5U6wRCyQwTuRPlcFlhzd4RJyw2ymrrj8kh7PEhyWSIHgu
- DdoCv1FIWeQBVn23mEiLCnQAFL2tMm74er4YcPcs0X6FW9+jkSb0hN3ewsX9QM+64XLY
- SZABzet3sQk85V6zsGwE8cqOnlps7Eni9XGLXEqStgBrLF3404FSd5w+E8+HwaeehyCw
- FZkXSPfX4ekWkvVOwgRNneIa1vT7wLkWLsAyQaymOh6BGf1gnMy6QdlKP7iPJ/usm4hM
- 3Ugw==
+ bh=c/CcaBIobtZhsXA1lKF4+7wWbRa+XM/F56UYWiOAJSI=;
+ b=MnFsrxGLIaAnRKYs384NAGLIzwljKrIwSE03ibZEpqrllANT0/542FqSNyCm/Ytunz
+ OE5Sb0H6PcV8+m4Js/n0eBc59e4YuOuH9yOL4/HAXZLHReuM5vHbujDUDvSYCjwRPINj
+ IXynIRuGgimnrgM8hC/Q7KzzSaiOT39Tq9CzweFei30xFRzJGZ4TAJpxVZIrNKvIAozb
+ sk1iKYiZaUtXA6kS4cI7o/BJnJJ1dwhTcMyJYSfCcYYRXxec1YH+9lO6gWX7ZO1eMVZz
+ Y2ibCtxfcspDN36aJYzCg/BGKQJRkG68ABfeD8A+sYAzGY63121H+xl4CzPiMm6t1poc
+ 9WHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=BgZikz4sJLs+w0Gy/WgD2VLy+0WnxAYabQZ2ZyT4YKc=;
- b=T5+xfeasrRdtHDuyNSIv4col7+hFZy1WbuPQOc/lRMyoV6R+TFJ4tQkhWhAtijuYHL
- 2YSt1qC/BEgZQ0NjJqc2eJL0c/Rpv9avN/Fa0E1zZtfMmWg28RFzLxE8gdkZ3aHKbwTG
- 9C8M6WS5Gs6NDOCzyBGcPTe3ltyrQQIOfp0J9Eg2nHv0Iwb6AuVT/YxWJOJ5/V0y6f0w
- X+rkX3bLcc3fn4LCpSw2bADJnzhef4j2yz0ZyWUNMum2ZqzewLWrwYJGYe7P8n32F/ry
- LtICITjnadR4EEh05Im4mAKQd44ccwHSNbixm+WVVfia6lBeQGUt4zUlyzLhEW4mXAep
- c0WQ==
-X-Gm-Message-State: AOAM5311O74zwlLvk+OGJ4PC2wtuzpM48SzydGLEobzLR4ARYwpWazvj
- YrdEO54wKYzMoTFXR84EXYcMpw==
-X-Google-Smtp-Source: ABdhPJwTF/OLj3ZIUPocFw06r6Cgfk2G1VV1jPq9LHtgaOn3MN6hKG0UoU3XQgnUm80GlQdyZVnxSw==
-X-Received: by 2002:a63:c441:: with SMTP id m1mr2288694pgg.353.1610418017981; 
- Mon, 11 Jan 2021 18:20:17 -0800 (PST)
+ bh=c/CcaBIobtZhsXA1lKF4+7wWbRa+XM/F56UYWiOAJSI=;
+ b=uVVjbyKjYabNxMpevgC5BC9dqsjDXY7ZomZFu4HriorRQ5DpYHIl1J4kcewLtr16UB
+ ODBrNrNWe/0ZBzedvHsdH7c2AcZavkb/pugoxSdlwTd3TYhPCKecLyyDeOTrBmNDXDBa
+ CGkpcXSEr0AaYESnGiFs5lwzoD/WkTSb+pOhdENnBF/YU/jc15HF5FkYmKSBkVbDdOUj
+ Ek0v1Z4LxAblrkCNjiFqaw9z3edMUT9nmCZk6jPWneGBnvX2vPYa9vAi8lNmz8PvywtZ
+ 7nQwqReEUF0HgkeMiEPw3/w0sac3KG8BevcgKFz2dXVKvCxcX8TP7lMZyWPvEPJQ2Jjo
+ Pscw==
+X-Gm-Message-State: AOAM530+bqc6rbKomQVXgZnh04bFJTp2zstKGAONZ2JqtiXk7EtcYvHd
+ rBRbek4WSaseRp5QyI4CEFvh9Q==
+X-Google-Smtp-Source: ABdhPJxYcjP8LC9Oauf/mmy2DntoVEc08NTmaEt70YUAYPuCED24Md/xd0WehQXlXdkU+yiQHCxr8w==
+X-Received: by 2002:a17:902:b7cb:b029:db:c0d6:96ee with SMTP id
+ v11-20020a170902b7cbb02900dbc0d696eemr2776383plz.21.1610418023085; 
+ Mon, 11 Jan 2021 18:20:23 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id x14sm981326pfp.77.2021.01.11.18.20.15
+ by smtp.gmail.com with ESMTPSA id x14sm981326pfp.77.2021.01.11.18.20.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Jan 2021 18:20:17 -0800 (PST)
+ Mon, 11 Jan 2021 18:20:22 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -50,23 +51,23 @@ Cc: Kito Cheng <kito.cheng@sifive.com>, Frank Chang <frank.chang@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [RFC v3 01/16] target/riscv: reformat @sh format encoding for
- B-extension
-Date: Tue, 12 Jan 2021 10:19:42 +0800
-Message-Id: <20210112022001.20521-2-frank.chang@sifive.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [RFC v3 02/16] target/riscv: rvb: count leading/trailing zeros
+Date: Tue, 12 Jan 2021 10:19:43 +0800
+Message-Id: <20210112022001.20521-3-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210112022001.20521-1-frank.chang@sifive.com>
 References: <20210112022001.20521-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x535.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,7 +80,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2021 02:20:23 -0000
+X-List-Received-Date: Tue, 12 Jan 2021 02:20:28 -0000
 
 From: Kito Cheng <kito.cheng@sifive.com>
 
@@ -87,44 +88,174 @@ Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn32.decode | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ target/riscv/insn32-64.decode           |  4 +++
+ target/riscv/insn32.decode              |  7 +++-
+ target/riscv/insn_trans/trans_rvb.c.inc | 47 +++++++++++++++++++++++++
+ target/riscv/translate.c                | 42 ++++++++++++++++++++++
+ 4 files changed, 99 insertions(+), 1 deletion(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvb.c.inc
 
+diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
+index 8157dee8b7c..f4c42720fc7 100644
+--- a/target/riscv/insn32-64.decode
++++ b/target/riscv/insn32-64.decode
+@@ -86,3 +86,7 @@ fmv_d_x    1111001  00000 ..... 000 ..... 1010011 @r2
+ hlv_wu    0110100  00001   ..... 100 ..... 1110011 @r2
+ hlv_d     0110110  00000   ..... 100 ..... 1110011 @r2
+ hsv_d     0110111  .....   ..... 100 00000 1110011 @r2_s
++
++# *** RV64B Standard Extension (in addition to RV32B) ***
++clzw       0110000 00000 ..... 001 ..... 0011011 @r2
++ctzw       0110000 00001 ..... 001 ..... 0011011 @r2
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 84080dd18ca..3823b3ea800 100644
+index 3823b3ea800..8fe838cf0d0 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -22,7 +22,7 @@
- %rs1       15:5
- %rd        7:5
+@@ -40,6 +40,7 @@
+ &i    imm rs1 rd
+ &j    imm rd
+ &r    rd rs1 rs2
++&r2   rd rs1
+ &s    imm rs1 rs2
+ &u    imm rd
+ &shift     shamt rs1 rd
+@@ -67,7 +68,7 @@
+ @r4_rm   ..... ..  ..... ..... ... ..... ....... %rs3 %rs2 %rs1 %rm %rd
+ @r_rm    .......   ..... ..... ... ..... ....... %rs2 %rs1 %rm %rd
+ @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
+-@r2      .......   ..... ..... ... ..... ....... %rs1 %rd
++@r2      .......   ..... ..... ... ..... ....... &r2 %rs1 %rd
+ @r2_nfvm ... ... vm:1 ..... ..... ... ..... ....... &r2nfvm %nf %rs1 %rd
+ @r2_vm   ...... vm:1 ..... ..... ... ..... ....... &rmr %rs2 %rd
+ @r1_vm   ...... vm:1 ..... ..... ... ..... ....... %rd
+@@ -592,3 +593,7 @@ vcompress_vm    010111 - ..... ..... 010 ..... 1010111 @r
  
--%sh10    20:10
-+%sh7    20:7
- %csr    20:12
- %rm     12:3
- %nf     29:3                     !function=ex_plus_1
-@@ -58,7 +58,7 @@
- @u       ....................      ..... ....... &u      imm=%imm_u          %rd
- @j       ....................      ..... ....... &j      imm=%imm_j          %rd
+ vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+ vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
++
++# *** RV32B Standard Extension ***
++clz        011000 000000 ..... 001 ..... 0010011 @r2
++ctz        011000 000001 ..... 001 ..... 0010011 @r2
+diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+new file mode 100644
+index 00000000000..76788c2f353
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvb.c.inc
+@@ -0,0 +1,47 @@
++/*
++ * RISC-V translation routines for the RVB Standard Extension.
++ *
++ * Copyright (c) 2020 Kito Cheng, kito.cheng@sifive.com
++ * Copyright (c) 2020 Frank Chang, frank.chang@sifive.com
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++static bool trans_clz(DisasContext *ctx, arg_clz *a)
++{
++    REQUIRE_EXT(ctx, RVB);
++    return gen_unary(ctx, a, gen_clz);
++}
++
++static bool trans_ctz(DisasContext *ctx, arg_ctz *a)
++{
++    REQUIRE_EXT(ctx, RVB);
++    return gen_unary(ctx, a, gen_ctz);
++}
++
++/* RV64-only instructions */
++#ifdef TARGET_RISCV64
++
++static bool trans_clzw(DisasContext *ctx, arg_clzw *a)
++{
++    REQUIRE_EXT(ctx, RVB);
++    return gen_unary(ctx, a, gen_clzw);
++}
++
++static bool trans_ctzw(DisasContext *ctx, arg_ctzw *a)
++{
++    REQUIRE_EXT(ctx, RVB);
++    return gen_unary(ctx, a, gen_ctzw);
++}
++
++#endif
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 554d52a4be3..fac111d465c 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -711,6 +711,23 @@ static bool gen_arith_div_uw(DisasContext *ctx, arg_r *a,
  
--@sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
-+@sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh7     %rs1 %rd
- @csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
+ #endif
  
- @atom_ld ..... aq:1 rl:1 ..... ........ ..... ....... &atomic rs2=0     %rs1 %rd
-@@ -122,9 +122,9 @@ sltiu    ............     ..... 011 ..... 0010011 @i
- xori     ............     ..... 100 ..... 0010011 @i
- ori      ............     ..... 110 ..... 0010011 @i
- andi     ............     ..... 111 ..... 0010011 @i
--slli     00.... ......    ..... 001 ..... 0010011 @sh
--srli     00.... ......    ..... 101 ..... 0010011 @sh
--srai     01.... ......    ..... 101 ..... 0010011 @sh
-+slli     00000. ......    ..... 001 ..... 0010011 @sh
-+srli     00000. ......    ..... 101 ..... 0010011 @sh
-+srai     01000. ......    ..... 101 ..... 0010011 @sh
- add      0000000 .....    ..... 000 ..... 0110011 @r
- sub      0100000 .....    ..... 000 ..... 0110011 @r
- sll      0000000 .....    ..... 001 ..... 0110011 @r
++#ifdef TARGET_RISCV64
++
++static void gen_ctzw(TCGv ret, TCGv arg1)
++{
++    tcg_gen_ori_i64(ret, arg1, MAKE_64BIT_MASK(32, 32));
++    tcg_gen_ctzi_i64(ret, ret, 64);
++}
++
++static void gen_clzw(TCGv ret, TCGv arg1)
++{
++    tcg_gen_ext32u_i64(ret, arg1);
++    tcg_gen_clzi_i64(ret, ret, 64);
++    tcg_gen_subi_i64(ret, ret, 32);
++}
++
++#endif
++
+ static bool gen_arith(DisasContext *ctx, arg_r *a,
+                       void(*func)(TCGv, TCGv, TCGv))
+ {
+@@ -747,6 +764,30 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+     return true;
+ }
+ 
++static void gen_ctz(TCGv ret, TCGv arg1)
++{
++    tcg_gen_ctzi_tl(ret, arg1, TARGET_LONG_BITS);
++}
++
++static void gen_clz(TCGv ret, TCGv arg1)
++{
++    tcg_gen_clzi_tl(ret, arg1, TARGET_LONG_BITS);
++}
++
++static bool gen_unary(DisasContext *ctx, arg_r2 *a,
++                      void(*func)(TCGv, TCGv))
++{
++    TCGv source = tcg_temp_new();
++
++    gen_get_gpr(source, a->rs1);
++
++    (*func)(source, source);
++
++    gen_set_gpr(a->rd, source);
++    tcg_temp_free(source);
++    return true;
++}
++
+ /* Include insn module translation function */
+ #include "insn_trans/trans_rvi.c.inc"
+ #include "insn_trans/trans_rvm.c.inc"
+@@ -755,6 +796,7 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+ #include "insn_trans/trans_rvd.c.inc"
+ #include "insn_trans/trans_rvh.c.inc"
+ #include "insn_trans/trans_rvv.c.inc"
++#include "insn_trans/trans_rvb.c.inc"
+ #include "insn_trans/trans_privileged.c.inc"
+ 
+ /* Include the auto-generated decoder for 16 bit insn */
 -- 
 2.17.1
 
