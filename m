@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kzBfT-00015y-Q4
-	for mharc-qemu-riscv@gnu.org; Mon, 11 Jan 2021 23:52:32 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51564)
+	id 1kzBfX-00017i-Rj
+	for mharc-qemu-riscv@gnu.org; Mon, 11 Jan 2021 23:52:35 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51580)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kzBfK-000125-VK; Mon, 11 Jan 2021 23:52:24 -0500
-Received: from mail-qk1-x72c.google.com ([2607:f8b0:4864:20::72c]:39027)
+ id 1kzBfO-00013K-Vz; Mon, 11 Jan 2021 23:52:29 -0500
+Received: from mail-qk1-x72f.google.com ([2607:f8b0:4864:20::72f]:39030)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kzBfH-0001jp-CD; Mon, 11 Jan 2021 23:52:22 -0500
-Received: by mail-qk1-x72c.google.com with SMTP id p14so892884qke.6;
- Mon, 11 Jan 2021 20:52:18 -0800 (PST)
+ id 1kzBfL-0001kz-0l; Mon, 11 Jan 2021 23:52:26 -0500
+Received: by mail-qk1-x72f.google.com with SMTP id p14so892967qke.6;
+ Mon, 11 Jan 2021 20:52:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=XulXpk/URsYQ/0PFYvTgQh46JVvQ+x1a9lNdwgJyFaU=;
- b=bqOE/RuOcrL3klhahIodrPrqFfQcK0s6HtV+40FVF9/nJ7i2r+tzzu8KI/BTvhPHqe
- trJxCkmn2MOiuHD7dRXBTJ0xzT90QDMhpApJIJUPB5jjN++GWoYf5wWZa6/E4gziQ200
- qV1mJPkxDssdfyxVrS5U3gc2EeAlm5H/RM7eBbcvrkFH6o8I6ATXPtVnotJ1kUIhY0Yg
- OzVOUppd6P46kOBGQXyC246SLcw9VCV7mWk7aEAUHRznhu7rsTvfT0JkiirdAGZsUvgP
- gC8DKkOCSdF9KV9X8r2TJrmW1pH+cj3YQ0lc5mT+nZJGOQ8+oD5WX63x7su8QKb5gKcs
- 1H6A==
+ bh=R5m6GJ3sxEdxwfoWdI+AK9Uiuauu9msMTRlxTjXzQpM=;
+ b=min6KDiEH16yBNKSbr+/jWkEXwOYDzikSYzQy2IZIqJ/eEd80o0+57ORdInUcHtFSd
+ lFZaCSWBdSHDM/jmfqtulRHAekZev+Dh9qAxCYcM1sLx4CnI/BO9FYli/YXlpJoc5dxN
+ 5PoSfh0w7/salyNKQMRmVzRs7HmLXI8x27l048ehpHGP1gVDGIQubZ8Lp5WVhvzLrpKh
+ ikE76zEsztmddNvcdWGIdb6kdBzuFORSnsm50WGg3HsfE7yL20PigrMJIze6qnWbUcaE
+ LGwPjhs58QvmkKnfYUPbu9sRcr/H9ZHAYRgq9ypATzURuBZjGdfciRXyFPYO62ICjDzM
+ 3ApA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=XulXpk/URsYQ/0PFYvTgQh46JVvQ+x1a9lNdwgJyFaU=;
- b=aY5qL5ZFgqX/wz/T/LsgR5Qca5Ne+4fIhFbiuuij6Qh+nGwrhyRCsR2s2rJpn8ycBE
- yNNM85bLl9RORoykigPOh9J5obTLwC8oMxXkn7VfvsvUIeZ65PeKJpE746QYGN0rlQdD
- 2eZeKK0WR5AHNtbJHn7yYDZfKiJmEzaizn1CxQCBM80P9lzRDZo53/5Ddnk5vSwOJS0J
- k8yOOPrZ32mYSvXObFI26rShMzycCncK4HchuEGtCYPrDQZ8bptt7tMqlY3esH8LN3vC
- l+cFsxiea59Ta7R3Bx6idw4IBV5wDYO92Qeva4KmQKoQYV9WaSjr0MVNlWOlKrrmhbww
- oPbQ==
-X-Gm-Message-State: AOAM533Pd4gY08ukDwBA9PDSD7SGSjuNg9yGUDa728j5/zRS2k/U5Jj8
- NSfgnLkSbG94u+arLn0D2QM=
-X-Google-Smtp-Source: ABdhPJxqjQWcSs2cCp9iso3q8oRJTppRT3s9k4dseYIzGjMEwYp77nEmjhKYtFl01nUMK1zvbb0Lyw==
-X-Received: by 2002:a05:620a:1279:: with SMTP id
- b25mr2778160qkl.8.1610427137504; 
- Mon, 11 Jan 2021 20:52:17 -0800 (PST)
+ bh=R5m6GJ3sxEdxwfoWdI+AK9Uiuauu9msMTRlxTjXzQpM=;
+ b=gmox1+QOvebB2GZHt0ChbASG0L/HI+S7Stwjvh/E2ikg6/lNEkNzexZTTfd1FFSli0
+ L6ykI3ZzVfJ3VJ70zqcogxHyqhIBD563v/UEZgxTjrQ0i2qxXtuBoEpLPHPqhbqjIFS4
+ rZ3rFLJh5gJxAd6Fmkc15ivKlwZtiiwBGcWVQGZGUxwUKq9X1HWXruiRap378uUQslIx
+ ktkvEAmYBAj8wDS9phZh87roYdXKA2GlJrmvnqAqXF3Zrs9B0kQknoC7vPfE3ggytLYE
+ uZLsZMfd0ImWdbqfJPrFSIUNwb8A5Ggln6NdFcK6wgWtSB6PekYu8VApUzj7DdTIKq7x
+ idTw==
+X-Gm-Message-State: AOAM531WrZ6UypPX6ISknym93VGjrHfDMwfOaNJxBW8S2ha5MlJjIKfF
+ olWDC6G7H/SyKJDv8kaqmYoR8RKra3c=
+X-Google-Smtp-Source: ABdhPJx1P8u3i3mlHtdJxhwJDz7XdX9AL/J1ZzbyMibZ6mrY1ZFq3nSq30TN/nE2D2M6QnAaiSKQAw==
+X-Received: by 2002:a37:6692:: with SMTP id a140mr2842455qkc.0.1610427141187; 
+ Mon, 11 Jan 2021 20:52:21 -0800 (PST)
 Received: from pek-vx-bsp2.wrs.com (unknown-124-94.windriver.com.
  [147.11.124.94])
- by smtp.gmail.com with ESMTPSA id b67sm863814qkc.44.2021.01.11.20.52.13
+ by smtp.gmail.com with ESMTPSA id b67sm863814qkc.44.2021.01.11.20.52.17
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 11 Jan 2021 20:52:17 -0800 (PST)
+ Mon, 11 Jan 2021 20:52:20 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Jim Wilson <jimw@sifive.com>, Alistair Francis <alistair.francis@wdc.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 2/4] target/riscv: Add CSR name in the CSR function table
-Date: Tue, 12 Jan 2021 12:52:02 +0800
-Message-Id: <1610427124-49887-3-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH 3/4] target/riscv: Generate the GDB XML file for CSR registers
+ dynamically
+Date: Tue, 12 Jan 2021 12:52:03 +0800
+Message-Id: <1610427124-49887-4-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1610427124-49887-1-git-send-email-bmeng.cn@gmail.com>
 References: <1610427124-49887-1-git-send-email-bmeng.cn@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72c;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x72c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::72f;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x72f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -73,397 +73,455 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2021 04:52:26 -0000
+X-List-Received-Date: Tue, 12 Jan 2021 04:52:32 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-In preparation to generate the CSR register list for GDB stub
-dynamically, let's add the CSR name in the CSR function table.
+At present QEMU RISC-V uses a hardcoded XML to report the feature
+"org.gnu.gdb.riscv.csr" [1]. There are two major issues with the
+approach being used currently:
+
+- The XML does not specify the "regnum" field of a CSR entry, hence
+  consecutive numbers are used by the remote GDB client to access
+  CSRs. In QEMU we have to maintain a map table to convert the GDB
+  number to the hardware number which is error prone.
+- The XML contains some CSRs that QEMU does not implement at all,
+  which causes an "E14" response sent to remote GDB client.
+
+Change to generate the CSR register list dynamically, based on the
+availability presented in the CSR function table. This new approach
+will reflect a correct list of CSRs that QEMU actually implements.
+
+[1] https://sourceware.org/gdb/current/onlinedocs/gdb/RISC_002dV-Features.html#RISC_002dV-Features
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- target/riscv/cpu.h |   1 +
- target/riscv/csr.c | 332 +++++++++++++++++++++++++++++++++++++++--------------
- 2 files changed, 249 insertions(+), 84 deletions(-)
+ target/riscv/cpu.h     |   2 +
+ target/riscv/cpu.c     |  12 ++
+ target/riscv/gdbstub.c | 308 +++++++------------------------------------------
+ 3 files changed, 58 insertions(+), 264 deletions(-)
 
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 6f9e1cc..6684316 100644
+index 6684316..f810169 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -476,6 +476,7 @@ typedef int (*riscv_csr_op_fn)(CPURISCVState *env, int csrno,
-     target_ulong *ret_value, target_ulong new_value, target_ulong write_mask);
+@@ -272,6 +272,8 @@ struct RISCVCPU {
+     CPUNegativeOffsetState neg;
+     CPURISCVState env;
  
- typedef struct {
-+    const char *name;
-     riscv_csr_predicate_fn predicate;
-     riscv_csr_read_fn read;
-     riscv_csr_write_fn write;
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 507e8ee..fd2e636 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1372,112 +1372,276 @@ int riscv_csrrw_debug(CPURISCVState *env, int csrno, target_ulong *ret_value,
- /* Control and Status Register function table */
- riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /* User Floating-Point CSRs */
--    [CSR_FFLAGS] =              { fs,   read_fflags,      write_fflags      },
--    [CSR_FRM] =                 { fs,   read_frm,         write_frm         },
--    [CSR_FCSR] =                { fs,   read_fcsr,        write_fcsr        },
-+    [CSR_FFLAGS]   = { "fflags",   fs,     read_fflags,  write_fflags },
-+    [CSR_FRM]      = { "frm",      fs,     read_frm,     write_frm    },
-+    [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
-     /* Vector CSRs */
--    [CSR_VSTART] =              { vs,   read_vstart,      write_vstart      },
--    [CSR_VXSAT] =               { vs,   read_vxsat,       write_vxsat       },
--    [CSR_VXRM] =                { vs,   read_vxrm,        write_vxrm        },
--    [CSR_VL] =                  { vs,   read_vl                             },
--    [CSR_VTYPE] =               { vs,   read_vtype                          },
-+    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
-+    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
-+    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
-+    [CSR_VL]       = { "vl",       vs,     read_vl                    },
-+    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype                 },
-     /* User Timers and Counters */
--    [CSR_CYCLE] =               { ctr,  read_instret                        },
--    [CSR_INSTRET] =             { ctr,  read_instret                        },
--    [CSR_CYCLEH] =              { ctr32,  read_instreth                     },
--    [CSR_INSTRETH] =            { ctr32,  read_instreth                     },
++    char *dyn_csr_xml;
++
+     /* Configuration Settings */
+     struct {
+         bool ext_i;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index dfe5d4e..c0dd646 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -569,6 +569,17 @@ static gchar *riscv_gdb_arch_name(CPUState *cs)
+     }
+ }
+ 
++static const char *riscv_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
++{
++    RISCVCPU *cpu = RISCV_CPU(cs);
++
++    if (strcmp(xmlname, "riscv-csr.xml") == 0) {
++        return cpu->dyn_csr_xml;
++    }
++
++    return NULL;
++}
++
+ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+ {
+     RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
+@@ -607,6 +618,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     cc->write_elf32_note = riscv_cpu_write_elf32_note;
+ #endif
+     cc->gdb_arch_name = riscv_gdb_arch_name;
++    cc->gdb_get_dynamic_xml = riscv_gdb_get_dynamic_xml;
+ #ifdef CONFIG_TCG
+     cc->tcg_initialize = riscv_translate_init;
+     cc->tlb_fill = riscv_cpu_tlb_fill;
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index eba12a8..5f96b7e 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -20,256 +20,6 @@
+ #include "exec/gdbstub.h"
+ #include "cpu.h"
+ 
+-/*
+- * The GDB CSR xml files list them in documentation order, not numerical order,
+- * and are missing entries for unnamed CSRs.  So we need to map the gdb numbers
+- * to the hardware numbers.
+- */
 -
--    /* In privileged mode, the monitor will have to emulate TIME CSRs only if
--     * rdtime callback is not provided by machine/platform emulation */
--    [CSR_TIME] =                { ctr,  read_time                           },
--    [CSR_TIMEH] =               { ctr32,  read_timeh                        },
-+    [CSR_CYCLE]    = { "cycle",    ctr,    read_instret  },
-+    [CSR_INSTRET]  = { "instret",  ctr,    read_instret  },
-+    [CSR_CYCLEH]   = { "cycleh",   ctr32,  read_instreth },
-+    [CSR_INSTRETH] = { "instreth", ctr32,  read_instreth },
-+
-+    /*
-+     * In privileged mode, the monitor will have to emulate TIME CSRs only if
-+     * rdtime callback is not provided by machine/platform emulation.
-+     */
-+    [CSR_TIME]  = { "time",  ctr,   read_time  },
-+    [CSR_TIMEH] = { "timeh", ctr32, read_timeh },
- 
- #if !defined(CONFIG_USER_ONLY)
-     /* Machine Timers and Counters */
--    [CSR_MCYCLE] =              { any,  read_instret                        },
--    [CSR_MINSTRET] =            { any,  read_instret                        },
--    [CSR_MCYCLEH] =             { any32,  read_instreth                     },
--    [CSR_MINSTRETH] =           { any32,  read_instreth                     },
-+    [CSR_MCYCLE]    = { "mcycle",    any,   read_instret  },
-+    [CSR_MINSTRET]  = { "minstret",  any,   read_instret  },
-+    [CSR_MCYCLEH]   = { "mcycleh",   any32, read_instreth },
-+    [CSR_MINSTRETH] = { "minstreth", any32, read_instreth },
- 
-     /* Machine Information Registers */
--    [CSR_MVENDORID] =           { any,  read_zero                           },
--    [CSR_MARCHID] =             { any,  read_zero                           },
--    [CSR_MIMPID] =              { any,  read_zero                           },
--    [CSR_MHARTID] =             { any,  read_mhartid                        },
-+    [CSR_MVENDORID] = { "mvendorid", any,   read_zero    },
-+    [CSR_MARCHID]   = { "marchid",   any,   read_zero    },
-+    [CSR_MIMPID]    = { "mimpid",    any,   read_zero    },
-+    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid },
- 
-     /* Machine Trap Setup */
--    [CSR_MSTATUS] =             { any,  read_mstatus,     write_mstatus     },
--    [CSR_MISA] =                { any,  read_misa,        write_misa        },
--    [CSR_MIDELEG] =             { any,  read_mideleg,     write_mideleg     },
--    [CSR_MEDELEG] =             { any,  read_medeleg,     write_medeleg     },
--    [CSR_MIE] =                 { any,  read_mie,         write_mie         },
--    [CSR_MTVEC] =               { any,  read_mtvec,       write_mtvec       },
--    [CSR_MCOUNTEREN] =          { any,  read_mcounteren,  write_mcounteren  },
-+    [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus,     write_mstatus     },
-+    [CSR_MISA]        = { "misa",       any,   read_misa,        write_misa        },
-+    [CSR_MIDELEG]     = { "mideleg",    any,   read_mideleg,     write_mideleg     },
-+    [CSR_MEDELEG]     = { "medeleg",    any,   read_medeleg,     write_medeleg     },
-+    [CSR_MIE]         = { "mie",        any,   read_mie,         write_mie         },
-+    [CSR_MTVEC]       = { "mtvec",      any,   read_mtvec,       write_mtvec       },
-+    [CSR_MCOUNTEREN]  = { "mcounteren", any,   read_mcounteren,  write_mcounteren  },
- 
--    [CSR_MSTATUSH] =            { any32,  read_mstatush,    write_mstatush  },
-+    [CSR_MSTATUSH]    = { "mstatush",   any32, read_mstatush,    write_mstatush    },
- 
--    [CSR_MSCOUNTEREN] =         { any,  read_mscounteren, write_mscounteren },
-+    [CSR_MSCOUNTEREN] = { "msounteren", any,   read_mscounteren, write_mscounteren },
- 
-     /* Machine Trap Handling */
--    [CSR_MSCRATCH] =            { any,  read_mscratch,    write_mscratch    },
--    [CSR_MEPC] =                { any,  read_mepc,        write_mepc        },
--    [CSR_MCAUSE] =              { any,  read_mcause,      write_mcause      },
--    [CSR_MBADADDR] =            { any,  read_mbadaddr,    write_mbadaddr    },
--    [CSR_MIP] =                 { any,  NULL,     NULL,     rmw_mip         },
-+    [CSR_MSCRATCH] = { "mscratch", any,  read_mscratch, write_mscratch },
-+    [CSR_MEPC]     = { "mepc",     any,  read_mepc,     write_mepc     },
-+    [CSR_MCAUSE]   = { "mcause",   any,  read_mcause,   write_mcause   },
-+    [CSR_MBADADDR] = { "mbadaddr", any,  read_mbadaddr, write_mbadaddr },
-+    [CSR_MIP]      = { "mip",      any,  NULL,    NULL, rmw_mip        },
- 
-     /* Supervisor Trap Setup */
--    [CSR_SSTATUS] =             { smode, read_sstatus,     write_sstatus     },
--    [CSR_SIE] =                 { smode, read_sie,         write_sie         },
--    [CSR_STVEC] =               { smode, read_stvec,       write_stvec       },
--    [CSR_SCOUNTEREN] =          { smode, read_scounteren,  write_scounteren  },
-+    [CSR_SSTATUS]    = { "sstatus",    smode, read_sstatus,    write_sstatus    },
-+    [CSR_SIE]        = { "sie",        smode, read_sie,        write_sie        },
-+    [CSR_STVEC]      = { "stvec",      smode, read_stvec,      write_stvec      },
-+    [CSR_SCOUNTEREN] = { "scounteren", smode, read_scounteren, write_scounteren },
- 
-     /* Supervisor Trap Handling */
--    [CSR_SSCRATCH] =            { smode, read_sscratch,    write_sscratch    },
--    [CSR_SEPC] =                { smode, read_sepc,        write_sepc        },
--    [CSR_SCAUSE] =              { smode, read_scause,      write_scause      },
--    [CSR_SBADADDR] =            { smode, read_sbadaddr,    write_sbadaddr    },
--    [CSR_SIP] =                 { smode, NULL,     NULL,     rmw_sip         },
-+    [CSR_SSCRATCH] = { "sscratch", smode, read_sscratch, write_sscratch },
-+    [CSR_SEPC]     = { "sepc",     smode, read_sepc,     write_sepc     },
-+    [CSR_SCAUSE]   = { "scause",   smode, read_scause,   write_scause   },
-+    [CSR_SBADADDR] = { "sbadaddr", smode, read_sbadaddr, write_sbadaddr },
-+    [CSR_SIP]      = { "sip",      smode, NULL,    NULL, rmw_sip        },
- 
-     /* Supervisor Protection and Translation */
--    [CSR_SATP] =                { smode, read_satp,        write_satp        },
+-static int csr_register_map[] = {
+-    CSR_USTATUS,
+-    CSR_UIE,
+-    CSR_UTVEC,
+-    CSR_USCRATCH,
+-    CSR_UEPC,
+-    CSR_UCAUSE,
+-    CSR_UTVAL,
+-    CSR_UIP,
+-    CSR_FFLAGS,
+-    CSR_FRM,
+-    CSR_FCSR,
+-    CSR_CYCLE,
+-    CSR_TIME,
+-    CSR_INSTRET,
+-    CSR_HPMCOUNTER3,
+-    CSR_HPMCOUNTER4,
+-    CSR_HPMCOUNTER5,
+-    CSR_HPMCOUNTER6,
+-    CSR_HPMCOUNTER7,
+-    CSR_HPMCOUNTER8,
+-    CSR_HPMCOUNTER9,
+-    CSR_HPMCOUNTER10,
+-    CSR_HPMCOUNTER11,
+-    CSR_HPMCOUNTER12,
+-    CSR_HPMCOUNTER13,
+-    CSR_HPMCOUNTER14,
+-    CSR_HPMCOUNTER15,
+-    CSR_HPMCOUNTER16,
+-    CSR_HPMCOUNTER17,
+-    CSR_HPMCOUNTER18,
+-    CSR_HPMCOUNTER19,
+-    CSR_HPMCOUNTER20,
+-    CSR_HPMCOUNTER21,
+-    CSR_HPMCOUNTER22,
+-    CSR_HPMCOUNTER23,
+-    CSR_HPMCOUNTER24,
+-    CSR_HPMCOUNTER25,
+-    CSR_HPMCOUNTER26,
+-    CSR_HPMCOUNTER27,
+-    CSR_HPMCOUNTER28,
+-    CSR_HPMCOUNTER29,
+-    CSR_HPMCOUNTER30,
+-    CSR_HPMCOUNTER31,
+-    CSR_CYCLEH,
+-    CSR_TIMEH,
+-    CSR_INSTRETH,
+-    CSR_HPMCOUNTER3H,
+-    CSR_HPMCOUNTER4H,
+-    CSR_HPMCOUNTER5H,
+-    CSR_HPMCOUNTER6H,
+-    CSR_HPMCOUNTER7H,
+-    CSR_HPMCOUNTER8H,
+-    CSR_HPMCOUNTER9H,
+-    CSR_HPMCOUNTER10H,
+-    CSR_HPMCOUNTER11H,
+-    CSR_HPMCOUNTER12H,
+-    CSR_HPMCOUNTER13H,
+-    CSR_HPMCOUNTER14H,
+-    CSR_HPMCOUNTER15H,
+-    CSR_HPMCOUNTER16H,
+-    CSR_HPMCOUNTER17H,
+-    CSR_HPMCOUNTER18H,
+-    CSR_HPMCOUNTER19H,
+-    CSR_HPMCOUNTER20H,
+-    CSR_HPMCOUNTER21H,
+-    CSR_HPMCOUNTER22H,
+-    CSR_HPMCOUNTER23H,
+-    CSR_HPMCOUNTER24H,
+-    CSR_HPMCOUNTER25H,
+-    CSR_HPMCOUNTER26H,
+-    CSR_HPMCOUNTER27H,
+-    CSR_HPMCOUNTER28H,
+-    CSR_HPMCOUNTER29H,
+-    CSR_HPMCOUNTER30H,
+-    CSR_HPMCOUNTER31H,
+-    CSR_SSTATUS,
+-    CSR_SEDELEG,
+-    CSR_SIDELEG,
+-    CSR_SIE,
+-    CSR_STVEC,
+-    CSR_SCOUNTEREN,
+-    CSR_SSCRATCH,
+-    CSR_SEPC,
+-    CSR_SCAUSE,
+-    CSR_STVAL,
+-    CSR_SIP,
+-    CSR_SATP,
+-    CSR_MVENDORID,
+-    CSR_MARCHID,
+-    CSR_MIMPID,
+-    CSR_MHARTID,
+-    CSR_MSTATUS,
+-    CSR_MISA,
+-    CSR_MEDELEG,
+-    CSR_MIDELEG,
+-    CSR_MIE,
+-    CSR_MTVEC,
+-    CSR_MCOUNTEREN,
+-    CSR_MSCRATCH,
+-    CSR_MEPC,
+-    CSR_MCAUSE,
+-    CSR_MTVAL,
+-    CSR_MIP,
+-    CSR_MTINST,
+-    CSR_MTVAL2,
+-    CSR_PMPCFG0,
+-    CSR_PMPCFG1,
+-    CSR_PMPCFG2,
+-    CSR_PMPCFG3,
+-    CSR_PMPADDR0,
+-    CSR_PMPADDR1,
+-    CSR_PMPADDR2,
+-    CSR_PMPADDR3,
+-    CSR_PMPADDR4,
+-    CSR_PMPADDR5,
+-    CSR_PMPADDR6,
+-    CSR_PMPADDR7,
+-    CSR_PMPADDR8,
+-    CSR_PMPADDR9,
+-    CSR_PMPADDR10,
+-    CSR_PMPADDR11,
+-    CSR_PMPADDR12,
+-    CSR_PMPADDR13,
+-    CSR_PMPADDR14,
+-    CSR_PMPADDR15,
+-    CSR_MCYCLE,
+-    CSR_MINSTRET,
+-    CSR_MHPMCOUNTER3,
+-    CSR_MHPMCOUNTER4,
+-    CSR_MHPMCOUNTER5,
+-    CSR_MHPMCOUNTER6,
+-    CSR_MHPMCOUNTER7,
+-    CSR_MHPMCOUNTER8,
+-    CSR_MHPMCOUNTER9,
+-    CSR_MHPMCOUNTER10,
+-    CSR_MHPMCOUNTER11,
+-    CSR_MHPMCOUNTER12,
+-    CSR_MHPMCOUNTER13,
+-    CSR_MHPMCOUNTER14,
+-    CSR_MHPMCOUNTER15,
+-    CSR_MHPMCOUNTER16,
+-    CSR_MHPMCOUNTER17,
+-    CSR_MHPMCOUNTER18,
+-    CSR_MHPMCOUNTER19,
+-    CSR_MHPMCOUNTER20,
+-    CSR_MHPMCOUNTER21,
+-    CSR_MHPMCOUNTER22,
+-    CSR_MHPMCOUNTER23,
+-    CSR_MHPMCOUNTER24,
+-    CSR_MHPMCOUNTER25,
+-    CSR_MHPMCOUNTER26,
+-    CSR_MHPMCOUNTER27,
+-    CSR_MHPMCOUNTER28,
+-    CSR_MHPMCOUNTER29,
+-    CSR_MHPMCOUNTER30,
+-    CSR_MHPMCOUNTER31,
+-    CSR_MCYCLEH,
+-    CSR_MINSTRETH,
+-    CSR_MHPMCOUNTER3H,
+-    CSR_MHPMCOUNTER4H,
+-    CSR_MHPMCOUNTER5H,
+-    CSR_MHPMCOUNTER6H,
+-    CSR_MHPMCOUNTER7H,
+-    CSR_MHPMCOUNTER8H,
+-    CSR_MHPMCOUNTER9H,
+-    CSR_MHPMCOUNTER10H,
+-    CSR_MHPMCOUNTER11H,
+-    CSR_MHPMCOUNTER12H,
+-    CSR_MHPMCOUNTER13H,
+-    CSR_MHPMCOUNTER14H,
+-    CSR_MHPMCOUNTER15H,
+-    CSR_MHPMCOUNTER16H,
+-    CSR_MHPMCOUNTER17H,
+-    CSR_MHPMCOUNTER18H,
+-    CSR_MHPMCOUNTER19H,
+-    CSR_MHPMCOUNTER20H,
+-    CSR_MHPMCOUNTER21H,
+-    CSR_MHPMCOUNTER22H,
+-    CSR_MHPMCOUNTER23H,
+-    CSR_MHPMCOUNTER24H,
+-    CSR_MHPMCOUNTER25H,
+-    CSR_MHPMCOUNTER26H,
+-    CSR_MHPMCOUNTER27H,
+-    CSR_MHPMCOUNTER28H,
+-    CSR_MHPMCOUNTER29H,
+-    CSR_MHPMCOUNTER30H,
+-    CSR_MHPMCOUNTER31H,
+-    CSR_MHPMEVENT3,
+-    CSR_MHPMEVENT4,
+-    CSR_MHPMEVENT5,
+-    CSR_MHPMEVENT6,
+-    CSR_MHPMEVENT7,
+-    CSR_MHPMEVENT8,
+-    CSR_MHPMEVENT9,
+-    CSR_MHPMEVENT10,
+-    CSR_MHPMEVENT11,
+-    CSR_MHPMEVENT12,
+-    CSR_MHPMEVENT13,
+-    CSR_MHPMEVENT14,
+-    CSR_MHPMEVENT15,
+-    CSR_MHPMEVENT16,
+-    CSR_MHPMEVENT17,
+-    CSR_MHPMEVENT18,
+-    CSR_MHPMEVENT19,
+-    CSR_MHPMEVENT20,
+-    CSR_MHPMEVENT21,
+-    CSR_MHPMEVENT22,
+-    CSR_MHPMEVENT23,
+-    CSR_MHPMEVENT24,
+-    CSR_MHPMEVENT25,
+-    CSR_MHPMEVENT26,
+-    CSR_MHPMEVENT27,
+-    CSR_MHPMEVENT28,
+-    CSR_MHPMEVENT29,
+-    CSR_MHPMEVENT30,
+-    CSR_MHPMEVENT31,
+-    CSR_TSELECT,
+-    CSR_TDATA1,
+-    CSR_TDATA2,
+-    CSR_TDATA3,
+-    CSR_DCSR,
+-    CSR_DPC,
+-    CSR_DSCRATCH,
+-    CSR_HSTATUS,
+-    CSR_HEDELEG,
+-    CSR_HIDELEG,
+-    CSR_HIE,
+-    CSR_HCOUNTEREN,
+-    CSR_HTVAL,
+-    CSR_HIP,
+-    CSR_HTINST,
+-    CSR_HGATP,
+-    CSR_MBASE,
+-    CSR_MBOUND,
+-    CSR_MIBASE,
+-    CSR_MIBOUND,
+-    CSR_MDBASE,
+-    CSR_MDBOUND,
+-    CSR_MUCOUNTEREN,
+-    CSR_MSCOUNTEREN,
+-    CSR_MHCOUNTEREN,
+-};
 -
--    [CSR_HSTATUS] =             { hmode,   read_hstatus,     write_hstatus    },
--    [CSR_HEDELEG] =             { hmode,   read_hedeleg,     write_hedeleg    },
--    [CSR_HIDELEG] =             { hmode,   read_hideleg,     write_hideleg    },
--    [CSR_HVIP] =                { hmode,   NULL,     NULL,     rmw_hvip       },
--    [CSR_HIP] =                 { hmode,   NULL,     NULL,     rmw_hip        },
--    [CSR_HIE] =                 { hmode,   read_hie,         write_hie        },
--    [CSR_HCOUNTEREN] =          { hmode,   read_hcounteren,  write_hcounteren },
--    [CSR_HGEIE] =               { hmode,   read_hgeie,       write_hgeie      },
--    [CSR_HTVAL] =               { hmode,   read_htval,       write_htval      },
--    [CSR_HTINST] =              { hmode,   read_htinst,      write_htinst     },
--    [CSR_HGEIP] =               { hmode,   read_hgeip,       write_hgeip      },
--    [CSR_HGATP] =               { hmode,   read_hgatp,       write_hgatp      },
--    [CSR_HTIMEDELTA] =          { hmode,   read_htimedelta,  write_htimedelta },
--    [CSR_HTIMEDELTAH] =         { hmode32,   read_htimedeltah, write_htimedeltah},
--
--    [CSR_VSSTATUS] =            { hmode,   read_vsstatus,    write_vsstatus   },
--    [CSR_VSIP] =                { hmode,   NULL,     NULL,     rmw_vsip       },
--    [CSR_VSIE] =                { hmode,   read_vsie,        write_vsie       },
--    [CSR_VSTVEC] =              { hmode,   read_vstvec,      write_vstvec     },
--    [CSR_VSSCRATCH] =           { hmode,   read_vsscratch,   write_vsscratch  },
--    [CSR_VSEPC] =               { hmode,   read_vsepc,       write_vsepc      },
--    [CSR_VSCAUSE] =             { hmode,   read_vscause,     write_vscause    },
--    [CSR_VSTVAL] =              { hmode,   read_vstval,      write_vstval     },
--    [CSR_VSATP] =               { hmode,   read_vsatp,       write_vsatp      },
--
--    [CSR_MTVAL2] =              { hmode,   read_mtval2,      write_mtval2     },
--    [CSR_MTINST] =              { hmode,   read_mtinst,      write_mtinst     },
-+    [CSR_SATP]     = { "satp",     smode, read_satp,    write_satp      },
-+
-+    [CSR_HSTATUS]     = { "hstatus",     hmode,   read_hstatus,     write_hstatus     },
-+    [CSR_HEDELEG]     = { "hedeleg",     hmode,   read_hedeleg,     write_hedeleg     },
-+    [CSR_HIDELEG]     = { "hideleg",     hmode,   read_hideleg,     write_hideleg     },
-+    [CSR_HVIP]        = { "hvip",        hmode,   NULL,   NULL,     rmw_hvip          },
-+    [CSR_HIP]         = { "hip",         hmode,   NULL,   NULL,     rmw_hip           },
-+    [CSR_HIE]         = { "hie",         hmode,   read_hie,         write_hie         },
-+    [CSR_HCOUNTEREN]  = { "hcounteren",  hmode,   read_hcounteren,  write_hcounteren  },
-+    [CSR_HGEIE]       = { "hgeie",       hmode,   read_hgeie,       write_hgeie       },
-+    [CSR_HTVAL]       = { "htval",       hmode,   read_htval,       write_htval       },
-+    [CSR_HTINST]      = { "htinst",      hmode,   read_htinst,      write_htinst      },
-+    [CSR_HGEIP]       = { "hgeip",       hmode,   read_hgeip,       write_hgeip       },
-+    [CSR_HGATP]       = { "hgatp",       hmode,   read_hgatp,       write_hgatp       },
-+    [CSR_HTIMEDELTA]  = { "htimedelta",  hmode,   read_htimedelta,  write_htimedelta  },
-+    [CSR_HTIMEDELTAH] = { "htimedeltah", hmode32, read_htimedeltah, write_htimedeltah },
-+
-+    [CSR_VSSTATUS]    = { "vsstatus",    hmode,   read_vsstatus,    write_vsstatus    },
-+    [CSR_VSIP]        = { "vsip",        hmode,   NULL,    NULL,    rmw_vsip          },
-+    [CSR_VSIE]        = { "vsie",        hmode,   read_vsie,        write_vsie        },
-+    [CSR_VSTVEC]      = { "vstvec",      hmode,   read_vstvec,      write_vstvec      },
-+    [CSR_VSSCRATCH]   = { "vsscratch",   hmode,   read_vsscratch,   write_vsscratch   },
-+    [CSR_VSEPC]       = { "vsepc",       hmode,   read_vsepc,       write_vsepc       },
-+    [CSR_VSCAUSE]     = { "vscause",     hmode,   read_vscause,     write_vscause     },
-+    [CSR_VSTVAL]      = { "vstval",      hmode,   read_vstval,      write_vstval      },
-+    [CSR_VSATP]       = { "vsatp",       hmode,   read_vsatp,       write_vsatp       },
-+
-+    [CSR_MTVAL2]      = { "mtval2",      hmode,   read_mtval2,      write_mtval2      },
-+    [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,      write_mtinst      },
+ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+@@ -315,11 +65,11 @@ static int riscv_gdb_get_fpu(CPURISCVState *env, GByteArray *buf, int n)
+         target_ulong val = 0;
+         int result;
+         /*
+-         * CSR_FFLAGS is at index 8 in csr_register, and gdb says it is FP
++         * CSR_FFLAGS is at index 1 in csr_register, and gdb says it is FP
+          * register 33, so we recalculate the map index.
+          * This also works for CSR_FRM and CSR_FCSR.
+          */
+-        result = riscv_csrrw_debug(env, n - 33 + csr_register_map[8], &val,
++        result = riscv_csrrw_debug(env, n - 32, &val,
+                                    0, 0);
+         if (result == 0) {
+             return gdb_get_regl(buf, val);
+@@ -338,11 +88,11 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+         target_ulong val = ldtul_p(mem_buf);
+         int result;
+         /*
+-         * CSR_FFLAGS is at index 8 in csr_register, and gdb says it is FP
++         * CSR_FFLAGS is at index 1 in csr_register, and gdb says it is FP
+          * register 33, so we recalculate the map index.
+          * This also works for CSR_FRM and CSR_FCSR.
+          */
+-        result = riscv_csrrw_debug(env, n - 33 + csr_register_map[8], NULL,
++        result = riscv_csrrw_debug(env, n - 32, NULL,
+                                    val, -1);
+         if (result == 0) {
+             return sizeof(target_ulong);
+@@ -353,11 +103,11 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
  
-     /* Physical Memory Protection */
--    [CSR_PMPCFG0  ... CSR_PMPCFG3]   = { pmp,   read_pmpcfg,  write_pmpcfg   },
--    [CSR_PMPADDR0 ... CSR_PMPADDR15] = { pmp,   read_pmpaddr, write_pmpaddr  },
-+    [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
-+    [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
-+    [CSR_PMPCFG2]    = { "pmpcfg2",   pmp, read_pmpcfg,  write_pmpcfg  },
-+    [CSR_PMPCFG3]    = { "pmpcfg3",   pmp, read_pmpcfg,  write_pmpcfg  },
-+    [CSR_PMPADDR0]   = { "pmpaddr0",  pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR1]   = { "pmpaddr1",  pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR2]   = { "pmpaddr2",  pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR3]   = { "pmpaddr3",  pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR4]   = { "pmpaddr4",  pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR5]   = { "pmpaddr5",  pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR6]   = { "pmpaddr6",  pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR7]   = { "pmpaddr7",  pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR8]   = { "pmpaddr8",  pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR9]   = { "pmpaddr9",  pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR10]  = { "pmpaddr10", pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR11]  = { "pmpaddr11", pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR12]  = { "pmpaddr12", pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR13]  = { "pmpaddr13", pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR14] =  { "pmpaddr14", pmp, read_pmpaddr, write_pmpaddr },
-+    [CSR_PMPADDR15] =  { "pmpaddr15", pmp, read_pmpaddr, write_pmpaddr },
+ static int riscv_gdb_get_csr(CPURISCVState *env, GByteArray *buf, int n)
+ {
+-    if (n < ARRAY_SIZE(csr_register_map)) {
++    if (n < CSR_TABLE_SIZE) {
+         target_ulong val = 0;
+         int result;
  
-     /* Performance Counters */
--    [CSR_HPMCOUNTER3   ... CSR_HPMCOUNTER31] =    { ctr,  read_zero          },
--    [CSR_MHPMCOUNTER3  ... CSR_MHPMCOUNTER31] =   { any,  read_zero          },
--    [CSR_MHPMEVENT3    ... CSR_MHPMEVENT31] =     { any,  read_zero          },
--    [CSR_HPMCOUNTER3H  ... CSR_HPMCOUNTER31H] =   { ctr32,  read_zero        },
--    [CSR_MHPMCOUNTER3H ... CSR_MHPMCOUNTER31H] =  { any32,  read_zero        },
-+    [CSR_HPMCOUNTER3]    = { "hpmcounter3",    ctr,    read_zero },
-+    [CSR_HPMCOUNTER4]    = { "hpmcounter4",    ctr,    read_zero },
-+    [CSR_HPMCOUNTER5]    = { "hpmcounter5",    ctr,    read_zero },
-+    [CSR_HPMCOUNTER6]    = { "hpmcounter6",    ctr,    read_zero },
-+    [CSR_HPMCOUNTER7]    = { "hpmcounter7",    ctr,    read_zero },
-+    [CSR_HPMCOUNTER8]    = { "hpmcounter8",    ctr,    read_zero },
-+    [CSR_HPMCOUNTER9]    = { "hpmcounter9",    ctr,    read_zero },
-+    [CSR_HPMCOUNTER10]   = { "hpmcounter10",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER11]   = { "hpmcounter11",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER12]   = { "hpmcounter12",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER13]   = { "hpmcounter13",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER14]   = { "hpmcounter14",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER15]   = { "hpmcounter15",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER16]   = { "hpmcounter16",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER17]   = { "hpmcounter17",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER18]   = { "hpmcounter18",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER19]   = { "hpmcounter19",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER20]   = { "hpmcounter20",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER21]   = { "hpmcounter21",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER22]   = { "hpmcounter22",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER23]   = { "hpmcounter23",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER24]   = { "hpmcounter24",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER25]   = { "hpmcounter25",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER26]   = { "hpmcounter26",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER27]   = { "hpmcounter27",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER28]   = { "hpmcounter28",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER29]   = { "hpmcounter29",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER30]   = { "hpmcounter30",   ctr,    read_zero },
-+    [CSR_HPMCOUNTER31]   = { "hpmcounter31",   ctr,    read_zero },
+-        result = riscv_csrrw_debug(env, csr_register_map[n], &val, 0, 0);
++        result = riscv_csrrw_debug(env, n, &val, 0, 0);
+         if (result == 0) {
+             return gdb_get_regl(buf, val);
+         }
+@@ -367,11 +117,11 @@ static int riscv_gdb_get_csr(CPURISCVState *env, GByteArray *buf, int n)
+ 
+ static int riscv_gdb_set_csr(CPURISCVState *env, uint8_t *mem_buf, int n)
+ {
+-    if (n < ARRAY_SIZE(csr_register_map)) {
++    if (n < CSR_TABLE_SIZE) {
+         target_ulong val = ldtul_p(mem_buf);
+         int result;
+ 
+-        result = riscv_csrrw_debug(env, csr_register_map[n], NULL, val, -1);
++        result = riscv_csrrw_debug(env, n, NULL, val, -1);
+         if (result == 0) {
+             return sizeof(target_ulong);
+         }
+@@ -405,6 +155,38 @@ static int riscv_gdb_set_virtual(CPURISCVState *cs, uint8_t *mem_buf, int n)
+     return 0;
+ }
+ 
++static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
++{
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    CPURISCVState *env = &cpu->env;
++    GString *s = g_string_new(NULL);
++    riscv_csr_predicate_fn predicate;
++    int bitsize = riscv_cpu_is_32bit(env) ? 32 : 64;
++    int i;
 +
-+    [CSR_MHPMCOUNTER3]   = { "mhpmcounter3",   any,    read_zero },
-+    [CSR_MHPMCOUNTER4]   = { "mhpmcounter4",   any,    read_zero },
-+    [CSR_MHPMCOUNTER5]   = { "mhpmcounter5",   any,    read_zero },
-+    [CSR_MHPMCOUNTER6]   = { "mhpmcounter6",   any,    read_zero },
-+    [CSR_MHPMCOUNTER7]   = { "mhpmcounter7",   any,    read_zero },
-+    [CSR_MHPMCOUNTER8]   = { "mhpmcounter8",   any,    read_zero },
-+    [CSR_MHPMCOUNTER9]   = { "mhpmcounter9",   any,    read_zero },
-+    [CSR_MHPMCOUNTER10]  = { "mhpmcounter10",  any,    read_zero },
-+    [CSR_MHPMCOUNTER11]  = { "mhpmcounter11",  any,    read_zero },
-+    [CSR_MHPMCOUNTER12]  = { "mhpmcounter12",  any,    read_zero },
-+    [CSR_MHPMCOUNTER13]  = { "mhpmcounter13",  any,    read_zero },
-+    [CSR_MHPMCOUNTER14]  = { "mhpmcounter14",  any,    read_zero },
-+    [CSR_MHPMCOUNTER15]  = { "mhpmcounter15",  any,    read_zero },
-+    [CSR_MHPMCOUNTER16]  = { "mhpmcounter16",  any,    read_zero },
-+    [CSR_MHPMCOUNTER17]  = { "mhpmcounter17",  any,    read_zero },
-+    [CSR_MHPMCOUNTER18]  = { "mhpmcounter18",  any,    read_zero },
-+    [CSR_MHPMCOUNTER19]  = { "mhpmcounter19",  any,    read_zero },
-+    [CSR_MHPMCOUNTER20]  = { "mhpmcounter20",  any,    read_zero },
-+    [CSR_MHPMCOUNTER21]  = { "mhpmcounter21",  any,    read_zero },
-+    [CSR_MHPMCOUNTER22]  = { "mhpmcounter22",  any,    read_zero },
-+    [CSR_MHPMCOUNTER23]  = { "mhpmcounter23",  any,    read_zero },
-+    [CSR_MHPMCOUNTER24]  = { "mhpmcounter24",  any,    read_zero },
-+    [CSR_MHPMCOUNTER25]  = { "mhpmcounter25",  any,    read_zero },
-+    [CSR_MHPMCOUNTER26]  = { "mhpmcounter26",  any,    read_zero },
-+    [CSR_MHPMCOUNTER27]  = { "mhpmcounter27",  any,    read_zero },
-+    [CSR_MHPMCOUNTER28]  = { "mhpmcounter28",  any,    read_zero },
-+    [CSR_MHPMCOUNTER29]  = { "mhpmcounter29",  any,    read_zero },
-+    [CSR_MHPMCOUNTER30]  = { "mhpmcounter30",  any,    read_zero },
-+    [CSR_MHPMCOUNTER31]  = { "mhpmcounter31",  any,    read_zero },
++    g_string_printf(s, "<?xml version=\"1.0\"?>");
++    g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">");
++    g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
 +
-+    [CSR_MHPMEVENT3]     = { "mhpmevent3",     any,    read_zero },
-+    [CSR_MHPMEVENT4]     = { "mhpmevent4",     any,    read_zero },
-+    [CSR_MHPMEVENT5]     = { "mhpmevent5",     any,    read_zero },
-+    [CSR_MHPMEVENT6]     = { "mhpmevent6",     any,    read_zero },
-+    [CSR_MHPMEVENT7]     = { "mhpmevent7",     any,    read_zero },
-+    [CSR_MHPMEVENT8]     = { "mhpmevent8",     any,    read_zero },
-+    [CSR_MHPMEVENT9]     = { "mhpmevent9",     any,    read_zero },
-+    [CSR_MHPMEVENT10]    = { "mhpmevent10",    any,    read_zero },
-+    [CSR_MHPMEVENT11]    = { "mhpmevent11",    any,    read_zero },
-+    [CSR_MHPMEVENT12]    = { "mhpmevent12",    any,    read_zero },
-+    [CSR_MHPMEVENT13]    = { "mhpmevent13",    any,    read_zero },
-+    [CSR_MHPMEVENT14]    = { "mhpmevent14",    any,    read_zero },
-+    [CSR_MHPMEVENT15]    = { "mhpmevent15",    any,    read_zero },
-+    [CSR_MHPMEVENT16]    = { "mhpmevent16",    any,    read_zero },
-+    [CSR_MHPMEVENT17]    = { "mhpmevent17",    any,    read_zero },
-+    [CSR_MHPMEVENT18]    = { "mhpmevent18",    any,    read_zero },
-+    [CSR_MHPMEVENT19]    = { "mhpmevent19",    any,    read_zero },
-+    [CSR_MHPMEVENT20]    = { "mhpmevent20",    any,    read_zero },
-+    [CSR_MHPMEVENT21]    = { "mhpmevent21",    any,    read_zero },
-+    [CSR_MHPMEVENT22]    = { "mhpmevent22",    any,    read_zero },
-+    [CSR_MHPMEVENT23]    = { "mhpmevent23",    any,    read_zero },
-+    [CSR_MHPMEVENT24]    = { "mhpmevent24",    any,    read_zero },
-+    [CSR_MHPMEVENT25]    = { "mhpmevent25",    any,    read_zero },
-+    [CSR_MHPMEVENT26]    = { "mhpmevent26",    any,    read_zero },
-+    [CSR_MHPMEVENT27]    = { "mhpmevent27",    any,    read_zero },
-+    [CSR_MHPMEVENT28]    = { "mhpmevent28",    any,    read_zero },
-+    [CSR_MHPMEVENT29]    = { "mhpmevent29",    any,    read_zero },
-+    [CSR_MHPMEVENT30]    = { "mhpmevent30",    any,    read_zero },
-+    [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_zero },
++    for (i = 0; i < CSR_TABLE_SIZE; i++) {
++        predicate = csr_ops[i].predicate;
++        if (predicate && !predicate(env, i)) {
++            if (csr_ops[i].name) {
++                g_string_append_printf(s, "<reg name=\"%s\"", csr_ops[i].name);
++            } else {
++                g_string_append_printf(s, "<reg name=\"csr%03x\"", i);
++            }
++            g_string_append_printf(s, " bitsize=\"%d\"", bitsize);
++            g_string_append_printf(s, " regnum=\"%d\"/>", base_reg + i);
++        }
++    }
 +
-+    [CSR_HPMCOUNTER3H]   = { "hpmcounter3h",   ctr32,  read_zero },
-+    [CSR_HPMCOUNTER4H]   = { "hpmcounter4h",   ctr32,  read_zero },
-+    [CSR_HPMCOUNTER5H]   = { "hpmcounter5h",   ctr32,  read_zero },
-+    [CSR_HPMCOUNTER6H]   = { "hpmcounter6h",   ctr32,  read_zero },
-+    [CSR_HPMCOUNTER7H]   = { "hpmcounter7h",   ctr32,  read_zero },
-+    [CSR_HPMCOUNTER8H]   = { "hpmcounter8h",   ctr32,  read_zero },
-+    [CSR_HPMCOUNTER9H]   = { "hpmcounter9h",   ctr32,  read_zero },
-+    [CSR_HPMCOUNTER10H]  = { "hpmcounter10h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER11H]  = { "hpmcounter11h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER12H]  = { "hpmcounter12h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER13H]  = { "hpmcounter13h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER14H]  = { "hpmcounter14h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER15H]  = { "hpmcounter15h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER16H]  = { "hpmcounter16h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER17H]  = { "hpmcounter17h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER18H]  = { "hpmcounter18h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER19H]  = { "hpmcounter19h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER20H]  = { "hpmcounter20h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER21H]  = { "hpmcounter21h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER22H]  = { "hpmcounter22h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER23H]  = { "hpmcounter23h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER24H]  = { "hpmcounter24h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER25H]  = { "hpmcounter25h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER26H]  = { "hpmcounter26h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER27H]  = { "hpmcounter27h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER28H]  = { "hpmcounter28h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER29H]  = { "hpmcounter29h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER30H]  = { "hpmcounter30h",  ctr32,  read_zero },
-+    [CSR_HPMCOUNTER31H]  = { "hpmcounter31h",  ctr32,  read_zero },
++    g_string_append_printf(s, "</feature>");
 +
-+    [CSR_MHPMCOUNTER3H]  = { "mhpmcounter3h",  any32,  read_zero },
-+    [CSR_MHPMCOUNTER4H]  = { "mhpmcounter4h",  any32,  read_zero },
-+    [CSR_MHPMCOUNTER5H]  = { "mhpmcounter5h",  any32,  read_zero },
-+    [CSR_MHPMCOUNTER6H]  = { "mhpmcounter6h",  any32,  read_zero },
-+    [CSR_MHPMCOUNTER7H]  = { "mhpmcounter7h",  any32,  read_zero },
-+    [CSR_MHPMCOUNTER8H]  = { "mhpmcounter8h",  any32,  read_zero },
-+    [CSR_MHPMCOUNTER9H]  = { "mhpmcounter9h",  any32,  read_zero },
-+    [CSR_MHPMCOUNTER10H] = { "mhpmcounter10h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER11H] = { "mhpmcounter11h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER12H] = { "mhpmcounter12h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER13H] = { "mhpmcounter13h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER14H] = { "mhpmcounter14h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER15H] = { "mhpmcounter15h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER16H] = { "mhpmcounter16h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER17H] = { "mhpmcounter17h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER18H] = { "mhpmcounter18h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER19H] = { "mhpmcounter19h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER20H] = { "mhpmcounter20h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER21H] = { "mhpmcounter21h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER22H] = { "mhpmcounter22h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER23H] = { "mhpmcounter23h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER24H] = { "mhpmcounter24h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER25H] = { "mhpmcounter25h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER26H] = { "mhpmcounter26h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER27H] = { "mhpmcounter27h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER28H] = { "mhpmcounter28h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER29H] = { "mhpmcounter29h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER30H] = { "mhpmcounter30h", any32,  read_zero },
-+    [CSR_MHPMCOUNTER31H] = { "mhpmcounter31h", any32,  read_zero },
- #endif /* !CONFIG_USER_ONLY */
- };
++    cpu->dyn_csr_xml = g_string_free(s, false);
++    return CSR_TABLE_SIZE;
++}
++
+ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+@@ -417,16 +199,14 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+                                  36, "riscv-32bit-fpu.xml", 0);
+     }
+ #if defined(TARGET_RISCV32)
+-    gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+-                             240, "riscv-32bit-csr.xml", 0);
+-
+     gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+                              1, "riscv-32bit-virtual.xml", 0);
+ #elif defined(TARGET_RISCV64)
+-    gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+-                             240, "riscv-64bit-csr.xml", 0);
+-
+     gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+                              1, "riscv-64bit-virtual.xml", 0);
+ #endif
++
++    gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
++                             riscv_gen_dynamic_csr_xml(cs, cs->gdb_num_regs),
++                             "riscv-csr.xml", 0);
+ }
 -- 
 2.7.4
 
