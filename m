@@ -1,56 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kzBfF-0000zu-PT
-	for mharc-qemu-riscv@gnu.org; Mon, 11 Jan 2021 23:52:18 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51520)
+	id 1kzBfM-00012L-PV
+	for mharc-qemu-riscv@gnu.org; Mon, 11 Jan 2021 23:52:26 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51534)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kzBfC-0000xi-EC; Mon, 11 Jan 2021 23:52:14 -0500
-Received: from mail-qk1-x72e.google.com ([2607:f8b0:4864:20::72e]:41897)
+ id 1kzBfF-0000zn-CX; Mon, 11 Jan 2021 23:52:18 -0500
+Received: from mail-qv1-xf35.google.com ([2607:f8b0:4864:20::f35]:44038)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1kzBfA-0001hI-5M; Mon, 11 Jan 2021 23:52:14 -0500
-Received: by mail-qk1-x72e.google.com with SMTP id 19so883388qkm.8;
- Mon, 11 Jan 2021 20:52:11 -0800 (PST)
+ id 1kzBfC-0001iH-Qg; Mon, 11 Jan 2021 23:52:17 -0500
+Received: by mail-qv1-xf35.google.com with SMTP id d11so408083qvo.11;
+ Mon, 11 Jan 2021 20:52:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=o+drKs7Fjj3+XOK6USpNt42SKZl44x4gNsfqshr4X/w=;
- b=onEbDYEHa4Oup1WWupF9nDXZNPoiHUFIM1Nt3UvB+tihTdVmT29xs9wh3PJ49OwxB+
- Gmyup9teIRA0brU7xEU2PlP5BJmUdIZNwWIyiA8VrPXVPmA9L6sfpJIb8GT7Uewb+n6Z
- ueGb994rhz6MHcTXZ/MU1uQll9Sa7TbD3j3xC/p6zVl8AZvbv/Puw8akc+XbGQyCxrq9
- IpTANYVBJXCcyRrK0gQ2Zn5pSKRZa8K6PTx7l8Z2HekPcTRPwKdfD36mZfBy6NEDYy7U
- wXzaW3uyYDWvx5vTjWi/Gk0otMGb4h1dXNLb2D1P/5iBQ2drNhu+0yXsp0WXOrEjDxcI
- IZMA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=u8DEazBQHMt8t61oENXWf0bQTSKivVZaKe9kaYJ0ezY=;
+ b=tL/hMN3EClj+1ynhfLMvUcQtPIH8RFAu89O6h6746UP4u/kehK4JVE+wV3+cUrUlZP
+ FsRDl7ehXms5hi1ihSMIo7uvT+XcOCA7WKOQfz7unH9/FXcqacwv9PZ/1DyMJpjKgvRi
+ NKgmD6jacMd808Wwbbu0MHJBQfWh7n+B2s2rgnelS5GHAzo6P6c+FUFx6UwjJsyxayXe
+ bLr+w3fj1DdCBP1++X2neMfCWbaqA6pXEnQj8+o3zb3HIJzsvXotLDUecLD7lQ1OvMQD
+ FTpCMpZzJCYt1HfJRRhg/OPPlTsjI5xY/aWOmFpn4g9VKjqm/wDbNUxo81HhYrfI0qIk
+ gWJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=o+drKs7Fjj3+XOK6USpNt42SKZl44x4gNsfqshr4X/w=;
- b=TsVUNeY4b8Xg6vga5Zban1yje/Gfk027QFcnpfU9KMoy7NacGYkjsX3OaN9u+okXPo
- CDxmG4xbyuf5HPu1DLGWsjFqep5LMV3S2+ryOTz7mgLaPLnQ93hHjYnjU7OtwL1WolO6
- dnrg5Dmc6pFjm3BA6kreP9U3EVJEaRkOErVaQ+7lMWYg3ivLp4epCJYnmIH/XatFhSMR
- a/VWas+njjeaxjKwIb85sgsXkWm+TLUdVHnWL8QvWK8tiRxFGATzAnA+Mkqo5rdTr/+W
- U2roRRNNQEoLj5iUKX3KWFlnNsZes/oeRSZ/CWEAtndPVBMsl+K0UrcqdH3DeJpPvsQY
- KLqA==
-X-Gm-Message-State: AOAM532Q/O+quDwECgzUqWHQSA0hjF8+w/gZ+hk0WIFrWWMcD0tIMn33
- QxJHFEIhIODyr0G+PosgFRY=
-X-Google-Smtp-Source: ABdhPJyNuosDUq1yOz4Ryy62B1DK40w9paXdnqs2LAWifDDRebN0YWhyU5Ot53nSHTL1ehI8A6vtGw==
-X-Received: by 2002:a37:c0b:: with SMTP id 11mr2832831qkm.32.1610427130893;
- Mon, 11 Jan 2021 20:52:10 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=u8DEazBQHMt8t61oENXWf0bQTSKivVZaKe9kaYJ0ezY=;
+ b=CAlnwGTnZBWw0+QJiJ7xhPgNe2MPQyzyR4FBrcHkvwkBfihqoyej/AYQYieSvDQVVs
+ tgK98Bj4YfGzn0vfirLFGhHQPyFuFSIqXi3wxDCKkJ9NEYh0oeAvFm59guzffXK2+hq+
+ PEONYdHIAjAUyAvI8b1WIM+mH22TGajzbBR2rzHQRJguXhUVVZPTgqUtKxlCzrrRR6Ip
+ nqfFXWZ8/K7ut/1bpVRUq8BLSIR0Z8QN7arpmPBjtX5WVfyQaTN10e71we7mOcS52zvF
+ DYfFLW65UziZ+0GbODghjmy/1Kd1GTTFETt5hUeqNjG2QuOQMyuyHq6MM36kJfJmIo/w
+ xjvg==
+X-Gm-Message-State: AOAM532Ii1w+J9Lq3kAo3gYfWRsIZ1Nv5f8uSNVcgO8AssMMH8dnhCve
+ hOnPKrm3PMluQYpVycIWGiY=
+X-Google-Smtp-Source: ABdhPJx4yAKYQpSPWLPPYhjO8zNqc+Z7vNl/FaN2R/S1tG+/nAIfoBWQw4Enpy0NtMX5UlUAwA7L0Q==
+X-Received: by 2002:a05:6214:13a3:: with SMTP id
+ h3mr2943759qvz.5.1610427133647; 
+ Mon, 11 Jan 2021 20:52:13 -0800 (PST)
 Received: from pek-vx-bsp2.wrs.com (unknown-124-94.windriver.com.
  [147.11.124.94])
- by smtp.gmail.com with ESMTPSA id b67sm863814qkc.44.2021.01.11.20.52.08
+ by smtp.gmail.com with ESMTPSA id b67sm863814qkc.44.2021.01.11.20.52.11
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 11 Jan 2021 20:52:10 -0800 (PST)
+ Mon, 11 Jan 2021 20:52:13 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Jim Wilson <jimw@sifive.com>, Alistair Francis <alistair.francis@wdc.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 0/4] target/riscv: Generate the GDB XML file for CSR registers
- dynamically
-Date: Tue, 12 Jan 2021 12:52:00 +0800
-Message-Id: <1610427124-49887-1-git-send-email-bmeng.cn@gmail.com>
+Subject: [PATCH 1/4] target/riscv: Make csr_ops[CSR_TABLE_SIZE] external
+Date: Tue, 12 Jan 2021 12:52:01 +0800
+Message-Id: <1610427124-49887-2-git-send-email-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72e;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x72e.google.com
+In-Reply-To: <1610427124-49887-1-git-send-email-bmeng.cn@gmail.com>
+References: <1610427124-49887-1-git-send-email-bmeng.cn@gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f35;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qv1-xf35.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -70,49 +73,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2021 04:52:15 -0000
+X-List-Received-Date: Tue, 12 Jan 2021 04:52:20 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
+In preparation to generate the CSR register list for GDB stub
+dynamically, change csr_ops[] to non-static so that it can be
+referenced externally.
 
-At present QEMU RISC-V uses a hardcoded XML to report the feature
-"org.gnu.gdb.riscv.csr" [1]. There are two major issues with the
-approach being used currently:
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+---
 
-- The XML does not specify the "regnum" field of a CSR entry, hence
-  consecutive numbers are used by the remote GDB client to access
-  CSRs. In QEMU we have to maintain a map table to convert the GDB
-  number to the hardware number which is error prone.
-- The XML contains some CSRs that QEMU does not implement at all,
-  which causes an "E14" response sent to remote GDB client.
+ target/riscv/cpu.h |  8 ++++++++
+ target/riscv/csr.c | 10 +---------
+ 2 files changed, 9 insertions(+), 9 deletions(-)
 
-Change to generate the CSR register list dynamically, based on the
-availability presented in the CSR function table. This new approach
-will reflect a correct list of CSRs that QEMU actually implements.
-
-[1] https://sourceware.org/gdb/current/onlinedocs/gdb/RISC_002dV-Features.html#RISC_002dV-Features
-
-
-Bin Meng (4):
-  target/riscv: Make csr_ops[CSR_TABLE_SIZE] external
-  target/riscv: Add CSR name in the CSR function table
-  target/riscv: Generate the GDB XML file for CSR registers dynamically
-  target/riscv: Remove built-in GDB XML files for CSRs
-
- default-configs/targets/riscv32-linux-user.mak |   2 +-
- default-configs/targets/riscv32-softmmu.mak    |   2 +-
- default-configs/targets/riscv64-linux-user.mak |   2 +-
- default-configs/targets/riscv64-softmmu.mak    |   2 +-
- target/riscv/cpu.h                             |  11 +
- target/riscv/cpu.c                             |  12 +
- target/riscv/csr.c                             | 342 ++++++++++++++++++-------
- target/riscv/gdbstub.c                         | 308 ++++------------------
- gdb-xml/riscv-32bit-csr.xml                    | 250 ------------------
- gdb-xml/riscv-64bit-csr.xml                    | 250 ------------------
- 10 files changed, 320 insertions(+), 861 deletions(-)
- delete mode 100644 gdb-xml/riscv-32bit-csr.xml
- delete mode 100644 gdb-xml/riscv-64bit-csr.xml
-
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 2649949..6f9e1cc 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -482,6 +482,14 @@ typedef struct {
+     riscv_csr_op_fn op;
+ } riscv_csr_operations;
+ 
++/* CSR function table constants */
++enum {
++    CSR_TABLE_SIZE = 0x1000
++};
++
++/* CSR function table */
++extern riscv_csr_operations csr_ops[];
++
+ void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+ 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 10ab82e..507e8ee 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -23,14 +23,6 @@
+ #include "qemu/main-loop.h"
+ #include "exec/exec-all.h"
+ 
+-/* CSR function table */
+-static riscv_csr_operations csr_ops[];
+-
+-/* CSR function table constants */
+-enum {
+-    CSR_TABLE_SIZE = 0x1000
+-};
+-
+ /* CSR function table public API */
+ void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops)
+ {
+@@ -1378,7 +1370,7 @@ int riscv_csrrw_debug(CPURISCVState *env, int csrno, target_ulong *ret_value,
+ }
+ 
+ /* Control and Status Register function table */
+-static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
++riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* User Floating-Point CSRs */
+     [CSR_FFLAGS] =              { fs,   read_fflags,      write_fflags      },
+     [CSR_FRM] =                 { fs,   read_frm,         write_frm         },
 -- 
 2.7.4
 
