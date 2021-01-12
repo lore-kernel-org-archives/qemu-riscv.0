@@ -1,49 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kzGAx-0003it-7e
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Jan 2021 04:41:20 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37106)
+	id 1kzGB1-0003jY-9a
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Jan 2021 04:41:24 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37110)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kzGAo-0003gJ-FU
- for qemu-riscv@nongnu.org; Tue, 12 Jan 2021 04:41:10 -0500
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:38231)
+ id 1kzGAp-0003gs-Ro
+ for qemu-riscv@nongnu.org; Tue, 12 Jan 2021 04:41:12 -0500
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430]:36133)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kzGAi-0007Qk-Lp
- for qemu-riscv@nongnu.org; Tue, 12 Jan 2021 04:41:10 -0500
-Received: by mail-pj1-x1029.google.com with SMTP id j13so1307050pjz.3
- for <qemu-riscv@nongnu.org>; Tue, 12 Jan 2021 01:41:03 -0800 (PST)
+ id 1kzGAm-0007RQ-Vn
+ for qemu-riscv@nongnu.org; Tue, 12 Jan 2021 04:41:11 -0500
+Received: by mail-pf1-x430.google.com with SMTP id b3so731546pft.3
+ for <qemu-riscv@nongnu.org>; Tue, 12 Jan 2021 01:41:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=fl1+91Qp/M1QMhLTc9AwqONPESXGYC0ye50jErfNJXM=;
- b=i8A3wptLPLTX6u1X0RmGB9uZ0P8ONWJCA5cj9Hv+Us4zjwWgyjoZPvXTWKYc5UXNau
- ZG1oyg1WeCvXeV46elmeHlT/SZZj+u2ppxJDMdwG1WJfca6sMKI+pNgSTse/yLVFMA2e
- mYAcgjZqy4t+c4kLJCY6bjx/nxFjAH+pAdMx4Nw7Ctup3fA6yPOaqMSU10Z03B98gUhq
- uXdW95+6+KpIfuL3B7u90ndO+B830gRYwvLY4tS2vupxM2djIWz4ksrj5aA/eHtFI9kA
- dfWSM/qGFFA4TMOUc+f8FUYZh+4gChXU4byOgqXb+8cKDahYob7aUwZvTMR9+YqD54uY
- ftEA==
+ bh=mkSgJj+AdtN+uPMUSm+PksB4+E8StQF6TXa/U+VZxYE=;
+ b=AoTRIu7XbNG35qogik87/vcbB4rTyT9+oXAWWsubJvx/oTSrm4rZ7Eik9jVGXCArXR
+ gqd0w7mHZlqBaUxL24dk6wpIKWU1xhIWrqCE9Ob9tPiYyOCjX2xXuJrcJ3PBK4dn8cJv
+ FqnlSkkcmIO7m5AE+xQn0maNuwA/5VbPF3q113drZuXIC37Z33xQjCO4vCqHI3nvZGwn
+ 0fNx8yyL8nJeuf9ROeju92ldPx7iBOvrsxTOTlPGxSsxHvPjTLDbfmoPBi5qTouTJDJZ
+ 6AYhVF5f19gj3QyYJQhNT4QIul+oob+vqOnUpACAnfOyoaz7KmkTmX7BviQq3PN1HSi8
+ PhNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=fl1+91Qp/M1QMhLTc9AwqONPESXGYC0ye50jErfNJXM=;
- b=NaUDSwBRzvseMWk5Ml3kmoQeAlS8tsfIfKWsBMaxCOZ2sZjOBcKZHOoyt1xC6UmkUk
- bQ99fAN1UHhL2U2wrFcWyol3OUglF0KhSHgt72p9DKMmdFvooqqlFS7aasDOVCing4iB
- /W9nm5PiQTQh+zatqhum3uB1p8uzWIoTpK9i7v8SX7F1Az9ep2mJq5f3lpGVvvAVkZp8
- 8Dz/QFQjFr8r2eHskrF0hc4JiYVAnhG+i9c1q5XnYPLmFzGaBvX1/WPMKYRU9nn49YAB
- NvUWa7iEWyIm764nqXtroXsM/wwkrsSdgqodUM3+1542UaMXp0Z4mGC/5Lr1vF80844d
- 4gxQ==
-X-Gm-Message-State: AOAM5332woYdB3N/PslGRiC5mWJamij9wDi33mNaoMYc3jzY9E8NRiBt
- 70/dSaliD7sEAd9sxoaoXBrz7w==
-X-Google-Smtp-Source: ABdhPJwRwDjonZJXZY90yDn9ay3oqA+8YaxyN4ejqO916eQnAYMcwpGAZiftM1HVFnEqfunrSyoD5g==
-X-Received: by 2002:a17:902:8f90:b029:db:fc74:c59a with SMTP id
- z16-20020a1709028f90b02900dbfc74c59amr3963174plo.58.1610444462584; 
- Tue, 12 Jan 2021 01:41:02 -0800 (PST)
+ bh=mkSgJj+AdtN+uPMUSm+PksB4+E8StQF6TXa/U+VZxYE=;
+ b=qO4pJe9Q1lD2Fza4mmYsLu/DdKJWE80skJz+9bQOm0PQByjAzhZyvl+OrsEEotn/RA
+ CpzRuFKjeWmWoZO7E7jRz5ZaiXKcdCqG2uUktHqMZWuMXdUXbMUL/N7SLJzQ9WBldNAZ
+ /i2cLjCIRrt24BLkZmasWUvljtDnVTQR6hOMqsw+z7aGRwE+9vkp4oWEa77sMDfP8G3m
+ 3NdWSafmEG5YwIfLjYJ0r+HQk3CV+a1G2n+LhNzJCE+bhAQRfQvzkuJaKgmmANMhuh7t
+ bn7oD0opY63CLBAltcVEEVamUw+Omqihb6bxLB+QPPmiCpNe4duvG+KF+JjCNE48WhmQ
+ vvxQ==
+X-Gm-Message-State: AOAM531iV8fVtJzGWhDxLaff+aKlrJO0Jql/SL554VCPRL9r4qxNANtz
+ JU0Y7l0GuNQE2VXt/vjlhGO93g==
+X-Google-Smtp-Source: ABdhPJx2PXKffxCQuMghCQrpSfW0azsmyYrKNBE0SX27cES1F2KENMgsek7d/AVZxx7X0i0h6kgX3g==
+X-Received: by 2002:a63:574c:: with SMTP id h12mr3909671pgm.79.1610444467053; 
+ Tue, 12 Jan 2021 01:41:07 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id h16sm2865664pgd.62.2021.01.12.01.41.00
+ by smtp.gmail.com with ESMTPSA id h16sm2865664pgd.62.2021.01.12.01.41.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Jan 2021 01:41:01 -0800 (PST)
+ Tue, 12 Jan 2021 01:41:06 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -53,15 +52,14 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Richard Henderson <richard.henderson@linaro.org>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v6 16/72] target/riscv: rvv:1.0: add translation-time nan-box
- helper function
-Date: Tue, 12 Jan 2021 17:38:50 +0800
-Message-Id: <20210112093950.17530-17-frank.chang@sifive.com>
+Subject: [PATCH v6 17/72] target/riscv: rvv-1.0: configure instructions
+Date: Tue, 12 Jan 2021 17:38:51 +0800
+Message-Id: <20210112093950.17530-18-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210112093950.17530-1-frank.chang@sifive.com>
 References: <20210112093950.17530-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1029.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,109 +79,134 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2021 09:41:11 -0000
+X-List-Received-Date: Tue, 12 Jan 2021 09:41:13 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
-
-* Add fp16 nan-box check generator function, if a 16-bit input is not
-  properly nanboxed, then the input is replaced with the default qnan.
-* Add do_nanbox() helper function to utilize gen_check_nanbox_X() to
-  generate the NaN-boxed floating-point values based on SEW setting.
-* Apply nanbox helper in opfvf_trans().
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 35 ++++++++++++++++++++++++-
- target/riscv/translate.c                | 10 +++++++
- 2 files changed, 44 insertions(+), 1 deletion(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 53 +++++++++----------------
+ target/riscv/vector_helper.c            | 14 ++++++-
+ 2 files changed, 31 insertions(+), 36 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 18a1c409fcf..ccfa93cf2f8 100644
+index ccfa93cf2f8..a3732e76e09 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2100,6 +2100,33 @@ GEN_OPIVI_NARROW_TRANS(vnclip_vi, IMM_ZX, vnclip_vx)
- /*
-  *** Vector Float Point Arithmetic Instructions
-  */
-+
-+/*
-+ * As RVF-only cpus always have values NaN-boxed to 64-bits,
-+ * RVF and RVD can be treated equally.
-+ * We don't have to deal with the cases of: SEW > FLEN.
-+ *
-+ * If SEW < FLEN, check whether input fp register is a valid
-+ * NaN-boxed value, in which case the least-significant SEW bits
-+ * of the f regsiter are used, else the canonical NaN value is used.
-+ */
-+static void do_nanbox(DisasContext *s, TCGv_i64 out, TCGv_i64 in)
-+{
-+    switch (s->sew) {
-+    case 1:
-+        gen_check_nanbox_h(out, in);
-+        break;
-+    case 2:
-+        gen_check_nanbox_s(out, in);
-+        break;
-+    case 3:
-+        tcg_gen_mov_i64(out, in);
-+        break;
-+    default:
-+        g_assert_not_reached();
-+    }
-+}
-+
- /* Vector Single-Width Floating-Point Add/Subtract Instructions */
+@@ -132,28 +132,29 @@ static bool require_noover_seg(const int8_t dst, const int8_t nf,
+     return !is_overlapped(dst, nf, src, 1);
+ }
  
- /*
-@@ -2152,6 +2179,7 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
+-static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
++static bool do_vsetvl(DisasContext *ctx, int rd, int rs1, TCGv s2)
  {
-     TCGv_ptr dest, src2, mask;
-     TCGv_i32 desc;
-+    TCGv_i64 t1;
+-    TCGv s1, s2, dst;
++    TCGv s1, dst;
  
-     TCGLabel *over = gen_new_label();
-     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-@@ -2165,12 +2193,17 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, vs2));
-     tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
+     if (!require_rvv(ctx) || !has_ext(ctx, RVV)) {
+         return false;
+     }
  
--    fn(dest, mask, cpu_fpr[rs1], src2, cpu_env, desc);
-+    /* NaN-box f[rs1] */
-+    t1 = tcg_temp_new_i64();
-+    do_nanbox(s, t1, cpu_fpr[rs1]);
+-    s2 = tcg_temp_new();
+     dst = tcg_temp_new();
+ 
+-    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
+-    if (a->rs1 == 0) {
++    if (rd == 0 && rs1 == 0) {
++        s1 = tcg_temp_new();
++        tcg_gen_mov_tl(s1, cpu_vl);
++    } else if (rs1 == 0) {
+         /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
+         s1 = tcg_const_tl(RV_VLEN_MAX);
+     } else {
+         s1 = tcg_temp_new();
+-        gen_get_gpr(s1, a->rs1);
++        gen_get_gpr(s1, rs1);
+     }
+-    gen_get_gpr(s2, a->rs2);
 +
-+    fn(dest, mask, t1, src2, cpu_env, desc);
- 
-     tcg_temp_free_ptr(dest);
-     tcg_temp_free_ptr(mask);
-     tcg_temp_free_ptr(src2);
-     tcg_temp_free_i32(desc);
-+    tcg_temp_free_i64(t1);
-     mark_vs_dirty(s);
-     gen_set_label(over);
+     gen_helper_vsetvl(dst, cpu_env, s1, s2);
+-    gen_set_gpr(a->rd, dst);
++    gen_set_gpr(rd, dst);
+     mark_vs_dirty(ctx);
+     tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+     lookup_and_goto_ptr(ctx);
+@@ -165,35 +166,17 @@ static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
      return true;
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index d9b3b37f698..511b7b868f5 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -122,6 +122,16 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
-  *
-  * Here, the result is always nan-boxed, even the canonical nan.
-  */
-+static void gen_check_nanbox_h(TCGv_i64 out, TCGv_i64 in)
-+{
-+    TCGv_i64 t_max = tcg_const_i64(0xffffffffffff0000ull);
-+    TCGv_i64 t_nan = tcg_const_i64(0xffffffffffff7e00ull);
-+
-+    tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
-+    tcg_temp_free_i64(t_max);
-+    tcg_temp_free_i64(t_nan);
-+}
-+
- static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+ }
+ 
+-static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)
++static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
  {
-     TCGv_i64 t_max = tcg_const_i64(0xffffffff00000000ull);
+-    TCGv s1, s2, dst;
+-
+-    if (!require_rvv(ctx) || !has_ext(ctx, RVV)) {
+-        return false;
+-    }
+-
+-    s2 = tcg_const_tl(a->zimm);
+-    dst = tcg_temp_new();
+-
+-    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
+-    if (a->rs1 == 0) {
+-        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
+-        s1 = tcg_const_tl(RV_VLEN_MAX);
+-    } else {
+-        s1 = tcg_temp_new();
+-        gen_get_gpr(s1, a->rs1);
+-    }
+-    gen_helper_vsetvl(dst, cpu_env, s1, s2);
+-    gen_set_gpr(a->rd, dst);
+-    mark_vs_dirty(ctx);
+-    gen_goto_tb(ctx, 0, ctx->pc_succ_insn);
+-    ctx->base.is_jmp = DISAS_NORETURN;
++    TCGv s2 = tcg_temp_new();
++    gen_get_gpr(s2, a->rs2);
++    return do_vsetvl(ctx, a->rd, a->rs1, s2);
++}
+ 
+-    tcg_temp_free(s1);
+-    tcg_temp_free(s2);
+-    tcg_temp_free(dst);
+-    return true;
++static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)
++{
++    TCGv s2 = tcg_const_tl(a->zimm);
++    return do_vsetvl(ctx, a->rd, a->rs1, s2);
+ }
+ 
+ /* vector register offset from env */
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 89aa7cbf73f..61917d34ffe 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -31,12 +31,24 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+ {
+     int vlmax, vl;
+     RISCVCPU *cpu = env_archcpu(env);
++    uint64_t lmul = FIELD_EX64(s2, VTYPE, VLMUL);
+     uint16_t sew = 8 << FIELD_EX64(s2, VTYPE, VSEW);
+     uint8_t ediv = FIELD_EX64(s2, VTYPE, VEDIV);
+     bool vill = FIELD_EX64(s2, VTYPE, VILL);
+     target_ulong reserved = FIELD_EX64(s2, VTYPE, RESERVED);
+ 
+-    if ((sew > cpu->cfg.elen) || vill || (ediv != 0) || (reserved != 0)) {
++    if (lmul & 4) {
++        /* Fractional LMUL. */
++        if (lmul == 4 ||
++            cpu->cfg.elen >> (8 - lmul) < sew) {
++            vill = true;
++        }
++    }
++
++    if ((sew > cpu->cfg.elen)
++        || vill
++        || (ediv != 0)
++        || (reserved != 0)) {
+         /* only set vill bit. */
+         env->vtype = FIELD_DP64(0, VTYPE, VILL, 1);
+         env->vl = 0;
 -- 
 2.17.1
 
