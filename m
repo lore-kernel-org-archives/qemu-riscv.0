@@ -1,82 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kziOc-0001dg-Id
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Jan 2021 10:49:20 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46696)
+	id 1kzjQp-0001dT-Ph
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Jan 2021 11:55:43 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35288)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kziOW-0001a3-H0; Wed, 13 Jan 2021 10:49:16 -0500
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435]:33639)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kzjQa-0001Vi-1Q; Wed, 13 Jan 2021 11:55:24 -0500
+Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:44751)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1kziOU-0007SV-Mq; Wed, 13 Jan 2021 10:49:12 -0500
-Received: by mail-wr1-x435.google.com with SMTP id t30so2651233wrb.0;
- Wed, 13 Jan 2021 07:49:09 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1kzjQS-0003VS-Cp; Wed, 13 Jan 2021 11:55:21 -0500
+Received: by mail-io1-xd33.google.com with SMTP id z5so5428330iob.11;
+ Wed, 13 Jan 2021 08:55:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:from:to:cc:references:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=E3wtd3qw+as/QhriapeELz91lcwVZj53Ki+3VVGHMIo=;
- b=lRERm5/a6+e0PR7yITwbZz0zBMitGnOHodpIAzsmy5hUnTLynr5H5AMwf6YagyvQNf
- vZdZlqpf/fsrKs6qBWIssLILvIqGWl66l15Ha3f7UJ+7ywwqJQQj+zqgyvW7dRw/jNiA
- uWblShfWz75D8odJGXhfZcmqtkZzxGvgZZERhnUCjooZN1sme9IYB/WwJQ6TSYaRHxYh
- Sj1xkcjtqomO+irafd8SI04pVE1bJvi83p+sTCSYpsV6lKyqTFLiHsSsoFMzMKjq0FRU
- vvpD+dErypWnPqKLsHUPJU3Xlexpq/nVOAXoi3rq7H2n9o/G51wEQUACkv3Mmw9t9YaC
- r1Og==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=B3c+OkbpE7ApZcVMn8sR142NACKXfJ9j/DuphwKqs70=;
+ b=YUCIP+/MefIxLV9fkeAcCneDu6XA6duXdLoN9kT2/xSkH92JVyedHDPZHUCWhUnkDX
+ NaELYuu5Z5LdlPqry+WwOBppH343OR5t++Y0p2bAQZoVJaUYA3gyBT92VnhdhkUhE7gs
+ u+B3esMUoWwwfdAzTL9zbaRVxlsXDdGNmc6RbS49ytvWdpyjewkwgKGUf+lqrQ3lbN6U
+ 72yBZXcNSNrnVf6WAlSMkmdbKMt0v3n4i2Tha31IEKCohypgcP0+UtMRePlpYZJDQxNV
+ EjYVyzBP7xvV5URJJxoacMMftNULfZjXay66KUZuwJsMonGIP2H6TK7/Zo4oULJCLMyR
+ KAcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:from:to:cc:references:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=E3wtd3qw+as/QhriapeELz91lcwVZj53Ki+3VVGHMIo=;
- b=Gnvr/J6S2R8bPwKiwt/rZNcSowfrPxs+q3Zu4yIeVwvSXv57zXA0Yuzs5Fxd0zhdxT
- PuGlqD5DO7oMaNRq/zMs2DqR/RWG+lVwlafoQiAS/dAWIATh3H38P7ME3lE8qVyc0NeQ
- sKG9pw8mmHtjCSHVHl7AlnvC9ZlJdF/z3YTwHUndCa5vL9fbYqUEUktszrYBaOPNI5Ud
- Vz9CpSQV/oJlLQt3mxXh1BvxA5msap9mr+V6e7jag7WJcL4+YTIJGg5m2Mkq3M3Nn8Ko
- m02VbgZTvdCywtx/FSP8msVz5hbYL/pZ+Td6s81cX9tjYvKyaYVDvgQbq622Lxd3IbZm
- WCAg==
-X-Gm-Message-State: AOAM53091cyo0i2q9zFcYO8UGK3deIVHFuNn/Ys9yjJy1KGtHKuX7DxR
- oLiV27kFXYNMugq2lW701Rs=
-X-Google-Smtp-Source: ABdhPJwET/K9IzbD8Ledf8orVIZKqRYZ2BFiTBrSXQDL2phDXJgYeYbGB8Cr6N/WJ2gpomW5iq8CRQ==
-X-Received: by 2002:adf:dc87:: with SMTP id r7mr3293743wrj.305.1610552948124; 
- Wed, 13 Jan 2021 07:49:08 -0800 (PST)
-Received: from [192.168.1.36] (13.red-83-57-169.dynamicip.rima-tde.net.
- [83.57.169.13])
- by smtp.gmail.com with ESMTPSA id o14sm3721342wri.48.2021.01.13.07.49.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Jan 2021 07:49:07 -0800 (PST)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 2/5] tcg/ppc: Hoist common argument loads in tcg_out_op()
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-To: Richard Henderson <richard.henderson@linaro.org>,
- Miroslav Rezanina <mrezanin@redhat.com>
-Cc: Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Huacai Chen <chenhuacai@kernel.org>, qemu-riscv@nongnu.org,
- Stefan Weil <sw@weilnetz.de>, Cornelia Huck <cohuck@redhat.com>,
- qemu-devel@nongnu.org, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, Thomas Huth <thuth@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Aurelien Jarno <aurelien@aurel32.net>
-References: <20210111150114.1415930-1-f4bug@amsat.org>
- <20210111150114.1415930-3-f4bug@amsat.org>
- <fa4c5ea6-3ca6-6aa4-6dea-5b400bc7ccd1@amsat.org>
-Message-ID: <7baba218-340a-9426-6933-0024e0d4110d@amsat.org>
-Date: Wed, 13 Jan 2021 16:49:05 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=B3c+OkbpE7ApZcVMn8sR142NACKXfJ9j/DuphwKqs70=;
+ b=GpurrXKASJy9lW8VtgpnLaDocoXLW/L+s2RZAzAg9qJNN3UKGgSVl8wI5HU6PkOua2
+ duaAwNs1zJpPhNqxn8P6qouUt+8gsNx+g7LieXRWAQkG+VHiUFy53nA8wyrTXya9dlhx
+ RIZVDXNzILhFaAfYfFXR5+BmwDD3FhTl+iHd0ykh94bJLNhQL/9QBnXy/o0loxaylN/1
+ vEVc1oEdPvPc7721jSJo8VGg4i4hfc9DUGx35GH2k2ahMk06fOqSRUyYJ3YoqktLBVjU
+ yO/R21RqyhH2CWob+YRAQt9EdwGds/kWZkRsKfcUBrDmbkG8+zu9lIA4U7eLaqnjlWNn
+ F53Q==
+X-Gm-Message-State: AOAM533kaacY6iUjDuXn/qBW7IRoCaOC/CXuTgrpPVHCMZ+rPiRiRj9O
+ f8W6A6stZjSZ2f0+jL27m6yH8V3J7cdLCLfaVAo=
+X-Google-Smtp-Source: ABdhPJxAfl+fZa87erSzwe2KWazVXAVJT55WswuWSxA1c+sJbTboRjvN9pD2kZOqvt69dT7iakHbV4rWSYw6t4UaChc=
+X-Received: by 2002:a02:ca09:: with SMTP id i9mr3204961jak.135.1610556913246; 
+ Wed, 13 Jan 2021 08:55:13 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <fa4c5ea6-3ca6-6aa4-6dea-5b400bc7ccd1@amsat.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x435.google.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
+References: <20201231113010.27108-1-bmeng.cn@gmail.com>
+ <20201231113010.27108-8-bmeng.cn@gmail.com>
+In-Reply-To: <20201231113010.27108-8-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 13 Jan 2021 08:54:47 -0800
+Message-ID: <CAKmqyKPFUuHN602DNLx5U9onvsDe1svqoWd-vphNPD3s7TaELg@mail.gmail.com>
+Subject: Re: [PATCH 07/22] hw/sd: ssi-sd: Suffix a data block with CRC16
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
+ Alistair Francis <alistair.francis@wdc.com>, Qemu-block <qemu-block@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.248, NICE_REPLY_A=-0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -89,47 +73,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2021 15:49:17 -0000
+X-List-Received-Date: Wed, 13 Jan 2021 16:55:35 -0000
 
-On 1/13/21 4:25 PM, Philippe Mathieu-Daudé wrote:
-> On 1/11/21 4:01 PM, Philippe Mathieu-Daudé wrote:
->> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
->> ---
->>  tcg/ppc/tcg-target.c.inc | 294 ++++++++++++++++++---------------------
->>  1 file changed, 138 insertions(+), 156 deletions(-)
-> ...
-> 
->> @@ -2818,10 +2805,9 @@ static void tcg_out_op(TCGContext *s, TCGOpcode opc, const TCGArg *args,
->>      case INDEX_op_bswap32_i32:
->>      case INDEX_op_bswap32_i64:
->>          /* Stolen from gcc's builtin_bswap32 */
->> -        a1 = args[1];
->> -        a0 = args[0] == a1 ? TCG_REG_R0 : args[0];
->> +        a0 = a0 == a1 ? TCG_REG_R0 : a0;
-> 
-> Oops... Here is probably the regression reported by Miroslav,
-> I shouldn't have changed this line, simply remove the a1
+On Thu, Dec 31, 2020 at 3:38 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> Per the SD spec, a valid data block is suffixed with a 16-bit CRC
+> generated by the standard CCITT polynomial x16+x12+x5+1. This part
+> is currently missing in the ssi-sd state machine. Without it, all
+> data block transfer fails in guest software because the expected
+> CRC16 is missing on the data out line.
+>
+> Fixes: 775616c3ae8c ("Partial SD card SPI mode support")
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Oops^2, wrong hunk =) Following one...
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-> 
->>  
->> -        /* a1 = args[1] # abcd */
->> +        /* a1 = a1 # abcd */
->>          /* a0 = rotate_left (a1, 8) # bcda */
->>          tcg_out_rlw(s, RLWINM, a0, a1, 8, 0, 31);
->>          /* a0 = (a0 & ~0xff000000) | ((a1 r<< 24) & 0xff000000) # dcda */
-@@ -2830,12 +2816,12 @@ static void tcg_out_op(TCGContext *s, TCGOpcode
-opc, const TCGArg *args,
-         tcg_out_rlw(s, RLWIMI, a0, a1, 24, 16, 23);
+Alistair
 
-Here, is the line I shouldn't have changed:
-
-         if (a0 == TCG_REG_R0) {
--            tcg_out_mov(s, TCG_TYPE_REG, args[0], a0);
-+            tcg_out_mov(s, TCG_TYPE_REG, a0, a0);
-         }
-         break;
-
-(multiple occurrences).
+> ---
+>
+>  hw/sd/ssi-sd.c | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+>
+> diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
+> index 228ce4ddc7..10b0ac2eaf 100644
+> --- a/hw/sd/ssi-sd.c
+> +++ b/hw/sd/ssi-sd.c
+> @@ -17,6 +17,7 @@
+>  #include "hw/qdev-properties.h"
+>  #include "hw/sd/sd.h"
+>  #include "qapi/error.h"
+> +#include "qemu/crc-ccitt.h"
+>  #include "qemu/module.h"
+>  #include "qom/object.h"
+>
+> @@ -40,6 +41,7 @@ typedef enum {
+>      SSI_SD_RESPONSE,
+>      SSI_SD_DATA_START,
+>      SSI_SD_DATA_READ,
+> +    SSI_SD_DATA_CRC16,
+>  } ssi_sd_mode;
+>
+>  struct ssi_sd_state {
+> @@ -48,6 +50,7 @@ struct ssi_sd_state {
+>      int cmd;
+>      uint8_t cmdarg[4];
+>      uint8_t response[5];
+> +    uint16_t crc16;
+>      int32_t arglen;
+>      int32_t response_pos;
+>      int32_t stopping;
+> @@ -193,12 +196,24 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+>      case SSI_SD_DATA_START:
+>          DPRINTF("Start read block\n");
+>          s->mode = SSI_SD_DATA_READ;
+> +        s->response_pos = 0;
+>          return 0xfe;
+>      case SSI_SD_DATA_READ:
+>          val = sdbus_read_byte(&s->sdbus);
+> +        s->crc16 = crc_ccitt_false(s->crc16, (uint8_t *)&val, 1);
+>          if (!sdbus_data_ready(&s->sdbus)) {
+>              DPRINTF("Data read end\n");
+> +            s->mode = SSI_SD_DATA_CRC16;
+> +        }
+> +        return val;
+> +    case SSI_SD_DATA_CRC16:
+> +        val = (s->crc16 & 0xff00) >> 8;
+> +        s->crc16 <<= 8;
+> +        s->response_pos++;
+> +        if (s->response_pos == 2) {
+> +            DPRINTF("CRC16 read end\n");
+>              s->mode = SSI_SD_CMD;
+> +            s->response_pos = 0;
+>          }
+>          return val;
+>      }
+> @@ -236,6 +251,7 @@ static const VMStateDescription vmstate_ssi_sd = {
+>          VMSTATE_INT32(cmd, ssi_sd_state),
+>          VMSTATE_UINT8_ARRAY(cmdarg, ssi_sd_state, 4),
+>          VMSTATE_UINT8_ARRAY(response, ssi_sd_state, 5),
+> +        VMSTATE_UINT16(crc16, ssi_sd_state),
+>          VMSTATE_INT32(arglen, ssi_sd_state),
+>          VMSTATE_INT32(response_pos, ssi_sd_state),
+>          VMSTATE_INT32(stopping, ssi_sd_state),
+> @@ -287,6 +303,7 @@ static void ssi_sd_reset(DeviceState *dev)
+>      s->cmd = 0;
+>      memset(s->cmdarg, 0, sizeof(s->cmdarg));
+>      memset(s->response, 0, sizeof(s->response));
+> +    s->crc16 = 0;
+>      s->arglen = 0;
+>      s->response_pos = 0;
+>      s->stopping = 0;
+> --
+> 2.25.1
+>
+>
 
