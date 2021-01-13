@@ -1,67 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kzkyL-000357-Vy
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Jan 2021 13:34:22 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59418)
+	id 1kzkz7-0004Bp-GY
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Jan 2021 13:35:09 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59640)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kzkyI-00033H-8c; Wed, 13 Jan 2021 13:34:18 -0500
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:34434)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kzkz6-00049v-KE
+ for qemu-riscv@nongnu.org; Wed, 13 Jan 2021 13:35:08 -0500
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034]:55640)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kzkyC-00054o-Al; Wed, 13 Jan 2021 13:34:15 -0500
-Received: by mail-io1-xd32.google.com with SMTP id u17so6188065iow.1;
- Wed, 13 Jan 2021 10:34:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=nFiHzUGdOnxgADp/IprQYlmXs2eCeT10BNnUJxKlJxU=;
- b=XpTiVZrZzc/CtHD3o6ZDgiQl1ciVlyZ8c/k6NdwqPUIk+Oq632eE2AAHd0rJVHk35L
- bkpP+muAczGZgOeH2nfvEHMKrRHFOP9q+QBNz/Bx4oMbMBLn7Oq2wpuUoEvotEi5sZMS
- YezgANjsIgKLY/db2F+QQjAEzcFVC+QbnQ8PQv3MPwF7IjkeVdj7nagM+QUEo6w1Ni8g
- INEpm1vGDzPi2ZiDpUCLfuIxhcGnDfbZLKovGiDP5lry9vSwaGDwCO89a7Pvis56FMCl
- gM5RtOfH1gVC496UDNm8hKONejDZSnx4nnkrl/7xzjl/cwjJR5M0OSEwav2FdYuGJMcM
- gf4w==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1kzkz3-0005LA-94
+ for qemu-riscv@nongnu.org; Wed, 13 Jan 2021 13:35:08 -0500
+Received: by mail-pj1-x1034.google.com with SMTP id p12so1662224pju.5
+ for <qemu-riscv@nongnu.org>; Wed, 13 Jan 2021 10:35:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=gYTnyLNc9BDdch+CYT/M8NXtPx1Qcjw9nfMbl+C0AfM=;
+ b=Ch4kCmbWWv4489uaGsdeEhwG8p/5HGqaNIKfbipKDu2xnEBt0EVAp7UcU9GEZf3iyO
+ 7eQHIfLLtqjRRJy4xacVLV2dbX5DSQ6elH7tPzF01SJdsxC4Tu3/ynpUE6ddDApoR+rD
+ rfTjxelItBzJpyTER8X8LjSui8YKL3xVRFNJu9of6AJlYkA8JpT4QmGArpIgAuYtbICn
+ 25vv0mudvmNz/LSoNMyc5NkTIFeatMRao0cc878X58McX/TMpeyyhtglZDMyl5ZLbE9i
+ 67SHezA0i59TTDETRa+VKx01m0uRG1Y49d/MvdQlSVcb7WTl1XaeMwDuxX4x1/oq4+u5
+ 12lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=nFiHzUGdOnxgADp/IprQYlmXs2eCeT10BNnUJxKlJxU=;
- b=gqsyAvkKcnW103KgyI2twwZZlp9hyeOEDpwNdpqEFCx3TCGbNB9wIdnWZrwtYoBG1P
- U94g11X/j9CI7RlrZUCJy/mclpGIcWBCYkLMtTFCdX/CO72xXE+cm8J63ffpm/W4k1BZ
- g3ZYutFiVy2aowLgR96rJUNW4VPhjKo/RgrIDV9QH0+yKpyIPxmpRtneXtzqoTBN52Yf
- whodxdsh0HdvcaEXYPyxEorFs8AEBQn8GrWfaFO0aOg8Imt4x1b8x2SchyuIyE354gMa
- zYE0JUVJDsg9vpv36E3R6CTkQxeP9qktZ7rUFaB9ar5z00SMW2+DwT11xdGl1icc8aZF
- pJIA==
-X-Gm-Message-State: AOAM531topY14xARzpttgH/Y5YSH1s/oaiEbRhEAgWSFLessyN/yrQWV
- Y80ABX5UQil/rqTvmHu0wJ85g+s2WLW2XM2BkTw=
-X-Google-Smtp-Source: ABdhPJx8t1rDlP1taoV1py/GZDB2TkxOVd4uv3QTx4Bp7t3tTm7ngm1ror7J0OKG20CJuQr+rw6U0e1n6qUgSLDxiok=
-X-Received: by 2002:a05:6638:83:: with SMTP id
- v3mr3500406jao.106.1610562848867; 
- Wed, 13 Jan 2021 10:34:08 -0800 (PST)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=gYTnyLNc9BDdch+CYT/M8NXtPx1Qcjw9nfMbl+C0AfM=;
+ b=AgvSN+Z10rznE7Mc3ZOmwDJ1yeUNumuJpUFvV17pYIduLPtzMgC4BwnH+UN+FzTA0N
+ bYghIu/W6zSQfRz1eKbUh4ieAZVOLvl4xLKFQmcXwXqtjsPPLiqYdnJlZoHoTUOFWchN
+ LmubyhTpmBsp1pJoLoDGS20wugd7m5Kh2b2k3+bG4OaoR++s2O/q64b1BxZY4ktHJ7s0
+ +SohTrwmUmjMMtyDk8mRhaYnEVR+1LTJQn/ONcF8r0ZpX6FedY1BBxrrTsAH4tttdQtL
+ mNXGwrX+ZXRmePBRxwxFs6NLWFhuf6NpsNjZHjXKv8P2voHViyvaYc7SrEMKK4nQR0Fm
+ azUQ==
+X-Gm-Message-State: AOAM531EmkEEvDENNv/m6Zd5E4pm5FQwx76GW5g1hG9me+SaooQlRW0B
+ ZfbvxoXo1wRclBf4vZvfziuHAA==
+X-Google-Smtp-Source: ABdhPJzhDJr2MfZOkiekrrdV15GgBARtyUwlrdrzdNSNxYAlVSDYg8uG+wt55Oh7z5q2tZsv+QhKFg==
+X-Received: by 2002:a17:90a:bb8c:: with SMTP id
+ v12mr578106pjr.227.1610562902984; 
+ Wed, 13 Jan 2021 10:35:02 -0800 (PST)
+Received: from [10.25.18.3] (rrcs-173-197-107-21.west.biz.rr.com.
+ [173.197.107.21])
+ by smtp.gmail.com with ESMTPSA id a31sm3024994pgb.93.2021.01.13.10.35.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 Jan 2021 10:35:02 -0800 (PST)
+Subject: Re: [PATCH 0/5] tcg: Restrict tcg_out_op() to arrays of
+ TCG_MAX_OP_ARGS elements
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ qemu-devel@nongnu.org
+Cc: Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Cornelia Huck <cohuck@redhat.com>, qemu-riscv@nongnu.org,
+ Stefan Weil <sw@weilnetz.de>, Huacai Chen <chenhuacai@kernel.org>,
+ Thomas Huth <thuth@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Andrzej Zaborowski <balrogg@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>
+References: <20210111150114.1415930-1-f4bug@amsat.org>
+ <43f360be-af44-27ce-619b-7a2ad169aa2f@linaro.org>
+ <e157e0ab-1d96-040c-5329-8ebb8064c7c2@amsat.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <7ba66bdc-c464-26c5-ef35-fdd6f2b538c9@linaro.org>
+Date: Wed, 13 Jan 2021 08:34:57 -1000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20201231113010.27108-1-bmeng.cn@gmail.com>
- <20201231113010.27108-21-bmeng.cn@gmail.com>
-In-Reply-To: <20201231113010.27108-21-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 13 Jan 2021 10:33:42 -0800
-Message-ID: <CAKmqyKMqTR2Ju4fWWU+BQi0yNjYSmOLXyC1CcwXGaZv04KzAvg@mail.gmail.com>
-Subject: Re: [PATCH 20/22] docs/system: Sort targets in alphabetical order
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Alistair Francis <alistair.francis@wdc.com>, Qemu-block <qemu-block@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+In-Reply-To: <e157e0ab-1d96-040c-5329-8ebb8064c7c2@amsat.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1034.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -74,58 +92,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2021 18:34:20 -0000
+X-List-Received-Date: Wed, 13 Jan 2021 18:35:09 -0000
 
-On Thu, Dec 31, 2020 at 3:50 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+On 1/13/21 5:07 AM, Philippe Mathieu-Daudé wrote:
+> On 1/11/21 6:22 PM, Richard Henderson wrote:
+>> On 1/11/21 5:01 AM, Philippe Mathieu-Daudé wrote:
+>>> Attempt to fix the warning reported by Miroslav using GCC 10:
+>>> https://www.mail-archive.com/qemu-devel@nongnu.org/msg771520.html
+>>>
+>>> Philippe Mathieu-Daudé (5):
+>>>   tcg/arm: Hoist common argument loads in tcg_out_op()
+>>>   tcg/ppc: Hoist common argument loads in tcg_out_op()
+>>>   tcg/s390: Hoist common argument loads in tcg_out_op()
+>>>   tcg: Restrict tcg_out_op() to arrays of TCG_MAX_OP_ARGS elements
+>>>   tcg: Restrict tcg_out_vec_op() to arrays of TCG_MAX_OP_ARGS elements
+>>
+>> I've been trying to figure out a cleaner way to handle these, but this is
+>> certainly ok for now, and avoids the Werror.
+>>
+>> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>>
+>> Will queue to tcg-next.
+> 
+> Please hold on, Miroslav found a regression in the PPC patch.
+> 
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I had found the trivial s390 one during regression and fixed it.  But I'll
+dequeue for the ppc one and let you re-post.
 
-Alistair
 
-> ---
->
->  docs/system/targets.rst | 19 ++++++++++++-------
->  1 file changed, 12 insertions(+), 7 deletions(-)
->
-> diff --git a/docs/system/targets.rst b/docs/system/targets.rst
-> index 560783644d..564cea9a9b 100644
-> --- a/docs/system/targets.rst
-> +++ b/docs/system/targets.rst
-> @@ -7,16 +7,21 @@ various targets are mentioned in the following sections.
->
->  Contents:
->
-> +..
-> +   This table of contents should be kept sorted alphabetically
-> +   by the title text of each file, which isn't the same ordering
-> +   as an alphabetical sort by filename.
-> +
->  .. toctree::
->
-> -   target-i386
-> +   target-arm
-> +   target-avr
-> +   target-m68k
-> +   target-mips
->     target-ppc
-> +   target-rx
-> +   target-s390x
->     target-sparc
->     target-sparc64
-> -   target-mips
-> -   target-arm
-> -   target-m68k
-> +   target-i386
->     target-xtensa
-> -   target-s390x
-> -   target-rx
-> -   target-avr
-> --
-> 2.25.1
->
->
+r~
 
