@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kzaNF-0007pW-O6
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Jan 2021 02:15:21 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49292)
+	id 1kzaNI-0007vt-75
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Jan 2021 02:15:24 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49338)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kzaND-0007kU-ML
- for qemu-riscv@nongnu.org; Wed, 13 Jan 2021 02:15:19 -0500
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:53069)
+ id 1kzaNG-0007rF-E0
+ for qemu-riscv@nongnu.org; Wed, 13 Jan 2021 02:15:22 -0500
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:43740)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1kzaNA-0004FX-7P
- for qemu-riscv@nongnu.org; Wed, 13 Jan 2021 02:15:19 -0500
-Received: by mail-pj1-x102f.google.com with SMTP id v1so563537pjr.2
- for <qemu-riscv@nongnu.org>; Tue, 12 Jan 2021 23:15:15 -0800 (PST)
+ id 1kzaNE-0004J1-Gu
+ for qemu-riscv@nongnu.org; Wed, 13 Jan 2021 02:15:22 -0500
+Received: by mail-pg1-x52b.google.com with SMTP id n10so910421pgl.10
+ for <qemu-riscv@nongnu.org>; Tue, 12 Jan 2021 23:15:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=1kUMsBJeTTaJT5hWSf4ZQEPL/s217cbvOOKIMRYR0N0=;
- b=b+XknbpNwBpEMuL0GwPYUWdX7zZKDfEC/shgM3WPCFsCezNmXORsZwb6beYB9rqFth
- DycAB0DnDN95ACQ3RXP6IcqYaWLOjLcpk1AellXRLD79IWKkhvcFxmKcq9H2zM/n//J+
- kSr4fwPiItdNfN0E3bZwov4BbP2297qnPg0vewaDGkC0sZ1j6UEl/sZAPvhYXnHOMZqQ
- eKQujST+SHLPfoQQ4yFa2hQCUZ6jb+ZuMDCKEz1OAu74OCvdW+DwNFnXURNdEJ1BXnjA
- k2yrqhEpyut5S5EknK0ygiTr0cSKqoKutXXWGaJXVfOYEmgZarOtIxTuoW8VGHD/8SY3
- 6MXA==
+ bh=cg/XSyBDgfWMKTaj4H5pnj/4AfFpWEh9kdHo1QO7YT0=;
+ b=NS0ez8MPi0X4EbHi+B5qyNbwgnh1n7o3YbCOWWmYPbaeYUWRf7MfpB4eyIKlgmwam1
+ l1zYrGNxwWp7pJRZRR7eD78psyz7haWU6jk/2S2HVDTn1lRPeoDHUfcTy46fjQQ2umJc
+ GIuVh7yVfOMgBkEobbWQuq1KADVr3k4y35EItd3NRReIMebfWHgBgesP2lkivw6rUr+k
+ 7K592HJE3cFZo/BqTpjd7odUiJ/NosSGrrbtYqcdXJgyHRoFQIgslL8rQWrxQaI7bGv4
+ pWa86q7uvFY7AAcn4kZ4/onDcNEd5iRz5IqICi0RWr0qfYSrn7MstwekNFaltB8sl8uK
+ WM7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=1kUMsBJeTTaJT5hWSf4ZQEPL/s217cbvOOKIMRYR0N0=;
- b=RGfvxLj/koiwGwyoup5Aw+j4HCmw91i+LdXfbXGT5EcEd+gBaITzAsrfb1r8lg4j3a
- sV2RVn/HzOAhHmXp/WeQhcGf53jjON600qWdC+Slksq/tmZGBY2ZqG25iVk5Hk5zH1Nr
- JMoj9iIbjsU1geSsS/LQp80JlsYHi1wDGAdq/fLy7Ak0tuZzND5P322aE17wOQVC7M2s
- q1RRdbG65V41gD/utyBaYpAD5mHp9MTLsgzJ01Uq6ap/eEXgA3fam4gD44Se9h9s1L0G
- ySk1fEKUkqnKbSvY++yU++QffycqvL2xRJE5iZpk4c0CHC9vhJcZVdoXHHAeaNxH1CkZ
- 6kBg==
-X-Gm-Message-State: AOAM532h8+VAHbOnLL3VIP8IFncWUurfT4pg2Xh+UUny9BAg6jJAWJ3i
- KGunNxsWM5itzqq9ypMFWubrmw==
-X-Google-Smtp-Source: ABdhPJz2wn1RzhnIQOe5OVvSEqlBXLI8wW7P35YqY5Dj4Oro9DmDJioWYwSV199lDdjPPzFsuzsYeQ==
-X-Received: by 2002:a17:90a:f408:: with SMTP id
- ch8mr823116pjb.222.1610522114506; 
- Tue, 12 Jan 2021 23:15:14 -0800 (PST)
+ bh=cg/XSyBDgfWMKTaj4H5pnj/4AfFpWEh9kdHo1QO7YT0=;
+ b=Qtd5E7mxno0JsR4GgNnm5FkL+0Bkx5K7ZK6Xe6/o0MXhny08MN9KtvA1xEMyjICxce
+ neeor72v6jkQUug0JfBLga+FO93b5PnXNDek6YCWeEIiYFN6ZBA+BES+DpM0PFxaLFDW
+ Fv2pTLZExrdQBG68HUrrlm/mGKLd6FuKJr3Jy/vQ7RojXBKnmQuUUZidHCVOF6Ib6xdA
+ jJdxj6mbTqQn4rFQTHUodf/LK46x6uhj0EHRmGATXFC/fKmT5yYRe1kIlbnPgUYizlyX
+ rkSYKRSkKWFSUrWOA9LwFVhP0WyY/dOHABknHHWEjb6y8OnffKBUa93VyV+MIo0UjWo1
+ 80Qw==
+X-Gm-Message-State: AOAM532osWaeeOqeUzjcotMRWzNooA+c3uQXV1nHRd8P2D/kA/q1D4b0
+ 1XD0boeJk2SIdnz8CMIKh1tfUg==
+X-Google-Smtp-Source: ABdhPJwJltMq326+RDedv4QOk0tqIEDlLzOZYYbiB6rW9NA1kseQQYwmJU1qXkcO9OGjoeYpRgI+/Q==
+X-Received: by 2002:a62:2f03:0:b029:1af:b254:d1b0 with SMTP id
+ v3-20020a622f030000b02901afb254d1b0mr1091981pfv.5.1610522119183; 
+ Tue, 12 Jan 2021 23:15:19 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id l7sm1361888pjy.29.2021.01.12.23.15.12
+ by smtp.gmail.com with ESMTPSA id l7sm1361888pjy.29.2021.01.12.23.15.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Jan 2021 23:15:14 -0800 (PST)
+ Tue, 12 Jan 2021 23:15:18 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -53,14 +53,14 @@ Cc: Kito Cheng <kito.cheng@sifive.com>, Frank Chang <frank.chang@sifive.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [RFC v4 14/16] target/riscv: rvb: address calculation
-Date: Wed, 13 Jan 2021 15:13:46 +0800
-Message-Id: <20210113071350.24852-15-frank.chang@sifive.com>
+Subject: [RFC v4 15/16] target/riscv: rvb: add/shift with prefix zero-extend
+Date: Wed, 13 Jan 2021 15:13:47 +0800
+Message-Id: <20210113071350.24852-16-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210113071350.24852-1-frank.chang@sifive.com>
 References: <20210113071350.24852-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -80,7 +80,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2021 07:15:20 -0000
+X-List-Received-Date: Wed, 13 Jan 2021 07:15:22 -0000
 
 From: Kito Cheng <kito.cheng@sifive.com>
 
@@ -89,124 +89,72 @@ Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
  target/riscv/insn32-64.decode           |  3 +++
- target/riscv/insn32.decode              |  3 +++
- target/riscv/insn_trans/trans_rvb.c.inc | 23 ++++++++++++++++++
- target/riscv/translate.c                | 32 +++++++++++++++++++++++++
- 4 files changed, 61 insertions(+)
+ target/riscv/insn_trans/trans_rvb.c.inc | 22 ++++++++++++++++++++++
+ target/riscv/translate.c                |  6 ++++++
+ 3 files changed, 31 insertions(+)
 
 diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
-index 894db5e3abf..2f80b0c07ae 100644
+index 2f80b0c07ae..01b28718af5 100644
 --- a/target/riscv/insn32-64.decode
 +++ b/target/riscv/insn32-64.decode
-@@ -104,6 +104,9 @@ rorw       0110000 .......... 101 ..... 0111011 @r
- rolw       0110000 .......... 001 ..... 0111011 @r
- grevw      0110100 .......... 101 ..... 0111011 @r
- gorcw      0010100 .......... 101 ..... 0111011 @r
-+sh1add_uw  0010000 .......... 010 ..... 0111011 @r
-+sh2add_uw  0010000 .......... 100 ..... 0111011 @r
-+sh3add_uw  0010000 .......... 110 ..... 0111011 @r
+@@ -107,6 +107,7 @@ gorcw      0010100 .......... 101 ..... 0111011 @r
+ sh1add_uw  0010000 .......... 010 ..... 0111011 @r
+ sh2add_uw  0010000 .......... 100 ..... 0111011 @r
+ sh3add_uw  0010000 .......... 110 ..... 0111011 @r
++add_uw     0000100 .......... 000 ..... 0111011 @r
  
  bsetiw     0010100 .......... 001 ..... 0011011 @sh5
  bclriw     0100100 .......... 001 ..... 0011011 @sh5
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 0756ea5cc28..b90c1c0a350 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -621,6 +621,9 @@ ror        0110000 .......... 101 ..... 0110011 @r
- rol        0110000 .......... 001 ..... 0110011 @r
- grev       0110100 .......... 101 ..... 0110011 @r
- gorc       0010100 .......... 101 ..... 0110011 @r
-+sh1add     0010000 .......... 010 ..... 0110011 @r
-+sh2add     0010000 .......... 100 ..... 0110011 @r
-+sh3add     0010000 .......... 110 ..... 0110011 @r
- 
- bseti      00101. ........... 001 ..... 0010011 @sh
- bclri      01001. ........... 001 ..... 0010011 @sh
+@@ -116,3 +117,5 @@ sroiw      0010000 .......... 101 ..... 0011011 @sh5
+ roriw      0110000 .......... 101 ..... 0011011 @sh5
+ greviw     0110100 .......... 101 ..... 0011011 @sh5
+ gorciw     0010100 .......... 101 ..... 0011011 @sh5
++
++slli_uw    00001. ........... 001 ..... 0011011 @sh
 diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
-index a4181dbf0de..ca987f2705f 100644
+index ca987f2705f..94fcf822a36 100644
 --- a/target/riscv/insn_trans/trans_rvb.c.inc
 +++ b/target/riscv/insn_trans/trans_rvb.c.inc
-@@ -226,6 +226,17 @@ static bool trans_gorci(DisasContext *ctx, arg_gorci *a)
-     return gen_shifti(ctx, a, gen_helper_gorc);
- }
+@@ -390,4 +390,26 @@ GEN_TRANS_SHADD_UW(1)
+ GEN_TRANS_SHADD_UW(2)
+ GEN_TRANS_SHADD_UW(3)
  
-+#define GEN_TRANS_SHADD(SHAMT)                                             \
-+static bool trans_sh##SHAMT##add(DisasContext *ctx, arg_sh##SHAMT##add *a) \
-+{                                                                          \
-+    REQUIRE_EXT(ctx, RVB);                                                 \
-+    return gen_arith(ctx, a, gen_sh##SHAMT##add);                          \
++static bool trans_add_uw(DisasContext *ctx, arg_add_uw *a)
++{
++    REQUIRE_EXT(ctx, RVB);
++    return gen_arith(ctx, a, gen_add_uw);
 +}
 +
-+GEN_TRANS_SHADD(1)
-+GEN_TRANS_SHADD(2)
-+GEN_TRANS_SHADD(3)
++static bool trans_slli_uw(DisasContext *ctx, arg_slli_uw *a)
++{
++    TCGv source1 = tcg_temp_new();
++    gen_get_gpr(source1, a->rs1);
 +
- /* RV64-only instructions */
- #ifdef TARGET_RISCV64
- 
-@@ -367,4 +378,16 @@ static bool trans_gorciw(DisasContext *ctx, arg_gorciw *a)
-     return gen_shiftiw(ctx, a, gen_gorcw);
- }
- 
-+#define GEN_TRANS_SHADD_UW(SHAMT)                             \
-+static bool trans_sh##SHAMT##add_uw(DisasContext *ctx,        \
-+                                    arg_sh##SHAMT##add_uw *a) \
-+{                                                             \
-+    REQUIRE_EXT(ctx, RVB);                                    \
-+    return gen_arith(ctx, a, gen_sh##SHAMT##add_uw);          \
++    if (a->shamt < 32) {
++        tcg_gen_deposit_z_i64(source1, source1, a->shamt, 32);
++    } else {
++        tcg_gen_shli_i64(source1, source1, a->shamt);
++    }
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    return true;
 +}
-+
-+GEN_TRANS_SHADD_UW(1)
-+GEN_TRANS_SHADD_UW(2)
-+GEN_TRANS_SHADD_UW(3)
 +
  #endif
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index e845b311a3d..7365e591eb7 100644
+index 7365e591eb7..dbcc15ed73f 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -812,6 +812,21 @@ static bool gen_grevi(DisasContext *ctx, arg_grevi *a)
-     return true;
- }
+@@ -930,6 +930,12 @@ GEN_SHADD_UW(1)
+ GEN_SHADD_UW(2)
+ GEN_SHADD_UW(3)
  
-+#define GEN_SHADD(SHAMT)                                       \
-+static void gen_sh##SHAMT##add(TCGv ret, TCGv arg1, TCGv arg2) \
-+{                                                              \
-+    TCGv t = tcg_temp_new();                                   \
-+                                                               \
-+    tcg_gen_shli_tl(t, arg1, SHAMT);                           \
-+    tcg_gen_add_tl(ret, t, arg2);                              \
-+                                                               \
-+    tcg_temp_free(t);                                          \
++static void gen_add_uw(TCGv ret, TCGv arg1, TCGv arg2)
++{
++    tcg_gen_ext32u_tl(arg1, arg1);
++    tcg_gen_add_tl(ret, arg1, arg2);
 +}
-+
-+GEN_SHADD(1)
-+GEN_SHADD(2)
-+GEN_SHADD(3)
-+
- #ifdef TARGET_RISCV64
- 
- static void gen_ctzw(TCGv ret, TCGv arg1)
-@@ -898,6 +913,23 @@ static void gen_gorcw(TCGv ret, TCGv arg1, TCGv arg2)
-     gen_helper_gorcw(ret, arg1, arg2);
- }
- 
-+#define GEN_SHADD_UW(SHAMT)                                       \
-+static void gen_sh##SHAMT##add_uw(TCGv ret, TCGv arg1, TCGv arg2) \
-+{                                                                 \
-+    TCGv t = tcg_temp_new();                                      \
-+                                                                  \
-+    tcg_gen_ext32u_tl(t, arg1);                                   \
-+                                                                  \
-+    tcg_gen_shli_tl(t, t, SHAMT);                                 \
-+    tcg_gen_add_tl(ret, t, arg2);                                 \
-+                                                                  \
-+    tcg_temp_free(t);                                             \
-+}
-+
-+GEN_SHADD_UW(1)
-+GEN_SHADD_UW(2)
-+GEN_SHADD_UW(3)
 +
  #endif
  
