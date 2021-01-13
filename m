@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kzjQp-0001dT-Ph
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Jan 2021 11:55:43 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35288)
+	id 1kzjVT-0006hm-Fm
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Jan 2021 12:00:28 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36154)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kzjQa-0001Vi-1Q; Wed, 13 Jan 2021 11:55:24 -0500
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:44751)
+ id 1kzjVA-0006cL-7h; Wed, 13 Jan 2021 12:00:09 -0500
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:35551)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kzjQS-0003VS-Cp; Wed, 13 Jan 2021 11:55:21 -0500
-Received: by mail-io1-xd33.google.com with SMTP id z5so5428330iob.11;
- Wed, 13 Jan 2021 08:55:14 -0800 (PST)
+ id 1kzjV5-00055s-Cb; Wed, 13 Jan 2021 12:00:07 -0500
+Received: by mail-io1-xd30.google.com with SMTP id y19so5561794iov.2;
+ Wed, 13 Jan 2021 09:00:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=B3c+OkbpE7ApZcVMn8sR142NACKXfJ9j/DuphwKqs70=;
- b=YUCIP+/MefIxLV9fkeAcCneDu6XA6duXdLoN9kT2/xSkH92JVyedHDPZHUCWhUnkDX
- NaELYuu5Z5LdlPqry+WwOBppH343OR5t++Y0p2bAQZoVJaUYA3gyBT92VnhdhkUhE7gs
- u+B3esMUoWwwfdAzTL9zbaRVxlsXDdGNmc6RbS49ytvWdpyjewkwgKGUf+lqrQ3lbN6U
- 72yBZXcNSNrnVf6WAlSMkmdbKMt0v3n4i2Tha31IEKCohypgcP0+UtMRePlpYZJDQxNV
- EjYVyzBP7xvV5URJJxoacMMftNULfZjXay66KUZuwJsMonGIP2H6TK7/Zo4oULJCLMyR
- KAcw==
+ :cc; bh=1v1xIxIZMIBfAPhA51JVgMJJf/RjXzhelljvVyZPNVA=;
+ b=I+IBaAnGXhiLI5nlISeNfSSyrUaTVPZY5dW1FfBgYXH0Dy11ZUCTgiEXTgK6Rf6eUW
+ ojYDY/427T5Ayy3auoM1/wUK/5DSiCHvPxxRYGY+gcr6bxg3D5E7lPteRG3E05JjFyKR
+ qC3t+aChMWRvqxM8S0kZ2CrOEZ7FjFbRBG3ogjY7mSuHFLGXbzmmURMhFiYwm8Bg0H/O
+ vkgBJ0T5hIKlLK5ma9zk142jy2d8tOW7Yiuyk5QSDMfrzuwtkISUTqHIy1UMhS440kD9
+ EnIYj1u/V+XNvuHvHYqyvvMOtsXHHNNjCaqagF7vp2BZOXxwxGIbgbhGAU+V39gJWJFw
+ vGLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=B3c+OkbpE7ApZcVMn8sR142NACKXfJ9j/DuphwKqs70=;
- b=GpurrXKASJy9lW8VtgpnLaDocoXLW/L+s2RZAzAg9qJNN3UKGgSVl8wI5HU6PkOua2
- duaAwNs1zJpPhNqxn8P6qouUt+8gsNx+g7LieXRWAQkG+VHiUFy53nA8wyrTXya9dlhx
- RIZVDXNzILhFaAfYfFXR5+BmwDD3FhTl+iHd0ykh94bJLNhQL/9QBnXy/o0loxaylN/1
- vEVc1oEdPvPc7721jSJo8VGg4i4hfc9DUGx35GH2k2ahMk06fOqSRUyYJ3YoqktLBVjU
- yO/R21RqyhH2CWob+YRAQt9EdwGds/kWZkRsKfcUBrDmbkG8+zu9lIA4U7eLaqnjlWNn
- F53Q==
-X-Gm-Message-State: AOAM533kaacY6iUjDuXn/qBW7IRoCaOC/CXuTgrpPVHCMZ+rPiRiRj9O
- f8W6A6stZjSZ2f0+jL27m6yH8V3J7cdLCLfaVAo=
-X-Google-Smtp-Source: ABdhPJxAfl+fZa87erSzwe2KWazVXAVJT55WswuWSxA1c+sJbTboRjvN9pD2kZOqvt69dT7iakHbV4rWSYw6t4UaChc=
-X-Received: by 2002:a02:ca09:: with SMTP id i9mr3204961jak.135.1610556913246; 
- Wed, 13 Jan 2021 08:55:13 -0800 (PST)
+ bh=1v1xIxIZMIBfAPhA51JVgMJJf/RjXzhelljvVyZPNVA=;
+ b=MnSyd3x9aPdIgqcDDbKcUKcA6rbgbYAkLaF8fWKGxGuygfuO5nEdv3nKnlm3zEfk4P
+ NgAj00nKwmUSrp9EJXc+CYJlhYIMp4BL0zmykvhWx9WCbTgiQaOnw5q+7x+Bc97KrBBx
+ MuWaUPQWwB7XITBfBEdf/U8pwmXkcZ/98JEoZ3tFeg6TM4hOC+VB6k9SBFhYGNZHB6RS
+ KnSEdy+9QUwSBpnDIfw9gmeDW5fj9L8ywDG3fxvTJu44spY/xaum6DPiCwCCYyJ14Mz1
+ rSkACN06x4NRP8wFkfDgGzoadvd1xgkLDtqLzMrPDR7e3m+apLnk3ZaG01VsirQ6Qa76
+ 3biA==
+X-Gm-Message-State: AOAM532CZQqSZRJGRujaUIaLiIKFoKeYLHdoHOZkHzqnjErxMrtWbSsv
+ +SHajiBrz9WzuLSXZaxSERcdyMb2HQT1Zp1FPttBLYITC8Q=
+X-Google-Smtp-Source: ABdhPJxzCaUeZSTL6Y8ZzR95P7PdBuOFPLCTjnUEqtELPjS9nt9/l5IhhTKRUpaBT8Pxvsj4ZmjTZhi79Ytv59IPtEQ=
+X-Received: by 2002:a5e:850b:: with SMTP id i11mr2428195ioj.42.1610557201175; 
+ Wed, 13 Jan 2021 09:00:01 -0800 (PST)
 MIME-Version: 1.0
 References: <20201231113010.27108-1-bmeng.cn@gmail.com>
- <20201231113010.27108-8-bmeng.cn@gmail.com>
-In-Reply-To: <20201231113010.27108-8-bmeng.cn@gmail.com>
+ <20201231113010.27108-9-bmeng.cn@gmail.com>
+In-Reply-To: <20201231113010.27108-9-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 13 Jan 2021 08:54:47 -0800
-Message-ID: <CAKmqyKPFUuHN602DNLx5U9onvsDe1svqoWd-vphNPD3s7TaELg@mail.gmail.com>
-Subject: Re: [PATCH 07/22] hw/sd: ssi-sd: Suffix a data block with CRC16
+Date: Wed, 13 Jan 2021 08:59:35 -0800
+Message-ID: <CAKmqyKP5=_ZCvN5N3_62NbG7WWftBmtJZfi+3VXTSqgTmdo1TA@mail.gmail.com>
+Subject: Re: [PATCH 08/22] hw/sd: ssi-sd: Support multiple block read (CMD18)
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
  Alistair Francis <alistair.francis@wdc.com>, Qemu-block <qemu-block@nongnu.org>,
@@ -51,8 +51,8 @@ Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,19 +73,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2021 16:55:35 -0000
+X-List-Received-Date: Wed, 13 Jan 2021 17:00:16 -0000
 
-On Thu, Dec 31, 2020 at 3:38 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Thu, Dec 31, 2020 at 3:41 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> Per the SD spec, a valid data block is suffixed with a 16-bit CRC
-> generated by the standard CCITT polynomial x16+x12+x5+1. This part
-> is currently missing in the ssi-sd state machine. Without it, all
-> data block transfer fails in guest software because the expected
-> CRC16 is missing on the data out line.
+> In the case of a multiple block read operation every transfered
+> block has its suffix of CRC16. Update the state machine logic to
+> handle multiple block read.
 >
-> Fixes: 775616c3ae8c ("Partial SD card SPI mode support")
+> This also fixed the wrong command index for STOP_TRANSMISSION,
+> the required command to interupt the multiple block read command,
+> in the old codes. It should be CMD12 (0x4c), not CMD13 (0x4d).
+>
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
@@ -94,75 +95,68 @@ Alistair
 
 > ---
 >
->  hw/sd/ssi-sd.c | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
+>  hw/sd/ssi-sd.c | 15 ++++++++++++---
+>  1 file changed, 12 insertions(+), 3 deletions(-)
 >
 > diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
-> index 228ce4ddc7..10b0ac2eaf 100644
+> index 10b0ac2eaf..889260bd8f 100644
 > --- a/hw/sd/ssi-sd.c
 > +++ b/hw/sd/ssi-sd.c
-> @@ -17,6 +17,7 @@
->  #include "hw/qdev-properties.h"
->  #include "hw/sd/sd.h"
->  #include "qapi/error.h"
-> +#include "qemu/crc-ccitt.h"
->  #include "qemu/module.h"
->  #include "qom/object.h"
->
-> @@ -40,6 +41,7 @@ typedef enum {
->      SSI_SD_RESPONSE,
->      SSI_SD_DATA_START,
->      SSI_SD_DATA_READ,
-> +    SSI_SD_DATA_CRC16,
->  } ssi_sd_mode;
->
->  struct ssi_sd_state {
-> @@ -48,6 +50,7 @@ struct ssi_sd_state {
->      int cmd;
+> @@ -51,6 +51,7 @@ struct ssi_sd_state {
 >      uint8_t cmdarg[4];
 >      uint8_t response[5];
-> +    uint16_t crc16;
+>      uint16_t crc16;
+> +    int32_t read_bytes;
 >      int32_t arglen;
 >      int32_t response_pos;
 >      int32_t stopping;
-> @@ -193,12 +196,24 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
->      case SSI_SD_DATA_START:
->          DPRINTF("Start read block\n");
->          s->mode = SSI_SD_DATA_READ;
-> +        s->response_pos = 0;
+> @@ -82,7 +83,7 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+>      ssi_sd_state *s = SSI_SD(dev);
+>
+>      /* Special case: allow CMD12 (STOP TRANSMISSION) while reading data.  */
+> -    if (s->mode == SSI_SD_DATA_READ && val == 0x4d) {
+> +    if (s->mode == SSI_SD_DATA_READ && val == 0x4c) {
+>          s->mode = SSI_SD_CMD;
+>          /* There must be at least one byte delay before the card responds.  */
+>          s->stopping = 1;
+> @@ -200,8 +201,9 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
 >          return 0xfe;
 >      case SSI_SD_DATA_READ:
 >          val = sdbus_read_byte(&s->sdbus);
-> +        s->crc16 = crc_ccitt_false(s->crc16, (uint8_t *)&val, 1);
->          if (!sdbus_data_ready(&s->sdbus)) {
+> +        s->read_bytes++;
+>          s->crc16 = crc_ccitt_false(s->crc16, (uint8_t *)&val, 1);
+> -        if (!sdbus_data_ready(&s->sdbus)) {
+> +        if (!sdbus_data_ready(&s->sdbus) || s->read_bytes == 512) {
 >              DPRINTF("Data read end\n");
-> +            s->mode = SSI_SD_DATA_CRC16;
-> +        }
-> +        return val;
-> +    case SSI_SD_DATA_CRC16:
-> +        val = (s->crc16 & 0xff00) >> 8;
-> +        s->crc16 <<= 8;
-> +        s->response_pos++;
-> +        if (s->response_pos == 2) {
-> +            DPRINTF("CRC16 read end\n");
->              s->mode = SSI_SD_CMD;
-> +            s->response_pos = 0;
+>              s->mode = SSI_SD_DATA_CRC16;
+>          }
+> @@ -212,7 +214,12 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+>          s->response_pos++;
+>          if (s->response_pos == 2) {
+>              DPRINTF("CRC16 read end\n");
+> -            s->mode = SSI_SD_CMD;
+> +            if (s->read_bytes == 512 && s->cmd != 17) {
+> +                s->mode = SSI_SD_DATA_START;
+> +            } else {
+> +                s->mode = SSI_SD_CMD;
+> +            }
+> +            s->read_bytes = 0;
+>              s->response_pos = 0;
 >          }
 >          return val;
->      }
-> @@ -236,6 +251,7 @@ static const VMStateDescription vmstate_ssi_sd = {
->          VMSTATE_INT32(cmd, ssi_sd_state),
+> @@ -252,6 +259,7 @@ static const VMStateDescription vmstate_ssi_sd = {
 >          VMSTATE_UINT8_ARRAY(cmdarg, ssi_sd_state, 4),
 >          VMSTATE_UINT8_ARRAY(response, ssi_sd_state, 5),
-> +        VMSTATE_UINT16(crc16, ssi_sd_state),
+>          VMSTATE_UINT16(crc16, ssi_sd_state),
+> +        VMSTATE_INT32(read_bytes, ssi_sd_state),
 >          VMSTATE_INT32(arglen, ssi_sd_state),
 >          VMSTATE_INT32(response_pos, ssi_sd_state),
 >          VMSTATE_INT32(stopping, ssi_sd_state),
-> @@ -287,6 +303,7 @@ static void ssi_sd_reset(DeviceState *dev)
->      s->cmd = 0;
+> @@ -304,6 +312,7 @@ static void ssi_sd_reset(DeviceState *dev)
 >      memset(s->cmdarg, 0, sizeof(s->cmdarg));
 >      memset(s->response, 0, sizeof(s->response));
-> +    s->crc16 = 0;
+>      s->crc16 = 0;
+> +    s->read_bytes = 0;
 >      s->arglen = 0;
 >      s->response_pos = 0;
 >      s->stopping = 0;
