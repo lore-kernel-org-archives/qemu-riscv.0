@@ -1,66 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1kzjqr-0006LQ-5H
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Jan 2021 12:22:33 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40902)
+	id 1kzjtN-0008E0-UH
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Jan 2021 12:25:09 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41492)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kzjqp-0006Iy-CI; Wed, 13 Jan 2021 12:22:31 -0500
-Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:40930)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kzjtL-0008BM-Gq; Wed, 13 Jan 2021 12:25:07 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335]:35300)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1kzjqn-00052U-NQ; Wed, 13 Jan 2021 12:22:31 -0500
-Received: by mail-io1-xd2f.google.com with SMTP id r9so5659456ioo.7;
- Wed, 13 Jan 2021 09:22:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1kzjtI-0005wj-3P; Wed, 13 Jan 2021 12:25:07 -0500
+Received: by mail-wm1-x335.google.com with SMTP id e25so2346147wme.0;
+ Wed, 13 Jan 2021 09:25:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=p3XeLmL+EqyMJBnKOgp74A16p7ga2Zbo0nHwMAsbgVA=;
- b=IKyRqwJSoDh6filf1qXOMRz+fC5UcZIV5u4d+ei3fYvxIsQayaN2DylnTSSy9BUZLT
- 0q83tu7VVkVNH7w5TAjUukgYnIkEQe6OmCncG+5C0twXmI/32YO9Mnmsb2g1MIPbo8uH
- Mdu/aQuVTfnXdCPNA25PYRKcbO2oGMEYExWJH41KQmkS2U/SJgBR1GfIn9K3Oi5tRm63
- qellq8dRdywukbyhZv6GQvjwtpDNaklTXnR/Ff4tMbq841tnBoQAzv+cxi5zCYjll22Q
- IP7ni8bHPbsGbdRflq1bubvdyhXtpJT19dXVNYvzAKrA36B0QoxSpv0Z1YYx5e8rO/+2
- hItA==
+ h=sender:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=qM+WMPm9+Hjt/UIhL77XA+4VCNDq6a3MUy1J9umBvsc=;
+ b=VbbfHn04l2rBSxh0AvYQkbS7S1MJjdzqudjakpJcWpUI4z5K/c/liCeC9UgV9YhQTO
+ Ci9dmAdy+ytRTTz77zCEXSkSlf2qc3/NiiJLE2GDkFZesVkA1TS/LneBEbMoqjpy9j68
+ gDO9lL2Sr3V15p74uKh1aSzvmlAm7kcEWbQeRSnOSmnyJXMXAqSkCR91ExwuOjlCZaY1
+ 29vxKh6sypY6lhlB/oRY8pKBuRKPHqU8beBTaCupUL0fvcdFffTtu5Y8YOqwB0I1mwTi
+ aRDvsIdaumHSzD7zqZgNUSnlrQVxwHdtTTmEFDURAS9ZkBacWLyPTiQukq9MIrqaaguS
+ RUjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=p3XeLmL+EqyMJBnKOgp74A16p7ga2Zbo0nHwMAsbgVA=;
- b=V1thJ66GGD56o7zpjo0orlbOfTsgjKf3EPYSLEb3RlzwCQt7PH7P5sq4C8JBUTAU0l
- apFfhf9R4yx9ioBuOkRjYxkPCnzls8IUA/gwvRH8aYPaLdVmTLgIti6IQSCgnKBH3bGU
- vP5IfjsYJ3jWQVoIAlyNn7oBCFIeqSB0OZJabef2iaN+DEjTI2Db2PjjSJ5C4XNwCAcs
- soiuMsOBLqgPwJWtsp3Lf3Wxooff3t5ohgRBfq14IleRzbqtJpRb5l6W7ZAgkxHTXxEc
- sg1kyGZNbA8T+L17J7cOzZAszMU/prxv7emHcnLCNnh/PSAjJ3w9kXNBtT5ovn8kD1tQ
- ldHg==
-X-Gm-Message-State: AOAM53238aIdD6NBCfa86gsyubItnHHdWtIxafV2r+n6Uz2oQf0yoAUk
- JQCBGIW+k595zI5DywHsf79KStpnO1UlEAfTzCg=
-X-Google-Smtp-Source: ABdhPJzbF2eRdWTG42pjonpahP8l2LpCYcixSOBmABPhPorayKTmDMZ4+FIf2CCbWQRDSJyKJm0NXfJ+7zS8Bdg+NSE=
-X-Received: by 2002:a5d:9514:: with SMTP id d20mr1175368iom.118.1610558548079; 
- Wed, 13 Jan 2021 09:22:28 -0800 (PST)
+ h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+ :mime-version:content-transfer-encoding;
+ bh=qM+WMPm9+Hjt/UIhL77XA+4VCNDq6a3MUy1J9umBvsc=;
+ b=MaMgIyxvMX7gql7MCgxhTQnededmpTgRWy+UWJIznJAZWqoMc0Ectp5DiSk02AvsWk
+ 6HEPmxvxVxP/x4nuO1HgADqgDjdXbK4/pUnlyHq22zsk6dWyjueTVwRO4q45bRbfLFvn
+ /1a87pCKJoa0yLKuZgzD0TsFpQjF2nT3w3fNNlkIrIcOLG7602vkqQ20ppRMF5hkWXyy
+ Rk2HBfMAVXTumMWnK+K2/VTvSqO/u08SR41wfE8/yBvahJ17mJRkY5Vofa3+inGQDMcZ
+ zaaDLx47pBZZMxbMVZhy2RY3TUHmYAge7ADJqBE2eG/rCnVP6WMGn+c1/N7ajhie/9Yw
+ W0bQ==
+X-Gm-Message-State: AOAM531o/gVfRtn7Oofx/dAFFouDfgvqlujjWmLp+q79ZkeJmrQ8zM4i
+ t2rrhVfI5ZAA29Me5E3TEY9Dk7Qw2Y4=
+X-Google-Smtp-Source: ABdhPJxvPNroUj8J29oimpPGSHpcBrCJcMGNJSlXTSGoUsLb21UGp/HoRlHppZds10roUK4YRDcCQQ==
+X-Received: by 2002:a1c:8181:: with SMTP id c123mr286452wmd.23.1610558701509; 
+ Wed, 13 Jan 2021 09:25:01 -0800 (PST)
+Received: from x1w.redhat.com (13.red-83-57-169.dynamicip.rima-tde.net.
+ [83.57.169.13])
+ by smtp.gmail.com with ESMTPSA id h9sm4030774wre.24.2021.01.13.09.24.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Jan 2021 09:25:00 -0800 (PST)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+To: qemu-devel@nongnu.org
+Cc: Aurelien Jarno <aurelien@aurel32.net>, Cornelia Huck <cohuck@redhat.com>,
+ qemu-arm@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
+ Miroslav Rezanina <mrezanin@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ qemu-riscv@nongnu.org, Huacai Chen <chenhuacai@kernel.org>,
+ Stefan Weil <sw@weilnetz.de>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Andrzej Zaborowski <balrogg@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH v2 0/6] tcg: Restrict tcg_out_op() to arrays of
+ TCG_MAX_OP_ARGS elements
+Date: Wed, 13 Jan 2021 18:24:53 +0100
+Message-Id: <20210113172459.2481060-1-f4bug@amsat.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <20201231113010.27108-1-bmeng.cn@gmail.com>
- <20201231113010.27108-14-bmeng.cn@gmail.com>
-In-Reply-To: <20201231113010.27108-14-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 13 Jan 2021 09:22:01 -0800
-Message-ID: <CAKmqyKOT0TrCu+z76NiaAntsyzTWws22dfsa6Ks640WzkM61Ag@mail.gmail.com>
-Subject: Re: [PATCH 13/22] hw/sd: Introduce receive_ready() callback
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Alistair Francis <alistair.francis@wdc.com>, Qemu-block <qemu-block@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x335.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.248,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -73,98 +87,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2021 17:22:31 -0000
+X-List-Received-Date: Wed, 13 Jan 2021 17:25:08 -0000
 
-On Thu, Dec 31, 2020 at 3:44 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> At present there is a data_ready() callback for the SD data read
-> path. Let's add a receive_ready() for the SD data write path.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
-> ---
->
->  include/hw/sd/sd.h |  2 ++
->  hw/sd/core.c       | 13 +++++++++++++
->  hw/sd/sd.c         |  6 ++++++
->  3 files changed, 21 insertions(+)
->
-> diff --git a/include/hw/sd/sd.h b/include/hw/sd/sd.h
-> index 05ef9b73e5..47360ba4ee 100644
-> --- a/include/hw/sd/sd.h
-> +++ b/include/hw/sd/sd.h
-> @@ -116,6 +116,7 @@ struct SDCardClass {
->       * Return: byte value read
->       */
->      uint8_t (*read_byte)(SDState *sd);
-> +    bool (*receive_ready)(SDState *sd);
->      bool (*data_ready)(SDState *sd);
->      void (*set_voltage)(SDState *sd, uint16_t millivolts);
->      uint8_t (*get_dat_lines)(SDState *sd);
-> @@ -187,6 +188,7 @@ void sdbus_write_data(SDBus *sdbus, const void *buf, size_t length);
->   * Read multiple bytes of data on the data lines of a SD bus.
->   */
->  void sdbus_read_data(SDBus *sdbus, void *buf, size_t length);
-> +bool sdbus_receive_ready(SDBus *sd);
->  bool sdbus_data_ready(SDBus *sd);
->  bool sdbus_get_inserted(SDBus *sd);
->  bool sdbus_get_readonly(SDBus *sd);
-> diff --git a/hw/sd/core.c b/hw/sd/core.c
-> index 08c93b5903..30ee62c510 100644
-> --- a/hw/sd/core.c
-> +++ b/hw/sd/core.c
-> @@ -160,6 +160,19 @@ void sdbus_read_data(SDBus *sdbus, void *buf, size_t length)
->      }
->  }
->
-> +bool sdbus_receive_ready(SDBus *sdbus)
-> +{
-> +    SDState *card = get_card(sdbus);
-> +
-> +    if (card) {
-> +        SDCardClass *sc = SD_CARD_GET_CLASS(card);
-> +
-> +        return sc->receive_ready(card);
-> +    }
-> +
-> +    return false;
-> +}
-> +
->  bool sdbus_data_ready(SDBus *sdbus)
->  {
->      SDState *card = get_card(sdbus);
-> diff --git a/hw/sd/sd.c b/hw/sd/sd.c
-> index 67e5f7c05d..f19e38625a 100644
-> --- a/hw/sd/sd.c
-> +++ b/hw/sd/sd.c
-> @@ -2036,6 +2036,11 @@ uint8_t sd_read_byte(SDState *sd)
->      return ret;
->  }
->
-> +static bool sd_receive_ready(SDState *sd)
-> +{
-> +    return sd->state == sd_receivingdata_state;
-> +}
-> +
->  static bool sd_data_ready(SDState *sd)
->  {
->      return sd->state == sd_sendingdata_state;
-> @@ -2147,6 +2152,7 @@ static void sd_class_init(ObjectClass *klass, void *data)
->      sc->do_command = sd_do_command;
->      sc->write_byte = sd_write_byte;
->      sc->read_byte = sd_read_byte;
-> +    sc->receive_ready = sd_receive_ready;
->      sc->data_ready = sd_data_ready;
->      sc->enable = sd_enable;
->      sc->get_inserted = sd_get_inserted;
-> --
-> 2.25.1
->
->
+Since v1:=0D
+- Redo the whole change, only hoisting when variable is used 10+ times=0D
+- Remove goto statement/label=0D
+- Take care of the following pattern:=0D
+=0D
+    case INDEX_op_bswap64_i64:=0D
+        a2 =3D3D TCG_REG_R0;=0D
+        if (a0 =3D3D=3D3D a1) {=0D
+            a0 =3D3D TCG_REG_R0;=0D
+            a2 =3D3D a1;=0D
+        }=0D
+        ...=0D
+        if (a0 =3D3D=3D3D 0) {=0D
+            tcg_out_mov(s, TCG_TYPE_REG, args[0], a0);=0D
+                                         ^^^^ take original a[0]=0D
+        }=0D
+=0D
+Attempt to fix the warning reported by Miroslav using GCC 10:=0D
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg771520.html=0D
+=0D
+Diff with v1:=0D
+=0D
+Key:=0D
+[----] : patches are identical=0D
+[####] : number of functional differences between upstream/downstream patch=
+=0D
+[down] : patch is downstream-only=0D
+The flags [FC] indicate (F)unctional and (C)ontextual differences, respecti=
+ve=3D=0D
+ly=0D
+=0D
+001/6:[0063] [FC] 'tcg/arm: Hoist common argument loads in tcg_out_op()'=0D
+002/6:[down] 'tcg/arm: Replace goto statement by fall through comment'=0D
+003/6:[0190] [FC] 'tcg/ppc: Hoist common argument loads in tcg_out_op()'=0D
+004/6:[0136] [FC] 'tcg/s390: Hoist common argument loads in tcg_out_op()'=0D
+005/6:[----] [--] 'tcg: Restrict tcg_out_op() to arrays of TCG_MAX_OP_ARGS =
+el=3D=0D
+ements'=0D
+006/6:[----] [--] 'tcg: Restrict tcg_out_vec_op() to arrays of TCG_MAX_OP_A=
+RG=3D=0D
+S elements'=0D
+=0D
+Philippe Mathieu-Daud=3DC3=3DA9 (6):=0D
+  tcg/arm: Hoist common argument loads in tcg_out_op()=0D
+  tcg/arm: Replace goto statement by fall through comment=0D
+  tcg/ppc: Hoist common argument loads in tcg_out_op()=0D
+  tcg/s390: Hoist common argument loads in tcg_out_op()=0D
+  tcg: Restrict tcg_out_op() to arrays of TCG_MAX_OP_ARGS elements=0D
+  tcg: Restrict tcg_out_vec_op() to arrays of TCG_MAX_OP_ARGS elements=0D
+=0D
+ tcg/tcg.c                    |  19 +--=0D
+ tcg/aarch64/tcg-target.c.inc |   3 +-=0D
+ tcg/arm/tcg-target.c.inc     | 196 +++++++++++++++----------------=0D
+ tcg/i386/tcg-target.c.inc    |   6 +-=0D
+ tcg/mips/tcg-target.c.inc    |   3 +-=0D
+ tcg/ppc/tcg-target.c.inc     | 191 ++++++++++++++----------------=0D
+ tcg/riscv/tcg-target.c.inc   |   3 +-=0D
+ tcg/s390/tcg-target.c.inc    | 222 +++++++++++++++++------------------=0D
+ tcg/tci/tcg-target.c.inc     |   5 +-=0D
+ 9 files changed, 311 insertions(+), 337 deletions(-)=0D
+=0D
+--=3D20=0D
+2.26.2=0D
+=0D
 
