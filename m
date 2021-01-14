@@ -1,76 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l00zo-0004k8-E8
-	for mharc-qemu-riscv@gnu.org; Thu, 14 Jan 2021 06:40:56 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53292)
+	id 1l013P-00077c-3I
+	for mharc-qemu-riscv@gnu.org; Thu, 14 Jan 2021 06:44:39 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54088)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1l00zm-0004iL-7H; Thu, 14 Jan 2021 06:40:54 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334]:52882)
+ id 1l013M-00077A-KR; Thu, 14 Jan 2021 06:44:36 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436]:33274)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1l00zk-0003oQ-Pq; Thu, 14 Jan 2021 06:40:53 -0500
-Received: by mail-wm1-x334.google.com with SMTP id a6so4254365wmc.2;
- Thu, 14 Jan 2021 03:40:51 -0800 (PST)
+ id 1l013L-0005aa-5r; Thu, 14 Jan 2021 06:44:36 -0500
+Received: by mail-wr1-x436.google.com with SMTP id t30so5465101wrb.0;
+ Thu, 14 Jan 2021 03:44:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=KqJo3eNaRQ9aV3kJqDaHfVD9Yt30gwPED9wIxMxH9QI=;
- b=MTqOJYJ+7tKrRDzPyvnVKAOo9hS76+lPp4GdP7ikbe+Xya/RmHrbMAXHzQbR/8BpBI
- OmiEJHFOwKsZ7zKrC4WhkX2JwrVVF7je8CRUL8w1qu8qdvl5lK0AhZusms2BoIRDACZY
- riyWdh3lGNusIvl9xLMv7hjo1rU0F3LisyEmOWgS1AxR7zZ1qrj+IvlDF3TY7lQDbliY
- 2FmgsHfN8Ce3pygZBCK9ASHrZ1Fv3aI6plVAWEa3KsxBhvzFxx14owRbXZuVdEDI1K39
- MN1um4AmHQTqh6m3T/1JsP7lcaNEOUZovR6zZYLG0vb5xvm4OzWhC72VmLmlvdXR2LDO
- ujLg==
+ bh=n/mT+XUpPloLraTDYpgGDc8uZkFZgKmUglbj/ssR0QY=;
+ b=JkLL5hbXBv0hapyKcMHIl1BMDGVlNuWKZxR4UclOm6/nYP4tgjWfpmrDq3jRKi2o9E
+ +fJxMOI9A3rWah9uQsNk9P3c5dJbGqnDStmiSjGeCud4TIXqifiLwcRUtLPReF+KxS9C
+ EMEV+chKNr5Ti8iNN9AOSy0Cdp6fbD2UMcojYPdJGrS+ZnijRJr5av7Rqc+8QgaoSHIo
+ +162H5SWGKgR6lUL8Z/BokKWzfDUelTDhRlDoF9Dp+AerCS3Xlq772q5pAe82khi/3ID
+ fryZ/V5bH5KDuaKK07d/8GQoYCssmmVeeI0AiGMcsBvoT9y0S4mFWrmw05hyXZttfUH9
+ /veg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=KqJo3eNaRQ9aV3kJqDaHfVD9Yt30gwPED9wIxMxH9QI=;
- b=Y7fMPwcz+t+jCL21fgm8TKwa/xYNit1D/aZ4VVKGoYtEkwZKUHOeajEyoeallRJQQa
- bZZnNsxmycE+UO9ZycETHOnZMeF5JVW0S5lmIfmlVScSuqjjsx5F8bt4OzSp0XSLRDcU
- D+ZER+7v6KUb7xAODSudqLl/iuN4ewNibNYz/Ur3A3XYbWyqgDeazJUkODx1l6luZf2m
- K7mwXClVDgvjOBQTv28H5owOtDeJePC4Ie+eTPXosMJwzSsXkaUuS0VITf6btcilvek7
- YouV+DswmWdZqEV5z+GGxmBDJoKYVVu5W9FQAnxcLP6fBXbyaMfPZr9n5h2s4iZ+tIsf
- e1ZQ==
-X-Gm-Message-State: AOAM532GSB9/Z+vmVA95jrasFMH6bgx2iD6Fk60QgWu1cczzlXkxTEHE
- 2v5hu36GTaVQtYttjSUk3Wg=
-X-Google-Smtp-Source: ABdhPJx40Ai/PvoC6LThRZnp93F0YWIt06rXVDtfiQVf4n+P1kPuqyQm0RGDnd5cqCMYkZtaaW3xpQ==
-X-Received: by 2002:a1c:9ccd:: with SMTP id f196mr3596763wme.82.1610624450128; 
- Thu, 14 Jan 2021 03:40:50 -0800 (PST)
+ bh=n/mT+XUpPloLraTDYpgGDc8uZkFZgKmUglbj/ssR0QY=;
+ b=OpkwWAzVsfsq1sDB8O+4WP4A5jf2+uFOXDdqAQ20+VLjux7vm+MO3k0gxGyeRsFncJ
+ OMZ5S5qaYL73ai8bL1c85CEBxqarH/1eeFZoNMDQL4b1iZj5ctp8Ny7wGnXpJfk9kBKJ
+ eOARAkYHnBEn6wF5nB6YeVdfn8YBnR/w+OQe6W7hL4qE0Qtrb9PL8s8J06wFqcxNei+u
+ XWU+knF7Y7SB2fGuEMHygs4rt0/ky616qqHahOqnZ21DeCwylyN9ur8t9hLXfjy2L5YM
+ OmSnVJzkZy2i+V3aADlbGTW2TDvD2NJoOBzuNR8NSZuZsbhBe1udLcIKPH845AI53nSI
+ vJag==
+X-Gm-Message-State: AOAM532Mi5EHh3ZzyQo9LIFqAhGSuhwbE2Di28CT2VfVi4liRO6EQTZR
+ fLxob76VAL02X/kJu4G2lPg=
+X-Google-Smtp-Source: ABdhPJw/PNvGsCUY7IQlnKUyIm91oeNPJ9yo6QxJWmifSKT/mQ3J3LL0R4MOl1rTW9oSXSCzow2unA==
+X-Received: by 2002:a5d:5913:: with SMTP id v19mr7491774wrd.207.1610624671380; 
+ Thu, 14 Jan 2021 03:44:31 -0800 (PST)
 Received: from [192.168.1.36] (13.red-83-57-169.dynamicip.rima-tde.net.
  [83.57.169.13])
- by smtp.gmail.com with ESMTPSA id i16sm8718964wrx.89.2021.01.14.03.40.48
+ by smtp.gmail.com with ESMTPSA id s20sm7492746wmj.46.2021.01.14.03.44.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Jan 2021 03:40:49 -0800 (PST)
+ Thu, 14 Jan 2021 03:44:30 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 09/22] hw/sd: ssi-sd: Use macros for the dummy value and
- tokens in the transfer
+Subject: Re: [PATCH 13/22] hw/sd: Introduce receive_ready() callback
 To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
  <alistair.francis@wdc.com>, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
 References: <20201231113010.27108-1-bmeng.cn@gmail.com>
- <20201231113010.27108-10-bmeng.cn@gmail.com>
+ <20201231113010.27108-14-bmeng.cn@gmail.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <990308d9-01a2-1904-4b6c-969fcbd43557@amsat.org>
-Date: Thu, 14 Jan 2021 12:40:48 +0100
+Message-ID: <00289da1-65a9-f717-2f19-8dd8a026831e@amsat.org>
+Date: Thu, 14 Jan 2021 12:44:29 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
 MIME-Version: 1.0
-In-Reply-To: <20201231113010.27108-10-bmeng.cn@gmail.com>
+In-Reply-To: <20201231113010.27108-14-bmeng.cn@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x436.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
 X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.248, NICE_REPLY_A=-0.001,
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.248,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.248, NICE_REPLY_A=-0.237,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
@@ -85,20 +84,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2021 11:40:54 -0000
+X-List-Received-Date: Thu, 14 Jan 2021 11:44:36 -0000
 
-On 12/31/20 12:29 PM, Bin Meng wrote:
+On 12/31/20 12:30 PM, Bin Meng wrote:
 > From: Bin Meng <bin.meng@windriver.com>
 > 
-> At present the codes use hardcoded numbers (0xff/0xfe) for the dummy
-> value and block start token. Replace them with macros, and add more
-> tokens for multiple block write.
+> At present there is a data_ready() callback for the SD data read
+> path. Let's add a receive_ready() for the SD data write path.
 > 
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 > ---
 > 
->  hw/sd/ssi-sd.c | 30 +++++++++++++++++++++---------
->  1 file changed, 21 insertions(+), 9 deletions(-)
+>  include/hw/sd/sd.h |  2 ++
+>  hw/sd/core.c       | 13 +++++++++++++
+>  hw/sd/sd.c         |  6 ++++++
+>  3 files changed, 21 insertions(+)
 
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
