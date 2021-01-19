@@ -1,51 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1u0i-0000i0-Pk
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 11:37:41 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47462)
+	id 1l1uBC-0002PN-CI
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 11:48:31 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50456)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1u0f-0000e2-TX; Tue, 19 Jan 2021 11:37:37 -0500
-Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34]:36758)
+ id 1l1uB7-0002Lo-09; Tue, 19 Jan 2021 11:48:26 -0500
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:41852)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1u0c-0007m0-QI; Tue, 19 Jan 2021 11:37:37 -0500
-Received: by mail-io1-xd34.google.com with SMTP id d81so25629063iof.3;
- Tue, 19 Jan 2021 08:37:34 -0800 (PST)
+ id 1l1uB2-0001Yu-NU; Tue, 19 Jan 2021 11:48:24 -0500
+Received: by mail-io1-xd30.google.com with SMTP id q1so40861815ion.8;
+ Tue, 19 Jan 2021 08:48:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=e0ss7NliYShxPbLg2oxQZ+54H9rOvsHlimRM8y0Bwj8=;
- b=dIl0KBG7TAm0cdZn+3v5ImxzaDGRpx9j/zUafqFu9AO8gVY1Kjgae17X/WJre5i3QO
- kQpGbyJ8e8TDXqeSy1F8nCmUnxHlg7KcErLheKz59dSo0u7+ogskjw76WuGhnPfJXidP
- 2vr8Vsikpa8pjixw67OZYU4ZwmCtPoTu71XMFu4nfZAzUoIZit5EiNaXEE+PC5DSlUrv
- d+udUzkNQTIPfbFCFilnLDK06WmQR/eM5mP3UUcWrAyqAlkl7Cmf9PeQtbAUiNi8yMnZ
- Z0lM71PvoUaWQ2UL2vQ+S5gAp00iRPj3FejUHS84wWCl0rbJWs5YtqMS3/CuakMuoRWU
- 4Epg==
+ :cc; bh=fm3OfEGwwxiE3Qf6wYnVyiu/kbBV73OWraagFPT+4NU=;
+ b=uIfWHICN0E2sZaL1pUkaoACYF21Vt/SaAA9pwkuZuadooaJlQFehrq5GLG+FjkFv94
+ hWPQKSIJUQxl/GOwARq0yBtZ8n5fodSBAdsyp8cez95QyW1OYZz551rn/az2V1ibAG0N
+ 1zDheeuZEAf/nvsMVohI+999wGvubX609IJna3UpvBvMvrswu+r/rKuxZfB4EEHAFnRE
+ 3wKNgpLQg8JcLzJ+/tFvedio0WxCayPXWqWwiTOIm48ulMIR7xfHOQeHtOQ8kZhU4or5
+ ERviZCz3D6dR9CTvcTikJIKaG90NIoC3Q4vJs+WN24MSZhk9l/xI2cZPTgfOuQCBzr56
+ XVMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=e0ss7NliYShxPbLg2oxQZ+54H9rOvsHlimRM8y0Bwj8=;
- b=PyIvA6u7dVRuyrwcUnXdwBbOw8vLQ1LzytyIKZxBj6jhSLDNZ0tbWpHysO64n04ofL
- bwhCFwrNIa3Ud2WMospcnGtggzFXOyEys7Dqs01DNhZkYh4KWUdQ7OV7+Kgo8kVL1j/j
- SPrvCHwXf1s+l2K1tNjVKhk8/wQPFqZsKn1iDkOcgSQ+geZ9mfiFKe77YGbwX7lth8e7
- OVobc3MWR8+KIWOvn+ys3pbZOj9UCoeAUISFHp8FtbBRdgZTq5C1YkOP2ZYYb6uE28vL
- hw+5lQty+QwVhK7SZREXtyw2M86AHexHjSS4+mHAOLsaK3qujx16kJHXfFUtvU/5Md/A
- nn3g==
-X-Gm-Message-State: AOAM530ifVxSKZ8ZyeGHCErnB8Pnb09gKIFHi/bMpy9D5ZA7Ylkixqge
- kQ0uDPclcHnaallVdjUyODiBCKW9qlKHFoxjAUA=
-X-Google-Smtp-Source: ABdhPJwL2Uo8clg28PLTnavaKUN6BpVfJpgmm+MX4OIdJeQpeRYu669F54wK1sz0/drSRdIdibkEuU7ZWfdGGHFercc=
-X-Received: by 2002:a05:6e02:20e5:: with SMTP id
- q5mr4043745ilv.131.1611074253555; 
- Tue, 19 Jan 2021 08:37:33 -0800 (PST)
+ bh=fm3OfEGwwxiE3Qf6wYnVyiu/kbBV73OWraagFPT+4NU=;
+ b=bjLxSi3LG5FRj5wr1sDz7n4h07yNNhh3YhydUEhGtoQeVj7yA0qBdIO6PKyINGD71/
+ CKJC0s4IheU40c0v0v3fcLt1yYWzoKYT3L0pvShqe5XxWUXMTXg42PYm4z1cUdUPe6HM
+ yBs1iECfNDaul0FQJdIm0Mri72vxjSXaLM+tYVjbZ3fj05AvEXiqietyl8OKw/bARkMD
+ jokhHzP8QcIqB6LDPPgKb6zXXhhi5gJdi3bSMT5Q1bFnLxH1HjOLC0+8GQOO/yOc9ogr
+ eK8MPdg37VW+3wJq8+JhxlP9w/iW8zES4n9Dh5Srmya7nRiVnu9DUF1RCdOZDPiuiYkk
+ kdkQ==
+X-Gm-Message-State: AOAM532ZbP8p3jqNES0q6dZxlk5PlNVnJ03w9zx4oZtbZ/katpslKbS5
+ /eXKUzfcaU7FelecsxlYGNyygNYbCKLpXwIWCik=
+X-Google-Smtp-Source: ABdhPJziVoKM7bvBcq/vSj9l+4S6l2T4tZZV3IcglvDzLUHRE10YSBSV1vfNto8zOPCHPNdWaiIDBdhjh1yZaIFooOE=
+X-Received: by 2002:a92:cda1:: with SMTP id g1mr4159870ild.267.1611074896043; 
+ Tue, 19 Jan 2021 08:48:16 -0800 (PST)
 MIME-Version: 1.0
 References: <20210112093950.17530-1-frank.chang@sifive.com>
- <20210112093950.17530-6-frank.chang@sifive.com>
-In-Reply-To: <20210112093950.17530-6-frank.chang@sifive.com>
+ <20210112093950.17530-8-frank.chang@sifive.com>
+In-Reply-To: <20210112093950.17530-8-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Jan 2021 08:37:07 -0800
-Message-ID: <CAKmqyKM6XxKSKb8+yb_wM59Jgs2S58X1T+PTqT8dOYKnVEApvw@mail.gmail.com>
-Subject: Re: [PATCH v6 05/72] target/riscv: rvv-1.0: introduce writable misa.v
- field
+Date: Tue, 19 Jan 2021 08:47:49 -0800
+Message-ID: <CAKmqyKMNiqY_NxtiTsa2ai1axb67JNY=_Rh5evHXh+Oy-nmbqw@mail.gmail.com>
+Subject: Re: [PATCH v6 07/72] target/riscv: rvv-1.0: remove rvv related codes
+ from fcsr registers
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -54,8 +53,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,15 +75,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2021 16:37:38 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 16:48:27 -0000
 
-On Tue, Jan 12, 2021 at 1:42 AM <frank.chang@sifive.com> wrote:
+On Tue, Jan 12, 2021 at 1:50 AM <frank.chang@sifive.com> wrote:
 >
 > From: Frank Chang <frank.chang@sifive.com>
 >
-> Implementations may have a writable misa.v field. Analogous to the way
-> in which the floating-point unit is handled, the mstatus.vs field may
-> exist even if misa.v is clear.
+> * Remove VXRM and VXSAT fields from FCSR register as they are only
+>   presented in VCSR register.
+> * Remove RVV loose check in fs() predicate function.
 >
 > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
@@ -94,22 +93,49 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/csr.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  target/riscv/csr.c | 13 -------------
+>  1 file changed, 13 deletions(-)
 >
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index a70a78386da..c8b1e4954ec 100644
+> index c8b1e4954ec..6eda5bacb7c 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -579,7 +579,7 @@ static int write_misa(CPURISCVState *env, int csrno, target_ulong val)
->      val &= env->misa_mask;
+> @@ -46,10 +46,6 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+>  static int fs(CPURISCVState *env, int csrno)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    /* loose check condition for fcsr in vector extension */
+> -    if ((csrno == CSR_FCSR) && (env->misa & RVV)) {
+> -        return 0;
+> -    }
+>      if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>          return -RISCV_EXCP_ILLEGAL_INST;
+>      }
+> @@ -254,10 +250,6 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+>  #endif
+>      *val = (riscv_cpu_get_fflags(env) << FSR_AEXC_SHIFT)
+>          | (env->frm << FSR_RD_SHIFT);
+> -    if (vs(env, csrno) >= 0) {
+> -        *val |= (env->vxrm << FSR_VXRM_SHIFT)
+> -                | (env->vxsat << FSR_VXSAT_SHIFT);
+> -    }
+>      return 0;
+>  }
 >
->      /* Mask extensions that are not supported by QEMU */
-> -    val &= (RVI | RVE | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-> +    val &= (RVI | RVE | RVM | RVA | RVF | RVD | RVC | RVS | RVU | RVV);
->
->      /* 'D' depends on 'F', so clear 'D' if 'F' is not present */
->      if ((val & RVD) && !(val & RVF)) {
+> @@ -268,13 +260,8 @@ static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
+>          return -RISCV_EXCP_ILLEGAL_INST;
+>      }
+>      env->mstatus |= MSTATUS_FS;
+> -    env->mstatus |= MSTATUS_VS;
+>  #endif
+>      env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
+> -    if (vs(env, csrno) >= 0) {
+> -        env->vxrm = (val & FSR_VXRM) >> FSR_VXRM_SHIFT;
+> -        env->vxsat = (val & FSR_VXSAT) >> FSR_VXSAT_SHIFT;
+> -    }
+>      riscv_cpu_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
+>      return 0;
+>  }
 > --
 > 2.17.1
 >
