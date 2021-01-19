@@ -1,57 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1uWx-0008Nk-44
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 12:11:01 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55838)
+	id 1l1uuJ-0004Rm-M1
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 12:35:07 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60922)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1uWp-0008Kg-4U; Tue, 19 Jan 2021 12:10:55 -0500
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:33985)
+ id 1l1uuH-0004Nb-Pt; Tue, 19 Jan 2021 12:35:05 -0500
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:43507)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1uWn-0004wQ-5M; Tue, 19 Jan 2021 12:10:50 -0500
-Received: by mail-io1-xd32.google.com with SMTP id u17so41109231iow.1;
- Tue, 19 Jan 2021 09:10:48 -0800 (PST)
+ id 1l1uuF-0000Dw-Jo; Tue, 19 Jan 2021 12:35:05 -0500
+Received: by mail-io1-xd30.google.com with SMTP id x21so23018646iog.10;
+ Tue, 19 Jan 2021 09:35:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=oKBZeEAABl0KX90sbYSnPYn9dh0EVM1k/nQRAM1Nv6A=;
- b=Uh5bHN5w5z6jjlIpNHbdAMAGvIgW+J1VLexJyzvqO0owNrmSqVjEvMcZT3yVS4RwXU
- 2z8VEu6G2ztzChc42Iyn1KPV5AKm7aXxnTG3HdawlSeaNAUhIGX3pleXjK75eXJAjaYv
- 1rbBobhuIbfmEdtAPg6OWtkaquwgqgT1ML69HaVYKRIPOA+ogeCHsZzRTsOOsPhhTEPI
- v7U4OvtqzPcfTFp1lGPo0Ia3uploUXezPuVjInUC5ej88D5QIlB41QSCbmM9tl0LHFeE
- eKafKoTP+UAaKZ/lUEPduXsMp0N5wNXd5M59Kdhn05Lpi/Jn1asimAnKADoJAmiIaGD+
- a3Uw==
+ :cc:content-transfer-encoding;
+ bh=uckWWWjAq++tc1xguD4EkjJfOnMfhV6QH7N6POaP7o4=;
+ b=h/T4PrPtbbQOMxQI4qAtTA//GD8hS2IpG2sqY0ze6HTv+ilPv4wVpYqwyyDLhYMGZm
+ GWFA1DUIsWER1bZ3jOQzpHOiBvt8N8T0mCb7/NTxc+ZeWAkvMbeTCNnczsCNlrAjK8lc
+ QMcH9cabsQ5a6tJf0vaaqV0qCycNWFSHw7leteB80tm/ir0gz9lsgMQn1zL44AZYNh8m
+ Aq/e6SxPhA49hj6vI3NaQqA/iSa1MrIkTPgRKmGTj3WBlNZLpBWX6L30Y6O+NCC7RPS1
+ 2aZSOB2olxZazn6mNBPDCKvx9voFJvHq4qOgef19B16QmKk1DUqgFyjOfQAioXRzM5Sd
+ 5JtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=oKBZeEAABl0KX90sbYSnPYn9dh0EVM1k/nQRAM1Nv6A=;
- b=YWZ2WYARJPkyWUBdv+XaquCoPuQkNEkJ58rWlgyA7V3arNCS1+ZLA5f54TPZ7u35NG
- nSMcPKAFXbT6oGVvpSlOgJsnZjCLkOCdpjzJDGFp0yEtAdHhyVGgDF4cE1owOSjbB//J
- Ye1QJSQTbSs1UBmQkADMI2N901p8oGZuDNh/cQ3uKuR96o34K612DuuLfyxe2ryFxxd4
- zxhklIuEeesgGAXCp8/IuhfqxzqidHTOdv3skzbkpe9EZ894YPHnRBO9qobgvv+uGEdL
- 0njifjjoBUM3CYjVKUGBm202SBIRj1YmR7e0aDB+NTwATSzSrkdZhCpNNNMKtvWvQ8As
- dvPQ==
-X-Gm-Message-State: AOAM530ol1u57+JE+XD71Ioj6ke3o6zVRQP763tlkKker11vqFBKO8ze
- cN7cS3yJjUGKdM4v08qXMOsC1nXvxyHUCXcKE+U=
-X-Google-Smtp-Source: ABdhPJyMlFt+DDSRqSshUNHmoBwYrlfbe5nmeFkN2XeGbGOJg5N3izbeQBpvZIRj9AtdQhsLNe9GCh1aXbbnGEKO/z0=
-X-Received: by 2002:a92:8455:: with SMTP id l82mr4267049ild.40.1611076247596; 
- Tue, 19 Jan 2021 09:10:47 -0800 (PST)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=uckWWWjAq++tc1xguD4EkjJfOnMfhV6QH7N6POaP7o4=;
+ b=C1epse0alJdysVl7pAcXhBWlMEwD9l+4tNOzzQYibfCaZCv9xPIDFKdx0MmLs3SKKV
+ Hm33Hi6ClASTJ5IaeYcmRWs+Gn0prXXX+LB0UgMG1IzkLA5muaJIzKbNyB4aMDwE36Sg
+ 3q4zcGWioZ8daf4rgn2OIHbcwefVnGJ0AtTh2pQaE6uMQNWM+DHBOAeMTJAijXOgwTzO
+ moS38pmQNQHDHD4xSw2XZpBRVV/b8Vk3tvNV+rUfR5rkPajWd/TTv3prqQ3MpGbIuQ0W
+ fnvkuaoHejU5/dJn4O9oxivwmz0UD6nw6I6DewkN/Gox0L5UFM8zKkldZ4CtZ6WKjOlM
+ RsvQ==
+X-Gm-Message-State: AOAM533QJrc2My2gq0EQ6IA2EACuJhkCO3uibNi6fEkGpAdzQUWxfatQ
+ GRfj+NuIRu6+UW6+GblHxK4aFb+9fjpYc4kiG9g=
+X-Google-Smtp-Source: ABdhPJxMGyDk2WhETcOC0qWCyzHyuUJdlBvu12JDKFR12hIB+UUdNAHz6yHv4dcud2o5NEkAo08tS1lyDRzwy1eRq3Y=
+X-Received: by 2002:a92:cda1:: with SMTP id g1mr4343246ild.267.1611077702116; 
+ Tue, 19 Jan 2021 09:35:02 -0800 (PST)
 MIME-Version: 1.0
-References: <1611026585-29971-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1611026585-29971-1-git-send-email-bmeng.cn@gmail.com>
+References: <1a4df1b5638d73b64200add175be9d69013418d8.1608401453.git.alistair.francis@wdc.com>
+ <eac70d13-7e70-756e-503c-329fdb14a312@vivier.eu>
+In-Reply-To: <eac70d13-7e70-756e-503c-329fdb14a312@vivier.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Jan 2021 09:10:21 -0800
-Message-ID: <CAKmqyKPCe_M4VvHpz+c=rmNW-591WreLF0jGcc4whypaE-bZOQ@mail.gmail.com>
-Subject: Re: [PATCH] hw/misc: sifive_u_otp: Use error_report() when block
- operation fails
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, Green Wan <green.wan@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+Date: Tue, 19 Jan 2021 09:34:36 -0800
+Message-ID: <CAKmqyKMM-vfWzDWSxBe2XhLmKQ2g7pWOg+GmeDtbDLR=o4xOCg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] linux-user/signal: Decode waitid si_code
+To: Laurent Vivier <laurent@vivier.eu>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,79 +74,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2021 17:10:57 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 17:35:06 -0000
 
-On Mon, Jan 18, 2021 at 7:23 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Jan 18, 2021 at 6:36 AM Laurent Vivier <laurent@vivier.eu> wrote:
 >
-> From: Bin Meng <bin.meng@windriver.com>
+> Le 19/12/2020 =C3=A0 19:11, Alistair Francis a =C3=A9crit :
+> > When mapping the host waitid status to the target status we previously
+> > just used decoding information in the status value. This doesn't follow
+> > what the waitid documentation describes, which instead suggests using
+> > the si_code value for the decoding. This results in the incorrect value=
+s
+> > seen when calling waitid. This is especially apparent on RV32 where all
+> > wait calls use waitid (see the bug case).
+> >
+> > This patch uses the si_code value to map the waitid status.
+> >
+> > Buglink: https://bugs.launchpad.net/qemu/+bug/1906193
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  linux-user/signal.c | 26 ++++++++++++++++++++++++--
+> >  1 file changed, 24 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/linux-user/signal.c b/linux-user/signal.c
+> > index 73de934c65..b6c9326521 100644
+> > --- a/linux-user/signal.c
+> > +++ b/linux-user/signal.c
+> > @@ -305,6 +305,7 @@ static inline void host_to_target_siginfo_noswap(ta=
+rget_siginfo_t *tinfo,
+> >      int sig =3D host_to_target_signal(info->si_signo);
+> >      int si_code =3D info->si_code;
+> >      int si_type;
+> > +    int status =3D info->si_status;
+> >      tinfo->si_signo =3D sig;
+> >      tinfo->si_errno =3D 0;
+> >      tinfo->si_code =3D info->si_code;
+> > @@ -349,8 +350,29 @@ static inline void host_to_target_siginfo_noswap(t=
+arget_siginfo_t *tinfo,
+> >          case TARGET_SIGCHLD:
+> >              tinfo->_sifields._sigchld._pid =3D info->si_pid;
+> >              tinfo->_sifields._sigchld._uid =3D info->si_uid;
+> > -            tinfo->_sifields._sigchld._status
+> > -                =3D host_to_target_waitstatus(info->si_status);
+> > +
+> > +            /*
+> > +             * Map host to target signal numbers for the waitid family=
+ of
+> > +             * syscalls. This is similar to the functionality in
+> > +             * host_to_target_waitstatus() except we use the si_code t=
+o
+> > +             * determine the operation.
+> > +             */
+> > +            switch (info->si_code) {
+> > +            case CLD_KILLED:
+> > +            case CLD_DUMPED:
+> > +                tinfo->_sifields._sigchld._status =3D
+> > +                    host_to_target_signal(WTERMSIG(status)) |
+> > +                                          (status & ~0x7f);
+> > +                break;
+> > +            case CLD_STOPPED:
+> > +                tinfo->_sifields._sigchld._status =3D
+> > +                (host_to_target_signal(WSTOPSIG(status)) << 8) |
+> > +                    (status & 0xff);
+> > +                break;
+> > +            default:
 >
-> At present when blk_pread() / blk_pwrite() fails, a guest error
-> is logged, but this is not really a guest error. Change to use
-> error_report() instead.
+> I guess the the operation is not encoded in the status coming from the ho=
+st as we need to use the
+> si_code to decode the status, so why do we need to encode it in the statu=
+s we send to the guest?
 >
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> Can it be only "tinfo->_sifields._sigchld._status =3D status" for all the=
+ cases?
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+That also works, I'll send a v2.
 
 Alistair
 
-> ---
 >
->  hw/misc/sifive_u_otp.c | 13 +++++--------
->  1 file changed, 5 insertions(+), 8 deletions(-)
->
-> diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
-> index f921c67..4d8f793 100644
-> --- a/hw/misc/sifive_u_otp.c
-> +++ b/hw/misc/sifive_u_otp.c
-> @@ -23,6 +23,7 @@
->  #include "hw/qdev-properties.h"
->  #include "hw/qdev-properties-system.h"
->  #include "hw/sysbus.h"
-> +#include "qemu/error-report.h"
->  #include "qemu/log.h"
->  #include "qemu/module.h"
->  #include "hw/misc/sifive_u_otp.h"
-> @@ -65,8 +66,7 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
->
->                  if (blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
->                                SIFIVE_U_OTP_FUSE_WORD) < 0) {
-> -                    qemu_log_mask(LOG_GUEST_ERROR,
-> -                                  "read error index<%d>\n", s->pa);
-> +                    error_report("read error index<%d>", s->pa);
->                      return 0xff;
->                  }
->
-> @@ -169,8 +169,7 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
->                  if (blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD,
->                                 &s->fuse[s->pa], SIFIVE_U_OTP_FUSE_WORD,
->                                 0) < 0) {
-> -                    qemu_log_mask(LOG_GUEST_ERROR,
-> -                                  "write error index<%d>\n", s->pa);
-> +                    error_report("write error index<%d>", s->pa);
->                  }
->              }
->
-> @@ -260,15 +259,13 @@ static void sifive_u_otp_reset(DeviceState *dev)
->          serial_data = s->serial;
->          if (blk_pwrite(s->blk, index * SIFIVE_U_OTP_FUSE_WORD,
->                         &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0) < 0) {
-> -            qemu_log_mask(LOG_GUEST_ERROR,
-> -                          "write error index<%d>\n", index);
-> +            error_report("write error index<%d>", index);
->          }
->
->          serial_data = ~(s->serial);
->          if (blk_pwrite(s->blk, (index + 1) * SIFIVE_U_OTP_FUSE_WORD,
->                         &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0) < 0) {
-> -            qemu_log_mask(LOG_GUEST_ERROR,
-> -                          "write error index<%d>\n", index + 1);
-> +            error_report("write error index<%d>", index + 1);
->          }
->      }
->
-> --
-> 2.7.4
->
->
+> Thanks,
+> Laurent
 
