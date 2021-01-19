@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1uuJ-0004Rm-M1
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 12:35:07 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60922)
+	id 1l1uxn-00075b-Q0
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 12:38:43 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33726)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1uuH-0004Nb-Pt; Tue, 19 Jan 2021 12:35:05 -0500
-Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:43507)
+ id 1l1uxh-00072p-Hc; Tue, 19 Jan 2021 12:38:37 -0500
+Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c]:33053)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1uuF-0000Dw-Jo; Tue, 19 Jan 2021 12:35:05 -0500
-Received: by mail-io1-xd30.google.com with SMTP id x21so23018646iog.10;
- Tue, 19 Jan 2021 09:35:02 -0800 (PST)
+ id 1l1uxg-0000qd-1A; Tue, 19 Jan 2021 12:38:37 -0500
+Received: by mail-io1-xd2c.google.com with SMTP id w18so41267228iot.0;
+ Tue, 19 Jan 2021 09:38:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=uckWWWjAq++tc1xguD4EkjJfOnMfhV6QH7N6POaP7o4=;
- b=h/T4PrPtbbQOMxQI4qAtTA//GD8hS2IpG2sqY0ze6HTv+ilPv4wVpYqwyyDLhYMGZm
- GWFA1DUIsWER1bZ3jOQzpHOiBvt8N8T0mCb7/NTxc+ZeWAkvMbeTCNnczsCNlrAjK8lc
- QMcH9cabsQ5a6tJf0vaaqV0qCycNWFSHw7leteB80tm/ir0gz9lsgMQn1zL44AZYNh8m
- Aq/e6SxPhA49hj6vI3NaQqA/iSa1MrIkTPgRKmGTj3WBlNZLpBWX6L30Y6O+NCC7RPS1
- 2aZSOB2olxZazn6mNBPDCKvx9voFJvHq4qOgef19B16QmKk1DUqgFyjOfQAioXRzM5Sd
- 5JtA==
+ :cc; bh=lu8LQ8daA/h8PmYD2TnZ31WFd7LjbAagekmzwQTsWzk=;
+ b=ds7z9JcabvcFrxmXH8yXqv8U1XRzpSVnaqz9mGB+d7QAtrij4cNSN+80/zi5MCyN5x
+ Za4fA/++K7SP0lTTCNY8oub44GVuwrhcXtgnDrpMHJi0Dheo7FfMwCsTYpFqmuAIGA3S
+ mXDa3/Uvqc0i3JNO2SJwCN7S41btwlgaENQkp3oHi5A4eCdmk4YI+oL8GJ+5znawE3OX
+ hc1p230ArViZ+x1bkrPQJ0eVx2yia8PD/4uVZKHyb4Dav3bCydclpeGJKvR7USehCnH0
+ YBippKk3ILMJlD+OZ99Q616jaTzG8JlXZTLHe++06oVxoNOG/RBaYsVeJLhXbzbQ6Djt
+ 8YgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=uckWWWjAq++tc1xguD4EkjJfOnMfhV6QH7N6POaP7o4=;
- b=C1epse0alJdysVl7pAcXhBWlMEwD9l+4tNOzzQYibfCaZCv9xPIDFKdx0MmLs3SKKV
- Hm33Hi6ClASTJ5IaeYcmRWs+Gn0prXXX+LB0UgMG1IzkLA5muaJIzKbNyB4aMDwE36Sg
- 3q4zcGWioZ8daf4rgn2OIHbcwefVnGJ0AtTh2pQaE6uMQNWM+DHBOAeMTJAijXOgwTzO
- moS38pmQNQHDHD4xSw2XZpBRVV/b8Vk3tvNV+rUfR5rkPajWd/TTv3prqQ3MpGbIuQ0W
- fnvkuaoHejU5/dJn4O9oxivwmz0UD6nw6I6DewkN/Gox0L5UFM8zKkldZ4CtZ6WKjOlM
- RsvQ==
-X-Gm-Message-State: AOAM533QJrc2My2gq0EQ6IA2EACuJhkCO3uibNi6fEkGpAdzQUWxfatQ
- GRfj+NuIRu6+UW6+GblHxK4aFb+9fjpYc4kiG9g=
-X-Google-Smtp-Source: ABdhPJxMGyDk2WhETcOC0qWCyzHyuUJdlBvu12JDKFR12hIB+UUdNAHz6yHv4dcud2o5NEkAo08tS1lyDRzwy1eRq3Y=
-X-Received: by 2002:a92:cda1:: with SMTP id g1mr4343246ild.267.1611077702116; 
- Tue, 19 Jan 2021 09:35:02 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=lu8LQ8daA/h8PmYD2TnZ31WFd7LjbAagekmzwQTsWzk=;
+ b=etzWqMBVVyVwj6QgbaStprtJOGQqbxAtKa0r0mRK24NQM87awVUUYEm4yJXtzYacbg
+ lPokTvB9fHTOh8s9H8Muc+PYMZ1sYGbbU1GHL5rSn90B0j8wi3EhxXfzuXEclm4Itgaf
+ 8RlZQqiOZz0unRZHEAokDfIlaMYpUbMWg98XYu/MKTE4x+PyTwdh/aOqJzC4xKWEiOsq
+ V7hwnQ796koQNZlPPdZ6QR6eguKnERL14zOMXEWXQWmXiF5oFigJQ2vy7oypb8cUKnce
+ p4Vpcu8NRjFX09eh3tbklDITRSm2lFdeAIXq8bwgjX9PmZIIosOgJhSniT45Ru4JNmCt
+ xfkw==
+X-Gm-Message-State: AOAM533Vv/piMGy5BampaznoX9vGstXhB3Kima3tYeNftww3q23Tphgp
+ l2SovDOQ6WSbaeEiKdv6Pmq+ECPBvwBtEsLqWJA=
+X-Google-Smtp-Source: ABdhPJyaz60cAssaiI1NKPUcLJgRF+OMPxeYSP0EHoXz1QiAe+TxqHeaSnQLjzEoNJvlemzxpkmWh+b6JLUrrxDXK0o=
+X-Received: by 2002:a92:4b06:: with SMTP id m6mr2299800ilg.177.1611077913463; 
+ Tue, 19 Jan 2021 09:38:33 -0800 (PST)
 MIME-Version: 1.0
-References: <1a4df1b5638d73b64200add175be9d69013418d8.1608401453.git.alistair.francis@wdc.com>
- <eac70d13-7e70-756e-503c-329fdb14a312@vivier.eu>
-In-Reply-To: <eac70d13-7e70-756e-503c-329fdb14a312@vivier.eu>
+References: <20210112093950.17530-1-frank.chang@sifive.com>
+ <20210112093950.17530-9-frank.chang@sifive.com>
+In-Reply-To: <20210112093950.17530-9-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Jan 2021 09:34:36 -0800
-Message-ID: <CAKmqyKMM-vfWzDWSxBe2XhLmKQ2g7pWOg+GmeDtbDLR=o4xOCg@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] linux-user/signal: Decode waitid si_code
-To: Laurent Vivier <laurent@vivier.eu>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Tue, 19 Jan 2021 09:38:07 -0800
+Message-ID: <CAKmqyKNhx+zkstaSHRX6z5MJ7=zW-D_zwJvV6=JSC1Ke9KE3vg@mail.gmail.com>
+Subject: Re: [PATCH v6 08/72] target/riscv: rvv-1.0: add vcsr register
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,83 +74,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2021 17:35:06 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 17:38:39 -0000
 
-On Mon, Jan 18, 2021 at 6:36 AM Laurent Vivier <laurent@vivier.eu> wrote:
+On Tue, Jan 12, 2021 at 1:55 AM <frank.chang@sifive.com> wrote:
 >
-> Le 19/12/2020 =C3=A0 19:11, Alistair Francis a =C3=A9crit :
-> > When mapping the host waitid status to the target status we previously
-> > just used decoding information in the status value. This doesn't follow
-> > what the waitid documentation describes, which instead suggests using
-> > the si_code value for the decoding. This results in the incorrect value=
-s
-> > seen when calling waitid. This is especially apparent on RV32 where all
-> > wait calls use waitid (see the bug case).
-> >
-> > This patch uses the si_code value to map the waitid status.
-> >
-> > Buglink: https://bugs.launchpad.net/qemu/+bug/1906193
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  linux-user/signal.c | 26 ++++++++++++++++++++++++--
-> >  1 file changed, 24 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/linux-user/signal.c b/linux-user/signal.c
-> > index 73de934c65..b6c9326521 100644
-> > --- a/linux-user/signal.c
-> > +++ b/linux-user/signal.c
-> > @@ -305,6 +305,7 @@ static inline void host_to_target_siginfo_noswap(ta=
-rget_siginfo_t *tinfo,
-> >      int sig =3D host_to_target_signal(info->si_signo);
-> >      int si_code =3D info->si_code;
-> >      int si_type;
-> > +    int status =3D info->si_status;
-> >      tinfo->si_signo =3D sig;
-> >      tinfo->si_errno =3D 0;
-> >      tinfo->si_code =3D info->si_code;
-> > @@ -349,8 +350,29 @@ static inline void host_to_target_siginfo_noswap(t=
-arget_siginfo_t *tinfo,
-> >          case TARGET_SIGCHLD:
-> >              tinfo->_sifields._sigchld._pid =3D info->si_pid;
-> >              tinfo->_sifields._sigchld._uid =3D info->si_uid;
-> > -            tinfo->_sifields._sigchld._status
-> > -                =3D host_to_target_waitstatus(info->si_status);
-> > +
-> > +            /*
-> > +             * Map host to target signal numbers for the waitid family=
- of
-> > +             * syscalls. This is similar to the functionality in
-> > +             * host_to_target_waitstatus() except we use the si_code t=
-o
-> > +             * determine the operation.
-> > +             */
-> > +            switch (info->si_code) {
-> > +            case CLD_KILLED:
-> > +            case CLD_DUMPED:
-> > +                tinfo->_sifields._sigchld._status =3D
-> > +                    host_to_target_signal(WTERMSIG(status)) |
-> > +                                          (status & ~0x7f);
-> > +                break;
-> > +            case CLD_STOPPED:
-> > +                tinfo->_sifields._sigchld._status =3D
-> > +                (host_to_target_signal(WSTOPSIG(status)) << 8) |
-> > +                    (status & 0xff);
-> > +                break;
-> > +            default:
+> From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 >
-> I guess the the operation is not encoded in the status coming from the ho=
-st as we need to use the
-> si_code to decode the status, so why do we need to encode it in the statu=
-s we send to the guest?
->
-> Can it be only "tinfo->_sifields._sigchld._status =3D status" for all the=
- cases?
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-That also works, I'll send a v2.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu_bits.h |  7 +++++++
+>  target/riscv/csr.c      | 21 +++++++++++++++++++++
+>  2 files changed, 28 insertions(+)
 >
-> Thanks,
-> Laurent
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 8edf81692e6..2538580a62a 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -60,9 +60,16 @@
+>  #define CSR_VSTART          0x008
+>  #define CSR_VXSAT           0x009
+>  #define CSR_VXRM            0x00a
+> +#define CSR_VCSR            0x00f
+>  #define CSR_VL              0xc20
+>  #define CSR_VTYPE           0xc21
+>
+> +/* VCSR fields */
+> +#define VCSR_VXSAT_SHIFT    0
+> +#define VCSR_VXSAT          (0x1 << VCSR_VXSAT_SHIFT)
+> +#define VCSR_VXRM_SHIFT     1
+> +#define VCSR_VXRM           (0x3 << VCSR_VXRM_SHIFT)
+> +
+>  /* User Timers and Counters */
+>  #define CSR_CYCLE           0xc00
+>  #define CSR_TIME            0xc01
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 6eda5bacb7c..4ac1ed8cfa8 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -335,6 +335,26 @@ static int write_vstart(CPURISCVState *env, int csrno, target_ulong val)
+>      return 0;
+>  }
+>
+> +static int read_vcsr(CPURISCVState *env, int csrno, target_ulong *val)
+> +{
+> +    *val = (env->vxrm << VCSR_VXRM_SHIFT) | (env->vxsat << VCSR_VXSAT_SHIFT);
+> +    return 0;
+> +}
+> +
+> +static int write_vcsr(CPURISCVState *env, int csrno, target_ulong val)
+> +{
+> +#if !defined(CONFIG_USER_ONLY)
+> +    if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
+> +        return -1;
+> +    }
+> +    env->mstatus |= MSTATUS_VS;
+> +#endif
+> +
+> +    env->vxrm = (val & VCSR_VXRM) >> VCSR_VXRM_SHIFT;
+> +    env->vxsat = (val & VCSR_VXSAT) >> VCSR_VXSAT_SHIFT;
+> +    return 0;
+> +}
+> +
+>  /* User Timers and Counters */
+>  static int read_instret(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+> @@ -1397,6 +1417,7 @@ static riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_VSTART] =              { vs,   read_vstart,      write_vstart      },
+>      [CSR_VXSAT] =               { vs,   read_vxsat,       write_vxsat       },
+>      [CSR_VXRM] =                { vs,   read_vxrm,        write_vxrm        },
+> +    [CSR_VCSR] =                { vs,   read_vcsr,        write_vcsr        },
+>      [CSR_VL] =                  { vs,   read_vl                             },
+>      [CSR_VTYPE] =               { vs,   read_vtype                          },
+>      /* User Timers and Counters */
+> --
+> 2.17.1
+>
+>
 
