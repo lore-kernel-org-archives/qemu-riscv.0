@@ -1,58 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1gxu-0001PE-G5
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Jan 2021 21:41:54 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47808)
+	id 1l1h7y-0003ON-NK
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Jan 2021 21:52:18 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51730)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l1gxs-0001OM-Oa; Mon, 18 Jan 2021 21:41:52 -0500
-Received: from mail-yb1-xb31.google.com ([2607:f8b0:4864:20::b31]:44766)
+ id 1l1h7w-0003Nh-NC; Mon, 18 Jan 2021 21:52:16 -0500
+Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:33739)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l1gxr-0008EV-4j; Mon, 18 Jan 2021 21:41:52 -0500
-Received: by mail-yb1-xb31.google.com with SMTP id x78so10102024ybe.11;
- Mon, 18 Jan 2021 18:41:50 -0800 (PST)
+ id 1l1h7v-000470-5U; Mon, 18 Jan 2021 21:52:16 -0500
+Received: by mail-io1-xd32.google.com with SMTP id w18so36848180iot.0;
+ Mon, 18 Jan 2021 18:52:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Lp/2F5sXlYY6JgjlXoaTXdic40awA9foAt8N+Wb4Ri8=;
- b=Lqj3MZGct8RhEH/u/kLLA/EB1PGuxpLx4uSZiB6MgEoXF4QKUTq9N6N77QVhGSn/ms
- cBJe70UhIPAnKE5DYFgU2vJ5JHRxmI+pCY3Ja2kPwyMwh056GxsQCWhyav7RII975UTp
- iHH4F2e3i80Of3ArOCNrI1h+ktonZ9LvjzDXX8gkTWarmLYHe6A+gqkDijyaem6f87JH
- 843NVxmTsYaqiDIlUxFgrwM03tjfJHQ4J8/nBjqHkYq5MdQBYDn4ZsFzJ2QA3zBJwvt7
- W5SBbMLM7TfdB1mau9/jBSQPafbcb+u5b10muFK5HGajD6NB4pl5T716JdBuxgfzADHV
- FW1w==
+ h=from:to:cc:subject:date:message-id;
+ bh=CYOV8khp4NTduR1YE+2GoXcxhPROtbd8FixAoGn5hPs=;
+ b=BQm0ubT3OwhHB7VXbMtF/VkbdSinzrfTpknrO/E17jnH5P2CY8HjbCCc3LIpp4KDZv
+ 9JWt/IO9g76eybvATTOhsDlUeHHCv7vSvbehdLv3i+HnsJfEZeu5wk5P1JEMxWIMzfnf
+ RYpXVRplKMHm+INvTvqr63kf486tQrrZfQvBFuY/Q5w7WrTznlr3X7XJPM4wBb/4GO7h
+ lBHwEI0XJ1wEnuX/UZhuuVd3WxZymPUE1i/w7MKbfCy4mrYyi7/TQpM5ld3O/4YdeuM8
+ Ijgtn2Po/1tw6hXZhfPBude8r6KEyMpKLenOZaxSi7OHVS3JkwgxfCmNNKQWcuwHgzot
+ fwIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Lp/2F5sXlYY6JgjlXoaTXdic40awA9foAt8N+Wb4Ri8=;
- b=cWUk4lc9nQCRfjHdQMz6AYdnRrMP0AXdQcQfrRHbhyfU6wNZA0onK9NUqlvLzQpRn2
- /1mAcUEJ4J9cmf1FSGcY/ovbOGDKrjT5980iGny25ZAdohxEMyTha1gy2bahx3XcqQ4Z
- 5cE3QO0BJ4/pII4ezxVxEYz4+zaHD6vS4Aqkpf6aBbNLddU5ks2qDrs1prxFR2LJ1cfs
- GjvPELF3hzVjYo6rNA6Jd2oJRUoff17jt8Dl0fSuFfyR3J5s53PtQbcNiYAWJMatfiio
- yif0Xvpg5hHEki27KrV4l942bb5Ptg/JmqcMZ+x/brLcdJsELmmmkriIs3teAoBqgMSl
- M/BA==
-X-Gm-Message-State: AOAM5313xVR4LerA8Xf5Ipsyq0CCFp0qrGZM1ut0t5w0+5386SEKvChZ
- S/lsCt6MUuLtiMzehXFkCWAaXGatUHBb+NXHTD4=
-X-Google-Smtp-Source: ABdhPJygxSg98ntcuPNE7N7xXFfIhPj8WE909o8WaRbHZufu5p6j0c2dTDOl5aMIHcPaYMD7GEG/goMbhbWXz49sQEs=
-X-Received: by 2002:a25:2a86:: with SMTP id q128mr3093570ybq.387.1611024109779; 
- Mon, 18 Jan 2021 18:41:49 -0800 (PST)
-MIME-Version: 1.0
-References: <1610427124-49887-1-git-send-email-bmeng.cn@gmail.com>
- <1610427124-49887-2-git-send-email-bmeng.cn@gmail.com>
- <5bb89965-266d-d789-bd64-a963559ea28f@linaro.org>
-In-Reply-To: <5bb89965-266d-d789-bd64-a963559ea28f@linaro.org>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=CYOV8khp4NTduR1YE+2GoXcxhPROtbd8FixAoGn5hPs=;
+ b=RciiEWa4WelbDSLlsO3TPRo5BOVgQM/qQlxJnMJAighiuzlEpf0dhjyx2vqNQjpLyt
+ xK/8XSQh274FDyjMtLiK/br51MB3RiUIYPlLyxOW4RZsCsiC66jY0My5qEwRG6jThaKf
+ bXcE4LxNnA74F2ikdauZeBZL4gmijQuHmYalF6v8lnPZD8ZeNruHKJN1WgVMInQ9a5Ap
+ Rqo9QhELgdcFRX8zHqyIwi1RUvuMoB3K5TL7raeIDbFV3af7areKYdLFhApG9XmkLIhy
+ nLFfErUWee0YnicBd4ZdJh7LTfsEVbqgT7kex60Cu/c/ZOibVUPyrEHFJ/ENPvgTvKqP
+ QgOQ==
+X-Gm-Message-State: AOAM5338KiOyuqIyZWAGIls+onqOlGKkgMW/WuSuD2Y/qdLeP3Rup0Pz
+ dSQ7VUUsA7qsT6JQWQfXBNw=
+X-Google-Smtp-Source: ABdhPJzogydnsX9qH/a2qD6yl0gJY87Gt3yxKlVG+8aja7iXwH7HJJ8tmCYMAMebRA+l6JKwhxX69w==
+X-Received: by 2002:a05:6638:b16:: with SMTP id
+ a22mr1742056jab.56.1611024733127; 
+ Mon, 18 Jan 2021 18:52:13 -0800 (PST)
+Received: from pek-vx-bsp2.wrs.com (unknown-124-94.windriver.com.
+ [147.11.124.94])
+ by smtp.gmail.com with ESMTPSA id p126sm4462058iof.55.2021.01.18.18.52.10
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 18 Jan 2021 18:52:12 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Jan 2021 10:41:38 +0800
-Message-ID: <CAEUhbmWoF7aDfwMdQot8TTUuVb4sAzzQf1T8KM=ZtYoZ8M66eA@mail.gmail.com>
-Subject: Re: [PATCH 1/4] target/riscv: Make csr_ops[CSR_TABLE_SIZE] external
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Jim Wilson <jimw@sifive.com>, Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb31.google.com
+To: Richard Henderson <richard.henderson@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH] target/riscv: Declare csr_ops[] with a known size
+Date: Tue, 19 Jan 2021 10:52:03 +0800
+Message-Id: <1611024723-14293-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-io1-xd32.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -72,22 +71,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2021 02:41:53 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 02:52:17 -0000
 
-On Tue, Jan 19, 2021 at 1:55 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 1/11/21 6:52 PM, Bin Meng wrote:
-> > +extern riscv_csr_operations csr_ops[];
->
-> You might as well use CSR_TABLE_SIZE here.
->
+From: Bin Meng <bin.meng@windriver.com>
 
-OK, I will send a patch for this. Thanks!
+csr_ops[] is currently declared with an unknown size in cpu.h.
+Since the array size is known, let's do a complete declaration.
 
-> Otherwise,
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+---
 
-Regards,
-Bin
+ target/riscv/cpu.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 02758ae..419a214 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -487,7 +487,7 @@ enum {
+ };
+ 
+ /* CSR function table */
+-extern riscv_csr_operations csr_ops[];
++extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
+ 
+ void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+-- 
+2.7.4
+
 
