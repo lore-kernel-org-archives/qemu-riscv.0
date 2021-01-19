@@ -1,77 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1Ykt-000265-Ph
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Jan 2021 12:55:55 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43926)
+	id 1l1gxu-0001PE-G5
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Jan 2021 21:41:54 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47808)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1l1Ykp-000224-NC
- for qemu-riscv@nongnu.org; Mon, 18 Jan 2021 12:55:53 -0500
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:33944)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1l1gxs-0001OM-Oa; Mon, 18 Jan 2021 21:41:52 -0500
+Received: from mail-yb1-xb31.google.com ([2607:f8b0:4864:20::b31]:44766)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1l1Ykh-0002vr-OH
- for qemu-riscv@nongnu.org; Mon, 18 Jan 2021 12:55:49 -0500
-Received: by mail-pj1-x1033.google.com with SMTP id my11so222406pjb.1
- for <qemu-riscv@nongnu.org>; Mon, 18 Jan 2021 09:55:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=SE8vf9eW3SnOLCOT2l+Ewm+uuWHLP0vI5RKOCNL6ErA=;
- b=hDpm9JT1/UhY4UC3Gfj5B3666m4C4vIHiPebdV04kHBEFycKJK5KmFlBklM4EOx5oo
- UvX5pRbldpEj54E5Uyf/qqgjJ2k2c17xcM5QVxX99nqucqi0HIC4e+PoQCgyZCSCWSXG
- hs4BCqrd5wuvVHJnzHBOASi19gmtg/xQEVgCqQknvqHaHcViyLyd5XZLh3Q9eIY/MqsW
- IJFKp2fjqX3GyhH2cLvJUEwIpCEy4R+Hfc9kTW1aHg05k87ba5H7IVCZVERGEZP7fVHI
- Czv3pzw1aFNzkG7U0B/ubFaFs6EcdmmYwcuEn60YeMh7nslzPrBh4K9d2TsuvlkASsV/
- NR5A==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1l1gxr-0008EV-4j; Mon, 18 Jan 2021 21:41:52 -0500
+Received: by mail-yb1-xb31.google.com with SMTP id x78so10102024ybe.11;
+ Mon, 18 Jan 2021 18:41:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Lp/2F5sXlYY6JgjlXoaTXdic40awA9foAt8N+Wb4Ri8=;
+ b=Lqj3MZGct8RhEH/u/kLLA/EB1PGuxpLx4uSZiB6MgEoXF4QKUTq9N6N77QVhGSn/ms
+ cBJe70UhIPAnKE5DYFgU2vJ5JHRxmI+pCY3Ja2kPwyMwh056GxsQCWhyav7RII975UTp
+ iHH4F2e3i80Of3ArOCNrI1h+ktonZ9LvjzDXX8gkTWarmLYHe6A+gqkDijyaem6f87JH
+ 843NVxmTsYaqiDIlUxFgrwM03tjfJHQ4J8/nBjqHkYq5MdQBYDn4ZsFzJ2QA3zBJwvt7
+ W5SBbMLM7TfdB1mau9/jBSQPafbcb+u5b10muFK5HGajD6NB4pl5T716JdBuxgfzADHV
+ FW1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=SE8vf9eW3SnOLCOT2l+Ewm+uuWHLP0vI5RKOCNL6ErA=;
- b=CbxljfXGQqzGWzkDKODZShTlOzWnSIqyCF2svGikb3j79dNZFkWYnpVhzHN0/cJbnl
- x02izKII4ARnF+XKJD8+A+np02ugDawwrIHHnHcKjxSqkkWGT3BUi1c5zyfoZfNoKBx3
- sx+MkQXJQb6SooK+dQ3ldiGVIVDtbjbahl35SjijyddTLN6VubBfaFvD5mRccCyW2EHd
- WqeVsADqxvneVWBAAPibbmFflMqJDil7PKb7DbEKjXsGDJSqLO3Huc2OI6Z3LsU2yASC
- xkKppQcibhrJ3QwMPHdMHnCkHRczV/6zEPDUj+INWBoeOIHDWWr163T+/2a2tZ7yIrHc
- MB2Q==
-X-Gm-Message-State: AOAM530gJkKyLtBvrzj6aDF5FHC8TRi4/tPwUbIUzR6827sqUvN9Gc/p
- nTnn64TfyDiUerbsk9Z2OzAgJQ==
-X-Google-Smtp-Source: ABdhPJxhb07BKMCdI6+mB2vDkiO6FvJY2x/0ch03DBI6coGDsBt4I7LsWwkkpsfmuo/wKfwEI9YOvQ==
-X-Received: by 2002:a17:90a:d249:: with SMTP id
- o9mr479378pjw.196.1610992541039; 
- Mon, 18 Jan 2021 09:55:41 -0800 (PST)
-Received: from [192.168.3.43] (cpe-66-75-72-126.hawaii.res.rr.com.
- [66.75.72.126])
- by smtp.gmail.com with ESMTPSA id b2sm16702799pff.79.2021.01.18.09.55.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 Jan 2021 09:55:40 -0800 (PST)
-Subject: Re: [PATCH 1/4] target/riscv: Make csr_ops[CSR_TABLE_SIZE] external
-To: Bin Meng <bmeng.cn@gmail.com>, Jim Wilson <jimw@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Cc: Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Lp/2F5sXlYY6JgjlXoaTXdic40awA9foAt8N+Wb4Ri8=;
+ b=cWUk4lc9nQCRfjHdQMz6AYdnRrMP0AXdQcQfrRHbhyfU6wNZA0onK9NUqlvLzQpRn2
+ /1mAcUEJ4J9cmf1FSGcY/ovbOGDKrjT5980iGny25ZAdohxEMyTha1gy2bahx3XcqQ4Z
+ 5cE3QO0BJ4/pII4ezxVxEYz4+zaHD6vS4Aqkpf6aBbNLddU5ks2qDrs1prxFR2LJ1cfs
+ GjvPELF3hzVjYo6rNA6Jd2oJRUoff17jt8Dl0fSuFfyR3J5s53PtQbcNiYAWJMatfiio
+ yif0Xvpg5hHEki27KrV4l942bb5Ptg/JmqcMZ+x/brLcdJsELmmmkriIs3teAoBqgMSl
+ M/BA==
+X-Gm-Message-State: AOAM5313xVR4LerA8Xf5Ipsyq0CCFp0qrGZM1ut0t5w0+5386SEKvChZ
+ S/lsCt6MUuLtiMzehXFkCWAaXGatUHBb+NXHTD4=
+X-Google-Smtp-Source: ABdhPJygxSg98ntcuPNE7N7xXFfIhPj8WE909o8WaRbHZufu5p6j0c2dTDOl5aMIHcPaYMD7GEG/goMbhbWXz49sQEs=
+X-Received: by 2002:a25:2a86:: with SMTP id q128mr3093570ybq.387.1611024109779; 
+ Mon, 18 Jan 2021 18:41:49 -0800 (PST)
+MIME-Version: 1.0
 References: <1610427124-49887-1-git-send-email-bmeng.cn@gmail.com>
  <1610427124-49887-2-git-send-email-bmeng.cn@gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <5bb89965-266d-d789-bd64-a963559ea28f@linaro.org>
-Date: Mon, 18 Jan 2021 07:55:37 -1000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <1610427124-49887-2-git-send-email-bmeng.cn@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1033.google.com
-X-Spam_score_int: -22
-X-Spam_score: -2.3
+ <5bb89965-266d-d789-bd64-a963559ea28f@linaro.org>
+In-Reply-To: <5bb89965-266d-d789-bd64-a963559ea28f@linaro.org>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 19 Jan 2021 10:41:38 +0800
+Message-ID: <CAEUhbmWoF7aDfwMdQot8TTUuVb4sAzzQf1T8KM=ZtYoZ8M66eA@mail.gmail.com>
+Subject: Re: [PATCH 1/4] target/riscv: Make csr_ops[CSR_TABLE_SIZE] external
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Jim Wilson <jimw@sifive.com>, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb31.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.194,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,16 +72,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2021 17:55:53 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 02:41:53 -0000
 
-On 1/11/21 6:52 PM, Bin Meng wrote:
-> +extern riscv_csr_operations csr_ops[];
+On Tue, Jan 19, 2021 at 1:55 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 1/11/21 6:52 PM, Bin Meng wrote:
+> > +extern riscv_csr_operations csr_ops[];
+>
+> You might as well use CSR_TABLE_SIZE here.
+>
 
-You might as well use CSR_TABLE_SIZE here.
+OK, I will send a patch for this. Thanks!
 
-Otherwise,
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Otherwise,
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-
-r~
+Regards,
+Bin
 
