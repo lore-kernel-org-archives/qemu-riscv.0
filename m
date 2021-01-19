@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1uUt-0005pp-8B
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 12:08:51 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55340)
+	id 1l1uWx-0008Nk-44
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 12:11:01 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55838)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1uUn-0005f2-Ea; Tue, 19 Jan 2021 12:08:45 -0500
-Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:38213)
+ id 1l1uWp-0008Kg-4U; Tue, 19 Jan 2021 12:10:55 -0500
+Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:33985)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1uUg-0004WY-Ix; Tue, 19 Jan 2021 12:08:45 -0500
-Received: by mail-io1-xd2f.google.com with SMTP id e22so41010424iom.5;
- Tue, 19 Jan 2021 09:08:37 -0800 (PST)
+ id 1l1uWn-0004wQ-5M; Tue, 19 Jan 2021 12:10:50 -0500
+Received: by mail-io1-xd32.google.com with SMTP id u17so41109231iow.1;
+ Tue, 19 Jan 2021 09:10:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=40QeAgMnbYy25MaiAE4YrLU7i340GYM2vYObI5hJdGg=;
- b=lDiNg7EH/IM+IqkPn/l2z6NQT4EjTK3fX/mNyIHqVhtjo0o3Gq8IdkVSy2nl1naucC
- vJGAgwXAx4zE/Mm1ONl6yJtUlya7wqiVC1vY6eeSLrq+egGTkrOiqNCv14poyJr5Json
- lYuqyPbcuUiSoCc8fvWpSKtIIxqK1pFbD93HwK6XgnSNnJmSUWUWlbkQdfxrWBJnu+Fv
- ouBnuuOWfAJlhhEYycOl+vHOXrL/hIEDWcZnF0PNUfTc3usF2W82LQKRGgSL0xjz7zQT
- iWuTzVgmptpGHUZ5oM4yMYke4B3BKltXEZulDmT2+stiIwDNktkW6h4s2x2jyL9LOU6a
- 6D4w==
+ :cc; bh=oKBZeEAABl0KX90sbYSnPYn9dh0EVM1k/nQRAM1Nv6A=;
+ b=Uh5bHN5w5z6jjlIpNHbdAMAGvIgW+J1VLexJyzvqO0owNrmSqVjEvMcZT3yVS4RwXU
+ 2z8VEu6G2ztzChc42Iyn1KPV5AKm7aXxnTG3HdawlSeaNAUhIGX3pleXjK75eXJAjaYv
+ 1rbBobhuIbfmEdtAPg6OWtkaquwgqgT1ML69HaVYKRIPOA+ogeCHsZzRTsOOsPhhTEPI
+ v7U4OvtqzPcfTFp1lGPo0Ia3uploUXezPuVjInUC5ej88D5QIlB41QSCbmM9tl0LHFeE
+ eKafKoTP+UAaKZ/lUEPduXsMp0N5wNXd5M59Kdhn05Lpi/Jn1asimAnKADoJAmiIaGD+
+ a3Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=40QeAgMnbYy25MaiAE4YrLU7i340GYM2vYObI5hJdGg=;
- b=sHTGGzl/qc76RPTtITDYAOOrRPqKmRh4LF5Q0gYu7/I8D0I/c/qCsaKK16RhMdenqA
- sAuh+GoIHZBsWHwN80SCkcQccFzvR2j4UL+Mw15HdREQ9PITJGQfqGSi/i5huTiWyzBS
- 8SpFSnpqqahd+2il6Tl005D9IWXcw5tGl6cjigwA5GNnchZ+F/V9tZJA+VHfCjH1nqKH
- e93THXXlmdYYwN457z229vEOFWAdwFDOZSXRFw68pNDo0iMOvk7tPCJK9bt3T5hHYoMq
- 2illPQ/BmMIsP7Bm7uup5ldFOlxCPAwa46OPsPbvkGcnxMAeIOttj4f6jqlruaRUYBlq
- TDBQ==
-X-Gm-Message-State: AOAM533AguKDkm5ZUO458Xk/not7kw4B63yXTQY4uTXcDAKeiUOZISAI
- qsCNlo8db64SaFnVIZ77NbKTQ65mr+JxWYTWVAQ=
-X-Google-Smtp-Source: ABdhPJwCywgmyKGcO+3RBKJ0SQRF85W3H/HmJN2jA0IdSZ4WChKMrUL9LgDtmqUuKBme64HgnG0YGTcgJVi6oNsLUT0=
-X-Received: by 2002:a05:6e02:20e5:: with SMTP id
- q5mr4160612ilv.131.1611076116688; 
- Tue, 19 Jan 2021 09:08:36 -0800 (PST)
+ bh=oKBZeEAABl0KX90sbYSnPYn9dh0EVM1k/nQRAM1Nv6A=;
+ b=YWZ2WYARJPkyWUBdv+XaquCoPuQkNEkJ58rWlgyA7V3arNCS1+ZLA5f54TPZ7u35NG
+ nSMcPKAFXbT6oGVvpSlOgJsnZjCLkOCdpjzJDGFp0yEtAdHhyVGgDF4cE1owOSjbB//J
+ Ye1QJSQTbSs1UBmQkADMI2N901p8oGZuDNh/cQ3uKuR96o34K612DuuLfyxe2ryFxxd4
+ zxhklIuEeesgGAXCp8/IuhfqxzqidHTOdv3skzbkpe9EZ894YPHnRBO9qobgvv+uGEdL
+ 0njifjjoBUM3CYjVKUGBm202SBIRj1YmR7e0aDB+NTwATSzSrkdZhCpNNNMKtvWvQ8As
+ dvPQ==
+X-Gm-Message-State: AOAM530ol1u57+JE+XD71Ioj6ke3o6zVRQP763tlkKker11vqFBKO8ze
+ cN7cS3yJjUGKdM4v08qXMOsC1nXvxyHUCXcKE+U=
+X-Google-Smtp-Source: ABdhPJyMlFt+DDSRqSshUNHmoBwYrlfbe5nmeFkN2XeGbGOJg5N3izbeQBpvZIRj9AtdQhsLNe9GCh1aXbbnGEKO/z0=
+X-Received: by 2002:a92:8455:: with SMTP id l82mr4267049ild.40.1611076247596; 
+ Tue, 19 Jan 2021 09:10:47 -0800 (PST)
 MIME-Version: 1.0
-References: <1611024723-14293-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1611024723-14293-1-git-send-email-bmeng.cn@gmail.com>
+References: <1611026585-29971-1-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1611026585-29971-1-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Jan 2021 09:08:10 -0800
-Message-ID: <CAKmqyKMb_C+TSE7LLfyCm6j7rm32OH4UZQzRr456Pf6S0Ws79w@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Declare csr_ops[] with a known size
+Date: Tue, 19 Jan 2021 09:10:21 -0800
+Message-ID: <CAKmqyKPCe_M4VvHpz+c=rmNW-591WreLF0jGcc4whypaE-bZOQ@mail.gmail.com>
+Subject: Re: [PATCH] hw/misc: sifive_u_otp: Use error_report() when block
+ operation fails
 To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Richard Henderson <richard.henderson@linaro.org>, 
+Cc: Peter Maydell <peter.maydell@linaro.org>, Green Wan <green.wan@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,41 +72,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2021 17:08:45 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 17:10:57 -0000
 
-On Mon, Jan 18, 2021 at 6:52 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Jan 18, 2021 at 7:23 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > From: Bin Meng <bin.meng@windriver.com>
 >
-> csr_ops[] is currently declared with an unknown size in cpu.h.
-> Since the array size is known, let's do a complete declaration.
+> At present when blk_pread() / blk_pwrite() fails, a guest error
+> is logged, but this is not really a guest error. Change to use
+> error_report() instead.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
 >
->  target/riscv/cpu.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  hw/misc/sifive_u_otp.c | 13 +++++--------
+>  1 file changed, 5 insertions(+), 8 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 02758ae..419a214 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -487,7 +487,7 @@ enum {
->  };
+> diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
+> index f921c67..4d8f793 100644
+> --- a/hw/misc/sifive_u_otp.c
+> +++ b/hw/misc/sifive_u_otp.c
+> @@ -23,6 +23,7 @@
+>  #include "hw/qdev-properties.h"
+>  #include "hw/qdev-properties-system.h"
+>  #include "hw/sysbus.h"
+> +#include "qemu/error-report.h"
+>  #include "qemu/log.h"
+>  #include "qemu/module.h"
+>  #include "hw/misc/sifive_u_otp.h"
+> @@ -65,8 +66,7 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
 >
->  /* CSR function table */
-> -extern riscv_csr_operations csr_ops[];
-> +extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
+>                  if (blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
+>                                SIFIVE_U_OTP_FUSE_WORD) < 0) {
+> -                    qemu_log_mask(LOG_GUEST_ERROR,
+> -                                  "read error index<%d>\n", s->pa);
+> +                    error_report("read error index<%d>", s->pa);
+>                      return 0xff;
+>                  }
 >
->  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
->  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+> @@ -169,8 +169,7 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
+>                  if (blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD,
+>                                 &s->fuse[s->pa], SIFIVE_U_OTP_FUSE_WORD,
+>                                 0) < 0) {
+> -                    qemu_log_mask(LOG_GUEST_ERROR,
+> -                                  "write error index<%d>\n", s->pa);
+> +                    error_report("write error index<%d>", s->pa);
+>                  }
+>              }
+>
+> @@ -260,15 +259,13 @@ static void sifive_u_otp_reset(DeviceState *dev)
+>          serial_data = s->serial;
+>          if (blk_pwrite(s->blk, index * SIFIVE_U_OTP_FUSE_WORD,
+>                         &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0) < 0) {
+> -            qemu_log_mask(LOG_GUEST_ERROR,
+> -                          "write error index<%d>\n", index);
+> +            error_report("write error index<%d>", index);
+>          }
+>
+>          serial_data = ~(s->serial);
+>          if (blk_pwrite(s->blk, (index + 1) * SIFIVE_U_OTP_FUSE_WORD,
+>                         &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0) < 0) {
+> -            qemu_log_mask(LOG_GUEST_ERROR,
+> -                          "write error index<%d>\n", index + 1);
+> +            error_report("write error index<%d>", index + 1);
+>          }
+>      }
+>
 > --
 > 2.7.4
 >
