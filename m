@@ -1,77 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1hFS-00073B-My
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Jan 2021 22:00:03 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53486)
+	id 1l1hbz-00049v-7c
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Jan 2021 22:23:19 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57814)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1l1hFR-00072e-Mt; Mon, 18 Jan 2021 22:00:01 -0500
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529]:40245)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1l1hbv-000495-QQ; Mon, 18 Jan 2021 22:23:15 -0500
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:44844)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1l1hFQ-00072a-4g; Mon, 18 Jan 2021 22:00:01 -0500
-Received: by mail-ed1-x529.google.com with SMTP id h16so19787487edt.7;
- Mon, 18 Jan 2021 18:59:59 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1l1hbu-0006vJ-8d; Mon, 18 Jan 2021 22:23:15 -0500
+Received: by mail-pl1-x62c.google.com with SMTP id r4so9699523pls.11;
+ Mon, 18 Jan 2021 19:23:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=T8wm/6JewwPSAZFKnY3eY8zLspOVr+SJQp4TWRZ/bTk=;
- b=BGOA5xQqwWiUTVnWwJzwY2xm3cwNlGL+S0Ybgrw5ULM9ylvyYjO8iJyyOR+JtlsUqC
- 7Svjfo44oOJyoDpmhLura6+KSglwSkgYWGHnneV+vYeaPVfu6E0zEv3a8Xjy1fjpTQcR
- bD6VjyVPwcDW6UdVRHekDl9iCV3VPzuV1hruqBFQ+H95N6zS8YUV4fkCuwNBXvxSdXRr
- laxvKKcV29Lp5sMmV6Pyv1M2M+zVKEGIKR1kTq096BrA9bNuj6a1QTEc+8AVRzQBqZ7b
- aJYbs+AKlQFGe7e0DhOKdIrbCssFhqJkun7+A5c0w5yXRAQC5BmEtAEMyft1+o+ONxXb
- YGuw==
+ h=from:to:cc:subject:date:message-id;
+ bh=lkOMMBEvfSBDQoI21wVPZJpEUQ3pr1l1lES84h5wUWk=;
+ b=tNntGWkmvjtmr1cbdbCeam2xsASLNTyOarSZe7UOZTZqMEkUSf2VqBuEeij0jH6bTH
+ 6brt3qW/uDDo4KqKmHg2KS5r5pQIP3GGyiH9fSGlyxdz3ee54NQog1Kls3Cn1n1wCsy7
+ 8q7cQQweMk0vEtqX5DNv+VDxt/kDkc+SHgejjRjrp+SA9q7v3pnZgsjRLvhotBhbtW/W
+ fHfA/vZ06G2Fydp/JYxaIYEGJWUH8dQdNKy05f+/ypglc01bKIaUSiLHSZKPjd2eEZwE
+ IAGzGhYMfbiQgxR2Muv3cHXL4vdWCWSHjvcWGL59l96i7KIGzLLOrLKAeU8L5rfABqT8
+ gAYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=T8wm/6JewwPSAZFKnY3eY8zLspOVr+SJQp4TWRZ/bTk=;
- b=fLelj6xs2QlLZXscGyBvfFzQLJ2GLsjEJLM6gKN/zV0ZCTXyBeDcDqJrL1kuZ1PO7h
- +Pxyf+OcmsKS88lFY0M/sANOwFheKlQyTdc4aYBE3SDJzEzn5eQ5yJ3tjB6dezcbG9rH
- 4/rXwX09l3NKzQK5t/bGwzkFwQ/3R6WoPt3fX0Pzuv4LBway3AxuXtgFnV40VH2lWjnp
- nGa4AtzeT2TmeudCnnS/WvbKWGoeEo92dL9KX+FBP8/+w7Tw4tRSb7M18CsuQiQ7gF30
- 0sd8I+5Qy6Ym/kv1HnhZBUZG9uN/ZPEeaLagfVozZ9RzRd6Y4Dr7Oqf0Z+fiEZU/TvxJ
- OjPw==
-X-Gm-Message-State: AOAM530JhRfPGxxOFdpXmjLGZEHoOsJfh7EaiYGjmgXfBej8J/WYI5mf
- YbyUaq+nSbp95UmaqsahXaprvqUhi3k=
-X-Google-Smtp-Source: ABdhPJypAxeLXTUxWzXbtthO6gsQSRn2F+wiiJ3Q5eWaZFou+mro/rTyNki2rd3D0ypbnq9V8s1hEA==
-X-Received: by 2002:aa7:cb42:: with SMTP id w2mr1766613edt.21.1611025197458;
- Mon, 18 Jan 2021 18:59:57 -0800 (PST)
-Received: from [192.168.1.36] (13.red-83-57-169.dynamicip.rima-tde.net.
- [83.57.169.13])
- by smtp.gmail.com with ESMTPSA id ar1sm7336994ejc.30.2021.01.18.18.59.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 Jan 2021 18:59:56 -0800 (PST)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH] target/riscv: Declare csr_ops[] with a known size
-To: Bin Meng <bmeng.cn@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=lkOMMBEvfSBDQoI21wVPZJpEUQ3pr1l1lES84h5wUWk=;
+ b=jXaYkDzzo2/kQcTcR6bei3nfel1/45B4V8K2Z0tVBh3h8K96pAnKXOYz33v0RbvwHg
+ ofI2LoWFz6K0JkYA29Z3XcZ83ByV+JdS6AD3XMyHvtcE8eN2yV9vIHGUEqpXcm/uMxdz
+ 6wYUzm6vbIAU2EUX1UO9CzIj6dMP7MaDI7d36FTEHdCm1L5jVZTFCG4HNRz0E90MrhtT
+ L67N5TNw4s20Eg5LqrdaLHdDmwSI4veBn0Fyv5hadRRmPyWyhJEMUBSje4IKaA+ECC9R
+ /ESgjGm6nmwFaTzlhFvOqv6W1RQZW0Bg8V1zprsyADT1AmGPLBswy5L+iPTJbRQi75nB
+ WH3w==
+X-Gm-Message-State: AOAM53248uBJiV9kF58esFWfxvtv84pGam8ierrGCkMgLCdMK2s0W7ku
+ 3qG7e39P31X5htQjB+4TWBs=
+X-Google-Smtp-Source: ABdhPJyZ+hpLBbpMqH3Z/ZZP/vMunmwzW4w5q/fnVpzHEe4QnEDYPu0NtQE/REBIesDGc6kApzUh6A==
+X-Received: by 2002:a17:90a:4083:: with SMTP id
+ l3mr2766839pjg.109.1611026592475; 
+ Mon, 18 Jan 2021 19:23:12 -0800 (PST)
+Received: from pek-vx-bsp2.wrs.com (unknown-124-94.windriver.com.
+ [147.11.124.94])
+ by smtp.gmail.com with ESMTPSA id y22sm1013993pfb.132.2021.01.18.19.23.09
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 18 Jan 2021 19:23:12 -0800 (PST)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Peter Maydell <peter.maydell@linaro.org>, Green Wan <green.wan@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Cc: Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-References: <1611024723-14293-1-git-send-email-bmeng.cn@gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <15b229b9-d8c3-5e98-18ca-8c2953c19d54@amsat.org>
-Date: Tue, 19 Jan 2021 03:59:55 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
-MIME-Version: 1.0
-In-Reply-To: <1611024723-14293-1-git-send-email-bmeng.cn@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.248,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.248, NICE_REPLY_A=-0.194,
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH] hw/misc: sifive_u_otp: Use error_report() when block
+ operation fails
+Date: Tue, 19 Jan 2021 11:23:05 +0800
+Message-Id: <1611026585-29971-1-git-send-email-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x62c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,19 +72,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2021 03:00:02 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 03:23:16 -0000
 
-On 1/19/21 3:52 AM, Bin Meng wrote:
-> From: Bin Meng <bin.meng@windriver.com>
-> 
-> csr_ops[] is currently declared with an unknown size in cpu.h.
-> Since the array size is known, let's do a complete declaration.
-> 
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> ---
-> 
->  target/riscv/cpu.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+From: Bin Meng <bin.meng@windriver.com>
 
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+At present when blk_pread() / blk_pwrite() fails, a guest error
+is logged, but this is not really a guest error. Change to use
+error_report() instead.
+
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+---
+
+ hw/misc/sifive_u_otp.c | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+
+diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
+index f921c67..4d8f793 100644
+--- a/hw/misc/sifive_u_otp.c
++++ b/hw/misc/sifive_u_otp.c
+@@ -23,6 +23,7 @@
+ #include "hw/qdev-properties.h"
+ #include "hw/qdev-properties-system.h"
+ #include "hw/sysbus.h"
++#include "qemu/error-report.h"
+ #include "qemu/log.h"
+ #include "qemu/module.h"
+ #include "hw/misc/sifive_u_otp.h"
+@@ -65,8 +66,7 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
+ 
+                 if (blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
+                               SIFIVE_U_OTP_FUSE_WORD) < 0) {
+-                    qemu_log_mask(LOG_GUEST_ERROR,
+-                                  "read error index<%d>\n", s->pa);
++                    error_report("read error index<%d>", s->pa);
+                     return 0xff;
+                 }
+ 
+@@ -169,8 +169,7 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
+                 if (blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD,
+                                &s->fuse[s->pa], SIFIVE_U_OTP_FUSE_WORD,
+                                0) < 0) {
+-                    qemu_log_mask(LOG_GUEST_ERROR,
+-                                  "write error index<%d>\n", s->pa);
++                    error_report("write error index<%d>", s->pa);
+                 }
+             }
+ 
+@@ -260,15 +259,13 @@ static void sifive_u_otp_reset(DeviceState *dev)
+         serial_data = s->serial;
+         if (blk_pwrite(s->blk, index * SIFIVE_U_OTP_FUSE_WORD,
+                        &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0) < 0) {
+-            qemu_log_mask(LOG_GUEST_ERROR,
+-                          "write error index<%d>\n", index);
++            error_report("write error index<%d>", index);
+         }
+ 
+         serial_data = ~(s->serial);
+         if (blk_pwrite(s->blk, (index + 1) * SIFIVE_U_OTP_FUSE_WORD,
+                        &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0) < 0) {
+-            qemu_log_mask(LOG_GUEST_ERROR,
+-                          "write error index<%d>\n", index + 1);
++            error_report("write error index<%d>", index + 1);
+         }
+     }
+ 
+-- 
+2.7.4
+
 
