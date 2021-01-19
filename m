@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1tzp-00087c-N4
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 11:36:45 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47158)
+	id 1l1u0G-0000EL-42
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 11:37:12 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47332)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1tzm-00083i-97; Tue, 19 Jan 2021 11:36:42 -0500
-Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34]:36979)
+ id 1l1u0B-00009f-8Z; Tue, 19 Jan 2021 11:37:08 -0500
+Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:34407)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1tzk-0007VP-7z; Tue, 19 Jan 2021 11:36:42 -0500
-Received: by mail-io1-xd34.google.com with SMTP id d13so37559670ioy.4;
- Tue, 19 Jan 2021 08:36:39 -0800 (PST)
+ id 1l1u08-0007ei-Ro; Tue, 19 Jan 2021 11:37:06 -0500
+Received: by mail-io1-xd32.google.com with SMTP id u17so40862221iow.1;
+ Tue, 19 Jan 2021 08:37:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=z/vzwFyZ6BZBjPqUDHRC/Sozjg+p7aS+gel5+0fESOc=;
- b=Z3CGhdB5qL7otqnFhTYr6F+3Loi+BusVHBfT3w/YGjCMhFwI7FzlYvdC9WsBCfN9lG
- yJCS0N4eY6Wox2T0eqzRK6HVdj4DTrJguwfQ30AWtYALCo/VVXwaxPM9HSSZbQ0hlQze
- Phvj+0RzSonUfhTf71M596wjz1Fbb8iSE1eC50OudYcjzx/5k0hUQ8lnZEi+2cNaQRCq
- gQ2tfGM+wE2wk3LopvJucapFxXM3CrjCItHMCGLYoYT8xXP4dBmJWXLqMsyBjxcngFYd
- a17pHW/cfsJlHMkqEozTSTq6IsyBFZaCKyP3Y+nzm3pyJdcZThiMahHdDedzT8DSSw6k
- SmUQ==
+ :cc; bh=gsjRYwfGdghN2DKYlUIHWegNlgsR76pHPsztQrvMAoQ=;
+ b=QRDUNXj1GkWjteMavwV6ae43LQCGQ7xTjriihO+mDEGj9z5OXCzqUEUFkAZy6DBGsZ
+ gasgaT1rYXwuyrw3whs6z0NCe+Qa4jk0uY9Ez0CPkwzV4hdJssQnx7mhv0y6pv84Ed8w
+ ho3KwBrTe+o9n8wr1SbsOxgqusgvMmnAolWnnK+iobjllhYjfvHHv2d5aiVN/8+CxXin
+ c9TjSXXp0CCPXNaR0J2LPHSacKxbCaoo62hXJjlpyCPSIk/MtSAd5G91g+P/11aYbQfK
+ c1jo3zv/bEVjgIr8yaRleRfDE2p05FZNBz1TYNVIZR1WinyPcXWJBCGwVpbvAeTs5mZN
+ lMTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=z/vzwFyZ6BZBjPqUDHRC/Sozjg+p7aS+gel5+0fESOc=;
- b=kAHsoyVzTinuMwPRcaQ7z9c9l+9AYeWaq6C6NyXhWhnWm9RVWMaUEzlYrN1ySOg72s
- z1ALmv4dZdCvTZFz4worzCvvZaL2VXjvjMNgmqAfpCl399QRly/NMlnbXP6hIazj3ezf
- IXNEqjQTl9qbw/3rzhI6EKlsOZve4+v9xB4QE+eXPR6rzRGQmPzX092RPALS2sWMJbiJ
- yfTzhqxch/yeiZI2z1gOye/H3kBVJQFZ5W307/2/plwZO1zcQGb5fiIfDqnmvWnqt0mp
- 59uvOsYPAlfkX1D0dB/QW7j7hqFIJjTZ5C62Kd+FgCEmfvjF87bo2ztMsj9K1pllPllJ
- GrNg==
-X-Gm-Message-State: AOAM533ODNVRi3ZVukm7tEjTdCsFmPm7oAOGyBNvz7flXZcg3tqYl4IV
- WJVQlITuJB4Yw8yPy4/vog968DzhqfSNCuOaIt0=
-X-Google-Smtp-Source: ABdhPJyev1GydZWJvsFFIjPvShcE81VAJ25JxEnOkc8qT92HE02Y0PXFB94Sx2N4wF46ujhF3u57dX8/ZWi5zpjYpJU=
-X-Received: by 2002:a92:cda1:: with SMTP id g1mr4115776ild.267.1611074199025; 
- Tue, 19 Jan 2021 08:36:39 -0800 (PST)
+ bh=gsjRYwfGdghN2DKYlUIHWegNlgsR76pHPsztQrvMAoQ=;
+ b=AZiXwz3jlRAZDUhnLytdj0K2K6jswPRQ6LYxQl0bUyi8C+TOAZW/sKjTqa38NYja2O
+ sL5nk404fPo4oHniqJHkiT1/y8aR7X+VRjCjq1t2vCsAimfozEOx9YYloQelaoDrn8VY
+ kk7r+AaOwLEHKwdwBAeM872rjPKpM7rXFrsxyhZjYgFiG0WtAzRL1AfhtCuBzIRN6U+d
+ m2faEqFS5Owb5kzqCLia4ldJYJnAOvGKYE7p+v5J714BzAS/QJakiSNTHYpqTb+Zyb1u
+ AHRCxJBNIf3RoGuMmOtoK9Epjxo5j+EG6rz8M1YTCfevYlPdzPg3y3+UDxNtG/I4ENxM
+ saAQ==
+X-Gm-Message-State: AOAM532lJUdcAxJ3OPuJ3DlZR9g5dyQ5lhp/lsbLtc2lqBnuk6j4GOvy
+ ZGSyVqjXLbHG9EeFfqFA9Ed/B7s+3RopmNYiW1w=
+X-Google-Smtp-Source: ABdhPJypgMRhdZOU2st8Dw3NDeZ+v4YvDyaZHKb1x9sabbz/qqFy/w60cReEBQILhwA8Bj2iodBQcitF7Fiy93O646E=
+X-Received: by 2002:a02:2544:: with SMTP id g65mr4111769jag.91.1611074223478; 
+ Tue, 19 Jan 2021 08:37:03 -0800 (PST)
 MIME-Version: 1.0
 References: <20210112093950.17530-1-frank.chang@sifive.com>
- <20210112093950.17530-4-frank.chang@sifive.com>
-In-Reply-To: <20210112093950.17530-4-frank.chang@sifive.com>
+ <20210112093950.17530-5-frank.chang@sifive.com>
+In-Reply-To: <20210112093950.17530-5-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Jan 2021 08:36:12 -0800
-Message-ID: <CAKmqyKO2Z_B4FybCraycR49GLRAxYLObz185RKYf7A+jYqXseA@mail.gmail.com>
-Subject: Re: [PATCH v6 03/72] target/riscv: rvv-1.0: add mstatus VS field
+Date: Tue, 19 Jan 2021 08:36:37 -0800
+Message-ID: <CAKmqyKOsn+vSRxWQYkHkST53F7G_sNR=3YAdT-QdF4M4DGY+mQ@mail.gmail.com>
+Subject: Re: [PATCH v6 04/72] target/riscv: rvv-1.0: add sstatus VS field
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -52,8 +52,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,9 +74,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2021 16:36:44 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 16:37:09 -0000
 
-On Tue, Jan 12, 2021 at 1:48 AM <frank.chang@sifive.com> wrote:
+On Tue, Jan 12, 2021 at 1:51 AM <frank.chang@sifive.com> wrote:
 >
 > From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 >
@@ -89,164 +89,35 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.h        |  7 +++++++
->  target/riscv/cpu_bits.h   |  1 +
->  target/riscv/cpu_helper.c | 15 ++++++++++++++-
->  target/riscv/csr.c        | 25 ++++++++++++++++++++++++-
->  4 files changed, 46 insertions(+), 2 deletions(-)
+>  target/riscv/cpu_bits.h | 1 +
+>  target/riscv/csr.c      | 2 +-
+>  2 files changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index b0281133e09..cd5c77114a4 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -325,6 +325,7 @@ int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
->  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
->  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
->  bool riscv_cpu_fp_enabled(CPURISCVState *env);
-> +bool riscv_cpu_vector_enabled(CPURISCVState *env);
->  bool riscv_cpu_virt_enabled(CPURISCVState *env);
->  void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
->  bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
-> @@ -372,6 +373,7 @@ void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
->  #define TB_FLAGS_PRIV_MMU_MASK                3
->  #define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
->  #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
-> +#define TB_FLAGS_MSTATUS_VS MSTATUS_VS
->
->  typedef CPURISCVState CPUArchState;
->  typedef RISCVCPU ArchCPU;
-> @@ -426,6 +428,7 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->
->  #ifdef CONFIG_USER_ONLY
->      flags |= TB_FLAGS_MSTATUS_FS;
-> +    flags |= TB_FLAGS_MSTATUS_VS;
->  #else
->      flags |= cpu_mmu_index(env, 0);
->      if (riscv_cpu_fp_enabled(env)) {
-> @@ -440,6 +443,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->              flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
->          }
->      }
-> +
-> +    if (riscv_cpu_vector_enabled(env)) {
-> +        flags |= env->mstatus & MSTATUS_VS;
-> +    }
->  #endif
->
->      *pflags = flags;
 > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index b41e8836c3f..82c48b7b9be 100644
+> index 82c48b7b9be..8edf81692e6 100644
 > --- a/target/riscv/cpu_bits.h
 > +++ b/target/riscv/cpu_bits.h
-> @@ -370,6 +370,7 @@
->  #define MSTATUS_SPIE        0x00000020
->  #define MSTATUS_MPIE        0x00000080
->  #define MSTATUS_SPP         0x00000100
-> +#define MSTATUS_VS          0x00000600
->  #define MSTATUS_MPP         0x00001800
->  #define MSTATUS_FS          0x00006000
->  #define MSTATUS_XS          0x00018000
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index a2afb95fa11..8f67263a49a 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -108,11 +108,24 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
->      return false;
->  }
->
-> +/* Return true is vector support is currently enabled */
-> +bool riscv_cpu_vector_enabled(CPURISCVState *env)
-> +{
-> +    if (env->mstatus & MSTATUS_VS) {
-> +        if (riscv_cpu_virt_enabled(env) && !(env->mstatus_hs & MSTATUS_VS)) {
-> +            return false;
-> +        }
-> +        return true;
-> +    }
-> +
-> +    return false;
-> +}
-> +
->  void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
->  {
->      uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
->                              MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE |
-> -                            MSTATUS64_UXL;
-> +                            MSTATUS64_UXL | MSTATUS_VS;
->      bool current_virt = riscv_cpu_virt_enabled(env);
->
->      g_assert(riscv_has_ext(env, RVH));
+> @@ -414,6 +414,7 @@
+>  #define SSTATUS_UPIE        0x00000010
+>  #define SSTATUS_SPIE        0x00000020
+>  #define SSTATUS_SPP         0x00000100
+> +#define SSTATUS_VS          0x00000600
+>  #define SSTATUS_FS          0x00006000
+>  #define SSTATUS_XS          0x00018000
+>  #define SSTATUS_PUM         0x00040000 /* until: priv-1.9.1 */
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 10ab82ed1fc..50862df9e82 100644
+> index 50862df9e82..a70a78386da 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -268,6 +268,7 @@ static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
->          return -RISCV_EXCP_ILLEGAL_INST;
->      }
->      env->mstatus |= MSTATUS_FS;
-> +    env->mstatus |= MSTATUS_VS;
->  #endif
->      env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
->      if (vs(env, csrno) >= 0) {
-> @@ -298,6 +299,13 @@ static int read_vxrm(CPURISCVState *env, int csrno, target_ulong *val)
->
->  static int write_vxrm(CPURISCVState *env, int csrno, target_ulong val)
->  {
-> +#if !defined(CONFIG_USER_ONLY)
-> +    if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
-> +        return -1;
-> +    }
-> +    env->mstatus |= MSTATUS_VS;
-> +#endif
-> +
->      env->vxrm = val;
->      return 0;
->  }
-> @@ -310,6 +318,13 @@ static int read_vxsat(CPURISCVState *env, int csrno, target_ulong *val)
->
->  static int write_vxsat(CPURISCVState *env, int csrno, target_ulong val)
->  {
-> +#if !defined(CONFIG_USER_ONLY)
-> +    if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
-> +        return -1;
-> +    }
-> +    env->mstatus |= MSTATUS_VS;
-> +#endif
-> +
->      env->vxsat = val;
->      return 0;
->  }
-> @@ -322,6 +337,13 @@ static int read_vstart(CPURISCVState *env, int csrno, target_ulong *val)
->
->  static int write_vstart(CPURISCVState *env, int csrno, target_ulong val)
->  {
-> +#if !defined(CONFIG_USER_ONLY)
-> +    if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
-> +        return -1;
-> +    }
-> +    env->mstatus |= MSTATUS_VS;
-> +#endif
-> +
->      env->vstart = val;
->      return 0;
->  }
-> @@ -485,7 +507,7 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
->      mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
->          MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
->          MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
-> -        MSTATUS_TW;
-> +        MSTATUS_TW | MSTATUS_VS;
->
->      if (!riscv_cpu_is_32bit(env)) {
->          /*
-> @@ -498,6 +520,7 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
->      mstatus = (mstatus & ~mask) | (val & mask);
->
->      dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
-> +            ((mstatus & MSTATUS_VS) == MSTATUS_VS) |
->              ((mstatus & MSTATUS_XS) == MSTATUS_XS);
->      mstatus = set_field(mstatus, MSTATUS_SD, dirty);
->      env->mstatus = mstatus;
+> @@ -448,7 +448,7 @@ static const target_ulong delegable_excps =
+>      (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT));
+>  static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+>      SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
+> -    SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD;
+> +    SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD | SSTATUS_VS;
+>  static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP;
+>  static const target_ulong hip_writable_mask = MIP_VSSIP | MIP_VSTIP | MIP_VSEIP;
+>  static const target_ulong vsip_writable_mask = MIP_VSSIP;
 > --
 > 2.17.1
 >
