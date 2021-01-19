@@ -1,60 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1uBC-0002PN-CI
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 11:48:31 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50456)
+	id 1l1uUt-0005pp-8B
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 12:08:51 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55340)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1uB7-0002Lo-09; Tue, 19 Jan 2021 11:48:26 -0500
-Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:41852)
+ id 1l1uUn-0005f2-Ea; Tue, 19 Jan 2021 12:08:45 -0500
+Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:38213)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1uB2-0001Yu-NU; Tue, 19 Jan 2021 11:48:24 -0500
-Received: by mail-io1-xd30.google.com with SMTP id q1so40861815ion.8;
- Tue, 19 Jan 2021 08:48:16 -0800 (PST)
+ id 1l1uUg-0004WY-Ix; Tue, 19 Jan 2021 12:08:45 -0500
+Received: by mail-io1-xd2f.google.com with SMTP id e22so41010424iom.5;
+ Tue, 19 Jan 2021 09:08:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fm3OfEGwwxiE3Qf6wYnVyiu/kbBV73OWraagFPT+4NU=;
- b=uIfWHICN0E2sZaL1pUkaoACYF21Vt/SaAA9pwkuZuadooaJlQFehrq5GLG+FjkFv94
- hWPQKSIJUQxl/GOwARq0yBtZ8n5fodSBAdsyp8cez95QyW1OYZz551rn/az2V1ibAG0N
- 1zDheeuZEAf/nvsMVohI+999wGvubX609IJna3UpvBvMvrswu+r/rKuxZfB4EEHAFnRE
- 3wKNgpLQg8JcLzJ+/tFvedio0WxCayPXWqWwiTOIm48ulMIR7xfHOQeHtOQ8kZhU4or5
- ERviZCz3D6dR9CTvcTikJIKaG90NIoC3Q4vJs+WN24MSZhk9l/xI2cZPTgfOuQCBzr56
- XVMQ==
+ :cc; bh=40QeAgMnbYy25MaiAE4YrLU7i340GYM2vYObI5hJdGg=;
+ b=lDiNg7EH/IM+IqkPn/l2z6NQT4EjTK3fX/mNyIHqVhtjo0o3Gq8IdkVSy2nl1naucC
+ vJGAgwXAx4zE/Mm1ONl6yJtUlya7wqiVC1vY6eeSLrq+egGTkrOiqNCv14poyJr5Json
+ lYuqyPbcuUiSoCc8fvWpSKtIIxqK1pFbD93HwK6XgnSNnJmSUWUWlbkQdfxrWBJnu+Fv
+ ouBnuuOWfAJlhhEYycOl+vHOXrL/hIEDWcZnF0PNUfTc3usF2W82LQKRGgSL0xjz7zQT
+ iWuTzVgmptpGHUZ5oM4yMYke4B3BKltXEZulDmT2+stiIwDNktkW6h4s2x2jyL9LOU6a
+ 6D4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=fm3OfEGwwxiE3Qf6wYnVyiu/kbBV73OWraagFPT+4NU=;
- b=bjLxSi3LG5FRj5wr1sDz7n4h07yNNhh3YhydUEhGtoQeVj7yA0qBdIO6PKyINGD71/
- CKJC0s4IheU40c0v0v3fcLt1yYWzoKYT3L0pvShqe5XxWUXMTXg42PYm4z1cUdUPe6HM
- yBs1iECfNDaul0FQJdIm0Mri72vxjSXaLM+tYVjbZ3fj05AvEXiqietyl8OKw/bARkMD
- jokhHzP8QcIqB6LDPPgKb6zXXhhi5gJdi3bSMT5Q1bFnLxH1HjOLC0+8GQOO/yOc9ogr
- eK8MPdg37VW+3wJq8+JhxlP9w/iW8zES4n9Dh5Srmya7nRiVnu9DUF1RCdOZDPiuiYkk
- kdkQ==
-X-Gm-Message-State: AOAM532ZbP8p3jqNES0q6dZxlk5PlNVnJ03w9zx4oZtbZ/katpslKbS5
- /eXKUzfcaU7FelecsxlYGNyygNYbCKLpXwIWCik=
-X-Google-Smtp-Source: ABdhPJziVoKM7bvBcq/vSj9l+4S6l2T4tZZV3IcglvDzLUHRE10YSBSV1vfNto8zOPCHPNdWaiIDBdhjh1yZaIFooOE=
-X-Received: by 2002:a92:cda1:: with SMTP id g1mr4159870ild.267.1611074896043; 
- Tue, 19 Jan 2021 08:48:16 -0800 (PST)
+ bh=40QeAgMnbYy25MaiAE4YrLU7i340GYM2vYObI5hJdGg=;
+ b=sHTGGzl/qc76RPTtITDYAOOrRPqKmRh4LF5Q0gYu7/I8D0I/c/qCsaKK16RhMdenqA
+ sAuh+GoIHZBsWHwN80SCkcQccFzvR2j4UL+Mw15HdREQ9PITJGQfqGSi/i5huTiWyzBS
+ 8SpFSnpqqahd+2il6Tl005D9IWXcw5tGl6cjigwA5GNnchZ+F/V9tZJA+VHfCjH1nqKH
+ e93THXXlmdYYwN457z229vEOFWAdwFDOZSXRFw68pNDo0iMOvk7tPCJK9bt3T5hHYoMq
+ 2illPQ/BmMIsP7Bm7uup5ldFOlxCPAwa46OPsPbvkGcnxMAeIOttj4f6jqlruaRUYBlq
+ TDBQ==
+X-Gm-Message-State: AOAM533AguKDkm5ZUO458Xk/not7kw4B63yXTQY4uTXcDAKeiUOZISAI
+ qsCNlo8db64SaFnVIZ77NbKTQ65mr+JxWYTWVAQ=
+X-Google-Smtp-Source: ABdhPJwCywgmyKGcO+3RBKJ0SQRF85W3H/HmJN2jA0IdSZ4WChKMrUL9LgDtmqUuKBme64HgnG0YGTcgJVi6oNsLUT0=
+X-Received: by 2002:a05:6e02:20e5:: with SMTP id
+ q5mr4160612ilv.131.1611076116688; 
+ Tue, 19 Jan 2021 09:08:36 -0800 (PST)
 MIME-Version: 1.0
-References: <20210112093950.17530-1-frank.chang@sifive.com>
- <20210112093950.17530-8-frank.chang@sifive.com>
-In-Reply-To: <20210112093950.17530-8-frank.chang@sifive.com>
+References: <1611024723-14293-1-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1611024723-14293-1-git-send-email-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Jan 2021 08:47:49 -0800
-Message-ID: <CAKmqyKMNiqY_NxtiTsa2ai1axb67JNY=_Rh5evHXh+Oy-nmbqw@mail.gmail.com>
-Subject: Re: [PATCH v6 07/72] target/riscv: rvv-1.0: remove rvv related codes
- from fcsr registers
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Tue, 19 Jan 2021 09:08:10 -0800
+Message-ID: <CAKmqyKMb_C+TSE7LLfyCm6j7rm32OH4UZQzRr456Pf6S0Ws79w@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Declare csr_ops[] with a known size
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,69 +72,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2021 16:48:27 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 17:08:45 -0000
 
-On Tue, Jan 12, 2021 at 1:50 AM <frank.chang@sifive.com> wrote:
+On Mon, Jan 18, 2021 at 6:52 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> From: Bin Meng <bin.meng@windriver.com>
 >
-> * Remove VXRM and VXSAT fields from FCSR register as they are only
->   presented in VCSR register.
-> * Remove RVV loose check in fs() predicate function.
+> csr_ops[] is currently declared with an unknown size in cpu.h.
+> Since the array size is known, let's do a complete declaration.
 >
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  target/riscv/csr.c | 13 -------------
->  1 file changed, 13 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index c8b1e4954ec..6eda5bacb7c 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -46,10 +46,6 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
->  static int fs(CPURISCVState *env, int csrno)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    /* loose check condition for fcsr in vector extension */
-> -    if ((csrno == CSR_FCSR) && (env->misa & RVV)) {
-> -        return 0;
-> -    }
->      if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
->          return -RISCV_EXCP_ILLEGAL_INST;
->      }
-> @@ -254,10 +250,6 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
->  #endif
->      *val = (riscv_cpu_get_fflags(env) << FSR_AEXC_SHIFT)
->          | (env->frm << FSR_RD_SHIFT);
-> -    if (vs(env, csrno) >= 0) {
-> -        *val |= (env->vxrm << FSR_VXRM_SHIFT)
-> -                | (env->vxsat << FSR_VXSAT_SHIFT);
-> -    }
->      return 0;
->  }
+>  target/riscv/cpu.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> @@ -268,13 +260,8 @@ static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
->          return -RISCV_EXCP_ILLEGAL_INST;
->      }
->      env->mstatus |= MSTATUS_FS;
-> -    env->mstatus |= MSTATUS_VS;
->  #endif
->      env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
-> -    if (vs(env, csrno) >= 0) {
-> -        env->vxrm = (val & FSR_VXRM) >> FSR_VXRM_SHIFT;
-> -        env->vxsat = (val & FSR_VXSAT) >> FSR_VXSAT_SHIFT;
-> -    }
->      riscv_cpu_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
->      return 0;
->  }
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 02758ae..419a214 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -487,7 +487,7 @@ enum {
+>  };
+>
+>  /* CSR function table */
+> -extern riscv_csr_operations csr_ops[];
+> +extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
+>
+>  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+>  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
 > --
-> 2.17.1
+> 2.7.4
 >
 >
 
