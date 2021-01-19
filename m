@@ -1,75 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1vgc-0002or-Cp
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 13:25:02 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47832)
+	id 1l1vz2-0007n2-Cf
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 13:44:06 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52606)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=646a5f148=alistair.francis@wdc.com>)
- id 1l1vga-0002iN-01; Tue, 19 Jan 2021 13:25:00 -0500
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:8318)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=646a5f148=alistair.francis@wdc.com>)
- id 1l1vgW-0008M6-OT; Tue, 19 Jan 2021 13:24:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1611080696; x=1642616696;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=jyyeFgotAtHBsttKtybkfyF9CLt9zaVHlJoGJAIS1C0=;
- b=l9Ux65av6v2VAw3hxhkEEdnwdM58F2BDelnHlegY1UDfShz0IN4/tTMF
- Ged5CfJfdGztgtHjfKFQEbtJpEf5PuKYhx7s6qzZzTI3Z66jUhfT9fLCd
- tctR+8G5BVzw13JUEZq/wd+MNuarE6Rz1EtTyZFUjlP4849ibkozJvMji
- yt97UzWI79SJ7e43jeGb9R/Mt6AI37T/br5UByl7OC15qpc3vYWFGJW2O
- ug/UNNcN+gBsUSnUBhfb96/B4jIcYvK5ouFfgoA2OjieTAwXFGOt4Se69
- nGZYn+brwvciqqFJg99pZWJZxS5HIXHqX0lAjPBli90RKM7VJ0kND32s9 A==;
-IronPort-SDR: 5Be6bZ9Q52HZ2ukV6puQZ1ng7Cr3d9aEcccpRrngn/y0wRHfkFcRtctnEWyAD3mEotP6OF0tea
- DdE/1Pm1fr56h/XWNXTIN6LzJ4HnIzVV3fDLWyndLnwpUdUfszHXarjJW5A3+6XAtXEcpqNpg/
- iIrRdmJ8R9Xor+7KD/A9czKGvSmZcoWjWuYgn5trdDGu81epPCzUgmXLdvlyyiWor5zSJ54Ubd
- E939ojZhMg3/9oWxWLKyRe/v9tg1PW5E7EQGukGOlrUGqFpAd+Fr3R3zkIOWX3RtFyCRIAIdcQ
- ypY=
-X-IronPort-AV: E=Sophos;i="5.79,359,1602518400"; d="scan'208";a="157820559"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 20 Jan 2021 02:24:52 +0800
-IronPort-SDR: 9wIGnva2gLqmPcXydRK8BME+tVKgCcDO1+qumfo55tjdDGTHkPgbboKGqEBM1A9OunSq18IM/I
- AEdaLwF+VIA84jfa3tjQcRluAPYu36b2KWHfBmyKTucS5KBszCO3fuWCVvH0WTaz4KZCfG4FOG
- vB4tnkg6ZRCh1PlVEbk9TZ7V++I5i51H6bc9OHd+LsuB8Jr0jgufbpmo20T4ALWyb/b549JMbv
- NoS6iP0lbNcLBZFjMpB/v6sd1QsNlLCnjZQ5Q+mDrA+F2Xeh1P7NRz9rzs+PcVnxgPev0kvmsq
- KPr9TVmNfiDsFQjkNr2W6oqC
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jan 2021 10:09:29 -0800
-IronPort-SDR: Rv3rNxIFwjRhI51kN5ZK0KRGA8U4FTK0MQKcStcS3ZbZ5/uyiAaPKW+BbrALgWGEY9vv3DOeLA
- qoDNL2EzPiJ915F4ccgTn68I8Jydxm7V+bQcisdBgNyg8Aw6k8t05ahlplPJ40nid5VxAL/d66
- Cghxe5K7NXskf+j3pa1UMDqncOXBBrx2ixK5OieUA+oOcF8+8VF6EBxdhgpIXUT1DkA/7kvBqM
- /5hlU4dQueeH7VezbQOPCM280cv63sVMSVOW9Yzww6iEwYhwRsvThMbbVlX6+8lwpFpTZ5j6tj
- hdg=
-WDCIronportException: Internal
-Received: from usa002350.ad.shared (HELO risc6-mainframe.hgst.com)
- ([10.86.62.244])
- by uls-op-cesaip01.wdc.com with ESMTP; 19 Jan 2021 10:24:53 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org,
-	dilfridge@gentoo.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v2 1/1] linux-user/signal: Decode waitid si_code
-Date: Tue, 19 Jan 2021 10:24:52 -0800
-Message-Id: <1fb2d56aa23a81f4473e638abe9e2d78c09a3d5b.1611080607.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.29.2
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1l1vyv-0007kf-G4; Tue, 19 Jan 2021 13:43:57 -0500
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:38719)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1l1vyn-0002OW-7F; Tue, 19 Jan 2021 13:43:57 -0500
+Received: by mail-io1-xd35.google.com with SMTP id e22so41665257iom.5;
+ Tue, 19 Jan 2021 10:43:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=au/UKhL6f+zdjCa3ichz8ynlkQAcoZUIwtkSsIQ9zNQ=;
+ b=MLk6lJk2HjPl7TrFvgBmaGxqXtj04iVsNlDw2N0ZKwGX20A7cKsVGDe9SGcsLpyUvD
+ k+TN8IzcCoDW7tcN1sa5YDc3Qo75fP5waY1mlcTVCGEnURTwv74dter2cbxLXY0veHJC
+ kgNhj+7zFeqPYRWFFItCE2X1fihu0BUb8RzQ/fuEVMKK7f0diCG56aVrp6azV/NHVGKd
+ FUssPJG0GeTnLmRGcduwh4i4pHMBJPs8UjDSsJXeo9VVnMPfpji/z++NEcRDrLYHHCF6
+ kVQCikvSFIkW6PVYZjRLQZl1gcChb2hDvD+s5BA+mQKCBH7sFxt8prspk9eL4k3NFdjA
+ TLEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=au/UKhL6f+zdjCa3ichz8ynlkQAcoZUIwtkSsIQ9zNQ=;
+ b=Z6evnLo5EXnAIv0aRYr1r+9Hio7accGQWy+x8U+80MxYc/BfYvLtWE0bBNXisoyUs3
+ JWhCD8oRZ2hNIH21kyoT9Uutq0xsRVVdUGYcS6DftMkQ3wrVmESy4pp0cCkEsx4nykM2
+ Hcuj6BiYZnLlHVBR+h4XXNcisw0MQYEhTfaWpTZ/lBtjZ7tf2PRH6UwowpOR5EhMMSqX
+ FJhzKQixNV6HOFzsBsg5VB4XjtuVp2Ux+686sdFO0reHrKzssDg7ViAbj40QtMrdiqS9
+ blCK0rBruziYvoJ+su3wA5xPe/4AAWi2JYeb0/nldpPQIrPEMnNzZKj6Vb7OIWTaBWCY
+ qTkQ==
+X-Gm-Message-State: AOAM5314STvsjc9QzNrPo/6D7wzWVnggoojLMhCuTBfjhQ55wPrNu0kN
+ Q0Ud8WfciIQESprENoYxnXDzxXxsHPSXc5DCU7g=
+X-Google-Smtp-Source: ABdhPJwshxXmV9ocbq6a+D27L53VZpCK0NGqW1RH1cybEIkYZ+2o08sU+ldCcY7H7tgjQvRCmz6XajPO4lI2wSw3UbQ=
+X-Received: by 2002:a02:cbad:: with SMTP id v13mr4688569jap.26.1611081827809; 
+ Tue, 19 Jan 2021 10:43:47 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.144;
- envelope-from=prvs=646a5f148=alistair.francis@wdc.com;
- helo=esa5.hgst.iphmx.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20210112093950.17530-1-frank.chang@sifive.com>
+ <20210112093950.17530-13-frank.chang@sifive.com>
+In-Reply-To: <20210112093950.17530-13-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 19 Jan 2021 10:43:21 -0800
+Message-ID: <CAKmqyKMvZoNUH=yAhkYansDRjmtSK6Cq7Z7=A_x_xbGTcCJwDw@mail.gmail.com>
+Subject: Re: [PATCH v6 12/72] target/riscv: rvv-1.0: add fractional LMUL
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,41 +74,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2021 18:25:00 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 18:43:59 -0000
 
-When mapping the host waitid status to the target status we previously
-just used decoding information in the status value. This doesn't follow
-what the waitid documentation describes, which instead suggests using
-the si_code value for the decoding. This results in the incorrect values
-seen when calling waitid. This is especially apparent on RV32 where all
-wait calls use waitid (see the bug case).
+On Tue, Jan 12, 2021 at 1:46 AM <frank.chang@sifive.com> wrote:
+>
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> Introduce the concepts of fractional LMUL for RVV 1.0.
+> In RVV 1.0, LMUL bits are contiguous in vtype register.
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-This patch just passes the waitid status directly back to the guest.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Buglink: https://bugs.launchpad.net/qemu/+bug/1906193
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
-v2:
- - Set tinfo->_sifields._sigchld._status directly from status
+Alistair
 
- linux-user/signal.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/linux-user/signal.c b/linux-user/signal.c
-index 73de934c65..7eecec46c4 100644
---- a/linux-user/signal.c
-+++ b/linux-user/signal.c
-@@ -349,8 +349,7 @@ static inline void host_to_target_siginfo_noswap(target_siginfo_t *tinfo,
-         case TARGET_SIGCHLD:
-             tinfo->_sifields._sigchld._pid = info->si_pid;
-             tinfo->_sifields._sigchld._uid = info->si_uid;
--            tinfo->_sifields._sigchld._status
--                = host_to_target_waitstatus(info->si_status);
-+            tinfo->_sifields._sigchld._status = info->si_status;
-             tinfo->_sifields._sigchld._utime = info->si_utime;
-             tinfo->_sifields._sigchld._stime = info->si_stime;
-             si_type = QEMU_SI_CHLD;
--- 
-2.29.2
-
+> ---
+>  target/riscv/cpu.h           | 17 +++++++++--------
+>  target/riscv/translate.c     | 16 ++++++++++++++--
+>  target/riscv/vector_helper.c | 16 ++++++++++++++--
+>  3 files changed, 37 insertions(+), 12 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index cd5c77114a4..3b985f6218d 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -105,10 +105,10 @@ typedef struct CPURISCVState CPURISCVState;
+>
+>  #define RV_VLEN_MAX 256
+>
+> -FIELD(VTYPE, VLMUL, 0, 2)
+> -FIELD(VTYPE, VSEW, 2, 3)
+> -FIELD(VTYPE, VEDIV, 5, 2)
+> -FIELD(VTYPE, RESERVED, 7, sizeof(target_ulong) * 8 - 9)
+> +FIELD(VTYPE, VLMUL, 0, 3)
+> +FIELD(VTYPE, VSEW, 3, 3)
+> +FIELD(VTYPE, VEDIV, 8, 2)
+> +FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 - 11)
+>  FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
+>
+>  struct CPURISCVState {
+> @@ -380,11 +380,12 @@ typedef RISCVCPU ArchCPU;
+>  #include "exec/cpu-all.h"
+>
+>  FIELD(TB_FLAGS, VL_EQ_VLMAX, 2, 1)
+> -FIELD(TB_FLAGS, LMUL, 3, 2)
+> -FIELD(TB_FLAGS, SEW, 5, 3)
+> -FIELD(TB_FLAGS, VILL, 8, 1)
+> +FIELD(TB_FLAGS, LMUL, 3, 3)
+> +FIELD(TB_FLAGS, SEW, 6, 3)
+> +/* Skip MSTATUS_VS (0x600) fields */
+> +FIELD(TB_FLAGS, VILL, 11, 1)
+>  /* Is a Hypervisor instruction load/store allowed? */
+> -FIELD(TB_FLAGS, HLSX, 9, 1)
+> +FIELD(TB_FLAGS, HLSX, 12, 1)
+>
+>  bool riscv_cpu_is_32bit(CPURISCVState *env);
+>
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 18e198bf8a6..d9b3b37f698 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -60,7 +60,19 @@ typedef struct DisasContext {
+>      bool hlsx;
+>      /* vector extension */
+>      bool vill;
+> -    uint8_t lmul;
+> +    /*
+> +     * Encode LMUL to lmul as follows:
+> +     *     LMUL    vlmul    lmul
+> +     *      1       000       0
+> +     *      2       001       1
+> +     *      4       010       2
+> +     *      8       011       3
+> +     *      -       100       -
+> +     *     1/8      101      -3
+> +     *     1/4      110      -2
+> +     *     1/2      111      -1
+> +     */
+> +    int8_t lmul;
+>      uint8_t sew;
+>      uint16_t vlen;
+>      bool vl_eq_vlmax;
+> @@ -843,7 +855,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>      ctx->hlsx = FIELD_EX32(tb_flags, TB_FLAGS, HLSX);
+>      ctx->vill = FIELD_EX32(tb_flags, TB_FLAGS, VILL);
+>      ctx->sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
+> -    ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
+> +    ctx->lmul = sextract32(FIELD_EX32(tb_flags, TB_FLAGS, LMUL), 0, 3);
+>      ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
+>  }
+>
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 12301e943e6..aa8348ea25a 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -86,9 +86,21 @@ static inline uint32_t vext_vm(uint32_t desc)
+>      return FIELD_EX32(simd_data(desc), VDATA, VM);
+>  }
+>
+> -static inline uint32_t vext_lmul(uint32_t desc)
+> +/*
+> + * Encode LMUL to lmul as following:
+> + *     LMUL    vlmul    lmul
+> + *      1       000       0
+> + *      2       001       1
+> + *      4       010       2
+> + *      8       011       3
+> + *      -       100       -
+> + *     1/8      101      -3
+> + *     1/4      110      -2
+> + *     1/2      111      -1
+> + */
+> +static inline int32_t vext_lmul(uint32_t desc)
+>  {
+> -    return FIELD_EX32(simd_data(desc), VDATA, LMUL);
+> +    return sextract32(FIELD_EX32(simd_data(desc), VDATA, LMUL), 0, 3);
+>  }
+>
+>  static uint32_t vext_wd(uint32_t desc)
+> --
+> 2.17.1
+>
+>
 
