@@ -1,57 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l1wUk-0002kN-Nh
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 14:16:52 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34754)
+	id 1l1wY9-0004id-LG
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Jan 2021 14:20:22 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35542)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1wUi-0002hd-TK; Tue, 19 Jan 2021 14:16:48 -0500
-Received: from mail-io1-xd31.google.com ([2607:f8b0:4864:20::d31]:42793)
+ id 1l1wY5-0004h3-SN; Tue, 19 Jan 2021 14:20:18 -0500
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:35377)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l1wUh-00079F-8v; Tue, 19 Jan 2021 14:16:48 -0500
-Received: by mail-io1-xd31.google.com with SMTP id z22so15229708ioh.9;
- Tue, 19 Jan 2021 11:16:46 -0800 (PST)
+ id 1l1wY0-0007Zz-1U; Tue, 19 Jan 2021 14:20:17 -0500
+Received: by mail-io1-xd35.google.com with SMTP id y19so41906816iov.2;
+ Tue, 19 Jan 2021 11:20:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ucciB0HleIJwsPx+xIPPym8h3bCgefva4R2zbb6VWiQ=;
- b=nAKFd7eA+/UrN61TvD32MhOHsdmwd2ZZJMuSZclWeanz89jP8rPPWIuaKedjkqrzjJ
- 9TcwaNnjaWgFNqlCzQH2oGvjeTxAiyaNOIHQQBsNe4zuwUIfsmNWPtndVkDgkZnoGjHS
- iqNiwBrrvwSPhRdcBL3rzqi+XGfPtCepDA0MLBOnjbhQmKCgAprddWKEOV64N4+wV5fl
- 5FumdSCQg/GMR1Cy8MpZ8EWT72DNEOa4UQmL9I13TBs8ux2hiDtUjv5fmAuQzufkLCDw
- m292o+9/YzvxDRySSmBJBRU/UaI9nONt/1dOf9Z6BU62aPB0g6FcLs45unlQFoKEqKsK
- 2QyA==
+ :cc; bh=2JQoIhc0KOX2a8RGsu9MXEObVIiAKy0d2dLFzQ7SXXk=;
+ b=hCToVDr9Hsq55bq0NVUcgWJsyMaFrbyQ5MjtpzE2HZsr755MT0b5YkglqP7KsqY7j5
+ Y+S8lLt20qvfpPaQTl+WMn1j4raugFit97nm/zlKvlxbl+0XdWwBu95eq34f3HgA4RNh
+ BB+GrWnH0B5khLKFGGyFRVxNAl19V0EPTrpf8JVatfMim1fMTfvXbTnHJhG5F4xEzsZx
+ 6Uaw3A9FxQKF016cu8UUip3rV+GtJ1Zo2t4Yj2KRSkBDApDXSXaNHmsrraxmnWJC7exv
+ KZe6fMG6NVtnkJoqpig5+s7u4uaVoONtj3S5jUlC4jFJZ9pbhguEYbcajq6EpJJS+fh4
+ SZ1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ucciB0HleIJwsPx+xIPPym8h3bCgefva4R2zbb6VWiQ=;
- b=kv5TiHndgfYqgaCoHg938LBnPZveWrkKFkqt/sdnvcBXNZE0CutAd57xC1v14gmlb0
- r9E+caMINYGyRRtxQFKYXsI7QLRh+4GYBfTnwizig//xod8gwpQ2V7znAO5FPObpBGmR
- zHxSuXjNvh4Y3JmsJEJljEgksQbpwxdZG/S2qlaF8Ct/PCU3vZWKQxpU0cxpwI7foz0z
- 82GFwB+wQzvfzD9762WIRtepM8Za/RO1dpwGteZyyxlpf1Izvs5Kqqiiy++Q7z2lNdxV
- HguSDebfBh07KUC1NSn9lP9A+fhOGPzdFli0QbxqDSJahkuh0tj/+mO8UkoYtiloC4hZ
- 62EQ==
-X-Gm-Message-State: AOAM530aF3U83SQdwD6fIENUlBtgVcqd26rMUsXW5VhzJNgweJdiu/XV
- NLes41FQKZKXPZEzFFvQXvM7Mx3yqJUdQW+ScNA=
-X-Google-Smtp-Source: ABdhPJxzIvYca7jxOK8z8DRmucx9vkDfsCUMn9izwmUAA1YB8QM7c/TuGDlZDomnSAsp6V0aSCXhjBROcCpEob2OD18=
-X-Received: by 2002:a92:4b06:: with SMTP id m6mr2657647ilg.177.1611083805809; 
- Tue, 19 Jan 2021 11:16:45 -0800 (PST)
+ bh=2JQoIhc0KOX2a8RGsu9MXEObVIiAKy0d2dLFzQ7SXXk=;
+ b=HVC1xxyc5Mgk7C53mCogfTITN8l7ZTck3mXLJIAy290laRFG2ZRiGh6jVNJvF9SClU
+ 9ZN/70cX9qUOihkavGM5M8I+rFE/ZFW+ZEvlT4NK3iGOPoC2ky9tMBi4iExRcL1ijtx+
+ SVy+c1OtSnA4Vqe3z0ANFYtNvzk7DHk9zIXB6CNYJ6gsODXHkcwmxI8vZgcH1gFqAH9B
+ Yrea2yNmqQbnKxTzkfGklenRzHvqiev4BaFLleMlG6D3a2Lr6mAmTHnjHGshdsMF8lZi
+ 2F5ClN+HJbnn5rAVlWc6q7Zo+aYd6j9lvjGoG3ok3Z8Er0sT3IXpqbPyDHs5WT7BnwAj
+ Ve/A==
+X-Gm-Message-State: AOAM532Lo2fAig2wBEAoA8VlzjrndcOUWd7xPbw9jYTA77AkneKSSFGC
+ N5u0KJBoGY6IPx06Tw8T1ny1N6MHAGUNdl9A9L0=
+X-Google-Smtp-Source: ABdhPJwo679QfCbav/RYQAMshAxljDaycaZbG8CjVdm+tTcxFtNbn7tNH+kROoQK1lbJIWu3PjkZY1rcWkiBXqGJzrc=
+X-Received: by 2002:a05:6e02:20e5:: with SMTP id
+ q5mr4635568ilv.131.1611084009387; 
+ Tue, 19 Jan 2021 11:20:09 -0800 (PST)
 MIME-Version: 1.0
-References: <1611026585-29971-1-git-send-email-bmeng.cn@gmail.com>
-In-Reply-To: <1611026585-29971-1-git-send-email-bmeng.cn@gmail.com>
+References: <20210112093950.17530-1-frank.chang@sifive.com>
+ <20210112093950.17530-22-frank.chang@sifive.com>
+In-Reply-To: <20210112093950.17530-22-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Jan 2021 11:16:19 -0800
-Message-ID: <CAKmqyKP3b29wJGdE7qh7P4n7=PQ8OU4fFRYZSjP+Rv6nDB4FGA@mail.gmail.com>
-Subject: Re: [PATCH] hw/misc: sifive_u_otp: Use error_report() when block
- operation fails
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, Green Wan <green.wan@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+Date: Tue, 19 Jan 2021 11:19:43 -0800
+Message-ID: <CAKmqyKPBv641N-zfKTyni066B3t66m7mkdJhai5sc=2Ld7p23w@mail.gmail.com>
+Subject: Re: [PATCH v6 21/72] target/riscv: rvv-1.0: fault-only-first unit
+ stride load
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,81 +77,254 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2021 19:16:49 -0000
+X-List-Received-Date: Tue, 19 Jan 2021 19:20:19 -0000
 
-On Mon, Jan 18, 2021 at 7:23 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, Jan 12, 2021 at 1:56 AM <frank.chang@sifive.com> wrote:
 >
-> From: Bin Meng <bin.meng@windriver.com>
+> From: Frank Chang <frank.chang@sifive.com>
 >
-> At present when blk_pread() / blk_pwrite() fails, a guest error
-> is logged, but this is not really a guest error. Change to use
-> error_report() instead.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
+>  target/riscv/helper.h                   | 27 +++---------
+>  target/riscv/insn32.decode              | 14 +++----
+>  target/riscv/insn_trans/trans_rvv.c.inc | 33 ++++-----------
+>  target/riscv/vector_helper.c            | 56 +++++++++----------------
+>  4 files changed, 39 insertions(+), 91 deletions(-)
 >
->  hw/misc/sifive_u_otp.c | 13 +++++--------
->  1 file changed, 5 insertions(+), 8 deletions(-)
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 98c0c6e29b6..5eb2404a75a 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -135,28 +135,11 @@ DEF_HELPER_6(vsxei64_8_v, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vsxei64_16_v, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vsxei64_32_v, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vsxei64_64_v, void, ptr, ptr, tl, ptr, env, i32)
+> -DEF_HELPER_5(vlbff_v_b, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlbff_v_h, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlbff_v_w, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlbff_v_d, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlhff_v_h, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlhff_v_w, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlhff_v_d, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlwff_v_w, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlwff_v_d, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vleff_v_b, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vleff_v_h, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vleff_v_w, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vleff_v_d, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlbuff_v_b, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlbuff_v_h, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlbuff_v_w, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlbuff_v_d, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlhuff_v_h, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlhuff_v_w, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlhuff_v_d, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlwuff_v_w, void, ptr, ptr, tl, env, i32)
+> -DEF_HELPER_5(vlwuff_v_d, void, ptr, ptr, tl, env, i32)
+> +DEF_HELPER_5(vle8ff_v, void, ptr, ptr, tl, env, i32)
+> +DEF_HELPER_5(vle16ff_v, void, ptr, ptr, tl, env, i32)
+> +DEF_HELPER_5(vle32ff_v, void, ptr, ptr, tl, env, i32)
+> +DEF_HELPER_5(vle64ff_v, void, ptr, ptr, tl, env, i32)
+> +
+>  #ifdef TARGET_RISCV64
+>  DEF_HELPER_6(vamoswapw_v_d, void, ptr, ptr, tl, ptr, env, i32)
+>  DEF_HELPER_6(vamoswapd_v_d, void, ptr, ptr, tl, ptr, env, i32)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index c0058c6c756..9e4fe72560b 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -260,14 +260,6 @@ vsse16_v    ... 010 . ..... ..... 101 ..... 0100111 @r_nfvm
+>  vsse32_v    ... 010 . ..... ..... 110 ..... 0100111 @r_nfvm
+>  vsse64_v    ... 010 . ..... ..... 111 ..... 0100111 @r_nfvm
 >
-> diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
-> index f921c67..4d8f793 100644
-> --- a/hw/misc/sifive_u_otp.c
-> +++ b/hw/misc/sifive_u_otp.c
-> @@ -23,6 +23,7 @@
->  #include "hw/qdev-properties.h"
->  #include "hw/qdev-properties-system.h"
->  #include "hw/sysbus.h"
-> +#include "qemu/error-report.h"
->  #include "qemu/log.h"
->  #include "qemu/module.h"
->  #include "hw/misc/sifive_u_otp.h"
-> @@ -65,8 +66,7 @@ static uint64_t sifive_u_otp_read(void *opaque, hwaddr addr, unsigned int size)
+> -vlbff_v    ... 100 . 10000 ..... 000 ..... 0000111 @r2_nfvm
+> -vlhff_v    ... 100 . 10000 ..... 101 ..... 0000111 @r2_nfvm
+> -vlwff_v    ... 100 . 10000 ..... 110 ..... 0000111 @r2_nfvm
+> -vleff_v    ... 000 . 10000 ..... 111 ..... 0000111 @r2_nfvm
+> -vlbuff_v   ... 000 . 10000 ..... 000 ..... 0000111 @r2_nfvm
+> -vlhuff_v   ... 000 . 10000 ..... 101 ..... 0000111 @r2_nfvm
+> -vlwuff_v   ... 000 . 10000 ..... 110 ..... 0000111 @r2_nfvm
+> -
+>  # Vector ordered-indexed and unordered-indexed load insns.
+>  vlxei8_v      ... 0-1 . ..... ..... 000 ..... 0000111 @r_nfvm
+>  vlxei16_v     ... 0-1 . ..... ..... 101 ..... 0000111 @r_nfvm
+> @@ -280,6 +272,12 @@ vsxei16_v     ... 0-1 . ..... ..... 101 ..... 0100111 @r_nfvm
+>  vsxei32_v     ... 0-1 . ..... ..... 110 ..... 0100111 @r_nfvm
+>  vsxei64_v     ... 0-1 . ..... ..... 111 ..... 0100111 @r_nfvm
 >
->                  if (blk_pread(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD, &buf,
->                                SIFIVE_U_OTP_FUSE_WORD) < 0) {
-> -                    qemu_log_mask(LOG_GUEST_ERROR,
-> -                                  "read error index<%d>\n", s->pa);
-> +                    error_report("read error index<%d>", s->pa);
->                      return 0xff;
->                  }
+> +# Vector unit-stride fault-only-first load insns.
+> +vle8ff_v      ... 000 . 10000 ..... 000 ..... 0000111 @r2_nfvm
+> +vle16ff_v     ... 000 . 10000 ..... 101 ..... 0000111 @r2_nfvm
+> +vle32ff_v     ... 000 . 10000 ..... 110 ..... 0000111 @r2_nfvm
+> +vle64ff_v     ... 000 . 10000 ..... 111 ..... 0000111 @r2_nfvm
+> +
+>  #*** Vector AMO operations are encoded under the standard AMO major opcode ***
+>  vamoswapw_v     00001 . . ..... ..... 110 ..... 0101111 @r_wdvm
+>  vamoaddw_v      00000 . . ..... ..... 110 ..... 0101111 @r_wdvm
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 320d710695f..20161b1ebe3 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -943,28 +943,16 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+>      return true;
+>  }
 >
-> @@ -169,8 +169,7 @@ static void sifive_u_otp_write(void *opaque, hwaddr addr,
->                  if (blk_pwrite(s->blk, s->pa * SIFIVE_U_OTP_FUSE_WORD,
->                                 &s->fuse[s->pa], SIFIVE_U_OTP_FUSE_WORD,
->                                 0) < 0) {
-> -                    qemu_log_mask(LOG_GUEST_ERROR,
-> -                                  "write error index<%d>\n", s->pa);
-> +                    error_report("write error index<%d>", s->pa);
->                  }
->              }
+> -static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
+> +static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew)
+>  {
+>      uint32_t data = 0;
+>      gen_helper_ldst_us *fn;
+> -    static gen_helper_ldst_us * const fns[7][4] = {
+> -        { gen_helper_vlbff_v_b,  gen_helper_vlbff_v_h,
+> -          gen_helper_vlbff_v_w,  gen_helper_vlbff_v_d },
+> -        { NULL,                  gen_helper_vlhff_v_h,
+> -          gen_helper_vlhff_v_w,  gen_helper_vlhff_v_d },
+> -        { NULL,                  NULL,
+> -          gen_helper_vlwff_v_w,  gen_helper_vlwff_v_d },
+> -        { gen_helper_vleff_v_b,  gen_helper_vleff_v_h,
+> -          gen_helper_vleff_v_w,  gen_helper_vleff_v_d },
+> -        { gen_helper_vlbuff_v_b, gen_helper_vlbuff_v_h,
+> -          gen_helper_vlbuff_v_w, gen_helper_vlbuff_v_d },
+> -        { NULL,                  gen_helper_vlhuff_v_h,
+> -          gen_helper_vlhuff_v_w, gen_helper_vlhuff_v_d },
+> -        { NULL,                  NULL,
+> -          gen_helper_vlwuff_v_w, gen_helper_vlwuff_v_d }
+> +    static gen_helper_ldst_us * const fns[4] = {
+> +        gen_helper_vle8ff_v, gen_helper_vle16ff_v,
+> +        gen_helper_vle32ff_v, gen_helper_vle64ff_v
+>      };
 >
-> @@ -260,15 +259,13 @@ static void sifive_u_otp_reset(DeviceState *dev)
->          serial_data = s->serial;
->          if (blk_pwrite(s->blk, index * SIFIVE_U_OTP_FUSE_WORD,
->                         &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0) < 0) {
-> -            qemu_log_mask(LOG_GUEST_ERROR,
-> -                          "write error index<%d>\n", index);
-> +            error_report("write error index<%d>", index);
+> -    fn =  fns[seq][s->sew];
+> +    fn = fns[eew];
+>      if (fn == NULL) {
+>          return false;
+>      }
+> @@ -975,13 +963,10 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t seq)
+>      return ldff_trans(a->rd, a->rs1, data, fn, s);
+>  }
+>
+> -GEN_VEXT_TRANS(vlbff_v, 0, r2nfvm, ldff_op, ld_us_check)
+> -GEN_VEXT_TRANS(vlhff_v, 1, r2nfvm, ldff_op, ld_us_check)
+> -GEN_VEXT_TRANS(vlwff_v, 2, r2nfvm, ldff_op, ld_us_check)
+> -GEN_VEXT_TRANS(vleff_v, 3, r2nfvm, ldff_op, ld_us_check)
+> -GEN_VEXT_TRANS(vlbuff_v, 4, r2nfvm, ldff_op, ld_us_check)
+> -GEN_VEXT_TRANS(vlhuff_v, 5, r2nfvm, ldff_op, ld_us_check)
+> -GEN_VEXT_TRANS(vlwuff_v, 6, r2nfvm, ldff_op, ld_us_check)
+> +GEN_VEXT_TRANS(vle8ff_v,  MO_8,  r2nfvm, ldff_op, ld_us_check)
+> +GEN_VEXT_TRANS(vle16ff_v, MO_16, r2nfvm, ldff_op, ld_us_check)
+> +GEN_VEXT_TRANS(vle32ff_v, MO_32, r2nfvm, ldff_op, ld_us_check)
+> +GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, ld_us_check)
+>
+>  /*
+>   *** vector atomic operation
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 9349a36b41b..fd398af8550 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -458,7 +458,7 @@ static inline void
+>  vext_ldff(void *vd, void *v0, target_ulong base,
+>            CPURISCVState *env, uint32_t desc,
+>            vext_ldst_elem_fn *ldst_elem,
+> -          uint32_t esz, uint32_t msz, uintptr_t ra)
+> +          uint32_t esz, uintptr_t ra)
+>  {
+>      void *host;
+>      uint32_t i, k, vl = 0;
+> @@ -472,24 +472,24 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+>          if (!vm && !vext_elem_mask(v0, i)) {
+>              continue;
 >          }
->
->          serial_data = ~(s->serial);
->          if (blk_pwrite(s->blk, (index + 1) * SIFIVE_U_OTP_FUSE_WORD,
->                         &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0) < 0) {
-> -            qemu_log_mask(LOG_GUEST_ERROR,
-> -                          "write error index<%d>\n", index + 1);
-> +            error_report("write error index<%d>", index + 1);
+> -        addr = base + nf * i * msz;
+> +        addr = base + nf * i * esz;
+>          if (i == 0) {
+> -            probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
+> +            probe_pages(env, addr, nf * esz, ra, MMU_DATA_LOAD);
+>          } else {
+>              /* if it triggers an exception, no need to check watchpoint */
+> -            remain = nf * msz;
+> +            remain = nf * esz;
+>              while (remain > 0) {
+>                  offset = -(addr | TARGET_PAGE_MASK);
+>                  host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD,
+>                                           cpu_mmu_index(env, false));
+>                  if (host) {
+>  #ifdef CONFIG_USER_ONLY
+> -                    if (page_check_range(addr, nf * msz, PAGE_READ) < 0) {
+> +                    if (page_check_range(addr, nf * esz, PAGE_READ) < 0) {
+>                          vl = i;
+>                          goto ProbeSuccess;
+>                      }
+>  #else
+> -                    probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
+> +                    probe_pages(env, addr, nf * esz, ra, MMU_DATA_LOAD);
+>  #endif
+>                  } else {
+>                      vl = i;
+> @@ -514,43 +514,25 @@ ProbeSuccess:
+>              continue;
+>          }
+>          while (k < nf) {
+> -            target_ulong addr = base + (i * nf + k) * msz;
+> +            target_ulong addr = base + (i * nf + k) * esz;
+>              ldst_elem(env, addr, i + k * vlmax, vd, ra);
+>              k++;
 >          }
 >      }
+>  }
 >
+> -#define GEN_VEXT_LDFF(NAME, MTYPE, ETYPE, LOAD_FN)               \
+> -void HELPER(NAME)(void *vd, void *v0, target_ulong base,         \
+> -                  CPURISCVState *env, uint32_t desc)             \
+> -{                                                                \
+> -    vext_ldff(vd, v0, base, env, desc, LOAD_FN,                  \
+> -              sizeof(ETYPE), sizeof(MTYPE), GETPC());            \
+> -}
+> -
+> -GEN_VEXT_LDFF(vlbff_v_b,  int8_t,   int8_t,   ldb_b)
+> -GEN_VEXT_LDFF(vlbff_v_h,  int8_t,   int16_t,  ldb_h)
+> -GEN_VEXT_LDFF(vlbff_v_w,  int8_t,   int32_t,  ldb_w)
+> -GEN_VEXT_LDFF(vlbff_v_d,  int8_t,   int64_t,  ldb_d)
+> -GEN_VEXT_LDFF(vlhff_v_h,  int16_t,  int16_t,  ldh_h)
+> -GEN_VEXT_LDFF(vlhff_v_w,  int16_t,  int32_t,  ldh_w)
+> -GEN_VEXT_LDFF(vlhff_v_d,  int16_t,  int64_t,  ldh_d)
+> -GEN_VEXT_LDFF(vlwff_v_w,  int32_t,  int32_t,  ldw_w)
+> -GEN_VEXT_LDFF(vlwff_v_d,  int32_t,  int64_t,  ldw_d)
+> -GEN_VEXT_LDFF(vleff_v_b,  int8_t,   int8_t,   lde_b)
+> -GEN_VEXT_LDFF(vleff_v_h,  int16_t,  int16_t,  lde_h)
+> -GEN_VEXT_LDFF(vleff_v_w,  int32_t,  int32_t,  lde_w)
+> -GEN_VEXT_LDFF(vleff_v_d,  int64_t,  int64_t,  lde_d)
+> -GEN_VEXT_LDFF(vlbuff_v_b, uint8_t,  uint8_t,  ldbu_b)
+> -GEN_VEXT_LDFF(vlbuff_v_h, uint8_t,  uint16_t, ldbu_h)
+> -GEN_VEXT_LDFF(vlbuff_v_w, uint8_t,  uint32_t, ldbu_w)
+> -GEN_VEXT_LDFF(vlbuff_v_d, uint8_t,  uint64_t, ldbu_d)
+> -GEN_VEXT_LDFF(vlhuff_v_h, uint16_t, uint16_t, ldhu_h)
+> -GEN_VEXT_LDFF(vlhuff_v_w, uint16_t, uint32_t, ldhu_w)
+> -GEN_VEXT_LDFF(vlhuff_v_d, uint16_t, uint64_t, ldhu_d)
+> -GEN_VEXT_LDFF(vlwuff_v_w, uint32_t, uint32_t, ldwu_w)
+> -GEN_VEXT_LDFF(vlwuff_v_d, uint32_t, uint64_t, ldwu_d)
+> +#define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
+> +void HELPER(NAME)(void *vd, void *v0, target_ulong base,  \
+> +                  CPURISCVState *env, uint32_t desc)      \
+> +{                                                         \
+> +    vext_ldff(vd, v0, base, env, desc, LOAD_FN,           \
+> +              sizeof(ETYPE), GETPC());                    \
+> +}
+> +
+> +GEN_VEXT_LDFF(vle8ff_v,  int8_t,  lde_b)
+> +GEN_VEXT_LDFF(vle16ff_v, int16_t, lde_h)
+> +GEN_VEXT_LDFF(vle32ff_v, int32_t, lde_w)
+> +GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d)
+>
+>  /*
+>   *** Vector AMO Operations (Zvamo)
 > --
-> 2.7.4
+> 2.17.1
 >
 >
 
