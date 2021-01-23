@@ -1,64 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l3GMm-0003be-Og
-	for mharc-qemu-riscv@gnu.org; Sat, 23 Jan 2021 05:42:05 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51158)
+	id 1l3GMn-0003cI-9T
+	for mharc-qemu-riscv@gnu.org; Sat, 23 Jan 2021 05:42:06 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51176)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3GLl-0003EC-MV; Sat, 23 Jan 2021 05:41:01 -0500
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631]:36942)
+ id 1l3GLm-0003HW-Ns; Sat, 23 Jan 2021 05:41:02 -0500
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:41855)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3GLg-00032z-Ij; Sat, 23 Jan 2021 05:41:01 -0500
-Received: by mail-pl1-x631.google.com with SMTP id q2so1958868plk.4;
- Sat, 23 Jan 2021 02:40:54 -0800 (PST)
+ id 1l3GLl-000346-2p; Sat, 23 Jan 2021 05:41:02 -0500
+Received: by mail-pl1-x62c.google.com with SMTP id h15so2235825pli.8;
+ Sat, 23 Jan 2021 02:40:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=B58xplxCooU/F15C0BemwLKQ+JY8xrgit1LkcRDbVyo=;
- b=uvu9tZz3bny3rIfJV3MH4SYrF56Q8vDO7r+9qPEA2tobJsP7l+/cLG5muX0X5K5l70
- UAeVHPgXzJeD1xKV3e6DFHyL93iRRP/Dz4qyj061wKi0nG0orqgi76M5mD2hq0TPgt+w
- cQKHcZhEknwklnFdHXarfrdPRvGJndcOaoYwmVbvv1n6MFhcFSYphFy8biufnQR+/iiB
- bbYKQ33jQmIGWUaExvz+cNdws4D/sMqs9ACetYaiCxDXXdPs/GMTktbjGRnqe+FzFYG9
- Ne6nmuWJvQ9nY+NludUctGJ88Aqa/cHG9rx5hdQLWQ60OoFbCXAyKvZ7JRbaZumoa2o8
- xvcg==
+ bh=8S+2pTjCNFYHJQpKubpfhi88hOIid6hv5Akr1gRnwjQ=;
+ b=R999AIAk0j7suqvcy9wmiLFpq0GCTm6BcvAH6SWsdsJIpwBvUea20yCngEmT9HBxNe
+ o0I67bpVWN4MECuqsuJG+L5+9mj1ldzIyl6Kfk/Mbymyu0jmF/oazgCodcd0jpFn927J
+ Bc2zG+R1Xu+hCM7yO9HXWMpqSZfKkld93DFZBpbaCqLfcXdjzVs/tggZxT/B9/7Sp88l
+ 5agFhkYEVCj2xpJQ39w0wQ4E42VFO1feZi47x6dywSbsR6T5geMAYdCrWRHmGxUjWrBA
+ W5p4nAS/guzkuEZjsjapyjMVlgB6C/CpfUEBkOAE/QGpI+8dx+QDb1s5yIn/vDA8rDoF
+ 55bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=B58xplxCooU/F15C0BemwLKQ+JY8xrgit1LkcRDbVyo=;
- b=YO62NRKudmKlz47EGswZPNaTUrAAoW6K7J1Spa25kV+JvGEbqUWJNs8kHCS7syJe1j
- Hg2EeDn5GqDtvNpj9cn233ITm6hyAJjNdWXpIWVMigDR/QU/Q7P/oldqW7mzgS/AdOY/
- DnpIKPUltb+QbuReGT96fyOP8lA9ZaS67Eb8DLhmdnKgl9F4yZlUDMxSH4kT00ypBHPr
- B6LRulRyNyMZabZQ72yAl5dvA1aijNhb/pzQz82CeUoR80KA8lFa+ZXo5hZl/a/H8tHx
- u50A5MjB88hF4yxFdU55y5GTKq5NY+FbYpPWMoO9cPvdrKLgGYLBqk8ZGvvkj5/d8+U/
- ZRNw==
-X-Gm-Message-State: AOAM532zXSfvAfqzpNHOrdh4ImHaiHKAEiXdjwuOs0OBQ13uRSjSYZZL
- 3Mj+/qHamB9ijMQjxoEo2t0=
-X-Google-Smtp-Source: ABdhPJxCM/i2LBRaGZlqrHPRdlnMCt39qiH4FWLFueXc4MiszGAtmH8muhP5xe7LoI8SCHZaY+fVdQ==
-X-Received: by 2002:a17:90a:3b04:: with SMTP id
- d4mr10433113pjc.48.1611398453341; 
- Sat, 23 Jan 2021 02:40:53 -0800 (PST)
+ bh=8S+2pTjCNFYHJQpKubpfhi88hOIid6hv5Akr1gRnwjQ=;
+ b=WcxasobpiYS3dmwJ/hcFuba/hpnYDCsUmStVMzETek1sm9iqSyAIIc88MUSqirqg7u
+ nDqT8fvbvRUcI9lKu9YkfFadyCTQVyMFq17Lr1aOGhESOJYszcf1jkythjPjJLLiA+eg
+ jFVlzwODFHQz0KL8uGyRbk/O63zFhtVusUhhCIC0E0Q1XT/OT1+Az/Q+rA37hqzMWY2c
+ I1wRzxQrGBJmvFga9n3Jwnub91MmhoPmErbFdsilBOCS4zGx8znI5vC4Dvp1CIogu8r4
+ NUcxurX6g0OhDdEmBFpRdcfS+YwNt5WBnwhcKGWcLzzdiC2DecA7v4cAdUPMywItykIb
+ 5otQ==
+X-Gm-Message-State: AOAM532ha77ZDgkpKovpZvlEkv/e6GU/MRoxzgHCXK2P9Pv9TPYejXwN
+ 5zg5vFRrSnaNYlVJkiflcj8=
+X-Google-Smtp-Source: ABdhPJwQxDxjuMF8XXvqjMGZT1JXiN5j6Q0S/gTnOUYjzQzawTAqsuGSk9j6b2v6lwXxm4q/kxr3sg==
+X-Received: by 2002:a17:90b:948:: with SMTP id
+ dw8mr3408377pjb.72.1611398458950; 
+ Sat, 23 Jan 2021 02:40:58 -0800 (PST)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id a5sm10575463pgl.41.2021.01.23.02.40.51
+ by smtp.gmail.com with ESMTPSA id a5sm10575463pgl.41.2021.01.23.02.40.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Jan 2021 02:40:52 -0800 (PST)
+ Sat, 23 Jan 2021 02:40:57 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v2 11/25] hw/sd: ssi-sd: Use macros for the dummy value and
- tokens in the transfer
-Date: Sat, 23 Jan 2021 18:40:02 +0800
-Message-Id: <20210123104016.17485-12-bmeng.cn@gmail.com>
+Subject: [PATCH v2 13/25] hw/sd: sd: Allow single/multiple block write for SPI
+ mode
+Date: Sat, 23 Jan 2021 18:40:04 +0800
+Message-Id: <20210123104016.17485-14-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210123104016.17485-1-bmeng.cn@gmail.com>
 References: <20210123104016.17485-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,108 +78,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2021 10:41:02 -0000
-X-List-Received-Date: Sat, 23 Jan 2021 10:41:02 -0000
+X-List-Received-Date: Sat, 23 Jan 2021 10:41:03 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-At present the codes use hardcoded numbers (0xff/0xfe) for the dummy
-value and block start token. Replace them with macros.
+At present the single/multiple block write in SPI mode is blocked
+by sd_normal_command(). Remove the limitation.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 
-Changes in v2:
-- Move multiple write token definitions out of this patch
+(no changes since v1)
 
- hw/sd/ssi-sd.c | 26 ++++++++++++++++----------
- 1 file changed, 16 insertions(+), 10 deletions(-)
+ hw/sd/sd.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
-index c1532b004b..75e76cf87a 100644
---- a/hw/sd/ssi-sd.c
-+++ b/hw/sd/ssi-sd.c
-@@ -79,6 +79,12 @@ OBJECT_DECLARE_SIMPLE_TYPE(ssi_sd_state, SSI_SD)
- #define SSI_SDR_ADDRESS_ERROR   0x2000
- #define SSI_SDR_PARAMETER_ERROR 0x4000
+diff --git a/hw/sd/sd.c b/hw/sd/sd.c
+index 09753359bb..946036d87c 100644
+--- a/hw/sd/sd.c
++++ b/hw/sd/sd.c
+@@ -1230,9 +1230,6 @@ static sd_rsp_type_t sd_normal_command(SDState *sd, SDRequest req)
+     case 25:	/* CMD25:  WRITE_MULTIPLE_BLOCK */
+         switch (sd->state) {
+         case sd_transfer_state:
+-            /* Writing in SPI mode not implemented.  */
+-            if (sd->spi)
+-                break;
  
-+/* single block read/write, multiple block read */
-+#define SSI_TOKEN_SINGLE        0xfe
-+
-+/* dummy value - don't care */
-+#define SSI_DUMMY               0xff
-+
- static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
- {
-     ssi_sd_state *s = SSI_SD(dev);
-@@ -107,14 +113,14 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
- 
-     switch (s->mode) {
-     case SSI_SD_CMD:
--        if (val == 0xff) {
-+        if (val == SSI_DUMMY) {
-             DPRINTF("NULL command\n");
--            return 0xff;
-+            return SSI_DUMMY;
-         }
-         s->cmd = val & 0x3f;
-         s->mode = SSI_SD_CMDARG;
-         s->arglen = 0;
--        return 0xff;
-+        return SSI_DUMMY;
-     case SSI_SD_CMDARG:
-         if (s->arglen == 4) {
-             SDRequest request;
-@@ -189,15 +195,15 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
-         } else {
-             s->cmdarg[s->arglen++] = val;
-         }
--        return 0xff;
-+        return SSI_DUMMY;
-     case SSI_SD_PREP_RESP:
-         DPRINTF("Prepare card response (Ncr)\n");
-         s->mode = SSI_SD_RESPONSE;
--        return 0xff;
-+        return SSI_DUMMY;
-     case SSI_SD_RESPONSE:
-         if (s->stopping) {
-             s->stopping = 0;
--            return 0xff;
-+            return SSI_DUMMY;
-         }
-         if (s->response_pos < s->arglen) {
-             DPRINTF("Response 0x%02x\n", s->response[s->response_pos]);
-@@ -210,16 +216,16 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
-             DPRINTF("End of command\n");
-             s->mode = SSI_SD_CMD;
-         }
--        return 0xff;
-+        return SSI_DUMMY;
-     case SSI_SD_PREP_DATA:
-         DPRINTF("Prepare data block (Nac)\n");
-         s->mode = SSI_SD_DATA_START;
--        return 0xff;
-+        return SSI_DUMMY;
-     case SSI_SD_DATA_START:
-         DPRINTF("Start read block\n");
-         s->mode = SSI_SD_DATA_READ;
-         s->response_pos = 0;
--        return 0xfe;
-+        return SSI_TOKEN_SINGLE;
-     case SSI_SD_DATA_READ:
-         val = sdbus_read_byte(&s->sdbus);
-         s->read_bytes++;
-@@ -246,7 +252,7 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
-         return val;
-     }
-     /* Should never happen.  */
--    return 0xff;
-+    return SSI_DUMMY;
- }
- 
- static int ssi_sd_post_load(void *opaque, int version_id)
+             if (addr + sd->blk_len > sd->size) {
+                 sd->card_status |= ADDRESS_ERROR;
 -- 
 2.25.1
 
