@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l3GLl-0003Ey-UP
-	for mharc-qemu-riscv@gnu.org; Sat, 23 Jan 2021 05:41:01 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51080)
+	id 1l3GLm-0003HX-Pn
+	for mharc-qemu-riscv@gnu.org; Sat, 23 Jan 2021 05:41:02 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51054)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3GLd-00034d-KN; Sat, 23 Jan 2021 05:40:54 -0500
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030]:39522)
+ id 1l3GLb-00034C-P1; Sat, 23 Jan 2021 05:40:52 -0500
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:38670)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3GLW-00030G-FL; Sat, 23 Jan 2021 05:40:53 -0500
-Received: by mail-pj1-x1030.google.com with SMTP id u4so5457468pjn.4;
- Sat, 23 Jan 2021 02:40:43 -0800 (PST)
+ id 1l3GLR-0002yT-E0; Sat, 23 Jan 2021 05:40:46 -0500
+Received: by mail-pl1-x634.google.com with SMTP id d4so4731698plh.5;
+ Sat, 23 Jan 2021 02:40:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=ktbhuYLuMNGFg6d3UKLkt2kVZEQvBOKHZn5SKljkb2c=;
- b=HK4/4m5+ldSOJMsh245B9wTVkqqKPt4I34hQckT/uVgrPIJ0guMoEyNE1kkKLHS41+
- KwyIdnMigYeFfpSpz0R00+qD4J9UVLpUm9S4zdpStNL9Z956TORzDvKaY5T56b+MSmpM
- MkjcybPOZ7aSGPWpAphJcD/pGIoumptdbt3q77mTFziPr3yim77jNBtPb9X/wf8LB+zO
- zrI3P5/1FmKvZT+ms6kxUCo4bzqECrcbzcf6LW2auXA/cHrLZLe87ErcNHSMUzlYK/6q
- S1NYDqkz3PsNZ/cpG6CrLAPOoNNa0XvmDhzTBzVQG+56mB8ThefhsfS5GoC1dAYMV/iV
- nZOA==
+ bh=yZCtk3pSUPvfXlClwRPrI//hxIZ74y5ldXEVKrWZP+A=;
+ b=XWuqzsC1/KZMYbpW5K2E9qNI3BdDT6iQ3Dhs4Yh4EWv2aGPABd5drqZRIZG2pHehvB
+ 0LF5zCeM/9CdIn+XEF3aAONzf1UCyl0GMy1jiupVqfNnHGvxqj7U9rxlGzlVsZ6aGXCw
+ EbB1KOfXLek/MdpLHuGr1fsqJS97yJYA1SoNZjMU0vYDR+2wVCI1PZQtD1UKwlQ1OnY1
+ cRzRPQ5ZxA02aIUitZzkqNFN1SjCShXA6imllI2eJZhMjm+TzRXXA6sXJLUoHqMu6AE/
+ KTLatw6r2fO5NiUbj/FfPpQk+Z0Nd3QpxnQYVXrQxBIrUo1ErbMI5ZhxM6DYOFsmQm3u
+ m3/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=ktbhuYLuMNGFg6d3UKLkt2kVZEQvBOKHZn5SKljkb2c=;
- b=f4ESWWabmMzkgbsyCYh+l+UIH3ol+snvkr7wpKgbShQZoLYb84VRqouLWnNBH9nWBS
- TiMgQ11RpygMrtfNDvzdt7TwaPKSyOHh8lW3esVVbQ8l5GyccK2yYxO5RNXnlYlJq11c
- HqvT+6sVnbrcTh+BleC3CVUxr1VVdx/ENS9ItlhDUg3Iii1zPhgxkLiml3b7IMGVjJM2
- 6xIzS9SyTTcVp2uNcaWI+xpzy1JqWaEivZBX6+AH2JSdPiOosjf2rsBMXx+SI7j2MreA
- g2cPB2P1aXiqAJMDtaM/IAJeUEyfDBSq3v1HZYsO1PYpaMcqsCQA1ZndkiSS0zEL8rQZ
- lVRQ==
-X-Gm-Message-State: AOAM530waYM9hdfNq3NO1i2xasAechEHzCfgNrKuzOZkskFklx3v5wEA
- D0wZNBiJzFJWhMW4FL+Gpy4NBU7hTATewA==
-X-Google-Smtp-Source: ABdhPJzEN7Cpdp0yr8IHXv8/GSU+FP8kqxXtQwPvluJ9Ab9PmuoxftBJXsSEuIoMleJeAtEX+VyaiQ==
-X-Received: by 2002:a17:90b:3805:: with SMTP id
- mq5mr10644546pjb.93.1611398443189; 
- Sat, 23 Jan 2021 02:40:43 -0800 (PST)
+ bh=yZCtk3pSUPvfXlClwRPrI//hxIZ74y5ldXEVKrWZP+A=;
+ b=f/KEXbidWoZDAMnDq2ybFtpDLMxbQ6qkWUSRJsKCoCivYGxnMMvhD8EJSXHSi697bs
+ pU4X9F9Bre7gJPrMjI+hLLrI0vbsfLDo/zEHq5O/0/6QG2MQ7122Wgl+9T+JhiEzu/Sy
+ VKn3LbYW9wo+Di1JymvrNIv/ux+ZdhO/TumrRq0HeClV72KEtbsTBn7eygJL2v9m1MZZ
+ 7koPphSzMr5AtsRTI+mpx8hFv63zkILCrQb+s+R9fB0QOjqc5kB526A631omBBRyUkKD
+ 7FXam92B9QZNrAJdIK0q7UlPPr5gCRNmF2YOkoaUW5nkPpOKYY7AkDN4OvuIXJNCOLSY
+ oclg==
+X-Gm-Message-State: AOAM530hPyopc+CBjzmpVySHoBK77S7sAq9RpuveqHQ+G8BGNCAwOswO
+ ZB9DQuUtqC0Z02zRt57efjE=
+X-Google-Smtp-Source: ABdhPJxWnTh9D/WXpSrXJ/FGUn/EKdjbO67zPOkPrmz2gy51pYFla1iSPJTCp+TsxGNRCNxOJDZWhw==
+X-Received: by 2002:a17:90a:2947:: with SMTP id x7mr20584pjf.157.1611398438176; 
+ Sat, 23 Jan 2021 02:40:38 -0800 (PST)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id a5sm10575463pgl.41.2021.01.23.02.40.40
+ by smtp.gmail.com with ESMTPSA id a5sm10575463pgl.41.2021.01.23.02.40.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Jan 2021 02:40:42 -0800 (PST)
+ Sat, 23 Jan 2021 02:40:37 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v2 07/25] hw/sd: ssi-sd: Suffix a data block with CRC16
-Date: Sat, 23 Jan 2021 18:39:58 +0800
-Message-Id: <20210123104016.17485-8-bmeng.cn@gmail.com>
+Cc: Bin Meng <bin.meng@windriver.com>,
+ Pragnesh Patel <pragnesh.patel@sifive.com>
+Subject: [PATCH v2 05/25] hw/sd: sd: Drop sd_crc16()
+Date: Sat, 23 Jan 2021 18:39:56 +0800
+Message-Id: <20210123104016.17485-6-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210123104016.17485-1-bmeng.cn@gmail.com>
 References: <20210123104016.17485-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1030.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,91 +81,72 @@ X-List-Received-Date: Sat, 23 Jan 2021 10:40:56 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Per the SD spec, a valid data block is suffixed with a 16-bit CRC
-generated by the standard CCITT polynomial x16+x12+x5+1. This part
-is currently missing in the ssi-sd state machine. Without it, all
-data block transfer fails in guest software because the expected
-CRC16 is missing on the data out line.
+commit f6fb1f9b319f ("sdcard: Correct CRC16 offset in sd_function_switch()")
+changed the 16-bit CRC to be stored at offset 64. In fact, this CRC
+calculation is completely wrong. From the original codes, it wants
+to calculate the CRC16 of the first 64 bytes of sd->data[], however
+passing 64 as the `width` to sd_crc16() actually counts 256 bytes
+starting from the `message` for the CRC16 calculation, which is not
+what we want.
 
-Fixes: 775616c3ae8c ("Partial SD card SPI mode support")
+Besides that, it seems existing sd_crc16() algorithm does not match
+the SD spec, which says CRC16 is the CCITT one but the calculation
+does not produce expected result. It turns out the CRC16 was never
+transferred outside the sd core, as in sd_read_byte() we see:
+
+    if (sd->data_offset >= 64)
+        sd->state = sd_transfer_state;
+
+Given above reasons, let's drop it.
+
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Pragnesh Patel <pragnesh.patel@sifive.com>
+Tested-by: Pragnesh Patel <pragnesh.patel@sifive.com>
+
 ---
 
-(no changes since v1)
+Changes in v2:
+- Fix several typos in the commit message
 
- hw/sd/ssi-sd.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ hw/sd/sd.c | 18 ------------------
+ 1 file changed, 18 deletions(-)
 
-diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
-index 043e270066..8bccedfab2 100644
---- a/hw/sd/ssi-sd.c
-+++ b/hw/sd/ssi-sd.c
-@@ -17,6 +17,7 @@
- #include "hw/qdev-properties.h"
- #include "hw/sd/sd.h"
- #include "qapi/error.h"
-+#include "qemu/crc-ccitt.h"
- #include "qemu/module.h"
- #include "qom/object.h"
+diff --git a/hw/sd/sd.c b/hw/sd/sd.c
+index bfea5547d5..b3952514fe 100644
+--- a/hw/sd/sd.c
++++ b/hw/sd/sd.c
+@@ -271,23 +271,6 @@ static uint8_t sd_crc7(const void *message, size_t width)
+     return shift_reg;
+ }
  
-@@ -40,6 +41,7 @@ typedef enum {
-     SSI_SD_RESPONSE,
-     SSI_SD_DATA_START,
-     SSI_SD_DATA_READ,
-+    SSI_SD_DATA_CRC16,
- } ssi_sd_mode;
+-static uint16_t sd_crc16(const void *message, size_t width)
+-{
+-    int i, bit;
+-    uint16_t shift_reg = 0x0000;
+-    const uint16_t *msg = (const uint16_t *)message;
+-    width <<= 1;
+-
+-    for (i = 0; i < width; i ++, msg ++)
+-        for (bit = 15; bit >= 0; bit --) {
+-            shift_reg <<= 1;
+-            if ((shift_reg >> 15) ^ ((*msg >> bit) & 1))
+-                shift_reg ^= 0x1011;
+-        }
+-
+-    return shift_reg;
+-}
+-
+ #define OCR_POWER_DELAY_NS      500000 /* 0.5ms */
  
- struct ssi_sd_state {
-@@ -48,6 +50,7 @@ struct ssi_sd_state {
-     int cmd;
-     uint8_t cmdarg[4];
-     uint8_t response[5];
-+    uint16_t crc16;
-     int32_t arglen;
-     int32_t response_pos;
-     int32_t stopping;
-@@ -194,12 +197,24 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
-     case SSI_SD_DATA_START:
-         DPRINTF("Start read block\n");
-         s->mode = SSI_SD_DATA_READ;
-+        s->response_pos = 0;
-         return 0xfe;
-     case SSI_SD_DATA_READ:
-         val = sdbus_read_byte(&s->sdbus);
-+        s->crc16 = crc_ccitt_false(s->crc16, (uint8_t *)&val, 1);
-         if (!sdbus_data_ready(&s->sdbus)) {
-             DPRINTF("Data read end\n");
-+            s->mode = SSI_SD_DATA_CRC16;
-+        }
-+        return val;
-+    case SSI_SD_DATA_CRC16:
-+        val = (s->crc16 & 0xff00) >> 8;
-+        s->crc16 <<= 8;
-+        s->response_pos++;
-+        if (s->response_pos == 2) {
-+            DPRINTF("CRC16 read end\n");
-             s->mode = SSI_SD_CMD;
-+            s->response_pos = 0;
-         }
-         return val;
+ FIELD(OCR, VDD_VOLTAGE_WINDOW,          0, 24)
+@@ -843,7 +826,6 @@ static void sd_function_switch(SDState *sd, uint32_t arg)
+         sd->data[16 - (i >> 1)] |= new_func << ((i % 2) * 4);
      }
-@@ -237,6 +252,7 @@ static const VMStateDescription vmstate_ssi_sd = {
-         VMSTATE_INT32(cmd, ssi_sd_state),
-         VMSTATE_UINT8_ARRAY(cmdarg, ssi_sd_state, 4),
-         VMSTATE_UINT8_ARRAY(response, ssi_sd_state, 5),
-+        VMSTATE_UINT16(crc16, ssi_sd_state),
-         VMSTATE_INT32(arglen, ssi_sd_state),
-         VMSTATE_INT32(response_pos, ssi_sd_state),
-         VMSTATE_INT32(stopping, ssi_sd_state),
-@@ -288,6 +304,7 @@ static void ssi_sd_reset(DeviceState *dev)
-     s->cmd = 0;
-     memset(s->cmdarg, 0, sizeof(s->cmdarg));
-     memset(s->response, 0, sizeof(s->response));
-+    s->crc16 = 0;
-     s->arglen = 0;
-     s->response_pos = 0;
-     s->stopping = 0;
+     memset(&sd->data[17], 0, 47);
+-    stw_be_p(sd->data + 64, sd_crc16(sd->data, 64));
+ }
+ 
+ static inline bool sd_wp_addr(SDState *sd, uint64_t addr)
 -- 
 2.25.1
 
