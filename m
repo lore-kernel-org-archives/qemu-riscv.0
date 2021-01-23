@@ -1,63 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l33xe-00064L-6G
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Jan 2021 16:27:18 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36380)
+	id 1l3GLW-00033h-9T
+	for mharc-qemu-riscv@gnu.org; Sat, 23 Jan 2021 05:40:51 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50992)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l33xd-00063C-0x; Fri, 22 Jan 2021 16:27:17 -0500
-Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:41675)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1l3GLO-0002z1-2x; Sat, 23 Jan 2021 05:40:38 -0500
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:38063)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l33xb-0004JL-HR; Fri, 22 Jan 2021 16:27:16 -0500
-Received: by mail-io1-xd36.google.com with SMTP id q1so14129916ion.8;
- Fri, 22 Jan 2021 13:27:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1l3GLH-0002vX-QM; Sat, 23 Jan 2021 05:40:37 -0500
+Received: by mail-pg1-x52a.google.com with SMTP id q7so5599856pgm.5;
+ Sat, 23 Jan 2021 02:40:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=cNtSqKBYYVPkgE3c4O1QNMMPvggSHuOmLIGJfDGvmX0=;
- b=ViVQdNGafF+VcpUKoB36rE0w1aiXEAT/wXey2VrGEYcG4ARz/Z+5dp3Iui5O/+4G/i
- Jfra3zUE8LmntnZYu3cE0phVSEz47Zg/WnR4hkONPGsqxpJdhLIsfjKo5v99SD2NFmyP
- P/Z88ggEw3aAOoG8yFWcUojC3rHQDMu+ak65Qlfuqc0lCn65wPuj1AnrceOhmDLEGvIJ
- OTDG2Crd58u77YS9iFCpZ9vwpW4lG58jq1NqeEm7cP1gprRnSXw+Z31pnaAp1nv1/T3M
- X6qjugE2qjtxTYVuaMo7QwIekMOY/6B2iKfrqVkQFx+ZHRbC/r99nSrXi0yJF5AxktkZ
- p/mg==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=yYTOVsDICNYs9a4Nc8bQDRVEnCpcAczZDVceLgRkdvo=;
+ b=kcVubV9vjsxs3ZxGmi6MkWnOdGAQ1RVTzDbCWxXuar0/EM/BamDS4Z4nLxPluxgFRV
+ Sn7BfbS3S75B6VUyOzxnwYmfX6JpF607XR4kqVgea95f8hVAt/g6rElinTiOneiY9VCJ
+ rD1k+/IHgcoGnXxfv15VhMGUmNXUQjnk8Ioeu0uXGJLh8Xc5dE2y+9LW9yOsjXafC5en
+ 4NF7+bVna9Oqp5lO2rbqfdOluAiN12p7CKoUlH0hDvqOvLHgnMor0ZB898xaJ8F8XiJZ
+ tKB2XsldH0RVw+cRYHQOhqP3JHJrFRpgPxanovJQDNZsg0AqG/HHYYzzN/ZfZCU/p5Nu
+ Pwzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=cNtSqKBYYVPkgE3c4O1QNMMPvggSHuOmLIGJfDGvmX0=;
- b=fi5lyww8ubk/RSkIGzMznHoUXX+WYr47SDXH5p1kaAXUe9rVlRbYyWr+vls46c6VWL
- lawuP7pIttAPWzW4RnRrz+ZLllxk6Gdti2zi2svVLtJpiN6NPIcMLcjE8mT6BwAIzQQd
- NmFhaJyZ5FKuB1rhFJdg3Ti8hfQKPK9oliuBiztdivnGJzFEJQA+xcYfjHK/fMB3Tbjm
- si1SAfeTsDhMnKMZyD9sntTxodfbwUNC87rKZ8cyCXAF+MsfAyD9csW1Pctv1VS0dw+q
- HBjdHscGTf7cbWOtznWAMMFXyj6bDUaoZkcCvgXcjzL6kfwggGmRwKz+WeF/wzKQvOSH
- AC+Q==
-X-Gm-Message-State: AOAM531XifRcIsEYw22Kil9LbdC5Rsu7MWiNSHrM00kRdivJsxsCA6YB
- eKF/owI1xnWGp9godd1MQ572QkYWHVmOIn3gJ5I=
-X-Google-Smtp-Source: ABdhPJy4rvTlnuRwGEw/o6PoBNh7loL0yx/zuOgs3GgFcdp1k2870EqZVzOjQGhRo9GOTCOpMAHQDLD+NylMmLQFn28=
-X-Received: by 2002:a02:2544:: with SMTP id g65mr1373263jag.91.1611350834083; 
- Fri, 22 Jan 2021 13:27:14 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=yYTOVsDICNYs9a4Nc8bQDRVEnCpcAczZDVceLgRkdvo=;
+ b=PNYwiDvf7QNihHgY63xeRNpFYRESzZ0k3kqamZHHAwA+4s0B4nEO8kTZVey1xuErU5
+ 9Iej76Hn+mbNGo8MZ39XrytDRYFN6oldKRo05bb6cQqdLrGhGzxoG23vVVR7RtZ62O6Z
+ LJeBfz/74mGOr+cUDYoeSYFfV9e8FmIvNBtet7V2fVL49Uy8p6TStaFNweiYYjmoG72T
+ MoZmCKd9NUHqNP+ojY+8MnLXrQWFPMTXzeZZEJT1MVHsAWYH0+qNEVvUxktaOsVa6MB9
+ asWnRxKi19bXvBLCUYNGvsZ3BR5a6DHSX6bJkj8S5hJ5Bq9gzgUgOmNFeGG8lBInVX6o
+ TAMA==
+X-Gm-Message-State: AOAM531Asvjh/5tb7Yn3C3Oaj3mOoG9sRjSLgI7N5GZe7UJr3uI+5W2U
+ Kdyn0Z409iVw7wyApk7fRyo=
+X-Google-Smtp-Source: ABdhPJw8J2LCeCIrP3654oAube3BZMLZwuW/+nIlv2eDbJa7ctfivBd+8aKt+JdvIM3qBDDFLC9Xxg==
+X-Received: by 2002:a63:6344:: with SMTP id x65mr9102420pgb.172.1611398429996; 
+ Sat, 23 Jan 2021 02:40:29 -0800 (PST)
+Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
+ [144.168.56.201])
+ by smtp.gmail.com with ESMTPSA id a5sm10575463pgl.41.2021.01.23.02.40.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 23 Jan 2021 02:40:29 -0800 (PST)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH v2 02/25] hw/block: m25p80: Add various ISSI flash information
+Date: Sat, 23 Jan 2021 18:39:53 +0800
+Message-Id: <20210123104016.17485-3-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210123104016.17485-1-bmeng.cn@gmail.com>
+References: <20210123104016.17485-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
-References: <20210122122958.12311-1-bmeng.cn@gmail.com>
- <20210122122958.12311-4-bmeng.cn@gmail.com>
-In-Reply-To: <20210122122958.12311-4-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 22 Jan 2021 13:26:47 -0800
-Message-ID: <CAKmqyKO3gG9E2n4cBV1KjLEzGs3Cn9eR3S5S21=uXUeWrUwneQ@mail.gmail.com>
-Subject: Re: [PATCH 3/4] hw/riscv: virt: Limit RAM size in a 32-bit system
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x52a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -72,53 +76,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2021 21:27:17 -0000
+X-List-Received-Date: Sat, 23 Jan 2021 10:40:40 -0000
 
-On Fri, Jan 22, 2021 at 4:34 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> RV32 supports 34-bit physical address hence the maximum RAM size
-> should be limitted. Limit the RAM size to 10 GiB, which leaves
-> some room for PCIe high mmio space.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+From: Bin Meng <bin.meng@windriver.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This updates the flash information table to include various ISSI
+flashes that are supported by upstream U-Boot and Linux kernel.
 
-Alistair
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+---
 
-> ---
->
->  hw/riscv/virt.c | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 1d05bb3ef9..4f44509360 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -590,6 +590,19 @@ static void virt_machine_init(MachineState *machine)
->          }
->      }
->
-> +    /* limit RAM size in a 32-bit system */
-> +    if (riscv_is_32bit(&s->soc[0])) {
-> +        /*
-> +         * Cast machine->ram_size to 64-bit for 32-bit host,
-> +         * to make the build on 32-bit host happy.
-> +         */
-> +        if ((uint64_t)(machine->ram_size) > 10 * GiB) {
-> +            /* 32-bit host won't have a chance to execute here */
-> +            machine->ram_size = 10 * GiB;
-> +            error_report("Limitting RAM size to 10 GiB");
-> +        }
-> +    }
-> +
->      /* register system main memory (actual RAM) */
->      memory_region_init_ram(main_mem, NULL, "riscv_virt_board.ram",
->                             machine->ram_size, &error_fatal);
-> --
-> 2.25.1
->
->
+(no changes since v1)
+
+ hw/block/m25p80.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/hw/block/m25p80.c b/hw/block/m25p80.c
+index 217c130f56..4bf8aa8158 100644
+--- a/hw/block/m25p80.c
++++ b/hw/block/m25p80.c
+@@ -210,6 +210,19 @@ static const FlashPartInfo known_devices[] = {
+     { INFO("640s33b",     0x898913,      0,  64 << 10, 128, 0) },
+     { INFO("n25q064",     0x20ba17,      0,  64 << 10, 128, 0) },
+ 
++    /* ISSI */
++    { INFO("is25lq040b",  0x9d4013,      0,  64 << 10,   8, ER_4K) },
++    { INFO("is25lp080d",  0x9d6014,      0,  64 << 10,  16, ER_4K) },
++    { INFO("is25lp016d",  0x9d6015,      0,  64 << 10,  32, ER_4K) },
++    { INFO("is25lp032",   0x9d6016,      0,  64 << 10,  64, ER_4K) },
++    { INFO("is25lp064",   0x9d6017,      0,  64 << 10, 128, ER_4K) },
++    { INFO("is25lp128",   0x9d6018,      0,  64 << 10, 256, ER_4K) },
++    { INFO("is25lp256",   0x9d6019,      0,  64 << 10, 512, ER_4K) },
++    { INFO("is25wp032",   0x9d7016,      0,  64 << 10,  64, ER_4K) },
++    { INFO("is25wp064",   0x9d7017,      0,  64 << 10, 128, ER_4K) },
++    { INFO("is25wp128",   0x9d7018,      0,  64 << 10, 256, ER_4K) },
++    { INFO("is25wp256",   0x9d7019,      0,  64 << 10, 512, ER_4K) },
++
+     /* Macronix */
+     { INFO("mx25l2005a",  0xc22012,      0,  64 << 10,   4, ER_4K) },
+     { INFO("mx25l4005a",  0xc22013,      0,  64 << 10,   8, ER_4K) },
+-- 
+2.25.1
+
 
