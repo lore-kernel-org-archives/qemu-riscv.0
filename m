@@ -1,71 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l3GMv-0003gb-0Q
+	id 1l3GMv-0003iJ-It
 	for mharc-qemu-riscv@gnu.org; Sat, 23 Jan 2021 05:42:13 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51216)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51306)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3GLy-0003NC-RD; Sat, 23 Jan 2021 05:41:16 -0500
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:52471)
+ id 1l3GME-0003T2-I0; Sat, 23 Jan 2021 05:41:33 -0500
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:46474)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3GLt-00036w-9d; Sat, 23 Jan 2021 05:41:14 -0500
-Received: by mail-pj1-x1036.google.com with SMTP id kx7so5394484pjb.2;
- Sat, 23 Jan 2021 02:41:04 -0800 (PST)
+ id 1l3GLv-000373-6S; Sat, 23 Jan 2021 05:41:23 -0500
+Received: by mail-pl1-x62e.google.com with SMTP id u11so4696559plg.13;
+ Sat, 23 Jan 2021 02:41:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=jl5yWzJQLZ/3iIKrZa05bEzfjs6tF2YDXsKTDBgwC7Q=;
- b=ghN7kRi9kaGtFlK+cuALRIlCAqzEcjLivXdPo+cGChUd1p46iS9i5VzfOfp74Qv3r0
- AhFwm+34hVff18neio7j6oJw916qvw0P3GTirXtKshhNwXBG7vAXRxClZZUuYicOQ1f5
- g/L3HZXa038S/2S1XzjrmuKmW2bthyl66Hzj2ApJSI6yfqn0uGeNAQrDEbS1Cqxg4FJW
- ub/ntjLuUsVoDBX7zAjqDWo4VT24xDhZB9boUU/4uoSpQZ9IA/aCgc5G7brOyoLBS2ah
- yM/UXiM5kuJO53ND9ptMjGjTo7RoLDexDKofLwWzDTkrxIMcTMzIRcxDmarz8Z++02AB
- hxbw==
+ bh=vMwNDhJzrNnSIXeq99hgPETYS9nHQnoJ/lsGNQKjl7o=;
+ b=vAI90+uwkyzo2TYV1wvomtQHmfqHHOOKuB4LWWwQznOie+wU0RWBOntQ+uLne6RQ+G
+ K/ab8eaWxpEVpM5kAR9yzAJVWKqKOqQXr6fri+6i/9CUXn/L6AqvEhAwuWFDDkvxU/kC
+ 3jbguS7amRH6HEgqpEtInI8yV2Khzv9zL68WoUxL4fUQp5n2HlwCaNAf5+Bl1OmMqnVy
+ s6geM66MHxX6yl7mzCS7QS3T5bycJ7q+iFeo1i5RKw3jXOavRHsdyFAF6McrVURXyFFl
+ 7Z3iOPGdFumC6tAxKUDJhxuITTKIvhB28AZVV9gyzN5S7fWvJRnC3a8XB25+iRMefBSh
+ 2S9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=jl5yWzJQLZ/3iIKrZa05bEzfjs6tF2YDXsKTDBgwC7Q=;
- b=Web+adlQ0FLZ56g2ub0eZ3R0T0MhGD15FOGCT7ct2IntN165RgFldpc053TRl1lZyR
- jeCxd8/GTNyIpyPVuzT/q+ZAZ/f6ljVqaT7xtR3W2QTZmz6/lvH6MUTKwVT8y2CGz4TB
- BVaCtOjD3bMAlcztpbzKSbgedC5PMdKVzerQagIxODvGDX1aKnSJPO+haIjYz3vx4tDD
- CWNujkS3xwFBxkBg4PmjmRKlfBX4BzKHMhxk8kgP6E87PGy9oISCIeZ3f+069Ka8LS2t
- VxtL5LbS9Qji//jdwypj1e7UHCvukZpnEAKPmOZuOoWeqgoVvcJLd1EOEoKx00Ch/ThV
- MG8Q==
-X-Gm-Message-State: AOAM532MTZ7QGn0v+vR+Kjl5t7THxnwP1ao8NrTstDbfP4pVQNA43xKF
- gLfTTZ37wS4MnvsqfAVLPoE=
-X-Google-Smtp-Source: ABdhPJxJUqnWbMsNdRNK2hRDx5ZrDhCwdR8icitT1fPvXvqhewZSA8FJ2Y+0rbcX/yiVgljq/hVcHQ==
-X-Received: by 2002:a17:90b:1a87:: with SMTP id
- ng7mr1236459pjb.211.1611398463901; 
- Sat, 23 Jan 2021 02:41:03 -0800 (PST)
+ bh=vMwNDhJzrNnSIXeq99hgPETYS9nHQnoJ/lsGNQKjl7o=;
+ b=O15PsXbhA5JUdLoFrPTn0LBAb1fbCBQVAqSrzuIQUeNWFZBSZkrECDudBQWO/utguE
+ uaqmHNZgU9Dt1/lWq/MLjZW5dXtxiSBwts1/PTzYcYcpM5jIo0fdNG1a75a04IbnRV6y
+ hjFLlet7mimF2fC7YNQCSdFKMo6+G1jMReOClg2IrNsv3PrVeDoelTBJxCu9mgGqGmBz
+ eZn6RNtYZbUebrzANCKQQVzbfx9Frqsv2JMh0e8HzcMci9TILgVuUXerAxMG5yH/zgNC
+ 03Vtt4InQLFbimPn/e2T2nrLiGLfzQK7oIbdfchal5bxCk0he2AXBCrdUdi0ozyvogTK
+ 3eAA==
+X-Gm-Message-State: AOAM533+B19/gTtZP3XKmti16IDRS6oBOyRLxrkPm+Bce4YvZkdgRhMW
+ WAE0bD/7olbMnaoqKnUVRe4=
+X-Google-Smtp-Source: ABdhPJwZWEaCFEbOKJjbxN+lhiPTuX0P6CzH8k0lDuOf6RGXRAzrkoRhgrv9yX5CNU42pFdcmXQhZQ==
+X-Received: by 2002:a17:90a:7e82:: with SMTP id
+ j2mr1850999pjl.217.1611398466523; 
+ Sat, 23 Jan 2021 02:41:06 -0800 (PST)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id a5sm10575463pgl.41.2021.01.23.02.41.01
+ by smtp.gmail.com with ESMTPSA id a5sm10575463pgl.41.2021.01.23.02.41.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Jan 2021 02:41:03 -0800 (PST)
+ Sat, 23 Jan 2021 02:41:05 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v2 15/25] hw/sd: Introduce receive_ready() callback
-Date: Sat, 23 Jan 2021 18:40:06 +0800
-Message-Id: <20210123104016.17485-16-bmeng.cn@gmail.com>
+Subject: [PATCH v2 16/25] hw/sd: ssi-sd: Support single block write
+Date: Sat, 23 Jan 2021 18:40:07 +0800
+Message-Id: <20210123104016.17485-17-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210123104016.17485-1-bmeng.cn@gmail.com>
 References: <20210123104016.17485-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -78,93 +77,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2021 10:41:22 -0000
+X-List-Received-Date: Sat, 23 Jan 2021 10:41:45 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-At present there is a data_ready() callback for the SD data read
-path. Let's add a receive_ready() for the SD data write path.
+Add 2 more states for the block write operation. The SPI host needs
+to send a data start token to start the transfer, and the data block
+written to the card will be acknowledged by a data response token.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+
 ---
 
-(no changes since v1)
+Changes in v2:
+- Correct the "token" typo in the commit message
+- Add 'write_bytes' in vmstate_ssi_sd
 
- include/hw/sd/sd.h |  2 ++
- hw/sd/core.c       | 13 +++++++++++++
- hw/sd/sd.c         |  6 ++++++
- 3 files changed, 21 insertions(+)
+ hw/sd/ssi-sd.c | 38 +++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 37 insertions(+), 1 deletion(-)
 
-diff --git a/include/hw/sd/sd.h b/include/hw/sd/sd.h
-index 05ef9b73e5..47360ba4ee 100644
---- a/include/hw/sd/sd.h
-+++ b/include/hw/sd/sd.h
-@@ -116,6 +116,7 @@ struct SDCardClass {
-      * Return: byte value read
-      */
-     uint8_t (*read_byte)(SDState *sd);
-+    bool (*receive_ready)(SDState *sd);
-     bool (*data_ready)(SDState *sd);
-     void (*set_voltage)(SDState *sd, uint16_t millivolts);
-     uint8_t (*get_dat_lines)(SDState *sd);
-@@ -187,6 +188,7 @@ void sdbus_write_data(SDBus *sdbus, const void *buf, size_t length);
-  * Read multiple bytes of data on the data lines of a SD bus.
-  */
- void sdbus_read_data(SDBus *sdbus, void *buf, size_t length);
-+bool sdbus_receive_ready(SDBus *sd);
- bool sdbus_data_ready(SDBus *sd);
- bool sdbus_get_inserted(SDBus *sd);
- bool sdbus_get_readonly(SDBus *sd);
-diff --git a/hw/sd/core.c b/hw/sd/core.c
-index 08c93b5903..30ee62c510 100644
---- a/hw/sd/core.c
-+++ b/hw/sd/core.c
-@@ -160,6 +160,19 @@ void sdbus_read_data(SDBus *sdbus, void *buf, size_t length)
+diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
+index 75e76cf87a..240cfd919c 100644
+--- a/hw/sd/ssi-sd.c
++++ b/hw/sd/ssi-sd.c
+@@ -43,6 +43,8 @@ typedef enum {
+     SSI_SD_DATA_START,
+     SSI_SD_DATA_READ,
+     SSI_SD_DATA_CRC16,
++    SSI_SD_DATA_WRITE,
++    SSI_SD_SKIP_CRC16,
+ } ssi_sd_mode;
+ 
+ struct ssi_sd_state {
+@@ -53,6 +55,7 @@ struct ssi_sd_state {
+     uint8_t response[5];
+     uint16_t crc16;
+     int32_t read_bytes;
++    int32_t write_bytes;
+     int32_t arglen;
+     int32_t response_pos;
+     int32_t stopping;
+@@ -85,6 +88,9 @@ OBJECT_DECLARE_SIMPLE_TYPE(ssi_sd_state, SSI_SD)
+ /* dummy value - don't care */
+ #define SSI_DUMMY               0xff
+ 
++/* data accepted */
++#define DATA_RESPONSE_ACCEPTED  0x05
++
+ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+ {
+     ssi_sd_state *s = SSI_SD(dev);
+@@ -113,10 +119,17 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+ 
+     switch (s->mode) {
+     case SSI_SD_CMD:
+-        if (val == SSI_DUMMY) {
++        switch (val) {
++        case SSI_DUMMY:
+             DPRINTF("NULL command\n");
+             return SSI_DUMMY;
++            break;
++        case SSI_TOKEN_SINGLE:
++            DPRINTF("Start write block\n");
++            s->mode = SSI_SD_DATA_WRITE;
++            return SSI_DUMMY;
+         }
++
+         s->cmd = val & 0x3f;
+         s->mode = SSI_SD_CMDARG;
+         s->arglen = 0;
+@@ -250,6 +263,27 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+             s->response_pos = 0;
+         }
+         return val;
++    case SSI_SD_DATA_WRITE:
++        sdbus_write_byte(&s->sdbus, val);
++        s->write_bytes++;
++        if (!sdbus_receive_ready(&s->sdbus) || s->write_bytes == 512) {
++            DPRINTF("Data write end\n");
++            s->mode = SSI_SD_SKIP_CRC16;
++            s->response_pos = 0;
++        }
++        return val;
++    case SSI_SD_SKIP_CRC16:
++        /* we don't verify the crc16 */
++        s->response_pos++;
++        if (s->response_pos == 2) {
++            DPRINTF("CRC16 receive end\n");
++            s->mode = SSI_SD_RESPONSE;
++            s->write_bytes = 0;
++            s->arglen = 1;
++            s->response[0] = DATA_RESPONSE_ACCEPTED;
++            s->response_pos = 0;
++        }
++        return SSI_DUMMY;
      }
- }
- 
-+bool sdbus_receive_ready(SDBus *sdbus)
-+{
-+    SDState *card = get_card(sdbus);
-+
-+    if (card) {
-+        SDCardClass *sc = SD_CARD_GET_CLASS(card);
-+
-+        return sc->receive_ready(card);
-+    }
-+
-+    return false;
-+}
-+
- bool sdbus_data_ready(SDBus *sdbus)
- {
-     SDState *card = get_card(sdbus);
-diff --git a/hw/sd/sd.c b/hw/sd/sd.c
-index 946036d87c..c99c0e93bb 100644
---- a/hw/sd/sd.c
-+++ b/hw/sd/sd.c
-@@ -2037,6 +2037,11 @@ uint8_t sd_read_byte(SDState *sd)
-     return ret;
- }
- 
-+static bool sd_receive_ready(SDState *sd)
-+{
-+    return sd->state == sd_receivingdata_state;
-+}
-+
- static bool sd_data_ready(SDState *sd)
- {
-     return sd->state == sd_sendingdata_state;
-@@ -2147,6 +2152,7 @@ static void sd_class_init(ObjectClass *klass, void *data)
-     sc->do_command = sd_do_command;
-     sc->write_byte = sd_write_byte;
-     sc->read_byte = sd_read_byte;
-+    sc->receive_ready = sd_receive_ready;
-     sc->data_ready = sd_data_ready;
-     sc->enable = sd_enable;
-     sc->get_inserted = sd_get_inserted;
+     /* Should never happen.  */
+     return SSI_DUMMY;
+@@ -287,6 +321,7 @@ static const VMStateDescription vmstate_ssi_sd = {
+         VMSTATE_UINT8_ARRAY(response, ssi_sd_state, 5),
+         VMSTATE_UINT16(crc16, ssi_sd_state),
+         VMSTATE_INT32(read_bytes, ssi_sd_state),
++        VMSTATE_INT32(write_bytes, ssi_sd_state),
+         VMSTATE_INT32(arglen, ssi_sd_state),
+         VMSTATE_INT32(response_pos, ssi_sd_state),
+         VMSTATE_INT32(stopping, ssi_sd_state),
+@@ -340,6 +375,7 @@ static void ssi_sd_reset(DeviceState *dev)
+     memset(s->response, 0, sizeof(s->response));
+     s->crc16 = 0;
+     s->read_bytes = 0;
++    s->write_bytes = 0;
+     s->arglen = 0;
+     s->response_pos = 0;
+     s->stopping = 0;
 -- 
 2.25.1
 
