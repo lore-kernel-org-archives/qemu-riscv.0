@@ -1,71 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l3GLl-0003EB-ML
+	id 1l3GLl-0003Ey-UP
 	for mharc-qemu-riscv@gnu.org; Sat, 23 Jan 2021 05:41:01 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51056)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51080)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3GLb-00034E-Pg; Sat, 23 Jan 2021 05:40:52 -0500
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:34589)
+ id 1l3GLd-00034d-KN; Sat, 23 Jan 2021 05:40:54 -0500
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030]:39522)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3GLO-0002x9-0G; Sat, 23 Jan 2021 05:40:47 -0500
-Received: by mail-pj1-x1036.google.com with SMTP id my11so7490870pjb.1;
- Sat, 23 Jan 2021 02:40:36 -0800 (PST)
+ id 1l3GLW-00030G-FL; Sat, 23 Jan 2021 05:40:53 -0500
+Received: by mail-pj1-x1030.google.com with SMTP id u4so5457468pjn.4;
+ Sat, 23 Jan 2021 02:40:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=RuQ3gOwEbnCFLQacowSgyfhpGP/J5gBP7ftXBeVEIVk=;
- b=TXrJWP8cIxN9PV4tHIr1LR0D5IQHovzllkN5impJQLzRmyfB/Cd4kOqQ11Kawuf4NJ
- BHpPi4Tm2+6j+/+pd+U/mYzYh260LnN1z6c8vDHgLUwgk2EVkJSGMNUgvfVPTJJuXc2+
- eXcZ/U5ZgAeYbaNpRebF57gORT8SGmzpE+1IVSgEq/4cioE3w+uTzKyfjVs45HogSpqQ
- Qw5TqmBvSpw/6/2DHdWNFs0Cyc+PMEQqPXQO16IfPO0PLCLwDVDjE78KSQF/sHIKnRm+
- OJwliPPowigLqddSDHtjOSF7/NGDRrI5afXdgrJUAh3wW9iwNU/3ik1xUHR7FPG4HvDQ
- YJcw==
+ bh=ktbhuYLuMNGFg6d3UKLkt2kVZEQvBOKHZn5SKljkb2c=;
+ b=HK4/4m5+ldSOJMsh245B9wTVkqqKPt4I34hQckT/uVgrPIJ0guMoEyNE1kkKLHS41+
+ KwyIdnMigYeFfpSpz0R00+qD4J9UVLpUm9S4zdpStNL9Z956TORzDvKaY5T56b+MSmpM
+ MkjcybPOZ7aSGPWpAphJcD/pGIoumptdbt3q77mTFziPr3yim77jNBtPb9X/wf8LB+zO
+ zrI3P5/1FmKvZT+ms6kxUCo4bzqECrcbzcf6LW2auXA/cHrLZLe87ErcNHSMUzlYK/6q
+ S1NYDqkz3PsNZ/cpG6CrLAPOoNNa0XvmDhzTBzVQG+56mB8ThefhsfS5GoC1dAYMV/iV
+ nZOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=RuQ3gOwEbnCFLQacowSgyfhpGP/J5gBP7ftXBeVEIVk=;
- b=a7MW76U4wHylEJK8DjnlYLYlRHNF9FlDmgDR9EgMrrw1QUNgqUjhR/BA2skVXQJqF/
- LNiWjQ51/uEMl4On9Ysnmoh1QdynRoJ3ANlR+uuWo0936tdJdXmLM7jZWXg4Pkr7zoQn
- twha28EggynbegP2hzTRmbKWXsVRGerkh9av8c0nwCYD715JKhhrGwQJ2pUt6o2VoURN
- wFc+nonLF0QsvscSmD6JM1r6T9Usy6xzS0/Q+XaP7Chcn/K2IYiblwHBxRZ8x9/4Tyuh
- 6cqUOwpMiZ2HdEKRQXPP0IWQqloG0qthVPSyhlQZtWGQBcglKsyRsvj4smfYHf18knBO
- WKSA==
-X-Gm-Message-State: AOAM5338a/F04H3IBZalU2saWQvlsYeoFqqAoGJfR6QT437dXsTmPQ0t
- Ng9j/eandd2GME8yANcErFg=
-X-Google-Smtp-Source: ABdhPJxQhOyxnpicJMb8ceUpiLYZT3tR3nj4CI2SS/LodjTd+9q3xfMJhk6cOZEiZpQCtjIabYfIVA==
-X-Received: by 2002:a17:90b:881:: with SMTP id
- bj1mr228389pjb.150.1611398435478; 
- Sat, 23 Jan 2021 02:40:35 -0800 (PST)
+ bh=ktbhuYLuMNGFg6d3UKLkt2kVZEQvBOKHZn5SKljkb2c=;
+ b=f4ESWWabmMzkgbsyCYh+l+UIH3ol+snvkr7wpKgbShQZoLYb84VRqouLWnNBH9nWBS
+ TiMgQ11RpygMrtfNDvzdt7TwaPKSyOHh8lW3esVVbQ8l5GyccK2yYxO5RNXnlYlJq11c
+ HqvT+6sVnbrcTh+BleC3CVUxr1VVdx/ENS9ItlhDUg3Iii1zPhgxkLiml3b7IMGVjJM2
+ 6xIzS9SyTTcVp2uNcaWI+xpzy1JqWaEivZBX6+AH2JSdPiOosjf2rsBMXx+SI7j2MreA
+ g2cPB2P1aXiqAJMDtaM/IAJeUEyfDBSq3v1HZYsO1PYpaMcqsCQA1ZndkiSS0zEL8rQZ
+ lVRQ==
+X-Gm-Message-State: AOAM530waYM9hdfNq3NO1i2xasAechEHzCfgNrKuzOZkskFklx3v5wEA
+ D0wZNBiJzFJWhMW4FL+Gpy4NBU7hTATewA==
+X-Google-Smtp-Source: ABdhPJzEN7Cpdp0yr8IHXv8/GSU+FP8kqxXtQwPvluJ9Ab9PmuoxftBJXsSEuIoMleJeAtEX+VyaiQ==
+X-Received: by 2002:a17:90b:3805:: with SMTP id
+ mq5mr10644546pjb.93.1611398443189; 
+ Sat, 23 Jan 2021 02:40:43 -0800 (PST)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id a5sm10575463pgl.41.2021.01.23.02.40.33
+ by smtp.gmail.com with ESMTPSA id a5sm10575463pgl.41.2021.01.23.02.40.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Jan 2021 02:40:35 -0800 (PST)
+ Sat, 23 Jan 2021 02:40:42 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Alistair Francis <alistair.francis@wdc.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>,
- Pragnesh Patel <pragnesh.patel@sifive.com>
-Subject: [PATCH v2 04/25] hw/sd: sd: Support CMD59 for SPI mode
-Date: Sat, 23 Jan 2021 18:39:55 +0800
-Message-Id: <20210123104016.17485-5-bmeng.cn@gmail.com>
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH v2 07/25] hw/sd: ssi-sd: Suffix a data block with CRC16
+Date: Sat, 23 Jan 2021 18:39:58 +0800
+Message-Id: <20210123104016.17485-8-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210123104016.17485-1-bmeng.cn@gmail.com>
 References: <20210123104016.17485-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1030.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,45 +81,91 @@ X-List-Received-Date: Sat, 23 Jan 2021 10:40:56 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-After the card is put into SPI mode, CRC check for all commands
-including CMD0 will be done according to CMD59 setting. But this
-command is currently unimplemented. Simply allow the decoding of
-CMD59, but the CRC remains unchecked.
+Per the SD spec, a valid data block is suffixed with a 16-bit CRC
+generated by the standard CCITT polynomial x16+x12+x5+1. This part
+is currently missing in the ssi-sd state machine. Without it, all
+data block transfer fails in guest software because the expected
+CRC16 is missing on the data out line.
 
+Fixes: 775616c3ae8c ("Partial SD card SPI mode support")
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
-Reviewed-by: Pragnesh Patel <pragnesh.patel@sifive.com>
-Tested-by: Pragnesh Patel <pragnesh.patel@sifive.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 
 (no changes since v1)
 
- hw/sd/sd.c | 8 +-------
- 1 file changed, 1 insertion(+), 7 deletions(-)
+ hw/sd/ssi-sd.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/hw/sd/sd.c b/hw/sd/sd.c
-index 4375ed5b8b..bfea5547d5 100644
---- a/hw/sd/sd.c
-+++ b/hw/sd/sd.c
-@@ -1517,18 +1517,12 @@ static sd_rsp_type_t sd_normal_command(SDState *sd, SDRequest req)
-         if (!sd->spi) {
-             goto bad_cmd;
+diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
+index 043e270066..8bccedfab2 100644
+--- a/hw/sd/ssi-sd.c
++++ b/hw/sd/ssi-sd.c
+@@ -17,6 +17,7 @@
+ #include "hw/qdev-properties.h"
+ #include "hw/sd/sd.h"
+ #include "qapi/error.h"
++#include "qemu/crc-ccitt.h"
+ #include "qemu/module.h"
+ #include "qom/object.h"
+ 
+@@ -40,6 +41,7 @@ typedef enum {
+     SSI_SD_RESPONSE,
+     SSI_SD_DATA_START,
+     SSI_SD_DATA_READ,
++    SSI_SD_DATA_CRC16,
+ } ssi_sd_mode;
+ 
+ struct ssi_sd_state {
+@@ -48,6 +50,7 @@ struct ssi_sd_state {
+     int cmd;
+     uint8_t cmdarg[4];
+     uint8_t response[5];
++    uint16_t crc16;
+     int32_t arglen;
+     int32_t response_pos;
+     int32_t stopping;
+@@ -194,12 +197,24 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+     case SSI_SD_DATA_START:
+         DPRINTF("Start read block\n");
+         s->mode = SSI_SD_DATA_READ;
++        s->response_pos = 0;
+         return 0xfe;
+     case SSI_SD_DATA_READ:
+         val = sdbus_read_byte(&s->sdbus);
++        s->crc16 = crc_ccitt_false(s->crc16, (uint8_t *)&val, 1);
+         if (!sdbus_data_ready(&s->sdbus)) {
+             DPRINTF("Data read end\n");
++            s->mode = SSI_SD_DATA_CRC16;
++        }
++        return val;
++    case SSI_SD_DATA_CRC16:
++        val = (s->crc16 & 0xff00) >> 8;
++        s->crc16 <<= 8;
++        s->response_pos++;
++        if (s->response_pos == 2) {
++            DPRINTF("CRC16 read end\n");
+             s->mode = SSI_SD_CMD;
++            s->response_pos = 0;
          }
--        goto unimplemented_spi_cmd;
-+        return sd_r1;
- 
-     default:
-     bad_cmd:
-         qemu_log_mask(LOG_GUEST_ERROR, "SD: Unknown CMD%i\n", req.cmd);
-         return sd_illegal;
--
--    unimplemented_spi_cmd:
--        /* Commands that are recognised but not yet implemented in SPI mode.  */
--        qemu_log_mask(LOG_UNIMP, "SD: CMD%i not implemented in SPI mode\n",
--                      req.cmd);
--        return sd_illegal;
+         return val;
      }
- 
-     qemu_log_mask(LOG_GUEST_ERROR, "SD: CMD%i in a wrong state\n", req.cmd);
+@@ -237,6 +252,7 @@ static const VMStateDescription vmstate_ssi_sd = {
+         VMSTATE_INT32(cmd, ssi_sd_state),
+         VMSTATE_UINT8_ARRAY(cmdarg, ssi_sd_state, 4),
+         VMSTATE_UINT8_ARRAY(response, ssi_sd_state, 5),
++        VMSTATE_UINT16(crc16, ssi_sd_state),
+         VMSTATE_INT32(arglen, ssi_sd_state),
+         VMSTATE_INT32(response_pos, ssi_sd_state),
+         VMSTATE_INT32(stopping, ssi_sd_state),
+@@ -288,6 +304,7 @@ static void ssi_sd_reset(DeviceState *dev)
+     s->cmd = 0;
+     memset(s->cmdarg, 0, sizeof(s->cmdarg));
+     memset(s->response, 0, sizeof(s->response));
++    s->crc16 = 0;
+     s->arglen = 0;
+     s->response_pos = 0;
+     s->stopping = 0;
 -- 
 2.25.1
 
