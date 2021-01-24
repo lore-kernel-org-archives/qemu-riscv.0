@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l3jQH-0003RT-Mv
-	for mharc-qemu-riscv@gnu.org; Sun, 24 Jan 2021 12:43:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43696)
+	id 1l3jU7-0004rJ-Vx
+	for mharc-qemu-riscv@gnu.org; Sun, 24 Jan 2021 12:47:39 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44028)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1l3jQG-0003Qb-2p; Sun, 24 Jan 2021 12:43:36 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330]:35869)
+ id 1l3jTu-0004pb-6G; Sun, 24 Jan 2021 12:47:28 -0500
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c]:40313)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1l3jQE-0002JH-Ff; Sun, 24 Jan 2021 12:43:35 -0500
-Received: by mail-wm1-x330.google.com with SMTP id i9so2254681wmq.1;
- Sun, 24 Jan 2021 09:43:32 -0800 (PST)
+ id 1l3jTk-0003Zh-5s; Sun, 24 Jan 2021 12:47:16 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id c127so8764394wmf.5;
+ Sun, 24 Jan 2021 09:47:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=qQOdXGp4P0Tgv8BTypNRgkV6q6bV9Qlp5Jzmbrc364w=;
- b=Ul/JRPTy33sOIp0MjwS2dTS/8hKCAOejOLKY1nMxUKxuWr4BA/MAyl7WUklcl7KvZ5
- w4FGVm2tOByaR6VGXjU6TL+lFH0U1I/Yu6Z2sTQixeq/edut+8WgIrswAwHp+yqpRMTP
- SRaq+kOdv09sKCkeIQLpwpGxEF6OU2HaQiy+e/jO4vLBlxfE/l+HDGCAnzYPPf/A+eqk
- cNYq4D1m5/f+kIVs/Oxhay32XCkRHHUMcghBdEeZIAnrZAkIYhzVLkHmC8oLXGI7MDYj
- 3OWDWSi6J2oVFevgfDHFyLjmzXKG6n918Gbm8BEH2fDFbqUnjzoGbsVSz9CxqFwKFQ93
- ppwA==
+ bh=6jMksSRS7fg8bvONgPil6ukP9HvDaDkxmhuVb7zD7GY=;
+ b=ilFxKSpNLBFkTQvcJxPAGCstBEx1hZKuqaj40DEmFkGK3+1Aiyc4jBFuETQ/Sxuc1D
+ KSF2cT+ywFM4nDyaNjlCIX66AW7J9Ma4krAe/1tqkiWqWOjBJYel5vN2kkvzMUL8R3MC
+ CjERiE8579xj35BFyfCMoxYfhfG6ihg+Dpx//H0J5GYu/o9pAIowGd2YNqt9wCS4c7hd
+ /DFJZUSMvbyok9vD9XGd4wzMDvLBg803XdGyvIU32YiCH8JyJoTyzUnxjD2dSYq7jTQW
+ inUn/esvVTAXA4eWtRvjx6XxedNjbkqkq5w9F2Xmlzabjk7hn+ZgUevibqQ93l8zHcKz
+ dtRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=qQOdXGp4P0Tgv8BTypNRgkV6q6bV9Qlp5Jzmbrc364w=;
- b=Ie3AXhTRDLTdL+5L3hBp6ODww4zxgdQovuI89SfhbpxXdBpRTxB0NuvejXsFGjSCe5
- GxmGSsss3KLZXv1z18QAgPROzhGzmbMzflLRruhq2oSGIVqkFR7TR6TNS6TUPqg/g7Rx
- 4e2krJ0bQZnnF/Np0SuczG/yc86olm9sjJ08zjfg68QjJu1FvV6QvxTSEi29RcpgECzb
- 0HB1a2OKq+XZWVEu75S6cjyZkTnCM5TYpFrB8p59kgFKLSbEWwQXXsL3IgzQ9TCeOh3m
- 8K7ZPWwLQ6Nh3Zx5vfaPg7aDh/8iVdb9YFDHEsRowXBi93dlw1mhzAntf2bjaJeCriYy
- tlHg==
-X-Gm-Message-State: AOAM533AIXfvBR4Y3GeSGkB3c4CqbkVdFtn91wgMt/77HK3ARxQUI5iY
- mYUQTtcB19WsoCJeU9+TWWg=
-X-Google-Smtp-Source: ABdhPJwMs0CwiA3Hx9Z8P6FHgnwFbD6O0xF1iISGjP5MQ/SJxMeEINFbPG9/okplh3wavp8SBurz0g==
-X-Received: by 2002:a1c:f70c:: with SMTP id v12mr4942687wmh.77.1611510211742; 
- Sun, 24 Jan 2021 09:43:31 -0800 (PST)
+ bh=6jMksSRS7fg8bvONgPil6ukP9HvDaDkxmhuVb7zD7GY=;
+ b=GB7FASNpL4lU1TAI7UxKUJpXCYILsOSra0PJnbuFA1dmxWf/ezrF3OjBxi02FZs+6l
+ nA7WuNJxMh2VBxE6l6zYM+tDfmA9XovHQU4H8+4CmslMK/n36zbYFDbb+rrUmtp7Vxr0
+ TpKSfJMkgMqkzunhlfBIZR8R+v/2F8ki+X0FPU9fNB10W1S85utTG4Y4pxKlad3Gp6EQ
+ E+HDArY2w2bn9OxrvoPmOmmQhT5Gebp3c/9fb3sQeWLXS4Jd5J937fKvMa/Hw0jG6HIT
+ E+95c2NgS0AMPKhYE6SldnioEajc3e6qUv70CQYKPYBcTjziONKWSTk6r/iFIxnYdYSK
+ lwVg==
+X-Gm-Message-State: AOAM533AhuoD0BNF94hmId6dYl2SPEQKApcyIGRCWDMQ3h6amjjynthh
+ tyFXcBlvPSKwMECQ1k2eFcU=
+X-Google-Smtp-Source: ABdhPJxFfvGkRKTkG+PvzX8UoMeHBSOC3/ey3Zau72sEOAKDMZ0fysM4iZroNz0iVa8gHiSPkdfLdg==
+X-Received: by 2002:a1c:3587:: with SMTP id c129mr2941033wma.76.1611510427891; 
+ Sun, 24 Jan 2021 09:47:07 -0800 (PST)
 Received: from [192.168.1.36] (13.red-83-57-169.dynamicip.rima-tde.net.
  [83.57.169.13])
- by smtp.gmail.com with ESMTPSA id q2sm18403033wma.6.2021.01.24.09.43.30
+ by smtp.gmail.com with ESMTPSA id s19sm22227826wrf.72.2021.01.24.09.47.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 24 Jan 2021 09:43:31 -0800 (PST)
+ Sun, 24 Jan 2021 09:47:07 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v2 14/25] hw/sd: sd.h: Cosmetic change of using spaces
+Subject: Re: [PATCH v2 08/25] hw/sd: ssi-sd: Add a state representing Nac
 To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
  <alistair.francis@wdc.com>, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
 References: <20210123104016.17485-1-bmeng.cn@gmail.com>
- <20210123104016.17485-15-bmeng.cn@gmail.com>
+ <20210123104016.17485-9-bmeng.cn@gmail.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <a0c8bf33-a41c-bdbf-8b52-288a5a3726c6@amsat.org>
-Date: Sun, 24 Jan 2021 18:43:29 +0100
+Message-ID: <d1d4a9c9-e877-ec46-fc55-145560d8b6fb@amsat.org>
+Date: Sun, 24 Jan 2021 18:47:05 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
 MIME-Version: 1.0
-In-Reply-To: <20210123104016.17485-15-bmeng.cn@gmail.com>
+In-Reply-To: <20210123104016.17485-9-bmeng.cn@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x330.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -84,102 +84,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2021 17:43:36 -0000
+X-List-Received-Date: Sun, 24 Jan 2021 17:47:31 -0000
 
-On 1/23/21 11:40 AM, Bin Meng wrote:
+On 1/23/21 11:39 AM, Bin Meng wrote:
 > From: Bin Meng <bin.meng@windriver.com>
 > 
-> QEMU coding convention prefers spaces over tabs.
+> Per the "Physical Layer Specification Version 8.00" chapter 7.5.2,
+> "Data Read", there is a minimum 8 clock cycles (Nac) after the card
+> response and before data block shows up on the data out line. This
+> applies to both single and multiple block read operations.
+> 
+> Current implementation of single block read already satisfies the
+> timing requirement as in the RESPONSE state after all responses are
+> transferred the state remains unchanged. In the next 8 clock cycles
+> it jumps to DATA_START state if data is ready.
+> 
+> However we need an explicit state when expanding our support to
+> multiple block read in the future. Let's add a new state PREP_DATA
+> explicitly in the ssi-sd state machine to represent Nac.
+> 
+> Note we don't change the single block read state machine to let it
+> jump from RESPONSE state to DATA_START state as that effectively
+> generates a 16 clock cycles Nac, which might not be safe. As the
+> spec says the maximum Nac shall be calculated from several fields
+> encoded in the CSD register, we don't want to bother updating CSD
+> to ensure our Nac is within range to complicate things.
 > 
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > 
 > ---
 > 
 > Changes in v2:
-> - Correct the "coding" typo in the commit message
+> - new patch: add a state representing Nac
 > 
->  include/hw/sd/sd.h | 42 +++++++++++++++++++++---------------------
->  1 file changed, 21 insertions(+), 21 deletions(-)
+>  hw/sd/ssi-sd.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 > 
-> diff --git a/include/hw/sd/sd.h b/include/hw/sd/sd.h
-> index 59d108d453..05ef9b73e5 100644
-> --- a/include/hw/sd/sd.h
-> +++ b/include/hw/sd/sd.h
-> @@ -33,27 +33,27 @@
->  #include "hw/qdev-core.h"
->  #include "qom/object.h"
->  
-> -#define OUT_OF_RANGE		(1 << 31)
-> -#define ADDRESS_ERROR		(1 << 30)
-> -#define BLOCK_LEN_ERROR		(1 << 29)
-> -#define ERASE_SEQ_ERROR		(1 << 28)
-> -#define ERASE_PARAM		(1 << 27)
-> -#define WP_VIOLATION		(1 << 26)
-> -#define CARD_IS_LOCKED		(1 << 25)
-> -#define LOCK_UNLOCK_FAILED	(1 << 24)
-> -#define COM_CRC_ERROR		(1 << 23)
-> -#define ILLEGAL_COMMAND		(1 << 22)
-> -#define CARD_ECC_FAILED		(1 << 21)
-> -#define CC_ERROR		(1 << 20)
-> -#define SD_ERROR		(1 << 19)
-> -#define CID_CSD_OVERWRITE	(1 << 16)
-> -#define WP_ERASE_SKIP		(1 << 15)
-> -#define CARD_ECC_DISABLED	(1 << 14)
-> -#define ERASE_RESET		(1 << 13)
-> -#define CURRENT_STATE		(7 << 9)
-> -#define READY_FOR_DATA		(1 << 8)
-> -#define APP_CMD			(1 << 5)
-> -#define AKE_SEQ_ERROR		(1 << 3)
-> +#define OUT_OF_RANGE            (1 << 31)
-> +#define ADDRESS_ERROR           (1 << 30)
-> +#define BLOCK_LEN_ERROR         (1 << 29)
-> +#define ERASE_SEQ_ERROR         (1 << 28)
-> +#define ERASE_PARAM             (1 << 27)
-> +#define WP_VIOLATION            (1 << 26)
-> +#define CARD_IS_LOCKED          (1 << 25)
-> +#define LOCK_UNLOCK_FAILED      (1 << 24)
-> +#define COM_CRC_ERROR           (1 << 23)
-> +#define ILLEGAL_COMMAND         (1 << 22)
-> +#define CARD_ECC_FAILED         (1 << 21)
-> +#define CC_ERROR                (1 << 20)
-> +#define SD_ERROR                (1 << 19)
-> +#define CID_CSD_OVERWRITE       (1 << 16)
-> +#define WP_ERASE_SKIP           (1 << 15)
-> +#define CARD_ECC_DISABLED       (1 << 14)
-> +#define ERASE_RESET             (1 << 13)
-> +#define CURRENT_STATE           (7 << 9)
-> +#define READY_FOR_DATA          (1 << 8)
-> +#define APP_CMD                 (1 << 5)
-> +#define AKE_SEQ_ERROR           (1 << 3)
+> diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
+> index 8bccedfab2..5763afeba0 100644
+> --- a/hw/sd/ssi-sd.c
+> +++ b/hw/sd/ssi-sd.c
+> @@ -39,6 +39,7 @@ typedef enum {
+>      SSI_SD_CMDARG,
+>      SSI_SD_PREP_RESP,
+>      SSI_SD_RESPONSE,
+> +    SSI_SD_PREP_DATA,
 
-The plan was to use the REGISTERFIELD definitions
-we already have in sd.c and simply remove these:
+Hmm yet another change breaking migration.
 
-FIELD(CSR, AKE_SEQ_ERROR,               3,  1)
-FIELD(CSR, APP_CMD,                     5,  1)
-FIELD(CSR, FX_EVENT,                    6,  1)
-FIELD(CSR, READY_FOR_DATA,              8,  1)
-FIELD(CSR, CURRENT_STATE,               9,  4)
-FIELD(CSR, ERASE_RESET,                13,  1)
-FIELD(CSR, CARD_ECC_DISABLED,          14,  1)
-FIELD(CSR, WP_ERASE_SKIP,              15,  1)
-FIELD(CSR, CSD_OVERWRITE,              16,  1)
-FIELD(CSR, DEFERRED_RESPONSE,          17,  1)
-FIELD(CSR, ERROR,                      19,  1)
-FIELD(CSR, CC_ERROR,                   20,  1)
-FIELD(CSR, CARD_ECC_FAILED,            21,  1)
-FIELD(CSR, ILLEGAL_COMMAND,            22,  1)
-FIELD(CSR, COM_CRC_ERROR,              23,  1)
-FIELD(CSR, LOCK_UNLOCK_FAILED,         24,  1)
-FIELD(CSR, CARD_IS_LOCKED,             25,  1)
-FIELD(CSR, WP_VIOLATION,               26,  1)
-FIELD(CSR, ERASE_PARAM,                27,  1)
-FIELD(CSR, ERASE_SEQ_ERROR,            28,  1)
-FIELD(CSR, BLOCK_LEN_ERROR,            29,  1)
-FIELD(CSR, ADDRESS_ERROR,              30,  1)
-FIELD(CSR, OUT_OF_RANGE,               31,  1)
-
-Anyway, we never got there...
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+>      SSI_SD_DATA_START,
+>      SSI_SD_DATA_READ,
+>      SSI_SD_DATA_CRC16,
 
