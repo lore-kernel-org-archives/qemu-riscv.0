@@ -1,70 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l3j5A-0001tw-FA
-	for mharc-qemu-riscv@gnu.org; Sun, 24 Jan 2021 12:21:48 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40254)
+	id 1l3j9Q-0003Qd-Kj
+	for mharc-qemu-riscv@gnu.org; Sun, 24 Jan 2021 12:26:12 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40746)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1l3j52-0001st-La; Sun, 24 Jan 2021 12:21:41 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:40234)
+ id 1l3j9P-0003QK-Rf; Sun, 24 Jan 2021 12:26:11 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332]:34523)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1l3j51-0003Qd-1I; Sun, 24 Jan 2021 12:21:40 -0500
-Received: by mail-wr1-x429.google.com with SMTP id c12so9957436wrc.7;
- Sun, 24 Jan 2021 09:21:37 -0800 (PST)
+ id 1l3j9O-0004uJ-BY; Sun, 24 Jan 2021 12:26:11 -0500
+Received: by mail-wm1-x332.google.com with SMTP id o10so9301381wmc.1;
+ Sun, 24 Jan 2021 09:26:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=b1leKSgc5o1D6u7Sy9B8NMWINeSLJ94yomcdIpS+XUA=;
- b=c1WJn6Nd41HcwfvpIlrMi//QUpz8vcj7H8Fqf5rvzDndnDmldOueynYUDX3Zam/VCt
- M7ZbyUBdWrYzy89On6NgEA7rCNhO1hM9hKpPKWI0n9xDs2CsDFm3rscQN6Jp/uPReWGQ
- yJYkcIy7lYDc1XzEXCX9355hMMeGJ1HJvRZ3Hz7ErvDXXIR3DqwHY90yDrrFbFVyogNt
- +JYejJScoVKykEzoAgvtpOvDfJBFiu+S5ynoRmiplqfMJOQ+CXSxLg2ROLY20tNpmqtf
- WOqzHrZG7XeWqHzG5agZ45w1EuVYtwQw46auvNQ1chKWeRJtnFG0ZZVB7AZbVh2qZy5V
- mOqQ==
+ bh=W8MMeSQ8q9L8iyYg2f4t6l4U5l8fjW6EZGzgFKN/23k=;
+ b=E3xPqF2lfwBZuP5LClcN3veIJ1RyjvM/mBnHH/inBvTBfvzEoEAgfQf1zOPAvhtfMO
+ E7Rr+bqLLwENJDxQnKQ4YL5cVXz3bIv0qvsgZAszyZeczry4wCJctj+gUTeOqN/gkXXx
+ /ZQMCFcckDOHzKqPNjSZAuFEQ2ydEVTP4/STE7eQvKsCsDbrQ6yBR1J05S8y078cawL0
+ rqkkbgm+tuwoGJZ65w+THhwm8s7VKbOYPPqyMovZ8JAM87L+iy0DVc7PstmuTAbC4MZ+
+ iaiYiZtRei+o04h9OW2lPRJ4TRnEZ5/UmklsBC4x2gD6rLEfh32GKc+MT1fnE/FBmPs5
+ Lkcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=b1leKSgc5o1D6u7Sy9B8NMWINeSLJ94yomcdIpS+XUA=;
- b=XrfqAxnyksIMpCjnSmL1IsQlMXqxJBd159lNBBEKw57r6GwLjX/LJ8WQ8tFZ7gpqAr
- WNSLb8w22XuntVf3xjV51gG7Sqb9L6zrmIsEv/1ww9g3uwphRlwRuiq3ibZD3N6Orgcj
- mIzwFe7VGu+W2mVmcLgAOOhPmyqN4XbcFEOTAB+u46LzjonXYMfy2I+EWaufk+oyIGt2
- ASdzBwkWYOSxzgYJ98jutblyBy9NgyCNaAoTqt7CFrOPForA0q7xW4pscDLXC5knDsvw
- pHyC43kuNFyxj2BBjEdL4GeUM7ItwwBL0SzVmciuXzxsYNh+7INe/k/nW4JU6ah02/7L
- uwGg==
-X-Gm-Message-State: AOAM532RXzKYq2QEUoNTMShqCnbFlnkIPlmO2OuhP8ApQGAhxy51WPMR
- zagwMfg5XVu81gafClaqWr0=
-X-Google-Smtp-Source: ABdhPJyLAkOSGP2SwaFXXDKkBpxlHv+kmWXznMdcM2Udie8hU8BT9pXI91VjsrXgfuuNZpki0Sxh4w==
-X-Received: by 2002:adf:eb05:: with SMTP id s5mr1336038wrn.333.1611508896753; 
- Sun, 24 Jan 2021 09:21:36 -0800 (PST)
+ bh=W8MMeSQ8q9L8iyYg2f4t6l4U5l8fjW6EZGzgFKN/23k=;
+ b=p84gEXNxjNZQoVZdA6eUbtsCjG168dBJgcXHVhj8w07X0fXrGuCWadlOJBGMZBo0Py
+ arL+y37P4w95It2aRjfXGYq/BujC925czPax9I6W0JlrFXotJ8aTpqOy165NnyF75FZQ
+ BbIe7RsQtnb+JUaGd3UImvawq9DBnr6fHiaPJYXeXu25Gys5IrdYurA+8HGgmP1wyGoQ
+ wliXFFxclZlbEs/fJJSb9+EChvqZWGyn1vNw9DRldU6heJDtLY0DDFBdMtpFA8O+PYze
+ YoZV3umDp+cmRlLldBEYXx9aPPIbJVmjfaJsdICI7uLFXwTdAHsxZY8Pnt1O1rnznMWx
+ IicA==
+X-Gm-Message-State: AOAM532a4n6io1QLYmOt6BGIEFH7uTLm0jInFKLfo7WV5mG1fgmoktVX
+ FRvuRv2qDPRqbGqV7ZzeuqE=
+X-Google-Smtp-Source: ABdhPJwDauzkXi4zcjU+joDHQPtsomyAgxBTDG26HY7qaPKdw/IiFxCIZYhTZMtjkecWsck/hqd42Q==
+X-Received: by 2002:a1c:bc8b:: with SMTP id m133mr3096098wmf.58.1611509167273; 
+ Sun, 24 Jan 2021 09:26:07 -0800 (PST)
 Received: from [192.168.1.36] (13.red-83-57-169.dynamicip.rima-tde.net.
  [83.57.169.13])
- by smtp.gmail.com with ESMTPSA id s1sm19871640wrv.97.2021.01.24.09.21.35
+ by smtp.gmail.com with ESMTPSA id y6sm18970568wrp.6.2021.01.24.09.26.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 24 Jan 2021 09:21:35 -0800 (PST)
+ Sun, 24 Jan 2021 09:26:06 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v2 04/25] hw/sd: sd: Support CMD59 for SPI mode
+Subject: Re: [PATCH v2 08/25] hw/sd: ssi-sd: Add a state representing Nac
 To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
  <alistair.francis@wdc.com>, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>,
- Pragnesh Patel <pragnesh.patel@sifive.com>
+Cc: Bin Meng <bin.meng@windriver.com>
 References: <20210123104016.17485-1-bmeng.cn@gmail.com>
- <20210123104016.17485-5-bmeng.cn@gmail.com>
+ <20210123104016.17485-9-bmeng.cn@gmail.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <ae8b23de-77c9-dd34-713e-2ab054a310b4@amsat.org>
-Date: Sun, 24 Jan 2021 18:21:34 +0100
+Message-ID: <94f29240-6713-9045-0146-19ff9355d682@amsat.org>
+Date: Sun, 24 Jan 2021 18:26:05 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
 MIME-Version: 1.0
-In-Reply-To: <20210123104016.17485-5-bmeng.cn@gmail.com>
+In-Reply-To: <20210123104016.17485-9-bmeng.cn@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -85,25 +84,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2021 17:21:42 -0000
+X-List-Received-Date: Sun, 24 Jan 2021 17:26:12 -0000
 
 On 1/23/21 11:39 AM, Bin Meng wrote:
 > From: Bin Meng <bin.meng@windriver.com>
 > 
-> After the card is put into SPI mode, CRC check for all commands
-> including CMD0 will be done according to CMD59 setting. But this
-> command is currently unimplemented. Simply allow the decoding of
-> CMD59, but the CRC remains unchecked.
+> Per the "Physical Layer Specification Version 8.00" chapter 7.5.2,
+> "Data Read", there is a minimum 8 clock cycles (Nac) after the card
+> response and before data block shows up on the data out line. This
+> applies to both single and multiple block read operations.
+> 
+> Current implementation of single block read already satisfies the
+> timing requirement as in the RESPONSE state after all responses are
+> transferred the state remains unchanged. In the next 8 clock cycles
+> it jumps to DATA_START state if data is ready.
+> 
+> However we need an explicit state when expanding our support to
+> multiple block read in the future. Let's add a new state PREP_DATA
+> explicitly in the ssi-sd state machine to represent Nac.
+> 
+> Note we don't change the single block read state machine to let it
+> jump from RESPONSE state to DATA_START state as that effectively
+> generates a 16 clock cycles Nac, which might not be safe. As the
+> spec says the maximum Nac shall be calculated from several fields
+> encoded in the CSD register, we don't want to bother updating CSD
+> to ensure our Nac is within range to complicate things.
+
+As I don't have access to that part of the spec, I'm going to trust you.
+
+Acked-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+
 > 
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> Reviewed-by: Pragnesh Patel <pragnesh.patel@sifive.com>
-> Tested-by: Pragnesh Patel <pragnesh.patel@sifive.com>
+> 
 > ---
 > 
-> (no changes since v1)
+> Changes in v2:
+> - new patch: add a state representing Nac
 > 
->  hw/sd/sd.c | 8 +-------
->  1 file changed, 1 insertion(+), 7 deletions(-)
-
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+>  hw/sd/ssi-sd.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 
