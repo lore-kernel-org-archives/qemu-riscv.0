@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l3pxn-00056f-ER
-	for mharc-qemu-riscv@gnu.org; Sun, 24 Jan 2021 19:42:42 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49284)
+	id 1l3qZ9-0002Xk-JB
+	for mharc-qemu-riscv@gnu.org; Sun, 24 Jan 2021 20:21:15 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53412)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3pxf-00056Q-NN; Sun, 24 Jan 2021 19:42:37 -0500
-Received: from mail-yb1-xb31.google.com ([2607:f8b0:4864:20::b31]:42126)
+ id 1l3qZ3-0002UO-37; Sun, 24 Jan 2021 20:21:09 -0500
+Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a]:42275)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3pxa-0006PU-80; Sun, 24 Jan 2021 19:42:31 -0500
-Received: by mail-yb1-xb31.google.com with SMTP id b11so11695499ybj.9;
- Sun, 24 Jan 2021 16:42:23 -0800 (PST)
+ id 1l3qYt-0001pQ-Ry; Sun, 24 Jan 2021 20:21:08 -0500
+Received: by mail-yb1-xb2a.google.com with SMTP id b11so11755944ybj.9;
+ Sun, 24 Jan 2021 17:20:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=df5gTLSkEr5Oqen7/8WaYA6Josq7OsVj2loqthhVp3E=;
- b=rP73bkFV5r7eaMf6dZrfqjmVGIqvXTYeWNP9axRGdn7GebkMahxt9//XZ0z4qaXzzb
- TZTpadhD5EKnt3+/f6KptdyTdnAqyZQ3XfLTyXx4vxs52Hq6I+WX0n+hnCRRcHmv/ynu
- 53ey90KWuvHaCsoSuA7TXk0T+fmXkqWQnM91+DKcNoiaEoMDMFevXD9vI3ThW/76PcLt
- h9GGdwCzNttKlV+zfJRVvhjYYOXQMY7ePVbuIVeJ9ta5TT0ck52yomVAJ9WgeAx2KD+8
- 9xawrsYYyGkfNDH79Vnbzq57tL8sj5xijUA1VBPsosgw3/NyDG/Pm+yoLzLlau29SE6W
- wdBg==
+ bh=tn4n9t1So1fss2GqIvU2k+hDWGc3NbMMYBG45LaWWNg=;
+ b=NQS1FgEnxiszQ29LS4PhUBGkpWUohkma5i9nXkAaAGSBuD8DyTy0/UVB+g25WjXFMK
+ eik2NsmPdUXOI0+DPsDI7+IfJy8QcZFBJgmiwgRSMRevHDEng1Dh+Ingn/mg8GxGJnw/
+ lRQQ3MGRA985zaFMhOeHkrYiIK4oZOYqUjNCSNxGYDZ4POfoWZtCnbgms4k5scgMtehu
+ bG95ni/VvwU+w9V4DLrmP21Po/+awVOP9eH0MN63mM24w/RZtwbbnAYEl9wFaepPv4u+
+ 32pidmqshFQhcRSn88y4+uxChdz5FTjw9D2UZ+BTOwXfjd+luVcqPLo3Dr+SDgvV+//K
+ 6EMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=df5gTLSkEr5Oqen7/8WaYA6Josq7OsVj2loqthhVp3E=;
- b=EZp/QGgvSvCbyXtXNgAPHNq73VL6dfdFiCwUkXInBuSkewezfpF2LCcsC3IQYcuspT
- 6HEhbFXMst+bSjf6ROaIS2JPRRWuT6cfZjdEBuxwQjs/Eh2h4tYCqAGmTKfSWA3nYOmc
- BeNcmzki+LkUC8cWjJgKvGjJvjSYCq5D7eLpDMv6r8Mrp04T+wCHRLDvMpFYlyoh16dh
- ODp5qdlwWbAubwVQGqdNWzaWxM3aLc9uTuWkFTKMpatqc54uVd/XcIJEKtO8EBJ0sxQX
- THjLT43udFxR5VpuzOBpwDL31HEWRWTmtmnBnTENNIEYKiv13EEuaHEpNAis1o2Kq1BJ
- Q0cQ==
-X-Gm-Message-State: AOAM532/37edNYAYMJdoeT3biPYve9z/VkBMe0dRQAmXJ7mClGL9kw4g
- +8TSivE1712WZFfZezhKBbgbaJjz0b3DjWhevso=
-X-Google-Smtp-Source: ABdhPJyezDofMPSUQHFC58HQx3niRj7zhe6Ryge+usfFCNx0WXPuOiH57wieix7Kq/rw0i2PpWGLqj3GdltVXNwvaDU=
-X-Received: by 2002:a25:2041:: with SMTP id g62mr130397ybg.152.1611535342388; 
- Sun, 24 Jan 2021 16:42:22 -0800 (PST)
+ bh=tn4n9t1So1fss2GqIvU2k+hDWGc3NbMMYBG45LaWWNg=;
+ b=SVHA0jKvftvgi6mX8op1qj99JV1TEzPIpkc04XVenl2mKLYCYZo8dN0hCixhZIkM8p
+ errzKPzphtuyrHwbp+pgFClzEhN9TJwW1Iw1C7v16BmvPB/PkbkF8ydiN1iOyKX71Hal
+ zUoMz6lOcTmAL6hY7yGCUU9YwX09J19/ufxAqlq4R0LffJj1O9Vvu2pnAyn+Wf+lzcTA
+ vpQ2CbtTFDjkU2u8ASYaSplAsig8w2Na1UcJOjJpRJiKJWMJ8i6A4Kvhn9UNXlsCcSSm
+ 1MirhQPkFxyLdf1K5fFgEY0p7hsgHKBUt6/6gT2JFpAucwHIoiRTO/0dnWpNktyd0bCp
+ gHUQ==
+X-Gm-Message-State: AOAM531udM4lje3FobOVuEVi7vEGk+elW6/kiHI5CcUOlbAsdyBHO7Na
+ xfes7Uk3Qpn4zqk3JgLI7pHRqsUF8ILICfWlka0=
+X-Google-Smtp-Source: ABdhPJxutKDnbdh16UcfjemipOPkuIYtEkRnI+LZQjDIV/Cdrij91MTbIYlcCzStdLAxLd8WjAsxLuTt+rogkBaBBKs=
+X-Received: by 2002:a25:2041:: with SMTP id g62mr298327ybg.152.1611537657965; 
+ Sun, 24 Jan 2021 17:20:57 -0800 (PST)
 MIME-Version: 1.0
 References: <20210123104016.17485-1-bmeng.cn@gmail.com>
- <20210123104016.17485-10-bmeng.cn@gmail.com>
- <13bab35c-4e0a-e92a-24a5-558f33087061@amsat.org>
- <CAEUhbmWpXRj70MemQ0UT5pEyBsi6GtD6cejrLMOyQEOfG0FSAQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmWpXRj70MemQ0UT5pEyBsi6GtD6cejrLMOyQEOfG0FSAQ@mail.gmail.com>
+ <20210123104016.17485-19-bmeng.cn@gmail.com>
+ <634d629a-999d-b1e2-28dc-f9b49f9918a7@amsat.org>
+In-Reply-To: <634d629a-999d-b1e2-28dc-f9b49f9918a7@amsat.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 25 Jan 2021 08:42:11 +0800
-Message-ID: <CAEUhbmX3qNAwpOQieNrEL0obVQYrYgAzqseDDqhoSkAc7aMjLg@mail.gmail.com>
-Subject: Re: [PATCH v2 09/25] hw/sd: ssi-sd: Fix the wrong command index for
- STOP_TRANSMISSION
+Date: Mon, 25 Jan 2021 09:20:46 +0800
+Message-ID: <CAEUhbmVaeMeOcACyKg7q6dHVn+Pue7eKzu0RW7mGx5PQyVWg=g@mail.gmail.com>
+Subject: Re: [PATCH v2 18/25] hw/sd: ssi-sd: Bump up version ids of
+ VMStateDescription
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: Alistair Francis <alistair.francis@wdc.com>,
  Qemu-block <qemu-block@nongnu.org>, 
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Bin Meng <bin.meng@windriver.com>
+ Bin Meng <bin.meng@windriver.com>, 
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,55 +77,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2021 00:42:39 -0000
+X-List-Received-Date: Mon, 25 Jan 2021 01:21:13 -0000
 
-On Mon, Jan 25, 2021 at 8:33 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Mon, Jan 25, 2021 at 12:59 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.o=
+rg> wrote:
 >
-> On Mon, Jan 25, 2021 at 1:33 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.=
-org> wrote:
+> On 1/23/21 11:40 AM, Bin Meng wrote:
+> > From: Bin Meng <bin.meng@windriver.com>
 > >
-> > On 1/23/21 11:40 AM, Bin Meng wrote:
-> > > From: Bin Meng <bin.meng@windriver.com>
-> > >
-> > > This fixes the wrong command index for STOP_TRANSMISSION, the
-> > > required command to interrupt the multiple block read command,
-> > > in the old codes. It should be CMD12 (0x4c), not CMD13 (0x4d).
-> > >
-> > > Fixes: 775616c3ae8c ("Partial SD card SPI mode support")
-> > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> > >
-> > > ---
-> > >
-> > > Changes in v2:
-> > > - Make this fix a separate patch from the CMD18 support
-> > >
-> > >  hw/sd/ssi-sd.c | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
-> > > index 5763afeba0..9e2f13374a 100644
-> > > --- a/hw/sd/ssi-sd.c
-> > > +++ b/hw/sd/ssi-sd.c
-> > > @@ -83,7 +83,7 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev,=
- uint32_t val)
-> > >      ssi_sd_state *s =3D SSI_SD(dev);
-> > >
-> > >      /* Special case: allow CMD12 (STOP TRANSMISSION) while reading d=
-ata.  */
-> > > -    if (s->mode =3D=3D SSI_SD_DATA_READ && val =3D=3D 0x4d) {
-> > > +    if (s->mode =3D=3D SSI_SD_DATA_READ && val =3D=3D 0x4c) {
-> >
-> > Patch is correct, but I wonder if we couldn't improve using instead:
-> >
-> >      if (s->mode =3D=3D SSI_SD_DATA_READ && ((val & 0x3f) =3D=3D 12)) {
-> >
+> > With all these fixes and improvements, there is no way for the
+> > VMStateDescription to keep backward compatibility. We will have
+> > to bump up version ids.
 >
-> (val & 0x3f =3D=3D 12) isn't correct because it can catch values equal to
-> 0x7c or 0xfc.
+> Unfortunately this breaks bisectability (think about downstream
+> distributions cherry-picking patches individually).
+>
+> I don't think there is a problem increasing 2 -> 3 -> 4 -> 5
+> (Cc'ed David in case). Could you respin increasing the version
+> on each VMState change?
+>
 
-Sorry, wrong calculation. It should read:
+I definitely could be wrong, the reason I posted a single patch to
+upreve the version is that, I was under an impression that in each big
+release (like here 5.2.0 -> 6.0.0), the incompatibility version id
+should be bumped up once.
+It does not look correct to me that in a big release we bump up the
+version id for 10 times.
 
-It can catch values 0x0c, 0x8c, 0xcc.
+Since this is a series to fix issues in the ssi-sd, I don't think it's
+practical for downstream to just cherry-pick some commits while
+leaving some other commits there.
 
 Regards,
 Bin
