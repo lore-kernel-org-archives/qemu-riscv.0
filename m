@@ -1,71 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l3zQQ-0004zu-Mj
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Jan 2021 05:48:51 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56478)
+	id 1l45ry-0000J0-SL
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Jan 2021 12:41:42 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38764)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3zQN-0004xu-AL; Mon, 25 Jan 2021 05:48:47 -0500
-Received: from mail-yb1-xb35.google.com ([2607:f8b0:4864:20::b35]:41149)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1l45rx-0000Ip-Cf; Mon, 25 Jan 2021 12:41:41 -0500
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a]:43319)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l3zQK-00064d-Lq; Mon, 25 Jan 2021 05:48:46 -0500
-Received: by mail-yb1-xb35.google.com with SMTP id p185so12862104ybg.8;
- Mon, 25 Jan 2021 02:48:43 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1l45rw-0003cl-0n; Mon, 25 Jan 2021 12:41:41 -0500
+Received: by mail-ed1-x52a.google.com with SMTP id n6so16439524edt.10;
+ Mon, 25 Jan 2021 09:41:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=8JNZ2aNKgPd0EHCcouZDvQZGX/aNz8I3vbpjCMmsDn8=;
- b=eXeazLk7T+mY7nTcfEAZHGBu/FSGFZuk1a2CoGm9O0g3UzY1BBDgFvKW2mXcYzA+T4
- 0eUKyoqFPLSxphieXFVBVxkE2OZd89P0Zf6oXnwwtkPv9yXutFFQ/Qh1bAIPkj1ArfMm
- SZs6YgbbcvBab/fJstQRT0650C/Xd6C3EbPG6HJmY8wwv/9PqpvKHHcp30K20IiaCdom
- n0W2KNaRcRplbZuHzI0V0Wq5fIyHKIL3sZ58IQ1440kOOudQqhtrTGnWb6KMDND0oOAR
- /DND4PC7JK4gFo/tuWTyLdZw8DFLsoiX3+nzd49fTNNspSH2Nx2pd6dViBk9lmseoskG
- B3dw==
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=QwmQx7cK4Lz7cAzOAZ0mmWHJxRMt3hJP9Rlt3kRv+44=;
+ b=ssxxYNf9iYUImbukIv8hdc40nPMHSHgAqnZZELBEs6z0uLvMcOFlSvuWshHNOy5gMU
+ J1tVMsaWTKiFlzI0C0xAqhtcVcC1RFBVzji9CapsRGt3gUuMtJA4Gt02vAgHLY2ZPKSJ
+ q1MsJb5IOZGRuk3YDcXJ+QaaNSeXTHGRu7vI/PqyNycv40OUXMeko7nM3703Ws/8c+xX
+ ENXYL9nGyfeK7LAOHy4pT4piK1s91AC+5+jsTwty2LcByEgtGUc/2DphsjMdgub5yFys
+ w/Sx3tK9r0XB/WrVzE7Sos6STDXOyNuF8cwwBj8QAIgdXOdE+8VWE+Skm4uNsFOqwDZP
+ CxKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=8JNZ2aNKgPd0EHCcouZDvQZGX/aNz8I3vbpjCMmsDn8=;
- b=YKfvF9Lmg8HmHm3k23II5l5kWssUUzSyvlPw9fHXxunxo6WSnhZEDbBCk0C2OqYzie
- OoLjxcmquU6+bYbuKA2vIq5SFJEKdX0Sb6/fM8UgY1Q0O1u3vapoaRuSIormFtO3QB0e
- XbV7seG5gY1IXcvHliwyWJGTrIqdAqaB1HjaWKFUd1WT6ht+4B0MUTy5zfhjkfrWHYpq
- zkWfOTiL9J5scMPC7O6ccUrWSVVSgsToL/xze6n9zOkarB6b3i0R00QjHYUZJkpRNB6v
- aXppVVRU6QW7bZIve62Evk4KucjowVSp/SfaXx+J5WFg7r7YN2kFFFnvce/cIQ6iv9Q4
- kbyQ==
-X-Gm-Message-State: AOAM533SP/KC+eWRQnYZZa5+gDRstmOVP7KAIPaWJnAjcKkmGRwjNECS
- NMmG+TaID5ohFjItFKRrm49EySXkVfP2xGc9ZHE=
-X-Google-Smtp-Source: ABdhPJx23tDPxC5YYzsjbbZZvP1Vmx7LpoFCWYCZxMvtSD82HHHOUBV3k3mzKlBjSJC3uHpNTbiK/DAsV/KeUK+fQEI=
-X-Received: by 2002:a25:2041:: with SMTP id g62mr1106734ybg.152.1611571722623; 
- Mon, 25 Jan 2021 02:48:42 -0800 (PST)
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=QwmQx7cK4Lz7cAzOAZ0mmWHJxRMt3hJP9Rlt3kRv+44=;
+ b=Zx5ABwySGUmYNrkIl9eENagavl3iasolTNMHrxa9Bcy1MgxBZPdlOtlK1xP8ziAO3X
+ UK8kqJ6T8jbbzn7qtQTuvoS8kwknES+JgNYIHNtFUcZHXD42eRwTUsSDcDuE3O8UJkbN
+ elpe10i+gmUiI/f5cE6wUHFTOR+sT30RlrLSSq2mIgq1AX1e0GpzZlamFqpAHRlqhA3F
+ /cS12FlzKNpPcSK0sIMO1lK3Ho/jEpaVWrWSY5qqtQDjW5bMrD2NuVaCzsOG+LDe6CH3
+ TVHxdn1te8vQzDAbDfkQh8OzqjrzBdPI2hKEVARzH4PN3NV8Srn920dyM+uiOJHZowmj
+ zJ4g==
+X-Gm-Message-State: AOAM530jZAargnTq8TTBeAWkq8CMAcVw7WMIh3Vxvnn8d/NRxnHzdq8M
+ mx3qdcxLl+00htE3SwJcv5g=
+X-Google-Smtp-Source: ABdhPJyjNBCQGQoCMZft65zvsyUysp6pgy85u1ca+1/KO3LxwoIFQHjbMnwV3DtFafgMwULupLXs7g==
+X-Received: by 2002:a05:6402:438d:: with SMTP id
+ o13mr1388211edc.135.1611596497362; 
+ Mon, 25 Jan 2021 09:41:37 -0800 (PST)
+Received: from [192.168.1.36] (13.red-83-57-169.dynamicip.rima-tde.net.
+ [83.57.169.13])
+ by smtp.gmail.com with ESMTPSA id z13sm11052038edc.73.2021.01.25.09.41.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 25 Jan 2021 09:41:36 -0800 (PST)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH 1/4] hw/riscv: Drop 'struct MemmapEntry'
+To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>
+References: <20210122122958.12311-1-bmeng.cn@gmail.com>
+ <20210122122958.12311-2-bmeng.cn@gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <cb6cd18b-734a-9fa4-cce7-3b56ab53fddf@amsat.org>
+Date: Mon, 25 Jan 2021 18:41:35 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-References: <20210123104016.17485-1-bmeng.cn@gmail.com>
- <20210123104016.17485-19-bmeng.cn@gmail.com>
- <634d629a-999d-b1e2-28dc-f9b49f9918a7@amsat.org>
- <CAEUhbmVaeMeOcACyKg7q6dHVn+Pue7eKzu0RW7mGx5PQyVWg=g@mail.gmail.com>
- <20210125104106.GC2925@work-vm>
-In-Reply-To: <20210125104106.GC2925@work-vm>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 25 Jan 2021 18:48:31 +0800
-Message-ID: <CAEUhbmVKywZqhr0pPfQ99YoFtOJz3MAocqx7RugnG2r2dZMPwg@mail.gmail.com>
-Subject: Re: [PATCH v2 18/25] hw/sd: ssi-sd: Bump up version ids of
- VMStateDescription
-To: "Dr. David Alan Gilbert" <dgilbert@redhat.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Alistair Francis <alistair.francis@wdc.com>, Qemu-block <qemu-block@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b35;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb35.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+In-Reply-To: <20210122122958.12311-2-bmeng.cn@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-ed1-x52a.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
+X-Spam_bar: -
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -78,61 +84,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2021 10:48:47 -0000
+X-List-Received-Date: Mon, 25 Jan 2021 17:41:41 -0000
 
-On Mon, Jan 25, 2021 at 6:41 PM Dr. David Alan Gilbert
-<dgilbert@redhat.com> wrote:
->
-> * Bin Meng (bmeng.cn@gmail.com) wrote:
-> > On Mon, Jan 25, 2021 at 12:59 AM Philippe Mathieu-Daud=C3=A9 <f4bug@ams=
-at.org> wrote:
-> > >
-> > > On 1/23/21 11:40 AM, Bin Meng wrote:
-> > > > From: Bin Meng <bin.meng@windriver.com>
-> > > >
-> > > > With all these fixes and improvements, there is no way for the
-> > > > VMStateDescription to keep backward compatibility. We will have
-> > > > to bump up version ids.
-> > >
-> > > Unfortunately this breaks bisectability (think about downstream
-> > > distributions cherry-picking patches individually).
-> > >
-> > > I don't think there is a problem increasing 2 -> 3 -> 4 -> 5
-> > > (Cc'ed David in case). Could you respin increasing the version
-> > > on each VMState change?
-> > >
-> >
-> > I definitely could be wrong, the reason I posted a single patch to
-> > upreve the version is that, I was under an impression that in each big
-> > release (like here 5.2.0 -> 6.0.0), the incompatibility version id
-> > should be bumped up once.
-> > It does not look correct to me that in a big release we bump up the
-> > version id for 10 times.
->
-> I think I agree; I don't think we've ever done it incrementally like
-> that before.
->
+On 1/22/21 1:29 PM, Bin Meng wrote:
+> From: Bin Meng <bin.meng@windriver.com>
+> 
+> There is already a MemMapEntry type defined in hwaddr.h. Let's drop
+> the RISC-V defined `struct MemmapEntry` and use the existing one.
+> 
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> ---
+> 
+>  hw/riscv/microchip_pfsoc.c |  9 +++------
+>  hw/riscv/opentitan.c       |  9 +++------
+>  hw/riscv/sifive_e.c        |  9 +++------
+>  hw/riscv/sifive_u.c        | 11 ++++-------
+>  hw/riscv/spike.c           |  9 +++------
+>  hw/riscv/virt.c            |  9 +++------
+>  6 files changed, 19 insertions(+), 37 deletions(-)
 
-Thanks David.
-
-> It would only break bisectability if you were cross-version migrating
-> during the bisect which is rare.
->
-> > Since this is a series to fix issues in the ssi-sd, I don't think it's
-> > practical for downstream to just cherry-pick some commits while
-> > leaving some other commits there.
->
-> Never underestimate downstream :-)
-> However, please add a comment when you're doing incrimentals like this -
-> e.g. a TODO or something showing that it's unfinished and you need the
-> remaining patches so people don't do it accidentally.
->
-
-Sure, next time :)
-
-Philippe, I guess we will need to hold on your PR?
-http://patchwork.ozlabs.org/project/qemu-devel/list/?series=3D226135
-
-Regards,
-Bin
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
