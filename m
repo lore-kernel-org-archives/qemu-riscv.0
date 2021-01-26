@@ -1,59 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l4HOv-0000Gw-IO
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Jan 2021 01:00:29 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41668)
+	id 1l4HOx-0000LN-Gy
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Jan 2021 01:00:31 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41696)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l4HOt-0000EN-VY; Tue, 26 Jan 2021 01:00:27 -0500
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d]:37459)
+ id 1l4HOw-0000In-Cz; Tue, 26 Jan 2021 01:00:30 -0500
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:38819)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l4HOr-0001Lq-Ib; Tue, 26 Jan 2021 01:00:27 -0500
-Received: by mail-pf1-x42d.google.com with SMTP id 11so9882352pfu.4;
- Mon, 25 Jan 2021 22:00:24 -0800 (PST)
+ id 1l4HOu-0001Oi-DJ; Tue, 26 Jan 2021 01:00:30 -0500
+Received: by mail-pg1-x52b.google.com with SMTP id o16so1234982pgg.5;
+ Mon, 25 Jan 2021 22:00:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=PoNn/bFoDnh5efZd0mYKkDFkOeN43DFe/uwJ8wWwY4U=;
- b=pz3PAiqtr2IUdXQiUKcIYJ+Tb6G0CPqtyAGrODeSltj9iqvtb9eGPMIX9jJgKI+Y96
- Mw+f2mUcwHKyT1QM/S41B3wukXZ+s4dg4xo1XyL4Ac82s97ZIfs/1zX1RWvWh3yRe4i+
- n5Bx7Lr3xk62pTNvdbL/w58HLjhhZW7k8pLEYH9JcE26vRCfHoXTZygrAUIzqZGi/R0Q
- sKJq1rpzW9/WiaSuOQSCl+VxhDtTzAtC3p30LvEEnQ30kpBfcZl/mpVePCgFAU37Sa71
- mHC9s1dq21A9+Mh4sYde/bspbgzwlOTT9zYHJcOHHzAgB5S2AoPq16zsYLejHv30PdN/
- otZA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=lPgVdXOd8dKlKEB1hV4iW/elZmTi6Kdti2t1vuxXyCY=;
+ b=Kr9C7OR2d/F8dxYmk6VlFDwmz82/7516dde52C9GtQBFoWhRWivTbn8ggkXqu0M6DU
+ jMjpwZkPYcncT0LaVQYRXb2Vy12NdLQAby3Bee4DGiJ2ua2c19Hhu5s5IbjUhqZb1pYG
+ zQrvQCNUUIuBnolz/GqHYRrcDg7PHmyKzxWvN0ZKdPsAh8NAGlDzSpFbaAPP+H98tdBg
+ SuaJOHnmJLyBdsI0qIvjSLW2oqum1a7STX/vV2XW0jZu+Rxa02DZ3JwSjj0Pezn3vHLi
+ vBdDeQaUD0pPL+k1iHviaUlbHmogZ11hAaNIjBMS7VRrh5uuTDu8mN3uoJoxH2rE7eDa
+ DntA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=PoNn/bFoDnh5efZd0mYKkDFkOeN43DFe/uwJ8wWwY4U=;
- b=MMVKdVvmodsPsSB2hMfToA5wWV/rfnfEBScY/wpP8PcW8x/FlSIhhx6an3yMLcqwy4
- 5iM1UUOKlrVuqey15MufqFuW/WR3ckTKH/dRp4bHgy3nM0DfLPBNMqMF9XOkVcy2wqHq
- fUkWJlYNU3ac+IyYwedRpUIjEdX1hrSDxWB5WaQTSM6mk7k86IhSSZ8UMjD7PixYE0Oq
- RTaXIv4wBQXxzFh1xqtJdUcs+OZR+LDBZWNm0n68DKXrluWD8zh8wrpAAAQwajKL+2/a
- drCnyDPe8qWoNNr1i9RRL2RwF0a+xEF3dhVzAyoeL7BtsT62XWR5AAzEB7oUzix6tJ9D
- Z7+g==
-X-Gm-Message-State: AOAM533bUcifR2T0OHGdw0QNp9tQwDEHPKe/Wd/7ldYpv2DJ6O5DtQa3
- w55DwvEfZQJ64jB0Zj7KZTU=
-X-Google-Smtp-Source: ABdhPJw1kiVFWXpAPGD9yLYIUuhAXJ9mPMRhmpE5p9/nm++6/QbqmDzk3XovCCZrj5/4oQRTRg4Ixg==
-X-Received: by 2002:a63:1047:: with SMTP id 7mr4251302pgq.292.1611640823426;
- Mon, 25 Jan 2021 22:00:23 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=lPgVdXOd8dKlKEB1hV4iW/elZmTi6Kdti2t1vuxXyCY=;
+ b=oxQhh7Fcik3kGwz4j1bNPFFMrG+27cFu0J4YS0992Uh5Z5weaKIte1wqR0yTr0kRkg
+ eEhCc3Anun5iF7gIvXKN0zHshV5wC2uZr3aRmoPZilaw/epGF9Fy7c67uWkcz+jk5To7
+ imFDUEP67tBlCWq07K8SJi6uZhbAgMHh5c7YRmcbhBgmnOR9ptBaBvn6emUlvMrhhuO0
+ ePDUwLqwQx/UIbLisHSIrXk1E+0dAjFXuDnH0P8xFx6Ofw2MQeB77Sq1AdbtdeSNN84U
+ eQErf8rdNOLQafWKhRIJxLYHN1N3IYer8AEZAdF7d/QQPAesQSEWQBgCnF9xGDv+/pAJ
+ YUfg==
+X-Gm-Message-State: AOAM530CwJpUFge5QVX4zJgum4aMWZkPM45SW8JN7fomg5dTwH1u9Cym
+ lxxdkdjrIXfCpohX6TaDeVM=
+X-Google-Smtp-Source: ABdhPJxLLezv+bV5vWwozjpqqjCZOWQrvviS4iRNAFBQ48L79w05FZhZ5EaAk5uZSq5Q4WkeUP2sWw==
+X-Received: by 2002:a62:7694:0:b029:1b9:8d43:95af with SMTP id
+ r142-20020a6276940000b02901b98d4395afmr3952293pfc.2.1611640826616; 
+ Mon, 25 Jan 2021 22:00:26 -0800 (PST)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id k10sm12471076pfk.0.2021.01.25.22.00.18
+ by smtp.gmail.com with ESMTPSA id k10sm12471076pfk.0.2021.01.25.22.00.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Jan 2021 22:00:22 -0800 (PST)
+ Mon, 25 Jan 2021 22:00:26 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v3 0/9] hw/riscv: sifive_u: Add missing SPI support
-Date: Tue, 26 Jan 2021 13:59:58 +0800
-Message-Id: <20210126060007.12904-1-bmeng.cn@gmail.com>
+Subject: [PATCH v3 1/9] hw/block: m25p80: Add ISSI SPI flash support
+Date: Tue, 26 Jan 2021 13:59:59 +0800
+Message-Id: <20210126060007.12904-2-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210126060007.12904-1-bmeng.cn@gmail.com>
+References: <20210126060007.12904-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x42d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -73,82 +76,138 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jan 2021 06:00:28 -0000
+X-List-Received-Date: Tue, 26 Jan 2021 06:00:30 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-This adds the missing SPI support to the `sifive_u` machine in the QEMU
-mainline. With this series, upstream U-Boot for the SiFive HiFive Unleashed
-board can boot on QEMU `sifive_u` out of the box. This allows users to
-develop and test the recommended RISC-V boot flow with a real world use
-case: ZSBL (in QEMU) loads U-Boot SPL from SD card or SPI flash to L2LIM,
-then U-Boot SPL loads the payload from SD card or SPI flash that is a
-combination of OpenSBI fw_dynamic firmware and U-Boot proper.
+This adds the ISSI SPI flash support. The number of dummy cycles in
+fast read, fast read dual output and fast read quad output commands
+is currently using the default 8. Likewise, the same default value
+is used for fast read dual/quad I/O command. Per the datasheet [1],
+the number of dummy cycles is configurable, but this is not modeled
+at present.
 
-The m25p80 model is updated to support ISSI flash series. A bunch of
-ssi-sd issues are fixed, and writing to SD card in SPI mode is supported.
+For flash whose size is larger than 16 MiB, the sequence of 3-byte
+address along with EXTADD bit in the bank address register (BAR) is
+not supported. We assume that guest software always uses op codes
+with 4-byte address sequence. Fortunately, this is the case for both
+U-Boot and Linux spi-nor drivers.
 
-Note the ssi-sd changes are split out of this series in v3, so that all
-patches in v3 can go via Alistair's riscv tree.
+QPI (Quad Peripheral Interface) that supports 2-cycle instruction
+has different default values for dummy cycles of fast read family
+commands, and is unsupported at the time being.
 
-Part of the ssi-sd changes are now in qemu/master. The remaining patches
-are http://patchwork.ozlabs.org/project/qemu-devel/list/?series=226136
-that will go via Philippe's sd tree.
+[1] http://www.issi.com/WW/pdf/25LP-WP256.pdf
 
-reST documentation for RISC-V is added. Currently only `sifive_u`
-machine is documented, but more to come.
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Changes in v3:
-- Simplify flush txfifo logic
-- Convert sifive_u.rst from UTF-8 to ASCII
+---
+
+(no changes since v2)
 
 Changes in v2:
 - Mention QPI (Quad Peripheral Interface) mode is not supported
-- Log guest error when trying to write reserved registers
-- Log guest error when trying to access out-of-bounds registers
-- log guest error when writing to reserved bits for chip select
-  registers and watermark registers
-- Log unimplemented warning when trying to write direct-map flash
-  interface registers
-- Add test tx fifo full logic in sifive_spi_read(), hence remove
-  setting the tx fifo full flag in sifive_spi_write().
-- Populate register with their default value
-- Correct the "connects" typo in the commit message
-- Mention in the commit message that <reg> property does not populate
-  the second group which represents the memory mapped address of the
-  SPI flash
-- Correct the "connects" typo in the commit message
-- Correct several typos in sifive_u.rst
-- Update doc to mention U-Boot v2021.01
 
-Bin Meng (9):
-  hw/block: m25p80: Add ISSI SPI flash support
-  hw/block: m25p80: Add various ISSI flash information
-  hw/ssi: Add SiFive SPI controller support
-  hw/riscv: sifive_u: Add QSPI0 controller and connect a flash
-  hw/riscv: sifive_u: Add QSPI2 controller and connect an SD card
-  hw/riscv: sifive_u: Change SIFIVE_U_GEM_IRQ to decimal value
-  docs/system: Sort targets in alphabetical order
-  docs/system: Add RISC-V documentation
-  docs/system: riscv: Add documentation for sifive_u machine
+ hw/block/m25p80.c | 44 +++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 43 insertions(+), 1 deletion(-)
 
- docs/system/riscv/sifive_u.rst | 336 +++++++++++++++++++++++++++++++
- docs/system/target-riscv.rst   |  72 +++++++
- docs/system/targets.rst        |  20 +-
- include/hw/riscv/sifive_u.h    |   9 +-
- include/hw/ssi/sifive_spi.h    |  47 +++++
- hw/block/m25p80.c              |  57 +++++-
- hw/riscv/sifive_u.c            |  91 +++++++++
- hw/ssi/sifive_spi.c            | 358 +++++++++++++++++++++++++++++++++
- hw/riscv/Kconfig               |   3 +
- hw/ssi/Kconfig                 |   4 +
- hw/ssi/meson.build             |   1 +
- 11 files changed, 989 insertions(+), 9 deletions(-)
- create mode 100644 docs/system/riscv/sifive_u.rst
- create mode 100644 docs/system/target-riscv.rst
- create mode 100644 include/hw/ssi/sifive_spi.h
- create mode 100644 hw/ssi/sifive_spi.c
-
+diff --git a/hw/block/m25p80.c b/hw/block/m25p80.c
+index b744a58d1c..217c130f56 100644
+--- a/hw/block/m25p80.c
++++ b/hw/block/m25p80.c
+@@ -412,6 +412,7 @@ typedef enum {
+     MAN_NUMONYX,
+     MAN_WINBOND,
+     MAN_SST,
++    MAN_ISSI,
+     MAN_GENERIC,
+ } Manufacturer;
+ 
+@@ -487,6 +488,8 @@ static inline Manufacturer get_man(Flash *s)
+         return MAN_MACRONIX;
+     case 0xBF:
+         return MAN_SST;
++    case 0x9D:
++        return MAN_ISSI;
+     default:
+         return MAN_GENERIC;
+     }
+@@ -706,6 +709,9 @@ static void complete_collecting_data(Flash *s)
+         case MAN_SPANSION:
+             s->quad_enable = !!(s->data[1] & 0x02);
+             break;
++        case MAN_ISSI:
++            s->quad_enable = extract32(s->data[0], 6, 1);
++            break;
+         case MAN_MACRONIX:
+             s->quad_enable = extract32(s->data[0], 6, 1);
+             if (s->len > 1) {
+@@ -895,6 +901,19 @@ static void decode_fast_read_cmd(Flash *s)
+                                     SPANSION_DUMMY_CLK_LEN
+                                     );
+         break;
++    case MAN_ISSI:
++        /*
++         * The Fast Read instruction code is followed by address bytes and
++         * dummy cycles, transmitted via the SI line.
++         *
++         * The number of dummy cycles is configurable but this is currently
++         * unmodeled, hence the default value 8 is used.
++         *
++         * QPI (Quad Peripheral Interface) mode has different default value
++         * of dummy cycles, but this is unsupported at the time being.
++         */
++        s->needed_bytes += 1;
++        break;
+     default:
+         break;
+     }
+@@ -934,6 +953,16 @@ static void decode_dio_read_cmd(Flash *s)
+             break;
+         }
+         break;
++    case MAN_ISSI:
++        /*
++         * The Fast Read Dual I/O instruction code is followed by address bytes
++         * and dummy cycles, transmitted via the IO1 and IO0 line.
++         *
++         * The number of dummy cycles is configurable but this is currently
++         * unmodeled, hence the default value 4 is used.
++         */
++        s->needed_bytes += 1;
++        break;
+     default:
+         break;
+     }
+@@ -974,6 +1003,19 @@ static void decode_qio_read_cmd(Flash *s)
+             break;
+         }
+         break;
++    case MAN_ISSI:
++        /*
++         * The Fast Read Quad I/O instruction code is followed by address bytes
++         * and dummy cycles, transmitted via the IO3, IO2, IO1 and IO0 line.
++         *
++         * The number of dummy cycles is configurable but this is currently
++         * unmodeled, hence the default value 6 is used.
++         *
++         * QPI (Quad Peripheral Interface) mode has different default value
++         * of dummy cycles, but this is unsupported at the time being.
++         */
++        s->needed_bytes += 3;
++        break;
+     default:
+         break;
+     }
+@@ -1132,7 +1174,7 @@ static void decode_new_cmd(Flash *s, uint32_t value)
+ 
+     case RDSR:
+         s->data[0] = (!!s->write_enable) << 1;
+-        if (get_man(s) == MAN_MACRONIX) {
++        if (get_man(s) == MAN_MACRONIX || get_man(s) == MAN_ISSI) {
+             s->data[0] |= (!!s->quad_enable) << 6;
+         }
+         if (get_man(s) == MAN_SST) {
 -- 
 2.25.1
 
