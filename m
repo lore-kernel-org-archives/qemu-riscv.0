@@ -1,72 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l4J1F-0008OF-5W
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Jan 2021 02:44:13 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54250)
+	id 1l4J2B-0000xF-VS
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Jan 2021 02:45:07 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54404)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1l4J1C-0008Mr-3w
- for qemu-riscv@nongnu.org; Tue, 26 Jan 2021 02:44:06 -0500
-Received: from mail-oi1-x236.google.com ([2607:f8b0:4864:20::236]:40019)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1l4J25-0000tE-Vp; Tue, 26 Jan 2021 02:45:05 -0500
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a]:34312)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1l4J18-0001xR-9n
- for qemu-riscv@nongnu.org; Tue, 26 Jan 2021 02:44:05 -0500
-Received: by mail-oi1-x236.google.com with SMTP id p5so17573918oif.7
- for <qemu-riscv@nongnu.org>; Mon, 25 Jan 2021 23:44:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=etSaseQMnqDMoqnBOr4eNun84jxkl2tJf6RFDGSVsDE=;
- b=BWauU4joctdv1idWnr8KQgSD5PDKOYzmpz+ocniv3E33NhBjkEtw9sRxlyFEhtMrdc
- +PZBUUTvXSMHUp4Utk0dPBmlAF4wBvBzMenjtrPHDWW5GgSeZohu3QYcqweNzosUPrSw
- F1XhTonFWiaqqS4lBYGttizl9w56ZERrAh4PUXS3Go6AFLbFNG6FrkiCFn1uEXdZxm8t
- H7codkdwKsdj9i3WKdIaWqOZxLs7rt90Y48otDQxfd0u1oJ8IHr4dhSvaQTCY9lIolzm
- Yjg3Z95J/iAVLQbJeazd2kgmPffbIGgQ7qvt8eT6e/g48wqewEgu5J44LJQY+asb2gOh
- A0yw==
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1l4J24-0002D1-9i; Tue, 26 Jan 2021 02:45:01 -0500
+Received: by mail-ed1-x52a.google.com with SMTP id d22so18600850edy.1;
+ Mon, 25 Jan 2021 23:44:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=R0iR+/yHx68i0iee50nfClSuj2+Oehbx9Uj95gCYT+I=;
+ b=SbbUT39cuxBACJbfHbZRzpqHyaSyJ+29OoF9L0fa8CWtg9Q4jm1bfsYuxv8XIb8q4E
+ gae0JCdB4VNgih4MIP5hM/f7CNNyqsUAYxm/aC3hPHuuN7yLecm1USRddT+50OgHYkux
+ 9nY9we9ioRbSLBx6Zvg20ySy4wmdWF2nvJAEfq6S4qGJykRAZDkhLKyEragHRqYQFi/O
+ Tugt8Gjat7POsSejGTuQSGdxMCBcyL7wC1TMiZ0wZOANQKGNCasA6nUKj4EBweJD02gj
+ 8E3o68cO6WVPZFsjzIFHDuWlYEVIgyjmD9UeFAo1mxuBDQoFZgWmi9+E6/YN80A25z6h
+ a+gA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=etSaseQMnqDMoqnBOr4eNun84jxkl2tJf6RFDGSVsDE=;
- b=AXwI1rkVJt+qWDbAnU8MwG4b08gsEL/FWKb8PZkKh+Q28PUYkihFtrn+xVluK4do6C
- 89nXlrcGW3QbZ+9+OVg/ChpaUs8kMB/5u1HQMcXNhB1PMLmcMtYd7BoFDycRDEEBFdm0
- ffQdBSD1RdWuRGn6ybOn/9hFU154BO71XXT+SNdwv4h7Dvuuy4CrsIUnwPw8bPppIxsi
- Oqsb34yIYt93HY50zYo1zx8e65z7S3VmtMhMN6lun2hDSJjAaWePedsSA8mkGSZKW4Dl
- xKy/yFfdWpfdThs8c8C3m5yHrJqa+2Kvi4+52V6t8YHN6G+GGKYGJdhMOa3i7wdVUGCC
- 3zOQ==
-X-Gm-Message-State: AOAM5333Hj2xzD1WLd+ygv3rk5teUk4uGvH+lGA7gS0syO+mEzSlDzZ7
- yywRL09cGdOARzDykSohx5DjXeWIhlmhILQ4ij2BiA==
-X-Google-Smtp-Source: ABdhPJypBS/sMKo3wE+ABNI3746YCzZFiHonFo/Duqb394mW3WOsj15jbRr4pAPf5pgwrTrPCFtJDXAYs8qpk/S5W/A=
-X-Received: by 2002:aca:5088:: with SMTP id e130mr2398098oib.78.1611647040958; 
- Mon, 25 Jan 2021 23:44:00 -0800 (PST)
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=R0iR+/yHx68i0iee50nfClSuj2+Oehbx9Uj95gCYT+I=;
+ b=H3z3VJXmr9ZKqPd+fXSnLSIjBl6xv2a9cTlGmPK0HtZ157peuUCeylMnzKP77AbXzD
+ xNg15/j//FP5WaOP3ehxCF69IXJL+OwlzZKZlqNe4hHMyvSsUqVzd//QdnlJT+4nCZR3
+ WM2/g9Ib4+vjkdaHvWzSGCXAyGtY1S8gMjFEw9xqs+4MJb3Vk5eovzPVxGblJxhE2Rnk
+ FunzOfMqdvPDVOi2CqUEBiGuRf0yquPBqVwlvwgBNHN43yZkQLjyrxe827FMMgstEmfm
+ l/cWAKBDaYlys6VcyQ0g6Z91NBcx7zZ5/6UDt0ZI7wjjB9rESsHcprAKBjfXaks7A4rG
+ WE6A==
+X-Gm-Message-State: AOAM533RdnoK3OS1Pgp5/aAfFSRZoYJUuHj6K7SH05sLjylZem55tyb5
+ kggNfIF9RXjJfM/fO1q0PTM=
+X-Google-Smtp-Source: ABdhPJzU798haAkxHHfWvL/3aliIEvi5F/b3DB6jOrj19WTDAmk6FXwZeYhg0AYBBvRvpSXHnyycdA==
+X-Received: by 2002:a05:6402:215:: with SMTP id
+ t21mr3527235edv.363.1611647097798; 
+ Mon, 25 Jan 2021 23:44:57 -0800 (PST)
+Received: from [192.168.1.36] (13.red-83-57-169.dynamicip.rima-tde.net.
+ [83.57.169.13])
+ by smtp.gmail.com with ESMTPSA id a11sm11882119edt.26.2021.01.25.23.44.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 25 Jan 2021 23:44:56 -0800 (PST)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH v2 06/25] util: Add CRC16 (CCITT) calculation routines
+To: Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>
+Cc: qemu-riscv@nongnu.org, qemu-block@nongnu.org,
+ Bin Meng <bin.meng@windriver.com>, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+References: <20210123104016.17485-1-bmeng.cn@gmail.com>
+ <20210123104016.17485-7-bmeng.cn@gmail.com>
+ <b9c150df-00e4-c785-1e89-dc135a51f4ac@amsat.org>
+ <2927f234-a9d0-8fd8-c99e-b858aed1287c@linaro.org>
+ <a87dbd17-b6cb-ae0f-10a8-9617c49a807f@amsat.org>
+ <21456d3c-559e-3ea6-bc5e-2abcfa088da0@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <94d4b459-61e5-a65a-becb-955500c8da37@amsat.org>
+Date: Tue, 26 Jan 2021 08:44:55 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-References: <20210112093950.17530-1-frank.chang@sifive.com>
- <20210112093950.17530-69-frank.chang@sifive.com>
- <CAKmqyKM-XPcGMo0Z0549ojPSKqCbW3bq4+77JnzV5WQGS2Q3Fg@mail.gmail.com>
-In-Reply-To: <CAKmqyKM-XPcGMo0Z0549ojPSKqCbW3bq4+77JnzV5WQGS2Q3Fg@mail.gmail.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Tue, 26 Jan 2021 15:43:49 +0800
-Message-ID: <CAE_xrPh+Vi97vRPo_wh78F+YRGxKGH0G=Bm3K7cp1t+s87PqCQ@mail.gmail.com>
-Subject: Re: [PATCH v6 68/72] target/riscv: gdb: modify gdb csr xml file to
- align with csr register map
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Hsiangkai Wang <kai.wang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Content-Type: multipart/alternative; boundary="000000000000614ff605b9c8d16c"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::236;
- envelope-from=frank.chang@sifive.com; helo=mail-oi1-x236.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+In-Reply-To: <21456d3c-559e-3ea6-bc5e-2abcfa088da0@linaro.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-ed1-x52a.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
+X-Spam_bar: -
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,318 +90,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jan 2021 07:44:06 -0000
+X-List-Received-Date: Tue, 26 Jan 2021 07:45:06 -0000
 
---000000000000614ff605b9c8d16c
-Content-Type: text/plain; charset="UTF-8"
+On 1/24/21 10:41 PM, Richard Henderson wrote:
+> On 1/24/21 10:24 AM, Philippe Mathieu-Daudé wrote:
+>> On 1/24/21 9:07 PM, Richard Henderson wrote:
+>>> Doesn't this get put in libutil, where it is only pulled from the archive when
+>>> needed?  Also, libutil is built once, not per-target.
+>>
+>> Hmm I just sent a pull request with this change squashed in.
+>> Should I cancel it?
+> 
+> I guess not.
+> 
+>> My view is we don't install libqemuutil.a anywhere, so why overload
+>> building unused objects when some configuration don't need it?
+> 
+> My view is that util/meson.build should not be overly complicated with
+> conditionals.
 
-On Tue, Jan 26, 2021 at 7:54 AM Alistair Francis <alistair23@gmail.com>
-wrote:
+Well I do see an impact when building on slow hosts.
 
-> On Tue, Jan 12, 2021 at 2:50 AM <frank.chang@sifive.com> wrote:
-> >
-> > From: Hsiangkai Wang <kai.wang@sifive.com>
-> >
-> > Signed-off-by: Hsiangkai Wang <kai.wang@sifive.com>
-> > Acked-by: Richard Henderson <richard.henderson@linaro.org>
-> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
->
-> This patch won't apply any more, we have removed the hardcoded GDB
-> register list.
->
-> Alistair
->
+> If we were building objects per-target, that would be one thing.  If we were
+> doing --whole-archive, and including unused code in the executables, that would
+> be another thing.  But otherwise...
 
-Okay, I will update it in my next patchset.
+I understand your position :)
 
 Thanks,
-Frank Chang
 
-
->
-> > ---
-> >  gdb-xml/riscv-32bit-csr.xml | 11 ++++++-----
-> >  gdb-xml/riscv-64bit-csr.xml | 11 ++++++-----
-> >  target/riscv/gdbstub.c      |  4 ++--
-> >  3 files changed, 14 insertions(+), 12 deletions(-)
-> >
-> > diff --git a/gdb-xml/riscv-32bit-csr.xml b/gdb-xml/riscv-32bit-csr.xml
-> > index da1bf19e2f4..3d2031da7dc 100644
-> > --- a/gdb-xml/riscv-32bit-csr.xml
-> > +++ b/gdb-xml/riscv-32bit-csr.xml
-> > @@ -110,6 +110,8 @@
-> >    <reg name="mcause" bitsize="32"/>
-> >    <reg name="mtval" bitsize="32"/>
-> >    <reg name="mip" bitsize="32"/>
-> > +  <reg name="mtinst" bitsize="32"/>
-> > +  <reg name="mtval2" bitsize="32"/>
-> >    <reg name="pmpcfg0" bitsize="32"/>
-> >    <reg name="pmpcfg1" bitsize="32"/>
-> >    <reg name="pmpcfg2" bitsize="32"/>
-> > @@ -232,12 +234,11 @@
-> >    <reg name="hedeleg" bitsize="32"/>
-> >    <reg name="hideleg" bitsize="32"/>
-> >    <reg name="hie" bitsize="32"/>
-> > -  <reg name="htvec" bitsize="32"/>
-> > -  <reg name="hscratch" bitsize="32"/>
-> > -  <reg name="hepc" bitsize="32"/>
-> > -  <reg name="hcause" bitsize="32"/>
-> > -  <reg name="hbadaddr" bitsize="32"/>
-> > +  <reg name="hcounteren" bitsize="32"/>
-> > +  <reg name="htval" bitsize="32"/>
-> >    <reg name="hip" bitsize="32"/>
-> > +  <reg name="htinst" bitsize="32"/>
-> > +  <reg name="hgatp" bitsize="32"/>
-> >    <reg name="mbase" bitsize="32"/>
-> >    <reg name="mbound" bitsize="32"/>
-> >    <reg name="mibase" bitsize="32"/>
-> > diff --git a/gdb-xml/riscv-64bit-csr.xml b/gdb-xml/riscv-64bit-csr.xml
-> > index 6aa4bed9f50..90394562930 100644
-> > --- a/gdb-xml/riscv-64bit-csr.xml
-> > +++ b/gdb-xml/riscv-64bit-csr.xml
-> > @@ -110,6 +110,8 @@
-> >    <reg name="mcause" bitsize="64"/>
-> >    <reg name="mtval" bitsize="64"/>
-> >    <reg name="mip" bitsize="64"/>
-> > +  <reg name="mtinst" bitsize="64"/>
-> > +  <reg name="mtval2" bitsize="64"/>
-> >    <reg name="pmpcfg0" bitsize="64"/>
-> >    <reg name="pmpcfg1" bitsize="64"/>
-> >    <reg name="pmpcfg2" bitsize="64"/>
-> > @@ -232,12 +234,11 @@
-> >    <reg name="hedeleg" bitsize="64"/>
-> >    <reg name="hideleg" bitsize="64"/>
-> >    <reg name="hie" bitsize="64"/>
-> > -  <reg name="htvec" bitsize="64"/>
-> > -  <reg name="hscratch" bitsize="64"/>
-> > -  <reg name="hepc" bitsize="64"/>
-> > -  <reg name="hcause" bitsize="64"/>
-> > -  <reg name="hbadaddr" bitsize="64"/>
-> > +  <reg name="hcounteren" bitsize="64"/>
-> > +  <reg name="htval" bitsize="64"/>
-> >    <reg name="hip" bitsize="64"/>
-> > +  <reg name="htinst" bitsize="64"/>
-> > +  <reg name="hgatp" bitsize="64"/>
-> >    <reg name="mbase" bitsize="64"/>
-> >    <reg name="mbound" bitsize="64"/>
-> >    <reg name="mibase" bitsize="64"/>
-> > diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> > index eba12a86f2e..f7c5212e274 100644
-> > --- a/target/riscv/gdbstub.c
-> > +++ b/target/riscv/gdbstub.c
-> > @@ -418,13 +418,13 @@ void
-> riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-> >      }
-> >  #if defined(TARGET_RISCV32)
-> >      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-> > -                             240, "riscv-32bit-csr.xml", 0);
-> > +                             241, "riscv-32bit-csr.xml", 0);
-> >
-> >      gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
-> riscv_gdb_set_virtual,
-> >                               1, "riscv-32bit-virtual.xml", 0);
-> >  #elif defined(TARGET_RISCV64)
-> >      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-> > -                             240, "riscv-64bit-csr.xml", 0);
-> > +                             241, "riscv-64bit-csr.xml", 0);
-> >
-> >      gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
-> riscv_gdb_set_virtual,
-> >                               1, "riscv-64bit-virtual.xml", 0);
-> > --
-> > 2.17.1
-> >
-> >
->
-
---000000000000614ff605b9c8d16c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Tue, Jan 26, 2021 at 7:54 AM Alistair =
-Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a=
->&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail=
-_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
-,204);padding-left:1ex">On Tue, Jan 12, 2021 at 2:50 AM &lt;<a href=3D"mail=
-to:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a>&gt;=
- wrote:<br>
-&gt;<br>
-&gt; From: Hsiangkai Wang &lt;<a href=3D"mailto:kai.wang@sifive.com" target=
-=3D"_blank">kai.wang@sifive.com</a>&gt;<br>
-&gt;<br>
-&gt; Signed-off-by: Hsiangkai Wang &lt;<a href=3D"mailto:kai.wang@sifive.co=
-m" target=3D"_blank">kai.wang@sifive.com</a>&gt;<br>
-&gt; Acked-by: Richard Henderson &lt;<a href=3D"mailto:richard.henderson@li=
-naro.org" target=3D"_blank">richard.henderson@linaro.org</a>&gt;<br>
-&gt; Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.co=
-m" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-<br>
-This patch won&#39;t apply any more, we have removed the hardcoded GDB<br>
-register list.<br>
-<br>
-Alistair<br></blockquote><div><br></div><div>Okay, I will update it in my n=
-ext patchset.</div><div><br></div><div>Thanks,</div><div>Frank Chang</div><=
-div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
-px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-&gt; ---<br>
-&gt;=C2=A0 gdb-xml/riscv-32bit-csr.xml | 11 ++++++-----<br>
-&gt;=C2=A0 gdb-xml/riscv-64bit-csr.xml | 11 ++++++-----<br>
-&gt;=C2=A0 target/riscv/gdbstub.c=C2=A0 =C2=A0 =C2=A0 |=C2=A0 4 ++--<br>
-&gt;=C2=A0 3 files changed, 14 insertions(+), 12 deletions(-)<br>
-&gt;<br>
-&gt; diff --git a/gdb-xml/riscv-32bit-csr.xml b/gdb-xml/riscv-32bit-csr.xml=
-<br>
-&gt; index da1bf19e2f4..3d2031da7dc 100644<br>
-&gt; --- a/gdb-xml/riscv-32bit-csr.xml<br>
-&gt; +++ b/gdb-xml/riscv-32bit-csr.xml<br>
-&gt; @@ -110,6 +110,8 @@<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mcause&quot; bitsize=3D&quot;32&quot=
-;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mtval&quot; bitsize=3D&quot;32&quot;=
-/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mip&quot; bitsize=3D&quot;32&quot;/&=
-gt;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;mtinst&quot; bitsize=3D&quot;32&quot;/&gt=
-;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;mtval2&quot; bitsize=3D&quot;32&quot;/&gt=
-;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;pmpcfg0&quot; bitsize=3D&quot;32&quo=
-t;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;pmpcfg1&quot; bitsize=3D&quot;32&quo=
-t;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;pmpcfg2&quot; bitsize=3D&quot;32&quo=
-t;/&gt;<br>
-&gt; @@ -232,12 +234,11 @@<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;hedeleg&quot; bitsize=3D&quot;32&quo=
-t;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;hideleg&quot; bitsize=3D&quot;32&quo=
-t;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;hie&quot; bitsize=3D&quot;32&quot;/&=
-gt;<br>
-&gt; -=C2=A0 &lt;reg name=3D&quot;htvec&quot; bitsize=3D&quot;32&quot;/&gt;=
-<br>
-&gt; -=C2=A0 &lt;reg name=3D&quot;hscratch&quot; bitsize=3D&quot;32&quot;/&=
-gt;<br>
-&gt; -=C2=A0 &lt;reg name=3D&quot;hepc&quot; bitsize=3D&quot;32&quot;/&gt;<=
-br>
-&gt; -=C2=A0 &lt;reg name=3D&quot;hcause&quot; bitsize=3D&quot;32&quot;/&gt=
-;<br>
-&gt; -=C2=A0 &lt;reg name=3D&quot;hbadaddr&quot; bitsize=3D&quot;32&quot;/&=
-gt;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;hcounteren&quot; bitsize=3D&quot;32&quot;=
-/&gt;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;htval&quot; bitsize=3D&quot;32&quot;/&gt;=
-<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;hip&quot; bitsize=3D&quot;32&quot;/&=
-gt;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;htinst&quot; bitsize=3D&quot;32&quot;/&gt=
-;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;hgatp&quot; bitsize=3D&quot;32&quot;/&gt;=
-<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mbase&quot; bitsize=3D&quot;32&quot;=
-/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mbound&quot; bitsize=3D&quot;32&quot=
-;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mibase&quot; bitsize=3D&quot;32&quot=
-;/&gt;<br>
-&gt; diff --git a/gdb-xml/riscv-64bit-csr.xml b/gdb-xml/riscv-64bit-csr.xml=
-<br>
-&gt; index 6aa4bed9f50..90394562930 100644<br>
-&gt; --- a/gdb-xml/riscv-64bit-csr.xml<br>
-&gt; +++ b/gdb-xml/riscv-64bit-csr.xml<br>
-&gt; @@ -110,6 +110,8 @@<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mcause&quot; bitsize=3D&quot;64&quot=
-;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mtval&quot; bitsize=3D&quot;64&quot;=
-/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mip&quot; bitsize=3D&quot;64&quot;/&=
-gt;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;mtinst&quot; bitsize=3D&quot;64&quot;/&gt=
-;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;mtval2&quot; bitsize=3D&quot;64&quot;/&gt=
-;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;pmpcfg0&quot; bitsize=3D&quot;64&quo=
-t;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;pmpcfg1&quot; bitsize=3D&quot;64&quo=
-t;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;pmpcfg2&quot; bitsize=3D&quot;64&quo=
-t;/&gt;<br>
-&gt; @@ -232,12 +234,11 @@<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;hedeleg&quot; bitsize=3D&quot;64&quo=
-t;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;hideleg&quot; bitsize=3D&quot;64&quo=
-t;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;hie&quot; bitsize=3D&quot;64&quot;/&=
-gt;<br>
-&gt; -=C2=A0 &lt;reg name=3D&quot;htvec&quot; bitsize=3D&quot;64&quot;/&gt;=
-<br>
-&gt; -=C2=A0 &lt;reg name=3D&quot;hscratch&quot; bitsize=3D&quot;64&quot;/&=
-gt;<br>
-&gt; -=C2=A0 &lt;reg name=3D&quot;hepc&quot; bitsize=3D&quot;64&quot;/&gt;<=
-br>
-&gt; -=C2=A0 &lt;reg name=3D&quot;hcause&quot; bitsize=3D&quot;64&quot;/&gt=
-;<br>
-&gt; -=C2=A0 &lt;reg name=3D&quot;hbadaddr&quot; bitsize=3D&quot;64&quot;/&=
-gt;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;hcounteren&quot; bitsize=3D&quot;64&quot;=
-/&gt;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;htval&quot; bitsize=3D&quot;64&quot;/&gt;=
-<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;hip&quot; bitsize=3D&quot;64&quot;/&=
-gt;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;htinst&quot; bitsize=3D&quot;64&quot;/&gt=
-;<br>
-&gt; +=C2=A0 &lt;reg name=3D&quot;hgatp&quot; bitsize=3D&quot;64&quot;/&gt;=
-<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mbase&quot; bitsize=3D&quot;64&quot;=
-/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mbound&quot; bitsize=3D&quot;64&quot=
-;/&gt;<br>
-&gt;=C2=A0 =C2=A0 &lt;reg name=3D&quot;mibase&quot; bitsize=3D&quot;64&quot=
-;/&gt;<br>
-&gt; diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c<br>
-&gt; index eba12a86f2e..f7c5212e274 100644<br>
-&gt; --- a/target/riscv/gdbstub.c<br>
-&gt; +++ b/target/riscv/gdbstub.c<br>
-&gt; @@ -418,13 +418,13 @@ void riscv_cpu_register_gdb_regs_for_features(CP=
-UState *cs)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;=C2=A0 #if defined(TARGET_RISCV32)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 gdb_register_coprocessor(cs, riscv_gdb_get_csr, ri=
-scv_gdb_set_csr,<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0240, &quot;riscv-32bit-csr.xml&quot;, 0)=
-;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0241, &quot;riscv-32bit-csr.xml&quot;, 0)=
-;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 gdb_register_coprocessor(cs, riscv_gdb_get_virtual=
-, riscv_gdb_set_virtual,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01, &quot;riscv-32bit-virtual.xml&q=
-uot;, 0);<br>
-&gt;=C2=A0 #elif defined(TARGET_RISCV64)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 gdb_register_coprocessor(cs, riscv_gdb_get_csr, ri=
-scv_gdb_set_csr,<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0240, &quot;riscv-64bit-csr.xml&quot;, 0)=
-;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0241, &quot;riscv-64bit-csr.xml&quot;, 0)=
-;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 gdb_register_coprocessor(cs, riscv_gdb_get_virtual=
-, riscv_gdb_set_virtual,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01, &quot;riscv-64bit-virtual.xml&q=
-uot;, 0);<br>
-&gt; --<br>
-&gt; 2.17.1<br>
-&gt;<br>
-&gt;<br>
-</blockquote></div></div>
-
---000000000000614ff605b9c8d16c--
+Phil.
 
