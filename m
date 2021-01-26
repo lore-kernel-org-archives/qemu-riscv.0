@@ -1,68 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l4Bgd-0002Qf-OT
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Jan 2021 18:54:23 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46664)
+	id 1l4HOv-0000Gw-IO
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Jan 2021 01:00:29 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41668)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l4Bgb-0002PS-Sv; Mon, 25 Jan 2021 18:54:21 -0500
-Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:38047)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1l4HOt-0000EN-VY; Tue, 26 Jan 2021 01:00:27 -0500
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d]:37459)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l4BgZ-0003m0-Fz; Mon, 25 Jan 2021 18:54:21 -0500
-Received: by mail-io1-xd2d.google.com with SMTP id e22so30267932iom.5;
- Mon, 25 Jan 2021 15:54:18 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1l4HOr-0001Lq-Ib; Tue, 26 Jan 2021 01:00:27 -0500
+Received: by mail-pf1-x42d.google.com with SMTP id 11so9882352pfu.4;
+ Mon, 25 Jan 2021 22:00:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=puB/xlPKDy2xxo8KuHU7/paIIYS2rKgPopeyNnrl7KE=;
- b=nhoIj3IhDsHpnIAcI+2jAPzInt7URsK8fsnoNMoMHCyTZtfzpL3K7X1TGjYjLhPOdG
- 8b6yZY75rX97j4V9iviTw4Cz+HaUfBOuaJJDB58uXAJ9XV4vF0KCCyGOu3+L2H/T2ie0
- vafWxQmmlYYdXLekrIG2IBZ1kSHbFRWObTVxvDVz/tG5eEFJMYPUjy+44dukWA+b2s6B
- VFFrdtRb4a/PFJls3OQr5NW3hdPjBgGpRv/feAL7Ht22Y2+gym4xeDYgZJeA4kzw7wT8
- 07clXVXL/ljMyzY5ykdAMd6qIWmzZVD2dJBAAVs9dLdu4rZ28mqD5o1AxwIs/ZD1yiU1
- 5CNg==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=PoNn/bFoDnh5efZd0mYKkDFkOeN43DFe/uwJ8wWwY4U=;
+ b=pz3PAiqtr2IUdXQiUKcIYJ+Tb6G0CPqtyAGrODeSltj9iqvtb9eGPMIX9jJgKI+Y96
+ Mw+f2mUcwHKyT1QM/S41B3wukXZ+s4dg4xo1XyL4Ac82s97ZIfs/1zX1RWvWh3yRe4i+
+ n5Bx7Lr3xk62pTNvdbL/w58HLjhhZW7k8pLEYH9JcE26vRCfHoXTZygrAUIzqZGi/R0Q
+ sKJq1rpzW9/WiaSuOQSCl+VxhDtTzAtC3p30LvEEnQ30kpBfcZl/mpVePCgFAU37Sa71
+ mHC9s1dq21A9+Mh4sYde/bspbgzwlOTT9zYHJcOHHzAgB5S2AoPq16zsYLejHv30PdN/
+ otZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=puB/xlPKDy2xxo8KuHU7/paIIYS2rKgPopeyNnrl7KE=;
- b=pYGs0t5hudSbWID8PtQrMVFbhQgnUdyESPoSvRR9Tsmetz8XRMPQs2qL+L4bhk/2PF
- cGFsj+PeWLlNzfzE+LPeareg+mZhr5vlBVmYi82MQSSuOhJXzewpDCAl8OW6T1U4HO4V
- 8rryBgf98Hc9sH7TXLRG5mo5vQbWq4epYRtKZcFWLTmBBrQV325a1qEXbjQ9GgIA4CtE
- 0E5Z0Co92rhOifABdMiwXB8WHXwjDY4zk7Mt3JeuRkwg7g6XFTYRPUoEkj4Fb/VmAXLH
- l9AQVwmFj1POghDjB/2K5sN6TycPiF8sIOBsmd0DXKTDn6LMOcM3f6fs8aLWmEdGf3L2
- w/QA==
-X-Gm-Message-State: AOAM532jqo23Nxnw+crT5mNPcrMyo1jUvvRtJVgvU9PNi6zpQkQYFKHr
- ZqxIPQDibRBfe9aEZKb/5cTwR+ahHZiFc5jGUNU=
-X-Google-Smtp-Source: ABdhPJz3v2hfWQ9O/gzeyeS5X0MNGVWHTdtVSWLJLTxpzdRExvXaUd0t4rloZqcIKsuYU9/I+xyJMKUhDPQrRbd3BJ8=
-X-Received: by 2002:a92:cda1:: with SMTP id g1mr2406260ild.267.1611618857622; 
- Mon, 25 Jan 2021 15:54:17 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=PoNn/bFoDnh5efZd0mYKkDFkOeN43DFe/uwJ8wWwY4U=;
+ b=MMVKdVvmodsPsSB2hMfToA5wWV/rfnfEBScY/wpP8PcW8x/FlSIhhx6an3yMLcqwy4
+ 5iM1UUOKlrVuqey15MufqFuW/WR3ckTKH/dRp4bHgy3nM0DfLPBNMqMF9XOkVcy2wqHq
+ fUkWJlYNU3ac+IyYwedRpUIjEdX1hrSDxWB5WaQTSM6mk7k86IhSSZ8UMjD7PixYE0Oq
+ RTaXIv4wBQXxzFh1xqtJdUcs+OZR+LDBZWNm0n68DKXrluWD8zh8wrpAAAQwajKL+2/a
+ drCnyDPe8qWoNNr1i9RRL2RwF0a+xEF3dhVzAyoeL7BtsT62XWR5AAzEB7oUzix6tJ9D
+ Z7+g==
+X-Gm-Message-State: AOAM533bUcifR2T0OHGdw0QNp9tQwDEHPKe/Wd/7ldYpv2DJ6O5DtQa3
+ w55DwvEfZQJ64jB0Zj7KZTU=
+X-Google-Smtp-Source: ABdhPJw1kiVFWXpAPGD9yLYIUuhAXJ9mPMRhmpE5p9/nm++6/QbqmDzk3XovCCZrj5/4oQRTRg4Ixg==
+X-Received: by 2002:a63:1047:: with SMTP id 7mr4251302pgq.292.1611640823426;
+ Mon, 25 Jan 2021 22:00:23 -0800 (PST)
+Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
+ [144.168.56.201])
+ by smtp.gmail.com with ESMTPSA id k10sm12471076pfk.0.2021.01.25.22.00.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Jan 2021 22:00:22 -0800 (PST)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH v3 0/9] hw/riscv: sifive_u: Add missing SPI support
+Date: Tue, 26 Jan 2021 13:59:58 +0800
+Message-Id: <20210126060007.12904-1-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210112093950.17530-1-frank.chang@sifive.com>
- <20210112093950.17530-69-frank.chang@sifive.com>
-In-Reply-To: <20210112093950.17530-69-frank.chang@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 25 Jan 2021 15:53:51 -0800
-Message-ID: <CAKmqyKM-XPcGMo0Z0549ojPSKqCbW3bq4+77JnzV5WQGS2Q3Fg@mail.gmail.com>
-Subject: Re: [PATCH v6 68/72] target/riscv: gdb: modify gdb csr xml file to
- align with csr register map
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Hsiangkai Wang <kai.wang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x42d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -77,109 +73,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2021 23:54:22 -0000
+X-List-Received-Date: Tue, 26 Jan 2021 06:00:28 -0000
 
-On Tue, Jan 12, 2021 at 2:50 AM <frank.chang@sifive.com> wrote:
->
-> From: Hsiangkai Wang <kai.wang@sifive.com>
->
-> Signed-off-by: Hsiangkai Wang <kai.wang@sifive.com>
-> Acked-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+From: Bin Meng <bin.meng@windriver.com>
 
-This patch won't apply any more, we have removed the hardcoded GDB
-register list.
+This adds the missing SPI support to the `sifive_u` machine in the QEMU
+mainline. With this series, upstream U-Boot for the SiFive HiFive Unleashed
+board can boot on QEMU `sifive_u` out of the box. This allows users to
+develop and test the recommended RISC-V boot flow with a real world use
+case: ZSBL (in QEMU) loads U-Boot SPL from SD card or SPI flash to L2LIM,
+then U-Boot SPL loads the payload from SD card or SPI flash that is a
+combination of OpenSBI fw_dynamic firmware and U-Boot proper.
 
-Alistair
+The m25p80 model is updated to support ISSI flash series. A bunch of
+ssi-sd issues are fixed, and writing to SD card in SPI mode is supported.
 
-> ---
->  gdb-xml/riscv-32bit-csr.xml | 11 ++++++-----
->  gdb-xml/riscv-64bit-csr.xml | 11 ++++++-----
->  target/riscv/gdbstub.c      |  4 ++--
->  3 files changed, 14 insertions(+), 12 deletions(-)
->
-> diff --git a/gdb-xml/riscv-32bit-csr.xml b/gdb-xml/riscv-32bit-csr.xml
-> index da1bf19e2f4..3d2031da7dc 100644
-> --- a/gdb-xml/riscv-32bit-csr.xml
-> +++ b/gdb-xml/riscv-32bit-csr.xml
-> @@ -110,6 +110,8 @@
->    <reg name="mcause" bitsize="32"/>
->    <reg name="mtval" bitsize="32"/>
->    <reg name="mip" bitsize="32"/>
-> +  <reg name="mtinst" bitsize="32"/>
-> +  <reg name="mtval2" bitsize="32"/>
->    <reg name="pmpcfg0" bitsize="32"/>
->    <reg name="pmpcfg1" bitsize="32"/>
->    <reg name="pmpcfg2" bitsize="32"/>
-> @@ -232,12 +234,11 @@
->    <reg name="hedeleg" bitsize="32"/>
->    <reg name="hideleg" bitsize="32"/>
->    <reg name="hie" bitsize="32"/>
-> -  <reg name="htvec" bitsize="32"/>
-> -  <reg name="hscratch" bitsize="32"/>
-> -  <reg name="hepc" bitsize="32"/>
-> -  <reg name="hcause" bitsize="32"/>
-> -  <reg name="hbadaddr" bitsize="32"/>
-> +  <reg name="hcounteren" bitsize="32"/>
-> +  <reg name="htval" bitsize="32"/>
->    <reg name="hip" bitsize="32"/>
-> +  <reg name="htinst" bitsize="32"/>
-> +  <reg name="hgatp" bitsize="32"/>
->    <reg name="mbase" bitsize="32"/>
->    <reg name="mbound" bitsize="32"/>
->    <reg name="mibase" bitsize="32"/>
-> diff --git a/gdb-xml/riscv-64bit-csr.xml b/gdb-xml/riscv-64bit-csr.xml
-> index 6aa4bed9f50..90394562930 100644
-> --- a/gdb-xml/riscv-64bit-csr.xml
-> +++ b/gdb-xml/riscv-64bit-csr.xml
-> @@ -110,6 +110,8 @@
->    <reg name="mcause" bitsize="64"/>
->    <reg name="mtval" bitsize="64"/>
->    <reg name="mip" bitsize="64"/>
-> +  <reg name="mtinst" bitsize="64"/>
-> +  <reg name="mtval2" bitsize="64"/>
->    <reg name="pmpcfg0" bitsize="64"/>
->    <reg name="pmpcfg1" bitsize="64"/>
->    <reg name="pmpcfg2" bitsize="64"/>
-> @@ -232,12 +234,11 @@
->    <reg name="hedeleg" bitsize="64"/>
->    <reg name="hideleg" bitsize="64"/>
->    <reg name="hie" bitsize="64"/>
-> -  <reg name="htvec" bitsize="64"/>
-> -  <reg name="hscratch" bitsize="64"/>
-> -  <reg name="hepc" bitsize="64"/>
-> -  <reg name="hcause" bitsize="64"/>
-> -  <reg name="hbadaddr" bitsize="64"/>
-> +  <reg name="hcounteren" bitsize="64"/>
-> +  <reg name="htval" bitsize="64"/>
->    <reg name="hip" bitsize="64"/>
-> +  <reg name="htinst" bitsize="64"/>
-> +  <reg name="hgatp" bitsize="64"/>
->    <reg name="mbase" bitsize="64"/>
->    <reg name="mbound" bitsize="64"/>
->    <reg name="mibase" bitsize="64"/>
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index eba12a86f2e..f7c5212e274 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -418,13 +418,13 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
->      }
->  #if defined(TARGET_RISCV32)
->      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-> -                             240, "riscv-32bit-csr.xml", 0);
-> +                             241, "riscv-32bit-csr.xml", 0);
->
->      gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
->                               1, "riscv-32bit-virtual.xml", 0);
->  #elif defined(TARGET_RISCV64)
->      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-> -                             240, "riscv-64bit-csr.xml", 0);
-> +                             241, "riscv-64bit-csr.xml", 0);
->
->      gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
->                               1, "riscv-64bit-virtual.xml", 0);
-> --
-> 2.17.1
->
->
+Note the ssi-sd changes are split out of this series in v3, so that all
+patches in v3 can go via Alistair's riscv tree.
+
+Part of the ssi-sd changes are now in qemu/master. The remaining patches
+are http://patchwork.ozlabs.org/project/qemu-devel/list/?series=226136
+that will go via Philippe's sd tree.
+
+reST documentation for RISC-V is added. Currently only `sifive_u`
+machine is documented, but more to come.
+
+Changes in v3:
+- Simplify flush txfifo logic
+- Convert sifive_u.rst from UTF-8 to ASCII
+
+Changes in v2:
+- Mention QPI (Quad Peripheral Interface) mode is not supported
+- Log guest error when trying to write reserved registers
+- Log guest error when trying to access out-of-bounds registers
+- log guest error when writing to reserved bits for chip select
+  registers and watermark registers
+- Log unimplemented warning when trying to write direct-map flash
+  interface registers
+- Add test tx fifo full logic in sifive_spi_read(), hence remove
+  setting the tx fifo full flag in sifive_spi_write().
+- Populate register with their default value
+- Correct the "connects" typo in the commit message
+- Mention in the commit message that <reg> property does not populate
+  the second group which represents the memory mapped address of the
+  SPI flash
+- Correct the "connects" typo in the commit message
+- Correct several typos in sifive_u.rst
+- Update doc to mention U-Boot v2021.01
+
+Bin Meng (9):
+  hw/block: m25p80: Add ISSI SPI flash support
+  hw/block: m25p80: Add various ISSI flash information
+  hw/ssi: Add SiFive SPI controller support
+  hw/riscv: sifive_u: Add QSPI0 controller and connect a flash
+  hw/riscv: sifive_u: Add QSPI2 controller and connect an SD card
+  hw/riscv: sifive_u: Change SIFIVE_U_GEM_IRQ to decimal value
+  docs/system: Sort targets in alphabetical order
+  docs/system: Add RISC-V documentation
+  docs/system: riscv: Add documentation for sifive_u machine
+
+ docs/system/riscv/sifive_u.rst | 336 +++++++++++++++++++++++++++++++
+ docs/system/target-riscv.rst   |  72 +++++++
+ docs/system/targets.rst        |  20 +-
+ include/hw/riscv/sifive_u.h    |   9 +-
+ include/hw/ssi/sifive_spi.h    |  47 +++++
+ hw/block/m25p80.c              |  57 +++++-
+ hw/riscv/sifive_u.c            |  91 +++++++++
+ hw/ssi/sifive_spi.c            | 358 +++++++++++++++++++++++++++++++++
+ hw/riscv/Kconfig               |   3 +
+ hw/ssi/Kconfig                 |   4 +
+ hw/ssi/meson.build             |   1 +
+ 11 files changed, 989 insertions(+), 9 deletions(-)
+ create mode 100644 docs/system/riscv/sifive_u.rst
+ create mode 100644 docs/system/target-riscv.rst
+ create mode 100644 include/hw/ssi/sifive_spi.h
+ create mode 100644 hw/ssi/sifive_spi.c
+
+-- 
+2.25.1
+
 
