@@ -1,70 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l4HPY-0001Ep-Jd
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Jan 2021 01:01:12 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42006)
+	id 1l4Hcw-00073i-FJ
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Jan 2021 01:14:58 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43974)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l4HPW-0001DC-Ol; Tue, 26 Jan 2021 01:01:06 -0500
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:35913)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1l4Hcu-00072L-7A
+ for qemu-riscv@nongnu.org; Tue, 26 Jan 2021 01:14:56 -0500
+Received: from mail-oo1-xc31.google.com ([2607:f8b0:4864:20::c31]:38589)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1l4HPS-0001fs-Mc; Tue, 26 Jan 2021 01:01:06 -0500
-Received: by mail-pj1-x1035.google.com with SMTP id gx1so1604899pjb.1;
- Mon, 25 Jan 2021 22:01:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=v97D7smHMIUwyVZ3xHv8OaavtvY8DGMN9i4ZZVD+ZOs=;
- b=FJK3OPzw2rImAY7UugurDpQpBR28b7jkl1+ubosI7+FPt7/WIOudvSLKM5Urd7EGbB
- 2FDDDGXaT8hRrx6gV/5aXqqEvxNCx4qBBoGQLJw7DS9uPQ3rZAGGZMY3IWIWqnYbFsUs
- bFsVm/NSCT9mKTvRX/Qu+A1rE1mNrYEYE+/Kiaatp4OpOO7AEFe9Zm4DOeRcn+kNT7Nn
- Oxuow8OGCSrTdBFhnStZAAUhpbnON+c1RSHgy1hia8wzPKBpGv0hUdDo92Zxa9hc4akO
- +ipKguatccKxw8Eq0zu2ckLL7Iw5kXVuduyPIr/K0DIVrVp7vHVNrgzf3+r499eQ/SEP
- zMkw==
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1l4Hcr-0006Kx-4e
+ for qemu-riscv@nongnu.org; Tue, 26 Jan 2021 01:14:55 -0500
+Received: by mail-oo1-xc31.google.com with SMTP id y72so3358991ooa.5
+ for <qemu-riscv@nongnu.org>; Mon, 25 Jan 2021 22:14:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=kUtqY5416HDw2loPh4/VqOgZ8sZempoLbyV3FhkmhQc=;
+ b=kGtm0v+zAGJ46a0JPXzW8C1jS8wYkJ7nZzX3bNeB/qj0JsU4F+nMQDnMeX6cUBKg1f
+ syv9OO0bPnOGnsySkaTC6QlhMx/hMYZp71qTwoxJdYVf/biwJm+dQao5ZOcvI25wteAN
+ xg+hjODc4PcQ+w3cArxZEX+AmtHaudvK+btfjavgovyGxYpiax/6VtpQk4z8weQOOx/f
+ 15jp77FemGZiJMFCoynnllY+eOlQebxx75fOc4Z2PdOFN0PKcvpOsIh94pMmI4J4yF3o
+ pbsLFS0ELr8yQfuvgs+t4SY3rKDiTI1tO6LQLx/VbX3bvoGUyrtNKvb3HTfARSQbxazZ
+ Q+hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=v97D7smHMIUwyVZ3xHv8OaavtvY8DGMN9i4ZZVD+ZOs=;
- b=deppdyxG4DUDqfeFwAYTC1oQybelIoN2dpr5NgJC1kkUP78aEKGWONdMeBDPHnyeN5
- /zqDYlJS8VQ+YGW/cmLgfW/yj7DFacfFWM9XEtylSEXo0YoMTVXdr4VmbblM72VBcelh
- XGSwqysckfGaGiGOYE21cXn8Qu//Uw13ZeUmC9xW841O27CBGANclIguC0RaN30+5njr
- O6RL1n5yYs+Rqb4KYre6P/ga+bA4MZxtAuPwPTRhEpiQi6IIy2lkkppzRcwoPJmCY2mT
- dUQbb6YeTjjoJg6k113d2WQfqCKwOHC53iJLnhkRmDFH5jsWbjQkOFHRhIudi2niXW0h
- mVbg==
-X-Gm-Message-State: AOAM5325wCq67gImzS1HaP06nQS65I5JFERjm62VqbZdtuzgQJvFLcFO
- CqqiVLBCL9WvdV6LGZ6irQo=
-X-Google-Smtp-Source: ABdhPJzxM/lJ4Kd7P6z5HnOJeMxGLL8t/MHqhJCbazAuAKtTi9NVvV02hgujpJsWYGnvWqdWOFwx8Q==
-X-Received: by 2002:a17:902:ea0f:b029:de:5fd5:abb9 with SMTP id
- s15-20020a170902ea0fb02900de5fd5abb9mr4278946plg.46.1611640860518; 
- Mon, 25 Jan 2021 22:01:00 -0800 (PST)
-Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
- [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id k10sm12471076pfk.0.2021.01.25.22.00.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Jan 2021 22:01:00 -0800 (PST)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v3 9/9] docs/system: riscv: Add documentation for sifive_u
- machine
-Date: Tue, 26 Jan 2021 14:00:07 +0800
-Message-Id: <20210126060007.12904-10-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210126060007.12904-1-bmeng.cn@gmail.com>
-References: <20210126060007.12904-1-bmeng.cn@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=kUtqY5416HDw2loPh4/VqOgZ8sZempoLbyV3FhkmhQc=;
+ b=EfS+cxmB2dmmI1pvbft2ONRCeMHcO95wuqsl6ZUidxYNzcaktAJgiTdnrabaovCZP+
+ wiCUcvlXlufbYZfSnj8mfcxm8Ybq0E0gGOj73AW9SORrN1u6nb9/69lZTMBUAG/2pHjp
+ eyJeWOpGwnZzInpIzwEFvpHD7DwXU9D5H8z63/TIXLPccC/fr1DLPl7MQsIRQJNgcdeg
+ hbtkmavNBBUTRotkOPThnlizqYlHX8CBe2IZMwQU8GizQz4AKqK2+JtOWq2mz/HnxTZf
+ XeC3h78Mm1UlBiTQAcnT6f/DWeePQpj/FPhxfDw/W2rI8pueFcovqQ+4qMCYtK11lujV
+ d8mg==
+X-Gm-Message-State: AOAM532NUP/vABtG8stsAFqRX1Uk8cQqoXs1ieE2CWM+II7Xsxdhvcw4
+ fZBgXTNqolF9gHNkRrgOXvqMYtzFvHFeAK3mq2FhBA==
+X-Google-Smtp-Source: ABdhPJxaavTd1RDX0FBWtzYoPSSnR8mXCW/j+2uB8VvBvSJOLTQS/q257Lfo+fulyRaZ1aIpDpGv+nL98kDOa6SVOIY=
+X-Received: by 2002:a4a:decb:: with SMTP id w11mr2884273oou.32.1611641691212; 
+ Mon, 25 Jan 2021 22:14:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1035.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20210112093950.17530-1-frank.chang@sifive.com>
+ <CAKmqyKMZ9CyAV1d5tA0Ww=NOFGYkKMu_EiDJEBs80=Q3mZQD0w@mail.gmail.com>
+In-Reply-To: <CAKmqyKMZ9CyAV1d5tA0Ww=NOFGYkKMu_EiDJEBs80=Q3mZQD0w@mail.gmail.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Tue, 26 Jan 2021 14:14:39 +0800
+Message-ID: <CAE_xrPgZXfekLTWKJ2+h9_K0HxqpBxT3yti+2BOWD3dwKDf6xA@mail.gmail.com>
+Subject: Re: [PATCH v6 00/72] support vector extension v1.0
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: multipart/alternative; boundary="00000000000082ac9805b9c792b6"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c31;
+ envelope-from=frank.chang@sifive.com; helo=mail-oo1-xc31.google.com
+X-Spam_score_int: -3
+X-Spam_score: -0.4
+X-Spam_bar: /
+X-Spam_report: (-0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_SBL=1.623, URI_HEX=0.1 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,401 +71,541 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jan 2021 06:01:07 -0000
+X-List-Received-Date: Tue, 26 Jan 2021 06:14:56 -0000
 
-From: Bin Meng <bin.meng@windriver.com>
+--00000000000082ac9805b9c792b6
+Content-Type: text/plain; charset="UTF-8"
 
-This adds detailed documentation for RISC-V `sifive_u` machine,
-including the following information:
+On Wed, Jan 20, 2021 at 3:12 AM Alistair Francis <alistair23@gmail.com>
+wrote:
 
-- Supported devices
-- Hardware configuration information
-- Boot options
-- Machine-specific options
-- Running Linux kernel
-- Running VxWorks kernel
-- Running U-Boot, and with an alternate configuration
+> On Tue, Jan 12, 2021 at 1:40 AM <frank.chang@sifive.com> wrote:
+> >
+> > From: Frank Chang <frank.chang@sifive.com>
+> >
+> > This patchset implements the vector extension v1.0 for RISC-V on QEMU.
+> >
+> > As vector extension specification is near to be ratified, this patchset
+> is
+> > sent as formal patchset for review.
+>
+> Do you know when the 1.0 spec will be released?
+>
 
-Signed-off-by: Bin Meng <bin.meng@windriver.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I'm afraid I can't tell the exact date of when 1.0 spec.will be released.
+As far as I know, although the community is trying to push 1.0 spec. to be
+ratified,
+but they are also still adding some new instructions on the fly, e.g.
+*vle1.v*/*sel.v* and *vsetivli*.
+Hope they can complete it soon.....
 
----
 
-Changes in v3:
-- Convert sifive_u.rst from UTF-8 to ASCII
+> >
+> > The port is available here:
+> > https://github.com/sifive/qemu/tree/rvv-1.0-upstream-v6
+> >
+> > You can change the cpu argument: vext_spec to v1.0 (i.e. vext_spec=v1.0)
+> > to run with RVV v1.0 instructions.
+> >
+> > Note: This patchset depends on another patchset listed in Based-on
+> >       section below so it might not able to be built unless the patchset
+> >           is applied.
+>
+> Has this been merged?
+>
 
-Changes in v2:
-- Correct several typos in sifive_u.rst
-- Update doc to mention U-Boot v2021.01
+Yes, this one is not merged yet and the latest patchset is:
+<1597908641-6293-1-git-send-email-chihmin.chao@sifive.com>
+<https://patchew.org/QEMU/1597908641-6293-1-git-send-email-chihmin.chao@sifive.com/>
+I've asked Chih-Min about the status of this patchset.
+He said he will rebase the codes and send out a new patchset to review.
 
- docs/system/riscv/sifive_u.rst | 336 +++++++++++++++++++++++++++++++++
- docs/system/target-riscv.rst   |  10 +
- 2 files changed, 346 insertions(+)
- create mode 100644 docs/system/riscv/sifive_u.rst
+Thanks,
+Frank Chang
 
-diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
-new file mode 100644
-index 0000000000..98e7562848
---- /dev/null
-+++ b/docs/system/riscv/sifive_u.rst
-@@ -0,0 +1,336 @@
-+SiFive HiFive Unleashed (``sifive_u``)
-+======================================
-+
-+SiFive HiFive Unleashed Development Board is the ultimate RISC-V development
-+board featuring the Freedom U540 multi-core RISC-V processor.
-+
-+Supported devices
-+-----------------
-+
-+The ``sifive_u`` machine supports the following devices:
-+
-+ * 1 E51 / E31 core
-+ * Up to 4 U54 / U34 cores
-+ * Core Level Interruptor (CLINT)
-+ * Platform-Level Interrupt Controller (PLIC)
-+ * Power, Reset, Clock, Interrupt (PRCI)
-+ * L2 Loosely Integrated Memory (L2-LIM)
-+ * DDR memory controller
-+ * 2 UARTs
-+ * 1 GEM Ethernet controller
-+ * 1 GPIO controller
-+ * 1 One-Time Programmable (OTP) memory with stored serial number
-+ * 1 DMA controller
-+ * 2 QSPI controllers
-+ * 1 ISSI 25WP256 flash
-+ * 1 SD card in SPI mode
-+
-+Please note the real world HiFive Unleashed board has a fixed configuration of
-+1 E51 core and 4 U54 core combination and the RISC-V core boots in 64-bit mode.
-+With QEMU, one can create a machine with 1 E51 core and up to 4 U54 cores. It
-+is also possible to create a 32-bit variant with the same peripherals except
-+that the RISC-V cores are replaced by the 32-bit ones (E31 and U34), to help
-+testing of 32-bit guest software.
-+
-+Hardware configuration information
-+----------------------------------
-+
-+The ``sifive_u`` machine automatically generates a device tree blob ("dtb")
-+which it passes to the guest. This provides information about the addresses,
-+interrupt lines and other configuration of the various devices in the system.
-+Guest software should discover the devices that are present in the generated
-+DTB instead of using a DTB for the real hardware, as some of the devices are
-+not modeled by QEMU and trying to access these devices may cause unexpected
-+behavior.
-+
-+Boot options
-+------------
-+
-+The ``sifive_u`` machine can start using the standard -kernel functionality
-+for loading a Linux kernel, a VxWorks kernel, a modified U-Boot bootloader
-+(S-mode) or ELF executable with the default OpenSBI firmware image as the
-+-bios. It also supports booting the unmodified U-Boot bootloader using the
-+standard -bios functionality.
-+
-+Machine-specific options
-+------------------------
-+
-+The following machine-specific options are supported:
-+
-+- serial=nnn
-+
-+  The board serial number. When not given, the default serial number 1 is used.
-+
-+  SiFive reserves the first 1 KiB of the 16 KiB OTP memory for internal use.
-+  The current usage is only used to store the serial number of the board at
-+  offset 0xfc. U-Boot reads the serial number from the OTP memory, and uses
-+  it to generate a unique MAC address to be programmed to the on-chip GEM
-+  Ethernet controller. When multiple QEMU ``sifive_u`` machines are created
-+  and connected to the same subnet, they all have the same MAC address hence
-+  it creates an unusable network. In such scenario, user should give different
-+  values to serial= when creating different ``sifive_u`` machines.
-+
-+- start-in-flash
-+
-+  When given, QEMU's ROM codes jump to QSPI memory-mapped flash directly.
-+  Otherwise QEMU will jump to DRAM or L2LIM depending on the msel= value.
-+  When not given, it defaults to direct DRAM booting.
-+
-+- msel=[6|11]
-+
-+  Mode Select (MSEL[3:0]) pins value, used to control where to boot from.
-+
-+  The FU540 SoC supports booting from several sources, which are controlled
-+  using the Mode Select pins on the chip. Typically, the boot process runs
-+  through several stages before it begins execution of user-provided programs.
-+  These stages typically include the following:
-+
-+  1. Zeroth Stage Boot Loader (ZSBL), which is contained in an on-chip mask
-+     ROM and provided by QEMU. Note QEMU implemented ROM codes are not the
-+     same as what is programmed in the hardware. The QEMU one is a simplified
-+     version, but it provides the same functionality as the hardware.
-+  2. First Stage Boot Loader (FSBL), which brings up PLLs and DDR memory.
-+     This is U-Boot SPL.
-+  3. Second Stage Boot Loader (SSBL), which further initializes additional
-+     peripherals as needed. This is U-Boot proper combined with an OpenSBI
-+     fw_dynamic firmware image.
-+
-+  msel=6 means FSBL and SSBL are both on the QSPI flash. msel=11 means FSBL
-+  and SSBL are both on the SD card.
-+
-+Running Linux kernel
-+--------------------
-+
-+Linux mainline v5.10 release is tested at the time of writing. To build a
-+Linux mainline kernel that can be booted by the ``sifive_u`` machine in
-+64-bit mode, simply configure the kernel using the defconfig configuration:
-+
-+.. code-block:: bash
-+
-+  $ export ARCH=riscv
-+  $ export CROSS_COMPILE=riscv64-linux-
-+  $ make defconfig
-+  $ make
-+
-+To boot the newly built Linux kernel in QEMU with the ``sifive_u`` machine:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
-+      -display none -serial stdio \
-+      -kernel arch/riscv/boot/Image \
-+      -initrd /path/to/rootfs.ext4 \
-+      -append "root=/dev/ram"
-+
-+To build a Linux mainline kernel that can be booted by the ``sifive_u`` machine
-+in 32-bit mode, use the rv32_defconfig configuration. A patch is required to
-+fix the 32-bit boot issue for Linux kernel v5.10.
-+
-+.. code-block:: bash
-+
-+  $ export ARCH=riscv
-+  $ export CROSS_COMPILE=riscv64-linux-
-+  $ curl https://patchwork.kernel.org/project/linux-riscv/patch/20201219001356.2887782-1-atish.patra@wdc.com/mbox/ > riscv.patch
-+  $ git am riscv.patch
-+  $ make rv32_defconfig
-+  $ make
-+
-+Replace ``qemu-system-riscv64`` with ``qemu-system-riscv32`` in the command
-+line above to boot the 32-bit Linux kernel. A rootfs image containing 32-bit
-+applications shall be used in order for kernel to boot to user space.
-+
-+Running VxWorks kernel
-+----------------------
-+
-+VxWorks 7 SR0650 release is tested at the time of writing. To build a 64-bit
-+VxWorks mainline kernel that can be booted by the ``sifive_u`` machine, simply
-+create a VxWorks source build project based on the sifive_generic BSP, and a
-+VxWorks image project to generate the bootable VxWorks image, by following the
-+BSP documentation instructions.
-+
-+A pre-built 64-bit VxWorks 7 image for HiFive Unleashed board is available as
-+part of the VxWorks SDK for testing as well. Instructions to download the SDK:
-+
-+.. code-block:: bash
-+
-+  $ wget https://labs.windriver.com/downloads/wrsdk-vxworks7-sifive-hifive-1.01.tar.bz2
-+  $ tar xvf wrsdk-vxworks7-sifive-hifive-1.01.tar.bz2
-+  $ ls bsps/sifive_generic_1_0_0_0/uboot/uVxWorks
-+
-+To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
-+      -display none -serial stdio \
-+      -nic tap,ifname=tap0,script=no,downscript=no \
-+      -kernel /path/to/vxWorks \
-+      -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
-+
-+It is also possible to test 32-bit VxWorks on the ``sifive_u`` machine. Create
-+a 32-bit project to build the 32-bit VxWorks image, and use exact the same
-+command line options with ``qemu-system-riscv32``.
-+
-+Running U-Boot
-+--------------
-+
-+U-Boot mainline v2021.01 release is tested at the time of writing. To build a
-+U-Boot mainline bootloader that can be booted by the ``sifive_u`` machine, use
-+the sifive_fu540_defconfig with similar commands as described above for Linux:
-+
-+.. code-block:: bash
-+
-+  $ export CROSS_COMPILE=riscv64-linux-
-+  $ export OPENSBI=/path/to/opensbi-riscv64-generic-fw_dynamic.bin
-+  $ make sifive_fu540_defconfig
-+
-+You will get spl/u-boot-spl.bin and u-boot.itb file in the build tree.
-+
-+To start U-Boot using the ``sifive_u`` machine, prepare an SPI flash image, or
-+SD card image that is properly partitioned and populated with correct contents.
-+genimage_ can be used to generate these images.
-+
-+A sample configuration file for a 128 MiB SD card image is:
-+
-+.. code-block:: bash
-+
-+  $ cat genimage_sdcard.cfg
-+  image sdcard.img {
-+          size = 128M
-+
-+          hdimage {
-+                  gpt = true
-+          }
-+
-+          partition u-boot-spl {
-+                  image = "u-boot-spl.bin"
-+                  offset = 17K
-+                  partition-type-uuid = 5B193300-FC78-40CD-8002-E86C45580B47
-+          }
-+
-+          partition u-boot {
-+                  image = "u-boot.itb"
-+                  offset = 1041K
-+                  partition-type-uuid = 2E54B353-1271-4842-806F-E436D6AF6985
-+          }
-+  }
-+
-+SPI flash image has slightly different partition offsets, and the size has to
-+be 32 MiB to match the ISSI 25WP256 flash on the real board:
-+
-+.. code-block:: bash
-+
-+  $ cat genimage_spi-nor.cfg
-+  image spi-nor.img {
-+          size = 32M
-+
-+          hdimage {
-+                  gpt = true
-+          }
-+
-+          partition u-boot-spl {
-+                  image = "u-boot-spl.bin"
-+                  offset = 20K
-+                  partition-type-uuid = 5B193300-FC78-40CD-8002-E86C45580B47
-+          }
-+
-+          partition u-boot {
-+                  image = "u-boot.itb"
-+                  offset = 1044K
-+                  partition-type-uuid = 2E54B353-1271-4842-806F-E436D6AF6985
-+          }
-+  }
-+
-+Assume U-Boot binaries are put in the same directory as the config file,
-+we can generate the image by:
-+
-+.. code-block:: bash
-+
-+  $ genimage --config genimage_<boot_src>.cfg --inputpath .
-+
-+Boot U-Boot from SD card, by specifying msel=11 and pass the SD card image
-+to QEMU ``sifive_u`` machine:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M sifive_u,msel=11 -smp 5 -m 8G \
-+      -display none -serial stdio \
-+      -bios /path/to/u-boot-spl.bin \
-+      -drive file=/path/to/sdcard.img,if=sd
-+
-+Changing msel= value to 6, allows booting U-Boot from the SPI flash:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M sifive_u,msel=6 -smp 5 -m 8G \
-+      -display none -serial stdio \
-+      -bios /path/to/u-boot-spl.bin \
-+      -drive file=/path/to/spi-nor.img,if=mtd
-+
-+Note when testing U-Boot, QEMU automatically generated device tree blob is
-+not used because U-Boot itself embeds device tree blobs for U-Boot SPL and
-+U-Boot proper. Hence the number of cores and size of memory have to match
-+the real hardware, ie: 5 cores (-smp 5) and 8 GiB memory (-m 8G).
-+
-+Above use case is to run upstream U-Boot for the SiFive HiFive Unleashed
-+board on QEMU ``sifive_u`` machine out of the box. This allows users to
-+develop and test the recommended RISC-V boot flow with a real world use
-+case: ZSBL (in QEMU) loads U-Boot SPL from SD card or SPI flash to L2LIM,
-+then U-Boot SPL loads the combined payload image of OpenSBI fw_dynamic
-+firmware and U-Boot proper. However sometimes we want to have a quick test
-+of booting U-Boot on QEMU without the needs of preparing the SPI flash or
-+SD card images, an alternate way can be used, which is to create a U-Boot
-+S-mode image by modifying the configuration of U-Boot:
-+
-+.. code-block:: bash
-+
-+  $ make menuconfig
-+
-+then manually select the following configuration in U-Boot:
-+
-+  Device Tree Control > Provider of DTB for DT Control > Prior Stage bootloader DTB
-+
-+This lets U-Boot to use the QEMU generated device tree blob. During the build,
-+a build error will be seen below:
-+
-+.. code-block:: none
-+
-+  MKIMAGE u-boot.img
-+  ./tools/mkimage: Can't open arch/riscv/dts/hifive-unleashed-a00.dtb: No such file or directory
-+  ./tools/mkimage: failed to build FIT
-+  make: *** [Makefile:1440: u-boot.img] Error 1
-+
-+The above errors can be safely ignored as we don't run U-Boot SPL under QEMU
-+in this alternate configuration.
-+
-+Boot the 64-bit U-Boot S-mode image directly:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
-+      -display none -serial stdio \
-+      -kernel /path/to/u-boot.bin
-+
-+It's possible to create a 32-bit U-Boot S-mode image as well.
-+
-+.. code-block:: bash
-+
-+  $ export CROSS_COMPILE=riscv64-linux-
-+  $ make sifive_fu540_defconfig
-+  $ make menuconfig
-+
-+then manually update the following configuration in U-Boot:
-+
-+  Device Tree Control > Provider of DTB for DT Control > Prior Stage bootloader DTB
-+  RISC-V architecture > Base ISA > RV32I
-+  Boot images > Text Base > 0x80400000
-+
-+Use the same command line options to boot the 32-bit U-Boot S-mode image:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv32 -M sifive_u -smp 5 -m 2G \
-+      -display none -serial stdio \
-+      -kernel /path/to/u-boot.bin
-+
-+.. _genimage: https://github.com/pengutronix/genimage
-diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-index 9f4b7586e5..94d99c4c82 100644
---- a/docs/system/target-riscv.rst
-+++ b/docs/system/target-riscv.rst
-@@ -58,5 +58,15 @@ undocumented; you can get a complete list by running
- ``qemu-system-riscv64 --machine help``, or
- ``qemu-system-riscv32 --machine help``.
- 
-+..
-+   This table of contents should be kept sorted alphabetically
-+   by the title text of each file, which isn't the same ordering
-+   as an alphabetical sort by filename.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   riscv/sifive_u
-+
- RISC-V CPU features
- -------------------
--- 
-2.25.1
 
+>
+> Alistair
+>
+> >
+> > Changelog:
+> >
+> > v6
+> >   * add vector floating-point reciprocal estimate instruction.
+> >   * add vector floating-point reciprocal square-root estimate
+> instruction.
+> >   * update check rules for segment register groups, each segment register
+> >     group has to follow overlap rules.
+> >   * update viota.m instruction check rules.
+> >
+> > v5
+> >   * refactor RVV v1.0 check functions.
+> >     (Thanks to Richard Henderson's bitwise tricks.)
+> >   * relax RV_VLEN_MAX to 1024-bits.
+> >   * implement vstart CSR's behaviors.
+> >   * trigger illegal instruction exception if frm is not valid for
+> >     vector floating-point instructions.
+> >   * rebase on riscv-to-apply.next.
+> >
+> > v4
+> >   * remove explicit float flmul variable in DisasContext.
+> >   * replace floating-point calculations with shift operations to
+> >     improve performance.
+> >   * relax RV_VLEN_MAX to 512-bits.
+> >
+> > v3
+> >   * apply nan-box helpers from Richard Henderson.
+> >   * remove fp16 api changes as they are sent independently in another
+> >     pathcset by Chih-Min Chao.
+> >   * remove all tail elements clear functions as tail elements can
+> >     retain unchanged for either VTA set to undisturbed or agnostic.
+> >   * add fp16 nan-box check generator function.
+> >   * add floating-point rounding mode enum.
+> >   * replace flmul arithmetic with shifts to avoid floating-point
+> >     conversions.
+> >   * add Zvqmac extension.
+> >   * replace gdbstub vector register xml files with dynamic generator.
+> >   * bumped to RVV v1.0.
+> >   * RVV v1.0 related changes:
+> >     * add vl<nf>re<eew>.v and vs<nf>r.v vector whole register
+> >       load/store instructions
+> >     * add vrgatherei16 instruction.
+> >     * rearranged bits in vtype to make vlmul bits into a contiguous
+> >       field.
+> >
+> > v2
+> >   * drop v0.7.1 support.
+> >   * replace invisible return check macros with functions.
+> >   * move mark_vs_dirty() to translators.
+> >   * add SSTATUS_VS flag for s-mode.
+> >   * nan-box scalar fp register for floating-point operations.
+> >   * add gdbstub files for vector registers to allow system-mode
+> >     debugging with GDB.
+> >
+> > Based-on: <1596102747-20226-1-git-send-email-chihmin.chao@sifive.com/>
+> >
+> > Frank Chang (66):
+> >   target/riscv: drop vector 0.7.1 and add 1.0 support
+> >   target/riscv: Use FIELD_EX32() to extract wd field
+> >   target/riscv: rvv-1.0: introduce writable misa.v field
+> >   target/riscv: rvv-1.0: add translation-time vector context status
+> >   target/riscv: rvv-1.0: remove rvv related codes from fcsr registers
+> >   target/riscv: rvv-1.0: check MSTATUS_VS when accessing vector csr
+> >     registers
+> >   target/riscv: rvv-1.0: remove MLEN calculations
+> >   target/riscv: rvv-1.0: add fractional LMUL
+> >   target/riscv: rvv-1.0: add VMA and VTA
+> >   target/riscv: rvv-1.0: update check functions
+> >   target/riscv: introduce more imm value modes in translator functions
+> >   target/riscv: rvv:1.0: add translation-time nan-box helper function
+> >   target/riscv: rvv-1.0: configure instructions
+> >   target/riscv: rvv-1.0: stride load and store instructions
+> >   target/riscv: rvv-1.0: index load and store instructions
+> >   target/riscv: rvv-1.0: fix address index overflow bug of indexed
+> >     load/store insns
+> >   target/riscv: rvv-1.0: fault-only-first unit stride load
+> >   target/riscv: rvv-1.0: amo operations
+> >   target/riscv: rvv-1.0: load/store whole register instructions
+> >   target/riscv: rvv-1.0: update vext_max_elems() for load/store insns
+> >   target/riscv: rvv-1.0: take fractional LMUL into vector max elements
+> >     calculation
+> >   target/riscv: rvv-1.0: floating-point square-root instruction
+> >   target/riscv: rvv-1.0: floating-point classify instructions
+> >   target/riscv: rvv-1.0: mask population count instruction
+> >   target/riscv: rvv-1.0: find-first-set mask bit instruction
+> >   target/riscv: rvv-1.0: set-X-first mask bit instructions
+> >   target/riscv: rvv-1.0: iota instruction
+> >   target/riscv: rvv-1.0: element index instruction
+> >   target/riscv: rvv-1.0: allow load element with sign-extended
+> >   target/riscv: rvv-1.0: register gather instructions
+> >   target/riscv: rvv-1.0: integer scalar move instructions
+> >   target/riscv: rvv-1.0: floating-point move instruction
+> >   target/riscv: rvv-1.0: floating-point scalar move instructions
+> >   target/riscv: rvv-1.0: whole register move instructions
+> >   target/riscv: rvv-1.0: integer extension instructions
+> >   target/riscv: rvv-1.0: single-width averaging add and subtract
+> >     instructions
+> >   target/riscv: rvv-1.0: single-width bit shift instructions
+> >   target/riscv: rvv-1.0: integer add-with-carry/subtract-with-borrow
+> >   target/riscv: rvv-1.0: narrowing integer right shift instructions
+> >   target/riscv: rvv-1.0: widening integer multiply-add instructions
+> >   target/riscv: rvv-1.0: single-width saturating add and subtract
+> >     instructions
+> >   target/riscv: rvv-1.0: integer comparison instructions
+> >   target/riscv: rvv-1.0: floating-point compare instructions
+> >   target/riscv: rvv-1.0: mask-register logical instructions
+> >   target/riscv: rvv-1.0: slide instructions
+> >   target/riscv: rvv-1.0: floating-point slide instructions
+> >   target/riscv: rvv-1.0: narrowing fixed-point clip instructions
+> >   target/riscv: rvv-1.0: single-width floating-point reduction
+> >   target/riscv: rvv-1.0: widening floating-point reduction instructions
+> >   target/riscv: rvv-1.0: single-width scaling shift instructions
+> >   target/riscv: rvv-1.0: remove widening saturating scaled multiply-add
+> >   target/riscv: rvv-1.0: remove vmford.vv and vmford.vf
+> >   target/riscv: rvv-1.0: remove integer extract instruction
+> >   target/riscv: rvv-1.0: floating-point min/max instructions
+> >   target/riscv: introduce floating-point rounding mode enum
+> >   target/riscv: rvv-1.0: floating-point/integer type-convert
+> >     instructions
+> >   target/riscv: rvv-1.0: widening floating-point/integer type-convert
+> >   target/riscv: add "set round to odd" rounding mode helper function
+> >   target/riscv: rvv-1.0: narrowing floating-point/integer type-convert
+> >   target/riscv: rvv-1.0: relax RV_VLEN_MAX to 1024-bits
+> >   target/riscv: rvv-1.0: implement vstart CSR
+> >   target/riscv: rvv-1.0: trigger illegal instruction exception if frm is
+> >     not valid
+> >   target/riscv: rvv-1.0: set mstatus.SD bit when writing vector CSRs
+> >   target/riscv: rvv-1.0: floating-point reciprocal square-root estimate
+> >     instruction
+> >   target/riscv: rvv-1.0: floating-point reciprocal estimate instruction
+> >   target/riscv: set mstatus.SD bit when writing fp CSRs
+> >
+> > Greentime Hu (1):
+> >   target/riscv: rvv-1.0: add vlenb register
+> >
+> > Hsiangkai Wang (2):
+> >   target/riscv: gdb: modify gdb csr xml file to align with csr register
+> >     map
+> >   target/riscv: gdb: support vector registers for rv64 & rv32
+> >
+> > LIU Zhiwei (3):
+> >   target/riscv: rvv-1.0: add mstatus VS field
+> >   target/riscv: rvv-1.0: add sstatus VS field
+> >   target/riscv: rvv-1.0: add vcsr register
+> >
+> >  gdb-xml/riscv-32bit-csr.xml             |   18 +-
+> >  gdb-xml/riscv-64bit-csr.xml             |   18 +-
+> >  target/riscv/cpu.c                      |   11 +-
+> >  target/riscv/cpu.h                      |   98 +-
+> >  target/riscv/cpu_bits.h                 |   10 +
+> >  target/riscv/cpu_helper.c               |   15 +-
+> >  target/riscv/csr.c                      |   85 +-
+> >  target/riscv/fpu_helper.c               |   17 +-
+> >  target/riscv/gdbstub.c                  |  177 +-
+> >  target/riscv/helper.h                   |  503 ++-
+> >  target/riscv/insn32-64.decode           |   18 +-
+> >  target/riscv/insn32.decode              |  290 +-
+> >  target/riscv/insn_trans/trans_rvv.c.inc | 2475 ++++++++++-----
+> >  target/riscv/internals.h                |   24 +-
+> >  target/riscv/translate.c                |   72 +-
+> >  target/riscv/vector_helper.c            | 3690 ++++++++++++-----------
+> >  16 files changed, 4531 insertions(+), 2990 deletions(-)
+> >
+> > --
+> > 2.17.1
+> >
+> >
+>
+
+--00000000000082ac9805b9c792b6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Wed, Jan 20, 2021 at 3:12 AM Alistair =
+Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a=
+>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail=
+_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
+,204);padding-left:1ex">On Tue, Jan 12, 2021 at 1:40 AM &lt;<a href=3D"mail=
+to:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a>&gt;=
+ wrote:<br>
+&gt;<br>
+&gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=
+=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt;<br>
+&gt; This patchset implements the vector extension v1.0 for RISC-V on QEMU.=
+<br>
+&gt;<br>
+&gt; As vector extension specification is near to be ratified, this patchse=
+t is<br>
+&gt; sent as formal patchset for review.<br>
+<br>
+Do you know when the 1.0 spec will be released?<br></blockquote><div><br></=
+div><div>I&#39;m afraid I can&#39;t tell the exact date of when 1.0 spec.wi=
+ll be released.</div><div>As far as I know, although the community is tryin=
+g to push 1.0 spec. to be ratified,</div><div>but they are also still addin=
+g some new instructions on the fly, e.g. <i>vle1.v</i>/<i>sel.v</i> and <i>=
+vsetivli</i>.</div><div>Hope they can complete it soon.....</div><div><br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
+rder-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+&gt;<br>
+&gt; The port is available here:<br>
+&gt; <a href=3D"https://github.com/sifive/qemu/tree/rvv-1.0-upstream-v6" re=
+l=3D"noreferrer" target=3D"_blank">https://github.com/sifive/qemu/tree/rvv-=
+1.0-upstream-v6</a><br>
+&gt;<br>
+&gt; You can change the cpu argument: vext_spec to v1.0 (i.e. vext_spec=3Dv=
+1.0)<br>
+&gt; to run with RVV v1.0 instructions.<br>
+&gt;<br>
+&gt; Note: This patchset depends on another patchset listed in Based-on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0section below so it might not able to be bui=
+lt unless the patchset<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0is applied.<br>
+<br>
+Has this been merged?<br></blockquote><div><br></div><div>Yes, this one is =
+not merged yet and the latest patchset is:</div><div><a href=3D"https://pat=
+chew.org/QEMU/1597908641-6293-1-git-send-email-chihmin.chao@sifive.com/">&l=
+t;1597908641-6293-1-git-send-email-chihmin.chao@sifive.com&gt;</a></div><di=
+v>I&#39;ve asked Chih-Min about the status of this patchset.</div><div>He s=
+aid he will rebase the codes and send out a new patchset to review.</div><d=
+iv><br></div><div>Thanks,</div><div>Frank Chang</div><div>=C2=A0</div><bloc=
+kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
+1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+Alistair<br>
+<br>
+&gt;<br>
+&gt; Changelog:<br>
+&gt;<br>
+&gt; v6<br>
+&gt;=C2=A0 =C2=A0* add vector floating-point reciprocal estimate instructio=
+n.<br>
+&gt;=C2=A0 =C2=A0* add vector floating-point reciprocal square-root estimat=
+e instruction.<br>
+&gt;=C2=A0 =C2=A0* update check rules for segment register groups, each seg=
+ment register<br>
+&gt;=C2=A0 =C2=A0 =C2=A0group has to follow overlap rules.<br>
+&gt;=C2=A0 =C2=A0* update viota.m instruction check rules.<br>
+&gt;<br>
+&gt; v5<br>
+&gt;=C2=A0 =C2=A0* refactor RVV v1.0 check functions.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0(Thanks to Richard Henderson&#39;s bitwise tricks.)=
+<br>
+&gt;=C2=A0 =C2=A0* relax RV_VLEN_MAX to 1024-bits.<br>
+&gt;=C2=A0 =C2=A0* implement vstart CSR&#39;s behaviors.<br>
+&gt;=C2=A0 =C2=A0* trigger illegal instruction exception if frm is not vali=
+d for<br>
+&gt;=C2=A0 =C2=A0 =C2=A0vector floating-point instructions.<br>
+&gt;=C2=A0 =C2=A0* rebase on riscv-to-apply.next.<br>
+&gt;<br>
+&gt; v4<br>
+&gt;=C2=A0 =C2=A0* remove explicit float flmul variable in DisasContext.<br=
+>
+&gt;=C2=A0 =C2=A0* replace floating-point calculations with shift operation=
+s to<br>
+&gt;=C2=A0 =C2=A0 =C2=A0improve performance.<br>
+&gt;=C2=A0 =C2=A0* relax RV_VLEN_MAX to 512-bits.<br>
+&gt;<br>
+&gt; v3<br>
+&gt;=C2=A0 =C2=A0* apply nan-box helpers from Richard Henderson.<br>
+&gt;=C2=A0 =C2=A0* remove fp16 api changes as they are sent independently i=
+n another<br>
+&gt;=C2=A0 =C2=A0 =C2=A0pathcset by Chih-Min Chao.<br>
+&gt;=C2=A0 =C2=A0* remove all tail elements clear functions as tail element=
+s can<br>
+&gt;=C2=A0 =C2=A0 =C2=A0retain unchanged for either VTA set to undisturbed =
+or agnostic.<br>
+&gt;=C2=A0 =C2=A0* add fp16 nan-box check generator function.<br>
+&gt;=C2=A0 =C2=A0* add floating-point rounding mode enum.<br>
+&gt;=C2=A0 =C2=A0* replace flmul arithmetic with shifts to avoid floating-p=
+oint<br>
+&gt;=C2=A0 =C2=A0 =C2=A0conversions.<br>
+&gt;=C2=A0 =C2=A0* add Zvqmac extension.<br>
+&gt;=C2=A0 =C2=A0* replace gdbstub vector register xml files with dynamic g=
+enerator.<br>
+&gt;=C2=A0 =C2=A0* bumped to RVV v1.0.<br>
+&gt;=C2=A0 =C2=A0* RVV v1.0 related changes:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0* add vl&lt;nf&gt;re&lt;eew&gt;.v and vs&lt;nf&gt;r=
+.v vector whole register<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0load/store instructions<br>
+&gt;=C2=A0 =C2=A0 =C2=A0* add vrgatherei16 instruction.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0* rearranged bits in vtype to make vlmul bits into =
+a contiguous<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0field.<br>
+&gt;<br>
+&gt; v2<br>
+&gt;=C2=A0 =C2=A0* drop v0.7.1 support.<br>
+&gt;=C2=A0 =C2=A0* replace invisible return check macros with functions.<br=
+>
+&gt;=C2=A0 =C2=A0* move mark_vs_dirty() to translators.<br>
+&gt;=C2=A0 =C2=A0* add SSTATUS_VS flag for s-mode.<br>
+&gt;=C2=A0 =C2=A0* nan-box scalar fp register for floating-point operations=
+.<br>
+&gt;=C2=A0 =C2=A0* add gdbstub files for vector registers to allow system-m=
+ode<br>
+&gt;=C2=A0 =C2=A0 =C2=A0debugging with GDB.<br>
+&gt;<br>
+&gt; Based-on: &lt;<a href=3D"http://1596102747-20226-1-git-send-email-chih=
+min.chao@sifive.com/" rel=3D"noreferrer" target=3D"_blank">1596102747-20226=
+-1-git-send-email-chihmin.chao@sifive.com/</a>&gt;<br>
+&gt;<br>
+&gt; Frank Chang (66):<br>
+&gt;=C2=A0 =C2=A0target/riscv: drop vector 0.7.1 and add 1.0 support<br>
+&gt;=C2=A0 =C2=A0target/riscv: Use FIELD_EX32() to extract wd field<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: introduce writable misa.v field<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: add translation-time vector context=
+ status<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: remove rvv related codes from fcsr =
+registers<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: check MSTATUS_VS when accessing vec=
+tor csr<br>
+&gt;=C2=A0 =C2=A0 =C2=A0registers<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: remove MLEN calculations<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: add fractional LMUL<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: add VMA and VTA<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: update check functions<br>
+&gt;=C2=A0 =C2=A0target/riscv: introduce more imm value modes in translator=
+ functions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv:1.0: add translation-time nan-box helper=
+ function<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: configure instructions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: stride load and store instructions<=
+br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: index load and store instructions<b=
+r>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: fix address index overflow bug of i=
+ndexed<br>
+&gt;=C2=A0 =C2=A0 =C2=A0load/store insns<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: fault-only-first unit stride load<b=
+r>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: amo operations<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: load/store whole register instructi=
+ons<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: update vext_max_elems() for load/st=
+ore insns<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: take fractional LMUL into vector ma=
+x elements<br>
+&gt;=C2=A0 =C2=A0 =C2=A0calculation<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: floating-point square-root instruct=
+ion<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: floating-point classify instruction=
+s<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: mask population count instruction<b=
+r>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: find-first-set mask bit instruction=
+<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: set-X-first mask bit instructions<b=
+r>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: iota instruction<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: element index instruction<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: allow load element with sign-extend=
+ed<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: register gather instructions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: integer scalar move instructions<br=
+>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: floating-point move instruction<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: floating-point scalar move instruct=
+ions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: whole register move instructions<br=
+>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: integer extension instructions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: single-width averaging add and subt=
+ract<br>
+&gt;=C2=A0 =C2=A0 =C2=A0instructions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: single-width bit shift instructions=
+<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: integer add-with-carry/subtract-wit=
+h-borrow<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: narrowing integer right shift instr=
+uctions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: widening integer multiply-add instr=
+uctions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: single-width saturating add and sub=
+tract<br>
+&gt;=C2=A0 =C2=A0 =C2=A0instructions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: integer comparison instructions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: floating-point compare instructions=
+<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: mask-register logical instructions<=
+br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: slide instructions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: floating-point slide instructions<b=
+r>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: narrowing fixed-point clip instruct=
+ions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: single-width floating-point reducti=
+on<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: widening floating-point reduction i=
+nstructions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: single-width scaling shift instruct=
+ions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: remove widening saturating scaled m=
+ultiply-add<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: remove vmford.vv and vmford.vf<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: remove integer extract instruction<=
+br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: floating-point min/max instructions=
+<br>
+&gt;=C2=A0 =C2=A0target/riscv: introduce floating-point rounding mode enum<=
+br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: floating-point/integer type-convert=
+<br>
+&gt;=C2=A0 =C2=A0 =C2=A0instructions<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: widening floating-point/integer typ=
+e-convert<br>
+&gt;=C2=A0 =C2=A0target/riscv: add &quot;set round to odd&quot; rounding mo=
+de helper function<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: narrowing floating-point/integer ty=
+pe-convert<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: relax RV_VLEN_MAX to 1024-bits<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: implement vstart CSR<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: trigger illegal instruction excepti=
+on if frm is<br>
+&gt;=C2=A0 =C2=A0 =C2=A0not valid<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: set mstatus.SD bit when writing vec=
+tor CSRs<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: floating-point reciprocal square-ro=
+ot estimate<br>
+&gt;=C2=A0 =C2=A0 =C2=A0instruction<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: floating-point reciprocal estimate =
+instruction<br>
+&gt;=C2=A0 =C2=A0target/riscv: set mstatus.SD bit when writing fp CSRs<br>
+&gt;<br>
+&gt; Greentime Hu (1):<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: add vlenb register<br>
+&gt;<br>
+&gt; Hsiangkai Wang (2):<br>
+&gt;=C2=A0 =C2=A0target/riscv: gdb: modify gdb csr xml file to align with c=
+sr register<br>
+&gt;=C2=A0 =C2=A0 =C2=A0map<br>
+&gt;=C2=A0 =C2=A0target/riscv: gdb: support vector registers for rv64 &amp;=
+ rv32<br>
+&gt;<br>
+&gt; LIU Zhiwei (3):<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: add mstatus VS field<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: add sstatus VS field<br>
+&gt;=C2=A0 =C2=A0target/riscv: rvv-1.0: add vcsr register<br>
+&gt;<br>
+&gt;=C2=A0 gdb-xml/riscv-32bit-csr.xml=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0|=C2=A0 =C2=A018 +-<br>
+&gt;=C2=A0 gdb-xml/riscv-64bit-csr.xml=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0|=C2=A0 =C2=A018 +-<br>
+&gt;=C2=A0 target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A011 +-<br>
+&gt;=C2=A0 target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A098 +-<br>
+&gt;=C2=A0 target/riscv/cpu_bits.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A010 +<br>
+&gt;=C2=A0 target/riscv/cpu_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A015 +-<br>
+&gt;=C2=A0 target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A085 +-<br>
+&gt;=C2=A0 target/riscv/fpu_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A017 +-<br>
+&gt;=C2=A0 target/riscv/gdbstub.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 |=C2=A0 177 +-<br>
+&gt;=C2=A0 target/riscv/helper.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 503 ++-<br>
+&gt;=C2=A0 target/riscv/insn32-64.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0|=C2=A0 =C2=A018 +-<br>
+&gt;=C2=A0 target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 |=C2=A0 290 +-<br>
+&gt;=C2=A0 target/riscv/insn_trans/trans_rvv.c.inc | 2475 ++++++++++-----<b=
+r>
+&gt;=C2=A0 target/riscv/internals.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A024 +-<br>
+&gt;=C2=A0 target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A072 +-<br>
+&gt;=C2=A0 target/riscv/vector_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 | 3690 ++++++++++++-----------<br>
+&gt;=C2=A0 16 files changed, 4531 insertions(+), 2990 deletions(-)<br>
+&gt;<br>
+&gt; --<br>
+&gt; 2.17.1<br>
+&gt;<br>
+&gt;<br>
+</blockquote></div></div>
+
+--00000000000082ac9805b9c792b6--
 
