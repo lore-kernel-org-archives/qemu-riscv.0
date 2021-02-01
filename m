@@ -1,52 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l6fLo-0003qY-It
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Feb 2021 14:59:08 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54136)
+	id 1l6fMe-0005KV-Fw
+	for mharc-qemu-riscv@gnu.org; Mon, 01 Feb 2021 15:00:00 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54278)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l6fLh-0003kE-Cu; Mon, 01 Feb 2021 14:59:03 -0500
-Received: from mail-il1-x135.google.com ([2607:f8b0:4864:20::135]:38272)
+ id 1l6fMc-0005GG-9n; Mon, 01 Feb 2021 14:59:58 -0500
+Received: from mail-il1-x133.google.com ([2607:f8b0:4864:20::133]:41337)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l6fLd-0006S7-Qo; Mon, 01 Feb 2021 14:59:01 -0500
-Received: by mail-il1-x135.google.com with SMTP id a1so16848191ilr.5;
- Mon, 01 Feb 2021 11:58:55 -0800 (PST)
+ id 1l6fMa-0006yc-If; Mon, 01 Feb 2021 14:59:58 -0500
+Received: by mail-il1-x133.google.com with SMTP id p15so16130573ilq.8;
+ Mon, 01 Feb 2021 11:59:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=SKyyWMxTpIpg6K+Vsby9Djb/AwohucHSDi/F4Vwzhw4=;
- b=tzTFUWGIt/jbJtBuJEOSSbOZaKaI/R57rNrNjA8YZkHq4YFzseAlCTndZHILaE0jjV
- XcN+fRSEEU92OM/RtuReIeds9T4kTj6oMvCIeoFuqeugMhE8uPUxkDim8oGn5265kVhA
- c/Mxax7i/l0tfw3u4UvkQPpCQGcEfcuhYCBs++N8aX6/TbdPfAHfBrtbHy3dwW5zU5r3
- BIDo6KA5T/F4plzh1syDUlxXYmhjWkCT32nGWL2Qsg8t9wPW/bE4Y+Am7ejYW0ZieG3G
- ncYPSJN9tTZ+uqV1pzdlxnqjDJTPP4reCJ32WdQeXHLsfdGd8ua5dpq6kASDikckmGi+
- X2eQ==
+ bh=GDenK5/Y6Tw0AuufIxmVZZ1MA9L3+vzEFpguQA9Cjls=;
+ b=niKCoEfugQ5PK78TwJoKKMSo+2T21jM4fPm8pPUGvLZjL82EAWBjwnsKbjY+HYcyU6
+ aJjydNfJFTNsN3hsEOI7ubCpVGS74zVa/YExdywLmb9KDyeZIOCDZgomlvyC45q0zK0i
+ S2mgH9PWFbGprjrAbzlO5XkiK8k/DK5GVLzsLjpjRYjC1sB/famY9ULIm/snHaGjKccR
+ q6EbAIB+5LsPi7hcUqAoH+WmIvBJiWM2R7eNn+T6ft4Lq+qxEsaxMoaqPRBHvjfaVWhS
+ yTBIeig1gn//crqBTFH1NcgANVI5Wyvbl1TeY44s0iFiE+Jbp5yDOZFdTVTj6B0FDJ6k
+ gA4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=SKyyWMxTpIpg6K+Vsby9Djb/AwohucHSDi/F4Vwzhw4=;
- b=WLLlZ7Gj2WfmHEH2//2tm7rm+9Yjb2FQHivxwIxjwow53a55YRs9d5WV4vf6EBUATT
- yZWwrBz8aAyQD/KCHJq5l0rUPBJJp03OWoxNxYjYbCpEFvrPorWrPHQ25KX0NP6LkzhU
- MyTZcbA72sj4xneKiuAIzJryLXXUik95pd7c05nGjVdpzLM79v2FXylqe+Kwk/UXXjXs
- A5tmY0DwW39JE7LcoF8lYO1cAld4zfj/6Dz66ypyvjHKH0451dnIublt3vDq49Sm6s7z
- yS720KIbO4IGq2UtvuM9+n5qDlGOWj96o6M0M/x7EAunBU1V1CyDXF1i4AEE4LBaUKFJ
- bLJQ==
-X-Gm-Message-State: AOAM530tQCjjNCV7rljLesAtwoejpXkktsu8DojwrE0MhFAvUZ8RYlTc
- gk2B6WU8wFijO3QsKqaFh7iUjuMu6Y/ym04KvpU=
-X-Google-Smtp-Source: ABdhPJySdadrxzzwNF2ryS4eN2JSOOO0w7oSrLlIH48L7SH5Oad7lB269hmQan6Yq4xbgfKqAhNAqAnZAYBRgk3WZjk=
-X-Received: by 2002:a05:6e02:963:: with SMTP id
- q3mr14399945ilt.227.1612209534947; 
- Mon, 01 Feb 2021 11:58:54 -0800 (PST)
+ bh=GDenK5/Y6Tw0AuufIxmVZZ1MA9L3+vzEFpguQA9Cjls=;
+ b=TLZVpfwp1Qn/llozCxUknDDhdW3edA+gLtUz3m8h/lC+wuq6SMzYi5yQu6E9hm/Ml3
+ L9A5zMF2GakLZHxdXEA/wSzhtNZ3C6ZnngHP3r/L1hyfVVOq7XsJttzy5bznUsBRslOc
+ jWBV+us5/cJTS7UGWoQokWKwDW6lZ10wh/oU/qawW6WPcFbfjlzGM90pWy5C3StKbs0x
+ 3QZrVe09K+EM7je7KtKc5EU/lgh4Uhfa/IFhBcYEqe8cJsRdhvEmRuJ7TUgdwn7i6bGr
+ qUcx1O/i5fz72Zf0RsiKO9aIKKnz/VadgHO/a1BPjBRO6EoMy1rpzh4sFdWmAaStlNnx
+ 261g==
+X-Gm-Message-State: AOAM532bU9PHmLPdQtkcv+GSJC1IMxBsHpZGqxUutNRWoeBTsg9Htt82
+ a/VVVj8bCIkR7EzLahVPF1lGVgCiVyLCX+0pskY=
+X-Google-Smtp-Source: ABdhPJwzc0t2XzSS0cYo/LZ3JL+MxIgQ8+UL10QgsFRolJRObMtAeWIIajsriOccHiDvNJLQNtaKuaXteSrX7PanraM=
+X-Received: by 2002:a92:cda1:: with SMTP id g1mr14217320ild.267.1612209594110; 
+ Mon, 01 Feb 2021 11:59:54 -0800 (PST)
 MIME-Version: 1.0
 References: <20210131111316.232778-1-f4bug@amsat.org>
- <20210131111316.232778-9-f4bug@amsat.org>
-In-Reply-To: <20210131111316.232778-9-f4bug@amsat.org>
+ <20210131111316.232778-10-f4bug@amsat.org>
+In-Reply-To: <20210131111316.232778-10-f4bug@amsat.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 1 Feb 2021 11:58:27 -0800
-Message-ID: <CAKmqyKNLM9TRr9PhAOk+fqcW9d7T8P5BRE0YJrkGfE52t1Pg3A@mail.gmail.com>
-Subject: Re: [PATCH 08/10] default-configs: Remove unnecessary SEMIHOSTING
- selection
+Date: Mon, 1 Feb 2021 11:59:25 -0800
+Message-ID: <CAKmqyKPukRjL9drhUxeVvL04etQ97AWdWH+SAiOyyBUMJs6sLQ@mail.gmail.com>
+Subject: Re: [PATCH 09/10] target: Move ARM_COMPATIBLE_SEMIHOSTING feature to
+ target Kconfig
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Paolo Bonzini <pbonzini@redhat.com>, 
@@ -80,8 +79,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Aurelien Jarno <aurelien@aurel32.net>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::135;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x135.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x133.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -102,14 +101,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2021 19:59:07 -0000
+X-List-Received-Date: Mon, 01 Feb 2021 19:59:59 -0000
 
-On Sun, Jan 31, 2021 at 3:24 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
+On Sun, Jan 31, 2021 at 3:14 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
 g> wrote:
 >
-> Commit 56b5170c87e ("semihosting: Move ARM semihosting code to
-> shared directories") selected ARM_COMPATIBLE_SEMIHOSTING which
-> already selects SEMIHOSTING. No need to select it again.
+> ARM_COMPATIBLE_SEMIHOSTING is an architecture feature, move its
+> declaration to each target/ARCH/.
+>
+> Note, we do not modify the linux-user targets, as user-mode builds
+> don't use Kconfig.
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 
@@ -121,46 +122,70 @@ Alistair
 >  default-configs/devices/arm-softmmu.mak     | 1 -
 >  default-configs/devices/riscv32-softmmu.mak | 1 -
 >  default-configs/devices/riscv64-softmmu.mak | 1 -
->  3 files changed, 3 deletions(-)
+>  target/arm/Kconfig                          | 1 +
+>  target/riscv/Kconfig                        | 2 ++
+>  5 files changed, 3 insertions(+), 3 deletions(-)
 >
 > diff --git a/default-configs/devices/arm-softmmu.mak b/default-configs/de=
 vices/arm-softmmu.mak
-> index 0500156a0c7..341d439de6f 100644
+> index 341d439de6f..0824e9be795 100644
 > --- a/default-configs/devices/arm-softmmu.mak
 > +++ b/default-configs/devices/arm-softmmu.mak
-> @@ -41,6 +41,5 @@ CONFIG_MICROBIT=3Dy
+> @@ -41,5 +41,4 @@ CONFIG_MICROBIT=3Dy
 >  CONFIG_FSL_IMX25=3Dy
 >  CONFIG_FSL_IMX7=3Dy
 >  CONFIG_FSL_IMX6UL=3Dy
-> -CONFIG_SEMIHOSTING=3Dy
->  CONFIG_ARM_COMPATIBLE_SEMIHOSTING=3Dy
+> -CONFIG_ARM_COMPATIBLE_SEMIHOSTING=3Dy
 >  CONFIG_ALLWINNER_H3=3Dy
 > diff --git a/default-configs/devices/riscv32-softmmu.mak b/default-config=
 s/devices/riscv32-softmmu.mak
-> index d847bd5692e..5c9ad2590ef 100644
+> index 5c9ad2590ef..94a236c9c25 100644
 > --- a/default-configs/devices/riscv32-softmmu.mak
 > +++ b/default-configs/devices/riscv32-softmmu.mak
 > @@ -3,7 +3,6 @@
 >  # Uncomment the following lines to disable these optional devices:
 >  #
 >  #CONFIG_PCI_DEVICES=3Dn
-> -CONFIG_SEMIHOSTING=3Dy
->  CONFIG_ARM_COMPATIBLE_SEMIHOSTING=3Dy
+> -CONFIG_ARM_COMPATIBLE_SEMIHOSTING=3Dy
 >
 >  # Boards:
+>  #
 > diff --git a/default-configs/devices/riscv64-softmmu.mak b/default-config=
 s/devices/riscv64-softmmu.mak
-> index d5eec75f05e..d5b2e25b6df 100644
+> index d5b2e25b6df..76b61956489 100644
 > --- a/default-configs/devices/riscv64-softmmu.mak
 > +++ b/default-configs/devices/riscv64-softmmu.mak
 > @@ -3,7 +3,6 @@
 >  # Uncomment the following lines to disable these optional devices:
 >  #
 >  #CONFIG_PCI_DEVICES=3Dn
-> -CONFIG_SEMIHOSTING=3Dy
->  CONFIG_ARM_COMPATIBLE_SEMIHOSTING=3Dy
+> -CONFIG_ARM_COMPATIBLE_SEMIHOSTING=3Dy
 >
 >  # Boards:
+>  #
+> diff --git a/target/arm/Kconfig b/target/arm/Kconfig
+> index 1f05de47ca6..ae89d05c7e5 100644
+> --- a/target/arm/Kconfig
+> +++ b/target/arm/Kconfig
+> @@ -1,5 +1,6 @@
+>  config ARM
+>      bool
+> +    select ARM_COMPATIBLE_SEMIHOSTING
+>
+>  config AARCH64
+>      bool
+> diff --git a/target/riscv/Kconfig b/target/riscv/Kconfig
+> index b9e5932f13f..c3b9d8a1cf1 100644
+> --- a/target/riscv/Kconfig
+> +++ b/target/riscv/Kconfig
+> @@ -1,5 +1,7 @@
+>  config RISCV32
+>      bool
+> +    select ARM_COMPATIBLE_SEMIHOSTING
+>
+>  config RISCV64
+>      bool
+> +    select ARM_COMPATIBLE_SEMIHOSTING
 > --
 > 2.26.2
 >
