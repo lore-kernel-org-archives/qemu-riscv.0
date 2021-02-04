@@ -1,69 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l7Nop-0004U5-8b
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Feb 2021 14:28:03 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46542)
+	id 1l7mP5-0001S9-RT
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Feb 2021 16:43:08 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56446)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l7Non-0004Q8-Ty; Wed, 03 Feb 2021 14:28:01 -0500
-Received: from mail-il1-x12d.google.com ([2607:f8b0:4864:20::12d]:37985)
+ (Exim 4.90_1) (envelope-from <jahagirdar.vs@gmail.com>)
+ id 1l7mP4-0001Rz-Lf
+ for qemu-riscv@nongnu.org; Thu, 04 Feb 2021 16:43:06 -0500
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:54965)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l7Noj-000491-GC; Wed, 03 Feb 2021 14:28:01 -0500
-Received: by mail-il1-x12d.google.com with SMTP id a16so328683ilq.5;
- Wed, 03 Feb 2021 11:27:55 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <jahagirdar.vs@gmail.com>)
+ id 1l7mOy-0002AM-Hw
+ for qemu-riscv@nongnu.org; Thu, 04 Feb 2021 16:43:06 -0500
+Received: by mail-pj1-x1033.google.com with SMTP id m12so2460877pjs.4
+ for <qemu-riscv@nongnu.org>; Thu, 04 Feb 2021 13:42:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gsMH2SYUwl4FmVURapXdw1cZIOy+0YQVzKHqvjmgP9A=;
- b=Vh2AquHXSkYvJ+ba5pVSdPsFHpXF4dq7l6BHGiPovEw6nkFyr0zKqK8mNtYgn6xgzb
- rbg/JOdlwem3dQax+1u8kjeVwnJSZQrB7ujFdck3e20+0aBFDNxyKh3OTCRAxvG/KIaN
- j4dJmGAkCYtKHHDFO08jvvYncysJICM232ysjcXE9ftB6QCr315wT1efMG/i6SDtEs5u
- L6KMborFG5PUYVNpS6ckvv9u+JabLghC7EQuhDz5Y2lr01ZLSuJks6FmZ0dU+CcdwT8O
- lwqHL40HoRGySBk4NuhB1E5w9qzz37zoFMiTZ621jxQDU8mwnRtKtzk8HA65qgcr0zx7
- bpCQ==
+ h=mime-version:from:date:message-id:subject:to;
+ bh=/i/IEIVt4fzKzFLjq+j09tKQax2gxMQYNU6vy9Pc92E=;
+ b=RtmmuM9xGYhh8f/bSWZzW3jaHMW64yJm8vuyKe++IvLBOF+fi9n05LKW5z0QdWQU3n
+ +2lshU57M6qVVb8H84JvwD3I1JRRX/g53el+fbO35X6Bnog/DHW4MdCSsVt94/2oEEcf
+ ka4mLeJhd3a9YaWTwGu+w24msLgUCzrxWu8Z4WQLCPHTAANaeTfW/XvmW8G/YQx9RsnH
+ YX6HnVwuqnTA0QClRLSFTbdDNVTZvte/8oy7cncGnO+7xfwrnMuL5/tMleNOl3h5qfak
+ wMMbP4RKjXc8DRQWHxpdPZiYXAU3uu25PxrlwTUQuQM3yi2TaBAvG6Am+hGpKUp12g+W
+ A2/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=gsMH2SYUwl4FmVURapXdw1cZIOy+0YQVzKHqvjmgP9A=;
- b=V6eY3ep2QpRn4OAUFteZez8puSegmmEKa20XXF5xeEs3k/EPsZmU4gEjPLl2WHI5yo
- XjPEVUnYNpmC05sLXDkNDF5DbcYtxBZwnZDA65uG0sf4UxDk6vuQW5RICt07h7vegq8V
- H2FBT+xgrpy3ZXy4yRkvRmW24l0oc5JRRJcs1ijYPfei2vY6xkiCfEk7dYhFfnZG847c
- 9iUVDDJMV8iTmLy/Zywh8ySy+/OOII+3twcH/a8+gGbTaGMXuDNgnjRcOQY0t4tLHAQ4
- cEIat7d7lL1ixNPgHEJqKGL8MIeRB1Du/nZb5g8ak6BTHxKGaT56z8aaxZ++xX4UF1Es
- 22uQ==
-X-Gm-Message-State: AOAM533XBXnUQGeRWvL1x6iCdWIb2EkMaZhVJP7khriOLwQnnDmxJ9IE
- Oj74eW2HG1AEC27pgvb6y2snv7IzfRl8lpbbuYA=
-X-Google-Smtp-Source: ABdhPJysR9NrOm8xGZSr6dC8BkzCH3k1ZHSSij+kB+UHY/v65FV0A4DjnDyJxJ9iJhkMl+rayipVLcByz+PVipo2EsE=
-X-Received: by 2002:a92:d445:: with SMTP id r5mr2840760ilm.227.1612380474957; 
- Wed, 03 Feb 2021 11:27:54 -0800 (PST)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=/i/IEIVt4fzKzFLjq+j09tKQax2gxMQYNU6vy9Pc92E=;
+ b=P9ts5DHov7oBPx2HW0FoyRywjrzh2ChzdUljfd7GgIket7PHIbnA4DxHjNRwyt18Qg
+ jT4mk3yuGxmHsd2AzVsvHrxwVFgrTcgegdtpL9wN2VuvIygQxzppQLK1Fj0qkZnuh/go
+ Ksd/jTRNjzBuMM/FA57nvIShhXZs88TosxHB5a+Hus8hlgY0WOJ4UgBoGVcwt/7DO+7m
+ HknN/gLmvA5K/TIsEVQX22giT4IDlzt4zEqGvmHEq6IPNexHr9k4tygzBTS9WMYJ4Su6
+ W+oBgI6Iy2FAIxnuBFirVvsYcSA/djEZ2yZCFvdKvvi82LX4GZrRpqnMauKmf44sEsaS
+ Ok5A==
+X-Gm-Message-State: AOAM532KIjvTKSh/ynDRtWXBJ4xbsAarLPuc7qYPON6HnpypoJUHDsPR
+ A7NJ/40WGJJxavtjnAf1Bjsv4ycXO6eUnXrQiTdWZj7XwGvtSw==
+X-Google-Smtp-Source: ABdhPJxAiXNqqS8+vhnsVgYIu6Ki637VF+oO30KrOwDUKBbGVuYVPPoQyaQGuZ+7MWF9qtrES9Bh3ndXjAxtonVU2kk=
+X-Received: by 2002:a17:90b:358d:: with SMTP id
+ mm13mr998323pjb.146.1612474973075; 
+ Thu, 04 Feb 2021 13:42:53 -0800 (PST)
 MIME-Version: 1.0
-References: <20210110185109.29841-1-space.monkey.delivers@gmail.com>
- <20210110185109.29841-6-space.monkey.delivers@gmail.com>
-In-Reply-To: <20210110185109.29841-6-space.monkey.delivers@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 3 Feb 2021 11:27:29 -0800
-Message-ID: <CAKmqyKNXStzu5kv7R+EGXHuAvchpWi9bDjM300b8SgB=JgNLgw@mail.gmail.com>
-Subject: Re: [PATCH v7 5/6] [RISCV_PM] Implement address masking functions
- required for RISC-V Pointer Masking extension
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- space.monkey.delivers@gmail.com, 
- Alistair Francis <Alistair.Francis@wdc.com>, kupokupokupopo@gmail.com, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+From: vijayvithal jahagirdar <jahagirdar.vs@gmail.com>
+Date: Fri, 5 Feb 2021 03:12:41 +0530
+Message-ID: <CANvkr8f=X2FR3Kzt0QNm318qA7=jyBrrcUFV-soioMz6CYobYA@mail.gmail.com>
+Subject: Sample Baremetal program with Interrupt
+To: qemu-riscv@nongnu.org
+Content-Type: multipart/alternative; boundary="000000000000fabd4a05ba899558"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=jahagirdar.vs@gmail.com; helo=mail-pj1-x1033.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -77,143 +66,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2021 19:28:02 -0000
+X-List-Received-Date: Thu, 04 Feb 2021 21:43:06 -0000
 
-On Sun, Jan 10, 2021 at 10:53 AM Alexey Baturo <baturo.alexey@gmail.com> wrote:
->
-> From: Anatoly Parshintsev <kupokupokupopo@gmail.com>
->
-> Signed-off-by: Anatoly Parshintsev <kupokupokupopo@gmail.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  target/riscv/cpu.h       | 19 +++++++++++++++++++
->  target/riscv/translate.c | 34 ++++++++++++++++++++++++++++++++--
->  2 files changed, 51 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 37ea7f7802..b3c63ca5ff 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -397,6 +397,7 @@ FIELD(TB_FLAGS, SEW, 5, 3)
->  FIELD(TB_FLAGS, VILL, 8, 1)
->  /* Is a Hypervisor instruction load/store allowed? */
->  FIELD(TB_FLAGS, HLSX, 9, 1)
-> +FIELD(TB_FLAGS, PM_ENABLED, 10, 1)
+--000000000000fabd4a05ba899558
+Content-Type: text/plain; charset="UTF-8"
 
-Can you add a comment above this for what this is? PM could be lots of
-different things.
+I am extending hw/riscv/virt.c to model some custom hardware.
+At some point in the code, I am calling
+ qemu_irq_raise(s->irq);
+I was expecting this to trigger the corresponding routine in my baremetal
+program. But the routine was not triggered.
 
->
->  bool riscv_cpu_is_32bit(CPURISCVState *env);
->
-> @@ -454,6 +455,24 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->              flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
->          }
->      }
-> +    if (riscv_has_ext(env, RVJ)) {
-> +        int priv = cpu_mmu_index(env, false);
-> +        bool pm_enabled = false;
-> +        switch (priv) {
-> +        case PRV_U:
-> +            pm_enabled = env->mmte & U_PM_ENABLE;
-> +            break;
-> +        case PRV_S:
-> +            pm_enabled = env->mmte & S_PM_ENABLE;
-> +            break;
-> +        case PRV_M:
-> +            pm_enabled = env->mmte & M_PM_ENABLE;
-> +            break;
-> +        default:
-> +            g_assert_not_reached();
-> +        }
-> +        flags = FIELD_DP32(flags, TB_FLAGS, PM_ENABLED, pm_enabled);
-> +    }
->  #endif
->
->      *pflags = flags;
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 5da7330f33..980604935d 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -36,6 +36,9 @@ static TCGv cpu_gpr[32], cpu_pc, cpu_vl;
->  static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
->  static TCGv load_res;
->  static TCGv load_val;
-> +/* globals for PM CSRs */
-> +static TCGv pm_mask[4];
-> +static TCGv pm_base[4];
->
->  #include "exec/gen-icount.h"
->
-> @@ -64,6 +67,10 @@ typedef struct DisasContext {
->      uint16_t vlen;
->      uint16_t mlen;
->      bool vl_eq_vlmax;
-> +    /* PointerMasking extension */
-> +    bool pm_enabled;
-> +    TCGv pm_mask;
-> +    TCGv pm_base;
->  } DisasContext;
->
->  #ifdef TARGET_RISCV64
-> @@ -103,13 +110,19 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
->  }
->
->  /*
-> - * Temp stub: generates address adjustment for PointerMasking
-> + * Generates address adjustment for PointerMasking
->   */
->  static void gen_pm_adjust_address(DisasContext *s,
->                                    TCGv_i64      dst,
->                                    TCGv_i64      src)
->  {
-> -    tcg_gen_mov_i64(dst, src);
-> +    if (!s->pm_enabled) {
-> +        /* Load unmodified address */
-> +        tcg_gen_mov_i64(dst, src);
-> +    } else {
-> +        tcg_gen_andc_i64(dst, src, s->pm_mask);
-> +        tcg_gen_or_i64(dst, dst, s->pm_base);
-> +    }
->  }
->
->  /*
-> @@ -828,6 +841,10 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
->      ctx->mlen = 1 << (ctx->sew  + 3 - ctx->lmul);
->      ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
-> +    ctx->pm_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_ENABLED);
-> +    int priv = cpu_mmu_index(env, false);
+Is there a reference  baremetal program with interrupt for qemu+riscv that
+I can use as a reference to debug my code??
+Is  qemu_irq_raise(s->irq); correct & complete method for raising an
+Interrupt?
+*Note: *As a part of the debug process, I tried the following:
+uint64_t mie_reg;
+mie_reg = read_csr(mie);
+ mie_reg = mie_reg | 0x0000000000000800;
+write_csr(mie, mie_reg);
+ mie_reg = read_csr(mie);
+printf(" mie_reg after write_csr fun %lx  \n",mie_reg);
 
-Can you AND this with TB_FLAGS_PRIV_MMU_MASK?
+I was expecting the print to return 0x800, but it returned 0x00, I am not
+sure what next steps I should take to debug this.
 
-Alistair
+Regards
+Vijay
 
-> +    ctx->pm_mask = pm_mask[priv];
-> +    ctx->pm_base = pm_base[priv];
->  }
->
->  static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
-> @@ -947,4 +964,17 @@ void riscv_translate_init(void)
->                               "load_res");
->      load_val = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, load_val),
->                               "load_val");
-> +    /* Assign PM CSRs to tcg globals */
-> +    pm_mask[PRV_U] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmmask), "upmmask");
-> +    pm_base[PRV_U] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmbase), "upmbase");
-> +    pm_mask[PRV_S] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmmask), "spmmask");
-> +    pm_base[PRV_S] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmbase), "spmbase");
-> +    pm_mask[PRV_M] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmmask), "mpmmask");
-> +    pm_base[PRV_M] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmbase), "mpmbase");
->  }
-> --
-> 2.20.1
->
->
+--000000000000fabd4a05ba899558
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><div><div><div>I am extending hw/riscv/virt.c to mode=
+l some custom hardware.<br></div>At some point in the code, I am calling <b=
+r>=C2=A0qemu_irq_raise(s-&gt;irq);<br></div>I was expecting this to trigger=
+ the corresponding routine in my baremetal program. But the routine was not=
+ triggered.<br><br></div>Is there a reference=C2=A0 baremetal program with =
+interrupt for qemu+riscv that I can use as a reference to debug my code??<b=
+r></div><div>Is=C2=A0 qemu_irq_raise(s-&gt;irq); correct &amp; complete met=
+hod for raising an Interrupt?<br></div><b>Note: </b>As a part of the debug =
+process, I tried the following:<br><div><div><div><div><div><div>uint64_t m=
+ie_reg;<br>mie_reg =3D read_csr(mie);<br>=C2=A0mie_reg =3D mie_reg | 0x0000=
+000000000800;<br>write_csr(mie, mie_reg);<br>=C2=A0mie_reg =3D read_csr(mie=
+);<br>printf(&quot; mie_reg after write_csr fun %lx =C2=A0\n&quot;,mie_reg)=
+;<br><br></div><div>I was expecting the print to return 0x800, but it retur=
+ned 0x00, I am not sure what next steps I should take to debug this.<br><br=
+></div><div>Regards<br></div><div>Vijay</div><div><div dir=3D"ltr" class=3D=
+"gmail_signature" data-smartmail=3D"gmail_signature"><br></div></div></div>=
+</div></div></div></div></div>
+
+--000000000000fabd4a05ba899558--
 
