@@ -1,85 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l96yk-0004x6-ED
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Feb 2021 08:53:27 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50482)
+	id 1l9777-0005ze-Pj
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Feb 2021 09:02:14 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52288)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1l96yP-0004te-T1; Mon, 08 Feb 2021 08:53:07 -0500
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430]:41713)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1l976L-0005uU-F2
+ for qemu-riscv@nongnu.org; Mon, 08 Feb 2021 09:01:23 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e]:55630)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1l96yF-0000Kp-6X; Mon, 08 Feb 2021 08:52:57 -0500
-Received: by mail-wr1-x430.google.com with SMTP id n6so4393971wrv.8;
- Mon, 08 Feb 2021 05:52:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=RO1fjUbPuaoEr7p6+/bv1uAV/ae5IRUpPRFbET0L9rM=;
- b=Zw+zqYLVHWb/tdInaOgxyIQEeBFiWq8kpg6G8cPmDh/G8CLsn6soPtQbY2TYi0FJPJ
- v/Muybyo9zHn3nQHE60ADe3pebZA3XFv6sV6tdSc3pF/cLWWEj8pKDAq15ZxOdXj/A10
- 8wDVqIiJWRm+RZVyU1Hw5pMPcmolu6SWlNjVX1tgvcO0R8WztXZ4N4+rIYD5vPUuf5My
- wTzvlWMyt6WjY1aRJaCh8hbqfMapSK/5ptybQ8bS+i947x1XS1E13OP3aPi3DXlIbMoX
- R7whh5UcOMgquEabRUQ355+jWPMcNyR35IZKMnMUk6lih2VmUh/X9vnFVaPxseSuDNPs
- aMLg==
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1l9761-000218-6b
+ for qemu-riscv@nongnu.org; Mon, 08 Feb 2021 09:01:15 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id f16so12674249wmq.5
+ for <qemu-riscv@nongnu.org>; Mon, 08 Feb 2021 06:00:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=references:user-agent:from:to:cc:subject:date:in-reply-to
+ :message-id:mime-version:content-transfer-encoding;
+ bh=KfnQ9jhQM8pSkS0FO4KBxiyzFRJpSlgqJHKn/mx6zuk=;
+ b=mvhUaxWSOmsIKslqCz/ZWX7IK+CK4S61jNYgWJyIn8snTOOrTlxPS6GYf3DYgidaf6
+ tJYlBVDmC0ehZlClOBlpVfirUz8NnETspB6ZNFHRsqzgwo20mX+XgapHTwYzJ7iqWKm+
+ VW4AGhjabd9IFQQDBORe2L3n7UtsJDm10Q7ut4qGfA9P0wanZVZtNrafSpLkwgIzMwdQ
+ dxhDPvo5sbia5w0Ok+ffEiv2NOLuCJ0sy5fzgZOwKBF66TkKnLeibz2+wL8PPdP4+7w6
+ wXtrtza+Oj9FkuRlko3Q+8PPl0wGxE59jKX/UE+zEaqu8QA9kQIt8MYhHYKt8MNBQOtR
+ cu5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=RO1fjUbPuaoEr7p6+/bv1uAV/ae5IRUpPRFbET0L9rM=;
- b=A/f02tqOM6OyYqjy72jDjwmN7vmU5zxcVtDJybd51QrYwpQipNg29XXcNRfNkzmWN5
- YCATruqHl7YZBuH9gFIVgHrrXaqNfyDsOmi8baTDOVDc4vQY8vwseWdGgEdQgnUF86MD
- dfizFwVlv90T5A5gLoo+VNeKo/mWfGEicGOUGKCru+I3O/3M0nvEmkOMEx/zkqiGPn3Q
- WGDJMxv14zdHVzyiMPrK8zrP76aaBdhiIgDiMVMQELFJB6nLe5EH8lrU5EWsDXM2t2di
- 8eJR888pHpphGOqkBkD+bGA8CMQT88dNrGi8QnMJYhVwUxn+Z0Cl7+fBO027p2S55CEb
- oHfA==
-X-Gm-Message-State: AOAM5310x8uSEyVcTmwxmXH05WCzrOZ/YA0XMsjag4R+VIkAWO4C3cLd
- h4NruFT7DZGqhrPGbh0ALUE=
-X-Google-Smtp-Source: ABdhPJyWJe2lgkK058CdMWRHq9VZQGyidshG36Fqs0fj0VRgGWq3Ku1z1XGTWDf+3/1AnvaoCaXAfQ==
-X-Received: by 2002:a5d:5051:: with SMTP id h17mr20663485wrt.164.1612792369192; 
- Mon, 08 Feb 2021 05:52:49 -0800 (PST)
-Received: from [192.168.1.36] (68.red-83-57-175.dynamicip.rima-tde.net.
- [83.57.175.68])
- by smtp.gmail.com with ESMTPSA id z15sm11933382wmi.38.2021.02.08.05.52.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Feb 2021 05:52:48 -0800 (PST)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [RFC PATCH v2 5/6] accel/tcg: Refactor debugging
- tlb_assert_iotlb_entry_for_ptr_present()
-To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, qemu-riscv@nongnu.org,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- Laurent Vivier <laurent@vivier.eu>, qemu-arm@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Claudio Fontana <cfontana@suse.de>, Paolo Bonzini <pbonzini@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Aurelien Jarno <aurelien@aurel32.net>
+ h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
+ :in-reply-to:message-id:mime-version:content-transfer-encoding;
+ bh=KfnQ9jhQM8pSkS0FO4KBxiyzFRJpSlgqJHKn/mx6zuk=;
+ b=JKmyfCKgkw+ruJtN7K2AmtdGsRESOy4IDfTqVfzk/vIC1wkrUzVDIbaXXapMvoIH/E
+ wJsN/MfC6IrtWWI8SQy91kvWntiwuBA0/y+Nkdveq4G/nWYRX5yzOYT62J1XlX4rEqMZ
+ w7WEzjude0akq37E4ZVYgnCnbIiviV47l9sWMkrb51vWe23oqcJHD8zDF1N1QAw6+Lv2
+ HBBWwN6SdwHO0FxtOV/vuKLnl0FqfZP7HzSC0fhob+72PLlW8trQ9xrykk3BXLVip8e7
+ VCjDdUBFWRFSqzWABlfsYmHSPGhQXhzkrAmRAGS2BsRmSGB7dFFfRs0B8kH9+ac3Y2yH
+ arWQ==
+X-Gm-Message-State: AOAM530Wqzz5P0JSvkFmZdgc08w4p1Eno+N01HSrDfWwZMCuTSmUK1hX
+ sZFrVFVrTKKvMvKthKb0YcGtvw==
+X-Google-Smtp-Source: ABdhPJx20sFSUg3de52em0vd/uTVsILZfOK1KEmPzHkl+qnp4ZfHsYbDLotnFZ1waus/l3P6oMcYWg==
+X-Received: by 2002:a7b:c5c1:: with SMTP id n1mr14817049wmk.163.1612792847863; 
+ Mon, 08 Feb 2021 06:00:47 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id h14sm19169554wmq.39.2021.02.08.06.00.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Feb 2021 06:00:46 -0800 (PST)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id A75841FF7E;
+ Mon,  8 Feb 2021 14:00:45 +0000 (GMT)
 References: <20210207232310.2505283-1-f4bug@amsat.org>
- <20210207232310.2505283-6-f4bug@amsat.org> <87im73aqsq.fsf@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <83c71866-2e28-2edb-d79d-f4f96bb765a1@amsat.org>
-Date: Mon, 8 Feb 2021 14:52:47 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+ <20210207232310.2505283-2-f4bug@amsat.org>
+User-agent: mu4e 1.5.7; emacs 28.0.50
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, Sagar Karandikar
+ <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, Richard Henderson
+ <richard.henderson@linaro.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Laurent Vivier <laurent@vivier.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Claudio Fontana <cfontana@suse.de>, Paolo Bonzini <pbonzini@redhat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, Aurelien Jarno
+ <aurelien@aurel32.net>, qemu-arm@nongnu.org
+Subject: Re: [RFC PATCH v2 1/6] target: Replace tcg_debug_assert() by assert()
+Date: Mon, 08 Feb 2021 13:54:31 +0000
+In-reply-to: <20210207232310.2505283-2-f4bug@amsat.org>
+Message-ID: <87a6sebqwi.fsf@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <87im73aqsq.fsf@linaro.org>
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x430.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.248,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.265,
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -92,131 +89,506 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2021 13:53:24 -0000
+X-List-Received-Date: Mon, 08 Feb 2021 14:01:38 -0000
 
-On 2/8/21 9:42 AM, Alex Bennée wrote:
-> 
-> Philippe Mathieu-Daudé <f4bug@amsat.org> writes:
-> 
->> Refactor debug code as tlb_assert_iotlb_entry_for_ptr_present() helper.
->>
->> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
->> ---
->> What this code does is out of my league, but refactoring it allow
->> keeping tlb_addr_write() local to accel/tcg/cputlb.c in the next
->> patch.
-> 
-> The assertion that the table entry is current is just a simple
-> housekeeping one. The details of how the MTE implementation uses
-> (abuses?) the iotlb entries requires a closer reading of the code.
-> 
->> ---
->>  include/exec/exec-all.h |  9 +++++++++
->>  accel/tcg/cputlb.c      | 14 ++++++++++++++
->>  target/arm/mte_helper.c | 11 ++---------
->>  target/arm/sve_helper.c | 10 ++--------
->>  4 files changed, 27 insertions(+), 17 deletions(-)
->>
->> diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
->> index f933c74c446..c5e8e355b7f 100644
->> --- a/include/exec/exec-all.h
->> +++ b/include/exec/exec-all.h
->> @@ -296,6 +296,15 @@ void tlb_set_page_with_attrs(CPUState *cpu, target_ulong vaddr,
->>  void tlb_set_page(CPUState *cpu, target_ulong vaddr,
->>                    hwaddr paddr, int prot,
->>                    int mmu_idx, target_ulong size);
->> +
->> +/*
->> + * Find the iotlbentry for ptr.  This *must* be present in the TLB
->> + * because we just found the mapping.
->> + */
->> +void tlb_assert_iotlb_entry_for_ptr_present(CPUArchState *env, int ptr_mmu_idx,
->> +                                            uint64_t ptr,
->> +                                            MMUAccessType ptr_access,
->> +                                            uintptr_t index);
-> 
-> Probably worth making this an empty inline for the non CONFIG_DEBUG_TCG
-> case so we can eliminate the call to an empty function.
 
-But then we can't make tlb_addr_write() static (next patch) and
-we still have to include "tcg/tcg.h" for the TCG_OVERSIZED_GUEST
-definition...
+Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
 
-> 
->>  #else
->>  static inline void tlb_init(CPUState *cpu)
->>  {
->> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
->> index 8a7b779270a..a6247da34a0 100644
->> --- a/accel/tcg/cputlb.c
->> +++ b/accel/tcg/cputlb.c
->> @@ -429,6 +429,20 @@ void tlb_flush_all_cpus_synced(CPUState *src_cpu)
->>      tlb_flush_by_mmuidx_all_cpus_synced(src_cpu, ALL_MMUIDX_BITS);
->>  }
->>  
->> +void tlb_assert_iotlb_entry_for_ptr_present(CPUArchState *env, int ptr_mmu_idx,
->> +                                            uint64_t ptr,
->> +                                            MMUAccessType ptr_access,
->> +                                            uintptr_t index)
->> +{
->> +#ifdef CONFIG_DEBUG_TCG
->> +    CPUTLBEntry *entry = tlb_entry(env, ptr_mmu_idx, ptr);
->> +    target_ulong comparator = (ptr_access == MMU_DATA_LOAD
->> +                               ? entry->addr_read
->> +                               : tlb_addr_write(entry));
->> +    g_assert(tlb_hit(comparator, ptr));
->> +#endif
->> +}
->> +
->>  static bool tlb_hit_page_mask_anyprot(CPUTLBEntry *tlb_entry,
->>                                        target_ulong page, target_ulong mask)
->>  {
->> diff --git a/target/arm/mte_helper.c b/target/arm/mte_helper.c
->> index 6cea9d1b506..f47d3b4570e 100644
->> --- a/target/arm/mte_helper.c
->> +++ b/target/arm/mte_helper.c
->> @@ -111,15 +111,8 @@ static uint8_t *allocation_tag_mem(CPUARMState *env, int ptr_mmu_idx,
->>       * matching tlb entry + iotlb entry.
->>       */
->>      index = tlb_index(env, ptr_mmu_idx, ptr);
->> -# ifdef CONFIG_DEBUG_TCG
->> -    {
->> -        CPUTLBEntry *entry = tlb_entry(env, ptr_mmu_idx, ptr);
->> -        target_ulong comparator = (ptr_access == MMU_DATA_LOAD
->> -                                   ? entry->addr_read
->> -                                   : tlb_addr_write(entry));
->> -        g_assert(tlb_hit(comparator, ptr));
->> -    }
->> -# endif
->> +    tlb_assert_iotlb_entry_for_ptr_present(env, ptr_mmu_idx, ptr,
->> +                                           ptr_access, index);
->>      iotlbentry = &env_tlb(env)->d[ptr_mmu_idx].iotlb[index];
->>  
->>      /* If the virtual page MemAttr != Tagged, access unchecked. */
->> diff --git a/target/arm/sve_helper.c b/target/arm/sve_helper.c
->> index c8cdf7618eb..a5708da0f2f 100644
->> --- a/target/arm/sve_helper.c
->> +++ b/target/arm/sve_helper.c
->> @@ -4089,14 +4089,8 @@ static bool sve_probe_page(SVEHostPage *info, bool nofault,
->>      {
->>          uintptr_t index = tlb_index(env, mmu_idx, addr);
->>  
->> -# ifdef CONFIG_DEBUG_TCG
->> -        CPUTLBEntry *entry = tlb_entry(env, mmu_idx, addr);
->> -        target_ulong comparator = (access_type == MMU_DATA_LOAD
->> -                                   ? entry->addr_read
->> -                                   : tlb_addr_write(entry));
->> -        g_assert(tlb_hit(comparator, addr));
->> -# endif
->> -
->> +        tlb_assert_iotlb_entry_for_ptr_present(env, mmu_idx, addr,
->> +                                               access_type, index);
->>          CPUIOTLBEntry *iotlbentry = &env_tlb(env)->d[mmu_idx].iotlb[index];
->>          info->attrs = iotlbentry->attrs;
->>      }
-> 
-> with the inline fix:
-> 
-> Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-> 
+> Since commit 262a69f4282 ("osdep.h: Prohibit disabling assert()
+> in supported builds") we can not build QEMU with assert() disabled.
+>
+> tcg_debug_assert() does nothing until QEMU is configured with
+> --enable-debug-tcg.
+>
+> Since there is no obvious logic whether to use tcg_debug_assert()
+> or assert() for files under target/, simplify by using plain
+> assert() everywhere. Keep tcg_debug_assert() for the tcg/ and
+> accel/ directories.
+
+I think generally tcg_debug_asserts are those that:
+
+  - assert the TCG logic is working correctly
+  - would impose a cost on the hotpath if run in "production"
+
+Arguably all of these are on the translation front-end side and are
+guards against changes being made to the front-end that violate the API
+contract with the rest of the code. They are unlikely to be triggered by
+running different code.
+
+Usually these mask or zero checks are fairly cheap on modern hardware
+but we can hit these checks fairly frequently. Have you measured any
+performance change?
+
+>
+> Patch created mechanically using:
+>
+>   $ sed -i s/tcg_debug_assert/assert/ \
+>       $(git grep -l tcg_debug_assert target/)
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> ---
+> If there is a logic, we should document it, and include "tcg/tcg.h"
+> in these files.
+> ---
+>  target/arm/translate.h                  |  4 +--
+>  target/arm/mte_helper.c                 |  4 +--
+>  target/arm/sve_helper.c                 |  8 +++---
+>  target/arm/translate-a64.c              | 12 ++++-----
+>  target/arm/translate-sve.c              |  4 +--
+>  target/arm/translate.c                  | 36 ++++++++++++-------------
+>  target/hppa/translate.c                 |  4 +--
+>  target/rx/op_helper.c                   |  6 ++---
+>  target/rx/translate.c                   | 14 +++++-----
+>  target/sh4/translate.c                  |  4 +--
+>  target/riscv/insn_trans/trans_rvv.c.inc |  2 +-
+>  11 files changed, 49 insertions(+), 49 deletions(-)
+>
+> diff --git a/target/arm/translate.h b/target/arm/translate.h
+> index 423b0e08df0..e2ddf87629c 100644
+> --- a/target/arm/translate.h
+> +++ b/target/arm/translate.h
+> @@ -220,7 +220,7 @@ static inline void set_pstate_bits(uint32_t bits)
+>  {
+>      TCGv_i32 p =3D tcg_temp_new_i32();
+>=20=20
+> -    tcg_debug_assert(!(bits & CACHED_PSTATE_BITS));
+> +    assert(!(bits & CACHED_PSTATE_BITS));
+>=20=20
+>      tcg_gen_ld_i32(p, cpu_env, offsetof(CPUARMState, pstate));
+>      tcg_gen_ori_i32(p, p, bits);
+> @@ -233,7 +233,7 @@ static inline void clear_pstate_bits(uint32_t bits)
+>  {
+>      TCGv_i32 p =3D tcg_temp_new_i32();
+>=20=20
+> -    tcg_debug_assert(!(bits & CACHED_PSTATE_BITS));
+> +    assert(!(bits & CACHED_PSTATE_BITS));
+>=20=20
+>      tcg_gen_ld_i32(p, cpu_env, offsetof(CPUARMState, pstate));
+>      tcg_gen_andi_i32(p, p, ~bits);
+> diff --git a/target/arm/mte_helper.c b/target/arm/mte_helper.c
+> index 153bd1e9df8..6cea9d1b506 100644
+> --- a/target/arm/mte_helper.c
+> +++ b/target/arm/mte_helper.c
+> @@ -166,8 +166,8 @@ static uint8_t *allocation_tag_mem(CPUARMState *env, =
+int ptr_mmu_idx,
+>       * not set in the cputlb lookup above.
+>       */
+>      mr =3D memory_region_from_host(host, &ptr_ra);
+> -    tcg_debug_assert(mr !=3D NULL);
+> -    tcg_debug_assert(memory_region_is_ram(mr));
+> +    assert(mr !=3D NULL);
+> +    assert(memory_region_is_ram(mr));
+>      ptr_paddr =3D ptr_ra;
+>      do {
+>          ptr_paddr +=3D mr->addr;
+> diff --git a/target/arm/sve_helper.c b/target/arm/sve_helper.c
+> index 844db08bd57..c8cdf7618eb 100644
+> --- a/target/arm/sve_helper.c
+> +++ b/target/arm/sve_helper.c
+> @@ -4030,7 +4030,7 @@ static intptr_t find_next_active(uint64_t *vg, intp=
+tr_t reg_off,
+>      reg_off +=3D ctz64(pg);
+>=20=20
+>      /* We should never see an out of range predicate bit set.  */
+> -    tcg_debug_assert(reg_off < reg_max);
+> +    assert(reg_off < reg_max);
+>      return reg_off;
+>  }
+>=20=20
+> @@ -4186,7 +4186,7 @@ static bool sve_cont_ldst_elements(SVEContLdSt *inf=
+o, target_ulong addr,
+>          /* No active elements, no pages touched. */
+>          return false;
+>      }
+> -    tcg_debug_assert(reg_off_last >=3D 0 && reg_off_last < reg_max);
+> +    assert(reg_off_last >=3D 0 && reg_off_last < reg_max);
+>=20=20
+>      info->reg_off_first[0] =3D reg_off_first;
+>      info->mem_off_first[0] =3D (reg_off_first >> esz) * msize;
+> @@ -4235,7 +4235,7 @@ static bool sve_cont_ldst_elements(SVEContLdSt *inf=
+o, target_ulong addr,
+>       * this may affect the address reported in an exception.
+>       */
+>      reg_off_split =3D find_next_active(vg, reg_off_split, reg_max, esz);
+> -    tcg_debug_assert(reg_off_split <=3D reg_off_last);
+> +    assert(reg_off_split <=3D reg_off_last);
+>      info->reg_off_first[1] =3D reg_off_split;
+>      info->mem_off_first[1] =3D (reg_off_split >> esz) * msize;
+>      info->reg_off_last[1] =3D reg_off_last;
+> @@ -4794,7 +4794,7 @@ void sve_ldnfff1_r(CPUARMState *env, void *vg, cons=
+t target_ulong addr,
+>      /* Probe the page(s). */
+>      if (!sve_cont_ldst_pages(&info, fault, env, addr, MMU_DATA_LOAD, ret=
+addr)) {
+>          /* Fault on first element. */
+> -        tcg_debug_assert(fault =3D=3D FAULT_NO);
+> +        assert(fault =3D=3D FAULT_NO);
+>          memset(vd, 0, reg_max);
+>          goto do_fault;
+>      }
+> diff --git a/target/arm/translate-a64.c b/target/arm/translate-a64.c
+> index ffc060e5d70..f570506133c 100644
+> --- a/target/arm/translate-a64.c
+> +++ b/target/arm/translate-a64.c
+> @@ -144,7 +144,7 @@ static void set_btype(DisasContext *s, int val)
+>      TCGv_i32 tcg_val;
+>=20=20
+>      /* BTYPE is a 2-bit field, and 0 should be done with reset_btype.  */
+> -    tcg_debug_assert(val >=3D 1 && val <=3D 3);
+> +    assert(val >=3D 1 && val <=3D 3);
+>=20=20
+>      tcg_val =3D tcg_const_i32(val);
+>      tcg_gen_st_i32(tcg_val, cpu_env, offsetof(CPUARMState, btype));
+> @@ -10659,7 +10659,7 @@ static void handle_vec_simd_shri(DisasContext *s,=
+ bool is_q, bool is_u,
+>          unallocated_encoding(s);
+>          return;
+>      }
+> -    tcg_debug_assert(size <=3D 3);
+> +    assert(size <=3D 3);
+>=20=20
+>      if (!fp_access_check(s)) {
+>          return;
+> @@ -12812,7 +12812,7 @@ static void disas_simd_two_reg_misc(DisasContext =
+*s, uint32_t insn)
+>          /* Coverity claims (size =3D=3D 3 && !is_q) has been eliminated
+>           * from all paths leading to here.
+>           */
+> -        tcg_debug_assert(is_q);
+> +        assert(is_q);
+>          for (pass =3D 0; pass < 2; pass++) {
+>              TCGv_i64 tcg_op =3D tcg_temp_new_i64();
+>              TCGv_i64 tcg_res =3D tcg_temp_new_i64();
+> @@ -14615,7 +14615,7 @@ static void disas_a64_insn(CPUARMState *env, Disa=
+sContext *s)
+>              s->guarded_page =3D is_guarded_page(env, s);
+>=20=20
+>              /* First insn can have btype set to non-zero.  */
+> -            tcg_debug_assert(s->btype >=3D 0);
+> +            assert(s->btype >=3D 0);
+>=20=20
+>              /*
+>               * Note that the Branch Target Exception has fairly high
+> @@ -14633,7 +14633,7 @@ static void disas_a64_insn(CPUARMState *env, Disa=
+sContext *s)
+>              }
+>          } else {
+>              /* Not the first insn: btype must be 0.  */
+> -            tcg_debug_assert(s->btype =3D=3D 0);
+> +            assert(s->btype =3D=3D 0);
+>          }
+>      }
+>=20=20
+> @@ -14733,7 +14733,7 @@ static void aarch64_tr_init_disas_context(DisasCo=
+ntextBase *dcbase,
+>=20=20
+>  #ifdef CONFIG_USER_ONLY
+>      /* In sve_probe_page, we assume TBI is enabled. */
+> -    tcg_debug_assert(dc->tbid & 1);
+> +    assert(dc->tbid & 1);
+>  #endif
+>=20=20
+>      /* Single step state. The code-generation logic here is:
+> diff --git a/target/arm/translate-sve.c b/target/arm/translate-sve.c
+> index 27402af23c0..a1e327f863e 100644
+> --- a/target/arm/translate-sve.c
+> +++ b/target/arm/translate-sve.c
+> @@ -3938,8 +3938,8 @@ static bool trans_FCMLA_zzxz(DisasContext *s, arg_F=
+CMLA_zzxz *a)
+>          gen_helper_gvec_fcmlas_idx,
+>      };
+>=20=20
+> -    tcg_debug_assert(a->esz =3D=3D 1 || a->esz =3D=3D 2);
+> -    tcg_debug_assert(a->rd =3D=3D a->ra);
+> +    assert(a->esz =3D=3D 1 || a->esz =3D=3D 2);
+> +    assert(a->rd =3D=3D a->ra);
+>      if (sve_access_check(s)) {
+>          unsigned vsz =3D vec_full_reg_size(s);
+>          TCGv_ptr status =3D fpstatus_ptr(a->esz =3D=3D MO_16 ? FPST_FPCR=
+_F16 : FPST_FPCR);
+> diff --git a/target/arm/translate.c b/target/arm/translate.c
+> index 1653cca1aaa..04ebfcc0d6d 100644
+> --- a/target/arm/translate.c
+> +++ b/target/arm/translate.c
+> @@ -2972,7 +2972,7 @@ void gen_gvec_sqrdmlah_qc(unsigned vece, uint32_t r=
+d_ofs, uint32_t rn_ofs,
+>      static gen_helper_gvec_3_ptr * const fns[2] =3D {
+>          gen_helper_gvec_qrdmlah_s16, gen_helper_gvec_qrdmlah_s32
+>      };
+> -    tcg_debug_assert(vece >=3D 1 && vece <=3D 2);
+> +    assert(vece >=3D 1 && vece <=3D 2);
+>      gen_gvec_fn3_qc(rd_ofs, rn_ofs, rm_ofs, opr_sz, max_sz, fns[vece - 1=
+]);
+>  }
+>=20=20
+> @@ -2982,7 +2982,7 @@ void gen_gvec_sqrdmlsh_qc(unsigned vece, uint32_t r=
+d_ofs, uint32_t rn_ofs,
+>      static gen_helper_gvec_3_ptr * const fns[2] =3D {
+>          gen_helper_gvec_qrdmlsh_s16, gen_helper_gvec_qrdmlsh_s32
+>      };
+> -    tcg_debug_assert(vece >=3D 1 && vece <=3D 2);
+> +    assert(vece >=3D 1 && vece <=3D 2);
+>      gen_gvec_fn3_qc(rd_ofs, rn_ofs, rm_ofs, opr_sz, max_sz, fns[vece - 1=
+]);
+>  }
+>=20=20
+> @@ -3105,8 +3105,8 @@ void gen_gvec_ssra(unsigned vece, uint32_t rd_ofs, =
+uint32_t rm_ofs,
+>      };
+>=20=20
+>      /* tszimm encoding produces immediates in the range [1..esize]. */
+> -    tcg_debug_assert(shift > 0);
+> -    tcg_debug_assert(shift <=3D (8 << vece));
+> +    assert(shift > 0);
+> +    assert(shift <=3D (8 << vece));
+>=20=20
+>      /*
+>       * Shifts larger than the element size are architecturally valid.
+> @@ -3181,8 +3181,8 @@ void gen_gvec_usra(unsigned vece, uint32_t rd_ofs, =
+uint32_t rm_ofs,
+>      };
+>=20=20
+>      /* tszimm encoding produces immediates in the range [1..esize]. */
+> -    tcg_debug_assert(shift > 0);
+> -    tcg_debug_assert(shift <=3D (8 << vece));
+> +    assert(shift > 0);
+> +    assert(shift <=3D (8 << vece));
+>=20=20
+>      /*
+>       * Shifts larger than the element size are architecturally valid.
+> @@ -3290,8 +3290,8 @@ void gen_gvec_srshr(unsigned vece, uint32_t rd_ofs,=
+ uint32_t rm_ofs,
+>      };
+>=20=20
+>      /* tszimm encoding produces immediates in the range [1..esize] */
+> -    tcg_debug_assert(shift > 0);
+> -    tcg_debug_assert(shift <=3D (8 << vece));
+> +    assert(shift > 0);
+> +    assert(shift <=3D (8 << vece));
+>=20=20
+>      if (shift =3D=3D (8 << vece)) {
+>          /*
+> @@ -3386,8 +3386,8 @@ void gen_gvec_srsra(unsigned vece, uint32_t rd_ofs,=
+ uint32_t rm_ofs,
+>      };
+>=20=20
+>      /* tszimm encoding produces immediates in the range [1..esize] */
+> -    tcg_debug_assert(shift > 0);
+> -    tcg_debug_assert(shift <=3D (8 << vece));
+> +    assert(shift > 0);
+> +    assert(shift <=3D (8 << vece));
+>=20=20
+>      /*
+>       * Shifts larger than the element size are architecturally valid.
+> @@ -3491,8 +3491,8 @@ void gen_gvec_urshr(unsigned vece, uint32_t rd_ofs,=
+ uint32_t rm_ofs,
+>      };
+>=20=20
+>      /* tszimm encoding produces immediates in the range [1..esize] */
+> -    tcg_debug_assert(shift > 0);
+> -    tcg_debug_assert(shift <=3D (8 << vece));
+> +    assert(shift > 0);
+> +    assert(shift <=3D (8 << vece));
+>=20=20
+>      if (shift =3D=3D (8 << vece)) {
+>          /*
+> @@ -3606,8 +3606,8 @@ void gen_gvec_ursra(unsigned vece, uint32_t rd_ofs,=
+ uint32_t rm_ofs,
+>      };
+>=20=20
+>      /* tszimm encoding produces immediates in the range [1..esize] */
+> -    tcg_debug_assert(shift > 0);
+> -    tcg_debug_assert(shift <=3D (8 << vece));
+> +    assert(shift > 0);
+> +    assert(shift <=3D (8 << vece));
+>=20=20
+>      tcg_gen_gvec_2i(rd_ofs, rm_ofs, opr_sz, max_sz, shift, &ops[vece]);
+>  }
+> @@ -3695,8 +3695,8 @@ void gen_gvec_sri(unsigned vece, uint32_t rd_ofs, u=
+int32_t rm_ofs,
+>      };
+>=20=20
+>      /* tszimm encoding produces immediates in the range [1..esize]. */
+> -    tcg_debug_assert(shift > 0);
+> -    tcg_debug_assert(shift <=3D (8 << vece));
+> +    assert(shift > 0);
+> +    assert(shift <=3D (8 << vece));
+>=20=20
+>      /* Shift of esize leaves destination unchanged. */
+>      if (shift < (8 << vece)) {
+> @@ -3788,8 +3788,8 @@ void gen_gvec_sli(unsigned vece, uint32_t rd_ofs, u=
+int32_t rm_ofs,
+>      };
+>=20=20
+>      /* tszimm encoding produces immediates in the range [0..esize-1]. */
+> -    tcg_debug_assert(shift >=3D 0);
+> -    tcg_debug_assert(shift < (8 << vece));
+> +    assert(shift >=3D 0);
+> +    assert(shift < (8 << vece));
+>=20=20
+>      if (shift =3D=3D 0) {
+>          tcg_gen_gvec_mov(vece, rd_ofs, rm_ofs, opr_sz, max_sz);
+> diff --git a/target/hppa/translate.c b/target/hppa/translate.c
+> index 64af1e0d5cc..ceb3bacc7dd 100644
+> --- a/target/hppa/translate.c
+> +++ b/target/hppa/translate.c
+> @@ -1945,8 +1945,8 @@ static bool do_ibranch(DisasContext *ctx, TCGv_reg =
+dest,
+>             for the indirect branch consumes no special resources, we
+>             can (conditionally) skip B and continue execution.  */
+>          /* The use_nullify_skip test implies we have a known control pat=
+h.  */
+> -        tcg_debug_assert(ctx->iaoq_b !=3D -1);
+> -        tcg_debug_assert(ctx->iaoq_n !=3D -1);
+> +        assert(ctx->iaoq_b !=3D -1);
+> +        assert(ctx->iaoq_n !=3D -1);
+>=20=20
+>          /* We do have to handle the non-local temporary, DEST, before
+>             branching.  Since IOAQ_F is not really live at this point, we
+> diff --git a/target/rx/op_helper.c b/target/rx/op_helper.c
+> index 4d315b44492..03d285fbafe 100644
+> --- a/target/rx/op_helper.c
+> +++ b/target/rx/op_helper.c
+> @@ -234,7 +234,7 @@ static void (* const cpu_stfn[])(CPUArchState *env,
+>=20=20
+>  void helper_sstr(CPURXState *env, uint32_t sz)
+>  {
+> -    tcg_debug_assert(sz < 3);
+> +    assert(sz < 3);
+>      while (env->regs[3] !=3D 0) {
+>          cpu_stfn[sz](env, env->regs[1], env->regs[2], GETPC());
+>          env->regs[1] +=3D 1 << sz;
+> @@ -283,7 +283,7 @@ void helper_smovb(CPURXState *env)
+>  void helper_suntil(CPURXState *env, uint32_t sz)
+>  {
+>      uint32_t tmp;
+> -    tcg_debug_assert(sz < 3);
+> +    assert(sz < 3);
+>      if (env->regs[3] =3D=3D 0) {
+>          return ;
+>      }
+> @@ -302,7 +302,7 @@ void helper_suntil(CPURXState *env, uint32_t sz)
+>  void helper_swhile(CPURXState *env, uint32_t sz)
+>  {
+>      uint32_t tmp;
+> -    tcg_debug_assert(sz < 3);
+> +    assert(sz < 3);
+>      if (env->regs[3] =3D=3D 0) {
+>          return ;
+>      }
+> diff --git a/target/rx/translate.c b/target/rx/translate.c
+> index 9ea941c6302..ff12af4f7f8 100644
+> --- a/target/rx/translate.c
+> +++ b/target/rx/translate.c
+> @@ -87,7 +87,7 @@ static uint32_t li(DisasContext *ctx, int sz)
+>      CPURXState *env =3D ctx->env;
+>      addr =3D ctx->base.pc_next;
+>=20=20
+> -    tcg_debug_assert(sz < 4);
+> +    assert(sz < 4);
+>      switch (sz) {
+>      case 1:
+>          ctx->base.pc_next +=3D 1;
+> @@ -201,7 +201,7 @@ static inline TCGv rx_index_addr(DisasContext *ctx, T=
+CGv mem,
+>  {
+>      uint32_t dsp;
+>=20=20
+> -    tcg_debug_assert(ld < 3);
+> +    assert(ld < 3);
+>      switch (ld) {
+>      case 0:
+>          return cpu_regs[reg];
+> @@ -222,7 +222,7 @@ static inline TCGv rx_index_addr(DisasContext *ctx, T=
+CGv mem,
+>  static inline MemOp mi_to_mop(unsigned mi)
+>  {
+>      static const MemOp mop[5] =3D { MO_SB, MO_SW, MO_UL, MO_UW, MO_UB };
+> -    tcg_debug_assert(mi < 5);
+> +    assert(mi < 5);
+>      return mop[mi];
+>  }
+>=20=20
+> @@ -258,7 +258,7 @@ static int is_privileged(DisasContext *ctx, int is_ex=
+ception)
+>  /* generate QEMU condition */
+>  static void psw_cond(DisasCompare *dc, uint32_t cond)
+>  {
+> -    tcg_debug_assert(cond < 16);
+> +    assert(cond < 16);
+>      switch (cond) {
+>      case 0: /* z */
+>          dc->cond =3D TCG_COND_EQ;
+> @@ -1401,7 +1401,7 @@ static inline void shiftr_imm(uint32_t rd, uint32_t=
+ rs, uint32_t imm,
+>      static void (* const gen_sXri[])(TCGv ret, TCGv arg1, int arg2) =3D {
+>          tcg_gen_shri_i32, tcg_gen_sari_i32,
+>      };
+> -    tcg_debug_assert(alith < 2);
+> +    assert(alith < 2);
+>      if (imm) {
+>          gen_sXri[alith](cpu_regs[rd], cpu_regs[rs], imm - 1);
+>          tcg_gen_andi_i32(cpu_psw_c, cpu_regs[rd], 0x00000001);
+> @@ -1425,7 +1425,7 @@ static inline void shiftr_reg(uint32_t rd, uint32_t=
+ rs, unsigned int alith)
+>      static void (* const gen_sXr[])(TCGv ret, TCGv arg1, TCGv arg2) =3D {
+>          tcg_gen_shr_i32, tcg_gen_sar_i32,
+>      };
+> -    tcg_debug_assert(alith < 2);
+> +    assert(alith < 2);
+>      noshift =3D gen_new_label();
+>      done =3D gen_new_label();
+>      count =3D tcg_temp_new();
+> @@ -2282,7 +2282,7 @@ static bool trans_INT(DisasContext *ctx, arg_INT *a)
+>  {
+>      TCGv vec;
+>=20=20
+> -    tcg_debug_assert(a->imm < 0x100);
+> +    assert(a->imm < 0x100);
+>      vec =3D tcg_const_i32(a->imm);
+>      tcg_gen_movi_i32(cpu_pc, ctx->base.pc_next);
+>      gen_helper_rxint(cpu_env, vec);
+> diff --git a/target/sh4/translate.c b/target/sh4/translate.c
+> index 93127906237..f12cc0830bf 100644
+> --- a/target/sh4/translate.c
+> +++ b/target/sh4/translate.c
+> @@ -339,7 +339,7 @@ static void gen_delayed_conditional_jump(DisasContext=
+ * ctx)
+>  static inline void gen_load_fpr64(DisasContext *ctx, TCGv_i64 t, int reg)
+>  {
+>      /* We have already signaled illegal instruction for odd Dr.  */
+> -    tcg_debug_assert((reg & 1) =3D=3D 0);
+> +    assert((reg & 1) =3D=3D 0);
+>      reg ^=3D ctx->fbank;
+>      tcg_gen_concat_i32_i64(t, cpu_fregs[reg + 1], cpu_fregs[reg]);
+>  }
+> @@ -347,7 +347,7 @@ static inline void gen_load_fpr64(DisasContext *ctx, =
+TCGv_i64 t, int reg)
+>  static inline void gen_store_fpr64(DisasContext *ctx, TCGv_i64 t, int re=
+g)
+>  {
+>      /* We have already signaled illegal instruction for odd Dr.  */
+> -    tcg_debug_assert((reg & 1) =3D=3D 0);
+> +    assert((reg & 1) =3D=3D 0);
+>      reg ^=3D ctx->fbank;
+>      tcg_gen_extr_i64_i32(cpu_fregs[reg + 1], cpu_fregs[reg], t);
+>  }
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
+trans/trans_rvv.c.inc
+> index 887c6b88831..f0e6e844f5f 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -992,7 +992,7 @@ static void tcg_gen_gvec_rsubs(unsigned vece, uint32_=
+t dofs, uint32_t aofs,
+>            .vece =3D MO_64 },
+>      };
+>=20=20
+> -    tcg_debug_assert(vece <=3D MO_64);
+> +    assert(vece <=3D MO_64);
+>      tcg_gen_gvec_2s(dofs, aofs, oprsz, maxsz, c, &rsub_op[vece]);
+>  }
+
+
+--=20
+Alex Benn=C3=A9e
 
