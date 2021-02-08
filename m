@@ -1,85 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l9F74-0006kt-08
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Feb 2021 17:34:34 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55294)
+	id 1l9FMX-0008SF-VL
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Feb 2021 17:50:34 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59420)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1l9F72-0006hN-44
- for qemu-riscv@nongnu.org; Mon, 08 Feb 2021 17:34:32 -0500
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434]:36547)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1l9FMS-0008Px-Rt; Mon, 08 Feb 2021 17:50:30 -0500
+Received: from mail-io1-xd2e.google.com ([2607:f8b0:4864:20::d2e]:38081)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1l9F6z-0003ey-5Q
- for qemu-riscv@nongnu.org; Mon, 08 Feb 2021 17:34:31 -0500
-Received: by mail-pf1-x434.google.com with SMTP id 18so8500053pfz.3
- for <qemu-riscv@nongnu.org>; Mon, 08 Feb 2021 14:34:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=B3ycbnVqO5qmpQR0+kxdOZc1+K23PTet73ziktMTo8g=;
- b=jVvZMz3iWPboc5tLiQD9LbEE1VzgDrQX6vbfMNuBs2e2yxRUVoTgr4KzI0Oazc7nwS
- gbsJZWk0cNGF52uK1aNymTCoDzeE0JTI36Nyl9cNjjezOrxfw4uEBnzthHV/fjDMYvJj
- qQ1SlTWBS1N4PdZEsM7NZo8rR5+Qb7JczyXme5jZgLkRga38eIR39L22qVkOFqqtP7Ee
- NjzjN5cujGqgRL4dlACK8uNudHOOofiyO//dvZqOsUIL9Uu2AFe+WNPWVXIZBPbmqIa7
- 6z0RyykNiU3eniI0qjyCfKYZBqchHqxBQv26QqkzxWAAQZ2kCyORzNgOy2qvyA9NJ63d
- 7RuA==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1l9FMN-0002dF-6B; Mon, 08 Feb 2021 17:50:28 -0500
+Received: by mail-io1-xd2e.google.com with SMTP id f6so16820605ioz.5;
+ Mon, 08 Feb 2021 14:50:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=FysIOZ87icjobs3JgrfyO/HazpJvePqT83hifnbpYkw=;
+ b=j/SbgdgcwuRBvjsu1KkFEdDh3vAEZ1xtBvz9ltjxXHvl0dHjF3naMqFEqtTSAleePD
+ G4E97aha6R8wOCzyUZHL/lLtgJXH5PngppT6RR0Up1jOGe9ClLCQc0LKHdeMkBYJAq2G
+ e3UoivNBH4nhgHjEo0Xovd7GalM9HBByTUUDtPJ+CFIOUROZFU0cxYBFGmnD5SzZBHkR
+ XkNHSzVBz6IB61V3DdB+sEopb/p5B9dq2jo6K+QVk16plzejddggPgfRj28q0Zjpovf6
+ E3z4E1uEG2kMYmlUdKNVqwoww1Mam8SYXaB5fPa6Kx9TTSGZBwSvGt+ie4JnkXqho3eR
+ b+CQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=B3ycbnVqO5qmpQR0+kxdOZc1+K23PTet73ziktMTo8g=;
- b=VqwMOEeFFd3fajEet5RLJ4fiYCEAURyTlgG2oAuarHQ6+DaaXpVdX8UCQuuuHEqaDt
- jfaD3lOjw2g0ObmxLmcB0aVzr/EkEVxEa7Jz1SQ1M0tnzNz2ShE3bh+bQe7vtFz5I49q
- RZsyJDMbKAKrJj0LrQETFWpcSQZnwa3TTMBrMt3XHaP8AxloZoSvWbKoBxAmY0AscCes
- mFiLQmjBLOR+cTH8OWunI6HbygAq/LpSAfbc2MmuprF+Ge3D8elhPRBzIeKKzAe0w1Hb
- n7dmzdF5C+gl6pexnfDLOCmXtv88SoroZfDjMGC7uv1LJXXiTvmmXgZTm2Rg7H+5g2Lp
- B96A==
-X-Gm-Message-State: AOAM532Fu8GgRcke+6tnigtOTieIy9M2zzm0RAtXnGKDOJKjoEpIU5cL
- iEvx5ihtN8BlNa5OniqYFjzPdA==
-X-Google-Smtp-Source: ABdhPJxrc0yntA8EvrHBZp80AedKIhBtVd/LCkesfnJRwyzPW15LWX4o3kvC5kXXwI5b+oLhZP9lPg==
-X-Received: by 2002:a63:c84a:: with SMTP id l10mr19111782pgi.159.1612823667575; 
- Mon, 08 Feb 2021 14:34:27 -0800 (PST)
-Received: from [192.168.1.11] (174-21-150-71.tukw.qwest.net. [174.21.150.71])
- by smtp.gmail.com with ESMTPSA id
- r15sm20717845pgh.39.2021.02.08.14.34.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Feb 2021 14:34:26 -0800 (PST)
-Subject: Re: [RFC PATCH v2 5/6] accel/tcg: Refactor debugging
- tlb_assert_iotlb_entry_for_ptr_present()
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, qemu-riscv@nongnu.org,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-devel@nongnu.org,
- Laurent Vivier <laurent@vivier.eu>, qemu-arm@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Claudio Fontana <cfontana@suse.de>, Paolo Bonzini <pbonzini@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Aurelien Jarno <aurelien@aurel32.net>
-References: <20210207232310.2505283-1-f4bug@amsat.org>
- <20210207232310.2505283-6-f4bug@amsat.org> <87im73aqsq.fsf@linaro.org>
- <83c71866-2e28-2edb-d79d-f4f96bb765a1@amsat.org>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <e79856a7-f437-df71-f557-b2ace11ffb3e@linaro.org>
-Date: Mon, 8 Feb 2021 14:34:24 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=FysIOZ87icjobs3JgrfyO/HazpJvePqT83hifnbpYkw=;
+ b=JxsAYWkw/eYx8x2qgrGxCv0YEnNmhCXGF8whF91xvca41LeFEOd/Aemd7khnL1shxI
+ opd5SujJkbPBbf1dRrnwWBYeN9Cskypt6mYAeEfy5VfKKeLsc52Y7DOLIvXA/g7v/yGu
+ eXVhReijaGd7/SClTYuSk+nV5RwqUOCZsAMkX1vsU5mjR+YjDHG2N7Km8YC3A3/ViN2B
+ N88E0ScN4FR6EFtsQ/srrhRRBNAKQ2WyRKVATK14R6wuUQ/FpXR7pVy7wBb9O8rXJkZm
+ tnuEGTzfyw6inqyHLQT+3NvXWYVArNIKAkG/mKWFZ0fa5clZDPOoGTC+SqKWGCinP9XE
+ yzlQ==
+X-Gm-Message-State: AOAM530kx4VLFirtjm6PVY4sMs8gM93A5hc2M/cUyNT96LePJGH7eSbu
+ JlwCGzFLWEHVhe1sZAeEpcu4PS0h8aihejnzpjGtIJacCoM5jg==
+X-Google-Smtp-Source: ABdhPJwMox4BQ+UJqTJqI8oiIHZvWPioL6g7X8zzKBcXLtCzkFak30ULsdjVaxJMTc/EIvOZDloswHbBy0k4Umyjgk0=
+X-Received: by 2002:a6b:7d42:: with SMTP id d2mr17454292ioq.176.1612824619751; 
+ Mon, 08 Feb 2021 14:50:19 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <83c71866-2e28-2edb-d79d-f4f96bb765a1@amsat.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x434.google.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.265,
+References: <d2511f50-8b72-8a3b-9127-75b3ed98c584@msx.tu-dresden.de>
+In-Reply-To: <d2511f50-8b72-8a3b-9127-75b3ed98c584@msx.tu-dresden.de>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 8 Feb 2021 14:49:47 -0800
+Message-ID: <CAKmqyKOVvaVV-WHhm7dwWyO9zSomvTRA5bXJjf=4aRqqjD96rg@mail.gmail.com>
+Subject: Re: Emulating sd card with hifive_u risc-v machine
+To: Pascal Scholz <s6899329@msx.tu-dresden.de>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -92,73 +69,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2021 22:34:32 -0000
+X-List-Received-Date: Mon, 08 Feb 2021 22:50:32 -0000
 
-On 2/8/21 5:52 AM, Philippe Mathieu-Daudé wrote:
-> On 2/8/21 9:42 AM, Alex Bennée wrote:
->>
->> Philippe Mathieu-Daudé <f4bug@amsat.org> writes:
->>
->>> Refactor debug code as tlb_assert_iotlb_entry_for_ptr_present() helper.
->>>
->>> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
->>> ---
->>> What this code does is out of my league, but refactoring it allow
->>> keeping tlb_addr_write() local to accel/tcg/cputlb.c in the next
->>> patch.
->>
->> The assertion that the table entry is current is just a simple
->> housekeeping one. The details of how the MTE implementation uses
->> (abuses?) the iotlb entries requires a closer reading of the code.
->>
->>> ---
->>>  include/exec/exec-all.h |  9 +++++++++
->>>  accel/tcg/cputlb.c      | 14 ++++++++++++++
->>>  target/arm/mte_helper.c | 11 ++---------
->>>  target/arm/sve_helper.c | 10 ++--------
->>>  4 files changed, 27 insertions(+), 17 deletions(-)
->>>
->>> diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
->>> index f933c74c446..c5e8e355b7f 100644
->>> --- a/include/exec/exec-all.h
->>> +++ b/include/exec/exec-all.h
->>> @@ -296,6 +296,15 @@ void tlb_set_page_with_attrs(CPUState *cpu, target_ulong vaddr,
->>>  void tlb_set_page(CPUState *cpu, target_ulong vaddr,
->>>                    hwaddr paddr, int prot,
->>>                    int mmu_idx, target_ulong size);
->>> +
->>> +/*
->>> + * Find the iotlbentry for ptr.  This *must* be present in the TLB
->>> + * because we just found the mapping.
->>> + */
->>> +void tlb_assert_iotlb_entry_for_ptr_present(CPUArchState *env, int ptr_mmu_idx,
->>> +                                            uint64_t ptr,
->>> +                                            MMUAccessType ptr_access,
->>> +                                            uintptr_t index);
->>
->> Probably worth making this an empty inline for the non CONFIG_DEBUG_TCG
->> case so we can eliminate the call to an empty function.
-> 
-> But then we can't make tlb_addr_write() static (next patch) and
-> we still have to include "tcg/tcg.h" for the TCG_OVERSIZED_GUEST
-> definition...
+On Mon, Feb 8, 2021 at 12:00 PM Pascal Scholz
+<s6899329@msx.tu-dresden.de> wrote:
+>
+> Hi all,
+>
+> I'm hoping that I addressed the right mailing lists.
 
-Certainly you can, though it's not especially pretty:
+Hello Pascal,
 
-#ifdef CONFIG_DEBUG_TCG
-void tlb_assert_iotlb_entry_for_ptr_present
-      (CPUArchState *env, int ptr_mmu_idx,
-       uint64_t ptr, MMUAccessType ptr_access,
-       uintptr_t index);
-#else
-static inline void
-tlb_assert_iotlb_entry_for_ptr_present
-      (CPUArchState *env, int ptr_mmu_idx,
-       uint64_t ptr, MMUAccessType ptr_access,
-       uintptr_t index)
-{ }
-#endif
+Yep, this is the right place :)
 
+>
+> I'm working a bit with qemu's risc-v emulation. My current goal is to
+> simulate a complete boot process for the SiFive Unleashed Board (SU 540
+> SoC)[1]. I've created the correspondig OpenSBI and U-Boot images, being
+> the -bios and the -kernel images. It's possible for me to boot up to the
+> U-Boot prompt. From this prompt I now want to boot an system image
+> located on an emulated sd card.
+>
+> However I now fail to get a working sd card within qemu for the device
+> sifive_u. For example i tried the following command:
+>
+> qemu-system-riscv64 -M sifive_u -m 8G -serial stdio -bios
+> build/platform/sifive/fu540/firmware/fw_jump.bin -kernel
+> ../../u-boot/u-boot.bin -device sdhci-pci -device sd-card,drive=sdX
+> -drive id=sdX,if=none,format=raw,file=path/to/image.elf
+>
+> This results in Qemu telling me: -device sdhci-pci: No 'PCI' bus found
+> for device 'sdhci-pci'.
+>
+> Using the machine "virt" the command above works.
+>
+> The thing i tried was:
+>
+> qemu-system-riscv64 -M sifive_u -m 8G -serial stdio -bios
+> opensbi/build/platform/sifive/fu540/firmware/fw_jump.bin -kernel
+> ../u-boot/u-boot.bin -sd path/to/image.elf
+>
+> Resulting in: machine type does not support if=sd,bus=0,unit=0
+>
+>
+> Even if the machine gets stuck at some point when booting, Qemu has no
+> problem starting the VM if I use "-M virt" instead of "-M sifive_u". At
+> this point i think, that the machine "sifive_u" doesn't support sd
+> cards? Is this guess right or is there anything left I can try? After
 
-r~
+Correct. There is no SD card support for the SiFive U in QEMU.
+
+You actually just reminded me though that someone has sent patches to
+add support and I need to review them.
+
+You can find the patches here:
+https://patchew.org/QEMU/20210126060007.12904-1-bmeng.cn@gmail.com/
+which should work when applied to QEMU.
+
+If you do get a chance to test the patches it would be great if you
+can let me know what works/doesn't work for you.
+
+Alistair
+
+> all I'm a bit confused, because there seems to be a block device "sd0"
+> when I try to start the machine "sifive_u" without any additional
+> device/drive arguments. I would really appreciate if someone would tell
+> me, what I'm doing wrong.
+>
+> Thanks in advance and stay healthy!
+>
+> Best regards
+>
+> Pascal
+>
+>
+> [1] https://www.sifive.com/boards/hifive-unleashed
+>
+>
 
