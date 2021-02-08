@@ -1,82 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l97nz-00062I-3S
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Feb 2021 09:46:24 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32812)
+	id 1l97sj-0006ta-2u
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Feb 2021 09:51:17 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33492)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1l97nv-0005zw-Vp
- for qemu-riscv@nongnu.org; Mon, 08 Feb 2021 09:46:20 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332]:50830)
+ id 1l97sV-0006rX-M3
+ for qemu-riscv@nongnu.org; Mon, 08 Feb 2021 09:51:03 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:44685)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1l97na-00064o-Oa
- for qemu-riscv@nongnu.org; Mon, 08 Feb 2021 09:46:12 -0500
-Received: by mail-wm1-x332.google.com with SMTP id 190so12852160wmz.0
- for <qemu-riscv@nongnu.org>; Mon, 08 Feb 2021 06:45:56 -0800 (PST)
+ id 1l97sN-0007RX-Qd
+ for qemu-riscv@nongnu.org; Mon, 08 Feb 2021 09:51:02 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id g6so4459723wrs.11
+ for <qemu-riscv@nongnu.org>; Mon, 08 Feb 2021 06:50:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=references:user-agent:from:to:cc:subject:date:in-reply-to
  :message-id:mime-version:content-transfer-encoding;
- bh=xR9fGvWhoYeBEwD4RhHEsHWTNzhsE4RptkxQRS6BcaQ=;
- b=xlIXX1BprPFu1FnTvxamS+lh3CzWEgh0Jwk4eDJURXuGkt/FGpz+CfXNZ+lNCquZHy
- EUYbo2u9smM7bP2zhzMXz3LPBrlyNf+vNPgMn0vj1dj5pOlBDKQ/dLe6VLyqr/nmShrH
- fQ25D6L837sPJ+wDc00l6qCu5G+A3f4A5pl0vZ9oQPL9dQs/aWA7uTKJozDgIGiwKUMh
- bxQypQZZtM+0FASrVIINFy+2vEi7BF9ZZXsNYK/e+YjdhPevpBgrjtoYkdkrxLdYci56
- UsyQqdK55Tu9QIZYChFZ9GgZeT862gv8uDOnauOFyKQPMuwpigQ5z4qmmPhLIUm6fGoH
- nvKQ==
+ bh=3OjIIaYJOgJTaqyNNEmkAsPCnZ25uA8+JKC4fYqCwqk=;
+ b=olyRjW9P/U1iYRFy0DsCcWfcH/yL3knboaFhzt3rVAAXFeAHsJXK2JgGzV9VL7XTUy
+ sZCD85yu9OyeQcdcdkcKUosUt+YExVSddyIt+sJ+3c3QBytAFONSpaeeSVb8mw5twToO
+ NkUubrMWuC4Gt3kXQ3LDykXxLX3WPxwA02N3wtjtfN6zaPeZIGJzU5fna+M/Up4eJlTk
+ hBMCl6dM7rXuC3KQMscba9X+R+pXcSuQCcOk+gxjzKVR0YlvJ9PIX6z79Dv82+oyYK42
+ nP3zIdVJBJ+mVAQ65vU/wmeFvTbDFlm0vdtNb2Mr9t4U8sXLMF8DxUTzJhb7Is2Zfv1G
+ 7nOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
  :in-reply-to:message-id:mime-version:content-transfer-encoding;
- bh=xR9fGvWhoYeBEwD4RhHEsHWTNzhsE4RptkxQRS6BcaQ=;
- b=nIuObJnDXJh0NkXOAkx/MjGsWAvNZlJBHpCOHJh/J2r9x4PLL24qzm6xGPUx6kF6YL
- yQyT5infVeRuQfcZKNLCMY5tPUCH4Q+JB3TdWUjAwGKzVjuAKiTf7vadFCSFuuGovLJZ
- XOTOyw4hDpcvEP/GCndxc6GjnI/eQ4vWqPlu2SCR+pSBSqOFJt2aIblip/0t7f0jRdDU
- bfWa4SWPHwxGSUw+7k6nFKmumgyxKz0JfYtmq1WxWNM4B9hl6RUTXjMNovmZS8dj5Dbc
- JDfwhi5CgnUNfokrVNYVidmNNfWNcQcDJi2pMrmn/+t3beTYRoHu0ry7d0cee3dkpS/D
- hISA==
-X-Gm-Message-State: AOAM530N4pOvN8//vjZ95khqSLT7LFWP6QphE93mLmzG4EpK2uJHdK0i
- /PNCjlAYjPDT0DAWrwFvwRFmEw==
-X-Google-Smtp-Source: ABdhPJxXS2+y31UVE1Ty5pYQHDeh5zY1HjuxbrS4epgxu3+jlTAqxPFcAxHrFuE3EFZZQ6ASwR7MDg==
-X-Received: by 2002:a7b:c7c8:: with SMTP id z8mr14751257wmk.72.1612795554769; 
- Mon, 08 Feb 2021 06:45:54 -0800 (PST)
+ bh=3OjIIaYJOgJTaqyNNEmkAsPCnZ25uA8+JKC4fYqCwqk=;
+ b=q23MwFZP3W1G2Be+5JjKS1etwPWPEczh37ug8QBAHyEQ8rbNADXYyzLNTzNFqZtwgb
+ zKeoiVOd3tGA1NpHlxpGh7w+eHp7p4bU8hiMSs5h8Ge4fVlOCWIOb/U2avTZ5sT33npC
+ dGtSdQ8uii9Z/zhzHQBalVulGewgbog4L4+O6mko97WXtdpR3qC3xY1Wl04IjDrEw0Xc
+ a6JMS60e/a8NGG9G4GEBSKsqPXrbyb4If793nXHwo4q1INeD7t1lkkaKQDd5/tbc8tms
+ Ibpwxbn17Igjh9vbnxgOwPWKIV9dEN0S6/J6DUVAPYYGnltdFoUdtYUSWeFgkUsw8RJy
+ y6rA==
+X-Gm-Message-State: AOAM533m6NFHiWFgMwl2aCfq1pNbFxqD4mY8BW8U/5TN67Vtdrdl9APy
+ 6rMQ5abaOXNKDyFWdpzh5S9quw==
+X-Google-Smtp-Source: ABdhPJzfje3YiI0XflS4r5tABl9ki+cYIStyuyJv/Bj4WhcO84VnM1fnUUZUeJNvGLhfcfo3NRG/iQ==
+X-Received: by 2002:adf:cd8f:: with SMTP id q15mr2498993wrj.386.1612795852988; 
+ Mon, 08 Feb 2021 06:50:52 -0800 (PST)
 Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id c9sm32743661wrw.76.2021.02.08.06.45.53
+ by smtp.gmail.com with ESMTPSA id 16sm15967986wmi.43.2021.02.08.06.50.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Feb 2021 06:45:53 -0800 (PST)
+ Mon, 08 Feb 2021 06:50:51 -0800 (PST)
 Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 055BB1FF7E;
- Mon,  8 Feb 2021 14:45:53 +0000 (GMT)
+ by zen.linaroharston (Postfix) with ESMTP id 1777E1FF7E;
+ Mon,  8 Feb 2021 14:50:51 +0000 (GMT)
 References: <20210207232310.2505283-1-f4bug@amsat.org>
- <20210207232310.2505283-7-f4bug@amsat.org>
+ <20210207232310.2505283-6-f4bug@amsat.org> <87im73aqsq.fsf@linaro.org>
+ <83c71866-2e28-2edb-d79d-f4f96bb765a1@amsat.org>
 User-agent: mu4e 1.5.7; emacs 28.0.50
 From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Cc: Peter Maydell <peter.maydell@linaro.org>, Alistair Francis
- <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org, Yoshinori Sato
+Cc: Peter Maydell <peter.maydell@linaro.org>, Aleksandar Rikalo
+ <aleksandar.rikalo@syrmia.com>, qemu-riscv@nongnu.org, Yoshinori Sato
  <ysato@users.sourceforge.jp>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Richard Henderson
- <richard.henderson@linaro.org>, Laurent Vivier <laurent@vivier.eu>,
- qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, Claudio Fontana
- <cfontana@suse.de>, Paolo Bonzini <pbonzini@redhat.com>, Aleksandar Rikalo
- <aleksandar.rikalo@syrmia.com>, Aurelien Jarno <aurelien@aurel32.net>,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH v2 6/6] exec/cpu_ldst: Move tlb* declarations to
- "exec/exec-all.h"
-Date: Mon, 08 Feb 2021 14:40:41 +0000
-In-reply-to: <20210207232310.2505283-7-f4bug@amsat.org>
-Message-ID: <874kimbotb.fsf@linaro.org>
+ <richard.henderson@linaro.org>, qemu-devel@nongnu.org, Laurent Vivier
+ <laurent@vivier.eu>, qemu-arm@nongnu.org, Alistair Francis
+ <Alistair.Francis@wdc.com>, Claudio Fontana <cfontana@suse.de>, Paolo
+ Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Aurelien Jarno <aurelien@aurel32.net>
+Subject: Re: [RFC PATCH v2 5/6] accel/tcg: Refactor debugging
+ tlb_assert_iotlb_entry_for_ptr_present()
+Date: Mon, 08 Feb 2021 14:48:20 +0000
+In-reply-to: <83c71866-2e28-2edb-d79d-f4f96bb765a1@amsat.org>
+Message-ID: <871rdqbol0.fsf@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -89,126 +90,150 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2021 14:46:20 -0000
+X-List-Received-Date: Mon, 08 Feb 2021 14:51:04 -0000
 
 
 Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
 
-> Keep MMU functions in "exec/cpu_ldst.h", and move TLB functions
-> to "exec/exec-all.h". As tlb_addr_write() is only called in
-> accel/tcg/cputlb.c, make move it there as a static function.
+> On 2/8/21 9:42 AM, Alex Benn=C3=A9e wrote:
+>>=20
+>> Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
+>>=20
+>>> Refactor debug code as tlb_assert_iotlb_entry_for_ptr_present() helper.
+>>>
+>>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+>>> ---
+>>> What this code does is out of my league, but refactoring it allow
+>>> keeping tlb_addr_write() local to accel/tcg/cputlb.c in the next
+>>> patch.
+>>=20
+>> The assertion that the table entry is current is just a simple
+>> housekeeping one. The details of how the MTE implementation uses
+>> (abuses?) the iotlb entries requires a closer reading of the code.
+>>=20
+>>> ---
+>>>  include/exec/exec-all.h |  9 +++++++++
+>>>  accel/tcg/cputlb.c      | 14 ++++++++++++++
+>>>  target/arm/mte_helper.c | 11 ++---------
+>>>  target/arm/sve_helper.c | 10 ++--------
+>>>  4 files changed, 27 insertions(+), 17 deletions(-)
+>>>
+>>> diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
+>>> index f933c74c446..c5e8e355b7f 100644
+>>> --- a/include/exec/exec-all.h
+>>> +++ b/include/exec/exec-all.h
+>>> @@ -296,6 +296,15 @@ void tlb_set_page_with_attrs(CPUState *cpu, target=
+_ulong vaddr,
+>>>  void tlb_set_page(CPUState *cpu, target_ulong vaddr,
+>>>                    hwaddr paddr, int prot,
+>>>                    int mmu_idx, target_ulong size);
+>>> +
+>>> +/*
+>>> + * Find the iotlbentry for ptr.  This *must* be present in the TLB
+>>> + * because we just found the mapping.
+>>> + */
+>>> +void tlb_assert_iotlb_entry_for_ptr_present(CPUArchState *env, int ptr=
+_mmu_idx,
+>>> +                                            uint64_t ptr,
+>>> +                                            MMUAccessType ptr_access,
+>>> +                                            uintptr_t index);
+>>=20
+>> Probably worth making this an empty inline for the non CONFIG_DEBUG_TCG
+>> case so we can eliminate the call to an empty function.
 >
-> Doing so we removed the "tcg/tcg.h" dependency on "exec/cpu_ldst.h".
+> But then we can't make tlb_addr_write() static (next patch) and
+> we still have to include "tcg/tcg.h" for the TCG_OVERSIZED_GUEST
+> definition...
+
+Hmm - yeah. I'm not keen on turning something into a function call when
+the compiler should have all the information it needs with it. On the
+other hand maybe we don't care for a debug assert.
+
+Richard WDYT?
+
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
-> ---
->  include/exec/cpu_ldst.h | 28 ----------------------------
->  include/exec/exec-all.h | 16 ++++++++++++++++
->  accel/tcg/cputlb.c      |  9 +++++++++
->  3 files changed, 25 insertions(+), 28 deletions(-)
->
-> diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
-> index ef54cb7e1f8..c1753a64dfd 100644
-> --- a/include/exec/cpu_ldst.h
-> +++ b/include/exec/cpu_ldst.h
-> @@ -291,34 +291,6 @@ static inline void cpu_stq_le_mmuidx_ra(CPUArchState=
- *env, abi_ptr addr,
->=20=20
->  #else
->=20=20
-> -/* Needed for TCG_OVERSIZED_GUEST */
-> -#include "tcg/tcg.h"
-> -
-> -static inline target_ulong tlb_addr_write(const CPUTLBEntry *entry)
-> -{
-> -#if TCG_OVERSIZED_GUEST
-> -    return entry->addr_write;
-> -#else
-> -    return qatomic_read(&entry->addr_write);
-> -#endif
-> -}
-> -
-> -/* Find the TLB index corresponding to the mmu_idx + address pair.  */
-> -static inline uintptr_t tlb_index(CPUArchState *env, uintptr_t mmu_idx,
-> -                                  target_ulong addr)
-> -{
-> -    uintptr_t size_mask =3D env_tlb(env)->f[mmu_idx].mask >> CPU_TLB_ENT=
-RY_BITS;
-> -
-> -    return (addr >> TARGET_PAGE_BITS) & size_mask;
-> -}
-> -
-> -/* Find the TLB entry corresponding to the mmu_idx + address pair.  */
-> -static inline CPUTLBEntry *tlb_entry(CPUArchState *env, uintptr_t mmu_id=
-x,
-> -                                     target_ulong addr)
-> -{
-> -    return &env_tlb(env)->f[mmu_idx].table[tlb_index(env, mmu_idx, addr)=
-];
-> -}
-> -
->  uint32_t cpu_ldub_mmuidx_ra(CPUArchState *env, abi_ptr addr,
->                              int mmu_idx, uintptr_t ra);
->  int cpu_ldsb_mmuidx_ra(CPUArchState *env, abi_ptr addr,
-> diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-> index c5e8e355b7f..8e54b537189 100644
-> --- a/include/exec/exec-all.h
-> +++ b/include/exec/exec-all.h
-> @@ -297,6 +297,22 @@ void tlb_set_page(CPUState *cpu, target_ulong vaddr,
->                    hwaddr paddr, int prot,
->                    int mmu_idx, target_ulong size);
->=20=20
-> +/* Find the TLB index corresponding to the mmu_idx + address pair.  */
-> +static inline uintptr_t tlb_index(CPUArchState *env, uintptr_t mmu_idx,
-> +                                  target_ulong addr)
-> +{
-> +    uintptr_t size_mask =3D env_tlb(env)->f[mmu_idx].mask >> CPU_TLB_ENT=
-RY_BITS;
-> +
-> +    return (addr >> TARGET_PAGE_BITS) & size_mask;
-> +}
-> +
-> +/* Find the TLB entry corresponding to the mmu_idx + address pair.  */
-> +static inline CPUTLBEntry *tlb_entry(CPUArchState *env, uintptr_t mmu_id=
-x,
-> +                                     target_ulong addr)
-> +{
-> +    return &env_tlb(env)->f[mmu_idx].table[tlb_index(env, mmu_idx, addr)=
-];
-> +}
-> +
-
-I wonder if throwing these into exec-all is worth it, could we not use
-the cputlb.h so we avoid too much kitchen sink for a header (after all
-we are trying to avoid recompilations and not everything needs detailed
-access to the tlb structures).
-
->  /*
->   * Find the iotlbentry for ptr.  This *must* be present in the TLB
->   * because we just found the mapping.
-> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-> index a6247da34a0..084d19b52d7 100644
-> --- a/accel/tcg/cputlb.c
-> +++ b/accel/tcg/cputlb.c
-> @@ -429,6 +429,15 @@ void tlb_flush_all_cpus_synced(CPUState *src_cpu)
->      tlb_flush_by_mmuidx_all_cpus_synced(src_cpu, ALL_MMUIDX_BITS);
->  }
->=20=20
-> +static inline target_ulong tlb_addr_write(const CPUTLBEntry *entry)
-> +{
-> +#if TCG_OVERSIZED_GUEST
-> +    return entry->addr_write;
-> +#else
-> +    return qatomic_read(&entry->addr_write);
-> +#endif
-> +}
-
-You can drop the inline, compiler should know best what to do in this case.
-
->  void tlb_assert_iotlb_entry_for_ptr_present(CPUArchState *env, int ptr_m=
-mu_idx,
->                                              uint64_t ptr,
->                                              MMUAccessType ptr_access,
+>>=20
+>>>  #else
+>>>  static inline void tlb_init(CPUState *cpu)
+>>>  {
+>>> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+>>> index 8a7b779270a..a6247da34a0 100644
+>>> --- a/accel/tcg/cputlb.c
+>>> +++ b/accel/tcg/cputlb.c
+>>> @@ -429,6 +429,20 @@ void tlb_flush_all_cpus_synced(CPUState *src_cpu)
+>>>      tlb_flush_by_mmuidx_all_cpus_synced(src_cpu, ALL_MMUIDX_BITS);
+>>>  }
+>>>=20=20
+>>> +void tlb_assert_iotlb_entry_for_ptr_present(CPUArchState *env, int ptr=
+_mmu_idx,
+>>> +                                            uint64_t ptr,
+>>> +                                            MMUAccessType ptr_access,
+>>> +                                            uintptr_t index)
+>>> +{
+>>> +#ifdef CONFIG_DEBUG_TCG
+>>> +    CPUTLBEntry *entry =3D tlb_entry(env, ptr_mmu_idx, ptr);
+>>> +    target_ulong comparator =3D (ptr_access =3D=3D MMU_DATA_LOAD
+>>> +                               ? entry->addr_read
+>>> +                               : tlb_addr_write(entry));
+>>> +    g_assert(tlb_hit(comparator, ptr));
+>>> +#endif
+>>> +}
+>>> +
+>>>  static bool tlb_hit_page_mask_anyprot(CPUTLBEntry *tlb_entry,
+>>>                                        target_ulong page, target_ulong =
+mask)
+>>>  {
+>>> diff --git a/target/arm/mte_helper.c b/target/arm/mte_helper.c
+>>> index 6cea9d1b506..f47d3b4570e 100644
+>>> --- a/target/arm/mte_helper.c
+>>> +++ b/target/arm/mte_helper.c
+>>> @@ -111,15 +111,8 @@ static uint8_t *allocation_tag_mem(CPUARMState *en=
+v, int ptr_mmu_idx,
+>>>       * matching tlb entry + iotlb entry.
+>>>       */
+>>>      index =3D tlb_index(env, ptr_mmu_idx, ptr);
+>>> -# ifdef CONFIG_DEBUG_TCG
+>>> -    {
+>>> -        CPUTLBEntry *entry =3D tlb_entry(env, ptr_mmu_idx, ptr);
+>>> -        target_ulong comparator =3D (ptr_access =3D=3D MMU_DATA_LOAD
+>>> -                                   ? entry->addr_read
+>>> -                                   : tlb_addr_write(entry));
+>>> -        g_assert(tlb_hit(comparator, ptr));
+>>> -    }
+>>> -# endif
+>>> +    tlb_assert_iotlb_entry_for_ptr_present(env, ptr_mmu_idx, ptr,
+>>> +                                           ptr_access, index);
+>>>      iotlbentry =3D &env_tlb(env)->d[ptr_mmu_idx].iotlb[index];
+>>>=20=20
+>>>      /* If the virtual page MemAttr !=3D Tagged, access unchecked. */
+>>> diff --git a/target/arm/sve_helper.c b/target/arm/sve_helper.c
+>>> index c8cdf7618eb..a5708da0f2f 100644
+>>> --- a/target/arm/sve_helper.c
+>>> +++ b/target/arm/sve_helper.c
+>>> @@ -4089,14 +4089,8 @@ static bool sve_probe_page(SVEHostPage *info, bo=
+ol nofault,
+>>>      {
+>>>          uintptr_t index =3D tlb_index(env, mmu_idx, addr);
+>>>=20=20
+>>> -# ifdef CONFIG_DEBUG_TCG
+>>> -        CPUTLBEntry *entry =3D tlb_entry(env, mmu_idx, addr);
+>>> -        target_ulong comparator =3D (access_type =3D=3D MMU_DATA_LOAD
+>>> -                                   ? entry->addr_read
+>>> -                                   : tlb_addr_write(entry));
+>>> -        g_assert(tlb_hit(comparator, addr));
+>>> -# endif
+>>> -
+>>> +        tlb_assert_iotlb_entry_for_ptr_present(env, mmu_idx, addr,
+>>> +                                               access_type, index);
+>>>          CPUIOTLBEntry *iotlbentry =3D &env_tlb(env)->d[mmu_idx].iotlb[=
+index];
+>>>          info->attrs =3D iotlbentry->attrs;
+>>>      }
+>>=20
+>> with the inline fix:
+>>=20
+>> Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+>>=20
 
 
 --=20
