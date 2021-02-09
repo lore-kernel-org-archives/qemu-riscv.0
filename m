@@ -1,74 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l9IVJ-0004qt-5u
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Feb 2021 21:11:49 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51220)
+	id 1l9IYe-0007A3-SA
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Feb 2021 21:15:16 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52310)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=667b40a3b=alistair.francis@wdc.com>)
- id 1l9IVF-0004q8-Rg; Mon, 08 Feb 2021 21:11:45 -0500
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:13209)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=667b40a3b=alistair.francis@wdc.com>)
- id 1l9IVC-0004q8-M3; Mon, 08 Feb 2021 21:11:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1612837580; x=1644373580;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=be+p1+1tPCPjFu5957n73qyTdlQbqYCeV9NRPv04YOg=;
- b=WTtOXBQaLzdpsny4XZAEI0nAOq0+7jRHetRdEkn6nfR13SEmmcg3CxmI
- YpvA23QPwNSruJ2S9hi5RDmpmBSOkKo4jf3+B9llhSmR5s+05rMMCnMJH
- qt27OjuJQUqurJIsX5CbFatVLV6eOzbKMZp4IW3Mzz5RANzPKtLwys0BV
- SZ31DiAs5Ipo8x+43/BsxvYuIj/SJNcNEytXA6ccO4fzbDx9/8jBee4Wy
- JiI5WJEMWRcgtM86uQ2LFHCLI16bh74U3zExDfh30ggPSjf/cc+QZFCkX
- 1VUM1ZMNjH3YrSu5smrlF5UUdIYT3imykWZBPIK/grA4CWcR073I7/0lp Q==;
-IronPort-SDR: C3MuEofHVaUNNSj5mDdwheYaQkhr/2yOdu+lUdDOHxo1GR7dVToIWUOMGQWrQju2sLTlguDnjc
- XP5NIydRQa7XUQBO1gfvYzw4OSYADV91zfuB76OCEA5VZS02Lui6vKcOKkdY7YkVnN0xtJuVJ2
- l63VQxsimpI5xPO4cXJSDb44GImTFnaIHZGgjf1LHgJdn2/s7ARcbUaIlNBs2nCE3hhJjTUbD3
- pHIj+UH5PGgncfqHJoqCp5pEA6GnhabapjMqm86LNPrR/oTvWUtjfM1X5wTimxltLxClhdMA3O
- fiU=
-X-IronPort-AV: E=Sophos;i="5.81,163,1610380800"; d="scan'208";a="263605823"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 09 Feb 2021 10:26:16 +0800
-IronPort-SDR: hjB19rv9yJ3JNZ3y4Wl0MIuIHrwTmXjFcm9rRSVj1nkHR+wfAnM4mdqp3yWHDYQCLUD/4uFfwn
- LM7FiLW74i2PKRn1b9cGEn3en6NJe5gGyVMuuNWeyKxqrGfA2Ppr6b8EQUX4w/n3GqQBBZBLjT
- YqI4envtJKjo1o2FMtLuAecAVcfAerYV4kv59qx0a0l+mztoeG5mlKx/5hj3jM+3GaplpoNQMC
- KO7V0ovbFpbfoZ0ka1ieg2++vVlH3Rpz/LIF6B+B6BqZfRjliloQ/IRU/MGWZM8M+47U3nLAOt
- Xgo7RKrT4MASNqHD+nJ4Ub5q
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Feb 2021 17:55:27 -0800
-IronPort-SDR: qM79qve4QzL6KrqsbEyzImNBo5OJJkyy+jlkOaaN9FxjA+URuEACSPM8FND0yH0MmpbWbbb0cj
- 97lAevIPHOpgM8kR2/CUeKtAFDXxAuOVp09PP/fafgMDRW0FUpsDbzPE+M4b3142Hc4rPYq45i
- AupSy5K4n14QYN4qOWDYAzL6U/wzFo3d/8LWDbRTlGdFErX6079bKLHJSCBdAh+5cHBvPRn0Mi
- h/w8XHDwwVBjFr0hiGHl4ijlF4C6MXcjxdTowqdJ97+JJAY1YjG6h5QF9Emwql6gYi+qkzHft/
- yGk=
-WDCIronportException: Internal
-Received: from ilb000836.ad.shared (HELO alistair-risc6-laptop.hgst.com)
- ([10.86.63.217])
- by uls-op-cesaip01.wdc.com with ESMTP; 08 Feb 2021 18:11:39 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v1 1/1] MAINTAINERS: Add a SiFIve machine section
-Date: Mon,  8 Feb 2021 18:11:27 -0800
-Message-Id: <6bc077e5ae4a9512c8adf81ae194718f2f17c402.1612836645.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.30.0
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1l9IYd-00079l-Ci; Mon, 08 Feb 2021 21:15:15 -0500
+Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36]:38612)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1l9IYa-0006Os-Du; Mon, 08 Feb 2021 21:15:15 -0500
+Received: by mail-yb1-xb36.google.com with SMTP id 133so3976333ybd.5;
+ Mon, 08 Feb 2021 18:15:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=H+nM2YlZCHkjZQFTNGaYN8+VWxxtnyjoNi4lKelPUIE=;
+ b=jMYwTMGE0bEKHnE5MWUHlgWnSTQdmp0i9MnDi3KKTjsnanibu3xEibTG2pUoilOwmZ
+ SwBHrt0qOpWGyeQxnNeyzXElZ6Iq7NwsqmfL9kfYG4cJUvX3EhsAf9QIJ+w+v5mRcsh/
+ a/SCsqiKQTYi3hJEeWJym3A8ji9j+VoXZuKnNVijfvooN3KgwcUDk0IVmB6XPlmsyPRM
+ nFczh48sjIOlShJKyZr3UusGhjE9Icq/0zyGJkRdZ9KH0/QdoBWG+aK1qTbf9f2Gxqjg
+ CKGEBrESPphdorFdnfMMwZGU3CkE6ULfmN6sCeTpCqXckemHp+Rbuu3O33DB0PD59Kat
+ 25Ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=H+nM2YlZCHkjZQFTNGaYN8+VWxxtnyjoNi4lKelPUIE=;
+ b=G+xLshwzEd2LAikvDYET+LIOn7Hi5NaYPx1P8xUyKK+OJp4ycJ3i2k5caSqt8Jk3UD
+ pC7MqOSbqZjYSIfFspF7a14SQSE6qEz4kWVbA5GVQsCqikm12Ug2Mtr5UEdkEixYhMco
+ 75HnR51Mw90+3TbuOGjeWrG47TQk5A3ldVKwJz/2+GRcVQFzD4wEApyJJ+uasESGkpcv
+ L1wIlrZqB2Hhhw6j6Jq8PGCxIJOooP+7ao7bGvS2Mk3wM06dJI0nlfTzsOssd6RK7/0U
+ D68S3xEF+dD44IsGAJGOO9aYmL2g3mH1xfjSsX2AUdBT/H8X314ENxlU2jirmSavFDR4
+ ypWg==
+X-Gm-Message-State: AOAM5314p4edgj961/UhyXoqBAySsiAg8w5AY5vZrmcbaDG00G0EE+W1
+ ppdjMknikQsCkdxKASe9yrlATIbU0bZ/et+h+kI=
+X-Google-Smtp-Source: ABdhPJyJvT1/YiYHaUPEx+Al9rHrQcf0tjgcDTX5MtzOdgqO4iZanwmM7/GJkqVcalWDVv7YBjDRmEFCHD+mZLgsUMs=
+X-Received: by 2002:a25:b8ca:: with SMTP id g10mr27664033ybm.517.1612836911245; 
+ Mon, 08 Feb 2021 18:15:11 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.143.124;
- envelope-from=prvs=667b40a3b=alistair.francis@wdc.com;
- helo=esa2.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+References: <6bc077e5ae4a9512c8adf81ae194718f2f17c402.1612836645.git.alistair.francis@wdc.com>
+In-Reply-To: <6bc077e5ae4a9512c8adf81ae194718f2f17c402.1612836645.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 9 Feb 2021 10:14:59 +0800
+Message-ID: <CAEUhbmW5TzWVQFOv3PM6ZwY34cSPRjvfzN3sWxP+_6SDcJ93ZA@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] MAINTAINERS: Add a SiFIve machine section
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb36.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -82,35 +69,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2021 02:11:47 -0000
+X-List-Received-Date: Tue, 09 Feb 2021 02:15:15 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Acked-by: Bin Meng <bin.meng@windriver.com>
----
- MAINTAINERS | 9 +++++++++
- 1 file changed, 9 insertions(+)
+On Tue, Feb 9, 2021 at 10:11 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8d8b0bf966..c347d49bd2 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1359,6 +1359,15 @@ F: include/hw/misc/mchp_pfsoc_dmc.h
- F: include/hw/misc/mchp_pfsoc_ioscb.h
- F: include/hw/misc/mchp_pfsoc_sysreg.h
- 
-+SiFive Machines
-+M: Alistair Francis <Alistair.Francis@wdc.com>
-+M: Bin Meng <bin.meng@windriver.com>
-+M: Palmer Dabbelt <palmer@dabbelt.com>
-+L: qemu-riscv@nongnu.org
-+S: Supported
-+F: hw/*/*sifive*.c
-+F: include/hw/*/*sifive*.h
-+
- RX Machines
- -----------
- rx-gdbsim
--- 
-2.30.0
+nits: SiFIve => SiFive in the title
 
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Acked-by: Bin Meng <bin.meng@windriver.com>
+> ---
+>  MAINTAINERS | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+>
+
+Regards,
+Bin
 
