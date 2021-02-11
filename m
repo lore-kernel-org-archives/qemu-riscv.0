@@ -1,63 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1l9y38-0002Mk-Al
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Feb 2021 17:33:30 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33250)
+	id 1lA133-0000W8-Tk
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Feb 2021 20:45:37 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45670)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l9y36-0002KK-Ib; Wed, 10 Feb 2021 17:33:28 -0500
-Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c]:33868)
+ (Exim 4.90_1) (envelope-from <billa.iitmadras@gmail.com>)
+ id 1lA131-0000Vf-V2
+ for qemu-riscv@nongnu.org; Wed, 10 Feb 2021 20:45:35 -0500
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530]:34360)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1l9y34-0003ON-V6; Wed, 10 Feb 2021 17:33:28 -0500
-Received: by mail-io1-xd2c.google.com with SMTP id e24so3714362ioc.1;
- Wed, 10 Feb 2021 14:33:26 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <billa.iitmadras@gmail.com>)
+ id 1lA130-0006JP-94
+ for qemu-riscv@nongnu.org; Wed, 10 Feb 2021 20:45:35 -0500
+Received: by mail-ed1-x530.google.com with SMTP id df22so5316484edb.1
+ for <qemu-riscv@nongnu.org>; Wed, 10 Feb 2021 17:45:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/3TlgQYKcFf6QvT8ew3Z8ZTUjTo2SDpwfyTsLg5G3zU=;
- b=S4qbn5gKmghhZdDhrggVYbaZPCLYVSP1wJ8hT3b+gyWhLR2B5Wpp/4eaX+v9iaCtNY
- lZMiTVIp3QUWEh4FdYWXWg8bP8BM11aUGv+otgXwIwuS/jK/5rIV08ABfr0EnoAv/KQ+
- cw11o1V/K9hw+821gYpgZTZTefd5V0kb9GSSvThkjYD+JkXMgp47JXMU89t6LpQnw/OM
- OlpceSqOkBv7kmYvxht9PHWpt7hxhmowGANMaNZZcowkn6MLD/iC9QYp81LeAE/HA2Ur
- CLYdwnQXINFVfzBLNO56Ljyi1Z/v30ikczy5XnHsJoOuQL7d2RaJ/B0A67Ij2q6rgF84
- rNRw==
+ :cc; bh=TH4ZAPPUAkekoGcif0gl1yrZhT93LD5EYheRiOawp9c=;
+ b=fOPCk+UHl57xGJG+oicLFW8q2+meMDnCGroKm2hBZBQSf6iHaTQho3W8Iv0TCPqZrP
+ yvT1I7N5AGhtJwpnrDEkaZjXEgnHDKA0dQRFG2dqTsgbC7v0VQG8neLBckBfVDRLX05D
+ Gx2pKOVUUizlCE/EZKsjRC8wWJKCRz94hxu07LdSGjy8Pr+y9I2wfRNXjhHY21UyzXxf
+ 7RcEQMWlSORA49ts4RojvEJtXqWtQsP8Ng1Tf5/Mita+nnDktc9CTE3VaTJ2DwHLbdJ2
+ rFgWbRaA9JMFyKad2xYNVx6YLFo4uhKQoFfgcooM4uXL0PSGvx45tTMdz++N0VPFDmzn
+ 79SA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/3TlgQYKcFf6QvT8ew3Z8ZTUjTo2SDpwfyTsLg5G3zU=;
- b=cV/TJyG4sAil28ps253ifU6Yk/amTsKpUjiOJIFPyiOByj5FTBBR0/xMrX67IrFl21
- n63jDJv4Lcu+OQmoVcK/O19xgNCAqJXddeKE3GPxaWgi+QtQYA+acd2I8otHNH94U3Tx
- PqxxmqzCJfBypt/RYl1Rud+P6QWbetDcqIDHBHn+3gZywP+FSad8eLESzVMGrS2KBSoV
- LLxWcECIXlanB7SOTB3QHje/suuS6RevfD0tc+pFtJjyUdmRFEj/O7yMj/2mPUINGfFR
- gKIX/c95z7PpMlncVJw+uZtVFdkX7MSY9VhNvYELa+SJT9F8ZNnBVArrtHkXVkpt/iWU
- Sg6g==
-X-Gm-Message-State: AOAM533UDLp0NJPErOcRC8eolneNcwnjcFHHRTooH4OxDdTZJurXil5j
- nPTUrWpK85jTIzRoHaoVeyCGkvTgfOpXB2FlF94=
-X-Google-Smtp-Source: ABdhPJx8HA75kmIobENEx1rhTeTfcHolY90X9EYapRpgS23NYZ90iwVYxU1R/w29vGQ+sVTWQsNm5cRJJlFWY5U5YM4=
-X-Received: by 2002:a05:6638:3c8:: with SMTP id
- r8mr5656716jaq.135.1612996405466; 
- Wed, 10 Feb 2021 14:33:25 -0800 (PST)
+ bh=TH4ZAPPUAkekoGcif0gl1yrZhT93LD5EYheRiOawp9c=;
+ b=WzUImUtBNSt0VTgjPS4/1H0U4tHFui1UcBGJU+E8jIbJASk4XnT12Ru3/KYGccXE1x
+ PcZc9vWha7VYf16RsVWo9nSJRsGHJnmncnXLrjwO1Nn8SKVEZeS0WZBDhxiOg6L8SHPP
+ KkZfOIYyya4T8l1e3ENozVbOhSfyvVcRP7iLzWRME/7YZzwhErUaONWVQU7izJsHqaNn
+ 7Dj7xEbUa5FP4733je6BMbY6JTHrvHIdFq22gMcLLWjof/MMLBGwI5+ff+gNIQeySqsu
+ NITNsd518vNIopvCR6splfFdbcH9+S1R8tnXGctvSen1JTP5N59CI8DlWVHHdXxybzIO
+ hahQ==
+X-Gm-Message-State: AOAM533UAGoZX67ZeJDsgGLA4BCAKRM/xR9sYX0vkKykDFTN9P53rbNX
+ F2+fJaoMNGy3lM1ENsmyEDnO+g4fayAr+6pHyjk=
+X-Google-Smtp-Source: ABdhPJziOj5oH4JmA6jKcrp8M0o5PatxzleZFCJ+8du0mHhfm7GTbcpbb88jLCxZNg9JecSB5d1eujG2D6G+jSSNRBA=
+X-Received: by 2002:a50:b742:: with SMTP id g60mr5776991ede.113.1613007931583; 
+ Wed, 10 Feb 2021 17:45:31 -0800 (PST)
 MIME-Version: 1.0
-References: <6bc077e5ae4a9512c8adf81ae194718f2f17c402.1612836645.git.alistair.francis@wdc.com>
-In-Reply-To: <6bc077e5ae4a9512c8adf81ae194718f2f17c402.1612836645.git.alistair.francis@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 10 Feb 2021 14:32:50 -0800
-Message-ID: <CAKmqyKN1_WTzaoYoAHgxy4RALdLPeA6ZMcbO5PkBy_u5O-mLBg@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] MAINTAINERS: Add a SiFIve machine section
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+References: <CAKBF_5qGScpAzeaJKHs4102nqVCmjmNq05EXLHLbLPV9tXBd9g@mail.gmail.com>
+ <mhng-1181297c-6676-455c-af50-9c947b9a470d@palmerdabbelt-glaptop>
+In-Reply-To: <mhng-1181297c-6676-455c-af50-9c947b9a470d@palmerdabbelt-glaptop>
+From: Billa Surendra <billa.iitmadras@gmail.com>
+Date: Thu, 11 Feb 2021 07:15:19 +0530
+Message-ID: <CAKBF_5q4ccvJrYJoZE1csUP0YCN_wVOCWLOtEHYL2oSxqaTs8Q@mail.gmail.com>
+Subject: Re: qemu support for rv64imafd/rv64imafdc
+To: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: qemu-riscv@nongnu.org
+Content-Type: multipart/alternative; boundary="000000000000c8312605bb05ac16"
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=billa.iitmadras@gmail.com; helo=mail-ed1-x530.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -71,45 +70,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2021 22:33:29 -0000
+X-List-Received-Date: Thu, 11 Feb 2021 01:45:36 -0000
 
-On Mon, Feb 8, 2021 at 6:11 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+--000000000000c8312605bb05ac16
+Content-Type: text/plain; charset="UTF-8"
+
+Thanks for the info.
+
+On Thu, 11 Feb, 2021, 1:58 am Palmer Dabbelt, <palmer@dabbelt.com> wrote:
+
+> On Wed, 10 Feb 2021 02:10:35 PST (-0800), billa.iitmadras@gmail.com wrote:
+> > Does riscv qemu support  both kernel image generated with RV64IMAFD
+> > extensions and Image generated with RV64IMAFDC ?. If the answer is yes,
+> how
+> > is it supporting both ?. Please reply to my question if anyone knows.
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> Acked-by: Bin Meng <bin.meng@windriver.com>
-
-Thanks!
-
-Applied to riscv-to-apply.next with the title fixed.
-
-Alistair
-
-> ---
->  MAINTAINERS | 9 +++++++++
->  1 file changed, 9 insertions(+)
+> You can use CPU properties to enable/disable various ISA subsets.
+> Something like
 >
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 8d8b0bf966..c347d49bd2 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1359,6 +1359,15 @@ F: include/hw/misc/mchp_pfsoc_dmc.h
->  F: include/hw/misc/mchp_pfsoc_ioscb.h
->  F: include/hw/misc/mchp_pfsoc_sysreg.h
+>     qemu-system-riscv64 -cpu rv64,c=off
 >
-> +SiFive Machines
-> +M: Alistair Francis <Alistair.Francis@wdc.com>
-> +M: Bin Meng <bin.meng@windriver.com>
-> +M: Palmer Dabbelt <palmer@dabbelt.com>
-> +L: qemu-riscv@nongnu.org
-> +S: Supported
-> +F: hw/*/*sifive*.c
-> +F: include/hw/*/*sifive*.h
-> +
->  RX Machines
->  -----------
->  rx-gdbsim
-> --
-> 2.30.0
+> would turn C off.  The other supported ISA subsets can be enabled/disabled
+> in a
+> similar fashion, including everything you listed.  There's no known reason
+> RV64G (ie, non-C) kernels wouldn't work but they're not widely used so you
+> may
+> run into some long-tail issues.  You need C for EFI, but most people aren't
+> using that on RISC-V yet.
 >
+
+--000000000000c8312605bb05ac16
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Thanks for the info.=C2=A0</div><br><div class=3D"gmail_q=
+uote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, 11 Feb, 2021, 1:58 am P=
+almer Dabbelt, &lt;<a href=3D"mailto:palmer@dabbelt.com">palmer@dabbelt.com=
+</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
+0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On Wed, 10 Feb 2021=
+ 02:10:35 PST (-0800), <a href=3D"mailto:billa.iitmadras@gmail.com" target=
+=3D"_blank" rel=3D"noreferrer">billa.iitmadras@gmail.com</a> wrote:<br>
+&gt; Does riscv qemu support=C2=A0 both kernel image generated with RV64IMA=
+FD<br>
+&gt; extensions and Image generated with RV64IMAFDC ?. If the answer is yes=
+, how<br>
+&gt; is it supporting both ?. Please reply to my question if anyone knows.<=
+br>
+<br>
+You can use CPU properties to enable/disable various ISA subsets.=C2=A0 Som=
+ething like<br>
+<br>
+=C2=A0 =C2=A0 qemu-system-riscv64 -cpu rv64,c=3Doff<br>
+<br>
+would turn C off.=C2=A0 The other supported ISA subsets can be enabled/disa=
+bled in a<br>
+similar fashion, including everything you listed.=C2=A0 There&#39;s no know=
+n reason<br>
+RV64G (ie, non-C) kernels wouldn&#39;t work but they&#39;re not widely used=
+ so you may<br>
+run into some long-tail issues.=C2=A0 You need C for EFI, but most people a=
+ren&#39;t<br>
+using that on RISC-V yet.<br>
+</blockquote></div>
+
+--000000000000c8312605bb05ac16--
 
