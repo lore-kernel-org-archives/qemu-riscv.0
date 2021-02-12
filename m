@@ -1,59 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lAgFg-0003OF-8C
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Feb 2021 16:45:24 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46950)
+	id 1lAgIv-0005hs-3w
+	for mharc-qemu-riscv@gnu.org; Fri, 12 Feb 2021 16:48:49 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47584)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lAgFb-0003Nq-CJ; Fri, 12 Feb 2021 16:45:20 -0500
-Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:32800)
+ id 1lAgIt-0005fN-9K; Fri, 12 Feb 2021 16:48:43 -0500
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:38724)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lAgFY-0008GE-RI; Fri, 12 Feb 2021 16:45:19 -0500
-Received: by mail-il1-x12f.google.com with SMTP id e1so568658ilu.0;
- Fri, 12 Feb 2021 13:45:14 -0800 (PST)
+ id 1lAgIq-0001Ml-Bc; Fri, 12 Feb 2021 16:48:43 -0500
+Received: by mail-io1-xd35.google.com with SMTP id f6so708520ioz.5;
+ Fri, 12 Feb 2021 13:48:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=Yjg/IodtYRvJV+eHVoYGt1XRxn6yaloB9lzV7zttepU=;
- b=T6jNF2/VrJpti2KfplDaABfliLER6qGFGMk5fGVhX5dKMH3uV+5QkNb0O1mp8p9bWI
- aFs2NnLoMrIATZNjiZjPZSDXmVb341vGJL5YlRHgCfZxXMOD5eC47z2/J4jcC7Zed3lo
- Pv5ARwLZ6D1FP6stSQ9CJbweC/M2iErLkWw5gHcLjgNSF48nOvionNnAoczhoaxtSVx/
- z7PhmLCvoW1Ooj/0XhHq/hKtnTeoiyVFiGM1BQyuEkX9YytCM/d8TyRK1ax1vovvN/k7
- TZWlay1itf92fKyIIzeDIKEPxVIY2oHP8ywgEvua2xM340rmfHqYsL/2dGOgrceedH/g
- abnA==
+ :cc; bh=2SSDKff4jtNKYth9XF9GgWbKPzvLDa0pRP7jlBMkyAc=;
+ b=j9l/+o2hQsU+yoqi7W6gF2OalNV8zc0wAsFkilWpdha+50S2zkHf1Oc4/HSoDwcwV0
+ CLUtQ2ji2e32HDEFsTWdjFphvAUha83MXMKU/L0UIvAYqUogMPbhRC1y/U6nK1UTn2Q7
+ m2TLAvWM4s0TAITa+/uyoEiaT4F2Qy/uHgWBdIbXlt+a8d+gpviGvaN+5QnEqVrh/46n
+ 4d0POLXCXq8odF8+VKrPvJJe+6RCxHX412UvTaSEcJbhtzkSMMt4hWm6Jxsdua/s8LtP
+ tZxtXnSZkiSACFxR1p47grWFcEVZrz9JgfyHZ+NUWUUhkeM/am78PslZBVrwNszW4Fhd
+ I6gQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=Yjg/IodtYRvJV+eHVoYGt1XRxn6yaloB9lzV7zttepU=;
- b=UmvmoCySxCBMj+JfpmCLb6MX0YvdRMqfZp9hITrtn6iGCH95Kflls19pxIJZlkKjzP
- 5z1UCVKQ/IyaUFoyfCU8w/hIHFBetynn+UvDYXgjQcqHSyRuWkUG3ignw/DvNBvtPjwq
- LsZ8w7WIlwi1bx9omV/J+xZOw0QatJ0LG+74KNjgguHF9Y+dgJwB7Dia0n5gAKUeFMWa
- /EXS+ONvAqvA8ZWUDLVSfWv+Fa/QycQ7bTroeKQ4O8smHUnY+QXW9W9xjgAVJtyy01NV
- DyLqbLW5l7YBcgXz5Es2/vFIPn2HBLpabLBSolQxpEv6xrzeb0Cl2/lZFJVtmbMm3G2/
- mJRw==
-X-Gm-Message-State: AOAM532yZoGnGDulK1HHUCrJdXn/aJBYoqU1qfpfJMQPT75sqM27hGmz
- EWOwPwO/wZHnksZ67xFRZ3fxpnMR6eH19kT81Zo=
-X-Google-Smtp-Source: ABdhPJwHFigVZHoUngpHAYag/+E2iIJizSFXa+PUVsTouiOPThuqbs+FnM9jdajyjOczHjJbG9sUFgBpvZzyZq2H/2g=
-X-Received: by 2002:a92:cda1:: with SMTP id g1mr3951771ild.267.1613166313307; 
- Fri, 12 Feb 2021 13:45:13 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=2SSDKff4jtNKYth9XF9GgWbKPzvLDa0pRP7jlBMkyAc=;
+ b=ppGHo0iL5R/lGxwdj1B7IeEMCgsgnumr5xytzUYun9sT3XyCoq66pIhe/0FX5ESDcz
+ fUV16qTAMh5B/4ef7JA0qnuGDTX7uX5pcXlx5h+EfvDGcEfviSpChy3iEDT3Ih098c2O
+ Nw/+Xpw1deDjRfCAmyIV5/mGGgYZB+aAJdvnljKtmGx0StleGRkZrxg2rLKBMeT1mm6w
+ dZccotH10uEhIxzs9V4cSFbbp2bNHqv9jCDzubO7GXy5r3o+HO++lYU9GnT0uJeCONlU
+ jmpFDfP33nTOEG16t5uWBXzNT9IAx3qU/ZQMBXIP3BuRN9+6udkbYUbcMhV91Zwn0HZW
+ VI5A==
+X-Gm-Message-State: AOAM5317zP3LI/bgly6gXFTai4e9NnFTiPZVtLWi5rJQVMgh8+sJIMZe
+ 3s7bQ0VilEUhNeVgcU14e1USzwWGrsUNJfXLb5g=
+X-Google-Smtp-Source: ABdhPJxtgyY+EYWNw3Jd5AqDdTIbtzZJiMVMge3lmgGTebQyGbsfs8cCgQOIoaXA+kzFTBFfO6Y0cpHW6eDIDna+2sc=
+X-Received: by 2002:a02:2944:: with SMTP id p65mr4384758jap.91.1613166517311; 
+ Fri, 12 Feb 2021 13:48:37 -0800 (PST)
 MIME-Version: 1.0
-References: <1fb2d56aa23a81f4473e638abe9e2d78c09a3d5b.1611080607.git.alistair.francis@wdc.com>
- <24791910.1r3eYUQgxm@farino> <2013655.G923GbCHz0@farino>
-In-Reply-To: <2013655.G923GbCHz0@farino>
+References: <20210122122958.12311-1-bmeng.cn@gmail.com>
+ <20210122122958.12311-5-bmeng.cn@gmail.com>
+In-Reply-To: <20210122122958.12311-5-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 12 Feb 2021 13:44:32 -0800
-Message-ID: <CAKmqyKMkmUHKZ7GyTuTqu6ZQ_u9rZbQANPQy9U907voBDJo=4A@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] linux-user/signal: Decode waitid si_code
-To: =?UTF-8?B?QW5kcmVhcyBLLiBIw7x0dGVs?= <dilfridge@gentoo.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Fri, 12 Feb 2021 13:47:56 -0800
+Message-ID: <CAKmqyKMU0QR9sZ7xjxDrWk1JywZwWyuoTzZaAGLc4_x3P4H1EQ@mail.gmail.com>
+Subject: Re: [PATCH 4/4] hw/riscv: virt: Map high mmio for PCIe
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Alistair Francis <alistair.francis@wdc.com>
+ Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,69 +72,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2021 21:45:21 -0000
+X-List-Received-Date: Fri, 12 Feb 2021 21:48:43 -0000
 
-On Thu, Jan 21, 2021 at 7:15 AM Andreas K. H=C3=BCttel <dilfridge@gentoo.or=
-g> wrote:
+On Fri, Jan 22, 2021 at 4:35 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Am Mittwoch, 20. Januar 2021, 22:12:30 EET schrieb Andreas K. H=C3=BCttel=
-:
-> > > This patch just passes the waitid status directly back to the guest.
-> >
-> > This works at least as well as the previous versions, so ++ from me.
-> >
-> > Will do more testing over the next days to see if it maybe also improve=
-s the
-> > additional oddities I observed.
-> >
+> From: Bin Meng <bin.meng@windriver.com>
 >
-> So the patch is good since it clearly resolves the linked bug.
+> Some peripherals require 64-bit PCI address, so let's map the high
+> mmio space for PCIe.
 >
-> However, something else is still broken (maybe related; unchanged compare=
-d to
-> the previous patch version). I keep seeing hanging "qemu-riscv32 /bin/bas=
-h
-> ..." processes using 100% cpu. If I attach strace (on the host arch x86-6=
-4) to
-> qemu, I see an infinite loop:
+> For RV32, the address is hardcoded to below 4 GiB from the highest
+> accessible physical address. For RV64, the base address depends on
+> top of RAM and is aligned to its size which is using 16 GiB for now.
 >
-> waitid(P_ALL, -1, {}, WNOHANG|WEXITED, NULL) =3D 0
-> rt_sigprocmask(SIG_SETMASK, ~[RTMIN RT_1], NULL, 8) =3D 0
-> rt_sigprocmask(SIG_SETMASK, ~[RTMIN RT_1], NULL, 8) =3D 0
-> rt_sigprocmask(SIG_SETMASK, [CHLD], NULL, 8) =3D 0
-> rt_sigprocmask(SIG_SETMASK, ~[RTMIN RT_1], NULL, 8) =3D 0
-> rt_sigprocmask(SIG_SETMASK, ~[RTMIN RT_1], NULL, 8) =3D 0
-> rt_sigprocmask(SIG_SETMASK, [CHLD], NULL, 8) =3D 0
-> waitid(P_ALL, -1, {}, WNOHANG|WEXITED, NULL) =3D 0
-> rt_sigprocmask(SIG_SETMASK, ~[RTMIN RT_1], NULL, 8) =3D 0
-> rt_sigprocmask(SIG_SETMASK, ~[RTMIN RT_1], NULL, 8) =3D 0
-> rt_sigprocmask(SIG_SETMASK, [CHLD], NULL, 8) =3D 0
-> rt_sigprocmask(SIG_SETMASK, ~[RTMIN RT_1], NULL, 8) =3D 0
-> rt_sigprocmask(SIG_SETMASK, ~[RTMIN RT_1], NULL, 8) =3D 0
-> rt_sigprocmask(SIG_SETMASK, [CHLD], NULL, 8) =3D 0
-> ...
->
-> Unfortunately I do not have a simple reproducer. This is somewhere in the
-> middle of our build system...
->
-> Otherwise, I can re-build glibc, gcc, binutils, make  in the qemu chroot
-> without obvious problems, with one striking strange detail - "make" refus=
-es to
-> run more than one concurrent process (even with MAKEOPTS=3D"-j9"). Someth=
-ing is
-> off there.
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Ping!
-
-Even though it seems like there are still issues with RV32, this is a
-step in the right direction.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 >
+> ---
+>
+>  hw/riscv/virt.c | 36 ++++++++++++++++++++++++++++++++++--
+>  1 file changed, 34 insertions(+), 2 deletions(-)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 4f44509360..4ab3b35cc7 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -59,6 +59,15 @@ static const MemMapEntry virt_memmap[] = {
+>      [VIRT_DRAM] =        { 0x80000000,           0x0 },
+>  };
+>
+> +/* PCIe high mmio is fixed for RV32 */
+> +#define VIRT32_HIGH_PCIE_MMIO_BASE  0x300000000ULL
+> +#define VIRT32_HIGH_PCIE_MMIO_SIZE  (4 * GiB)
+> +
+> +/* PCIe high mmio for RV64, size is fixed but base depends on top of RAM */
+> +#define VIRT64_HIGH_PCIE_MMIO_SIZE  (16 * GiB)
+> +
+> +static MemMapEntry virt_high_pcie_memmap;
+> +
+>  #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
+>
+>  static PFlashCFI01 *virt_flash_create1(RISCVVirtState *s,
+> @@ -371,7 +380,11 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+>          2, memmap[VIRT_PCIE_PIO].base, 2, memmap[VIRT_PCIE_PIO].size,
+>          1, FDT_PCI_RANGE_MMIO,
+>          2, memmap[VIRT_PCIE_MMIO].base,
+> -        2, memmap[VIRT_PCIE_MMIO].base, 2, memmap[VIRT_PCIE_MMIO].size);
+> +        2, memmap[VIRT_PCIE_MMIO].base, 2, memmap[VIRT_PCIE_MMIO].size,
+> +        1, FDT_PCI_RANGE_MMIO_64BIT,
+> +        2, virt_high_pcie_memmap.base,
+> +        2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
+> +
+>      create_pcie_irq_map(fdt, name, plic_pcie_phandle);
+>      g_free(name);
+>
+> @@ -448,12 +461,14 @@ update_bootargs:
+>  static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+>                                            hwaddr ecam_base, hwaddr ecam_size,
+>                                            hwaddr mmio_base, hwaddr mmio_size,
+> +                                          hwaddr high_mmio_base,
+> +                                          hwaddr high_mmio_size,
+>                                            hwaddr pio_base,
+>                                            DeviceState *plic)
+>  {
+>      DeviceState *dev;
+>      MemoryRegion *ecam_alias, *ecam_reg;
+> -    MemoryRegion *mmio_alias, *mmio_reg;
+> +    MemoryRegion *mmio_alias, *high_mmio_alias, *mmio_reg;
+>      qemu_irq irq;
+>      int i;
+>
+> @@ -473,6 +488,13 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+>                               mmio_reg, mmio_base, mmio_size);
+>      memory_region_add_subregion(get_system_memory(), mmio_base, mmio_alias);
+>
+> +    /* Map high MMIO space */
+> +    high_mmio_alias = g_new0(MemoryRegion, 1);
+> +    memory_region_init_alias(high_mmio_alias, OBJECT(dev), "pcie-mmio-high",
+> +                             mmio_reg, high_mmio_base, high_mmio_size);
+> +    memory_region_add_subregion(get_system_memory(), high_mmio_base,
+> +                                high_mmio_alias);
+> +
+>      sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
+>
+>      for (i = 0; i < GPEX_NUM_IRQS; i++) {
+> @@ -601,6 +623,14 @@ static void virt_machine_init(MachineState *machine)
+>              machine->ram_size = 10 * GiB;
+>              error_report("Limitting RAM size to 10 GiB");
+>          }
+> +
+> +        virt_high_pcie_memmap.base = VIRT32_HIGH_PCIE_MMIO_BASE;
+> +        virt_high_pcie_memmap.size = VIRT32_HIGH_PCIE_MMIO_SIZE;
+> +    } else {
+> +        virt_high_pcie_memmap.size = VIRT64_HIGH_PCIE_MMIO_SIZE;
+> +        virt_high_pcie_memmap.base = memmap[VIRT_DRAM].base + machine->ram_size;
+> +        virt_high_pcie_memmap.base =
+> +            ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
+>      }
+>
+>      /* register system main memory (actual RAM) */
+> @@ -686,6 +716,8 @@ static void virt_machine_init(MachineState *machine)
+>                     memmap[VIRT_PCIE_ECAM].size,
+>                     memmap[VIRT_PCIE_MMIO].base,
+>                     memmap[VIRT_PCIE_MMIO].size,
+> +                   virt_high_pcie_memmap.base,
+> +                   virt_high_pcie_memmap.size,
+>                     memmap[VIRT_PCIE_PIO].base,
+>                     DEVICE(pcie_plic));
+>
 > --
-> Andreas K. H=C3=BCttel
-> dilfridge@gentoo.org
-> Gentoo Linux developer
-> (council, qa, toolchain, base-system, perl, libreoffice)
+> 2.25.1
+>
+>
 
