@@ -1,29 +1,30 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lAb2K-0003BC-9E
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Feb 2021 11:11:16 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57774)
+	id 1lAb4L-00055Q-Se
+	for mharc-qemu-riscv@gnu.org; Fri, 12 Feb 2021 11:13:21 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58744)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lAb2I-00038u-Ag; Fri, 12 Feb 2021 11:11:14 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:47941)
+ id 1lAb4J-00051S-Hc; Fri, 12 Feb 2021 11:13:19 -0500
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:57647)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lAb2G-00083I-Eu; Fri, 12 Feb 2021 11:11:14 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.0927783|-1; CH=blue; DM=|OVERLOAD|false|;
- DS=CONTINUE|ham_regular_dialog|0.343025-0.00652002-0.650455;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047206; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.JYHY1EE_1613146265; 
+ id 1lAb4E-0000JO-SH; Fri, 12 Feb 2021 11:13:19 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07954361|-1; CH=blue; DM=|OVERLOAD|false|;
+ DS=CONTINUE|ham_system_inform|0.375017-0.00787785-0.617105;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047213; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.JYHSP3M_1613146386; 
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.JYHY1EE_1613146265)
- by smtp.aliyun-inc.com(10.147.41.178);
- Sat, 13 Feb 2021 00:11:05 +0800
+ fp:SMTPD_---.JYHSP3M_1613146386)
+ by smtp.aliyun-inc.com(10.147.43.230);
+ Sat, 13 Feb 2021 00:13:06 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, richard.henderson@linaro.org, alistair23@gmail.com,
  palmer@dabbelt.com, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 33/38] target/riscv: RV64 Only 32-bit Multiply Instructions
-Date: Fri, 12 Feb 2021 23:02:51 +0800
-Message-Id: <20210212150256.885-34-zhiwei_liu@c-sky.com>
+Subject: [PATCH 34/38] target/riscv: RV64 Only 32-bit Multiply & Add
+ Instructions
+Date: Fri, 12 Feb 2021 23:02:52 +0800
+Message-Id: <20210212150256.885-35-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210212150256.885-1-zhiwei_liu@c-sky.com>
 References: <20210212150256.885-1-zhiwei_liu@c-sky.com>
@@ -46,80 +47,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2021 16:11:14 -0000
+X-List-Received-Date: Fri, 12 Feb 2021 16:13:19 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/helper.h                   |  3 +++
- target/riscv/insn32-64.decode           |  3 +++
- target/riscv/insn_trans/trans_rvp.c.inc |  4 ++++
- target/riscv/packed_helper.c            | 19 +++++++++++++++++++
- 4 files changed, 29 insertions(+)
+ target/riscv/helper.h                   |  4 ++++
+ target/riscv/insn32-64.decode           |  4 ++++
+ target/riscv/insn_trans/trans_rvp.c.inc |  5 ++++
+ target/riscv/packed_helper.c            | 31 +++++++++++++++++++++++++
+ 4 files changed, 44 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index f8521a5388..198b010601 100644
+index 198b010601..05f7c1d811 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1450,4 +1450,7 @@ DEF_HELPER_3(kdmtt16, tl, env, tl, tl)
- DEF_HELPER_4(kdmabb16, tl, env, tl, tl, tl)
- DEF_HELPER_4(kdmabt16, tl, env, tl, tl, tl)
- DEF_HELPER_4(kdmatt16, tl, env, tl, tl, tl)
+@@ -1453,4 +1453,8 @@ DEF_HELPER_4(kdmatt16, tl, env, tl, tl, tl)
+ 
+ DEF_HELPER_3(smbt32, tl, env, tl, tl)
+ DEF_HELPER_3(smtt32, tl, env, tl, tl)
 +
-+DEF_HELPER_3(smbt32, tl, env, tl, tl)
-+DEF_HELPER_3(smtt32, tl, env, tl, tl)
++DEF_HELPER_4(kmabb32, tl, env, tl, tl, tl)
++DEF_HELPER_4(kmabt32, tl, env, tl, tl, tl)
++DEF_HELPER_4(kmatt32, tl, env, tl, tl, tl)
  #endif
 diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
-index 2e1c1817e4..46a4e5d080 100644
+index 46a4e5d080..c5b07a2667 100644
 --- a/target/riscv/insn32-64.decode
 +++ b/target/riscv/insn32-64.decode
-@@ -145,3 +145,6 @@ kdmtt16    1111101  ..... ..... 001 ..... 1111111 @r
- kdmabb16   1101100  ..... ..... 001 ..... 1111111 @r
- kdmabt16   1110100  ..... ..... 001 ..... 1111111 @r
- kdmatt16   1111100  ..... ..... 001 ..... 1111111 @r
+@@ -148,3 +148,7 @@ kdmatt16   1111100  ..... ..... 001 ..... 1111111 @r
+ 
+ smbt32     0001100  ..... ..... 010 ..... 1111111 @r
+ smtt32     0010100  ..... ..... 010 ..... 1111111 @r
 +
-+smbt32     0001100  ..... ..... 010 ..... 1111111 @r
-+smtt32     0010100  ..... ..... 010 ..... 1111111 @r
++kmabb32    0101101  ..... ..... 010 ..... 1111111 @r
++kmabt32    0110101  ..... ..... 010 ..... 1111111 @r
++kmatt32    0111101  ..... ..... 010 ..... 1111111 @r
 diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
-index 2b4418abd8..33435c3a9e 100644
+index 33435c3a9e..da6a4ba14a 100644
 --- a/target/riscv/insn_trans/trans_rvp.c.inc
 +++ b/target/riscv/insn_trans/trans_rvp.c.inc
-@@ -1190,4 +1190,8 @@ GEN_RVP_R_OOL(kdmtt16);
- GEN_RVP_R_ACC_OOL(kdmabb16);
- GEN_RVP_R_ACC_OOL(kdmabt16);
- GEN_RVP_R_ACC_OOL(kdmatt16);
+@@ -1194,4 +1194,9 @@ GEN_RVP_R_ACC_OOL(kdmatt16);
+ /* (RV64 Only) 32-bit Multiply Instructions */
+ GEN_RVP_R_OOL(smbt32);
+ GEN_RVP_R_OOL(smtt32);
 +
-+/* (RV64 Only) 32-bit Multiply Instructions */
-+GEN_RVP_R_OOL(smbt32);
-+GEN_RVP_R_OOL(smtt32);
++/* (RV64 Only) 32-bit Multiply & Add Instructions */
++GEN_RVP_R_ACC_OOL(kmabb32);
++GEN_RVP_R_ACC_OOL(kmabt32);
++GEN_RVP_R_ACC_OOL(kmatt32);
  #endif
 diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
-index 5636848aaf..11b41637a1 100644
+index 11b41637a1..99da28a4b3 100644
 --- a/target/riscv/packed_helper.c
 +++ b/target/riscv/packed_helper.c
-@@ -3572,5 +3572,24 @@ static inline void do_kdmatt16(CPURISCVState *env, void *vd, void *va,
+@@ -3592,4 +3592,35 @@ static inline void do_smtt32(CPURISCVState *env, void *vd, void *va,
+ }
  
- RVPR_ACC(kdmatt16, 2, 2);
- 
-+/* (RV64 Only) 32-bit Multiply Instructions */
-+static inline void do_smbt32(CPURISCVState *env, void *vd, void *va,
-+                             void *vb, uint8_t i)
+ RVPR(smtt32, 1, sizeof(target_ulong));
++
++/* (RV64 Only) 32-bit Multiply & Add Instructions */
++static inline void do_kmabb32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, void *vc, uint8_t i)
 +{
-+    int64_t *d = vd;
++    int64_t *d = vd, *c = vc;
 +    int32_t *a = va, *b = vb;
-+    *d = (int64_t)a[H4(2 * i)] * b[H4(4 * i + 1)];
++    *d = sadd64(env, 0, (int64_t)a[H4(2 * i)] * b[H4(2 * i)], *c);
 +}
 +
-+RVPR(smbt32, 1, sizeof(target_ulong));
++RVPR_ACC(kmabb32, 1, sizeof(target_ulong));
 +
-+static inline void do_smtt32(CPURISCVState *env, void *vd, void *va,
-+                             void *vb, uint8_t i)
++static inline void do_kmabt32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, void *vc, uint8_t i)
 +{
-+    int64_t *d = vd;
++    int64_t *d = vd, *c = vc;
 +    int32_t *a = va, *b = vb;
-+    *d = (int64_t)a[H4(2 * i + 1)] * b[H4(2 * i + 1)];
++    *d = sadd64(env, 0, (int64_t)a[H4(2 * i)] * b[H4(2 * i + 1)], *c);
 +}
- 
-+RVPR(smtt32, 1, sizeof(target_ulong));
++
++RVPR_ACC(kmabt32, 1, sizeof(target_ulong));
++
++static inline void do_kmatt32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, void *vc, uint8_t i)
++{
++    int64_t *d = vd, *c = vc;
++    int32_t *a = va, *b = vb;
++    *d = sadd64(env, 0, (int64_t)a[H4(2 * i + 1)] * b[H4(2 * i + 1)], *c);
++}
++
++RVPR_ACC(kmatt32, 1, sizeof(target_ulong));
  #endif
 -- 
 2.17.1
