@@ -1,30 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lAaLe-00030P-Qs
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Feb 2021 10:27:10 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47166)
+	id 1lAaNR-0004Em-Qe
+	for mharc-qemu-riscv@gnu.org; Fri, 12 Feb 2021 10:29:02 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47540)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lAaLc-0002xS-SJ; Fri, 12 Feb 2021 10:27:08 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:35047)
+ id 1lAaNN-0004CT-7v; Fri, 12 Feb 2021 10:28:57 -0500
+Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:43422)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lAaLU-0005k4-Of; Fri, 12 Feb 2021 10:27:08 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436293|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.00365088-7.57492e-05-0.996273;
- FP=11549458540173723280|1|1|1|0|-1|-1|-1; HT=ay29a033018047202;
- MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=6; RT=6; SR=0;
- TI=SMTPD_---.JYGrFHl_1613142312; 
+ id 1lAaNK-0006Xo-D4; Fri, 12 Feb 2021 10:28:56 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_system_inform|0.412053-0.0126374-0.57531;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047202; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.JYGrTFL_1613143727; 
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.JYGrFHl_1613142312)
- by smtp.aliyun-inc.com(10.147.42.22); Fri, 12 Feb 2021 23:05:12 +0800
+ fp:SMTPD_---.JYGrTFL_1613143727)
+ by smtp.aliyun-inc.com(10.147.42.22); Fri, 12 Feb 2021 23:28:48 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, richard.henderson@linaro.org, alistair23@gmail.com,
  palmer@dabbelt.com, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 01/38] target/riscv: implementation-defined constant parameters
-Date: Fri, 12 Feb 2021 23:02:19 +0800
-Message-Id: <20210212150256.885-2-zhiwei_liu@c-sky.com>
+Subject: [PATCH 12/38] target/riscv: SIMD 16-bit Miscellaneous Instructions
+Date: Fri, 12 Feb 2021 23:02:30 +0800
+Message-Id: <20210212150256.885-13-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210212150256.885-1-zhiwei_liu@c-sky.com>
 References: <20210212150256.885-1-zhiwei_liu@c-sky.com>
@@ -47,144 +45,289 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2021 15:27:09 -0000
-
-ext_p64 is whether to support Zp64 extension in RV32, default value is true.
-pext_ver is the packed specification version, default value is v0.9.2.
+X-List-Received-Date: Fri, 12 Feb 2021 15:28:58 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/cpu.c       | 29 +++++++++++++++++++++++++++++
- target/riscv/cpu.h       |  6 ++++++
- target/riscv/translate.c |  2 ++
- 3 files changed, 37 insertions(+)
+ target/riscv/helper.h                   |  12 ++
+ target/riscv/insn32.decode              |  13 ++
+ target/riscv/insn_trans/trans_rvp.c.inc |  42 ++++++
+ target/riscv/packed_helper.c            | 167 ++++++++++++++++++++++++
+ 4 files changed, 234 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 16f1a34238..1b99f629ec 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -132,6 +132,11 @@ static void set_vext_version(CPURISCVState *env, int vext_ver)
-     env->vext_ver = vext_ver;
- }
- 
-+static void set_pext_version(CPURISCVState *env, int pext_ver)
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 6bb601b436..866484e37d 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1228,3 +1228,15 @@ DEF_HELPER_3(umul8, i64, env, tl, tl)
+ DEF_HELPER_3(umulx8, i64, env, tl, tl)
+ DEF_HELPER_3(khm8, tl, env, tl, tl)
+ DEF_HELPER_3(khmx8, tl, env, tl, tl)
++
++DEF_HELPER_3(smin16, tl, env, tl, tl)
++DEF_HELPER_3(umin16, tl, env, tl, tl)
++DEF_HELPER_3(smax16, tl, env, tl, tl)
++DEF_HELPER_3(umax16, tl, env, tl, tl)
++DEF_HELPER_3(sclip16, tl, env, tl, tl)
++DEF_HELPER_3(uclip16, tl, env, tl, tl)
++DEF_HELPER_2(kabs16, tl, env, tl)
++DEF_HELPER_2(clrs16, tl, env, tl)
++DEF_HELPER_2(clz16, tl, env, tl)
++DEF_HELPER_2(clo16, tl, env, tl)
++DEF_HELPER_2(swap16, tl, env, tl)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 9d165efba9..bc9d5fc967 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -42,6 +42,7 @@
+ &i    imm rs1 rd
+ &j    imm rd
+ &r    rd rs1 rs2
++&r2   rd rs1
+ &s    imm rs1 rs2
+ &u    imm rd
+ &shift     shamt rs1 rd
+@@ -695,3 +696,15 @@ umul8      1011100  ..... ..... 000 ..... 1111111 @r
+ umulx8     1011101  ..... ..... 000 ..... 1111111 @r
+ khm8       1000111  ..... ..... 000 ..... 1111111 @r
+ khmx8      1001111  ..... ..... 000 ..... 1111111 @r
++
++smin16     1000000  ..... ..... 000 ..... 1111111 @r
++umin16     1001000  ..... ..... 000 ..... 1111111 @r
++smax16     1000001  ..... ..... 000 ..... 1111111 @r
++umax16     1001001  ..... ..... 000 ..... 1111111 @r
++sclip16    1000010  0.... ..... 000 ..... 1111111 @sh4
++uclip16    1000010  1.... ..... 000 ..... 1111111 @sh4
++kabs16     1010110  10001 ..... 000 ..... 1111111 @r2
++clrs16     1010111  01000 ..... 000 ..... 1111111 @r2
++clz16      1010111  01001 ..... 000 ..... 1111111 @r2
++clo16      1010111  01011 ..... 000 ..... 1111111 @r2
++swap16     1010110  11001 ..... 000 ..... 1111111 @r2
+diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
+index 336f3418b1..56fb8b2523 100644
+--- a/target/riscv/insn_trans/trans_rvp.c.inc
++++ b/target/riscv/insn_trans/trans_rvp.c.inc
+@@ -444,3 +444,45 @@ GEN_RVP_R_D64_OOL(umul8);
+ GEN_RVP_R_D64_OOL(umulx8);
+ GEN_RVP_R_OOL(khm8);
+ GEN_RVP_R_OOL(khmx8);
++
++/* SIMD 16-bit Miscellaneous Instructions */
++GEN_RVP_R_OOL(smin16);
++GEN_RVP_R_OOL(umin16);
++GEN_RVP_R_OOL(smax16);
++GEN_RVP_R_OOL(umax16);
++GEN_RVP_SHIFTI(sclip16, sclip16, NULL);
++GEN_RVP_SHIFTI(uclip16, uclip16, NULL);
++
++/* Out of line helpers for R2 format */
++static bool
++r2_ool(DisasContext *ctx, arg_r2 *a,
++       void (* fn)(TCGv, TCGv_ptr, TCGv))
 +{
-+    env->pext_ver = pext_ver;
++    TCGv src1, dst;
++    if (!has_ext(ctx, RVP)) {
++        return false;
++    }
++
++    src1 = tcg_temp_new();
++    dst = tcg_temp_new();
++
++    gen_get_gpr(src1, a->rs1);
++    fn(dst, cpu_env, src1);
++    gen_set_gpr(a->rd, dst);
++
++    tcg_temp_free(src1);
++    tcg_temp_free(dst);
++    return true;
 +}
 +
- static void set_feature(CPURISCVState *env, int feature)
- {
-     env->features |= (1ULL << feature);
-@@ -380,6 +385,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-     int priv_version = PRIV_VERSION_1_11_0;
-     int vext_version = VEXT_VERSION_0_07_1;
-+    int pext_version = PEXT_VERSION_0_09_2;
-     target_ulong target_misa = env->misa;
-     Error *local_err = NULL;
- 
-@@ -404,6 +410,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
- 
-     set_priv_version(env, priv_version);
-     set_vext_version(env, vext_version);
-+    set_pext_version(env, pext_version);
- 
-     if (cpu->cfg.mmu) {
-         set_feature(env, RISCV_FEATURE_MMU);
-@@ -511,6 +518,28 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             }
-             set_vext_version(env, vext_version);
-         }
-+        if (cpu->cfg.ext_p) {
-+            target_misa |= RVP;
-+            if (cpu->cfg.pext_spec) {
-+                if (!g_strcmp0(cpu->cfg.pext_spec, "v0.9.2")) {
-+                    pext_version = PEXT_VERSION_0_09_2;
-+                } else {
-+                    error_setg(errp,
-+                               "Unsupported packed spec version '%s'",
-+                               cpu->cfg.pext_spec);
-+                    return;
-+                }
-+            } else {
-+                qemu_log("packed verison is not specified, "
-+                         "use the default value v0.9.2\n");
-+            }
-+            if (!cpu->cfg.ext_p64 && env->misa == RV64) {
-+                error_setg(errp, "For RV64, the Zp64 instructions will be "
-+                                 "included in the baseline P extension.");
-+                return;
-+            }
-+            set_pext_version(env, pext_version);
-+        }
- 
-         set_misa(env, target_misa);
-     }
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 02758ae0eb..f458722646 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -68,6 +68,7 @@
- #define RVF RV('F')
- #define RVD RV('D')
- #define RVV RV('V')
-+#define RVP RV('P')
- #define RVC RV('C')
- #define RVS RV('S')
- #define RVU RV('U')
-@@ -87,6 +88,7 @@ enum {
- #define PRIV_VERSION_1_11_0 0x00011100
- 
- #define VEXT_VERSION_0_07_1 0x00000701
-+#define PEXT_VERSION_0_09_2 0x00000902
- 
- enum {
-     TRANSLATE_SUCCESS,
-@@ -134,6 +136,7 @@ struct CPURISCVState {
- 
-     target_ulong priv_ver;
-     target_ulong vext_ver;
-+    target_ulong pext_ver;
-     target_ulong misa;
-     target_ulong misa_mask;
- 
-@@ -288,13 +291,16 @@ struct RISCVCPU {
-         bool ext_u;
-         bool ext_h;
-         bool ext_v;
-+        bool ext_p;
-         bool ext_counters;
-         bool ext_ifencei;
-         bool ext_icsr;
-+        bool ext_p64;
- 
-         char *priv_spec;
-         char *user_spec;
-         char *vext_spec;
-+        char *pext_spec;
-         uint16_t vlen;
-         uint16_t elen;
-         bool mmu;
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 0f28b5f41e..eb810efec6 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -56,6 +56,7 @@ typedef struct DisasContext {
-        to reset this known value.  */
-     int frm;
-     bool ext_ifencei;
-+    bool ext_p64;
-     bool hlsx;
-     /* vector extension */
-     bool vill;
-@@ -824,6 +825,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
-     ctx->mlen = 1 << (ctx->sew  + 3 - ctx->lmul);
-     ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
-+    ctx->ext_p64 = cpu->cfg.ext_p64;
-     ctx->cs = cs;
++#define GEN_RVP_R2_OOL(NAME)                           \
++static bool trans_##NAME(DisasContext *s, arg_r2 *a)   \
++{                                                      \
++    return r2_ool(s, a, gen_helper_##NAME);            \
++}
++
++GEN_RVP_R2_OOL(kabs16);
++GEN_RVP_R2_OOL(clrs16);
++GEN_RVP_R2_OOL(clz16);
++GEN_RVP_R2_OOL(clo16);
++GEN_RVP_R2_OOL(swap16);
+diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
+index 56baefeb8e..a6ab011ace 100644
+--- a/target/riscv/packed_helper.c
++++ b/target/riscv/packed_helper.c
+@@ -920,3 +920,170 @@ static inline void do_khmx8(CPURISCVState *env, void *vd, void *va,
  }
  
+ RVPR(khmx8, 2, 1);
++
++/* SIMD 16-bit Miscellaneous Instructions */
++static inline void do_smin16(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
++{
++    int16_t *d = vd, *a = va, *b = vb;
++
++    d[i] = (a[i] < b[i]) ? a[i] : b[i];
++}
++
++RVPR(smin16, 1, 2);
++
++static inline void do_umin16(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
++{
++    uint16_t *d = vd, *a = va, *b = vb;
++
++    d[i] = (a[i] < b[i]) ? a[i] : b[i];
++}
++
++RVPR(umin16, 1, 2);
++
++static inline void do_smax16(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
++{
++    int16_t *d = vd, *a = va, *b = vb;
++
++    d[i] = (a[i] > b[i]) ? a[i] : b[i];
++}
++
++RVPR(smax16, 1, 2);
++
++static inline void do_umax16(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
++{
++    uint16_t *d = vd, *a = va, *b = vb;
++
++    d[i] = (a[i] > b[i]) ? a[i] : b[i];
++}
++
++RVPR(umax16, 1, 2);
++
++static int64_t sat64(CPURISCVState *env, int64_t a, uint8_t shift)
++{
++    int64_t max = shift >= 64 ? INT64_MAX : (1ull << shift) - 1;
++    int64_t min = shift >= 64 ? INT64_MIN : -(1ull << shift);
++    int64_t result;
++
++    if (a > max) {
++        result = max;
++        env->vxsat = 0x1;
++    } else if (a < min) {
++        result = min;
++        env->vxsat = 0x1;
++    } else {
++        result = a;
++    }
++    return result;
++}
++
++static inline void do_sclip16(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    uint8_t shift = *(uint8_t *)vb & 0xf;
++
++    d[i] = sat64(env, a[i], shift);
++}
++
++RVPR(sclip16, 1, 2);
++
++static uint64_t satu64(CPURISCVState *env, uint64_t a, uint8_t shift)
++{
++    uint64_t max = shift >= 64 ? UINT64_MAX : (1ull << shift) - 1;
++    uint64_t result;
++
++    if (a > max) {
++        result = max;
++        env->vxsat = 0x1;
++    } else {
++        result = a;
++    }
++    return result;
++}
++
++static inline void do_uclip16(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    uint8_t shift = *(uint8_t *)vb & 0xf;
++
++    if (a[i] < 0) {
++        d[i] = 0;
++        env->vxsat = 0x1;
++    } else {
++        d[i] = satu64(env, a[i], shift);
++    }
++}
++
++RVPR(uclip16, 1, 2);
++
++typedef void PackedFn2i(CPURISCVState *, void *, void *, uint8_t);
++
++static inline target_ulong rvpr2(CPURISCVState *env, target_ulong a,
++                                 uint8_t step, uint8_t size, PackedFn2i *fn)
++{
++    int i, passes = sizeof(target_ulong) / size;
++    target_ulong result;
++
++    for (i = 0; i < passes; i += step) {
++        fn(env, &result, &a, i);
++    }
++    return result;
++}
++
++#define RVPR2(NAME, STEP, SIZE)                                  \
++target_ulong HELPER(NAME)(CPURISCVState *env, target_ulong a)    \
++{                                                                \
++    return rvpr2(env, a, STEP, SIZE, (PackedFn2i *)do_##NAME);   \
++}
++
++static inline void do_kabs16(CPURISCVState *env, void *vd, void *va, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++
++    if (a[i] == INT16_MIN) {
++        d[i] = INT16_MAX;
++        env->vxsat = 0x1;
++    } else {
++        d[i] = abs(a[i]);
++    }
++}
++
++RVPR2(kabs16, 1, 2);
++
++static inline void do_clrs16(CPURISCVState *env, void *vd, void *va, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    d[i] = clrsb32(a[i]) - 16;
++}
++
++RVPR2(clrs16, 1, 2);
++
++static inline void do_clz16(CPURISCVState *env, void *vd, void *va, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    d[i] = (a[i] < 0) ? 0 : (clz32(a[i]) - 16);
++}
++
++RVPR2(clz16, 1, 2);
++
++static inline void do_clo16(CPURISCVState *env, void *vd, void *va, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    d[i] = (a[i] >= 0) ? 0 : (clo32(a[i]) - 16);
++}
++
++RVPR2(clo16, 1, 2);
++
++static inline void do_swap16(CPURISCVState *env, void *vd, void *va, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    d[H2(i)] = a[H2(i + 1)];
++    d[H2(i + 1)] = a[H2(i)];
++}
++
++RVPR2(swap16, 2, 2);
 -- 
 2.17.1
 
