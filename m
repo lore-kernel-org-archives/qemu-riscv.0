@@ -1,66 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lAgZj-0004a5-Ji
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Feb 2021 17:06:07 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51104)
+	id 1lAxTn-0007Yo-T9
+	for mharc-qemu-riscv@gnu.org; Sat, 13 Feb 2021 11:09:07 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50600)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lAgZg-0004TL-6R; Fri, 12 Feb 2021 17:06:04 -0500
-Received: from mail-il1-x12d.google.com ([2607:f8b0:4864:20::12d]:44182)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lAgZb-00084Y-Sr; Fri, 12 Feb 2021 17:06:03 -0500
-Received: by mail-il1-x12d.google.com with SMTP id y15so548423ilj.11;
- Fri, 12 Feb 2021 14:05:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=FngmoyvQJ2rNynjbh1OxbPLU6h1gs0EfFKu5i/ft/Gg=;
- b=S4o0Omn2+AGjC7tCvFiXC4xGsyAQBRYRdpvsjbVyUd4Iq+ozdzJGHaUyP5mqSp9zgf
- 7O2lD3jwGNRh5zs1KMG9tT+F/BncWNStuOIqtSd4NDrg02kA05FDNflkrwvfs8KJolOq
- jEyhIbgWVo7Qjd+zaL/Ufmn4nnRtzGbjRtsIcnPKn+pERNFADUDbSpDVJKmjzcQPF7Oo
- UTDDzQOlnGL2YsCTdQWsMNGuxYMYzHKw0IZ3QD88xQtV+98R1+N/apHvYvmSsJXHiUUb
- +MfJZNnIQOkzHIiIou7tLN3L+NrPydDx/84DVCTTEnW2OqA/S/xfxhWqXZNy50Z7TGEg
- g2UQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=FngmoyvQJ2rNynjbh1OxbPLU6h1gs0EfFKu5i/ft/Gg=;
- b=OsT/4Z2+pMtly0Z/WiU/h9OKtLWv8drRd7CC7jKFSJshRmF8bz8rmdcWmcYfbPr7nR
- +lvvChWaNXLxIbeP0cOXjm1iaBLJWZDI2vlfb3jsK1t1WoYfAiICYIALatSf7RPfOpzO
- LymOyoo1TIv0P/JogSGZFJxURM1JS8wJYy7UiyhGBQcD6PzHPiPpxeEqvjRa2dt2u8xP
- GjiJnnhl+lIynm0XivvFj5Hoq8E7F7FbHbTwPKJASEfyobg4joOU0UEHQLKx/Sa/Brte
- RowYZwIg7FNaTelpzSweG4+l8eHMD//GWYT6HhIgZim+5rEbwOQEC5y2ofs5w3HnRAc7
- 6dLQ==
-X-Gm-Message-State: AOAM530aHbegs91WQjZ431glKX6b1l5NDTEwmVwHRgteXYnL3K4TxamK
- QKjgaGfyOx328vetttsrGrG/eOnR9+4ZT4RK3YQ=
-X-Google-Smtp-Source: ABdhPJzwA0NcuUTorXfDXJwftQAcpQoUikt15zlHIMvPJsOtB6G9BzwjOPU7FiEEbM7b3w08r3ces3s76odsBD8SPeE=
-X-Received: by 2002:a05:6e02:20e5:: with SMTP id
- q5mr3952258ilv.131.1613167557788; 
- Fri, 12 Feb 2021 14:05:57 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
+ id 1lAxTm-0007X4-9o; Sat, 13 Feb 2021 11:09:06 -0500
+Received: from mout.kundenserver.de ([212.227.17.10]:36993)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
+ id 1lAxTa-0001nG-UH; Sat, 13 Feb 2021 11:09:06 -0500
+Received: from [192.168.100.1] ([82.252.149.54]) by mrelayeu.kundenserver.de
+ (mreue109 [213.165.67.119]) with ESMTPSA (Nemesis) id
+ 1N49Yt-1lsRFs3Sld-01084i; Sat, 13 Feb 2021 17:08:37 +0100
+Subject: Re: [PATCH v2 1/1] linux-user/signal: Decode waitid si_code
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, dilfridge@gentoo.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
+References: <1fb2d56aa23a81f4473e638abe9e2d78c09a3d5b.1611080607.git.alistair.francis@wdc.com>
+From: Laurent Vivier <laurent@vivier.eu>
+Message-ID: <c69d5212-ed5e-c1e5-3dc4-d23b0e6f74d7@vivier.eu>
+Date: Sat, 13 Feb 2021 17:08:35 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
 MIME-Version: 1.0
-References: <20210122122958.12311-1-bmeng.cn@gmail.com>
-In-Reply-To: <20210122122958.12311-1-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 12 Feb 2021 14:05:17 -0800
-Message-ID: <CAKmqyKPV4GxSe-0SijrkRXLxnJ8Ev-9_u8ML3Bk4R2d+6n598A@mail.gmail.com>
-Subject: Re: [PATCH 0/4] hw/riscv: Clean-ups and map high mmio for PCIe of
- 'virt' machine
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+In-Reply-To: <1fb2d56aa23a81f4473e638abe9e2d78c09a3d5b.1611080607.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: fr
+Content-Transfer-Encoding: 8bit
+X-Provags-ID: V03:K1:VtBBkalUxccH9zPzqaYjKVQ7qVRYLk4qNLGr1RGx8rnNogfZ7E3
+ VLr5ZrI0XfwXCZDtGONZrSavvT8dSkpMDhR9aIB9aWIJjG4n8WxcFKgGvugF12VXYrGo1KH
+ sAyaSen5peVv95V0RDzfGkFty0tZgMcXRzGY4kTuFsjJ7WGYAJsT+oHkIaQoV45q8pC+D5j
+ w3naBGxvY/qI/0ZPxznvQ==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:qBrf7r/eRPI=:1Ymowzy9Y7ZwO1S9+WuG/q
+ 7NqIXkSixp2KGBRsf4jalSiujVZnOZ56hIv6lKVW0NspzZ3Mn1F9JEF6jDv63yCZdvcyhjC3K
+ A+ENQ2i/7UHHeMzKMWIBCE3cD9HiWbEnQfQLqU81TP09zX7GX1rd8bF3YzB48IMhcN2BMkFzX
+ RBS8qrqs8CMh91eUAJt45dzaKJ68kTHjey/FCVQJiF8t0dbU9Z5Tw/iZhw3CDGaiRlQR/XLOB
+ UpAEgqVNWuNR/yA2kS7kdxYGR7mBdte3eF32Y/C+Ha38+NEPm7gTBU5E1EgmkuvoKIO5lSS8R
+ Tic6qjXHMd8HFlhv/nL2q+MEjEAAx8ZXL9CRA5JXAtvY6wkypcQZl02A0aGLnor6Pkki5zGH0
+ NTW9kNPQzRTYSvv9WePeU+G9NRqmvC79P6y81C/61DJMxigfXcS4qhsxQXDZA+Qea+2sYsO+m
+ fw4ksg83xw==
+Received-SPF: none client-ip=212.227.17.10; envelope-from=laurent@vivier.eu;
+ helo=mout.kundenserver.de
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -73,44 +59,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2021 22:06:04 -0000
+X-List-Received-Date: Sat, 13 Feb 2021 16:09:06 -0000
 
-On Fri, Jan 22, 2021 at 4:32 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> This series does the following clean-ups:
-> - Drop 'struct MemmapEntry'
-> - virt: Drop the 'link_up' parameter of gpex_pcie_init()
->
-> It also adds the following small enhancement to 'virt' machine:
-> - Limit RAM size in a 32-bit system
-> - Map high mmio for PCIe
->
->
-> Bin Meng (4):
->   hw/riscv: Drop 'struct MemmapEntry'
->   hw/riscv: virt: Drop the 'link_up' parameter of gpex_pcie_init()
->   hw/riscv: virt: Limit RAM size in a 32-bit system
->   hw/riscv: virt: Map high mmio for PCIe
+Le 19/01/2021 à 19:24, Alistair Francis a écrit :
+> When mapping the host waitid status to the target status we previously
+> just used decoding information in the status value. This doesn't follow
+> what the waitid documentation describes, which instead suggests using
+> the si_code value for the decoding. This results in the incorrect values
+> seen when calling waitid. This is especially apparent on RV32 where all
+> wait calls use waitid (see the bug case).
+> 
+> This patch just passes the waitid status directly back to the guest.
+> 
+> Buglink: https://bugs.launchpad.net/qemu/+bug/1906193
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+> v2:
+>  - Set tinfo->_sifields._sigchld._status directly from status
+> 
+>  linux-user/signal.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+> 
+> diff --git a/linux-user/signal.c b/linux-user/signal.c
+> index 73de934c65..7eecec46c4 100644
+> --- a/linux-user/signal.c
+> +++ b/linux-user/signal.c
+> @@ -349,8 +349,7 @@ static inline void host_to_target_siginfo_noswap(target_siginfo_t *tinfo,
+>          case TARGET_SIGCHLD:
+>              tinfo->_sifields._sigchld._pid = info->si_pid;
+>              tinfo->_sifields._sigchld._uid = info->si_uid;
+> -            tinfo->_sifields._sigchld._status
+> -                = host_to_target_waitstatus(info->si_status);
+> +            tinfo->_sifields._sigchld._status = info->si_status;
+>              tinfo->_sifields._sigchld._utime = info->si_utime;
+>              tinfo->_sifields._sigchld._stime = info->si_stime;
+>              si_type = QEMU_SI_CHLD;
+> 
 
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
->
->  hw/riscv/microchip_pfsoc.c |  9 ++---
->  hw/riscv/opentitan.c       |  9 ++---
->  hw/riscv/sifive_e.c        |  9 ++---
->  hw/riscv/sifive_u.c        | 11 +++---
->  hw/riscv/spike.c           |  9 ++---
->  hw/riscv/virt.c            | 72 ++++++++++++++++++++++++++++++--------
->  6 files changed, 73 insertions(+), 46 deletions(-)
->
-> --
-> 2.25.1
->
->
+Reviewed-by: Laurent Vivier <laurent@vivier.eu>
 
