@@ -1,58 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lD846-0006Qh-GF
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Feb 2021 10:51:34 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49622)
+	id 1lD8Ny-0004Bd-7L
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Feb 2021 11:12:06 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55228)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alr48@hermes.cam.ac.uk>)
- id 1lD844-0006NJ-Mv; Fri, 19 Feb 2021 10:51:32 -0500
-Received: from ppsw-41.csi.cam.ac.uk ([131.111.8.141]:58822)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alr48@hermes.cam.ac.uk>)
- id 1lD842-0005L7-Uu; Fri, 19 Feb 2021 10:51:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cam.ac.uk; 
- s=20180806.ppsw;
- h=Sender:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SW5jTn9WteGASvOpQnPr5MkU6ynaNRoFa9KXoZRVMgw=; b=k6cPehbHMc1P2OCxwQHhwx3IQv
- xxqPJ3vAK74DlWHEvlzydxBtOG2p6ZrvGjQZ61GmWGFOcgADQe56gW3vUI3XUNwp8e7UZsEfWpARE
- kZs/DZpPZS7UVrUBCt4EbNJaEojjbf41edO6o647n8eLf34pgYTkTNl7TgZNnhc0RXZc=;
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
-Received: from host86-156-0-119.range86-156.btcentralplus.com
- ([86.156.0.119]:49213 helo=Alexs-MBP-10.home)
- by ppsw-41.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.159]:587)
- with esmtpsa (LOGIN:alr48) (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- id 1lD83y-000II8-S7 (Exim 4.94)
- (return-path <alr48@hermes.cam.ac.uk>); Fri, 19 Feb 2021 15:51:26 +0000
-From: Alex Richardson <Alexander.Richardson@cl.cam.ac.uk>
-To: 
-Cc: Alex Richardson <Alexander.Richardson@cl.cam.ac.uk>,
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1lD8Nw-00047q-8j
+ for qemu-riscv@nongnu.org; Fri, 19 Feb 2021 11:12:04 -0500
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:37156)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1lD8Nq-0005tY-02
+ for qemu-riscv@nongnu.org; Fri, 19 Feb 2021 11:12:03 -0500
+Received: by mail-pl1-x62c.google.com with SMTP id y3so383339plg.4
+ for <qemu-riscv@nongnu.org>; Fri, 19 Feb 2021 08:11:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=595R75jp6aA/qFqLhq14f0hccd1YYdJDQfsUxH0wtEM=;
+ b=mXzfG6zKxVKyNrgVFLzi2hFYWxDY5s/WaKrI/kwoX7/EB8OkqwbwTGovm8s2j4o+Uh
+ UhuvA+jVEJjbHlbgTPTW5H55TdiucSf+Jhj5M1h9221qXuKJacusAEVxaHd0q7OnsqkD
+ hqx7M2oo8xfmErgm0Qj3FOoxsfCbfPdTxqW4MGtku/4W30iefo0jOOsl1oDcytgmUwtK
+ MsIvGdPNOb8Dl/bY8H1GwL3ZLcos7+EqlJwBAGSuWxvFhSkIwbz+A/eWvk27775DHwah
+ bZB9Z8W92rUiDoJKdnbr6i6VcvuI0vwE2FCEGGpO/27Sw8kXkisY0EybwAlUtij9osmw
+ c/7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=595R75jp6aA/qFqLhq14f0hccd1YYdJDQfsUxH0wtEM=;
+ b=mP3OYylK2MKwxoNN25A9hrGzkrdfNuqI4pEmeuMBo0Pr9SmUzl75gbq1Ad3s7Espx3
+ Sdcg9SP083gVmBvv4pceGOUKCyf2UCRux3ydPuGUhhY3ihhAFlbfC0B8An87CFNHyQKb
+ A+6vX0PLh9idzkozatJY9Ku+QjJu5oZLXoRgtcgbeLCvjF3ESNkn/t5smGppRLc+nPZi
+ CxDLX1R+GzFfRhXlRwXZQ9s1YrWlTwdMgFPRC3XA8gr2TwHyaBW9mAp1cVAAsB0tBH5e
+ T+GVq73JB8jkumamF4PmK/wJ48X6BUAUArBLi4Kjt92W+DXQfZq7qmhnQ3cSoSu7RLvB
+ TDhQ==
+X-Gm-Message-State: AOAM530gFRwwoRKF1q9f7eedIC/sQRJKOwFBQSquAyDqsTpuozdeaWkL
+ MVOjOJG7Zx1QEhIOOOPwRHaXJg==
+X-Google-Smtp-Source: ABdhPJzhkYSHMs3dNXwRhgzZbH1p1IWTy+LHaXyWNkpfaOHTa6QmG5mWIbhfEsL7YqEvc/SOsVEskw==
+X-Received: by 2002:a17:903:141:b029:e3:9ade:bbe5 with SMTP id
+ r1-20020a1709030141b02900e39adebbe5mr10072425plc.6.1613751116455; 
+ Fri, 19 Feb 2021 08:11:56 -0800 (PST)
+Received: from [192.168.3.43] (047-051-160-125.biz.spectrum.com.
+ [47.51.160.125])
+ by smtp.gmail.com with ESMTPSA id j73sm10623284pfd.170.2021.02.19.08.11.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 19 Feb 2021 08:11:56 -0800 (PST)
+Subject: Re: [PATCH] target/riscv: fix TB_FLAGS bits overlapping bug for
+ rvv/rvh
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
- qemu-devel@nongnu.org (open list:All patches CC here)
-Subject: [PATCH 2/2] target/riscv: Call check_access() before tcg_temp_new()
-Date: Fri, 19 Feb 2021 15:50:52 +0000
-Message-Id: <20210219155052.76921-2-Alexander.Richardson@cl.cam.ac.uk>
-X-Mailer: git-send-email 2.30.0
-In-Reply-To: <20210219155052.76921-1-Alexander.Richardson@cl.cam.ac.uk>
-References: <20210219155052.76921-1-Alexander.Richardson@cl.cam.ac.uk>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+References: <20210219095902.3602-1-frank.chang@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <3cd7260d-4c09-696c-6a8d-0a74920adcdd@linaro.org>
+Date: Fri, 19 Feb 2021 08:11:53 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: "A.L. Richardson" <alr48@hermes.cam.ac.uk>
-Received-SPF: pass client-ip=131.111.8.141;
- envelope-from=alr48@hermes.cam.ac.uk; helo=ppsw-41.csi.cam.ac.uk
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
+In-Reply-To: <20210219095902.3602-1-frank.chang@sifive.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -66,70 +85,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2021 15:51:33 -0000
+X-List-Received-Date: Fri, 19 Feb 2021 16:12:04 -0000
 
----
- target/riscv/insn_trans/trans_rvh.c.inc | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+On 2/19/21 1:59 AM, frank.chang@sifive.com wrote:
+> +/* Skip mem_idx bits */
+> +FIELD(TB_FLAGS, VL_EQ_VLMAX, 3, 1)
 
-diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
-index 203a620723..b0a9ea1dca 100644
---- a/target/riscv/insn_trans/trans_rvh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvh.c.inc
-@@ -32,11 +32,11 @@ static bool gen_hlv(DisasContext *ctx, arg_hlv_b *a, MemOp memop)
- {
-     REQUIRE_EXT(ctx, RVH);
- #ifndef CONFIG_USER_ONLY
-+    check_access(ctx);
-+
-     TCGv t0 = tcg_temp_new();
-     TCGv t1 = tcg_temp_new();
- 
--    check_access(ctx);
--
-     gen_get_gpr(t0, a->rs1);
- 
-     tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, memop);
-@@ -55,10 +55,11 @@ static bool gen_hsv(DisasContext *ctx, arg_hsv_b *a, MemOp memop)
- {
-     REQUIRE_EXT(ctx, RVH);
- #ifndef CONFIG_USER_ONLY
-+    check_access(ctx);
-+
-     TCGv t0 = tcg_temp_new();
-     TCGv dat = tcg_temp_new();
- 
--    check_access(ctx);
- 
-     gen_get_gpr(t0, a->rs1);
-     gen_get_gpr(dat, a->rs2);
-@@ -134,10 +135,11 @@ static bool trans_hlvx_hu(DisasContext *ctx, arg_hlvx_hu *a)
- {
-     REQUIRE_EXT(ctx, RVH);
- #ifndef CONFIG_USER_ONLY
-+    check_access(ctx);
-+
-     TCGv t0 = tcg_temp_new();
-     TCGv t1 = tcg_temp_new();
- 
--    check_access(ctx);
- 
-     gen_get_gpr(t0, a->rs1);
- 
-@@ -156,10 +158,11 @@ static bool trans_hlvx_wu(DisasContext *ctx, arg_hlvx_wu *a)
- {
-     REQUIRE_EXT(ctx, RVH);
- #ifndef CONFIG_USER_ONLY
-+    check_access(ctx);
-+
-     TCGv t0 = tcg_temp_new();
-     TCGv t1 = tcg_temp_new();
- 
--    check_access(ctx);
- 
-     gen_get_gpr(t0, a->rs1);
- 
--- 
-2.30.0
+Why not just add the mem_idx field to the list?
 
+The separation between the FIELDs and TB_FLAG_*_MASK is unfortunate, and will
+be a continuing source of errors.
+
+
+r~
 
