@@ -1,67 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lDKb3-0008Sq-MS
-	for mharc-qemu-riscv@gnu.org; Sat, 20 Feb 2021 00:14:25 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52250)
+	id 1lDPdy-0001uN-Ph
+	for mharc-qemu-riscv@gnu.org; Sat, 20 Feb 2021 05:37:46 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39602)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lDKb2-0008Rg-JU
- for qemu-riscv@nongnu.org; Sat, 20 Feb 2021 00:14:24 -0500
-Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d]:33577)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1lDPdx-0001uA-Cv
+ for qemu-riscv@nongnu.org; Sat, 20 Feb 2021 05:37:45 -0500
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b]:38810)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lDKax-00057O-SG
- for qemu-riscv@nongnu.org; Sat, 20 Feb 2021 00:14:24 -0500
-Received: by mail-ot1-x32d.google.com with SMTP id c16so7171943otp.0
- for <qemu-riscv@nongnu.org>; Fri, 19 Feb 2021 21:14:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1lDPdv-0001T2-Uk
+ for qemu-riscv@nongnu.org; Sat, 20 Feb 2021 05:37:45 -0500
+Received: by mail-ej1-x62b.google.com with SMTP id bl23so20230126ejb.5
+ for <qemu-riscv@nongnu.org>; Sat, 20 Feb 2021 02:37:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fG1FO8SgixDTaSu0XDOPc/hjeTlRcmgoVngr/Lc77SE=;
- b=YeFeCu0t221pmGtMcPOcDJFa/+YF7dzW5NtIjkRQsf0fxZm/v+5p8hOSlooSbaUH12
- fAzxZ3X4ycF8VrPg7PUqCPDkT0yGe4SU4jisgj9a30c+spRb8NRQSsdQVb57CYPHACVy
- lK7yNRbuYiR7SgMzr+VHSwzgsDzaz1Om1MtROnsRwcvxR0TO12XnvU+mKZP+c5GnN09z
- /g3aWOdj85LsEvmpE1oIJEMAyErOBFpEGf71cboaQXmmQBw/XjZPadll/oZAc7uAtmjC
- 6/XevHZDA4Sl+aDDD8lmhnZYx5JI8uzrR+JF6kcX+rWlOHwnZm2qhrPbA4RiKYq3wuAu
- SzVQ==
+ :cc; bh=loPtZxLAFSJDDaLmOa/VgYQN02akXgl5UYQNYhGK8EQ=;
+ b=JjTmqX6iVFkQvElGxPpJXo2fV9tyoPD4h0MQlPAjUWVFWPBDc++7aLVZ+j4vBnULDP
+ cB2xAihrWL/zQpJtBszssIxuoEkGPoNnFrIG5FDU9RH+PtBMFwBHB8YX/Cps0J6C2atV
+ ZC3dJmnsDb4258Y7oAmNVZ6VTVlhwhJW/tBt41/vYjZ1Z6zRSZTBnXsk+ktjB4JoXRE1
+ eQMsIAzXYritVlHMYiB1mmAWw9G0FOlbSTEmyG5eKRLj0nHzOgedFRzr0ZgYmQeMyuYc
+ 9J22M4P0I+TYiNjx/QQjyUIwxkCYUe+tc5+s6ZbbD7/Dy36xzRAxAh0vK+G5cPYT/uir
+ wUpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=fG1FO8SgixDTaSu0XDOPc/hjeTlRcmgoVngr/Lc77SE=;
- b=hzzMMEjx/thqmR5/RaLGyose9F8QsGOKOBkY/ydc/xWkpjiHleQCiKEFi8TvmmtUh7
- bB4qzqwYMrJNa+UCtpZwh+vzehhxJKoLFBRTtnkpkGE2N4GG22/stzBh/nlgJJL4tWDR
- N+ONS2yfW1CfpKzpCowiIGuCOpD3Ek6drRxqSVjeu+lXi3V42EVrQQOwIh8yLS62DOHg
- 7xLcV0YDt7jaMTkMcSVtDnCMgtJkaHZPIamOh/OyavKyrCraxdkW2h6hvucPUzcztQa+
- oe+HS85riyCz7xlenV4lgCO85et4+mPCeUTq6U6foAh36u9pHS1eqhN4h0FZ3QUDUMGn
- 0exA==
-X-Gm-Message-State: AOAM532r66DcQom50Vt/K9QZs0U+Uyr+lVEv3tULUH2HIReTegE9HFIb
- dDm8c8Zd2UOLxqXe76qZxUaH5Isvs4x1thyk/Xz/LA==
-X-Google-Smtp-Source: ABdhPJzeqohT5cNsGsEtj+rfkbJjvk5wosLQdBbJTRirVW+v2E+G+zhbcyGcUU7dOhzTu+WEBJFZ2FZ9CayNEF1+b0I=
-X-Received: by 2002:a9d:64cc:: with SMTP id n12mr9612070otl.175.1613798058576; 
- Fri, 19 Feb 2021 21:14:18 -0800 (PST)
+ bh=loPtZxLAFSJDDaLmOa/VgYQN02akXgl5UYQNYhGK8EQ=;
+ b=IxWpgswbdnrIsLPll82DhvJ6+W/Z3tEj0KSA0Nhi8v7G9iBYsdJNNUWuR8vh+gPZv+
+ yyXancWTbf4uDIRSrGZcT48BQCuhV2wvrNw5SouFTu/GsOF0JJBZ9d8nYYt4vE3SsmNb
+ b1seW/RWIKW5nFBt5g2McLCXAeCzjb0Cv5iBT5W7eEX4m941Xzh7pmWP5L0shUlEBA8t
+ kbpCTk3XUELiYFEoaJgjagW5/H31MFvSikcw9xmLj02iOJtgJr6SMjH4kS84F9aPAbod
+ fKVfqV+8rnL5NjG08DAIEFpkGSRHmpOxrC8cV4LMfJwDSkLsuchKEkxQHXihJcIPkJL4
+ KIQw==
+X-Gm-Message-State: AOAM533/o7pB1k/E2UPn5mkXSMRMxHSJGjZnTTrE8WsYxHuBa5RKPMCN
+ Ir2MNqtlTeoLiZy878btvBxyW8zFiwOpw7gGAX3M0A==
+X-Google-Smtp-Source: ABdhPJyVfroxe5mNpTuZvScvF3q+aZjr11MsMM4tu/QyUJbuMb0W9jIcWj5hbbG/Y2aaLNaXtDQpdjzT1jbV1Qgg2yE=
+X-Received: by 2002:a17:906:3556:: with SMTP id
+ s22mr11783305eja.85.1613817462213; 
+ Sat, 20 Feb 2021 02:37:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20210219095902.3602-1-frank.chang@sifive.com>
- <3cd7260d-4c09-696c-6a8d-0a74920adcdd@linaro.org>
-In-Reply-To: <3cd7260d-4c09-696c-6a8d-0a74920adcdd@linaro.org>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Sat, 20 Feb 2021 13:14:09 +0800
-Message-ID: <CAE_xrPgyccR9QnoR-Rc7R=gq8vSvOEWZv1U4XAFbO80_ncQUuw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: fix TB_FLAGS bits overlapping bug for
- rvv/rvh
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Content-Type: multipart/alternative; boundary="0000000000000562ce05bbbda4f9"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
- envelope-from=frank.chang@sifive.com; helo=mail-ot1-x32d.google.com
+References: <1613749155-84250-1-git-send-email-bmeng.cn@gmail.com>
+ <1613749155-84250-4-git-send-email-bmeng.cn@gmail.com>
+In-Reply-To: <1613749155-84250-4-git-send-email-bmeng.cn@gmail.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Sat, 20 Feb 2021 10:37:31 +0000
+Message-ID: <CAFEAcA9dvMT=4RGztaxshtNHaT-Bm4w0gK-S_zv9aJO_e3AVFA@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] hw/riscv: virt: Limit RAM size in a 32-bit system
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ QEMU Developers <qemu-devel@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -76,61 +73,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Feb 2021 05:14:24 -0000
+X-List-Received-Date: Sat, 20 Feb 2021 10:37:45 -0000
 
---0000000000000562ce05bbbda4f9
-Content-Type: text/plain; charset="UTF-8"
-
-On Sat, Feb 20, 2021 at 12:12 AM Richard Henderson <
-richard.henderson@linaro.org> wrote:
-
-> On 2/19/21 1:59 AM, frank.chang@sifive.com wrote:
-> > +/* Skip mem_idx bits */
-> > +FIELD(TB_FLAGS, VL_EQ_VLMAX, 3, 1)
+On Fri, 19 Feb 2021 at 16:10, Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Why not just add the mem_idx field to the list?
+> From: Bin Meng <bin.meng@windriver.com>
 >
-> The separation between the FIELDs and TB_FLAG_*_MASK is unfortunate, and
-> will
-> be a continuing source of errors.
+> RV32 supports 34-bit physical address hence the maximum RAM size
+> should be limitted. Limit the RAM size to 10 GiB, which leaves
+> some room for PCIe high mmio space.
 >
+> For 32-bit host, this is not needed as machine->ram_size cannot
+> represent a RAM size that big. Use a #if size test to only do
+> the size limitation for the 64-bit host.
 >
-Sure, I will edit it and send out the next version patch.
-
-Thanks,
-Frank Chang
-
-
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 >
-> r~
+> ---
 >
+> Changes in v2:
+> - Use a #if size test to only do the size limitation for the 64-bit host
+>
+>  hw/riscv/virt.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 1d05bb3..fc90bc8 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -590,6 +590,16 @@ static void virt_machine_init(MachineState *machine)
+>          }
+>      }
+>
+> +    if (riscv_is_32bit(&s->soc[0])) {
+> +#if HOST_LONG_BITS == 64
+> +        /* limit RAM size in a 32-bit system */
+> +        if (machine->ram_size > 10 * GiB) {
+> +            machine->ram_size = 10 * GiB;
+> +            error_report("Limitting RAM size to 10 GiB");
 
---0000000000000562ce05bbbda4f9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+"Limiting"
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Sat, Feb 20, 2021 at 12:12 AM Richard =
-Henderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hende=
-rson@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
- solid rgb(204,204,204);padding-left:1ex">On 2/19/21 1:59 AM, <a href=3D"ma=
-ilto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> w=
-rote:<br>
-&gt; +/* Skip mem_idx bits */<br>
-&gt; +FIELD(TB_FLAGS, VL_EQ_VLMAX, 3, 1)<br>
-<br>
-Why not just add the mem_idx field to the list?<br>
-<br>
-The separation between the FIELDs and TB_FLAG_*_MASK is unfortunate, and wi=
-ll<br>
-be a continuing source of errors.<br>
-<br></blockquote><div><br></div><div>Sure, I will edit it and send out the =
-next version patch.</div><div><br></div><div>Thanks,</div><div>Frank Chang<=
-/div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
- 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-r~<br>
-</blockquote></div></div>
+> +        }
+> +#endif
+> +    }
+> +
+>      /* register system main memory (actual RAM) */
+>      memory_region_init_ram(main_mem, NULL, "riscv_virt_board.ram",
+>                             machine->ram_size, &error_fatal);
+> --
+> 2.7.4
 
---0000000000000562ce05bbbda4f9--
+-- PMM
 
