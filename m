@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lDTYk-0007Br-OA
-	for mharc-qemu-riscv@gnu.org; Sat, 20 Feb 2021 09:48:38 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57462)
+	id 1lDTYn-0007HN-65
+	for mharc-qemu-riscv@gnu.org; Sat, 20 Feb 2021 09:48:41 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57484)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lDTYi-00078H-Ug; Sat, 20 Feb 2021 09:48:36 -0500
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:36446)
+ id 1lDTYk-0007CO-Sc; Sat, 20 Feb 2021 09:48:38 -0500
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:33948)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lDTYd-0003aP-Mw; Sat, 20 Feb 2021 09:48:36 -0500
-Received: by mail-pj1-x1033.google.com with SMTP id s23so2687288pji.1;
- Sat, 20 Feb 2021 06:48:30 -0800 (PST)
+ id 1lDTYj-0003cR-1m; Sat, 20 Feb 2021 09:48:38 -0500
+Received: by mail-pj1-x1033.google.com with SMTP id my11so5174810pjb.1;
+ Sat, 20 Feb 2021 06:48:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=yl3FmSMqUOceM2edicTwk98MpA8ZTg1Y4GvnyWg9pt8=;
- b=RMDAoKmo5YivtDwabZNy30r4kZBN4j/NYkwBza05RZcJ1hU/uvcaq8j6kZXEiGAoQE
- t3VSnmVFu+MvCUESdzJdHEUULcehIxzB8EzvOT5EZZhij1YofXKNTG9otZeh1fkZ4akX
- rFmwfgkq8Nn8q0gaYEGDs4TlFWUJbiNKui3xZF9fzVcMbKbdA/kJdiX5JptgzYs3SEaI
- UoKvq315ecpZRJAOMKbHtCVqzfhJA08S9+sHNtLkO6L3pH6pKUDVstSj9HTQ8qHFAoJd
- AuKj5FxLcb4zitCs2RqGjjQYdzKIuS2l1cwZMv4RI20158beTNKzeQNUbbHwj5HYwmzD
- v5TA==
+ bh=PhZTMUwjoq80zLn5T9J9Vyn2H21mn4uZhhWc8FpCttQ=;
+ b=bXf5u/Yzo67BYVbTkuhFAzmRhCXsEN+DshFeeX0q3NEUUm1WesY1ry3ifYAO1uOWI9
+ CFqWbEuSbELBOUzDMOQ5HCo3Ezqg1Rx2KxTvTAt8W8Trcco6kg1QaQdq1ALkBRtlv5ug
+ sTf01JLjdPPluNSFZOozDV8Lsgwg3jCxzWkS5tMqrWQtDblH77dApqLlj3xlIBzALltK
+ 83qAkmZuO37MNx8pII6aUatxT2PG+KnIdHJDHz8ZESo8upHbTzSlhCEiHCjz1Q7TvjBw
+ 6j6J86cr4ihpe+9sbfgEFp/hLyoU1scR7nb0WNq0KQZdLyu/pV4NyFbg+trkVBikTI28
+ mTBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=yl3FmSMqUOceM2edicTwk98MpA8ZTg1Y4GvnyWg9pt8=;
- b=WPeCAU7fkV1CRRv4qfXFbdYnqNOz0D5+Dom8REIG54VIlMCOagn2z+rzk6fhAf28It
- pRnmI8vJkoUChj8p8eg8s3mqXy7fJzHTpXXRqD1SuIJAvcFC2uuo5aTCeJwOmz44eUma
- i1ejoQUf4UhpvyMa8WaPedrSb0CQ6ImHQ2/Y+NLGHZwMjNlq0ssGjx4+8+LkSA/+ikUb
- Kv1tst1Bsdgxg5zwPasZkHYKe9eh4uXcUcq/CCNKFO3AB/ONQv/2vHB2P+1b5wKB8s5X
- PBycMy1KSMr3SEXY5zY4kUSERTrOaWq4epJ9GwVJDAxUv7BLxWNSQnZTiCyNf9eyI4j4
- 9XoA==
-X-Gm-Message-State: AOAM531YKpb+BkqwVI8I5EVpE+xNtN3tDUdpSSM/rgic0a324YYOE0S/
- JY8c1GkGI6jXMJRwp0U1IvQ=
-X-Google-Smtp-Source: ABdhPJwrBLDfJVS+sS4La4ay6kgcaE8RMd0J8sDv2zNhwm8DzWaowGJAw0/wmgZWm2LSDWu5NdGs6w==
-X-Received: by 2002:a17:902:f2d1:b029:e2:86d3:128 with SMTP id
- h17-20020a170902f2d1b02900e286d30128mr6727350plc.63.1613832510201; 
- Sat, 20 Feb 2021 06:48:30 -0800 (PST)
+ bh=PhZTMUwjoq80zLn5T9J9Vyn2H21mn4uZhhWc8FpCttQ=;
+ b=Dd33O1+DX+9k0AZC6nVNBlvUEh8FfTkbPfWzNIe/aO9WVlZ2dZNaKh15jGghlgGhW0
+ ybipkz9D1PJgrrlwResedRC9PHNqEbxAVmlj/qX7MgUSmmGkUzC4W3vUlWczD+2jMxEJ
+ cpY5XDtl4Lq7uuqLs29C7ZP1+Iwnz2SHLIG9AVJQgzR/IaVGbq/VNAQyhsuD+RxYgUKk
+ H9qZUHx5d1xV3Zmr2kZXkkHDuLVYob3YQITWgNglN/J1WJDSIP1DuJTtz4KqHz1IYsDJ
+ bix8GLkhiIoeR8vlFYLOlKd+lL52YVMBO7W5CXmvukPtvBpJNXcuzpGY3HubbkmkYDCL
+ sRvw==
+X-Gm-Message-State: AOAM53354dznzStadLygzV1hjVXufc4rKsftZTOgUntKJJgYxdDD1AQ0
+ uV6JAtVuliQdUG0uNvJa0cM=
+X-Google-Smtp-Source: ABdhPJwQAgOMlKvOCJoQaBlaUjgxDqdnxj83a3eY2zxIdCgExCPAk8Q1toLza/BNvHhPjsgoC1tyWQ==
+X-Received: by 2002:a17:90a:420c:: with SMTP id
+ o12mr14512685pjg.193.1613832513368; 
+ Sat, 20 Feb 2021 06:48:33 -0800 (PST)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id d16sm3100480pgb.12.2021.02.20.06.48.26
+ by smtp.gmail.com with ESMTPSA id d16sm3100480pgb.12.2021.02.20.06.48.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Feb 2021 06:48:29 -0800 (PST)
+ Sat, 20 Feb 2021 06:48:33 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v3 3/4] hw/riscv: virt: Limit RAM size in a 32-bit system
-Date: Sat, 20 Feb 2021 22:48:06 +0800
-Message-Id: <20210220144807.819-4-bmeng.cn@gmail.com>
+Cc: Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v3 4/4] hw/riscv: virt: Map high mmio for PCIe
+Date: Sat, 20 Feb 2021 22:48:07 +0800
+Message-Id: <20210220144807.819-5-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210220144807.819-1-bmeng.cn@gmail.com>
 References: <20210220144807.819-1-bmeng.cn@gmail.com>
@@ -76,52 +77,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Feb 2021 14:48:37 -0000
+X-List-Received-Date: Sat, 20 Feb 2021 14:48:39 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-RV32 supports 34-bit physical address hence the maximum RAM size
-should be limited. Limit the RAM size to 10 GiB, which leaves
-some room for PCIe high mmio space.
+Some peripherals require 64-bit PCI address, so let's map the high
+mmio space for PCIe.
 
-For 32-bit host, this is not needed as machine->ram_size cannot
-represent a RAM size that big. Use a #if size test to only do
-the size limitation for the 64-bit host.
+For RV32, the address is hardcoded to below 4 GiB from the highest
+accessible physical address. For RV64, the base address depends on
+top of RAM and is aligned to its size which is using 16 GiB for now.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 ---
 
-Changes in v3:
-- Fix the typo (limit) in the commit message and codes
+(no changes since v1)
 
-Changes in v2:
-- Use a #if size test to only do the size limitation for the 64-bit host
-
- hw/riscv/virt.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ hw/riscv/virt.c | 35 +++++++++++++++++++++++++++++++++--
+ 1 file changed, 33 insertions(+), 2 deletions(-)
 
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 1d05bb3ef9..c4b8f455f8 100644
+index c4b8f455f8..4f0c2fbca0 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -590,6 +590,16 @@ static void virt_machine_init(MachineState *machine)
+@@ -59,6 +59,15 @@ static const MemMapEntry virt_memmap[] = {
+     [VIRT_DRAM] =        { 0x80000000,           0x0 },
+ };
+ 
++/* PCIe high mmio is fixed for RV32 */
++#define VIRT32_HIGH_PCIE_MMIO_BASE  0x300000000ULL
++#define VIRT32_HIGH_PCIE_MMIO_SIZE  (4 * GiB)
++
++/* PCIe high mmio for RV64, size is fixed but base depends on top of RAM */
++#define VIRT64_HIGH_PCIE_MMIO_SIZE  (16 * GiB)
++
++static MemMapEntry virt_high_pcie_memmap;
++
+ #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
+ 
+ static PFlashCFI01 *virt_flash_create1(RISCVVirtState *s,
+@@ -371,7 +380,11 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+         2, memmap[VIRT_PCIE_PIO].base, 2, memmap[VIRT_PCIE_PIO].size,
+         1, FDT_PCI_RANGE_MMIO,
+         2, memmap[VIRT_PCIE_MMIO].base,
+-        2, memmap[VIRT_PCIE_MMIO].base, 2, memmap[VIRT_PCIE_MMIO].size);
++        2, memmap[VIRT_PCIE_MMIO].base, 2, memmap[VIRT_PCIE_MMIO].size,
++        1, FDT_PCI_RANGE_MMIO_64BIT,
++        2, virt_high_pcie_memmap.base,
++        2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
++
+     create_pcie_irq_map(fdt, name, plic_pcie_phandle);
+     g_free(name);
+ 
+@@ -448,12 +461,14 @@ update_bootargs:
+ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+                                           hwaddr ecam_base, hwaddr ecam_size,
+                                           hwaddr mmio_base, hwaddr mmio_size,
++                                          hwaddr high_mmio_base,
++                                          hwaddr high_mmio_size,
+                                           hwaddr pio_base,
+                                           DeviceState *plic)
+ {
+     DeviceState *dev;
+     MemoryRegion *ecam_alias, *ecam_reg;
+-    MemoryRegion *mmio_alias, *mmio_reg;
++    MemoryRegion *mmio_alias, *high_mmio_alias, *mmio_reg;
+     qemu_irq irq;
+     int i;
+ 
+@@ -473,6 +488,13 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+                              mmio_reg, mmio_base, mmio_size);
+     memory_region_add_subregion(get_system_memory(), mmio_base, mmio_alias);
+ 
++    /* Map high MMIO space */
++    high_mmio_alias = g_new0(MemoryRegion, 1);
++    memory_region_init_alias(high_mmio_alias, OBJECT(dev), "pcie-mmio-high",
++                             mmio_reg, high_mmio_base, high_mmio_size);
++    memory_region_add_subregion(get_system_memory(), high_mmio_base,
++                                high_mmio_alias);
++
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
+ 
+     for (i = 0; i < GPEX_NUM_IRQS; i++) {
+@@ -598,6 +620,13 @@ static void virt_machine_init(MachineState *machine)
+             error_report("Limiting RAM size to 10 GiB");
          }
+ #endif
++        virt_high_pcie_memmap.base = VIRT32_HIGH_PCIE_MMIO_BASE;
++        virt_high_pcie_memmap.size = VIRT32_HIGH_PCIE_MMIO_SIZE;
++    } else {
++        virt_high_pcie_memmap.size = VIRT64_HIGH_PCIE_MMIO_SIZE;
++        virt_high_pcie_memmap.base = memmap[VIRT_DRAM].base + machine->ram_size;
++        virt_high_pcie_memmap.base =
++            ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
      }
  
-+    if (riscv_is_32bit(&s->soc[0])) {
-+#if HOST_LONG_BITS == 64
-+        /* limit RAM size in a 32-bit system */
-+        if (machine->ram_size > 10 * GiB) {
-+            machine->ram_size = 10 * GiB;
-+            error_report("Limiting RAM size to 10 GiB");
-+        }
-+#endif
-+    }
-+
      /* register system main memory (actual RAM) */
-     memory_region_init_ram(main_mem, NULL, "riscv_virt_board.ram",
-                            machine->ram_size, &error_fatal);
+@@ -683,6 +712,8 @@ static void virt_machine_init(MachineState *machine)
+                    memmap[VIRT_PCIE_ECAM].size,
+                    memmap[VIRT_PCIE_MMIO].base,
+                    memmap[VIRT_PCIE_MMIO].size,
++                   virt_high_pcie_memmap.base,
++                   virt_high_pcie_memmap.size,
+                    memmap[VIRT_PCIE_PIO].base,
+                    DEVICE(pcie_plic));
+ 
 -- 
 2.25.1
 
