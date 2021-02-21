@@ -1,39 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lDpJr-0005n5-6N
-	for mharc-qemu-riscv@gnu.org; Sun, 21 Feb 2021 09:02:46 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56002)
+	id 1lDpJw-0005oe-2E
+	for mharc-qemu-riscv@gnu.org; Sun, 21 Feb 2021 09:02:48 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55990)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cwshu@andestech.com>)
- id 1lDpJp-0005mQ-6I; Sun, 21 Feb 2021 09:02:41 -0500
-Received: from exmail.andestech.com ([60.248.187.195]:10481
+ id 1lDpJo-0005m0-4q; Sun, 21 Feb 2021 09:02:40 -0500
+Received: from exmail.andestech.com ([60.248.187.195]:10475
  helo=ATCSQR.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cwshu@andestech.com>)
- id 1lDpJl-00058q-V1; Sun, 21 Feb 2021 09:02:40 -0500
+ id 1lDpJl-00057W-5Q; Sun, 21 Feb 2021 09:02:39 -0500
 Received: from mail.andestech.com (atcpcs16.andestech.com [10.0.1.222])
- by ATCSQR.andestech.com with ESMTP id 11LDurVW062705;
- Sun, 21 Feb 2021 21:56:53 +0800 (GMT-8)
+ by ATCSQR.andestech.com with ESMTP id 11LDuh6R062668;
+ Sun, 21 Feb 2021 21:56:43 +0800 (GMT-8)
  (envelope-from cwshu@andestech.com)
 Received: from ubuntu1604.andestech.com (10.0.12.177) by
  ATCPCS16.andestech.com (10.0.1.222) with Microsoft SMTP Server id 14.3.487.0; 
- Sun, 21 Feb 2021 22:02:24 +0800
+ Sun, 21 Feb 2021 22:02:12 +0800
 From: Jim Shu <cwshu@andestech.com>
 To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-CC: Jim Shu <cwshu@andestech.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, Sagar Karandikar
- <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+CC: Jim Shu <cwshu@andestech.com>, <palmer@dabbelt.com>,
+ <listair.Francis@wdc.com>, <sagark@eecs.berkeley.edu>,
  <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH 2/3] target/riscv: add log of PMP permission checking
-Date: Sun, 21 Feb 2021 22:01:21 +0800
-Message-ID: <1613916082-19528-3-git-send-email-cwshu@andestech.com>
+Subject: [PATCH 0/3] target/riscv: fix PMP permission checking when softmmu's
+ TLB hits
+Date: Sun, 21 Feb 2021 22:01:19 +0800
+Message-ID: <1613916082-19528-1-git-send-email-cwshu@andestech.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1613916082-19528-1-git-send-email-cwshu@andestech.com>
-References: <1613916082-19528-1-git-send-email-cwshu@andestech.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.0.12.177]
 X-DNSRBL: 
-X-MAIL: ATCSQR.andestech.com 11LDurVW062705
+X-MAIL: ATCSQR.andestech.com 11LDuh6R062668
 Received-SPF: pass client-ip=60.248.187.195; envelope-from=cwshu@andestech.com;
  helo=ATCSQR.andestech.com
 X-Spam_score_int: -18
@@ -53,46 +51,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Feb 2021 14:02:41 -0000
+X-List-Received-Date: Sun, 21 Feb 2021 14:02:40 -0000
 
-Like MMU translation, add qemu log of PMP permission checking for
-debugging.
-
-Signed-off-by: Jim Shu <cwshu@andestech.com>
+Sorry for sending this patch set again. 
+The cover letter of my previous mail doesn't add cc list.
 ---
- target/riscv/cpu_helper.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index f6ac63bf0e..c1ecb8a710 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -794,6 +794,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-             if (ret == TRANSLATE_SUCCESS) {
-                 ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
-                                                size, access_type, mode);
-+
-+                qemu_log_mask(CPU_LOG_MMU,
-+                              "%s PMP address=" TARGET_FMT_plx " ret %d prot"
-+                              " %d tlb_size " TARGET_FMT_lu "\n",
-+                              __func__, pa, ret, prot_pmp, tlb_size);
-+
-                 prot &= prot_pmp;
-             }
- 
-@@ -821,6 +827,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         if (ret == TRANSLATE_SUCCESS) {
-             ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
-                                            size, access_type, mode);
-+
-+            qemu_log_mask(CPU_LOG_MMU,
-+                          "%s PMP address=" TARGET_FMT_plx " ret %d prot"
-+                          " %d tlb_size " TARGET_FMT_lu "\n",
-+                          __func__, pa, ret, prot_pmp, tlb_size);
-+
-             prot &= prot_pmp;
-         }
-     }
+Current implementation of PMP permission checking only has effect when
+softmmu's TLB miss. PMP checking is bypassed when TLB hits because TLB page
+permission isn't affected by PMP permission.
+
+To fix this issue, this patch set addes the feature to propagate PMP
+permission to the TLB page and flush TLB pages if PMP permission has
+been changed.
+
+The patch set is tested on Zephyr RTOS userspace testsuite on QEMU riscv32
+virt machine.
+
+Jim Shu (3):
+  target/riscv: propagate PMP permission to TLB page
+  target/riscv: add log of PMP permission checking
+  target/riscv: flush TLB pages if PMP permission has been changed
+
+ target/riscv/cpu_helper.c | 96 ++++++++++++++++++++++++++++++---------
+ target/riscv/pmp.c        | 84 +++++++++++++++++++++++++---------
+ target/riscv/pmp.h        |  4 +-
+ 3 files changed, 141 insertions(+), 43 deletions(-)
+
 -- 
 2.30.1
 
