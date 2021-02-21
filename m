@@ -1,21 +1,21 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lDot0-0003Qh-Lf
+	id 1lDot0-0003R0-Sa
 	for mharc-qemu-riscv@gnu.org; Sun, 21 Feb 2021 08:34:58 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51352)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51354)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cwshu@andestech.com>)
- id 1lDost-0003IT-0t; Sun, 21 Feb 2021 08:34:52 -0500
-Received: from atcsqr.andestech.com ([60.248.187.195]:45098)
+ id 1lDosv-0003KV-2o; Sun, 21 Feb 2021 08:34:53 -0500
+Received: from atcsqr.andestech.com ([60.248.187.195]:45101)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cwshu@andestech.com>)
- id 1lDosk-0001Yk-Oc; Sun, 21 Feb 2021 08:34:50 -0500
+ id 1lDosk-0001Zl-On; Sun, 21 Feb 2021 08:34:52 -0500
 Received: from mail.andestech.com (atcpcs16.andestech.com [10.0.1.222])
- by ATCSQR.andestech.com with ESMTP id 11LDSTmj059349;
- Sun, 21 Feb 2021 21:28:29 +0800 (GMT-8)
+ by ATCSQR.andestech.com with ESMTP id 11LDSYJU059381;
+ Sun, 21 Feb 2021 21:28:34 +0800 (GMT-8)
  (envelope-from cwshu@andestech.com)
 Received: from ubuntu1604.andestech.com (10.0.12.177) by
  ATCPCS16.andestech.com (10.0.1.222) with Microsoft SMTP Server id 14.3.487.0; 
- Sun, 21 Feb 2021 21:33:58 +0800
+ Sun, 21 Feb 2021 21:34:03 +0800
 From: Jim Shu <cwshu@andestech.com>
 To: 
 CC: Jim Shu <cwshu@andestech.com>, Palmer Dabbelt <palmer@dabbelt.com>,
@@ -24,9 +24,10 @@ CC: Jim Shu <cwshu@andestech.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  <kbastian@mail.uni-paderborn.de>, "open list:RISC-V TCG CPUs"
  <qemu-riscv@nongnu.org>, "open list:All patches CC here"
  <qemu-devel@nongnu.org>
-Subject: [PATCH 2/3] target/riscv: add log of PMP permission checking
-Date: Sun, 21 Feb 2021 21:32:49 +0800
-Message-ID: <1613914370-17285-3-git-send-email-cwshu@andestech.com>
+Subject: [PATCH 3/3] target/riscv: flush TLB pages if PMP permission has been
+ changed
+Date: Sun, 21 Feb 2021 21:32:50 +0800
+Message-ID: <1613914370-17285-4-git-send-email-cwshu@andestech.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1613914370-17285-1-git-send-email-cwshu@andestech.com>
 References: <1613914370-17285-1-git-send-email-cwshu@andestech.com>
@@ -34,7 +35,7 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.0.12.177]
 X-DNSRBL: 
-X-MAIL: ATCSQR.andestech.com 11LDSTmj059349
+X-MAIL: ATCSQR.andestech.com 11LDSYJU059381
 Received-SPF: pass client-ip=60.248.187.195; envelope-from=cwshu@andestech.com;
  helo=ATCSQR.andestech.com
 X-Spam_score_int: -18
@@ -54,46 +55,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Feb 2021 13:34:53 -0000
+X-List-Received-Date: Sun, 21 Feb 2021 13:34:54 -0000
 
-Like MMU translation, add qemu log of PMP permission checking for
-debugging.
+If PMP permission of any address has been changed by updating PMP entry,
+flush all TLB pages to prevent from getting old permission.
 
 Signed-off-by: Jim Shu <cwshu@andestech.com>
 ---
- target/riscv/cpu_helper.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ target/riscv/pmp.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index f6ac63bf0e..c1ecb8a710 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -794,6 +794,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-             if (ret == TRANSLATE_SUCCESS) {
-                 ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
-                                                size, access_type, mode);
-+
-+                qemu_log_mask(CPU_LOG_MMU,
-+                              "%s PMP address=" TARGET_FMT_plx " ret %d prot"
-+                              " %d tlb_size " TARGET_FMT_lu "\n",
-+                              __func__, pa, ret, prot_pmp, tlb_size);
-+
-                 prot &= prot_pmp;
-             }
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index ebd874cde3..cff020122a 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -28,6 +28,7 @@
+ #include "qapi/error.h"
+ #include "cpu.h"
+ #include "trace.h"
++#include "exec/exec-all.h"
  
-@@ -821,6 +827,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         if (ret == TRANSLATE_SUCCESS) {
-             ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
-                                            size, access_type, mode);
-+
-+            qemu_log_mask(CPU_LOG_MMU,
-+                          "%s PMP address=" TARGET_FMT_plx " ret %d prot"
-+                          " %d tlb_size " TARGET_FMT_lu "\n",
-+                          __func__, pa, ret, prot_pmp, tlb_size);
-+
-             prot &= prot_pmp;
-         }
+ static void pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
+     uint8_t val);
+@@ -347,6 +348,9 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
+         cfg_val = (val >> 8 * i)  & 0xff;
+         pmp_write_cfg(env, (reg_index * 4) + i, cfg_val);
      }
++
++    /* If PMP permission of any addr has been changed, flush TLB pages. */
++    tlb_flush(env_cpu(env));
+ }
+ 
+ 
 -- 
 2.30.1
 
