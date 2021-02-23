@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lERfe-0000Sk-6m
-	for mharc-qemu-riscv@gnu.org; Tue, 23 Feb 2021 01:59:46 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40754)
+	id 1lESvK-0007VG-9M
+	for mharc-qemu-riscv@gnu.org; Tue, 23 Feb 2021 03:20:02 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60926)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lERfc-0000SQ-O2
- for qemu-riscv@nongnu.org; Tue, 23 Feb 2021 01:59:44 -0500
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f]:38362)
+ id 1lESvI-0007Uy-RC
+ for qemu-riscv@nongnu.org; Tue, 23 Feb 2021 03:20:00 -0500
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:45083)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lERfa-0003bT-VT
- for qemu-riscv@nongnu.org; Tue, 23 Feb 2021 01:59:44 -0500
-Received: by mail-pl1-x62f.google.com with SMTP id f8so9262175plg.5
- for <qemu-riscv@nongnu.org>; Mon, 22 Feb 2021 22:59:42 -0800 (PST)
+ id 1lESvH-0001YU-1S
+ for qemu-riscv@nongnu.org; Tue, 23 Feb 2021 03:20:00 -0500
+Received: by mail-pg1-x52b.google.com with SMTP id p21so11891370pgl.12
+ for <qemu-riscv@nongnu.org>; Tue, 23 Feb 2021 00:19:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id;
- bh=13vhUIocFQHQnO3QqjJ3UGcFtp1CW2yXBHweLGUr8I4=;
- b=miiP4kVnpTrjjFjScK8FRTEoOJ538XVP0PZyWZd4NZqc6fT+xn/TPvI2rXIyovFMSx
- 6/gdzICYVb0qsFi/BtxPonFYQKIRte4R6rHa1/DH7fKc8gHzFINdwAhB3zCmQk0s1inW
- VINKZJ52z1+L+PUC3NQGNg+WJHoRobd0LqUo1t9ilnTEIZ06vvAGXrdU3qZvQAE3rd+d
- QL02xjqZhY7fJOIcFNvbMISSugIxZaK+EjPNfmD7NxldPiI2ofufw/HU7igAQTwUlqUi
- PC5htbPii01zv6SUQrKhpD20/Gt6v8JYdIiw1g+Goh/vNEq6h6AGN+EiYrcMKbRt6gTw
- 3jyg==
+ bh=1qrHobv3NrqcH2ghUvMxccLmDGRDxe+jf1v0dL2ZvGc=;
+ b=CHe+3qGRmKPjDneLse1yoCmabbOJHPKRRd3negZwA6Dns/gspK+Vp0p5RVrJVrPrHv
+ zRbsYTLDPoOPpS2kkKQ3MRMmufKk020InNtDsEkHap6jeo4RY98auhn9pIblb9OWD1zB
+ ec+k86HsgEvLuru1/obSbI7d1qXLOhbdXs43ZSFQD/o8/0sdfzEYKHsjLUHXPYoabk8o
+ tKNTFY7uj2gNyOvy/QLgJPxno2MXbL4kvjsksWPsytLppkdWqNaUj1MkCSUB/bWeqA1a
+ /pvKuwaFAT2ay5tPJ1DK2yIBsRVPXj77X7iOFk6bckRCkFUKlIpD74vSzTPjxU8kcO1z
+ e9tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=13vhUIocFQHQnO3QqjJ3UGcFtp1CW2yXBHweLGUr8I4=;
- b=AxJ2fgTDPwzaxgqo63sEPZNXeqC4wddaQNQsPr3Gv8khaTmurxsh9l0KOQFNebyFNu
- SsOuiM66i8i/T1z0Lh1TUL4WrdR2yP/4SQRI6xw8NYWah9BIp1RCZsW8u/NkCF7WlLfq
- faBftSrM/Og/tM/okBYpC07rWCOGhij7srxJgpYvV4xIx0M11JfaQnpwLLnc+tSq3U/+
- bE/06qPVVPVRZNse96E9p8NNlwdPzh0JshyfbvHllW3CD89pA7K+FTjgi/78xwORxPs8
- teCS1i2ORSz6xKL2iuVe/+OIf/baO3XqVuw4vEL7C07uNYOt7+C+7fEX3uwwxDjgDCbs
- usIQ==
-X-Gm-Message-State: AOAM531uTvfXdSRJLrJb5s4jXlmDne5Y4sGtTByCQYIAK3Oo2kDRAwIp
- rnPphqHuJvuOkAlFrdj/4/4bhg==
-X-Google-Smtp-Source: ABdhPJyF6BixiB3P+7Qc1FWsSrdHwbMzSvFJ3a5+Jl6I5eOuHGeCzAoWZyVVBIgxiUcUbp7i0j9Exg==
-X-Received: by 2002:a17:90a:4092:: with SMTP id
- l18mr27749782pjg.39.1614063580995; 
- Mon, 22 Feb 2021 22:59:40 -0800 (PST)
+ bh=1qrHobv3NrqcH2ghUvMxccLmDGRDxe+jf1v0dL2ZvGc=;
+ b=VxSUnKZtsLXHqhUUgCtCxLUJ2IOLnqPkpDnDTIe+BGFmDvrw3i3URsE4utRemOdms3
+ mdlT8GdCi2bwDvitE7n1/xf26m4Z7TZbn5EWRRy61jirEB4H4ws1AsSf9QBLHXviLaxf
+ o/f1Uk2NHfLytENfIhGDMAos8yj4S3QwNhwN4iSxxhKgJ1qn9C896T5D+AOt95U3CLLR
+ L5VAed5j+ESKe3lWAM9VMVjfkmwMFkLIXnIR106+zt9MjIa+oJJ52Mf7WaYjYz/VZsLc
+ MqVSZcb0VEGtx/3t8377gh5eTG6M6nY6uT4qEiPYvPXbqjPK6cj9IQ0Nrd8W7IEHcgHU
+ 3FVg==
+X-Gm-Message-State: AOAM53115HWI5nDLZUhhWq+WUMKX3HgfxMD6VEJ/y5OuC+5Z6pTWu7w0
+ qMnV9tpZcNf1y341P0QXsMeZGg==
+X-Google-Smtp-Source: ABdhPJynpt1oPBg6mxQ6bAbaDCMYbwM2xs56qmZ2updBWlD1Bvds9RMBgAJ2oe+Kv3GVrse6pvzB3Q==
+X-Received: by 2002:a62:7e58:0:b029:1ed:b833:a305 with SMTP id
+ z85-20020a627e580000b02901edb833a305mr6050729pfc.66.1614068397429; 
+ Tue, 23 Feb 2021 00:19:57 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id s18sm20165714pfm.129.2021.02.22.22.59.38
+ by smtp.gmail.com with ESMTPSA id fw18sm2057773pjb.46.2021.02.23.00.19.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Feb 2021 22:59:40 -0800 (PST)
+ Tue, 23 Feb 2021 00:19:56 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -50,12 +50,12 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH] target/riscv: fix vs() to return proper error code
-Date: Tue, 23 Feb 2021 14:59:32 +0800
-Message-Id: <20210223065935.20208-1-frank.chang@sifive.com>
+Subject: [PATCH v2] target/riscv: fix TB_FLAGS bits overlapping bug for rvv/rvh
+Date: Tue, 23 Feb 2021 16:19:49 +0800
+Message-Id: <20210223081951.20226-1-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -75,35 +75,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2021 06:59:44 -0000
+X-List-Received-Date: Tue, 23 Feb 2021 08:20:01 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-vs() should return -RISCV_EXCP_ILLEGAL_INST instead of -1 if rvv feature
-is not enabled.
-
-If -1 is returned, exception will be raised and cs->exception_index will
-be set to the negative return value. The exception will then be treated
-as an instruction access fault instead of illegal instruction fault.
+TB_FLAGS mem_idx bits was extended from 2 bits to 3 bits in
+commit: c445593, but other TB_FLAGS bits for rvv and rvh were
+not shift as well so these bits may overlap with each other when
+rvv is enabled.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/csr.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu.h       | 12 ++++++------
+ target/riscv/translate.c |  2 +-
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index fd2e6363f39..d2ae73e4a08 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -54,7 +54,7 @@ static int vs(CPURISCVState *env, int csrno)
-     if (env->misa & RVV) {
-         return 0;
-     }
--    return -1;
-+    return -RISCV_EXCP_ILLEGAL_INST;
- }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 02758ae0eb4..116b16b9362 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -370,7 +370,6 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
+ target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
+ void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
  
- static int ctr(CPURISCVState *env, int csrno)
+-#define TB_FLAGS_MMU_MASK   7
+ #define TB_FLAGS_PRIV_MMU_MASK                3
+ #define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
+ #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
+@@ -379,12 +378,13 @@ typedef CPURISCVState CPUArchState;
+ typedef RISCVCPU ArchCPU;
+ #include "exec/cpu-all.h"
+ 
+-FIELD(TB_FLAGS, VL_EQ_VLMAX, 2, 1)
+-FIELD(TB_FLAGS, LMUL, 3, 2)
+-FIELD(TB_FLAGS, SEW, 5, 3)
+-FIELD(TB_FLAGS, VILL, 8, 1)
++FIELD(TB_FLAGS, MEM_IDX, 0, 3)
++FIELD(TB_FLAGS, VL_EQ_VLMAX, 3, 1)
++FIELD(TB_FLAGS, LMUL, 4, 2)
++FIELD(TB_FLAGS, SEW, 6, 3)
++FIELD(TB_FLAGS, VILL, 9, 1)
+ /* Is a Hypervisor instruction load/store allowed? */
+-FIELD(TB_FLAGS, HLSX, 9, 1)
++FIELD(TB_FLAGS, HLSX, 10, 1)
+ 
+ bool riscv_cpu_is_32bit(CPURISCVState *env);
+ 
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 0f28b5f41e4..9b518cdff46 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -802,7 +802,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     uint32_t tb_flags = ctx->base.tb->flags;
+ 
+     ctx->pc_succ_insn = ctx->base.pc_first;
+-    ctx->mem_idx = tb_flags & TB_FLAGS_MMU_MASK;
++    ctx->mem_idx = FIELD_EX32(tb_flags, TB_FLAGS, MEM_IDX);
+     ctx->mstatus_fs = tb_flags & TB_FLAGS_MSTATUS_FS;
+     ctx->priv_ver = env->priv_ver;
+ #if !defined(CONFIG_USER_ONLY)
 -- 
 2.17.1
 
