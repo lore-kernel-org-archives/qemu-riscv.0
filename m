@@ -1,68 +1,86 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lEiHf-0007pl-8d
-	for mharc-qemu-riscv@gnu.org; Tue, 23 Feb 2021 19:44:07 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38796)
+	id 1lFEdA-0006g9-7A
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Feb 2021 06:16:28 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33182)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lEiHd-0007nj-C5
- for qemu-riscv@nongnu.org; Tue, 23 Feb 2021 19:44:05 -0500
-Received: from mail-ot1-x335.google.com ([2607:f8b0:4864:20::335]:39483)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lEiHb-000174-9s
- for qemu-riscv@nongnu.org; Tue, 23 Feb 2021 19:44:04 -0500
-Received: by mail-ot1-x335.google.com with SMTP id h22so555193otr.6
- for <qemu-riscv@nongnu.org>; Tue, 23 Feb 2021 16:43:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=EE/srU3Oa/6tIABDfnNyF/+QIdWdgTUfcnz/0/9SQ3c=;
- b=JgNbotGKrP98peWjksVeZJV4RPE71DkCfxpmONYbnT2Ex0ilwT4RQohD1o8iyqv96W
- NXPd6ej3mXb2NwdKXPihmqtwlA7baUfVMJoRznImmE9CKLUK3OIQevI9r1e/6w/EedLp
- n7Dp9aBx9ZAq7TlKIqBOLVu63vcnuR+ugKwcp5zGYxRLk61sEOoRzQv6NcONBYEdAnz0
- hLtVEoKHIPuKGom7cNoVF9UwQyRM1J22HH9zoCJ1CNSbUR3D4upu+n+Zqfi8/y9Fa7MM
- msCkh2HvkE8w1Pwo7fswZ2pDAKwXxpxEFfgQ5jsKA+g10BspTolT66wDE6F0Jjwa4l+K
- 0+5Q==
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lFEd6-0006cr-Fj
+ for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 06:16:27 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:31342)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lFEd0-0006yv-FY
+ for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 06:16:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1614251777;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7Co9+wzVrkExJlVkuF7bfU2tqehXl1mAQR9zwOh6M/I=;
+ b=H85S/alm/fxDGb857r0XHJJpHKPkNuu2MW+LEoWaEwgyv/SrCQ+lec8JUG/76enFW9Bv9Y
+ xa6+wXTgFjQcfytfzAaX/thmr4aWX6H23p1nwtRHJrkYq+RJJjbZQKNd2WfED21mkOSlgU
+ Adz5Zrzx+xnCk+X8PGZ/RixkmOpScNA=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-446-AjFFDszOPTOj355urKqCPQ-1; Thu, 25 Feb 2021 06:16:16 -0500
+X-MC-Unique: AjFFDszOPTOj355urKqCPQ-1
+Received: by mail-wr1-f71.google.com with SMTP id j12so2489478wrt.9
+ for <qemu-riscv@nongnu.org>; Thu, 25 Feb 2021 03:16:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=EE/srU3Oa/6tIABDfnNyF/+QIdWdgTUfcnz/0/9SQ3c=;
- b=TDwqlV5G72zTFdfojA21rihC30ykop+VyaMDuGy/EWDB7SF+9RJ3uQN51WavbiXSka
- IoBRD5Tyx1YewLC5FXswlLlc0U+RBPpNAF4Y+UIcGN8Qzg4HZNKcoCPvJgLVuiiEuGSU
- ECjJTOvDJQY7yFB7zHxqMYacyrohU9QauN6nOfrd48D69I5tx9Ju3eH1UdFJ+vfj3rb/
- tbbELUgBMVgSS0JKlM96g3jMnM+euW78CqyWnBE3vCLLWkJKUdWNz1CqdMOm9r8zug5L
- NxCcABqQyNg35oyyL1mF9Pr39FJMgC2b5g/DgYn6O6I4TM0Qv07nVT31DNDHMixhi/ZJ
- 7DJA==
-X-Gm-Message-State: AOAM533oPaUhCoO2BRg5Xkuk7XA3Av0hwMLcE4TaveGV1LfwMAh0uwwL
- 90kmU0Of1yytHejQXSS85pUFYGXZepNjX3naXSm12A==
-X-Google-Smtp-Source: ABdhPJyRp946nhCPUX3KkJrkl8UTY+xlOSs0vSazwIiFqMa6KDu/7bx6PJn96g2XZFjLwKFQOnri0MkERDVDkcXvUTA=
-X-Received: by 2002:a9d:2ac4:: with SMTP id e62mr23062371otb.139.1614127438698; 
- Tue, 23 Feb 2021 16:43:58 -0800 (PST)
-MIME-Version: 1.0
-References: <20210223081951.20226-1-frank.chang@sifive.com>
- <500b1f4a-1fe8-9e4f-cdee-2c2b35a53edb@linaro.org>
-In-Reply-To: <500b1f4a-1fe8-9e4f-cdee-2c2b35a53edb@linaro.org>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Wed, 24 Feb 2021 08:43:48 +0800
-Message-ID: <CAE_xrPiU0kL5nkcL3RbRSNyRv1FCVYk1pOVXp_rVFFB8dhaMCg@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: fix TB_FLAGS bits overlapping bug for
- rvv/rvh
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ h=x-gm-message-state:subject:to:references:cc:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=7Co9+wzVrkExJlVkuF7bfU2tqehXl1mAQR9zwOh6M/I=;
+ b=P04mQLVaV8oJTLDcYjKJLugT25jHWdi3jz/YTWy/sn4O1j4xRCvvG8xXw3Z5xMaVwD
+ 260qfGewh3uPwrBWh+JXDcguuwhZjicCwPrgJNUzmsZuyZhyeKt8MuoptPvXguN1aTgF
+ nmD0RMbg7T50LU8R80UHMv/c/6NwdAf2UL9aYb2FF08N487cLD16F4bvyVoUI+TeiGkR
+ nyYXL9ink0na5AMJ7jopDCCseC72rjHcc2UilhPuy+bEVie9Xpusl4fb6gHze7McVbZM
+ Kq2b0unTvDBgTPSiAw+XdQSUkkiXjHBU6mEEFNw4u1ZUapNGluRpaOWQslbGJ1e7uD18
+ cQ5w==
+X-Gm-Message-State: AOAM530HM6fkeAcdqLkXuxloBcLgA4vxv0a8necfR1quFtivamVo863b
+ x2r2nNeZRbBt6MehY5AiRdDLN5FP1cro+TpO7YfApm2i7uSsAQ80vMCb9olB/Gdxuk49Ljapxb2
+ XpdctZpniWkXnjRSYf8mzQCLtgKz1p0CsoQiHoY47P8ayXd9KYEI7uFN83/FHu5kJ
+X-Received: by 2002:adf:b355:: with SMTP id k21mr3030157wrd.156.1614251772770; 
+ Thu, 25 Feb 2021 03:16:12 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwa7nTOE34GBVjNK5wyMsVL595UNKs7p3zDP740VWqLW1/rB4Cw815ZsSx/YhJ3worJmyMPJQ==
+X-Received: by 2002:adf:b355:: with SMTP id k21mr3030096wrd.156.1614251772082; 
+ Thu, 25 Feb 2021 03:16:12 -0800 (PST)
+Received: from [192.168.1.36] (68.red-83-57-175.dynamicip.rima-tde.net.
+ [83.57.175.68])
+ by smtp.gmail.com with ESMTPSA id o15sm6843040wmh.39.2021.02.25.03.16.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 Feb 2021 03:16:11 -0800 (PST)
+Subject: Re: [PATCH] hw/riscv: Add basic fw_cfg support to virt
+To: Asherah Connor <ashe@kivikakk.ee>
+References: <20210225101343.40301-1-ashe@kivikakk.ee>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, qemu-devel@nongnu.org,
  Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Content-Type: multipart/alternative; boundary="0000000000009b30e205bc0a5421"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::335;
- envelope-from=frank.chang@sifive.com; helo=mail-ot1-x335.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Message-ID: <a09c550e-2172-adfe-140d-45936b7edacd@redhat.com>
+Date: Thu, 25 Feb 2021 12:16:09 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
+MIME-Version: 1.0
+In-Reply-To: <20210225101343.40301-1-ashe@kivikakk.ee>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=63.128.21.124; envelope-from=philmd@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -76,131 +94,110 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2021 00:44:05 -0000
+X-List-Received-Date: Thu, 25 Feb 2021 11:16:27 -0000
 
---0000000000009b30e205bc0a5421
-Content-Type: text/plain; charset="UTF-8"
+Hi Asherah,
 
-On Wed, Feb 24, 2021 at 2:24 AM Richard Henderson <
-richard.henderson@linaro.org> wrote:
+You forgot to Cc the maintainers (doing it now):
 
-> On 2/23/21 12:19 AM, frank.chang@sifive.com wrote:
-> > From: Frank Chang <frank.chang@sifive.com>
-> >
-> > TB_FLAGS mem_idx bits was extended from 2 bits to 3 bits in
-> > commit: c445593, but other TB_FLAGS bits for rvv and rvh were
-> > not shift as well so these bits may overlap with each other when
-> > rvv is enabled.
-> >
-> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
->
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
->
-> > -#define TB_FLAGS_MMU_MASK   7
-> >  #define TB_FLAGS_PRIV_MMU_MASK                3
-> >  #define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
-> >  #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
-> ...
-> > +FIELD(TB_FLAGS, MEM_IDX, 0, 3)
-> > +FIELD(TB_FLAGS, VL_EQ_VLMAX, 3, 1)
-> > +FIELD(TB_FLAGS, LMUL, 4, 2)
-> > +FIELD(TB_FLAGS, SEW, 6, 3)
-> > +FIELD(TB_FLAGS, VILL, 9, 1)
-> >  /* Is a Hypervisor instruction load/store allowed? */
-> > -FIELD(TB_FLAGS, HLSX, 9, 1)
-> > +FIELD(TB_FLAGS, HLSX, 10, 1)
->
-> The only other thing that I'd add at this point is a comment about
-> MSTATUS_FS
-> -- a 2-bit field at bit 13 -- for the benefit of the next person that adds
-> something to TB_FLAGS.
->
->
-In fact, in RVV patchset, both MSTATUS_FS and MSTATUS_VS are skipped
-and I also add the comments to state that.
-The bits are also rearranged to fill the empty bit holes in RVV patchset on
-my local branch:
+./scripts/get_maintainer.pl -f hw/riscv/virt.c
+Palmer Dabbelt <palmer@dabbelt.com>
+Alistair Francis <Alistair.Francis@wdc.com>
+Sagar Karandikar <sagark@eecs.berkeley.edu>
+Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+qemu-riscv@nongnu.org
+qemu-devel@nongnu.org
 
-  FIELD(TB_FLAGS, MEM_IDX, 0, 3)
-  FIELD(TB_FLAGS, LMUL, 3, 3)
-  FIELD(TB_FLAGS, SEW, 6, 3)
-  /* Skip MSTATUS_VS (0x600) bits */
-  FIELD(TB_FLAGS, VL_EQ_VLMAX, 11, 1)
-  FIELD(TB_FLAGS, VILL, 12, 1)
-  /* Skip MSTATUS_FS (0x6000) bits */
-  /* Is a Hypervisor instruction load/store allowed? */
-  FIELD(TB_FLAGS, HLSX, 15, 1)
+On 2/25/21 11:13 AM, Asherah Connor wrote:
+> Provides a minimal fw_cfg for the virt machine on riscv.  I've
+> arbitrarily selected an MMIO base for it.  This is very rudimentary, so
+> no DMA interface is exposed.  Tested as working!
+> 
+> (First patch to qemu, so whatever patience you can afford would be
+> appreciated.)
 
-Thanks for the review.
-Frank Chang
+What is missing here is why do you need this, what problem
+does this patch solve.
 
+> 
+> Signed-off-by: Asherah Connor <ashe@kivikakk.ee>
+> ---
+>  hw/riscv/virt.c         | 25 +++++++++++++++++++++++++
+>  include/hw/riscv/virt.h |  4 +++-
+>  2 files changed, 28 insertions(+), 1 deletion(-)
+> 
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 2299b3a6be..4981ca004b 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -56,6 +56,7 @@ static const struct MemmapEntry {
+>      [VIRT_PLIC] =        {  0xc000000, VIRT_PLIC_SIZE(VIRT_CPUS_MAX * 2) },
+>      [VIRT_UART0] =       { 0x10000000,         0x100 },
+>      [VIRT_VIRTIO] =      { 0x10001000,        0x1000 },
+> +    [VIRT_FW_CFG] =      { 0x10100000,          0x10 },
+>      [VIRT_FLASH] =       { 0x20000000,     0x4000000 },
+>      [VIRT_PCIE_ECAM] =   { 0x30000000,    0x10000000 },
+>      [VIRT_PCIE_MMIO] =   { 0x40000000,    0x40000000 },
+> @@ -488,6 +489,26 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+>      return dev;
+>  }
+>  
+> +static FWCfgState *create_fw_cfg(const RISCVVirtState *s)
+> +{
+> +    hwaddr base = virt_memmap[VIRT_FW_CFG].base;
+> +    hwaddr size = virt_memmap[VIRT_FW_CFG].size;
+> +    FWCfgState *fw_cfg;
+> +    char *nodename;
+> +
+> +    fw_cfg = fw_cfg_init_mem_wide(base + 8, base, 8, 0, NULL);
+> +    fw_cfg_add_i16(fw_cfg, FW_CFG_NB_CPUS, (uint16_t)MACHINE(s)->smp.cpus);
+> +
+> +    nodename = g_strdup_printf("/fw-cfg@%" PRIx64, base);
+> +    qemu_fdt_add_subnode(s->fdt, nodename);
+> +    qemu_fdt_setprop_string(s->fdt, nodename,
+> +                            "compatible", "qemu,fw-cfg-mmio");
+> +    qemu_fdt_setprop_sized_cells(s->fdt, nodename, "reg",
+> +                                 2, base, 2, size);
+> +    g_free(nodename);
+> +    return fw_cfg;
+> +}
+> +
+>  static void virt_machine_init(MachineState *machine)
+>  {
+>      const struct MemmapEntry *memmap = virt_memmap;
+> @@ -652,6 +673,10 @@ static void virt_machine_init(MachineState *machine)
+>          start_addr = virt_memmap[VIRT_FLASH].base;
+>      }
+>  
+> +    /* init fw_cfg */
+> +    s->fw_cfg = create_fw_cfg(s);
+> +    rom_set_fw(s->fw_cfg);
+> +
+>      /* Compute the fdt load address in dram */
+>      fdt_load_addr = riscv_load_fdt(memmap[VIRT_DRAM].base,
+>                                     machine->ram_size, s->fdt);
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index 84b7a3848f..3b81a2e3f6 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -40,6 +40,7 @@ struct RISCVVirtState {
+>      RISCVHartArrayState soc[VIRT_SOCKETS_MAX];
+>      DeviceState *plic[VIRT_SOCKETS_MAX];
+>      PFlashCFI01 *flash[2];
+> +    FWCfgState *fw_cfg;
+>  
+>      void *fdt;
+>      int fdt_size;
+> @@ -58,7 +59,8 @@ enum {
+>      VIRT_DRAM,
+>      VIRT_PCIE_MMIO,
+>      VIRT_PCIE_PIO,
+> -    VIRT_PCIE_ECAM
+> +    VIRT_PCIE_ECAM,
+> +    VIRT_FW_CFG
+>  };
+>  
+>  enum {
+> 
 
->
-> r~
->
-
---0000000000009b30e205bc0a5421
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Wed, Feb 24, 2021 at 2:24 AM Richard H=
-enderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hender=
-son@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">On 2/23/21 12:19 AM, <a href=3D"ma=
-ilto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> w=
-rote:<br>
-&gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=
-=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; <br>
-&gt; TB_FLAGS mem_idx bits was extended from 2 bits to 3 bits in<br>
-&gt; commit: c445593, but other TB_FLAGS bits for rvv and rvh were<br>
-&gt; not shift as well so these bits may overlap with each other when<br>
-&gt; rvv is enabled.<br>
-&gt; <br>
-&gt; Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.co=
-m" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-<br>
-Reviewed-by: Richard Henderson &lt;<a href=3D"mailto:richard.henderson@lina=
-ro.org" target=3D"_blank">richard.henderson@linaro.org</a>&gt;<br>
-<br>
-&gt; -#define TB_FLAGS_MMU_MASK=C2=A0 =C2=A07<br>
-&gt;=C2=A0 #define TB_FLAGS_PRIV_MMU_MASK=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 3<br>
-&gt;=C2=A0 #define TB_FLAGS_PRIV_HYP_ACCESS_MASK=C2=A0 =C2=A0(1 &lt;&lt; 2)=
-<br>
-&gt;=C2=A0 #define TB_FLAGS_MSTATUS_FS MSTATUS_FS<br>
-...<br>
-&gt; +FIELD(TB_FLAGS, MEM_IDX, 0, 3)<br>
-&gt; +FIELD(TB_FLAGS, VL_EQ_VLMAX, 3, 1)<br>
-&gt; +FIELD(TB_FLAGS, LMUL, 4, 2)<br>
-&gt; +FIELD(TB_FLAGS, SEW, 6, 3)<br>
-&gt; +FIELD(TB_FLAGS, VILL, 9, 1)<br>
-&gt;=C2=A0 /* Is a Hypervisor instruction load/store allowed? */<br>
-&gt; -FIELD(TB_FLAGS, HLSX, 9, 1)<br>
-&gt; +FIELD(TB_FLAGS, HLSX, 10, 1)<br>
-<br>
-The only other thing that I&#39;d add at this point is a comment about MSTA=
-TUS_FS<br>
--- a 2-bit field at bit 13 -- for the benefit of the next person that adds<=
-br>
-something to TB_FLAGS.<br>
-<br></blockquote><div><br></div><div>In fact, in RVV patchset, both MSTATUS=
-_FS and MSTATUS_VS are skipped</div><div>and I also add the comments to sta=
-te that.</div><div>The bits are also rearranged to fill the empty bit holes=
- in RVV patchset on my local branch:</div><div><br></div><div>=C2=A0 FIELD(=
-TB_FLAGS, MEM_IDX, 0, 3)<br>=C2=A0 FIELD(TB_FLAGS, LMUL, 3, 3)<br>=C2=A0 FI=
-ELD(TB_FLAGS, SEW, 6, 3)<br>=C2=A0 /* Skip MSTATUS_VS (0x600) bits */<br>=
-=C2=A0 FIELD(TB_FLAGS, VL_EQ_VLMAX, 11, 1)<br>=C2=A0 FIELD(TB_FLAGS, VILL, =
-12, 1)<br>=C2=A0 /* Skip MSTATUS_FS (0x6000) bits */<br>=C2=A0 /* Is a Hype=
-rvisor instruction load/store allowed? */<br>=C2=A0 FIELD(TB_FLAGS, HLSX, 1=
-5, 1)<br></div><div><br></div><div>Thanks for the review.</div><div>Frank C=
-hang</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-">
-<br>
-r~<br>
-</blockquote></div></div>
-
---0000000000009b30e205bc0a5421--
 
