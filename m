@@ -1,64 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lFTkx-0003cC-5u
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Feb 2021 22:25:31 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36226)
+	id 1lFTl3-0003j5-3Y
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Feb 2021 22:25:37 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36266)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lFTkv-0003XM-IY
- for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:25:29 -0500
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:46042)
+ id 1lFTl0-0003h2-8C
+ for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:25:34 -0500
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:32873)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lFTkt-00034t-RK
- for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:25:29 -0500
-Received: by mail-pf1-x42f.google.com with SMTP id j12so5302765pfj.12
- for <qemu-riscv@nongnu.org>; Thu, 25 Feb 2021 19:25:27 -0800 (PST)
+ id 1lFTkx-00036T-U6
+ for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:25:33 -0500
+Received: by mail-pj1-x1032.google.com with SMTP id t5so6025615pjd.0
+ for <qemu-riscv@nongnu.org>; Thu, 25 Feb 2021 19:25:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=ZYs26elqaYiAlUapqukWqAxtPc5Pa/77IqPMJUo1CRQ=;
- b=aEmE+DBpMHH9fyFnpERYzU9acnv+eoZPCIUw0qN+PZZre53Pe2oEbygZau8OVqpl5R
- ehJeCXwG9xGKCsVVt1kcE8xt0rdtcsD5z7LYhGe6Z7VA9mT0ReTPRjk7Qu85YLGPZtcE
- AXJZLH+wekR2xJYU9o9Kdod7ZyV7yBWJ9k8C229cb3z9/og/tExNoMdq0b0UUe3CteGD
- G6jCz0o/g4ZRqA5E89CpegfcxgSGy2gwEW2oD3tBVCPBPM0SACfzIKgWKR4pgQy/WQKf
- 5FHHAtFu3KVsWqkhXJ311MUiYUsPB8zE7c12a8/czwNLU7NAv98xZMvvdRg04RtlAGOv
- wtXg==
+ bh=otSUGTugQziVAYtaVLRk4o8gktYRUt42gZZaoyBMQvk=;
+ b=O7X6SE5odvM8kDLEuPEoLt3oDmFWqjWtgCL0D8t46ILKVGPU43wbpNbLhlVFiyS4KH
+ aq6vJBki/fBWFfP612mIinnd8R7DUPYJSb3TBBjKI8WiNwUmABDGrMbFJ69HmJV+3wyq
+ npfY5d3lIoZqWjgU8ZvkjfqljwhmXPljaTSrPLs769K85lCdvkgqgwani098gXnGu/EY
+ BBBhx2RyetXyGzjWny7nvQygVJnKu7+cjVFdhsKJc0l1xqx9syxRtZ1ilx3rFGIzJP/r
+ hPr6NbxqekXDamttD8WHP/cL9PUuu2eRWsxfUQ+WD6FtIdTZWfvDwzyt2JHVnZYQvI/c
+ PJVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=ZYs26elqaYiAlUapqukWqAxtPc5Pa/77IqPMJUo1CRQ=;
- b=DmnIFJcTDdB4Tk9iOkhLMR/wV/6TSUSdOmIuqzcPcmaR1E6wFlXd2fr4XpvqY2+56o
- deEd89II1KgRHj1GDOjEFrFxfv0ovSRj8hyW9ROAXPGWMdA/ROjLkPrGvcVvOKZ64KE7
- YFjFpno+AqjlQS9W9lmfv3AbwG6llnHyBqu5+27CCieVnSHXXjhX7XmqRPn5FdBt3qeZ
- iP+HtE0K6cN5XgirJhv0+8zcHjVLxK6UGYjjVXIEz36hahK6njrAbILKUuqAPXAeH+/u
- CN9LagjNQeGFdanL7GVodVjfP4sSL3fR9Sr7XIbvIKKAytJ8neoCfYycT5BWdzz95FuJ
- OIUA==
-X-Gm-Message-State: AOAM532EnM7oC9Ha8lZow5jmc5CeWyoHlzA6Ry0qzo8mAMYwYjTbrqp4
- RBG75dn2fy9y97/MgFYk7yjb0A==
-X-Google-Smtp-Source: ABdhPJwulzLciBpZIKl4vn1wBR8Tffhg+dH9TTgFwamVU0gVTl/C6xwBekuRCa7KuMoAL+soXEZ3oQ==
-X-Received: by 2002:a63:4e44:: with SMTP id o4mr1062038pgl.46.1614309926630;
- Thu, 25 Feb 2021 19:25:26 -0800 (PST)
+ bh=otSUGTugQziVAYtaVLRk4o8gktYRUt42gZZaoyBMQvk=;
+ b=sUkXYZmAsmKTgBKpUuU1hETg5f0jaWEox6DJ3Fxl61GYqWEJHXlX8Z+Mth5QsKrIBA
+ +vJlyL3uxYlOLHs2pK7H4Ct+UVrxBLAJEc0MxaUQnzdBjWw3/yt4edCyFBk0sFAsi8tE
+ vHAwZg4GuQ1gYLbngKVT+uVEskLiD8JhapOvu5Vplrb1NFz9IWs/QcKu9kMcKKw4qE2Z
+ L2/Hpw6ncVxfP9RttR8rSurAnn6DymNZUbUAs6zd0QRg0EK/x5eFaIYzR0embysVetzE
+ VAFgPSr21roqA5yVtehcKFK0R3CI2oseowxRPzW6qGocHcg1GD1tJSe650rWJcmfvbQR
+ GoAQ==
+X-Gm-Message-State: AOAM530lgcYXLdCnFMUOfzS8E3M2YfBPkFJdxUAQRHocidIQOJa6uI7Q
+ h3fI5FxHYgZZ128aJn4eY1exnw==
+X-Google-Smtp-Source: ABdhPJxZZNeX6MH+U4zO5R8+tj9ULM6Do7LAN+6p39nSYw6O2v7Wg39/JE5ue8/OJaxdjrSuHuWykQ==
+X-Received: by 2002:a17:903:2306:b029:de:18e9:f439 with SMTP id
+ d6-20020a1709032306b02900de18e9f439mr1038597plh.38.1614309930650; 
+ Thu, 25 Feb 2021 19:25:30 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id p11sm7083709pjb.31.2021.02.25.19.25.24
+ by smtp.gmail.com with ESMTPSA id p11sm7083709pjb.31.2021.02.25.19.25.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Feb 2021 19:25:26 -0800 (PST)
+ Thu, 25 Feb 2021 19:25:30 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Hsiangkai Wang <kai.wang@sifive.com>,
+ Greentime Hu <greentime.hu@sifive.com>,
+ Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH v7 67/75] target/riscv: rvv-1.0: set mstatus.SD bit when
- writing vector CSRs
-Date: Fri, 26 Feb 2021 11:18:51 +0800
-Message-Id: <20210226031902.23656-68-frank.chang@sifive.com>
+Subject: [PATCH v7 68/75] target/riscv: gdb: support vector registers for rv64
+ & rv32
+Date: Fri, 26 Feb 2021 11:18:52 +0800
+Message-Id: <20210226031902.23656-69-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210226031902.23656-1-frank.chang@sifive.com>
 References: <20210226031902.23656-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,56 +81,260 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2021 03:25:29 -0000
+X-List-Received-Date: Fri, 26 Feb 2021 03:25:35 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+From: Hsiangkai Wang <kai.wang@sifive.com>
 
+Signed-off-by: Hsiangkai Wang <kai.wang@sifive.com>
+Signed-off-by: Greentime Hu <greentime.hu@sifive.com>
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/csr.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ target/riscv/cpu.c     |   2 +
+ target/riscv/cpu.h     |   1 +
+ target/riscv/gdbstub.c | 184 +++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 187 insertions(+)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index aa76da9e185..e0f1106d909 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -293,7 +293,7 @@ static int write_vxrm(CPURISCVState *env, int csrno, target_ulong val)
-     if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
-         return -RISCV_EXCP_ILLEGAL_INST;
-     }
--    env->mstatus |= MSTATUS_VS;
-+    env->mstatus |= MSTATUS_VS | MSTATUS_SD;
- #endif
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index d95165b3acb..a110b6ead9b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -575,6 +575,8 @@ static const char *riscv_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
  
-     env->vxrm = val;
-@@ -312,7 +312,7 @@ static int write_vxsat(CPURISCVState *env, int csrno, target_ulong val)
-     if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
-         return -RISCV_EXCP_ILLEGAL_INST;
+     if (strcmp(xmlname, "riscv-csr.xml") == 0) {
+         return cpu->dyn_csr_xml;
++    } else if (strcmp(xmlname, "riscv-vector.xml") == 0) {
++        return cpu->dyn_vreg_xml;
      }
--    env->mstatus |= MSTATUS_VS;
-+    env->mstatus |= MSTATUS_VS | MSTATUS_SD;
- #endif
  
-     env->vxsat = val;
-@@ -331,7 +331,7 @@ static int write_vstart(CPURISCVState *env, int csrno, target_ulong val)
-     if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
-         return -RISCV_EXCP_ILLEGAL_INST;
+     return NULL;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index ad2497229db..f324949beb1 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -275,6 +275,7 @@ struct RISCVCPU {
+     CPURISCVState env;
+ 
+     char *dyn_csr_xml;
++    char *dyn_vreg_xml;
+ 
+     /* Configuration Settings */
+     struct {
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 5f96b7ea2a9..dd883612c77 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -20,6 +20,32 @@
+ #include "exec/gdbstub.h"
+ #include "cpu.h"
+ 
++struct TypeSize {
++    const char *gdb_type;
++    const char *id;
++    int size;
++    const char suffix;
++};
++
++static const struct TypeSize vec_lanes[] = {
++    /* quads */
++    { "uint128", "quads", 128, 'q' },
++    /* 64 bit */
++    { "uint64", "longs", 64, 'l' },
++    /* 32 bit */
++    { "uint32", "words", 32, 'w' },
++    /* 16 bit */
++    { "uint16", "shorts", 16, 's' },
++    /*
++     * TODO: currently there is no reliable way of telling
++     * if the remote gdb actually understands ieee_half so
++     * we don't expose it in the target description for now.
++     * { "ieee_half", 16, 'h', 'f' },
++     */
++    /* bytes */
++    { "uint8", "bytes", 8, 'b' },
++};
++
+ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+@@ -101,6 +127,96 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+     return 0;
+ }
+ 
++/*
++ * Convert register index number passed by GDB to the correspond
++ * vector CSR number. Vector CSRs are defined after vector registers
++ * in dynamic generated riscv-vector.xml, thus the starting register index
++ * of vector CSRs is 32.
++ * Return 0 if register index number is out of range.
++ */
++static int riscv_gdb_vector_csrno(int num_regs)
++{
++    /*
++     * The order of vector CSRs in the switch case
++     * should match with the order defined in csr_ops[].
++     */
++    switch (num_regs) {
++    case 32:
++        return CSR_VSTART;
++    case 33:
++        return CSR_VXSAT;
++    case 34:
++        return CSR_VXRM;
++    case 35:
++        return CSR_VCSR;
++    case 36:
++        return CSR_VL;
++    case 37:
++        return CSR_VTYPE;
++    case 38:
++        return CSR_VLENB;
++    default:
++        /* Unknown register. */
++        return 0;
++    }
++}
++
++static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
++{
++    uint16_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
++    if (n < 32) {
++        int i;
++        int cnt = 0;
++        for (i = 0; i < vlenb; i += 8) {
++            cnt += gdb_get_reg64(buf,
++                                 env->vreg[(n * vlenb + i) / 8]);
++        }
++        return cnt;
++    }
++
++    int csrno = riscv_gdb_vector_csrno(n);
++
++    if (!csrno) {
++        return 0;
++    }
++
++    target_ulong val = 0;
++    int result = riscv_csrrw_debug(env, csrno, &val, 0, 0);
++
++    if (result == 0) {
++        return gdb_get_regl(buf, val);
++    }
++
++    return 0;
++}
++
++static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
++{
++    uint16_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
++    if (n < 32) {
++        int i;
++        for (i = 0; i < vlenb; i += 8) {
++            env->vreg[(n * vlenb + i) / 8] = ldq_p(mem_buf + i);
++        }
++        return vlenb;
++    }
++
++    int csrno = riscv_gdb_vector_csrno(n);
++
++    if (!csrno) {
++        return 0;
++    }
++
++    target_ulong val = ldtul_p(mem_buf);
++    int result = riscv_csrrw_debug(env, csrno, NULL, val, -1);
++
++    if (result == 0) {
++        return sizeof(target_ulong);
++    }
++
++    return 0;
++}
++
+ static int riscv_gdb_get_csr(CPURISCVState *env, GByteArray *buf, int n)
+ {
+     if (n < CSR_TABLE_SIZE) {
+@@ -187,6 +303,68 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+     return CSR_TABLE_SIZE;
+ }
+ 
++static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
++{
++    RISCVCPU *cpu = RISCV_CPU(cs);
++    GString *s = g_string_new(NULL);
++    g_autoptr(GString) ts = g_string_new("");
++    int reg_width = cpu->cfg.vlen;
++    int num_regs = 0;
++    int i;
++
++    g_string_printf(s, "<?xml version=\"1.0\"?>");
++    g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">");
++    g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.vector\">");
++
++    /* First define types and totals in a whole VL */
++    for (i = 0; i < ARRAY_SIZE(vec_lanes); i++) {
++        int count = reg_width / vec_lanes[i].size;
++        g_string_printf(ts, "%s", vec_lanes[i].id);
++        g_string_append_printf(s,
++                               "<vector id=\"%s\" type=\"%s\" count=\"%d\"/>",
++                               ts->str, vec_lanes[i].gdb_type, count);
++    }
++
++    /* Define unions */
++    g_string_append_printf(s, "<union id=\"riscv_vector\">");
++    for (i = 0; i < ARRAY_SIZE(vec_lanes); i++) {
++        g_string_append_printf(s, "<field name=\"%c\" type=\"%s\"/>",
++                               vec_lanes[i].suffix,
++                               vec_lanes[i].id);
++    }
++    g_string_append(s, "</union>");
++
++    /* Define vector registers */
++    for (i = 0; i < 32; i++) {
++        g_string_append_printf(s,
++                               "<reg name=\"v%d\" bitsize=\"%d\""
++                               " regnum=\"%d\" group=\"vector\""
++                               " type=\"riscv_vector\"/>",
++                               i, reg_width, base_reg++);
++        num_regs++;
++    }
++
++    /* Define vector CSRs */
++    const char *vector_csrs[7] = {
++        "vstart", "vxsat", "vxrm", "vcsr",
++        "vl", "vtype", "vlenb"
++    };
++
++    for (i = 0; i < 7; i++) {
++        g_string_append_printf(s,
++                               "<reg name=\"%s\" bitsize=\"%d\""
++                               " regnum=\"%d\" group=\"vector\""
++                               " type=\"int\"/>",
++                               vector_csrs[i], TARGET_LONG_BITS, base_reg++);
++        num_regs++;
++    }
++
++    g_string_append_printf(s, "</feature>");
++
++    cpu->dyn_vreg_xml = g_string_free(s, false);
++    return num_regs;
++}
++
+ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+@@ -198,6 +376,12 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+         gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+                                  36, "riscv-32bit-fpu.xml", 0);
      }
--    env->mstatus |= MSTATUS_VS;
-+    env->mstatus |= MSTATUS_VS | MSTATUS_SD;
- #endif
- 
-     /*
-@@ -354,7 +354,7 @@ static int write_vcsr(CPURISCVState *env, int csrno, target_ulong val)
-     if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
-         return -RISCV_EXCP_ILLEGAL_INST;
-     }
--    env->mstatus |= MSTATUS_VS;
-+    env->mstatus |= MSTATUS_VS | MSTATUS_SD;
- #endif
- 
-     env->vxrm = (val & VCSR_VXRM) >> VCSR_VXRM_SHIFT;
++    if (env->misa & RVV) {
++        gdb_register_coprocessor(cs, riscv_gdb_get_vector, riscv_gdb_set_vector,
++                                 ricsv_gen_dynamic_vector_xml(cs,
++                                                              cs->gdb_num_regs),
++                                 "riscv-vector.xml", 0);
++    }
+ #if defined(TARGET_RISCV32)
+     gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+                              1, "riscv-32bit-virtual.xml", 0);
 -- 
 2.17.1
 
