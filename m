@@ -1,49 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lFTeu-00056j-CL
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Feb 2021 22:19:16 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33328)
+	id 1lFTew-0005CU-P0
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Feb 2021 22:19:18 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33356)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lFTes-00054g-2S
- for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:19:14 -0500
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:55876)
+ id 1lFTev-00059H-8I
+ for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:19:17 -0500
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e]:37746)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lFTep-0000KG-Lg
- for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:19:13 -0500
-Received: by mail-pj1-x1035.google.com with SMTP id t9so5175915pjl.5
- for <qemu-riscv@nongnu.org>; Thu, 25 Feb 2021 19:19:11 -0800 (PST)
+ id 1lFTet-0000MT-Nk
+ for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:19:17 -0500
+Received: by mail-pf1-x42e.google.com with SMTP id b145so5325503pfb.4
+ for <qemu-riscv@nongnu.org>; Thu, 25 Feb 2021 19:19:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=zlFNbq4DwQdIZec/gpCc+TQqpq61iL3CEGhohVS/DuE=;
- b=ZMBYkoRKt7Uu6DB2lroHGv1zoeFQtULD2tMTPRpqOKUx/1MmPZWNsIqF4kVmBlg/Dc
- Wh1ND45HbDThLqbgBksgRHOp0v9Ll4hfD055pkCejCC03QkfqEak1s8vttamHeaO93wT
- jQ8K0zWfaCgupoxdOg5KRO9n6jqJTfqAryq0N6pHAw0ru0psuJFzO/qUpQ1Me6Vu1yzt
- qywRBDY6D/n0m+UM6YxeiK8R8W1HTpNZZ2bVhY0F5xEvLm7lk9UFFKrm/XJ5+d0Zcf5s
- odyb8KkQELuTh5sapzCY2Kan3WxVbt7+7+GH0/iZDO8UAbaC7ohEfHIaFH767xMuoCI9
- uvlw==
+ bh=Oj6zdFic6NGpQV/DS08Hb8h3hPvrSha1nmKRgxJUgjk=;
+ b=IFN84pTzpOU+RjHHdPYNNMgcUxkplIWFTGQN2+Rsn3JJSwSib3umTLJeyHvQ5vGrhS
+ y9XX/Mpk2c4zz0moA3f+/ewArs0v2dxLnJdfpUYYS6JxhdsnvKIZH+Gl2gKMDF1MXhdE
+ FKKBTywkMK0LFnTfM6SUq1yMGYqW4wFZQPPKqUtDO5RmSF51GHKCYfoQofGf23itc37n
+ Vwn+7ofaMv5ef+k3Gfq7wVuq7rMVtP8sh9ohQ2xj3jht5uA3iFCe00JuU8LIxejORvj2
+ n36MOrOCV2eJ6rQk/rAQ0E4IAzuNu/Gy0plFIyi0N1iTPcSAWDv9jKHEqpGcAOjmFaIa
+ 5vHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=zlFNbq4DwQdIZec/gpCc+TQqpq61iL3CEGhohVS/DuE=;
- b=fOfeH0cQX2qAm+xfoi4bK/l9/wiTBIgYG8mab77qIVg13uh1N89c3BgO4hxpZ74nnw
- 6EY9Bh1VvZkiNZsS9bVWoHLrxUFNcGv6H71+9FSSrADOXcc9xTZzQs5ncNCA/usrfcV1
- bdmy+4cg4Ax2rfeSpAaNyQIRknPUYfkV8zKIemPtX7QDby0NBGAqJfeWpOxc69DVbT0z
- aU2zsTKWfQX0KoN7rZas6WlJ91eIgShwCl++2Mx9HtCglqxAl6H4NlzkRKsIj6hO1914
- iugZRaGcLeb+fomXsQP261/FkI9f0iNgmXcPRGha1Kw97Kc3wlf4cTLdcUzSjbEOY8hi
- YB7w==
-X-Gm-Message-State: AOAM533GNWP8eZu/lZEu1ld1ajJAMKqFNoqyKkzfBtGruO6SlzUDr4wx
- WYCiswJLw0TJ2tUeH7P0t/OMdA==
-X-Google-Smtp-Source: ABdhPJxDfhg8if8vMnhpdsc6e5rnusp0dxX/SZdWap4M+GTBlAPE4nJxGSjxv0jzC6Wq6+KRKlXy2A==
-X-Received: by 2002:a17:902:7404:b029:e4:503b:f83d with SMTP id
- g4-20020a1709027404b02900e4503bf83dmr1180561pll.35.1614309549951; 
- Thu, 25 Feb 2021 19:19:09 -0800 (PST)
+ bh=Oj6zdFic6NGpQV/DS08Hb8h3hPvrSha1nmKRgxJUgjk=;
+ b=rtQOwLyLUnFvqT9/1b3PNap6sasaIz7UickeC/ULuxy0SAWJy3ahngfJ41eOSJ9DQb
+ nwmKkzRGUOjPmzhMQYarJZTwIr+oEUiFJLXMj+aKhRPnPJ7e5RNu8HfLQ8vOtGzg8Ath
+ YP6X/1gkYtO3o0kKeMg84a/hko/Nlx1/ndbeprHJL7PiwjerUB9ydOkzItfha8RuU9vj
+ RgVCmHVQ4zYFaHgzk1VJz2XMeOasPumR2wta91ihgYWTyHUfdVX/IWOWirk1s785CP0f
+ HzZGQPNXWTqjyHwjVW14k13oRsN3Xa0t691T6Qdwkdq1OIXkeJZacqDYaj44Brn+joud
+ 79Ng==
+X-Gm-Message-State: AOAM533eI4N6Eeoo9Bhvrl04d8pILu4vRNWdaoDGvb6W3FRExJ8lTnwt
+ vffzrXUDBxPBXS2S1QNFMOtH0islDYdRuA==
+X-Google-Smtp-Source: ABdhPJy6S6FUxjIOofUEAc8tj3b1e5QIZqjDq7NTAs9W1I+Qxrg6S0MIxAkkI/kckVXKJO+un1MT8w==
+X-Received: by 2002:a63:4922:: with SMTP id w34mr991133pga.423.1614309554442; 
+ Thu, 25 Feb 2021 19:19:14 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id p11sm7083709pjb.31.2021.02.25.19.19.08
+ by smtp.gmail.com with ESMTPSA id p11sm7083709pjb.31.2021.02.25.19.19.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Feb 2021 19:19:09 -0800 (PST)
+ Thu, 25 Feb 2021 19:19:14 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -51,14 +50,14 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH v7 01/75] target/riscv: drop vector 0.7.1 and add 1.0 support
-Date: Fri, 26 Feb 2021 11:17:45 +0800
-Message-Id: <20210226031902.23656-2-frank.chang@sifive.com>
+Subject: [PATCH v7 02/75] target/riscv: Use FIELD_EX32() to extract wd field
+Date: Fri, 26 Feb 2021 11:17:46 +0800
+Message-Id: <20210226031902.23656-3-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210226031902.23656-1-frank.chang@sifive.com>
 References: <20210226031902.23656-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,7 +77,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2021 03:19:14 -0000
+X-List-Received-Date: Fri, 26 Feb 2021 03:19:17 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
@@ -86,58 +85,22 @@ Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 10 +++++-----
- target/riscv/cpu.h |  2 +-
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ target/riscv/vector_helper.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 16f1a342388..d95165b3acb 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -379,7 +379,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     CPURISCVState *env = &cpu->env;
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-     int priv_version = PRIV_VERSION_1_11_0;
--    int vext_version = VEXT_VERSION_0_07_1;
-+    int vext_version = VEXT_VERSION_1_00_0;
-     target_ulong target_misa = env->misa;
-     Error *local_err = NULL;
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index a156573d281..bc3f212ceac 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -98,7 +98,7 @@ static inline uint32_t vext_lmul(uint32_t desc)
  
-@@ -497,8 +497,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-                 return;
-             }
-             if (cpu->cfg.vext_spec) {
--                if (!g_strcmp0(cpu->cfg.vext_spec, "v0.7.1")) {
--                    vext_version = VEXT_VERSION_0_07_1;
-+                if (!g_strcmp0(cpu->cfg.vext_spec, "v1.0")) {
-+                    vext_version = VEXT_VERSION_1_00_0;
-                 } else {
-                     error_setg(errp,
-                            "Unsupported vector spec version '%s'",
-@@ -506,8 +506,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-                     return;
-                 }
-             } else {
--                qemu_log("vector verison is not specified, "
--                        "use the default value v0.7.1\n");
-+                qemu_log("vector version is not specified, "
-+                        "use the default value v1.0\n");
-             }
-             set_vext_version(env, vext_version);
-         }
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 116b16b9362..9d911f81093 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -86,7 +86,7 @@ enum {
- #define PRIV_VERSION_1_10_0 0x00011000
- #define PRIV_VERSION_1_11_0 0x00011100
+ static uint32_t vext_wd(uint32_t desc)
+ {
+-    return (simd_data(desc) >> 11) & 0x1;
++    return FIELD_EX32(simd_data(desc), VDATA, WD);
+ }
  
--#define VEXT_VERSION_0_07_1 0x00000701
-+#define VEXT_VERSION_1_00_0 0x00010000
- 
- enum {
-     TRANSLATE_SUCCESS,
+ /*
 -- 
 2.17.1
 
