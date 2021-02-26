@@ -1,67 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lFTl3-0003j5-3Y
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Feb 2021 22:25:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36266)
+	id 1lFTl7-0003nQ-Fo
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Feb 2021 22:25:42 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36318)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lFTl0-0003h2-8C
- for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:25:34 -0500
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:32873)
+ id 1lFTl5-0003lE-51
+ for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:25:40 -0500
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a]:38376)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lFTkx-00036T-U6
- for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:25:33 -0500
-Received: by mail-pj1-x1032.google.com with SMTP id t5so6025615pjd.0
- for <qemu-riscv@nongnu.org>; Thu, 25 Feb 2021 19:25:31 -0800 (PST)
+ id 1lFTl1-000380-M5
+ for qemu-riscv@nongnu.org; Thu, 25 Feb 2021 22:25:38 -0500
+Received: by mail-pf1-x42a.google.com with SMTP id 201so5331514pfw.5
+ for <qemu-riscv@nongnu.org>; Thu, 25 Feb 2021 19:25:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=otSUGTugQziVAYtaVLRk4o8gktYRUt42gZZaoyBMQvk=;
- b=O7X6SE5odvM8kDLEuPEoLt3oDmFWqjWtgCL0D8t46ILKVGPU43wbpNbLhlVFiyS4KH
- aq6vJBki/fBWFfP612mIinnd8R7DUPYJSb3TBBjKI8WiNwUmABDGrMbFJ69HmJV+3wyq
- npfY5d3lIoZqWjgU8ZvkjfqljwhmXPljaTSrPLs769K85lCdvkgqgwani098gXnGu/EY
- BBBhx2RyetXyGzjWny7nvQygVJnKu7+cjVFdhsKJc0l1xqx9syxRtZ1ilx3rFGIzJP/r
- hPr6NbxqekXDamttD8WHP/cL9PUuu2eRWsxfUQ+WD6FtIdTZWfvDwzyt2JHVnZYQvI/c
- PJVg==
+ bh=1Zn0tZ8xhql4GWQ2w8q0taRZB9BjchZT8TyOSfZwkfA=;
+ b=ABzyycjQF12tcPyz5wzTcMrgXNrQpUlBdRUSRyYGin5jPWti1liBTeQCKsbhI4zyYg
+ Y0mjwoXIEatN61IGjOvvG7mWpsPlvtjwT+1bABlcJuTY52ZmCqazp+8glRrfwIwnDcDN
+ RY4te8i9F5KPQYkZurRyL+isVHEtKdyUGhYJ1J665XjNA66tFQncXcMuaY3IS5Rt5Hfp
+ JzVm3sUseU4COgw4uqbBh6j1SLZcdTj0W/b9Qbg0/NfDMykT348hOB+4mT/msz6LMXJb
+ T7BTQZ50X1Jbf8UuJx2U9Baow2UkQPQNTyQyp0Y6TJEFIDOae5eFHhpdFtCMNrK3Rll1
+ sn4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=otSUGTugQziVAYtaVLRk4o8gktYRUt42gZZaoyBMQvk=;
- b=sUkXYZmAsmKTgBKpUuU1hETg5f0jaWEox6DJ3Fxl61GYqWEJHXlX8Z+Mth5QsKrIBA
- +vJlyL3uxYlOLHs2pK7H4Ct+UVrxBLAJEc0MxaUQnzdBjWw3/yt4edCyFBk0sFAsi8tE
- vHAwZg4GuQ1gYLbngKVT+uVEskLiD8JhapOvu5Vplrb1NFz9IWs/QcKu9kMcKKw4qE2Z
- L2/Hpw6ncVxfP9RttR8rSurAnn6DymNZUbUAs6zd0QRg0EK/x5eFaIYzR0embysVetzE
- VAFgPSr21roqA5yVtehcKFK0R3CI2oseowxRPzW6qGocHcg1GD1tJSe650rWJcmfvbQR
- GoAQ==
-X-Gm-Message-State: AOAM530lgcYXLdCnFMUOfzS8E3M2YfBPkFJdxUAQRHocidIQOJa6uI7Q
- h3fI5FxHYgZZ128aJn4eY1exnw==
-X-Google-Smtp-Source: ABdhPJxZZNeX6MH+U4zO5R8+tj9ULM6Do7LAN+6p39nSYw6O2v7Wg39/JE5ue8/OJaxdjrSuHuWykQ==
-X-Received: by 2002:a17:903:2306:b029:de:18e9:f439 with SMTP id
- d6-20020a1709032306b02900de18e9f439mr1038597plh.38.1614309930650; 
- Thu, 25 Feb 2021 19:25:30 -0800 (PST)
+ bh=1Zn0tZ8xhql4GWQ2w8q0taRZB9BjchZT8TyOSfZwkfA=;
+ b=Jv5qIEuEVyEWrkciicvz4uAtIi5BWfZpTE3gYWiY4CIquqAUUv/nPPXnsjpR5xIqrU
+ hvK5VzsdmOyf1QVo+j/EBnB27TESinmKxWq0wk76r95cVNUrmqcuMEyY6VkTr4cMI0cC
+ awsUeVkpXSOZf4B4OXngRfTkmYZ36J4AHlmktnC/6wHM3VZv5eBikoCZuU117cjl84U8
+ ASKWGKeP82T0L8jCA8P45JSpp6l3ezKPyprCe21rwmGE5aRRybINFujOG523gGyYamkK
+ yAbPDixQGCOBbBmHXTEW55b0CWXUkngnqyVhAWV2SbGp8Zx64i45DRhpktP0+au/EQIr
+ naAg==
+X-Gm-Message-State: AOAM5300GH3Lf7QLy4hsEfaXjw5UJ9+D3jnywkKOkW6gC7tLGYhg+CrQ
+ vE13SDKqVtQdsR6bGpVz9293Ph3Bc32+CQ==
+X-Google-Smtp-Source: ABdhPJwZbPUBqSa/QiabbJ7GK8fO7ZUf4osnB1IOdVa5gYuFgoHTEPEY2iuwYENOdNQop876E6HdrQ==
+X-Received: by 2002:a63:4504:: with SMTP id s4mr1041248pga.184.1614309934481; 
+ Thu, 25 Feb 2021 19:25:34 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id p11sm7083709pjb.31.2021.02.25.19.25.28
+ by smtp.gmail.com with ESMTPSA id p11sm7083709pjb.31.2021.02.25.19.25.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Feb 2021 19:25:30 -0800 (PST)
+ Thu, 25 Feb 2021 19:25:34 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Hsiangkai Wang <kai.wang@sifive.com>,
- Greentime Hu <greentime.hu@sifive.com>,
- Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH v7 68/75] target/riscv: gdb: support vector registers for rv64
- & rv32
-Date: Fri, 26 Feb 2021 11:18:52 +0800
-Message-Id: <20210226031902.23656-69-frank.chang@sifive.com>
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v7 69/75] target/riscv: rvv-1.0: floating-point reciprocal
+ square-root estimate instruction
+Date: Fri, 26 Feb 2021 11:18:53 +0800
+Message-Id: <20210226031902.23656-70-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210226031902.23656-1-frank.chang@sifive.com>
 References: <20210226031902.23656-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1032.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,260 +80,261 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2021 03:25:35 -0000
+X-List-Received-Date: Fri, 26 Feb 2021 03:25:40 -0000
 
-From: Hsiangkai Wang <kai.wang@sifive.com>
+From: Frank Chang <frank.chang@sifive.com>
 
-Signed-off-by: Hsiangkai Wang <kai.wang@sifive.com>
-Signed-off-by: Greentime Hu <greentime.hu@sifive.com>
+Implement the floating-point reciprocal square-root estimate to 7 bits
+instruction.
+
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/cpu.c     |   2 +
- target/riscv/cpu.h     |   1 +
- target/riscv/gdbstub.c | 184 +++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 187 insertions(+)
+ target/riscv/helper.h                   |   4 +
+ target/riscv/insn32.decode              |   1 +
+ target/riscv/insn_trans/trans_rvv.c.inc |   1 +
+ target/riscv/vector_helper.c            | 183 ++++++++++++++++++++++++
+ 4 files changed, 189 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d95165b3acb..a110b6ead9b 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -575,6 +575,8 @@ static const char *riscv_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 78f330b949e..1be95ebd0aa 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -882,6 +882,10 @@ DEF_HELPER_5(vfsqrt_v_h, void, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_5(vfsqrt_v_w, void, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_5(vfsqrt_v_d, void, ptr, ptr, ptr, env, i32)
  
-     if (strcmp(xmlname, "riscv-csr.xml") == 0) {
-         return cpu->dyn_csr_xml;
-+    } else if (strcmp(xmlname, "riscv-vector.xml") == 0) {
-+        return cpu->dyn_vreg_xml;
-     }
- 
-     return NULL;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index ad2497229db..f324949beb1 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -275,6 +275,7 @@ struct RISCVCPU {
-     CPURISCVState env;
- 
-     char *dyn_csr_xml;
-+    char *dyn_vreg_xml;
- 
-     /* Configuration Settings */
-     struct {
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 5f96b7ea2a9..dd883612c77 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -20,6 +20,32 @@
- #include "exec/gdbstub.h"
- #include "cpu.h"
- 
-+struct TypeSize {
-+    const char *gdb_type;
-+    const char *id;
-+    int size;
-+    const char suffix;
-+};
++DEF_HELPER_5(vfrsqrt7_v_h, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_5(vfrsqrt7_v_w, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_5(vfrsqrt7_v_d, void, ptr, ptr, ptr, env, i32)
 +
-+static const struct TypeSize vec_lanes[] = {
-+    /* quads */
-+    { "uint128", "quads", 128, 'q' },
-+    /* 64 bit */
-+    { "uint64", "longs", 64, 'l' },
-+    /* 32 bit */
-+    { "uint32", "words", 32, 'w' },
-+    /* 16 bit */
-+    { "uint16", "shorts", 16, 's' },
-+    /*
-+     * TODO: currently there is no reliable way of telling
-+     * if the remote gdb actually understands ieee_half so
-+     * we don't expose it in the target description for now.
-+     * { "ieee_half", 16, 'h', 'f' },
-+     */
-+    /* bytes */
-+    { "uint8", "bytes", 8, 'b' },
-+};
-+
- int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-@@ -101,6 +127,96 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
-     return 0;
+ DEF_HELPER_6(vfmin_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vfmin_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vfmin_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index f670c1282d8..c1e896f6b84 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -535,6 +535,7 @@ vfwmsac_vf      111110 . ..... ..... 101 ..... 1010111 @r_vm
+ vfwnmsac_vv     111111 . ..... ..... 001 ..... 1010111 @r_vm
+ vfwnmsac_vf     111111 . ..... ..... 101 ..... 1010111 @r_vm
+ vfsqrt_v        010011 . ..... 00000 001 ..... 1010111 @r2_vm
++vfrsqrt7_v      010011 . ..... 00100 001 ..... 1010111 @r2_vm
+ vfmin_vv        000100 . ..... ..... 001 ..... 1010111 @r_vm
+ vfmin_vf        000100 . ..... ..... 101 ..... 1010111 @r_vm
+ vfmax_vv        000110 . ..... ..... 001 ..... 1010111 @r_vm
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 2a3a437168f..ca290469e23 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -2638,6 +2638,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)  \
  }
+ 
+ GEN_OPFV_TRANS(vfsqrt_v, opfv_check, RISCV_FRM_DYN)
++GEN_OPFV_TRANS(vfrsqrt7_v, opfv_check, RISCV_FRM_DYN)
+ 
+ /* Vector Floating-Point MIN/MAX Instructions */
+ GEN_OPFVV_TRANS(vfmin_vv, opfvv_check)
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index efa32565d9a..471b07f4388 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -18,6 +18,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/host-utils.h"
++#include "qemu/bitops.h"
+ #include "cpu.h"
+ #include "exec/memop.h"
+ #include "exec/exec-all.h"
+@@ -3638,6 +3639,188 @@ GEN_VEXT_V_ENV(vfsqrt_v_h, 2, 2)
+ GEN_VEXT_V_ENV(vfsqrt_v_w, 4, 4)
+ GEN_VEXT_V_ENV(vfsqrt_v_d, 8, 8)
  
 +/*
-+ * Convert register index number passed by GDB to the correspond
-+ * vector CSR number. Vector CSRs are defined after vector registers
-+ * in dynamic generated riscv-vector.xml, thus the starting register index
-+ * of vector CSRs is 32.
-+ * Return 0 if register index number is out of range.
++ * Vector Floating-Point Reciprocal Square-Root Estimate Instruction
++ *
++ * Adapted from riscv-v-spec recip.cc:
++ * https://github.com/riscv/riscv-v-spec/blob/master/recip.cc
 + */
-+static int riscv_gdb_vector_csrno(int num_regs)
++static uint64_t frsqrt7(uint64_t f, int exp_size, int frac_size)
 +{
-+    /*
-+     * The order of vector CSRs in the switch case
-+     * should match with the order defined in csr_ops[].
-+     */
-+    switch (num_regs) {
-+    case 32:
-+        return CSR_VSTART;
-+    case 33:
-+        return CSR_VXSAT;
-+    case 34:
-+        return CSR_VXRM;
-+    case 35:
-+        return CSR_VCSR;
-+    case 36:
-+        return CSR_VL;
-+    case 37:
-+        return CSR_VTYPE;
-+    case 38:
-+        return CSR_VLENB;
-+    default:
-+        /* Unknown register. */
-+        return 0;
-+    }
-+}
++    bool sign = extract64(f, frac_size + exp_size, 1);
++    uint64_t exp = extract64(f, frac_size, exp_size);
++    uint64_t frac = extract64(f, 0, frac_size);
 +
-+static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
-+{
-+    uint16_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-+    if (n < 32) {
-+        int i;
-+        int cnt = 0;
-+        for (i = 0; i < vlenb; i += 8) {
-+            cnt += gdb_get_reg64(buf,
-+                                 env->vreg[(n * vlenb + i) / 8]);
-+        }
-+        return cnt;
-+    }
-+
-+    int csrno = riscv_gdb_vector_csrno(n);
-+
-+    if (!csrno) {
-+        return 0;
-+    }
-+
-+    target_ulong val = 0;
-+    int result = riscv_csrrw_debug(env, csrno, &val, 0, 0);
-+
-+    if (result == 0) {
-+        return gdb_get_regl(buf, val);
-+    }
-+
-+    return 0;
-+}
-+
-+static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
-+{
-+    uint16_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-+    if (n < 32) {
-+        int i;
-+        for (i = 0; i < vlenb; i += 8) {
-+            env->vreg[(n * vlenb + i) / 8] = ldq_p(mem_buf + i);
-+        }
-+        return vlenb;
-+    }
-+
-+    int csrno = riscv_gdb_vector_csrno(n);
-+
-+    if (!csrno) {
-+        return 0;
-+    }
-+
-+    target_ulong val = ldtul_p(mem_buf);
-+    int result = riscv_csrrw_debug(env, csrno, NULL, val, -1);
-+
-+    if (result == 0) {
-+        return sizeof(target_ulong);
-+    }
-+
-+    return 0;
-+}
-+
- static int riscv_gdb_get_csr(CPURISCVState *env, GByteArray *buf, int n)
- {
-     if (n < CSR_TABLE_SIZE) {
-@@ -187,6 +303,68 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
-     return CSR_TABLE_SIZE;
- }
- 
-+static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    GString *s = g_string_new(NULL);
-+    g_autoptr(GString) ts = g_string_new("");
-+    int reg_width = cpu->cfg.vlen;
-+    int num_regs = 0;
-+    int i;
-+
-+    g_string_printf(s, "<?xml version=\"1.0\"?>");
-+    g_string_append_printf(s, "<!DOCTYPE target SYSTEM \"gdb-target.dtd\">");
-+    g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.vector\">");
-+
-+    /* First define types and totals in a whole VL */
-+    for (i = 0; i < ARRAY_SIZE(vec_lanes); i++) {
-+        int count = reg_width / vec_lanes[i].size;
-+        g_string_printf(ts, "%s", vec_lanes[i].id);
-+        g_string_append_printf(s,
-+                               "<vector id=\"%s\" type=\"%s\" count=\"%d\"/>",
-+                               ts->str, vec_lanes[i].gdb_type, count);
-+    }
-+
-+    /* Define unions */
-+    g_string_append_printf(s, "<union id=\"riscv_vector\">");
-+    for (i = 0; i < ARRAY_SIZE(vec_lanes); i++) {
-+        g_string_append_printf(s, "<field name=\"%c\" type=\"%s\"/>",
-+                               vec_lanes[i].suffix,
-+                               vec_lanes[i].id);
-+    }
-+    g_string_append(s, "</union>");
-+
-+    /* Define vector registers */
-+    for (i = 0; i < 32; i++) {
-+        g_string_append_printf(s,
-+                               "<reg name=\"v%d\" bitsize=\"%d\""
-+                               " regnum=\"%d\" group=\"vector\""
-+                               " type=\"riscv_vector\"/>",
-+                               i, reg_width, base_reg++);
-+        num_regs++;
-+    }
-+
-+    /* Define vector CSRs */
-+    const char *vector_csrs[7] = {
-+        "vstart", "vxsat", "vxrm", "vcsr",
-+        "vl", "vtype", "vlenb"
++    const uint8_t lookup_table[] = {
++        52, 51, 50, 48, 47, 46, 44, 43,
++        42, 41, 40, 39, 38, 36, 35, 34,
++        33, 32, 31, 30, 30, 29, 28, 27,
++        26, 25, 24, 23, 23, 22, 21, 20,
++        19, 19, 18, 17, 16, 16, 15, 14,
++        14, 13, 12, 12, 11, 10, 10, 9,
++        9, 8, 7, 7, 6, 6, 5, 4,
++        4, 3, 3, 2, 2, 1, 1, 0,
++        127, 125, 123, 121, 119, 118, 116, 114,
++        113, 111, 109, 108, 106, 105, 103, 102,
++        100, 99, 97, 96, 95, 93, 92, 91,
++        90, 88, 87, 86, 85, 84, 83, 82,
++        80, 79, 78, 77, 76, 75, 74, 73,
++        72, 71, 70, 70, 69, 68, 67, 66,
++        65, 64, 63, 63, 62, 61, 60, 59,
++        59, 58, 57, 56, 56, 55, 54, 53
 +    };
++    const int precision = 7;
 +
-+    for (i = 0; i < 7; i++) {
-+        g_string_append_printf(s,
-+                               "<reg name=\"%s\" bitsize=\"%d\""
-+                               " regnum=\"%d\" group=\"vector\""
-+                               " type=\"int\"/>",
-+                               vector_csrs[i], TARGET_LONG_BITS, base_reg++);
-+        num_regs++;
++    if (exp == 0 && frac != 0) { /* subnormal */
++        /* Normalize the subnormal. */
++        while (extract64(frac, frac_size - 1, 1) == 0) {
++            exp--;
++            frac <<= 1;
++        }
++
++        frac = (frac << 1) & MAKE_64BIT_MASK(0, frac_size);
 +    }
 +
-+    g_string_append_printf(s, "</feature>");
++    int idx = ((exp & 1) << (precision - 1)) |
++                (frac >> (frac_size - precision + 1));
++    uint64_t out_frac = (uint64_t)(lookup_table[idx]) <<
++                            (frac_size - precision);
++    uint64_t out_exp = (3 * MAKE_64BIT_MASK(0, exp_size - 1) + ~exp) / 2;
 +
-+    cpu->dyn_vreg_xml = g_string_free(s, false);
-+    return num_regs;
++    uint64_t val = 0;
++    val = deposit64(val, 0, frac_size, out_frac);
++    val = deposit64(val, frac_size, exp_size, out_exp);
++    val = deposit64(val, frac_size + exp_size, 1, sign);
++    return val;
 +}
 +
- void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-@@ -198,6 +376,12 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-         gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
-                                  36, "riscv-32bit-fpu.xml", 0);
-     }
-+    if (env->misa & RVV) {
-+        gdb_register_coprocessor(cs, riscv_gdb_get_vector, riscv_gdb_set_vector,
-+                                 ricsv_gen_dynamic_vector_xml(cs,
-+                                                              cs->gdb_num_regs),
-+                                 "riscv-vector.xml", 0);
++static float16 frsqrt7_h(float16 f, float_status *s)
++{
++    int exp_size = 5, frac_size = 10;
++    bool sign = float16_is_neg(f);
++
++    /*
++     * frsqrt7(sNaN) = canonical NaN
++     * frsqrt7(-inf) = canonical NaN
++     * frsqrt7(-normal) = canonical NaN
++     * frsqrt7(-subnormal) = canonical NaN
++     */
++    if (float16_is_signaling_nan(f, s) ||
++            (float16_is_infinity(f) && sign) ||
++            (float16_is_normal(f) && sign) ||
++            (float16_is_zero_or_denormal(f) && !float16_is_zero(f) && sign)) {
++        s->float_exception_flags |= float_flag_invalid;
++        return float16_default_nan(s);
 +    }
- #if defined(TARGET_RISCV32)
-     gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
-                              1, "riscv-32bit-virtual.xml", 0);
++
++    /* frsqrt7(qNaN) = canonical NaN */
++    if (float16_is_quiet_nan(f, s)) {
++        return float16_default_nan(s);
++    }
++
++    /* frsqrt7(+-0) = +-inf */
++    if (float16_is_zero(f)) {
++        s->float_exception_flags |= float_flag_divbyzero;
++        return float16_set_sign(float16_infinity, sign);
++    }
++
++    /* frsqrt7(+inf) = +0 */
++    if (float16_is_infinity(f) && !sign) {
++        return float16_set_sign(float16_zero, sign);
++    }
++
++    /* +normal, +subnormal */
++    uint64_t val = frsqrt7(f, exp_size, frac_size);
++    return make_float16(val);
++}
++
++static float32 frsqrt7_s(float32 f, float_status *s)
++{
++    int exp_size = 8, frac_size = 23;
++    bool sign = float32_is_neg(f);
++
++    /*
++     * frsqrt7(sNaN) = canonical NaN
++     * frsqrt7(-inf) = canonical NaN
++     * frsqrt7(-normal) = canonical NaN
++     * frsqrt7(-subnormal) = canonical NaN
++     */
++    if (float32_is_signaling_nan(f, s) ||
++            (float32_is_infinity(f) && sign) ||
++            (float32_is_normal(f) && sign) ||
++            (float32_is_zero_or_denormal(f) && !float32_is_zero(f) && sign)) {
++        s->float_exception_flags |= float_flag_invalid;
++        return float32_default_nan(s);
++    }
++
++    /* frsqrt7(qNaN) = canonical NaN */
++    if (float32_is_quiet_nan(f, s)) {
++        return float32_default_nan(s);
++    }
++
++    /* frsqrt7(+-0) = +-inf */
++    if (float32_is_zero(f)) {
++        s->float_exception_flags |= float_flag_divbyzero;
++        return float32_set_sign(float32_infinity, sign);
++    }
++
++    /* frsqrt7(+inf) = +0 */
++    if (float32_is_infinity(f) && !sign) {
++        return float32_set_sign(float32_zero, sign);
++    }
++
++    /* +normal, +subnormal */
++    uint64_t val = frsqrt7(f, exp_size, frac_size);
++    return make_float32(val);
++}
++
++static float64 frsqrt7_d(float64 f, float_status *s)
++{
++    int exp_size = 11, frac_size = 52;
++    bool sign = float64_is_neg(f);
++
++    /*
++     * frsqrt7(sNaN) = canonical NaN
++     * frsqrt7(-inf) = canonical NaN
++     * frsqrt7(-normal) = canonical NaN
++     * frsqrt7(-subnormal) = canonical NaN
++     */
++    if (float64_is_signaling_nan(f, s) ||
++            (float64_is_infinity(f) && sign) ||
++            (float64_is_normal(f) && sign) ||
++            (float64_is_zero_or_denormal(f) && !float64_is_zero(f) && sign)) {
++        s->float_exception_flags |= float_flag_invalid;
++        return float64_default_nan(s);
++    }
++
++    /* frsqrt7(qNaN) = canonical NaN */
++    if (float64_is_quiet_nan(f, s)) {
++        return float64_default_nan(s);
++    }
++
++    /* frsqrt7(+-0) = +-inf */
++    if (float64_is_zero(f)) {
++        s->float_exception_flags |= float_flag_divbyzero;
++        return float64_set_sign(float64_infinity, sign);
++    }
++
++    /* frsqrt7(+inf) = +0 */
++    if (float64_is_infinity(f) && !sign) {
++        return float64_set_sign(float64_zero, sign);
++    }
++
++    /* +normal, +subnormal */
++    uint64_t val = frsqrt7(f, exp_size, frac_size);
++    return make_float64(val);
++}
++
++RVVCALL(OPFVV1, vfrsqrt7_v_h, OP_UU_H, H2, H2, frsqrt7_h)
++RVVCALL(OPFVV1, vfrsqrt7_v_w, OP_UU_W, H4, H4, frsqrt7_s)
++RVVCALL(OPFVV1, vfrsqrt7_v_d, OP_UU_D, H8, H8, frsqrt7_d)
++GEN_VEXT_V_ENV(vfrsqrt7_v_h, 2, 2)
++GEN_VEXT_V_ENV(vfrsqrt7_v_w, 4, 4)
++GEN_VEXT_V_ENV(vfrsqrt7_v_d, 8, 8)
++
+ /* Vector Floating-Point MIN/MAX Instructions */
+ RVVCALL(OPFVV2, vfmin_vv_h, OP_UUU_H, H2, H2, H2, float16_minnum_noprop)
+ RVVCALL(OPFVV2, vfmin_vv_w, OP_UUU_W, H4, H4, H4, float32_minnum_noprop)
 -- 
 2.17.1
 
