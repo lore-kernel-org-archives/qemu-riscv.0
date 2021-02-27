@@ -1,18 +1,18 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lG50S-000231-RI
-	for mharc-qemu-riscv@gnu.org; Sat, 27 Feb 2021 14:12:01 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43780)
+	id 1lG50W-00023W-3K
+	for mharc-qemu-riscv@gnu.org; Sat, 27 Feb 2021 14:12:04 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44324)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
- id 1lG4fK-0001Uw-0v; Sat, 27 Feb 2021 13:50:11 -0500
-Received: from mx2.suse.de ([195.135.220.15]:46994)
+ id 1lG4hs-0003PF-5J; Sat, 27 Feb 2021 13:52:48 -0500
+Received: from mx2.suse.de ([195.135.220.15]:47374)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
- id 1lG4fE-0007Cs-MT; Sat, 27 Feb 2021 13:50:09 -0500
+ id 1lG4hm-0008T1-3g; Sat, 27 Feb 2021 13:52:47 -0500
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 539EEAC6F;
- Sat, 27 Feb 2021 18:50:00 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 54D85AC24;
+ Sat, 27 Feb 2021 18:52:39 +0000 (UTC)
 Subject: Re: [PATCH 07/16] cpu: Introduce CPUSystemOperations structure
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
  qemu-devel@nongnu.org
@@ -42,8 +42,8 @@ Cc: qemu-arm@nongnu.org, Sarah Harris <S.E.Harris@kent.ac.uk>,
 References: <20210226163227.4097950-1-f4bug@amsat.org>
  <20210226163227.4097950-8-f4bug@amsat.org>
 From: Claudio Fontana <cfontana@suse.de>
-Message-ID: <52e23664-534b-70b3-fad0-54a6b964963f@suse.de>
-Date: Sat, 27 Feb 2021 19:49:53 +0100
+Message-ID: <ea91a25d-25f9-e81e-d199-f754ec26679e@suse.de>
+Date: Sat, 27 Feb 2021 19:52:37 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
@@ -72,7 +72,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Feb 2021 18:50:16 -0000
+X-List-Received-Date: Sat, 27 Feb 2021 18:52:51 -0000
 
 On 2/26/21 5:32 PM, Philippe Mathieu-Daudé wrote:
 > Introduce a structure to hold handler specific to sysemu.
@@ -94,40 +94,6 @@ On 2/26/21 5:32 PM, Philippe Mathieu-Daudé wrote:
 > + * struct CPUSystemOperations: System operations specific to a CPU class
 > + */
 > +typedef struct CPUSystemOperations {
-
-I'd suggest for consistency and brevity:
-
-SysemuCPUOps .
-
-Let me tell you my full train of thought, just so you understand exactly where I am coming from:
-
-in my view all this camelcase is nonsense, as is typedef. They just cause problems and solve none.
-
-However, considering the existing QEMU conventions, the existence of QOM,
-for consistency with the rest of the QEMU code base, especially when looking at stuff around CPUClass,
-the convention is to use this camel case stuff for objects, so in lieu of
-
-tcg_cpu_ops
-
-I went with TCGCPUOps
-
-(TCG is the standard way to call tcg when case is an option, same for CPU, then Ops).
-
-Here for consistency I would say:
-
-Sysemu (as we are standardizing on calling system emulation/virtualization "sysemu")
-+CPUOps as before.
-
-=
-
-SysemuCPUOps.
-
-What do you think?
-
-Ciao,
-
-Claudio
-
 > +} CPUSystemOperations;
 > +
 >  /**
@@ -139,6 +105,15 @@ Claudio
 >  
 > +    /* when system emulation is not available, this pointer is NULL */
 > +    struct CPUSystemOperations system_ops;
+
+and here again for future code base consistency I would say "sysemu_ops".
+
+So we will focus in the future on the "sysemu" keyword for system emulation (in directories, comments, macros etc).
+
+Ciao,
+
+Claudio
+
 > +
 >      /* when TCG is not available, this pointer is NULL */
 >      struct TCGCPUOps *tcg_ops;
