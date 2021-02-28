@@ -1,66 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lG50W-00023W-3K
-	for mharc-qemu-riscv@gnu.org; Sat, 27 Feb 2021 14:12:04 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44324)
+	id 1lGEQG-0006pE-Tu
+	for mharc-qemu-riscv@gnu.org; Sun, 28 Feb 2021 00:15:16 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43494)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
- id 1lG4hs-0003PF-5J; Sat, 27 Feb 2021 13:52:48 -0500
-Received: from mx2.suse.de ([195.135.220.15]:47374)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
- id 1lG4hm-0008T1-3g; Sat, 27 Feb 2021 13:52:47 -0500
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 54D85AC24;
- Sat, 27 Feb 2021 18:52:39 +0000 (UTC)
-Subject: Re: [PATCH 07/16] cpu: Introduce CPUSystemOperations structure
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, Sarah Harris <S.E.Harris@kent.ac.uk>,
- Paolo Bonzini <pbonzini@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, qemu-s390x@nongnu.org,
- Michael Rolnik <mrolnik@gmail.com>, qemu-ppc@nongnu.org,
- Marek Vasut <marex@denx.de>, Eduardo Habkost <ehabkost@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, Michael Walle
- <michael@walle.cc>, Guan Xuetao <gxt@mprc.pku.edu.cn>,
- Laurent Vivier <laurent@vivier.eu>, Anthony Green <green@moxielogic.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, David Hildenbrand <david@redhat.com>,
- qemu-riscv@nongnu.org, David Gibson <david@gibson.dropbear.id.au>,
- Peter Maydell <peter.maydell@linaro.org>, Cornelia Huck <cohuck@redhat.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Chris Wulff <crwulff@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, Thomas Huth <thuth@redhat.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Greg Kurz <groug@kaod.org>,
- Stafford Horne <shorne@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-References: <20210226163227.4097950-1-f4bug@amsat.org>
- <20210226163227.4097950-8-f4bug@amsat.org>
-From: Claudio Fontana <cfontana@suse.de>
-Message-ID: <ea91a25d-25f9-e81e-d199-f754ec26679e@suse.de>
-Date: Sat, 27 Feb 2021 19:52:37 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lGEQE-0006n9-Sz; Sun, 28 Feb 2021 00:15:14 -0500
+Received: from mail-yb1-xb2b.google.com ([2607:f8b0:4864:20::b2b]:44094)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lGEQC-0001Vi-PW; Sun, 28 Feb 2021 00:15:14 -0500
+Received: by mail-yb1-xb2b.google.com with SMTP id f4so13388864ybk.11;
+ Sat, 27 Feb 2021 21:15:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=M+nbYEPDmROvplud8P18wUkNibKsWIoTz9K9t2bcUmY=;
+ b=uOK8EondsvdZF263LFgA/azb8O6q1JsdFT+9K27zpJCRAqkr+cBrWGKRR5hDQr/On7
+ ZxPlvaenw0Zlvgi8wDM7aNniM25oqx2WpVctcE/6rZRPeULWbHrVghn7zls8jf85Y3SL
+ VNQv7i7P49yquMOPuA4EpRyPZncSLq1N1rJHQS5rjFc4X15xRI8R6y4q/TAOb3+DcS8k
+ t2dLS8PWphZVmGjMbliP6URLvbwO3upabFX2/OP4fknyDX/ThUml7wjgr8uhQko3GtAL
+ zpnsjIB2Hzweh96Md9uatrzydYsP8kiJYNZQee70p79/zme25bcMm0N7Ex4ldu+4YONq
+ N2xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=M+nbYEPDmROvplud8P18wUkNibKsWIoTz9K9t2bcUmY=;
+ b=OFCiYJmkw2GCTzpOa72cgGSo2cvoxVbcynLvE1dKuNAvl1RtCCGNigbeCF4CV17FpJ
+ kcvMK6jhSGziO6P+g9PXmWZtz0W1wRbZ0WnSJXIyQAmHkl2RzzppNlrZz4cSrPTKd/QI
+ k2TfHGIOUU4VPSAbrZ09LoWzMAV9mBL88TvHZyXne1DeV1qxDtpuvkr6Tluf+6tMlKfe
+ lZEhi9QGvlspq0wxXL3C8u3c7FAxFRJ/S+uPh4okgvAEi8j/M3XYOCBx6V4TkpetRwxF
+ 5UmODNI72Bq2JSbDvAYzKI038LJlKbIKpdBJXd1rt3uUkkhc+Aa9ggyPBg2q4+pTIbhN
+ P6dg==
+X-Gm-Message-State: AOAM532RaYGXX6q1MfBJGQ86N2oAb2w2NHEpdE49t84zlVxCKW8ZwfwR
+ snNSQbPpvH+peeMusL8b91hu5w4PcsCwXXEWNas=
+X-Google-Smtp-Source: ABdhPJx9mwGvGgfk9xlG/BKBwYrW1Iip2TSjudX4j+zjK0prlmv/hVcIqT8jPJYRfpZSJXGpxu7jM702eofocTgPJAU=
+X-Received: by 2002:a25:c090:: with SMTP id
+ c138mr14212520ybf.314.1614489311396; 
+ Sat, 27 Feb 2021 21:15:11 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20210226163227.4097950-8-f4bug@amsat.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=195.135.220.15; envelope-from=cfontana@suse.de;
- helo=mx2.suse.de
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.35,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20210220144807.819-1-bmeng.cn@gmail.com>
+In-Reply-To: <20210220144807.819-1-bmeng.cn@gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sun, 28 Feb 2021 13:15:00 +0800
+Message-ID: <CAEUhbmX2+CtzQ53JbN-Vn9mVX9tipTND3xGJzk317mTZEfayJA@mail.gmail.com>
+Subject: Re: [PATCH v3 0/4] hw/riscv: Clean-ups and map high mmio for PCIe of
+ 'virt' machine
+To: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Cc: Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 27 Feb 2021 14:11:59 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,52 +71,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Feb 2021 18:52:51 -0000
+X-List-Received-Date: Sun, 28 Feb 2021 05:15:15 -0000
 
-On 2/26/21 5:32 PM, Philippe Mathieu-Daudé wrote:
-> Introduce a structure to hold handler specific to sysemu.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-> ---
->  include/hw/core/cpu.h | 9 +++++++++
->  1 file changed, 9 insertions(+)
-> 
-> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> index b12028c3c03..ab89235cb45 100644
-> --- a/include/hw/core/cpu.h
-> +++ b/include/hw/core/cpu.h
-> @@ -80,6 +80,12 @@ struct TCGCPUOps;
->  /* see accel-cpu.h */
->  struct AccelCPUClass;
->  
-> +/*
-> + * struct CPUSystemOperations: System operations specific to a CPU class
-> + */
-> +typedef struct CPUSystemOperations {
-> +} CPUSystemOperations;
-> +
->  /**
->   * CPUClass:
->   * @class_by_name: Callback to map -cpu command line model name to an
-> @@ -190,6 +196,9 @@ struct CPUClass {
->      bool gdb_stop_before_watchpoint;
->      struct AccelCPUClass *accel_cpu;
->  
-> +    /* when system emulation is not available, this pointer is NULL */
-> +    struct CPUSystemOperations system_ops;
+On Sat, Feb 20, 2021 at 10:48 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> This series does the following clean-ups:
+> - Drop 'struct MemmapEntry'
+> - virt: Drop the 'link_up' parameter of gpex_pcie_init()
+>
+> It also adds the following small enhancement to 'virt' machine:
+> - Limit RAM size in a 32-bit system
+> - Map high mmio for PCIe
+>
+> Changes in v3:
+> - Fix the typo (limit) in the commit message and codes
+>
 
-and here again for future code base consistency I would say "sysemu_ops".
-
-So we will focus in the future on the "sysemu" keyword for system emulation (in directories, comments, macros etc).
-
-Ciao,
-
-Claudio
-
-> +
->      /* when TCG is not available, this pointer is NULL */
->      struct TCGCPUOps *tcg_ops;
->  };
-> 
-
+Ping?
 
