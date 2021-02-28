@@ -1,73 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lGK4h-0003bB-Q8
-	for mharc-qemu-riscv@gnu.org; Sun, 28 Feb 2021 06:17:23 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33638)
+	id 1lGK5a-0004UV-Mc
+	for mharc-qemu-riscv@gnu.org; Sun, 28 Feb 2021 06:18:18 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33746)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ashe@kivikakk.ee>)
- id 1lGK4f-0003Vt-EM; Sun, 28 Feb 2021 06:17:21 -0500
-Received: from out3-smtp.messagingengine.com ([66.111.4.27]:42135)
+ id 1lGK5Y-0004S9-Q1; Sun, 28 Feb 2021 06:18:16 -0500
+Received: from out3-smtp.messagingengine.com ([66.111.4.27]:37615)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ashe@kivikakk.ee>)
- id 1lGK4a-0000ZD-4h; Sun, 28 Feb 2021 06:17:21 -0500
+ id 1lGK5U-0000wA-UM; Sun, 28 Feb 2021 06:18:16 -0500
 Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.nyi.internal (Postfix) with ESMTP id 69BC45C0048;
- Sun, 28 Feb 2021 06:17:15 -0500 (EST)
+ by mailout.nyi.internal (Postfix) with ESMTP id 712FB5C00A6;
+ Sun, 28 Feb 2021 06:18:11 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Sun, 28 Feb 2021 06:17:15 -0500
+ by compute5.internal (MEProxy); Sun, 28 Feb 2021 06:18:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kivikakk.ee; h=
- from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding; s=fm1; bh=vgaqb+DYeGGMH
- RBgK96eRzJA9+5hGlbzZeIyl8s+Dho=; b=MnzulEBxDSJQZXcvxyq6hLXJ71nxx
- uPWFfgrzOBto828uzJQNAi/Z31TSSioTWvy3xRJjAd++ler3SZfFDr+3LM/RlzXT
- KQuLX3WW15PZmqlTUIHyfkdWV2wOG8CVXnqoaEX339MzJwxcze0Qq89dd8J3+A3E
- ENH6NUPEqzg70Av8CRZy6LPX3x2mBH/IzMsQpNez5Cgy9r/QDQGeVpcxXHqaln8D
- VewTxi2ojIvmpzwFshPxCLU95Afnifv9mpuAfKjgedPt9wPLO3zzu1WYPC0DRjbE
- YQhlF6u765dgQK1flhsOUT5DfEO++DZgt6tgT0r+2MAw5cGDdbpkZUo6A==
+ date:from:to:cc:subject:message-id:references:mime-version
+ :content-type:in-reply-to; s=fm1; bh=2LAfAFEnShA9COqwpQVLGNoxMdB
+ DjcGMIC6YMibWXyI=; b=K4mfPaSFyO0fQVFMQh0bWGaaT/voiJ68ofi+Td6BVk+
+ 3go6yF0ulbNOuAMY+UvkM2kmntBjvSr88+BdgEI8eNzdpa1fEfZXLVRDLR86PgSo
+ hMj7WH+mLq1IJyxuiWVBoCFsf+HHyLtqyhRRQ6cOUWz6UuumfsOMSfx5/hJBwaJz
+ qBEmA28Ir4dsZarAe5leTzVDAYwVGMzp6M3qQoaxh9SX0BMKZh0grRCvBe+3eqq0
+ g+SsJwehW9BVzPLfWw/gPw/QjiYLdRPWwdqCUpmaaioORtTNCTcL3v1zQveau+DX
+ w90iOT7IygUHePLwRI1cp+C9SHtRqv3hz1Eq/Wg59cA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-transfer-encoding:date:from
- :in-reply-to:message-id:mime-version:references:subject:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; bh=vgaqb+DYeGGMHRBgK96eRzJA9+5hGlbzZeIyl8s+Dho=; b=I88oPINH
- 9D1RcANL9SYdYmPhc30Roz0tDcTvTfafhfL+kEjc2raNQ72EpC3YszLdLkLixFXH
- 6gQI8R6qXJbctD13zBtBAlwwESsjGWRjAzttxQoZFClVDnrdKbZV+t88hoWXXX+s
- Q96WpyI+U/pmZYVS+7JEMp3t56xTk3nAgoB8eF7oFZr0I5huXEHjucXl/Rss1UzT
- YirLzKsCEEP73zvPI1P1euowl2RY265c43OhV6Ud8hP9zQQRiEnfvOaIDwIAm9z6
- yur//WC4ArlbWk6x+Bdkr6Ork7GRWJLdbHZloo/9fUYVyYrhTx398Dz1G9nNyy6d
- H/vl4W50aHLMuA==
-X-ME-Sender: <xms:u3s7YN_mIIOWFiXgBrV5AYRR8AHL_yHpT8DyoMkeFntceyduIXAS6Q>
- <xme:u3s7YBvD-ONB_2LTZcNCMA4i-Ae29XN3nDH0ds1Lf0KWe483LdYM46FtX64RU297v
- MQUYc368VrSGERj4oA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrleeigddvjecutefuodetggdotefrodftvf
+ messagingengine.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=2LAfAF
+ EnShA9COqwpQVLGNoxMdBDjcGMIC6YMibWXyI=; b=CB7OzrgjUOCA+6tXlujXiq
+ h4UVTBsZxFM7Gs+aUZksyzPRF+u2hTBfp86lWsC3XokngOzneQcBR+4y00r7OQ98
+ L7nRgI7YsvEIsMlo1j1DvBzIKZe2UD3M30HFopB46LR8rIY5oBzMzhQKbUo5IebU
+ J4MOUwJimuhrcwMcTuHRe0R86ZqN6ZYY6c9TLODEuj9zxRTpZBVy3oeQOZqglSbV
+ +SCwzafCeUi4lmHfJNUu5NMI2Qhsx6sjT4SGhHdB2bZ1pmwt64q7dwUTyn2cBNXA
+ MFYKU0D7ReVjxF0L++MgDMGxU6CeK8FYLXyNwQznef13lZpZT6Rg2Ub563o0bAqw
+ ==
+X-ME-Sender: <xms:83s7YFn6clVUlXa5WhLCwYJ1kOgWm63_gW_WsgVaMkI9sqbxAGcuWw>
+ <xme:83s7YA2q4u6xJwbgMFD2ozm8H3RwLXHiWjtVaTW47ZmVUNyAqPC1dqfTaHTPsAg1s
+ qgrvqdU1EKxMGzvH68>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrleeigddvkecutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefhvffufffkofgjfhgggfestdekredtredttdenucfhrhhomheptehshhgvrhgr
+ fjughrpeffhffvuffkfhggtggujgesthdtredttddtvdenucfhrhhomheptehshhgvrhgr
  hhcuvehonhhnohhruceorghshhgvsehkihhvihhkrghkkhdrvggvqeenucggtffrrghtth
- gvrhhnpeduffekffefveetfeefjeegudeghffgteeiteeltddtkedvgeffudeifeegkeet
- feenucfkphepudduledrudekrdefuddrudefheenucevlhhushhtvghrufhiiigvpedune
- curfgrrhgrmhepmhgrihhlfhhrohhmpegrshhhvgeskhhivhhikhgrkhhkrdgvvg
-X-ME-Proxy: <xmx:u3s7YLCsec4HkqF09HxCiiWtPbwW6Iy_LohsVFfDha9dlyQIa2hp5g>
- <xmx:u3s7YBcTGFJE84138O8h2y-wwM19DNXBnmOWkebmhu8xRBv3b7M7YQ>
- <xmx:u3s7YCOP3lxt6ZK0b_vVn-IaneXemtKOKPbK3VisZtie2YP8CreNTw>
- <xmx:u3s7YJ3IvXThFL32i8w5CmV6enHeIkKuEMHXlbXIepU7reiqrdkN3Q>
-Received: from ravenlin.tomodachi
- (119-18-31-135.77121f.mel.static.aussiebb.net [119.18.31.135])
- by mail.messagingengine.com (Postfix) with ESMTPA id CC9471080054;
- Sun, 28 Feb 2021 06:17:12 -0500 (EST)
+ gvrhhnpeelgeetfeelkeetfeffjeffudeiveejteeiiedvjeeggfeijeetfeekveelvefh
+ jeenucfkphepudefrdejfedrvddtiedriedunecuvehluhhsthgvrhfuihiivgeptdenuc
+ frrghrrghmpehmrghilhhfrhhomheprghshhgvsehkihhvihhkrghkkhdrvggv
+X-ME-Proxy: <xmx:83s7YLptplyK7lBRG1AzZXQ4P78z12vy3oRlbKT5Q446p5fwLJii-Q>
+ <xmx:83s7YFlAzbFogwp_yZl0dNlWYAZ_bYWlhaUXTKhli7si3echndxXXA>
+ <xmx:83s7YD0ghNh8XlnBVaLw2AMMffFFeIqHcbmHIVqG1FcputDCzV_3lg>
+ <xmx:83s7YOSPtH24i5E4MOsUQ97uxJOnRoprhfSRwTWrcixlUPMZcmqTEQ>
+Received: from talia.n4wrvuuuhszuhem3na2pm5saea.px.internal.cloudapp.net
+ (talia.hrzn.ee [13.73.206.61])
+ by mail.messagingengine.com (Postfix) with ESMTPA id 0E4F21080054;
+ Sun, 28 Feb 2021 06:18:08 -0500 (EST)
+Date: Sun, 28 Feb 2021 11:18:06 +0000
 From: Asherah Connor <ashe@kivikakk.ee>
-To: qemu-devel@nongnu.org
-Cc: Bin Meng <bmeng.cn@gmail.com>, Asherah Connor <ashe@kivikakk.ee>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-riscv@nongnu.org
-Subject: [PATCH v3 2/2] hw/riscv: allow ramfb on virt
-Date: Sun, 28 Feb 2021 22:16:57 +1100
-Message-Id: <20210228111657.23240-3-ashe@kivikakk.ee>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20210228111657.23240-1-ashe@kivikakk.ee>
-References: <20210228111657.23240-1-ashe@kivikakk.ee>
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v2 1/2] hw/riscv: Add fw_cfg support to virt
+Message-ID: <20210228111806.s6pyxk3iyhvfatzh@talia.n4wrvuuuhszuhem3na2pm5saea.px.internal.cloudapp.net>
+References: <20210226035447.1252-1-ashe@kivikakk.ee>
+ <20210226035447.1252-2-ashe@kivikakk.ee>
+ <CAEUhbmWBPGNQ0J9P3OzV60BW23YCatbU9PZ0whs2ut4bXLPU4A@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAEUhbmWBPGNQ0J9P3OzV60BW23YCatbU9PZ0whs2ut4bXLPU4A@mail.gmail.com>
 Received-SPF: pass client-ip=66.111.4.27; envelope-from=ashe@kivikakk.ee;
  helo=out3-smtp.messagingengine.com
 X-Spam_score_int: -27
@@ -89,45 +92,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Feb 2021 11:17:21 -0000
+X-List-Received-Date: Sun, 28 Feb 2021 11:18:17 -0000
 
-Allow ramfb on virt.  This lets `-device ramfb' work.
+Hi Bin,
 
-Signed-off-by: Asherah Connor <ashe@kivikakk.ee>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Thanks very much for your review.
 
----
+On 21/02/28 02:02:p, Bin Meng wrote:
+> I guess this is put here because riscv_load_fdt() is trying to touch
+> the device tree, and creating fw_cfg has to be done before that?
+> Maybe a comment is needed to prevent whoever later wanted to move the
+> codes around?
 
-(no changes since v2)
+Done!
 
-Changes in v2:
-* Add ramfb as allowed on riscv virt machine class.
+> > -    VIRT_PCIE_ECAM
+> > +    VIRT_PCIE_ECAM,
+> > +    VIRT_FW_CFG
+> 
+> nits: insert this before VIRT_FLASH
 
- hw/riscv/virt.c | 3 +++
- 1 file changed, 3 insertions(+)
+Done.  I've included your Reviewed-by: on the unmodified commit in the
+series; I hope this is the correct thing to do.
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 82eff42c37..700b481fa2 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -42,6 +42,7 @@
- #include "sysemu/sysemu.h"
- #include "hw/pci/pci.h"
- #include "hw/pci-host/gpex.h"
-+#include "hw/display/ramfb.h"
- 
- static const struct MemmapEntry {
-     hwaddr base;
-@@ -743,6 +744,8 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
-     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
-     mc->numa_mem_supported = true;
-+
-+    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
- }
- 
- static const TypeInfo virt_machine_typeinfo = {
--- 
-2.20.1
+Best,
 
+Asherah
 
