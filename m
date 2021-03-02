@@ -1,48 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lH2G9-00026U-Gi
-	for mharc-qemu-riscv@gnu.org; Tue, 02 Mar 2021 05:28:09 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54952)
+	id 1lH2GE-0002IL-3x
+	for mharc-qemu-riscv@gnu.org; Tue, 02 Mar 2021 05:28:14 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54998)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lH2G6-0001x7-2x; Tue, 02 Mar 2021 05:28:06 -0500
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532]:40860)
+ id 1lH2GC-0002FR-VH; Tue, 02 Mar 2021 05:28:13 -0500
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533]:39566)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lH2G4-0008P9-Hf; Tue, 02 Mar 2021 05:28:05 -0500
-Received: by mail-ed1-x532.google.com with SMTP id w21so24514430edc.7;
- Tue, 02 Mar 2021 02:28:02 -0800 (PST)
+ id 1lH2GB-0008Tq-GZ; Tue, 02 Mar 2021 05:28:12 -0500
+Received: by mail-ed1-x533.google.com with SMTP id h10so24442467edl.6;
+ Tue, 02 Mar 2021 02:28:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=DgLtxhW6TCh0Vt3N87A01jn3z88UQCjsPYLiOsnHu/I=;
- b=YlynJAlXKis3xlvlp8b6xXHhq0ZpkGKKUsa//dsaBGpYIxs1ee/4OjZMCRqF7puPiO
- MAwS7tiamXTZgyTqqn62PHPhe+SAStlPIrlUQ8L9EEeObQf+c3mthlsnxKdD3ndP5JbT
- P9s0lyYCSH7V43/m4zpPv9w/CPbWrmcgyuxJk3cNlUoaj5QarlqBGD9FWTk2PgLCjFI4
- wcMnz4FQgr8jldgJckscDY7lK4QlWVWWR0eVlEdNgt4xXJHHVjPDXaj/F5EfwZ4b+KYk
- MrgHJS5hkpgMscFTsK3yejPKqySFuAIca00epUiNV/nilYnhDlsw6jt7rA/Q02j+4UNh
- jPZQ==
+ bh=pjMzSGB3VrIz5KxFOb+6NNQW9N2HU550cTaWwJDZ/8A=;
+ b=G5cW5AURekQmkyrJ6xeJCQv3edRRJ8ZowZ2/mHrshd3o/HOnTy8r0r1Wkrd93i0mF+
+ mtmII75SZLx6cturdLpzSNbUx8PdoKT9uFWuDmfad1KxrZQI/LWFwv2TPlpn9YPCweFW
+ 8IKjAQKz+PUtSpW56WCBYuIjNm76Gm43hEVc10r4j4Ah40F8Bf2xfMvqnX9meZ02ZnTN
+ 6q6cem4/2iK5QTzWNuKHcpzkSq5CFfAG24luNZ+kj+BeIrcLKzbi86cmK/hfLEvTHWhc
+ PkdROXLdXdue86d7PetG3j2V0RlsS0/FmKH0fhgHn6b2bQGdyDw3eQcuA7KXp8y3DnDH
+ 6mFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=DgLtxhW6TCh0Vt3N87A01jn3z88UQCjsPYLiOsnHu/I=;
- b=UGLKsqKgfS2R8wvcCqm62B4esHuPfYIPlZ1N9pIvd1OZBLzwyuD+rebqNvt+pYOKBs
- 2VifayVVYFptfehbrBIwWmSchhiaCk0kESEb8WHFLoO13wdiKeZexWIBiUCdgjzChpG8
- jsbeFniOO5z7n/Ar6XOMLzfnU765SQYZOsLQYp7xeyv6lkaaL3wzE9J2wbTMlJLu+quZ
- FN5W6FLiSA06mEgUmaaliUMkE43TSU90yOefg4dk3oxZThCeyrp/IxJoVlgkb9Romnyg
- 1ymVJFFrBjfE354qh3eAAdp4IQeUVOUuY7rAG0e2mpWc1CqoIT7Npum9U2jX+5ZyYx5q
- PdCg==
-X-Gm-Message-State: AOAM530y05s6XZu5LnTQWsiGc2QhD3CIj4z3bqarmkSE2+bJkYnmG+HX
- AHcPttmlK0njBM9FA3oLziQwwmt8Qw4=
-X-Google-Smtp-Source: ABdhPJxtBe1JyuD647B2YHW3dOzrYqzhDwPtmH10I8kjKvgq6yC2fTZ+sviIRfIIHi1N2BTa1Atj0Q==
-X-Received: by 2002:a05:6402:1d39:: with SMTP id
- dh25mr18074868edb.282.1614680881533; 
- Tue, 02 Mar 2021 02:28:01 -0800 (PST)
+ bh=pjMzSGB3VrIz5KxFOb+6NNQW9N2HU550cTaWwJDZ/8A=;
+ b=m+fYmg0ua7LU0Kr82KXhBwsRM+k+J8GKnjtKYKJMlC2SZqxuJXWBdXOmo/FTH6qVfv
+ 7QsZ+X0z6bD3mWD4Wt9DOy2pg5fQPSDHcJxv6qVu5euraaVndxciKpzBE/kHYldyj2aS
+ C1QZGJb6GBtGp/fFRsupb6+BihmbXsAiXI0gtLLgTTWbTp0gzmK+0QBKfxUH1V9utkdA
+ givlJE7CO/NGFH5iYPhn0BMOOytyZR53XEfG8xfoJDLWnmVB5c4l52If9L+tfYzUAkFu
+ detveRDVkuPAdOFeYZUd50ZBAxfvZ6OVtGgUtoWEY4Y3vWYCAhGx3NzZIRkEsucGgQLZ
+ 0P3g==
+X-Gm-Message-State: AOAM531OHHM4TVQVTurirQPlsjWBnjvQ8Dg06gX+V/0liMDvRBkLgh9/
+ jv5qsU0iRp3s6nrOgcxRCjYbvN6VaZ4=
+X-Google-Smtp-Source: ABdhPJwrIthzky9aSjMOj2l7zu1IQyoGsU4Myc6vHwfgeJPx5pGxTKIGOWsBqqphOUFcNXqMeKFGDA==
+X-Received: by 2002:aa7:c9c9:: with SMTP id i9mr19642808edt.160.1614680888521; 
+ Tue, 02 Mar 2021 02:28:08 -0800 (PST)
 Received: from x1w.redhat.com (68.red-83-57-175.dynamicip.rima-tde.net.
  [83.57.175.68])
- by smtp.gmail.com with ESMTPSA id y11sm17365132ejd.72.2021.03.02.02.27.58
+ by smtp.gmail.com with ESMTPSA id br13sm4397210ejb.87.2021.03.02.02.28.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Mar 2021 02:28:01 -0800 (PST)
+ Tue, 02 Mar 2021 02:28:07 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -73,18 +72,17 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Guan Xuetao <gxt@mprc.pku.edu.cn>, Max Filippov <jcmvbkbc@gmail.com>,
  Aurelien Jarno <aurelien@aurel32.net>
-Subject: [PATCH 3/7] target/arm: Directly use arm_cpu_has_work instead of
- CPUClass::has_work
-Date: Tue,  2 Mar 2021 11:27:33 +0100
-Message-Id: <20210302102737.1031287-4-f4bug@amsat.org>
+Subject: [PATCH 4/7] target/s390x: Move s390_cpu_has_work to excp_helper.c
+Date: Tue,  2 Mar 2021 11:27:34 +0100
+Message-Id: <20210302102737.1031287-5-f4bug@amsat.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210302102737.1031287-1-f4bug@amsat.org>
 References: <20210302102737.1031287-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-ed1-x532.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::533;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-ed1-x533.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -105,58 +103,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2021 10:28:06 -0000
+X-List-Received-Date: Tue, 02 Mar 2021 10:28:13 -0000
 
-There is only one CPUClass::has_work() ARM handler: arm_cpu_has_work().
-
-Avoid a dereference by declaring it in "internals.h" and call it
-directly  in the WFI helper.
+We will restrict the s390_cpu_has_work() function to TCG.
+First declare it in "internal.h" and move it to excp_helper.c.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/arm/internals.h | 1 +
- target/arm/cpu.c       | 2 +-
- target/arm/op_helper.c | 2 +-
- 3 files changed, 3 insertions(+), 2 deletions(-)
+ target/s390x/internal.h    |  1 +
+ target/s390x/cpu.c         | 17 -----------------
+ target/s390x/excp_helper.c | 18 ++++++++++++++++++
+ 3 files changed, 19 insertions(+), 17 deletions(-)
 
-diff --git a/target/arm/internals.h b/target/arm/internals.h
-index 05cebc8597c..1930be08828 100644
---- a/target/arm/internals.h
-+++ b/target/arm/internals.h
-@@ -172,6 +172,7 @@ static inline int r14_bank_number(int mode)
- void arm_cpu_register_gdb_regs_for_features(ARMCPU *cpu);
- void arm_translate_init(void);
+diff --git a/target/s390x/internal.h b/target/s390x/internal.h
+index 11515bb6173..7184e38631c 100644
+--- a/target/s390x/internal.h
++++ b/target/s390x/internal.h
+@@ -263,6 +263,7 @@ ObjectClass *s390_cpu_class_by_name(const char *name);
  
-+bool arm_cpu_has_work(CPUState *cs);
- #ifdef CONFIG_TCG
- void arm_cpu_synchronize_from_tb(CPUState *cs, const TranslationBlock *tb);
- #endif /* CONFIG_TCG */
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index b8bc89e71fc..d03607c2684 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -76,7 +76,7 @@ void arm_cpu_synchronize_from_tb(CPUState *cs,
+ 
+ /* excp_helper.c */
++bool s390_cpu_has_work(CPUState *cs);
+ void s390x_cpu_debug_excp_handler(CPUState *cs);
+ void s390_cpu_do_interrupt(CPUState *cpu);
+ bool s390_cpu_exec_interrupt(CPUState *cpu, int int_req);
+diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
+index d35eb39a1bb..91142db1097 100644
+--- a/target/s390x/cpu.c
++++ b/target/s390x/cpu.c
+@@ -56,23 +56,6 @@ static void s390_cpu_set_pc(CPUState *cs, vaddr value)
+     cpu->env.psw.addr = value;
  }
- #endif /* CONFIG_TCG */
  
--static bool arm_cpu_has_work(CPUState *cs)
-+bool arm_cpu_has_work(CPUState *cs)
+-static bool s390_cpu_has_work(CPUState *cs)
+-{
+-    S390CPU *cpu = S390_CPU(cs);
+-
+-    /* STOPPED cpus can never wake up */
+-    if (s390_cpu_get_state(cpu) != S390_CPU_STATE_LOAD &&
+-        s390_cpu_get_state(cpu) != S390_CPU_STATE_OPERATING) {
+-        return false;
+-    }
+-
+-    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
+-        return false;
+-    }
+-
+-    return s390_cpu_has_int(cpu);
+-}
+-
+ #if !defined(CONFIG_USER_ONLY)
+ /* S390CPUClass::load_normal() */
+ static void s390_cpu_load_normal(CPUState *s)
+diff --git a/target/s390x/excp_helper.c b/target/s390x/excp_helper.c
+index ce16af394b1..64923ffb83a 100644
+--- a/target/s390x/excp_helper.c
++++ b/target/s390x/excp_helper.c
+@@ -28,12 +28,30 @@
+ #include "hw/s390x/ioinst.h"
+ #include "exec/address-spaces.h"
+ #include "tcg_s390x.h"
++#include "qapi/qapi-types-machine.h"
+ #ifndef CONFIG_USER_ONLY
+ #include "sysemu/sysemu.h"
+ #include "hw/s390x/s390_flic.h"
+ #include "hw/boards.h"
+ #endif
+ 
++bool s390_cpu_has_work(CPUState *cs)
++{
++    S390CPU *cpu = S390_CPU(cs);
++
++    /* STOPPED cpus can never wake up */
++    if (s390_cpu_get_state(cpu) != S390_CPU_STATE_LOAD &&
++        s390_cpu_get_state(cpu) != S390_CPU_STATE_OPERATING) {
++        return false;
++    }
++
++    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
++        return false;
++    }
++
++    return s390_cpu_has_int(cpu);
++}
++
+ void QEMU_NORETURN tcg_s390_program_interrupt(CPUS390XState *env,
+                                               uint32_t code, uintptr_t ra)
  {
-     ARMCPU *cpu = ARM_CPU(cs);
- 
-diff --git a/target/arm/op_helper.c b/target/arm/op_helper.c
-index 65cb37d088f..a4da6f4fde8 100644
---- a/target/arm/op_helper.c
-+++ b/target/arm/op_helper.c
-@@ -289,7 +289,7 @@ void HELPER(wfi)(CPUARMState *env, uint32_t insn_len)
-     CPUState *cs = env_cpu(env);
-     int target_el = check_wfx_trap(env, false);
- 
--    if (cpu_has_work(cs)) {
-+    if (arm_cpu_has_work(cs)) {
-         /* Don't bother to go into our "low power state" if
-          * we would just wake up immediately.
-          */
 -- 
 2.26.2
 
