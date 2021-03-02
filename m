@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lH6Tt-0005SO-Oi
-	for mharc-qemu-riscv@gnu.org; Tue, 02 Mar 2021 09:58:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42826)
+	id 1lH6U0-0005lK-ML
+	for mharc-qemu-riscv@gnu.org; Tue, 02 Mar 2021 09:58:44 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42868)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lH6Tq-0005KX-QQ; Tue, 02 Mar 2021 09:58:34 -0500
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535]:37047)
+ id 1lH6Ty-0005e2-4K; Tue, 02 Mar 2021 09:58:42 -0500
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634]:44211)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lH6Tp-00057o-5B; Tue, 02 Mar 2021 09:58:34 -0500
-Received: by mail-ed1-x535.google.com with SMTP id d13so20522087edp.4;
- Tue, 02 Mar 2021 06:58:31 -0800 (PST)
+ id 1lH6Tw-00058b-F3; Tue, 02 Mar 2021 09:58:41 -0500
+Received: by mail-ej1-x634.google.com with SMTP id w1so35807567ejf.11;
+ Tue, 02 Mar 2021 06:58:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=nOq5iyMcYnp2lkKz6qC+70BZoqGGdKahRqfZnxYC4Rc=;
- b=QoLfOdXlHLmowLZWaZMbLVHZ/VJvR62ZBAI4f8Nkve7/977q+cpLfMgRoLR5+cMx/N
- wl8kIr6d+sBwDDUlCpY14WVoAx/pHr8fqR/AdvtFsX5O862Pa2sK5KvuzYk0oVGdszRD
- /WgQTCVcYuXy/BbAmaVEOJd41hN3/BJs6ty07RAr5QKToIu0fLPn1VzyTDWiDRZxhJmD
- dKUcGnoC/mk5Zp6BQ+mmLtaOb+U31BmENk+hk17Lpny5BO1VJMy2aVhW3mJr00kqGhnd
- 00t2LdB9qf44sL/DrB0W1dn3Z0r8cnDZgoNen812LIYz+CGnJ6a7oxHsmFpi9VI9FZSW
- GZMg==
+ bh=UQM81mur+9UHjxbQN0Zv4wGjBmPMsrfz+L5iL9ZySpM=;
+ b=gM6oF45eEgeNG6jf0U+7Wauc0D9nSOP59689GTofoHvqh0QBEfMdYjySyWCyMq8sBU
+ 1zJre/CpXuUL+fPnMODz6mqVZn5QHHK1MyoIlbVAww9HKamSEofQJBGg8EeDWHN7cQCs
+ UBf2QUI8YHyI9tT5FphFRuObueYwj9AsFSgFWZJbuAy7Pu04GmsynGjwpcvZe1XZOKmf
+ O1JDjh5CmhzyB4UXxT4KCzjBJWN9IOjhu/bFRf1zNxCZ9jP91n9si/WCe/SCuAPNBjSi
+ UnK8voYy//wO+UiEVqVvLxNe9nyGj2CMPTh6rE2UuFVWQs5/GiaiT0UVhJpZkFeZseiJ
+ KM8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=nOq5iyMcYnp2lkKz6qC+70BZoqGGdKahRqfZnxYC4Rc=;
- b=m8ysKX2uLuuyzmmfMtTJUS/j9oXmWtaR74u/ofcPYTy7/DFLta0OkF3nnoiKBgyGri
- 6D8V+qCOPZshJCbtxZoyOwXEJrTp0Qdw7vGm67HqZTIf4GxYyHnEjwoaEWd2AFzBNfIb
- loUYyZMr/rcf8fSAPgry0ReZEkTrb9X8iLERfaaj5NOI8zSOX6I9c4HKmqYJmRbQ8iTA
- /7suEcM+G/lDyJIDxogMYT77VvzI3nuW79N4exXqjlh1EF1VIvNm+YkzL9dUboWxHQaQ
- xOpF9rgMPpJbLZAHHyzbDjPmp74nGgOHpThkuNP1sFvHux6Wky20J+nvy2GcARdOsH4a
- vL1Q==
-X-Gm-Message-State: AOAM530Xz2Ie7MQh4W9N5TFaTeo14NkIFtvjVr2xDpHSSJVKWW2+o6tI
- EziTDzwo772fS0Z9rCpDfFPlehkGU2k=
-X-Google-Smtp-Source: ABdhPJxPDVoCPFyYidIi8kxBRuO5ZaCNBi34uPz+PUzoV64jR18SwyjokZ5+MdnpUKAcm/nTEqcxIw==
-X-Received: by 2002:a05:6402:445:: with SMTP id
- p5mr21430090edw.20.1614697109974; 
- Tue, 02 Mar 2021 06:58:29 -0800 (PST)
+ bh=UQM81mur+9UHjxbQN0Zv4wGjBmPMsrfz+L5iL9ZySpM=;
+ b=fHTtbiXIrARKnZWYQaDeXsp6SRbJAYaGUuR/Fy15CSX8qn4c0L5miKn4WmvoiHIT5p
+ tKznKJDXBD5oxhKgqCT9FLnWSXIA2dVPNqYFXNHCdRoRWwQ6iwJJzTwndAaV60+JivfG
+ FOmLUnyzl9L7MaBQqIcHT2yDA/SjQPFsTmOIe3TMRN1SW7jTFvsnr/MmIRGq8KT4AKWd
+ dinu+oLBubwa+6nqYzgMQMglSeew4G43uYWQEUN3EHLsRu21x8IfKoq0UZZDe+4f5DbC
+ 1KfcB3kchNlQAINpm3eyp/SjQ5YCbfEiX5jf4pl0uRV+/FXfDiqJkXpGIzRT7hNpV3+q
+ 56Pw==
+X-Gm-Message-State: AOAM532EhaGd8CS3+7ZSPBNDsPZqWqPWWl5PVN2gjz5gOsvEEe9kVYvY
+ utptHGnmk1iIdmNkdyGIWY1E7DhmPfQ=
+X-Google-Smtp-Source: ABdhPJw2mC3+e40Odm6BazWaDWOlbZXJ2wr7csUb1ftgk2oZ5GMJgWXHllJx6Z2ycIOMCRUUTz1czw==
+X-Received: by 2002:a17:906:d554:: with SMTP id
+ cr20mr4765760ejc.61.1614697117233; 
+ Tue, 02 Mar 2021 06:58:37 -0800 (PST)
 Received: from x1w.redhat.com (68.red-83-57-175.dynamicip.rima-tde.net.
  [83.57.175.68])
- by smtp.gmail.com with ESMTPSA id y8sm17817784edd.97.2021.03.02.06.58.26
+ by smtp.gmail.com with ESMTPSA id q16sm9320176ejd.15.2021.03.02.06.58.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Mar 2021 06:58:29 -0800 (PST)
+ Tue, 02 Mar 2021 06:58:36 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -78,18 +78,18 @@ Cc: Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Taylor Simpson <tsimpson@quicinc.com>
-Subject: [PATCH v3 01/27] target: Set CPUClass::vmsd instead of
- DeviceClass::vmsd
-Date: Tue,  2 Mar 2021 15:57:52 +0100
-Message-Id: <20210302145818.1161461-2-f4bug@amsat.org>
+Subject: [PATCH v3 02/27] cpu: Un-inline cpu_get_phys_page_debug and
+ cpu_asidx_from_attrs
+Date: Tue,  2 Mar 2021 15:57:53 +0100
+Message-Id: <20210302145818.1161461-3-f4bug@amsat.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210302145818.1161461-1-f4bug@amsat.org>
 References: <20210302145818.1161461-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-ed1-x535.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::634;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-ej1-x634.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -110,143 +110,119 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2021 14:58:35 -0000
+X-List-Received-Date: Tue, 02 Mar 2021 14:58:43 -0000
 
-The cpu model is the single device available in user-mode.
-Since we want to restrict some fields to user-mode emulation,
-we prefer to set the vmsd field of CPUClass, rather than the
-DeviceClass one.
+To be able to later extract the cpu_get_phys_page_debug() and
+cpu_asidx_from_attrs() handlers from CPUClass, un-inline them
+from "hw/core/cpu.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/alpha/cpu.c      | 2 +-
- target/cris/cpu.c       | 2 +-
- target/hppa/cpu.c       | 2 +-
- target/m68k/cpu.c       | 2 +-
- target/microblaze/cpu.c | 2 +-
- target/openrisc/cpu.c   | 2 +-
- target/sh4/cpu.c        | 2 +-
- target/unicore32/cpu.c  | 2 +-
- target/xtensa/cpu.c     | 2 +-
- 9 files changed, 9 insertions(+), 9 deletions(-)
+ include/hw/core/cpu.h | 33 ++++-----------------------------
+ hw/core/cpu.c         | 32 ++++++++++++++++++++++++++++++++
+ 2 files changed, 36 insertions(+), 29 deletions(-)
 
-diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
-index 27192b62e22..faabffe0796 100644
---- a/target/alpha/cpu.c
-+++ b/target/alpha/cpu.c
-@@ -237,7 +237,7 @@ static void alpha_cpu_class_init(ObjectClass *oc, void *data)
-     cc->gdb_write_register = alpha_cpu_gdb_write_register;
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_debug = alpha_cpu_get_phys_page_debug;
--    dc->vmsd = &vmstate_alpha_cpu;
-+    cc->vmsd = &vmstate_alpha_cpu;
- #endif
-     cc->disas_set_info = alpha_cpu_disas_set_info;
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index c005d3dc2d8..2d43f78819f 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -578,18 +578,8 @@ void cpu_dump_statistics(CPUState *cpu, int flags);
+  *
+  * Returns: Corresponding physical page address or -1 if no page found.
+  */
+-static inline hwaddr cpu_get_phys_page_attrs_debug(CPUState *cpu, vaddr addr,
+-                                                   MemTxAttrs *attrs)
+-{
+-    CPUClass *cc = CPU_GET_CLASS(cpu);
+-
+-    if (cc->get_phys_page_attrs_debug) {
+-        return cc->get_phys_page_attrs_debug(cpu, addr, attrs);
+-    }
+-    /* Fallback for CPUs which don't implement the _attrs_ hook */
+-    *attrs = MEMTXATTRS_UNSPECIFIED;
+-    return cc->get_phys_page_debug(cpu, addr);
+-}
++hwaddr cpu_get_phys_page_attrs_debug(CPUState *cpu, vaddr addr,
++                                     MemTxAttrs *attrs);
  
-diff --git a/target/cris/cpu.c b/target/cris/cpu.c
-index ed983380fca..29a865b75d2 100644
---- a/target/cris/cpu.c
-+++ b/target/cris/cpu.c
-@@ -293,7 +293,7 @@ static void cris_cpu_class_init(ObjectClass *oc, void *data)
-     cc->gdb_write_register = cris_cpu_gdb_write_register;
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_debug = cris_cpu_get_phys_page_debug;
--    dc->vmsd = &vmstate_cris_cpu;
-+    cc->vmsd = &vmstate_cris_cpu;
- #endif
+ /**
+  * cpu_get_phys_page_debug:
+@@ -601,12 +591,7 @@ static inline hwaddr cpu_get_phys_page_attrs_debug(CPUState *cpu, vaddr addr,
+  *
+  * Returns: Corresponding physical page address or -1 if no page found.
+  */
+-static inline hwaddr cpu_get_phys_page_debug(CPUState *cpu, vaddr addr)
+-{
+-    MemTxAttrs attrs = {};
+-
+-    return cpu_get_phys_page_attrs_debug(cpu, addr, &attrs);
+-}
++hwaddr cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
  
-     cc->gdb_num_core_regs = 49;
-diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
-index d8fad52d1fe..4f142de6e45 100644
---- a/target/hppa/cpu.c
-+++ b/target/hppa/cpu.c
-@@ -162,7 +162,7 @@ static void hppa_cpu_class_init(ObjectClass *oc, void *data)
-     cc->gdb_write_register = hppa_cpu_gdb_write_register;
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_debug = hppa_cpu_get_phys_page_debug;
--    dc->vmsd = &vmstate_hppa_cpu;
-+    cc->vmsd = &vmstate_hppa_cpu;
- #endif
-     cc->disas_set_info = hppa_cpu_disas_set_info;
-     cc->gdb_num_core_regs = 128;
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 37d2ed9dc79..c98fb1e33be 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -533,7 +533,7 @@ static void m68k_cpu_class_init(ObjectClass *c, void *data)
-     cc->gdb_write_register = m68k_cpu_gdb_write_register;
- #if defined(CONFIG_SOFTMMU)
-     cc->get_phys_page_debug = m68k_cpu_get_phys_page_debug;
--    dc->vmsd = &vmstate_m68k_cpu;
-+    cc->vmsd = &vmstate_m68k_cpu;
- #endif
-     cc->disas_set_info = m68k_cpu_disas_set_info;
+ /** cpu_asidx_from_attrs:
+  * @cpu: CPU
+@@ -615,17 +600,7 @@ static inline hwaddr cpu_get_phys_page_debug(CPUState *cpu, vaddr addr)
+  * Returns the address space index specifying the CPU AddressSpace
+  * to use for a memory access with the given transaction attributes.
+  */
+-static inline int cpu_asidx_from_attrs(CPUState *cpu, MemTxAttrs attrs)
+-{
+-    CPUClass *cc = CPU_GET_CLASS(cpu);
+-    int ret = 0;
+-
+-    if (cc->asidx_from_attrs) {
+-        ret = cc->asidx_from_attrs(cpu, attrs);
+-        assert(ret < cpu->num_ases && ret >= 0);
+-    }
+-    return ret;
+-}
++int cpu_asidx_from_attrs(CPUState *cpu, MemTxAttrs attrs);
  
-diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-index 433ba202037..335dfdc734e 100644
---- a/target/microblaze/cpu.c
-+++ b/target/microblaze/cpu.c
-@@ -387,7 +387,7 @@ static void mb_cpu_class_init(ObjectClass *oc, void *data)
+ #endif /* CONFIG_USER_ONLY */
  
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_attrs_debug = mb_cpu_get_phys_page_attrs_debug;
--    dc->vmsd = &vmstate_mb_cpu;
-+    cc->vmsd = &vmstate_mb_cpu;
- #endif
-     device_class_set_props(dc, mb_properties);
-     cc->gdb_num_core_regs = 32 + 27;
-diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
-index 2c64842f46b..79d246d1930 100644
---- a/target/openrisc/cpu.c
-+++ b/target/openrisc/cpu.c
-@@ -204,7 +204,7 @@ static void openrisc_cpu_class_init(ObjectClass *oc, void *data)
-     cc->gdb_write_register = openrisc_cpu_gdb_write_register;
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_debug = openrisc_cpu_get_phys_page_debug;
--    dc->vmsd = &vmstate_openrisc_cpu;
-+    cc->vmsd = &vmstate_openrisc_cpu;
- #endif
-     cc->gdb_num_core_regs = 32 + 3;
-     cc->disas_set_info = openrisc_disas_set_info;
-diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
-index ac65c88f1f8..bd44de53729 100644
---- a/target/sh4/cpu.c
-+++ b/target/sh4/cpu.c
-@@ -262,7 +262,7 @@ static void superh_cpu_class_init(ObjectClass *oc, void *data)
- 
-     cc->gdb_num_core_regs = 59;
- 
--    dc->vmsd = &vmstate_sh_cpu;
-+    cc->vmsd = &vmstate_sh_cpu;
-     cc->tcg_ops = &superh_tcg_ops;
+diff --git a/hw/core/cpu.c b/hw/core/cpu.c
+index 00330ba07de..4dce35f832f 100644
+--- a/hw/core/cpu.c
++++ b/hw/core/cpu.c
+@@ -94,6 +94,38 @@ static void cpu_common_get_memory_mapping(CPUState *cpu,
+     error_setg(errp, "Obtaining memory mappings is unsupported on this CPU.");
  }
  
-diff --git a/target/unicore32/cpu.c b/target/unicore32/cpu.c
-index 0258884f845..12894ffac6a 100644
---- a/target/unicore32/cpu.c
-+++ b/target/unicore32/cpu.c
-@@ -146,7 +146,7 @@ static void uc32_cpu_class_init(ObjectClass *oc, void *data)
-     cc->dump_state = uc32_cpu_dump_state;
-     cc->set_pc = uc32_cpu_set_pc;
-     cc->get_phys_page_debug = uc32_cpu_get_phys_page_debug;
--    dc->vmsd = &vmstate_uc32_cpu;
-+    cc->vmsd = &vmstate_uc32_cpu;
-     cc->tcg_ops = &uc32_tcg_ops;
- }
- 
-diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-index e2b2c7a71c1..6bedd5b97b8 100644
---- a/target/xtensa/cpu.c
-+++ b/target/xtensa/cpu.c
-@@ -218,7 +218,7 @@ static void xtensa_cpu_class_init(ObjectClass *oc, void *data)
-     cc->get_phys_page_debug = xtensa_cpu_get_phys_page_debug;
- #endif
-     cc->disas_set_info = xtensa_cpu_disas_set_info;
--    dc->vmsd = &vmstate_xtensa_cpu;
-+    cc->vmsd = &vmstate_xtensa_cpu;
-     cc->tcg_ops = &xtensa_tcg_ops;
- }
- 
++hwaddr cpu_get_phys_page_attrs_debug(CPUState *cpu, vaddr addr,
++                                                   MemTxAttrs *attrs)
++{
++    CPUClass *cc = CPU_GET_CLASS(cpu);
++
++    if (cc->get_phys_page_attrs_debug) {
++        return cc->get_phys_page_attrs_debug(cpu, addr, attrs);
++    }
++    /* Fallback for CPUs which don't implement the _attrs_ hook */
++    *attrs = MEMTXATTRS_UNSPECIFIED;
++    return cc->get_phys_page_debug(cpu, addr);
++}
++
++hwaddr cpu_get_phys_page_debug(CPUState *cpu, vaddr addr)
++{
++    MemTxAttrs attrs = {};
++
++    return cpu_get_phys_page_attrs_debug(cpu, addr, &attrs);
++}
++
++int cpu_asidx_from_attrs(CPUState *cpu, MemTxAttrs attrs)
++{
++    CPUClass *cc = CPU_GET_CLASS(cpu);
++    int ret = 0;
++
++    if (cc->asidx_from_attrs) {
++        ret = cc->asidx_from_attrs(cpu, attrs);
++        assert(ret < cpu->num_ases && ret >= 0);
++    }
++    return ret;
++}
++
+ /* Resetting the IRQ comes from across the code base so we take the
+  * BQL here if we need to.  cpu_interrupt assumes it is held.*/
+ void cpu_reset_interrupt(CPUState *cpu, int mask)
 -- 
 2.26.2
 
