@@ -1,47 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lH6VX-0000SU-3A
-	for mharc-qemu-riscv@gnu.org; Tue, 02 Mar 2021 10:00:22 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43458)
+	id 1lH6Vc-0000Tv-4m
+	for mharc-qemu-riscv@gnu.org; Tue, 02 Mar 2021 10:00:24 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43520)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lH6VM-0000LM-Hh; Tue, 02 Mar 2021 10:00:10 -0500
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:40015)
+ id 1lH6VU-0000Nl-RI; Tue, 02 Mar 2021 10:00:16 -0500
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636]:46935)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lH6VK-0005Nt-AG; Tue, 02 Mar 2021 10:00:07 -0500
-Received: by mail-ed1-x52f.google.com with SMTP id w21so25569139edc.7;
- Tue, 02 Mar 2021 07:00:04 -0800 (PST)
+ id 1lH6VT-0005Ow-Do; Tue, 02 Mar 2021 10:00:16 -0500
+Received: by mail-ej1-x636.google.com with SMTP id r17so35762780ejy.13;
+ Tue, 02 Mar 2021 07:00:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=80i+luS2gU1nZWsoBAiYbRUL/K5YnYdp7E5uXZjJBL4=;
- b=dpGwCF6rebaENcMlefxhPfnkG83niqll8GFUGNLSSk8S7EFiaz4tXcPgz1/bHzD/LG
- ySvI+vtZvFfOwKSfOyCwAOHdWro9HLaYSOVTUxfM0qXytAzCGZY/nOxz6r7wz4w6RxgS
- P3jtRjV0jIHhTtPTqTebeL0RhUPGgmkABM7OMFbp5k4mboy/vKFeqliQ5CQUAzYq8q/x
- 2OFd7nr215d/UNsF3OF0FPoEliX9ng6XE4ZfumA/SLowiAyOqLIB5llWH5H489asaxSG
- ENsWhrR2IsMbVeRTxhN8DlSc8SLFzjg/o/winpzAwheC9289Q3m/3AsJQfU2nvJZOaqF
- gvwQ==
+ bh=MXkQdWgohB9uSSp9OtT22O1oCJ949jTBzJW7O9qsdTc=;
+ b=GmayORTWFPj6iDGKUHa7t73OH3hTE1OJrvoWfY0PwzDb/vnzx/mKjkua+X+Z0gjGbs
+ GEcOyF1fXcj0Gt+0LjmXtjH4VfoHFtI2oJte+jNXVAR5fq4Sv7XmtE0JzHtrPCfCmQUW
+ 3DXgkuj8yPjDQe65YoQxQx8iXry1nxCQCOawjGOEoU6HDBOI9o6UswNTP9oUiJ9HU2Sc
+ /8z4GcL+ehWHak6J9d5CjsvvxnwlphAX6sZRIBVERthGUxDG4sjJb15S+GkGR40p6DUV
+ CxawhI9etqquBI2/9gW3vFt5BQJy3/GD+/yOCgma9cNRWxUz8AGcC0vE2XLm4UzEbf/W
+ 2pGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=80i+luS2gU1nZWsoBAiYbRUL/K5YnYdp7E5uXZjJBL4=;
- b=QS7ddQ+kNSYUFF83s9zjRB9trjNqQp94XH2fa1gcoFumGZTSW3ishg6ZmektrBZzVq
- dZg2GRb+UG2Sq4o4YBHJpOapjIHzRoUzzChqOThu1wrr4r4pXbxXcwon7cHN2jTqESaY
- 18uELKY3ximzKbN6mR96mJPfsgP2LW9FiTwKwjTPQQZC2iSqc61lvazoJnBZwfWHfZB1
- vOo6SGRna/n6sIyqOFq+5740dXL5iTniccPLkvT1a5+dqrJQNJnuZqfMZopHlulnHbqr
- eWC1zClvTPnr3o/EkkhXBYVf/H1fuHD2aqL3WY7E3YBS4qtG+cRZWnEbnPEFNbX2SZz9
- vocQ==
-X-Gm-Message-State: AOAM532lk27Kvix6+S2YJRGleKB98VG9O40C4I3oVdrmmQErIOlwgfKd
- jIPU4Bz28726cjjG0k1Ka6f6QUwZB5Y=
-X-Google-Smtp-Source: ABdhPJyXQFUGRRxV54Xm/zg4k3LV8CQ/B3gXnhCbP+IjO4+X69LJTqe/h1Q4Rh1dH6mRTY7/JWneNw==
-X-Received: by 2002:aa7:c150:: with SMTP id r16mr20556346edp.96.1614697203386; 
- Tue, 02 Mar 2021 07:00:03 -0800 (PST)
+ bh=MXkQdWgohB9uSSp9OtT22O1oCJ949jTBzJW7O9qsdTc=;
+ b=TftGSgtwItu48/iZfPI08Ds6xDZ28LIPJ/4SF6aX016BVHk8tjiDqa2ToWEHQmfMCG
+ nBgUdzzfgH+NbtKmirwIejfyg9MOq2ERMwhcmnbF4qEpq+7mf4WM3rRWxFQ/D+Dtrjes
+ KZZQVFkEIu14ooqdMENGCOcuq8UgKvDn2JrzsWBuu2w/7TxLDLSap9q1B81EJ069VwR3
+ NNHw2W0KU7QgAm3sDN0gTWdiQ+Z5Oho5EBU3YcsrtZEP8RYch8rQVNaUmpG9zuYV7MGx
+ 8PjQ9Nd5iUt04gcDMCHKC7UMJaux3uetcNc10hZY9nT6YT0IumopGh/dU/Jy3NjNj4mx
+ OzYg==
+X-Gm-Message-State: AOAM533RkRbrlKkZJTQkmh8ZRzcghL+NVZ3EU1tbl/bc8YGqCcp0Xk5b
+ xQszUP8xXRMiGoSWfODyin6ksHvnbck=
+X-Google-Smtp-Source: ABdhPJzCJ5ZRVmsLs7BPbo8luyvvIsXPCSP371JAB0/fcmYSDVoccxfjf9SnpwtLQZYtRZOD8eWVaA==
+X-Received: by 2002:a17:906:f296:: with SMTP id
+ gu22mr20058872ejb.20.1614697210673; 
+ Tue, 02 Mar 2021 07:00:10 -0800 (PST)
 Received: from x1w.redhat.com (68.red-83-57-175.dynamicip.rima-tde.net.
  [83.57.175.68])
- by smtp.gmail.com with ESMTPSA id p25sm18624983eds.55.2021.03.02.07.00.00
+ by smtp.gmail.com with ESMTPSA id h2sm16480337ejk.32.2021.03.02.07.00.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Mar 2021 07:00:02 -0800 (PST)
+ Tue, 02 Mar 2021 07:00:10 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -77,18 +78,18 @@ Cc: Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Taylor Simpson <tsimpson@quicinc.com>
-Subject: [PATCH v3 14/27] cpu: Move CPUClass::get_memory_mapping to
+Subject: [PATCH v3 15/27] cpu: Move CPUClass::get_paging_enabled to
  SysemuCPUOps
-Date: Tue,  2 Mar 2021 15:58:05 +0100
-Message-Id: <20210302145818.1161461-15-f4bug@amsat.org>
+Date: Tue,  2 Mar 2021 15:58:06 +0100
+Message-Id: <20210302145818.1161461-16-f4bug@amsat.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210302145818.1161461-1-f4bug@amsat.org>
 References: <20210302145818.1161461-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-ed1-x52f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::636;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-ej1-x636.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -109,88 +110,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2021 15:00:16 -0000
+X-List-Received-Date: Tue, 02 Mar 2021 15:00:18 -0000
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/hw/core/cpu.h            | 3 ---
- include/hw/core/sysemu-cpu-ops.h | 5 +++++
+ include/hw/core/cpu.h            | 2 --
+ include/hw/core/sysemu-cpu-ops.h | 4 ++++
  hw/core/cpu.c                    | 4 ++--
- target/i386/cpu.c                | 2 +-
- 4 files changed, 8 insertions(+), 6 deletions(-)
+ target/i386/cpu.c                | 4 +++-
+ 4 files changed, 9 insertions(+), 5 deletions(-)
 
 diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 9a86c707cf7..8af78cdde23 100644
+index 8af78cdde23..960846d2b64 100644
 --- a/include/hw/core/cpu.h
 +++ b/include/hw/core/cpu.h
-@@ -94,7 +94,6 @@ struct AccelCPUClass;
+@@ -93,7 +93,6 @@ struct AccelCPUClass;
+  * @dump_state: Callback for dumping state.
   * @dump_statistics: Callback for dumping statistics.
   * @get_arch_id: Callback for getting architecture-dependent CPU ID.
-  * @get_paging_enabled: Callback for inquiring whether paging is enabled.
-- * @get_memory_mapping: Callback for obtaining the memory mappings.
+- * @get_paging_enabled: Callback for inquiring whether paging is enabled.
   * @set_pc: Callback for setting the Program Counter register. This
   *       should have the semantics used by the target architecture when
   *       setting the PC from a source such as an ELF file entry point;
-@@ -138,8 +137,6 @@ struct CPUClass {
+@@ -136,7 +135,6 @@ struct CPUClass {
+     void (*dump_state)(CPUState *cpu, FILE *, int flags);
      void (*dump_statistics)(CPUState *cpu, int flags);
      int64_t (*get_arch_id)(CPUState *cpu);
-     bool (*get_paging_enabled)(const CPUState *cpu);
--    void (*get_memory_mapping)(CPUState *cpu, MemoryMappingList *list,
--                               Error **errp);
+-    bool (*get_paging_enabled)(const CPUState *cpu);
      void (*set_pc)(CPUState *cpu, vaddr value);
      int (*gdb_read_register)(CPUState *cpu, GByteArray *buf, int reg);
      int (*gdb_write_register)(CPUState *cpu, uint8_t *buf, int reg);
 diff --git a/include/hw/core/sysemu-cpu-ops.h b/include/hw/core/sysemu-cpu-ops.h
-index 0c8f616a565..460e7d63b0c 100644
+index 460e7d63b0c..3f9a5199dd1 100644
 --- a/include/hw/core/sysemu-cpu-ops.h
 +++ b/include/hw/core/sysemu-cpu-ops.h
-@@ -16,6 +16,11 @@
-  * struct SysemuCPUOps: System operations specific to a CPU class
-  */
- typedef struct SysemuCPUOps {
+@@ -21,6 +21,10 @@ typedef struct SysemuCPUOps {
+      */
+     void (*get_memory_mapping)(CPUState *cpu, MemoryMappingList *list,
+                                Error **errp);
 +    /**
-+     * @get_memory_mapping: Callback for obtaining the memory mappings.
++     * @get_paging_enabled: Callback for inquiring whether paging is enabled.
 +     */
-+    void (*get_memory_mapping)(CPUState *cpu, MemoryMappingList *list,
-+                               Error **errp);
++    bool (*get_paging_enabled)(const CPUState *cpu);
      /**
       * @get_phys_page_debug: Callback for obtaining a physical address.
       */
 diff --git a/hw/core/cpu.c b/hw/core/cpu.c
-index 6932781425a..339bdfadd7a 100644
+index 339bdfadd7a..7a8487d468f 100644
 --- a/hw/core/cpu.c
 +++ b/hw/core/cpu.c
-@@ -83,8 +83,8 @@ void cpu_get_memory_mapping(CPUState *cpu, MemoryMappingList *list,
+@@ -71,8 +71,8 @@ bool cpu_paging_enabled(const CPUState *cpu)
  {
      CPUClass *cc = CPU_GET_CLASS(cpu);
  
--    if (cc->get_memory_mapping) {
--        cc->get_memory_mapping(cpu, list, errp);
-+    if (cc->sysemu_ops->get_memory_mapping) {
-+        cc->sysemu_ops->get_memory_mapping(cpu, list, errp);
-         return;
+-    if (cc->get_paging_enabled) {
+-        return cc->get_paging_enabled(cpu);
++    if (cc->sysemu_ops->get_paging_enabled) {
++        return cc->sysemu_ops->get_paging_enabled(cpu);
      }
  
+     return false;
 diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index c7a18cd8e4f..d33ee9f831e 100644
+index d33ee9f831e..3519cef8fba 100644
 --- a/target/i386/cpu.c
 +++ b/target/i386/cpu.c
-@@ -7388,6 +7388,7 @@ static Property x86_cpu_properties[] = {
+@@ -7157,12 +7157,14 @@ static int64_t x86_cpu_get_arch_id(CPUState *cs)
+     return cpu->apic_id;
+ }
  
++#if !defined(CONFIG_USER_ONLY)
+ static bool x86_cpu_get_paging_enabled(const CPUState *cs)
+ {
+     X86CPU *cpu = X86_CPU(cs);
+ 
+     return cpu->env.cr[0] & CR0_PG_MASK;
+ }
++#endif /* !CONFIG_USER_ONLY */
+ 
+ static void x86_cpu_set_pc(CPUState *cs, vaddr value)
+ {
+@@ -7389,6 +7391,7 @@ static Property x86_cpu_properties[] = {
  #ifndef CONFIG_USER_ONLY
  static struct SysemuCPUOps i386_sysemu_ops = {
-+    .get_memory_mapping = x86_cpu_get_memory_mapping,
+     .get_memory_mapping = x86_cpu_get_memory_mapping,
++    .get_paging_enabled = x86_cpu_get_paging_enabled,
      .get_phys_page_attrs_debug = x86_cpu_get_phys_page_attrs_debug,
      .asidx_from_attrs = x86_asidx_from_attrs,
      .get_crash_info = x86_cpu_get_crash_info,
-@@ -7431,7 +7432,6 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
-     cc->get_paging_enabled = x86_cpu_get_paging_enabled;
+@@ -7429,7 +7432,6 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
+     cc->gdb_read_register = x86_cpu_gdb_read_register;
+     cc->gdb_write_register = x86_cpu_gdb_write_register;
+     cc->get_arch_id = x86_cpu_get_arch_id;
+-    cc->get_paging_enabled = x86_cpu_get_paging_enabled;
  
  #ifndef CONFIG_USER_ONLY
--    cc->get_memory_mapping = x86_cpu_get_memory_mapping;
      cc->sysemu_ops = &i386_sysemu_ops;
- #endif /* !CONFIG_USER_ONLY */
- 
 -- 
 2.26.2
 
