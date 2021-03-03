@@ -1,59 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lHa22-0003fP-U0
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Mar 2021 17:31:50 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52790)
+	id 1lHa54-0005ad-3l
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Mar 2021 17:34:58 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53312)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lHa20-0003dL-P8; Wed, 03 Mar 2021 17:31:48 -0500
-Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:35758)
+ id 1lHa52-0005Z4-TA; Wed, 03 Mar 2021 17:34:56 -0500
+Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:39203)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lHa1y-0006ah-U0; Wed, 03 Mar 2021 17:31:48 -0500
-Received: by mail-io1-xd2f.google.com with SMTP id g27so26212181iox.2;
- Wed, 03 Mar 2021 14:31:43 -0800 (PST)
+ id 1lHa51-0007Ln-GT; Wed, 03 Mar 2021 17:34:56 -0500
+Received: by mail-il1-x134.google.com with SMTP id d5so23016146iln.6;
+ Wed, 03 Mar 2021 14:34:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Qv6ePLspdjDvpkr5vJihauZ24z4dtnS/re8vrMsqG/s=;
- b=VfOnUsMCDQJBOm1FRnxdl8Jhcvbg+o8OQSO2b+2yDB/QLdF6RJu+8xRAd9RdFaVWNi
- 7oIJFGpd/DiycZMx/7qAgvSGgPngke+Fye0VitSViyu37uEgjxxlD0obArAS9z0VrW9P
- yyh/So8yQHAeLiHJ/jMyeFeyQLA77qPJDOwI9d4sNglT1c3hcUizLUyI/zao0WSGmr3z
- ZAFVs/qnpLnyOnJBjnEYl0BvJbrJT0EqL/6mB487qppp3Luc+VagIbZimc6BxxpLgpsD
- nFyJdFywDokSDKebmHm/el25uCU30u27dadr8N/4ajgxH+qWcDg1hH9obTAR3AxJEEeQ
- NIsQ==
+ :cc; bh=FQPmLcl6eMa/Y8DdcBL6qdpMa8zTP/Ig7wpWzXFjYrc=;
+ b=izHbZyVsMRS/KL+w6DWRR91OU7LVE+utYW/HEbkjjBiSWnwxNtFhEDHaJyus7UaD/n
+ WFYD8mmgoSl/E0QmjxNo47doZYc/0YD728ET8s0kdIkV/+Ee6Z3BrOmYw/iYIBaE/tKC
+ UrXt6MMD4Q7V2AMekANcS5lBPDD2926EowgEmlzzwIgYYttnrptHbxUdehRzuuECemBm
+ X54qHLxoGCR5U56mgHqCataNgq7FlfnM4Hu4GcokOZqHKM7XIffx2TR5msMFVm3lyOYm
+ 8XwYPhH4fwnsuiWW9Z67IbEWXY68oi6YBmQ95SbjrVq83eo6+zYcASBPLnyL1ht7RDPT
+ LmLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Qv6ePLspdjDvpkr5vJihauZ24z4dtnS/re8vrMsqG/s=;
- b=a/KNrpGCjb36+i6Y2/YHJWtEM8qWPfoltiW1AiBJ0bGOyJsbAKnV/6uI0cWqAF1t49
- TTM5t//qSUw6NLvqPj1Ey+p3xHNSSCLW+7xdWRGcyCeT/idAL2WReJVR0EyQ13ASNiqC
- cevV1xmODG0RbV9VLvG6AJCobv+qHDf51Zu5uahYKmcSlFtmk7rUaZk+Ppc2FVnp8DiB
- Bamocu6xo82StGLIuzj+JaGp2AI/sKBbcEWGgPDebnQS320uEHYFd8bKgt0NRiFSGtvU
- HOz8rnb11o8vWdX9FYTpzmZpk+1AEj45HJcticgWyfNfOxacw2ZQ2VbxUyqqkwoUZo3Y
- jFTg==
-X-Gm-Message-State: AOAM53229jxYI6KwP/0oeS438j5WAAPGhjLuMg6Of64m71zoYX7OPxVT
- yeOfOmiKAYRxf6AZvd7PnMmk8JaFb4UakmF4pLs=
-X-Google-Smtp-Source: ABdhPJzlxpYLrtnmGhmtG1pUxTXYKewnZHCKw+aTiG/jZsfnCIyyfG/tGkgHNRYfezYfbT0t4wRjKvUGY3YQA7uRibw=
-X-Received: by 2002:a02:cc1b:: with SMTP id n27mr1156775jap.106.1614810702424; 
- Wed, 03 Mar 2021 14:31:42 -0800 (PST)
+ bh=FQPmLcl6eMa/Y8DdcBL6qdpMa8zTP/Ig7wpWzXFjYrc=;
+ b=dWs+x+qRaSqS2ZgsN5lfkJruSz3ke0ivIdBuXMuLSxIqyffqZuSHp9fugSPXBkbHci
+ ndSG3HWlIrhTGihC0sVg6+1mxnvNxopyqA83kNnnUO/zMWERRxkQinjpelDi3rfP19Bv
+ XAm7pD5LD9srb08H6ZW50omc4u9wLrRL3aqZX5GMtIpoE98gRycmi1Qi++GqXeqKnVC7
+ Hl+Hw+uepEtdafH2e1ilWI32dzPzIHvZrF66iZ6ppshaGFJmBev3qR/y+4cJAKwinBMe
+ TmC1MXJhhDwRidu+P8JXmY5X3owbynsXcwxCZZQygFqzAzFuOlKQ8olumG54QXhI2X5Q
+ 1vIA==
+X-Gm-Message-State: AOAM533UKV2WZu8PQIOZZqxvBkPxABlkDxaxhVeR/cj5z2exWY3UVw5m
+ AVvnwA6xF2ulYikLjdqpv4cGmN3IbuLQ/U3K5Bo=
+X-Google-Smtp-Source: ABdhPJwRNLtc0HYrLaUMVdzaTQ3iN0lfjdW47nsFPxsJ8cL9dZISFRL60/F3dPThk5x9/0uRSXRF6xTB9Jr7ajcW4Bk=
+X-Received: by 2002:a92:c102:: with SMTP id p2mr1397197ile.227.1614810894078; 
+ Wed, 03 Mar 2021 14:34:54 -0800 (PST)
 MIME-Version: 1.0
 References: <20210228111657.23240-1-ashe@kivikakk.ee>
- <20210228111657.23240-3-ashe@kivikakk.ee>
-In-Reply-To: <20210228111657.23240-3-ashe@kivikakk.ee>
+ <20210228111657.23240-2-ashe@kivikakk.ee>
+ <CAEUhbmXPC5CKnsvx7_0qG4eN3zMS6as4PkbxSE-kv0De1Lv_VQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmXPC5CKnsvx7_0qG4eN3zMS6as4PkbxSE-kv0De1Lv_VQ@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 3 Mar 2021 17:30:26 -0500
-Message-ID: <CAKmqyKOOR=Vhy5EZ6L-T+6fd7_bF0W3ik1djHg2oGz9gQLUtbA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] hw/riscv: allow ramfb on virt
-To: Asherah Connor <ashe@kivikakk.ee>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Wed, 3 Mar 2021 17:33:37 -0500
+Message-ID: <CAKmqyKOQ-EwJjq9az9KzP2BEXYLshYCLWiFJ_aF7izj5d-bdaw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] hw/riscv: Add fw_cfg support to virt
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Asherah Connor <ashe@kivikakk.ee>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x134.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,53 +76,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2021 22:31:49 -0000
+X-List-Received-Date: Wed, 03 Mar 2021 22:34:57 -0000
 
-On Sun, Feb 28, 2021 at 6:20 AM Asherah Connor <ashe@kivikakk.ee> wrote:
+On Sun, Feb 28, 2021 at 6:45 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Allow ramfb on virt.  This lets `-device ramfb' work.
->
-> Signed-off-by: Asherah Connor <ashe@kivikakk.ee>
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> On Sun, Feb 28, 2021 at 7:17 PM Asherah Connor <ashe@kivikakk.ee> wrote:
+> >
+> > Provides fw_cfg for the virt machine on riscv.  This enables
+> > using e.g.  ramfb later.
+> >
+> > Signed-off-by: Asherah Connor <ashe@kivikakk.ee>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> > ---
+> >
+> > Changes in v3:
+> > * Document why fw_cfg is done when it is.
+> > * Move VIRT_FW_CFG before VIRT_FLASH.
+> >
+> > Changes in v2:
+> > * Add DMA support (needed for writes).
+> >
+> >  hw/riscv/Kconfig        |  1 +
+> >  hw/riscv/virt.c         | 30 ++++++++++++++++++++++++++++++
+> >  include/hw/riscv/virt.h |  2 ++
+> >  3 files changed, 33 insertions(+)
+> >
 >
-> ---
->
-> (no changes since v2)
->
-> Changes in v2:
-> * Add ramfb as allowed on riscv virt machine class.
->
->  hw/riscv/virt.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 82eff42c37..700b481fa2 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -42,6 +42,7 @@
->  #include "sysemu/sysemu.h"
->  #include "hw/pci/pci.h"
->  #include "hw/pci-host/gpex.h"
-> +#include "hw/display/ramfb.h"
->
->  static const struct MemmapEntry {
->      hwaddr base;
-> @@ -743,6 +744,8 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
->      mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
->      mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
->      mc->numa_mem_supported = true;
-> +
-> +    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
->  }
->
->  static const TypeInfo virt_machine_typeinfo = {
-> --
-> 2.20.1
->
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 >
 
