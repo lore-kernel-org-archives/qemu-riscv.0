@@ -1,47 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lHwNo-00075J-7H
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Mar 2021 17:23:48 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55580)
+	id 1lHwNt-0007Hf-6S
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Mar 2021 17:23:53 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55594)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lHwNl-0006yk-PO; Thu, 04 Mar 2021 17:23:45 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:41027)
+ id 1lHwNr-0007CJ-4W; Thu, 04 Mar 2021 17:23:51 -0500
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a]:33643)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lHwNk-0002T2-4D; Thu, 04 Mar 2021 17:23:45 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id f12so25577162wrx.8;
- Thu, 04 Mar 2021 14:23:42 -0800 (PST)
+ id 1lHwNp-0002VC-GQ; Thu, 04 Mar 2021 17:23:50 -0500
+Received: by mail-wm1-x32a.google.com with SMTP id
+ w203-20020a1c49d40000b029010c706d0642so5202401wma.0; 
+ Thu, 04 Mar 2021 14:23:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=Sy2H6EddRIKWB1GSb3aR2E61qw1Oji422a4IED5nUFk=;
- b=mhBQEJUjEnB/YIfFNMe++iCNWz0lJM5t4I45IW7gGw6pz4iPRjTY1kAOLOwqDZL7ot
- Wx6nDJEaMvdheasiN9HYKocpqofzOsYa6I9yN1m8YReMdvKynY8+wujDG65Dj6IX098p
- k6JYfFDivampkjG3tsfEA1KmoNyGSfrG/M8MigxnAEPnhKwY4+/zP1jjPXo7acXe4AYA
- TOwZP3ZM17VgTe1jvAEzCBdzewFmVfSuRLmAClJ3jCN6LTWOnBm1hmpgbip1RqQ0BYyP
- xBrgN+hVJKOAwXYAwIDNGgunDGyGfP/KSz6SAnwFUq9yzlHIYY38BES3bHNHoQAUNUie
- JDhg==
+ bh=+rqeUSg2fiW/MftHzeY++j7Aj9yk8dsEiDYp+lRnH1c=;
+ b=OOdbFZ3AqgZkXVIv+J10pQn1XsyaoAYbkMORcRS7S/KbOJ4VSw3ZqOa1gcj+mFkYT5
+ CeTJC7kMsKIUKqtrc1cLSs6ag0pKQhWPXeeMcMCS1lLITsEV9RHZqjiY9Op/96wgtTNK
+ tZGghF+IwTdq8Y15SeAXpDmHCfMruYiMABL1XpvuU0w1twQWFe/dlMy7YYBP5WDTtaQw
+ 2yRhfHQX2R60nsIyMO1UBSAdOKL23MyEnKqe9fgZ4hs/5KLUXXObr7VJXjhl3qVumlTU
+ eu34/v9omzWDN4/dDT++xEXPKyAz6IzjVIa1qytss59q5pBSZqFhgtu/btW0SUsQRze0
+ oL2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=Sy2H6EddRIKWB1GSb3aR2E61qw1Oji422a4IED5nUFk=;
- b=Fz/DDcWMhweGUFdmSLt7LsB/jHx2aHgkno7ggjMuG9ODQ99TwU0wv28DtIXkYllBc0
- xX65c+8M+5sD8pjdEQvrP/tq1MKKoqzb8RAkGbGxf0L1xihT8q6N4799ydlBBsDkVHiK
- Axtch0q+lEqu+If+GUpywVkoYwlXctQ0LFIiV30N4azJSoetHu/8wJoraWadsMSafBqQ
- STUYdpCx/VEv5gQaDCDFTrlPs0c4BgwNjp7GzvjEJWF7lo9LNjoDlt3SzzCHNng6WoUt
- ZRO9BZmUxaE3wLeZgIfD2ldI3ojS9YQw+xuSkQt929qXOUrD0+6us1DEaE56KEMMN9np
- yQ2Q==
-X-Gm-Message-State: AOAM533cGBz1ZW97vwhl7YNSaC6wYmuEx9GE+/VQFGrfoIPKHCrH1Tlt
- FGCTBv/gnrq6v13buW4No0/7RD1COx8=
-X-Google-Smtp-Source: ABdhPJwlQm7jfaSajGyc50qshmJurkslHzterzoVGYe4xgchSIPRbdA//wesm2yYXPzLC2j1BiGmUg==
-X-Received: by 2002:adf:ed49:: with SMTP id u9mr6088176wro.337.1614896621247; 
- Thu, 04 Mar 2021 14:23:41 -0800 (PST)
+ bh=+rqeUSg2fiW/MftHzeY++j7Aj9yk8dsEiDYp+lRnH1c=;
+ b=QkkWBC95NVSsixsankuNPXZBRZtasGXTdpF8tWxBpnmMOQG4ZjEbY4Bktk2LEIzg2x
+ DBtV+PWRuCZzkgHuP4AFEcOTLOVs5twf5ceXufcYJIwf4vWFHauOw6fR4mFcOBrSs69J
+ Fpx+MAZqIBqOoQbltD2NXjwqY5zOL9OLaJsrhQeNFK6pEobOocWO9v7VCJjlawBT02Wz
+ Kbux95BlCs116a0wWk3EWxSdz0jYGNHkgfsW8aRb9JHddcAC6ss28JEgCx6ljdj5/jIR
+ pCgJEwp04rdKeCyqKmAED6CaDxB5dSDmqpIKcJDwebInXUpuWFUhy2Tjsnldj7Q8cfPu
+ LQUA==
+X-Gm-Message-State: AOAM530OsSXntBZA5jGIpMdjtA/sNXwFxsITuc8OxRnBJQtcXsTrUIgR
+ SejtO6KM9v1VFWUbGSrGyo1wbEWZdH4=
+X-Google-Smtp-Source: ABdhPJzOo7zZJspFMey4e0BrxmgD6sGrw/fGdi9w+8Brl5uG9ELjlvTZp8m6kGMO6R1vYn8QLdFc4A==
+X-Received: by 2002:a05:600c:2f08:: with SMTP id
+ r8mr5905655wmn.95.1614896626435; 
+ Thu, 04 Mar 2021 14:23:46 -0800 (PST)
 Received: from localhost.localdomain (68.red-83-57-175.dynamicip.rima-tde.net.
  [83.57.175.68])
- by smtp.gmail.com with ESMTPSA id y9sm907051wrm.88.2021.03.04.14.23.40
+ by smtp.gmail.com with ESMTPSA id 3sm1162274wry.72.2021.03.04.14.23.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Mar 2021 14:23:40 -0800 (PST)
+ Thu, 04 Mar 2021 14:23:45 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -56,18 +58,18 @@ Cc: David Hildenbrand <david@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  Claudio Fontana <cfontana@suse.de>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [RFC PATCH v2 3/8] target/arm: Directly use arm_cpu_has_work instead
- of CPUClass::has_work
-Date: Thu,  4 Mar 2021 23:23:18 +0100
-Message-Id: <20210304222323.1954755-4-f4bug@amsat.org>
+Subject: [RFC PATCH v2 4/8] target/s390x: Move s390_cpu_has_work to
+ excp_helper.c
+Date: Thu,  4 Mar 2021 23:23:19 +0100
+Message-Id: <20210304222323.1954755-5-f4bug@amsat.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210304222323.1954755-1-f4bug@amsat.org>
 References: <20210304222323.1954755-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -88,58 +90,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2021 22:23:47 -0000
+X-List-Received-Date: Thu, 04 Mar 2021 22:23:52 -0000
 
-There is only one CPUClass::has_work() ARM handler: arm_cpu_has_work().
+We will restrict the s390_cpu_has_work() function to TCG.
+First declare it in "internal.h" and move it to excp_helper.c.
 
-Avoid a dereference by declaring it in "internals.h" and call it
-directly  in the WFI helper.
-
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/arm/internals.h | 1 +
- target/arm/cpu.c       | 2 +-
- target/arm/op_helper.c | 2 +-
- 3 files changed, 3 insertions(+), 2 deletions(-)
+ target/s390x/internal.h    |  1 +
+ target/s390x/cpu.c         | 17 -----------------
+ target/s390x/excp_helper.c | 18 ++++++++++++++++++
+ 3 files changed, 19 insertions(+), 17 deletions(-)
 
-diff --git a/target/arm/internals.h b/target/arm/internals.h
-index 05cebc8597c..1930be08828 100644
---- a/target/arm/internals.h
-+++ b/target/arm/internals.h
-@@ -172,6 +172,7 @@ static inline int r14_bank_number(int mode)
- void arm_cpu_register_gdb_regs_for_features(ARMCPU *cpu);
- void arm_translate_init(void);
+diff --git a/target/s390x/internal.h b/target/s390x/internal.h
+index 11515bb6173..7184e38631c 100644
+--- a/target/s390x/internal.h
++++ b/target/s390x/internal.h
+@@ -263,6 +263,7 @@ ObjectClass *s390_cpu_class_by_name(const char *name);
  
-+bool arm_cpu_has_work(CPUState *cs);
- #ifdef CONFIG_TCG
- void arm_cpu_synchronize_from_tb(CPUState *cs, const TranslationBlock *tb);
- #endif /* CONFIG_TCG */
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 5e018b2a732..6d2d9f2100f 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -76,7 +76,7 @@ void arm_cpu_synchronize_from_tb(CPUState *cs,
+ 
+ /* excp_helper.c */
++bool s390_cpu_has_work(CPUState *cs);
+ void s390x_cpu_debug_excp_handler(CPUState *cs);
+ void s390_cpu_do_interrupt(CPUState *cpu);
+ bool s390_cpu_exec_interrupt(CPUState *cpu, int int_req);
+diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
+index feaf2a6d08f..d57f69e7f7d 100644
+--- a/target/s390x/cpu.c
++++ b/target/s390x/cpu.c
+@@ -56,23 +56,6 @@ static void s390_cpu_set_pc(CPUState *cs, vaddr value)
+     cpu->env.psw.addr = value;
  }
- #endif /* CONFIG_TCG */
  
--static bool arm_cpu_has_work(CPUState *cs)
-+bool arm_cpu_has_work(CPUState *cs)
+-static bool s390_cpu_has_work(CPUState *cs)
+-{
+-    S390CPU *cpu = S390_CPU(cs);
+-
+-    /* STOPPED cpus can never wake up */
+-    if (s390_cpu_get_state(cpu) != S390_CPU_STATE_LOAD &&
+-        s390_cpu_get_state(cpu) != S390_CPU_STATE_OPERATING) {
+-        return false;
+-    }
+-
+-    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
+-        return false;
+-    }
+-
+-    return s390_cpu_has_int(cpu);
+-}
+-
+ #if !defined(CONFIG_USER_ONLY)
+ /* S390CPUClass::load_normal() */
+ static void s390_cpu_load_normal(CPUState *s)
+diff --git a/target/s390x/excp_helper.c b/target/s390x/excp_helper.c
+index ce16af394b1..64923ffb83a 100644
+--- a/target/s390x/excp_helper.c
++++ b/target/s390x/excp_helper.c
+@@ -28,12 +28,30 @@
+ #include "hw/s390x/ioinst.h"
+ #include "exec/address-spaces.h"
+ #include "tcg_s390x.h"
++#include "qapi/qapi-types-machine.h"
+ #ifndef CONFIG_USER_ONLY
+ #include "sysemu/sysemu.h"
+ #include "hw/s390x/s390_flic.h"
+ #include "hw/boards.h"
+ #endif
+ 
++bool s390_cpu_has_work(CPUState *cs)
++{
++    S390CPU *cpu = S390_CPU(cs);
++
++    /* STOPPED cpus can never wake up */
++    if (s390_cpu_get_state(cpu) != S390_CPU_STATE_LOAD &&
++        s390_cpu_get_state(cpu) != S390_CPU_STATE_OPERATING) {
++        return false;
++    }
++
++    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
++        return false;
++    }
++
++    return s390_cpu_has_int(cpu);
++}
++
+ void QEMU_NORETURN tcg_s390_program_interrupt(CPUS390XState *env,
+                                               uint32_t code, uintptr_t ra)
  {
-     ARMCPU *cpu = ARM_CPU(cs);
- 
-diff --git a/target/arm/op_helper.c b/target/arm/op_helper.c
-index 65cb37d088f..a4da6f4fde8 100644
---- a/target/arm/op_helper.c
-+++ b/target/arm/op_helper.c
-@@ -289,7 +289,7 @@ void HELPER(wfi)(CPUARMState *env, uint32_t insn_len)
-     CPUState *cs = env_cpu(env);
-     int target_el = check_wfx_trap(env, false);
- 
--    if (cpu_has_work(cs)) {
-+    if (arm_cpu_has_work(cs)) {
-         /* Don't bother to go into our "low power state" if
-          * we would just wake up immediately.
-          */
 -- 
 2.26.2
 
