@@ -1,48 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lHwNk-0006uN-4a
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Mar 2021 17:23:44 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55554)
+	id 1lHwNo-00075J-7H
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Mar 2021 17:23:48 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55580)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lHwNh-0006mN-5B; Thu, 04 Mar 2021 17:23:41 -0500
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335]:54722)
+ id 1lHwNl-0006yk-PO; Thu, 04 Mar 2021 17:23:45 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:41027)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lHwNf-0002Qs-GD; Thu, 04 Mar 2021 17:23:40 -0500
-Received: by mail-wm1-x335.google.com with SMTP id u187so9370354wmg.4;
- Thu, 04 Mar 2021 14:23:37 -0800 (PST)
+ id 1lHwNk-0002T2-4D; Thu, 04 Mar 2021 17:23:45 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id f12so25577162wrx.8;
+ Thu, 04 Mar 2021 14:23:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=OUZUt6DUDETGfeYoWkRPY1ImgFxPl3GPkcbxoc9krNo=;
- b=UWQyP0l8uyZKNzmMYvUOIW1n9rnYeebf87oLY66bGNcJPc/WT9d+sCaWgS5LOEasCZ
- KCQZLazOPSW9RjHHtS8Nnuq4iUGbzC2rSjtt1hRvs9xdL4RvNLN4+kQtbjABSCugpnoO
- TSnqXY3R26ztLy+AG3I9AJzYoD2HEhJsphdG6OhnVAp2Xlj4GE3h9Mi7x6VsZXoLyQ6z
- 76lZEtmKUvnt673nEJGgiFYHerS5bq+9vt5Hk9FOK+P4pfYwdGUIoBbgAkstYXmnQ8w1
- 6JF9AvG/e5MoSDh+q0MF8+tJ5R33fwIdskaXZ+P3Ha4oKozJ9M0+/SLav6vd9xCP/7IO
- CdJw==
+ bh=Sy2H6EddRIKWB1GSb3aR2E61qw1Oji422a4IED5nUFk=;
+ b=mhBQEJUjEnB/YIfFNMe++iCNWz0lJM5t4I45IW7gGw6pz4iPRjTY1kAOLOwqDZL7ot
+ Wx6nDJEaMvdheasiN9HYKocpqofzOsYa6I9yN1m8YReMdvKynY8+wujDG65Dj6IX098p
+ k6JYfFDivampkjG3tsfEA1KmoNyGSfrG/M8MigxnAEPnhKwY4+/zP1jjPXo7acXe4AYA
+ TOwZP3ZM17VgTe1jvAEzCBdzewFmVfSuRLmAClJ3jCN6LTWOnBm1hmpgbip1RqQ0BYyP
+ xBrgN+hVJKOAwXYAwIDNGgunDGyGfP/KSz6SAnwFUq9yzlHIYY38BES3bHNHoQAUNUie
+ JDhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=OUZUt6DUDETGfeYoWkRPY1ImgFxPl3GPkcbxoc9krNo=;
- b=GVKflYSjLbp+pyQ3t1NMl1MnDvWlIZIEBLNnIr/6L9JD8a7lX9AoEwkSzI+scEwp/+
- gknN0hGeUkdpMGiuKGmR8tMY7Ct/pc47ju57lTRDCMa7hKYXXPmQTPkPa9G2ksZYnnto
- 5/dIS5Q8DHaqCHi2A5fYSKRMoPYAJOxvwdJN1+YKltOHcrKd0av8U6c1h5HNCbqWdLAM
- 2zYgsMnT/7DlKtQr8gjrOdRJ1nmnkJ7f0FS3s/YRS5kxz9jtx0xP+BFxN2gvAggNvgEe
- avHT/02FBTDR0pA9dJlw84eVo3A60nieyhCLED71hVh16KygWwC+Ub+YOZj3A/0jEvz9
- wxcg==
-X-Gm-Message-State: AOAM531WonKrkms0CIevjycthj7YHyZHByphyGFOK9/CctaUYzrk5Wed
- nkGFSaSpY9r4dzjUbmfXTGpjZK53BQE=
-X-Google-Smtp-Source: ABdhPJxtwTdTVXcDZSftstwccFkSDRQ/eq3WDttHC5Vx/OfQwqayes3YoV41fMb5TqwzjbWn/uResQ==
-X-Received: by 2002:a05:600c:4ba2:: with SMTP id
- e34mr5923244wmp.121.1614896616354; 
- Thu, 04 Mar 2021 14:23:36 -0800 (PST)
+ bh=Sy2H6EddRIKWB1GSb3aR2E61qw1Oji422a4IED5nUFk=;
+ b=Fz/DDcWMhweGUFdmSLt7LsB/jHx2aHgkno7ggjMuG9ODQ99TwU0wv28DtIXkYllBc0
+ xX65c+8M+5sD8pjdEQvrP/tq1MKKoqzb8RAkGbGxf0L1xihT8q6N4799ydlBBsDkVHiK
+ Axtch0q+lEqu+If+GUpywVkoYwlXctQ0LFIiV30N4azJSoetHu/8wJoraWadsMSafBqQ
+ STUYdpCx/VEv5gQaDCDFTrlPs0c4BgwNjp7GzvjEJWF7lo9LNjoDlt3SzzCHNng6WoUt
+ ZRO9BZmUxaE3wLeZgIfD2ldI3ojS9YQw+xuSkQt929qXOUrD0+6us1DEaE56KEMMN9np
+ yQ2Q==
+X-Gm-Message-State: AOAM533cGBz1ZW97vwhl7YNSaC6wYmuEx9GE+/VQFGrfoIPKHCrH1Tlt
+ FGCTBv/gnrq6v13buW4No0/7RD1COx8=
+X-Google-Smtp-Source: ABdhPJwlQm7jfaSajGyc50qshmJurkslHzterzoVGYe4xgchSIPRbdA//wesm2yYXPzLC2j1BiGmUg==
+X-Received: by 2002:adf:ed49:: with SMTP id u9mr6088176wro.337.1614896621247; 
+ Thu, 04 Mar 2021 14:23:41 -0800 (PST)
 Received: from localhost.localdomain (68.red-83-57-175.dynamicip.rima-tde.net.
  [83.57.175.68])
- by smtp.gmail.com with ESMTPSA id d13sm1058581wro.23.2021.03.04.14.23.35
+ by smtp.gmail.com with ESMTPSA id y9sm907051wrm.88.2021.03.04.14.23.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Mar 2021 14:23:35 -0800 (PST)
+ Thu, 04 Mar 2021 14:23:40 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -56,20 +55,19 @@ Cc: David Hildenbrand <david@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  Claudio Fontana <cfontana@suse.de>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Subject: [RFC PATCH v2 2/8] sysemu/tcg: Restrict qemu_tcg_mttcg_enabled() to
- TCG
-Date: Thu,  4 Mar 2021 23:23:17 +0100
-Message-Id: <20210304222323.1954755-3-f4bug@amsat.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Subject: [RFC PATCH v2 3/8] target/arm: Directly use arm_cpu_has_work instead
+ of CPUClass::has_work
+Date: Thu,  4 Mar 2021 23:23:18 +0100
+Message-Id: <20210304222323.1954755-4-f4bug@amsat.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210304222323.1954755-1-f4bug@amsat.org>
 References: <20210304222323.1954755-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x335.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -90,83 +88,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2021 22:23:42 -0000
+X-List-Received-Date: Thu, 04 Mar 2021 22:23:47 -0000
 
-qemu_tcg_mttcg_enabled() shouldn't not be used outside of TCG,
-restrict its declaration.
+There is only one CPUClass::has_work() ARM handler: arm_cpu_has_work().
+
+Avoid a dereference by declaring it in "internals.h" and call it
+directly  in the WFI helper.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/hw/core/cpu.h | 9 ---------
- include/sysemu/tcg.h  | 9 +++++++++
- accel/tcg/cpu-exec.c  | 1 +
- tcg/tcg.c             | 1 +
- 4 files changed, 11 insertions(+), 9 deletions(-)
+ target/arm/internals.h | 1 +
+ target/arm/cpu.c       | 2 +-
+ target/arm/op_helper.c | 2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index e3648338dfe..1376e496a3f 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -454,15 +454,6 @@ static inline void cpu_tb_jmp_cache_clear(CPUState *cpu)
-     }
+diff --git a/target/arm/internals.h b/target/arm/internals.h
+index 05cebc8597c..1930be08828 100644
+--- a/target/arm/internals.h
++++ b/target/arm/internals.h
+@@ -172,6 +172,7 @@ static inline int r14_bank_number(int mode)
+ void arm_cpu_register_gdb_regs_for_features(ARMCPU *cpu);
+ void arm_translate_init(void);
+ 
++bool arm_cpu_has_work(CPUState *cs);
+ #ifdef CONFIG_TCG
+ void arm_cpu_synchronize_from_tb(CPUState *cs, const TranslationBlock *tb);
+ #endif /* CONFIG_TCG */
+diff --git a/target/arm/cpu.c b/target/arm/cpu.c
+index 5e018b2a732..6d2d9f2100f 100644
+--- a/target/arm/cpu.c
++++ b/target/arm/cpu.c
+@@ -76,7 +76,7 @@ void arm_cpu_synchronize_from_tb(CPUState *cs,
  }
- 
--/**
-- * qemu_tcg_mttcg_enabled:
-- * Check whether we are running MultiThread TCG or not.
-- *
-- * Returns: %true if we are in MTTCG mode %false otherwise.
-- */
--extern bool mttcg_enabled;
--#define qemu_tcg_mttcg_enabled() (mttcg_enabled)
--
- /**
-  * cpu_paging_enabled:
-  * @cpu: The CPU whose state is to be inspected.
-diff --git a/include/sysemu/tcg.h b/include/sysemu/tcg.h
-index fddde2b6b9a..c16c13c3c69 100644
---- a/include/sysemu/tcg.h
-+++ b/include/sysemu/tcg.h
-@@ -17,6 +17,15 @@ void tcg_exec_init(unsigned long tb_size, int splitwx);
- extern bool tcg_allowed;
- #define tcg_enabled() (tcg_allowed)
- 
-+/**
-+ * qemu_tcg_mttcg_enabled:
-+ * Check whether we are running MultiThread TCG or not.
-+ *
-+ * Returns: %true if we are in MTTCG mode %false otherwise.
-+ */
-+extern bool mttcg_enabled;
-+#define qemu_tcg_mttcg_enabled() (mttcg_enabled)
-+
  #endif /* CONFIG_TCG */
  
- #endif
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index 16e4fe3ccd8..7e67ade35b9 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -39,6 +39,7 @@
- #include "hw/i386/apic.h"
- #endif
- #include "sysemu/cpus.h"
-+#include "sysemu/tcg.h"
- #include "exec/cpu-all.h"
- #include "sysemu/cpu-timers.h"
- #include "sysemu/replay.h"
-diff --git a/tcg/tcg.c b/tcg/tcg.c
-index 63a12b197bf..4a4dac0bb3e 100644
---- a/tcg/tcg.c
-+++ b/tcg/tcg.c
-@@ -65,6 +65,7 @@
- #include "elf.h"
- #include "exec/log.h"
- #include "sysemu/sysemu.h"
-+#include "sysemu/tcg.h"
+-static bool arm_cpu_has_work(CPUState *cs)
++bool arm_cpu_has_work(CPUState *cs)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
  
- /* Forward declarations for functions declared in tcg-target.c.inc and
-    used here. */
+diff --git a/target/arm/op_helper.c b/target/arm/op_helper.c
+index 65cb37d088f..a4da6f4fde8 100644
+--- a/target/arm/op_helper.c
++++ b/target/arm/op_helper.c
+@@ -289,7 +289,7 @@ void HELPER(wfi)(CPUARMState *env, uint32_t insn_len)
+     CPUState *cs = env_cpu(env);
+     int target_el = check_wfx_trap(env, false);
+ 
+-    if (cpu_has_work(cs)) {
++    if (arm_cpu_has_work(cs)) {
+         /* Don't bother to go into our "low power state" if
+          * we would just wake up immediately.
+          */
 -- 
 2.26.2
 
