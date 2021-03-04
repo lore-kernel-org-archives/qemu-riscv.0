@@ -1,97 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lHtvq-0002mF-RI
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Mar 2021 14:46:50 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49422)
+	id 1lHwNd-0006ce-56
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Mar 2021 17:23:37 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55504)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lHtvp-0002ln-5R; Thu, 04 Mar 2021 14:46:45 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:42489)
+ id 1lHwNY-0006TU-DW; Thu, 04 Mar 2021 17:23:34 -0500
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b]:41025)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lHtvm-0001HV-It; Thu, 04 Mar 2021 14:46:43 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id j2so16121347wrx.9;
- Thu, 04 Mar 2021 11:46:40 -0800 (PST)
+ id 1lHwNW-0002Lx-Pb; Thu, 04 Mar 2021 17:23:32 -0500
+Received: by mail-wr1-x42b.google.com with SMTP id f12so25576630wrx.8;
+ Thu, 04 Mar 2021 14:23:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=t276LUinFqdo3UZ05DHKy95/FXYpuFynT6Qlz+DIzoA=;
- b=IBM3qGDjAp6Y43GT8RuOPXswxLMlTX13skt/D9AqMo9eI/Mx1S8Ksjl4nFHRfFSL86
- i06NIzE0f25e2X1JurUZwWmvWVseSi4XXG314vY7aWS+wdnrXHEM8/SxkthOZ5YTme+U
- fYlOjnf3bxJ72q+izvXbW4Q/haIaYoDX1PlR2WUoBjMhq3KFtEg/K/yovK15pPP98nFb
- WUYf1h11coSybMRF1/InwkY6H0s1DI60LV/bx1TdDS04FbuJnP13bo2emwtdlbSTKTJe
- NOQTY/KwP6I2VBscAmyzXkDt6L1gkhSprvBe9Lp7QPKsIGMwUQIQXzlfkakOH63QjfFf
- k1LQ==
+ h=sender:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=aHeoAp8GFYRuOJSiApa7NgdOQdOqdNenAR63HpCEUyc=;
+ b=nZQHZcgCU8xqNDX8qng9oiPgf0qW3QLlZlx53X5r4pDHVGALs5/0j/6aB7i8H9OKHz
+ GQq6bGtqYxDYpvIDoStxk38HsHvTg8YcaWow3JW3LJQlHhn9hQoqyiiN0B7VFjkvtx5V
+ 5UbsPTi+QtI9n22nSknykmXe54nP0lNlT76+RMg7yfaD5Wqz2I3a9KjIHXXXX7IBy85z
+ rZeFmrqm9EQxzH06AU2mG9wdr+dqGQMigBPeiUhtUAVgM1TeQeGctfJ+shyGVF/jjkSM
+ 8qWtyNZqwIaRgX6g6qYtMxIeGUCvE+l5UnVhRy9wJJTEOE2ZL99IbGepoObSDZhyYVDl
+ BBWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=t276LUinFqdo3UZ05DHKy95/FXYpuFynT6Qlz+DIzoA=;
- b=oBOOE2V/JSc831HeaNLWpxQhvZcyS0iqHgl6QQpmF8tIr5epSKcXvpdL9YQUmmx/Yk
- GBLDXQkYxj3CANfBlirMMsp9iXI6jjUSBEeq1E87TNb0bYfim7sRm37TwCxoqt6hhEpS
- ychMiTqBVLaRpfpirojM4gymcIO8kx8Bw5rANqgucVrhEkifJpsysC89gdzvXoX1D9L4
- yKl0iZ/W5mbY5ZhEMetSh87nqJ7kn7qCcp/W2ORLB/htjGk1UrH/V9xryBKx464dtTC0
- HpTFA8c0syygQzyS17+je8CLryp656lKnVYZaWTPS1qHwqHVIuRKnNj74mB0knGqKYz9
- ms4A==
-X-Gm-Message-State: AOAM531Qerl+QcU/6wVd3WPrZAjQOcAhza8F1gIEa1NQmJOMKMMvx0/z
- GtF/zQ4PHJX+xGhOqdke6Bw=
-X-Google-Smtp-Source: ABdhPJzuOv+iV476B/IIsEpBxciH11svCwJSOzkl+9CGn1Dkqq5TPLk4DqUoVzEOr5EG4TYAXEcREg==
-X-Received: by 2002:a05:6000:1081:: with SMTP id
- y1mr5532805wrw.347.1614887199500; 
- Thu, 04 Mar 2021 11:46:39 -0800 (PST)
-Received: from [192.168.1.36] (68.red-83-57-175.dynamicip.rima-tde.net.
+ h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+ :mime-version:content-transfer-encoding;
+ bh=aHeoAp8GFYRuOJSiApa7NgdOQdOqdNenAR63HpCEUyc=;
+ b=lWLCRlw+WtL+WBh2/Argm4dOdZzSGOgqE4gzSBPrPAKptHu15vTHI03AC2KxIh9aFL
+ V0VZT1O4TmLopfaQdSg+dh7p2snmBVdNZqVLV+fmOytlF6Z7DqPhexUhnTw1tpcQaWb9
+ YdVRZI0ypev/+8GftNevqjAGLqwUqLtJQJphpBvYecOjcO41/2Qw5T1b58H+w3qqaJ89
+ IWoxjNlAcnHKFx6P6BbsmUcEVf8sdHHSAZdIZCQMbvInf+6+pgWnczK0HAXdN7LSyBlU
+ kBygXa7b54PMP2VIQPT99HlSbcYTmaBfdqs4a4JZCOlQi3PRcuOPoLR4jYhfRaI2PIbe
+ Nr6w==
+X-Gm-Message-State: AOAM531//+2mghMwdhn3XcXb+bkuPEKvIbEqloLK+8BXzQdMu/aRcTPA
+ GaC9sjhazoRG+7CFovBSQULBWLY3ods=
+X-Google-Smtp-Source: ABdhPJzpM25P3pzTne4XY3n+9TFpqUqg127nFkrsZ+E8TsHXltpF9Ro++mIJX57b2UAJNtje0WSGOA==
+X-Received: by 2002:adf:ee4f:: with SMTP id w15mr6135463wro.199.1614896606291; 
+ Thu, 04 Mar 2021 14:23:26 -0800 (PST)
+Received: from localhost.localdomain (68.red-83-57-175.dynamicip.rima-tde.net.
  [83.57.175.68])
- by smtp.gmail.com with ESMTPSA id f22sm740189wmc.33.2021.03.04.11.46.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 04 Mar 2021 11:46:38 -0800 (PST)
+ by smtp.gmail.com with ESMTPSA id i11sm1009229wro.53.2021.03.04.14.23.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Mar 2021 14:23:25 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [RFC PATCH 6/7] cpu: Move CPUClass::has_work() to TCGCPUOps
-To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Sarah Harris <S.E.Harris@kent.ac.uk>, Cornelia Huck <cohuck@redhat.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- David Hildenbrand <david@redhat.com>, Anthony Green <green@moxielogic.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Taylor Simpson <tsimpson@quicinc.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Guan Xuetao <gxt@mprc.pku.edu.cn>, Marek Vasut <marex@denx.de>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+To: qemu-devel@nongnu.org
+Cc: David Hildenbrand <david@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-ppc@nongnu.org,
+ qemu-s390x@nongnu.org, Thomas Huth <thuth@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>, Cornelia Huck <cohuck@redhat.com>,
+ Greg Kurz <groug@kaod.org>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-arm@nongnu.org, Eduardo Habkost <ehabkost@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  Claudio Fontana <cfontana@suse.de>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-ppc@nongnu.org,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, Greg Kurz
- <groug@kaod.org>, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- Michael Rolnik <mrolnik@gmail.com>, Stafford Horne <shorne@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Chris Wulff <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
- Michael Walle <michael@walle.cc>, Palmer Dabbelt <palmer@dabbelt.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
-References: <20210302102737.1031287-1-f4bug@amsat.org>
- <20210302102737.1031287-7-f4bug@amsat.org>
- <dfda927b-8937-afe2-f853-5c9817499c4a@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <421b6c9e-9128-bf09-bf3e-b04101b6f11d@amsat.org>
-Date: Thu, 4 Mar 2021 20:46:35 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Subject: [RFC PATCH v2 0/8] cpu: Move CPUClass::has_work() to TCGCPUOps
+Date: Thu,  4 Mar 2021 23:23:15 +0100
+Message-Id: <20210304222323.1954755-1-f4bug@amsat.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <dfda927b-8937-afe2-f853-5c9817499c4a@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42c.google.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
 X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
@@ -106,46 +85,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2021 19:46:45 -0000
+X-List-Received-Date: Thu, 04 Mar 2021 22:23:35 -0000
 
-On 3/4/21 7:15 AM, Thomas Huth wrote:
-> On 02/03/2021 11.27, Philippe Mathieu-Daudé wrote:
->> We can only check if a vCPU has work with TCG.
->> Restrict the has_work() handler to TCG by moving it to
->> the TCGCPUOps structure, and adapt all the targets.
->>
->> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
->> ---
->> RFC: PPC target incomplete
->> ---
-> [...]
->> diff --git a/hw/core/cpu.c b/hw/core/cpu.c
->> index 00330ba07de..3110867c3a3 100644
->> --- a/hw/core/cpu.c
->> +++ b/hw/core/cpu.c
->> @@ -261,11 +261,6 @@ static void cpu_common_reset(DeviceState *dev)
->>       }
->>   }
->>   -static bool cpu_common_has_work(CPUState *cs)
->> -{
->> -    return false;
->> -}
->> -
->>   ObjectClass *cpu_class_by_name(const char *typename, const char
->> *cpu_model)
->>   {
->>       CPUClass *cc = CPU_CLASS(object_class_by_name(typename));
->> @@ -397,7 +392,6 @@ static void cpu_class_init(ObjectClass *klass,
->> void *data)
->>         k->parse_features = cpu_common_parse_features;
->>       k->get_arch_id = cpu_common_get_arch_id;
->> -    k->has_work = cpu_common_has_work;
->>       k->get_paging_enabled = cpu_common_get_paging_enabled;
->>       k->get_memory_mapping = cpu_common_get_memory_mapping;
->>       k->write_elf32_qemunote = cpu_common_write_elf32_qemunote;
-> 
-> cpu_common_has_work() is gone without replacement? Can you be sure that
-> the pointer in tcg_ops is always initialized?
-
-Oops... Good catch :)
+Hi,=0D
+=0D
+cpu_has_work() isn't used out of TCG, so restrict it to it.=0D
+RFC because maybe it could?=0D
+=0D
+Since v1:=0D
+- finished PPC=0D
+- check cc->tcg_ops->has_work non-null (thuth)=0D
+=0D
+Based-on: <20210227232519.222663-1-richard.henderson@linaro.org>=0D
+=0D
+Philippe Mathieu-Daud=C3=A9 (8):=0D
+  sysemu/tcg: Restrict tcg_exec_init() to CONFIG_TCG=0D
+  sysemu/tcg: Restrict qemu_tcg_mttcg_enabled() to TCG=0D
+  target/arm: Directly use arm_cpu_has_work instead of=0D
+    CPUClass::has_work=0D
+  target/s390x: Move s390_cpu_has_work to excp_helper.c=0D
+  target/ppc: Duplicate the TCGCPUOps structure for POWER CPUs=0D
+  cpu: Declare cpu_has_work() in 'sysemu/tcg.h'=0D
+  cpu: Move CPUClass::has_work() to TCGCPUOps=0D
+  target/arm: Restrict arm_cpu_has_work() to TCG=0D
+=0D
+ include/hw/core/cpu.h           | 27 -----------=0D
+ include/hw/core/tcg-cpu-ops.h   |  4 ++=0D
+ include/sysemu/tcg.h            | 30 +++++++++++--=0D
+ target/arm/internals.h          |  1 +=0D
+ target/s390x/internal.h         |  1 +=0D
+ accel/tcg/cpu-exec.c            | 12 +++++=0D
+ hw/core/cpu.c                   |  6 ---=0D
+ softmmu/cpus.c                  |  1 +=0D
+ target/alpha/cpu.c              |  2 +-=0D
+ target/arm/cpu.c                |  6 +--=0D
+ target/arm/op_helper.c          |  2 +-=0D
+ target/avr/cpu.c                |  2 +-=0D
+ target/cris/cpu.c               |  3 +-=0D
+ target/hexagon/cpu.c            |  2 +-=0D
+ target/hppa/cpu.c               |  2 +-=0D
+ target/i386/cpu.c               |  7 +--=0D
+ target/i386/tcg/tcg-cpu.c       |  6 +++=0D
+ target/lm32/cpu.c               |  2 +-=0D
+ target/m68k/cpu.c               |  2 +-=0D
+ target/microblaze/cpu.c         |  2 +-=0D
+ target/mips/cpu.c               |  2 +-=0D
+ target/moxie/cpu.c              |  2 +-=0D
+ target/nios2/cpu.c              |  2 +-=0D
+ target/openrisc/cpu.c           |  2 +-=0D
+ target/riscv/cpu.c              |  2 +-=0D
+ target/rx/cpu.c                 |  2 +-=0D
+ target/s390x/cpu.c              | 19 +-------=0D
+ target/s390x/excp_helper.c      | 18 ++++++++=0D
+ target/sh4/cpu.c                |  2 +-=0D
+ target/sparc/cpu.c              |  2 +-=0D
+ target/tilegx/cpu.c             |  2 +-=0D
+ target/tricore/cpu.c            |  2 +-=0D
+ target/unicore32/cpu.c          |  2 +-=0D
+ target/xtensa/cpu.c             |  2 +-=0D
+ tcg/tcg.c                       |  1 +=0D
+ target/ppc/translate_init.c.inc | 79 ++++++++++++++++++++++++++++++---=0D
+ 36 files changed, 171 insertions(+), 90 deletions(-)=0D
+=0D
+-- =0D
+2.26.2=0D
+=0D
 
