@@ -1,47 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lHwNf-0006j2-EM
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Mar 2021 17:23:39 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55524)
+	id 1lHwNk-0006uN-4a
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Mar 2021 17:23:44 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55554)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lHwNc-0006a2-8t; Thu, 04 Mar 2021 17:23:36 -0500
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435]:35121)
+ id 1lHwNh-0006mN-5B; Thu, 04 Mar 2021 17:23:41 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335]:54722)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lHwNa-0002OB-PA; Thu, 04 Mar 2021 17:23:35 -0500
-Received: by mail-wr1-x435.google.com with SMTP id l12so29379993wry.2;
- Thu, 04 Mar 2021 14:23:33 -0800 (PST)
+ id 1lHwNf-0002Qs-GD; Thu, 04 Mar 2021 17:23:40 -0500
+Received: by mail-wm1-x335.google.com with SMTP id u187so9370354wmg.4;
+ Thu, 04 Mar 2021 14:23:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=sZzqDSzbsexD9Zh3aq/wd1p0b53KS/Yn8zf4kVHZSu8=;
- b=pZ6S1AEWRk7U9b63+cejO+/j9dwOxzbhBvb/obwzh3d8QeY5JA7h7LT5i53dILRgqi
- BVTqFHfXSNGXLmcRGw5Hi6i4U6iU9W7CO7nOcC2ohPO1noOUzcj6PoSeQWb6g+gueQO7
- 3g4z6jr4jKb28VZVuUILRZV7iEnGjGda05d8N89Ay+Cxp4KppuDempl3wlXk4tgZNvJ2
- zevCyH7Ny/uYfEK5PxTo4fJ3MQ9DuriYqWJ9yc3p+VQSFk+VfUBwdcTYNRwaPJxpzfd/
- LinY5lXzDUN5x7Vk/ejifGcZpYJZQK4k1sstoXZmSBmv+sfv0C7HsfjF2HsFSw8l0QQM
- GEFg==
+ bh=OUZUt6DUDETGfeYoWkRPY1ImgFxPl3GPkcbxoc9krNo=;
+ b=UWQyP0l8uyZKNzmMYvUOIW1n9rnYeebf87oLY66bGNcJPc/WT9d+sCaWgS5LOEasCZ
+ KCQZLazOPSW9RjHHtS8Nnuq4iUGbzC2rSjtt1hRvs9xdL4RvNLN4+kQtbjABSCugpnoO
+ TSnqXY3R26ztLy+AG3I9AJzYoD2HEhJsphdG6OhnVAp2Xlj4GE3h9Mi7x6VsZXoLyQ6z
+ 76lZEtmKUvnt673nEJGgiFYHerS5bq+9vt5Hk9FOK+P4pfYwdGUIoBbgAkstYXmnQ8w1
+ 6JF9AvG/e5MoSDh+q0MF8+tJ5R33fwIdskaXZ+P3Ha4oKozJ9M0+/SLav6vd9xCP/7IO
+ CdJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=sZzqDSzbsexD9Zh3aq/wd1p0b53KS/Yn8zf4kVHZSu8=;
- b=O2CYgNKSFFOXrmD/wKNktX7WiUcAn+PONW6Z02u3x5ta8bsNmW+v03gtbCWahFCWHA
- HIL5ZhJjaXQ5yfbEUpVs0tuDTcAQGR6w09LIhh6YNydAwobnNArdgLlE72gmVB7/WLci
- KTV+9ZqB/Recy42phEDN3rHvyG7xpy722/Mk/CjJZOVnxbJGPDzug4nrMizAbZ/6thZb
- WNJfogNvxO9PkIBh/r9xoxmyXHWqSESR/b5tvaUdofR/HZ06zFFvnhim8jnpyG1g4YbJ
- R6NJiNsnFU3Mlpq8tjJSK64Rv93tFXp0fKxmAnMy18cZ5TCXRmDYn/5pQqA8FGswNYxP
- npVw==
-X-Gm-Message-State: AOAM531HlUcW2SYNgU4PlDIC3fYHTX4Uq/87zccerETZkrSp8Eq60hhT
- 4d40Qw1eC1dfNj9ltGslmwVcLME34+M=
-X-Google-Smtp-Source: ABdhPJytszF6Gh7yIRnn5zIm8ZcLxWTULeMm+RZerO6Mj2TnpXYLHT76N4M87apDUrJ+R7srJ2unTw==
-X-Received: by 2002:adf:f889:: with SMTP id u9mr6073330wrp.180.1614896611296; 
- Thu, 04 Mar 2021 14:23:31 -0800 (PST)
+ bh=OUZUt6DUDETGfeYoWkRPY1ImgFxPl3GPkcbxoc9krNo=;
+ b=GVKflYSjLbp+pyQ3t1NMl1MnDvWlIZIEBLNnIr/6L9JD8a7lX9AoEwkSzI+scEwp/+
+ gknN0hGeUkdpMGiuKGmR8tMY7Ct/pc47ju57lTRDCMa7hKYXXPmQTPkPa9G2ksZYnnto
+ 5/dIS5Q8DHaqCHi2A5fYSKRMoPYAJOxvwdJN1+YKltOHcrKd0av8U6c1h5HNCbqWdLAM
+ 2zYgsMnT/7DlKtQr8gjrOdRJ1nmnkJ7f0FS3s/YRS5kxz9jtx0xP+BFxN2gvAggNvgEe
+ avHT/02FBTDR0pA9dJlw84eVo3A60nieyhCLED71hVh16KygWwC+Ub+YOZj3A/0jEvz9
+ wxcg==
+X-Gm-Message-State: AOAM531WonKrkms0CIevjycthj7YHyZHByphyGFOK9/CctaUYzrk5Wed
+ nkGFSaSpY9r4dzjUbmfXTGpjZK53BQE=
+X-Google-Smtp-Source: ABdhPJxtwTdTVXcDZSftstwccFkSDRQ/eq3WDttHC5Vx/OfQwqayes3YoV41fMb5TqwzjbWn/uResQ==
+X-Received: by 2002:a05:600c:4ba2:: with SMTP id
+ e34mr5923244wmp.121.1614896616354; 
+ Thu, 04 Mar 2021 14:23:36 -0800 (PST)
 Received: from localhost.localdomain (68.red-83-57-175.dynamicip.rima-tde.net.
  [83.57.175.68])
- by smtp.gmail.com with ESMTPSA id i26sm1289891wmb.18.2021.03.04.14.23.30
+ by smtp.gmail.com with ESMTPSA id d13sm1058581wro.23.2021.03.04.14.23.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Mar 2021 14:23:30 -0800 (PST)
+ Thu, 04 Mar 2021 14:23:35 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -55,18 +56,20 @@ Cc: David Hildenbrand <david@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  Claudio Fontana <cfontana@suse.de>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [RFC PATCH v2 1/8] sysemu/tcg: Restrict tcg_exec_init() to CONFIG_TCG
-Date: Thu,  4 Mar 2021 23:23:16 +0100
-Message-Id: <20210304222323.1954755-2-f4bug@amsat.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Subject: [RFC PATCH v2 2/8] sysemu/tcg: Restrict qemu_tcg_mttcg_enabled() to
+ TCG
+Date: Thu,  4 Mar 2021 23:23:17 +0100
+Message-Id: <20210304222323.1954755-3-f4bug@amsat.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210304222323.1954755-1-f4bug@amsat.org>
 References: <20210304222323.1954755-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -87,40 +90,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2021 22:23:37 -0000
+X-List-Received-Date: Thu, 04 Mar 2021 22:23:42 -0000
 
-Invert the #ifdef'ry to easily restrict tcg_exec_init() declaration
-to CONFIG_TCG.
+qemu_tcg_mttcg_enabled() shouldn't not be used outside of TCG,
+restrict its declaration.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/sysemu/tcg.h | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ include/hw/core/cpu.h | 9 ---------
+ include/sysemu/tcg.h  | 9 +++++++++
+ accel/tcg/cpu-exec.c  | 1 +
+ tcg/tcg.c             | 1 +
+ 4 files changed, 11 insertions(+), 9 deletions(-)
 
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index e3648338dfe..1376e496a3f 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -454,15 +454,6 @@ static inline void cpu_tb_jmp_cache_clear(CPUState *cpu)
+     }
+ }
+ 
+-/**
+- * qemu_tcg_mttcg_enabled:
+- * Check whether we are running MultiThread TCG or not.
+- *
+- * Returns: %true if we are in MTTCG mode %false otherwise.
+- */
+-extern bool mttcg_enabled;
+-#define qemu_tcg_mttcg_enabled() (mttcg_enabled)
+-
+ /**
+  * cpu_paging_enabled:
+  * @cpu: The CPU whose state is to be inspected.
 diff --git a/include/sysemu/tcg.h b/include/sysemu/tcg.h
-index 00349fb18a7..fddde2b6b9a 100644
+index fddde2b6b9a..c16c13c3c69 100644
 --- a/include/sysemu/tcg.h
 +++ b/include/sysemu/tcg.h
-@@ -8,13 +8,15 @@
- #ifndef SYSEMU_TCG_H
- #define SYSEMU_TCG_H
- 
-+#ifndef CONFIG_TCG
-+#define tcg_enabled() 0
-+#else
-+
- void tcg_exec_init(unsigned long tb_size, int splitwx);
- 
--#ifdef CONFIG_TCG
+@@ -17,6 +17,15 @@ void tcg_exec_init(unsigned long tb_size, int splitwx);
  extern bool tcg_allowed;
  #define tcg_enabled() (tcg_allowed)
--#else
--#define tcg_enabled() 0
--#endif
+ 
++/**
++ * qemu_tcg_mttcg_enabled:
++ * Check whether we are running MultiThread TCG or not.
++ *
++ * Returns: %true if we are in MTTCG mode %false otherwise.
++ */
++extern bool mttcg_enabled;
++#define qemu_tcg_mttcg_enabled() (mttcg_enabled)
 +
-+#endif /* CONFIG_TCG */
+ #endif /* CONFIG_TCG */
  
  #endif
+diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+index 16e4fe3ccd8..7e67ade35b9 100644
+--- a/accel/tcg/cpu-exec.c
++++ b/accel/tcg/cpu-exec.c
+@@ -39,6 +39,7 @@
+ #include "hw/i386/apic.h"
+ #endif
+ #include "sysemu/cpus.h"
++#include "sysemu/tcg.h"
+ #include "exec/cpu-all.h"
+ #include "sysemu/cpu-timers.h"
+ #include "sysemu/replay.h"
+diff --git a/tcg/tcg.c b/tcg/tcg.c
+index 63a12b197bf..4a4dac0bb3e 100644
+--- a/tcg/tcg.c
++++ b/tcg/tcg.c
+@@ -65,6 +65,7 @@
+ #include "elf.h"
+ #include "exec/log.h"
+ #include "sysemu/sysemu.h"
++#include "sysemu/tcg.h"
+ 
+ /* Forward declarations for functions declared in tcg-target.c.inc and
+    used here. */
 -- 
 2.26.2
 
