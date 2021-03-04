@@ -1,49 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lHwNt-0007Hf-6S
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Mar 2021 17:23:53 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55594)
+	id 1lHwO2-0007Wk-WC
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Mar 2021 17:24:03 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55608)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lHwNr-0007CJ-4W; Thu, 04 Mar 2021 17:23:51 -0500
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a]:33643)
+ id 1lHwNv-0007Ot-VN; Thu, 04 Mar 2021 17:23:56 -0500
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c]:54715)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lHwNp-0002VC-GQ; Thu, 04 Mar 2021 17:23:50 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id
- w203-20020a1c49d40000b029010c706d0642so5202401wma.0; 
- Thu, 04 Mar 2021 14:23:47 -0800 (PST)
+ id 1lHwNu-0002XD-Ax; Thu, 04 Mar 2021 17:23:55 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id u187so9370741wmg.4;
+ Thu, 04 Mar 2021 14:23:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=+rqeUSg2fiW/MftHzeY++j7Aj9yk8dsEiDYp+lRnH1c=;
- b=OOdbFZ3AqgZkXVIv+J10pQn1XsyaoAYbkMORcRS7S/KbOJ4VSw3ZqOa1gcj+mFkYT5
- CeTJC7kMsKIUKqtrc1cLSs6ag0pKQhWPXeeMcMCS1lLITsEV9RHZqjiY9Op/96wgtTNK
- tZGghF+IwTdq8Y15SeAXpDmHCfMruYiMABL1XpvuU0w1twQWFe/dlMy7YYBP5WDTtaQw
- 2yRhfHQX2R60nsIyMO1UBSAdOKL23MyEnKqe9fgZ4hs/5KLUXXObr7VJXjhl3qVumlTU
- eu34/v9omzWDN4/dDT++xEXPKyAz6IzjVIa1qytss59q5pBSZqFhgtu/btW0SUsQRze0
- oL2Q==
+ bh=D6LLQzNZyfmEhNL83oc33kVYOp47IlGJ59yVOiNpnRg=;
+ b=ZEreaPaFQBeiuBRNQ2OdnjMAh9JP6F2sp+ucDXyAI7serdBvnEP0GeJdpO1aAGOIeI
+ mIVkrONeWtvTb1SMlHLcC3sGhPN3obe0dPFCNXlQDxIXdWO3p3i0+75JNV1bSQ3SXq+Z
+ YHhbanE6DrpECs+Gf7JQFnk1TcIRvJF8JXp6USUYHyeIUAUv1YMCAxZOBy6LY6sh2+vb
+ v4Nd21MM9wbNeiCvo7RmagK5R3DNdDj4WFkWsU+1u17WCATCjnuqddqsP8euBUJlYwbE
+ 4lHfmE2bwxDXaii4j1U2dCT4sO84hu9SR1qdIVEDLB0K9amKQ6g8RbArTEXXP6kLsuc7
+ n2GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=+rqeUSg2fiW/MftHzeY++j7Aj9yk8dsEiDYp+lRnH1c=;
- b=QkkWBC95NVSsixsankuNPXZBRZtasGXTdpF8tWxBpnmMOQG4ZjEbY4Bktk2LEIzg2x
- DBtV+PWRuCZzkgHuP4AFEcOTLOVs5twf5ceXufcYJIwf4vWFHauOw6fR4mFcOBrSs69J
- Fpx+MAZqIBqOoQbltD2NXjwqY5zOL9OLaJsrhQeNFK6pEobOocWO9v7VCJjlawBT02Wz
- Kbux95BlCs116a0wWk3EWxSdz0jYGNHkgfsW8aRb9JHddcAC6ss28JEgCx6ljdj5/jIR
- pCgJEwp04rdKeCyqKmAED6CaDxB5dSDmqpIKcJDwebInXUpuWFUhy2Tjsnldj7Q8cfPu
- LQUA==
-X-Gm-Message-State: AOAM530OsSXntBZA5jGIpMdjtA/sNXwFxsITuc8OxRnBJQtcXsTrUIgR
- SejtO6KM9v1VFWUbGSrGyo1wbEWZdH4=
-X-Google-Smtp-Source: ABdhPJzOo7zZJspFMey4e0BrxmgD6sGrw/fGdi9w+8Brl5uG9ELjlvTZp8m6kGMO6R1vYn8QLdFc4A==
-X-Received: by 2002:a05:600c:2f08:: with SMTP id
- r8mr5905655wmn.95.1614896626435; 
- Thu, 04 Mar 2021 14:23:46 -0800 (PST)
+ bh=D6LLQzNZyfmEhNL83oc33kVYOp47IlGJ59yVOiNpnRg=;
+ b=F2ZmQdebd5vNEMytEvMB1FAyZA36eEpW3JXsKtyIhN3NwW/h5oAwQiBun4ZSAjS+5E
+ D6xEmxar9W8ZjFej5OZ7XSopbWePHVOfB5Gy31wKaLPji3ogNbr9Z3z9l3QKJcaAgvjg
+ eZRa7amZb+uEkC1kv5R2s8dmW35fZRY/yaO6qzlZuNvCCL9AGwAwqFEWwLgrvHeT/u6D
+ YcQbsT/O0d3aYu3ZEl2VvFEv4PcqlG9+HHW7w2JArpzUGQK+oYz4ClUhmz+RamION8A4
+ ewu4zmWT+TNUCmUe66tSJ6L7GN57wKD/pBIjdu9NG6OYUhhaapir6cnVcetvXrzurEAS
+ ONYA==
+X-Gm-Message-State: AOAM530gdtcI8/4CRLgNdNiKgspZISNVEglmeDF/jEWkSNLe6MZ+yWIg
+ slaYyUpjvGdfKPtgAHdwGYkWJAEVoQw=
+X-Google-Smtp-Source: ABdhPJwnMQsUEYN2vxJhPn71ExiDnnAWuGzag6QAtfQlcdTNm3SuZmB5gnJwAeak8v++6xxILl5L3w==
+X-Received: by 2002:a1c:6309:: with SMTP id x9mr5873815wmb.62.1614896631437;
+ Thu, 04 Mar 2021 14:23:51 -0800 (PST)
 Received: from localhost.localdomain (68.red-83-57-175.dynamicip.rima-tde.net.
  [83.57.175.68])
- by smtp.gmail.com with ESMTPSA id 3sm1162274wry.72.2021.03.04.14.23.45
+ by smtp.gmail.com with ESMTPSA id m9sm1035239wro.52.2021.03.04.14.23.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Mar 2021 14:23:45 -0800 (PST)
+ Thu, 04 Mar 2021 14:23:51 -0800 (PST)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -58,18 +56,18 @@ Cc: David Hildenbrand <david@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  Claudio Fontana <cfontana@suse.de>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [RFC PATCH v2 4/8] target/s390x: Move s390_cpu_has_work to
- excp_helper.c
-Date: Thu,  4 Mar 2021 23:23:19 +0100
-Message-Id: <20210304222323.1954755-5-f4bug@amsat.org>
+Subject: [RFC PATCH v2 5/8] target/ppc: Duplicate the TCGCPUOps structure for
+ POWER CPUs
+Date: Thu,  4 Mar 2021 23:23:20 +0100
+Message-Id: <20210304222323.1954755-6-f4bug@amsat.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210304222323.1954755-1-f4bug@amsat.org>
 References: <20210304222323.1954755-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -90,94 +88,133 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2021 22:23:52 -0000
+X-List-Received-Date: Thu, 04 Mar 2021 22:23:57 -0000
 
-We will restrict the s390_cpu_has_work() function to TCG.
-First declare it in "internal.h" and move it to excp_helper.c.
+POWER CPUs have specific CPUClass::has_work() handlers.
+In preparation of moving this field to TCGCPUOps, we need
+to duplicate the current ppc_tcg_ops structure for the
+POWER cpus.
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/s390x/internal.h    |  1 +
- target/s390x/cpu.c         | 17 -----------------
- target/s390x/excp_helper.c | 18 ++++++++++++++++++
- 3 files changed, 19 insertions(+), 17 deletions(-)
+ target/ppc/translate_init.c.inc | 69 +++++++++++++++++++++++++++++++++
+ 1 file changed, 69 insertions(+)
 
-diff --git a/target/s390x/internal.h b/target/s390x/internal.h
-index 11515bb6173..7184e38631c 100644
---- a/target/s390x/internal.h
-+++ b/target/s390x/internal.h
-@@ -263,6 +263,7 @@ ObjectClass *s390_cpu_class_by_name(const char *name);
+diff --git a/target/ppc/translate_init.c.inc b/target/ppc/translate_init.c.inc
+index 80239077e0b..fe76d0b3773 100644
+--- a/target/ppc/translate_init.c.inc
++++ b/target/ppc/translate_init.c.inc
+@@ -48,6 +48,11 @@
+ /* #define PPC_DUMP_SPR_ACCESSES */
+ /* #define USE_APPLE_GDB */
  
- 
- /* excp_helper.c */
-+bool s390_cpu_has_work(CPUState *cs);
- void s390x_cpu_debug_excp_handler(CPUState *cs);
- void s390_cpu_do_interrupt(CPUState *cpu);
- bool s390_cpu_exec_interrupt(CPUState *cpu, int int_req);
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index feaf2a6d08f..d57f69e7f7d 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -56,23 +56,6 @@ static void s390_cpu_set_pc(CPUState *cs, vaddr value)
-     cpu->env.psw.addr = value;
++static const struct TCGCPUOps power7_tcg_ops;
++static const struct TCGCPUOps power8_tcg_ops;
++static const struct TCGCPUOps power9_tcg_ops;
++static const struct TCGCPUOps power10_tcg_ops;
++
+ /*
+  * Generic callbacks:
+  * do nothing but store/retrieve spr value
+@@ -8685,6 +8690,9 @@ POWERPC_FAMILY(POWER7)(ObjectClass *oc, void *data)
+     pcc->l1_dcache_size = 0x8000;
+     pcc->l1_icache_size = 0x8000;
+     pcc->interrupts_big_endian = ppc_cpu_interrupts_big_endian_lpcr;
++#ifdef CONFIG_TCG
++    cc->tcg_ops = &power7_tcg_ops;
++#endif /* CONFIG_TCG */
  }
  
--static bool s390_cpu_has_work(CPUState *cs)
--{
--    S390CPU *cpu = S390_CPU(cs);
--
--    /* STOPPED cpus can never wake up */
--    if (s390_cpu_get_state(cpu) != S390_CPU_STATE_LOAD &&
--        s390_cpu_get_state(cpu) != S390_CPU_STATE_OPERATING) {
--        return false;
--    }
--
--    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
--        return false;
--    }
--
--    return s390_cpu_has_int(cpu);
--}
--
- #if !defined(CONFIG_USER_ONLY)
- /* S390CPUClass::load_normal() */
- static void s390_cpu_load_normal(CPUState *s)
-diff --git a/target/s390x/excp_helper.c b/target/s390x/excp_helper.c
-index ce16af394b1..64923ffb83a 100644
---- a/target/s390x/excp_helper.c
-+++ b/target/s390x/excp_helper.c
-@@ -28,12 +28,30 @@
- #include "hw/s390x/ioinst.h"
- #include "exec/address-spaces.h"
- #include "tcg_s390x.h"
-+#include "qapi/qapi-types-machine.h"
- #ifndef CONFIG_USER_ONLY
- #include "sysemu/sysemu.h"
- #include "hw/s390x/s390_flic.h"
- #include "hw/boards.h"
- #endif
+ static void init_proc_POWER8(CPUPPCState *env)
+@@ -8863,6 +8871,9 @@ POWERPC_FAMILY(POWER8)(ObjectClass *oc, void *data)
+     pcc->l1_dcache_size = 0x8000;
+     pcc->l1_icache_size = 0x8000;
+     pcc->interrupts_big_endian = ppc_cpu_interrupts_big_endian_lpcr;
++#ifdef CONFIG_TCG
++    cc->tcg_ops = &power8_tcg_ops;
++#endif /* CONFIG_TCG */
+ }
  
-+bool s390_cpu_has_work(CPUState *cs)
-+{
-+    S390CPU *cpu = S390_CPU(cs);
+ #ifdef CONFIG_SOFTMMU
+@@ -9081,6 +9092,9 @@ POWERPC_FAMILY(POWER9)(ObjectClass *oc, void *data)
+     pcc->l1_dcache_size = 0x8000;
+     pcc->l1_icache_size = 0x8000;
+     pcc->interrupts_big_endian = ppc_cpu_interrupts_big_endian_lpcr;
++#ifdef CONFIG_TCG
++    cc->tcg_ops = &power9_tcg_ops;
++#endif /* CONFIG_TCG */
+ }
+ 
+ #ifdef CONFIG_SOFTMMU
+@@ -9292,6 +9306,9 @@ POWERPC_FAMILY(POWER10)(ObjectClass *oc, void *data)
+     pcc->l1_dcache_size = 0x8000;
+     pcc->l1_icache_size = 0x8000;
+     pcc->interrupts_big_endian = ppc_cpu_interrupts_big_endian_lpcr;
++#ifdef CONFIG_TCG
++    cc->tcg_ops = &power10_tcg_ops;
++#endif /* CONFIG_TCG */
+ }
+ 
+ #if !defined(CONFIG_USER_ONLY)
+@@ -10851,6 +10868,58 @@ static const struct TCGCPUOps ppc_tcg_ops = {
+   .cpu_exec_interrupt = ppc_cpu_exec_interrupt,
+   .tlb_fill = ppc_cpu_tlb_fill,
+ 
++#ifndef CONFIG_USER_ONLY
++  .do_interrupt = ppc_cpu_do_interrupt,
++  .cpu_exec_enter = ppc_cpu_exec_enter,
++  .cpu_exec_exit = ppc_cpu_exec_exit,
++  .do_unaligned_access = ppc_cpu_do_unaligned_access,
++#endif /* !CONFIG_USER_ONLY */
++};
 +
-+    /* STOPPED cpus can never wake up */
-+    if (s390_cpu_get_state(cpu) != S390_CPU_STATE_LOAD &&
-+        s390_cpu_get_state(cpu) != S390_CPU_STATE_OPERATING) {
-+        return false;
-+    }
++static const struct TCGCPUOps power7_tcg_ops = {
++  .initialize = ppc_translate_init,
++  .cpu_exec_interrupt = ppc_cpu_exec_interrupt,
++  .tlb_fill = ppc_cpu_tlb_fill,
 +
-+    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
-+        return false;
-+    }
++#ifndef CONFIG_USER_ONLY
++  .do_interrupt = ppc_cpu_do_interrupt,
++  .cpu_exec_enter = ppc_cpu_exec_enter,
++  .cpu_exec_exit = ppc_cpu_exec_exit,
++  .do_unaligned_access = ppc_cpu_do_unaligned_access,
++#endif /* !CONFIG_USER_ONLY */
++};
 +
-+    return s390_cpu_has_int(cpu);
-+}
++static const struct TCGCPUOps power8_tcg_ops = {
++  .initialize = ppc_translate_init,
++  .cpu_exec_interrupt = ppc_cpu_exec_interrupt,
++  .tlb_fill = ppc_cpu_tlb_fill,
 +
- void QEMU_NORETURN tcg_s390_program_interrupt(CPUS390XState *env,
-                                               uint32_t code, uintptr_t ra)
- {
++#ifndef CONFIG_USER_ONLY
++  .do_interrupt = ppc_cpu_do_interrupt,
++  .cpu_exec_enter = ppc_cpu_exec_enter,
++  .cpu_exec_exit = ppc_cpu_exec_exit,
++  .do_unaligned_access = ppc_cpu_do_unaligned_access,
++#endif /* !CONFIG_USER_ONLY */
++};
++
++static const struct TCGCPUOps power9_tcg_ops = {
++  .initialize = ppc_translate_init,
++  .cpu_exec_interrupt = ppc_cpu_exec_interrupt,
++  .tlb_fill = ppc_cpu_tlb_fill,
++
++#ifndef CONFIG_USER_ONLY
++  .do_interrupt = ppc_cpu_do_interrupt,
++  .cpu_exec_enter = ppc_cpu_exec_enter,
++  .cpu_exec_exit = ppc_cpu_exec_exit,
++  .do_unaligned_access = ppc_cpu_do_unaligned_access,
++#endif /* !CONFIG_USER_ONLY */
++};
++
++static const struct TCGCPUOps power10_tcg_ops = {
++  .initialize = ppc_translate_init,
++  .cpu_exec_interrupt = ppc_cpu_exec_interrupt,
++  .tlb_fill = ppc_cpu_tlb_fill,
++
+ #ifndef CONFIG_USER_ONLY
+   .do_interrupt = ppc_cpu_do_interrupt,
+   .cpu_exec_enter = ppc_cpu_exec_enter,
 -- 
 2.26.2
 
