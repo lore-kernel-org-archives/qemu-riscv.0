@@ -1,45 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lI3jm-00016G-1b
-	for mharc-qemu-riscv@gnu.org; Fri, 05 Mar 2021 01:14:58 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53220)
+	id 1lI7T3-00033d-0i
+	for mharc-qemu-riscv@gnu.org; Fri, 05 Mar 2021 05:13:57 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45316)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lI3jf-00015O-0S; Fri, 05 Mar 2021 01:14:51 -0500
-Received: from smtp2200-217.mail.aliyun.com ([121.197.200.217]:35697)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lI3ja-0006Eh-GG; Fri, 05 Mar 2021 01:14:50 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1090531|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.04784-0.00539141-0.946769;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047190; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=5; RT=5; SR=0; TI=SMTPD_---.Jgmc0sJ_1614924874; 
-Received: from 30.225.208.66(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Jgmc0sJ_1614924874)
- by smtp.aliyun-inc.com(10.147.44.129);
- Fri, 05 Mar 2021 14:14:34 +0800
-Subject: Re: [PATCH 00/38] target/riscv: support packed extension v0.9.2
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, richard.henderson@linaro.org,
- alistair23@gmail.com, palmer@dabbelt.com
-References: <20210212150256.885-1-zhiwei_liu@c-sky.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <814f40d2-3b2e-6690-d978-1f2786ffa529@c-sky.com>
-Date: Fri, 5 Mar 2021 14:14:29 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1lI7T1-00031L-LX
+ for qemu-riscv@nongnu.org; Fri, 05 Mar 2021 05:13:55 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:40820)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1lI7Su-00078a-GQ
+ for qemu-riscv@nongnu.org; Fri, 05 Mar 2021 05:13:54 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id d11so1438972wrj.7
+ for <qemu-riscv@nongnu.org>; Fri, 05 Mar 2021 02:13:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=references:user-agent:from:to:cc:subject:date:in-reply-to
+ :message-id:mime-version:content-transfer-encoding;
+ bh=yWNPM1oDOi+xPoG9v7e/3EpJBd9H8y1ByspZKbq2e08=;
+ b=VueOOli9Ro11JPL040ZtNb6VOSRP6XBb2MRY5bH/4w1NfrU9AP7azwLBWrz9ULOPJs
+ K7LPydDLQWBoQBHQz6t2x8S/eEQhT8EwP02RszRRDg44F8F8voPO7G9WjgOMxCSYDXqk
+ +E0QNu6YIOm2ZurESsRacSr3Athm6QurDVpkWuGJaN4BT7lezQJ0tps5/XweDwitEsFG
+ Baj1hhrlPow0Tow8y1NGEQxZNJ/Y2sUH2WFQhuC8YqS+72hNGdC2MN7KdortCV978UON
+ +A0aAOCcLRQXVgErw4HCR5pTltQyvWZ0aKAuPDLOD84Vwm4wnx/zvAv0TmWEPsvqKEYs
+ WVUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
+ :in-reply-to:message-id:mime-version:content-transfer-encoding;
+ bh=yWNPM1oDOi+xPoG9v7e/3EpJBd9H8y1ByspZKbq2e08=;
+ b=M208j+pYj1ob2Uir4K0XiZymtfVqL2ZUw8v9pn/YEACg0vg4ptrHwOJ4JzsMpuL8nt
+ pX77uFF9OUkIGKJa4R+cxzsid5VWiqoh+B9AGICCWM6R13nlzNzjYKXr6A7S3417ZOrM
+ ZAgX1ADBjCo7XG7d83K1/qJcMyc+M4J9G6RpW1LtxS1UFpU2Qp7+XJSc3g0ersK3gMUj
+ eWK4SNJSiSeaauqAGeYOxvdQZZ6RNC7K9CfpI1MgzhkFWZW6v0OBCL8vyFwUOASPFd4F
+ 3uZuS+yZOgPnLFYylmF2u/+hGVKtCO7rKVFp2fhRmT/KCYsApyrm00qbNKZz+RKFpzss
+ NX+Q==
+X-Gm-Message-State: AOAM533kYSifQPaedwuoQibLLJ4YXJTZyIXviWtpWN+cbsqPjNdEpE7D
+ s1/S1evigvU+64NokiC1iFkVKw==
+X-Google-Smtp-Source: ABdhPJwpC7T49qHCw4Cao4tNN0yEXugp2RJXfPfxF+jTWAchgfgmxJ14D0Zfg2eYMt3lbW2FC9pbVw==
+X-Received: by 2002:a5d:5141:: with SMTP id u1mr8547026wrt.31.1614939226288;
+ Fri, 05 Mar 2021 02:13:46 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id x6sm3870813wmj.32.2021.03.05.02.13.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Mar 2021 02:13:45 -0800 (PST)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 63D1E1FF7E;
+ Fri,  5 Mar 2021 10:13:44 +0000 (GMT)
+References: <20210226131356.3964782-1-f4bug@amsat.org>
+User-agent: mu4e 1.5.8; emacs 28.0.50
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, Paolo Bonzini <pbonzini@redhat.com>,
+ Guan Xuetao <gxt@mprc.pku.edu.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Laurent Vivier <laurent@vivier.eu>, Chris Wulff <crwulff@gmail.com>,
+ qemu-arm@nongnu.org, Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
+ <philmd@redhat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, qemu-riscv@nongnu.org,
+ Max Filippov <jcmvbkbc@gmail.com>, Marek Vasut <marex@denx.de>, Palmer
+ Dabbelt <palmer@dabbelt.com>, Aurelien Jarno <aurelien@aurel32.net>, Peter
+ Maydell <peter.maydell@linaro.org>, Michael Walle <michael@walle.cc>
+Subject: Re: [PATCH 0/2] semihosting: Move it out of hw/
+Date: Fri, 05 Mar 2021 10:13:37 +0000
+In-reply-to: <20210226131356.3964782-1-f4bug@amsat.org>
+Message-ID: <87k0qlgb6v.fsf@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <20210212150256.885-1-zhiwei_liu@c-sky.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-Received-SPF: none client-ip=121.197.200.217;
- envelope-from=zhiwei_liu@c-sky.com; helo=smtp2200-217.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -52,81 +89,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Mar 2021 06:14:52 -0000
+X-List-Received-Date: Fri, 05 Mar 2021 10:13:55 -0000
 
-ping
 
-On 2021/2/12 23:02, LIU Zhiwei wrote:
-> This patchset implements the packed extension for RISC-V on QEMU.
->
-> This patchset have passed all my direct Linux user mode cases(RV64) and
-> bare metal cases(RV32) on X86-64 Ubuntu host machine. I will later push
-> these test cases to my repo(https://github.com/romanheros/qemu.git
-> branch:packed-upstream-v1).
->
-> I have ported packed extension on RISU, but I didn't find a simulator or
-> hardware to compare with. If anyone have one, please let me know.
->
-> Features:
->    * support specification packed extension v0.9.2(https://github.com/riscv/riscv-p-spec/)
->    * support basic packed extension.
->    * support Zp64.
->
-> LIU Zhiwei (38):
->    target/riscv: implementation-defined constant parameters
->    target/riscv: Hoist vector functions
->    target/riscv: Fixup saturate subtract function
->    target/riscv: 16-bit Addition & Subtraction Instructions
->    target/riscv: 8-bit Addition & Subtraction Instruction
->    target/riscv: SIMD 16-bit Shift Instructions
->    target/riscv: SIMD 8-bit Shift Instructions
->    target/riscv: SIMD 16-bit Compare Instructions
->    target/riscv: SIMD 8-bit Compare Instructions
->    target/riscv: SIMD 16-bit Multiply Instructions
->    target/riscv: SIMD 8-bit Multiply Instructions
->    target/riscv: SIMD 16-bit Miscellaneous Instructions
->    target/riscv: SIMD 8-bit Miscellaneous Instructions
->    target/riscv: 8-bit Unpacking Instructions
->    target/riscv: 16-bit Packing Instructions
->    target/riscv: Signed MSW 32x32 Multiply and Add Instructions
->    target/riscv: Signed MSW 32x16 Multiply and Add Instructions
->    target/riscv: Signed 16-bit Multiply 32-bit Add/Subtract Instructions
->    target/riscv: Signed 16-bit Multiply 64-bit Add/Subtract Instructions
->    target/riscv: Partial-SIMD Miscellaneous Instructions
->    target/riscv: 8-bit Multiply with 32-bit Add Instructions
->    target/riscv: 64-bit Add/Subtract Instructions
->    target/riscv: 32-bit Multiply 64-bit Add/Subtract Instructions
->    target/riscv: Signed 16-bit Multiply with 64-bit Add/Subtract
->      Instructions
->    target/riscv: Non-SIMD Q15 saturation ALU Instructions
->    target/riscv: Non-SIMD Q31 saturation ALU Instructions
->    target/riscv: 32-bit Computation Instructions
->    target/riscv: Non-SIMD Miscellaneous Instructions
->    target/riscv: RV64 Only SIMD 32-bit Add/Subtract Instructions
->    target/riscv: RV64 Only SIMD 32-bit Shift Instructions
->    target/riscv: RV64 Only SIMD 32-bit Miscellaneous Instructions
->    target/riscv: RV64 Only SIMD Q15 saturating Multiply Instructions
->    target/riscv: RV64 Only 32-bit Multiply Instructions
->    target/riscv: RV64 Only 32-bit Multiply & Add Instructions
->    target/riscv: RV64 Only 32-bit Parallel Multiply & Add Instructions
->    target/riscv: RV64 Only Non-SIMD 32-bit Shift Instructions
->    target/riscv: RV64 Only 32-bit Packing Instructions
->    target/riscv: configure and turn on packed extension from command line
->
->   target/riscv/cpu.c                      |   32 +
->   target/riscv/cpu.h                      |    6 +
->   target/riscv/helper.h                   |  332 ++
->   target/riscv/insn32-64.decode           |   93 +-
->   target/riscv/insn32.decode              |  285 ++
->   target/riscv/insn_trans/trans_rvp.c.inc | 1224 +++++++
->   target/riscv/internals.h                |   50 +
->   target/riscv/meson.build                |    1 +
->   target/riscv/packed_helper.c            | 3862 +++++++++++++++++++++++
->   target/riscv/translate.c                |    3 +
->   target/riscv/vector_helper.c            |   90 +-
->   11 files changed, 5912 insertions(+), 66 deletions(-)
->   create mode 100644 target/riscv/insn_trans/trans_rvp.c.inc
->   create mode 100644 target/riscv/packed_helper.c
->
+Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
 
+> In order to reduce CONFIG_USER_ONLY uses in hw/, move
+> semihosting out of it, being a generic feature.
+
+Queued to semihosting/next, thanks.
+
+--=20
+Alex Benn=C3=A9e
 
