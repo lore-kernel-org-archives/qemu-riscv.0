@@ -1,76 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lJG7e-0006cn-4I
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Mar 2021 08:40:34 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50344)
+	id 1lJGII-0006pY-LN
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Mar 2021 08:51:34 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53676)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1lJG7c-0006Yz-6t
- for qemu-riscv@nongnu.org; Mon, 08 Mar 2021 08:40:32 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:56620)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1lJG7W-0004Tr-Jh
- for qemu-riscv@nongnu.org; Mon, 08 Mar 2021 08:40:31 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1615210823;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=P26XU5A2Ztslhnr/o+XDQv6sKntmkGm3RLFFw/EZ+a4=;
- b=gjIUhaYasU68ElPiQznJnCsHkHwDHlU0O76z7X4qbKRwk7hnyZEM5vN2FDOMaqEr9DA4lc
- YCi+WEu4+RRkDxbcJv+bdYf40FL+uAcWn6x/lqhEKu4YRpbU7hl6rZTfifXnP4PDJtM877
- +PUCH/9elWeRuL2dFRmFgBGPsH/5RWQ=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-452-OWt9f6tYPo-XBiaZoCdkyw-1; Mon, 08 Mar 2021 08:40:21 -0500
-X-MC-Unique: OWt9f6tYPo-XBiaZoCdkyw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AF3EF63ADA;
- Mon,  8 Mar 2021 13:40:19 +0000 (UTC)
-Received: from [10.36.113.123] (ovpn-113-123.ams2.redhat.com [10.36.113.123])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 453FB60C43;
- Mon,  8 Mar 2021 13:40:07 +0000 (UTC)
-Subject: Re: [RFC PATCH v2 1/8] sysemu/tcg: Restrict tcg_exec_init() to
- CONFIG_TCG
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- qemu-devel@nongnu.org
-Cc: David Gibson <david@gibson.dropbear.id.au>, qemu-ppc@nongnu.org,
- qemu-s390x@nongnu.org, Thomas Huth <thuth@redhat.com>,
- Laurent Vivier <laurent@vivier.eu>, Cornelia Huck <cohuck@redhat.com>,
- Greg Kurz <groug@kaod.org>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-arm@nongnu.org, Eduardo Habkost <ehabkost@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
- Claudio Fontana <cfontana@suse.de>
-References: <20210304222323.1954755-1-f4bug@amsat.org>
- <20210304222323.1954755-2-f4bug@amsat.org>
-From: David Hildenbrand <david@redhat.com>
-Organization: Red Hat GmbH
-Message-ID: <e927dd5b-85c5-ddbf-aa16-2d1401a10bc3@redhat.com>
-Date: Mon, 8 Mar 2021 14:40:06 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1lJGIF-0006gJ-5z
+ for qemu-riscv@nongnu.org; Mon, 08 Mar 2021 08:51:31 -0500
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336]:46858)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1lJGI5-0001Fv-68
+ for qemu-riscv@nongnu.org; Mon, 08 Mar 2021 08:51:30 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ d139-20020a1c1d910000b029010b895cb6f2so3847504wmd.5
+ for <qemu-riscv@nongnu.org>; Mon, 08 Mar 2021 05:51:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=5ViVWtZ3No3EwiuLvapp181B6jvA1Zl37fC61JHK5PU=;
+ b=TJORMraYWiV20w8qDxwleyRNVTbR0TIBeI94ghcyq8tlh79y0d4L7nwo/m3niOq40b
+ hXKK7FhGpIhdRB7lomBs4Ho0ubfN2MUOCAzkymSbZPcQGPIGys3hUeX0WYRxKqdQVPqg
+ pSqeLwW4OdDG5xCwE0ysa7Z9A0GiCxYS34KpTShrJeWuR0XmLxDqhw1PxK8F2fvBRbbw
+ agelcXI94uSbi+BTHoZFP4O8sPC5BhN5AYPXjTpVq3U/cmpCzObRBDuQ6FEfSMBrjGSJ
+ B15zYfWEIPmPQYFaq8XJKAdE9OAmANB/1RwOyIgx4UQ8mT0rR2ZVgOdc/Fbv31eF3mio
+ g0GA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=5ViVWtZ3No3EwiuLvapp181B6jvA1Zl37fC61JHK5PU=;
+ b=jSeCSfAxSDLQgr5y2GjR+mCwjLHxSRu4O48Dvj56719LSY8myDsOpc/9DcQPIZ/Wj0
+ LRq/KKQuBaFU0/fuKzIhEaAxtZFGZ6s3tP2U8dNp2h6zzEO3qEWNFiHL+czmwHJ0/hnt
+ NnP7hjUMAFEFF30RyYXq9zH5ik9p+y2czPypYlz45o0VFiW/NfqqiQn6jKHCFnmP8exw
+ dcICKNumAbz88s+YxYYa7aFr/XmSIHQM3QkwrekJuj7t7iXGNrg/XekXBKXNQhvegGHF
+ ebT6lrYjZ3pyDKf48rWOQhnAU9d0GrvL41JHePV9bI9vl9T8UetrcX0gn6Iwb6LDuihl
+ TOMg==
+X-Gm-Message-State: AOAM532fVBnr1G6EhNnTaUyAPjxfkLmimGW/wn7wdZ8ogaD9LlPYVXa2
+ XczEmYMII5vvmdqEvufVifSBFw==
+X-Google-Smtp-Source: ABdhPJxue4Yz6kyYhmmiB5Vn+HdqZkVx9Qye3KB7dMj0OGCelTgX5k4HApjvnNY/gb0RvaoIQuAXYA==
+X-Received: by 2002:a1c:195:: with SMTP id 143mr21688670wmb.81.1615211479644; 
+ Mon, 08 Mar 2021 05:51:19 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id k4sm23496842wrd.9.2021.03.08.05.51.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Mar 2021 05:51:17 -0800 (PST)
+Received: from zen.lan (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id D4BE61FF9A;
+ Mon,  8 Mar 2021 13:51:05 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: peter.maydell@linaro.org
+Cc: qemu-devel@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PULL 11/18] hw/riscv: migrate fdt field to generic MachineState
+Date: Mon,  8 Mar 2021 13:50:57 +0000
+Message-Id: <20210308135104.24903-12-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210308135104.24903-1-alex.bennee@linaro.org>
+References: <20210308135104.24903-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <20210304222323.1954755-2-f4bug@amsat.org>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=david@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=63.128.21.124; envelope-from=david@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -29
-X-Spam_score: -3.0
-X-Spam_bar: ---
-X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.251,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001,
- RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -84,48 +88,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Mar 2021 13:40:33 -0000
+X-List-Received-Date: Mon, 08 Mar 2021 13:51:31 -0000
 
-On 04.03.21 23:23, Philippe Mathieu-Daudé wrote:
-> Invert the #ifdef'ry to easily restrict tcg_exec_init() declaration
-> to CONFIG_TCG.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-> ---
->   include/sysemu/tcg.h | 10 ++++++----
->   1 file changed, 6 insertions(+), 4 deletions(-)
-> 
-> diff --git a/include/sysemu/tcg.h b/include/sysemu/tcg.h
-> index 00349fb18a7..fddde2b6b9a 100644
-> --- a/include/sysemu/tcg.h
-> +++ b/include/sysemu/tcg.h
-> @@ -8,13 +8,15 @@
->   #ifndef SYSEMU_TCG_H
->   #define SYSEMU_TCG_H
->   
-> +#ifndef CONFIG_TCG
-> +#define tcg_enabled() 0
-> +#else
-> +
->   void tcg_exec_init(unsigned long tb_size, int splitwx);
->   
-> -#ifdef CONFIG_TCG
->   extern bool tcg_allowed;
->   #define tcg_enabled() (tcg_allowed)
-> -#else
-> -#define tcg_enabled() 0
-> -#endif
-> +
-> +#endif /* CONFIG_TCG */
->   
->   #endif
-> 
+This is a mechanical change to make the fdt available through
+MachineState.
 
-Reviewed-by: David Hildenbrand <david@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Message-Id: <20210303173642.3805-3-alex.bennee@linaro.org>
 
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 84b7a3848f..632da52018 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -41,7 +41,6 @@ struct RISCVVirtState {
+     DeviceState *plic[VIRT_SOCKETS_MAX];
+     PFlashCFI01 *flash[2];
+ 
+-    void *fdt;
+     int fdt_size;
+ };
+ 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 4f0c2fbca0..0b39101a5e 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -195,14 +195,14 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+     hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
+ 
+     if (mc->dtb) {
+-        fdt = s->fdt = load_device_tree(mc->dtb, &s->fdt_size);
++        fdt = mc->fdt = load_device_tree(mc->dtb, &s->fdt_size);
+         if (!fdt) {
+             error_report("load_device_tree() failed");
+             exit(1);
+         }
+         goto update_bootargs;
+     } else {
+-        fdt = s->fdt = create_device_tree(&s->fdt_size);
++        fdt = mc->fdt = create_device_tree(&s->fdt_size);
+         if (!fdt) {
+             error_report("create_device_tree() failed");
+             exit(1);
+@@ -444,12 +444,12 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+     g_free(name);
+ 
+     name = g_strdup_printf("/soc/flash@%" PRIx64, flashbase);
+-    qemu_fdt_add_subnode(s->fdt, name);
+-    qemu_fdt_setprop_string(s->fdt, name, "compatible", "cfi-flash");
+-    qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
++    qemu_fdt_add_subnode(mc->fdt, name);
++    qemu_fdt_setprop_string(mc->fdt, name, "compatible", "cfi-flash");
++    qemu_fdt_setprop_sized_cells(mc->fdt, name, "reg",
+                                  2, flashbase, 2, flashsize,
+                                  2, flashbase + flashsize, 2, flashsize);
+-    qemu_fdt_setprop_cell(s->fdt, name, "bank-width", 4);
++    qemu_fdt_setprop_cell(mc->fdt, name, "bank-width", 4);
+     g_free(name);
+ 
+ update_bootargs:
+@@ -667,9 +667,9 @@ static void virt_machine_init(MachineState *machine)
+             hwaddr end = riscv_load_initrd(machine->initrd_filename,
+                                            machine->ram_size, kernel_entry,
+                                            &start);
+-            qemu_fdt_setprop_cell(s->fdt, "/chosen",
++            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
+                                   "linux,initrd-start", start);
+-            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
++            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
+                                   end);
+         }
+     } else {
+@@ -690,12 +690,12 @@ static void virt_machine_init(MachineState *machine)
+ 
+     /* Compute the fdt load address in dram */
+     fdt_load_addr = riscv_load_fdt(memmap[VIRT_DRAM].base,
+-                                   machine->ram_size, s->fdt);
++                                   machine->ram_size, machine->fdt);
+     /* load the reset vector */
+     riscv_setup_rom_reset_vec(machine, &s->soc[0], start_addr,
+                               virt_memmap[VIRT_MROM].base,
+                               virt_memmap[VIRT_MROM].size, kernel_entry,
+-                              fdt_load_addr, s->fdt);
++                              fdt_load_addr, machine->fdt);
+ 
+     /* SiFive Test MMIO device */
+     sifive_test_create(memmap[VIRT_TEST].base);
 -- 
-Thanks,
-
-David / dhildenb
+2.20.1
 
 
