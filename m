@@ -1,88 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lIAv3-0007lK-DZ
-	for mharc-qemu-riscv@gnu.org; Fri, 05 Mar 2021 08:55:05 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37802)
+	id 1lJEld-0004Lz-N2
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Mar 2021 07:13:45 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34208)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1lIAv0-0007fG-Uy
- for qemu-riscv@nongnu.org; Fri, 05 Mar 2021 08:55:02 -0500
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431]:42829)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1lIAuw-00079g-NV
- for qemu-riscv@nongnu.org; Fri, 05 Mar 2021 08:55:02 -0500
-Received: by mail-wr1-x431.google.com with SMTP id j2so2168195wrx.9
- for <qemu-riscv@nongnu.org>; Fri, 05 Mar 2021 05:54:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=MupsZ87lXP1Mr2svUts96dM3pR11RQaXebcgIZ/+VwI=;
- b=jkanQvyIQym4YGOj+5qMM3YlHiN7MrXjcgJB+knzRGOf2SYAlcg85dzRk82iS6XIay
- TkfjYjzz/MV+iyI8ttxMxWPGdfDdtiDshPqzWmGKTyYsHvfwmuH+9mgefX2lLho8Dtfq
- hnjEhVd1XeXaAQmzH+NtKChhKQKeRDa139Kw2zoiWkz6aBC1MjPtYyighgHS4YEIzHfy
- 7a5/5TcIXW5dJJAaNU37bQbN4PKlPA5JWBDYiCh61Er7UfaJfj3PCzBhxVHpa9wj/orV
- blKJY6klAXywlJHA+/aMz21dUKsCogtwMY+9Qy48yTdLNmZK/ekpdOVjbEuOzfAgvoFm
- /+8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=MupsZ87lXP1Mr2svUts96dM3pR11RQaXebcgIZ/+VwI=;
- b=Zc4008eR9CI0gzBqpN9pR92nDoNV5FK+oPYW/Y0HaTey0wSDTJcldD8hKVLbcVFdi2
- Y7BzqfE5rCZGlrmVUuB2W9L67H4M2buKtuyVcij441Vbwd96fhtbUoRqWwVjWNMwKeXp
- yb2IJhrMEGvkX7A/whukGkuDtKTBqTtncU3Ym/LCO9SFdpBG+eOmYc4Pu49lyJHwPsVv
- l89p12cd/llyA61JGNn4D0U3qoqN5xxK5vcPXCKSquzQq5y4dpecgRe4Ubx5z58fT+ui
- Hr6Qnbr8rM4M3rJsBSeGA81CE9mSozBbNvqFrsvAEhr98tfKJYMerbjArcNx/w3t5iBU
- MS7g==
-X-Gm-Message-State: AOAM5302slCAxaONaWz0Zyr5Y5Nkh6Yod+RG0clQVUTsvrqaUnM7/wJt
- FbKJhpf0KF971bO4bpRCbl3Mog==
-X-Google-Smtp-Source: ABdhPJzXecnLjjGLzXZH4pGzjgKDelFL8rHf50OhIFSTAILgrRbrj8Z68QOyPO4Qya5GRzojel1Yvw==
-X-Received: by 2002:adf:a406:: with SMTP id d6mr9580631wra.141.1614952497417; 
- Fri, 05 Mar 2021 05:54:57 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id p6sm4516932wru.2.2021.03.05.05.54.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Mar 2021 05:54:54 -0800 (PST)
-Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 102031FF87;
- Fri,  5 Mar 2021 13:54:52 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, Michael Walle <michael@walle.cc>,
- Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Guan Xuetao <gxt@mprc.pku.edu.cn>, Max Filippov <jcmvbkbc@gmail.com>,
- qemu-arm@nongnu.org (open list:ARM TCG CPUs),
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v1 1/3] semihosting: Move include/hw/semihosting/ ->
- include/semihosting/
-Date: Fri,  5 Mar 2021 13:54:49 +0000
-Message-Id: <20210305135451.15427-2-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20210305135451.15427-1-alex.bennee@linaro.org>
-References: <20210305135451.15427-1-alex.bennee@linaro.org>
+ (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
+ id 1lJElX-0004Hd-Il; Mon, 08 Mar 2021 07:13:40 -0500
+Received: from mx2.suse.de ([195.135.220.15]:46550)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
+ id 1lJElS-0002QW-0u; Mon, 08 Mar 2021 07:13:39 -0500
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id B049CAC0C;
+ Mon,  8 Mar 2021 12:13:29 +0000 (UTC)
+Subject: Re: [RFC PATCH v2 6/8] cpu: Declare cpu_has_work() in 'sysemu/tcg.h'
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ qemu-devel@nongnu.org
+Cc: David Hildenbrand <david@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-ppc@nongnu.org,
+ qemu-s390x@nongnu.org, Thomas Huth <thuth@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>, Cornelia Huck <cohuck@redhat.com>,
+ Greg Kurz <groug@kaod.org>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-arm@nongnu.org, Eduardo Habkost <ehabkost@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+References: <20210304222323.1954755-1-f4bug@amsat.org>
+ <20210304222323.1954755-7-f4bug@amsat.org>
+From: Claudio Fontana <cfontana@suse.de>
+Message-ID: <417b5d4a-b1a6-92be-5d84-f8ef28f793c9@suse.de>
+Date: Mon, 8 Mar 2021 13:13:28 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20210304222323.1954755-7-f4bug@amsat.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=195.135.220.15; envelope-from=cfontana@suse.de;
+ helo=mx2.suse.de
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -95,426 +57,121 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Mar 2021 13:55:03 -0000
+X-List-Received-Date: Mon, 08 Mar 2021 12:13:41 -0000
 
-From: Philippe Mathieu-Daudé <f4bug@amsat.org>
+On 3/4/21 11:23 PM, Philippe Mathieu-Daudé wrote:
+> We can only check if a vCPU has work with TCG.
+> Move the cpu_has_work() prototype to "sysemu/tcg.h".
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+> ---
+> RFC: could another accelerator do that?
+>      can we rename this tcg_vcpu_has_work()?
+> ---
+>  include/hw/core/cpu.h | 16 ----------------
+>  include/sysemu/tcg.h  | 11 +++++++++++
+>  accel/tcg/cpu-exec.c  |  7 +++++++
+>  softmmu/cpus.c        |  1 +
+>  4 files changed, 19 insertions(+), 16 deletions(-)
+> 
+> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+> index 1376e496a3f..66109bcca35 100644
+> --- a/include/hw/core/cpu.h
+> +++ b/include/hw/core/cpu.h
+> @@ -670,22 +670,6 @@ CPUState *cpu_create(const char *typename);
+>   */
+>  const char *parse_cpu_option(const char *cpu_option);
+>  
+> -/**
+> - * cpu_has_work:
+> - * @cpu: The vCPU to check.
+> - *
+> - * Checks whether the CPU has work to do.
+> - *
+> - * Returns: %true if the CPU has work, %false otherwise.
+> - */
+> -static inline bool cpu_has_work(CPUState *cpu)
+> -{
+> -    CPUClass *cc = CPU_GET_CLASS(cpu);
+> -
+> -    g_assert(cc->has_work);
+> -    return cc->has_work(cpu);
+> -}
+> -
+>  /**
+>   * qemu_cpu_is_self:
+>   * @cpu: The vCPU to check against.
+> diff --git a/include/sysemu/tcg.h b/include/sysemu/tcg.h
+> index c16c13c3c69..3d46b0a7a93 100644
+> --- a/include/sysemu/tcg.h
+> +++ b/include/sysemu/tcg.h
+> @@ -10,6 +10,7 @@
+>  
+>  #ifndef CONFIG_TCG
+>  #define tcg_enabled() 0
+> +#define cpu_has_work(cpu) false
 
-We want to move the semihosting code out of hw/ in the next patch.
 
-This patch contains the mechanical steps, created using:
+I am not sure I like this approach,
 
-  $ git mv include/hw/semihosting/ include/
-  $ sed -i s,hw/semihosting,semihosting, $(git grep -l hw/semihosting)
+it is misleading for the reader: cpu_has_work should not be called for TCG at all,
+or at least a clue should be given that it is indeed a TCG-only function.
 
-Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20210226131356.3964782-2-f4bug@amsat.org>
----
- include/{hw => }/semihosting/console.h  | 0
- include/{hw => }/semihosting/semihost.h | 0
- gdbstub.c                               | 2 +-
- hw/mips/malta.c                         | 2 +-
- hw/semihosting/arm-compat-semi.c        | 6 +++---
- hw/semihosting/config.c                 | 2 +-
- hw/semihosting/console.c                | 4 ++--
- linux-user/aarch64/cpu_loop.c           | 2 +-
- linux-user/arm/cpu_loop.c               | 2 +-
- linux-user/riscv/cpu_loop.c             | 2 +-
- linux-user/semihost.c                   | 2 +-
- softmmu/vl.c                            | 2 +-
- stubs/semihost.c                        | 2 +-
- target/arm/helper.c                     | 4 ++--
- target/arm/m_helper.c                   | 4 ++--
- target/arm/translate-a64.c              | 2 +-
- target/arm/translate.c                  | 2 +-
- target/lm32/helper.c                    | 2 +-
- target/m68k/op_helper.c                 | 2 +-
- target/mips/cpu.c                       | 2 +-
- target/mips/mips-semi.c                 | 4 ++--
- target/mips/translate.c                 | 2 +-
- target/nios2/helper.c                   | 2 +-
- target/riscv/cpu_helper.c               | 2 +-
- target/unicore32/helper.c               | 2 +-
- target/xtensa/translate.c               | 2 +-
- target/xtensa/xtensa-semi.c             | 2 +-
- MAINTAINERS                             | 2 +-
- 28 files changed, 32 insertions(+), 32 deletions(-)
- rename include/{hw => }/semihosting/console.h (100%)
- rename include/{hw => }/semihosting/semihost.h (100%)
+Otherwise, from the common code, the reader does not have any clue from the context that this is actually meaningful for TCG only.
 
-diff --git a/include/hw/semihosting/console.h b/include/semihosting/console.h
-similarity index 100%
-rename from include/hw/semihosting/console.h
-rename to include/semihosting/console.h
-diff --git a/include/hw/semihosting/semihost.h b/include/semihosting/semihost.h
-similarity index 100%
-rename from include/hw/semihosting/semihost.h
-rename to include/semihosting/semihost.h
-diff --git a/gdbstub.c b/gdbstub.c
-index 3ee40479b6..e51e33cc70 100644
---- a/gdbstub.c
-+++ b/gdbstub.c
-@@ -49,7 +49,7 @@
- #include "sysemu/hw_accel.h"
- #include "sysemu/kvm.h"
- #include "sysemu/runstate.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "exec/exec-all.h"
- #include "sysemu/replay.h"
- 
-diff --git a/hw/mips/malta.c b/hw/mips/malta.c
-index 9afc0b427b..26e7b1bd9f 100644
---- a/hw/mips/malta.c
-+++ b/hw/mips/malta.c
-@@ -58,7 +58,7 @@
- #include "qemu/error-report.h"
- #include "hw/misc/empty_slot.h"
- #include "sysemu/kvm.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "hw/mips/cps.h"
- #include "hw/qdev-clock.h"
- 
-diff --git a/hw/semihosting/arm-compat-semi.c b/hw/semihosting/arm-compat-semi.c
-index 23c6e3edcb..94950b6c56 100644
---- a/hw/semihosting/arm-compat-semi.c
-+++ b/hw/semihosting/arm-compat-semi.c
-@@ -34,9 +34,9 @@
- #include "qemu/osdep.h"
- 
- #include "cpu.h"
--#include "hw/semihosting/semihost.h"
--#include "hw/semihosting/console.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/semihost.h"
-+#include "semihosting/console.h"
-+#include "semihosting/common-semi.h"
- #include "qemu/log.h"
- #include "qemu/timer.h"
- #ifdef CONFIG_USER_ONLY
-diff --git a/hw/semihosting/config.c b/hw/semihosting/config.c
-index 9807f10cb0..3548e0f627 100644
---- a/hw/semihosting/config.c
-+++ b/hw/semihosting/config.c
-@@ -22,7 +22,7 @@
- #include "qemu/option.h"
- #include "qemu/config-file.h"
- #include "qemu/error-report.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "chardev/char.h"
- #include "sysemu/sysemu.h"
- 
-diff --git a/hw/semihosting/console.c b/hw/semihosting/console.c
-index 9b4fee9260..c9ebd6fdd0 100644
---- a/hw/semihosting/console.c
-+++ b/hw/semihosting/console.c
-@@ -17,8 +17,8 @@
- 
- #include "qemu/osdep.h"
- #include "cpu.h"
--#include "hw/semihosting/semihost.h"
--#include "hw/semihosting/console.h"
-+#include "semihosting/semihost.h"
-+#include "semihosting/console.h"
- #include "exec/gdbstub.h"
- #include "exec/exec-all.h"
- #include "qemu/log.h"
-diff --git a/linux-user/aarch64/cpu_loop.c b/linux-user/aarch64/cpu_loop.c
-index 7c42f65706..ee72a1c20f 100644
---- a/linux-user/aarch64/cpu_loop.c
-+++ b/linux-user/aarch64/cpu_loop.c
-@@ -22,7 +22,7 @@
- #include "qemu.h"
- #include "cpu_loop-common.h"
- #include "qemu/guest-random.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- #include "target/arm/syndrome.h"
- 
- #define get_user_code_u32(x, gaddr, env)                \
-diff --git a/linux-user/arm/cpu_loop.c b/linux-user/arm/cpu_loop.c
-index cadfb7fa43..989d03cd89 100644
---- a/linux-user/arm/cpu_loop.c
-+++ b/linux-user/arm/cpu_loop.c
-@@ -22,7 +22,7 @@
- #include "qemu.h"
- #include "elf.h"
- #include "cpu_loop-common.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- 
- #define get_user_code_u32(x, gaddr, env)                \
-     ({ abi_long __r = get_user_u32((x), (gaddr));       \
-diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
-index 9665dabb09..6767f941e8 100644
---- a/linux-user/riscv/cpu_loop.c
-+++ b/linux-user/riscv/cpu_loop.c
-@@ -23,7 +23,7 @@
- #include "qemu.h"
- #include "cpu_loop-common.h"
- #include "elf.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- 
- void cpu_loop(CPURISCVState *env)
- {
-diff --git a/linux-user/semihost.c b/linux-user/semihost.c
-index c0015ee7f6..82013b8b48 100644
---- a/linux-user/semihost.c
-+++ b/linux-user/semihost.c
-@@ -12,7 +12,7 @@
- 
- #include "qemu/osdep.h"
- #include "cpu.h"
--#include "hw/semihosting/console.h"
-+#include "semihosting/console.h"
- #include "qemu.h"
- #include <termios.h>
- 
-diff --git a/softmmu/vl.c b/softmmu/vl.c
-index 10bd8a10a3..ac06dfbae0 100644
---- a/softmmu/vl.c
-+++ b/softmmu/vl.c
-@@ -108,7 +108,7 @@
- #include "qapi/opts-visitor.h"
- #include "qapi/clone-visitor.h"
- #include "qom/object_interfaces.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "crypto/init.h"
- #include "sysemu/replay.h"
- #include "qapi/qapi-events-run-state.h"
-diff --git a/stubs/semihost.c b/stubs/semihost.c
-index 1d8b37f7b2..1b30f38b03 100644
---- a/stubs/semihost.c
-+++ b/stubs/semihost.c
-@@ -11,7 +11,7 @@
- #include "qemu/osdep.h"
- #include "qemu/option.h"
- #include "qemu/error-report.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "sysemu/sysemu.h"
- 
- /* Empty config */
-diff --git a/target/arm/helper.c b/target/arm/helper.c
-index 0e1a3b9421..d763f376c6 100644
---- a/target/arm/helper.c
-+++ b/target/arm/helper.c
-@@ -22,7 +22,7 @@
- #include "exec/exec-all.h"
- #include <zlib.h> /* For crc32 */
- #include "hw/irq.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "sysemu/cpus.h"
- #include "sysemu/cpu-timers.h"
- #include "sysemu/kvm.h"
-@@ -34,7 +34,7 @@
- #ifdef CONFIG_TCG
- #include "arm_ldst.h"
- #include "exec/cpu_ldst.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- #endif
- 
- #define ARM_CPU_FREQ 1000000000 /* FIXME: 1 GHz, should be configurable */
-diff --git a/target/arm/m_helper.c b/target/arm/m_helper.c
-index 731c435c00..d63ae465e1 100644
---- a/target/arm/m_helper.c
-+++ b/target/arm/m_helper.c
-@@ -21,7 +21,7 @@
- #include "qemu/qemu-print.h"
- #include "exec/exec-all.h"
- #include <zlib.h> /* For crc32 */
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "sysemu/cpus.h"
- #include "sysemu/kvm.h"
- #include "qemu/range.h"
-@@ -31,7 +31,7 @@
- #ifdef CONFIG_TCG
- #include "arm_ldst.h"
- #include "exec/cpu_ldst.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- #endif
- 
- static void v7m_msr_xpsr(CPUARMState *env, uint32_t mask,
-diff --git a/target/arm/translate-a64.c b/target/arm/translate-a64.c
-index b23a8975d5..6d002e2c63 100644
---- a/target/arm/translate-a64.c
-+++ b/target/arm/translate-a64.c
-@@ -28,7 +28,7 @@
- #include "internals.h"
- #include "qemu/host-utils.h"
- 
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "exec/gen-icount.h"
- 
- #include "exec/helper-proto.h"
-diff --git a/target/arm/translate.c b/target/arm/translate.c
-index 1653cca1aa..62b1c2081b 100644
---- a/target/arm/translate.c
-+++ b/target/arm/translate.c
-@@ -29,7 +29,7 @@
- #include "qemu/log.h"
- #include "qemu/bitops.h"
- #include "arm_ldst.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- 
- #include "exec/helper-proto.h"
- #include "exec/helper-gen.h"
-diff --git a/target/lm32/helper.c b/target/lm32/helper.c
-index 7c52ae76d6..01cc3c53a5 100644
---- a/target/lm32/helper.c
-+++ b/target/lm32/helper.c
-@@ -21,7 +21,7 @@
- #include "cpu.h"
- #include "exec/exec-all.h"
- #include "qemu/host-utils.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "exec/log.h"
- 
- bool lm32_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-diff --git a/target/m68k/op_helper.c b/target/m68k/op_helper.c
-index 202498deb5..730cdf7744 100644
---- a/target/m68k/op_helper.c
-+++ b/target/m68k/op_helper.c
-@@ -21,7 +21,7 @@
- #include "exec/helper-proto.h"
- #include "exec/exec-all.h"
- #include "exec/cpu_ldst.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- 
- #if defined(CONFIG_USER_ONLY)
- 
-diff --git a/target/mips/cpu.c b/target/mips/cpu.c
-index bf70c77295..bd4dca571f 100644
---- a/target/mips/cpu.c
-+++ b/target/mips/cpu.c
-@@ -31,7 +31,7 @@
- #include "exec/exec-all.h"
- #include "hw/qdev-properties.h"
- #include "hw/qdev-clock.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "qapi/qapi-commands-machine-target.h"
- #include "fpu_helper.h"
- 
-diff --git a/target/mips/mips-semi.c b/target/mips/mips-semi.c
-index 898251aa02..6de60fa6dd 100644
---- a/target/mips/mips-semi.c
-+++ b/target/mips/mips-semi.c
-@@ -22,8 +22,8 @@
- #include "qemu/log.h"
- #include "exec/helper-proto.h"
- #include "exec/softmmu-semi.h"
--#include "hw/semihosting/semihost.h"
--#include "hw/semihosting/console.h"
-+#include "semihosting/semihost.h"
-+#include "semihosting/console.h"
- 
- typedef enum UHIOp {
-     UHI_exit = 1,
-diff --git a/target/mips/translate.c b/target/mips/translate.c
-index 70891c37cd..0b6d82d228 100644
---- a/target/mips/translate.c
-+++ b/target/mips/translate.c
-@@ -29,7 +29,7 @@
- #include "exec/translator.h"
- #include "exec/helper-proto.h"
- #include "exec/helper-gen.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- 
- #include "target/mips/trace.h"
- #include "trace-tcg.h"
-diff --git a/target/nios2/helper.c b/target/nios2/helper.c
-index 57c97bde3c..53be8398e9 100644
---- a/target/nios2/helper.c
-+++ b/target/nios2/helper.c
-@@ -26,7 +26,7 @@
- #include "exec/cpu_ldst.h"
- #include "exec/log.h"
- #include "exec/helper-proto.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- 
- #if defined(CONFIG_USER_ONLY)
- 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 2f43939fb6..83a6bcfad0 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -24,7 +24,7 @@
- #include "exec/exec-all.h"
- #include "tcg/tcg-op.h"
- #include "trace.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- 
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
- {
-diff --git a/target/unicore32/helper.c b/target/unicore32/helper.c
-index 54c26871fe..704393c27f 100644
---- a/target/unicore32/helper.c
-+++ b/target/unicore32/helper.c
-@@ -14,7 +14,7 @@
- #include "cpu.h"
- #include "exec/exec-all.h"
- #include "exec/helper-proto.h"
--#include "hw/semihosting/console.h"
-+#include "semihosting/console.h"
- 
- #undef DEBUG_UC32
- 
-diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
-index 944a157747..0ae4efc48a 100644
---- a/target/xtensa/translate.c
-+++ b/target/xtensa/translate.c
-@@ -37,7 +37,7 @@
- #include "qemu/log.h"
- #include "qemu/qemu-print.h"
- #include "exec/cpu_ldst.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "exec/translator.h"
- 
- #include "exec/helper-proto.h"
-diff --git a/target/xtensa/xtensa-semi.c b/target/xtensa/xtensa-semi.c
-index 25f57a6500..79f2b043f2 100644
---- a/target/xtensa/xtensa-semi.c
-+++ b/target/xtensa/xtensa-semi.c
-@@ -29,7 +29,7 @@
- #include "cpu.h"
- #include "chardev/char-fe.h"
- #include "exec/helper-proto.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "qapi/error.h"
- #include "qemu/log.h"
- 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1443278059..37ddf90669 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -3227,7 +3227,7 @@ Semihosting
- M: Alex Bennée <alex.bennee@linaro.org>
- S: Maintained
- F: hw/semihosting/
--F: include/hw/semihosting/
-+F: include/semihosting/
- 
- Multi-process QEMU
- M: Elena Ufimtseva <elena.ufimtseva@oracle.com>
--- 
-2.20.1
+Where is this actually used..?
+
+
+>  #else
+>  
+>  void tcg_exec_init(unsigned long tb_size, int splitwx);
+> @@ -26,6 +27,16 @@ extern bool tcg_allowed;
+>  extern bool mttcg_enabled;
+>  #define qemu_tcg_mttcg_enabled() (mttcg_enabled)
+>  
+> +/**
+> + * cpu_has_work:
+> + * @cpu: The vCPU to check.
+> + *
+> + * Checks whether the CPU has work to do.
+> + *
+> + * Returns: %true if the CPU has work, %false otherwise.
+> + */
+> +bool cpu_has_work(CPUState *cpu);
+> +
+>  #endif /* CONFIG_TCG */
+>  
+>  #endif
+> diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+> index 7e67ade35b9..b9ce36e59e2 100644
+> --- a/accel/tcg/cpu-exec.c
+> +++ b/accel/tcg/cpu-exec.c
+> @@ -447,6 +447,13 @@ static inline TranslationBlock *tb_find(CPUState *cpu,
+>      return tb;
+>  }
+>  
+> +bool cpu_has_work(CPUState *cpu)
+> +{
+> +    CPUClass *cc = CPU_GET_CLASS(cpu);
+> +
+> +    return cc->has_work(cpu);
+> +}
+> +
+>  static inline bool cpu_handle_halt(CPUState *cpu)
+>  {
+>      if (cpu->halted) {
+> diff --git a/softmmu/cpus.c b/softmmu/cpus.c
+> index a7ee431187a..548ab9236f1 100644
+> --- a/softmmu/cpus.c
+> +++ b/softmmu/cpus.c
+> @@ -42,6 +42,7 @@
+>  #include "sysemu/runstate.h"
+>  #include "sysemu/cpu-timers.h"
+>  #include "sysemu/whpx.h"
+> +#include "sysemu/tcg.h"
+>  #include "hw/boards.h"
+>  #include "hw/hw.h"
+>  
+> 
 
 
