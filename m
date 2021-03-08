@@ -1,40 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lJHDh-0001ug-VW
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Mar 2021 09:50:53 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41740)
+	id 1lJHFB-0003Wj-NE
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Mar 2021 09:52:27 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42114)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
- id 1lJHDg-0001sj-Hj; Mon, 08 Mar 2021 09:50:52 -0500
-Received: from mx2.suse.de ([195.135.220.15]:44350)
+ id 1lJHF7-0003VR-H1; Mon, 08 Mar 2021 09:52:21 -0500
+Received: from mx2.suse.de ([195.135.220.15]:46950)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
- id 1lJHDd-0002Hv-EQ; Mon, 08 Mar 2021 09:50:52 -0500
+ id 1lJHF5-000372-Vb; Mon, 08 Mar 2021 09:52:21 -0500
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 52A9EAE30;
- Mon,  8 Mar 2021 14:50:45 +0000 (UTC)
-Subject: Re: [RFC PATCH v2 1/8] sysemu/tcg: Restrict tcg_exec_init() to
- CONFIG_TCG
-To: David Hildenbrand <david@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ by mx2.suse.de (Postfix) with ESMTP id 14D40AE15;
+ Mon,  8 Mar 2021 14:52:17 +0000 (UTC)
+Subject: Re: [RFC PATCH v2 2/8] sysemu/tcg: Restrict qemu_tcg_mttcg_enabled()
+ to TCG
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
  qemu-devel@nongnu.org
-Cc: David Gibson <david@gibson.dropbear.id.au>, qemu-ppc@nongnu.org,
- qemu-s390x@nongnu.org, Thomas Huth <thuth@redhat.com>,
- Laurent Vivier <laurent@vivier.eu>, Cornelia Huck <cohuck@redhat.com>,
- Greg Kurz <groug@kaod.org>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-arm@nongnu.org, Eduardo Habkost <ehabkost@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>, Thomas Huth <thuth@redhat.com>, 
+ qemu-riscv@nongnu.org, Eduardo Habkost <ehabkost@redhat.com>,
+ David Hildenbrand <david@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Laurent Vivier <laurent@vivier.eu>, Greg Kurz <groug@kaod.org>,
+ qemu-s390x@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>
 References: <20210304222323.1954755-1-f4bug@amsat.org>
- <20210304222323.1954755-2-f4bug@amsat.org>
- <e927dd5b-85c5-ddbf-aa16-2d1401a10bc3@redhat.com>
+ <20210304222323.1954755-3-f4bug@amsat.org>
 From: Claudio Fontana <cfontana@suse.de>
-Message-ID: <442914dd-1059-dba4-fc14-09671e041747@suse.de>
-Date: Mon, 8 Mar 2021 15:50:44 +0100
+Message-ID: <ab719bff-5af7-c663-1665-816cecdd2f6e@suse.de>
+Date: Mon, 8 Mar 2021 15:52:16 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <e927dd5b-85c5-ddbf-aa16-2d1401a10bc3@redhat.com>
+In-Reply-To: <20210304222323.1954755-3-f4bug@amsat.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -58,45 +57,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Mar 2021 14:50:53 -0000
+X-List-Received-Date: Mon, 08 Mar 2021 14:52:22 -0000
 
-On 3/8/21 2:40 PM, David Hildenbrand wrote:
-> On 04.03.21 23:23, Philippe Mathieu-Daudé wrote:
->> Invert the #ifdef'ry to easily restrict tcg_exec_init() declaration
->> to CONFIG_TCG.
->>
->> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
->> ---
->>   include/sysemu/tcg.h | 10 ++++++----
->>   1 file changed, 6 insertions(+), 4 deletions(-)
->>
->> diff --git a/include/sysemu/tcg.h b/include/sysemu/tcg.h
->> index 00349fb18a7..fddde2b6b9a 100644
->> --- a/include/sysemu/tcg.h
->> +++ b/include/sysemu/tcg.h
->> @@ -8,13 +8,15 @@
->>   #ifndef SYSEMU_TCG_H
->>   #define SYSEMU_TCG_H
->>   
->> +#ifndef CONFIG_TCG
->> +#define tcg_enabled() 0
->> +#else
->> +
->>   void tcg_exec_init(unsigned long tb_size, int splitwx);
->>   
->> -#ifdef CONFIG_TCG
->>   extern bool tcg_allowed;
->>   #define tcg_enabled() (tcg_allowed)
->> -#else
->> -#define tcg_enabled() 0
->> -#endif
->> +
->> +#endif /* CONFIG_TCG */
->>   
->>   #endif
->>
+On 3/4/21 11:23 PM, Philippe Mathieu-Daudé wrote:
+> qemu_tcg_mttcg_enabled() shouldn't not be used outside of TCG,
+> restrict its declaration.
 > 
-> Reviewed-by: David Hildenbrand <david@redhat.com>
-> 
+> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+
 Reviewed-by: Claudio Fontana <cfontana@suse.de>
+
+> ---
+>  include/hw/core/cpu.h | 9 ---------
+>  include/sysemu/tcg.h  | 9 +++++++++
+>  accel/tcg/cpu-exec.c  | 1 +
+>  tcg/tcg.c             | 1 +
+>  4 files changed, 11 insertions(+), 9 deletions(-)
+> 
+> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+> index e3648338dfe..1376e496a3f 100644
+> --- a/include/hw/core/cpu.h
+> +++ b/include/hw/core/cpu.h
+> @@ -454,15 +454,6 @@ static inline void cpu_tb_jmp_cache_clear(CPUState *cpu)
+>      }
+>  }
+>  
+> -/**
+> - * qemu_tcg_mttcg_enabled:
+> - * Check whether we are running MultiThread TCG or not.
+> - *
+> - * Returns: %true if we are in MTTCG mode %false otherwise.
+> - */
+> -extern bool mttcg_enabled;
+> -#define qemu_tcg_mttcg_enabled() (mttcg_enabled)
+> -
+>  /**
+>   * cpu_paging_enabled:
+>   * @cpu: The CPU whose state is to be inspected.
+> diff --git a/include/sysemu/tcg.h b/include/sysemu/tcg.h
+> index fddde2b6b9a..c16c13c3c69 100644
+> --- a/include/sysemu/tcg.h
+> +++ b/include/sysemu/tcg.h
+> @@ -17,6 +17,15 @@ void tcg_exec_init(unsigned long tb_size, int splitwx);
+>  extern bool tcg_allowed;
+>  #define tcg_enabled() (tcg_allowed)
+>  
+> +/**
+> + * qemu_tcg_mttcg_enabled:
+> + * Check whether we are running MultiThread TCG or not.
+> + *
+> + * Returns: %true if we are in MTTCG mode %false otherwise.
+> + */
+> +extern bool mttcg_enabled;
+> +#define qemu_tcg_mttcg_enabled() (mttcg_enabled)
+> +
+>  #endif /* CONFIG_TCG */
+>  
+>  #endif
+> diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+> index 16e4fe3ccd8..7e67ade35b9 100644
+> --- a/accel/tcg/cpu-exec.c
+> +++ b/accel/tcg/cpu-exec.c
+> @@ -39,6 +39,7 @@
+>  #include "hw/i386/apic.h"
+>  #endif
+>  #include "sysemu/cpus.h"
+> +#include "sysemu/tcg.h"
+>  #include "exec/cpu-all.h"
+>  #include "sysemu/cpu-timers.h"
+>  #include "sysemu/replay.h"
+> diff --git a/tcg/tcg.c b/tcg/tcg.c
+> index 63a12b197bf..4a4dac0bb3e 100644
+> --- a/tcg/tcg.c
+> +++ b/tcg/tcg.c
+> @@ -65,6 +65,7 @@
+>  #include "elf.h"
+>  #include "exec/log.h"
+>  #include "sysemu/sysemu.h"
+> +#include "sysemu/tcg.h"
+>  
+>  /* Forward declarations for functions declared in tcg-target.c.inc and
+>     used here. */
+> 
+
 
