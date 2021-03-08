@@ -1,68 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lJG7d-0006aA-5K
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Mar 2021 08:40:33 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50276)
+	id 1lJG7e-0006cn-4I
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Mar 2021 08:40:34 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50344)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lJG7T-0006Sp-1e; Mon, 08 Mar 2021 08:40:24 -0500
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:33771)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lJG7J-0004Qd-CE; Mon, 08 Mar 2021 08:40:22 -0500
-Received: by mail-io1-xd33.google.com with SMTP id n132so9947689iod.0;
- Mon, 08 Mar 2021 05:40:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9/Pe/r1bYX2VQnMDE60ZZYO+MFVd1XHt25pp1baZRLM=;
- b=bHdwVL0YAiqqkoFqTDc7jN4ZmPeXWsGXQjsDxumnqU2qCOdH1pBr9HxxeM/wH7wQs8
- rhAPsGSXlUzmCjqALzlqAgyagqw80WXbxZX2CHLolPBd/hEm7tIa3Eu8kzqLMJmq9FOS
- jqSfDmPUOODrpVmnfuP1YpOynIEK0mMgQ3C0gOaEvSVBgv9VyhvkuQC40ay9OUQ2BqVD
- BMyXEG1jFXw1uijpnAF7BsRWbhoe9BSl2EyubkKZSfVQs5nkO3zQ+WbXSSR5R7yQuMtU
- 7/UrJrfTbpyRE92oVoS7oYPkH3yOaSAjwrpb8Omx8yidNARwRHUS0uj8wau8P468g5Qm
- wdgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=9/Pe/r1bYX2VQnMDE60ZZYO+MFVd1XHt25pp1baZRLM=;
- b=qmAWtKVV2lYAM/Xi/8iZWAs01z22ViWhT7m/Q8Os/dIVDsIp15xc5JOJjpnIBYOzls
- 9Bz5kGHItVtOhvyadghRwLEX2jH6LY4ma2RWubZc4FFY3cu7CCP9u+7xvwpF3708JweG
- SS96X64b2WVBranmA0fcF1UiIfbIx9gAAKC3xCXRK68gCToEUFv0kLu0tbJR5948jIws
- snuWOAkGgEJqSW0419X1rw4sKQeBggYWUZzBR2EPjLS/oD+QeXbTPhAyChKiAAqPaDDl
- W9vFX0FbQ4V0fyZ9GPdB2dFEO9zl6Jp+xZKX5O1PqsmH/1RCWxdn4ppqTeo3JZM7c52N
- q7jw==
-X-Gm-Message-State: AOAM532FTrE8YSYfVSLUonsDD/b4LueqljUzVjEJCQToo9a2TFWI5i42
- K1YVeJOuCOxQzXWpKT/Yhgt3LClj2iV5CyCvgco=
-X-Google-Smtp-Source: ABdhPJwNh2pG8HhxsCtHgNG4uU7LBUz6Ip4zyUilTdhJRL+98LJbv/71lJM09Yp3fWEzBSVv1iJWE43Hux8pCPPdi/M=
-X-Received: by 2002:a02:ec6:: with SMTP id 189mr18826832jae.91.1615210811348; 
- Mon, 08 Mar 2021 05:40:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1lJG7c-0006Yz-6t
+ for qemu-riscv@nongnu.org; Mon, 08 Mar 2021 08:40:32 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:56620)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1lJG7W-0004Tr-Jh
+ for qemu-riscv@nongnu.org; Mon, 08 Mar 2021 08:40:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1615210823;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=P26XU5A2Ztslhnr/o+XDQv6sKntmkGm3RLFFw/EZ+a4=;
+ b=gjIUhaYasU68ElPiQznJnCsHkHwDHlU0O76z7X4qbKRwk7hnyZEM5vN2FDOMaqEr9DA4lc
+ YCi+WEu4+RRkDxbcJv+bdYf40FL+uAcWn6x/lqhEKu4YRpbU7hl6rZTfifXnP4PDJtM877
+ +PUCH/9elWeRuL2dFRmFgBGPsH/5RWQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-452-OWt9f6tYPo-XBiaZoCdkyw-1; Mon, 08 Mar 2021 08:40:21 -0500
+X-MC-Unique: OWt9f6tYPo-XBiaZoCdkyw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AF3EF63ADA;
+ Mon,  8 Mar 2021 13:40:19 +0000 (UTC)
+Received: from [10.36.113.123] (ovpn-113-123.ams2.redhat.com [10.36.113.123])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 453FB60C43;
+ Mon,  8 Mar 2021 13:40:07 +0000 (UTC)
+Subject: Re: [RFC PATCH v2 1/8] sysemu/tcg: Restrict tcg_exec_init() to
+ CONFIG_TCG
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ qemu-devel@nongnu.org
+Cc: David Gibson <david@gibson.dropbear.id.au>, qemu-ppc@nongnu.org,
+ qemu-s390x@nongnu.org, Thomas Huth <thuth@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>, Cornelia Huck <cohuck@redhat.com>,
+ Greg Kurz <groug@kaod.org>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-arm@nongnu.org, Eduardo Habkost <ehabkost@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
+ Claudio Fontana <cfontana@suse.de>
+References: <20210304222323.1954755-1-f4bug@amsat.org>
+ <20210304222323.1954755-2-f4bug@amsat.org>
+From: David Hildenbrand <david@redhat.com>
+Organization: Red Hat GmbH
+Message-ID: <e927dd5b-85c5-ddbf-aa16-2d1401a10bc3@redhat.com>
+Date: Mon, 8 Mar 2021 14:40:06 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
 MIME-Version: 1.0
-References: <20210223065935.20208-1-frank.chang@sifive.com>
- <86510657-883a-f49e-c9da-d7a3d31d3de2@linaro.org>
-In-Reply-To: <86510657-883a-f49e-c9da-d7a3d31d3de2@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 8 Mar 2021 08:38:52 -0500
-Message-ID: <CAKmqyKMYULAb6daKKgWepWdJiQZhSmXGqK3mKcq7930g=yQ=pQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: fix vs() to return proper error code
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Frank Chang <frank.chang@sifive.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <20210304222323.1954755-2-f4bug@amsat.org>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=david@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=63.128.21.124; envelope-from=david@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -29
+X-Spam_score: -3.0
+X-Spam_bar: ---
+X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.251,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -75,49 +84,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Mar 2021 13:40:29 -0000
+X-List-Received-Date: Mon, 08 Mar 2021 13:40:33 -0000
 
-On Tue, Feb 23, 2021 at 1:46 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 2/22/21 10:59 PM, frank.chang@sifive.com wrote:
-> > From: Frank Chang <frank.chang@sifive.com>
-> >
-> > vs() should return -RISCV_EXCP_ILLEGAL_INST instead of -1 if rvv feature
-> > is not enabled.
-> >
-> > If -1 is returned, exception will be raised and cs->exception_index will
-> > be set to the negative return value. The exception will then be treated
-> > as an instruction access fault instead of illegal instruction fault.
->
-> It does seem an unfortunate interface; -1 seems so tempting, but does not by
-> itself mean anything.
->
-> I wonder if we should dispense with the whole "negative number" thing and
-> simply return an exception value.  Then for bonus points put all of the
-> RISCV_EXCP_* values in an enumeration, and return that type from these
-> functions so that it's perfectly clear what the interface really is.
+On 04.03.21 23:23, Philippe Mathieu-Daudé wrote:
+> Invert the #ifdef'ry to easily restrict tcg_exec_init() declaration
+> to CONFIG_TCG.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+> ---
+>   include/sysemu/tcg.h | 10 ++++++----
+>   1 file changed, 6 insertions(+), 4 deletions(-)
+> 
+> diff --git a/include/sysemu/tcg.h b/include/sysemu/tcg.h
+> index 00349fb18a7..fddde2b6b9a 100644
+> --- a/include/sysemu/tcg.h
+> +++ b/include/sysemu/tcg.h
+> @@ -8,13 +8,15 @@
+>   #ifndef SYSEMU_TCG_H
+>   #define SYSEMU_TCG_H
+>   
+> +#ifndef CONFIG_TCG
+> +#define tcg_enabled() 0
+> +#else
+> +
+>   void tcg_exec_init(unsigned long tb_size, int splitwx);
+>   
+> -#ifdef CONFIG_TCG
+>   extern bool tcg_allowed;
+>   #define tcg_enabled() (tcg_allowed)
+> -#else
+> -#define tcg_enabled() 0
+> -#endif
+> +
+> +#endif /* CONFIG_TCG */
+>   
+>   #endif
+> 
 
-Good idea!
+Reviewed-by: David Hildenbrand <david@redhat.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+-- 
+Thanks,
 
-Alistair
+David / dhildenb
 
->
-> That said,
->
-> > @@ -54,7 +54,7 @@ static int vs(CPURISCVState *env, int csrno)
-> >      if (env->misa & RVV) {
-> >          return 0;
-> >      }
-> > -    return -1;
-> > +    return -RISCV_EXCP_ILLEGAL_INST;
->
-> this fixes the immediate bug, so
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
->
->
-> r~
->
 
