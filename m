@@ -1,65 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lJyv7-0001wE-8I
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Mar 2021 08:30:37 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49278)
+	id 1lK1GO-0004ok-JR
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Mar 2021 11:00:45 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34794)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
- id 1lJyuz-0001tE-JN; Wed, 10 Mar 2021 08:30:29 -0500
-Received: from mx2.suse.de ([195.135.220.15]:50882)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cfontana@suse.de>)
- id 1lJyuv-0007hK-BS; Wed, 10 Mar 2021 08:30:29 -0500
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 004AFAD72;
- Wed, 10 Mar 2021 13:30:18 +0000 (UTC)
-Subject: Re: [PATCH 00/10] target: Provide target-specific Kconfig
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- qemu-devel@nongnu.org, =?UTF-8?Q?Alex_Benn=c3=a9e?=
- <alex.bennee@linaro.org>, Peter Maydell <peter.maydell@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Sarah Harris
- <S.E.Harris@kent.ac.uk>, Cornelia Huck <cohuck@redhat.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>, Anthony Green <green@moxielogic.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Thomas Huth <thuth@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Guan Xuetao <gxt@mprc.pku.edu.cn>, Marek Vasut <marex@denx.de>,
- qemu-block@nongnu.org, David Hildenbrand <david@redhat.com>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Eduardo Habkost <ehabkost@redhat.com>, Greg Kurz <groug@kaod.org>,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- Michael Rolnik <mrolnik@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1lK1GH-0004j0-NQ
+ for qemu-riscv@nongnu.org; Wed, 10 Mar 2021 11:00:39 -0500
+Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c]:41110)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1lK1G5-0002nD-VA
+ for qemu-riscv@nongnu.org; Wed, 10 Mar 2021 11:00:36 -0500
+Received: by mail-lj1-x22c.google.com with SMTP id t9so26213922ljt.8
+ for <qemu-riscv@nongnu.org>; Wed, 10 Mar 2021 08:00:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=5ViVWtZ3No3EwiuLvapp181B6jvA1Zl37fC61JHK5PU=;
+ b=JBdEbffkez64Mc7m3WjWfI/it9TsTKd999OZ9tSVY383s8EVAMYZnKMIPHj9xsgKgl
+ AJFaVZKdfIIC6E3SFvuMVG4ldIaalAm/U5Kb1Ia7PWnGWync9DPAQ7aEwfU07YSAuF8n
+ L7TMkrKMbM+uNFtnr42uNAWbA0EXSLC7uhGi72NhH4M6Uqvt7z3NL3j9mO++woWJfKRS
+ oMC4GKNn/nXZH7PS8sPjir68p6KF8PH5chZT5K3nGMVaMuZNglmePzZ2hx6/h0d6YQFk
+ s5eYmv59mOpoCgPlOQ51NcYaP3p9t6ybc80YlpI0t9dSu2FAUQ2kytPnakEFV4ZaTbSj
+ 8Xag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=5ViVWtZ3No3EwiuLvapp181B6jvA1Zl37fC61JHK5PU=;
+ b=fMSTTsbs85ALlw4fnFykVE5UeRMD1tXibzcDBNO264LWh2c/I7ShTsC+ltnDJ8UCKi
+ KVODdsqnpqZR/5vm8jnnEp68fD0NqHZM0eP6w7rSQcJvA8/Cs3JfJ7bprB7mV2FvtYJ8
+ EVUccQPlCN/gnUrY4bGgturnCYjjke2Wn2gApG3Zpb5Pr/osQkn+7726dihETGtOIBGz
+ VDXOMPE6MvYexKuX9ByN0OnVY3Q6hnzsnByrEm2Zbdrp2sgErwYymWKAUPgxFNMN8AHV
+ 3Qp3vjH3rHKZXrdA30dWTimIyTa09IDeE4bCDldAgJGhfgzL5hB0fauTUwmgeihxGw61
+ 25Pw==
+X-Gm-Message-State: AOAM531IX+zMvqzYEJDAqofS1VzcZcs4P2MSlhNIwaPC7XzZQV7SoPv/
+ wFwZoX+TWD8wF0ewnFvAXkomrtcwQhGEZw==
+X-Google-Smtp-Source: ABdhPJy1PksEbV5y9RV2XHc8TIEi0IUuns3AgN5smAPnFMtn/Ed5YXRw2tgeDDYr29wZOhzHMdLN2w==
+X-Received: by 2002:a05:6402:3550:: with SMTP id
+ f16mr4105497edd.134.1615392013718; 
+ Wed, 10 Mar 2021 08:00:13 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id qo25sm2825463ejb.93.2021.03.10.08.00.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Mar 2021 08:00:10 -0800 (PST)
+Received: from zen.lan (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 54F021FF96;
+ Wed, 10 Mar 2021 16:00:03 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: peter.maydell@linaro.org
+Cc: qemu-devel@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- David Gibson <david@gibson.dropbear.id.au>, Kevin Wolf <kwolf@redhat.com>,
- qemu-riscv@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Chris Wulff <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
- Max Reitz <mreitz@redhat.com>, Michael Walle <michael@walle.cc>,
- qemu-ppc@nongnu.org, Aurelien Jarno <aurelien@aurel32.net>
-References: <20210131111316.232778-1-f4bug@amsat.org>
-From: Claudio Fontana <cfontana@suse.de>
-Message-ID: <2eca1e78-073f-ae5d-6f82-73f4d21c4e72@suse.de>
-Date: Wed, 10 Mar 2021 14:30:13 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PULL v2 08/15] hw/riscv: migrate fdt field to generic MachineState
+Date: Wed, 10 Mar 2021 15:59:55 +0000
+Message-Id: <20210310160002.11659-9-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210310160002.11659-1-alex.bennee@linaro.org>
+References: <20210310160002.11659-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <20210131111316.232778-1-f4bug@amsat.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=195.135.220.15; envelope-from=cfontana@suse.de;
- helo=mx2.suse.de
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-lj1-x22c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -72,145 +88,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2021 13:30:30 -0000
+X-List-Received-Date: Wed, 10 Mar 2021 16:00:42 -0000
 
-Hi all, where are we with this series?
+This is a mechanical change to make the fdt available through
+MachineState.
 
-I am trying to figure out how to apply the whole thing,
-in order to build only compatible ARM boards and devices for KVM-only builds.
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Message-Id: <20210303173642.3805-3-alex.bennee@linaro.org>
 
-Ie, I would like to combine this with:
-
-"arm cleanup experiment for kvm-only build"
-
-https://lists.gnu.org/archive/html/qemu-devel/2021-03/msg02790.html
-
-My series there gets us to a buildable and working KVM-only ARM target, with all make check tests passing.
-
-However, in order to be able to remove more code, remove stubs etc,
-I found the presence of incompatible ARM boards and devices as blocking additional cleanups.
-
-Therefore, in order to proceed with additional cleanup in arm, and adding the accel-specific extensions to the cpu class,
-I see being able to disable incompatible boards for KVM as necessary.
-
-IIUC there are:
-
-* This series "target: Provide target-specific Kconfig"
-* Support disabling TCG on ARM ?
-* Support disabling TCG on ARM (part 2) ?
-
-What is the current state here?
-
-Thanks,
-
-Claudio
-
-
-On 1/31/21 12:13 PM, Philippe Mathieu-Daudé wrote:
-> Hi,
-> 
-> This series add a Kconfig file to each target, allowing
-> to select target-specific features there, instead of from
-> the hardware Kconfig.
-> 
-> This simplifies managing multi-arch features such semihosting.
-> 
-> Series organization:
-> 
-> 1/ Some targets use the architecture symbol to select boards and
-> peripherals (SH4 and LM32), we need to clean that first.
-> 
-> 2/ Introduce empty target Kconfig, update meson.
-> 
-> 3/ Move architectural features out of hardware:
->    - x86 SEV
->    - ARM v7m
->    - generic semihosting
-> 
-> [following only important to patchew, unrelated to this series]
-> Based-on: <20210131105918.228787-1-f4bug@amsat.org>
-> 
-> Philippe Mathieu-Daudé (10):
->   hw/sh4/Kconfig: Rename CONFIG_SH4 -> CONFIG_SH4_PERIPHERALS
->   hw/lm32/Kconfig: Introduce CONFIG_LM32_EVR for lm32-evr/uclinux boards
->   hw/sh4/Kconfig: Rename CONFIG_LM32 -> CONFIG_LM32_PERIPHERALS
->   hw/lm32/Kconfig: Have MILKYMIST select LM32_PERIPHERALS
->   meson: Introduce target-specific Kconfig
->   target/i386: Move SEV feature to target Kconfig
->   target/arm: Move V7M feature to target Kconfig
->   default-configs: Remove unnecessary SEMIHOSTING selection
->   target: Move ARM_COMPATIBLE_SEMIHOSTING feature to target Kconfig
->   target: Move SEMIHOSTING feature to target Kconfig
-> 
->  default-configs/devices/arm-softmmu.mak       |  2 --
->  default-configs/devices/lm32-softmmu.mak      |  4 +---
->  default-configs/devices/m68k-softmmu.mak      |  2 --
->  .../devices/mips-softmmu-common.mak           |  3 ---
->  default-configs/devices/nios2-softmmu.mak     |  2 --
->  default-configs/devices/riscv32-softmmu.mak   |  2 --
->  default-configs/devices/riscv64-softmmu.mak   |  2 --
->  default-configs/devices/unicore32-softmmu.mak |  1 -
->  default-configs/devices/xtensa-softmmu.mak    |  2 --
->  meson.build                                   |  3 ++-
->  Kconfig                                       |  1 +
->  hw/arm/Kconfig                                |  4 ----
->  hw/block/meson.build                          |  2 +-
->  hw/char/meson.build                           |  6 ++---
->  hw/i386/Kconfig                               |  4 ----
->  hw/intc/meson.build                           |  4 ++--
->  hw/lm32/Kconfig                               | 10 +++++---
->  hw/lm32/meson.build                           |  2 +-
->  hw/sh4/Kconfig                                |  6 ++---
->  hw/timer/meson.build                          |  4 ++--
->  target/Kconfig                                | 23 +++++++++++++++++++
->  target/alpha/Kconfig                          |  2 ++
->  target/arm/Kconfig                            | 11 +++++++++
->  target/avr/Kconfig                            |  2 ++
->  target/cris/Kconfig                           |  2 ++
->  target/hppa/Kconfig                           |  2 ++
->  target/i386/Kconfig                           |  9 ++++++++
->  target/lm32/Kconfig                           |  3 +++
->  target/m68k/Kconfig                           |  3 +++
->  target/microblaze/Kconfig                     |  2 ++
->  target/mips/Kconfig                           |  7 ++++++
->  target/moxie/Kconfig                          |  2 ++
->  target/nios2/Kconfig                          |  3 +++
->  target/openrisc/Kconfig                       |  2 ++
->  target/ppc/Kconfig                            |  5 ++++
->  target/riscv/Kconfig                          |  7 ++++++
->  target/rx/Kconfig                             |  2 ++
->  target/s390x/Kconfig                          |  2 ++
->  target/sh4/Kconfig                            |  2 ++
->  target/sparc/Kconfig                          |  5 ++++
->  target/tilegx/Kconfig                         |  2 ++
->  target/tricore/Kconfig                        |  2 ++
->  target/unicore32/Kconfig                      |  3 +++
->  target/xtensa/Kconfig                         |  3 +++
->  44 files changed, 129 insertions(+), 43 deletions(-)
->  create mode 100644 target/Kconfig
->  create mode 100644 target/alpha/Kconfig
->  create mode 100644 target/arm/Kconfig
->  create mode 100644 target/avr/Kconfig
->  create mode 100644 target/cris/Kconfig
->  create mode 100644 target/hppa/Kconfig
->  create mode 100644 target/i386/Kconfig
->  create mode 100644 target/lm32/Kconfig
->  create mode 100644 target/m68k/Kconfig
->  create mode 100644 target/microblaze/Kconfig
->  create mode 100644 target/mips/Kconfig
->  create mode 100644 target/moxie/Kconfig
->  create mode 100644 target/nios2/Kconfig
->  create mode 100644 target/openrisc/Kconfig
->  create mode 100644 target/ppc/Kconfig
->  create mode 100644 target/riscv/Kconfig
->  create mode 100644 target/rx/Kconfig
->  create mode 100644 target/s390x/Kconfig
->  create mode 100644 target/sh4/Kconfig
->  create mode 100644 target/sparc/Kconfig
->  create mode 100644 target/tilegx/Kconfig
->  create mode 100644 target/tricore/Kconfig
->  create mode 100644 target/unicore32/Kconfig
->  create mode 100644 target/xtensa/Kconfig
-> 
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 84b7a3848f..632da52018 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -41,7 +41,6 @@ struct RISCVVirtState {
+     DeviceState *plic[VIRT_SOCKETS_MAX];
+     PFlashCFI01 *flash[2];
+ 
+-    void *fdt;
+     int fdt_size;
+ };
+ 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 4f0c2fbca0..0b39101a5e 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -195,14 +195,14 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+     hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
+ 
+     if (mc->dtb) {
+-        fdt = s->fdt = load_device_tree(mc->dtb, &s->fdt_size);
++        fdt = mc->fdt = load_device_tree(mc->dtb, &s->fdt_size);
+         if (!fdt) {
+             error_report("load_device_tree() failed");
+             exit(1);
+         }
+         goto update_bootargs;
+     } else {
+-        fdt = s->fdt = create_device_tree(&s->fdt_size);
++        fdt = mc->fdt = create_device_tree(&s->fdt_size);
+         if (!fdt) {
+             error_report("create_device_tree() failed");
+             exit(1);
+@@ -444,12 +444,12 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+     g_free(name);
+ 
+     name = g_strdup_printf("/soc/flash@%" PRIx64, flashbase);
+-    qemu_fdt_add_subnode(s->fdt, name);
+-    qemu_fdt_setprop_string(s->fdt, name, "compatible", "cfi-flash");
+-    qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
++    qemu_fdt_add_subnode(mc->fdt, name);
++    qemu_fdt_setprop_string(mc->fdt, name, "compatible", "cfi-flash");
++    qemu_fdt_setprop_sized_cells(mc->fdt, name, "reg",
+                                  2, flashbase, 2, flashsize,
+                                  2, flashbase + flashsize, 2, flashsize);
+-    qemu_fdt_setprop_cell(s->fdt, name, "bank-width", 4);
++    qemu_fdt_setprop_cell(mc->fdt, name, "bank-width", 4);
+     g_free(name);
+ 
+ update_bootargs:
+@@ -667,9 +667,9 @@ static void virt_machine_init(MachineState *machine)
+             hwaddr end = riscv_load_initrd(machine->initrd_filename,
+                                            machine->ram_size, kernel_entry,
+                                            &start);
+-            qemu_fdt_setprop_cell(s->fdt, "/chosen",
++            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
+                                   "linux,initrd-start", start);
+-            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
++            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
+                                   end);
+         }
+     } else {
+@@ -690,12 +690,12 @@ static void virt_machine_init(MachineState *machine)
+ 
+     /* Compute the fdt load address in dram */
+     fdt_load_addr = riscv_load_fdt(memmap[VIRT_DRAM].base,
+-                                   machine->ram_size, s->fdt);
++                                   machine->ram_size, machine->fdt);
+     /* load the reset vector */
+     riscv_setup_rom_reset_vec(machine, &s->soc[0], start_addr,
+                               virt_memmap[VIRT_MROM].base,
+                               virt_memmap[VIRT_MROM].size, kernel_entry,
+-                              fdt_load_addr, s->fdt);
++                              fdt_load_addr, machine->fdt);
+ 
+     /* SiFive Test MMIO device */
+     sifive_test_create(memmap[VIRT_TEST].base);
+-- 
+2.20.1
 
 
