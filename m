@@ -1,30 +1,31 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lJpce-0000pf-8F
-	for mharc-qemu-riscv@gnu.org; Tue, 09 Mar 2021 22:34:56 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42694)
+	id 1lJpcf-0000uO-OY
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Mar 2021 22:34:57 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42696)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dylan@andestech.com>)
- id 1lJpcc-0000mb-IZ; Tue, 09 Mar 2021 22:34:54 -0500
-Received: from atcsqr.andestech.com ([60.248.187.195]:45043)
+ id 1lJpcd-0000nu-Bt; Tue, 09 Mar 2021 22:34:55 -0500
+Received: from exmail.andestech.com ([60.248.187.195]:45049
+ helo=ATCSQR.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dylan@andestech.com>)
- id 1lJpcT-0000JW-U7; Tue, 09 Mar 2021 22:34:54 -0500
+ id 1lJpcU-0000M9-JF; Tue, 09 Mar 2021 22:34:55 -0500
 Received: from mail.andestech.com (atcpcs16.andestech.com [10.0.1.222])
- by ATCSQR.andestech.com with ESMTP id 12A3YIUE085652;
- Wed, 10 Mar 2021 11:34:18 +0800 (GMT-8)
+ by ATCSQR.andestech.com with ESMTP id 12A3YNsp085729;
+ Wed, 10 Mar 2021 11:34:23 +0800 (GMT-8)
  (envelope-from dylan@andestech.com)
 Received: from atcfdc88.andestech.com (10.0.15.120) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.487.0;
- Wed, 10 Mar 2021 11:34:15 +0800
+ Wed, 10 Mar 2021 11:34:19 +0800
 From: Dylan Jhong <dylan@andestech.com>
 To: <Alistair.Francis@wdc.com>, <palmer@dabbelt.com>,
  <sagark@eecs.berkeley.edu>, <kbastian@mail.uni-paderborn.de>,
  <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <alankao@andestech.com>, <ruinland@andestech.com>, Dylan Jhong
  <dylan@andestech.com>
-Subject: [PATCH 2/3] Andes RISC-V PLMT
-Date: Wed, 10 Mar 2021 11:33:57 +0800
-Message-ID: <20210310033358.30499-3-dylan@andestech.com>
+Subject: [PATCH 3/3] Andes AE350 RISC-V Machine
+Date: Wed, 10 Mar 2021 11:33:58 +0800
+Message-ID: <20210310033358.30499-4-dylan@andestech.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210310033358.30499-1-dylan@andestech.com>
 References: <20210310033358.30499-1-dylan@andestech.com>
@@ -32,7 +33,7 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.120]
 X-DNSRBL: 
-X-MAIL: ATCSQR.andestech.com 12A3YIUE085652
+X-MAIL: ATCSQR.andestech.com 12A3YNsp085729
 Received-SPF: pass client-ip=60.248.187.195; envelope-from=dylan@andestech.com;
  helo=ATCSQR.andestech.com
 X-Spam_score_int: -18
@@ -52,45 +53,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2021 03:34:54 -0000
+X-List-Received-Date: Wed, 10 Mar 2021 03:34:55 -0000
 
-Andes PLMT (Platform-Level Machine Timer) device provides an
-timer functionality and issues timer interrupts.
+This provides a RISC-V Board based on Andes's AE350 specification.
+The following machine is implemented:
 
-The Andes PLMT is implemented based on Andes's PLMT specification.
+- 'andes_ae350'; PLIC, PLICSW, PLMT, 16550a UART, VirtIO MMIO, device-tree
 
 Signed-off-by: Dylan Jhong <dylan@andestech.com>
 Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
 ---
- hw/timer/Kconfig              |   3 +
- hw/timer/andes_plmt.c         | 225 ++++++++++++++++++++++++++++++++++
- hw/timer/meson.build          |   1 +
- include/hw/timer/andes_plmt.h |  50 ++++++++
- 4 files changed, 279 insertions(+)
- create mode 100644 hw/timer/andes_plmt.c
- create mode 100644 include/hw/timer/andes_plmt.h
+ default-configs/devices/riscv32-softmmu.mak |   1 +
+ default-configs/devices/riscv64-softmmu.mak |   1 +
+ hw/riscv/Kconfig                            |   7 +
+ hw/riscv/andes_ae350.c                      | 501 ++++++++++++++++++++
+ hw/riscv/meson.build                        |   1 +
+ include/hw/riscv/andes_ae350.h              |  93 ++++
+ 6 files changed, 604 insertions(+)
+ create mode 100644 hw/riscv/andes_ae350.c
+ create mode 100644 include/hw/riscv/andes_ae350.h
 
-diff --git a/hw/timer/Kconfig b/hw/timer/Kconfig
-index 18936ef55b..d96814e5a4 100644
---- a/hw/timer/Kconfig
-+++ b/hw/timer/Kconfig
-@@ -1,3 +1,6 @@
-+config ANDES_PLMT
-+    bool
-+
- config ARM_TIMER
+diff --git a/default-configs/devices/riscv32-softmmu.mak b/default-configs/devices/riscv32-softmmu.mak
+index d847bd5692..a268007e72 100644
+--- a/default-configs/devices/riscv32-softmmu.mak
++++ b/default-configs/devices/riscv32-softmmu.mak
+@@ -8,6 +8,7 @@ CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+ 
+ # Boards:
+ #
++CONFIG_ANDES_AE350=y
+ CONFIG_SPIKE=y
+ CONFIG_SIFIVE_E=y
+ CONFIG_SIFIVE_U=y
+diff --git a/default-configs/devices/riscv64-softmmu.mak b/default-configs/devices/riscv64-softmmu.mak
+index d5eec75f05..9a37dfd8c0 100644
+--- a/default-configs/devices/riscv64-softmmu.mak
++++ b/default-configs/devices/riscv64-softmmu.mak
+@@ -8,6 +8,7 @@ CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+ 
+ # Boards:
+ #
++CONFIG_ANDES_AE350=y
+ CONFIG_SPIKE=y
+ CONFIG_SIFIVE_E=y
+ CONFIG_SIFIVE_U=y
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index d139074b02..04f6369ab7 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -1,6 +1,13 @@
+ config IBEX
      bool
-     select PTIMER
-diff --git a/hw/timer/andes_plmt.c b/hw/timer/andes_plmt.c
+ 
++config ANDES_AE350
++    bool
++    select SERIAL
++    select VIRTIO_MMIO
++    select ANDES_PLIC
++    select ANDES_PLMT
++
+ config MICROCHIP_PFSOC
+     bool
+     select CADENCE_SDHCI
+diff --git a/hw/riscv/andes_ae350.c b/hw/riscv/andes_ae350.c
 new file mode 100644
-index 0000000000..a6adb05199
+index 0000000000..ed5f9701ad
 --- /dev/null
-+++ b/hw/timer/andes_plmt.c
-@@ -0,0 +1,225 @@
++++ b/hw/riscv/andes_ae350.c
+@@ -0,0 +1,501 @@
 +/*
-+ * Andes PLMT (Platform Level Machine Timer)
++ * Andes RISC-V AE350 Board
 + *
 + * Copyright (c) 2021 Andes Tech. Corp.
++ *
++ * Andes AE350 Board supports ns16550a UART and VirtIO MMIO.
++ * The interrupt controllers are andes PLIC and andes PLICSW.
++ * Timer is Andes PLMT.
 + *
 + * This program is free software; you can redistribute it and/or modify it
 + * under the terms and conditions of the GNU General Public License,
@@ -106,230 +144,504 @@ index 0000000000..a6adb05199
 + */
 +
 +#include "qemu/osdep.h"
-+#include "qapi/error.h"
++#include "qemu/units.h"
++#include "qemu/log.h"
 +#include "qemu/error-report.h"
-+#include "qemu/timer.h"
-+#include "qemu/module.h"
++#include "qapi/error.h"
++#include "hw/boards.h"
++#include "hw/loader.h"
 +#include "hw/sysbus.h"
-+#include "target/riscv/cpu.h"
 +#include "hw/qdev-properties.h"
++#include "hw/char/serial.h"
++#include "target/riscv/cpu.h"
++#include "hw/riscv/riscv_hart.h"
++#include "hw/riscv/boot.h"
++#include "hw/riscv/numa.h"
++#include "chardev/char.h"
++#include "sysemu/arch_init.h"
++#include "sysemu/device_tree.h"
++#include "sysemu/sysemu.h"
++#include "hw/pci/pci.h"
++#include "hw/pci-host/gpex.h"
++
++#include "hw/intc/andes_plic.h"
 +#include "hw/timer/andes_plmt.h"
++#include "hw/riscv/andes_ae350.h"
 +
-+static uint64_t andes_cpu_riscv_read_rtc(uint32_t timebase_freq)
-+{
-+    return muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL),
-+        timebase_freq, NANOSECONDS_PER_SECOND);
-+}
++# define BIOS_FILENAME ""
 +
-+/*
-+ * Called when timecmp is written to update the QEMU timer or immediately
-+ * trigger timer interrupt if mtimecmp <= current timer value.
-+ */
++static const struct MemmapEntry {
++    hwaddr base;
++    hwaddr size;
++} andes_ae350_memmap[] = {
++    [ANDES_AE350_DEBUG]     = { 0x00000000,      0x100 },
++    [ANDES_AE350_DRAM]      = { 0x00000000, 0x80000000 },
++    [ANDES_AE350_MROM]      = { 0xb0000000,   0x100000 },
++    [ANDES_AE350_MAC]       = { 0xe0100000,   0x100000 },
++    [ANDES_AE350_GEM]       = { 0xe0200000,   0x100000 },
++    [ANDES_AE350_PLIC]      = { 0xe4000000,   0x400000 },
++    [ANDES_AE350_PLMT]      = { 0xe6000000,   0x100000 },
++    [ANDES_AE350_PLICSW]    = { 0xe6400000,   0x400000 },
++    [ANDES_AE350_UART1]     = { 0xf0200000,      0x100 },
++    [ANDES_AE350_UART2]     = { 0xf0300000,      0x100 },
++    [ANDES_AE350_PIT]       = { 0xf0400000,   0x100000 },
++    [ANDES_AE350_SDC]       = { 0xf0e00000,   0x100000 },
++    [ANDES_AE350_VIRTIO]    = { 0xfe000000,     0x1000 },
++};
++
 +static void
-+andes_plmt_write_timecmp(RISCVCPU *cpu, uint64_t value)
++create_fdt(AndesAe350BoardState *bs, const struct MemmapEntry *memmap,
++    uint64_t mem_size, const char *cmdline)
 +{
-+    uint64_t next;
-+    uint64_t diff;
++    AndesAe350SocState *s = &bs->soc;
++    MachineState *ms = MACHINE(qdev_get_machine());
++    void *fdt;
++    int cpu, i;
++    uint64_t mem_addr;
++    uint32_t *plic_irq_ext, *plicsw_irq_ext, *plmt_irq_ext;
++    unsigned long plic_addr, plicsw_addr, plmt_addr;
++    char *plic_name, *plicsw_name, *plmt_name;
++    uint32_t intc_phandle = 0, plic_phandle = 0;
++    uint32_t phandle = 1;
++    char *isa_name, *mem_name, *cpu_name, *intc_name, *uart_name, *virtio_name;
 +
-+    uint64_t rtc_r = andes_cpu_riscv_read_rtc(ANDES_PLMT_TIMEBASE_FREQ);
-+
-+    cpu->env.timecmp = (uint64_t)value;
-+    if (cpu->env.timecmp <= rtc_r) {
-+        /*
-+         * if we're setting an MTIMECMP value in the "past",
-+         * immediately raise the timer interrupt
-+         */
-+        riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-+        return;
-+    }
-+
-+    /* otherwise, set up the future timer interrupt */
-+    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
-+    diff = cpu->env.timecmp - rtc_r;
-+    /* back to ns (note args switched in muldiv64) */
-+    next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-+        muldiv64(diff, NANOSECONDS_PER_SECOND, ANDES_PLMT_TIMEBASE_FREQ);
-+    timer_mod(cpu->env.timer, next);
-+}
-+
-+/*
-+ * Callback used when the timer set using timer_mod expires.
-+ * Should raise the timer interrupt line
-+ */
-+static void
-+andes_plmt_timer_cb(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-+}
-+
-+static uint64_t
-+andes_plmt_read(void *opaque, hwaddr addr, unsigned size)
-+{
-+    AndesPLMTState *plmt = opaque;
-+    uint64_t rz = 0;
-+
-+    if ((addr >= (plmt->timecmp_base)) &&
-+        (addr < (plmt->timecmp_base + (plmt->num_harts << 3)))) {
-+        /* %8=0:timecmp_lo, %8=4:timecmp_hi */
-+        size_t hartid = (addr - plmt->timecmp_base) >> 3;
-+        CPUState *cpu = qemu_get_cpu(hartid);
-+        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-+        if (!env) {
-+            error_report("plmt: invalid timecmp hartid: %zu", hartid);
-+        } else if ((addr & 0x7) == 0) {
-+            rz = env->timecmp & (unsigned long)0xFFFFFFFF;
-+        } else if ((addr & 0x7) == 4) {
-+            rz = (env->timecmp >> 32) & (unsigned long)0xFFFFFFFF;
-+        } else {
-+            error_report("plmt: invalid read: %08x", (uint32_t)addr);
++    if (ms->dtb) {
++        fdt = bs->fdt = load_device_tree(ms->dtb, &bs->fdt_size);
++        if (!fdt) {
++            error_report("load_device_tree() failed");
++            exit(1);
 +        }
-+    } else if (addr == (plmt->time_base)) {
-+        /* time_lo */
-+        rz = andes_cpu_riscv_read_rtc(ANDES_PLMT_TIMEBASE_FREQ)
-+                    & (unsigned long)0xFFFFFFFF;
-+    } else if (addr == (plmt->time_base + 4)) {
-+        /* time_hi */
-+        rz = (andes_cpu_riscv_read_rtc(ANDES_PLMT_TIMEBASE_FREQ) >> 32)
-+                    & (unsigned long)0xFFFFFFFF;
++        goto update_bootargs;
 +    } else {
-+        error_report("plmt: invalid read: %08x", (uint32_t)addr);
-+    }
-+
-+    return rz;
-+}
-+
-+static void
-+andes_plmt_write(void *opaque, hwaddr addr, uint64_t value, unsigned size)
-+{
-+    AndesPLMTState *plmt = opaque;
-+
-+    if ((addr >= (plmt->timecmp_base)) &&
-+        (addr < (plmt->timecmp_base + (plmt->num_harts << 3)))) {
-+        /* %8=0:timecmp_lo, %8=4:timecmp_hi */
-+        size_t hartid = (addr - plmt->timecmp_base) >> 3;
-+        CPUState *cpu = qemu_get_cpu(hartid);
-+        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-+        if (!env) {
-+            error_report("plmt: invalid timecmp hartid: %zu", hartid);
-+        } else if ((addr & 0x7) == 0) {
-+            uint64_t timecmp_hi = (unsigned long)env->timecmp >> 32;
-+            andes_plmt_write_timecmp(RISCV_CPU(cpu),
-+                (timecmp_hi << 32) | (value & (unsigned long)0xFFFFFFFF));
-+        } else if ((addr & 0x7) == 4) {
-+            uint64_t timecmp_lo = env->timecmp;
-+            andes_plmt_write_timecmp(RISCV_CPU(cpu),
-+                (value << 32) | (timecmp_lo & (unsigned long)0xFFFFFFFF));
-+        } else {
-+            error_report("plmt: invalid write: %08x", (uint32_t)addr);
++        fdt = bs->fdt = create_device_tree(&bs->fdt_size);
++        if (!fdt) {
++            error_report("create_device_tree() failed");
++            exit(1);
 +        }
-+    } else if (addr == (plmt->time_base)) {
-+        /* time_lo */
-+        error_report("plmt: time_lo write not implemented");
-+    } else if (addr == (plmt->time_base + 4)) {
-+        /* time_hi */
-+        error_report("plmt: time_hi write not implemented");
-+    } else {
-+        error_report("plmt: invalid write: %08x", (uint32_t)addr);
++    }
++
++    qemu_fdt_setprop_string(fdt, "/", "model", "Andes AE350 Board");
++    qemu_fdt_setprop_string(fdt, "/", "compatible", "andestech,ae350");
++    qemu_fdt_setprop_cell(fdt, "/", "#size-cells", 0x2);
++    qemu_fdt_setprop_cell(fdt, "/", "#address-cells", 0x2);
++
++    qemu_fdt_add_subnode(fdt, "/soc");
++    qemu_fdt_setprop(fdt, "/soc", "ranges", NULL, 0);
++    qemu_fdt_setprop_string(fdt, "/soc", "compatible", "simple-bus");
++    qemu_fdt_setprop_cell(fdt, "/soc", "#size-cells", 0x2);
++    qemu_fdt_setprop_cell(fdt, "/soc", "#address-cells", 0x2);
++
++    qemu_fdt_add_subnode(fdt, "/cpus");
++    qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
++                          ANDES_PLMT_TIMEBASE_FREQ);
++    qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
++    qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
++    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
++
++    plic_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 4);
++    plicsw_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 2);
++    plmt_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 2);
++
++    for (cpu = 0; cpu < s->cpus.num_harts; cpu++) {
++        intc_phandle = phandle++;
++
++        cpu_name = g_strdup_printf("/cpus/cpu@%d",
++            s->cpus.hartid_base + cpu);
++        qemu_fdt_add_subnode(fdt, cpu_name);
++#if defined(TARGET_RISCV32)
++        qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
++#else
++        qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv39");
++#endif
++        isa_name = riscv_isa_string(&s->cpus.harts[cpu]);
++        qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa", isa_name);
++        g_free(isa_name);
++        qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
++        qemu_fdt_setprop_string(fdt, cpu_name, "status", "okay");
++        qemu_fdt_setprop_cell(fdt, cpu_name, "reg",
++            s->cpus.hartid_base + cpu);
++        qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
++
++        intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
++        qemu_fdt_add_subnode(fdt, intc_name);
++        qemu_fdt_setprop_cell(fdt, intc_name, "phandle", intc_phandle);
++        qemu_fdt_setprop_string(fdt, intc_name, "compatible",
++            "riscv,cpu-intc");
++        qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
++        qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
++
++        plic_irq_ext[cpu * 4 + 0] = cpu_to_be32(intc_phandle);
++        plic_irq_ext[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
++        plic_irq_ext[cpu * 4 + 2] = cpu_to_be32(intc_phandle);
++        plic_irq_ext[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
++
++        plicsw_irq_ext[cpu * 2 + 0] = cpu_to_be32(intc_phandle);
++        plicsw_irq_ext[cpu * 2 + 1] = cpu_to_be32(IRQ_M_SOFT);
++
++        plmt_irq_ext[cpu * 2 + 0] = cpu_to_be32(intc_phandle);
++        plmt_irq_ext[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
++
++        g_free(intc_name);
++    }
++
++    mem_addr = memmap[ANDES_AE350_DRAM].base;
++    mem_name = g_strdup_printf("/memory@%lx", (long)mem_addr);
++    qemu_fdt_add_subnode(fdt, mem_name);
++    qemu_fdt_setprop_cells(fdt, mem_name, "reg",
++        mem_addr >> 32, mem_addr, mem_size >> 32, mem_size);
++    qemu_fdt_setprop_string(fdt, mem_name, "device_type", "memory");
++    g_free(mem_name);
++
++    /* create plic */
++    plic_phandle = phandle++;
++    plic_addr = memmap[ANDES_AE350_PLIC].base;
++    plic_name = g_strdup_printf("/soc/interrupt-controller@%lx", plic_addr);
++    qemu_fdt_add_subnode(fdt, plic_name);
++    qemu_fdt_setprop_cell(fdt, plic_name,
++        "#address-cells", 0x2);
++    qemu_fdt_setprop_cell(fdt, plic_name,
++        "#interrupt-cells", 0x2);
++    qemu_fdt_setprop_string(fdt, plic_name, "compatible", "riscv,plic0");
++    qemu_fdt_setprop(fdt, plic_name, "interrupt-controller", NULL, 0);
++    qemu_fdt_setprop(fdt, plic_name, "interrupts-extended",
++        plic_irq_ext, s->cpus.num_harts * sizeof(uint32_t) * 4);
++    qemu_fdt_setprop_cells(fdt, plic_name, "reg",
++        0x0, plic_addr, 0x0, memmap[ANDES_AE350_PLIC].size);
++    qemu_fdt_setprop_cell(fdt, plic_name, "riscv,ndev", 0x47);
++    qemu_fdt_setprop_cell(fdt, plic_name, "phandle", plic_phandle);
++    g_free(plic_name);
++    g_free(plic_irq_ext);
++
++    /* create plicsw */
++    plicsw_addr = memmap[ANDES_AE350_PLICSW].base;
++    plicsw_name = g_strdup_printf("/soc/interrupt-controller@%lx", plicsw_addr);
++    qemu_fdt_add_subnode(fdt, plicsw_name);
++    qemu_fdt_setprop_cell(fdt, plicsw_name,
++        "#address-cells", 0x2);
++    qemu_fdt_setprop_cell(fdt, plicsw_name,
++        "#interrupt-cells", 0x2);
++    qemu_fdt_setprop_string(fdt, plicsw_name, "compatible", "riscv,plic1");
++    qemu_fdt_setprop(fdt, plicsw_name, "interrupt-controller", NULL, 0);
++    qemu_fdt_setprop(fdt, plicsw_name, "interrupts-extended",
++        plicsw_irq_ext, s->cpus.num_harts * sizeof(uint32_t) * 2);
++    qemu_fdt_setprop_cells(fdt, plicsw_name, "reg",
++        0x0, plicsw_addr, 0x0, memmap[ANDES_AE350_PLIC].size);
++    qemu_fdt_setprop_cell(fdt, plicsw_name, "riscv,ndev", 0x1);
++    g_free(plicsw_name);
++    g_free(plicsw_irq_ext);
++
++    /* create plmt */
++    plmt_addr = memmap[ANDES_AE350_PLMT].base;
++    plmt_name = g_strdup_printf("/soc/plmt0@%lx", plmt_addr);
++    qemu_fdt_add_subnode(fdt, plmt_name);
++    qemu_fdt_setprop_string(fdt, plmt_name, "compatible", "riscv,plmt0");
++    qemu_fdt_setprop(fdt, plmt_name, "interrupts-extended",
++        plmt_irq_ext, s->cpus.num_harts * sizeof(uint32_t) * 2);
++    qemu_fdt_setprop_cells(fdt, plmt_name, "reg",
++        0x0, plmt_addr, 0x0, memmap[ANDES_AE350_PLMT].size);
++    g_free(plmt_name);
++    g_free(plmt_irq_ext);
++
++    uart_name = g_strdup_printf("/serial@%lx", memmap[ANDES_AE350_UART1].base);
++    qemu_fdt_add_subnode(fdt, uart_name);
++    qemu_fdt_setprop_string(fdt, uart_name, "compatible", "ns16550a");
++    qemu_fdt_setprop_cells(fdt, uart_name, "reg",
++        0x0, memmap[ANDES_AE350_UART1].base,
++        0x0, memmap[ANDES_AE350_UART1].size);
++    qemu_fdt_setprop_cell(fdt, uart_name, "clock-frequency", 3686400);
++    qemu_fdt_setprop_cell(fdt, uart_name, "reg-shift", ANDES_UART_REG_SHIFT);
++    qemu_fdt_setprop_cell(fdt, uart_name, "reg-offset", ANDES_UART_REG_OFFSET);
++    qemu_fdt_setprop_cell(fdt, uart_name, "interrupt-parent", plic_phandle);
++    qemu_fdt_setprop_cells(fdt, uart_name, "interrupts", ANDES_AE350_UART1_IRQ, 0x4);
++
++    uart_name = g_strdup_printf("/serial@%lx", memmap[ANDES_AE350_UART2].base);
++    qemu_fdt_add_subnode(fdt, uart_name);
++    qemu_fdt_setprop_string(fdt, uart_name, "compatible", "ns16550a");
++    qemu_fdt_setprop_cells(fdt, uart_name, "reg",
++        0x0, memmap[ANDES_AE350_UART2].base,
++        0x0, memmap[ANDES_AE350_UART2].size);
++    qemu_fdt_setprop_cell(fdt, uart_name, "reg-shift", ANDES_UART_REG_SHIFT);
++    qemu_fdt_setprop_cell(fdt, uart_name, "reg-offset", ANDES_UART_REG_OFFSET);
++    qemu_fdt_setprop_cell(fdt, uart_name, "clock-frequency", 3686400);
++    qemu_fdt_setprop_cell(fdt, uart_name, "interrupt-parent", plic_phandle);
++    qemu_fdt_setprop_cells(fdt, uart_name, "interrupts", ANDES_AE350_UART2_IRQ, 0x4);
++
++    qemu_fdt_add_subnode(fdt, "/chosen");
++    qemu_fdt_setprop_string(fdt, "/chosen", "bootargs",
++            "console=ttyS0,38400n8 earlycon=sbi debug loglevel=7");
++    qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", uart_name);
++    g_free(uart_name);
++
++    for (i = 0; i < ANDES_AE350_VIRTIO_COUNT; i++) {
++        virtio_name = g_strdup_printf("/virtio_mmio@%lx",
++            (memmap[ANDES_AE350_VIRTIO].base + i * memmap[ANDES_AE350_VIRTIO].size));
++        qemu_fdt_add_subnode(fdt, virtio_name);
++        qemu_fdt_setprop_string(fdt, virtio_name, "compatible", "virtio,mmio");
++        qemu_fdt_setprop_cells(fdt, virtio_name, "reg",
++            0x0, memmap[ANDES_AE350_VIRTIO].base + i * memmap[ANDES_AE350_VIRTIO].size,
++            0x0, memmap[ANDES_AE350_VIRTIO].size);
++        qemu_fdt_setprop_cell(fdt, virtio_name, "interrupt-parent",
++                                plic_phandle);
++        qemu_fdt_setprop_cells(fdt, virtio_name, "interrupts",
++                                ANDES_AE350_VIRTIO_IRQ + i, 0x4);
++        g_free(virtio_name);
++    }
++
++update_bootargs:
++    if (cmdline && cmdline[0] != '\0') {
++        qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
 +    }
 +}
 +
-+static const MemoryRegionOps andes_plmt_ops = {
-+    .read = andes_plmt_read,
-+    .write = andes_plmt_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid = {
-+        .min_access_size = 4,
-+        .max_access_size = 8
-+    }
-+};
-+
-+static Property andes_plmt_properties[] = {
-+    DEFINE_PROP_UINT32("num-harts", AndesPLMTState, num_harts, 0),
-+    DEFINE_PROP_UINT32("time-base", AndesPLMTState, time_base, 0),
-+    DEFINE_PROP_UINT32("timecmp-base", AndesPLMTState, timecmp_base, 0),
-+    DEFINE_PROP_UINT32("aperture-size", AndesPLMTState, aperture_size, 0),
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
-+static void andes_plmt_realize(DeviceState *dev, Error **errp)
++static char *init_hart_config(const char *hart_config, int num_harts)
 +{
-+    AndesPLMTState *s = ANDES_PLMT(dev);
-+    memory_region_init_io(&s->mmio, OBJECT(dev), &andes_plmt_ops, s,
-+        TYPE_ANDES_PLMT, s->aperture_size);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-+}
++    int length = 0, i = 0;
++    char *result;
 +
-+static void andes_plmt_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    dc->realize = andes_plmt_realize;
-+    device_class_set_props(dc, andes_plmt_properties);
-+}
-+
-+static const TypeInfo andes_plmt_info = {
-+    .name = TYPE_ANDES_PLMT,
-+    .parent = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(AndesPLMTState),
-+    .class_init = andes_plmt_class_init,
-+};
-+
-+static void andes_plmt_register_types(void)
-+{
-+    type_register_static(&andes_plmt_info);
-+}
-+
-+type_init(andes_plmt_register_types)
-+
-+/*
-+ * Create PLMT device.
-+ */
-+DeviceState*
-+andes_plmt_create(hwaddr addr, hwaddr size, uint32_t num_harts,
-+    uint32_t time_base, uint32_t timecmp_base)
-+{
-+    int i;
++    length = (strlen(hart_config) + 1) * num_harts;
++    result = g_malloc0(length);
 +    for (i = 0; i < num_harts; i++) {
-+        CPUState *cpu = qemu_get_cpu(i);
-+        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-+        if (!env) {
-+            continue;
++        if (i != 0) {
++            strncat(result, ",", length);
 +        }
-+        riscv_cpu_set_rdtime_fn(env, andes_cpu_riscv_read_rtc,
-+            ANDES_PLMT_TIMEBASE_FREQ);
-+
-+        env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-+                                  &andes_plmt_timer_cb, cpu);
-+        env->timecmp = 0;
++        strncat(result, hart_config, length);
++        length -= (strlen(hart_config) + 1);
 +    }
 +
-+    DeviceState *dev = qdev_new(TYPE_ANDES_PLMT);
-+    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-+    qdev_prop_set_uint32(dev, "time-base", time_base);
-+    qdev_prop_set_uint32(dev, "timecmp-base", timecmp_base);
-+    qdev_prop_set_uint32(dev, "aperture-size", size);
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-+    return dev;
++    return result;
 +}
-diff --git a/hw/timer/meson.build b/hw/timer/meson.build
-index 26c2701fd7..02c1f205cc 100644
---- a/hw/timer/meson.build
-+++ b/hw/timer/meson.build
-@@ -35,4 +35,5 @@ softmmu_ss.add(when: 'CONFIG_SLAVIO', if_true: files('slavio_timer.c'))
- softmmu_ss.add(when: 'CONFIG_STM32F2XX_TIMER', if_true: files('stm32f2xx_timer.c'))
- softmmu_ss.add(when: 'CONFIG_XILINX', if_true: files('xilinx_timer.c'))
- 
-+specific_ss.add(when: 'CONFIG_ANDES_PLMT', if_true: files('andes_plmt.c'))
- specific_ss.add(when: 'CONFIG_AVR_TIMER16', if_true: files('avr_timer16.c'))
-diff --git a/include/hw/timer/andes_plmt.h b/include/hw/timer/andes_plmt.h
++
++static void andes_ae350_soc_realize(DeviceState *dev_soc, Error **errp)
++{
++    const struct MemmapEntry *memmap = andes_ae350_memmap;
++    MachineState *machine = MACHINE(qdev_get_machine());
++    MemoryRegion *system_memory = get_system_memory();
++    AndesAe350SocState *s = ANDES_AE350_SOC(dev_soc);
++    char *plic_hart_config, *plicsw_hart_config;
++
++    plicsw_hart_config =
++        init_hart_config(ANDES_AE350_PLICSW_HART_CONFIG, machine->smp.cpus);
++
++    /* Per-socket SW-PLIC */
++    s->plic_sw = andes_plicsw_create(
++        memmap[ANDES_AE350_PLICSW].base,
++        ANDES_AE350_PLICSW_NAME,
++        plicsw_hart_config,
++        ANDES_AE350_PLICSW_NUM_SOURCES,
++        ANDES_AE350_PLICSW_NUM_PRIORITIES,
++        ANDES_AE350_PLICSW_PRIORITY_BASE,
++        ANDES_AE350_PLICSW_PENDING_BASE,
++        ANDES_AE350_PLICSW_ENABLE_BASE,
++        ANDES_AE350_PLICSW_ENABLE_STRIDE,
++        ANDES_AE350_PLICSW_THRESHOLD_BASE,
++        ANDES_AE350_PLICSW_THRESHOLD_STRIDE,
++        memmap[ANDES_AE350_PLICSW].size);
++
++    g_free(plicsw_hart_config);
++
++    andes_plmt_create(memmap[ANDES_AE350_PLMT].base,
++                memmap[ANDES_AE350_PLMT].size,
++                machine->smp.cpus, ANDES_PLMT_TIME_BASE, ANDES_PLMT_TIMECMP_BASE);
++
++    plic_hart_config =
++        init_hart_config(ANDES_AE350_PLIC_HART_CONFIG, machine->smp.cpus);
++
++    /* Per-socket PLIC */
++    s->plic = andes_plic_create(
++        memmap[ANDES_AE350_PLIC].base,
++        ANDES_AE350_PLIC_NAME,
++        plic_hart_config,
++        ANDES_AE350_PLIC_NUM_SOURCES,
++        ANDES_AE350_PLIC_NUM_PRIORITIES,
++        ANDES_AE350_PLIC_PRIORITY_BASE,
++        ANDES_AE350_PLIC_PENDING_BASE,
++        ANDES_AE350_PLIC_ENABLE_BASE,
++        ANDES_AE350_PLIC_ENABLE_STRIDE,
++        ANDES_AE350_PLIC_THRESHOLD_BASE,
++        ANDES_AE350_PLIC_THRESHOLD_STRIDE,
++        memmap[ANDES_AE350_PLIC].size);
++
++    g_free(plic_hart_config);
++
++    /* VIRTIO */
++    for (int i = 0; i < ANDES_AE350_VIRTIO_COUNT; i++) {
++        sysbus_create_simple("virtio-mmio",
++            memmap[ANDES_AE350_VIRTIO].base + i * memmap[ANDES_AE350_VIRTIO].size,
++            qdev_get_gpio_in(DEVICE(s->plic), (ANDES_AE350_VIRTIO_IRQ + i)));
++    }
++
++    serial_mm_init(system_memory,
++        memmap[ANDES_AE350_UART1].base + ANDES_UART_REG_OFFSET,
++        ANDES_UART_REG_SHIFT,
++        qdev_get_gpio_in(DEVICE(s->plic), ANDES_AE350_UART1_IRQ),
++        38400, serial_hd(0), DEVICE_LITTLE_ENDIAN);
++
++    serial_mm_init(system_memory,
++        memmap[ANDES_AE350_UART2].base + ANDES_UART_REG_OFFSET,
++        ANDES_UART_REG_SHIFT,
++        qdev_get_gpio_in(DEVICE(s->plic), ANDES_AE350_UART2_IRQ),
++        38400, serial_hd(0), DEVICE_LITTLE_ENDIAN);
++}
++
++static void andes_ae350_soc_instance_init(Object *obj)
++{
++    const struct MemmapEntry *memmap = andes_ae350_memmap;
++    MachineState *machine = MACHINE(qdev_get_machine());
++    AndesAe350SocState *s = ANDES_AE350_SOC(obj);
++
++    object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
++    object_property_set_str(OBJECT(&s->cpus), "cpu-type",
++                            machine->cpu_type, &error_abort);
++    object_property_set_int(OBJECT(&s->cpus), "num-harts",
++                            machine->smp.cpus, &error_abort);
++    qdev_prop_set_uint64(DEVICE(&s->cpus), "resetvec",
++                            memmap[ANDES_AE350_MROM].base);
++    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
++}
++
++static void andes_ae350_machine_init(MachineState *machine)
++{
++    const struct MemmapEntry *memmap = andes_ae350_memmap;
++
++    AndesAe350BoardState *bs = ANDES_AE350_MACHINE(machine);
++    MemoryRegion *system_memory = get_system_memory();
++    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
++    MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
++    target_ulong start_addr = memmap[ANDES_AE350_DRAM].base;
++    target_ulong firmware_end_addr, kernel_start_addr;
++    uint32_t fdt_load_addr;
++    uint64_t kernel_entry;
++
++    /* Initialize SoC */
++    object_initialize_child(OBJECT(machine), "soc",
++                    &bs->soc, TYPE_ANDES_AE350_SOC);
++    qdev_realize(DEVICE(&bs->soc), NULL, &error_abort);
++
++    /* register system main memory (actual RAM) */
++    memory_region_init_ram(main_mem, NULL, "riscv.andes.ae350.ram",
++                           machine->ram_size, &error_fatal);
++    memory_region_add_subregion(system_memory, memmap[ANDES_AE350_DRAM].base,
++        main_mem);
++
++    /* create device tree */
++    create_fdt(bs, memmap, machine->ram_size, machine->kernel_cmdline);
++
++    /* boot rom */
++    memory_region_init_rom(mask_rom, NULL, "riscv.andes.ae350.mrom",
++                           memmap[ANDES_AE350_MROM].size, &error_fatal);
++    memory_region_add_subregion(system_memory, memmap[ANDES_AE350_MROM].base,
++                                mask_rom);
++
++    firmware_end_addr = riscv_find_and_load_firmware(machine, BIOS_FILENAME,
++                                                     start_addr, NULL);
++    if (machine->kernel_filename) {
++        kernel_start_addr = riscv_calc_kernel_start_addr(&bs->soc.cpus,
++                                                         firmware_end_addr);
++
++        kernel_entry = riscv_load_kernel(machine->kernel_filename,
++                                         kernel_start_addr, NULL);
++
++        if (machine->initrd_filename) {
++            hwaddr start;
++            hwaddr end = riscv_load_initrd(machine->initrd_filename,
++                                           machine->ram_size, kernel_entry,
++                                           &start);
++            qemu_fdt_setprop_cell(bs->fdt, "/chosen",
++                                  "linux,initrd-start", start);
++            qemu_fdt_setprop_cell(bs->fdt, "/chosen", "linux,initrd-end",
++                                  end);
++        }
++    } else {
++       /*
++        * If dynamic firmware is used, it doesn't know where is the next mode
++        * if kernel argument is not set.
++        */
++        kernel_entry = 0;
++    }
++
++    /* Compute the fdt load address in dram */
++    fdt_load_addr = riscv_load_fdt(memmap[ANDES_AE350_DRAM].base,
++                                   machine->ram_size, bs->fdt);
++
++    /* load the reset vector */
++    riscv_setup_rom_reset_vec(machine, &bs->soc.cpus, start_addr,
++                andes_ae350_memmap[ANDES_AE350_MROM].base,
++                andes_ae350_memmap[ANDES_AE350_MROM].size, kernel_entry,
++                fdt_load_addr, bs->fdt);
++}
++
++static void andes_ae350_machine_class_init(ObjectClass *oc, void *data)
++{
++    MachineClass *mc = MACHINE_CLASS(oc);
++
++    mc->desc = "RISC-V Board compatible with Andes AE350";
++    mc->init = andes_ae350_machine_init;
++    mc->max_cpus = ANDES_CPUS_MAX;
++    mc->default_cpu_type = VIRT_CPU;
++}
++
++static void andes_ae350_machine_instance_init(Object *obj)
++{
++
++}
++
++static const TypeInfo andes_ae350_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("andes_ae350"),
++    .parent     = TYPE_MACHINE,
++    .class_init = andes_ae350_machine_class_init,
++    .instance_init = andes_ae350_machine_instance_init,
++    .instance_size = sizeof(AndesAe350BoardState),
++};
++
++static void andes_ae350_machine_init_register_types(void)
++{
++    type_register_static(&andes_ae350_machine_typeinfo);
++}
++
++type_init(andes_ae350_machine_init_register_types)
++
++static void andes_ae350_soc_class_init(ObjectClass *oc, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(oc);
++
++    dc->realize = andes_ae350_soc_realize;
++    dc->user_creatable = false;
++}
++
++static const TypeInfo andes_ae350_soc_type_info = {
++    .name       = TYPE_ANDES_AE350_SOC,
++    .parent     = TYPE_DEVICE,
++    .instance_init = andes_ae350_soc_instance_init,
++    .instance_size = sizeof(AndesAe350SocState),
++    .class_init = andes_ae350_soc_class_init,
++};
++
++static void andes_ae350_soc_init_register_types(void)
++{
++    type_register_static(&andes_ae350_soc_type_info);
++}
++
++type_init(andes_ae350_soc_init_register_types)
+diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+index 275c0f7eb7..dc0f2cb98b 100644
+--- a/hw/riscv/meson.build
++++ b/hw/riscv/meson.build
+@@ -2,6 +2,7 @@ riscv_ss = ss.source_set()
+ riscv_ss.add(files('boot.c'), fdt)
+ riscv_ss.add(files('numa.c'))
+ riscv_ss.add(files('riscv_hart.c'))
++riscv_ss.add(when: 'CONFIG_ANDES_AE350', if_true: files('andes_ae350.c'))
+ riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
+ riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
+ riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
+diff --git a/include/hw/riscv/andes_ae350.h b/include/hw/riscv/andes_ae350.h
 new file mode 100644
-index 0000000000..8864013d6f
+index 0000000000..fb1a15e8cc
 --- /dev/null
-+++ b/include/hw/timer/andes_plmt.h
-@@ -0,0 +1,50 @@
++++ b/include/hw/riscv/andes_ae350.h
+@@ -0,0 +1,93 @@
 +/*
-+ * Andes PLMT (Platform Level Machine Timer) interface
++ * Andes RISC-V AE350 Board
 + *
 + * Copyright (c) 2021 Andes Tech. Corp.
 + *
@@ -346,38 +658,81 @@ index 0000000000..8864013d6f
 + * this program.  If not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+#ifndef HW_ANDES_PLMT_H
-+#define HW_ANDES_PLMT_H
++#ifndef HW_RISCV_ANDES_AE350_H
++#define HW_RISCV_ANDES_AE350_H
 +
-+#define TYPE_ANDES_PLMT "riscv.andes.plmt"
++#include "hw/riscv/riscv_hart.h"
++#include "hw/sysbus.h"
++#include "hw/block/flash.h"
++#include "qom/object.h"
 +
-+#define ANDES_PLMT(obj) \
-+    OBJECT_CHECK(AndesPLMTState, (obj), TYPE_ANDES_PLMT)
++#define ANDES_CPUS_MAX 4
 +
-+typedef struct AndesPLMTState {
++#define TYPE_ANDES_AE350_SOC "riscv.andes.ae350.soc"
++#define ANDES_AE350_SOC(obj) \
++    OBJECT_CHECK(AndesAe350SocState, (obj), TYPE_ANDES_AE350_SOC)
++
++typedef struct AndesAe350SocState {
 +    /*< private >*/
 +    SysBusDevice parent_obj;
 +
 +    /*< public >*/
-+    MemoryRegion mmio;
-+    uint32_t num_harts;
-+    uint32_t time_base;
-+    uint32_t timecmp_base;
-+    uint32_t aperture_size;
-+} AndesPLMTState;
++    RISCVHartArrayState cpus;
++    DeviceState *plic;
++    DeviceState *plic_sw;
++} AndesAe350SocState;
 +
-+DeviceState *
-+andes_plmt_create(hwaddr addr, hwaddr size, uint32_t num_harts,
-+    uint32_t time_base, uint32_t timecmp_base);
++#define TYPE_ANDES_AE350_MACHINE MACHINE_TYPE_NAME("andes_ae350")
++#define ANDES_AE350_MACHINE(obj) \
++    OBJECT_CHECK(AndesAe350BoardState, (obj), TYPE_ANDES_AE350_MACHINE)
++
++typedef struct AndesAe350BoardState {
++    /*< private >*/
++    SysBusDevice parent_obj;
++
++    /*< public >*/
++    AndesAe350SocState soc;
++    void *fdt;
++    int fdt_size;
++} AndesAe350BoardState;
 +
 +enum {
-+    ANDES_PLMT_TIME_BASE = 0,
-+    ANDES_PLMT_TIMECMP_BASE = 8,
-+    ANDES_PLMT_MMIO_SIZE = 0x100000,
-+    ANDES_PLMT_TIMEBASE_FREQ = 60 * 1000 * 1000
++    ANDES_AE350_DEBUG,
++    ANDES_AE350_MROM,
++    ANDES_AE350_PLMT,
++    ANDES_AE350_PLICSW,
++    ANDES_AE350_PLIC,
++    ANDES_AE350_UART1,
++    ANDES_AE350_UART2,
++    ANDES_AE350_DRAM,
++    ANDES_AE350_GEM,
++    ANDES_AE350_PIT,
++    ANDES_AE350_SDC,
++    ANDES_AE350_MAC,
++    ANDES_AE350_VIRTIO,
 +};
 +
++enum {
++    ANDES_AE350_PIT_IRQ = 3,
++    ANDES_AE350_UART1_IRQ = 8,
++    ANDES_AE350_UART2_IRQ = 9,
++    ANDES_AE350_SDC_IRQ = 18,
++    ANDES_AE350_MAC_IRQ = 19,
++    ANDES_AE350_GEM_IRQ = 0x35,
++    ANDES_AE350_VIRTIO_COUNT = 8,
++    ANDES_AE350_VIRTIO_IRQ = 16, /* 16 to 23 */
++};
++
++#define ANDES_UART_REG_SHIFT    0x2
++#define ANDES_UART_REG_OFFSET   0x20
++
++#if defined(TARGET_RISCV32)
++#define VIRT_CPU TYPE_RISCV_CPU_BASE32
++#elif defined(TARGET_RISCV64)
++#define VIRT_CPU TYPE_RISCV_CPU_BASE64
 +#endif
++
++#endif /* HW_RISCV_ANDES_AE350_H */
 -- 
 2.17.1
 
