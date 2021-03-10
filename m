@@ -1,51 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lKFBW-0001U3-K5
-	for mharc-qemu-riscv@gnu.org; Thu, 11 Mar 2021 01:52:39 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46700)
+	id 1lKHZI-0006wH-Qx
+	for mharc-qemu-riscv@gnu.org; Thu, 11 Mar 2021 04:25:20 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41992)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dylan@andestech.com>)
- id 1lKFBT-0001SA-VL; Thu, 11 Mar 2021 01:52:36 -0500
-Received: from atcsqr.andestech.com ([60.248.187.195]:44532)
+ (Exim 4.90_1) (envelope-from <alexander.wagner@ulal.de>)
+ id 1lK74p-0007Vo-Ue; Wed, 10 Mar 2021 17:13:11 -0500
+Received: from mo4-p00-ob.smtp.rzone.de ([81.169.146.221]:12326)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dylan@andestech.com>)
- id 1lKFBR-0006RK-Q2; Thu, 11 Mar 2021 01:52:35 -0500
-Received: from mail.andestech.com (atcpcs16.andestech.com [10.0.1.222])
- by ATCSQR.andestech.com with ESMTP id 12B6qGS8015112;
- Thu, 11 Mar 2021 14:52:16 +0800 (GMT-8)
- (envelope-from dylan@andestech.com)
-Received: from atcfdc88 (10.0.15.120) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.487.0; Thu, 11 Mar 2021 14:52:14 +0800
-Date: Thu, 11 Mar 2021 14:52:15 +0800
-From: Dylan Jhong <dylan@andestech.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>, "Bastian
- Koppelmann" <kbastian@mail.uni-paderborn.de>, "qemu-devel@nongnu.org
- Developers" <qemu-devel@nongnu.org>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>, "Ruinland Chuan-Tzu Tsa(((((((((()"
- <ruinland@andestech.com>, "Alan Quey-Liang Kao(((((((((()"
- <alankao@andestech.com>
-Subject: Re: [PATCH 1/3] Andes RISC-V PLIC
-Message-ID: <20210311065215.GB469@atcfdc88>
-References: <20210310033358.30499-1-dylan@andestech.com>
- <20210310033358.30499-2-dylan@andestech.com>
- <CAEUhbmVgQzzS4DSOKM_zBxMMAb0bCZBJOZfQ7BUop84SaikZxg@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <alexander.wagner@ulal.de>)
+ id 1lK74c-0008J1-Kp; Wed, 10 Mar 2021 17:13:11 -0500
+ARC-Seal: i=1; a=rsa-sha256; t=1615414366; cv=none;
+ d=strato.com; s=strato-dkim-0002;
+ b=p7BCeXU4MFCAaq2DVxFMebTq8AEFDdntwjhMvEOCOO0J9bvJLJKlbbsa/68tKhWJfy
+ UkKxGn1yEGprxkPSjAv795fnZ9Qm5Z9D1EyAnHmSV2UcfvPaV4f9nysljrdEiOvuXt4U
+ /XpHWl2+4XKOQsmBYJdBzNTzfrhC2MAhFkxmFRyyr+cmBXpNo6k5RsTR7rPBl3Shyyvb
+ IdScDkcDKwdFnCtmutYzoE+EwJTh/uisAEDA0pA9stGMU3uItnKd38N9nRfvtULlkjj6
+ jlR+BVHWKqD2LX+uCZ82T9xKfakvI0rKaj7gWWXZVe4XWEd3NuX69UlbqcM6yl51O3t6
+ Pqyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1615414366;
+ s=strato-dkim-0002; d=strato.com;
+ h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+ bh=CVPEcgbsyUYGRsFw6HrjdR70qzqtM6xpWIU1hL9sKJo=;
+ b=V/fCfsxU+QKvdpM8sjVsHFnXLa4mvWcXKRBJApUQrYW6yO+QkOfUzyDiB/bkNXIM5A
+ xGKdwHsT130xHWl4rgQqYFbForFhuUPkdaYff5rPThyvgir1ZDnDnKnqHPDQFYBMGaiy
+ ReNk36CK8HtohL2KHlkcxsezZ/65u2p5vA9dUiXLKOqAvpVogNZsFZmMlmKi98JTzBHE
+ XOCAn7bZZ3nllo0AE1MrBY5AtPEYVTdjWNgia1RKlxRQ8+n5V089K9t0ZZ2VeAdzaFYQ
+ 47kCQJlduZCRNuRgzQK7ARgGi3TuvudAqp1ueNdYF1Qkx/Be5KWtfqjlFSgeKyvkMIlo
+ 6Rmw==
+ARC-Authentication-Results: i=1; strato.com;
+    dkim=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1615414366;
+ s=strato-dkim-0002; d=ulal.de;
+ h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+ bh=CVPEcgbsyUYGRsFw6HrjdR70qzqtM6xpWIU1hL9sKJo=;
+ b=imj8TTsffFhmh+xVdpV1JQwS6NrAbTTs7wovwRyMHe2Ca2BLeXaEOlXQWF5DZSyff5
+ qdpAEMlDyFMLOczw4K319F6rtXhV8H+mGLaE/TurX3wwYB+0gyajol83hYy5fN5ZaMS8
+ 6CQKPbZ+RCbCfZ/GYS6gJBmbLgQB4L3IfWXlr1d9CiXA9Mc4xCcSDMydassDNRSk7Ffn
+ HigjRjbUSz/lZ6xE/qPUSvNLOfIiJpSTYynjTESKxnvpM6ueWnRWZOsFzEoEFTHjRC3o
+ 0rSzUW4jcxcfNAi1XaI+G13psZ5HxOU7Mih4RBdJNOE0JR5CfO0XaqGSZo6ss2z0pP6m
+ M5Fg==
+Authentication-Results: strato.com;
+    dkim=none
+X-RZG-AUTH: ":LWABbUGmf/p3d3fx281mbpk9zOkHG9L8L9MnY9md4b2JTjr0xj1uUQtYCbJnQW9aY+KkeQGMenXp0qUAdrQH120clOmDF/WGxJ0nW9BfcQmjrQti"
+X-RZG-CLASS-ID: mo00
+Received: from alwagner-T470s.fritz.box by smtp.strato.de (RZmta 47.20.3 AUTH)
+ with ESMTPSA id c075a1x2AMCjNQk
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Wed, 10 Mar 2021 23:12:45 +0100 (CET)
+From: Alexander Wagner <alexander.wagner@ulal.de>
+To: qemu-devel@nongnu.org
+Cc: Alexander Wagner <alexander.wagner@ulal.de>, Alistair.Francis@wdc.com,
+ qemu-riscv@nongnu.org, palmer@dabbelt.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de
+Subject: [PATCH] hw/riscv: Fix OT IBEX reset vector
+Date: Wed, 10 Mar 2021 23:12:08 +0100
+Message-Id: <20210310221208.167990-1-alexander.wagner@ulal.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CAEUhbmVgQzzS4DSOKM_zBxMMAb0bCZBJOZfQ7BUop84SaikZxg@mail.gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Originating-IP: [10.0.15.120]
-X-DNSRBL: 
-X-MAIL: ATCSQR.andestech.com 12B6qGS8015112
-Received-SPF: pass client-ip=60.248.187.195; envelope-from=dylan@andestech.com;
- helo=ATCSQR.andestech.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=81.169.146.221;
+ envelope-from=alexander.wagner@ulal.de; helo=mo4-p00-ob.smtp.rzone.de
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 11 Mar 2021 04:25:19 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,48 +81,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Mar 2021 06:52:36 -0000
+X-List-Received-Date: Wed, 10 Mar 2021 22:13:12 -0000
 
-On Wed, Mar 10, 2021 at 02:05:51PM +0800, Bin Meng wrote:
-> On Wed, Mar 10, 2021 at 11:34 AM Dylan Jhong <dylan@andestech.com> wrote:
-> >
-> > Andes PLIC (Platform-Level Interrupt Controller) device provides an
-> > interrupt controller functionality based on Andes's PLIC specification.
-> >
-> > The Andes PLIC can handle either external interrupts (PLIC)
-> > or interprocessor interrupts (PLICSW).
-> >
-> > While Andes PLIC spec includes vector interrupt and interrupt preemption,
-> > we leave them as future items for now.
-> >
-> > Signed-off-by: Dylan Jhong <dylan@andestech.com>
-> > Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
-> > ---
-> >  hw/intc/Kconfig              |   3 +
-> >  hw/intc/andes_plic.c         | 505 +++++++++++++++++++++++++++++++++++
-> >  hw/intc/meson.build          |   1 +
-> >  include/hw/intc/andes_plic.h | 130 +++++++++
-> >  4 files changed, 639 insertions(+)
-> >  create mode 100644 hw/intc/andes_plic.c
-> >  create mode 100644 include/hw/intc/andes_plic.h
-> 
-> Is the Andes PLIC spec public available?
->
+The IBEX documentation [1] specifies the reset vector to be "the most
+significant 3 bytes of the boot address and the reset value (0x80) as
+the least significant byte".
 
-Please refer to Andes website
-http://www.andestech.com/en/products-solutions/product-documentation/
+[1] https://github.com/lowRISC/ibex/blob/master/doc/03_reference/exception_interrupts.rst
 
-> What's the difference between Andres's implementation and the SiFive's?
-> 
+Signed-off-by: Alexander Wagner <alexander.wagner@ulal.de>
+---
+ hw/riscv/opentitan.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Currently, the Andes's PLIC specification allows the following functions:
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index e168bffe69..ca4c1be6f6 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -120,7 +120,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+                             &error_abort);
+     object_property_set_int(OBJECT(&s->cpus), "num-harts", ms->smp.cpus,
+                             &error_abort);
+-    object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x8090, &error_abort);
++    object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x8080, &error_abort);
+     sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
+ 
+     /* Boot ROM */
+-- 
+2.25.1
 
-Preemptive Priority Interrupt, Vectored Mode Interrupt Dispatching and
-Software-Generated Interrupt.
-
-In this patch, we only implement "Software-Generated Interrupt" feature.
-For the other PLIC features, we'll leave them as future items for now.
-
-> Regards,
-> Bin
 
