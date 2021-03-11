@@ -1,75 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lKHZI-0006wH-Qx
-	for mharc-qemu-riscv@gnu.org; Thu, 11 Mar 2021 04:25:20 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41992)
+	id 1lKHvM-0002ti-66
+	for mharc-qemu-riscv@gnu.org; Thu, 11 Mar 2021 04:48:08 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59756)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexander.wagner@ulal.de>)
- id 1lK74p-0007Vo-Ue; Wed, 10 Mar 2021 17:13:11 -0500
-Received: from mo4-p00-ob.smtp.rzone.de ([81.169.146.221]:12326)
+ (Exim 4.90_1) (envelope-from <georg.kotheimer@kernkonzept.com>)
+ id 1lKHvJ-0002qd-SY; Thu, 11 Mar 2021 04:48:05 -0500
+Received: from serv1.kernkonzept.com ([2a01:4f8:1c1c:b490::2]:56843
+ helo=mx.kernkonzept.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexander.wagner@ulal.de>)
- id 1lK74c-0008J1-Kp; Wed, 10 Mar 2021 17:13:11 -0500
-ARC-Seal: i=1; a=rsa-sha256; t=1615414366; cv=none;
- d=strato.com; s=strato-dkim-0002;
- b=p7BCeXU4MFCAaq2DVxFMebTq8AEFDdntwjhMvEOCOO0J9bvJLJKlbbsa/68tKhWJfy
- UkKxGn1yEGprxkPSjAv795fnZ9Qm5Z9D1EyAnHmSV2UcfvPaV4f9nysljrdEiOvuXt4U
- /XpHWl2+4XKOQsmBYJdBzNTzfrhC2MAhFkxmFRyyr+cmBXpNo6k5RsTR7rPBl3Shyyvb
- IdScDkcDKwdFnCtmutYzoE+EwJTh/uisAEDA0pA9stGMU3uItnKd38N9nRfvtULlkjj6
- jlR+BVHWKqD2LX+uCZ82T9xKfakvI0rKaj7gWWXZVe4XWEd3NuX69UlbqcM6yl51O3t6
- Pqyw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1615414366;
- s=strato-dkim-0002; d=strato.com;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=CVPEcgbsyUYGRsFw6HrjdR70qzqtM6xpWIU1hL9sKJo=;
- b=V/fCfsxU+QKvdpM8sjVsHFnXLa4mvWcXKRBJApUQrYW6yO+QkOfUzyDiB/bkNXIM5A
- xGKdwHsT130xHWl4rgQqYFbForFhuUPkdaYff5rPThyvgir1ZDnDnKnqHPDQFYBMGaiy
- ReNk36CK8HtohL2KHlkcxsezZ/65u2p5vA9dUiXLKOqAvpVogNZsFZmMlmKi98JTzBHE
- XOCAn7bZZ3nllo0AE1MrBY5AtPEYVTdjWNgia1RKlxRQ8+n5V089K9t0ZZ2VeAdzaFYQ
- 47kCQJlduZCRNuRgzQK7ARgGi3TuvudAqp1ueNdYF1Qkx/Be5KWtfqjlFSgeKyvkMIlo
- 6Rmw==
-ARC-Authentication-Results: i=1; strato.com;
-    dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1615414366;
- s=strato-dkim-0002; d=ulal.de;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=CVPEcgbsyUYGRsFw6HrjdR70qzqtM6xpWIU1hL9sKJo=;
- b=imj8TTsffFhmh+xVdpV1JQwS6NrAbTTs7wovwRyMHe2Ca2BLeXaEOlXQWF5DZSyff5
- qdpAEMlDyFMLOczw4K319F6rtXhV8H+mGLaE/TurX3wwYB+0gyajol83hYy5fN5ZaMS8
- 6CQKPbZ+RCbCfZ/GYS6gJBmbLgQB4L3IfWXlr1d9CiXA9Mc4xCcSDMydassDNRSk7Ffn
- HigjRjbUSz/lZ6xE/qPUSvNLOfIiJpSTYynjTESKxnvpM6ueWnRWZOsFzEoEFTHjRC3o
- 0rSzUW4jcxcfNAi1XaI+G13psZ5HxOU7Mih4RBdJNOE0JR5CfO0XaqGSZo6ss2z0pP6m
- M5Fg==
-Authentication-Results: strato.com;
-    dkim=none
-X-RZG-AUTH: ":LWABbUGmf/p3d3fx281mbpk9zOkHG9L8L9MnY9md4b2JTjr0xj1uUQtYCbJnQW9aY+KkeQGMenXp0qUAdrQH120clOmDF/WGxJ0nW9BfcQmjrQti"
-X-RZG-CLASS-ID: mo00
-Received: from alwagner-T470s.fritz.box by smtp.strato.de (RZmta 47.20.3 AUTH)
- with ESMTPSA id c075a1x2AMCjNQk
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Wed, 10 Mar 2021 23:12:45 +0100 (CET)
-From: Alexander Wagner <alexander.wagner@ulal.de>
-To: qemu-devel@nongnu.org
-Cc: Alexander Wagner <alexander.wagner@ulal.de>, Alistair.Francis@wdc.com,
- qemu-riscv@nongnu.org, palmer@dabbelt.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de
-Subject: [PATCH] hw/riscv: Fix OT IBEX reset vector
-Date: Wed, 10 Mar 2021 23:12:08 +0100
-Message-Id: <20210310221208.167990-1-alexander.wagner@ulal.de>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1) (envelope-from <georg.kotheimer@kernkonzept.com>)
+ id 1lKHvH-0001jq-Kp; Thu, 11 Mar 2021 04:48:05 -0500
+Received: from [86.56.46.35] (helo=broc.lan)
+ by mx.kernkonzept.com with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) id 1lKHv8-0005Te-7L; Thu, 11 Mar 2021 10:47:54 +0100
+From: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Georg Kotheimer <georg.kotheimer@kernkonzept.com>
+Subject: [PATCH] target/riscv: Fix read and write accesses to vsip and vsie
+Date: Thu, 11 Mar 2021 10:47:38 +0100
+Message-Id: <20210311094738.1376795-1-georg.kotheimer@kernkonzept.com>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=81.169.146.221;
- envelope-from=alexander.wagner@ulal.de; helo=mo4-p00-ob.smtp.rzone.de
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+Received-SPF: softfail client-ip=2a01:4f8:1c1c:b490::2;
+ envelope-from=georg.kotheimer@kernkonzept.com; helo=mx.kernkonzept.com
+X-Spam_score_int: -11
+X-Spam_score: -1.2
+X-Spam_bar: -
+X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, KHOP_HELO_FCRDNS=0.02,
+ SPF_HELO_NONE=0.001, SPF_SOFTFAIL=0.665 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 11 Mar 2021 04:25:19 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,33 +43,133 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2021 22:13:12 -0000
+X-List-Received-Date: Thu, 11 Mar 2021 09:48:06 -0000
 
-The IBEX documentation [1] specifies the reset vector to be "the most
-significant 3 bytes of the boot address and the reset value (0x80) as
-the least significant byte".
+The previous implementation was broken in many ways:
+ - Used mideleg instead of hideleg to mask accesses
+ - Used MIP_VSSIP instead of VS_MODE_INTERRUPTS to mask writes to vsie
+ - Did not shift between S bits and VS bits (VSEIP <-> SEIP, ...)
 
-[1] https://github.com/lowRISC/ibex/blob/master/doc/03_reference/exception_interrupts.rst
-
-Signed-off-by: Alexander Wagner <alexander.wagner@ulal.de>
+Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
 ---
- hw/riscv/opentitan.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/csr.c | 68 +++++++++++++++++++++++-----------------------
+ 1 file changed, 34 insertions(+), 34 deletions(-)
 
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index e168bffe69..ca4c1be6f6 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -120,7 +120,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-                             &error_abort);
-     object_property_set_int(OBJECT(&s->cpus), "num-harts", ms->smp.cpus,
-                             &error_abort);
--    object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x8090, &error_abort);
-+    object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x8080, &error_abort);
-     sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index fd2e6363f3..4a5b362ec1 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -748,30 +748,42 @@ static int write_sstatus(CPURISCVState *env, int csrno, target_ulong val)
+     return write_mstatus(env, CSR_MSTATUS, newval);
+ }
  
-     /* Boot ROM */
++static int read_vsie(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    /* Shift the VS bits to their S bit location in vsie */
++    *val = (env->mie & env->hideleg & VS_MODE_INTERRUPTS) >> 1;
++    return 0;
++}
++
+ static int read_sie(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+     if (riscv_cpu_virt_enabled(env)) {
+-        /* Tell the guest the VS bits, shifted to the S bit locations */
+-        *val = (env->mie & env->mideleg & VS_MODE_INTERRUPTS) >> 1;
++        read_vsie(env, CSR_VSIE, val);
+     } else {
+         *val = env->mie & env->mideleg;
+     }
+     return 0;
+ }
+ 
+-static int write_sie(CPURISCVState *env, int csrno, target_ulong val)
++static int write_vsie(CPURISCVState *env, int csrno, target_ulong val)
+ {
+-    target_ulong newval;
++    /* Shift the S bits to their VS bit location in mie */
++    target_ulong newval = (env->mie & ~VS_MODE_INTERRUPTS) |
++                          ((val << 1) & env->hideleg & VS_MODE_INTERRUPTS);
++    return write_mie(env, CSR_MIE, newval);
++}
+ 
++static int write_sie(CPURISCVState *env, int csrno, target_ulong val)
++{
+     if (riscv_cpu_virt_enabled(env)) {
+-        /* Shift the guests S bits to VS */
+-        newval = (env->mie & ~VS_MODE_INTERRUPTS) |
+-                 ((val << 1) & VS_MODE_INTERRUPTS);
++        write_vsie(env, CSR_VSIE, val);
+     } else {
+-        newval = (env->mie & ~S_MODE_INTERRUPTS) | (val & S_MODE_INTERRUPTS);
++        target_ulong newval = (env->mie & ~S_MODE_INTERRUPTS) |
++                              (val & S_MODE_INTERRUPTS);
++        write_mie(env, CSR_MIE, newval);
+     }
+ 
+-    return write_mie(env, CSR_MIE, newval);
++    return 0;
+ }
+ 
+ static int read_stvec(CPURISCVState *env, int csrno, target_ulong *val)
+@@ -852,17 +864,25 @@ static int write_sbadaddr(CPURISCVState *env, int csrno, target_ulong val)
+     return 0;
+ }
+ 
++static int rmw_vsip(CPURISCVState *env, int csrno, target_ulong *ret_value,
++                    target_ulong new_value, target_ulong write_mask)
++{
++    /* Shift the S bits to their VS bit location in mip */
++    int ret = rmw_mip(env, 0, ret_value, new_value << 1,
++                      (write_mask << 1) & vsip_writable_mask & env->hideleg);
++    *ret_value &= VS_MODE_INTERRUPTS;
++    /* Shift the VS bits to their S bit location in vsip */
++    *ret_value >>= 1;
++    return ret;
++}
++
+ static int rmw_sip(CPURISCVState *env, int csrno, target_ulong *ret_value,
+                    target_ulong new_value, target_ulong write_mask)
+ {
+     int ret;
+ 
+     if (riscv_cpu_virt_enabled(env)) {
+-        /* Shift the new values to line up with the VS bits */
+-        ret = rmw_mip(env, CSR_MSTATUS, ret_value, new_value << 1,
+-                      (write_mask & sip_writable_mask) << 1 & env->mideleg);
+-        ret &= vsip_writable_mask;
+-        ret >>= 1;
++        ret = rmw_vsip(env, CSR_VSIP, ret_value, new_value, write_mask);
+     } else {
+         ret = rmw_mip(env, CSR_MSTATUS, ret_value, new_value,
+                       write_mask & env->mideleg & sip_writable_mask);
+@@ -1121,26 +1141,6 @@ static int write_vsstatus(CPURISCVState *env, int csrno, target_ulong val)
+     return 0;
+ }
+ 
+-static int rmw_vsip(CPURISCVState *env, int csrno, target_ulong *ret_value,
+-                    target_ulong new_value, target_ulong write_mask)
+-{
+-    int ret = rmw_mip(env, 0, ret_value, new_value,
+-                      write_mask & env->mideleg & vsip_writable_mask);
+-    return ret;
+-}
+-
+-static int read_vsie(CPURISCVState *env, int csrno, target_ulong *val)
+-{
+-    *val = env->mie & env->mideleg & VS_MODE_INTERRUPTS;
+-    return 0;
+-}
+-
+-static int write_vsie(CPURISCVState *env, int csrno, target_ulong val)
+-{
+-    target_ulong newval = (env->mie & ~env->mideleg) | (val & env->mideleg & MIP_VSSIP);
+-    return write_mie(env, CSR_MIE, newval);
+-}
+-
+ static int read_vstvec(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+     *val = env->vstvec;
 -- 
-2.25.1
+2.30.1
 
 
