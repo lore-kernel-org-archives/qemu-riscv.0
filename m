@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lKNTc-0002To-MK
-	for mharc-qemu-riscv@gnu.org; Thu, 11 Mar 2021 10:43:52 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56940)
+	id 1lKNXO-0006go-0c
+	for mharc-qemu-riscv@gnu.org; Thu, 11 Mar 2021 10:47:46 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58376)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lKNTZ-0002Jt-Mk; Thu, 11 Mar 2021 10:43:49 -0500
-Received: from mail-io1-xd2a.google.com ([2607:f8b0:4864:20::d2a]:39289)
+ id 1lKNXL-0006aY-Or; Thu, 11 Mar 2021 10:47:43 -0500
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:35586)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lKNTS-0000bg-NK; Thu, 11 Mar 2021 10:43:49 -0500
-Received: by mail-io1-xd2a.google.com with SMTP id o9so22386048iow.6;
- Thu, 11 Mar 2021 07:43:41 -0800 (PST)
+ id 1lKNXH-0002qO-RU; Thu, 11 Mar 2021 10:47:43 -0500
+Received: by mail-io1-xd35.google.com with SMTP id g27so22410091iox.2;
+ Thu, 11 Mar 2021 07:47:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=iHIK2kOcd3S8jQDMYuCs2OSgeVurDXYZhk2DjhWnslw=;
- b=eVfTZp3QMVfcICJ9nxPjjnB517JTkJqMRXKcmIhnuyDXDpUFDguioG/vqaxCKOirza
- ijrtiDYHZAx0F/x+qVbE+lvDxqHZ6AFXvZsDNqqr5IlGoJZG3b8QHL4uocHSdwXB9iMg
- k2IRs5aPyJGj0WIZHhesdqNXsHMb96GRMOhZNyXYlYQdkdWo9h0XQfGXleeNqkyWsIT7
- cCYuUWP2ed3G3v2AzbqDhV08BWduDAXlof/iA2oWptO3D0ixpFtj1HKwptx1FElZ/5wS
- 4VDPi1uu7Pu5bWv9FgfIDuO794jBS3u9aalLWiP0jC+AlTTKncdeNYZFJbWe687l5NOC
- KvWA==
+ :cc; bh=us2ggO3ywWa/Suta24AkTx82+FbzWuyl/MVO7Ib+wiE=;
+ b=ogJt6fHntbFef9Uxdcvu+T8c0hFouW5UNrRWwAQ+IQeLQHM6JwsjjWa3QNFReID6JR
+ EppeHMfH8bWLFlKVaxMLG+R4mnPtNuyiR6n6+WQFPCAISKth7t8tQkIvmZT/B2E4DtfV
+ BBw3FBFtStoVTaSqNgCZUM/iCbR2xGL6VSmySEu7f0jdUDqqcf7s0IWHyNCvmw6tFLTw
+ /3SuvqYtB/hhd7kNrZglbNou7pPr43J45MTe/RoSX/+lX2YI2qo5IFW+C5pLyYaAdt0O
+ 1CYKLcQxS1R+r76HM4id9nDkNbuVWhbzxC2tEuMlt9iN/lJJMSUGEL1i4WAwlRfeo0S4
+ +C5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=iHIK2kOcd3S8jQDMYuCs2OSgeVurDXYZhk2DjhWnslw=;
- b=Fmo0UFW44xZpzJ+1tqFvNrc87Lbz1BSE5I+bM5vKo54H6rCnb3XdUtYH9/Fhxd9zO0
- /sZnT9yqkKTZPU9wnfyAb0urRCcVdfCXxcvOODp4TEfykW07S3cP4y0aQi9KIoVm6hwx
- OvUljKIhLy/o2ILz/9NpB1zkNbxdzRmmDwuwNYg2QKVuUzmpq5+R1PZNFg3dKc6rdJEA
- B0WUo3XTxCVv2Ik7PmoNE7u7BLcDBfoer5utkxzLhWdO0O1fledA2v3nqLdS3Xl7ZMon
- d6NQJfAbNsSblhBPisQjGJxALrZkD281/2uGYfKqVw1Es2dEC4imdIulDMzZ6Uj318v5
- jPAA==
-X-Gm-Message-State: AOAM532xKheXcVk9Xs9wcog2ET7PgTGkJ+A2GLjZmdL3UICLyzSwoEEl
- wf62llpmJA1mjbY0pmIQD0SXqfTCxY16b7Hw5QE=
-X-Google-Smtp-Source: ABdhPJzIJD+SxH9yz5d/mdCehnUlmjMT7FB+bKoSbXKa8aWfxWiJhtpLG7/EK6Rx4tnHQNLIIsVh8Ailn7uvkVBTuzY=
-X-Received: by 2002:a5d:854b:: with SMTP id b11mr6610591ios.105.1615477420293; 
- Thu, 11 Mar 2021 07:43:40 -0800 (PST)
+ bh=us2ggO3ywWa/Suta24AkTx82+FbzWuyl/MVO7Ib+wiE=;
+ b=nYiZYPmteT54saHgA/GL3LzG4CL6wlGcZxexs+w7hBmdh3kUfd28BUx/uQrgbmnSIU
+ /8HiivknsFHLsZ40KT4djy9UVAS+FVkXmzA4Kz7t6NR1fA2uamktvIYMSpePKc5foM0l
+ s3KNAfnJT86KfhIN3A8SD/0BmDdfKQoElKKjXC6qQn4Xv+FG/yQmoF+a+TRwQ1aa062S
+ fCekUBKjVoMkzIA/kVnckH2JVGrTvFFBDldnBMeJSI4J8x++gWhrhIJ0DQpG803SPUJx
+ EnivRsAwP+/U7Esw12UcwgS93zCzaz2EgTknB8Y/pjTEQgfhs6PImhr3yxbS8PiOjhZZ
+ MqRw==
+X-Gm-Message-State: AOAM531d9L47ngd9arwrkdnfSdCz9Pwo+y5SiYTUaKymIwh9eckOEDO0
+ +2dqmvYKvl5lSEqumwUSDuvU6vWQGu7yZjGaZdI=
+X-Google-Smtp-Source: ABdhPJzG30kBkqYt497FdRXRs/mexJbzYH4p5Rzk/DgPTw+IfrWnkEWeGLPTzn1MMr92LDol54pokZ53iQ4zQSiqJuU=
+X-Received: by 2002:a5d:9459:: with SMTP id x25mr6894101ior.176.1615477657988; 
+ Thu, 11 Mar 2021 07:47:37 -0800 (PST)
 MIME-Version: 1.0
 References: <20210310033358.30499-1-dylan@andestech.com>
- <20210310033358.30499-2-dylan@andestech.com>
- <CALecT5iCBcHfGzakfa6iV_j-03Rncq4+a0PiyftAMYR7dNsOFg@mail.gmail.com>
-In-Reply-To: <CALecT5iCBcHfGzakfa6iV_j-03Rncq4+a0PiyftAMYR7dNsOFg@mail.gmail.com>
+ <20210310033358.30499-4-dylan@andestech.com>
+ <CAEUhbmWAfYLuEOD_epjA=4d27JDV+iVdACOmj2B6PSR0Dg1wdQ@mail.gmail.com>
+ <20210311065037.GA469@atcfdc88>
+In-Reply-To: <20210311065037.GA469@atcfdc88>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 11 Mar 2021 10:42:18 -0500
-Message-ID: <CAKmqyKMwyKreAHnBN=9tPG6EgTLm7kTZL-jPtyJuorQuTOJwPQ@mail.gmail.com>
-Subject: Re: [PATCH 1/3] Andes RISC-V PLIC
-To: Yixun Lan <yixun.lan@gmail.com>
-Cc: Dylan Jhong <dylan@andestech.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
+Date: Thu, 11 Mar 2021 10:46:15 -0500
+Message-ID: <CAKmqyKPdyEjMdp36PjD-zP6LvnAzAi-00+4zASi3bRyRp=+k2A@mail.gmail.com>
+Subject: Re: [PATCH 3/3] Andes AE350 RISC-V Machine
+To: Dylan Jhong <dylan@andestech.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "Alan Quey-Liang Kao(((((((((()" <alankao@andestech.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, ruinland@andestech.com, 
- alankao@andestech.com
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ "Ruinland Chuan-Tzu Tsa(((((((((()" <ruinland@andestech.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,716 +78,755 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Mar 2021 15:43:50 -0000
+X-List-Received-Date: Thu, 11 Mar 2021 15:47:44 -0000
 
-On Wed, Mar 10, 2021 at 9:58 AM Yixun Lan <yixun.lan@gmail.com> wrote:
+On Thu, Mar 11, 2021 at 2:03 AM Dylan Jhong <dylan@andestech.com> wrote:
 >
-> On 3/10/21 3:33 AM, Dylan Jhong wrote:
-> > Andes PLIC (Platform-Level Interrupt Controller) device provides an
-> > interrupt controller functionality based on Andes's PLIC specification.
+> On Wed, Mar 10, 2021 at 02:15:25PM +0800, Bin Meng wrote:
+> > On Wed, Mar 10, 2021 at 11:36 AM Dylan Jhong <dylan@andestech.com> wrote:
+> > >
+> > > This provides a RISC-V Board based on Andes's AE350 specification.
+> > > The following machine is implemented:
+> > >
+> > > - 'andes_ae350'; PLIC, PLICSW, PLMT, 16550a UART, VirtIO MMIO, device-tree
 > >
-> > The Andes PLIC can handle either external interrupts (PLIC)
-> > or interprocessor interrupts (PLICSW).
-> >
-> > While Andes PLIC spec includes vector interrupt and interrupt preemption,
-> > we leave them as future items for now.
-> >
-> > Signed-off-by: Dylan Jhong <dylan@andestech.com>
-> > Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
-> > ---
-> >   hw/intc/Kconfig              |   3 +
-> >   hw/intc/andes_plic.c         | 505 +++++++++++++++++++++++++++++++++++
-> >   hw/intc/meson.build          |   1 +
-> >   include/hw/intc/andes_plic.h | 130 +++++++++
-> >   4 files changed, 639 insertions(+)
-> >   create mode 100644 hw/intc/andes_plic.c
-> >   create mode 100644 include/hw/intc/andes_plic.h
-> >
-> > diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
-> > index 66bf0b90b4..b1735c937a 100644
-> > --- a/hw/intc/Kconfig
-> > +++ b/hw/intc/Kconfig
-> > @@ -67,3 +67,6 @@ config SIFIVE_CLINT
-> >
-> >   config SIFIVE_PLIC
-> >       bool
-> > +
-> > +config ANDES_PLIC
-> > +    bool
-> > diff --git a/hw/intc/andes_plic.c b/hw/intc/andes_plic.c
-> > new file mode 100644
-> > index 0000000000..51b5583566
-> > --- /dev/null
-> > +++ b/hw/intc/andes_plic.c
-> > @@ -0,0 +1,505 @@
-> > +/*
-> > + * Andes PLIC (Platform Level Interrupt Controller)
-> > + *
-> > + * Copyright (c) 2021 Andes Tech. Corp.
-> > + *
-> > + * This program is free software; you can redistribute it and/or modify it
-> > + * under the terms and conditions of the GNU General Public License,
-> > + * version 2 or later, as published by the Free Software Foundation.
-> > + *
-> > + * This program is distributed in the hope it will be useful, but WITHOUT
-> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> > + * more details.
-> > + *
-> > + * You should have received a copy of the GNU General Public License along with
-> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +#include "qemu/error-report.h"
-> > +#include "qemu/log.h"
-> > +#include "qapi/error.h"
-> > +#include "hw/qdev-properties.h"
-> > +#include "target/riscv/cpu.h"
-> > +#include "hw/sysbus.h"
-> > +#include "hw/intc/andes_plic.h"
-> > +
-> > +/* #define DEBUG_ANDES_PLIC */
-> > +#define LOGGE(x...) qemu_log_mask(LOG_GUEST_ERROR, x)
-> > +#define xLOG(x...)
-> > +#define yLOG(x...) qemu_log(x)
-> > +#ifdef DEBUG_ANDES_PLIC
-> > +  #define LOG(x...) yLOG(x)
-> > +#else
-> > +  #define LOG(x...) xLOG(x)
-> > +#endif
-> > +
-> > +enum register_names {
-> > +    REG_FEATURE_ENABLE = 0x0000,
-> > +    REG_TRIGGER_TYPE_BASE = 0x1080,
-> > +    REG_NUM_IRQ_TARGET = 0x1100,
-> > +    REG_VER_MAX_PRIORITY = 0x1104,
-> > +};
-> > +
-> > +enum feature_enable_register {
-> > +    FER_PREEMPT = (1u << 0),
-> > +    FER_VECTORED = (1u << 0),
-> > +};
-> > +
-> > +static uint32_t atomic_set_masked(uint32_t *a, uint32_t mask, uint32_t value)
-> > +{
-> > +    uint32_t old, new, cmp = qatomic_read(a);
-> > +
-> > +    do {
-> > +        old = cmp;
-> > +        new = (old & ~mask) | (value & mask);
-> > +        cmp = qatomic_cmpxchg(a, old, new);
-> > +    } while (old != cmp);
-> > +
-> > +    return old;
-> > +}
-> > +
-> > +static void andes_plic_set_pending(AndesPLICState *plic, int irq, bool level)
-> > +{
-> > +    atomic_set_masked(&plic->pending[irq >> 5], 1 << (irq & 31), -!!level);
-> > +}
-> > +
-> > +static void andes_plic_set_claimed(AndesPLICState *plic, int irq, bool level)
-> > +{
-> > +    atomic_set_masked(&plic->claimed[irq >> 5], 1 << (irq & 31), -!!level);
-> > +}
-> > +
-> > +static int andes_plic_irqs_pending(AndesPLICState *plic, uint32_t target_id)
-> > +{
-> > +    int i, j;
-> > +    for (i = 0; i < plic->bitfield_words; i++) {
-> > +        uint32_t pending_enabled_not_claimed =
-> > +            (plic->pending[i] & ~plic->claimed[i]) &
-> > +            plic->enable[target_id * plic->bitfield_words + i];
-> > +        if (!pending_enabled_not_claimed) {
-> > +            continue;
-> > +        }
-> > +
-> > +        for (j = 0; j < 32; j++) {
-> > +            int irq = (i << 5) + j;
-> > +            uint32_t prio = plic->source_priority[irq];
-> > +            int enabled = pending_enabled_not_claimed & (1 << j);
-> > +            if (enabled && prio > plic->target_priority[target_id]) {
-> > +                return 1;
-> > +            }
-> > +        }
-> > +    }
-> > +    return 0;
-> > +}
-> > +
-> > +void andes_plichw_update(AndesPLICState *plic)
-> > +{
-> > +    int target_id;
-> > +
-> > +    /* raise irq on harts where this irq is enabled */
-> > +    for (target_id = 0; target_id < plic->num_addrs; target_id++) {
-> > +        uint32_t hart_id = plic->addr_config[target_id].hart_id;
-> > +        AndesPLICMode mode = plic->addr_config[target_id].mode;
-> > +        CPUState *cpu = qemu_get_cpu(hart_id);
-> > +        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> > +        if (!env) {
-> > +            continue;
-> > +        }
-> > +        int level = andes_plic_irqs_pending(plic, target_id);
-> > +
-> > +        switch (mode) {
-> > +        case PlicMode_M:
-> > +            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MEIP, BOOL_TO_MASK(level));
-> > +            break;
-> > +        case PlicMode_S:
-> > +            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SEIP, BOOL_TO_MASK(level));
-> > +            break;
-> > +        default:
-> > +            break;
-> > +        }
-> > +    }
-> > +}
-> > +
-> > +void andes_plicsw_update(AndesPLICState *plic)
-> > +{
-> > +    int target_id;
-> > +
-> > +    /* raise irq on harts where this irq is enabled */
-> > +    for (target_id = 0; target_id < plic->num_addrs; target_id++) {
-> > +        uint32_t hart_id = plic->addr_config[target_id].hart_id;
-> > +        AndesPLICMode mode = plic->addr_config[target_id].mode;
-> > +        CPUState *cpu = qemu_get_cpu(hart_id);
-> > +        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> > +        if (!env) {
-> > +            continue;
-> > +        }
-> > +        int level = andes_plic_irqs_pending(plic, target_id);
-> > +
-> > +        switch (mode) {
-> > +        case PlicMode_M:
-> > +            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MSIP, BOOL_TO_MASK(level));
-> > +            break;
-> > +        case PlicMode_S:
-> > +            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SSIP, BOOL_TO_MASK(level));
-> > +            break;
-> > +        default:
-> > +            break;
-> > +        }
-> > +    }
-> > +}
-> > +
-> > +static uint32_t andes_plic_claim(AndesPLICState *plic, uint32_t target_id)
-> > +{
-> > +    int i, j;
-> > +    uint32_t max_irq = 0;
-> > +    uint32_t max_prio = plic->target_priority[target_id];
-> > +
-> > +    for (i = 0; i < plic->bitfield_words; i++) {
-> > +        uint32_t pending_enabled_not_claimed =
-> > +            (plic->pending[i] & ~plic->claimed[i]) &
-> > +            plic->enable[target_id * plic->bitfield_words + i];
-> > +        if (!pending_enabled_not_claimed) {
-> > +            continue;
-> > +        }
-> > +        for (j = 0; j < 32; j++) {
-> > +            int irq = (i << 5) + j;
-> > +            uint32_t prio = plic->source_priority[irq];
-> > +            int enabled = pending_enabled_not_claimed & (1 << j);
-> > +            if (enabled && prio > max_prio) {
-> > +                max_irq = irq;
-> > +                max_prio = prio;
-> > +            }
-> > +        }
-> > +    }
-> > +
-> > +    if (max_irq) {
-> > +        andes_plic_set_pending(plic, max_irq, false);
-> > +        andes_plic_set_claimed(plic, max_irq, true);
-> > +    }
-> > +    return max_irq;
-> > +}
-> > +
-> > +static AndesPLICMode char_to_mode(char c)
-> > +{
-> > +    switch (c) {
-> > +    case 'U': return PlicMode_U;
-> > +    case 'S': return PlicMode_S;
-> > +    case 'H': return PlicMode_H;
-> > +    case 'M': return PlicMode_M;
-> > +    default:
-> > +        error_report("plic: invalid mode '%c'", c);
-> > +        exit(1);
-> > +    }
-> > +}
-> > +
-> > +static uint64_t
-> > +andes_plic_read(void *opaque, hwaddr addr, unsigned size)
-> > +{
-> > +    AndesPLICState *plic = ANDES_PLIC(opaque);
-> > +
-> > +    if ((addr & 0x3)) {
-> > +        error_report("%s: invalid register read: %08x",
-> > +            __func__, (uint32_t)addr);
-> > +    }
-> > +
-> > +    if (addr_between(addr,
-> > +            plic->priority_base,
-> > +            (plic->num_sources << 2))) {
-> > +        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
-> > +        return plic->source_priority[irq];
-> > +    } else if (addr_between(addr,
-> > +                plic->pending_base,
-> > +                (plic->num_sources >> 3))) {
-> > +        uint32_t word = (addr - plic->pending_base) >> 2;
-> > +        return plic->pending[word];
-> > +    } else if (addr_between(addr,
-> > +                plic->enable_base,
-> > +                (plic->num_addrs * plic->enable_stride))) {
-> > +        uint32_t target_id = (addr - plic->enable_base) / plic->enable_stride;
-> > +        uint32_t wordid = (addr & (plic->enable_stride - 1)) >> 2;
-> > +        if (wordid < plic->bitfield_words) {
-> > +            return plic->enable[target_id * plic->bitfield_words + wordid];
-> > +        }
-> > +    } else if (addr_between(addr,
-> > +                plic->threshold_base,
-> > +                (plic->num_addrs * plic->threshold_stride))) {
-> > +        uint32_t target_id =
-> > +            (addr - plic->threshold_base) / plic->threshold_stride;
-> > +        uint32_t contextid = (addr & (plic->threshold_stride - 1));
-> > +        if (contextid == 0) {
-> > +            return plic->target_priority[target_id];
-> > +        } else if (contextid == 4) {
-> > +            uint32_t value = andes_plic_claim(plic, target_id);
-> > +            plic->andes_plic_update(plic);
-> > +            return value;
-> > +        }
-> > +    }
-> > +
-> > +    return 0;
-> > +}
-> > +
-> > +static void
-> > +andes_plic_write(void *opaque, hwaddr addr, uint64_t value, unsigned size)
-> > +{
-> > +
-> > +    AndesPLICState *plic = ANDES_PLIC(opaque);
-> > +
-> > +    if ((addr & 0x3)) {
-> > +        error_report("%s: invalid register write: %08x",
-> > +            __func__, (uint32_t)addr);
-> > +    }
-> > +
-> > +    if (addr_between(addr,
-> > +            plic->priority_base,
-> > +            (plic->num_sources << 2))) {
-> > +        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
-> > +        plic->source_priority[irq] = value & 7;
-> > +        plic->andes_plic_update(plic);
-> > +        return;
-> > +    } else if (addr_between(addr,
-> > +                plic->pending_base,
-> > +                (plic->num_sources >> 3))) {
-> > +        uint32_t word = (addr - plic->pending_base) >> 2;
-> > +        uint32_t xchg = plic->pending[word] ^ (uint32_t)value;
-> > +        if (xchg) {
-> > +            plic->pending[word] |= value;
-> > +            plic->andes_plic_update(plic);
-> > +        }
-> > +        return;
-> > +    } else if (addr_between(addr,
-> > +                plic->enable_base,
-> > +                (plic->num_addrs * plic->enable_stride))) {
-> > +        uint32_t target_id = (addr - plic->enable_base) / plic->enable_stride;
-> > +        uint32_t wordid = (addr & (plic->enable_stride - 1)) >> 2;
-> > +        if (wordid < plic->bitfield_words) {
-> > +            plic->enable[target_id * plic->bitfield_words + wordid] = value;
-> > +            return;
-> > +        }
-> > +    } else if (addr_between(addr,
-> > +                plic->threshold_base,
-> > +                (plic->num_addrs * plic->threshold_stride))) {
-> > +        uint32_t target_id =
-> > +            (addr - plic->threshold_base) / plic->threshold_stride;
-> > +        uint32_t contextid = (addr & (plic->threshold_stride - 1));
-> > +        if (contextid == 0) {
-> > +            if (value <= plic->num_priorities) {
-> > +                plic->target_priority[target_id] = value;
-> > +                plic->andes_plic_update(plic);
-> > +            }
-> > +            return;
-> > +        } else if (contextid == 4) {
-> > +            if (value < plic->num_sources) {
-> > +                andes_plic_set_claimed(plic, value, false);
-> > +                plic->andes_plic_update(plic);
-> > +            }
-> > +            return;
-> > +        }
-> > +    }
-> > +}
-> > +
-> > +/*
-> > + * parse PLIC hart/mode address offset config
-> > + *
-> > + * "M"              1 hart with M mode
-> > + * "MS,MS"          2 harts, 0-1 with M and S mode
-> > + * "M,MS,MS,MS,MS"  5 harts, 0 with M mode, 1-5 with M and S mode
-> > + */
-> > +static void parse_hart_config(AndesPLICState *plic)
-> > +{
-> > +    int target_id, hart_id, modes;
-> > +    const char *p;
-> > +    char c;
-> > +
-> > +    /* count and validate hart/mode combinations */
-> > +    target_id = 0, hart_id = 0, modes = 0;
-> > +    p = plic->hart_config;
-> > +    while ((c = *p++)) {
-> > +        if (c == ',') {
-> > +            target_id += ctpop8(modes);
-> > +            modes = 0;
-> > +            hart_id++;
-> > +        } else {
-> > +            int m = 1 << char_to_mode(c);
-> > +            if (modes == (modes | m)) {
-> > +                error_report("plic: duplicate mode '%c' in config: %s",
-> > +                             c, plic->hart_config);
-> > +                exit(1);
-> > +            }
-> > +            modes |= m;
-> > +        }
-> > +    }
-> > +    if (modes) {
-> > +        target_id += ctpop8(modes);
-> > +    }
-> > +    hart_id++;
-> > +
-> > +    plic->num_addrs = target_id;
-> > +    plic->num_harts = hart_id;
-> > +
-> > +    /* store hart/mode combinations */
-> > +    plic->addr_config = g_new(AndesPLICAddr, plic->num_addrs);
-> > +    target_id = 0, hart_id = plic->hartid_base;
-> > +    p = plic->hart_config;
-> > +    while ((c = *p++)) {
-> > +        if (c == ',') {
-> > +            hart_id++;
-> > +        } else {
-> > +            plic->addr_config[target_id].target_id = target_id;
-> > +            plic->addr_config[target_id].hart_id = hart_id;
-> > +            plic->addr_config[target_id].mode = char_to_mode(c);
-> > +            target_id++;
-> > +        }
-> > +    }
-> > +}
-> > +
-> > +static void andes_plic_irq_request(void *opaque, int irq, int level)
-> > +{
-> > +    AndesPLICState *plic = opaque;
-> > +    andes_plic_set_pending(plic, irq, level > 0);
-> > +    plic->andes_plic_update(plic);
-> > +}
-> > +
-> > +static const MemoryRegionOps andes_plic_ops = {
-> > +    .read = andes_plic_read,
-> > +    .write = andes_plic_write,
-> > +    .endianness = DEVICE_LITTLE_ENDIAN,
-> > +    .valid = {
-> > +        .min_access_size = 4,
-> > +        .max_access_size = 8
-> > +    }
-> > +};
-> > +
-> > +static void
-> > +andes_plic_realize(DeviceState *dev, Error **errp)
-> > +{
-> > +    LOG("%s:\n", __func__);
-> > +    AndesPLICState *plic = ANDES_PLIC(dev);
-> > +
-> > +    memory_region_init_io(&plic->mmio, OBJECT(dev), &andes_plic_ops, plic,
-> > +                          TYPE_ANDES_PLIC, plic->aperture_size);
-> > +
-> > +    parse_hart_config(plic);
-> > +    plic->bitfield_words = (plic->num_sources + 31) >> 5;
-> > +    plic->num_enables = plic->bitfield_words * plic->num_addrs;
-> > +    plic->source_priority = g_new0(uint32_t, plic->num_sources);
-> > +    plic->target_priority = g_new0(uint32_t, plic->num_addrs);
-> > +    plic->pending = g_new0(uint32_t, plic->bitfield_words);
-> > +    plic->claimed = g_new0(uint32_t, plic->bitfield_words);
-> > +    plic->enable = g_new0(uint32_t, plic->num_enables);
-> > +
-> > +    if (strstr(plic->plic_name , "SW") != NULL) {
-> > +        plic->andes_plic_update = andes_plicsw_update;
-> > +    } else {
-> > +        plic->andes_plic_update = andes_plichw_update;
-> > +    }
-> > +
-> > +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &plic->mmio);
-> > +    qdev_init_gpio_in(dev, andes_plic_irq_request, plic->num_sources);
-> > +}
-> > +
-> > +static Property andes_plic_properties[] = {
-> > +    DEFINE_PROP_STRING("plic-name", AndesPLICState, plic_name),
-> > +    DEFINE_PROP_UINT32("plic-base", AndesPLICState, plic_base, 0),
-> > +    DEFINE_PROP_STRING("hart-config", AndesPLICState, hart_config),
-> > +    DEFINE_PROP_UINT32("num-sources", AndesPLICState, num_sources, 0),
-> > +    DEFINE_PROP_UINT32("num-priorities", AndesPLICState, num_priorities, 0),
-> > +    DEFINE_PROP_UINT32("priority-base", AndesPLICState, priority_base, 0),
-> > +    DEFINE_PROP_UINT32("pending-base", AndesPLICState, pending_base, 0),
-> > +    DEFINE_PROP_UINT32("enable-base", AndesPLICState, enable_base, 0),
-> > +    DEFINE_PROP_UINT32("enable-stride", AndesPLICState, enable_stride, 0),
-> > +    DEFINE_PROP_UINT32("threshold-base", AndesPLICState, threshold_base, 0),
-> > +    DEFINE_PROP_UINT32("threshold-stride", AndesPLICState, threshold_stride, 0),
-> > +    DEFINE_PROP_UINT32("aperture-size", AndesPLICState, aperture_size, 0),
-> > +    DEFINE_PROP_END_OF_LIST(),
-> > +};
-> > +
-> > +static void andes_plic_class_init(ObjectClass *klass, void *data)
-> > +{
-> > +    DeviceClass *dc = DEVICE_CLASS(klass);
-> > +
-> > +    /* TODO: add own properties */
-> > +    device_class_set_props(dc, andes_plic_properties);
-> > +    dc->realize = andes_plic_realize;
-> > +}
-> > +
-> > +static const TypeInfo andes_plic_info = {
-> > +    .name          = TYPE_ANDES_PLIC,
-> > +    .parent        = TYPE_SYS_BUS_DEVICE,
-> > +    .instance_size = sizeof(AndesPLICState),
-> > +    .class_init    = andes_plic_class_init,
-> > +};
-> > +
-> > +static void andes_plic_register_types(void)
-> > +{
-> > +    LOG("%s:\n", __func__);
-> > +    type_register_static(&andes_plic_info);
-> > +}
-> > +
-> > +type_init(andes_plic_register_types)
-> > +
-> > +/*
-> > + * Create PLIC device.
-> > + */
-> > +DeviceState *andes_plic_create(hwaddr plic_base,
-> > +    const char *plic_name, char *hart_config,
-> > +    uint32_t num_sources, uint32_t num_priorities,
-> > +    uint32_t priority_base, uint32_t pending_base,
-> > +    uint32_t enable_base, uint32_t enable_stride,
-> > +    uint32_t threshold_base, uint32_t threshold_stride,
-> > +    uint32_t aperture_size)
-> > +{
-> > +    DeviceState *dev = qdev_new(TYPE_ANDES_PLIC);
-> > +
-> > +    assert(enable_stride == (enable_stride & -enable_stride));
-> > +    assert(threshold_stride == (threshold_stride & -threshold_stride));
-> > +    qdev_prop_set_string(dev, "plic-name", plic_name);
-> > +    qdev_prop_set_uint32(dev, "plic-base", plic_base);
-> > +    qdev_prop_set_string(dev, "hart-config", hart_config);
-> > +    qdev_prop_set_uint32(dev, "num-sources", num_sources);
-> > +    qdev_prop_set_uint32(dev, "num-priorities", num_priorities);
-> > +    qdev_prop_set_uint32(dev, "priority-base", priority_base);
-> > +    qdev_prop_set_uint32(dev, "pending-base", pending_base);
-> > +    qdev_prop_set_uint32(dev, "enable-base", enable_base);
-> > +    qdev_prop_set_uint32(dev, "enable-stride", enable_stride);
-> > +    qdev_prop_set_uint32(dev, "threshold-base", threshold_base);
-> > +    qdev_prop_set_uint32(dev, "threshold-stride", threshold_stride);
-> > +    qdev_prop_set_uint32(dev, "aperture-size", aperture_size);
-> > +
-> > +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> > +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, plic_base);
-> > +    return dev;
-> > +}
-> > +
-> > +/*
-> > + * Create PLICSW device.
-> > + */
-> > +DeviceState *andes_plicsw_create(hwaddr plic_base,
-> > +    const char *plic_name, char *hart_config,
-> > +    uint32_t num_sources, uint32_t num_priorities,
-> > +    uint32_t priority_base, uint32_t pending_base,
-> > +    uint32_t enable_base, uint32_t enable_stride,
-> > +    uint32_t threshold_base, uint32_t threshold_stride,
-> > +    uint32_t aperture_size)
-> > +{
-> > +    DeviceState *dev = qdev_new(TYPE_ANDES_PLIC);
-> > +
-> > +    assert(enable_stride == (enable_stride & -enable_stride));
-> > +    assert(threshold_stride == (threshold_stride & -threshold_stride));
-> > +    qdev_prop_set_string(dev, "plic-name", plic_name);
-> > +    qdev_prop_set_uint32(dev, "plic-base", plic_base);
-> > +    qdev_prop_set_string(dev, "hart-config", hart_config);
-> > +    qdev_prop_set_uint32(dev, "num-sources", num_sources);
-> > +    qdev_prop_set_uint32(dev, "num-priorities", num_priorities);
-> > +    qdev_prop_set_uint32(dev, "priority-base", priority_base);
-> > +    qdev_prop_set_uint32(dev, "pending-base", pending_base);
-> > +    qdev_prop_set_uint32(dev, "enable-base", enable_base);
-> > +    qdev_prop_set_uint32(dev, "enable-stride", enable_stride);
-> > +    qdev_prop_set_uint32(dev, "threshold-base", threshold_base);
-> > +    qdev_prop_set_uint32(dev, "threshold-stride", threshold_stride);
-> > +    qdev_prop_set_uint32(dev, "aperture-size", aperture_size);
-> > +
-> > +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> > +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, plic_base);
-> > +    return dev;
-> > +}
-> > diff --git a/hw/intc/meson.build b/hw/intc/meson.build
-> > index b3d9345a0d..0d2cb94a2f 100644
-> > --- a/hw/intc/meson.build
-> > +++ b/hw/intc/meson.build
-> > @@ -25,6 +25,7 @@ softmmu_ss.add(when: 'CONFIG_XLNX_ZYNQMP', if_true: files('xlnx-zynqmp-ipi.c'))
-> >   softmmu_ss.add(when: 'CONFIG_XLNX_ZYNQMP_PMU', if_true: files('xlnx-pmu-iomod-intc.c'))
-> >
-> >   specific_ss.add(when: 'CONFIG_ALLWINNER_A10_PIC', if_true: files('allwinner-a10-pic.c'))
-> > +specific_ss.add(when: 'CONFIG_ANDES_PLIC', if_true: files('andes_plic.c'))
-> >   specific_ss.add(when: 'CONFIG_APIC', if_true: files('apic.c', 'apic_common.c'))
-> >   specific_ss.add(when: 'CONFIG_ARM_GIC', if_true: files('arm_gicv3_cpuif.c'))
-> >   specific_ss.add(when: 'CONFIG_ARM_GIC_KVM', if_true: files('arm_gic_kvm.c'))
-> > diff --git a/include/hw/intc/andes_plic.h b/include/hw/intc/andes_plic.h
-> > new file mode 100644
-> > index 0000000000..9e1212ba09
-> > --- /dev/null
-> > +++ b/include/hw/intc/andes_plic.h
-> > @@ -0,0 +1,130 @@
-> > +/*
-> > + * Andes PLIC (Platform Level Interrupt Controller) interface
-> > + *
-> > + * Copyright (c) 2018 Andes Tech. Corp.
-> > + *
-> > + * This provides a RISC-V PLIC device with Andes' extensions.
-> > + *
-> > + * This program is free software; you can redistribute it and/or modify it
-> > + * under the terms and conditions of the GNU General Public License,
-> > + * version 2 or later, as published by the Free Software Foundation.
-> > + *
-> > + * This program is distributed in the hope it will be useful, but WITHOUT
-> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> > + * more details.
-> > + *
-> > + * You should have received a copy of the GNU General Public License along with
-> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> > + */
-> > +
-> > +#ifndef HW_ANDES_PLIC_H
-> > +#define HW_ANDES_PLIC_H
-> > +
-> > +#include "hw/sysbus.h"
-> > +#include "qom/object.h"
-> > +
-> > +#define ANDES_AE350_PLIC_NAME             "ANDES_PLIC"
-> > +#define ANDES_AE350_PLIC_HART_CONFIG      "MS"
-> > +#define ANDES_AE350_PLIC_NUM_SOURCES      128
-> > +#define ANDES_AE350_PLIC_NUM_PRIORITIES   32
-> > +#define ANDES_AE350_PLIC_PRIORITY_BASE    0x04
-> > +#define ANDES_AE350_PLIC_PENDING_BASE     0x1000
-> > +#define ANDES_AE350_PLIC_ENABLE_BASE      0x2000
-> > +#define ANDES_AE350_PLIC_ENABLE_STRIDE    0x80
-> > +#define ANDES_AE350_PLIC_THRESHOLD_BASE   0x200000
-> > +#define ANDES_AE350_PLIC_THRESHOLD_STRIDE 0x1000
-> > +
-> > +#define ANDES_AE350_PLICSW_NAME           "ANDES_PLICSW"
-> > +#define ANDES_AE350_PLICSW_HART_CONFIG    "M"
-> > +#define ANDES_AE350_PLICSW_NUM_SOURCES    64
-> > +#define ANDES_AE350_PLICSW_NUM_PRIORITIES 8
-> > +#define ANDES_AE350_PLICSW_PRIORITY_BASE  0x4
-> > +#define ANDES_AE350_PLICSW_PENDING_BASE   0x1000
-> > +#define ANDES_AE350_PLICSW_ENABLE_BASE    0x2000
-> > +#define ANDES_AE350_PLICSW_ENABLE_STRIDE  0x80
-> > +#define ANDES_AE350_PLICSW_THRESHOLD_BASE   0x200000
-> > +#define ANDES_AE350_PLICSW_THRESHOLD_STRIDE 0x1000
-> > +
-> > +#define TYPE_ANDES_PLIC "riscv.andes.plic"
-> > +
-> > +typedef struct AndesPLICState AndesPLICState;
-> > +DECLARE_INSTANCE_CHECKER(AndesPLICState, ANDES_PLIC,
-> > +                         TYPE_ANDES_PLIC)
-> > +
-> > +typedef enum AndesPLICMode {
-> > +    PlicMode_U,
-> > +    PlicMode_S,
-> > +    PlicMode_H,
-> > +    PlicMode_M
-> > +} AndesPLICMode;
-> > +
-> > +typedef struct AndesPLICAddr {
-> > +    uint32_t target_id;
-> > +    uint32_t hart_id;
-> > +    AndesPLICMode mode;
-> > +} AndesPLICAddr;
-> > +
-> > +typedef struct AndesPLICState {
-> > +    /*< private >*/
-> > +    SysBusDevice parent_mmio;
-> > +
-> > +    /*< public >*/
-> > +    MemoryRegion mmio;
-> > +    uint32_t num_addrs;
-> > +    uint32_t num_harts;
-> > +    uint32_t bitfield_words;
-> > +    uint32_t num_enables;
-> > +    AndesPLICAddr *addr_config;
-> > +    uint32_t *source_priority;
-> > +    uint32_t *target_priority;
-> > +    uint32_t *pending;
-> > +    uint32_t *claimed;
-> > +    uint32_t *enable;
-> > +
-> > +    /* config */
-> > +    char *hart_config;
-> > +    char *plic_name;
-> > +    uint32_t plic_base;
-> > +    uint32_t hartid_base;
-> > +    uint32_t num_sources;
-> > +    uint32_t num_priorities;
-> > +    uint32_t priority_base;
-> > +    uint32_t pending_base;
-> > +    uint32_t enable_base;
-> > +    uint32_t enable_stride;
-> > +    uint32_t threshold_base;
-> > +    uint32_t threshold_stride;
-> > +    uint32_t aperture_size;
-> > +
-> > +    /* interface */
-> > +    void (*andes_plic_update)(AndesPLICState *plic);
-> > +} AndesPLICState;
-> > +
+> > Is this a virtual target because virtio is added? Or does the hardware
+> > provide the virtio programming interface?
 >
-> Try to follow up Bin's PLIC question ..
->
-> The above data structures are quite similar to SiFive's [1]
-> So, is it possible to merge into a common file? for better maintenance
->
-> [1] include/hw/intc/sifive_plic.h
+> Andes ae350 is an FPGA evaluation board with many Andes's peripheral devices,
+> but we only provide the most basic functions in the qemu version of ae350.
+> Because we hope that customers can quickly develop and evaluate before getting the real ae350 board,
+> so we use virtio to replace some peripheral devices.
 
-+1 on this. From a quick look it seems similar to the SiFive PLIC.
-Could this be combined with that?
+I don't think that's a good idea. The QEMU model should match the
+hardware device.
+
+>
+> >
+> > >
+> > > Signed-off-by: Dylan Jhong <dylan@andestech.com>
+> > > Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
+> > > ---
+> > >  default-configs/devices/riscv32-softmmu.mak |   1 +
+> > >  default-configs/devices/riscv64-softmmu.mak |   1 +
+> > >  hw/riscv/Kconfig                            |   7 +
+> > >  hw/riscv/andes_ae350.c                      | 501 ++++++++++++++++++++
+> > >  hw/riscv/meson.build                        |   1 +
+> > >  include/hw/riscv/andes_ae350.h              |  93 ++++
+> > >  6 files changed, 604 insertions(+)
+> > >  create mode 100644 hw/riscv/andes_ae350.c
+> > >  create mode 100644 include/hw/riscv/andes_ae350.h
+> > >
+> > > diff --git a/default-configs/devices/riscv32-softmmu.mak b/default-configs/devices/riscv32-softmmu.mak
+> > > index d847bd5692..a268007e72 100644
+> > > --- a/default-configs/devices/riscv32-softmmu.mak
+> > > +++ b/default-configs/devices/riscv32-softmmu.mak
+> > > @@ -8,6 +8,7 @@ CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+> > >
+> > >  # Boards:
+> > >  #
+> > > +CONFIG_ANDES_AE350=y
+> > >  CONFIG_SPIKE=y
+> > >  CONFIG_SIFIVE_E=y
+> > >  CONFIG_SIFIVE_U=y
+> > > diff --git a/default-configs/devices/riscv64-softmmu.mak b/default-configs/devices/riscv64-softmmu.mak
+> > > index d5eec75f05..9a37dfd8c0 100644
+> > > --- a/default-configs/devices/riscv64-softmmu.mak
+> > > +++ b/default-configs/devices/riscv64-softmmu.mak
+> > > @@ -8,6 +8,7 @@ CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+> > >
+> > >  # Boards:
+> > >  #
+> > > +CONFIG_ANDES_AE350=y
+> > >  CONFIG_SPIKE=y
+> > >  CONFIG_SIFIVE_E=y
+> > >  CONFIG_SIFIVE_U=y
+> > > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> > > index d139074b02..04f6369ab7 100644
+> > > --- a/hw/riscv/Kconfig
+> > > +++ b/hw/riscv/Kconfig
+> > > @@ -1,6 +1,13 @@
+> > >  config IBEX
+> > >      bool
+> > >
+> > > +config ANDES_AE350
+> >
+> > This needs to be sorted in alphabetical order
+> >
+>
+> Thanks, this will be fixed in V2.
+>
+> > > +    bool
+> > > +    select SERIAL
+> > > +    select VIRTIO_MMIO
+> > > +    select ANDES_PLIC
+> > > +    select ANDES_PLMT
+> > > +
+> > >  config MICROCHIP_PFSOC
+> > >      bool
+> > >      select CADENCE_SDHCI
+> > > diff --git a/hw/riscv/andes_ae350.c b/hw/riscv/andes_ae350.c
+> > > new file mode 100644
+> > > index 0000000000..ed5f9701ad
+> > > --- /dev/null
+> > > +++ b/hw/riscv/andes_ae350.c
+> > > @@ -0,0 +1,501 @@
+> > > +/*
+> > > + * Andes RISC-V AE350 Board
+> > > + *
+> > > + * Copyright (c) 2021 Andes Tech. Corp.
+> > > + *
+> > > + * Andes AE350 Board supports ns16550a UART and VirtIO MMIO.
+> > > + * The interrupt controllers are andes PLIC and andes PLICSW.
+> > > + * Timer is Andes PLMT.
+> > > + *
+> > > + * This program is free software; you can redistribute it and/or modify it
+> > > + * under the terms and conditions of the GNU General Public License,
+> > > + * version 2 or later, as published by the Free Software Foundation.
+> > > + *
+> > > + * This program is distributed in the hope it will be useful, but WITHOUT
+> > > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> > > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> > > + * more details.
+> > > + *
+> > > + * You should have received a copy of the GNU General Public License along with
+> > > + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> > > + */
+> > > +
+> > > +#include "qemu/osdep.h"
+> > > +#include "qemu/units.h"
+> > > +#include "qemu/log.h"
+> > > +#include "qemu/error-report.h"
+> > > +#include "qapi/error.h"
+> > > +#include "hw/boards.h"
+> > > +#include "hw/loader.h"
+> > > +#include "hw/sysbus.h"
+> > > +#include "hw/qdev-properties.h"
+> > > +#include "hw/char/serial.h"
+> > > +#include "target/riscv/cpu.h"
+> > > +#include "hw/riscv/riscv_hart.h"
+> > > +#include "hw/riscv/boot.h"
+> > > +#include "hw/riscv/numa.h"
+> > > +#include "chardev/char.h"
+> > > +#include "sysemu/arch_init.h"
+> > > +#include "sysemu/device_tree.h"
+> > > +#include "sysemu/sysemu.h"
+> > > +#include "hw/pci/pci.h"
+> > > +#include "hw/pci-host/gpex.h"
+> > > +
+> > > +#include "hw/intc/andes_plic.h"
+> > > +#include "hw/timer/andes_plmt.h"
+> > > +#include "hw/riscv/andes_ae350.h"
+> > > +
+> > > +# define BIOS_FILENAME ""
+> > > +
+> > > +static const struct MemmapEntry {
+> > > +    hwaddr base;
+> > > +    hwaddr size;
+> > > +} andes_ae350_memmap[] = {
+> > > +    [ANDES_AE350_DEBUG]     = { 0x00000000,      0x100 },
+> > > +    [ANDES_AE350_DRAM]      = { 0x00000000, 0x80000000 },
+> > > +    [ANDES_AE350_MROM]      = { 0xb0000000,   0x100000 },
+> > > +    [ANDES_AE350_MAC]       = { 0xe0100000,   0x100000 },
+> > > +    [ANDES_AE350_GEM]       = { 0xe0200000,   0x100000 },
+> > > +    [ANDES_AE350_PLIC]      = { 0xe4000000,   0x400000 },
+> > > +    [ANDES_AE350_PLMT]      = { 0xe6000000,   0x100000 },
+> > > +    [ANDES_AE350_PLICSW]    = { 0xe6400000,   0x400000 },
+> > > +    [ANDES_AE350_UART1]     = { 0xf0200000,      0x100 },
+> > > +    [ANDES_AE350_UART2]     = { 0xf0300000,      0x100 },
+> > > +    [ANDES_AE350_PIT]       = { 0xf0400000,   0x100000 },
+> > > +    [ANDES_AE350_SDC]       = { 0xf0e00000,   0x100000 },
+> > > +    [ANDES_AE350_VIRTIO]    = { 0xfe000000,     0x1000 },
+> > > +};
+> > > +
+> > > +static void
+> > > +create_fdt(AndesAe350BoardState *bs, const struct MemmapEntry *memmap,
+> > > +    uint64_t mem_size, const char *cmdline)
+> > > +{
+> > > +    AndesAe350SocState *s = &bs->soc;
+> > > +    MachineState *ms = MACHINE(qdev_get_machine());
+> > > +    void *fdt;
+> > > +    int cpu, i;
+> > > +    uint64_t mem_addr;
+> > > +    uint32_t *plic_irq_ext, *plicsw_irq_ext, *plmt_irq_ext;
+> > > +    unsigned long plic_addr, plicsw_addr, plmt_addr;
+> > > +    char *plic_name, *plicsw_name, *plmt_name;
+> > > +    uint32_t intc_phandle = 0, plic_phandle = 0;
+> > > +    uint32_t phandle = 1;
+> > > +    char *isa_name, *mem_name, *cpu_name, *intc_name, *uart_name, *virtio_name;
+> > > +
+> > > +    if (ms->dtb) {
+> > > +        fdt = bs->fdt = load_device_tree(ms->dtb, &bs->fdt_size);
+> > > +        if (!fdt) {
+> > > +            error_report("load_device_tree() failed");
+> > > +            exit(1);
+> > > +        }
+> > > +        goto update_bootargs;
+> > > +    } else {
+> > > +        fdt = bs->fdt = create_device_tree(&bs->fdt_size);
+> > > +        if (!fdt) {
+> > > +            error_report("create_device_tree() failed");
+> > > +            exit(1);
+> > > +        }
+> > > +    }
+> > > +
+> > > +    qemu_fdt_setprop_string(fdt, "/", "model", "Andes AE350 Board");
+> > > +    qemu_fdt_setprop_string(fdt, "/", "compatible", "andestech,ae350");
+> > > +    qemu_fdt_setprop_cell(fdt, "/", "#size-cells", 0x2);
+> > > +    qemu_fdt_setprop_cell(fdt, "/", "#address-cells", 0x2);
+> > > +
+> > > +    qemu_fdt_add_subnode(fdt, "/soc");
+> > > +    qemu_fdt_setprop(fdt, "/soc", "ranges", NULL, 0);
+> > > +    qemu_fdt_setprop_string(fdt, "/soc", "compatible", "simple-bus");
+> > > +    qemu_fdt_setprop_cell(fdt, "/soc", "#size-cells", 0x2);
+> > > +    qemu_fdt_setprop_cell(fdt, "/soc", "#address-cells", 0x2);
+> > > +
+> > > +    qemu_fdt_add_subnode(fdt, "/cpus");
+> > > +    qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
+> > > +                          ANDES_PLMT_TIMEBASE_FREQ);
+> > > +    qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
+> > > +    qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
+> > > +    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
+> > > +
+> > > +    plic_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 4);
+> > > +    plicsw_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 2);
+> > > +    plmt_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 2);
+> > > +
+> > > +    for (cpu = 0; cpu < s->cpus.num_harts; cpu++) {
+> > > +        intc_phandle = phandle++;
+> > > +
+> > > +        cpu_name = g_strdup_printf("/cpus/cpu@%d",
+> > > +            s->cpus.hartid_base + cpu);
+> > > +        qemu_fdt_add_subnode(fdt, cpu_name);
+> > > +#if defined(TARGET_RISCV32)
+> > > +        qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
+> > > +#else
+> > > +        qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv39");
+> > > +#endif
+> > > +        isa_name = riscv_isa_string(&s->cpus.harts[cpu]);
+> > > +        qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa", isa_name);
+> > > +        g_free(isa_name);
+> > > +        qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
+> > > +        qemu_fdt_setprop_string(fdt, cpu_name, "status", "okay");
+> > > +        qemu_fdt_setprop_cell(fdt, cpu_name, "reg",
+> > > +            s->cpus.hartid_base + cpu);
+> > > +        qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
+> > > +
+> > > +        intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
+> > > +        qemu_fdt_add_subnode(fdt, intc_name);
+> > > +        qemu_fdt_setprop_cell(fdt, intc_name, "phandle", intc_phandle);
+> > > +        qemu_fdt_setprop_string(fdt, intc_name, "compatible",
+> > > +            "riscv,cpu-intc");
+> > > +        qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
+> > > +        qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
+> > > +
+> > > +        plic_irq_ext[cpu * 4 + 0] = cpu_to_be32(intc_phandle);
+> > > +        plic_irq_ext[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
+> > > +        plic_irq_ext[cpu * 4 + 2] = cpu_to_be32(intc_phandle);
+> > > +        plic_irq_ext[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
+> > > +
+> > > +        plicsw_irq_ext[cpu * 2 + 0] = cpu_to_be32(intc_phandle);
+> > > +        plicsw_irq_ext[cpu * 2 + 1] = cpu_to_be32(IRQ_M_SOFT);
+> > > +
+> > > +        plmt_irq_ext[cpu * 2 + 0] = cpu_to_be32(intc_phandle);
+> > > +        plmt_irq_ext[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
+> > > +
+> > > +        g_free(intc_name);
+> > > +    }
+> > > +
+> > > +    mem_addr = memmap[ANDES_AE350_DRAM].base;
+> > > +    mem_name = g_strdup_printf("/memory@%lx", (long)mem_addr);
+> > > +    qemu_fdt_add_subnode(fdt, mem_name);
+> > > +    qemu_fdt_setprop_cells(fdt, mem_name, "reg",
+> > > +        mem_addr >> 32, mem_addr, mem_size >> 32, mem_size);
+> > > +    qemu_fdt_setprop_string(fdt, mem_name, "device_type", "memory");
+> > > +    g_free(mem_name);
+> > > +
+> > > +    /* create plic */
+> > > +    plic_phandle = phandle++;
+> > > +    plic_addr = memmap[ANDES_AE350_PLIC].base;
+> > > +    plic_name = g_strdup_printf("/soc/interrupt-controller@%lx", plic_addr);
+> > > +    qemu_fdt_add_subnode(fdt, plic_name);
+> > > +    qemu_fdt_setprop_cell(fdt, plic_name,
+> > > +        "#address-cells", 0x2);
+> > > +    qemu_fdt_setprop_cell(fdt, plic_name,
+> > > +        "#interrupt-cells", 0x2);
+> > > +    qemu_fdt_setprop_string(fdt, plic_name, "compatible", "riscv,plic0");
+> >
+> > This suggests PLIC is the same as the SiFive one. So why do we have a
+> > different implementation of the PLIC model?
+> >
+>
+> The difference of these two PLICs, please refer to my reply of "[PATCH 1/3] Andes RISC-V PLIC"
+>
+> > > +    qemu_fdt_setprop(fdt, plic_name, "interrupt-controller", NULL, 0);
+> > > +    qemu_fdt_setprop(fdt, plic_name, "interrupts-extended",
+> > > +        plic_irq_ext, s->cpus.num_harts * sizeof(uint32_t) * 4);
+> > > +    qemu_fdt_setprop_cells(fdt, plic_name, "reg",
+> > > +        0x0, plic_addr, 0x0, memmap[ANDES_AE350_PLIC].size);
+> > > +    qemu_fdt_setprop_cell(fdt, plic_name, "riscv,ndev", 0x47);
+> > > +    qemu_fdt_setprop_cell(fdt, plic_name, "phandle", plic_phandle);
+> > > +    g_free(plic_name);
+> > > +    g_free(plic_irq_ext);
+> > > +
+> > > +    /* create plicsw */
+> > > +    plicsw_addr = memmap[ANDES_AE350_PLICSW].base;
+> > > +    plicsw_name = g_strdup_printf("/soc/interrupt-controller@%lx", plicsw_addr);
+> > > +    qemu_fdt_add_subnode(fdt, plicsw_name);
+> > > +    qemu_fdt_setprop_cell(fdt, plicsw_name,
+> > > +        "#address-cells", 0x2);
+> > > +    qemu_fdt_setprop_cell(fdt, plicsw_name,
+> > > +        "#interrupt-cells", 0x2);
+> > > +    qemu_fdt_setprop_string(fdt, plicsw_name, "compatible", "riscv,plic1");
+> >
+> > Is this bindings in the Linux kernel upstream? I can't find any
+> > reference in the kernel tree.
+> >
+>
+> Currently only supports andes Linux BSP,
+> we have plans to push to linux upstream in the future.
+
+This raises a good question about device tree bindings being generated
+from QEMU.
+
+Do we want QEMU to generate a DT that doesn't have matching bindings?
+
+I guess if the bindings change during the upstream process we can just
+add a second compatible string.
+
+Also if there is no upstream support how can I test the board?
 
 Alistair
 
 >
->
-> > +void andes_plichw_update(AndesPLICState *plic);
-> > +void andes_plicsw_update(AndesPLICState *plic);
-> > +
-> > +static inline bool addr_between(uint32_t addr, uint32_t base, uint32_t offset)
-> > +{
-> > +    return (addr >= base && addr < base + offset);
-> > +}
-> > +
-> > +DeviceState *
-> > +andes_plic_create(hwaddr addr,
-> > +    const char *plic_name, char *hart_config,
-> > +    uint32_t num_sources, uint32_t num_priorities,
-> > +    uint32_t priority_base, uint32_t pending_base,
-> > +    uint32_t enable_base, uint32_t enable_stride,
-> > +    uint32_t threshold_base, uint32_t threshold_stride,
-> > +    uint32_t aperture_size);
-> > +
-> > +DeviceState *
-> > +andes_plicsw_create(hwaddr addr,
-> > +    const char *plic_name, char *hart_config,
-> > +    uint32_t num_sources, uint32_t num_priorities,
-> > +    uint32_t priority_base, uint32_t pending_base,
-> > +    uint32_t enable_base, uint32_t enable_stride,
-> > +    uint32_t threshold_base, uint32_t threshold_stride,
-> > +    uint32_t aperture_size);
-> > +
-> > +#endif
+> > > +    qemu_fdt_setprop(fdt, plicsw_name, "interrupt-controller", NULL, 0);
+> > > +    qemu_fdt_setprop(fdt, plicsw_name, "interrupts-extended",
+> > > +        plicsw_irq_ext, s->cpus.num_harts * sizeof(uint32_t) * 2);
+> > > +    qemu_fdt_setprop_cells(fdt, plicsw_name, "reg",
+> > > +        0x0, plicsw_addr, 0x0, memmap[ANDES_AE350_PLIC].size);
+> > > +    qemu_fdt_setprop_cell(fdt, plicsw_name, "riscv,ndev", 0x1);
+> > > +    g_free(plicsw_name);
+> > > +    g_free(plicsw_irq_ext);
+> > > +
+> > > +    /* create plmt */
+> > > +    plmt_addr = memmap[ANDES_AE350_PLMT].base;
+> > > +    plmt_name = g_strdup_printf("/soc/plmt0@%lx", plmt_addr);
+> > > +    qemu_fdt_add_subnode(fdt, plmt_name);
+> > > +    qemu_fdt_setprop_string(fdt, plmt_name, "compatible", "riscv,plmt0");
 > >
+> > The same here.
+> >
+> > > +    qemu_fdt_setprop(fdt, plmt_name, "interrupts-extended",
+> > > +        plmt_irq_ext, s->cpus.num_harts * sizeof(uint32_t) * 2);
+> > > +    qemu_fdt_setprop_cells(fdt, plmt_name, "reg",
+> > > +        0x0, plmt_addr, 0x0, memmap[ANDES_AE350_PLMT].size);
+> > > +    g_free(plmt_name);
+> > > +    g_free(plmt_irq_ext);
+> > > +
+> > > +    uart_name = g_strdup_printf("/serial@%lx", memmap[ANDES_AE350_UART1].base);
+> > > +    qemu_fdt_add_subnode(fdt, uart_name);
+> > > +    qemu_fdt_setprop_string(fdt, uart_name, "compatible", "ns16550a");
+> > > +    qemu_fdt_setprop_cells(fdt, uart_name, "reg",
+> > > +        0x0, memmap[ANDES_AE350_UART1].base,
+> > > +        0x0, memmap[ANDES_AE350_UART1].size);
+> > > +    qemu_fdt_setprop_cell(fdt, uart_name, "clock-frequency", 3686400);
+> > > +    qemu_fdt_setprop_cell(fdt, uart_name, "reg-shift", ANDES_UART_REG_SHIFT);
+> > > +    qemu_fdt_setprop_cell(fdt, uart_name, "reg-offset", ANDES_UART_REG_OFFSET);
+> > > +    qemu_fdt_setprop_cell(fdt, uart_name, "interrupt-parent", plic_phandle);
+> > > +    qemu_fdt_setprop_cells(fdt, uart_name, "interrupts", ANDES_AE350_UART1_IRQ, 0x4);
+> > > +
+> > > +    uart_name = g_strdup_printf("/serial@%lx", memmap[ANDES_AE350_UART2].base);
+> > > +    qemu_fdt_add_subnode(fdt, uart_name);
+> > > +    qemu_fdt_setprop_string(fdt, uart_name, "compatible", "ns16550a");
+> > > +    qemu_fdt_setprop_cells(fdt, uart_name, "reg",
+> > > +        0x0, memmap[ANDES_AE350_UART2].base,
+> > > +        0x0, memmap[ANDES_AE350_UART2].size);
+> > > +    qemu_fdt_setprop_cell(fdt, uart_name, "reg-shift", ANDES_UART_REG_SHIFT);
+> > > +    qemu_fdt_setprop_cell(fdt, uart_name, "reg-offset", ANDES_UART_REG_OFFSET);
+> > > +    qemu_fdt_setprop_cell(fdt, uart_name, "clock-frequency", 3686400);
+> > > +    qemu_fdt_setprop_cell(fdt, uart_name, "interrupt-parent", plic_phandle);
+> > > +    qemu_fdt_setprop_cells(fdt, uart_name, "interrupts", ANDES_AE350_UART2_IRQ, 0x4);
+> > > +
+> > > +    qemu_fdt_add_subnode(fdt, "/chosen");
+> > > +    qemu_fdt_setprop_string(fdt, "/chosen", "bootargs",
+> > > +            "console=ttyS0,38400n8 earlycon=sbi debug loglevel=7");
+> > > +    qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", uart_name);
+> > > +    g_free(uart_name);
+> > > +
+> > > +    for (i = 0; i < ANDES_AE350_VIRTIO_COUNT; i++) {
+> > > +        virtio_name = g_strdup_printf("/virtio_mmio@%lx",
+> > > +            (memmap[ANDES_AE350_VIRTIO].base + i * memmap[ANDES_AE350_VIRTIO].size));
+> > > +        qemu_fdt_add_subnode(fdt, virtio_name);
+> > > +        qemu_fdt_setprop_string(fdt, virtio_name, "compatible", "virtio,mmio");
+> > > +        qemu_fdt_setprop_cells(fdt, virtio_name, "reg",
+> > > +            0x0, memmap[ANDES_AE350_VIRTIO].base + i * memmap[ANDES_AE350_VIRTIO].size,
+> > > +            0x0, memmap[ANDES_AE350_VIRTIO].size);
+> > > +        qemu_fdt_setprop_cell(fdt, virtio_name, "interrupt-parent",
+> > > +                                plic_phandle);
+> > > +        qemu_fdt_setprop_cells(fdt, virtio_name, "interrupts",
+> > > +                                ANDES_AE350_VIRTIO_IRQ + i, 0x4);
+> > > +        g_free(virtio_name);
+> > > +    }
+> > > +
+> > > +update_bootargs:
+> > > +    if (cmdline && cmdline[0] != '\0') {
+> > > +        qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+> > > +    }
+> > > +}
+> > > +
+> > > +static char *init_hart_config(const char *hart_config, int num_harts)
+> > > +{
+> > > +    int length = 0, i = 0;
+> > > +    char *result;
+> > > +
+> > > +    length = (strlen(hart_config) + 1) * num_harts;
+> > > +    result = g_malloc0(length);
+> > > +    for (i = 0; i < num_harts; i++) {
+> > > +        if (i != 0) {
+> > > +            strncat(result, ",", length);
+> > > +        }
+> > > +        strncat(result, hart_config, length);
+> > > +        length -= (strlen(hart_config) + 1);
+> > > +    }
+> > > +
+> > > +    return result;
+> > > +}
+> > > +
+> > > +static void andes_ae350_soc_realize(DeviceState *dev_soc, Error **errp)
+> > > +{
+> > > +    const struct MemmapEntry *memmap = andes_ae350_memmap;
+> > > +    MachineState *machine = MACHINE(qdev_get_machine());
+> > > +    MemoryRegion *system_memory = get_system_memory();
+> > > +    AndesAe350SocState *s = ANDES_AE350_SOC(dev_soc);
+> > > +    char *plic_hart_config, *plicsw_hart_config;
+> > > +
+> > > +    plicsw_hart_config =
+> > > +        init_hart_config(ANDES_AE350_PLICSW_HART_CONFIG, machine->smp.cpus);
+> > > +
+> > > +    /* Per-socket SW-PLIC */
+> > > +    s->plic_sw = andes_plicsw_create(
+> > > +        memmap[ANDES_AE350_PLICSW].base,
+> > > +        ANDES_AE350_PLICSW_NAME,
+> > > +        plicsw_hart_config,
+> > > +        ANDES_AE350_PLICSW_NUM_SOURCES,
+> > > +        ANDES_AE350_PLICSW_NUM_PRIORITIES,
+> > > +        ANDES_AE350_PLICSW_PRIORITY_BASE,
+> > > +        ANDES_AE350_PLICSW_PENDING_BASE,
+> > > +        ANDES_AE350_PLICSW_ENABLE_BASE,
+> > > +        ANDES_AE350_PLICSW_ENABLE_STRIDE,
+> > > +        ANDES_AE350_PLICSW_THRESHOLD_BASE,
+> > > +        ANDES_AE350_PLICSW_THRESHOLD_STRIDE,
+> > > +        memmap[ANDES_AE350_PLICSW].size);
+> > > +
+> > > +    g_free(plicsw_hart_config);
+> > > +
+> > > +    andes_plmt_create(memmap[ANDES_AE350_PLMT].base,
+> > > +                memmap[ANDES_AE350_PLMT].size,
+> > > +                machine->smp.cpus, ANDES_PLMT_TIME_BASE, ANDES_PLMT_TIMECMP_BASE);
+> > > +
+> > > +    plic_hart_config =
+> > > +        init_hart_config(ANDES_AE350_PLIC_HART_CONFIG, machine->smp.cpus);
+> > > +
+> > > +    /* Per-socket PLIC */
+> > > +    s->plic = andes_plic_create(
+> > > +        memmap[ANDES_AE350_PLIC].base,
+> > > +        ANDES_AE350_PLIC_NAME,
+> > > +        plic_hart_config,
+> > > +        ANDES_AE350_PLIC_NUM_SOURCES,
+> > > +        ANDES_AE350_PLIC_NUM_PRIORITIES,
+> > > +        ANDES_AE350_PLIC_PRIORITY_BASE,
+> > > +        ANDES_AE350_PLIC_PENDING_BASE,
+> > > +        ANDES_AE350_PLIC_ENABLE_BASE,
+> > > +        ANDES_AE350_PLIC_ENABLE_STRIDE,
+> > > +        ANDES_AE350_PLIC_THRESHOLD_BASE,
+> > > +        ANDES_AE350_PLIC_THRESHOLD_STRIDE,
+> > > +        memmap[ANDES_AE350_PLIC].size);
+> > > +
+> > > +    g_free(plic_hart_config);
+> > > +
+> > > +    /* VIRTIO */
+> > > +    for (int i = 0; i < ANDES_AE350_VIRTIO_COUNT; i++) {
+> > > +        sysbus_create_simple("virtio-mmio",
+> > > +            memmap[ANDES_AE350_VIRTIO].base + i * memmap[ANDES_AE350_VIRTIO].size,
+> > > +            qdev_get_gpio_in(DEVICE(s->plic), (ANDES_AE350_VIRTIO_IRQ + i)));
+> > > +    }
+> > > +
+> > > +    serial_mm_init(system_memory,
+> > > +        memmap[ANDES_AE350_UART1].base + ANDES_UART_REG_OFFSET,
+> > > +        ANDES_UART_REG_SHIFT,
+> > > +        qdev_get_gpio_in(DEVICE(s->plic), ANDES_AE350_UART1_IRQ),
+> > > +        38400, serial_hd(0), DEVICE_LITTLE_ENDIAN);
+> > > +
+> > > +    serial_mm_init(system_memory,
+> > > +        memmap[ANDES_AE350_UART2].base + ANDES_UART_REG_OFFSET,
+> > > +        ANDES_UART_REG_SHIFT,
+> > > +        qdev_get_gpio_in(DEVICE(s->plic), ANDES_AE350_UART2_IRQ),
+> > > +        38400, serial_hd(0), DEVICE_LITTLE_ENDIAN);
+> > > +}
+> > > +
+> > > +static void andes_ae350_soc_instance_init(Object *obj)
+> > > +{
+> > > +    const struct MemmapEntry *memmap = andes_ae350_memmap;
+> > > +    MachineState *machine = MACHINE(qdev_get_machine());
+> > > +    AndesAe350SocState *s = ANDES_AE350_SOC(obj);
+> > > +
+> > > +    object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
+> > > +    object_property_set_str(OBJECT(&s->cpus), "cpu-type",
+> > > +                            machine->cpu_type, &error_abort);
+> > > +    object_property_set_int(OBJECT(&s->cpus), "num-harts",
+> > > +                            machine->smp.cpus, &error_abort);
+> > > +    qdev_prop_set_uint64(DEVICE(&s->cpus), "resetvec",
+> > > +                            memmap[ANDES_AE350_MROM].base);
+> > > +    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
+> > > +}
+> > > +
+> > > +static void andes_ae350_machine_init(MachineState *machine)
+> > > +{
+> > > +    const struct MemmapEntry *memmap = andes_ae350_memmap;
+> > > +
+> > > +    AndesAe350BoardState *bs = ANDES_AE350_MACHINE(machine);
+> > > +    MemoryRegion *system_memory = get_system_memory();
+> > > +    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+> > > +    MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+> > > +    target_ulong start_addr = memmap[ANDES_AE350_DRAM].base;
+> > > +    target_ulong firmware_end_addr, kernel_start_addr;
+> > > +    uint32_t fdt_load_addr;
+> > > +    uint64_t kernel_entry;
+> > > +
+> > > +    /* Initialize SoC */
+> > > +    object_initialize_child(OBJECT(machine), "soc",
+> > > +                    &bs->soc, TYPE_ANDES_AE350_SOC);
+> > > +    qdev_realize(DEVICE(&bs->soc), NULL, &error_abort);
+> > > +
+> > > +    /* register system main memory (actual RAM) */
+> > > +    memory_region_init_ram(main_mem, NULL, "riscv.andes.ae350.ram",
+> > > +                           machine->ram_size, &error_fatal);
+> > > +    memory_region_add_subregion(system_memory, memmap[ANDES_AE350_DRAM].base,
+> > > +        main_mem);
+> > > +
+> > > +    /* create device tree */
+> > > +    create_fdt(bs, memmap, machine->ram_size, machine->kernel_cmdline);
+> > > +
+> > > +    /* boot rom */
+> > > +    memory_region_init_rom(mask_rom, NULL, "riscv.andes.ae350.mrom",
+> > > +                           memmap[ANDES_AE350_MROM].size, &error_fatal);
+> > > +    memory_region_add_subregion(system_memory, memmap[ANDES_AE350_MROM].base,
+> > > +                                mask_rom);
+> > > +
+> > > +    firmware_end_addr = riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> > > +                                                     start_addr, NULL);
+> > > +    if (machine->kernel_filename) {
+> > > +        kernel_start_addr = riscv_calc_kernel_start_addr(&bs->soc.cpus,
+> > > +                                                         firmware_end_addr);
+> > > +
+> > > +        kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> > > +                                         kernel_start_addr, NULL);
+> > > +
+> > > +        if (machine->initrd_filename) {
+> > > +            hwaddr start;
+> > > +            hwaddr end = riscv_load_initrd(machine->initrd_filename,
+> > > +                                           machine->ram_size, kernel_entry,
+> > > +                                           &start);
+> > > +            qemu_fdt_setprop_cell(bs->fdt, "/chosen",
+> > > +                                  "linux,initrd-start", start);
+> > > +            qemu_fdt_setprop_cell(bs->fdt, "/chosen", "linux,initrd-end",
+> > > +                                  end);
+> > > +        }
+> > > +    } else {
+> > > +       /*
+> > > +        * If dynamic firmware is used, it doesn't know where is the next mode
+> > > +        * if kernel argument is not set.
+> > > +        */
+> > > +        kernel_entry = 0;
+> > > +    }
+> > > +
+> > > +    /* Compute the fdt load address in dram */
+> > > +    fdt_load_addr = riscv_load_fdt(memmap[ANDES_AE350_DRAM].base,
+> > > +                                   machine->ram_size, bs->fdt);
+> > > +
+> > > +    /* load the reset vector */
+> > > +    riscv_setup_rom_reset_vec(machine, &bs->soc.cpus, start_addr,
+> > > +                andes_ae350_memmap[ANDES_AE350_MROM].base,
+> > > +                andes_ae350_memmap[ANDES_AE350_MROM].size, kernel_entry,
+> > > +                fdt_load_addr, bs->fdt);
+> > > +}
+> > > +
+> > > +static void andes_ae350_machine_class_init(ObjectClass *oc, void *data)
+> > > +{
+> > > +    MachineClass *mc = MACHINE_CLASS(oc);
+> > > +
+> > > +    mc->desc = "RISC-V Board compatible with Andes AE350";
+> > > +    mc->init = andes_ae350_machine_init;
+> > > +    mc->max_cpus = ANDES_CPUS_MAX;
+> > > +    mc->default_cpu_type = VIRT_CPU;
+> > > +}
+> > > +
+> > > +static void andes_ae350_machine_instance_init(Object *obj)
+> > > +{
+> > > +
+> > > +}
+> > > +
+> > > +static const TypeInfo andes_ae350_machine_typeinfo = {
+> > > +    .name       = MACHINE_TYPE_NAME("andes_ae350"),
+> > > +    .parent     = TYPE_MACHINE,
+> > > +    .class_init = andes_ae350_machine_class_init,
+> > > +    .instance_init = andes_ae350_machine_instance_init,
+> > > +    .instance_size = sizeof(AndesAe350BoardState),
+> > > +};
+> > > +
+> > > +static void andes_ae350_machine_init_register_types(void)
+> > > +{
+> > > +    type_register_static(&andes_ae350_machine_typeinfo);
+> > > +}
+> > > +
+> > > +type_init(andes_ae350_machine_init_register_types)
+> > > +
+> > > +static void andes_ae350_soc_class_init(ObjectClass *oc, void *data)
+> > > +{
+> > > +    DeviceClass *dc = DEVICE_CLASS(oc);
+> > > +
+> > > +    dc->realize = andes_ae350_soc_realize;
+> > > +    dc->user_creatable = false;
+> > > +}
+> > > +
+> > > +static const TypeInfo andes_ae350_soc_type_info = {
+> > > +    .name       = TYPE_ANDES_AE350_SOC,
+> > > +    .parent     = TYPE_DEVICE,
+> > > +    .instance_init = andes_ae350_soc_instance_init,
+> > > +    .instance_size = sizeof(AndesAe350SocState),
+> > > +    .class_init = andes_ae350_soc_class_init,
+> > > +};
+> > > +
+> > > +static void andes_ae350_soc_init_register_types(void)
+> > > +{
+> > > +    type_register_static(&andes_ae350_soc_type_info);
+> > > +}
+> > > +
+> > > +type_init(andes_ae350_soc_init_register_types)
+> > > diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+> > > index 275c0f7eb7..dc0f2cb98b 100644
+> > > --- a/hw/riscv/meson.build
+> > > +++ b/hw/riscv/meson.build
+> > > @@ -2,6 +2,7 @@ riscv_ss = ss.source_set()
+> > >  riscv_ss.add(files('boot.c'), fdt)
+> > >  riscv_ss.add(files('numa.c'))
+> > >  riscv_ss.add(files('riscv_hart.c'))
+> > > +riscv_ss.add(when: 'CONFIG_ANDES_AE350', if_true: files('andes_ae350.c'))
+> > >  riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
+> > >  riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
+> > >  riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
+> > > diff --git a/include/hw/riscv/andes_ae350.h b/include/hw/riscv/andes_ae350.h
+> > > new file mode 100644
+> > > index 0000000000..fb1a15e8cc
+> > > --- /dev/null
+> > > +++ b/include/hw/riscv/andes_ae350.h
+> > > @@ -0,0 +1,93 @@
+> > > +/*
+> > > + * Andes RISC-V AE350 Board
+> > > + *
+> > > + * Copyright (c) 2021 Andes Tech. Corp.
+> > > + *
+> > > + * This program is free software; you can redistribute it and/or modify it
+> > > + * under the terms and conditions of the GNU General Public License,
+> > > + * version 2 or later, as published by the Free Software Foundation.
+> > > + *
+> > > + * This program is distributed in the hope it will be useful, but WITHOUT
+> > > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> > > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> > > + * more details.
+> > > + *
+> > > + * You should have received a copy of the GNU General Public License along with
+> > > + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> > > + */
+> > > +
+> > > +#ifndef HW_RISCV_ANDES_AE350_H
+> > > +#define HW_RISCV_ANDES_AE350_H
+> > > +
+> > > +#include "hw/riscv/riscv_hart.h"
+> > > +#include "hw/sysbus.h"
+> > > +#include "hw/block/flash.h"
+> > > +#include "qom/object.h"
+> > > +
+> > > +#define ANDES_CPUS_MAX 4
+> > > +
+> > > +#define TYPE_ANDES_AE350_SOC "riscv.andes.ae350.soc"
+> > > +#define ANDES_AE350_SOC(obj) \
+> > > +    OBJECT_CHECK(AndesAe350SocState, (obj), TYPE_ANDES_AE350_SOC)
+> > > +
+> > > +typedef struct AndesAe350SocState {
+> > > +    /*< private >*/
+> > > +    SysBusDevice parent_obj;
+> > > +
+> > > +    /*< public >*/
+> > > +    RISCVHartArrayState cpus;
+> > > +    DeviceState *plic;
+> > > +    DeviceState *plic_sw;
+> > > +} AndesAe350SocState;
+> > > +
+> > > +#define TYPE_ANDES_AE350_MACHINE MACHINE_TYPE_NAME("andes_ae350")
+> > > +#define ANDES_AE350_MACHINE(obj) \
+> > > +    OBJECT_CHECK(AndesAe350BoardState, (obj), TYPE_ANDES_AE350_MACHINE)
+> > > +
+> > > +typedef struct AndesAe350BoardState {
+> > > +    /*< private >*/
+> > > +    SysBusDevice parent_obj;
+> > > +
+> > > +    /*< public >*/
+> > > +    AndesAe350SocState soc;
+> > > +    void *fdt;
+> > > +    int fdt_size;
+> > > +} AndesAe350BoardState;
+> > > +
+> > > +enum {
+> > > +    ANDES_AE350_DEBUG,
+> > > +    ANDES_AE350_MROM,
+> > > +    ANDES_AE350_PLMT,
+> > > +    ANDES_AE350_PLICSW,
+> > > +    ANDES_AE350_PLIC,
+> > > +    ANDES_AE350_UART1,
+> > > +    ANDES_AE350_UART2,
+> > > +    ANDES_AE350_DRAM,
+> > > +    ANDES_AE350_GEM,
+> > > +    ANDES_AE350_PIT,
+> > > +    ANDES_AE350_SDC,
+> > > +    ANDES_AE350_MAC,
+> > > +    ANDES_AE350_VIRTIO,
+> > > +};
+> > > +
+> > > +enum {
+> > > +    ANDES_AE350_PIT_IRQ = 3,
+> > > +    ANDES_AE350_UART1_IRQ = 8,
+> > > +    ANDES_AE350_UART2_IRQ = 9,
+> > > +    ANDES_AE350_SDC_IRQ = 18,
+> > > +    ANDES_AE350_MAC_IRQ = 19,
+> > > +    ANDES_AE350_GEM_IRQ = 0x35,
+> > > +    ANDES_AE350_VIRTIO_COUNT = 8,
+> > > +    ANDES_AE350_VIRTIO_IRQ = 16, /* 16 to 23 */
+> > > +};
+> > > +
+> > > +#define ANDES_UART_REG_SHIFT    0x2
+> > > +#define ANDES_UART_REG_OFFSET   0x20
+> > > +
+> > > +#if defined(TARGET_RISCV32)
+> > > +#define VIRT_CPU TYPE_RISCV_CPU_BASE32
+> > > +#elif defined(TARGET_RISCV64)
+> > > +#define VIRT_CPU TYPE_RISCV_CPU_BASE64
+> > > +#endif
+> > > +
+> > > +#endif /* HW_RISCV_ANDES_AE350_H */
+> > > --
+> >
+> > Please add a target guide in docs/system/riscv for this new board.
+>
+> OK.
+>
+> > Does it support running upstream U-Boot?
+> >
+>
+> The status is same as linux upstream.
+> Will be support later.
+>
+> > Regards,
+> > Bin
 >
 
