@@ -1,89 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lK1GS-0004sT-P5
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Mar 2021 11:00:48 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34850)
+	id 1lKFAV-00019p-Bp
+	for mharc-qemu-riscv@gnu.org; Thu, 11 Mar 2021 01:51:35 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46484)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1lK1GO-0004pk-Th
- for qemu-riscv@nongnu.org; Wed, 10 Mar 2021 11:00:45 -0500
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631]:37254)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1lK1GC-0002ol-8Z
- for qemu-riscv@nongnu.org; Wed, 10 Mar 2021 11:00:44 -0500
-Received: by mail-ej1-x631.google.com with SMTP id bm21so39703031ejb.4
- for <qemu-riscv@nongnu.org>; Wed, 10 Mar 2021 08:00:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=fqx1PjpE4XdyU4ueylmX46qPILJ9vFmxxsMgOHJktxM=;
- b=KWEBTO+N/vgdqjnFiw41riW3em16KvyowI3/h+HM8n1RN5IT5ZZRKkCGjYO7w7WjAg
- tE+8EQBR5vr8lZmnwdpkQJtp/KnH1Ab8oGBeIXdkq4zcOqusX1JKZXUFyJnSGQaTc5/x
- JMrCFN5Oe8kt/g+gesuDOcjmMnMgUQS668dUS6YJ9Z9s3j1vweL8fSaZgU6LrUb0JB5i
- 52oXHJxXT9Pg2pN12RuDsG9lGVAYxCJmYfY48qFIKOI0PPkNObTCQtbFVK7Ob9m/w++Y
- 4wpfAMeCLnFrnLwGZcqVGvZyP521/KGB5mnCpJlIXRR+lMUfYnw+0Z+N3y7Y6CtwTmwp
- CHww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=fqx1PjpE4XdyU4ueylmX46qPILJ9vFmxxsMgOHJktxM=;
- b=WcIdLNx65PO6HtCgopM0NcK55eouicqJhdeCLmgzO6cnTtS1cb7Ube2Bn4V7qeAgNf
- DD2x8wQYFLXoIxcKiIMhy0Wc7M7r/ZX1CospqDi0C7m7N3icXrS7w8cq4h7g9w5Zc7BS
- PMrzedaYN2PZVwAZiI9k2i6xkLlhOmzCLaXkfxN8+T4ljahXcpg3T1wi/rdQg4i2PUAl
- nFnmtAcoWwlKLTMF3KmPLGlzLL/pNWRRSR4VetMl3mIxTRAVQIGqpa2Uxv5u/C8rHuQ0
- X443JUufEjzLK2O+IXB7f5RV9P+k26Gce2y2ALxvI19i9qss0qHHShvoDJo1GNbnVEIE
- gFIA==
-X-Gm-Message-State: AOAM531w7q+1p0ftsmtnzhuu0BYdL+e3W27Km3ZOqgnpQVuVyroWzbBJ
- DdOo/E0vc3F980yGsKX4lzX+ow==
-X-Google-Smtp-Source: ABdhPJxuFzpwiraSK1O3PhnRHXLKHmUOmdQyj45CicO1E4h1WZsqwXPHvujfnK5biOYe4pLIaCnAig==
-X-Received: by 2002:a17:906:23e9:: with SMTP id
- j9mr4293381ejg.78.1615392022442; 
- Wed, 10 Mar 2021 08:00:22 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id m14sm3216867edr.13.2021.03.10.08.00.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Mar 2021 08:00:13 -0800 (PST)
-Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 2629E1FF9D;
- Wed, 10 Mar 2021 16:00:04 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: peter.maydell@linaro.org
-Cc: qemu-devel@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
- Michael Walle <michael@walle.cc>, Chris Wulff <crwulff@gmail.com>,
- Marek Vasut <marex@denx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Guan Xuetao <gxt@mprc.pku.edu.cn>, Max Filippov <jcmvbkbc@gmail.com>,
- qemu-arm@nongnu.org (open list:ARM TCG CPUs),
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PULL v2 14/15] semihosting: Move include/hw/semihosting/ ->
- include/semihosting/
-Date: Wed, 10 Mar 2021 16:00:01 +0000
-Message-Id: <20210310160002.11659-15-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20210310160002.11659-1-alex.bennee@linaro.org>
-References: <20210310160002.11659-1-alex.bennee@linaro.org>
+ (Exim 4.90_1) (envelope-from <dylan@andestech.com>)
+ id 1lKFAS-00018a-3y; Thu, 11 Mar 2021 01:51:33 -0500
+Received: from atcsqr.andestech.com ([60.248.187.195]:31120)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <dylan@andestech.com>)
+ id 1lKFAL-0005kV-4A; Thu, 11 Mar 2021 01:51:31 -0500
+Received: from mail.andestech.com (atcpcs16.andestech.com [10.0.1.222])
+ by ATCSQR.andestech.com with ESMTP id 12B6odCf014343;
+ Thu, 11 Mar 2021 14:50:39 +0800 (GMT-8)
+ (envelope-from dylan@andestech.com)
+Received: from atcfdc88 (10.0.15.120) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.487.0; Thu, 11 Mar 2021 14:50:36 +0800
+Date: Thu, 11 Mar 2021 14:50:37 +0800
+From: Dylan Jhong <dylan@andestech.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>, "Bastian
+ Koppelmann" <kbastian@mail.uni-paderborn.de>, "qemu-devel@nongnu.org
+ Developers" <qemu-devel@nongnu.org>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>, "Ruinland Chuan-Tzu Tsa(((((((((()"
+ <ruinland@andestech.com>, "Alan Quey-Liang Kao(((((((((()"
+ <alankao@andestech.com>
+Subject: Re: [PATCH 3/3] Andes AE350 RISC-V Machine
+Message-ID: <20210311065037.GA469@atcfdc88>
+References: <20210310033358.30499-1-dylan@andestech.com>
+ <20210310033358.30499-4-dylan@andestech.com>
+ <CAEUhbmWAfYLuEOD_epjA=4d27JDV+iVdACOmj2B6PSR0Dg1wdQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x631.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <CAEUhbmWAfYLuEOD_epjA=4d27JDV+iVdACOmj2B6PSR0Dg1wdQ@mail.gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Originating-IP: [10.0.15.120]
+X-DNSRBL: 
+X-MAIL: ATCSQR.andestech.com 12B6odCf014343
+Received-SPF: pass client-ip=60.248.187.195; envelope-from=dylan@andestech.com;
+ helo=ATCSQR.andestech.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -96,395 +57,735 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2021 16:00:46 -0000
+X-List-Received-Date: Thu, 11 Mar 2021 06:51:33 -0000
 
-From: Philippe Mathieu-Daudé <f4bug@amsat.org>
+On Wed, Mar 10, 2021 at 02:15:25PM +0800, Bin Meng wrote:
+> On Wed, Mar 10, 2021 at 11:36 AM Dylan Jhong <dylan@andestech.com> wrote:
+> >
+> > This provides a RISC-V Board based on Andes's AE350 specification.
+> > The following machine is implemented:
+> >
+> > - 'andes_ae350'; PLIC, PLICSW, PLMT, 16550a UART, VirtIO MMIO, device-tree
+> 
+> Is this a virtual target because virtio is added? Or does the hardware
+> provide the virtio programming interface?
 
-We want to move the semihosting code out of hw/ in the next patch.
+Andes ae350 is an FPGA evaluation board with many Andes's peripheral devices,
+but we only provide the most basic functions in the qemu version of ae350.
+Because we hope that customers can quickly develop and evaluate before getting the real ae350 board,
+so we use virtio to replace some peripheral devices.
 
-This patch contains the mechanical steps, created using:
+> 
+> >
+> > Signed-off-by: Dylan Jhong <dylan@andestech.com>
+> > Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
+> > ---
+> >  default-configs/devices/riscv32-softmmu.mak |   1 +
+> >  default-configs/devices/riscv64-softmmu.mak |   1 +
+> >  hw/riscv/Kconfig                            |   7 +
+> >  hw/riscv/andes_ae350.c                      | 501 ++++++++++++++++++++
+> >  hw/riscv/meson.build                        |   1 +
+> >  include/hw/riscv/andes_ae350.h              |  93 ++++
+> >  6 files changed, 604 insertions(+)
+> >  create mode 100644 hw/riscv/andes_ae350.c
+> >  create mode 100644 include/hw/riscv/andes_ae350.h
+> >
+> > diff --git a/default-configs/devices/riscv32-softmmu.mak b/default-configs/devices/riscv32-softmmu.mak
+> > index d847bd5692..a268007e72 100644
+> > --- a/default-configs/devices/riscv32-softmmu.mak
+> > +++ b/default-configs/devices/riscv32-softmmu.mak
+> > @@ -8,6 +8,7 @@ CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+> >
+> >  # Boards:
+> >  #
+> > +CONFIG_ANDES_AE350=y
+> >  CONFIG_SPIKE=y
+> >  CONFIG_SIFIVE_E=y
+> >  CONFIG_SIFIVE_U=y
+> > diff --git a/default-configs/devices/riscv64-softmmu.mak b/default-configs/devices/riscv64-softmmu.mak
+> > index d5eec75f05..9a37dfd8c0 100644
+> > --- a/default-configs/devices/riscv64-softmmu.mak
+> > +++ b/default-configs/devices/riscv64-softmmu.mak
+> > @@ -8,6 +8,7 @@ CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
+> >
+> >  # Boards:
+> >  #
+> > +CONFIG_ANDES_AE350=y
+> >  CONFIG_SPIKE=y
+> >  CONFIG_SIFIVE_E=y
+> >  CONFIG_SIFIVE_U=y
+> > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> > index d139074b02..04f6369ab7 100644
+> > --- a/hw/riscv/Kconfig
+> > +++ b/hw/riscv/Kconfig
+> > @@ -1,6 +1,13 @@
+> >  config IBEX
+> >      bool
+> >
+> > +config ANDES_AE350
+> 
+> This needs to be sorted in alphabetical order
+>
 
-  $ git mv include/hw/semihosting/ include/
-  $ sed -i s,hw/semihosting,semihosting, $(git grep -l hw/semihosting)
+Thanks, this will be fixed in V2.
 
-Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20210226131356.3964782-2-f4bug@amsat.org>
-Message-Id: <20210305135451.15427-2-alex.bennee@linaro.org>
+> > +    bool
+> > +    select SERIAL
+> > +    select VIRTIO_MMIO
+> > +    select ANDES_PLIC
+> > +    select ANDES_PLMT
+> > +
+> >  config MICROCHIP_PFSOC
+> >      bool
+> >      select CADENCE_SDHCI
+> > diff --git a/hw/riscv/andes_ae350.c b/hw/riscv/andes_ae350.c
+> > new file mode 100644
+> > index 0000000000..ed5f9701ad
+> > --- /dev/null
+> > +++ b/hw/riscv/andes_ae350.c
+> > @@ -0,0 +1,501 @@
+> > +/*
+> > + * Andes RISC-V AE350 Board
+> > + *
+> > + * Copyright (c) 2021 Andes Tech. Corp.
+> > + *
+> > + * Andes AE350 Board supports ns16550a UART and VirtIO MMIO.
+> > + * The interrupt controllers are andes PLIC and andes PLICSW.
+> > + * Timer is Andes PLMT.
+> > + *
+> > + * This program is free software; you can redistribute it and/or modify it
+> > + * under the terms and conditions of the GNU General Public License,
+> > + * version 2 or later, as published by the Free Software Foundation.
+> > + *
+> > + * This program is distributed in the hope it will be useful, but WITHOUT
+> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> > + * more details.
+> > + *
+> > + * You should have received a copy of the GNU General Public License along with
+> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> > + */
+> > +
+> > +#include "qemu/osdep.h"
+> > +#include "qemu/units.h"
+> > +#include "qemu/log.h"
+> > +#include "qemu/error-report.h"
+> > +#include "qapi/error.h"
+> > +#include "hw/boards.h"
+> > +#include "hw/loader.h"
+> > +#include "hw/sysbus.h"
+> > +#include "hw/qdev-properties.h"
+> > +#include "hw/char/serial.h"
+> > +#include "target/riscv/cpu.h"
+> > +#include "hw/riscv/riscv_hart.h"
+> > +#include "hw/riscv/boot.h"
+> > +#include "hw/riscv/numa.h"
+> > +#include "chardev/char.h"
+> > +#include "sysemu/arch_init.h"
+> > +#include "sysemu/device_tree.h"
+> > +#include "sysemu/sysemu.h"
+> > +#include "hw/pci/pci.h"
+> > +#include "hw/pci-host/gpex.h"
+> > +
+> > +#include "hw/intc/andes_plic.h"
+> > +#include "hw/timer/andes_plmt.h"
+> > +#include "hw/riscv/andes_ae350.h"
+> > +
+> > +# define BIOS_FILENAME ""
+> > +
+> > +static const struct MemmapEntry {
+> > +    hwaddr base;
+> > +    hwaddr size;
+> > +} andes_ae350_memmap[] = {
+> > +    [ANDES_AE350_DEBUG]     = { 0x00000000,      0x100 },
+> > +    [ANDES_AE350_DRAM]      = { 0x00000000, 0x80000000 },
+> > +    [ANDES_AE350_MROM]      = { 0xb0000000,   0x100000 },
+> > +    [ANDES_AE350_MAC]       = { 0xe0100000,   0x100000 },
+> > +    [ANDES_AE350_GEM]       = { 0xe0200000,   0x100000 },
+> > +    [ANDES_AE350_PLIC]      = { 0xe4000000,   0x400000 },
+> > +    [ANDES_AE350_PLMT]      = { 0xe6000000,   0x100000 },
+> > +    [ANDES_AE350_PLICSW]    = { 0xe6400000,   0x400000 },
+> > +    [ANDES_AE350_UART1]     = { 0xf0200000,      0x100 },
+> > +    [ANDES_AE350_UART2]     = { 0xf0300000,      0x100 },
+> > +    [ANDES_AE350_PIT]       = { 0xf0400000,   0x100000 },
+> > +    [ANDES_AE350_SDC]       = { 0xf0e00000,   0x100000 },
+> > +    [ANDES_AE350_VIRTIO]    = { 0xfe000000,     0x1000 },
+> > +};
+> > +
+> > +static void
+> > +create_fdt(AndesAe350BoardState *bs, const struct MemmapEntry *memmap,
+> > +    uint64_t mem_size, const char *cmdline)
+> > +{
+> > +    AndesAe350SocState *s = &bs->soc;
+> > +    MachineState *ms = MACHINE(qdev_get_machine());
+> > +    void *fdt;
+> > +    int cpu, i;
+> > +    uint64_t mem_addr;
+> > +    uint32_t *plic_irq_ext, *plicsw_irq_ext, *plmt_irq_ext;
+> > +    unsigned long plic_addr, plicsw_addr, plmt_addr;
+> > +    char *plic_name, *plicsw_name, *plmt_name;
+> > +    uint32_t intc_phandle = 0, plic_phandle = 0;
+> > +    uint32_t phandle = 1;
+> > +    char *isa_name, *mem_name, *cpu_name, *intc_name, *uart_name, *virtio_name;
+> > +
+> > +    if (ms->dtb) {
+> > +        fdt = bs->fdt = load_device_tree(ms->dtb, &bs->fdt_size);
+> > +        if (!fdt) {
+> > +            error_report("load_device_tree() failed");
+> > +            exit(1);
+> > +        }
+> > +        goto update_bootargs;
+> > +    } else {
+> > +        fdt = bs->fdt = create_device_tree(&bs->fdt_size);
+> > +        if (!fdt) {
+> > +            error_report("create_device_tree() failed");
+> > +            exit(1);
+> > +        }
+> > +    }
+> > +
+> > +    qemu_fdt_setprop_string(fdt, "/", "model", "Andes AE350 Board");
+> > +    qemu_fdt_setprop_string(fdt, "/", "compatible", "andestech,ae350");
+> > +    qemu_fdt_setprop_cell(fdt, "/", "#size-cells", 0x2);
+> > +    qemu_fdt_setprop_cell(fdt, "/", "#address-cells", 0x2);
+> > +
+> > +    qemu_fdt_add_subnode(fdt, "/soc");
+> > +    qemu_fdt_setprop(fdt, "/soc", "ranges", NULL, 0);
+> > +    qemu_fdt_setprop_string(fdt, "/soc", "compatible", "simple-bus");
+> > +    qemu_fdt_setprop_cell(fdt, "/soc", "#size-cells", 0x2);
+> > +    qemu_fdt_setprop_cell(fdt, "/soc", "#address-cells", 0x2);
+> > +
+> > +    qemu_fdt_add_subnode(fdt, "/cpus");
+> > +    qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
+> > +                          ANDES_PLMT_TIMEBASE_FREQ);
+> > +    qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
+> > +    qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
+> > +    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
+> > +
+> > +    plic_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 4);
+> > +    plicsw_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 2);
+> > +    plmt_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 2);
+> > +
+> > +    for (cpu = 0; cpu < s->cpus.num_harts; cpu++) {
+> > +        intc_phandle = phandle++;
+> > +
+> > +        cpu_name = g_strdup_printf("/cpus/cpu@%d",
+> > +            s->cpus.hartid_base + cpu);
+> > +        qemu_fdt_add_subnode(fdt, cpu_name);
+> > +#if defined(TARGET_RISCV32)
+> > +        qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
+> > +#else
+> > +        qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv39");
+> > +#endif
+> > +        isa_name = riscv_isa_string(&s->cpus.harts[cpu]);
+> > +        qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa", isa_name);
+> > +        g_free(isa_name);
+> > +        qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
+> > +        qemu_fdt_setprop_string(fdt, cpu_name, "status", "okay");
+> > +        qemu_fdt_setprop_cell(fdt, cpu_name, "reg",
+> > +            s->cpus.hartid_base + cpu);
+> > +        qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
+> > +
+> > +        intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
+> > +        qemu_fdt_add_subnode(fdt, intc_name);
+> > +        qemu_fdt_setprop_cell(fdt, intc_name, "phandle", intc_phandle);
+> > +        qemu_fdt_setprop_string(fdt, intc_name, "compatible",
+> > +            "riscv,cpu-intc");
+> > +        qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
+> > +        qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
+> > +
+> > +        plic_irq_ext[cpu * 4 + 0] = cpu_to_be32(intc_phandle);
+> > +        plic_irq_ext[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
+> > +        plic_irq_ext[cpu * 4 + 2] = cpu_to_be32(intc_phandle);
+> > +        plic_irq_ext[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
+> > +
+> > +        plicsw_irq_ext[cpu * 2 + 0] = cpu_to_be32(intc_phandle);
+> > +        plicsw_irq_ext[cpu * 2 + 1] = cpu_to_be32(IRQ_M_SOFT);
+> > +
+> > +        plmt_irq_ext[cpu * 2 + 0] = cpu_to_be32(intc_phandle);
+> > +        plmt_irq_ext[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
+> > +
+> > +        g_free(intc_name);
+> > +    }
+> > +
+> > +    mem_addr = memmap[ANDES_AE350_DRAM].base;
+> > +    mem_name = g_strdup_printf("/memory@%lx", (long)mem_addr);
+> > +    qemu_fdt_add_subnode(fdt, mem_name);
+> > +    qemu_fdt_setprop_cells(fdt, mem_name, "reg",
+> > +        mem_addr >> 32, mem_addr, mem_size >> 32, mem_size);
+> > +    qemu_fdt_setprop_string(fdt, mem_name, "device_type", "memory");
+> > +    g_free(mem_name);
+> > +
+> > +    /* create plic */
+> > +    plic_phandle = phandle++;
+> > +    plic_addr = memmap[ANDES_AE350_PLIC].base;
+> > +    plic_name = g_strdup_printf("/soc/interrupt-controller@%lx", plic_addr);
+> > +    qemu_fdt_add_subnode(fdt, plic_name);
+> > +    qemu_fdt_setprop_cell(fdt, plic_name,
+> > +        "#address-cells", 0x2);
+> > +    qemu_fdt_setprop_cell(fdt, plic_name,
+> > +        "#interrupt-cells", 0x2);
+> > +    qemu_fdt_setprop_string(fdt, plic_name, "compatible", "riscv,plic0");
+> 
+> This suggests PLIC is the same as the SiFive one. So why do we have a
+> different implementation of the PLIC model?
+> 
 
-diff --git a/include/hw/semihosting/console.h b/include/semihosting/console.h
-similarity index 100%
-rename from include/hw/semihosting/console.h
-rename to include/semihosting/console.h
-diff --git a/include/hw/semihosting/semihost.h b/include/semihosting/semihost.h
-similarity index 100%
-rename from include/hw/semihosting/semihost.h
-rename to include/semihosting/semihost.h
-diff --git a/gdbstub.c b/gdbstub.c
-index 16d7c8f534..7a4cc07584 100644
---- a/gdbstub.c
-+++ b/gdbstub.c
-@@ -49,7 +49,7 @@
- #include "sysemu/hw_accel.h"
- #include "sysemu/kvm.h"
- #include "sysemu/runstate.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "exec/exec-all.h"
- #include "sysemu/replay.h"
- 
-diff --git a/hw/mips/malta.c b/hw/mips/malta.c
-index 9afc0b427b..26e7b1bd9f 100644
---- a/hw/mips/malta.c
-+++ b/hw/mips/malta.c
-@@ -58,7 +58,7 @@
- #include "qemu/error-report.h"
- #include "hw/misc/empty_slot.h"
- #include "sysemu/kvm.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "hw/mips/cps.h"
- #include "hw/qdev-clock.h"
- 
-diff --git a/hw/semihosting/arm-compat-semi.c b/hw/semihosting/arm-compat-semi.c
-index 23c6e3edcb..94950b6c56 100644
---- a/hw/semihosting/arm-compat-semi.c
-+++ b/hw/semihosting/arm-compat-semi.c
-@@ -34,9 +34,9 @@
- #include "qemu/osdep.h"
- 
- #include "cpu.h"
--#include "hw/semihosting/semihost.h"
--#include "hw/semihosting/console.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/semihost.h"
-+#include "semihosting/console.h"
-+#include "semihosting/common-semi.h"
- #include "qemu/log.h"
- #include "qemu/timer.h"
- #ifdef CONFIG_USER_ONLY
-diff --git a/hw/semihosting/config.c b/hw/semihosting/config.c
-index 9807f10cb0..3548e0f627 100644
---- a/hw/semihosting/config.c
-+++ b/hw/semihosting/config.c
-@@ -22,7 +22,7 @@
- #include "qemu/option.h"
- #include "qemu/config-file.h"
- #include "qemu/error-report.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "chardev/char.h"
- #include "sysemu/sysemu.h"
- 
-diff --git a/hw/semihosting/console.c b/hw/semihosting/console.c
-index 9b4fee9260..c9ebd6fdd0 100644
---- a/hw/semihosting/console.c
-+++ b/hw/semihosting/console.c
-@@ -17,8 +17,8 @@
- 
- #include "qemu/osdep.h"
- #include "cpu.h"
--#include "hw/semihosting/semihost.h"
--#include "hw/semihosting/console.h"
-+#include "semihosting/semihost.h"
-+#include "semihosting/console.h"
- #include "exec/gdbstub.h"
- #include "exec/exec-all.h"
- #include "qemu/log.h"
-diff --git a/linux-user/aarch64/cpu_loop.c b/linux-user/aarch64/cpu_loop.c
-index 7c42f65706..ee72a1c20f 100644
---- a/linux-user/aarch64/cpu_loop.c
-+++ b/linux-user/aarch64/cpu_loop.c
-@@ -22,7 +22,7 @@
- #include "qemu.h"
- #include "cpu_loop-common.h"
- #include "qemu/guest-random.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- #include "target/arm/syndrome.h"
- 
- #define get_user_code_u32(x, gaddr, env)                \
-diff --git a/linux-user/arm/cpu_loop.c b/linux-user/arm/cpu_loop.c
-index cadfb7fa43..989d03cd89 100644
---- a/linux-user/arm/cpu_loop.c
-+++ b/linux-user/arm/cpu_loop.c
-@@ -22,7 +22,7 @@
- #include "qemu.h"
- #include "elf.h"
- #include "cpu_loop-common.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- 
- #define get_user_code_u32(x, gaddr, env)                \
-     ({ abi_long __r = get_user_u32((x), (gaddr));       \
-diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
-index 9665dabb09..6767f941e8 100644
---- a/linux-user/riscv/cpu_loop.c
-+++ b/linux-user/riscv/cpu_loop.c
-@@ -23,7 +23,7 @@
- #include "qemu.h"
- #include "cpu_loop-common.h"
- #include "elf.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- 
- void cpu_loop(CPURISCVState *env)
- {
-diff --git a/linux-user/semihost.c b/linux-user/semihost.c
-index c0015ee7f6..82013b8b48 100644
---- a/linux-user/semihost.c
-+++ b/linux-user/semihost.c
-@@ -12,7 +12,7 @@
- 
- #include "qemu/osdep.h"
- #include "cpu.h"
--#include "hw/semihosting/console.h"
-+#include "semihosting/console.h"
- #include "qemu.h"
- #include <termios.h>
- 
-diff --git a/softmmu/vl.c b/softmmu/vl.c
-index ff488ea3e7..b7673b9613 100644
---- a/softmmu/vl.c
-+++ b/softmmu/vl.c
-@@ -108,7 +108,7 @@
- #include "qapi/opts-visitor.h"
- #include "qapi/clone-visitor.h"
- #include "qom/object_interfaces.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "crypto/init.h"
- #include "sysemu/replay.h"
- #include "qapi/qapi-events-run-state.h"
-diff --git a/stubs/semihost.c b/stubs/semihost.c
-index 1d8b37f7b2..1b30f38b03 100644
---- a/stubs/semihost.c
-+++ b/stubs/semihost.c
-@@ -11,7 +11,7 @@
- #include "qemu/osdep.h"
- #include "qemu/option.h"
- #include "qemu/error-report.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "sysemu/sysemu.h"
- 
- /* Empty config */
-diff --git a/target/arm/helper.c b/target/arm/helper.c
-index 904b0927cd..d9220be7c5 100644
---- a/target/arm/helper.c
-+++ b/target/arm/helper.c
-@@ -22,7 +22,7 @@
- #include "exec/exec-all.h"
- #include <zlib.h> /* For crc32 */
- #include "hw/irq.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "sysemu/cpus.h"
- #include "sysemu/cpu-timers.h"
- #include "sysemu/kvm.h"
-@@ -34,7 +34,7 @@
- #ifdef CONFIG_TCG
- #include "arm_ldst.h"
- #include "exec/cpu_ldst.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- #endif
- 
- #define ARM_CPU_FREQ 1000000000 /* FIXME: 1 GHz, should be configurable */
-diff --git a/target/arm/m_helper.c b/target/arm/m_helper.c
-index 731c435c00..d63ae465e1 100644
---- a/target/arm/m_helper.c
-+++ b/target/arm/m_helper.c
-@@ -21,7 +21,7 @@
- #include "qemu/qemu-print.h"
- #include "exec/exec-all.h"
- #include <zlib.h> /* For crc32 */
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "sysemu/cpus.h"
- #include "sysemu/kvm.h"
- #include "qemu/range.h"
-@@ -31,7 +31,7 @@
- #ifdef CONFIG_TCG
- #include "arm_ldst.h"
- #include "exec/cpu_ldst.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- #endif
- 
- static void v7m_msr_xpsr(CPUARMState *env, uint32_t mask,
-diff --git a/target/arm/translate-a64.c b/target/arm/translate-a64.c
-index b591f096df..0b42e53500 100644
---- a/target/arm/translate-a64.c
-+++ b/target/arm/translate-a64.c
-@@ -28,7 +28,7 @@
- #include "internals.h"
- #include "qemu/host-utils.h"
- 
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "exec/gen-icount.h"
- 
- #include "exec/helper-proto.h"
-diff --git a/target/arm/translate.c b/target/arm/translate.c
-index 1653cca1aa..62b1c2081b 100644
---- a/target/arm/translate.c
-+++ b/target/arm/translate.c
-@@ -29,7 +29,7 @@
- #include "qemu/log.h"
- #include "qemu/bitops.h"
- #include "arm_ldst.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- 
- #include "exec/helper-proto.h"
- #include "exec/helper-gen.h"
-diff --git a/target/lm32/helper.c b/target/lm32/helper.c
-index 7c52ae76d6..01cc3c53a5 100644
---- a/target/lm32/helper.c
-+++ b/target/lm32/helper.c
-@@ -21,7 +21,7 @@
- #include "cpu.h"
- #include "exec/exec-all.h"
- #include "qemu/host-utils.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "exec/log.h"
- 
- bool lm32_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-diff --git a/target/m68k/op_helper.c b/target/m68k/op_helper.c
-index 202498deb5..730cdf7744 100644
---- a/target/m68k/op_helper.c
-+++ b/target/m68k/op_helper.c
-@@ -21,7 +21,7 @@
- #include "exec/helper-proto.h"
- #include "exec/exec-all.h"
- #include "exec/cpu_ldst.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- 
- #if defined(CONFIG_USER_ONLY)
- 
-diff --git a/target/mips/cpu.c b/target/mips/cpu.c
-index bf70c77295..bd4dca571f 100644
---- a/target/mips/cpu.c
-+++ b/target/mips/cpu.c
-@@ -31,7 +31,7 @@
- #include "exec/exec-all.h"
- #include "hw/qdev-properties.h"
- #include "hw/qdev-clock.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "qapi/qapi-commands-machine-target.h"
- #include "fpu_helper.h"
- 
-diff --git a/target/mips/mips-semi.c b/target/mips/mips-semi.c
-index 898251aa02..6de60fa6dd 100644
---- a/target/mips/mips-semi.c
-+++ b/target/mips/mips-semi.c
-@@ -22,8 +22,8 @@
- #include "qemu/log.h"
- #include "exec/helper-proto.h"
- #include "exec/softmmu-semi.h"
--#include "hw/semihosting/semihost.h"
--#include "hw/semihosting/console.h"
-+#include "semihosting/semihost.h"
-+#include "semihosting/console.h"
- 
- typedef enum UHIOp {
-     UHI_exit = 1,
-diff --git a/target/mips/translate.c b/target/mips/translate.c
-index 70891c37cd..0b6d82d228 100644
---- a/target/mips/translate.c
-+++ b/target/mips/translate.c
-@@ -29,7 +29,7 @@
- #include "exec/translator.h"
- #include "exec/helper-proto.h"
- #include "exec/helper-gen.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- 
- #include "target/mips/trace.h"
- #include "trace-tcg.h"
-diff --git a/target/nios2/helper.c b/target/nios2/helper.c
-index 57c97bde3c..53be8398e9 100644
---- a/target/nios2/helper.c
-+++ b/target/nios2/helper.c
-@@ -26,7 +26,7 @@
- #include "exec/cpu_ldst.h"
- #include "exec/log.h"
- #include "exec/helper-proto.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- 
- #if defined(CONFIG_USER_ONLY)
- 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 2f43939fb6..83a6bcfad0 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -24,7 +24,7 @@
- #include "exec/exec-all.h"
- #include "tcg/tcg-op.h"
- #include "trace.h"
--#include "hw/semihosting/common-semi.h"
-+#include "semihosting/common-semi.h"
- 
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
- {
-diff --git a/target/unicore32/helper.c b/target/unicore32/helper.c
-index 54c26871fe..704393c27f 100644
---- a/target/unicore32/helper.c
-+++ b/target/unicore32/helper.c
-@@ -14,7 +14,7 @@
- #include "cpu.h"
- #include "exec/exec-all.h"
- #include "exec/helper-proto.h"
--#include "hw/semihosting/console.h"
-+#include "semihosting/console.h"
- 
- #undef DEBUG_UC32
- 
-diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
-index 944a157747..0ae4efc48a 100644
---- a/target/xtensa/translate.c
-+++ b/target/xtensa/translate.c
-@@ -37,7 +37,7 @@
- #include "qemu/log.h"
- #include "qemu/qemu-print.h"
- #include "exec/cpu_ldst.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "exec/translator.h"
- 
- #include "exec/helper-proto.h"
-diff --git a/target/xtensa/xtensa-semi.c b/target/xtensa/xtensa-semi.c
-index 25f57a6500..79f2b043f2 100644
---- a/target/xtensa/xtensa-semi.c
-+++ b/target/xtensa/xtensa-semi.c
-@@ -29,7 +29,7 @@
- #include "cpu.h"
- #include "chardev/char-fe.h"
- #include "exec/helper-proto.h"
--#include "hw/semihosting/semihost.h"
-+#include "semihosting/semihost.h"
- #include "qapi/error.h"
- #include "qemu/log.h"
- 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ea200aae1d..c5ff881892 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -3250,7 +3250,7 @@ Semihosting
- M: Alex Bennée <alex.bennee@linaro.org>
- S: Maintained
- F: hw/semihosting/
--F: include/hw/semihosting/
-+F: include/semihosting/
- 
- Multi-process QEMU
- M: Elena Ufimtseva <elena.ufimtseva@oracle.com>
--- 
-2.20.1
+The difference of these two PLICs, please refer to my reply of "[PATCH 1/3] Andes RISC-V PLIC"
 
+> > +    qemu_fdt_setprop(fdt, plic_name, "interrupt-controller", NULL, 0);
+> > +    qemu_fdt_setprop(fdt, plic_name, "interrupts-extended",
+> > +        plic_irq_ext, s->cpus.num_harts * sizeof(uint32_t) * 4);
+> > +    qemu_fdt_setprop_cells(fdt, plic_name, "reg",
+> > +        0x0, plic_addr, 0x0, memmap[ANDES_AE350_PLIC].size);
+> > +    qemu_fdt_setprop_cell(fdt, plic_name, "riscv,ndev", 0x47);
+> > +    qemu_fdt_setprop_cell(fdt, plic_name, "phandle", plic_phandle);
+> > +    g_free(plic_name);
+> > +    g_free(plic_irq_ext);
+> > +
+> > +    /* create plicsw */
+> > +    plicsw_addr = memmap[ANDES_AE350_PLICSW].base;
+> > +    plicsw_name = g_strdup_printf("/soc/interrupt-controller@%lx", plicsw_addr);
+> > +    qemu_fdt_add_subnode(fdt, plicsw_name);
+> > +    qemu_fdt_setprop_cell(fdt, plicsw_name,
+> > +        "#address-cells", 0x2);
+> > +    qemu_fdt_setprop_cell(fdt, plicsw_name,
+> > +        "#interrupt-cells", 0x2);
+> > +    qemu_fdt_setprop_string(fdt, plicsw_name, "compatible", "riscv,plic1");
+> 
+> Is this bindings in the Linux kernel upstream? I can't find any
+> reference in the kernel tree.
+> 
+
+Currently only supports andes Linux BSP,
+we have plans to push to linux upstream in the future.
+
+> > +    qemu_fdt_setprop(fdt, plicsw_name, "interrupt-controller", NULL, 0);
+> > +    qemu_fdt_setprop(fdt, plicsw_name, "interrupts-extended",
+> > +        plicsw_irq_ext, s->cpus.num_harts * sizeof(uint32_t) * 2);
+> > +    qemu_fdt_setprop_cells(fdt, plicsw_name, "reg",
+> > +        0x0, plicsw_addr, 0x0, memmap[ANDES_AE350_PLIC].size);
+> > +    qemu_fdt_setprop_cell(fdt, plicsw_name, "riscv,ndev", 0x1);
+> > +    g_free(plicsw_name);
+> > +    g_free(plicsw_irq_ext);
+> > +
+> > +    /* create plmt */
+> > +    plmt_addr = memmap[ANDES_AE350_PLMT].base;
+> > +    plmt_name = g_strdup_printf("/soc/plmt0@%lx", plmt_addr);
+> > +    qemu_fdt_add_subnode(fdt, plmt_name);
+> > +    qemu_fdt_setprop_string(fdt, plmt_name, "compatible", "riscv,plmt0");
+> 
+> The same here.
+> 
+> > +    qemu_fdt_setprop(fdt, plmt_name, "interrupts-extended",
+> > +        plmt_irq_ext, s->cpus.num_harts * sizeof(uint32_t) * 2);
+> > +    qemu_fdt_setprop_cells(fdt, plmt_name, "reg",
+> > +        0x0, plmt_addr, 0x0, memmap[ANDES_AE350_PLMT].size);
+> > +    g_free(plmt_name);
+> > +    g_free(plmt_irq_ext);
+> > +
+> > +    uart_name = g_strdup_printf("/serial@%lx", memmap[ANDES_AE350_UART1].base);
+> > +    qemu_fdt_add_subnode(fdt, uart_name);
+> > +    qemu_fdt_setprop_string(fdt, uart_name, "compatible", "ns16550a");
+> > +    qemu_fdt_setprop_cells(fdt, uart_name, "reg",
+> > +        0x0, memmap[ANDES_AE350_UART1].base,
+> > +        0x0, memmap[ANDES_AE350_UART1].size);
+> > +    qemu_fdt_setprop_cell(fdt, uart_name, "clock-frequency", 3686400);
+> > +    qemu_fdt_setprop_cell(fdt, uart_name, "reg-shift", ANDES_UART_REG_SHIFT);
+> > +    qemu_fdt_setprop_cell(fdt, uart_name, "reg-offset", ANDES_UART_REG_OFFSET);
+> > +    qemu_fdt_setprop_cell(fdt, uart_name, "interrupt-parent", plic_phandle);
+> > +    qemu_fdt_setprop_cells(fdt, uart_name, "interrupts", ANDES_AE350_UART1_IRQ, 0x4);
+> > +
+> > +    uart_name = g_strdup_printf("/serial@%lx", memmap[ANDES_AE350_UART2].base);
+> > +    qemu_fdt_add_subnode(fdt, uart_name);
+> > +    qemu_fdt_setprop_string(fdt, uart_name, "compatible", "ns16550a");
+> > +    qemu_fdt_setprop_cells(fdt, uart_name, "reg",
+> > +        0x0, memmap[ANDES_AE350_UART2].base,
+> > +        0x0, memmap[ANDES_AE350_UART2].size);
+> > +    qemu_fdt_setprop_cell(fdt, uart_name, "reg-shift", ANDES_UART_REG_SHIFT);
+> > +    qemu_fdt_setprop_cell(fdt, uart_name, "reg-offset", ANDES_UART_REG_OFFSET);
+> > +    qemu_fdt_setprop_cell(fdt, uart_name, "clock-frequency", 3686400);
+> > +    qemu_fdt_setprop_cell(fdt, uart_name, "interrupt-parent", plic_phandle);
+> > +    qemu_fdt_setprop_cells(fdt, uart_name, "interrupts", ANDES_AE350_UART2_IRQ, 0x4);
+> > +
+> > +    qemu_fdt_add_subnode(fdt, "/chosen");
+> > +    qemu_fdt_setprop_string(fdt, "/chosen", "bootargs",
+> > +            "console=ttyS0,38400n8 earlycon=sbi debug loglevel=7");
+> > +    qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", uart_name);
+> > +    g_free(uart_name);
+> > +
+> > +    for (i = 0; i < ANDES_AE350_VIRTIO_COUNT; i++) {
+> > +        virtio_name = g_strdup_printf("/virtio_mmio@%lx",
+> > +            (memmap[ANDES_AE350_VIRTIO].base + i * memmap[ANDES_AE350_VIRTIO].size));
+> > +        qemu_fdt_add_subnode(fdt, virtio_name);
+> > +        qemu_fdt_setprop_string(fdt, virtio_name, "compatible", "virtio,mmio");
+> > +        qemu_fdt_setprop_cells(fdt, virtio_name, "reg",
+> > +            0x0, memmap[ANDES_AE350_VIRTIO].base + i * memmap[ANDES_AE350_VIRTIO].size,
+> > +            0x0, memmap[ANDES_AE350_VIRTIO].size);
+> > +        qemu_fdt_setprop_cell(fdt, virtio_name, "interrupt-parent",
+> > +                                plic_phandle);
+> > +        qemu_fdt_setprop_cells(fdt, virtio_name, "interrupts",
+> > +                                ANDES_AE350_VIRTIO_IRQ + i, 0x4);
+> > +        g_free(virtio_name);
+> > +    }
+> > +
+> > +update_bootargs:
+> > +    if (cmdline && cmdline[0] != '\0') {
+> > +        qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+> > +    }
+> > +}
+> > +
+> > +static char *init_hart_config(const char *hart_config, int num_harts)
+> > +{
+> > +    int length = 0, i = 0;
+> > +    char *result;
+> > +
+> > +    length = (strlen(hart_config) + 1) * num_harts;
+> > +    result = g_malloc0(length);
+> > +    for (i = 0; i < num_harts; i++) {
+> > +        if (i != 0) {
+> > +            strncat(result, ",", length);
+> > +        }
+> > +        strncat(result, hart_config, length);
+> > +        length -= (strlen(hart_config) + 1);
+> > +    }
+> > +
+> > +    return result;
+> > +}
+> > +
+> > +static void andes_ae350_soc_realize(DeviceState *dev_soc, Error **errp)
+> > +{
+> > +    const struct MemmapEntry *memmap = andes_ae350_memmap;
+> > +    MachineState *machine = MACHINE(qdev_get_machine());
+> > +    MemoryRegion *system_memory = get_system_memory();
+> > +    AndesAe350SocState *s = ANDES_AE350_SOC(dev_soc);
+> > +    char *plic_hart_config, *plicsw_hart_config;
+> > +
+> > +    plicsw_hart_config =
+> > +        init_hart_config(ANDES_AE350_PLICSW_HART_CONFIG, machine->smp.cpus);
+> > +
+> > +    /* Per-socket SW-PLIC */
+> > +    s->plic_sw = andes_plicsw_create(
+> > +        memmap[ANDES_AE350_PLICSW].base,
+> > +        ANDES_AE350_PLICSW_NAME,
+> > +        plicsw_hart_config,
+> > +        ANDES_AE350_PLICSW_NUM_SOURCES,
+> > +        ANDES_AE350_PLICSW_NUM_PRIORITIES,
+> > +        ANDES_AE350_PLICSW_PRIORITY_BASE,
+> > +        ANDES_AE350_PLICSW_PENDING_BASE,
+> > +        ANDES_AE350_PLICSW_ENABLE_BASE,
+> > +        ANDES_AE350_PLICSW_ENABLE_STRIDE,
+> > +        ANDES_AE350_PLICSW_THRESHOLD_BASE,
+> > +        ANDES_AE350_PLICSW_THRESHOLD_STRIDE,
+> > +        memmap[ANDES_AE350_PLICSW].size);
+> > +
+> > +    g_free(plicsw_hart_config);
+> > +
+> > +    andes_plmt_create(memmap[ANDES_AE350_PLMT].base,
+> > +                memmap[ANDES_AE350_PLMT].size,
+> > +                machine->smp.cpus, ANDES_PLMT_TIME_BASE, ANDES_PLMT_TIMECMP_BASE);
+> > +
+> > +    plic_hart_config =
+> > +        init_hart_config(ANDES_AE350_PLIC_HART_CONFIG, machine->smp.cpus);
+> > +
+> > +    /* Per-socket PLIC */
+> > +    s->plic = andes_plic_create(
+> > +        memmap[ANDES_AE350_PLIC].base,
+> > +        ANDES_AE350_PLIC_NAME,
+> > +        plic_hart_config,
+> > +        ANDES_AE350_PLIC_NUM_SOURCES,
+> > +        ANDES_AE350_PLIC_NUM_PRIORITIES,
+> > +        ANDES_AE350_PLIC_PRIORITY_BASE,
+> > +        ANDES_AE350_PLIC_PENDING_BASE,
+> > +        ANDES_AE350_PLIC_ENABLE_BASE,
+> > +        ANDES_AE350_PLIC_ENABLE_STRIDE,
+> > +        ANDES_AE350_PLIC_THRESHOLD_BASE,
+> > +        ANDES_AE350_PLIC_THRESHOLD_STRIDE,
+> > +        memmap[ANDES_AE350_PLIC].size);
+> > +
+> > +    g_free(plic_hart_config);
+> > +
+> > +    /* VIRTIO */
+> > +    for (int i = 0; i < ANDES_AE350_VIRTIO_COUNT; i++) {
+> > +        sysbus_create_simple("virtio-mmio",
+> > +            memmap[ANDES_AE350_VIRTIO].base + i * memmap[ANDES_AE350_VIRTIO].size,
+> > +            qdev_get_gpio_in(DEVICE(s->plic), (ANDES_AE350_VIRTIO_IRQ + i)));
+> > +    }
+> > +
+> > +    serial_mm_init(system_memory,
+> > +        memmap[ANDES_AE350_UART1].base + ANDES_UART_REG_OFFSET,
+> > +        ANDES_UART_REG_SHIFT,
+> > +        qdev_get_gpio_in(DEVICE(s->plic), ANDES_AE350_UART1_IRQ),
+> > +        38400, serial_hd(0), DEVICE_LITTLE_ENDIAN);
+> > +
+> > +    serial_mm_init(system_memory,
+> > +        memmap[ANDES_AE350_UART2].base + ANDES_UART_REG_OFFSET,
+> > +        ANDES_UART_REG_SHIFT,
+> > +        qdev_get_gpio_in(DEVICE(s->plic), ANDES_AE350_UART2_IRQ),
+> > +        38400, serial_hd(0), DEVICE_LITTLE_ENDIAN);
+> > +}
+> > +
+> > +static void andes_ae350_soc_instance_init(Object *obj)
+> > +{
+> > +    const struct MemmapEntry *memmap = andes_ae350_memmap;
+> > +    MachineState *machine = MACHINE(qdev_get_machine());
+> > +    AndesAe350SocState *s = ANDES_AE350_SOC(obj);
+> > +
+> > +    object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
+> > +    object_property_set_str(OBJECT(&s->cpus), "cpu-type",
+> > +                            machine->cpu_type, &error_abort);
+> > +    object_property_set_int(OBJECT(&s->cpus), "num-harts",
+> > +                            machine->smp.cpus, &error_abort);
+> > +    qdev_prop_set_uint64(DEVICE(&s->cpus), "resetvec",
+> > +                            memmap[ANDES_AE350_MROM].base);
+> > +    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
+> > +}
+> > +
+> > +static void andes_ae350_machine_init(MachineState *machine)
+> > +{
+> > +    const struct MemmapEntry *memmap = andes_ae350_memmap;
+> > +
+> > +    AndesAe350BoardState *bs = ANDES_AE350_MACHINE(machine);
+> > +    MemoryRegion *system_memory = get_system_memory();
+> > +    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+> > +    MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+> > +    target_ulong start_addr = memmap[ANDES_AE350_DRAM].base;
+> > +    target_ulong firmware_end_addr, kernel_start_addr;
+> > +    uint32_t fdt_load_addr;
+> > +    uint64_t kernel_entry;
+> > +
+> > +    /* Initialize SoC */
+> > +    object_initialize_child(OBJECT(machine), "soc",
+> > +                    &bs->soc, TYPE_ANDES_AE350_SOC);
+> > +    qdev_realize(DEVICE(&bs->soc), NULL, &error_abort);
+> > +
+> > +    /* register system main memory (actual RAM) */
+> > +    memory_region_init_ram(main_mem, NULL, "riscv.andes.ae350.ram",
+> > +                           machine->ram_size, &error_fatal);
+> > +    memory_region_add_subregion(system_memory, memmap[ANDES_AE350_DRAM].base,
+> > +        main_mem);
+> > +
+> > +    /* create device tree */
+> > +    create_fdt(bs, memmap, machine->ram_size, machine->kernel_cmdline);
+> > +
+> > +    /* boot rom */
+> > +    memory_region_init_rom(mask_rom, NULL, "riscv.andes.ae350.mrom",
+> > +                           memmap[ANDES_AE350_MROM].size, &error_fatal);
+> > +    memory_region_add_subregion(system_memory, memmap[ANDES_AE350_MROM].base,
+> > +                                mask_rom);
+> > +
+> > +    firmware_end_addr = riscv_find_and_load_firmware(machine, BIOS_FILENAME,
+> > +                                                     start_addr, NULL);
+> > +    if (machine->kernel_filename) {
+> > +        kernel_start_addr = riscv_calc_kernel_start_addr(&bs->soc.cpus,
+> > +                                                         firmware_end_addr);
+> > +
+> > +        kernel_entry = riscv_load_kernel(machine->kernel_filename,
+> > +                                         kernel_start_addr, NULL);
+> > +
+> > +        if (machine->initrd_filename) {
+> > +            hwaddr start;
+> > +            hwaddr end = riscv_load_initrd(machine->initrd_filename,
+> > +                                           machine->ram_size, kernel_entry,
+> > +                                           &start);
+> > +            qemu_fdt_setprop_cell(bs->fdt, "/chosen",
+> > +                                  "linux,initrd-start", start);
+> > +            qemu_fdt_setprop_cell(bs->fdt, "/chosen", "linux,initrd-end",
+> > +                                  end);
+> > +        }
+> > +    } else {
+> > +       /*
+> > +        * If dynamic firmware is used, it doesn't know where is the next mode
+> > +        * if kernel argument is not set.
+> > +        */
+> > +        kernel_entry = 0;
+> > +    }
+> > +
+> > +    /* Compute the fdt load address in dram */
+> > +    fdt_load_addr = riscv_load_fdt(memmap[ANDES_AE350_DRAM].base,
+> > +                                   machine->ram_size, bs->fdt);
+> > +
+> > +    /* load the reset vector */
+> > +    riscv_setup_rom_reset_vec(machine, &bs->soc.cpus, start_addr,
+> > +                andes_ae350_memmap[ANDES_AE350_MROM].base,
+> > +                andes_ae350_memmap[ANDES_AE350_MROM].size, kernel_entry,
+> > +                fdt_load_addr, bs->fdt);
+> > +}
+> > +
+> > +static void andes_ae350_machine_class_init(ObjectClass *oc, void *data)
+> > +{
+> > +    MachineClass *mc = MACHINE_CLASS(oc);
+> > +
+> > +    mc->desc = "RISC-V Board compatible with Andes AE350";
+> > +    mc->init = andes_ae350_machine_init;
+> > +    mc->max_cpus = ANDES_CPUS_MAX;
+> > +    mc->default_cpu_type = VIRT_CPU;
+> > +}
+> > +
+> > +static void andes_ae350_machine_instance_init(Object *obj)
+> > +{
+> > +
+> > +}
+> > +
+> > +static const TypeInfo andes_ae350_machine_typeinfo = {
+> > +    .name       = MACHINE_TYPE_NAME("andes_ae350"),
+> > +    .parent     = TYPE_MACHINE,
+> > +    .class_init = andes_ae350_machine_class_init,
+> > +    .instance_init = andes_ae350_machine_instance_init,
+> > +    .instance_size = sizeof(AndesAe350BoardState),
+> > +};
+> > +
+> > +static void andes_ae350_machine_init_register_types(void)
+> > +{
+> > +    type_register_static(&andes_ae350_machine_typeinfo);
+> > +}
+> > +
+> > +type_init(andes_ae350_machine_init_register_types)
+> > +
+> > +static void andes_ae350_soc_class_init(ObjectClass *oc, void *data)
+> > +{
+> > +    DeviceClass *dc = DEVICE_CLASS(oc);
+> > +
+> > +    dc->realize = andes_ae350_soc_realize;
+> > +    dc->user_creatable = false;
+> > +}
+> > +
+> > +static const TypeInfo andes_ae350_soc_type_info = {
+> > +    .name       = TYPE_ANDES_AE350_SOC,
+> > +    .parent     = TYPE_DEVICE,
+> > +    .instance_init = andes_ae350_soc_instance_init,
+> > +    .instance_size = sizeof(AndesAe350SocState),
+> > +    .class_init = andes_ae350_soc_class_init,
+> > +};
+> > +
+> > +static void andes_ae350_soc_init_register_types(void)
+> > +{
+> > +    type_register_static(&andes_ae350_soc_type_info);
+> > +}
+> > +
+> > +type_init(andes_ae350_soc_init_register_types)
+> > diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+> > index 275c0f7eb7..dc0f2cb98b 100644
+> > --- a/hw/riscv/meson.build
+> > +++ b/hw/riscv/meson.build
+> > @@ -2,6 +2,7 @@ riscv_ss = ss.source_set()
+> >  riscv_ss.add(files('boot.c'), fdt)
+> >  riscv_ss.add(files('numa.c'))
+> >  riscv_ss.add(files('riscv_hart.c'))
+> > +riscv_ss.add(when: 'CONFIG_ANDES_AE350', if_true: files('andes_ae350.c'))
+> >  riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
+> >  riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
+> >  riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
+> > diff --git a/include/hw/riscv/andes_ae350.h b/include/hw/riscv/andes_ae350.h
+> > new file mode 100644
+> > index 0000000000..fb1a15e8cc
+> > --- /dev/null
+> > +++ b/include/hw/riscv/andes_ae350.h
+> > @@ -0,0 +1,93 @@
+> > +/*
+> > + * Andes RISC-V AE350 Board
+> > + *
+> > + * Copyright (c) 2021 Andes Tech. Corp.
+> > + *
+> > + * This program is free software; you can redistribute it and/or modify it
+> > + * under the terms and conditions of the GNU General Public License,
+> > + * version 2 or later, as published by the Free Software Foundation.
+> > + *
+> > + * This program is distributed in the hope it will be useful, but WITHOUT
+> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> > + * more details.
+> > + *
+> > + * You should have received a copy of the GNU General Public License along with
+> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> > + */
+> > +
+> > +#ifndef HW_RISCV_ANDES_AE350_H
+> > +#define HW_RISCV_ANDES_AE350_H
+> > +
+> > +#include "hw/riscv/riscv_hart.h"
+> > +#include "hw/sysbus.h"
+> > +#include "hw/block/flash.h"
+> > +#include "qom/object.h"
+> > +
+> > +#define ANDES_CPUS_MAX 4
+> > +
+> > +#define TYPE_ANDES_AE350_SOC "riscv.andes.ae350.soc"
+> > +#define ANDES_AE350_SOC(obj) \
+> > +    OBJECT_CHECK(AndesAe350SocState, (obj), TYPE_ANDES_AE350_SOC)
+> > +
+> > +typedef struct AndesAe350SocState {
+> > +    /*< private >*/
+> > +    SysBusDevice parent_obj;
+> > +
+> > +    /*< public >*/
+> > +    RISCVHartArrayState cpus;
+> > +    DeviceState *plic;
+> > +    DeviceState *plic_sw;
+> > +} AndesAe350SocState;
+> > +
+> > +#define TYPE_ANDES_AE350_MACHINE MACHINE_TYPE_NAME("andes_ae350")
+> > +#define ANDES_AE350_MACHINE(obj) \
+> > +    OBJECT_CHECK(AndesAe350BoardState, (obj), TYPE_ANDES_AE350_MACHINE)
+> > +
+> > +typedef struct AndesAe350BoardState {
+> > +    /*< private >*/
+> > +    SysBusDevice parent_obj;
+> > +
+> > +    /*< public >*/
+> > +    AndesAe350SocState soc;
+> > +    void *fdt;
+> > +    int fdt_size;
+> > +} AndesAe350BoardState;
+> > +
+> > +enum {
+> > +    ANDES_AE350_DEBUG,
+> > +    ANDES_AE350_MROM,
+> > +    ANDES_AE350_PLMT,
+> > +    ANDES_AE350_PLICSW,
+> > +    ANDES_AE350_PLIC,
+> > +    ANDES_AE350_UART1,
+> > +    ANDES_AE350_UART2,
+> > +    ANDES_AE350_DRAM,
+> > +    ANDES_AE350_GEM,
+> > +    ANDES_AE350_PIT,
+> > +    ANDES_AE350_SDC,
+> > +    ANDES_AE350_MAC,
+> > +    ANDES_AE350_VIRTIO,
+> > +};
+> > +
+> > +enum {
+> > +    ANDES_AE350_PIT_IRQ = 3,
+> > +    ANDES_AE350_UART1_IRQ = 8,
+> > +    ANDES_AE350_UART2_IRQ = 9,
+> > +    ANDES_AE350_SDC_IRQ = 18,
+> > +    ANDES_AE350_MAC_IRQ = 19,
+> > +    ANDES_AE350_GEM_IRQ = 0x35,
+> > +    ANDES_AE350_VIRTIO_COUNT = 8,
+> > +    ANDES_AE350_VIRTIO_IRQ = 16, /* 16 to 23 */
+> > +};
+> > +
+> > +#define ANDES_UART_REG_SHIFT    0x2
+> > +#define ANDES_UART_REG_OFFSET   0x20
+> > +
+> > +#if defined(TARGET_RISCV32)
+> > +#define VIRT_CPU TYPE_RISCV_CPU_BASE32
+> > +#elif defined(TARGET_RISCV64)
+> > +#define VIRT_CPU TYPE_RISCV_CPU_BASE64
+> > +#endif
+> > +
+> > +#endif /* HW_RISCV_ANDES_AE350_H */
+> > --
+> 
+> Please add a target guide in docs/system/riscv for this new board.
+
+OK.
+
+> Does it support running upstream U-Boot?
+> 
+
+The status is same as linux upstream.
+Will be support later.
+
+> Regards,
+> Bin
 
