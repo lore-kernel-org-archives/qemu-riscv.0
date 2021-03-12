@@ -1,73 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lKWHn-00048Q-P6
-	for mharc-qemu-riscv@gnu.org; Thu, 11 Mar 2021 20:08:15 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54936)
+	id 1lKeuY-0000GJ-16
+	for mharc-qemu-riscv@gnu.org; Fri, 12 Mar 2021 05:20:50 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39128)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lKWHm-00042G-5j; Thu, 11 Mar 2021 20:08:14 -0500
-Received: from mail-yb1-xb2d.google.com ([2607:f8b0:4864:20::b2d]:43630)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1lKeuW-0000D2-Qn
+ for qemu-riscv@nongnu.org; Fri, 12 Mar 2021 05:20:48 -0500
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a]:34767)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lKWHj-00025z-7h; Thu, 11 Mar 2021 20:08:13 -0500
-Received: by mail-yb1-xb2d.google.com with SMTP id u75so23643362ybi.10;
- Thu, 11 Mar 2021 17:08:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=HS0XhVstu4xXlZNqhDaAiK/bQ4Zzee8sNJeIiQEhU5A=;
- b=q/epgEOftjgdkM8HrL/Dt/3DibSYfE3IS9GJd536lOifhOt+Z/ZOk+zgmuNJj2GgX7
- TqnU42i3dGA8aIx3UxguZHgc6m/h6QVTuHCIfIF6Y3pZ9I5GP5F77K5LUSkTAa/GXgLF
- I+hFQ3CySyTdKl0cWMOoQWKKO0MqH2xeTLI6XdZTPcn1LGDOa2R7n3pBOAtX7x/8eMl3
- +hB1ncMm7aCgD14vGEdQbuWNRC+IvSOWTNmE69C2/r06mWTeqG708CCImAkDPQ3h7kkk
- QEb4EtKspFsv2bYgKpKFOXrRsQf93RM2U7xbrabzrjAlcmzmdXaNDo80J0u9dJwK+GZJ
- Orog==
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1lKeuJ-0005EQ-PD
+ for qemu-riscv@nongnu.org; Fri, 12 Mar 2021 05:20:48 -0500
+Received: by mail-ej1-x62a.google.com with SMTP id k16so2182591ejx.1
+ for <qemu-riscv@nongnu.org>; Fri, 12 Mar 2021 02:20:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=AclNMqw7+Oe33LgyQ1xDfyBQsCEaTssVfqb8h0Up9Xg=;
+ b=gvtJx4jbS3tbsx8zql/PG9nX6YWHCAHBFo/pXWyv733vRkUBu7VByp8bPzFrZ7F4It
+ Ye98IEYC5OsbGu/v137Lbshmsd1ioiLnVALfEccR9OxSqwzfPMdyKISE1tni5wpVjto1
+ Q38EJfBIoFvQa2ih8FMlyXEqTq2AqYqRb7ZXCyFB5ezsPkUJNSJUrj/RRUZyFGOc8Cr5
+ QSi69yZH2E7jHcK0bdzmMEfCJ514D5rCLSk+C3FIzl6+hhEqZ3Pgh59KnSoTDPA9maPD
+ GCJ1jjzao7K7Wl6bFqPLOGOcpgx6uiLx6fidBeSRVT66J+raL38+ZSFxy1NDktp1OF0T
+ 0pfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=HS0XhVstu4xXlZNqhDaAiK/bQ4Zzee8sNJeIiQEhU5A=;
- b=aeaxIrl8IeccMOZ+onLLHRjp2QPqtCGahej4aWpW/HpxmUIgYhYts5CGWpDUsSPIZF
- W3Lo8Fa4B+5FgN2AAQMfjBV665RvE04MCr+BkkX2YZ2Sz/c/Zob6QFdvZQ+V19ZVJhA9
- MaOMZb+sKjW5nLHCUBGPaNN6aCYtkcDhvvlujffbkS1MAN0twB1S2/6aUCX28N1Y9Y0u
- Xcyv0s+1niqhW7qTwxoojvrxBV1ehRYkIj2+Bb+U4H+FrrddMoPjfGDTeEZaPBxLvVw+
- IWP5G+MAUdQJTUddmOtwq9e0jHOGWNsBljFuQr7S7dhaJ3HtSrrwHKTDq4rtwYO33SjK
- gY6Q==
-X-Gm-Message-State: AOAM533GcfIFV567Q8mWpkNRpYaT6drTFRrCpZrtkcGaJA+C3yjvcKp3
- +inOh7xBQyqq+5NM7JxNswz+ggW0smEhnd22ycA=
-X-Google-Smtp-Source: ABdhPJwM1dsh+tVYUvlq+pvIU8SQGwuLkyPQaqD2jzA60p/PfX40poIFM9O/pxjmqbqGCz7bkmNLuV/Oan1G8Xvzpis=
-X-Received: by 2002:a25:d08d:: with SMTP id
- h135mr15809478ybg.122.1615511289654; 
- Thu, 11 Mar 2021 17:08:09 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=AclNMqw7+Oe33LgyQ1xDfyBQsCEaTssVfqb8h0Up9Xg=;
+ b=SV17rrWpb4FAF2e/XWxRedmR5se3f9yHzyWmC+eba8bdYrwjqrjUd+jcitK5xgnLza
+ EVXF1e7LjYvC72abD0xN3K8GLS567kGh+vXl3g+mhn88r/l0VI+Vl7draDMJWCshdPrI
+ 7LdpY7AaL3k2E4/r+88GtEHBQbuGYS7DukWPqAHZXRd5E8x1SGbMyy9f2Zjhh5bG0vFb
+ K1p0gImORplx5bJE6OAYiGhsI96PMBjPcOUJzHt1Opq87BYnlN8hpSVqo5+tiwIXs5/L
+ oDNGaiQoRzYkMe9p9DHC8SJJA+zRw8Nw2xzi9BiMkVHDtjW0WkDhhD2F45SpzIiPWy5K
+ yO2A==
+X-Gm-Message-State: AOAM532JBLJKybkPZMsbgB1ybSjmCCyJGNPw8JSZwId2q5lenSgjbs24
+ jf9HlnozA/qQxyN9wnn90zR7Cg==
+X-Google-Smtp-Source: ABdhPJwWP/KuQ4/4LZjE4Ciuh0uZiD5X5s+gleyQ4aWhvfx5LH0llGcGyZ84Qino8+GI5cN/K19rzw==
+X-Received: by 2002:a17:906:1b54:: with SMTP id
+ p20mr7630646ejg.307.1615544432429; 
+ Fri, 12 Mar 2021 02:20:32 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id e22sm2601168edu.61.2021.03.12.02.20.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Mar 2021 02:20:30 -0800 (PST)
+Received: from zen.lan (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id C03001FF87;
+ Fri, 12 Mar 2021 10:20:29 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: keithp@keithp.com, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Peter Maydell <peter.maydell@linaro.org>
+Subject: [PATCH  v5 1/5] semihosting: move semihosting tests to multiarch
+Date: Fri, 12 Mar 2021 10:20:25 +0000
+Message-Id: <20210312102029.17017-2-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210312102029.17017-1-alex.bennee@linaro.org>
+References: <20210312102029.17017-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-References: <20210310033358.30499-1-dylan@andestech.com>
- <20210310033358.30499-4-dylan@andestech.com>
- <CAEUhbmWAfYLuEOD_epjA=4d27JDV+iVdACOmj2B6PSR0Dg1wdQ@mail.gmail.com>
- <20210311065037.GA469@atcfdc88>
- <CAKmqyKPdyEjMdp36PjD-zP6LvnAzAi-00+4zASi3bRyRp=+k2A@mail.gmail.com>
-In-Reply-To: <CAKmqyKPdyEjMdp36PjD-zP6LvnAzAi-00+4zASi3bRyRp=+k2A@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 12 Mar 2021 09:07:58 +0800
-Message-ID: <CAEUhbmXkf3k6XN2JNYahA+TvoeQgp034mNFAQmJd+A++nkO+RQ@mail.gmail.com>
-Subject: Re: [PATCH 3/3] Andes AE350 RISC-V Machine
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Dylan Jhong <dylan@andestech.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "Alan Quey-Liang Kao(((((((((()" <alankao@andestech.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- "Ruinland Chuan-Tzu Tsa(((((((((()" <ruinland@andestech.com>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2d;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2d.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,336 +83,310 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2021 01:08:14 -0000
+X-List-Received-Date: Fri, 12 Mar 2021 10:20:49 -0000
 
-On Thu, Mar 11, 2021 at 11:47 PM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Thu, Mar 11, 2021 at 2:03 AM Dylan Jhong <dylan@andestech.com> wrote:
-> >
-> > On Wed, Mar 10, 2021 at 02:15:25PM +0800, Bin Meng wrote:
-> > > On Wed, Mar 10, 2021 at 11:36 AM Dylan Jhong <dylan@andestech.com> wrote:
-> > > >
-> > > > This provides a RISC-V Board based on Andes's AE350 specification.
-> > > > The following machine is implemented:
-> > > >
-> > > > - 'andes_ae350'; PLIC, PLICSW, PLMT, 16550a UART, VirtIO MMIO, device-tree
-> > >
-> > > Is this a virtual target because virtio is added? Or does the hardware
-> > > provide the virtio programming interface?
-> >
-> > Andes ae350 is an FPGA evaluation board with many Andes's peripheral devices,
-> > but we only provide the most basic functions in the qemu version of ae350.
-> > Because we hope that customers can quickly develop and evaluate before getting the real ae350 board,
-> > so we use virtio to replace some peripheral devices.
->
-> I don't think that's a good idea. The QEMU model should match the
-> hardware device.
->
+It may be arm-compat-semihosting but more than one architecture uses
+it so lets move the tests into the multiarch area. We gate it on the
+feature and split the semicall.h header between the arches.
 
-Agree. It is very confusing to add a virtio to a machine that has a
-real world board.
+Also clean-up a bit of the Makefile messing about to one common set of
+runners.
 
-> >
-> > >
-> > > >
-> > > > Signed-off-by: Dylan Jhong <dylan@andestech.com>
-> > > > Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
-> > > > ---
-> > > >  default-configs/devices/riscv32-softmmu.mak |   1 +
-> > > >  default-configs/devices/riscv64-softmmu.mak |   1 +
-> > > >  hw/riscv/Kconfig                            |   7 +
-> > > >  hw/riscv/andes_ae350.c                      | 501 ++++++++++++++++++++
-> > > >  hw/riscv/meson.build                        |   1 +
-> > > >  include/hw/riscv/andes_ae350.h              |  93 ++++
-> > > >  6 files changed, 604 insertions(+)
-> > > >  create mode 100644 hw/riscv/andes_ae350.c
-> > > >  create mode 100644 include/hw/riscv/andes_ae350.h
-> > > >
-> > > > diff --git a/default-configs/devices/riscv32-softmmu.mak b/default-configs/devices/riscv32-softmmu.mak
-> > > > index d847bd5692..a268007e72 100644
-> > > > --- a/default-configs/devices/riscv32-softmmu.mak
-> > > > +++ b/default-configs/devices/riscv32-softmmu.mak
-> > > > @@ -8,6 +8,7 @@ CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
-> > > >
-> > > >  # Boards:
-> > > >  #
-> > > > +CONFIG_ANDES_AE350=y
-> > > >  CONFIG_SPIKE=y
-> > > >  CONFIG_SIFIVE_E=y
-> > > >  CONFIG_SIFIVE_U=y
-> > > > diff --git a/default-configs/devices/riscv64-softmmu.mak b/default-configs/devices/riscv64-softmmu.mak
-> > > > index d5eec75f05..9a37dfd8c0 100644
-> > > > --- a/default-configs/devices/riscv64-softmmu.mak
-> > > > +++ b/default-configs/devices/riscv64-softmmu.mak
-> > > > @@ -8,6 +8,7 @@ CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
-> > > >
-> > > >  # Boards:
-> > > >  #
-> > > > +CONFIG_ANDES_AE350=y
-> > > >  CONFIG_SPIKE=y
-> > > >  CONFIG_SIFIVE_E=y
-> > > >  CONFIG_SIFIVE_U=y
-> > > > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> > > > index d139074b02..04f6369ab7 100644
-> > > > --- a/hw/riscv/Kconfig
-> > > > +++ b/hw/riscv/Kconfig
-> > > > @@ -1,6 +1,13 @@
-> > > >  config IBEX
-> > > >      bool
-> > > >
-> > > > +config ANDES_AE350
-> > >
-> > > This needs to be sorted in alphabetical order
-> > >
-> >
-> > Thanks, this will be fixed in V2.
-> >
-> > > > +    bool
-> > > > +    select SERIAL
-> > > > +    select VIRTIO_MMIO
-> > > > +    select ANDES_PLIC
-> > > > +    select ANDES_PLMT
-> > > > +
-> > > >  config MICROCHIP_PFSOC
-> > > >      bool
-> > > >      select CADENCE_SDHCI
-> > > > diff --git a/hw/riscv/andes_ae350.c b/hw/riscv/andes_ae350.c
-> > > > new file mode 100644
-> > > > index 0000000000..ed5f9701ad
-> > > > --- /dev/null
-> > > > +++ b/hw/riscv/andes_ae350.c
-> > > > @@ -0,0 +1,501 @@
-> > > > +/*
-> > > > + * Andes RISC-V AE350 Board
-> > > > + *
-> > > > + * Copyright (c) 2021 Andes Tech. Corp.
-> > > > + *
-> > > > + * Andes AE350 Board supports ns16550a UART and VirtIO MMIO.
-> > > > + * The interrupt controllers are andes PLIC and andes PLICSW.
-> > > > + * Timer is Andes PLMT.
-> > > > + *
-> > > > + * This program is free software; you can redistribute it and/or modify it
-> > > > + * under the terms and conditions of the GNU General Public License,
-> > > > + * version 2 or later, as published by the Free Software Foundation.
-> > > > + *
-> > > > + * This program is distributed in the hope it will be useful, but WITHOUT
-> > > > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> > > > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> > > > + * more details.
-> > > > + *
-> > > > + * You should have received a copy of the GNU General Public License along with
-> > > > + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> > > > + */
-> > > > +
-> > > > +#include "qemu/osdep.h"
-> > > > +#include "qemu/units.h"
-> > > > +#include "qemu/log.h"
-> > > > +#include "qemu/error-report.h"
-> > > > +#include "qapi/error.h"
-> > > > +#include "hw/boards.h"
-> > > > +#include "hw/loader.h"
-> > > > +#include "hw/sysbus.h"
-> > > > +#include "hw/qdev-properties.h"
-> > > > +#include "hw/char/serial.h"
-> > > > +#include "target/riscv/cpu.h"
-> > > > +#include "hw/riscv/riscv_hart.h"
-> > > > +#include "hw/riscv/boot.h"
-> > > > +#include "hw/riscv/numa.h"
-> > > > +#include "chardev/char.h"
-> > > > +#include "sysemu/arch_init.h"
-> > > > +#include "sysemu/device_tree.h"
-> > > > +#include "sysemu/sysemu.h"
-> > > > +#include "hw/pci/pci.h"
-> > > > +#include "hw/pci-host/gpex.h"
-> > > > +
-> > > > +#include "hw/intc/andes_plic.h"
-> > > > +#include "hw/timer/andes_plmt.h"
-> > > > +#include "hw/riscv/andes_ae350.h"
-> > > > +
-> > > > +# define BIOS_FILENAME ""
-> > > > +
-> > > > +static const struct MemmapEntry {
-> > > > +    hwaddr base;
-> > > > +    hwaddr size;
-> > > > +} andes_ae350_memmap[] = {
-> > > > +    [ANDES_AE350_DEBUG]     = { 0x00000000,      0x100 },
-> > > > +    [ANDES_AE350_DRAM]      = { 0x00000000, 0x80000000 },
-> > > > +    [ANDES_AE350_MROM]      = { 0xb0000000,   0x100000 },
-> > > > +    [ANDES_AE350_MAC]       = { 0xe0100000,   0x100000 },
-> > > > +    [ANDES_AE350_GEM]       = { 0xe0200000,   0x100000 },
-> > > > +    [ANDES_AE350_PLIC]      = { 0xe4000000,   0x400000 },
-> > > > +    [ANDES_AE350_PLMT]      = { 0xe6000000,   0x100000 },
-> > > > +    [ANDES_AE350_PLICSW]    = { 0xe6400000,   0x400000 },
-> > > > +    [ANDES_AE350_UART1]     = { 0xf0200000,      0x100 },
-> > > > +    [ANDES_AE350_UART2]     = { 0xf0300000,      0x100 },
-> > > > +    [ANDES_AE350_PIT]       = { 0xf0400000,   0x100000 },
-> > > > +    [ANDES_AE350_SDC]       = { 0xf0e00000,   0x100000 },
-> > > > +    [ANDES_AE350_VIRTIO]    = { 0xfe000000,     0x1000 },
-> > > > +};
-> > > > +
-> > > > +static void
-> > > > +create_fdt(AndesAe350BoardState *bs, const struct MemmapEntry *memmap,
-> > > > +    uint64_t mem_size, const char *cmdline)
-> > > > +{
-> > > > +    AndesAe350SocState *s = &bs->soc;
-> > > > +    MachineState *ms = MACHINE(qdev_get_machine());
-> > > > +    void *fdt;
-> > > > +    int cpu, i;
-> > > > +    uint64_t mem_addr;
-> > > > +    uint32_t *plic_irq_ext, *plicsw_irq_ext, *plmt_irq_ext;
-> > > > +    unsigned long plic_addr, plicsw_addr, plmt_addr;
-> > > > +    char *plic_name, *plicsw_name, *plmt_name;
-> > > > +    uint32_t intc_phandle = 0, plic_phandle = 0;
-> > > > +    uint32_t phandle = 1;
-> > > > +    char *isa_name, *mem_name, *cpu_name, *intc_name, *uart_name, *virtio_name;
-> > > > +
-> > > > +    if (ms->dtb) {
-> > > > +        fdt = bs->fdt = load_device_tree(ms->dtb, &bs->fdt_size);
-> > > > +        if (!fdt) {
-> > > > +            error_report("load_device_tree() failed");
-> > > > +            exit(1);
-> > > > +        }
-> > > > +        goto update_bootargs;
-> > > > +    } else {
-> > > > +        fdt = bs->fdt = create_device_tree(&bs->fdt_size);
-> > > > +        if (!fdt) {
-> > > > +            error_report("create_device_tree() failed");
-> > > > +            exit(1);
-> > > > +        }
-> > > > +    }
-> > > > +
-> > > > +    qemu_fdt_setprop_string(fdt, "/", "model", "Andes AE350 Board");
-> > > > +    qemu_fdt_setprop_string(fdt, "/", "compatible", "andestech,ae350");
-> > > > +    qemu_fdt_setprop_cell(fdt, "/", "#size-cells", 0x2);
-> > > > +    qemu_fdt_setprop_cell(fdt, "/", "#address-cells", 0x2);
-> > > > +
-> > > > +    qemu_fdt_add_subnode(fdt, "/soc");
-> > > > +    qemu_fdt_setprop(fdt, "/soc", "ranges", NULL, 0);
-> > > > +    qemu_fdt_setprop_string(fdt, "/soc", "compatible", "simple-bus");
-> > > > +    qemu_fdt_setprop_cell(fdt, "/soc", "#size-cells", 0x2);
-> > > > +    qemu_fdt_setprop_cell(fdt, "/soc", "#address-cells", 0x2);
-> > > > +
-> > > > +    qemu_fdt_add_subnode(fdt, "/cpus");
-> > > > +    qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
-> > > > +                          ANDES_PLMT_TIMEBASE_FREQ);
-> > > > +    qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
-> > > > +    qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
-> > > > +    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
-> > > > +
-> > > > +    plic_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 4);
-> > > > +    plicsw_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 2);
-> > > > +    plmt_irq_ext = g_new0(uint32_t, s->cpus.num_harts * 2);
-> > > > +
-> > > > +    for (cpu = 0; cpu < s->cpus.num_harts; cpu++) {
-> > > > +        intc_phandle = phandle++;
-> > > > +
-> > > > +        cpu_name = g_strdup_printf("/cpus/cpu@%d",
-> > > > +            s->cpus.hartid_base + cpu);
-> > > > +        qemu_fdt_add_subnode(fdt, cpu_name);
-> > > > +#if defined(TARGET_RISCV32)
-> > > > +        qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
-> > > > +#else
-> > > > +        qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv39");
-> > > > +#endif
-> > > > +        isa_name = riscv_isa_string(&s->cpus.harts[cpu]);
-> > > > +        qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa", isa_name);
-> > > > +        g_free(isa_name);
-> > > > +        qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
-> > > > +        qemu_fdt_setprop_string(fdt, cpu_name, "status", "okay");
-> > > > +        qemu_fdt_setprop_cell(fdt, cpu_name, "reg",
-> > > > +            s->cpus.hartid_base + cpu);
-> > > > +        qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
-> > > > +
-> > > > +        intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
-> > > > +        qemu_fdt_add_subnode(fdt, intc_name);
-> > > > +        qemu_fdt_setprop_cell(fdt, intc_name, "phandle", intc_phandle);
-> > > > +        qemu_fdt_setprop_string(fdt, intc_name, "compatible",
-> > > > +            "riscv,cpu-intc");
-> > > > +        qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
-> > > > +        qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
-> > > > +
-> > > > +        plic_irq_ext[cpu * 4 + 0] = cpu_to_be32(intc_phandle);
-> > > > +        plic_irq_ext[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
-> > > > +        plic_irq_ext[cpu * 4 + 2] = cpu_to_be32(intc_phandle);
-> > > > +        plic_irq_ext[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
-> > > > +
-> > > > +        plicsw_irq_ext[cpu * 2 + 0] = cpu_to_be32(intc_phandle);
-> > > > +        plicsw_irq_ext[cpu * 2 + 1] = cpu_to_be32(IRQ_M_SOFT);
-> > > > +
-> > > > +        plmt_irq_ext[cpu * 2 + 0] = cpu_to_be32(intc_phandle);
-> > > > +        plmt_irq_ext[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
-> > > > +
-> > > > +        g_free(intc_name);
-> > > > +    }
-> > > > +
-> > > > +    mem_addr = memmap[ANDES_AE350_DRAM].base;
-> > > > +    mem_name = g_strdup_printf("/memory@%lx", (long)mem_addr);
-> > > > +    qemu_fdt_add_subnode(fdt, mem_name);
-> > > > +    qemu_fdt_setprop_cells(fdt, mem_name, "reg",
-> > > > +        mem_addr >> 32, mem_addr, mem_size >> 32, mem_size);
-> > > > +    qemu_fdt_setprop_string(fdt, mem_name, "device_type", "memory");
-> > > > +    g_free(mem_name);
-> > > > +
-> > > > +    /* create plic */
-> > > > +    plic_phandle = phandle++;
-> > > > +    plic_addr = memmap[ANDES_AE350_PLIC].base;
-> > > > +    plic_name = g_strdup_printf("/soc/interrupt-controller@%lx", plic_addr);
-> > > > +    qemu_fdt_add_subnode(fdt, plic_name);
-> > > > +    qemu_fdt_setprop_cell(fdt, plic_name,
-> > > > +        "#address-cells", 0x2);
-> > > > +    qemu_fdt_setprop_cell(fdt, plic_name,
-> > > > +        "#interrupt-cells", 0x2);
-> > > > +    qemu_fdt_setprop_string(fdt, plic_name, "compatible", "riscv,plic0");
-> > >
-> > > This suggests PLIC is the same as the SiFive one. So why do we have a
-> > > different implementation of the PLIC model?
-> > >
-> >
-> > The difference of these two PLICs, please refer to my reply of "[PATCH 1/3] Andes RISC-V PLIC"
-> >
-> > > > +    qemu_fdt_setprop(fdt, plic_name, "interrupt-controller", NULL, 0);
-> > > > +    qemu_fdt_setprop(fdt, plic_name, "interrupts-extended",
-> > > > +        plic_irq_ext, s->cpus.num_harts * sizeof(uint32_t) * 4);
-> > > > +    qemu_fdt_setprop_cells(fdt, plic_name, "reg",
-> > > > +        0x0, plic_addr, 0x0, memmap[ANDES_AE350_PLIC].size);
-> > > > +    qemu_fdt_setprop_cell(fdt, plic_name, "riscv,ndev", 0x47);
-> > > > +    qemu_fdt_setprop_cell(fdt, plic_name, "phandle", plic_phandle);
-> > > > +    g_free(plic_name);
-> > > > +    g_free(plic_irq_ext);
-> > > > +
-> > > > +    /* create plicsw */
-> > > > +    plicsw_addr = memmap[ANDES_AE350_PLICSW].base;
-> > > > +    plicsw_name = g_strdup_printf("/soc/interrupt-controller@%lx", plicsw_addr);
-> > > > +    qemu_fdt_add_subnode(fdt, plicsw_name);
-> > > > +    qemu_fdt_setprop_cell(fdt, plicsw_name,
-> > > > +        "#address-cells", 0x2);
-> > > > +    qemu_fdt_setprop_cell(fdt, plicsw_name,
-> > > > +        "#interrupt-cells", 0x2);
-> > > > +    qemu_fdt_setprop_string(fdt, plicsw_name, "compatible", "riscv,plic1");
-> > >
-> > > Is this bindings in the Linux kernel upstream? I can't find any
-> > > reference in the kernel tree.
-> > >
-> >
-> > Currently only supports andes Linux BSP,
-> > we have plans to push to linux upstream in the future.
->
-> This raises a good question about device tree bindings being generated
-> from QEMU.
->
-> Do we want QEMU to generate a DT that doesn't have matching bindings?
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 
-I'd prefer new bindings are sent to kernel upstream to get it reviewed
-there first. It might not just be the compatible string, but some
-other properties that may change.
+---
+v5
+  - add to MAINTAINERS
+---
+ tests/tcg/aarch64/semicall.h                  | 18 +++++++++++
+ tests/tcg/arm/semicall.h                      | 15 +--------
+ tests/tcg/riscv64/semicall.h                  | 22 +++++++++++++
+ .../arm-compat-semi}/semiconsole.c            |  2 ++
+ .../arm-compat-semi}/semihosting.c            |  5 ++-
+ MAINTAINERS                                   |  1 +
+ tests/tcg/Makefile.target                     |  3 ++
+ tests/tcg/aarch64/Makefile.target             | 18 -----------
+ tests/tcg/arm/Makefile.target                 | 16 ++--------
+ tests/tcg/multiarch/Makefile.target           | 31 +++++++++++++++++++
+ 10 files changed, 84 insertions(+), 47 deletions(-)
+ create mode 100644 tests/tcg/aarch64/semicall.h
+ create mode 100644 tests/tcg/riscv64/semicall.h
+ rename tests/tcg/{arm => multiarch/arm-compat-semi}/semiconsole.c (93%)
+ rename tests/tcg/{arm => multiarch/arm-compat-semi}/semihosting.c (85%)
 
->
-> I guess if the bindings change during the upstream process we can just
-> add a second compatible string.
->
-> Also if there is no upstream support how can I test the board?
->
+diff --git a/tests/tcg/aarch64/semicall.h b/tests/tcg/aarch64/semicall.h
+new file mode 100644
+index 0000000000..8a3fce35c5
+--- /dev/null
++++ b/tests/tcg/aarch64/semicall.h
+@@ -0,0 +1,18 @@
++/*
++ * Semihosting Tests - AArch64 helper
++ *
++ * Copyright (c) 2019
++ * Written by Alex Bennée <alex.bennee@linaro.org>
++ *
++ * SPDX-License-Identifier: GPL-3.0-or-later
++ */
++
++uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
++{
++    register uintptr_t t asm("x0") = type;
++    register uintptr_t a0 asm("x1") = arg0;
++    asm("hlt 0xf000"
++        : "=r" (t)
++        : "r" (t), "r" (a0));
++    return t;
++}
+diff --git a/tests/tcg/arm/semicall.h b/tests/tcg/arm/semicall.h
+index d4f6818192..ad8ac51310 100644
+--- a/tests/tcg/arm/semicall.h
++++ b/tests/tcg/arm/semicall.h
+@@ -1,5 +1,5 @@
+ /*
+- * Semihosting Tests
++ * Semihosting Tests - ARM Helper
+  *
+  * Copyright (c) 2019
+  * Written by Alex Bennée <alex.bennee@linaro.org>
+@@ -7,13 +7,8 @@
+  * SPDX-License-Identifier: GPL-3.0-or-later
+  */
+ 
+-#define SYS_WRITE0      0x04
+-#define SYS_READC       0x07
+-#define SYS_REPORTEXC   0x18
+-
+ uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
+ {
+-#if defined(__arm__)
+     register uintptr_t t asm("r0") = type;
+     register uintptr_t a0 asm("r1") = arg0;
+ #ifdef __thumb__
+@@ -23,13 +18,5 @@ uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
+ #endif
+     asm(SVC : "=r" (t)
+         : "r" (t), "r" (a0));
+-#else
+-    register uintptr_t t asm("x0") = type;
+-    register uintptr_t a0 asm("x1") = arg0;
+-    asm("hlt 0xf000"
+-        : "=r" (t)
+-        : "r" (t), "r" (a0));
+-#endif
+-
+     return t;
+ }
+diff --git a/tests/tcg/riscv64/semicall.h b/tests/tcg/riscv64/semicall.h
+new file mode 100644
+index 0000000000..f8c88f32dc
+--- /dev/null
++++ b/tests/tcg/riscv64/semicall.h
+@@ -0,0 +1,22 @@
++/*
++ * Semihosting Tests - RiscV64 Helper
++ *
++ * Copyright (c) 2021
++ * Written by Alex Bennée <alex.bennee@linaro.org>
++ *
++ * SPDX-License-Identifier: GPL-3.0-or-later
++ */
++
++uintptr_t __semi_call(uintptr_t type, uintptr_t arg0)
++{
++    register uintptr_t t asm("a0") = type;
++    register uintptr_t a0 asm("a1") = arg0;
++    asm(".option norvc\n\t"
++        ".balign 16\n\t"
++        "slli zero, zero, 0x1f\n\t"
++        "ebreak\n\t"
++        "srai zero, zero, 0x7\n\t"
++        : "=r" (t)
++        : "r" (t), "r" (a0));
++    return t;
++}
+diff --git a/tests/tcg/arm/semiconsole.c b/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
+similarity index 93%
+rename from tests/tcg/arm/semiconsole.c
+rename to tests/tcg/multiarch/arm-compat-semi/semiconsole.c
+index 6ef0bd2450..1d82efc589 100644
+--- a/tests/tcg/arm/semiconsole.c
++++ b/tests/tcg/multiarch/arm-compat-semi/semiconsole.c
+@@ -7,6 +7,8 @@
+  * SPDX-License-Identifier: GPL-3.0-or-later
+  */
+ 
++#define SYS_READC       0x07
++
+ #include <stdio.h>
+ #include <stdint.h>
+ #include "semicall.h"
+diff --git a/tests/tcg/arm/semihosting.c b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
+similarity index 85%
+rename from tests/tcg/arm/semihosting.c
+rename to tests/tcg/multiarch/arm-compat-semi/semihosting.c
+index 33faac9916..b3fd16cd12 100644
+--- a/tests/tcg/arm/semihosting.c
++++ b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
+@@ -7,12 +7,15 @@
+  * SPDX-License-Identifier: GPL-3.0-or-later
+  */
+ 
++#define SYS_WRITE0      0x04
++#define SYS_REPORTEXC   0x18
++
+ #include <stdint.h>
+ #include "semicall.h"
+ 
+ int main(int argc, char *argv[argc])
+ {
+-#if defined(__arm__)
++#if UINTPTR_MAX == UINT32_MAX
+     uintptr_t exit_code = 0x20026;
+ #else
+     uintptr_t exit_block[2] = {0x20026, 0};
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 8e9f0d591e..0af92aea8f 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -3264,6 +3264,7 @@ M: Alex Bennée <alex.bennee@linaro.org>
+ S: Maintained
+ F: semihosting/
+ F: include/semihosting/
++F: tests/tcg/multiarch/arm-compat-semi/
+ 
+ Multi-process QEMU
+ M: Elena Ufimtseva <elena.ufimtseva@oracle.com>
+diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
+index 24d75a5801..cab8c6b3a2 100644
+--- a/tests/tcg/Makefile.target
++++ b/tests/tcg/Makefile.target
+@@ -32,6 +32,9 @@
+ all:
+ -include ../../../config-host.mak
+ -include ../config-$(TARGET).mak
++ifeq ($(CONFIG_USER_ONLY),y)
++-include $(SRC_PATH)/default-configs/targets/$(TARGET).mak
++endif
+ 
+ # for including , in command strings
+ COMMA := ,
+diff --git a/tests/tcg/aarch64/Makefile.target b/tests/tcg/aarch64/Makefile.target
+index bf53ad0087..56e48f4b34 100644
+--- a/tests/tcg/aarch64/Makefile.target
++++ b/tests/tcg/aarch64/Makefile.target
+@@ -41,24 +41,6 @@ AARCH64_TESTS += mte-1 mte-2 mte-3 mte-4
+ mte-%: CFLAGS += -march=armv8.5-a+memtag
+ endif
+ 
+-# Semihosting smoke test for linux-user
+-AARCH64_TESTS += semihosting
+-run-semihosting: semihosting
+-	$(call run-test,$<,$(QEMU) $< 2> $<.err, "$< on $(TARGET_NAME)")
+-
+-run-plugin-semihosting-with-%:
+-	$(call run-test, $@, $(QEMU) $(QEMU_OPTS) \
+-		-plugin $(PLUGIN_LIB)/$(call extract-plugin,$@) \
+-		 $(call strip-plugin,$<) 2> $<.err, \
+-		"$< on $(TARGET_NAME) with $*")
+-
+-AARCH64_TESTS += semiconsole
+-run-semiconsole: semiconsole
+-	$(call skip-test, $<, "MANUAL ONLY")
+-
+-run-plugin-semiconsole-with-%:
+-	$(call skip-test, $<, "MANUAL ONLY")
+-
+ ifneq ($(DOCKER_IMAGE)$(CROSS_CC_HAS_SVE),)
+ # System Registers Tests
+ AARCH64_TESTS += sysregs
+diff --git a/tests/tcg/arm/Makefile.target b/tests/tcg/arm/Makefile.target
+index ec95156562..1deda384df 100644
+--- a/tests/tcg/arm/Makefile.target
++++ b/tests/tcg/arm/Makefile.target
+@@ -30,37 +30,25 @@ run-fcvt: fcvt
+ 	$(call diff-out,fcvt,$(ARM_SRC)/fcvt.ref)
+ 
+ # Semihosting smoke test for linux-user
+-ARM_TESTS += semihosting
+ semihosting: CFLAGS += -mthumb
+-run-semihosting: semihosting
+-	$(call run-test,$<,$(QEMU) $< 2> $<.err, "$< on $(TARGET_NAME)")
+ 
+ ARM_TESTS += semihosting-arm
+ semihosting-arm: CFLAGS += -marm
+-semihosting-arm: semihosting.c
+-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS)
+ 
+ run-semihosting-arm: semihosting-arm
+ 	$(call run-test,$<,$(QEMU) $< 2> $<.err, "$< on $(TARGET_NAME)")
+ 
+-run-plugin-semihosting-with-%:
++run-plugin-semihosting-arm-with-%:
+ 	$(call run-test, $@, $(QEMU) $(QEMU_OPTS) \
+ 		-plugin $(PLUGIN_LIB)/$(call extract-plugin,$@) \
+ 		 $(call strip-plugin,$<) 2> $<.err, \
+ 		"$< on $(TARGET_NAME) with $*")
+ 
+-ARM_TESTS += semiconsole semiconsole-arm
++ARM_TESTS += semiconsole-arm
+ 
+ semiconsole: CFLAGS += -mthumb
+-run-semiconsole: semiconsole
+-	$(call skip-test, $<, "MANUAL ONLY")
+-
+-run-plugin-semiconsole-with-%:
+-	$(call skip-test, $<, "MANUAL ONLY")
+ 
+ semiconsole-arm: CFLAGS += -marm
+-semiconsole-arm: semiconsole.c
+-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $< -o $@ $(LDFLAGS)
+ 
+ run-semiconsole-arm: semiconsole-arm
+ 	$(call skip-test, $<, "MANUAL ONLY")
+diff --git a/tests/tcg/multiarch/Makefile.target b/tests/tcg/multiarch/Makefile.target
+index abbdb2e126..a3a751723d 100644
+--- a/tests/tcg/multiarch/Makefile.target
++++ b/tests/tcg/multiarch/Makefile.target
+@@ -69,6 +69,37 @@ run-gdbstub-%:
+ endif
+ EXTRA_RUNS += run-gdbstub-sha1 run-gdbstub-qxfer-auxv-read
+ 
++# ARM Compatible Semi Hosting Tests
++#
++# Despite having ARM in the name we actually have several
++# architectures that implement it. We gate the tests on the feature
++# appearing in config.
++#
++ifeq ($(CONFIG_ARM_COMPATIBLE_SEMIHOSTING),y)
++VPATH += $(MULTIARCH_SRC)/arm-compat-semi
++
++# Add -I path back to TARGET_NAME for semicall.h
++semihosting: CFLAGS+=-I$(SRC_PATH)/tests/tcg/$(TARGET_NAME)
++
++run-semihosting: semihosting
++	$(call run-test,$<,$(QEMU) $< 2> $<.err, "$< on $(TARGET_NAME)")
++
++run-plugin-semihosting-with-%:
++	$(call run-test, $@, $(QEMU) $(QEMU_OPTS) \
++		-plugin $(PLUGIN_LIB)/$(call extract-plugin,$@) \
++		 $(call strip-plugin,$<) 2> $<.err, \
++		"$< on $(TARGET_NAME) with $*")
++
++semiconsole: CFLAGS+=-I$(SRC_PATH)/tests/tcg/$(TARGET_NAME)
++
++run-semiconsole: semiconsole
++	$(call skip-test, $<, "MANUAL ONLY")
++
++run-plugin-semiconsole-with-%:
++	$(call skip-test, $<, "MANUAL ONLY")
++
++TESTS += semihosting semiconsole
++endif
+ 
+ # Update TESTS
+ TESTS += $(MULTIARCH_TESTS)
+-- 
+2.20.1
 
-Regards,
-Bin
 
