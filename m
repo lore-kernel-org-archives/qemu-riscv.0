@@ -1,65 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lKeuZ-0000Le-Me
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Mar 2021 05:20:51 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39058)
+	id 1lKeua-0000On-N8
+	for mharc-qemu-riscv@gnu.org; Fri, 12 Mar 2021 05:20:52 -0500
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39162)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1lKeuU-00007R-0Y
- for qemu-riscv@nongnu.org; Fri, 12 Mar 2021 05:20:46 -0500
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629]:41437)
+ id 1lKeuY-0000HJ-9l
+ for qemu-riscv@nongnu.org; Fri, 12 Mar 2021 05:20:50 -0500
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635]:42930)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1lKeuJ-0005EE-5i
- for qemu-riscv@nongnu.org; Fri, 12 Mar 2021 05:20:45 -0500
-Received: by mail-ej1-x629.google.com with SMTP id lr13so52369701ejb.8
- for <qemu-riscv@nongnu.org>; Fri, 12 Mar 2021 02:20:32 -0800 (PST)
+ id 1lKeuR-0005Hu-Uj
+ for qemu-riscv@nongnu.org; Fri, 12 Mar 2021 05:20:49 -0500
+Received: by mail-ej1-x635.google.com with SMTP id c10so52245523ejx.9
+ for <qemu-riscv@nongnu.org>; Fri, 12 Mar 2021 02:20:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=7m175x/89IYovvE0alvawrCLn8AfRPZq9j4HkwrcQjw=;
- b=xsvsydy9RgYTkTqEOR95wHyEbC/b+PyZWO8z8wMObfnQTZnUiTaaS8JPlMS2bNm/4e
- HNrUkGGdNNjkEa3DV/cu+C84A6yRWTUC3f/XHcHMk12wyp44r3YDn4GDQNLYqdR9GkmU
- 1EDOVpfN0Wk6eJKFeccq0bSsmm+roSIN7Sa1NEzqz8DP7A/oGriwqAcFAbwRQXLM2KwK
- bw9x8I3Aa9oAudDJlo8jdgKQOQhl8Qk9Jx3mmKOcgrybjU8h6kRF3t8Pe0lOslQS49mC
- 9Lvr8tch2MnvtuKQnH/HfuyxROCu9drSxIOoEd0DLka3LIntmAh1YVYyXjcM6+IyArYo
- HKvQ==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=04vjAEipaNiQpWFMv2ryUkypG9qXG22abGmmoD11u5Y=;
+ b=g+sEHs6JvOdFqzo7teYpgdz5WRwfwTRfG3JTSDqNBCZKP3a+UaYpyEj/LeHRSOKJzO
+ 5eckSvsG4UpP8KcXfc7cn/xDBNmrJuXFMUKgjNpX9aTmRKHEpH1BsbssGn+3tt7W2UVv
+ 8ifL4VWXpdCrycMZjH1Xa49nRaKmMJ+FtDD+gGVXr4A2/nQCt7NwL4cp60YF4ULDjBqY
+ d3GBpPtPhrhG7O5UrasALB65BwsNuVQh/O4Amx2LCAaHqrW1QKjA/QWtjapxeo7KR9I5
+ DAD6Dail61G+3mBnfIO1841aiM+9D4LSi6oVQtbfB6u/YUhIPGasSPd1Uz7L05eWc08T
+ /EUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=7m175x/89IYovvE0alvawrCLn8AfRPZq9j4HkwrcQjw=;
- b=S+WY/Ai5JC6chKnjQ3ZiDzw8s0/wtD9IZoWIRiYrFyld2/nWHRO+3ALbz8oczglndS
- z7ESRIdAPyXJ+0XBPoIMmcJ+DrJ+9FiVj6yuas0eGEuI4UrPpdllMpNDbcB5HmbiT4Rb
- wvRF2v8o5ZKnCaA0cGgdG9RuJyLyJ/1vAle57Tqri3kUwhK+yub8zDXAA9tmbpaUqf9P
- pXf1lcsgE6BvFA8VLBp82M/v4RJvOIKauD0zSalXoAYPyl/1LWcCfMTNDI1NB2JpMno4
- GAEElO6PmHe4OF7/FtGQQNyFWwwG+kLYmu57gszI/GyUc/Bz2uFJvVFK5J52fScCt0ww
- baEQ==
-X-Gm-Message-State: AOAM532s0SC4WZX9KaXPvflloKEcnu5/QIets3Qym9Y3f5tbuwJ5JXAr
- 5F4ePkUUnwlMXMPEYrSVeDwdzQ==
-X-Google-Smtp-Source: ABdhPJxqqTS7Mfqn6VvqKeUPhAjLiwMdhdXjcDcUxCwZ4eufo7LJ/XnThml6O8OLffkg7hu2+wmwGA==
-X-Received: by 2002:a17:906:19d9:: with SMTP id
- h25mr7994557ejd.453.1615544431614; 
- Fri, 12 Mar 2021 02:20:31 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=04vjAEipaNiQpWFMv2ryUkypG9qXG22abGmmoD11u5Y=;
+ b=Kt5tkj9eOzmJtSdraIMOc4lvK9ZL84OeD15Fp2ASx67bqPueasTVsgJRRnF0w8gWDW
+ PtEHE/I+ROrc9PJLknyfi5WHRVBG0v0Sr1MZEfOPeQCwWe2HYXmDChI5ejF59Q+gX2hz
+ Ku6BPhCjA0l+qJAO8gU1DUxAwjRTblzXxJfC3UAshUgFVm9CkZ5DPoKrwV5IEOtOBANR
+ pFSz8B7lCG8JVF17Jc5LLRuG644CKof1aNW53EBd1aAFX8HuBX22dKihxa27TCBlQDa5
+ RudXr2ksEbvEy9yeIM+lQ3P7xoaVJKjK3dO+8bC24dFWloS8Ct3KWXuj2lvIQ4GS3nEF
+ VWCA==
+X-Gm-Message-State: AOAM5321N9ZiXKmQGdmTpjlGoXQ9WRS2Noqhy4zFg734mnTRVHJCl8v5
+ PuT1Am6sjVL9RiAJb5CoDNMp3OVJWuzo3A==
+X-Google-Smtp-Source: ABdhPJzfiQeHdh9e/L+zDVNXLvro2BAZ2mNp32CC2R6iNeUFt0/LNiocd2wjbRh6cH5GbUXDAgZLjQ==
+X-Received: by 2002:a17:906:5498:: with SMTP id
+ r24mr7889675ejo.29.1615544438130; 
+ Fri, 12 Mar 2021 02:20:38 -0800 (PST)
 Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id qo25sm2528274ejb.93.2021.03.12.02.20.30
+ by smtp.gmail.com with ESMTPSA id d6sm2530500eje.20.2021.03.12.02.20.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Mar 2021 02:20:30 -0800 (PST)
+ Fri, 12 Mar 2021 02:20:36 -0800 (PST)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 96EFF1FF7E;
- Fri, 12 Mar 2021 10:20:29 +0000 (GMT)
+ by zen.linaroharston (Postfix) with ESMTP id 28A9B1FF91;
+ Fri, 12 Mar 2021 10:20:30 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: keithp@keithp.com, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH  v5 0/5] semihosting/next (SYS_HEAPINFO)
-Date: Fri, 12 Mar 2021 10:20:24 +0000
-Message-Id: <20210312102029.17017-1-alex.bennee@linaro.org>
+Subject: [PATCH  v5 5/5] tests/tcg: add HeapInfo checking to semihosting test
+Date: Fri, 12 Mar 2021 10:20:29 +0000
+Message-Id: <20210312102029.17017-6-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210312102029.17017-1-alex.bennee@linaro.org>
+References: <20210312102029.17017-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x629.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -79,49 +81,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2021 10:20:47 -0000
+X-List-Received-Date: Fri, 12 Mar 2021 10:20:50 -0000
 
-Hi,
+Query the SYS_HEAPINFO semicall and do some basic verification of the
+information via libc calls.
 
-Change from the last version include tweaking the test to be a little
-less asnprintf heavy and also don't rely on brk() to do it's job. It
-also threw up a linux-user failure for RiscV which didn't have the
-needed TaskState info set. The series now applies cleanly to master.
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 
-The following patches need review:
+---
+v5
+  - drop asnprintf, just mix printf output
+  - don't use brk() but do sanity check
+---
+ .../multiarch/arm-compat-semi/semihosting.c   | 44 ++++++++++++++++++-
+ 1 file changed, 43 insertions(+), 1 deletion(-)
 
- - tests/tcg: add HeapInfo checking to semihosting test
- - linux-user/riscv: initialise the TaskState heap/stack info
- - semihosting/arm-compat-semi: don't use SET_ARG to report SYS_HEAPINFO
- - semihosting: move semihosting tests to multiarch
-
-Alex Bennée (5):
-  semihosting: move semihosting tests to multiarch
-  semihosting/arm-compat-semi: unify GET/SET_ARG helpers
-  semihosting/arm-compat-semi: don't use SET_ARG to report SYS_HEAPINFO
-  linux-user/riscv: initialise the TaskState heap/stack info
-  tests/tcg: add HeapInfo checking to semihosting test
-
- tests/tcg/aarch64/semicall.h                  | 18 +++++
- tests/tcg/arm/semicall.h                      | 15 +---
- tests/tcg/riscv64/semicall.h                  | 22 ++++++
- linux-user/riscv/cpu_loop.c                   |  5 ++
- semihosting/arm-compat-semi.c                 | 62 +++++++---------
- tests/tcg/arm/semihosting.c                   | 26 -------
- .../arm-compat-semi}/semiconsole.c            |  2 +
- .../multiarch/arm-compat-semi/semihosting.c   | 71 +++++++++++++++++++
- MAINTAINERS                                   |  1 +
- tests/tcg/Makefile.target                     |  3 +
- tests/tcg/aarch64/Makefile.target             | 18 -----
- tests/tcg/arm/Makefile.target                 | 16 +----
- tests/tcg/multiarch/Makefile.target           | 31 ++++++++
- 13 files changed, 180 insertions(+), 110 deletions(-)
- create mode 100644 tests/tcg/aarch64/semicall.h
- create mode 100644 tests/tcg/riscv64/semicall.h
- delete mode 100644 tests/tcg/arm/semihosting.c
- rename tests/tcg/{arm => multiarch/arm-compat-semi}/semiconsole.c (93%)
- create mode 100644 tests/tcg/multiarch/arm-compat-semi/semihosting.c
-
+diff --git a/tests/tcg/multiarch/arm-compat-semi/semihosting.c b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
+index b3fd16cd12..8e9cfb578c 100644
+--- a/tests/tcg/multiarch/arm-compat-semi/semihosting.c
++++ b/tests/tcg/multiarch/arm-compat-semi/semihosting.c
+@@ -8,9 +8,13 @@
+  */
+ 
+ #define SYS_WRITE0      0x04
++#define SYS_HEAPINFO    0x16
+ #define SYS_REPORTEXC   0x18
+ 
+ #include <stdint.h>
++#include <stdlib.h>
++#include <stdio.h>
++#include <string.h>
+ #include "semicall.h"
+ 
+ int main(int argc, char *argv[argc])
+@@ -21,8 +25,46 @@ int main(int argc, char *argv[argc])
+     uintptr_t exit_block[2] = {0x20026, 0};
+     uintptr_t exit_code = (uintptr_t) &exit_block;
+ #endif
++    struct {
++        void *heap_base;
++        void *heap_limit;
++        void *stack_base;
++        void *stack_limit;
++    } info;
++    void *ptr_to_info = (void *) &info;
+ 
+-    __semi_call(SYS_WRITE0, (uintptr_t) "Hello World");
++    __semi_call(SYS_WRITE0, (uintptr_t) "Checking HeapInfo\n");
++
++    memset(&info, 0, sizeof(info));
++    __semi_call(SYS_HEAPINFO, (uintptr_t) &ptr_to_info);
++
++    if (info.heap_base == NULL || info.heap_limit == NULL) {
++        printf("null heap: %p -> %p\n", info.heap_base, info.heap_limit);
++        exit(1);
++    } else if (info.heap_base != NULL && info.heap_limit != NULL) {
++        /* Error if heap base is above limit */
++        if ((uintptr_t) info.heap_base >= (uintptr_t) info.heap_limit) {
++            printf("heap base %p >= heap_limit %p\n",
++                   info.heap_base, info.heap_limit);
++            exit(2);
++        }
++    }
++
++    if (info.stack_base == NULL) {
++        printf("null stack: %p -> %p\n", info.stack_base, info.stack_limit);
++        exit(3);
++    } else if (info.stack_base != NULL && info.stack_limit != NULL) {
++        /* Error if stack base is below limit */
++        if ((uintptr_t) info.stack_base < (uintptr_t) info.stack_limit) {
++            printf("stack base %p < stack_limit %p\n",
++                   info.stack_base, info.stack_limit);
++            exit(4);
++        }
++    }
++    printf("heap: %p -> %p\n", info.heap_base, info.heap_limit);
++    printf("stack: %p -> %p\n", info.stack_base, info.stack_limit);
++
++    __semi_call(SYS_WRITE0, (uintptr_t) "Passed HeapInfo checks");
+     __semi_call(SYS_REPORTEXC, exit_code);
+     /* if we get here we failed */
+     return -1;
 -- 
 2.20.1
 
