@@ -1,73 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lKick-000649-5i
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Mar 2021 09:18:42 -0500
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49836)
+	id 1lLMIV-0000xb-Dw
+	for mharc-qemu-riscv@gnu.org; Sun, 14 Mar 2021 04:40:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59488)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1lKici-00062j-0z
- for qemu-riscv@nongnu.org; Fri, 12 Mar 2021 09:18:40 -0500
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d]:44639)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1lKicf-0000Sl-1G
- for qemu-riscv@nongnu.org; Fri, 12 Mar 2021 09:18:39 -0500
-Received: by mail-ed1-x52d.google.com with SMTP id j3so8183460edp.11
- for <qemu-riscv@nongnu.org>; Fri, 12 Mar 2021 06:18:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=references:user-agent:from:to:cc:subject:date:in-reply-to
- :message-id:mime-version:content-transfer-encoding;
- bh=rKJB4AlkfGyI7OxCAlY3Z8/EtdlEO2pG+pgv4m/JM0o=;
- b=eXqha6wvbupBe/niPMhAZIljBsIGKDxpCsf31IoGwlFHO8g3LcNSsDgCLktyywxfvF
- flG9xQ+5UwtT031SjS3tzi/ZhT6RWXNblsOwIJXcFye0TKT8C/VHIyJHOBmlkvorIjTg
- 8+R1nqe9P3uvL5MisVwtma6qhl71/QL6LdpMq5jpb0dLQcE+Yh2qxfpDKjfjW+DBaTIr
- Y56jIAZNDelxMWy0B+clozy100qOVHT747A0kBzTZvrBp+syBjA0zh1Sjcju3PsBOwOv
- 56sVCnRSkuXxQnlkgt37OolNrTu1kpGDsrYXw1NI4vLGV6syfZh+STUgk8H2zfUgVAgG
- bxSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
- :in-reply-to:message-id:mime-version:content-transfer-encoding;
- bh=rKJB4AlkfGyI7OxCAlY3Z8/EtdlEO2pG+pgv4m/JM0o=;
- b=QTNFNlDP6m9pytvTN+bx6Ww5zNM3kWurUJ+XpyKWUDfiV+rA3bPVBVWApmGgCXFoJT
- 2wnGKF4Y7MAFYRwRHpa9g6EifhqzDllsHZC/Hyc7a95tU0zUSNJ7O22dnM6QdxQPlIaz
- hVbT2vrHlsE8rBB6SH02vFZOoBuHJ29ayOtKUNUgZOf2o9vQ1DxbEJlU+asDBkzhqx1k
- T2VifNB/jdzNGJfhcl1WQO8t9Rw3uRLlM0vMT+uJV0bz5G236bAuss9BF4kJ5EL0FDQn
- ec3BjEx1Z+EjXkLPChdvo/W6xF31o4krd0XCLzYLssuI/WCaKBBkTCpAemMWgjaILPIy
- DWNw==
-X-Gm-Message-State: AOAM530u1TjkIK99GD7Ein2esrnKLuiOZSrUncAhuU64N3IjbaxpzctO
- 34Hz4v3+Kp5QJ0VeVRS9c56Eww==
-X-Google-Smtp-Source: ABdhPJxq9a0StzpDKgNgFaKzUZVm1dMLrHrQnDbjxGEs3fxvYtZ8wlqjGtkPUrXBIT/FFCmdc5b3rw==
-X-Received: by 2002:a05:6402:646:: with SMTP id
- u6mr14760263edx.250.1615558715275; 
- Fri, 12 Mar 2021 06:18:35 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id lu5sm2837358ejb.97.2021.03.12.06.18.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Mar 2021 06:18:34 -0800 (PST)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 53CB31FF7E;
- Fri, 12 Mar 2021 14:18:33 +0000 (GMT)
-References: <20210312102029.17017-1-alex.bennee@linaro.org>
- <20210312102029.17017-6-alex.bennee@linaro.org>
- <CAFEAcA_7OKauefw7ehAnqF6jmaqWPvNyVba+G2wg+xxsUgpZhQ@mail.gmail.com>
- <87a6r8ehsi.fsf@linaro.org>
- <CAFEAcA_0wKRcwpWODM23QaQi5qu86k=Y-2NHk4hWiz08oL98zQ@mail.gmail.com>
-User-agent: mu4e 1.5.10; emacs 28.0.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: QEMU Developers <qemu-devel@nongnu.org>, Keith Packard
- <keithp@keithp.com>, qemu-arm <qemu-arm@nongnu.org>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH v5 5/5] tests/tcg: add HeapInfo checking to semihosting
- test
-Date: Fri, 12 Mar 2021 14:08:38 +0000
-In-reply-to: <CAFEAcA_0wKRcwpWODM23QaQi5qu86k=Y-2NHk4hWiz08oL98zQ@mail.gmail.com>
-Message-ID: <877dmce9qe.fsf@linaro.org>
+ (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
+ id 1lLMIU-0000ww-Mq; Sun, 14 Mar 2021 04:40:26 -0400
+Received: from sender-of-o52.zoho.in ([103.117.158.52]:2296)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
+ id 1lLMIR-000411-6G; Sun, 14 Mar 2021 04:40:26 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1615711213; cv=none; d=zohomail.in; s=zohoarc; 
+ b=Iz3rbema8j6ZyDGjx7MtLXnFb7k002e7Elr7sXrvPqrmZ2so0p8L0w2Ub+ldt83Wt86BF7lvQzFBcU9mZpt/9igvphsE1IBoweqNFYCx07TjCRToPO7AZTEzW2km915pT3XudVU7RG5RZcJdAsYSw1Alri3FWDZurGUrw19Rl0o=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in;
+ s=zohoarc; t=1615711213;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To;
+ bh=bVRHk0QiKmQkSqHkNJxwzrRNe28YYjs9aZVv/6QIMac=; 
+ b=Yb8IjcLFQLRmNkBepsXTRx4rzFuMG71MDF7//AFfpr3V35Y8gF6p4G/nNwXwWs+EZKPUrue8Y2cH6dFiw/gFDTPUsHG1IgfijyA+GjWOR8f+sDqnU3NVG76d6n0I0dAmBVDL8HaRs1odOpfVQBNj9rCvdwltqe6h2kapYjO56o0=
+ARC-Authentication-Results: i=1; mx.zohomail.in;
+ dkim=pass  header.i=behindbytes.com;
+ spf=pass  smtp.mailfrom=vijai@behindbytes.com;
+ dmarc=pass header.from=<vijai@behindbytes.com>
+ header.from=<vijai@behindbytes.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1615711213; 
+ s=yrk; d=behindbytes.com; i=vijai@behindbytes.com;
+ h=From:To:Cc:Message-ID:Subject:Date:MIME-Version:Content-Transfer-Encoding:Content-Type;
+ bh=bVRHk0QiKmQkSqHkNJxwzrRNe28YYjs9aZVv/6QIMac=;
+ b=Hv1L/a8tIf3wtoFT6OHn/ooZqNVmxALWMDjT5hnouQD0Vp7X/4U0DZYIPMqLbGIr
+ 2uRmjP+6m1qzIyMDCduEhOHbVFk45b2Pw4K10Beje1VPmAPmhDoPWGxYOn6oeL/nFMf
+ fZsDMuYFYR3SyXsOfwtOcexeKbtvGUbd1xhSdh3I=
+Received: from helium.Dlink (49.207.215.131 [49.207.215.131]) by mx.zoho.in
+ with SMTPS id 1615711210355417.72999579876034;
+ Sun, 14 Mar 2021 14:10:10 +0530 (IST)
+From: Vijai Kumar K <vijai@behindbytes.com>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org,
+	Vijai Kumar K <vijai@behindbytes.com>
+Message-ID: <20210314083936.76269-1-vijai@behindbytes.com>
+Subject: [PATCH 0/3] Add support for Shakti SoC from IIT-M
+Date: Sun, 14 Mar 2021 14:09:33 +0530
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52d.google.com
+X-ZohoMailClient: External
+Content-Type: text/plain; charset=utf8
+Received-SPF: pass client-ip=103.117.158.52;
+ envelope-from=vijai@behindbytes.com; helo=sender-of-o52.zoho.in
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -87,50 +64,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2021 14:18:40 -0000
+X-List-Received-Date: Sun, 14 Mar 2021 08:40:27 -0000
 
+This series adds initial suppport for emulating shakti soc[1] running
+on arty 100T.
 
-Peter Maydell <peter.maydell@linaro.org> writes:
+Shakti SoC uses Shakti C class core[2] and Shakti Uart[3]
 
-> On Fri, 12 Mar 2021 at 11:24, Alex Benn=3DC3=3DA9e <alex.bennee@linaro.or=
-g> wro=3D
-> te:
->>
->>
->> Peter Maydell <peter.maydell@linaro.org> writes:
->>
->> > On Fri, 12 Mar 2021 at 10:31, Alex Benn=3D3DC3=3D3DA9e <alex.bennee@li=
-naro.=3D
-> org> wro=3D3D
->> > te:
->> >>
->> >> Query the SYS_HEAPINFO semicall and do some basic verification of the
->> >> information via libc calls.
->> >
->> > Are we both testing system emulation and linux-user, or just one of th=
-e=3D
->  two=3D3D
->> > ?
->>
->> Currently just linux-user. There is no inherent reason we couldn't add a
->> system emulation test but I felt that was already reasonably exercised
->> by your semihosting tests.
->
-> Do we run those automatically anywhere ? I agree that probably the
-> best thing is to get those into the CI loop somehow (and then put
-> a SYS_HEAPINFO test there.)
+[1] https://gitlab.com/shaktiproject/cores/shakti-soc/-/blob/master/README.=
+rst
+[2] https://gitlab.com/shaktiproject/cores/c-class/-/blob/master/README.md
+[3] https://gitlab.com/shaktiproject/uncore/devices/-/tree/master/uart_v2
 
-Not currently. I have toyed with series that make integrate the building
-of external test suites into the source tree. There are a number that it
-would be useful to have a short "make" away including:
+Vijai Kumar K (3):
+  riscv: Add initial support for Shakti C class
+  hw/char: Add Shakti UART emulation
+  hw/riscv: Connect Shakti UART to Shakti platform
 
-  kvm-unit-tests
-  LTP
-  diy7 (memory model testing)
-  sbsa-ref tools
-
-and I guess the semihosting testd would be another good example.
+ MAINTAINERS                                 |   9 +
+ default-configs/devices/riscv64-softmmu.mak |   1 +
+ hw/char/meson.build                         |   1 +
+ hw/char/shakti_uart.c                       | 204 ++++++++++++++++++++
+ hw/char/trace-events                        |   4 +
+ hw/riscv/Kconfig                            |  10 +
+ hw/riscv/meson.build                        |   1 +
+ hw/riscv/shakti_c.c                         | 185 ++++++++++++++++++
+ include/hw/char/shakti_uart.h               |  74 +++++++
+ include/hw/riscv/shakti_c.h                 |  76 ++++++++
+ target/riscv/cpu.c                          |   9 +
+ target/riscv/cpu.h                          |   1 +
+ 12 files changed, 575 insertions(+)
+ create mode 100644 hw/char/shakti_uart.c
+ create mode 100644 hw/riscv/shakti_c.c
+ create mode 100644 include/hw/char/shakti_uart.h
+ create mode 100644 include/hw/riscv/shakti_c.h
 
 --=20
-Alex Benn=C3=A9e
+2.25.1
+
+
 
