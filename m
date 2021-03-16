@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lMFnS-0005Fb-Je
-	for mharc-qemu-riscv@gnu.org; Tue, 16 Mar 2021 15:56:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58574)
+	id 1lMFui-0005RZ-Bk
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Mar 2021 16:03:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60358)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lMFnR-0005CU-60; Tue, 16 Mar 2021 15:56:05 -0400
-Received: from mail-qk1-x72f.google.com ([2607:f8b0:4864:20::72f]:44862)
+ id 1lMFug-0005OI-Ai; Tue, 16 Mar 2021 16:03:34 -0400
+Received: from mail-qv1-xf2e.google.com ([2607:f8b0:4864:20::f2e]:38560)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lMFnM-0008Ia-Go; Tue, 16 Mar 2021 15:56:04 -0400
-Received: by mail-qk1-x72f.google.com with SMTP id 130so36559745qkh.11;
- Tue, 16 Mar 2021 12:55:59 -0700 (PDT)
+ id 1lMFuZ-0003SI-Eu; Tue, 16 Mar 2021 16:03:33 -0400
+Received: by mail-qv1-xf2e.google.com with SMTP id t5so275495qvs.5;
+ Tue, 16 Mar 2021 13:03:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=GqMAZL0XmNWwrUlAucEMPrH3WEoFydfF5nGVsAFtxIQ=;
- b=RkqMjO3k2szsLGNbd1ztjOk1f6vVwRwSkCrp0Pjow9Adb01m1TPhUO60v7WcpoU0Qv
- rqt/drJvfGsfMQC4sQfxjNlof4HvNIDNwZbynajatsNR90Rgj+K//bY4F/JFNaLcvSz+
- jp57hJAPZSMD+7eey+Urktsq/YBB/l20udhSuHAZ1xVfJHo20PCgrDQecYUvIeTfGh/I
- mstV/XmVQDbEc3p5aGbIWXTxc7OsfnvrI9URnqkPofoNVf711wfnccpaceBChEhS8FUR
- OL7xqJLXseMPrGezWbsVDrJ+WrVAGmbwHWOVYwYgqkx+vZb9X6Cq8Q9ojnvEwYQTCixT
- mGbw==
+ :cc; bh=3+9Zc4+fAGPJPl57TXCZNB/5ect5Oigz89/uDOo3nsY=;
+ b=EW1cKz3xu1BJussiUEq/6JXP5kXpJos3dvSgP0cyUpfdVQmPWUTcUMJU6nhlaS1cAL
+ 1+lVz4zIhdbrnMY2WRfFH2mOzJp1urcdINGuEA/omC9Ln3UOk5iq9wXXIBuhMsQzMlMQ
+ a5Rc0j13rx7NwT8Ky0dvR5Rtp/ZmXlFaWDp2CsrPaWqqUH+0AW4mgfm3KXRxjgHAjCzi
+ Uo7jTay5buRIPtqb+KBHdmED0B5JTD5uaFG4KkE9aDheJpqmkRNMofY2XRFsQFsBln6r
+ 5xDScJrNrF3EFr15DEUvajKWD6qVCckG4yNj53WO21+ATt9Z4dIbvqOSHgr+L4i5w9DN
+ oOEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=GqMAZL0XmNWwrUlAucEMPrH3WEoFydfF5nGVsAFtxIQ=;
- b=PPRqAAbfDhob78bIgYAhwAA6YY0jkAvkjJE0CiQr/Zmn1bmdV9OhP8LhUaHpnytlHp
- YbX2PWpI9pSSDX6/vQAMcPMjWueefQEWVyztVgUyWXxglG6rac7wzMFDbpQWtDE+hzYW
- q/dgUO7/QdknypatvU7VcExNFsgMOC1EL2JHz0wjFxkXLHakE7Zksj68GZCtxCMykj53
- LKGY8e/FdxzerNfHjO7t0+uMtW8RY698BcQrXFuOJIkaEhKAMyrkwWcErB27XOOHUEcb
- Iz4QKNsHNah1zKlgMhlsKlS1YIXguRxO34iyZgfGpWNO2gGgyDB+mP0xt5adMdHRKBMh
- 4d0Q==
-X-Gm-Message-State: AOAM530JwRtTZYW0f5Ro0Hnkrs8Fb+b8wgX4oBXmc/j47JXgz75715pE
- 9a2WQiYylJ2c6RDAA3lgtXttpgSwG8EsZ/9PlpY=
-X-Google-Smtp-Source: ABdhPJymCg87qsyemCJWp9bjz7reRxhoMpfuRQIKnh9q6Tlde9m2ZcFRBhFR7pwADncxmUaoiRkUZX7V48sl7fipxfc=
-X-Received: by 2002:a05:620a:13aa:: with SMTP id
- m10mr834332qki.164.1615924558921; 
- Tue, 16 Mar 2021 12:55:58 -0700 (PDT)
+ bh=3+9Zc4+fAGPJPl57TXCZNB/5ect5Oigz89/uDOo3nsY=;
+ b=ED2Dx7tL65168A9mtbG9YHwht6VtGaH3q6pKcE+rBvt/2YNEQNHkCeU3V9lYUStW9p
+ OdntP0nUBycQxHyhJG8Dy70+DWwsGZPGBDvdcjrXVpKMFH/vpIPEFg7flKc8QmQLohVx
+ quMwNgymuyYGsviw9WRTy4JqslobqREJ4L3IXTKKwmTvn8kaeBHZvJgozSFiktrSf4L4
+ t9ZZCKhXoWOegolUgqYEV1xs+lElJuGzlOUfmTD+nCHrnCpydUqwlhGeFOPkg566pr3j
+ Li2srfx/SYwhOrrJKCdErEfKx0AUR0jVM2Qp1sjE7bhS4QiemAbK4PqhjvQZ5XaBOzYg
+ jorg==
+X-Gm-Message-State: AOAM53167+RVY+W99zMvjyzMn/pg+na4mz2Y1bURnwdu40THyFTu5SGR
+ 2xK/0275mVxW5zq3gV/0cN4CrwqAC1SYFlbF0AE=
+X-Google-Smtp-Source: ABdhPJxsBGCKq6WZ2B1nSHPPxlK4NIJq4L8lPxKpp8iZnk57WGnJHorehypYsweceipYaysme+WGlwBrYojD+q4YTLg=
+X-Received: by 2002:a0c:9a04:: with SMTP id p4mr1597375qvd.38.1615925005722;
+ Tue, 16 Mar 2021 13:03:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210212150256.885-1-zhiwei_liu@c-sky.com>
- <20210212150256.885-7-zhiwei_liu@c-sky.com>
- <CAKmqyKP+=knMPnOtgQq477_=dwswG3TQ+xBBPULnvLma2HmsdQ@mail.gmail.com>
- <c4d020e2-cb88-869f-a504-22dd2e4eae05@c-sky.com>
-In-Reply-To: <c4d020e2-cb88-869f-a504-22dd2e4eae05@c-sky.com>
+References: <1613916082-19528-1-git-send-email-cwshu@andestech.com>
+ <1613916082-19528-2-git-send-email-cwshu@andestech.com>
+In-Reply-To: <1613916082-19528-2-git-send-email-cwshu@andestech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 16 Mar 2021 15:54:21 -0400
-Message-ID: <CAKmqyKPm98gFz9n=hpkHdKcugiqG2ouAjJDtj1r0ON5ZjkQ9sQ@mail.gmail.com>
-Subject: Re: [PATCH 06/38] target/riscv: SIMD 16-bit Shift Instructions
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>
+Date: Tue, 16 Mar 2021 16:01:49 -0400
+Message-ID: <CAKmqyKOmQ2we5SqLnDk1HUSESA_eQdTt2swcLU=HvTp4qFH4sw@mail.gmail.com>
+Subject: Re: [PATCH 1/3] target/riscv: propagate PMP permission to TLB page
+To: Jim Shu <cwshu@andestech.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72f;
- envelope-from=alistair23@gmail.com; helo=mail-qk1-x72f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f2e;
+ envelope-from=alistair23@gmail.com; helo=mail-qv1-xf2e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,367 +74,315 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2021 19:56:05 -0000
+X-List-Received-Date: Tue, 16 Mar 2021 20:03:34 -0000
 
-On Mon, Mar 15, 2021 at 10:40 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Sun, Feb 21, 2021 at 10:35 AM Jim Shu <cwshu@andestech.com> wrote:
 >
+> Currently, PMP permission checking of TLB page is bypassed if TLB hits
+> Fix it by propagating PMP permission to TLB page permission.
 >
+> PMP permission checking also use MMU-style API to change TLB permission
+> and size.
 >
-> On 2021/3/16 5:25, Alistair Francis wrote:
-> > On Fri, Feb 12, 2021 at 10:16 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
-> >> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> >> ---
-> >>   target/riscv/helper.h                   |   9 ++
-> >>   target/riscv/insn32.decode              |  17 ++++
-> >>   target/riscv/insn_trans/trans_rvp.c.inc | 115 ++++++++++++++++++++++++
-> >>   target/riscv/packed_helper.c            | 104 +++++++++++++++++++++
-> >>   4 files changed, 245 insertions(+)
-> >>
-> >> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> >> index a69a6b4e84..20bf400ac2 100644
-> >> --- a/target/riscv/helper.h
-> >> +++ b/target/riscv/helper.h
-> >> @@ -1184,3 +1184,12 @@ DEF_HELPER_3(rsub8, tl, env, tl, tl)
-> >>   DEF_HELPER_3(ursub8, tl, env, tl, tl)
-> >>   DEF_HELPER_3(ksub8, tl, env, tl, tl)
-> >>   DEF_HELPER_3(uksub8, tl, env, tl, tl)
-> >> +
-> >> +DEF_HELPER_3(sra16, tl, env, tl, tl)
-> >> +DEF_HELPER_3(sra16_u, tl, env, tl, tl)
-> >> +DEF_HELPER_3(srl16, tl, env, tl, tl)
-> >> +DEF_HELPER_3(srl16_u, tl, env, tl, tl)
-> >> +DEF_HELPER_3(sll16, tl, env, tl, tl)
-> >> +DEF_HELPER_3(ksll16, tl, env, tl, tl)
-> >> +DEF_HELPER_3(kslra16, tl, env, tl, tl)
-> >> +DEF_HELPER_3(kslra16_u, tl, env, tl, tl)
-> >> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> >> index 358dd1fa10..6f053bfeb7 100644
-> >> --- a/target/riscv/insn32.decode
-> >> +++ b/target/riscv/insn32.decode
-> >> @@ -23,6 +23,7 @@
-> >>   %rd        7:5
-> >>
-> >>   %sh10    20:10
-> >> +%sh4    20:4
-> >>   %csr    20:12
-> >>   %rm     12:3
-> >>   %nf     29:3                     !function=ex_plus_1
-> >> @@ -59,6 +60,7 @@
-> >>   @j       ....................      ..... ....... &j      imm=%imm_j          %rd
-> >>
-> >>   @sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
-> >> +@sh4     ......  ...... .....  ... ..... ....... &shift  shamt=%sh4      %rs1 %rd
-> >>   @csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
-> >>
-> >>   @atom_ld ..... aq:1 rl:1 ..... ........ ..... ....... &atomic rs2=0     %rs1 %rd
-> >> @@ -635,3 +637,18 @@ rsub8      0000101  ..... ..... 000 ..... 1111111 @r
-> >>   ursub8     0010101  ..... ..... 000 ..... 1111111 @r
-> >>   ksub8      0001101  ..... ..... 000 ..... 1111111 @r
-> >>   uksub8     0011101  ..... ..... 000 ..... 1111111 @r
-> >> +
-> >> +sra16      0101000  ..... ..... 000 ..... 1111111 @r
-> >> +sra16_u    0110000  ..... ..... 000 ..... 1111111 @r
-> >> +srai16     0111000  0.... ..... 000 ..... 1111111 @sh4
-> >> +srai16_u   0111000  1.... ..... 000 ..... 1111111 @sh4
-> >> +srl16      0101001  ..... ..... 000 ..... 1111111 @r
-> >> +srl16_u    0110001  ..... ..... 000 ..... 1111111 @r
-> >> +srli16     0111001  0.... ..... 000 ..... 1111111 @sh4
-> >> +srli16_u   0111001  1.... ..... 000 ..... 1111111 @sh4
-> >> +sll16      0101010  ..... ..... 000 ..... 1111111 @r
-> >> +slli16     0111010  0.... ..... 000 ..... 1111111 @sh4
-> >> +ksll16     0110010  ..... ..... 000 ..... 1111111 @r
-> >> +kslli16    0111010  1.... ..... 000 ..... 1111111 @sh4
-> >> +kslra16    0101011  ..... ..... 000 ..... 1111111 @r
-> >> +kslra16_u  0110011  ..... ..... 000 ..... 1111111 @r
-> >> diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
-> >> index 109f560ec9..848edab7e5 100644
-> >> --- a/target/riscv/insn_trans/trans_rvp.c.inc
-> >> +++ b/target/riscv/insn_trans/trans_rvp.c.inc
-> >> @@ -238,3 +238,118 @@ GEN_RVP_R_OOL(rsub8);
-> >>   GEN_RVP_R_OOL(ursub8);
-> >>   GEN_RVP_R_OOL(ksub8);
-> >>   GEN_RVP_R_OOL(uksub8);
-> >> +
-> >> +/* 16-bit Shift Instructions */
-> >> +static bool rvp_shift_ool(DisasContext *ctx, arg_r *a,
-> >> +                          gen_helper_rvp_r *fn, target_ulong mask)
-> >> +{
-> >> +    TCGv src1, src2, dst;
-> >> +
-> >> +    src1 = tcg_temp_new();
-> >> +    src2 = tcg_temp_new();
-> >> +    dst = tcg_temp_new();
-> >> +
-> >> +    gen_get_gpr(src1, a->rs1);
-> >> +    gen_get_gpr(src2, a->rs2);
-> >> +    tcg_gen_andi_tl(src2, src2, mask);
-> >> +
-> >> +    fn(dst, cpu_env, src1, src2);
-> >> +    gen_set_gpr(a->rd, dst);
-> >> +
-> >> +    tcg_temp_free(src1);
-> >> +    tcg_temp_free(src2);
-> >> +    tcg_temp_free(dst);
-> >> +    return true;
-> >> +}
-> >> +
-> >> +typedef void GenGvecShift(unsigned, uint32_t, uint32_t, TCGv_i32,
-> >> +                          uint32_t, uint32_t);
-> >> +static inline bool
-> >> +rvp_shift(DisasContext *ctx, arg_r *a, uint8_t vece,
-> >> +          GenGvecShift *f64, gen_helper_rvp_r *fn,
-> >> +          uint8_t mask)
-> >> +{
-> >> +    if (!has_ext(ctx, RVP)) {
-> >> +        return false;
-> >> +    }
-> >> +
-> >> +#ifdef TARGET_RISCV64
-> > Hmm....
-> >
-> > I don't want to add any more #defines on the RISC-V xlen. We are
-> > trying to make the QEMU RISC-V implementation xlen independent.
-> I noticed the change, but was not quite clear about the benefit of it.
->
-> Could you give a brief explanation?
+> Signed-off-by: Jim Shu <cwshu@andestech.com>
 
-Yep, there are a few reasons for it.
-
-AFAIK every QEMU platform except RISC-V allows the 64-bit binary to
-run the 32-bit guests. So for example in the ARM QEMU builds I can use
-qemu-system-aarch64 to run 32-bit ARMv7 guests. This is a step towards
-allowing us to do the same with RISC-V.
-
-It's also a step towards allowing fixed XLEN CPUS to run. For example
-4 64-bit application CPUs and a single 32-bit power management CPU can
-all run together.
-
-Also XLEN in RISC-V is configurable. A 64-bit Hypervisor can have
-32-bit XLEN guests according to the spec. This is a step towards
-allowing that as well.
-
-> > Can you use `riscv_cpu_is_32bit(env)` instead, here are everywhere
-> > else you add a #define TARGET... ?
-> Sure, I think there are two ways.
->
-> 1) Get env from the current_cpu, then call riscv_cpu_is_32bit(env).
->
-> It's some strange,  because I can't find current_cpu reference from many
-> archs.
->
-> I don't know whether it has side effects.
->
-> 2)  Add a similar function cpu_is_32bit(DisasContext *ctx).
-
-This is probably a better option, but I'm open to either way if you
-have a strong preference.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu_helper.c | 84 +++++++++++++++++++++++++++++----------
+>  target/riscv/pmp.c        | 80 +++++++++++++++++++++++++++----------
+>  target/riscv/pmp.h        |  4 +-
+>  3 files changed, 125 insertions(+), 43 deletions(-)
 >
-> In this way, the type of  misa field  in struct DisasContext should be
-> target_ulong.
-> Currently, the type of misa filed is uint32_t.
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 2f43939fb6..f6ac63bf0e 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -280,6 +280,49 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+>      env->load_res = -1;
+>  }
 >
-> Do you think which one is better? Thanks very much.
+> +/*
+> + * get_physical_address_pmp - check PMP permission for this physical address
+> + *
+> + * Match the PMP region and check permission for this physical address and it's
+> + * TLB page. Returns 0 if the permission checking was successful
+> + *
+> + * @env: CPURISCVState
+> + * @prot: The returned protection attributes
+> + * @tlb_size: TLB page size containing addr. It could be modified after PMP
+> + *            permission checking. NULL if not set TLB page for addr.
+> + * @addr: The physical address to be checked permission
+> + * @access_type: The type of MMU access
+> + * @mode: Indicates current privilege level.
+> + */
+> +static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+> +                                    target_ulong *tlb_size, hwaddr addr,
+> +                                    int size, MMUAccessType access_type,
+> +                                    int mode)
+> +{
+> +    pmp_priv_t pmp_priv;
+> +    target_ulong tlb_size_pmp = 0;
+> +
+> +    if (!riscv_feature(env, RISCV_FEATURE_PMP)) {
+> +        *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
+> +        return TRANSLATE_SUCCESS;
+> +    }
+> +
+> +    if (!pmp_hart_has_privs(env, addr, size, 1 << access_type, &pmp_priv,
+> +                            mode)) {
+> +        *prot = 0;
+> +        return TRANSLATE_PMP_FAIL;
+> +    }
+> +
+> +    *prot = pmp_priv_to_page_prot(pmp_priv);
+> +    if (tlb_size != NULL) {
+> +        if (pmp_is_range_in_tlb(env, addr & ~(*tlb_size - 1), &tlb_size_pmp)) {
+> +            *tlb_size = tlb_size_pmp;
+> +        }
+> +    }
+> +
+> +    return TRANSLATE_SUCCESS;
+> +}
+> +
+>  /* get_physical_address - get the physical address for this virtual address
+>   *
+>   * Do a page table walk to obtain the physical address corresponding to a
+> @@ -442,9 +485,11 @@ restart:
+>              pte_addr = base + idx * ptesize;
+>          }
 >
-> Zhiwei
-> >
-> > Alistair
-> >
-> >> +    if (a->rd && a->rs1 && a->rs2) {
-> >> +        TCGv_i32 shift = tcg_temp_new_i32();
-> >> +        tcg_gen_extrl_i64_i32(shift, cpu_gpr[a->rs2]);
-> >> +        tcg_gen_andi_i32(shift, shift, mask);
-> >> +        f64(vece, offsetof(CPURISCVState, gpr[a->rd]),
-> >> +            offsetof(CPURISCVState, gpr[a->rs1]),
-> >> +            shift, 8, 8);
-> >> +        tcg_temp_free_i32(shift);
-> >> +        return true;
-> >> +    }
-> >> +#endif
-> >> +    return rvp_shift_ool(ctx, a, fn, mask);
-> >> +}
-> >> +
-> >> +#define GEN_RVP_SHIFT(NAME, GVEC, VECE)                     \
-> >> +static bool trans_##NAME(DisasContext *s, arg_r *a)         \
-> >> +{                                                           \
-> >> +    return rvp_shift(s, a, VECE, GVEC, gen_helper_##NAME,   \
-> >> +                     (8 << VECE) - 1);                      \
-> >> +}
-> >> +
-> >> +GEN_RVP_SHIFT(sra16, tcg_gen_gvec_sars, 1);
-> >> +GEN_RVP_SHIFT(srl16, tcg_gen_gvec_shrs, 1);
-> >> +GEN_RVP_SHIFT(sll16, tcg_gen_gvec_shls, 1);
-> >> +GEN_RVP_R_OOL(sra16_u);
-> >> +GEN_RVP_R_OOL(srl16_u);
-> >> +GEN_RVP_R_OOL(ksll16);
-> >> +GEN_RVP_R_OOL(kslra16);
-> >> +GEN_RVP_R_OOL(kslra16_u);
-> >> +
-> >> +static bool rvp_shifti_ool(DisasContext *ctx, arg_shift *a,
-> >> +                           gen_helper_rvp_r *fn)
-> >> +{
-> >> +    TCGv src1, dst, shift;
-> >> +
-> >> +    src1 = tcg_temp_new();
-> >> +    dst = tcg_temp_new();
-> >> +
-> >> +    gen_get_gpr(src1, a->rs1);
-> >> +    shift = tcg_const_tl(a->shamt);
-> >> +    fn(dst, cpu_env, src1, shift);
-> >> +    gen_set_gpr(a->rd, dst);
-> >> +
-> >> +    tcg_temp_free(src1);
-> >> +    tcg_temp_free(dst);
-> >> +    tcg_temp_free(shift);
-> >> +    return true;
-> >> +}
-> >> +
-> >> +static inline bool
-> >> +rvp_shifti(DisasContext *ctx, arg_shift *a,
-> >> +           void (* f64)(TCGv_i64, TCGv_i64, int64_t),
-> >> +           gen_helper_rvp_r *fn)
-> >> +{
-> >> +    if (!has_ext(ctx, RVP)) {
-> >> +        return false;
-> >> +    }
-> >> +
-> >> +#ifdef TARGET_RISCV64
-> >> +    if (a->rd && a->rs1 && f64) {
-> >> +        f64(cpu_gpr[a->rd], cpu_gpr[a->rs1], a->shamt);
-> >> +        return true;
-> >> +    }
-> >> +#endif
-> >> +    return rvp_shifti_ool(ctx, a, fn);
-> >> +}
-> >> +
-> >> +#define GEN_RVP_SHIFTI(NAME, OP, GVEC)                   \
-> >> +static bool trans_##NAME(DisasContext *s, arg_shift *a)  \
-> >> +{                                                        \
-> >> +    return rvp_shifti(s, a, GVEC, gen_helper_##OP);      \
-> >> +}
-> >> +
-> >> +GEN_RVP_SHIFTI(srai16, sra16, tcg_gen_vec_sar16i_i64);
-> >> +GEN_RVP_SHIFTI(srli16, srl16, tcg_gen_vec_shr16i_i64);
-> >> +GEN_RVP_SHIFTI(slli16, sll16, tcg_gen_vec_shl16i_i64);
-> >> +GEN_RVP_SHIFTI(srai16_u, sra16_u, NULL);
-> >> +GEN_RVP_SHIFTI(srli16_u, srl16_u, NULL);
-> >> +GEN_RVP_SHIFTI(kslli16, ksll16, NULL);
-> >> diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
-> >> index 62db072204..7e31c2fe46 100644
-> >> --- a/target/riscv/packed_helper.c
-> >> +++ b/target/riscv/packed_helper.c
-> >> @@ -425,3 +425,107 @@ static inline void do_uksub8(CPURISCVState *env, void *vd, void *va,
-> >>   }
-> >>
-> >>   RVPR(uksub8, 1, 1);
-> >> +
-> >> +/* 16-bit Shift Instructions */
-> >> +static inline void do_sra16(CPURISCVState *env, void *vd, void *va,
-> >> +                            void *vb, uint8_t i)
-> >> +{
-> >> +    int16_t *d = vd, *a = va;
-> >> +    uint8_t shift = *(uint8_t *)vb & 0xf;
-> >> +    d[i] = a[i] >> shift;
-> >> +}
-> >> +
-> >> +RVPR(sra16, 1, 2);
-> >> +
-> >> +static inline void do_srl16(CPURISCVState *env, void *vd, void *va,
-> >> +                            void *vb, uint8_t i)
-> >> +{
-> >> +    uint16_t *d = vd, *a = va;
-> >> +    uint8_t shift = *(uint8_t *)vb & 0xf;
-> >> +    d[i] = a[i] >> shift;
-> >> +}
-> >> +
-> >> +RVPR(srl16, 1, 2);
-> >> +
-> >> +static inline void do_sll16(CPURISCVState *env, void *vd, void *va,
-> >> +                            void *vb, uint8_t i)
-> >> +{
-> >> +    uint16_t *d = vd, *a = va;
-> >> +    uint8_t shift = *(uint8_t *)vb & 0xf;
-> >> +    d[i] = a[i] << shift;
-> >> +}
-> >> +
-> >> +RVPR(sll16, 1, 2);
-> >> +
-> >> +static inline void do_sra16_u(CPURISCVState *env, void *vd, void *va,
-> >> +                              void *vb, uint8_t i)
-> >> +{
-> >> +    int16_t *d = vd, *a = va;
-> >> +    uint8_t shift = *(uint8_t *)vb & 0xf;
-> >> +
-> >> +    d[i] = vssra16(env, 0, a[i], shift);
-> >> +}
-> >> +
-> >> +RVPR(sra16_u, 1, 2);
-> >> +
-> >> +static inline void do_srl16_u(CPURISCVState *env, void *vd, void *va,
-> >> +                              void *vb, uint8_t i)
-> >> +{
-> >> +    uint16_t *d = vd, *a = va;
-> >> +    uint8_t shift = *(uint8_t *)vb & 0xf;
-> >> +
-> >> +    d[i] = vssrl16(env, 0, a[i], shift);
-> >> +}
-> >> +
-> >> +RVPR(srl16_u, 1, 2);
-> >> +
-> >> +static inline void do_ksll16(CPURISCVState *env, void *vd, void *va,
-> >> +                             void *vb, uint8_t i)
-> >> +{
-> >> +    int16_t *d = vd, *a = va, result;
-> >> +    uint8_t shift = *(uint8_t *)vb & 0xf;
-> >> +
-> >> +    result = a[i] << shift;
-> >> +    if (shift > (clrsb32(a[i]) - 16)) {
-> >> +        env->vxsat = 0x1;
-> >> +        d[i] = (a[i] & INT16_MIN) ? INT16_MIN : INT16_MAX;
-> >> +    } else {
-> >> +        d[i] = result;
-> >> +    }
-> >> +}
-> >> +
-> >> +RVPR(ksll16, 1, 2);
-> >> +
-> >> +static inline void do_kslra16(CPURISCVState *env, void *vd, void *va,
-> >> +                              void *vb, uint8_t i)
-> >> +{
-> >> +    int16_t *d = vd, *a = va;
-> >> +    int32_t shift = sextract32((*(target_ulong *)vb), 0, 5);
-> >> +
-> >> +    if (shift >= 0) {
-> >> +        do_ksll16(env, vd, va, vb, i);
-> >> +    } else {
-> >> +        shift = -shift;
-> >> +        shift = (shift == 16) ? 15 : shift;
-> >> +        d[i] = a[i] >> shift;
-> >> +    }
-> >> +}
-> >> +
-> >> +RVPR(kslra16, 1, 2);
-> >> +
-> >> +static inline void do_kslra16_u(CPURISCVState *env, void *vd, void *va,
-> >> +                                void *vb, uint8_t i)
-> >> +{
-> >> +    int16_t *d = vd, *a = va;
-> >> +    int32_t shift = sextract32((*(uint32_t *)vb), 0, 5);
-> >> +
-> >> +    if (shift >= 0) {
-> >> +        do_ksll16(env, vd, va, vb, i);
-> >> +    } else {
-> >> +        shift = -shift;
-> >> +        shift = (shift == 16) ? 15 : shift;
-> >> +        d[i] = vssra16(env, 0, a[i], shift);
-> >> +    }
-> >> +}
-> >> +
-> >> +RVPR(kslra16_u, 1, 2);
-> >> --
-> >> 2.17.1
-> >>
+> -        if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+> -            !pmp_hart_has_privs(env, pte_addr, sizeof(target_ulong),
+> -            1 << MMU_DATA_LOAD, PRV_S)) {
+> +        int pmp_prot;
+> +        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, NULL, pte_addr,
+> +                                               sizeof(target_ulong),
+> +                                               MMU_DATA_LOAD, PRV_S);
+> +        if (pmp_ret != TRANSLATE_SUCCESS) {
+>              return TRANSLATE_PMP_FAIL;
+>          }
+>
+> @@ -682,13 +727,14 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>  #ifndef CONFIG_USER_ONLY
+>      vaddr im_address;
+>      hwaddr pa = 0;
+> -    int prot, prot2;
+> +    int prot, prot2, prot_pmp;
+>      bool pmp_violation = false;
+>      bool first_stage_error = true;
+>      bool two_stage_lookup = false;
+>      int ret = TRANSLATE_FAIL;
+>      int mode = mmu_idx;
+> -    target_ulong tlb_size = 0;
+> +    /* default TLB page size */
+> +    target_ulong tlb_size = TARGET_PAGE_SIZE;
+>
+>      env->guest_phys_fault_addr = 0;
+>
+> @@ -745,10 +791,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>
+>              prot &= prot2;
+>
+> -            if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+> -                (ret == TRANSLATE_SUCCESS) &&
+> -                !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
+> -                ret = TRANSLATE_PMP_FAIL;
+> +            if (ret == TRANSLATE_SUCCESS) {
+> +                ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
+> +                                               size, access_type, mode);
+> +                prot &= prot_pmp;
+>              }
+>
+>              if (ret != TRANSLATE_SUCCESS) {
+> @@ -771,25 +817,21 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>                        "%s address=%" VADDR_PRIx " ret %d physical "
+>                        TARGET_FMT_plx " prot %d\n",
+>                        __func__, address, ret, pa, prot);
+> -    }
+>
+> -    if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+> -        (ret == TRANSLATE_SUCCESS) &&
+> -        !pmp_hart_has_privs(env, pa, size, 1 << access_type, mode)) {
+> -        ret = TRANSLATE_PMP_FAIL;
+> +        if (ret == TRANSLATE_SUCCESS) {
+> +            ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
+> +                                           size, access_type, mode);
+> +            prot &= prot_pmp;
+> +        }
+>      }
+> +
+>      if (ret == TRANSLATE_PMP_FAIL) {
+>          pmp_violation = true;
+>      }
+>
+>      if (ret == TRANSLATE_SUCCESS) {
+> -        if (pmp_is_range_in_tlb(env, pa & TARGET_PAGE_MASK, &tlb_size)) {
+> -            tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
+> -                         prot, mmu_idx, tlb_size);
+> -        } else {
+> -            tlb_set_page(cs, address & TARGET_PAGE_MASK, pa & TARGET_PAGE_MASK,
+> -                         prot, mmu_idx, TARGET_PAGE_SIZE);
+> -        }
+> +        tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
+> +                     prot, mmu_idx, tlb_size);
+>          return true;
+>      } else if (probe) {
+>          return false;
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 80d0334e1b..ebd874cde3 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -217,6 +217,35 @@ static int pmp_is_in_range(CPURISCVState *env, int pmp_index, target_ulong addr)
+>      return result;
+>  }
+>
+> +/*
+> + * Check if the address has required RWX privs when no PMP entry is matched.
+> + */
+> +static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
+> +    target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
+> +    target_ulong mode)
+> +{
+> +    bool ret;
+> +
+> +    if ((!riscv_feature(env, RISCV_FEATURE_PMP)) || (mode == PRV_M)) {
+> +        /*
+> +         * Privileged spec v1.10 states if HW doesn't implement any PMP entry
+> +         * or no PMP entry matches an M-Mode access, the access succeeds.
+> +         */
+> +        ret = true;
+> +        *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
+> +    } else {
+> +        /*
+> +         * Other modes are not allowed to succeed if they don't * match a rule,
+> +         * but there are rules. We've checked for no rule earlier in this
+> +         * function.
+> +         */
+> +        ret = false;
+> +        *allowed_privs = 0;
+> +    }
+> +
+> +    return ret;
+> +}
+> +
+>
+>  /*
+>   * Public Interface
+> @@ -226,18 +255,19 @@ static int pmp_is_in_range(CPURISCVState *env, int pmp_index, target_ulong addr)
+>   * Check if the address has required RWX privs to complete desired operation
+>   */
+>  bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+> -    target_ulong size, pmp_priv_t privs, target_ulong mode)
+> +    target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
+> +    target_ulong mode)
+>  {
+>      int i = 0;
+>      int ret = -1;
+>      int pmp_size = 0;
+>      target_ulong s = 0;
+>      target_ulong e = 0;
+> -    pmp_priv_t allowed_privs = 0;
+>
+>      /* Short cut if no rules */
+>      if (0 == pmp_get_num_rules(env)) {
+> -        return (env->priv == PRV_M) ? true : false;
+> +        return pmp_hart_has_privs_default(env, addr, size, privs,
+> +                                          allowed_privs, mode);
+>      }
+>
+>      if (size == 0) {
+> @@ -277,37 +307,25 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>           * check
+>           */
+>          if (((s + e) == 2) && (PMP_AMATCH_OFF != a_field)) {
+> -            allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
+> +            *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
+>              if ((mode != PRV_M) || pmp_is_locked(env, i)) {
+> -                allowed_privs &= env->pmp_state.pmp[i].cfg_reg;
+> +                *allowed_privs &= env->pmp_state.pmp[i].cfg_reg;
+>              }
+>
+> -            if ((privs & allowed_privs) == privs) {
+> -                ret = 1;
+> -                break;
+> -            } else {
+> -                ret = 0;
+> -                break;
+> -            }
+> +            ret = ((privs & *allowed_privs) == privs);
+> +            break;
+>          }
+>      }
+>
+>      /* No rule matched */
+>      if (ret == -1) {
+> -        if (mode == PRV_M) {
+> -            ret = 1; /* Privileged spec v1.10 states if no PMP entry matches an
+> -                      * M-Mode access, the access succeeds */
+> -        } else {
+> -            ret = 0; /* Other modes are not allowed to succeed if they don't
+> -                      * match a rule, but there are rules.  We've checked for
+> -                      * no rule earlier in this function. */
+> -        }
+> +        return pmp_hart_has_privs_default(env, addr, size, privs,
+> +                                          allowed_privs, mode);
+>      }
+>
+>      return ret == 1 ? true : false;
+>  }
+>
+> -
+>  /*
+>   * Handle a write to a pmpcfg CSP
+>   */
+> @@ -442,3 +460,23 @@ bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+>
+>      return false;
+>  }
+> +
+> +/*
+> + * Convert PMP privilege to TLB page privilege.
+> + */
+> +int pmp_priv_to_page_prot(pmp_priv_t pmp_priv)
+> +{
+> +    int prot = 0;
+> +
+> +    if (pmp_priv & PMP_READ) {
+> +        prot |= PAGE_READ;
+> +    }
+> +    if (pmp_priv & PMP_WRITE) {
+> +        prot |= PAGE_WRITE;
+> +    }
+> +    if (pmp_priv & PMP_EXEC) {
+> +        prot |= PAGE_EXEC;
+> +    }
+> +
+> +    return prot;
+> +}
+> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+> index c8d5ef4a69..b82a30f0d5 100644
+> --- a/target/riscv/pmp.h
+> +++ b/target/riscv/pmp.h
+> @@ -59,11 +59,13 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+>      target_ulong val);
+>  target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
+>  bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+> -    target_ulong size, pmp_priv_t priv, target_ulong mode);
+> +    target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
+> +    target_ulong mode);
+>  bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+>                           target_ulong *tlb_size);
+>  void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
+>  void pmp_update_rule_nums(CPURISCVState *env);
+>  uint32_t pmp_get_num_rules(CPURISCVState *env);
+> +int pmp_priv_to_page_prot(pmp_priv_t pmp_priv);
+>
+>  #endif
+> --
+> 2.30.1
+>
 >
 
