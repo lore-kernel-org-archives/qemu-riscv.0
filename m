@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lMaAP-0007tM-4h
-	for mharc-qemu-riscv@gnu.org; Wed, 17 Mar 2021 13:41:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52664)
+	id 1lMaAS-0007xQ-CS
+	for mharc-qemu-riscv@gnu.org; Wed, 17 Mar 2021 13:41:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52684)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=703660e7d=alistair.francis@wdc.com>)
- id 1lMaAN-0007p9-2x; Wed, 17 Mar 2021 13:41:07 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:29204)
+ id 1lMaAP-0007up-Ug; Wed, 17 Mar 2021 13:41:09 -0400
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:50477)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=703660e7d=alistair.francis@wdc.com>)
- id 1lMaAJ-0006pp-IU; Wed, 17 Mar 2021 13:41:06 -0400
+ id 1lMaAM-0006sn-HF; Wed, 17 Mar 2021 13:41:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1616002866; x=1647538866;
+ t=1616002870; x=1647538870;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=y6287f7K/OgcHnis2WMvgKGzwZCp/G5UW6glnR+/jN8=;
- b=OFriimPCvrZvIJ/TE34Kb9ByQikUkCXg4pAsNenHeKsCHlw63qtOzX67
- kbphkHhfZbR2v1i7AtBJcXZG5m5UkjnXRrCvZVKDqU1hmGkjZpPrD/v87
- RoMQTkSWLwmf33vMlkKT8DucZi3S656eljSNQHxVAGfWlfJInnKgcg3kA
- AcoMI6F0Upl1X2/Iv2HrK6k6m7aZkh1gooBvo/J90RGgJncgYKhgg+/3g
- wbZ1rIERNIWoMRUtEmjZ/1nBSmSVorx1BO7Ro7cX9lS32x48eYUOaRwxX
- qTuN4n7POkHw12mGcQGgc88bhusKIij4WuZbt9BPVuNwQkZEkrIHRW2ET Q==;
-IronPort-SDR: 4KBC8yj2iaujEj80Z0W4DPmaOnF8Hcz21DJ3at2x44S0z7IDFknafeej2gU4w/a+Nbn685Xgds
- 2lUhgfNqTWLkOJJIVOIwkd9p3eOAx+jJzrBBjU7FHf+p3YsIuSuzji8qbaT+ZHIVTcmbQA59Z5
- SluAzj0IbYM87nQ6T7NPxPJAwWnJ8lIFpUPegYWr+xrWUdU8IT7wBRrmRoTp7GPs3p7oxydCs8
- vOr4wxxU3pd7/UJtHxSWCYNoQcwXg2dXoiqvkt+Zpzt0/DWWMRPAGrXW4P//Ryykzh6qhrFx6g
- Xdg=
-X-IronPort-AV: E=Sophos;i="5.81,257,1610380800"; d="scan'208";a="266778841"
+ bh=Ehe+Z0MOh9y3MksWGIoz60oE2KX6z159jeYn8/Jaqdg=;
+ b=MNGyYpvX8wR1my2orelBWtCfLr5YeoMnoWV1tkzgPBvsvLTX0QCrBPOf
+ xT3qISKJQcFjGvaLFgAlTVFNHZ2QMKLCQB88X7atQNUlcQ4C7SKhkteA2
+ Ik2304jjS4gXdSXdHMTgU0qUZWZRecDVw7LZ3KkQIyhv02KaDDl3oCCyC
+ jN95xrk/nHoYn6ywvfDX8jTYLP5IqqSmXGDf4XXuCpANDLtmtBDyTlBKp
+ rR9SfXAKOD7cn9cUCL8Z0JlZ6Z7VQ0p/Ne0h1Uz+huRUXfzkJwjrqZY34
+ eV6GxHcrUHQrrQQX0bNweQWpJj6U8Zhh58slGGw7/FuAYXCXTVbDjegnP w==;
+IronPort-SDR: 2fW1tsaiXarUZL2gpzKj2JQIA53kq16qYK4GyxS7Oczmd7u+VScKsjWBCFspcY1lx2GrPzq1M3
+ 137VGXhvFTcG4/1FhEevpcTIgc/X/BsOShOYKmfv98oqa7s9ID0Ra1I+jikfE69fEUpP99rrfK
+ PMsBw+VQl10TX7xEEnjzNIEnuNaVH28MoIkT5P03vDqFuNyfFq0EqDb21HOdUmOdZOShQsTS6w
+ y0CCgcN8mI3xkJIFXDfOLE/PWS9OtQ1RB5gtoKL/xW29/DYfDjRb1jUGDJiedHHBnf6SdmLVeG
+ Eno=
+X-IronPort-AV: E=Sophos;i="5.81,257,1610380800"; d="scan'208";a="266778849"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 18 Mar 2021 01:41:05 +0800
-IronPort-SDR: ZsQw+8yO5ZaBp4D89U+eSd0pvXRmUB8sT7hRYjVqR7uDclSn2Rnt2oUwy22LITBlUxe7UUYoi3
- YAsyZluXgdKyRWHsZfc1eYG8GJ7l6jYcnEUYbqD8pflh+trnH0ltt/I5VdcWmTBk8X0fn9k8QW
- 7CiTNOhTZuQO4BxfE/Tqay9TXRK9GfwdX/G5GW7okhgD//rE8VaDW+hU1HBJkOawFK5tsIKaBa
- 5RL86hgRT9ruFCZGm8zTSWDIj0q2f1/iDLa3lk2s3924pN0DgFOV6G0Q3wi0wFuCrt6Xid2NJs
- 8Vxoq8NcPCI516CbMJxr5a3t
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by ob1.hgst.iphmx.com with ESMTP; 18 Mar 2021 01:41:08 +0800
+IronPort-SDR: X/ZRz6jIob9OnKfBDYWOkyF4iEYyJ0aEIR34k4Ev8lATTPdwbze/W/lMQVr5Za0r+WN2PtHelK
+ 0PB94WDw9MvgW6Q1QWU8IAl7y9U2SQxoQaajhyKeFfTY59I2ZYJ/n/KTDCt0Z5bapTMQV7vpvt
+ C+mloXJEwx/r/7Mi36B1HKAnIZ7EjhVEkjds9XdqJQpZQgsfmb1dFnOVffvh9U6Q4Gugq92uYn
+ CXJc/qwXJp83mZQaMxizP/w0exUoVxD3bfsEXDej6b1N6WkrKS+kGWz4/uFC4KBVOmtUpHXMxk
+ q7d96C5AGDmEI4r8Wjs4CEz6
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 17 Mar 2021 10:23:20 -0700
-IronPort-SDR: K9BvYAPd7urqccffcRg6og+LmnCyiiwtkJC0+6t8hhlu17YDMdifIdYlD81SA5TuM6seM+YWwC
- dfNmJLzf2WL9lHYLMUMkRzTfrhMnpQJbFl4e6EGzrY6olWyo5FXyGm6fFHSJLhDUBGAZPABl9K
- zXp70DlPSHmQLNy0A/yiThKhSTewUtNEs3q5gcuPDhMFClD2am9YQ1Qcbzn8gJN9pUqGpqZcK7
- LDu3BY/PflGU7t0EoVUH3W4xMwUr6yMHPu9k9xJR6KN1V7vy1wsaJZex5ABBMlx4QmURawgc05
- o2E=
+ 17 Mar 2021 10:23:24 -0700
+IronPort-SDR: dyPSCbQrXbeGjhmjhGLqcOnyRzrb70+seRzF19vqTD3k2Pn+OukAIpybstuqot/VvB5k7UqKC2
+ 9bfHm2wVD/SjBWSjlWobZs62tW1ZRgkfoDIv9t9gmvovHpBqTRKlhnSFS+JPjLQWXZMoQjtkHT
+ t19ZGZZDUCZzknTCd7NqkPInRqafOar88TQMWQMQ6z4w2Rl5VFL6/eTqQGCGDosNW8Ep/eAFXB
+ OuLniI1egCtPJjsNoxEeVPgYSTxFU+iyfXuu8EFYD4ptcgfGK4TmbSyHsQjSzyE2MQ7X4L2L7D
+ YmM=
 WDCIronportException: Internal
 Received: from fvwlp12.ad.shared (HELO alistair-risc6-laptop.hgst.com)
  ([10.86.48.223])
- by uls-op-cesaip01.wdc.com with ESMTP; 17 Mar 2021 10:41:01 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 17 Mar 2021 10:41:04 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v1 1/5] target/riscv: Convert the RISC-V exceptions to an enum
-Date: Wed, 17 Mar 2021 13:39:48 -0400
-Message-Id: <685a79eb7992d8b780570501cdb784b607144f02.1616002766.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 2/5] target/riscv: Use the RiscVException enum for CSR
+ predicates
+Date: Wed, 17 Mar 2021 13:39:52 -0400
+Message-Id: <9c0fa7d4f191d83ac2e70e830d141f4f4105e061.1616002766.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.30.1
 In-Reply-To: <cover.1616002766.git.alistair.francis@wdc.com>
 References: <cover.1616002766.git.alistair.francis@wdc.com>
@@ -84,103 +85,243 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Mar 2021 17:41:07 -0000
+X-List-Received-Date: Wed, 17 Mar 2021 17:41:10 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_bits.h   | 44 ++++++++++++++++++++-------------------
- target/riscv/cpu.c        |  2 +-
- target/riscv/cpu_helper.c |  4 ++--
- 3 files changed, 26 insertions(+), 24 deletions(-)
+ target/riscv/cpu.h |  3 +-
+ target/riscv/csr.c | 80 +++++++++++++++++++++++++---------------------
+ 2 files changed, 46 insertions(+), 37 deletions(-)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index caf4599207..8ae404c32a 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -527,27 +527,29 @@
- #define DEFAULT_RSTVEC      0x1000
- 
- /* Exception causes */
--#define EXCP_NONE                                -1 /* sentinel value */
--#define RISCV_EXCP_INST_ADDR_MIS                 0x0
--#define RISCV_EXCP_INST_ACCESS_FAULT             0x1
--#define RISCV_EXCP_ILLEGAL_INST                  0x2
--#define RISCV_EXCP_BREAKPOINT                    0x3
--#define RISCV_EXCP_LOAD_ADDR_MIS                 0x4
--#define RISCV_EXCP_LOAD_ACCESS_FAULT             0x5
--#define RISCV_EXCP_STORE_AMO_ADDR_MIS            0x6
--#define RISCV_EXCP_STORE_AMO_ACCESS_FAULT        0x7
--#define RISCV_EXCP_U_ECALL                       0x8
--#define RISCV_EXCP_S_ECALL                      0x9
--#define RISCV_EXCP_VS_ECALL                      0xa
--#define RISCV_EXCP_M_ECALL                       0xb
--#define RISCV_EXCP_INST_PAGE_FAULT               0xc /* since: priv-1.10.0 */
--#define RISCV_EXCP_LOAD_PAGE_FAULT               0xd /* since: priv-1.10.0 */
--#define RISCV_EXCP_STORE_PAGE_FAULT              0xf /* since: priv-1.10.0 */
--#define RISCV_EXCP_SEMIHOST                      0x10
--#define RISCV_EXCP_INST_GUEST_PAGE_FAULT         0x14
--#define RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT       0x15
--#define RISCV_EXCP_VIRT_INSTRUCTION_FAULT        0x16
--#define RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT  0x17
-+typedef enum RiscVException {
-+    RISCV_EXCP_NONE = -1, /* sentinel value */
-+    RISCV_EXCP_INST_ADDR_MIS = 0x0,
-+    RISCV_EXCP_INST_ACCESS_FAULT = 0x1,
-+    RISCV_EXCP_ILLEGAL_INST = 0x2,
-+    RISCV_EXCP_BREAKPOINT = 0x3,
-+    RISCV_EXCP_LOAD_ADDR_MIS = 0x4,
-+    RISCV_EXCP_LOAD_ACCESS_FAULT = 0x5,
-+    RISCV_EXCP_STORE_AMO_ADDR_MIS = 0x6,
-+    RISCV_EXCP_STORE_AMO_ACCESS_FAULT = 0x7,
-+    RISCV_EXCP_U_ECALL = 0x8,
-+    RISCV_EXCP_S_ECALL = 0x9,
-+    RISCV_EXCP_VS_ECALL = 0xa,
-+    RISCV_EXCP_M_ECALL = 0xb,
-+    RISCV_EXCP_INST_PAGE_FAULT = 0xc, /* since: priv-1.10.0 */
-+    RISCV_EXCP_LOAD_PAGE_FAULT = 0xd, /* since: priv-1.10.0 */
-+    RISCV_EXCP_STORE_PAGE_FAULT = 0xf, /* since: priv-1.10.0 */
-+    RISCV_EXCP_SEMIHOST = 0x10,
-+    RISCV_EXCP_INST_GUEST_PAGE_FAULT = 0x14,
-+    RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT = 0x15,
-+    RISCV_EXCP_VIRT_INSTRUCTION_FAULT = 0x16,
-+    RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT = 0x17,
-+} RiscVException;
- 
- #define RISCV_EXCP_INT_FLAG                0x80000000
- #define RISCV_EXCP_INT_MASK                0x7fffffff
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 2a990f6253..63584b4a20 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -357,7 +357,7 @@ static void riscv_cpu_reset(DeviceState *dev)
-     env->mcause = 0;
-     env->pc = env->resetvec;
- #endif
--    cs->exception_index = EXCP_NONE;
-+    cs->exception_index = RISCV_EXCP_NONE;
-     env->load_res = -1;
-     set_default_nan_mode(1, &env->fp_status);
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 0edb2826a2..073a994d13 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -469,7 +469,8 @@ static inline target_ulong riscv_csr_read(CPURISCVState *env, int csrno)
+     return val;
  }
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 83a6bcfad0..af702f65b1 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -72,7 +72,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
-     if (irqs) {
-         return ctz64(irqs); /* since non-zero */
-     } else {
--        return EXCP_NONE; /* indicates no pending interrupt */
-+        return RISCV_EXCP_NONE; /* indicates no pending interrupt */
+ 
+-typedef int (*riscv_csr_predicate_fn)(CPURISCVState *env, int csrno);
++typedef RiscVException (*riscv_csr_predicate_fn)(CPURISCVState *env,
++                                                 int csrno);
+ typedef int (*riscv_csr_read_fn)(CPURISCVState *env, int csrno,
+     target_ulong *ret_value);
+ typedef int (*riscv_csr_write_fn)(CPURISCVState *env, int csrno,
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index fd2e6363f3..da9baff6fb 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -35,29 +35,29 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+ }
+ 
+ /* Predicates */
+-static int fs(CPURISCVState *env, int csrno)
++static RiscVException fs(CPURISCVState *env, int csrno)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+     /* loose check condition for fcsr in vector extension */
+     if ((csrno == CSR_FCSR) && (env->misa & RVV)) {
+-        return 0;
++        return RISCV_EXCP_INST_ACCESS_FAULT;
      }
- }
+     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+-        return -RISCV_EXCP_ILLEGAL_INST;
++        return RISCV_EXCP_ILLEGAL_INST;
+     }
  #endif
-@@ -1017,5 +1017,5 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-      */
+-    return 0;
++    return RISCV_EXCP_NONE;
+ }
  
- #endif
--    cs->exception_index = EXCP_NONE; /* mark handled to qemu */
-+    cs->exception_index = RISCV_EXCP_NONE; /* mark handled to qemu */
+-static int vs(CPURISCVState *env, int csrno)
++static RiscVException vs(CPURISCVState *env, int csrno)
+ {
+     if (env->misa & RVV) {
+-        return 0;
++        return RISCV_EXCP_NONE;
+     }
+-    return -1;
++    return RISCV_EXCP_INST_ACCESS_FAULT;
  }
+ 
+-static int ctr(CPURISCVState *env, int csrno)
++static RiscVException ctr(CPURISCVState *env, int csrno)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+     CPUState *cs = env_cpu(env);
+@@ -65,7 +65,7 @@ static int ctr(CPURISCVState *env, int csrno)
+ 
+     if (!cpu->cfg.ext_counters) {
+         /* The Counters extensions is not enabled */
+-        return -RISCV_EXCP_ILLEGAL_INST;
++        return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+     if (riscv_cpu_virt_enabled(env)) {
+@@ -73,25 +73,25 @@ static int ctr(CPURISCVState *env, int csrno)
+         case CSR_CYCLE:
+             if (!get_field(env->hcounteren, HCOUNTEREN_CY) &&
+                 get_field(env->mcounteren, HCOUNTEREN_CY)) {
+-                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+             }
+             break;
+         case CSR_TIME:
+             if (!get_field(env->hcounteren, HCOUNTEREN_TM) &&
+                 get_field(env->mcounteren, HCOUNTEREN_TM)) {
+-                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+             }
+             break;
+         case CSR_INSTRET:
+             if (!get_field(env->hcounteren, HCOUNTEREN_IR) &&
+                 get_field(env->mcounteren, HCOUNTEREN_IR)) {
+-                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+             }
+             break;
+         case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+             if (!get_field(env->hcounteren, 1 << (csrno - CSR_HPMCOUNTER3)) &&
+                 get_field(env->mcounteren, 1 << (csrno - CSR_HPMCOUNTER3))) {
+-                return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+             }
+             break;
+         }
+@@ -100,93 +100,101 @@ static int ctr(CPURISCVState *env, int csrno)
+             case CSR_CYCLEH:
+                 if (!get_field(env->hcounteren, HCOUNTEREN_CY) &&
+                     get_field(env->mcounteren, HCOUNTEREN_CY)) {
+-                    return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+                 }
+                 break;
+             case CSR_TIMEH:
+                 if (!get_field(env->hcounteren, HCOUNTEREN_TM) &&
+                     get_field(env->mcounteren, HCOUNTEREN_TM)) {
+-                    return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+                 }
+                 break;
+             case CSR_INSTRETH:
+                 if (!get_field(env->hcounteren, HCOUNTEREN_IR) &&
+                     get_field(env->mcounteren, HCOUNTEREN_IR)) {
+-                    return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+                 }
+                 break;
+             case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+                 if (!get_field(env->hcounteren, 1 << (csrno - CSR_HPMCOUNTER3H)) &&
+                     get_field(env->mcounteren, 1 << (csrno - CSR_HPMCOUNTER3H))) {
+-                    return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+                 }
+                 break;
+             }
+         }
+     }
+ #endif
+-    return 0;
++    return RISCV_EXCP_NONE;
+ }
+ 
+-static int ctr32(CPURISCVState *env, int csrno)
++static RiscVException ctr32(CPURISCVState *env, int csrno)
+ {
+     if (!riscv_cpu_is_32bit(env)) {
+-        return -RISCV_EXCP_ILLEGAL_INST;
++        return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+     return ctr(env, csrno);
+ }
+ 
+ #if !defined(CONFIG_USER_ONLY)
+-static int any(CPURISCVState *env, int csrno)
++static RiscVException any(CPURISCVState *env, int csrno)
+ {
+-    return 0;
++    return RISCV_EXCP_NONE;
+ }
+ 
+-static int any32(CPURISCVState *env, int csrno)
++static RiscVException any32(CPURISCVState *env, int csrno)
+ {
+     if (!riscv_cpu_is_32bit(env)) {
+-        return -RISCV_EXCP_ILLEGAL_INST;
++        return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+     return any(env, csrno);
+ 
+ }
+ 
+-static int smode(CPURISCVState *env, int csrno)
++static RiscVException smode(CPURISCVState *env, int csrno)
+ {
+-    return -!riscv_has_ext(env, RVS);
++    if (riscv_has_ext(env, RVS)) {
++        return RISCV_EXCP_NONE;
++    }
++
++    return RISCV_EXCP_ILLEGAL_INST;
+ }
+ 
+-static int hmode(CPURISCVState *env, int csrno)
++static RiscVException hmode(CPURISCVState *env, int csrno)
+ {
+     if (riscv_has_ext(env, RVS) &&
+         riscv_has_ext(env, RVH)) {
+         /* Hypervisor extension is supported */
+         if ((env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+             env->priv == PRV_M) {
+-            return 0;
++            return RISCV_EXCP_NONE;
+         } else {
+-            return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+         }
+     }
+ 
+-    return -RISCV_EXCP_ILLEGAL_INST;
++    return RISCV_EXCP_ILLEGAL_INST;
+ }
+ 
+-static int hmode32(CPURISCVState *env, int csrno)
++static RiscVException hmode32(CPURISCVState *env, int csrno)
+ {
+     if (!riscv_cpu_is_32bit(env)) {
+-        return 0;
++        return RISCV_EXCP_NONE;
+     }
+ 
+     return hmode(env, csrno);
+ 
+ }
+ 
+-static int pmp(CPURISCVState *env, int csrno)
++static RiscVException pmp(CPURISCVState *env, int csrno)
+ {
+-    return -!riscv_feature(env, RISCV_FEATURE_PMP);
++    if (riscv_feature(env, RISCV_FEATURE_PMP)) {
++        return RISCV_EXCP_NONE;
++    }
++
++    return RISCV_EXCP_ILLEGAL_INST;
+ }
+ #endif
+ 
+@@ -1312,8 +1320,8 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+         return -RISCV_EXCP_ILLEGAL_INST;
+     }
+     ret = csr_ops[csrno].predicate(env, csrno);
+-    if (ret < 0) {
+-        return ret;
++    if (ret > 0) {
++        return -ret;
+     }
+ 
+     /* execute combined read/write operation if it exists */
 -- 
 2.30.1
 
