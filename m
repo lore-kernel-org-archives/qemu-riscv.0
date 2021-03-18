@@ -1,56 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lMzMt-0007wv-EE
-	for mharc-qemu-riscv@gnu.org; Thu, 18 Mar 2021 16:35:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54646)
+	id 1lMzNk-0000Jp-4d
+	for mharc-qemu-riscv@gnu.org; Thu, 18 Mar 2021 16:36:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54860)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lMzMr-0007ud-Al; Thu, 18 Mar 2021 16:35:41 -0400
-Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:41922)
+ id 1lMzNi-0000Hh-DG; Thu, 18 Mar 2021 16:36:34 -0400
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:41688)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lMzMp-0005qQ-A7; Thu, 18 Mar 2021 16:35:41 -0400
-Received: by mail-il1-x136.google.com with SMTP id r8so6104826ilo.8;
- Thu, 18 Mar 2021 13:35:35 -0700 (PDT)
+ id 1lMzNf-0006MJ-Rw; Thu, 18 Mar 2021 16:36:34 -0400
+Received: by mail-io1-xd30.google.com with SMTP id z3so3741408ioc.8;
+ Thu, 18 Mar 2021 13:36:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WMDX9Phh+bSWHe/t1G0uxpWBm+OwN2xH8fJ7cugUYMw=;
- b=YLCckbwcu2NIbeLa8gBcL+aGACdr1UnYpGVq0L/rs32ZSVnkTJuz20Hazo4rRJF7/+
- MehKGVU99YhjJSW3zajzV6CHLn+Qj2axf1s8iIE5eeLofTRyXmiOlpBHy/nU02Auk1/L
- svvsC7lZmzTYYIhxMM81z4ysFXG2GYsJ9EvgppQXD0re68MLE4JNBbha4eHhKambQkTK
- 3Rh/EFU3vSVcYcSwJgJ2KpDcLmH5rcN9j0CBIx74bp4rVETfN9rYUj9YWeoQYWZTMGn6
- F+iiHh+JR7qH4hHOn8Y/m/2t1ke8wmwxCftxvO6Aj4b0R8v+DxHQxwtqZtXWOq5ydqZI
- iztg==
+ :cc; bh=YxGICG2iv7SWaF/CvHir33v2sf5FsLV0yZvRnxcbFsE=;
+ b=edArSLHwJU2iIZqxOOrA+GpV9rmDwIwAFxfeCLDievdyW7mX4YI3LGIbHWEp+w4JYk
+ JIjCehIUeggysp+PXMjrx9JGhEu1ZFHpNumbMJ5QgG9XIWfca/sRBvtKAUilmFFZ8okZ
+ cv74N23WUmoyknYaACpKWAxW3EalIcHVvYwx4l3oo3nquLCJT2lw27/mZ9zo0ESlQi73
+ j8mdpoVE5M8hqke66tbcVQRc2dyUv3Ecb06aTH8wsvg0WdZf/ZGJmeZWQfRDdMAVLm2S
+ VRq2ohGqiOBeOibflHZoIWddkkH576hsgtg7Pa8Sg8zG0szE7+uDU3hfaDtoZNQGjjJO
+ caBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=WMDX9Phh+bSWHe/t1G0uxpWBm+OwN2xH8fJ7cugUYMw=;
- b=P6rZioQxVgGvrDlNR9CM7+kI2RXUgiPWcTzCl8egUQ4Mss9LmyJMtPbsWSZPtTCmXR
- e5HLqndT4b5HTuZHTNAlduiFr9jnTirBoe1fukzqhVXUZoiawyVGL+PTKl6GEj6aGRty
- gljMoXmJPvmzCRMKYRy6tZg2YNv72jxqMSsW0Zb5u9Q/c6+IOJm9dmLWSUwKU2P8FXtI
- ZgheXiKH0V1kuHqs8/drnghbBCpUid3TR4vwdP/8d3TQDbNt2AFbKK051Apq1+hUtjl7
- KOn1pD0Ds7sBbZ0qDarEk2sqvEL1Dxw6BmRbESJOM6hCLtRsnHpin6VshbfJGBRcQRxN
- u57A==
-X-Gm-Message-State: AOAM530DgcQG21MgurxZQB6mUfBE5YJVnkmZXPtl88Nuymqv0DuveqIU
- XC6JRYLjOiaK8ZwF8RdwLHgcLgtXtBNcCh2za/0=
-X-Google-Smtp-Source: ABdhPJyRE3UGQ17T+gkWh5Bf3YObKeBwGyeDWT8vX4+aEL9FMnMelnQZVEa01kA8YcJqKhHaYsqgE4014HOZXh2inDI=
-X-Received: by 2002:a92:d6cf:: with SMTP id z15mr327930ilp.40.1616099734942;
- Thu, 18 Mar 2021 13:35:34 -0700 (PDT)
+ bh=YxGICG2iv7SWaF/CvHir33v2sf5FsLV0yZvRnxcbFsE=;
+ b=WbZNyRzSoPrmlsRCUUqApHVzMkOpOMOqtfx//xw1WWuQ3q1AgpSR+uDkHccmOUjqWa
+ 0uuqd9sJmAFiNO7laNiUQjqETSSsx7kbDSiEwM3iYAuQRm1ui+7x7bs58kwjUlfYPFEl
+ MrFjN9XHjaFMKk8Ds978uuPTQMJsLnGh9aWOqxdi05iQUkmbN6e/YoTdJtTEdwdDq4EY
+ U6y9gzybwxTN73XSeuxGl/PJ1YTcONgs9gYrG+pAx5UvWuW3DWkTdsBPOR26nSxgE5Wn
+ 3xQlzO0aXjs8Ykzo6fLHUsBFZJjExUtfgoXO5a7eEf3SZlk8oRqQPI9SwA+WwQ52YeTE
+ sSSA==
+X-Gm-Message-State: AOAM532odaXFC4kR+9HR74bIB0l8OVDUhMFpp7yWsND9X/4M29xj0YOU
+ xPp1cRQjovCOOrUZQHIcx2GhHZfXwo/GtAoB1KA=
+X-Google-Smtp-Source: ABdhPJzaYnUqnpmQwvuhIOMeTaLheYIK6DASeBXfZtLByV0HlYAPhdw7XuoCltAvuOeugmBx3ZCZswcZ6r02FvfAisE=
+X-Received: by 2002:a5d:87d5:: with SMTP id q21mr295264ios.105.1616099790521; 
+ Thu, 18 Mar 2021 13:36:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210311103005.1400718-1-georg.kotheimer@kernkonzept.com>
-In-Reply-To: <20210311103005.1400718-1-georg.kotheimer@kernkonzept.com>
+References: <20210311094902.1377593-1-georg.kotheimer@kernkonzept.com>
+In-Reply-To: <20210311094902.1377593-1-georg.kotheimer@kernkonzept.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 18 Mar 2021 16:33:45 -0400
-Message-ID: <CAKmqyKPHFio8sbO2QUeZ7MdSpxa59Z7dW+8SHmjJPf8h4soqcw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Adjust privilege level for HLV(X)/HSV
- instructions
+Date: Thu, 18 Mar 2021 16:34:42 -0400
+Message-ID: <CAKmqyKPP0ZEJSVbZ75fsB1_xiYvHk-EvQqM-dL8tkJetwh5u1Q@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Make VSTIP and VSEIP read-only in hip
 To: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -71,14 +70,10 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Mar 2021 20:35:41 -0000
+X-List-Received-Date: Thu, 18 Mar 2021 20:36:35 -0000
 
-On Thu, Mar 11, 2021 at 5:32 AM Georg Kotheimer
+On Thu, Mar 11, 2021 at 4:49 AM Georg Kotheimer
 <georg.kotheimer@kernkonzept.com> wrote:
->
-> According to the specification the "field SPVP of hstatus controls the
-> privilege level of the access" for the hypervisor virtual-machine load
-> and store instructions HLV, HLVX and HSV.
 >
 > Signed-off-by: Georg Kotheimer <georg.kotheimer@kernkonzept.com>
 
@@ -89,55 +84,35 @@ Applied to riscv-to-apply.next
 Alistair
 
 > ---
->  target/riscv/cpu_helper.c | 25 ++++++++++++++-----------
->  1 file changed, 14 insertions(+), 11 deletions(-)
+>  target/riscv/csr.c | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 2f43939fb6..d0577b1e08 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -325,7 +325,11 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->          use_background = true;
->      }
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index fd2e6363f3..00a3ab72af 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -420,7 +420,8 @@ static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+>      SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
+>      SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD;
+>  static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP;
+> -static const target_ulong hip_writable_mask = MIP_VSSIP | MIP_VSTIP | MIP_VSEIP;
+> +static const target_ulong hip_writable_mask = MIP_VSSIP;
+> +static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP | MIP_VSEIP;
+>  static const target_ulong vsip_writable_mask = MIP_VSSIP;
 >
-> -    if (mode == PRV_M && access_type != MMU_INST_FETCH) {
-> +    /* MPRV does not affect the virtual-machine load/store
-> +       instructions, HLV, HLVX, and HSV. */
-> +    if (riscv_cpu_two_stage_lookup(mmu_idx)) {
-> +        mode = get_field(env->hstatus, HSTATUS_SPVP);
-> +    } else if (mode == PRV_M && access_type != MMU_INST_FETCH) {
->          if (get_field(env->mstatus, MSTATUS_MPRV)) {
->              mode = get_field(env->mstatus, MSTATUS_MPP);
->          }
-> @@ -695,19 +699,18 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
->                    __func__, address, access_type, mmu_idx);
+>  static const char valid_vm_1_10_32[16] = {
+> @@ -962,9 +963,9 @@ static int rmw_hvip(CPURISCVState *env, int csrno, target_ulong *ret_value,
+>                     target_ulong new_value, target_ulong write_mask)
+>  {
+>      int ret = rmw_mip(env, 0, ret_value, new_value,
+> -                      write_mask & hip_writable_mask);
+> +                      write_mask & hvip_writable_mask);
 >
-> -    if (mode == PRV_M && access_type != MMU_INST_FETCH) {
-> -        if (get_field(env->mstatus, MSTATUS_MPRV)) {
-> -            mode = get_field(env->mstatus, MSTATUS_MPP);
-> +    /* MPRV does not affect the virtual-machine load/store
-> +       instructions, HLV, HLVX, and HSV. */
-> +    if (riscv_cpu_two_stage_lookup(mmu_idx)) {
-> +        mode = get_field(env->hstatus, HSTATUS_SPVP);
-> +    } else if (mode == PRV_M && access_type != MMU_INST_FETCH &&
-> +               get_field(env->mstatus, MSTATUS_MPRV)) {
-> +        mode = get_field(env->mstatus, MSTATUS_MPP);
-> +        if (riscv_has_ext(env, RVH) && get_field(env->mstatus, MSTATUS_MPV)) {
-> +            two_stage_lookup = true;
->          }
->      }
+> -    *ret_value &= hip_writable_mask;
+> +    *ret_value &= hvip_writable_mask;
 >
-> -    if (riscv_has_ext(env, RVH) && env->priv == PRV_M &&
-> -        access_type != MMU_INST_FETCH &&
-> -        get_field(env->mstatus, MSTATUS_MPRV) &&
-> -        get_field(env->mstatus, MSTATUS_MPV)) {
-> -        two_stage_lookup = true;
-> -    }
-> -
->      if (riscv_cpu_virt_enabled(env) ||
->          ((riscv_cpu_two_stage_lookup(mmu_idx) || two_stage_lookup) &&
->           access_type != MMU_INST_FETCH)) {
+>      return ret;
+>  }
 > --
 > 2.30.1
 >
