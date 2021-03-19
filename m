@@ -1,52 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lNF2I-0004L4-HN
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Mar 2021 09:19:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59718)
+	id 1lNF3q-0005mG-7W
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Mar 2021 09:21:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59906)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lNF2G-0004KJ-D4; Fri, 19 Mar 2021 09:19:28 -0400
-Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:41864)
+ id 1lNF3n-0005ku-Fg; Fri, 19 Mar 2021 09:21:03 -0400
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:43711)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lNF2E-0008DU-W8; Fri, 19 Mar 2021 09:19:28 -0400
-Received: by mail-il1-x12a.google.com with SMTP id r8so7974504ilo.8;
- Fri, 19 Mar 2021 06:19:26 -0700 (PDT)
+ id 1lNF3k-0000pq-UF; Fri, 19 Mar 2021 09:21:03 -0400
+Received: by mail-il1-x12a.google.com with SMTP id d2so7977898ilm.10;
+ Fri, 19 Mar 2021 06:21:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WKjlAKpHxcHOpOcYsJngiyItPLZLWyW9gfxygmHm6V4=;
- b=UEli+BB3DUGUoqlIAortjwgaxoFy6SSWhnaTuqpIB2dO7PBauQtEcTYaYFWSV0jvNu
- BlrcjawDSP9pTahmMxwqRLfB1UQsOctbAZzdCwCZnCMJXSBE3A6FBNBzyN5T7ckbxXe8
- tNBFt5H0+wFz4FtRg1Jq+Xs8wVWbFmwls6YLgL+3y1gnE46p3Ipy8rF4XGUF3ddyz5ES
- wzzRwou4NPEKP5+U+4js8CDPfYtAQObGvTMkAa8MgqNuizs9Yih2CCpMk6nOmzjQkxvr
- k/Gi+yCpF3OMNotnYB44hmfFD6OkIs6xMwtINUbu1Ed1Un9ExLYWYksaXGHRNgU4SONa
- hfqA==
+ :cc; bh=Y+wXREcz+G27txgq0Zyw9ZKW7U/CnCbXn9a5uKaTow4=;
+ b=SwdIIYAZ1UH9ahWmONx+VeVqe/HZ6iQG4O8SKm0GdymqmVrFKVlUXYeqe75i59X57Y
+ 69srAY9NgFIY8AJQbQRDeJs/oGcFwL6DiHinFGBIKl+/7Wwyhq6KwWMSYcDdZUPHpT4X
+ DzhMgRFXig0DbQMS0/s6orXbIqTuBEQ94tCzVXmhN0OrznewJ0lY4Z6jZoZ1JsHPQ/vt
+ 3vZt1YEuqBc7w82GrBrI8ytXDoLDooGKX99ZKoOBTDUMHo34eMOrLNi83Zpn4g//Rifu
+ 6nz6kwcoFkcSdkFp4PQoWywugB5JnfT5gcGo2iHLf1Xl9aSv6jXzxOt3zBVEE0HWhB4d
+ 73pA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=WKjlAKpHxcHOpOcYsJngiyItPLZLWyW9gfxygmHm6V4=;
- b=CX6ZsFrYgxE3mrGXH1lC7pUQgG2wBIcVMtxJz1Dr4KnZs6iIa1M7LF0at1ETbhAPbc
- RnXRcTrCmLlqtuk0R8Zli0DV2Zp83nNigUUQMLUzcFruehSTmn6RDb12M8EN/qwcenUi
- GoPBzX1vIwggkhC4zRyebMUkeNUqMB2bZvu9XgvzUiksuDkPEQ5V7xu+dlr+tcnmA6gD
- eH/56oyvwbGyQIBWLQPNg5Y3yd/IetmoqpgMMzdh0tByvHj7mNv3LeeDHGJp4Q0b+h7h
- 28O1VSIcjdVbQCgJ5iM6HGmzWHU/Gb6bPqNDWpV6xYLo0XUd6oVfcVjL9H0PRYrZRT55
- iN+A==
-X-Gm-Message-State: AOAM5314tlrNx8Fon3Qmf8JDY6ymZG4onx1TbBFljGzVBMQYYBXO8scv
- wOrXQ4NMED3AC7SCiEWGrS/A98n9lFPVfXv2IcI=
-X-Google-Smtp-Source: ABdhPJyFXG5DvLmV/7wwCzhig+Je/cq609yBg4B67tq4RplTceVG4E9gcjC5KoI8hUzDXW14uIZJfKApYnNtdOGXBTQ=
-X-Received: by 2002:a05:6e02:1748:: with SMTP id
- y8mr2598467ill.131.1616159965573; 
- Fri, 19 Mar 2021 06:19:25 -0700 (PDT)
+ bh=Y+wXREcz+G27txgq0Zyw9ZKW7U/CnCbXn9a5uKaTow4=;
+ b=JBgvYUIJNo7P2mWLRupEi4cqLaYS6ErRRSQ/BBWoenbRJgfTWS6jua1dThs/ZKJ0oS
+ dQD8bXETdjFcXjYUX0nrz7boKxWKa6AUVWvTEtOR/akQBupPT6P6E3G0ThQhQ4oCARM3
+ F1tOztFSzR40VtZtpRnoMA69d9E6bZKWe2aMPY3FV9EUOWhrt66wtDH3J3IYWsIj1kRp
+ ttgchY6yTG0MPU6D0Zfid3AvNESE+dey1mRxLA0ooGq87UcErhR73AvLUq7ZRIp2yoXF
+ vVkvmn/kiLus+Ja1zPJQMgo2VlxmhRlY8KGMwkCRKrGzqOFtqu9YsST4XxwaSbvDrgNz
+ 7KWQ==
+X-Gm-Message-State: AOAM53054bObluGuKg+cj/vnur/hUNAKo2otCDUL+NDnICEJuFGYPz4k
+ Y8owHCKNhUxp53QNbr9Z77rTlM05aYX9DbiXdeU=
+X-Google-Smtp-Source: ABdhPJzXeyziPzcq4JpGxW3I9kFzwjWdwL7P3QyxB1STXWYf8njaSFnyhyA9yfR83RpCDpgHnPbHNqzMX1C+6nkqUNg=
+X-Received: by 2002:a92:c102:: with SMTP id p2mr2587397ile.227.1616160059404; 
+ Fri, 19 Mar 2021 06:20:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1616002766.git.alistair.francis@wdc.com>
- <9c0fa7d4f191d83ac2e70e830d141f4f4105e061.1616002766.git.alistair.francis@wdc.com>
- <db7bdc63-2c9b-40fc-f36c-230d32810970@linaro.org>
-In-Reply-To: <db7bdc63-2c9b-40fc-f36c-230d32810970@linaro.org>
+ <6834cb79431f394b05b06a26317799c9066ccd4f.1616002766.git.alistair.francis@wdc.com>
+ <20c52b91-3ddb-f384-3094-7efb344ca5ef@linaro.org>
+In-Reply-To: <20c52b91-3ddb-f384-3094-7efb344ca5ef@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 19 Mar 2021 09:17:37 -0400
-Message-ID: <CAKmqyKNRsh5+q2p1jGWqkq920u4YxQVt9uGneqfeOXTpH_pFcw@mail.gmail.com>
-Subject: Re: [PATCH v1 2/5] target/riscv: Use the RiscVException enum for CSR
- predicates
+Date: Fri, 19 Mar 2021 09:19:11 -0400
+Message-ID: <CAKmqyKN7TeyLUYZ2kdLb1iOBLeVGuvpx55NmSXeDM7MdxxVG1w@mail.gmail.com>
+Subject: Re: [PATCH v1 5/5] target/riscv: Use RiscVException enum for CSR
+ access
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -75,32 +74,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Mar 2021 13:19:28 -0000
+X-List-Received-Date: Fri, 19 Mar 2021 13:21:04 -0000
 
-On Wed, Mar 17, 2021 at 3:44 PM Richard Henderson
+On Thu, Mar 18, 2021 at 9:25 AM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> On 3/17/21 11:39 AM, Alistair Francis wrote:
-> > @@ -1312,8 +1320,8 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
-> >           return -RISCV_EXCP_ILLEGAL_INST;
-> >       }
-> >       ret = csr_ops[csrno].predicate(env, csrno);
-> > -    if (ret < 0) {
-> > -        return ret;
-> > +    if (ret > 0) {
-> > +        return -ret;
-> >       }
+> On 3/17/21 11:40 AM, Alistair Francis wrote:
+> >           result = riscv_csrrw_debug(env, n - 32, &val,
+> >                                      0, 0);
+> > -        if (result == 0) {
+> > +        if (result != RISCV_EXCP_NONE) {
 >
-> I think you want
->
->    if (ret != RISCV_EXCP_NONE) {
->       return -ret;
->    }
->
-> here.  But of course this outer interface is still confused until patches 4+5.
->   So perhaps it doesn't matter.
+> This was intending == NONE.  I.e. no exception raised, let gdb proceed.
 
-It probably doesn't, but it reduces churn so I have fixed this.
+Good catch! Fixed.
 
 Alistair
 
