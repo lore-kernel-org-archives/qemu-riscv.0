@@ -1,59 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lNEsG-0006wv-TH
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Mar 2021 09:09:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57442)
+	id 1lNF2I-0004L4-HN
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Mar 2021 09:19:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59718)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lNEsF-0006wi-Iu; Fri, 19 Mar 2021 09:09:07 -0400
-Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:37645)
+ id 1lNF2G-0004KJ-D4; Fri, 19 Mar 2021 09:19:28 -0400
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:41864)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lNEsE-0001oD-1Q; Fri, 19 Mar 2021 09:09:07 -0400
-Received: by mail-io1-xd2f.google.com with SMTP id b10so5990480iot.4;
- Fri, 19 Mar 2021 06:09:04 -0700 (PDT)
+ id 1lNF2E-0008DU-W8; Fri, 19 Mar 2021 09:19:28 -0400
+Received: by mail-il1-x12a.google.com with SMTP id r8so7974504ilo.8;
+ Fri, 19 Mar 2021 06:19:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=s3YVosDOHXtscmPMs8euaOMeqVtoqrnRF4CTe32hWo0=;
- b=sv0gWZwLzEbnQ+SBz+ve5Vq+iK13XXmMsBdIsO5ujccsRaPbdVzpCGysO8R+pD+xd1
- NCSza0uNIfqNoFZTxHhhz3uumMHKrNjmiIUb1dO41TpAE+a6ux3c3Q36T7QfEAOz2vL2
- KvxMpiT3HW6L0CrUD6rNBX/UDI6fH4aDYZoyc3p/X/rB/uMJqC1SxQPsznOFNSXaM2cJ
- ifKkxPEXxgBJ9vkdvmvAvhbUOF8dtPGr9YXIdbOLcf22RaFA/NC2snu87ubF+ezf8yrk
- mkaBZ7nut0JPJR6BYsdh8ADfWnTh7JQp/XEBK8wScfk6+jnBnNdVirsUA3jcur3nk8dc
- 9gRA==
+ :cc; bh=WKjlAKpHxcHOpOcYsJngiyItPLZLWyW9gfxygmHm6V4=;
+ b=UEli+BB3DUGUoqlIAortjwgaxoFy6SSWhnaTuqpIB2dO7PBauQtEcTYaYFWSV0jvNu
+ BlrcjawDSP9pTahmMxwqRLfB1UQsOctbAZzdCwCZnCMJXSBE3A6FBNBzyN5T7ckbxXe8
+ tNBFt5H0+wFz4FtRg1Jq+Xs8wVWbFmwls6YLgL+3y1gnE46p3Ipy8rF4XGUF3ddyz5ES
+ wzzRwou4NPEKP5+U+4js8CDPfYtAQObGvTMkAa8MgqNuizs9Yih2CCpMk6nOmzjQkxvr
+ k/Gi+yCpF3OMNotnYB44hmfFD6OkIs6xMwtINUbu1Ed1Un9ExLYWYksaXGHRNgU4SONa
+ hfqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=s3YVosDOHXtscmPMs8euaOMeqVtoqrnRF4CTe32hWo0=;
- b=pLW4N/NMheYziBg1vu8umClOFNBbY3hn7QAc1uMZFSiAOHH7LQgr0feJfjB4GbVosS
- G7sbugEGc2+T3aX9BwLnf20Mrze6/2PwN3T8htLpaezDkv1fKtNLb7mh8uKtfCtUsF8c
- eN2FiKkprkgZo6C4cu4Gzl4/VCCbSzGxtaewiRODpEf/SuEpCfbMgiZF2yiQgXP9YuaW
- bDH0FOx009+tlFSqZTE9C/39ASPBqNHCogw0c7kgd7PRxTe3yzEPtIhI/6gIqM1FKBw5
- 4vfdPMvHtw6zhvfw9mNLePQD0uiYBX08YTy5XsvEs2MNYKTNui+tauqUwvUbOlDMm5fB
- P3/A==
-X-Gm-Message-State: AOAM530ExfPzeAzjNHK/G+3+RiGwSd0kap8P4+HubBfiVr/eiJvqN8bb
- kODI491KggUg83icqUGrSNyREUjaiQZZytJe0Eo=
-X-Google-Smtp-Source: ABdhPJzl8cGuJqfnHaZIXG1DlCKOES97yhCaSsiNTAIHx3/YN5ArfJz1Yv93v+eaFgjSKE+hmwmTyTvXo0JakoLG2ck=
-X-Received: by 2002:a05:6638:3791:: with SMTP id
- w17mr1242121jal.91.1616159344094; 
- Fri, 19 Mar 2021 06:09:04 -0700 (PDT)
+ bh=WKjlAKpHxcHOpOcYsJngiyItPLZLWyW9gfxygmHm6V4=;
+ b=CX6ZsFrYgxE3mrGXH1lC7pUQgG2wBIcVMtxJz1Dr4KnZs6iIa1M7LF0at1ETbhAPbc
+ RnXRcTrCmLlqtuk0R8Zli0DV2Zp83nNigUUQMLUzcFruehSTmn6RDb12M8EN/qwcenUi
+ GoPBzX1vIwggkhC4zRyebMUkeNUqMB2bZvu9XgvzUiksuDkPEQ5V7xu+dlr+tcnmA6gD
+ eH/56oyvwbGyQIBWLQPNg5Y3yd/IetmoqpgMMzdh0tByvHj7mNv3LeeDHGJp4Q0b+h7h
+ 28O1VSIcjdVbQCgJ5iM6HGmzWHU/Gb6bPqNDWpV6xYLo0XUd6oVfcVjL9H0PRYrZRT55
+ iN+A==
+X-Gm-Message-State: AOAM5314tlrNx8Fon3Qmf8JDY6ymZG4onx1TbBFljGzVBMQYYBXO8scv
+ wOrXQ4NMED3AC7SCiEWGrS/A98n9lFPVfXv2IcI=
+X-Google-Smtp-Source: ABdhPJyFXG5DvLmV/7wwCzhig+Je/cq609yBg4B67tq4RplTceVG4E9gcjC5KoI8hUzDXW14uIZJfKApYnNtdOGXBTQ=
+X-Received: by 2002:a05:6e02:1748:: with SMTP id
+ y8mr2598467ill.131.1616159965573; 
+ Fri, 19 Mar 2021 06:19:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210318235041.17175-1-ashe@kivikakk.ee>
-In-Reply-To: <20210318235041.17175-1-ashe@kivikakk.ee>
+References: <cover.1616002766.git.alistair.francis@wdc.com>
+ <9c0fa7d4f191d83ac2e70e830d141f4f4105e061.1616002766.git.alistair.francis@wdc.com>
+ <db7bdc63-2c9b-40fc-f36c-230d32810970@linaro.org>
+In-Reply-To: <db7bdc63-2c9b-40fc-f36c-230d32810970@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 19 Mar 2021 09:07:15 -0400
-Message-ID: <CAKmqyKNj9HB7c3+ESYzPTWn_TXY-AZ-w+pBP1BePpNqpHUpuMg@mail.gmail.com>
-Subject: Re: [PATCH v4 0/2] hw/riscv: Add fw_cfg support, allow ramfb
-To: Asherah Connor <ashe@kivikakk.ee>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Fri, 19 Mar 2021 09:17:37 -0400
+Message-ID: <CAKmqyKNRsh5+q2p1jGWqkq920u4YxQVt9uGneqfeOXTpH_pFcw@mail.gmail.com>
+Subject: Re: [PATCH v1 2/5] target/riscv: Use the RiscVException enum for CSR
+ predicates
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,45 +75,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Mar 2021 13:09:07 -0000
+X-List-Received-Date: Fri, 19 Mar 2021 13:19:28 -0000
 
-On Thu, Mar 18, 2021 at 7:51 PM Asherah Connor <ashe@kivikakk.ee> wrote:
+On Wed, Mar 17, 2021 at 3:44 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> This is version 4 of the series to bring fw_cfg and ramfb support to
-> riscv's virt machine, adapted for the latest master.  It is still tested
-> as working against a modified U-Boot with ramfb support.
+> On 3/17/21 11:39 AM, Alistair Francis wrote:
+> > @@ -1312,8 +1320,8 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+> >           return -RISCV_EXCP_ILLEGAL_INST;
+> >       }
+> >       ret = csr_ops[csrno].predicate(env, csrno);
+> > -    if (ret < 0) {
+> > -        return ret;
+> > +    if (ret > 0) {
+> > +        return -ret;
+> >       }
 >
+> I think you want
 >
-> Changes in v4:
-> * Adapt for changes made in c65d7080d8 "hw/riscv: migrate fdt field to
->   generic MachineState".
+>    if (ret != RISCV_EXCP_NONE) {
+>       return -ret;
+>    }
 >
-> Changes in v3:
-> * Document why fw_cfg is done when it is.
-> * Move VIRT_FW_CFG before VIRT_FLASH.
->
-> Changes in v2:
-> * Add DMA support (needed for writes).
-> * Add ramfb as allowed on riscv virt machine class.
->
-> Asherah Connor (2):
->   hw/riscv: Add fw_cfg support to virt
->   hw/riscv: allow ramfb on virt
->
->  hw/riscv/Kconfig        |  1 +
->  hw/riscv/virt.c         | 33 +++++++++++++++++++++++++++++++++
->  include/hw/riscv/virt.h |  2 ++
->  3 files changed, 36 insertions(+)
+> here.  But of course this outer interface is still confused until patches 4+5.
+>   So perhaps it doesn't matter.
 
-Thanks!
-
-Applied to riscv-to-apply.next
+It probably doesn't, but it reduces churn so I have fixed this.
 
 Alistair
 
 >
-> --
-> 2.20.1
 >
->
+> r~
 
