@@ -1,49 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lNY1F-0005U2-Cz
-	for mharc-qemu-riscv@gnu.org; Sat, 20 Mar 2021 05:35:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55890)
+	id 1lNY4H-0007Jc-Jt
+	for mharc-qemu-riscv@gnu.org; Sat, 20 Mar 2021 05:38:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56236)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
- id 1lNY1C-0005QS-Qe; Sat, 20 Mar 2021 05:35:39 -0400
-Received: from sender-of-o51.zoho.in ([103.117.158.51]:2296)
+ id 1lNY4B-0007GB-OC; Sat, 20 Mar 2021 05:38:47 -0400
+Received: from sender-of-o51.zoho.in ([103.117.158.51]:2297)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
- id 1lNY1A-0006e1-0R; Sat, 20 Mar 2021 05:35:38 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1616232921; cv=none; d=zohomail.in; s=zohoarc; 
- b=DIoPCiUyIP7kEPoQPo15ipd13YQQCckTQMxn2hQX9oBNOzahWt7hkgJhm+QHiZTWLjR+D7QBx8R3KkAnDQVDqa07gRJXDPVtfuR11E2nzAdgkyHuZyWMwnkkSw8AaCizoTjMkCYEFIvvCjs0wB6/98LkMLmHdBaeqEdN4OR87qA=
+ id 1lNY49-0008Bc-Fs; Sat, 20 Mar 2021 05:38:43 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1616233107; cv=none; d=zohomail.in; s=zohoarc; 
+ b=eAzUCx5F3FAJ8qVdbw4Bsem+s491DFI7njhq/ML+TjQPIreLv8dp6Aa5e0qDX5F+qkYoO8p7egGocGsc+s3gdLw7rdCKoefiWScjU6vQ34+jQInAzdOmbjUAz9pmZLhpJAByLqtSxq4odFGdwVS3M7HCqbXhw2hOqC1qg2DBGdY=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in;
- s=zohoarc; t=1616232921;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To;
- bh=ADKOgabrLJYijRTByHXNUpvHeMzzz9ifJatn4atOPHs=; 
- b=BSAyiSnTAHIN5/HhlOXgupFHIaC4inhuCO32kNnUGsvCbnqcMCyYN4JRuJehBSz3/bG6HSBCCY6UOo7tA9rwTr7gn9tRLs9DnSNkYbTox//+JmgoSo4u96uN1hzgFGbHvZ4YXuTKAjoXz+/r/YwiMeevqi1DNPquBXJjvd+hrYM=
+ s=zohoarc; t=1616233107;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
+ bh=ZCDS8Nmm4LXS59HVi5Bgz5VC0FY3RgPFIMAnSlFKoQc=; 
+ b=FMJrGCzsWpvh4sk/COjiJZk3nqgp25to9J6S8PrSQYxD/Bu33kBnMSVYm7jV2Sz1NNFrMLherhxhdrkM6mUwOaMk9bPQnKhQ8moQ9thGs+6Q57MTznFhkZ9Xj1M5gYtI5iYxcNAKq7gfgBZLwyvUdPoymetd65n3KAGTTjZbJ3o=
 ARC-Authentication-Results: i=1; mx.zohomail.in;
  dkim=pass  header.i=behindbytes.com;
  spf=pass  smtp.mailfrom=vijai@behindbytes.com;
  dmarc=pass header.from=<vijai@behindbytes.com>
  header.from=<vijai@behindbytes.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1616232921; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1616233107; 
  s=yrk; d=behindbytes.com; i=vijai@behindbytes.com;
- h=From:To:Cc:Message-ID:Subject:Date:MIME-Version:Content-Transfer-Encoding:Content-Type;
- bh=ADKOgabrLJYijRTByHXNUpvHeMzzz9ifJatn4atOPHs=;
- b=w3Aceovu7En/LYVrBci1+EnEwv+yaxy2El4TmsBfg/3oHmCCc33tOoo3X9VB1I46
- /913sfrcX5fsUDsknQ4Ql27fUosl2tEH/XDpmxJA6/Rl+C5l12blKBaPV+JADftTb1Z
- uXfqhdwhSzqTvRKMZaMDSVRALp/rj6enBghwyCvY=
-Received: from localhost.localdomain (49.207.212.3 [49.207.212.3]) by
- mx.zoho.in with SMTPS id 1616232918156279.8627736546946;
- Sat, 20 Mar 2021 15:05:18 +0530 (IST)
+ h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding;
+ bh=ZCDS8Nmm4LXS59HVi5Bgz5VC0FY3RgPFIMAnSlFKoQc=;
+ b=clSrhbsraCplUH5PPlJ+KuywDgqtfOmR3MQ3Uo0h3Uw85Q9wVMxdOEoGw5JHLfkL
+ clULoWBvQmC65eIZ5ScpVC1mlQ0QAUdJkI6jbRvgciCnTTPKzV19Y8HPUUJgbwWFWMn
+ wVJ7M2uizTj6C4lyllFVGslJS1iuzeLPK+UF8D3w=
+Received: from mail.zoho.in by mx.zoho.in
+ with SMTP id 1616233105862914.9664377455897;
+ Sat, 20 Mar 2021 15:08:25 +0530 (IST)
+Date: Sat, 20 Mar 2021 15:08:25 +0530
 From: Vijai Kumar K <vijai@behindbytes.com>
-To: qemu-riscv@nongnu.org,
-	alistair23@gmail.com
-Cc: qemu-devel@nongnu.org,
-	Vijai Kumar K <vijai@behindbytes.com>
-Message-ID: <20210320093509.80016-1-vijai@behindbytes.com>
-Subject: [PATCH] hw/riscv: Drop the unused fdt pointer
-Date: Sat, 20 Mar 2021 15:05:09 +0530
-X-Mailer: git-send-email 2.25.1
+To: "Alistair Francis" <alistair23@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Message-ID: <1784f0009c4.2768405041006.3269321445638908202@behindbytes.com>
+In-Reply-To: <CAKmqyKOJ43cf__vXXpEQANPRfyyNFT5WVEcc-hnkfWAPg2kt_g@mail.gmail.com>
+References: <20210314083936.76269-1-vijai@behindbytes.com>
+ <20210314083936.76269-4-vijai@behindbytes.com>
+ <CAKmqyKOJ43cf__vXXpEQANPRfyyNFT5WVEcc-hnkfWAPg2kt_g@mail.gmail.com>
+Subject: Re: [PATCH 3/3] hw/riscv: Connect Shakti UART to Shakti platform
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-ZohoMailClient: External
-Content-Type: text/plain; charset=utf8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Importance: Medium
+User-Agent: Zoho Mail
+X-Mailer: Zoho Mail
 Received-SPF: pass client-ip=103.117.158.51;
  envelope-from=vijai@behindbytes.com; helo=sender-of-o51.zoho.in
 X-Spam_score_int: -20
@@ -65,75 +69,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Mar 2021 09:35:39 -0000
-
-Drop the unused fdt pointer in riscv_setup_rom_reset_vec API.
-
-Signed-off-by: Vijai Kumar K <vijai@behindbytes.com>
----
- hw/riscv/boot.c         | 2 +-
- hw/riscv/spike.c        | 2 +-
- hw/riscv/virt.c         | 2 +-
- include/hw/riscv/boot.h | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 0d38bb7426..893e307da6 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -249,7 +249,7 @@ void riscv_setup_rom_reset_vec(MachineState *machine, R=
-ISCVHartArrayState *harts
-                                hwaddr start_addr,
-                                hwaddr rom_base, hwaddr rom_size,
-                                uint64_t kernel_entry,
--                               uint32_t fdt_load_addr, void *fdt)
-+                               uint32_t fdt_load_addr)
- {
-     int i;
-     uint32_t start_addr_hi32 =3D 0x00000000;
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index ec7cb2f707..0b68710afb 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -298,7 +298,7 @@ static void spike_board_init(MachineState *machine)
-     riscv_setup_rom_reset_vec(machine, &s->soc[0], memmap[SPIKE_DRAM].base=
-,
-                               memmap[SPIKE_MROM].base,
-                               memmap[SPIKE_MROM].size, kernel_entry,
--                              fdt_load_addr, s->fdt);
-+                              fdt_load_addr);
-=20
-     /* initialize HTIF using symbols found in load_kernel */
-     htif_mm_init(system_memory, mask_rom,
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 0b39101a5e..7c247626c8 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -695,7 +695,7 @@ static void virt_machine_init(MachineState *machine)
-     riscv_setup_rom_reset_vec(machine, &s->soc[0], start_addr,
-                               virt_memmap[VIRT_MROM].base,
-                               virt_memmap[VIRT_MROM].size, kernel_entry,
--                              fdt_load_addr, machine->fdt);
-+                              fdt_load_addr);
-=20
-     /* SiFive Test MMIO device */
-     sifive_test_create(memmap[VIRT_TEST].base);
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index 11a21dd584..27b9569e2f 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -46,7 +46,7 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RIS=
-CVHartArrayState *harts
-                                hwaddr saddr,
-                                hwaddr rom_base, hwaddr rom_size,
-                                uint64_t kernel_entry,
--                               uint32_t fdt_load_addr, void *fdt);
-+                               uint32_t fdt_load_addr);
- void riscv_rom_copy_firmware_info(MachineState *machine, hwaddr rom_base,
-                                   hwaddr rom_size,
-                                   uint32_t reset_vec_size,
---=20
-2.25.1
+X-List-Received-Date: Sat, 20 Mar 2021 09:38:47 -0000
 
 
+
+
+---- On Fri, 19 Mar 2021 19:17:58 +0530 Alistair Francis <alistair23@gmail.com> wrote ----
+
+ > On Sun, Mar 14, 2021 at 5:11 AM Vijai Kumar K <vijai@behindbytes.com> wrote: 
+ > > 
+ > > Connect one shakti uart to the shakti_c machine. 
+ > > 
+ > > Signed-off-by: Vijai Kumar K <vijai@behindbytes.com> 
+ > > --- 
+ > >  hw/riscv/shakti_c.c         | 7 +++++++ 
+ > >  include/hw/riscv/shakti_c.h | 2 ++ 
+ > >  2 files changed, 9 insertions(+) 
+ > > 
+ > > diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c 
+ > > index e96436a3bf..07cc42a380 100644 
+ > > --- a/hw/riscv/shakti_c.c 
+ > > +++ b/hw/riscv/shakti_c.c 
+ > > @@ -133,6 +133,12 @@ static void shakti_c_soc_state_realize(DeviceState *dev, Error **errp) 
+ > >          shakti_c_memmap[SHAKTI_C_CLINT].size, 0, 1, 
+ > >          SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE, 
+ > >          SIFIVE_CLINT_TIMEBASE_FREQ, false); 
+ > > +    qdev_prop_set_chr(DEVICE(&(sss->uart)), "chardev", serial_hd(0)); 
+ > > +    if (!sysbus_realize(SYS_BUS_DEVICE(&sss->uart), errp)) { 
+ > > +        return; 
+ > > +    } 
+ > > +    sysbus_mmio_map(SYS_BUS_DEVICE(&sss->uart), 0, 
+ > > +                    shakti_c_memmap[SHAKTI_C_UART].base); 
+ >  
+ > Are there no interrupts? 
+ >  
+ > Alistair 
+
+Not in the initial implementation. Interrupt support was added to the UART IP meanwhile. I did not test it.
+Will come as a separate patch later.
+
+Thanks,
+Vijai Kumar K
+
+ >  
+ > >      /* ROM */ 
+ > >      memory_region_init_rom(&sss->rom, OBJECT(dev), "riscv.shakti.c.rom", 
+ > >                             shakti_c_memmap[SHAKTI_C_ROM].size, &error_fatal); 
+ > > @@ -151,6 +157,7 @@ static void shakti_c_soc_instance_init(Object *obj) 
+ > >      ShaktiCSoCState *sss = RISCV_SHAKTI_SOC(obj); 
+ > > 
+ > >      object_initialize_child(obj, "cpus", &sss->cpus, TYPE_RISCV_HART_ARRAY); 
+ > > +    object_initialize_child(obj, "uart", &sss->uart, TYPE_SHAKTI_UART); 
+ > > 
+ > >      /* 
+ > >       * CPU type is fixed and we are not supporting passing from commandline yet. 
+ > > diff --git a/include/hw/riscv/shakti_c.h b/include/hw/riscv/shakti_c.h 
+ > > index 6c66a160f5..3abb080d3c 100644 
+ > > --- a/include/hw/riscv/shakti_c.h 
+ > > +++ b/include/hw/riscv/shakti_c.h 
+ > > @@ -21,6 +21,7 @@ 
+ > > 
+ > >  #include "hw/riscv/riscv_hart.h" 
+ > >  #include "hw/boards.h" 
+ > > +#include "hw/char/shakti_uart.h" 
+ > > 
+ > >  #define TYPE_RISCV_SHAKTI_SOC "riscv.shakti.cclass.soc" 
+ > >  #define RISCV_SHAKTI_SOC(obj) \ 
+ > > @@ -33,6 +34,7 @@ typedef struct ShaktiCSoCState { 
+ > >      /*< public >*/ 
+ > >      RISCVHartArrayState cpus; 
+ > >      DeviceState *plic; 
+ > > +    ShaktiUartState uart; 
+ > >      MemoryRegion rom; 
+ > > 
+ > >  } ShaktiCSoCState; 
+ > > -- 
+ > > 2.25.1 
+ > > 
+ > > 
+ > > 
+ > 
 
