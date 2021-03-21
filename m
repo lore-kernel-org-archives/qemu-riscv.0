@@ -1,44 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lNqLU-0005fE-7A
+	id 1lNqLU-0005fn-Fp
 	for mharc-qemu-riscv@gnu.org; Sun, 21 Mar 2021 01:09:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43768)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43766)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
- id 1lNqLS-0005cC-Bu; Sun, 21 Mar 2021 01:09:46 -0400
-Received: from sender-of-o51.zoho.in ([103.117.158.51]:2360)
+ id 1lNqLR-0005bl-K6; Sun, 21 Mar 2021 01:09:45 -0400
+Received: from sender-of-o51.zoho.in ([103.117.158.51]:2359)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
- id 1lNqLL-0007Wv-NG; Sun, 21 Mar 2021 01:09:46 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1616303370; cv=none; d=zohomail.in; s=zohoarc; 
- b=LfZmNWLNA0+K77s3OaN9CJaWkUPpjXtqzP0D5Xy/ZL5wioGyZ1ObHzoGXYTDDLxzh9qJdnwb+4hs///nLWXO37y5WKOm+HUi2E+uZ44esMb+JGXN3upV+TBDQsy+eHeUnbT9PjK5drPTUfanWFDTQR0DZ+t6r4Gu+1wEOfm3ukc=
+ id 1lNqLL-0007Wy-Oh; Sun, 21 Mar 2021 01:09:45 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1616303369; cv=none; d=zohomail.in; s=zohoarc; 
+ b=bcvKHvS+5l7F+RBsvps+FFTV3zggdsQzHTRb2YUFwXONE1/QtujNREmvFWNHySQKy3uIMcTguB3cSDzfLSDK4oypgBJ+nQTC5H7qeCGlcUnCM7CSFYmifzgHS5EeRQUIZXdCFifYs0xKmysYVX2Is8xaNqJCWTyshDqCRIVyBmE=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in;
- s=zohoarc; t=1616303370;
+ s=zohoarc; t=1616303369;
  h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
- bh=ncZGrTcTW1nPzdmfhF9Rt5NVWAILdf4CYCmNdHCO+SE=; 
- b=dgdsmMBjVj8simSlZrz2Oewn4f0al/AKRA7Zss0vs+oxMp8w5DAd51ERHGbyhsFwiTxE8nljMZe9hDojn5W5canUIzjrJHi/kA+ovOdHlfoF6Bzc2iEZofpULfO4jU6rGPblKKxzmsnTtQGmRCjHhUCG5gSVyk8NERfvtH4QTPo=
+ bh=xFo9r9JEtBqpLxIEtXqPr/jj7ZNiZVgywVbyzxMJVCU=; 
+ b=Y/FND51OliZk4Xkf3K62SNnXS5ZwGNYApHYtRnSFYgCrjcy/CNVdOPnl40meBQEBoEN6e5IJa1Om1P/rM83OUYchtNJu5QFr2avoaUM/YRyfdIAjh94RTzBGNAQX7F+tfTOPd2kXQy/7OF/R0AO1cPz2bATOkF3mJ4Iyl+OyR5k=
 ARC-Authentication-Results: i=1; mx.zohomail.in;
  dkim=pass  header.i=behindbytes.com;
  spf=pass  smtp.mailfrom=vijai@behindbytes.com;
  dmarc=pass header.from=<vijai@behindbytes.com>
  header.from=<vijai@behindbytes.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1616303370; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1616303369; 
  s=yrk; d=behindbytes.com; i=vijai@behindbytes.com;
  h=From:To:Cc:Message-ID:Subject:Date:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Content-Type;
- bh=ncZGrTcTW1nPzdmfhF9Rt5NVWAILdf4CYCmNdHCO+SE=;
- b=mRa3ItycBlXg1z6yP4khsnEsZVP5WlUpKrNaeB24ll5yFnix9vmK7nHMYqiuYTYV
- qQYPfGxPOT23wQO9RI/0SJFa0kIZp25Ox6RSR+L3/35gTDVPzEYxv/QeRYrt4WsUC3E
- PngO8jStbB75Q5T/jaufshgHdvADN2GgG1Hlxbk8=
+ bh=xFo9r9JEtBqpLxIEtXqPr/jj7ZNiZVgywVbyzxMJVCU=;
+ b=rIWneoS2ku+FS2itVnWfSnW2v1wHBjcvE1pC0RZToRBkAqotoVxa0gEKJnuHxIqa
+ 24CHZyAL1l8jTorBVNUKLtDC1UMxO0h5V2helAAcg9m0fcj6Sd5xsAHdVrV0F7Q6qiU
+ 2ir0CF1nCLhdO1v2FguMa8HiQY4Z+SBx2ivzIEaA=
 Received: from helium.Dlink (49.207.205.35 [49.207.205.35]) by mx.zoho.in
- with SMTPS id 1616303368492275.35400038376395;
+ with SMTPS id 1616303368837317.21930478009847;
  Sun, 21 Mar 2021 10:39:28 +0530 (IST)
 From: Vijai Kumar K <vijai@behindbytes.com>
 To: qemu-riscv@nongnu.org,
 	alistair23@gmail.com
 Cc: qemu-devel@nongnu.org,
 	Vijai Kumar K <vijai@behindbytes.com>
-Message-ID: <20210321050917.24621-3-vijai@behindbytes.com>
-Subject: [PATCH v2 2/4] riscv: Add initial support for Shakti C machine
-Date: Sun, 21 Mar 2021 10:39:15 +0530
+Message-ID: <20210321050917.24621-4-vijai@behindbytes.com>
+Subject: [PATCH v2 3/4] hw/char: Add Shakti UART emulation
+Date: Sun, 21 Mar 2021 10:39:16 +0530
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210321050917.24621-1-vijai@behindbytes.com>
 References: <20210321050917.24621-1-vijai@behindbytes.com>
@@ -67,352 +67,365 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Mar 2021 05:09:46 -0000
+X-List-Received-Date: Sun, 21 Mar 2021 05:09:45 -0000
 
-Add support for emulating Shakti reference platform based on C-class
-running on arty-100T board.
-
-https://gitlab.com/shaktiproject/cores/shakti-soc/-/blob/master/README.rst
+This is the initial implementation of Shakti UART.
 
 Signed-off-by: Vijai Kumar K <vijai@behindbytes.com>
 ---
- MAINTAINERS                                 |   7 +
- default-configs/devices/riscv64-softmmu.mak |   1 +
- hw/riscv/Kconfig                            |  10 ++
- hw/riscv/meson.build                        |   1 +
- hw/riscv/shakti_c.c                         | 171 ++++++++++++++++++++
- include/hw/riscv/shakti_c.h                 |  74 +++++++++
- 6 files changed, 264 insertions(+)
- create mode 100644 hw/riscv/shakti_c.c
- create mode 100644 include/hw/riscv/shakti_c.h
+ MAINTAINERS                   |   2 +
+ hw/char/meson.build           |   1 +
+ hw/char/shakti_uart.c         | 185 ++++++++++++++++++++++++++++++++++
+ hw/char/trace-events          |   4 +
+ include/hw/char/shakti_uart.h |  74 ++++++++++++++
+ 5 files changed, 266 insertions(+)
+ create mode 100644 hw/char/shakti_uart.c
+ create mode 100644 include/hw/char/shakti_uart.h
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 8e9f0d591e..9f71c4cc3f 100644
+index 9f71c4cc3f..be084865db 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1380,6 +1380,13 @@ F: include/hw/misc/mchp_pfsoc_dmc.h
- F: include/hw/misc/mchp_pfsoc_ioscb.h
- F: include/hw/misc/mchp_pfsoc_sysreg.h
+@@ -1385,7 +1385,9 @@ M: Vijai Kumar K <vijai@behindbytes.com>
+ L: qemu-riscv@nongnu.org
+ S: Supported
+ F: hw/riscv/shakti_c.c
++F: hw/char/shakti_uart.c
+ F: include/hw/riscv/shakti_c.h
++F: include/hw/char/shakti_uart.h
 =20
-+Shakti C class SoC
-+M: Vijai Kumar K <vijai@behindbytes.com>
-+L: qemu-riscv@nongnu.org
-+S: Supported
-+F: hw/riscv/shakti_c.c
-+F: include/hw/riscv/shakti_c.h
-+
  SiFive Machines
  M: Alistair Francis <Alistair.Francis@wdc.com>
- M: Bin Meng <bin.meng@windriver.com>
-diff --git a/default-configs/devices/riscv64-softmmu.mak b/default-configs/=
-devices/riscv64-softmmu.mak
-index d5eec75f05..bc69301fa4 100644
---- a/default-configs/devices/riscv64-softmmu.mak
-+++ b/default-configs/devices/riscv64-softmmu.mak
-@@ -13,3 +13,4 @@ CONFIG_SIFIVE_E=3Dy
- CONFIG_SIFIVE_U=3Dy
- CONFIG_RISCV_VIRT=3Dy
- CONFIG_MICROCHIP_PFSOC=3Dy
-+CONFIG_SHAKTI_C=3Dy
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index d139074b02..92a62b5ce9 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -19,6 +19,16 @@ config OPENTITAN
-     select IBEX
-     select UNIMP
-=20
-+config SHAKTI
-+    bool
-+
-+config SHAKTI_C
-+    bool
-+    select UNIMP
-+    select SHAKTI
-+    select SIFIVE_CLINT
-+    select SIFIVE_PLIC
-+
- config RISCV_VIRT
-     bool
-     imply PCI_DEVICES
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 275c0f7eb7..a97454661c 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -4,6 +4,7 @@ riscv_ss.add(files('numa.c'))
- riscv_ss.add(files('riscv_hart.c'))
- riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
-+riscv_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c'))
- riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
- riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
- riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
-diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+diff --git a/hw/char/meson.build b/hw/char/meson.build
+index 7ba38dbd96..61c43d4b51 100644
+--- a/hw/char/meson.build
++++ b/hw/char/meson.build
+@@ -19,6 +19,7 @@ softmmu_ss.add(when: 'CONFIG_SERIAL', if_true: files('ser=
+ial.c'))
+ softmmu_ss.add(when: 'CONFIG_SERIAL_ISA', if_true: files('serial-isa.c'))
+ softmmu_ss.add(when: 'CONFIG_SERIAL_PCI', if_true: files('serial-pci.c'))
+ softmmu_ss.add(when: 'CONFIG_SERIAL_PCI_MULTI', if_true: files('serial-pci=
+-multi.c'))
++softmmu_ss.add(when: 'CONFIG_SHAKTI', if_true: files('shakti_uart.c'))
+ softmmu_ss.add(when: 'CONFIG_VIRTIO_SERIAL', if_true: files('virtio-consol=
+e.c'))
+ softmmu_ss.add(when: 'CONFIG_XEN', if_true: files('xen_console.c'))
+ softmmu_ss.add(when: 'CONFIG_XILINX', if_true: files('xilinx_uartlite.c'))
+diff --git a/hw/char/shakti_uart.c b/hw/char/shakti_uart.c
 new file mode 100644
-index 0000000000..45d0eedabd
+index 0000000000..6870821325
 --- /dev/null
-+++ b/hw/riscv/shakti_c.c
-@@ -0,0 +1,171 @@
++++ b/hw/char/shakti_uart.c
+@@ -0,0 +1,185 @@
 +/*
-+ * Shakti C-class SoC emulation
++ * SHAKTI UART
 + *
 + * Copyright (c) 2021 Vijai Kumar K <vijai@behindbytes.com>
 + *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
++ * Permission is hereby granted, free of charge, to any person obtaining a=
+ copy
++ * of this software and associated documentation files (the "Software"), t=
+o deal
++ * in the Software without restriction, including without limitation the r=
+ights
++ * to use, copy, modify, merge, publish, distribute, sublicense, and/or se=
+ll
++ * copies of the Software, and to permit persons to whom the Software is
++ * furnished to do so, subject to the following conditions:
 + *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License f=
-or
-+ * more details.
++ * The above copyright notice and this permission notice shall be included=
+ in
++ * all copies or substantial portions of the Software.
 + *
-+ * You should have received a copy of the GNU General Public License along=
- with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS=
+ OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY=
+,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OT=
+HER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING=
+ FROM,
++ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS =
+IN
++ * THE SOFTWARE.
 + */
 +
 +#include "qemu/osdep.h"
-+#include "hw/boards.h"
-+#include "hw/riscv/shakti_c.h"
-+#include "qapi/error.h"
-+#include "hw/intc/sifive_plic.h"
-+#include "hw/intc/sifive_clint.h"
-+#include "sysemu/sysemu.h"
++#include "hw/char/shakti_uart.h"
 +#include "hw/qdev-properties.h"
-+#include "exec/address-spaces.h"
-+#include "hw/riscv/boot.h"
++#include "hw/qdev-properties-system.h"
++#include "qemu/log.h"
 +
-+
-+static const struct MemmapEntry {
-+    hwaddr base;
-+    hwaddr size;
-+} shakti_c_memmap[] =3D {
-+    [SHAKTI_C_ROM]   =3D  {  0x00001000,  0x2000   },
-+    [SHAKTI_C_RAM]   =3D  {  0x80000000,  0x0      },
-+    [SHAKTI_C_UART]  =3D  {  0x00011300,  0x00040  },
-+    [SHAKTI_C_GPIO]  =3D  {  0x020d0000,  0x00100  },
-+    [SHAKTI_C_PLIC]  =3D  {  0x0c000000,  0x20000  },
-+    [SHAKTI_C_CLINT] =3D  {  0x02000000,  0xc0000  },
-+    [SHAKTI_C_DEBUG] =3D  {  0x00000000,  0x00010  },
-+    [SHAKTI_C_I2C]   =3D  {  0x20c00000,  0x00100  },
-+};
-+
-+static void shakti_c_machine_state_init(MachineState *mstate)
++static uint64_t shakti_uart_read(void *opaque, hwaddr addr, unsigned size)
 +{
-+    ShaktiCMachineState *sms =3D RISCV_SHAKTI_MACHINE(mstate);
-+    MemoryRegion *system_memory =3D get_system_memory();
-+    MemoryRegion *main_mem =3D g_new(MemoryRegion, 1);
++    ShaktiUartState *s =3D opaque;
 +
-+    /* Allow only Shakti C CPU for this platform */
-+    if (strcmp(mstate->cpu_type, TYPE_RISCV_CPU_SHAKTI_C) !=3D 0) {
-+        error_report("This board can only be used with Shakti C CPU");
-+        exit(1);
++    switch (addr) {
++    case SHAKTI_UART_BAUD:
++        return s->uart_baud;
++    case SHAKTI_UART_RX:
++        qemu_chr_fe_accept_input(&s->chr);
++        s->uart_status &=3D ~SHAKTI_UART_STATUS_RX_NOT_EMPTY;
++        return s->uart_rx;
++    case SHAKTI_UART_STATUS:
++        return s->uart_status;
++    case SHAKTI_UART_DELAY:
++        return s->uart_delay;
++    case SHAKTI_UART_CONTROL:
++        return s->uart_control;
++    case SHAKTI_UART_INT_EN:
++        return s->uart_interrupt;
++    case SHAKTI_UART_IQ_CYCLES:
++        return s->uart_iq_cycles;
++    case SHAKTI_UART_RX_THRES:
++        return s->uart_rx_threshold;
++    default:
++        /* Also handles TX REG which is write only */
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: Bad offset 0x%"HWADDR_PRIx"\n", __func__, addr)=
+;
 +    }
 +
-+    /* Initialize SoC */
-+    object_initialize_child(OBJECT(mstate), "soc", &sms->soc,
-+                            TYPE_RISCV_SHAKTI_SOC);
-+    qdev_realize(DEVICE(&sms->soc), NULL, &error_abort);
-+
-+    /* register RAM */
-+    memory_region_init_ram(main_mem, NULL, "riscv.shakti.c.ram",
-+                           mstate->ram_size, &error_fatal);
-+    memory_region_add_subregion(system_memory,
-+                                shakti_c_memmap[SHAKTI_C_RAM].base,
-+                                main_mem);
-+
-+    /* ROM reset vector */
-+    riscv_setup_rom_reset_vec(mstate, &sms->soc.cpus,
-+                              shakti_c_memmap[SHAKTI_C_RAM].base,
-+                              shakti_c_memmap[SHAKTI_C_ROM].base,
-+                              shakti_c_memmap[SHAKTI_C_ROM].size, 0, 0,
-+                              NULL);
-+    riscv_load_firmware(mstate->firmware, shakti_c_memmap[SHAKTI_C_RAM].ba=
-se,
-+                        NULL);
++    return 0;
 +}
 +
-+static void shakti_c_machine_instance_init(Object *obj)
++static void shakti_uart_write(void *opaque, hwaddr addr,
++                              uint64_t data, unsigned size)
 +{
++    ShaktiUartState *s =3D opaque;
++    uint32_t value =3D data;
++    uint8_t ch;
++
++    switch (addr) {
++    case SHAKTI_UART_BAUD:
++        s->uart_baud =3D value;
++        break;
++    case SHAKTI_UART_TX:
++        ch =3D value;
++        qemu_chr_fe_write_all(&s->chr, &ch, 1);
++        s->uart_status &=3D ~SHAKTI_UART_STATUS_TX_FULL;
++        break;
++    case SHAKTI_UART_STATUS:
++        s->uart_status =3D value;
++        break;
++    case SHAKTI_UART_DELAY:
++        s->uart_delay =3D value;
++        break;
++    case SHAKTI_UART_CONTROL:
++        s->uart_control =3D value;
++        break;
++    case SHAKTI_UART_INT_EN:
++        s->uart_interrupt =3D value;
++        break;
++    case SHAKTI_UART_IQ_CYCLES:
++        s->uart_iq_cycles =3D value;
++        break;
++    case SHAKTI_UART_RX_THRES:
++        s->uart_rx_threshold =3D value;
++        break;
++    default:
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: Bad offset 0x%"HWADDR_PRIx"\n", __func__, addr)=
+;
++    }
 +}
 +
-+static void shakti_c_machine_class_init(ObjectClass *klass, void *data)
-+{
-+    MachineClass *mc =3D MACHINE_CLASS(klass);
-+    mc->desc =3D "RISC-V Board compatible with Shakti SDK";
-+    mc->init =3D shakti_c_machine_state_init;
-+    mc->default_cpu_type =3D TYPE_RISCV_CPU_SHAKTI_C;
-+}
-+
-+static const TypeInfo shakti_c_machine_type_info =3D {
-+    .name =3D TYPE_RISCV_SHAKTI_MACHINE,
-+    .parent =3D TYPE_MACHINE,
-+    .class_init =3D shakti_c_machine_class_init,
-+    .instance_init =3D shakti_c_machine_instance_init,
-+    .instance_size =3D sizeof(ShaktiCMachineState),
++static const MemoryRegionOps shakti_uart_ops =3D {
++    .read =3D shakti_uart_read,
++    .write =3D shakti_uart_write,
++    .endianness =3D DEVICE_NATIVE_ENDIAN,
++    .impl =3D {.min_access_size =3D 1, .max_access_size =3D 4},
++    .valid =3D {.min_access_size =3D 1, .max_access_size =3D 4},
 +};
 +
-+static void shakti_c_machine_type_info_register(void)
++static void shakti_uart_reset(DeviceState *dev)
 +{
-+    type_register_static(&shakti_c_machine_type_info);
-+}
-+type_init(shakti_c_machine_type_info_register)
++    ShaktiUartState *s =3D SHAKTI_UART(dev);
 +
-+static void shakti_c_soc_state_realize(DeviceState *dev, Error **errp)
-+{
-+    ShaktiCSoCState *sss =3D RISCV_SHAKTI_SOC(dev);
-+    MemoryRegion *system_memory =3D get_system_memory();
-+
-+    sysbus_realize(SYS_BUS_DEVICE(&sss->cpus), &error_abort);
-+
-+    sss->plic =3D sifive_plic_create(shakti_c_memmap[SHAKTI_C_PLIC].base,
-+        (char *)SHAKTI_C_PLIC_HART_CONFIG, 0,
-+        SHAKTI_C_PLIC_NUM_SOURCES,
-+        SHAKTI_C_PLIC_NUM_PRIORITIES,
-+        SHAKTI_C_PLIC_PRIORITY_BASE,
-+        SHAKTI_C_PLIC_PENDING_BASE,
-+        SHAKTI_C_PLIC_ENABLE_BASE,
-+        SHAKTI_C_PLIC_ENABLE_STRIDE,
-+        SHAKTI_C_PLIC_CONTEXT_BASE,
-+        SHAKTI_C_PLIC_CONTEXT_STRIDE,
-+        shakti_c_memmap[SHAKTI_C_PLIC].size);
-+
-+    sifive_clint_create(shakti_c_memmap[SHAKTI_C_CLINT].base,
-+        shakti_c_memmap[SHAKTI_C_CLINT].size, 0, 1,
-+        SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
-+        SIFIVE_CLINT_TIMEBASE_FREQ, false);
-+
-+    /* ROM */
-+    memory_region_init_rom(&sss->rom, OBJECT(dev), "riscv.shakti.c.rom",
-+                           shakti_c_memmap[SHAKTI_C_ROM].size, &error_fata=
-l);
-+    memory_region_add_subregion(system_memory,
-+        shakti_c_memmap[SHAKTI_C_ROM].base, &sss->rom);
++    s->uart_baud =3D SHAKTI_UART_BAUD_DEFAULT;
++    s->uart_tx =3D 0x0;
++    s->uart_rx =3D 0x0;
++    s->uart_status =3D 0x0000;
++    s->uart_delay =3D 0x0000;
++    s->uart_control =3D SHAKTI_UART_CONTROL_DEFAULT;
++    s->uart_interrupt =3D 0x0000;
++    s->uart_iq_cycles =3D 0x00;
++    s->uart_rx_threshold =3D 0x00;
 +}
 +
-+static void shakti_c_soc_class_init(ObjectClass *klass, void *data)
++static int shakti_uart_can_receive(void *opaque)
++{
++    ShaktiUartState *s =3D opaque;
++
++    return !(s->uart_status & SHAKTI_UART_STATUS_RX_NOT_EMPTY);
++}
++
++static void shakti_uart_receive(void *opaque, const uint8_t *buf, int size=
+)
++{
++    ShaktiUartState *s =3D opaque;
++
++    s->uart_rx =3D *buf;
++    s->uart_status |=3D SHAKTI_UART_STATUS_RX_NOT_EMPTY;
++}
++
++static void shakti_uart_realize(DeviceState *dev, Error **errp)
++{
++    ShaktiUartState *sus =3D SHAKTI_UART(dev);
++    qemu_chr_fe_set_handlers(&sus->chr, shakti_uart_can_receive,
++                             shakti_uart_receive, NULL, NULL, sus, NULL, t=
+rue);
++}
++
++static void shakti_uart_instance_init(Object *obj)
++{
++    ShaktiUartState *sus =3D SHAKTI_UART(obj);
++    memory_region_init_io(&sus->mmio,
++                          obj,
++                          &shakti_uart_ops,
++                          sus,
++                          TYPE_SHAKTI_UART,
++                          0x1000);
++    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &sus->mmio);
++}
++
++static Property shakti_uart_properties[] =3D {
++    DEFINE_PROP_CHR("chardev", ShaktiUartState, chr),
++    DEFINE_PROP_END_OF_LIST(),
++};
++
++static void shakti_uart_class_init(ObjectClass *klass, void *data)
 +{
 +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-+    dc->realize =3D shakti_c_soc_state_realize;
++    dc->reset =3D shakti_uart_reset;
++    dc->realize =3D shakti_uart_realize;
++    device_class_set_props(dc, shakti_uart_properties);
 +}
 +
-+static void shakti_c_soc_instance_init(Object *obj)
-+{
-+    ShaktiCSoCState *sss =3D RISCV_SHAKTI_SOC(obj);
-+
-+    object_initialize_child(obj, "cpus", &sss->cpus, TYPE_RISCV_HART_ARRAY=
-);
-+
-+    /*
-+     * CPU type is fixed and we are not supporting passing from commandlin=
-e yet.
-+     * So let it be in instance_init. When supported should use ms->cpu_ty=
-pe
-+     * instead of TYPE_RISCV_CPU_SHAKTI_C
-+     */
-+    object_property_set_str(OBJECT(&sss->cpus), "cpu-type",
-+                            TYPE_RISCV_CPU_SHAKTI_C, &error_abort);
-+    object_property_set_int(OBJECT(&sss->cpus), "num-harts", 1,
-+                            &error_abort);
-+}
-+
-+static const TypeInfo shakti_c_type_info =3D {
-+    .name =3D TYPE_RISCV_SHAKTI_SOC,
-+    .parent =3D TYPE_DEVICE,
-+    .class_init =3D shakti_c_soc_class_init,
-+    .instance_init =3D shakti_c_soc_instance_init,
-+    .instance_size =3D sizeof(ShaktiCSoCState),
++static const TypeInfo shakti_uart_info =3D {
++    .name =3D TYPE_SHAKTI_UART,
++    .parent =3D TYPE_SYS_BUS_DEVICE,
++    .instance_size =3D sizeof(ShaktiUartState),
++    .class_init =3D shakti_uart_class_init,
++    .instance_init =3D shakti_uart_instance_init,
 +};
 +
-+static void shakti_c_type_info_register(void)
++static void shakti_uart_register_types(void)
 +{
-+    type_register_static(&shakti_c_type_info);
++    type_register_static(&shakti_uart_info);
 +}
-+type_init(shakti_c_type_info_register)
-diff --git a/include/hw/riscv/shakti_c.h b/include/hw/riscv/shakti_c.h
++type_init(shakti_uart_register_types)
+diff --git a/hw/char/trace-events b/hw/char/trace-events
+index 81026f6612..54aeeb899c 100644
+--- a/hw/char/trace-events
++++ b/hw/char/trace-events
+@@ -80,6 +80,10 @@ cmsdk_apb_uart_set_params(int speed) "CMSDK APB UART: pa=
+rams set to %d 8N1"
+ nrf51_uart_read(uint64_t addr, uint64_t r, unsigned int size) "addr 0x%" P=
+RIx64 " value 0x%" PRIx64 " size %u"
+ nrf51_uart_write(uint64_t addr, uint64_t value, unsigned int size) "addr 0=
+x%" PRIx64 " value 0x%" PRIx64 " size %u"
+=20
++# shakti_uart.c
++shakti_uart_read(uint64_t addr, uint16_t r, unsigned int size) "addr 0x%" =
+PRIx64 " value 0x%" PRIx16 " size %u"
++shakti_uart_write(uint64_t addr, uint64_t value, unsigned int size) "addr =
+0x%" PRIx64 " value 0x%" PRIx64 " size %u"
++
+ # exynos4210_uart.c
+ exynos_uart_dmabusy(uint32_t channel) "UART%d: DMA busy (Rx buffer empty)"
+ exynos_uart_dmaready(uint32_t channel) "UART%d: DMA ready"
+diff --git a/include/hw/char/shakti_uart.h b/include/hw/char/shakti_uart.h
 new file mode 100644
-index 0000000000..6c66a160f5
+index 0000000000..526c408233
 --- /dev/null
-+++ b/include/hw/riscv/shakti_c.h
++++ b/include/hw/char/shakti_uart.h
 @@ -0,0 +1,74 @@
 +/*
-+ * Shakti C-class SoC emulation
++ * SHAKTI UART
 + *
 + * Copyright (c) 2021 Vijai Kumar K <vijai@behindbytes.com>
 + *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
++ * Permission is hereby granted, free of charge, to any person obtaining a=
+ copy
++ * of this software and associated documentation files (the "Software"), t=
+o deal
++ * in the Software without restriction, including without limitation the r=
+ights
++ * to use, copy, modify, merge, publish, distribute, sublicense, and/or se=
+ll
++ * copies of the Software, and to permit persons to whom the Software is
++ * furnished to do so, subject to the following conditions:
 + *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License f=
-or
-+ * more details.
++ * The above copyright notice and this permission notice shall be included=
+ in
++ * all copies or substantial portions of the Software.
 + *
-+ * You should have received a copy of the GNU General Public License along=
- with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS=
+ OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY=
+,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OT=
+HER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING=
+ FROM,
++ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS =
+IN
++ * THE SOFTWARE.
 + */
 +
-+#ifndef HW_SHAKTI_H
-+#define HW_SHAKTI_H
++#ifndef HW_SHAKTI_UART_H
++#define HW_SHAKTI_UART_H
 +
-+#include "hw/riscv/riscv_hart.h"
-+#include "hw/boards.h"
++#include "hw/sysbus.h"
++#include "chardev/char-fe.h"
 +
-+#define TYPE_RISCV_SHAKTI_SOC "riscv.shakti.cclass.soc"
-+#define RISCV_SHAKTI_SOC(obj) \
-+    OBJECT_CHECK(ShaktiCSoCState, (obj), TYPE_RISCV_SHAKTI_SOC)
++#define SHAKTI_UART_BAUD        0x00
++#define SHAKTI_UART_TX          0x04
++#define SHAKTI_UART_RX          0x08
++#define SHAKTI_UART_STATUS      0x0C
++#define SHAKTI_UART_DELAY       0x10
++#define SHAKTI_UART_CONTROL     0x14
++#define SHAKTI_UART_INT_EN      0x18
++#define SHAKTI_UART_IQ_CYCLES   0x1C
++#define SHAKTI_UART_RX_THRES    0x20
 +
-+typedef struct ShaktiCSoCState {
-+    /*< private >*/
-+    DeviceState parent_obj;
++#define SHAKTI_UART_STATUS_TX_EMPTY     (1 << 0)
++#define SHAKTI_UART_STATUS_TX_FULL      (1 << 1)
++#define SHAKTI_UART_STATUS_RX_NOT_EMPTY (1 << 2)
++#define SHAKTI_UART_STATUS_RX_FULL      (1 << 3)
++/* 9600 8N1 is the default setting */
++/* Reg value =3D (50000000 Hz)/(16 * 9600)*/
++#define SHAKTI_UART_BAUD_DEFAULT    0x0145
++#define SHAKTI_UART_CONTROL_DEFAULT 0x0100
 +
-+    /*< public >*/
-+    RISCVHartArrayState cpus;
-+    DeviceState *plic;
-+    MemoryRegion rom;
++#define TYPE_SHAKTI_UART "shakti-uart"
++#define SHAKTI_UART(obj) \
++    OBJECT_CHECK(ShaktiUartState, (obj), TYPE_SHAKTI_UART)
 +
-+} ShaktiCSoCState;
++typedef struct {
++    /* <private> */
++    SysBusDevice parent_obj;
 +
-+#define TYPE_RISCV_SHAKTI_MACHINE MACHINE_TYPE_NAME("shakti_c")
-+#define RISCV_SHAKTI_MACHINE(obj) \
-+    OBJECT_CHECK(ShaktiCMachineState, (obj), TYPE_RISCV_SHAKTI_MACHINE)
-+typedef struct ShaktiCMachineState {
-+    /*< private >*/
-+    MachineState parent_obj;
++    /* <public> */
++    MemoryRegion mmio;
 +
-+    /*< public >*/
-+    ShaktiCSoCState soc;
-+} ShaktiCMachineState;
++    uint32_t uart_baud;
++    uint32_t uart_tx;
++    uint32_t uart_rx;
++    uint32_t uart_status;
++    uint32_t uart_delay;
++    uint32_t uart_control;
++    uint32_t uart_interrupt;
++    uint32_t uart_iq_cycles;
++    uint32_t uart_rx_threshold;
 +
-+enum {
-+    SHAKTI_C_ROM,
-+    SHAKTI_C_RAM,
-+    SHAKTI_C_UART,
-+    SHAKTI_C_GPIO,
-+    SHAKTI_C_PLIC,
-+    SHAKTI_C_CLINT,
-+    SHAKTI_C_DEBUG,
-+    SHAKTI_C_I2C,
-+};
++    CharBackend chr;
++} ShaktiUartState;
 +
-+#define SHAKTI_C_PLIC_HART_CONFIG "MS"
-+/* Including Interrupt ID 0 (no interrupt)*/
-+#define SHAKTI_C_PLIC_NUM_SOURCES 28
-+/* Excluding Priority 0 */
-+#define SHAKTI_C_PLIC_NUM_PRIORITIES 2
-+#define SHAKTI_C_PLIC_PRIORITY_BASE 0x04
-+#define SHAKTI_C_PLIC_PENDING_BASE 0x1000
-+#define SHAKTI_C_PLIC_ENABLE_BASE 0x2000
-+#define SHAKTI_C_PLIC_ENABLE_STRIDE 0x80
-+#define SHAKTI_C_PLIC_CONTEXT_BASE 0x200000
-+#define SHAKTI_C_PLIC_CONTEXT_STRIDE 0x1000
-+
-+#endif
++#endif /* HW_SHAKTI_UART_H */
 --=20
 2.25.1
 
