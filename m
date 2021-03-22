@@ -1,60 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lOFNI-0000BL-1t
-	for mharc-qemu-riscv@gnu.org; Mon, 22 Mar 2021 03:53:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50604)
+	id 1lOFNS-0000IR-5V
+	for mharc-qemu-riscv@gnu.org; Mon, 22 Mar 2021 03:53:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50636)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lOFNG-0000Ai-17; Mon, 22 Mar 2021 03:53:18 -0400
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631]:47022)
+ id 1lOFNL-0000EW-D7; Mon, 22 Mar 2021 03:53:28 -0400
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635]:36784)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lOFNE-0000UC-82; Mon, 22 Mar 2021 03:53:17 -0400
-Received: by mail-ej1-x631.google.com with SMTP id u21so1662961ejo.13;
- Mon, 22 Mar 2021 00:53:15 -0700 (PDT)
+ id 1lOFNH-0000Wg-Id; Mon, 22 Mar 2021 03:53:23 -0400
+Received: by mail-ej1-x635.google.com with SMTP id a7so19614092ejs.3;
+ Mon, 22 Mar 2021 00:53:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=cs+Z0fdL1sAHQBPvNReIU5kyz9OmiirPaFx/ufuYLo4=;
- b=Adf9hnkfh+sMQ35wJ9IE92doj1Y1+vJvN6xtf5k+5lChhNdHotqX5nom5p4/ZwArI5
- 0fQYiRFChlaA4gRY4SppdS25RPElMYYwRV6H0cuFfVCdfvAqbbRU8Z2QoGt5eU2+qodE
- yGsBgLbnDG8cReSB61IApKszi54wQZZQtXW6IT6nmmg86il4/JzE7R9/p4TpKZvTXVjr
- oTWHw+uxISJ3PpCr4NjIcYKvjUXhscnkFKHe3DxXYQaH+yWgSw5EyLrTb7qj3ceDF5RO
- EjWZnt1zCjNjt7Gkrefa2f5J46Q+IfyXYp+yFF1iTeBYRHvvRZChnhaJeqUaogSTynBT
- KGOQ==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=l5+uBxMMgZuhxwrZ9af5WimJi0Ra9OZhZgAWE4VVDYk=;
+ b=MXn5wUCa1n1yhv7M01mWz4yfbVOTIismdKEkVLf3yXwjVgcberecuxIgvEviiVx4Sd
+ sKSeD1VlvHwVFz5zx5yldXCmNdp5m7Yn8MhGMp8kYf3DFSNrS1nBOx8Xsd0jFcZPkDGn
+ VRU5NLmhnWwcOMauItygjF+lokw297zNqxprTaWK7Ywvt0QLAhNt9a9JTD6t5MTOOuZJ
+ 8S/BpSMxJxQcaq6uEkzWdylqH0fzsEXHMTm7NkV8Q0bVpMzR4/YPxvhFqxt3XIvjWrCC
+ gIk7OA7X+tLYjisJhhItqYO8u8IoVwCnIAbI/AWnirLcwGYqr3cI6AdzQD+ZqDP5sKTn
+ JtCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=cs+Z0fdL1sAHQBPvNReIU5kyz9OmiirPaFx/ufuYLo4=;
- b=BenBR4aP6AytLXS0YA0vSfvAPzcgeD3NSEi+77NHYdMO6H7YkrTwYu0p8rkPW1IQ9d
- gVFiIOZkjgKeJ5BhuVgiP//CrMy/xlaVMbiwWiLqYCwfDNoE1UmONc2/zi0jFZVbdQ9I
- Anu70GgKtAF0luddeB8bhCPBuZ4RBvm1OfxTtsEHhn5XJipiWv2KHmnocqOTonaLxDbM
- JY2QRQhrLHMizOQpw29QvC+iI7FwxuTqgq/n7p9deuwl/+fv75YDNDG0rv8U2cNYG7VI
- E/2+khiWRcJ+R4CFnvjLZ0V0pWeuEzADij6vhTyosEIaNSq1Ok0wjyNNHRBEEgjtWpP0
- k0eQ==
-X-Gm-Message-State: AOAM531UMv56UaCdNFqyDw01p7VrSbdpgvGntHevbZE6GXLHpJYB+UK2
- zUlJ/kr+jjwewlRsNa4fLfI=
-X-Google-Smtp-Source: ABdhPJx9HHKuq0ghFkTJkR+3hsHZURpuuHrc9YRIA4PdiVbNLq/GhffAFqhFmK9Xs82ThpHumOjJDA==
-X-Received: by 2002:a17:906:5495:: with SMTP id
- r21mr18081059ejo.471.1616399593782; 
- Mon, 22 Mar 2021 00:53:13 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=l5+uBxMMgZuhxwrZ9af5WimJi0Ra9OZhZgAWE4VVDYk=;
+ b=R/KQ0C9GXcFEo3tH6tpf4FaZDjeXTHICeacTF2PLr5+wdp8eNcjjPaHHDQI7r0VDr2
+ jKTJmL/urQ02fVoXan3ZpOao8XUlnMeY/SSYehS9Gww8uXVbdvkvQr1lhLbDhnDZYx51
+ W07CWbTm0LzVB5V2CL4YF9/nVgy9XAo+Wns6/mlLrW42Snl94ii5wvYbGFEOUFt3is1d
+ RiipDXCIDQWdTbsVTlG/TQv4UxRApMPnaN+NLNREPn4M6xOb8kFEnRwLr81N7ItSrUgY
+ CPq1XgJ3RhtrJeN7qiAyZTGyrQD9jyEk5FeDBO0bJswVHkQuxUBzGgxJ7ipkdpiuNqca
+ lW4Q==
+X-Gm-Message-State: AOAM532uE0KQwWxI1L3bBIv2juTKPEhZ9zPgXOiB5nd2QMmtNAgkYGFd
+ coNJfcZBPzMq0lDuQ+QiQAXgA3ibrTA=
+X-Google-Smtp-Source: ABdhPJzGrpbIAf4oIeiAlSF1TxAU5TrEW/xyblAOLjpOu7af9i9z3LYZANKrmupgNLLQp/8zHI4OIA==
+X-Received: by 2002:a17:906:14d0:: with SMTP id
+ y16mr18090382ejc.242.1616399597366; 
+ Mon, 22 Mar 2021 00:53:17 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com
  (ec2-44-242-66-180.us-west-2.compute.amazonaws.com. [44.242.66.180])
- by smtp.gmail.com with ESMTPSA id x17sm9193844ejd.68.2021.03.22.00.53.10
+ by smtp.gmail.com with ESMTPSA id x17sm9193844ejd.68.2021.03.22.00.53.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Mar 2021 00:53:13 -0700 (PDT)
+ Mon, 22 Mar 2021 00:53:17 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 1/2] hw/riscv: microchip_pfsoc: Map EMMC/SD mux register
-Date: Mon, 22 Mar 2021 15:52:47 +0800
-Message-Id: <20210322075248.136255-1-bmeng.cn@gmail.com>
+Subject: [PATCH 2/2] docs/system: riscv: Add documentation for
+ 'microchip-icicle-kit' machine
+Date: Mon, 22 Mar 2021 15:52:48 +0800
+Message-Id: <20210322075248.136255-2-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210322075248.136255-1-bmeng.cn@gmail.com>
+References: <20210322075248.136255-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x631.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -74,63 +77,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2021 07:53:18 -0000
+X-List-Received-Date: Mon, 22 Mar 2021 07:53:28 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Since HSS commit c20a89f8dcac, the Icicle Kit reference design has
-been updated to use a register mapped at 0x4f000000 instead of a
-GPIO to control whether eMMC or SD card is to be used. With this
-support the same HSS image can be used for both eMMC and SD card
-boot flow, while previously two different board configurations were
-used. This is undocumented but one can take a look at the HSS code
-HSS_MMCInit() in services/mmc/mmc_api.c.
-
-With this commit, HSS image built from 2020.12 release boots again.
+This adds the documentation to describe what is supported for the
+'microchip-icicle-kit' machine, and how to boot the machine in QEMU.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- include/hw/riscv/microchip_pfsoc.h | 1 +
- hw/riscv/microchip_pfsoc.c         | 6 ++++++
- 2 files changed, 7 insertions(+)
+ docs/system/riscv/microchip-icicle-kit.rst | 89 ++++++++++++++++++++++
+ docs/system/target-riscv.rst               |  1 +
+ 2 files changed, 90 insertions(+)
+ create mode 100644 docs/system/riscv/microchip-icicle-kit.rst
 
-diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-index d0c666aae0..d30916f45d 100644
---- a/include/hw/riscv/microchip_pfsoc.h
-+++ b/include/hw/riscv/microchip_pfsoc.h
-@@ -109,6 +109,7 @@ enum {
-     MICROCHIP_PFSOC_ENVM_DATA,
-     MICROCHIP_PFSOC_QSPI_XIP,
-     MICROCHIP_PFSOC_IOSCB,
-+    MICROCHIP_PFSOC_EMMC_SD_MUX,
-     MICROCHIP_PFSOC_DRAM_LO,
-     MICROCHIP_PFSOC_DRAM_LO_ALIAS,
-     MICROCHIP_PFSOC_DRAM_HI,
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index 266f1c3342..c4146b7a6b 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -122,6 +122,7 @@ static const MemMapEntry microchip_pfsoc_memmap[] = {
-     [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
-     [MICROCHIP_PFSOC_QSPI_XIP] =        { 0x21000000,  0x1000000 },
-     [MICROCHIP_PFSOC_IOSCB] =           { 0x30000000, 0x10000000 },
-+    [MICROCHIP_PFSOC_EMMC_SD_MUX] =     { 0x4f000000,        0x4 },
-     [MICROCHIP_PFSOC_DRAM_LO] =         { 0x80000000, 0x40000000 },
-     [MICROCHIP_PFSOC_DRAM_LO_ALIAS] =   { 0xc0000000, 0x40000000 },
-     [MICROCHIP_PFSOC_DRAM_HI] =       { 0x1000000000,        0x0 },
-@@ -411,6 +412,11 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->ioscb), 0,
-                     memmap[MICROCHIP_PFSOC_IOSCB].base);
- 
-+    /* eMMC/SD mux */
-+    create_unimplemented_device("microchip.pfsoc.emmc_sd_mux",
-+        memmap[MICROCHIP_PFSOC_EMMC_SD_MUX].base,
-+        memmap[MICROCHIP_PFSOC_EMMC_SD_MUX].size);
+diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
+new file mode 100644
+index 0000000000..4fe97bce3f
+--- /dev/null
++++ b/docs/system/riscv/microchip-icicle-kit.rst
+@@ -0,0 +1,89 @@
++Microchip PolarFire SoC Icicle Kit (``microchip-icicle-kit``)
++=============================================================
 +
-     /* QSPI Flash */
-     memory_region_init_rom(qspi_xip_mem, OBJECT(dev),
-                            "microchip.pfsoc.qspi_xip",
++Microchip PolarFire SoC Icicle Kit integrates a PolarFire SoC, with one
++SiFive's E51 plus four U54 cores and many on-chip peripherals and an FPGA.
++
++For more details about Microchip PolarFire SoC, please see:
++https://www.microsemi.com/product-directory/soc-fpgas/5498-polarfire-soc-fpga
++
++The Icicle Kit board information can be found here:
++https://www.microsemi.com/existing-parts/parts/152514
++
++Supported devices
++-----------------
++
++The ``microchip-icicle-kit`` machine supports the following devices:
++
++ * 1 E51 core
++ * 4 U54 cores
++ * Core Level Interruptor (CLINT)
++ * Platform-Level Interrupt Controller (PLIC)
++ * L2 Loosely Integrated Memory (L2-LIM)
++ * DDR memory controller
++ * 5 MMUARTs
++ * 1 DMA controller
++ * 2 GEM Ethernet controllers
++ * 1 SDHC storage controller
++
++Boot options
++------------
++
++The ``microchip-icicle-kit`` machine can start using the standard -bios
++functionality for loading its BIOS image, aka Hart Software Services (HSS_).
++HSS loads the second stage bootloader U-Boot from an SD card. It does not
++support direct kernel loading via the -kernel option. One has to load kernel
++from U-Boot.
++
++The memory is set to 1537 MiB by default which is the minimum required high
++memory size by HSS. A sanity check on ram size is performed in the machine
++init routine to prompt user to increase the RAM size to > 1537 MiB when less
++than 1537 MiB ram is detected.
++
++Boot the machine
++----------------
++
++HSS 2020.12 release is tested at the time of writing. To build an HSS image
++that can be booted by the ``microchip-icicle-kit`` machine, type the following
++in the HSS source tree:
++
++.. code-block:: bash
++
++  $ export CROSS_COMPILE=riscv64-linux-
++  $ cp boards/mpfs-icicle-kit-es/def_config .config
++  $ make BOARD=mpfs-icicle-kit-es
++
++Download the official SD card image released by Microchip and prepare it for
++QEMU usage:
++
++.. code-block:: bash
++
++  $ wget ftp://ftpsoc.microsemi.com/outgoing/core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic.gz
++  $ gunzip core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic.gz
++  $ qemu-img resize core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic 4G
++
++Then we can boot the machine by:
++
++.. code-block:: bash
++
++  $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
++      -bios path/to/hss.bin -sd path/to/sdcard.img \
++      -nic user,model=cadence_gem \
++      -nic tap,ifname=tap,model=cadence_gem,script=no \
++      -display none -serial stdio \
++      -chardev socket,id=serial1,path=serial1.sock,server=on,wait=on \
++      -serial chardev:serial1
++
++With above command line, current terminal session will be used for the first
++serial port. Open another terminal window, and use `minicom` to connect the
++second serial port.
++
++.. code-block:: bash
++
++  $ minicom -D unix\#serial1.sock
++
++HSS output is on the first serial port (stdio) and U-Boot outputs on the
++second serial port. U-Boot will automatically load the Linux kernel from
++the SD card image.
++
++.. _HSS: https://github.com/polarfire-soc/hart-software-services
+diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+index 94d99c4c82..8d5946fbbb 100644
+--- a/docs/system/target-riscv.rst
++++ b/docs/system/target-riscv.rst
+@@ -66,6 +66,7 @@ undocumented; you can get a complete list by running
+ .. toctree::
+    :maxdepth: 1
+ 
++   riscv/microchip-icicle-kit
+    riscv/sifive_u
+ 
+ RISC-V CPU features
 -- 
 2.25.1
 
