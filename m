@@ -1,66 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lOMRK-0001Pp-E6
-	for mharc-qemu-riscv@gnu.org; Mon, 22 Mar 2021 11:25:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60974)
+	id 1lOQvu-0000XS-Pl
+	for mharc-qemu-riscv@gnu.org; Mon, 22 Mar 2021 16:13:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58956)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lOMRJ-0001Or-6A; Mon, 22 Mar 2021 11:25:57 -0400
-Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c]:34709)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1lOQvr-0000TC-H2
+ for qemu-riscv@nongnu.org; Mon, 22 Mar 2021 16:13:48 -0400
+Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442]:47096)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lOMRE-0003vF-3n; Mon, 22 Mar 2021 11:25:56 -0400
-Received: by mail-io1-xd2c.google.com with SMTP id x16so14341173iob.1;
- Mon, 22 Mar 2021 08:25:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gdzcd17w02nFW6OSyJ1t3QvINzfm5kR+CItYNa7a2zU=;
- b=dxnWax9uZnW2O+DzCssIDrbBzJBNLU0tM+Ea/5dnM4VN9zwaLdMsSYJrgtlnTBUtLb
- Ht6Ip+elKKuqCPtbRAawQ6L4ilIuKjMwyhMDu91rWEB6wg69wRxP344aMWpjuhS0kfyC
- Rvyx1pfCYZCUpAv+C1jJV5fDm57KBHbRR54N3hyXUGBCRbEa0RIHv3LhzrYqRvgqH496
- gmOEFbOAURapDG05iuW2UQMBPGA00Ik3j2FRkhLmp41lmaCkgQg8RBSuX1IrtrwBc0MQ
- RxCqsAEm/Gsccdl6nBXWTgyOliPJ8w0jR7g5MYvfNkMqQAClBVodeY7Nja6SVuMjHUbK
- TT0A==
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1lOQvl-0003ju-Ki
+ for qemu-riscv@nongnu.org; Mon, 22 Mar 2021 16:13:47 -0400
+Received: by mail-wr1-x442.google.com with SMTP id v4so18491040wrp.13
+ for <qemu-riscv@nongnu.org>; Mon, 22 Mar 2021 13:13:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=VRN75fiZq3z0KsQUrseR+n6u9jCms7lasgObIRtwiok=;
+ b=r4dR3MBOpVmKBR+8fSZcoMzu2dgyUoK3HFccRcnWoQ50uKFwhgY0TuttELxN+QhBAG
+ tjPC8kuaPop+3jl5xR3lAHgWxcfl3mJ4PXrCElWUPMRhIwHj497UBKHZ31M3f/a+biBp
+ T3TSG3fjhLMcu7gYiInhcRNazQ+umDYIF58SlpjVXT2lGjciewzA2irKVRhuxwYa2Jtx
+ 2gjngSFOmWi7yQlo1cii5KWRicJOWu54m/lc9zwmZ0y82/ZBCLW+oSdFVq55fKWskNM7
+ pMkju6A++2ts2rJH2WyaY3cHWRKJtAcjxpipc/EVUj2Stdlj/YkuFqtHHYtlHvDacfno
+ glUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=gdzcd17w02nFW6OSyJ1t3QvINzfm5kR+CItYNa7a2zU=;
- b=g66VkX99V0A5Mtt/x65+MC6Nypsw4EhI9p6db/6/zNwCXvRvvLP8eL8PcMKmipHqd3
- 7+r/AzjjB+xyiRo6KY669sKA8w6zkD74/ZF1RbpdEKJcehEfxhJRHBL0jUWqmillgVms
- N13aXazhtsIy9GF/B5caQwXlm+U96ehF0C2uDzbYRIFEC+hp6rr10yvv6mdyQWO/Vs1i
- yxaDssJBqyR00A1eyJVDvx5Bt4t4eGyyikGvYpD/UCwno6TAUtoofDW2T6CGT7jqsvLE
- FF63NiZIO6CqQFHx3tMxE6SQ1VIt6ahJ3XGlpwuuBSR0Y6GCwW1MdE+9y012KD6U/32a
- 1MoA==
-X-Gm-Message-State: AOAM532HUmUfwlMqxrkz5xWibzje2XA73OpGKiqNlbuKgZxAilj/CiW5
- Y6QAbjvGu5Do9o4K0FRlWa+vgM3dSzIzssXXv1A=
-X-Google-Smtp-Source: ABdhPJyRHeg0E9cFGy3BFlK11Nfixp4xITQ0G5UcXDaSCMQGhb+NkHT/Nv2at3dbRq5D1s8mu6DuBXzuSdRL4Tcbq+4=
-X-Received: by 2002:a02:11c9:: with SMTP id 192mr11599239jaf.135.1616426750083; 
- Mon, 22 Mar 2021 08:25:50 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=VRN75fiZq3z0KsQUrseR+n6u9jCms7lasgObIRtwiok=;
+ b=D19qLtQhMZyFPI1cCv5Jm5p++2xeg1QXoquqHbKlY8m+jkYsrK64aV/G3FMfHC4rlu
+ rCwABDnSf9SmMtf7bx1GXTefbrPMhh6KE7ONNK5efMxajRvD6zyXlUKYbxmLhFNeVree
+ MAonCH6ywOufknSQw3xjOL8sUrXUtwUIbPvoNZPu6+FSAlGItNMOorjB5u0ZxMEn+E2c
+ MdIw7TlCYDnVtjjQKbh7XIQbr8MrENsXOzP5twqbUUAureQXVu14f2dWQlqsAONH0+ga
+ VLVC9t9niH4BT+Pz0cRFxtj/XWznCJizEpVjtfQyFdGXubJ5fSOfXKfMrl7btNcAhD7l
+ 2DZg==
+X-Gm-Message-State: AOAM5312WLDwr59WYVAh+Ix2CZcybVfRWPwcmwfj41PTU8YZa0ZgSTkP
+ dooH5kexff37CWSBYpO2ZOzIxg==
+X-Google-Smtp-Source: ABdhPJzkP0IPwo6bOiyP11H38QjB34BsAu320k+R1ahZ6nrP+ybblj8oyBYxZVfdOV0LeioZHwLdfg==
+X-Received: by 2002:adf:8151:: with SMTP id 75mr323008wrm.152.1616444019883;
+ Mon, 22 Mar 2021 13:13:39 -0700 (PDT)
+Received: from orth.archaic.org.uk (orth.archaic.org.uk. [81.2.115.148])
+ by smtp.gmail.com with ESMTPSA id u15sm419548wmq.4.2021.03.22.13.13.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Mar 2021 13:13:39 -0700 (PDT)
+From: Peter Maydell <peter.maydell@linaro.org>
+To: qemu-arm@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, Dmitry Vyukov <dvyukov@google.com>,
+ Arnd Bergmann <arnd@arndb.de>, qemu-riscv@nongnu.org
+Subject: [PATCH] hw/pci-host/gpex: Don't fault for unmapped parts of MMIO and
+ PIO windows
+Date: Mon, 22 Mar 2021 20:13:36 +0000
+Message-Id: <20210322201336.9539-1-peter.maydell@linaro.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20210322075248.136255-1-bmeng.cn@gmail.com>
- <20210322075248.136255-2-bmeng.cn@gmail.com>
-In-Reply-To: <20210322075248.136255-2-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Mar 2021 11:23:54 -0400
-Message-ID: <CAKmqyKPxa=CShXBK-0svxqhAEyUF+OrSWGiT11Vym02Acj63JQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] docs/system: riscv: Add documentation for
- 'microchip-icicle-kit' machine
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::442;
+ envelope-from=peter.maydell@linaro.org; helo=mail-wr1-x442.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -73,137 +76,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2021 15:25:57 -0000
+X-List-Received-Date: Mon, 22 Mar 2021 20:13:48 -0000
 
-On Mon, Mar 22, 2021 at 3:53 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> This adds the documentation to describe what is supported for the
-> 'microchip-icicle-kit' machine, and how to boot the machine in QEMU.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+Currently the gpex PCI controller implements no special behaviour for
+guest accesses to areas of the PIO and MMIO where it has not mapped
+any PCI devices, which means that for Arm you end up with a CPU
+exception due to a data abort.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Most host OSes expect "like an x86 PC" behaviour, where bad accesses
+like this return -1 for reads and ignore writes.  In the interests of
+not being surprising, make host CPU accesses to these windows behave
+as -1/discard where there's no mapped PCI device.
 
-Alistair
+Reported-by: Dmitry Vyukov <dvyukov@google.com>
+Fixes: https://bugs.launchpad.net/qemu/+bug/1918917
+Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+---
+Not convinced that this is 6.0 material, because IMHO the
+kernel shouldn't be doing this in the first place.
+Do we need to have the property machinery so that old
+virt-5.2 etc retain the previous behaviour ?
+---
+ include/hw/pci-host/gpex.h |  2 ++
+ hw/pci-host/gpex.c         | 37 +++++++++++++++++++++++++++++++++++--
+ 2 files changed, 37 insertions(+), 2 deletions(-)
 
-> ---
->
->  docs/system/riscv/microchip-icicle-kit.rst | 89 ++++++++++++++++++++++
->  docs/system/target-riscv.rst               |  1 +
->  2 files changed, 90 insertions(+)
->  create mode 100644 docs/system/riscv/microchip-icicle-kit.rst
->
-> diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
-> new file mode 100644
-> index 0000000000..4fe97bce3f
-> --- /dev/null
-> +++ b/docs/system/riscv/microchip-icicle-kit.rst
-> @@ -0,0 +1,89 @@
-> +Microchip PolarFire SoC Icicle Kit (``microchip-icicle-kit``)
-> +=============================================================
-> +
-> +Microchip PolarFire SoC Icicle Kit integrates a PolarFire SoC, with one
-> +SiFive's E51 plus four U54 cores and many on-chip peripherals and an FPGA.
-> +
-> +For more details about Microchip PolarFire SoC, please see:
-> +https://www.microsemi.com/product-directory/soc-fpgas/5498-polarfire-soc-fpga
-> +
-> +The Icicle Kit board information can be found here:
-> +https://www.microsemi.com/existing-parts/parts/152514
-> +
-> +Supported devices
-> +-----------------
-> +
-> +The ``microchip-icicle-kit`` machine supports the following devices:
-> +
-> + * 1 E51 core
-> + * 4 U54 cores
-> + * Core Level Interruptor (CLINT)
-> + * Platform-Level Interrupt Controller (PLIC)
-> + * L2 Loosely Integrated Memory (L2-LIM)
-> + * DDR memory controller
-> + * 5 MMUARTs
-> + * 1 DMA controller
-> + * 2 GEM Ethernet controllers
-> + * 1 SDHC storage controller
-> +
-> +Boot options
-> +------------
-> +
-> +The ``microchip-icicle-kit`` machine can start using the standard -bios
-> +functionality for loading its BIOS image, aka Hart Software Services (HSS_).
-> +HSS loads the second stage bootloader U-Boot from an SD card. It does not
-> +support direct kernel loading via the -kernel option. One has to load kernel
-> +from U-Boot.
-> +
-> +The memory is set to 1537 MiB by default which is the minimum required high
-> +memory size by HSS. A sanity check on ram size is performed in the machine
-> +init routine to prompt user to increase the RAM size to > 1537 MiB when less
-> +than 1537 MiB ram is detected.
-> +
-> +Boot the machine
-> +----------------
-> +
-> +HSS 2020.12 release is tested at the time of writing. To build an HSS image
-> +that can be booted by the ``microchip-icicle-kit`` machine, type the following
-> +in the HSS source tree:
-> +
-> +.. code-block:: bash
-> +
-> +  $ export CROSS_COMPILE=riscv64-linux-
-> +  $ cp boards/mpfs-icicle-kit-es/def_config .config
-> +  $ make BOARD=mpfs-icicle-kit-es
-> +
-> +Download the official SD card image released by Microchip and prepare it for
-> +QEMU usage:
-> +
-> +.. code-block:: bash
-> +
-> +  $ wget ftp://ftpsoc.microsemi.com/outgoing/core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic.gz
-> +  $ gunzip core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic.gz
-> +  $ qemu-img resize core-image-minimal-dev-icicle-kit-es-sd-20201009141623.rootfs.wic 4G
-> +
-> +Then we can boot the machine by:
-> +
-> +.. code-block:: bash
-> +
-> +  $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
-> +      -bios path/to/hss.bin -sd path/to/sdcard.img \
-> +      -nic user,model=cadence_gem \
-> +      -nic tap,ifname=tap,model=cadence_gem,script=no \
-> +      -display none -serial stdio \
-> +      -chardev socket,id=serial1,path=serial1.sock,server=on,wait=on \
-> +      -serial chardev:serial1
-> +
-> +With above command line, current terminal session will be used for the first
-> +serial port. Open another terminal window, and use `minicom` to connect the
-> +second serial port.
-> +
-> +.. code-block:: bash
-> +
-> +  $ minicom -D unix\#serial1.sock
-> +
-> +HSS output is on the first serial port (stdio) and U-Boot outputs on the
-> +second serial port. U-Boot will automatically load the Linux kernel from
-> +the SD card image.
-> +
-> +.. _HSS: https://github.com/polarfire-soc/hart-software-services
-> diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-> index 94d99c4c82..8d5946fbbb 100644
-> --- a/docs/system/target-riscv.rst
-> +++ b/docs/system/target-riscv.rst
-> @@ -66,6 +66,7 @@ undocumented; you can get a complete list by running
->  .. toctree::
->     :maxdepth: 1
->
-> +   riscv/microchip-icicle-kit
->     riscv/sifive_u
->
->  RISC-V CPU features
-> --
-> 2.25.1
->
->
+diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
+index d48a020a952..ad876ecd209 100644
+--- a/include/hw/pci-host/gpex.h
++++ b/include/hw/pci-host/gpex.h
+@@ -49,6 +49,8 @@ struct GPEXHost {
+ 
+     MemoryRegion io_ioport;
+     MemoryRegion io_mmio;
++    MemoryRegion io_ioport_window;
++    MemoryRegion io_mmio_window;
+     qemu_irq irq[GPEX_NUM_IRQS];
+     int irq_num[GPEX_NUM_IRQS];
+ };
+diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
+index 2bdbe7b4561..1f48c89ac6a 100644
+--- a/hw/pci-host/gpex.c
++++ b/hw/pci-host/gpex.c
+@@ -82,13 +82,46 @@ static void gpex_host_realize(DeviceState *dev, Error **errp)
+     PCIExpressHost *pex = PCIE_HOST_BRIDGE(dev);
+     int i;
+ 
++    /*
++     * Note that the MemoryRegions io_mmio and io_ioport that we pass
++     * to pci_register_root_bus() are not the same as the
++     * MemoryRegions io_mmio_window and io_ioport_window that we
++     * expose as SysBus MRs. The difference is in the behaviour of
++     * accesses to addresses where no PCI device has been mapped.
++     *
++     * io_mmio and io_ioport are the underlying PCI view of the PCI
++     * address space, and when a PCI device does a bus master access
++     * to a bad address this is reported back to it as a transaction
++     * failure.
++     *
++     * io_mmio_window and io_ioport_window implement "unmapped
++     * addresses read as -1 and ignore writes"; this is traditional
++     * x86 PC behaviour, which is not mandated by the PCI spec proper
++     * but expected by much PCI-using guest software, including Linux.
++     *
++     * In the interests of not being unnecessarily surprising, we
++     * implement it in the gpex PCI host controller, by providing the
++     * _window MRs, which are containers with io ops that implement
++     * the 'background' behaviour and which hold the real PCI MRs as
++     * subregions.
++     */
+     pcie_host_mmcfg_init(pex, PCIE_MMCFG_SIZE_MAX);
+     memory_region_init(&s->io_mmio, OBJECT(s), "gpex_mmio", UINT64_MAX);
+     memory_region_init(&s->io_ioport, OBJECT(s), "gpex_ioport", 64 * 1024);
+ 
++    memory_region_init_io(&s->io_mmio_window, OBJECT(s),
++                          &unassigned_io_ops, OBJECT(s),
++                          "gpex_mmio_window", UINT64_MAX);
++    memory_region_init_io(&s->io_ioport_window, OBJECT(s),
++                          &unassigned_io_ops, OBJECT(s),
++                          "gpex_ioport_window", 64 * 1024);
++
++    memory_region_add_subregion(&s->io_mmio_window, 0, &s->io_mmio);
++    memory_region_add_subregion(&s->io_ioport_window, 0, &s->io_ioport);
++
+     sysbus_init_mmio(sbd, &pex->mmio);
+-    sysbus_init_mmio(sbd, &s->io_mmio);
+-    sysbus_init_mmio(sbd, &s->io_ioport);
++    sysbus_init_mmio(sbd, &s->io_mmio_window);
++    sysbus_init_mmio(sbd, &s->io_ioport_window);
+     for (i = 0; i < GPEX_NUM_IRQS; i++) {
+         sysbus_init_irq(sbd, &s->irq[i]);
+         s->irq_num[i] = -1;
+-- 
+2.20.1
+
 
