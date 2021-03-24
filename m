@@ -1,64 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lP3lS-0007Ub-O0
-	for mharc-qemu-riscv@gnu.org; Wed, 24 Mar 2021 09:41:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38132)
+	id 1lP51E-0003U9-N0
+	for mharc-qemu-riscv@gnu.org; Wed, 24 Mar 2021 11:02:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60288)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lP3lP-0007U3-Lz; Wed, 24 Mar 2021 09:41:35 -0400
-Received: from mail-yb1-xb31.google.com ([2607:f8b0:4864:20::b31]:41800)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lP51C-0003Qo-W5; Wed, 24 Mar 2021 11:01:59 -0400
+Received: from mail-qk1-x729.google.com ([2607:f8b0:4864:20::729]:37604)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lP3lN-0002sc-U5; Wed, 24 Mar 2021 09:41:35 -0400
-Received: by mail-yb1-xb31.google.com with SMTP id j2so14156868ybj.8;
- Wed, 24 Mar 2021 06:41:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lP51B-0008BL-5G; Wed, 24 Mar 2021 11:01:58 -0400
+Received: by mail-qk1-x729.google.com with SMTP id g15so18310308qkl.4;
+ Wed, 24 Mar 2021 08:01:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5YusfBGFn66IFPIBiEdhUfrqXYGa4bwguTgCYjVoZuA=;
- b=DCo0r+n1qTJL6bbmDecx388JHVjeLvXkFilGl9+zZiM9WCblaPhRURvLzAqEq7/I5n
- jdHaSuFDkb/DzuB9NTbBXFHJX2vjE6HE7mKievPfMct6NN3oxxl0+0VoA3B9TNALJfNZ
- 4IqWkPLg/03Bzx526IsKrk2GQP3mKjAptVPnDIhWavN9+JGQfzgzhPTeny0xtHcZJt1L
- JnlzjWTz9tDEZu26gWW92NqfcjimrMjEDsVfItEE0LGiBZlEjOrFUl46g9QNKgdqGRlL
- My3ELwYxW4teRrwnA6YLnX5zh1V5+YGjP98uX3xc+BOjjK/6cfsov9xDWtk6XEJfaCOq
- nzmA==
+ :cc; bh=w2l/tX9K5T4/wKJhsUatQajQ52ONUR4EFX8qLEZUPKU=;
+ b=R8OvE79XkeajDvGz/gC5gOh649bSznJIhvuZcwAq6cCIhGvlCF9KGHbhiCv0X0bMX0
+ o96VCVCkWNwzEYYjfW+8wtu6GWWCWe5gHpZZNpleGvZz3O5Tjtkn1WsmHuVsBqDBpThO
+ RUoT3a0jUe8JeuXbPJ6mNSHFY7ibbZHLcnJxiA1E6kDXU8fIlmKSEd7FfFDGtF/XSHLT
+ jXZW6ZeusJ1fp4g9a/NRt/iz6Dp9ZIKVkfiJROVZkzS6yGCDNrN4e317Yptg/giwuiyH
+ FzVas+H9Mgr42jxyqbmO91NjELUhNTuN/aCmhPUUvqIu23KWGR8fJBjKmyXyHrQQl0Ku
+ lcrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=5YusfBGFn66IFPIBiEdhUfrqXYGa4bwguTgCYjVoZuA=;
- b=j4kxfhaKXg5MlEM2xGoZIh9Rd1pcXaq2uMVjWr6kpJA7aTi4vv6TiAIWnfbabPZp/v
- g9Bna5ZXsR/3HgOfD5ttJlgW6y81JjkXggFYB6hVe+DqoTzFNcP4ouMyvmUzpXygyBtC
- tlyhFu3HywSpAZm1DsxcqfUx4/xZInMVkGZRdl2VCghW/5oNxtWfNjeh3jrVhzJjnh22
- PzZKtGL0icCi7O5hwHoG9wcKEyjOs2jwhlHI0YoSyp+PmDP7DN0Qpf5Yfc/RKOX4OB5t
- AiLkQ54EHRmusIRJMh7RY2z6bDHFLNyKtKNE83G0BuRW6lvzon0j3XoJWeCDxDY9YZha
- N8FQ==
-X-Gm-Message-State: AOAM5325W+izKe+cN/vQnymmz9tMFO1VWT3Tl2HrcI9YR05pJdwa9yOj
- DaSv3yiIOnhSQUr3aN5Ey151MIxdL/C68vsF6Mo=
-X-Google-Smtp-Source: ABdhPJzwEoWE1uDrLQI9J5MbDPq2Z1uTqJbtm3RJAf/WQW5un0ymPGxWyCJaE1mlVtCadNfm7d/UWBwBBYAtyfS5XO4=
-X-Received: by 2002:a25:73d1:: with SMTP id o200mr5061400ybc.239.1616593291807; 
- Wed, 24 Mar 2021 06:41:31 -0700 (PDT)
+ bh=w2l/tX9K5T4/wKJhsUatQajQ52ONUR4EFX8qLEZUPKU=;
+ b=IdqQnhUi7CrTP/dAX1jKOlKQcKR/VPTHNC/MurwrXiaeSCBkaIGjpJouotq9vDBE5T
+ Mgbj+Nh53IOaW3FdYyEkt2yYV+xWdyOwQCVpZ9OPShc6QfVeFjGsNBdvssyWvUYf6HuR
+ RxFnqAQxq9pB/y3qkCLv2WHCa3lvi+0yWXvG9hDmlHcfypyyQ/Abozk3HgsSXjM5yr16
+ m84nkiGBd9yVY+xfK/7VgiByM8IrZlJ7GgOO1esYfEngdtGPwRup8HKgZlgu6amCHDXz
+ IvLZt80l9TmBzy+/2jrP2VoiHiCaEgcTS2wZJT8NNw7PrDaiU4vhrISRxqHLYO6K26m8
+ OolA==
+X-Gm-Message-State: AOAM530/+DjtCcv3mK0ihZobITUA0fG7MkYem5eN3dHJnqHIjj1eajGZ
+ 9DO1rHCzkk/Ndfx6Hk90RazGAt45IJzqMj23/IY=
+X-Google-Smtp-Source: ABdhPJzmE7zX4k0eT83lX3e+VUYWhBzi/65Bg/NIui/q/R/fAoMJoBHfANHIS2bCgK1QiVfLL2ESQPMh9uR4cy3NIRQ=
+X-Received: by 2002:a05:620a:1483:: with SMTP id
+ w3mr3411006qkj.339.1616598114307; 
+ Wed, 24 Mar 2021 08:01:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20201022053225.2596110-1-anup.patel@wdc.com>
-In-Reply-To: <20201022053225.2596110-1-anup.patel@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 24 Mar 2021 21:41:21 +0800
-Message-ID: <CAEUhbmVWesOJTxejnr-DYMUMXgLsRLz9nVqbAEb0emu_nUEhqw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] hw/riscv: sifive_u: Allow passing custom DTB
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atish.patra@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+References: <20210323091409.1226-1-dylan@andestech.com>
+In-Reply-To: <20210323091409.1226-1-dylan@andestech.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 24 Mar 2021 10:59:55 -0400
+Message-ID: <CAKmqyKMTkDcO9_in28QSg7Spk=K9PdsSghUVJF4i1744fNdkYw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Align the data type of reset vector address
+To: Dylan Jhong <dylan@andestech.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Anup Patel <anup@brainfault.org>
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "Alan Quey-Liang Kao(((((((((()" <alankao@andestech.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <alistair.francis@wdc.com>, x5710999x@gmail.com, 
+ "Ruinland Chuan-Tzu Tsa(((((((((()" <ruinland@andestech.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb31.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::729;
+ envelope-from=alistair23@gmail.com; helo=mail-qk1-x729.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -73,35 +76,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2021 13:41:36 -0000
+X-List-Received-Date: Wed, 24 Mar 2021 15:01:59 -0000
 
-Hi Anup,
-
-On Thu, Oct 22, 2020 at 1:34 PM Anup Patel <anup.patel@wdc.com> wrote:
+On Tue, Mar 23, 2021 at 5:15 AM Dylan Jhong <dylan@andestech.com> wrote:
 >
-> Extend sifive_u machine to allow passing custom DTB using "-dtb"
-> command-line parameter. This will help users pass modified DTB
-> or Linux SiFive DTB to sifive_u machine.
+> Although the AE350 has not been upstream (preparing for v2),
+> the reset vector of the AE350 is known to be at the 2G position,
+> so this patch is corrected in advance.
 >
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> Signed-off-by: Dylan Jhong <dylan@andestech.com>
+> Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
 > ---
->  hw/riscv/sifive_u.c | 28 ++++++++++++++++++++--------
->  1 file changed, 20 insertions(+), 8 deletions(-)
+>  target/riscv/cpu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 2a990f6253..0236abf169 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -137,7 +137,7 @@ static void set_feature(CPURISCVState *env, int feature)
+>      env->features |= (1ULL << feature);
+>  }
+>
+> -static void set_resetvec(CPURISCVState *env, int resetvec)
+> +static void set_resetvec(CPURISCVState *env, uint64_t resetvec)
 
-I am using the following command to boot a Linux v5.11 kernel, but it hangs at:
+resetvec in env is a target_ulong so this should be as well (instead
+of a uint64_t).
 
-$ qemu-system-riscv64 -M sifive_u -smp 5 -m 8G -display none -serial
-stdio -kernel arch/riscv/boot/Image -dtb
-arch/riscv/boot/dts/sifive/hifive-unleashed-a00.dtb -append
-"earlycon=sbi console=ttySIF0"
+Alistair
 
-[    0.000000] smp: Bringing up secondary CPUs ...
-
-Removing -dtb makes the kernel continue booting.
-
-I am not sure what's missing ofusing "-dtb"?
-
-Regards,
-Bin
+>  {
+>  #ifndef CONFIG_USER_ONLY
+>      env->resetvec = resetvec;
+> --
+> 2.17.1
+>
+>
 
