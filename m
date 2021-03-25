@@ -1,78 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lPTOU-0003ft-JQ
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Mar 2021 13:03:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42460)
+	id 1lPUVo-0001E5-8z
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Mar 2021 14:15:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39134)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1lPTOS-0003c8-FV
- for qemu-riscv@nongnu.org; Thu, 25 Mar 2021 13:03:36 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:36337)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1lPTOO-0004m2-07
- for qemu-riscv@nongnu.org; Thu, 25 Mar 2021 13:03:35 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1616691809;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=yd24CN/cEsMQNc/Y0vFp8HoTg/GNygss3BU1636GTgw=;
- b=JjBSxYotOrBozYv8vgjqXc0BYEXLT8rkJZZp2iIz3hKOyyCP7KJGNIQO4gyHCl8fqCt2lk
- kA17HT2gzRBU3//8/EuYT7zxsakw8bdQgTZruPkeAoqggsKNiAd6TNMKuhyDhJjpvau+4e
- D/ZD+YXgWUamezXK0YvYeKjBQNIdGWY=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-120-8UjH11_SNRmLZu_1NCJhTA-1; Thu, 25 Mar 2021 13:03:20 -0400
-X-MC-Unique: 8UjH11_SNRmLZu_1NCJhTA-1
-Received: by mail-wr1-f72.google.com with SMTP id x9so2892340wro.9
- for <qemu-riscv@nongnu.org>; Thu, 25 Mar 2021 10:03:20 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1lPUVg-0001Cx-34; Thu, 25 Mar 2021 14:15:09 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335]:38885)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1lPUVb-0008Og-4H; Thu, 25 Mar 2021 14:15:04 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ m20-20020a7bcb940000b029010cab7e5a9fso3624490wmi.3; 
+ Thu, 25 Mar 2021 11:15:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=aQY57PXl5KgQCcyO+MfsfF9QAvKDZdNHuXYoHurhUcc=;
+ b=WwGC8rSNib25wjhN1CU5aNjj/SWOFHXaH0N/ZPlEtrYoNSiOzNH2qt+ZvnILJsh8QZ
+ GCFsfyTwy7RwGkno6k+s0/UXVzofM7EzFsAhc1b/AFHArQ7kbK+0plXULPoF+81PrNDd
+ TUre/NgYL2cOxTJ+8NXFmLp8GgsHNVYPAcocqkS3CfGnBsT+a+W8DODZ7becLokBFidF
+ 8jQV+KXYYF9nX5jeyu06HMoz951kSgmtW3TnOKt4eDdbgSqcQY19KbfFTBrelo6VgQqr
+ VAfuUC5Cp4ojceE6BK+orB7tdp0CnXLtyvMAHShHrSB3JFQMuxhl+F+KVLREl6Eny98y
+ zJQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=yd24CN/cEsMQNc/Y0vFp8HoTg/GNygss3BU1636GTgw=;
- b=Hjl2y80PEbmt5GH6sERsi6iBKiNRWQnHYbnewKYhMxn6txUICcbTaNUIKJO0f8bWZ+
- NXMjVT5yfCeVozUow461qwc+oWCE09TdqdD3D+8K4bJiNQKF7xFubHRyNX6306GhpNd+
- i6qC1ysYUeNszOKaeHXQKgZwXlnILR26vGoTf0OyjjvjsV/48MIlydK7yy3lXSz5qJsg
- HOaPeoSdpzzE7yK8mmZ1BInILcELGSlIK1Nf6lduoFIq9UOpg+S6KY4oXLvTdiInwcx5
- LwI3UHGsp6S0/OLcC2bqpuwfLKtlBPGtif59Hw2o08XlB2cAor4GnUeNBtMPxh7kAT2W
- DQKw==
-X-Gm-Message-State: AOAM5308EYIlTOpv83kjLEMrAGGp0wE9haPo7UsfYhKByxsS7wbH3dCd
- 31qJsGtAR33MBCwIK7PANirDTTBDD8fq9bZsr+FiPrdck21Hnf8gCYMy2CiKNp0SGtdTlsCupBG
- maeeZrCzluBB5GIE=
-X-Received: by 2002:a1c:1dd4:: with SMTP id d203mr8966819wmd.83.1616691797935; 
- Thu, 25 Mar 2021 10:03:17 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyFOqBswtzJ2YMVO7GFPX4Jh4UhxmKZj1M314z91teI6tYTlW4eiKNMiRvociLv2elKggkPSQ==
-X-Received: by 2002:a1c:1dd4:: with SMTP id d203mr8966784wmd.83.1616691797600; 
- Thu, 25 Mar 2021 10:03:17 -0700 (PDT)
-Received: from redhat.com ([2a10:800e:f0d3:0:b69b:9fb8:3947:5636])
- by smtp.gmail.com with ESMTPSA id m11sm8702227wri.44.2021.03.25.10.03.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Mar 2021 10:03:17 -0700 (PDT)
-Date: Thu, 25 Mar 2021 13:03:14 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Dmitry Vyukov <dvyukov@google.com>, Arnd Bergmann <arnd@arndb.de>
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=aQY57PXl5KgQCcyO+MfsfF9QAvKDZdNHuXYoHurhUcc=;
+ b=DpDMb4BrmigkF6xjEzdYblvWEGgC3HN/UPpb7eBuQVq1quw1OmnOB4Gu5HjnbC2g6L
+ kDdX3GTtjMQeQTdFA1sCyjebFpPqxFb9W7QjFyv97oW5pe0Ch3XpxITzdDi4aTP3dikM
+ nvbNjCufIiT2sRyWoF4T7NTg2FIzGEvFGmFd5HiKj3L1SEEbeoTUMQPtXNqo8Bx4w5uV
+ +DBkg8uqhURhk6ci0+eqfwiTfsq517ii8OFywR+/dagXP3cJ5VV5DSiYBuFzjebjtxqP
+ WRmbwoXD1tiASpp5ugfbg1+lK9y0XMyCRItEmqhr8jzgk+AR39EHPBKb773T1n+gg5xd
+ RO4w==
+X-Gm-Message-State: AOAM5336RGlD2Ez0GOAlLymasNXmFWQ9WGrGfjrZHCVhkJC2efNObjn/
+ EwBzT2ma1Hv7V1aaR9+uoqc=
+X-Google-Smtp-Source: ABdhPJyEOh4PZBQvBp4nkdavhvziF3p6CytNGJueHJr6yGjVnd/6IFi8EWk3JMfWHPdbesdZM+JXGg==
+X-Received: by 2002:a05:600c:203:: with SMTP id 3mr9233774wmi.88.1616696098486; 
+ Thu, 25 Mar 2021 11:14:58 -0700 (PDT)
+Received: from [192.168.1.36] (17.red-88-21-201.staticip.rima-tde.net.
+ [88.21.201.17])
+ by smtp.gmail.com with ESMTPSA id r14sm8750081wrw.91.2021.03.25.11.14.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 Mar 2021 11:14:57 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
 Subject: Re: [PATCH v2 for-6.0?] hw/pci-host/gpex: Don't fault for unmapped
  parts of MMIO and PIO windows
-Message-ID: <20210325130304-mutt-send-email-mst@kernel.org>
+To: Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Arnd Bergmann <arnd@arndb.de>,
+ Dmitry Vyukov <dvyukov@google.com>, "Michael S. Tsirkin" <mst@redhat.com>
 References: <20210325163315.27724-1-peter.maydell@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <1df78911-9858-b747-b22b-7e5254cd3cac@amsat.org>
+Date: Thu, 25 Mar 2021 19:14:56 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
 MIME-Version: 1.0
 In-Reply-To: <20210325163315.27724-1-peter.maydell@linaro.org>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x335.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
+X-Spam_bar: -
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -85,9 +85,11 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2021 17:03:36 -0000
+X-List-Received-Date: Thu, 25 Mar 2021 18:15:11 -0000
 
-On Thu, Mar 25, 2021 at 04:33:15PM +0000, Peter Maydell wrote:
+Hi Peter,
+
+On 3/25/21 5:33 PM, Peter Maydell wrote:
 > Currently the gpex PCI controller implements no special behaviour for
 > guest accesses to areas of the PIO and MMIO where it has not mapped
 > any PCI devices, which means that for Arm you end up with a CPU
@@ -108,9 +110,6 @@ On Thu, Mar 25, 2021 at 04:33:15PM +0000, Peter Maydell wrote:
 > Reported-by: Dmitry Vyukov <dvyukov@google.com>
 > Fixes: https://bugs.launchpad.net/qemu/+bug/1918917
 > Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
-
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-
 > ---
 > v1->v2 changes: put in the hw_compat machinery.
 > 
@@ -176,7 +175,16 @@ Acked-by: Michael S. Tsirkin <mst@redhat.com>
 > +     * addresses read as -1 and ignore writes"; this is traditional
 > +     * x86 PC behaviour, which is not mandated by the PCI spec proper
 > +     * but expected by much PCI-using guest software, including Linux.
-> +     *
+
+I suspect PCI-ISA bridges to provide an EISA bus.
+
+The 'IEEE P996' ISA spec doesn't seem public. Per the Intel
+ISA spec:
+https://archive.org/details/bitsavers_intelbusSpep89_3342148/page/n31/mode/2up
+the data lines are tri-stated, but I couldn't find the default logic
+when no add-on card owns the bus at the requested address (to confirm
+the "read as -1").
+
 > +     * In the interests of not being unnecessarily surprising, we
 > +     * implement it in the gpex PCI host controller, by providing the
 > +     * _window MRs, which are containers with io ops that implement
@@ -193,9 +201,19 @@ Acked-by: Michael S. Tsirkin <mst@redhat.com>
 > +        memory_region_init_io(&s->io_mmio_window, OBJECT(s),
 > +                              &unassigned_io_ops, OBJECT(s),
 > +                              "gpex_mmio_window", UINT64_MAX);
+
+EISA -> 4 * GiB
+
+unassigned_io_ops allows 64-bit accesses. Here we want up to 32.
+
+Maybe we don't care.
+
 > +        memory_region_init_io(&s->io_ioport_window, OBJECT(s),
 > +                              &unassigned_io_ops, OBJECT(s),
 > +                              "gpex_ioport_window", 64 * 1024);
+
+Ditto, unassigned_io_ops accepts 64-bit accesses.
+
 > +
 > +        memory_region_add_subregion(&s->io_mmio_window, 0, &s->io_mmio);
 > +        memory_region_add_subregion(&s->io_ioport_window, 0, &s->io_ioport);
@@ -231,10 +249,14 @@ Acked-by: Michael S. Tsirkin <mst@redhat.com>
 >      set_bit(DEVICE_CATEGORY_BRIDGE, dc->categories);
 >      dc->fw_name = "pci";
 > +    device_class_set_props(dc, gpex_host_properties);
->  }
->  
->  static void gpex_host_initfn(Object *obj)
-> -- 
-> 2.20.1
 
+IMO this change belongs to the parent bridges,
+TYPE_PCI_HOST_BRIDGE and TYPE_PCIE_HOST_BRIDGE.
+
+Again, 6.0 is at the door, so this can be discussed /
+updated later.
+
+Regards,
+
+Phil.
 
