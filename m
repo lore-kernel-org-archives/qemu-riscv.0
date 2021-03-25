@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lPGrM-0001Ke-Mp
-	for mharc-qemu-riscv@gnu.org; Wed, 24 Mar 2021 23:40:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45976)
+	id 1lPHA7-00056R-RB
+	for mharc-qemu-riscv@gnu.org; Wed, 24 Mar 2021 23:59:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49708)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lPGrL-0001Im-D4; Wed, 24 Mar 2021 23:40:35 -0400
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631]:39860)
+ id 1lPHA6-00056G-Px; Wed, 24 Mar 2021 23:59:58 -0400
+Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33]:44918)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lPGrJ-000651-Jl; Wed, 24 Mar 2021 23:40:35 -0400
-Received: by mail-ej1-x631.google.com with SMTP id ce10so613102ejb.6;
- Wed, 24 Mar 2021 20:40:32 -0700 (PDT)
+ id 1lPHA5-0001UX-7l; Wed, 24 Mar 2021 23:59:58 -0400
+Received: by mail-yb1-xb33.google.com with SMTP id j198so852298ybj.11;
+ Wed, 24 Mar 2021 20:59:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=F8NGhxvh1d5UcdmYEuS0UY8AjiZWvo5cTBsxnuTCkLA=;
- b=S58KPStoOla5l7rLFNUiaH2tokWtbwWMmDyoJyOCNHqFKcJhh9yBrUo5CB6NzcgClW
- HLSDDNEG4hUdGtCn5oo2qZUpUk0hV7dyEBPjYcMRX21gbuudHr8Ro39yWkZZZp7Bj8AF
- 8IvG4ctZffHh1JrSbpkbp2Z8S2l2L72lNigZJouGcwM5/WIiRaLjAne48gLNjntycG41
- q2MAbYPoc0VP5OoLSms/n6YD72e8kJuCK7k4UFalHQcBoLzxQOBBTwd68EJrdQEYznNt
- xduqdU1AVvqEZxlKRJ1sl7cJUY4gs+X+PrwuiBho1MMT7yPUQAiFc8Zzt90XWCPtizGf
- /6gw==
+ :cc; bh=/eFLjDGfCYZzDWZOLpraw4xy7B++vMpmESRmEs7tqKo=;
+ b=RunVZYoOsPCauPm3t/qENS0AT93lhzwDxe4/vb2ggSwd4iTXf+BmyCivatPAJr7uPK
+ DrMjcAhsbh7GB4oFxVlc6NFc8Rndk+vNgEktgBHUyylXB/RLyzKYSESWEZnAndDm5xdn
+ 8aBwjSnmQt8c6NlSpFMS7ByDFPmBnN8xY/20Gt0RVGwRP8c6xboiZsQ5Px7SA00MXHUH
+ szeW6JtqYgVYIlX2rtT5X2s8qKR7/0ZKdGazQq90+nnJiOGPRjaL4wK4eYC3qniwgKwN
+ 61BANhp45JPcrXJdYutlKU3E6A3n+AF/et/yawpDbTZDI6SbQwsyKArb3RX4bbJh1/jh
+ fgAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=F8NGhxvh1d5UcdmYEuS0UY8AjiZWvo5cTBsxnuTCkLA=;
- b=YxTl70l0I1zjd5kBlAmCrxjIqOZTmv9wwKHmwgGjJ3hqmmNxulbplJopR1yiYxoEOR
- Y/2g4BLRLF5VPyrxhYyH6vLB9TFFME6EOagSwp6d/klt2MITUePWeM2nRgxHZ9a5K7uS
- m13OOZzYXIF4unqL++6LPvF9TfS8B0R9M0PxCuckojJEOnnbq7X4nfn0JVHb5Q9BVcRy
- sKMJHnhaLY7YMKOc5bHbpqipahEEEwoQ0dOBMwQXPcFkysLqbUatSVxbH+OK1QJTG3nx
- Jr44P3iaPO7q2pc+3ilOidUjGRJHLeyOwSrnPAPUr2QqlIcBCU731ISqnOPAfZH0YUM9
- SjMw==
-X-Gm-Message-State: AOAM5317T98hxh3MOlz47Cca+ef+gbk/uIDdbIplPfGfXfzIjsRs0TnP
- u62XAu5nH3TtI5OOjsPJjQsBS0EjU2sE8FQxGx8=
-X-Google-Smtp-Source: ABdhPJwKf4G8zkmLBvY5ij8uCMABtQMpkzb0UaLfnN61cveR0ESSsK7rIPbWKwwYbzjocwwZRl+LstpCM98tW+j9wU4=
-X-Received: by 2002:a17:906:58d6:: with SMTP id
- e22mr6877137ejs.112.1616643631354; 
- Wed, 24 Mar 2021 20:40:31 -0700 (PDT)
+ bh=/eFLjDGfCYZzDWZOLpraw4xy7B++vMpmESRmEs7tqKo=;
+ b=V4/K3PhJ8h5pWWT6lfjuIu1D7rvlwiAI8/RJqe3I4vBa1xiS7v+9RA/RCB41MYzLmw
+ JWBHuXaDe3ln8nUUtJ7/BVaFgbZZzXOAC0ENeO7DPOwJfjW/hC2+Y/3dATqNKN98SmbT
+ OV8XPZFrs4wJTwdLtorcGv8WFmmrAV6JScSeIANeS2BytYHvfOv8ryWXOZPZB6WhrUvl
+ NpgsamIWqnFP7+t89PLXzdGuUPVR7DauO4tYkvYw/byI7gL/lhfxuPxRLFYIXKxBIrgS
+ fG3VDcFWZmyiwnz19uzz5zXm7lM6IRCzFCh8lCmVnz0/w1by+2PTa5B+6lymCNLplG1x
+ Rcvg==
+X-Gm-Message-State: AOAM533iF/ybf42gcwDXK+3Gp8WIZu/aJwjJZHOXfLLH0c8dM5O/PtZR
+ BRefxh+lEW8zspZtB/ga8dsbvJCBAZdR2Eg+mic=
+X-Google-Smtp-Source: ABdhPJyTmVs9E6wzOxf0qV6Cor/4OXOxkLpnghiwXy+b2n/cs/j3K3JBwxO2zjqbq2m5RHzuOX0G17mgFChIKE6ioMA=
+X-Received: by 2002:a25:73d1:: with SMTP id o200mr9932575ybc.239.1616644795998; 
+ Wed, 24 Mar 2021 20:59:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210323091409.1226-1-dylan@andestech.com>
  <CAKmqyKMTkDcO9_in28QSg7Spk=K9PdsSghUVJF4i1744fNdkYw@mail.gmail.com>
  <20210325033121.GA9484@andestech.com>
-In-Reply-To: <20210325033121.GA9484@andestech.com>
+ <CAEUhbmWr6+fSHyM2RJUmoB7Np7Y4pY3J_dvsDAZEVpt6ceiRiw@mail.gmail.com>
+In-Reply-To: <CAEUhbmWr6+fSHyM2RJUmoB7Np7Y4pY3J_dvsDAZEVpt6ceiRiw@mail.gmail.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 25 Mar 2021 11:40:19 +0800
-Message-ID: <CAEUhbmWr6+fSHyM2RJUmoB7Np7Y4pY3J_dvsDAZEVpt6ceiRiw@mail.gmail.com>
+Date: Thu, 25 Mar 2021 11:59:44 +0800
+Message-ID: <CAEUhbmXK3aniZtqXDFKkGvz=M36eaNmTZhEyceOFrFkBLX0J1A@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Align the data type of reset vector address
 To: Dylan Jhong <dylan@andestech.com>
 Cc: Alistair Francis <alistair23@gmail.com>,
@@ -58,8 +58,8 @@ Cc: Alistair Francis <alistair23@gmail.com>,
  =?UTF-8?B?UnVpbmxhbmQgQ2h1YW4tVHp1IFRzYSjolKHlgrPos4cp?=
  <ruinland@andestech.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -79,55 +79,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2021 03:40:35 -0000
+X-List-Received-Date: Thu, 25 Mar 2021 03:59:59 -0000
 
-On Thu, Mar 25, 2021 at 11:32 AM Dylan Jhong <dylan@andestech.com> wrote:
+On Thu, Mar 25, 2021 at 11:40 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Wed, Mar 24, 2021 at 10:59:55PM +0800, Alistair Francis wrote:
-> > On Tue, Mar 23, 2021 at 5:15 AM Dylan Jhong <dylan@andestech.com> wrote:
-> > >
-> > > Although the AE350 has not been upstream (preparing for v2),
-> > > the reset vector of the AE350 is known to be at the 2G position,
-> > > so this patch is corrected in advance.
-> > >
-> > > Signed-off-by: Dylan Jhong <dylan@andestech.com>
-> > > Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
-> > > ---
-> > >  target/riscv/cpu.c | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > index 2a990f6253..0236abf169 100644
-> > > --- a/target/riscv/cpu.c
-> > > +++ b/target/riscv/cpu.c
-> > > @@ -137,7 +137,7 @@ static void set_feature(CPURISCVState *env, int feature)
-> > >      env->features |= (1ULL << feature);
-> > >  }
-> > >
-> > > -static void set_resetvec(CPURISCVState *env, int resetvec)
-> > > +static void set_resetvec(CPURISCVState *env, uint64_t resetvec)
+> On Thu, Mar 25, 2021 at 11:32 AM Dylan Jhong <dylan@andestech.com> wrote:
 > >
-> > resetvec in env is a target_ulong so this should be as well (instead
-> > of a uint64_t).
+> > On Wed, Mar 24, 2021 at 10:59:55PM +0800, Alistair Francis wrote:
+> > > On Tue, Mar 23, 2021 at 5:15 AM Dylan Jhong <dylan@andestech.com> wrote:
+> > > >
+> > > > Although the AE350 has not been upstream (preparing for v2),
+> > > > the reset vector of the AE350 is known to be at the 2G position,
+> > > > so this patch is corrected in advance.
+> > > >
+> > > > Signed-off-by: Dylan Jhong <dylan@andestech.com>
+> > > > Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
+> > > > ---
+> > > >  target/riscv/cpu.c | 2 +-
+> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > > index 2a990f6253..0236abf169 100644
+> > > > --- a/target/riscv/cpu.c
+> > > > +++ b/target/riscv/cpu.c
+> > > > @@ -137,7 +137,7 @@ static void set_feature(CPURISCVState *env, int feature)
+> > > >      env->features |= (1ULL << feature);
+> > > >  }
+> > > >
+> > > > -static void set_resetvec(CPURISCVState *env, int resetvec)
+> > > > +static void set_resetvec(CPURISCVState *env, uint64_t resetvec)
+> > >
+> > > resetvec in env is a target_ulong so this should be as well (instead
+> > > of a uint64_t).
+> > >
+> > > Alistair
+> > >
 > >
-> > Alistair
+> > Hi Alistar,
 > >
+> > Thanks for your comments.
+> >
+> > Indeed resetvec should use target_ulong instead of uint64_t.
 >
-> Hi Alistar,
->
-> Thanks for your comments.
->
-> Indeed resetvec should use target_ulong instead of uint64_t.
+> resetvec being target_ulong means that rv32 cannot have a reset vector
+> beyond 4GiB. I don't think the spec disallow this.
 
-resetvec being target_ulong means that rv32 cannot have a reset vector
-beyond 4GiB. I don't think the spec disallow this.
+Ah, I was wrong. The spec says: "the pc is set to an implementation-de
+ned reset vector" and pc is XLEN wide.
 
-> But in target/riscv/cpu.h:306, there is also a resetvec in struct RISCVCPU but it is defined as uint64_t.
-> Do you think I should change it to target_ulong together?
->
-> ref:
-> commit 9b4c9b2b2a50fe4eb90d0ac2d8723b46ecb42511
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg730077.html
+So for rv32 the reset vector cannot beyond 4GiB. We should change it
+to target_ulong.
 
 Regards,
 Bin
