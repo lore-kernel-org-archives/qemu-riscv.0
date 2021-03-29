@@ -1,62 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lQm86-0006QE-Lg
-	for mharc-qemu-riscv@gnu.org; Mon, 29 Mar 2021 03:16:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51750)
+	id 1lQvNV-0005w9-IG
+	for mharc-qemu-riscv@gnu.org; Mon, 29 Mar 2021 13:08:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59468)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lQm85-0006Pz-UK; Mon, 29 Mar 2021 03:16:05 -0400
-Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a]:35383)
+ id 1lQvNP-0005tf-LE; Mon, 29 Mar 2021 13:08:31 -0400
+Received: from mail-qv1-xf32.google.com ([2607:f8b0:4864:20::f32]:43789)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lQm83-00045P-0G; Mon, 29 Mar 2021 03:16:05 -0400
-Received: by mail-yb1-xb2a.google.com with SMTP id m132so12782747ybf.2;
- Mon, 29 Mar 2021 00:16:02 -0700 (PDT)
+ id 1lQvNN-0004Qf-Kp; Mon, 29 Mar 2021 13:08:31 -0400
+Received: by mail-qv1-xf32.google.com with SMTP id cx5so6786344qvb.10;
+ Mon, 29 Mar 2021 10:08:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=MBTE2ln4BgbbXqrkGLEvSfJ8/X1gKcz4yAqlCLSGJdc=;
- b=Mfg8bhNxbpbyyHMlTAjG7orNYp6llaCsY9DtH7DXB/BXjZ+2zjrYJu4PqS51iRGBz8
- Q0pp3MptxEmvlxi2nKN2B+ghge2kDScwRTOBTRW+sQUaOKaI8dx+fbqrZ4RVMQ+U2mPq
- Y/HoEr7/mqLWWXtQICi1yN3E1Nog3yw9HM5iA7551y+f5ksWVlfuyVLwdT2Zgd/X9CGg
- Yc8ZuHqiujEfDoUPC6MhRZGCBScnJmOjNEGzYSID5X2Y7+83IwebbUEYzmly7DdG414W
- cs7u4MKZysZdwTU0wJTBWHhFUVU1cDlCR98YVcx1pxtv4YFfwFsuCKROR1Z2ZSupcNdj
- 8hqA==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=0ih20dGSxpLlL1BkR6m8Np/BFCqUcCDovNPTSrcRDno=;
+ b=EvqisE2tQLPCJaiHwIhocqPcN5Jb6mVSk8le3Phf//l5RY495rwYDJ3zu/BJnLMNWC
+ J0mpjarDYyzcwcB7mDHT4M2J9DXeAwk7g1iR6fPq7NxcpzeXjxCb1w+N7EmhSrF8aIqY
+ cDwGHjK0npvnajmKDt5YFFio0Obw9x5N6pLa689awvsNTFpL+nQM6XzyWxhI55tN8yKe
+ eD20tsielTM/sUAzb2AHaMCK89eyfLvyG8pnOjcN3zMhf61nTqwSbDn/TbVAVv6WPquA
+ VDwW4CjkFmM2o/JcZSkApZjQgijM0Gw9N8swCm6EHsJ0O11VICcVOCTGU62kbYy0aKMe
+ uOqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=MBTE2ln4BgbbXqrkGLEvSfJ8/X1gKcz4yAqlCLSGJdc=;
- b=VbQtzwSqX3lIGvmVEUO+xSALiSD/MQF40iHwJAEzRZ+XmZc6Im1QszIr2ddtX2S0NO
- 56ye/dZsp8OM5x26wXpCIq7eTmZodC3JJF+ogZ1EvK12ZshsRZJBk7ERejIIq4cRB38K
- YB+ImhtjEzhPXMCao7Ba5C6KUaGsVLR5unSV3DYPAhfZ3wsBJBz6Q3l68PARS58hmqyb
- ggEl8NJ8/RSa3V6q7pvD2vc9lq+J21uR0XSH+8ltoDilXDghxHNeiSyYMIrHUPO7K3vY
- plQjLAyPGXihaKx7lku1GTW3L9BLnfByHXaEMnLuxZ3/fFQo+nlTX6Ot3S2EBFrzmnaV
- YlOw==
-X-Gm-Message-State: AOAM533PX16M3dTrkV6iSwuk/Eu5U3s0TVz7XNQ0/Q5IRMsTmV8dEfUj
- YXcrwz1GYWMZNCs0bJRxrbcASrcA0YjaVzKG87c=
-X-Google-Smtp-Source: ABdhPJzTWUN5bs55UW6Yc5nogJsfvXQK+b7r73k7f53B9PZ2y4Bzey+hzzIMSjBgmcdxkLJM3WyKLE2iJhi+R/xkJqs=
-X-Received: by 2002:a25:d645:: with SMTP id n66mr35775675ybg.122.1617002161344; 
- Mon, 29 Mar 2021 00:16:01 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210329034801.22667-1-dylan@andestech.com>
-In-Reply-To: <20210329034801.22667-1-dylan@andestech.com>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=0ih20dGSxpLlL1BkR6m8Np/BFCqUcCDovNPTSrcRDno=;
+ b=foW5+8CEjQC1EF2YCqtJspgRx6pYEk/xpQq5sn1yz0S2hGvC4B6ey2um6xwhKN88ls
+ JRSqvjemnuzJh43Qjl/QXiyNMaFvfsdaSvOn3TR85EYOauxwQUQw38P24GSid6Jnuv/W
+ P1IfZWzUFWPJ8eCfzh4l8Era2sUURyGtiSOsvEDAadb4WG0yk74PkOtHQ6j+KFpFeNdk
+ zPqYg353SNl3cz3jEP3pA4McwLyhWNAxhcraeYmkrEETet5cfiiuqG/b4vgsX1M4bU5M
+ +J3s7qfA1MSzIAHwr3JV/GTrisRCSZ50A6Xxim4dWkJjPZ1lX3roisI0g/YN357p1vVp
+ iilQ==
+X-Gm-Message-State: AOAM532nwAEK66jtN4Z7/0KayJD2zJGDq6/wYyaZ5uZSS7MX8xwAE3a5
+ H6isIoAE76fpOSiTK2r8ZMA=
+X-Google-Smtp-Source: ABdhPJxqtSUogkUdQZT+Zw0vs/vIHpv8R1/uFkGy0XyX/ex+36KO2UtCTzFetDwYp+vlkrz4MEmffg==
+X-Received: by 2002:a0c:ea81:: with SMTP id d1mr26446240qvp.57.1617037708248; 
+ Mon, 29 Mar 2021 10:08:28 -0700 (PDT)
+Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
+ [144.168.56.201])
+ by smtp.gmail.com with ESMTPSA id i6sm13553981qkf.96.2021.03.29.10.08.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Mar 2021 10:08:28 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 29 Mar 2021 15:15:50 +0800
-Message-ID: <CAEUhbmVvmWLALMe1W_wZBHX9NyKh8C1VXp2gy9fvcoHXV53gmA@mail.gmail.com>
-Subject: Re: [PATCH V5] target/riscv: Align the data type of reset vector
- address
-To: Dylan Jhong <dylan@andestech.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, x5710999x@gmail.com,
- Alan Kao <alankao@andestech.com>, 
- "Ruinland Chuan-Tzu Tsa(((((((((()" <ruinland@andestech.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2a.google.com
+To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH 1/8] hw/riscv: sifive_u: Switch to use
+ qemu_fdt_setprop_string_array() helper
+Date: Tue, 30 Mar 2021 01:08:11 +0800
+Message-Id: <20210329170818.23139-1-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f32;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qv1-xf32.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -76,19 +74,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2021 07:16:06 -0000
+X-List-Received-Date: Mon, 29 Mar 2021 17:08:33 -0000
 
-On Mon, Mar 29, 2021 at 11:48 AM Dylan Jhong <dylan@andestech.com> wrote:
->
-> Use target_ulong to instead of uint64_t on reset vector address
-> to adapt on both 32/64 machine.
->
-> Signed-off-by: Dylan Jhong <dylan@andestech.com>
-> Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
-> ---
->  target/riscv/cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+From: Bin Meng <bin.meng@windriver.com>
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Since commit 78da6a1bca22 ("device_tree: add qemu_fdt_setprop_string_array helper"),
+we can use the new helper to set the clock name for the ethernet
+controller node.
+
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+---
+
+ hw/riscv/sifive_u.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 7b59942369..f06b3b2e64 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -96,7 +96,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+     int cpu;
+     uint32_t *cells;
+     char *nodename;
+-    char ethclk_names[] = "pclk\0hclk";
++    const char *ethclk_names[2] = { "pclk", "hclk" };
+     uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle = 1;
+     uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
+ 
+@@ -413,8 +413,8 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "interrupts", SIFIVE_U_GEM_IRQ);
+     qemu_fdt_setprop_cells(fdt, nodename, "clocks",
+         prci_phandle, PRCI_CLK_GEMGXLPLL, prci_phandle, PRCI_CLK_GEMGXLPLL);
+-    qemu_fdt_setprop(fdt, nodename, "clock-names", ethclk_names,
+-        sizeof(ethclk_names));
++    qemu_fdt_setprop_string_array(fdt, nodename, "clock-names",
++        (char **)&ethclk_names, ARRAY_SIZE(ethclk_names));
+     qemu_fdt_setprop(fdt, nodename, "local-mac-address",
+         s->soc.gem.conf.macaddr.a, ETH_ALEN);
+     qemu_fdt_setprop_cell(fdt, nodename, "#address-cells", 1);
+-- 
+2.25.1
+
 
