@@ -1,60 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lQvNV-0005w9-IG
-	for mharc-qemu-riscv@gnu.org; Mon, 29 Mar 2021 13:08:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59468)
+	id 1lQvNX-0005x8-Tb
+	for mharc-qemu-riscv@gnu.org; Mon, 29 Mar 2021 13:08:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59480)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lQvNP-0005tf-LE; Mon, 29 Mar 2021 13:08:31 -0400
-Received: from mail-qv1-xf32.google.com ([2607:f8b0:4864:20::f32]:43789)
+ id 1lQvNR-0005uY-SX; Mon, 29 Mar 2021 13:08:33 -0400
+Received: from mail-qt1-x82e.google.com ([2607:f8b0:4864:20::82e]:34338)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lQvNN-0004Qf-Kp; Mon, 29 Mar 2021 13:08:31 -0400
-Received: by mail-qv1-xf32.google.com with SMTP id cx5so6786344qvb.10;
- Mon, 29 Mar 2021 10:08:28 -0700 (PDT)
+ id 1lQvNP-0004Ru-Mw; Mon, 29 Mar 2021 13:08:33 -0400
+Received: by mail-qt1-x82e.google.com with SMTP id c6so9859316qtc.1;
+ Mon, 29 Mar 2021 10:08:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=0ih20dGSxpLlL1BkR6m8Np/BFCqUcCDovNPTSrcRDno=;
- b=EvqisE2tQLPCJaiHwIhocqPcN5Jb6mVSk8le3Phf//l5RY495rwYDJ3zu/BJnLMNWC
- J0mpjarDYyzcwcB7mDHT4M2J9DXeAwk7g1iR6fPq7NxcpzeXjxCb1w+N7EmhSrF8aIqY
- cDwGHjK0npvnajmKDt5YFFio0Obw9x5N6pLa689awvsNTFpL+nQM6XzyWxhI55tN8yKe
- eD20tsielTM/sUAzb2AHaMCK89eyfLvyG8pnOjcN3zMhf61nTqwSbDn/TbVAVv6WPquA
- VDwW4CjkFmM2o/JcZSkApZjQgijM0Gw9N8swCm6EHsJ0O11VICcVOCTGU62kbYy0aKMe
- uOqA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=BOBJj4Vg0E/HMoaDJ7ga/GYXXHYXn4c4V9yyzSn/7ws=;
+ b=jNaSdyoHycBBXLougSAJIbp/fDevu7Dw6C5e2G3dUe1kjVEnrRylQzTKcoEumzYJXL
+ FErrVEZrRLlWNrS5703An+lI7nbyJsduF6K85a5dKlCLgDfNIXtSXgmQECTO/sc5QY4n
+ USBYui7+0lWVzXA0ittu8FMjjNt0EGrDt1WkzkI+g2eaAL6MLQku5G6jmaxEJha1/cW7
+ +61BvZrnAe1/yvD246RSinIbyDqswDCXRCtk5M6ooqnXVCakBEGsRp4EbUp+snfH2C0M
+ EtLS7EmiJU0r9OObdC5dQoVFcoNPEcW0kyOX+bQL7JNM0V9Ew1uVSELByOH1LfCQVjVD
+ ImVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=0ih20dGSxpLlL1BkR6m8Np/BFCqUcCDovNPTSrcRDno=;
- b=foW5+8CEjQC1EF2YCqtJspgRx6pYEk/xpQq5sn1yz0S2hGvC4B6ey2um6xwhKN88ls
- JRSqvjemnuzJh43Qjl/QXiyNMaFvfsdaSvOn3TR85EYOauxwQUQw38P24GSid6Jnuv/W
- P1IfZWzUFWPJ8eCfzh4l8Era2sUURyGtiSOsvEDAadb4WG0yk74PkOtHQ6j+KFpFeNdk
- zPqYg353SNl3cz3jEP3pA4McwLyhWNAxhcraeYmkrEETet5cfiiuqG/b4vgsX1M4bU5M
- +J3s7qfA1MSzIAHwr3JV/GTrisRCSZ50A6Xxim4dWkJjPZ1lX3roisI0g/YN357p1vVp
- iilQ==
-X-Gm-Message-State: AOAM532nwAEK66jtN4Z7/0KayJD2zJGDq6/wYyaZ5uZSS7MX8xwAE3a5
- H6isIoAE76fpOSiTK2r8ZMA=
-X-Google-Smtp-Source: ABdhPJxqtSUogkUdQZT+Zw0vs/vIHpv8R1/uFkGy0XyX/ex+36KO2UtCTzFetDwYp+vlkrz4MEmffg==
-X-Received: by 2002:a0c:ea81:: with SMTP id d1mr26446240qvp.57.1617037708248; 
- Mon, 29 Mar 2021 10:08:28 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=BOBJj4Vg0E/HMoaDJ7ga/GYXXHYXn4c4V9yyzSn/7ws=;
+ b=cT3PDGLU9eF3tlI4Ff+y7RtzPoSJO8/uKRYSEfUjNBndwq1uLUyjvLHMjvDy+91KZ7
+ XEyLnO9NlZYNJ9zPvXbJBlsEOmBau5CEG2rmgoguCppMd6E24uK6ROssbyTwCaDCOFtQ
+ 29PCcCup7aUsIWchInZykefQZ75R47zu8OLhtU6B4b23/acJ3BlwrN6V1nbwOsrgW/Ut
+ ZbCua0Yy4O0Mp5XnF7sC05+HaN3FCXjCxFDOBTX1+uk7OsI2TsA96wnTLQ72tHsTA+Zn
+ z4IbTbdOjKez/Rn2sVnS/ho0Z9RwzA8l2792l5y9kVOJ4745ngCyUMxJnCr8kVcyhBO3
+ ywPQ==
+X-Gm-Message-State: AOAM531T/VpkX9fZ60t2O4HaipAw6+R2SJpQPBIHDD0ieGGo99EChnaz
+ 9n0WXFCm3WX2KShxHXKLyNk=
+X-Google-Smtp-Source: ABdhPJyNJR4RdoWJega5GwmjfcEu/M2qAV8qwyQ6eN7yA1LrkyA7viq1JrkD8ptnG/fyffY4JBhKbg==
+X-Received: by 2002:ac8:5e07:: with SMTP id h7mr23690978qtx.225.1617037710416; 
+ Mon, 29 Mar 2021 10:08:30 -0700 (PDT)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id i6sm13553981qkf.96.2021.03.29.10.08.26
+ by smtp.gmail.com with ESMTPSA id i6sm13553981qkf.96.2021.03.29.10.08.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Mar 2021 10:08:28 -0700 (PDT)
+ Mon, 29 Mar 2021 10:08:30 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 1/8] hw/riscv: sifive_u: Switch to use
+Subject: [PATCH 2/8] hw/riscv: virt: Switch to use
  qemu_fdt_setprop_string_array() helper
-Date: Tue, 30 Mar 2021 01:08:11 +0800
-Message-Id: <20210329170818.23139-1-bmeng.cn@gmail.com>
+Date: Tue, 30 Mar 2021 01:08:12 +0800
+Message-Id: <20210329170818.23139-2-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210329170818.23139-1-bmeng.cn@gmail.com>
+References: <20210329170818.23139-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f32;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qv1-xf32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::82e;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qt1-x82e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -74,44 +76,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2021 17:08:33 -0000
+X-List-Received-Date: Mon, 29 Mar 2021 17:08:35 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
 Since commit 78da6a1bca22 ("device_tree: add qemu_fdt_setprop_string_array helper"),
-we can use the new helper to set the clock name for the ethernet
-controller node.
+we can use the new helper to set the compatible strings for the
+SiFive test device node.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- hw/riscv/sifive_u.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ hw/riscv/virt.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 7b59942369..f06b3b2e64 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -96,7 +96,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
-     int cpu;
-     uint32_t *cells;
-     char *nodename;
--    char ethclk_names[] = "pclk\0hclk";
-+    const char *ethclk_names[2] = { "pclk", "hclk" };
-     uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle = 1;
-     uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
- 
-@@ -413,8 +413,8 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
-     qemu_fdt_setprop_cell(fdt, nodename, "interrupts", SIFIVE_U_GEM_IRQ);
-     qemu_fdt_setprop_cells(fdt, nodename, "clocks",
-         prci_phandle, PRCI_CLK_GEMGXLPLL, prci_phandle, PRCI_CLK_GEMGXLPLL);
--    qemu_fdt_setprop(fdt, nodename, "clock-names", ethclk_names,
--        sizeof(ethclk_names));
-+    qemu_fdt_setprop_string_array(fdt, nodename, "clock-names",
-+        (char **)&ethclk_names, ARRAY_SIZE(ethclk_names));
-     qemu_fdt_setprop(fdt, nodename, "local-mac-address",
-         s->soc.gem.conf.macaddr.a, ETH_ALEN);
-     qemu_fdt_setprop_cell(fdt, nodename, "#address-cells", 1);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index c0dc69ff33..5d0c1e5903 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -395,8 +395,9 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+         (long)memmap[VIRT_TEST].base);
+     qemu_fdt_add_subnode(fdt, name);
+     {
+-        const char compat[] = "sifive,test1\0sifive,test0\0syscon";
+-        qemu_fdt_setprop(fdt, name, "compatible", compat, sizeof(compat));
++        const char *compat[3] = { "sifive,test1", "sifive,test0", "syscon" };
++        qemu_fdt_setprop_string_array(fdt, name, "compatible", (char **)&compat,
++                                      ARRAY_SIZE(compat));
+     }
+     qemu_fdt_setprop_cells(fdt, name, "reg",
+         0x0, memmap[VIRT_TEST].base,
 -- 
 2.25.1
 
