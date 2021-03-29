@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lQvNd-0005ym-BB
-	for mharc-qemu-riscv@gnu.org; Mon, 29 Mar 2021 13:08:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59532)
+	id 1lQvNe-000615-BA
+	for mharc-qemu-riscv@gnu.org; Mon, 29 Mar 2021 13:08:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59552)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lQvNY-0005xC-VI; Mon, 29 Mar 2021 13:08:41 -0400
-Received: from mail-qt1-x82d.google.com ([2607:f8b0:4864:20::82d]:46705)
+ id 1lQvNd-0005z1-BE; Mon, 29 Mar 2021 13:08:45 -0400
+Received: from mail-qv1-xf36.google.com ([2607:f8b0:4864:20::f36]:45801)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lQvNT-0004TU-Rf; Mon, 29 Mar 2021 13:08:40 -0400
-Received: by mail-qt1-x82d.google.com with SMTP id y2so9789399qtw.13;
- Mon, 29 Mar 2021 10:08:35 -0700 (PDT)
+ id 1lQvNX-0004UF-9I; Mon, 29 Mar 2021 13:08:45 -0400
+Received: by mail-qv1-xf36.google.com with SMTP id t16so6775364qvr.12;
+ Mon, 29 Mar 2021 10:08:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=rkoEeGh9mk/Lm6Pt/z5k0lRkrzMvuzoohdKpLTtxqGw=;
- b=AWqrP6mfTdxHoeKBcTr37aAgg+TDinW7EHLJ+zbO6aOH4JbV7gb1P6IrGtxo/xksTH
- uG1BGJ2wHMyRHDD3JHiV/UQtY1I87nuYvuapXpt7o6aUhzvihwwyB6uk0zZfKtpAilWl
- 3sckr9+PjnwHS9bhFk7tmY6ATW/+s45vYiEb34Qcqj+GqJvtdvhUBnNRi7J12mcr4F+c
- DNwG8NNdFVMGlv4DBoWapsFKvtkUQpYFhVnCcP1obpTjD2s92kOcVIXdqWU9YpKLkp9C
- CuarJI899AP4joHgU7InJnVbbqyWh7hCtUw7J+1tPKgR2ztUf/trEIr5J8nti50qfoZk
- VdaQ==
+ bh=CzZq3zGrlxWDkyLDfTxKVl+AzpvgJj0bWMsHQiFEoGw=;
+ b=Ijg2bo6moq2dxZuPP5jbkBbCsFKif306t4cuaznDqUZ4/AdsEdlQTdF291MpKpxUtt
+ /sl44gEDZcC23NwmgSLT6gCgKHeLpp5WH/Zv9jZGWmynfgVqqe9t5Vx6pbwtgeGJUbV9
+ Ihi1iLdG5cvxyxFGHwbaD+0dXY6f3ctR0++nhALjM64b3x1G5w4MgeyoGMcxz23i77YR
+ 0woVq0250F0TzB89dnst95LCQOgWXQ8CUhY/0sDN87iQ44TQDrb7kWQZoz1zsXhOP/uU
+ S5MO7A6FqpSlJQr3kmuFBnoW07/9zb7db2WZdCmZ5HFUFxbObYXd5b53/D2iXospeQ7/
+ ptiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=rkoEeGh9mk/Lm6Pt/z5k0lRkrzMvuzoohdKpLTtxqGw=;
- b=pUc1KHmYSrP1es3tjTbsloDQm8JdVCFbzSeL/h3/AWXTmoEcKvQWZDBnuPRc+5oMoC
- 0PpDrcLAiS6cYe285Oq51SClbdu53wMG0CZHNSHjraiILNEkhRbKzK2CQ1NpsDV7laYR
- UpgOItkaGwSzzas7CpEiTmm3EDqMk7W7PNZjJw5GPizKqjqbFGLMr9JPLQZic2tauGSA
- wOM0QTx6xVwWpfoFcUFvCEO24luNnkmoTELkYuWQeapUP4ZpWVrxlv7xMhIUvkBGDNlo
- V4vNO3Nd6bY6GPUHJ2qBJofdtefpY/p2axf9/OU3hKiWnnW1EaYFn/zVvvpX85He2V7s
- 5jKw==
-X-Gm-Message-State: AOAM530Xeo3rPB3NKico29wJBIsu2Z1jo80URD9lZ1tauufd9Bo0zCKO
- JYgFQXoNZr1+cneL3Dhr0kA=
-X-Google-Smtp-Source: ABdhPJzq+yBuTNj0eZxmnrGsiG35iuUJhupSmVhN7xLLMpyJwwkrjnxZLiAfG6FiJRmTj5fyA+3nkA==
-X-Received: by 2002:a05:622a:1c5:: with SMTP id
- t5mr22672810qtw.49.1617037714697; 
- Mon, 29 Mar 2021 10:08:34 -0700 (PDT)
+ bh=CzZq3zGrlxWDkyLDfTxKVl+AzpvgJj0bWMsHQiFEoGw=;
+ b=PXCsnMtzx+W6ymHLncZc8undEM5wuiAO2DztjUTpgiU8cVmcw4xG/MuIES2gVsgaVI
+ XmoafW0VstLugR3eCYfKyQLs/kWmskfqFZjBSf0HB3oD2mqiG+8v5VyUfaTDaJDt2DxH
+ LERJ+F9z8umMhfLH1DnPF8H9Slw5v5zR6PKf7LrD1VgqG7iJaXf+tQP78y+vb8PsiIyS
+ EnU8NGvhXD48dyJQRhKjyTjy4yQkPtEi/N34G6lrcIGlPyuLfu+V39sPJAuYkJYS+hx9
+ 6d7JyUjk3xsRuMA5hwj7n/ntIw3pyNU/ZlI9oV9fCa15Lm8ForDPX5q2/4dFzXoR6gfx
+ VQnQ==
+X-Gm-Message-State: AOAM532WpNQxebw+Y5PIsSjJ9GyhKmSRFxIsvDjIi0d0mYFcZSnjzAIb
+ 6KbrYPvaqXjh5v3Xpi37yFM=
+X-Google-Smtp-Source: ABdhPJwmDMRuenJfC8CDIg28DoLeKSai5QjeVJxTwFuwbLUiRKLUDkgV3kjuNQXT+7xWt1V5pKFnqA==
+X-Received: by 2002:ad4:4b6c:: with SMTP id m12mr25794154qvx.21.1617037716748; 
+ Mon, 29 Mar 2021 10:08:36 -0700 (PDT)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id i6sm13553981qkf.96.2021.03.29.10.08.32
+ by smtp.gmail.com with ESMTPSA id i6sm13553981qkf.96.2021.03.29.10.08.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Mar 2021 10:08:34 -0700 (PDT)
+ Mon, 29 Mar 2021 10:08:36 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 4/8] hw/riscv: Support the official PLIC DT bindings
-Date: Tue, 30 Mar 2021 01:08:14 +0800
-Message-Id: <20210329170818.23139-4-bmeng.cn@gmail.com>
+Subject: [PATCH 5/8] docs/system/riscv: Correct the indentation level of
+ supported devices
+Date: Tue, 30 Mar 2021 01:08:15 +0800
+Message-Id: <20210329170818.23139-5-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210329170818.23139-1-bmeng.cn@gmail.com>
 References: <20210329170818.23139-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::82d;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qt1-x82d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f36;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qv1-xf36.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -76,66 +76,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2021 17:08:43 -0000
+X-List-Received-Date: Mon, 29 Mar 2021 17:08:45 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-The official DT bindings of PLIC uses "sifive,plic-1.0.0" as the
-compatible string in the upstream Linux kernel. "riscv,plic0" is
-now legacy and has to be kept for backward compatibility of legacy
-systems.
+The supported device bullet list has an additional space before each
+entry, which makes a wrong indentation level. Correct it.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- hw/riscv/sifive_u.c | 4 +++-
- hw/riscv/virt.c     | 4 +++-
- 2 files changed, 6 insertions(+), 2 deletions(-)
+ docs/system/riscv/microchip-icicle-kit.rst | 20 +++++++--------
+ docs/system/riscv/sifive_u.rst             | 30 +++++++++++-----------
+ 2 files changed, 25 insertions(+), 25 deletions(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 7f696ebc12..651a439528 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -98,6 +98,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
-     char *nodename;
-     const char *ethclk_names[2] = { "pclk", "hclk" };
-     const char *clint_compat[2] = { "sifive,clint0", "riscv,clint0" };
-+    const char *plic_compat[2] = { "sifive,plic-1.0.0", "riscv,plic0" };
-     uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle = 1;
-     uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
+diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
+index 4fe97bce3f..e803131763 100644
+--- a/docs/system/riscv/microchip-icicle-kit.rst
++++ b/docs/system/riscv/microchip-icicle-kit.rst
+@@ -15,16 +15,16 @@ Supported devices
  
-@@ -269,7 +270,8 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
-         (long)memmap[SIFIVE_U_DEV_PLIC].base);
-     qemu_fdt_add_subnode(fdt, nodename);
-     qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells", 1);
--    qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv,plic0");
-+    qemu_fdt_setprop_string_array(fdt, nodename, "compatible",
-+        (char **)&plic_compat, ARRAY_SIZE(plic_compat));
-     qemu_fdt_setprop(fdt, nodename, "interrupt-controller", NULL, 0);
-     qemu_fdt_setprop(fdt, nodename, "interrupts-extended",
-         cells, (ms->smp.cpus * 4 - 2) * sizeof(uint32_t));
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 5b4fac015d..d04733d97c 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -194,6 +194,7 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
-     char *mem_name, *cpu_name, *core_name, *intc_name;
-     char *name, *clint_name, *plic_name, *clust_name;
-     const char *clint_compat[2] = { "sifive,clint0", "riscv,clint0" };
-+    const char *plic_compat[2] = { "sifive,plic-1.0.0", "riscv,plic0" };
-     hwaddr flashsize = virt_memmap[VIRT_FLASH].size / 2;
-     hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
+ The ``microchip-icicle-kit`` machine supports the following devices:
  
-@@ -318,7 +319,8 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
-             "#address-cells", FDT_PLIC_ADDR_CELLS);
-         qemu_fdt_setprop_cell(fdt, plic_name,
-             "#interrupt-cells", FDT_PLIC_INT_CELLS);
--        qemu_fdt_setprop_string(fdt, plic_name, "compatible", "riscv,plic0");
-+        qemu_fdt_setprop_string_array(fdt, plic_name, "compatible",
-+            (char **)&plic_compat, ARRAY_SIZE(plic_compat));
-         qemu_fdt_setprop(fdt, plic_name, "interrupt-controller", NULL, 0);
-         qemu_fdt_setprop(fdt, plic_name, "interrupts-extended",
-             plic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
+- * 1 E51 core
+- * 4 U54 cores
+- * Core Level Interruptor (CLINT)
+- * Platform-Level Interrupt Controller (PLIC)
+- * L2 Loosely Integrated Memory (L2-LIM)
+- * DDR memory controller
+- * 5 MMUARTs
+- * 1 DMA controller
+- * 2 GEM Ethernet controllers
+- * 1 SDHC storage controller
++* 1 E51 core
++* 4 U54 cores
++* Core Level Interruptor (CLINT)
++* Platform-Level Interrupt Controller (PLIC)
++* L2 Loosely Integrated Memory (L2-LIM)
++* DDR memory controller
++* 5 MMUARTs
++* 1 DMA controller
++* 2 GEM Ethernet controllers
++* 1 SDHC storage controller
+ 
+ Boot options
+ ------------
+diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
+index 98e7562848..dcdfbda931 100644
+--- a/docs/system/riscv/sifive_u.rst
++++ b/docs/system/riscv/sifive_u.rst
+@@ -9,21 +9,21 @@ Supported devices
+ 
+ The ``sifive_u`` machine supports the following devices:
+ 
+- * 1 E51 / E31 core
+- * Up to 4 U54 / U34 cores
+- * Core Level Interruptor (CLINT)
+- * Platform-Level Interrupt Controller (PLIC)
+- * Power, Reset, Clock, Interrupt (PRCI)
+- * L2 Loosely Integrated Memory (L2-LIM)
+- * DDR memory controller
+- * 2 UARTs
+- * 1 GEM Ethernet controller
+- * 1 GPIO controller
+- * 1 One-Time Programmable (OTP) memory with stored serial number
+- * 1 DMA controller
+- * 2 QSPI controllers
+- * 1 ISSI 25WP256 flash
+- * 1 SD card in SPI mode
++* 1 E51 / E31 core
++* Up to 4 U54 / U34 cores
++* Core Level Interruptor (CLINT)
++* Platform-Level Interrupt Controller (PLIC)
++* Power, Reset, Clock, Interrupt (PRCI)
++* L2 Loosely Integrated Memory (L2-LIM)
++* DDR memory controller
++* 2 UARTs
++* 1 GEM Ethernet controller
++* 1 GPIO controller
++* 1 One-Time Programmable (OTP) memory with stored serial number
++* 1 DMA controller
++* 2 QSPI controllers
++* 1 ISSI 25WP256 flash
++* 1 SD card in SPI mode
+ 
+ Please note the real world HiFive Unleashed board has a fixed configuration of
+ 1 E51 core and 4 U54 core combination and the RISC-V core boots in 64-bit mode.
 -- 
 2.25.1
 
