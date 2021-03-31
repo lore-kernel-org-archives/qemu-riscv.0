@@ -1,56 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lRcOH-0003V4-JY
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Mar 2021 11:04:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42726)
+	id 1lRcPw-0004ik-U0
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Mar 2021 11:06:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43172)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lRcOD-0003So-28; Wed, 31 Mar 2021 11:04:13 -0400
-Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:38416)
+ id 1lRcPw-0004hF-1w; Wed, 31 Mar 2021 11:06:00 -0400
+Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:45896)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lRcOA-00024F-LI; Wed, 31 Mar 2021 11:04:12 -0400
-Received: by mail-io1-xd36.google.com with SMTP id e8so20435568iok.5;
- Wed, 31 Mar 2021 08:04:09 -0700 (PDT)
+ id 1lRcPu-00034E-JS; Wed, 31 Mar 2021 11:05:59 -0400
+Received: by mail-il1-x134.google.com with SMTP id w2so16954128ilj.12;
+ Wed, 31 Mar 2021 08:05:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9p+g8WUPALCJeA1iNezXA04eJTFY0ED/yaX5BNzMwCg=;
- b=AWFgT9QwIDjEy3DTCx8UsRi08NU/OPL3Ywa7dUdO+9tuKg7QRdQTkC6FXmnPYcp69L
- Jgg8ygr8Hfv1mQm2KR9FnG4crtcE8nxpfzBgqp8AhCVuoyTZTCmR+ILdu8MqCuB2DjcE
- kLrKJ6AT+JGTb/hZMNW5ySigE8R4xp1WvxvYBMrbGhbNT7qoCHLEAGPANzGn6crTqAmC
- +TgMmOX7t39RdhW6eZYAg8XVwL3eZZwgatE3A0WIxXckbTG363M+umt1KFFWzO9Pn6MV
- BD8gP8yaBvORch1H3j1zZDlgAtdXnlBRHW0XovyrtQx2RURM1gJHyA+UMZPER/+2p7Qx
- xB3w==
+ :cc; bh=xcCNOOVMPCKpF2NKvtdqHwq+wVEFhl5zFnoaD9/2hdo=;
+ b=rLfrkoQgIYQzq/rYUP39JetcpAzr/Yc+Hx2vHEmoEkhOs5MI4wuDviEsonQ9RIszpw
+ ATthpJ0J6GNlYjdQzQmQDvsc5AUNwKREIaEtkmyy05sKid6XEOfGMCdCGyp4hWJGw4Qe
+ cCghDvfq00Ui2uJ+HBHvamzH2ok+o5GziGE7bFKsn3tIm4qo9Aanm3o/XpF/y4cLFEYO
+ 20AvxGkuzlgSAi3ExA7HnMD3972AbEaLC+73+o8IdYABeegZFHMp2Sga7bY6fngRv/ox
+ aZfOavV+KoY7QkIyfhnJQMpXmtLEf6gjOCDLplpuexjEhhUu3d4ExEafcE3aZ6ZM+CaN
+ MabA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=9p+g8WUPALCJeA1iNezXA04eJTFY0ED/yaX5BNzMwCg=;
- b=IbqK5OhBtppF23nhRasY2zZMK4Wo1hdtB/jKL9BZIIo8N9kHmR/PYS8w2TzY53kAkk
- NMGihCV61JB4ZSmhACiXLFG+k9aG8nMOr0+JhY/cEQVTp70iLc7VaN/UgJoXsEds+mdH
- 8a+rKcIgNl6zy/u6qrnpTSwzKwRO3Pv3HxXQOLfVIGwdLOvFiKYWHhYPXLmOshPX2Z1D
- ze41PvQmmbH1Y4NUgsuHwS6EZVhJ3MoymIX1pGBVJtyCNOr61NziwUQVYZvJFzpiKRy+
- 2IOB3jV0Npdj/dSoyVc2RlllGafElKVQhih9q8s4cAN10Imyn16T6Mgn44rDYLMPk1bB
- gusg==
-X-Gm-Message-State: AOAM531ncW3dy6dYcQbPF9u8sZ89alS4HGp0Wamzat+3zbWXMTBawsS7
- XUp5pozgQBrBT4nck8XyUJ7mjb/X8R+iZIJDlJ0=
-X-Google-Smtp-Source: ABdhPJwAHcYQhGCrba4cmaTadxX8aULhzyBk5BjtcPjNXfSH7ndiBcfDi6V4qqXs/ayITQqXupiQo05n+pnkcq53S7M=
-X-Received: by 2002:a6b:d60c:: with SMTP id w12mr2608286ioa.105.1617203048921; 
- Wed, 31 Mar 2021 08:04:08 -0700 (PDT)
+ bh=xcCNOOVMPCKpF2NKvtdqHwq+wVEFhl5zFnoaD9/2hdo=;
+ b=hiokgBQK2PjaOGrWvgX9D5ymXAfAsZrYOdGqRC2z3XrmksK3nmvXwZkIWZhVDJEdBY
+ NmErYrloMohJkvC341UosBtWlUR+fiCW3aC/+ZKxCuQqD28zaiksHMcGeyF0YHLpO/R/
+ ieXqnzxsiwA7yOhkMQc7iUVI0AGiBFXgjLP7Tm0T/ezDOnrDLij7OZ3ACamgQGiUfjxC
+ rZoQDDzCpDS4lQbfXW1WGXNeAprEBxkhtmMc+Ckra/nm3DrBUksYtHhLm2aqjkPS2RjW
+ L2lG2HJqcqPPou8H6WgbpqXdcS94XzIcw4NwGcFFzPP53opZl4fy/E8OMZWzPDPhUJKI
+ 8Ypg==
+X-Gm-Message-State: AOAM531zairUlI2s2YpioJwnAZKxZgs+rRHpS/xw+9Of3ZZqtjtaAOsJ
+ gfXOnvVcEBWqHh1/uihhb4AT8CYtc19XJdRwxd0=
+X-Google-Smtp-Source: ABdhPJzlJvqNcD9j0/852mYWqFRT+KI9k+RQRj0iHbGQPE1glqwgCHjkxsIkGPBCKu9mbTP3CFBnYCf9d4vAMOdthMk=
+X-Received: by 2002:a92:cbc8:: with SMTP id s8mr2855163ilq.227.1617203157050; 
+ Wed, 31 Mar 2021 08:05:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210331103612.654261-1-bmeng.cn@gmail.com>
-In-Reply-To: <20210331103612.654261-1-bmeng.cn@gmail.com>
+References: <20210331021825.537484-1-bmeng.cn@gmail.com>
+In-Reply-To: <20210331021825.537484-1-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 31 Mar 2021 11:02:00 -0400
-Message-ID: <CAKmqyKMMqAzfYjEXPdwJLv_M=-6PULBJJSbjrFbigvfJ5efH4A@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: sifive_e: Add 'const' to sifive_e_memmap[]
+Date: Wed, 31 Mar 2021 11:03:48 -0400
+Message-ID: <CAKmqyKNo9UN-sm7y_ooMrm833NVJ6=5v2OwWebvL_ibGe00=3Q@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: csr: Fix hmode32() for RV64
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Emmanuel Blot <eblot.ml@gmail.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x134.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -71,37 +70,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2021 15:04:14 -0000
+X-List-Received-Date: Wed, 31 Mar 2021 15:06:00 -0000
 
-On Wed, Mar 31, 2021 at 6:36 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, Mar 30, 2021 at 10:18 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> This was accidentally dropped before. Add it back.
+> hmode32() should return -RISCV_EXCP_ILLEGAL_INST for RV64.
 >
-> Reported-by: Emmanuel Blot <eblot.ml@gmail.com>
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks for the patch.
+
+There is already a patch on list to fix this: "target/riscv: Fix
+32-bit HS mode access permissions"
 
 Alistair
 
 > ---
 >
->  hw/riscv/sifive_e.c | 2 +-
+>  target/riscv/csr.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index f939bcf9ea..82096b3e5a 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -50,7 +50,7 @@
->  #include "sysemu/sysemu.h"
->  #include "exec/address-spaces.h"
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index d2585395bf..2bad396f64 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -177,7 +177,7 @@ static int hmode(CPURISCVState *env, int csrno)
+>  static int hmode32(CPURISCVState *env, int csrno)
+>  {
+>      if (!riscv_cpu_is_32bit(env)) {
+> -        return 0;
+> +        return -RISCV_EXCP_ILLEGAL_INST;
+>      }
 >
-> -static MemMapEntry sifive_e_memmap[] = {
-> +static const MemMapEntry sifive_e_memmap[] = {
->      [SIFIVE_E_DEV_DEBUG] =    {        0x0,     0x1000 },
->      [SIFIVE_E_DEV_MROM] =     {     0x1000,     0x2000 },
->      [SIFIVE_E_DEV_OTP] =      {    0x20000,     0x2000 },
+>      return hmode(env, csrno);
 > --
 > 2.25.1
 >
