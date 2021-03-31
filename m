@@ -1,59 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lRQRY-0007eR-R7
-	for mharc-qemu-riscv@gnu.org; Tue, 30 Mar 2021 22:18:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53478)
+	id 1lRQRa-0007h3-7n
+	for mharc-qemu-riscv@gnu.org; Tue, 30 Mar 2021 22:18:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53488)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lRQRW-0007dx-VH; Tue, 30 Mar 2021 22:18:51 -0400
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e]:44569)
+ id 1lRQRX-0007e6-T6; Tue, 30 Mar 2021 22:18:51 -0400
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a]:34775)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lRQRU-0004ik-Iz; Tue, 30 Mar 2021 22:18:50 -0400
-Received: by mail-ej1-x62e.google.com with SMTP id e14so27648701ejz.11;
- Tue, 30 Mar 2021 19:18:47 -0700 (PDT)
+ id 1lRQRW-0004kG-D8; Tue, 30 Mar 2021 22:18:51 -0400
+Received: by mail-ej1-x62a.google.com with SMTP id b7so27708353ejv.1;
+ Tue, 30 Mar 2021 19:18:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:subject:date:message-id:mime-version
+ h=from:to:subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding;
- bh=ihtX5VssituVLzkgIYBEx9Dew+g40bf0EopofkqaQJI=;
- b=QTjJDkenyujFq3ss4TQk53cN4KRvzEOm0sUAB+5NIsrg1wOjtIb2zwEkRkF57YgR4i
- cYsd+4BV8fUe76HLTJ7LV4fR1BdhWG5tScYvDrp6qoNV6HBvjSZ+Wp77QqxoqQ6rhP33
- SuW3WiKqNpUdaDrsoO6EXscPZ8XIYwwJyZPCK0i4Np1aZ2bilINerrZLKPBgepQsIcPQ
- ndo2Q0F2yHqnSgkZHezKLz54/QirX5Hdw4i9pStC/2f4qoLHh67ILQqWNh4XcMnkBx5+
- XcKKu6udiILS4iEpSHeEsRoBcQhKR5DpFDnl9DRTIIBDGUaWMcxTgUf+tmi04D4/QCg4
- Bi1w==
+ bh=q44kQ6H/QJ3ONt0zZiwt63N3MoHJrKyZ/y+04+ZwvJM=;
+ b=G0apw0MrhthdLyX5Y/XpFLDZIRtY8QNMLDkES376TwDUvXxfm4Hhe7yyPAyT1vnmxG
+ eBSejJLCIOpieiEPgAEg67iXJxNXU1hoeaLDF3ZcBmxiaZG5r8oY7B+uxahPJaB4sdJy
+ 5re//SSOd7u+N7O+Xw4FWi9QtNR2qBYE99DfYNLC3uI/GvfyWYa5pvJ8Cs+OPtbDZoC5
+ rSz5xcHg+Rd8SPrWrSNoOW580RXjrDfEZuzl4/DdGOIh5WL9cvffNYOVscWjWh+oDzD7
+ Wp2vOqQTzmUxvsEwcuqYuVE6W/y+MSzKdbv71uFGGYD0MthMZ3fs8IhfJFlmONI8gigV
+ k83Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ihtX5VssituVLzkgIYBEx9Dew+g40bf0EopofkqaQJI=;
- b=iRGYRgBVBsfuUSQV+tgbII2nmCOwhZKKaxz+E89H3xOGNvak52wpxOseOC6i1e6+iW
- +ZCRcwaR5LXH0usu6ASqzZ7LSJStdfM0tHdA1YBOW8hVdloE8zBUrGvuOMiLJft9g0Jj
- PSwNGOhRNkE98jQn6RsnYTpEiyl3jTjNEXHopL5Ynk0KumPrrOIFIM5+GlTFmovZcx87
- sQZli7EjZsTZryBp8Rl62k/9d9aCTpGhKtdXHpePfuvazvQcXbe6EOi+9PmAgZTTcjRt
- +FbJzXEmkqYXlDBLiOS+y9Ne2cCDjV5h7sgtL9k0vpbk0HfebbhKIVTh/DJaDpNpfC6K
- VDDQ==
-X-Gm-Message-State: AOAM530PK/5c8CGt/tcGEpdWY1pqs4bnaKOanGf2aDz+OMhS9PYxDo1B
- S1d6o1VxBqezyzucDCmo+U+K4NLNggk=
-X-Google-Smtp-Source: ABdhPJw5as7RmAiTuvpxbibZ1bMv5W3V7xUKF9O5XH+73TmUrl0VXscZApVGiAmtmhTShykRoTlTgQ==
-X-Received: by 2002:a17:906:4f10:: with SMTP id
- t16mr1064384eju.531.1617157125864; 
- Tue, 30 Mar 2021 19:18:45 -0700 (PDT)
+ h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=q44kQ6H/QJ3ONt0zZiwt63N3MoHJrKyZ/y+04+ZwvJM=;
+ b=PlaqdKXwLFLkHoytl/MEPpmCArEvpY+tAN63i+Dz0J7MJVcQjGfik4Fw5pfj7i/x0n
+ toLJXqn1IJbVkGv6Kp+aRzB6qlnfWVqr72LI+Cy5edolwh/aSfyOIcqGzawCgK290683
+ LXQkzWMmGVi16/vQShVpXoAxUfp9oLhDaUD+hRVKS+XqnK5BPS5cKTXUuMuiEfTvqfPF
+ MGu6ryAvkRUxpEeisBwtzPENYfAxPcfGBHcJVDBn8Hv88hBsMRqzZNjAWi6OEVCPyOYb
+ W67b96/c20zk5MCdE24d9tKaQGDFiIkYa7Ylesg1dU0fSEMSpmidO5WinoJvDQfUUraL
+ GtIQ==
+X-Gm-Message-State: AOAM533Xe9rC6eNVK/SbDoHROAzdGCOUmRDIyvxdm8sWKejIdnL9SimZ
+ 2Upwd6ntaU/wl/U8x9aylg6qfQRXLYY=
+X-Google-Smtp-Source: ABdhPJx1vTK8DIa2znDXNhCMSE4SCu3f9xRCsCmZsNn5SHMQGw70dKSgO5eaoE1NLQV5/p461f6rRQ==
+X-Received: by 2002:a17:906:5689:: with SMTP id
+ am9mr1076578ejc.298.1617157128757; 
+ Tue, 30 Mar 2021 19:18:48 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com
  (ec2-44-242-66-180.us-west-2.compute.amazonaws.com. [44.242.66.180])
- by smtp.gmail.com with ESMTPSA id a26sm496211edm.15.2021.03.30.19.18.43
+ by smtp.gmail.com with ESMTPSA id a26sm496211edm.15.2021.03.30.19.18.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Mar 2021 19:18:45 -0700 (PDT)
+ Tue, 30 Mar 2021 19:18:48 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH 1/2] target/riscv: csr: Fix hmode32() for RV64
-Date: Wed, 31 Mar 2021 10:18:24 +0800
-Message-Id: <20210331021825.537484-1-bmeng.cn@gmail.com>
+Subject: [PATCH 2/2] target/riscv: csr: Remove redundant check in fp csr
+ read/write routines
+Date: Wed, 31 Mar 2021 10:18:25 +0800
+Message-Id: <20210331021825.537484-2-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210331021825.537484-1-bmeng.cn@gmail.com>
+References: <20210331021825.537484-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -73,29 +76,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2021 02:18:51 -0000
+X-List-Received-Date: Wed, 31 Mar 2021 02:18:52 -0000
 
-hmode32() should return -RISCV_EXCP_ILLEGAL_INST for RV64.
+The following check:
+
+    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+        return -RISCV_EXCP_ILLEGAL_INST;
+    }
+
+is redundant in fflags/frm/fcsr read/write routines, as the check was
+already done in fs().
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
- target/riscv/csr.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/csr.c | 24 ------------------------
+ 1 file changed, 24 deletions(-)
 
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index d2585395bf..2bad396f64 100644
+index 2bad396f64..7c24318f75 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -177,7 +177,7 @@ static int hmode(CPURISCVState *env, int csrno)
- static int hmode32(CPURISCVState *env, int csrno)
+@@ -193,11 +193,6 @@ static int pmp(CPURISCVState *env, int csrno)
+ /* User Floating-Point CSRs */
+ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
  {
-     if (!riscv_cpu_is_32bit(env)) {
--        return 0;
-+        return -RISCV_EXCP_ILLEGAL_INST;
-     }
+-#if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+-        return -RISCV_EXCP_ILLEGAL_INST;
+-    }
+-#endif
+     *val = riscv_cpu_get_fflags(env);
+     return 0;
+ }
+@@ -205,9 +200,6 @@ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
+ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+-        return -RISCV_EXCP_ILLEGAL_INST;
+-    }
+     env->mstatus |= MSTATUS_FS;
+ #endif
+     riscv_cpu_set_fflags(env, val & (FSR_AEXC >> FSR_AEXC_SHIFT));
+@@ -216,11 +208,6 @@ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
  
-     return hmode(env, csrno);
+ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+-#if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+-        return -RISCV_EXCP_ILLEGAL_INST;
+-    }
+-#endif
+     *val = env->frm;
+     return 0;
+ }
+@@ -228,9 +215,6 @@ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+-        return -RISCV_EXCP_ILLEGAL_INST;
+-    }
+     env->mstatus |= MSTATUS_FS;
+ #endif
+     env->frm = val & (FSR_RD >> FSR_RD_SHIFT);
+@@ -239,11 +223,6 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+ 
+ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+-#if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+-        return -RISCV_EXCP_ILLEGAL_INST;
+-    }
+-#endif
+     *val = (riscv_cpu_get_fflags(env) << FSR_AEXC_SHIFT)
+         | (env->frm << FSR_RD_SHIFT);
+     if (vs(env, csrno) >= 0) {
+@@ -256,9 +235,6 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+ static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+-    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+-        return -RISCV_EXCP_ILLEGAL_INST;
+-    }
+     env->mstatus |= MSTATUS_FS;
+ #endif
+     env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
 -- 
 2.25.1
 
