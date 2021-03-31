@@ -1,60 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lRd99-0007B2-IH
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Mar 2021 11:52:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34098)
+	id 1lRdAN-0000RA-Ry
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Mar 2021 11:53:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34444)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lRd97-00076d-Cw; Wed, 31 Mar 2021 11:52:41 -0400
-Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:36362)
+ id 1lRdAL-0000M3-OH; Wed, 31 Mar 2021 11:53:57 -0400
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:39534)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lRd92-0005pv-Lc; Wed, 31 Mar 2021 11:52:41 -0400
-Received: by mail-il1-x12a.google.com with SMTP id t14so17560241ilu.3;
- Wed, 31 Mar 2021 08:52:35 -0700 (PDT)
+ id 1lRdAF-0006Sj-Pl; Wed, 31 Mar 2021 11:53:57 -0400
+Received: by mail-io1-xd30.google.com with SMTP id k25so20629009iob.6;
+ Wed, 31 Mar 2021 08:53:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=vwwL/K0taDCzeQUxMSr/b2SOINV2mYY4YB93yt/+1Qg=;
- b=n1BPfCAiDPm9bgX3NhDz0rSiHFQ1L1EOvGgudNVKI5yndG9I58nYeLzwNGhDD2MsYI
- d9uhloiOV+paljqTwkTaLY5z5Nimsv33pm+nalBp382jhLC6JzlubnPWDUzhNJW0HQ4Z
- R/kcVRslCv/fPOkhmDWlenVQZ4gWCjPuwvBGjGyeIpOIgyVHLNqlQbzE6QxQ29rQHm5y
- ei0hPH4M+t+pwmduvbJUvsH2mpNbzkk9cbz6NCHmr7M7pW5rWqMQBnpp4ol7nhNdilCr
- GYpr0j6VC5Z61uz4L2FxVhVt4p7J/CfnWYnrn6O2X90/A43ujvOEpRv56YjlrSbxcbbD
- I9kg==
+ :cc; bh=cIaPXoZQNM46sZutf+VUaPa0zzyFJFOG1v9LF2gSpfQ=;
+ b=WePvoS6ZJ3lfDEn6Rqq5we4UmQrjTRh3j09o4S/PvOO/hlyPIltPwEI1+AIqnUL84y
+ Pjqs6ht+9aRXztvXXJSTTH7MszqWsQJKdCwkuPGbiPDhCrwRVEo+tv9ALyrEagHF4s0e
+ T1FrMXib8UaX3F+wZr095z9lWfC4WQ3llX8Zt8amagaAadMxNI60h9T0h42ezTT4eCy0
+ 8b6kYn7QqAEdb4NuQYopi2rtUuFWxTMNv4gDeWAZPjvE+3/tr830fTFZ1sMgZd1UFlrb
+ IlQNNzQya1OOqXKIQb6qfQIqrmz36U4tVf8vk4Uhu4N7xK5c/UpmXMToBR0DTjleyDT5
+ QaVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=vwwL/K0taDCzeQUxMSr/b2SOINV2mYY4YB93yt/+1Qg=;
- b=RMMDtSDVIIrdGhbsct2fAI99ouNb8QdLjdZk9RMj9GODVgP6srK5h0vWcJbAIO/KVR
- qkf+uviAj4DeMYUxTuo2EXdlOGd7t6s+OwvlbD++MCNvfhu8vkbnT6paiICXBqxhHwka
- pA6BqP4N4wk9OpEnThPsvnO379DehFYYJ7j/kOq1kCFTqrRWBUqnieRZOdO25BXbl6Mi
- DpE/8E2UekXv32uqPnPsO9rEGlGUAjZNOWYdOkn3gM8zwPGaJRnABNrSE+EX0UyZb8qD
- 0jNtaTe+E/pdVwTQE9bR3UDLDervrak5FxNSA46FVmJPvBvModqoXUDiKc/jJeDU4vTO
- Y6LA==
-X-Gm-Message-State: AOAM532meYUQoMeLq4BQVtHtwHhkFF3TnBwIJdklIRRjf42ngclNebah
- d5MDiOO35NozBek+r2CQXqAbo925W4SAeFkjLLE=
-X-Google-Smtp-Source: ABdhPJyga8uBuSmp0g0v50PxB4Gyn5FRM/xEeEwD0YonyHz8EecFWU7UBrJ4t2mVGWfTBMY1sWaCJQMsCzg+MayGhHI=
-X-Received: by 2002:a05:6e02:1989:: with SMTP id
- g9mr3065005ilf.40.1617205954931; 
- Wed, 31 Mar 2021 08:52:34 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=cIaPXoZQNM46sZutf+VUaPa0zzyFJFOG1v9LF2gSpfQ=;
+ b=a2P3kyT2PPenAtqCPun3XkqLcoliKfuSQE8CbGIaKyLTgefVsH8x127fLbKnqBd+UZ
+ V8ucD6V9hN/+drY/DdkfTDsLZmNpbbyjrbLn4Y5t+mdcqMhcDzZeUpJHIwoMR2Rpcc0X
+ y7cLeGb+V0nn+8WbrMDOmzyI9LFYnfjELgRQmzQQyrARgON1kxwfZ3F+VANYhQ2tf+bZ
+ UVu5Z7TxrOstejzJAiu8f/Qn9vVfPgoUBJauczAagUZtrC0Xl+Pi3QQNkQotXNNw6jH8
+ CLc+svIYQK9yKMJlx5GCooyWk41PiN7+70V8pJxo5lAzxHivG9Q+e3XJ1P98B1NFicZi
+ PepA==
+X-Gm-Message-State: AOAM531WlY/JVLBOSMzc86HeFwz152bSphGZgFoC75YFVNMzxR6gnsgk
+ 1XYFuEpjwCltqT2nPe1ZohkSTzMH+YIXAp3Qsdc=
+X-Google-Smtp-Source: ABdhPJzq38Iwp31Iu56mr10uL4O5e/2yfNyPmkyXcCUgUXyWKtrC1K3BUBy55zI/0r+GGC8JOP4JHZNTcMDjvIaDmqg=
+X-Received: by 2002:a6b:7808:: with SMTP id j8mr2840045iom.118.1617206030248; 
+ Wed, 31 Mar 2021 08:53:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210329170818.23139-1-bmeng.cn@gmail.com>
- <20210329170818.23139-8-bmeng.cn@gmail.com>
-In-Reply-To: <20210329170818.23139-8-bmeng.cn@gmail.com>
+References: <20210331021825.537484-1-bmeng.cn@gmail.com>
+ <20210331021825.537484-2-bmeng.cn@gmail.com>
+In-Reply-To: <20210331021825.537484-2-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 31 Mar 2021 11:50:23 -0400
-Message-ID: <CAKmqyKN7_RBmU+P1j1z6WdozKF8m0bD5J0dNoT-PJJNBfC3ZdQ@mail.gmail.com>
-Subject: Re: [PATCH 8/8] hw/riscv: microchip_pfsoc: Support direct kernel boot
+Date: Wed, 31 Mar 2021 11:51:41 -0400
+Message-ID: <CAKmqyKMCTFVs9dhFza+GnTM-EqRngPmTEfWbuX=BaVMGAEpbCg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] target/riscv: csr: Remove redundant check in fp csr
+ read/write routines
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,41 +72,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2021 15:52:41 -0000
+X-List-Received-Date: Wed, 31 Mar 2021 15:53:58 -0000
 
-On Mon, Mar 29, 2021 at 1:16 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, Mar 30, 2021 at 10:18 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> From: Bin Meng <bin.meng@windriver.com>
+> The following check:
 >
-> At present the Microchip Icicle Kit machine only supports using
-> '-bios' to load the HSS, and does not support '-kernel' for direct
-> kernel booting just like other RISC-V machines do. One has to use
-> U-Boot which is chain-loaded by HSS, to load a kernel for testing.
-> This is not so convenient.
+>     if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+>         return -RISCV_EXCP_ILLEGAL_INST;
+>     }
 >
-> Adding '-kernel' support together with the existing '-bios', we
-> follow the following table to select which payload we execute:
+> is redundant in fflags/frm/fcsr read/write routines, as the check was
+> already done in fs().
 >
->   -bios |    -kernel | payload
->   ------+------------+--------
->       N |          N | HSS
->       Y | don't care | HSS
->       N |          Y | kernel
->
-> This ensures backwards compatibility with how we used to expose
-> '-bios' to users. When '-kernel' is used for direct boot, '-dtb'
-> must be present to provide a valid device tree for the board,
-> as we don't generate device tree.
->
-> When direct kernel boot is used, the OpenSBI fw_dynamic BIOS image
-> is used to boot a payload like U-Boot or OS kernel directly.
->
-> Documentation is updated to describe the direct kernel boot. Note
-> as of today there is still no PolarFire SoC support in the upstream
-> Linux kernel hence the document does not include instructions for
-> that. It will be updated in the future.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
@@ -117,206 +93,79 @@ Alistair
 
 > ---
 >
->  docs/system/riscv/microchip-icicle-kit.rst | 30 ++++++--
->  hw/riscv/microchip_pfsoc.c                 | 81 +++++++++++++++++++++-
->  2 files changed, 103 insertions(+), 8 deletions(-)
+>  target/riscv/csr.c | 24 ------------------------
+>  1 file changed, 24 deletions(-)
 >
-> diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/ris=
-cv/microchip-icicle-kit.rst
-> index e803131763..54ced661e3 100644
-> --- a/docs/system/riscv/microchip-icicle-kit.rst
-> +++ b/docs/system/riscv/microchip-icicle-kit.rst
-> @@ -31,17 +31,37 @@ Boot options
->
->  The ``microchip-icicle-kit`` machine can start using the standard -bios
->  functionality for loading its BIOS image, aka Hart Software Services (HS=
-S_).
-> -HSS loads the second stage bootloader U-Boot from an SD card. It does no=
-t
-> -support direct kernel loading via the -kernel option. One has to load ke=
-rnel
-> -from U-Boot.
-> +HSS loads the second stage bootloader U-Boot from an SD card. Then a ker=
-nel
-> +can be loaded from U-Boot. It also supports direct kernel booting via th=
-e
-> +-kernel option along with the device tree blob via -dtb. When direct ker=
-nel
-> +boot is used, the OpenSBI fw_dynamic BIOS image is used to boot a payloa=
-d
-> +like U-Boot or OS kernel directly.
-> +
-> +The user provided DTB should have the following requirements:
-> +
-> +* The /cpus node should contain at least one subnode for E51 and the num=
-ber
-> +  of subnodes should match QEMU's ``-smp`` option
-> +* The /memory reg size should match QEMU=E2=80=99s selected ram_size via=
- ``-m``
-> +* Should contain a node for the CLINT device with a compatible string
-> +  "riscv,clint0"
-> +
-> +QEMU follows below truth table to select which payload to execute:
-> +
-> +=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D
-> +-bios     -kernel payload
-> +=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D
-> +    N           N     HSS
-> +    Y  don't care     HSS
-> +    N           Y  kernel
-> +=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D
->
->  The memory is set to 1537 MiB by default which is the minimum required h=
-igh
->  memory size by HSS. A sanity check on ram size is performed in the machi=
-ne
->  init routine to prompt user to increase the RAM size to > 1537 MiB when =
-less
->  than 1537 MiB ram is detected.
->
-> -Boot the machine
-> -----------------
-> +Running HSS
-> +-----------
->
->  HSS 2020.12 release is tested at the time of writing. To build an HSS im=
-age
->  that can be booted by the ``microchip-icicle-kit`` machine, type the fol=
-lowing
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index c4146b7a6b..1919c09f2f 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -53,6 +53,7 @@
->  #include "hw/riscv/microchip_pfsoc.h"
->  #include "hw/intc/sifive_clint.h"
->  #include "hw/intc/sifive_plic.h"
-> +#include "sysemu/device_tree.h"
->  #include "sysemu/sysemu.h"
->
->  /*
-> @@ -462,6 +463,12 @@ static void microchip_icicle_kit_machine_init(Machin=
-eState *machine)
->      MemoryRegion *mem_high =3D g_new(MemoryRegion, 1);
->      MemoryRegion *mem_high_alias =3D g_new(MemoryRegion, 1);
->      uint64_t mem_high_size;
-> +    hwaddr firmware_load_addr;
-> +    const char *firmware_name;
-> +    bool kernel_as_payload =3D false;
-> +    target_ulong firmware_end_addr, kernel_start_addr;
-> +    uint64_t kernel_entry;
-> +    uint32_t fdt_load_addr;
->      DriveInfo *dinfo =3D drive_get_next(IF_SD);
->
->      /* Sanity check on RAM size */
-> @@ -506,9 +513,6 @@ static void microchip_icicle_kit_machine_init(Machine=
-State *machine)
->                                  memmap[MICROCHIP_PFSOC_DRAM_HI_ALIAS].ba=
-se,
->                                  mem_high_alias);
->
-> -    /* Load the firmware */
-> -    riscv_find_and_load_firmware(machine, BIOS_FILENAME, RESET_VECTOR, N=
-ULL);
-> -
->      /* Attach an SD card */
->      if (dinfo) {
->          CadenceSDHCIState *sdhci =3D &(s->soc.sdhci);
-> @@ -518,6 +522,77 @@ static void microchip_icicle_kit_machine_init(Machin=
-eState *machine)
->                                  &error_fatal);
->          qdev_realize_and_unref(card, sdhci->bus, &error_fatal);
->      }
-> +
-> +    /*
-> +     * We follow the following table to select which payload we execute.
-> +     *
-> +     *  -bios |    -kernel | payload
-> +     * -------+------------+--------
-> +     *      N |          N | HSS
-> +     *      Y | don't care | HSS
-> +     *      N |          Y | kernel
-> +     *
-> +     * This ensures backwards compatibility with how we used to expose -=
-bios
-> +     * to users but allows them to run through direct kernel booting as =
-well.
-> +     *
-> +     * When -kernel is used for direct boot, -dtb must be present to pro=
-vide
-> +     * a valid device tree for the board, as we don't generate device tr=
-ee.
-> +     */
-> +
-> +    if (machine->kernel_filename && machine->dtb) {
-> +        int fdt_size;
-> +        machine->fdt =3D load_device_tree(machine->dtb, &fdt_size);
-> +        if (!machine->fdt) {
-> +            error_report("load_device_tree() failed");
-> +            exit(1);
-> +        }
-> +
-> +        firmware_name =3D RISCV64_BIOS_BIN;
-> +        firmware_load_addr =3D memmap[MICROCHIP_PFSOC_DRAM_LO].base;
-> +        kernel_as_payload =3D true;
-> +    }
-> +
-> +    if (!kernel_as_payload) {
-> +        firmware_name =3D BIOS_FILENAME;
-> +        firmware_load_addr =3D RESET_VECTOR;
-> +    }
-> +
-> +    /* Load the firmware */
-> +    firmware_end_addr =3D riscv_find_and_load_firmware(machine, firmware=
-_name,
-> +                                                     firmware_load_addr,=
- NULL);
-> +
-> +    if (kernel_as_payload) {
-> +        kernel_start_addr =3D riscv_calc_kernel_start_addr(&s->soc.u_cpu=
-s,
-> +                                                         firmware_end_ad=
-dr);
-> +
-> +        kernel_entry =3D riscv_load_kernel(machine->kernel_filename,
-> +                                         kernel_start_addr, NULL);
-> +
-> +        if (machine->initrd_filename) {
-> +            hwaddr start;
-> +            hwaddr end =3D riscv_load_initrd(machine->initrd_filename,
-> +                                           machine->ram_size, kernel_ent=
-ry,
-> +                                           &start);
-> +            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
-> +                                  "linux,initrd-start", start);
-> +            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
-> +                                  "linux,initrd-end", end);
-> +        }
-> +
-> +        if (machine->kernel_cmdline) {
-> +            qemu_fdt_setprop_string(machine->fdt, "/chosen",
-> +                                    "bootargs", machine->kernel_cmdline)=
-;
-> +        }
-> +
-> +        /* Compute the fdt load address in dram */
-> +        fdt_load_addr =3D riscv_load_fdt(memmap[MICROCHIP_PFSOC_DRAM_LO]=
-.base,
-> +                                       machine->ram_size, machine->fdt);
-> +        /* Load the reset vector */
-> +        riscv_setup_rom_reset_vec(machine, &s->soc.u_cpus, firmware_load=
-_addr,
-> +                                  memmap[MICROCHIP_PFSOC_ENVM_DATA].base=
-,
-> +                                  memmap[MICROCHIP_PFSOC_ENVM_DATA].size=
-,
-> +                                  kernel_entry, fdt_load_addr, machine->=
-fdt);
-> +    }
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 2bad396f64..7c24318f75 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -193,11 +193,6 @@ static int pmp(CPURISCVState *env, int csrno)
+>  /* User Floating-Point CSRs */
+>  static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+> -#if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> -        return -RISCV_EXCP_ILLEGAL_INST;
+> -    }
+> -#endif
+>      *val = riscv_cpu_get_fflags(env);
+>      return 0;
 >  }
+> @@ -205,9 +200,6 @@ static int read_fflags(CPURISCVState *env, int csrno, target_ulong *val)
+>  static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> -        return -RISCV_EXCP_ILLEGAL_INST;
+> -    }
+>      env->mstatus |= MSTATUS_FS;
+>  #endif
+>      riscv_cpu_set_fflags(env, val & (FSR_AEXC >> FSR_AEXC_SHIFT));
+> @@ -216,11 +208,6 @@ static int write_fflags(CPURISCVState *env, int csrno, target_ulong val)
 >
->  static void microchip_icicle_kit_machine_class_init(ObjectClass *oc, voi=
-d *data)
+>  static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+> -#if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> -        return -RISCV_EXCP_ILLEGAL_INST;
+> -    }
+> -#endif
+>      *val = env->frm;
+>      return 0;
+>  }
+> @@ -228,9 +215,6 @@ static int read_frm(CPURISCVState *env, int csrno, target_ulong *val)
+>  static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> -        return -RISCV_EXCP_ILLEGAL_INST;
+> -    }
+>      env->mstatus |= MSTATUS_FS;
+>  #endif
+>      env->frm = val & (FSR_RD >> FSR_RD_SHIFT);
+> @@ -239,11 +223,6 @@ static int write_frm(CPURISCVState *env, int csrno, target_ulong val)
+>
+>  static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+> -#if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> -        return -RISCV_EXCP_ILLEGAL_INST;
+> -    }
+> -#endif
+>      *val = (riscv_cpu_get_fflags(env) << FSR_AEXC_SHIFT)
+>          | (env->frm << FSR_RD_SHIFT);
+>      if (vs(env, csrno) >= 0) {
+> @@ -256,9 +235,6 @@ static int read_fcsr(CPURISCVState *env, int csrno, target_ulong *val)
+>  static int write_fcsr(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+> -    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> -        return -RISCV_EXCP_ILLEGAL_INST;
+> -    }
+>      env->mstatus |= MSTATUS_FS;
+>  #endif
+>      env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
 > --
 > 2.25.1
 >
