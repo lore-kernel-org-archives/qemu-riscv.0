@@ -1,68 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lRJ9Q-00046G-Aw
-	for mharc-qemu-riscv@gnu.org; Tue, 30 Mar 2021 14:31:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34434)
+	id 1lRQRY-0007eR-R7
+	for mharc-qemu-riscv@gnu.org; Tue, 30 Mar 2021 22:18:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53478)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lRJ9O-00045i-Fc; Tue, 30 Mar 2021 14:31:38 -0400
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:45690)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lRQRW-0007dx-VH; Tue, 30 Mar 2021 22:18:51 -0400
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e]:44569)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lRJ9M-0001HY-7c; Tue, 30 Mar 2021 14:31:38 -0400
-Received: by mail-io1-xd33.google.com with SMTP id k8so17431367iop.12;
- Tue, 30 Mar 2021 11:31:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lRQRU-0004ik-Iz; Tue, 30 Mar 2021 22:18:50 -0400
+Received: by mail-ej1-x62e.google.com with SMTP id e14so27648701ejz.11;
+ Tue, 30 Mar 2021 19:18:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=P5lvodlfjOEMsb+7eRByD3mHHLNIcnXzYOny6e9pEeU=;
- b=W+zm+DpXf5FdIPGXXtNBfLxkJKBS7zKSe1il8HRYbP7hfbANj/MxEYDwSVoZa8kA5K
- SpXSfwsEqhq5ySKZOs3NmvlrwMBZXRPnnz9H4NGos//TZdpaV/EmVxY/fAXU8qPtJ2zQ
- vCR3SrU5zxmR/IXZ3hDvYe7Tu7rbMU6l1/RwDMeAauzkRwlTbICHQIL0j+wHwKmGJ5eN
- b0U1kjbfcbHyB+PjJFtC3jC9dVHvmjqkUcrc1P5lNqM9n8NDkkmkmV3SRhHA9RFmkND5
- RKH9zo9hGx5jp9AwREWghVNcfu7NwKQvCeH2Vn7burxxf4VPiGXT+DzrrJ2MaxRpg0Om
- 9yTg==
+ h=from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ihtX5VssituVLzkgIYBEx9Dew+g40bf0EopofkqaQJI=;
+ b=QTjJDkenyujFq3ss4TQk53cN4KRvzEOm0sUAB+5NIsrg1wOjtIb2zwEkRkF57YgR4i
+ cYsd+4BV8fUe76HLTJ7LV4fR1BdhWG5tScYvDrp6qoNV6HBvjSZ+Wp77QqxoqQ6rhP33
+ SuW3WiKqNpUdaDrsoO6EXscPZ8XIYwwJyZPCK0i4Np1aZ2bilINerrZLKPBgepQsIcPQ
+ ndo2Q0F2yHqnSgkZHezKLz54/QirX5Hdw4i9pStC/2f4qoLHh67ILQqWNh4XcMnkBx5+
+ XcKKu6udiILS4iEpSHeEsRoBcQhKR5DpFDnl9DRTIIBDGUaWMcxTgUf+tmi04D4/QCg4
+ Bi1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=P5lvodlfjOEMsb+7eRByD3mHHLNIcnXzYOny6e9pEeU=;
- b=pmUR64pyg36Bt0d8jZoXPo0of1vSCB2SogIYLee3byYyZomqao7Pv4G5WEIuRT/wI/
- j2RarVP8OsanQcaPJb0U8q/0kLNXZ1SDK7BVXDptywPJo4rNoqFjl4fFUdh7uqMiMnlE
- rztxDlopH1XpZkWAzA8D33uavAcO1Qs1ztLGEFTE+eYMXZGXfuUYgLBJU3mblAieKE0F
- l0TW2L0GaDwkDiM/d4lLSwx6Ja/p1u7x4sQGSTYDkKHgqnEmos2EbsKh6vODZdebpj5x
- 14TMghclWJKH33Ye7+f9r2KZgmMcDPOk1ERPJ/An4fst2NFmzMTyGU07dqI+3U4cToGO
- u2Zg==
-X-Gm-Message-State: AOAM5305CR/nIfRMft5Z5Ypaee0xeGMvzMpGcV2P61rcee9zT30Pqp9A
- 549GU/5SV0S3joEKVjVD7mpc11E7dm2iXdJaTcM=
-X-Google-Smtp-Source: ABdhPJwVqdnmXjt0suFA6C/s6R/kvKCcfMx+iLCvrrMz/cKw7+eiRwrQQjs8VTTbaIyQTxnKzrv5+9YrmCS+ubSaz9Y=
-X-Received: by 2002:a6b:7808:: with SMTP id j8mr25656477iom.118.1617129094717; 
- Tue, 30 Mar 2021 11:31:34 -0700 (PDT)
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ihtX5VssituVLzkgIYBEx9Dew+g40bf0EopofkqaQJI=;
+ b=iRGYRgBVBsfuUSQV+tgbII2nmCOwhZKKaxz+E89H3xOGNvak52wpxOseOC6i1e6+iW
+ +ZCRcwaR5LXH0usu6ASqzZ7LSJStdfM0tHdA1YBOW8hVdloE8zBUrGvuOMiLJft9g0Jj
+ PSwNGOhRNkE98jQn6RsnYTpEiyl3jTjNEXHopL5Ynk0KumPrrOIFIM5+GlTFmovZcx87
+ sQZli7EjZsTZryBp8Rl62k/9d9aCTpGhKtdXHpePfuvazvQcXbe6EOi+9PmAgZTTcjRt
+ +FbJzXEmkqYXlDBLiOS+y9Ne2cCDjV5h7sgtL9k0vpbk0HfebbhKIVTh/DJaDpNpfC6K
+ VDDQ==
+X-Gm-Message-State: AOAM530PK/5c8CGt/tcGEpdWY1pqs4bnaKOanGf2aDz+OMhS9PYxDo1B
+ S1d6o1VxBqezyzucDCmo+U+K4NLNggk=
+X-Google-Smtp-Source: ABdhPJw5as7RmAiTuvpxbibZ1bMv5W3V7xUKF9O5XH+73TmUrl0VXscZApVGiAmtmhTShykRoTlTgQ==
+X-Received: by 2002:a17:906:4f10:: with SMTP id
+ t16mr1064384eju.531.1617157125864; 
+ Tue, 30 Mar 2021 19:18:45 -0700 (PDT)
+Received: from pek-vx-bsp2.wrs.com
+ (ec2-44-242-66-180.us-west-2.compute.amazonaws.com. [44.242.66.180])
+ by smtp.gmail.com with ESMTPSA id a26sm496211edm.15.2021.03.30.19.18.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Mar 2021 19:18:45 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH 1/2] target/riscv: csr: Fix hmode32() for RV64
+Date: Wed, 31 Mar 2021 10:18:24 +0800
+Message-Id: <20210331021825.537484-1-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210329033844.11878-1-dylan@andestech.com>
-In-Reply-To: <20210329033844.11878-1-dylan@andestech.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 30 Mar 2021 14:29:26 -0400
-Message-ID: <CAKmqyKMokXk78ChtvL7oJmtwAj0EQ6kHRWhaYePDOhmX6+3KwA@mail.gmail.com>
-Subject: Re: [PATCH V4] target/riscv: Align the data type of reset vector
- address
-To: Dylan Jhong <dylan@andestech.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell <peter.maydell@linaro.org>, 
- "Alan Quey-Liang Kao(((((((((()" <alankao@andestech.com>, x5710999x@gmail.com, 
- "Ruinland Chuan-Tzu Tsa(((((((((()" <ruinland@andestech.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -77,65 +73,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Mar 2021 18:31:38 -0000
+X-List-Received-Date: Wed, 31 Mar 2021 02:18:51 -0000
 
-On Sun, Mar 28, 2021 at 11:39 PM Dylan Jhong <dylan@andestech.com> wrote:
->
-> Use target_ulong to instead of uint64_t on reset vector address
-> to adapt on both 32/64 machine.
->
-> Signed-off-by: Dylan Jhong <dylan@andestech.com>
-> Signed-off-by: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
+hmode32() should return -RISCV_EXCP_ILLEGAL_INST for RV64.
 
-Thanks!
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+---
 
-Applied to riscv-to-apply.next
+ target/riscv/csr.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Alistair
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index d2585395bf..2bad396f64 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -177,7 +177,7 @@ static int hmode(CPURISCVState *env, int csrno)
+ static int hmode32(CPURISCVState *env, int csrno)
+ {
+     if (!riscv_cpu_is_32bit(env)) {
+-        return 0;
++        return -RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+     return hmode(env, csrno);
+-- 
+2.25.1
 
-> ---
->  target/riscv/cpu.c | 5 +++--
->  target/riscv/cpu.h | 2 +-
->  2 files changed, 4 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 7d6ed80f6b..268945d8a9 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -137,7 +137,7 @@ static void set_feature(CPURISCVState *env, int feature)
->      env->features |= (1ULL << feature);
->  }
->
-> -static void set_resetvec(CPURISCVState *env, int resetvec)
-> +static void set_resetvec(CPURISCVState *env, target_ulong resetvec)
->  {
->  #ifndef CONFIG_USER_ONLY
->      env->resetvec = resetvec;
-> @@ -554,7 +554,8 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-> -    DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
-> +    DEFINE_PROP_UNSIGNED("resetvec", RISCVCPU, cfg.resetvec,
-> +        DEFAULT_RSTVEC, qdev_prop_uint64, target_ulong),
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 0a33d387ba..d9d7891666 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -303,7 +303,7 @@ struct RISCVCPU {
->          uint16_t elen;
->          bool mmu;
->          bool pmp;
-> -        uint64_t resetvec;
-> +        target_ulong resetvec;
->      } cfg;
->  };
->
-> --
-> 2.17.1
->
->
 
