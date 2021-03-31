@@ -1,67 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lRYDP-0006hA-AO
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Mar 2021 06:36:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33240)
+	id 1lRafN-0003vI-2Q
+	for mharc-qemu-riscv@gnu.org; Wed, 31 Mar 2021 09:13:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44046)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lRYDG-0006eh-Dp; Wed, 31 Mar 2021 06:36:38 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529]:44018)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1lRafL-0003uW-HE; Wed, 31 Mar 2021 09:13:47 -0400
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a]:50824)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lRYDE-0002Xc-0a; Wed, 31 Mar 2021 06:36:38 -0400
-Received: by mail-ed1-x529.google.com with SMTP id e7so21677214edu.10;
- Wed, 31 Mar 2021 03:36:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1lRafK-0002qx-03; Wed, 31 Mar 2021 09:13:47 -0400
+Received: by mail-wm1-x32a.google.com with SMTP id g25so10179292wmh.0;
+ Wed, 31 Mar 2021 06:13:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=6B8F1C+YQqkROypmJL0Djudesqu5mXiaDlrt1fs9/Uk=;
- b=FJrYz/TdcuwnpYfAoaAcbslGLQ0zf/HcaW1/lEnOOt3w7wsz0FenB/oLMDzDPrWNyU
- AYVtsfo+ylTV26I1k1Hrv09IuHHYcetZBoEQ5lkzYsEBkHEQegk5oLwStMsYKq0YSvXq
- 3nfEGKPDZRDZKyYHT1zh5hwpO5T1MSGSL0r2B9UqjnJS0sv/aihswUwoM3hQx0tcH2zv
- 6r+QyH5dc54hwfvJI8HzOGePzJdf3HBwDI7EADaIGJ5K/rBIuWRQnFRl9ncKOhO+4fZT
- Y/q9UFlSNfeGisY4cGPc0C8BOuXMrW7b2gXYTpDSzWSor8FvnDUoxVD0mBYbnyjIyKQO
- 7pkQ==
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=2imILVcWDhiWtLMyZB9g3JpmaqOWwGDkSEShu4U5JT0=;
+ b=TkVpzMEdBkT0lZ456GlW7Xkm4iVez3wlB4axs37OBJ6hg8IggasKV6/iYc2LQlxFA+
+ pAAGhP6Ga6/aNsU7poXMo/yIKgrOvCLn+IQ71dA6QX5BRY/fKK+MNoWaS+NnPEQd9817
+ U3yXEtpH+sze2/5Zfs+XxboWa1oFqp4DFrD59+xViXXT8EnkNj1PpUbbkTWWYJa55fIu
+ BOjWgNeBR2RlZGJN+hgzgV+LmM2XCX6g4nBJ9XoZno1AkSqU/eVurk+UrKCdfiJUpNQo
+ eaGF0UxQUS3zo/qw66Rld49CiMIKh0MVTPGIUh0gGAazKCzsuuTHd4B7xb7mVMbvC2gu
+ j6Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=6B8F1C+YQqkROypmJL0Djudesqu5mXiaDlrt1fs9/Uk=;
- b=DJHSOVii6mDmpBdxQyLhkT017Qnu+FTYJpDsmQL7fyK6IDkKAPMFublzck+pZD/mrS
- oq5hNIXx3esCXyg82ahUUZ7OOovdxpthckEh+ERBjkSvmZU7pcc6GCcUQ7ISq83kDw7V
- rFZWZhMKF/GIVK4qK3raIMfKbrDdIF06L0MnThig+x4ciDQXpFFkiMpgb6MmKPpGeNIa
- 9L606qfzIqhYbrJsSgyojQPLG7ca/aBya8gouKvotMEFaiREorURdK77308Skxw940Gp
- rdyDCKC2qSzGZhi9y/IqEfi01aDa6OJnjJzU1hb6/ptsruhH/XlB/d5UfO9tfHdWMMyh
- J9fQ==
-X-Gm-Message-State: AOAM531aT5XlgA+B0WHEWS9EnIEalFfOLQ/Janr3OdicqOpvKqEpZBge
- wrmo9PMsBtGSMUq26ll095w=
-X-Google-Smtp-Source: ABdhPJy1kbvk2yO7js3fJfwVeRTQ67d4UtTElXK2hPTUB0IQB1MfXox9xhO/i9wi4G9JdDl8WwgUig==
-X-Received: by 2002:a05:6402:d07:: with SMTP id
- eb7mr2796854edb.242.1617186993521; 
- Wed, 31 Mar 2021 03:36:33 -0700 (PDT)
-Received: from pek-vx-bsp2.wrs.com
- (ec2-44-242-66-180.us-west-2.compute.amazonaws.com. [44.242.66.180])
- by smtp.gmail.com with ESMTPSA id j25sm1302075edy.9.2021.03.31.03.36.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Mar 2021 03:36:33 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
+ bh=2imILVcWDhiWtLMyZB9g3JpmaqOWwGDkSEShu4U5JT0=;
+ b=fLwc8o03jQXBDy07NNVdf5c/EWV9+gOv+BY+Q4ej1c8/qrin3iRasXloxItOrj98tM
+ DFvcWDY8H4dHcGmvk3sf5iAIc5S0aNZ7dN1QKz2xC8087eD6/qEejrOWH2a7yfAApKDW
+ Bk3XEMXEvrw8egL3QEBrZDy5KF9PUNAsYXVIkvliGX2czQpNYPAAlII0qv3SOoQ6pBsG
+ JiAqr8qsR8xXqYgRqDXcMzQPJS+ULVPAK/PXpb6mWBdlOZ6n1VJjlUFZbIXGZVnfOpIm
+ g//jEVMN2YYnXuc3l9nwKQVva6Y8RmMcWYGb1uH0le0GbCQkMCozrp3sIrEqZilm2BN/
+ Vx3Q==
+X-Gm-Message-State: AOAM533x+ChcY3Wo2bXycWpNqpGgDSZnOMJycXxBR6COPtAL+wiEgdJM
+ U0D1xCKdd7ZYu0acGFtuklQ=
+X-Google-Smtp-Source: ABdhPJzxbTjQO8IT0O2lwZq9fHL7mVaKa1tB8U2bZYT7dSSCOjIgOXvf0yAc199bKLSXczw1qZqukg==
+X-Received: by 2002:a7b:c186:: with SMTP id y6mr3238175wmi.84.1617196424086;
+ Wed, 31 Mar 2021 06:13:44 -0700 (PDT)
+Received: from [192.168.1.36] (17.red-88-21-201.staticip.rima-tde.net.
+ [88.21.201.17])
+ by smtp.gmail.com with ESMTPSA id u8sm4764708wrr.42.2021.03.31.06.13.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 31 Mar 2021 06:13:43 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH] hw/riscv: sifive_e: Add 'const' to sifive_e_memmap[]
+To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Emmanuel Blot <eblot.ml@gmail.com>
-Subject: [PATCH] hw/riscv: sifive_e: Add 'const' to sifive_e_memmap[]
-Date: Wed, 31 Mar 2021 18:36:12 +0800
-Message-Id: <20210331103612.654261-1-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.25.1
+References: <20210331103612.654261-1-bmeng.cn@gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <d107d524-db19-72d0-bcee-b741c6fcc4da@amsat.org>
+Date: Wed, 31 Mar 2021 15:13:42 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
 MIME-Version: 1.0
+In-Reply-To: <20210331103612.654261-1-bmeng.cn@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32a.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
+X-Spam_bar: -
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -74,31 +82,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2021 10:36:38 -0000
+X-List-Received-Date: Wed, 31 Mar 2021 13:13:47 -0000
 
-This was accidentally dropped before. Add it back.
+On 3/31/21 12:36 PM, Bin Meng wrote:
+> This was accidentally dropped before. Add it back.
+> 
 
-Reported-by: Emmanuel Blot <eblot.ml@gmail.com>
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
----
+Fixes: 732612856a8 ("hw/riscv: Drop 'struct MemmapEntry'")
 
- hw/riscv/sifive_e.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Reported-by: Emmanuel Blot <eblot.ml@gmail.com>
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index f939bcf9ea..82096b3e5a 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -50,7 +50,7 @@
- #include "sysemu/sysemu.h"
- #include "exec/address-spaces.h"
- 
--static MemMapEntry sifive_e_memmap[] = {
-+static const MemMapEntry sifive_e_memmap[] = {
-     [SIFIVE_E_DEV_DEBUG] =    {        0x0,     0x1000 },
-     [SIFIVE_E_DEV_MROM] =     {     0x1000,     0x2000 },
-     [SIFIVE_E_DEV_OTP] =      {    0x20000,     0x2000 },
--- 
-2.25.1
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+
+> ---
+> 
+>  hw/riscv/sifive_e.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index f939bcf9ea..82096b3e5a 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -50,7 +50,7 @@
+>  #include "sysemu/sysemu.h"
+>  #include "exec/address-spaces.h"
+>  
+> -static MemMapEntry sifive_e_memmap[] = {
+> +static const MemMapEntry sifive_e_memmap[] = {
+>      [SIFIVE_E_DEV_DEBUG] =    {        0x0,     0x1000 },
+>      [SIFIVE_E_DEV_MROM] =     {     0x1000,     0x2000 },
+>      [SIFIVE_E_DEV_OTP] =      {    0x20000,     0x2000 },
+> 
 
 
