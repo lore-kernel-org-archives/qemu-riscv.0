@@ -1,47 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lS1qv-0003Ny-Bh
-	for mharc-qemu-riscv@gnu.org; Thu, 01 Apr 2021 14:15:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60284)
+	id 1lS1r6-0003TD-2m
+	for mharc-qemu-riscv@gnu.org; Thu, 01 Apr 2021 14:15:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60318)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
- id 1lS1qc-0003LA-KJ; Thu, 01 Apr 2021 14:15:16 -0400
-Received: from sender-of-o51.zoho.in ([103.117.158.51]:2303)
+ id 1lS1qi-0003Mv-Ss; Thu, 01 Apr 2021 14:15:26 -0400
+Received: from sender-of-o51.zoho.in ([103.117.158.51]:2302)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
- id 1lS1qX-0003YL-Tj; Thu, 01 Apr 2021 14:15:14 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1617300902; cv=none; d=zohomail.in; s=zohoarc; 
- b=RhsO1CNVkJ6yIvEmxIQXnKxGxdjiMwgoxh6SApan552XyWoWNwofj5+q0hFLr1KTOuOj+d0aIXez9kIpDf7e641u2AXzAmznWY+sCXMQER2AgdHcSQ6BG6gjOg9OmFiT6SBkm1gb1RnUCksrQs78+KlXHJZiUuChQTPNmEbKv0c=
+ id 1lS1qX-0003Y1-Vz; Thu, 01 Apr 2021 14:15:20 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1617300900; cv=none; d=zohomail.in; s=zohoarc; 
+ b=Sb5rhDZC8bOTBNKNw7YUTN9rEiAHSSgaTnt6NyvLbL9qeCL5OgxnpttDuzwG90i2SCUDmeGVMPiA6Kly0UFSeKBuDtVPpiaTfpnCXyDSH1fP6JodL3yw4BA8JHtQDAzrzEbA8OnANnMjVxmQESmVA1Sok/ME35OvvJ6Ga9KWtKs=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in;
- s=zohoarc; t=1617300902;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
- bh=evHDLWBYxQMqqDMawDnxpTEbO7c4T6GucCah48FP61Q=; 
- b=aoS3Nl6wYDvHq7HeGI/ynSSxvu4gr3eKXW2y01l+MxYtW+T2M6yve6PmWNLgPV7p77qRz8SjWu9W3yRwss1GZXydcMmS14t9gZsrmkxZPsQ05IfnZk9sO1T9pjktfKk+JPs4b2oGd4SVLtPt3y9yumFcc2cVsc6VYkbRS9s8eO0=
+ s=zohoarc; t=1617300900;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To;
+ bh=gpNvWb11klRaX3ZQW/T/0R6XxaJ510x8GYvqivdKx0U=; 
+ b=RleI/utt0MTC1xYZi/rKw5g8w3WFUDyKVBKIGaJ8PwJKyw1SzduttVm+9Yl1m31Nge/SOJAEzx5Yv/BLgI6iOoLZPCFObZRYJnfFBnxPqgCEYquBwBczXsgMVwdBGbJqTW8kyTm0hJYT4BPZlr/iXEhqUPG7QoZBlIOOJS4K3XE=
 ARC-Authentication-Results: i=1; mx.zohomail.in;
  dkim=pass  header.i=behindbytes.com;
  spf=pass  smtp.mailfrom=vijai@behindbytes.com;
  dmarc=pass header.from=<vijai@behindbytes.com>
  header.from=<vijai@behindbytes.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1617300902; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1617300900; 
  s=yrk; d=behindbytes.com; i=vijai@behindbytes.com;
- h=From:To:Cc:Message-ID:Subject:Date:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Content-Type;
- bh=evHDLWBYxQMqqDMawDnxpTEbO7c4T6GucCah48FP61Q=;
- b=JLV+eDfksiP3zKO/PeHxL9HFZ4A2tkk7FYevFr1qIju75XalD/uIq0+/fZ/WBw6U
- BMWpt6eVWW5VORD5A8yzzdCiVqOvzC65X2/mEdebOORcbzv0fvGwHpfeUFLwt8YmexR
- 4bG9yqBGge2Mowq4h/P+pgUFj9eBlLweQakZIR5E=
+ h=From:To:Cc:Message-ID:Subject:Date:MIME-Version:Content-Transfer-Encoding:Content-Type;
+ bh=gpNvWb11klRaX3ZQW/T/0R6XxaJ510x8GYvqivdKx0U=;
+ b=KaLxw8V5F7p0H0Xhjs3d2RNQrikTpHY1gsK5F9KAEtvwPIWDQQkuBfc11B8YPClG
+ YMF/+GyMjTGFIMDFdpW+5y5OZp81fYH2oHCID1NDr0bOI+2yvnfWyE4Sh0dRcrueRp7
+ Og0/fa2bsxsWJpiWCMASIjrKQZa+cDEKgz8dNfAU=
 Received: from localhost.localdomain (49.207.218.164 [49.207.218.164]) by
- mx.zoho.in with SMTPS id 1617300900611717.8044221259788;
- Thu, 1 Apr 2021 23:45:00 +0530 (IST)
+ mx.zoho.in with SMTPS id 1617300899344966.5717957986967;
+ Thu, 1 Apr 2021 23:44:59 +0530 (IST)
 From: Vijai Kumar K <vijai@behindbytes.com>
 To: qemu-riscv@nongnu.org,
 	alistair23@gmail.com
 Cc: qemu-devel@nongnu.org,
 	Vijai Kumar K <vijai@behindbytes.com>
-Message-ID: <20210401181457.73039-2-vijai@behindbytes.com>
-Subject: [PATCH v3 1/4] target/riscv: Add Shakti C class CPU
-Date: Thu,  1 Apr 2021 23:44:54 +0530
+Message-ID: <20210401181457.73039-1-vijai@behindbytes.com>
+Subject: [PATCH v3 0/4] Add support for Shakti SoC from IIT-M
+Date: Thu,  1 Apr 2021 23:44:53 +0530
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210401181457.73039-1-vijai@behindbytes.com>
-References: <20210401181457.73039-1-vijai@behindbytes.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 X-ZohoMailClient: External
@@ -54,7 +52,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -67,44 +65,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2021 18:15:17 -0000
+X-List-Received-Date: Thu, 01 Apr 2021 18:15:33 -0000
 
-C-Class is a member of the SHAKTI family of processors from IIT-M.
+Changes in v3:
+ - Drop SHAKTI_C_DEBUG register
 
-It is an extremely configurable and commercial-grade 5-stage in-order
-core supporting the standard RV64GCSUN ISA extensions.
+Changes in v2:
+ - Moved CPU addition to a separate patch(P1)
+ - Use riscv_setup_rom_resetvec API to setup reset vector
+ - Dropped unused DPRINTF and unwanted break statements
+ - Fixed uart_can_receive logic
+ - Reused sifive_u_cpu_init routine for shakti
+ - Error out when an unsupported CPU is specified
+ - Addressed formatting changes pointed out in review
 
-Signed-off-by: Vijai Kumar K <vijai@behindbytes.com>
----
- target/riscv/cpu.c | 1 +
- target/riscv/cpu.h | 1 +
- 2 files changed, 2 insertions(+)
+Vijai Kumar K (4):
+  target/riscv: Add Shakti C class CPU
+  riscv: Add initial support for Shakti C machine
+  hw/char: Add Shakti UART emulation
+  hw/riscv: Connect Shakti UART to Shakti platform
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 2a990f6253..140094fd52 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -707,6 +707,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           rv64_base_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
- #endif
- };
-=20
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0edb2826a2..ebbf15fb1c 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -38,6 +38,7 @@
- #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
- #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
- #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex"=
-)
-+#define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
- #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
- #define TYPE_RISCV_CPU_SIFIVE_E34       RISCV_CPU_TYPE_NAME("sifive-e34")
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
+ MAINTAINERS                                 |   9 +
+ default-configs/devices/riscv64-softmmu.mak |   1 +
+ hw/char/meson.build                         |   1 +
+ hw/char/shakti_uart.c                       | 185 ++++++++++++++++++++
+ hw/char/trace-events                        |   4 +
+ hw/riscv/Kconfig                            |  10 ++
+ hw/riscv/meson.build                        |   1 +
+ hw/riscv/shakti_c.c                         | 178 +++++++++++++++++++
+ include/hw/char/shakti_uart.h               |  74 ++++++++
+ include/hw/riscv/shakti_c.h                 |  75 ++++++++
+ target/riscv/cpu.c                          |   1 +
+ target/riscv/cpu.h                          |   1 +
+ 12 files changed, 540 insertions(+)
+ create mode 100644 hw/char/shakti_uart.c
+ create mode 100644 hw/riscv/shakti_c.c
+ create mode 100644 include/hw/char/shakti_uart.h
+ create mode 100644 include/hw/riscv/shakti_c.h
+
 --=20
 2.25.1
 
