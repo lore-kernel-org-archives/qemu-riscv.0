@@ -1,75 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lRz7b-0007wg-MD
-	for mharc-qemu-riscv@gnu.org; Thu, 01 Apr 2021 11:20:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45322)
+	id 1lS0y4-0004ua-LB
+	for mharc-qemu-riscv@gnu.org; Thu, 01 Apr 2021 13:18:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46718)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=718ae7c5e=alistair.francis@wdc.com>)
- id 1lRz7Z-0007t3-Td; Thu, 01 Apr 2021 11:20:33 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:49467)
+ (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
+ id 1lS0y2-0004t1-EA; Thu, 01 Apr 2021 13:18:50 -0400
+Received: from sender-of-o51.zoho.in ([103.117.158.51]:2301)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=718ae7c5e=alistair.francis@wdc.com>)
- id 1lRz7X-0005Lp-L0; Thu, 01 Apr 2021 11:20:33 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1617290484; x=1648826484;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=NvIACZsNCOtHYoAOlNCAlMIPm+x7eeAHMHw8T6QdPbE=;
- b=g8WqXl411VBg6CDmy6M9YPQjlSXvEFdNUYv55H97fBmcUOyQaeEIGXS7
- 8TlqgQa7kNQlYddxDpBTl0iBD1T4k8L1uwiMNPCp/R0YudVrLF70spQ3I
- LDRvN0RN3hqtn49PjGUbTTJD0x+t6e/haT68C54Qx/i+T6cTnnkLe3mrx
- 6FTDuyicHYA/zUuTV2M3gB+vN1O/Flpv1RKRB5Slfx1nLehigHZ5PtiTX
- QnEu0g/fUyHk7M9wqoRqU8jYaAxKiRGWfLEJzP1QkBEYOzMr3KN0ua/AK
- 03Ao8AmSwOawE/RaJI0zTbtOObeAFafopeJ0L3K7J0mAIOUGTazI21P1f g==;
-IronPort-SDR: hx/MqSebwali7UAcDoX/FvbOCSK1w1BLI+MazwS+i9OJVTfCbbyhaIAMQbi5N3zqqrAd51H5D3
- jvVqeTuRxOe6jNU9/sO9hSzM3wMYuJE+bXZszo5QU8zep67dC7r3xMEG7lGBKRRBp7tb4DBWkI
- SIkjM2/6FycXIG4vevjfPyUYUDXvSZSbl+dy96WkH6uv4f02ikh39DkGM+VNhT8GxW76smM3u4
- OhjS3XZCtJgvYov1tOSGD61TFjt6gBZ35OiVM9pCkRSyO0qu0N0sTgGMN2kAjwuiptogFPwlPx
- ePg=
-X-IronPort-AV: E=Sophos;i="5.81,296,1610380800"; d="scan'208";a="267973424"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 01 Apr 2021 23:20:49 +0800
-IronPort-SDR: UAHJcIGZfHeM8iD1zmyR9ixqRiPsw3RpAIKWTTluYsmKdB158maOJi4MEdxpRMB7v4I/QQVi+A
- 9m291CJ8Fk55AC4z1Ilb7VAfMUQCL8FIyMrAPIShJ2XtxGf+FV2rP5js3oXuoB7rTBUEYntWFZ
- jZpM/inNCsyWfs9iLrStDKgkScTszjGFUGiGLF1jygkGNNdfEBxaO1pF8dyxX/pTeO5t++bAW9
- z0r2MQNHRU5YMVklSZNNuOx1CO9/Rg7E/FS9pdzCddFYT5RHVHLx7kHusdl7ls/HwUkLwqdUtW
- /Z+CybV9J9nK9e9V5v7RCcSI
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Apr 2021 08:01:39 -0700
-IronPort-SDR: ekHuxOxRrswirCdMx8ck1GsqE6E1LKXjvEllLEQSE09/z4qalA37YnpLdcPcL+D4PxMcIsQStU
- 1OVmeWtJPrv/IIxMt0rzLZotin7DK3e3ICvQezieOrOI8ePim/+JHuLcJcsuwHvSb3C/GU5Bc2
- L5/dSPAqkjOwuZ3ksndE8Fpk1h3Jb+zjvdsv0iOY/mJTxYw+FmABhBKFIXOD1E/whbrZAlMV9G
- h4SBXg9BXFsTYn9SR/1kM2jCn5xPR2qjBKrLJRpOjKhMNtb9Y5Hb4tsNAFdzEbeJPCxzCz2n1l
- HSU=
-WDCIronportException: Internal
-Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.167.75])
- by uls-op-cesaip02.wdc.com with ESMTP; 01 Apr 2021 08:19:56 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v2 5/5] target/riscv: Use RISCVException enum for CSR access
-Date: Thu,  1 Apr 2021 11:18:07 -0400
-Message-Id: <302b208f40373557fa11b351b5c9f43039ca8ea3.1617290165.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <cover.1617290165.git.alistair.francis@wdc.com>
-References: <cover.1617290165.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
+ id 1lS0xr-0005UY-8H; Thu, 01 Apr 2021 13:18:50 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1617297506; cv=none; d=zohomail.in; s=zohoarc; 
+ b=aJgYB6reTMZgDETjLu8M6z8sEE/PwEfdnem7zKIZEygOsYSI9HqeWpWBarS83QbUJ8eFWCndc9BEq38qGBviE1nYG/tccgaMKQ/84qIYNNVl/2v8eqUyAS1VnJa1iAtXtNsryhX07GAg6pR7ogiik62eM9COvU1skIRL78x/o2Y=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in;
+ s=zohoarc; t=1617297506;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
+ bh=l23kWWEsZgjJg5fGvov83H3v5E5k+w5gNbLgU9dgprQ=; 
+ b=BKQSRUWwMn62ZIS2o5IdHGiX1pvzYs/zlacAEocjsJ59QB89yGOIt3DifOnI84iQJDalOJEptMxxBogE8yJTWZp+LooNu1TDurA3QDfbwxvtMIsRgogVZWlxWWqfx40Wt5tGxA+rS0bLUnY3xgnsT6IxMrkZ9TKB0k46i5bwhls=
+ARC-Authentication-Results: i=1; mx.zohomail.in;
+ dkim=pass  header.i=behindbytes.com;
+ spf=pass  smtp.mailfrom=vijai@behindbytes.com;
+ dmarc=pass header.from=<vijai@behindbytes.com>
+ header.from=<vijai@behindbytes.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1617297506; 
+ s=yrk; d=behindbytes.com; i=vijai@behindbytes.com;
+ h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding;
+ bh=l23kWWEsZgjJg5fGvov83H3v5E5k+w5gNbLgU9dgprQ=;
+ b=UaIN3cdMSF4I5e3x7r1EcNuxw9xqFakG9FaAH6mEtbCt/zCWPz14HrniLuxImcmj
+ vlujmccH49L9oPI+jYX1GYtNy8jJk2550NudHMJWcDmsJq7sORFzc90Q1jYSeQ2v9ae
+ VOnNeVd5TwtdiBAXyo9JJWRsg/QzyDzYv6eqIjuI=
+Received: from mail.zoho.in by mx.zoho.in
+ with SMTP id 1617297504069995.7481271373672;
+ Thu, 1 Apr 2021 22:48:24 +0530 (IST)
+Date: Thu, 01 Apr 2021 22:48:24 +0530
+From: Vijai Kumar K <vijai@behindbytes.com>
+To: "Alistair Francis" <alistair23@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Message-ID: <1788e717742.b23f5ec42963.7150229126692558445@behindbytes.com>
+In-Reply-To: <CAKmqyKPu44=w=upUxv=4JMjoF1vY4dXwFSFmPMA7FOZgY82d+g@mail.gmail.com>
+References: <20210321050917.24621-1-vijai@behindbytes.com>
+ <20210321050917.24621-3-vijai@behindbytes.com>
+ <CAKmqyKPu44=w=upUxv=4JMjoF1vY4dXwFSFmPMA7FOZgY82d+g@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] riscv: Add initial support for Shakti C machine
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.143.124;
- envelope-from=prvs=718ae7c5e=alistair.francis@wdc.com;
- helo=esa2.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+Importance: Medium
+User-Agent: Zoho Mail
+X-Mailer: Zoho Mail
+Received-SPF: pass client-ip=103.117.158.51;
+ envelope-from=vijai@behindbytes.com; helo=sender-of-o51.zoho.in
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,226 +69,367 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2021 15:20:34 -0000
+X-List-Received-Date: Thu, 01 Apr 2021 17:18:50 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.h       | 11 +++++++----
- target/riscv/csr.c       | 37 ++++++++++++++++++-------------------
- target/riscv/gdbstub.c   |  8 ++++----
- target/riscv/op_helper.c | 18 +++++++++---------
- 4 files changed, 38 insertions(+), 36 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7b9b9da6b7..d3df8b9292 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -455,10 +455,13 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-     *pflags = flags;
- }
- 
--int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
--                target_ulong new_value, target_ulong write_mask);
--int riscv_csrrw_debug(CPURISCVState *env, int csrno, target_ulong *ret_value,
--                      target_ulong new_value, target_ulong write_mask);
-+RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-+                           target_ulong *ret_value,
-+                           target_ulong new_value, target_ulong write_mask);
-+RISCVException riscv_csrrw_debug(CPURISCVState *env, int csrno,
-+                                 target_ulong *ret_value,
-+                                 target_ulong new_value,
-+                                 target_ulong write_mask);
- 
- static inline void riscv_csr_write(CPURISCVState *env, int csrno,
-                                    target_ulong val)
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 9df65a609c..459db93c83 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1404,10 +1404,11 @@ static RISCVException write_pmpaddr(CPURISCVState *env, int csrno,
-  * csrrc  <->  riscv_csrrw(env, csrno, ret_value, 0, value);
-  */
- 
--int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
--                target_ulong new_value, target_ulong write_mask)
-+RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-+                           target_ulong *ret_value,
-+                           target_ulong new_value, target_ulong write_mask)
- {
--    int ret;
-+    RISCVException ret;
-     target_ulong old_value;
-     RISCVCPU *cpu = env_archcpu(env);
- 
-@@ -1429,41 +1430,37 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
- 
-     if ((write_mask && read_only) ||
-         (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
--        return -RISCV_EXCP_ILLEGAL_INST;
-+        return RISCV_EXCP_ILLEGAL_INST;
-     }
- #endif
- 
-     /* ensure the CSR extension is enabled. */
-     if (!cpu->cfg.ext_icsr) {
--        return -RISCV_EXCP_ILLEGAL_INST;
-+        return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-     /* check predicate */
-     if (!csr_ops[csrno].predicate) {
--        return -RISCV_EXCP_ILLEGAL_INST;
-+        return RISCV_EXCP_ILLEGAL_INST;
-     }
-     ret = csr_ops[csrno].predicate(env, csrno);
-     if (ret != RISCV_EXCP_NONE) {
--        return -ret;
-+        return ret;
-     }
- 
-     /* execute combined read/write operation if it exists */
-     if (csr_ops[csrno].op) {
--        ret = csr_ops[csrno].op(env, csrno, ret_value, new_value, write_mask);
--        if (ret != RISCV_EXCP_NONE) {
--            return -ret;
--        }
--        return 0;
-+        return csr_ops[csrno].op(env, csrno, ret_value, new_value, write_mask);
-     }
- 
-     /* if no accessor exists then return failure */
-     if (!csr_ops[csrno].read) {
--        return -RISCV_EXCP_ILLEGAL_INST;
-+        return RISCV_EXCP_ILLEGAL_INST;
-     }
-     /* read old value */
-     ret = csr_ops[csrno].read(env, csrno, &old_value);
-     if (ret != RISCV_EXCP_NONE) {
--        return -ret;
-+        return ret;
-     }
- 
-     /* write value if writable and write mask set, otherwise drop writes */
-@@ -1472,7 +1469,7 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
-         if (csr_ops[csrno].write) {
-             ret = csr_ops[csrno].write(env, csrno, new_value);
-             if (ret != RISCV_EXCP_NONE) {
--                return -ret;
-+                return ret;
-             }
-         }
-     }
-@@ -1482,17 +1479,19 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
-         *ret_value = old_value;
-     }
- 
--    return 0;
-+    return RISCV_EXCP_NONE;
- }
- 
- /*
-  * Debugger support.  If not in user mode, set env->debugger before the
-  * riscv_csrrw call and clear it after the call.
-  */
--int riscv_csrrw_debug(CPURISCVState *env, int csrno, target_ulong *ret_value,
--                target_ulong new_value, target_ulong write_mask)
-+RISCVException riscv_csrrw_debug(CPURISCVState *env, int csrno,
-+                                 target_ulong *ret_value,
-+                                 target_ulong new_value,
-+                                 target_ulong write_mask)
- {
--    int ret;
-+    RISCVException ret;
- #if !defined(CONFIG_USER_ONLY)
-     env->debugger = true;
- #endif
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 5f96b7ea2a..ca78682cf4 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -71,7 +71,7 @@ static int riscv_gdb_get_fpu(CPURISCVState *env, GByteArray *buf, int n)
-          */
-         result = riscv_csrrw_debug(env, n - 32, &val,
-                                    0, 0);
--        if (result == 0) {
-+        if (result == RISCV_EXCP_NONE) {
-             return gdb_get_regl(buf, val);
-         }
-     }
-@@ -94,7 +94,7 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
-          */
-         result = riscv_csrrw_debug(env, n - 32, NULL,
-                                    val, -1);
--        if (result == 0) {
-+        if (result == RISCV_EXCP_NONE) {
-             return sizeof(target_ulong);
-         }
-     }
-@@ -108,7 +108,7 @@ static int riscv_gdb_get_csr(CPURISCVState *env, GByteArray *buf, int n)
-         int result;
- 
-         result = riscv_csrrw_debug(env, n, &val, 0, 0);
--        if (result == 0) {
-+        if (result == RISCV_EXCP_NONE) {
-             return gdb_get_regl(buf, val);
-         }
-     }
-@@ -122,7 +122,7 @@ static int riscv_gdb_set_csr(CPURISCVState *env, uint8_t *mem_buf, int n)
-         int result;
- 
-         result = riscv_csrrw_debug(env, n, NULL, val, -1);
--        if (result == 0) {
-+        if (result == RISCV_EXCP_NONE) {
-             return sizeof(target_ulong);
-         }
-     }
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 1eddcb94de..3fc5e0505d 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -42,10 +42,10 @@ target_ulong helper_csrrw(CPURISCVState *env, target_ulong src,
-         target_ulong csr)
- {
-     target_ulong val = 0;
--    int ret = riscv_csrrw(env, csr, &val, src, -1);
-+    RISCVException ret = riscv_csrrw(env, csr, &val, src, -1);
- 
--    if (ret < 0) {
--        riscv_raise_exception(env, -ret, GETPC());
-+    if (ret != RISCV_EXCP_NONE) {
-+        riscv_raise_exception(env, ret, GETPC());
-     }
-     return val;
- }
-@@ -54,10 +54,10 @@ target_ulong helper_csrrs(CPURISCVState *env, target_ulong src,
-         target_ulong csr, target_ulong rs1_pass)
- {
-     target_ulong val = 0;
--    int ret = riscv_csrrw(env, csr, &val, -1, rs1_pass ? src : 0);
-+    RISCVException ret = riscv_csrrw(env, csr, &val, -1, rs1_pass ? src : 0);
- 
--    if (ret < 0) {
--        riscv_raise_exception(env, -ret, GETPC());
-+    if (ret != RISCV_EXCP_NONE) {
-+        riscv_raise_exception(env, ret, GETPC());
-     }
-     return val;
- }
-@@ -66,10 +66,10 @@ target_ulong helper_csrrc(CPURISCVState *env, target_ulong src,
-         target_ulong csr, target_ulong rs1_pass)
- {
-     target_ulong val = 0;
--    int ret = riscv_csrrw(env, csr, &val, 0, rs1_pass ? src : 0);
-+    RISCVException ret = riscv_csrrw(env, csr, &val, 0, rs1_pass ? src : 0);
- 
--    if (ret < 0) {
--        riscv_raise_exception(env, -ret, GETPC());
-+    if (ret != RISCV_EXCP_NONE) {
-+        riscv_raise_exception(env, ret, GETPC());
-     }
-     return val;
- }
--- 
-2.31.0
 
+
+---- On Wed, 31 Mar 2021 21:05:47 +0530 Alistair Francis <alistair23@gmail.com> wrote ----
+
+ > On Sun, Mar 21, 2021 at 1:09 AM Vijai Kumar K <vijai@behindbytes.com> wrote: 
+ > > 
+ > > Add support for emulating Shakti reference platform based on C-class 
+ > > running on arty-100T board. 
+ > > 
+ > > https://gitlab.com/shaktiproject/cores/shakti-soc/-/blob/master/README.rst 
+ > > 
+ > > Signed-off-by: Vijai Kumar K <vijai@behindbytes.com> 
+ > > --- 
+ > >  MAINTAINERS                                 |   7 + 
+ > >  default-configs/devices/riscv64-softmmu.mak |   1 + 
+ > >  hw/riscv/Kconfig                            |  10 ++ 
+ > >  hw/riscv/meson.build                        |   1 + 
+ > >  hw/riscv/shakti_c.c                         | 171 ++++++++++++++++++++ 
+ > >  include/hw/riscv/shakti_c.h                 |  74 +++++++++ 
+ > >  6 files changed, 264 insertions(+) 
+ > >  create mode 100644 hw/riscv/shakti_c.c 
+ > >  create mode 100644 include/hw/riscv/shakti_c.h 
+ > > 
+ > > diff --git a/MAINTAINERS b/MAINTAINERS 
+ > > index 8e9f0d591e..9f71c4cc3f 100644 
+ > > --- a/MAINTAINERS 
+ > > +++ b/MAINTAINERS 
+ > > @@ -1380,6 +1380,13 @@ F: include/hw/misc/mchp_pfsoc_dmc.h 
+ > >  F: include/hw/misc/mchp_pfsoc_ioscb.h 
+ > >  F: include/hw/misc/mchp_pfsoc_sysreg.h 
+ > > 
+ > > +Shakti C class SoC 
+ > > +M: Vijai Kumar K <vijai@behindbytes.com> 
+ > > +L: qemu-riscv@nongnu.org 
+ > > +S: Supported 
+ > > +F: hw/riscv/shakti_c.c 
+ > > +F: include/hw/riscv/shakti_c.h 
+ > > + 
+ > >  SiFive Machines 
+ > >  M: Alistair Francis <Alistair.Francis@wdc.com> 
+ > >  M: Bin Meng <bin.meng@windriver.com> 
+ > > diff --git a/default-configs/devices/riscv64-softmmu.mak b/default-configs/devices/riscv64-softmmu.mak 
+ > > index d5eec75f05..bc69301fa4 100644 
+ > > --- a/default-configs/devices/riscv64-softmmu.mak 
+ > > +++ b/default-configs/devices/riscv64-softmmu.mak 
+ > > @@ -13,3 +13,4 @@ CONFIG_SIFIVE_E=y 
+ > >  CONFIG_SIFIVE_U=y 
+ > >  CONFIG_RISCV_VIRT=y 
+ > >  CONFIG_MICROCHIP_PFSOC=y 
+ > > +CONFIG_SHAKTI_C=y 
+ > > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig 
+ > > index d139074b02..92a62b5ce9 100644 
+ > > --- a/hw/riscv/Kconfig 
+ > > +++ b/hw/riscv/Kconfig 
+ > > @@ -19,6 +19,16 @@ config OPENTITAN 
+ > >      select IBEX 
+ > >      select UNIMP 
+ > > 
+ > > +config SHAKTI 
+ > > +    bool 
+ > > + 
+ > > +config SHAKTI_C 
+ > > +    bool 
+ > > +    select UNIMP 
+ > > +    select SHAKTI 
+ > > +    select SIFIVE_CLINT 
+ > > +    select SIFIVE_PLIC 
+ > > + 
+ > >  config RISCV_VIRT 
+ > >      bool 
+ > >      imply PCI_DEVICES 
+ > > diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build 
+ > > index 275c0f7eb7..a97454661c 100644 
+ > > --- a/hw/riscv/meson.build 
+ > > +++ b/hw/riscv/meson.build 
+ > > @@ -4,6 +4,7 @@ riscv_ss.add(files('numa.c')) 
+ > >  riscv_ss.add(files('riscv_hart.c')) 
+ > >  riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c')) 
+ > >  riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c')) 
+ > > +riscv_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c')) 
+ > >  riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c')) 
+ > >  riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c')) 
+ > >  riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c')) 
+ > > diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c 
+ > > new file mode 100644 
+ > > index 0000000000..45d0eedabd 
+ > > --- /dev/null 
+ > > +++ b/hw/riscv/shakti_c.c 
+ > > @@ -0,0 +1,171 @@ 
+ > > +/* 
+ > > + * Shakti C-class SoC emulation 
+ > > + * 
+ > > + * Copyright (c) 2021 Vijai Kumar K <vijai@behindbytes.com> 
+ > > + * 
+ > > + * This program is free software; you can redistribute it and/or modify it 
+ > > + * under the terms and conditions of the GNU General Public License, 
+ > > + * version 2 or later, as published by the Free Software Foundation. 
+ > > + * 
+ > > + * This program is distributed in the hope it will be useful, but WITHOUT 
+ > > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+ > > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for 
+ > > + * more details. 
+ > > + * 
+ > > + * You should have received a copy of the GNU General Public License along with 
+ > > + * this program.  If not, see <http://www.gnu.org/licenses/>. 
+ > > + */ 
+ > > + 
+ > > +#include "qemu/osdep.h" 
+ > > +#include "hw/boards.h" 
+ > > +#include "hw/riscv/shakti_c.h" 
+ > > +#include "qapi/error.h" 
+ > > +#include "hw/intc/sifive_plic.h" 
+ > > +#include "hw/intc/sifive_clint.h" 
+ > > +#include "sysemu/sysemu.h" 
+ > > +#include "hw/qdev-properties.h" 
+ > > +#include "exec/address-spaces.h" 
+ > > +#include "hw/riscv/boot.h" 
+ > > + 
+ > > + 
+ > > +static const struct MemmapEntry { 
+ > > +    hwaddr base; 
+ > > +    hwaddr size; 
+ > > +} shakti_c_memmap[] = { 
+ > > +    [SHAKTI_C_ROM]   =  {  0x00001000,  0x2000   }, 
+ > > +    [SHAKTI_C_RAM]   =  {  0x80000000,  0x0      }, 
+ > > +    [SHAKTI_C_UART]  =  {  0x00011300,  0x00040  }, 
+ > > +    [SHAKTI_C_GPIO]  =  {  0x020d0000,  0x00100  }, 
+ > > +    [SHAKTI_C_PLIC]  =  {  0x0c000000,  0x20000  }, 
+ > > +    [SHAKTI_C_CLINT] =  {  0x02000000,  0xc0000  }, 
+ > > +    [SHAKTI_C_DEBUG] =  {  0x00000000,  0x00010  }, 
+ >  
+ > What is this debug used for? 
+
+I could not find the answer in docs. I got in touch with the developer and this is the response I got.
+
+"It where the debug self-loop lies. When halted by a debugger, the core executes a loop of [nop; j nop]. This loop is placed at the debug_loop location."
+
+This has no purpose in QEMU. It is there for sake of completion.
+
+Thanks,
+Vijai Kumar K
+
+ >  
+ > Alistair 
+ >  
+ > > +    [SHAKTI_C_I2C]   =  {  0x20c00000,  0x00100  }, 
+ > > +}; 
+ > > + 
+ > > +static void shakti_c_machine_state_init(MachineState *mstate) 
+ > > +{ 
+ > > +    ShaktiCMachineState *sms = RISCV_SHAKTI_MACHINE(mstate); 
+ > > +    MemoryRegion *system_memory = get_system_memory(); 
+ > > +    MemoryRegion *main_mem = g_new(MemoryRegion, 1); 
+ > > + 
+ > > +    /* Allow only Shakti C CPU for this platform */ 
+ > > +    if (strcmp(mstate->cpu_type, TYPE_RISCV_CPU_SHAKTI_C) != 0) { 
+ > > +        error_report("This board can only be used with Shakti C CPU"); 
+ > > +        exit(1); 
+ > > +    } 
+ > > + 
+ > > +    /* Initialize SoC */ 
+ > > +    object_initialize_child(OBJECT(mstate), "soc", &sms->soc, 
+ > > +                            TYPE_RISCV_SHAKTI_SOC); 
+ > > +    qdev_realize(DEVICE(&sms->soc), NULL, &error_abort); 
+ > > + 
+ > > +    /* register RAM */ 
+ > > +    memory_region_init_ram(main_mem, NULL, "riscv.shakti.c.ram", 
+ > > +                           mstate->ram_size, &error_fatal); 
+ > > +    memory_region_add_subregion(system_memory, 
+ > > +                                shakti_c_memmap[SHAKTI_C_RAM].base, 
+ > > +                                main_mem); 
+ > > + 
+ > > +    /* ROM reset vector */ 
+ > > +    riscv_setup_rom_reset_vec(mstate, &sms->soc.cpus, 
+ > > +                              shakti_c_memmap[SHAKTI_C_RAM].base, 
+ > > +                              shakti_c_memmap[SHAKTI_C_ROM].base, 
+ > > +                              shakti_c_memmap[SHAKTI_C_ROM].size, 0, 0, 
+ > > +                              NULL); 
+ > > +    riscv_load_firmware(mstate->firmware, shakti_c_memmap[SHAKTI_C_RAM].base, 
+ > > +                        NULL); 
+ > > +} 
+ > > + 
+ > > +static void shakti_c_machine_instance_init(Object *obj) 
+ > > +{ 
+ > > +} 
+ > > + 
+ > > +static void shakti_c_machine_class_init(ObjectClass *klass, void *data) 
+ > > +{ 
+ > > +    MachineClass *mc = MACHINE_CLASS(klass); 
+ > > +    mc->desc = "RISC-V Board compatible with Shakti SDK"; 
+ > > +    mc->init = shakti_c_machine_state_init; 
+ > > +    mc->default_cpu_type = TYPE_RISCV_CPU_SHAKTI_C; 
+ > > +} 
+ > > + 
+ > > +static const TypeInfo shakti_c_machine_type_info = { 
+ > > +    .name = TYPE_RISCV_SHAKTI_MACHINE, 
+ > > +    .parent = TYPE_MACHINE, 
+ > > +    .class_init = shakti_c_machine_class_init, 
+ > > +    .instance_init = shakti_c_machine_instance_init, 
+ > > +    .instance_size = sizeof(ShaktiCMachineState), 
+ > > +}; 
+ > > + 
+ > > +static void shakti_c_machine_type_info_register(void) 
+ > > +{ 
+ > > +    type_register_static(&shakti_c_machine_type_info); 
+ > > +} 
+ > > +type_init(shakti_c_machine_type_info_register) 
+ > > + 
+ > > +static void shakti_c_soc_state_realize(DeviceState *dev, Error **errp) 
+ > > +{ 
+ > > +    ShaktiCSoCState *sss = RISCV_SHAKTI_SOC(dev); 
+ > > +    MemoryRegion *system_memory = get_system_memory(); 
+ > > + 
+ > > +    sysbus_realize(SYS_BUS_DEVICE(&sss->cpus), &error_abort); 
+ > > + 
+ > > +    sss->plic = sifive_plic_create(shakti_c_memmap[SHAKTI_C_PLIC].base, 
+ > > +        (char *)SHAKTI_C_PLIC_HART_CONFIG, 0, 
+ > > +        SHAKTI_C_PLIC_NUM_SOURCES, 
+ > > +        SHAKTI_C_PLIC_NUM_PRIORITIES, 
+ > > +        SHAKTI_C_PLIC_PRIORITY_BASE, 
+ > > +        SHAKTI_C_PLIC_PENDING_BASE, 
+ > > +        SHAKTI_C_PLIC_ENABLE_BASE, 
+ > > +        SHAKTI_C_PLIC_ENABLE_STRIDE, 
+ > > +        SHAKTI_C_PLIC_CONTEXT_BASE, 
+ > > +        SHAKTI_C_PLIC_CONTEXT_STRIDE, 
+ > > +        shakti_c_memmap[SHAKTI_C_PLIC].size); 
+ > > + 
+ > > +    sifive_clint_create(shakti_c_memmap[SHAKTI_C_CLINT].base, 
+ > > +        shakti_c_memmap[SHAKTI_C_CLINT].size, 0, 1, 
+ > > +        SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE, 
+ > > +        SIFIVE_CLINT_TIMEBASE_FREQ, false); 
+ > > + 
+ > > +    /* ROM */ 
+ > > +    memory_region_init_rom(&sss->rom, OBJECT(dev), "riscv.shakti.c.rom", 
+ > > +                           shakti_c_memmap[SHAKTI_C_ROM].size, &error_fatal); 
+ > > +    memory_region_add_subregion(system_memory, 
+ > > +        shakti_c_memmap[SHAKTI_C_ROM].base, &sss->rom); 
+ > > +} 
+ > > + 
+ > > +static void shakti_c_soc_class_init(ObjectClass *klass, void *data) 
+ > > +{ 
+ > > +    DeviceClass *dc = DEVICE_CLASS(klass); 
+ > > +    dc->realize = shakti_c_soc_state_realize; 
+ > > +} 
+ > > + 
+ > > +static void shakti_c_soc_instance_init(Object *obj) 
+ > > +{ 
+ > > +    ShaktiCSoCState *sss = RISCV_SHAKTI_SOC(obj); 
+ > > + 
+ > > +    object_initialize_child(obj, "cpus", &sss->cpus, TYPE_RISCV_HART_ARRAY); 
+ > > + 
+ > > +    /* 
+ > > +     * CPU type is fixed and we are not supporting passing from commandline yet. 
+ > > +     * So let it be in instance_init. When supported should use ms->cpu_type 
+ > > +     * instead of TYPE_RISCV_CPU_SHAKTI_C 
+ > > +     */ 
+ > > +    object_property_set_str(OBJECT(&sss->cpus), "cpu-type", 
+ > > +                            TYPE_RISCV_CPU_SHAKTI_C, &error_abort); 
+ > > +    object_property_set_int(OBJECT(&sss->cpus), "num-harts", 1, 
+ > > +                            &error_abort); 
+ > > +} 
+ > > + 
+ > > +static const TypeInfo shakti_c_type_info = { 
+ > > +    .name = TYPE_RISCV_SHAKTI_SOC, 
+ > > +    .parent = TYPE_DEVICE, 
+ > > +    .class_init = shakti_c_soc_class_init, 
+ > > +    .instance_init = shakti_c_soc_instance_init, 
+ > > +    .instance_size = sizeof(ShaktiCSoCState), 
+ > > +}; 
+ > > + 
+ > > +static void shakti_c_type_info_register(void) 
+ > > +{ 
+ > > +    type_register_static(&shakti_c_type_info); 
+ > > +} 
+ > > +type_init(shakti_c_type_info_register) 
+ > > diff --git a/include/hw/riscv/shakti_c.h b/include/hw/riscv/shakti_c.h 
+ > > new file mode 100644 
+ > > index 0000000000..6c66a160f5 
+ > > --- /dev/null 
+ > > +++ b/include/hw/riscv/shakti_c.h 
+ > > @@ -0,0 +1,74 @@ 
+ > > +/* 
+ > > + * Shakti C-class SoC emulation 
+ > > + * 
+ > > + * Copyright (c) 2021 Vijai Kumar K <vijai@behindbytes.com> 
+ > > + * 
+ > > + * This program is free software; you can redistribute it and/or modify it 
+ > > + * under the terms and conditions of the GNU General Public License, 
+ > > + * version 2 or later, as published by the Free Software Foundation. 
+ > > + * 
+ > > + * This program is distributed in the hope it will be useful, but WITHOUT 
+ > > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+ > > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for 
+ > > + * more details. 
+ > > + * 
+ > > + * You should have received a copy of the GNU General Public License along with 
+ > > + * this program.  If not, see <http://www.gnu.org/licenses/>. 
+ > > + */ 
+ > > + 
+ > > +#ifndef HW_SHAKTI_H 
+ > > +#define HW_SHAKTI_H 
+ > > + 
+ > > +#include "hw/riscv/riscv_hart.h" 
+ > > +#include "hw/boards.h" 
+ > > + 
+ > > +#define TYPE_RISCV_SHAKTI_SOC "riscv.shakti.cclass.soc" 
+ > > +#define RISCV_SHAKTI_SOC(obj) \ 
+ > > +    OBJECT_CHECK(ShaktiCSoCState, (obj), TYPE_RISCV_SHAKTI_SOC) 
+ > > + 
+ > > +typedef struct ShaktiCSoCState { 
+ > > +    /*< private >*/ 
+ > > +    DeviceState parent_obj; 
+ > > + 
+ > > +    /*< public >*/ 
+ > > +    RISCVHartArrayState cpus; 
+ > > +    DeviceState *plic; 
+ > > +    MemoryRegion rom; 
+ > > + 
+ > > +} ShaktiCSoCState; 
+ > > + 
+ > > +#define TYPE_RISCV_SHAKTI_MACHINE MACHINE_TYPE_NAME("shakti_c") 
+ > > +#define RISCV_SHAKTI_MACHINE(obj) \ 
+ > > +    OBJECT_CHECK(ShaktiCMachineState, (obj), TYPE_RISCV_SHAKTI_MACHINE) 
+ > > +typedef struct ShaktiCMachineState { 
+ > > +    /*< private >*/ 
+ > > +    MachineState parent_obj; 
+ > > + 
+ > > +    /*< public >*/ 
+ > > +    ShaktiCSoCState soc; 
+ > > +} ShaktiCMachineState; 
+ > > + 
+ > > +enum { 
+ > > +    SHAKTI_C_ROM, 
+ > > +    SHAKTI_C_RAM, 
+ > > +    SHAKTI_C_UART, 
+ > > +    SHAKTI_C_GPIO, 
+ > > +    SHAKTI_C_PLIC, 
+ > > +    SHAKTI_C_CLINT, 
+ > > +    SHAKTI_C_DEBUG, 
+ > > +    SHAKTI_C_I2C, 
+ > > +}; 
+ > > + 
+ > > +#define SHAKTI_C_PLIC_HART_CONFIG "MS" 
+ > > +/* Including Interrupt ID 0 (no interrupt)*/ 
+ > > +#define SHAKTI_C_PLIC_NUM_SOURCES 28 
+ > > +/* Excluding Priority 0 */ 
+ > > +#define SHAKTI_C_PLIC_NUM_PRIORITIES 2 
+ > > +#define SHAKTI_C_PLIC_PRIORITY_BASE 0x04 
+ > > +#define SHAKTI_C_PLIC_PENDING_BASE 0x1000 
+ > > +#define SHAKTI_C_PLIC_ENABLE_BASE 0x2000 
+ > > +#define SHAKTI_C_PLIC_ENABLE_STRIDE 0x80 
+ > > +#define SHAKTI_C_PLIC_CONTEXT_BASE 0x200000 
+ > > +#define SHAKTI_C_PLIC_CONTEXT_STRIDE 0x1000 
+ > > + 
+ > > +#endif 
+ > > -- 
+ > > 2.25.1 
+ > > 
+ > > 
+ > 
 
