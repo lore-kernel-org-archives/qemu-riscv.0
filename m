@@ -1,74 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lRdO1-0004Lj-IA
-	for mharc-qemu-riscv@gnu.org; Wed, 31 Mar 2021 12:08:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38744)
+	id 1lRtbY-0003fl-8C
+	for mharc-qemu-riscv@gnu.org; Thu, 01 Apr 2021 05:27:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53926)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lRdO0-0004K0-Ia
- for qemu-riscv@nongnu.org; Wed, 31 Mar 2021 12:08:04 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:36737)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1lRtbX-0003ep-D9
+ for qemu-riscv@nongnu.org; Thu, 01 Apr 2021 05:27:07 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633]:35586)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lRdNy-0005c8-Sc
- for qemu-riscv@nongnu.org; Wed, 31 Mar 2021 12:08:04 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- f2-20020a17090a4a82b02900c67bf8dc69so1431282pjh.1
- for <qemu-riscv@nongnu.org>; Wed, 31 Mar 2021 09:08:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=XMSZkEk0OoaY+VPkeJwsIkntCr7MDUwFdmbpdWCKjG8=;
- b=zhDP8f0Uo3fMmVXoj/qOI/ExmjQYbsLlANuSV/5jxJtspCh9yTRkH34Egc4Dd2qkiO
- 6N/bwHWC5GNWhVTprfKKpjzIAWa81VtcEKrwYrlg6LRtRrVgQV/6b8y2hkorFBEBSIUK
- 2RZGyIumpsIaucfI32WpD39xlQ/aG3a4UG7c8KNXY7k9Yy7wwvUDaszub/F5Bdls84p3
- PrZe5QIejkO/G0XQzaLxw22kUlGUTibfQJNSqJODbOV0BMNUkQIZap7MIH+OmajQmURq
- MbV2zZHyI3lkBbWfqSCA7Lm08AlnBlVhB1A7TWmsWlOrNK2WNnWRjYevDyQKJtoBF72s
- xEtQ==
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1lRtbU-0000aU-Sm
+ for qemu-riscv@nongnu.org; Thu, 01 Apr 2021 05:27:07 -0400
+Received: by mail-pl1-x633.google.com with SMTP id e14so733796plj.2
+ for <qemu-riscv@nongnu.org>; Thu, 01 Apr 2021 02:27:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=DPn/VyjoRcdg2Tb/W2GIOzIy4AXKOBLzr/lu5G5f78w=;
+ b=WTVuWf1GFGxg85wW+C9jBW0VyBhvcnDZjA5UZEGZrkqiCVJ96GxS5U/ry4nYxFJMUA
+ TnKFr27kULLtnBJ4GmAf3bYHDMueLRI8k9exXK7/OdRUFx84goMJrN/jrY4TJ2FWx+nL
+ RGTaJ/HsIjhgSandYA51GzDUL4khO1chnM+slnqlzaN5XqrW6nduO8ewwK/7ePB8IQDk
+ dVTma4tCMQeH2X12V9noGY7aPDsU5beNMj+WS6unHG8+90hA5s9xtmmA0QKmoFmArCBu
+ sFwJGmVyz2SDDRe2rZfYRvSa81RN8qcqyZ/9aLXulsJqUxpSxmfQ5OBMzSHjRcb9kxjT
+ 1OVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=XMSZkEk0OoaY+VPkeJwsIkntCr7MDUwFdmbpdWCKjG8=;
- b=unvo9I2P5Bouugt/DfnQlV2Axv+YgVhXb8vu/GZ+T5w+kJssmmNZdgWgQ9xorqFYff
- /m1dguY/JBQSdQQ7qWzLgZRoGy5flkywz4d8DqglLhD76KECLYBUWzMbDSwz7MFRq//Y
- kO39hekbaa598SuNoF9jgXsEgSX7j20wBDF0PQNMQBFOPleyxfwQEXOtTyEfVWKjqr30
- WQsuZBUPPJLVHl2dTN43MLiIXOM2iXPeUAy4TXWpo6wtmp28VrafAuQayAUdKhTFc9fv
- qhonUN+8l7WsZ1F3cIQR6tuY0uRWJv32x1bkFMiaPUoWs/OIFxdFJzTVJxsFvGguVXHY
- IOLw==
-X-Gm-Message-State: AOAM532yBg6PtzsS+5Hv9p/eZkL6HXxnJF7l+mUDGVWQ5IXhv4m1ftQE
- +LiJFiwg/C8thOdsnLHPb5GytA==
-X-Google-Smtp-Source: ABdhPJyFpt9fqdCz495GIskAyiyEIKvyWDBpxBAq0hAE8jj7baoSNRcJXXvaGz5DC2plgCU56Fxt1Q==
-X-Received: by 2002:a17:90a:c909:: with SMTP id
- v9mr4262342pjt.218.1617206881123; 
- Wed, 31 Mar 2021 09:08:01 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.131.83])
- by smtp.gmail.com with ESMTPSA id k21sm2837719pfi.28.2021.03.31.09.08.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 31 Mar 2021 09:08:00 -0700 (PDT)
-Subject: Re: [PATCH 1/8] hw/riscv: sifive_u: Switch to use
- qemu_fdt_setprop_string_array() helper
-To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
- <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>
-References: <20210329170818.23139-1-bmeng.cn@gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <2fee25ee-e944-90b2-ef95-3a6545aac699@linaro.org>
-Date: Wed, 31 Mar 2021 09:07:58 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
-MIME-Version: 1.0
-In-Reply-To: <20210329170818.23139-1-bmeng.cn@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1033.google.com
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=DPn/VyjoRcdg2Tb/W2GIOzIy4AXKOBLzr/lu5G5f78w=;
+ b=CL7MsXpNSb8bZIXP1JOrJHR/6juok5bJgAfBHgtkn1qOH6mb3lyprVc81zonbl5wKT
+ OJnoGgs94C9BDJt5lZEjyk6hnltIlUcay6Uhdx8mmkDr8UeXnXPF7l0P1EYvVxKb1LHc
+ 0J+2mMgKnXiZAkHy3JDHBOwQyvBEqnGTi1WdhyiNNK9MKycbsMJpjNEimrhopJILHOkl
+ 9raW7uErHvDNaGt8iLCAigubQd72FDlo2FNebFvzpU7ZPKgFE15m00/LCokaDHwrtBFb
+ TjytCcxrGk+ilkc2wxojvrUqHutAaR0J9+dXG6YaOOr/PfNT08SttZEeprqHTapjHLUd
+ TQyA==
+X-Gm-Message-State: AOAM5304KNHWvY0VtFPbSeLDqXLZf97k8R3O74Whr9dQoBuvAHMJJatD
+ D0gehrEtiYchYXZbAuIheGIxbQ==
+X-Google-Smtp-Source: ABdhPJygHkgiQpwIJugXU1X8LmzymKp8o56AVpmfEWta++IAlH667DroSXHiSN8RTSP07xt2RUTPNA==
+X-Received: by 2002:a17:90a:c207:: with SMTP id
+ e7mr7819857pjt.188.1617269222580; 
+ Thu, 01 Apr 2021 02:27:02 -0700 (PDT)
+Received: from frankchang-ThinkPad-T490.internal.sifive.com
+ (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
+ by smtp.gmail.com with ESMTPSA id i7sm4751319pgq.16.2021.04.01.02.27.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Apr 2021 02:27:02 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>
+Subject: [RFC v2 0/4] target/riscv: add RNMI support
+Date: Thu,  1 Apr 2021 17:26:47 +0800
+Message-Id: <20210401092659.12014-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -83,14 +72,123 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2021 16:08:05 -0000
+X-List-Received-Date: Thu, 01 Apr 2021 09:27:07 -0000
 
-On 3/29/21 10:08 AM, Bin Meng wrote:
-> -    char ethclk_names[] = "pclk\0hclk";
-> +    const char *ethclk_names[2] = { "pclk", "hclk" };
+From: Frank Chang <frank.chang@sifive.com>
 
-static const char * const ethclk_names[2]
+This patchset add suport of Resumable NMI (RNMI) in RISC-V.
 
+There are four new CSRs and one new instruction added to allow NMI to be
+resumable in RISC-V, which are:
 
-r~
+=============================================================
+  * mnscratch (0x350)
+  * mnepc     (0x351)
+  * mncause   (0x352)
+  * mnstatus  (0x353)
+=============================================================
+  * mnret: To return from RNMI interrupt/exception handler.
+=============================================================
+
+RNMI also has higher priority than any other interrupts or exceptions
+and cannot be disable by software.
+
+RNMI may be used to route to other devices such as Bus Error Unit or
+Watchdog Timer in the future.
+
+The interrupt/exception trap handler addresses of RNMI are
+implementation defined.
+
+The technical proposal of RNMI can be found:
+https://lists.riscv.org/g/tech-privileged/message/421
+
+The port is available here:
+https://github.com/sifive/qemu/tree/nmi-upstream-v2
+
+To test RNMI, we have created another QEMU branch to have
+RNMI feature enabled and also both SiFive Bus Error Unit and
+Error Device included on sifive_e machine.
+
+Bus Error Unit (BEU) is routed to RNMI with mncause value set to 3.
+When any reads or writes to Error Device, it will drive BEU RNMI.
+A freedom-e-sdk RNMI example is also provided for testing.
+(We will also upstream BEU and Error Device in the near future.)
+
+Two -cpu options are added for RNMI and BEU:
+  * rnmi=true to enable RNMI feature
+  * beu=true to enable BEU feature
+
+Download and build freedom-e-sdk rnmi example:
+
+1. git clone git@github.com:sifive/freedom-e-sdk.git
+2. cd freedom-e-sdk
+3. git checkout origin/dev/yihaoc/nmi -b nmi
+4. git submodule init
+5. git submodule update --recursive
+6. Follow freedom-e-sdk guide to install freedom-e-sdk:
+   https://sifive.github.io/freedom-e-sdk-docs/index.html
+7. make PROGRAM=example-rnmi TARGET=qemu-sifive-e31 \
+    CONFIGURATION=release software
+
+Download, build and run freedom-e-sdk RNMI example on QEMU:
+
+1. git clone git@github.com:sifive/qemu.git
+2. cd qemu
+3. git checkout origin/upstream-nmi-beu-error-device -b nmi-beu-error-device
+4. git submodule init
+5. git submodule update --recursive
+6. ./configure --target-list=riscv32-softmmu
+7. make -j
+8. <path to qemu-system-riscv32> -nographic -M sifive_e \
+    -cpu rv32,rnmi=true,beu=true \
+    --bios none -kernel <path to example-rnmi.elf>
+
+Output example:
+
+RNMI Driver Example.
+Cleared accrued bus error
+Enter RNMI interrupt ISR.
+mnscratch: 0x00000000
+mnepc: 0x20401178
+mncause: 0x00000003
+mnstatus: 0x00001800
+Try to trigger illegal instruction exception.
+Enter RNMI exception ISR.
+mscratch: 0x00000000
+mepc: 0x20401208
+mcause: 0x00000002
+mstatus: 0x80007800
+Return from RNMI exception ISR.
+Handled TileLink bus error
+Return from RNMI interrupt ISR.
+Test passed!!
+
+Changelog:
+
+v2
+  * split up the series into more commits for convenience of review.
+  * add missing rnmi_irqvec and rnmi_excpvec properties to riscv_harts.
+
+Frank Chang (4):
+  target/riscv: add RNMI cpu feature
+  target/riscv: add RNMI CSRs
+  target/riscv: handle RNMI interrupt and exception
+  target/riscv: add RNMI mnret instruction
+
+ hw/riscv/riscv_hart.c                         |  8 +++
+ include/hw/riscv/riscv_hart.h                 |  2 +
+ target/riscv/cpu.c                            | 40 +++++++++++++
+ target/riscv/cpu.h                            | 16 ++++-
+ target/riscv/cpu_bits.h                       | 19 ++++++
+ target/riscv/cpu_helper.c                     | 49 +++++++++++++--
+ target/riscv/csr.c                            | 59 +++++++++++++++++++
+ target/riscv/helper.h                         |  1 +
+ target/riscv/insn32.decode                    |  3 +
+ .../riscv/insn_trans/trans_privileged.c.inc   | 13 ++++
+ target/riscv/op_helper.c                      | 31 ++++++++++
+ 11 files changed, 236 insertions(+), 5 deletions(-)
+
+--
+2.17.1
+
 
