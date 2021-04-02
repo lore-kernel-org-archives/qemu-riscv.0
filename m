@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lSJVI-0005Uj-5j
-	for mharc-qemu-riscv@gnu.org; Fri, 02 Apr 2021 09:06:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42892)
+	id 1lSJWH-0006Yy-WC
+	for mharc-qemu-riscv@gnu.org; Fri, 02 Apr 2021 09:07:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43200)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lSJVG-0005TP-Sy; Fri, 02 Apr 2021 09:06:22 -0400
-Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:37594)
+ id 1lSJWF-0006VI-KF; Fri, 02 Apr 2021 09:07:23 -0400
+Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:34806)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lSJVF-00067H-Cg; Fri, 02 Apr 2021 09:06:22 -0400
-Received: by mail-io1-xd36.google.com with SMTP id b10so5305014iot.4;
- Fri, 02 Apr 2021 06:06:20 -0700 (PDT)
+ id 1lSJWC-0006gQ-9O; Fri, 02 Apr 2021 09:07:23 -0400
+Received: by mail-io1-xd29.google.com with SMTP id x16so5336926iob.1;
+ Fri, 02 Apr 2021 06:07:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=xjXKTKeRPFrdqINNIuHyRRm2q7+Fm15N4fmIcxUIjz0=;
- b=WdQla1RjC9IfdBoWv9QQ93oPTbifNkqviasGH/fYM66X8zAQqliMGFSfdw78IEBLi0
- azFNzW5IYe3QStCZ3yFtHfo+zrZkPJiRxFyOOuE+0Ffzq3Sm+/bk92gLSrACuAdeomAl
- D4UcD0LzIOmvbcGEhldfQwDAdedmK86x6MGzirOVg/G0m7CfSRQZm2Xuc4KMMXJQAoRE
- T1JXIugxyjeal7JfRq8brBZEc+PKcjktUsuAliKTdrzOAu6lOl0dJ0qnt/E+pHbedeqw
- TnGUD8alB1Cx7vwRNBawv03gBv/lUf9cxY7vCTUFDMF086/Xs9iKSYxCgUPExvNuZK+m
- V82w==
+ :cc; bh=16yJhlFJ37AtBD6+05BKbsqBPu1GdmOLS8mynxGbx24=;
+ b=WqltpAHEraGyV1ieTDdzFAxVyK/khHVA8aEKuPkJ0NQQ5cH3Oy8OjukdlTyF2TqOgE
+ P0E4kfiLCaRISeuh2HBcmS1w1e2Id/rpx3qd+CqiP5vCI0MCPXOQ8s2C3aeYRA860vzR
+ hdEEUMiHnb62j6EFEjhe8RTkh+emfXADOWJoQDrIJqayMJLjiXues8lkN6zFpDbI4za7
+ MnZPQpar13zDJKkv+zYib+GKGaOb24yE1GwjZAwpQoDQI/8rGSH1vClDbiuSQQvVVniG
+ 5gubJsplD61TvvDR+XmetyktUd5oZ/cs2zLkkrJVDXizlwEweJHpD4LDdd50Y1z/UK2S
+ kqXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=xjXKTKeRPFrdqINNIuHyRRm2q7+Fm15N4fmIcxUIjz0=;
- b=b46iRN/k9OuijAluQDoYVsRCE1WcNhMo0oXyQBNnQxV/+mANObZxQHIZkN9QNFzoSS
- XyycnBrWL+Ntsf80PlbjJOcXxcldo9oXCmRpO/9BRosD2exJVLx2+CFINpSpk6Xm2jmK
- pVztVWyB6h0oQ3Ni1K49SyaW6dFI8uJ+QYHhW5Dcp9Nwb7OqOoyjoQBHsWOwgL3iWssF
- 6qrBdWtsj0hnySJQtBkUzkj2r9IV0BFAiO3vi42n5eEFYBXnvOwRQGalEhS8pDSton/z
- OnRNQ+LROKTxKZw1MHef7bQf8lTD+/PUrP7Mwve5XFl01d4hO/LnjAQDTVMyZIjvVlwN
- 8Ozw==
-X-Gm-Message-State: AOAM532N55JbjRm5YHDeoKIYPmutsntvgVDw3mlmgO3DpSQjDiLsiIPD
- 9sRyLCdjKZDhYGk3XwT8PVFskb4zj+1hN7W0IHA=
-X-Google-Smtp-Source: ABdhPJxaMFYQ7UcidUSpj+d/f8zn9kggSsdF0n8gfc2O3KqIr0IHYOTFwKMz+gFKl0+SQ2ldEtzZdxXQEO28Hmwdtco=
-X-Received: by 2002:a02:11c9:: with SMTP id 192mr12758325jaf.135.1617368780047; 
- Fri, 02 Apr 2021 06:06:20 -0700 (PDT)
+ bh=16yJhlFJ37AtBD6+05BKbsqBPu1GdmOLS8mynxGbx24=;
+ b=sUoHRJxhQAqzC0FnyUtV4c5YIR1hTN8xLrft+N/3atscP8OUuNs8lbA05XoXJwrinM
+ FoEoabxAoCx7EUNbXOzhBhLvOp3WdT3EfBgr9qTM9hQJrMboWA7+n2vDwsaymyIYMnCj
+ zifSk21X7ljtrpmHQ3bh42PxEJknaDXp12eaM+o/HMEIcM6WUNUKgQPlzmudeJhzFRUD
+ 1fJjQec1I2phcTERRzgUTDAmMQXmGIlX79a7d+qecux0kGhL6A63z3vvPcUqV5JoP/KL
+ iaYhoYwyafonOMekejz4C3YC/xymNx1upxLxz8o7Oa8eXzb3cTMv775TRMt4Rq7KH0mW
+ mnmg==
+X-Gm-Message-State: AOAM532M7w/gJbRF2flLoK4ZVCvezu2Z/31NytDYeGIRjtyirktmKg6b
+ /fDcDyz4uLdK4BMPRfwF2b6+AtJOUdWx7Lu3YyQ=
+X-Google-Smtp-Source: ABdhPJz3x/G/k6uNQWgCDrfdtyEPUuERXeCmgmFt2FVAKAszm4/rQ/LbOuSLP4QFA5Ja877zcgWCIuKwQXXXrQ5nkOQ=
+X-Received: by 2002:a05:6638:224e:: with SMTP id
+ m14mr13203781jas.8.1617368838877; 
+ Fri, 02 Apr 2021 06:07:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210401181457.73039-1-vijai@behindbytes.com>
- <20210401181457.73039-2-vijai@behindbytes.com>
-In-Reply-To: <20210401181457.73039-2-vijai@behindbytes.com>
+ <20210401181457.73039-5-vijai@behindbytes.com>
+In-Reply-To: <20210401181457.73039-5-vijai@behindbytes.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 2 Apr 2021 09:04:04 -0400
-Message-ID: <CAKmqyKNosjnkyn7hQ7fQ3tHpApRuc+7jcVZsj4x2R+Y-sRys8Q@mail.gmail.com>
-Subject: Re: [PATCH v3 1/4] target/riscv: Add Shakti C class CPU
+Date: Fri, 2 Apr 2021 09:05:04 -0400
+Message-ID: <CAKmqyKPCbBznWkOeREnb-r7gHbzhvvjBXafNYkBT1u52+9z7hQ@mail.gmail.com>
+Subject: Re: [PATCH v3 4/4] hw/riscv: Connect Shakti UART to Shakti platform
 To: Vijai Kumar K <vijai@behindbytes.com>
 Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -70,50 +71,72 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2021 13:06:23 -0000
+X-List-Received-Date: Fri, 02 Apr 2021 13:07:23 -0000
 
 On Thu, Apr 1, 2021 at 2:15 PM Vijai Kumar K <vijai@behindbytes.com> wrote:
 >
-> C-Class is a member of the SHAKTI family of processors from IIT-M.
->
-> It is an extremely configurable and commercial-grade 5-stage in-order
-> core supporting the standard RV64GCSUN ISA extensions.
+> Connect one shakti uart to the shakti_c machine.
 >
 > Signed-off-by: Vijai Kumar K <vijai@behindbytes.com>
+
+In future can you please keep the Reviewed by tags when sending a new
+version of the patch series?
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 1 +
->  target/riscv/cpu.h | 1 +
->  2 files changed, 2 insertions(+)
+>  hw/riscv/shakti_c.c         | 8 ++++++++
+>  include/hw/riscv/shakti_c.h | 2 ++
+>  2 files changed, 10 insertions(+)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 2a990f6253..140094fd52 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -707,6 +707,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->      DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           rv64_base_cpu_init),
->      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
->      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
-> +    DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
->  #endif
->  };
+> diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+> index c8205d3f22..e207fa83dd 100644
+> --- a/hw/riscv/shakti_c.c
+> +++ b/hw/riscv/shakti_c.c
+> @@ -125,6 +125,13 @@ static void shakti_c_soc_state_realize(DeviceState *dev, Error **errp)
+>          SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
+>          SIFIVE_CLINT_TIMEBASE_FREQ, false);
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 0edb2826a2..ebbf15fb1c 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -38,6 +38,7 @@
->  #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
->  #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
->  #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
-> +#define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
->  #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
->  #define TYPE_RISCV_CPU_SIFIVE_E34       RISCV_CPU_TYPE_NAME("sifive-e34")
->  #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
+> +    qdev_prop_set_chr(DEVICE(&(sss->uart)), "chardev", serial_hd(0));
+> +    if (!sysbus_realize(SYS_BUS_DEVICE(&sss->uart), errp)) {
+> +        return;
+> +    }
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(&sss->uart), 0,
+> +                    shakti_c_memmap[SHAKTI_C_UART].base);
+> +
+>      /* ROM */
+>      memory_region_init_rom(&sss->rom, OBJECT(dev), "riscv.shakti.c.rom",
+>                             shakti_c_memmap[SHAKTI_C_ROM].size, &error_fatal);
+> @@ -143,6 +150,7 @@ static void shakti_c_soc_instance_init(Object *obj)
+>      ShaktiCSoCState *sss = RISCV_SHAKTI_SOC(obj);
+>
+>      object_initialize_child(obj, "cpus", &sss->cpus, TYPE_RISCV_HART_ARRAY);
+> +    object_initialize_child(obj, "uart", &sss->uart, TYPE_SHAKTI_UART);
+>
+>      /*
+>       * CPU type is fixed and we are not supporting passing from commandline yet.
+> diff --git a/include/hw/riscv/shakti_c.h b/include/hw/riscv/shakti_c.h
+> index 8ffc2b0213..50a2b79086 100644
+> --- a/include/hw/riscv/shakti_c.h
+> +++ b/include/hw/riscv/shakti_c.h
+> @@ -21,6 +21,7 @@
+>
+>  #include "hw/riscv/riscv_hart.h"
+>  #include "hw/boards.h"
+> +#include "hw/char/shakti_uart.h"
+>
+>  #define TYPE_RISCV_SHAKTI_SOC "riscv.shakti.cclass.soc"
+>  #define RISCV_SHAKTI_SOC(obj) \
+> @@ -33,6 +34,7 @@ typedef struct ShaktiCSoCState {
+>      /*< public >*/
+>      RISCVHartArrayState cpus;
+>      DeviceState *plic;
+> +    ShaktiUartState uart;
+>      MemoryRegion rom;
+>
+>  } ShaktiCSoCState;
 > --
 > 2.25.1
 >
