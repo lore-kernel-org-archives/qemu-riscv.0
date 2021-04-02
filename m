@@ -1,75 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lSQ2y-00065w-SP
-	for mharc-qemu-riscv@gnu.org; Fri, 02 Apr 2021 16:05:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47788)
+	id 1lSQ55-0000Go-B0
+	for mharc-qemu-riscv@gnu.org; Fri, 02 Apr 2021 16:07:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48330)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=7197bd837=alistair.francis@wdc.com>)
- id 1lSQ2u-00063l-Hq; Fri, 02 Apr 2021 16:05:34 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:1528)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=7197bd837=alistair.francis@wdc.com>)
- id 1lSQ2o-0003oA-VE; Fri, 02 Apr 2021 16:05:32 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1617393926; x=1648929926;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=MUm7inRKj+7G1rTvuCFJJ80cTV26/SwUHAm1uIyaze8=;
- b=rYIT/WEEyjoxBH8Jw2HtdCZo3O0xAO0Qs9ytFGYbcXeBC1EdQfF3M7PU
- kBoJmAlI8FDfQz1GUN7CixZX+tX+9lkUB0QK2Zj66iv1IaDdYxOVjf3Sd
- 8Pi0r/L9JMopDDAi2hwJVmtBRW8uwj9Xx1EIPvYJlqfYGnwOhkxY0CSqd
- as+eCfw1JP0U4NdPchJPOtx6MY6QpbLYt4tDvRwZjlfXJhSku73J7myVJ
- tVnrKtxGgds+3BLs6JS/3CglwuGMUrsSJlco1EjqgfV/1+MALYUpkw0gS
- 7tSMaFaHxK5swsbJcEirFhS7YsR9YnfYUFlst9+SxgnnvyKCOlX46sfnm A==;
-IronPort-SDR: 6xjkHUNGfgsusHRI1eqL8AXj1Uva/YlHHRrOyQf7VKkvN+DX3psxIapD8kigYztoHP1FOkYYG8
- KIoVrsb8s4m6h9YIl+neSM5tL3zYek0ikt6TVjve7bX4j2a9cLep0ZizapS7fOCOwFaPZ3oij6
- g7b8WpQQoYA8loZyYKMDxS1KbX5fH9GoGOWwXzYln3QN8aWSCBlbcUbVvjHmWk0G4DmxT/Dl4k
- yBWZSMxkf+iZGvT7Q5TktlUJYD50SoPuJE0YFPdVFRpfAxSUc1z4Ar000TohmwhWxDRASkEye1
- yIo=
-X-IronPort-AV: E=Sophos;i="5.81,300,1610380800"; d="scan'208";a="163541917"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 03 Apr 2021 04:05:10 +0800
-IronPort-SDR: TcU/1Nzfi8AS99To7wCaB168YjL5Puym9cSjOKUAAbuPbfrfdASyhT9lcJAG2rYazUGA4rQ7eg
- qwElTYkZ7ptUOFCWSCVX3uIrvDwQYW1igRiq2CFpL7qdf/oGBEvruvFuja1HlVTyTRlUZKPjyZ
- 4mobkUnTQrKP7lNG7KXMfcgX5yDuk5Dk++7VtWDRLXCmcVQRZ+TxRPV/jdU3e4pR/aHvZk7yC9
- CQFsc2eIgxFnr+aXUHh+q94Uq8/WWeOJnVuICPktrlKeck+lthBBr1YqOpNMxnr60aXh/tUE8p
- La3qCGFwtyWnnzeUIL1Rgpz8
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Apr 2021 12:46:43 -0700
-IronPort-SDR: FlQr1toDWzxNX8lxN+ysvbz8dhZpVHunGSGTOYwKkJk/v82Bbayrjbq3+sEOtnLmIJdWM9O0dZ
- Cm3EyP/8YolgN80loKz8nCsi0f5sKy+F77my/wOcGv7s4LfgqmfBQqmHz4newQIYc6KxgyV5cE
- n8N2wdTPVLoq/4vJqLbGrnycpYd6omBgjwgkSQ+dA4leaPmsF5Yu7CrdJcWt4BzYTJ4kuj7niC
- d5da6NFl2C2yaSBaF9bSUTubFWCoghM0fB1BOE6v69weWrOHjmgFbe8ma1EQD/VDchZd8CEDUX
- wqw=
-WDCIronportException: Internal
-Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.167.80])
- by uls-op-cesaip02.wdc.com with ESMTP; 02 Apr 2021 13:05:03 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v1 8/8] target/riscv: Include RV32 instructions in RV64 build
-Date: Fri,  2 Apr 2021 16:03:07 -0400
-Message-Id: <1c19d0112fae5ec6087cfc415f0d6cc56495220b.1617393702.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <cover.1617393702.git.alistair.francis@wdc.com>
-References: <cover.1617393702.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lSQ53-0000DW-Vp; Fri, 02 Apr 2021 16:07:45 -0400
+Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34]:47078)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lSQ50-0004qW-N4; Fri, 02 Apr 2021 16:07:45 -0400
+Received: by mail-io1-xd34.google.com with SMTP id j26so1176971iog.13;
+ Fri, 02 Apr 2021 13:07:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=0O/yA3qyej1tmGaNUAhGdoC8z8bWASm8BGnCvWUAI/Y=;
+ b=mJZw6+dcrmh/MZniqs5MunD/u62Q2D7wW2j1PToeytu+NlTjFSLdbgSbGX7F+kD6/8
+ b49gGSzXDfOwg5AGwlXKFyOON8r0b73VgdGJX/8SYPt7v123dsvdjsvg2jEtZq3IwvyH
+ I22Yv7hD1QFYVie9oxeNQWQn0Fqd0U1f7/IZSp8btw+bdQctH0es9zZReuttZWHMdRE3
+ dWdwMsstKFpuwBrPYyNd8Pn4fVh1i4Fj1k/vMnKJOcp/WILI9GHZ2h/LX1S/MX3BVF4F
+ 48a4+1gOQshF6KwutMimoyumr8wVU9zPtk81PFzxBQcZ+VOvg3n0/+sTaZD3PlkjLUo6
+ IIuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=0O/yA3qyej1tmGaNUAhGdoC8z8bWASm8BGnCvWUAI/Y=;
+ b=EUCEZOAMn3Pz9r3se/D1P/lFYe5YuaRoWOfL7iLskZuxsZPNjTUQ//CjCqXblI5bmQ
+ ImsW01ensueRjGtY0sgzsM5cM968FAnROHKtNvR7/vL6EyKMH9hsTfQYCEx3hOl5rn+0
+ /sFCALYh3x0t93qZE2bxWkAeG0JeoQ+0PoNUmPX2RvXQVgTaMU8IcYJVz/t8h5Jjl4Ix
+ 7hSvOrzeMhEXtEcyJw/lodT/POL3FA1EVG7ChHjot2Zaa58xQ5r7Aw9CKhxnOyb84oVu
+ HcNpWAor2WbDFyI/5drLMXAyJuhs8/xjphkbCV+GqP85kTS4q1AF6zel8V8PIw46CkLe
+ S7MA==
+X-Gm-Message-State: AOAM531Tq+xy1X0dhoCR0oNumawrbpIMaiJkUuD8IAcv3vISn2PIwgnU
+ KTZpGgJPEJ4/0jRW+FjtHXv4UMZEnqe70tWAuv4H/opfftlZzg==
+X-Google-Smtp-Source: ABdhPJyBc05eXzMd9u3CJOlM3gW/REYLzbPp7YX4jhGG+VgKK9yD+Pyk+J9liRDZe6nyAQTZHHDSUIEp1VLusPfVU9I=
+X-Received: by 2002:a02:cc1b:: with SMTP id n27mr14121139jap.106.1617394061009; 
+ Fri, 02 Apr 2021 13:07:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.154.42;
- envelope-from=prvs=7197bd837=alistair.francis@wdc.com;
- helo=esa4.hgst.iphmx.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20210401181457.73039-1-vijai@behindbytes.com>
+In-Reply-To: <20210401181457.73039-1-vijai@behindbytes.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 2 Apr 2021 16:05:25 -0400
+Message-ID: <CAKmqyKPAXLHPi_anf_Xbe6=9j-nkBP-b6QRqC4xDUT3u-7riUA@mail.gmail.com>
+Subject: Re: [PATCH v3 0/4] Add support for Shakti SoC from IIT-M
+To: Vijai Kumar K <vijai@behindbytes.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,152 +69,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2021 20:05:35 -0000
+X-List-Received-Date: Fri, 02 Apr 2021 20:07:46 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/insn16-32.decode | 24 ++++++++++++++++++++++++
- target/riscv/insn16-64.decode | 31 +++++++++++++++++++++++++++++++
- target/riscv/translate.c      | 18 +++++++++++++++++-
- target/riscv/meson.build      |  7 +++++--
- 4 files changed, 77 insertions(+), 3 deletions(-)
+On Thu, Apr 1, 2021 at 2:15 PM Vijai Kumar K <vijai@behindbytes.com> wrote:
+>
+> Changes in v3:
+>  - Drop SHAKTI_C_DEBUG register
+>
+> Changes in v2:
+>  - Moved CPU addition to a separate patch(P1)
+>  - Use riscv_setup_rom_resetvec API to setup reset vector
+>  - Dropped unused DPRINTF and unwanted break statements
+>  - Fixed uart_can_receive logic
+>  - Reused sifive_u_cpu_init routine for shakti
+>  - Error out when an unsupported CPU is specified
+>  - Addressed formatting changes pointed out in review
 
-diff --git a/target/riscv/insn16-32.decode b/target/riscv/insn16-32.decode
-index 0819b17028..f83f43e955 100644
---- a/target/riscv/insn16-32.decode
-+++ b/target/riscv/insn16-32.decode
-@@ -16,6 +16,30 @@
- # You should have received a copy of the GNU General Public License along with
- # this program.  If not, see <http://www.gnu.org/licenses/>.
- 
-+# Fields imported from insn16.decode:
-+%rd        7:5
-+%rs1_3     7:3                !function=ex_rvc_register
-+%rs2_3     2:3                !function=ex_rvc_register
-+%rs2_5     2:5
-+
-+# Immediates imported from insn16.decode:
-+%uimm_cl_w     5:1 10:3 6:1       !function=ex_shift_2
-+%uimm_6bit_lw 2:2 12:1 4:3           !function=ex_shift_2
-+%uimm_6bit_sw 7:2 9:4                !function=ex_shift_2
-+%imm_cj        12:s1 8:1 9:2 6:1 7:1 2:1 11:1 3:3 !function=ex_shift_1
-+
-+# Argument sets imported from insn16.decode:
-+&j         imm rd       !extern
-+&i         imm rs1 rd   !extern
-+&s         imm rs1 rs2  !extern
-+
-+# Formats 16 imported from insn16.decode:
-+@cl_w      ... ... ... .. ... .. &i      imm=%uimm_cl_w   rs1=%rs1_3  rd=%rs2_3
-+@cj        ...    ........... .. &j      imm=%imm_cj
-+@c_lwsp    ... . .....  ..... .. &i      imm=%uimm_6bit_lw rs1=2 %rd
-+@c_swsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sw rs1=2 rs2=%rs2_5
-+@cs_w      ... ... ... .. ... .. &s      imm=%uimm_cl_w   rs1=%rs1_3  rs2=%rs2_3
-+
- # *** RV32C Standard Extension (Quadrant 0) ***
- flw               011  ... ... .. ... 00 @cl_w
- fsw               111  ... ... .. ... 00 @cs_w
-diff --git a/target/riscv/insn16-64.decode b/target/riscv/insn16-64.decode
-index 672e1e916f..dbef1e5365 100644
---- a/target/riscv/insn16-64.decode
-+++ b/target/riscv/insn16-64.decode
-@@ -16,6 +16,37 @@
- # You should have received a copy of the GNU General Public License along with
- # this program.  If not, see <http://www.gnu.org/licenses/>.
- 
-+# Fields imported from insn16.decode:
-+%rd        7:5
-+%rs1_3     7:3                !function=ex_rvc_register
-+%rs2_3     2:3                !function=ex_rvc_register
-+%rs2_5     2:5
-+
-+# Immediates imported from insn16.decode:
-+%imm_ci        12:s1 2:5
-+%uimm_cl_d     5:2 10:3           !function=ex_shift_3
-+%uimm_6bit_ld 2:3 12:1 5:2           !function=ex_shift_3
-+%uimm_6bit_lw 2:2 12:1 4:3           !function=ex_shift_2
-+%uimm_6bit_sd 7:3 10:3               !function=ex_shift_3
-+
-+# Argument sets imported from insn16.decode:
-+&empty                  !extern
-+&r         rd rs1 rs2   !extern
-+&i         imm rs1 rd   !extern
-+&s         imm rs1 rs2  !extern
-+&j         imm rd       !extern
-+&b         imm rs2 rs1  !extern
-+&u         imm rd       !extern
-+&shift     shamt rs1 rd !extern
-+
-+# Formats 16 imported from insn16.decode:
-+@ci        ... . ..... .....  .. &i      imm=%imm_ci      rs1=%rd     %rd
-+@cl_d      ... ... ... .. ... .. &i      imm=%uimm_cl_d   rs1=%rs1_3  rd=%rs2_3
-+@cs_d      ... ... ... .. ... .. &s      imm=%uimm_cl_d   rs1=%rs1_3  rs2=%rs2_3
-+@cs_2      ... ... ... .. ... .. &r      rs2=%rs2_3       rs1=%rs1_3  rd=%rs1_3
-+@c_ldsp    ... . .....  ..... .. &i      imm=%uimm_6bit_ld rs1=2 %rd
-+@c_sdsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sd rs1=2 rs2=%rs2_5
-+
- # *** RV64C Standard Extension (Quadrant 0) ***
- ld                011  ... ... .. ... 00 @cl_d
- sd                111  ... ... .. ... 00 @cs_d
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 4af55deaea..9a93c77fd6 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -602,6 +602,10 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- 
- /* Include the auto-generated decoder for 16 bit insn */
- #include "decode-insn16.c.inc"
-+#include "decode-insn16-32.c.inc"
-+#ifdef TARGET_RISCV64
-+# include "decode-insn16-64.c.inc"
-+#endif
- 
- static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
- {
-@@ -612,7 +616,19 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-         } else {
-             ctx->pc_succ_insn = ctx->base.pc_next + 2;
-             if (!decode_insn16(ctx, opcode)) {
--                gen_exception_illegal(ctx);
-+                if (riscv_cpu_is_32bit(env)) {
-+                    if (!decode_insn16_32(ctx, opcode)) {
-+                        gen_exception_illegal(ctx);
-+                    }
-+                } else {
-+#ifdef TARGET_RISCV64
-+                    if (!decode_insn16_64(ctx, opcode)) {
-+                        gen_exception_illegal(ctx);
-+                    }
-+#else
-+                    gen_exception_illegal(ctx);
-+#endif
-+                }
-             }
-         }
-     } else {
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index 88ab850682..d17b478120 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -1,12 +1,15 @@
- # FIXME extra_args should accept files()
- dir = meson.current_source_dir()
- gen32 = [
--  decodetree.process('insn16.decode', extra_args: [dir / 'insn16-32.decode', '--static-decode=decode_insn16', '--insnwidth=16']),
-+  decodetree.process('insn16.decode', extra_args: ['--static-decode=decode_insn16', '--insnwidth=16']),
-+  decodetree.process('insn16-32.decode', extra_args: ['--static-decode=decode_insn16_32', '--insnwidth=16']),
-   decodetree.process('insn32.decode', extra_args: '--static-decode=decode_insn32'),
- ]
- 
- gen64 = [
--  decodetree.process('insn16.decode', extra_args: [dir / 'insn16-64.decode', '--static-decode=decode_insn16', '--insnwidth=16']),
-+  decodetree.process('insn16.decode', extra_args: ['--static-decode=decode_insn16', '--insnwidth=16']),
-+  decodetree.process('insn16-32.decode', extra_args: ['--static-decode=decode_insn16_32', '--insnwidth=16']),
-+  decodetree.process('insn16-64.decode', extra_args: ['--static-decode=decode_insn16_64', '--insnwidth=16']),
-   decodetree.process('insn32.decode', extra_args: [dir / 'insn32-64.decode', '--static-decode=decode_insn32']),
- ]
- 
--- 
-2.31.0
+Thanks, I have reviewed these patches and applied them.
 
+Can you add details to the docs on how to build images and run this machine?
+
+This is an example for a different board:
+https://gitlab.com/qemu-project/qemu/-/blob/master/docs/system/riscv/microchip-icicle-kit.rst
+
+That way others can use this machine and I can generate tests for it.
+
+Alistair
+
+>
+> Vijai Kumar K (4):
+>   target/riscv: Add Shakti C class CPU
+>   riscv: Add initial support for Shakti C machine
+>   hw/char: Add Shakti UART emulation
+>   hw/riscv: Connect Shakti UART to Shakti platform
+>
+>  MAINTAINERS                                 |   9 +
+>  default-configs/devices/riscv64-softmmu.mak |   1 +
+>  hw/char/meson.build                         |   1 +
+>  hw/char/shakti_uart.c                       | 185 ++++++++++++++++++++
+>  hw/char/trace-events                        |   4 +
+>  hw/riscv/Kconfig                            |  10 ++
+>  hw/riscv/meson.build                        |   1 +
+>  hw/riscv/shakti_c.c                         | 178 +++++++++++++++++++
+>  include/hw/char/shakti_uart.h               |  74 ++++++++
+>  include/hw/riscv/shakti_c.h                 |  75 ++++++++
+>  target/riscv/cpu.c                          |   1 +
+>  target/riscv/cpu.h                          |   1 +
+>  12 files changed, 540 insertions(+)
+>  create mode 100644 hw/char/shakti_uart.c
+>  create mode 100644 hw/riscv/shakti_c.c
+>  create mode 100644 include/hw/char/shakti_uart.h
+>  create mode 100644 include/hw/riscv/shakti_c.h
+>
+> --
+> 2.25.1
+>
+>
 
