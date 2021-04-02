@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lSQ20-0005aQ-CQ
-	for mharc-qemu-riscv@gnu.org; Fri, 02 Apr 2021 16:04:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47548)
+	id 1lSQ27-0005hF-PP
+	for mharc-qemu-riscv@gnu.org; Fri, 02 Apr 2021 16:04:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47600)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=7197bd837=alistair.francis@wdc.com>)
- id 1lSQ1v-0005YK-R6; Fri, 02 Apr 2021 16:04:31 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:49476)
+ id 1lSQ25-0005fN-R8; Fri, 02 Apr 2021 16:04:41 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:3905)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=7197bd837=alistair.francis@wdc.com>)
- id 1lSQ1t-0003OI-Uq; Fri, 02 Apr 2021 16:04:31 -0400
+ id 1lSQ22-0003Sb-GY; Fri, 02 Apr 2021 16:04:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1617393869; x=1648929869;
+ t=1617393878; x=1648929878;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=kLrMTEgcRfPaVkkRYDE5ayo5vm3gKUAnMaJCQNv4XDo=;
- b=iBbMkjaMI/Y5sFuswWeyVHTVPYtOgMa98Q0n8f3Pu37moysqM7wxAtTq
- nD5EptdBahKJ8I9OZlw6eGwmLUSgSJbtUtrLvfnWOrnka0eVVsDpnw9bB
- 5oqexCRfTlh+C40iCZO2HqXew0gjbEZ+Mysgo2wVVRJqg1HTP+G5U9h2m
- AAmn0NMwLHQ2vyMjWYn9I3az7iXyw3n0Q8TVpMZpQZ4kX3pPlXDunoHlQ
- rUNHhDnw8n30r2f7Bj0r3q1zH5KHTL+jQJW8gatveSPpyly+OvFolE/Kh
- G3y2GfmTM4Bslq69nja66JP9FYOMzz5sbK9YaPeWm7eP7DjzEX9xngwpR g==;
-IronPort-SDR: O0GhO9fsYkijN83blKkE3zgietYsRExKWyX04Ysa+tfFjgWtTTxlNJCBayoQGUdpWNkNuKC3SX
- B9cyBZn8bNoluxQMgb60241Rrl9wKm0Qt+7LWQ9dGYkwarkeWEWy/t60xpNnpND7UiMSmai/DW
- QG3yCRd3gWRu325LzDa7AYZ7mtYiDfauYTLlT2hnfNh2otXOftWe9KOij4bP4JVVMgUEMNM9ev
- uo8r94524BSGJUnVcN2WWcK/LjORLTj3NME9GfmHj6SoJHZfo1V0JdEtOSZU7snwbt8zbFs8OK
- L+g=
-X-IronPort-AV: E=Sophos;i="5.81,300,1610380800"; d="scan'208";a="274524876"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ bh=EFExi6aUTtKZ4PTrlDdT+lSkosA+eReHet69P4R+W/4=;
+ b=JNf/w64kE5IyS1EAKJvnInzNO86rHmEUDGlEGxdS672Ur6yTDEodYKd7
+ N8uXbLXT+Dc1zmFlCdouLTS0pzrYWFBuEiEHaE/50DwF5xH+SQ5yYmM/D
+ aa/9riXvX1YrrssNSlNSwkTcbU1rdeZetYSsqcCpQ+2ANdoFxiRr+HUDr
+ 3pTAh+SCiTxSgTl6iTkfkyQWdil8mApXgDuyF58yhVT5NB5f2c/7iPyYp
+ 9AaLWP24ozJ5nXD/Z0qJa4CRn2IK7WAapxJPNWpzQCn52I/6KJHmIeRc0
+ fKo0Npu36V0wPuCxNtcaJPQr/LJarYVHFMhtuaZhuNQhAWklTJEm0r80+ Q==;
+IronPort-SDR: 008hFMgMIf2kAN/8JIxT9aQ83gAIygh9TmzoAXIYwuKwf+pKMeLvHeriJsxMit9VsCMHMms28N
+ erupZOJWRGbL5gjIXSw/+4mWb80Hg8BnFH4w6tlPpzqfGQWyidVn0d50YFWHrQnvo8+Qv1MbAl
+ 4GoD5FBrHZf/hcdvNRpvgQHL8Zai8QkcpBP6rHGJlBIDG0UPQaHn4itP2761jO+Si2bvxOT6+z
+ pE7Rwd0qmoC0u4MbY21AyF+RvHRVEkgXDznkvZltX3/1MOJ0Fu5cA+nsNiSo/3werZhBcS01kD
+ maE=
+X-IronPort-AV: E=Sophos;i="5.81,300,1610380800"; d="scan'208";a="168175379"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 03 Apr 2021 04:04:27 +0800
-IronPort-SDR: njnxs7lnOwvAkwr++xeBry8XDvrHPy1DgG8S+Kiuf3XT3B+gL0n/aAHB5Yn7VkM/3vFE9KnhAp
- 0y9Ytl8rVfFBZoq1P8xx3tS+Q2nQGzzowPc/k2xwSGWcDO6sp2hkdAGk+G0z0Qdudp3Jrqd01M
- iRI66V6DBumhSyNtEJORgD9j1dMyxT4w+Bh/v9KhQJeLaacxsyKUUUamiGjJb/zJg52+FIyyJU
- 9OxWBElzvp4YTYgmdeEuTSnskNO+0ZbhldQE/gr7tLqQEFb4Q1EULusPvIcd1wywja1FuiNhFA
- Dl1yHyjUzPPjTDqNl5WUnaBQ
+ by ob1.hgst.iphmx.com with ESMTP; 03 Apr 2021 04:04:36 +0800
+IronPort-SDR: HL6HH8zOIbHTkovU3gkhVkzKAZByPM9y7ZYwZJl0gwGwKZ5Zazr4rirCpAlHnXaWShg2/td8J2
+ 7FtISGAWw+FPx1SrZmdBFxgLcCGI2kyYbLLVJUBYO3jsEk24jRv3w3HAxrQlbMYN4jJaK0wFI8
+ SlSXb3KCuqAKiRA3mQZQXGl11n0eZndsLN1MidZYvOmqKhrbB7bDQzkw4xuxZkzzuiZWR4VNuV
+ hzgDnqrnyylOQxFQYMF/cFbsITq/iM2jASBlyT9DT+ff7p4XdnVRPD3AgrQqiG7cQkwpyzYppy
+ Ej9Y0Q6coJUlXnSm8T4nIxL7
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Apr 2021 12:46:08 -0700
-IronPort-SDR: AqewZ1lxBTY2q0v+2gT34fml1KEPq4ZLAfA1VHmsa5m9VRMluMB7wcgMrxhBx5Lw24LwgJMexm
- mw4fiJhM8rAR/arINfh4CBI8jKig8dBFiz2B63OwwVf6aJFKMN1P7BS3EyuzyE4HjF2uEqYW6B
- No60qpxdqwSsUHp8tS9RzwylEH/GcW32IX5P8JzhcuCB6njKNYs+IpG2rZ3aIBar2YlAmNTTI0
- wbkjbuDAiw6yJVti9KrXbwDjF2DiIBJzcj2ciyF9eKlV0mCd/FuhXjZYjITXWjWjZ4F9vuXVK3
- Q1s=
+ 02 Apr 2021 12:46:16 -0700
+IronPort-SDR: sfsmzfWzFrxF6GuNsUiNABR2jwpkcKqW0bXp9fypVDbWP1mHcBUeFKPXFyyaSJCzNWFH985cWa
+ h2UM/31SQ3yR6DsTHB4R71/xOO7bjs+QHlICOjbNwkc5sPzI8Zdpda/01pTS/xeHcYt5N4Rm90
+ 9HWWZ8TmamyvRHqIMgHO4N1Uf8cNjL1vgyJN1oIj66LtpjwNxO2SaZVYGaTK7Hmx81ImVTHoa8
+ zkkGVL4QNtx62tLvqkx3nbO7dvKSe6OLMovryFdED0gemtaS9ZDHHYefQiOkl7Z2KDFMF3L7lS
+ bIw=
 WDCIronportException: Internal
 Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.167.80])
- by uls-op-cesaip01.wdc.com with ESMTP; 02 Apr 2021 13:04:27 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 02 Apr 2021 13:04:35 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v1 4/8] target/riscv: Remove the hardcoded MSTATUS_SD macro
-Date: Fri,  2 Apr 2021 16:02:31 -0400
-Message-Id: <7efb55362999a5b709ea8e7fa0ea188e740d9c67.1617393702.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 5/8] target/riscv: Remove the hardcoded SATP_MODE macro
+Date: Fri,  2 Apr 2021 16:02:40 -0400
+Message-Id: <c2a0653687bea5e932747e301112ea0507169385.1617393702.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <cover.1617393702.git.alistair.francis@wdc.com>
 References: <cover.1617393702.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.141.245;
+Received-SPF: pass client-ip=216.71.153.141;
  envelope-from=prvs=7197bd837=alistair.francis@wdc.com;
- helo=esa1.hgst.iphmx.com
+ helo=esa3.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -83,107 +83,173 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2021 20:04:32 -0000
+X-List-Received-Date: Fri, 02 Apr 2021 20:04:42 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_bits.h  | 10 ----------
- target/riscv/csr.c       | 12 ++++++++++--
- target/riscv/translate.c | 19 +++++++++++++++++--
- 3 files changed, 27 insertions(+), 14 deletions(-)
+ target/riscv/cpu_bits.h   | 11 -----------
+ target/riscv/cpu_helper.c | 30 +++++++++++++++++++++++-------
+ target/riscv/csr.c        | 33 ++++++++++++++++++++++++---------
+ target/riscv/monitor.c    | 22 +++++++++++++++++-----
+ 4 files changed, 64 insertions(+), 32 deletions(-)
 
 diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 8caab23b62..dd643d0f63 100644
+index dd643d0f63..6a816ce9c2 100644
 --- a/target/riscv/cpu_bits.h
 +++ b/target/riscv/cpu_bits.h
-@@ -387,16 +387,6 @@
- #define MXL_RV64            2
- #define MXL_RV128           3
+@@ -452,17 +452,6 @@
+ #define SATP64_ASID         0x0FFFF00000000000ULL
+ #define SATP64_PPN          0x00000FFFFFFFFFFFULL
  
 -#if defined(TARGET_RISCV32)
--#define MSTATUS_SD MSTATUS32_SD
--#define MISA_MXL MISA32_MXL
--#define MXL_VAL MXL_RV32
--#elif defined(TARGET_RISCV64)
--#define MSTATUS_SD MSTATUS64_SD
--#define MISA_MXL MISA64_MXL
--#define MXL_VAL MXL_RV64
+-#define SATP_MODE           SATP32_MODE
+-#define SATP_ASID           SATP32_ASID
+-#define SATP_PPN            SATP32_PPN
+-#endif
+-#if defined(TARGET_RISCV64)
+-#define SATP_MODE           SATP64_MODE
+-#define SATP_ASID           SATP64_ASID
+-#define SATP_PPN            SATP64_PPN
 -#endif
 -
- /* sstatus CSR bits */
- #define SSTATUS_UIE         0x00000001
- #define SSTATUS_SIE         0x00000002
+ /* VM modes (mstatus.vm) privileged ISA 1.9.1 */
+ #define VM_1_09_MBARE       0
+ #define VM_1_09_MBB         1
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 6446af5de0..7ae9352d80 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -403,11 +403,21 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+ 
+     if (first_stage == true) {
+         if (use_background) {
+-            base = (hwaddr)get_field(env->vsatp, SATP_PPN) << PGSHIFT;
+-            vm = get_field(env->vsatp, SATP_MODE);
++            if (riscv_cpu_is_32bit(env)) {
++                base = (hwaddr)get_field(env->vsatp, SATP32_PPN) << PGSHIFT;
++                vm = get_field(env->vsatp, SATP32_MODE);
++            } else {
++                base = (hwaddr)get_field(env->vsatp, SATP64_PPN) << PGSHIFT;
++                vm = get_field(env->vsatp, SATP64_MODE);
++            }
+         } else {
+-            base = (hwaddr)get_field(env->satp, SATP_PPN) << PGSHIFT;
+-            vm = get_field(env->satp, SATP_MODE);
++            if (riscv_cpu_is_32bit(env)) {
++                base = (hwaddr)get_field(env->satp, SATP32_PPN) << PGSHIFT;
++                vm = get_field(env->satp, SATP32_MODE);
++            } else {
++                base = (hwaddr)get_field(env->satp, SATP64_PPN) << PGSHIFT;
++                vm = get_field(env->satp, SATP64_MODE);
++            }
+         }
+         widened = 0;
+     } else {
+@@ -622,9 +632,15 @@ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+     CPUState *cs = env_cpu(env);
+     int page_fault_exceptions;
+     if (first_stage) {
+-        page_fault_exceptions =
+-            get_field(env->satp, SATP_MODE) != VM_1_10_MBARE &&
+-            !pmp_violation;
++        if (riscv_cpu_is_32bit(env)) {
++            page_fault_exceptions =
++                get_field(env->satp, SATP32_MODE) != VM_1_10_MBARE &&
++                !pmp_violation;
++        } else {
++            page_fault_exceptions =
++                get_field(env->satp, SATP64_MODE) != VM_1_10_MBARE &&
++                !pmp_violation;
++        }
+     } else {
+         if (riscv_cpu_is_32bit(env)) {
+             page_fault_exceptions =
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 832c3bf7fd..6052b2d6e9 100644
+index 6052b2d6e9..b0ebaa029e 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -492,7 +492,11 @@ static int write_mstatus(CPURISCVState *env, int csrno, target_ulong val)
- 
-     dirty = ((mstatus & MSTATUS_FS) == MSTATUS_FS) |
-             ((mstatus & MSTATUS_XS) == MSTATUS_XS);
--    mstatus = set_field(mstatus, MSTATUS_SD, dirty);
-+    if (riscv_cpu_is_32bit(env)) {
-+        mstatus = set_field(mstatus, MSTATUS32_SD, dirty);
-+    } else {
-+        mstatus = set_field(mstatus, MSTATUS64_SD, dirty);
-+    }
-     env->mstatus = mstatus;
- 
-     return 0;
-@@ -564,7 +568,11 @@ static int write_misa(CPURISCVState *env, int csrno, target_ulong val)
+@@ -930,16 +930,31 @@ static int write_satp(CPURISCVState *env, int csrno, target_ulong val)
+     if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
+         return 0;
      }
- 
-     /* misa.MXL writes are not supported by QEMU */
--    val = (env->misa & MISA_MXL) | (val & ~MISA_MXL);
+-    if (validate_vm(env, get_field(val, SATP_MODE)) &&
+-        ((val ^ env->satp) & (SATP_MODE | SATP_ASID | SATP_PPN)))
+-    {
+-        if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+-            return -RISCV_EXCP_ILLEGAL_INST;
+-        } else {
+-            if ((val ^ env->satp) & SATP_ASID) {
+-                tlb_flush(env_cpu(env));
 +    if (riscv_cpu_is_32bit(env)) {
-+        val = (env->misa & MISA32_MXL) | (val & ~MISA32_MXL);
++        if (validate_vm(env, get_field(val, SATP32_MODE)) &&
++            ((val ^ env->satp) & (SATP32_MODE | SATP32_ASID | SATP32_PPN)))
++        {
++            if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
++                return -RISCV_EXCP_ILLEGAL_INST;
++            } else {
++                if ((val ^ env->satp) & SATP32_ASID) {
++                    tlb_flush(env_cpu(env));
++                }
++                env->satp = val;
++            }
++        }
 +    } else {
-+        val = (env->misa & MISA64_MXL) | (val & ~MISA64_MXL);
++        if (validate_vm(env, get_field(val, SATP64_MODE)) &&
++            ((val ^ env->satp) & (SATP64_MODE | SATP64_ASID | SATP64_PPN)))
++        {
++            if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
++                return -RISCV_EXCP_ILLEGAL_INST;
++            } else {
++                if ((val ^ env->satp) & SATP64_ASID) {
++                    tlb_flush(env_cpu(env));
++                }
++                env->satp = val;
+             }
+-            env->satp = val;
+         }
+     }
+     return 0;
+diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
+index e51188f919..f7e6ea72b3 100644
+--- a/target/riscv/monitor.c
++++ b/target/riscv/monitor.c
+@@ -150,9 +150,14 @@ static void mem_info_svxx(Monitor *mon, CPUArchState *env)
+     target_ulong last_size;
+     int last_attr;
+ 
+-    base = (hwaddr)get_field(env->satp, SATP_PPN) << PGSHIFT;
++    if (riscv_cpu_is_32bit(env)) {
++        base = (hwaddr)get_field(env->satp, SATP32_PPN) << PGSHIFT;
++        vm = get_field(env->satp, SATP32_MODE);
++    } else {
++        base = (hwaddr)get_field(env->satp, SATP64_PPN) << PGSHIFT;
++        vm = get_field(env->satp, SATP64_MODE);
 +    }
  
-     /* flush translation cache */
-     if (val != env->misa) {
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 2f9f5ccc62..9c6d998efa 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -369,6 +369,9 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
- static void mark_fs_dirty(DisasContext *ctx)
- {
-     TCGv tmp;
-+    CPUState *cpu = ctx->cs;
-+    CPURISCVState *env = cpu->env_ptr;
-+
-     if (ctx->mstatus_fs == MSTATUS_FS) {
+-    vm = get_field(env->satp, SATP_MODE);
+     switch (vm) {
+     case VM_1_10_SV32:
+         levels = 2;
+@@ -215,9 +220,16 @@ void hmp_info_mem(Monitor *mon, const QDict *qdict)
          return;
      }
-@@ -377,12 +380,24 @@ static void mark_fs_dirty(DisasContext *ctx)
  
-     tmp = tcg_temp_new();
-     tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
--    tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS_SD);
+-    if (!(env->satp & SATP_MODE)) {
+-        monitor_printf(mon, "No translation or protection\n");
+-        return;
 +    if (riscv_cpu_is_32bit(env)) {
-+        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS32_SD);
-+    } else {
-+#if defined(TARGET_RISCV64)
-+        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS64_SD);
-+#endif
-+    }
-     tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
- 
-     if (ctx->virt_enabled) {
-         tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
--        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS_SD);
-+        if (riscv_cpu_is_32bit(env)) {
-+            tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS32_SD);
-+        } else {
-+#if defined(TARGET_RISCV64)
-+            tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS64_SD);
-+#endif
++        if (!(env->satp & SATP32_MODE)) {
++            monitor_printf(mon, "No translation or protection\n");
++            return;
 +        }
-         tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
++    } else {
++        if (!(env->satp & SATP64_MODE)) {
++            monitor_printf(mon, "No translation or protection\n");
++            return;
++        }
      }
-     tcg_temp_free(tmp);
+ 
+     mem_info_svxx(mon, env);
 -- 
 2.31.0
 
