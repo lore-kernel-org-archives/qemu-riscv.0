@@ -1,68 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lSNNP-0001YS-C6
-	for mharc-qemu-riscv@gnu.org; Fri, 02 Apr 2021 13:14:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40040)
+	id 1lSNQB-0003K5-SW
+	for mharc-qemu-riscv@gnu.org; Fri, 02 Apr 2021 13:17:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40576)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lSNNO-0001XK-AY
- for qemu-riscv@nongnu.org; Fri, 02 Apr 2021 13:14:30 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432]:41496)
+ id 1lSNQ9-0003Hz-TS
+ for qemu-riscv@nongnu.org; Fri, 02 Apr 2021 13:17:21 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:46918)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lSNNL-0003Zk-VJ
- for qemu-riscv@nongnu.org; Fri, 02 Apr 2021 13:14:30 -0400
-Received: by mail-pf1-x432.google.com with SMTP id l123so2454310pfl.8
- for <qemu-riscv@nongnu.org>; Fri, 02 Apr 2021 10:14:27 -0700 (PDT)
+ id 1lSNQ6-00059v-S5
+ for qemu-riscv@nongnu.org; Fri, 02 Apr 2021 13:17:21 -0400
+Received: by mail-pg1-x530.google.com with SMTP id t140so3906497pgb.13
+ for <qemu-riscv@nongnu.org>; Fri, 02 Apr 2021 10:17:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=+BRZFVWbLfuzk9ULq1EDFqemn5viKeHr/qW6c11zA6M=;
- b=gTkqQT6fYfS7uUdyeZnIXUVX7lH2B/MZNLA+V/9CqtIo9lp6VX2knNW5DZA6a1Jj+w
- P+zYdSkBNEEnWrFtwh52umKixm+5JdpxvmFepSUl5p8NBJ+9tJvKyBg8brLHfnKXE12B
- EWw+yJ28HsfPvOAGMtfprCAqO9NFprXofWgDSYkRfCVRqnO4gObX/1PJVs+3MQwnZmAi
- W2BnXa0e/DjtLdO8/lJPrDW04Sa8b0XdqFuC5VaEQsGuuaHHRwAP7w3XVjTUd10iPwOw
- +Y12JaoIhgf7Yq0eJpX9upAkxwbj1SBs0WL+ZS5+ukpY/tahpbgH1EsR+rBpQfORFiJU
- uxew==
+ bh=6c9mNIjNfmi+96MQiJgRPmZkwQtSAnQzmjk+Vy2JFW0=;
+ b=x2pxWhza5WmtdBp131Bmc0/chOl17D9ZXJuaSbO/2M+ALMu0ueBDBeMsZq5hJ20Rxk
+ iSwe90US13RmPkzkfbx3LcpBcz3ZSvCC5rIKo0Dsxcfakr9O+owYKZxRs63Nq6c1S+mB
+ QKlr2ozJQpgyuer8Nmkqx284LR/gLafpL4f14udbVYRwL2sCiTcgAItMQQ9HEqCMY7IO
+ UEyJ8wp+gxznzCVHO6GvDEpqjccoe1LQaJFZUj8tKjf4VTesGLBYWlokx7KnL1tkis7s
+ 4v7xHYNlEc9Wq6NrVhepZpQmv0fOOBrVYFpCQTWRLFU4cwmNmZdXWFm9yBXqKsi7NNAN
+ 66mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=+BRZFVWbLfuzk9ULq1EDFqemn5viKeHr/qW6c11zA6M=;
- b=FexQQF96gxebqMHyKx1MdSNd8dj3pZSLzPkQxZdRztZKcwF9vb36fq8CuodjcxN05I
- nng4xaz4uShi8L70uwSz5sIlhDSRYP2j8UTG79PiIdAW9I86+FumJnwhMV3F9Z1LH+1q
- 5Ez9sgVXyLLnbM8pg/u4AW7bSnrziQv53O0zT2HA1oJn5WkkinslsYsFrp3iKwbps2Wx
- mTXfGuR2fpZLZBp0e72hJ4DHg+CVGlM9gghfcn2/OdGt4uvQLn43td+ysc67OjIRayrz
- xjlxmxVKQAPD4R8o/+hQdmYuu6MvFs+50AtZ/VLPwWStx7mRQKr2PQK/EpgbicBluPWI
- 4w+g==
-X-Gm-Message-State: AOAM532ImIXPsDx9SSWGtbjER2BFkmKFp7gIiiJUhcAxfOWBugLZsBqC
- 3EZRgrYKSy9jeNDQ13XVjFYccw==
-X-Google-Smtp-Source: ABdhPJwk5eLpO+NGjrJXYo2xhFbQgZgzNiwW27u7/aYJsvNGbC5iYtiRgWDKbor5f5gxh9kiVWE56w==
-X-Received: by 2002:a63:eb53:: with SMTP id b19mr12576051pgk.383.1617383666748; 
- Fri, 02 Apr 2021 10:14:26 -0700 (PDT)
+ bh=6c9mNIjNfmi+96MQiJgRPmZkwQtSAnQzmjk+Vy2JFW0=;
+ b=rLz3s+5xsHcsvM7RLjrqS1Jis6Lm5Hmjc4hEWG8/7rYpOE+zz7lPVgACPl9cmm4PO+
+ 9nO7sO4VGp2Epqt6/+U8kLLDWjWfp0+LGdtd5YryneG/PV+FCBKfrDNutqudpI+sG/rs
+ Ai9adwEYPau1kkiCeAdo7CZ974UZ7TVIDa+EbwDzmlIYiIGTSv78clcpXu13/zn1kvsd
+ iMuxiT3RLqDzQq3i43JmuKGBq1avOnUDWeONLTHHRuUPnW/j0RCkYueOSzDUoAyW0JOB
+ Er8e/gThWqcSc7Gmqe6pNDuivO0GZMawgSPxCdMn82GkdZDfzt0OK0gU5S2RO4xDPfYk
+ PA8Q==
+X-Gm-Message-State: AOAM533+CgugWCwopj1PXKWd4Zt8HWei1qEtDwuFIXMtU0bok+N22cBs
+ Z1c6F7nSpRv8NhOGx00AI9Qqpg==
+X-Google-Smtp-Source: ABdhPJzvjj5YOgIa5IleGOUlhy+kfCw/rH1oK6Tbw2Ft441rLIScTMmfRUA5l93pFSw240V7L9vKKA==
+X-Received: by 2002:a05:6a00:78a:b029:20a:309:2fcd with SMTP id
+ g10-20020a056a00078ab029020a03092fcdmr2439929pfu.35.1617383837290; 
+ Fri, 02 Apr 2021 10:17:17 -0700 (PDT)
 Received: from [192.168.51.248]
  (h216-228-167-147.bendor.dedicated.static.tds.net. [216.228.167.147])
- by smtp.gmail.com with ESMTPSA id x7sm8767460pfp.23.2021.04.02.10.14.25
+ by smtp.gmail.com with ESMTPSA id n73sm9234014pfd.196.2021.04.02.10.17.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 Apr 2021 10:14:26 -0700 (PDT)
-Subject: Re: [PATCH v2 3/5] target/riscv: Fix 32-bit HS mode access permissions
+ Fri, 02 Apr 2021 10:17:15 -0700 (PDT)
+Subject: Re: [PATCH v2 4/5] target/riscv: Use the RISCVException enum for CSR
+ operations
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
 References: <cover.1617290165.git.alistair.francis@wdc.com>
- <cb1ef2061547dc9028ce3cf4f6622588f9c09149.1617290165.git.alistair.francis@wdc.com>
+ <8566c4c271723f27f3ae8fc2429f906a459f17ce.1617290165.git.alistair.francis@wdc.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <05fb06ef-6a2e-e2a5-1972-52970b03ee76@linaro.org>
-Date: Fri, 2 Apr 2021 10:14:23 -0700
+Message-ID: <034b7d4f-5571-b793-3934-aec96ed18f22@linaro.org>
+Date: Fri, 2 Apr 2021 10:17:13 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.1
 MIME-Version: 1.0
-In-Reply-To: <cb1ef2061547dc9028ce3cf4f6622588f9c09149.1617290165.git.alistair.francis@wdc.com>
+In-Reply-To: <8566c4c271723f27f3ae8fc2429f906a459f17ce.1617290165.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -82,13 +84,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2021 17:14:30 -0000
+X-List-Received-Date: Fri, 02 Apr 2021 17:17:22 -0000
 
 On 4/1/21 8:17 AM, Alistair Francis wrote:
 > Signed-off-by: Alistair Francis<alistair.francis@wdc.com>
 > ---
->   target/riscv/csr.c | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
+>   target/riscv/cpu.h |  14 +-
+>   target/riscv/csr.c | 643 +++++++++++++++++++++++++++------------------
+>   2 files changed, 390 insertions(+), 267 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
