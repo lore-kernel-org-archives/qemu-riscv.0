@@ -1,77 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lSNRv-0003op-GL
-	for mharc-qemu-riscv@gnu.org; Fri, 02 Apr 2021 13:19:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40756)
+	id 1lSQ1f-0005LG-5i
+	for mharc-qemu-riscv@gnu.org; Fri, 02 Apr 2021 16:04:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47442)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lSNRq-0003oQ-Rt
- for qemu-riscv@nongnu.org; Fri, 02 Apr 2021 13:19:07 -0400
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:45884)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lSNRn-0005zK-0Z
- for qemu-riscv@nongnu.org; Fri, 02 Apr 2021 13:19:06 -0400
-Received: by mail-pj1-x1032.google.com with SMTP id
- kr3-20020a17090b4903b02900c096fc01deso2841840pjb.4
- for <qemu-riscv@nongnu.org>; Fri, 02 Apr 2021 10:19:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=a7X/JuysazCUdbLBNeqbvw1zbQswYaIoxcHcFQ6jC3Y=;
- b=Epc+SSr4daiw265r1Aj+SQGdcgWXdDqvBxE7FtcfMlEqbPS1wxCeb3DNLYnMggBJyT
- lsiJxGHuZl6h+QnLN80pohkCHU6pNqUyxWnA0dupe5Dh8h17MDCuowB7VGygoP54w1A3
- gP8wiDmO+M7rgq4X0OPtHKRQFBViokWl857tSNPsmLKCTHlJcgl9BMwSx28mooj68dI2
- V1U5jc/5FugsgMFpsDL8wOaWvN+uKnru5m0vu1qkikdsnotgurexC24Qa1ge0IFnd5RK
- HG5oz5Hnrh+iA9LjxkKoDsbsyLsd3mSWKg2coP8u2LMOj8pAw3xLBpjFvZulTQ47Ky6I
- 43hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=a7X/JuysazCUdbLBNeqbvw1zbQswYaIoxcHcFQ6jC3Y=;
- b=aqAHDkbs4eej5PPMAXsIZ3G69aOD1HSh9eSVPebjLCe2aVRKq2LCSBx6q9gEtc3prR
- t590mPNgln6hWVcYoS7pxX2R6IGrdNDPmsU8sv8PZdodc94gvBfCUdYzCBmE5rNUMy6j
- 1bUNF7Q0kD3kHHEZz305H8Z+mUVLbZWuUHn6IDdVKZHtlGX4wAoO7ZjilER3cTZoeHiH
- wZ9WndDbZn70R160nyXRRTGWN0B/K58/aldhtSNlK4Cve9auFAF6M0Kla9bKP+qsmqu3
- qCsCGv2xrGectRsxLhrDioockWgqof3L9xa4FG4zPuNBb/VD0U7tuf4VlsCP+f78KSUq
- 03wA==
-X-Gm-Message-State: AOAM530ZcXlN7OUHGiV4LCYgXgB4hmxyRDUv02YkVo0H8vzaB0oo9pp1
- HYwMAU2v84MZIvPhL0osSRA5L8/Nea5IeQ==
-X-Google-Smtp-Source: ABdhPJxF2wt8dyQ+lWER6xeSrO1ly1b52gKymh6vkTaGYB/Ko8yB38Gg1TDhJadxSzajHHxu8cGgUw==
-X-Received: by 2002:a17:90a:4005:: with SMTP id
- u5mr14783532pjc.6.1617383941433; 
- Fri, 02 Apr 2021 10:19:01 -0700 (PDT)
-Received: from [192.168.51.248]
- (h216-228-167-147.bendor.dedicated.static.tds.net. [216.228.167.147])
- by smtp.gmail.com with ESMTPSA id v23sm8501724pfn.71.2021.04.02.10.19.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 Apr 2021 10:19:00 -0700 (PDT)
-Subject: Re: [PATCH v2 5/5] target/riscv: Use RISCVException enum for CSR
- access
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
-References: <cover.1617290165.git.alistair.francis@wdc.com>
- <302b208f40373557fa11b351b5c9f43039ca8ea3.1617290165.git.alistair.francis@wdc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <3beab695-3414-1c61-91d1-f52a2e53f4c5@linaro.org>
-Date: Fri, 2 Apr 2021 10:18:58 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
+ (Exim 4.90_1)
+ (envelope-from <prvs=7197bd837=alistair.francis@wdc.com>)
+ id 1lSQ1X-0005KK-68; Fri, 02 Apr 2021 16:04:07 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:6345)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=7197bd837=alistair.francis@wdc.com>)
+ id 1lSQ1U-0003EZ-LR; Fri, 02 Apr 2021 16:04:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1617393844; x=1648929844;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=4pOLarYNC5b4CVIKibxf0S+h2HcJ0ERquVzbRSFSCGM=;
+ b=W17X8TT8gh6O6y71Es9M5OiCNsyBeXbb59ntJulSZmldwni9hoO7rxty
+ Sr/JZUVyMDpewAhHDd7M4zTTtVeChGbwWO6rhdamp3x1lTxeH/JXf/Obm
+ jIe5ZAp1XjbYVvuF7i3xaYjEG1nRw6vKXSbHchk911dRha6wKoYVoYzo6
+ 9sL1kgonDs7W/j57VBW0x5sZc33s9bDHg3anhcLt/iQHyRtZy1ffNP1Ok
+ xR0V98r6XIKky0VZBKW25TjSu4i5l2UCeg1XR9Lg6VfeXSDg/amXpQHpY
+ tVLoAxc+RBKrQMgHT1sxjjF+gDSK77JeKv3BGb9mooKA7nTlI5q3BvDde A==;
+IronPort-SDR: nLYrsi7c7nM94RGQCfIQF3of170z42aneeEPr7+W1OQZIVlBJ3IY2rXpw05kPbKKcz08xvMTZ6
+ +gMgmjpXliqQknjYHo/zHm2cz8atFAzjmLIvi8MeLtk4lI75ObTRB17CuvV/6CEZKkmD/kOzfO
+ zr9NuBRD79w0rWBZmGGwYfl1Ezqk4QeDfIZpsNgpvtCt3ISm3ZNzNtlCW1iKoGDkxKDdHoAwzV
+ gv6BVRCr8X2f3eIGJYXVBHjQYsK9QD8oAkj26NHkLLCjl1OWU5ukDqCL2WZIsygkdlCrruddgt
+ ZGY=
+X-IronPort-AV: E=Sophos;i="5.81,300,1610380800"; d="scan'208";a="163694212"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 03 Apr 2021 04:04:02 +0800
+IronPort-SDR: yTRbt051MeXN/eIgQyoNPK8j8I9uucvowxsP1EuzQHKWd7j33FCPf2b2qIUVK6p1wj3T1cyaB6
+ TFJrbMh4zUzNtHevhx6LKEQXk1u4PQCLp3hWr0/+E2L6eaFgYX9d5KRqw8zzA31gQEJcmXL2Id
+ /lIKo/BEHzHnMP4wordEhuo50sp9izCwfS0z3BMm5HCApDZZKYGRpu4jymTi3GnEi5434m1ibr
+ l3o0K/zi66q6FIcclOKUMPC4iB0a1tkHtEc+/8B0VLl5lI79vD5L5pwUkqbC1gXRAIpNJGDd2y
+ 5pK438kouuo39FtQUgKHSsS1
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Apr 2021 12:45:42 -0700
+IronPort-SDR: 1sO+NMff0dwKF9kOAARUJEh9TloJISumSOYZ0JfVdKJmCiAsU0P/PaQo2sC0OtSMw/wNPTTPV4
+ t8y+JYrxxF710nGTmQnOLhGQ8Ty/M8DDds9nk7L6bTj/kIn5RN2E9KfTWDHU2LvakWeL4Dphn8
+ B/x6GCNwdgMEg9nRi/Ujk77If20idjBS8Bd47pzVoUoiVp7pILjJOM6r+tA7EbIXsmEMrRpVQQ
+ qGwGQ6zL9fQbOsdM9sgbExHbM76Kz//iVRIrmDi86cZdVfSrfskUsr5ozsz0W/M+siSNvboyZJ
+ kp8=
+WDCIronportException: Internal
+Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.167.80])
+ by uls-op-cesaip01.wdc.com with ESMTP; 02 Apr 2021 13:04:01 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com
+Subject: [PATCH v1 0/8]  RISC-V: Steps towards running 32-bit guests on
+Date: Fri,  2 Apr 2021 16:02:06 -0400
+Message-Id: <cover.1617393702.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-In-Reply-To: <302b208f40373557fa11b351b5c9f43039ca8ea3.1617290165.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.71.153.144;
+ envelope-from=prvs=7197bd837=alistair.francis@wdc.com;
+ helo=esa5.hgst.iphmx.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,18 +81,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2021 17:19:07 -0000
+X-List-Received-Date: Fri, 02 Apr 2021 20:04:12 -0000
 
-On 4/1/21 8:18 AM, Alistair Francis wrote:
-> Signed-off-by: Alistair Francis<alistair.francis@wdc.com>
-> ---
->   target/riscv/cpu.h       | 11 +++++++----
->   target/riscv/csr.c       | 37 ++++++++++++++++++-------------------
->   target/riscv/gdbstub.c   |  8 ++++----
->   target/riscv/op_helper.c | 18 +++++++++---------
->   4 files changed, 38 insertions(+), 36 deletions(-)
+This is another step towards running 32-bit CPU code on the 64-bit
+softmmu builds for RISC-V.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+I have tested this and am able to run some 32-bit code, but eventually
+hit some issue.  This series doesn't allow users to use 32-bit CPUs with
+64-bit softmmu builds as it doesn't work yet. This series instead just
+gets us a little closer to being able to and removes more hardcoded
+macros so hopefully others also stop using them for new code.
 
-r~
+Alistair Francis (8):
+  target/riscv: Remove the hardcoded RVXLEN macro
+  target/riscv: Remove the hardcoded SSTATUS_SD macro
+  target/riscv: Remove the hardcoded HGATP_MODE macro
+  target/riscv: Remove the hardcoded MSTATUS_SD macro
+  target/riscv: Remove the hardcoded SATP_MODE macro
+  target/riscv: Remove the unused HSTATUS_WPRI macro
+  target/riscv: Remove an unused CASE_OP_32_64 macro
+  target/riscv: Include RV32 instructions in RV64 build
+
+ target/riscv/cpu.h            |  6 ----
+ target/riscv/cpu_bits.h       | 44 ----------------------------
+ target/riscv/insn16-32.decode | 24 ++++++++++++++++
+ target/riscv/insn16-64.decode | 31 ++++++++++++++++++++
+ target/riscv/cpu.c            |  6 +++-
+ target/riscv/cpu_helper.c     | 51 +++++++++++++++++++++++++--------
+ target/riscv/csr.c            | 54 +++++++++++++++++++++++++++--------
+ target/riscv/monitor.c        | 22 ++++++++++----
+ target/riscv/translate.c      | 43 ++++++++++++++++++++++------
+ target/riscv/meson.build      |  7 +++--
+ 10 files changed, 197 insertions(+), 91 deletions(-)
+
+-- 
+2.31.0
+
 
