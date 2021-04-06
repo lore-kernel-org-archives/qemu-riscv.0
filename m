@@ -1,50 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lTlTJ-0002dY-Hs
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Apr 2021 09:10:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53084)
+	id 1lTn8q-0004xX-KO
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Apr 2021 10:57:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50250)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <qemu@jade.fyi>)
- id 1lTjvj-0006N8-8t; Tue, 06 Apr 2021 07:31:36 -0400
-Received: from out2.migadu.com ([2001:41d0:2:aacc::]:15902)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <qemu@jade.fyi>)
- id 1lTjva-0007Ce-4e; Tue, 06 Apr 2021 07:31:33 -0400
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jade.fyi; s=key1;
- t=1617708676;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=MpAayDMbblMybCul2Z9h8sgj2liMBXeXs0+0sRI2suM=;
- b=uxv8Ky/dSJFMd6EEnLIGKp5S3Bb0HmfUdLmaErJqKuv/dhADSGLrlojs5MPBEiNk27BJBL
- kBRfn8kS9UtW3V7R4I7ZxMXfmQ+RhcKGjDyZ/lfKjdccac3gglzdDya2+iISvOnYwv5cJ5
- Dhmf1w7rJmyq33b1u7ujKNA8P5+WP1M=
-From: Jade Fink <qemu@jade.fyi>
-To: qemu-devel@nongnu.org
-Cc: Jade Fink <qemu@jade.fyi>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH] riscv: don't look at SUM when accessing memory from a
- debugger context
-Date: Tue,  6 Apr 2021 04:31:09 -0700
-Message-Id: <20210406113109.1031033-1-qemu@jade.fyi>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1lTn8o-0004vC-N6
+ for qemu-riscv@nongnu.org; Tue, 06 Apr 2021 10:57:18 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c]:56047)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1lTn8l-00033U-Er
+ for qemu-riscv@nongnu.org; Tue, 06 Apr 2021 10:57:18 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id nh5so5855925pjb.5
+ for <qemu-riscv@nongnu.org>; Tue, 06 Apr 2021 07:57:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=oispWkNDsIc062/KAagewBcewbY86P0WF835Cw+20fU=;
+ b=g8/KDzzm8c8tzisUNERsmNHq1zI7Rc0IZ0k4Y+9Tf6luUlLvXOn/lch2dbzlg90r7t
+ JRz3x6Dvdd1hzYDLzSN+iRS9Fd87/Gkf7GohnfgmTxN7VyxYJqMERrAie+Zcef6UmIL2
+ dGOVxVYwgIYZ8WHV8NgyiEpbNkcgTQJeFjUHDhlFIAQlVVdXbY2zZnDXaWYGmX4N8uAJ
+ jzdmoh0mdmaOY1vgNuEVbTDxRGfcw1jqN8O1CQVWAkIxd+bo7EpMy30p1k4q8o3gL/yE
+ X4zaTYgViQfbHxIr0CyykY5X3AnUiQav54xk9iH3JCgCI+DtsUXVsVMsguMYo0OaIfJV
+ qlvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=oispWkNDsIc062/KAagewBcewbY86P0WF835Cw+20fU=;
+ b=gggt/hoRIleDXe3hFzK5RaKkCbll+BVwVwOk2bpx1eE7KgLvJnAqk0hcT2QYO301oq
+ nqrKFQQPD5puDEoya1sM0m6rC0fr7h5roef/+rq21vmVOmElsfcCgfw2vU7uqFWoRWUA
+ 3auAdC9zV3JTxKPDlAO9DX4IC9HRNQrFKxn7QKQZ1g7JD/JmvI0ed/hYktu5T+8Mz6G4
+ D7AUGtLgMyunMvpnDC7faHkTxbE9mxeTcnQVHBiDCoxr5OoEnuXu/4E8Q+VDAvk7FlTt
+ KQ8TRm/dNs8ivkmMQBh19TwAdLgp56exyfVuvCnoqcBJBJdsH/VIZ0FViU0NepJmOlHb
+ uB8Q==
+X-Gm-Message-State: AOAM530hW7UJkS98921GAnnUksgwrHnGF4GuWgkIdDYxBpWHqC35cbRk
+ TPAjsk+tO46d9nqRTgCnxqTy/A==
+X-Google-Smtp-Source: ABdhPJwO+QoHC1DKfWl3P/q3KK9n8HS0D1+clev2ehjGthlDqXXm0wlvqwiXSnztoFvqyNbIX+iIGQ==
+X-Received: by 2002:a17:902:525:b029:e8:e347:b07f with SMTP id
+ 34-20020a1709020525b02900e8e347b07fmr13709979plf.34.1617721033168; 
+ Tue, 06 Apr 2021 07:57:13 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.131.83])
+ by smtp.gmail.com with ESMTPSA id y12sm19465200pfq.118.2021.04.06.07.57.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Apr 2021 07:57:12 -0700 (PDT)
+Subject: Re: [PATCH v1 8/8] target/riscv: Include RV32 instructions in RV64
+ build
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
+References: <cover.1617393702.git.alistair.francis@wdc.com>
+ <1c19d0112fae5ec6087cfc415f0d6cc56495220b.1617393702.git.alistair.francis@wdc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <7aea1ab9-ac9b-5245-7b3a-b6d87bef6c0d@linaro.org>
+Date: Tue, 6 Apr 2021 07:57:10 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Migadu-Auth-User: i@jade.fyi
-Received-SPF: pass client-ip=2001:41d0:2:aacc::; envelope-from=qemu@jade.fyi;
- helo=out2.migadu.com
+In-Reply-To: <1c19d0112fae5ec6087cfc415f0d6cc56495220b.1617393702.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 06 Apr 2021 09:10:20 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -56,101 +83,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Apr 2021 11:31:42 -0000
+X-List-Received-Date: Tue, 06 Apr 2021 14:57:19 -0000
 
-Previously the qemu monitor and gdbstub looked at SUM and refused to
-perform accesses to user memory if it is off, which was an impediment to
-debugging.
+On 4/2/21 1:03 PM, Alistair Francis wrote:
+> Signed-off-by: Alistair Francis<alistair.francis@wdc.com>
+> ---
+>   target/riscv/insn16-32.decode | 24 ++++++++++++++++++++++++
+>   target/riscv/insn16-64.decode | 31 +++++++++++++++++++++++++++++++
+>   target/riscv/translate.c      | 18 +++++++++++++++++-
+>   target/riscv/meson.build      |  7 +++++--
+>   4 files changed, 77 insertions(+), 3 deletions(-)
 
-Signed-off-by: Jade Fink <qemu@jade.fyi>
----
- target/riscv/cpu_helper.c | 20 ++++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
+Having these split out from the main decode file was a cool trick when we were 
+sure that we never needed to support both.  Now, I think it would be better to 
+merge the patterns back in to the main insn16.decode file.
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 83a6bcfad0..18ea2cba57 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -299,12 +299,14 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-  * @first_stage: Are we in first stage translation?
-  *               Second stage is used for hypervisor guest translation
-  * @two_stage: Are we going to perform two stage translation
-+ * @is_debug: Is this access from a debugger or the monitor?
-  */
- static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-                                 int *prot, target_ulong addr,
-                                 target_ulong *fault_pte_addr,
-                                 int access_type, int mmu_idx,
--                                bool first_stage, bool two_stage)
-+                                bool first_stage, bool two_stage,
-+                                bool is_debug)
- {
-     /* NOTE: the env->pc value visible here will not be
-      * correct, but the value visible to the exception handler
-@@ -369,7 +371,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-         widened = 2;
-     }
-     /* status.SUM will be ignored if execute on background */
--    sum = get_field(env->mstatus, MSTATUS_SUM) || use_background;
-+    sum = get_field(env->mstatus, MSTATUS_SUM) || use_background || is_debug;
-     switch (vm) {
-     case VM_1_10_SV32:
-       levels = 2; ptidxbits = 10; ptesize = 4; break;
-@@ -428,7 +430,8 @@ restart:
-             /* Do the second stage translation on the base PTE address. */
-             int vbase_ret = get_physical_address(env, &vbase, &vbase_prot,
-                                                  base, NULL, MMU_DATA_LOAD,
--                                                 mmu_idx, false, true);
-+                                                 mmu_idx, false, true,
-+                                                 is_debug);
- 
-             if (vbase_ret != TRANSLATE_SUCCESS) {
-                 if (fault_pte_addr) {
-@@ -616,13 +619,13 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
-     int mmu_idx = cpu_mmu_index(&cpu->env, false);
- 
-     if (get_physical_address(env, &phys_addr, &prot, addr, NULL, 0, mmu_idx,
--                             true, riscv_cpu_virt_enabled(env))) {
-+                             true, riscv_cpu_virt_enabled(env), true)) {
-         return -1;
-     }
- 
-     if (riscv_cpu_virt_enabled(env)) {
-         if (get_physical_address(env, &phys_addr, &prot, phys_addr, NULL,
--                                 0, mmu_idx, false, true)) {
-+                                 0, mmu_idx, false, true, true)) {
-             return -1;
-         }
-     }
-@@ -714,7 +717,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         /* Two stage lookup */
-         ret = get_physical_address(env, &pa, &prot, address,
-                                    &env->guest_phys_fault_addr, access_type,
--                                   mmu_idx, true, true);
-+                                   mmu_idx, true, true, false);
- 
-         /*
-          * A G-stage exception may be triggered during two state lookup.
-@@ -736,7 +739,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-             im_address = pa;
- 
-             ret = get_physical_address(env, &pa, &prot2, im_address, NULL,
--                                       access_type, mmu_idx, false, true);
-+                                       access_type, mmu_idx, false, true,
-+                                       false);
- 
-             qemu_log_mask(CPU_LOG_MMU,
-                     "%s 2nd-stage address=%" VADDR_PRIx " ret %d physical "
-@@ -765,7 +769,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     } else {
-         /* Single stage lookup */
-         ret = get_physical_address(env, &pa, &prot, address, NULL,
--                                   access_type, mmu_idx, true, false);
-+                                   access_type, mmu_idx, true, false, false);
- 
-         qemu_log_mask(CPU_LOG_MMU,
-                       "%s address=%" VADDR_PRIx " ret %d physical "
--- 
-2.31.1
+You'd begin by adding a REQUIRE_64BIT(ctx) macro, much like the other REQUIRE 
+macros in translate.c, using the translate-local is_32bit() function as 
+discussed earlier.
 
+You add this to all of the trans_* functions that are currently #ifdef 
+TARGET_RISCV64, and merge the insn32-64.decode bits in first.
+
+There may well be an issue of missing helper functions, particularly when it 
+comes to RVF/RVD/RVV.  There's a suggestion that I made for Claudio for i386 
+that may help here:
+
+https://lists.gnu.org/archive/html/qemu-devel/2021-02/msg08595.html
+
+where you add stubs that allow the gen_helper_foo() function to be declared, 
+insist that it be optimized away, and reduce to an abort with -O0.
+
+Only after insn32.decode is complete, do insn16.decode.  That's because many of 
+the insns here will need the REQUIRE_64BIT in place for correctness.
+
+E.g.
+
+{
+   ld          011  ... ... .. ... 00 @cl_d
+   flw         011  ... ... .. ... 00 @cl_w
+}
+
+Since ld already has REQUIRE_64BIT, for is_32bit it returns false, and we fall 
+into the flw code.
+
+There will be one extra helper required, when the 64-bit RVC insn has a set of 
+illegal operands:
+
+static bool trans_c64_illegal(DisasContext *ctx, arg_empty *a)
+{
+     REQUIRE_64BIT(ctx);
+     return trans_illegal(ctx, a);
+}
+
+for use with quadrant 1:
+
+{
+   c64_illegal 001 -  00000  ----- 01 # c.addiw, RES rd=0
+   addiw       001 .  .....  ..... 01 @ci
+   jal         001     ........... 01 @cj    rd=1  # C.JAL
+
+}
+
+and quadrant 2:
+
+{
+   c64_illegal 011 -  00000  ----- 10 # c.ldsp, RES rd=0
+   ld          011 .  .....  ..... 10 @c_ldsp
+   flw         011 .  .....  ..... 10 @c_lwsp
+}
+
+
+r~
 
