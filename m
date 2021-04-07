@@ -1,62 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lU96r-0003vk-DS
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Apr 2021 10:24:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35218)
+	id 1lU98a-0005fu-VE
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Apr 2021 10:26:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36920)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lU96n-0003t6-TG; Wed, 07 Apr 2021 10:24:41 -0400
-Received: from mail-yb1-xb2e.google.com ([2607:f8b0:4864:20::b2e]:45020)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lU98Y-0005cW-Gp; Wed, 07 Apr 2021 10:26:31 -0400
+Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:46752)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lU96l-0008Mu-Qj; Wed, 07 Apr 2021 10:24:41 -0400
-Received: by mail-yb1-xb2e.google.com with SMTP id j206so11694921ybj.11;
- Wed, 07 Apr 2021 07:24:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lU98N-00010V-JW; Wed, 07 Apr 2021 10:26:30 -0400
+Received: by mail-il1-x12f.google.com with SMTP id p8so12004668ilm.13;
+ Wed, 07 Apr 2021 07:26:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=iFaqjRvMA2GttUCQ/Y+2CQe4b4GAeBCsmahPte5h26c=;
- b=VDnqG2ZM2pdWnlGYPKcYVIolvp8+uUoE9mjv9DrPpOSv6qon0nsKfEOpK37i28gKwK
- RMT0xmK0bcODfDG2VfYPvpcq4XmgkhlwcOoHZq9ynxuD2IlnQdEiieWklv6ABJ0wXdnK
- ZC91S/aVKzmEgGpzpL6V3Jslrs5zG9T8WZCfdDmor92jXNhhdUmNeXTeed5VJgYda7N7
- mlsDmYxLE2ZuYYg1USZiMM3vB39uUe/d0KMuaeAdWs+2a+X4nLHDD4C1pyyiznHiqwug
- foGoCdh3+fU3Pav4L145c2phJMGWjDywKOeB2BfiIMBmfFCjSLDpr6FOvACmOBe3Ozd/
- 5AVw==
+ :cc; bh=Acf9CiAzaFeH8eLeZ5du5p1Kh8sUSQ3gzUGdD30l1NM=;
+ b=AGwR+KmYxXagDXyMggYDEwLfrXTb70/vkDl0v8Nmqt0BpvGfzMjNXfHXNyBppgQkTY
+ TFaQ/BdEBTZH8CS5CZWy9XVKtpUWWqq6BQhrvckARu6gSk1HlYUZt9BznONxjJTd8ojb
+ 4IsgOqmmV4w8a2GhVMWUE1X6lRt3KTJDW42dJRUEB5JhDEXLvMXSUprxcXsAb0ES/23w
+ FTmvNRCDb7dYPmHPM6myWUOHlXHzT5Mc+REWtKFCJR8rK3wxKlwoU4aCD7CYmSnbbtdD
+ ciStx10i/08ppJaTRXYxMXmLsaQIqRPS2ip8gcK2rIiqwSJiZSiD2CPWIVeqXCq/6JZe
+ ScgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=iFaqjRvMA2GttUCQ/Y+2CQe4b4GAeBCsmahPte5h26c=;
- b=sTLmDrHFo3j+c2Kw6Ut6Ag//nc1X1XJLFpm7w0XkGao4eGCdCmJKrJbUKSkQ5NRIIh
- M3p1Ztnuw/MqhjNX1W6hbWYsahAF0H5IfxFGXLZpU8tq7jC3gHl7Fk/SKdxbGKzebDcu
- lU6AFytkq4hCf+t7qLpqFlIfb2hpbkpTGDsoifW8dtsVRAtRUSW10DahRFQmF7kL0OjC
- j3eqOhCWXTgZMztp7F9uzDOIM8nsQTB9uixezhjJ7RmbFyUoKNz8zqNj1unz/RxLUkpu
- ZcHCyIUYPNNmDkGI/v3ShA0jiPEmrHePhfhP5+Yd4Qy8NtQ9SphfeZDyIT6NGTlwWtXe
- LshQ==
-X-Gm-Message-State: AOAM531UEn168sdLkxRrlcGT9hVDOiX5Cc3BYiZSpyFv0QRgArImsg6x
- QBwFBzpZitRjjV8KhsIevoC/8kiK26cZVHweKZU=
-X-Google-Smtp-Source: ABdhPJzdxtqdYit4lvUSUXoNkFlOk7gSaYfuyLu7THFsdPfwySVNZdVXr5Yc8v83OoYwQt3MKC1HHLSxw7B9ZK0GNEM=
-X-Received: by 2002:a25:4154:: with SMTP id o81mr5068542yba.239.1617805478410; 
- Wed, 07 Apr 2021 07:24:38 -0700 (PDT)
+ bh=Acf9CiAzaFeH8eLeZ5du5p1Kh8sUSQ3gzUGdD30l1NM=;
+ b=DNQqQcLlkDYi5Ich2Ip+lwxwIyyP+hB8TZQyOpNe+LTwtARqu9CrP1vz3yRmsW9lar
+ AQd4hNa5Zgo55JGqYkxnY+jlJPxd9J4H+lWZmJoL0TdIuI2WQZq3AC9shA+r/c5eSKaG
+ hZbv2O1srvUtjXgVE1SH+ti5FQjwrXDHNVQULVDZwwIwAwtI4tH5HYetTvvWR2ZnqQmW
+ 65nS8tueog6yBahUIltgB+PVFitONPCleT/mlXpI7uN9uEu/gsfn2riXu2s/7TvzILhP
+ njLJDE5O+mA9Mz5NUGXSHgMZINunNTiAstauMTbiK5Ox3Phn7RK0F8Gc8z088DO0oQlG
+ 8whA==
+X-Gm-Message-State: AOAM530Hadnv+qvUR4jxoF0vFm7kgSlChLo4f7iBGvlzWHaiGqV8zuZQ
+ 9EIkrXGkAv1Y1GvTylNdH8/pxhrl8Wew0VKi49Q=
+X-Google-Smtp-Source: ABdhPJxbN7EQGTgDdIELhWYxvhXKhYLSnNwoZ6qFtiQZp59gtiXbEN9TBSSicrUSbWaY2O68X+Iwfykq2ecnG7jY5n0=
+X-Received: by 2002:a05:6e02:1989:: with SMTP id
+ g9mr2977298ilf.40.1617805571754; 
+ Wed, 07 Apr 2021 07:26:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1617367533.git.alistair.francis@wdc.com>
- <5c59f6a40a5bdff35c086f35665e97de5b872c64.1617367533.git.alistair.francis@wdc.com>
-In-Reply-To: <5c59f6a40a5bdff35c086f35665e97de5b872c64.1617367533.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 7 Apr 2021 22:24:27 +0800
-Message-ID: <CAEUhbmW=O4E7npyoBPRx9J1WOD+=wWKWq_dhz4PnxvKD240PHQ@mail.gmail.com>
-Subject: Re: [PATCH v1 3/8] target/riscv: Add the ePMP feature
+References: <6564ba829c40ad9aa7d28f43be69d8eb5cf4b56b.1617749142.git.alistair.francis@wdc.com>
+In-Reply-To: <6564ba829c40ad9aa7d28f43be69d8eb5cf4b56b.1617749142.git.alistair.francis@wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 7 Apr 2021 10:23:51 -0400
+Message-ID: <CAKmqyKPX_7F2-nsS0Ea1oimJC9jKe3RfvFH-yG91dVXhy3PzSA@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] MAINTAINERS: Update the RISC-V CPU Maintainers
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>,
- Ethan.Lee.QNL@gmail.com, weiying_hou@outlook.com, camiyoru@gmail.com
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2e;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -71,31 +73,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Apr 2021 14:24:42 -0000
+X-List-Received-Date: Wed, 07 Apr 2021 14:26:32 -0000
 
-On Fri, Apr 2, 2021 at 8:50 PM Alistair Francis
+On Tue, Apr 6, 2021 at 6:51 PM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
-
-nits: I guess mentioning the ePMP spec URL in the commit message might
-be helpful
-
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu.h | 1 +
->  1 file changed, 1 insertion(+)
+> Update the RISC-V maintainers by removing Sagar and Bastian who haven't
+> been involved recently.
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 0a33d387ba..8dcb4a4bb2 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -80,6 +80,7 @@
->  enum {
->      RISCV_FEATURE_MMU,
->      RISCV_FEATURE_PMP,
-> +    RISCV_FEATURE_EPMP,
->      RISCV_FEATURE_MISA
->  };
+> Also add Bin who has been helping with reviews.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Thanks!
+
+Applied to riscv-to-apply.next
+
+Alistair
+
+> ---
+> I have run this by all of the people involved and they are all ok with
+> the change.
+>
+>  MAINTAINERS | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 69003cdc3c..541bd264b2 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -295,9 +295,8 @@ F: tests/acceptance/machine_ppc.py
+>
+>  RISC-V TCG CPUs
+>  M: Palmer Dabbelt <palmer@dabbelt.com>
+> -M: Alistair Francis <Alistair.Francis@wdc.com>
+> -M: Sagar Karandikar <sagark@eecs.berkeley.edu>
+> -M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+> +M: Alistair Francis <alistair.francis@wdc.com>
+> +M: Bin Meng <bin.meng@windriver.com>
+>  L: qemu-riscv@nongnu.org
+>  S: Supported
+>  F: target/riscv/
+> --
+> 2.31.0
+>
 
