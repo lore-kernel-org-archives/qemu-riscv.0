@@ -1,58 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lU98a-0005fu-VE
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Apr 2021 10:26:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36920)
+	id 1lU99l-0007MC-On
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Apr 2021 10:27:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38096)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lU98Y-0005cW-Gp; Wed, 07 Apr 2021 10:26:31 -0400
-Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:46752)
+ id 1lU99j-0007Iz-Ak; Wed, 07 Apr 2021 10:27:43 -0400
+Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:37491)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lU98N-00010V-JW; Wed, 07 Apr 2021 10:26:30 -0400
-Received: by mail-il1-x12f.google.com with SMTP id p8so12004668ilm.13;
- Wed, 07 Apr 2021 07:26:12 -0700 (PDT)
+ id 1lU99c-0001pO-8w; Wed, 07 Apr 2021 10:27:43 -0400
+Received: by mail-il1-x134.google.com with SMTP id z9so16379032ilb.4;
+ Wed, 07 Apr 2021 07:27:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Acf9CiAzaFeH8eLeZ5du5p1Kh8sUSQ3gzUGdD30l1NM=;
- b=AGwR+KmYxXagDXyMggYDEwLfrXTb70/vkDl0v8Nmqt0BpvGfzMjNXfHXNyBppgQkTY
- TFaQ/BdEBTZH8CS5CZWy9XVKtpUWWqq6BQhrvckARu6gSk1HlYUZt9BznONxjJTd8ojb
- 4IsgOqmmV4w8a2GhVMWUE1X6lRt3KTJDW42dJRUEB5JhDEXLvMXSUprxcXsAb0ES/23w
- FTmvNRCDb7dYPmHPM6myWUOHlXHzT5Mc+REWtKFCJR8rK3wxKlwoU4aCD7CYmSnbbtdD
- ciStx10i/08ppJaTRXYxMXmLsaQIqRPS2ip8gcK2rIiqwSJiZSiD2CPWIVeqXCq/6JZe
- ScgQ==
+ :cc; bh=UqK/5OB50WtBsb/rPCngHvMb9bATeUJ0gNM6BJUH8bI=;
+ b=EclhhbuemIo8KJEYd71BOk8Cz5wjxpXMgVYqaGeao3Z4HqHdFtF0hUyZtuje/wZ/8x
+ nERw1Z42iUvouDz2vEvcl1pPqr0VHsIecND+f5Pvuz5zm11n/V83czFsE8deTLXWkkn+
+ EA0HmmLlZTcnhSU7hdsgKOi6I1EFlGnUljEGwYAfiGTPX+Tc2AfWRHB/eRfHTlrkBpMy
+ JTGxKcHsga2ssmIlwaHy+r61ITYbFOSrVI7KQmAte8JFYdviQf4nho0hxWI7nYU4x6Ee
+ pQq95qt9woeAMmrOGGKIeLuqKu5wvqV1H9X23Cl/AAQK74aWBnstNba3duomzFRz5xcc
+ THug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Acf9CiAzaFeH8eLeZ5du5p1Kh8sUSQ3gzUGdD30l1NM=;
- b=DNQqQcLlkDYi5Ich2Ip+lwxwIyyP+hB8TZQyOpNe+LTwtARqu9CrP1vz3yRmsW9lar
- AQd4hNa5Zgo55JGqYkxnY+jlJPxd9J4H+lWZmJoL0TdIuI2WQZq3AC9shA+r/c5eSKaG
- hZbv2O1srvUtjXgVE1SH+ti5FQjwrXDHNVQULVDZwwIwAwtI4tH5HYetTvvWR2ZnqQmW
- 65nS8tueog6yBahUIltgB+PVFitONPCleT/mlXpI7uN9uEu/gsfn2riXu2s/7TvzILhP
- njLJDE5O+mA9Mz5NUGXSHgMZINunNTiAstauMTbiK5Ox3Phn7RK0F8Gc8z088DO0oQlG
- 8whA==
-X-Gm-Message-State: AOAM530Hadnv+qvUR4jxoF0vFm7kgSlChLo4f7iBGvlzWHaiGqV8zuZQ
- 9EIkrXGkAv1Y1GvTylNdH8/pxhrl8Wew0VKi49Q=
-X-Google-Smtp-Source: ABdhPJxbN7EQGTgDdIELhWYxvhXKhYLSnNwoZ6qFtiQZp59gtiXbEN9TBSSicrUSbWaY2O68X+Iwfykq2ecnG7jY5n0=
-X-Received: by 2002:a05:6e02:1989:: with SMTP id
- g9mr2977298ilf.40.1617805571754; 
- Wed, 07 Apr 2021 07:26:11 -0700 (PDT)
+ bh=UqK/5OB50WtBsb/rPCngHvMb9bATeUJ0gNM6BJUH8bI=;
+ b=tuAqriMF+0eqgcViUBopZ1zT43H5Lt/koK85ZKZv1w+ptCaXz2G0h0XZYeI7QvDsjj
+ U9NGbh7YjZzCo9rQ8eBsyu+hWnWlo6oVXb+DZqbMn3RI0G+4+xB7ZuZUpd8onw85Bvyj
+ wJGsznCvy84CNZyaKrLEcDelzn6OCbY4VxGW8a8U7hpuPB8cCItB2zgzq8betV0uTEOi
+ Cso4H+DfZQYBCbZrLucx6YbwUBzoRzK3vwJAhth/HPmmP6j0lgNCEQdPrET9VFgzm36I
+ pwWkUHezoZfW//NWNpnp/cefHqI7HEHy5lFveYY2eGJw7AyyuJWTeZXRGRYQ8aqBMNzs
+ BEyg==
+X-Gm-Message-State: AOAM531Y6KcilBdZ7z146m47yJZjQ9Ere7vn/y6+AaJmqfv5xmblnonh
+ B/hXySINSxYx52VYNwYrcrXH4Y0GLP95yzUg+M1bkw+L8HY=
+X-Google-Smtp-Source: ABdhPJzgMaiEa13N9XSkwR77mTzdBdRwMRaOPoz6MeTP+U2fg9LuX/vyCcer1qPIx7Fw5iuEgxxJ5Lhu4Js1iY3Sw5A=
+X-Received: by 2002:a05:6e02:5a2:: with SMTP id
+ k2mr3061031ils.177.1617805654786; 
+ Wed, 07 Apr 2021 07:27:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <6564ba829c40ad9aa7d28f43be69d8eb5cf4b56b.1617749142.git.alistair.francis@wdc.com>
-In-Reply-To: <6564ba829c40ad9aa7d28f43be69d8eb5cf4b56b.1617749142.git.alistair.francis@wdc.com>
+References: <e92b696f1809c9fa4410da2e9f23c414db5a6960.1617202791.git.alistair.francis@wdc.com>
+In-Reply-To: <e92b696f1809c9fa4410da2e9f23c414db5a6960.1617202791.git.alistair.francis@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 7 Apr 2021 10:23:51 -0400
-Message-ID: <CAKmqyKPX_7F2-nsS0Ea1oimJC9jKe3RfvFH-yG91dVXhy3PzSA@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] MAINTAINERS: Update the RISC-V CPU Maintainers
+Date: Wed, 7 Apr 2021 10:25:14 -0400
+Message-ID: <CAKmqyKO5Wjp1zjnFjeF48KNarq4nm6sTT9ZQyEvQeZADETtK6g@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] hw/opentitan: Update the interrupt layout
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x134.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,15 +71,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Apr 2021 14:26:32 -0000
+X-List-Received-Date: Wed, 07 Apr 2021 14:27:43 -0000
 
-On Tue, Apr 6, 2021 at 6:51 PM Alistair Francis
+On Wed, Mar 31, 2021 at 11:02 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
-> Update the RISC-V maintainers by removing Sagar and Bastian who haven't
-> been involved recently.
->
-> Also add Bin who has been helping with reviews.
+> Update the OpenTitan interrupt layout to match the latest OpenTitan
+> bitstreams. This involves changing the Ibex PLIC memory layout and the
+> UART interrupts.
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 
@@ -92,28 +89,101 @@ Applied to riscv-to-apply.next
 Alistair
 
 > ---
-> I have run this by all of the people involved and they are all ok with
-> the change.
+>  include/hw/riscv/opentitan.h | 16 ++++++++--------
+>  hw/intc/ibex_plic.c          | 20 ++++++++++----------
+>  hw/riscv/opentitan.c         |  8 ++++----
+>  3 files changed, 22 insertions(+), 22 deletions(-)
 >
->  MAINTAINERS | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
+> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+> index a5ea3a5e4e..aab9bc9245 100644
+> --- a/include/hw/riscv/opentitan.h
+> +++ b/include/hw/riscv/opentitan.h
+> @@ -82,14 +82,14 @@ enum {
+>  };
 >
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 69003cdc3c..541bd264b2 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -295,9 +295,8 @@ F: tests/acceptance/machine_ppc.py
+>  enum {
+> -    IBEX_UART_RX_PARITY_ERR_IRQ = 0x28,
+> -    IBEX_UART_RX_TIMEOUT_IRQ = 0x27,
+> -    IBEX_UART_RX_BREAK_ERR_IRQ = 0x26,
+> -    IBEX_UART_RX_FRAME_ERR_IRQ = 0x25,
+> -    IBEX_UART_RX_OVERFLOW_IRQ = 0x24,
+> -    IBEX_UART_TX_EMPTY_IRQ = 0x23,
+> -    IBEX_UART_RX_WATERMARK_IRQ = 0x22,
+> -    IBEX_UART_TX_WATERMARK_IRQ = 0x21,
+> +    IBEX_UART0_RX_PARITY_ERR_IRQ = 8,
+> +    IBEX_UART0_RX_TIMEOUT_IRQ = 7,
+> +    IBEX_UART0_RX_BREAK_ERR_IRQ = 6,
+> +    IBEX_UART0_RX_FRAME_ERR_IRQ = 5,
+> +    IBEX_UART0_RX_OVERFLOW_IRQ = 4,
+> +    IBEX_UART0_TX_EMPTY_IRQ = 3,
+> +    IBEX_UART0_RX_WATERMARK_IRQ = 2,
+> +    IBEX_UART0_TX_WATERMARK_IRQ = 1,
+>  };
 >
->  RISC-V TCG CPUs
->  M: Palmer Dabbelt <palmer@dabbelt.com>
-> -M: Alistair Francis <Alistair.Francis@wdc.com>
-> -M: Sagar Karandikar <sagark@eecs.berkeley.edu>
-> -M: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> +M: Alistair Francis <alistair.francis@wdc.com>
-> +M: Bin Meng <bin.meng@windriver.com>
->  L: qemu-riscv@nongnu.org
->  S: Supported
->  F: target/riscv/
+>  #endif
+> diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
+> index c1b72fcab0..edf76e4f61 100644
+> --- a/hw/intc/ibex_plic.c
+> +++ b/hw/intc/ibex_plic.c
+> @@ -225,23 +225,23 @@ static void ibex_plic_irq_request(void *opaque, int irq, int level)
+>
+>  static Property ibex_plic_properties[] = {
+>      DEFINE_PROP_UINT32("num-cpus", IbexPlicState, num_cpus, 1),
+> -    DEFINE_PROP_UINT32("num-sources", IbexPlicState, num_sources, 80),
+> +    DEFINE_PROP_UINT32("num-sources", IbexPlicState, num_sources, 176),
+>
+>      DEFINE_PROP_UINT32("pending-base", IbexPlicState, pending_base, 0),
+> -    DEFINE_PROP_UINT32("pending-num", IbexPlicState, pending_num, 3),
+> +    DEFINE_PROP_UINT32("pending-num", IbexPlicState, pending_num, 6),
+>
+> -    DEFINE_PROP_UINT32("source-base", IbexPlicState, source_base, 0x0c),
+> -    DEFINE_PROP_UINT32("source-num", IbexPlicState, source_num, 3),
+> +    DEFINE_PROP_UINT32("source-base", IbexPlicState, source_base, 0x18),
+> +    DEFINE_PROP_UINT32("source-num", IbexPlicState, source_num, 6),
+>
+> -    DEFINE_PROP_UINT32("priority-base", IbexPlicState, priority_base, 0x18),
+> -    DEFINE_PROP_UINT32("priority-num", IbexPlicState, priority_num, 80),
+> +    DEFINE_PROP_UINT32("priority-base", IbexPlicState, priority_base, 0x30),
+> +    DEFINE_PROP_UINT32("priority-num", IbexPlicState, priority_num, 177),
+>
+> -    DEFINE_PROP_UINT32("enable-base", IbexPlicState, enable_base, 0x200),
+> -    DEFINE_PROP_UINT32("enable-num", IbexPlicState, enable_num, 3),
+> +    DEFINE_PROP_UINT32("enable-base", IbexPlicState, enable_base, 0x300),
+> +    DEFINE_PROP_UINT32("enable-num", IbexPlicState, enable_num, 6),
+>
+> -    DEFINE_PROP_UINT32("threshold-base", IbexPlicState, threshold_base, 0x20c),
+> +    DEFINE_PROP_UINT32("threshold-base", IbexPlicState, threshold_base, 0x318),
+>
+> -    DEFINE_PROP_UINT32("claim-base", IbexPlicState, claim_base, 0x210),
+> +    DEFINE_PROP_UINT32("claim-base", IbexPlicState, claim_base, 0x31c),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+>
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index e168bffe69..30dca1ee91 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -149,16 +149,16 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+>      sysbus_mmio_map(SYS_BUS_DEVICE(&s->uart), 0, memmap[IBEX_DEV_UART].base);
+>      sysbus_connect_irq(SYS_BUS_DEVICE(&s->uart),
+>                         0, qdev_get_gpio_in(DEVICE(&s->plic),
+> -                       IBEX_UART_TX_WATERMARK_IRQ));
+> +                       IBEX_UART0_TX_WATERMARK_IRQ));
+>      sysbus_connect_irq(SYS_BUS_DEVICE(&s->uart),
+>                         1, qdev_get_gpio_in(DEVICE(&s->plic),
+> -                       IBEX_UART_RX_WATERMARK_IRQ));
+> +                       IBEX_UART0_RX_WATERMARK_IRQ));
+>      sysbus_connect_irq(SYS_BUS_DEVICE(&s->uart),
+>                         2, qdev_get_gpio_in(DEVICE(&s->plic),
+> -                       IBEX_UART_TX_EMPTY_IRQ));
+> +                       IBEX_UART0_TX_EMPTY_IRQ));
+>      sysbus_connect_irq(SYS_BUS_DEVICE(&s->uart),
+>                         3, qdev_get_gpio_in(DEVICE(&s->plic),
+> -                       IBEX_UART_RX_OVERFLOW_IRQ));
+> +                       IBEX_UART0_RX_OVERFLOW_IRQ));
+>
+>      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
+>          memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
 > --
 > 2.31.0
 >
