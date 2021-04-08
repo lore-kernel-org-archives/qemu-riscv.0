@@ -1,62 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lUUEE-0008PI-SI
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Apr 2021 08:57:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50154)
+	id 1lUWV6-00044H-Su
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Apr 2021 11:23:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59694)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lUUED-0008O3-4Z; Thu, 08 Apr 2021 08:57:45 -0400
-Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a]:34493)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lUWV4-00042N-NU; Thu, 08 Apr 2021 11:23:18 -0400
+Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:39815)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lUUE7-0004Cy-EY; Thu, 08 Apr 2021 08:57:44 -0400
-Received: by mail-yb1-xb2a.google.com with SMTP id v3so217120ybi.1;
- Thu, 08 Apr 2021 05:57:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lUWV3-0001XM-61; Thu, 08 Apr 2021 11:23:18 -0400
+Received: by mail-il1-x12c.google.com with SMTP id b17so2110385ilh.6;
+ Thu, 08 Apr 2021 08:23:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=r//7tcx0xlmshnf883CSDQJNDU8B0gd6TUykawSoQjQ=;
- b=uGjkxSt0ZoOLfP19uIQ7u4Mf+Sssl91ed4u1ziVa2r5vDfLcG/3vaT7IP9Md+9exj0
- 43ca2ZvWluhpeVruupFnDwvWZRcAtsGP+brEN2akG5s2bRQjSGR9UJKl9JL1G9uZ3jmR
- 1/LIgFriBiN53ne79B8leKXDXRPqZCsez0nu+UMAjLdDkdYUjXC9NR0XLOa5PNrmUB1y
- ppqcZComqerfDskhLGzRwcuAxjnBnC1dblhhXEKrrOk+Qq12bYAdD4mBz5pR714lvOPw
- UX5NJQq6LwLfV2gZHaeAm6IkmZf/khwQNnMl4d1uenbc3l81FgjoB6yIAMyk2GTf1Bgo
- ph5Q==
+ :cc; bh=Gcd/vsZtjno3B6I1lJLXfrhYz7HPZzQS2ctns6uBjbc=;
+ b=TusA41Hbblxx1lrgxRm8z1hHAmHH41My0n/A2H1l2MZ4L+s8NzDS250WgYX3Nd28UH
+ X2khSN8zr4VIqdxOkjdMXklmxb7XnxRSLXClzePu0/Edi5BklEeqlwOSF+0Ny7SEqG2p
+ lLvb/P0bPY+mQgjwAErPJMP4ULJFP0S9GHEzuk0NSWnZN5tzt6HHRHzdBGvaPuaRkFe8
+ RWVinPtK+Pb9S6NCyoISmnYMhi9FP2IleFRWSaWnCYHLrT6drvRnaqjV8HslodBm4I0d
+ MfFTKagMbvgipAIqz/1/S/ajH5z8gEqld/LrkY9fEGG7TwawUvm0Ivb3tcmUKb92d2R+
+ iW1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=r//7tcx0xlmshnf883CSDQJNDU8B0gd6TUykawSoQjQ=;
- b=ryMFDgpMioTHzR8YXwu4KRH7OZ+yvVZvRVOScdb20qc/qHFCySgRHaw8DkJ+5bFpXo
- WQwZvV59ArqucpOe9btJBmf6KAdHcWmVLoiydxvmFi9dWwQgLXvwwi7TFiR/Prsl9kz1
- y3qUNWcYhDBEbaWgKgsxD09mZSYvHnINskoeBnEUAD/Cz/CJVMyBoiRdXCYzNgMFYMlA
- usyQqZVW4hLGTPn/PBUN43FVd76NNbjdYylyTnFf3HvGmm4hPw0FRAh3SzHf2dERrKeW
- bR/T+gnd6BJNum4WEbGm7P05KRbGo5XniHaFCKYrIheVeSQaUrj6t44hULNgCfVpCEOv
- XiiA==
-X-Gm-Message-State: AOAM531yYDEHRN8kYCP6U66IwDGRT53r/AsTPikWSAtSweRyOQ9XV1g+
- +epMZ+rzcK65Ct/32GcyYixDjUG3+BVST7coW9o=
-X-Google-Smtp-Source: ABdhPJz4osEZebQ723Ma8FubFhOIzASvi37wb2FSfxy1xpNLRBHDEyehdS49JE6weyYkZsQnZKugBEVT6s5b4aVnKUk=
-X-Received: by 2002:a25:afca:: with SMTP id d10mr10612469ybj.517.1617886653066; 
- Thu, 08 Apr 2021 05:57:33 -0700 (PDT)
+ bh=Gcd/vsZtjno3B6I1lJLXfrhYz7HPZzQS2ctns6uBjbc=;
+ b=BfRcE2skbFvH8baNlgk/T83vqLbLnYxbsR1JD7eIT40kmaXnJ2s4EwX9rYD3F1i0XI
+ 173wweYmVBgLaW9WbK4+FX6Kt7pPsa9CtSJVjoDumWYhgADT+Erszxn0+/4kordh6IGm
+ I/cT+99MNVisoHEymuuTYTvyX9/t8yRrUS075um29HZ+VYjMPO8IrTgpw3GmHdGTS+nr
+ 9EAwkbJfkDd081a/A1AgkHEbSzasFu2G3QppJ016fpFuWoKJm2cAFZfMt2KL0zuiGbrM
+ CqG5TOQS3OMRgn1WcMpiF8OOfUtZAKVVrWheOxpAhd6Hg+H45LPmLKYxxiIUWX3WRmKb
+ rtww==
+X-Gm-Message-State: AOAM530oPjipEH55gdAtNBYtBbvgAYJMHY5Xs668UrCAfO/72A33Bdoc
+ SBRy1LU1558zfVNxqkro+IlCrXSqF/cCFiSaB0A=
+X-Google-Smtp-Source: ABdhPJwoFMyAq9sNmn0ewKT5R7ZIRGmq/5ZLDj2uKQHZOPkNY2vuNQGJTlGudPETloxiagybc/4l6wkUjJaWW8wXbSE=
+X-Received: by 2002:a05:6e02:5a2:: with SMTP id
+ k2mr7531543ils.177.1617895395162; 
+ Thu, 08 Apr 2021 08:23:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1617367533.git.alistair.francis@wdc.com>
- <8c6c6c2e9feb7709b5d23eee57d96e322ac8e5a7.1617367533.git.alistair.francis@wdc.com>
-In-Reply-To: <8c6c6c2e9feb7709b5d23eee57d96e322ac8e5a7.1617367533.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 8 Apr 2021 20:57:21 +0800
-Message-ID: <CAEUhbmX6LCmkyLt2Ae95J6mhGpk3AGD+PNV7TuWAV1K58+4KCQ@mail.gmail.com>
-Subject: Re: [PATCH v1 4/8] target/riscv: Add ePMP CSR access functions
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+References: <cover.1617393702.git.alistair.francis@wdc.com>
+ <7efb55362999a5b709ea8e7fa0ea188e740d9c67.1617393702.git.alistair.francis@wdc.com>
+ <81cbeace-c357-1ef3-1a1c-f1b266e66a98@linaro.org>
+In-Reply-To: <81cbeace-c357-1ef3-1a1c-f1b266e66a98@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 8 Apr 2021 11:20:53 -0400
+Message-ID: <CAKmqyKNN7y=WV5=Bqd7zjLrYL620QOzrz=YR0XgdxMe+pLBxcw@mail.gmail.com>
+Subject: Re: [PATCH v1 4/8] target/riscv: Remove the hardcoded MSTATUS_SD macro
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>,
- Ethan.Lee.QNL@gmail.com, weiying_hou@outlook.com, camiyoru@gmail.com
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -71,31 +74,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2021 12:57:45 -0000
+X-List-Received-Date: Thu, 08 Apr 2021 15:23:19 -0000
 
-On Fri, Apr 2, 2021 at 8:50 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+On Mon, Apr 5, 2021 at 11:10 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> From: Hou Weiying <weiying_hou@outlook.com>
+> On 4/2/21 1:02 PM, Alistair Francis wrote:
+> > @@ -369,6 +369,9 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+> >   static void mark_fs_dirty(DisasContext *ctx)
+> >   {
+> >       TCGv tmp;
+> > +    CPUState *cpu = ctx->cs;
+> > +    CPURISCVState *env = cpu->env_ptr;
+> > +
+> >       if (ctx->mstatus_fs == MSTATUS_FS) {
+> >           return;
+> >       }
+> > @@ -377,12 +380,24 @@ static void mark_fs_dirty(DisasContext *ctx)
+> >
+> >       tmp = tcg_temp_new();
+> >       tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+> > -    tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS_SD);
+> > +    if (riscv_cpu_is_32bit(env)) {
 >
-> Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
-> Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
-> Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
-> Message-Id: <SG2PR02MB26348FDC30678B3177B5CF3893450@SG2PR02MB2634.apcprd02.prod.outlook.com>
-> [ Changes by AF:
->  - Rebase on master
->  - Fix build errors
->  - Fix some style issues
-> ]
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu.h        |  1 +
->  target/riscv/pmp.h        | 14 ++++++++++++++
->  target/riscv/csr.c        | 22 ++++++++++++++++++++++
->  target/riscv/pmp.c        | 34 ++++++++++++++++++++++++++++++++++
->  target/riscv/trace-events |  3 +++
->  5 files changed, 74 insertions(+)
+> This is less than ideal, and will be incorrect long term.
+> You should check ctx->misa instead.
 >
+> Eventually you'll need to change riscv_tr_init_disas_context to not just copy
+> ctx->misa from env.  At present we flush all translation blocks when misa
+> changes, which works.  But you won't want to do that when the hypervisor is
+> 64-bit and the guest is 32-bit.
+>
+> Anyway, I think it would be a good idea to create a helper local to translate,
+> akin to has_ext().
+>
+> > +        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS32_SD);
+> > +    } else {
+> > +#if defined(TARGET_RISCV64)
+> > +        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | MSTATUS64_SD);
+> > +#endif
+>
+> The ifdefs are ugly.  I presume there's some sort of compiler warning here?
+> Does it go away if you cast to target_ulong?
+>
+> How about
+>
+>      target_ulong sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+It turns out clang doesn't like this, so I might still be stuck with ifdefs.
+
+Alistair
+
+>      tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+>
+>
+> r~
 
