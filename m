@@ -1,58 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lUQvM-0008Uj-4P
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Apr 2021 05:26:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56284)
+	id 1lUUEE-0008PI-SI
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Apr 2021 08:57:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50154)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lUQvL-0008UZ-1a; Thu, 08 Apr 2021 05:26:03 -0400
-Received: from mail-yb1-xb2f.google.com ([2607:f8b0:4864:20::b2f]:42701)
+ id 1lUUED-0008O3-4Z; Thu, 08 Apr 2021 08:57:45 -0400
+Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a]:34493)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lUQvJ-00052u-0d; Thu, 08 Apr 2021 05:26:02 -0400
-Received: by mail-yb1-xb2f.google.com with SMTP id c195so1893364ybf.9;
- Thu, 08 Apr 2021 02:26:00 -0700 (PDT)
+ id 1lUUE7-0004Cy-EY; Thu, 08 Apr 2021 08:57:44 -0400
+Received: by mail-yb1-xb2a.google.com with SMTP id v3so217120ybi.1;
+ Thu, 08 Apr 2021 05:57:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=kL6259XroHkSoz6VrN39UuA3jRA5YPBCapzPEg3T+S8=;
- b=XGualytqsS+b3MYchlnhLKAJYXe7ohRqRd4qmDriHWrMW8/dyHdUsSGmQu0q6DCIAa
- AbBaBwWsxKNnJpokn74E158eGa1lh7eGP+oIA2EeIn5HiBg/vfqqroSaCeLOVfWG8+vD
- y4Gs35AkcoGTT9dPuqWggKmYZlg692JsPtcpd+DntD9NDXKVQubnCD2uICutBjYTUwhE
- O7V9kB0hO15Dbi+N5WIvMqmXcIFWOl6+ei05LSTI+gKl+eaAk48zML3FyVtf82bgR2aA
- 4S9ErM3qNR1rbuhf+axnj2uBt245W4Ts/+b5F5D0Q3W/wF5viLZgaPdktuAGvv6ypFEZ
- o8jw==
+ :cc; bh=r//7tcx0xlmshnf883CSDQJNDU8B0gd6TUykawSoQjQ=;
+ b=uGjkxSt0ZoOLfP19uIQ7u4Mf+Sssl91ed4u1ziVa2r5vDfLcG/3vaT7IP9Md+9exj0
+ 43ca2ZvWluhpeVruupFnDwvWZRcAtsGP+brEN2akG5s2bRQjSGR9UJKl9JL1G9uZ3jmR
+ 1/LIgFriBiN53ne79B8leKXDXRPqZCsez0nu+UMAjLdDkdYUjXC9NR0XLOa5PNrmUB1y
+ ppqcZComqerfDskhLGzRwcuAxjnBnC1dblhhXEKrrOk+Qq12bYAdD4mBz5pR714lvOPw
+ UX5NJQq6LwLfV2gZHaeAm6IkmZf/khwQNnMl4d1uenbc3l81FgjoB6yIAMyk2GTf1Bgo
+ ph5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=kL6259XroHkSoz6VrN39UuA3jRA5YPBCapzPEg3T+S8=;
- b=GEcBoSbamCcbXzOxZwMF3eo8GYpJ8Iewn42KCZVT5f+B3UtuMMa+qR4/W8K4cxtZ1Z
- v9C/hX4KOR8qoVLBw41sWMBWie38K+hJN807UPfrxzevtY1EpMVHBQo0EefD1SjJ2qJ/
- qD+gcuM7tHBK03tBtUU4Ygaq5rFwjpphAzSGpbnz7E0/dyXg1S8rcIGJ6X8eX6MSVg9L
- GjIMJtRfgUUa6E0b8/n/sTmRKcf0Rt2COf6rYbogx4pjMf1lddtqpbkZUZbDigbNR4TE
- tW74qcWJCRbE41np0Fc5RkJQGRpChH+lw4Nu7QvziZc4O2Jp4WDJPblSbZu6I/rvfYBC
- 0dRQ==
-X-Gm-Message-State: AOAM533kOCiUN4+4StezvAtYqrLXEERnQyUJ9dgZ6htT5UNcE6ieOYFt
- sUateA8ut5l+IPcFzvk4goNCEoZRJOKzAmfZrnA=
-X-Google-Smtp-Source: ABdhPJwMj4K+udphQ7AMac+XM7ikvqgjyi4hVrIZCAqi/hxyAsxO1d4aIHWRHc/ophLwSuueYl9g/VEr79pPHH9Mxsk=
-X-Received: by 2002:a25:3f07:: with SMTP id m7mr8397585yba.314.1617873959251; 
- Thu, 08 Apr 2021 02:25:59 -0700 (PDT)
+ bh=r//7tcx0xlmshnf883CSDQJNDU8B0gd6TUykawSoQjQ=;
+ b=ryMFDgpMioTHzR8YXwu4KRH7OZ+yvVZvRVOScdb20qc/qHFCySgRHaw8DkJ+5bFpXo
+ WQwZvV59ArqucpOe9btJBmf6KAdHcWmVLoiydxvmFi9dWwQgLXvwwi7TFiR/Prsl9kz1
+ y3qUNWcYhDBEbaWgKgsxD09mZSYvHnINskoeBnEUAD/Cz/CJVMyBoiRdXCYzNgMFYMlA
+ usyQqZVW4hLGTPn/PBUN43FVd76NNbjdYylyTnFf3HvGmm4hPw0FRAh3SzHf2dERrKeW
+ bR/T+gnd6BJNum4WEbGm7P05KRbGo5XniHaFCKYrIheVeSQaUrj6t44hULNgCfVpCEOv
+ XiiA==
+X-Gm-Message-State: AOAM531yYDEHRN8kYCP6U66IwDGRT53r/AsTPikWSAtSweRyOQ9XV1g+
+ +epMZ+rzcK65Ct/32GcyYixDjUG3+BVST7coW9o=
+X-Google-Smtp-Source: ABdhPJz4osEZebQ723Ma8FubFhOIzASvi37wb2FSfxy1xpNLRBHDEyehdS49JE6weyYkZsQnZKugBEVT6s5b4aVnKUk=
+X-Received: by 2002:a25:afca:: with SMTP id d10mr10612469ybj.517.1617886653066; 
+ Thu, 08 Apr 2021 05:57:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1617367533.git.alistair.francis@wdc.com>
- <4123032daa32329ded1b4c7690dd0886d5ffe135.1617367533.git.alistair.francis@wdc.com>
-In-Reply-To: <4123032daa32329ded1b4c7690dd0886d5ffe135.1617367533.git.alistair.francis@wdc.com>
+ <8c6c6c2e9feb7709b5d23eee57d96e322ac8e5a7.1617367533.git.alistair.francis@wdc.com>
+In-Reply-To: <8c6c6c2e9feb7709b5d23eee57d96e322ac8e5a7.1617367533.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 8 Apr 2021 17:25:47 +0800
-Message-ID: <CAEUhbmXgCrW72JbnUK+OWOCEFbfoMC_9burnoZNnBjGcicUu9A@mail.gmail.com>
-Subject: Re: [PATCH v1 1/8] target/riscv: Fix the PMP is locked check when
- using TOR
+Date: Thu, 8 Apr 2021 20:57:21 +0800
+Message-ID: <CAEUhbmX6LCmkyLt2Ae95J6mhGpk3AGD+PNV7TuWAV1K58+4KCQ@mail.gmail.com>
+Subject: Re: [PATCH v1 4/8] target/riscv: Add ePMP CSR access functions
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>,
  Ethan.Lee.QNL@gmail.com, weiying_hou@outlook.com, camiyoru@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2f;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -72,81 +71,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2021 09:26:03 -0000
+X-List-Received-Date: Thu, 08 Apr 2021 12:57:45 -0000
 
-On Fri, Apr 2, 2021 at 8:49 PM Alistair Francis
+On Fri, Apr 2, 2021 at 8:50 PM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
-> The RISC-V spec says:
->     if PMP entry i is locked and pmpicfg.A is set to TOR, writes to
->     pmpaddri-1 are ignored.
+> From: Hou Weiying <weiying_hou@outlook.com>
 >
-> The current QEMU code ignores accesses to pmpaddri-1 and pmpcfgi-1 which
-> is incorrect.
->
-> Update the pmp_is_locked() function to not check the suppording fields
-
-typo: supported?
-
-> and instaed enforce the lock functionality in the pmpaddr write operation.
-
-typo: instead
-
->
+> Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
+> Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
+> Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
+> Message-Id: <SG2PR02MB26348FDC30678B3177B5CF3893450@SG2PR02MB2634.apcprd02.prod.outlook.com>
+> [ Changes by AF:
+>  - Rebase on master
+>  - Fix build errors
+>  - Fix some style issues
+> ]
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/pmp.c | 25 +++++++++++++++----------
->  1 file changed, 15 insertions(+), 10 deletions(-)
+>  target/riscv/cpu.h        |  1 +
+>  target/riscv/pmp.h        | 14 ++++++++++++++
+>  target/riscv/csr.c        | 22 ++++++++++++++++++++++
+>  target/riscv/pmp.c        | 34 ++++++++++++++++++++++++++++++++++
+>  target/riscv/trace-events |  3 +++
+>  5 files changed, 74 insertions(+)
 >
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index cff020122a..6141d0f8f9 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -59,16 +59,6 @@ static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
->          return 0;
->      }
->
-> -    /* In TOR mode, need to check the lock bit of the next pmp
-> -     * (if there is a next)
-> -     */
-> -    const uint8_t a_field =
-> -        pmp_get_a_field(env->pmp_state.pmp[pmp_index + 1].cfg_reg);
-> -    if ((env->pmp_state.pmp[pmp_index + 1u].cfg_reg & PMP_LOCK) &&
-> -         (PMP_AMATCH_TOR == a_field)) {
-> -        return 1;
-> -    }
-> -
->      return 0;
->  }
->
-> @@ -380,7 +370,22 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->      target_ulong val)
->  {
->      trace_pmpaddr_csr_write(env->mhartid, addr_index, val);
-> +
->      if (addr_index < MAX_RISCV_PMPS) {
-> +        /* In TOR mode, need to check the lock bit of the next pmp
 
-nits: should use correct multi-line comment block format
-
-> +         * (if there is a next).
-> +         */
-> +        if (addr_index + 1 < MAX_RISCV_PMPS) {
-> +            uint8_t pmp_cfg = env->pmp_state.pmp[addr_index + 1].cfg_reg;
-> +
-> +            if (pmp_cfg & PMP_LOCK &&
-> +                PMP_AMATCH_TOR == pmp_get_a_field(pmp_cfg)) {
-> +                qemu_log_mask(LOG_GUEST_ERROR,
-> +                              "ignoring pmpaddr write - pmpcfg + 1 locked\n");
-> +                return;
-> +            }
-> +        }
-> +
->          if (!pmp_is_locked(env, addr_index)) {
->              env->pmp_state.pmp[addr_index].addr_reg = val;
->              pmp_update_rule(env, addr_index);
-> --
-
-Otherwise,
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
