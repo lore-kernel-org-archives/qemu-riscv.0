@@ -1,75 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lUqAT-0001d7-Tq
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Apr 2021 08:23:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48318)
+	id 1lUsCN-0008MI-PN
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Apr 2021 10:33:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51862)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=726c96411=alistair.francis@wdc.com>)
- id 1lUqAQ-0001aB-6v; Fri, 09 Apr 2021 08:23:18 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:13152)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=726c96411=alistair.francis@wdc.com>)
- id 1lUqAN-0001GV-Sw; Fri, 09 Apr 2021 08:23:17 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1617970995; x=1649506995;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=mZ+wqac0dNQBf14VBAdxbL798fGUkArSIFgASuf6VRY=;
- b=QsRXRpg9uvrx1sfaBXp+nC3GGZVFIC/irnx45NSdO/WPZuT3CC/bCKhS
- 7+DOdwDyw5DBaBUqPoZ98TJ9g/lCkOfrajLh+HEULwphP9K/BUigYOiSv
- QZH2oTUArLBVrJvLuYxFzNBvfGGiczjkfGe8gnAWJbU1vparNxxrUl0LD
- yhQtqKQFHFZuz/BxSz+yyU2/ubfJkAj0wi8X0J6sWWnc2t2wO8v0Z7fBL
- AV0DwIZxdZAWsgX3hBIXiQ9zs0GAA3Qff1ZIAVTmxqBnL2yyE4r9ngtPJ
- 3ZvcE0RlqQnVDzS4Fn3Wp1FKqX56rCXzUHUEsObJuJy6+I0ODrb1wSjzZ A==;
-IronPort-SDR: AMRX4yXgy/22qlDx7sQH4lsPVbTE15ofGkRpCV+jD4cADaE8T4YFRTl1mVEPI29kBmNJlF7kSL
- QF/QhNViOrEpHHX/gTW1s5At/CGOylaaAzVsbyiIBTOUTMtHqKou1PYuBNT7E0V1f+snDq9N+E
- MMyMPWJd6YqFGIuuC8TsNfkrgFKR4Cj2qGnDoi0ze2Sc+JdDo+hxqHyAHoumGZkw3gCoNvXZuU
- vW1W5FQngrAv3vFTNTJNn9JNY2zxdOi7uQmbB4AuJz1tmUgezknR8RoF0AWoUw63pt8RBtxItX
- R7M=
-X-IronPort-AV: E=Sophos;i="5.82,209,1613404800"; d="scan'208";a="163998942"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 09 Apr 2021 20:22:59 +0800
-IronPort-SDR: /E/2LP7rkzjKXIB+k3ofKT0W4W9JoQG4LujzpFt4LWXD3H8TUNFzJItq2wz0DRiC9h8riFW2AW
- gXbaOTelZYoy6fAdGwuqGhewKJ07BodLisEj1QJsEkqBfaewQVf4/y112UXi3t9nd3EW4FlsOA
- U+CRJgjGxDWkOWAuZds0v78UmOK/6TWbHINbL18lgkudQfY8JGKAvndXQjgf6xbczH9hAAQXEv
- +v+GnTGepgam1qNYVWfpO8W4eBDOqDr1G1ARcWYE9VFxWUNwyeKDU9CaABZ1zczEUtoC2bHSCy
- gsPif5ERD90c5gM3cxvr7J0C
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Apr 2021 05:04:01 -0700
-IronPort-SDR: qdIF7ZdSftHVHgHb+WRFWCfdTly7rKN5G8mTp57GYIZxCWseAn5YowaLMJvnFLkixVL6aFj7xR
- 50EigBcntOygt7gAaD63RkRHrXXRA2UdLbZqyWQKmqFK7h4SADromAZP2FShqXNseZPLSbyWxq
- B7ooVMRKWmxqtebmUkZwRhhOFPQAjWR+pnHL0vbYE9SRVZSWcobjJBfhLWYhkV/Iz0wGd6aMaK
- EbtzBvHK/GnBOfA+Yg1vAr6i+eLtFfibYLmtoP4cFAembTT1E6qulsLsY/roXmqGVapUM6ao6f
- BRE=
-WDCIronportException: Internal
-Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.167.98])
- by uls-op-cesaip02.wdc.com with ESMTP; 09 Apr 2021 05:22:51 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v2 7/8] target/riscv/pmp: Remove outdated comment
-Date: Fri,  9 Apr 2021 08:20:49 -0400
-Message-Id: <cf394a15cebea5be5875c6908775af907bceb143.1617970729.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <cover.1617970729.git.alistair.francis@wdc.com>
-References: <cover.1617970729.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lUsCL-0008Js-KZ; Fri, 09 Apr 2021 10:33:25 -0400
+Received: from mail-yb1-xb29.google.com ([2607:f8b0:4864:20::b29]:39563)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lUsCK-0002La-4i; Fri, 09 Apr 2021 10:33:25 -0400
+Received: by mail-yb1-xb29.google.com with SMTP id z1so6807017ybf.6;
+ Fri, 09 Apr 2021 07:33:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=B0n6LANtvak/N9owEyHwdtcMow+1UzXHdOQV8K8iTSU=;
+ b=No1EkXJma183GA3zjjeJUJWnXBu8sC1YTxbyly1S+q7/NX54GcdhmnRtMp86U+DHq8
+ 55IMjTthC0FgaHCmS4ONEMF/RR9tb8KAjbkanjxFkx3b9y8sPrDDsupCzGBVP6/FQyUu
+ hYi7WRXiBpXgA6c2eEycWv1ocTFOVw9MbUVTsLtGlvt2UsfZdJHtQOjYy+3xZEaSOAa9
+ uDM7kkdzB3+kpnShUJ/WeoFR58lYUjrtk1LKR+tOhV/9VrsCwk9l1+LTxfwElA8nzDiK
+ YONpz1wcSqS2SxgQDpGIIyhX5yebvFp3gq+mtLrd1uXkQimRMhgzawpjmTnx0IuQ0ss0
+ 44GQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=B0n6LANtvak/N9owEyHwdtcMow+1UzXHdOQV8K8iTSU=;
+ b=OuZ9NV43ZzSQ7J7L0O4buh9aM5PWm8aIk++KXJTg2fNonVDmiac9Pc38HQ0ZvJP0k7
+ ejuU28k/TE5YG06FYc3Ed+V+OAZA5k0HTg4NO5Zy5+itxVMnvZRRmpiU1bz410dFqoHc
+ Z3c8+i9Tq8nOjXIwi8oeJiraaKluHAvmIQyBgrLcT3bPkMcwNb4oiGg7UcFYunkjKasH
+ OYH6InFzWrHx1GrrZQknzPRjHtG8V3+HOhBZIYND8BTb9mliVoUB0qTpH0VmCvvQi2Vl
+ akFP3k6ymp6Rp4JVWTOZawOxLQ9+c5rB9/be0A/rTPrXlr1Yky+UVOMvZ2fXx1ZzwYOC
+ x8bA==
+X-Gm-Message-State: AOAM532NqgXMqdbgQZDhgZb9ORJIMcv6BShBeUrxfjAzHMGpIh+4c4NO
+ GJS7wnuEu12odqmN8ek7F+RH8A0NK6MmfJBRkYI=
+X-Google-Smtp-Source: ABdhPJwySw9i9O28LFW0es/gWVxKfoI/huneP0koRy4T2kLBBK+46efrYnoGGfIHkZJgoGVdTJBX2HSDI2vSmtgD0tU=
+X-Received: by 2002:a25:e04c:: with SMTP id x73mr20680924ybg.387.1617978802246; 
+ Fri, 09 Apr 2021 07:33:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.154.42;
- envelope-from=prvs=726c96411=alistair.francis@wdc.com;
- helo=esa4.hgst.iphmx.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+References: <cover.1617970729.git.alistair.francis@wdc.com>
+ <3f4a8b1fa0cd5deed00beb585010d6b1cc59efb6.1617970729.git.alistair.francis@wdc.com>
+In-Reply-To: <3f4a8b1fa0cd5deed00beb585010d6b1cc59efb6.1617970729.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 9 Apr 2021 22:33:11 +0800
+Message-ID: <CAEUhbmWgOcma-uHBU0Zb8BhDpvt6D06Qg1_ACNzGGzXV_L=MBw@mail.gmail.com>
+Subject: Re: [PATCH v2 5/8] target/riscv: Implementation of enhanced PMP (ePMP)
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b29;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb29.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,30 +70,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Apr 2021 12:23:18 -0000
+X-List-Received-Date: Fri, 09 Apr 2021 14:33:26 -0000
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
----
- target/riscv/pmp.c | 4 ----
- 1 file changed, 4 deletions(-)
+Hi Alistair,
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index cd44d81eba..326d793f55 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -19,10 +19,6 @@
-  * this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--/*
-- * PMP (Physical Memory Protection) is as-of-yet unused and needs testing.
-- */
--
- #include "qemu/osdep.h"
- #include "qemu/log.h"
- #include "qapi/error.h"
--- 
-2.31.0
+On Fri, Apr 9, 2021 at 8:23 PM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> From: Hou Weiying <weiying_hou@outlook.com>
+>
+> This commit adds support for ePMP v0.9.1.
+>
+> The ePMP spec can be found in:
+> https://docs.google.com/document/d/1Mh_aiHYxemL0umN3GTTw8vsbmzHZ_nxZXgjgOUzbvc8
+>
+> Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
+> Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
+> Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
+> Message-Id: <SG2PR02MB263462CCDBCBBAD36983C2CD93450@SG2PR02MB2634.apcprd02.prod.outlook.com>
+> [ Changes by AF:
+>  - Rebase on master
+>  - Update to latest spec
+>  - Use a switch case to handle ePMP MML permissions
+>  - Fix a few bugs
+> ]
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/pmp.c | 165 +++++++++++++++++++++++++++++++++++++++++----
+>  1 file changed, 153 insertions(+), 12 deletions(-)
+>
 
+It looks like the v1 comments are not addressed?
+
+Regards,
+Bin
 
