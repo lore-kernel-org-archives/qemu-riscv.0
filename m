@@ -1,63 +1,87 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lUsCN-0008MI-PN
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Apr 2021 10:33:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51862)
+	id 1lUxY7-0000Eo-Kv
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Apr 2021 16:16:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50560)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lUsCL-0008Js-KZ; Fri, 09 Apr 2021 10:33:25 -0400
-Received: from mail-yb1-xb29.google.com ([2607:f8b0:4864:20::b29]:39563)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lUsCK-0002La-4i; Fri, 09 Apr 2021 10:33:25 -0400
-Received: by mail-yb1-xb29.google.com with SMTP id z1so6807017ybf.6;
- Fri, 09 Apr 2021 07:33:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=B0n6LANtvak/N9owEyHwdtcMow+1UzXHdOQV8K8iTSU=;
- b=No1EkXJma183GA3zjjeJUJWnXBu8sC1YTxbyly1S+q7/NX54GcdhmnRtMp86U+DHq8
- 55IMjTthC0FgaHCmS4ONEMF/RR9tb8KAjbkanjxFkx3b9y8sPrDDsupCzGBVP6/FQyUu
- hYi7WRXiBpXgA6c2eEycWv1ocTFOVw9MbUVTsLtGlvt2UsfZdJHtQOjYy+3xZEaSOAa9
- uDM7kkdzB3+kpnShUJ/WeoFR58lYUjrtk1LKR+tOhV/9VrsCwk9l1+LTxfwElA8nzDiK
- YONpz1wcSqS2SxgQDpGIIyhX5yebvFp3gq+mtLrd1uXkQimRMhgzawpjmTnx0IuQ0ss0
- 44GQ==
+ (Exim 4.90_1) (envelope-from <etm2131@columbia.edu>)
+ id 1lUxXk-00008v-7O
+ for qemu-riscv@nongnu.org; Fri, 09 Apr 2021 16:15:59 -0400
+Received: from mx0b-00364e01.pphosted.com ([148.163.139.74]:57270)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <etm2131@columbia.edu>)
+ id 1lUxXT-0000QC-Id
+ for qemu-riscv@nongnu.org; Fri, 09 Apr 2021 16:15:47 -0400
+Received: from pps.filterd (m0167076.ppops.net [127.0.0.1])
+ by mx0b-00364e01.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 139K86p8015013
+ for <qemu-riscv@nongnu.org>; Fri, 9 Apr 2021 16:15:16 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=columbia.edu;
+ h=mime-version : from
+ : date : message-id : subject : to : content-type; s=pps01;
+ bh=c34j/JBYfHYrxzL+qkkBrvhZlBIh9t3Vz8fg9HAgFZ4=;
+ b=MJoE7ZMUqM0zHWnlfLevtuD4Xx0yxQk49kh4Pxr1CsPX9fU5tPy0rf9UHfwLa2v2NpKo
+ hRz9tgFD4FRVRHcCM+92QB+k9O8YOPghY89BSr4R6kiDddFl73Tj+1xWn7c7I8DcXyqV
+ ZraOhfMdkYRSpCjZsGMdcxFgFldwelSkT+lf2u/Pyo5NifEmyxUfN82GvuIsjlEF8DJk
+ cbWpLyEFtqnPyldoI4xEEQzRQlKz3lKpZi8lquSA+5CdwIzOPXZrFqdEO49l/5tZvx9s
+ OZgUa3Au5X7cuK96aM8PMO5Zy+Zdpnaeycu0FdpSYDsp3UwTpdShFO5JTigrtB92a7Mk Ow== 
+Received: from sendprdmail20.cc.columbia.edu (sendprdmail20.cc.columbia.edu
+ [128.59.72.22])
+ by mx0b-00364e01.pphosted.com with ESMTP id 37rw45p7ar-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 09 Apr 2021 16:15:16 -0400
+Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
+ [209.85.217.71])
+ by sendprdmail20.cc.columbia.edu (8.14.7/8.14.4) with ESMTP id 139KFGns110360
+ (version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 9 Apr 2021 16:15:16 -0400
+Received: by mail-vs1-f71.google.com with SMTP id l2so231162vst.8
+ for <qemu-riscv@nongnu.org>; Fri, 09 Apr 2021 13:15:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=B0n6LANtvak/N9owEyHwdtcMow+1UzXHdOQV8K8iTSU=;
- b=OuZ9NV43ZzSQ7J7L0O4buh9aM5PWm8aIk++KXJTg2fNonVDmiac9Pc38HQ0ZvJP0k7
- ejuU28k/TE5YG06FYc3Ed+V+OAZA5k0HTg4NO5Zy5+itxVMnvZRRmpiU1bz410dFqoHc
- Z3c8+i9Tq8nOjXIwi8oeJiraaKluHAvmIQyBgrLcT3bPkMcwNb4oiGg7UcFYunkjKasH
- OYH6InFzWrHx1GrrZQknzPRjHtG8V3+HOhBZIYND8BTb9mliVoUB0qTpH0VmCvvQi2Vl
- akFP3k6ymp6Rp4JVWTOZawOxLQ9+c5rB9/be0A/rTPrXlr1Yky+UVOMvZ2fXx1ZzwYOC
- x8bA==
-X-Gm-Message-State: AOAM532NqgXMqdbgQZDhgZb9ORJIMcv6BShBeUrxfjAzHMGpIh+4c4NO
- GJS7wnuEu12odqmN8ek7F+RH8A0NK6MmfJBRkYI=
-X-Google-Smtp-Source: ABdhPJwySw9i9O28LFW0es/gWVxKfoI/huneP0koRy4T2kLBBK+46efrYnoGGfIHkZJgoGVdTJBX2HSDI2vSmtgD0tU=
-X-Received: by 2002:a25:e04c:: with SMTP id x73mr20680924ybg.387.1617978802246; 
- Fri, 09 Apr 2021 07:33:22 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=c34j/JBYfHYrxzL+qkkBrvhZlBIh9t3Vz8fg9HAgFZ4=;
+ b=l3OidTp3xEC0HFcIagUM1auhvolEf9CypF/MY7BrYMu0EKkMfr4nuAqeIhrlULpu1w
+ eIV0XVDpDHC70qfx7HmWywck+Gz/KzdX/M7FZLuGWuxwkF1kP5ONeRiIuuegRgCwSKMU
+ AfudOCsYmwm5jf94VdxzvQiknzGXm6C1enEmiAm/hYzzYlEBui2Y+pMpX9kvVvgCw6D2
+ cGGcP9oU5S1xyamU0sstu17riaYbtbEdKgjRqcXvD3gfJ3pgSe0lUmkI7rFGVJdvGwCk
+ zNElSkk2wWwfs+wVmVMm+vJZ2mXcDZWYt8Aa7CL9yvCeTMcgf+0uC6ujThFh+BBZImRn
+ 30Kg==
+X-Gm-Message-State: AOAM530pv2kZ6FSC1KTFzb05IJYlnfTNAyXaSFjRWiGCWCjQP+O8Ba3X
+ 1ypmWwLmy+aSrQMCkxB+dcGHbGttKN79NhJyMHoCmeeO62/uZb9cZaDDijxJnuJ5vD3I0J0UT2j
+ ENEXiKBeBGBAbJdyDBPpBrbUtyOlFgs4hu3nc2Is=
+X-Received: by 2002:ab0:310a:: with SMTP id e10mr12908293ual.93.1617999315495; 
+ Fri, 09 Apr 2021 13:15:15 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzlrze6SywV4Zl6GHjXa9ogVj38UDME147TR6+1puVGBPE+MHRM3qe8BZy7u6INpurXWBy5VJsZDf3BlyvTMB0=
+X-Received: by 2002:ab0:310a:: with SMTP id e10mr12908270ual.93.1617999315202; 
+ Fri, 09 Apr 2021 13:15:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1617970729.git.alistair.francis@wdc.com>
- <3f4a8b1fa0cd5deed00beb585010d6b1cc59efb6.1617970729.git.alistair.francis@wdc.com>
-In-Reply-To: <3f4a8b1fa0cd5deed00beb585010d6b1cc59efb6.1617970729.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 9 Apr 2021 22:33:11 +0800
-Message-ID: <CAEUhbmWgOcma-uHBU0Zb8BhDpvt6D06Qg1_ACNzGGzXV_L=MBw@mail.gmail.com>
-Subject: Re: [PATCH v2 5/8] target/riscv: Implementation of enhanced PMP (ePMP)
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
+From: Evan M <etm2131@columbia.edu>
+Date: Fri, 9 Apr 2021 16:15:04 -0400
+Message-ID: <CAJh8_PvnRWh9Ki+Jc6ZKibq64P-Khv85pjTJUcuEJS5OOQB8bA@mail.gmail.com>
+Subject: medeleg[11] should be hardwired to zero?
+To: qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b29;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb29.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Proofpoint-GUID: R93bqhdgpoudR2UbOy019I305pK8S_II
+X-Proofpoint-ORIG-GUID: R93bqhdgpoudR2UbOy019I305pK8S_II
+X-CU-OB: Yes
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.761
+ definitions=2021-04-09_07:2021-04-09,
+ 2021-04-09 signatures=0
+X-Proofpoint-Spam-Details: rule=inbound_notspam policy=inbound score=0
+ priorityscore=1501 spamscore=0
+ malwarescore=0 suspectscore=0 phishscore=0 adultscore=0 mlxscore=0
+ clxscore=1011 bulkscore=10 impostorscore=10 mlxlogscore=436
+ lowpriorityscore=10 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2104060000 definitions=main-2104090146
+Received-SPF: pass client-ip=148.163.139.74; envelope-from=etm2131@columbia.edu;
+ helo=mx0b-00364e01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -70,38 +94,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Apr 2021 14:33:26 -0000
+X-List-Received-Date: Fri, 09 Apr 2021 20:16:04 -0000
 
-Hi Alistair,
+Hi,
 
-On Fri, Apr 9, 2021 at 8:23 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
->
-> From: Hou Weiying <weiying_hou@outlook.com>
->
-> This commit adds support for ePMP v0.9.1.
->
-> The ePMP spec can be found in:
-> https://docs.google.com/document/d/1Mh_aiHYxemL0umN3GTTw8vsbmzHZ_nxZXgjgOUzbvc8
->
-> Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
-> Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
-> Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
-> Message-Id: <SG2PR02MB263462CCDBCBBAD36983C2CD93450@SG2PR02MB2634.apcprd02.prod.outlook.com>
-> [ Changes by AF:
->  - Rebase on master
->  - Update to latest spec
->  - Use a switch case to handle ePMP MML permissions
->  - Fix a few bugs
-> ]
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/pmp.c | 165 +++++++++++++++++++++++++++++++++++++++++----
->  1 file changed, 153 insertions(+), 12 deletions(-)
->
+I'm relatively new to RISC-V, so this may be a misunderstanding on my
+part. According to the privileged ISA spec v1.12-draft,
 
-It looks like the v1 comments are not addressed?
+> For exceptions that cannot occur in less privileged modes, the corresponding medeleg bits
+> should be hardwired to zero. In particular, medeleg[11] is hardwired to zero.
 
-Regards,
-Bin
+This bit corresponds to RISCV_EXCP_M_ECALL in QEMU, which is OR'd into
+delegable_excps in target/riscv/csr.c. Indeed, I can set bit 11
+running an RV64 target in QEMU.
+
+Is this a bug in QEMU or a misunderstanding on my part? I'm having a
+hard time finding exactly where in the spec it enumerates which
+interrupts and exceptions can be delegated from M mode to S mode, so
+perhaps I'm off base.
+
+Thanks,
+Evan
+
+-- 
+Evan Mesterhazy
+etm2131@columbia.edu
 
