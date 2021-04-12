@@ -1,20 +1,20 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lVqS5-0007fL-Tp
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 02:53:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40606)
+	id 1lVqS8-0007jz-Ex
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 02:53:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40652)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1lVqS4-0007f3-J5; Mon, 12 Apr 2021 02:53:40 -0400
-Received: from szxga06-in.huawei.com ([45.249.212.32]:5024)
+ id 1lVqS6-0007fz-Fl; Mon, 12 Apr 2021 02:53:42 -0400
+Received: from szxga06-in.huawei.com ([45.249.212.32]:5027)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1lVqS1-0004Qt-BP; Mon, 12 Apr 2021 02:53:40 -0400
+ id 1lVqS2-0004Wu-TH; Mon, 12 Apr 2021 02:53:42 -0400
 Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4FJfXl6jN6zkdMr;
- Mon, 12 Apr 2021 14:51:35 +0800 (CST)
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4FJfXx6ZBmzjYsK;
+ Mon, 12 Apr 2021 14:51:45 +0800 (CST)
 Received: from huawei.com (10.174.186.236) by DGGEMS412-HUB.china.huawei.com
  (10.3.19.212) with Microsoft SMTP Server id 14.3.498.0; Mon, 12 Apr 2021
- 14:53:19 +0800
+ 14:53:30 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
@@ -24,9 +24,10 @@ CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
  <fanliang@huawei.com>, <wu.wubin@huawei.com>,
  <zhang.zhanghailiang@huawei.com>, <yinyipeng1@huawei.com>, Yifei Jiang
  <jiangyifei@huawei.com>
-Subject: [PATCH RFC v5 01/12] linux-header: Update linux/kvm.h
-Date: Mon, 12 Apr 2021 14:52:35 +0800
-Message-ID: <20210412065246.1853-2-jiangyifei@huawei.com>
+Subject: [PATCH RFC v5 06/12] target/riscv: Support start kernel directly by
+ KVM
+Date: Mon, 12 Apr 2021 14:52:40 +0800
+Message-ID: <20210412065246.1853-7-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
 In-Reply-To: <20210412065246.1853-1-jiangyifei@huawei.com>
 References: <20210412065246.1853-1-jiangyifei@huawei.com>
@@ -55,188 +56,221 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2021 06:53:40 -0000
+X-List-Received-Date: Mon, 12 Apr 2021 06:53:42 -0000
 
-Update linux-headers/linux/kvm.h from
-https://github.com/avpatel/linux/tree/riscv_kvm_v17.
-Only use this header file, so here do not update all linux headers by
-update-linux-headers.sh until above KVM series is accepted.
+Get kernel and fdt start address in virt.c, and pass them to KVM
+when cpu reset. In addition, add kvm_riscv.h to place riscv specific
+interface.
 
 Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
 ---
- linux-headers/linux/kvm.h | 97 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 97 insertions(+)
+ hw/riscv/boot.c          | 11 +++++++++++
+ hw/riscv/virt.c          |  7 +++++++
+ include/hw/riscv/boot.h  |  1 +
+ target/riscv/cpu.c       |  8 ++++++++
+ target/riscv/cpu.h       |  3 +++
+ target/riscv/kvm-stub.c  | 25 +++++++++++++++++++++++++
+ target/riscv/kvm.c       | 13 +++++++++++++
+ target/riscv/kvm_riscv.h | 24 ++++++++++++++++++++++++
+ target/riscv/meson.build |  2 +-
+ 9 files changed, 93 insertions(+), 1 deletion(-)
+ create mode 100644 target/riscv/kvm-stub.c
+ create mode 100644 target/riscv/kvm_riscv.h
 
-diff --git a/linux-headers/linux/kvm.h b/linux-headers/linux/kvm.h
-index 020b62a619..1e92fd2a76 100644
---- a/linux-headers/linux/kvm.h
-+++ b/linux-headers/linux/kvm.h
-@@ -216,6 +216,20 @@ struct kvm_hyperv_exit {
- 	} u;
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 0d38bb7426..b9741a647d 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -290,3 +290,14 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
+ 
+     return;
+ }
++
++void riscv_setup_direct_kernel(hwaddr kernel_addr, hwaddr fdt_addr)
++{
++    CPUState *cs;
++
++    for (cs = first_cpu; cs; cs = CPU_NEXT(cs)) {
++        RISCVCPU *riscv_cpu = RISCV_CPU(cs);
++        riscv_cpu->env.kernel_addr = kernel_addr;
++        riscv_cpu->env.fdt_addr = fdt_addr;
++    }
++}
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index c0dc69ff33..4a1fca139c 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -728,6 +728,13 @@ static void virt_machine_init(MachineState *machine)
+                               virt_memmap[VIRT_MROM].size, kernel_entry,
+                               fdt_load_addr, machine->fdt);
+ 
++    /*
++     * Only direct boot kernel is currently supported for KVM VM,
++     * So here setup kernel start address and fdt address.
++     * TODO:Support firmware loading and integrate to TCG start
++     */
++    riscv_setup_direct_kernel(kernel_entry, fdt_load_addr);
++
+     /* SiFive Test MMIO device */
+     sifive_test_create(memmap[VIRT_TEST].base);
+ 
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index 11a21dd584..28d838cc29 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -51,5 +51,6 @@ void riscv_rom_copy_firmware_info(MachineState *machine, hwaddr rom_base,
+                                   hwaddr rom_size,
+                                   uint32_t reset_vec_size,
+                                   uint64_t kernel_entry);
++void riscv_setup_direct_kernel(hwaddr kernel_addr, hwaddr fdt_addr);
+ 
+ #endif /* RISCV_BOOT_H */
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 7d6ed80f6b..dd34ab4978 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -29,6 +29,8 @@
+ #include "hw/qdev-properties.h"
+ #include "migration/vmstate.h"
+ #include "fpu/softfloat-helpers.h"
++#include "sysemu/kvm.h"
++#include "kvm_riscv.h"
+ 
+ /* RISC-V CPU definitions */
+ 
+@@ -361,6 +363,12 @@ static void riscv_cpu_reset(DeviceState *dev)
+     cs->exception_index = EXCP_NONE;
+     env->load_res = -1;
+     set_default_nan_mode(1, &env->fp_status);
++
++#ifndef CONFIG_USER_ONLY
++    if (kvm_enabled()) {
++        kvm_riscv_reset_vcpu(cpu);
++    }
++#endif
+ }
+ 
+ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 0a33d387ba..a489d94187 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -243,6 +243,9 @@ struct CPURISCVState {
+ 
+     /* Fields from here on are preserved across CPU reset. */
+     QEMUTimer *timer; /* Internal timer */
++
++    hwaddr kernel_addr;
++    hwaddr fdt_addr;
  };
  
-+struct kvm_xen_exit {
-+#define KVM_EXIT_XEN_HCALL          1
-+	__u32 type;
-+	union {
-+		struct {
-+			__u32 longmode;
-+			__u32 cpl;
-+			__u64 input;
-+			__u64 result;
-+			__u64 params[6];
-+		} hcall;
-+	} u;
-+};
+ OBJECT_DECLARE_TYPE(RISCVCPU, RISCVCPUClass,
+diff --git a/target/riscv/kvm-stub.c b/target/riscv/kvm-stub.c
+new file mode 100644
+index 0000000000..39b96fe3f4
+--- /dev/null
++++ b/target/riscv/kvm-stub.c
+@@ -0,0 +1,25 @@
++/*
++ * QEMU KVM RISC-V specific function stubs
++ *
++ * Copyright (c) 2020 Huawei Technologies Co., Ltd
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++#include "qemu/osdep.h"
++#include "cpu.h"
++#include "kvm_riscv.h"
 +
- #define KVM_S390_GET_SKEYS_NONE   1
- #define KVM_S390_SKEYS_MAX        1048576
++void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
++{
++    abort();
++}
+diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+index 9d1441952a..79c931acb4 100644
+--- a/target/riscv/kvm.c
++++ b/target/riscv/kvm.c
+@@ -37,6 +37,7 @@
+ #include "hw/irq.h"
+ #include "qemu/log.h"
+ #include "hw/loader.h"
++#include "kvm_riscv.h"
  
-@@ -251,6 +265,10 @@ struct kvm_hyperv_exit {
- #define KVM_EXIT_X86_RDMSR        29
- #define KVM_EXIT_X86_WRMSR        30
- #define KVM_EXIT_DIRTY_RING_FULL  31
-+#define KVM_EXIT_AP_RESET_HOLD    32
-+#define KVM_EXIT_X86_BUS_LOCK     33
-+#define KVM_EXIT_XEN              34
-+#define KVM_EXIT_RISCV_SBI        35
+ static __u64 kvm_riscv_reg_id(CPURISCVState *env, __u64 type, __u64 idx)
+ {
+@@ -440,6 +441,18 @@ int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
+     return 0;
+ }
  
- /* For KVM_EXIT_INTERNAL_ERROR */
- /* Emulate instruction failed. */
-@@ -427,6 +445,15 @@ struct kvm_run {
- 			__u32 index; /* kernel -> user */
- 			__u64 data; /* kernel <-> user */
- 		} msr;
-+		/* KVM_EXIT_XEN */
-+		struct kvm_xen_exit xen;
-+		/* KVM_EXIT_RISCV_SBI */
-+		struct {
-+			unsigned long extension_id;
-+			unsigned long function_id;
-+			unsigned long args[6];
-+			unsigned long ret[2];
-+		} riscv_sbi;
- 		/* Fix the size of the union. */
- 		char padding[256];
- 	};
-@@ -573,6 +600,7 @@ struct kvm_vapic_addr {
- #define KVM_MP_STATE_CHECK_STOP        6
- #define KVM_MP_STATE_OPERATING         7
- #define KVM_MP_STATE_LOAD              8
-+#define KVM_MP_STATE_AP_RESET_HOLD     9
- 
- struct kvm_mp_state {
- 	__u32 mp_state;
-@@ -1056,6 +1084,8 @@ struct kvm_ppc_resize_hpt {
- #define KVM_CAP_ENFORCE_PV_FEATURE_CPUID 190
- #define KVM_CAP_SYS_HYPERV_CPUID 191
- #define KVM_CAP_DIRTY_LOG_RING 192
-+#define KVM_CAP_X86_BUS_LOCK_EXIT 193
-+#define KVM_CAP_PPC_DAWR1 194
- 
- #ifdef KVM_CAP_IRQ_ROUTING
- 
-@@ -1129,6 +1159,11 @@ struct kvm_x86_mce {
- #endif
- 
- #ifdef KVM_CAP_XEN_HVM
-+#define KVM_XEN_HVM_CONFIG_HYPERCALL_MSR	(1 << 0)
-+#define KVM_XEN_HVM_CONFIG_INTERCEPT_HCALL	(1 << 1)
-+#define KVM_XEN_HVM_CONFIG_SHARED_INFO		(1 << 2)
-+#define KVM_XEN_HVM_CONFIG_RUNSTATE		(1 << 3)
++void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
++{
++    CPURISCVState *env = &cpu->env;
 +
- struct kvm_xen_hvm_config {
- 	__u32 flags;
- 	__u32 msr;
-@@ -1563,6 +1598,57 @@ struct kvm_pv_cmd {
- /* Available with KVM_CAP_DIRTY_LOG_RING */
- #define KVM_RESET_DIRTY_RINGS		_IO(KVMIO, 0xc7)
++    if (!kvm_enabled()) {
++        return;
++    }
++    env->pc = cpu->env.kernel_addr;
++    env->gpr[10] = kvm_arch_vcpu_id(CPU(cpu)); /* a0 */
++    env->gpr[11] = cpu->env.fdt_addr;          /* a1 */
++}
++
+ bool kvm_arch_cpu_check_are_resettable(void)
+ {
+     return true;
+diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
+new file mode 100644
+index 0000000000..f38c82bf59
+--- /dev/null
++++ b/target/riscv/kvm_riscv.h
+@@ -0,0 +1,24 @@
++/*
++ * QEMU KVM support -- RISC-V specific functions.
++ *
++ * Copyright (c) 2020 Huawei Technologies Co., Ltd
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef QEMU_KVM_RISCV_H
++#define QEMU_KVM_RISCV_H
++
++void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
++
++#endif
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index 32afd6e882..0f63e3824d 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -23,7 +23,7 @@ riscv_ss.add(files(
+   'vector_helper.c',
+   'translate.c',
+ ))
+-riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'))
++riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: files('kvm-stub.c'))
  
-+/* Per-VM Xen attributes */
-+#define KVM_XEN_HVM_GET_ATTR	_IOWR(KVMIO, 0xc8, struct kvm_xen_hvm_attr)
-+#define KVM_XEN_HVM_SET_ATTR	_IOW(KVMIO,  0xc9, struct kvm_xen_hvm_attr)
-+
-+struct kvm_xen_hvm_attr {
-+	__u16 type;
-+	__u16 pad[3];
-+	union {
-+		__u8 long_mode;
-+		__u8 vector;
-+		struct {
-+			__u64 gfn;
-+		} shared_info;
-+		__u64 pad[8];
-+	} u;
-+};
-+
-+/* Available with KVM_CAP_XEN_HVM / KVM_XEN_HVM_CONFIG_SHARED_INFO */
-+#define KVM_XEN_ATTR_TYPE_LONG_MODE		0x0
-+#define KVM_XEN_ATTR_TYPE_SHARED_INFO		0x1
-+#define KVM_XEN_ATTR_TYPE_UPCALL_VECTOR		0x2
-+
-+/* Per-vCPU Xen attributes */
-+#define KVM_XEN_VCPU_GET_ATTR	_IOWR(KVMIO, 0xca, struct kvm_xen_vcpu_attr)
-+#define KVM_XEN_VCPU_SET_ATTR	_IOW(KVMIO,  0xcb, struct kvm_xen_vcpu_attr)
-+
-+struct kvm_xen_vcpu_attr {
-+	__u16 type;
-+	__u16 pad[3];
-+	union {
-+		__u64 gpa;
-+		__u64 pad[8];
-+		struct {
-+			__u64 state;
-+			__u64 state_entry_time;
-+			__u64 time_running;
-+			__u64 time_runnable;
-+			__u64 time_blocked;
-+			__u64 time_offline;
-+		} runstate;
-+	} u;
-+};
-+
-+/* Available with KVM_CAP_XEN_HVM / KVM_XEN_HVM_CONFIG_SHARED_INFO */
-+#define KVM_XEN_VCPU_ATTR_TYPE_VCPU_INFO	0x0
-+#define KVM_XEN_VCPU_ATTR_TYPE_VCPU_TIME_INFO	0x1
-+#define KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_ADDR	0x2
-+#define KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_CURRENT	0x3
-+#define KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_DATA	0x4
-+#define KVM_XEN_VCPU_ATTR_TYPE_RUNSTATE_ADJUST	0x5
-+
- /* Secure Encrypted Virtualization command */
- enum sev_cmd_id {
- 	/* Guest initialization commands */
-@@ -1591,6 +1677,8 @@ enum sev_cmd_id {
- 	KVM_SEV_DBG_ENCRYPT,
- 	/* Guest certificates commands */
- 	KVM_SEV_CERT_EXPORT,
-+	/* Attestation report */
-+	KVM_SEV_GET_ATTESTATION_REPORT,
- 
- 	KVM_SEV_NR_MAX,
- };
-@@ -1643,6 +1731,12 @@ struct kvm_sev_dbg {
- 	__u32 len;
- };
- 
-+struct kvm_sev_attestation_report {
-+	__u8 mnonce[16];
-+	__u64 uaddr;
-+	__u32 len;
-+};
-+
- #define KVM_DEV_ASSIGN_ENABLE_IOMMU	(1 << 0)
- #define KVM_DEV_ASSIGN_PCI_2_3		(1 << 1)
- #define KVM_DEV_ASSIGN_MASK_INTX	(1 << 2)
-@@ -1764,4 +1858,7 @@ struct kvm_dirty_gfn {
- 	__u64 offset;
- };
- 
-+#define KVM_BUS_LOCK_DETECTION_OFF             (1 << 0)
-+#define KVM_BUS_LOCK_DETECTION_EXIT            (1 << 1)
-+
- #endif /* __LINUX_KVM_H */
+ riscv_softmmu_ss = ss.source_set()
+ riscv_softmmu_ss.add(files(
 -- 
 2.19.1
 
