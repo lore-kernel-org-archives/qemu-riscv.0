@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lVsbG-0006FP-Dj
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 05:11:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43120)
+	id 1lVsbM-0006IT-JC
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 05:11:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43160)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lVsbA-0006DR-8S; Mon, 12 Apr 2021 05:11:13 -0400
-Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33]:44907)
+ id 1lVsbC-0006ED-4C; Mon, 12 Apr 2021 05:11:15 -0400
+Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:46720)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lVsb2-0002qR-GM; Mon, 12 Apr 2021 05:11:11 -0400
-Received: by mail-yb1-xb33.google.com with SMTP id l14so8038396ybf.11;
- Mon, 12 Apr 2021 02:11:03 -0700 (PDT)
+ id 1lVsb4-0002s7-JT; Mon, 12 Apr 2021 05:11:13 -0400
+Received: by mail-yb1-xb2c.google.com with SMTP id y2so12177535ybq.13;
+ Mon, 12 Apr 2021 02:11:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=1hXwot+n1Oe3312UOiS7tIwSVSqEPxmcKidERgn8eqM=;
- b=iKYKV9MWgXLCM7gRy+0/rkC+mY68emEYNMx69i7XakwEg9Pzr1ywUFNE2drTBxUY0G
- PZggX+1i0q8wGSB0SW9cp+BQvSJtzVvvpWOsftuFzkbjK23fXMkkkT1LoL5+q/9oDzzi
- NvFu73RCDWCtUpc4LXhw1yCRxsjnfFFu2qwAaGAHHG5CPaoDwIlyjkUo94JbdYeWj5V5
- ESJSs7qghQQGzFyy5icbCDRpDoOazWv3U7xAmGZCzltd8qXudiDVX9UUfYX4EXPvY0Xf
- hypQ/G32rqSkVs9V5/QJWGdnASU5iaVNNrPnzaZgBkl1us00xvmjQpT96cSDheQ34kjG
- zyow==
+ :cc; bh=jK0mqu1iQCLA8twMlWJbR5GVErLdXdDfQ3ktFDfnfzM=;
+ b=oajyFagiHPUZV5pfU3xkf5ha4VI6R+43rpv7okqu1S6GAtNFr1DI55+xfU7vv5v/Eu
+ cy4e+/7BWV6JPjne8uXdiIiDTPCS3tY34pslBM51Jb6xUvKhc/WLL4+HQRaQlv4t5kZb
+ JcN3M3JgFjpNlv2GtHmZvZkBS43CeMyVjsgNIEeQbzYUSAZ2S0OtweQJ3M2Ju/4sYPJB
+ qjy/c1ShJlvxwTaIDT4AM2HvpXM1fn+b0bzNbfxhJC9JRI+l6p7nU8iJ2UbCGSPJznLT
+ aGECvuc5LVkdGonIMueud6sizoCj7wPfzwIQdYZDpMMzOYFECFTdjrgpuR3Jtm/4tgk3
+ XedQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=1hXwot+n1Oe3312UOiS7tIwSVSqEPxmcKidERgn8eqM=;
- b=dxkwlxAJXpYWIex2f7eDkTp5MGm0S4AAJcuzMdX7cz/Asc/LQ9edN9PFiyhFkdUdHi
- 1tJt4X0utbi/++n16kJF9WLR1rqZ0RhFREqEQJ+ets98d94J61ERWfNiEqX0rxXCxvhh
- GYhZ4UZ52+3FTIPi5Q6FAYPC3VQ8MQFGGamHDPEtxD53zjDZxDlJurRaEkZ2qt1HX64x
- 5gVKOEf2oYtF8GieWfu1CHPR3bjIBUC9z9l89vyyFm9oKpIieH4LbMIqX6+uZdv7aZb8
- QyRzQpxEhq0d2iUQ7LzBlKYGgZsg0K3RQSDHtdm0U4XVCUCHjF6MYCssDOcdl/sq0Ncw
- 5nRA==
-X-Gm-Message-State: AOAM531nRBwWMJIp1J487mtggxb469GOGTOqu7NxTWpqROSUD3ZTdsqI
- S3mFjVMjwDBRwHtcjaq3unUFhu7QK1GiAqRntms=
-X-Google-Smtp-Source: ABdhPJw8uAnQTzKAXrwyq++ByX713T0vqhsvfYnQsRaDDaWM03Rg+IhsYVjeFis3GA7qHBIMKXFc9oNoufhJjFxzxKs=
-X-Received: by 2002:a25:d181:: with SMTP id
- i123mr12058221ybg.387.1618218662789; 
- Mon, 12 Apr 2021 02:11:02 -0700 (PDT)
+ bh=jK0mqu1iQCLA8twMlWJbR5GVErLdXdDfQ3ktFDfnfzM=;
+ b=GYid3xUKeKmWYoCSIUoi+70yxtq+pU+0ma2/AOLCPt2ndvMTQYv9ykNu2KLKWYolkP
+ nS9wR3f58nlhKpNwdWVAyxjC2ObFF54ojor9OzrX8OFxIs1LB1bYU1bkYVgNA7Q98wtJ
+ 7NJkQNy9TdhLkHhI9OLx+Y/3I93qXRBcEP0PPePA7o7vWtSSXtNBE/wYFORbMOSQtR4e
+ 1pRZhdKGPoWjfT8Q2rH8L9hld2kqJNk8bjx04WwaH0dSKgbh3ii9QEzZ2MIijUtI60rT
+ NIr3rIHYzszB8OeB0BJWgCn0cMh0OqvRCLD8jT6Jp5OGv/3+fsq4gzKB9sU5jWeytcDz
+ /0+A==
+X-Gm-Message-State: AOAM530WaD6KunDA/T+wHNkgKwGDnLQExmFdC4iHQbYMNmk4zBgtwXcw
+ fb+qsw+64Zcpbs95dS3j49VRqbLwjhslill5z0o=
+X-Google-Smtp-Source: ABdhPJw9OufcNVqXLo8YCka7WCa39AUQn8NyqJgp4S7EP22W/XtAxltgyP7dL/Ppy//JtzFQiWoB/9Urvsm6zY7AldA=
+X-Received: by 2002:a25:cf8f:: with SMTP id f137mr1340856ybg.122.1618218665444; 
+ Mon, 12 Apr 2021 02:11:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1617393702.git.alistair.francis@wdc.com>
- <f9d643f4f0bf3b84aca49fb0373bb050f7d401a4.1617393702.git.alistair.francis@wdc.com>
-In-Reply-To: <f9d643f4f0bf3b84aca49fb0373bb050f7d401a4.1617393702.git.alistair.francis@wdc.com>
+ <aebf46ff114a04335f26cf7a2aae83be66dd5b42.1617393702.git.alistair.francis@wdc.com>
+In-Reply-To: <aebf46ff114a04335f26cf7a2aae83be66dd5b42.1617393702.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 12 Apr 2021 17:10:51 +0800
-Message-ID: <CAEUhbmVGbUT7UaGofAX+1xEB4CWfZXfOo3WzH4pxoAtegs=tzQ@mail.gmail.com>
-Subject: Re: [PATCH v1 6/8] target/riscv: Remove the unused HSTATUS_WPRI macro
+Date: Mon, 12 Apr 2021 17:10:53 +0800
+Message-ID: <CAEUhbmXfpFXeUcLuY8yscbWH3D=_DfDF0C0Hv0T1Nx6jyGgj=w@mail.gmail.com>
+Subject: Re: [PATCH v1 7/8] target/riscv: Remove an unused CASE_OP_32_64 macro
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2c;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -71,14 +70,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2021 09:11:15 -0000
+X-List-Received-Date: Mon, 12 Apr 2021 09:11:17 -0000
 
-On Sat, Apr 3, 2021 at 4:05 AM Alistair Francis
+On Sat, Apr 3, 2021 at 4:04 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu_bits.h | 6 ------
+>  target/riscv/translate.c | 6 ------
 >  1 file changed, 6 deletions(-)
 >
 
