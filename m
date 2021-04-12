@@ -1,63 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lVsbM-0006IT-JC
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 05:11:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43160)
+	id 1lW0ah-0000ac-I9
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 13:43:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55020)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lVsbC-0006ED-4C; Mon, 12 Apr 2021 05:11:15 -0400
-Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:46720)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lVsb4-0002s7-JT; Mon, 12 Apr 2021 05:11:13 -0400
-Received: by mail-yb1-xb2c.google.com with SMTP id y2so12177535ybq.13;
- Mon, 12 Apr 2021 02:11:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jK0mqu1iQCLA8twMlWJbR5GVErLdXdDfQ3ktFDfnfzM=;
- b=oajyFagiHPUZV5pfU3xkf5ha4VI6R+43rpv7okqu1S6GAtNFr1DI55+xfU7vv5v/Eu
- cy4e+/7BWV6JPjne8uXdiIiDTPCS3tY34pslBM51Jb6xUvKhc/WLL4+HQRaQlv4t5kZb
- JcN3M3JgFjpNlv2GtHmZvZkBS43CeMyVjsgNIEeQbzYUSAZ2S0OtweQJ3M2Ju/4sYPJB
- qjy/c1ShJlvxwTaIDT4AM2HvpXM1fn+b0bzNbfxhJC9JRI+l6p7nU8iJ2UbCGSPJznLT
- aGECvuc5LVkdGonIMueud6sizoCj7wPfzwIQdYZDpMMzOYFECFTdjrgpuR3Jtm/4tgk3
- XedQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=jK0mqu1iQCLA8twMlWJbR5GVErLdXdDfQ3ktFDfnfzM=;
- b=GYid3xUKeKmWYoCSIUoi+70yxtq+pU+0ma2/AOLCPt2ndvMTQYv9ykNu2KLKWYolkP
- nS9wR3f58nlhKpNwdWVAyxjC2ObFF54ojor9OzrX8OFxIs1LB1bYU1bkYVgNA7Q98wtJ
- 7NJkQNy9TdhLkHhI9OLx+Y/3I93qXRBcEP0PPePA7o7vWtSSXtNBE/wYFORbMOSQtR4e
- 1pRZhdKGPoWjfT8Q2rH8L9hld2kqJNk8bjx04WwaH0dSKgbh3ii9QEzZ2MIijUtI60rT
- NIr3rIHYzszB8OeB0BJWgCn0cMh0OqvRCLD8jT6Jp5OGv/3+fsq4gzKB9sU5jWeytcDz
- /0+A==
-X-Gm-Message-State: AOAM530WaD6KunDA/T+wHNkgKwGDnLQExmFdC4iHQbYMNmk4zBgtwXcw
- fb+qsw+64Zcpbs95dS3j49VRqbLwjhslill5z0o=
-X-Google-Smtp-Source: ABdhPJw9OufcNVqXLo8YCka7WCa39AUQn8NyqJgp4S7EP22W/XtAxltgyP7dL/Ppy//JtzFQiWoB/9Urvsm6zY7AldA=
-X-Received: by 2002:a25:cf8f:: with SMTP id f137mr1340856ybg.122.1618218665444; 
- Mon, 12 Apr 2021 02:11:05 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
+ id 1lW0af-0000Ys-LE; Mon, 12 Apr 2021 13:43:13 -0400
+Received: from sender-of-o51.zoho.in ([103.117.158.51]:2307)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
+ id 1lW0ac-0000Wj-Vh; Mon, 12 Apr 2021 13:43:13 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1618249379; cv=none; d=zohomail.in; s=zohoarc; 
+ b=b+dv06hUWXKWxIOKegPvd2XAZlajctfxrxahYvZv3ciBmGTdYvA3mYi++jymjV/wgKDzxBhfJaA9ckNVJBKkNc2gpUCneBrOLhTIkrdWUVOROUhvdJIDMDMw09dMTuJqemf9BnnDzB0x7NTnUmBzvCsYmLUF5tBrZtV57PBZi/4=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in;
+ s=zohoarc; t=1618249379;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To;
+ bh=NqEBvyBkUWMyqT1aEs2cawZtrhEfGIpjP27VgayNH5k=; 
+ b=JXuImHr+rKRGP4a433SOD71zzVmjVQKwumzih0hXrJ2VRJNZza8TpPiThX2YTldfRKXIUB1nne6ZMR8Mjf+A35GrgKyvl/WARCwwwcwzOw9NlFAblnS+7TIBMvuat8MUSBu1w8Bo4iUXSAYn9YEr+RpDfE8jQetdNjKPM7Scjn0=
+ARC-Authentication-Results: i=1; mx.zohomail.in;
+ dkim=pass  header.i=behindbytes.com;
+ spf=pass  smtp.mailfrom=vijai@behindbytes.com;
+ dmarc=pass header.from=<vijai@behindbytes.com>
+ header.from=<vijai@behindbytes.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1618249379; 
+ s=yrk; d=behindbytes.com; i=vijai@behindbytes.com;
+ h=From:To:Cc:Message-ID:Subject:Date:MIME-Version:Content-Transfer-Encoding:Content-Type;
+ bh=NqEBvyBkUWMyqT1aEs2cawZtrhEfGIpjP27VgayNH5k=;
+ b=JYCjumtWx8rRR14isW8twfNxBcsZtvpgSo1eYcC3I0kkbm0LbQAwnwoHtBWXM/FN
+ Y/iOzaNwaC7gd+Ll2AJJkRgIeQcTytKdM92SO7+ehY5P5kRvZUnZp8zSJnb8VIi3xua
+ ET7vPPR1x0T1D9ViPvtPHxHUUhCBKsxNs5Reu84k=
+Received: from localhost.localdomain (49.207.197.211 [49.207.197.211]) by
+ mx.zoho.in with SMTPS id 1618249378272518.6965502542902;
+ Mon, 12 Apr 2021 23:12:58 +0530 (IST)
+From: Vijai Kumar K <vijai@behindbytes.com>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org,
+	Vijai Kumar K <vijai@behindbytes.com>
+Message-ID: <20210412174248.8668-1-vijai@behindbytes.com>
+Subject: [PATCH] docs: Add documentation for shakti_c machine
+Date: Mon, 12 Apr 2021 23:12:48 +0530
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <cover.1617393702.git.alistair.francis@wdc.com>
- <aebf46ff114a04335f26cf7a2aae83be66dd5b42.1617393702.git.alistair.francis@wdc.com>
-In-Reply-To: <aebf46ff114a04335f26cf7a2aae83be66dd5b42.1617393702.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 12 Apr 2021 17:10:53 +0800
-Message-ID: <CAEUhbmXfpFXeUcLuY8yscbWH3D=_DfDF0C0Hv0T1Nx6jyGgj=w@mail.gmail.com>
-Subject: Re: [PATCH v1 7/8] target/riscv: Remove an unused CASE_OP_32_64 macro
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2c;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: quoted-printable
+X-ZohoMailClient: External
+Content-Type: text/plain; charset=utf8
+Received-SPF: pass client-ip=103.117.158.51;
+ envelope-from=vijai@behindbytes.com; helo=sender-of-o51.zoho.in
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -70,16 +63,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2021 09:11:17 -0000
+X-List-Received-Date: Mon, 12 Apr 2021 17:43:13 -0000
 
-On Sat, Apr 3, 2021 at 4:04 AM Alistair Francis
-<alistair.francis@wdc.com> wrote:
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/translate.c | 6 ------
->  1 file changed, 6 deletions(-)
->
+Add documentation for Shakti C reference platform.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Signed-off-by: Vijai Kumar K <vijai@behindbytes.com>
+---
+ docs/system/riscv/shakti-c.rst | 82 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 82 insertions(+)
+ create mode 100644 docs/system/riscv/shakti-c.rst
+
+diff --git a/docs/system/riscv/shakti-c.rst b/docs/system/riscv/shakti-c.rs=
+t
+new file mode 100644
+index 0000000000..a6035d42b0
+--- /dev/null
++++ b/docs/system/riscv/shakti-c.rst
+@@ -0,0 +1,82 @@
++Shakti C Reference Platform (``shakti_c``)
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++
++Shakti C Reference Platform is a reference platform based on arty a7 100t
++for the Shakti SoC.
++
++Shakti SoC is a SoC based on the Shakti C-class processor core. Shakti C
++is a 64bit RV64GCSUN processor core.
++
++For more details on Shakti SoC, please see:
++https://gitlab.com/shaktiproject/cores/shakti-soc/-/blob/master/fpga/board=
+s/artya7-100t/c-class/README.rst
++
++For more info on the Shakti C-class core, please see:
++https://c-class.readthedocs.io/en/latest/
++
++Supported devices
++-----------------
++
++The ``shakti_c`` machine supports the following devices:
++
++ * 1 C-class core
++ * Core Level Interruptor (CLINT)
++ * Platform-Level Interrupt Controller (PLIC)
++ * 1 UART
++
++Boot options
++------------
++
++The ``shakti_c`` machine can start using the standard -bios
++functionality for loading the baremetal application or opensbi.
++
++Boot the machine
++----------------
++
++Shakti SDK
++~~~~~~~~~~
++Shakti SDK can be used to generate the baremetal example UART applications=
+.
++
++.. code-block:: bash
++
++   $ git clone https://gitlab.com/behindbytes/shakti-sdk.git
++   $ cd shakti-sdk
++   $ make software PROGRAM=3Dloopback TARGET=3Dartix7_100t
++
++Binary would be generated in:
++  software/examples/uart_applns/loopback/output/loopback.shakti
++
++You could also download the precompiled example applicatons using below
++commands.
++
++.. code-block:: bash
++
++   $ wget -c https://gitlab.com/behindbytes/shakti-binaries/-/raw/master/s=
+dk/shakti_sdk_qemu.zip
++   $ unzip shakti_sdk_qemu.zip
++
++Then we can run the UART example using:
++
++.. code-block:: bash
++
++   $ qemu-system-riscv64 -M shakti_c -nographic \
++      -bios path/to/shakti_sdk_qemu/loopback.shakti
++
++OpenSBI
++~~~~~~~
++We can also run OpenSBI with Test Payload.
++
++.. code-block:: bash
++
++   $ git clone https://github.com/riscv/opensbi.git -b v0.9
++   $ cd opensbi
++   $ wget -c https://gitlab.com/behindbytes/shakti-binaries/-/raw/master/d=
+ts/shakti.dtb
++   $ export CROSS_COMPILE=3Driscv64-unknown-elf-
++   $ export FW_FDT_PATH=3D./shakti.dtb
++   $ make PLATFORM=3Dgeneric
++
++fw_payload.elf would be generated in build/platform/generic/firmware/fw_pa=
+yload.elf.
++Boot it using the below qemu command.
++
++.. code-block:: bash
++
++   $ qemu-system-riscv64 -M shakti_c -nographic \
++      -bios path/to/fw_payload.elf
+--=20
+2.25.1
+
+
 
