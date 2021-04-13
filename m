@@ -1,76 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lW95c-0003AU-Rs
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 22:47:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42368)
+	id 1lW9j1-0005Wn-AU
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 23:28:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48688)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=730c0c5bd=alistair.francis@wdc.com>)
- id 1lW95U-00037f-CE; Mon, 12 Apr 2021 22:47:38 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:21351)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1lW9iy-0005WR-Qc; Mon, 12 Apr 2021 23:28:25 -0400
+Received: from out28-220.mail.aliyun.com ([115.124.28.220]:51531)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=730c0c5bd=alistair.francis@wdc.com>)
- id 1lW95N-0002cF-II; Mon, 12 Apr 2021 22:47:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1618282049; x=1649818049;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=bAxzhW2heL1O/qeLTh6rWsqzlTWl7MNh1NZ6zHObLQU=;
- b=bYRhUdICmdr8DUyuq92OMR0P8EuJ4sM4mCaMWFwsBe6R/GuSi0wXPHP5
- HwO+3K0hmw2lbnJbseMN89fWauZDHr7vAR8c76foNIQI46dQnY1tRfs/6
- ZAUfqpBNWCiiUhbFr+eoG3FcisvXCYM+EGHd6iBSio+IYwt8cHI047OKr
- pfSQy4NX5IjlwkUqF8cU2svpBAi07g/t53NybxLBKX1Uzfd0CJxFpcFb8
- L7kyshqt/i2Qi9CA+5e3SihSbBc+m6Rol1bgIWU0YGa1J+p5D3Jc30Ngi
- x4RpvlM2IvYzhaiLvWvZR3FGA9FlHMhfJbphL1soU7BCAiZ5fVxVQRD3l Q==;
-IronPort-SDR: AH4QSFH42CH/1Xysp5/jB/co/WoKxig+BotTClbVAm33I9HfGfssye1J7SwCl7VMN93PEvcgy+
- LkrP9gqhwppOXGsq40WSrVpPpkr3PqOHj14DST/WNfwENQ/nTJVJwQpQRApzeliKe9+Evl6K8P
- YzEBuW60k8hscT/74bOR6JZ9pCbTtMD6sC/YR0tOCDrHOV/bZdXayhTe4xrpPgKOnkZ8VbleHB
- JWM5IWqJL28Vk/s1qCuZe5SY4Z66XS2fS568p3Pv6hLWxdMMblRL1Wf+PxS/nGrOHzyyQzxo7e
- 08g=
-X-IronPort-AV: E=Sophos;i="5.82,216,1613404800"; d="scan'208";a="164557096"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 13 Apr 2021 10:43:21 +0800
-IronPort-SDR: u28QQ3kcW/F0oCB+Wo9qsZS6GthcxvEqM8V5yl0dM537SrBfTlLYFOFwArFYd8EbFCiUjFfYqN
- R5qhrlTuPTC0emPz/ejA+bVRIV3DvbELYLnIwj6DCUfENPpUASlWnI/Pq36JqVaEhCFaiEOrJM
- X9sG/jDBkbO/YJADDU8wv4EwJtxiz9DNiBtRjcO9tT3sNSNpK6zgiUbXw5s5CTEmzhoW3Mf474
- PyMxEowgltEIi+xGAbJ4w7UFNIjvznAfnQEml6yZSKWyMIDr62B/F2Cqw8YiHIp7cMRTI2l5gR
- tKu3qZ8fVDCld0ooJT/xeUI+
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Apr 2021 19:24:23 -0700
-IronPort-SDR: fPQQwefFuXXUiewmv/K5LlmpihJJJ0Uqzw2s7P42TtAHG3cgWU1EO5KJDrWxvrkujs+F1lv1bB
- Vo9SD16gRIZpqqQS3no2M53sBmFau9H5ZOjtAuO5zNlikvV6JBaaYHUpELSoMaERZ9VUiAkACC
- oUIRj1VAgRjArl440suZ4bSAu3HxROxDeDPgrFa8iKwSByUvDUB0fO9Bx9IoPwksLAhrpv5lA+
- J6W3gB9jnzIUh1x/Q3XkXQyb8QoJp87haKJ/sWOnt2ihCbzzmRUfxvZLWyuWusG20SOSqG6pIb
- 2ZQ=
-WDCIronportException: Internal
-Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.165.16])
- by uls-op-cesaip01.wdc.com with ESMTP; 12 Apr 2021 19:43:16 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v3 8/8] target/riscv: Add ePMP support for the Ibex CPU
-Date: Tue, 13 Apr 2021 12:43:08 +1000
-Message-Id: <01a14ca289ed6ceb87fdaae61e4689937244518f.1618281655.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1618281655.git.alistair.francis@wdc.com>
-References: <cover.1618281655.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1lW9iu-0001Qe-Rs; Mon, 12 Apr 2021 23:28:24 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.10593|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.04784-0.00539141-0.946769;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047211; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=5; RT=5; SR=0; TI=SMTPD_---.Jz7d4AN_1618284488; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.Jz7d4AN_1618284488)
+ by smtp.aliyun-inc.com(10.147.44.145);
+ Tue, 13 Apr 2021 11:28:09 +0800
+Subject: Re: [PATCH 00/38] target/riscv: support packed extension v0.9.2
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, richard.henderson@linaro.org,
+ alistair23@gmail.com, palmer@dabbelt.com
+References: <20210212150256.885-1-zhiwei_liu@c-sky.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <17b7c38a-f780-0216-3e3b-fd0d2178c004@c-sky.com>
+Date: Tue, 13 Apr 2021 11:27:45 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <20210212150256.885-1-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.144;
- envelope-from=prvs=730c0c5bd=alistair.francis@wdc.com;
- helo=esa5.hgst.iphmx.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.220; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-220.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -83,30 +53,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Apr 2021 02:47:42 -0000
+X-List-Received-Date: Tue, 13 Apr 2021 03:28:26 -0000
 
-The physical Ibex CPU has ePMP support and it's enabled for the
-OpenTitan machine so let's enable ePMP support for the Ibex CPU in QEMU.
+ping +1.
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
----
- target/riscv/cpu.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 66787d019c..4bf6a00636 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -202,6 +202,7 @@ static void rv32_ibex_cpu_init(Object *obj)
-     set_misa(env, RV32 | RVI | RVM | RVC | RVU);
-     set_priv_version(env, PRIV_VERSION_1_10_0);
-     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
-+    qdev_prop_set_bit(DEVICE(obj), "x-epmp", true);
- }
- 
- static void rv32_imafcu_nommu_cpu_init(Object *obj)
--- 
-2.31.1
-
+On 2021/2/12 下午11:02, LIU Zhiwei wrote:
+> This patchset implements the packed extension for RISC-V on QEMU.
+>
+> This patchset have passed all my direct Linux user mode cases(RV64) and
+> bare metal cases(RV32) on X86-64 Ubuntu host machine. I will later push
+> these test cases to my repo(https://github.com/romanheros/qemu.git
+> branch:packed-upstream-v1).
+>
+> I have ported packed extension on RISU, but I didn't find a simulator or
+> hardware to compare with. If anyone have one, please let me know.
+>
+> Features:
+>    * support specification packed extension v0.9.2(https://github.com/riscv/riscv-p-spec/)
+>    * support basic packed extension.
+>    * support Zp64.
+>
+> LIU Zhiwei (38):
+>    target/riscv: implementation-defined constant parameters
+>    target/riscv: Hoist vector functions
+>    target/riscv: Fixup saturate subtract function
+>    target/riscv: 16-bit Addition & Subtraction Instructions
+>    target/riscv: 8-bit Addition & Subtraction Instruction
+>    target/riscv: SIMD 16-bit Shift Instructions
+>    target/riscv: SIMD 8-bit Shift Instructions
+>    target/riscv: SIMD 16-bit Compare Instructions
+>    target/riscv: SIMD 8-bit Compare Instructions
+>    target/riscv: SIMD 16-bit Multiply Instructions
+>    target/riscv: SIMD 8-bit Multiply Instructions
+>    target/riscv: SIMD 16-bit Miscellaneous Instructions
+>    target/riscv: SIMD 8-bit Miscellaneous Instructions
+>    target/riscv: 8-bit Unpacking Instructions
+>    target/riscv: 16-bit Packing Instructions
+>    target/riscv: Signed MSW 32x32 Multiply and Add Instructions
+>    target/riscv: Signed MSW 32x16 Multiply and Add Instructions
+>    target/riscv: Signed 16-bit Multiply 32-bit Add/Subtract Instructions
+>    target/riscv: Signed 16-bit Multiply 64-bit Add/Subtract Instructions
+>    target/riscv: Partial-SIMD Miscellaneous Instructions
+>    target/riscv: 8-bit Multiply with 32-bit Add Instructions
+>    target/riscv: 64-bit Add/Subtract Instructions
+>    target/riscv: 32-bit Multiply 64-bit Add/Subtract Instructions
+>    target/riscv: Signed 16-bit Multiply with 64-bit Add/Subtract
+>      Instructions
+>    target/riscv: Non-SIMD Q15 saturation ALU Instructions
+>    target/riscv: Non-SIMD Q31 saturation ALU Instructions
+>    target/riscv: 32-bit Computation Instructions
+>    target/riscv: Non-SIMD Miscellaneous Instructions
+>    target/riscv: RV64 Only SIMD 32-bit Add/Subtract Instructions
+>    target/riscv: RV64 Only SIMD 32-bit Shift Instructions
+>    target/riscv: RV64 Only SIMD 32-bit Miscellaneous Instructions
+>    target/riscv: RV64 Only SIMD Q15 saturating Multiply Instructions
+>    target/riscv: RV64 Only 32-bit Multiply Instructions
+>    target/riscv: RV64 Only 32-bit Multiply & Add Instructions
+>    target/riscv: RV64 Only 32-bit Parallel Multiply & Add Instructions
+>    target/riscv: RV64 Only Non-SIMD 32-bit Shift Instructions
+>    target/riscv: RV64 Only 32-bit Packing Instructions
+>    target/riscv: configure and turn on packed extension from command line
+>
+>   target/riscv/cpu.c                      |   32 +
+>   target/riscv/cpu.h                      |    6 +
+>   target/riscv/helper.h                   |  332 ++
+>   target/riscv/insn32-64.decode           |   93 +-
+>   target/riscv/insn32.decode              |  285 ++
+>   target/riscv/insn_trans/trans_rvp.c.inc | 1224 +++++++
+>   target/riscv/internals.h                |   50 +
+>   target/riscv/meson.build                |    1 +
+>   target/riscv/packed_helper.c            | 3862 +++++++++++++++++++++++
+>   target/riscv/translate.c                |    3 +
+>   target/riscv/vector_helper.c            |   90 +-
+>   11 files changed, 5912 insertions(+), 66 deletions(-)
+>   create mode 100644 target/riscv/insn_trans/trans_rvp.c.inc
+>   create mode 100644 target/riscv/packed_helper.c
+>
 
