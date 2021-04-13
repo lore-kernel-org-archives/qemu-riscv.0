@@ -1,75 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lW91L-0007IY-Rg
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 22:43:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41734)
+	id 1lW95c-0003AU-Rs
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 22:47:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42368)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=730c0c5bd=alistair.francis@wdc.com>)
- id 1lW91J-0007ET-QE; Mon, 12 Apr 2021 22:43:17 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:62364)
+ id 1lW95U-00037f-CE; Mon, 12 Apr 2021 22:47:38 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:21351)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=730c0c5bd=alistair.francis@wdc.com>)
- id 1lW91H-00005a-Vy; Mon, 12 Apr 2021 22:43:17 -0400
+ id 1lW95N-0002cF-II; Mon, 12 Apr 2021 22:47:34 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1618281795; x=1649817795;
+ t=1618282049; x=1649818049;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=xa/AfaCnaXGcqbPu6T/WSIkls/DVmFNgca5PZOzM57o=;
- b=TAQSNdFAXx36WTtDjw1Z7BjxYod5UrKe8xgwkW4/QzBQbjuR9m0rk6LF
- 6zQiIrWj3H/ddibl20tDNf0O8CNECP7P5qH5951TwUd8QbzxsHQXq+2p3
- jdTs5i8ZFX9NUwVvN8MU1r4RGasin4OmjmyeW38zwzLxje4GoXziODHN0
- kt4j08AD/dN4vThXczktUry8AGUtLlDiUyO4leuEkOEy8Iap8rZptIJDI
- M6qw1pMhenxTtGimNlWqz1+HP0tJeAEeucIysWfAZaCdHxfzqg4+vMoqj
- LndjV8ldp04HlnAy7xMTsLdhJf1CU7sA8yvKUxLlgugPu7hpFAPsrDdph Q==;
-IronPort-SDR: gQfPWEWAOfhpBSGY3BgNMo1Tbc1GD5qTMG96AH3jZHHgGSHZEiEPut8p2ZgonugF3g/DI4SgVM
- adB6Y9jVkt4n1xjbKpSMO/AOxGPAdXfK/6D26p+lRvCClqNW2gYrWT9wXlwt8rHhYOuTu1r+pX
- ao9JBYWchdCeOqmQgATYojR5TnPolYWwfxInjrUWflhTeSnrHEnzV6w23grA/J9LlNO6EXTGfz
- q4JJYCn+mXZC8ozy8plEHswQAfKPTSK1n23qjoDgZqgISMh9AadP2ZDjsC0mVy5wBadbx4//SQ
- OEg=
-X-IronPort-AV: E=Sophos;i="5.82,216,1613404800"; d="scan'208";a="164190777"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ bh=bAxzhW2heL1O/qeLTh6rWsqzlTWl7MNh1NZ6zHObLQU=;
+ b=bYRhUdICmdr8DUyuq92OMR0P8EuJ4sM4mCaMWFwsBe6R/GuSi0wXPHP5
+ HwO+3K0hmw2lbnJbseMN89fWauZDHr7vAR8c76foNIQI46dQnY1tRfs/6
+ ZAUfqpBNWCiiUhbFr+eoG3FcisvXCYM+EGHd6iBSio+IYwt8cHI047OKr
+ pfSQy4NX5IjlwkUqF8cU2svpBAi07g/t53NybxLBKX1Uzfd0CJxFpcFb8
+ L7kyshqt/i2Qi9CA+5e3SihSbBc+m6Rol1bgIWU0YGa1J+p5D3Jc30Ngi
+ x4RpvlM2IvYzhaiLvWvZR3FGA9FlHMhfJbphL1soU7BCAiZ5fVxVQRD3l Q==;
+IronPort-SDR: AH4QSFH42CH/1Xysp5/jB/co/WoKxig+BotTClbVAm33I9HfGfssye1J7SwCl7VMN93PEvcgy+
+ LkrP9gqhwppOXGsq40WSrVpPpkr3PqOHj14DST/WNfwENQ/nTJVJwQpQRApzeliKe9+Evl6K8P
+ YzEBuW60k8hscT/74bOR6JZ9pCbTtMD6sC/YR0tOCDrHOV/bZdXayhTe4xrpPgKOnkZ8VbleHB
+ JWM5IWqJL28Vk/s1qCuZe5SY4Z66XS2fS568p3Pv6hLWxdMMblRL1Wf+PxS/nGrOHzyyQzxo7e
+ 08g=
+X-IronPort-AV: E=Sophos;i="5.82,216,1613404800"; d="scan'208";a="164557096"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 13 Apr 2021 10:43:08 +0800
-IronPort-SDR: tJjUTFUaZtvsDsSzUXaSi5+/47g6MaBKMOwxyEmf0j/hiYx1aPLW6wlIN7QZM3nOQRU7KoFv7w
- RdchI4XMJGbieuYiy7+Yvb90w8E3SjY+C8E+eM3tzJA+D53OmpeiZl1SYTkf3GRCn396SMYg55
- AVpxU9bB011DlbGkIptIZKAjlom+DC1wRQcXDDjAcA8NS/Z+xFgGTlJw1JmC+vpA5HByvGLQgM
- RRrrfehSlUchjBJt9DzroK919lPO6clLaPa1pHLuYkgFuSLSBKFrMXP5zNULdqDoP7MMcQfOB6
- KumDNez4FsI5h3nI0pUNyTOL
+ by ob1.hgst.iphmx.com with ESMTP; 13 Apr 2021 10:43:21 +0800
+IronPort-SDR: u28QQ3kcW/F0oCB+Wo9qsZS6GthcxvEqM8V5yl0dM537SrBfTlLYFOFwArFYd8EbFCiUjFfYqN
+ R5qhrlTuPTC0emPz/ejA+bVRIV3DvbELYLnIwj6DCUfENPpUASlWnI/Pq36JqVaEhCFaiEOrJM
+ X9sG/jDBkbO/YJADDU8wv4EwJtxiz9DNiBtRjcO9tT3sNSNpK6zgiUbXw5s5CTEmzhoW3Mf474
+ PyMxEowgltEIi+xGAbJ4w7UFNIjvznAfnQEml6yZSKWyMIDr62B/F2Cqw8YiHIp7cMRTI2l5gR
+ tKu3qZ8fVDCld0ooJT/xeUI+
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Apr 2021 19:24:10 -0700
-IronPort-SDR: o+THx8Iihq1UAAr+Pe9D5Jc6oIclxKQSq+0Ls47/qofz/5xDbRgO/S9wv/f3om7LY7VxpEfLVn
- rPly1ExR+k2qJiH+cnPs6wJOUt80c639in6lX/dvueUY6ouIQXsHt/zssY39oz0v7u6nTieibA
- pYWGgmlRmoyjviOL6wrPkj6hc+PPkq190VjrSck6IEJIsjE7G8XQFS3B2A40x41FCP/Ca0TfpP
- jl0e/08rra4GlgLloeLJmusIt1TX9Qqm/h5PbfGO2vaLg4cOQW5AfYn7Vl3Z6ztALTcsCJWJt0
- DFE=
+ 12 Apr 2021 19:24:23 -0700
+IronPort-SDR: fPQQwefFuXXUiewmv/K5LlmpihJJJ0Uqzw2s7P42TtAHG3cgWU1EO5KJDrWxvrkujs+F1lv1bB
+ Vo9SD16gRIZpqqQS3no2M53sBmFau9H5ZOjtAuO5zNlikvV6JBaaYHUpELSoMaERZ9VUiAkACC
+ oUIRj1VAgRjArl440suZ4bSAu3HxROxDeDPgrFa8iKwSByUvDUB0fO9Bx9IoPwksLAhrpv5lA+
+ J6W3gB9jnzIUh1x/Q3XkXQyb8QoJp87haKJ/sWOnt2ihCbzzmRUfxvZLWyuWusG20SOSqG6pIb
+ 2ZQ=
 WDCIronportException: Internal
 Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.165.16])
- by uls-op-cesaip01.wdc.com with ESMTP; 12 Apr 2021 19:43:04 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 12 Apr 2021 19:43:16 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v3 7/8] target/riscv/pmp: Remove outdated comment
-Date: Tue, 13 Apr 2021 12:42:57 +1000
-Message-Id: <433d23e16bd941b209d433263aa8020b9efbf669.1618281655.git.alistair.francis@wdc.com>
+Subject: [PATCH v3 8/8] target/riscv: Add ePMP support for the Ibex CPU
+Date: Tue, 13 Apr 2021 12:43:08 +1000
+Message-Id: <01a14ca289ed6ceb87fdaae61e4689937244518f.1618281655.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1618281655.git.alistair.francis@wdc.com>
 References: <cover.1618281655.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.154.42;
+Received-SPF: pass client-ip=216.71.153.144;
  envelope-from=prvs=730c0c5bd=alistair.francis@wdc.com;
- helo=esa4.hgst.iphmx.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+ helo=esa5.hgst.iphmx.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,29 +83,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Apr 2021 02:43:18 -0000
+X-List-Received-Date: Tue, 13 Apr 2021 02:47:42 -0000
+
+The physical Ibex CPU has ePMP support and it's enabled for the
+OpenTitan machine so let's enable ePMP support for the Ibex CPU in QEMU.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
- target/riscv/pmp.c | 4 ----
- 1 file changed, 4 deletions(-)
+ target/riscv/cpu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 00f91d074f..68be893e16 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -19,10 +19,6 @@
-  * this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 66787d019c..4bf6a00636 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -202,6 +202,7 @@ static void rv32_ibex_cpu_init(Object *obj)
+     set_misa(env, RV32 | RVI | RVM | RVC | RVU);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
++    qdev_prop_set_bit(DEVICE(obj), "x-epmp", true);
+ }
  
--/*
-- * PMP (Physical Memory Protection) is as-of-yet unused and needs testing.
-- */
--
- #include "qemu/osdep.h"
- #include "qemu/log.h"
- #include "qapi/error.h"
+ static void rv32_imafcu_nommu_cpu_init(Object *obj)
 -- 
 2.31.1
 
