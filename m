@@ -1,62 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lW907-0005kq-IC
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 22:42:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41496)
+	id 1lW90I-0005z9-8s
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Apr 2021 22:42:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41558)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=730c0c5bd=alistair.francis@wdc.com>)
- id 1lW905-0005ji-Fx; Mon, 12 Apr 2021 22:42:01 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:1951)
+ id 1lW90G-0005xe-TN; Mon, 12 Apr 2021 22:42:12 -0400
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:19807)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=730c0c5bd=alistair.francis@wdc.com>)
- id 1lW902-0007fw-D2; Mon, 12 Apr 2021 22:42:00 -0400
+ id 1lW90E-0007w1-SS; Mon, 12 Apr 2021 22:42:12 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1618281721; x=1649817721;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=n3nwbJib2YznG66tzjAueVrCesshKzWUGmiBU37ZDDA=;
- b=UCFx6Ry3XuHXpnO5FZc7i5W2jHITyidEu7CBqiH3IzJCn54K9Gx4+/Ep
- 6Sa85y6de7PpTl7nV5C5lLIpgiQxy5dUaMZs/h12QA3w/uoYSXUTdTRPx
- VwDnJyOvCHXuma+9GgzGl70hzvIO691j/o4Ni4ZKiQKZx0suTIbtUKHYG
- 5tbRHpsRpJHR3mwPcXO+vWK0V96QkZ+7W7eFydHNnZBiJ9quIjPWJeMvK
- 951bP+yXXR0+J4V7aZHu3Zw4XODebqlZK8WOQa0kIdWf1LNk2A2a92blz
- G0P++dxG7hIl6EB2bLvPDduGIXVu2cWm6XbP1UlEEoCLavAJVtoW63KBk A==;
-IronPort-SDR: /SLw24ArSNLSIZvZSsOmb+pMMK4q7pUabPDJo1e1DTcWlpbQ/5Btxcgzog/R8lLKldfJ2m/rpx
- QQHXPoJHUngu2dFIgBFQkaNtQvItcvxoXng18MyEVPguaT8V+B6CQVgUV6uB+h1Wt3sybzIfKJ
- btAqBrFgIlzU0GfIqJkAu4uvsmMwwALe6/dGv7wyS39y9RfEPhkHgZaCPsKjjoBGlz9642Dczr
- WaxjqmNybpxgo6vhzIRRMZLSAbpRBsR4y7dapX1/Hs0oEujGx9yF21aBXpKLviZPgbqRO5GEln
- xNo=
-X-IronPort-AV: E=Sophos;i="5.82,216,1613404800"; d="scan'208";a="268800683"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 13 Apr 2021 10:41:50 +0800
-IronPort-SDR: +wVdMS22ctMQEda5ukuNDndKA4dNrnpPXdGCH4kIdtzeOMstfXsphDKQQNq60a/FjcACjtyLLx
- W8+kAUX4TX2fBkQFyyPJ23MKmC+eUSwPAoj3cvBqoKEfna3UUIRyc8F55xeboi0XyPUZcaQMnZ
- ORBbApwrL6OBQpdY9q3yRPqzhwjxsJ/VljwciQL0YSNcEnhCkc/K+7fV3KmML3ZM+B1D2cgO5g
- tB17lLLPKr5u0BkcHgY39v7qzrBQ4dB6aUwTmsAWnlMY6+meG2ZzXPNo7s/l3o132fNPSnObdO
- +VFDOsc/VtjTI6V+DQAL80Rf
+ t=1618281736; x=1649817736;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=/Ok+tcjiS+FZn/FXu1Fpq+gKJ8dmBUMypcJItbhVtUk=;
+ b=mecVyWQaA+YNP2iQtsHmwxMyfuv6TDxYNuq+nf9kUZHo5aWccMpq6VY9
+ K69w62YzPhGJGiNdAHFr/l2ai94Qup+tDDI7neFyVx5QgdNmkVtilWwnq
+ 8Zka2n6fVv2V5PDZcSaTXral+rXkXjFhglXXc0AKWwgFxzY8yHJr3SwlP
+ /Rp/i0MAMngxrir1AYDGruvIYC1/AsEYEz4Z42AZlXEo2lmFXhWd6c+nc
+ sQCHVYFexhs85uuE5chil5odHqLxO/p5MH/aOlwzXV8lA+p3XFrG59gkQ
+ uWjV9C+eQnJkFTTuMG9EwEkBudjARe5rfUiVG+eg/iDal1k4iymOWaqsE Q==;
+IronPort-SDR: V266+8jq/jrlOirTRuJs7TGih+jupAn/iR6kN14XD39hav4Iry/RyeIPyr2hZhRP4zA7lkPlkC
+ GRwmC4FmLYn7mUrXNeI6Pj49idb5te87QZIjn9fWlFAi5+hhh5fB5ObQnan55unIajW8WVajmv
+ Tc79OaMEhhNZRQi7NRhyltHJUr48yrv3uyay/4ldYV6U8YL24jd3mYiLjanwbhOoirVfjPSwGW
+ 2MRbMOZPhxneZtvxM/r1Naxq22UjUg9kZQ8nHoRCJvj3k1P/5MZt+7bUlHfJovHjM+fJvAGsH4
+ xZU=
+X-IronPort-AV: E=Sophos;i="5.82,216,1613404800"; d="scan'208";a="268800698"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 13 Apr 2021 10:41:57 +0800
+IronPort-SDR: UMMmOXmpBY3kVmI/qF4eTAt9qksWhGUXum9b+E/cjQ5uVYjNwCq9xMI6V3CAOjuIMnn7JU1peF
+ sxtaYZEaGEOfk2Bd/30zTFSJh190P/zbH0w3HeKdkxolw18zdT76xYLv+Yay5tTFYWy1tRC7P9
+ YB9Y+MrsjDSJnqBEizqeg7iU+NRHE3khjNYqFv5FcHUwOyAS3MeFzXVOQpBc7eo1mpq7jWkfrH
+ mqD2CCew4GCGAUUNM/ANENjkBOfPzGnEo6s02yKIT70hO9oIYk2TQmw1eSmmlEsO9qBeqpybn/
+ SM2KqbKFZDISScl2SzzkLN17
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Apr 2021 19:22:33 -0700
-IronPort-SDR: yJc9//4T+FjUoByDnJP34A9rpsr6RQx6I/nIz8dyU60WRfKufV43wQ1xP6abxCvJCayZ9R2QQQ
- hCqY+ohqtkxq8VNQtWUk6frGVizVe8miMJ8RECGuOsNXaAzg+0IUDFHzYH/V97lovaGpavwUnd
- UI46u/jEl+naQpSPYaCggjh0BwJgkIDr12sLpAzI35bdjbPXmSWa9K6UfwRtyiUF5lxd1B4Thj
- oqYRkYsjWvdnl+pVBUTo7JcK7kJN/QlJZ/OmL6LXBUcQiT5tph4DA4R6bKqTM9bvkc2apmi5Ki
- Tt4=
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Apr 2021 19:21:20 -0700
+IronPort-SDR: 4ROzS0BIe6NtWejGR4AiAoa7gUPRPpjLO+qj5UCcsMdQ+ZHny1kFGlCwqyN6xHzzH3TWW+i6WQ
+ jugYaXrQy2g+b3kWtrAq8YnZfwALDykPtdZx/CV5PvUc7yqrV+Cmdf6rAPTRfOyflkouG0j80l
+ Tag27yQIU5lspOseiGLCOvwzwYWcyCR0pme2CSzuEberwIVPSn0VDwjZit26WIvdvlqTqkabgS
+ ib9r3+JCuKLx1MDDyHS4LLe69EOh1pNFdgbWHT3ZXozWbdKkRhgrR8jS3IN+ojg0kgK35+8NkR
+ DR0=
 WDCIronportException: Internal
 Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.165.16])
- by uls-op-cesaip01.wdc.com with ESMTP; 12 Apr 2021 19:41:16 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 12 Apr 2021 19:41:50 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v3 0/8]  RISC-V: Add support for ePMP v0.9.1
-Date: Tue, 13 Apr 2021 12:41:14 +1000
-Message-Id: <cover.1618281655.git.alistair.francis@wdc.com>
+Subject: [PATCH v3 1/8] target/riscv: Fix the PMP is locked check when using
+ TOR
+Date: Tue, 13 Apr 2021 12:41:43 +1000
+Message-Id: <358acc99b748a2099f460fb01d7f0727bdf1432e.1618281655.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <cover.1618281655.git.alistair.francis@wdc.com>
+References: <cover.1618281655.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=68.232.143.124;
@@ -81,48 +84,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Apr 2021 02:42:01 -0000
+X-List-Received-Date: Tue, 13 Apr 2021 02:42:13 -0000
 
-This series adds support for ePMP v0.9.1 to the QEMU RISC-V target.
+The RISC-V spec says:
+    if PMP entry i is locked and pmpicfg.A is set to TOR, writes to
+    pmpaddri-1 are ignored.
 
-This is based on previous patches, but has been rebased on the latest
-master and updated for the latest spec.
+The current QEMU code ignores accesses to pmpaddri-1 and pmpcfgi-1 which
+is incorrect.
 
-The spec is avaliable at: https://docs.google.com/document/d/1Mh_aiHYxemL0umN3GTTw8vsbmzHZ_nxZXgjgOUzbvc8
+Update the pmp_is_locked() function to not check the supporting fields
+and instead enforce the lock functionality in the pmpaddr write operation.
 
-This was tested by running Tock on the OpenTitan board.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+---
+ target/riscv/pmp.c | 26 ++++++++++++++++----------
+ 1 file changed, 16 insertions(+), 10 deletions(-)
 
-This is based on the original work by:
- Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
- Hou Weiying <weiying_hou@outlook.com>
- Myriad-Dreamin <camiyoru@gmail.com>
-
-v3:
- - Address Bin's comments on the ePMP implementation
-v2:
- - Rebase on the RISC-V tree
-
-Alistair Francis (4):
-  target/riscv: Fix the PMP is locked check when using TOR
-  target/riscv: Add the ePMP feature
-  target/riscv/pmp: Remove outdated comment
-  target/riscv: Add ePMP support for the Ibex CPU
-
-Hou Weiying (4):
-  target/riscv: Define ePMP mseccfg
-  target/riscv: Add ePMP CSR access functions
-  target/riscv: Implementation of enhanced PMP (ePMP)
-  target/riscv: Add a config option for ePMP
-
- target/riscv/cpu.h        |   3 +
- target/riscv/cpu_bits.h   |   3 +
- target/riscv/pmp.h        |  14 +++
- target/riscv/cpu.c        |  11 ++
- target/riscv/csr.c        |  24 ++++
- target/riscv/pmp.c        | 228 +++++++++++++++++++++++++++++++++-----
- target/riscv/trace-events |   3 +
- 7 files changed, 260 insertions(+), 26 deletions(-)
-
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index cff020122a..a3b253bb15 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -59,16 +59,6 @@ static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
+         return 0;
+     }
+ 
+-    /* In TOR mode, need to check the lock bit of the next pmp
+-     * (if there is a next)
+-     */
+-    const uint8_t a_field =
+-        pmp_get_a_field(env->pmp_state.pmp[pmp_index + 1].cfg_reg);
+-    if ((env->pmp_state.pmp[pmp_index + 1u].cfg_reg & PMP_LOCK) &&
+-         (PMP_AMATCH_TOR == a_field)) {
+-        return 1;
+-    }
+-
+     return 0;
+ }
+ 
+@@ -380,7 +370,23 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+     target_ulong val)
+ {
+     trace_pmpaddr_csr_write(env->mhartid, addr_index, val);
++
+     if (addr_index < MAX_RISCV_PMPS) {
++        /*
++         * In TOR mode, need to check the lock bit of the next pmp
++         * (if there is a next).
++         */
++        if (addr_index + 1 < MAX_RISCV_PMPS) {
++            uint8_t pmp_cfg = env->pmp_state.pmp[addr_index + 1].cfg_reg;
++
++            if (pmp_cfg & PMP_LOCK &&
++                PMP_AMATCH_TOR == pmp_get_a_field(pmp_cfg)) {
++                qemu_log_mask(LOG_GUEST_ERROR,
++                              "ignoring pmpaddr write - pmpcfg + 1 locked\n");
++                return;
++            }
++        }
++
+         if (!pmp_is_locked(env, addr_index)) {
+             env->pmp_state.pmp[addr_index].addr_reg = val;
+             pmp_update_rule(env, addr_index);
 -- 
 2.31.1
 
