@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lWaRK-0000IE-JE
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Apr 2021 03:59:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47436)
+	id 1lWaRP-0000Qg-3c
+	for mharc-qemu-riscv@gnu.org; Wed, 14 Apr 2021 04:00:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47464)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lWaRJ-0000I3-Oe; Wed, 14 Apr 2021 03:59:57 -0400
-Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36]:38690)
+ id 1lWaRN-0000MV-2m; Wed, 14 Apr 2021 04:00:01 -0400
+Received: from mail-yb1-xb35.google.com ([2607:f8b0:4864:20::b35]:37785)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lWaRI-0001ku-8m; Wed, 14 Apr 2021 03:59:57 -0400
-Received: by mail-yb1-xb36.google.com with SMTP id x76so11148033ybe.5;
- Wed, 14 Apr 2021 00:59:55 -0700 (PDT)
+ id 1lWaRL-0001nV-Jf; Wed, 14 Apr 2021 04:00:00 -0400
+Received: by mail-yb1-xb35.google.com with SMTP id 65so21171432ybc.4;
+ Wed, 14 Apr 2021 00:59:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=y7L1UbA9+tTOkPlDsjY5PbkoqsSfv32GgHvwSlXGJ5E=;
- b=g4MwZ8jmAoy4vZI/gvcEd5iWKsNnYlmOzwnZbW7ChHdmrnJcL/OEc4J+2+oAbXQoxR
- Z0PJjaEsKGqwGYxZvFvFCRuBxR+oHSiDAzmD9JwY3WrklGZLoSLrBNxYnRxjViwsV5EF
- v6gINaavUOQ69qO7lJRYrvTkXKuf+9slTvDiWPzwnot4HeRqu26raW7PKSJiwcNVvRRG
- YOTrpIXlNMi9Tgy+ut3jm9/I56CrXcivRZZzM9SgFyPW8Kid/OulOz/D+vGnt5MvfWHp
- d0wuHnSfZf90w4pOnafImaPNY+PuuWSFZWDAhaYBkWVrtw4/KvFBiLriyMMr+Fk++BK5
- s2Dg==
+ :cc; bh=L5iI7QYKKzDA1z2h2cIrwKtonNbj+WbNwXqkcU3St/A=;
+ b=WoNDhld9QQI+Taj3lPrHriBcYrB9QcZ2AW/OsHhLeGFi86tQvlBCAbnEk4OTF4wOIJ
+ nJ64ycVWgpCrs40wr2YLdUCtqo9p+3lOPTxm9vjr9sEdQmLfuHPb0yJD4RWcXPEnMUoa
+ 8AgeDqcZGub6xx0tKQOeqbBxlbqtmJy/3HTDkJ5AAfX3MG7XHTnqEFwxhourd8ZG93YD
+ 4bPg7090fIdSCJuV0QLz+0jp/PzKkGYRX/PJMdZF6QSP0dnoxC6BrMVzzyn/mzQRGcjK
+ DlPTIrhV0NvI6bKWe8NhXUxSJcJ/Er+7oK9HFB4w4xT2MgeIg0mlA/fs0QIFPkgNbKjh
+ 7tIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=y7L1UbA9+tTOkPlDsjY5PbkoqsSfv32GgHvwSlXGJ5E=;
- b=nyV+krrmh9Gqew5yJWpH60wZ/ujJLHESuN5DtnTUFMppHOaMT+t5RKPblsYYOTfv2b
- DajtYmXuZyOAlSdpOLQSq9jN3og6rFECkh7t/7vmvEq2HrmRZv5B3u3AC5iC+U8vlfIm
- UeYDsF7aNJxcRaiFgmdG47f3NTzRpINKLBwqNwRx2U1gJfbn7UuElDmT12nn1jnZ6Rwb
- OxJJah97Zp8UAtPh3CIqvTSTiEW7FLcw0Szu/GW8u9Tplcganlvky8ffPCbjsUfrENJ5
- FoZQ2dcwTmPhJhNxfpklfM8ABhsZIaeN987SfKDNiGtSpvGe3H6MfIlVF6Wja+k06uC6
- CSYg==
-X-Gm-Message-State: AOAM530COUm+bnvxC2jcoTjsVhgCU18Py+jA43RQWFNNgTnXWYEH20lx
- LDCb7Yk1e7T/r6Ag2JfFtp6bS04LFlbZ3zbZB0A=
-X-Google-Smtp-Source: ABdhPJxs21xuPii607ID1bFL5EDEykHCFgt5MgrhLWf3tq3uVrJ9fKhgDzexL1a7XuTd3oDpB4MRZezqGk7jgf9yVcA=
-X-Received: by 2002:a25:cf8f:: with SMTP id
- f137mr16164279ybg.122.1618387194878; 
- Wed, 14 Apr 2021 00:59:54 -0700 (PDT)
+ bh=L5iI7QYKKzDA1z2h2cIrwKtonNbj+WbNwXqkcU3St/A=;
+ b=dcdZH18BtZRNcXqNPam57J9Ogtvr3IMoJIOU7rKHbDL560NimKgTpl3mQV9MABF6Bl
+ ANLo1J+sjclyTFeoWkZw9d30aC0RvO5FHLrOpEGk1981XV/6HwiQqc5VnfBK9KODv97c
+ cu0a2EkPUQuxvG3ODo9QAj8jTbOlEKhbuKGlHbviGbXhxzeW6uzMpYWJR4QWdtaRy/eA
+ SJb4IPla3D4F81vyLmsT985rrdvaSH1TR2YwECnKCUJJDJo9XE6ITFXQ6Qbp6bnYofqx
+ r11zxe3pkhjCtbr9wLNFJiYvcCZy4sAN/77iGyRBr4iXrDMMQgTimwT+lYOmk4Q8fAMG
+ LtAQ==
+X-Gm-Message-State: AOAM532cwAb07/G+keGPBknHIfgAZerfb8Tk5jgQlx47OKaXs2x/1x1s
+ bv9sQ5Qby5ICt60s6YTQRQecZoYl+/H23AMnRV0=
+X-Google-Smtp-Source: ABdhPJwP6mKTSFBK29DRe5J3WwDoKX/yeisilLZMeWVQZKi9EVfx0jxbRqwjL8MJC/YFNLXcc0tpC6Tj8WaMu7OdYVU=
+X-Received: by 2002:a25:aa14:: with SMTP id s20mr11663461ybi.306.1618387198488; 
+ Wed, 14 Apr 2021 00:59:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1618356725.git.alistair.francis@wdc.com>
- <3eea7ff02e990d9d9cb906be9eb821eaf1ee5408.1618356725.git.alistair.francis@wdc.com>
-In-Reply-To: <3eea7ff02e990d9d9cb906be9eb821eaf1ee5408.1618356725.git.alistair.francis@wdc.com>
+ <c699df25d8349bf9fef71c940501bff98d5f21c1.1618356725.git.alistair.francis@wdc.com>
+In-Reply-To: <c699df25d8349bf9fef71c940501bff98d5f21c1.1618356725.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 14 Apr 2021 15:59:43 +0800
-Message-ID: <CAEUhbmWpc0FZ3W6iPeMWpDVJn3b+8gt-2FUtuaD=oYUvixRtDw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/9] target/riscv: Remove the hardcoded RVXLEN macro
+Date: Wed, 14 Apr 2021 15:59:46 +0800
+Message-ID: <CAEUhbmWxzwk=u7kf+iK368Vqaq+3K-bST51Um-hMzcZ52LN33Q@mail.gmail.com>
+Subject: Re: [PATCH v2 2/9] target/riscv: Remove the hardcoded SSTATUS_SD macro
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b35;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb35.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -71,18 +70,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Apr 2021 07:59:58 -0000
+X-List-Received-Date: Wed, 14 Apr 2021 08:00:01 -0000
 
 On Wed, Apr 14, 2021 at 7:33 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
+
+Worth mentioning that this also fixed the issue of a writable SD bit
+
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  target/riscv/cpu.h | 6 ------
->  target/riscv/cpu.c | 6 +++++-
->  2 files changed, 5 insertions(+), 7 deletions(-)
+>  target/riscv/cpu_bits.h | 6 ------
+>  target/riscv/csr.c      | 9 ++++++++-
+>  2 files changed, 8 insertions(+), 7 deletions(-)
 >
 
+Otherwise,
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
