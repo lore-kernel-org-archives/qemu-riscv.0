@@ -1,75 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lWVzF-0003Fr-Ds
-	for mharc-qemu-riscv@gnu.org; Tue, 13 Apr 2021 23:14:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50602)
+	id 1lWWPo-0006Ur-O6
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Apr 2021 23:42:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55112)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lWVzE-0003F5-Dc
- for qemu-riscv@nongnu.org; Tue, 13 Apr 2021 23:14:40 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:36661)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1lWWPm-0006S3-GA
+ for qemu-riscv@nongnu.org; Tue, 13 Apr 2021 23:42:06 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:40833)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lWVzA-0006VB-QZ
- for qemu-riscv@nongnu.org; Tue, 13 Apr 2021 23:14:39 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id z22so4194279plo.3
- for <qemu-riscv@nongnu.org>; Tue, 13 Apr 2021 20:14:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=gAAq5ItyC12mz4O4d4lIMv9wThII8XtGy9912qs54fM=;
- b=evm3PkZc5l9SNGPVMIWrcfbzANrH1eSzTzoMRId4viORtuV1Rks3qYkJh6KLpTXIp/
- s3Usr3+TGzrPCA6Div6ASYetIPX1znd/JmdaZBWFGae3noG4zMbIIAjkZYnSQUW8Bxso
- FkPKHnKHsQjTRjcPdnvyA/y8HKasALJaJF/yp8/boPD4HnhphV1FHkq8etImG07VcflP
- RIoCmD+I9JBkMtCOstJYtc9wEB/7kp/Bocs2rI6p9ZozmfbZQEgOtX8AFHRIfpqb/dxu
- u++0na5voJ9SLEo/WzNnIish6qPxVjd345/ht3On8NPs6iArTEgVo+IOkpKKphNdJrSO
- OyDg==
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1lWWPk-0005xt-RM
+ for qemu-riscv@nongnu.org; Tue, 13 Apr 2021 23:42:06 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id
+ b8-20020a17090a5508b029014d0fbe9b64so11759058pji.5
+ for <qemu-riscv@nongnu.org>; Tue, 13 Apr 2021 20:42:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=m4QaEvX13+YjQd3jg7kJvUNIvda2k5QLmlTdOfaWvaw=;
+ b=BfBlyNLOTZxWQRORUBkOkZv4DvBWaYEk09dZ9i/VHhnZtC561swx6BtGzfdm8zbCRz
+ bOQMKa3UVFpeAf9cWL8KigQ2/CUtlAgH74+HKMGA/CjNSgYeZkL8vAWFNmGYEpUOzepO
+ L6sLAuqhcosHeIrPODL9V6KbEJRBThnO/twDTEjhBtI6Ayo+2fuOgAAiW/v54/I3Ss8R
+ AERS3LVKaDAr+EodVc/O9h7nN+gY9mIPxiuss9G+f6DW4ot6V95PqBoexxO3uNzQGYVQ
+ 1rU0e9s5XIgMrd+jsHWkMyxnNPGqWz3tChX+BRean9HBf1Gufpy+MjAGq30MOcEBG4Sk
+ sbqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=gAAq5ItyC12mz4O4d4lIMv9wThII8XtGy9912qs54fM=;
- b=Ma+vH5OeDJR3qin+a0KrIqXrL9dNL7g41iFsQoFtdAFeVYluw+iqfd86r6RYZ1VyNU
- crJcQZuwNouxglNxzY2JL7kyVZiNz7LL3VVj92+JaCmoqJ2mv5YcfVnUXc6XBBxu0GjX
- KY0RUykutBUC0y10uz9GRdkkycB4MdmRiBhTNSQQjvYiY5xepGZMkB77Yl+saANE1FLL
- CoLbcbzEB36cnH9Ar6ZA9lxOogNo7r4/GHycCgb1utpBYyk9ex4epcqzTTeAC7cERfzj
- M2X4lJAe1pdgVFY3glnzQdYf75BcObGf+b6Wya4FmP5Y0tlpoH7fMIyCNa9E6Np1e9Z7
- tkmw==
-X-Gm-Message-State: AOAM53168SKC3W1DJwMup/wbeGEByuAOZiKkpfUU+0T5JmnxyxjspKA0
- xF7SCamEuxrN2YayJcJ2XZC+WA==
-X-Google-Smtp-Source: ABdhPJyfv+8RTikYJjcyLBRm3OihQhuTLX76dfWzIUAcSmCfVcWddSxnKpro0UNRX+K4gZFhWQBeNQ==
-X-Received: by 2002:a17:90a:e298:: with SMTP id
- d24mr1066895pjz.37.1618370075444; 
- Tue, 13 Apr 2021 20:14:35 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.131.83])
- by smtp.gmail.com with ESMTPSA id o9sm14863487pfh.217.2021.04.13.20.14.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Apr 2021 20:14:35 -0700 (PDT)
-Subject: Re: [PATCH v2 5/9] target/riscv: Remove the hardcoded SATP_MODE macro
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
-References: <cover.1618356725.git.alistair.francis@wdc.com>
- <ef02611060de1a918f148fef5773a68d336afc16.1618356725.git.alistair.francis@wdc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <ec8a710c-c38a-ca35-7f44-1caffd1987c2@linaro.org>
-Date: Tue, 13 Apr 2021 20:14:32 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
-MIME-Version: 1.0
-In-Reply-To: <ef02611060de1a918f148fef5773a68d336afc16.1618356725.git.alistair.francis@wdc.com>
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=m4QaEvX13+YjQd3jg7kJvUNIvda2k5QLmlTdOfaWvaw=;
+ b=K56xUIYp+KzfcLOESJ6OpiFr7APtbsPrdlK3mHvuqzSMooaJWFZMjq7CeURRusNU7y
+ 5hQbvPTuUSc5OdgpkslILhrEhNYYC8QVitHuwy9BA/lo83cfcOAtXsEww/TXltF8uihe
+ MJHwPkF/BYYCIbdmDPVAT0DSh55y7XLyDQJUL662TTeENGDbG2250Uo9RToNUpTH5OLv
+ HiDy4GjKK12HjpIMl7jt8PqwJKhRFJjA2rb4Boef/zj+4XUQdqbpzrgRlaCPk27SAdY9
+ lF+92NPSuw7HUUBtHyzCC2x+f9fGuolsEDdKtpZKLyj98oW063qBpSsxOTzFWjHvhYU9
+ u6Ag==
+X-Gm-Message-State: AOAM533W+7X4Nqn3prc7/QcVAfBwrSy9jzQSv4211Dp+T95NnAGqgGNA
+ HujyMV95MY/mBQ/CxeC1AUliJg==
+X-Google-Smtp-Source: ABdhPJzQ2dPakrqoKKVuHEfecgUNUdwGzW54b1DqG25NCSXg6CJYrYmnc5PWatkk6bocPzwQZu3q9g==
+X-Received: by 2002:a17:902:c411:b029:e9:3d37:afc with SMTP id
+ k17-20020a170902c411b02900e93d370afcmr36466483plk.17.1618371721637; 
+ Tue, 13 Apr 2021 20:42:01 -0700 (PDT)
+Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
+ [76.210.143.223])
+ by smtp.gmail.com with ESMTPSA id z23sm3372963pjh.45.2021.04.13.20.42.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Apr 2021 20:42:01 -0700 (PDT)
+Date: Tue, 13 Apr 2021 20:42:01 -0700 (PDT)
+X-Google-Original-Date: Tue, 13 Apr 2021 20:41:50 PDT (-0700)
+Subject: Re: [PATCH] target/riscv: fix exception index on instruction access
+ fault
+In-Reply-To: <20210413163000.45307-1-emmanuel.blot@sifive.com>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org,
+ emmanuel.blot@sifive.com
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: emmanuel.blot@sifive.com
+Message-ID: <mhng-a46bc280-de18-4499-9faa-063849ff6d6a@palmerdabbelt-glaptop>
+Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=palmer@dabbelt.com; helo=mail-pj1-x1032.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,18 +80,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Apr 2021 03:14:40 -0000
+X-List-Received-Date: Wed, 14 Apr 2021 03:42:06 -0000
 
-On 4/13/21 4:34 PM, Alistair Francis wrote:
-> Signed-off-by: Alistair Francis<alistair.francis@wdc.com>
+On Tue, 13 Apr 2021 09:30:00 PDT (-0700), emmanuel.blot@sifive.com wrote:
+> When no MMU is used and the guest code attempts to fetch an instruction
+> from an invalid memory location, the exception index defaults to a data
+> load access fault, rather an instruction access fault.
 > ---
->   target/riscv/cpu_bits.h   | 11 -----------
->   target/riscv/cpu_helper.c | 24 ++++++++++++++++++------
->   target/riscv/csr.c        | 20 ++++++++++++++++----
->   target/riscv/monitor.c    | 22 +++++++++++++++++-----
->   4 files changed, 51 insertions(+), 26 deletions(-)
+>  target/riscv/cpu_helper.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 21c54ef5613..4e107b1bd23 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -691,8 +691,10 @@ void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
+>
+>      if (access_type == MMU_DATA_STORE) {
+>          cs->exception_index = RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
+> -    } else {
+> +    } else if (access_type == MMU_DATA_LOAD) {
+>          cs->exception_index = RISCV_EXCP_LOAD_ACCESS_FAULT;
+> +    } else {
+> +        cs->exception_index = RISCV_EXCP_INST_ACCESS_FAULT;
+>      }
+>
+>      env->badaddr = addr;
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+You need a Signed-off-by, but otherwise
 
-r~
+Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
+
+Thanks!
 
