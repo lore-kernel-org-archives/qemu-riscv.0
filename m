@@ -1,63 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lWtw3-0004xo-F2
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Apr 2021 00:48:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33676)
+	id 1lWuuZ-00060q-V2
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Apr 2021 01:51:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42546)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lWtw1-0004w0-5E; Thu, 15 Apr 2021 00:48:57 -0400
-Received: from mail-il1-x12d.google.com ([2607:f8b0:4864:20::12d]:43917)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lWtvz-0006c1-93; Thu, 15 Apr 2021 00:48:56 -0400
-Received: by mail-il1-x12d.google.com with SMTP id d2so19078484ilm.10;
- Wed, 14 Apr 2021 21:48:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WDKqbg1uqLbbmHcYJVFnNdUNlvGknY6GmPoa7Um9/rE=;
- b=ax+gL6UQcb26rO/d8iut1Wz4y/1CBd0SnXv03SE1cw4CNi0FrtY3+mD13ofjO7/M4W
- vnIFSruoJujJ4EX46p7WbkptxBnl9bLHGfHHr1VrNNgkVNwnEJKTzmLQYy+DrqTDYEax
- AwXjsb/t3HBI+7iUvuWoz0EOzenF4M1TvtRu/RYRR02OPKPvSLTw45Rw1Q7MxaYtRDcu
- 7DhqWA4U7j2qngnjeC17JsVqWleJz7WiQG+/gaXWrFHfejG7FjpBtAzbijyYMPTAwiA1
- 6pObo34iHUlV/zV8q2qYSr8u6jQ8pwlutZ7/LJiP6Zo9PtliMJgk+51KoZiWzAEjeJ/S
- PI5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=WDKqbg1uqLbbmHcYJVFnNdUNlvGknY6GmPoa7Um9/rE=;
- b=Mn29L9U+lQ1o8cin5CbWiXmzFnViG/xMft5WN+XZyi6afbJrleu1Q5cE5op1te2wF+
- fZTx0wZgN05fmrpWN4Zf9XG81cziT81KUKvaby7RV1egDAadSN0eOWZluRW3Qc8mKP93
- 2VfdIThNEq3XeH1m85zdxwUNvxESDXhbIaBFUCKMR7/Y7ECJfiRJ8b1rMRMrn8hVFwxV
- jiin6iY2WYMXsugUIrNmPrprm/lMtsVVkaYWrAVDruUse4u0btapEN0Rr957k2AH+N09
- 7LN5YLJYOnXJ6KH6RVNl+ARPbivArIsggcydZ7TcpUfGkAIasNpzqMQN8iPedWQvcA48
- IHHA==
-X-Gm-Message-State: AOAM531o0drZdSQJlQzxDAh6u4BMTdLAD/K5tPEmxJ4wV3bSRn7qRf4Z
- nuDRj0Ot0LHXoGkiWmImaCabOEZ7E1lcVrI/zAo=
-X-Google-Smtp-Source: ABdhPJyZk4fLUxB5BCySudays9jIzIBnAYZczyOujYfPIkLflV9RFnqpFrMtGt4gw4sL4CTv3q/xXXC8bZ9pras1LnQ=
-X-Received: by 2002:a05:6e02:671:: with SMTP id
- l17mr1323101ilt.267.1618462133253; 
- Wed, 14 Apr 2021 21:48:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1lWuuX-00060b-CW; Thu, 15 Apr 2021 01:51:29 -0400
+Received: from out28-3.mail.aliyun.com ([115.124.28.3]:54885)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1lWuuT-0003vy-UK; Thu, 15 Apr 2021 01:51:29 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07527663|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0488016-0.00547701-0.945721;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047194; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=5; RT=5; SR=0; TI=SMTPD_---.K-EMDyX_1618465876; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.K-EMDyX_1618465876)
+ by smtp.aliyun-inc.com(10.147.40.44); Thu, 15 Apr 2021 13:51:17 +0800
+Subject: Re: [PATCH 00/38] target/riscv: support packed extension v0.9.2
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20210212150256.885-1-zhiwei_liu@c-sky.com>
+ <17b7c38a-f780-0216-3e3b-fd0d2178c004@c-sky.com>
+ <CAKmqyKM430xxwC+JyXBKwFiE4Y=1_mk4Qq3b3D+EKUszSneWRA@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <431e88e7-5a21-74ec-624e-99fc6f29d175@c-sky.com>
+Date: Thu, 15 Apr 2021 13:50:55 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20210412174248.8668-1-vijai@behindbytes.com>
-In-Reply-To: <20210412174248.8668-1-vijai@behindbytes.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 15 Apr 2021 14:48:27 +1000
-Message-ID: <CAKmqyKP=rX01hbZRqdiKACgoasHotkN93pwCb3o_o0mpHN5tSw@mail.gmail.com>
-Subject: Re: [PATCH] docs: Add documentation for shakti_c machine
-To: Vijai Kumar K <vijai@behindbytes.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+In-Reply-To: <CAKmqyKM430xxwC+JyXBKwFiE4Y=1_mk4Qq3b3D+EKUszSneWRA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.3; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-3.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -70,114 +57,102 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Apr 2021 04:48:57 -0000
+X-List-Received-Date: Thu, 15 Apr 2021 05:51:29 -0000
 
-On Tue, Apr 13, 2021 at 3:44 AM Vijai Kumar K <vijai@behindbytes.com> wrote:
->
-> Add documentation for Shakti C reference platform.
->
-> Signed-off-by: Vijai Kumar K <vijai@behindbytes.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+On 2021/4/15 下午12:46, Alistair Francis wrote:
+> On Tue, Apr 13, 2021 at 1:28 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>> ping +1.
+>>
+>> On 2021/2/12 下午11:02, LIU Zhiwei wrote:
+>>> This patchset implements the packed extension for RISC-V on QEMU.
+>>>
+>>> This patchset have passed all my direct Linux user mode cases(RV64) and
+>>> bare metal cases(RV32) on X86-64 Ubuntu host machine. I will later push
+>>> these test cases to my repo(https://github.com/romanheros/qemu.git
+>>> branch:packed-upstream-v1).
+>>>
+>>> I have ported packed extension on RISU, but I didn't find a simulator or
+>>> hardware to compare with. If anyone have one, please let me know.
+>>>
+>>> Features:
+>>>     * support specification packed extension v0.9.2(https://github.com/riscv/riscv-p-spec/)
+>>>     * support basic packed extension.
+>>>     * support Zp64.
+>>>
+>>> LIU Zhiwei (38):
+>>>     target/riscv: implementation-defined constant parameters
+>>>     target/riscv: Hoist vector functions
+>>>     target/riscv: Fixup saturate subtract function
+> Thanks for the patches and sorry for the long delay.
+>
+> I have applied patch 3 as it fixes a bug.
+> As for the other patches they are on both my review queue and Palmer's
+> review queue. It takes a lot of time to review these large patch
+> series, especially as I haven't been involved with the extension
+> development, so I have to both understand the extension and then
+> review the code.
+>
+> If you would like to help speed things up you could review other
+> patches. That way I will have more time left to review your patches.
 
-Alistair
+No worries. I fully understand the great efforts needed to review so 
+many patches. Firstly, I will try to review as many  as I send.
 
-> ---
->  docs/system/riscv/shakti-c.rst | 82 ++++++++++++++++++++++++++++++++++
->  1 file changed, 82 insertions(+)
->  create mode 100644 docs/system/riscv/shakti-c.rst
+Zhiwei
+
+> Alistair
 >
-> diff --git a/docs/system/riscv/shakti-c.rst b/docs/system/riscv/shakti-c.rst
-> new file mode 100644
-> index 0000000000..a6035d42b0
-> --- /dev/null
-> +++ b/docs/system/riscv/shakti-c.rst
-> @@ -0,0 +1,82 @@
-> +Shakti C Reference Platform (``shakti_c``)
-> +==========================================
-> +
-> +Shakti C Reference Platform is a reference platform based on arty a7 100t
-> +for the Shakti SoC.
-> +
-> +Shakti SoC is a SoC based on the Shakti C-class processor core. Shakti C
-> +is a 64bit RV64GCSUN processor core.
-> +
-> +For more details on Shakti SoC, please see:
-> +https://gitlab.com/shaktiproject/cores/shakti-soc/-/blob/master/fpga/boards/artya7-100t/c-class/README.rst
-> +
-> +For more info on the Shakti C-class core, please see:
-> +https://c-class.readthedocs.io/en/latest/
-> +
-> +Supported devices
-> +-----------------
-> +
-> +The ``shakti_c`` machine supports the following devices:
-> +
-> + * 1 C-class core
-> + * Core Level Interruptor (CLINT)
-> + * Platform-Level Interrupt Controller (PLIC)
-> + * 1 UART
-> +
-> +Boot options
-> +------------
-> +
-> +The ``shakti_c`` machine can start using the standard -bios
-> +functionality for loading the baremetal application or opensbi.
-> +
-> +Boot the machine
-> +----------------
-> +
-> +Shakti SDK
-> +~~~~~~~~~~
-> +Shakti SDK can be used to generate the baremetal example UART applications.
-> +
-> +.. code-block:: bash
-> +
-> +   $ git clone https://gitlab.com/behindbytes/shakti-sdk.git
-> +   $ cd shakti-sdk
-> +   $ make software PROGRAM=loopback TARGET=artix7_100t
-> +
-> +Binary would be generated in:
-> +  software/examples/uart_applns/loopback/output/loopback.shakti
-> +
-> +You could also download the precompiled example applicatons using below
-> +commands.
-> +
-> +.. code-block:: bash
-> +
-> +   $ wget -c https://gitlab.com/behindbytes/shakti-binaries/-/raw/master/sdk/shakti_sdk_qemu.zip
-> +   $ unzip shakti_sdk_qemu.zip
-> +
-> +Then we can run the UART example using:
-> +
-> +.. code-block:: bash
-> +
-> +   $ qemu-system-riscv64 -M shakti_c -nographic \
-> +      -bios path/to/shakti_sdk_qemu/loopback.shakti
-> +
-> +OpenSBI
-> +~~~~~~~
-> +We can also run OpenSBI with Test Payload.
-> +
-> +.. code-block:: bash
-> +
-> +   $ git clone https://github.com/riscv/opensbi.git -b v0.9
-> +   $ cd opensbi
-> +   $ wget -c https://gitlab.com/behindbytes/shakti-binaries/-/raw/master/dts/shakti.dtb
-> +   $ export CROSS_COMPILE=riscv64-unknown-elf-
-> +   $ export FW_FDT_PATH=./shakti.dtb
-> +   $ make PLATFORM=generic
-> +
-> +fw_payload.elf would be generated in build/platform/generic/firmware/fw_payload.elf.
-> +Boot it using the below qemu command.
-> +
-> +.. code-block:: bash
-> +
-> +   $ qemu-system-riscv64 -M shakti_c -nographic \
-> +      -bios path/to/fw_payload.elf
-> --
-> 2.25.1
->
->
->
+>>>     target/riscv: 16-bit Addition & Subtraction Instructions
+>>>     target/riscv: 8-bit Addition & Subtraction Instruction
+>>>     target/riscv: SIMD 16-bit Shift Instructions
+>>>     target/riscv: SIMD 8-bit Shift Instructions
+>>>     target/riscv: SIMD 16-bit Compare Instructions
+>>>     target/riscv: SIMD 8-bit Compare Instructions
+>>>     target/riscv: SIMD 16-bit Multiply Instructions
+>>>     target/riscv: SIMD 8-bit Multiply Instructions
+>>>     target/riscv: SIMD 16-bit Miscellaneous Instructions
+>>>     target/riscv: SIMD 8-bit Miscellaneous Instructions
+>>>     target/riscv: 8-bit Unpacking Instructions
+>>>     target/riscv: 16-bit Packing Instructions
+>>>     target/riscv: Signed MSW 32x32 Multiply and Add Instructions
+>>>     target/riscv: Signed MSW 32x16 Multiply and Add Instructions
+>>>     target/riscv: Signed 16-bit Multiply 32-bit Add/Subtract Instructions
+>>>     target/riscv: Signed 16-bit Multiply 64-bit Add/Subtract Instructions
+>>>     target/riscv: Partial-SIMD Miscellaneous Instructions
+>>>     target/riscv: 8-bit Multiply with 32-bit Add Instructions
+>>>     target/riscv: 64-bit Add/Subtract Instructions
+>>>     target/riscv: 32-bit Multiply 64-bit Add/Subtract Instructions
+>>>     target/riscv: Signed 16-bit Multiply with 64-bit Add/Subtract
+>>>       Instructions
+>>>     target/riscv: Non-SIMD Q15 saturation ALU Instructions
+>>>     target/riscv: Non-SIMD Q31 saturation ALU Instructions
+>>>     target/riscv: 32-bit Computation Instructions
+>>>     target/riscv: Non-SIMD Miscellaneous Instructions
+>>>     target/riscv: RV64 Only SIMD 32-bit Add/Subtract Instructions
+>>>     target/riscv: RV64 Only SIMD 32-bit Shift Instructions
+>>>     target/riscv: RV64 Only SIMD 32-bit Miscellaneous Instructions
+>>>     target/riscv: RV64 Only SIMD Q15 saturating Multiply Instructions
+>>>     target/riscv: RV64 Only 32-bit Multiply Instructions
+>>>     target/riscv: RV64 Only 32-bit Multiply & Add Instructions
+>>>     target/riscv: RV64 Only 32-bit Parallel Multiply & Add Instructions
+>>>     target/riscv: RV64 Only Non-SIMD 32-bit Shift Instructions
+>>>     target/riscv: RV64 Only 32-bit Packing Instructions
+>>>     target/riscv: configure and turn on packed extension from command line
+>>>
+>>>    target/riscv/cpu.c                      |   32 +
+>>>    target/riscv/cpu.h                      |    6 +
+>>>    target/riscv/helper.h                   |  332 ++
+>>>    target/riscv/insn32-64.decode           |   93 +-
+>>>    target/riscv/insn32.decode              |  285 ++
+>>>    target/riscv/insn_trans/trans_rvp.c.inc | 1224 +++++++
+>>>    target/riscv/internals.h                |   50 +
+>>>    target/riscv/meson.build                |    1 +
+>>>    target/riscv/packed_helper.c            | 3862 +++++++++++++++++++++++
+>>>    target/riscv/translate.c                |    3 +
+>>>    target/riscv/vector_helper.c            |   90 +-
+>>>    11 files changed, 5912 insertions(+), 66 deletions(-)
+>>>    create mode 100644 target/riscv/insn_trans/trans_rvp.c.inc
+>>>    create mode 100644 target/riscv/packed_helper.c
+>>>
 
