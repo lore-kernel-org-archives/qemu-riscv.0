@@ -1,65 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lWoLZ-0004zy-2Z
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Apr 2021 18:50:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37052)
+	id 1lWtRf-0005xu-4r
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Apr 2021 00:17:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56462)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lWoLV-0004xB-JN; Wed, 14 Apr 2021 18:50:53 -0400
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:43920)
+ id 1lWtRe-0005wd-1K; Thu, 15 Apr 2021 00:17:34 -0400
+Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:44821)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lWoLT-0004I1-PM; Wed, 14 Apr 2021 18:50:53 -0400
-Received: by mail-io1-xd32.google.com with SMTP id v123so15432438ioe.10;
- Wed, 14 Apr 2021 15:50:50 -0700 (PDT)
+ id 1lWtRb-0002uW-SF; Thu, 15 Apr 2021 00:17:33 -0400
+Received: by mail-io1-xd33.google.com with SMTP id p8so1525383iol.11;
+ Wed, 14 Apr 2021 21:17:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=YMl0q4Qg+LLVVghVpz3Z75rPVp0f8dXQ4rlEwW2PnGY=;
- b=MSWSM466xn2JwPKk40F9f0J0QSVWykebgtuupTAWaKe7xc8NFvydhhv6fEGlB5Emvr
- phLpPjr4MxjPnc4/4xEZVaCAkH4/sqQRy9VUfOn3XRRVSV0EdVRFj7LM3yzEnVmoEzco
- VB+RRIaYV445qO8LzejzorIh1Fu0YPD9vY+j/3K6ERPoRTL1oeKQMyjVxtrHSa+4jSTB
- vtObrsewgGLlbFm+wpVp7XKo1zVtN/nt8tjom/92KZy6IUJLEvMUft9vfrJVwtyI7wWA
- dlGDI93zZvW0SIdD2WNYcd/GMoGLc49tFP0WOyQe5irB5Oc75L074gPIUl0e4BQjVk24
- HUww==
+ :cc; bh=djs7x6dJqj53t2sbEOoQZH+WgUI363+nwuOPFtr3pZk=;
+ b=Lp5gg1Z7c8vS7EuNu1GXHsKESi9eNAZHnmjjxritO8f33om2o/aKtlSQ0U7FULMOXR
+ 78g9BSjnr+0oi8bMKmJK//YUYtN2I/wswCbcJzeMH/gyU8hCNXNDl//NS9t+S47qg/Yt
+ i+xa/cTrBLZcqTwWirzKm5ZDohoH8ltOVXZqzW62VO/VA7AcK4rGgc2VUTOP4MdGGfs0
+ q8VKuCphQHF71B5+tBseDNm/W/ESP2UdHoqtU1psYeO55fTgoYM9yb/LAxdoE/SbiVu0
+ mGjgYkow/Q7Vbc3BlB17NnZy5A0zRuW5lYdxzpBn5pjyjqlu34Yb8lMZYTZjlqLajKj6
+ S7rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=YMl0q4Qg+LLVVghVpz3Z75rPVp0f8dXQ4rlEwW2PnGY=;
- b=ozQBBPpUBKABFmLDvcxCrvfSXulmZNi6h8eZB5XjxaGzyUCVujPS8FSQJMB7K8md21
- JS2keWTpqm/viP0VH/LDdG/2uAlGCS3vT/8C4ogngtSvS/exJxnKMQLOWDeafXKY5psx
- HKpEPGKe3xC/DGnfC27h8ALv6IOAWG5u+a3HaFWhxgZp29iHHYERwAZkSYZtJ9legQE9
- Dg1V3w+CNxILJPVouuw15YB1oJ0PeUJEj7EluAvqde6Q5W9lPCinhTXFnfJZYnPxg9N6
- plNCSmAh5sMGCDkpJdId9ROQL0toD1xTTVo+mVG9dW91+gbKfiQLdo/V1yucI/CQuKTh
- EsJA==
-X-Gm-Message-State: AOAM533kWyhJOFe39T3/nEYSJluCahH8jXHNab+pphYUOAnuUSoeKheo
- aDIgyGfY05n1unvvcHqiBYmmoiot79DvaHlCJ64=
-X-Google-Smtp-Source: ABdhPJxgaQGhRs1C/cFTlO12Ada6lPwWqpJPa3I/q2ak8K0Eq4Xr5SAYvJLaCBDcpyS9uy5RW9XvJXGaB5Cvzsq6VTE=
-X-Received: by 2002:a05:6638:3048:: with SMTP id
- u8mr203045jak.91.1618440650050; 
- Wed, 14 Apr 2021 15:50:50 -0700 (PDT)
+ bh=djs7x6dJqj53t2sbEOoQZH+WgUI363+nwuOPFtr3pZk=;
+ b=pshXRKTVwvNRVC/KaEn+jBwoRUw15KF+pDQ4F6J6PROn1udghjXZv7Xt5MuaMod4Gh
+ 16uDNCoeSrt+6BUsD4cq2EvRuRLdJJio7UQATZFVdsb3exFP4Hbmmi0x+8ks05WScoGo
+ DcWFKbXaKwxzqnt/RvOmA9AHOyfyhkxiLjU/5Sk6zXaLg96uVwS9GKPkfGNZqYtiHGS3
+ dBGDC3Zu6vjWyWxOaB3Nb9M1/KQGgCsZnqTxxTdVI+MbN8lntEy6+uoDqD9/+dh5DjQG
+ z0soUklZIPMU+rmDm5xQOaCUB6o7Zfy5gWR/uNDRt/HTNpgDiVH8trUcJMXcc0Bu1moc
+ DxKQ==
+X-Gm-Message-State: AOAM531yH4P0ClHMfT5fNp7kn0CN7ttlVIyQ7yQShyNSn0CSYWYEw2go
+ JFGxD8K9WCbGA3L+dPHZEkQ3Uulmoj4N/bYuUjo=
+X-Google-Smtp-Source: ABdhPJyUDrSyAk/MVjEqm6CLkGRxOVyJLj1k7PTvhPhAKGU0pG5XV1Sbj6skoBKG6TawfE6Wlc+tZ5B+A+1qSTzR35E=
+X-Received: by 2002:a5d:878e:: with SMTP id f14mr1120081ion.176.1618460250309; 
+ Wed, 14 Apr 2021 21:17:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210412065246.1853-1-jiangyifei@huawei.com>
- <20210412065246.1853-8-jiangyifei@huawei.com>
-In-Reply-To: <20210412065246.1853-8-jiangyifei@huawei.com>
+References: <cover.1618281655.git.alistair.francis@wdc.com>
+ <616cef68b75ec06b77847203efaca16f7efaaf18.1618281655.git.alistair.francis@wdc.com>
+ <CAEUhbmWPqHLGjXTgojg4r8jn9spanWJbLBJci_s0taRpAbLZHQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmWPqHLGjXTgojg4r8jn9spanWJbLBJci_s0taRpAbLZHQ@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 15 Apr 2021 08:50:23 +1000
-Message-ID: <CAKmqyKNzyftUr0yTJ1TOENo_p3S_nO9peQRpdu=1Zbm70zncdQ@mail.gmail.com>
-Subject: Re: [PATCH RFC v5 07/12] hw/riscv: PLIC update external interrupt by
- KVM when kvm enabled
-To: Yifei Jiang <jiangyifei@huawei.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Thu, 15 Apr 2021 14:17:03 +1000
+Message-ID: <CAKmqyKPuXJyqWWMLbMGrj4TUMdwQOPFWD_pcxQo_pzu4EgqnYw@mail.gmail.com>
+Subject: Re: [PATCH v3 5/8] target/riscv: Implementation of enhanced PMP (ePMP)
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "open list:Overall" <kvm@vger.kernel.org>, libvir-list@redhat.com, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Anup Patel <anup.patel@wdc.com>, 
- yinyipeng <yinyipeng1@huawei.com>, Alistair Francis <Alistair.Francis@wdc.com>,
- kvm-riscv@lists.infradead.org, Palmer Dabbelt <palmer@dabbelt.com>,
- fanliang@huawei.com, "Wubin (H)" <wu.wubin@huawei.com>,
- Zhanghailiang <zhang.zhanghailiang@huawei.com>
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -80,130 +73,245 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Apr 2021 22:50:54 -0000
+X-List-Received-Date: Thu, 15 Apr 2021 04:17:34 -0000
 
-On Mon, Apr 12, 2021 at 4:57 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
+On Wed, Apr 14, 2021 at 5:35 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Only support supervisor external interrupt currently.
+> Hi Alistair,
 >
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-> Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
+> On Tue, Apr 13, 2021 at 10:42 AM Alistair Francis
+> <alistair.francis@wdc.com> wrote:
+> >
+> > From: Hou Weiying <weiying_hou@outlook.com>
+> >
+> > This commit adds support for ePMP v0.9.1.
+> >
+> > The ePMP spec can be found in:
+> > https://docs.google.com/document/d/1Mh_aiHYxemL0umN3GTTw8vsbmzHZ_nxZXgjgOUzbvc8
+> >
+> > Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
+> > Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
+> > Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
+> > Message-Id: <SG2PR02MB263462CCDBCBBAD36983C2CD93450@SG2PR02MB2634.apcprd02.prod.outlook.com>
+> > [ Changes by AF:
+> >  - Rebase on master
+> >  - Update to latest spec
+> >  - Use a switch case to handle ePMP MML permissions
+> >  - Fix a few bugs
+> > ]
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  target/riscv/pmp.c | 164 +++++++++++++++++++++++++++++++++++++++++----
+> >  1 file changed, 152 insertions(+), 12 deletions(-)
+> >
+> > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> > index e35988eec2..00f91d074f 100644
+> > --- a/target/riscv/pmp.c
+> > +++ b/target/riscv/pmp.c
+> > @@ -90,11 +90,42 @@ static inline uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t pmp_index)
+> >  static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+> >  {
+> >      if (pmp_index < MAX_RISCV_PMPS) {
+> > -        if (!pmp_is_locked(env, pmp_index)) {
+> > -            env->pmp_state.pmp[pmp_index].cfg_reg = val;
+> > -            pmp_update_rule(env, pmp_index);
+> > +        bool locked = true;
+> > +
+> > +        if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
+> > +            /* mseccfg.RLB is set */
+> > +            if (MSECCFG_RLB_ISSET(env)) {
+> > +                locked = false;
+> > +            }
+> > +
+> > +            /* mseccfg.MML is not set */
+> > +            if (!MSECCFG_MML_ISSET(env) && !pmp_is_locked(env, pmp_index)) {
+> > +                locked = false;
+> > +            }
+> > +
+> > +            /* mseccfg.MML is set */
+> > +            if (MSECCFG_MML_ISSET(env)) {
+> > +                /* not adding execute bit */
+> > +                if ((val & PMP_LOCK) != 0 && (val & PMP_EXEC) != PMP_EXEC) {
+> > +                    locked = false;
+> > +                }
+> > +                /* shared region and not adding X bit */
+> > +                if ((val & PMP_LOCK) != PMP_LOCK &&
+> > +                    (val & 0x7) != (PMP_WRITE | PMP_EXEC)) {
+> > +                    locked = false;
+> > +                }
+> > +            }
+> >          } else {
+> > +            if (!pmp_is_locked(env, pmp_index)) {
+> > +                locked = false;
+> > +            }
+> > +        }
+> > +
+> > +        if (locked) {
+> >              qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - locked\n");
+> > +        } else {
+> > +            env->pmp_state.pmp[pmp_index].cfg_reg = val;
+> > +            pmp_update_rule(env, pmp_index);
+> >          }
+> >      } else {
+> >          qemu_log_mask(LOG_GUEST_ERROR,
+> > @@ -217,6 +248,32 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
+> >  {
+> >      bool ret;
+> >
+> > +    if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
+> > +        if (MSECCFG_MMWP_ISSET(env)) {
+> > +            /*
+> > +             * The Machine Mode Whitelist Policy (mseccfg.MMWP) is set
+> > +             * so we default to deny all, even for M-mode.
+> > +             */
+> > +            *allowed_privs = 0;
+> > +            return false;
+> > +        } else if (MSECCFG_MML_ISSET(env)) {
+> > +            /*
+> > +             * The Machine Mode Lockdown (mseccfg.MML) bit is set
+> > +             * so we can only execute code in M-mode with an applicable
+> > +             * rule. Other modes are disabled.
+> > +             */
+> > +            if (mode == PRV_M && !(privs & PMP_EXEC)) {
+> > +                ret = true;
+> > +                *allowed_privs = PMP_READ | PMP_WRITE;
+> > +            } else {
+> > +                ret = false;
+> > +                *allowed_privs = 0;
+> > +            }
+> > +
+> > +            return ret;
+> > +        }
+> > +    }
+> > +
+> >      if ((!riscv_feature(env, RISCV_FEATURE_PMP)) || (mode == PRV_M)) {
+> >          /*
+> >           * Privileged spec v1.10 states if HW doesn't implement any PMP entry
+> > @@ -294,13 +351,94 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+> >              pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg);
+> >
+> >          /*
+> > -         * If the PMP entry is not off and the address is in range, do the priv
+> > -         * check
+> > +         * Convert the PMP permissions to match the truth table in the
+> > +         * ePMP spec.
+> >           */
+> > +        const uint8_t epmp_operation =
+> > +            ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
+> > +            ((env->pmp_state.pmp[i].cfg_reg & PMP_READ) << 2) |
+> > +            (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
+> > +            ((env->pmp_state.pmp[i].cfg_reg & PMP_EXEC) >> 2);
+> > +
+> >          if (((s + e) == 2) && (PMP_AMATCH_OFF != a_field)) {
+> > -            *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
+> > -            if ((mode != PRV_M) || pmp_is_locked(env, i)) {
+> > -                *allowed_privs &= env->pmp_state.pmp[i].cfg_reg;
+> > +            /*
+> > +             * If the PMP entry is not off and the address is in range,
+> > +             * do the priv check
+> > +             */
+> > +            if (!MSECCFG_MML_ISSET(env)) {
+> > +                /*
+> > +                 * If mseccfg.MML Bit is not set, do pmp priv check
+> > +                 * This will always apply to regular PMP.
+> > +                 */
+> > +                *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
+> > +                if ((mode != PRV_M) || pmp_is_locked(env, i)) {
+> > +                    *allowed_privs &= env->pmp_state.pmp[i].cfg_reg;
+> > +                }
+> > +            } else {
+> > +                /*
+> > +                 * If mseccfg.MML Bit set, do the enhanced pmp priv check
+> > +                 */
+> > +                if (mode == PRV_M) {
+> > +                    switch (epmp_operation) {
+> > +                    case 0:
+> > +                    case 1:
+> > +                    case 4:
+> > +                    case 5:
+> > +                    case 6:
+> > +                    case 7:
+> > +                    case 8:
+> > +                        *allowed_privs = 0;
+> > +                        break;
+> > +                    case 2:
+> > +                    case 3:
+> > +                    case 14:
+> > +                        *allowed_privs = PMP_READ | PMP_WRITE;
+> > +                        break;
+> > +                    case 9:
+> > +                    case 10:
+> > +                        *allowed_privs = PMP_EXEC;
+> > +                        break;
+> > +                    case 11:
+> > +                    case 13:
+> > +                        *allowed_privs = PMP_READ | PMP_EXEC;
+> > +                        break;
+> > +                    case 12:
+> > +                    case 15:
+> > +                        *allowed_privs = PMP_READ;
+> > +                        break;
+> > +                    }
+> > +                } else {
+> > +                    switch (epmp_operation) {
+> > +                    case 0:
+> > +                    case 8:
+> > +                    case 9:
+> > +                    case 12:
+> > +                    case 13:
+> > +                    case 14:
+> > +                        *allowed_privs = 0;
+> > +                        break;
+> > +                    case 1:
+> > +                    case 10:
+> > +                    case 11:
+> > +                        *allowed_privs = PMP_EXEC;
+> > +                        break;
+> > +                    case 2:
+> > +                    case 4:
+> > +                    case 15:
+> > +                        *allowed_privs = PMP_READ;
+> > +                        break;
+> > +                    case 3:
+> > +                    case 6:
+> > +                        *allowed_privs = PMP_READ | PMP_WRITE;
+> > +                        break;
+> > +                    case 5:
+> > +                        *allowed_privs = PMP_READ | PMP_EXEC;
+> > +                        break;
+> > +                    case 7:
+> > +                        *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
+> > +                        break;
+> > +                    }
+> > +                }
+> >              }
+> >
+> >              ret = ((privs & *allowed_privs) == privs);
+> > @@ -328,10 +466,12 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
+> >
+> >      trace_pmpcfg_csr_write(env->mhartid, reg_index, val);
+> >
+> > -    if ((reg_index & 1) && (sizeof(target_ulong) == 8)) {
+> > -        qemu_log_mask(LOG_GUEST_ERROR,
+> > -                      "ignoring pmpcfg write - incorrect address\n");
+> > -        return;
+> > +    if (!riscv_feature(env, RISCV_FEATURE_EPMP) || !MSECCFG_RLB_ISSET(env)) {
+> > +        if ((reg_index & 1) && (sizeof(target_ulong) == 8)) {
+> > +            qemu_log_mask(LOG_GUEST_ERROR,
+> > +                          "ignoring pmpcfg write - PMP config is locked\n");
+>
+> I think the original log message was for checking register address for
+> RV64, and should still retain. We should add another branch with a
+> different log message for the new ePMP check.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This whole change is actually wrong. I have removed this entire chunk.
 
 Alistair
 
-> ---
->  hw/intc/sifive_plic.c    | 29 ++++++++++++++++++++---------
->  target/riscv/kvm-stub.c  |  5 +++++
->  target/riscv/kvm.c       | 20 ++++++++++++++++++++
->  target/riscv/kvm_riscv.h |  1 +
->  4 files changed, 46 insertions(+), 9 deletions(-)
 >
-> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-> index 97a1a27a9a..2746eb7a05 100644
-> --- a/hw/intc/sifive_plic.c
-> +++ b/hw/intc/sifive_plic.c
-> @@ -31,6 +31,8 @@
->  #include "target/riscv/cpu.h"
->  #include "sysemu/sysemu.h"
->  #include "migration/vmstate.h"
-> +#include "sysemu/kvm.h"
-> +#include "kvm_riscv.h"
+> > +            return;
+> > +        }
 >
->  #define RISCV_DEBUG_PLIC 0
->
-> @@ -147,15 +149,24 @@ static void sifive_plic_update(SiFivePLICState *plic)
->              continue;
->          }
->          int level = sifive_plic_irqs_pending(plic, addrid);
-> -        switch (mode) {
-> -        case PLICMode_M:
-> -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MEIP, BOOL_TO_MASK(level));
-> -            break;
-> -        case PLICMode_S:
-> -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SEIP, BOOL_TO_MASK(level));
-> -            break;
-> -        default:
-> -            break;
-> +        if (kvm_enabled()) {
-> +            if (mode == PLICMode_M) {
-> +                continue;
-> +            }
-> +            kvm_riscv_set_irq(RISCV_CPU(cpu), IRQ_S_EXT, level);
-> +        } else {
-> +            switch (mode) {
-> +            case PLICMode_M:
-> +                riscv_cpu_update_mip(RISCV_CPU(cpu),
-> +                                     MIP_MEIP, BOOL_TO_MASK(level));
-> +                break;
-> +            case PLICMode_S:
-> +                riscv_cpu_update_mip(RISCV_CPU(cpu),
-> +                                     MIP_SEIP, BOOL_TO_MASK(level));
-> +                break;
-> +            default:
-> +                break;
-> +            }
->          }
->      }
->
-> diff --git a/target/riscv/kvm-stub.c b/target/riscv/kvm-stub.c
-> index 39b96fe3f4..4e8fc31a21 100644
-> --- a/target/riscv/kvm-stub.c
-> +++ b/target/riscv/kvm-stub.c
-> @@ -23,3 +23,8 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
->  {
->      abort();
->  }
-> +
-> +void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
-> +{
-> +    abort();
-> +}
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 79c931acb4..da63535812 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -453,6 +453,26 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
->      env->gpr[11] = cpu->env.fdt_addr;          /* a1 */
->  }
->
-> +void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
-> +{
-> +    int ret;
-> +    unsigned virq = level ? KVM_INTERRUPT_SET : KVM_INTERRUPT_UNSET;
-> +
-> +    if (irq != IRQ_S_EXT) {
-> +        return;
-> +    }
-> +
-> +    if (!kvm_enabled()) {
-> +        return;
-> +    }
-> +
-> +    ret = kvm_vcpu_ioctl(CPU(cpu), KVM_INTERRUPT, &virq);
-> +    if (ret < 0) {
-> +        perror("Set irq failed");
-> +        abort();
-> +    }
-> +}
-> +
->  bool kvm_arch_cpu_check_are_resettable(void)
->  {
->      return true;
-> diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
-> index f38c82bf59..ed281bdce0 100644
-> --- a/target/riscv/kvm_riscv.h
-> +++ b/target/riscv/kvm_riscv.h
-> @@ -20,5 +20,6 @@
->  #define QEMU_KVM_RISCV_H
->
->  void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
-> +void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
->
->  #endif
-> --
-> 2.19.1
->
->
+> Regards,
+> Bin
 
