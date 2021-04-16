@@ -1,49 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lXGVx-00019b-B8
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Apr 2021 00:55:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55330)
+	id 1lXMkR-0004B9-4E
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Apr 2021 07:34:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37502)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lXGVv-00015K-K7; Fri, 16 Apr 2021 00:55:31 -0400
-Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:38690)
+ (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
+ id 1lXMkO-000499-Vr; Fri, 16 Apr 2021 07:34:52 -0400
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c]:44886)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lXGVs-0005bn-Lt; Fri, 16 Apr 2021 00:55:31 -0400
-Received: by mail-io1-xd30.google.com with SMTP id f15so17754497iob.5;
- Thu, 15 Apr 2021 21:55:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
+ id 1lXMkN-0002uL-8w; Fri, 16 Apr 2021 07:34:52 -0400
+Received: by mail-ed1-x52c.google.com with SMTP id f8so31849372edd.11;
+ Fri, 16 Apr 2021 04:34:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=TqhPBmIdX2fXKUKlrpYBCEXvJNh9xPtljVtd4cKyVpM=;
- b=dbA5OtcmCSKbyO3+EEv/+Y/t0uMkS0FK84qy1RmGOfBJvBqRCdXstc0uS9x1DDTmzU
- tUfwKrd9i3WrYrf2qTKqDKTF1U3EfR3J6setkJcv4OW2IrrxS+FAY/kgBwiyBMpHKvyE
- fpEQjAMzt6jQQl2lfLQfeMFVfaVomfFx0cCULOYAY44VSxFDQ/uSnvDHTFIHxPeN5Nyy
- zGCf0YKRw5jdVQmSLckpEF3/PUCQ2Ggmm2Ky6IrakvwFsjniLWRFnKwtDFmsqOVpRexA
- 5qLe2bWJm3m9oLZb7sMlbQYJDrr8s5pIXeJAcjbB7vhU1huGmyExqBTgTF1n5aE6dtjy
- 4ahg==
+ :cc:content-transfer-encoding;
+ bh=N8klAhgCyaEwa0TiMOJwHXJKTXvCrrhpztUoJxQL32Y=;
+ b=QPCWkXCLixy3iA3zTIo9nPepaGPw4nK0rO3RdWa13NxWdJzqJUUovqekGvoqyjOTdw
+ O4YRzRHsozi2DCFk4LnV+A4RF8JVINYHr1gX0juppMcZw/ENRwrwjxBOEx9Ds6D/I27T
+ luPQzgBos4+YlITXzVK8vDIoVDJZCLlB3yhTNknsAnRJNpAzx05tcu3Y+SXxmI2xfxFM
+ vS8BjYk+OcEQGnpiM00rMgwNwKTDnQogQjQNLFIdc5oAp4KKrKafWwExKDhNaED7b3P2
+ V7p9ZpRCdj4IMRLR02e/PoDRV2v51LEVCA2AZKUShMNnqfoqn/BAIFnp2heXt+rMmOn8
+ we0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=TqhPBmIdX2fXKUKlrpYBCEXvJNh9xPtljVtd4cKyVpM=;
- b=rPpUQRwYTYjsSwfb5Ba4VWwhovHOIRdAsCjDmbdl1cRmp+65TPDdmbnSpSZblPQN0W
- Yp6q0BwqajoDTPnFsSv6j4xjD/3FFLltqX6SvZ02CTmM0cs9/9GMzWi8WfZSoUTRs3C8
- dF/S7hFrSDSaGPvM+eA2n5AFx3gONFcu641IAdsJwsE6DdOT7gwqbFCh9DH4QWfElXXf
- Y8T1xoy4kAa9b+MHraLH2+fZnQjvjq6hbZ74szjwB0Cy1UwUzzXqQ4Nv57TGdLelume/
- mcQfoPkNFNe0FGZs/8OYYOqV7iKa3gGhFkIH+Zt8eeKm3IJ/CGfz7rtW/iZAiTyE2GO+
- TxHw==
-X-Gm-Message-State: AOAM530aKQ0W8ztA4NxfbqNYbSK6S8aCmFGD5ZaiCQ57yiYe9gIp2cdD
- yghGSei4Iq7sq+u1raqSVWSox7fEIEGOoKL0oy4=
-X-Google-Smtp-Source: ABdhPJzO1Si2smTymgF/iLc8zzOdlXuEk3X0yde6VyTdWaZ/yxguCW3kcVbIyRkDq+24oAKa1Dyax+b2F5MuqnOUnqQ=
-X-Received: by 2002:a02:a38f:: with SMTP id y15mr2475580jak.106.1618548926208; 
- Thu, 15 Apr 2021 21:55:26 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=N8klAhgCyaEwa0TiMOJwHXJKTXvCrrhpztUoJxQL32Y=;
+ b=jq+3X90tkUzT50+sEwamvohsyqlfCJPCVqipQm+XuV8gqx7mJ18REiHKDGYCDomgwe
+ 3aqUSOH+icWWLKcAOIupxLTb3xD/mYJtFnyS3alXpNpbm93TdAZYw9cCrqFB85N3++Ur
+ HbQi42UobfTZ8CzGe1LaxqNKViRTdxp95vKNeK0b2mUn4uCntqOIF8jveyLuPJ1EI/nb
+ jBaVIBpAZtzLaHvxBOTkyJdGQG1dser1V0plQ4NjelxICrmMHv4oEeSwn7QAS7sC280G
+ 1TRjBSO4Rdp12goKO89USHZyCWKtf4R9yegkI3XLdZ84FLQnM1pd8OoQ68WDEJ+iZ2b1
+ MT6w==
+X-Gm-Message-State: AOAM530FDNTX41lj+B8iNSfsV9hsiK8JTsT5fkXt/Yu1wC5hLVicu2s/
+ FWThzkxajzrw8Cdkli/Nb7TwrgDhhWPOQf4kB+s=
+X-Google-Smtp-Source: ABdhPJwr3zDVKkZSBmSlBcBMh36Nx/Oj0vijI7HOPPYy1ZN9oD/AIMITcDm30pOGqkygMCJZqKyrpWa8xhzXs+S02pU=
+X-Received: by 2002:a05:6402:350:: with SMTP id
+ r16mr1921676edw.227.1618572888636; 
+ Fri, 16 Apr 2021 04:34:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210410194047.559189-1-josemartins90@gmail.com>
-In-Reply-To: <20210410194047.559189-1-josemartins90@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 16 Apr 2021 14:55:00 +1000
-Message-ID: <CAKmqyKPpjRfowvYjofny8JNwnDUZkyH4jnU6mvVxaWNJuEgsqA@mail.gmail.com>
+ <CAKmqyKPpjRfowvYjofny8JNwnDUZkyH4jnU6mvVxaWNJuEgsqA@mail.gmail.com>
+In-Reply-To: <CAKmqyKPpjRfowvYjofny8JNwnDUZkyH4jnU6mvVxaWNJuEgsqA@mail.gmail.com>
+From: Jose Martins <josemartins90@gmail.com>
+Date: Fri, 16 Apr 2021 12:34:37 +0100
+Message-ID: <CAC41xo1K6_K7YXn2E6inRf0spkbOAGQNy2eA0s6TWXV7V_aYhg@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: fix wfi exception behavior
-To: Jose Martins <josemartins90@gmail.com>
+To: Alistair Francis <alistair23@gmail.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
  "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
@@ -51,8 +54,9 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=josemartins90@gmail.com; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,68 +77,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Apr 2021 04:55:31 -0000
+X-List-Received-Date: Fri, 16 Apr 2021 11:34:53 -0000
 
-On Sun, Apr 11, 2021 at 5:41 AM Jose Martins <josemartins90@gmail.com> wrote:
+> > -    if ((env->priv =3D=3D PRV_S &&
+> > -        get_field(env->mstatus, MSTATUS_TW)) ||
+> > -        riscv_cpu_virt_enabled(env)) {
+> > +    if ((!riscv_cpu_virt_enabled(env) && env->priv =3D=3D PRV_U) ||
 >
-> The wfi exception trigger behavior was not taking into account the fact
-> that user mode is not allowed to execute wfi instructions or the effect
-> of the hstatus.vtw bit. It was also always generating virtual instruction
-> exceptions when this should only happen when the wfi instruction is
-> executed when the virtualization mode is enabled:
+> > +        (env->priv =3D=3D PRV_S && get_field(env->mstatus, MSTATUS_TW)=
+)) {
 >
-> - when a wfi instruction is executed, an illegal exception should be triggered
-> if either the current mode is user or the mode is supervisor and mstatus.tw is
-> set.
+> Shouldn't we check here that we aren't virtualised?
 >
-> - a virtual instruction exception should be raised when a wfi is executed from
-> virtual-user or virtual-supervisor and hstatus.vtw is set.
->
-> Signed-off-by: Jose Martins <josemartins90@gmail.com>
-> ---
->  target/riscv/cpu_bits.h  | 1 +
->  target/riscv/op_helper.c | 8 +++++---
->  2 files changed, 6 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 24b24c69c5..ed8b97c788 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -436,6 +436,7 @@
->  #define HSTATUS_HU           0x00000200
->  #define HSTATUS_VGEIN        0x0003F000
->  #define HSTATUS_VTVM         0x00100000
-> +#define HSTATUS_VTW          0x00200000
->  #define HSTATUS_VTSR         0x00400000
->  #if defined(TARGET_RISCV64)
->  #define HSTATUS_VSXL        0x300000000
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index d55def76cf..354e39ec26 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -174,9 +174,11 @@ void helper_wfi(CPURISCVState *env)
->  {
->      CPUState *cs = env_cpu(env);
->
-> -    if ((env->priv == PRV_S &&
-> -        get_field(env->mstatus, MSTATUS_TW)) ||
-> -        riscv_cpu_virt_enabled(env)) {
-> +    if ((!riscv_cpu_virt_enabled(env) && env->priv == PRV_U) ||
 
-> +        (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TW))) {
+In section 5.4, the spec states that mstatus.tw has effect regardless
+of virtualization mode: "The TW field affects execution in all modes
+except M-mode.". I interpret "all modes" as being all supervisor modes
+since section 3.1.6.5 states that "When S-mode is implemented, then
+executing WFI in U-mode causes an illegal instruction exception" and
+later chapter 5 says that a virtual instruction exception should be
+generated when "in VU-mode, attempts to execute WFI (...)" regardless
+of the state of any status bit. Plus, it should be an illegal
+instruction exception and not a virtual instruction exception even in
+VS-mode when mstatus.tw =3D 1 because the spec also states only "When
+VTW=3D1 *(and assuming mstatus.TW=3D0)*, an attempt in VS-mode to execute
+WFI raises a virtual instruction exception".
 
-Shouldn't we check here that we aren't virtualised?
+But just now I realized the patch is assuming S-mode is present and
+not taking into account M/U only harts. If this is the case TW should
+affect U-mode WFIs. I will fix this and submit a new version of the
+patch.
 
-Alistair
-
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> +    } else if (riscv_cpu_virt_enabled(env) && (env->priv == PRV_U ||
-> +            (env->priv == PRV_S && get_field(env->hstatus, HSTATUS_VTW)))) {
->          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
->      } else {
->          cs->halted = 1;
-> --
-> 2.25.1
->
->
+Jos=C3=A9
 
