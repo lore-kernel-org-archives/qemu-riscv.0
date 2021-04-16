@@ -1,55 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lXAYq-0003dL-CK
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Apr 2021 18:34:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53740)
+	id 1lXGVx-00019b-B8
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Apr 2021 00:55:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55330)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lXAYo-0003aM-PM; Thu, 15 Apr 2021 18:34:06 -0400
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:44871)
+ id 1lXGVv-00015K-K7; Fri, 16 Apr 2021 00:55:31 -0400
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:38690)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lXAYm-0002JY-O2; Thu, 15 Apr 2021 18:34:06 -0400
-Received: by mail-io1-xd32.google.com with SMTP id p8so4451540iol.11;
- Thu, 15 Apr 2021 15:34:03 -0700 (PDT)
+ id 1lXGVs-0005bn-Lt; Fri, 16 Apr 2021 00:55:31 -0400
+Received: by mail-io1-xd30.google.com with SMTP id f15so17754497iob.5;
+ Thu, 15 Apr 2021 21:55:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=f4zD4sRXt/BaKHUrk72b5CYeq5O7E4rSDkxxZRR9nwk=;
- b=aeqK/dNBmwTlE1wchd7yO+bAdIV/ThJLDHqAQcl0tYuBu9hUKvQZA6o6xMGprYMX4M
- Q9mihPOmblUCWhtt1syMbMpZi1RS70nn5f7Kxf5meCyoY3U0IbrOV7msXKfwDcrRxyDe
- SIJRalSmlXneBMmkoPS0FKhu2jqEwK7bEq8kEcyqC2fLWxH4joauDAztW2wNZMcR2Q8r
- lSHFxJzUlzZQGLRjZ/VeJAfA4sfB/leCLozMHT3vQnuiDHhsXf1I1sEh5Xit0Za4GiTg
- G4wQsH9Ba1tqWNW3tck8uu/7akP/74IdA5x/HdvZ5glQ1GKndTdZmWf6vSgm2tiSEsyo
- RXNA==
+ :cc; bh=TqhPBmIdX2fXKUKlrpYBCEXvJNh9xPtljVtd4cKyVpM=;
+ b=dbA5OtcmCSKbyO3+EEv/+Y/t0uMkS0FK84qy1RmGOfBJvBqRCdXstc0uS9x1DDTmzU
+ tUfwKrd9i3WrYrf2qTKqDKTF1U3EfR3J6setkJcv4OW2IrrxS+FAY/kgBwiyBMpHKvyE
+ fpEQjAMzt6jQQl2lfLQfeMFVfaVomfFx0cCULOYAY44VSxFDQ/uSnvDHTFIHxPeN5Nyy
+ zGCf0YKRw5jdVQmSLckpEF3/PUCQ2Ggmm2Ky6IrakvwFsjniLWRFnKwtDFmsqOVpRexA
+ 5qLe2bWJm3m9oLZb7sMlbQYJDrr8s5pIXeJAcjbB7vhU1huGmyExqBTgTF1n5aE6dtjy
+ 4ahg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=f4zD4sRXt/BaKHUrk72b5CYeq5O7E4rSDkxxZRR9nwk=;
- b=ThTj73qDaiIZV0Ub0jC8uF6I+hZ7HngxR93FcXkBTe6i0VwsjJc53ETAI80XQodlD1
- gIxnDCLwINk9QIOl/zdVGcvzoThWDnHVRSjlHQ8JTgACSaedkxYQpNwx3RExE8SjWZzy
- GphlZb5esd6mbpR+jbORfKfs+MuUPVDzCuRs/Kmyz8sWcF5GUsy66FlPQ2498ZzfjZAL
- mWyyMV9ZgKkg1ysyX5y6iktg8KzLhmFmGQaMfw5w2P/za5KY8PfqA2XROX5fQhUnGYTd
- 1vOeIed3JL2ly7+dCCvJzxgGPPe42P3DUZ6CfwLd97i2Y+BKNdKr+oRoq2LRV5M4kSeH
- garg==
-X-Gm-Message-State: AOAM533qhsQ7B0Td8VXKCxehZXkguH1LzTcK40qvoDRYCay3CFjzrRkT
- HUJcMxV7v5otj0edPQO+WHO6VarUU4WoUJsMI3A=
-X-Google-Smtp-Source: ABdhPJz1qxEK2X7d17/xd/zoRtK1Cb8snrpNKs/Dd02NFP+LwQN+jqq1so76N0WaodsgOFRgd+dfPnv4xttiOWZ9OMU=
-X-Received: by 2002:a05:6638:1211:: with SMTP id
- n17mr1368941jas.26.1618526042339; 
- Thu, 15 Apr 2021 15:34:02 -0700 (PDT)
+ bh=TqhPBmIdX2fXKUKlrpYBCEXvJNh9xPtljVtd4cKyVpM=;
+ b=rPpUQRwYTYjsSwfb5Ba4VWwhovHOIRdAsCjDmbdl1cRmp+65TPDdmbnSpSZblPQN0W
+ Yp6q0BwqajoDTPnFsSv6j4xjD/3FFLltqX6SvZ02CTmM0cs9/9GMzWi8WfZSoUTRs3C8
+ dF/S7hFrSDSaGPvM+eA2n5AFx3gONFcu641IAdsJwsE6DdOT7gwqbFCh9DH4QWfElXXf
+ Y8T1xoy4kAa9b+MHraLH2+fZnQjvjq6hbZ74szjwB0Cy1UwUzzXqQ4Nv57TGdLelume/
+ mcQfoPkNFNe0FGZs/8OYYOqV7iKa3gGhFkIH+Zt8eeKm3IJ/CGfz7rtW/iZAiTyE2GO+
+ TxHw==
+X-Gm-Message-State: AOAM530aKQ0W8ztA4NxfbqNYbSK6S8aCmFGD5ZaiCQ57yiYe9gIp2cdD
+ yghGSei4Iq7sq+u1raqSVWSox7fEIEGOoKL0oy4=
+X-Google-Smtp-Source: ABdhPJzO1Si2smTymgF/iLc8zzOdlXuEk3X0yde6VyTdWaZ/yxguCW3kcVbIyRkDq+24oAKa1Dyax+b2F5MuqnOUnqQ=
+X-Received: by 2002:a02:a38f:: with SMTP id y15mr2475580jak.106.1618548926208; 
+ Thu, 15 Apr 2021 21:55:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210412174248.8668-1-vijai@behindbytes.com>
-In-Reply-To: <20210412174248.8668-1-vijai@behindbytes.com>
+References: <20210410194047.559189-1-josemartins90@gmail.com>
+In-Reply-To: <20210410194047.559189-1-josemartins90@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 16 Apr 2021 08:33:35 +1000
-Message-ID: <CAKmqyKPt9gi8sE0=9-tiNxoeFfmrDb_3JFq8aR_R6PSfAH_5OQ@mail.gmail.com>
-Subject: Re: [PATCH] docs: Add documentation for shakti_c machine
-To: Vijai Kumar K <vijai@behindbytes.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Date: Fri, 16 Apr 2021 14:55:00 +1000
+Message-ID: <CAKmqyKPpjRfowvYjofny8JNwnDUZkyH4jnU6mvVxaWNJuEgsqA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: fix wfi exception behavior
+To: Jose Martins <josemartins90@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -70,116 +73,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Apr 2021 22:34:07 -0000
+X-List-Received-Date: Fri, 16 Apr 2021 04:55:31 -0000
 
-On Tue, Apr 13, 2021 at 3:44 AM Vijai Kumar K <vijai@behindbytes.com> wrote:
+On Sun, Apr 11, 2021 at 5:41 AM Jose Martins <josemartins90@gmail.com> wrote:
 >
-> Add documentation for Shakti C reference platform.
+> The wfi exception trigger behavior was not taking into account the fact
+> that user mode is not allowed to execute wfi instructions or the effect
+> of the hstatus.vtw bit. It was also always generating virtual instruction
+> exceptions when this should only happen when the wfi instruction is
+> executed when the virtualization mode is enabled:
 >
-> Signed-off-by: Vijai Kumar K <vijai@behindbytes.com>
+> - when a wfi instruction is executed, an illegal exception should be triggered
+> if either the current mode is user or the mode is supervisor and mstatus.tw is
+> set.
+>
+> - a virtual instruction exception should be raised when a wfi is executed from
+> virtual-user or virtual-supervisor and hstatus.vtw is set.
+>
+> Signed-off-by: Jose Martins <josemartins90@gmail.com>
+> ---
+>  target/riscv/cpu_bits.h  | 1 +
+>  target/riscv/op_helper.c | 8 +++++---
+>  2 files changed, 6 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 24b24c69c5..ed8b97c788 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -436,6 +436,7 @@
+>  #define HSTATUS_HU           0x00000200
+>  #define HSTATUS_VGEIN        0x0003F000
+>  #define HSTATUS_VTVM         0x00100000
+> +#define HSTATUS_VTW          0x00200000
+>  #define HSTATUS_VTSR         0x00400000
+>  #if defined(TARGET_RISCV64)
+>  #define HSTATUS_VSXL        0x300000000
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index d55def76cf..354e39ec26 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -174,9 +174,11 @@ void helper_wfi(CPURISCVState *env)
+>  {
+>      CPUState *cs = env_cpu(env);
+>
+> -    if ((env->priv == PRV_S &&
+> -        get_field(env->mstatus, MSTATUS_TW)) ||
+> -        riscv_cpu_virt_enabled(env)) {
+> +    if ((!riscv_cpu_virt_enabled(env) && env->priv == PRV_U) ||
 
-Thanks!
+> +        (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TW))) {
 
-Applied to riscv-to-apply.next
+Shouldn't we check here that we aren't virtualised?
 
 Alistair
 
-> ---
->  docs/system/riscv/shakti-c.rst | 82 ++++++++++++++++++++++++++++++++++
->  1 file changed, 82 insertions(+)
->  create mode 100644 docs/system/riscv/shakti-c.rst
->
-> diff --git a/docs/system/riscv/shakti-c.rst b/docs/system/riscv/shakti-c.rst
-> new file mode 100644
-> index 0000000000..a6035d42b0
-> --- /dev/null
-> +++ b/docs/system/riscv/shakti-c.rst
-> @@ -0,0 +1,82 @@
-> +Shakti C Reference Platform (``shakti_c``)
-> +==========================================
-> +
-> +Shakti C Reference Platform is a reference platform based on arty a7 100t
-> +for the Shakti SoC.
-> +
-> +Shakti SoC is a SoC based on the Shakti C-class processor core. Shakti C
-> +is a 64bit RV64GCSUN processor core.
-> +
-> +For more details on Shakti SoC, please see:
-> +https://gitlab.com/shaktiproject/cores/shakti-soc/-/blob/master/fpga/boards/artya7-100t/c-class/README.rst
-> +
-> +For more info on the Shakti C-class core, please see:
-> +https://c-class.readthedocs.io/en/latest/
-> +
-> +Supported devices
-> +-----------------
-> +
-> +The ``shakti_c`` machine supports the following devices:
-> +
-> + * 1 C-class core
-> + * Core Level Interruptor (CLINT)
-> + * Platform-Level Interrupt Controller (PLIC)
-> + * 1 UART
-> +
-> +Boot options
-> +------------
-> +
-> +The ``shakti_c`` machine can start using the standard -bios
-> +functionality for loading the baremetal application or opensbi.
-> +
-> +Boot the machine
-> +----------------
-> +
-> +Shakti SDK
-> +~~~~~~~~~~
-> +Shakti SDK can be used to generate the baremetal example UART applications.
-> +
-> +.. code-block:: bash
-> +
-> +   $ git clone https://gitlab.com/behindbytes/shakti-sdk.git
-> +   $ cd shakti-sdk
-> +   $ make software PROGRAM=loopback TARGET=artix7_100t
-> +
-> +Binary would be generated in:
-> +  software/examples/uart_applns/loopback/output/loopback.shakti
-> +
-> +You could also download the precompiled example applicatons using below
-> +commands.
-> +
-> +.. code-block:: bash
-> +
-> +   $ wget -c https://gitlab.com/behindbytes/shakti-binaries/-/raw/master/sdk/shakti_sdk_qemu.zip
-> +   $ unzip shakti_sdk_qemu.zip
-> +
-> +Then we can run the UART example using:
-> +
-> +.. code-block:: bash
-> +
-> +   $ qemu-system-riscv64 -M shakti_c -nographic \
-> +      -bios path/to/shakti_sdk_qemu/loopback.shakti
-> +
-> +OpenSBI
-> +~~~~~~~
-> +We can also run OpenSBI with Test Payload.
-> +
-> +.. code-block:: bash
-> +
-> +   $ git clone https://github.com/riscv/opensbi.git -b v0.9
-> +   $ cd opensbi
-> +   $ wget -c https://gitlab.com/behindbytes/shakti-binaries/-/raw/master/dts/shakti.dtb
-> +   $ export CROSS_COMPILE=riscv64-unknown-elf-
-> +   $ export FW_FDT_PATH=./shakti.dtb
-> +   $ make PLATFORM=generic
-> +
-> +fw_payload.elf would be generated in build/platform/generic/firmware/fw_payload.elf.
-> +Boot it using the below qemu command.
-> +
-> +.. code-block:: bash
-> +
-> +   $ qemu-system-riscv64 -M shakti_c -nographic \
-> +      -bios path/to/fw_payload.elf
+> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> +    } else if (riscv_cpu_virt_enabled(env) && (env->priv == PRV_U ||
+> +            (env->priv == PRV_S && get_field(env->hstatus, HSTATUS_VTW)))) {
+>          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+>      } else {
+>          cs->halted = 1;
 > --
 > 2.25.1
->
 >
 >
 
