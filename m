@@ -1,61 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lYNyu-0003bC-6q
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 03:06:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49736)
+	id 1lYPbx-0007PS-3r
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 04:50:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40648)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lYNys-0003aR-Ig; Mon, 19 Apr 2021 03:06:02 -0400
-Received: from mail-yb1-xb2e.google.com ([2607:f8b0:4864:20::b2e]:44941)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lYPbv-0007Oe-3I; Mon, 19 Apr 2021 04:50:27 -0400
+Received: from mail-il1-x129.google.com ([2607:f8b0:4864:20::129]:47080)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lYNyq-0000xH-RS; Mon, 19 Apr 2021 03:06:02 -0400
-Received: by mail-yb1-xb2e.google.com with SMTP id v72so16827046ybe.11;
- Mon, 19 Apr 2021 00:05:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lYPbt-0005rD-BX; Mon, 19 Apr 2021 04:50:26 -0400
+Received: by mail-il1-x129.google.com with SMTP id l19so24576219ilk.13;
+ Mon, 19 Apr 2021 01:50:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=IvVm0n/cRnATjd07kY2L9vTcCjtvxeLIC2DYlMsqMYA=;
- b=LknTDXtnUAHJA0KnZirkqJx7NC9TB+kiZsKABENO4ySvy0FcDr5bLOZdZ//AfZvWpx
- x7V91CbrGgA+aQ/67geZxr81+l4tfU9Dhk/5UZ0MvbFc6ZLBiYf3n0ov05OH+IOBNAbJ
- RASjL9OHGRsXNLgTHsMNYLHQSDXZKjrpTr03gd5pYw2WJY3y1r6YMlJk6w6Kade7jsF/
- RDoAQiuN9LhSWVARKa5EE5MYT//e3/OYIeuZPHS4ZI6wfkUh4+vpaV1aWhy0frdzSY7W
- uOXS2+snXh9N+9ZY9XAFQAiYgkpaT/8xwX3bBW68w888+tUvGUQoMcQKfCZOwUNadjr0
- dbjw==
+ :cc:content-transfer-encoding;
+ bh=qjDKK2b8zaIKdFcqtXLEaJRSFx178MBsvfzE51n7Ngs=;
+ b=cZJqo1VbyF4h9snRdW0KT51qN+uMBBxkyw4Q3fOnkvqs1NDAFlmxG1uHszY/TzsxYx
+ obxjVF4Y/HhsREoTH5rojTmxnYCClL6RU2fk33NUxcdj1JmDq2y11n0s4kr3c2ilvBf7
+ HfBYzKsjzeGeiHLEfjg0AnXNLijXG19mZnvn9LTqH0s4iIAxzn0Z8VRSjHcsz4AAgVjP
+ ybxRghKT7Lw6umcq/25lbpfL1yE/Utxt3FXnRxk6SGdniN8fC+ZMRD08isngtrDwJ2a8
+ KElkCg4jT1ddBGfbkNui3X/kCr0zzHLEXcPku9nS0FiUu1XavjTet4lN+F3IFrR5r5TQ
+ keWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=IvVm0n/cRnATjd07kY2L9vTcCjtvxeLIC2DYlMsqMYA=;
- b=I+TsMMFPfu6I7Nv6KaKMC583OrBgqCh57ek1ZtuWvSVi4dQaWVR/foH66lDf3jQ12H
- u6GA4k12kZizzpO67bHX7hhNeNKcvO0Ke1LcmvZWa4FwdoUkXrxxf+hcMgnGieFS88Uh
- Rm632K/CM+mdLWkUWciszXoRI7Qr59VFZVzUMyoQSi3p0LLYRJh4Td5L54BDKtSCI40Z
- uWMGAaELs61f4eCwy5WwIIc3AQVO9kpYd+WtlL6QxqMuDFrMavuUQyb2nksfGcxn5TI0
- yqRXKocx0ykTOxUnyca6mOIrqXphseF02dunUBQMUQgFzO2lqlMDLvB+5jfKEPFzf4OR
- KETg==
-X-Gm-Message-State: AOAM531oy58OKiMRHok6U0hjRTHtaUU0M9XrFkweaHiKpv9o2pA5ly4w
- 60lEOggyX6tjW5AeZ8LOt4CIAYiHpjMRO6jlp6o=
-X-Google-Smtp-Source: ABdhPJwK9wWrsjBN6LwO41aq8JgIO6Q1jV+aPfVHi31qPhUwebev2LWgUp1LpQkbNDJS49cs542kHthGSmBzHDjauCE=
-X-Received: by 2002:a25:bd03:: with SMTP id f3mr15335448ybk.152.1618815958907; 
- Mon, 19 Apr 2021 00:05:58 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=qjDKK2b8zaIKdFcqtXLEaJRSFx178MBsvfzE51n7Ngs=;
+ b=fCpxvvNudEBKe4Kw+ZszvChjT9gvM+fAKJgEZoFK3jiqnPk2XvfZw9zL8uhnDVq04P
+ 6FC+MKZzdO2vKkk68MQ5T9eQvM4IZ3Wf476C4s7INKnGzvVodWgPN/yxp4og4ov6jY9K
+ 2R1hMU2ngpstgOhDm15d2DSfH5bgvFk0Hacp9Pm/qd8CQmI19LudHPMX+mXE0jDZqenS
+ 9p04FICLkENmJYCesQqAcrR+/xnwD3bZO8AjMOQS3ZebejVHGDBAyW4svyiVIX42hciL
+ rszTEfPV8WkjpJWD7ndGdnaHP8chWwGHP0NePL4mRy9aBjXyOAAVZezA9q6QauG5g7Ng
+ OOXQ==
+X-Gm-Message-State: AOAM531Li9NQeBBpICj3dXUaX3rIwOoYpAhLo6/gCKhWV7hIzrj4HVx2
+ Rv90VHNQk8q5OuEb+Afb9XbFvVa5HBmtSXSPZo4=
+X-Google-Smtp-Source: ABdhPJzINQ1Y4Chln6quK8e8cl0uiKfKTedF7Xw0xcTNOhtZvBjGxE4jNdpN7cAbmEh4SJQiGMEocEWMWBj7O2zeU0E=
+X-Received: by 2002:a92:d383:: with SMTP id o3mr16497126ilo.131.1618822223905; 
+ Mon, 19 Apr 2021 01:50:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1618812899.git.alistair.francis@wdc.com>
- <fef23b885f9649a4d54e7c98b168bdec5d297bb1.1618812899.git.alistair.francis@wdc.com>
-In-Reply-To: <fef23b885f9649a4d54e7c98b168bdec5d297bb1.1618812899.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 19 Apr 2021 15:05:47 +0800
-Message-ID: <CAEUhbmXb1dYso8weAcydB=+v5BpXfyhY+v2r88_71hNiPQDNAQ@mail.gmail.com>
-Subject: Re: [PATCH v4 5/8] target/riscv: Implementation of enhanced PMP (ePMP)
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+References: <20210419060145.11152-1-frank.chang@sifive.com>
+ <CAKmqyKOwZeqbbeZxQ2uGiKxGWZrBUk5Xq93kAeQecrFy9p718g@mail.gmail.com>
+ <CANzO1D2sRnzezeae89J4P+dBw_h0NSTX2SQUEStNo1K8dyquTQ@mail.gmail.com>
+In-Reply-To: <CANzO1D2sRnzezeae89J4P+dBw_h0NSTX2SQUEStNo1K8dyquTQ@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 19 Apr 2021 18:49:56 +1000
+Message-ID: <CAKmqyKMJW63O1P0wwKpWXM5QWgy8NCrrMiZzBXw37-JC7Ft_QQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: fix vssub.vv saturation bug
+To: Frank Chang <0xc0de0125@gmail.com>
+Cc: Frank Chang <frank.chang@sifive.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2e;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::129;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x129.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -70,33 +78,107 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Apr 2021 07:06:02 -0000
+X-List-Received-Date: Mon, 19 Apr 2021 08:50:27 -0000
 
-On Mon, Apr 19, 2021 at 2:17 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+On Mon, Apr 19, 2021 at 4:31 PM Frank Chang <0xc0de0125@gmail.com> wrote:
 >
-> From: Hou Weiying <weiying_hou@outlook.com>
+> Alistair Francis <alistair23@gmail.com> =E6=96=BC 2021=E5=B9=B44=E6=9C=88=
+19=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=882:28=E5=AF=AB=E9=81=93=EF=
+=BC=9A
+>>
+>> On Mon, Apr 19, 2021 at 4:02 PM <frank.chang@sifive.com> wrote:
+>> >
+>> > From: Frank Chang <frank.chang@sifive.com>
+>> >
+>> > Doing a negate (0x0 =E2=80=93 0x80000000) using vssub.vv produces
+>> > an incorrect result of 0x80000000 (should saturate to 0x7fffffff)
+>> >
+>> > Fix this bug by treating zero as a positive number.
+>> >
+>> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
+>>
+>> Thanks for the patch!
+>>
+>> A similar fix is already in the riscv-to-apply.next queue
+>>
+>>    target/riscv: Fixup saturate subtract function
+>>
+>>    The overflow predication ((a - b) ^ a) & (a ^ b) & INT64_MIN is right=
+.
+>>    However, when the predication is ture and a is 0, it should return ma=
+ximum.
+>>
+>>    Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+>>    Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>>    Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>>    Message-id: 20210212150256.885-4-zhiwei_liu@c-sky.com
+>>    Message-Id: <20210212150256.885-4-zhiwei_liu@c-sky.com>
+>>
+>>
+>> Alistair
 >
-> This commit adds support for ePMP v0.9.1.
 >
-> The ePMP spec can be found in:
-> https://docs.google.com/document/d/1Mh_aiHYxemL0umN3GTTw8vsbmzHZ_nxZXgjgOUzbvc8
->
-> Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
-> Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
-> Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
-> Message-Id: <SG2PR02MB263462CCDBCBBAD36983C2CD93450@SG2PR02MB2634.apcprd02.prod.outlook.com>
-> [ Changes by AF:
->  - Rebase on master
->  - Update to latest spec
->  - Use a switch case to handle ePMP MML permissions
->  - Fix a few bugs
-> ]
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/pmp.c | 154 ++++++++++++++++++++++++++++++++++++++++++---
->  1 file changed, 146 insertions(+), 8 deletions(-)
->
+> Thanks, I might missed that patch.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+No worries. Thanks anyway for the fix.
+
+Alistair
+
+> Frank Chang
+>
+>>
+>>
+>> > ---
+>> >  target/riscv/vector_helper.c | 8 ++++----
+>> >  1 file changed, 4 insertions(+), 4 deletions(-)
+>> >
+>> > diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper=
+.c
+>> > index a156573d281..356cef8a090 100644
+>> > --- a/target/riscv/vector_helper.c
+>> > +++ b/target/riscv/vector_helper.c
+>> > @@ -2451,7 +2451,7 @@ static inline int8_t ssub8(CPURISCVState *env, i=
+nt vxrm, int8_t a, int8_t b)
+>> >  {
+>> >      int8_t res =3D a - b;
+>> >      if ((res ^ a) & (a ^ b) & INT8_MIN) {
+>> > -        res =3D a > 0 ? INT8_MAX : INT8_MIN;
+>> > +        res =3D a >=3D 0 ? INT8_MAX : INT8_MIN;
+>> >          env->vxsat =3D 0x1;
+>> >      }
+>> >      return res;
+>> > @@ -2461,7 +2461,7 @@ static inline int16_t ssub16(CPURISCVState *env,=
+ int vxrm, int16_t a, int16_t b)
+>> >  {
+>> >      int16_t res =3D a - b;
+>> >      if ((res ^ a) & (a ^ b) & INT16_MIN) {
+>> > -        res =3D a > 0 ? INT16_MAX : INT16_MIN;
+>> > +        res =3D a >=3D 0 ? INT16_MAX : INT16_MIN;
+>> >          env->vxsat =3D 0x1;
+>> >      }
+>> >      return res;
+>> > @@ -2471,7 +2471,7 @@ static inline int32_t ssub32(CPURISCVState *env,=
+ int vxrm, int32_t a, int32_t b)
+>> >  {
+>> >      int32_t res =3D a - b;
+>> >      if ((res ^ a) & (a ^ b) & INT32_MIN) {
+>> > -        res =3D a > 0 ? INT32_MAX : INT32_MIN;
+>> > +        res =3D a >=3D 0 ? INT32_MAX : INT32_MIN;
+>> >          env->vxsat =3D 0x1;
+>> >      }
+>> >      return res;
+>> > @@ -2481,7 +2481,7 @@ static inline int64_t ssub64(CPURISCVState *env,=
+ int vxrm, int64_t a, int64_t b)
+>> >  {
+>> >      int64_t res =3D a - b;
+>> >      if ((res ^ a) & (a ^ b) & INT64_MIN) {
+>> > -        res =3D a > 0 ? INT64_MAX : INT64_MIN;
+>> > +        res =3D a >=3D 0 ? INT64_MAX : INT64_MIN;
+>> >          env->vxsat =3D 0x1;
+>> >      }
+>> >      return res;
+>> > --
+>> > 2.17.1
+>> >
+>> >
 
