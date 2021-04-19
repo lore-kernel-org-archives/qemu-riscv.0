@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lYNE5-0003Z5-Na
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 02:17:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43420)
+	id 1lYNEQ-0003fl-Jz
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 02:18:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43484)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=736d87ece=alistair.francis@wdc.com>)
- id 1lYNDz-0003VA-Ly; Mon, 19 Apr 2021 02:17:35 -0400
-Received: from esa1.hgst.iphmx.com ([68.232.141.245]:63233)
+ id 1lYNEP-0003dO-CR; Mon, 19 Apr 2021 02:18:01 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:51967)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=736d87ece=alistair.francis@wdc.com>)
- id 1lYNDx-0005Td-Rd; Mon, 19 Apr 2021 02:17:35 -0400
+ id 1lYNEN-0005iI-JT; Mon, 19 Apr 2021 02:18:01 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1618813053; x=1650349053;
+ t=1618813079; x=1650349079;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=KQtAdV5LP9iEiyOwP2HFZ15i0V8DACTLNBdpl+Fu7po=;
- b=BXIgTf1fHRkjOcSIUO3ney5JvslDchON3WkLHEoaHafhQGFw7HSRPf4F
- oBfLrReoMVgiOTawghxhljLlD7Av8JY1e78JaUNqiS3997/WmiUQ+BXwI
- pqhtd4WKoyPWxgZQtVwgMIo5epq26S6YycWgZklbLCDRxBSOmeG9uxd/r
- NMZ2e5c9U2MB7lxIXSOujFwbITRDCIOqrOBjNql6ZKA/L3zcoLX/oMiux
- RKk6VnJkdUKD5/ajo/b85dE0AHHp8qeSsUy5zfBs8zuhBzb6OJ7y82+iW
- X6KfpfpGUTIQ2rKzUvJ/O4d1QrW4F2WACop2Eq10IOarN1Wie4c+YrJTo g==;
-IronPort-SDR: zjrYFOeitNgcKQi2bwQLy27nf546kMBZ8AB4UKrABQoIrjBTB3/YLStWFivRKirGgEH/fvNqQI
- 5Y6sgB3e8GOsHTNmm0Qh23MxTbQRYFxOqxgpOV5WX+Xk9t8y74xNZX9oW0ArfNXkHpR/8JuXc0
- LVbUJhQPVQhcsIaYOwwoQPNdxMEXBLXYPSpjT3RYkXddvC0x2ItmA2C96cSd3zHIevug6JqRZl
- BaSQMM4sLbDILqcsmH6pYxMnZdHtxs6whZ7LAnY7bFbZ6uAHB0hyHIY12CdrOC34XT+eeE1rv8
- vIk=
-X-IronPort-AV: E=Sophos;i="5.82,233,1613404800"; d="scan'208";a="276347587"
+ bh=X32Jz9b6DgriBA4iY1sJRtque35/x8I2uhDBULiF2bQ=;
+ b=M/pMZVCbsrvkhVpTzAeRPtcxglIdA4vUvx9q5rcO9GaL+7rYbbn0vJA0
+ b+4HWLtdU2fPsYYPt80uKRwsNCgBsQcv+gkFGHamnHkznp6ZpblL4GJj+
+ 7M9ft0By90yBWLYTCCzSYAo4uIvcp6ERLjUrI/iE2hijkMteAnsp5s8tM
+ xqe9zZ0CR9XVNHebvCbjqr3rmndaz0Pixkjiw00KqDy2GqXgDBTZyMhYP
+ O5LI/8Igh8bB8T81JnO9u1ljvl7rec9FOWspKQgr2vqeaySUpeuQQJ9QB
+ Oj0aLBo2v+tsX0+j5LMY3tmAT5ZhcG/h2HEDSkbkiWTCv25zg/YUE/NSe A==;
+IronPort-SDR: wSG6f0FednopVF74DyJ47jleCEBQBfdF3E7qL1/Ne19PZxWfK3IBM/y86d7Ix2renvpE3HIhxD
+ 7k78U959l3ltVJeNNzVtlNcFqNu9UeeEAWnNNiBPKJCmfv0CpJRDkwwWWl9m+kLY3w/9RsnN0e
+ ZucGb86cei6/MFdVcZefhhl69PQN8WZ0UJisDX2AM57D3tMje0bwggJ+77pirUeX59NXjGmo3b
+ DXWJFQ0CliR56p3mPSdJz2W1ACNzVq7e5je9N2MsU1ZlDHQ65ctT+bL0KE5XnWOGOuHmNYog8M
+ cGI=
+X-IronPort-AV: E=Sophos;i="5.82,233,1613404800"; d="scan'208";a="169947849"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 19 Apr 2021 14:17:31 +0800
-IronPort-SDR: QvH0U3R7QV+wsE9vvefI++R1epTBx1bmGIcT1AorUvS0ULTAFLi4JaTOZtv7pfCXLmLv8gMazz
- eEFbila0F+H1tSGH3kcYkccMIublnQqyyaUy9zNPp6A2MfqpoMTiVQwd9UAGYFlBvuAKk0EiM7
- tUiO8noPPQTdi4y6MvOMUsApWVJP8fojYjs7s+9+4yGN+pFFHx7DLV7xxVhczp6Gq8Nh64tNn9
- DPXG/KutArsEWEhmPSTsoBVpDU2jUXRHv4VlVolC5yQquX/lBgkMtxjeJVhPheKPGb6Ejn7YPn
- HhSfvmxS8xSfh8QtpeVKjgT6
+ by ob1.hgst.iphmx.com with ESMTP; 19 Apr 2021 14:17:57 +0800
+IronPort-SDR: 2Mp45XV2J2WWdOtmQTJAOSP4/nc/sQQSIUE6SVfFzNTYZfQ+ExPa+TA7kPv7rUT4mo0nCFTnQn
+ gPlOXszv9U3ZX+MmRpft4/9jOQiJfj0QDDJXD47QzJLPzx7HrpKfTb7hXgRp5v3FgtnZocJsxn
+ CrdoQfsZ9LaofwNnFOS2nzCq+xs4f9fRezKsjb+6rfm9FwHRevqCuxXmpaCY4110Inu8MZIN7E
+ D30K7K+Cud3j0emCgo2YvDJkLnpLPjxq8ZSXvaNz+fsabDrhlYLGmzyj6+Gsw3KAhE89IjNMHh
+ rFitGLJd9a/2/Zkv8Arzxz3U
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Apr 2021 22:56:39 -0700
-IronPort-SDR: KVxzA7rG6LQyYRGilcTZIJNiGgpBlkKI5OiDZyQdhKQjs5Xcj+C0eNBncNRjeVNlRQXF63BbcO
- TQEBK/CUWneX7p+sngAPwdbc3Kh9WZ2+zJud8wktwK9NkqTFXtualmAN+8RI6p2wszZX1PTCUf
- WKrvcopV9X75Ost/TDYY8XUSPtDm/Ecyl7XXZYQcZJI8A7lXyvLium2EJWV0i+R4pG6AzBtqrk
- J0/kl4v4QXEvXyNOunjAEMkaAPjaW/DCOkHY/jB9MMhP+0gxhVVB9WtDgRVgH2gVIoat+FWB9m
- RAM=
+ 18 Apr 2021 22:57:05 -0700
+IronPort-SDR: 2dLAWcHGmHX2M8cc3PdndiidIkrRCKERREulwCHpTkZLiLALvyFARiUF2nI9S+PU0YobrukURH
+ t7BsrUGz3q6WWhYtXHsLtww5F1Og4Qa7cLWYWbddiTqJzV5J+oSNw1ui296WCvPLjS6TOLpCJa
+ sD/gBFFbGXi2iM7t3C/wylhQu2hOn0kd3tmZc8CYeDmpsZx5k1a4PkbB6OceoiU91ozud3mMck
+ jDg25sWDjGjpQxkmtlZJQtLLdr6Ezxtr8QYUL1sFLYA5Yj9RXdh/nRKUobN7QXKjKj5soBp/TX
+ 3ew=
 WDCIronportException: Internal
 Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.166.23])
- by uls-op-cesaip01.wdc.com with ESMTP; 18 Apr 2021 23:17:29 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 18 Apr 2021 23:17:47 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v4 6/8] target/riscv: Add a config option for ePMP
-Date: Mon, 19 Apr 2021 16:17:25 +1000
-Message-Id: <a22ccdaf9314078bc735d3b323f966623f8af020.1618812899.git.alistair.francis@wdc.com>
+Subject: [PATCH v4 7/8] target/riscv/pmp: Remove outdated comment
+Date: Mon, 19 Apr 2021 16:17:35 +1000
+Message-Id: <10387eec21d2f17c499a78fdba85280cab4dd27f.1618812899.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1618812899.git.alistair.francis@wdc.com>
 References: <cover.1618812899.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.141.245;
+Received-SPF: pass client-ip=216.71.153.141;
  envelope-from=prvs=736d87ece=alistair.francis@wdc.com;
- helo=esa1.hgst.iphmx.com
+ helo=esa3.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -83,64 +83,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Apr 2021 06:17:36 -0000
+X-List-Received-Date: Mon, 19 Apr 2021 06:18:01 -0000
 
-From: Hou Weiying <weiying_hou@outlook.com>
-
-Add a config option to enable experimental support for ePMP. This
-is disabled by default and can be enabled with 'x-epmp=true'.
-
-Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
-Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
-Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
-Message-Id: <SG2PR02MB263458D195A60A57C05EBE9993450@SG2PR02MB2634.apcprd02.prod.outlook.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
- target/riscv/cpu.h |  1 +
- target/riscv/cpu.c | 10 ++++++++++
- 2 files changed, 11 insertions(+)
+ target/riscv/pmp.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 83b315e0b2..add734bbbd 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -304,6 +304,7 @@ struct RISCVCPU {
-         uint16_t elen;
-         bool mmu;
-         bool pmp;
-+        bool epmp;
-         uint64_t resetvec;
-     } cfg;
- };
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index e530df9385..66787d019c 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -412,6 +412,14 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index e1f5776316..78203291de 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -19,10 +19,6 @@
+  * this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
  
-     if (cpu->cfg.pmp) {
-         set_feature(env, RISCV_FEATURE_PMP);
-+
-+        /*
-+         * Enhanced PMP should only be available
-+         * on harts with PMP support
-+         */
-+        if (cpu->cfg.epmp) {
-+            set_feature(env, RISCV_FEATURE_EPMP);
-+        }
-     }
- 
-     set_resetvec(env, cpu->cfg.resetvec);
-@@ -554,6 +562,8 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-+    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-+
-     DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
-     DEFINE_PROP_END_OF_LIST(),
- };
+-/*
+- * PMP (Physical Memory Protection) is as-of-yet unused and needs testing.
+- */
+-
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+ #include "qapi/error.h"
 -- 
 2.31.1
 
