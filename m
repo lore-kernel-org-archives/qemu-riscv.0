@@ -1,50 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lYMyu-0004C1-10
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 02:02:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40860)
+	id 1lYN03-0005o4-9n
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 02:03:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41130)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lYMyr-00049W-O7
- for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 02:01:58 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:54259)
+ id 1lYN01-0005jm-De
+ for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 02:03:09 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:51088)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lYMyk-00043W-FU
- for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 02:01:57 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id nk8so4113420pjb.3
- for <qemu-riscv@nongnu.org>; Sun, 18 Apr 2021 23:01:49 -0700 (PDT)
+ id 1lYMzz-0004ot-Pa
+ for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 02:03:09 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id u11so13616210pjr.0
+ for <qemu-riscv@nongnu.org>; Sun, 18 Apr 2021 23:03:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=hI6diI03YN0gzsP1zG7SKXRSFTBjgNgh2fgUlPSLQb0=;
- b=TtD6G8PlN+UjSivWpXHjZTEg/27kXJsnDyCxNvW1+QHouWwVL9D8uHR+n3OSV10YTp
- BMv2NZoxjnkGFOW3mUz0UR74t9rw7kfyZOStixkzXm8UUie2qG7hjhj7gz+UIQQwz3/R
- Dra74kRjYjQ4EKP1EXETYqo6TrfY8oAJ2oL/ImA6TNw8e5chE+6/4Iel61nEdfnjPZ+Q
- jbVOr7/V95o6WTKC6WY4/YMXngCSDoXEqv3+YrVXLQPmXGuu09ymqqYoFgxpJUePgPlk
- jm0Dle01lAzQfcuNe57TJbz8mtMARTuNuTxRIGcM8+g5jt7k2JC1/6gM7alYo/2RMZEy
- 8lQw==
+ h=from:to:cc:subject:date:message-id;
+ bh=41vtdKBbxUOFhp4p6eMdPTd6SyBd/ck8tNGb28KQNqA=;
+ b=P2Gkq3xhnvboohiN8KLkgPCBjn7OcNZAFRh//o+L9FznXn1cdOAVgmfkbcKE3vHrqD
+ B6tXfTb37wQlthGc8A97w9L2YN2679g0jXyje/W5CR+iy3Q+ufWpjkQD7OVOUEl3Xj+I
+ 3+u5X3r403quYcL6BJqr8IePmHYtvOUaDVEgrBiQU7CDfjPctdkUzT8Fi6ZbqwnAMyRc
+ Hy2mxPFtArNMnUEh9QYMCZxAzDZ5u4Skz3rM1oF3alEqEWK6Bt0z52C3yrQBeswiRzud
+ lfiP2KEq2H4gJDfCPp3PlkvWe2KjAl7Q8Hs/MWvO2zzeOl/NUBtoBE4yBFNpEUAay5gd
+ M3nQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=hI6diI03YN0gzsP1zG7SKXRSFTBjgNgh2fgUlPSLQb0=;
- b=ZxDNTPk4Xv7G1aI4u/2L+2c2Z5+LWrGoNMs5mXkvbtFY0r+5P9BIBSKL9xaXr7RfFN
- jAWFRJp1yuKXs4o1NMXhQvhxkfTjpWrzKviXaK3s9fr/fUtdH99NcRHrcjZ2323/sE+s
- ZcU02TrE9nw4Y4wwlFSK7+vAUDEPFAX6ORM4wHPlFMkPSgB7YNqX75ndkD0YB7g9H2Yb
- pLWX4XtKK2pp1YnCkIXwg2Mq5lt9UvnEE15kNv/8or7sejE8W+DSG2ZkOKoqHSVRrxy/
- d2Hv4RD4wyIKWqbObhc2sQu9pBkarXev+DKUsuKOBcdCmTAXgIo2fBhmlZmB0jZK6utq
- iaMQ==
-X-Gm-Message-State: AOAM530pl0rxmafF8DzWvfrKrV15e4ZhmnoajPs6jdDvXtPpEeP1+YKP
- EPqRxA2dI5FTqso0JyveuCu++Q==
-X-Google-Smtp-Source: ABdhPJxALzSb/fRjFn8vxojaley5kI/If7nqtKMeYv8HNXrc4NUZrkDaKjMnRAdHhpVOM7t7lZEFHQ==
-X-Received: by 2002:a17:90a:f3cf:: with SMTP id
- ha15mr22864257pjb.214.1618812108381; 
- Sun, 18 Apr 2021 23:01:48 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=41vtdKBbxUOFhp4p6eMdPTd6SyBd/ck8tNGb28KQNqA=;
+ b=ae2apad6deARZKjys4EPTXZEFUtFLE8folE68mtQcoHVIaYJ/t1eRTYCg21+YeD4/Y
+ N4MqHu0aMRiG73EKTMDumY/xbX4PXSzwLhh9K/AHRk27kRxRojoeqa6VnMVdTXoCMHR6
+ DMYzUbwrFD10kJkieOzdaRawtjeI82otThEk74w9M7JtV99YC5V+SrAEtUM2gpv98/BQ
+ lMFGLhFqXp4k1vzaIpsKRjKYAAF7VaIaZOURJHldhN1WoLJ2LrsC1jD42fKl+RfPyoIq
+ j+Uy8Pf/lojAuxy1HvdIg/46R2X2TEUJiuIPB+5eMY9sujAIbO8Ch7JRxkW6XNi82cZl
+ NETw==
+X-Gm-Message-State: AOAM5327VqpwC0CGViOSzPj6IkNHxXc5aLcisp0FxpkjfONVPTkq3PMH
+ IZO6jYyCu15ZieBo5b1wgVDp1g==
+X-Google-Smtp-Source: ABdhPJxII5Btbdx5IEaOpeI/n42ng91b4o41UUzoPvPPyEVHZJi36SBc36osMUZ/DyJ5M+RuCrjFeA==
+X-Received: by 2002:a17:902:edd5:b029:e9:7477:5f0a with SMTP id
+ q21-20020a170902edd5b02900e974775f0amr20915755plk.81.1618812186128; 
+ Sun, 18 Apr 2021 23:03:06 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id v1sm11162911pfu.6.2021.04.18.23.01.46
+ by smtp.gmail.com with ESMTPSA id x83sm5939316pfc.219.2021.04.18.23.03.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Apr 2021 23:01:48 -0700 (PDT)
+ Sun, 18 Apr 2021 23:03:05 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -52,22 +50,19 @@ Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Subject: [PATCH] target/riscv: fix vssub.vv saturation bug
-Date: Mon, 19 Apr 2021 14:01:44 +0800
-Message-Id: <20210419060145.11152-1-frank.chang@sifive.com>
+Subject: [PATCH] target/riscv: fix vrgather macro index variable type bug
+Date: Mon, 19 Apr 2021 14:03:01 +0800
+Message-Id: <20210419060302.14075-1-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,60 +75,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Apr 2021 06:01:58 -0000
+X-List-Received-Date: Mon, 19 Apr 2021 06:03:09 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Doing a negate (0x0 – 0x80000000) using vssub.vv produces
-an incorrect result of 0x80000000 (should saturate to 0x7fffffff)
-
-Fix this bug by treating zero as a positive number.
+ETYPE may be type of uint64_t, thus index variable has to be declared as
+type of uint64_t, too. Otherwise the value read from vs1 register may be
+truncated to type of uint32_t.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/vector_helper.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ target/riscv/vector_helper.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index a156573d281..356cef8a090 100644
+index a156573d281..4a70776af32 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -2451,7 +2451,7 @@ static inline int8_t ssub8(CPURISCVState *env, int vxrm, int8_t a, int8_t b)
- {
-     int8_t res = a - b;
-     if ((res ^ a) & (a ^ b) & INT8_MIN) {
--        res = a > 0 ? INT8_MAX : INT8_MIN;
-+        res = a >= 0 ? INT8_MAX : INT8_MIN;
-         env->vxsat = 0x1;
-     }
-     return res;
-@@ -2461,7 +2461,7 @@ static inline int16_t ssub16(CPURISCVState *env, int vxrm, int16_t a, int16_t b)
- {
-     int16_t res = a - b;
-     if ((res ^ a) & (a ^ b) & INT16_MIN) {
--        res = a > 0 ? INT16_MAX : INT16_MIN;
-+        res = a >= 0 ? INT16_MAX : INT16_MIN;
-         env->vxsat = 0x1;
-     }
-     return res;
-@@ -2471,7 +2471,7 @@ static inline int32_t ssub32(CPURISCVState *env, int vxrm, int32_t a, int32_t b)
- {
-     int32_t res = a - b;
-     if ((res ^ a) & (a ^ b) & INT32_MIN) {
--        res = a > 0 ? INT32_MAX : INT32_MIN;
-+        res = a >= 0 ? INT32_MAX : INT32_MIN;
-         env->vxsat = 0x1;
-     }
-     return res;
-@@ -2481,7 +2481,7 @@ static inline int64_t ssub64(CPURISCVState *env, int vxrm, int64_t a, int64_t b)
- {
-     int64_t res = a - b;
-     if ((res ^ a) & (a ^ b) & INT64_MIN) {
--        res = a > 0 ? INT64_MAX : INT64_MIN;
-+        res = a >= 0 ? INT64_MAX : INT64_MIN;
-         env->vxsat = 0x1;
-     }
-     return res;
+@@ -4796,7 +4796,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+     uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
+     uint32_t vm = vext_vm(desc);                                          \
+     uint32_t vl = env->vl;                                                \
+-    uint32_t index, i;                                                    \
++    uint64_t index;                                                       \
++    uint32_t i;                                                           \
+                                                                           \
+     for (i = 0; i < vl; i++) {                                            \
+         if (!vm && !vext_elem_mask(v0, mlen, i)) {                        \
+@@ -4826,7 +4827,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
+     uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
+     uint32_t vm = vext_vm(desc);                                          \
+     uint32_t vl = env->vl;                                                \
+-    uint32_t index = s1, i;                                               \
++    uint64_t index = s1;                                                  \
++    uint32_t i;                                                           \
+                                                                           \
+     for (i = 0; i < vl; i++) {                                            \
+         if (!vm && !vext_elem_mask(v0, mlen, i)) {                        \
 -- 
 2.17.1
 
