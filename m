@@ -1,71 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lYPbx-0007PS-3r
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 04:50:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40648)
+	id 1lYUBJ-0007oL-L9
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 09:43:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52762)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lYPbv-0007Oe-3I; Mon, 19 Apr 2021 04:50:27 -0400
-Received: from mail-il1-x129.google.com ([2607:f8b0:4864:20::129]:47080)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1lYUBH-0007jo-8K
+ for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 09:43:15 -0400
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533]:41829)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lYPbt-0005rD-BX; Mon, 19 Apr 2021 04:50:26 -0400
-Received: by mail-il1-x129.google.com with SMTP id l19so24576219ilk.13;
- Mon, 19 Apr 2021 01:50:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1lYUBF-00058B-8V
+ for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 09:43:15 -0400
+Received: by mail-ed1-x533.google.com with SMTP id j7so3846961eds.8
+ for <qemu-riscv@nongnu.org>; Mon, 19 Apr 2021 06:43:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=qjDKK2b8zaIKdFcqtXLEaJRSFx178MBsvfzE51n7Ngs=;
- b=cZJqo1VbyF4h9snRdW0KT51qN+uMBBxkyw4Q3fOnkvqs1NDAFlmxG1uHszY/TzsxYx
- obxjVF4Y/HhsREoTH5rojTmxnYCClL6RU2fk33NUxcdj1JmDq2y11n0s4kr3c2ilvBf7
- HfBYzKsjzeGeiHLEfjg0AnXNLijXG19mZnvn9LTqH0s4iIAxzn0Z8VRSjHcsz4AAgVjP
- ybxRghKT7Lw6umcq/25lbpfL1yE/Utxt3FXnRxk6SGdniN8fC+ZMRD08isngtrDwJ2a8
- KElkCg4jT1ddBGfbkNui3X/kCr0zzHLEXcPku9nS0FiUu1XavjTet4lN+F3IFrR5r5TQ
- keWA==
+ bh=lYas/TlTAS1s1f3CGkoMY6n2QFtVAZSR0X8+2blwnYU=;
+ b=Fc6iNaLgYxA1QB0mO3bjzQTsYAz6bcilhMn10fYTAo/6q/hxbIOjgTcNPpC6HuWP2V
+ 9dhCUKDMR10a0niG6K0/MRswVmEJHdeqCzpAkaCIo279ah4R8w2kI6e38l9cjAHvhq4j
+ /gOh1yD7pIQOhoCXvpFrR6caKU0TEqP3hp10y9eWLzXUVxtg0jt/2X89c3C7roA7A7lX
+ +B7TxqEY+ueuJZ6ohifnUDHjwXt5japUYukTTOeGedPtBCTS1tX5suLkNpUs8N44HXre
+ ErCqoM7RO9VcI82o2D9Rgohqho8JWlpVKONehCw5KIO45QJPtwTna+IVp/3OmK7oiFNw
+ nlSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=qjDKK2b8zaIKdFcqtXLEaJRSFx178MBsvfzE51n7Ngs=;
- b=fCpxvvNudEBKe4Kw+ZszvChjT9gvM+fAKJgEZoFK3jiqnPk2XvfZw9zL8uhnDVq04P
- 6FC+MKZzdO2vKkk68MQ5T9eQvM4IZ3Wf476C4s7INKnGzvVodWgPN/yxp4og4ov6jY9K
- 2R1hMU2ngpstgOhDm15d2DSfH5bgvFk0Hacp9Pm/qd8CQmI19LudHPMX+mXE0jDZqenS
- 9p04FICLkENmJYCesQqAcrR+/xnwD3bZO8AjMOQS3ZebejVHGDBAyW4svyiVIX42hciL
- rszTEfPV8WkjpJWD7ndGdnaHP8chWwGHP0NePL4mRy9aBjXyOAAVZezA9q6QauG5g7Ng
- OOXQ==
-X-Gm-Message-State: AOAM531Li9NQeBBpICj3dXUaX3rIwOoYpAhLo6/gCKhWV7hIzrj4HVx2
- Rv90VHNQk8q5OuEb+Afb9XbFvVa5HBmtSXSPZo4=
-X-Google-Smtp-Source: ABdhPJzINQ1Y4Chln6quK8e8cl0uiKfKTedF7Xw0xcTNOhtZvBjGxE4jNdpN7cAbmEh4SJQiGMEocEWMWBj7O2zeU0E=
-X-Received: by 2002:a92:d383:: with SMTP id o3mr16497126ilo.131.1618822223905; 
- Mon, 19 Apr 2021 01:50:23 -0700 (PDT)
+ bh=lYas/TlTAS1s1f3CGkoMY6n2QFtVAZSR0X8+2blwnYU=;
+ b=kseKlSqAcwCNwLJS/ZQ3h2ozd8v2AvXEH8UDjUFuFL6a4Y9QxXJpbEcv8m/07kVvhX
+ m2XkuW8wup0Xs1y5iv2zGLBrhm+atgkVWaLDIbzT6Xvm8BL27Tbi1huoMo0sS372NcFp
+ FmSq4IGgxmJog6JAvoVexrTaf2kFldsYlASvcqON8JLkLHvhFOGEcee0j2tGYhxpWXUJ
+ Q1Zjoy/ctTnS2pXpVqNi0bAFG8j0dd+yRkfd/ERcbE6BlTBZ5k2JelPRPkNvYOqJgcAI
+ oEgz/xeuF/bWk80UkTXwNYvly1xjlJRL432G5bgE8jx1N+vi/P5mX/KhU2+y9+ZZPB5g
+ sIcg==
+X-Gm-Message-State: AOAM532XhAm94wD1CNBsiTCkhKyRYSQXAA4ZSxrjLhm0HOuSZlnRoMMN
+ /pZvE+Oo6IIWbs0LIw65JjgDaLamyxZOkuMYOHUpQw==
+X-Google-Smtp-Source: ABdhPJyuayk7x5wlan/5MHMK53AnmC9gxVVhjSs6q+cgni/ld8XV5zKYKKAn/IdaHCl/VU2/D5Urq7G2q3jfyekNz+w=
+X-Received: by 2002:a05:6402:51d0:: with SMTP id
+ r16mr22320562edd.52.1618839791160; 
+ Mon, 19 Apr 2021 06:43:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210419060145.11152-1-frank.chang@sifive.com>
- <CAKmqyKOwZeqbbeZxQ2uGiKxGWZrBUk5Xq93kAeQecrFy9p718g@mail.gmail.com>
- <CANzO1D2sRnzezeae89J4P+dBw_h0NSTX2SQUEStNo1K8dyquTQ@mail.gmail.com>
-In-Reply-To: <CANzO1D2sRnzezeae89J4P+dBw_h0NSTX2SQUEStNo1K8dyquTQ@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 19 Apr 2021 18:49:56 +1000
-Message-ID: <CAKmqyKMJW63O1P0wwKpWXM5QWgy8NCrrMiZzBXw37-JC7Ft_QQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: fix vssub.vv saturation bug
-To: Frank Chang <0xc0de0125@gmail.com>
-Cc: Frank Chang <frank.chang@sifive.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+References: <20210325163315.27724-1-peter.maydell@linaro.org>
+ <1df78911-9858-b747-b22b-7e5254cd3cac@amsat.org>
+In-Reply-To: <1df78911-9858-b747-b22b-7e5254cd3cac@amsat.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 19 Apr 2021 14:42:19 +0100
+Message-ID: <CAFEAcA_TuKCJ31xsv_j49oQfOFuEipmMnsNb2czPZRMPTN=wxg@mail.gmail.com>
+Subject: Re: [PATCH v2 for-6.0?] hw/pci-host/gpex: Don't fault for unmapped
+ parts of MMIO and PIO windows
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: qemu-arm <qemu-arm@nongnu.org>, QEMU Developers <qemu-devel@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Arnd Bergmann <arnd@arndb.de>, 
+ Dmitry Vyukov <dvyukov@google.com>, "Michael S. Tsirkin" <mst@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::129;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x129.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::533;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x533.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -78,107 +76,163 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Apr 2021 08:50:27 -0000
+X-List-Received-Date: Mon, 19 Apr 2021 13:43:15 -0000
 
-On Mon, Apr 19, 2021 at 4:31 PM Frank Chang <0xc0de0125@gmail.com> wrote:
+On Thu, 25 Mar 2021 at 18:14, Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>=
+ wrote:
 >
-> Alistair Francis <alistair23@gmail.com> =E6=96=BC 2021=E5=B9=B44=E6=9C=88=
-19=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=882:28=E5=AF=AB=E9=81=93=EF=
-=BC=9A
->>
->> On Mon, Apr 19, 2021 at 4:02 PM <frank.chang@sifive.com> wrote:
->> >
->> > From: Frank Chang <frank.chang@sifive.com>
->> >
->> > Doing a negate (0x0 =E2=80=93 0x80000000) using vssub.vv produces
->> > an incorrect result of 0x80000000 (should saturate to 0x7fffffff)
->> >
->> > Fix this bug by treating zero as a positive number.
->> >
->> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
->>
->> Thanks for the patch!
->>
->> A similar fix is already in the riscv-to-apply.next queue
->>
->>    target/riscv: Fixup saturate subtract function
->>
->>    The overflow predication ((a - b) ^ a) & (a ^ b) & INT64_MIN is right=
-.
->>    However, when the predication is ture and a is 0, it should return ma=
-ximum.
->>
->>    Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
->>    Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
->>    Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->>    Message-id: 20210212150256.885-4-zhiwei_liu@c-sky.com
->>    Message-Id: <20210212150256.885-4-zhiwei_liu@c-sky.com>
->>
->>
->> Alistair
+> Hi Peter,
 >
+> On 3/25/21 5:33 PM, Peter Maydell wrote:
+> > Currently the gpex PCI controller implements no special behaviour for
+> > guest accesses to areas of the PIO and MMIO where it has not mapped
+> > any PCI devices, which means that for Arm you end up with a CPU
+> > exception due to a data abort.
+> >
+> > Most host OSes expect "like an x86 PC" behaviour, where bad accesses
+> > like this return -1 for reads and ignore writes.  In the interests of
+> > not being surprising, make host CPU accesses to these windows behave
+> > as -1/discard where there's no mapped PCI device.
+> >
+> > The old behaviour generally didn't cause any problems, because
+> > almost always the guest OS will map the PCI devices and then only
+> > access where it has mapped them. One corner case where you will see
+> > this kind of access is if Linux attempts to probe legacy ISA
+> > devices via a PIO window access. So far the only case where we've
+> > seen this has been via the syzkaller fuzzer.
+> >
+> > Reported-by: Dmitry Vyukov <dvyukov@google.com>
+> > Fixes: https://bugs.launchpad.net/qemu/+bug/1918917
+> > Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+> > ---
+> > v1->v2 changes: put in the hw_compat machinery.
+> >
+> > Still not sure if I want to put this in 6.0 or not.
+> >
+> >  include/hw/pci-host/gpex.h |  4 +++
+> >  hw/core/machine.c          |  1 +
+> >  hw/pci-host/gpex.c         | 56 ++++++++++++++++++++++++++++++++++++--
+> >  3 files changed, 58 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
+> > index d48a020a952..fcf8b638200 100644
+> > --- a/include/hw/pci-host/gpex.h
+> > +++ b/include/hw/pci-host/gpex.h
+> > @@ -49,8 +49,12 @@ struct GPEXHost {
+> >
+> >      MemoryRegion io_ioport;
+> >      MemoryRegion io_mmio;
+> > +    MemoryRegion io_ioport_window;
+> > +    MemoryRegion io_mmio_window;
+> >      qemu_irq irq[GPEX_NUM_IRQS];
+> >      int irq_num[GPEX_NUM_IRQS];
+> > +
+> > +    bool allow_unmapped_accesses;
+> >  };
+> >
+> >  struct GPEXConfig {
+> > diff --git a/hw/core/machine.c b/hw/core/machine.c
+> > index 257a664ea2e..9750fad7435 100644
+> > --- a/hw/core/machine.c
+> > +++ b/hw/core/machine.c
+> > @@ -41,6 +41,7 @@ GlobalProperty hw_compat_5_2[] =3D {
+> >      { "PIIX4_PM", "smm-compat", "on"},
+> >      { "virtio-blk-device", "report-discard-granularity", "off" },
+> >      { "virtio-net-pci", "vectors", "3"},
+> > +    { "gpex-pcihost", "allow-unmapped-accesses", "false" },
+> >  };
+> >  const size_t hw_compat_5_2_len =3D G_N_ELEMENTS(hw_compat_5_2);
+> >
+> > diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
+> > index 2bdbe7b4561..a6752fac5e8 100644
+> > --- a/hw/pci-host/gpex.c
+> > +++ b/hw/pci-host/gpex.c
+> > @@ -83,12 +83,51 @@ static void gpex_host_realize(DeviceState *dev, Err=
+or **errp)
+> >      int i;
+> >
+> >      pcie_host_mmcfg_init(pex, PCIE_MMCFG_SIZE_MAX);
+> > +    sysbus_init_mmio(sbd, &pex->mmio);
+> > +
+> > +    /*
+> > +     * Note that the MemoryRegions io_mmio and io_ioport that we pass
+> > +     * to pci_register_root_bus() are not the same as the
+> > +     * MemoryRegions io_mmio_window and io_ioport_window that we
+> > +     * expose as SysBus MRs. The difference is in the behaviour of
+> > +     * accesses to addresses where no PCI device has been mapped.
+> > +     *
+> > +     * io_mmio and io_ioport are the underlying PCI view of the PCI
+> > +     * address space, and when a PCI device does a bus master access
+> > +     * to a bad address this is reported back to it as a transaction
+> > +     * failure.
+> > +     *
+> > +     * io_mmio_window and io_ioport_window implement "unmapped
+> > +     * addresses read as -1 and ignore writes"; this is traditional
+> > +     * x86 PC behaviour, which is not mandated by the PCI spec proper
+> > +     * but expected by much PCI-using guest software, including Linux.
 >
-> Thanks, I might missed that patch.
+> I suspect PCI-ISA bridges to provide an EISA bus.
 
-No worries. Thanks anyway for the fix.
+I'm not sure what you mean here -- there isn't an ISA bridge
+or an EISA bus involved here. This is purely about the behaviour
+of the memory window the PCI host controller exposes to the CPU
+(and in particular the window for when a PCI device's BAR is
+set to "IO" rather than "MMIO"), though we change both here.
 
-Alistair
-
-> Frank Chang
+> > +     * In the interests of not being unnecessarily surprising, we
+> > +     * implement it in the gpex PCI host controller, by providing the
+> > +     * _window MRs, which are containers with io ops that implement
+> > +     * the 'background' behaviour and which hold the real PCI MRs as
+> > +     * subregions.
+> > +     */
+> >      memory_region_init(&s->io_mmio, OBJECT(s), "gpex_mmio", UINT64_MAX=
+);
+> >      memory_region_init(&s->io_ioport, OBJECT(s), "gpex_ioport", 64 * 1=
+024);
+> >
+> > -    sysbus_init_mmio(sbd, &pex->mmio);
+> > -    sysbus_init_mmio(sbd, &s->io_mmio);
+> > -    sysbus_init_mmio(sbd, &s->io_ioport);
+> > +    if (s->allow_unmapped_accesses) {
+> > +        memory_region_init_io(&s->io_mmio_window, OBJECT(s),
+> > +                              &unassigned_io_ops, OBJECT(s),
+> > +                              "gpex_mmio_window", UINT64_MAX);
 >
->>
->>
->> > ---
->> >  target/riscv/vector_helper.c | 8 ++++----
->> >  1 file changed, 4 insertions(+), 4 deletions(-)
->> >
->> > diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper=
-.c
->> > index a156573d281..356cef8a090 100644
->> > --- a/target/riscv/vector_helper.c
->> > +++ b/target/riscv/vector_helper.c
->> > @@ -2451,7 +2451,7 @@ static inline int8_t ssub8(CPURISCVState *env, i=
-nt vxrm, int8_t a, int8_t b)
->> >  {
->> >      int8_t res =3D a - b;
->> >      if ((res ^ a) & (a ^ b) & INT8_MIN) {
->> > -        res =3D a > 0 ? INT8_MAX : INT8_MIN;
->> > +        res =3D a >=3D 0 ? INT8_MAX : INT8_MIN;
->> >          env->vxsat =3D 0x1;
->> >      }
->> >      return res;
->> > @@ -2461,7 +2461,7 @@ static inline int16_t ssub16(CPURISCVState *env,=
- int vxrm, int16_t a, int16_t b)
->> >  {
->> >      int16_t res =3D a - b;
->> >      if ((res ^ a) & (a ^ b) & INT16_MIN) {
->> > -        res =3D a > 0 ? INT16_MAX : INT16_MIN;
->> > +        res =3D a >=3D 0 ? INT16_MAX : INT16_MIN;
->> >          env->vxsat =3D 0x1;
->> >      }
->> >      return res;
->> > @@ -2471,7 +2471,7 @@ static inline int32_t ssub32(CPURISCVState *env,=
- int vxrm, int32_t a, int32_t b)
->> >  {
->> >      int32_t res =3D a - b;
->> >      if ((res ^ a) & (a ^ b) & INT32_MIN) {
->> > -        res =3D a > 0 ? INT32_MAX : INT32_MIN;
->> > +        res =3D a >=3D 0 ? INT32_MAX : INT32_MIN;
->> >          env->vxsat =3D 0x1;
->> >      }
->> >      return res;
->> > @@ -2481,7 +2481,7 @@ static inline int64_t ssub64(CPURISCVState *env,=
- int vxrm, int64_t a, int64_t b)
->> >  {
->> >      int64_t res =3D a - b;
->> >      if ((res ^ a) & (a ^ b) & INT64_MIN) {
->> > -        res =3D a > 0 ? INT64_MAX : INT64_MIN;
->> > +        res =3D a >=3D 0 ? INT64_MAX : INT64_MIN;
->> >          env->vxsat =3D 0x1;
->> >      }
->> >      return res;
->> > --
->> > 2.17.1
->> >
->> >
+> EISA -> 4 * GiB
+>
+> unassigned_io_ops allows 64-bit accesses. Here we want up to 32.
+>
+> Maybe we don't care.
+>
+> > +        memory_region_init_io(&s->io_ioport_window, OBJECT(s),
+> > +                              &unassigned_io_ops, OBJECT(s),
+> > +                              "gpex_ioport_window", 64 * 1024);
+>
+> Ditto, unassigned_io_ops accepts 64-bit accesses.
+
+These are just using the same sizes as the io_mmio and io_ioport
+MRs which the existing code creates.
+
+> >  static void gpex_host_class_init(ObjectClass *klass, void *data)
+> >  {
+> >      DeviceClass *dc =3D DEVICE_CLASS(klass);
+> > @@ -117,6 +166,7 @@ static void gpex_host_class_init(ObjectClass *klass=
+, void *data)
+> >      dc->realize =3D gpex_host_realize;
+> >      set_bit(DEVICE_CATEGORY_BRIDGE, dc->categories);
+> >      dc->fw_name =3D "pci";
+> > +    device_class_set_props(dc, gpex_host_properties);
+>
+> IMO this change belongs to the parent bridges,
+> TYPE_PCI_HOST_BRIDGE and TYPE_PCIE_HOST_BRIDGE.
+
+Arnd had a look through the kernel sources and apparently not
+all PCI host controllers do this -- there are a few SoCs where the
+kernel has to put in special case code to allow for the fact that
+it will get a bus error for accesses to unmapped parts of the
+window. So I concluded that the specific controller implementation
+was the right place for it.
+
+thanks
+-- PMM
 
