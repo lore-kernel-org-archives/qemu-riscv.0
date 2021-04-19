@@ -1,70 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lYMtT-0002Lh-Ho
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 01:56:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39686)
+	id 1lYMyu-0004C1-10
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 02:02:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40860)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lYMtS-0002LS-Ib
- for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 01:56:22 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d]:33305)
+ id 1lYMyr-00049W-O7
+ for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 02:01:58 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:54259)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lYMtQ-0000OC-R5
- for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 01:56:22 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id
- kb13-20020a17090ae7cdb02901503d67f0beso5331804pjb.0
- for <qemu-riscv@nongnu.org>; Sun, 18 Apr 2021 22:56:19 -0700 (PDT)
+ id 1lYMyk-00043W-FU
+ for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 02:01:57 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id nk8so4113420pjb.3
+ for <qemu-riscv@nongnu.org>; Sun, 18 Apr 2021 23:01:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id;
- bh=gcqCCC6OKs+bYQSdPy1A/MAjJhQLH5ZK4FDiW+OtHh4=;
- b=m7i3QgsaJ96KVn7aEBZPm1CPlxiTNpQ2UaD+eMH7mEHsNgW3DGyS1LaFFVZPX7DW0Z
- OVDqNtEz5f8O7zENBeRQzK8hz5X3QE26pj/HmnoXoV0ArTGMPKPh4hUy3MIwtuFrlrz2
- f0nXtIdwiibdxew3gct4E6euBJAHv82ACk+XcXjhhtdzrcz3b72mh6p+veVJLDfHETed
- TCH2onH9qNkTazJ8tcXpXsVHzMaGCZe8teav3DhnMqVRiBddvss6uZCTH0HofB8UcUW8
- y3LbdZxC5cMnf1+XcypFCmsiEf+oELsZfexwzR2qPWRWnPrpboXaGAYlDL9kWfaDs+mD
- fD/w==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=hI6diI03YN0gzsP1zG7SKXRSFTBjgNgh2fgUlPSLQb0=;
+ b=TtD6G8PlN+UjSivWpXHjZTEg/27kXJsnDyCxNvW1+QHouWwVL9D8uHR+n3OSV10YTp
+ BMv2NZoxjnkGFOW3mUz0UR74t9rw7kfyZOStixkzXm8UUie2qG7hjhj7gz+UIQQwz3/R
+ Dra74kRjYjQ4EKP1EXETYqo6TrfY8oAJ2oL/ImA6TNw8e5chE+6/4Iel61nEdfnjPZ+Q
+ jbVOr7/V95o6WTKC6WY4/YMXngCSDoXEqv3+YrVXLQPmXGuu09ymqqYoFgxpJUePgPlk
+ jm0Dle01lAzQfcuNe57TJbz8mtMARTuNuTxRIGcM8+g5jt7k2JC1/6gM7alYo/2RMZEy
+ 8lQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=gcqCCC6OKs+bYQSdPy1A/MAjJhQLH5ZK4FDiW+OtHh4=;
- b=PxEJDt1VJn6bEsAGsdtkS7OOXOzbWj6/O7o3/iFiAp5H+k4izs1AG7octFgvgUKgux
- JGmPAmwH0Zlj3Z6Dsm90hfI4MxcuW4RaSw1v8DTIO4iIprMQpeA0DT5VVuNNWnacyCcU
- scW9HH8YnntlXHgUqkaAsnYh9ExGWpoGNTtUGZiLBysOC7UJ5yV2Z+ruMpMCgs/ChZTs
- olXgeaWCHHCJ+6YrIMSeS3dLH0CYc9a9Ciy9a6unf6M2fxh6VULqoGazrakQCcK/z/NG
- ick1hlos5U8Ga3wobN6TMJjx6JwUjLPOomxHjMdZC2eytUWpwc8jEeUV2+Em4j/5kiiB
- G56A==
-X-Gm-Message-State: AOAM533kNNDRRKDZEYBRNEWFNU8viiOX4skEBYv24WUFbc709XAnkmi2
- UOx0fnwkjJjYWMeLQR86yITtQA==
-X-Google-Smtp-Source: ABdhPJx17sDxZtPdvUJ2wbvaO84l1FKVtm0RwtreNhH8rbfswHqqK5451HtWRDWd28pUFsy1dSBt6A==
-X-Received: by 2002:a17:902:a406:b029:e6:78c4:71c8 with SMTP id
- p6-20020a170902a406b02900e678c471c8mr21157220plq.17.1618811778196; 
- Sun, 18 Apr 2021 22:56:18 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=hI6diI03YN0gzsP1zG7SKXRSFTBjgNgh2fgUlPSLQb0=;
+ b=ZxDNTPk4Xv7G1aI4u/2L+2c2Z5+LWrGoNMs5mXkvbtFY0r+5P9BIBSKL9xaXr7RfFN
+ jAWFRJp1yuKXs4o1NMXhQvhxkfTjpWrzKviXaK3s9fr/fUtdH99NcRHrcjZ2323/sE+s
+ ZcU02TrE9nw4Y4wwlFSK7+vAUDEPFAX6ORM4wHPlFMkPSgB7YNqX75ndkD0YB7g9H2Yb
+ pLWX4XtKK2pp1YnCkIXwg2Mq5lt9UvnEE15kNv/8or7sejE8W+DSG2ZkOKoqHSVRrxy/
+ d2Hv4RD4wyIKWqbObhc2sQu9pBkarXev+DKUsuKOBcdCmTAXgIo2fBhmlZmB0jZK6utq
+ iaMQ==
+X-Gm-Message-State: AOAM530pl0rxmafF8DzWvfrKrV15e4ZhmnoajPs6jdDvXtPpEeP1+YKP
+ EPqRxA2dI5FTqso0JyveuCu++Q==
+X-Google-Smtp-Source: ABdhPJxALzSb/fRjFn8vxojaley5kI/If7nqtKMeYv8HNXrc4NUZrkDaKjMnRAdHhpVOM7t7lZEFHQ==
+X-Received: by 2002:a17:90a:f3cf:: with SMTP id
+ ha15mr22864257pjb.214.1618812108381; 
+ Sun, 18 Apr 2021 23:01:48 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id q63sm14066788pjq.17.2021.04.18.22.56.16
+ by smtp.gmail.com with ESMTPSA id v1sm11162911pfu.6.2021.04.18.23.01.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Apr 2021 22:56:17 -0700 (PDT)
+ Sun, 18 Apr 2021 23:01:48 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH] fpu/softfloat: set invalid excp flag for RISC-V muladd
- instructions
-Date: Mon, 19 Apr 2021 13:56:10 +0800
-Message-Id: <20210419055614.28361-1-frank.chang@sifive.com>
+Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Subject: [PATCH] target/riscv: fix vssub.vv saturation bug
+Date: Mon, 19 Apr 2021 14:01:44 +0800
+Message-Id: <20210419060145.11152-1-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102d.google.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1031.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,58 +80,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Apr 2021 05:56:22 -0000
+X-List-Received-Date: Mon, 19 Apr 2021 06:01:58 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-In IEEE 754-2008 spec:
-  Invalid operation exception is signaled when doing:
-  fusedMultiplyAdd(0, Inf, c) or fusedMultiplyAdd(Inf, 0, c)
-  unless c is a quiet NaN; if c is a quiet NaN then it is
-  implementation defined whether the invalid operation exception
-  is signaled.
+Doing a negate (0x0 – 0x80000000) using vssub.vv produces
+an incorrect result of 0x80000000 (should saturate to 0x7fffffff)
 
-In RISC-V Unprivileged ISA spec:
-  The fused multiply-add instructions must set the invalid
-  operation exception flag when the multiplicands are Inf and
-  zero, even when the addend is a quiet NaN.
-
-This commit set invalid operation execption flag for RISC-V when
-multiplicands of muladd instructions are Inf and zero.
+Fix this bug by treating zero as a positive number.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- fpu/softfloat-specialize.c.inc | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ target/riscv/vector_helper.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/fpu/softfloat-specialize.c.inc b/fpu/softfloat-specialize.c.inc
-index c2f87addb25..9c37265e20b 100644
---- a/fpu/softfloat-specialize.c.inc
-+++ b/fpu/softfloat-specialize.c.inc
-@@ -624,6 +624,23 @@ static int pickNaNMulAdd(FloatClass a_cls, FloatClass b_cls, FloatClass c_cls,
-     } else {
-         return 1;
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index a156573d281..356cef8a090 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -2451,7 +2451,7 @@ static inline int8_t ssub8(CPURISCVState *env, int vxrm, int8_t a, int8_t b)
+ {
+     int8_t res = a - b;
+     if ((res ^ a) & (a ^ b) & INT8_MIN) {
+-        res = a > 0 ? INT8_MAX : INT8_MIN;
++        res = a >= 0 ? INT8_MAX : INT8_MIN;
+         env->vxsat = 0x1;
      }
-+#elif defined(TARGET_RISCV)
-+    /*
-+     * For RISC-V, InvalidOp is set when multiplicands are Inf and zero
-+     * and returns default NaN.
-+     */
-+    if (infzero) {
-+        float_raise(float_flag_invalid, status);
-+        return 3;
-+    }
-+
-+    if (is_nan(a_cls)) {
-+        return 0;
-+    } else if (is_nan(b_cls)) {
-+        return 1;
-+    } else {
-+        return 2;
-+    }
- #elif defined(TARGET_XTENSA)
-     /*
-      * For Xtensa, the (inf,zero,nan) case sets InvalidOp and returns
+     return res;
+@@ -2461,7 +2461,7 @@ static inline int16_t ssub16(CPURISCVState *env, int vxrm, int16_t a, int16_t b)
+ {
+     int16_t res = a - b;
+     if ((res ^ a) & (a ^ b) & INT16_MIN) {
+-        res = a > 0 ? INT16_MAX : INT16_MIN;
++        res = a >= 0 ? INT16_MAX : INT16_MIN;
+         env->vxsat = 0x1;
+     }
+     return res;
+@@ -2471,7 +2471,7 @@ static inline int32_t ssub32(CPURISCVState *env, int vxrm, int32_t a, int32_t b)
+ {
+     int32_t res = a - b;
+     if ((res ^ a) & (a ^ b) & INT32_MIN) {
+-        res = a > 0 ? INT32_MAX : INT32_MIN;
++        res = a >= 0 ? INT32_MAX : INT32_MIN;
+         env->vxsat = 0x1;
+     }
+     return res;
+@@ -2481,7 +2481,7 @@ static inline int64_t ssub64(CPURISCVState *env, int vxrm, int64_t a, int64_t b)
+ {
+     int64_t res = a - b;
+     if ((res ^ a) & (a ^ b) & INT64_MIN) {
+-        res = a > 0 ? INT64_MAX : INT64_MIN;
++        res = a >= 0 ? INT64_MAX : INT64_MIN;
+         env->vxsat = 0x1;
+     }
+     return res;
 -- 
 2.17.1
 
