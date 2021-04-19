@@ -1,68 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lYbPc-0000G6-LF
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 17:26:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48552)
+	id 1lYbZx-0003Bf-0W
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 17:37:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50924)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexander.wagner@ulal.de>)
- id 1lYbPb-0000Fm-8r; Mon, 19 Apr 2021 17:26:31 -0400
-Received: from mo4-p00-ob.smtp.rzone.de ([81.169.146.219]:21190)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexander.wagner@ulal.de>)
- id 1lYbPV-0004Yx-TP; Mon, 19 Apr 2021 17:26:31 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1618867575; cv=none;
- d=strato.com; s=strato-dkim-0002;
- b=kpDk7Ai/90MPX04nI0/09mLb88ZDXe3lVd4FkcWd1cOXEG4gZrGZ5TG/u5+lE9pGD3
- xVJsBi337M9qd3eT0nk3vPzUWwTRW+DjP4quj6UFdoETKZb3hwkVWKmjQbnZ48SQwjOn
- w5qyLc5kbx7CUZPqpB6hS6Aawr0S9bTriF8GUK2dxCFTVudQ2vwEytkiRpMH/S2PpqQD
- hBVFl7VpqJx7TlgBv2KlzOZ5Nd+hBA72ujX72Epk8Q/Oqz1hchz846WoKOLlZhaH4VmU
- PC4Btn9GoObmRI3xXndCrgBO4+XQXolc2JkbXf8fHYlWRC5l+SdPIOAiAp1e9OPa7fIi
- F3EQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1618867575;
- s=strato-dkim-0002; d=strato.com;
- h=Date:Message-ID:Subject:From:Cc:References:To:Cc:Date:From:Subject:
- Sender; bh=wxo1ovHERLm79wzEmHpOZuFSJ1XrUo6J+MTm/AhYyvM=;
- b=IYpcEGpn7mcmkfMhu8tf88nQMPeeSdHh/qAsUkquvad/W6Cay+PEWoZ2MBc9Tw7zP+
- +D/bXJ9rOiZd5EXRDdGwJquwZDAVIQbHvNLyhhRVxU357BSOuijyQEwzeQjQEIMRXst4
- 7KFwnOBZq1eFQlnYjqjbn6qrXFaYsajZOl6Xm+ybN0PVD/3xQKCEtFc1EHds/RFH0ynG
- Ko381YtlG7zsiN1wfun3ir1fXqund37LhddHtjdPScJGxG/9pJIZhIdXdZCmlevgSr3p
- an+2yNd3pqdnlqJwV711+ZVc1AdLciawncguMH8JsfOGTeuOhgoJNhFcLhCHC7znXuAT
- xXlA==
-ARC-Authentication-Results: i=1; strato.com;
-    dkim=none
-Authentication-Results: strato.com;
-    dkim=none
-X-RZG-AUTH: ":LWABbUGmf/p3d3fx281mbpk9zOkHG9L8L9MnY9md4b2JSSHyzkN3ON0Uun6F+zrkVqc/ZmTClqC4x8TtiRZHkgvdiKE9vpOcNvUp/CcHtmvnEw=="
-X-RZG-CLASS-ID: mo00
-Received: from [IPv6:2003:c3:9710:2300:1761:34f8:11a8:6e99]
- by smtp.strato.de (RZmta 47.24.3 AUTH)
- with ESMTPSA id U051a9x3JLQEGfh
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Mon, 19 Apr 2021 23:26:14 +0200 (CEST)
-To: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-References: 
-Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, qemu-riscv@nongnu.org
-From: Alexander Wagner <alexander.wagner@ulal.de>
-Subject: Re: [PATCH] hw/riscv: Fix OT IBEX reset vector
-Message-ID: <59b1b2ac-dd6a-46aa-9b48-6afa7eb41c0a@ulal.de>
-Date: Mon, 19 Apr 2021 23:26:13 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lYbZs-0003AZ-E1; Mon, 19 Apr 2021 17:37:08 -0400
+Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e]:39535)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lYbZo-000180-NQ; Mon, 19 Apr 2021 17:37:08 -0400
+Received: by mail-il1-x12e.google.com with SMTP id b17so30385911ilh.6;
+ Mon, 19 Apr 2021 14:37:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=rpI+JiGTmk4A4bIQ2ljfXV2qMoRnxEpWzZ3oTiwfV28=;
+ b=DAKpN4Ow2PAWp0CJmI32wBKJLeDEgzDrKiiDclpImyWOVSoOnlbKCffP83bQC/2van
+ f7Ca5CkhXweBCJl3hALeGmtxbtgJUbDtXbAYlJ/doFvR4KF4JpGJh2+xM2bWRBl3r5ZJ
+ ZOtLYrh/L+04ba05tLp6dnK9mafJmLaNhGQ9Ni5Z+o0CVvpEJ6jjsO4wYfuxcNnj2rCN
+ G9KtO+M77BgJ6RQTidSAeq7i26Ec726BQsAcC3qVhYTUmIBu8c+lH/BO26H7SpJ/K3mo
+ OAYEhpbwnuDZvmeWf6op2t/HERY2L9DI1UB/+UllluXUBcPB8ULFmL/Jhl2Clspdvpax
+ I/BA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=rpI+JiGTmk4A4bIQ2ljfXV2qMoRnxEpWzZ3oTiwfV28=;
+ b=txZeIKLHFiuAb0825W8WqKu4MOqwbPguiL+1gdTiBCpX2fKFNiTYaGp31MBQU/T8Fk
+ Uo4Kf9g0EenRdzLoWNxHdPRLU/9cQvyPV2cF371tdezxuful2Ji3TMNqcNKQO9NL/tDu
+ mCDUrIJe4vHwd/c7yv+VAEWe0y8UHNKZZlDUBJNCK0LSwj8MW0lPuUWAZTiP9SEBCpDx
+ HAi/Qma5A0pX6i+297OMQoJXLBLBICfQaotpO96fSvwO7icw6GaHS4NvTFwZ6kuS5K1e
+ 2VGpSBXSJcyd5q6EML4xQO5MqewO4voS4naEe+i5eP03wpxyImLtOOnlOuUBfNfT50dg
+ Hi8Q==
+X-Gm-Message-State: AOAM532LGAD3W4sHD5ixCDXqfc/Qcf1Gs4nDEI6ktvCCFYkg5Py0WBKj
+ m2Mkq0clkEHliHFwZUpM/tW8kPmtIn4kyiqbhAY=
+X-Google-Smtp-Source: ABdhPJws3afTL88sIA+pjZZ+DlpFLb40rJwsQo7JLkUOOo3B4qu1TrxWys/GQx1OFQ2STWPN7b4HBRjEW2Xurv0sLp8=
+X-Received: by 2002:a92:d90f:: with SMTP id s15mr19127134iln.227.1618868223405; 
+ Mon, 19 Apr 2021 14:37:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-US
-Received-SPF: none client-ip=81.169.146.219;
- envelope-from=alexander.wagner@ulal.de; helo=mo4-p00-ob.smtp.rzone.de
-X-Spam_score_int: -25
-X-Spam_score: -2.6
-X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+References: <59b1b2ac-dd6a-46aa-9b48-6afa7eb41c0a@ulal.de>
+In-Reply-To: <59b1b2ac-dd6a-46aa-9b48-6afa7eb41c0a@ulal.de>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 20 Apr 2021 07:36:36 +1000
+Message-ID: <CAKmqyKMt6i6vA8eGn+fbTH1moQe=Kx_ET_yy2f37PWqyL+mo5Q@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: Fix OT IBEX reset vector
+To: Alexander Wagner <alexander.wagner@ulal.de>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -75,21 +73,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Apr 2021 21:26:31 -0000
+X-List-Received-Date: Mon, 19 Apr 2021 21:37:12 -0000
 
-Hi,
+On Tue, Apr 20, 2021 at 7:26 AM Alexander Wagner
+<alexander.wagner@ulal.de> wrote:
+>
+> Hi,
+>
+> I just wanted to check if the patch [1] is missing anything to be
+> merged? If so, please let me know.
 
-I just wanted to check if the patch [1] is missing anything to be=20
-merged? If so, please let me know.
+Thanks for the ping!
 
-Regards
+You have done everything correctly, I just forgot to apply the patch.
 
-Alex
+Do you mind re-sending the patch though? When re-sending the patch can
+you include all of the reviewed by tags?
 
+Alistair
 
-[1]=20
-https://patchew.org/QEMU/20210310221208.167990-1-alexander.wagner@ulal.de=
-/
-
-
+>
+> Regards
+>
+> Alex
+>
+>
+> [1]
+> https://patchew.org/QEMU/20210310221208.167990-1-alexander.wagner@ulal.de/
+>
+>
+>
 
