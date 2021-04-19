@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lYNDH-0002px-4T
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 02:16:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43250)
+	id 1lYNDU-0002wW-SR
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 02:17:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43296)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=736d87ece=alistair.francis@wdc.com>)
- id 1lYNDB-0002nK-7U; Mon, 19 Apr 2021 02:16:45 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:39840)
+ id 1lYNDO-0002sc-FQ; Mon, 19 Apr 2021 02:16:58 -0400
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:6358)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=736d87ece=alistair.francis@wdc.com>)
- id 1lYND9-0004zu-Ih; Mon, 19 Apr 2021 02:16:44 -0400
+ id 1lYNDI-000541-2d; Mon, 19 Apr 2021 02:16:58 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1618813003; x=1650349003;
+ t=1618813054; x=1650349054;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=6Pem7nn+Ai8i7C1vw/hr6N5V118h5TJ3Ltyh7wyBDJY=;
- b=Ou95Jg4LQi6Qo7NOk29wyMrMj3eXmZSxx74yojGEHnPIW/GkCkAIv4O0
- QetUxi6GfNqm8PLit/pWsnUAftmWkRNAgWUYx0AX3rAMx/LWWVPvy8qUW
- 4zrxbyP/UxeIC4bAYXjRIso+0ZDLk8S317NdknKv61M+KLxoqVmcSEqeW
- BVbvsUBipCAqPK61IxySSZAAEh6cVFCGAR9Bu1DmGNl+cTvOAg6fzmGX4
- 4CJsuq0Dhngcb+k/j8A07Olr48G6oEhsCvuO2nNRW0RgjRM+J+4KZ2s1t
- 6IHsDhwwkYvHEL5Lneypr6gGLOV5hmW4kigd2MOaQxHirMlMqj7W75zPK g==;
-IronPort-SDR: 87/Qog4CkqRNJ7B1EB9yIcNp8nPF+Q6cMBZHPlhS2OYat4az31oMEnIRaWhe62bfH9atqjHSV7
- p9H1v8mZu2fFEbztlsPdhcc8x784meIffTKhrcR4dqAyYtgPjdXPn8BGHYcso4eWmPn3PpjI2f
- Dv2GIdTzpIddXW6PFVJmBTvLtvsMHJpeuhSYKKp1OOo88L5dN+LbTxirAlHXHvsxMszsysmqsw
- tv6OLzqibW3IhP96eLpQbS26XxorKWav+ntrqW7f3AQVrLumgUAvEoc8UKBb5lBfXdMz9ezvWS
- jY4=
-X-IronPort-AV: E=Sophos;i="5.82,233,1613404800"; d="scan'208";a="169947779"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 19 Apr 2021 14:16:41 +0800
-IronPort-SDR: n/bEGsZ9KaT4MlU13SQjhXGA70NvWpY+QQHGQ/I8waX4XJtBu38jpu/C8ENrda9EoicgPiMFUC
- wRbplpUBLzXQ+Aao6qDAYALhGges6IczA6Swu6nfOmmFRikwqafjiBpji5FB/Kd+t6NuJ9tzea
- v9s0UqLtQ1POBgdsqF/KiNUWCcjU+qq8h9Q7rfXmwjZwFiZHhVzdD1/l/d2gd8mUA1ATHizYt/
- AXKaP2baoZP5AsUhhGbqgypXK4QgkeLCzriasXa4XFHTvGL7fyakkn8Ueb719oOWlMmrWbP0La
- Es8wSXYicWWoU6+tbPB51v0N
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Apr 2021 22:55:49 -0700
-IronPort-SDR: pAKVXrogrOhTys+S65Igw6AtaGtQjSvUZykFMF+eIqLhjZ5n6knCb9kNPDJFtmkZ7h6QCUU8Uu
- bymuBroxriAS5d8N8n5RHYsPTYjH3EJaRS09ifQNETskha/Rioqv5Ww1Oe6i6ZFNxRrMNWa75+
- Yctu4ZVEZoWhS/fHgU555VHHMi3RoJRrtDYcSxYfZN/IfvozyQOyizbEixfXXWgtK2npDRumIS
- +nXW5adttIpUPgspynSpORN4f3uBPWw7Lkjt1sWrw6Bl8JQuN9HUG13CB8lTdjsKSdEJOiSlqE
- +N4=
+ bh=AEdLUUCBoQL5rEE7QdTBd0JifO8NvjBpCTUmr7NrzuA=;
+ b=qD7ho70m9irsHj70Z/0poFKfGt8byMakeSUk/H4Fid8Mv0xMJhroUTJN
+ B/CKrKQOoiCdaSpuYekNs3RP81iw7A2YrjuvT+fglQN5RVrl2IRxpOb0G
+ Kdh3ASAviuIczZ56VxIw2+lq9upy8X0n46JPmy5Dl7xLjilzSNXw5S+E0
+ Z78wzR7kC0w4DEKPtS8IkrpAits4vU238iif+tQ16ETQVUOszgPYiZFWN
+ QGYGD+XKXNpgde8mMcAjrZ0EZPc4xDY2bkBXAeFt6uG70LJMdZWCohTPt
+ uAZ9gp1qkl3yh6VicRJuhLsEaiAMzTYCfaoWyn94TPMadLnpFjApBtt92 w==;
+IronPort-SDR: Q2bKQ+LFsjJMpaI6kcVxUW2HEKSaDSp0xPqMsPu/8P4Omj96gQVb0LqroPi33qBcfYDKnqUZh+
+ gtCf6T/0Zz6hQb168W2nK+32muZtp5RrSpMtS0gZRK81mOs+BkgsrNHnI6ahu86XZ2Nwq5JmoJ
+ 4AUq8yY4g3z4Ko79kGlvv9+II0oM/wdujINZta2papcsRx7FxKG9ACZZVLNPyMRYb6EkZCk5xy
+ Yy3onV9Ooo1uqp/zbIBEqMpetRe+39aAM2qXkzH4wrBBKhla20gTbXroGAW365FZ7I9EfvrHzB
+ L5Q=
+X-IronPort-AV: E=Sophos;i="5.82,233,1613404800"; d="scan'208";a="269339318"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 19 Apr 2021 14:17:31 +0800
+IronPort-SDR: LUBW467kJLxHB9MCnFO1KgbG+cQ2Jg9z6tenxfP65hE1dWmEg4waurTQ6mbExgPrDGOOXQqsHj
+ KDxjD0/vaoo4Z3raOcPLoHhC7rFtBYgnCDWoPhMph/mTJFhToaF00ITg69MtNbtqQ1aUBvqKJ9
+ /dVJrDYmOZsIXtbt/kQNovsqs7k3t1NIay2pp26/gYMIDkIkX1M6UPbhziPXdvK2fNlso7XGpt
+ msEgtJP50aHWA++6QswMCqCqrLCnLkY7Elf6cX658oQ9l20jIwu1EI+wqQnnlS+I/8dpXKWLy2
+ KUWA7S7iycHEaPQzwLtAQ99w
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Apr 2021 22:57:34 -0700
+IronPort-SDR: r88Ocmw4WEqwMah5NMSbeqbxGi/v/sp+m/DqU/AKKZ/bzjKltsqjH0BRS4cdPr42DCwLuja8TD
+ iP08XkcVExo4AgEJ6LXvSQwftec5yaa3uMGmSSpi7Dky4wWG9ubeO+ZGIppnMOhz7SquXMgICY
+ Tt+l/qvOUpcCFHZ5RUdfp8AL5q2aaMHGaof4Vaw7b1Oso7VNIFpiJuURH1FraimO0pezs5v+y6
+ wn1qA3lpS01Tmcqf9863Shk9S3XD61Fp3c7ql84ouwY5TXrSklKMQkjoSMKuA86PrSv6e8yx2k
+ z5k=
 WDCIronportException: Internal
 Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.166.23])
- by uls-op-cesaip01.wdc.com with ESMTP; 18 Apr 2021 23:16:39 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 18 Apr 2021 23:16:47 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v4 2/8] target/riscv: Define ePMP mseccfg
-Date: Mon, 19 Apr 2021 16:16:38 +1000
-Message-Id: <63245b559f477a9ce6d4f930136d2d7fd7f99c78.1618812899.git.alistair.francis@wdc.com>
+Subject: [PATCH v4 3/8] target/riscv: Add the ePMP feature
+Date: Mon, 19 Apr 2021 16:16:44 +1000
+Message-Id: <28c8855c80b0388a08c3ae009f5467e2b3960ce0.1618812899.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1618812899.git.alistair.francis@wdc.com>
 References: <cover.1618812899.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.141;
+Received-SPF: pass client-ip=68.232.143.124;
  envelope-from=prvs=736d87ece=alistair.francis@wdc.com;
- helo=esa3.hgst.iphmx.com
+ helo=esa2.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -83,40 +83,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Apr 2021 06:16:45 -0000
+X-List-Received-Date: Mon, 19 Apr 2021 06:17:03 -0000
 
-From: Hou Weiying <weiying_hou@outlook.com>
+The spec is avaliable at:
+https://docs.google.com/document/d/1Mh_aiHYxemL0umN3GTTw8vsbmzHZ_nxZXgjgOUzbvc8
 
-Use address 0x390 and 0x391 for the ePMP CSRs.
-
-Signed-off-by: Hongzheng-Li <Ethan.Lee.QNL@gmail.com>
-Signed-off-by: Hou Weiying <weiying_hou@outlook.com>
-Signed-off-by: Myriad-Dreamin <camiyoru@gmail.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Message-Id: <SG2PR02MB2634D85E5DF0C2BB540AE1BB93450@SG2PR02MB2634.apcprd02.prod.outlook.com>
-[ Changes by AF:
- - Tidy up commit message
-]
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
- target/riscv/cpu_bits.h | 3 +++
- 1 file changed, 3 insertions(+)
+ target/riscv/cpu.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 8549d77b4f..24d89939a0 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -220,6 +220,9 @@
- #define CSR_MTINST          0x34a
- #define CSR_MTVAL2          0x34b
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 842d3ab810..13a08b86f6 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -81,6 +81,7 @@
+ enum {
+     RISCV_FEATURE_MMU,
+     RISCV_FEATURE_PMP,
++    RISCV_FEATURE_EPMP,
+     RISCV_FEATURE_MISA
+ };
  
-+/* Enhanced Physical Memory Protection (ePMP) */
-+#define CSR_MSECCFG         0x390
-+#define CSR_MSECCFGH        0x391
- /* Physical Memory Protection */
- #define CSR_PMPCFG0         0x3a0
- #define CSR_PMPCFG1         0x3a1
 -- 
 2.31.1
 
