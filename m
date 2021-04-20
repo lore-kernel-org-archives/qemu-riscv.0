@@ -1,81 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lYovU-00020Q-MM
-	for mharc-qemu-riscv@gnu.org; Tue, 20 Apr 2021 07:52:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45462)
+	id 1lYpTA-0006dc-Vv
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Apr 2021 08:27:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57242)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lYovL-0001xf-Nv; Tue, 20 Apr 2021 07:52:11 -0400
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430]:44665)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lYovI-0006Az-3X; Tue, 20 Apr 2021 07:52:10 -0400
-Received: by mail-wr1-x430.google.com with SMTP id e7so28329517wrs.11;
- Tue, 20 Apr 2021 04:52:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=1d3Qs8pqU6VaS54jRrLe9JgDdsVxdpFZv1Y1nX+qd+c=;
- b=f4ItVPK4f7PS4KOd9hrhgtJcMuxoi62VPMIlFg7JeW9TWWjtbn/0HxEUx/0TA9HdM6
- AGg7cI4H3hTIiZt78zz47VdAIQOlCl++sp9cCRWjF32DwxrznTpC2Y6RyZGaQ75bkx1J
- javogyjcTwYViKXxABBoE6FQQIvZRwuBHeUXFS9dl7c/0bYMNhj6SEosDw/lsTkSuoS8
- nrEEKAaDTK77roi8AYQSoATKrT9gIMJjFKmjYBK05xY3mHj4qijr0n0bHgZ0KRqei9E2
- 3ZVw3AIQc05vz6pxIfr91KntqBPLjKb5Ck8uW7+3YGbWbyi806EAFwGlSQJnn0DO3dRP
- zFlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=1d3Qs8pqU6VaS54jRrLe9JgDdsVxdpFZv1Y1nX+qd+c=;
- b=rPyomnlo0hr91BsvWENYMtdYMgm3cMxWnZGPpk+zLW6cOCKkCWWIcXVMXiWTPzcT66
- HssbVeKXfkN43l17qO1w7uaNFxLue0fVr0pzPwe87yAUM0PjpOkcBOdeTYKZCX2E6h7t
- hcSApnwYmFVTplmoRXGTdobUBd+VBKSo2kr003gjf/qkBso7ZlSTZJuZKwGwqsUkHO21
- MIQpYdjvfXMkAwhhPIiF7fi/XAEQwCk3LXzaXMjleogliWdNlw1fdT9XLJlQ7/4llr2/
- 6g9O6/C4GVCNsj0J9en7tKJGRxem0nCrmWLekg6zUc9LmuMVUBcfxu3LpVCQva2wlINa
- lawA==
-X-Gm-Message-State: AOAM533ytd3Z6XJbrL9nQCKTB/FW+A30Uo666rEEbAC3atZZGRveWi9P
- ooPHTdKmYLkzVh7WBXmQajU=
-X-Google-Smtp-Source: ABdhPJwOesJh8nG3mf3vnZEQ1A11PcUoDujgxAdaliCEA+1wCNmfo/Td4Hsg6kD9r/3SF1QpcZ5WMg==
-X-Received: by 2002:a05:6000:128f:: with SMTP id
- f15mr20438291wrx.19.1618919525641; 
- Tue, 20 Apr 2021 04:52:05 -0700 (PDT)
-Received: from [192.168.1.36] (39.red-81-40-121.staticip.rima-tde.net.
- [81.40.121.39])
- by smtp.gmail.com with ESMTPSA id r19sm2698923wmq.33.2021.04.20.04.52.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Apr 2021 04:52:04 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v2 for-6.0?] hw/pci-host/gpex: Don't fault for unmapped
- parts of MMIO and PIO windows
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, Arnd Bergmann
- <arnd@arndb.de>, "Michael S. Tsirkin" <mst@redhat.com>,
- QEMU Developers <qemu-devel@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>,
- Dmitry Vyukov <dvyukov@google.com>
+ (Exim 4.90_1) (envelope-from <arnd@arndb.de>)
+ id 1lYpT8-0006b0-Ug; Tue, 20 Apr 2021 08:27:07 -0400
+Received: from mout.kundenserver.de ([217.72.192.73]:45597)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <arnd@arndb.de>)
+ id 1lYpSx-0000hx-MH; Tue, 20 Apr 2021 08:27:05 -0400
+Received: from mail-wm1-f49.google.com ([209.85.128.49]) by
+ mrelayeu.kundenserver.de (mreue109 [213.165.67.113]) with ESMTPSA (Nemesis)
+ id 1MoNyA-1lsX6a1Gxs-00omXw; Tue, 20 Apr 2021 14:26:44 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ t14-20020a05600c198eb029012eeb3edfaeso10100419wmq.2; 
+ Tue, 20 Apr 2021 05:26:44 -0700 (PDT)
+X-Gm-Message-State: AOAM5319zJ97QzqnE5bPMz5hvlW+wZZmb8ik4F1Kx6vtCBTbEvgXfcws
+ g97F8cIX/GyJ4OG7SjQAkdzK3XrkcZ0913wkYUE=
+X-Google-Smtp-Source: ABdhPJzzH/3t3TG94dZXiQdv4zy0WWlqYsKIrKmJ4UDLYfPin+YjtDuGo7NZV7y/wmB5Cl4ZKkTZhmQwPLoJu82qEgk=
+X-Received: by 2002:a1c:6382:: with SMTP id x124mr4257008wmb.142.1618921603890; 
+ Tue, 20 Apr 2021 05:26:43 -0700 (PDT)
+MIME-Version: 1.0
 References: <20210325163315.27724-1-peter.maydell@linaro.org>
  <1df78911-9858-b747-b22b-7e5254cd3cac@amsat.org>
  <CAFEAcA_TuKCJ31xsv_j49oQfOFuEipmMnsNb2czPZRMPTN=wxg@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <bb3cc932-5111-c388-2770-3c1110dbc89f@amsat.org>
-Date: Tue, 20 Apr 2021 13:52:03 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
-MIME-Version: 1.0
-In-Reply-To: <CAFEAcA_TuKCJ31xsv_j49oQfOFuEipmMnsNb2czPZRMPTN=wxg@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x430.google.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
+ <bb3cc932-5111-c388-2770-3c1110dbc89f@amsat.org>
+In-Reply-To: <bb3cc932-5111-c388-2770-3c1110dbc89f@amsat.org>
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Tue, 20 Apr 2021 14:26:27 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a3zeYC0wiT2Or3RicPbVBY4TJCOTa6ZN3rT=e4XGR-eCA@mail.gmail.com>
+Message-ID: <CAK8P3a3zeYC0wiT2Or3RicPbVBY4TJCOTa6ZN3rT=e4XGR-eCA@mail.gmail.com>
+Subject: Re: [PATCH v2 for-6.0?] hw/pci-host/gpex: Don't fault for unmapped
+ parts of MMIO and PIO windows
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, QEMU Developers <qemu-devel@nongnu.org>,
+ qemu-arm <qemu-arm@nongnu.org>, Dmitry Vyukov <dvyukov@google.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:w3zfaopnzGc6TlSPbWcxcOzN1AvR0c0ZRp0tG6M7CugebnJmTNI
+ TpSVEOv9QVLBjQryMKL5rQBRXKb+N8xL3V4gwkfOhJRH40+R5F0jMbvfjwBE2mnbej+twz3
+ fBkwb2evNUB6hstnnEmqTDHMOwm1ekI/MqnLfqJK1utAFaj8mrimtC6ibEgSQSwzZDdlTVh
+ kPn2OGdIIDuhaUj1kajTA==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:sJyoyYzSyMU=:qH9ALZbYpNQyIC9y1HVMDK
+ fxbESdtOeE1Om9GhQ8gKvZvYGOKrCfyInf6mq0cI7uH9bqwvZdIhAlvnj9zg9hYF3VvklFlGz
+ Z6oj4BJPVAdiwhdHkrS5time8QchCAehWNTeNJ2VtnmzXQ5vJwOJGYroz3j88jPc1Wfxhwuxq
+ iyEbOglmhzNPtbv2FAWPfKi4b/W1ym2D4kqB6keYF2P5SISy1GX/PNcysHprAqLhybMjBt/5c
+ kHY96oJmyKviJr6GJLLteCg/OtYKX7VQlyDMNDpVixJv+lkPHXs+DTdzbK0So3G16nUNrhOE6
+ H+cq6ahjeGm4eWdlG88mZrmvfiflC2W0OKrHM7ANqZQSAZ4yc7o6ilSOkvFS+o5WDOsNUM8sI
+ dzxwBbOJQm/ZBKBYszP6G18iB56xOm5gVMxK/oOdOXSAft9Imtb9lDwYpwL6hllOIvAUvA5wQ
+ ndwRTFOlmJk8HmYSDHXBvJeQesRVtJDnMJo025r2eBp5kZ8mDVCWKFOa2DnCOWifZ3Mzn9zSJ
+ stNO9JVkRZ33XusOuHpa8w=
+Received-SPF: none client-ip=217.72.192.73; envelope-from=arnd@arndb.de;
+ helo=mout.kundenserver.de
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -88,163 +72,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Apr 2021 11:52:12 -0000
+X-List-Received-Date: Tue, 20 Apr 2021 12:27:07 -0000
 
-On 4/19/21 3:42 PM, Peter Maydell wrote:
-> On Thu, 25 Mar 2021 at 18:14, Philippe Mathieu-Daudé <f4bug@amsat.org> wrote:
->>
->> Hi Peter,
->>
->> On 3/25/21 5:33 PM, Peter Maydell wrote:
->>> Currently the gpex PCI controller implements no special behaviour for
->>> guest accesses to areas of the PIO and MMIO where it has not mapped
->>> any PCI devices, which means that for Arm you end up with a CPU
->>> exception due to a data abort.
->>>
->>> Most host OSes expect "like an x86 PC" behaviour, where bad accesses
->>> like this return -1 for reads and ignore writes.  In the interests of
->>> not being surprising, make host CPU accesses to these windows behave
->>> as -1/discard where there's no mapped PCI device.
->>>
->>> The old behaviour generally didn't cause any problems, because
->>> almost always the guest OS will map the PCI devices and then only
->>> access where it has mapped them. One corner case where you will see
->>> this kind of access is if Linux attempts to probe legacy ISA
->>> devices via a PIO window access. So far the only case where we've
->>> seen this has been via the syzkaller fuzzer.
->>>
->>> Reported-by: Dmitry Vyukov <dvyukov@google.com>
->>> Fixes: https://bugs.launchpad.net/qemu/+bug/1918917
->>> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
->>> ---
->>> v1->v2 changes: put in the hw_compat machinery.
->>>
->>> Still not sure if I want to put this in 6.0 or not.
->>>
->>>  include/hw/pci-host/gpex.h |  4 +++
->>>  hw/core/machine.c          |  1 +
->>>  hw/pci-host/gpex.c         | 56 ++++++++++++++++++++++++++++++++++++--
->>>  3 files changed, 58 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
->>> index d48a020a952..fcf8b638200 100644
->>> --- a/include/hw/pci-host/gpex.h
->>> +++ b/include/hw/pci-host/gpex.h
->>> @@ -49,8 +49,12 @@ struct GPEXHost {
->>>
->>>      MemoryRegion io_ioport;
->>>      MemoryRegion io_mmio;
->>> +    MemoryRegion io_ioport_window;
->>> +    MemoryRegion io_mmio_window;
->>>      qemu_irq irq[GPEX_NUM_IRQS];
->>>      int irq_num[GPEX_NUM_IRQS];
->>> +
->>> +    bool allow_unmapped_accesses;
->>>  };
->>>
->>>  struct GPEXConfig {
->>> diff --git a/hw/core/machine.c b/hw/core/machine.c
->>> index 257a664ea2e..9750fad7435 100644
->>> --- a/hw/core/machine.c
->>> +++ b/hw/core/machine.c
->>> @@ -41,6 +41,7 @@ GlobalProperty hw_compat_5_2[] = {
->>>      { "PIIX4_PM", "smm-compat", "on"},
->>>      { "virtio-blk-device", "report-discard-granularity", "off" },
->>>      { "virtio-net-pci", "vectors", "3"},
->>> +    { "gpex-pcihost", "allow-unmapped-accesses", "false" },
->>>  };
->>>  const size_t hw_compat_5_2_len = G_N_ELEMENTS(hw_compat_5_2);
->>>
->>> diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
->>> index 2bdbe7b4561..a6752fac5e8 100644
->>> --- a/hw/pci-host/gpex.c
->>> +++ b/hw/pci-host/gpex.c
->>> @@ -83,12 +83,51 @@ static void gpex_host_realize(DeviceState *dev, Error **errp)
->>>      int i;
->>>
->>>      pcie_host_mmcfg_init(pex, PCIE_MMCFG_SIZE_MAX);
->>> +    sysbus_init_mmio(sbd, &pex->mmio);
->>> +
->>> +    /*
->>> +     * Note that the MemoryRegions io_mmio and io_ioport that we pass
->>> +     * to pci_register_root_bus() are not the same as the
->>> +     * MemoryRegions io_mmio_window and io_ioport_window that we
->>> +     * expose as SysBus MRs. The difference is in the behaviour of
->>> +     * accesses to addresses where no PCI device has been mapped.
->>> +     *
->>> +     * io_mmio and io_ioport are the underlying PCI view of the PCI
->>> +     * address space, and when a PCI device does a bus master access
->>> +     * to a bad address this is reported back to it as a transaction
->>> +     * failure.
->>> +     *
->>> +     * io_mmio_window and io_ioport_window implement "unmapped
->>> +     * addresses read as -1 and ignore writes"; this is traditional
->>> +     * x86 PC behaviour, which is not mandated by the PCI spec proper
->>> +     * but expected by much PCI-using guest software, including Linux.
->>
->> I suspect PCI-ISA bridges to provide an EISA bus.
-> 
-> I'm not sure what you mean here -- there isn't an ISA bridge
-> or an EISA bus involved here. This is purely about the behaviour
-> of the memory window the PCI host controller exposes to the CPU
-> (and in particular the window for when a PCI device's BAR is
-> set to "IO" rather than "MMIO"), though we change both here.
+On Tue, Apr 20, 2021 at 1:52 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
+g> wrote:
+> On 4/19/21 3:42 PM, Peter Maydell wrote:
+> >>
+> >> I suspect PCI-ISA bridges to provide an EISA bus.
+> >
+> > I'm not sure what you mean here -- there isn't an ISA bridge
+> > or an EISA bus involved here. This is purely about the behaviour
+> > of the memory window the PCI host controller exposes to the CPU
+> > (and in particular the window for when a PCI device's BAR is
+> > set to "IO" rather than "MMIO"), though we change both here.
+>
+> I guess I always interpreted the IO BAR were here to address ISA
+> backward compatibility. I don't know well PCI so I'll study it
+> more. Sorry for my confused comment.
 
-I guess I always interpreted the IO BAR were here to address ISA
-backward compatibility. I don't know well PCI so I'll study it
-more. Sorry for my confused comment.
+It is mostly for compatibility, but there are many layers of it:
 
->>> +     * In the interests of not being unnecessarily surprising, we
->>> +     * implement it in the gpex PCI host controller, by providing the
->>> +     * _window MRs, which are containers with io ops that implement
->>> +     * the 'background' behaviour and which hold the real PCI MRs as
->>> +     * subregions.
->>> +     */
->>>      memory_region_init(&s->io_mmio, OBJECT(s), "gpex_mmio", UINT64_MAX);
->>>      memory_region_init(&s->io_ioport, OBJECT(s), "gpex_ioport", 64 * 1024);
->>>
->>> -    sysbus_init_mmio(sbd, &pex->mmio);
->>> -    sysbus_init_mmio(sbd, &s->io_mmio);
->>> -    sysbus_init_mmio(sbd, &s->io_ioport);
->>> +    if (s->allow_unmapped_accesses) {
->>> +        memory_region_init_io(&s->io_mmio_window, OBJECT(s),
->>> +                              &unassigned_io_ops, OBJECT(s),
->>> +                              "gpex_mmio_window", UINT64_MAX);
->>
->> EISA -> 4 * GiB
->>
->> unassigned_io_ops allows 64-bit accesses. Here we want up to 32.
->>
->> Maybe we don't care.
->>
->>> +        memory_region_init_io(&s->io_ioport_window, OBJECT(s),
->>> +                              &unassigned_io_ops, OBJECT(s),
->>> +                              "gpex_ioport_window", 64 * 1024);
->>
->> Ditto, unassigned_io_ops accepts 64-bit accesses.
-> 
-> These are just using the same sizes as the io_mmio and io_ioport
-> MRs which the existing code creates.
-> 
->>>  static void gpex_host_class_init(ObjectClass *klass, void *data)
->>>  {
->>>      DeviceClass *dc = DEVICE_CLASS(klass);
->>> @@ -117,6 +166,7 @@ static void gpex_host_class_init(ObjectClass *klass, void *data)
->>>      dc->realize = gpex_host_realize;
->>>      set_bit(DEVICE_CATEGORY_BRIDGE, dc->categories);
->>>      dc->fw_name = "pci";
->>> +    device_class_set_props(dc, gpex_host_properties);
->>
->> IMO this change belongs to the parent bridges,
->> TYPE_PCI_HOST_BRIDGE and TYPE_PCIE_HOST_BRIDGE.
-> 
-> Arnd had a look through the kernel sources and apparently not
-> all PCI host controllers do this -- there are a few SoCs where the
-> kernel has to put in special case code to allow for the fact that
-> it will get a bus error for accesses to unmapped parts of the
-> window. So I concluded that the specific controller implementation
-> was the right place for it.
+- PCI supports actual ISA/EISA/VLB/PCMCIA/LPC/PC104/... style
+  devices behind a bridge, using I/O ports at their native address.
 
-Yes the changes are simple. I'm certainly not NAcking the patch,
-but can't review it neither :( So please ignore my comments.
+- PCI devices themselves can have fixed I/O ports at well-known
+  addresses, e.g. VGA or IDE/ATA adapters
+
+- PCI devices can behave like legacy devices using port I/O
+  but use PCI resource assignment to pick an arbitrary port
+  number outside of the legacy range
+
+- PCIe can support all of the above by virtue of being backwards
+  compatible with PCI and allowing PCI buses behind bridges,
+  though port I/O is deprecated here and often not supported at all
+
+The first two are very rare these days, but Linux still support them
+in order to run on old hardware, and any driver for these that
+assumes a hardcoded port number can crash the kernel if the
+PCI host bridge causes an asynchronous external abort or
+similar.
+
+       Arnd
 
