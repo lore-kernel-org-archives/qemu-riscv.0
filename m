@@ -1,68 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lYfF7-0002z2-OH
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 21:31:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34392)
+	id 1lYfS0-0000t2-54
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Apr 2021 21:45:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36116)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lYfF6-0002yD-Vw
- for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 21:31:57 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c]:44970)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lYfF4-0006eu-KK
- for qemu-riscv@nongnu.org; Mon, 19 Apr 2021 21:31:56 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id m11so24428798pfc.11
- for <qemu-riscv@nongnu.org>; Mon, 19 Apr 2021 18:31:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id;
- bh=UNUuA/Culgon66fOzzg1a4dNV1+/D++sWBiWxJ7kOjM=;
- b=EcydkXCoXT0EWNRbqKgonPVhvC+/1DITDZw5BqhRYt37bYX/ZiRUd3BlkZXzQkHp8P
- g5AYyYsx1qV6sDkfFut5Ne+mGyjqy/uTJ38UTO790wTHKgUtmyQEU54CVvS3JRUDG+l9
- /A8Jrc2MF9q3ChmnlIGxAvCp9c7E02Y2JpDPVH7gk28ZbBCYrMQ8q3axsuZ2aFnOYwwI
- 0wRgG2gZ+Pd8plcs7/9pppqVT/xhzcZX5vUbf587AkyP6OMWMKgjiHBOTLATvkqUFpmt
- nEr+Vr0h5yW9Axg90wfdjbpD5cH82n8cnV1lSJJyzvemMmeMtFee3SE9/4qmt5zjv0n/
- kCeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=UNUuA/Culgon66fOzzg1a4dNV1+/D++sWBiWxJ7kOjM=;
- b=Q32NLi5Pe2wR8gPZaFO3B4wFi08ifuENsrkA53vXLRK9Az5ElsxLJw+JxDV3ohYegJ
- H5Y7JUG1FEADv6ThKb2KEg8LZpKHkwIiBHmCPIFtupF9tG3CiWUrcSbSmmUmibaeOqxX
- C0uLfYSIuSjM/pCTGBfGKcgk/5tzfgk2QjFj0720QE/qMIM0oJ9pin7f5QCkR8bL5fQf
- x6QwBqTD3/Ijki3qeXHl+33n8i8+0sOhPP9QmatfYkSnuX1D6S1F6EUYdo+I97rJkczG
- TWFqU+p5X5QT21EVdLa36wB4ZhKm5oNxg99nKlfhShsQwU/gVAwhP/vmcffHhj+KsKPt
- hAmQ==
-X-Gm-Message-State: AOAM531AnljEs8PNORm5spazFiSbsfJthuEzFCe9Yzbgk3m8bXROXe7p
- oR09yzKpRoyP/kv8iOR+ngd/3g==
-X-Google-Smtp-Source: ABdhPJx8m0Zp5BTHdKZcUiUmOnnGkyro3yrB1bxZ+pNtF19uwrBm1fLi4Te8zQ3CqVKLZihWRdfOjQ==
-X-Received: by 2002:a63:e5c:: with SMTP id 28mr14286129pgo.365.1618882313074; 
- Mon, 19 Apr 2021 18:31:53 -0700 (PDT)
-Received: from frankchang-ThinkPad-T490.internal.sifive.com
- (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id o15sm577529pjk.48.2021.04.19.18.31.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Apr 2021 18:31:52 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v2] fpu/softfloat: set invalid excp flag for RISC-V muladd
- instructions
-Date: Tue, 20 Apr 2021 09:31:48 +0800
-Message-Id: <20210420013150.21992-1-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1lYfRx-0000sJ-Mk; Mon, 19 Apr 2021 21:45:13 -0400
+Received: from out28-221.mail.aliyun.com ([115.124.28.221]:57008)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1lYfRu-0003j5-Ir; Mon, 19 Apr 2021 21:45:13 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08855618|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.0382446-0.000266983-0.961488;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047207; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.K0kQM6V_1618883101; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.K0kQM6V_1618883101)
+ by smtp.aliyun-inc.com(10.147.42.198);
+ Tue, 20 Apr 2021 09:45:01 +0800
+Subject: Re: [RFC PATCH 00/11] RISC-V: support clic v0.9 specification
+To: Alistair Francis <alistair23@gmail.com>, michaeljclark@mac.com
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, wxy194768@alibaba-inc.com
+References: <20210409074857.166082-1-zhiwei_liu@c-sky.com>
+ <CAKmqyKPtV0PFdEfO0B5YFGC2i21OAmvBsY0ovUVdQwn3ttpcQA@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <beb2e320-60fb-db42-e4d6-3b4d5cb82a95@c-sky.com>
+Date: Tue, 20 Apr 2021 09:44:36 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <CAKmqyKPtV0PFdEfO0B5YFGC2i21OAmvBsY0ovUVdQwn3ttpcQA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.221; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-221.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -75,48 +56,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Apr 2021 01:31:57 -0000
+X-List-Received-Date: Tue, 20 Apr 2021 01:45:14 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
 
-In IEEE 754-2008 spec:
-  Invalid operation exception is signaled when doing:
-  fusedMultiplyAdd(0, Inf, c) or fusedMultiplyAdd(Inf, 0, c)
-  unless c is a quiet NaN; if c is a quiet NaN then it is
-  implementation defined whether the invalid operation exception
-  is signaled.
+On 2021/4/20 上午7:30, Alistair Francis wrote:
+> On Fri, Apr 9, 2021 at 5:56 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>> This patch set gives an implementation of "RISC-V Core-Local Interrupt
+>> Controller(CLIC) Version 0.9-draft-20210217". It comes from [1], where
+>> you can find the pdf format or the source code.
+>>
+>> I take over the job from Michael Clark, who gave the first implementation
+>> of clic-v0.7 specification. If there is any copyright question, please
+>> let me know.
+> You need to make sure you leave all original copyright notices and SoB in place.
 
-In RISC-V Unprivileged ISA spec:
-  The fused multiply-add instructions must set the invalid
-  operation exception flag when the multiplicands are Inf and
-  zero, even when the addend is a quiet NaN.
+OK.
 
-This commit set invalid operation execption flag for RISC-V when
-multiplicands of muladd instructions are Inf and zero.
+Is it OK that keep the original copyright notices for new files and  
+your SoB in every patch,  Michael?
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
----
- fpu/softfloat-specialize.c.inc | 6 ++++++
- 1 file changed, 6 insertions(+)
+>
+>> Features:
+>> 1. support four kinds of trigger types.
+>> 2. Preserve the CSR WARL/WPRI semantics.
+>> 3. Option to select different modes, such as M/S/U or M/U.
+>> 4. At most 4096 interrupts.
+>> 5. At most 1024 apertures.
+>>
+>> Todo:
+>> 1. Encode the interrupt trigger information to exccode.
+>> 2. Support complete CSR mclicbase when its number is fixed.
+>> 3. Gave each aperture an independend address.
+>>
+>> It have passed my qtest case and freertos test. Welcome to have a try
+>> for your hardware.
+> It doesn't seem to be connected to any machine. How are you testing this?
 
-diff --git a/fpu/softfloat-specialize.c.inc b/fpu/softfloat-specialize.c.inc
-index c2f87addb25..12f29fbfc5e 100644
---- a/fpu/softfloat-specialize.c.inc
-+++ b/fpu/softfloat-specialize.c.inc
-@@ -624,6 +624,12 @@ static int pickNaNMulAdd(FloatClass a_cls, FloatClass b_cls, FloatClass c_cls,
-     } else {
-         return 1;
-     }
-+#elif defined(TARGET_RISCV)
-+    /* For RISC-V, InvalidOp is set when multiplicands are Inf and zero */
-+    if (infzero) {
-+        float_raise(float_flag_invalid, status);
-+    }
-+    return 3; /* deafult NaN */
- #elif defined(TARGET_XTENSA)
-     /*
-      * For Xtensa, the (inf,zero,nan) case sets InvalidOp and returns
--- 
-2.17.1
+There is a machine called SMARTL in my repository[1].  The qtest case 
+is  tests/qtest/test-riscv32-clic.c. If it's better, I can upstream the 
+machine together next version.
 
+Zhiwei
+
+[1]https://github.com/romanheros/qemu, branch: riscv-clic-upstream-rfc
+
+
+>
+> Alistair
+>
+>> Any advice is welcomed. Thanks very much.
+>>
+>> Zhiwei
+>>
+>> [1] specification website: https://github.com/riscv/riscv-fast-interrupt.
+>> [2] Michael Clark origin work: https://github.com/sifive/riscv-qemu/tree/sifive-clic.
+>>
+>>
+>> LIU Zhiwei (11):
+>>    target/riscv: Add CLIC CSR mintstatus
+>>    target/riscv: Update CSR xintthresh in CLIC mode
+>>    hw/intc: Add CLIC device
+>>    target/riscv: Update CSR xie in CLIC mode
+>>    target/riscv: Update CSR xip in CLIC mode
+>>    target/riscv: Update CSR xtvec in CLIC mode
+>>    target/riscv: Update CSR xtvt in CLIC mode
+>>    target/riscv: Update CSR xnxti in CLIC mode
+>>    target/riscv: Update CSR mclicbase in CLIC mode
+>>    target/riscv: Update interrupt handling in CLIC mode
+>>    target/riscv: Update interrupt return in CLIC mode
+>>
+>>   default-configs/devices/riscv32-softmmu.mak |   1 +
+>>   default-configs/devices/riscv64-softmmu.mak |   1 +
+>>   hw/intc/Kconfig                             |   3 +
+>>   hw/intc/meson.build                         |   1 +
+>>   hw/intc/riscv_clic.c                        | 836 ++++++++++++++++++++
+>>   include/hw/intc/riscv_clic.h                | 103 +++
+>>   target/riscv/cpu.h                          |   9 +
+>>   target/riscv/cpu_bits.h                     |  32 +
+>>   target/riscv/cpu_helper.c                   | 117 ++-
+>>   target/riscv/csr.c                          | 247 +++++-
+>>   target/riscv/op_helper.c                    |  25 +
+>>   11 files changed, 1363 insertions(+), 12 deletions(-)
+>>   create mode 100644 hw/intc/riscv_clic.c
+>>   create mode 100644 include/hw/intc/riscv_clic.h
+>>
+>> --
+>> 2.25.1
+>>
+>>
 
