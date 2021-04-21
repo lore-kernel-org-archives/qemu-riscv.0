@@ -1,69 +1,91 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lZDgS-0000aG-Qu
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Apr 2021 10:18:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47398)
+	id 1lZKwu-00013p-Cd
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Apr 2021 18:03:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45998)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <emmanuel.blot@sifive.com>)
- id 1lZDgQ-0000a8-Pr
- for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 10:18:26 -0400
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b]:41969)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <emmanuel.blot@sifive.com>)
- id 1lZDgK-0008GM-GG
- for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 10:18:26 -0400
-Received: by mail-wr1-x42b.google.com with SMTP id c4so2641504wrt.8
- for <qemu-riscv@nongnu.org>; Wed, 21 Apr 2021 07:18:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=O6V8UWLrMdS10z8y3GbxzAynh9LOdOm22UuTPekncOE=;
- b=ccJdUi4t230Z2zuUtU1dqKFVfhIIUIQR/wChtmYY9XSnD4KRvPW0h8+xwceWPBnI9j
- VbgawwKTcOOMrlH4xxnELKZdyA5VW/DG7y0kvff7jifb2cFuUdr+mfXf156oYi29Sop6
- VpL5k6/j57q2WGD64k2rYADIPnlVkyJqaoehAMPcBUhbF9pDHmcyJMd9UpmNFK3hWwfV
- 27rvV3dJY9XGVIV38OVSHOP4g+t9VqD9PoIML9ggRgUED6ev5VNc+m7NSyK/TVze00Xj
- 6+itvRjw0V+zxwqY0P4Py1D/63etl6gmMfRkqjoa6D0FO3wO1FkaOPu9pA0W5Jkr7eNa
- 6+JA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=O6V8UWLrMdS10z8y3GbxzAynh9LOdOm22UuTPekncOE=;
- b=s/lZPUrEW4ubhwzw/Nl31ISyFL5srT+NKbKEyGPzIXWgZ9jviL1Wo4pvzLUJvOqmaf
- biNhuAYyqpwItJrVN4l2C2k6+74ZPuBItUFSai8m42JgpLtT9sUR1Qnjcao/YO5MF8Tn
- yJ0NH3zEdi7Ut0YRx9bUxSeJ1yGDhE1ro5QahGC+MH+MqBgbtEnxYaCLsMXTABXC1LIk
- AWPXzt7DwDL8RS5RUAApVcrmIlIKS+x0or0/HlnOV2JkuXQYK0IQFF4tnzeBDlP5DDYj
- JIixLXkwacZPwfxycNydvv1hk9v9KczfGulqwUlYaHVBTdhBKEiLISrbeNDZjWvoxIBD
- Rn0w==
-X-Gm-Message-State: AOAM532HZRZC21hsbiaG24U2JeVDb7zFyDBt+a9CsipSUZtYQqllgnzX
- iNfx0T5WcdoWR/N+0sqdLFI75CmQK+GBpA==
-X-Google-Smtp-Source: ABdhPJx5b3z+ay9WdGqj6b0oxjozWRj7EUCh1qrxq7XW796WUJMFPt/D6J9HlVNEuMaN7XC4S6P6vw==
-X-Received: by 2002:adf:fc01:: with SMTP id i1mr27258517wrr.374.1619014698182; 
- Wed, 21 Apr 2021 07:18:18 -0700 (PDT)
-Received: from [192.168.83.45] (lfbn-tln-1-134-231.w90-119.abo.wanadoo.fr.
- [90.119.102.231])
- by smtp.gmail.com with ESMTPSA id h10sm3289526wrt.40.2021.04.21.07.18.17
- for <qemu-riscv@nongnu.org>
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 21 Apr 2021 07:18:17 -0700 (PDT)
-From: Emmanuel Blot <emmanuel.blot@sifive.com>
-To: qemu-riscv@nongnu.org
-Subject: [RFC] target/riscv: generated RISCV isa string and subset naming
- convention
-Date: Wed, 21 Apr 2021 16:18:16 +0200
-X-Mailer: MailMate (1.14r5757)
-Message-ID: <1CD35845-3055-45D2-9166-489C2B74E0E7@sifive.com>
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1lZKws-000138-9q
+ for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 18:03:54 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:38834)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1lZKwp-0006LJ-J0
+ for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 18:03:53 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1619042630;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZKwAZgnosTkIVH7gtSI1QhJKu5U41iES4FQ7MOxeanI=;
+ b=KOhtx+ssYas0WwuIo61Bf7HZK9LBOlNIX9y4jK2ZbV0VQ5yLxcqQXv0RhVLfZpwqD9gs26
+ xgo7KFRs33NxxMkkD4V/zKYG1JPbjz6fMVU2/Y3EkOxHRWIGZEeouSCfrY3Psjz5Upxrtu
+ /2THTZw7bbaNqCRo4I4ocggiWXco35c=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-320-ALkarCY0PDa5RIVge3tpEQ-1; Wed, 21 Apr 2021 18:03:48 -0400
+X-MC-Unique: ALkarCY0PDa5RIVge3tpEQ-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 26B7D343AC;
+ Wed, 21 Apr 2021 22:03:43 +0000 (UTC)
+Received: from localhost (ovpn-117-199.rdu2.redhat.com [10.10.117.199])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AFD7C5D9F2;
+ Wed, 21 Apr 2021 22:03:33 +0000 (UTC)
+Date: Wed, 21 Apr 2021 18:03:33 -0400
+From: Eduardo Habkost <ehabkost@redhat.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ Sarah Harris <S.E.Harris@kent.ac.uk>, Chris Wulff <crwulff@gmail.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ David Hildenbrand <david@redhat.com>, Anthony Green <green@moxielogic.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Taylor Simpson <tsimpson@quicinc.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Guan Xuetao <gxt@mprc.pku.edu.cn>, Marek Vasut <marex@denx.de>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Claudio Fontana <cfontana@suse.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Thomas Huth <thuth@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Greg Kurz <groug@kaod.org>, qemu-s390x@nongnu.org,
+ qemu-arm@nongnu.org, Michael Rolnik <mrolnik@gmail.com>,
+ Stafford Horne <shorne@gmail.com>,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Cornelia Huck <cohuck@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
+ Michael Walle <michael@walle.cc>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
+Subject: Re: [PATCH v3 01/27] target: Set CPUClass::vmsd instead of
+ DeviceClass::vmsd
+Message-ID: <20210421220333.bkxo6zriqe6w3rim@habkost.net>
+References: <20210302145818.1161461-1-f4bug@amsat.org>
+ <20210302145818.1161461-2-f4bug@amsat.org>
 MIME-Version: 1.0
-Content-Type: text/plain; format=flowed
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=emmanuel.blot@sifive.com; helo=mail-wr1-x42b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+In-Reply-To: <20210302145818.1161461-2-f4bug@amsat.org>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=ehabkost@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,64 +98,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Apr 2021 14:18:27 -0000
+X-List-Received-Date: Wed, 21 Apr 2021 22:03:54 -0000
 
-The riscv_isa_string function deals with all the misa bits the same way.
-However, it seems froom the specification that bits should not be =
+On Tue, Mar 02, 2021 at 03:57:52PM +0100, Philippe Mathieu-Daudé wrote:
+> The cpu model is the single device available in user-mode.
+> Since we want to restrict some fields to user-mode emulation,
+> we prefer to set the vmsd field of CPUClass, rather than the
+> DeviceClass one.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
-equally
-represented in the isa string.
+Is this going to have an externally visible effect?
 
-For example:
+If it does, how can we make sure it's safe?
 
-- user mode ISA extension does not seem to be part of the isa string, =
+If it does not, do you know why CPUClass::vmsd exists in the
+first place?
 
-only N
-   (user mode interrupt) does.
-- S/H/X/Z extensions should be suffixed with an alphabetical name.
+Do you think it would be simpler to just squash this patch into
+  [PATCH v3 08/27] cpu: Move CPUClass::vmsd to SysemuCPUOps
+?
 
-Moreover the table 27.1 documents a canonical order that is slightly
-different from the one initially implemented.
+-- 
+Eduardo
 
-Should we simplify this string?
-This string is used to generate the DTB riscv,isa compatible string.
-
-ref: The RISC-V Instruction Set Manual Volume I: Unprivileged ISA,
-Subset Naming Convention section 27.11
-https://github.com/riscv/riscv-isa-manual/releases/download/draft-2021040=
-2-1271737/riscv-spec.pdf
-
-
----
-  target/riscv/cpu.c | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 7d6ed80f6b6..4eadd9b9fc1 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -32,7 +32,7 @@
-
-  /* RISC-V CPU definitions */
-
--static const char riscv_exts[26] =3D "IEMAFDQCLBJTPVNSUHKORWXYZG";
-+static const char riscv_exts[] =3D "IEMAFDQLCBKJTPVN";
-
-  const char * const riscv_int_regnames[] =3D {
-    "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   =
-
-"x6/t1",
-@@ -641,7 +641,7 @@ char *riscv_isa_string(RISCVCPU *cpu)
-      const size_t maxlen =3D sizeof("rv128") + sizeof(riscv_exts) + 1;
-      char *isa_str =3D g_new(char, maxlen);
-      char *p =3D isa_str + snprintf(isa_str, maxlen, "rv%d", =
-
-TARGET_LONG_BITS);
--    for (i =3D 0; i < sizeof(riscv_exts); i++) {
-+    for (i =3D 0; i < sizeof(riscv_exts)-1; i++) {
-          if (cpu->env.misa & RV(riscv_exts[i])) {
-              *p++ =3D qemu_tolower(riscv_exts[i]);
-          }
---
-2.31.1
 
