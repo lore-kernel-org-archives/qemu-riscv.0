@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lZ4GQ-0007OO-Nl
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Apr 2021 00:14:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36000)
+	id 1lZ4GS-0007Py-Tw
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Apr 2021 00:15:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36026)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lZ4GO-0007MX-VK
- for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 00:14:57 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633]:41583)
+ id 1lZ4GQ-0007P7-Vx
+ for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 00:14:59 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:40739)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lZ4GL-0003K5-Ih
- for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 00:14:56 -0400
-Received: by mail-pl1-x633.google.com with SMTP id e2so16587617plh.8
- for <qemu-riscv@nongnu.org>; Tue, 20 Apr 2021 21:14:53 -0700 (PDT)
+ id 1lZ4GP-0003Lf-B4
+ for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 00:14:58 -0400
+Received: by mail-pf1-x429.google.com with SMTP id a12so27454344pfc.7
+ for <qemu-riscv@nongnu.org>; Tue, 20 Apr 2021 21:14:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=JZRXLju1W0DUJfWSJ/qAg/atQdQXPJ/g9gL7eWvCb4U=;
- b=H6RO1YB2qXRSiXwrTKd+f1M2gxdqzCdVDnJUzLhhYDTYNp7ODhbluvyvN5YNJFZtzm
- Zbs0NwIU9VNkXf202pypYvszBWfyWfrBBdVlMV5n5lARFSa+iZTCdkvbMNtX2ae51yju
- toNh7S/YllLimm0tX1xKc+NMXhnd6CKEHtGgo5gmGsDpqXxmV5PnCSUjizKnWwz8/zfA
- g1wUXwsxRsoSHkaI0/7UNoqLlEmEjwSJqbnHfagxUYBuZV9HvrqT4QIpCddygF0RutRU
- 4oG2HL+7DMB71xUI+cj6FVuS0o2ApMOvL+YmFLXz5hWI9wDOT+eHqNSPxrLQRAhgGxzN
- deew==
+ bh=LKTAYv1ZhXep+SFlA+lQrA8de8BbGJbbUnzR8R+sZJc=;
+ b=OwuQD3OuL3zQBldVt7wnLw0gRiBryz1rrxNW1lp+iedgLXgFe+PCC6OC8XziuCKmQD
+ wy9End4ELKPazXn1M9Re8eKTdtlzbauVDHlNmwzdEMy3TFfpyJVV4CNABpIPIGiK2D5t
+ PuajS0E4cOd+jg3qG3V1i+CG78qsCjN2YyiosNYH8/uinnagueY6D1gQY5ckP7gjxXqp
+ NSPcr0x3rVVlZw1VTYqWQzZ7V/Yjx+j3N4FnS2SDhkUfHI8hls/RuV2vjazZtakSWrAM
+ u3rrkEKXy2UrbmIAJmOgsTN/S6Zx/Dff4kOLQ7TihdolOds2X0mRltxL6DZTqN2eaGrU
+ tObA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=JZRXLju1W0DUJfWSJ/qAg/atQdQXPJ/g9gL7eWvCb4U=;
- b=jOrNROpIREel+Emd9tPuJ3fVHjcr5xupKtdO6UPy90fAuBmUMXDWdAm/JxdYxx4ZWH
- IM1yPJbToi0ltYJkKJTPTfilDQLvUBsZjlhq1zW0TiOyRRP6o22jY6g42v7w5aVm3Hjd
- 8/kysS4XbhMHHfUNAmGv57c61xuBtapW3B/mFb7/wFSc5ZUQRqUsbXQsQXYGCCPvGNZD
- JHfdpqlvdKfsocUFs/eUUhm5dEzr4KrDoCHhybXOcpQqNjZNMWOX+TAwdTHNPdYYFmVJ
- 3ZbjgXSo1mxVUt2Ikjz5v5/LyyzTVyR9+ZVKuachbUZXIBNuxQ7WBt+WCJKRhz9RyIW1
- d+XA==
-X-Gm-Message-State: AOAM532Ad2htVrOj+8MBEruy3mWr45VSF/YrxvyU903GToPlZNsJ13kZ
- 1VIozq25SUWnX/l28C6uUcYTIw==
-X-Google-Smtp-Source: ABdhPJzBSlXrrXwq0rX4/TYGPAWR+fnlMsovfX84shcSvViF6ibZ/qO5xpOCOHlMXA0bWCBCuluMJA==
-X-Received: by 2002:a17:902:9b97:b029:eb:7a1b:5b88 with SMTP id
- y23-20020a1709029b97b02900eb7a1b5b88mr31116520plp.77.1618978492330; 
- Tue, 20 Apr 2021 21:14:52 -0700 (PDT)
+ bh=LKTAYv1ZhXep+SFlA+lQrA8de8BbGJbbUnzR8R+sZJc=;
+ b=rdZWIEruHdRlN62pnP8p0aW0O1c5DcsidLdgtaMMHNCVHJMGFHUeN2ynhnJjTX1AIS
+ lVycXZl6X9xQirFdcKLWRNKRH62Hh+H6FVo0r94RP2Wv8g67qI9JLGKA0GMZ6bbsgd+7
+ IEqWLUOR7MXMYwdrW313Tx6HknD7hYN83GeFsK/7nGiKSMlF+mAS2uqmftFs/S6CBE7j
+ ZaMedU2wsItA2h5Mya65IeegTVEpFujdrDGc/vGOiaUcI3Tcu8f2zvH0D+v3thT19Qqc
+ l9lCKFsOnvbZ2D1HAEQ1SbGa0MO7DnjQOy1KxOZEkX+6l6GmSvsotGNbtrFR8kMFg6xR
+ 1N+Q==
+X-Gm-Message-State: AOAM531x5Sccv7lhmE5OE6qa69n/8ya6a666/fjWErAoeJkAJ58ozUL8
+ O9w5/iwIAc52iXM0nTFoXJTcSw==
+X-Google-Smtp-Source: ABdhPJx3/V8Wwch5VzyFEKgssskNxsBSRdndKOTySkS1tUVM59hI7FXHBFpMJJ2wvmAVgHxKBQpqDQ==
+X-Received: by 2002:a17:90a:7783:: with SMTP id
+ v3mr8870958pjk.177.1618978495729; 
+ Tue, 20 Apr 2021 21:14:55 -0700 (PDT)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (114-34-229-221.HINET-IP.hinet.net. [114.34.229.221])
- by smtp.gmail.com with ESMTPSA id jx20sm551465pjb.41.2021.04.20.21.14.50
+ by smtp.gmail.com with ESMTPSA id jx20sm551465pjb.41.2021.04.20.21.14.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Apr 2021 21:14:52 -0700 (PDT)
+ Tue, 20 Apr 2021 21:14:55 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -53,21 +53,21 @@ Cc: Kito Cheng <kito.cheng@sifive.com>, Frank Chang <frank.chang@sifive.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v5 14/17] target/riscv: rvb: address calculation
-Date: Wed, 21 Apr 2021 12:13:56 +0800
-Message-Id: <20210421041400.22243-15-frank.chang@sifive.com>
+Subject: [PATCH v5 15/17] target/riscv: rvb: add/shift with prefix zero-extend
+Date: Wed, 21 Apr 2021 12:13:57 +0800
+Message-Id: <20210421041400.22243-16-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210421041400.22243-1-frank.chang@sifive.com>
 References: <20210421041400.22243-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,7 +80,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Apr 2021 04:14:57 -0000
+X-List-Received-Date: Wed, 21 Apr 2021 04:14:59 -0000
 
 From: Kito Cheng <kito.cheng@sifive.com>
 
@@ -89,124 +89,74 @@ Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
  target/riscv/insn32-64.decode           |  3 +++
- target/riscv/insn32.decode              |  3 +++
- target/riscv/insn_trans/trans_rvb.c.inc | 23 ++++++++++++++++++
- target/riscv/translate.c                | 32 +++++++++++++++++++++++++
- 4 files changed, 61 insertions(+)
+ target/riscv/insn_trans/trans_rvb.c.inc | 24 ++++++++++++++++++++++++
+ target/riscv/translate.c                |  6 ++++++
+ 3 files changed, 33 insertions(+)
 
 diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
-index 894db5e3abf..2f80b0c07ae 100644
+index 2f80b0c07ae..01b28718af5 100644
 --- a/target/riscv/insn32-64.decode
 +++ b/target/riscv/insn32-64.decode
-@@ -104,6 +104,9 @@ rorw       0110000 .......... 101 ..... 0111011 @r
- rolw       0110000 .......... 001 ..... 0111011 @r
- grevw      0110100 .......... 101 ..... 0111011 @r
- gorcw      0010100 .......... 101 ..... 0111011 @r
-+sh1add_uw  0010000 .......... 010 ..... 0111011 @r
-+sh2add_uw  0010000 .......... 100 ..... 0111011 @r
-+sh3add_uw  0010000 .......... 110 ..... 0111011 @r
+@@ -107,6 +107,7 @@ gorcw      0010100 .......... 101 ..... 0111011 @r
+ sh1add_uw  0010000 .......... 010 ..... 0111011 @r
+ sh2add_uw  0010000 .......... 100 ..... 0111011 @r
+ sh3add_uw  0010000 .......... 110 ..... 0111011 @r
++add_uw     0000100 .......... 000 ..... 0111011 @r
  
  bsetiw     0010100 .......... 001 ..... 0011011 @sh5
  bclriw     0100100 .......... 001 ..... 0011011 @sh5
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 0756ea5cc28..b90c1c0a350 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -621,6 +621,9 @@ ror        0110000 .......... 101 ..... 0110011 @r
- rol        0110000 .......... 001 ..... 0110011 @r
- grev       0110100 .......... 101 ..... 0110011 @r
- gorc       0010100 .......... 101 ..... 0110011 @r
-+sh1add     0010000 .......... 010 ..... 0110011 @r
-+sh2add     0010000 .......... 100 ..... 0110011 @r
-+sh3add     0010000 .......... 110 ..... 0110011 @r
- 
- bseti      00101. ........... 001 ..... 0010011 @sh
- bclri      01001. ........... 001 ..... 0010011 @sh
+@@ -116,3 +117,5 @@ sroiw      0010000 .......... 101 ..... 0011011 @sh5
+ roriw      0110000 .......... 101 ..... 0011011 @sh5
+ greviw     0110100 .......... 101 ..... 0011011 @sh5
+ gorciw     0010100 .......... 101 ..... 0011011 @sh5
++
++slli_uw    00001. ........... 001 ..... 0011011 @sh
 diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
-index a4181dbf0de..ca987f2705f 100644
+index ca987f2705f..d69bda2f7b3 100644
 --- a/target/riscv/insn_trans/trans_rvb.c.inc
 +++ b/target/riscv/insn_trans/trans_rvb.c.inc
-@@ -226,6 +226,17 @@ static bool trans_gorci(DisasContext *ctx, arg_gorci *a)
-     return gen_shifti(ctx, a, gen_helper_gorc);
- }
+@@ -390,4 +390,28 @@ GEN_TRANS_SHADD_UW(1)
+ GEN_TRANS_SHADD_UW(2)
+ GEN_TRANS_SHADD_UW(3)
  
-+#define GEN_TRANS_SHADD(SHAMT)                                             \
-+static bool trans_sh##SHAMT##add(DisasContext *ctx, arg_sh##SHAMT##add *a) \
-+{                                                                          \
-+    REQUIRE_EXT(ctx, RVB);                                                 \
-+    return gen_arith(ctx, a, gen_sh##SHAMT##add);                          \
++static bool trans_add_uw(DisasContext *ctx, arg_add_uw *a)
++{
++    REQUIRE_EXT(ctx, RVB);
++    return gen_arith(ctx, a, gen_add_uw);
 +}
 +
-+GEN_TRANS_SHADD(1)
-+GEN_TRANS_SHADD(2)
-+GEN_TRANS_SHADD(3)
++static bool trans_slli_uw(DisasContext *ctx, arg_slli_uw *a)
++{
++    REQUIRE_EXT(ctx, RVB);
 +
- /* RV64-only instructions */
- #ifdef TARGET_RISCV64
- 
-@@ -367,4 +378,16 @@ static bool trans_gorciw(DisasContext *ctx, arg_gorciw *a)
-     return gen_shiftiw(ctx, a, gen_gorcw);
- }
- 
-+#define GEN_TRANS_SHADD_UW(SHAMT)                             \
-+static bool trans_sh##SHAMT##add_uw(DisasContext *ctx,        \
-+                                    arg_sh##SHAMT##add_uw *a) \
-+{                                                             \
-+    REQUIRE_EXT(ctx, RVB);                                    \
-+    return gen_arith(ctx, a, gen_sh##SHAMT##add_uw);          \
++    TCGv source1 = tcg_temp_new();
++    gen_get_gpr(source1, a->rs1);
++
++    if (a->shamt < 32) {
++        tcg_gen_deposit_z_i64(source1, source1, a->shamt, 32);
++    } else {
++        tcg_gen_shli_i64(source1, source1, a->shamt);
++    }
++
++    gen_set_gpr(a->rd, source1);
++    tcg_temp_free(source1);
++    return true;
 +}
-+
-+GEN_TRANS_SHADD_UW(1)
-+GEN_TRANS_SHADD_UW(2)
-+GEN_TRANS_SHADD_UW(3)
 +
  #endif
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index e1e8315ccbd..7e92cd87851 100644
+index 7e92cd87851..764e8f8cb0d 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -637,6 +637,21 @@ static bool gen_grevi(DisasContext *ctx, arg_grevi *a)
-     return true;
- }
+@@ -755,6 +755,12 @@ GEN_SHADD_UW(1)
+ GEN_SHADD_UW(2)
+ GEN_SHADD_UW(3)
  
-+#define GEN_SHADD(SHAMT)                                       \
-+static void gen_sh##SHAMT##add(TCGv ret, TCGv arg1, TCGv arg2) \
-+{                                                              \
-+    TCGv t = tcg_temp_new();                                   \
-+                                                               \
-+    tcg_gen_shli_tl(t, arg1, SHAMT);                           \
-+    tcg_gen_add_tl(ret, t, arg2);                              \
-+                                                               \
-+    tcg_temp_free(t);                                          \
++static void gen_add_uw(TCGv ret, TCGv arg1, TCGv arg2)
++{
++    tcg_gen_ext32u_tl(arg1, arg1);
++    tcg_gen_add_tl(ret, arg1, arg2);
 +}
-+
-+GEN_SHADD(1)
-+GEN_SHADD(2)
-+GEN_SHADD(3)
-+
- #ifdef TARGET_RISCV64
- 
- static void gen_ctzw(TCGv ret, TCGv arg1)
-@@ -723,6 +738,23 @@ static void gen_gorcw(TCGv ret, TCGv arg1, TCGv arg2)
-     gen_helper_gorcw(ret, arg1, arg2);
- }
- 
-+#define GEN_SHADD_UW(SHAMT)                                       \
-+static void gen_sh##SHAMT##add_uw(TCGv ret, TCGv arg1, TCGv arg2) \
-+{                                                                 \
-+    TCGv t = tcg_temp_new();                                      \
-+                                                                  \
-+    tcg_gen_ext32u_tl(t, arg1);                                   \
-+                                                                  \
-+    tcg_gen_shli_tl(t, t, SHAMT);                                 \
-+    tcg_gen_add_tl(ret, t, arg2);                                 \
-+                                                                  \
-+    tcg_temp_free(t);                                             \
-+}
-+
-+GEN_SHADD_UW(1)
-+GEN_SHADD_UW(2)
-+GEN_SHADD_UW(3)
 +
  #endif
  
