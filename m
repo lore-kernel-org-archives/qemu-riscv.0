@@ -1,73 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lZCyf-0006qQ-GT
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Apr 2021 09:33:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36352)
+	id 1lZDgS-0000aG-Qu
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Apr 2021 10:18:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47398)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <emmanuel.blot@sifive.com>)
- id 1lZCyd-0006o2-6p
- for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 09:33:11 -0400
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e]:44636)
+ id 1lZDgQ-0000a8-Pr
+ for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 10:18:26 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b]:41969)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <emmanuel.blot@sifive.com>)
- id 1lZCyb-0005nS-Dm
- for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 09:33:10 -0400
-Received: by mail-wr1-x42e.google.com with SMTP id e7so32425978wrs.11
- for <qemu-riscv@nongnu.org>; Wed, 21 Apr 2021 06:33:08 -0700 (PDT)
+ id 1lZDgK-0008GM-GG
+ for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 10:18:26 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id c4so2641504wrt.8
+ for <qemu-riscv@nongnu.org>; Wed, 21 Apr 2021 07:18:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
+ h=from:to:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=zSkFusyEvXXQUVc2IgzyoEjzFxTRCgOWIAsV4aalh2U=;
- b=B1RcB584z+cL3N4OTeh5aL9inBWL3RUqYkuIV2Qv2uQI2YnKswc0MxdObh/d7hCZMT
- pV+gzCfmoILGflUZAEY86+FkR2heeI5t0BmHnX0ecQXCVnOAVDEnZJ+EbhnVIi4XnEVp
- d9bx7NTzOPB6QStceOinqy9sP1pr8S1G5OblpNEwCCuOHL4JQNTu9sbb7OQhm9sMz7cM
- ipQ28GXL+F8XzOkFcwgGkZOXOaHlo2J8aaTqMQQ62Jt0S+Wm7cE1B6pO7Kfx5Aykts7f
- LS7N9hBqZpfvOGm8ROm1MEGTRzIwObk5m4//+ICNJEmKHkH/m3lWHG+qYHYbMePzXC3P
- wMNQ==
+ bh=O6V8UWLrMdS10z8y3GbxzAynh9LOdOm22UuTPekncOE=;
+ b=ccJdUi4t230Z2zuUtU1dqKFVfhIIUIQR/wChtmYY9XSnD4KRvPW0h8+xwceWPBnI9j
+ VbgawwKTcOOMrlH4xxnELKZdyA5VW/DG7y0kvff7jifb2cFuUdr+mfXf156oYi29Sop6
+ VpL5k6/j57q2WGD64k2rYADIPnlVkyJqaoehAMPcBUhbF9pDHmcyJMd9UpmNFK3hWwfV
+ 27rvV3dJY9XGVIV38OVSHOP4g+t9VqD9PoIML9ggRgUED6ev5VNc+m7NSyK/TVze00Xj
+ 6+itvRjw0V+zxwqY0P4Py1D/63etl6gmMfRkqjoa6D0FO3wO1FkaOPu9pA0W5Jkr7eNa
+ 6+JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=zSkFusyEvXXQUVc2IgzyoEjzFxTRCgOWIAsV4aalh2U=;
- b=D8chj3IsT2TUtSeltbl7TRAv1iOQ+j9hIeusosZFiz7jsvvcyOJjGkYI37COoRwPVC
- MwwJnlnHVsjnH0eWHvKuouLIPYphFuToEBvWScKD7jSbEpukt+kZekKquQKh4iLiJzfZ
- li8fMDs4Y9nbYRiUeP6kHaNs70YP5+GC6oaPNHl7+xtACtdAt/ZEuXIO5NdUX4QcF+t4
- nAE0L7YuOCS7pPULiPziYiWRtGqGXS9Y3K8S++SYZYhu6xSpu74Ly5ZIKpNqzURW/WY0
- ckRZuwx5G83d/J23iG0KKmC6JH3VlMaz8bbziUaHOE3w2c3YP8ep/JRNkGLfw4rTE5FI
- pa3A==
-X-Gm-Message-State: AOAM532N3BvVkWXQA9DYh0pIOZVakDJsxCwpLjvS9zmqrMw3vJAzs76b
- yFdaMgtXO7KMcsiDULLpApb2Rw==
-X-Google-Smtp-Source: ABdhPJyoy8c2O+YxPomfdw7xfPo3rLMbrPVz1Nb+GM9zs8Wmy3Qo92YwgRzu2mV7B2Q/3sX942cOHQ==
-X-Received: by 2002:adf:fec5:: with SMTP id q5mr27483416wrs.168.1619011987514; 
- Wed, 21 Apr 2021 06:33:07 -0700 (PDT)
-Received: from localhost.localdomain
- (lfbn-tln-1-134-231.w90-119.abo.wanadoo.fr. [90.119.102.231])
- by smtp.gmail.com with ESMTPSA id z18sm3229471wrr.9.2021.04.21.06.33.06
+ bh=O6V8UWLrMdS10z8y3GbxzAynh9LOdOm22UuTPekncOE=;
+ b=s/lZPUrEW4ubhwzw/Nl31ISyFL5srT+NKbKEyGPzIXWgZ9jviL1Wo4pvzLUJvOqmaf
+ biNhuAYyqpwItJrVN4l2C2k6+74ZPuBItUFSai8m42JgpLtT9sUR1Qnjcao/YO5MF8Tn
+ yJ0NH3zEdi7Ut0YRx9bUxSeJ1yGDhE1ro5QahGC+MH+MqBgbtEnxYaCLsMXTABXC1LIk
+ AWPXzt7DwDL8RS5RUAApVcrmIlIKS+x0or0/HlnOV2JkuXQYK0IQFF4tnzeBDlP5DDYj
+ JIixLXkwacZPwfxycNydvv1hk9v9KczfGulqwUlYaHVBTdhBKEiLISrbeNDZjWvoxIBD
+ Rn0w==
+X-Gm-Message-State: AOAM532HZRZC21hsbiaG24U2JeVDb7zFyDBt+a9CsipSUZtYQqllgnzX
+ iNfx0T5WcdoWR/N+0sqdLFI75CmQK+GBpA==
+X-Google-Smtp-Source: ABdhPJx5b3z+ay9WdGqj6b0oxjozWRj7EUCh1qrxq7XW796WUJMFPt/D6J9HlVNEuMaN7XC4S6P6vw==
+X-Received: by 2002:adf:fc01:: with SMTP id i1mr27258517wrr.374.1619014698182; 
+ Wed, 21 Apr 2021 07:18:18 -0700 (PDT)
+Received: from [192.168.83.45] (lfbn-tln-1-134-231.w90-119.abo.wanadoo.fr.
+ [90.119.102.231])
+ by smtp.gmail.com with ESMTPSA id h10sm3289526wrt.40.2021.04.21.07.18.17
+ for <qemu-riscv@nongnu.org>
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 21 Apr 2021 06:33:07 -0700 (PDT)
+ Wed, 21 Apr 2021 07:18:17 -0700 (PDT)
 From: Emmanuel Blot <emmanuel.blot@sifive.com>
-To: 
-Cc: Emmanuel Blot <emmanuel.blot@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
- qemu-devel@nongnu.org (open list:All patches CC here)
-Subject: [PATCH] target/riscv: fix a typo with interrupt names
-Date: Wed, 21 Apr 2021 15:32:36 +0200
-Message-Id: <20210421133236.11323-1-emmanuel.blot@sifive.com>
-X-Mailer: git-send-email 2.31.1
+To: qemu-riscv@nongnu.org
+Subject: [RFC] target/riscv: generated RISCV isa string and subset naming
+ convention
+Date: Wed, 21 Apr 2021 16:18:16 +0200
+X-Mailer: MailMate (1.14r5757)
+Message-ID: <1CD35845-3055-45D2-9166-489C2B74E0E7@sifive.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=emmanuel.blot@sifive.com; helo=mail-wr1-x42e.google.com
+Content-Type: text/plain; format=flowed
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=emmanuel.blot@sifive.com; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,31 +76,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Apr 2021 13:33:11 -0000
+X-List-Received-Date: Wed, 21 Apr 2021 14:18:27 -0000
 
-Interrupt names have been swapped in 205377f8 and do not follow
-IRQ_*_EXT definition order.
+The riscv_isa_string function deals with all the misa bits the same way.
+However, it seems froom the specification that bits should not be =
 
-Signed-off-by: Emmanuel Blot <emmanuel.blot@sifive.com>
+equally
+represented in the isa string.
+
+For example:
+
+- user mode ISA extension does not seem to be part of the isa string, =
+
+only N
+   (user mode interrupt) does.
+- S/H/X/Z extensions should be suffixed with an alphabetical name.
+
+Moreover the table 27.1 documents a canonical order that is slightly
+different from the one initially implemented.
+
+Should we simplify this string?
+This string is used to generate the DTB riscv,isa compatible string.
+
+ref: The RISC-V Instruction Set Manual Volume I: Unprivileged ISA,
+Subset Naming Convention section 27.11
+https://github.com/riscv/riscv-isa-manual/releases/download/draft-2021040=
+2-1271737/riscv-spec.pdf
+
+
 ---
- target/riscv/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  target/riscv/cpu.c | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 7d6ed80f6b6..c79503ce967 100644
+index 7d6ed80f6b6..4eadd9b9fc1 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -88,8 +88,8 @@ const char * const riscv_intr_names[] = {
-     "vs_timer",
-     "m_timer",
-     "u_external",
-+    "s_external",
-     "vs_external",
--    "h_external",
-     "m_external",
-     "reserved",
-     "reserved",
--- 
-2.31.1
+@@ -32,7 +32,7 @@
 
+  /* RISC-V CPU definitions */
+
+-static const char riscv_exts[26] =3D "IEMAFDQCLBJTPVNSUHKORWXYZG";
++static const char riscv_exts[] =3D "IEMAFDQLCBKJTPVN";
+
+  const char * const riscv_int_regnames[] =3D {
+    "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   =
+
+"x6/t1",
+@@ -641,7 +641,7 @@ char *riscv_isa_string(RISCVCPU *cpu)
+      const size_t maxlen =3D sizeof("rv128") + sizeof(riscv_exts) + 1;
+      char *isa_str =3D g_new(char, maxlen);
+      char *p =3D isa_str + snprintf(isa_str, maxlen, "rv%d", =
+
+TARGET_LONG_BITS);
+-    for (i =3D 0; i < sizeof(riscv_exts); i++) {
++    for (i =3D 0; i < sizeof(riscv_exts)-1; i++) {
+          if (cpu->env.misa & RV(riscv_exts[i])) {
+              *p++ =3D qemu_tolower(riscv_exts[i]);
+          }
+--
+2.31.1
 
