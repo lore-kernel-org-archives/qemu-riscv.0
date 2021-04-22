@@ -1,74 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lZNnf-00011J-0z
-	for mharc-qemu-riscv@gnu.org; Wed, 21 Apr 2021 21:06:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45312)
+	id 1lZOMt-0000y2-6E
+	for mharc-qemu-riscv@gnu.org; Wed, 21 Apr 2021 21:42:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53198)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lZNnd-00010h-PU
- for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 21:06:33 -0400
-Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a]:39906)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lZOMr-0000vQ-7X; Wed, 21 Apr 2021 21:42:57 -0400
+Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:36829)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lZNnb-0005CX-Fb
- for qemu-riscv@nongnu.org; Wed, 21 Apr 2021 21:06:33 -0400
-Received: by mail-pf1-x42a.google.com with SMTP id c17so30546900pfn.6
- for <qemu-riscv@nongnu.org>; Wed, 21 Apr 2021 18:06:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=gFMtv0MZqjtWyNTXdRmWHzFD1Pnk4J53YdNpHde6ZFY=;
- b=wKE8QRNdhIOYO+OjKrkamrA7V5pWC6xWZuNz9io/5O6FbO2a13TwRh/wVlKIphxiUp
- A1pGohsGY05yz6A9rLlla80Fd0QfTdSvGcwfegfLdgAM/qVmpIEDT14/aZWjnwwgbRYv
- v1MM/fV90AtFYn/sPUmGgf6ORi4pde2aWYhB1fNxYsPiqLm5CYcWw1BmzmvCqVEmXQJ2
- cY45KpUMqX77/55EWSM91TT3qxhAQqqX/K3nW+89KwULvehjt3/0N/Vj4PEeArDU54pB
- 3ENXbN+cKcudhwK1akyS1iQ1pqANJKEpDTTrhG086tZ5uotgSfGBqhJYBljQJ14N+B7+
- PR9g==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lZOMp-000508-1N; Wed, 21 Apr 2021 21:42:57 -0400
+Received: by mail-il1-x134.google.com with SMTP id p15so755056iln.3;
+ Wed, 21 Apr 2021 18:42:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=w/cXhI4jKYYny3K7schsKdtggbOGnStznEuG5YxSA38=;
+ b=WoQTZtTMxCqBaUMbQT+yuwg161zOT9zm2L2xkdXBACDKKWcIYE2zLv21CrNmPi1Itb
+ G92bv6EeaySE4WcQDkHpV5WovorlSN15pojZF+Knal9Cf0ckkj7JdOlsXZM1sPcrdWsR
+ 6FaRSzZVUwn5CyefhJDVV6wBEkeymPD0GVbXYpuyCpHF25Etv+nBGFfWptwMUePhz7Ko
+ oqM8JDjiYcSwm7iAvdtc9cb3kI7KCukc2SuRQ5RYsAfDU2BucupcesU5xPI00ULczbQw
+ IxVdhtsjSePqQg4qjbKwyeu9IPpMPTUXPnQzZzaOJb9izjaRb1JQZbAg67VceGqktprp
+ 26EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=gFMtv0MZqjtWyNTXdRmWHzFD1Pnk4J53YdNpHde6ZFY=;
- b=BYeWRXSW2mg8SbvMmp/raaX+bfRB14LWls4lG0uL119iyYXC4ZBu4JH1bnkKtPJ5Hs
- TLREyViAeo39QeyrtT4Pf7wlNlLd+6qzOuRqWa5y87m1STI97AalpbKcgNI5ilq0LBI3
- rNgB3AZNZXXr27NoXirXseBddz6oFz2uyjP0NRWOBDJXw5D435pstP3Ot7qAce2k9F9n
- x2bbA/xFTkm/P3M+lrjTG/2JV5c6h+GdzJftWniwhf+MOlobN/D2lBj89hjdW7DbCH7N
- Xkb9Vvn6AR1IiHhyT8rdQnfuH0uFbiMHmmlV+inDEbCX4zttTxVwl48KMmcPS/WQVzM0
- vCpQ==
-X-Gm-Message-State: AOAM533/vvXIBNf8eJUELzKwymNFhu+z/EdZIilnvTbx6TO6ccc8wMZl
- 1yuk4q6cRWDoQjavbGMD+caKhg==
-X-Google-Smtp-Source: ABdhPJwrh3FwSkSWRUV9lNW0WrGPprTZgo2pDeyunBQxrFsO8bvKJluEAHzCSzWJsrh7hgNcjVejQQ==
-X-Received: by 2002:a05:6a00:856:b029:208:f11c:231f with SMTP id
- q22-20020a056a000856b0290208f11c231fmr687038pfk.25.1619053589721; 
- Wed, 21 Apr 2021 18:06:29 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.131.83])
- by smtp.gmail.com with ESMTPSA id m188sm374397pfm.167.2021.04.21.18.06.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Apr 2021 18:06:29 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=w/cXhI4jKYYny3K7schsKdtggbOGnStznEuG5YxSA38=;
+ b=BQc2dwyHqqoxDdMrqQW0+lZKhwzUMkfBl/CG9pat7Akf9H0lR/nOMApzyKWO+C0d2H
+ GxqTiHcZTk4hyUIuljmH/jkNwKQfTTdyWd/NnigavHf2lz3UcTwJf/61BQozdVrD0oiN
+ ttBv+F0HgB4cmdJmGjU5Q8ROVqTzAJw+FkDfvl2khoGPjkjAdxNrBo+Gm/Mk3ZmTOSYt
+ Dt9nNAlZA1YK3/tVViwzECvdtuuVNY9P8JCgw070qBJP/rtp+UsEF+zHLmCa1qD41IiY
+ dpIlHI5KKW2v27HLXCZ/cVWmMQr+ZXA8qI2uYvJZV4l1771jxR3Sya4/6LOS6gsJVV/1
+ xziQ==
+X-Gm-Message-State: AOAM532rChJ0252Fyj34Q6qBgSaRJt5TDdX+QlIQnBU0afWH4L7O9jl/
+ YMHffG7XXcdfDlUpD6nLaJuglFxr9/2Yar5ebgQ=
+X-Google-Smtp-Source: ABdhPJwfeR+fWZkX59XPliObQ23v34os/IkIJ3fFYoUNAKptd9dg1woXs8W7QIm39l67n+IMGDVaR3ieGCm22cM7s3k=
+X-Received: by 2002:a05:6e02:5a2:: with SMTP id
+ k2mr730429ils.177.1619055771162; 
+ Wed, 21 Apr 2021 18:42:51 -0700 (PDT)
+MIME-Version: 1.0
+References: <20210420013150.21992-1-frank.chang@sifive.com>
+ <3b6b4967-d9bc-ec4f-4676-cb9df2b4930a@linaro.org>
+In-Reply-To: <3b6b4967-d9bc-ec4f-4676-cb9df2b4930a@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 22 Apr 2021 11:42:25 +1000
+Message-ID: <CAKmqyKMKrNtqULUdQTdXAoHX8JS_dcRAQYx2MPbMiRtzJt6DWw@mail.gmail.com>
 Subject: Re: [PATCH v2] fpu/softfloat: set invalid excp flag for RISC-V muladd
  instructions
-To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>
-References: <20210420013150.21992-1-frank.chang@sifive.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <3b6b4967-d9bc-ec4f-4676-cb9df2b4930a@linaro.org>
-Date: Wed, 21 Apr 2021 18:06:27 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
-MIME-Version: 1.0
-In-Reply-To: <20210420013150.21992-1-frank.chang@sifive.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Frank Chang <frank.chang@sifive.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x134.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,12 +74,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Apr 2021 01:06:34 -0000
+X-List-Received-Date: Thu, 22 Apr 2021 01:42:57 -0000
 
-On 4/19/21 6:31 PM, frank.chang@sifive.com wrote:
-> +    return 3; /* deafult NaN */
+On Thu, Apr 22, 2021 at 11:06 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 4/19/21 6:31 PM, frank.chang@sifive.com wrote:
+> > +    return 3; /* deafult NaN */
+>
+> Late notice of spelling error: default.
 
-Late notice of spelling error: default.
+Fixed when I applied it.
 
-r~
+Thanks!
+
+Applied to riscv-to-apply.next
+
+Alistair
+
+>
+> r~
+>
 
