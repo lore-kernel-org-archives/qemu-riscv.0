@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lZfBG-00036l-M8
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Apr 2021 15:40:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57160)
+	id 1lZfBO-0003C7-L2
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Apr 2021 15:40:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57192)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lZfBE-00033P-FA; Thu, 22 Apr 2021 15:40:04 -0400
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f]:45569)
+ id 1lZfBI-00038L-Qb; Thu, 22 Apr 2021 15:40:10 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431]:37521)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lZfBC-0005Zs-37; Thu, 22 Apr 2021 15:40:04 -0400
-Received: by mail-wr1-x42f.google.com with SMTP id h4so36903088wrt.12;
- Thu, 22 Apr 2021 12:40:00 -0700 (PDT)
+ id 1lZfBG-0005ci-Ty; Thu, 22 Apr 2021 15:40:08 -0400
+Received: by mail-wr1-x431.google.com with SMTP id j5so44974376wrn.4;
+ Thu, 22 Apr 2021 12:40:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=geK1FL9BfBSzKYrYLCYKzr+Rs4N62lLrBU0a9dBAM/U=;
- b=Nl0YtqttuvNibxtHdC7V16eAWQoec2etPKOGpgf9XnFgw4C678GtTngNMKIiTzwgeM
- ysjbRL7zNSX6Mk8+DWxFHffkkxUu+K6Y5zGdqNG9NK+BEKz0moFkflHLHCEVKnHSBjlV
- J6PjIko6hwiH3QjaagwQlhPran8zaVizTmdu2qCHxcuiObrJ9lg1jyW/x7+MZIGQJUZ3
- SGq5kDTu5Ae7Z66ZqVZGy/2FgzqXhVt6i9hG6okcxh2hxdCaztx2pGs2EmEnyOO2UbvR
- pkYat6iuR7BxCV2wPNqHTGS+d/HIJihSOs7ryrq8mwsDZnENloiskjiahSQ3aReyY0iQ
- 4QFw==
+ bh=A7inHjxFSKegRWGQqqs5t49oYCgVN7h+qmqFdyyUm4Q=;
+ b=QM8MVmniMaHl+Smm4+9C6OMCS1gKU8GkwU7VJFvD5hxpjWTyMbyrrKuCOkOtAaSw1l
+ qiSw0qkbSs9cyshkROaR54VRAkCdd9gd2dtde29XeksJEGTtEStk95K8P8ZGPSTnVQJ8
+ l1iWlSb4StayRAoSKy1hRCAe/6ZXoI9XxrV3tjPOvKbLT+hYK2BmFUdNKo8KcU5pfn/N
+ wuOZ31Wodcv6aTxceD+ipbYd1oNDo2wXtnmpdhJCOi535KYqAhaZmHiBW3x4+tpG3yWr
+ yZOtc2exog/pSZvkmSCUIq0IojG+DYB1cqFOf4QvMcYzihiuboqRq4whbZ/3VLVuXnau
+ VKvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=geK1FL9BfBSzKYrYLCYKzr+Rs4N62lLrBU0a9dBAM/U=;
- b=YJ5pYEkW1yqbYclzRM/jtkThfvSXGw0IPVCIXQk1JJkLXAF1V9jylTNfYjE+Cl1G2c
- kmacpjswO1iJmM2U5Ix1QZBswW5BgbYaBY/ds0gsws3sK3aVnEygrOqo7ElmDJnKBNQq
- 4qGaOs/q1f3Qs5VBSpzKsKx1hnueIcLs8nYJze1zbTkMoRJ6yhYeZrCiyu15ihOt1uPQ
- BYdtKsUB+mhUkshGe/BZNZYNigvZmq1McjTiSOH+9DAO29qLNKG0MCljRC2vzwLAGAom
- SCU/TaD/DXKQ1nzUVlNyrO96r5xaPQYGrAG7tYz6ivc0c9YnqnIMKfA+2VIUB5qv+5rJ
- eW5w==
-X-Gm-Message-State: AOAM5335qPp+jAPel9ydVg0XU9pZbis9x6I61mKXNOI/lNE5AJQZuz+7
- +epNb5v5+/UDHXktZa/cgqF8iCI42/I4Jg==
-X-Google-Smtp-Source: ABdhPJwYdZr7z0HYSrTBAyjxzjX0b+lskkju9d4QCTNNev0Yk05gG/E4yHj5mgdsQlFlN3Ae2OAzdw==
-X-Received: by 2002:a5d:6487:: with SMTP id o7mr36460wri.152.1619120398751;
- Thu, 22 Apr 2021 12:39:58 -0700 (PDT)
+ bh=A7inHjxFSKegRWGQqqs5t49oYCgVN7h+qmqFdyyUm4Q=;
+ b=NJbXSLK8am2URsXQSckdz8yR8841bwLEPfFJEbLrJ0ixWNimyQGVgAMtc1q0VyyXrd
+ u+MAyIhO9g4jhG50c8TRSkzabT5lcveTHkUXo4Rkm+x0ZtPtiAnwfC56zALWHTO5VP68
+ ngByxd9dfjHK2XJQHa/R/RwrFpuThElSvv6NfpHS5ntZGFxThqmR3JBec3ckzF7CJPBe
+ K3mwYiPPJzE8Ezlewq7NbczmeqCkWB61jOLBoYWkN6PwT9G0bqFVIDOpbdsb/Jr+LI8M
+ S+rhuwRJ8TRz0CMutT9bKhvfZ2avTJes0bkvLTLX8biRu6XgiIZOnBjcCyigB24+5gSV
+ /5+g==
+X-Gm-Message-State: AOAM533qZmZsJmWK+PNv9u/oKgyxrBAHEzxCzJwlVS7gp2w04lqneh/T
+ Ze/zqgIxMGje3WUukzVXmAAyJ4oJTqNjTQ==
+X-Google-Smtp-Source: ABdhPJyz8+qZuYkN1TG5YmX3iGnFsdfMx87Xvu89fA5FS6dk7qDgpMDXn41eKhld43zlQARb0EuXLg==
+X-Received: by 2002:adf:bc49:: with SMTP id a9mr2725wrh.109.1619120403721;
+ Thu, 22 Apr 2021 12:40:03 -0700 (PDT)
 Received: from x1w.redhat.com (39.red-81-40-121.staticip.rima-tde.net.
  [81.40.121.39])
- by smtp.gmail.com with ESMTPSA id b15sm7470096wmj.46.2021.04.22.12.39.57
+ by smtp.gmail.com with ESMTPSA id t20sm7400937wmi.35.2021.04.22.12.40.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Apr 2021 12:39:58 -0700 (PDT)
+ Thu, 22 Apr 2021 12:40:03 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -55,29 +55,19 @@ Cc: "Dr. David Alan Gilbert" <dgilbert@redhat.com>, qemu-riscv@nongnu.org,
  Laurent Vivier <laurent@vivier.eu>, qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- David Hildenbrand <david@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
- Thomas Huth <thuth@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>
-Subject: [PATCH v6 10/18] cpu: Move CPUClass::vmsd to SysemuCPUOps
-Date: Thu, 22 Apr 2021 21:38:54 +0200
-Message-Id: <20210422193902.2644064-11-f4bug@amsat.org>
+ David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>
+Subject: [PATCH v6 11/18] cpu: Move CPUClass::virtio_is_big_endian to
+ SysemuCPUOps
+Date: Thu, 22 Apr 2021 21:38:55 +0200
+Message-Id: <20210422193902.2644064-12-f4bug@amsat.org>
 X-Mailer: git-send-email 2.26.3
 In-Reply-To: <20210422193902.2644064-1-f4bug@amsat.org>
 References: <20210422193902.2644064-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -98,322 +88,119 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Apr 2021 19:40:05 -0000
+X-List-Received-Date: Thu, 22 Apr 2021 19:40:12 -0000
 
-Migration is specific to system emulation.
+VirtIO devices are only meaningful with system emulation.
 
-- Move the CPUClass::vmsd field to SysemuCPUOps,
-- restrict VMSTATE_CPU() macro to sysemu,
-- vmstate_dummy is now unused, remove it.
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
-Since v3: Merged in patch 1 (Eduardo)
-therefore removed Richard R-b.
-
-'vmsd' is not a 'system operation' prototype but a const
-pointer field, so it belongs to a const structure,
-but maybe this structure could be better named than SysemuCPUOps?
-
-This field comes from:
-
-commit b170fce3dd06372f7bfec9a780ebcb1fce6d57e4
-Author: Andreas Färber <afaerber@suse.de>
-Date:   Sun Jan 20 20:23:22 2013 +0100
-
-    cpu: Register VMStateDescription through CPUState
-
-    In comparison to DeviceClass::vmsd, CPU VMState is split in two,
-    "cpu_common" and "cpu", and uses cpu_index as instance_id instead of -1.
-    Therefore add a CPU-specific CPUClass::vmsd field.
-
-    Unlike the legacy CPUArchState registration, rather register CPUState.
----
- include/hw/core/cpu.h            |  8 ++------
- include/hw/core/sysemu-cpu-ops.h |  5 +++++
- include/migration/vmstate.h      |  2 --
- cpu.c                            | 15 +++++++--------
- stubs/vmstate.c                  |  2 --
- target/arm/cpu.c                 |  2 +-
- target/i386/cpu.c                |  2 +-
- target/mips/cpu.c                |  2 +-
- target/riscv/cpu.c               |  4 ++--
- target/s390x/cpu.c               |  2 +-
- target/sparc/cpu.c               |  2 +-
- target/ppc/translate_init.c.inc  |  2 +-
- 12 files changed, 22 insertions(+), 26 deletions(-)
+ include/hw/core/cpu.h            | 5 -----
+ include/hw/core/sysemu-cpu-ops.h | 8 ++++++++
+ hw/core/cpu.c                    | 4 ++--
+ target/arm/cpu.c                 | 2 +-
+ target/ppc/translate_init.c.inc  | 4 +---
+ 5 files changed, 12 insertions(+), 11 deletions(-)
 
 diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 23b718a4a51..bdc702894bf 100644
+index bdc702894bf..e3c702b8b74 100644
 --- a/include/hw/core/cpu.h
 +++ b/include/hw/core/cpu.h
-@@ -124,8 +124,6 @@ struct AccelCPUClass;
-  * 32-bit VM coredump.
-  * @write_elf32_qemunote: Callback for writing a CPU- and QEMU-specific ELF
-  * note to a 32-bit VM coredump.
-- * @legacy_vmsd: Legacy state description for migration.
-- *               Do not use in new targets, use #DeviceClass::vmsd instead.
-  * @gdb_num_core_regs: Number of core registers accessible to GDB.
-  * @gdb_core_xml_file: File name for core registers GDB XML description.
-  * @gdb_stop_before_watchpoint: Indicates whether GDB expects the CPU to stop
-@@ -180,7 +178,6 @@ struct CPUClass {
-     int (*write_elf32_qemunote)(WriteCoreDumpFunction f, CPUState *cpu,
-                                 void *opaque);
+@@ -89,10 +89,6 @@ struct AccelCPUClass;
+  * @parse_features: Callback to parse command line arguments.
+  * @reset_dump_flags: #CPUDumpFlags to use for reset logging.
+  * @has_work: Callback for checking if there is work to do.
+- * @virtio_is_big_endian: Callback to return %true if a CPU which supports
+- * runtime configurable endianness is currently big-endian. Non-configurable
+- * CPUs can use the default implementation of this method. This method should
+- * not be used by any callers other than the pre-1.0 virtio devices.
+  * @memory_rw_debug: Callback for GDB memory access.
+  * @dump_state: Callback for dumping state.
+  * @dump_statistics: Callback for dumping statistics.
+@@ -151,7 +147,6 @@ struct CPUClass {
  
--    const VMStateDescription *legacy_vmsd;
-     const char *gdb_core_xml_file;
-     gchar * (*gdb_arch_name)(CPUState *cpu);
-     const char * (*gdb_get_dynamic_xml)(CPUState *cpu, const char *xmlname);
-@@ -1058,10 +1055,8 @@ bool target_words_bigendian(void);
- #ifdef NEED_CPU_H
- 
- #ifdef CONFIG_SOFTMMU
-+
- extern const VMStateDescription vmstate_cpu_common;
--#else
--#define vmstate_cpu_common vmstate_dummy
--#endif
- 
- #define VMSTATE_CPU() {                                                     \
-     .name = "parent_obj",                                                   \
-@@ -1070,6 +1065,7 @@ extern const VMStateDescription vmstate_cpu_common;
-     .flags = VMS_STRUCT,                                                    \
-     .offset = 0,                                                            \
- }
-+#endif /* CONFIG_SOFTMMU */
- 
- #endif /* NEED_CPU_H */
- 
+     int reset_dump_flags;
+     bool (*has_work)(CPUState *cpu);
+-    bool (*virtio_is_big_endian)(CPUState *cpu);
+     int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
+                            uint8_t *buf, int len, bool is_write);
+     void (*dump_state)(CPUState *cpu, FILE *, int flags);
 diff --git a/include/hw/core/sysemu-cpu-ops.h b/include/hw/core/sysemu-cpu-ops.h
-index e54a08ea25e..a10d9fbdd16 100644
+index a10d9fbdd16..1c325d62b94 100644
 --- a/include/hw/core/sysemu-cpu-ops.h
 +++ b/include/hw/core/sysemu-cpu-ops.h
-@@ -16,6 +16,11 @@
+@@ -16,6 +16,14 @@
   * struct SysemuCPUOps: System operations specific to a CPU class
   */
  typedef struct SysemuCPUOps {
 +    /**
-+     * @legacy_vmsd: Legacy state for migration.
-+     *               Do not use in new targets, use #DeviceClass::vmsd instead.
++     * @virtio_is_big_endian: Callback to return %true if a CPU which supports
++     *       runtime configurable endianness is currently big-endian.
++     * Non-configurable CPUs can use the default implementation of this method.
++     * This method should not be used by any callers other than the pre-1.0
++     * virtio devices.
 +     */
-+    const VMStateDescription *legacy_vmsd;
- } SysemuCPUOps;
- 
- #endif /* SYSEMU_CPU_OPS_H */
-diff --git a/include/migration/vmstate.h b/include/migration/vmstate.h
-index 075ee800960..8df7b69f389 100644
---- a/include/migration/vmstate.h
-+++ b/include/migration/vmstate.h
-@@ -194,8 +194,6 @@ struct VMStateDescription {
-     const VMStateDescription **subsections;
- };
- 
--extern const VMStateDescription vmstate_dummy;
--
- extern const VMStateInfo vmstate_info_bool;
- 
- extern const VMStateInfo vmstate_info_int8;
-diff --git a/cpu.c b/cpu.c
-index c1c9cdebc3e..47eb8c40775 100644
---- a/cpu.c
-+++ b/cpu.c
-@@ -126,7 +126,9 @@ const VMStateDescription vmstate_cpu_common = {
- 
- void cpu_exec_realizefn(CPUState *cpu, Error **errp)
++    bool (*virtio_is_big_endian)(CPUState *cpu);
+     /**
+      * @legacy_vmsd: Legacy state for migration.
+      *               Do not use in new targets, use #DeviceClass::vmsd instead.
+diff --git a/hw/core/cpu.c b/hw/core/cpu.c
+index 5abf8bed2e4..09eaa3fa49f 100644
+--- a/hw/core/cpu.c
++++ b/hw/core/cpu.c
+@@ -204,8 +204,8 @@ bool cpu_virtio_is_big_endian(CPUState *cpu)
  {
-+#ifndef CONFIG_USER_ONLY
      CPUClass *cc = CPU_GET_CLASS(cpu);
-+#endif
  
-     cpu_list_add(cpu);
- 
-@@ -139,26 +141,23 @@ void cpu_exec_realizefn(CPUState *cpu, Error **errp)
- 
- #ifdef CONFIG_USER_ONLY
-     assert(qdev_get_vmsd(DEVICE(cpu)) == NULL);
--    assert(cc->legacy_vmsd == NULL);
- #else
-     if (qdev_get_vmsd(DEVICE(cpu)) == NULL) {
-         vmstate_register(NULL, cpu->cpu_index, &vmstate_cpu_common, cpu);
+-    if (cc->virtio_is_big_endian) {
+-        return cc->virtio_is_big_endian(cpu);
++    if (cc->sysemu_ops->virtio_is_big_endian) {
++        return cc->sysemu_ops->virtio_is_big_endian(cpu);
      }
--    if (cc->legacy_vmsd != NULL) {
--        vmstate_register(NULL, cpu->cpu_index, cc->legacy_vmsd, cpu);
-+    if (cc->sysemu_ops->legacy_vmsd != NULL) {
-+        vmstate_register(NULL, cpu->cpu_index, cc->sysemu_ops->legacy_vmsd, cpu);
-     }
- #endif /* CONFIG_USER_ONLY */
+     return target_words_bigendian();
  }
- 
- void cpu_exec_unrealizefn(CPUState *cpu)
- {
-+#ifndef CONFIG_USER_ONLY
-     CPUClass *cc = CPU_GET_CLASS(cpu);
- 
--#ifdef CONFIG_USER_ONLY
--    assert(cc->legacy_vmsd == NULL);
--#else
--    if (cc->legacy_vmsd != NULL) {
--        vmstate_unregister(NULL, cc->legacy_vmsd, cpu);
-+    if (cc->sysemu_ops->legacy_vmsd != NULL) {
-+        vmstate_unregister(NULL, cc->sysemu_ops->legacy_vmsd, cpu);
-     }
-     if (qdev_get_vmsd(DEVICE(cpu)) == NULL) {
-         vmstate_unregister(NULL, &vmstate_cpu_common, cpu);
-diff --git a/stubs/vmstate.c b/stubs/vmstate.c
-index cc4fe41dfc2..8513d9204e4 100644
---- a/stubs/vmstate.c
-+++ b/stubs/vmstate.c
-@@ -1,8 +1,6 @@
- #include "qemu/osdep.h"
- #include "migration/vmstate.h"
- 
--const VMStateDescription vmstate_dummy = {};
--
- int vmstate_register_with_alias_id(VMStateIf *obj,
-                                    uint32_t instance_id,
-                                    const VMStateDescription *vmsd,
 diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index c1943194cf1..9b598bf10a8 100644
+index 9b598bf10a8..d071ae72ba3 100644
 --- a/target/arm/cpu.c
 +++ b/target/arm/cpu.c
 @@ -1945,6 +1945,7 @@ static gchar *arm_gdb_arch_name(CPUState *cs)
  
  #ifndef CONFIG_USER_ONLY
  static const struct SysemuCPUOps arm_sysemu_ops = {
-+    .legacy_vmsd = &vmstate_arm_cpu,
++    .virtio_is_big_endian = arm_cpu_virtio_is_big_endian,
+     .legacy_vmsd = &vmstate_arm_cpu,
  };
  #endif
- 
-@@ -1987,7 +1988,6 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
+@@ -1988,7 +1989,6 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
  #ifndef CONFIG_USER_ONLY
      cc->get_phys_page_attrs_debug = arm_cpu_get_phys_page_attrs_debug;
      cc->asidx_from_attrs = arm_asidx_from_attrs;
--    cc->legacy_vmsd = &vmstate_arm_cpu;
-     cc->virtio_is_big_endian = arm_cpu_virtio_is_big_endian;
+-    cc->virtio_is_big_endian = arm_cpu_virtio_is_big_endian;
      cc->write_elf64_note = arm_cpu_write_elf64_note;
      cc->write_elf32_note = arm_cpu_write_elf32_note;
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 0920eeef1e7..eb96dd42556 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -7393,6 +7393,7 @@ static Property x86_cpu_properties[] = {
- 
- #ifndef CONFIG_USER_ONLY
- static const struct SysemuCPUOps i386_sysemu_ops = {
-+    .legacy_vmsd = &vmstate_x86_cpu,
- };
- #endif
- 
-@@ -7436,7 +7437,6 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
-     cc->write_elf64_qemunote = x86_cpu_write_elf64_qemunote;
-     cc->write_elf32_note = x86_cpu_write_elf32_note;
-     cc->write_elf32_qemunote = x86_cpu_write_elf32_qemunote;
--    cc->legacy_vmsd = &vmstate_x86_cpu;
-     cc->sysemu_ops = &i386_sysemu_ops;
- #endif /* !CONFIG_USER_ONLY */
- 
-diff --git a/target/mips/cpu.c b/target/mips/cpu.c
-index 0bbaff3b57a..4023d487669 100644
---- a/target/mips/cpu.c
-+++ b/target/mips/cpu.c
-@@ -682,6 +682,7 @@ static Property mips_cpu_properties[] = {
- 
- #ifndef CONFIG_USER_ONLY
- static const struct SysemuCPUOps mips_sysemu_ops = {
-+    .legacy_vmsd = &vmstate_mips_cpu,
- };
- #endif
- 
-@@ -725,7 +726,6 @@ static void mips_cpu_class_init(ObjectClass *c, void *data)
-     cc->gdb_write_register = mips_cpu_gdb_write_register;
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_debug = mips_cpu_get_phys_page_debug;
--    cc->legacy_vmsd = &vmstate_mips_cpu;
-     cc->sysemu_ops = &mips_sysemu_ops;
- #endif
-     cc->disas_set_info = mips_cpu_disas_set_info;
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index c465695f00d..5514e23c1d2 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -583,6 +583,8 @@ static const char *riscv_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
- 
- #ifndef CONFIG_USER_ONLY
- static const struct SysemuCPUOps riscv_sysemu_ops = {
-+    /* For now, mark unmigratable: */
-+    .legacy_vmsd = &vmstate_riscv_cpu,
- };
- #endif
- 
-@@ -628,8 +630,6 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     cc->disas_set_info = riscv_cpu_disas_set_info;
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_debug = riscv_cpu_get_phys_page_debug;
--    /* For now, mark unmigratable: */
--    cc->legacy_vmsd = &vmstate_riscv_cpu;
-     cc->sysemu_ops = &riscv_sysemu_ops;
-     cc->write_elf64_note = riscv_cpu_write_elf64_note;
-     cc->write_elf32_note = riscv_cpu_write_elf32_note;
-diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-index 7503b9e0c8b..131e7dfdf82 100644
---- a/target/s390x/cpu.c
-+++ b/target/s390x/cpu.c
-@@ -479,6 +479,7 @@ static void s390_cpu_reset_full(DeviceState *dev)
- 
- #ifndef CONFIG_USER_ONLY
- static const struct SysemuCPUOps s390_sysemu_ops = {
-+    .legacy_vmsd = &vmstate_s390_cpu,
- };
- #endif
- 
-@@ -522,7 +523,6 @@ static void s390_cpu_class_init(ObjectClass *oc, void *data)
-     cc->gdb_write_register = s390_cpu_gdb_write_register;
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_debug = s390_cpu_get_phys_page_debug;
--    cc->legacy_vmsd = &vmstate_s390_cpu;
-     cc->get_crash_info = s390_cpu_get_crash_info;
-     cc->write_elf64_note = s390_cpu_write_elf64_note;
-     cc->sysemu_ops = &s390_sysemu_ops;
-diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-index 743a7287a4f..543853c24dc 100644
---- a/target/sparc/cpu.c
-+++ b/target/sparc/cpu.c
-@@ -850,6 +850,7 @@ static Property sparc_cpu_properties[] = {
- 
- #ifndef CONFIG_USER_ONLY
- static const struct SysemuCPUOps sparc_sysemu_ops = {
-+    .legacy_vmsd = &vmstate_sparc_cpu,
- };
- #endif
- 
-@@ -894,7 +895,6 @@ static void sparc_cpu_class_init(ObjectClass *oc, void *data)
-     cc->gdb_write_register = sparc_cpu_gdb_write_register;
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_debug = sparc_cpu_get_phys_page_debug;
--    cc->legacy_vmsd = &vmstate_sparc_cpu;
-     cc->sysemu_ops = &sparc_sysemu_ops;
- #endif
-     cc->disas_set_info = cpu_sparc_disas_set_info;
+     cc->sysemu_ops = &arm_sysemu_ops;
 diff --git a/target/ppc/translate_init.c.inc b/target/ppc/translate_init.c.inc
-index b15abc36851..e3f2f2fefa3 100644
+index e3f2f2fefa3..8d6bc6c0087 100644
 --- a/target/ppc/translate_init.c.inc
 +++ b/target/ppc/translate_init.c.inc
 @@ -10880,6 +10880,7 @@ static Property ppc_cpu_properties[] = {
  
  #ifndef CONFIG_USER_ONLY
  static const struct SysemuCPUOps ppc_sysemu_ops = {
-+    .legacy_vmsd = &vmstate_ppc_cpu,
++    .virtio_is_big_endian = ppc_cpu_is_big_endian,
+     .legacy_vmsd = &vmstate_ppc_cpu,
  };
  #endif
- 
-@@ -10925,7 +10926,6 @@ static void ppc_cpu_class_init(ObjectClass *oc, void *data)
-     cc->gdb_write_register = ppc_cpu_gdb_write_register;
- #ifndef CONFIG_USER_ONLY
-     cc->get_phys_page_debug = ppc_cpu_get_phys_page_debug;
--    cc->legacy_vmsd = &vmstate_ppc_cpu;
-     cc->sysemu_ops = &ppc_sysemu_ops;
+@@ -10948,9 +10949,6 @@ static void ppc_cpu_class_init(ObjectClass *oc, void *data)
+     cc->gdb_core_xml_file = "power64-core.xml";
+ #else
+     cc->gdb_core_xml_file = "power-core.xml";
+-#endif
+-#ifndef CONFIG_USER_ONLY
+-    cc->virtio_is_big_endian = ppc_cpu_is_big_endian;
  #endif
- #if defined(CONFIG_SOFTMMU)
+     cc->disas_set_info = ppc_disas_set_info;
+ 
 -- 
 2.26.3
 
