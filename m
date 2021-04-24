@@ -1,75 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1la94F-00005N-It
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Apr 2021 23:34:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53222)
+	id 1laLlT-000474-SY
+	for mharc-qemu-riscv@gnu.org; Sat, 24 Apr 2021 13:08:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60910)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=7413b051c=alistair.francis@wdc.com>)
- id 1la94D-0008TI-Lo; Fri, 23 Apr 2021 23:34:49 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:7434)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=7413b051c=alistair.francis@wdc.com>)
- id 1la94B-0004MR-Ou; Fri, 23 Apr 2021 23:34:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1619235286; x=1650771286;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=d14N0Y5Ry5uhxuNORztBbIKTQXqP1sBkSSfyZAQ6cWo=;
- b=jXHkX4CT0fVTydKP/IX/WxbXpyVRh0s+XCuzPymvYk9QOxBYDNToQSte
- szfPj3K45vXrExLXonMpPLMxc+JS9tvSze7WBVhZy3PrarS9WIM4KVfN6
- aysjBmeL3C/+AASgdai3xqAR7gh7Kt0MyHLg7vkrL38VB392kcI1qqnNP
- pUAWBxH3IYp+eQeFF1ducw8IyWNzhyKGk0AV/nBgAZ+xR/Lb9QpKY2W/E
- dAXvOvt8J35jM3XpDJvJym3dgU0ltKI85RveunV0QMdjjbnTUPzWCd0xF
- lEL2hXo7bthNkOvfltKLL2fhuscY1IYraapD9guhTy1UOmmJG5zEukymX w==;
-IronPort-SDR: k6Z8bndjOdtBv9wPYrHx3AJtfArFTFvuVmBR2Vvm+oKDJR1JCOiOEDSNAkqTXxODSTu85axeWe
- vP13pvEOPf2USzBsvUWR9fQXF++7CAuLLSNqjpnVeDZjtLwDfTJAN0pBpY2DmhGpCP/7rJ/pHy
- hwQa8QD7peWwro4GoTTu4Y+iuNvUKAP3f1KNk3lllk8RLmrzbtzY77Sdr12wjJ3Iqt1lQDAB5w
- cDXfnKPFeIAUEn+UG+th09nClGyM9kT5177cfqeSdih3cRMdoT67DsTPyFa4M7SiYs0j8qM49W
- qGc=
-X-IronPort-AV: E=Sophos;i="5.82,247,1613404800"; d="scan'208";a="166115916"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 24 Apr 2021 11:34:44 +0800
-IronPort-SDR: NZcYKUXM12/l2WC2pjR54IbXAvHjkvF2bc8/L48FyaQKQfTaJzvJsRR7+a43WNc6MEytKv1AWQ
- DpPLwbnOKi9PRk8+dKxhaOpSCub4ReDidLDF9HCX3Kfe0Vuf55kkz39ePD4TdVMMjFkUfxn5E4
- netT8+ccJpmFLPdHUr6eoYzBXXp2GmyWpa3AvhzPYQrXHLSOG0ZWym7ZldSOCbj0MfZAP1hwHX
- w+TqhmkLCdtzOE5vw0yOpujjV13pTUm8YFoVYxejByAML5Uq48jr5cDdndssrVJDk/9HV2VThe
- TlHaB/XNy+h/dmUc8/w79fZs
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 23 Apr 2021 20:15:19 -0700
-IronPort-SDR: G2+MruUYzI7ksEsGf60WKZkbvOi+ZWIMkEmjA1CiTjNMge9QRTnJSf/zWh2LdbTvxyGTByv4bP
- /o+Xqt9H7zBzd7/FP4p4hxM1AqB25XPBrh2vOvboYe14Jx+IOiqZlf7ike3uTRREdHYKK3lWiS
- IASV7Zgdr49/d3W/5/piV8NQ02NGq9Mches4Zy+Izy8V9b+RiTOuFdh5sf99nuXwJGj5x47MVD
- Ybr2gn9a/wVh/vWtIhQZhybL3/x/nMiecAgzfeq+z67GxYiS4dwwW7jhFkKRJGNiLqEX1y6oEc
- OkM=
-WDCIronportException: Internal
-Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.165.34])
- by uls-op-cesaip02.wdc.com with ESMTP; 23 Apr 2021 20:34:43 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v3 10/10] target/riscv: Fix the RV64H decode comment
-Date: Sat, 24 Apr 2021 13:34:37 +1000
-Message-Id: <024ce841221c1d15c74b253512428c4baca7e4ba.1619234854.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1619234854.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1laLlS-00046n-52
+ for qemu-riscv@nongnu.org; Sat, 24 Apr 2021 13:08:18 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:36540)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1laLlP-0003SN-N3
+ for qemu-riscv@nongnu.org; Sat, 24 Apr 2021 13:08:17 -0400
+Received: by mail-pg1-x530.google.com with SMTP id j7so27890073pgi.3
+ for <qemu-riscv@nongnu.org>; Sat, 24 Apr 2021 10:08:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=hNF5OxEPE4tuzlqPGkY4f3+ZzRjAxr7dpZTNhwje4Ms=;
+ b=J8ELAfL9sJxR4vI7GVy3A9QG7vj98iTWzuk0/XztvGjdvmdGH2/BHg1qxtUZgJrw+z
+ FqKq38Us/LG1EUo7NT/m1Quyb4w0Ra6RpD6AhDciJLMhuh+xLTgJT+SJpAYYKtggehCx
+ mLCqisFKPgPxABsavgS0MFSAaA8OMrtJcqTXvh9CPJEuGipacZaqcoW1upSCanokGHqm
+ RLrYHTc0v7ripkyDbt+hZHWUYLCcCtNwaiaC5vbAVEWlaQ4ah+8fpXXE2V5n2lC4xp/F
+ QBg9jzwzSRDtI/3Hzmy0gu/8S61Xv74S5Er8J7ZTxIVOJfY+dIp0k9Axvw0Ooza53UIE
+ 29nQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=hNF5OxEPE4tuzlqPGkY4f3+ZzRjAxr7dpZTNhwje4Ms=;
+ b=jydSiCRyHUY2TTjT/Bf4RLTXvM/VZsFyKYlUsaQX9vnUrYnf/b3RztOFYAyMD1dohh
+ aq9OaO3yoQsq9H0T2tlUq3pOrlZdx2MICX1monN7oadRKzxSVI8srxkS94ErlOOTkb7k
+ kXuwXUvyZiEL4phZwnxnaCCWcWzKlWr//o1IGoV4kp+td5BobtvX0oE9ua/fpQ9BtMDm
+ f7XPpM9wtFjPpNI0OBAaYk0afnBIvyfHOcZszd75SWqh0m68kbcdM0Lt8mDZkmzxzsA2
+ 2/cEN/Vn1kvY8MOA1xfZ56mBKsWTgagQeqRPjD6TXPBwowZ9jX42v/Nd7HQkUMXVfpUb
+ Z13A==
+X-Gm-Message-State: AOAM532PRkOWB8gGV4JEUznDxR4Q4aQELCD8iSfzCj7twDoOrhw6imPT
+ SSdP6DdXparaOLdIBx+cQjeomA==
+X-Google-Smtp-Source: ABdhPJxnfS6buSTwWG0dm+nKNgMCL2AbZsqS153Ltk7S8bM60ooiVym8Nm5yzFJY0wBy6dmnWJPJ9w==
+X-Received: by 2002:a63:d04b:: with SMTP id s11mr9584293pgi.92.1619284093608; 
+ Sat, 24 Apr 2021 10:08:13 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.144.24])
+ by smtp.gmail.com with ESMTPSA id u7sm7631985pjx.8.2021.04.24.10.08.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 24 Apr 2021 10:08:13 -0700 (PDT)
+Subject: Re: [PATCH v3 08/10] target/riscv: Consolidate RV32/64 32-bit
+ instructions
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
 References: <cover.1619234854.git.alistair.francis@wdc.com>
+ <db709360e2be47d2f9c6483ab973fe4791aefa77.1619234854.git.alistair.francis@wdc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <2ea910ea-690a-bdac-bcdf-436bbe28964e@linaro.org>
+Date: Sat, 24 Apr 2021 10:08:11 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.144;
- envelope-from=prvs=7413b051c=alistair.francis@wdc.com;
- helo=esa5.hgst.iphmx.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+In-Reply-To: <db709360e2be47d2f9c6483ab973fe4791aefa77.1619234854.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,28 +82,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Apr 2021 03:34:50 -0000
+X-List-Received-Date: Sat, 24 Apr 2021 17:08:18 -0000
 
-BugLink: https://gitlab.com/qemu-project/qemu/-/issues/6
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/insn32.decode | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 4/23/21 8:34 PM, Alistair Francis wrote:
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -74,8 +74,6 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+>   
+>   #ifdef TARGET_RISCV32
+>   # define is_32bit(ctx)  true
+> -#elif defined(CONFIG_USER_ONLY)
+> -# define is_32bit(ctx)  false
+>   #else
+>   static inline bool is_32bit(DisasContext *ctx)
+>   {
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index fecf0f15d5..8901ba1e1b 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -288,7 +288,7 @@ hsv_w       0110101  .....  ..... 100 00000 1110011 @r2_s
- hfence_gvma 0110001  .....  ..... 000 00000 1110011 @hfence_gvma
- hfence_vvma 0010001  .....  ..... 000 00000 1110011 @hfence_vvma
- 
--# *** RV32H Base Instruction Set ***
-+# *** RV64H Base Instruction Set ***
- hlv_wu    0110100  00001   ..... 100 ..... 1110011 @r2
- hlv_d     0110110  00000   ..... 100 ..... 1110011 @r2
- hsv_d     0110111  .....   ..... 100 00000 1110011 @r2_s
--- 
-2.31.1
+Rebase error?
 
+Otherwise,
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+
+r~
 
