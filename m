@@ -1,75 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1laLlT-000474-SY
-	for mharc-qemu-riscv@gnu.org; Sat, 24 Apr 2021 13:08:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60910)
+	id 1laLrQ-0006md-MQ
+	for mharc-qemu-riscv@gnu.org; Sat, 24 Apr 2021 13:14:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33696)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1laLlS-00046n-52
- for qemu-riscv@nongnu.org; Sat, 24 Apr 2021 13:08:18 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:36540)
+ id 1laLrJ-0006lj-U0
+ for qemu-riscv@nongnu.org; Sat, 24 Apr 2021 13:14:22 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631]:45945)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1laLlP-0003SN-N3
- for qemu-riscv@nongnu.org; Sat, 24 Apr 2021 13:08:17 -0400
-Received: by mail-pg1-x530.google.com with SMTP id j7so27890073pgi.3
- for <qemu-riscv@nongnu.org>; Sat, 24 Apr 2021 10:08:14 -0700 (PDT)
+ id 1laLrE-0006F6-Dp
+ for qemu-riscv@nongnu.org; Sat, 24 Apr 2021 13:14:21 -0400
+Received: by mail-pl1-x631.google.com with SMTP id p17so853091plf.12
+ for <qemu-riscv@nongnu.org>; Sat, 24 Apr 2021 10:14:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=hNF5OxEPE4tuzlqPGkY4f3+ZzRjAxr7dpZTNhwje4Ms=;
- b=J8ELAfL9sJxR4vI7GVy3A9QG7vj98iTWzuk0/XztvGjdvmdGH2/BHg1qxtUZgJrw+z
- FqKq38Us/LG1EUo7NT/m1Quyb4w0Ra6RpD6AhDciJLMhuh+xLTgJT+SJpAYYKtggehCx
- mLCqisFKPgPxABsavgS0MFSAaA8OMrtJcqTXvh9CPJEuGipacZaqcoW1upSCanokGHqm
- RLrYHTc0v7ripkyDbt+hZHWUYLCcCtNwaiaC5vbAVEWlaQ4ah+8fpXXE2V5n2lC4xp/F
- QBg9jzwzSRDtI/3Hzmy0gu/8S61Xv74S5Er8J7ZTxIVOJfY+dIp0k9Axvw0Ooza53UIE
- 29nQ==
+ bh=k+yquW6Jwfr4iNaYcZTtMgJSwtJ91lwBzswa/nAFTRc=;
+ b=dxvnPy3RWxY4pq2Z/3HHACmzvfrY0NjChJV92QJ3UE4egc4desjW86oxZACEuhumgQ
+ LTDSOXN+P8C2ZlspWbawivnGvLLqZkb8d1ks6EQWtfCghSD9f/3nM4P0FOxg815T6bmS
+ mqRe05FoMR5k/3WG5dffhijlbtZFktGY/92P0IqP676IJvhka/rhcwoTeouSthwRts54
+ O1umo35MXIkqES83zcXzWvLhMgwjXCy/JETdMLiC+wc7alXXR5btx4zfeI3VKuDnNCVN
+ XJqWFyNENia+v2dH3BUJ+hpeu8tmS3Dc7V0TBrbWcB735spndZpCXN3TcinvURufplsD
+ 0rPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=hNF5OxEPE4tuzlqPGkY4f3+ZzRjAxr7dpZTNhwje4Ms=;
- b=jydSiCRyHUY2TTjT/Bf4RLTXvM/VZsFyKYlUsaQX9vnUrYnf/b3RztOFYAyMD1dohh
- aq9OaO3yoQsq9H0T2tlUq3pOrlZdx2MICX1monN7oadRKzxSVI8srxkS94ErlOOTkb7k
- kXuwXUvyZiEL4phZwnxnaCCWcWzKlWr//o1IGoV4kp+td5BobtvX0oE9ua/fpQ9BtMDm
- f7XPpM9wtFjPpNI0OBAaYk0afnBIvyfHOcZszd75SWqh0m68kbcdM0Lt8mDZkmzxzsA2
- 2/cEN/Vn1kvY8MOA1xfZ56mBKsWTgagQeqRPjD6TXPBwowZ9jX42v/Nd7HQkUMXVfpUb
- Z13A==
-X-Gm-Message-State: AOAM532PRkOWB8gGV4JEUznDxR4Q4aQELCD8iSfzCj7twDoOrhw6imPT
- SSdP6DdXparaOLdIBx+cQjeomA==
-X-Google-Smtp-Source: ABdhPJxnfS6buSTwWG0dm+nKNgMCL2AbZsqS153Ltk7S8bM60ooiVym8Nm5yzFJY0wBy6dmnWJPJ9w==
-X-Received: by 2002:a63:d04b:: with SMTP id s11mr9584293pgi.92.1619284093608; 
- Sat, 24 Apr 2021 10:08:13 -0700 (PDT)
+ bh=k+yquW6Jwfr4iNaYcZTtMgJSwtJ91lwBzswa/nAFTRc=;
+ b=IrzRaQZjaGgxNSeKNdznv6UTNRuJwux1N19PPm74BDZwsV3rwpdsZ1vZ8LUZlS1N2X
+ BIKBetw1Ygp9y+pNfBDc3Hx/V0kONwz0gdI+rw97zlZMCeUI/8Iw48egEzWto/hJPFGX
+ 3VpFVudu8uWEEQmkZp6h//b6UsZjJPffba3jFUxTDp0dr2z6crzIzupGKr80q3oW/K/A
+ 6s4C8F/HcXZCpMXpIxbTx2L2LbH4Dhn9o96ce+tGe3NJQIK3DvsXAe/vX3ndqFJZ2WMA
+ H1Km6MAcaETS97UENrE15994rENAkMIkNYP0ppjOXMaG3FL6tEe7x75xfdopX8fanI6R
+ Cjag==
+X-Gm-Message-State: AOAM533NESCmPsJj2/yw+mT1yWy9wEGj5liZ5daCRlkvytNWBLXBJpqM
+ iG1Xn/en7TTvlA5eUG/04cafug==
+X-Google-Smtp-Source: ABdhPJwt/7Ek1yO+peLSFmWhVMcd4NwppFkDruRenprbxV5vU0zo+7qB8v3v0uXtiVBpDHGSgC/qAg==
+X-Received: by 2002:a17:90b:344d:: with SMTP id
+ lj13mr11925442pjb.44.1619284454798; 
+ Sat, 24 Apr 2021 10:14:14 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.144.24])
- by smtp.gmail.com with ESMTPSA id u7sm7631985pjx.8.2021.04.24.10.08.12
+ by smtp.gmail.com with ESMTPSA id g24sm7911741pgn.18.2021.04.24.10.14.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 24 Apr 2021 10:08:13 -0700 (PDT)
-Subject: Re: [PATCH v3 08/10] target/riscv: Consolidate RV32/64 32-bit
- instructions
+ Sat, 24 Apr 2021 10:14:14 -0700 (PDT)
+Subject: Re: [PATCH v3 10/10] target/riscv: Fix the RV64H decode comment
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
 References: <cover.1619234854.git.alistair.francis@wdc.com>
- <db709360e2be47d2f9c6483ab973fe4791aefa77.1619234854.git.alistair.francis@wdc.com>
+ <024ce841221c1d15c74b253512428c4baca7e4ba.1619234854.git.alistair.francis@wdc.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <2ea910ea-690a-bdac-bcdf-436bbe28964e@linaro.org>
-Date: Sat, 24 Apr 2021 10:08:11 -0700
+Message-ID: <43dfcf5d-26b0-759d-296b-416d3566b2ea@linaro.org>
+Date: Sat, 24 Apr 2021 10:14:12 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.1
 MIME-Version: 1.0
-In-Reply-To: <db709360e2be47d2f9c6483ab973fe4791aefa77.1619234854.git.alistair.francis@wdc.com>
+In-Reply-To: <024ce841221c1d15c74b253512428c4baca7e4ba.1619234854.git.alistair.francis@wdc.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,26 +82,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Apr 2021 17:08:18 -0000
+X-List-Received-Date: Sat, 24 Apr 2021 17:14:23 -0000
 
 On 4/23/21 8:34 PM, Alistair Francis wrote:
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -74,8 +74,6 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
->   
->   #ifdef TARGET_RISCV32
->   # define is_32bit(ctx)  true
-> -#elif defined(CONFIG_USER_ONLY)
-> -# define is_32bit(ctx)  false
->   #else
->   static inline bool is_32bit(DisasContext *ctx)
->   {
+> BugLink: https://gitlab.com/qemu-project/qemu/-/issues/6
 
-Rebase error?
+The issue got renumbered to 47, fwiw.
 
-Otherwise,
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-
 r~
+
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>   target/riscv/insn32.decode | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index fecf0f15d5..8901ba1e1b 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -288,7 +288,7 @@ hsv_w       0110101  .....  ..... 100 00000 1110011 @r2_s
+>   hfence_gvma 0110001  .....  ..... 000 00000 1110011 @hfence_gvma
+>   hfence_vvma 0010001  .....  ..... 000 00000 1110011 @hfence_vvma
+>   
+> -# *** RV32H Base Instruction Set ***
+> +# *** RV64H Base Instruction Set ***
+>   hlv_wu    0110100  00001   ..... 100 ..... 1110011 @r2
+>   hlv_d     0110110  00000   ..... 100 ..... 1110011 @r2
+>   hsv_d     0110111  .....   ..... 100 00000 1110011 @r2_s
+> 
+
 
