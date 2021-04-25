@@ -1,58 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1laniM-000412-CG
-	for mharc-qemu-riscv@gnu.org; Sun, 25 Apr 2021 18:58:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34582)
+	id 1lanis-0004a4-7k
+	for mharc-qemu-riscv@gnu.org; Sun, 25 Apr 2021 18:59:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34710)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1laniL-0003zu-EY; Sun, 25 Apr 2021 18:58:57 -0400
-Received: from mail-il1-x12d.google.com ([2607:f8b0:4864:20::12d]:43553)
+ id 1lanir-0004ZB-Ce; Sun, 25 Apr 2021 18:59:29 -0400
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:33764)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1laniJ-00089y-Nx; Sun, 25 Apr 2021 18:58:57 -0400
-Received: by mail-il1-x12d.google.com with SMTP id l9so2605350ilh.10;
- Sun, 25 Apr 2021 15:58:55 -0700 (PDT)
+ id 1lanip-0008TN-8m; Sun, 25 Apr 2021 18:59:29 -0400
+Received: by mail-il1-x12a.google.com with SMTP id y10so4404729ilv.0;
+ Sun, 25 Apr 2021 15:59:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=2aW8epdkpVT1ZubfjL0HCSTTc/IKoMyTUez0iLaMi0c=;
- b=Uub/58WCiU8ejAA1bfZAWFA2AH2MT3MIyGmX+HUG4W4kM8/QfElpL4AMjmH6LW86ed
- Xzx4YsXTaM7SC8oGdj14Lh1OOcRxvZv/ONXs1ljC41Wo8gcPrTq4mNuKwZnT4yPbQcrW
- 5ha3w5CneaEhkluTgDbvuZbuaRlnzzru9I0afdlQPfImsuqVuRwc/0PI76TCGwyiAImc
- UxKDdsefrn86+gA5dxpzZxq8o3XrXo2NVNr+xMhVIQR2OPiKOK7oNqKe3XJflsfAcXb8
- Y1W2NL3BsLMcbSc6NBr4SxUw6Pw42W657CMJoGQoFkyfeWhlJDz1gWiuCWmVxibwPKGW
- X6MA==
+ :cc; bh=woaYW8rwqCMksjeBBUgmhDONmXNPi2hnLmJvSmSN9Mk=;
+ b=cCejuyWkzyeAsfYPNN2vVmhniBq8tdvMkSFDXolaH9Cf0zB+qqbGF7SR6ppuUjdwzh
+ QYSDHcAUGp0D48ZVLfYX9f/bvAo1R3u10w/y4NH2ppoAfocUSLbarCRzFVKaeASilCB+
+ MgQH+W4fbBNyqTM+YujeQw7pIQ5Mp0UpW18KBGY55pMwCtBcWGJqzI/19LDU/nLAvlWg
+ 2oanR4GKmbIR5XEdzK7gvBBRTC6W39InOFQyIJOhcLGM9Bg4d1PozE8f/tK+7KAihhPZ
+ qwgfMtIos8UC1okqHMvzs4sZLiHUCw+8Usw8yYTKzixJS9ILOZJsr0/ifmIhnc9UsJ/2
+ q/3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=2aW8epdkpVT1ZubfjL0HCSTTc/IKoMyTUez0iLaMi0c=;
- b=brRoeLndekWcN2TlrfOF2wBuq/4w+LOxO9kcxIt2Fy0YqwkhUQnDB5ysjF0C3fatu3
- XVdx3vFULI5xPHEZlF098Q/TQhVh07JsMCDOP8HbPX3fpQf2pSkT/L4JzpvAYBqvZkgi
- nw+DpeXMbDlZmwW/Hdbg4JEzpAEEd5CzA1/Od/VaOFCOp6hkstietsg6Cbqj5LPqWjUe
- x/jhT+pWs2E/nbk5EV8mno2sj2GSc6IhK4xYFRYaMr3ooMqom6iSp8JrhRAPQf6KvbWC
- 3wCBy2PUvWHHdM/EAtMN26euPxvXw3Frrm6c+QyzkIKajmEBMyafEbn0m1dL10t0C3J6
- /oKw==
-X-Gm-Message-State: AOAM533V0cw+0EdpPXmcPsvpauBMNpDytIOjTJoiEiAwnaEzgZ5pd5+s
- hMbhuCflabgeQcYpkPL6wc5S6mmSkg0tMz69rSOPC3AvBts=
-X-Google-Smtp-Source: ABdhPJyGIFEWWbKO9eOSx5UCr4jCmC6zy0NSowEnGVSue/bRUCcXCO7y53lfkPgyspCMHu8+H+9agTDRwBoOGMEhQBk=
-X-Received: by 2002:a92:d383:: with SMTP id o3mr11152348ilo.131.1619391534411; 
- Sun, 25 Apr 2021 15:58:54 -0700 (PDT)
+ bh=woaYW8rwqCMksjeBBUgmhDONmXNPi2hnLmJvSmSN9Mk=;
+ b=thsbtEkxIE5sKh5zLo7dSR1oGiYv/Wa0tsO+1ceRI4j2Exu7NzQYCeUus1xNfsKsju
+ f85jeBWWbJd16SUYAx8jcMWo6vnaP8qNyZGxAM6CncitWtOGHA30UOmtE+u0++++7p2N
+ X73b8qPAsYNLmTBNCVPrcS75CI8hTEjgvuajAEU/LlkGaiWtQD6In2AXfft2SI2F2jz/
+ jWKbevmirE1fxrvB7C6A05KqYP+/ObN5vgAJ71yzKvdHBj9VVYa08gsmrZ799LYJtoQP
+ wKmiWKMGkrzuXxhe/pLfm8FcUUbg/k+T+afHnmY7VrW17HX4ek2ImVGq9WQ5twwmZB42
+ dXhA==
+X-Gm-Message-State: AOAM530RUnx3GJFlQ4Utu2vV1TI1vI7ffPuW+Ki83p9jqVtIfcRj9yRl
+ jkiwXiZze6240J/Elg5nm1CRTADsYXxZhBIo+Fo=
+X-Google-Smtp-Source: ABdhPJw4x6J4cvDz+/LaLy9GsElxs0DoQ31a+seDQfB4BIuEcn6TQZQBtFeVIj1BidTyJ0ztiIQ6QD22Q8ITVHXxvbY=
+X-Received: by 2002:a92:d68a:: with SMTP id p10mr11359343iln.40.1619391565785; 
+ Sun, 25 Apr 2021 15:59:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1619234854.git.alistair.francis@wdc.com>
- <024ce841221c1d15c74b253512428c4baca7e4ba.1619234854.git.alistair.francis@wdc.com>
- <43dfcf5d-26b0-759d-296b-416d3566b2ea@linaro.org>
-In-Reply-To: <43dfcf5d-26b0-759d-296b-416d3566b2ea@linaro.org>
+In-Reply-To: <cover.1619234854.git.alistair.francis@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 26 Apr 2021 08:58:28 +1000
-Message-ID: <CAKmqyKMXR=uMKsttPKJ7eNMx6F_96_GMsqvzYCPdUr9uk38GpA@mail.gmail.com>
-Subject: Re: [PATCH v3 10/10] target/riscv: Fix the RV64H decode comment
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Mon, 26 Apr 2021 08:58:59 +1000
+Message-ID: <CAKmqyKPFW6ieaohRStmzH9J6oamoG31x28KvqR9Gk1XxEkCvoQ@mail.gmail.com>
+Subject: Re: [PATCH v3 00/10] RISC-V: Steps towards running 32-bit guests on
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,41 +70,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Apr 2021 22:58:57 -0000
+X-List-Received-Date: Sun, 25 Apr 2021 22:59:29 -0000
 
-On Sun, Apr 25, 2021 at 3:14 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Sat, Apr 24, 2021 at 1:28 PM Alistair Francis
+<alistair.francis@wdc.com> wrote:
 >
-> On 4/23/21 8:34 PM, Alistair Francis wrote:
-> > BugLink: https://gitlab.com/qemu-project/qemu/-/issues/6
+> This is another step towards running 32-bit CPU code on the 64-bit
+> softmmu builds for RISC-V.
 >
-> The issue got renumbered to 47, fwiw.
+> I have tested this and am able to run some 32-bit code, but eventually
+> hit some issue.  This series doesn't allow users to use 32-bit CPUs with
+> 64-bit softmmu builds as it doesn't work yet. This series instead just
+> gets us a little closer to being able to and removes more hardcoded
+> macros so hopefully others also stop using them for new code.
+>
+> v3:
+>  - Remove casts from the decoder
+>  - Add a patch to fix a comment
+>  - Rebase on the RISC-V tree
+> v2:
+>  - Update the decode tree setup
+>  - Address other review comments
+>
+> Alistair Francis (10):
+>   target/riscv: Remove the hardcoded RVXLEN macro
+>   target/riscv: Remove the hardcoded SSTATUS_SD macro
+>   target/riscv: Remove the hardcoded HGATP_MODE macro
+>   target/riscv: Remove the hardcoded MSTATUS_SD macro
+>   target/riscv: Remove the hardcoded SATP_MODE macro
+>   target/riscv: Remove the unused HSTATUS_WPRI macro
+>   target/riscv: Remove an unused CASE_OP_32_64 macro
+>   target/riscv: Consolidate RV32/64 32-bit instructions
+>   target/riscv: Consolidate RV32/64 16-bit instructions
+>   target/riscv: Fix the RV64H decode comment
 
 Thanks!
 
+Applied to riscv-to-apply.next
+
+Alistair
+
 >
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>  target/riscv/cpu.h                      |  6 --
+>  target/riscv/cpu_bits.h                 | 44 -------------
+>  target/riscv/helper.h                   | 18 +++--
+>  target/riscv/insn16-32.decode           | 28 --------
+>  target/riscv/insn16-64.decode           | 36 ----------
+>  target/riscv/insn16.decode              | 30 +++++++++
+>  target/riscv/insn32-64.decode           | 88 -------------------------
+>  target/riscv/insn32.decode              | 67 ++++++++++++++++++-
+>  target/riscv/cpu.c                      |  6 +-
+>  target/riscv/cpu_helper.c               | 48 ++++++++++----
+>  target/riscv/csr.c                      | 40 +++++++++--
+>  target/riscv/fpu_helper.c               | 16 ++---
+>  target/riscv/monitor.c                  | 22 +++++--
+>  target/riscv/translate.c                | 32 +++++----
+>  target/riscv/vector_helper.c            |  4 --
+>  target/riscv/insn_trans/trans_rva.c.inc | 14 +++-
+>  target/riscv/insn_trans/trans_rvd.c.inc | 17 ++++-
+>  target/riscv/insn_trans/trans_rvf.c.inc |  6 +-
+>  target/riscv/insn_trans/trans_rvh.c.inc |  8 ++-
+>  target/riscv/insn_trans/trans_rvi.c.inc | 22 +++++--
+>  target/riscv/insn_trans/trans_rvm.c.inc | 12 +++-
+>  target/riscv/insn_trans/trans_rvv.c.inc | 39 +++++------
+>  target/riscv/meson.build                | 13 ++--
+>  23 files changed, 310 insertions(+), 306 deletions(-)
+>  delete mode 100644 target/riscv/insn16-32.decode
+>  delete mode 100644 target/riscv/insn16-64.decode
+>  delete mode 100644 target/riscv/insn32-64.decode
 >
-> r~
->
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >   target/riscv/insn32.decode | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> > index fecf0f15d5..8901ba1e1b 100644
-> > --- a/target/riscv/insn32.decode
-> > +++ b/target/riscv/insn32.decode
-> > @@ -288,7 +288,7 @@ hsv_w       0110101  .....  ..... 100 00000 1110011 @r2_s
-> >   hfence_gvma 0110001  .....  ..... 000 00000 1110011 @hfence_gvma
-> >   hfence_vvma 0010001  .....  ..... 000 00000 1110011 @hfence_vvma
-> >
-> > -# *** RV32H Base Instruction Set ***
-> > +# *** RV64H Base Instruction Set ***
-> >   hlv_wu    0110100  00001   ..... 100 ..... 1110011 @r2
-> >   hlv_d     0110110  00000   ..... 100 ..... 1110011 @r2
-> >   hsv_d     0110111  .....   ..... 100 00000 1110011 @r2_s
-> >
+> --
+> 2.31.1
 >
 
