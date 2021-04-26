@@ -1,71 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lb71C-0008TW-HV
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Apr 2021 15:35:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54082)
+	id 1lb71E-00008D-W7
+	for mharc-qemu-riscv@gnu.org; Mon, 26 Apr 2021 15:35:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54134)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lb71A-0008Nh-8d
- for qemu-riscv@nongnu.org; Mon, 26 Apr 2021 15:35:40 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:50766)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lb71C-0008Uw-WC
+ for qemu-riscv@nongnu.org; Mon, 26 Apr 2021 15:35:43 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:44720)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lb717-0008Sf-Ai
- for qemu-riscv@nongnu.org; Mon, 26 Apr 2021 15:35:39 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lb71A-0008Uq-CY
+ for qemu-riscv@nongnu.org; Mon, 26 Apr 2021 15:35:42 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1619465736;
+ s=mimecast20190719; t=1619465739;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=m3J2o1342PI/Nwq9CiNtPMcwkrmRbYFAeBct1A9GlkY=;
- b=ARCUG6HCTCM8kbuI7KMPQ6bPGBFFd2UshP7XIYU487in/wiLznWPEry3RDEwlrUMzvHks/
- fqgZItsdUdlxq1MRb8lse4IZx7+kDWxXPnCNXELRCtpMbvRxmFJyB8Rk/9KLr5yEb2E38J
- 1IVqzrLsId15Cq3m8qfdumjMMHxzULE=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-145-IUP7H748MlObYQBUBnVQQQ-1; Mon, 26 Apr 2021 15:35:33 -0400
-X-MC-Unique: IUP7H748MlObYQBUBnVQQQ-1
-Received: by mail-wr1-f69.google.com with SMTP id
- d15-20020a5d538f0000b02901027c18c581so19343605wrv.3
- for <qemu-riscv@nongnu.org>; Mon, 26 Apr 2021 12:35:33 -0700 (PDT)
+ bh=eMSZjv63DbKN4jYT+FhVyP0Dhkg/kXBNBsFuwQnf2tE=;
+ b=Ri1FPl/Z+NZ6urhbFkRe/krdWGo+JEaw+o6LKCo3mZDI3M4V71JAZkkaCOIv9anbXQmbXe
+ E9FVpJpldHg54M2B0UxwyoOZcHFN2gKJk+VsMdhusuDjuWI36w4/xvHjmIbiPA/592k6kH
+ adVM2HY2tfKwTgitvquEgX0vkADVBJk=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-396-Zi4IyumJNXO_MwKnpo0noQ-1; Mon, 26 Apr 2021 15:35:37 -0400
+X-MC-Unique: Zi4IyumJNXO_MwKnpo0noQ-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ o14-20020a5d474e0000b029010298882dadso19481176wrs.2
+ for <qemu-riscv@nongnu.org>; Mon, 26 Apr 2021 12:35:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=m3J2o1342PI/Nwq9CiNtPMcwkrmRbYFAeBct1A9GlkY=;
- b=Lzz8H9tT2DmpRIbn9xLjRSaZYUtHqmQ5g0pETAvmBzn6p8Uom0oUYjMqitkmqc8+Vs
- mOcUxZIQojvr34mz5JrYIdvZ8zAPvOFMrYrlVeOU0LUyOlFalqiP4b9f5gINYEv4mDDQ
- MYQ5HX5Fiw2a2qqZSNM/vIH9gYf+oeQ1KC1KVMrg51e8lIl95G/eMjKhiC9AdZbOh+Pf
- iufTNV5P6ocP0qp6pb9DCern8x7nStAPx6ajFsjoiYXkg8XRgEtxIFZoPETfjXJMDwUP
- HKuKQSx6kDypJ5XRC+dxY7u/4eR9Y4V7V4q1jYQJTbt97+u/COCzuehWzhF7T55TK5IV
- 679Q==
-X-Gm-Message-State: AOAM533ZxozBY2/oa9p43HU/haMxEuNgPEtRt0k8hHqia5V2rW1Nytgf
- BFJwLSgra/aJi0TiZIzZKptHspYo86Ypzk7tjdTmgQ4Yo3gD/fq8+O62Z42QRTL1TFDo+/T0xp7
- 13g6tKz04LFXGS2s=
-X-Received: by 2002:a05:600c:2cd6:: with SMTP id
- l22mr14768506wmc.160.1619465732098; 
- Mon, 26 Apr 2021 12:35:32 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzXqNoDYJSJBVuKEOCsjaj69O8GsYv1GJb+RSGtbi7V1NKSZMRw/Y6KTl0UTxKt42tLmXa42A==
-X-Received: by 2002:a05:600c:2cd6:: with SMTP id
- l22mr14768489wmc.160.1619465731909; 
- Mon, 26 Apr 2021 12:35:31 -0700 (PDT)
+ bh=eMSZjv63DbKN4jYT+FhVyP0Dhkg/kXBNBsFuwQnf2tE=;
+ b=TjfU42IkmXTD0bbnkBQnorRUQi5SJEsmLIhLw1bn5FcCX4eJ4iVyPff0BPGj7veaVL
+ Lnnkmwv2CXZfPYXX1PLUs1bhOVj0Wc8yns32QU/4GQmCqdpqcu2antqEiVR1GX2O6RGU
+ HEoTTgo8GkTHtWbnWsd9uhXq0Ra5KmtoZynVL/GaGAykhVln3ycf2gHske6NWar9S5sZ
+ 9T7AANxUOIulsZn3uZYYeJtVfbW0rNgiWW4R7YDUCr61yufwH2zzh+DAvU8uZuNah0E8
+ buP8JC0RjK8K+X7+SxeO1LvBdpG0D1pmIKVKAaRIPy9KVIsxUfJUYowPfP/5uKpHuLTA
+ aRTQ==
+X-Gm-Message-State: AOAM530yJAVhYQMPWJ4Vk/hYdsYnqzxeddMIS/l+08eH2wN0GQGwCqYx
+ /QJGqty6AH0aSkjUgCwyWon0yeqQwck+EFuUupNZGTCnNcX7na/+MVE6GA6qDLYfAQ02tahMzgr
+ Z2rzoYH9sJpj1iQ4=
+X-Received: by 2002:adf:e60e:: with SMTP id p14mr24413107wrm.427.1619465736735; 
+ Mon, 26 Apr 2021 12:35:36 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwCarOUwZMLYiZkUvUXG/efo8ACPEIazzLFmUDWCbopLkFW0zGGmVl7g4PbDhOalnBj4dY8Ew==
+X-Received: by 2002:adf:e60e:: with SMTP id p14mr24413088wrm.427.1619465736601; 
+ Mon, 26 Apr 2021 12:35:36 -0700 (PDT)
 Received: from localhost.localdomain (39.red-81-40-121.staticip.rima-tde.net.
  [81.40.121.39])
- by smtp.gmail.com with ESMTPSA id i11sm1269242wrp.56.2021.04.26.12.35.30
+ by smtp.gmail.com with ESMTPSA id g6sm1548706wrr.63.2021.04.26.12.35.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Apr 2021 12:35:31 -0700 (PDT)
+ Mon, 26 Apr 2021 12:35:36 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
  Laszlo Ersek <lersek@redhat.com>, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>
-Subject: [PATCH 2/7] hw/nvram: Rename FW_CFG_MIPS as generic FW_CFG Kconfig
- symbol
-Date: Mon, 26 Apr 2021 21:35:15 +0200
-Message-Id: <20210426193520.4115528-3-philmd@redhat.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Subject: [PATCH 3/7] hw/nvram: Declare FW_CFG_DMA Kconfig symbol in hw/nvram/
+Date: Mon, 26 Apr 2021 21:35:16 +0200
+Message-Id: <20210426193520.4115528-4-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.3
 In-Reply-To: <20210426193520.4115528-1-philmd@redhat.com>
 References: <20210426193520.4115528-1-philmd@redhat.com>
@@ -76,7 +69,7 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=philmd@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=philmd@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -29
 X-Spam_score: -3.0
@@ -97,62 +90,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Apr 2021 19:35:40 -0000
+X-List-Received-Date: Mon, 26 Apr 2021 19:35:43 -0000
 
-Targets using the fw_cfg device might have architecture specific
-keys. If so, they define the fw_cfg_arch_key_name() function.
-
-The use of FW_CFG_MIPS is not MIPS-specific, it is simply the
-architectural implementation. Rename it using the generic 'FW_CFG'
-and move the Kconfig declaration in hw/nvram/ where fw_cfg code
-is maintained.
+fw_cfg related files are maintained in hw/nvram/, so it makes
+sense to declare the FW_CFG_DMA Kconfig symbol there, along
+with the FW_CFG one.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- hw/mips/Kconfig     | 5 +----
- hw/mips/meson.build | 2 +-
- hw/nvram/Kconfig    | 3 +++
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ hw/display/Kconfig | 3 ---
+ hw/nvram/Kconfig   | 4 ++++
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/hw/mips/Kconfig b/hw/mips/Kconfig
-index aadd436bf4e..bbc6b9c1d11 100644
---- a/hw/mips/Kconfig
-+++ b/hw/mips/Kconfig
-@@ -42,7 +42,7 @@ config LOONGSON3V
-     select PCI_DEVICES
-     select PCI_EXPRESS_GENERIC_BRIDGE
-     select MSI_NONBROKEN
--    select FW_CFG_MIPS
-+    select FW_CFG
- 
- config MIPS_CPS
+diff --git a/hw/display/Kconfig b/hw/display/Kconfig
+index ca46b5830e7..0e4bb596c43 100644
+--- a/hw/display/Kconfig
++++ b/hw/display/Kconfig
+@@ -6,9 +6,6 @@ config DDC
+ config EDID
      bool
-@@ -50,6 +50,3 @@ config MIPS_CPS
  
- config MIPS_BOSTON
-     bool
--
--config FW_CFG_MIPS
+-config FW_CFG_DMA
 -    bool
-diff --git a/hw/mips/meson.build b/hw/mips/meson.build
-index 1195716dc73..893e56f7453 100644
---- a/hw/mips/meson.build
-+++ b/hw/mips/meson.build
-@@ -1,6 +1,6 @@
- mips_ss = ss.source_set()
- mips_ss.add(files('bootloader.c', 'mips_int.c'))
--mips_ss.add(when: 'CONFIG_FW_CFG_MIPS', if_true: files('fw_cfg.c'))
-+mips_ss.add(when: 'CONFIG_FW_CFG', if_true: files('fw_cfg.c'))
- mips_ss.add(when: 'CONFIG_FULOONG', if_true: files('fuloong2e.c'))
- mips_ss.add(when: 'CONFIG_LOONGSON3V', if_true: files('loongson3_bootp.c', 'loongson3_virt.c'))
- mips_ss.add(when: 'CONFIG_JAZZ', if_true: files('jazz.c'))
+-
+ config VGA_CIRRUS
+     bool
+     default y if PCI_DEVICES
 diff --git a/hw/nvram/Kconfig b/hw/nvram/Kconfig
-index e872fcb1941..cab1070375f 100644
+index cab1070375f..59fac45c315 100644
 --- a/hw/nvram/Kconfig
 +++ b/hw/nvram/Kconfig
-@@ -1,3 +1,6 @@
-+config FW_CFG
+@@ -1,6 +1,10 @@
+ config FW_CFG
+     bool
+ 
++config FW_CFG_DMA
 +    bool
++    select FW_CFG
 +
  config DS1225Y
      bool
