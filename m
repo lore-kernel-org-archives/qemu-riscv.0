@@ -1,57 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lb71S-0000UQ-VQ
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Apr 2021 15:35:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54306)
+	id 1lb71U-0000Yx-Pw
+	for mharc-qemu-riscv@gnu.org; Mon, 26 Apr 2021 15:36:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54342)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lb71R-0000Qo-KC
- for qemu-riscv@nongnu.org; Mon, 26 Apr 2021 15:35:57 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:37141)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lb71T-0000UR-0L
+ for qemu-riscv@nongnu.org; Mon, 26 Apr 2021 15:35:59 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:33979)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lb71L-0000AH-2Q
- for qemu-riscv@nongnu.org; Mon, 26 Apr 2021 15:35:57 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lb71Q-0000HI-LK
+ for qemu-riscv@nongnu.org; Mon, 26 Apr 2021 15:35:58 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1619465750;
+ s=mimecast20190719; t=1619465756;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=uoXlpYDNcisrlAbO/UUpY9wHK6QDGT6jB/1qXMxl4wc=;
- b=Cf+x5OLmmPk+sAvYARbKbUDKkpczKIUUyxn+fB9NULDtikuHGk0+hs/HsbnoVB7AQ57PIl
- k3xyvw7QePwjKGMS6CMLfThxx+fdZZX/ggs8CV+YYZVCdKEI+/SkkqAuUGhW004oL4C8oe
- RUjc5v29rf/OoFWRh88mUfDUWDttRHY=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-250-e-A6mIFONdalSYIN3Vl5_A-1; Mon, 26 Apr 2021 15:35:48 -0400
-X-MC-Unique: e-A6mIFONdalSYIN3Vl5_A-1
-Received: by mail-wr1-f70.google.com with SMTP id
- 89-20020adf83e20000b029010c35eb9917so1576417wre.1
- for <qemu-riscv@nongnu.org>; Mon, 26 Apr 2021 12:35:47 -0700 (PDT)
+ bh=/NBJrN/GlacMceBg1qLAcbh146RyM7XsMz2+vmFelAU=;
+ b=buSRupJuLPv9/pSUCZYn3qB56GofCbpi7LRUiDz0HEhZdtR3bmUCw5snyqmoONUvPtNRqZ
+ uMnPSYlg96Na+QLrSk+S5S+MLuw4scAB57pxjXqGhMgh4siWkwoTyqHbZKqsxnsMnayYIr
+ EQcCzYTJFibgL8C1bJQvlRZjzS6E39g=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-333-CIPXYVtgNX2kF1oUr3PwuA-1; Mon, 26 Apr 2021 15:35:53 -0400
+X-MC-Unique: CIPXYVtgNX2kF1oUr3PwuA-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ 61-20020adf84430000b029010b4cd88298so2392987wrf.21
+ for <qemu-riscv@nongnu.org>; Mon, 26 Apr 2021 12:35:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=uoXlpYDNcisrlAbO/UUpY9wHK6QDGT6jB/1qXMxl4wc=;
- b=MQw+gozA/QeXmXA6D/3oIxSaZkAPTpwyNXs6p5n7Pw+U8bPYnpfHtE5+YC0+PO31J1
- 3xOBLcu2X2JwXmFcoN5zlWjxtJF7YaYX1s2w6pIIrf+jpEcJMSgf7qWvqrRziNUdpFxx
- 9YAQip9RNIYshnLC54ti8X3QXYW6G4jmhDW6xeG8skAkhNpxBUz2ML+jSxep2mrGkbik
- b+LOjRb64oOudl5i2bNBdY4cPjHHVOr53DTJvEn07RNWrfIoYL+uuhprlAaEV5EN4Zlk
- taCWSRtwLprWxPrPyWF3hX3ApJNmCH/l/J6aFH3vwlmn6+0taZzmJgl/d2pRUstnAIo4
- ZmKA==
-X-Gm-Message-State: AOAM532lBLa56BOGNFnSTYXz6LIwx9zR5Rr7rUx8Q9exXt3TNPh1y2L0
- 0UniVGOe7Sdi9f3GWuZnypv0+e4Gw1rX0ubH12oukNEOCiqwMm2ewbiQMijUxQ2koDWf9szbA4t
- QvA09RePMsz/vovQ=
-X-Received: by 2002:a05:6000:12ca:: with SMTP id
- l10mr18376201wrx.145.1619465746787; 
- Mon, 26 Apr 2021 12:35:46 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwI96ZTANWZjfJONUkNwrqi8hhrvWBdNhqFQRXfNfB3PusmpCZuLW8R0wrQdeXofl0jkM5HaQ==
-X-Received: by 2002:a05:6000:12ca:: with SMTP id
- l10mr18376193wrx.145.1619465746673; 
- Mon, 26 Apr 2021 12:35:46 -0700 (PDT)
+ bh=/NBJrN/GlacMceBg1qLAcbh146RyM7XsMz2+vmFelAU=;
+ b=KgHRWD6uE1Kw3KiqWE7i5aK6GvvJ/0SI8i/qgIq8UDhbvYAdTbUb3+g7l+qiwD48w0
+ PsPB28Wuxb9w6aHGvNDXVu3Kf2jfSMHpsPlUEaN2LsKQbx2KthG2E/sz8gn7zcOM2xLM
+ T9njBE5f70zPNql60vXCL4T2DdegQ3gfG183QY8dn7WII7hlH1plO3hRQspJ1v2Jk1Wn
+ z0TaX6N9HnyWv8x8HCJz73HnuT+0ib5k8XoT31O6dFhDxEyQIg8iC2Zw+QOGFGzvCAv9
+ XvIUqgcmAz88IoFJU6joPG2eCkTz09pv3lEkAQLpLiRvDapJVuishXzSfIyiTZClZpZm
+ 3Ymg==
+X-Gm-Message-State: AOAM532hZRs9QTlS3GHV/jrK/GwyVf6FVyLV/yjxsp+qlNhogJkXhbIf
+ zRSRPAHw53mWic5hwOwLlwEkRr025qI9zkUWzsunKhlWAyrHgmbrutFPW3aqWucU1dBjIo9wuKP
+ UCi0N8ai+vLUNBSs=
+X-Received: by 2002:adf:e7c2:: with SMTP id e2mr5882920wrn.180.1619465751927; 
+ Mon, 26 Apr 2021 12:35:51 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyumkVOaHD3aoGHNGy6imfLuSzZSB+RGcJEgtKiYDmsVoADFCUmJ8o9mNaeKN1+mXVVQ6HPvw==
+X-Received: by 2002:adf:e7c2:: with SMTP id e2mr5882895wrn.180.1619465751734; 
+ Mon, 26 Apr 2021 12:35:51 -0700 (PDT)
 Received: from localhost.localdomain (39.red-81-40-121.staticip.rima-tde.net.
  [81.40.121.39])
- by smtp.gmail.com with ESMTPSA id k188sm484762wmf.18.2021.04.26.12.35.45
+ by smtp.gmail.com with ESMTPSA id z66sm464116wmc.4.2021.04.26.12.35.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Apr 2021 12:35:46 -0700 (PDT)
+ Mon, 26 Apr 2021 12:35:51 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
@@ -60,15 +58,13 @@ Cc: Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- Helge Deller <deller@gmx.de>, "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>,
- David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>
-Subject: [PATCH 5/7] hw: Have machines Kconfig-select FW_CFG
-Date: Mon, 26 Apr 2021 21:35:18 +0200
-Message-Id: <20210426193520.4115528-6-philmd@redhat.com>
+ Helge Deller <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Subject: [PATCH 6/7] hw/{arm,hppa,riscv}: Add fw_cfg arch-specific stub
+Date: Mon, 26 Apr 2021 21:35:19 +0200
+Message-Id: <20210426193520.4115528-7-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.3
 In-Reply-To: <20210426193520.4115528-1-philmd@redhat.com>
 References: <20210426193520.4115528-1-philmd@redhat.com>
@@ -79,7 +75,7 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=philmd@redhat.com;
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=philmd@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -29
 X-Spam_score: -3.0
@@ -87,7 +83,7 @@ X-Spam_bar: ---
 X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.219,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -100,114 +96,151 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Apr 2021 19:35:58 -0000
+X-List-Received-Date: Mon, 26 Apr 2021 19:35:59 -0000
 
-Beside the loongson3-virt machine (MIPS), the following machines
-also use the fw_cfg device:
+The ARM, HPPA and RISC-V architectures don't declare any fw_cfg
+specific key. To simplify the buildsys machinery and allow building
+QEMU without the fw_cfg device (in the next commit), first add a
+per-architecture empty stub defining the fw_cfg_arch_key_name().
 
-- ARM: virt & sbsa-ref
-- HPPA: generic machine
-- X86: ACPI based (pc & microvm)
-- PPC64: various
-- SPARC: sun4m & sun4u
-
-Add their FW_CFG Kconfig dependency.
+Update the MAINTAINERS section to cover the various target-specific
+fw_cfg.c files.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- hw/arm/Kconfig     | 2 ++
- hw/hppa/Kconfig    | 1 +
- hw/i386/Kconfig    | 2 ++
- hw/ppc/Kconfig     | 1 +
- hw/sparc/Kconfig   | 1 +
- hw/sparc64/Kconfig | 1 +
- 6 files changed, 8 insertions(+)
+ hw/arm/fw_cfg.c      | 19 +++++++++++++++++++
+ hw/hppa/fw_cfg.c     | 19 +++++++++++++++++++
+ hw/riscv/fw_cfg.c    | 19 +++++++++++++++++++
+ MAINTAINERS          |  2 +-
+ hw/arm/meson.build   |  1 +
+ hw/hppa/meson.build  |  1 +
+ hw/riscv/meson.build |  1 +
+ 7 files changed, 61 insertions(+), 1 deletion(-)
+ create mode 100644 hw/arm/fw_cfg.c
+ create mode 100644 hw/hppa/fw_cfg.c
+ create mode 100644 hw/riscv/fw_cfg.c
 
-diff --git a/hw/arm/Kconfig b/hw/arm/Kconfig
-index 8c37cf00da7..3b2641e39dc 100644
---- a/hw/arm/Kconfig
-+++ b/hw/arm/Kconfig
-@@ -8,6 +8,7 @@ config ARM_VIRT
-     imply TPM_TIS_SYSBUS
-     select ARM_GIC
-     select ACPI
-+    select FW_CFG
-     select ARM_SMMUV3
-     select GPIO_KEY
-     select FW_CFG_DMA
-@@ -216,6 +217,7 @@ config SBSA_REF
-     select PL061 # GPIO
-     select USB_EHCI_SYSBUS
-     select WDT_SBSA
-+    select FW_CFG
+diff --git a/hw/arm/fw_cfg.c b/hw/arm/fw_cfg.c
+new file mode 100644
+index 00000000000..de2bca9c76c
+--- /dev/null
++++ b/hw/arm/fw_cfg.c
+@@ -0,0 +1,19 @@
++/*
++ * QEMU fw_cfg helpers (ARM specific)
++ *
++ * Copyright (c) 2021 Red Hat, Inc.
++ *
++ * Author:
++ *   Philippe Mathieu-Daudé <philmd@redhat.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "hw/mips/fw_cfg.h"
++#include "hw/nvram/fw_cfg.h"
++
++const char *fw_cfg_arch_key_name(uint16_t key)
++{
++    return NULL;
++}
+diff --git a/hw/hppa/fw_cfg.c b/hw/hppa/fw_cfg.c
+new file mode 100644
+index 00000000000..322b03068c7
+--- /dev/null
++++ b/hw/hppa/fw_cfg.c
+@@ -0,0 +1,19 @@
++/*
++ * QEMU fw_cfg helpers (HPPA specific)
++ *
++ * Copyright (c) 2021 Red Hat, Inc.
++ *
++ * Author:
++ *   Philippe Mathieu-Daudé <philmd@redhat.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "hw/mips/fw_cfg.h"
++#include "hw/nvram/fw_cfg.h"
++
++const char *fw_cfg_arch_key_name(uint16_t key)
++{
++    return NULL;
++}
+diff --git a/hw/riscv/fw_cfg.c b/hw/riscv/fw_cfg.c
+new file mode 100644
+index 00000000000..8e3d2a8bdea
+--- /dev/null
++++ b/hw/riscv/fw_cfg.c
+@@ -0,0 +1,19 @@
++/*
++ * QEMU fw_cfg helpers (RISC-V specific)
++ *
++ * Copyright (c) 2021 Red Hat, Inc.
++ *
++ * Author:
++ *   Philippe Mathieu-Daudé <philmd@redhat.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "hw/mips/fw_cfg.h"
++#include "hw/nvram/fw_cfg.h"
++
++const char *fw_cfg_arch_key_name(uint16_t key)
++{
++    return NULL;
++}
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 36055f14c59..ab8f030d4c0 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -2162,7 +2162,7 @@ R: Laszlo Ersek <lersek@redhat.com>
+ R: Gerd Hoffmann <kraxel@redhat.com>
+ S: Supported
+ F: docs/specs/fw_cfg.txt
+-F: hw/nvram/fw_cfg*.c
++F: hw/*/fw_cfg*.c
+ F: stubs/fw_cfg.c
+ F: include/hw/nvram/fw_cfg.h
+ F: include/standard-headers/linux/qemu_fw_cfg.h
+diff --git a/hw/arm/meson.build b/hw/arm/meson.build
+index be39117b9b6..fd278de916f 100644
+--- a/hw/arm/meson.build
++++ b/hw/arm/meson.build
+@@ -1,6 +1,7 @@
+ arm_ss = ss.source_set()
+ arm_ss.add(files('boot.c'), fdt)
+ arm_ss.add(when: 'CONFIG_PLATFORM_BUS', if_true: files('sysbus-fdt.c'))
++arm_ss.add(when: 'CONFIG_FW_CFG', if_true: files('fw_cfg.c'))
+ arm_ss.add(when: 'CONFIG_ARM_VIRT', if_true: files('virt.c'))
+ arm_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
+ arm_ss.add(when: 'CONFIG_DIGIC', if_true: files('digic_boards.c'))
+diff --git a/hw/hppa/meson.build b/hw/hppa/meson.build
+index 1deae83aee8..10494cc24b7 100644
+--- a/hw/hppa/meson.build
++++ b/hw/hppa/meson.build
+@@ -1,4 +1,5 @@
+ hppa_ss = ss.source_set()
+ hppa_ss.add(when: 'CONFIG_DINO', if_true: files('pci.c', 'machine.c', 'dino.c', 'lasi.c'))
++hppa_ss.add(when: 'CONFIG_FW_CFG', if_true: files('fw_cfg.c'))
  
- config SABRELITE
-     bool
-diff --git a/hw/hppa/Kconfig b/hw/hppa/Kconfig
-index 22948db0256..45f40e09224 100644
---- a/hw/hppa/Kconfig
-+++ b/hw/hppa/Kconfig
-@@ -14,3 +14,4 @@ config DINO
-     select LASIPS2
-     select PARALLEL
-     select ARTIST
-+    select FW_CFG
-diff --git a/hw/i386/Kconfig b/hw/i386/Kconfig
-index 7f91f30877f..9e4039a2dce 100644
---- a/hw/i386/Kconfig
-+++ b/hw/i386/Kconfig
-@@ -52,6 +52,7 @@ config PC_ACPI
-     select SMBUS_EEPROM
-     select PFLASH_CFI01
-     depends on ACPI_SMBUS
-+    select FW_CFG
+ hw_arch += {'hppa': hppa_ss}
+diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+index 275c0f7eb7c..ab4d3adb924 100644
+--- a/hw/riscv/meson.build
++++ b/hw/riscv/meson.build
+@@ -8,5 +8,6 @@
+ riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
+ riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
+ riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
++riscv_ss.add(when: 'CONFIG_FW_CFG', if_true: files('fw_cfg.c'))
  
- config I440FX
-     bool
-@@ -106,6 +107,7 @@ config MICROVM
-     select ACPI_HW_REDUCED
-     select PCI_EXPRESS_GENERIC_BRIDGE
-     select USB_XHCI_SYSBUS
-+    select FW_CFG
- 
- config X86_IOMMU
-     bool
-diff --git a/hw/ppc/Kconfig b/hw/ppc/Kconfig
-index d11dc30509d..a7ba8283bf1 100644
---- a/hw/ppc/Kconfig
-+++ b/hw/ppc/Kconfig
-@@ -131,6 +131,7 @@ config VIRTEX
- # Only used by 64-bit targets
- config FW_CFG_PPC
-     bool
-+    select FW_CFG
- 
- config FDT_PPC
-     bool
-diff --git a/hw/sparc/Kconfig b/hw/sparc/Kconfig
-index 8dcb10086fd..267bf45fa21 100644
---- a/hw/sparc/Kconfig
-+++ b/hw/sparc/Kconfig
-@@ -15,6 +15,7 @@ config SUN4M
-     select STP2000
-     select CHRP_NVRAM
-     select OR_IRQ
-+    select FW_CFG
- 
- config LEON3
-     bool
-diff --git a/hw/sparc64/Kconfig b/hw/sparc64/Kconfig
-index 980a201bb73..c17b34b9d5b 100644
---- a/hw/sparc64/Kconfig
-+++ b/hw/sparc64/Kconfig
-@@ -13,6 +13,7 @@ config SUN4U
-     select PCKBD
-     select SIMBA
-     select CHRP_NVRAM
-+    select FW_CFG
- 
- config NIAGARA
-     bool
+ hw_arch += {'riscv': riscv_ss}
 -- 
 2.26.3
 
