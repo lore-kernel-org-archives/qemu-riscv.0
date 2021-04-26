@@ -1,84 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lb71Y-0000hv-NQ
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Apr 2021 15:36:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54408)
+	id 1lb9Kk-0005zJ-10
+	for mharc-qemu-riscv@gnu.org; Mon, 26 Apr 2021 18:04:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53556)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lb71X-0000fn-M0
- for qemu-riscv@nongnu.org; Mon, 26 Apr 2021 15:36:03 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:33971)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1lb9KY-0005xu-Je; Mon, 26 Apr 2021 18:03:52 -0400
+Received: from zero.eik.bme.hu ([152.66.115.2]:22741)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lb71U-0000Kj-Gg
- for qemu-riscv@nongnu.org; Mon, 26 Apr 2021 15:36:03 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1619465759;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/SwK7FX3kH1UWtK3h3/1AavB3Zp9Tje3hQEQT9u6kU8=;
- b=bTcCzCsJoyopFVbLfDA4rtz0b5ErYzeocUXSq/yL3YKZMHA49TmXByoTd3+F082XVWWgzz
- aW2CYAcJ2QIcNg98NiGN7hkAlyemKIrCOuUdtwVjq6FRr/eFokb9Jjwq73cKwjOb8QcoN5
- 3aI66QRgD7o+iNNFqDzEgbFONmuin2Y=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-601-gzN-eFBPO16OpWg0LvTSPQ-1; Mon, 26 Apr 2021 15:35:57 -0400
-X-MC-Unique: gzN-eFBPO16OpWg0LvTSPQ-1
-Received: by mail-wr1-f70.google.com with SMTP id
- d15-20020a5d538f0000b02901027c18c581so19344080wrv.3
- for <qemu-riscv@nongnu.org>; Mon, 26 Apr 2021 12:35:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=/SwK7FX3kH1UWtK3h3/1AavB3Zp9Tje3hQEQT9u6kU8=;
- b=O5zzDUd2Gml9jm1Zi55kgdBCHdm5gc4fTdRd0iSM/d61qP3ynMe5KKSgkVRB+K/6da
- GdqjbKoo2mzPjnA8kSFLj4u9xeli2tDalCMfDvDhKs9XlqyWGOJGI3HdU8cKjxeNdCbl
- uOvEk33FMdQGGSuUcImrROZ6vQvCDpnMhZJXuCLQNcR8oqZ7V/Pi52OMQ1Vg2WVtZfqk
- /g8mfr42tBrWEHI6nOOjikDJJ66YKWMsjnVnSa6QOY0TwVsFmW53kb0t+85gu8x5ZwGk
- xec42Q15U/dJSwvfCmHrItinRpF+WqUTD1zBL+YLtSTeQZ1kOJ46MVzMY8LTw2cxYLZF
- OZoQ==
-X-Gm-Message-State: AOAM531J+ZtWv89z3Ypf/INfC0BEBnY3jdKjI/ShhtvbEt00luaO+zyo
- GzCUbYREe2TrU7ICbVv3fZpDFcR8ClNZqxiYuFu/N/KNm/Ln+w6NPITQXRvb6IODT2lk6YFDx72
- WZNIUgA+pUYGAUvU=
-X-Received: by 2002:a1c:c911:: with SMTP id f17mr21525706wmb.45.1619465756708; 
- Mon, 26 Apr 2021 12:35:56 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyCXFZJfuCsZD6GeozfGMj7nTkyuZ7WzQqPIkaCKCWCw6PWoyIT0Kn90gGXuY1yLPwpzSQBTQ==
-X-Received: by 2002:a1c:c911:: with SMTP id f17mr21525698wmb.45.1619465756518; 
- Mon, 26 Apr 2021 12:35:56 -0700 (PDT)
-Received: from localhost.localdomain (39.red-81-40-121.staticip.rima-tde.net.
- [81.40.121.39])
- by smtp.gmail.com with ESMTPSA id t63sm18527743wma.20.2021.04.26.12.35.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Apr 2021 12:35:56 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
- Laszlo Ersek <lersek@redhat.com>, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PATCH 7/7] hw/nvram: Do not build FW_CFG if not required
-Date: Mon, 26 Apr 2021 21:35:20 +0200
-Message-Id: <20210426193520.4115528-8-philmd@redhat.com>
-X-Mailer: git-send-email 2.26.3
-In-Reply-To: <20210426193520.4115528-1-philmd@redhat.com>
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1lb9KU-0002ZI-NW; Mon, 26 Apr 2021 18:03:49 -0400
+Received: from zero.eik.bme.hu (blah.eik.bme.hu [152.66.115.182])
+ by localhost (Postfix) with SMTP id 53D7B74581E;
+ Tue, 27 Apr 2021 00:03:42 +0200 (CEST)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id 2463574570D; Tue, 27 Apr 2021 00:03:42 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id 21C597456B4;
+ Tue, 27 Apr 2021 00:03:42 +0200 (CEST)
+Date: Tue, 27 Apr 2021 00:03:42 +0200 (CEST)
+From: BALATON Zoltan <balaton@eik.bme.hu>
+To: =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@redhat.com>
+cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>, 
+ Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org, 
+ Eduardo Habkost <ehabkost@redhat.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Helge Deller <deller@gmx.de>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Greg Kurz <groug@kaod.org>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
+ Gerd Hoffmann <kraxel@redhat.com>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Laszlo Ersek <lersek@redhat.com>, 
+ Artyom Tarasenko <atar4qemu@gmail.com>, 
+ David Gibson <david@gibson.dropbear.id.au>
+Subject: Re: [PATCH 5/7] hw: Have machines Kconfig-select FW_CFG
+In-Reply-To: <20210426193520.4115528-6-philmd@redhat.com>
+Message-ID: <aec5eea-8beb-a59-fda1-4c1ba4374c5@eik.bme.hu>
 References: <20210426193520.4115528-1-philmd@redhat.com>
+ <20210426193520.4115528-6-philmd@redhat.com>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=philmd@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -29
-X-Spam_score: -3.0
-X-Spam_bar: ---
-X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.219,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: multipart/mixed;
+ boundary="3866299591-991902759-1619474622=:18331"
+X-Spam-Probability: 9%
+Received-SPF: pass client-ip=152.66.115.2; envelope-from=balaton@eik.bme.hu;
+ helo=zero.eik.bme.hu
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -91,100 +59,139 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Apr 2021 19:36:03 -0000
+X-List-Received-Date: Mon, 26 Apr 2021 22:03:57 -0000
 
-If the Kconfig 'FW_CFG' symbol is not selected, it is pointless
-to build the fw_cfg device. Update the stubs.
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
----
- stubs/fw_cfg.c       | 49 ++++++++++++++++++++++++++++++++++++++++++--
- hw/nvram/meson.build |  2 +-
- 2 files changed, 48 insertions(+), 3 deletions(-)
+--3866299591-991902759-1619474622=:18331
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8BIT
 
-diff --git a/stubs/fw_cfg.c b/stubs/fw_cfg.c
-index bb1e3c8aa95..ac1e539c93f 100644
---- a/stubs/fw_cfg.c
-+++ b/stubs/fw_cfg.c
-@@ -1,7 +1,7 @@
- /*
-  * fw_cfg stubs
-  *
-- * Copyright (c) 2019 Red Hat, Inc.
-+ * Copyright (c) 2019,2021 Red Hat, Inc.
-  *
-  * Author:
-  *   Philippe Mathieu-Daudé <philmd@redhat.com>
-@@ -13,9 +13,54 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qapi/error.h"
- #include "hw/nvram/fw_cfg.h"
- 
--const char *fw_cfg_arch_key_name(uint16_t key)
-+FWCfgState *fw_cfg_find(void)
- {
-     return NULL;
- }
-+
-+bool fw_cfg_add_from_generator(FWCfgState *s, const char *filename,
-+                               const char *gen_id, Error **errp)
-+{
-+    error_setg(errp, "fw-cfg device not built in");
-+
-+    return true;
-+}
-+
-+void fw_cfg_add_file(FWCfgState *s,  const char *filename,
-+                     void *data, size_t len)
-+{
-+    g_assert_not_reached();
-+}
-+
-+void fw_cfg_add_file_callback(FWCfgState *s,  const char *filename,
-+                              FWCfgCallback select_cb,
-+                              FWCfgWriteCallback write_cb,
-+                              void *callback_opaque,
-+                              void *data, size_t len, bool read_only)
-+{
-+    g_assert_not_reached();
-+}
-+
-+void *fw_cfg_modify_file(FWCfgState *s, const char *filename,
-+                        void *data, size_t len)
-+{
-+    g_assert_not_reached();
-+}
-+
-+void fw_cfg_set_order_override(FWCfgState *s, int order)
-+{
-+    g_assert_not_reached();
-+}
-+
-+void fw_cfg_reset_order_override(FWCfgState *s)
-+{
-+    g_assert_not_reached();
-+}
-+
-+bool fw_cfg_dma_enabled(void *opaque)
-+{
-+    g_assert_not_reached();
-+}
-diff --git a/hw/nvram/meson.build b/hw/nvram/meson.build
-index fd2951a860f..99e12224483 100644
---- a/hw/nvram/meson.build
-+++ b/hw/nvram/meson.build
-@@ -1,7 +1,7 @@
- # QOM interfaces must be available anytime QOM is used.
- qom_ss.add(files('fw_cfg-interface.c'))
- 
--softmmu_ss.add(files('fw_cfg.c'))
-+softmmu_ss.add(when: 'CONFIG_FW_CFG', if_true: files('fw_cfg.c'))
- softmmu_ss.add(when: 'CONFIG_CHRP_NVRAM', if_true: files('chrp_nvram.c'))
- softmmu_ss.add(when: 'CONFIG_DS1225Y', if_true: files('ds1225y.c'))
- softmmu_ss.add(when: 'CONFIG_NMC93XX_EEPROM', if_true: files('eeprom93xx.c'))
--- 
-2.26.3
+On Mon, 26 Apr 2021, Philippe Mathieu-Daudé wrote:
+> Beside the loongson3-virt machine (MIPS), the following machines
+> also use the fw_cfg device:
+>
+> - ARM: virt & sbsa-ref
+> - HPPA: generic machine
+> - X86: ACPI based (pc & microvm)
+> - PPC64: various
+> - SPARC: sun4m & sun4u
+>
+> Add their FW_CFG Kconfig dependency.
+>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+> ---
+> hw/arm/Kconfig     | 2 ++
+> hw/hppa/Kconfig    | 1 +
+> hw/i386/Kconfig    | 2 ++
+> hw/ppc/Kconfig     | 1 +
+> hw/sparc/Kconfig   | 1 +
+> hw/sparc64/Kconfig | 1 +
+> 6 files changed, 8 insertions(+)
+>
+> diff --git a/hw/arm/Kconfig b/hw/arm/Kconfig
+> index 8c37cf00da7..3b2641e39dc 100644
+> --- a/hw/arm/Kconfig
+> +++ b/hw/arm/Kconfig
+> @@ -8,6 +8,7 @@ config ARM_VIRT
+>     imply TPM_TIS_SYSBUS
+>     select ARM_GIC
+>     select ACPI
+> +    select FW_CFG
+>     select ARM_SMMUV3
+>     select GPIO_KEY
+>     select FW_CFG_DMA
+> @@ -216,6 +217,7 @@ config SBSA_REF
+>     select PL061 # GPIO
+>     select USB_EHCI_SYSBUS
+>     select WDT_SBSA
+> +    select FW_CFG
+>
+> config SABRELITE
+>     bool
+> diff --git a/hw/hppa/Kconfig b/hw/hppa/Kconfig
+> index 22948db0256..45f40e09224 100644
+> --- a/hw/hppa/Kconfig
+> +++ b/hw/hppa/Kconfig
+> @@ -14,3 +14,4 @@ config DINO
+>     select LASIPS2
+>     select PARALLEL
+>     select ARTIST
+> +    select FW_CFG
+> diff --git a/hw/i386/Kconfig b/hw/i386/Kconfig
+> index 7f91f30877f..9e4039a2dce 100644
+> --- a/hw/i386/Kconfig
+> +++ b/hw/i386/Kconfig
+> @@ -52,6 +52,7 @@ config PC_ACPI
+>     select SMBUS_EEPROM
+>     select PFLASH_CFI01
+>     depends on ACPI_SMBUS
+> +    select FW_CFG
+>
+> config I440FX
+>     bool
+> @@ -106,6 +107,7 @@ config MICROVM
+>     select ACPI_HW_REDUCED
+>     select PCI_EXPRESS_GENERIC_BRIDGE
+>     select USB_XHCI_SYSBUS
+> +    select FW_CFG
+>
+> config X86_IOMMU
+>     bool
+> diff --git a/hw/ppc/Kconfig b/hw/ppc/Kconfig
+> index d11dc30509d..a7ba8283bf1 100644
+> --- a/hw/ppc/Kconfig
+> +++ b/hw/ppc/Kconfig
+> @@ -131,6 +131,7 @@ config VIRTEX
+> # Only used by 64-bit targets
+> config FW_CFG_PPC
+>     bool
+> +    select FW_CFG
 
+Why do we need a separate config option here if all it does is select 
+FW_CFG and also in meson.build it only seems to add fw_cfg.c? (Unlike 
+FW_CFG_DMA which seems to add other files so another option makes sense 
+for that case). Could we just use FW_CFG directly and drop the PPC 
+specific option like you did for MIPS?
+
+Also the comment saying "Only used by 64-bit targets" seems to be wrong as 
+it is also selected by MAC_OLDWORLD that's definitely a 32-bit machine 
+(and MAC_NEWWORLD that can be both 32 or 64 bit) so maybe this option used 
+to do something previously but now seems to be equivalent to just FW_CFG. 
+So could it be dropped and use FW_CFG instead to simplify this or what's 
+the reason to keep a PPC specific option for it?
+
+Regards,
+BALATON Zoltan
+
+>
+> config FDT_PPC
+>     bool
+> diff --git a/hw/sparc/Kconfig b/hw/sparc/Kconfig
+> index 8dcb10086fd..267bf45fa21 100644
+> --- a/hw/sparc/Kconfig
+> +++ b/hw/sparc/Kconfig
+> @@ -15,6 +15,7 @@ config SUN4M
+>     select STP2000
+>     select CHRP_NVRAM
+>     select OR_IRQ
+> +    select FW_CFG
+>
+> config LEON3
+>     bool
+> diff --git a/hw/sparc64/Kconfig b/hw/sparc64/Kconfig
+> index 980a201bb73..c17b34b9d5b 100644
+> --- a/hw/sparc64/Kconfig
+> +++ b/hw/sparc64/Kconfig
+> @@ -13,6 +13,7 @@ config SUN4U
+>     select PCKBD
+>     select SIMBA
+>     select CHRP_NVRAM
+> +    select FW_CFG
+>
+> config NIAGARA
+>     bool
+>
+--3866299591-991902759-1619474622=:18331--
 
