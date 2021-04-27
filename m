@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lbVqd-0006CU-Od
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Apr 2021 18:06:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57132)
+	id 1lbVqg-0006GD-Af
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Apr 2021 18:06:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57160)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1lbVqc-0006CK-P2; Tue, 27 Apr 2021 18:06:26 -0400
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634]:45650)
+ id 1lbVqe-0006Cj-5G; Tue, 27 Apr 2021 18:06:28 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d]:33709)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1lbVqa-0002fo-Tt; Tue, 27 Apr 2021 18:06:26 -0400
-Received: by mail-ej1-x634.google.com with SMTP id u3so12942801eja.12;
- Tue, 27 Apr 2021 15:06:23 -0700 (PDT)
+ id 1lbVqc-0002gm-6H; Tue, 27 Apr 2021 18:06:27 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id t4so8338843ejo.0;
+ Tue, 27 Apr 2021 15:06:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=5NCSBeXLLnQxRcsQBmTOFrJe1uMeKwEpgQvj+fl82v4=;
- b=T7kheJnPdbKDifHgaaQzgvOqGLXk85WkeUWZJhwG/efnfcoIy+8qZNpcuXD9a+y9ig
- 0frhqhEbBu9ThXRbkFVx+3MGoCCKV5wpfdqLfnKL0u9B2duJ4vBbtXmH+LfoWSbF2inm
- 9/MXMrsGDL7tj8drg6wBWT4YLLfAD+JQD5FDsyYvWGxv2lbYrVZU6RyJDUs0xfBKyA5I
- PABOQFvEB/52WXQ2r7MHXj7HSP/7Q10H7DeflfZnF/ZBQP0grxrqlh6gT4SYDKhyMSMq
- COmyBVCEu6NBh9mde2L757ZID1aIGcHloCyvf/9XoJ8temt3RzbTe5tm9NiTCpBo7lIE
- j04g==
+ bh=I5tnfyh15+1Hzqs2BbpAsHKgrqdCLD3z3hF5NAd03tM=;
+ b=S2Wx8WWW2OAr9xcdhR3wtjLBzqLk5RmrIOCYwtG7YP2jwcbHyGKp9sNBSQUcBwkwQh
+ AZ5VXm8Sy+BuKqqeUcFTqDTUk234X09am8WO3aJrf8TdXfM8mlQ3OHsWF+hxKH2ZCeQl
+ pzuVlxbf/OgZzchyfoTB6s1MH+Hr5e+9a7q75E65Ndmu3FO+WY9ze5aLOJBC1X0rPUgB
+ snccrh0okxsstYrky0XmiVPL/6Ft89TtCT4+XcJaXzPLOh0Q6+yVFlsj41CuJTy/OQD2
+ Zq32f74hKhbNAMOqkJcv7ptYlRop0Zcb3sLfQopgB3Xw28BAZ6gaak8kgeRvC4ic7pW8
+ mfCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=5NCSBeXLLnQxRcsQBmTOFrJe1uMeKwEpgQvj+fl82v4=;
- b=QDvCKzraoAqPjlL3B6YVE6tlywDrGl4n6h6PHO3buyh0raRBWavYs4YAq4X7AgnlhE
- VJGl8687Fa9bttlUXmjfqGp1KgtH3Sek6bypF9dIUWgCxHgg3xx2ciEUsfsML4LGtYf5
- szubmnbppCFUN6SGLJ7gIQmrhq6zvhV3VHq6/Xm5FtfjhduynsAnrXoErZUZeL43QCtf
- CjpbAb3en9ZjtRqa3f8HHRg8Q/QRdIhwdedKud4BkQ++To8lzK/y76AQOuvIQ7ydGu1H
- Q8CbNaSBbH5OK7lnGuCMGRNL3ksxmZ0PhlxWPdkKC0njEyzx0R6ExQFcfd5HG9sHpWcE
- AUyg==
-X-Gm-Message-State: AOAM53263TqxG2NnOt3pPS2/X+iZtUg+UXYQCplCsJKKTV0JOd/S1CGn
- de6fIEjVzpMCR7QqO9Qyus0=
-X-Google-Smtp-Source: ABdhPJzdXCNd/+mJpq6azZaoTiXfNFjKiVVVhR+yDMH7izvMi6ICOjaqUW/8fX8IoXa6dZP3S8Z5Lw==
-X-Received: by 2002:a17:907:397:: with SMTP id
- ss23mr8255581ejb.298.1619561182391; 
- Tue, 27 Apr 2021 15:06:22 -0700 (PDT)
+ bh=I5tnfyh15+1Hzqs2BbpAsHKgrqdCLD3z3hF5NAd03tM=;
+ b=gy5kjhAelE8Bo6q4itrlevROEI/obNH5U1mZwsvQ+xIFZ7sf77Ikp+agqcAD2gsOZ4
+ FAGOb48OfXzl+onQweKDO0AFUgBm9jDri7ELw/bnI03DG/H+4fceHGxArhxQzhICBsXF
+ YXpIlnOkor/xxJX55xqiIYz2devWqh4R57F14FJ0s59qpk2CaP+GUPBCMmvEf2O4y8SN
+ u+z+ta4J77tl7s0mzOc3CrEngX+hSex3KxvXkYefscH+woi/wRtlnyv57fWb19XSaZra
+ IJmvwwLMI3oAdATM4LCHJgHVRqI55o5OWvw+L4v3eUQVTjw1EhL0lvGVnKr4XZov5MZh
+ keog==
+X-Gm-Message-State: AOAM531xI+/3VNQSl3Abgkub4p0XIJgv7LvizC9gpjFjAERwiRgZnwbq
+ Hnshuy4ecJmg6WSwLoAqx29vNFoo+FRz74Y8aDMlRYhP
+X-Google-Smtp-Source: ABdhPJxeAr6TqoD2k48/VRSr1na7NS4HI+t4uI2eEGG4jYWgVFWV7nH6jD62G02I3MinZVLWnVARng==
+X-Received: by 2002:a17:906:4d02:: with SMTP id
+ r2mr13725591eju.464.1619561184587; 
+ Tue, 27 Apr 2021 15:06:24 -0700 (PDT)
 Received: from neptune.lab ([46.39.228.82])
- by smtp.googlemail.com with ESMTPSA id r10sm640049ejd.112.2021.04.27.15.06.21
+ by smtp.googlemail.com with ESMTPSA id r10sm640049ejd.112.2021.04.27.15.06.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Apr 2021 15:06:22 -0700 (PDT)
+ Tue, 27 Apr 2021 15:06:24 -0700 (PDT)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
 To: 
@@ -50,16 +50,16 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v8 1/6] [RISCV_PM] Add J-extension into RISC-V
-Date: Wed, 28 Apr 2021 01:06:10 +0300
-Message-Id: <20210427220615.12763-2-space.monkey.delivers@gmail.com>
+Subject: [PATCH v8 3/6] [RISCV_PM] Print new PM CSRs in QEMU logs
+Date: Wed, 28 Apr 2021 01:06:12 +0300
+Message-Id: <20210427220615.12763-4-space.monkey.delivers@gmail.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210427220615.12763-1-space.monkey.delivers@gmail.com>
 References: <20210427220615.12763-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::634;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x634.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -79,35 +79,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Apr 2021 22:06:27 -0000
+X-List-Received-Date: Tue, 27 Apr 2021 22:06:28 -0000
 
 Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.h | 2 ++
- 1 file changed, 2 insertions(+)
+ target/riscv/cpu.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0a33d387ba..0ea9fc65c8 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -72,6 +72,7 @@
- #define RVS RV('S')
- #define RVU RV('U')
- #define RVH RV('H')
-+#define RVJ RV('J')
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index c04911ec05..0682410f5d 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -287,6 +287,31 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval ", env->htval);
+         qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2 ", env->mtval2);
+     }
++    if (riscv_has_ext(env, RVJ)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mmte    ", env->mmte);
++        switch (env->priv) {
++        case PRV_U:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmbase ",
++                         env->upmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmmask ",
++                         env->upmmask);
++            break;
++        case PRV_S:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmbase ",
++                         env->spmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmmask ",
++                         env->spmmask);
++            break;
++        case PRV_M:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmbase ",
++                         env->mpmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmmask ",
++                         env->mpmmask);
++            break;
++        default:
++            g_assert_not_reached();
++        }
++    }
+ #endif
  
- /* S extension denotes that Supervisor mode exists, however it is possible
-    to have a core that support S mode but does not have an MMU and there
-@@ -291,6 +292,7 @@ struct RISCVCPU {
-         bool ext_s;
-         bool ext_u;
-         bool ext_h;
-+        bool ext_j;
-         bool ext_v;
-         bool ext_counters;
-         bool ext_ifencei;
+     for (i = 0; i < 32; i++) {
 -- 
 2.20.1
 
