@@ -1,54 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lbCyG-00044j-1h
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Apr 2021 21:57:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59878)
+	id 1lbGnv-0001L9-2o
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Apr 2021 02:02:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39170)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
- id 1lbCy6-0003pZ-M0; Mon, 26 Apr 2021 21:56:54 -0400
-Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:34215 helo=ozlabs.org)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
- id 1lbCy2-0000hi-UV; Mon, 26 Apr 2021 21:56:54 -0400
-Received: by ozlabs.org (Postfix, from userid 1007)
- id 4FTlHV6jGPz9sXM; Tue, 27 Apr 2021 11:56:38 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=gibson.dropbear.id.au; s=201602; t=1619488598;
- bh=OBvWCeppEGuxHgjD5ZlXjdlcD19Qdw1rC4JUuy8jq4A=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=M3D/u5x0d0qI2wXsW89sm7f7eA6KLyY7ceuiUZjPuy2aQg3PGsMDDMRIEsbHISp5Y
- ruI+caQD1XDqINg5qJWrvRXNCR+1d34FvpRVJOphXZJnfNhFJugpvTYZPHbLsjmiR7
- 0sDR+11qwby4J1k5fCfyuUoPjFFpNlL9+wgHd0ng=
-Date: Tue, 27 Apr 2021 11:54:58 +1000
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>
-Cc: qemu-devel@nongnu.org, Gerd Hoffmann <kraxel@redhat.com>,
- qemu-riscv@nongnu.org, Laszlo Ersek <lersek@redhat.com>,
- qemu-ppc@nongnu.org, qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Helge Deller <deller@gmx.de>, "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>, Greg Kurz <groug@kaod.org>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>
-Subject: Re: [PATCH 5/7] hw: Have machines Kconfig-select FW_CFG
-Message-ID: <YIdu8rBQ/eG8dBSs@yekko.fritz.box>
-References: <20210426193520.4115528-1-philmd@redhat.com>
- <20210426193520.4115528-6-philmd@redhat.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lbGnj-0001KO-Ct; Tue, 27 Apr 2021 02:02:27 -0400
+Received: from mail-il1-x12b.google.com ([2607:f8b0:4864:20::12b]:35732)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lbGnc-0007gE-Hx; Tue, 27 Apr 2021 02:02:26 -0400
+Received: by mail-il1-x12b.google.com with SMTP id r5so8461183ilb.2;
+ Mon, 26 Apr 2021 23:02:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=lARzkG6VAqCWa51MmHPOuZ0d/wpcND5eL+uX8oCNfH0=;
+ b=A+geeyWQ5raJEBMX2bBHw5BJREz1UQwMSnHEH30orLUi4dutlo5koJTtriml+2cSfQ
+ Ci+Mt9pbLUh/zpNIUP4dQ14kpBnyyy8N0Mkzup/sbn86iN7mquq91msJ0DGtgWiToEEU
+ 3vBudVkxN54/BM807Gw2lfZNI+7PE8dWAChrv9kap+Gh2K0Oiogv6R6JnVjy6EH4RpjR
+ 8SdVfrnQK2bO+GZXacgkKyigXTFeFUGQdQzvgiJ5GmrAwgLfzER9WL9iqTkeP11Yqums
+ 4UT2m/eTuB3YJCeovNZtm7Gs94GwMRhDLTwRZ6JL8iDwHCps7pREykW/KYqYE4s+BTr6
+ sgZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=lARzkG6VAqCWa51MmHPOuZ0d/wpcND5eL+uX8oCNfH0=;
+ b=kZRpTYdnkA7qjRIjVUhdz6o36N+M6qFDZJPEkX641zGGe114scbIJnMkaDvyKgntdo
+ DZfngmZUsCWdv4tBVIAHB9P7+0FZ9lhUleq00zhdoBIs8bPMYDRR0YEVCc0DT5F549Ps
+ mhrZzel4ME8/j3nU254oOJOFI5b2rq0MvxBSbQnhO3XrxnCxUbSICmqL6O92fx98W5DS
+ 1wnSdOTH2RGjs36/BSb+k9uAKUX1wmtPgH1jf4nOhck5MUmtRFpO7xQbFFlOmqSTg6bJ
+ 8uTaiWTie0gj+IHQQW8+hYGaeTtC10a8760kYZkQG7eNgAf420grwT0ux5/DH2ymqJM0
+ 85+Q==
+X-Gm-Message-State: AOAM532p3nDwi7iCi2aGpuxfmjnbmCdY2ygKo/lX1tfaVoog7O/KhFdM
+ iI3X8JPAxmthDt6itgBeguIM0WXbdCLUh/dbbP4=
+X-Google-Smtp-Source: ABdhPJwsToH10p/+aXOMtIgA6C83MNGW1v76lliOKmibsH50Er849LQkdt3XRu6BPRQshuanuQbiWa8p+h2OtjYO5MI=
+X-Received: by 2002:a92:d90f:: with SMTP id s15mr16933460iln.227.1619503338444; 
+ Mon, 26 Apr 2021 23:02:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="O55wQVwTlrgyL9RX"
-Content-Disposition: inline
-In-Reply-To: <20210426193520.4115528-6-philmd@redhat.com>
-Received-SPF: pass client-ip=2401:3900:2:1::2; envelope-from=dgibson@ozlabs.org;
- helo=ozlabs.org
+References: <20210421041400.22243-1-frank.chang@sifive.com>
+ <20210421041400.22243-3-frank.chang@sifive.com>
+In-Reply-To: <20210421041400.22243-3-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 27 Apr 2021 16:01:52 +1000
+Message-ID: <CAKmqyKNVc6gRz5NZEYEWLJdqZ99MJ9=CVuk7Q0fmJhVb_rDhNA@mail.gmail.com>
+Subject: Re: [PATCH v5 02/17] target/riscv: rvb: count leading/trailing zeros
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Kito Cheng <kito.cheng@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12b;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -61,151 +75,201 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Apr 2021 01:56:59 -0000
+X-List-Received-Date: Tue, 27 Apr 2021 06:02:29 -0000
 
-
---O55wQVwTlrgyL9RX
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Apr 26, 2021 at 09:35:18PM +0200, Philippe Mathieu-Daud=E9 wrote:
-> Beside the loongson3-virt machine (MIPS), the following machines
-> also use the fw_cfg device:
->=20
-> - ARM: virt & sbsa-ref
-> - HPPA: generic machine
-> - X86: ACPI based (pc & microvm)
-> - PPC64: various
-> - SPARC: sun4m & sun4u
->=20
-> Add their FW_CFG Kconfig dependency.
->=20
-> Signed-off-by: Philippe Mathieu-Daud=E9 <philmd@redhat.com>
-
-ppc parts
-Acked-by: David Gibson <david@gibson.dropbear.id.au>
-
+On Wed, Apr 21, 2021 at 2:14 PM <frank.chang@sifive.com> wrote:
+>
+> From: Kito Cheng <kito.cheng@sifive.com>
+>
+> Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  hw/arm/Kconfig     | 2 ++
->  hw/hppa/Kconfig    | 1 +
->  hw/i386/Kconfig    | 2 ++
->  hw/ppc/Kconfig     | 1 +
->  hw/sparc/Kconfig   | 1 +
->  hw/sparc64/Kconfig | 1 +
->  6 files changed, 8 insertions(+)
->=20
-> diff --git a/hw/arm/Kconfig b/hw/arm/Kconfig
-> index 8c37cf00da7..3b2641e39dc 100644
-> --- a/hw/arm/Kconfig
-> +++ b/hw/arm/Kconfig
-> @@ -8,6 +8,7 @@ config ARM_VIRT
->      imply TPM_TIS_SYSBUS
->      select ARM_GIC
->      select ACPI
-> +    select FW_CFG
->      select ARM_SMMUV3
->      select GPIO_KEY
->      select FW_CFG_DMA
-> @@ -216,6 +217,7 @@ config SBSA_REF
->      select PL061 # GPIO
->      select USB_EHCI_SYSBUS
->      select WDT_SBSA
-> +    select FW_CFG
-> =20
->  config SABRELITE
->      bool
-> diff --git a/hw/hppa/Kconfig b/hw/hppa/Kconfig
-> index 22948db0256..45f40e09224 100644
-> --- a/hw/hppa/Kconfig
-> +++ b/hw/hppa/Kconfig
-> @@ -14,3 +14,4 @@ config DINO
->      select LASIPS2
->      select PARALLEL
->      select ARTIST
-> +    select FW_CFG
-> diff --git a/hw/i386/Kconfig b/hw/i386/Kconfig
-> index 7f91f30877f..9e4039a2dce 100644
-> --- a/hw/i386/Kconfig
-> +++ b/hw/i386/Kconfig
-> @@ -52,6 +52,7 @@ config PC_ACPI
->      select SMBUS_EEPROM
->      select PFLASH_CFI01
->      depends on ACPI_SMBUS
-> +    select FW_CFG
-> =20
->  config I440FX
->      bool
-> @@ -106,6 +107,7 @@ config MICROVM
->      select ACPI_HW_REDUCED
->      select PCI_EXPRESS_GENERIC_BRIDGE
->      select USB_XHCI_SYSBUS
-> +    select FW_CFG
-> =20
->  config X86_IOMMU
->      bool
-> diff --git a/hw/ppc/Kconfig b/hw/ppc/Kconfig
-> index d11dc30509d..a7ba8283bf1 100644
-> --- a/hw/ppc/Kconfig
-> +++ b/hw/ppc/Kconfig
-> @@ -131,6 +131,7 @@ config VIRTEX
->  # Only used by 64-bit targets
->  config FW_CFG_PPC
->      bool
-> +    select FW_CFG
-> =20
->  config FDT_PPC
->      bool
-> diff --git a/hw/sparc/Kconfig b/hw/sparc/Kconfig
-> index 8dcb10086fd..267bf45fa21 100644
-> --- a/hw/sparc/Kconfig
-> +++ b/hw/sparc/Kconfig
-> @@ -15,6 +15,7 @@ config SUN4M
->      select STP2000
->      select CHRP_NVRAM
->      select OR_IRQ
-> +    select FW_CFG
-> =20
->  config LEON3
->      bool
-> diff --git a/hw/sparc64/Kconfig b/hw/sparc64/Kconfig
-> index 980a201bb73..c17b34b9d5b 100644
-> --- a/hw/sparc64/Kconfig
-> +++ b/hw/sparc64/Kconfig
-> @@ -13,6 +13,7 @@ config SUN4U
->      select PCKBD
->      select SIMBA
->      select CHRP_NVRAM
-> +    select FW_CFG
-> =20
->  config NIAGARA
->      bool
+>  target/riscv/insn32-64.decode           |  4 +++
+>  target/riscv/insn32.decode              |  7 +++-
+>  target/riscv/insn_trans/trans_rvb.c.inc | 47 +++++++++++++++++++++++++
+>  target/riscv/translate.c                | 42 ++++++++++++++++++++++
+>  4 files changed, 99 insertions(+), 1 deletion(-)
+>  create mode 100644 target/riscv/insn_trans/trans_rvb.c.inc
+>
+> diff --git a/target/riscv/insn32-64.decode b/target/riscv/insn32-64.decode
+> index 8157dee8b7c..f4c42720fc7 100644
+> --- a/target/riscv/insn32-64.decode
+> +++ b/target/riscv/insn32-64.decode
+> @@ -86,3 +86,7 @@ fmv_d_x    1111001  00000 ..... 000 ..... 1010011 @r2
+>  hlv_wu    0110100  00001   ..... 100 ..... 1110011 @r2
+>  hlv_d     0110110  00000   ..... 100 ..... 1110011 @r2
+>  hsv_d     0110111  .....   ..... 100 00000 1110011 @r2_s
+> +
+> +# *** RV64B Standard Extension (in addition to RV32B) ***
+> +clzw       0110000 00000 ..... 001 ..... 0011011 @r2
+> +ctzw       0110000 00001 ..... 001 ..... 0011011 @r2
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 3823b3ea800..8fe838cf0d0 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -40,6 +40,7 @@
+>  &i    imm rs1 rd
+>  &j    imm rd
+>  &r    rd rs1 rs2
+> +&r2   rd rs1
+>  &s    imm rs1 rs2
+>  &u    imm rd
+>  &shift     shamt rs1 rd
+> @@ -67,7 +68,7 @@
+>  @r4_rm   ..... ..  ..... ..... ... ..... ....... %rs3 %rs2 %rs1 %rm %rd
+>  @r_rm    .......   ..... ..... ... ..... ....... %rs2 %rs1 %rm %rd
+>  @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
+> -@r2      .......   ..... ..... ... ..... ....... %rs1 %rd
+> +@r2      .......   ..... ..... ... ..... ....... &r2 %rs1 %rd
+>  @r2_nfvm ... ... vm:1 ..... ..... ... ..... ....... &r2nfvm %nf %rs1 %rd
+>  @r2_vm   ...... vm:1 ..... ..... ... ..... ....... &rmr %rs2 %rd
+>  @r1_vm   ...... vm:1 ..... ..... ... ..... ....... %rd
+> @@ -592,3 +593,7 @@ vcompress_vm    010111 - ..... ..... 010 ..... 1010111 @r
+>
+>  vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+>  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+> +
+> +# *** RV32B Standard Extension ***
+> +clz        011000 000000 ..... 001 ..... 0010011 @r2
+> +ctz        011000 000001 ..... 001 ..... 0010011 @r2
+> diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+> new file mode 100644
+> index 00000000000..76788c2f353
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_rvb.c.inc
+> @@ -0,0 +1,47 @@
+> +/*
+> + * RISC-V translation routines for the RVB Standard Extension.
+> + *
+> + * Copyright (c) 2020 Kito Cheng, kito.cheng@sifive.com
+> + * Copyright (c) 2020 Frank Chang, frank.chang@sifive.com
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +static bool trans_clz(DisasContext *ctx, arg_clz *a)
+> +{
+> +    REQUIRE_EXT(ctx, RVB);
+> +    return gen_unary(ctx, a, gen_clz);
+> +}
+> +
+> +static bool trans_ctz(DisasContext *ctx, arg_ctz *a)
+> +{
+> +    REQUIRE_EXT(ctx, RVB);
+> +    return gen_unary(ctx, a, gen_ctz);
+> +}
+> +
+> +/* RV64-only instructions */
+> +#ifdef TARGET_RISCV64
+> +
+> +static bool trans_clzw(DisasContext *ctx, arg_clzw *a)
+> +{
+> +    REQUIRE_EXT(ctx, RVB);
+> +    return gen_unary(ctx, a, gen_clzw);
+> +}
+> +
+> +static bool trans_ctzw(DisasContext *ctx, arg_ctzw *a)
+> +{
+> +    REQUIRE_EXT(ctx, RVB);
+> +    return gen_unary(ctx, a, gen_ctzw);
+> +}
+> +
+> +#endif
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 2f9f5ccc621..4648c422f42 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -536,6 +536,23 @@ static bool gen_arith_div_uw(DisasContext *ctx, arg_r *a,
+>
+>  #endif
+>
+> +#ifdef TARGET_RISCV64
 
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
+Thanks for the patches!
 
---O55wQVwTlrgyL9RX
-Content-Type: application/pgp-signature; name="signature.asc"
+Unfortunately this will need to be rebased and updated. We don't want
+any more #ifdef's on the RISC-V xlen. The idea is to make the XLEN not
+just a compile time constant.
 
------BEGIN PGP SIGNATURE-----
+The latest riscv-to-apply.next tree has changes to allow you to do
+this. See this commit for what this will look like:
+https://github.com/alistair23/qemu/commit/4965ae3f6f3838e651d1a33050b15b4ca3d822a0
 
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAmCHbvIACgkQbDjKyiDZ
-s5KCOw/+KIWd2NDzDbQgK72oaT4v/Az1pxnmk3zm4GIIg8E1EiiZ3Yyj10oZGLr3
-kYoWNwXk7A15+UpXsx2KzzE2x0clHbcEX6QSg3dvrLKXN1iCf3uHM9Ta1eE9DN8A
-k/beAYEFthMDPKVvRAx9DvXkSJgv9a37KMmWuPnXwZPeWFMg83eizQl2IEJX9Kaj
-Z0D6ajr1QOpE5HcUsG41TXTNFdiGubCE2ZOKvV7PjG8Wf6YvVXK2j4bSyvjjJ04N
-v5Xnp7diEHmO0RV5JrLpbgA2oceupURF4fS0OZ6Mq2C1r7qvQm5OmDFpNc24NO6e
-26rtWCRdD2EeDt4kwk+wS4ZmbZTsuSu6HSuPuETTW+WVV00Jq3S9JJoykjLJ8ufd
-CiVEXMwLzB8NFMTX+X0IVklRjdABtQiPqjn73d8pPHvkYbztXfpZ6jKqeA/b2kOA
-sh2imSDfZDCpN3IGANbMFxkD9YsNNLUgzuY4y5WHJ9NFKIOv+HJsh6mDGdka4SEn
-WhldhZnCyrBO1WvOCoNhYx7iXrloqbqBgi9CgaSd1Amjp26mNdIjNauuA7mDXnpV
-q5Zt0rhWcbmIybEaaVx0UMVsPL2h/JnOQGcqQPCk6Xa3KlFPS1NelB6kQPV9FtGl
-UhQ22iierYq0KvXRBLkBsk3kH8GYAejCD9Ox05JMIbzM4V+/moU=
-=syxT
------END PGP SIGNATURE-----
+The changes should be in master after the 6.0 release.
 
---O55wQVwTlrgyL9RX--
+Alistair
+
+> +
+> +static void gen_ctzw(TCGv ret, TCGv arg1)
+> +{
+> +    tcg_gen_ori_i64(ret, arg1, MAKE_64BIT_MASK(32, 32));
+> +    tcg_gen_ctzi_i64(ret, ret, 64);
+> +}
+> +
+> +static void gen_clzw(TCGv ret, TCGv arg1)
+> +{
+> +    tcg_gen_ext32u_i64(ret, arg1);
+> +    tcg_gen_clzi_i64(ret, ret, 64);
+> +    tcg_gen_subi_i64(ret, ret, 32);
+> +}
+> +
+> +#endif
+> +
+>  static bool gen_arith(DisasContext *ctx, arg_r *a,
+>                        void(*func)(TCGv, TCGv, TCGv))
+>  {
+> @@ -581,6 +598,30 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+>      return cpu_ldl_code(env, pc);
+>  }
+>
+> +static void gen_ctz(TCGv ret, TCGv arg1)
+> +{
+> +    tcg_gen_ctzi_tl(ret, arg1, TARGET_LONG_BITS);
+> +}
+> +
+> +static void gen_clz(TCGv ret, TCGv arg1)
+> +{
+> +    tcg_gen_clzi_tl(ret, arg1, TARGET_LONG_BITS);
+> +}
+> +
+> +static bool gen_unary(DisasContext *ctx, arg_r2 *a,
+> +                      void(*func)(TCGv, TCGv))
+> +{
+> +    TCGv source = tcg_temp_new();
+> +
+> +    gen_get_gpr(source, a->rs1);
+> +
+> +    (*func)(source, source);
+> +
+> +    gen_set_gpr(a->rd, source);
+> +    tcg_temp_free(source);
+> +    return true;
+> +}
+> +
+>  /* Include insn module translation function */
+>  #include "insn_trans/trans_rvi.c.inc"
+>  #include "insn_trans/trans_rvm.c.inc"
+> @@ -589,6 +630,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+>  #include "insn_trans/trans_rvd.c.inc"
+>  #include "insn_trans/trans_rvh.c.inc"
+>  #include "insn_trans/trans_rvv.c.inc"
+> +#include "insn_trans/trans_rvb.c.inc"
+>  #include "insn_trans/trans_privileged.c.inc"
+>
+>  /* Include the auto-generated decoder for 16 bit insn */
+> --
+> 2.17.1
+>
+>
 
