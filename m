@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lbGsJ-0004WI-Fp
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Apr 2021 02:07:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39916)
+	id 1lbGum-0007LF-6k
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Apr 2021 02:09:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40274)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lbGsE-0004UA-Op; Tue, 27 Apr 2021 02:07:06 -0400
-Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:36591)
+ id 1lbGue-0007Ii-FZ; Tue, 27 Apr 2021 02:09:38 -0400
+Received: from mail-io1-xd2b.google.com ([2607:f8b0:4864:20::d2b]:45020)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lbGs9-0001YJ-Ob; Tue, 27 Apr 2021 02:07:06 -0400
-Received: by mail-il1-x136.google.com with SMTP id p15so12935733iln.3;
- Mon, 26 Apr 2021 23:07:01 -0700 (PDT)
+ id 1lbGuY-0002qt-HS; Tue, 27 Apr 2021 02:09:33 -0400
+Received: by mail-io1-xd2b.google.com with SMTP id p8so5819971iol.11;
+ Mon, 26 Apr 2021 23:09:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=qyEH9SqsCJ2OV07r/M1nS4yBPuNlD/2JhuHC6IPsU+Y=;
- b=Fw9QNtwTjmbNUpSUrlDdZzcwXTAKmpE8MupnSWCnfEHdqy/3A7FfbIGbVrnX0llzxS
- MaYcMwbFbeHj0y/CTxQ/utH2bFFBCuLlsui/SmEQI0dwUGtkrx14Yq6bSreF3Qn9hdHN
- HiJDmXNEgOFoXw1GM67aRHfofYFo/eyCW6hfbXnXNE/lh42pGYVop599B3yobXkuYYsk
- 5zVDegcrkH8lzErhaG63rgG6j6oORm/zHiYwZfdZtvz6nC5yEBSOXYkXUi9LAHEpuM1P
- E9Uoa8NnL8m1yCx5+21pw9Eh9ng/c+Iv0I3DlZGewWzSHKmm9bNxbnrOg751ANBEm9VY
- 09xg==
+ :cc; bh=ajvijVnbKEqN/VqS92zVhYQJ3kKRjwmWQoCZWU2UhEc=;
+ b=lz97tKCs8mBsjG27LA0ErRvKor0DY6uIdS9/wwiTSsVXKgLhlvHVDzij/ju0iADP5D
+ iRmOjWEJNrOoUr1SRbQjkanyfLCibbseqjcPCkHR0CRri3mU/lvj7ThwKCxQF2zQ/6px
+ kFQisqt/bzI1CfyaYPSMP91kQjWCYWaSWOpIjhZSvZje03P16Fdvwpbu5nrS8SVJ0Mu9
+ UqjkeRNid10TEbeFDSQF8/XgCcLT/hsMPAYZ71SQEVZ1UujIBENJJ1SaPgft2DwwtBeN
+ HzFb4eL/Ez36jHEXQdvI+y5N/s3TVFuuS1eaLazchVFLrmlzeMY8dpSRt1CV6MwL9TSC
+ nwKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=qyEH9SqsCJ2OV07r/M1nS4yBPuNlD/2JhuHC6IPsU+Y=;
- b=nRtqm3L3SEPqqInVrlXVa4A2+Ws+9d5tw3X8+F1RrySLSK4wDdCI3CEEyZRrT3qUQE
- Q8z/m85hSIhNAp7PyZ4Dvs6oHXbzicPSt50oQRr+ajBjJG/5bjJmRYqKnCx+mK7xL4Eh
- JUD8eb10zKMKIoih+lIrvOXA4ogzYAUkJW3wlroaOtKMv5TKoZak5upQ7RxaVUcUWCqa
- IVrmvkcj6TDBnYdjhKWZJB/Cob4tPKeJkX0GPdbDLU3WXVnKtFGjriiJqguNNX2qqD/v
- 8gzGx2i6NZ88Gp58Hoxj4UCHAnJMcecC+KzPNnGaBsn2deZpMfF8oF4bUEe1JveG6+Rq
- frBQ==
-X-Gm-Message-State: AOAM532yYQqtTRakTZ97zK55kgMkKmkVScPFbyeOp3XHxMaiBwyAoIkj
- 5Mey2k2b+o4DsImEXx5zao9Kl9FlGsvVXCcNNd8=
-X-Google-Smtp-Source: ABdhPJxWgH/Hhh1+nk44xFln2pNxKEiHJ2TYs2ZWoFxkahOaZ3gSwwh/Wpo2lFqp9GjTqvUSpxh83ZdAQHviwOo6SMQ=
-X-Received: by 2002:a92:d90f:: with SMTP id s15mr16946997iln.227.1619503620488; 
- Mon, 26 Apr 2021 23:07:00 -0700 (PDT)
+ bh=ajvijVnbKEqN/VqS92zVhYQJ3kKRjwmWQoCZWU2UhEc=;
+ b=akCmwFnAuPW89IuiyBswGOoPCv4LzTn1GNSAR1BFVHGB8sFy5JVKqOJN0tvXivt/3j
+ ssVBjanxzTHL3+Ox/kzsiX8XrUpSj72jAtY/Fsb1qtnOcBgyBPIT7EwTtr6YFRnNB8Th
+ iJfAqzOc+aqWJ9zGAa5xnlx65FgPBuBKkR328Tbz0AimqeI8Sj/qp8D0RbS9TIyoNrbN
+ b2dL5Wr80mhXAt9ZgLlsg9CWuMkAaYJmQ77s9qU+dpHYjWXytbBAbFbve8Fcrp7icJAI
+ xTklODE2cgrGZM3NJ9mrnGmgzwt0yvysxEKxNpmaD5tT1aVdh6tnY2h8AwlJI4psIdiY
+ bOuQ==
+X-Gm-Message-State: AOAM532pHiNCUF+C6UDG/ioES0shTCPWx1uJWhFJORgwI3aJxvEEGQ4S
+ jhbM6ejD8TFybApOqTMeZ0KCzKKLNjEt0H7ticM=
+X-Google-Smtp-Source: ABdhPJyOWzoYiZxwD7CZrbp4obxaHwqAbaTruU+XUgfxog2p5C3JXsykEVAttpSOUOGxySOYEBLIlGtkPdFNPe0NxCI=
+X-Received: by 2002:a05:6638:3048:: with SMTP id
+ u8mr19870542jak.91.1619503767609; 
+ Mon, 26 Apr 2021 23:09:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210421041400.22243-1-frank.chang@sifive.com>
- <20210421041400.22243-8-frank.chang@sifive.com>
-In-Reply-To: <20210421041400.22243-8-frank.chang@sifive.com>
+References: <20210420213656.85148-1-josemartins90@gmail.com>
+In-Reply-To: <20210420213656.85148-1-josemartins90@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 27 Apr 2021 16:06:33 +1000
-Message-ID: <CAKmqyKPPQYr+chW7ndT_P1u+vzqNf-v8YhptJ_O=pmcqmo6TsQ@mail.gmail.com>
-Subject: Re: [PATCH v5 07/17] target/riscv: rvb: sign-extend instructions
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Tue, 27 Apr 2021 16:09:01 +1000
+Message-ID: <CAKmqyKOr5bMi__F+C6PJ3CKRd_4v3LEROirEtV_rJyCwO5zncA@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: fix wfi exception behavior
+To: Jose Martins <josemartins90@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Kito Cheng <kito.cheng@sifive.com>
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2b;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,63 +74,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Apr 2021 06:07:08 -0000
+X-List-Received-Date: Tue, 27 Apr 2021 06:09:38 -0000
 
-On Wed, Apr 21, 2021 at 2:20 PM <frank.chang@sifive.com> wrote:
+On Wed, Apr 21, 2021 at 7:37 AM Jose Martins <josemartins90@gmail.com> wrote:
 >
-> From: Kito Cheng <kito.cheng@sifive.com>
+> The wfi exception trigger behavior should take into account user mode,
+> hstatus.vtw, and the fact the an wfi might raise different types of
+> exceptions depending on various factors:
 >
-> Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> If supervisor mode is not present:
+>
+> - an illegal instruction exception should be generated if user mode
+> executes and wfi instruction and mstatus.tw = 1.
+>
+> If supervisor mode is present:
+>
+> - when a wfi instruction is executed, an illegal exception should be triggered
+> if either the current mode is user or the mode is supervisor and mstatus.tw is
+> set.
+>
+> Plus, if the hypervisor extensions are enabled:
+>
+> - a virtual instruction exception should be raised when a wfi is executed from
+> virtual-user or virtual-supervisor and hstatus.vtw is set.
+>
+> Signed-off-by: Jose Martins <josemartins90@gmail.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/insn32.decode              |  2 ++
->  target/riscv/insn_trans/trans_rvb.c.inc | 12 ++++++++++++
->  2 files changed, 14 insertions(+)
+> Alistair, I hope you've agreed with my argumentis for the previous version
+> of the patch. As promised, I submit this version which takes into account M/U
+> only harts. It checks for the presence of the RVS extension. If it is
+> not present mstatus.tw takes effect over the exection of wfi in user
+> mode.
 >
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index d64326fd864..938c23088eb 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -598,6 +598,8 @@ vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
->  clz        011000 000000 ..... 001 ..... 0010011 @r2
->  ctz        011000 000001 ..... 001 ..... 0010011 @r2
->  cpop       011000 000010 ..... 001 ..... 0010011 @r2
-> +sext_b     011000 000100 ..... 001 ..... 0010011 @r2
-> +sext_h     011000 000101 ..... 001 ..... 0010011 @r2
+>  target/riscv/cpu_bits.h  |  1 +
+>  target/riscv/op_helper.c | 11 ++++++++---
+>  2 files changed, 9 insertions(+), 3 deletions(-)
 >
->  andn       0100000 .......... 111 ..... 0110011 @r
->  orn        0100000 .......... 110 ..... 0110011 @r
-> diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
-> index 2aa4515fe31..1496996a660 100644
-> --- a/target/riscv/insn_trans/trans_rvb.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvb.c.inc
-> @@ -95,6 +95,18 @@ static bool trans_maxu(DisasContext *ctx, arg_maxu *a)
->      return gen_arith(ctx, a, tcg_gen_umax_tl);
->  }
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 24b24c69c5..ed8b97c788 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -436,6 +436,7 @@
+>  #define HSTATUS_HU           0x00000200
+>  #define HSTATUS_VGEIN        0x0003F000
+>  #define HSTATUS_VTVM         0x00100000
+> +#define HSTATUS_VTW          0x00200000
+>  #define HSTATUS_VTSR         0x00400000
+>  #if defined(TARGET_RISCV64)
+>  #define HSTATUS_VSXL        0x300000000
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index d55def76cf..15982a7a33 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -173,10 +173,15 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+>  void helper_wfi(CPURISCVState *env)
+>  {
+>      CPUState *cs = env_cpu(env);
+> +    bool rvs = riscv_has_ext(env, RVS);
+> +    bool prv_u = env->priv == PRV_U;
+> +    bool prv_s = env->priv == PRV_S;
 >
-> +static bool trans_sext_b(DisasContext *ctx, arg_sext_b *a)
-> +{
-> +    REQUIRE_EXT(ctx, RVB);
-> +    return gen_unary(ctx, a, tcg_gen_ext8s_tl);
-> +}
-> +
-> +static bool trans_sext_h(DisasContext *ctx, arg_sext_h *a)
-> +{
-> +    REQUIRE_EXT(ctx, RVB);
-> +    return gen_unary(ctx, a, tcg_gen_ext16s_tl);
-> +}
-> +
->  /* RV64-only instructions */
->  #ifdef TARGET_RISCV64
->
+> -    if ((env->priv == PRV_S &&
+> -        get_field(env->mstatus, MSTATUS_TW)) ||
+> -        riscv_cpu_virt_enabled(env)) {
+> +    if (((prv_s || (!rvs && prv_u)) && get_field(env->mstatus, MSTATUS_TW)) ||
+> +        (rvs && prv_u && !riscv_cpu_virt_enabled(env))) {
+> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> +    } else if (riscv_cpu_virt_enabled(env) && (prv_u ||
+> +        (prv_s && get_field(env->hstatus, HSTATUS_VTW)))) {
+>          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+>      } else {
+>          cs->halted = 1;
 > --
-> 2.17.1
+> 2.25.1
 >
 >
 
