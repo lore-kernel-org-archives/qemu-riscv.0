@@ -1,47 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lbbf5-00012o-UM
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Apr 2021 00:18:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60644)
+	id 1lbbf7-00014h-3s
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Apr 2021 00:18:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60658)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1lbbf5-00012e-1n; Wed, 28 Apr 2021 00:18:55 -0400
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631]:35528)
+ id 1lbbf5-00012q-V5; Wed, 28 Apr 2021 00:18:55 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531]:44586)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1lbbf3-00062I-65; Wed, 28 Apr 2021 00:18:54 -0400
-Received: by mail-ej1-x631.google.com with SMTP id u17so92651471ejk.2;
- Tue, 27 Apr 2021 21:18:52 -0700 (PDT)
+ id 1lbbf3-00062h-Sg; Wed, 28 Apr 2021 00:18:55 -0400
+Received: by mail-ed1-x531.google.com with SMTP id z5so36022883edr.11;
+ Tue, 27 Apr 2021 21:18:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=GrmLPHYpeRDGLVXBq7JGpx12BzAdRGWWpAXtkmLzF44=;
- b=py6A7KgQkSNenPmD01fS2hIGUmcZRPoG6H3jONfE2VkRXQKs27X6pmRa+g2UNHshvo
- wFly+/wEudJeZTKxKlWrFZG5KMEL6qG9ev50Bi7yxUSyN3OHeDk2gL0yhYRhMttRCcoK
- HBnYig2H0cSfI6+Mq0u3Op0PqluHIZ2qOBhXtTp+1ML6TjTuLJJvoxo5Sme8CcXCf/Wb
- xj5NiOn5kAdZDurrKvieNfXE/3KaUe/CHQbq2+hZ+LhYUo3uQE/TTLszZ7w8DmL/CN03
- dE4ZaOIprqYISKRH1zGI8UdlLA4QqNmZiqkyzemEarPztwclmFAdUbrHU4NBvw6PdWsy
- zqnQ==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=5NCSBeXLLnQxRcsQBmTOFrJe1uMeKwEpgQvj+fl82v4=;
+ b=O2lKWLCtJpACgzkwTo3B1c2o2Lesu5eQdecF3hX263asy9PeIXm/UGKWE5sqLQsV3h
+ UZMjA79B8g57OYaXQz8NkVmCsvQW4VfrN9wPonfDT4XxjuSq3JzJcazZ/WUPlBf5ao+J
+ FBfsuSZKdFM7+c1HxwgGXDyn7YjAarh/y9YeJq++Znv5TQSnxfpip2bQ2YlW31lejaa/
+ 310fVGf4OrpG2d19LoH7DKrdLm0FizEwxv2iFuwkjhuHD5zkIAC2ZGUlQiWF2YrM6CF2
+ XTWTroLHS9s71oWtlAzLxEp+2LwXaOZLm8nrSOrPlN4YuWlCmKRfkbSEcPUEU/HVBwuJ
+ vYeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=GrmLPHYpeRDGLVXBq7JGpx12BzAdRGWWpAXtkmLzF44=;
- b=OTsFR6EUr8fumpZ/M/TCOvZ2LYWdNROBQ4zjWCloM2g2itGtCEJsmO+JF51rOlyNX9
- LeqbPU2rQSH5hutTEZCLE8wFD00zZ1dmAWU0ATIP5ic88V1njV4gboOnqsls7hOrnQ2V
- TdueNLfyadZXpJI9y1OD4kR/F9G22aGVEBpyXwtjQWL0iaQ6e/l8jYWbP2NQbrWB5fPo
- Vo51lK1WHCxzfexHhMEebpPY3IL62+yIclN/lA7acxSgxMF4FFfm/IPNAqE2ojigGNDb
- pFC3Kld/3WA2NnhhcvM89cVfAh1Lev4yUsUjJKavZ5vXPGR5sNCPKdfslJ8+754xxfhI
- EXDQ==
-X-Gm-Message-State: AOAM533szwLmjLzo4gbMcdFmzJ2+osaR9aOEktBr/+FewWBUD8z8mAPr
- MMow2oI9oRWe2L89WEOKwa8=
-X-Google-Smtp-Source: ABdhPJwnRZ5WwOTnd6gkDNcR6HB+ewyXdFdDPp0DuDpFWThnPX1iBvSxqnph3bXmc/0g+yLAI38lPA==
-X-Received: by 2002:a17:906:9146:: with SMTP id
- y6mr13500340ejw.107.1619583530971; 
- Tue, 27 Apr 2021 21:18:50 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=5NCSBeXLLnQxRcsQBmTOFrJe1uMeKwEpgQvj+fl82v4=;
+ b=Pxcdp5Cfv3FkpuM5dmkL27gmtavna3L7sTFq1mb8rghVSDTWwHxXOGZx0iehUmBUDO
+ zdIyMpIjDujHDGiRq2JyJYjKw7bWyu18jBhH+ibWQtfwWgl4CidZ/Ag3ZifXUxeLBhuU
+ kzuC1Yx6S0Oq/nDP6pJFDxf371LFLFA375fR8ov0aO7bhPnYtORjW9SXZVKeq3Yej5on
+ jJ6U0B50FKxQN04XRSbd5Q6jHIdpqgwCud38gpHNqShDPiaAKr5k0hQ6jrGXRNeH8s4v
+ lmJamUhMTGE8cqny/8fTSSvn5XEAMWkeL+lpZg4yZY4d+KtTHzNoB694rpEh1ESI7EgV
+ r+2w==
+X-Gm-Message-State: AOAM531Qg3H+PcjwtWlzxHXzTeVjCrsS5M0Q8YpHgSauSV8hmAzE09pe
+ 3D37MAhREEPqdVtKCiEe+bw=
+X-Google-Smtp-Source: ABdhPJx9bR1kT6t9B6JdPX36pjkxDLjUMpoH+dv60KaKPTe4Qs24bQfEkJ2VnASCvKsqpMIfdDfuNQ==
+X-Received: by 2002:aa7:d14a:: with SMTP id r10mr8382283edo.385.1619583532087; 
+ Tue, 27 Apr 2021 21:18:52 -0700 (PDT)
 Received: from neptune.lab ([46.39.228.82])
- by smtp.googlemail.com with ESMTPSA id s20sm3759565edu.93.2021.04.27.21.18.50
+ by smtp.googlemail.com with ESMTPSA id s20sm3759565edu.93.2021.04.27.21.18.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Apr 2021 21:18:50 -0700 (PDT)
+ Tue, 27 Apr 2021 21:18:51 -0700 (PDT)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
 To: 
@@ -49,15 +48,17 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
  palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH RESEND v8 0/6] RISC-V Pointer Masking implementation
-Date: Wed, 28 Apr 2021 07:18:42 +0300
-Message-Id: <20210428041848.12982-1-space.monkey.delivers@gmail.com>
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v8 1/6] [RISCV_PM] Add J-extension into RISC-V
+Date: Wed, 28 Apr 2021 07:18:43 +0300
+Message-Id: <20210428041848.12982-2-space.monkey.delivers@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210428041848.12982-1-space.monkey.delivers@gmail.com>
+References: <20210428041848.12982-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x631.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,63 +78,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Apr 2021 04:18:55 -0000
+X-List-Received-Date: Wed, 28 Apr 2021 04:18:56 -0000
 
-v8-resend:
-Resending to trigger recheck due to minor codestyle issues.
+Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-v8:
-Hi folks,
-
-Finally we were able to assign v0.1 draft for Pointer Masking extension for RISC-V: https://github.com/riscv/riscv-j-extension/blob/master/pointer-masking-proposal.adoc
-This is supposed to be the first series of patches with initial support for PM. It obviously misses support for hypervisor mode, vector load/stores and some other features, while using temporary csr numbers(they're to be assigned by the committee a bit later).
-With this patch series we were able to run a bunch of tests with HWASAN checks enabled.
-
-I hope I've managed to addressed @Alistair's previous comments in this version.
-
-Thanks!
-
-v7:
-Hi folks,
-
-Sorry it took me almost 3 month to provide the reply and fixes: it was a really busy EOY.
-This series contains fixed @Alistair suggestion on enabling J-ext.
-
-As for @Richard comments:
-- Indeed I've missed appending review-by to the approved commits. Now I've restored them except for the fourth commit. @Richard could you please tell if you think it's still ok to commit it as is, or should I support masking mem ops for RVV first?
-- These patches don't have any support for load/store masking for RVV and RVH extensions, so no support for special load/store for Hypervisor in particular.
-
-If this patch series would be accepted, I think my further attention would be to:
-- Support pm for memory operations for RVV
-- Add proper csr and support pm for memory operations for Hypervisor mode
-- Support address wrapping on unaligned accesses as @Richard mentioned previously
-
-Thanks!
-
-Alexey Baturo (5):
-  [RISCV_PM] Add J-extension into RISC-V
-  [RISCV_PM] Support CSRs required for RISC-V PM extension except for
-    the h-mode
-  [RISCV_PM] Print new PM CSRs in QEMU logs
-  [RISCV_PM] Support pointer masking for RISC-V for i/c/f/d/a types of
-    instructions
-  [RISCV_PM] Allow experimental J-ext to be turned on
-
-Anatoly Parshintsev (1):
-  [RISCV_PM] Implement address masking functions required for RISC-V
-    Pointer Masking extension
-
- target/riscv/cpu.c                      |  32 ++++
- target/riscv/cpu.h                      |  34 ++++
- target/riscv/cpu_bits.h                 |  66 +++++++
- target/riscv/csr.c                      | 236 ++++++++++++++++++++++++
- target/riscv/insn_trans/trans_rva.c.inc |   3 +
- target/riscv/insn_trans/trans_rvd.c.inc |   2 +
- target/riscv/insn_trans/trans_rvf.c.inc |   2 +
- target/riscv/insn_trans/trans_rvi.c.inc |   2 +
- target/riscv/translate.c                |  42 +++++
- 9 files changed, 419 insertions(+)
-
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 0a33d387ba..0ea9fc65c8 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -72,6 +72,7 @@
+ #define RVS RV('S')
+ #define RVU RV('U')
+ #define RVH RV('H')
++#define RVJ RV('J')
+ 
+ /* S extension denotes that Supervisor mode exists, however it is possible
+    to have a core that support S mode but does not have an MMU and there
+@@ -291,6 +292,7 @@ struct RISCVCPU {
+         bool ext_s;
+         bool ext_u;
+         bool ext_h;
++        bool ext_j;
+         bool ext_v;
+         bool ext_counters;
+         bool ext_ifencei;
 -- 
 2.20.1
 
