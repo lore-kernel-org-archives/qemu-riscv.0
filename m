@@ -1,76 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lcLA8-0006jB-Q9
-	for mharc-qemu-riscv@gnu.org; Fri, 30 Apr 2021 00:54:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32774)
+	id 1lcNDa-0002F2-ER
+	for mharc-qemu-riscv@gnu.org; Fri, 30 Apr 2021 03:05:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51178)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1lcLA7-0006in-7d
- for qemu-riscv@nongnu.org; Fri, 30 Apr 2021 00:53:59 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d]:36771)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lcNDY-0002B0-G6; Fri, 30 Apr 2021 03:05:40 -0400
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e]:33718)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1lcLA3-0005UP-VJ
- for qemu-riscv@nongnu.org; Fri, 30 Apr 2021 00:53:59 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- f15-20020a05600c4e8fb029013f5599b8a9so975094wmq.1
- for <qemu-riscv@nongnu.org>; Thu, 29 Apr 2021 21:53:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UGRVbFEa+O4nql4wL8JLwDHK88SuI1CttvKEIpPLdho=;
- b=tAZOlBWC/dpe7X4h3LVF4JPHUHPKhmGC5Jgq5flDvzlS3SEXGQc+S+M+lae8i5pcJC
- 6NAUgtRCZwc3HQzDsVVo0m/tz+J3cZIZvocq8XlIVFfQt7aiiRAbNdWH3Ae6FpqwCtJu
- ILuQFcAgM/H2XmlV+JYAKfSMQtdgfdg62aDqg5pgLb8PcLaNUa6rmbG0wmUH3Re22mtf
- ywos2ak6Rr+c39ESQDCiWiffWvFwMVReNNkvrqMWszfAHiLk/YHsBuIEdiLC5Q/D2MCK
- PFcaX04lZdC+ZfZUmxdj5jGWROUUyT/cEtvmtnG1DGJ//x2Ja31TqsJVBM/7bGrG7v2e
- JZKA==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lcNDW-0004Yv-S4; Fri, 30 Apr 2021 03:05:40 -0400
+Received: by mail-ej1-x62e.google.com with SMTP id t4so20391915ejo.0;
+ Fri, 30 Apr 2021 00:05:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=LPdx+jF0CLWeUsQ3inDtRtcpQVPPegXbGAOTsItkSTY=;
+ b=S/AFQ0e9PcXbBAy7d+XacLvh1mDmf6shCQ0nOJJNjzLfnClpe7qQgqLuJERARpuXsk
+ jwsRTHh0Fp/jTF7JPQVF5Ts6zurC+0PE+Gnoe3lkb/NsE4uwU45iiqoYeglDyule3EuZ
+ kFVNznLqaAXUsBh6IlJ0drK5kmXnUWNgHbjrmRXO7NJ5nKr39AiDLx/oEJnX3EuUKOkZ
+ AmI7di6f4xcR44/+MbPlYGB1641iWaEbxPNRWcJmzuVxSwJM/yBNM73wzaAXEKyJLb1h
+ KzsPQIu7T+4zwFRvqsO8EYXb/OiH0HF0ePaI1tW+AyHB73jFGGf6EnTEC2ZbzE+tGFwg
+ 3+6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=UGRVbFEa+O4nql4wL8JLwDHK88SuI1CttvKEIpPLdho=;
- b=D3MaO9kH7ZhhRpZI0zopWnWXufUFvxyBqXvxJzVDZphBsBw2408IKYly+ufQzNge+7
- gnTFAMIFTie9GyoYic0Mg13FFujsMt2cxbVaRwXM1asmGFfyf/gFXRtzGdt8FFLd7rlZ
- Rwa3oQdrRgzxkWZD66tpydUK2xb/AACgec9dUScOjZOGdEYb7E873zuxEiBrdph9k0Z/
- L1B23Z8SahXlePwswZHJ5fuCYgl/TZidkeNmefRHjEBZd2iZ6YsDWsbTo88+QUNajMu8
- 64Uqd9IJ6bCBelupfVjpytaczTvr6hziVZLpM6ZUQbaYCo1zWv2FFnYjCFba8AzQNF/o
- zxdA==
-X-Gm-Message-State: AOAM530rgzaynqUYSJYeA6QOKs6hbS5cmr3YbFUbqyrWR6KRy8RgxkS8
- AoUwOeajJSkvGHKXPmb7fE+Svu2MU2nP2KVzwBAnHw==
-X-Google-Smtp-Source: ABdhPJz6ciYc399ey9eit4UZvScEpLv5uRf/WYCuteudvmF//NfaJHTVN7DyPq6zhLx3l7ORcT1VPGnVqp22VhrZSEo=
-X-Received: by 2002:a7b:c348:: with SMTP id l8mr14781328wmj.152.1619758433260; 
- Thu, 29 Apr 2021 21:53:53 -0700 (PDT)
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=LPdx+jF0CLWeUsQ3inDtRtcpQVPPegXbGAOTsItkSTY=;
+ b=ozJBjWWzXzxlsbUqrm76AptwopSdhZX0cC8WjCv8mTLboRGM6NtH0XgG+4YxkGImJA
+ uXdQSjkNZrX3lBoB4b7+hGxUqfJIdj0ngeDieiSks+7SmmGJ3TUeUMq1cRnE+T5mWxrR
+ 5WkOWIwT7CH4GCHUQhIDhTGCw3UdT5xpxqSg8kwyi/OKBH3VBhhm8POJ140x5k8zGReX
+ tV8lDXpDPt1/eXJTyUkja2Km0ZKaS4VzhLWjZV14vqOhIfohAE9CTGHdNLN66H0ZHY+k
+ HfNVwPNQbpVeVTp3cME4vB9HXqsvaqlEkFpKAGC2+7Q4i+GoNlqCySO/oICk2E7q0J2d
+ 9Qow==
+X-Gm-Message-State: AOAM532luyrAxJuvG86BnCVywn+EeDGQgRi6F5cEkjqIjs1c5XSM1utW
+ 3Eb8Zeg4jenIrw3daKEzo40=
+X-Google-Smtp-Source: ABdhPJxqU56/A3NDtzY10R8IeNCTh/k/9BHHKWKrQ3kC3gHCblS/NrFBNWvtOI8GYHH2wlsvCCkTZA==
+X-Received: by 2002:a17:906:90d4:: with SMTP id
+ v20mr2669274ejw.275.1619766336518; 
+ Fri, 30 Apr 2021 00:05:36 -0700 (PDT)
+Received: from pek-vx-bsp2.wrs.com
+ (ec2-44-242-66-180.us-west-2.compute.amazonaws.com. [44.242.66.180])
+ by smtp.gmail.com with ESMTPSA id t15sm578532edr.55.2021.04.30.00.05.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Apr 2021 00:05:36 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH] docs/system: riscv: Include shakti_c machine documentation
+Date: Fri, 30 Apr 2021 15:05:34 +0800
+Message-Id: <20210430070534.1487242-1-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210412065246.1853-1-jiangyifei@huawei.com>
- <20210412065246.1853-8-jiangyifei@huawei.com>
-In-Reply-To: <20210412065246.1853-8-jiangyifei@huawei.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Fri, 30 Apr 2021 10:23:41 +0530
-Message-ID: <CAAhSdy34aVwGEW-_Z=FkOkrAGrTsaS-11Ck6gJg77wwUSXe=zw@mail.gmail.com>
-Subject: Re: [PATCH RFC v5 07/12] hw/riscv: PLIC update external interrupt by
- KVM when kvm enabled
-To: Yifei Jiang <jiangyifei@huawei.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- kvm-riscv@lists.infradead.org, KVM General <kvm@vger.kernel.org>,
- libvir-list@redhat.com, 
- Anup Patel <anup.patel@wdc.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Bin Meng <bin.meng@windriver.com>, 
- fanliang@huawei.com, "Wubin (H)" <wu.wubin@huawei.com>, 
- Zhanghailiang <zhang.zhanghailiang@huawei.com>,
- yinyipeng <yinyipeng1@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::32d;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x32d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -83,145 +73,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Apr 2021 04:53:59 -0000
+X-List-Received-Date: Fri, 30 Apr 2021 07:05:41 -0000
 
-On Mon, Apr 12, 2021 at 12:24 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
->
-> Only support supervisor external interrupt currently.
->
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-> Signed-off-by: Yipeng Yin <yinyipeng1@huawei.com>
-> ---
->  hw/intc/sifive_plic.c    | 29 ++++++++++++++++++++---------
->  target/riscv/kvm-stub.c  |  5 +++++
->  target/riscv/kvm.c       | 20 ++++++++++++++++++++
->  target/riscv/kvm_riscv.h |  1 +
->  4 files changed, 46 insertions(+), 9 deletions(-)
->
-> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-> index 97a1a27a9a..2746eb7a05 100644
-> --- a/hw/intc/sifive_plic.c
-> +++ b/hw/intc/sifive_plic.c
-> @@ -31,6 +31,8 @@
->  #include "target/riscv/cpu.h"
->  #include "sysemu/sysemu.h"
->  #include "migration/vmstate.h"
-> +#include "sysemu/kvm.h"
-> +#include "kvm_riscv.h"
->
->  #define RISCV_DEBUG_PLIC 0
->
-> @@ -147,15 +149,24 @@ static void sifive_plic_update(SiFivePLICState *plic)
->              continue;
->          }
->          int level = sifive_plic_irqs_pending(plic, addrid);
-> -        switch (mode) {
-> -        case PLICMode_M:
-> -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MEIP, BOOL_TO_MASK(level));
-> -            break;
-> -        case PLICMode_S:
-> -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SEIP, BOOL_TO_MASK(level));
-> -            break;
-> -        default:
-> -            break;
-> +        if (kvm_enabled()) {
-> +            if (mode == PLICMode_M) {
-> +                continue;
-> +            }
-> +            kvm_riscv_set_irq(RISCV_CPU(cpu), IRQ_S_EXT, level);
-> +        } else {
-> +            switch (mode) {
-> +            case PLICMode_M:
-> +                riscv_cpu_update_mip(RISCV_CPU(cpu),
-> +                                     MIP_MEIP, BOOL_TO_MASK(level));
-> +                break;
-> +            case PLICMode_S:
-> +                riscv_cpu_update_mip(RISCV_CPU(cpu),
-> +                                     MIP_SEIP, BOOL_TO_MASK(level));
-> +                break;
-> +            default:
-> +                break;
-> +            }
+shakti_c machine documentation was missed in the riscv target doc.
 
-I am not comfortable with this patch.
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+---
 
-This way we will endup calling kvm_riscv_set_irq() from various
-places in hw/intc and hw/riscv.
+ docs/system/target-riscv.rst | 1 +
+ 1 file changed, 1 insertion(+)
 
-I suggest to extend riscv_cpu_update_mip() such that when kvm is
-enabled riscv_cpu_update_mip() will:
-1) Consider only MIP_SEIP bit in "mask" parameter and all other
-    bits in "mask" parameter will be ignored probably with warning
-2) When the MIP_SEIP bit is set in "mask" call kvm_riscv_set_irq()
-to change the IRQ state in the KVM module.
+diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+index 8d5946fbbb..4b3c78382c 100644
+--- a/docs/system/target-riscv.rst
++++ b/docs/system/target-riscv.rst
+@@ -67,6 +67,7 @@ undocumented; you can get a complete list by running
+    :maxdepth: 1
+ 
+    riscv/microchip-icicle-kit
++   riscv/shakti-c
+    riscv/sifive_u
+ 
+ RISC-V CPU features
+-- 
+2.25.1
 
-Regards,
-Anup
-
->          }
->      }
->
-> diff --git a/target/riscv/kvm-stub.c b/target/riscv/kvm-stub.c
-> index 39b96fe3f4..4e8fc31a21 100644
-> --- a/target/riscv/kvm-stub.c
-> +++ b/target/riscv/kvm-stub.c
-> @@ -23,3 +23,8 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
->  {
->      abort();
->  }
-> +
-> +void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
-> +{
-> +    abort();
-> +}
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 79c931acb4..da63535812 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -453,6 +453,26 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
->      env->gpr[11] = cpu->env.fdt_addr;          /* a1 */
->  }
->
-> +void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
-> +{
-> +    int ret;
-> +    unsigned virq = level ? KVM_INTERRUPT_SET : KVM_INTERRUPT_UNSET;
-> +
-> +    if (irq != IRQ_S_EXT) {
-> +        return;
-> +    }
-> +
-> +    if (!kvm_enabled()) {
-> +        return;
-> +    }
-> +
-> +    ret = kvm_vcpu_ioctl(CPU(cpu), KVM_INTERRUPT, &virq);
-> +    if (ret < 0) {
-> +        perror("Set irq failed");
-> +        abort();
-> +    }
-> +}
-> +
->  bool kvm_arch_cpu_check_are_resettable(void)
->  {
->      return true;
-> diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
-> index f38c82bf59..ed281bdce0 100644
-> --- a/target/riscv/kvm_riscv.h
-> +++ b/target/riscv/kvm_riscv.h
-> @@ -20,5 +20,6 @@
->  #define QEMU_KVM_RISCV_H
->
->  void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
-> +void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
->
->  #endif
-> --
-> 2.19.1
->
->
-> --
-> kvm-riscv mailing list
-> kvm-riscv@lists.infradead.org
-> http://lists.infradead.org/mailman/listinfo/kvm-riscv
 
