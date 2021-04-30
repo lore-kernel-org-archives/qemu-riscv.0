@@ -1,63 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lcNL6-0000Qz-LM
-	for mharc-qemu-riscv@gnu.org; Fri, 30 Apr 2021 03:13:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52654)
+	id 1lcNLA-0000UA-45
+	for mharc-qemu-riscv@gnu.org; Fri, 30 Apr 2021 03:13:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52674)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lcNL3-0000OP-E6; Fri, 30 Apr 2021 03:13:26 -0400
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532]:34743)
+ id 1lcNL6-0000R2-OI; Fri, 30 Apr 2021 03:13:28 -0400
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b]:38456)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lcNL1-0000US-3C; Fri, 30 Apr 2021 03:13:25 -0400
-Received: by mail-ed1-x532.google.com with SMTP id i3so55716034edt.1;
- Fri, 30 Apr 2021 00:13:22 -0700 (PDT)
+ id 1lcNL4-0000WV-SX; Fri, 30 Apr 2021 03:13:28 -0400
+Received: by mail-ej1-x62b.google.com with SMTP id r12so103724071ejr.5;
+ Fri, 30 Apr 2021 00:13:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=fElpJp1+gGfKDOYhMNPiyFsjOP8fGNaHPojf2JKI0UE=;
- b=DOMkwaACvvdCEonFPiTR9zV9sOvi7lFjXk4VoXskT9NloL0D6OHjBNacWUyL0WzeOP
- ppnYapT6gxnSepPsTe5NjE/pPlsByhz2BJYKJTIrZnl56R23zxhICyFbU4tXpCEcLq/Q
- soWHagK+T6Iqp3oHL1Po+zcdOCP5DaJHWnk3pOebJVrOo826x/Xm8AteSI/erIoSf8pB
- Y2GhmGsYOkL4qPd2xvGV3lU5U2ZaN1LVhFqO4nx1xLZaNPVHotUvZEd+n5RMmHwvoE1C
- t/WSc7ysd7gxFO0GPZznHCBNZoWz91KPL+G9eGwNBCQ3JvQLvsYi01m+5i3Q++rvgPyE
- Ojqw==
+ bh=7dCWjL573Gahu7h+Kf6RESRLjB/RTp/6jU2NDFatOOM=;
+ b=lMZ8wZqTqlBXnXm6ZdnkVclGenxn70MDN60s6gi+nZW4Srx5Khauyw16wMYVxe2Ros
+ 98yG9pK5vMBocEItg+S0i8fnMnOiRxsER36eyxoS3l9LuEB0wVED9kQ9d0bdANjJpjk3
+ DKN6q4MG/tQbtbDnK3PaRvFXN7WKh92IGvmOmXBf+Zvp3qvObu7fEgIrVSzxgR/HfLmJ
+ AZkUP/ZCgFAaKZKW2x3dGW5l91FTx9Y8OfRFBohZu7V9MgP2Tl4eIIpLQNGf1huC3gln
+ 5cxaP3P2KSlKHCnF1TIMyqUm/vf/GUhATllzfuEMsrr52CA9uQNdj0uQfpOrrK7vxqvx
+ d8qQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=fElpJp1+gGfKDOYhMNPiyFsjOP8fGNaHPojf2JKI0UE=;
- b=TZiZWONc0ZQTLLdHnYM8L528AGOmVH9LWNKqc8oN7kCpo0lkU0RuovgTkP+Ye2mlgM
- cg6ja1N63ZAqK/dJgzJNnESYO5K+a09+tks2LT8H5IQjxbIWOw+Od7ffYUIfGGmpjwFk
- JOSALxTmULR2axWysAcG4k8pNdVsGYMX1t+VdcYURNW5o5N/XkZJFejp/kEkEtn2nUiH
- uWUh3a6+3wY5dOiVTsGnAz1oA3diYsC+rHbsLr7YTdzvjQBMJ/LJITyJHCAMTgCNFpi7
- Xpx1WoKyb/LBnayxHE6LuZkqZxk3TwwpTQxZM99skSGM0OYtnoK3JFQsdXJDwUVwmn2v
- AXqA==
-X-Gm-Message-State: AOAM530JGIjs19/FhwPnqwKMnMyaZEgVsttnLd6szOuTR1oy54VNAJtc
- tf21qPZlOz0VanoONcB/VNQ=
-X-Google-Smtp-Source: ABdhPJwbXian9OO0L8A3SXry/8SAFm7PXBD57dM3z/c66RCxy55l+isScQ+xSWwsYV9iOhbgch7Tvg==
-X-Received: by 2002:a05:6402:5211:: with SMTP id
- s17mr4006441edd.327.1619766801450; 
- Fri, 30 Apr 2021 00:13:21 -0700 (PDT)
+ bh=7dCWjL573Gahu7h+Kf6RESRLjB/RTp/6jU2NDFatOOM=;
+ b=JscXs5vnCE6gO3vV0/qLj49SIAHndeipOSz+5TSYxH0Ap+vhPYOwyzA96+A5qcG2mq
+ tAMYaPa3XtogcZzXsEliU4A2jE4DwUIQtll+gPmGXDY1xnIXEuXbNZN8Inppa+gUa6Ue
+ 2JFh3sk0dAxqSfErilOYaa9E+D1/ZwUuCMbb3Dg8UhXvhMUNp8JRC5igt0uTHieODi2m
+ oD0wVcZuIV0GUa3icldTzFaeN09K1T14BD+HvPk9ULstagl5/NzkT+w2NAkVUmAYg2XS
+ oyFQOpOETDs9TxZ1WQ3N76WNgQmplP5zk6htAqvDOWTbsUf+4Gnc+ZKuVDrovNjmupLL
+ 4ylw==
+X-Gm-Message-State: AOAM531j/6RCvzZqlKYSq2WtDoiWQ/vxvoYNJnaPnokbpiTk/s1NQAvB
+ T7AbRC0DQFYULqJEghP+AN/DN9DGmbc=
+X-Google-Smtp-Source: ABdhPJwDmIJ7oPj2hI5nuRRx5KPlB0m4i+C38BfL9EEX5V9035WpNRg0QpI4Ga6Ycc8hweuFVu3pEQ==
+X-Received: by 2002:a17:906:f210:: with SMTP id
+ gt16mr2650816ejb.52.1619766805202; 
+ Fri, 30 Apr 2021 00:13:25 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com
  (ec2-44-242-66-180.us-west-2.compute.amazonaws.com. [44.242.66.180])
- by smtp.gmail.com with ESMTPSA id b19sm574462edd.66.2021.04.30.00.13.18
+ by smtp.gmail.com with ESMTPSA id b19sm574462edd.66.2021.04.30.00.13.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Apr 2021 00:13:21 -0700 (PDT)
+ Fri, 30 Apr 2021 00:13:24 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v2 6/8] docs/system/riscv: sifive_u: Document '-dtb' usage
-Date: Fri, 30 Apr 2021 15:13:00 +0800
-Message-Id: <20210430071302.1489082-6-bmeng.cn@gmail.com>
+Subject: [PATCH v2 7/8] hw/riscv: Use macros for BIOS image names
+Date: Fri, 30 Apr 2021 15:13:01 +0800
+Message-Id: <20210430071302.1489082-7-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210430071302.1489082-1-bmeng.cn@gmail.com>
 References: <20210430071302.1489082-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x532.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,12 +76,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Apr 2021 07:13:27 -0000
+X-List-Received-Date: Fri, 30 Apr 2021 07:13:29 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-Update the 'sifive_u' machine documentation to mention the '-dtb'
-option that can be used to pass a custom DTB to QEMU.
+The OpenSBI BIOS image names are used by many RISC-V machines.
+Let's define macros for them.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -90,74 +89,86 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 (no changes since v1)
 
- docs/system/riscv/sifive_u.rst | 47 +++++++++++++++++++++++++++++-----
- 1 file changed, 41 insertions(+), 6 deletions(-)
+ include/hw/riscv/boot.h | 5 +++++
+ hw/riscv/sifive_u.c     | 6 ++----
+ hw/riscv/spike.c        | 6 ++----
+ hw/riscv/virt.c         | 6 ++----
+ 4 files changed, 11 insertions(+), 12 deletions(-)
 
-diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
-index dcdfbda931..32d0a1b85d 100644
---- a/docs/system/riscv/sifive_u.rst
-+++ b/docs/system/riscv/sifive_u.rst
-@@ -36,12 +36,21 @@ Hardware configuration information
- ----------------------------------
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index 11a21dd584..0e89400b09 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -24,6 +24,11 @@
+ #include "hw/loader.h"
+ #include "hw/riscv/riscv_hart.h"
  
- The ``sifive_u`` machine automatically generates a device tree blob ("dtb")
--which it passes to the guest. This provides information about the addresses,
--interrupt lines and other configuration of the various devices in the system.
--Guest software should discover the devices that are present in the generated
--DTB instead of using a DTB for the real hardware, as some of the devices are
--not modeled by QEMU and trying to access these devices may cause unexpected
--behavior.
-+which it passes to the guest, if there is no ``-dtb`` option. This provides
-+information about the addresses, interrupt lines and other configuration of
-+the various devices in the system. Guest software should discover the devices
-+that are present in the generated DTB instead of using a DTB for the real
-+hardware, as some of the devices are not modeled by QEMU and trying to access
-+these devices may cause unexpected behavior.
++#define RISCV32_BIOS_BIN    "opensbi-riscv32-generic-fw_dynamic.bin"
++#define RISCV32_BIOS_ELF    "opensbi-riscv32-generic-fw_dynamic.elf"
++#define RISCV64_BIOS_BIN    "opensbi-riscv64-generic-fw_dynamic.bin"
++#define RISCV64_BIOS_ELF    "opensbi-riscv64-generic-fw_dynamic.elf"
 +
-+If users want to provide their own DTB, they can use the ``-dtb`` option.
-+These DTBs should have the following requirements:
-+
-+* The /cpus node should contain at least one subnode for E51 and the number
-+  of subnodes should match QEMU's ``-smp`` option
-+* The /memory reg size should match QEMU’s selected ram_size via ``-m``
-+* Should contain a node for the CLINT device with a compatible string
-+  "riscv,clint0" if using with OpenSBI BIOS images
+ bool riscv_is_32bit(RISCVHartArrayState *harts);
  
- Boot options
- ------------
-@@ -122,6 +131,32 @@ To boot the newly built Linux kernel in QEMU with the ``sifive_u`` machine:
-       -initrd /path/to/rootfs.ext4 \
-       -append "root=/dev/ram"
+ target_ulong riscv_calc_kernel_start_addr(RISCVHartArrayState *harts,
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index b55e56890c..f30cc8004b 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -561,12 +561,10 @@ static void sifive_u_machine_init(MachineState *machine)
  
-+Alternatively, we can use a custom DTB to boot the machine by inserting a CLINT
-+node in fu540-c000.dtsi in the Linux kernel,
-+
-+.. code-block:: none
-+
-+    clint: clint@2000000 {
-+        compatible = "riscv,clint0";
-+        interrupts-extended = <&cpu0_intc 3 &cpu0_intc 7
-+                               &cpu1_intc 3 &cpu1_intc 7
-+                               &cpu2_intc 3 &cpu2_intc 7
-+                               &cpu3_intc 3 &cpu3_intc 7
-+                               &cpu4_intc 3 &cpu4_intc 7>;
-+        reg = <0x00 0x2000000 0x00 0x10000>;
-+    };
-+
-+with the following command line options:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M sifive_u -smp 5 -m 8G \
-+      -display none -serial stdio \
-+      -kernel arch/riscv/boot/Image \
-+      -dtb arch/riscv/boot/dts/sifive/hifive-unleashed-a00.dtb \
-+      -initrd /path/to/rootfs.ext4 \
-+      -append "root=/dev/ram"
-+
- To build a Linux mainline kernel that can be booted by the ``sifive_u`` machine
- in 32-bit mode, use the rv32_defconfig configuration. A patch is required to
- fix the 32-bit boot issue for Linux kernel v5.10.
+     if (riscv_is_32bit(&s->soc.u_cpus)) {
+         firmware_end_addr = riscv_find_and_load_firmware(machine,
+-                                    "opensbi-riscv32-generic-fw_dynamic.bin",
+-                                    start_addr, NULL);
++                                    RISCV32_BIOS_BIN, start_addr, NULL);
+     } else {
+         firmware_end_addr = riscv_find_and_load_firmware(machine,
+-                                    "opensbi-riscv64-generic-fw_dynamic.bin",
+-                                    start_addr, NULL);
++                                    RISCV64_BIOS_BIN, start_addr, NULL);
+     }
+ 
+     if (machine->kernel_filename) {
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index f094bb2158..98932fba62 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -259,13 +259,11 @@ static void spike_board_init(MachineState *machine)
+      */
+     if (riscv_is_32bit(&s->soc[0])) {
+         firmware_end_addr = riscv_find_and_load_firmware(machine,
+-                                    "opensbi-riscv32-generic-fw_dynamic.elf",
+-                                    memmap[SPIKE_DRAM].base,
++                                    RISCV32_BIOS_ELF, memmap[SPIKE_DRAM].base,
+                                     htif_symbol_callback);
+     } else {
+         firmware_end_addr = riscv_find_and_load_firmware(machine,
+-                                    "opensbi-riscv64-generic-fw_dynamic.elf",
+-                                    memmap[SPIKE_DRAM].base,
++                                    RISCV64_BIOS_ELF, memmap[SPIKE_DRAM].base,
+                                     htif_symbol_callback);
+     }
+ 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 8a8ff04dab..b03c5f8b5b 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -682,12 +682,10 @@ static void virt_machine_init(MachineState *machine)
+ 
+     if (riscv_is_32bit(&s->soc[0])) {
+         firmware_end_addr = riscv_find_and_load_firmware(machine,
+-                                    "opensbi-riscv32-generic-fw_dynamic.bin",
+-                                    start_addr, NULL);
++                                    RISCV32_BIOS_BIN, start_addr, NULL);
+     } else {
+         firmware_end_addr = riscv_find_and_load_firmware(machine,
+-                                    "opensbi-riscv64-generic-fw_dynamic.bin",
+-                                    start_addr, NULL);
++                                    RISCV64_BIOS_BIN, start_addr, NULL);
+     }
+ 
+     if (machine->kernel_filename) {
 -- 
 2.25.1
 
