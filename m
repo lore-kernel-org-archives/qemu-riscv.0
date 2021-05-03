@@ -1,70 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ldfR9-0007GQ-2E
-	for mharc-qemu-riscv@gnu.org; Mon, 03 May 2021 16:45:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34076)
+	id 1ldh9e-0000eg-5V
+	for mharc-qemu-riscv@gnu.org; Mon, 03 May 2021 18:35:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56064)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1ldfR7-0007Dx-GT; Mon, 03 May 2021 16:45:01 -0400
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d]:33448)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1ldfR4-0008K9-84; Mon, 03 May 2021 16:45:01 -0400
-Received: by mail-wr1-x42d.google.com with SMTP id n2so7021207wrm.0;
- Mon, 03 May 2021 13:44:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=SV1ZOnE6lj13CJJbhYDEk/s0OMmCaGgLXzaCQlq+Xcg=;
- b=K82Qd/ltEYSPNxI3FOrCFdI/oLluk2k7CQaFPparnwh40hOZOCmPZAtqloaTYS4t1L
- v2rZy3GMDcym1d3X1qDKqGfiIhpygLhgC4XdGs+kNj/VilDnmx3lGaK55eJ2KsnGpoyQ
- LJLw62t6Td6cB2wt1PBGQhNF4sQbTT0u2pdP/zGXM+qdoEKwGDoxoRcqO2OTkMt3PGbv
- tE+lA9Sr9ok4OBNfb6Fn/RC7XqqkGS/Wz3oTfyB5lpHDbhVebaFKh/hOCMUGYaLL/tre
- sSVe3rgshUbEirzvV66u+UTdvuDskXwan5NaIO/nvsTkKt4zXjD2t075BE8scaOXfvep
- Qr/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=SV1ZOnE6lj13CJJbhYDEk/s0OMmCaGgLXzaCQlq+Xcg=;
- b=OEAWANuhGUHyl4JYVmIXsjHBLmddUdVNqMmDbEkrMZ39pR2uVfuGPk3K33Jy6XHNEk
- 1ths0ZgNQxbV0Z0ULYR3brVlrRHhf7QjDt1EECTuSl+HYTpwmhJMpEGLDXI3djdk2S44
- xxoeVV4mE6oM/cPjHV0gsAyx17LJAcffl2T4Pm0ixDTAFDSTHCuXDPJRvUJ10UJnQrvh
- /acpSGhJnmSV7LNwAcDcgSJ0xJOupU+DgnKK3diVTjEHKyrnVIr0hZNgZ0KlyPuMOZG2
- widY8oWWGL+5hNz5kNjKjjw465Mcbfpsa7WWH340MAQ2cV4JHuOWBf5+HjLYfN5cPg6y
- t3YA==
-X-Gm-Message-State: AOAM532IiMkTjiwnNFXjuYZI0sldYJt1oDI42wD8jZuT5gQA5N4ZCAH7
- SDNrA78rYSGlxyoZRPexZmK2Zo5h0DzM0dDB
-X-Google-Smtp-Source: ABdhPJzaYjQfmLj5BzhmF62jRzyTV5LCQNZbTXPixoThSbrccAs+wUXH0oSuq0UHB6aELPw/n2+PEA==
-X-Received: by 2002:adf:f74d:: with SMTP id z13mr27339310wrp.147.1620074695158; 
- Mon, 03 May 2021 13:44:55 -0700 (PDT)
-Received: from localhost.localdomain (a89-152-76-22.cpe.netcabo.pt.
- [89.152.76.22])
- by smtp.gmail.com with ESMTPSA id l22sm457353wmq.28.2021.05.03.13.44.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 May 2021 13:44:54 -0700 (PDT)
-From: Jose Martins <josemartins90@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Jose Martins <josemartins90@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v2] target/riscv: fix VS interrupts forwarding to HS
-Date: Mon,  3 May 2021 21:44:48 +0100
-Message-Id: <20210503204448.127412-1-josemartins90@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1)
+ (envelope-from <prvs=750139ea6=alistair.francis@wdc.com>)
+ id 1ldh9P-0000Z0-H9; Mon, 03 May 2021 18:34:53 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:28723)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=750139ea6=alistair.francis@wdc.com>)
+ id 1ldh9J-00029V-KK; Mon, 03 May 2021 18:34:50 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1620081285; x=1651617285;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=996xNHOaJte2Ne5Z1bf2gQTkRE6nHIOU5XBHX1YwcPI=;
+ b=HOjrypn/qPGr6onxTKcWOrQBPfY+nxu2D3WuUbleEXhTrXqPv35yOLK2
+ FxcD9b+IdwQ6MoNc1fcjwV75r0zWm0EjRO6HcpNvBbySAFnSQOB//oDKV
+ tY0ZcLdWvIePzgwPhp1zesdxA5VPsU44gAjpWinWK9CvgfcXnH5k99qRR
+ 0JlDmuDQW47+3DYUte/Wsfp3QCheeXlRegHu7tgQTWlh4THKdVuPkysaj
+ gFCfSgU3WHuBiKq2fzJpneHmkv753hKRqd26fAVuYRgtO2TjluRuGNCh1
+ Z566OoGpYsKNKQRZoHAHZ4mihfl63szNRDP5dIkBp4o6eSDVH7SyAzoEY w==;
+IronPort-SDR: x9Agqk8OCKQbz57lLHecoSuWvQNitrXi4Sej8eG0DcEzQJdO0oboO4q4Ou59g04eoPt7CWzwWy
+ QCiyM4UYZzYCYy4W6bKpGAcF2vxDPk2yYdjBk/0N8fjQA6Qh+Z7VV1BxpC+M6Q8ZlQdbEY7R/f
+ V8cIEhg9mwYd864FzBlwNt+hTLe5QoVrReYX1Hfvc9fw/mMveJ5zkuEcgLDN5bRYm65uQqW165
+ A3tDNh65vCpGZZQCAWimkFcUaFHkjfhfFBNmxNbIvDGl/jZG1MzEECDS0JC/gQK9iBMLRdqJxg
+ QPQ=
+X-IronPort-AV: E=Sophos;i="5.82,271,1613404800"; d="scan'208";a="278115916"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 04 May 2021 06:34:43 +0800
+IronPort-SDR: Zs3o2UK2xTaqpigD7dB9EnnQghMjb3X5lOmCSIuRbecFotmEKFaFoyjMEq+n8G9wqQpl1Ck8aJ
+ GDLLdjuLUsBEOX54xPchFI4caXGhTUcPjlQfNZEvj5++kwte5A19UqfJ41qJcWvtFMHG4SuGm8
+ qK/EFEU9iYYUIb1j0R+spmXdZIDA82Tbo9vdclYobb4DecXqq2DZV9lQG0882FTNgC0/Hi5MkX
+ gOkaGodBBprHp0WTSaupHMNrtIkJRC9djAMyPcyc4K4wqFrKjZss5PqsviSHzDyZFSN7tSEz/A
+ iYUZlEkoQO++x4HN/C5mBqdu
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 May 2021 15:13:26 -0700
+IronPort-SDR: 3z9i/FQL4vCRhrfzHPH3HxEL0djO3l0t5josBZIRzbP9A+gh+Brtpo5mDn/gdVO6huyMYwmVmM
+ qFU8/LCnKSZbvXGm5TdUZbDMTaZ9IxkQzzkn609PPlUfvi/WnRSc53O3kKXrzU+0yR5d96TDEy
+ ycy8pmr0o7O5WKYKsBY3/inz5hmeVgEhb+rDdVe5qyC/MnDGfB7wpz9ZGHQDmvVb4BBkXfXc8s
+ 3Q6gxxWdCqH35zFNl319Ip+k6VgLqbfnnqUY5fm++DsmluvmczWjpUbc634ZeXPK8KNkTDnwQs
+ J1M=
+WDCIronportException: Internal
+Received: from unknown (HELO alistair-risc6-laptop.wdc.com) ([10.225.165.45])
+ by uls-op-cesaip01.wdc.com with ESMTP; 03 May 2021 15:34:39 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com
+Subject: [PATCH v1 1/1] docs/system: Move the RISC-V -bios information to
+ removed
+Date: Tue,  4 May 2021 08:34:32 +1000
+Message-Id: <4f1c261e7f69045ab8bb8926d85fe1d35e48ea5b.1620081256.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=josemartins90@gmail.com; helo=mail-wr1-x42d.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=68.232.141.245;
+ envelope-from=prvs=750139ea6=alistair.francis@wdc.com;
+ helo=esa1.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -78,89 +82,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 May 2021 20:45:01 -0000
+X-List-Received-Date: Mon, 03 May 2021 22:35:00 -0000
 
-VS interrupts (2, 6, 10) were not correctly forwarded to hs-mode when
-not delegated in hideleg (which was not being taken into account). This
-was mainly because hs level sie was not always considered enabled when
-it should. The spec states that "Interrupts for higher-privilege modes,
-y>x, are always globally enabled regardless of the setting of the global
-yIE bit for the higher-privilege mode." and also "For purposes of
-interrupt global enables, HS-mode is considered more privileged than
-VS-mode, and VS-mode is considered more privileged than VU-mode".
+QEMU 5.1 changed the behaviour of the default boot for the RISC-V virt
+and sifive_u machines. This patch moves that change from the
+deprecated.rst file to the removed-features.rst file and the
+target-riscv.rst.
 
-These interrupts should be treated the same as any other kind of
-exception. Therefore, there is no need to "force an hs exception" as the
-current privilege level, the state of the global ie and of the
-delegation registers should be enough to route the interrupt to the
-appropriate privilege level in riscv_cpu_do_interrupt. Also, these
-interrupts never target m-mode, which is  guaranteed by the hardwiring
-of the corresponding bits in mideleg.
-
-Signed-off-by: Jose Martins <josemartins90@gmail.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
-Alistair, I sent the previous version of this patch a year ago (!).        
-After our brief exchange on wether we should considered HS a higher        
-privilege mode than VS (the spec was updated to clarify this in the        
-meantime) you asked me for a small last tweak  before accepting            
-the patch. This completely slipped my mind, and I only noticed I hadn't    
-submitted the final version of the patch a few weeks ago. For this, my     
-apologies. When I took a deeper look at it again, I found some other issues
-with the patch so I decided to go for a deeper refactoring.                                                        
+ docs/system/deprecated.rst       | 19 -------------------
+ docs/system/removed-features.rst |  5 +++++
+ docs/system/target-riscv.rst     | 13 ++++++++++++-
+ 3 files changed, 17 insertions(+), 20 deletions(-)
 
- target/riscv/cpu_helper.c | 28 ++++++++--------------------
- 1 file changed, 8 insertions(+), 20 deletions(-)
-
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 21c54ef561..592d4642be 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -38,36 +38,24 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
- #ifndef CONFIG_USER_ONLY
- static int riscv_cpu_local_irq_pending(CPURISCVState *env)
- {
--    target_ulong irqs;
-+    target_ulong virt_enabled = riscv_cpu_virt_enabled(env);
+diff --git a/docs/system/deprecated.rst b/docs/system/deprecated.rst
+index 80cae86252..dd83c95211 100644
+--- a/docs/system/deprecated.rst
++++ b/docs/system/deprecated.rst
+@@ -52,25 +52,6 @@ pcspk-audiodev=<name>``.
+ ``tty`` and ``parport`` are aliases that will be removed. Instead, the
+ actual backend names ``serial`` and ``parallel`` should be used.
  
-     target_ulong mstatus_mie = get_field(env->mstatus, MSTATUS_MIE);
-     target_ulong mstatus_sie = get_field(env->mstatus, MSTATUS_SIE);
--    target_ulong hs_mstatus_sie = get_field(env->mstatus_hs, MSTATUS_SIE);
- 
--    target_ulong pending = env->mip & env->mie &
--                               ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
--    target_ulong vspending = (env->mip & env->mie &
--                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
-+    target_ulong pending = env->mip & env->mie;
- 
-     target_ulong mie    = env->priv < PRV_M ||
-                           (env->priv == PRV_M && mstatus_mie);
-     target_ulong sie    = env->priv < PRV_S ||
-                           (env->priv == PRV_S && mstatus_sie);
--    target_ulong hs_sie = env->priv < PRV_S ||
--                          (env->priv == PRV_S && hs_mstatus_sie);
-+    target_ulong hsie   = virt_enabled || sie;
-+    target_ulong vsie   = virt_enabled && sie;
- 
--    if (riscv_cpu_virt_enabled(env)) {
--        target_ulong pending_hs_irq = pending & -hs_sie;
+-RISC-V ``-bios`` (since 5.1)
+-''''''''''''''''''''''''''''
 -
--        if (pending_hs_irq) {
--            riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
--            return ctz64(pending_hs_irq);
--        }
+-QEMU 4.1 introduced support for the -bios option in QEMU for RISC-V for the
+-RISC-V virt machine and sifive_u machine. QEMU 4.1 had no changes to the
+-default behaviour to avoid breakages.
 -
--        pending = vspending;
--    }
+-QEMU 5.1 changes the default behaviour from ``-bios none`` to ``-bios default``.
 -
--    irqs = (pending & ~env->mideleg & -mie) | (pending &  env->mideleg & -sie);
-+    target_ulong irqs =
-+            (pending & ~env->mideleg & -mie) |
-+            (pending &  env->mideleg & ~env->hideleg & -hsie) |
-+            (pending &  env->mideleg &  env->hideleg & -vsie);
+-QEMU 5.1 has three options:
+- 1. ``-bios default`` - This is the current default behavior if no -bios option
+-      is included. This option will load the default OpenSBI firmware automatically.
+-      The firmware is included with the QEMU release and no user interaction is
+-      required. All a user needs to do is specify the kernel they want to boot
+-      with the -kernel option
+- 2. ``-bios none`` - QEMU will not automatically load any firmware. It is up
+-      to the user to load all the images they need.
+- 3. ``-bios <file>`` - Tells QEMU to load the specified file as the firmwrae.
+-
+ Short-form boolean options (since 6.0)
+ ''''''''''''''''''''''''''''''''''''''
  
-     if (irqs) {
-         return ctz64(irqs); /* since non-zero */
+diff --git a/docs/system/removed-features.rst b/docs/system/removed-features.rst
+index 29e90601a5..747a763b37 100644
+--- a/docs/system/removed-features.rst
++++ b/docs/system/removed-features.rst
+@@ -126,6 +126,11 @@ devices.  Drives the board doesn't pick up can no longer be used with
+ This option was undocumented and not used in the field.
+ Use `-device usb-ccid`` instead.
+ 
++RISC-V firmware not booted by default (removed in 5.1)
++''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++QEMU 5.1 changes the default behaviour from ``-bios none`` to ``-bios default``
++for the RISC-V ``virt`` machine and ``sifive_u`` machine.
+ 
+ QEMU Machine Protocol (QMP) commands
+ ------------------------------------
+diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+index 8d5946fbbb..0001c55fca 100644
+--- a/docs/system/target-riscv.rst
++++ b/docs/system/target-riscv.rst
+@@ -69,5 +69,16 @@ undocumented; you can get a complete list by running
+    riscv/microchip-icicle-kit
+    riscv/sifive_u
+ 
+-RISC-V CPU features
++RISC-V CPU firmware
+ -------------------
++
++When using the ``sifive_u`` or ``virt`` machine there are three different
++firmware boot options:
++ 1. ``-bios default`` - This is the default behaviour if no -bios option
++      is included. This option will load the default OpenSBI firmware automatically.
++      The firmware is included with the QEMU release and no user interaction is
++      required. All a user needs to do is specify the kernel they want to boot
++      with the -kernel option
++ 2. ``-bios none`` - QEMU will not automatically load any firmware. It is up
++      to the user to load all the images they need.
++ 3. ``-bios <file>`` - Tells QEMU to load the specified file as the firmware.
 -- 
-2.25.1
+2.31.1
 
 
