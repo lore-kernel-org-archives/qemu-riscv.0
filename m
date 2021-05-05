@@ -1,64 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1leK3l-0006Vo-MM
-	for mharc-qemu-riscv@gnu.org; Wed, 05 May 2021 12:07:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60092)
+	id 1leK3t-0006ax-KE
+	for mharc-qemu-riscv@gnu.org; Wed, 05 May 2021 12:07:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60148)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1leK3h-0006UB-WD
- for qemu-riscv@nongnu.org; Wed, 05 May 2021 12:07:34 -0400
-Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a]:43771)
+ id 1leK3m-0006Wi-M5
+ for qemu-riscv@nongnu.org; Wed, 05 May 2021 12:07:38 -0400
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030]:37662)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1leK3Y-0002ge-Uq
- for qemu-riscv@nongnu.org; Wed, 05 May 2021 12:07:30 -0400
-Received: by mail-pf1-x42a.google.com with SMTP id e15so2302019pfv.10
- for <qemu-riscv@nongnu.org>; Wed, 05 May 2021 09:07:23 -0700 (PDT)
+ id 1leK3e-0002jx-Q7
+ for qemu-riscv@nongnu.org; Wed, 05 May 2021 12:07:36 -0400
+Received: by mail-pj1-x1030.google.com with SMTP id
+ k3-20020a17090ad083b0290155b934a295so1099389pju.2
+ for <qemu-riscv@nongnu.org>; Wed, 05 May 2021 09:07:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=kc8+Dl4aAeMCPJAczn9yydjcGXHFYt2T6ODbO66giag=;
- b=RcFeRk3zrKr2PNSpS2KJ2L00PTLNoz1OZ//HJOF1GzEzvzmGrmLM6OMwNaAbi3l4Yo
- 46QX8MedjTAFleq6/chLVzYSgeFnrMvOZgdkOFcdvMIXx9OAnzw7dTM3a+psusrb+S40
- FV0U0o623y0X+ERi+b2SMYQIg1IlM7PBC8TsJKt5pBv0/ramJjDN2ne9pJLSoNrKkaZH
- axMprb5u4yUYpoazhZdZ6MWu6+a/8tyaeYWp+iThzFk5orCmzo4T7NCvLOMGWtDGpj8T
- qV9Rc3ohAdvcdQsTdMY60VQLI/2f82J9odXvySUcgIjzP7daFJ2x6SqhWlbCxQ5o2kuQ
- Eddg==
+ bh=MbUS3FHXaTjfTejD26jINumm8NjBKbn09fwRKpQblAw=;
+ b=eiGK5FRI04TeEes6Szi2hA5iz8ACryGxY7ntsqmtV7tYPeuC5a7xazXIRTFOan0o6y
+ b2qcQbm8RdUbfFcsC7PiSWuscTpEs1rRFFIdrS4i0QFUX2+VOb4ZTt+CwlrsuzV6//R7
+ Qqnr3y5xZomy543S5jTvncgH1HCaT5d/2i6owwMEJ9MAu143a6tUMTxaqjjxMjoOCFGJ
+ HKjLT6BtUAKPvE+WhnIPjvzqGw6t/WmMrztwcd2BAvp93/D4O68IpG8YHr6PluX8PI1d
+ W6Zmfwa/H7bqDCzpNFaZ5wiHHo21ihqG/lXbRqkC7kxz9v+E3+iIXC9OdEwBP7hhU64e
+ jXPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=kc8+Dl4aAeMCPJAczn9yydjcGXHFYt2T6ODbO66giag=;
- b=uFfEJIE9HtrFwajEpLWVn7X3vl72FfQMZlkrx86qhV2+RBPujzBGyJNXLQ3m8jxqID
- I4+3lsb/j7/LmDk6G7sIXagenE1qNXkblgsgAOPiLF1udMnIiYunf4gB+9fsTMRcKR4i
- JCADY6/BjkRbaqGb7s+fXHsiWhsZemnWBcSUX4Qfvq65VO+BdhPWmyk8pvsA7Del9DEw
- QASY9dsfAaVw/cnWUkO6ZtHKHyp1GH7JHqnZTX57SOl73+j2IjNj1QLp+Rq/s8XaAKzH
- EyAc3lYF/o3R2xe3Pg5pI17o2LK8cQViOkpqYAIRoEgDrdEbbmpIOchdkoxFm7wMjuqr
- WBkA==
-X-Gm-Message-State: AOAM532cv5C9lnmtq+aif09xWFPFA7Kphu0fgo2/e2ly7n8W2YQoe6UG
- EX+KGm3LvmZmzRK//pNwrd5wZw==
-X-Google-Smtp-Source: ABdhPJyWGby41wkKuT/Es8x8wgwynZv384VR94oVJrClkYgAV74Ljd93ukbLGztLn0rGpn41vy7mOg==
-X-Received: by 2002:a65:4048:: with SMTP id h8mr29149070pgp.123.1620230842645; 
- Wed, 05 May 2021 09:07:22 -0700 (PDT)
+ bh=MbUS3FHXaTjfTejD26jINumm8NjBKbn09fwRKpQblAw=;
+ b=MNig4sqmU0gIcISDBYejZLyknX8DbbepDNnHWIo8IiYo3mhB9GymqKEA5KCY0UiBd0
+ ZciPNyvDk6rpCphoo/DAWwQxfQ6Y8GtA/+wn/cRFOuxkLsVqSF07LhDSshWlOl2BP2QG
+ vM/7hUI89Io9mDAvcGFs2NB1RSMlixkRKeoNRRVUffTTh+Z2tX/yyEQWZwl6bd8j0aAs
+ qQT3FatRv7PAEDPrV/7nLLBToCCs/5lw+71uHddXxTMzOfa9d83fFt6BsbbKr9EPHe9Y
+ OrkkssypYBj5d5wVW2UDd5GaIUnawyQmnbHxSR74lhk0Pd3qmxSqzWJsGa5FgvCG1uSv
+ m6UQ==
+X-Gm-Message-State: AOAM531bL+hrtnE1aK5WUbkgsIaKhf/pqGO99AI7B1b8tsVS6eYQ1Dp7
+ 1lQ8Nm1nzQ4uNK36KME2Yly6RyY1NS0rvKBo
+X-Google-Smtp-Source: ABdhPJwi9ss7vhg50XDNQ4GsckZKzBg2u4ugODOLs9EPrbQEJw2ofSHUDpcUDkxQHuzSUNY+uTAhFw==
+X-Received: by 2002:a17:902:fe98:b029:ed:23f5:7d54 with SMTP id
+ x24-20020a170902fe98b02900ed23f57d54mr32388707plm.57.1620230846721; 
+ Wed, 05 May 2021 09:07:26 -0700 (PDT)
 Received: from localhost.localdomain (122-116-72-36.HINET-IP.hinet.net.
  [122.116.72.36])
- by smtp.gmail.com with ESMTPSA id js6sm35877977pjb.0.2021.05.05.09.07.20
+ by smtp.gmail.com with ESMTPSA id js6sm35877977pjb.0.2021.05.05.09.07.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 May 2021 09:07:22 -0700 (PDT)
+ Wed, 05 May 2021 09:07:26 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Kito Cheng <kito.cheng@sifive.com>, Frank Chang <frank.chang@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v6 15/17] target/riscv: rvb: add/shift with prefix zero-extend
-Date: Thu,  6 May 2021 00:06:16 +0800
-Message-Id: <20210505160620.15723-16-frank.chang@sifive.com>
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH v6 16/17] target/riscv: rvb: support and turn on B-extension
+ from command line
+Date: Thu,  6 May 2021 00:06:17 +0800
+Message-Id: <20210505160620.15723-17-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210505160620.15723-1-frank.chang@sifive.com>
 References: <20210505160620.15723-1-frank.chang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1030.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,88 +80,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 May 2021 16:07:35 -0000
+X-List-Received-Date: Wed, 05 May 2021 16:07:39 -0000
 
 From: Kito Cheng <kito.cheng@sifive.com>
 
+B-extension is default off, use cpu rv32 or rv64 with x-b=true to
+enable B-extension.
+
 Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn32.decode              |  3 +++
- target/riscv/insn_trans/trans_rvb.c.inc | 26 +++++++++++++++++++++++++
- target/riscv/translate.c                |  6 ++++++
- 3 files changed, 35 insertions(+)
+ target/riscv/cpu.c | 4 ++++
+ target/riscv/cpu.h | 1 +
+ 2 files changed, 5 insertions(+)
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 287920ee9bf..f09f8d5faf7 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -720,6 +720,7 @@ gorcw      0010100 .......... 101 ..... 0111011 @r
- sh1add_uw  0010000 .......... 010 ..... 0111011 @r
- sh2add_uw  0010000 .......... 100 ..... 0111011 @r
- sh3add_uw  0010000 .......... 110 ..... 0111011 @r
-+add_uw     0000100 .......... 000 ..... 0111011 @r
- 
- bsetiw     0010100 .......... 001 ..... 0011011 @sh5
- bclriw     0100100 .......... 001 ..... 0011011 @sh5
-@@ -729,3 +730,5 @@ sroiw      0010000 .......... 101 ..... 0011011 @sh5
- roriw      0110000 .......... 101 ..... 0011011 @sh5
- greviw     0110100 .......... 101 ..... 0011011 @sh5
- gorciw     0010100 .......... 101 ..... 0011011 @sh5
-+
-+slli_uw    00001. ........... 001 ..... 0011011 @sh
-diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
-index b27114a068d..9e81f6e3de4 100644
---- a/target/riscv/insn_trans/trans_rvb.c.inc
-+++ b/target/riscv/insn_trans/trans_rvb.c.inc
-@@ -410,3 +410,29 @@ static bool trans_sh##SHAMT##add_uw(DisasContext *ctx,        \
- GEN_TRANS_SHADD_UW(1)
- GEN_TRANS_SHADD_UW(2)
- GEN_TRANS_SHADD_UW(3)
-+
-+static bool trans_add_uw(DisasContext *ctx, arg_add_uw *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_EXT(ctx, RVB);
-+    return gen_arith(ctx, a, gen_add_uw);
-+}
-+
-+static bool trans_slli_uw(DisasContext *ctx, arg_slli_uw *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_EXT(ctx, RVB);
-+
-+    TCGv source1 = tcg_temp_new();
-+    gen_get_gpr(source1, a->rs1);
-+
-+    if (a->shamt < 32) {
-+        tcg_gen_deposit_z_tl(source1, source1, a->shamt, 32);
-+    } else {
-+        tcg_gen_shli_tl(source1, source1, a->shamt);
-+    }
-+
-+    gen_set_gpr(a->rd, source1);
-+    tcg_temp_free(source1);
-+    return true;
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index ae9b5f7a2e2..c6e87396142 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -765,6 +765,12 @@ GEN_SHADD_UW(1)
- GEN_SHADD_UW(2)
- GEN_SHADD_UW(3)
- 
-+static void gen_add_uw(TCGv ret, TCGv arg1, TCGv arg2)
-+{
-+    tcg_gen_ext32u_tl(arg1, arg1);
-+    tcg_gen_add_tl(ret, arg1, arg2);
-+}
-+
- static bool gen_arith(DisasContext *ctx, arg_r *a,
-                       void(*func)(TCGv, TCGv, TCGv))
- {
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 3191fd00822..1b3c5ba1480 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -486,6 +486,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         if (cpu->cfg.ext_h) {
+             target_misa |= RVH;
+         }
++        if (cpu->cfg.ext_b) {
++            target_misa |= RVB;
++        }
+         if (cpu->cfg.ext_v) {
+             target_misa |= RVV;
+             if (!is_power_of_2(cpu->cfg.vlen)) {
+@@ -556,6 +559,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+     /* This is experimental so mark with 'x-' */
++    DEFINE_PROP_BOOL("x-b", RISCVCPU, cfg.ext_b, false),
+     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
+     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index f95bcbd8e10..3cea62cd4c4 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -284,6 +284,7 @@ struct RISCVCPU {
+         bool ext_f;
+         bool ext_d;
+         bool ext_c;
++        bool ext_b;
+         bool ext_s;
+         bool ext_u;
+         bool ext_h;
 -- 
 2.17.1
 
