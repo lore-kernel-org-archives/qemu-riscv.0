@@ -1,59 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1leTT0-0000aZ-3m
-	for mharc-qemu-riscv@gnu.org; Wed, 05 May 2021 22:10:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60024)
+	id 1leTW0-0002SW-T3
+	for mharc-qemu-riscv@gnu.org; Wed, 05 May 2021 22:13:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60572)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1leTSo-0000Zw-Sx; Wed, 05 May 2021 22:10:11 -0400
-Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:44860)
+ id 1leTVy-0002P4-Jc; Wed, 05 May 2021 22:13:22 -0400
+Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:44799)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1leTSm-0008Oo-UQ; Wed, 05 May 2021 22:10:06 -0400
-Received: by mail-il1-x132.google.com with SMTP id i22so3454829ila.11;
- Wed, 05 May 2021 19:10:04 -0700 (PDT)
+ id 1leTVw-0001xR-Tg; Wed, 05 May 2021 22:13:22 -0400
+Received: by mail-io1-xd29.google.com with SMTP id p8so3465185iol.11;
+ Wed, 05 May 2021 19:13:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=1YnX9Cm3enqdv0yfI/EdfbngfUVrtcH6oNGxderYxdE=;
- b=aYFRQHi6vpUdj8fNw9WPUz2AIqkPMK6H00cY13nURagG0VuNNPhuYN6qgC4du2legk
- vITSssWJMo9TdvBo54pZB9gMon/G/Mj3sQUCQIBs2YYzOggfLqaLBqhbSN+ejsN1Z7F0
- rzvBc6TEntOl/Qp1YMI7PS6nZ7PaQietZdXvhHBPCkPNgzeQ0W2HxAUOwXazmF+ZhDwS
- /MQhOcrRSuSmWlKwPmuGX+v+TC7fjXCD0yHXZkDK6IzCLMmpp+RRY0TcX27rKBg8qZ8I
- 5dqBD6Hsqy6jHLgelCO6oyBBOeYFSxfrmlCTQU7i0Z2RepVDDEjdf7iyeqi5nNN5wp5O
- J7Ew==
+ :cc:content-transfer-encoding;
+ bh=KDzHJ5do4n1hBS072QilmuA4EJKwMQI1wwP2/GupqBE=;
+ b=PfwbJC/7IyUtbRhGaTwMyg/NZ+kJLC/u5HdAyekBHXJ9X6w1oNzDHLoJqIorVQgXiU
+ UpooPbS02/D6uaIkThJ38FbSqRgsAlSN5whox32FLcQNYyJurWZgQ1hBRICj76IBusRP
+ vFyP+E4R9nFwgrA6kNPbjL+B5wFV9EYL8NmIrWTJwuGhe8G5yQbyiS0BNeOb+ESTsEyW
+ I+DqS9OHFTm6DcZeKsVI6Jm2RibCSI99Pi4vU4p0C+leDH665mZdHdcPoNia8lEYKvFb
+ XypsTnzG1+Mt42oO/6Cmznl0HK92kwI4EafHXLPV83/5Jfk51U1B6arER+6TzXtu6gm8
+ 0U5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=1YnX9Cm3enqdv0yfI/EdfbngfUVrtcH6oNGxderYxdE=;
- b=Bby5NkVb/02+EssXOaOYZozZL8QR4i0lBXLkGNqp/2tD3W6aDfW99aHmuJR4hm7GxO
- t/ZIYBwf/C/SwdRKgpeG9iNq5ulnCynVEB247uUcrkagevh2F4On57wai3RfE1OrQx4N
- FsFK2m5bJYIzmyqPp1GoLN0ew5HHXvIA56y00pkDfA7U48IyEKEPQXuT6jj9URp5jptg
- CTXLG9wDCL6pjD3pQ2Bn8ojYejLjoahCPynXSsJgiqWJKsq890vjj9NV01JHKD+LSlPo
- sUSfIfLLsIK0QtE/ksxwDQgAFgKk6ITZhjmNm4qDxm3ri8Y5p1EgF7t/TjE2pp1yzzGG
- FhBg==
-X-Gm-Message-State: AOAM531WYE4LWnCi5MOZsWULkqZvcEW2slZOnYwD+fIif0FSAzBwi1ci
- SEs3fJclZBw01vAKXfQk80zPPrTn/I5XuSSNxQ0=
-X-Google-Smtp-Source: ABdhPJwJbW0JHg5VJptvSmtlWVUujQ0bvv2CCinZHcKqEZ20hufV84k4IoAeA6gfywAsFOH0Ciy2zkXOa8LDqSJhuZo=
-X-Received: by 2002:a05:6e02:eac:: with SMTP id
- u12mr1863475ilj.177.1620267003422; 
- Wed, 05 May 2021 19:10:03 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=KDzHJ5do4n1hBS072QilmuA4EJKwMQI1wwP2/GupqBE=;
+ b=RN/E7n30/IRRZv9pjkgogaFnLsQ0kUaKPVeJRQITGdZlD09/MOrdlJ4vOs0txHAL89
+ PdvmzBF1F1Po4kUri/+3Im7ZEk0Y0y0nlYXnu2iYXovyIA/QQSCiB1d7+2NufhALA59H
+ b8cEoQ+1F0X/eMyD3Hvj+cDCYKCyTfIL0ZbYQ+/I5TVx2Sp4MDYUIqI8qgm/Dz6aD2HI
+ NS7OTZV8e+jAQ88eF7ale4AWZe+7yCP23dnS0GBrLFyFBEIw2ysw2kxASYcsrkVGbYj5
+ 3O3FlrJdvBRONOVZezWGdJMQbVEi2uh/D/kSBPMWWIm35xnTxn5up3NwIyvtKoH6Teb4
+ rovw==
+X-Gm-Message-State: AOAM531fLxpst2Cu9l5ABgKtMHsu2Vyz/argpiq4jHyPuHoXDlKL/l3C
+ Vz+hC1hmdHhcgIiF5VfdozrmgFVKnJH4vGbg1CM=
+X-Google-Smtp-Source: ABdhPJwW2STKK39VcWYiNzPmCX4vynZ/RRMI0ZLARu5HKL69qYSdxVUoGumCPPHc7JIX3HSIqhyREuNHNpGF47j1Tco=
+X-Received: by 2002:a6b:c857:: with SMTP id y84mr1260367iof.118.1620267199497; 
+ Wed, 05 May 2021 19:13:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210420213656.85148-1-josemartins90@gmail.com>
-In-Reply-To: <20210420213656.85148-1-josemartins90@gmail.com>
+References: <20210504153456.927083-1-lukas.juenger@greensocs.com>
+ <20210504153456.927083-2-lukas.juenger@greensocs.com>
+In-Reply-To: <20210504153456.927083-2-lukas.juenger@greensocs.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 May 2021 12:09:37 +1000
-Message-ID: <CAKmqyKN-qaBqhqTKJ-RVQ4BXO++vxVYB1+WNK3atUmqZbNyWgg@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: fix wfi exception behavior
-To: Jose Martins <josemartins90@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+Date: Thu, 6 May 2021 12:12:51 +1000
+Message-ID: <CAKmqyKO2cObuSbUe7itr4n9cgF6pmVB5coVovphhSzO+7AJuZg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] Consistent function names for sifive uart read and
+ write function
+To: =?UTF-8?Q?Lukas_J=C3=BCnger?= <lukas.juenger@greensocs.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, Mark Burton <mark.burton@greensocs.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Luc Michel <luc.michel@greensocs.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x132.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,86 +78,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2021 02:10:16 -0000
+X-List-Received-Date: Thu, 06 May 2021 02:13:23 -0000
 
-On Wed, Apr 21, 2021 at 7:37 AM Jose Martins <josemartins90@gmail.com> wrote:
+On Wed, May 5, 2021 at 2:50 AM Lukas J=C3=BCnger <lukas.juenger@greensocs.c=
+om> wrote:
 >
-> The wfi exception trigger behavior should take into account user mode,
-> hstatus.vtw, and the fact the an wfi might raise different types of
-> exceptions depending on various factors:
->
-> If supervisor mode is not present:
->
-> - an illegal instruction exception should be generated if user mode
-> executes and wfi instruction and mstatus.tw = 1.
->
-> If supervisor mode is present:
->
-> - when a wfi instruction is executed, an illegal exception should be triggered
-> if either the current mode is user or the mode is supervisor and mstatus.tw is
-> set.
->
-> Plus, if the hypervisor extensions are enabled:
->
-> - a virtual instruction exception should be raised when a wfi is executed from
-> virtual-user or virtual-supervisor and hstatus.vtw is set.
->
-> Signed-off-by: Jose Martins <josemartins90@gmail.com>
+> Signed-off-by: Lukas J=C3=BCnger <lukas.juenger@greensocs.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
-> Alistair, I hope you've agreed with my argumentis for the previous version
-> of the patch. As promised, I submit this version which takes into account M/U
-> only harts. It checks for the presence of the RVS extension. If it is
-> not present mstatus.tw takes effect over the exection of wfi in user
-> mode.
+>  hw/char/sifive_uart.c | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
 >
->  target/riscv/cpu_bits.h  |  1 +
->  target/riscv/op_helper.c | 11 ++++++++---
->  2 files changed, 9 insertions(+), 3 deletions(-)
+> diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
+> index 3a00ba7f00..cb70374ead 100644
+> --- a/hw/char/sifive_uart.c
+> +++ b/hw/char/sifive_uart.c
+> @@ -65,7 +65,7 @@ static void update_irq(SiFiveUARTState *s)
+>  }
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 24b24c69c5..ed8b97c788 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -436,6 +436,7 @@
->  #define HSTATUS_HU           0x00000200
->  #define HSTATUS_VGEIN        0x0003F000
->  #define HSTATUS_VTVM         0x00100000
-> +#define HSTATUS_VTW          0x00200000
->  #define HSTATUS_VTSR         0x00400000
->  #if defined(TARGET_RISCV64)
->  #define HSTATUS_VSXL        0x300000000
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index d55def76cf..15982a7a33 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -173,10 +173,15 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
->  void helper_wfi(CPURISCVState *env)
+>  static uint64_t
+> -uart_read(void *opaque, hwaddr addr, unsigned int size)
+> +sifive_uart_read(void *opaque, hwaddr addr, unsigned int size)
 >  {
->      CPUState *cs = env_cpu(env);
-> +    bool rvs = riscv_has_ext(env, RVS);
-> +    bool prv_u = env->priv == PRV_U;
-> +    bool prv_s = env->priv == PRV_S;
+>      SiFiveUARTState *s =3D opaque;
+>      unsigned char r;
+> @@ -101,8 +101,8 @@ uart_read(void *opaque, hwaddr addr, unsigned int siz=
+e)
+>  }
 >
-> -    if ((env->priv == PRV_S &&
-> -        get_field(env->mstatus, MSTATUS_TW)) ||
-> -        riscv_cpu_virt_enabled(env)) {
-> +    if (((prv_s || (!rvs && prv_u)) && get_field(env->mstatus, MSTATUS_TW)) ||
-> +        (rvs && prv_u && !riscv_cpu_virt_enabled(env))) {
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> +    } else if (riscv_cpu_virt_enabled(env) && (prv_u ||
-> +        (prv_s && get_field(env->hstatus, HSTATUS_VTW)))) {
->          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
->      } else {
->          cs->halted = 1;
+>  static void
+> -uart_write(void *opaque, hwaddr addr,
+> -           uint64_t val64, unsigned int size)
+> +sifive_uart_write(void *opaque, hwaddr addr,
+> +                  uint64_t val64, unsigned int size)
+>  {
+>      SiFiveUARTState *s =3D opaque;
+>      uint32_t value =3D val64;
+> @@ -131,9 +131,9 @@ uart_write(void *opaque, hwaddr addr,
+>                    __func__, (int)addr, (int)value);
+>  }
+>
+> -static const MemoryRegionOps uart_ops =3D {
+> -    .read =3D uart_read,
+> -    .write =3D uart_write,
+> +static const MemoryRegionOps sifive_uart_ops =3D {
+> +    .read =3D sifive_uart_read,
+> +    .write =3D sifive_uart_write,
+>      .endianness =3D DEVICE_NATIVE_ENDIAN,
+>      .valid =3D {
+>          .min_access_size =3D 4,
+> @@ -187,7 +187,7 @@ SiFiveUARTState *sifive_uart_create(MemoryRegion *add=
+ress_space, hwaddr base,
+>      qemu_chr_fe_init(&s->chr, chr, &error_abort);
+>      qemu_chr_fe_set_handlers(&s->chr, uart_can_rx, uart_rx, uart_event,
+>          uart_be_change, s, NULL, true);
+> -    memory_region_init_io(&s->mmio, NULL, &uart_ops, s,
+> +    memory_region_init_io(&s->mmio, NULL, &sifive_uart_ops, s,
+>                            TYPE_SIFIVE_UART, SIFIVE_UART_MAX);
+>      memory_region_add_subregion(address_space, base, &s->mmio);
+>      return s;
 > --
-> 2.25.1
+> 2.30.2
 >
 >
 
