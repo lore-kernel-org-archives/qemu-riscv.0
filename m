@@ -1,66 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1leYvF-0003In-7S
-	for mharc-qemu-riscv@gnu.org; Thu, 06 May 2021 03:59:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43110)
+	id 1lezBb-0001r2-La
+	for mharc-qemu-riscv@gnu.org; Fri, 07 May 2021 08:02:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50402)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1leYvD-0003Gk-3j; Thu, 06 May 2021 03:59:47 -0400
-Received: from szxga08-in.huawei.com ([45.249.212.255]:2746)
+ (Exim 4.90_1) (envelope-from <konrad.schwarz@siemens.com>)
+ id 1lezBZ-0001oT-DO
+ for qemu-riscv@nongnu.org; Fri, 07 May 2021 08:02:25 -0400
+Received: from gw-eagle1.siemens.com ([194.138.20.72]:13097)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1leYv9-0003mr-Ko; Thu, 06 May 2021 03:59:46 -0400
-Received: from dggeml707-chm.china.huawei.com (unknown [172.30.72.56])
- by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4FbQqG0wZqz19LyD;
- Thu,  6 May 2021 15:55:22 +0800 (CST)
-Received: from dggpemm000002.china.huawei.com (7.185.36.174) by
- dggeml707-chm.china.huawei.com (10.3.17.137) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.2176.2; Thu, 6 May 2021 15:59:24 +0800
-Received: from dggpemm000001.china.huawei.com (7.185.36.245) by
- dggpemm000002.china.huawei.com (7.185.36.174) with Microsoft SMTP Server
+ (Exim 4.90_1) (envelope-from <konrad.schwarz@siemens.com>)
+ id 1lezBT-0002i1-OM
+ for qemu-riscv@nongnu.org; Fri, 07 May 2021 08:02:24 -0400
+Received: from mail2.dc4ca.siemens.de (mail2.dc4ca.siemens.de [139.25.224.94])
+ by gw-eagle1.siemens.com (Postfix) with ESMTPS id CF1204F0120
+ for <qemu-riscv@nongnu.org>; Fri,  7 May 2021 14:02:15 +0200 (CEST)
+Received: from DEMCHDC8A1A.ad011.siemens.net (sop-solman.siemens.com
+ [139.25.226.107])
+ by mail2.dc4ca.siemens.de (Postfix) with ESMTPS id 3730C18DDCA65
+ for <qemu-riscv@nongnu.org>; Fri,  7 May 2021 14:02:15 +0200 (CEST)
+Received: from DEMCHDC8A0A.ad011.siemens.net (139.25.226.106) by
+ DEMCHDC8A1A.ad011.siemens.net (139.25.226.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.2; Thu, 6 May 2021 15:59:24 +0800
-Received: from dggpemm000001.china.huawei.com ([7.185.36.245]) by
- dggpemm000001.china.huawei.com ([7.185.36.245]) with mapi id 15.01.2176.012;
- Thu, 6 May 2021 15:59:24 +0800
-From: Jiangyifei <jiangyifei@huawei.com>
-To: Anup Patel <anup@brainfault.org>
-CC: Bin Meng <bin.meng@windriver.com>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>, Sagar Karandikar <sagark@eecs.berkeley.edu>, "KVM
- General" <kvm@vger.kernel.org>, "libvir-list@redhat.com"
- <libvir-list@redhat.com>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>, Anup Patel <anup.patel@wdc.com>, "QEMU
- Developers" <qemu-devel@nongnu.org>, yinyipeng <yinyipeng1@huawei.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, "kvm-riscv@lists.infradead.org"
- <kvm-riscv@lists.infradead.org>, Alistair Francis <Alistair.Francis@wdc.com>, 
- "Fanliang (EulerOS)" <fanliang@huawei.com>, "Wubin (H)"
- <wu.wubin@huawei.com>, Zhanghailiang <zhang.zhanghailiang@huawei.com>
-Subject: RE: [PATCH RFC v5 07/12] hw/riscv: PLIC update external interrupt by
- KVM when kvm enabled
-Thread-Topic: [PATCH RFC v5 07/12] hw/riscv: PLIC update external interrupt by
- KVM when kvm enabled
-Thread-Index: AQHXL2iS97/Gt+zlwEynCeteOmCihKrMFKeAgAok0BA=
-Date: Thu, 6 May 2021 07:59:24 +0000
-Message-ID: <057e885d5168477a904943e8ebb5fbbb@huawei.com>
-References: <20210412065246.1853-1-jiangyifei@huawei.com>
- <20210412065246.1853-8-jiangyifei@huawei.com>
- <CAAhSdy34aVwGEW-_Z=FkOkrAGrTsaS-11Ck6gJg77wwUSXe=zw@mail.gmail.com>
-In-Reply-To: <CAAhSdy34aVwGEW-_Z=FkOkrAGrTsaS-11Ck6gJg77wwUSXe=zw@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
+ 15.1.2176.2; Fri, 7 May 2021 14:02:14 +0200
+Received: from DEMCHDC8A0A.ad011.siemens.net ([139.25.226.106]) by
+ DEMCHDC8A0A.ad011.siemens.net ([139.25.226.106]) with mapi id 15.01.2176.012; 
+ Fri, 7 May 2021 14:02:14 +0200
+From: "Schwarz, Konrad" <konrad.schwarz@siemens.com>
+To: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Subject: target.xml
+Thread-Topic: target.xml
+Thread-Index: AddDN2jy/7SLM4voQ+a1yUt6X7i4vw==
+Date: Fri, 7 May 2021 12:02:14 +0000
+Message-ID: <1261d139a2894b56b344f114c47f93e3@siemens.com>
+Accept-Language: en-US, de-DE
+Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.174.186.236]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+msip_labels: MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_Enabled=true;
+ MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_SetDate=2021-05-07T12:02:13Z; 
+ MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_Method=Standard;
+ MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_Name=restricted-default;
+ MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;
+ MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_ActionId=bb1c1fc1-2b10-4f1b-a34e-13bdff726438;
+ MSIP_Label_a59b6cd5-d141-4a33-8bf1-0ca04484304f_ContentBits=0
+document_confidentiality: Restricted
+x-originating-ip: [139.25.69.216]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.255;
- envelope-from=jiangyifei@huawei.com; helo=szxga08-in.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+Received-SPF: pass client-ip=194.138.20.72;
+ envelope-from=konrad.schwarz@siemens.com; helo=gw-eagle1.siemens.com
+X-Spam_score_int: -68
+X-Spam_score: -6.9
+X-Spam_bar: ------
+X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -74,108 +67,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2021 07:59:47 -0000
+X-List-Received-Date: Fri, 07 May 2021 12:02:25 -0000
 
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFFlbXUtcmlzY3YNCj4gW21h
-aWx0bzpxZW11LXJpc2N2LWJvdW5jZXMramlhbmd5aWZlaT1odWF3ZWkuY29tQG5vbmdudS5vcmdd
-IE9uIEJlaGFsZiBPZg0KPiBBbnVwIFBhdGVsDQo+IFNlbnQ6IEZyaWRheSwgQXByaWwgMzAsIDIw
-MjEgMTI6NTQgUE0NCj4gVG86IEppYW5neWlmZWkgPGppYW5neWlmZWlAaHVhd2VpLmNvbT4NCj4g
-Q2M6IEJpbiBNZW5nIDxiaW4ubWVuZ0B3aW5kcml2ZXIuY29tPjsgb3BlbiBsaXN0OlJJU0MtVg0K
-PiA8cWVtdS1yaXNjdkBub25nbnUub3JnPjsgU2FnYXIgS2FyYW5kaWthciA8c2FnYXJrQGVlY3Mu
-YmVya2VsZXkuZWR1PjsNCj4gS1ZNIEdlbmVyYWwgPGt2bUB2Z2VyLmtlcm5lbC5vcmc+OyBsaWJ2
-aXItbGlzdEByZWRoYXQuY29tOyBCYXN0aWFuDQo+IEtvcHBlbG1hbm4gPGtiYXN0aWFuQG1haWwu
-dW5pLXBhZGVyYm9ybi5kZT47IEFudXAgUGF0ZWwNCj4gPGFudXAucGF0ZWxAd2RjLmNvbT47IFFF
-TVUgRGV2ZWxvcGVycyA8cWVtdS1kZXZlbEBub25nbnUub3JnPjsNCj4geWlueWlwZW5nIDx5aW55
-aXBlbmcxQGh1YXdlaS5jb20+OyBQYWxtZXIgRGFiYmVsdCA8cGFsbWVyQGRhYmJlbHQuY29tPjsN
-Cj4ga3ZtLXJpc2N2QGxpc3RzLmluZnJhZGVhZC5vcmc7IEFsaXN0YWlyIEZyYW5jaXMgPEFsaXN0
-YWlyLkZyYW5jaXNAd2RjLmNvbT47DQo+IEZhbmxpYW5nIChFdWxlck9TKSA8ZmFubGlhbmdAaHVh
-d2VpLmNvbT47IFd1YmluIChIKQ0KPiA8d3Uud3ViaW5AaHVhd2VpLmNvbT47IFpoYW5naGFpbGlh
-bmcgPHpoYW5nLnpoYW5naGFpbGlhbmdAaHVhd2VpLmNvbT4NCj4gU3ViamVjdDogUmU6IFtQQVRD
-SCBSRkMgdjUgMDcvMTJdIGh3L3Jpc2N2OiBQTElDIHVwZGF0ZSBleHRlcm5hbCBpbnRlcnJ1cHQg
-YnkNCj4gS1ZNIHdoZW4ga3ZtIGVuYWJsZWQNCj4gDQo+IE9uIE1vbiwgQXByIDEyLCAyMDIxIGF0
-IDEyOjI0IFBNIFlpZmVpIEppYW5nIDxqaWFuZ3lpZmVpQGh1YXdlaS5jb20+IHdyb3RlOg0KPiA+
-DQo+ID4gT25seSBzdXBwb3J0IHN1cGVydmlzb3IgZXh0ZXJuYWwgaW50ZXJydXB0IGN1cnJlbnRs
-eS4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IFlpZmVpIEppYW5nIDxqaWFuZ3lpZmVpQGh1YXdl
-aS5jb20+DQo+ID4gU2lnbmVkLW9mZi1ieTogWWlwZW5nIFlpbiA8eWlueWlwZW5nMUBodWF3ZWku
-Y29tPg0KPiA+IC0tLQ0KPiA+ICBody9pbnRjL3NpZml2ZV9wbGljLmMgICAgfCAyOSArKysrKysr
-KysrKysrKysrKysrKy0tLS0tLS0tLQ0KPiA+ICB0YXJnZXQvcmlzY3Yva3ZtLXN0dWIuYyAgfCAg
-NSArKysrKw0KPiA+ICB0YXJnZXQvcmlzY3Yva3ZtLmMgICAgICAgfCAyMCArKysrKysrKysrKysr
-KysrKysrKw0KPiA+ICB0YXJnZXQvcmlzY3Yva3ZtX3Jpc2N2LmggfCAgMSArDQo+ID4gIDQgZmls
-ZXMgY2hhbmdlZCwgNDYgaW5zZXJ0aW9ucygrKSwgOSBkZWxldGlvbnMoLSkNCj4gPg0KPiA+IGRp
-ZmYgLS1naXQgYS9ody9pbnRjL3NpZml2ZV9wbGljLmMgYi9ody9pbnRjL3NpZml2ZV9wbGljLmMg
-aW5kZXgNCj4gPiA5N2ExYTI3YTlhLi4yNzQ2ZWI3YTA1IDEwMDY0NA0KPiA+IC0tLSBhL2h3L2lu
-dGMvc2lmaXZlX3BsaWMuYw0KPiA+ICsrKyBiL2h3L2ludGMvc2lmaXZlX3BsaWMuYw0KPiA+IEBA
-IC0zMSw2ICszMSw4IEBADQo+ID4gICNpbmNsdWRlICJ0YXJnZXQvcmlzY3YvY3B1LmgiDQo+ID4g
-ICNpbmNsdWRlICJzeXNlbXUvc3lzZW11LmgiDQo+ID4gICNpbmNsdWRlICJtaWdyYXRpb24vdm1z
-dGF0ZS5oIg0KPiA+ICsjaW5jbHVkZSAic3lzZW11L2t2bS5oIg0KPiA+ICsjaW5jbHVkZSAia3Zt
-X3Jpc2N2LmgiDQo+ID4NCj4gPiAgI2RlZmluZSBSSVNDVl9ERUJVR19QTElDIDANCj4gPg0KPiA+
-IEBAIC0xNDcsMTUgKzE0OSwyNCBAQCBzdGF0aWMgdm9pZCBzaWZpdmVfcGxpY191cGRhdGUoU2lG
-aXZlUExJQ1N0YXRlICpwbGljKQ0KPiA+ICAgICAgICAgICAgICBjb250aW51ZTsNCj4gPiAgICAg
-ICAgICB9DQo+ID4gICAgICAgICAgaW50IGxldmVsID0gc2lmaXZlX3BsaWNfaXJxc19wZW5kaW5n
-KHBsaWMsIGFkZHJpZCk7DQo+ID4gLSAgICAgICAgc3dpdGNoIChtb2RlKSB7DQo+ID4gLSAgICAg
-ICAgY2FzZSBQTElDTW9kZV9NOg0KPiA+IC0gICAgICAgICAgICByaXNjdl9jcHVfdXBkYXRlX21p
-cChSSVNDVl9DUFUoY3B1KSwgTUlQX01FSVAsDQo+IEJPT0xfVE9fTUFTSyhsZXZlbCkpOw0KPiA+
-IC0gICAgICAgICAgICBicmVhazsNCj4gPiAtICAgICAgICBjYXNlIFBMSUNNb2RlX1M6DQo+ID4g
-LSAgICAgICAgICAgIHJpc2N2X2NwdV91cGRhdGVfbWlwKFJJU0NWX0NQVShjcHUpLCBNSVBfU0VJ
-UCwNCj4gQk9PTF9UT19NQVNLKGxldmVsKSk7DQo+ID4gLSAgICAgICAgICAgIGJyZWFrOw0KPiA+
-IC0gICAgICAgIGRlZmF1bHQ6DQo+ID4gLSAgICAgICAgICAgIGJyZWFrOw0KPiA+ICsgICAgICAg
-IGlmIChrdm1fZW5hYmxlZCgpKSB7DQo+ID4gKyAgICAgICAgICAgIGlmIChtb2RlID09IFBMSUNN
-b2RlX00pIHsNCj4gPiArICAgICAgICAgICAgICAgIGNvbnRpbnVlOw0KPiA+ICsgICAgICAgICAg
-ICB9DQo+ID4gKyAgICAgICAgICAgIGt2bV9yaXNjdl9zZXRfaXJxKFJJU0NWX0NQVShjcHUpLCBJ
-UlFfU19FWFQsIGxldmVsKTsNCj4gPiArICAgICAgICB9IGVsc2Ugew0KPiA+ICsgICAgICAgICAg
-ICBzd2l0Y2ggKG1vZGUpIHsNCj4gPiArICAgICAgICAgICAgY2FzZSBQTElDTW9kZV9NOg0KPiA+
-ICsgICAgICAgICAgICAgICAgcmlzY3ZfY3B1X3VwZGF0ZV9taXAoUklTQ1ZfQ1BVKGNwdSksDQo+
-ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNSVBfTUVJUCwNCj4gQk9P
-TF9UT19NQVNLKGxldmVsKSk7DQo+ID4gKyAgICAgICAgICAgICAgICBicmVhazsNCj4gPiArICAg
-ICAgICAgICAgY2FzZSBQTElDTW9kZV9TOg0KPiA+ICsgICAgICAgICAgICAgICAgcmlzY3ZfY3B1
-X3VwZGF0ZV9taXAoUklTQ1ZfQ1BVKGNwdSksDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBNSVBfU0VJUCwNCj4gQk9PTF9UT19NQVNLKGxldmVsKSk7DQo+ID4gKyAg
-ICAgICAgICAgICAgICBicmVhazsNCj4gPiArICAgICAgICAgICAgZGVmYXVsdDoNCj4gPiArICAg
-ICAgICAgICAgICAgIGJyZWFrOw0KPiA+ICsgICAgICAgICAgICB9DQo+IA0KPiBJIGFtIG5vdCBj
-b21mb3J0YWJsZSB3aXRoIHRoaXMgcGF0Y2guDQo+IA0KPiBUaGlzIHdheSB3ZSB3aWxsIGVuZHVw
-IGNhbGxpbmcga3ZtX3Jpc2N2X3NldF9pcnEoKSBmcm9tIHZhcmlvdXMgcGxhY2VzIGluDQo+IGh3
-L2ludGMgYW5kIGh3L3Jpc2N2Lg0KPiANCj4gSSBzdWdnZXN0IHRvIGV4dGVuZCByaXNjdl9jcHVf
-dXBkYXRlX21pcCgpIHN1Y2ggdGhhdCB3aGVuIGt2bSBpcyBlbmFibGVkDQo+IHJpc2N2X2NwdV91
-cGRhdGVfbWlwKCkgd2lsbDoNCj4gMSkgQ29uc2lkZXIgb25seSBNSVBfU0VJUCBiaXQgaW4gIm1h
-c2siIHBhcmFtZXRlciBhbmQgYWxsIG90aGVyDQo+ICAgICBiaXRzIGluICJtYXNrIiBwYXJhbWV0
-ZXIgd2lsbCBiZSBpZ25vcmVkIHByb2JhYmx5IHdpdGggd2FybmluZw0KPiAyKSBXaGVuIHRoZSBN
-SVBfU0VJUCBiaXQgaXMgc2V0IGluICJtYXNrIiBjYWxsIGt2bV9yaXNjdl9zZXRfaXJxKCkgdG8g
-Y2hhbmdlDQo+IHRoZSBJUlEgc3RhdGUgaW4gdGhlIEtWTSBtb2R1bGUuDQo+IA0KPiBSZWdhcmRz
-LA0KPiBBbnVwDQo+IA0KDQpZZXMsIGJ1dCByaXNjdl9jcHVfdXBkYXRlX21pcCgpIGluIHRhcmdl
-dC9yaXNjdi9jcHVfaGVscGVyLmMgaXMgdXNlZCB0byBUQ0cuIFNvIGl0IGlzIG5vdA0KYXBwcm9w
-cmlhdGUgdG8gYWRhcHQgZm9yIEtWTS4NCg0KV2Ugd2lsbCBtb3ZlIHJpc2N2X2NwdV91cGRhdGVf
-bWlwKCkgdG8gdGFyZ2V0L3Jpc2N2L2NwdS5jIGFuZCBtb2RpZnkgaXQgYWNjb3JkaW5nIHlvdXIN
-CmFkdmljZS4NCg0KUmVnYXJkcywNCllpZmVpDQoNCj4gPiAgICAgICAgICB9DQo+ID4gICAgICB9
-DQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L2t2bS1zdHViLmMgYi90YXJnZXQv
-cmlzY3Yva3ZtLXN0dWIuYyBpbmRleA0KPiA+IDM5Yjk2ZmUzZjQuLjRlOGZjMzFhMjEgMTAwNjQ0
-DQo+ID4gLS0tIGEvdGFyZ2V0L3Jpc2N2L2t2bS1zdHViLmMNCj4gPiArKysgYi90YXJnZXQvcmlz
-Y3Yva3ZtLXN0dWIuYw0KPiA+IEBAIC0yMywzICsyMyw4IEBAIHZvaWQga3ZtX3Jpc2N2X3Jlc2V0
-X3ZjcHUoUklTQ1ZDUFUgKmNwdSkgIHsNCj4gPiAgICAgIGFib3J0KCk7DQo+ID4gIH0NCj4gPiAr
-DQo+ID4gK3ZvaWQga3ZtX3Jpc2N2X3NldF9pcnEoUklTQ1ZDUFUgKmNwdSwgaW50IGlycSwgaW50
-IGxldmVsKSB7DQo+ID4gKyAgICBhYm9ydCgpOw0KPiA+ICt9DQo+ID4gZGlmZiAtLWdpdCBhL3Rh
-cmdldC9yaXNjdi9rdm0uYyBiL3RhcmdldC9yaXNjdi9rdm0uYyBpbmRleA0KPiA+IDc5YzkzMWFj
-YjQuLmRhNjM1MzU4MTIgMTAwNjQ0DQo+ID4gLS0tIGEvdGFyZ2V0L3Jpc2N2L2t2bS5jDQo+ID4g
-KysrIGIvdGFyZ2V0L3Jpc2N2L2t2bS5jDQo+ID4gQEAgLTQ1Myw2ICs0NTMsMjYgQEAgdm9pZCBr
-dm1fcmlzY3ZfcmVzZXRfdmNwdShSSVNDVkNQVSAqY3B1KQ0KPiA+ICAgICAgZW52LT5ncHJbMTFd
-ID0gY3B1LT5lbnYuZmR0X2FkZHI7ICAgICAgICAgIC8qIGExICovDQo+ID4gIH0NCj4gPg0KPiA+
-ICt2b2lkIGt2bV9yaXNjdl9zZXRfaXJxKFJJU0NWQ1BVICpjcHUsIGludCBpcnEsIGludCBsZXZl
-bCkgew0KPiA+ICsgICAgaW50IHJldDsNCj4gPiArICAgIHVuc2lnbmVkIHZpcnEgPSBsZXZlbCA/
-IEtWTV9JTlRFUlJVUFRfU0VUIDoNCj4gS1ZNX0lOVEVSUlVQVF9VTlNFVDsNCj4gPiArDQo+ID4g
-KyAgICBpZiAoaXJxICE9IElSUV9TX0VYVCkgew0KPiA+ICsgICAgICAgIHJldHVybjsNCj4gPiAr
-ICAgIH0NCj4gPiArDQo+ID4gKyAgICBpZiAoIWt2bV9lbmFibGVkKCkpIHsNCj4gPiArICAgICAg
-ICByZXR1cm47DQo+ID4gKyAgICB9DQo+ID4gKw0KPiA+ICsgICAgcmV0ID0ga3ZtX3ZjcHVfaW9j
-dGwoQ1BVKGNwdSksIEtWTV9JTlRFUlJVUFQsICZ2aXJxKTsNCj4gPiArICAgIGlmIChyZXQgPCAw
-KSB7DQo+ID4gKyAgICAgICAgcGVycm9yKCJTZXQgaXJxIGZhaWxlZCIpOw0KPiA+ICsgICAgICAg
-IGFib3J0KCk7DQo+ID4gKyAgICB9DQo+ID4gK30NCj4gPiArDQo+ID4gIGJvb2wga3ZtX2FyY2hf
-Y3B1X2NoZWNrX2FyZV9yZXNldHRhYmxlKHZvaWQpDQo+ID4gIHsNCj4gPiAgICAgIHJldHVybiB0
-cnVlOw0KPiA+IGRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3Yva3ZtX3Jpc2N2LmggYi90YXJnZXQv
-cmlzY3Yva3ZtX3Jpc2N2LmggaW5kZXgNCj4gPiBmMzhjODJiZjU5Li5lZDI4MWJkY2UwIDEwMDY0
-NA0KPiA+IC0tLSBhL3RhcmdldC9yaXNjdi9rdm1fcmlzY3YuaA0KPiA+ICsrKyBiL3RhcmdldC9y
-aXNjdi9rdm1fcmlzY3YuaA0KPiA+IEBAIC0yMCw1ICsyMCw2IEBADQo+ID4gICNkZWZpbmUgUUVN
-VV9LVk1fUklTQ1ZfSA0KPiA+DQo+ID4gIHZvaWQga3ZtX3Jpc2N2X3Jlc2V0X3ZjcHUoUklTQ1ZD
-UFUgKmNwdSk7DQo+ID4gK3ZvaWQga3ZtX3Jpc2N2X3NldF9pcnEoUklTQ1ZDUFUgKmNwdSwgaW50
-IGlycSwgaW50IGxldmVsKTsNCj4gPg0KPiA+ICAjZW5kaWYNCj4gPiAtLQ0KPiA+IDIuMTkuMQ0K
-PiA+DQo+ID4NCj4gPiAtLQ0KPiA+IGt2bS1yaXNjdiBtYWlsaW5nIGxpc3QNCj4gPiBrdm0tcmlz
-Y3ZAbGlzdHMuaW5mcmFkZWFkLm9yZw0KPiA+IGh0dHA6Ly9saXN0cy5pbmZyYWRlYWQub3JnL21h
-aWxtYW4vbGlzdGluZm8va3ZtLXJpc2N2DQoNCg==
+Hi,
+
+GDB uses an XML description of a target's registers:
+i.e., for RISC-V this comprises
+general-purpose, floating-point, control & status,
+and "virtual" registers, as described
+in the GDB manual.  Normally, this target description
+is provided by the GDB server (e.g., QEMU);
+GDB should dynamically adjust the machine
+registers it understands on the command line
+(e.g., $pc, $ra, ...) according to the
+target description.  It is also possible
+to set the target description manually,
+using the
+    set tdesc filename .../my-target.xml
+command.
+
+The XML target description used by default
+between QEMU and GDB is outdated.
+I've created a new target description
+file that includes floating-point,
+user, supervisor, hypervisor,
+and virtual supervisor CSRs and
+provides definitions for the
+fields within the CSRs.
+
+However, I get the error message
+
+warning: Architecture rejected target-supplied description
+
+after my set tdesc filename command.
+
+Does anyone know how to debug this?
+
+
 
