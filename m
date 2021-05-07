@@ -1,58 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lf0T0-00084u-FL
-	for mharc-qemu-riscv@gnu.org; Fri, 07 May 2021 09:24:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60708)
+	id 1lf0cS-0000y6-Tg
+	for mharc-qemu-riscv@gnu.org; Fri, 07 May 2021 09:34:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45924)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wangjunqiang@iscas.ac.cn>)
- id 1levgW-0004a0-RT; Fri, 07 May 2021 04:18:08 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25]:50046 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <wangjunqiang@iscas.ac.cn>)
- id 1levgS-0005lP-Bn; Fri, 07 May 2021 04:18:08 -0400
-Received: from localhost.localdomain (unknown [121.232.13.213])
- by APP-05 (Coremail) with SMTP id zQCowAB3fSnh9pRgTQ5HAQ--.1834S7;
- Fri, 07 May 2021 16:14:28 +0800 (CST)
-From: wangjunqiang <wangjunqiang@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bin.meng@windriver.com,
- alapha23@gmail.com, liweiwei@iscas.ac.cn,
- wangjunqiang <wangjunqiang@iscas.ac.cn>
-Subject: [RFC PATCH 5/5] Nuclei FPGA Evaluation Kit MCU Machine
-Date: Fri,  7 May 2021 16:16:54 +0800
-Message-Id: <20210507081654.11056-6-wangjunqiang@iscas.ac.cn>
-X-Mailer: git-send-email 2.17.1
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1lf0cR-0000vN-Lk; Fri, 07 May 2021 09:34:15 -0400
+Resent-Date: Fri, 07 May 2021 09:34:15 -0400
+Resent-Message-Id: <E1lf0cR-0000vN-Lk@lists.gnu.org>
+Received: from sender4-of-o53.zoho.com ([136.143.188.53]:21340)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <no-reply@patchew.org>)
+ id 1lf0cO-0005tO-Nv; Fri, 07 May 2021 09:34:15 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1620394437; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=U4jbK5AztEVOyuVUYNURHzajb8dbvk2pzvarErN/Mys1P3nephV/i5PnMJDls4x75Q3bgRaqblxqcb/Jc+f+xPuHzvQGPNEOYN+g7aH6jUn0zi6F25xe2VxMbpHJCrM+3liZcWR1ufmiWEMZJ9FfRTfWhPQjuDCWDBuJksQNIBo=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1620394437;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:Reply-To:Subject:To;
+ bh=/MrFBydBVgM/uT3FZBX6Ihdov8wM6x/b0lbSled700M=; 
+ b=fa8ssm5iklJMlVblnBrPVwlYpj49DwRuxz/+BGZ/flF0w4gqvy5YaKUUTdfCEJIeUZz1kuWAQC5NR7MGTq8uNnHSQQl2u2++AyIhc8Zh6UsU5Uo7CDGrgb0Gd3fgesc6pU9Em4FwburLeQADbwPcMq8rclRBMz5S+xUKOuyKgfM=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ spf=pass  smtp.mailfrom=no-reply@patchew.org;
+ dmarc=pass header.from=<no-reply@patchew.org>
+ header.from=<no-reply@patchew.org>
+Received: from [172.17.0.3] (23.253.156.214 [23.253.156.214]) by
+ mx.zohomail.com with SMTPS id 1620394433266727.507465164879;
+ Fri, 7 May 2021 06:33:53 -0700 (PDT)
 In-Reply-To: <20210507081654.11056-1-wangjunqiang@iscas.ac.cn>
-References: <20210507081654.11056-1-wangjunqiang@iscas.ac.cn>
-X-CM-TRANSID: zQCowAB3fSnh9pRgTQ5HAQ--.1834S7
-X-Coremail-Antispam: 1UD129KBjvAXoW3ZryfKFWDWFyUXFy7KF1fXrb_yoW8WrWUKo
- WfJFWfJFW8Gw15Zr4FkFyDGrZrWrnakF42q398CF93u3WxWF47WryrK34DJwsxJr1rGwn7
- XFWa9w47W3WDXrykn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
- AaLaJ3UjIYCTnIWjp_UUUYM7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
- j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r126s0DM28Irc
- Ia0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l
- 84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJV
- WxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
- 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
- x0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
- JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc2xSY4AK67AK6r43Mx
- AIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_
- Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwI
- xGrwCI42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8
- Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0x
- vEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JU9F4iUUUUU=
-X-Originating-IP: [121.232.13.213]
-X-CM-SenderInfo: pzdqwy5xqtxt1qj6x2xfdvhtffof0/1tbiCgkOAFz4jlgX+wAAsT
-Received-SPF: none client-ip=159.226.251.25;
- envelope-from=wangjunqiang@iscas.ac.cn; helo=cstnet.cn
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, FORGED_SPF_HELO=1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+Reply-To: <qemu-devel@nongnu.org>
+Subject: Re: [RFC PATCH 0/5] RISC-V:support Nuclei FPGA Evaluation Kit
+Message-ID: <162039443180.3634.9846649937156739328@d887ba82c771>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Resent-From: 
+From: no-reply@patchew.org
+To: wangjunqiang@iscas.ac.cn
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, liweiwei@iscas.ac.cn,
+ wangjunqiang@iscas.ac.cn, bin.meng@windriver.com, Alistair.Francis@wdc.com,
+ alapha23@gmail.com, palmer@dabbelt.com
+Date: Fri, 7 May 2021 06:33:53 -0700 (PDT)
+X-ZohoMailClient: External
+Received-SPF: pass client-ip=136.143.188.53; envelope-from=no-reply@patchew.org;
+ helo=sender4-of-o53.zoho.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 07 May 2021 09:24:22 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,500 +61,114 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2021 08:18:09 -0000
+X-List-Received-Date: Fri, 07 May 2021 13:34:15 -0000
 
-This patch provides an implementation of Nuclei FPGA Evaluation Kit Board
-as MCU mode. The Machine based on Nuclei's specification which has Customized
-register. The following machine is implemented:
-
-   -"Nuclei 100T": SYSTIMER, ECLIC, UART ...
-
-Signed-off-by: Wang Junqiang <wangjunqiang@iscas.ac.cn>
----
- default-configs/devices/riscv32-softmmu.mak |   1 +
- default-configs/devices/riscv64-softmmu.mak |   1 +
- hw/riscv/Kconfig                            |   9 +
- hw/riscv/meson.build                        |   1 +
- hw/riscv/nuclei_n.c                         | 276 ++++++++++++++++++++
- include/hw/riscv/nuclei_n.h                 | 136 ++++++++++
- 6 files changed, 424 insertions(+)
- create mode 100644 hw/riscv/nuclei_n.c
- create mode 100644 include/hw/riscv/nuclei_n.h
-
-diff --git a/default-configs/devices/riscv32-softmmu.mak b/default-configs/devices/riscv32-softmmu.mak
-index d847bd5692..52fb26ef01 100644
---- a/default-configs/devices/riscv32-softmmu.mak
-+++ b/default-configs/devices/riscv32-softmmu.mak
-@@ -13,3 +13,4 @@ CONFIG_SIFIVE_E=y
- CONFIG_SIFIVE_U=y
- CONFIG_RISCV_VIRT=y
- CONFIG_OPENTITAN=y
-+CONFIG_NUCLEI_N=y
-\ No newline at end of file
-diff --git a/default-configs/devices/riscv64-softmmu.mak b/default-configs/devices/riscv64-softmmu.mak
-index d5eec75f05..ff688bbbc6 100644
---- a/default-configs/devices/riscv64-softmmu.mak
-+++ b/default-configs/devices/riscv64-softmmu.mak
-@@ -13,3 +13,4 @@ CONFIG_SIFIVE_E=y
- CONFIG_SIFIVE_U=y
- CONFIG_RISCV_VIRT=y
- CONFIG_MICROCHIP_PFSOC=y
-+CONFIG_NUCLEI_N=y
-\ No newline at end of file
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 1de18cdcf1..427ed3afd3 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -67,3 +67,12 @@ config SPIKE
-     select MSI_NONBROKEN
-     select SIFIVE_CLINT
-     select SIFIVE_PLIC
-+
-+config NUCLEI_N
-+    bool
-+    select MSI_NONBROKEN
-+    select NUCLEI_SYSTIMER
-+    select NUCLEI_ECLIC
-+    select SIFIVE_GPIO
-+    select NUCLEI_UART
-+    select UNIMP
-\ No newline at end of file
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 275c0f7eb7..840c2852e2 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -8,5 +8,6 @@ riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
- riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
- riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
- riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
-+riscv_ss.add(when: 'CONFIG_NUCLEI_N', if_true: files('nuclei_n.c'))
- 
- hw_arch += {'riscv': riscv_ss}
-diff --git a/hw/riscv/nuclei_n.c b/hw/riscv/nuclei_n.c
-new file mode 100644
-index 0000000000..a95b8a7d29
---- /dev/null
-+++ b/hw/riscv/nuclei_n.c
-@@ -0,0 +1,276 @@
-+/*
-+ * Nuclei N series  SOC machine interface
-+ *
-+ * Copyright (c) 2020 Gao ZhiYuan <alapha23@gmail.com>
-+ * Copyright (c) 2020-2021 PLCT Lab.All rights reserved.
-+ *
-+ * This program is free software: you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation, either version 3 of the License, or
-+ * (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ *  You should have received a copy of the GNU General Public License
-+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+#include "qemu/osdep.h"
-+#include "qemu/log.h"
-+#include "qemu/error-report.h"
-+#include "qapi/error.h"
-+#include "qapi/visitor.h"
-+#include "hw/boards.h"
-+#include "hw/loader.h"
-+#include "hw/sysbus.h"
-+#include "target/riscv/cpu.h"
-+#include "hw/misc/unimp.h"
-+#include "hw/char/riscv_htif.h"
-+#include "hw/riscv/riscv_hart.h"
-+#include "hw/intc/nuclei_eclic.h"
-+#include "hw/char/nuclei_uart.h"
-+#include "hw/riscv/nuclei_n.h"
-+#include "hw/riscv/boot.h"
-+#include "chardev/char.h"
-+#include "sysemu/arch_init.h"
-+#include "sysemu/device_tree.h"
-+#include "sysemu/qtest.h"
-+#include "sysemu/sysemu.h"
-+#include "exec/address-spaces.h"
-+
-+#include <libfdt.h>
-+
-+static const struct MemmapEntry {
-+    hwaddr base;
-+    hwaddr size;
-+} nuclei_memmap[] = {
-+    [HBIRD_DEBUG] = {0x0, 0x1000},
-+    [HBIRD_ROM] = {0x1000, 0x1000},
-+    [HBIRD_TIMER] = {0x2000000, 0x1000},
-+    [HBIRD_ECLIC] = {0xc000000, 0x10000},
-+    [HBIRD_GPIO] = {0x10012000, 0x1000},
-+    [HBIRD_UART0] = {0x10013000, 0x1000},
-+    [HBIRD_QSPI0] = {0x10014000, 0x1000},
-+    [HBIRD_PWM0] = {0x10015000, 0x1000},
-+    [HBIRD_UART1] = {0x10023000, 0x1000},
-+    [HBIRD_QSPI1] = {0x10024000, 0x1000},
-+    [HBIRD_PWM1] = {0x10025000, 0x1000},
-+    [HBIRD_QSPI2] = {0x10034000, 0x1000},
-+    [HBIRD_PWM2] = {0x10035000, 0x1000},
-+    [HBIRD_XIP] = {0x20000000, 0x10000000},
-+    [HBIRD_DRAM] = {0xa0000000, 0x0},
-+    [HBIRD_ILM] = {0x80000000, 0x20000},
-+    [HBIRD_DLM] = {0x90000000, 0x20000},
-+};
-+
-+static void nuclei_machine_get_uint32_prop(Object *obj, Visitor *v,
-+                                           const char *name, void *opaque,
-+                                           Error **errp)
-+{
-+    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
-+}
-+
-+static void nuclei_machine_set_uint32_prop(Object *obj, Visitor *v,
-+                                           const char *name, void *opaque,
-+                                           Error **errp)
-+{
-+    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
-+}
-+
-+static void nuclei_board_init(MachineState *machine)
-+{
-+    const struct MemmapEntry *memmap = nuclei_memmap;
-+    NucleiHBState *s = HBIRD_FPGA_MACHINE(machine);
-+    MemoryRegion *system_memory = get_system_memory();
-+    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-+    MemoryRegion *flash = g_new(MemoryRegion, 1);
-+    target_ulong start_addr = memmap[HBIRD_ILM].base;
-+    int i;
-+
-+    /* TODO: Add qtest support */
-+    /* Initialize SOC */
-+    object_initialize_child(OBJECT(machine), "soc",
-+                    &s->soc, TYPE_NUCLEI_HBIRD_SOC);
-+    qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
-+
-+    memory_region_init_ram(&s->soc.ilm, NULL, "riscv.nuclei.ram.ilm",
-+                           memmap[HBIRD_ILM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory,
-+                                memmap[HBIRD_ILM].base, &s->soc.ilm);
-+
-+    memory_region_init_ram(&s->soc.dlm, NULL, "riscv.nuclei.ram.dlm",
-+                           memmap[HBIRD_DLM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory,
-+                                memmap[HBIRD_DLM].base, &s->soc.dlm);
-+
-+    /* register DRAM */
-+    memory_region_init_ram(main_mem, NULL, "riscv.nuclei.dram",
-+                           machine->ram_size, &error_fatal);
-+    memory_region_add_subregion(system_memory, memmap[HBIRD_DRAM].base,
-+                                main_mem);
-+
-+    /* Flash memory */
-+    memory_region_init_ram(flash, NULL, "riscv.nuclei.xip",
-+                           memmap[HBIRD_XIP].size, &error_fatal);
-+    memory_region_add_subregion(system_memory, memmap[HBIRD_XIP].base,
-+                                flash);
-+
-+    switch (s->msel) {
-+    case MSEL_ILM:
-+        start_addr = memmap[HBIRD_ILM].base;
-+        break;
-+    case MSEL_FLASH:
-+        start_addr = memmap[HBIRD_XIP].base;
-+        break;
-+    case MSEL_FLASHXIP:
-+        start_addr = memmap[HBIRD_XIP].base;
-+        break;
-+    case MSEL_DDR:
-+        start_addr = memmap[HBIRD_DRAM].base;
-+        break;
-+    default:
-+        start_addr = memmap[HBIRD_ILM].base;
-+        break;
-+    }
-+
-+    /* reset vector */
-+    uint32_t reset_vec[8] = {
-+        0x00000297, /* 1:  auipc  t0, %pcrel_hi(dtb) */
-+        0x02028593, /*     addi   a1, t0, %pcrel_lo(1b) */
-+        0xf1402573, /*     csrr   a0, mhartid  */
-+#if defined(TARGET_RISCV32)
-+        0x0182a283, /*     lw     t0, 24(t0) */
-+#elif defined(TARGET_RISCV64)
-+        0x0182b283, /*     ld     t0, 24(t0) */
-+#endif
-+        0x00028067, /*     jr     t0 */
-+        0x00000000,
-+        start_addr, /* start: .dword DRAM_BASE */
-+        0x00000000,
-+    };
-+
-+    for (i = 0; i < sizeof(reset_vec) >> 2; i++) {
-+        reset_vec[i] = cpu_to_le32(reset_vec[i]);
-+    }
-+    rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
-+                          memmap[HBIRD_ROM].base, &address_space_memory);
-+
-+    /* boot rom */
-+    if (machine->kernel_filename) {
-+        riscv_load_kernel(machine->kernel_filename, start_addr, NULL);
-+    }
-+}
-+
-+static void nuclei_soc_init(Object *obj)
-+{
-+    NucleiHBSoCState *s = RISCV_NUCLEI_HBIRD_SOC(obj);
-+
-+    object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
-+
-+    object_initialize_child(obj, "riscv.nuclei.gpio",
-+                            &s->gpio, TYPE_SIFIVE_GPIO);
-+}
-+
-+static void nuclei_soc_realize(DeviceState *dev, Error **errp)
-+{
-+    const struct MemmapEntry *memmap = nuclei_memmap;
-+    MachineState *ms = MACHINE(qdev_get_machine());
-+    NucleiHBSoCState *s = RISCV_NUCLEI_HBIRD_SOC(dev);
-+    MemoryRegion *sys_mem = get_system_memory();
-+    Error *err = NULL;
-+
-+    object_property_set_str(OBJECT(&s->cpus), "cpu-type", ms->cpu_type,
-+                            &error_abort);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
-+
-+    /* Mask ROM */
-+    memory_region_init_rom(&s->internal_rom, OBJECT(dev), "riscv.nuclei.irom",
-+                           memmap[HBIRD_ROM].size, &error_fatal);
-+    memory_region_add_subregion(sys_mem,
-+                                memmap[HBIRD_ROM].base, &s->internal_rom);
-+
-+    s->eclic = nuclei_eclic_create(memmap[HBIRD_ECLIC].base,
-+                                   memmap[HBIRD_ECLIC].size, HBIRD_SOC_INT_MAX);
-+
-+    s->timer = nuclei_systimer_create(memmap[HBIRD_TIMER].base,
-+                                      memmap[HBIRD_TIMER].size,
-+                                      s->eclic,
-+                                      NUCLEI_HBIRD_TIMEBASE_FREQ);
-+
-+    /* GPIO */
-+    sysbus_realize(SYS_BUS_DEVICE(&s->gpio), &err);
-+    if (err) {
-+        error_propagate(errp, err);
-+        return;
-+    }
-+
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gpio), 0, memmap[HBIRD_GPIO].base);
-+
-+    nuclei_uart_create(sys_mem,
-+                       memmap[HBIRD_UART0].base,
-+                       memmap[HBIRD_UART0].size,
-+                       serial_hd(0),
-+                       nuclei_eclic_get_irq(DEVICE(s->eclic),
-+                                            HBIRD_SOC_INT22_IRQn));
-+}
-+
-+static void nuclei_machine_instance_init(Object *obj)
-+{
-+    NucleiHBState *s = HBIRD_FPGA_MACHINE(obj);
-+
-+    s->msel = 0;
-+    object_property_add(obj, "msel", "uint32",
-+                        nuclei_machine_get_uint32_prop,
-+                        nuclei_machine_set_uint32_prop, NULL, &s->msel);
-+    object_property_set_description(obj, "msel",
-+                                    "Mode Select Startup");
-+}
-+
-+static void nuclei_machine_class_init(ObjectClass *oc, void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-+    mc->desc = "Nuclei HummingBird Evaluation Kit";
-+    mc->init = nuclei_board_init;
-+    mc->max_cpus = 1;
-+    mc->default_cpu_type = NUCLEI_N_CPU;
-+}
-+
-+static const TypeInfo nuclei_machine_typeinfo = {
-+    .name = MACHINE_TYPE_NAME("hbird_fpga"),
-+    .parent = TYPE_MACHINE,
-+    .class_init = nuclei_machine_class_init,
-+    .instance_init = nuclei_machine_instance_init,
-+    .instance_size = sizeof(NucleiHBState),
-+};
-+
-+static void nuclei_machine_init_register_types(void)
-+{
-+    type_register_static(&nuclei_machine_typeinfo);
-+}
-+
-+type_init(nuclei_machine_init_register_types)
-+
-+    static void nuclei_soc_class_init(ObjectClass *oc, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(oc);
-+    dc->realize = nuclei_soc_realize;
-+    dc->user_creatable = false;
-+}
-+
-+static const TypeInfo nuclei_soc_type_info = {
-+    .name = TYPE_NUCLEI_HBIRD_SOC,
-+    .parent = TYPE_DEVICE,
-+    .instance_size = sizeof(NucleiHBSoCState),
-+    .instance_init = nuclei_soc_init,
-+    .class_init = nuclei_soc_class_init,
-+};
-+
-+static void nuclei_soc_register_types(void)
-+{
-+    type_register_static(&nuclei_soc_type_info);
-+}
-+
-+type_init(nuclei_soc_register_types)
-diff --git a/include/hw/riscv/nuclei_n.h b/include/hw/riscv/nuclei_n.h
-new file mode 100644
-index 0000000000..83776c5c22
---- /dev/null
-+++ b/include/hw/riscv/nuclei_n.h
-@@ -0,0 +1,136 @@
-+/*
-+ * Nuclei U series  SOC machine interface
-+ *
-+ * Copyright (c) 2020 Gao ZhiYuan <alapha23@gmail.com>
-+ * Copyright (c) 2020-2021 PLCT Lab.All rights reserved.
-+ *
-+ * This program is free software: you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation, either version 3 of the License, or
-+ * (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ *  You should have received a copy of the GNU General Public License
-+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+#ifndef HW_RISCV_NUCLEI_HBIRD_H
-+#define HW_RISCV_NUCLEI_HBIRD_H
-+
-+#include "hw/char/nuclei_uart.h"
-+#include "hw/gpio/sifive_gpio.h"
-+#include "hw/intc/nuclei_eclic.h"
-+#include "hw/intc/nuclei_systimer.h"
-+#include "hw/riscv/riscv_hart.h"
-+#include "hw/sysbus.h"
-+
-+#define TYPE_NUCLEI_HBIRD_SOC "riscv.nuclei.hbird.soc"
-+#define RISCV_NUCLEI_HBIRD_SOC(obj) \
-+    OBJECT_CHECK(NucleiHBSoCState, (obj), TYPE_NUCLEI_HBIRD_SOC)
-+
-+typedef struct NucleiHBSoCState {
-+    /*< private >*/
-+    SysBusDevice parent_obj;
-+
-+    /*< public >*/
-+    RISCVHartArrayState cpus;
-+
-+    DeviceState *eclic;
-+    MemoryRegion ilm;
-+    MemoryRegion dlm;
-+    MemoryRegion internal_rom;
-+    MemoryRegion xip_mem;
-+
-+    DeviceState *timer;
-+    NucLeiUARTState uart;
-+    SIFIVEGPIOState gpio;
-+
-+} NucleiHBSoCState;
-+
-+#define TYPE_HBIRD_FPGA_MACHINE MACHINE_TYPE_NAME("hbird_fpga")
-+#define HBIRD_FPGA_MACHINE(obj) \
-+    OBJECT_CHECK(NucleiHBState, (obj), TYPE_HBIRD_FPGA_MACHINE)
-+
-+typedef struct NucleiHBState {
-+    /*< private >*/
-+    SysBusDevice parent_obj;
-+
-+    /*< public >*/
-+    NucleiHBSoCState soc;
-+
-+    uint32_t msel;
-+} NucleiHBState;
-+
-+enum {
-+    MSEL_ILM = 1,
-+    MSEL_FLASH = 2,
-+    MSEL_FLASHXIP = 3,
-+    MSEL_DDR = 4
-+};
-+
-+enum {
-+    HBIRD_DEBUG,
-+    HBIRD_ROM,
-+    HBIRD_TIMER,
-+    HBIRD_ECLIC,
-+    HBIRD_GPIO,
-+    HBIRD_UART0,
-+    HBIRD_QSPI0,
-+    HBIRD_PWM0,
-+    HBIRD_UART1,
-+    HBIRD_QSPI1,
-+    HBIRD_PWM1,
-+    HBIRD_QSPI2,
-+    HBIRD_PWM2,
-+    HBIRD_XIP,
-+    HBIRD_DRAM,
-+    HBIRD_ILM,
-+    HBIRD_DLM
-+};
-+
-+enum {
-+    HBIRD_SOC_INT19_IRQn = 19, /*!< Device Interrupt */
-+    HBIRD_SOC_INT20_IRQn = 20, /*!< Device Interrupt */
-+    HBIRD_SOC_INT21_IRQn = 21, /*!< Device Interrupt */
-+    HBIRD_SOC_INT22_IRQn = 22, /*!< Device Interrupt */
-+    HBIRD_SOC_INT23_IRQn = 23, /*!< Device Interrupt */
-+    HBIRD_SOC_INT24_IRQn = 24, /*!< Device Interrupt */
-+    HBIRD_SOC_INT25_IRQn = 25, /*!< Device Interrupt */
-+    HBIRD_SOC_INT26_IRQn = 26, /*!< Device Interrupt */
-+    HBIRD_SOC_INT27_IRQn = 27, /*!< Device Interrupt */
-+    HBIRD_SOC_INT28_IRQn = 28, /*!< Device Interrupt */
-+    HBIRD_SOC_INT29_IRQn = 29, /*!< Device Interrupt */
-+    HBIRD_SOC_INT30_IRQn = 30, /*!< Device Interrupt */
-+    HBIRD_SOC_INT31_IRQn = 31, /*!< Device Interrupt */
-+    HBIRD_SOC_INT32_IRQn = 32, /*!< Device Interrupt */
-+    HBIRD_SOC_INT33_IRQn = 33, /*!< Device Interrupt */
-+    HBIRD_SOC_INT34_IRQn = 34, /*!< Device Interrupt */
-+    HBIRD_SOC_INT35_IRQn = 35, /*!< Device Interrupt */
-+    HBIRD_SOC_INT36_IRQn = 36, /*!< Device Interrupt */
-+    HBIRD_SOC_INT37_IRQn = 37, /*!< Device Interrupt */
-+    HBIRD_SOC_INT38_IRQn = 38, /*!< Device Interrupt */
-+    HBIRD_SOC_INT39_IRQn = 39, /*!< Device Interrupt */
-+    HBIRD_SOC_INT40_IRQn = 40, /*!< Device Interrupt */
-+    HBIRD_SOC_INT41_IRQn = 41, /*!< Device Interrupt */
-+    HBIRD_SOC_INT42_IRQn = 42, /*!< Device Interrupt */
-+    HBIRD_SOC_INT43_IRQn = 43, /*!< Device Interrupt */
-+    HBIRD_SOC_INT44_IRQn = 44, /*!< Device Interrupt */
-+    HBIRD_SOC_INT45_IRQn = 45, /*!< Device Interrupt */
-+    HBIRD_SOC_INT46_IRQn = 46, /*!< Device Interrupt */
-+    HBIRD_SOC_INT47_IRQn = 47, /*!< Device Interrupt */
-+    HBIRD_SOC_INT48_IRQn = 48, /*!< Device Interrupt */
-+    HBIRD_SOC_INT49_IRQn = 49, /*!< Device Interrupt */
-+    HBIRD_SOC_INT50_IRQn = 50, /*!< Device Interrupt */
-+    HBIRD_SOC_INT_MAX,
-+};
-+
-+#if defined(TARGET_RISCV32)
-+#define NUCLEI_N_CPU TYPE_RISCV_CPU_NUCLEI_N307FD
-+#elif defined(TARGET_RISCV64)
-+#define NUCLEI_N_CPU TYPE_RISCV_CPU_NUCLEI_NX600FD
-+#endif
-+
-+#endif
--- 
-2.17.1
-
+UGF0Y2hldyBVUkw6IGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDIxMDUwNzA4MTY1NC4xMTA1
+Ni0xLXdhbmdqdW5xaWFuZ0Bpc2Nhcy5hYy5jbi8KCgoKSGksCgpUaGlzIHNlcmllcyBzZWVtcyB0
+byBoYXZlIHNvbWUgY29kaW5nIHN0eWxlIHByb2JsZW1zLiBTZWUgb3V0cHV0IGJlbG93IGZvcgpt
+b3JlIGluZm9ybWF0aW9uOgoKVHlwZTogc2VyaWVzCk1lc3NhZ2UtaWQ6IDIwMjEwNTA3MDgxNjU0
+LjExMDU2LTEtd2FuZ2p1bnFpYW5nQGlzY2FzLmFjLmNuClN1YmplY3Q6IFtSRkMgUEFUQ0ggMC81
+XSBSSVNDLVY6c3VwcG9ydCBOdWNsZWkgRlBHQSBFdmFsdWF0aW9uIEtpdAoKPT09IFRFU1QgU0NS
+SVBUIEJFR0lOID09PQojIS9iaW4vYmFzaApnaXQgcmV2LXBhcnNlIGJhc2UgPiAvZGV2L251bGwg
+fHwgZXhpdCAwCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLnJlbmFtZWxpbWl0IDAKZ2l0IGNvbmZp
+ZyAtLWxvY2FsIGRpZmYucmVuYW1lcyBUcnVlCmdpdCBjb25maWcgLS1sb2NhbCBkaWZmLmFsZ29y
+aXRobSBoaXN0b2dyYW0KLi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgLS1tYWlsYmFjayBiYXNlLi4K
+PT09IFRFU1QgU0NSSVBUIEVORCA9PT0KClVwZGF0aW5nIDNjOGNmNWE5YzIxZmY4NzgyMTY0ZDFk
+ZWY3ZjQ0YmQ4ODg3MTMzODQKRnJvbSBodHRwczovL2dpdGh1Yi5jb20vcGF0Y2hldy1wcm9qZWN0
+L3FlbXUKICogW25ldyB0YWddICAgICAgICAgcGF0Y2hldy8yMDIxMDUwNzA4MTY1NC4xMTA1Ni0x
+LXdhbmdqdW5xaWFuZ0Bpc2Nhcy5hYy5jbiAtPiBwYXRjaGV3LzIwMjEwNTA3MDgxNjU0LjExMDU2
+LTEtd2FuZ2p1bnFpYW5nQGlzY2FzLmFjLmNuClN3aXRjaGVkIHRvIGEgbmV3IGJyYW5jaCAndGVz
+dCcKY2RmM2E1YSBOdWNsZWkgRlBHQSBFdmFsdWF0aW9uIEtpdCBNQ1UgTWFjaGluZQpmYzQ2MWRi
+IGh3L2NoYXI6IEFkZCBOdWNsZWkgVWFydAo3NDlmOThiIGh3L2ludGM6IEFkZCBOdWNsZWkgU3lz
+dGltZXIKNGY4MjE1MSBody9pbnRjOiBBZGQgTnVjbGVpIEVDTElDIGRldmljZQpmMGI3ZDU5IHRh
+cmdldC9yaXNjdjogQWRkIE51Y2xlaSBDU1IgYW5kIFVwZGF0ZSBpbnRlcnJ1cHQgaGFuZGxpbmcK
+Cj09PSBPVVRQVVQgQkVHSU4gPT09CjEvNSBDaGVja2luZyBjb21taXQgZjBiN2Q1OWJkODFjICh0
+YXJnZXQvcmlzY3Y6IEFkZCBOdWNsZWkgQ1NSIGFuZCBVcGRhdGUgaW50ZXJydXB0IGhhbmRsaW5n
+KQpXQVJOSU5HOiBsaW5lIG92ZXIgODAgY2hhcmFjdGVycwojNTE5OiBGSUxFOiB0YXJnZXQvcmlz
+Y3YvY3NyLmM6NzIwOgorc3RhdGljIGludCBybXdfbXNjcmF0Y2hjc3coQ1BVUklTQ1ZTdGF0ZSAq
+ZW52LCBpbnQgY3Nybm8sIHRhcmdldF91bG9uZyAqcmV0X3ZhbHVlLAoKRVJST1I6IHNwYWNlIHJl
+cXVpcmVkIGFmdGVyIHRoYXQgY2xvc2UgYnJhY2UgJ30nCiM1Mjc6IEZJTEU6IHRhcmdldC9yaXNj
+di9jc3IuYzo3Mjg6CisgICAgfWVsc2UgewoKV0FSTklORzogbGluZSBvdmVyIDgwIGNoYXJhY3Rl
+cnMKIzc4MzogRklMRTogdGFyZ2V0L3Jpc2N2L2Nzci5jOjE3NDI6CisgICAgW0NTUl9NSU5UU1RB
+VFVTXSA9IHsibWludHN0YXR1cyIsIGVjbGljLCAgcmVhZF9taW50c3RhdHVzLCAgd3JpdGVfbWlu
+dHN0YXR1cyAgfSwKCkVSUk9SOiBsaW5lIG92ZXIgOTAgY2hhcmFjdGVycwojNzg0OiBGSUxFOiB0
+YXJnZXQvcmlzY3YvY3NyLmM6MTc0MzoKKyAgICBbQ1NSX01TQ1JBVENIQ1NXXSA9ICB7Im1zY3Jh
+dGNoY3N3IiwgYW55LCAgcmVhZF9tc2NyYXRjaGNzdywgd3JpdGVfbXNjcmF0Y2hjc3csIHJtd19t
+c2NyYXRjaGNzd30sCgpFUlJPUjogbGluZSBvdmVyIDkwIGNoYXJhY3RlcnMKIzc4NTogRklMRTog
+dGFyZ2V0L3Jpc2N2L2Nzci5jOjE3NDQ6CisgICAgW0NTUl9NU0NSQVRDSENTV0xdID0gIHsgIm1z
+Y3JhdGNoY3N3bCIsIGFueSwgIHJlYWRfbXNjcmF0Y2hjc3dsLCB3cml0ZV9tc2NyYXRjaGNzd2ws
+ICBybXdfbXNjcmF0Y2hjc3dsfSwKCldBUk5JTkc6IGxpbmUgb3ZlciA4MCBjaGFyYWN0ZXJzCiM3
+ODk6IEZJTEU6IHRhcmdldC9yaXNjdi9jc3IuYzoxNzQ4OgorICAgIFtDU1JfTU1JU0NfQ1RMXSA9
+ICB7ICJtbWlzY19jdGwiLCBhbnksICByZWFkX21taXNjX2N0bCwgICB3cml0ZV9tbWlzY19jdGwg
+ICB9LAoKV0FSTklORzogbGluZSBvdmVyIDgwIGNoYXJhY3RlcnMKIzc5MDogRklMRTogdGFyZ2V0
+L3Jpc2N2L2Nzci5jOjE3NDk6CisgICAgW0NTUl9NU0FWRVNUQVRVU10gPSAgeyAibXNhdmVzdGF0
+dXMiLCBhbnksICByZWFkX21zYXZlc3RhdHVzLCB3cml0ZV9tc2F2ZXN0YXR1cyB9LAoKV0FSTklO
+RzogbGluZSBvdmVyIDgwIGNoYXJhY3RlcnMKIzc5MTogRklMRTogdGFyZ2V0L3Jpc2N2L2Nzci5j
+OjE3NTA6CisgICAgW0NTUl9NU0FWRUVQQzFdID0geyAibXNhdmVlcGMxIiwgYW55LCAgcmVhZF9t
+c2F2ZWVwYzEsICAgd3JpdGVfbXNhdmVlcGMxICAgfSwKCldBUk5JTkc6IGxpbmUgb3ZlciA4MCBj
+aGFyYWN0ZXJzCiM3OTI6IEZJTEU6IHRhcmdldC9yaXNjdi9jc3IuYzoxNzUxOgorICAgIFtDU1Jf
+TVNBVkVDQVVTRTFdID0gIHsgIm1zYXZlY2F1c2UxIiwgYW55LCAgcmVhZF9tc2F2ZWNhdXNlMSwg
+d3JpdGVfbXNhdmVjYXVzZTEgfSwKCldBUk5JTkc6IGxpbmUgb3ZlciA4MCBjaGFyYWN0ZXJzCiM3
+OTM6IEZJTEU6IHRhcmdldC9yaXNjdi9jc3IuYzoxNzUyOgorICAgIFtDU1JfTVNBVkVFUEMyXSA9
+ICB7ICJtc2F2ZWVwYzIiLCBhbnksICByZWFkX21zYXZlZXBjMiwgICB3cml0ZV9tc2F2ZWVwYzIg
+ICB9LAoKV0FSTklORzogbGluZSBvdmVyIDgwIGNoYXJhY3RlcnMKIzc5NDogRklMRTogdGFyZ2V0
+L3Jpc2N2L2Nzci5jOjE3NTM6CisgICAgW0NTUl9NU0FWRUNBVVNFMl0gPSAgeyAibXNhdmVjYXVz
+ZTIiLCBhbnksICByZWFkX21zYXZlY2F1c2UyLCB3cml0ZV9tc2F2ZWNhdXNlMiB9LAoKV0FSTklO
+RzogbGluZSBvdmVyIDgwIGNoYXJhY3RlcnMKIzc5NTogRklMRTogdGFyZ2V0L3Jpc2N2L2Nzci5j
+OjE3NTQ6CisgICAgW0NTUl9NU0FWRURDQVVTRTFdID0gIHsgIm1zYXZlZGNhdXNlMSIsIGFueSwg
+IHJlYWRfbXNhdmVkY2F1c2UxLCB3cml0ZV9tc2F2ZWRjYXVzZTEgfSwKCldBUk5JTkc6IGxpbmUg
+b3ZlciA4MCBjaGFyYWN0ZXJzCiM3OTY6IEZJTEU6IHRhcmdldC9yaXNjdi9jc3IuYzoxNzU1Ogor
+ICAgIFtDU1JfTVNBVkVEQ0FVU0UyXSA9ICB7ICJtc2F2ZWRjYXVzZTIiLCBhbnksICByZWFkX21z
+YXZlZGNhdXNlMiwgd3JpdGVfbXNhdmVkY2F1c2UyIH0sCgpXQVJOSU5HOiBsaW5lIG92ZXIgODAg
+Y2hhcmFjdGVycwojODA1OiBGSUxFOiB0YXJnZXQvcmlzY3YvY3NyLmM6MTc2NDoKKyAgICBbQ1NS
+X01VQ09VTlRFUkVOXSA9IHsgIm11Y291bnRlcmVuIiwgYW55LCAgcmVhZF9tdWNvdW50ZXJlbiwg
+d3JpdGVfbXVjb3VudGVyZW4gfSwKCkVSUk9SOiBNaXNzaW5nIFNpZ25lZC1vZmYtYnk6IGxpbmUo
+cykKCnRvdGFsOiA0IGVycm9ycywgMTEgd2FybmluZ3MsIDc4NCBsaW5lcyBjaGVja2VkCgpQYXRj
+aCAxLzUgaGFzIHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2aWV3LiAgSWYgYW55IG9mIHRoZXNl
+IGVycm9ycwphcmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0aGVtIHRvIHRoZSBtYWludGFpbmVy
+LCBzZWUKQ0hFQ0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KCjIvNSBDaGVja2luZyBjb21taXQgNGY4
+MjE1MWM4MmU0IChody9pbnRjOiBBZGQgTnVjbGVpIEVDTElDIGRldmljZSkKRVJST1I6IGxpbmUg
+b3ZlciA5MCBjaGFyYWN0ZXJzCiMxNTI6IEZJTEU6IGh3L2ludGMvbnVjbGVpX2VjbGljLmM6MTAz
+OgorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKGFjdGl2ZS0+aXJx
+ICYgMHhGRkYpIHwgKHNodiA8PCAxMikgfCAoYWN0aXZlLT5sZXZlbCA8PCAxMykpOwoKRVJST1I6
+IGxpbmUgb3ZlciA5MCBjaGFyYWN0ZXJzCiMxNzg6IEZJTEU6IGh3L2ludGMvbnVjbGVpX2VjbGlj
+LmM6MTI5OgorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKGVj
+bGljLT5jbGljaW50Y3RsW2lycV0gPj4gKDggLSBsZXZlbF93aWR0aCkpICYKCldBUk5JTkc6IGxp
+bmUgb3ZlciA4MCBjaGFyYWN0ZXJzCiMyMjA6IEZJTEU6IGh3L2ludGMvbnVjbGVpX2VjbGljLmM6
+MTcxOgorc3RhdGljIHZvaWQgbnVjbGVpX2VjbGljX3VwZGF0ZV9pbnRpcChOdWNMZWlFQ0xJQ1N0
+YXRlICplY2xpYywgaW50IGlycSwgaW50IG5ld19pbnRpcCkKCkVSUk9SOiBNaXNzaW5nIFNpZ25l
+ZC1vZmYtYnk6IGxpbmUocykKCnRvdGFsOiAzIGVycm9ycywgMSB3YXJuaW5ncywgNTY1IGxpbmVz
+IGNoZWNrZWQKClBhdGNoIDIvNSBoYXMgc3R5bGUgcHJvYmxlbXMsIHBsZWFzZSByZXZpZXcuICBJ
+ZiBhbnkgb2YgdGhlc2UgZXJyb3JzCmFyZSBmYWxzZSBwb3NpdGl2ZXMgcmVwb3J0IHRoZW0gdG8g
+dGhlIG1haW50YWluZXIsIHNlZQpDSEVDS1BBVENIIGluIE1BSU5UQUlORVJTLgoKMy81IENoZWNr
+aW5nIGNvbW1pdCA3NDlmOThiOWI3OTAgKGh3L2ludGM6IEFkZCBOdWNsZWkgU3lzdGltZXIpClVz
+ZSBvZiB1bmluaXRpYWxpemVkIHZhbHVlICRhY3BpX3Rlc3RleHBlY3RlZCBpbiBzdHJpbmcgZXEg
+YXQgLi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgbGluZSAxNTI5LgpXQVJOSU5HOiBhZGRlZCwgbW92
+ZWQgb3IgZGVsZXRlZCBmaWxlKHMpLCBkb2VzIE1BSU5UQUlORVJTIG5lZWQgdXBkYXRpbmc/CiM0
+NzogCm5ldyBmaWxlIG1vZGUgMTAwNjQ0Cgp0b3RhbDogMCBlcnJvcnMsIDEgd2FybmluZ3MsIDMz
+NyBsaW5lcyBjaGVja2VkCgpQYXRjaCAzLzUgaGFzIHN0eWxlIHByb2JsZW1zLCBwbGVhc2UgcmV2
+aWV3LiAgSWYgYW55IG9mIHRoZXNlIGVycm9ycwphcmUgZmFsc2UgcG9zaXRpdmVzIHJlcG9ydCB0
+aGVtIHRvIHRoZSBtYWludGFpbmVyLCBzZWUKQ0hFQ0tQQVRDSCBpbiBNQUlOVEFJTkVSUy4KNC81
+IENoZWNraW5nIGNvbW1pdCBmYzQ2MWRiMWZlMmMgKGh3L2NoYXI6IEFkZCBOdWNsZWkgVWFydCkK
+VXNlIG9mIHVuaW5pdGlhbGl6ZWQgdmFsdWUgJGFjcGlfdGVzdGV4cGVjdGVkIGluIHN0cmluZyBl
+cSBhdCAuL3NjcmlwdHMvY2hlY2twYXRjaC5wbCBsaW5lIDE1MjkuCldBUk5JTkc6IGFkZGVkLCBt
+b3ZlZCBvciBkZWxldGVkIGZpbGUocyksIGRvZXMgTUFJTlRBSU5FUlMgbmVlZCB1cGRhdGluZz8K
+IzQzOiAKbmV3IGZpbGUgbW9kZSAxMDA2NDQKCnRvdGFsOiAwIGVycm9ycywgMSB3YXJuaW5ncywg
+Mjk0IGxpbmVzIGNoZWNrZWQKClBhdGNoIDQvNSBoYXMgc3R5bGUgcHJvYmxlbXMsIHBsZWFzZSBy
+ZXZpZXcuICBJZiBhbnkgb2YgdGhlc2UgZXJyb3JzCmFyZSBmYWxzZSBwb3NpdGl2ZXMgcmVwb3J0
+IHRoZW0gdG8gdGhlIG1haW50YWluZXIsIHNlZQpDSEVDS1BBVENIIGluIE1BSU5UQUlORVJTLgo1
+LzUgQ2hlY2tpbmcgY29tbWl0IGNkZjNhNWE2NDVhNCAoTnVjbGVpIEZQR0EgRXZhbHVhdGlvbiBL
+aXQgTUNVIE1hY2hpbmUpClVzZSBvZiB1bmluaXRpYWxpemVkIHZhbHVlICRhY3BpX3Rlc3RleHBl
+Y3RlZCBpbiBzdHJpbmcgZXEgYXQgLi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgbGluZSAxNTI5LgpX
+QVJOSU5HOiBhZGRlZCwgbW92ZWQgb3IgZGVsZXRlZCBmaWxlKHMpLCBkb2VzIE1BSU5UQUlORVJT
+IG5lZWQgdXBkYXRpbmc/CiM3NDogCm5ldyBmaWxlIG1vZGUgMTAwNjQ0Cgp0b3RhbDogMCBlcnJv
+cnMsIDEgd2FybmluZ3MsIDQzOCBsaW5lcyBjaGVja2VkCgpQYXRjaCA1LzUgaGFzIHN0eWxlIHBy
+b2JsZW1zLCBwbGVhc2UgcmV2aWV3LiAgSWYgYW55IG9mIHRoZXNlIGVycm9ycwphcmUgZmFsc2Ug
+cG9zaXRpdmVzIHJlcG9ydCB0aGVtIHRvIHRoZSBtYWludGFpbmVyLCBzZWUKQ0hFQ0tQQVRDSCBp
+biBNQUlOVEFJTkVSUy4KPT09IE9VVFBVVCBFTkQgPT09CgpUZXN0IGNvbW1hbmQgZXhpdGVkIHdp
+dGggY29kZTogMQoKClRoZSBmdWxsIGxvZyBpcyBhdmFpbGFibGUgYXQKaHR0cDovL3BhdGNoZXcu
+b3JnL2xvZ3MvMjAyMTA1MDcwODE2NTQuMTEwNTYtMS13YW5nanVucWlhbmdAaXNjYXMuYWMuY24v
+dGVzdGluZy5jaGVja3BhdGNoLz90eXBlPW1lc3NhZ2UuCi0tLQpFbWFpbCBnZW5lcmF0ZWQgYXV0
+b21hdGljYWxseSBieSBQYXRjaGV3IFtodHRwczovL3BhdGNoZXcub3JnL10uClBsZWFzZSBzZW5k
+IHlvdXIgZmVlZGJhY2sgdG8gcGF0Y2hldy1kZXZlbEByZWRoYXQuY29t
 
