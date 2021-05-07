@@ -1,16 +1,16 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lf0Sy-0007zA-8w
+	id 1lf0Sy-000806-Ip
 	for mharc-qemu-riscv@gnu.org; Fri, 07 May 2021 09:24:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60728)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60742)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <wangjunqiang@iscas.ac.cn>)
- id 1levgX-0004aM-RP; Fri, 07 May 2021 04:18:09 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25]:50030 helo=cstnet.cn)
+ id 1levgY-0004ac-Nr; Fri, 07 May 2021 04:18:10 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25]:50028 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <wangjunqiang@iscas.ac.cn>)
- id 1levgS-0005jj-D6; Fri, 07 May 2021 04:18:09 -0400
+ id 1levgS-0005jn-JQ; Fri, 07 May 2021 04:18:10 -0400
 Received: from localhost.localdomain (unknown [121.232.13.213])
- by APP-05 (Coremail) with SMTP id zQCowAB3fSnh9pRgTQ5HAQ--.1834S5;
+ by APP-05 (Coremail) with SMTP id zQCowAB3fSnh9pRgTQ5HAQ--.1834S4;
  Fri, 07 May 2021 16:14:27 +0800 (CST)
 From: wangjunqiang <wangjunqiang@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
@@ -18,31 +18,31 @@ To: qemu-riscv@nongnu.org,
 Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bin.meng@windriver.com,
  alapha23@gmail.com, liweiwei@iscas.ac.cn,
  wangjunqiang <wangjunqiang@iscas.ac.cn>
-Subject: [RFC PATCH 3/5] hw/intc: Add Nuclei Systimer
-Date: Fri,  7 May 2021 16:16:52 +0800
-Message-Id: <20210507081654.11056-4-wangjunqiang@iscas.ac.cn>
+Subject: [RFC PATCH 2/5] hw/intc: Add Nuclei ECLIC device
+Date: Fri,  7 May 2021 16:16:51 +0800
+Message-Id: <20210507081654.11056-3-wangjunqiang@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210507081654.11056-1-wangjunqiang@iscas.ac.cn>
 References: <20210507081654.11056-1-wangjunqiang@iscas.ac.cn>
-X-CM-TRANSID: zQCowAB3fSnh9pRgTQ5HAQ--.1834S5
-X-Coremail-Antispam: 1UD129KBjvJXoW3urykCw4DGw1fuFW5Ww4UArb_yoWktFWxpF
- WkKa43Kw1UGF47G397Cw1DXFn3JwsrCF4DJ3Z7Ca12kF47G348G34qkFWayFZ7AFWkWFWr
- JF95XF15GF45A3DanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBa14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
- x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2AI
- xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
- vE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
- r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkIecxEwVAFwVW8ZwCF04k20x
- vY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I
- 3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIx
- AIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAI
- cVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2js
- IEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUBWlkUUUUU=
+X-CM-TRANSID: zQCowAB3fSnh9pRgTQ5HAQ--.1834S4
+X-Coremail-Antispam: 1UD129KBjvAXoWfJw13tFykJrykZrW3Gry8Zrb_yoW8CFyUCo
+ WfAr4DJ395Xr4UXrsakF1UGry7WF1ayFWYqFs7Wr4qyF18ZwnxX3yDKa43ZF4SvrZ8KrWx
+ ZryagFs3Xrs3JF1fn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+ AaLaJ3UjIYCTnIWjp_UUUYZ7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
+ j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r15M28IrcIa0x
+ kI8VCY1x0267AKxVW8JVW5JwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84AC
+ jcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJw
+ A2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_GFyl42xK82
+ IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC2
+ 0s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMI
+ IF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF
+ 0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87
+ Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU1yCJDUUUU
 X-Originating-IP: [121.232.13.213]
-X-CM-SenderInfo: pzdqwy5xqtxt1qj6x2xfdvhtffof0/1tbiCwoOAFz4kC9qyQABs2
+X-CM-SenderInfo: pzdqwy5xqtxt1qj6x2xfdvhtffof0/1tbiBgcOAF0TfNHfbQAAse
 Received-SPF: none client-ip=159.226.251.25;
  envelope-from=wangjunqiang@iscas.ac.cn; helo=cstnet.cn
 X-Spam_score_int: -31
@@ -66,59 +66,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 07 May 2021 08:18:10 -0000
 
-This patch provides an implementation of Nuclei Systimer,
-which like clint. In MCU mode, It only work for hart-0.
-MultiCore support will run on 200t board for Linux.
+This patch provides an implementation of Nuclei ECLIC Device.
+Nuclei processor core have been equipped with an Enhanced Core Local
+Interrupt Controller (ECLIC), which is optimized based on the RISC-V
+standard CLIC, to manage all interrupt sources.
 
-https://doc.nucleisys.com/nuclei_spec/isa/timer.html
-
-Signed-off-by: Wang Junqiang <wangjunqiang@iscas.ac.cn>
+https://doc.nucleisys.com/nuclei_spec/isa/eclic.html
 ---
- hw/intc/Kconfig                   |   3 +
- hw/intc/meson.build               |   1 +
- hw/intc/nuclei_systimer.c         | 254 ++++++++++++++++++++++++++++++
- include/hw/intc/nuclei_systimer.h |  70 ++++++++
- 4 files changed, 328 insertions(+)
- create mode 100644 hw/intc/nuclei_systimer.c
- create mode 100644 include/hw/intc/nuclei_systimer.h
+ hw/intc/Kconfig                |   3 +
+ hw/intc/meson.build            |   1 +
+ hw/intc/nuclei_eclic.c         | 437 +++++++++++++++++++++++++++++++++
+ include/hw/intc/nuclei_eclic.h | 115 +++++++++
+ 4 files changed, 556 insertions(+)
+ create mode 100644 hw/intc/nuclei_eclic.c
+ create mode 100644 include/hw/intc/nuclei_eclic.h
 
 diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
-index eab30f6ffd..70059d96fa 100644
+index f4694088a4..eab30f6ffd 100644
 --- a/hw/intc/Kconfig
 +++ b/hw/intc/Kconfig
-@@ -76,3 +76,6 @@ config M68K_IRQC
+@@ -73,3 +73,6 @@ config GOLDFISH_PIC
  
- config NUCLEI_ECLIC
+ config M68K_IRQC
      bool
 +
-+config NUCLEI_SYSTIMER
++config NUCLEI_ECLIC
 +    bool
-\ No newline at end of file
 diff --git a/hw/intc/meson.build b/hw/intc/meson.build
-index 7577ba69d2..d064f769ee 100644
+index 1c299039f6..7577ba69d2 100644
 --- a/hw/intc/meson.build
 +++ b/hw/intc/meson.build
-@@ -51,6 +51,7 @@ specific_ss.add(when: 'CONFIG_SH_INTC', if_true: files('sh_intc.c'))
+@@ -50,6 +50,7 @@ specific_ss.add(when: 'CONFIG_S390_FLIC_KVM', if_true: files('s390_flic_kvm.c'))
+ specific_ss.add(when: 'CONFIG_SH_INTC', if_true: files('sh_intc.c'))
  specific_ss.add(when: 'CONFIG_SIFIVE_CLINT', if_true: files('sifive_clint.c'))
  specific_ss.add(when: 'CONFIG_SIFIVE_PLIC', if_true: files('sifive_plic.c'))
- specific_ss.add(when: 'CONFIG_NUCLEI_ECLIC', if_true: files('nuclei_eclic.c'))
-+specific_ss.add(when: 'CONFIG_NUCLEI_SYSTIMER', if_true: files('nuclei_systimer.c'))
++specific_ss.add(when: 'CONFIG_NUCLEI_ECLIC', if_true: files('nuclei_eclic.c'))
  specific_ss.add(when: 'CONFIG_XICS', if_true: files('xics.c'))
  specific_ss.add(when: ['CONFIG_KVM', 'CONFIG_XICS'],
  		if_true: files('xics_kvm.c'))
-diff --git a/hw/intc/nuclei_systimer.c b/hw/intc/nuclei_systimer.c
+diff --git a/hw/intc/nuclei_eclic.c b/hw/intc/nuclei_eclic.c
 new file mode 100644
-index 0000000000..7d5f97b54c
+index 0000000000..52de83cb1d
 --- /dev/null
-+++ b/hw/intc/nuclei_systimer.c
-@@ -0,0 +1,254 @@
++++ b/hw/intc/nuclei_eclic.c
+@@ -0,0 +1,437 @@
 +/*
-+ *  NUCLEI TIMER (Timer Unit) interface
++ * NUCLEI ECLIC(Enhanced Core Local Interrupt Controller)
 + *
 + * Copyright (c) 2020 Gao ZhiYuan <alapha23@gmail.com>
 + * Copyright (c) 2020-2021 PLCT Lab.All rights reserved.
 + *
-+ * This provides a parameterizable timer controller based on NucLei's Systimer.
++ * This provides a parameterizable interrupt controller based on NucLei's ECLIC.
 + *
 + * This program is free software: you can redistribute it and/or modify
 + * it under the terms of the GNU General Public License as published by
@@ -136,249 +134,432 @@ index 0000000000..7d5f97b54c
 +
 +#include "qemu/osdep.h"
 +#include "qemu/log.h"
-+#include "qapi/error.h"
++#include "qemu/module.h"
 +#include "qemu/error-report.h"
-+#include "qemu/timer.h"
-+#include "target/riscv/cpu.h"
-+#include "hw/intc/nuclei_systimer.h"
-+#include "hw/intc/nuclei_eclic.h"
-+#include "hw/registerfields.h"
++#include "hw/sysbus.h"
++#include "hw/pci/msi.h"
++#include "hw/boards.h"
 +#include "hw/qdev-properties.h"
-+#include "migration/vmstate.h"
-+#include "trace.h"
++#include "target/riscv/cpu.h"
++#include "sysemu/sysemu.h"
++#include "hw/intc/nuclei_eclic.h"
++#include "qapi/error.h"
 +
-+static uint64_t cpu_riscv_read_rtc(uint64_t timebase_freq)
++#define RISCV_DEBUG_ECLIC 0
++
++static void riscv_cpu_eclic_interrupt(RISCVCPU *cpu, int exccode)
 +{
-+    return muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL),
-+                    timebase_freq, NANOSECONDS_PER_SECOND);
-+}
++    CPURISCVState *env = &cpu->env;
++    bool locked = false;
 +
-+static void nuclei_timer_update_compare(NucLeiSYSTIMERState *s)
-+{
-+    CPUState *cpu = qemu_get_cpu(0);
-+    CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-+    uint64_t cmp, real_time;
-+    int64_t diff;
++    env->exccode = exccode;
 +
-+    real_time = s->mtime_lo | ((uint64_t)s->mtime_hi << 32);
++    if (!qemu_mutex_iothread_locked()) {
++        locked = true;
++        qemu_mutex_lock_iothread();
++    }
 +
-+    cmp = (uint64_t)s->mtimecmp_lo | ((uint64_t)s->mtimecmp_hi << 32);
-+    env->mtimecmp = cmp;
-+    env->timecmp = cmp;
-+
-+    diff = cmp - real_time;
-+
-+    if (real_time >= cmp) {
-+        qemu_set_irq(*(s->timer_irq), 1);
++    if (exccode != -1) {
++        env->irq_pending = true;
++        cpu_interrupt(CPU(cpu), CPU_INTERRUPT_ECLIC);
 +    } else {
-+        qemu_set_irq(*(s->timer_irq), 0);
++        env->irq_pending = false;
++        cpu_reset_interrupt(CPU(cpu), CPU_INTERRUPT_ECLIC);
++    }
 +
-+        if (s->mtimecmp_hi != 0xffffffff) {
-+            uint64_t next_ns = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-+            muldiv64(diff, NANOSECONDS_PER_SECOND, s->timebase_freq);
-+            timer_mod(env->mtimer, next_ns);
-+        }
++    if (locked) {
++        qemu_mutex_unlock_iothread();
 +    }
 +}
 +
-+static void nuclei_timer_reset(DeviceState *dev)
++static int level_compare(NucLeiECLICState *eclic,
++                         ECLICPendingInterrupt *irq1,
++                         ECLICPendingInterrupt *irq2)
 +{
-+    NucLeiSYSTIMERState *s = NUCLEI_SYSTIMER(dev);
-+    s->mtime_lo = 0x0;
-+    s->mtime_hi = 0x0;
-+    s->mtimecmp_lo = 0xFFFFFFFF;
-+    s->mtimecmp_hi = 0xFFFFFFFF;
-+    s->mstop = 0x0;
-+    s->mstop = 0x0;
-+}
-+
-+static uint64_t nuclei_timer_read(void *opaque, hwaddr offset,
-+                                  unsigned size)
-+{
-+    NucLeiSYSTIMERState *s = NUCLEI_SYSTIMER(opaque);
-+    CPUState *cpu = qemu_get_cpu(0);
-+    CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-+    uint64_t value = 0;
-+
-+    switch (offset) {
-+    case NUCLEI_SYSTIMER_REG_MTIMELO:
-+        value = cpu_riscv_read_rtc(s->timebase_freq);
-+        s->mtime_lo = value & 0xffffffff;
-+        s->mtime_hi = (value >> 32) & 0xffffffff;
-+        value = s->mtime_lo;
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MTIMEHI:
-+        value = s->mtime_hi;
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MTIMECMPLO:
-+        s->mtimecmp_lo = (env->mtimecmp) & 0xFFFFFFFF;
-+        value = s->mtimecmp_lo;
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MTIMECMPHI:
-+        s->mtimecmp_hi = (env->mtimecmp >> 32) & 0xFFFFFFFF;
-+        value = s->mtimecmp_hi;
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MSFTRST:
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MSTOP:
-+        value = s->mstop;
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MSIP:
-+        value = s->msip;
-+        break;
-+    default:
-+        break;
-+    }
-+    value &= 0xFFFFFFFF;
-+    return value;
-+
-+}
-+
-+static void nuclei_timer_write(void *opaque, hwaddr offset,
-+                               uint64_t value, unsigned size)
-+{
-+    NucLeiSYSTIMERState *s = NUCLEI_SYSTIMER(opaque);
-+    CPUState *cpu = qemu_get_cpu(0);
-+    CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-+
-+    value = value & 0xFFFFFFFF;
-+    switch (offset) {
-+    case NUCLEI_SYSTIMER_REG_MTIMELO:
-+        s->mtime_lo = value;
-+        env->mtimer->expire_time |= (value & 0xFFFFFFFF);
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MTIMEHI:
-+        s->mtime_hi = value;
-+        env->mtimer->expire_time |= ((value << 32) & 0xFFFFFFFF);
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MTIMECMPLO:
-+        s->mtimecmp_lo = value;
-+        s->mtimecmp_hi = 0xFFFFFFFF;
-+        env->mtimecmp |= (value & 0xFFFFFFFF);
-+        nuclei_timer_update_compare(s);
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MTIMECMPHI:
-+        s->mtimecmp_hi = value;
-+        env->mtimecmp |= ((value << 32) & 0xFFFFFFFF);
-+        nuclei_timer_update_compare(s);
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MSFTRST:
-+        if (!(value & 0x80000000) == 0) {
-+            nuclei_timer_reset((DeviceState *)s);
-+        }
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MSTOP:
-+        s->mstop = value;
-+        break;
-+    case NUCLEI_SYSTIMER_REG_MSIP:
-+        s->msip = value;
-+        if ((s->msip & 0x1) == 1) {
-+            qemu_set_irq(*(s->soft_irq), 1);
++    if (irq1->level == irq2->level) {
++        if (irq1->prio == irq2->prio) {
++            if (irq1->irq >= irq2->irq) {
++                return 0;
++            } else {
++                return 1;
++            }
++        } else if (irq1->prio > irq2->level) {
++            return 0;
 +        } else {
-+            qemu_set_irq(*(s->soft_irq), 0);
++            return 1;
 +        }
++    } else if (irq1->level > irq2->level) {
++        return 0;
++    } else {
++        return 1;
++    }
++}
 +
++static void nuclei_eclic_next_interrupt(void *eclic_ptr)
++{
++    RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(0));
++    CPURISCVState *env = &cpu->env;
++    NucLeiECLICState *eclic = (NucLeiECLICState *)eclic_ptr;
++    ECLICPendingInterrupt *active;
++    target_ulong mil;
++    int shv;
++
++    QLIST_FOREACH(active, &eclic->pending_list, next)
++    {
++        if (active->enable) {
++            mil = get_field(env->mintstatus, MINTSTATUS_MIL);
++            if (active->level >= eclic->mth && active->level > mil) {
++                shv = eclic->clicintattr[active->irq] & 0x1;
++                eclic->active_count++;
++                riscv_cpu_eclic_interrupt(cpu,
++                                          (active->irq & 0xFFF) | (shv << 12) | (active->level << 13));
++                return;
++            }
++        }
++    }
++}
++
++static void nuclei_eclic_update_intmth(NucLeiECLICState *eclic,
++                                       int irq, int mth)
++{
++    eclic->mth = mth;
++    nuclei_eclic_next_interrupt(eclic);
++}
++
++static void update_eclic_int_info(NucLeiECLICState *eclic, int irq)
++{
++    int level_width = (eclic->cliccfg >> 1) & 0xF;
++    if (level_width > CLICINTCTLBITS) {
++        level_width = CLICINTCTLBITS;
++    }
++    int prio_width = CLICINTCTLBITS - level_width;
++
++    if (level_width == 0) {
++        eclic->clicintlist[irq].level = 255;
++    } else {
++        eclic->clicintlist[irq].level = ((
++                                             (eclic->clicintctl[irq] >> (8 - level_width)) &
++                                             ~((char)0x80 >> (8 - level_width)))
++                                         << (8 - level_width)) |
++                                        (0xff >> level_width);
++    }
++
++    if (prio_width == 0) {
++        eclic->clicintlist[irq].prio = 0;
++    } else {
++        eclic->clicintlist[irq].prio =
++            (eclic->clicintctl[irq] >> (8 - level_width)) &
++            ~(0x80 >> (8 - prio_width));
++    }
++
++    eclic->clicintlist[irq].enable = eclic->clicintie[irq] & 0x1;
++    eclic->clicintlist[irq].trigger = (eclic->clicintattr[irq] >> 1) & 0x3;
++}
++
++static void eclic_remove_pending_list(NucLeiECLICState *eclic, int irq)
++{
++    QLIST_REMOVE(&eclic->clicintlist[irq], next);
++}
++
++static void eclic_insert_pending_list(NucLeiECLICState *eclic, int irq)
++{
++    ECLICPendingInterrupt *node;
++    if (QLIST_EMPTY(&eclic->pending_list)) {
++        QLIST_INSERT_HEAD(&eclic->pending_list, &eclic->clicintlist[irq], next);
++    } else {
++        QLIST_FOREACH(node, &eclic->pending_list, next)
++        {
++            if (level_compare(eclic, node, &eclic->clicintlist[irq])) {
++                QLIST_INSERT_BEFORE(node, &eclic->clicintlist[irq], next);
++                break;
++            } else if (node->next.le_next == NULL) {
++                QLIST_INSERT_AFTER(node, &eclic->clicintlist[irq], next);
++                break;
++            }
++        }
++    }
++}
++
++static void nuclei_eclic_update_intip(NucLeiECLICState *eclic, int irq, int new_intip)
++{
++
++    int old_intip = eclic->clicintlist[irq].sig;
++    int trigger = (eclic->clicintattr[irq] >> 1) & 0x3;
++    if (((trigger == 0) && new_intip) ||
++        ((trigger == 1) && !old_intip && new_intip) ||
++        ((trigger == 3) && old_intip && !new_intip)) {
++        eclic->clicintip[irq] = 1;
++        eclic->clicintlist[irq].sig = new_intip;
++        eclic_insert_pending_list(eclic, irq);
++    } else {
++        if (eclic->clicintip[irq]) {
++            eclic_remove_pending_list(eclic, irq);
++        }
++        eclic->clicintip[irq] = 0;
++        eclic->clicintlist[irq].sig = new_intip;
++    }
++
++    nuclei_eclic_next_interrupt(eclic);
++}
++
++static void nuclei_eclic_update_intie(NucLeiECLICState *eclic,
++                                      int irq, int new_intie)
++{
++    eclic->clicintie[irq] = new_intie;
++    update_eclic_int_info(eclic, irq);
++    nuclei_eclic_next_interrupt(eclic);
++}
++
++static void nuclei_eclic_update_intattr(NucLeiECLICState *eclic,
++                                        int irq, int new_intattr)
++{
++    eclic->clicintattr[irq] = new_intattr;
++    update_eclic_int_info(eclic, irq);
++    nuclei_eclic_next_interrupt(eclic);
++}
++
++static void nuclei_eclic_update_intctl(NucLeiECLICState *eclic,
++                                       int irq, int new_intctl)
++{
++    eclic->clicintctl[irq] = new_intctl;
++    update_eclic_int_info(eclic, irq);
++    nuclei_eclic_next_interrupt(eclic);
++}
++
++qemu_irq nuclei_eclic_get_irq(DeviceState *dev, int irq)
++{
++    NucLeiECLICState *eclic = NUCLEI_ECLIC(dev);
++    return eclic->irqs[irq];
++}
++
++static uint64_t nuclei_eclic_read(void *opaque, hwaddr offset, unsigned size)
++{
++    NucLeiECLICState *eclic = NUCLEI_ECLIC(opaque);
++    uint64_t value = 0;
++    uint32_t id = 0;
++    if (offset >= NUCLEI_ECLIC_REG_CLICINTIP_BASE) {
++        if ((offset - 0x1000) % 4 == 0) {
++            id = (offset - 0x1000) / 4;
++        } else if ((offset - 0x1001) % 4 == 0) {
++            id = (offset - 0x1001) / 4;
++        } else if ((offset - 0x1002) % 4 == 0) {
++            id = (offset - 0x1002) / 4;
++        } else if ((offset - 0x1003) % 4 == 0) {
++            id = (offset - 0x1003) / 4;
++        }
++        offset = offset - 4 * id;
++    }
++
++    switch (offset) {
++    case NUCLEI_ECLIC_REG_CLICCFG:
++        value = eclic->cliccfg & 0xFF;
++        break;
++    case NUCLEI_ECLIC_REG_CLICINFO:
++        value = (CLICINTCTLBITS << 21) & 0xFFFFFFFF;
++        break;
++    case NUCLEI_ECLIC_REG_MTH:
++        value = eclic->mth & 0xFF;
++        break;
++    case NUCLEI_ECLIC_REG_CLICINTIP_BASE:
++        value = eclic->clicintip[id] & 0xFF;
++        break;
++    case NUCLEI_ECLIC_REG_CLICINTIE_BASE:
++        value = eclic->clicintie[id] & 0xFF;
++        break;
++    case NUCLEI_ECLIC_REG_CLICINTATTR_BASE:
++        value = eclic->clicintattr[id] & 0xFF;
++        break;
++    case NUCLEI_ECLIC_REG_CLICINTCTL_BASE:
++        value = eclic->clicintctl[id] & 0xFF;
++        break;
++    default:
++        break;
++    }
++
++    return value;
++}
++
++static void nuclei_eclic_write(void *opaque, hwaddr offset, uint64_t value,
++                               unsigned size)
++{
++    NucLeiECLICState *eclic = NUCLEI_ECLIC(opaque);
++    uint32_t id = 0;
++    if (offset >= NUCLEI_ECLIC_REG_CLICINTIP_BASE) {
++
++        if ((offset - 0x1000) % 4 == 0) {
++            id = (offset - 0x1000) / 4;
++        } else if ((offset - 0x1001) % 4 == 0) {
++            id = (offset - 0x1001) / 4;
++        } else if ((offset - 0x1002) % 4 == 0) {
++            id = (offset - 0x1002) / 4;
++        } else if ((offset - 0x1003) % 4 == 0) {
++            id = (offset - 0x1003) / 4;
++        }
++        offset = offset - 4 * id;
++    }
++    switch (offset) {
++    case NUCLEI_ECLIC_REG_CLICCFG:
++        eclic->cliccfg = value & 0xFF;
++        for (id = 0; id < eclic->num_sources; id++) {
++            update_eclic_int_info(eclic, id);
++        }
++        break;
++    case NUCLEI_ECLIC_REG_MTH:
++        nuclei_eclic_update_intmth(eclic, id, value & 0xFF);
++        break;
++    case NUCLEI_ECLIC_REG_CLICINTIP_BASE:
++        if ((eclic->clicintlist[id].trigger & 0x1) != 0) {
++            if ((eclic->clicintip[id] == 0) && (value & 0x1) == 1) {
++                eclic->clicintip[id] = 1;
++                eclic_insert_pending_list(eclic, id);
++            } else if ((eclic->clicintip[id] == 1) && (value & 0x1) == 0) {
++                eclic->clicintip[id] = 0;
++                eclic_remove_pending_list(eclic, id);
++            }
++        }
++        nuclei_eclic_next_interrupt(eclic);
++        break;
++    case NUCLEI_ECLIC_REG_CLICINTIE_BASE:
++        nuclei_eclic_update_intie(eclic, id, value & 0xFF);
++        break;
++    case NUCLEI_ECLIC_REG_CLICINTATTR_BASE:
++        nuclei_eclic_update_intattr(eclic, id, value & 0xFF);
++        break;
++    case NUCLEI_ECLIC_REG_CLICINTCTL_BASE:
++        nuclei_eclic_update_intctl(eclic, id, value & 0xFF);
 +        break;
 +    default:
 +        break;
 +    }
 +}
 +
-+static const MemoryRegionOps nuclei_timer_ops = {
-+    .read = nuclei_timer_read,
-+    .write = nuclei_timer_write,
++static const MemoryRegionOps nuclei_eclic_ops = {
++    .read = nuclei_eclic_read,
++    .write = nuclei_eclic_write,
 +    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .impl = {
-+        .min_access_size = 4,
-+        .max_access_size = 4,
-+    },
 +};
 +
-+static Property nuclei_systimer_properties[] = {
-+    DEFINE_PROP_UINT32("aperture-size", NucLeiSYSTIMERState, aperture_size, 0),
-+    DEFINE_PROP_UINT32("timebase-freq", NucLeiSYSTIMERState, timebase_freq, 0),
++void riscv_cpu_eclic_clean_pending(void *eclic_ptr, int irq)
++{
++    NucLeiECLICState *eclic = (NucLeiECLICState *)eclic_ptr;
++    if ((eclic->clicintlist[irq].trigger & 0x1) != 0 && irq >= 0) {
++        eclic->clicintip[irq] = 0;
++        eclic_remove_pending_list(eclic, irq);
++    }
++}
++
++void riscv_cpu_eclic_get_next_interrupt(void *eclic_ptr)
++{
++    NucLeiECLICState *eclic = (NucLeiECLICState *)eclic_ptr;
++    nuclei_eclic_next_interrupt(eclic);
++}
++
++
++
++static void nuclei_eclic_irq_request(void *opaque, int id, int new_intip)
++{
++    NucLeiECLICState *eclic = NUCLEI_ECLIC(opaque);
++    nuclei_eclic_update_intip(eclic, id, new_intip);
++}
++
++static void nuclei_eclic_realize(DeviceState *dev, Error **errp)
++{
++    NucLeiECLICState *eclic = NUCLEI_ECLIC(dev);
++    int id;
++
++    memory_region_init_io(&eclic->mmio, OBJECT(dev), &nuclei_eclic_ops, eclic,
++                          TYPE_NUCLEI_ECLIC, eclic->aperture_size);
++    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &eclic->mmio);
++
++    eclic->clicintip = g_new0(uint8_t, eclic->num_sources);
++    eclic->clicintlist = g_new0(ECLICPendingInterrupt, eclic->num_sources);
++    eclic->clicintie = g_new0(uint8_t, eclic->num_sources);
++    eclic->clicintattr = g_new0(uint8_t, eclic->num_sources);
++    eclic->clicintctl = g_new0(uint8_t, eclic->num_sources);
++    eclic->irqs = g_new0(qemu_irq, eclic->num_sources);
++    QLIST_INIT(&eclic->pending_list);
++    for (id = 0; id < eclic->num_sources; id++) {
++        eclic->clicintlist[id].irq = id;
++        update_eclic_int_info(eclic, id);
++    }
++    eclic->active_count = 0;
++
++    /* Init ECLIC IRQ */
++    eclic->irqs[Internal_SysTimerSW_IRQn] =
++        qemu_allocate_irq(nuclei_eclic_irq_request,
++                          eclic, Internal_SysTimerSW_IRQn);
++    eclic->irqs[Internal_SysTimer_IRQn] =
++        qemu_allocate_irq(nuclei_eclic_irq_request,
++                          eclic, Internal_SysTimer_IRQn);
++
++    for (id = Internal_Reserved_Max_IRQn; id < eclic->num_sources; id++) {
++        eclic->irqs[id] = qemu_allocate_irq(nuclei_eclic_irq_request,
++                                            eclic, id);
++    }
++
++    RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(0));
++    cpu->env.eclic = eclic;
++}
++
++static Property nuclei_eclic_properties[] = {
++    DEFINE_PROP_UINT32("aperture-size", NucLeiECLICState, aperture_size, 0),
++    DEFINE_PROP_UINT32("num-sources", NucLeiECLICState, num_sources, 0),
 +    DEFINE_PROP_END_OF_LIST(),
 +};
 +
-+static void nuclei_timer_realize(DeviceState *dev, Error **errp)
-+{
-+    NucLeiSYSTIMERState *s = NUCLEI_SYSTIMER(dev);
-+
-+    if (s->aperture_size == 0) {
-+        s->aperture_size = 0x1000;
-+    }
-+    memory_region_init_io(&s->iomem, OBJECT(dev), &nuclei_timer_ops,
-+                          s, TYPE_NUCLEI_SYSTIMER, s->aperture_size);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->iomem);
-+}
-+
-+static void nuclei_timer_class_init(ObjectClass *klass, void *data)
++static void nuclei_eclic_class_init(ObjectClass *klass, void *data)
 +{
 +    DeviceClass *dc = DEVICE_CLASS(klass);
-+    dc->realize = nuclei_timer_realize;
-+    dc->reset = nuclei_timer_reset;
-+    dc->desc = "NucLei Systimer Timer";
-+    device_class_set_props(dc, nuclei_systimer_properties);
++
++    device_class_set_props(dc, nuclei_eclic_properties);
++    dc->realize = nuclei_eclic_realize;
 +}
 +
-+static const TypeInfo nuclei_timer_info = {
-+    .name = TYPE_NUCLEI_SYSTIMER,
++static const TypeInfo nuclei_eclic_info = {
++    .name = TYPE_NUCLEI_ECLIC,
 +    .parent = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(NucLeiSYSTIMERState),
-+    .class_init = nuclei_timer_class_init,
++    .instance_size = sizeof(NucLeiECLICState),
++    .class_init = nuclei_eclic_class_init,
 +};
 +
-+static void nuclei_timer_register_types(void)
++static void nuclei_eclic_register_types(void)
 +{
-+    type_register_static(&nuclei_timer_info);
-+}
-+type_init(nuclei_timer_register_types);
-+
-+static void nuclei_mtimecmp_cb(void *opaque)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(0));
-+    CPURISCVState *env = &cpu->env;
-+    nuclei_eclic_systimer_cb(((RISCVCPU *)cpu)->env.eclic);
-+    timer_del(env->mtimer);
++    type_register_static(&nuclei_eclic_info);
 +}
 +
-+DeviceState *nuclei_systimer_create(hwaddr addr, hwaddr size,
-+                                    DeviceState *eclic, uint32_t timebase_freq)
++type_init(nuclei_eclic_register_types);
++
++void nuclei_eclic_systimer_cb(DeviceState *dev)
 +{
-+    RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(0));
-+    CPURISCVState *env = &cpu->env;
++    NucLeiECLICState *eclic = NUCLEI_ECLIC(dev);
++    nuclei_eclic_irq_request(eclic, Internal_SysTimer_IRQn, 1);
++}
 +
-+    env->features |= (1ULL << RISCV_FEATURE_ECLIC);
-+    env->mtimer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-+                               &nuclei_mtimecmp_cb, cpu);
-+    env->mtimecmp = 0;
++DeviceState *nuclei_eclic_create(hwaddr addr,
++                                 uint32_t aperture_size, uint32_t num_sources)
++{
++    DeviceState *dev = qdev_new(TYPE_NUCLEI_ECLIC);
 +
-+    DeviceState *dev = qdev_new(TYPE_NUCLEI_SYSTIMER);
-+    qdev_prop_set_uint32(dev, "aperture-size", size);
-+    qdev_prop_set_uint32(dev, "timebase-freq", timebase_freq);
++    qdev_prop_set_uint32(dev, "aperture-size", aperture_size);
++    qdev_prop_set_uint32(dev, "num-sources", num_sources);
++
 +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
 +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-+    NucLeiSYSTIMERState *s = NUCLEI_SYSTIMER(dev);
-+    if (eclic != NULL) {
-+        s->eclic = eclic;
-+        s->soft_irq = &(NUCLEI_ECLIC(eclic)->irqs[Internal_SysTimerSW_IRQn]);
-+        s->timer_irq = &(NUCLEI_ECLIC(eclic)->irqs[Internal_SysTimer_IRQn]);
-+    }
 +    return dev;
 +}
-diff --git a/include/hw/intc/nuclei_systimer.h b/include/hw/intc/nuclei_systimer.h
+diff --git a/include/hw/intc/nuclei_eclic.h b/include/hw/intc/nuclei_eclic.h
 new file mode 100644
-index 0000000000..1f7756bb6f
+index 0000000000..18b25485b9
 --- /dev/null
-+++ b/include/hw/intc/nuclei_systimer.h
-@@ -0,0 +1,70 @@
++++ b/include/hw/intc/nuclei_eclic.h
+@@ -0,0 +1,115 @@
 +/*
-+ *  NUCLEI TIMER (Timer Unit) interface
++ * NUCLEI ECLIC (Enhanced Core Local Interrupt Controller) interface
 + *
 + * Copyright (c) 2020 Gao ZhiYuan <alapha23@gmail.com>
 + * Copyright (c) 2020-2021 PLCT Lab.All rights reserved.
 + *
-+ * This provides a parameterizable timer controller based on NucLei's Systimer.
++ * This provides a parameterizable interrupt controller based on NucLei's ECLIC.
 + *
 + * This program is free software: you can redistribute it and/or modify
 + * it under the terms of the GNU General Public License as published by
@@ -393,54 +574,99 @@ index 0000000000..1f7756bb6f
 + *  You should have received a copy of the GNU General Public License
 + *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 + */
-+#ifndef HW_NUCLEI_SYSTIMER_H
-+#define HW_NUCLEI_SYSTIMER_H
++#ifndef HW_NUCLEI_ECLIC_H
++#define HW_NUCLEI_ECLIC_H
 +
-+#include "hw/intc/nuclei_eclic.h"
 +#include "hw/irq.h"
 +#include "hw/sysbus.h"
 +
-+#define TYPE_NUCLEI_SYSTIMER "riscv.nuclei.systimer"
++#define TYPE_NUCLEI_ECLIC "riscv.nuclei.eclic"
 +
-+#define NUCLEI_SYSTIMER(obj) \
-+    OBJECT_CHECK(NucLeiSYSTIMERState, (obj), TYPE_NUCLEI_SYSTIMER)
++#define INTERRUPT_SOURCE_MIN_ID (18)
++#define INTERRUPT_SOURCE_MAX_ID (4096)
 +
-+#define NUCLEI_SYSTIMER_REG_MTIMELO    0x0000
-+#define NUCLEI_SYSTIMER_REG_MTIMEHI    0x0004
-+#define NUCLEI_SYSTIMER_REG_MTIMECMPLO 0x0008
-+#define NUCLEI_SYSTIMER_REG_MTIMECMPHI 0x000C
-+#define NUCLEI_SYSTIMER_REG_MSFTRST    0xFF0
-+#define NUCLEI_SYSTIMER_REG_MSTOP      0xFF8
-+#define NUCLEI_SYSTIMER_REG_MSIP       0xFFC
++typedef struct NucLeiECLICState NucLeiECLICState;
++DECLARE_INSTANCE_CHECKER(NucLeiECLICState, NUCLEI_ECLIC,
++                         TYPE_NUCLEI_ECLIC)
 +
-+typedef struct NucLeiSYSTIMERState {
++typedef struct ECLICPendingInterrupt {
++    int irq;
++    int prio;
++    int level;
++    int enable;
++    int trigger;
++    int sig;
++    QLIST_ENTRY(ECLICPendingInterrupt) next;
++} ECLICPendingInterrupt;
++
++#define NUCLEI_ECLIC_REG_CLICCFG          0x0000
++#define NUCLEI_ECLIC_REG_CLICINFO         0x0004
++#define NUCLEI_ECLIC_REG_MTH              0x000b
++#define NUCLEI_ECLIC_REG_CLICINTIP_BASE   0x1000
++#define NUCLEI_ECLIC_REG_CLICINTIE_BASE   0x1001
++#define NUCLEI_ECLIC_REG_CLICINTATTR_BASE 0x1002
++#define NUCLEI_ECLIC_REG_CLICINTCTL_BASE  0x1003
++
++#define CLICINTCTLBITS 0x6
++
++typedef struct NucLeiECLICState {
 +    /*< private >*/
 +    SysBusDevice parent_obj;
 +
 +    /*< public >*/
-+    MemoryRegion iomem;
-+    qemu_irq *timer_irq;
-+    qemu_irq *soft_irq;
++    MemoryRegion mmio;
 +
-+    DeviceState *eclic;
++    uint32_t num_sources; /* 4-1024 */
 +
-+    uint32_t mtime_lo;
-+    uint32_t mtime_hi;
-+    uint32_t mtimecmp_lo;
-+    uint32_t mtimecmp_hi;
-+    uint32_t mstop;
-+    uint32_t msip;
-+
++    /* config */
++    uint32_t sources_id;
++    uint8_t cliccfg; /*  nlbits(1~4) */
++    uint32_t clicinfo;
++    uint8_t mth; /* mth(0~7) */
++    uint8_t *clicintip;
++    uint8_t *clicintie;
++    uint8_t *clicintattr; /* shv(0) trig(1~2)*/
++    uint8_t *clicintctl;
++    ECLICPendingInterrupt *clicintlist;
 +    uint32_t aperture_size;
-+    uint32_t timebase_freq;
 +
-+} NucLeiSYSTIMERState;
++    QLIST_HEAD(, ECLICPendingInterrupt)
++    pending_list;
++    size_t active_count;
 +
-+#define NUCLEI_GD32_TIMEBASE_FREQ  (108000000 * 2)
-+#define NUCLEI_HBIRD_TIMEBASE_FREQ (10000000)
++    /* ECLIC IRQ handlers */
++    qemu_irq *irqs;
 +
-+DeviceState *nuclei_systimer_create(hwaddr addr, hwaddr size,
-+                                    DeviceState *eclic, uint32_t timebase_freq);
++} NucLeiECLICState;
++
++enum {
++    Internal_Reserved0_IRQn = 0,     /*!<  Internal reserved */
++    Internal_Reserved1_IRQn = 1,     /*!<  Internal reserved */
++    Internal_Reserved2_IRQn = 2,     /*!<  Internal reserved */
++    Internal_SysTimerSW_IRQn = 3,    /*!<  System Timer SW interrupt */
++    Internal_Reserved3_IRQn = 4,     /*!<  Internal reserved */
++    Internal_Reserved4_IRQn = 5,     /*!<  Internal reserved */
++    Internal_Reserved5_IRQn = 6,     /*!<  Internal reserved */
++    Internal_SysTimer_IRQn = 7,      /*!<  System Timer Interrupt */
++    Internal_Reserved6_IRQn = 8,     /*!<  Internal reserved */
++    Internal_Reserved7_IRQn = 9,     /*!<  Internal reserved */
++    Internal_Reserved8_IRQn = 10,    /*!<  Internal reserved */
++    Internal_Reserved9_IRQn = 11,    /*!<  Internal reserved */
++    Internal_Reserved10_IRQn = 12,   /*!<  Internal reserved */
++    Internal_Reserved11_IRQn = 13,   /*!<  Internal reserved */
++    Internal_Reserved12_IRQn = 14,   /*!<  Internal reserved */
++    Internal_Reserved13_IRQn = 15,   /*!<  Internal reserved */
++    Internal_Reserved14_IRQn = 16,   /*!<  Internal reserved */
++    Internal_BusError_IRQn = 17,     /*!<  Bus Error interrupt */
++    Internal_PerfMon_IRQn = 18,      /*!<  Performance Monitor */
++    Internal_Reserved_Max_IRQn = 19, /*!<  Internal reserved  Max */
++};
++
++DeviceState *nuclei_eclic_create(hwaddr addr,
++                                 uint32_t aperture_size, uint32_t num_sources);
++qemu_irq nuclei_eclic_get_irq(DeviceState *dev, int irq);
++void nuclei_eclic_systimer_cb(DeviceState *dev);
++
 +#endif
 -- 
 2.17.1
