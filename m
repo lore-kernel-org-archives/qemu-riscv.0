@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lf0Sy-000806-Ip
+	id 1lf0Sy-00080n-Pu
 	for mharc-qemu-riscv@gnu.org; Fri, 07 May 2021 09:24:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60742)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60706)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <wangjunqiang@iscas.ac.cn>)
- id 1levgY-0004ac-Nr; Fri, 07 May 2021 04:18:10 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25]:50028 helo=cstnet.cn)
+ id 1levgW-0004Zx-JY; Fri, 07 May 2021 04:18:08 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25]:50026 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <wangjunqiang@iscas.ac.cn>)
- id 1levgS-0005jn-JQ; Fri, 07 May 2021 04:18:10 -0400
+ id 1levgS-0005jl-7t; Fri, 07 May 2021 04:18:08 -0400
 Received: from localhost.localdomain (unknown [121.232.13.213])
- by APP-05 (Coremail) with SMTP id zQCowAB3fSnh9pRgTQ5HAQ--.1834S4;
- Fri, 07 May 2021 16:14:27 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowAB3fSnh9pRgTQ5HAQ--.1834S6;
+ Fri, 07 May 2021 16:14:28 +0800 (CST)
 From: wangjunqiang <wangjunqiang@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bin.meng@windriver.com,
  alapha23@gmail.com, liweiwei@iscas.ac.cn,
  wangjunqiang <wangjunqiang@iscas.ac.cn>
-Subject: [RFC PATCH 2/5] hw/intc: Add Nuclei ECLIC device
-Date: Fri,  7 May 2021 16:16:51 +0800
-Message-Id: <20210507081654.11056-3-wangjunqiang@iscas.ac.cn>
+Subject: [RFC PATCH 4/5] hw/char: Add Nuclei Uart
+Date: Fri,  7 May 2021 16:16:53 +0800
+Message-Id: <20210507081654.11056-5-wangjunqiang@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210507081654.11056-1-wangjunqiang@iscas.ac.cn>
 References: <20210507081654.11056-1-wangjunqiang@iscas.ac.cn>
-X-CM-TRANSID: zQCowAB3fSnh9pRgTQ5HAQ--.1834S4
-X-Coremail-Antispam: 1UD129KBjvAXoWfJw13tFykJrykZrW3Gry8Zrb_yoW8CFyUCo
- WfAr4DJ395Xr4UXrsakF1UGry7WF1ayFWYqFs7Wr4qyF18ZwnxX3yDKa43ZF4SvrZ8KrWx
- ZryagFs3Xrs3JF1fn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
- AaLaJ3UjIYCTnIWjp_UUUYZ7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
- j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r15M28IrcIa0x
- kI8VCY1x0267AKxVW8JVW5JwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84AC
- jcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJw
- A2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
- 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
- IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
- Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_GFyl42xK82
- IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC2
- 0s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMI
- IF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF
- 0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87
- Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU1yCJDUUUU
+X-CM-TRANSID: zQCowAB3fSnh9pRgTQ5HAQ--.1834S6
+X-Coremail-Antispam: 1UD129KBjvJXoWxKF18KrW3GryDAFy3Gry7trb_yoWfWF4kpF
+ W5CFy5Ka1UKF13G393Ga17JF4fJF1kAF1DWa4xG3yvvr47Kr40yF92gayavFWDArWfGr45
+ AFZxXFWUG3W8XFJanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBm14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
+ 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+ IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_GFyl42
+ xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWU
+ GwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI4
+ 8JMIIF0xvE2Ix0cI8IcVAFwI0_Gr0_Xr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4U
+ MIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I
+ 8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUYyxRDUUUU
 X-Originating-IP: [121.232.13.213]
-X-CM-SenderInfo: pzdqwy5xqtxt1qj6x2xfdvhtffof0/1tbiBgcOAF0TfNHfbQAAse
+X-CM-SenderInfo: pzdqwy5xqtxt1qj6x2xfdvhtffof0/1tbiCwgOAFz4kC9qzQAAsx
 Received-SPF: none client-ip=159.226.251.25;
  envelope-from=wangjunqiang@iscas.ac.cn; helo=cstnet.cn
 X-Spam_score_int: -31
@@ -64,59 +64,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2021 08:18:10 -0000
+X-List-Received-Date: Fri, 07 May 2021 08:18:08 -0000
 
-This patch provides an implementation of Nuclei ECLIC Device.
-Nuclei processor core have been equipped with an Enhanced Core Local
-Interrupt Controller (ECLIC), which is optimized based on the RISC-V
-standard CLIC, to manage all interrupt sources.
+This patch provides the initial implementation of Nuclei Uart
+which is opensource in Nuclei's Hummingbird Project.
 
-https://doc.nucleisys.com/nuclei_spec/isa/eclic.html
+Signed-off-by: Wang Junqiang <wangjunqiang@iscas.ac.cn>
 ---
- hw/intc/Kconfig                |   3 +
- hw/intc/meson.build            |   1 +
- hw/intc/nuclei_eclic.c         | 437 +++++++++++++++++++++++++++++++++
- include/hw/intc/nuclei_eclic.h | 115 +++++++++
- 4 files changed, 556 insertions(+)
- create mode 100644 hw/intc/nuclei_eclic.c
- create mode 100644 include/hw/intc/nuclei_eclic.h
+ hw/char/Kconfig               |   3 +
+ hw/char/meson.build           |   1 +
+ hw/char/nuclei_uart.c         | 208 ++++++++++++++++++++++++++++++++++
+ include/hw/char/nuclei_uart.h |  73 ++++++++++++
+ 4 files changed, 285 insertions(+)
+ create mode 100644 hw/char/nuclei_uart.c
+ create mode 100644 include/hw/char/nuclei_uart.h
 
-diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
-index f4694088a4..eab30f6ffd 100644
---- a/hw/intc/Kconfig
-+++ b/hw/intc/Kconfig
-@@ -73,3 +73,6 @@ config GOLDFISH_PIC
+diff --git a/hw/char/Kconfig b/hw/char/Kconfig
+index 4cf36ac637..de003d0609 100644
+--- a/hw/char/Kconfig
++++ b/hw/char/Kconfig
+@@ -67,3 +67,6 @@ config SIFIVE_UART
  
- config M68K_IRQC
+ config GOLDFISH_TTY
      bool
 +
-+config NUCLEI_ECLIC
++config NUCLEI_UART
 +    bool
-diff --git a/hw/intc/meson.build b/hw/intc/meson.build
-index 1c299039f6..7577ba69d2 100644
---- a/hw/intc/meson.build
-+++ b/hw/intc/meson.build
-@@ -50,6 +50,7 @@ specific_ss.add(when: 'CONFIG_S390_FLIC_KVM', if_true: files('s390_flic_kvm.c'))
- specific_ss.add(when: 'CONFIG_SH_INTC', if_true: files('sh_intc.c'))
- specific_ss.add(when: 'CONFIG_SIFIVE_CLINT', if_true: files('sifive_clint.c'))
- specific_ss.add(when: 'CONFIG_SIFIVE_PLIC', if_true: files('sifive_plic.c'))
-+specific_ss.add(when: 'CONFIG_NUCLEI_ECLIC', if_true: files('nuclei_eclic.c'))
- specific_ss.add(when: 'CONFIG_XICS', if_true: files('xics.c'))
- specific_ss.add(when: ['CONFIG_KVM', 'CONFIG_XICS'],
- 		if_true: files('xics_kvm.c'))
-diff --git a/hw/intc/nuclei_eclic.c b/hw/intc/nuclei_eclic.c
+diff --git a/hw/char/meson.build b/hw/char/meson.build
+index da5bb8b762..fd0a0a34f4 100644
+--- a/hw/char/meson.build
++++ b/hw/char/meson.build
+@@ -34,6 +34,7 @@ softmmu_ss.add(when: 'CONFIG_SIFIVE_UART', if_true: files('sifive_uart.c'))
+ softmmu_ss.add(when: 'CONFIG_SH_SCI', if_true: files('sh_serial.c'))
+ softmmu_ss.add(when: 'CONFIG_STM32F2XX_USART', if_true: files('stm32f2xx_usart.c'))
+ softmmu_ss.add(when: 'CONFIG_MCHP_PFSOC_MMUART', if_true: files('mchp_pfsoc_mmuart.c'))
++softmmu_ss.add(when: 'CONFIG_NUCLEI_UART', if_true: files('nuclei_uart.c'))
+ 
+ specific_ss.add(when: 'CONFIG_HTIF', if_true: files('riscv_htif.c'))
+ specific_ss.add(when: 'CONFIG_TERMINAL3270', if_true: files('terminal3270.c'))
+diff --git a/hw/char/nuclei_uart.c b/hw/char/nuclei_uart.c
 new file mode 100644
-index 0000000000..52de83cb1d
+index 0000000000..0b6bfa33a7
 --- /dev/null
-+++ b/hw/intc/nuclei_eclic.c
-@@ -0,0 +1,437 @@
++++ b/hw/char/nuclei_uart.c
+@@ -0,0 +1,208 @@
 +/*
-+ * NUCLEI ECLIC(Enhanced Core Local Interrupt Controller)
++ *  NUCLEI Hummingbird Evaluation Kit  100T/200T UART interface
 + *
-+ * Copyright (c) 2020 Gao ZhiYuan <alapha23@gmail.com>
 + * Copyright (c) 2020-2021 PLCT Lab.All rights reserved.
-+ *
-+ * This provides a parameterizable interrupt controller based on NucLei's ECLIC.
 + *
 + * This program is free software: you can redistribute it and/or modify
 + * it under the terms of the GNU General Public License as published by
@@ -133,433 +128,204 @@ index 0000000000..52de83cb1d
 + */
 +
 +#include "qemu/osdep.h"
-+#include "qemu/log.h"
-+#include "qemu/module.h"
-+#include "qemu/error-report.h"
-+#include "hw/sysbus.h"
-+#include "hw/pci/msi.h"
-+#include "hw/boards.h"
-+#include "hw/qdev-properties.h"
-+#include "target/riscv/cpu.h"
-+#include "sysemu/sysemu.h"
-+#include "hw/intc/nuclei_eclic.h"
 +#include "qapi/error.h"
++#include "qemu/log.h"
++#include "hw/sysbus.h"
++#include "chardev/char.h"
++#include "chardev/char-fe.h"
++#include "hw/hw.h"
++#include "hw/irq.h"
++#include "hw/char/nuclei_uart.h"
 +
-+#define RISCV_DEBUG_ECLIC 0
-+
-+static void riscv_cpu_eclic_interrupt(RISCVCPU *cpu, int exccode)
++/*
++ * Not yet implemented:
++ *
++ * Transmit FIFO using "qemu/fifo8.h"
++ */
++static uint64_t uart_ip(NucLeiUARTState *s)
 +{
-+    CPURISCVState *env = &cpu->env;
-+    bool locked = false;
++    uint64_t ret = 0;
 +
-+    env->exccode = exccode;
++    uint64_t txcnt = NUCLEI_UART_GET_TXCNT(s->txctrl);
++    uint64_t rxcnt = NUCLEI_UART_GET_RXCNT(s->rxctrl);
 +
-+    if (!qemu_mutex_iothread_locked()) {
-+        locked = true;
-+        qemu_mutex_lock_iothread();
++    if (txcnt != 0) {
++        ret |= NUCLEI_UART_IP_TXWM;
++    }
++    if (s->rx_fifo_len > rxcnt) {
++        ret |= NUCLEI_UART_IP_RXWM;
 +    }
 +
-+    if (exccode != -1) {
-+        env->irq_pending = true;
-+        cpu_interrupt(CPU(cpu), CPU_INTERRUPT_ECLIC);
++    return ret;
++}
++
++static void update_irq(NucLeiUARTState *s)
++{
++    int cond = 0;
++    s->txctrl |= 0x1;
++    if (s->rx_fifo_len) {
++        s->rxctrl &= ~0x1;
 +    } else {
-+        env->irq_pending = false;
-+        cpu_reset_interrupt(CPU(cpu), CPU_INTERRUPT_ECLIC);
++        s->rxctrl |= 0x1;
 +    }
 +
-+    if (locked) {
-+        qemu_mutex_unlock_iothread();
++    if ((s->ie & NUCLEI_UART_IE_TXWM) ||
++        ((s->ie & NUCLEI_UART_IE_RXWM) && s->rx_fifo_len)) {
++        cond = 1;
 +    }
-+}
 +
-+static int level_compare(NucLeiECLICState *eclic,
-+                         ECLICPendingInterrupt *irq1,
-+                         ECLICPendingInterrupt *irq2)
-+{
-+    if (irq1->level == irq2->level) {
-+        if (irq1->prio == irq2->prio) {
-+            if (irq1->irq >= irq2->irq) {
-+                return 0;
-+            } else {
-+                return 1;
-+            }
-+        } else if (irq1->prio > irq2->level) {
-+            return 0;
-+        } else {
-+            return 1;
-+        }
-+    } else if (irq1->level > irq2->level) {
-+        return 0;
++    if (cond) {
++        qemu_irq_raise(s->irq);
 +    } else {
-+        return 1;
++        qemu_irq_lower(s->irq);
 +    }
 +}
 +
-+static void nuclei_eclic_next_interrupt(void *eclic_ptr)
++static uint64_t
++uart_read(void *opaque, hwaddr offset, unsigned int size)
 +{
-+    RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(0));
-+    CPURISCVState *env = &cpu->env;
-+    NucLeiECLICState *eclic = (NucLeiECLICState *)eclic_ptr;
-+    ECLICPendingInterrupt *active;
-+    target_ulong mil;
-+    int shv;
-+
-+    QLIST_FOREACH(active, &eclic->pending_list, next)
-+    {
-+        if (active->enable) {
-+            mil = get_field(env->mintstatus, MINTSTATUS_MIL);
-+            if (active->level >= eclic->mth && active->level > mil) {
-+                shv = eclic->clicintattr[active->irq] & 0x1;
-+                eclic->active_count++;
-+                riscv_cpu_eclic_interrupt(cpu,
-+                                          (active->irq & 0xFFF) | (shv << 12) | (active->level << 13));
-+                return;
-+            }
-+        }
-+    }
-+}
-+
-+static void nuclei_eclic_update_intmth(NucLeiECLICState *eclic,
-+                                       int irq, int mth)
-+{
-+    eclic->mth = mth;
-+    nuclei_eclic_next_interrupt(eclic);
-+}
-+
-+static void update_eclic_int_info(NucLeiECLICState *eclic, int irq)
-+{
-+    int level_width = (eclic->cliccfg >> 1) & 0xF;
-+    if (level_width > CLICINTCTLBITS) {
-+        level_width = CLICINTCTLBITS;
-+    }
-+    int prio_width = CLICINTCTLBITS - level_width;
-+
-+    if (level_width == 0) {
-+        eclic->clicintlist[irq].level = 255;
-+    } else {
-+        eclic->clicintlist[irq].level = ((
-+                                             (eclic->clicintctl[irq] >> (8 - level_width)) &
-+                                             ~((char)0x80 >> (8 - level_width)))
-+                                         << (8 - level_width)) |
-+                                        (0xff >> level_width);
-+    }
-+
-+    if (prio_width == 0) {
-+        eclic->clicintlist[irq].prio = 0;
-+    } else {
-+        eclic->clicintlist[irq].prio =
-+            (eclic->clicintctl[irq] >> (8 - level_width)) &
-+            ~(0x80 >> (8 - prio_width));
-+    }
-+
-+    eclic->clicintlist[irq].enable = eclic->clicintie[irq] & 0x1;
-+    eclic->clicintlist[irq].trigger = (eclic->clicintattr[irq] >> 1) & 0x3;
-+}
-+
-+static void eclic_remove_pending_list(NucLeiECLICState *eclic, int irq)
-+{
-+    QLIST_REMOVE(&eclic->clicintlist[irq], next);
-+}
-+
-+static void eclic_insert_pending_list(NucLeiECLICState *eclic, int irq)
-+{
-+    ECLICPendingInterrupt *node;
-+    if (QLIST_EMPTY(&eclic->pending_list)) {
-+        QLIST_INSERT_HEAD(&eclic->pending_list, &eclic->clicintlist[irq], next);
-+    } else {
-+        QLIST_FOREACH(node, &eclic->pending_list, next)
-+        {
-+            if (level_compare(eclic, node, &eclic->clicintlist[irq])) {
-+                QLIST_INSERT_BEFORE(node, &eclic->clicintlist[irq], next);
-+                break;
-+            } else if (node->next.le_next == NULL) {
-+                QLIST_INSERT_AFTER(node, &eclic->clicintlist[irq], next);
-+                break;
-+            }
-+        }
-+    }
-+}
-+
-+static void nuclei_eclic_update_intip(NucLeiECLICState *eclic, int irq, int new_intip)
-+{
-+
-+    int old_intip = eclic->clicintlist[irq].sig;
-+    int trigger = (eclic->clicintattr[irq] >> 1) & 0x3;
-+    if (((trigger == 0) && new_intip) ||
-+        ((trigger == 1) && !old_intip && new_intip) ||
-+        ((trigger == 3) && old_intip && !new_intip)) {
-+        eclic->clicintip[irq] = 1;
-+        eclic->clicintlist[irq].sig = new_intip;
-+        eclic_insert_pending_list(eclic, irq);
-+    } else {
-+        if (eclic->clicintip[irq]) {
-+            eclic_remove_pending_list(eclic, irq);
-+        }
-+        eclic->clicintip[irq] = 0;
-+        eclic->clicintlist[irq].sig = new_intip;
-+    }
-+
-+    nuclei_eclic_next_interrupt(eclic);
-+}
-+
-+static void nuclei_eclic_update_intie(NucLeiECLICState *eclic,
-+                                      int irq, int new_intie)
-+{
-+    eclic->clicintie[irq] = new_intie;
-+    update_eclic_int_info(eclic, irq);
-+    nuclei_eclic_next_interrupt(eclic);
-+}
-+
-+static void nuclei_eclic_update_intattr(NucLeiECLICState *eclic,
-+                                        int irq, int new_intattr)
-+{
-+    eclic->clicintattr[irq] = new_intattr;
-+    update_eclic_int_info(eclic, irq);
-+    nuclei_eclic_next_interrupt(eclic);
-+}
-+
-+static void nuclei_eclic_update_intctl(NucLeiECLICState *eclic,
-+                                       int irq, int new_intctl)
-+{
-+    eclic->clicintctl[irq] = new_intctl;
-+    update_eclic_int_info(eclic, irq);
-+    nuclei_eclic_next_interrupt(eclic);
-+}
-+
-+qemu_irq nuclei_eclic_get_irq(DeviceState *dev, int irq)
-+{
-+    NucLeiECLICState *eclic = NUCLEI_ECLIC(dev);
-+    return eclic->irqs[irq];
-+}
-+
-+static uint64_t nuclei_eclic_read(void *opaque, hwaddr offset, unsigned size)
-+{
-+    NucLeiECLICState *eclic = NUCLEI_ECLIC(opaque);
++    NucLeiUARTState *s = opaque;
 +    uint64_t value = 0;
-+    uint32_t id = 0;
-+    if (offset >= NUCLEI_ECLIC_REG_CLICINTIP_BASE) {
-+        if ((offset - 0x1000) % 4 == 0) {
-+            id = (offset - 0x1000) / 4;
-+        } else if ((offset - 0x1001) % 4 == 0) {
-+            id = (offset - 0x1001) / 4;
-+        } else if ((offset - 0x1002) % 4 == 0) {
-+            id = (offset - 0x1002) / 4;
-+        } else if ((offset - 0x1003) % 4 == 0) {
-+            id = (offset - 0x1003) / 4;
-+        }
-+        offset = offset - 4 * id;
-+    }
++    uint8_t fifo_val;
 +
 +    switch (offset) {
-+    case NUCLEI_ECLIC_REG_CLICCFG:
-+        value = eclic->cliccfg & 0xFF;
++    case NUCLEI_UART_REG_TXDATA:
++        return 0;
++    case NUCLEI_UART_REG_RXDATA:
++        if (s->rx_fifo_len) {
++            fifo_val = s->rx_fifo[0];
++            memmove(s->rx_fifo, s->rx_fifo + 1, s->rx_fifo_len - 1);
++            s->rx_fifo_len--;
++            qemu_chr_fe_accept_input(&s->chr);
++            update_irq(s);
++            return fifo_val;
++        }
++        return 0x80000000;
++    case NUCLEI_UART_REG_TXCTRL:
++        value = s->txctrl;
 +        break;
-+    case NUCLEI_ECLIC_REG_CLICINFO:
-+        value = (CLICINTCTLBITS << 21) & 0xFFFFFFFF;
++    case NUCLEI_UART_REG_RXCTRL:
++        value = s->rxctrl;
 +        break;
-+    case NUCLEI_ECLIC_REG_MTH:
-+        value = eclic->mth & 0xFF;
++    case NUCLEI_UART_REG_IE:
++        value = s->ie;
 +        break;
-+    case NUCLEI_ECLIC_REG_CLICINTIP_BASE:
-+        value = eclic->clicintip[id] & 0xFF;
++    case NUCLEI_UART_REG_IP:
++        value = uart_ip(s);
 +        break;
-+    case NUCLEI_ECLIC_REG_CLICINTIE_BASE:
-+        value = eclic->clicintie[id] & 0xFF;
-+        break;
-+    case NUCLEI_ECLIC_REG_CLICINTATTR_BASE:
-+        value = eclic->clicintattr[id] & 0xFF;
-+        break;
-+    case NUCLEI_ECLIC_REG_CLICINTCTL_BASE:
-+        value = eclic->clicintctl[id] & 0xFF;
++    case NUCLEI_UART_REG_DIV:
++        value = s->div;
 +        break;
 +    default:
 +        break;
 +    }
-+
 +    return value;
 +}
 +
-+static void nuclei_eclic_write(void *opaque, hwaddr offset, uint64_t value,
-+                               unsigned size)
++static void
++uart_write(void *opaque, hwaddr offset,
++           uint64_t value, unsigned int size)
 +{
-+    NucLeiECLICState *eclic = NUCLEI_ECLIC(opaque);
-+    uint32_t id = 0;
-+    if (offset >= NUCLEI_ECLIC_REG_CLICINTIP_BASE) {
++    NucLeiUARTState *s = opaque;
++    unsigned char ch = value;
 +
-+        if ((offset - 0x1000) % 4 == 0) {
-+            id = (offset - 0x1000) / 4;
-+        } else if ((offset - 0x1001) % 4 == 0) {
-+            id = (offset - 0x1001) / 4;
-+        } else if ((offset - 0x1002) % 4 == 0) {
-+            id = (offset - 0x1002) / 4;
-+        } else if ((offset - 0x1003) % 4 == 0) {
-+            id = (offset - 0x1003) / 4;
-+        }
-+        offset = offset - 4 * id;
-+    }
 +    switch (offset) {
-+    case NUCLEI_ECLIC_REG_CLICCFG:
-+        eclic->cliccfg = value & 0xFF;
-+        for (id = 0; id < eclic->num_sources; id++) {
-+            update_eclic_int_info(eclic, id);
-+        }
++    case NUCLEI_UART_REG_TXDATA:
++        qemu_chr_fe_write(&s->chr, &ch, 1);
++        update_irq(s);
 +        break;
-+    case NUCLEI_ECLIC_REG_MTH:
-+        nuclei_eclic_update_intmth(eclic, id, value & 0xFF);
++    case NUCLEI_UART_REG_TXCTRL:
++        s->txctrl = value;
 +        break;
-+    case NUCLEI_ECLIC_REG_CLICINTIP_BASE:
-+        if ((eclic->clicintlist[id].trigger & 0x1) != 0) {
-+            if ((eclic->clicintip[id] == 0) && (value & 0x1) == 1) {
-+                eclic->clicintip[id] = 1;
-+                eclic_insert_pending_list(eclic, id);
-+            } else if ((eclic->clicintip[id] == 1) && (value & 0x1) == 0) {
-+                eclic->clicintip[id] = 0;
-+                eclic_remove_pending_list(eclic, id);
-+            }
-+        }
-+        nuclei_eclic_next_interrupt(eclic);
++    case NUCLEI_UART_REG_RXCTRL:
++        s->rxctrl = value;
 +        break;
-+    case NUCLEI_ECLIC_REG_CLICINTIE_BASE:
-+        nuclei_eclic_update_intie(eclic, id, value & 0xFF);
++    case NUCLEI_UART_REG_IE:
++        s->ie = value;
++        update_irq(s);
 +        break;
-+    case NUCLEI_ECLIC_REG_CLICINTATTR_BASE:
-+        nuclei_eclic_update_intattr(eclic, id, value & 0xFF);
++    case NUCLEI_UART_REG_IP:
++        s->ip = value;
 +        break;
-+    case NUCLEI_ECLIC_REG_CLICINTCTL_BASE:
-+        nuclei_eclic_update_intctl(eclic, id, value & 0xFF);
++    case NUCLEI_UART_REG_DIV:
++        s->div = value;
 +        break;
 +    default:
 +        break;
 +    }
 +}
 +
-+static const MemoryRegionOps nuclei_eclic_ops = {
-+    .read = nuclei_eclic_read,
-+    .write = nuclei_eclic_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
++static const MemoryRegionOps uart_ops = {
++    .read = uart_read,
++    .write = uart_write,
++    .endianness = DEVICE_NATIVE_ENDIAN,
++    .valid = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++        }
 +};
 +
-+void riscv_cpu_eclic_clean_pending(void *eclic_ptr, int irq)
++static void uart_rx(void *opaque, const uint8_t *buf, int size)
 +{
-+    NucLeiECLICState *eclic = (NucLeiECLICState *)eclic_ptr;
-+    if ((eclic->clicintlist[irq].trigger & 0x1) != 0 && irq >= 0) {
-+        eclic->clicintip[irq] = 0;
-+        eclic_remove_pending_list(eclic, irq);
++    NucLeiUARTState *s = opaque;
++
++    /* Got a byte.  */
++    if (s->rx_fifo_len >= sizeof(s->rx_fifo)) {
++        printf("WARNING: UART dropped char.\n");
++        return;
 +    }
++    s->rx_fifo[s->rx_fifo_len++] = *buf;
++
++    update_irq(s);
 +}
 +
-+void riscv_cpu_eclic_get_next_interrupt(void *eclic_ptr)
++static int uart_can_rx(void *opaque)
 +{
-+    NucLeiECLICState *eclic = (NucLeiECLICState *)eclic_ptr;
-+    nuclei_eclic_next_interrupt(eclic);
++    NucLeiUARTState *s = opaque;
++    return s->rx_fifo_len < sizeof(s->rx_fifo);
 +}
 +
-+
-+
-+static void nuclei_eclic_irq_request(void *opaque, int id, int new_intip)
++static void uart_event(void *opaque, QEMUChrEvent event)
 +{
-+    NucLeiECLICState *eclic = NUCLEI_ECLIC(opaque);
-+    nuclei_eclic_update_intip(eclic, id, new_intip);
 +}
 +
-+static void nuclei_eclic_realize(DeviceState *dev, Error **errp)
++static int uart_be_change(void *opaque)
 +{
-+    NucLeiECLICState *eclic = NUCLEI_ECLIC(dev);
-+    int id;
++    NucLeiUARTState *s = opaque;
 +
-+    memory_region_init_io(&eclic->mmio, OBJECT(dev), &nuclei_eclic_ops, eclic,
-+                          TYPE_NUCLEI_ECLIC, eclic->aperture_size);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &eclic->mmio);
++    qemu_chr_fe_set_handlers(&s->chr, uart_can_rx, uart_rx, uart_event,
++                             uart_be_change, s, NULL, true);
 +
-+    eclic->clicintip = g_new0(uint8_t, eclic->num_sources);
-+    eclic->clicintlist = g_new0(ECLICPendingInterrupt, eclic->num_sources);
-+    eclic->clicintie = g_new0(uint8_t, eclic->num_sources);
-+    eclic->clicintattr = g_new0(uint8_t, eclic->num_sources);
-+    eclic->clicintctl = g_new0(uint8_t, eclic->num_sources);
-+    eclic->irqs = g_new0(qemu_irq, eclic->num_sources);
-+    QLIST_INIT(&eclic->pending_list);
-+    for (id = 0; id < eclic->num_sources; id++) {
-+        eclic->clicintlist[id].irq = id;
-+        update_eclic_int_info(eclic, id);
-+    }
-+    eclic->active_count = 0;
-+
-+    /* Init ECLIC IRQ */
-+    eclic->irqs[Internal_SysTimerSW_IRQn] =
-+        qemu_allocate_irq(nuclei_eclic_irq_request,
-+                          eclic, Internal_SysTimerSW_IRQn);
-+    eclic->irqs[Internal_SysTimer_IRQn] =
-+        qemu_allocate_irq(nuclei_eclic_irq_request,
-+                          eclic, Internal_SysTimer_IRQn);
-+
-+    for (id = Internal_Reserved_Max_IRQn; id < eclic->num_sources; id++) {
-+        eclic->irqs[id] = qemu_allocate_irq(nuclei_eclic_irq_request,
-+                                            eclic, id);
-+    }
-+
-+    RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(0));
-+    cpu->env.eclic = eclic;
++    return 0;
 +}
 +
-+static Property nuclei_eclic_properties[] = {
-+    DEFINE_PROP_UINT32("aperture-size", NucLeiECLICState, aperture_size, 0),
-+    DEFINE_PROP_UINT32("num-sources", NucLeiECLICState, num_sources, 0),
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
-+static void nuclei_eclic_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    device_class_set_props(dc, nuclei_eclic_properties);
-+    dc->realize = nuclei_eclic_realize;
-+}
-+
-+static const TypeInfo nuclei_eclic_info = {
-+    .name = TYPE_NUCLEI_ECLIC,
-+    .parent = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(NucLeiECLICState),
-+    .class_init = nuclei_eclic_class_init,
-+};
-+
-+static void nuclei_eclic_register_types(void)
-+{
-+    type_register_static(&nuclei_eclic_info);
-+}
-+
-+type_init(nuclei_eclic_register_types);
-+
-+void nuclei_eclic_systimer_cb(DeviceState *dev)
-+{
-+    NucLeiECLICState *eclic = NUCLEI_ECLIC(dev);
-+    nuclei_eclic_irq_request(eclic, Internal_SysTimer_IRQn, 1);
-+}
-+
-+DeviceState *nuclei_eclic_create(hwaddr addr,
-+                                 uint32_t aperture_size, uint32_t num_sources)
-+{
-+    DeviceState *dev = qdev_new(TYPE_NUCLEI_ECLIC);
-+
-+    qdev_prop_set_uint32(dev, "aperture-size", aperture_size);
-+    qdev_prop_set_uint32(dev, "num-sources", num_sources);
-+
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-+    return dev;
-+}
-diff --git a/include/hw/intc/nuclei_eclic.h b/include/hw/intc/nuclei_eclic.h
-new file mode 100644
-index 0000000000..18b25485b9
---- /dev/null
-+++ b/include/hw/intc/nuclei_eclic.h
-@@ -0,0 +1,115 @@
 +/*
-+ * NUCLEI ECLIC (Enhanced Core Local Interrupt Controller) interface
++ * Create UART device.
++ */
++NucLeiUARTState *nuclei_uart_create(MemoryRegion *address_space,
++                    hwaddr base, uint64_t size, Chardev *chr, qemu_irq irq)
++{
++    NucLeiUARTState *s = g_malloc0(sizeof(NucLeiUARTState));
++    s->irq = irq;
++    qemu_chr_fe_init(&s->chr, chr, &error_abort);
++    qemu_chr_fe_set_handlers(&s->chr, uart_can_rx, uart_rx, uart_event,
++                             uart_be_change, s, NULL, true);
++    memory_region_init_io(&s->mmio, NULL, &uart_ops, s,
++                          TYPE_NUCLEI_UART, size);
++    memory_region_add_subregion(address_space, base, &s->mmio);
++
++    return s;
++}
+diff --git a/include/hw/char/nuclei_uart.h b/include/hw/char/nuclei_uart.h
+new file mode 100644
+index 0000000000..a7f2c72fb7
+--- /dev/null
++++ b/include/hw/char/nuclei_uart.h
+@@ -0,0 +1,73 @@
++/*
++ *  NUCLEI Hummingbird Evaluation Kit  100T/200T UART interface
 + *
-+ * Copyright (c) 2020 Gao ZhiYuan <alapha23@gmail.com>
 + * Copyright (c) 2020-2021 PLCT Lab.All rights reserved.
-+ *
-+ * This provides a parameterizable interrupt controller based on NucLei's ECLIC.
 + *
 + * This program is free software: you can redistribute it and/or modify
 + * it under the terms of the GNU General Public License as published by
@@ -574,99 +340,60 @@ index 0000000000..18b25485b9
 + *  You should have received a copy of the GNU General Public License
 + *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 + */
-+#ifndef HW_NUCLEI_ECLIC_H
-+#define HW_NUCLEI_ECLIC_H
 +
++#ifndef HW_NUCLEI_UART_H
++#define HW_NUCLEI_UART_H
++
++#include "chardev/char-fe.h"
 +#include "hw/irq.h"
 +#include "hw/sysbus.h"
 +
-+#define TYPE_NUCLEI_ECLIC "riscv.nuclei.eclic"
++#define TYPE_NUCLEI_UART "riscv.nuclei.uart"
++OBJECT_DECLARE_SIMPLE_TYPE(NucLeiUARTState, NUCLEI_UART)
 +
-+#define INTERRUPT_SOURCE_MIN_ID (18)
-+#define INTERRUPT_SOURCE_MAX_ID (4096)
++#define NUCLEI_UART_REG_TXDATA 0x000
++#define NUCLEI_UART_REG_RXDATA 0x004
++#define NUCLEI_UART_REG_TXCTRL 0x008
++#define NUCLEI_UART_REG_RXCTRL 0x00C
++#define NUCLEI_UART_REG_IE     0x010
++#define NUCLEI_UART_REG_IP     0x014
++#define NUCLEI_UART_REG_DIV    0x018
 +
-+typedef struct NucLeiECLICState NucLeiECLICState;
-+DECLARE_INSTANCE_CHECKER(NucLeiECLICState, NUCLEI_ECLIC,
-+                         TYPE_NUCLEI_ECLIC)
++#define NUCLEI_UART_GET_TXCNT(txctrl) (txctrl & 0x1)
++#define NUCLEI_UART_GET_RXCNT(rxctrl) (rxctrl & 0x1)
 +
-+typedef struct ECLICPendingInterrupt {
-+    int irq;
-+    int prio;
-+    int level;
-+    int enable;
-+    int trigger;
-+    int sig;
-+    QLIST_ENTRY(ECLICPendingInterrupt) next;
-+} ECLICPendingInterrupt;
++enum {
++    NUCLEI_UART_IE_TXWM = 1, /* Transmit watermark interrupt enable */
++    NUCLEI_UART_IE_RXWM = 2  /* Receive watermark interrupt enable */
++};
 +
-+#define NUCLEI_ECLIC_REG_CLICCFG          0x0000
-+#define NUCLEI_ECLIC_REG_CLICINFO         0x0004
-+#define NUCLEI_ECLIC_REG_MTH              0x000b
-+#define NUCLEI_ECLIC_REG_CLICINTIP_BASE   0x1000
-+#define NUCLEI_ECLIC_REG_CLICINTIE_BASE   0x1001
-+#define NUCLEI_ECLIC_REG_CLICINTATTR_BASE 0x1002
-+#define NUCLEI_ECLIC_REG_CLICINTCTL_BASE  0x1003
++enum {
++    NUCLEI_UART_IP_TXWM = 1, /* Transmit watermark interrupt pending */
++    NUCLEI_UART_IP_RXWM = 2  /* Receive watermark interrupt pending */
++};
 +
-+#define CLICINTCTLBITS 0x6
-+
-+typedef struct NucLeiECLICState {
++typedef struct NucLeiUARTState {
 +    /*< private >*/
 +    SysBusDevice parent_obj;
 +
 +    /*< public >*/
++    qemu_irq irq;
 +    MemoryRegion mmio;
++    CharBackend chr;
++    uint8_t rx_fifo[8];
++    unsigned int rx_fifo_len;
 +
-+    uint32_t num_sources; /* 4-1024 */
++    uint32_t txdata;
++    uint32_t rxdata;
++    uint32_t txctrl;
++    uint32_t rxctrl;
++    uint32_t ie;
++    uint32_t ip;
++    uint32_t div;
++} NucLeiUARTState;
 +
-+    /* config */
-+    uint32_t sources_id;
-+    uint8_t cliccfg; /*  nlbits(1~4) */
-+    uint32_t clicinfo;
-+    uint8_t mth; /* mth(0~7) */
-+    uint8_t *clicintip;
-+    uint8_t *clicintie;
-+    uint8_t *clicintattr; /* shv(0) trig(1~2)*/
-+    uint8_t *clicintctl;
-+    ECLICPendingInterrupt *clicintlist;
-+    uint32_t aperture_size;
-+
-+    QLIST_HEAD(, ECLICPendingInterrupt)
-+    pending_list;
-+    size_t active_count;
-+
-+    /* ECLIC IRQ handlers */
-+    qemu_irq *irqs;
-+
-+} NucLeiECLICState;
-+
-+enum {
-+    Internal_Reserved0_IRQn = 0,     /*!<  Internal reserved */
-+    Internal_Reserved1_IRQn = 1,     /*!<  Internal reserved */
-+    Internal_Reserved2_IRQn = 2,     /*!<  Internal reserved */
-+    Internal_SysTimerSW_IRQn = 3,    /*!<  System Timer SW interrupt */
-+    Internal_Reserved3_IRQn = 4,     /*!<  Internal reserved */
-+    Internal_Reserved4_IRQn = 5,     /*!<  Internal reserved */
-+    Internal_Reserved5_IRQn = 6,     /*!<  Internal reserved */
-+    Internal_SysTimer_IRQn = 7,      /*!<  System Timer Interrupt */
-+    Internal_Reserved6_IRQn = 8,     /*!<  Internal reserved */
-+    Internal_Reserved7_IRQn = 9,     /*!<  Internal reserved */
-+    Internal_Reserved8_IRQn = 10,    /*!<  Internal reserved */
-+    Internal_Reserved9_IRQn = 11,    /*!<  Internal reserved */
-+    Internal_Reserved10_IRQn = 12,   /*!<  Internal reserved */
-+    Internal_Reserved11_IRQn = 13,   /*!<  Internal reserved */
-+    Internal_Reserved12_IRQn = 14,   /*!<  Internal reserved */
-+    Internal_Reserved13_IRQn = 15,   /*!<  Internal reserved */
-+    Internal_Reserved14_IRQn = 16,   /*!<  Internal reserved */
-+    Internal_BusError_IRQn = 17,     /*!<  Bus Error interrupt */
-+    Internal_PerfMon_IRQn = 18,      /*!<  Performance Monitor */
-+    Internal_Reserved_Max_IRQn = 19, /*!<  Internal reserved  Max */
-+};
-+
-+DeviceState *nuclei_eclic_create(hwaddr addr,
-+                                 uint32_t aperture_size, uint32_t num_sources);
-+qemu_irq nuclei_eclic_get_irq(DeviceState *dev, int irq);
-+void nuclei_eclic_systimer_cb(DeviceState *dev);
-+
++NucLeiUARTState *nuclei_uart_create(MemoryRegion *address_space,
++                    hwaddr base, uint64_t size, Chardev *chr, qemu_irq irq);
 +#endif
 -- 
 2.17.1
