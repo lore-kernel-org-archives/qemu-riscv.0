@@ -1,78 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lgRTf-0003Pl-65
-	for mharc-qemu-riscv@gnu.org; Tue, 11 May 2021 08:27:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40966)
+	id 1lgS5f-0002py-FA
+	for mharc-qemu-riscv@gnu.org; Tue, 11 May 2021 09:06:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52852)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lgRTd-0003OJ-AR; Tue, 11 May 2021 08:27:05 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432]:42904)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lgS5e-0002pm-2b; Tue, 11 May 2021 09:06:22 -0400
+Received: from mail-yb1-xb29.google.com ([2607:f8b0:4864:20::b29]:39797)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1lgRTb-0004wX-3P; Tue, 11 May 2021 08:27:04 -0400
-Received: by mail-wr1-x432.google.com with SMTP id l2so19934358wrm.9;
- Tue, 11 May 2021 05:27:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lgS5b-0004Sg-Hc; Tue, 11 May 2021 09:06:21 -0400
+Received: by mail-yb1-xb29.google.com with SMTP id s37so1703446ybi.6;
+ Tue, 11 May 2021 06:06:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=cUab8/BPpicqjRWLRsSe2OUGEVDu2PtuhV0srzfQJoA=;
- b=rM7SfMRrIXYGqH6UUlb9XxODJ2UkmuD/RnTwBLil0TEadQTkjrDQrX4AehRV9KGdev
- C2ZiIkQZJpRjVdf+JZRJzSL15x9n8dhBo4SBd8+exvSYDTzaEdYzokptdmuNJYU3Zcq+
- zKnqeltOkQt6pexIxBvqkMB8qyqOdpe1St0ddGrTPjxpmy5C6DTkTKt9kP/RzXia6zHw
- 0lsyqNwFS122CbjiUXXiCy6t9KKmmLj3O/OMuwowLEs11lhtHikWvkQTapASgkqrDpw+
- qJXe5yDYKqbUoNG4y3+hXSZU98okQg0RFZAAMenK6nVtnhdjKERLoX7gmlMGaHvbDGeL
- FSCg==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=EZngYV9stFe3OHnNnsjqCw+QkdCUpg/+5rmM+vOq++0=;
+ b=YGP141y0jIrLNxkdAXmZCoMoEpuNFFiAGqsUnk2Ah2EOonO4H0V18cjWY5Ffj4Du6U
+ uQ8KPam51tzVePrifWwsb/Q4GGQa4xkpPD2YKDiDO6k6jW8wgmQdT6dwarCf807xbbz5
+ +fPlWMolvArMv2+W5Gx/DDjlQGjHHBvU4DUo8ctC+P6JtXeBBqCP10Vy3gYDDJD5fgzG
+ 783jRkT2nIMVMa0FTJp0qhrvlaJi7uYvS6Bjx/65vH6dcQbtdT3hfI/qjXaJkMW4AeWb
+ ecHvqFaTxiMWxFdv2azTLj+qIgtZodKKPMvLXAPiXPlqOFRkO2hpmb2XoKS1XsUbOyj2
+ URKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=cUab8/BPpicqjRWLRsSe2OUGEVDu2PtuhV0srzfQJoA=;
- b=iOcyUwLgx4p8N3IioZ+iV+bIXiqDxrI8tGJNa4nkasfTaUrE85YEY7DNDdW4/NUUZ1
- SNOINM9LBKzsfp/mLG14qk+Jrm09bWktXbH5dQ1zy47X1C6DYszWi3g4vEo6LG8RPlxV
- sKEZE5ByClphad6poJoAEA05q56TKQ1ab1IT5dbikWDZU9U6p+so5doKJu98ScWyHNU6
- uCskF44rUIIyihLpvVELROhbwuWWj6PMqUI9p4ecVldROftX4/Dimfr3EXoSJdq6rf3B
- 7QP9up/kdEm738aXv0/3t81Nx1VTaqzAzLU773iT1/WMyNDZTHNzeAHWblMqJw9juSRr
- IJGQ==
-X-Gm-Message-State: AOAM531MEXZz3YNgyDx5R4uQdJOFLOI/hrdOXmlqazED4wiZQ8JGmlnY
- GFQoNZErZtM3PAg+32u42Aw=
-X-Google-Smtp-Source: ABdhPJyiW+VmhLoClMBahbYmznlP6XZp8fpSfVeavugeDsV7ILN89H9ICmv3J5Y3cDgrBB5BiFGSSQ==
-X-Received: by 2002:adf:fc46:: with SMTP id e6mr37230603wrs.169.1620736020961; 
- Tue, 11 May 2021 05:27:00 -0700 (PDT)
-Received: from [192.168.1.36] (39.red-81-40-121.staticip.rima-tde.net.
- [81.40.121.39])
- by smtp.gmail.com with ESMTPSA id f25sm27703375wrd.67.2021.05.11.05.26.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 May 2021 05:27:00 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 2/2] QOMify sifive_uart model
-To: =?UTF-8?Q?Lukas_J=c3=bcnger?= <lukas.juenger@greensocs.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, bin.meng@windriver.com, mark.burton@greensocs.com, 
- marcandre.lureau@redhat.com, palmer@dabbelt.com, pbonzini@redhat.com,
- alistair.francis@wdc.com, luc.michel@greensocs.com
-References: <20210504153456.927083-1-lukas.juenger@greensocs.com>
- <20210504153456.927083-3-lukas.juenger@greensocs.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <8471d630-72c1-aef0-a0cf-9f0417334c08@amsat.org>
-Date: Tue, 11 May 2021 14:26:54 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=EZngYV9stFe3OHnNnsjqCw+QkdCUpg/+5rmM+vOq++0=;
+ b=BY6m8Scas5meTRWGDxaV2fyQfDCeuttHPfIQqhqVcGkz//usfuPfk+/T1tWixq9bZl
+ GikIwPIOVFZtQhrhIPEJKNhHc7nNdszivY/KreB1EIAZp/22pn27QESDp24hxy/abLIi
+ KzRSNiwSRyld8oRYkIyJV84e+4SFKsN4ndsTt4jIjklBG+SWZ5b0E4GWURFF4M4Rl9di
+ EUoPjePNDSLqR1mQmtIPZDeVQxUao4VQXN9LhkbWGwR7Rku5EmjB42yy4m83CT9gvNQ5
+ BvLhM4cXOfpQyjk8lbUNJHUjnEWUVFDrcpjoUgFhq2T4WqZdUYRwLOdyWrktEF87PFJm
+ smzA==
+X-Gm-Message-State: AOAM531D2wFYexTpi4jtnR8dTr+Gt3PCG/BXevPL4X2c38PirWhfTxrk
+ EcFRl6DGgaVJvVlSvmxqYAOfP46RMIGL1XojEIg=
+X-Google-Smtp-Source: ABdhPJw8D1XnehRAPjlJfl5mIQtNfZr1iigitddEPQxbVHfL7zDlKAfgm5SXhTKwypue6ZDR6M72mwjXWWf5Yul4/0I=
+X-Received: by 2002:a25:be09:: with SMTP id h9mr42839805ybk.239.1620738377640; 
+ Tue, 11 May 2021 06:06:17 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210504153456.927083-3-lukas.juenger@greensocs.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x432.google.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.248,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.248, NICE_REPLY_A=-0.001,
+References: <20210504153456.927083-1-lukas.juenger@greensocs.com>
+ <20210504153456.927083-2-lukas.juenger@greensocs.com>
+In-Reply-To: <20210504153456.927083-2-lukas.juenger@greensocs.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 11 May 2021 21:06:06 +0800
+Message-ID: <CAEUhbmWCwyyj1jAnqeadoLCcJcrzP5agr_r7tzR5qBBm052VcQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] Consistent function names for sifive uart read and
+ write function
+To: =?UTF-8?Q?Lukas_J=C3=BCnger?= <lukas.juenger@greensocs.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, mark.burton@greensocs.com, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, luc.michel@greensocs.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b29;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb29.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -85,39 +76,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2021 12:27:05 -0000
+X-List-Received-Date: Tue, 11 May 2021 13:06:22 -0000
 
 Hi Lukas,
 
-On 5/4/21 5:34 PM, Lukas Jünger wrote:
-> Signed-off-by: Lukas Jünger <lukas.juenger@greensocs.com>
+On Wed, May 5, 2021 at 12:49 AM Lukas J=C3=BCnger
+<lukas.juenger@greensocs.com> wrote:
+>
+
+While we are here, could we make other functions sifive_ prefixed?
+
+Also the commit title should include a tag of "hw/char: sifive_uart"
+
+> Signed-off-by: Lukas J=C3=BCnger <lukas.juenger@greensocs.com>
 > ---
->  include/hw/char/sifive_uart.h |  6 +--
->  hw/char/sifive_uart.c         | 72 ++++++++++++++++++++++++++++++-----
->  2 files changed, 65 insertions(+), 13 deletions(-)
-
-> +static void sifive_uart_realize(DeviceState *dev, Error **errp)
-> +{
-> +    SiFiveUARTState *s = SIFIVE_UART(dev);
-> +
-> +    qemu_chr_fe_set_handlers(&s->chr, uart_can_rx, uart_rx, uart_event,
-> +                             uart_be_change, s, NULL, true);
-> +
-> +}
-> +
-> +static void sifive_uart_class_init(ObjectClass *oc, void *data)
-> +{
-> +    DeviceClass *dc = DEVICE_CLASS(oc);
-> +
-> +    dc->realize = sifive_uart_realize;
-> +    device_class_set_props(dc, sifive_uart_properties);
-> +}
-
-You forgot to add the migration fields (VMState) of the SiFiveUARTState
-structure. You might want to convert to the Fifo8 API (like the
-SiFiveSPIState does) previous to this patch.
+>  hw/char/sifive_uart.c | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
+>
 
 Regards,
-
-Phil.
+Bin
 
