@@ -1,63 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lghul-0008M0-WF
-	for mharc-qemu-riscv@gnu.org; Wed, 12 May 2021 02:00:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37440)
+	id 1lghy4-0001oZ-Md
+	for mharc-qemu-riscv@gnu.org; Wed, 12 May 2021 02:03:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38638)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lghuj-0008Ln-0p; Wed, 12 May 2021 02:00:10 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:45568)
+ id 1lghy2-0001nD-LE; Wed, 12 May 2021 02:03:34 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:41672)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lghug-0004Cr-07; Wed, 12 May 2021 02:00:08 -0400
-Received: by mail-pf1-x436.google.com with SMTP id i190so17691772pfc.12;
- Tue, 11 May 2021 23:00:05 -0700 (PDT)
+ id 1lghy1-0006Ww-0q; Wed, 12 May 2021 02:03:34 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id
+ v11-20020a17090a6b0bb029015cba7c6bdeso2458781pjj.0; 
+ Tue, 11 May 2021 23:03:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=DEdEmD0ozeiTapDiuurZ7PJsN/pCMoOD45EFBE05LUg=;
- b=HmMkLoSzt7T+FEwOSRfMhIaXtE2fdUuc3SNhI5BXw2ovAID/0Elq6UVS2N1U4e5qRF
- TBV6wffJM5995z6LeOp3VNDMRDyDUMm5ZlmxRLyllrKdlqlMinjHPk9tHV5Ew6d9CuU9
- gHj7GVfy/gs32rPUtnCFbyWarBUVamfW8vm8LeCMhkQCe0j6Qzal5gTj07yp+eKoylyd
- cWrA5WpHuWP9n6qN77xr2pYYPEnGdLd7Nd2O83ShP+ODXSEG1a57is3ct++EX8yH0ZBC
- Ur6cDMxG4RrjN/FDyF2La6RlkIdCORecFvJP/Fs66jLFReoywx0s3nonkG2hQhqH4wJR
- +TQw==
+ :cc; bh=8eBGvE7XKN/qOZsUylfHO2n3PvkzLwy4LznA/gd6TGM=;
+ b=mJvon3jcHS4EI1gTpMsm3ICUT+7FUl+9eI61ci+N0e8lYT3+ira08SVW/P1sb3AeAt
+ HRXlPeRFkxBKf3Rq3nfWxMmnY2xm+57MJL75jrCLG7xVZzFfSolkQH6afQ1WOPFa9RMS
+ dudcnbzI7CIfn7c3yL9k+rWHXycyb3hq7ycSklVJqAb0IRJqznppxbPYBuUrGCPdwklw
+ 7ch9x989bNqx4MjanS3814ftqpzw3Zjs3r7GNaiZjipGM6PsMVoQEFHTWeEdAhkT9wqU
+ 7IsXbYx+rNYT1F5Eduk0IHSbDZ1wRXU3Rfr3S8nCCgwzFJO1RZoUiqo/3qnerxFjEfv6
+ 2c0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=DEdEmD0ozeiTapDiuurZ7PJsN/pCMoOD45EFBE05LUg=;
- b=qGcebUuEpptql+pPd/wlO95PnlrInEedR/H4wqzVhCXf7xxE0hSYM6sS8G7a21MrNc
- LsyxG/epj35FMe4Dw85btFDZfnA0VKqtWXii2RbuuJ+z/iURfc0ry1SJn8bUXdPpW5UI
- fn9zDlYwheDDMh5QAkNaQ/hFKcEsjiik33n+x8evATCQfVOxBwRNBe3oBo44VvIxRknD
- XN4Y6sDqS0sI4zhzc/VajPauYNElH9pFO9+YmExN89oNJ3Z5Jsor6hse9YRM45/cKSP6
- oO77cZcrsJyKJQ27UcGPFd94OOjT2Vvfk44TRxW3FAJm5Jg8TDpHuYOywS2hFSxaE9fu
- whJg==
-X-Gm-Message-State: AOAM533tQ4yF8bm0s6/KMkLdALwYcWU33UHthz9d19yRFMPzzQ6etVN7
- iOgleCX/rZJ/JJ5cvIgdRgK3C4+dGIw8UVzFOk0=
-X-Google-Smtp-Source: ABdhPJx9exYvKrFSVtBAcNp3f/g7DW9uRFNKXlz5k6wrwYgp1wu/QwolJcpBAN4p/+njzXQpWzVrfw2lRK6wMougtX8=
-X-Received: by 2002:a62:f202:0:b029:28e:96e7:a084 with SMTP id
- m2-20020a62f2020000b029028e96e7a084mr34295266pfh.59.1620799204114; Tue, 11
- May 2021 23:00:04 -0700 (PDT)
+ bh=8eBGvE7XKN/qOZsUylfHO2n3PvkzLwy4LznA/gd6TGM=;
+ b=ICxaRtE0D9KLPiC+6EwAA1ePU27uDLz+fGGBHtV/OOqypISuiJJ6YXtflHmQHKt5Lj
+ QH7tSV/8RuduihbQC31LZpA+1EHTucratO6dExijwm+EAGLJ0i+9ZQn2LkpHWj8+uyT8
+ gZ3bHWF4tF5zW/iPYRgk6VRfcRgadnvqiduCEmzxneaHDlW1DfxmVoVdDwmiwXv/ho0t
+ 79l9HpKSz2SLssErdjdCoYxg+HPfVVaEqo2ugzLjSUY1yTKYpti/+9X6H0hovwGdPGQ0
+ CNdg8G+ubDIh0o2K8j/M4ygFI3jqbXtB5rIDXXDtTeQvZVLwlvkGNehF6QSujBqQEXK5
+ nqqw==
+X-Gm-Message-State: AOAM533sDNIkDYZ2mUn0CO8tPJjm16hDciaGnp0Sx55T6OkNtN3EERgS
+ CUdZ99G7sUiwi5H6GeMNTWnpCF7f1lFgZdbKv1g=
+X-Google-Smtp-Source: ABdhPJxGivwGCe9I/1+BlOl976g/TgGrxegTjFc5UbRR9MBkrAiElcT4OKsf51DT29dA41VF7WLokrCeaQIv4iEtKa4=
+X-Received: by 2002:a17:902:e9d1:b029:ed:1bde:8e4 with SMTP id
+ 17-20020a170902e9d1b02900ed1bde08e4mr34105938plk.6.1620799409936; Tue, 11 May
+ 2021 23:03:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210428041848.12982-1-space.monkey.delivers@gmail.com>
- <20210428041848.12982-6-space.monkey.delivers@gmail.com>
-In-Reply-To: <20210428041848.12982-6-space.monkey.delivers@gmail.com>
+References: <20210511100722.18065-1-ruinland@andestech.com>
+In-Reply-To: <20210511100722.18065-1-ruinland@andestech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 May 2021 15:59:37 +1000
-Message-ID: <CAKmqyKMUB4_x7pu=-ymwiBcO7bebTXxOE1-2fzdzdkj9caobfg@mail.gmail.com>
-Subject: Re: [PATCH v8 5/6] [RISCV_PM] Implement address masking functions
- required for RISC-V Pointer Masking extension
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Richard Henderson <richard.henderson@linaro.org>, 
+Date: Wed, 12 May 2021 16:03:04 +1000
+Message-ID: <CAKmqyKO35O+bichwKQVeZ2tPT+2G-hweds1VY6oJc_bqkuG8Zw@mail.gmail.com>
+Subject: Re: [PATCH V2 0/2] Proposing custom CSR handling logic
+To: Ruinland Chuan-Tzu Tsai <ruinland@andestech.com>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- space.monkey.delivers@gmail.com, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Dave Smith <kupokupokupopo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+ Bin Meng <bin.meng@windriver.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Dylan Jhong <dylan@andestech.com>, 
+ "Alan Quey-Liang Kao(((((((((()" <alankao@andestech.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x436.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -78,146 +75,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2021 06:00:10 -0000
+X-List-Received-Date: Wed, 12 May 2021 06:03:35 -0000
 
-On Wed, Apr 28, 2021 at 2:23 PM Alexey Baturo <baturo.alexey@gmail.com> wrote:
+On Tue, May 11, 2021 at 8:07 PM Ruinland Chuan-Tzu Tsai
+<ruinland@andestech.com> wrote:
 >
-> From: Anatoly Parshintsev <kupokupokupopo@gmail.com>
+> Hi all,
 >
-> Signed-off-by: Anatoly Parshintsev <kupokupokupopo@gmail.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  target/riscv/cpu.h       | 20 ++++++++++++++++++++
->  target/riscv/translate.c | 36 ++++++++++++++++++++++++++++++++++--
->  2 files changed, 54 insertions(+), 2 deletions(-)
+> My sincere apology that I missed the patch to include our own CSR table
+> into the patch series and there were plenty of typos.
+> Thus I'm sending out V2 of these tiny patches.
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 19aa3b4769..2edfc59712 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -407,6 +407,8 @@ FIELD(TB_FLAGS, SEW, 5, 3)
->  FIELD(TB_FLAGS, VILL, 8, 1)
->  /* Is a Hypervisor instruction load/store allowed? */
->  FIELD(TB_FLAGS, HLSX, 9, 1)
-> +/* If PointerMasking should be applied */
-> +FIELD(TB_FLAGS, PM_ENABLED, 10, 1)
+> I agree with Alistair's comment on not introducing intrusive code which
+> will interfere the generic code structure. Yet since there are
+> possibilities that some custom CSRs/instructions could be once drafted/
+> proposed by vendors at first, and made themselves into the standard
+> as the implementation become widely adopted.
 >
->  bool riscv_cpu_is_32bit(CPURISCVState *env);
+> So in this patch set, we humbly utilzed a glib hash table for inserting
+> the `struct riscv_custom_csr_operations`, check if the CSR is a non
+> standard one, and then proceed the desired behavior.
 >
-> @@ -464,6 +466,24 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->              flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
->          }
->      }
-> +    if (riscv_has_ext(env, RVJ)) {
-> +        int priv = cpu_mmu_index(env, false);
+> Once the non-standard CSRs make themselves into the specification,
+> people could easily plug-and-use the code into CSR operation table
+> inside `csr.c`.
+>
+> Ones may have concerns regarding the check code would introduce
+> further overhead. For those considerations, I guess it could be solved
+> by introducing a build option such as '--enable-riscv-vendor-features'
+> to toggle the code.
+>
+> Cordially yours,
+> Ruinland ChuanTzu Tsai
+>
+> Ruinland Chuan-Tzu Tsai (2):
+>   Adding premliminary support for custom CSR handling mechanism
+>   Adding custom Andes CSR table.
 
-You will want to and this with TB_FLAGS_PRIV_MMU_MASK
+Thanks for the patches.
 
-Otherwise:
+Can you please include:
+ wangjunqiang@iscas.ac.cn
+ qemu-devel@nongnu.org
+ bin.meng@windriver.com
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+on future patches so everyone is included.
 
 Alistair
 
-> +        bool pm_enabled = false;
-> +        switch (priv) {
-> +        case PRV_U:
-> +            pm_enabled = env->mmte & U_PM_ENABLE;
-> +            break;
-> +        case PRV_S:
-> +            pm_enabled = env->mmte & S_PM_ENABLE;
-> +            break;
-> +        case PRV_M:
-> +            pm_enabled = env->mmte & M_PM_ENABLE;
-> +            break;
-> +        default:
-> +            g_assert_not_reached();
-> +        }
-> +        flags = FIELD_DP32(flags, TB_FLAGS, PM_ENABLED, pm_enabled);
-> +    }
->  #endif
 >
->      *pflags = flags;
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 2e815a5912..37706d56d5 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -36,6 +36,9 @@ static TCGv cpu_gpr[32], cpu_pc, cpu_vl;
->  static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
->  static TCGv load_res;
->  static TCGv load_val;
-> +/* globals for PM CSRs */
-> +static TCGv pm_mask[4];
-> +static TCGv pm_base[4];
+>  target/riscv/cpu.c           |  28 ++++++++
+>  target/riscv/cpu.h           |  12 +++-
+>  target/riscv/cpu_bits.h      | 115 ++++++++++++++++++++++++++++++++
+>  target/riscv/csr.c           | 107 ++++++++++++++++++++++++++++--
+>  target/riscv/csr_andes.inc.c | 125 +++++++++++++++++++++++++++++++++++
+>  5 files changed, 381 insertions(+), 6 deletions(-)
+>  create mode 100644 target/riscv/csr_andes.inc.c
 >
->  #include "exec/gen-icount.h"
->
-> @@ -64,6 +67,10 @@ typedef struct DisasContext {
->      uint16_t vlen;
->      uint16_t mlen;
->      bool vl_eq_vlmax;
-> +    /* PointerMasking extension */
-> +    bool pm_enabled;
-> +    TCGv pm_mask;
-> +    TCGv pm_base;
->      CPUState *cs;
->  } DisasContext;
->
-> @@ -90,13 +97,19 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
->  }
->
->  /*
-> - * Temp stub: generates address adjustment for PointerMasking
-> + * Generates address adjustment for PointerMasking
->   */
->  static void gen_pm_adjust_address(DisasContext *s,
->                                    TCGv_i64      dst,
->                                    TCGv_i64      src)
->  {
-> -    tcg_gen_mov_i64(dst, src);
-> +    if (!s->pm_enabled) {
-> +        /* Load unmodified address */
-> +        tcg_gen_mov_i64(dst, src);
-> +    } else {
-> +        tcg_gen_andc_i64(dst, src, s->pm_mask);
-> +        tcg_gen_or_i64(dst, dst, s->pm_base);
-> +    }
->  }
->
->  /*
-> @@ -657,6 +670,10 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
->      ctx->mlen = 1 << (ctx->sew  + 3 - ctx->lmul);
->      ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
-> +    ctx->pm_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_ENABLED);
-> +    int priv = cpu_mmu_index(env, false) & TB_FLAGS_PRIV_MMU_MASK;
-> +    ctx->pm_mask = pm_mask[priv];
-> +    ctx->pm_base = pm_base[priv];
->      ctx->cs = cs;
->  }
->
-> @@ -777,4 +794,19 @@ void riscv_translate_init(void)
->                               "load_res");
->      load_val = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, load_val),
->                               "load_val");
-> +#ifndef CONFIG_USER_ONLY
-> +    /* Assign PM CSRs to tcg globals */
-> +    pm_mask[PRV_U] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmmask), "upmmask");
-> +    pm_base[PRV_U] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmbase), "upmbase");
-> +    pm_mask[PRV_S] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmmask), "spmmask");
-> +    pm_base[PRV_S] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmbase), "spmbase");
-> +    pm_mask[PRV_M] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmmask), "mpmmask");
-> +    pm_base[PRV_M] =
-> +      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmbase), "mpmbase");
-> +#endif
->  }
 > --
-> 2.20.1
->
+> 2.17.1
 >
 
