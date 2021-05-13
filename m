@@ -1,68 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lhENB-0002XJ-Jd
-	for mharc-qemu-riscv@gnu.org; Thu, 13 May 2021 12:39:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42714)
+	id 1lhEND-0002bj-12
+	for mharc-qemu-riscv@gnu.org; Thu, 13 May 2021 12:39:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42720)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhEN9-0002Um-Pb
- for qemu-riscv@nongnu.org; Thu, 13 May 2021 12:39:39 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:29605)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhENA-0002Vx-5B
+ for qemu-riscv@nongnu.org; Thu, 13 May 2021 12:39:40 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:23575)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhEN7-0000yf-Rz
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhEN2-0000wE-WE
  for qemu-riscv@nongnu.org; Thu, 13 May 2021 12:39:39 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1620923977;
+ s=mimecast20190719; t=1620923972;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=vt0rPlIVTA2zME2ANb52VRIm2f7ixfDlgEfuDufRLOU=;
- b=DifrLKt8WQtXfz///0p/NyK3IzmGMwd/9z0U6hELSw/08Oj76sUIe+lWKXeYFiDUPafayS
- BQ4wU9jnED+z62WnmDaV3aoyKbcLUgbymIscW0+PPkJWlKV+5j5BdpkswxfbKYTRIA6UFt
- yLwf5DUgATF+mg3EcTXW9TY7+ZxmROw=
-Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
- [209.85.208.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-265-U0jCiCRxOfug55m2ETCO6w-1; Thu, 13 May 2021 12:39:35 -0400
-X-MC-Unique: U0jCiCRxOfug55m2ETCO6w-1
-Received: by mail-ed1-f71.google.com with SMTP id
- h16-20020a0564020950b029038cbdae8cbaso3452668edz.6
- for <qemu-riscv@nongnu.org>; Thu, 13 May 2021 09:39:35 -0700 (PDT)
+ bh=XjYvOAyPTrpSNhVqdAN7BGoQLHD/mxypL8yaob15sP8=;
+ b=d/2nrCJ+P8jf4ZmHRa21qIKT0wzxiEG8neyC0ei4N/lLFgnQKKEFLXrbldW+EEsXX9zoIt
+ FpE+qhk+msB7HFuGSGJ+Vw52zMPZYo9P6FXMKn9Fl3eaEswinSytuDQtcQdBGjhZI9Vamt
+ pLqHUXHvkEOGOC7iL7wl0VXbtaYnKog=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-215-rZPhTBf_OumsI_nPAtxRgw-1; Thu, 13 May 2021 12:39:30 -0400
+X-MC-Unique: rZPhTBf_OumsI_nPAtxRgw-1
+Received: by mail-ed1-f69.google.com with SMTP id
+ g7-20020aa7c5870000b02903888f809d62so15017633edq.23
+ for <qemu-riscv@nongnu.org>; Thu, 13 May 2021 09:39:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=vt0rPlIVTA2zME2ANb52VRIm2f7ixfDlgEfuDufRLOU=;
- b=WJAMAmtgKGpCCsD/pd5RKpWwTOWT4bmeqoeInPSPYuciTHaZFip4aUv3u1R/GobyG2
- L/DxtV1zdPerkFGCVIFs9R/Dd+SoOWYFNLNp5xz5CBtvmMk0CotJsFoL2nyD4d8KhFp4
- epdEFww9azODHO1mVHnSrWHBI0XoWp55keSTtZyUiDqoJJF1egmvJCuHHm9jCoCO5/Y4
- /fjDMqMvEXeYCEj0kzAiYHwPC48xsIobXCdsGcsO0WiwMB85+ImGNS5cCAb3h+NbcBVu
- BOIdBHBVUVc8mpgzJ2n60C0jnn5ryPxq1cynTqfg2fWjvi9BHDrV/vu964jUocpcQGF5
- k5VQ==
-X-Gm-Message-State: AOAM533uMjMphEtsO/W9ocSJ786eX2Ysli5NWvz1E+MtGk/iqdTRp+LT
- U+FziXxV9L7vjNOEm9KMO9mXJvzcQiXnPF/746Uaj75MlxB6XfYQptbzQaFAp0pL+LBR+aMmO4W
- WVihL5NY5m7p6O7Y=
-X-Received: by 2002:a17:906:9246:: with SMTP id
- c6mr45279424ejx.10.1620923974107; 
- Thu, 13 May 2021 09:39:34 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxE1l7ofRjRJFGt9vB7ZIomsyEQvq5BC5uZr95cBlF78n+jfrvZh5DW7F56Oa6yX27iwzRPlQ==
-X-Received: by 2002:a17:906:9246:: with SMTP id
- c6mr45279413ejx.10.1620923973899; 
- Thu, 13 May 2021 09:39:33 -0700 (PDT)
+ bh=XjYvOAyPTrpSNhVqdAN7BGoQLHD/mxypL8yaob15sP8=;
+ b=mBinVCawtfA/9mw1WZJvZ0PE2bn7OeC7pOJmhkm7C9MPRKng/DS8UZ0prlveyUdb1B
+ 4V1GQQg979iC4rp+WSI3/LXebNKpBGQX1/okjrUK4DVDxmepWK8nMhn/5PNoWA9Q+hEV
+ ovx5b8aWx6VzoJ8jisHkSDICnDrMii2Fj/boqDwfVl/ubWeHJhPCO8xgaSW9wP8Hu4Ul
+ ROmkARk5GuThSVMzHHeSrsYoTxI7DfPSm9Z5ltdG5+H5toraFoNpBrI6t2JodJuSpw6a
+ tpt8ngHUK91S2WdSXyH0YaW4aD9/l7OnIPEJQBlSp3vMIOcohPGsIjHtQ47Vx+o+z1RP
+ f05g==
+X-Gm-Message-State: AOAM530hrfX1++u1eA8eArbUrtl2z9yNVt2EvXGWKCaxAPNYpYeUCXsw
+ 1pIb70lkqd1Pqj7J9V2Ci9jGpBt1N7/IfBV34IOImbl0nvd21VXVaXPllDZVlGLRo0uIB3dgyXw
+ RKgSDyqgjfP0mc9c=
+X-Received: by 2002:a50:eb47:: with SMTP id z7mr52056281edp.68.1620923969236; 
+ Thu, 13 May 2021 09:39:29 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzQQR8VCvYN64Fsq/tEUlN0mpcNMtt2b6hN9PG/yK7gHSmibN4yT03uqEfFRMs0WBiaNdkRSw==
+X-Received: by 2002:a50:eb47:: with SMTP id z7mr52056264edp.68.1620923969072; 
+ Thu, 13 May 2021 09:39:29 -0700 (PDT)
 Received: from x1w.redhat.com (31.red-83-51-215.dynamicip.rima-tde.net.
  [83.51.215.31])
- by smtp.gmail.com with ESMTPSA id r17sm2644904edt.33.2021.05.13.09.39.33
+ by smtp.gmail.com with ESMTPSA id w21sm2598159edq.82.2021.05.13.09.39.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 May 2021 09:39:33 -0700 (PDT)
+ Thu, 13 May 2021 09:39:28 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH 07/10] hw/riscv/Kconfig: Restrict NUMA to Virt & Spike machines
-Date: Thu, 13 May 2021 18:38:55 +0200
-Message-Id: <20210513163858.3928976-8-philmd@redhat.com>
+Subject: [PATCH 06/10] hw/riscv/Kconfig: Add missing dependency
+ MICROCHIP_PFSOC -> SERIAL
+Date: Thu, 13 May 2021 18:38:54 +0200
+Message-Id: <20210513163858.3928976-7-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.3
 In-Reply-To: <20210513163858.3928976-1-philmd@redhat.com>
 References: <20210513163858.3928976-1-philmd@redhat.com>
@@ -96,55 +95,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 13 May 2021 16:39:40 -0000
 
-Only the Virt and Spike machines use NUMA. Add a RISCV_NUMA Kconfig
-symbol and only have these machines select it. Adapt the Meson file
-to only built it if required.
+Commit a8fb0a500a6 ("hw/char: Add Microchip PolarFire SoC MMUART
+emulation") added a dependency on the SERIAL model, but forgot to
+add the Kconfig selector. Fix that to solve when built the
+MICROCHIP_PFSOC machine stand-alone:
 
+  /usr/bin/ld: libcommon.fa.p/hw_char_mchp_pfsoc_mmuart.c.o: in function `mchp_pfsoc_mmuart_create':
+  hw/char/mchp_pfsoc_mmuart.c:79: undefined reference to `serial_mm_init'
+
+Fixes: a8fb0a500a6 ("hw/char: Add Microchip PolarFire SoC MMUART emulation")
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- hw/riscv/Kconfig     | 5 +++++
- hw/riscv/meson.build | 2 +-
- 2 files changed, 6 insertions(+), 1 deletion(-)
+Cc: Bin Meng <bin.meng@windriver.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+---
+ hw/riscv/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index b72a248809e..b22736169c1 100644
+index 86957ec7b06..b72a248809e 100644
 --- a/hw/riscv/Kconfig
 +++ b/hw/riscv/Kconfig
-@@ -1,3 +1,6 @@
-+config RISCV_NUMA
-+    bool
-+
- config IBEX
-     bool
- 
-@@ -35,6 +38,7 @@ config RISCV_VIRT
-     imply PCI_DEVICES
-     imply VIRTIO_VGA
-     imply TEST_DEVICES
-+    select RISCV_NUMA
-     select GOLDFISH_RTC
-     select MSI_NONBROKEN
-     select PCI
-@@ -75,6 +79,7 @@ config SIFIVE_U
- 
- config SPIKE
-     bool
-+    select RISCV_NUMA
-     select HTIF
-     select MSI_NONBROKEN
+@@ -12,6 +12,7 @@ config MICROCHIP_PFSOC
      select SIFIVE_CLINT
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index a97454661c0..ab6cae57eae 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -1,6 +1,6 @@
- riscv_ss = ss.source_set()
- riscv_ss.add(files('boot.c'), fdt)
--riscv_ss.add(files('numa.c'))
-+riscv_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
- riscv_ss.add(files('riscv_hart.c'))
- riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
+     select SIFIVE_PDMA
+     select SIFIVE_PLIC
++    select SERIAL
+     select UNIMP
+ 
+ config OPENTITAN
 -- 
 2.26.3
 
