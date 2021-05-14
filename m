@@ -1,62 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lhNtM-0003Gb-MO
-	for mharc-qemu-riscv@gnu.org; Thu, 13 May 2021 22:49:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33410)
+	id 1lhOLR-0006NL-04
+	for mharc-qemu-riscv@gnu.org; Thu, 13 May 2021 23:18:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37350)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lhNtK-0003Fo-U3; Thu, 13 May 2021 22:49:30 -0400
-Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33]:38787)
+ id 1lhOLP-0006N4-0n; Thu, 13 May 2021 23:18:31 -0400
+Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36]:44639)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lhNtJ-0001Sw-BM; Thu, 13 May 2021 22:49:30 -0400
-Received: by mail-yb1-xb33.google.com with SMTP id c14so5603706ybr.5;
- Thu, 13 May 2021 19:49:28 -0700 (PDT)
+ id 1lhOLN-0007a1-FN; Thu, 13 May 2021 23:18:30 -0400
+Received: by mail-yb1-xb36.google.com with SMTP id h202so37178983ybg.11;
+ Thu, 13 May 2021 20:18:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=d1HYa7tJOEcAk73H+3N8qAqcwVI3VS3gJzAfwNCNSv8=;
- b=l5kcsExRnNV32pUkEpQUM+icL6aWobnZ481cQXk0EyBkIRVk432gsrKo2L1Y/iR9Ob
- szImNCetAHNTszjPggpVmLiATKPuss9fBS13/shavAp7e102W4OVCQROKikhUWEugDwB
- YFtt9+X91TDJFYiAPc5whS60TEx9AtIYnoNmHvr3BdLg3JPFPLACXSCeijSnzskdhW6F
- JaZdpUkX1BMLGK5V0DWTdB1wj6TmrjITe6OHddR4i7BCcXmV11sbPUOTXBnTsRMxcc6K
- sdL9VK0z9cFtcvcNeHHKC83lqrVcbOZyiXZHcgZV6m5hpgAN1cYEyvfz9M4mSM9d7A8t
- TofQ==
+ :cc; bh=pU5os8rDGZnlafLROSojoJt7m6u8Z+1HkGVuw1/XriQ=;
+ b=kde6Mlc9pU8aeTLLQdHZT7buteJXhsZD/L4E0QusSFSKDg9t/YHc4kvdFW6Sa8Cs2M
+ 9K6nSoeJvb1xr6Vtipk8WYNxVOaBSb9FZVb19B5tazivm77ZTe+hyBBmsQmR/relLQmq
+ S8pu8cd0Q5Fv39fLRLB5jK6a1UeW/VW2ZvgLc0VICyvVF5q44ksAfQ5jTHSmFnCmImdR
+ AILULPW+cylIDjXdAHWYv+NJT6GRVNx4RpxV7LHLfAjoK0wYAayglSfkeALwTV+QTIZz
+ Uzy3uBrZ3AiUyHR0olBIC7LZH/Hz5HMIFKHQrSOnft+eFyBR1qsoYvo/eFjD+xN6aewU
+ SBAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=d1HYa7tJOEcAk73H+3N8qAqcwVI3VS3gJzAfwNCNSv8=;
- b=HGw5P0HpwXNfa1HAkMLwTKR+UhmdeNAdxSnLdNKNHrl51cHh4P+W5fijxdMhuCYpgC
- XXrQ1wtRiuE4BBDJgMj6/lmmsoD453IQEh7PRimiDtEIM/FERBDj6xhOC+4AnGJMnD8N
- bp14fheTGTt6YiBrqbb8AlKZZCBhVtmUY17Y9TRfUdt3hOLGcMdzj9MwlsFsChzbG9UL
- vpfZyGGdnAq4Ez4NrTGDPKHpD6/ly365JB8qtqTeYooCWZKtMX4h5qydJNF3NaeGtJ49
- 9KJSRBjuYUTdhajlxJZngPIV+Xj7Vot0zfkVymJ5Nw3FLZq4st0VZlGS/IfHxollekL9
- Jo9A==
-X-Gm-Message-State: AOAM533fE9NyewftnzZL2wvb2S4JbTcEtUaCfT1X13Fc3e2sYQE37t3I
- KLkqstgaYnIsZO8v7r+LdCy777UGO0P6ue3GXSo=
-X-Google-Smtp-Source: ABdhPJzR5M3sZZqxKO1eZpjam/Ax7X9e7pPMbrlREmaPW2RrVoc1dV7EsWBr9yVJnz38u8vVLz/fAABUIIoCoJcNWwE=
-X-Received: by 2002:a25:d990:: with SMTP id
- q138mr65696784ybg.387.1620960568117; 
- Thu, 13 May 2021 19:49:28 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=pU5os8rDGZnlafLROSojoJt7m6u8Z+1HkGVuw1/XriQ=;
+ b=px5vsjIO1WejvAy4pCdGzdcxjFq7gjoWGHJjmM31kGvi0y/BVLv3alc/xuE2MdzpcT
+ PqzW4qXr7nnkTbokmCrDbIxq2BG9rv3KnRIJFdLY+xGF9Y0k9LFUXHVI4V2uFtTQr8mQ
+ MA4m4nvJLCN+4zGbluFRaR09u71J8dUOvxcyQP1s6bNvUFlAvTWLZ1eq2MIzNg591mKd
+ b+svFsWjJ+5VdcBNbJ1lZuGSOMFo+TZ1xbpJvwgpYMrXiXNJ4UwyO2MEl5c3wpMnjO2a
+ 5nMK0FK/eomQEqWLAmoL/yJBVryiSi+BhQPyiC373yA/RvF6+Fdvo+8YaZhf8Wgktx0Y
+ 29Wg==
+X-Gm-Message-State: AOAM533JXXifyz+r9n1jUiiakwrhU31kaWddky5NV5rZI7/MGQoP6p9t
+ EOyZ+qjqf0k05RUNqsN6ZGDRWaG9JGYH2NqJNrg=
+X-Google-Smtp-Source: ABdhPJziC/jBEezDvUN1qeVUfsY0wXdIF6LYuSOA5z06GKl5eAtzlPa5tu0ZAJhITIaNf0Yx21uLVvNk0deumFT6wEQ=
+X-Received: by 2002:a25:aae1:: with SMTP id t88mr59403004ybi.122.1620962308204; 
+ Thu, 13 May 2021 20:18:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210513163858.3928976-1-philmd@redhat.com>
- <20210513163858.3928976-8-philmd@redhat.com>
-In-Reply-To: <20210513163858.3928976-8-philmd@redhat.com>
+References: <20210428122528.295103-1-changbin.du@gmail.com>
+In-Reply-To: <20210428122528.295103-1-changbin.du@gmail.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 14 May 2021 10:49:15 +0800
-Message-ID: <CAEUhbmUeqPT5TO-hGMBVqhnc5i6CYY5BUvLcFPc+7ZRkJSy+EQ@mail.gmail.com>
-Subject: Re: [PATCH 07/10] hw/riscv/Kconfig: Restrict NUMA to Virt & Spike
- machines
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Date: Fri, 14 May 2021 11:18:15 +0800
+Message-ID: <CAEUhbmWY=-840tdFei2fKhOWDvzHsu2RHMkV7t+wY-V9gSGN+A@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Dump CSR mscratch/sscratch/satp
+To: Changbin Du <changbin.du@gmail.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb36.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -76,21 +72,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2021 02:49:31 -0000
+X-List-Received-Date: Fri, 14 May 2021 03:18:32 -0000
 
-On Fri, May 14, 2021 at 12:58 AM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
+On Wed, Apr 28, 2021 at 8:29 PM Changbin Du <changbin.du@gmail.com> wrote:
 >
-> Only the Virt and Spike machines use NUMA. Add a RISCV_NUMA Kconfig
-> symbol and only have these machines select it. Adapt the Meson file
-> to only built it if required.
+> This dumps the CSR mscratch/sscratch/satp and meanwhile aligns
+> the output of CSR mtval/stval.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+> Signed-off-by: Changbin Du <changbin.du@gmail.com>
 > ---
->  hw/riscv/Kconfig     | 5 +++++
->  hw/riscv/meson.build | 2 +-
->  2 files changed, 6 insertions(+), 1 deletion(-)
+>  target/riscv/cpu.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
 >
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 7d6ed80f6b67..73af6f5445ba 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -281,12 +281,15 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>      if (riscv_has_ext(env, RVH)) {
+>          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vscause ", env->vscause);
+>      }
+> -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval ", env->mtval);
+> -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "stval ", env->sbadaddr);
+> +    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval   ", env->mtval);
+> +    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "stval   ", env->sbadaddr);
+>      if (riscv_has_ext(env, RVH)) {
+>          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval ", env->htval);
+>          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2 ", env->mtval2);
+
+I believe you also need some alignment for these 2
+
+>      }
+> +    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mscratch", env->mscratch);
+> +    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "sscratch", env->sscratch);
+> +    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "satp    ", env->satp);
+>  #endif
+>
+>      for (i = 0; i < 32; i++) {
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
