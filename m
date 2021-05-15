@@ -1,57 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lhyEs-0001OZ-1o
-	for mharc-qemu-riscv@gnu.org; Sat, 15 May 2021 13:38:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48444)
+	id 1lhyEw-0001Wn-BS
+	for mharc-qemu-riscv@gnu.org; Sat, 15 May 2021 13:38:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48518)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEp-0001Fj-Jb
- for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:38:07 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:34990)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEu-0001Th-O6
+ for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:38:12 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:51819)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEn-0006RL-Hr
- for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:38:07 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEs-0006UZ-4b
+ for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:38:12 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1621100284;
+ s=mimecast20190719; t=1621100289;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=yMKbvRHD0VVgAl/shSsvEL3fFV0zSLsEZF6v1iEj1U8=;
- b=GecnskS1W4y3lxaZnmGbTFOL6jTM6nh82s3mCtmZdDsqUbd2gITQWaCVDGBGkTbPs9AJ8U
- 24ag4/DDxk5i7LByYgArbYJVRAAQrJFXWkhgG/r8atH6D8KvlNOaWwAXnhO7BxN45DQFgx
- qrtHygs8gP5i7QPvMaDnttY37YUFYHE=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-429-ofXyRc07NS2de6QKPDj6xQ-1; Sat, 15 May 2021 13:38:02 -0400
-X-MC-Unique: ofXyRc07NS2de6QKPDj6xQ-1
-Received: by mail-wm1-f70.google.com with SMTP id
- y193-20020a1c32ca0000b029014cbf30c3f2so1668231wmy.1
- for <qemu-riscv@nongnu.org>; Sat, 15 May 2021 10:38:02 -0700 (PDT)
+ bh=1x0uvyxiT8wyEBGvclqUmai2RCxtpbNXg1x32V8Mlyo=;
+ b=c8vy183nwAqY8Jc5TTcynXIben/a5AnJDPirOEQyjDgkrDk49eMctIM7atX7v97UvmM/cT
+ VCN25qJXHX9x8N71IrCclPZ5HUCbAyxpNMgmFPavtX6RLUslhdTndKv2EUnKYJgh1QcZen
+ L/qsOtY4A0z4wN77Ki1+RFjDeh/YpLE=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-320-0rfzqoPwOuGR2Uh725aiQg-1; Sat, 15 May 2021 13:38:08 -0400
+X-MC-Unique: 0rfzqoPwOuGR2Uh725aiQg-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ g17-20020a05600c0011b029014399f816a3so441028wmc.7
+ for <qemu-riscv@nongnu.org>; Sat, 15 May 2021 10:38:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=yMKbvRHD0VVgAl/shSsvEL3fFV0zSLsEZF6v1iEj1U8=;
- b=AUU/H7IFlRbDoCe+nETFdRmLgurv9yI9nJCGAzp3PiLGtIxuCbcSbkmZ+DRJe2ctss
- 1UQGXU7G2TeeRYa3uCO2AzymmSq9k+ipXu2eKrDJngaxETnxZ6ald7n3Y2buZLTqyG3G
- uBEQ8tmG57kwNRa3l5RXME3WyU/3ZVyg6Cklcot4dqwePKtVGcG2gg2xGw3mtyc9oo0W
- ChgVCKdcppX2a91jNzH523iOct0/vf3on0YslHKg0O57QV/37r/RaEx2MUvAEJtiJJiY
- ECNDM7wwi1icIIoKbBIdgqHgiRWYPkh6Ibsr8Jkp4WN8fx7ePAxbcrQXtT1Keyd0ncVp
- SzaA==
-X-Gm-Message-State: AOAM531RkpUlHSVKh3S9yaEbeA9Sqc6Fl1Hi0Lxw7Twt85NvhZ0qJP3y
- 9zf9pk58SNfpIwOPKBMH5X4u+ZKIcC6PyRDSGzTQZdagwspA8HPXi9hzHbsuw1CL5npLOkN5upp
- fvDTtBuHjhNmXS+E=
-X-Received: by 2002:a05:600c:4ca1:: with SMTP id
- g33mr19751673wmp.7.1621100281681; 
- Sat, 15 May 2021 10:38:01 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzzdkdaJKsqQvEMuw/in8yhkYSzmz4ZUGj7uT9+EgpNyG/uYj5c6KEaDv2tlbB8+jf6n0nPnw==
-X-Received: by 2002:a05:600c:4ca1:: with SMTP id
- g33mr19751656wmp.7.1621100281560; 
- Sat, 15 May 2021 10:38:01 -0700 (PDT)
+ bh=1x0uvyxiT8wyEBGvclqUmai2RCxtpbNXg1x32V8Mlyo=;
+ b=SC3DEtes0H4naU9p8WJwyOj1JKmwJFmphrqfxkuL5B9KelNPXv0guwTmH1aG7OsVq+
+ tJqGSCgoHAOO8YcS8YBidcFIRiokhHVUQnNdRAJG9/Dk/VTp52OsttnxwJ52GXoUszXP
+ DVfLg8MbAJ/r1oy5bvnPwgIUjtmQ0urzaH5FE+sLgw0MYegV4XHNLn/ENr4wu/rroipk
+ qxRHcIF9pvcMdT1YPAZy1vmi8yN5xhG2+TLEUrhFHL3UQDo5LZs1wGZos8gB4bBtcm5K
+ b976RQHY8s4svyiW8Xv12/ZGewCBojiy2ry/dDmUGVsb8Q/vSn01F/Jllv5R4H7cd5Iy
+ KtVg==
+X-Gm-Message-State: AOAM533lsxf0WVHVrN9nIczaE5cKOUHRjSwQiFhZq4gTN/YkaDQ/CbkO
+ jaqKrMIr9j1IBW2q5BQ+SqZThbrBJYRmkVqVlNyl6EJIP1v1RXWxz/PJq7g+YUcXycsk9WecHaD
+ fQJEdjZZ3z8PamLk=
+X-Received: by 2002:a1c:27c5:: with SMTP id n188mr8049122wmn.34.1621100286154; 
+ Sat, 15 May 2021 10:38:06 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwMTrQfpdVRUBxDdDTshuD8xC/K1JOLeK8ZGZcE4rK22H2ZM89m7JZ4Xv21inLYBWjycqc9PA==
+X-Received: by 2002:a1c:27c5:: with SMTP id n188mr8049108wmn.34.1621100286043; 
+ Sat, 15 May 2021 10:38:06 -0700 (PDT)
 Received: from localhost.localdomain (31.red-83-51-215.dynamicip.rima-tde.net.
  [83.51.215.31])
- by smtp.gmail.com with ESMTPSA id k6sm14457835wmi.42.2021.05.15.10.38.00
+ by smtp.gmail.com with ESMTPSA id j14sm10847304wmj.19.2021.05.15.10.38.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 May 2021 10:38:01 -0700 (PDT)
+ Sat, 15 May 2021 10:38:05 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -60,10 +58,10 @@ Cc: Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH v2 09/12] hw/pci-host/Kconfig: Add missing dependency MV64361
- -> I8259
-Date: Sat, 15 May 2021 19:37:13 +0200
-Message-Id: <20210515173716.358295-10-philmd@redhat.com>
+Subject: [PATCH v2 10/12] hw/isa/vt82c686: Add missing Kconfig dependencies
+ (build error)
+Date: Sat, 15 May 2021 19:37:14 +0200
+Message-Id: <20210515173716.358295-11-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.3
 In-Reply-To: <20210515173716.358295-1-philmd@redhat.com>
 References: <20210515173716.358295-1-philmd@redhat.com>
@@ -74,7 +72,7 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=philmd@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=philmd@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
@@ -82,7 +80,7 @@ X-Spam_bar: ---
 X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.701,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -95,41 +93,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 May 2021 17:38:08 -0000
+X-List-Received-Date: Sat, 15 May 2021 17:38:13 -0000
 
 From: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
-Looking at the MV64340 model source, there is a dependency on the
-8259 interrupt controller:
+The VT82C686 device model misses various dependencies:
 
-  523     case MV64340_PCI_1_INTERRUPT_ACKNOWLEDGE_VIRTUAL_REG:
-  524         /* FIXME: Should this be sent via the PCI bus somehow? */
-  525         if (s->gpp_int_level && (s->gpp_value & BIT(31))) {
-  526             ret = pic_read_irq(isa_pic);
-  527         }
-  528         break;
+  /usr/bin/ld: libcommon.fa.p/hw_isa_vt82c686.c.o: in function `vt82c686b_realize':
+  hw/isa/vt82c686.c:622: undefined reference to `i8259_init'
+  /usr/bin/ld: hw/isa/vt82c686.c:624: undefined reference to `i8257_dma_init'
+  /usr/bin/ld: hw/isa/vt82c686.c:627: undefined reference to `mc146818_rtc_init'
 
-Add it to Kconfig to avoid the following build failure:
+Add them.
 
-  /usr/bin/ld: libcommon.fa.p/hw_pci-host_mv64361.c.o: in function `mv64361_read':
-  hw/pci-host/mv64361.c:526: undefined reference to `isa_pic'
-  /usr/bin/ld: hw/pci-host/mv64361.c:526: undefined reference to `pic_read_irq'
-
-Fixes: dcdf98a9015 ("hw/pci-host: Add emulation of Marvell MV64361 PPC system controller")
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/pci-host/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ hw/isa/Kconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/hw/pci-host/Kconfig b/hw/pci-host/Kconfig
-index 79c20bf28bb..9dc0d761815 100644
---- a/hw/pci-host/Kconfig
-+++ b/hw/pci-host/Kconfig
-@@ -76,3 +76,4 @@ config SH_PCI
- config MV64361
-     bool
-     select PCI
+diff --git a/hw/isa/Kconfig b/hw/isa/Kconfig
+index 55e0003ce40..0703512209a 100644
+--- a/hw/isa/Kconfig
++++ b/hw/isa/Kconfig
+@@ -49,6 +49,9 @@ config VT82C686
+     select FDC
+     select USB_UHCI
+     select APM
++    select I8257
 +    select I8259
++    select MC146818RTC
+ 
+ config SMC37C669
+     bool
 -- 
 2.26.3
 
