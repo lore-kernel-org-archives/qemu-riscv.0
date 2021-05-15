@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lhyEj-0000qv-59
+	id 1lhyEj-0000ro-Bu
 	for mharc-qemu-riscv@gnu.org; Sat, 15 May 2021 13:38:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48176)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48216)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEa-0000lV-Nm
- for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:37:52 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:39462)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEd-0000o8-1v
+ for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:37:56 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:53706)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEW-0006Ho-JI
- for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:37:52 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEa-0006Ip-Aw
+ for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:37:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1621100267;
+ s=mimecast20190719; t=1621100270;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=S7IAZU3SpuyZA/TPUu84zMTCi1tlnlEn7V9DtnfwMAo=;
- b=E5YAm38QHzAgmKd27PBH7F+wicQRUEA5xQ4VgYljkCz7wQtZ7ZdI6PqA6Mf80sap0aixPc
- saGUn5GJTcHIIPDS2X79iJ1WQqOYwL8bVlPQiaCiwexdN/aRXiv+NdUzoYCxWAWmsg51ua
- EpyKzDsHoWFV8ChduiuBR/SqwRbaAUU=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-564--ZHpDCuTP9-Zgn6f-8TBiA-1; Sat, 15 May 2021 13:37:44 -0400
-X-MC-Unique: -ZHpDCuTP9-Zgn6f-8TBiA-1
-Received: by mail-wm1-f72.google.com with SMTP id
- n127-20020a1c27850000b02901717a27c785so1648596wmn.9
- for <qemu-riscv@nongnu.org>; Sat, 15 May 2021 10:37:43 -0700 (PDT)
+ bh=oapXbLTqf6jmlB2c8yI8R/Rxrd0PQpmzXNP57+j3KT8=;
+ b=ITcj2bCyUGfY4eYGjipXPuqGGNFn76QiRjHeJske33vNmdUAjkoz1I2Szq+nzc2CaD4Idf
+ oMl3FAs8Y8yVYEC9Qw31svf/bhW35KYnQ7++lpGN7KLMOecKe54DYxI+xUDvlZQkX72C/7
+ F++i+S3PPYpx2sxr0/glTYOkgY0s4cg=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-594-HWzTtwDCOLiBlyqrh0uS4A-1; Sat, 15 May 2021 13:37:48 -0400
+X-MC-Unique: HWzTtwDCOLiBlyqrh0uS4A-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ y193-20020a1c32ca0000b029014cbf30c3f2so1668019wmy.1
+ for <qemu-riscv@nongnu.org>; Sat, 15 May 2021 10:37:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=S7IAZU3SpuyZA/TPUu84zMTCi1tlnlEn7V9DtnfwMAo=;
- b=F0EdA5pBzffMHRs9yLJCkLNBmimZSdREBdMeI5+3y9b8XpD3HVRXBJqf4QoMJCP3op
- BudV/5LshsJe73N4hTaQPsBrVlSI1sELhH6F9f6zcOh6s+QCXb12aEuhdmZSAfepFkEJ
- VE1f2ykg+it9riyioZWvQIqmj1QTxyGuq80fvjN4R2BXEAyG/novOlyAYvKx2yG95yaE
- k9w02YeJ+BUvxOWECjs3Fr94KrZ57yQF3TEii1NRhYsSHR1lIqjsA2mmXfv6PZflaTvh
- 3ELfKLAKpYEkkAvlm/WEd2q5xU/90C8eknF/R7mBHjPrZgwTit4ERiOo7PDxlupbU0YK
- wVvA==
-X-Gm-Message-State: AOAM531Pen+Wg5v7pLBJOEZojUw/y3GiuhcqvqFloE+QRInjIwAvodfF
- VJQqGsIGic4chYSDcxGmRNU2oYAhL01YjiZUZ3iB4Uebv1laUdcVLCcudYuNCS4qK082Ey5RGLI
- aBgfBXP1FHMxfa/0=
-X-Received: by 2002:a7b:ce87:: with SMTP id q7mr17484721wmj.77.1621100262893; 
- Sat, 15 May 2021 10:37:42 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyGVOh7pkMkDvwyl4op4hAAMWNNYbI6Usln0UJOegBSdd5y4Gs1f92XifVNt+WjkNOmwRwmog==
-X-Received: by 2002:a7b:ce87:: with SMTP id q7mr17484711wmj.77.1621100262785; 
- Sat, 15 May 2021 10:37:42 -0700 (PDT)
+ bh=oapXbLTqf6jmlB2c8yI8R/Rxrd0PQpmzXNP57+j3KT8=;
+ b=gQuCcZlrbhyNkUTs87jU9xrd7qE2GRO6r/1YiyXJ74fALx/Qn7o+iC/4EvlKAnESyH
+ YHHguZQZ+/fJ8bL8eZqY5txvv85xAdS1qAIWxi1XwcNmcq68vqHL70Jk7KuSz9O6qxPd
+ H35oB6MbObmt4Tv9dog9yFc/AEPp4tpfKwKEdXLDi8C1YafU5Wgtb07t20ncSmT9xQpb
+ qf8NMrYJWpBPxTEZ/WmhatonaEFeg4tn438jTpIZMLCZB9XY+VsCtsyq85FmhHQUv79m
+ 6kaIK5WyTlecrDRJtAKVXwls2k02RlO4dTXbU30SZfcO774gu+KoF9sxY0bXVx+40MEI
+ 7/UQ==
+X-Gm-Message-State: AOAM530ZhhkKI4yrbyPQ3uYs/DjOQ6wXgUcSHVh7vlYLfJQHFnroaNgt
+ fC6tWjfGaY9XHl5kSKizIrUVQ9nKWJVE24xLedmQsxHqsaMFs9Njiejg8PpWhSBY1OurIHcBR4H
+ R+KI4Q+orOWW0qMs=
+X-Received: by 2002:a5d:6d88:: with SMTP id l8mr23733763wrs.185.1621100267675; 
+ Sat, 15 May 2021 10:37:47 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzF4bawh4kel9iuIamVbm1PNlABSKwFlGKejs+jqDOchip+fxGFi0iYCbS25sCIV5UINTj1Hg==
+X-Received: by 2002:a5d:6d88:: with SMTP id l8mr23733747wrs.185.1621100267514; 
+ Sat, 15 May 2021 10:37:47 -0700 (PDT)
 Received: from localhost.localdomain (31.red-83-51-215.dynamicip.rima-tde.net.
  [83.51.215.31])
- by smtp.gmail.com with ESMTPSA id 61sm11021853wrm.52.2021.05.15.10.37.41
+ by smtp.gmail.com with ESMTPSA id d9sm10234096wrp.47.2021.05.15.10.37.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 May 2021 10:37:42 -0700 (PDT)
+ Sat, 15 May 2021 10:37:47 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -58,11 +58,11 @@ Cc: Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Bin Meng <bmeng.cn@gmail.com>, Guenter Roeck <linux@roeck-us.net>,
- Peter Maydell <peter.maydell@linaro.org>
-Subject: [PATCH v2 05/12] hw/arm/Kconfig: Add missing SDHCI symbol to FSL_IMX25
-Date: Sat, 15 May 2021 19:37:09 +0200
-Message-Id: <20210515173716.358295-6-philmd@redhat.com>
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>
+Subject: [PATCH v2 06/12] hw/riscv/Kconfig: Add missing dependency
+ MICROCHIP_PFSOC -> SERIAL
+Date: Sat, 15 May 2021 19:37:10 +0200
+Message-Id: <20210515173716.358295-7-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.3
 In-Reply-To: <20210515173716.358295-1-philmd@redhat.com>
 References: <20210515173716.358295-1-philmd@redhat.com>
@@ -94,37 +94,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 May 2021 17:37:53 -0000
+X-List-Received-Date: Sat, 15 May 2021 17:37:57 -0000
 
-Commit bfae1772c43 ("hw/arm/fsl-imx25: Wire up eSDHC controllers")
-added a dependency on the TYPE_IMX_USDHC model, but forgot to add
-the Kconfig selector. Fix that to solve when built stand-alone:
+Commit a8fb0a500a6 ("hw/char: Add Microchip PolarFire SoC MMUART
+emulation") added a dependency on the SERIAL model, but forgot to
+add the Kconfig selector.
+Add the dependency to the MCHP_PFSOC_MMUART symbol to fix when
+building the MICROCHIP_PFSOC machine stand-alone:
 
-  $ qemu-system-arm -M imx25-pdk
-  qemu-system-arm: missing object type 'imx-usdhc'
-  Aborted (core dumped)
+  /usr/bin/ld: libcommon.fa.p/hw_char_mchp_pfsoc_mmuart.c.o: in function `mchp_pfsoc_mmuart_create':
+  hw/char/mchp_pfsoc_mmuart.c:79: undefined reference to `serial_mm_init'
 
-Fixes: bfae1772c43 ("hw/arm/fsl-imx25: Wire up eSDHC controllers")
+Fixes: a8fb0a500a6 ("hw/char: Add Microchip PolarFire SoC MMUART emulation")
 Acked-by: Paolo Bonzini <pbonzini@redhat.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
-Cc: Guenter Roeck <linux@roeck-us.net>
+Cc: Bin Meng <bin.meng@windriver.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/arm/Kconfig | 1 +
+ hw/char/Kconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/hw/arm/Kconfig b/hw/arm/Kconfig
-index 5827c092b28..6bb34926bb5 100644
---- a/hw/arm/Kconfig
-+++ b/hw/arm/Kconfig
-@@ -386,6 +386,7 @@ config FSL_IMX25
-     select IMX_FEC
-     select IMX_I2C
-     select WDT_IMX2
-+    select SDHCI
+diff --git a/hw/char/Kconfig b/hw/char/Kconfig
+index 4cf36ac637b..2e4f620b13e 100644
+--- a/hw/char/Kconfig
++++ b/hw/char/Kconfig
+@@ -61,6 +61,7 @@ config AVR_USART
  
- config FSL_IMX31
+ config MCHP_PFSOC_MMUART
+     bool
++    select SERIAL
+ 
+ config SIFIVE_UART
      bool
 -- 
 2.26.3
