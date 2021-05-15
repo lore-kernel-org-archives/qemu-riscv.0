@@ -1,57 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lhyEL-0000AR-LY
-	for mharc-qemu-riscv@gnu.org; Sat, 15 May 2021 13:37:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47994)
+	id 1lhyEO-0000KN-3Z
+	for mharc-qemu-riscv@gnu.org; Sat, 15 May 2021 13:37:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48040)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEJ-0008Tc-EH
- for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:37:35 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:32620)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEM-0000D1-7u
+ for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:37:38 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:53705)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEI-00067z-18
- for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:37:35 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lhyEK-0006Aa-Mu
+ for qemu-riscv@nongnu.org; Sat, 15 May 2021 13:37:37 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1621100253;
+ s=mimecast20190719; t=1621100256;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=k/10dvLOYecsAQmUGPkwxrFRTrjd5+JzocYSZHgeVfk=;
- b=Z2p/LIHFqWaInrFByTLNk/FrA0FWx9GIy5/9lrNzCpPN7r0IGokSOnaF8ujZrOv265k53n
- 7wSyh0zSFWVMgcaZO2IR1pn5x3VGXUrsfRBfQUVBzkE3sPe9/UXNF6hhwO8aYxAQFhJQSM
- 2bVBqqTjA4IlldMXq4VITqg6YIKCQrY=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-64-tq2FthsWP3KG4VCoD_2o4A-1; Sat, 15 May 2021 13:37:29 -0400
-X-MC-Unique: tq2FthsWP3KG4VCoD_2o4A-1
-Received: by mail-wm1-f72.google.com with SMTP id
- g17-20020a05600c0011b029014399f816a3so440361wmc.7
- for <qemu-riscv@nongnu.org>; Sat, 15 May 2021 10:37:29 -0700 (PDT)
+ bh=k59OgyztQggH2BswEalrOvHA2AZsGsT7XfWLcKTsjW4=;
+ b=D9NedgT3VSrkPQwTYTtIsGlErAZpthfrfifzJp3kpuJrr0ySU0PVYl8CtU7iG+e2bjRhmQ
+ PuhRWAIlLIWwGQEVgfVHas73SrpjqLQ0vc0ky4WdLNVQcnySd7EvsfYBVZQu0yqhgnxMeU
+ oDmGrl8XoaAMJVpR9Dgddw/RfcFK184=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-284-aPBWIugJPVaiwkFM-f7beA-1; Sat, 15 May 2021 13:37:34 -0400
+X-MC-Unique: aPBWIugJPVaiwkFM-f7beA-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ l185-20020a1c25c20000b029014b0624775eso1651526wml.6
+ for <qemu-riscv@nongnu.org>; Sat, 15 May 2021 10:37:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=k/10dvLOYecsAQmUGPkwxrFRTrjd5+JzocYSZHgeVfk=;
- b=r2gywq/t5XUE/jXubMU7fp+7UUFJA2PoWM6mixvNdlZvEV/YFxcBJsmMwSAYTuCa81
- vf8UhyfYVVDfJdk1ABd57wA8ljuXbQoIkWCRVHRIdqksw/VRhhObnsmOO+e8DokNSWNs
- pXs4y2DIj0Ck5Mi6w+f+LJlo33lrQ+nIqCfw4LBY47g7KBDkCbtT1g429DoxCp0Fr+bv
- cu769w59g3TGoEdvOs1bR5mspHhmM+oEvzSuJzAa8ZpGNz7XED+OOdZqxiSOTas/ghXe
- GsDVrY3l0eVmKQBNDez8hZcNuIsk2BHyXJS8Zjmrx4zFN8N8frLX/QKGJN/pbXtfvZxu
- eLzQ==
-X-Gm-Message-State: AOAM532/cbR+eiBiexLniXWxxeVICYOTO15y0FSrvQaweNd7s9G3qRcQ
- 9K7/CozeXG828Gz+KOeXCsB+NCmzgqsZdd9DftcuTqzrPobWqouCN9CeQfKjDK0ZIcmieyRKWe9
- aER1kKpoyd2HSSCM=
-X-Received: by 2002:a05:600c:4eca:: with SMTP id
- g10mr15474335wmq.180.1621100248599; 
- Sat, 15 May 2021 10:37:28 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwBI/OGWHQJw95jKNSYxvduONqDOFNeiW3sAzEu0dZbev1126HPcjQkDuw1xmVEaAqMlhE2ew==
-X-Received: by 2002:a05:600c:4eca:: with SMTP id
- g10mr15474322wmq.180.1621100248461; 
- Sat, 15 May 2021 10:37:28 -0700 (PDT)
+ bh=k59OgyztQggH2BswEalrOvHA2AZsGsT7XfWLcKTsjW4=;
+ b=RzXJ17lCrcnB/AclP2ljax6/LMuHzsmsJSSMlnFjnRieQoWjB1GHyhHODTRRFZl5Y1
+ UJU8VTspPRXT9oLNoiTm473hidmQiaSprO2FMyDvM3xmnIwat/uhpRO7l1CWN8u/TTcF
+ 3M7dM/Euc1bJLms5Bpdoi4BnEY5JIx7IwDxnU0cG78HvBZnLOTSXa4cT43F+OnSMBIV1
+ yTN9IPTSXxIMdJY/sQrD6j+PudqTgqh+wwvZ12DpipDZFRAiXpOi99mBnHq2GqFQTg8O
+ nAitszk7hp9Ye5JiqXDjigafal1smQxZX2CtsgKM2Qko3Ru9FvcVRscIY1flyCfSVLbt
+ NjtA==
+X-Gm-Message-State: AOAM5328bbHZ7ATqQqspTgj5TLI/UijFdH/xom/+f3We1LYEE5ucwKF8
+ z58hX6hXBMrTCGZ6LU3QD+/6IbH40wdIUZ+1z6sf73snqfojH2XPbCLsxdx5NbxAEyok5kWkWqH
+ ofvl3OHru7EGOOq8=
+X-Received: by 2002:a1c:a446:: with SMTP id n67mr3743200wme.19.1621100253362; 
+ Sat, 15 May 2021 10:37:33 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyY81/AM1k54bDXruKvRIomEErOv9vjg+vI2AQgtq4Ayz/+9KFltkQvriNz3cEMu45Ca/C/7Q==
+X-Received: by 2002:a1c:a446:: with SMTP id n67mr3743192wme.19.1621100253232; 
+ Sat, 15 May 2021 10:37:33 -0700 (PDT)
 Received: from localhost.localdomain (31.red-83-51-215.dynamicip.rima-tde.net.
  [83.51.215.31])
- by smtp.gmail.com with ESMTPSA id q3sm8260103wrr.43.2021.05.15.10.37.27
+ by smtp.gmail.com with ESMTPSA id b68sm2216685wmb.11.2021.05.15.10.37.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 May 2021 10:37:28 -0700 (PDT)
+ Sat, 15 May 2021 10:37:32 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -60,12 +58,12 @@ Cc: Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Bin Meng <bmeng.cn@gmail.com>, John Snow <jsnow@redhat.com>,
- qemu-block@nongnu.org (open list:IDE)
-Subject: [PATCH v2 02/12] hw/ide/Kconfig: Add missing dependency PCI ->
- IDE_QDEV
-Date: Sat, 15 May 2021 19:37:06 +0200
-Message-Id: <20210515173716.358295-3-philmd@redhat.com>
+ Hao Wu <wuhaotsh@google.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>
+Subject: [PATCH v2 03/12] hw/arm/Kconfig: Add missing dependency NPCM7XX ->
+ SMBUS
+Date: Sat, 15 May 2021 19:37:07 +0200
+Message-Id: <20210515173716.358295-4-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.3
 In-Reply-To: <20210515173716.358295-1-philmd@redhat.com>
 References: <20210515173716.358295-1-philmd@redhat.com>
@@ -84,7 +82,7 @@ X-Spam_bar: ---
 X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.701,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -97,42 +95,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 May 2021 17:37:35 -0000
+X-List-Received-Date: Sat, 15 May 2021 17:37:38 -0000
 
-The pci_ide_create_devs() function is declared i hw/ide/qdev.c:
+The TYPE_NPCM7XX_SMBUS device model exposes an SMBus, but
+this isn't advertised with proper Kconfig symbol, leading
+to an early build failure when building NPCM7XX machines
+standalone:
 
- $ git grep ide_create_drive
- hw/ide/pci.c:491:            ide_create_drive(d->bus + bus[i], unit[i], hd_table[i]);
- hw/ide/qdev.c:127:IDEDevice *ide_create_drive(IDEBus *bus, int unit, DriveInfo *drive)
- include/hw/ide/internal.h:653:IDEDevice *ide_create_drive(IDEBus *bus, int unit, DriveInfo *drive);
+  The following clauses were found for AT24C
 
-Fix the correct symbol dependency to avoid build failure when
-deselecting some machines:
+      config AT24C depends on I2C
+      select AT24C if NPCM7XX
 
-  /usr/bin/ld: libcommon.fa.p/hw_ide_pci.c.o: in function `pci_ide_create_devs':
-  hw/ide/pci.c:491: undefined reference to `ide_create_drive'
+Fix by adding SMBUS to NPCM7XX.
 
-Fixes: 8f01b41e109 ("ide: express dependencies with Kconfig")
+Fixes: 94e77879395 ("hw/i2c: Implement NPCM7XX SMBus Module Single Mode")
+Reviewed-by: Hao Wu <wuhaotsh@google.com>
 Acked-by: Paolo Bonzini <pbonzini@redhat.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- hw/ide/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/hw/ide/Kconfig b/hw/ide/Kconfig
-index 8e2c8934549..dd85fa3619f 100644
---- a/hw/ide/Kconfig
-+++ b/hw/ide/Kconfig
-@@ -8,7 +8,7 @@ config IDE_QDEV
- config IDE_PCI
+diff --git a/hw/arm/Kconfig b/hw/arm/Kconfig
+index 67723d9ea6a..85c6a1a088c 100644
+--- a/hw/arm/Kconfig
++++ b/hw/arm/Kconfig
+@@ -373,6 +373,7 @@ config NPCM7XX
      bool
-     depends on PCI
--    select IDE_CORE
-+    select IDE_QDEV
- 
- config IDE_ISA
-     bool
+     select A9MPCORE
+     select ARM_GIC
++    select SMBUS
+     select AT24C  # EEPROM
+     select PL310  # cache controller
+     select SERIAL
 -- 
 2.26.3
 
