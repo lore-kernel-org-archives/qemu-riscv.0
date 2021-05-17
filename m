@@ -1,50 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1liTiy-0002AT-Ep
-	for mharc-qemu-riscv@gnu.org; Sun, 16 May 2021 23:15:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56254)
+	id 1liVWh-0007SJ-JK
+	for mharc-qemu-riscv@gnu.org; Mon, 17 May 2021 01:10:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46778)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
- id 1liTim-00020P-3v; Sun, 16 May 2021 23:15:08 -0400
-Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:33181 helo=ozlabs.org)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
- id 1liTik-0007KR-9L; Sun, 16 May 2021 23:15:07 -0400
-Received: by ozlabs.org (Postfix, from userid 1007)
- id 4Fk44k4nlyz9sSs; Mon, 17 May 2021 13:15:02 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=gibson.dropbear.id.au; s=201602; t=1621221302;
- bh=6Be4UtpxnUpGwaqht9fr6Hc2Gxl5C07p+4BS4gG5YSs=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=WM8ByMndF/6iBOlgFmSTPtmLC1jTSae2IzlxpXiPWBDYXUttJN4e87E2kzTOS9y33
- cJtO0NEIMygrYCv7I/ZWDXzEoVQEcSWuK4f0Dr2DAM0KCjmo3zPl96DJO02rPbocvX
- cWCqRN0TExppcCocAwEwEErKAmGuYo//OT6jowBo=
-Date: Mon, 17 May 2021 13:13:49 +1000
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>
-Cc: qemu-devel@nongnu.org, Bin Meng <bin.meng@windriver.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- BALATON Zoltan <balaton@eik.bme.hu>,
- Alistair Francis <alistair.francis@wdc.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1liVWf-0007Rr-TG; Mon, 17 May 2021 01:10:45 -0400
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436]:46730)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1liVWe-0008LG-BY; Mon, 17 May 2021 01:10:45 -0400
+Received: by mail-wr1-x436.google.com with SMTP id y14so2840877wrm.13;
+ Sun, 16 May 2021 22:10:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=zw0LnE4UqMYfNm6bzlDqq5EFktTcl0kBPD/yLs7uAnk=;
+ b=VrsOsB4KiAlU8LCyGx8TouyNLqM1gsgwi9RjKtk2ZLXmbSytJSYsHlLvxOLNRpFWN0
+ hnCJh3MzMGAaEzZIjJmHefmZuiMVX8/l93/lIbxJj59Mt2BUDaVaNUuG8rcsi6I5TO9u
+ 92OJl6Yym5shuAy1CKfghhZmebTzZvzCFbdIKOcCcLwBNIvDpmJhA58X0E1ke4zQd3Ok
+ FzIc3YyrlQGvSfTI6Fz9g8Jerb4IFN7KZEbsCbakFDz5SjYL3+zmmwGby17Ilv8HAYrH
+ 4SOEZK9klT1wD6QDgLhjzAJ7CPJrmaKoJgXbGxaEy4VGNTd5vsWj7xVsFva/kccJ3+ds
+ Bxlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=zw0LnE4UqMYfNm6bzlDqq5EFktTcl0kBPD/yLs7uAnk=;
+ b=nGeVVzX2JCpzY2FqDbERi8u2Bn4bJWwwcCZNz1/A8DIu7BHAuo+V6zyQAjsYzAmXOZ
+ QiyFqlaqFlrqC83uW/LP3zWG3CJ4xublSf3CMwc6F7aH6pXm3Kd3teP2kqhvI4SpZ+hb
+ 8nJscUT+YXPkBEsr2Ss/+LGUANhuN/7a0Dhz49QfoVdSAlpFWpZnCLjXLS4LaHR3F3Mb
+ k2LpPBugYiZ0qfzc9eUZqhz/vxLIGvbPKg1eRuJgOB4c4imVwSKBA0BHq6hbF3ZX4U6j
+ BuYLur/zQryewYqY38zTj1QxV2qS/cIkayGAasYQ2zbD63C/aqs/P/8avs/K8XU9QouG
+ DfXg==
+X-Gm-Message-State: AOAM533pkwaJBc90eJqFZ3cvSOImOQdEMVAeaH3Pzzliv+29yGxcdP9G
+ t2p9SOmOJFSCmGeIhjFUSeM=
+X-Google-Smtp-Source: ABdhPJxdE8N1oFB5Tuz+c5A9PXqiN/V7T2syxnNj5swVzWw0DPJjjtWsTxDDp+3HoemkAMvjjyTAUA==
+X-Received: by 2002:adf:eb82:: with SMTP id t2mr68380478wrn.337.1621228241633; 
+ Sun, 16 May 2021 22:10:41 -0700 (PDT)
+Received: from [192.168.1.36] (31.red-83-51-215.dynamicip.rima-tde.net.
+ [83.51.215.31])
+ by smtp.gmail.com with ESMTPSA id m6sm4852204wml.3.2021.05.16.22.10.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 16 May 2021 22:10:40 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
 Subject: Re: [PATCH v2 09/12] hw/pci-host/Kconfig: Add missing dependency
  MV64361 -> I8259
-Message-ID: <YKHfbd2kFygnWVFw@yekko>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng
+ <bin.meng@windriver.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
+ <f4bug@amsat.org>, qemu-arm <qemu-arm@nongnu.org>,
+ qemu-ppc <qemu-ppc@nongnu.org>, Paolo Bonzini <pbonzini@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>
 References: <20210515173716.358295-1-philmd@redhat.com>
  <20210515173716.358295-10-philmd@redhat.com>
+ <CAEUhbmV3XiE1P-+K7Aa10n8udZrh+WRG4tCipRXbYUyd_1PVAA@mail.gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <4e5358f8-f0b3-6edb-f110-f34b414afe9c@amsat.org>
+Date: Mon, 17 May 2021 07:10:39 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="NmXgcd/mPMezN3dT"
-Content-Disposition: inline
-In-Reply-To: <20210515173716.358295-10-philmd@redhat.com>
-Received-SPF: pass client-ip=2401:3900:2:1::2; envelope-from=dgibson@ozlabs.org;
- helo=ozlabs.org
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+In-Reply-To: <CAEUhbmV3XiE1P-+K7Aa10n8udZrh+WRG4tCipRXbYUyd_1PVAA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x436.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -57,80 +90,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2021 03:15:10 -0000
+X-List-Received-Date: Mon, 17 May 2021 05:10:46 -0000
 
+On 5/17/21 4:49 AM, Bin Meng wrote:
+> On Sun, May 16, 2021 at 1:52 AM Philippe Mathieu-Daudé
+> <philmd@redhat.com> wrote:
+>>
+>> From: Philippe Mathieu-Daudé <f4bug@amsat.org>
+>>
+>> Looking at the MV64340 model source, there is a dependency on the
+>> 8259 interrupt controller:
+>>
+>>   523     case MV64340_PCI_1_INTERRUPT_ACKNOWLEDGE_VIRTUAL_REG:
+>>   524         /* FIXME: Should this be sent via the PCI bus somehow? */
+>>   525         if (s->gpp_int_level && (s->gpp_value & BIT(31))) {
+>>   526             ret = pic_read_irq(isa_pic);
+>>   527         }
+>>   528         break;
+>>
+>> Add it to Kconfig to avoid the following build failure:
+>>
+>>   /usr/bin/ld: libcommon.fa.p/hw_pci-host_mv64361.c.o: in function `mv64361_read':
+>>   hw/pci-host/mv64361.c:526: undefined reference to `isa_pic'
+>>   /usr/bin/ld: hw/pci-host/mv64361.c:526: undefined reference to `pic_read_irq'
+>>
+>> Fixes: dcdf98a9015 ("hw/pci-host: Add emulation of Marvell MV64361 PPC system controller")
+>> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+>> ---
+>>  hw/pci-host/Kconfig | 1 +
+>>  1 file changed, 1 insertion(+)
+>>
+> 
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
---NmXgcd/mPMezN3dT
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thank you :)
 
-On Sat, May 15, 2021 at 07:37:13PM +0200, Philippe Mathieu-Daud=E9 wrote:
-> From: Philippe Mathieu-Daud=E9 <f4bug@amsat.org>
->=20
-> Looking at the MV64340 model source, there is a dependency on the
-> 8259 interrupt controller:
->=20
->   523     case MV64340_PCI_1_INTERRUPT_ACKNOWLEDGE_VIRTUAL_REG:
->   524         /* FIXME: Should this be sent via the PCI bus somehow? */
->   525         if (s->gpp_int_level && (s->gpp_value & BIT(31))) {
->   526             ret =3D pic_read_irq(isa_pic);
->   527         }
->   528         break;
->=20
-> Add it to Kconfig to avoid the following build failure:
->=20
->   /usr/bin/ld: libcommon.fa.p/hw_pci-host_mv64361.c.o: in function `mv643=
-61_read':
->   hw/pci-host/mv64361.c:526: undefined reference to `isa_pic'
->   /usr/bin/ld: hw/pci-host/mv64361.c:526: undefined reference to `pic_rea=
-d_irq'
->=20
-> Fixes: dcdf98a9015 ("hw/pci-host: Add emulation of Marvell MV64361 PPC sy=
-stem controller")
-> Signed-off-by: Philippe Mathieu-Daud=E9 <f4bug@amsat.org>
+> There are some more codes that contain isa_pic. Maybe worth an additional check.
+> 
+> ./hw/i386/x86.c:573:    intno = pic_read_irq(isa_pic);
+> ./hw/intc/i8259.c:58:DeviceState *isa_pic;
+> ./hw/intc/i8259.c:429:    isa_pic = dev;
+> ./hw/intc/apic.c:387:    } else if (!apic_accept_pic_intr(dev) ||
+> !pic_get_output(isa_pic)) {
+> ./hw/intc/apic.c:562:    if (!apic_accept_pic_intr(dev) ||
+> !pic_get_output(isa_pic)) {
+> ./hw/intc/apic.c:615:        return isa_pic != NULL;
+> ./hw/intc/ioapic.c:78:        info->vector = pic_read_irq(isa_pic);
+> ./hw/hppa/pci.c:67:    return pic_read_irq(isa_pic);
+> ./hw/mips/gt64xxx_pci.c:777:        val = pic_read_irq(isa_pic);
+> ./hw/alpha/pci.c:70:    return pic_read_irq(isa_pic);
+> ./hw/pci-host/mv64361.c:526:            ret = pic_read_irq(isa_pic);
+> ./hw/pci-host/prep.c:121:    return pic_read_irq(isa_pic);
+> ./include/hw/intc/i8259.h:6:extern DeviceState *isa_pic;
 
-Acked-by: David Gibson <david@gibson.dropbear.id.au>
-
-> ---
->  hw/pci-host/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/hw/pci-host/Kconfig b/hw/pci-host/Kconfig
-> index 79c20bf28bb..9dc0d761815 100644
-> --- a/hw/pci-host/Kconfig
-> +++ b/hw/pci-host/Kconfig
-> @@ -76,3 +76,4 @@ config SH_PCI
->  config MV64361
->      bool
->      select PCI
-> +    select I8259
-
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
-
---NmXgcd/mPMezN3dT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAmCh320ACgkQbDjKyiDZ
-s5J7KQ/+NUiTYotpEXdbSdfv80Ss/pH28xIwlj59IowANukK341LDV2UdxxhvkGO
-RG0ZoR8pqS8CqYIwpjYhuuql/RhdFoA/UAoWqm4bW3qW314npte3mNsnhY6wSa5f
-AzcnynAkKrv3bO0CFn/b/g09oxl6PACj32lyfIeT4wt4YZ6Lu3Y0aQEvNF+8F1A5
-lM+5cR92d/nEjPRvS82+XFRZsLiIzfRMXZsw8eUs5+2qPgEl756Wizm/RKvfEXiI
-zys/6AhgZUe3rB/YnwtfDlXf9QivYQ/SgHfteY2XIPBs7PakEPfPkqJx9Est56+g
-ljIofx2sNSE48ijR5Kv+Mok9XNv7hTCma5OwCKZ/W8XoyB1OoBVXjXMSLEXozWDb
-GEHEraas24Sh0SnpkAF0qTH8jUAAkK99rYJvSAnW1T8m8+TFFPYYl96XKWZfzFLk
-H9XzvSXtVcdeJ2xUVHivTPTFHpn1UbnvlV154ROzRBfIkh3tJc9OBx/FO9uY27kh
-TqxojsNtbK9axxeamQ2mQeYcQ6x3T4NTi1eDWWsFtnKYWWx1d8YerCVhFUHKBwaA
-CaNF1UUck8DUZN0PX0ZjIQpVw7vYUM4G5FR2jUxQe2mTDdwEn00WnXEQ1s0/thUR
-ZI9XzsNEQCehSHv/JDT7aRq8zo1JgkJnYHFeBOW1P5KU+MevjIs=
-=X729
------END PGP SIGNATURE-----
-
---NmXgcd/mPMezN3dT--
+I'll have a look, by my secret plan is to remove the global isa_pic :)
 
