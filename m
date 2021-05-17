@@ -1,54 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1liilm-00042j-Ee
-	for mharc-qemu-riscv@gnu.org; Mon, 17 May 2021 15:19:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51264)
+	id 1lijTs-0002Ja-E7
+	for mharc-qemu-riscv@gnu.org; Mon, 17 May 2021 16:04:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35374)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1liilj-0003xT-Mo
- for qemu-riscv@nongnu.org; Mon, 17 May 2021 15:19:11 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:44650)
+ id 1lijTl-0002IY-3V
+ for qemu-riscv@nongnu.org; Mon, 17 May 2021 16:04:42 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:29787)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1liilb-0007wO-Rl
- for qemu-riscv@nongnu.org; Mon, 17 May 2021 15:19:09 -0400
+ id 1lijTY-0003sH-Ke
+ for qemu-riscv@nongnu.org; Mon, 17 May 2021 16:04:39 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1621279142;
+ s=mimecast20190719; t=1621281867;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=f4efrKdTwB2T0Qp6G5mDacoEPOXYGRWINEGWtQx+gt8=;
- b=Y623WmbUW8Me6eFBufEkHuR2gv8iof0kTwccpgdI2XZms4CAZ1gWJtNImJGCajVjFS7ZqZ
- oLXLR5XObhAaPL/mHDWrxEctp1eX3H5dOfl5S3W1IjzypfBhAv+B45hmzAnipg+Db0nUce
- KgTJ+7W2waf3KjLDbTXIAHsV/M06288=
+ bh=uKNftq8yHI0LEWJPm+mfCD8jQGyHIPkpccA4/JpjjXo=;
+ b=bXQDqPaXZ9dW/6CIukdeMe4tP3G4OnpkLWZFAh7fWkULgSEyHO+DGmqtAEMRurpTs8gubC
+ fR2rMob6w6zVl9iG17/e69h2/ntQI/voeQKixQ8nKEiK3ZUEBxoqmpUvp8bpks9C3VYTdc
+ 9UWHAX+BvHQaPyxHed33USJ7UVX72KU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-237-dpxDRnv8P-S8M1CmPTdQFw-1; Mon, 17 May 2021 15:19:00 -0400
-X-MC-Unique: dpxDRnv8P-S8M1CmPTdQFw-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ us-mta-366-NQOUkcUbOnyZrA10_TatTw-1; Mon, 17 May 2021 16:04:23 -0400
+X-MC-Unique: NQOUkcUbOnyZrA10_TatTw-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0CAFE107ACF6;
- Mon, 17 May 2021 19:18:59 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0C8D6801107;
+ Mon, 17 May 2021 20:04:22 +0000 (UTC)
 Received: from localhost (ovpn-114-21.rdu2.redhat.com [10.10.114.21])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 1E5E829692;
- Mon, 17 May 2021 19:18:57 +0000 (UTC)
-Date: Mon, 17 May 2021 15:18:56 -0400
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B84DC5C3E5;
+ Mon, 17 May 2021 20:04:16 +0000 (UTC)
+Date: Mon, 17 May 2021 16:04:16 -0400
 From: Eduardo Habkost <ehabkost@redhat.com>
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
+Cc: qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
+ qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
+ "Daniel P. Berrange" <berrange@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  David Gibson <david@gibson.dropbear.id.au>,
- "Daniel P. Berrange" <berrange@redhat.com>
+ =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
 Subject: Re: [PATCH v2 00/12] hw: Various Kconfig fixes
-Message-ID: <20210517191856.enjxmb7v2ai6ecdh@habkost.net>
+Message-ID: <20210517200416.pt4xghxiuzuwknvn@habkost.net>
 References: <20210515173716.358295-1-philmd@redhat.com>
+ <20210517191856.enjxmb7v2ai6ecdh@habkost.net>
 MIME-Version: 1.0
-In-Reply-To: <20210515173716.358295-1-philmd@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+In-Reply-To: <20210517191856.enjxmb7v2ai6ecdh@habkost.net>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -56,7 +58,7 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=ehabkost@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=ehabkost@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
@@ -77,51 +79,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2021 19:19:12 -0000
+X-List-Received-Date: Mon, 17 May 2021 20:04:44 -0000
 
-CCing Build system architecture maintainer (Daniel).
+On Mon, May 17, 2021 at 03:18:56PM -0400, Eduardo Habkost wrote:
+> CCing Build system architecture maintainer (Daniel).
 
-On Sat, May 15, 2021 at 07:37:04PM +0200, Philippe Mathieu-Daudé wrote:
-> Various Kconfig fixes when building stand-alone machine binaries.
+Oops, I was misled by the subsection title.  Daniel is
+responsible only for the build system documentation.
 
-Who should merge this once it's ready?
+Do we have any volunteers willing to be listed as reviewers for
+build system changes in MAINTAINERS?  meson.build has a
+non-trivial amount of code and no maintainers or reviewers at
+all.
 
 > 
-> Since v1:
-> - Fixed Pegasos2 machine
-> - Removed SEMIHOSTING related patches (will repost them later)
+> On Sat, May 15, 2021 at 07:37:04PM +0200, Philippe Mathieu-Daudé wrote:
+> > Various Kconfig fixes when building stand-alone machine binaries.
 > 
-> Philippe Mathieu-Daudé (12):
->   hw/mem/nvdimm: Use Kconfig 'imply' instead of 'depends on'
->   hw/ide/Kconfig: Add missing dependency PCI -> IDE_QDEV
->   hw/arm/Kconfig: Add missing dependency NPCM7XX -> SMBUS
->   hw/arm/Kconfig: Remove unused DS1338 symbol from i.MX25 PDK Board
->   hw/arm/Kconfig: Add missing SDHCI symbol to FSL_IMX25
->   hw/riscv/Kconfig: Add missing dependency MICROCHIP_PFSOC -> SERIAL
->   hw/riscv/Kconfig: Restrict NUMA to Virt & Spike machines
->   hw/ppc/Kconfig: Add missing dependency E500 -> DS1338 RTC
->   hw/pci-host/Kconfig: Add missing dependency MV64361 -> I8259
->   hw/isa/vt82c686: Add missing Kconfig dependencies (build error)
->   hw/isa/vt82c686: Add missing Kconfig dependency (runtime error)
->   hw/ppc/Kconfig: Add dependency PEGASOS2 -> ATI_VGA
+> Who should merge this once it's ready?
 > 
->  default-configs/devices/ppc-softmmu.mak   | 1 -
->  default-configs/devices/ppc64-softmmu.mak | 1 -
->  hw/arm/Kconfig                            | 4 +++-
->  hw/char/Kconfig                           | 1 +
->  hw/i386/Kconfig                           | 1 +
->  hw/ide/Kconfig                            | 2 +-
->  hw/isa/Kconfig                            | 4 ++++
->  hw/mem/Kconfig                            | 2 --
->  hw/pci-host/Kconfig                       | 1 +
->  hw/ppc/Kconfig                            | 3 +++
->  hw/riscv/Kconfig                          | 5 +++++
->  hw/riscv/meson.build                      | 2 +-
->  12 files changed, 20 insertions(+), 7 deletions(-)
+> > 
+> > Since v1:
+> > - Fixed Pegasos2 machine
+> > - Removed SEMIHOSTING related patches (will repost them later)
+> > 
+> > Philippe Mathieu-Daudé (12):
+> >   hw/mem/nvdimm: Use Kconfig 'imply' instead of 'depends on'
+> >   hw/ide/Kconfig: Add missing dependency PCI -> IDE_QDEV
+> >   hw/arm/Kconfig: Add missing dependency NPCM7XX -> SMBUS
+> >   hw/arm/Kconfig: Remove unused DS1338 symbol from i.MX25 PDK Board
+> >   hw/arm/Kconfig: Add missing SDHCI symbol to FSL_IMX25
+> >   hw/riscv/Kconfig: Add missing dependency MICROCHIP_PFSOC -> SERIAL
+> >   hw/riscv/Kconfig: Restrict NUMA to Virt & Spike machines
+> >   hw/ppc/Kconfig: Add missing dependency E500 -> DS1338 RTC
+> >   hw/pci-host/Kconfig: Add missing dependency MV64361 -> I8259
+> >   hw/isa/vt82c686: Add missing Kconfig dependencies (build error)
+> >   hw/isa/vt82c686: Add missing Kconfig dependency (runtime error)
+> >   hw/ppc/Kconfig: Add dependency PEGASOS2 -> ATI_VGA
+> > 
+> >  default-configs/devices/ppc-softmmu.mak   | 1 -
+> >  default-configs/devices/ppc64-softmmu.mak | 1 -
+> >  hw/arm/Kconfig                            | 4 +++-
+> >  hw/char/Kconfig                           | 1 +
+> >  hw/i386/Kconfig                           | 1 +
+> >  hw/ide/Kconfig                            | 2 +-
+> >  hw/isa/Kconfig                            | 4 ++++
+> >  hw/mem/Kconfig                            | 2 --
+> >  hw/pci-host/Kconfig                       | 1 +
+> >  hw/ppc/Kconfig                            | 3 +++
+> >  hw/riscv/Kconfig                          | 5 +++++
+> >  hw/riscv/meson.build                      | 2 +-
+> >  12 files changed, 20 insertions(+), 7 deletions(-)
+> > 
+> > -- 
+> > 2.26.3
+> > 
+> > 
+> > 
 > 
 > -- 
-> 2.26.3
-> 
+> Eduardo
 > 
 > 
 
