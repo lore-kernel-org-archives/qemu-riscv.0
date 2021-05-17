@@ -1,77 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lihCt-0003UR-FH
-	for mharc-qemu-riscv@gnu.org; Mon, 17 May 2021 13:39:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53038)
+	id 1liilm-00042j-Ee
+	for mharc-qemu-riscv@gnu.org; Mon, 17 May 2021 15:19:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51264)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lihCj-0003SQ-W0
- for qemu-riscv@nongnu.org; Mon, 17 May 2021 13:38:59 -0400
-Received: from mail-ot1-x335.google.com ([2607:f8b0:4864:20::335]:46660)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1lihCe-00073Y-32
- for qemu-riscv@nongnu.org; Mon, 17 May 2021 13:38:57 -0400
-Received: by mail-ot1-x335.google.com with SMTP id
- d3-20020a9d29030000b029027e8019067fso6220696otb.13
- for <qemu-riscv@nongnu.org>; Mon, 17 May 2021 10:38:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=ldhso26GEs3DEBzaPURX8lnxkqjDJonKIn1L7JZZPg0=;
- b=kxWMK5E9RuqSJ6DTcy3uI5iOLKYlywpuG3PRrS+vAom0oTj3esHyTBAvSOgo5XoSp4
- n8m2bXe1WeMKz+I1nAEGQYeUsRXklC6OPDpLD+LfhOIjYWUze3jrszUj7+tdjtZa2JdX
- rKnD2aoemBEkDk0dLvM7TjrHc/4/p19yGXEvwpYsO5/Dzs1qJ93uZ9pbPhVDYh/Nzwqh
- zouIUHr4JdOp9YXGpTEy5U5RfWakXYJcdvma9nSYRjUuY6UcOviFD+o0wlTDKhinggHh
- oOzR1g4peyH6xhOJj+d2302FWr0lshtqD0W8saODrtNIvd0q45ZFoCSsYhnREwzS/W7u
- qYeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=ldhso26GEs3DEBzaPURX8lnxkqjDJonKIn1L7JZZPg0=;
- b=KfAcC99dvUT6qCXLLV9rOxFtvTJ7fUrf3auWpuv1+PrayTE1h0W1Mg/tZm8bcBY4wC
- Gh66PEA4JUVh++oKURHoGtkhsfOfLW9xn6FbD791cLpSYue2oW9AcvLamwv4GUavOm6l
- 9p53A6D7f7DD7JH2I5frY+fkvqmrkqkme1Ys1u7GAI8fFTGsm4z1cuT2sSUuybt2r8qU
- 3SDG0DdpNIPKc4E8weGLvECeDR/AprGkU4oykfeN52xT6IWYvhM3jtiavaNoa5rXPPOT
- f/qo6KiRm8h/8CVwpX/cqcnRF62qxfUq4OAXRhElQrQNGgg5w5KY2PP6XaBWZ66UZGi0
- w6og==
-X-Gm-Message-State: AOAM532RuzmJqB69vAmxgAxERMAisx/4d/TzEDZVO6rTJvs++g0uaq1z
- wD+rAw9JOZLvsZ14oGHa5orzPg==
-X-Google-Smtp-Source: ABdhPJzcOEFxyI94wB2oqMolsLZpnNa1TYn7NLpi16ja1wRhZx36V13S5l9ph/Q3mjez4hQa+diVng==
-X-Received: by 2002:a9d:c24:: with SMTP id 33mr550970otr.289.1621273129223;
- Mon, 17 May 2021 10:38:49 -0700 (PDT)
-Received: from [172.16.22.144] ([45.235.253.15])
- by smtp.gmail.com with ESMTPSA id v22sm2873258oic.37.2021.05.17.10.38.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 May 2021 10:38:49 -0700 (PDT)
-Subject: Re: [PATCH] target/riscv: Remove obsolete 'CPU unmigratable' comment
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
- "Dr . David Alan Gilbert" <dgilbert@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-trivial@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20210517070851.857841-1-f4bug@amsat.org>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <797d7a56-1e29-8d5b-0f3b-4cfdbcb1869d@linaro.org>
-Date: Mon, 17 May 2021 12:38:45 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1liilj-0003xT-Mo
+ for qemu-riscv@nongnu.org; Mon, 17 May 2021 15:19:11 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:44650)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1liilb-0007wO-Rl
+ for qemu-riscv@nongnu.org; Mon, 17 May 2021 15:19:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1621279142;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=f4efrKdTwB2T0Qp6G5mDacoEPOXYGRWINEGWtQx+gt8=;
+ b=Y623WmbUW8Me6eFBufEkHuR2gv8iof0kTwccpgdI2XZms4CAZ1gWJtNImJGCajVjFS7ZqZ
+ oLXLR5XObhAaPL/mHDWrxEctp1eX3H5dOfl5S3W1IjzypfBhAv+B45hmzAnipg+Db0nUce
+ KgTJ+7W2waf3KjLDbTXIAHsV/M06288=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-237-dpxDRnv8P-S8M1CmPTdQFw-1; Mon, 17 May 2021 15:19:00 -0400
+X-MC-Unique: dpxDRnv8P-S8M1CmPTdQFw-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0CAFE107ACF6;
+ Mon, 17 May 2021 19:18:59 +0000 (UTC)
+Received: from localhost (ovpn-114-21.rdu2.redhat.com [10.10.114.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1E5E829692;
+ Mon, 17 May 2021 19:18:57 +0000 (UTC)
+Date: Mon, 17 May 2021 15:18:56 -0400
+From: Eduardo Habkost <ehabkost@redhat.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ "Daniel P. Berrange" <berrange@redhat.com>
+Subject: Re: [PATCH v2 00/12] hw: Various Kconfig fixes
+Message-ID: <20210517191856.enjxmb7v2ai6ecdh@habkost.net>
+References: <20210515173716.358295-1-philmd@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20210517070851.857841-1-f4bug@amsat.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+In-Reply-To: <20210515173716.358295-1-philmd@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::335;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x335.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=ehabkost@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.374,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,20 +77,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2021 17:38:59 -0000
+X-List-Received-Date: Mon, 17 May 2021 19:19:12 -0000
 
-On 5/17/21 2:08 AM, Philippe Mathieu-Daudé wrote:
-> The RISCV CPU is migratable since commit f7697f0e629
-> ("target/riscv: Add basic vmstate description of CPU"),
-> so remove an obsolete comment which is now incorrect.
+CCing Build system architecture maintainer (Daniel).
+
+On Sat, May 15, 2021 at 07:37:04PM +0200, Philippe Mathieu-Daudé wrote:
+> Various Kconfig fixes when building stand-alone machine binaries.
+
+Who should merge this once it's ready?
+
 > 
-> Reported-by: Richard Henderson<richard.henderson@linaro.org>
-> Signed-off-by: Philippe Mathieu-Daudé<f4bug@amsat.org>
-> ---
->   target/riscv/cpu.c | 1 -
->   1 file changed, 1 deletion(-)
+> Since v1:
+> - Fixed Pegasos2 machine
+> - Removed SEMIHOSTING related patches (will repost them later)
+> 
+> Philippe Mathieu-Daudé (12):
+>   hw/mem/nvdimm: Use Kconfig 'imply' instead of 'depends on'
+>   hw/ide/Kconfig: Add missing dependency PCI -> IDE_QDEV
+>   hw/arm/Kconfig: Add missing dependency NPCM7XX -> SMBUS
+>   hw/arm/Kconfig: Remove unused DS1338 symbol from i.MX25 PDK Board
+>   hw/arm/Kconfig: Add missing SDHCI symbol to FSL_IMX25
+>   hw/riscv/Kconfig: Add missing dependency MICROCHIP_PFSOC -> SERIAL
+>   hw/riscv/Kconfig: Restrict NUMA to Virt & Spike machines
+>   hw/ppc/Kconfig: Add missing dependency E500 -> DS1338 RTC
+>   hw/pci-host/Kconfig: Add missing dependency MV64361 -> I8259
+>   hw/isa/vt82c686: Add missing Kconfig dependencies (build error)
+>   hw/isa/vt82c686: Add missing Kconfig dependency (runtime error)
+>   hw/ppc/Kconfig: Add dependency PEGASOS2 -> ATI_VGA
+> 
+>  default-configs/devices/ppc-softmmu.mak   | 1 -
+>  default-configs/devices/ppc64-softmmu.mak | 1 -
+>  hw/arm/Kconfig                            | 4 +++-
+>  hw/char/Kconfig                           | 1 +
+>  hw/i386/Kconfig                           | 1 +
+>  hw/ide/Kconfig                            | 2 +-
+>  hw/isa/Kconfig                            | 4 ++++
+>  hw/mem/Kconfig                            | 2 --
+>  hw/pci-host/Kconfig                       | 1 +
+>  hw/ppc/Kconfig                            | 3 +++
+>  hw/riscv/Kconfig                          | 5 +++++
+>  hw/riscv/meson.build                      | 2 +-
+>  12 files changed, 20 insertions(+), 7 deletions(-)
+> 
+> -- 
+> 2.26.3
+> 
+> 
+> 
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+-- 
+Eduardo
 
-r~
 
