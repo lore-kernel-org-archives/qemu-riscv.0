@@ -1,63 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1liTN0-0001Pv-Gf
-	for mharc-qemu-riscv@gnu.org; Sun, 16 May 2021 22:52:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52386)
+	id 1liTPD-0004OU-8R
+	for mharc-qemu-riscv@gnu.org; Sun, 16 May 2021 22:54:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52858)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1liTMw-0001OW-B6; Sun, 16 May 2021 22:52:36 -0400
-Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36]:36467)
+ id 1liTP7-0004NK-LM; Sun, 16 May 2021 22:54:51 -0400
+Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:36477)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1liTMt-0001gk-IN; Sun, 16 May 2021 22:52:34 -0400
-Received: by mail-yb1-xb36.google.com with SMTP id m9so6595009ybm.3;
- Sun, 16 May 2021 19:52:30 -0700 (PDT)
+ id 1liTP2-00033E-RU; Sun, 16 May 2021 22:54:49 -0400
+Received: by mail-yb1-xb32.google.com with SMTP id m9so6598961ybm.3;
+ Sun, 16 May 2021 19:54:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=yuG0lKhKVaXDK5gD/3lNWmSgzpwAlgg/q+RSd8dj0jM=;
- b=YJOYeMgBWfiBei1gzM5FU5sbauALpWBxmo00sNxOZI4UXyGeUi7tcSW2XqJR45kQ8E
- KevgCiy7b2/C7ZCFE64yjAOz9FuePX1nzuX/S9esi3qjU5AJAMKPqjFVc8QIJoNl7yYL
- zDEmCIaY3BqxB6WFAFhicFlm5ctzcJVilH7yw+CKDJwM+PZGPswA28utzBKoD3cgv6S0
- uyyiDy0O3f858TDy1AsMpW5KE8lgJidpM9smJLujTb7XAf/hvMbo0SHk61GXabSZjhBy
- TtC/KLmXiPloHbSFHWKD+2lqcUWlh2uLPWCHuVMBXfVvHVr+pn757VDhv0MdHjoKVOBT
- BtWg==
+ bh=GMhgl/R2eCDhQNjEi2rHWPn0aE/8xd3gRFWeW62YlM0=;
+ b=lRQV5ceC6fwDTZ+iuerEaWhNz5r3EhsWtNX8Xtv0RquNpdxS7md/DTleF3sPhDyqLO
+ srLElIosnAEBKYrgVV5qA3fB7THdB6xLh0452xXAWDzTtsj/Q/bcEF/Me5dEK0wyfsRz
+ zMBaeYcCdUWKbWUMmLkvOLmvjXE6ohBSVe8yaGNzzaaccrFj5TG4VUCsDF4FY3iScjCv
+ F0a3WRTjJiHrC6iBauMTxlOFjF4EZdvctynI6G2m7CAPKFc90ym4uxDipUe1Ku9AXfZO
+ t7vcS/M2UNcjg44eP439kwrcivBW3/2veWVTMYBRqB7nSKmlABt+Wv8O5+mXxlXYOYZ0
+ b71g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=yuG0lKhKVaXDK5gD/3lNWmSgzpwAlgg/q+RSd8dj0jM=;
- b=B6pG1I4cVvRm9oNBzPcJnPa/aPTz/X6ihFbRGOTRkqh+uOCZFDXuvAh72qInuFQGAQ
- Qg/9ZSJNBI8V5NaKsHL6it4G+bVgTJtyeSasiCfDBzP+NibXtKHG58C6pBFr7pVFrYRy
- 6x1prv5DAcD1B/OZSU2fGTxBgmh4q/jlYMDoDw16sgq0YADCb/g1zoBbzUadlEmjr19D
- oOLszIOr4Zm1ddBNducHkO5315HQGaVwbYRw6vmK54Y9L8LZPzmzGXQKMtkEMWCZXUAm
- YJJoA/qkEnX/Ega66hBS++HfuhkWPjks8nAQ9O6E/+Z4S0kB0f/DKTSZGwpvBektbeLf
- zfTw==
-X-Gm-Message-State: AOAM53262SX34+0FpamDn6wkIt+3YkLSyU06Xm7rmteMjyDN86Yc72Sr
- gyUaIoHKALEUEzSfRYHJC9KgfgzjfnS4a77TJuw=
-X-Google-Smtp-Source: ABdhPJy6g4nrzP/CSNl3mzFrWdd0N6TZVSxlnc2ficb7LVIyqYkyJtES+wHXJH8nAG9NkbNsAh8NQa2zTe6XRr1RS8Q=
-X-Received: by 2002:a05:6902:1543:: with SMTP id
- r3mr46664668ybu.332.1621219949662; 
- Sun, 16 May 2021 19:52:29 -0700 (PDT)
+ bh=GMhgl/R2eCDhQNjEi2rHWPn0aE/8xd3gRFWeW62YlM0=;
+ b=DCY/rky14/JYFTWKxzRft75alMJt71Z/I5dWareeG/miZf6JQmyF4ITaXU1iOnKrXN
+ Mjm907iwE+ATrnDqlX428JVJI4r6uLx0WK/NLXHSZtSw2+gRTePjq9EDaV8H4EmCDOAu
+ nykK1qEWVQEu3HxtFQVj5axCZeRCzX3ciY0RBAbopx/NaWVzXr1ZXzUOPHVbW+IPABgT
+ FHvZ9OmA9w1k+eFOPXYl3AG58foqSOMHVuIaz9zGIjRXGrf/7+oQ/Mei89UE7sf2PTNQ
+ ipLkZvrBEYznJWlOIIIXAzJnI4nvJpBtwiCcRF4DTt5yz/+hzLZeNAPZgoPRQB6KwVBj
+ xwdA==
+X-Gm-Message-State: AOAM530EzAFOAl7pOPA5fvdei+F6zzRlx0v7JkufBHVGQH3cs+hbMRPY
+ T9/lOe0EabsJFTppaYIvPh1KUnl/mzMiG5mnC6k=
+X-Google-Smtp-Source: ABdhPJyR4eGQ2C9TVsB/NIC1S1nlI3UvqsDSWhJBRCyOQaeeWu/yEsdmcCcu5qDMueS5P/IfYqV93FV+4xtm1F88MiI=
+X-Received: by 2002:a25:afcb:: with SMTP id d11mr13803572ybj.306.1621220082364; 
+ Sun, 16 May 2021 19:54:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210515173716.358295-1-philmd@redhat.com>
- <20210515173716.358295-12-philmd@redhat.com>
-In-Reply-To: <20210515173716.358295-12-philmd@redhat.com>
+ <20210515173716.358295-13-philmd@redhat.com>
+ <e164f246-80a6-d65b-3dc-8b9cb16d0e8@eik.bme.hu>
+In-Reply-To: <e164f246-80a6-d65b-3dc-8b9cb16d0e8@eik.bme.hu>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 17 May 2021 10:52:18 +0800
-Message-ID: <CAEUhbmUTkX_zAO5VdMjxrFj+PF1Vp9y2ffW6mkrrNLWEKFvHAA@mail.gmail.com>
-Subject: Re: [PATCH v2 11/12] hw/isa/vt82c686: Add missing Kconfig dependency
- (runtime error)
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bin.meng@windriver.com>, 
+Date: Mon, 17 May 2021 10:54:31 +0800
+Message-ID: <CAEUhbmWpV=TycM8ndRZA3WMMeokcTdeW8tJ6FiCo4WKKPAk2BQ@mail.gmail.com>
+Subject: Re: [PATCH v2 12/12] hw/ppc/Kconfig: Add dependency PEGASOS2 ->
+ ATI_VGA
+To: BALATON Zoltan <balaton@eik.bme.hu>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- qemu-arm <qemu-arm@nongnu.org>, qemu-ppc <qemu-ppc@nongnu.org>, 
+ Greg Kurz <groug@kaod.org>, qemu-arm <qemu-arm@nongnu.org>,
+ qemu-ppc <qemu-ppc@nongnu.org>, 
  Paolo Bonzini <pbonzini@redhat.com>, David Gibson <david@gibson.dropbear.id.au>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,80 +80,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2021 02:52:36 -0000
+X-List-Received-Date: Mon, 17 May 2021 02:54:51 -0000
 
-On Sun, May 16, 2021 at 1:46 AM Philippe Mathieu-Daud=C3=A9
-<philmd@redhat.com> wrote:
+On Sun, May 16, 2021 at 3:41 AM BALATON Zoltan <balaton@eik.bme.hu> wrote:
 >
-> From: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> On Sat, 15 May 2021, Philippe Mathieu-Daud=C3=A9 wrote:
+> > From: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> >
+> > While the ATI VGA device isn't a requisite (no crash without it):
+> >
+> >  $ qemu-system-ppc -M pegasos2
+> >  qemu-system-ppc: standard VGA not available
+> >
+> > it is useful to have it with the Pegasos2 machine:
+> >
+> >  $ qemu-system-ppc -M pegasos2 -vga none -bios pegasos2.rom -device ati=
+-vga,romfile=3D
+> >  qemu-system-ppc: -device ati-vga,romfile=3D: 'ati-vga' is not a valid =
+device model name
+> >
+> > Add it as an implicit Kconfig dependency.
+> >
+> > Fixes: ba7e5ac18e7 ("hw/ppc: Add emulation of Genesi/bPlan Pegasos II")
 >
-> When building the Pegasos2 machine stand-alone we get:
+> You can list it as a fix but I regard this more an enhancement or
+> amandment to that commit as it was not broken in this regard as the commi=
+t
+> message above also explains. To me Fixes tag means more that something wa=
+s
+
+Agree. This patch is more like a feature, instead of a fix. So the
+"Fixes" tag isn't appropriate.
+
+> broken in that commit that this one patches up but I don't care much abou=
+t
+> this tag. It would probably make more sense in your other commits fixing
+> missing dependencies (although not clear which commit those fix as the
+> missing dependencies were probably also missing before the latest clean
+> ups).
 >
->   $ qemu-system-ppc -M pegasos2 -bios pegasos2.rom
->   ERROR:qom/object.c:714:object_new_with_type: assertion failed: (type !=
-=3D NULL)
->   Bail out! ERROR:qom/object.c:714:object_new_with_type: assertion failed=
-: (type !=3D NULL)
+> > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 >
-> Looking at the backtrace:
->
->   Thread 1 "qemu-system-ppc" received signal SIGABRT, Aborted.
->   (gdb) bt
->   #0  0x00007ffff53877d5 in raise () at /lib64/libc.so.6
->   #1  0x00007ffff5370895 in abort () at /lib64/libc.so.6
->   #2  0x00007ffff6dc4b6c in g_assertion_message_expr.cold () at /lib64/li=
-bglib-2.0.so.0
->   #3  0x00007ffff6e229ff in g_assertion_message_expr () at /lib64/libglib=
--2.0.so.0
->   #4  0x0000555555a0c8f4 in object_new_with_type (type=3D0x0) at qom/obje=
-ct.c:714
->   #5  0x0000555555a0c9d5 in object_new (typename=3D0x555555c7afe4 "isa-pi=
-t") at qom/object.c:747
->   #6  0x0000555555a053b8 in qdev_new (name=3D0x555555c7afe4 "isa-pit") at=
- hw/core/qdev.c:153
->   #7  0x00005555557cdd05 in isa_new (name=3D0x555555c7afe4 "isa-pit") at =
-hw/isa/isa-bus.c:160
->   #8  0x00005555557cf518 in i8254_pit_init (bus=3D0x55555603d140, base=3D=
-64, isa_irq=3D0, alt_irq=3D0x0) at include/hw/timer/i8254.h:54
->   #9  0x00005555557d12f9 in vt8231_realize (d=3D0x5555563d9770, errp=3D0x=
-7fffffffcc28) at hw/isa/vt82c686.c:704
->   #10 0x00005555557e1340 in pci_qdev_realize (qdev=3D0x5555563d9770, errp=
-=3D0x7fffffffcca0) at hw/pci/pci.c:2116
->   #11 0x0000555555a06a84 in device_set_realized (obj=3D0x5555563d9770, va=
-lue=3Dtrue, errp=3D0x7fffffffcda8) at hw/core/qdev.c:761
->   #12 0x0000555555a0ff9e in property_set_bool (obj=3D0x5555563d9770, v=3D=
-0x5555563da090, name=3D0x555555cd7881 "realized", opaque=3D0x5555560acf80, =
-errp=3D0x7fffffffcda8) at qom/object.c:2257
->   #13 0x0000555555a0e098 in object_property_set (obj=3D0x5555563d9770, na=
-me=3D0x555555cd7881 "realized", v=3D0x5555563da090, errp=3D0x555555fc3fa0 <=
-error_fatal>) at qom/object.c:1402
->   #14 0x0000555555a12271 in object_property_set_qobject (obj=3D0x5555563d=
-9770, name=3D0x555555cd7881 "realized", value=3D0x5555563cf0a0, errp=3D0x55=
-5555fc3fa0 <error_fatal>) at qom/qom-qobject.c:28
->   #15 0x0000555555a0e3fb in object_property_set_bool (obj=3D0x5555563d977=
-0, name=3D0x555555cd7881 "realized", value=3Dtrue, errp=3D0x555555fc3fa0 <e=
-rror_fatal>) at qom/object.c:1472
->   #16 0x0000555555a05b15 in qdev_realize (dev=3D0x5555563d9770, bus=3D0x5=
-555563d32b0, errp=3D0x555555fc3fa0 <error_fatal>) at hw/core/qdev.c:389
->   #17 0x0000555555a05b42 in qdev_realize_and_unref (dev=3D0x5555563d9770,=
- bus=3D0x5555563d32b0, errp=3D0x555555fc3fa0 <error_fatal>) at hw/core/qdev=
-.c:396
->   #18 0x00005555557e160f in pci_realize_and_unref (dev=3D0x5555563d9770, =
-bus=3D0x5555563d32b0, errp=3D0x555555fc3fa0 <error_fatal>) at hw/pci/pci.c:=
-2181
->   #19 0x00005555557e165b in pci_create_simple_multifunction (bus=3D0x5555=
-563d32b0, devfn=3D96, multifunction=3Dtrue, name=3D0x555555c9b63b "vt8231-i=
-sa") at hw/pci/pci.c:2189
->   #20 0x0000555555867730 in pegasos2_init (machine=3D0x5555560427a0) at h=
-w/ppc/pegasos2.c:105
->
-> The "isa-pit" type (TYPE_I8254) is missing. Add it.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
-> ---
->  hw/isa/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->
+> Acked-by: BALATON Zoltan <balaton@eik.bme.hu>
+
+FWIW:
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+
+Regards,
+Bin
 
