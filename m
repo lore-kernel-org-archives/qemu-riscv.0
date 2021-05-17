@@ -1,72 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lijTs-0002Ja-E7
-	for mharc-qemu-riscv@gnu.org; Mon, 17 May 2021 16:04:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35374)
+	id 1lilt3-0004He-MN
+	for mharc-qemu-riscv@gnu.org; Mon, 17 May 2021 18:38:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35720)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1lijTl-0002IY-3V
- for qemu-riscv@nongnu.org; Mon, 17 May 2021 16:04:42 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:29787)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
- id 1lijTY-0003sH-Ke
- for qemu-riscv@nongnu.org; Mon, 17 May 2021 16:04:39 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1621281867;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uKNftq8yHI0LEWJPm+mfCD8jQGyHIPkpccA4/JpjjXo=;
- b=bXQDqPaXZ9dW/6CIukdeMe4tP3G4OnpkLWZFAh7fWkULgSEyHO+DGmqtAEMRurpTs8gubC
- fR2rMob6w6zVl9iG17/e69h2/ntQI/voeQKixQ8nKEiK3ZUEBxoqmpUvp8bpks9C3VYTdc
- 9UWHAX+BvHQaPyxHed33USJ7UVX72KU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-366-NQOUkcUbOnyZrA10_TatTw-1; Mon, 17 May 2021 16:04:23 -0400
-X-MC-Unique: NQOUkcUbOnyZrA10_TatTw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0C8D6801107;
- Mon, 17 May 2021 20:04:22 +0000 (UTC)
-Received: from localhost (ovpn-114-21.rdu2.redhat.com [10.10.114.21])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B84DC5C3E5;
- Mon, 17 May 2021 20:04:16 +0000 (UTC)
-Date: Mon, 17 May 2021 16:04:16 -0400
-From: Eduardo Habkost <ehabkost@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Cc: qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
- qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- "Daniel P. Berrange" <berrange@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Subject: Re: [PATCH v2 00/12] hw: Various Kconfig fixes
-Message-ID: <20210517200416.pt4xghxiuzuwknvn@habkost.net>
-References: <20210515173716.358295-1-philmd@redhat.com>
- <20210517191856.enjxmb7v2ai6ecdh@habkost.net>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lilt2-0004Gj-16; Mon, 17 May 2021 18:38:56 -0400
+Received: from mail-il1-x135.google.com ([2607:f8b0:4864:20::135]:33680)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lilsn-00033E-9q; Mon, 17 May 2021 18:38:55 -0400
+Received: by mail-il1-x135.google.com with SMTP id z1so7505542ils.0;
+ Mon, 17 May 2021 15:38:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=zoFFE10DYsTBXBI+yYki8pfr6+B/a9aZGVKnNngoRjc=;
+ b=MXqd4nrgrs5KJJi3ulKRRjZaUVrd6ks4UZOWRPrcdDNBuewYWLaKERTOMvCnOIoV4S
+ U2qn4umwKEgjO/czGJumiwN9ONXXtzsmBoY69Bt6gAWg63XIQhe0eFkRM3kMbt4ycq4p
+ 9iUckkiKFyikXOOkqPeMa+qcJspN4AAULhMbf3Ch3siu4os3ndqFAkXJRnSTCkBW0ZXu
+ UCBb9OWRfbNgrvPgFF6FOHgyupsiIDAGHCg3CSHph/rJSWEUlF1sxx8RgFpTyoezqM7K
+ u24SZUufZJibA7gG+Dq7+ped2RpC+st5KSE9ettTfUUYD0Qfnp7oJLdjeBXLldj2xlkI
+ B1iA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=zoFFE10DYsTBXBI+yYki8pfr6+B/a9aZGVKnNngoRjc=;
+ b=XBG1kyfFgCsP8779kvXsrQbFh37mZ5TfG68lddScKEZuiLDCggAPqwf0LMWgOmYk+2
+ ppCSR1SEf4Kgs8YYxph5Sg9Z8+juxKUi+NdOwkRFGcO9KsEJgsJGoro85bbXEeDJjohw
+ yhCPmgmZel+WbG7bEl+0VISx54tMnN2NnwPb7vetJd5AnuWKhSup+dI5d56SdaskwE06
+ fbUt9G6uORtRl6VPMUzpF6j+ZYLpVsew/SbwaL387o9naruteAT/45u++2sVIh8DbtQ9
+ 28KgBbElf/jsQ91OGAb7hXVIbftt4Wbtz5Steo0ylJ6ub8RrUQ92ird6ny9i+ObtO6Ds
+ CijQ==
+X-Gm-Message-State: AOAM532Sg9BjU9bGGfivFE8qIJNDPDnuuGE0eRFuifs3sHaMdkpsLqFB
+ baXb+FI0LmCP0w8OSEHXD5E+fVHIFbmohJ6J5zg=
+X-Google-Smtp-Source: ABdhPJyfqP41Hz5fVMikPvQA+msmLmdZwncldf2dB7t7HyJAUIjuqJoOY3xv0O+hzo7+08P0IGbSYXdYe520lFFrx0I=
+X-Received: by 2002:a05:6e02:671:: with SMTP id
+ l17mr1620286ilt.267.1621291118400; 
+ Mon, 17 May 2021 15:38:38 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210517191856.enjxmb7v2ai6ecdh@habkost.net>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=ehabkost@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.374,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+References: <20210517070851.857841-1-f4bug@amsat.org>
+In-Reply-To: <20210517070851.857841-1-f4bug@amsat.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 18 May 2021 08:38:12 +1000
+Message-ID: <CAKmqyKNya4DfidO-9baQnE7=rV_XSKxfujoVRaukvB+SGJ_b_A@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Remove obsolete 'CPU unmigratable' comment
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ QEMU Trivial <qemu-trivial@nongnu.org>, Bin Meng <bin.meng@windriver.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ "Dr . David Alan Gilbert" <dgilbert@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::135;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x135.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,70 +77,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2021 20:04:44 -0000
+X-List-Received-Date: Mon, 17 May 2021 22:38:56 -0000
 
-On Mon, May 17, 2021 at 03:18:56PM -0400, Eduardo Habkost wrote:
-> CCing Build system architecture maintainer (Daniel).
+On Mon, May 17, 2021 at 5:09 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
+g> wrote:
+>
+> The RISCV CPU is migratable since commit f7697f0e629
+> ("target/riscv: Add basic vmstate description of CPU"),
+> so remove an obsolete comment which is now incorrect.
+>
+> Reported-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 
-Oops, I was misled by the subsection title.  Daniel is
-responsible only for the build system documentation.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Do we have any volunteers willing to be listed as reviewers for
-build system changes in MAINTAINERS?  meson.build has a
-non-trivial amount of code and no maintainers or reviewers at
-all.
+Alistair
 
-> 
-> On Sat, May 15, 2021 at 07:37:04PM +0200, Philippe Mathieu-Daudé wrote:
-> > Various Kconfig fixes when building stand-alone machine binaries.
-> 
-> Who should merge this once it's ready?
-> 
-> > 
-> > Since v1:
-> > - Fixed Pegasos2 machine
-> > - Removed SEMIHOSTING related patches (will repost them later)
-> > 
-> > Philippe Mathieu-Daudé (12):
-> >   hw/mem/nvdimm: Use Kconfig 'imply' instead of 'depends on'
-> >   hw/ide/Kconfig: Add missing dependency PCI -> IDE_QDEV
-> >   hw/arm/Kconfig: Add missing dependency NPCM7XX -> SMBUS
-> >   hw/arm/Kconfig: Remove unused DS1338 symbol from i.MX25 PDK Board
-> >   hw/arm/Kconfig: Add missing SDHCI symbol to FSL_IMX25
-> >   hw/riscv/Kconfig: Add missing dependency MICROCHIP_PFSOC -> SERIAL
-> >   hw/riscv/Kconfig: Restrict NUMA to Virt & Spike machines
-> >   hw/ppc/Kconfig: Add missing dependency E500 -> DS1338 RTC
-> >   hw/pci-host/Kconfig: Add missing dependency MV64361 -> I8259
-> >   hw/isa/vt82c686: Add missing Kconfig dependencies (build error)
-> >   hw/isa/vt82c686: Add missing Kconfig dependency (runtime error)
-> >   hw/ppc/Kconfig: Add dependency PEGASOS2 -> ATI_VGA
-> > 
-> >  default-configs/devices/ppc-softmmu.mak   | 1 -
-> >  default-configs/devices/ppc64-softmmu.mak | 1 -
-> >  hw/arm/Kconfig                            | 4 +++-
-> >  hw/char/Kconfig                           | 1 +
-> >  hw/i386/Kconfig                           | 1 +
-> >  hw/ide/Kconfig                            | 2 +-
-> >  hw/isa/Kconfig                            | 4 ++++
-> >  hw/mem/Kconfig                            | 2 --
-> >  hw/pci-host/Kconfig                       | 1 +
-> >  hw/ppc/Kconfig                            | 3 +++
-> >  hw/riscv/Kconfig                          | 5 +++++
-> >  hw/riscv/meson.build                      | 2 +-
-> >  12 files changed, 20 insertions(+), 7 deletions(-)
-> > 
-> > -- 
-> > 2.26.3
-> > 
-> > 
-> > 
-> 
-> -- 
-> Eduardo
-> 
-> 
-
--- 
-Eduardo
-
+> ---
+>  target/riscv/cpu.c | 1 -
+>  1 file changed, 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 3191fd00822..d459e8427e2 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -638,7 +638,6 @@ static void riscv_cpu_class_init(ObjectClass *c, void=
+ *data)
+>      cc->disas_set_info =3D riscv_cpu_disas_set_info;
+>  #ifndef CONFIG_USER_ONLY
+>      cc->get_phys_page_debug =3D riscv_cpu_get_phys_page_debug;
+> -    /* For now, mark unmigratable: */
+>      cc->vmsd =3D &vmstate_riscv_cpu;
+>      cc->write_elf64_note =3D riscv_cpu_write_elf64_note;
+>      cc->write_elf32_note =3D riscv_cpu_write_elf32_note;
+> --
+> 2.26.3
+>
+>
 
