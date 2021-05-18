@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lilt3-0004He-MN
-	for mharc-qemu-riscv@gnu.org; Mon, 17 May 2021 18:38:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35720)
+	id 1lisxb-0002T8-4S
+	for mharc-qemu-riscv@gnu.org; Tue, 18 May 2021 02:12:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46116)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lilt2-0004Gj-16; Mon, 17 May 2021 18:38:56 -0400
-Received: from mail-il1-x135.google.com ([2607:f8b0:4864:20::135]:33680)
+ id 1lisxV-0002PS-OP; Tue, 18 May 2021 02:12:02 -0400
+Received: from mail-il1-x129.google.com ([2607:f8b0:4864:20::129]:44010)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lilsn-00033E-9q; Mon, 17 May 2021 18:38:55 -0400
-Received: by mail-il1-x135.google.com with SMTP id z1so7505542ils.0;
- Mon, 17 May 2021 15:38:39 -0700 (PDT)
+ id 1lisxG-0004qJ-O1; Tue, 18 May 2021 02:11:59 -0400
+Received: by mail-il1-x129.google.com with SMTP id m1so6438530ilg.10;
+ Mon, 17 May 2021 23:11:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=zoFFE10DYsTBXBI+yYki8pfr6+B/a9aZGVKnNngoRjc=;
- b=MXqd4nrgrs5KJJi3ulKRRjZaUVrd6ks4UZOWRPrcdDNBuewYWLaKERTOMvCnOIoV4S
- U2qn4umwKEgjO/czGJumiwN9ONXXtzsmBoY69Bt6gAWg63XIQhe0eFkRM3kMbt4ycq4p
- 9iUckkiKFyikXOOkqPeMa+qcJspN4AAULhMbf3Ch3siu4os3ndqFAkXJRnSTCkBW0ZXu
- UCBb9OWRfbNgrvPgFF6FOHgyupsiIDAGHCg3CSHph/rJSWEUlF1sxx8RgFpTyoezqM7K
- u24SZUufZJibA7gG+Dq7+ped2RpC+st5KSE9ettTfUUYD0Qfnp7oJLdjeBXLldj2xlkI
- B1iA==
+ bh=XrXDX6jicIz+JNviJVv92l6+AMoxqWkr9y7Z0QTI/iE=;
+ b=iCbIgWEES92dxpiwA2SVJOsUka0kBGXZuscq0Y1qTCDw1her6nHq5XV7zUwUURd03/
+ IRwTzYTfuppM+W37cDqdeq+s6jY8EORUqJWZVEVqwC1zrUXosJCe3spAOqjvUCZQ88ma
+ +X5tef7Vc6c0OL6eaNir2Ei9y/31sRhj/fVrkYfRlXLANJOpUQ76uOSMLwVCz4FrYKb3
+ Vfs5cxZPjJfFQoECp6Z/qC075IoIz+bEkIL1aUaEMQ/CavDpJ+UgYhXXnDzSVeUuRNbG
+ 5Oh+zgHqi71eXfXu40ncbM9ApTORjXFltVj5hCHhIvo+eoKVuVg4qGF+1LHHZxUUAA6e
+ xC/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=zoFFE10DYsTBXBI+yYki8pfr6+B/a9aZGVKnNngoRjc=;
- b=XBG1kyfFgCsP8779kvXsrQbFh37mZ5TfG68lddScKEZuiLDCggAPqwf0LMWgOmYk+2
- ppCSR1SEf4Kgs8YYxph5Sg9Z8+juxKUi+NdOwkRFGcO9KsEJgsJGoro85bbXEeDJjohw
- yhCPmgmZel+WbG7bEl+0VISx54tMnN2NnwPb7vetJd5AnuWKhSup+dI5d56SdaskwE06
- fbUt9G6uORtRl6VPMUzpF6j+ZYLpVsew/SbwaL387o9naruteAT/45u++2sVIh8DbtQ9
- 28KgBbElf/jsQ91OGAb7hXVIbftt4Wbtz5Steo0ylJ6ub8RrUQ92ird6ny9i+ObtO6Ds
- CijQ==
-X-Gm-Message-State: AOAM532Sg9BjU9bGGfivFE8qIJNDPDnuuGE0eRFuifs3sHaMdkpsLqFB
- baXb+FI0LmCP0w8OSEHXD5E+fVHIFbmohJ6J5zg=
-X-Google-Smtp-Source: ABdhPJyfqP41Hz5fVMikPvQA+msmLmdZwncldf2dB7t7HyJAUIjuqJoOY3xv0O+hzo7+08P0IGbSYXdYe520lFFrx0I=
-X-Received: by 2002:a05:6e02:671:: with SMTP id
- l17mr1620286ilt.267.1621291118400; 
- Mon, 17 May 2021 15:38:38 -0700 (PDT)
+ bh=XrXDX6jicIz+JNviJVv92l6+AMoxqWkr9y7Z0QTI/iE=;
+ b=tDVPN5PI3NSBQ4rmiTzoqoOG1lzMbdpGjFumuiQTkSCd5AHmetb82EE9aZVTBoHk+N
+ Q/MkgEmelvQQPUmDL+bHabQHuRDLe2AXeda70hz1IWhc9NkGFYUekUKwJ/5sCx3QnGw3
+ PM7D6lgECkeyMhFif5NJgGnMP+QEsXkkFDvjokYzuGu0z4jwTdxFgS+DLgb8Gi7YJxl/
+ WiUU3sYCYn3zqTt1Y5hHeF0CqFtLEIaakWtzH/P+0ZbnnApQsdptPAoXe5ohsYI08/da
+ o2IYWmo+K4q93z/RrIPVM6A8hNj8Of76n3Sh8JJsSGugDhH0d+iCSG2xdFLcHN1mZS46
+ rHRw==
+X-Gm-Message-State: AOAM532PwurUnxwcP5XuYpaOFr4G0jpHj+/ActUrTRTKqbE3xTm23vhA
+ Gd+/y2VlHNAZO0Oa7/SiETt/mnFGjN+DIZ/fero=
+X-Google-Smtp-Source: ABdhPJxS6QOm79chwQRTIA8OpAsjDrZbDjmVBHacx2A4gfP93KLcF82T1VnryRfT3DlbpSRp9fMHLTNuHcrAN79ARVs=
+X-Received: by 2002:a05:6e02:dcf:: with SMTP id
+ l15mr2809755ilj.227.1621318303033; 
+ Mon, 17 May 2021 23:11:43 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210517070851.857841-1-f4bug@amsat.org>
 In-Reply-To: <20210517070851.857841-1-f4bug@amsat.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 18 May 2021 08:38:12 +1000
-Message-ID: <CAKmqyKNya4DfidO-9baQnE7=rV_XSKxfujoVRaukvB+SGJ_b_A@mail.gmail.com>
+Date: Tue, 18 May 2021 16:11:16 +1000
+Message-ID: <CAKmqyKNB4Tb2sMg9B17s3Ad_TZy9MY02_JRPS-1r1C1mjvq1bw@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Remove obsolete 'CPU unmigratable' comment
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -55,8 +55,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::135;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x135.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::129;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x129.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,7 +77,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2021 22:38:56 -0000
+X-List-Received-Date: Tue, 18 May 2021 06:12:04 -0000
 
 On Mon, May 17, 2021 at 5:09 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
 g> wrote:
@@ -89,7 +89,9 @@ g> wrote:
 > Reported-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
