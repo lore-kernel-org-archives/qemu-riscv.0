@@ -1,65 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lj5xC-0002bt-MV
-	for mharc-qemu-riscv@gnu.org; Tue, 18 May 2021 16:04:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57056)
+	id 1lj64i-000152-PU
+	for mharc-qemu-riscv@gnu.org; Tue, 18 May 2021 16:12:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42878)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1lj56Q-0005d5-0t
- for qemu-riscv@nongnu.org; Tue, 18 May 2021 15:10:02 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:35517)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lj64e-0000l7-0b
+ for qemu-riscv@nongnu.org; Tue, 18 May 2021 16:12:16 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:25360)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1lj56J-0001cJ-02
- for qemu-riscv@nongnu.org; Tue, 18 May 2021 15:10:01 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1lj64R-0006Gs-BM
+ for qemu-riscv@nongnu.org; Tue, 18 May 2021 16:12:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1621364991;
+ s=mimecast20190719; t=1621368722;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fwByx8C8msqjMmho85FgN1xrYCdmXBYqdKwFSOKVW6A=;
- b=SCVWoxNC28TmlkLFbeyG2dgaoqsTfw8s3uo1WaLyaPmMvHZ7LVHy8BdrS45tR3aSDmWyk5
- +Ec7OicHadiXvARy9z/owRpa/bmFrpAe1jOb8yA5q22E3yhExDxNTwLO23GZhPJVDCDt6Y
- ULpmL1gaDJtXEO7tqV5m/34nhcm9r50=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-87-fORRYkyDO5W6X8AcSdhgLg-1; Tue, 18 May 2021 15:09:49 -0400
-X-MC-Unique: fORRYkyDO5W6X8AcSdhgLg-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DA183180FD61;
- Tue, 18 May 2021 19:09:47 +0000 (UTC)
-Received: from [10.10.117.64] (ovpn-117-64.rdu2.redhat.com [10.10.117.64])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 59E34687E0;
- Tue, 18 May 2021 19:09:45 +0000 (UTC)
-Subject: Re: [PATCH v2 02/12] hw/ide/Kconfig: Add missing dependency PCI ->
- IDE_QDEV
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- qemu-devel@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-riscv@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- BALATON Zoltan <balaton@eik.bme.hu>,
+ bh=EtLwxEnsEfN6cj4xHan6As3MuvE7If+R0pjppMZsGg0=;
+ b=Wmf2VsWQ4NH/48gQ/ltxdQuNiJaLY3iHh7SDMSm3lSN5xGpIpDMm2EP1qSja9v0eryrZSS
+ c7r66QUl6NhbQCSxUFexPq3ZL1J/gdEc+qtKFY0Xr8Iuzcm0f5HP8VSPaIzQpQTIqgOmwk
+ ZuLke1OBVcia+6qsfbR68ltsq6Xaquk=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-377-b2xTliqnMfKh4ynYZSvUCg-1; Tue, 18 May 2021 16:11:57 -0400
+X-MC-Unique: b2xTliqnMfKh4ynYZSvUCg-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ i3-20020aa7dd030000b029038ce772ffe4so6421359edv.12
+ for <qemu-riscv@nongnu.org>; Tue, 18 May 2021 13:11:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=EtLwxEnsEfN6cj4xHan6As3MuvE7If+R0pjppMZsGg0=;
+ b=fmCYEqeQ85a2IEZiQMQrkSq/3xVjwncEMV25emmgAq1mA4oKFSezZQdqf6LqP0zkkz
+ s2y8STu6rzGlyI56HTSrWiI1rHQcnBm3GtrERXdOznEpHTxut4QCaLvaFK18BFKYlrxI
+ cFPd3qBjla26i4QePOdQ2kaHMSic66k8Cy7E5b+nlb4dP1VKe4OKZCB13c8f6S5yhy8M
+ oYNuiwJ00DbT29vWvxZLJ6DXNYWfMFhWOypeIVpSICGB4RrgNzuToKaxkpOS3Usx6Rkv
+ 5/0PPB7XZ+d24fVHi88RVgD6FOo2MgcyI1t2lqw6ABJhKpWG581alUjhuqdIvC16SIEm
+ JAvg==
+X-Gm-Message-State: AOAM531EO15T+OfH84563somKCCiXg5BXHxghTKj0CR6CrhgKEAUhM+t
+ k2IBMY5m53rkQw8Y6XLdJnJul9QSaRpdQMf6cwWHByEcGsDyU4+OqsagxA3zS1cq6A7+XJ+R3IE
+ BKmuTj2d7qobv84w=
+X-Received: by 2002:a17:906:5291:: with SMTP id
+ c17mr7697747ejm.527.1621368715804; 
+ Tue, 18 May 2021 13:11:55 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyOvoLewqk7B22jcfp7eaqS/xLOgx1W3a4vSsHE8OXTrbHXyRAdYGK6W02CDmbGbH3LyAngOQ==
+X-Received: by 2002:a17:906:5291:: with SMTP id
+ c17mr7697730ejm.527.1621368715659; 
+ Tue, 18 May 2021 13:11:55 -0700 (PDT)
+Received: from [192.168.1.36] (31.red-83-51-215.dynamicip.rima-tde.net.
+ [83.51.215.31])
+ by smtp.gmail.com with ESMTPSA id n17sm13378101eds.72.2021.05.18.13.11.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 May 2021 13:11:55 -0700 (PDT)
+Subject: Re: [PATCH v2 00/12] hw: Various Kconfig fixes
+To: Eduardo Habkost <ehabkost@redhat.com>
+Cc: qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
+ qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
+ "Daniel P. Berrange" <berrange@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  David Gibson <david@gibson.dropbear.id.au>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- "open list:IDE" <qemu-block@nongnu.org>
+ =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>
 References: <20210515173716.358295-1-philmd@redhat.com>
- <20210515173716.358295-3-philmd@redhat.com>
-From: John Snow <jsnow@redhat.com>
-Message-ID: <baab8de6-032c-5351-694f-3f4a8fb016ec@redhat.com>
-Date: Tue, 18 May 2021 15:09:44 -0400
+ <20210517191856.enjxmb7v2ai6ecdh@habkost.net>
+ <20210517200416.pt4xghxiuzuwknvn@habkost.net>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Message-ID: <610577a6-0aea-e6af-7f93-0caa9eb75e27@redhat.com>
+Date: Tue, 18 May 2021 22:11:53 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <20210515173716.358295-3-philmd@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+In-Reply-To: <20210517200416.pt4xghxiuzuwknvn@habkost.net>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jsnow@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=jsnow@redhat.com;
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=philmd@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
@@ -70,7 +90,6 @@ X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.374,
  RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 18 May 2021 16:04:32 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -82,46 +101,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 May 2021 19:10:02 -0000
+X-List-Received-Date: Tue, 18 May 2021 20:12:16 -0000
 
-On 5/15/21 1:37 PM, Philippe Mathieu-Daudé wrote:
-> The pci_ide_create_devs() function is declared i hw/ide/qdev.c:
+On 5/17/21 10:04 PM, Eduardo Habkost wrote:
+> On Mon, May 17, 2021 at 03:18:56PM -0400, Eduardo Habkost wrote:
+>> CCing Build system architecture maintainer (Daniel).
 > 
->   $ git grep ide_create_drive
->   hw/ide/pci.c:491:            ide_create_drive(d->bus + bus[i], unit[i], hd_table[i]);
->   hw/ide/qdev.c:127:IDEDevice *ide_create_drive(IDEBus *bus, int unit, DriveInfo *drive)
->   include/hw/ide/internal.h:653:IDEDevice *ide_create_drive(IDEBus *bus, int unit, DriveInfo *drive);
+> Oops, I was misled by the subsection title.  Daniel is
+> responsible only for the build system documentation.
 > 
-> Fix the correct symbol dependency to avoid build failure when
-> deselecting some machines:
-> 
->    /usr/bin/ld: libcommon.fa.p/hw_ide_pci.c.o: in function `pci_ide_create_devs':
->    hw/ide/pci.c:491: undefined reference to `ide_create_drive'
-> 
-> Fixes: 8f01b41e109 ("ide: express dependencies with Kconfig")
-> Acked-by: Paolo Bonzini <pbonzini@redhat.com>
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+> Do we have any volunteers willing to be listed as reviewers for
+> build system changes in MAINTAINERS?  meson.build has a
+> non-trivial amount of code and no maintainers or reviewers at
+> all.
 
-Acked-by: John Snow <jsnow@redhat.com>
+Hmmm OK I can add an entry. Ideally with Paolo/Thomas but I don't
+think they want to be listed in any new section ;)
 
-> ---
->   hw/ide/Kconfig | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/hw/ide/Kconfig b/hw/ide/Kconfig
-> index 8e2c8934549..dd85fa3619f 100644
-> --- a/hw/ide/Kconfig
-> +++ b/hw/ide/Kconfig
-> @@ -8,7 +8,7 @@ config IDE_QDEV
->   config IDE_PCI
->       bool
->       depends on PCI
-> -    select IDE_CORE
-> +    select IDE_QDEV
->   
->   config IDE_ISA
->       bool
-> 
+>> On Sat, May 15, 2021 at 07:37:04PM +0200, Philippe Mathieu-Daudé wrote:
+>>> Various Kconfig fixes when building stand-alone machine binaries.
+>>
+>> Who should merge this once it's ready?
+
+Paolo said in v1 that I can send the pull request myself :))
+
+I will do it in the next 48h~.
+
+Thanks,
+
+Phil.
 
 
