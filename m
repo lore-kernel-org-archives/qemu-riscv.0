@@ -1,73 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ljraP-0004qd-HQ
-	for mharc-qemu-riscv@gnu.org; Thu, 20 May 2021 18:56:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35962)
+	id 1ljujl-0001EC-Fj
+	for mharc-qemu-riscv@gnu.org; Thu, 20 May 2021 22:18:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45846)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=767f8a997=alistair.francis@wdc.com>)
- id 1ljraL-0004mD-Ft; Thu, 20 May 2021 18:56:10 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:8231)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=767f8a997=alistair.francis@wdc.com>)
- id 1ljraD-0004zS-Qh; Thu, 20 May 2021 18:56:09 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1621551359; x=1653087359;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=acliKGG3l829OIT5BBImeLeUsVa419f4dlzLIRV3Vqc=;
- b=P6Bnm9kRyJqvaWJOvscdFyc+aiYZ4UICGbSL1wEkQj/Ah+SB00o374R8
- DHS5GW3P2En0KEuo6bYDEa8yhe7mRaNyZRBGpha2O2OHnpfavlriK6e2g
- L9PGrj4ZbS3jy5CSeanJthWoB0xeBJPMrYuAAi3C78avW1sUbam/spk6f
- ez08Ip5q5wihR1sv+y7jqAaFh/EFKKXfsF1jwX2Gh4xONmHvqFe8rZ4pi
- frcYhrZdtbc5oHiy56vMfahf6w7gVqp27WdpcnoEL/aUhOeaGEJNGU1tm
- MtGXidb8QzDMj9KR1BLsy6uOsG3UVKjD9iJY3nEfJ0SAhuJQ8qTuSG+IA Q==;
-IronPort-SDR: AfLoFDgrhjUrd9Nr71ZxXH6BthmnJ+6Anhb0JJ7r2qLj+58lDqWJTI5QtcNeCKiHc4uxE4+Qfi
- PPqVPxd1gso2DFu8j2ZwZXjdec6+4vPCT9tWg63QdAmULxojvLCtJYeTXNoBaTQDMf32nDgHjj
- x21RB5lp7XZYyp7zjAc3hZ75dHVIFBojnP5ahUCEyF8Z4okrd8SipfJjVhusHhpBYL4YYXga6k
- Rn4b9ql2WQRAX/vU3UUfxdsdfU39iHo2mZYy5jNPdnUNtkqOleCiFHMhwcPF9FpWYJyNE4nS2w
- b5I=
-X-IronPort-AV: E=Sophos;i="5.82,313,1613404800"; d="scan'208";a="168919101"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 21 May 2021 06:55:57 +0800
-IronPort-SDR: g1IhWAnj35X01ZGrmM8EXhHXMn7AluKQqysJVp8pUhnMrkgoqpHe27i1sTpRFypaAUayRUN5ha
- FoDcyzfs5/HhD9w+gUbQuJiJJ/fRvdqju0hZxdd3urZ4sgfkNZE/EQK3di1W6DR4/OpbxTG0cs
- 04T7onmHrIkAdxB5iksimhraXNJ8zql0rbjcy9Fg0yhh22l6JMnPYZ6wBMzWy07Xzs2MByl7QT
- MYLXQfqZbLkKvs7Qr1PlkKE6vHkDmcDv0v5sEW+vGX2rdUNxL8MhJTymQF0eR0i7pvCBKFOdBf
- C9i1lwOmAuEItORFudXlkrLf
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 May 2021 15:34:21 -0700
-IronPort-SDR: yuSxlp54yNBmuoUdsyq/k9KVcA/tLZ4k33+RCr4JwJfuUc5kbb3KwPB5WAfH0QjPVPhegZUqSr
- FfcWSdmmWvmQAK0wOTZ1Ej6b+KiRAsVzoObo0bdbpi0BqJYCewVVgNaIq/tZ+nDZFK3/0B35cl
- DPYqCv7K/OR3p4wvnFNSPmUNrvAWYhOVceEJFZl0LNA+UShPiwJHmzEFh0jnode4cMKdG5uEXk
- sunWmPhMP3/BsP0BBqQp7KXsCsczee+nEOzXfLbPP4jx/XqWeZ1tzzC8PFgXTVO48riaaFadPd
- T+8=
-WDCIronportException: Internal
-Received: from unknown (HELO toolbox.wdc.com) ([10.225.165.61])
- by uls-op-cesaip02.wdc.com with ESMTP; 20 May 2021 15:55:56 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v1 1/1] target/riscv/pmp: Add assert for ePMP operations
-Date: Fri, 21 May 2021 06:55:53 +0800
-Message-Id: <ec5f225928eec448278c82fcb1f6805ee61dde82.1621550996.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.31.1
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1ljujf-0001DF-EK; Thu, 20 May 2021 22:18:01 -0400
+Received: from mail-yb1-xb30.google.com ([2607:f8b0:4864:20::b30]:45622)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1ljujb-0006hG-Le; Thu, 20 May 2021 22:17:59 -0400
+Received: by mail-yb1-xb30.google.com with SMTP id g38so25436461ybi.12;
+ Thu, 20 May 2021 19:17:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=/syS/icGFyxqTWAgtJ2TnUzN3/74MiGo37mk1Qlyr8k=;
+ b=rWoV4daxzXSWt8E+fOO+zikd16j2gozddZMFVPQVhOgCFEeesC8daT/89AMe3nBYb7
+ YUCRZh3vIzq301vvNd+kUMEVeJiES3ohGNjQj4kNl4cbmusieV5rzecP/psiMTttNJnG
+ wqNhXizxV/7yOOQuUwkjZ5dE5ZqOf7mLBxSJqVb6IvNnHZiTzlveY+BbcroXcMt8MUm/
+ wU8e13S5UPZpYMyPok2ccIG9Rb5Nc+WeLtjrmWz4vbs6GMQlX2301CcUzVE6+1y/63cm
+ lWBlX7AHQu+dJXb8aIdRAQ07Z+5BMAb0A1o/jg9aqNuOL5jHEIfD6OICQzJUnhxgPX+a
+ N4+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=/syS/icGFyxqTWAgtJ2TnUzN3/74MiGo37mk1Qlyr8k=;
+ b=ecyYM3UwwEsEUwTL9JsLVdEWqohbGO7bHzLxyIhNySeeobHHst1eT11sJKsIglC6Ib
+ AUyKvyn1Ttx2NnciNEnwZZIE5+9GpiFjKyWSPF/liMG2Cn3b7e7jNMk2zQNXv0LVGLHm
+ rNnnm+55TGGNF1c048TPUkqUWec0LzjkxDB2YBVsK0iy/29s21z5EXpt/yrQhEKQtz/z
+ YGQ+8g1mYDAUlyiUkF5sDTSUyTLJx2JGyhQuAqbwttftr4yFlcoqdWzhfPiX8bcGiCvW
+ MiBvHEYwNqBjMzMaSQkF9h3Wfkfgy5IMpuQGkgfszL1pCK6B/VZAZZsVeoGNxBwntq2E
+ U0LA==
+X-Gm-Message-State: AOAM5335pKLC6C/ddQ8i1xt4CMQ6eOZ07j5a3LcyRX82Ioe81jj9xaSy
+ W4Q9pE90YK3Q04Da1EGJ+fTheuC3hDmlCdMESZs=
+X-Google-Smtp-Source: ABdhPJwaRj72QYcUK1a5/ZnLPCi6QM70r4VN3iuFcxo4fFvhjkeCye3iLujWYkJLAXQzRknYAltC7Pmh+Wk3eCOQbH0=
+X-Received: by 2002:a25:744c:: with SMTP id p73mr12148613ybc.306.1621563473901; 
+ Thu, 20 May 2021 19:17:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.144;
- envelope-from=prvs=767f8a997=alistair.francis@wdc.com;
- helo=esa5.hgst.iphmx.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+References: <ec5f225928eec448278c82fcb1f6805ee61dde82.1621550996.git.alistair.francis@wdc.com>
+In-Reply-To: <ec5f225928eec448278c82fcb1f6805ee61dde82.1621550996.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 21 May 2021 10:17:42 +0800
+Message-ID: <CAEUhbmXh3M28AUyCEVL-SSJsFbEz0QYj+vKzH7rw2mNoHmAMFA@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] target/riscv/pmp: Add assert for ePMP operations
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b30;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb30.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -81,43 +69,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 May 2021 22:56:10 -0000
+X-List-Received-Date: Fri, 21 May 2021 02:18:03 -0000
 
-Although we construct epmp_operation in such a way that it can only be
-between 0 and 15 Coverity complains that we don't handle the other
-possible cases. To fix Coverity and make it easier for humans to read
-add a default case to the switch statement that calls
-g_assert_not_reached().
+On Fri, May 21, 2021 at 6:56 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> Although we construct epmp_operation in such a way that it can only be
+> between 0 and 15 Coverity complains that we don't handle the other
+> possible cases. To fix Coverity and make it easier for humans to read
+> add a default case to the switch statement that calls
+> g_assert_not_reached().
+>
+> Fixes: CID 1453108
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/pmp.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
 
-Fixes: CID 1453108
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/pmp.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 78203291de..82ed020b10 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -402,6 +402,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-                     case 15:
-                         *allowed_privs = PMP_READ;
-                         break;
-+                    default:
-+                        g_assert_not_reached();
-                     }
-                 } else {
-                     switch (epmp_operation) {
-@@ -433,6 +435,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-                     case 7:
-                         *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
-                         break;
-+                    default:
-+                        g_assert_not_reached();
-                     }
-                 }
-             }
--- 
-2.31.1
-
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
