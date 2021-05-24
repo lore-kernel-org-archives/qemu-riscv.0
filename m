@@ -1,72 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lkyxi-00008c-Je
-	for mharc-qemu-riscv@gnu.org; Sun, 23 May 2021 21:00:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60428)
+	id 1ll2UK-0002xq-5V
+	for mharc-qemu-riscv@gnu.org; Mon, 24 May 2021 00:46:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34492)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1lkyxb-00008H-QF
- for qemu-riscv@nongnu.org; Sun, 23 May 2021 21:00:49 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d]:40730)
+ id 1ll2UI-0002x8-Mq
+ for qemu-riscv@nongnu.org; Mon, 24 May 2021 00:46:46 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:33549)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1lkyxV-0006OA-Dk
- for qemu-riscv@nongnu.org; Sun, 23 May 2021 21:00:47 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id n8so8554962plf.7
- for <qemu-riscv@nongnu.org>; Sun, 23 May 2021 18:00:38 -0700 (PDT)
+ id 1ll2UF-0006cY-Ks
+ for qemu-riscv@nongnu.org; Mon, 24 May 2021 00:46:46 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id b7so9843514plg.0
+ for <qemu-riscv@nongnu.org>; Sun, 23 May 2021 21:46:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
  h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
  :content-transfer-encoding;
- bh=H9jqymzxHvqrh9s5eUBTbrB5UCiTChDWMtf+0BbMchU=;
- b=mrh6rYiqs9dWQAAEyBq+KW/JqQ8C7NDJnyIpbSt1iSlQfnasrs92R1xHxamlcyDegP
- VbRpIZr1NojSJzNym2pN8ffrPBgEsODL72P1UsSumfWy4jz7z/1PYakytqQP9NtMdKvK
- Yxr0QcWjQXFY4nnHtcUz9/hHRxi8SM0qaBgdSEHh4J5fENyTp9a/IGEnMXwKxNH1UiCx
- PtDXNVXsjcyu2Eet9heyV0Unk2yW/yonCVZcNCsxhpZMsI3vAY92QUFYmDTfsyATShzY
- qiHf4Xvk0NDkVCG5v5dkN+n5nWfO8gLQCKS9g94GeJlLhDei4FU0X9z5m/fAzM9OOMMz
- DLEQ==
+ bh=+XOQeysAfX0hQEu0i6Me/kIyP3wbkypxnZojoEGao14=;
+ b=AMfZDKNOKHIeHeQKb4dTh8ioBY1JwHIoL5VzTtCft6e7a4zIJREu3By/57aQCXf1Kq
+ r/qnGrwX04t+bMNYT/AfZMPSrI2qE5loT6Ydcxg5WCTFgbURYqwFA0XVjpkvZLDjoyGL
+ GchNTp96FQqlFfs1KTLUUqVopLHneWoheTXUHpZKMc82rovsQf28RNu8lUiZIM2VOx80
+ BlBVoQT2lo53gST9EF/6z1RIUkmLcHtAsASbZSAVhHIQ3WvhuI9OdHk3s7SUcNDH/mFs
+ dH7Hmsm8E4WMj+nDR5BMY4IjJL4yhjeTXDkd+NLlPY3XxCalCCEFjFMBtx3P3S6YrCvW
+ yf6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
  :mime-version:content-transfer-encoding;
- bh=H9jqymzxHvqrh9s5eUBTbrB5UCiTChDWMtf+0BbMchU=;
- b=BUmE5uLjoMTfwtdsthM+tmFwnyAIZe7+1jWvlawLVhz5CMH0zqIzCt+jIvQ3+EVYlc
- MUS5MLMF7SnJL4gO/RhX8qhN7TfZVBSyUjDUaMvKKCzNmaJUPlSMP+1/WysYpqswqRrc
- JK1C+J28OStJcOVzYKpL3/8AEQwtzXggWg9yfBPNpWyHGaR5/B/nWtcwPxxDD6dQR0b0
- JS/0PgD9EQOTaQYZp3enve2Ztz4smGDS+YmdnKWQBv2gR2oV8YsZJK6f1y1hu61lr/L5
- AwIx2MtgkRPLWorlYGXuPTjQQbiuU5dgzMh3xwWbwSMAvDjiny7I5n8aHy0sh4tvxvWT
- N9Ow==
-X-Gm-Message-State: AOAM532Wudg4Tm2Z6cD2fqmry0dKs+i58UTOSU0L56Dpa8z4Cf/iqJxb
- lCmE5pMWhSVB6H0HI55K7Uivgua+jkzADg==
-X-Google-Smtp-Source: ABdhPJwuLkzAbtIiVaB/5b8WrckjYE++uVhhAYETlhLK3yE9c5+j/SCOholtOLFfsKbqlDX1U30ncQ==
-X-Received: by 2002:a17:90a:c096:: with SMTP id
- o22mr22974948pjs.231.1621818036577; 
- Sun, 23 May 2021 18:00:36 -0700 (PDT)
+ bh=+XOQeysAfX0hQEu0i6Me/kIyP3wbkypxnZojoEGao14=;
+ b=VRtPXordZDPIShYG2hVm+oPzUVaJXEMFZGlvEqbsA5zBsKU/uF+/vA6RBcPCtPRHkk
+ cp7DapTid/5GNqYNxBh9X5J4ZBN4K39oF4yzY4VSvwLoE6T2b8CJX1d+MoQ+3XDvlRgr
+ ZpQefXP3Sbcp5SNgeSmLbun4l3O6Bj0YTBGCp9KVCmglMrhNLBT/S+ao+uV5caw9rraE
+ SEoo94w5+auZ6Ngdn/H/aGFf+CpHhcjEyu6ApSiYTakv/KpHW9tlR2RQA6X8OSKkSgge
+ Xwy/NF8USJZu0FIMPVm+MAtfagSUutg3s81vC4uE726HnFO6ePGgCUfIqmHy3aAgwJ/V
+ AaBQ==
+X-Gm-Message-State: AOAM530IibEGEr3zrtEVCpPjcrg/slbfv96B+i5Ro3AFjp1N8aqx6lmL
+ nMyXqJnAxovO9NC1wf+L0KDyEg==
+X-Google-Smtp-Source: ABdhPJwLVPB3jMI1+uXQimSfLh4wqxhkwd3bnUB7Qzt4EFz/fHxgAjUAbeRaUtL15PRJsDsfTuS4UQ==
+X-Received: by 2002:a17:90b:8c5:: with SMTP id
+ ds5mr23472789pjb.127.1621831601725; 
+ Sun, 23 May 2021 21:46:41 -0700 (PDT)
 Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
  [76.210.143.223])
- by smtp.gmail.com with ESMTPSA id t22sm9233782pfl.50.2021.05.23.18.00.35
+ by smtp.gmail.com with ESMTPSA id c7sm10333311pga.4.2021.05.23.21.46.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 May 2021 18:00:35 -0700 (PDT)
-Date: Sun, 23 May 2021 18:00:35 -0700 (PDT)
-X-Google-Original-Date: Sun, 23 May 2021 18:00:28 PDT (-0700)
-Subject: Re: [PATCH 05/38] target/riscv: 8-bit Addition & Subtraction
- Instruction
-In-Reply-To: <CAKmqyKO9UHGkfRdb8dEVHFaxCjGox3x+-g066nRc_vqc7wtVWQ@mail.gmail.com>
-CC: zhiwei_liu@c-sky.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- richard.henderson@linaro.org
+ Sun, 23 May 2021 21:46:41 -0700 (PDT)
+Date: Sun, 23 May 2021 21:46:41 -0700 (PDT)
+X-Google-Original-Date: Sun, 23 May 2021 21:46:39 PDT (-0700)
+Subject: Re: [PATCH 07/38] target/riscv: SIMD 8-bit Shift Instructions
+In-Reply-To: <20210212150256.885-8-zhiwei_liu@c-sky.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, richard.henderson@linaro.org,
+ alistair23@gmail.com, zhiwei_liu@c-sky.com
 From: Palmer Dabbelt <palmer@dabbelt.com>
-To: alistair23@gmail.com
-Message-ID: <mhng-167a21fd-72ef-432a-896e-ac21b587c560@palmerdabbelt-glaptop>
+To: zhiwei_liu@c-sky.com
+Message-ID: <mhng-473b2bdf-9ee3-4780-87bf-e8adabce949c@palmerdabbelt-glaptop>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=palmer@dabbelt.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=palmer@dabbelt.com; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,259 +78,211 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 May 2021 01:00:49 -0000
+X-List-Received-Date: Mon, 24 May 2021 04:46:46 -0000
 
-On Mon, 15 Mar 2021 14:22:58 PDT (-0700), alistair23@gmail.com wrote:
-> On Fri, Feb 12, 2021 at 10:14 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->>
->> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+On Fri, 12 Feb 2021 07:02:25 PST (-0800), zhiwei_liu@c-sky.com wrote:
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+
+I know it's always kind of akward for this type of patches, but IIUC 
+they're all supposed to have some sort of description.
+
+> ---
+>  target/riscv/helper.h                   |   9 +++
+>  target/riscv/insn32.decode              |  17 ++++
+>  target/riscv/insn_trans/trans_rvp.c.inc |  16 ++++
+>  target/riscv/packed_helper.c            | 102 ++++++++++++++++++++++++
+>  4 files changed, 144 insertions(+)
 >
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
-
-I saw some reviews on the other ones, but since others (like this) just 
-have acks and haven't had any other traffic I'm going to start here.
-
-It looks like the latest spec is 0.9.4, but the changelog is pretty 
-minimal between 0.9.5 and 0.9.2:
-
-[0.9.2 -> 0.9.3]
-
-* Changed Zp64 name to Zpsfoperand.
-* Added Zprvsfextra for RV64 only instructions.
-* Removed SWAP16 encoding. It is an alias of PKBT16.
-* Fixed few typos and enhanced precision descriptions on imtermediate results.
-
-[0.9.3 -> 0.9.4]
-
-* Fixed few typos and enhanced precision descriptions on imtermediate results.
-* Fixed/Changed data types for some intrinsic functions.
-* Removed "RV32 Only" for Zpsfoperand.
-
-So I'm just going to stick with reviewing based on the latest spec 
-<https://github.com/riscv/riscv-p-spec/blob/d33a761f805d3b7c84214e5654a511267985a0a0/P-ext-proposal.pdf> 
-and try to keep those differences in mind, assuming we're just tracking 
-the latest draft here.
-
-> Alistair
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 20bf400ac2..0ecd4d53f9 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -1193,3 +1193,12 @@ DEF_HELPER_3(sll16, tl, env, tl, tl)
+>  DEF_HELPER_3(ksll16, tl, env, tl, tl)
+>  DEF_HELPER_3(kslra16, tl, env, tl, tl)
+>  DEF_HELPER_3(kslra16_u, tl, env, tl, tl)
+> +
+> +DEF_HELPER_3(sra8, tl, env, tl, tl)
+> +DEF_HELPER_3(sra8_u, tl, env, tl, tl)
+> +DEF_HELPER_3(srl8, tl, env, tl, tl)
+> +DEF_HELPER_3(srl8_u, tl, env, tl, tl)
+> +DEF_HELPER_3(sll8, tl, env, tl, tl)
+> +DEF_HELPER_3(ksll8, tl, env, tl, tl)
+> +DEF_HELPER_3(kslra8, tl, env, tl, tl)
+> +DEF_HELPER_3(kslra8_u, tl, env, tl, tl)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 6f053bfeb7..cc782fcde5 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -24,6 +24,7 @@
 >
->> ---
->>  target/riscv/helper.h                   |  9 +++
->>  target/riscv/insn32.decode              | 11 ++++
->>  target/riscv/insn_trans/trans_rvp.c.inc | 79 +++++++++++++++++++++++++
->>  target/riscv/packed_helper.c            | 73 +++++++++++++++++++++++
->>  4 files changed, 172 insertions(+)
->>
->> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
->> index 6d622c732a..a69a6b4e84 100644
->> --- a/target/riscv/helper.h
->> +++ b/target/riscv/helper.h
->> @@ -1175,3 +1175,12 @@ DEF_HELPER_3(rstsa16, tl, env, tl, tl)
->>  DEF_HELPER_3(urstsa16, tl, env, tl, tl)
->>  DEF_HELPER_3(kstsa16, tl, env, tl, tl)
->>  DEF_HELPER_3(ukstsa16, tl, env, tl, tl)
->> +
->> +DEF_HELPER_3(radd8, tl, env, tl, tl)
->> +DEF_HELPER_3(uradd8, tl, env, tl, tl)
->> +DEF_HELPER_3(kadd8, tl, env, tl, tl)
->> +DEF_HELPER_3(ukadd8, tl, env, tl, tl)
->> +DEF_HELPER_3(rsub8, tl, env, tl, tl)
->> +DEF_HELPER_3(ursub8, tl, env, tl, tl)
->> +DEF_HELPER_3(ksub8, tl, env, tl, tl)
->> +DEF_HELPER_3(uksub8, tl, env, tl, tl)
->> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
->> index 8815e90476..358dd1fa10 100644
->> --- a/target/riscv/insn32.decode
->> +++ b/target/riscv/insn32.decode
->> @@ -624,3 +624,14 @@ rstsa16    1011011  ..... ..... 010 ..... 1111111 @r
->>  urstsa16   1101011  ..... ..... 010 ..... 1111111 @r
->>  kstsa16    1100011  ..... ..... 010 ..... 1111111 @r
->>  ukstsa16   1110011  ..... ..... 010 ..... 1111111 @r
->> +
->> +add8       0100100  ..... ..... 000 ..... 1111111 @r
->> +radd8      0000100  ..... ..... 000 ..... 1111111 @r
->> +uradd8     0010100  ..... ..... 000 ..... 1111111 @r
->> +kadd8      0001100  ..... ..... 000 ..... 1111111 @r
->> +ukadd8     0011100  ..... ..... 000 ..... 1111111 @r
->> +sub8       0100101  ..... ..... 000 ..... 1111111 @r
->> +rsub8      0000101  ..... ..... 000 ..... 1111111 @r
->> +ursub8     0010101  ..... ..... 000 ..... 1111111 @r
->> +ksub8      0001101  ..... ..... 000 ..... 1111111 @r
->> +uksub8     0011101  ..... ..... 000 ..... 1111111 @r
->> diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
->> index 0885a4fd45..109f560ec9 100644
->> --- a/target/riscv/insn_trans/trans_rvp.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvp.c.inc
->> @@ -159,3 +159,82 @@ GEN_RVP_R_OOL(rstsa16);
->>  GEN_RVP_R_OOL(urstsa16);
->>  GEN_RVP_R_OOL(kstsa16);
->>  GEN_RVP_R_OOL(ukstsa16);
->> +
->> +/* 8-bit Addition & Subtraction Instructions */
->> +/*
->> + *  Copied from tcg-op-gvec.c.
->> + *
->> + *  Perform a vector addition using normal addition and a mask.  The mask
->> + *  should be the sign bit of each lane.  This 6-operation form is more
->> + *  efficient than separate additions when there are 4 or more lanes in
->> + *  the 64-bit operation.
->> + */
->> +
->> +static void gen_simd_add_mask(TCGv d, TCGv a, TCGv b, TCGv m)
->> +{
->> +    TCGv t1 = tcg_temp_new();
->> +    TCGv t2 = tcg_temp_new();
->> +    TCGv t3 = tcg_temp_new();
->> +
->> +    tcg_gen_andc_tl(t1, a, m);
->> +    tcg_gen_andc_tl(t2, b, m);
->> +    tcg_gen_xor_tl(t3, a, b);
->> +    tcg_gen_add_tl(d, t1, t2);
->> +    tcg_gen_and_tl(t3, t3, m);
->> +    tcg_gen_xor_tl(d, d, t3);
->> +
->> +    tcg_temp_free(t1);
->> +    tcg_temp_free(t2);
->> +    tcg_temp_free(t3);
->> +}
->> +
->> +static void tcg_gen_simd_add8(TCGv d, TCGv a, TCGv b)
->> +{
->> +    TCGv m = tcg_const_tl((target_ulong)dup_const(MO_8, 0x80));
->> +    gen_simd_add_mask(d, a, b, m);
->> +    tcg_temp_free(m);
->> +}
->> +
->> +GEN_RVP_R_INLINE(add8, add, 0, trans_add);
->> +
->> +/*
->> + *  Copied from tcg-op-gvec.c.
->> + *
->> + *  Perform a vector subtraction using normal subtraction and a mask.
->> + *  Compare gen_addv_mask above.
->> + */
->> +static void gen_simd_sub_mask(TCGv d, TCGv a, TCGv b, TCGv m)
->> +{
->> +    TCGv t1 = tcg_temp_new();
->> +    TCGv t2 = tcg_temp_new();
->> +    TCGv t3 = tcg_temp_new();
->> +
->> +    tcg_gen_or_tl(t1, a, m);
->> +    tcg_gen_andc_tl(t2, b, m);
->> +    tcg_gen_eqv_tl(t3, a, b);
->> +    tcg_gen_sub_tl(d, t1, t2);
->> +    tcg_gen_and_tl(t3, t3, m);
->> +    tcg_gen_xor_tl(d, d, t3);
->> +
->> +    tcg_temp_free(t1);
->> +    tcg_temp_free(t2);
->> +    tcg_temp_free(t3);
->> +}
->> +
->> +static void tcg_gen_simd_sub8(TCGv d, TCGv a, TCGv b)
->> +{
->> +    TCGv m = tcg_const_tl((target_ulong)dup_const(MO_8, 0x80));
->> +    gen_simd_sub_mask(d, a, b, m);
->> +    tcg_temp_free(m);
->> +}
->> +
->> +GEN_RVP_R_INLINE(sub8, sub, 0, trans_sub);
->> +
->> +GEN_RVP_R_OOL(radd8);
->> +GEN_RVP_R_OOL(uradd8);
->> +GEN_RVP_R_OOL(kadd8);
->> +GEN_RVP_R_OOL(ukadd8);
->> +GEN_RVP_R_OOL(rsub8);
->> +GEN_RVP_R_OOL(ursub8);
->> +GEN_RVP_R_OOL(ksub8);
->> +GEN_RVP_R_OOL(uksub8);
->> diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
->> index b84abaaf25..62db072204 100644
->> --- a/target/riscv/packed_helper.c
->> +++ b/target/riscv/packed_helper.c
->> @@ -352,3 +352,76 @@ static inline void do_ukstsa16(CPURISCVState *env, void *vd, void *va,
->>  }
->>
->>  RVPR(ukstsa16, 2, 2);
->> +
->> +/* 8-bit Addition & Subtraction Instructions */
->> +static inline void do_radd8(CPURISCVState *env, void *vd, void *va,
->> +                            void *vb, uint8_t i)
->> +{
->> +    int8_t *d = vd, *a = va, *b = vb;
->> +    d[i] = hadd32(a[i], b[i]);
->> +}
->> +
->> +RVPR(radd8, 1, 1);
->> +
->> +static inline void do_uradd8(CPURISCVState *env, void *vd, void *va,
->> +                                  void *vb, uint8_t i)
->> +{
->> +    uint8_t *d = vd, *a = va, *b = vb;
->> +    d[i] = haddu32(a[i], b[i]);
->> +}
->> +
->> +RVPR(uradd8, 1, 1);
->> +
->> +static inline void do_kadd8(CPURISCVState *env, void *vd, void *va,
->> +                            void *vb, uint8_t i)
->> +{
->> +    int8_t *d = vd, *a = va, *b = vb;
->> +    d[i] = sadd8(env, 0, a[i], b[i]);
->> +}
->> +
->> +RVPR(kadd8, 1, 1);
->> +
->> +static inline void do_ukadd8(CPURISCVState *env, void *vd, void *va,
->> +                             void *vb, uint8_t i)
->> +{
->> +    uint8_t *d = vd, *a = va, *b = vb;
->> +    d[i] = saddu8(env, 0, a[i], b[i]);
->> +}
->> +
->> +RVPR(ukadd8, 1, 1);
->> +
->> +static inline void do_rsub8(CPURISCVState *env, void *vd, void *va,
->> +                            void *vb, uint8_t i)
->> +{
->> +    int8_t *d = vd, *a = va, *b = vb;
->> +    d[i] = hsub32(a[i], b[i]);
->> +}
->> +
->> +RVPR(rsub8, 1, 1);
->> +
->> +static inline void do_ursub8(CPURISCVState *env, void *vd, void *va,
->> +                             void *vb, uint8_t i)
->> +{
->> +    uint8_t *d = vd, *a = va, *b = vb;
->> +    d[i] = hsubu64(a[i], b[i]);
->> +}
->> +
->> +RVPR(ursub8, 1, 1);
->> +
->> +static inline void do_ksub8(CPURISCVState *env, void *vd, void *va,
->> +                            void *vb, uint8_t i)
->> +{
->> +    int8_t *d = vd, *a = va, *b = vb;
->> +    d[i] = ssub8(env, 0, a[i], b[i]);
->> +}
->> +
->> +RVPR(ksub8, 1, 1);
->> +
->> +static inline void do_uksub8(CPURISCVState *env, void *vd, void *va,
->> +                             void *vb, uint8_t i)
->> +{
->> +    uint8_t *d = vd, *a = va, *b = vb;
->> +    d[i] = ssubu8(env, 0, a[i], b[i]);
->> +}
->> +
->> +RVPR(uksub8, 1, 1);
->> --
->> 2.17.1
->>
-
-The naming on some of these helpers is a bit odd, but given that they're 
-a mix of the V and P extensions it's probably fine to just leave them 
-as-is.  
+>  %sh10    20:10
+>  %sh4    20:4
+> +%sh3    20:3
+>  %csr    20:12
+>  %rm     12:3
+>  %nf     29:3                     !function=ex_plus_1
+> @@ -61,6 +62,7 @@
+>
+>  @sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh10      %rs1 %rd
+>  @sh4     ......  ...... .....  ... ..... ....... &shift  shamt=%sh4      %rs1 %rd
+> +@sh3     ......  ...... .....  ... ..... ....... &shift  shamt=%sh3      %rs1 %rd
+>  @csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
+>
+>  @atom_ld ..... aq:1 rl:1 ..... ........ ..... ....... &atomic rs2=0     %rs1 %rd
+> @@ -652,3 +654,18 @@ ksll16     0110010  ..... ..... 000 ..... 1111111 @r
+>  kslli16    0111010  1.... ..... 000 ..... 1111111 @sh4
+>  kslra16    0101011  ..... ..... 000 ..... 1111111 @r
+>  kslra16_u  0110011  ..... ..... 000 ..... 1111111 @r
+> +
+> +sra8       0101100  ..... ..... 000 ..... 1111111 @r
+> +sra8_u     0110100  ..... ..... 000 ..... 1111111 @r
+> +srai8      0111100  00... ..... 000 ..... 1111111 @sh3
+> +srai8_u    0111100  01... ..... 000 ..... 1111111 @sh3
+> +srl8       0101101  ..... ..... 000 ..... 1111111 @r
+> +srl8_u     0110101  ..... ..... 000 ..... 1111111 @r
+> +srli8      0111101  00... ..... 000 ..... 1111111 @sh3
+> +srli8_u    0111101  01... ..... 000 ..... 1111111 @sh3
+> +sll8       0101110  ..... ..... 000 ..... 1111111 @r
+> +slli8      0111110  00... ..... 000 ..... 1111111 @sh3
+> +ksll8      0110110  ..... ..... 000 ..... 1111111 @r
+> +kslli8     0111110  01... ..... 000 ..... 1111111 @sh3
+> +kslra8     0101111  ..... ..... 000 ..... 1111111 @r
+> +kslra8_u   0110111  ..... ..... 000 ..... 1111111 @r
+> diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
+> index 848edab7e5..12a64849eb 100644
+> --- a/target/riscv/insn_trans/trans_rvp.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvp.c.inc
+> @@ -353,3 +353,19 @@ GEN_RVP_SHIFTI(slli16, sll16, tcg_gen_vec_shl16i_i64);
+>  GEN_RVP_SHIFTI(srai16_u, sra16_u, NULL);
+>  GEN_RVP_SHIFTI(srli16_u, srl16_u, NULL);
+>  GEN_RVP_SHIFTI(kslli16, ksll16, NULL);
+> +
+> +/* SIMD 8-bit Shift Instructions */
+> +GEN_RVP_SHIFT(sra8, tcg_gen_gvec_sars, 0);
+> +GEN_RVP_SHIFT(srl8, tcg_gen_gvec_shrs, 0);
+> +GEN_RVP_SHIFT(sll8, tcg_gen_gvec_shls, 0);
+> +GEN_RVP_R_OOL(sra8_u);
+> +GEN_RVP_R_OOL(srl8_u);
+> +GEN_RVP_R_OOL(ksll8);
+> +GEN_RVP_R_OOL(kslra8);
+> +GEN_RVP_R_OOL(kslra8_u);
+> +GEN_RVP_SHIFTI(srai8, sra8, tcg_gen_vec_sar8i_i64);
+> +GEN_RVP_SHIFTI(srli8, srl8, tcg_gen_vec_shr8i_i64);
+> +GEN_RVP_SHIFTI(slli8, sll8, tcg_gen_vec_shl8i_i64);
+> +GEN_RVP_SHIFTI(srai8_u, sra8_u, NULL);
+> +GEN_RVP_SHIFTI(srli8_u, srl8_u, NULL);
+> +GEN_RVP_SHIFTI(kslli8, ksll8, NULL);
+> diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
+> index 7e31c2fe46..ab9ebc472b 100644
+> --- a/target/riscv/packed_helper.c
+> +++ b/target/riscv/packed_helper.c
+> @@ -529,3 +529,105 @@ static inline void do_kslra16_u(CPURISCVState *env, void *vd, void *va,
+>  }
+>
+>  RVPR(kslra16_u, 1, 2);
+> +
+> +/* SIMD 8-bit Shift Instructions */
+> +static inline void do_sra8(CPURISCVState *env, void *vd, void *va,
+> +                           void *vb, uint8_t i)
+> +{
+> +    int8_t *d = vd, *a = va;
+> +    uint8_t shift = *(uint8_t *)vb & 0x7;
+> +    d[i] = a[i] >> shift;
+> +}
+> +
+> +RVPR(sra8, 1, 1);
+> +
+> +static inline void do_srl8(CPURISCVState *env, void *vd, void *va,
+> +                           void *vb, uint8_t i)
+> +{
+> +    uint8_t *d = vd, *a = va;
+> +    uint8_t shift = *(uint8_t *)vb & 0x7;
+> +    d[i] = a[i] >> shift;
+> +}
+> +
+> +RVPR(srl8, 1, 1);
+> +
+> +static inline void do_sll8(CPURISCVState *env, void *vd, void *va,
+> +                           void *vb, uint8_t i)
+> +{
+> +    uint8_t *d = vd, *a = va;
+> +    uint8_t shift = *(uint8_t *)vb & 0x7;
+> +    d[i] = a[i] << shift;
+> +}
+> +
+> +RVPR(sll8, 1, 1);
+> +
+> +static inline void do_sra8_u(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    int8_t *d = vd, *a = va;
+> +    uint8_t shift = *(uint8_t *)vb & 0x7;
+> +    d[i] =  vssra8(env, 0, a[i], shift);
+> +}
+> +
+> +RVPR(sra8_u, 1, 1);
+> +
+> +static inline void do_srl8_u(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    uint8_t *d = vd, *a = va;
+> +    uint8_t shift = *(uint8_t *)vb & 0x7;
+> +    d[i] =  vssrl8(env, 0, a[i], shift);
+> +}
+> +
+> +RVPR(srl8_u, 1, 1);
+> +
+> +static inline void do_ksll8(CPURISCVState *env, void *vd, void *va,
+> +                            void *vb, uint8_t i)
+> +{
+> +    int8_t *d = vd, *a = va, result;
+> +    uint8_t shift = *(uint8_t *)vb & 0x7;
+> +
+> +    result = a[i] << shift;
+> +    if (shift > (clrsb32(a[i]) - 24)) {
+> +        env->vxsat = 0x1;
+> +        d[i] = (a[i] & INT8_MIN) ? INT8_MIN : INT8_MAX;
+> +    } else {
+> +        d[i] = result;
+> +    }
+> +}
+> +
+> +RVPR(ksll8, 1, 1);
+> +
+> +static inline void do_kslra8(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    int8_t *d = vd, *a = va;
+> +    int32_t shift = sextract32((*(uint32_t *)vb), 0, 4);
+> +
+> +    if (shift >= 0) {
+> +        do_ksll8(env, vd, va, vb, i);
+> +    } else {
+> +        shift = -shift;
+> +        shift = (shift == 8) ? 7 : shift;
+> +        d[i] = a[i] >> shift;
+> +    }
+> +}
+> +
+> +RVPR(kslra8, 1, 1);
+> +
+> +static inline void do_kslra8_u(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    int8_t *d = vd, *a = va;
+> +    int32_t shift = sextract32((*(uint32_t *)vb), 0, 4);
+> +
+> +    if (shift >= 0) {
+> +        do_ksll8(env, vd, va, vb, i);
+> +    } else {
+> +        shift = -shift;
+> +        shift = (shift == 8) ? 7 : shift;
+> +        d[i] =  vssra8(env, 0, a[i], shift);
+> +    }
+> +}
+> +
+> +RVPR(kslra8_u, 1, 1);
 
 Reviewed-by: Palmer Dabbelt <palmerdabbelt@google.com>
 
