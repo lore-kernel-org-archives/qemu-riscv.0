@@ -1,62 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1llbCt-0003YQ-Rm
-	for mharc-qemu-riscv@gnu.org; Tue, 25 May 2021 13:51:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43576)
+	id 1llezp-0003Dx-Dp
+	for mharc-qemu-riscv@gnu.org; Tue, 25 May 2021 17:53:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40894)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1llbCs-0003Xu-Cm; Tue, 25 May 2021 13:51:06 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630]:33559)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1llezn-0003CW-BT; Tue, 25 May 2021 17:53:51 -0400
+Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:42938)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1llbCq-0000Wv-MT; Tue, 25 May 2021 13:51:06 -0400
-Received: by mail-ej1-x630.google.com with SMTP id z12so47224423ejw.0;
- Tue, 25 May 2021 10:51:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1llezl-0007Ge-NU; Tue, 25 May 2021 17:53:51 -0400
+Received: by mail-io1-xd2f.google.com with SMTP id k22so8746491ioa.9;
+ Tue, 25 May 2021 14:53:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=zCazhjUIYJgDWeojUAbeJa77nLmeLlOGmhCRhW2QppE=;
- b=lKLshnfWw+UDyHEvnpc7cusMP4AJHs64EneerrYeowMDyi9jL+7TPb6r40cISfko4K
- Jb3CH1q6WzgJh0KlBNj7pIDERLynH/upE0yl0I8fIOOgor3Ve7hn1tiiPtISmCt5r1la
- Fr+FWM1QX/yqzmWGu3iHWxNVGwCeJTzj3bBpyrWOIqYTNb6FsDLnixKWrkLLkvy8nJAA
- 2Xq1eh+mBWkbc+DeUtdFEoHH6uSlrIKwxPMGY+f+gcJwwgc3T8yNAWAFsK2zYdrzVH6I
- Hmj+bR07x7t+adN4p4hjWRuawgJrj2/TQDrcFGFD+/sLGeobZ6ddpsxf2hd73eYLKO6y
- ocxQ==
+ :cc; bh=oq3bYuIEb8HHq4uUjPz9CrgHORFAIsfvTxvFsKxgcBU=;
+ b=cV0lOLIluchnYcF/kxP8oMLbYtssEN6ghmDppcti3P3d6CJffLcyKfZtDgzDa5EAZ+
+ UKsH/M+0ox+V4IF4D3cKet0hN5rT3JRUUj7m3zeXcsEt057qid5HrbLsrdNt6QspfWqG
+ 3AsHQBcB1uqt5CCWD14nH/tNCHQt6eWuIe4SwSQLNxTMZtut0Q/HshK6tT0sO9fRFn2I
+ qf/AkBJocYiGYQDZjX00K7ViZWrdYmpdLjco+BQCGljkseBoYN2GQp3hAMd/EpdKwvRf
+ go7Y2cH2Gsuvd0i0agVIyWpjm3XE/62ztHpODVnQeUI4uizynzvgZ3lGF+RC5ydLAmVI
+ 485A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=zCazhjUIYJgDWeojUAbeJa77nLmeLlOGmhCRhW2QppE=;
- b=DM0q6YKShKAN6F3VMMEnO1GvF9gmNZVS8e4+VUbKVx9MDCnB+JI918/PVSprVH4u18
- CTyvViKeKU0B+rv8TbiA9/GUDwsgm5fuhw0YdhuUgw5xhdzWRjz4SJUeq68I1/Eileng
- q44YnMpVsiGp2GaimtQ1JsxVYtuVO0NRgiJlQ0bzJZDwq1rDYz0lQ8Dub2c8f8wiRfyz
- UfJfV9AHTW9yeN/dDQcKWD0QU2C/3tQsw26A6QndbVyHXHEmMz4/lsdfxpZTLE5XevkB
- OPZ4j54s5eYcrBhowiwHuICVxHrdi1lDHtXgdC6hNeTYNG+4DNWop0SAbYU7od7siqUW
- aJGg==
-X-Gm-Message-State: AOAM531tDxBVv4VmHM6icSWaqPLLe0K8bgGqRdFqwUQpN0KUSSMv1vI+
- YIJ3a6A6X2fo6sS85Hml5BdhbJbbpzrlZurW/Xs=
-X-Google-Smtp-Source: ABdhPJxN8PSU3n8OzEv/bGjjQJ2DE3whKb1C4jraYFMXtOR2w9LdpHobB7D8YyZJYM+/MjHb3uxSalWTsvMUM8H/4fg=
-X-Received: by 2002:a17:906:6dd0:: with SMTP id
- j16mr9280673ejt.208.1621965061486; 
- Tue, 25 May 2021 10:51:01 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=oq3bYuIEb8HHq4uUjPz9CrgHORFAIsfvTxvFsKxgcBU=;
+ b=Ifr0jh2CIc09xwX8++kf4ePFcHGc1XtFPyH6FzdIMzfIEwoYwOTV//V27jv0KwheXG
+ VYTtXPrtgn5U3EhMECV7+GB6TLyOvjU3y2ijgY3oMeIvx5kC9s+3mcFZ/HHHcZ7atcKm
+ Ez/dXIaC2jJ8cVqfS6VFXE0K9iAYe5Epv7i61p63CW97e9PpLh7H/n7cy6jBIqXfxegA
+ 6OxDmS88Ans3k8tVPWETEmH23oHIixOqIfIxS9SWkTzyfCBm7Wb4k4wfcO/LLn4L75tz
+ nV8Hp8q0qv4Qvr7/iWuDRKB1RbyAUvVooQXmylMrQp7H2v3kFv8LKYAQCz+ikz7UdAQV
+ zYtQ==
+X-Gm-Message-State: AOAM530O2jYBWmm9YCQm9VOJEpGyjKO3T8nSeIcK/Son8C6BpB+tLz/9
+ xdri6i5cWGSQ2xA5HH2ZZMW7vBdc476CzLRfOw4=
+X-Google-Smtp-Source: ABdhPJxDGFBS2TlWw3wLAnMBSMCgSwiR+zILen9S3dyzEvHyJ2xM+rGeOdiDASnIJ/bwfopEzrdwApwqlVB+IcziJt0=
+X-Received: by 2002:a6b:c913:: with SMTP id z19mr23520289iof.42.1621979628356; 
+ Tue, 25 May 2021 14:53:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210522155902.374439-1-josemartins90@gmail.com>
- <434d8825-8bd6-5344-aea2-e176fad6183e@c-sky.com>
-In-Reply-To: <434d8825-8bd6-5344-aea2-e176fad6183e@c-sky.com>
-From: Jose Martins <josemartins90@gmail.com>
-Date: Tue, 25 May 2021 18:50:50 +0100
-Message-ID: <CAC41xo2v7kU92+MkZfB7f_86X58k8R5Ft=2vSO3OORT2OJ-Exw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: hardwire bits in hideleg and hedeleg
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+References: <ec5f225928eec448278c82fcb1f6805ee61dde82.1621550996.git.alistair.francis@wdc.com>
+In-Reply-To: <ec5f225928eec448278c82fcb1f6805ee61dde82.1621550996.git.alistair.francis@wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 26 May 2021 07:53:22 +1000
+Message-ID: <CAKmqyKPes0r49Fm-fR8kbhB-PvDuC_skForij2i2E4_kK3ZBBA@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] target/riscv/pmp: Add assert for ePMP operations
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=josemartins90@gmail.com; helo=mail-ej1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,50 +70,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 May 2021 17:51:06 -0000
+X-List-Received-Date: Tue, 25 May 2021 21:53:51 -0000
 
-> We can use it directly if only one macro VS_MODE_INTERRUPTS.
-
-I wrote it like this to be more coherent with what was already there
-which also makes it more readable. Furthermore, the compiler will just
-probably optimize the variable away, right?
-
-> I didn't find that the RISCV_EXCP_VS_ECALL should be read-only 0 from the=
- specification.
-
-You are right. I had doubts about this also. The table that defines it
-in the spec is missing this bit. I raised an issue on the spec repo
-(https://github.com/riscv/riscv-isa-manual/issues/649). But in my
-opinion, it wouldn't really make sense to allow this exception to be
-delegated. What do you think? Is there any use case for this to be
-allowed? Maybe we'll need a clarification from the spec to reach a
-final decision.
-
-> However, as hedeleg is WARL, you had better reserve the other fields like=
- medeleg:
+On Fri, May 21, 2021 at 8:56 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
 >
-> env->medeleg =3D (env->medeleg & ~delegable_excps) | (val & delegable_exc=
-ps);
+> Although we construct epmp_operation in such a way that it can only be
+> between 0 and 15 Coverity complains that we don't handle the other
+> possible cases. To fix Coverity and make it easier for humans to read
+> add a default case to the switch statement that calls
+> g_assert_not_reached().
+>
+> Fixes: CID 1453108
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 
-Isn't the patch's implementation of hedeleg/hideleg providing a WARL
-behavior already? I don't think we need this preservation behavior
-since in the case of hideleg/hedeleg there can only be 0-wired bits. I
-believe this won't change. For hedeleg the spec states that  "Each bit
-of hedeleg shall be either writable or hardwired to zero". For
-hideleg: "Among bits 15:0 of hideleg, only bits 10, 6, and 2
-(corresponding to the standard VS-level interrupts) shall be writable,
-and the others shall be hardwired to zero."
+Thanks!
 
-> I really don't understand why medeleg codes this way. Is there anyone can=
- give a better explanation?
+Applied to riscv-to-apply.next
 
-I don't know if I fully understood your question, but I don't get why
-you would need to preserve non-delegable bits in medeleg in this way,
-even to keep WARL behavior. Again, the specification only allows
-medeleg bits to be hardwired to zero: "An implementation shall not
-hardwire any bits of medeleg to one, i.e., any synchronous trap that
-can be delegated must support not being delegated.", so a bitwise-and
-should suffice.
+Alistair
 
-Jos=C3=A9
+> ---
+>  target/riscv/pmp.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 78203291de..82ed020b10 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -402,6 +402,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>                      case 15:
+>                          *allowed_privs = PMP_READ;
+>                          break;
+> +                    default:
+> +                        g_assert_not_reached();
+>                      }
+>                  } else {
+>                      switch (epmp_operation) {
+> @@ -433,6 +435,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>                      case 7:
+>                          *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
+>                          break;
+> +                    default:
+> +                        g_assert_not_reached();
+>                      }
+>                  }
+>              }
+> --
+> 2.31.1
+>
 
