@@ -1,50 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1llROX-000401-R3
-	for mharc-qemu-riscv@gnu.org; Tue, 25 May 2021 03:22:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37760)
+	id 1llXnf-0005fk-U5
+	for mharc-qemu-riscv@gnu.org; Tue, 25 May 2021 10:12:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44678)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1llROV-0003zZ-Pr; Tue, 25 May 2021 03:22:27 -0400
-Received: from out28-170.mail.aliyun.com ([115.124.28.170]:40214)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1llROR-0000Ll-Pi; Tue, 25 May 2021 03:22:27 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07176567|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.0126492-8.3722e-05-0.987267;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047188; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KIP.QLB_1621927328; 
-Received: from 172.27.117.59(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KIP.QLB_1621927328)
- by smtp.aliyun-inc.com(10.147.42.253);
- Tue, 25 May 2021 15:22:09 +0800
-Subject: Re: [PATCH] target/riscv: hardwire bits in hideleg and hedeleg
-To: Jose Martins <josemartins90@gmail.com>, qemu-devel@nongnu.org
-Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20210522155902.374439-1-josemartins90@gmail.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <434d8825-8bd6-5344-aea2-e176fad6183e@c-sky.com>
-Date: Tue, 25 May 2021 15:22:07 +0800
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1llXnd-0005b9-89; Tue, 25 May 2021 10:12:49 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336]:33443)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1llXna-0006Ss-Kz; Tue, 25 May 2021 10:12:48 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ z137-20020a1c7e8f0000b02901774f2a7dc4so1745842wmc.0; 
+ Tue, 25 May 2021 07:12:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=iwB49LVCIjXSnzvqMm0GWsschCGQ4n6LHKQlhxMMr6M=;
+ b=c3p4m7+vkuKfwCkMHcCrx/dQ4evMS36z6tWU/TnNKEjDgSX2G8hAxfK3y5E0wo9NH/
+ 7Ctjn0zkKMe+UKrMT/WF+hgg1/f9yfAD1nSoDUf6vOqlQhchFiIsb8FnFpBomlBuoNyg
+ olZSbngeEIIxmToVRfJ3pb5qwdKqJBYX6KN1JuLIhad3NTwtannQRTx+GJOmFsGTwAwq
+ ANknc0srYv8e8ehei3jG0ETGrysDwrrJlImvELi2wKtu5Gh9QVU0wBpMqpEsC1IQPwL7
+ ZDJd8at1mS4qj+0VXWtCnG/LZd0eCLX7CUBDJSrVwmmg58zI6IcyqrLhimbrdMNfRSbm
+ 5LqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=iwB49LVCIjXSnzvqMm0GWsschCGQ4n6LHKQlhxMMr6M=;
+ b=bQ4hu4xwB093kxocODvxAnOTGk+8GtR4i7Fj/bd31kr4h82RX9lastiNqHCR/j6bmZ
+ KWcz9cvgGL83jKX8LIHZ1ES/MBqPE4jvj0euDac3jsUtbszM8F8ixBDRMFlTW8d9Nyj0
+ g0wOM8JF118zKgjxmpSVt2dIQOj/EgeQLhBUt/p8tUP1YCMCVRJyodRlnx8aC1OyxguJ
+ XzOy0j6Nx6BkvDr2+WrS8Yl+aQcS7HW+rtKpsNyWyKxGkICEdXBeyIBJY7knGpP5rTiW
+ SrQc5yd4YAEWAqex6BcR1ZT+Fh6Vb7IZKRrB4eegkxZxL+ljwCpubCVsypu8w3MJFABw
+ ybxw==
+X-Gm-Message-State: AOAM530T1lMGQ7IdBMZ85CY7quYpM+sGD1yb5vzX6IsTP0G42hGYXjZC
+ 9uhSiZ+VSZ2sKsUDP6A07PA=
+X-Google-Smtp-Source: ABdhPJw9r8CP3XwHEY7CU72JdMsBVUKlUD99KLUgGGUQkveG0uQ5xJt5EAM/KE1YZKX7uesNtKxRhg==
+X-Received: by 2002:a1c:b306:: with SMTP id c6mr4062347wmf.37.1621951963940;
+ Tue, 25 May 2021 07:12:43 -0700 (PDT)
+Received: from [192.168.1.36] (31.red-83-51-215.dynamicip.rima-tde.net.
+ [83.51.215.31])
+ by smtp.gmail.com with ESMTPSA id g10sm16542900wrq.12.2021.05.25.07.12.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 May 2021 07:12:42 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH v7 00/23] cpu: Introduce SysemuCPUOps structure
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ Laurent Vivier <laurent@vivier.eu>, qemu-s390x@nongnu.org,
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>
+References: <20210517105140.1062037-1-f4bug@amsat.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <4810c3c9-57c5-3355-9de7-5f45a0944ed6@amsat.org>
+Date: Tue, 25 May 2021 16:12:41 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ Thunderbird/78.10.1
 MIME-Version: 1.0
-In-Reply-To: <20210522155902.374439-1-josemartins90@gmail.com>
-Content-Type: multipart/alternative;
- boundary="------------3A719C23A2C0B1D4B11E73BA"
+In-Reply-To: <20210517105140.1062037-1-f4bug@amsat.org>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.170; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-170.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x336.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001,
- RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -57,193 +84,179 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 May 2021 07:22:28 -0000
+X-List-Received-Date: Tue, 25 May 2021 14:12:49 -0000
 
-This is a multi-part message in MIME format.
---------------3A719C23A2C0B1D4B11E73BA
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+On 5/17/21 12:51 PM, Philippe Mathieu-Daudé wrote:
+> Missing review: 2-5 (new) and 13
 
+Ping for review? :)
 
-On 5/22/21 11:59 PM, Jose Martins wrote:
-> The specification mandates for certain bits to be hardwired in the
-> hypervisor delegation registers. This was not being enforced.
->
-> Signed-off-by: Jose Martins <josemartins90@gmail.com>
-> ---
->   target/riscv/csr.c | 13 +++++++++++--
->   1 file changed, 11 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d2585395bf..9b74a00cc9 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -394,6 +394,7 @@ static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
->   
->   static const target_ulong delegable_ints = S_MODE_INTERRUPTS |
->                                              VS_MODE_INTERRUPTS;
-> +static const target_ulong vs_delegable_ints = VS_MODE_INTERRUPTS;
-We can use it directly if only one macro VS_MODE_INTERRUPTS.
->   static const target_ulong all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
->                                        VS_MODE_INTERRUPTS;
->   static const target_ulong delegable_excps =
-> @@ -416,6 +417,14 @@ static const target_ulong delegable_excps =
->       (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
->       (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
->       (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT));
-> +static const target_ulong vs_delegable_excps = delegable_excps &
-> +    ~((1ULL << (RISCV_EXCP_S_ECALL)) |
-> +    (1ULL << (RISCV_EXCP_VS_ECALL)) |
-I didn't find that the RISCV_EXCP_VS_ECALL should be read-only 0 from 
-the specification.
-> +    (1ULL << (RISCV_EXCP_M_ECALL)) |
-> +    (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) |
-> +    (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
-> +    (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
-> +    (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT)));
->   static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
->       SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
->       SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD;
-> @@ -963,7 +972,7 @@ static int read_hedeleg(CPURISCVState *env, int csrno, target_ulong *val)
->   
->   static int write_hedeleg(CPURISCVState *env, int csrno, target_ulong val)
->   {
-> -    env->hedeleg = val;
-> +    env->hedeleg = val & vs_delegable_excps;
-
-I think it's OK here.
-
-However, as hedeleg is WARL, you had better reserve the other fields 
-like medeleg:
-
-	env->medeleg = (env->medeleg & ~delegable_excps) | (val & delegable_excps);
-
-I really don't understand why medeleg codes this way. Is there anyone 
-can give a better explanation?
-
->       return 0;
->   }
->   
-> @@ -975,7 +984,7 @@ static int read_hideleg(CPURISCVState *env, int csrno, target_ulong *val)
->   
->   static int write_hideleg(CPURISCVState *env, int csrno, target_ulong val)
->   {
-> -    env->hideleg = val;
-> +    env->hideleg = val & vs_delegable_ints;
->       return 0;
->   }
->   
-
-The similar comments for hedeleg.
-
-Zhiwei
-
-
---------------3A719C23A2C0B1D4B11E73BA
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 5/22/21 11:59 PM, Jose Martins
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:20210522155902.374439-1-josemartins90@gmail.com">
-      <pre class="moz-quote-pre" wrap="">The specification mandates for certain bits to be hardwired in the
-hypervisor delegation registers. This was not being enforced.
-
-Signed-off-by: Jose Martins <a class="moz-txt-link-rfc2396E" href="mailto:josemartins90@gmail.com">&lt;josemartins90@gmail.com&gt;</a>
----
- target/riscv/csr.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
-
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index d2585395bf..9b74a00cc9 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -394,6 +394,7 @@ static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
- 
- static const target_ulong delegable_ints = S_MODE_INTERRUPTS |
-                                            VS_MODE_INTERRUPTS;
-+static const target_ulong vs_delegable_ints = VS_MODE_INTERRUPTS;</pre>
-    </blockquote>
-    We can use it directly if only one macro VS_MODE_INTERRUPTS.<br>
-    <blockquote type="cite"
-      cite="mid:20210522155902.374439-1-josemartins90@gmail.com">
-      <pre class="moz-quote-pre" wrap="">
- static const target_ulong all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
-                                      VS_MODE_INTERRUPTS;
- static const target_ulong delegable_excps =
-@@ -416,6 +417,14 @@ static const target_ulong delegable_excps =
-     (1ULL &lt;&lt; (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
-     (1ULL &lt;&lt; (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
-     (1ULL &lt;&lt; (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT));
-+static const target_ulong vs_delegable_excps = delegable_excps &amp;
-+    ~((1ULL &lt;&lt; (RISCV_EXCP_S_ECALL)) |
-+    (1ULL &lt;&lt; (RISCV_EXCP_VS_ECALL)) |</pre>
-    </blockquote>
-    I didn't find that the RISCV_EXCP_VS_ECALL should be read-only 0
-    from the specification.<br>
-    <blockquote type="cite"
-      cite="mid:20210522155902.374439-1-josemartins90@gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-+    (1ULL &lt;&lt; (RISCV_EXCP_M_ECALL)) |
-+    (1ULL &lt;&lt; (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) |
-+    (1ULL &lt;&lt; (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
-+    (1ULL &lt;&lt; (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
-+    (1ULL &lt;&lt; (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT)));
- static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
-     SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
-     SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD;
-@@ -963,7 +972,7 @@ static int read_hedeleg(CPURISCVState *env, int csrno, target_ulong *val)
- 
- static int write_hedeleg(CPURISCVState *env, int csrno, target_ulong val)
- {
--    env-&gt;hedeleg = val;
-+    env-&gt;hedeleg = val &amp; vs_delegable_excps;</pre>
-    </blockquote>
-    <p>I think it's OK here.<br>
-    </p>
-    <p>However, as hedeleg is WARL, you had better reserve the other
-      fields like medeleg:</p>
-    <pre>	env-&gt;medeleg = (env-&gt;medeleg &amp; ~delegable_excps) | (val &amp; delegable_excps);
-
-</pre>
-    <p>I really don't understand why medeleg codes this way. Is there
-      anyone can give a better explanation?<br>
-    </p>
-    <blockquote type="cite"
-      cite="mid:20210522155902.374439-1-josemartins90@gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-     return 0;
- }
- 
-@@ -975,7 +984,7 @@ static int read_hideleg(CPURISCVState *env, int csrno, target_ulong *val)
- 
- static int write_hideleg(CPURISCVState *env, int csrno, target_ulong val)
- {
--    env-&gt;hideleg = val;
-+    env-&gt;hideleg = val &amp; vs_delegable_ints;
-     return 0;
- }
- </pre>
-    </blockquote>
-    <p>The similar comments for hedeleg.</p>
-    <p>Zhiwei<br>
-    </p>
-    <blockquote type="cite"
-      cite="mid:20210522155902.374439-1-josemartins90@gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------3A719C23A2C0B1D4B11E73BA--
+> This series is inspired on Claudio TCG work.
+> 
+> Instead of separate TCG from other accelerators, here we
+> separate sysemu operations (system VS user).
+> 
+> Since v6:
+> - Rebased (3 targets removed, Claudio's target/i386 series merged)
+> - Addressed Richard & David comments
+> 
+> Since v5:
+> - Rework patch 10 after Peter Maydell explanation on v3:
+>   https://www.mail-archive.com/qemu-devel@nongnu.org/msg800849.html
+> 
+> Since v4:
+> - Removed watchpoint patches (need more work) (Richard)
+> - Merged patch 1 & 7 "Move CPUClass::vmsd to SysemuCPUOps" (Eduardo)
+> - Reworded cpu_virtio_is_big_endian description (Greg)
+> - Move write_elf() in target/riscv/cpu.c (rebased on top of 43a965888)
+> - Added R-b tags
+> 
+> Since v3:
+> - SysemuCPUOps const (Richard)
+> - added missing xtensa #ifdef'ry
+> - added missing aa64/sve #ifdef'ry
+> - added Laurent R-b
+> 
+> Since v2:
+> - fixed lm32/unicore32
+> - remove USER_ONLY ifdef'ry from "cpu.h" (Claudio)
+> 
+> Since v1:
+> - Name 'sysemu' (Claudio)
+> - change each field progressively (Richard)
+> 
+> $ git backport-diff
+> Key:
+> [----] : patches are identical
+> [####] : number of functional differences between upstream/downstream patch
+> [down] : patch is downstream-only
+> The flags [FC] indicate (F)unctional and (C)ontextual differences, respective=
+> ly
+> 
+> 001/23:[down] 'NOTFORMERGE target/arm: Restrict MTE code to softmmu'
+> 002/23:[down] 'cpu: Restrict target cpu_do_transaction_failed() handlers to s=
+> ysemu'
+> 003/23:[down] 'cpu: Restrict target cpu_do_unaligned_access() handlers to sys=
+> emu'
+> 004/23:[down] 'cpu: Remove duplicated 'sysemu/hw_accel.h' header'
+> 005/23:[down] 'cpu: Split as cpu-common / cpu-sysemu'
+> 006/23:[0002] [FC] 'cpu: Un-inline cpu_get_phys_page_debug and cpu_asidx_from=
+> _attrs'
+> 007/23:[0010] [FC] 'cpu: Introduce cpu_virtio_is_big_endian()'
+> 008/23:[0088] [FC] 'cpu: Directly use cpu_write_elf*() fallback handlers in p=
+> lace'
+> 009/23:[0022] [FC] 'cpu: Directly use get_paging_enabled() fallback handlers =
+> in place'
+> 010/23:[0026] [FC] 'cpu: Directly use get_memory_mapping() fallback handlers =
+> in place'
+> 011/23:[0007] [FC] 'cpu: Assert DeviceClass::vmsd is NULL on user emulation'
+> 012/23:[0004] [FC] 'cpu: Rename CPUClass vmsd -> legacy_vmsd'
+> 013/23:[down] 'cpu: Move AVR target vmsd field from CPUClass to DeviceClass'
+> 014/23:[0014] [FC] 'cpu: Introduce SysemuCPUOps structure'
+> 015/23:[0003] [FC] 'cpu: Move CPUClass::vmsd to SysemuCPUOps'
+> 016/23:[0002] [FC] 'cpu: Move CPUClass::virtio_is_big_endian to SysemuCPUOps'
+> 017/23:[----] [--] 'cpu: Move CPUClass::get_crash_info to SysemuCPUOps'
+> 018/23:[----] [-C] 'cpu: Move CPUClass::write_elf* to SysemuCPUOps'
+> 019/23:[----] [--] 'cpu: Move CPUClass::asidx_from_attrs to SysemuCPUOps'
+> 020/23:[0055] [FC] 'cpu: Move CPUClass::get_phys_page_debug to SysemuCPUOps'
+> 021/23:[----] [--] 'cpu: Move CPUClass::get_memory_mapping to SysemuCPUOps'
+> 022/23:[----] [--] 'cpu: Move CPUClass::get_paging_enabled to SysemuCPUOps'
+> 023/23:[0012] [FC] 'cpu: Restrict "hw/core/sysemu-cpu-ops.h" to target/cpu.c'
+> 
+> Regards,
+> 
+> Phil.
+> 
+> Philippe Mathieu-Daud=C3=A9 (23):
+>   NOTFORMERGE target/arm: Restrict MTE code to softmmu
+>   cpu: Restrict target cpu_do_transaction_failed() handlers to sysemu
+>   cpu: Restrict target cpu_do_unaligned_access() handlers to sysemu
+>   cpu: Remove duplicated 'sysemu/hw_accel.h' header
+>   cpu: Split as cpu-common / cpu-sysemu
+>   cpu: Un-inline cpu_get_phys_page_debug and cpu_asidx_from_attrs
+>   cpu: Introduce cpu_virtio_is_big_endian()
+>   cpu: Directly use cpu_write_elf*() fallback handlers in place
+>   cpu: Directly use get_paging_enabled() fallback handlers in place
+>   cpu: Directly use get_memory_mapping() fallback handlers in place
+>   cpu: Assert DeviceClass::vmsd is NULL on user emulation
+>   cpu: Rename CPUClass vmsd -> legacy_vmsd
+>   cpu: Move AVR target vmsd field from CPUClass to DeviceClass
+>   cpu: Introduce SysemuCPUOps structure
+>   cpu: Move CPUClass::vmsd to SysemuCPUOps
+>   cpu: Move CPUClass::virtio_is_big_endian to SysemuCPUOps
+>   cpu: Move CPUClass::get_crash_info to SysemuCPUOps
+>   cpu: Move CPUClass::write_elf* to SysemuCPUOps
+>   cpu: Move CPUClass::asidx_from_attrs to SysemuCPUOps
+>   cpu: Move CPUClass::get_phys_page_debug to SysemuCPUOps
+>   cpu: Move CPUClass::get_memory_mapping to SysemuCPUOps
+>   cpu: Move CPUClass::get_paging_enabled to SysemuCPUOps
+>   cpu: Restrict "hw/core/sysemu-cpu-ops.h" to target/cpu.c
+> 
+>  include/hw/core/cpu.h            |  92 +++++---------------
+>  include/hw/core/sysemu-cpu-ops.h |  92 ++++++++++++++++++++
+>  include/migration/vmstate.h      |   2 -
+>  target/alpha/cpu.h               |  12 ++-
+>  target/arm/cpu.h                 |   9 +-
+>  target/arm/internals.h           |   2 +
+>  target/avr/cpu.h                 |   1 +
+>  target/cris/cpu.h                |   7 +-
+>  target/hexagon/cpu.h             |   3 +
+>  target/hppa/cpu.h                |   5 +-
+>  target/i386/cpu.h                |   9 +-
+>  target/m68k/cpu.h                |  10 ++-
+>  target/microblaze/cpu.h          |  11 +--
+>  target/mips/cpu.h                |   3 +
+>  target/mips/tcg/tcg-internal.h   |   6 +-
+>  target/nios2/cpu.h               |   4 +-
+>  target/openrisc/cpu.h            |   6 +-
+>  target/ppc/cpu.h                 |   5 +-
+>  target/ppc/internal.h            |   2 +
+>  target/riscv/cpu.h               |  21 +++--
+>  target/rx/cpu.h                  |   5 ++
+>  target/s390x/cpu.h               |   3 +
+>  target/s390x/internal.h          |   2 +
+>  target/sh4/cpu.h                 |  11 ++-
+>  target/sparc/cpu.h               |  14 +--
+>  target/tricore/cpu.h             |   5 ++
+>  target/xtensa/cpu.h              |  19 ++--
+>  cpu.c                            |  18 ++--
+>  hw/core/{cpu.c =3D> cpu-common.c}  | 116 -------------------------
+>  hw/core/cpu-sysemu.c             | 145 +++++++++++++++++++++++++++++++
+>  hw/virtio/virtio.c               |   4 +-
+>  stubs/vmstate.c                  |   2 -
+>  target/alpha/cpu.c               |   8 +-
+>  target/arm/cpu.c                 |  18 ++--
+>  target/arm/tlb_helper.c          |   4 +-
+>  target/avr/cpu.c                 |   8 +-
+>  target/avr/machine.c             |   4 +-
+>  target/cris/cpu.c                |   8 +-
+>  target/hppa/cpu.c                |   8 +-
+>  target/i386/cpu.c                |  28 +++---
+>  target/m68k/cpu.c                |   8 +-
+>  target/microblaze/cpu.c          |   8 +-
+>  target/microblaze/helper.c       |  35 ++++----
+>  target/mips/cpu.c                |  10 ++-
+>  target/nios2/cpu.c               |   8 +-
+>  target/openrisc/cpu.c            |   8 +-
+>  target/ppc/excp_helper.c         |   3 +-
+>  target/riscv/cpu.c               |  14 ++-
+>  target/rx/cpu.c                  |  10 ++-
+>  target/s390x/cpu.c               |  14 ++-
+>  target/sh4/cpu.c                 |  11 ++-
+>  target/sparc/cpu.c               |  10 ++-
+>  target/sparc/ldst_helper.c       |   5 +-
+>  target/tricore/cpu.c             |   6 +-
+>  target/xtensa/cpu.c              |  10 ++-
+>  target/ppc/translate_init.c.inc  |  20 +++--
+>  hw/core/meson.build              |   3 +-
+>  target/arm/meson.build           |   6 +-
+>  58 files changed, 587 insertions(+), 334 deletions(-)
+>  create mode 100644 include/hw/core/sysemu-cpu-ops.h
+>  rename hw/core/{cpu.c =3D> cpu-common.c} (73%)
+>  create mode 100644 hw/core/cpu-sysemu.c
+> 
+> --=20
+> 2.26.3
+> 
+> 
 
