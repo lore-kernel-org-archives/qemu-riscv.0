@@ -1,80 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1llxEr-0002ey-Ow
-	for mharc-qemu-riscv@gnu.org; Wed, 26 May 2021 13:22:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47654)
+	id 1llxYV-0008V3-WD
+	for mharc-qemu-riscv@gnu.org; Wed, 26 May 2021 13:42:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51678)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1llxEo-0002Y4-Cx; Wed, 26 May 2021 13:22:34 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e]:45919)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1llxYT-0008Nk-Sj
+ for qemu-riscv@nongnu.org; Wed, 26 May 2021 13:42:53 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631]:37665)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1llxEg-0004Ne-7d; Wed, 26 May 2021 13:22:34 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- s5-20020a7bc0c50000b0290147d0c21c51so954893wmh.4; 
- Wed, 26 May 2021 10:22:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1llxYR-0006DF-Uk
+ for qemu-riscv@nongnu.org; Wed, 26 May 2021 13:42:53 -0400
+Received: by mail-pl1-x631.google.com with SMTP id u7so989165plq.4
+ for <qemu-riscv@nongnu.org>; Wed, 26 May 2021 10:42:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=g3072IN61z790QfiUDjHfQRP06QDH4SQGstDAQSUv/s=;
- b=HeQpsUaLJGlIUyg0eDufZJQXf67Y2rfsF/rVmu9Da9mAgzS0JcYXyacvJTKjP25hji
- Rd5UILbP+vmysmJ6q/VlNBF0r7P/ZAx8IFP+3TC8gPJS8GqcxHTxGO5W7uMpwn0JKTZQ
- 1kNIYxE+yac2bsN7kh/3bLSj7sESniyQtWMmwzASvF5R4t6eQ/ZfXtbCaaN7T8o6k3kR
- RCImbwOYp7/6tbM2Nz1F/qlXsLNxf3FntoLjy14x4tZQPawcq9kxSkHXP6qukewD1/du
- mMI3hI6dZtLgfLgq4IfdkzBMNq6KlNfooUEKYIJzVaKQWJBLftDHP7g/hjCJ/NvRQYVU
- kW2g==
+ bh=ebV2L6YkJ3ftQHodKPGw/tTpwzJUCoKeijb7QGEw1X4=;
+ b=bTLepR2J+2jsdeL+PTkBUG1IlYyTe2vySCyq00AAM+7e8n2RsimMevdNGTZVKbbPhi
+ tbQNty7wD+dCwx9dWslCrf8rrdeiJG70HQ2PObRXMXDajtfP1YoMaynmiX0WcJjv/uDa
+ gtW3OFjjqqke8Lc/lvPTAsvvvOj4EbJNqs+BTKYTnWI4dlN4zziuN+FgfBVyib/VN11G
+ Zurz2wJLLfWdbuvTUSLELW9E/H7Sl995sK5zLcBJFzfxfPq2oaDYBxKIMdlBulIZG8jg
+ Bj+cRuTXYV7ye5z3LN8JYdoNjZNIUyaRrhEBwwmCnKiCe396ooLVdOt466y7tRaC1qt5
+ lnkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=g3072IN61z790QfiUDjHfQRP06QDH4SQGstDAQSUv/s=;
- b=sTpUEgesYTIyKOpw1+dLXQr3wf+WgyCb4BzqzJlgaykHfUr2tFWYi4AB6Q7K/dB0QS
- evwabSm+7xWQuZUyYk2sXGAkxt5zxNvfjUUp2yVkozrR/vE70y5dIltTqYbsB4WHuf2X
- SbbXL0uqNtfTUNmMaQSSSq7thKc0ow4HryO4bfPjIEacbaKBxNhmP7mNEAfIHOe+1ZQZ
- jqJ4gOyuYVUB3MVGSXpzXzA9riIpJ0lIO+6aJq4ChdtkHNdl8bVAFq6KSPagAqW1mluz
- HYxjA4BHN4gf8U0xpTtAUHrRl6vUjCtqCyNrF70jjF+gzXBSnW3nsxmqlhT71jDed3+N
- YIeA==
-X-Gm-Message-State: AOAM5330ew4Pd+c0orJcXDd4GUEgE6GN0KP/ijET3QPEPuW94Jfb2sry
- RKaRtKECphr7XQQPXNKdDoY=
-X-Google-Smtp-Source: ABdhPJxotQfiG0+3GvxVfxNOsohcPyUpyk9DRH3pgTE3BJscucOiMqBqpL7uNSeFS14JJU1UZ201dw==
-X-Received: by 2002:a7b:cb93:: with SMTP id m19mr4462503wmi.162.1622049743313; 
- Wed, 26 May 2021 10:22:23 -0700 (PDT)
-Received: from [192.168.1.36] (64.red-88-10-103.dynamicip.rima-tde.net.
- [88.10.103.64])
- by smtp.gmail.com with ESMTPSA id x11sm20639512wrl.13.2021.05.26.10.22.22
+ bh=ebV2L6YkJ3ftQHodKPGw/tTpwzJUCoKeijb7QGEw1X4=;
+ b=jk7R0wJ5+SegLIqEDzWJPbmsZe3K3PNPmO2R7Yd64y6LBOOlYO2xW+e8KaggGr6XAH
+ CoETxebIOMinqYSpO7xYfL/c+ovssLdlkj/LsOagEGf2n1UIONeY2o9spCBx/Ub3NFZI
+ HVZZA2TxaZ2bCdqbPdw5qJplrxhFK0Br05D6ZOXTlKiiN9/K4Xl0prWrXtr6tf4f8WEm
+ J4xivNvWcIAnT8xY8ekuk5GMsf0WZT9Gtx7uIoKvaBby1uregK8EBSWYV1s9wLxthFiR
+ q7rhQmvGATVKlkKwxFna1rMSxo4qdC5w1OwUpy2L9gBtKR7KMy93iobJlP0wK8Qi4Qq1
+ XnJw==
+X-Gm-Message-State: AOAM53195UeGj9MAAs3p1rmhnqTHEbkyYabAKIygW7iWFX8e1zq5AZSp
+ /A1Rfq6TQbzGvHSo21SJWu/vaQ==
+X-Google-Smtp-Source: ABdhPJyqR6k9XMHcLjQH73HkPxJ/wnapsrknRJQ+gbuWnvhhA99ChVMwp2/bALYqsKC4Ia4sg4k51Q==
+X-Received: by 2002:a17:90a:880c:: with SMTP id
+ s12mr37600933pjn.66.1622050970143; 
+ Wed, 26 May 2021 10:42:50 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-70-228.tukw.qwest.net. [174.21.70.228])
+ by smtp.gmail.com with ESMTPSA id
+ u19sm16245675pfn.158.2021.05.26.10.42.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 May 2021 10:22:22 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v7 02/23] cpu: Restrict target cpu_do_transaction_failed()
- handlers to sysemu
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>
+ Wed, 26 May 2021 10:42:49 -0700 (PDT)
+Subject: Re: [PATCH v7 00/23] cpu: Introduce SysemuCPUOps structure
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-riscv@nongnu.org, qemu-ppc@nongnu.org
 References: <20210517105140.1062037-1-f4bug@amsat.org>
- <20210517105140.1062037-3-f4bug@amsat.org>
- <ae262a9c-1ffa-b680-4aa6-d7256fa6947a@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <5a1389f6-ced6-3b09-ba9b-749e2db2de4b@amsat.org>
-Date: Wed, 26 May 2021 19:22:21 +0200
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <4e0baa8d-b123-5e61-7bb3-c642ab25564a@linaro.org>
+Date: Wed, 26 May 2021 10:42:48 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <ae262a9c-1ffa-b680-4aa6-d7256fa6947a@linaro.org>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <20210517105140.1062037-1-f4bug@amsat.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32e.google.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.248, NICE_REPLY_A=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x631.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -87,38 +84,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2021 17:22:35 -0000
+X-List-Received-Date: Wed, 26 May 2021 17:42:54 -0000
 
-On 5/26/21 4:12 AM, Richard Henderson wrote:
-> On 5/17/21 3:51 AM, Philippe Mathieu-Daudé wrote:
->> In commit cbc183d2d9f ("cpu: move cc->transaction_failed to tcg_ops")
->> we restricted the do_transaction_failed() handler to the sysemu part
->> of TCGCPUOps, but forgot to restrict the target specific declarations.
->>
->> Signed-off-by: Philippe Mathieu-Daudé<f4bug@amsat.org>
->> ---
->>   target/arm/internals.h |  2 ++
->>   target/m68k/cpu.h      |  2 ++
->>   target/riscv/cpu.h     | 10 +++++-----
->>   target/xtensa/cpu.h    |  8 ++++----
->>   4 files changed, 13 insertions(+), 9 deletions(-)
-> 
-> What do the extra ifdefs buy us? Surely the fact that the symbol is not
-> present in the user-only, and would produce link errors if used, is
-> sufficient?
+On 5/17/21 3:51 AM, Philippe Mathieu-Daudé wrote:
+>    cpu: Remove duplicated 'sysemu/hw_accel.h' header
+>    cpu: Split as cpu-common / cpu-sysemu
+>    cpu: Un-inline cpu_get_phys_page_debug and cpu_asidx_from_attrs
+>    cpu: Introduce cpu_virtio_is_big_endian()
+>    cpu: Directly use cpu_write_elf*() fallback handlers in place
+>    cpu: Directly use get_paging_enabled() fallback handlers in place
+>    cpu: Directly use get_memory_mapping() fallback handlers in place
+>    cpu: Assert DeviceClass::vmsd is NULL on user emulation
+>    cpu: Rename CPUClass vmsd -> legacy_vmsd
+>    cpu: Move AVR target vmsd field from CPUClass to DeviceClass
+>    cpu: Introduce SysemuCPUOps structure
+>    cpu: Move CPUClass::vmsd to SysemuCPUOps
+>    cpu: Move CPUClass::virtio_is_big_endian to SysemuCPUOps
+>    cpu: Move CPUClass::get_crash_info to SysemuCPUOps
+>    cpu: Move CPUClass::write_elf* to SysemuCPUOps
+>    cpu: Move CPUClass::asidx_from_attrs to SysemuCPUOps
+>    cpu: Move CPUClass::get_phys_page_debug to SysemuCPUOps
+>    cpu: Move CPUClass::get_memory_mapping to SysemuCPUOps
+>    cpu: Move CPUClass::get_paging_enabled to SysemuCPUOps
 
-Last month on another series you told me we should declare prototypes
-that can't be used :) However I agree we want *less* #ifdef'ry, not
-more.
+I've queued all of these to tcg-next, fixing minor patch conflicts on the way. 
+  Most of which were the reorg going on in target/ppc/.
 
-The ARM declarations is fixed in Claudio's accel rework.
+>    cpu: Restrict "hw/core/sysemu-cpu-ops.h" to target/cpu.c
 
-For the m68k/riscv/xtensa targets I'll see if I can move it elsewhere
-in the same file (if there is already such #ifdef'ry), it is worthwhile
-to move the declaration in another (sysemu) header, or simply do
-nothing.
+I squashed this one back into "Introduce SysemuCPUOps structure", and moved the 
+target/*/ includes from cpu.h next to where the structure is declared.
 
-Thanks,
 
-Phil.
+r~
 
