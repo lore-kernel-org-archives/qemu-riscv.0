@@ -1,77 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1llj8c-0007C8-H7
-	for mharc-qemu-riscv@gnu.org; Tue, 25 May 2021 22:19:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42852)
+	id 1llm7g-0000Ir-Pa
+	for mharc-qemu-riscv@gnu.org; Wed, 26 May 2021 01:30:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43596)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1llj8a-00077r-3C
- for qemu-riscv@nongnu.org; Tue, 25 May 2021 22:19:12 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:43740)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1llm7b-0000IB-FF
+ for qemu-riscv@nongnu.org; Wed, 26 May 2021 01:30:24 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:33589)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1llj8Y-0007oO-0R
- for qemu-riscv@nongnu.org; Tue, 25 May 2021 22:19:11 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id e22so8560015pgv.10
- for <qemu-riscv@nongnu.org>; Tue, 25 May 2021 19:19:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=DPlXrCfHp8pQDQO1jfJmnZott4CioEXbswAa/pX0+o4=;
- b=d5Hr+p16DLEZy2sCrRQrzziwvZuCy3MBa+x2J6r8syyKWddyWVZs6rQB10zHapow5D
- MkqAMh3j8VGGOf+N/G/1OMp9ruGhmCYduomwjPcBGqGvJuUtn88yyntkKSbXG/U3nFke
- m9T4WoK0xIfSrcQrjhQUQcvgt1xnvI5TBgUa+/G2sFixkruIXMOVbbbLCJkr7DQEgMLx
- nSJp9bedkrrqMcBr+sd05mgANOzhsUOB4ikdNa5wL7iGIA67N4u9Qczc0365Yv2mN1hs
- szsqTOfxFkhfYIoDYVsn2Ne+e7MjLw0jTWsoIksNfzdp/+N6DwWllXXURAnqQkACQM5l
- P18w==
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1llm7W-0000X3-JZ
+ for qemu-riscv@nongnu.org; Wed, 26 May 2021 01:30:22 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ v13-20020a17090abb8db029015f9f7d7290so3041017pjr.0
+ for <qemu-riscv@nongnu.org>; Tue, 25 May 2021 22:30:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=A/Ks8iYKQxz0+Fi1gy9lDL9sDWaxKCvzkSAHv4PjuCU=;
+ b=fHKDdUzxiDTeirl1GDPY8GH7rx/Wm1CfOl2JY7qmdymqLro13iecylE1oOHcGMtMLi
+ Pn6bF3AheyyYAGpoR7qEn/9Tdru77TNhBjhlfrHQOXDx59MATgyqwFqFsrxQJ5EooUE4
+ YqESnYWWnksKyHuF1KcQYOuvMbyCldjQLiTCa0skfRaU4/rhsDXTNDQ4NGnQfwoA1ZOm
+ LkUUNTugSkhVxprrFmYHiy21Voiyq9F877shvldXzCwIjpbvTCY8z4rAvic3+zdI/3px
+ 0au0dkZpWQOxmhCKACGLDBx1E39wIfHAQWe6ncvXpzkVK4dJMRaQhOodW3RHyUbYaofD
+ kRlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=DPlXrCfHp8pQDQO1jfJmnZott4CioEXbswAa/pX0+o4=;
- b=bacgZ6u1ovnD4qC7DKtjX1z4pVTNhD2k+wK9m/MvQti9/F/Pp7/yah+CzTnodIwFi4
- zTFwGOf9sOm+G4THsaBJj0qbpUnxXS0VuDPs8xDqfcFoxZdG/zfVMFliteG8Z0lEernr
- Yam7sduLUTvIX1PloYYGA8n32gbn+UdQM5C0Iv3pCg6Zvf66e/cU1NPBlobSO4269AOZ
- 6iijZKDLHcJnfHKk8GtU8tkeTY4W4UiaPpAuHhfbW066D2ij4y/oHrRcUwLZ1e+QPZD8
- ziuj1IUH8CTuqoBNH5hTcP/q/50TPOuH+w6A/qh9iQgaL03Cn39fdvUQHz60CyjBmoZQ
- EN5w==
-X-Gm-Message-State: AOAM533kyQvGWiEBAT2MczCcRI7RcChEfrY3NIvjFj6rKvXsrsIEtMit
- /zvFOWlUds3uXJyDRs8NGsl7GQ==
-X-Google-Smtp-Source: ABdhPJz0jNf+4EIMC+VtTHanEqDjWzELBBdXI4oYx5POg5w4No/gYbJkESnfg7HSdO1mlcS4wM3/Zg==
-X-Received: by 2002:a63:f245:: with SMTP id d5mr22014163pgk.416.1621995548404; 
- Tue, 25 May 2021 19:19:08 -0700 (PDT)
-Received: from [192.168.1.11] (174-21-70-228.tukw.qwest.net. [174.21.70.228])
- by smtp.gmail.com with ESMTPSA id
- t1sm15296771pgl.40.2021.05.25.19.19.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 May 2021 19:19:08 -0700 (PDT)
-Subject: Re: [PATCH v7 13/23] cpu: Move AVR target vmsd field from CPUClass to
- DeviceClass
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- qemu-devel@nongnu.org
-Cc: qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-riscv@nongnu.org, qemu-ppc@nongnu.org
-References: <20210517105140.1062037-1-f4bug@amsat.org>
- <20210517105140.1062037-14-f4bug@amsat.org>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <2c96e1c3-85d8-6d1b-8f9f-0b6a1bc5486c@linaro.org>
-Date: Tue, 25 May 2021 19:19:06 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
-MIME-Version: 1.0
-In-Reply-To: <20210517105140.1062037-14-f4bug@amsat.org>
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=A/Ks8iYKQxz0+Fi1gy9lDL9sDWaxKCvzkSAHv4PjuCU=;
+ b=osQhoDXzm3KGWvSkjIEeCbFcTZuzp8RiuXEe09jqk9EtbMQCuTTOjgtaHIDUbFOmoG
+ 8CQy6IyIOJXf8fYpp+FfPW3uPhxVHFXu27b6MW3pAef2tCl+suI3LvVSFjb8tbxSVsTD
+ YzYW8BldKC7vGsUtIw2RgNQJA3+wZU+hBr4elNMoZy0Xw8E21vefz4NlESEjL7E/snxj
+ 6Z5AQq/7FKEO0sgmCzX2O6Xkx+Orz34YexCVMdatDrwsYxvLwUIWxy1+qgG8U1CwrRZS
+ y6viQKDTAN1XNqcRYH/fqeroqB2mbwsqYL/tc8vKgbNzaFj9BCCY7nSFdYdn50NY1aDQ
+ 8HKw==
+X-Gm-Message-State: AOAM532Q9ZWou8XPhi3S0g1xOC265EXpZG+mW6/Z6C36A5atmn7ye2Dw
+ 1Arh6d4BR/MLiwImw8tUh+nFGw==
+X-Google-Smtp-Source: ABdhPJwZSclbCDyFEnf1c/84SPVdmKp4zGiOIM9SMjF1B/al5MuRDzaAaD2M/egvYvbbVLsxjw3BEw==
+X-Received: by 2002:a17:902:7596:b029:f3:d01e:d316 with SMTP id
+ j22-20020a1709027596b02900f3d01ed316mr34465058pll.14.1622007015287; 
+ Tue, 25 May 2021 22:30:15 -0700 (PDT)
+Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
+ [76.210.143.223])
+ by smtp.gmail.com with ESMTPSA id 15sm4904157pfy.15.2021.05.25.22.30.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 May 2021 22:30:14 -0700 (PDT)
+Date: Tue, 25 May 2021 22:30:14 -0700 (PDT)
+X-Google-Original-Date: Tue, 25 May 2021 22:26:03 PDT (-0700)
+Subject: Re: [PATCH 08/38] target/riscv: SIMD 16-bit Compare Instructions
+In-Reply-To: <20210212150256.885-9-zhiwei_liu@c-sky.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, richard.henderson@linaro.org,
+ alistair23@gmail.com, zhiwei_liu@c-sky.com
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: zhiwei_liu@c-sky.com
+Message-ID: <mhng-21817afa-4f8d-4096-b64f-6f0b766c6174@palmerdabbelt-glaptop>
+Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=palmer@dabbelt.com; helo=mail-pj1-x1035.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,23 +79,114 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2021 02:19:12 -0000
+X-List-Received-Date: Wed, 26 May 2021 05:30:25 -0000
 
-On 5/17/21 3:51 AM, Philippe Mathieu-Daudé wrote:
-> See rationale in previous commit. Targets should use the vmsd field
-> of DeviceClass, not CPUClass. As migration is not important on the
-> AVR target, break the migration compatibility and set the DeviceClass
-> vmsd field. To feel safer, increment the vmstate version.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé<f4bug@amsat.org>
+On Fri, 12 Feb 2021 07:02:26 PST (-0800), zhiwei_liu@c-sky.com wrote:
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 > ---
-> v7: Increment vmstate version (Richard)
-> ---
->   target/avr/cpu.c     | 2 +-
->   target/avr/machine.c | 4 ++--
->   2 files changed, 3 insertions(+), 3 deletions(-)
+>  target/riscv/helper.h                   |  6 ++++
+>  target/riscv/insn32.decode              |  6 ++++
+>  target/riscv/insn_trans/trans_rvp.c.inc |  7 ++++
+>  target/riscv/packed_helper.c            | 46 +++++++++++++++++++++++++
+>  4 files changed, 65 insertions(+)
+>
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 0ecd4d53f9..f41f9acccc 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -1202,3 +1202,9 @@ DEF_HELPER_3(sll8, tl, env, tl, tl)
+>  DEF_HELPER_3(ksll8, tl, env, tl, tl)
+>  DEF_HELPER_3(kslra8, tl, env, tl, tl)
+>  DEF_HELPER_3(kslra8_u, tl, env, tl, tl)
+> +
+> +DEF_HELPER_3(cmpeq16, tl, env, tl, tl)
+> +DEF_HELPER_3(scmplt16, tl, env, tl, tl)
+> +DEF_HELPER_3(scmple16, tl, env, tl, tl)
+> +DEF_HELPER_3(ucmplt16, tl, env, tl, tl)
+> +DEF_HELPER_3(ucmple16, tl, env, tl, tl)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index cc782fcde5..f3cd508396 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -669,3 +669,9 @@ ksll8      0110110  ..... ..... 000 ..... 1111111 @r
+>  kslli8     0111110  01... ..... 000 ..... 1111111 @sh3
+>  kslra8     0101111  ..... ..... 000 ..... 1111111 @r
+>  kslra8_u   0110111  ..... ..... 000 ..... 1111111 @r
+> +
+> +cmpeq16    0100110  ..... ..... 000 ..... 1111111 @r
+> +scmplt16   0000110  ..... ..... 000 ..... 1111111 @r
+> +scmple16   0001110  ..... ..... 000 ..... 1111111 @r
+> +ucmplt16   0010110  ..... ..... 000 ..... 1111111 @r
+> +ucmple16   0011110  ..... ..... 000 ..... 1111111 @r
+> diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
+> index 12a64849eb..6438dfb776 100644
+> --- a/target/riscv/insn_trans/trans_rvp.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvp.c.inc
+> @@ -369,3 +369,10 @@ GEN_RVP_SHIFTI(slli8, sll8, tcg_gen_vec_shl8i_i64);
+>  GEN_RVP_SHIFTI(srai8_u, sra8_u, NULL);
+>  GEN_RVP_SHIFTI(srli8_u, srl8_u, NULL);
+>  GEN_RVP_SHIFTI(kslli8, ksll8, NULL);
+> +
+> +/* SIMD 16-bit Compare Instructions */
+> +GEN_RVP_R_OOL(cmpeq16);
+> +GEN_RVP_R_OOL(scmplt16);
+> +GEN_RVP_R_OOL(scmple16);
+> +GEN_RVP_R_OOL(ucmplt16);
+> +GEN_RVP_R_OOL(ucmple16);
+> diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
+> index ab9ebc472b..30b916b5ad 100644
+> --- a/target/riscv/packed_helper.c
+> +++ b/target/riscv/packed_helper.c
+> @@ -631,3 +631,49 @@ static inline void do_kslra8_u(CPURISCVState *env, void *vd, void *va,
+>  }
+>
+>  RVPR(kslra8_u, 1, 1);
+> +
+> +/* SIMD 16-bit Compare Instructions */
+> +static inline void do_cmpeq16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = (a[i] == b[i]) ? 0xffff : 0x0;
+> +}
+> +
+> +RVPR(cmpeq16, 1, 2);
+> +
+> +static inline void do_scmplt16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = (a[i] < b[i]) ? 0xffff : 0x0;
+> +}
+> +
+> +RVPR(scmplt16, 1, 2);
+> +
+> +static inline void do_scmple16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = (a[i] <= b[i]) ? 0xffff : 0x0;
+> +}
+> +
+> +RVPR(scmple16, 1, 2);
+> +
+> +static inline void do_ucmplt16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = (a[i] < b[i]) ? 0xffff : 0x0;
+> +}
+> +
+> +RVPR(ucmplt16, 1, 2);
+> +
+> +static inline void do_ucmple16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = (a[i] <= b[i]) ? 0xffff : 0x0;
+> +}
+> +
+> +RVPR(ucmple16, 1, 2);
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-r~
+Thanks, this is on for-next.
 
