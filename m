@@ -1,55 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lmOC2-0007bL-2K
-	for mharc-qemu-riscv@gnu.org; Thu, 27 May 2021 18:09:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57014)
+	id 1lmOMD-00024P-19
+	for mharc-qemu-riscv@gnu.org; Thu, 27 May 2021 18:20:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58780)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lmOBz-0007Yl-7p; Thu, 27 May 2021 18:09:27 -0400
-Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:39797)
+ id 1lmOM8-00022m-Pr; Thu, 27 May 2021 18:19:58 -0400
+Received: from mail-il1-x131.google.com ([2607:f8b0:4864:20::131]:38896)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lmOBx-0006OW-4x; Thu, 27 May 2021 18:09:26 -0400
-Received: by mail-il1-x136.google.com with SMTP id o9so1651403ilh.6;
- Thu, 27 May 2021 15:09:24 -0700 (PDT)
+ id 1lmOM5-0004jW-7h; Thu, 27 May 2021 18:19:56 -0400
+Received: by mail-il1-x131.google.com with SMTP id j30so1671479ila.5;
+ Thu, 27 May 2021 15:19:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=sSCfRQlKWQeEFJsRNm2FjjYnkNpNk0fMjKa+nhv6dn8=;
- b=h2QH52vOwhHnOvKzYTkBH1TNS2hkEB9sPs/XaTEIrGMakP/ZH3SEOntVN0iJ9WYp1V
- w6ZC1Mc7F/if7OU4kqlC8fYP2zvjtarFTJjIJsdXWCj0J2nZ7TxTbaRJs73JZWYrpdpW
- v8MolNUcvec+due4liVOtBDPhLPKPiXRa7jEd3zXO+qOKJzW9zz2kfE9Mti/pfwLpMx4
- 9ZHTpx6p8/iUoJJyWZuUmskKpzvwroO8P6P/GRx3QHeT3pKA76S9W9IZNw6bdH2imbHU
- niiBMExnNxqX4l4o3TKb0ScRPSgbQdb+bYzML2mdcD6x6Axw479HObIwtmZI/6/l1rzX
- rLgg==
+ :cc; bh=Agr6QIoRBqgH0qMfaKe+a5zsmMVYFVc/tShT2b5LMo8=;
+ b=iBmJdKum6B9LXjqO75PlU3XfRDEhlmeJgriPVKwZoLuU9LSWNtO5veXCJvnupAOYKe
+ UBdD0+1wHfmLoB8OsqCuMvApkh1emvwDQEkKTQNZvLKij1F2ZpjKbqi5p9zuViqvOEcc
+ TD5NElkNC0gOxxJ5eq80t1swQtu8SGq1Fzh+fYCBuMoRFTNlSxuntqNa6KiuGO6jBuUC
+ swjXNfSW2YMtvj5xfhgHzxFLGH+nHo4euTokND5R+70eqD1MhhQe358jMgb+RWNLSHt+
+ Pxeq6/KlHPgpfUsD7ffS8UjFTyaWxZjP+s3sdRlYSfIxViZgywDBQW/QAZrbEYAqRCsN
+ /TTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=sSCfRQlKWQeEFJsRNm2FjjYnkNpNk0fMjKa+nhv6dn8=;
- b=WOEuCN1KZ9G4J77q6IYdVI+hNIXzegI6nJQ7PFslhAUFoJ6ieUKqSGo6F8dmdhPsua
- CsvxPsoEd7DlqH/XkCbINsjDQmYNBH2xI0xXslX+/FVsmabVkv4Jz82BlfBqjZsgR5tI
- pI01fESKKKM/akpZB5DUi8RJSU5EDwZykrbHNs5YDyeNoG0XuaWRzpN5IkL+lW1ou6C8
- Qf/uNok05SSO7c7xTiPR0yZWz6f7NBUnDJUWeiEnHj2MZu6R/N2dosEtH7qKEoFrRo6g
- R6WnpYkyJGkbuIt6jiWeJZ8+MCakMuZKbMCPmg8wrkKXxCjKatG0ANZI8e2FS8egDs65
- ++TQ==
-X-Gm-Message-State: AOAM53379Z8IVVpJWXeOADKS1TARdeVMneLtdgVLUZ7kGkivBY1up/jC
- B9SC+rd1eieKS8qoOOgL7eU8EXJfBo660T4c+PU=
-X-Google-Smtp-Source: ABdhPJzMANhSRH2QMRCfaLJmi2BShkTuG82kwVVnH5FDi8lEPo6JhTKZb/+Bg2ZppW8IK6mzZZ+QKcdt7zK4qRhHopg=
-X-Received: by 2002:a05:6e02:974:: with SMTP id
- q20mr4619924ilt.227.1622153363738; 
- Thu, 27 May 2021 15:09:23 -0700 (PDT)
+ bh=Agr6QIoRBqgH0qMfaKe+a5zsmMVYFVc/tShT2b5LMo8=;
+ b=aHcxOgasoMp5BsqpkKVirdoDYORJYjyOEz1BIEebxtYslZnqOUTDwQ7mRxp6Wqf5Qw
+ /1YaNvaMxjP9/mBvmnD3hbkmE4fsNUAK4kTvSm+2sLYLWC9KWOkf7R7KipmXmvmVslLl
+ s3LdTq8RMYOJ/89QNbZfB83oG6HUrLNWNgXA42OE5NubBBlefqhMkIXkIrfxlSR8Vg/I
+ Ppu/6/cJi+Nhko3AQoUbWW0gnSNzMp/8iEjsYXZQt8eYeP3/3i3IcH83Q22zAtKW5zoJ
+ 77UnxKeicb+MLViUdG5XGVtbScISbsOwvR8LFMyMOlHT5lkAiXRjuQsU6fJqQM/hy5fZ
+ D2pA==
+X-Gm-Message-State: AOAM532bIyxrf4t0j5Yf9lRgkDEhkcRX3v116zFD/Maw6sKkheXzCWEi
+ p7y5uMehpDiT9e2DgMDRbjlvlrVUAQkVCwy7af4=
+X-Google-Smtp-Source: ABdhPJwkcBijVs7k/63HRc7WtZzC6wFMqxf5hx9kSpOMG8TfasgWEWqIoS+iOToYrBmzRObRXz26H/B90h9WhdA2/Fw=
+X-Received: by 2002:a92:6b05:: with SMTP id g5mr4726729ilc.40.1622153991566;
+ Thu, 27 May 2021 15:19:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210505160620.15723-1-frank.chang@sifive.com>
-In-Reply-To: <20210505160620.15723-1-frank.chang@sifive.com>
+References: <20210527090051.1837256-1-zhiwei_liu@c-sky.com>
+In-Reply-To: <20210527090051.1837256-1-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 28 May 2021 08:08:56 +1000
-Message-ID: <CAKmqyKOFBvxxNhVhVNN+tNnS-_ed97S91UsjxriPEZi58sWHzQ@mail.gmail.com>
-Subject: Re: [PATCH v6 00/17] support subsets of bitmanip extension
-To: Frank Chang <frank.chang@sifive.com>
+Date: Fri, 28 May 2021 08:19:24 +1000
+Message-ID: <CAKmqyKMtRCP7gouO0qBUsKPXCgroKsSXkTr8FTgDydXdrUc8tw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] target/riscv: Fix vsip vsie CSR ops in M and HS mode
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::131;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x131.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -70,95 +72,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2021 22:09:28 -0000
+X-List-Received-Date: Thu, 27 May 2021 22:19:58 -0000
 
-On Thu, May 6, 2021 at 2:11 AM <frank.chang@sifive.com> wrote:
+On Thu, May 27, 2021 at 7:01 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> When V=1, instructions that normally read or modify a supervisor CSR
+> shall instead access the corresponding VS CSR. And the VS CSRs can be
+> accessed as themselves from M-mode or HS-mode.
 >
-> This patchset implements RISC-V B-extension v0.93 version Zba, Zbb and
-> Zbs subset instructions. Some Zbp instructions are also implemented as
-> they have similar behavior with their Zba-, Zbb- and Zbs-family
-> instructions or for Zbb pseudo instructions (e.g. rev8, orc.b).
+> In M and HS mode, VSIP or VSIE should be written normally instead of
+> shift by 1.
 >
-> Specification:
-> https://github.com/riscv/riscv-bitmanip/blob/master/bitmanip-0.93.pdf
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> ---
+>  target/riscv/csr.c | 19 ++++++++++---------
+>  1 file changed, 10 insertions(+), 9 deletions(-)
 >
-> The port is available here:
-> https://github.com/sifive/qemu/tree/rvb-upstream-v6
->
-> To test rvb implementation, specify cpu argument with 'x-b=true' or
-> 'x-b=true,bext_spec=v0.93'to enable B-extension support.
->
-> Changelog:
->
-> v6:
->  * rebase riscv-to-apply.next branch.
->  * remove all #ifdef TARGET_RISCV64 macros.
->
-> v5:
->  * add bext_spec cpu option, default set to v0.93.
->  * rebase master branch.
->
-> v4:
->  * Remove 'rd != 0' checks from immediate shift instructions.
->
-> v3:
->  * Convert existing immediate shift instructions to use gen_shifti()
->    and gen_shiftiw() interfaces.
->  * Rename *u.w instructions to *.uw.
->  * Rename sb* instructions to b*.
->  * Rename pcnt* instructions to cpop*.
->
-> v2:
->  * Add gen_shifti(), gen_shiftw(), gen_shiftiw() helper functions.
->  * Remove addwu, subwu and addiwu instructions as they are not longer
->    exist in latest draft.
->  * Optimize implementation with cleaner tcg ops.
->
-> Frank Chang (6):
->   target/riscv: rvb: count bits set
->   target/riscv: add gen_shifti() and gen_shiftiw() helper functions
->   target/riscv: rvb: single-bit instructions
->   target/riscv: rvb: generalized reverse
->   target/riscv: rvb: generalized or-combine
->   target/riscv: rvb: add b-ext version cpu option
->
-> Kito Cheng (11):
->   target/riscv: reformat @sh format encoding for B-extension
->   target/riscv: rvb: count leading/trailing zeros
->   target/riscv: rvb: logic-with-negate
->   target/riscv: rvb: pack two words into one register
->   target/riscv: rvb: min/max instructions
->   target/riscv: rvb: sign-extend instructions
->   target/riscv: rvb: shift ones
->   target/riscv: rvb: rotate (left/right)
->   target/riscv: rvb: address calculation
->   target/riscv: rvb: add/shift with prefix zero-extend
->   target/riscv: rvb: support and turn on B-extension from command line
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index fe5628fea6..0cce474d3d 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -837,16 +837,16 @@ static RISCVException read_sie(CPURISCVState *env, int csrno,
+>  static RISCVException write_vsie(CPURISCVState *env, int csrno,
+>                                   target_ulong val)
+>  {
+> -    /* Shift the S bits to their VS bit location in mie */
+>      target_ulong newval = (env->mie & ~VS_MODE_INTERRUPTS) |
+> -                          ((val << 1) & env->hideleg & VS_MODE_INTERRUPTS);
+> +                          (val & env->hideleg & VS_MODE_INTERRUPTS);
 
-Thanks!
+Ok, so when a Hypervisor writes to vsie it should actually set SSIE
+instead of VSSIE. That looks right.
 
-Applied to riscv-to-apply.next
+The problem here now is that you are still using the VS mask, so this
+won't set anything.
+
+>      return write_mie(env, CSR_MIE, newval);
+>  }
+>
+>  static int write_sie(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+>      if (riscv_cpu_virt_enabled(env)) {
+> -        write_vsie(env, CSR_VSIE, val);
+> +        /* Shift the S bits to their VS bit location in mie */
+> +        write_vsie(env, CSR_VSIE, val << 1);
+
+A write to SIE when virtulised actually sets VSIE, sounds good.
+
+>      } else {
+>          target_ulong newval = (env->mie & ~S_MODE_INTERRUPTS) |
+>                                (val & S_MODE_INTERRUPTS);
+> @@ -950,12 +950,9 @@ static RISCVException rmw_vsip(CPURISCVState *env, int csrno,
+>                                 target_ulong *ret_value,
+>                                 target_ulong new_value, target_ulong write_mask)
+>  {
+> -    /* Shift the S bits to their VS bit location in mip */
+> -    int ret = rmw_mip(env, 0, ret_value, new_value << 1,
+> -                      (write_mask << 1) & vsip_writable_mask & env->hideleg);
+> +    int ret = rmw_mip(env, 0, ret_value, new_value,
+> +                      write_mask & vsip_writable_mask & env->hideleg);
+
+The mask seems wrong here as well.
 
 Alistair
 
+>      *ret_value &= VS_MODE_INTERRUPTS;
+> -    /* Shift the VS bits to their S bit location in vsip */
+> -    *ret_value >>= 1;
+>      return ret;
+>  }
 >
->  target/riscv/bitmanip_helper.c          |  90 +++++
->  target/riscv/cpu.c                      |  27 ++
->  target/riscv/cpu.h                      |   5 +
->  target/riscv/helper.h                   |   6 +
->  target/riscv/insn32.decode              |  87 ++++-
->  target/riscv/insn_trans/trans_rvb.c.inc | 438 ++++++++++++++++++++++++
->  target/riscv/insn_trans/trans_rvi.c.inc |  54 +--
->  target/riscv/meson.build                |   1 +
->  target/riscv/translate.c                | 306 +++++++++++++++++
->  9 files changed, 958 insertions(+), 56 deletions(-)
->  create mode 100644 target/riscv/bitmanip_helper.c
->  create mode 100644 target/riscv/insn_trans/trans_rvb.c.inc
+> @@ -966,7 +963,11 @@ static RISCVException rmw_sip(CPURISCVState *env, int csrno,
+>      int ret;
 >
+>      if (riscv_cpu_virt_enabled(env)) {
+> -        ret = rmw_vsip(env, CSR_VSIP, ret_value, new_value, write_mask);
+> +        /* Shift the S bits to their VS bit location in mip */
+> +        ret = rmw_vsip(env, CSR_VSIP, ret_value, new_value << 1,
+> +                       write_mask << 1);
+> +        /* Shift the VS bits to their S bit location in vsip */
+> +        *ret_value >>= 1;
+>      } else {
+>          ret = rmw_mip(env, CSR_MSTATUS, ret_value, new_value,
+>                        write_mask & env->mideleg & sip_writable_mask);
 > --
-> 2.17.1
+> 2.25.1
 >
 >
 
