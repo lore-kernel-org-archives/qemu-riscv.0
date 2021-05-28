@@ -1,52 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lmRjg-0001tR-S7
-	for mharc-qemu-riscv@gnu.org; Thu, 27 May 2021 21:56:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37186)
+	id 1lmRnt-00046Q-Pg
+	for mharc-qemu-riscv@gnu.org; Thu, 27 May 2021 22:00:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37718)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lmRjf-0001sl-F4; Thu, 27 May 2021 21:56:27 -0400
-Received: from out28-2.mail.aliyun.com ([115.124.28.2]:55538)
+ id 1lmRnp-000465-0J; Thu, 27 May 2021 22:00:45 -0400
+Received: from [115.124.28.52] (port=47494 helo=out28-52.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lmRjc-0001Zu-25; Thu, 27 May 2021 21:56:27 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07598961|-1; CH=green;
+ id 1lmRnm-00046D-ON; Thu, 27 May 2021 22:00:44 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07453547|-1; CH=green;
  DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.256127-0.00494922-0.738924;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047207; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KJpNlTk_1622166974; 
+ DS=CONTINUE|ham_system_inform|0.0777681-0.00232441-0.919908;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047194; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KJqC6pe_1622167231; 
 Received: from 172.27.117.59(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KJpNlTk_1622166974)
- by smtp.aliyun-inc.com(10.147.40.44); Fri, 28 May 2021 09:56:15 +0800
+ fp:SMTPD_---.KJqC6pe_1622167231) by smtp.aliyun-inc.com(10.147.40.2);
+ Fri, 28 May 2021 10:00:31 +0800
 Subject: Re: [PATCH] target/riscv: hardwire bits in hideleg and hedeleg
-To: Jose Martins <josemartins90@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+To: Jose Martins <josemartins90@gmail.com>, qemu-devel@nongnu.org
+Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
 References: <20210522155902.374439-1-josemartins90@gmail.com>
- <434d8825-8bd6-5344-aea2-e176fad6183e@c-sky.com>
- <CAC41xo2v7kU92+MkZfB7f_86X58k8R5Ft=2vSO3OORT2OJ-Exw@mail.gmail.com>
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <bca94724-96ed-5acf-e668-a0769626358e@c-sky.com>
-Date: Fri, 28 May 2021 09:56:14 +0800
+Message-ID: <a148ce4f-ce1e-afe6-2a4e-0787ce9d4877@c-sky.com>
+Date: Fri, 28 May 2021 10:00:31 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <CAC41xo2v7kU92+MkZfB7f_86X58k8R5Ft=2vSO3OORT2OJ-Exw@mail.gmail.com>
+In-Reply-To: <20210522155902.374439-1-josemartins90@gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.2; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-2.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.52 (deferred)
+Received-SPF: none client-ip=115.124.28.52; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-52.mail.aliyun.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -59,72 +57,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 May 2021 01:56:27 -0000
+X-List-Received-Date: Fri, 28 May 2021 02:00:45 -0000
 
+Reviewed-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 
-On 5/26/21 1:50 AM, Jose Martins wrote:
->> We can use it directly if only one macro VS_MODE_INTERRUPTS.
-> I wrote it like this to be more coherent with what was already there
-> which also makes it more readable. Furthermore, the compiler will just
-> probably optimize the variable away, right?
-
-Hi Jose,
-
-Sorry I missed this mail.
-
-Sounds good. Just keep it.
-
->
->> I didn't find that the RISCV_EXCP_VS_ECALL should be read-only 0 from the specification.
-> You are right. I had doubts about this also. The table that defines it
-> in the spec is missing this bit. I raised an issue on the spec repo
-> (https://github.com/riscv/riscv-isa-manual/issues/649). But in my
-> opinion, it wouldn't really make sense to allow this exception to be
-> delegated.
-Agree.
-> What do you think? Is there any use case for this to be
-> allowed? Maybe we'll need a clarification from the spec to reach a
-> final decision.
-That's will be great.
->
->> However, as hedeleg is WARL, you had better reserve the other fields like medeleg:
->>
->> env->medeleg = (env->medeleg & ~delegable_excps) | (val & delegable_excps);
-> Isn't the patch's implementation of hedeleg/hideleg providing a WARL
-> behavior already? I don't think we need this preservation behavior
-> since in the case of hideleg/hedeleg there can only be 0-wired bits. I
-> believe this won't change. For hedeleg the spec states that  "Each bit
-> of hedeleg shall be either writable or hardwired to zero". For
-> hideleg: "Among bits 15:0 of hideleg, only bits 10, 6, and 2
-> (corresponding to the standard VS-level interrupts) shall be writable,
-> and the others shall be hardwired to zero."
-Agree.
->
->> I really don't understand why medeleg codes this way. Is there anyone can give a better explanation?
->>
->> I don't know if I fully understood your question, but I don't get why
->> you would need to preserve non-delegable bits in medeleg in this way,
->> even to keep WARL behavior.
->   Again, the specification only allows
-> medeleg bits to be hardwired to zero: "An implementation shall not
-> hardwire any bits of medeleg to one, i.e., any synchronous trap that
-> can be delegated must support not being delegated.", so a bitwise-and
-> should suffice.
-
-That's the current way to implement medeleg in QEMU. I just copy the code.
-
-In my opinion, WARL means:
-
-1) For writable fields with WARL, any illegal written value will be 
-discarded.
-
-2) For reserved fields with WARL,  any written value will be discarded 
-and it should always keep hardwired value.
-
-I agree with your opinion. We can just use bitwise-and for medeleg.
-
-Best Regards,
 Zhiwei
 
-> José
+On 5/22/21 11:59 PM, Jose Martins wrote:
+> The specification mandates for certain bits to be hardwired in the
+> hypervisor delegation registers. This was not being enforced.
+>
+> Signed-off-by: Jose Martins <josemartins90@gmail.com>
+> ---
+>   target/riscv/csr.c | 13 +++++++++++--
+>   1 file changed, 11 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index d2585395bf..9b74a00cc9 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -394,6 +394,7 @@ static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
+>   
+>   static const target_ulong delegable_ints = S_MODE_INTERRUPTS |
+>                                              VS_MODE_INTERRUPTS;
+> +static const target_ulong vs_delegable_ints = VS_MODE_INTERRUPTS;
+>   static const target_ulong all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
+>                                        VS_MODE_INTERRUPTS;
+>   static const target_ulong delegable_excps =
+> @@ -416,6 +417,14 @@ static const target_ulong delegable_excps =
+>       (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
+>       (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
+>       (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT));
+> +static const target_ulong vs_delegable_excps = delegable_excps &
+> +    ~((1ULL << (RISCV_EXCP_S_ECALL)) |
+> +    (1ULL << (RISCV_EXCP_VS_ECALL)) |
+> +    (1ULL << (RISCV_EXCP_M_ECALL)) |
+> +    (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) |
+> +    (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
+> +    (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
+> +    (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT)));
+>   static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+>       SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
+>       SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD;
+> @@ -963,7 +972,7 @@ static int read_hedeleg(CPURISCVState *env, int csrno, target_ulong *val)
+>   
+>   static int write_hedeleg(CPURISCVState *env, int csrno, target_ulong val)
+>   {
+> -    env->hedeleg = val;
+> +    env->hedeleg = val & vs_delegable_excps;
+>       return 0;
+>   }
+>   
+> @@ -975,7 +984,7 @@ static int read_hideleg(CPURISCVState *env, int csrno, target_ulong *val)
+>   
+>   static int write_hideleg(CPURISCVState *env, int csrno, target_ulong val)
+>   {
+> -    env->hideleg = val;
+> +    env->hideleg = val & vs_delegable_ints;
+>       return 0;
+>   }
+>   
 
