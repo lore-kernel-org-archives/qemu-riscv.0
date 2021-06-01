@@ -1,57 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lo4AB-0004jM-R6
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Jun 2021 09:10:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39018)
+	id 1lo55X-00045Q-7B
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Jun 2021 10:09:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52386)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lo4A8-0004ix-VK; Tue, 01 Jun 2021 09:10:28 -0400
-Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33]:39820)
+ id 1lo55V-00040n-Gc; Tue, 01 Jun 2021 10:09:45 -0400
+Received: from mail-yb1-xb30.google.com ([2607:f8b0:4864:20::b30]:45612)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lo4A6-0006Rn-Et; Tue, 01 Jun 2021 09:10:28 -0400
-Received: by mail-yb1-xb33.google.com with SMTP id n133so12404178ybf.6;
- Tue, 01 Jun 2021 06:10:25 -0700 (PDT)
+ id 1lo55T-000231-7k; Tue, 01 Jun 2021 10:09:45 -0400
+Received: by mail-yb1-xb30.google.com with SMTP id g38so21303054ybi.12;
+ Tue, 01 Jun 2021 07:09:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=DI8CwnYKK64VQEr6SzzmVMrNMI7HE4Ivzi7Ga1QW3rY=;
- b=nerS0/Pma7Sq6b+8CVRAgHQnQ/rcTYInDs6+bg9waJPzrwGKKRCVuJt3S6H22PQs/r
- ZPjWJsaPDQj4TPPYz58RuykaJ20XNgKyj8sIY+6MIyhW+v9GlakX6Ros7/NxCWegYQPb
- 1hv/tcp8SJ+AUdEaosGRiWzoWM4vdlPrIhe3PiR7sT0TsydJ4hkmtwX3t+ubqiEi2s0z
- p0L4MUgCRSldfPP/tmpyxaG4TSO5m/DFZsH+dwgv39LSMXJgGEml39FJ15fszf1sawGS
- 8AQoHx1FGF/pHHLYbrC3LTuvCDElIUIwOS438qPatHVT7W75MuP2rF5p/bu8/L6uQ+KB
- h5uA==
+ :cc; bh=0rZjMipqbewndnwGMjcRz6/Mqb210LlSdvf6Mqfnz1E=;
+ b=NDpEfDoHmJbIliL60UAmx1XLNcqMegAyigvNgNIy+kFsaF0+Ja4w241c7C+hlG+5tP
+ wVqDys0muQz7uXLsTFTNZPIqdNfBvQ8K77tPTgn3gFiXlpjc3LdTdwb4Hvmzw7zs7IkU
+ rQtnwkGGKAWckISgg1gzhz3+NloMv+xpO9w1wTzZ04Ku2Z2w2yDuiBfHozmb5FsTMDNk
+ ewuiYevEZnVmOa7/2vvGfaoBMmSff0OfgjrazuiXBFe+VNlrkP5GSb1ptBRJegCe4u5s
+ 8M7Yv0bXpeQ7kx6/EKoTROM6zT+BTVSCPvrY3yvwpnXDnSXMggNfHJkxBFYRzfc2nafs
+ Chuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=DI8CwnYKK64VQEr6SzzmVMrNMI7HE4Ivzi7Ga1QW3rY=;
- b=Tt0mC3VagSwSLnNh/FsgI3w4CuGZapbGS2x9w+3SM1V9TRFC6hJgT8XGyVxWhwxQ4I
- +5iRh4YV/apLq3rOJ4guvS5Q+q67qWWj7VGP/4epP2NijkNfwHgvsxNuqiVSHYIjMBlq
- H14c1UfHcywUSmBsiilwmTl88+LZpIoho8CqgEygL9r7zi8bZCI4gik9p30WIwDxUS7y
- 9xm3zwRXe41zyipQwcA6iG8b0t80R2KWvHAlZkqZod12Ywv75BNSwHOMZzs1jhT2oL8N
- hqGrmyvftzNh3zYmfj8bAKdVoGtzDS2sH1FNzA522xvSyjf/sXvdZrpgaqAE4/hGjHje
- DfKw==
-X-Gm-Message-State: AOAM531T2MVS0nZb/lGayWc1GbiSkynNaO3waOvkzZ6QgmWMKOmB683V
- 3dFhu0Kkyu8x+BgBijJsRqtcsJcaEPFLfu8ELlg=
-X-Google-Smtp-Source: ABdhPJz8AKFJ8tsuSuqqsdfSpfUMHPEyp3GVxrkMBcKsrsSok+YEmYHw/ajZEYDv5H5+XgQG/65choB4m5cWRnUUR94=
-X-Received: by 2002:a25:99c1:: with SMTP id q1mr36788057ybo.517.1622553024863; 
- Tue, 01 Jun 2021 06:10:24 -0700 (PDT)
+ bh=0rZjMipqbewndnwGMjcRz6/Mqb210LlSdvf6Mqfnz1E=;
+ b=Zx7kOfoArwDHOn9yGM+TLjdCLThu36i0HX4dTkA2EIOg1UW4/z+jB8nkSt3L5OEU7B
+ HHW1qUq9BYip2YrRfLbtrHztas1EejQ5hdj9vzHtmhjXkVwGM/3OZ7Vr3gC5p3aNQKpj
+ 7vJgjFqVI5B6DBdwJHNFHu9ZvBDeqPfGPBdjnHOt9ibdYj+lBCv94qUCvmCyVGqK+iso
+ jHh/bZSlS66uiBXpJUdO2Zf4mAI5vjv317bjdXAvA5W0bTO1QsG6VbxPPO9bXqb843A7
+ PNicEvAhjvseVWQAo3o+K93RPCvBwnylXZ5JmPtFT3DNMiKgJP25uaYardE4VXvFZa0i
+ srcw==
+X-Gm-Message-State: AOAM5310F1TqHrL9KDiFcdelg5BH+989nIcs8pzvukX6vlOlExt5xsbm
+ BVUPI9+FAgYVgBqDmjylYrWCx5ciA5oR7VleKu8=
+X-Google-Smtp-Source: ABdhPJz1Hn/wNYycyyT9tH1iNtpctxk5MbPYdD/k3M/e9o7+gGAtcpy/P/YO579y1K5GxN8vl70i7tJ16rdUICNXr0c=
+X-Received: by 2002:a25:412:: with SMTP id 18mr40147717ybe.152.1622556581915; 
+ Tue, 01 Jun 2021 07:09:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1622435529.git.alistair.francis@wdc.com>
- <326d5fa6a311684be25803d4676690e4f60fe24c.1622435529.git.alistair.francis@wdc.com>
-In-Reply-To: <326d5fa6a311684be25803d4676690e4f60fe24c.1622435529.git.alistair.francis@wdc.com>
+References: <0CAA9018-0C42-4140-82C1-EAC80D46D359@getmailspring.com>
+ <CAEUhbmWnj3GOD5-EA54XHRQyfiSdOsH+KKGH-+uG0LEH+kAuUg@mail.gmail.com>
+ <CA+Oz1=Z4J8KCHk_TZTUB9aEODaRv0F3bF6jtCHwdKQ02VgjcTQ@mail.gmail.com>
+ <CAMSwOgoq5KNoU3aP6kGZxAVhj_phxJvmCWb=6dKB7SkbXjaJyQ@mail.gmail.com>
+ <CAEUhbmWCvPVo5Jww0GPb6uX0xBfRKqZD6Jp-e54sU+v6R=m3gQ@mail.gmail.com>
+ <CA+Oz1=b=wBCCVVHWic8UrJQY5aEB+9OYS2XVtn6FEA2R6wm5yw@mail.gmail.com>
+In-Reply-To: <CA+Oz1=b=wBCCVVHWic8UrJQY5aEB+9OYS2XVtn6FEA2R6wm5yw@mail.gmail.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 1 Jun 2021 21:10:14 +0800
-Message-ID: <CAEUhbmUN8Dfbn_vE1zrf6D6+yNtiBvN4fMC+wP0AExFBsNfcSA@mail.gmail.com>
-Subject: Re: [PATCH v1 3/3] hw/riscv: OpenTitan: Connect the mtime and
- mtimecmp timer
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Tue, 1 Jun 2021 22:09:30 +0800
+Message-ID: <CAEUhbmXXvhkZA0QgK1mvADq-FLKU56gt9PXyNW3i_n1SnKq8Lw@mail.gmail.com>
+Subject: Re: HSS Issue with GCC 10, Qemu Setup for microchip-icicle-kit
+To: Rahul Pathak <rpathak@ventanamicro.com>
+Cc: Rahul Pathak <rpathakmailbox@gmail.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b30;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb30.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -71,107 +75,131 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jun 2021 13:10:30 -0000
+X-List-Received-Date: Tue, 01 Jun 2021 14:09:45 -0000
 
-On Mon, May 31, 2021 at 12:33 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+Hi Rahul,
+
+On Tue, Jun 1, 2021 at 11:12 AM Rahul Pathak <rpathak@ventanamicro.com> wrote:
+>
+> Hi BIn,Alistair,
+>
+> I was passing the hss.elf file and it was strange that gdb after connecting was not letting the target to continue from gdb.
+
+This is the expected behavior if you pass an image to gdb before
+connecting to the target, as gdb will assume the debug contexts are
+the same, but it's not the case for PolarFire which has 1+4 hybrid
+configuration.
+
+> what worked was to not pass anything and then connect the to target then load the symbol file as hss.elf.
+> I followed the steps from the "Attaching the GDB" doc and was able to debug.
 >
 
-Please write some commit message here
+Yes, that's the correct way to debug PolarFire.
 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  include/hw/riscv/opentitan.h |  5 ++++-
->  hw/riscv/opentitan.c         | 14 +++++++++++---
->  2 files changed, 15 insertions(+), 4 deletions(-)
 >
-> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-> index aab9bc9245..86cceef698 100644
-> --- a/include/hw/riscv/opentitan.h
-> +++ b/include/hw/riscv/opentitan.h
-> @@ -22,6 +22,7 @@
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/intc/ibex_plic.h"
->  #include "hw/char/ibex_uart.h"
-> +#include "hw/timer/ibex_timer.h"
->  #include "qom/object.h"
->
->  #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
-> @@ -35,6 +36,7 @@ struct LowRISCIbexSoCState {
->      RISCVHartArrayState cpus;
->      IbexPlicState plic;
->      IbexUartState uart;
-> +    IbexTimerState timer;
->
->      MemoryRegion flash_mem;
->      MemoryRegion rom;
-> @@ -57,7 +59,7 @@ enum {
->      IBEX_DEV_SPI,
->      IBEX_DEV_I2C,
->      IBEX_DEV_PATTGEN,
-> -    IBEX_DEV_RV_TIMER,
-> +    IBEX_DEV_TIMER,
->      IBEX_DEV_SENSOR_CTRL,
->      IBEX_DEV_OTP_CTRL,
->      IBEX_DEV_PWRMGR,
-> @@ -82,6 +84,7 @@ enum {
->  };
->
->  enum {
-> +    IBEX_TIMER_TIMEREXPIRED0_0 = 125,
+> For the qemu command line from the doc, I made the "wait=off" then qemu was not waiting for another serial connection
+> and launched the hss.
 
-So this timer is connected to PLIC, instead of a dedicated exception
-code in the *cause CSR?
+You need to connect to the other serial connection otherwise QEMU does
+not start the emulation when "wait=on"
 
->      IBEX_UART0_RX_PARITY_ERR_IRQ = 8,
->      IBEX_UART0_RX_TIMEOUT_IRQ = 7,
->      IBEX_UART0_RX_BREAK_ERR_IRQ = 6,
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 7545dcda9c..c5a7e3bacb 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -36,7 +36,7 @@ static const MemMapEntry ibex_memmap[] = {
->      [IBEX_DEV_SPI] =            {  0x40050000,  0x1000  },
->      [IBEX_DEV_I2C] =            {  0x40080000,  0x1000  },
->      [IBEX_DEV_PATTGEN] =        {  0x400e0000,  0x1000  },
-> -    [IBEX_DEV_RV_TIMER] =       {  0x40100000,  0x1000  },
-> +    [IBEX_DEV_TIMER] =          {  0x40100000,  0x1000  },
->      [IBEX_DEV_SENSOR_CTRL] =    {  0x40110000,  0x1000  },
->      [IBEX_DEV_OTP_CTRL] =       {  0x40130000,  0x4000  },
->      [IBEX_DEV_PWRMGR] =         {  0x40400000,  0x1000  },
-> @@ -106,6 +106,8 @@ static void lowrisc_ibex_soc_init(Object *obj)
->      object_initialize_child(obj, "plic", &s->plic, TYPE_IBEX_PLIC);
 >
->      object_initialize_child(obj, "uart", &s->uart, TYPE_IBEX_UART);
-> +
-> +    object_initialize_child(obj, "timer", &s->timer, TYPE_IBEX_TIMER);
->  }
 >
->  static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-> @@ -159,6 +161,14 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->                         3, qdev_get_gpio_in(DEVICE(&s->plic),
->                         IBEX_UART0_RX_OVERFLOW_IRQ));
+> The problem remains is that I still do not have the u-boot and linux booting. The unix\#serial1.sock remains offline always.
+> These are the HSS logs -
 >
-> +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->timer), errp)) {
-> +        return;
-> +    }
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->timer), 0, memmap[IBEX_DEV_TIMER].base);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(&s->timer),
-> +                       0, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                       IBEX_TIMER_TIMEREXPIRED0_0));
-> +
->      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
->          memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.spi",
-> @@ -167,8 +177,6 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->          memmap[IBEX_DEV_I2C].base, memmap[IBEX_DEV_I2C].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.pattgen",
->          memmap[IBEX_DEV_PATTGEN].base, memmap[IBEX_DEV_PATTGEN].size);
-> -    create_unimplemented_device("riscv.lowrisc.ibex.rv_timer",
-> -        memmap[IBEX_DEV_RV_TIMER].base, memmap[IBEX_DEV_RV_TIMER].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.sensor_ctrl",
->          memmap[IBEX_DEV_SENSOR_CTRL].base, memmap[IBEX_DEV_SENSOR_CTRL].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.otp_ctrl",
+> [0.115001] HSS_E51_Banner(): PolarFire(R) SoC Hart Software Services (HSS) - version 0.99.15
+> (c) Copyright 2017-2020 Microchip Corporation.
+>
+> [0.116234] HSS_E51_Banner(): incorporating OpenSBI - version 0.6
+> (c) Copyright 2019-2020 Western Digital Corporation.
+>
+> [0.117071] HSS_PrintBuildId(): Build ID: 811342a39f80176f9e2086bf963a83224b3d3a2e
+> [0.117817] HSS_PrintToolVersions(): Built with the following tools:
+>  - riscv64-unknown-linux-gnu-gcc (GCC) 10.2.0
+
+Yeah, this log indicates that GCC 10.x works with HSS :)
+
+>  - GNU ld (GNU Binutils) 2.36.1
+>
+> [0.118760] HSS_MemTestDDRFast(): DDR size is 1 GiB
+> [0.130270] HSS_MMCInit(): Attempting to select SDCARD ... Passed
+> Press a key to enter CLI, ESC to skip
+> Timeout in 5 seconds
+>
+> .....
+> [5.138747] HSS_TinyCLI_Parser(): CLI check timeout
+> [5.139371] IPI_QueuesInit(): Initializing IPI Queues (9000 bytes @ 8000e40)...
+> [5.140435] HSS_PMP_Init(): Initializing PMPs
+> [5.141093] HSS_BootInit(): Initializing Boot Image..
+> [5.141787] getBootImageFromMMC_(): Preparing to copy from MMC to DDR ...
+> [5.142671] getBootImageFromMMC_(): Attempting to read image header (1552 bytes) ...
+> [5.144118] GPT_ValidateHeader(): Validated GPT Header ...
+> [5.153768] GPT_ValidatePartitionEntries(): Validated GPT Partition Entries ...
+> [5.155210] copyBootImageToDDR_(): Copying 436008 bytes to 0xA0000000
+> [5.407848] copyBootImageToDDR_(): Calculated CRC32 of image in DDR is 795fbbea
+> [5.412058] HSS_BootInit():  boot image passed CRC
+> [5.412407] HSS_BootInit(): Boot image set name: "PolarFire-SoC-HSS::U-Boot"
+> [5.412951] HSS_BootInit(): Boot Image registered...
+> [5.413376] HSS_Boot_RestartCore(): called for all harts
+> [5.414295] RunStateMachine(): boot_service(u54_1)::Init -> boot_service(u54_1)::SetupPMP
+> [5.414812] RunStateMachine(): boot_service(u54_2)::Init -> boot_service(u54_2)::SetupPMP
+> [5.415207] RunStateMachine(): boot_service(u54_3)::Init -> boot_service(u54_3)::SetupPMP
+> [5.415631] RunStateMachine(): boot_service(u54_4)::Init -> boot_service(u54_4)::SetupPMP
+> [5.416107] RunStateMachine(): usbdmsc_service::init -> usbdmsc_service::idle
+> [5.417164] RunStateMachine(): boot_service(u54_1)::SetupPMP -> boot_service(u54_1)::SetupPMPComplete
+> [5.417887] RunStateMachine(): boot_service(u54_2)::SetupPMP -> boot_service(u54_2)::SetupPMPComplete
+> [5.418552] RunStateMachine(): boot_service(u54_3)::SetupPMP -> boot_service(u54_3)::SetupPMPComplete
+> [5.419890] RunStateMachine(): boot_service(u54_4)::SetupPMP -> boot_service(u54_4)::SetupPMPComplete
+> [23.955147] RunStateMachine(): boot_service(u54_1)::SetupPMPComplete -> boot_service(u54_1)::ZeroInit
+> [23.955754] RunStateMachine(): boot_service(u54_2)::SetupPMPComplete -> boot_service(u54_2)::ZeroInit
+> [23.956259] RunStateMachine(): boot_service(u54_3)::SetupPMPComplete -> boot_service(u54_3)::ZeroInit
+> [23.956757] RunStateMachine(): boot_service(u54_4)::SetupPMPComplete -> boot_service(u54_4)::ZeroInit
+> [23.957371] RunStateMachine(): boot_service(u54_1)::ZeroInit -> boot_service(u54_1)::Download
+> [23.957876] RunStateMachine(): boot_service(u54_2)::ZeroInit -> boot_service(u54_2)::Download
+> [23.958386] RunStateMachine(): boot_service(u54_3)::ZeroInit -> boot_service(u54_3)::Download
+> [23.958856] RunStateMachine(): boot_service(u54_4)::ZeroInit -> boot_service(u54_4)::Download
+> [23.960300] RunStateMachine(): boot_service(u54_2)::Download -> boot_service(u54_2)::Idle
+> [23.960723] RunStateMachine(): boot_service(u54_3)::Download -> boot_service(u54_3)::Idle
+> [23.961129] RunStateMachine(): boot_service(u54_4)::Download -> boot_service(u54_4)::Idle
+> [23.983168] RunStateMachine(): boot_service(u54_1)::Download -> boot_service(u54_1)::Wait
+> [23.983661] boot_download_chunks_onExit(): boot_service(u54_1)::u54_2:sbi_init 80200000
+> [23.984374] boot_download_chunks_onExit(): boot_service(u54_1)::u54_3:sbi_init 80200000
+> [23.985418] boot_download_chunks_onExit(): boot_service(u54_1)::u54_4:sbi_init 80200000
+> [23.986783] boot_download_chunks_onExit(): boot_service(u54_1)::u54_1:sbi_init 80200000
+> [23.989086] boot_wait_onEntry(): boot_service(u54_1)::Checking for IPI ACKs: - -
+> [23.992106] boot_wait_handler(): boot_service(u54_1)::Checking for IPI ACKs: ACK/IDLE ACK
+> [23.994062] RunStateMachine(): boot_service(u54_1)::Wait -> boot_service(u54_1)::Idle
+>
+
+Based on the above log, HSS successfully boots U-Boot already. The
+U-Boot console is on the other serial console, which I guess you might
+turn it off?
+
+>
+> One thing I overlooked in the document is that we are preparing the *.wic file after downloading
+> but passing the *.img in the qemu command. How to convert the wic to img. I couldn't see much about
+> this on the internet ?
+
+The *.wic image is the raw image. Just use it as it is.
+
+> Since U-boot currently does not boot, it seems passing the wic file directly is not right. Now sure here.
+>
+>  qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
+>     -bios path/to/hss.bin -sd path/to/sdcard.img \
+>     -nic user,model=cadence_gem \
+>     -nic tap,ifname=tap,model=cadence_gem,script=no \
+>     -display none -serial stdio \
+>     -chardev socket,id=serial1,path=serial1.sock,server=on,wait=on \
+>     -serial chardev:serial1
+>
+>
+> Are there other ways in qemu icicle machine supported now to pass the u-boot and kernel?
+>
+
+Yes, it has. The capability to direct boot kernel (can be U-Boot or an
+OS kernel) without HSS is currently in the Alistair's riscv-next tree
+and should land on qemu/master soon.
 
 Regards,
 Bin
