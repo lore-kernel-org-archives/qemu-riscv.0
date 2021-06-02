@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1loWHg-0000iB-7X
-	for mharc-qemu-riscv@gnu.org; Wed, 02 Jun 2021 15:12:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35554)
+	id 1loWKk-0007S0-Vd
+	for mharc-qemu-riscv@gnu.org; Wed, 02 Jun 2021 15:15:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36210)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1loWHa-0000ds-Hl; Wed, 02 Jun 2021 15:12:03 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d]:38829)
+ id 1loWKh-0007Q9-CA; Wed, 02 Jun 2021 15:15:15 -0400
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f]:35763)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1loWHW-0001vf-K0; Wed, 02 Jun 2021 15:12:02 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- t4-20020a1c77040000b029019d22d84ebdso4409940wmi.3; 
- Wed, 02 Jun 2021 12:11:57 -0700 (PDT)
+ id 1loWKe-0003qV-Ek; Wed, 02 Jun 2021 15:15:15 -0400
+Received: by mail-ej1-x62f.google.com with SMTP id h24so5498983ejy.2;
+ Wed, 02 Jun 2021 12:15:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=XZz91rM5BGIW4nSoz6um0ZzXqGuRd9b6erkMDM2N8cs=;
- b=UnfrK+4GBbt+Hzu7he1J9AIQrxEbHwiWwptcoBTwqPE2P1zBK+5mqBoELBSsZvK7Lv
- aVyMNK7/yGN3qqtHDk/L66RzdY0rtB59aY77Pvg98U9zP0MmO3WqfvVwPykbF+q+6zDz
- mBV7xwaVbslYCk9OnXKpvZWi0IHUcfBbtjWJYN8sKY4IkueRcB9fIw0F/hQIbgUKrpNK
- vtL6ao8cUV8FZqpZ2jSKBuEmyBCQ862mKtiV3ZUJnzuWjs8DmThCK72vFbarqaYDla4T
- D4iCbfKnDfc12QcPI9gueTZXsbinHZrPRRye+7aX9rXpXdRA1evK8peAl89r23qOihdN
- l1NQ==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=WA6KYc5+P4R81g9uO7yz53xcRhgZ4TBfxEwjfMeCSYc=;
+ b=hG7TelvkFKN1V9mrKrYbyb1gPoLanGljb2muqqufKx9Xv9LgdCVzLRlNMAwj1PA6KY
+ 2kJxwZCvC2R7caQusrQHNatgKBSgj/9b6oVg825s7L4NB06lt+MD4Eaf4oYMq2pvCwp1
+ a0VozjPhqbY36ghgf3MQducSzjBUkOEfAas7osXBU9egzkR9q54IMeRXe6deb52jPN6h
+ 7tUNF03rTZambgfywTdEt1OUm0LGifU3WdU287AwXsyGL6ldVhKbMJuVc1NaxLQJBxQp
+ wCRCNhOgMBFDhKgGyi+j4zz/jNhVkTDo2jQVaptFstaqlAI0mTNbFKv3LvptJk96hRdQ
+ 6rQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=XZz91rM5BGIW4nSoz6um0ZzXqGuRd9b6erkMDM2N8cs=;
- b=XW4VqWq5lU90ZqGszfFEVsACRyqvsN3s5aQfSUus0YRNyN5VrcANA8TmhqHOJj28rK
- ygQK4U89WQtsfzdUwcGcyhR8Bz+nWOB+JAMCKlghgLd95PKAmpAXOxTWQkWi+rzCckpb
- yyCMS/oM1u4hqcSBy63v3tfb+COCOW7JTouSo22AMzDesdND9OK1hYC+YnLRij/vTkQB
- 4hYIzxyWm2/0393ofq7icwWqvmqD0wTxKz7hEx4TIDPSBFwyvcYIxzBH7rGBcoBIpx6i
- S7mMKNmOoa7JHX+XYPrIh5wOZnhK9JkGCLPNrPpiBpSfksjsY9PlYmbtOUmeABGx0OPN
- cVug==
-X-Gm-Message-State: AOAM530F5+oH1Ocb3/5Sobs+woTiyKoa27Hw4vI2bdMx/AI3LlRsLmnV
- YHpXfms/xduyQqCRtqyT2O1mKKQRPdQrxiRO
-X-Google-Smtp-Source: ABdhPJwv7/1LjF1fundtjB9gkDh72nQyMVbP8xkBH/lBa5hAk9t7xQBXXRw6RGwCi6BXsTHt8WgmaA==
-X-Received: by 2002:a1c:6657:: with SMTP id a84mr23393640wmc.15.1622661116568; 
- Wed, 02 Jun 2021 12:11:56 -0700 (PDT)
-Received: from asus.. ([83.144.170.28])
- by smtp.gmail.com with ESMTPSA id n2sm635304wmb.32.2021.06.02.12.11.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jun 2021 12:11:56 -0700 (PDT)
-From: Jose Martins <josemartins90@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Jose Martins <josemartins90@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH 2/2] target/riscv: remove force HS exception
-Date: Wed,  2 Jun 2021 20:11:25 +0100
-Message-Id: <20210602191125.525742-3-josemartins90@gmail.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210602191125.525742-1-josemartins90@gmail.com>
-References: <20210602191125.525742-1-josemartins90@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=WA6KYc5+P4R81g9uO7yz53xcRhgZ4TBfxEwjfMeCSYc=;
+ b=bph369DJoW0HiYRXby4xvymGrxYwy9YStNMpi8dMemdVkDNoWtjqPRlCVDsu5kYgQH
+ t+JvivTLOnuVHbz9HxmgF+0EoRMB+z9gGare5GW6sSGjHVk8XqtDVQnwX3dyYsD2Dfkh
+ hlWTTzKYslbURfgjOoITMBViQdCWhbi8xWkpciUVRPs95zt0cp2J9cI0FZaoe1fFYMpo
+ wEwecdr4/J1BQiaK0halImM1nVYYc3d6w56Xd+fEE2O64qNRcTilYrK4rd3kgJX5THWC
+ XbdBlwF/J2T63tOiSKolPPtjjGF0xFtXX0sIOA4z17G9C8XPF+3hdCuo7j3X4WhlYSYB
+ Pwxw==
+X-Gm-Message-State: AOAM5318TzmeKX5EVsv1Hf9IKzbpWvFYF4ZtnfhW/sUEwbEOug4r7Mr5
+ Qt7CG3m3JITXmR2rL4KzjqkmYpRkGse2yz6HbzM=
+X-Google-Smtp-Source: ABdhPJx4NGEElvpreS1SErMI+KM2RtPScKLyDrQGMBXOPDjfbsKyCzTpMR145ZoDigL8OU59z5UTqG8FyJ7HUdtnLnk=
+X-Received: by 2002:a17:906:b296:: with SMTP id
+ q22mr23187349ejz.9.1622661310314; 
+ Wed, 02 Jun 2021 12:15:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=josemartins90@gmail.com; helo=mail-wm1-x32d.google.com
+References: <20210522154429.361235-1-josemartins90@gmail.com>
+ <CAKmqyKNSG4ACk-QQ9_0XzAXWr_NPE3sijxbs+6Kz3J=N_k+LMw@mail.gmail.com>
+ <2e3c4d2f-475f-4d02-6be5-a89628cd6815@c-sky.com>
+In-Reply-To: <2e3c4d2f-475f-4d02-6be5-a89628cd6815@c-sky.com>
+From: Jose Martins <josemartins90@gmail.com>
+Date: Wed, 2 Jun 2021 20:14:59 +0100
+Message-ID: <CAC41xo1ftM_WcjNOio2ii-BtqtDh6RTEvsmwO69GU6taOCzYRA@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: fix VS interrupts forwarding to HS
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: Alistair Francis <alistair23@gmail.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=josemartins90@gmail.com; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -80,126 +79,242 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2021 19:12:05 -0000
+X-List-Received-Date: Wed, 02 Jun 2021 19:15:16 -0000
 
-There is no need to "force an hs exception" as the current privilege
-level, the state of the global ie and of the delegation registers should
-be enough to route the interrupt to the appropriate privilege level in
-riscv_cpu_do_interrupt. The is true for both asynchronous and
-synchronous exceptions, specifically, guest page faults which must be
-hardwired to zero hedeleg. As such the hs_force_except mechanism can be
-removed.
+Hello Zhiwei and Alistair,
 
-Signed-off-by: Jose Martins <josemartins90@gmail.com>
----
- target/riscv/cpu.h        |  2 --
- target/riscv/cpu_bits.h   |  6 ------
- target/riscv/cpu_helper.c | 26 +-------------------------
- 3 files changed, 1 insertion(+), 33 deletions(-)
+I went for a middle-ground solution. I divided the patch into two: one
+fixes the vs interrupt forwarding to the hypervisor, the other removes
+the unnecessary force exception stuff. I just submitted the patch
+series. I hope it's ok with you.
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0a33d387ba..a30a64241a 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -337,8 +337,6 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
- bool riscv_cpu_fp_enabled(CPURISCVState *env);
- bool riscv_cpu_virt_enabled(CPURISCVState *env);
- void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
--bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
--void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable);
- bool riscv_cpu_two_stage_lookup(int mmu_idx);
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
- hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index caf4599207..7322f54157 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -462,12 +462,6 @@
- 
- /* Virtulisation Register Fields */
- #define VIRT_ONOFF          1
--/* This is used to save state for when we take an exception. If this is set
-- * that means that we want to force a HS level exception (no matter what the
-- * delegation is set to). This will occur for things such as a second level
-- * page table fault.
-- */
--#define FORCE_HS_EXCEP      2
- 
- /* RV32 satp CSR field masks */
- #define SATP32_MODE         0x80000000
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 592d4642be..babe3d844b 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -178,24 +178,6 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
-     env->virt = set_field(env->virt, VIRT_ONOFF, enable);
- }
- 
--bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env)
--{
--    if (!riscv_has_ext(env, RVH)) {
--        return false;
--    }
--
--    return get_field(env->virt, FORCE_HS_EXCEP);
--}
--
--void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable)
--{
--    if (!riscv_has_ext(env, RVH)) {
--        return;
--    }
--
--    env->virt = set_field(env->virt, FORCE_HS_EXCEP, enable);
--}
--
- bool riscv_cpu_two_stage_lookup(int mmu_idx)
- {
-     return mmu_idx & TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-@@ -884,7 +866,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
- 
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
--    bool force_hs_execp = riscv_cpu_force_hs_excep_enabled(env);
-     uint64_t s;
- 
-     /* cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
-@@ -913,8 +894,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
-         case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
-         case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
--            force_hs_execp = true;
--            /* fallthrough */
-         case RISCV_EXCP_INST_ADDR_MIS:
-         case RISCV_EXCP_INST_ACCESS_FAULT:
-         case RISCV_EXCP_LOAD_ADDR_MIS:
-@@ -973,8 +952,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-                 env->hstatus = set_field(env->hstatus, HSTATUS_GVA, 0);
-             }
- 
--            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
--                !force_hs_execp) {
-+            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1)) {
-                 /* Trap to VS mode */
-                 /*
-                  * See if we need to adjust cause. Yes if its VS mode interrupt
-@@ -996,7 +974,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-                 htval = env->guest_phys_fault_addr;
- 
-                 riscv_cpu_set_virt_enabled(env, 0);
--                riscv_cpu_set_force_hs_excep(env, 0);
-             } else {
-                 /* Trap into HS mode */
-                 env->hstatus = set_field(env->hstatus, HSTATUS_SPV, false);
-@@ -1032,7 +1009,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
- 
-             /* Trapping to M mode, virt is disabled */
-             riscv_cpu_set_virt_enabled(env, 0);
--            riscv_cpu_set_force_hs_excep(env, 0);
-         }
- 
-         s = env->mstatus;
--- 
-2.30.2
+Jos=C3=A9
 
+On Fri, 28 May 2021 at 01:36, LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>
+>
+> On 5/28/21 6:34 AM, Alistair Francis wrote:
+> > On Sun, May 23, 2021 at 1:45 AM Jose Martins <josemartins90@gmail.com> =
+wrote:
+> >> VS interrupts (2, 6, 10) were not correctly forwarded to hs-mode when
+> >> not delegated in hideleg (which was not being taken into account). Thi=
+s
+> >> was mainly because hs level sie was not always considered enabled when
+> >> it should. The spec states that "Interrupts for higher-privilege modes=
+,
+> >> y>x, are always globally enabled regardless of the setting of the glob=
+al
+> >> yIE bit for the higher-privilege mode." and also "For purposes of
+> >> interrupt global enables, HS-mode is considered more privileged than
+> >> VS-mode, and VS-mode is considered more privileged than VU-mode".
+> >>
+> >> These interrupts should be treated the same as any other kind of
+> >> exception. Therefore, there is no need to "force an hs exception" as t=
+he
+> >> current privilege level, the state of the global ie and of the
+> >> delegation registers should be enough to route the interrupt to the
+> >> appropriate privilege level in riscv_cpu_do_interrupt. Also, these
+> >> interrupts never target m-mode, which is  guaranteed by the hardwiring
+> >> of the corresponding bits in mideleg. The same is true for synchronous
+> >> exceptions, specifically, guest page faults which must be hardwired in
+> >> to zero hedeleg. As such the hs_force_except mechanism can be removed.
+> >>
+> >> Signed-off-by: Jose Martins <josemartins90@gmail.com>
+> > This looks right to me, but this was one of the most confusing parts
+> > of the implementation. I also don't think the patch is too long as
+> > it's mostly just deleting stuff.
+> >
+> > I don't fully understand your concerns Zhiwei, do you mind stating them=
+ again?
+>
+> Hi Alistair,
+>
+> My main concern is the commit message is to complex.
+>
+> I also have a question why force hs exception in current code.
+> Then we can give a brief commit message.
+>
+> Best Regards,
+> Zhiwei
+>
+> >
+> > Alistair
+> >
+> >> ---
+> >> This version of the patch also removes the uneeded hs_force_except
+> >> functions, variables and macro.
+> >>
+> >>   target/riscv/cpu.h        |  2 --
+> >>   target/riscv/cpu_bits.h   |  6 -----
+> >>   target/riscv/cpu_helper.c | 54 +++++++------------------------------=
+--
+> >>   3 files changed, 9 insertions(+), 53 deletions(-)
+> >>
+> >> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> >> index 0a33d387ba..a30a64241a 100644
+> >> --- a/target/riscv/cpu.h
+> >> +++ b/target/riscv/cpu.h
+> >> @@ -337,8 +337,6 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int in=
+terrupt_request);
+> >>   bool riscv_cpu_fp_enabled(CPURISCVState *env);
+> >>   bool riscv_cpu_virt_enabled(CPURISCVState *env);
+> >>   void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+> >> -bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
+> >> -void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable);
+> >>   bool riscv_cpu_two_stage_lookup(int mmu_idx);
+> >>   int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
+> >>   hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+> >> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> >> index caf4599207..7322f54157 100644
+> >> --- a/target/riscv/cpu_bits.h
+> >> +++ b/target/riscv/cpu_bits.h
+> >> @@ -462,12 +462,6 @@
+> >>
+> >>   /* Virtulisation Register Fields */
+> >>   #define VIRT_ONOFF          1
+> >> -/* This is used to save state for when we take an exception. If this =
+is set
+> >> - * that means that we want to force a HS level exception (no matter w=
+hat the
+> >> - * delegation is set to). This will occur for things such as a second=
+ level
+> >> - * page table fault.
+> >> - */
+> >> -#define FORCE_HS_EXCEP      2
+> >>
+> >>   /* RV32 satp CSR field masks */
+> >>   #define SATP32_MODE         0x80000000
+> >> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> >> index 21c54ef561..babe3d844b 100644
+> >> --- a/target/riscv/cpu_helper.c
+> >> +++ b/target/riscv/cpu_helper.c
+> >> @@ -38,36 +38,24 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool i=
+fetch)
+> >>   #ifndef CONFIG_USER_ONLY
+> >>   static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+> >>   {
+> >> -    target_ulong irqs;
+> >> +    target_ulong virt_enabled =3D riscv_cpu_virt_enabled(env);
+> >>
+> >>       target_ulong mstatus_mie =3D get_field(env->mstatus, MSTATUS_MIE=
+);
+> >>       target_ulong mstatus_sie =3D get_field(env->mstatus, MSTATUS_SIE=
+);
+> >> -    target_ulong hs_mstatus_sie =3D get_field(env->mstatus_hs, MSTATU=
+S_SIE);
+> >>
+> >> -    target_ulong pending =3D env->mip & env->mie &
+> >> -                               ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> >> -    target_ulong vspending =3D (env->mip & env->mie &
+> >> -                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
+> >> +    target_ulong pending =3D env->mip & env->mie;
+> >>
+> >>       target_ulong mie    =3D env->priv < PRV_M ||
+> >>                             (env->priv =3D=3D PRV_M && mstatus_mie);
+> >>       target_ulong sie    =3D env->priv < PRV_S ||
+> >>                             (env->priv =3D=3D PRV_S && mstatus_sie);
+> >> -    target_ulong hs_sie =3D env->priv < PRV_S ||
+> >> -                          (env->priv =3D=3D PRV_S && hs_mstatus_sie);
+> >> +    target_ulong hsie   =3D virt_enabled || sie;
+> >> +    target_ulong vsie   =3D virt_enabled && sie;
+> >>
+> >> -    if (riscv_cpu_virt_enabled(env)) {
+> >> -        target_ulong pending_hs_irq =3D pending & -hs_sie;
+> >> -
+> >> -        if (pending_hs_irq) {
+> >> -            riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
+> >> -            return ctz64(pending_hs_irq);
+> >> -        }
+> >> -
+> >> -        pending =3D vspending;
+> >> -    }
+> >> -
+> >> -    irqs =3D (pending & ~env->mideleg & -mie) | (pending &  env->mide=
+leg & -sie);
+> >> +    target_ulong irqs =3D
+> >> +            (pending & ~env->mideleg & -mie) |
+> >> +            (pending &  env->mideleg & ~env->hideleg & -hsie) |
+> >> +            (pending &  env->mideleg &  env->hideleg & -vsie);
+> >>
+> >>       if (irqs) {
+> >>           return ctz64(irqs); /* since non-zero */
+> >> @@ -190,24 +178,6 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *en=
+v, bool enable)
+> >>       env->virt =3D set_field(env->virt, VIRT_ONOFF, enable);
+> >>   }
+> >>
+> >> -bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env)
+> >> -{
+> >> -    if (!riscv_has_ext(env, RVH)) {
+> >> -        return false;
+> >> -    }
+> >> -
+> >> -    return get_field(env->virt, FORCE_HS_EXCEP);
+> >> -}
+> >> -
+> >> -void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable)
+> >> -{
+> >> -    if (!riscv_has_ext(env, RVH)) {
+> >> -        return;
+> >> -    }
+> >> -
+> >> -    env->virt =3D set_field(env->virt, FORCE_HS_EXCEP, enable);
+> >> -}
+> >> -
+> >>   bool riscv_cpu_two_stage_lookup(int mmu_idx)
+> >>   {
+> >>       return mmu_idx & TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+> >> @@ -896,7 +866,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >>
+> >>       RISCVCPU *cpu =3D RISCV_CPU(cs);
+> >>       CPURISCVState *env =3D &cpu->env;
+> >> -    bool force_hs_execp =3D riscv_cpu_force_hs_excep_enabled(env);
+> >>       uint64_t s;
+> >>
+> >>       /* cs->exception is 32-bits wide unlike mcause which is XLEN-bit=
+s wide
+> >> @@ -925,8 +894,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >>           case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
+> >>           case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+> >>           case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
+> >> -            force_hs_execp =3D true;
+> >> -            /* fallthrough */
+> >>           case RISCV_EXCP_INST_ADDR_MIS:
+> >>           case RISCV_EXCP_INST_ACCESS_FAULT:
+> >>           case RISCV_EXCP_LOAD_ADDR_MIS:
+> >> @@ -985,8 +952,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >>                   env->hstatus =3D set_field(env->hstatus, HSTATUS_GVA=
+, 0);
+> >>               }
+> >>
+> >> -            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1=
+) &&
+> >> -                !force_hs_execp) {
+> >> +            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1=
+)) {
+> >>                   /* Trap to VS mode */
+> >>                   /*
+> >>                    * See if we need to adjust cause. Yes if its VS mod=
+e interrupt
+> >> @@ -1008,7 +974,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >>                   htval =3D env->guest_phys_fault_addr;
+> >>
+> >>                   riscv_cpu_set_virt_enabled(env, 0);
+> >> -                riscv_cpu_set_force_hs_excep(env, 0);
+> >>               } else {
+> >>                   /* Trap into HS mode */
+> >>                   env->hstatus =3D set_field(env->hstatus, HSTATUS_SPV=
+, false);
+> >> @@ -1044,7 +1009,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >>
+> >>               /* Trapping to M mode, virt is disabled */
+> >>               riscv_cpu_set_virt_enabled(env, 0);
+> >> -            riscv_cpu_set_force_hs_excep(env, 0);
+> >>           }
+> >>
+> >>           s =3D env->mstatus;
+> >> --
+> >> 2.30.2
+> >>
+> >>
 
