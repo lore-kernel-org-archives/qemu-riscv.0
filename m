@@ -1,68 +1,90 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lozmO-0006pF-5f
-	for mharc-qemu-riscv@gnu.org; Thu, 03 Jun 2021 22:41:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40198)
+	id 1lpC8e-00036w-Ag
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Jun 2021 11:53:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44580)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lozmM-0006ok-Hn; Thu, 03 Jun 2021 22:41:46 -0400
-Received: from mail-yb1-xb2f.google.com ([2607:f8b0:4864:20::b2f]:40650)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1lpC8c-0002zn-Fe
+ for qemu-riscv@nongnu.org; Fri, 04 Jun 2021 11:53:34 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435]:46855)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lozmJ-0001bX-D2; Thu, 03 Jun 2021 22:41:46 -0400
-Received: by mail-yb1-xb2f.google.com with SMTP id e10so11667177ybb.7;
- Thu, 03 Jun 2021 19:41:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Cg/2tce+e+jk+IPgyytsR1OXybj/QTMIpaGekbERJaI=;
- b=P3eg+/6dFR0TgB+FUf8F1NwVOV7evFFmDLAAQmhWJIscVEkp81a8tzMJ6YTGcf0jrK
- M85J/dCuTF+PNGgFvjkKXh4nUUbzjK4IYNZEchy9aSDH4xUkGXi9fsjlxMCWcxm94BXV
- 1S9/UYlZ6I/zzeAwFw8fP8Tam0/0iJbWkrST3/lSDGGOwTpD/oLRv5n2md0h7bu/X6KF
- ejHayNw4l7eVfGpyApJihHfeJon9FGiN8zdTpmxMPM81KftrbZoLT/FBBUoCmIFcTXhC
- rMPK3NH8EFnjfEZ+9uwa1RHL4D91ii/mQL/XI6B/DBKWcZDvtvFodinQe9oIYH15Mdge
- sucQ==
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1lpC8Z-00006Z-GR
+ for qemu-riscv@nongnu.org; Fri, 04 Jun 2021 11:53:34 -0400
+Received: by mail-wr1-x435.google.com with SMTP id a11so7917068wrt.13
+ for <qemu-riscv@nongnu.org>; Fri, 04 Jun 2021 08:53:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=bGZvEWP0B7XQQEsHoRPrpycuhOjRaiqhP5MCalZexp8=;
+ b=WXrKnXghbHEvw8Vgiq01+e7x8S36P2nbON4QAdKLwgJKvKlXFLZL2t966Npejniae1
+ kmgtm8uPNGRTwLthfl+0SYlhYwqJ+PI8bI2QsGTUQodygLZHtFTJwsm5wMAXUEx4zKQV
+ k39dJMQ7hLKZ+DAbpot18+mGaLE2QViRkqFgWIUXDqFNMw7861ZL4OtZNqGR6khhc0EA
+ iR5wqCSgX/Hcefcczp7oVSQBjHODyHzSf/Cnfz+oIODZB9yB0GbGKd+H+A5Us597HxLm
+ nlBc6yAyrRjGezhaxh6rRXmL/aCBRz1Slqtq35LlPbThTgqAv/oyZkM080QC9TnX7lnW
+ 3/Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Cg/2tce+e+jk+IPgyytsR1OXybj/QTMIpaGekbERJaI=;
- b=TdDfjPB8PqPXcKbT0d+NGl2SRdN5fghpI/iHNL0fBo74eo16oQcLEasFCc3jaJ/gzt
- /EBzvJOv/fAU+LOLbDRxLvzwsyoYqk1BeOGdpx8nzNT7lv6haG+aTiuIvCJQsMoVClrK
- N7MyPLLMYq9+XCbnpvxrGT3lOmTH8q3AvhJIn7w98CVoT5Pa+04LOW7bXI61eGUYVjJM
- BuP9SmHifcKTrj+gcVDezDCGnK7fyQPIQF2nxJDvWnXj+u7qQLfiLaNmdw5WeV8oOTdt
- +4heZmahMSMn53cZ6a1F+ElSaR+SCOUJu2KbqZCi+Wcf5MvA3zVK9qhthE/Tri3V1pgh
- Dxzg==
-X-Gm-Message-State: AOAM530t7V5k2xxzchAymIrPJR1aDPPtRPLxjeNRVDYVpMF7hIUxpcEJ
- KH1ExkHZliTuJ5rsJ/L1Ta+EAcweHvSnkc+tPy4=
-X-Google-Smtp-Source: ABdhPJyLGJJ0n6Nj2V3dTZo8OVm9Xgfy5aXp8AQ4zVEmi7XIaVg0AcwwtKzp4a3aw6zq6EvmvLOC6P0nqFBrXJOO/4k=
-X-Received: by 2002:a25:6c04:: with SMTP id h4mr2169770ybc.122.1622774500102; 
- Thu, 03 Jun 2021 19:41:40 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=bGZvEWP0B7XQQEsHoRPrpycuhOjRaiqhP5MCalZexp8=;
+ b=Zp7duNrpPYWOI27+MRI5NVAa57mpKB11T2TCoubEsVXnzItNuSsKXaxZ0RHBTX6JvR
+ QwPKMU5Mr//hTz/oGHfxrNdssFOsr9UQQ597VUlmM1MveE0ayiiIsccFor+vuAO3q4IT
+ lhxQ4/7FfbykbzJzbz/aPIBLiCyp4zf8WtEvTr0i8+CH1ExTHdTMGUmhajJs1oerOUag
+ iSwUnGgeIOvwD1zv6KhYm4tERjSMjx26wXlYk0gFnKH/lF472+MDWySUfsqANtgcdKN8
+ ksZfmF73h9+vsUSaQs+aSW0ScXGWAdeDlgoNYVAioPtUfhanKGIN0abMJxyBiwd9g7cT
+ bmtw==
+X-Gm-Message-State: AOAM533bwrxCYKVKCluuusqp+XWko906b6GJjogw1b1YYejhMOqY96Ah
+ yj9L3WDpXEJQOz1hGFbwFlGktQ==
+X-Google-Smtp-Source: ABdhPJzWNcfOAbmTA2OrWC8c4VzflEkQqWUYnBHLnE3cP+gxprJXVyBjUmPrSNOIvrS6qB5vw7NDBQ==
+X-Received: by 2002:a5d:54c8:: with SMTP id x8mr4706349wrv.109.1622822010020; 
+ Fri, 04 Jun 2021 08:53:30 -0700 (PDT)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id g11sm6873579wri.59.2021.06.04.08.53.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Jun 2021 08:53:24 -0700 (PDT)
+Received: from zen.lan (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id A88F91FF9C;
+ Fri,  4 Jun 2021 16:53:13 +0100 (BST)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, Claudio Fontana <cfontana@suse.de>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Taylor Simpson <tsimpson@quicinc.com>, Laurent Vivier <laurent@vivier.eu>,
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
+ Stafford Horne <shorne@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Cornelia Huck <cohuck@redhat.com>,
+ Thomas Huth <thuth@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ qemu-ppc@nongnu.org (open list:PowerPC TCG CPUs),
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
+ qemu-s390x@nongnu.org (open list:S390 general arch...)
+Subject: [PATCH  v16 13/99] meson: add target_user_arch
+Date: Fri,  4 Jun 2021 16:51:46 +0100
+Message-Id: <20210604155312.15902-14-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210604155312.15902-1-alex.bennee@linaro.org>
+References: <20210604155312.15902-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-References: <cover.1622435529.git.alistair.francis@wdc.com>
- <3a2dd5ce519fb1e66b539cba93750fb5cb706b1a.1622435529.git.alistair.francis@wdc.com>
- <CAEUhbmVnyTEaPjukMEuJp-cUXV_fEQGGzLfH47xkma3r3eh5RQ@mail.gmail.com>
- <CAKmqyKMXoOdnjvNDX2q3EbmLEhXa41s8fVAuWC05X+PfkeOhHg@mail.gmail.com>
- <CAEUhbmUQEoxkjoiAVxuyikdzNumDo40iZQxdTmGRS39Oc4gThQ@mail.gmail.com>
- <CAKmqyKN0D5_BXjaH+cqNfGhLiQeGAqOzRNpa=rHTF7V3bFtLgA@mail.gmail.com>
- <CAEUhbmW-8g8ZHXYxPYEOXdrF+xzYpuTsaFz2SCqDmQFtrug2cg@mail.gmail.com>
- <CAKmqyKPPqi1nY=uc+1fbctiK3vNs6n36q56ROUxR1_C0zEAUag@mail.gmail.com>
-In-Reply-To: <CAKmqyKPPqi1nY=uc+1fbctiK3vNs6n36q56ROUxR1_C0zEAUag@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 4 Jun 2021 10:41:27 +0800
-Message-ID: <CAEUhbmWm5nmMvPZ8nHGSMPc=QRqYNnCYZEv35vWoWoB8oC8e9Q@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] hw/timer: Initial commit of Ibex Timer
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2f;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2f.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -77,377 +99,252 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2021 02:41:46 -0000
+X-List-Received-Date: Fri, 04 Jun 2021 15:53:34 -0000
 
-On Fri, Jun 4, 2021 at 10:38 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Fri, Jun 4, 2021 at 12:34 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >
-> > On Fri, Jun 4, 2021 at 10:33 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > >
-> > > On Fri, Jun 4, 2021 at 12:11 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > >
-> > > > On Fri, Jun 4, 2021 at 7:21 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > > >
-> > > > > On Tue, Jun 1, 2021 at 11:05 PM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > > >
-> > > > > > On Mon, May 31, 2021 at 12:33 PM Alistair Francis
-> > > > > > <alistair.francis@wdc.com> wrote:
-> > > > > >
-> > > > > > Please write some commit message, for example, what is supported in
-> > > > > > this initial version, and what is not.
-> > > > >
-> > > > > I'll add something.
-> > > > >
-> > > > > >
-> > > > > > >
-> > > > > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > > > ---
-> > > > > > >  include/hw/timer/ibex_timer.h |  52 ++++++
-> > > > > > >  hw/timer/ibex_timer.c         | 305 ++++++++++++++++++++++++++++++++++
-> > > > > > >  MAINTAINERS                   |   6 +-
-> > > > > > >  hw/timer/meson.build          |   1 +
-> > > > > > >  4 files changed, 360 insertions(+), 4 deletions(-)
-> > > > > > >  create mode 100644 include/hw/timer/ibex_timer.h
-> > > > > > >  create mode 100644 hw/timer/ibex_timer.c
-> > > > > > >
-> > > > > > > diff --git a/include/hw/timer/ibex_timer.h b/include/hw/timer/ibex_timer.h
-> > > > > > > new file mode 100644
-> > > > > > > index 0000000000..6a43537003
-> > > > > > > --- /dev/null
-> > > > > > > +++ b/include/hw/timer/ibex_timer.h
-> > > > > > > @@ -0,0 +1,52 @@
-> > > > > > > +/*
-> > > > > > > + * QEMU lowRISC Ibex Timer device
-> > > > > > > + *
-> > > > > > > + * Copyright (c) 2021 Western Digital
-> > > > > > > + *
-> > > > > > > + * Permission is hereby granted, free of charge, to any person obtaining a copy
-> > > > > > > + * of this software and associated documentation files (the "Software"), to deal
-> > > > > > > + * in the Software without restriction, including without limitation the rights
-> > > > > > > + * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-> > > > > > > + * copies of the Software, and to permit persons to whom the Software is
-> > > > > > > + * furnished to do so, subject to the following conditions:
-> > > > > > > + *
-> > > > > > > + * The above copyright notice and this permission notice shall be included in
-> > > > > > > + * all copies or substantial portions of the Software.
-> > > > > > > + *
-> > > > > > > + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> > > > > > > + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> > > > > > > + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-> > > > > > > + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-> > > > > > > + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-> > > > > > > + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-> > > > > > > + * THE SOFTWARE.
-> > > > > > > + */
-> > > > > > > +
-> > > > > > > +#ifndef HW_IBEX_TIMER_H
-> > > > > > > +#define HW_IBEX_TIMER_H
-> > > > > > > +
-> > > > > > > +#include "hw/sysbus.h"
-> > > > > > > +
-> > > > > > > +#define TYPE_IBEX_TIMER "ibex-timer"
-> > > > > > > +OBJECT_DECLARE_SIMPLE_TYPE(IbexTimerState, IBEX_TIMER)
-> > > > > > > +
-> > > > > > > +struct IbexTimerState {
-> > > > > > > +    /* <private> */
-> > > > > > > +    SysBusDevice parent_obj;
-> > > > > > > +
-> > > > > > > +    /* <public> */
-> > > > > > > +    MemoryRegion mmio;
-> > > > > > > +
-> > > > > > > +    uint32_t timer_ctrl;
-> > > > > > > +    uint32_t timer_cfg0;
-> > > > > > > +    uint32_t timer_compare_lower0;
-> > > > > > > +    uint32_t timer_compare_upper0;
-> > > > > > > +    uint32_t timer_intr_enable;
-> > > > > > > +    uint32_t timer_intr_state;
-> > > > > > > +    uint32_t timer_intr_test;
-> > > > > > > +
-> > > > > > > +    uint32_t timebase_freq;
-> > > > > > > +
-> > > > > > > +    qemu_irq irq;
-> > > > > > > +};
-> > > > > > > +#endif /* HW_IBEX_TIMER_H */
-> > > > > > > diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
-> > > > > > > new file mode 100644
-> > > > > > > index 0000000000..0a1030b15f
-> > > > > > > --- /dev/null
-> > > > > > > +++ b/hw/timer/ibex_timer.c
-> > > > > > > @@ -0,0 +1,305 @@
-> > > > > > > +/*
-> > > > > > > + * QEMU lowRISC Ibex Timer device
-> > > > > > > + *
-> > > > > > > + * Copyright (c) 2021 Western Digital
-> > > > > > > + *
-> > > > > > > + * For details check the documentation here:
-> > > > > > > + *    https://docs.opentitan.org/hw/ip/rv_timer/doc/
-> > > > > > > + *
-> > > > > > > + * Permission is hereby granted, free of charge, to any person obtaining a copy
-> > > > > > > + * of this software and associated documentation files (the "Software"), to deal
-> > > > > > > + * in the Software without restriction, including without limitation the rights
-> > > > > > > + * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-> > > > > > > + * copies of the Software, and to permit persons to whom the Software is
-> > > > > > > + * furnished to do so, subject to the following conditions:
-> > > > > > > + *
-> > > > > > > + * The above copyright notice and this permission notice shall be included in
-> > > > > > > + * all copies or substantial portions of the Software.
-> > > > > > > + *
-> > > > > > > + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> > > > > > > + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> > > > > > > + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-> > > > > > > + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-> > > > > > > + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-> > > > > > > + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-> > > > > > > + * THE SOFTWARE.
-> > > > > > > + */
-> > > > > > > +
-> > > > > > > +#include "qemu/osdep.h"
-> > > > > > > +#include "qemu/log.h"
-> > > > > > > +#include "qemu/timer.h"
-> > > > > > > +#include "hw/timer/ibex_timer.h"
-> > > > > > > +#include "hw/irq.h"
-> > > > > > > +#include "hw/qdev-properties.h"
-> > > > > > > +#include "target/riscv/cpu.h"
-> > > > > > > +#include "migration/vmstate.h"
-> > > > > > > +
-> > > > > > > +REG32(CTRL, 0x00)
-> > > > > > > +    FIELD(CTRL, ACTIVE, 0, 1)
-> > > > > > > +REG32(CFG0, 0x100)
-> > > > > > > +    FIELD(CFG0, PRESCALE, 0, 12)
-> > > > > > > +    FIELD(CFG0, STEP, 16, 8)
-> > > > > > > +REG32(LOWER0, 0x104)
-> > > > > > > +REG32(UPPER0, 0x108)
-> > > > > > > +REG32(COMPARE_LOWER0, 0x10C)
-> > > > > > > +REG32(COMPARE_UPPER0, 0x110)
-> > > > > > > +REG32(INTR_ENABLE, 0x114)
-> > > > > > > +    FIELD(INTR_ENABLE, IE_0, 0, 1)
-> > > > > > > +REG32(INTR_STATE, 0x118)
-> > > > > > > +    FIELD(INTR_STATE, IS_0, 0, 1)
-> > > > > > > +REG32(INTR_TEST, 0x11C)
-> > > > > > > +    FIELD(INTR_TEST, T_0, 0, 1)
-> > > > > > > +
-> > > > > > > +static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
-> > > > > > > +{
-> > > > > > > +    return muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL),
-> > > > > > > +                    timebase_freq, NANOSECONDS_PER_SECOND);
-> > > > > > > +}
-> > > > > > > +
-> > > > > > > +static void ibex_timer_update_irqs(IbexTimerState *s)
-> > > > > > > +{
-> > > > > > > +    CPUState *cs = qemu_get_cpu(0);
-> > > > > > > +    RISCVCPU *cpu = RISCV_CPU(cs);
-> > > > > > > +    uint64_t value = s->timer_compare_lower0 |
-> > > > > > > +                         ((uint64_t)s->timer_compare_upper0 << 32);
-> > > > > > > +    uint64_t next, diff;
-> > > > > > > +    uint64_t now = cpu_riscv_read_rtc(s->timebase_freq);
-> > > > > > > +
-> > > > > > > +    if (!(s->timer_ctrl & R_CTRL_ACTIVE_MASK)) {
-> > > > > > > +        /* Timer isn't active */
-> > > > > > > +        return;
-> > > > > > > +    }
-> > > > > >
-> > > > > > I am not sure if compiler can optimize such, but this if block can be
-> > > > > > put at the beginning of this function.
-> > > > >
-> > > > > QEMU's style guide prefers declarations at the start of blocks, so I
-> > > > > think we should leave this as is.
-> > > > >
-> > > > > https://github.com/qemu/qemu/blob/master/docs/devel/style.rst#declarations
-> > > > >
-> > > > > >
-> > > > > > > +
-> > > > > > > +    /* Update the CPUs mtimecmp */
-> > > > > > > +    cpu->env.timecmp = value;
-> > > > > >
-> > > > > > The existing env.timecmp seems to be only valid for CLINT. Should we
-> > > > > > move it out of env?
-> > > > >
-> > > > > This is the CLINT equivalent for OpenTitan, so in this case it's the
-> > > > > correct use.
-> > > > >
-> > > > > In saying that as a future improvement it's probably good to move this
-> > > > > stuff out of env if we can.
-> > > > >
-> > > > > >
-> > > > > > > +
-> > > > > > > +    if (cpu->env.timecmp <= now) {
-> > > > > > > +        /*
-> > > > > > > +         * If the mtimecmp was in the past raise the interrupt now.
-> > > > > > > +         */
-> > > > > > > +        riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> > > > > > > +        if (s->timer_intr_enable & R_INTR_ENABLE_IE_0_MASK) {
-> > > > > > > +            s->timer_intr_state |= R_INTR_STATE_IS_0_MASK;
-> > > > > > > +            qemu_set_irq(s->irq, true);
-> > > > > > > +        }
-> > > > > > > +        return;
-> > > > > > > +    }
-> > > > > > > +
-> > > > > > > +    /* Setup a timer to trigger the interrupt in the future */
-> > > > > > > +    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
-> > > > > > > +    qemu_set_irq(s->irq, false);
-> > > > > > > +
-> > > > > > > +    diff = cpu->env.timecmp - now;
-> > > > > > > +    next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> > > > > > > +                                 muldiv64(diff,
-> > > > > > > +                                          NANOSECONDS_PER_SECOND,
-> > > > > > > +                                          s->timebase_freq);
-> > > > > > > +
-> > > > > > > +    if (next < qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL)) {
-> > > > > > > +        /* We overflowed the timer, just set it as large as we can */
-> > > > > > > +        timer_mod(cpu->env.timer, 0x0FFFFFFFFFFFFFFF);
-> > > > > >
-> > > > > > Should it be 0x7FFFFFFFFFFFFFFF?
-> > > > >
-> > > > > Yeah, you are right.
-> > > > >
-> > > > > >
-> > > > > > > +    } else {
-> > > > > > > +        timer_mod(cpu->env.timer, next);
-> > > > > > > +    }
-> > > > > > > +}
-> > > > > > > +
-> > > > > > > +static void ibex_timer_cb(void *opaque)
-> > > > > > > +{
-> > > > > > > +    IbexTimerState *s = opaque;
-> > > > > > > +    CPUState *cs = qemu_get_cpu(0);
-> > > > > > > +    RISCVCPU *cpu = RISCV_CPU(cs);
-> > > > > > > +
-> > > > > > > +    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> > > > > > > +    if (s->timer_intr_enable & R_INTR_ENABLE_IE_0_MASK) {
-> > > > > > > +        s->timer_intr_state |= R_INTR_STATE_IS_0_MASK;
-> > > > > > > +        qemu_set_irq(s->irq, true);
-> > > > > > > +    }
-> > > > > > > +}
-> > > > > > > +
-> > > > > > > +static void ibex_timer_reset(DeviceState *dev)
-> > > > > > > +{
-> > > > > > > +    IbexTimerState *s = IBEX_TIMER(dev);
-> > > > > > > +
-> > > > > > > +    CPUState *cpu = qemu_get_cpu(0);
-> > > > > > > +    CPURISCVState *env = cpu->env_ptr;
-> > > > > > > +    env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> > > > > > > +                              &ibex_timer_cb, s);
-> > > > > > > +    env->timecmp = 0;
-> > > > > > > +
-> > > > > > > +    s->timer_ctrl = 0x00000000;
-> > > > > > > +    s->timer_cfg0 = 0x00000000;
-> > > > > > > +    s->timer_compare_lower0 = 0x0000003c;
-> > > > > > > +    s->timer_compare_upper0 = 0x00000000;
-> > > > > >
-> > > > > > The reset values seem not to conform with the spec?
-> > > > >
-> > > > > You are right! Fixed
-> > > > >
-> > > > > >
-> > > > > > > +    s->timer_intr_enable = 0x00000000;
-> > > > > > > +    s->timer_intr_state = 0x00000000;
-> > > > > > > +    s->timer_intr_test = 0x00000000;
-> > > > > > > +
-> > > > > > > +    ibex_timer_update_irqs(s);
-> > > > > > > +}
-> > > > > > > +
-> > > > > > > +static uint64_t ibex_timer_read(void *opaque, hwaddr addr,
-> > > > > > > +                                       unsigned int size)
-> > > > > > > +{
-> > > > > > > +    IbexTimerState *s = opaque;
-> > > > > > > +    uint64_t now = cpu_riscv_read_rtc(s->timebase_freq);
-> > > > > > > +    uint64_t retvalue = 0;
-> > > > > > > +
-> > > > > > > +    switch (addr >> 2) {
-> > > > > > > +    case R_CTRL:
-> > > > > > > +        retvalue = s->timer_ctrl;
-> > > > > > > +        break;
-> > > > > > > +    case R_CFG0:
-> > > > > > > +        retvalue = s->timer_cfg0;
-> > > > > > > +        break;
-> > > > > > > +    case R_LOWER0:
-> > > > > > > +        retvalue = now;
-> > > > > > > +        break;
-> > > > > > > +    case R_UPPER0:
-> > > > > > > +        retvalue = now >> 32;
-> > > > > > > +        break;
-> > > > > > > +    case R_COMPARE_LOWER0:
-> > > > > > > +        retvalue = s->timer_compare_lower0;
-> > > > > > > +        break;
-> > > > > > > +    case R_COMPARE_UPPER0:
-> > > > > > > +        retvalue = s->timer_compare_upper0;
-> > > > > > > +        break;
-> > > > > > > +    case R_INTR_ENABLE:
-> > > > > > > +        retvalue = s->timer_intr_enable;
-> > > > > > > +        break;
-> > > > > > > +    case R_INTR_STATE:
-> > > > > > > +        retvalue = s->timer_intr_state;
-> > > > > > > +        break;
-> > > > > > > +    case R_INTR_TEST:
-> > > > > > > +        retvalue = s->timer_intr_test;
-> > > > > > > +        break;
-> > > > > > > +    default:
-> > > > > > > +        qemu_log_mask(LOG_GUEST_ERROR,
-> > > > > > > +                      "%s: Bad offset 0x%"HWADDR_PRIx"\n", __func__, addr);
-> > > > > > > +        return 0;
-> > > > > > > +    }
-> > > > > > > +
-> > > > > > > +    return retvalue;
-> > > > > > > +}
-> > > > > > > +
-> > > > > > > +static void ibex_timer_write(void *opaque, hwaddr addr,
-> > > > > > > +                             uint64_t val64, unsigned int size)
-> > > > > > > +{
-> > > > > > > +    IbexTimerState *s = opaque;
-> > > > > > > +    uint32_t val = val64;
-> > > > > > > +
-> > > > > > > +    switch (addr >> 2) {
-> > > > > > > +    case R_CTRL:
-> > > > > > > +        s->timer_ctrl = val;
-> > > > > > > +        break;
-> > > > > > > +    case R_CFG0:
-> > > > > > > +        qemu_log_mask(LOG_UNIMP, "Changing prescale or step not supported");
-> > > > > > > +        s->timer_cfg0 = val;
-> > > > > > > +        break;
-> > > > > > > +    case R_LOWER0:
-> > > > > > > +        qemu_log_mask(LOG_UNIMP, "Changing timer value is not supported");
-> > > > > > > +        break;
-> > > > > > > +    case R_UPPER0:
-> > > > > > > +        qemu_log_mask(LOG_UNIMP, "Changing timer value is not supported");
-> > > > > > > +        break;
-> > > > > > > +    case R_COMPARE_LOWER0:
-> > > > > > > +        s->timer_compare_lower0 = val;
-> > > > > > > +        ibex_timer_update_irqs(s);
-> > > > > > > +        break;
-> > > > > > > +    case R_COMPARE_UPPER0:
-> > > > > > > +        s->timer_compare_upper0 = val;
-> > > > > > > +        ibex_timer_update_irqs(s);
-> > > > > > > +        break;
-> > > > > > > +    case R_INTR_ENABLE:
-> > > > > > > +        s->timer_intr_enable = val;
-> > > > > >
-> > > > > > Does this register connect to MIE?
-> > > > >
-> > > > > No, it's a little confusing.
-> > > > >
-> > > > > The timer is connected to MIE AND it also has its own interrupt. This
-> > > > > controls it's custom interrupt.
-> > > > >
-> > > >
-> > > > I don't see codes to connect this to MIE, so in this version we only
-> > > > support connecting interrupt to PLIC?
-> > >
-> > > We call `riscv_cpu_update_mip()` which updates the bits in MIP.
-> > >
-> >
-> > I think that's for MIP, not MIE?
->
-> Yep. Sorry I misinterpreted what your first email meant.
->
-> R_INTR_ENABLE does not connect to MIE.
->
-> R_INTR_ENABLE is to enable or disable the PLIC interrupt line. The
-> timer will also trigger MIP (MIE is then controlled via teh CSR
-> access).
+From: Claudio Fontana <cfontana@suse.de>
 
-Yeah, this is now clear :). Thanks!
+the lack of target_user_arch makes it hard to fully leverage the
+build system in order to separate user code from sysemu code.
 
-Regards,
-Bin
+Provide it, so that we can avoid the proliferation of #ifdef
+in target code.
+
+Signed-off-by: Claudio Fontana <cfontana@suse.de>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+[claudio: added changes for new target hexagon]
+Signed-off-by: Claudio Fontana <cfontana@suse.de>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+
+---
+v15
+  - remove duplicate ss.source_set for mips
+---
+ target/alpha/meson.build      | 3 +++
+ target/arm/meson.build        | 2 ++
+ target/cris/meson.build       | 3 +++
+ target/hexagon/meson.build    | 3 +++
+ target/hppa/meson.build       | 3 +++
+ target/m68k/meson.build       | 3 +++
+ target/microblaze/meson.build | 3 +++
+ target/nios2/meson.build      | 3 +++
+ target/openrisc/meson.build   | 3 +++
+ target/ppc/meson.build        | 3 +++
+ target/riscv/meson.build      | 3 +++
+ target/s390x/meson.build      | 3 +++
+ target/sh4/meson.build        | 3 +++
+ target/sparc/meson.build      | 3 +++
+ target/tricore/meson.build    | 3 +++
+ target/xtensa/meson.build     | 3 +++
+ 16 files changed, 47 insertions(+)
+
+diff --git a/target/alpha/meson.build b/target/alpha/meson.build
+index 1aec55abb4..1b0555d3ee 100644
+--- a/target/alpha/meson.build
++++ b/target/alpha/meson.build
+@@ -14,5 +14,8 @@ alpha_ss.add(files(
+ alpha_softmmu_ss = ss.source_set()
+ alpha_softmmu_ss.add(files('machine.c'))
+ 
++alpha_user_ss = ss.source_set()
++
+ target_arch += {'alpha': alpha_ss}
+ target_softmmu_arch += {'alpha': alpha_softmmu_ss}
++target_user_arch += {'alpha': alpha_user_ss}
+diff --git a/target/arm/meson.build b/target/arm/meson.build
+index 5bfaf43b50..6106d24665 100644
+--- a/target/arm/meson.build
++++ b/target/arm/meson.build
+@@ -56,6 +56,8 @@ arm_softmmu_ss.add(files(
+   'monitor.c',
+   'psci.c',
+ ))
++arm_user_ss = ss.source_set()
+ 
+ target_arch += {'arm': arm_ss}
+ target_softmmu_arch += {'arm': arm_softmmu_ss}
++target_user_arch += {'arm': arm_user_ss}
+diff --git a/target/cris/meson.build b/target/cris/meson.build
+index 67c3793c85..7fd81e0348 100644
+--- a/target/cris/meson.build
++++ b/target/cris/meson.build
+@@ -10,5 +10,8 @@ cris_ss.add(files(
+ cris_softmmu_ss = ss.source_set()
+ cris_softmmu_ss.add(files('mmu.c', 'machine.c'))
+ 
++cris_user_ss = ss.source_set()
++
+ target_arch += {'cris': cris_ss}
+ target_softmmu_arch += {'cris': cris_softmmu_ss}
++target_user_arch += {'cris': cris_user_ss}
+diff --git a/target/hexagon/meson.build b/target/hexagon/meson.build
+index 6fd9360b74..fe232810ab 100644
+--- a/target/hexagon/meson.build
++++ b/target/hexagon/meson.build
+@@ -175,4 +175,7 @@ hexagon_ss.add(files(
+     'fma_emu.c',
+ ))
+ 
++hexagon_user_ss = ss.source_set()
++
+ target_arch += {'hexagon': hexagon_ss}
++target_user_arch += {'hexagon': hexagon_user_ss}
+diff --git a/target/hppa/meson.build b/target/hppa/meson.build
+index 8a7ff82efc..85ad314671 100644
+--- a/target/hppa/meson.build
++++ b/target/hppa/meson.build
+@@ -15,5 +15,8 @@ hppa_ss.add(files(
+ hppa_softmmu_ss = ss.source_set()
+ hppa_softmmu_ss.add(files('machine.c'))
+ 
++hppa_user_ss = ss.source_set()
++
+ target_arch += {'hppa': hppa_ss}
+ target_softmmu_arch += {'hppa': hppa_softmmu_ss}
++target_user_arch += {'hppa': hppa_user_ss}
+diff --git a/target/m68k/meson.build b/target/m68k/meson.build
+index 05cd9fbd1e..b507682684 100644
+--- a/target/m68k/meson.build
++++ b/target/m68k/meson.build
+@@ -13,5 +13,8 @@ m68k_ss.add(files(
+ m68k_softmmu_ss = ss.source_set()
+ m68k_softmmu_ss.add(files('monitor.c'))
+ 
++m68k_user_ss = ss.source_set()
++
+ target_arch += {'m68k': m68k_ss}
+ target_softmmu_arch += {'m68k': m68k_softmmu_ss}
++target_user_arch += {'m68k': m68k_user_ss}
+diff --git a/target/microblaze/meson.build b/target/microblaze/meson.build
+index 05ee0ec163..52d8fcb0a3 100644
+--- a/target/microblaze/meson.build
++++ b/target/microblaze/meson.build
+@@ -16,5 +16,8 @@ microblaze_softmmu_ss.add(files(
+   'machine.c',
+ ))
+ 
++microblaze_user_ss = ss.source_set()
++
+ target_arch += {'microblaze': microblaze_ss}
+ target_softmmu_arch += {'microblaze': microblaze_softmmu_ss}
++target_user_arch += {'microblaze': microblaze_user_ss}
+diff --git a/target/nios2/meson.build b/target/nios2/meson.build
+index e643917db1..00367056fa 100644
+--- a/target/nios2/meson.build
++++ b/target/nios2/meson.build
+@@ -11,5 +11,8 @@ nios2_ss.add(files(
+ nios2_softmmu_ss = ss.source_set()
+ nios2_softmmu_ss.add(files('monitor.c'))
+ 
++nios2_user_ss = ss.source_set()
++
+ target_arch += {'nios2': nios2_ss}
+ target_softmmu_arch += {'nios2': nios2_softmmu_ss}
++target_user_arch += {'nios2': nios2_user_ss}
+diff --git a/target/openrisc/meson.build b/target/openrisc/meson.build
+index 9774a58306..794a9e8161 100644
+--- a/target/openrisc/meson.build
++++ b/target/openrisc/meson.build
+@@ -19,5 +19,8 @@ openrisc_ss.add(files(
+ openrisc_softmmu_ss = ss.source_set()
+ openrisc_softmmu_ss.add(files('machine.c'))
+ 
++openrisc_user_ss = ss.source_set()
++
+ target_arch += {'openrisc': openrisc_ss}
+ target_softmmu_arch += {'openrisc': openrisc_softmmu_ss}
++target_user_arch += {'openrisc': openrisc_user_ss}
+diff --git a/target/ppc/meson.build b/target/ppc/meson.build
+index a4f18ff414..0afaea25dd 100644
+--- a/target/ppc/meson.build
++++ b/target/ppc/meson.build
+@@ -51,5 +51,8 @@ ppc_softmmu_ss.add(when: 'TARGET_PPC64', if_true: files(
+   'mmu-radix64.c',
+ ))
+ 
++ppc_user_ss = ss.source_set()
++
+ target_arch += {'ppc': ppc_ss}
+ target_softmmu_arch += {'ppc': ppc_softmmu_ss}
++target_user_arch += {'ppc': ppc_user_ss}
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index af6c3416b7..673b35b175 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -27,5 +27,8 @@ riscv_softmmu_ss.add(files(
+   'machine.c'
+ ))
+ 
++riscv_user_ss = ss.source_set()
++
+ target_arch += {'riscv': riscv_ss}
+ target_softmmu_arch += {'riscv': riscv_softmmu_ss}
++target_user_arch += {'riscv': riscv_user_ss}
+diff --git a/target/s390x/meson.build b/target/s390x/meson.build
+index c42eadb7d2..1219f64112 100644
+--- a/target/s390x/meson.build
++++ b/target/s390x/meson.build
+@@ -58,5 +58,8 @@ if host_machine.cpu_family() == 's390x' and cc.has_link_argument('-Wl,--s390-pgs
+                        if_true: declare_dependency(link_args: ['-Wl,--s390-pgste']))
+ endif
+ 
++s390x_user_ss = ss.source_set()
++
+ target_arch += {'s390x': s390x_ss}
+ target_softmmu_arch += {'s390x': s390x_softmmu_ss}
++target_user_arch += {'s390x': s390x_user_ss}
+diff --git a/target/sh4/meson.build b/target/sh4/meson.build
+index 56a57576da..5a05729bc1 100644
+--- a/target/sh4/meson.build
++++ b/target/sh4/meson.build
+@@ -10,5 +10,8 @@ sh4_ss.add(files(
+ sh4_softmmu_ss = ss.source_set()
+ sh4_softmmu_ss.add(files('monitor.c'))
+ 
++sh4_user_ss = ss.source_set()
++
+ target_arch += {'sh4': sh4_ss}
+ target_softmmu_arch += {'sh4': sh4_softmmu_ss}
++target_user_arch += {'sh4': sh4_user_ss}
+diff --git a/target/sparc/meson.build b/target/sparc/meson.build
+index a3638b9503..cc77a77064 100644
+--- a/target/sparc/meson.build
++++ b/target/sparc/meson.build
+@@ -19,5 +19,8 @@ sparc_softmmu_ss.add(files(
+   'monitor.c',
+ ))
+ 
++sparc_user_ss = ss.source_set()
++
+ target_arch += {'sparc': sparc_ss}
+ target_softmmu_arch += {'sparc': sparc_softmmu_ss}
++target_user_arch += {'sparc': sparc_user_ss}
+diff --git a/target/tricore/meson.build b/target/tricore/meson.build
+index 0ccc829517..7086ae1a22 100644
+--- a/target/tricore/meson.build
++++ b/target/tricore/meson.build
+@@ -11,5 +11,8 @@ tricore_ss.add(zlib)
+ 
+ tricore_softmmu_ss = ss.source_set()
+ 
++tricore_user_ss = ss.source_set()
++
+ target_arch += {'tricore': tricore_ss}
+ target_softmmu_arch += {'tricore': tricore_softmmu_ss}
++target_user_arch += {'tricore': tricore_user_ss}
+diff --git a/target/xtensa/meson.build b/target/xtensa/meson.build
+index 7c4efa6c62..ade555ae36 100644
+--- a/target/xtensa/meson.build
++++ b/target/xtensa/meson.build
+@@ -23,5 +23,8 @@ xtensa_softmmu_ss.add(files(
+   'xtensa-semi.c',
+ ))
+ 
++xtensa_user_ss = ss.source_set()
++
+ target_arch += {'xtensa': xtensa_ss}
+ target_softmmu_arch += {'xtensa': xtensa_softmmu_ss}
++target_user_arch += {'xtensa': xtensa_user_ss}
+-- 
+2.20.1
+
 
