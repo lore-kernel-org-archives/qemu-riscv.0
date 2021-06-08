@@ -1,74 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lqlSX-00036C-JQ
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Jun 2021 19:48:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59214)
+	id 1lqlSt-0003ft-QI
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Jun 2021 19:48:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59268)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=7863c9c60=alistair.francis@wdc.com>)
- id 1lqlSW-00034l-4H; Tue, 08 Jun 2021 19:48:36 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:7369)
+ id 1lqlSs-0003cN-4E; Tue, 08 Jun 2021 19:48:58 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:51192)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=7863c9c60=alistair.francis@wdc.com>)
- id 1lqlST-0000xq-5O; Tue, 08 Jun 2021 19:48:35 -0400
+ id 1lqlSp-00017h-My; Tue, 08 Jun 2021 19:48:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1623196111; x=1654732111;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=GcyOmcyUyYtAFAQn+mHz8q94tUbA/0BablwS4vSzrww=;
- b=Elidumzh77BC8scp0CN3G1m1jEiZ9fe8eATjN+e1rsHBlBJkHkz5zzNE
- X3Rgt0RsV77L4VofruE8NwWa8pvyouC2nuLiouk18emk1WvNhQHu7OTUe
- LBUVQ/ANluyMUFSEB34jvbCzir6DYb1Ca8O+RpY55w1i23kcUNg+tw/6I
- nfkqPL0ExNdqtUg/7iOmdy9hm+kOO4Tc85hW3MPgEIXMwvdtMvu1u8IyR
- nyIpu7XzH/smQzH9UjaXTeNCLuwkV2R2nXov9Cwv8xN1zFV/Jc4dvZq3N
- qT/GEOGelcqUApyAwS2FQnWKZbvwl1ky3a6VxDFXm4vz7YNbLZJZG8pSy A==;
-IronPort-SDR: vrPP8UCc0yFnpPvNQP4v8le3AogwyJCGh22T6yfgg+bGMdSdakWfYodfIGS+nN3K29PGqGa02a
- Gv3Zxx6jp4tUAptx0bhV89KzreSlDqUB3qGiJga+635HI7ZywPQw+xDpc0xrihJGd/lIMCmen8
- g1VGXrZSG8BrLkXLzlSWOPRRRmG3mnB4zTUx71ZBBc1zAM4GrIPzgIu26PO1xsKR7UY7NT8Wyp
- YjxE8jmPDTtPXBad7VUb208GxTB3bCO6V0doR5Cd7d6pGQrAjnU9aRcT/E9E0ON8GbcQd8xnOI
- 6Xs=
-X-IronPort-AV: E=Sophos;i="5.83,259,1616428800"; d="scan'208";a="171223689"
+ t=1623196135; x=1654732135;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=AuURfL0k3VVidwsEBze4ybTVo1wFWOoP1zuo9Br1ZgM=;
+ b=M81ktoxtUEROgQbKqMDM1DgZBOYKu8iiSzW5kS4MqX5L7M8ZMXYDNfCu
+ O3nAg8q8P5N5ccRNl+x9mwXsRjslFP8moetxCyYuy6BKQwYsPbjEIZwOR
+ YIUtWRdOp5vdGtjSHzU9Qkm9+SlfbEd6Ss2ptrm8eZHyw6eOH24yPmIFv
+ Lk6GDxPgJKYy1Tw2OC4N/LsvGSU/KvX7YU31J7J2zQmGAXaV3ECoGm2vk
+ 7SWI9KJiIU3Nc5cyhPw0Y1wN9GuwKyQ8ddIZudS7ncYkObpL/GEEoMtHV
+ 6HhLqrfbkbbQwrAS47uObjb3DcY/iBrb/hiQ7xtbOWh4VzQ+ZC0bw8aQt w==;
+IronPort-SDR: l4oeEovJujlQ1d7tNusS9Ysl1Hj4aytYzDhCN4/FCEJBjIlkxKhGDuPUSs4yIhFkDY7e9VbtAN
+ qiJUR/83ULrLNYnosr+pJiW58cALFWa4/YwVl7v7RC/yFAsUxEtFrBCD0Mdz/DfIyZUPi+7sJ3
+ KrdN/32qtEmKxne1RJUuBT2xZDkN0wtrQbhQzHIXI88TDudh5CwnMNXl3maFCj+69udJ6XHl9x
+ F6pNtBXweeg5OHbx7aqeLaGVrLlC+PxbwnY/46SL/Aot1GFrMyYNulrW/plkFQ41LtfTC/RmpD
+ ZCU=
+X-IronPort-AV: E=Sophos;i="5.83,259,1616428800"; d="scan'208";a="282652289"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 09 Jun 2021 07:48:27 +0800
-IronPort-SDR: /IpdisHaSsYIHCCsSYeVST2ly0hQDAmamk8LWi7nm2VtekJP24WeneYbIioME8eI4rjXr3kuJQ
- axbzH+1at0pmydCKNvIlIHK3TQNg+c+6mEIPksyksZEE5Qj4xeQ/nB2vWx7OWIHLtZwgBLf4Al
- ukPgy12Mg+B7e/gHW3KwXx3dKG1fkdV/ewiPBqQJlh8KedtdqRhGQVi8idYyLt/X2HFB5dC+pU
- mnqe1oPKj/seo3Le6KcgxIoJf37DlnNvcqRa2mmacAIa42r15PGsnRqYFbE/DOf5fxtvBKUBlt
- xd2a+/eW1O2qZ4E3pdS4VDSv
+ by ob1.hgst.iphmx.com with ESMTP; 09 Jun 2021 07:48:52 +0800
+IronPort-SDR: U4O9364AvSIVJ2/+W+qS+hRNLi0gwJb4L3TkbJ4LRIlj14SzNoB+iCJtajfLS+h+P/yWj9khLT
+ +HuNKMYqWx04KXxmHb8A5FwpEMEI+2+EfTcDrzrNpDz/+upYgcolN5kytEKHGxYqSA9OJwnifZ
+ ItllfIjVr9U5hFcGkaVmUYYIz5YAzqlmRv1B6dJxqQc/sn4OEQHPGb+5GgzvD4Q3ZoS9kxq7gl
+ /RW2xQ1HfmOrnCiHUlRnfYu3Uw7BgUJObLD9hJBh/iBuCYE0rCByoSUp8z2wuzhoTdyiAdsRvM
+ sYfPQnPdaES5rTEqRHScK0KV
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Jun 2021 16:27:34 -0700
-IronPort-SDR: Bvtii+OKKWAtGUWSzsBT3Q3D5f6nHt4UPrcxhbLHUp9Vxre2tPvZjxFzRZY0mKuuTSTOnL2q75
- xqCef2lTgvbBIFNooGsdOAfDIwuftfr4ze41jREFJdaCclSEKiq3hFirljo0zNTVtYtvQNx4HY
- YkE9oDvtWSAeH2Xkwd46Xf0h1gZvO0PhiG0DUYxiK2ZmNHjx6K/KhsyOOjySZSWfZDnRtS2nL2
- g4G50cETDajCxn/GOvESSTd0crjrPsrizqaEr39Lr4ObIxllYTUN7A77YvteW+wbkmzuD8GD+Y
- lLQ=
+ 08 Jun 2021 16:27:57 -0700
+IronPort-SDR: 1KHNkzicYUckwAkMGmXblVppdfjSePVJLG1WdVNQVupDcI46FhxeNWLIedeZ9uMQ0h68+1klIZ
+ NPS3wDFpD00PDgRuC3MHOhVe7NmAiHuJHPek2077n7l1SIepDMdnqbm9d/sq9y/Ee0JpLDfxUH
+ 7QGdeSl7Ygw/4kV39DJq20rZhVTusCjgKhDSZi0LU40VsTj9C61BQzUEJ1M/5STO8JR9kec6bE
+ +Yf+/VQxhcHI1s7JCf0VKlr5vWqiNtBTRzGqOmhGds6v4yBF4vFK7YO3OgqRN+PiIwFv1CxXzZ
+ aWE=
 WDCIronportException: Internal
 Received: from unknown (HELO localhost.localdomain) ([10.225.165.83])
- by uls-op-cesaip01.wdc.com with ESMTP; 08 Jun 2021 16:48:27 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 08 Jun 2021 16:48:50 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v2 0/3] hw/riscv: OpenTitan: Add support for the RISC-V timer
-Date: Wed,  9 Jun 2021 09:48:10 +1000
-Message-Id: <cover.1623196022.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 1/3] hw/char/ibex_uart: Make the register layout private
+Date: Wed,  9 Jun 2021 09:48:31 +1000
+Message-Id: <596c88e8529549275971eb7ce33f80e1154ca8aa.1623196022.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <cover.1623196022.git.alistair.francis@wdc.com>
+References: <cover.1623196022.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.144;
+Received-SPF: pass client-ip=68.232.141.245;
  envelope-from=prvs=7863c9c60=alistair.francis@wdc.com;
- helo=esa5.hgst.iphmx.com
+ helo=esa1.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
 X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ UPPERCASE_50_75=0.008 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,29 +83,114 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jun 2021 23:48:36 -0000
+X-List-Received-Date: Tue, 08 Jun 2021 23:48:58 -0000
 
-v2:
- - Address review comments
+We don't need to expose the register layout in the public header, so
+don't.
 
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+---
+ include/hw/char/ibex_uart.h | 37 -------------------------------------
+ hw/char/ibex_uart.c         | 37 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 37 insertions(+), 37 deletions(-)
 
-Alistair Francis (3):
-  hw/char/ibex_uart: Make the register layout private
-  hw/timer: Initial commit of Ibex Timer
-  hw/riscv: OpenTitan: Connect the mtime and mtimecmp timer
-
- include/hw/char/ibex_uart.h   |  37 -----
- include/hw/riscv/opentitan.h  |   5 +-
- include/hw/timer/ibex_timer.h |  52 ++++++
- hw/char/ibex_uart.c           |  37 +++++
- hw/riscv/opentitan.c          |  14 +-
- hw/timer/ibex_timer.c         | 305 ++++++++++++++++++++++++++++++++++
- MAINTAINERS                   |   6 +-
- hw/timer/meson.build          |   1 +
- 8 files changed, 412 insertions(+), 45 deletions(-)
- create mode 100644 include/hw/timer/ibex_timer.h
- create mode 100644 hw/timer/ibex_timer.c
-
+diff --git a/include/hw/char/ibex_uart.h b/include/hw/char/ibex_uart.h
+index 546f958eb8..a39985516a 100644
+--- a/include/hw/char/ibex_uart.h
++++ b/include/hw/char/ibex_uart.h
+@@ -31,43 +31,6 @@
+ #include "qemu/timer.h"
+ #include "qom/object.h"
+ 
+-REG32(INTR_STATE, 0x00)
+-    FIELD(INTR_STATE, TX_WATERMARK, 0, 1)
+-    FIELD(INTR_STATE, RX_WATERMARK, 1, 1)
+-    FIELD(INTR_STATE, TX_EMPTY, 2, 1)
+-    FIELD(INTR_STATE, RX_OVERFLOW, 3, 1)
+-REG32(INTR_ENABLE, 0x04)
+-REG32(INTR_TEST, 0x08)
+-REG32(CTRL, 0x0C)
+-    FIELD(CTRL, TX_ENABLE, 0, 1)
+-    FIELD(CTRL, RX_ENABLE, 1, 1)
+-    FIELD(CTRL, NF, 2, 1)
+-    FIELD(CTRL, SLPBK, 4, 1)
+-    FIELD(CTRL, LLPBK, 5, 1)
+-    FIELD(CTRL, PARITY_EN, 6, 1)
+-    FIELD(CTRL, PARITY_ODD, 7, 1)
+-    FIELD(CTRL, RXBLVL, 8, 2)
+-    FIELD(CTRL, NCO, 16, 16)
+-REG32(STATUS, 0x10)
+-    FIELD(STATUS, TXFULL, 0, 1)
+-    FIELD(STATUS, RXFULL, 1, 1)
+-    FIELD(STATUS, TXEMPTY, 2, 1)
+-    FIELD(STATUS, RXIDLE, 4, 1)
+-    FIELD(STATUS, RXEMPTY, 5, 1)
+-REG32(RDATA, 0x14)
+-REG32(WDATA, 0x18)
+-REG32(FIFO_CTRL, 0x1c)
+-    FIELD(FIFO_CTRL, RXRST, 0, 1)
+-    FIELD(FIFO_CTRL, TXRST, 1, 1)
+-    FIELD(FIFO_CTRL, RXILVL, 2, 3)
+-    FIELD(FIFO_CTRL, TXILVL, 5, 2)
+-REG32(FIFO_STATUS, 0x20)
+-    FIELD(FIFO_STATUS, TXLVL, 0, 5)
+-    FIELD(FIFO_STATUS, RXLVL, 16, 5)
+-REG32(OVRD, 0x24)
+-REG32(VAL, 0x28)
+-REG32(TIMEOUT_CTRL, 0x2c)
+-
+ #define IBEX_UART_TX_FIFO_SIZE 16
+ #define IBEX_UART_CLOCK 50000000 /* 50MHz clock */
+ 
+diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
+index 73b8f2e45b..fe4b6c3c9e 100644
+--- a/hw/char/ibex_uart.c
++++ b/hw/char/ibex_uart.c
+@@ -35,6 +35,43 @@
+ #include "qemu/log.h"
+ #include "qemu/module.h"
+ 
++REG32(INTR_STATE, 0x00)
++    FIELD(INTR_STATE, TX_WATERMARK, 0, 1)
++    FIELD(INTR_STATE, RX_WATERMARK, 1, 1)
++    FIELD(INTR_STATE, TX_EMPTY, 2, 1)
++    FIELD(INTR_STATE, RX_OVERFLOW, 3, 1)
++REG32(INTR_ENABLE, 0x04)
++REG32(INTR_TEST, 0x08)
++REG32(CTRL, 0x0C)
++    FIELD(CTRL, TX_ENABLE, 0, 1)
++    FIELD(CTRL, RX_ENABLE, 1, 1)
++    FIELD(CTRL, NF, 2, 1)
++    FIELD(CTRL, SLPBK, 4, 1)
++    FIELD(CTRL, LLPBK, 5, 1)
++    FIELD(CTRL, PARITY_EN, 6, 1)
++    FIELD(CTRL, PARITY_ODD, 7, 1)
++    FIELD(CTRL, RXBLVL, 8, 2)
++    FIELD(CTRL, NCO, 16, 16)
++REG32(STATUS, 0x10)
++    FIELD(STATUS, TXFULL, 0, 1)
++    FIELD(STATUS, RXFULL, 1, 1)
++    FIELD(STATUS, TXEMPTY, 2, 1)
++    FIELD(STATUS, RXIDLE, 4, 1)
++    FIELD(STATUS, RXEMPTY, 5, 1)
++REG32(RDATA, 0x14)
++REG32(WDATA, 0x18)
++REG32(FIFO_CTRL, 0x1c)
++    FIELD(FIFO_CTRL, RXRST, 0, 1)
++    FIELD(FIFO_CTRL, TXRST, 1, 1)
++    FIELD(FIFO_CTRL, RXILVL, 2, 3)
++    FIELD(FIFO_CTRL, TXILVL, 5, 2)
++REG32(FIFO_STATUS, 0x20)
++    FIELD(FIFO_STATUS, TXLVL, 0, 5)
++    FIELD(FIFO_STATUS, RXLVL, 16, 5)
++REG32(OVRD, 0x24)
++REG32(VAL, 0x28)
++REG32(TIMEOUT_CTRL, 0x2c)
++
+ static void ibex_uart_update_irqs(IbexUartState *s)
+ {
+     if (s->uart_intr_state & s->uart_intr_enable & R_INTR_STATE_TX_WATERMARK_MASK) {
 -- 
 2.31.1
 
