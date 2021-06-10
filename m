@@ -1,44 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrFtI-0001pq-Ha
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 04:18:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44694)
+	id 1lrKl4-0004NP-CR
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 09:30:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45980)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lrFtG-0001in-Sj; Thu, 10 Jun 2021 04:18:14 -0400
-Received: from mail142-29.mail.alibaba.com ([198.11.142.29]:40039)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lrFtE-0008NU-PV; Thu, 10 Jun 2021 04:18:14 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.4265272|-1; CH=blue; DM=|OVERLOAD|false|;
- DS=CONTINUE|ham_system_inform|0.2439-0.000735694-0.755364;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047208; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KQNS9yo_1623313082; 
-Received: from localhost.localdomain(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KQNS9yo_1623313082)
- by smtp.aliyun-inc.com(10.147.41.143);
- Thu, 10 Jun 2021 16:18:02 +0800
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v2 37/37] target/riscv: configure and turn on packed extension
- from command line
-Date: Thu, 10 Jun 2021 15:59:08 +0800
-Message-Id: <20210610075908.3305506-38-zhiwei_liu@c-sky.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210610075908.3305506-1-zhiwei_liu@c-sky.com>
-References: <20210610075908.3305506-1-zhiwei_liu@c-sky.com>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1lrKl2-0004K7-17
+ for qemu-riscv@nongnu.org; Thu, 10 Jun 2021 09:30:04 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:37570)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1lrKl0-0001dK-53
+ for qemu-riscv@nongnu.org; Thu, 10 Jun 2021 09:30:03 -0400
+Received: by mail-pf1-x436.google.com with SMTP id y15so1631067pfl.4
+ for <qemu-riscv@nongnu.org>; Thu, 10 Jun 2021 06:29:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=ki6JLcyj919EUFRUctRJZvUCun3KFEovFArpfVKfjMs=;
+ b=yxuuGPv1TBvrukInkBt+UvKMyq7KkKwCje469yoryk+b/X2FebyD8rCu31GZYMsf8L
+ xEjFnoQoKi3JRlL5Np+hygmMYG7bLWDdzuY8ed9A8/GJimNZZXqxU5NJeKue/xYCM9Tr
+ kMqpx9Q/l1QWMwTkX9nuGkLCQn69WGEZIBjO7+g7A2662RzhXeN1DK5BWKw8ElPvyLej
+ AMphGXTsX2JJANO8+fkfa8PNRZb44jzo20EjUJVcM9BE8PgXsb1h9fabN50JBpRRyFgJ
+ KqZjVHYgeHSoRVhv9879+w3nxfghdbps2+rtvJm3/xdi8iJ6YkwDVl9M/iPUOzoLvtE7
+ 8kjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=ki6JLcyj919EUFRUctRJZvUCun3KFEovFArpfVKfjMs=;
+ b=VPvKP2weRFq5aEPp7yf7NE1PGdrvl9ng4N2ZwbAn8/lPpc81vHz9xXKDa3De4ui+AX
+ wnF5Oyv+/4iqBMzDzkA1Gu3xEVXbuIgKoqcNeNmINNZYRfyBcfDnw+RIt9An18jVeIif
+ 9glN1sL/7+FO5ii7AFg1JHWKmEfbtFcLgDBUBUZ1/JxD9Ygb9QimiHTpiKE0T9lGQase
+ 0cSwwK3YoDPJ4lNwzSPfcqvBy0kBZ3fottUsBOATem/Bltzys9DcLlGe8sXk757v/S98
+ 16gkZE4tlwRn0Ija4llq9vJEgCIJvN79v5M1meejO8semsvXEvaqOWRTbJs6NcpkrHC7
+ qEiA==
+X-Gm-Message-State: AOAM530J56WXakorBNyuKZ0aDiJ5vhY5iPPt7Oq6px0vEb3x+tJa/Lws
+ F9c+sRPH1BySEpYONO9jTlR2ng==
+X-Google-Smtp-Source: ABdhPJyK93H3F7jg7LWF5eIG7WWMZF7modi/HviYIdtJexeVcMG4Ui8F9RuFiL9In7iXPiPxq3kGVw==
+X-Received: by 2002:a63:4c41:: with SMTP id m1mr4928647pgl.394.1623331798299; 
+ Thu, 10 Jun 2021 06:29:58 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-70-228.tukw.qwest.net. [174.21.70.228])
+ by smtp.gmail.com with ESMTPSA id
+ a9sm2499119pfo.69.2021.06.10.06.29.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 10 Jun 2021 06:29:57 -0700 (PDT)
+Subject: Re: TCG op for 32 bit only cpu on qemu-riscv64
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, QEMU Developers
+ <qemu-devel@nongnu.org>, "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>
+References: <97935519-42c8-71c8-3d87-30aa4cafc909@c-sky.com>
+ <618e9348-c420-b560-1f67-3608023985a7@linaro.org>
+ <7ac5990e-5f87-3d96-d8b5-bd7997fac0ee@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <eb54d2d9-db15-e2d7-e245-f61587b0ca4e@linaro.org>
+Date: Thu, 10 Jun 2021 06:29:56 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
+In-Reply-To: <7ac5990e-5f87-3d96-d8b5-bd7997fac0ee@c-sky.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=198.11.142.29; envelope-from=zhiwei_liu@c-sky.com;
- helo=mail142-29.mail.alibaba.com
-X-Spam_score_int: -25
-X-Spam_score: -2.6
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x436.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -51,46 +84,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2021 08:18:15 -0000
+X-List-Received-Date: Thu, 10 Jun 2021 13:30:04 -0000
 
-Packed extension is default off. The only way to use packed extension is
-1. use cpu rv32 or rv64
-2. turn on it by command line
-   "-cpu rv32,x-p=true,Zpsfoperand=true,pext_spec=v0.9.4".
+On 6/9/21 6:43 PM, LIU Zhiwei wrote:
+> 1)First a multiply instruction, if the source value big enough, it will return 
+> a result with some bits not zero in MSW 32-bit.
 
-Zpsfoperand is whether to support Zpsfoperand sub-extension,
-default value is true.
-pext_ver is the packed specification version, default value is v0.9.4.
-These properties can be specified with other values.
+Multiply is fine.  Input bits outside the low 32 cannot appear in the low 32 of 
+the output.  Multiply-high-part on the other hand will require sign- or 
+zero-extension of inputs.
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
----
- target/riscv/cpu.c | 3 +++
- 1 file changed, 3 insertions(+)
+> 2)If next instruction is a divide instruction,  the MSW 32-bit will influence 
+> the divide instruction result.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 9d8cf60a1c..21020b902e 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -618,14 +618,17 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("x-b", RISCVCPU, cfg.ext_b, false),
-     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
-+    DEFINE_PROP_BOOL("x-p", RISCVCPU, cfg.ext_p, false),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-     DEFINE_PROP_STRING("bext_spec", RISCVCPU, cfg.bext_spec),
-+    DEFINE_PROP_STRING("pext_spec", RISCVCPU, cfg.pext_spec),
-     DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
-+    DEFINE_PROP_BOOL("Zpsfoperand", RISCVCPU, cfg.ext_psfoperand, true),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
--- 
-2.25.1
+Yes, division requires extension too.
 
+> So I think use *_tl can't satisfy the need to run 32-bit program on qemu-riscv64.
+
+I said some operations will require extra work -- I gave right-shift as an example.
+
+You just have to be careful about deciding what extra work to do.  I am 
+suggesting that truncation to *_i32 is almost always not the correct answer.
+
+Perhaps make it easier by changing gen_get_gpr and gen_set_gpr:
+
+/* Return sign-extended version of gpr. */
+static void get_gpr_s(DisasContext *ctx, TCGv t, int reg_num)
+{
+     if (reg_num == 0) {
+         tcg_gen_movi_tl(t, 0);
+     } else if (is_32bit(ctx)) {
+         tcg_gen_ext32s_tl(t, cpu_gpr[reg_num]);
+     } else {
+         tcg_gen_mov_tl(t, cpu_gpr[reg_num]);
+     }
+}
+
+/* Return zero-extended version of gpr. */
+static void get_gpr_u(DisasContext *ctx, TCGv t, int reg_num);
+{
+     if (reg_num == 0) {
+         tcg_gen_movi_tl(t, 0);
+     } else if (is_32bit(ctx)) {
+         tcg_gen_ext32u_tl(t, cpu_gpr[reg_num]);
+     } else {
+         tcg_gen_mov_tl(t, cpu_gpr[reg_num]);
+     }
+}
+
+/* Return gpr with undefined high bits (which will be ignored). */
+static void get_gpr_x(TCGv t, int reg_num);
+{
+     if (reg_num == 0) {
+         tcg_gen_movi_tl(t, 0);
+     } else {
+         tcg_gen_mov_tl(t, cpu_gpr[reg_num]);
+     }
+}
+
+And similarly for set.
+
+
+r~
 
