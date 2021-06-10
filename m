@@ -1,56 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrThz-0005rh-BO
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 19:03:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51420)
+	id 1lrTqr-00089u-2G
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 19:12:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52314)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lrThx-0005lK-Fa; Thu, 10 Jun 2021 19:03:29 -0400
-Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:40758)
+ id 1lrTqp-00089L-8a; Thu, 10 Jun 2021 19:12:39 -0400
+Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:34702)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lrThv-0008Kd-LA; Thu, 10 Jun 2021 19:03:29 -0400
-Received: by mail-io1-xd29.google.com with SMTP id l64so7216470ioa.7;
- Thu, 10 Jun 2021 16:03:26 -0700 (PDT)
+ id 1lrTqn-0005Ll-E6; Thu, 10 Jun 2021 19:12:38 -0400
+Received: by mail-io1-xd33.google.com with SMTP id 5so28900657ioe.1;
+ Thu, 10 Jun 2021 16:12:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7fiQBKF8vcbZLcvbsZw7vJbv7FiK3SdFa0OJfkE/zsw=;
- b=QDxHjpiVgPe0t3clUIOI4xlr/aJig7jI3qEAP6etJ1Yd78mr184GuvPGZSP3TKRTm3
- NyEZxAkMqRErW2Z/auNidc/i1ewnKFzN/xjAYD78zfC8pZHRZ2OPRmB1vE0TR1sKvtA8
- SZiJrZOHkCaklUAtL+/Z5/3dUA2JdAYpEV4s787aO2f0gVS6A1rN95p7je2yrWyf3eRU
- TIYIWYybvC1clAT3SLt1mYH4Ga73+S9OokslUgPGXGgegadm9f+rw6/dFIhO86o0v7t7
- JnT4x3rk/aG1wct5MmU6VxoceLvdurkZmBfJ3dxDIsNlmCBvGGLBo0KE3AsMTNf8Fmq0
- XLFA==
+ :cc; bh=dcGYdzIzcWOpzDZfoKpS4jbuO3gYyTExPeTaBvQ2BTQ=;
+ b=XkE4VgkrIIMujm1WrqnCzmbNGC8fH7xOVwL1RYp3Ht/CsBINs4V+ZIb+lJEJe+dPxn
+ B6jZaELcMqLG3Cbw+mQugVaJ8p1amG+LqmYMNtIv0iwwoFhDQTwxipD9ZzxbZsa7C4G8
+ CdtpzlIPt8zQwHLhRHPr5qMV28uKxWOrrRuXGuuxuytYBAI558g2YuGTLuSnDhTgTdFi
+ PqhnahgCdtwFLneKGRsXqTRzLg4Z1N5jdfp4oHB/jyb4cPW7i8BhPna7GyOK+11bTPGE
+ AGfStrIs321sCbclFp5BUfizusXVJlNGejGtYWRwx7rovP3dAql5DJgefmtiolSjJrze
+ 037w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=7fiQBKF8vcbZLcvbsZw7vJbv7FiK3SdFa0OJfkE/zsw=;
- b=ZvolPz12eH7xzrrSQE4gbI37HNGPxFz7WF/DBVY5Zoykc+GjQZRq8wOPDgrcoQtsbI
- Hn0urHIb8BCVVERBLK8LmONmJ6qVQv2ARlSEFVx9OnstAsHFDHNfqwynJfaoNA/oRqWy
- x5Ini7Rgssi5da+ZmNgu8sYOvvowLNWVKJ2bs9xz8YTIN2bTwEKGQ12bJHTiJe6r3iny
- /yaejN1+flJDz7Yltbj92BSN03VlsgICxXRLclNPcuCh07cCLQ73e8Udj0KzDxxYJkRZ
- HEDkT3sS7rPvaJM8qEhaWd8+X3pxVuktiMUhiW/VTc6ri/C2s375RlqD7azpiYz2akie
- GBeA==
-X-Gm-Message-State: AOAM5314M3Xw31bToJ3nHlTHGA9Llj2t5g0yCmjZiVDug5Ui4UP6kEu+
- rq5hTJ2f4jP6UDgWCb5sEU6D//3oyvFwFFjRab4Kwh0Mn3B69A==
-X-Google-Smtp-Source: ABdhPJwAU3yoq2XNRe8p8KIyNo2jHbAb4MI8W5fjXToEAldkXPDdSpYlm48pvwhaUJoSPIj3N7K54nDO3QLPmmWq5hM=
-X-Received: by 2002:a5e:8349:: with SMTP id y9mr680552iom.105.1623366206217;
- Thu, 10 Jun 2021 16:03:26 -0700 (PDT)
+ bh=dcGYdzIzcWOpzDZfoKpS4jbuO3gYyTExPeTaBvQ2BTQ=;
+ b=PFqRRNWCDIDpJCYibJlehIXcWZk4TQ7xgLJeEBOAx3bzq2gBxbjfnsiTll+bkBtxeO
+ N3WQgJ5bUOdmor2oshj/NV9t6YIVxGPdIkkIRSSNfrxr6ols75S09kv7PshQ6Jmy3xMw
+ M6dNtULfv6WkeIUNrzW9fqxHpml2VZXiv82M+HjJ13iRT55VNfnAxlS0lGMHjL3bQTYk
+ G+TaSVvnt8uPn+hapFYWbOCjk4Y6H8YYrOZQOWMFQxuPqDEkrCIDugSWX9ps9Mpb6E62
+ YyLk421y/0mokyLUWe1NUOkiBtZ0aNoHWBQ+rBBEgQ2A8unE871njC5oivNWLGcRwjPL
+ 6cvg==
+X-Gm-Message-State: AOAM533p7xJIvuzG4PqcNxVE8cVyWCcHhle11ov2ZmXpJDWCELRvA8K1
+ eSEpk+UMqpbb0RYyQnYDr/G6sAgDP4/dXrt9SWE=
+X-Google-Smtp-Source: ABdhPJx7uHgSrGcmQ+sZXRL0Z/HLZgqP4PbIe9DJa+wAekyWxxwnW7Qg6k451y//GWLguPLnv8niB4K/puqUjFY65g4=
+X-Received: by 2002:a5e:8349:: with SMTP id y9mr704140iom.105.1623366755926;
+ Thu, 10 Jun 2021 16:12:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <c00176c7518c2a7b4de3eec320b6a683ab56f705.1622435221.git.alistair.francis@wdc.com>
-In-Reply-To: <c00176c7518c2a7b4de3eec320b6a683ab56f705.1622435221.git.alistair.francis@wdc.com>
+References: <20210522155902.374439-1-josemartins90@gmail.com>
+In-Reply-To: <20210522155902.374439-1-josemartins90@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Jun 2021 09:02:59 +1000
-Message-ID: <CAKmqyKMRR-ZTZNnA1QgvuOExrpbhMw=2q_vBXW53ceHz5Aga1w@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] target/riscv: Use target_ulong for the
- DisasContext misa
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Date: Fri, 11 Jun 2021 09:12:09 +1000
+Message-ID: <CAKmqyKMvaLn5YUPVBngDjziud-t8P717cp-LsrOBo-VG18BMiw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: hardwire bits in hideleg and hedeleg
+To: Jose Martins <josemartins90@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -71,42 +73,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2021 23:03:30 -0000
+X-List-Received-Date: Thu, 10 Jun 2021 23:12:39 -0000
 
-On Mon, May 31, 2021 at 2:27 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+On Sun, May 23, 2021 at 1:59 AM Jose Martins <josemartins90@gmail.com> wrote:
 >
-> The is_32bit() check in translate.c expects a 64-bit guest to have a
-> 64-bit misa value otherwise the macro check won't work. This patches
-> fixes that and fixes a Coverity issue at the same time.
+> The specification mandates for certain bits to be hardwired in the
+> hypervisor delegation registers. This was not being enforced.
 >
-> Fixes: CID 1453107
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Jose Martins <josemartins90@gmail.com>
+> ---
+>  target/riscv/csr.c | 13 +++++++++++--
+>  1 file changed, 11 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index d2585395bf..9b74a00cc9 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -394,6 +394,7 @@ static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
+>
+>  static const target_ulong delegable_ints = S_MODE_INTERRUPTS |
+>                                             VS_MODE_INTERRUPTS;
+> +static const target_ulong vs_delegable_ints = VS_MODE_INTERRUPTS;
+>  static const target_ulong all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
+>                                       VS_MODE_INTERRUPTS;
+>  static const target_ulong delegable_excps =
+> @@ -416,6 +417,14 @@ static const target_ulong delegable_excps =
+>      (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
+>      (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
+>      (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT));
+> +static const target_ulong vs_delegable_excps = delegable_excps &
+> +    ~((1ULL << (RISCV_EXCP_S_ECALL)) |
 
-Thanks!
+> +    (1ULL << (RISCV_EXCP_VS_ECALL)) |
+> +    (1ULL << (RISCV_EXCP_M_ECALL)) |
 
-Applied to riscv-to-apply.next
+These two are both read only 0, shouldn't they not be included in this list?
+
+> +    (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) |
+> +    (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
+> +    (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
+> +    (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT)));
+>  static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+>      SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
+>      SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD;
+> @@ -963,7 +972,7 @@ static int read_hedeleg(CPURISCVState *env, int csrno, target_ulong *val)
+>
+>  static int write_hedeleg(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+> -    env->hedeleg = val;
+> +    env->hedeleg = val & vs_delegable_excps;
+
+Because we then allow a write to occur here.
 
 Alistair
 
-> ---
->  target/riscv/translate.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>      return 0;
+>  }
 >
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index e945352bca..a35a58df92 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -47,7 +47,7 @@ typedef struct DisasContext {
->      bool virt_enabled;
->      uint32_t opcode;
->      uint32_t mstatus_fs;
-> -    uint32_t misa;
-> +    target_ulong misa;
->      uint32_t mem_idx;
->      /* Remember the rounding mode encoded in the previous fp instruction,
->         which we have already installed into env->fp_status.  Or -1 for
+> @@ -975,7 +984,7 @@ static int read_hideleg(CPURISCVState *env, int csrno, target_ulong *val)
+>
+>  static int write_hideleg(CPURISCVState *env, int csrno, target_ulong val)
+>  {
+> -    env->hideleg = val;
+> +    env->hideleg = val & vs_delegable_ints;
+>      return 0;
+>  }
+>
 > --
-> 2.31.1
+> 2.30.2
+>
 >
 
