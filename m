@@ -1,49 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lr9jJ-0002f1-Lw
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Jun 2021 21:43:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34498)
+	id 1lrFb3-0002uD-Ee
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 03:59:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40080)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lr9jI-0002eV-0Q; Wed, 09 Jun 2021 21:43:32 -0400
-Received: from out28-51.mail.aliyun.com ([115.124.28.51]:45729)
+ id 1lrFb1-0002r3-G8; Thu, 10 Jun 2021 03:59:23 -0400
+Received: from out28-195.mail.aliyun.com ([115.124.28.195]:49203)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lr9jF-0005Zq-1p; Wed, 09 Jun 2021 21:43:31 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1304699|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.144219-0.00175684-0.854024;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047190; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KQB3Ya2_1623289400; 
-Received: from 172.27.117.59(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KQB3Ya2_1623289400)
- by smtp.aliyun-inc.com(10.147.41.137);
- Thu, 10 Jun 2021 09:43:20 +0800
-Subject: Re: TCG op for 32 bit only cpu on qemu-riscv64
-To: Richard Henderson <richard.henderson@linaro.org>,
- QEMU Developers <qemu-devel@nongnu.org>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>
-References: <97935519-42c8-71c8-3d87-30aa4cafc909@c-sky.com>
- <618e9348-c420-b560-1f67-3608023985a7@linaro.org>
+ id 1lrFay-0005gf-32; Thu, 10 Jun 2021 03:59:23 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1083409|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0310271-0.000305969-0.968667;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047208; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KQMiwz0_1623311954; 
+Received: from localhost.localdomain(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.KQMiwz0_1623311954)
+ by smtp.aliyun-inc.com(10.147.41.143);
+ Thu, 10 Jun 2021 15:59:14 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <7ac5990e-5f87-3d96-d8b5-bd7997fac0ee@c-sky.com>
-Date: Thu, 10 Jun 2021 09:43:19 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v2 00/37] target/riscv: support packed extension v0.9.4
+Date: Thu, 10 Jun 2021 15:58:31 +0800
+Message-Id: <20210610075908.3305506-1-zhiwei_liu@c-sky.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <618e9348-c420-b560-1f67-3608023985a7@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.51; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-51.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.195; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-195.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -56,57 +48,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2021 01:43:32 -0000
+X-List-Received-Date: Thu, 10 Jun 2021 07:59:23 -0000
 
+This patchset implements the packed extension for RISC-V on QEMU.
 
-On 6/7/21 11:52 PM, Richard Henderson wrote:
-> On 6/6/21 8:07 PM, LIU Zhiwei wrote:
->> Hi Alistair,
->>
->> As I see,  we are moving  on to remove TARGET_RISCV64 macro.
->>
->> I have some questions:
->>
->> 1) Which tcg op should use when translate an instruction for 32bit 
->> cpu. The tcg_*_i64, tcg_*_i32 or tcg_*_tl?
->
-> You use *_tl, because that's the size of the field in CPURISCVState.
+This patchset have passed all my direct Linux user mode cases(RV64) on
+X86-64 Ubuntu host machine. You can also find this patch set on my
+repo(https://github.com/romanheros/qemu.git branch:packed-upstream-v2).
 
-Hi Richard,
+I have ported packed extension on RISU, but I can't compare with SPIKE 
+because the SPIKE PK lacks of socket and signal process syscalls. Neither
+with RISCOF, as its P extension is not complete. If anyone has random
+test method, please let me know.
 
-If we want to run 32-bit program on qemu-riscv64, I think use *_tl is 
-not enough. In semantics, we should only use the LSW 32-bit.
+Features:
+* support specification packed extension 
+  v0.9.4(https://github.com/riscv/riscv-p-spec/)
+* support basic packed extension.
+* support Zpsoperand.
 
-For example,
+v2:
+* remove all the TARGET_RISCV64 macro.
+* use tcg_gen_vec_* to accelabrate.
+* update specficication to latest v0.9.4
+* fix kmsxda32, kmsda32,kslra32,smal
 
-1)First a multiply instruction, if the source value big enough, it will 
-return a result with some bits not zero in MSW 32-bit.
+LIU Zhiwei (37):
+  target/riscv: implementation-defined constant parameters
+  target/riscv: Make the vector helper functions public
+  target/riscv: 16-bit Addition & Subtraction Instructions
+  target/riscv: 8-bit Addition & Subtraction Instruction
+  target/riscv: SIMD 16-bit Shift Instructions
+  target/riscv: SIMD 8-bit Shift Instructions
+  target/riscv: SIMD 16-bit Compare Instructions
+  target/riscv: SIMD 8-bit Compare Instructions
+  target/riscv: SIMD 16-bit Multiply Instructions
+  target/riscv: SIMD 8-bit Multiply Instructions
+  target/riscv: SIMD 16-bit Miscellaneous Instructions
+  target/riscv: SIMD 8-bit Miscellaneous Instructions
+  target/riscv: 8-bit Unpacking Instructions
+  target/riscv: 16-bit Packing Instructions
+  target/riscv: Signed MSW 32x32 Multiply and Add Instructions
+  target/riscv: Signed MSW 32x16 Multiply and Add Instructions
+  target/riscv: Signed 16-bit Multiply 32-bit Add/Subtract Instructions
+  target/riscv: Signed 16-bit Multiply 64-bit Add/Subtract Instructions
+  target/riscv: Partial-SIMD Miscellaneous Instructions
+  target/riscv: 8-bit Multiply with 32-bit Add Instructions
+  target/riscv: 64-bit Add/Subtract Instructions
+  target/riscv: 32-bit Multiply 64-bit Add/Subtract Instructions
+  target/riscv: Signed 16-bit Multiply with 64-bit Add/Subtract
+    Instructions
+  target/riscv: Non-SIMD Q15 saturation ALU Instructions
+  target/riscv: Non-SIMD Q31 saturation ALU Instructions
+  target/riscv: 32-bit Computation Instructions
+  target/riscv: Non-SIMD Miscellaneous Instructions
+  target/riscv: RV64 Only SIMD 32-bit Add/Subtract Instructions
+  target/riscv: RV64 Only SIMD 32-bit Shift Instructions
+  target/riscv: RV64 Only SIMD 32-bit Miscellaneous Instructions
+  target/riscv: RV64 Only SIMD Q15 saturating Multiply Instructions
+  target/riscv: RV64 Only 32-bit Multiply Instructions
+  target/riscv: RV64 Only 32-bit Multiply & Add Instructions
+  target/riscv: RV64 Only 32-bit Parallel Multiply & Add Instructions
+  target/riscv: RV64 Only Non-SIMD 32-bit Shift Instructions
+  target/riscv: RV64 Only 32-bit Packing Instructions
+  target/riscv: configure and turn on packed extension from command line
 
-2)If next instruction is a divide instruction,  the MSW 32-bit will 
-influence the divide instruction result.
+ include/tcg/tcg-op-gvec.h               |   38 +
+ target/riscv/cpu.c                      |   34 +
+ target/riscv/cpu.h                      |    6 +
+ target/riscv/helper.h                   |  330 ++
+ target/riscv/insn32.decode              |  370 +++
+ target/riscv/insn_trans/trans_rvp.c.inc | 1155 +++++++
+ target/riscv/internals.h                |   50 +
+ target/riscv/meson.build                |    1 +
+ target/riscv/packed_helper.c            | 3851 +++++++++++++++++++++++
+ target/riscv/translate.c                |    3 +
+ target/riscv/vector_helper.c            |   82 +-
+ tcg/tcg-op-gvec.c                       |  131 +
+ 12 files changed, 5993 insertions(+), 58 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvp.c.inc
+ create mode 100644 target/riscv/packed_helper.c
 
-So I think use *_tl can't satisfy the need to run 32-bit program on 
-qemu-riscv64.
+-- 
+2.25.1
 
-Now we are forwarding to run a 32-bit cpu on qemu-riscv64. In the near 
-future, I want to support dynamical change  of XLEN.
-
-Could you give some advice? Thanks very much.
-
-Best Regards,
-Zhiwei
-
->
->> 2) Do we should have a sign-extend 64 bit register(bit 31 as the sign 
->> bit)  for 32 bit cpu?
->
-> If the value must be sign-extended for RV64, then leave it 
-> sign-extended for RV32.  There's no point in adding extra code to 
-> distinguish between them.
->
-> If the instruction does not exist for RV64, then you can probably 
-> leave the high bits unspecified (sign, zero, or pure garbage).
->
->
-> r~
 
