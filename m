@@ -1,67 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrTyt-0007Ja-Hw
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 19:20:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53112)
+	id 1lrU0V-0001Vd-1w
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 19:22:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53314)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lrTyr-0007GQ-Mk; Thu, 10 Jun 2021 19:20:57 -0400
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:40876)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lrU0T-0001Ux-04; Thu, 10 Jun 2021 19:22:37 -0400
+Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:43762)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lrTyq-0002Gi-1I; Thu, 10 Jun 2021 19:20:57 -0400
-Received: by mail-io1-xd32.google.com with SMTP id l64so7255808ioa.7;
- Thu, 10 Jun 2021 16:20:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1lrU0Q-0003HO-BS; Thu, 10 Jun 2021 19:22:36 -0400
+Received: by mail-yb1-xb32.google.com with SMTP id b9so1670751ybg.10;
+ Thu, 10 Jun 2021 16:22:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fqWf4Mru0Y63BTk3wp7hPv/I324+cILLCDFIFi6SfXM=;
- b=Ah+DM+E4xYmV31vnq0+ZkLRVmRXjVbMCG1H5k5ocf4S7wN2GEAzqSBXIYzTA9B/1s1
- 3gPIrho3Wey4yzzHdQyTEmv2tl+Nw5LqlKGjj6bLy2Mtm6PXOn0Z8iXBAd6ZlEn0wzZs
- WL/31JHlv+h58rP0QA9mPTtW9w/lCqVd1tiTWJCDeXEpEmH/UU+AUNwQxgFOCuvC6jq4
- 9wKppyKv5/hp8uYp48uOG9hwAZzwKG/loUZJxF+qAj4vk/TTE2jFcI4O7UbBZcM7MuyY
- uyBhagKds/iWaUfVxCY60BL7z9IFI0r4p3wquHY0Q46QfDBLuCnFZfCMfhIpnKuPfwp0
- eRtA==
+ :cc; bh=J5M73s/PDH+0AeamuOPaF28gVKDEqhCMz3AOY2J7RtI=;
+ b=JomCL2EOJTRsWvT/rDWvH8eYMW3olVYUzkd0JrkktoeglNR7HDXztbgap2FK4HAFVk
+ Yvn666oubIoOvH8eUYiIuDPq2xSHQKLg2i/C8Z3xdQVM15UF07C4LPYBOjKKzakQvf96
+ km1OYsVgADLYuTfFR+mNfP04fGDsKjYT/X4tSOWQ/ysa7ybVSklZp4DFCnTNq+R5yrzs
+ e2T5X7NDvzR2fEcX4UIW+qg9dlmxENkT/7yM3D0Y3/RdCriGOTF2T4CO649r+qjW0WVx
+ jGEF2FE4AMthoSVb1MM5NLimWsK/9dJHbTx6INAd/syKsXsjjDJlCOMK3StDuioje6d/
+ GjLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=fqWf4Mru0Y63BTk3wp7hPv/I324+cILLCDFIFi6SfXM=;
- b=Tsm03bPW4l8jRnSuEY536/aiJ/lb/CEyQJZw9H0Sk+xr2t3qX9eRP3yWyRaj/1np6t
- kEK7QT8+bxi1JQsAi1yAzpnNL3JcLuuccxfYYGiJAe9G7kwzRONMCQeq1qEH/6itiZru
- 7ugs+nXYjFKlsdjrpEjY0r72KaR9cL4tuaAfX9lRySpcEBZ8Dl2W8xm0Us9ZD71dGLnC
- ErEoB/39gcUWmyAOOwVLUsw10nTXeESnLo+nv/9oId2CA2VW+H0mCASns+kv6PrtCb7p
- P6BQppfCY2KC74LVdq8Le5tYpnk/BiU62BFiu2KKIlpqqlGpMz2TE5Mx/WdxVvUBI2fD
- 4TvA==
-X-Gm-Message-State: AOAM530jpmno2e5nfXX0j2lO72ksvWRziAVfZhmRVzchqVqC6EFgSuso
- lQh/5uf2OpjWsg+8bHcAw96lV8RT7FyKVwKgSWA=
-X-Google-Smtp-Source: ABdhPJxhsb4v/DceC6HOizD1kDM2ajjaKwY8iJAPULqwP/IFzPCNylPr5ZU10IamfK1KwfLjrBYyLCmRIYbbpiDReCo=
-X-Received: by 2002:a6b:d609:: with SMTP id w9mr755914ioa.118.1623367254499;
- Thu, 10 Jun 2021 16:20:54 -0700 (PDT)
+ bh=J5M73s/PDH+0AeamuOPaF28gVKDEqhCMz3AOY2J7RtI=;
+ b=T8XIp1drnyZxNuTvAkmLINKVzDIZMU+2UqrGyeb+utr+xcifgckt94f8e74E/+JDWi
+ Z5TjErXUiu89VUzRrzKBNWA+T1eRDtQFAIV1I5vHbGAsv1Bq2VJX5hwMggUIT+75MqIv
+ E2H35pQiVL7GPS7He2z/3zKiEC+xGr/QPIJnRrowjhM40EvUXvP7xUyB8xXZvWzaHw7J
+ WoIRtPOqMxDuFCkqoNS5Igwue+g/LejeN48CeekA1tUnv1ekaTw/hrAUdc7Gg69O/lWc
+ b/W/G1qjKJ7HX0Yh4O/M8T7W1DyI+x8FaZVPoG9ZOgMBvrlw26eO8zJFcvGShfe/8X41
+ lB/A==
+X-Gm-Message-State: AOAM530LbVlCosQ7tqCRy+2cyO3wo9ma1EQQ6QQNoWbpZbgAbzfOEICh
+ d6uidp4oY6kjxq/VVuFm41agYqGl5VKE9v5+47E=
+X-Google-Smtp-Source: ABdhPJzRWul8SmEklfm7Cb4UJA6iuhuCuqqUuivVRB+Ms9OvkQIWRRsPfVHam6BcFmNf1StMQcZ1v4KZScxCDaVaCZE=
+X-Received: by 2002:a25:be09:: with SMTP id h9mr1794973ybk.239.1623367352668; 
+ Thu, 10 Jun 2021 16:22:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210514143242.377645-1-anup.patel@wdc.com>
- <20210514143242.377645-5-anup.patel@wdc.com>
-In-Reply-To: <20210514143242.377645-5-anup.patel@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Jun 2021 09:20:28 +1000
-Message-ID: <CAKmqyKOWwsv69EpRqJ_sjLmfq2fzjCHnLe+VU4ASVNK7Oj133g@mail.gmail.com>
-Subject: Re: [PATCH 4/4] hw/riscv: virt: Use AIA INTC compatible string when
- available
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atish.patra@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Anup Patel <anup@brainfault.org>
+References: <20210610144424.8658-1-ruinland@andestech.com>
+ <20210610144424.8658-2-ruinland@andestech.com>
+In-Reply-To: <20210610144424.8658-2-ruinland@andestech.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 11 Jun 2021 07:22:21 +0800
+Message-ID: <CAEUhbmVJCLU1EmO4taMpGbVbsdrZyH9CRd-esMj6k9nh2aFH+g@mail.gmail.com>
+Subject: Re: [RFC PATCH v3 1/2] Adding Andes AX25 CPU model
+To: Ruinland Chuan-Tzu Tsai <ruinland@andestech.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Dylan Jhong <dylan@andestech.com>, Alan Kao <alankao@andestech.com>, 
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -76,48 +72,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2021 23:20:57 -0000
+X-List-Received-Date: Thu, 10 Jun 2021 23:22:37 -0000
 
-On Sat, May 15, 2021 at 12:36 AM Anup Patel <anup.patel@wdc.com> wrote:
+Hi Ruinland,
+
+On Thu, Jun 10, 2021 at 10:45 PM Ruinland Chuan-Tzu Tsai
+<ruinland@andestech.com> wrote:
 >
-> We should use the AIA INTC compatible string in the CPU INTC
-> DT nodes when the CPUs support AIA feature. This will allow
-> Linux INTC driver to use AIA local interrupt CSRs.
+> From: Ruinaldn ChuanTzu Tsai <ruinland@andestech.com>
 >
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> Adding the skeleton of Andes Technology AX25 CPU model for the future commits,
+> which will utilize custom/vendor CSR handling mechaism.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
+typo: mechanism
 
 > ---
->  hw/riscv/virt.c | 11 +++++++++--
->  1 file changed, 9 insertions(+), 2 deletions(-)
+>  target/riscv/cpu.c | 8 ++++++++
+>  target/riscv/cpu.h | 1 +
+>  2 files changed, 9 insertions(+)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index c0dc69ff33..981a3a06d5 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -262,8 +262,15 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
->              qemu_fdt_add_subnode(fdt, intc_name);
->              intc_phandle = phandle++;
->              qemu_fdt_setprop_cell(fdt, intc_name, "phandle", intc_phandle);
-> -            qemu_fdt_setprop_string(fdt, intc_name, "compatible",
-> -                "riscv,cpu-intc");
-> +            if (riscv_feature(&s->soc[socket].harts[cpu].env,
-> +                              RISCV_FEATURE_AIA)) {
-> +                const char intcomp[] = "riscv,cpu-intc-aia\0riscv,cpu-intc";
-> +                qemu_fdt_setprop(fdt, name, "compatible",
-> +                    intcomp, sizeof(intcomp));
-> +            } else {
-> +                qemu_fdt_setprop_string(fdt, intc_name, "compatible",
-> +                    "riscv,cpu-intc");
-> +            }
->              qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
->              qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index ddea8fbeeb..4ae21cbf9b 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -159,6 +159,13 @@ static void rv64_base_cpu_init(Object *obj)
+>      set_misa(env, RV64);
+>  }
 >
-> --
-> 2.25.1
->
->
+> +static void ax25_cpu_init(Object *obj)
+> +{
+> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
+> +    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+> +    set_priv_version(env, PRIV_VERSION_1_10_0);
+> +}
+> +
+>  static void rv64_sifive_u_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> @@ -705,6 +712,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32_sifive_u_cpu_init),
+>  #elif defined(TARGET_RISCV64)
+>      DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           rv64_base_cpu_init),
+> +    DEFINE_CPU(TYPE_RISCV_CPU_AX25,             ax25_cpu_init),
+
+What about the 32-bit variant of A25, and the SMP variant of A25MP/AX25MP?
+
+Also how about the latest A45 (RV32) and AX45 (RV64)?
+
+How should we name these? I think we may need to name this using the
+SMP variant name, no?
+
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
+>  #endif
+
+Regards,
+Bin
 
