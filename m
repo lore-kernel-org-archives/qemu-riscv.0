@@ -1,42 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrLvb-0004t2-A2
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 10:45:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36536)
+	id 1lrNPF-0008Pw-03
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 12:19:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39096)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ruinland@andestech.com>)
- id 1lrLvZ-0004lB-Ac; Thu, 10 Jun 2021 10:45:01 -0400
-Received: from exmail.andestech.com ([60.248.187.195]:42444
- helo=ATCSQR.andestech.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ruinland@andestech.com>)
- id 1lrLvT-0000Bk-Tw; Thu, 10 Jun 2021 10:45:01 -0400
-Received: from mail.andestech.com (atcpcs16.andestech.com [10.0.1.222])
- by ATCSQR.andestech.com with ESMTP id 15AEiQit035876;
- Thu, 10 Jun 2021 22:44:26 +0800 (GMT-8)
- (envelope-from ruinland@andestech.com)
-Received: from atcsqa06.andestech.com (10.0.15.65) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 10 Jun 2021
- 22:44:25 +0800
-From: Ruinland Chuan-Tzu Tsai <ruinland@andestech.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: <alistair23@gmail.com>, <wangjunqiang@iscas.ac.cn>,
- <bin.meng@windriver.com>, <alankao@andestech.com>,
- <dylan@andestech.com>, Ruinaldn ChuanTzu Tsai <ruinland@andestech.com>
-Subject: [RFC PATCH v3 0/2] Proposing custom CSR handling logic
-Date: Thu, 10 Jun 2021 22:44:22 +0800
-Message-ID: <20210610144424.8658-1-ruinland@andestech.com>
-X-Mailer: git-send-email 2.17.0
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1lrNPD-0008Pa-Qq
+ for qemu-riscv@nongnu.org; Thu, 10 Jun 2021 12:19:43 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629]:40595)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1lrNPC-0005Ii-3U
+ for qemu-riscv@nongnu.org; Thu, 10 Jun 2021 12:19:43 -0400
+Received: by mail-pl1-x629.google.com with SMTP id e7so1289532plj.7
+ for <qemu-riscv@nongnu.org>; Thu, 10 Jun 2021 09:19:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=VC/T0KiKS5DZN9B9Ax69wcvjtew6dxXJWgZ1EagKsjE=;
+ b=Il9tomG/pkn9DfxON4BsGD4GxpCkYGJt0GPfpdOowT4NTqQYeivT2pYM/B96JPvIB7
+ GIza/LhJ6Ly0WsyU9o56kmIpo64CRZKlH8Beau593atdWVsvhYq4xV6xRc9VLD3orfJR
+ 6w8AFJPPA0HSRhVXsqMKKnP4JewXvg/87u1j8OEdI6r3gEX/HwuFKGT2NYq2gaSU4A+V
+ IJEBgoA1wt3AWvM+TNYPehyW+UECKKigbwawY24G0Sbr1C0eRSKi1JzhbBrGRxo2U7RM
+ uaMhbW/sxQzQ3Z1N5AJknMklmwPUyNJSad1Ug6AzVqvOdv4o2gQZaw0d+dQmXw8gHUdv
+ cr3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=VC/T0KiKS5DZN9B9Ax69wcvjtew6dxXJWgZ1EagKsjE=;
+ b=MIOzoGnkbf/t3RxN/FQZlLwyLxeuE4StTmrc0J9O2xIRJkdBrL1WeRxhuFMjoSA8Jv
+ n6YTxKDUNhh3TR3/NynwvHL+oUJBzIU4KylvPTOU4cDy1igI8A9+b0P4EpHyMEVCaba5
+ jeGHdwhXJ53sqYfe1kRiEfqVjcIkB+XFTHU2a2n4tXVCXJZJ2QLnhThGieQ7Z5JuzR/b
+ 8qew7Q1VT63i2PGr/k0KsE2oJqQVcCMYztxjeDHVa619Hb49i+ACjzA+y+bGnR6Tz2fQ
+ kZ6iRjxVdzdP5gsdRD/AJjZkHpflOPo6Rvw8NN+bTiM+Be0WE4s8+SOgy/ktoy/g0VXD
+ +pCQ==
+X-Gm-Message-State: AOAM532GPmMBTjWC3FqYvT7vUWkldw7ZIsoAthO0ZmQ4kcrkZHKD7/NW
+ 3UD+9PRVrFtDv2b0BAwEjwyijQ==
+X-Google-Smtp-Source: ABdhPJyr+o230NK16u6Pf2KIMdNuJg2C6QbbgiUSxvn04biwM08wnJoTs1ChPV5OKVQ4TiOr39FIKw==
+X-Received: by 2002:a17:902:8f8f:b029:107:810b:9ee5 with SMTP id
+ z15-20020a1709028f8fb0290107810b9ee5mr5514951plo.4.1623341980371; 
+ Thu, 10 Jun 2021 09:19:40 -0700 (PDT)
+Received: from [192.168.1.11] (174-21-70-228.tukw.qwest.net. [174.21.70.228])
+ by smtp.gmail.com with ESMTPSA id
+ x3sm3311906pgx.8.2021.06.10.09.19.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 10 Jun 2021 09:19:40 -0700 (PDT)
+Subject: Re: [RFC PATCH v3 2/2] Adding preliminary custom/vendor CSR handling
+ mechanism
+To: Ruinland Chuan-Tzu Tsai <ruinland@andestech.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: dylan@andestech.com, alankao@andestech.com, wangjunqiang@iscas.ac.cn,
+ bin.meng@windriver.com, alistair23@gmail.com
+References: <20210610144424.8658-1-ruinland@andestech.com>
+ <20210610144424.8658-3-ruinland@andestech.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <c9d350fb-16bd-6dc6-41de-0516c046a244@linaro.org>
+Date: Thu, 10 Jun 2021 09:19:38 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.65]
-X-DNSRBL: 
-X-MAIL: ATCSQR.andestech.com 15AEiQit035876
-Received-SPF: pass client-ip=60.248.187.195;
- envelope-from=ruinland@andestech.com; helo=ATCSQR.andestech.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+In-Reply-To: <20210610144424.8658-3-ruinland@andestech.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -50,76 +85,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2021 14:45:01 -0000
+X-List-Received-Date: Thu, 10 Jun 2021 16:19:44 -0000
 
-From: Ruinaldn ChuanTzu Tsai <ruinland@andestech.com>
+On 6/10/21 7:44 AM, Ruinland Chuan-Tzu Tsai wrote:
+> --- /dev/null
+> +++ b/target/riscv/andes_cpu_bits.h
+> @@ -0,0 +1,113 @@
+> +/* ========= AndeStar V5 machine mode CSRs ========= */
 
-The changes from V2 :
-* Making custom CSR operation table become registerable.
-* Re-use the riscv_csrrw() code instead of ducplication.
-* Splitting custom CPU bits into seperated files.
-* Splitting the AX25 CPU from the feature patch
-* Adding custom/vendor value "holder."
-    In previous patche
+> --- /dev/null
+> +++ b/target/riscv/csr_andes.inc.c
+> @@ -0,0 +1,153 @@
+> +/* Andes Custom Registers */
 
-- - - -
+> --- /dev/null
+> +++ b/target/riscv/custom_cpu_bits.h
+> @@ -0,0 +1,3 @@
+> +//XXX Maybe we should introduce a configure option to toggle different vendor
+> +// CSR bits definition ?
+> +#include "andes_cpu_bits.h"
 
-Sorry for the late update. COVID really hit us hard lately.
-
-I really appreciate the comments and suggestions from Bin and Alistair, and I
-am very willing to answer the doubts.
-
-For the questions regarding the hash table for CSR operations, that is because
-we might have heterogeneous architecture with harts having diffrent CSR
-extensions/features.
-For instance, there are FLUSH32 and FLUSH64 CSR on the application cores
-on the U54-MC and U74-MC series from SiFive, yet for the monitor cores (S51 and
-S7), there are no such custom/vendor CSRs. Though I cannot disclose too much
-for the time being, we Andes Technology have similar design choice on our
-platforms; and thus, a mechanism for dynamically registering CSR operation
-functions will become a substrate for further extension.
-
-And one day if those CSRs become standardized, ones can easily pull-and-plug
-the structures into `csr_ops` table.
-
-The write_stub() is useful and necessary if such a CSR conducts some hardware 
-behaviors which are hard to implement in QEMU's world view, such as cache
-policies or something would fail-over in user's code, for instance, the
-I/O feature probing code. And that's why we keep it inside our toolbox.
-
-Adding TINFO is a bit in the twilight zone. It's officially documented in the
-RISC-V Debug Spec, yet we Andes has our own customization (which might
-come out of the shadow one day) on it and thus we decice to add the csrno in
-the general parts (cpu_bits.h) and add the handling function in csr_andes.inc.c
-for our further development.
-
-For now, this patch with previously submitted Andes AE350 board support 
-https://mail.gnu.org/archive/html/qemu-riscv/2021-03/msg00096.html 
-could execute mainline U-boot (proper) and OpenSBI (with test payload)
-successfully.
+All new files must have copyright+license boilerplate.
 
 
-Cordially yours,
-Ruinland ChuanTzu Tsai
-
-
-Ruinaldn ChuanTzu Tsai (2):
-  Adding Andes AX25 CPU model
-  Adding preliminary custom/vendor CSR handling mechanism
-
- target/riscv/andes_cpu_bits.h  | 113 ++++++++++++++++++++++++
- target/riscv/cpu.c             |  37 ++++++++
- target/riscv/cpu.h             |  29 ++++++-
- target/riscv/cpu_bits.h        |   3 +
- target/riscv/csr.c             |  46 ++++++++--
- target/riscv/csr_andes.inc.c   | 153 +++++++++++++++++++++++++++++++++
- target/riscv/custom_cpu_bits.h |   3 +
- 7 files changed, 375 insertions(+), 9 deletions(-)
- create mode 100644 target/riscv/andes_cpu_bits.h
- create mode 100644 target/riscv/csr_andes.inc.c
- create mode 100644 target/riscv/custom_cpu_bits.h
-
--- 
-2.31.1
-
+r~
 
