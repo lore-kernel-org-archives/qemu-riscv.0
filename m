@@ -1,38 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrFg6-0004bo-B4
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 04:04:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41208)
+	id 1lrFgY-0005J0-PG
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 04:05:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41248)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lrFg4-0004Wm-62; Thu, 10 Jun 2021 04:04:36 -0400
-Received: from out28-220.mail.aliyun.com ([115.124.28.220]:54699)
+ id 1lrFgS-0005EO-FZ; Thu, 10 Jun 2021 04:05:01 -0400
+Received: from out28-217.mail.aliyun.com ([115.124.28.217]:34309)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lrFg0-0000Q5-Va; Thu, 10 Jun 2021 04:04:35 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07788347|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.369954-0.000121005-0.629925;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047199; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=8; RT=7; SR=0; TI=SMTPD_---.KQMQ66w_1623312259; 
+ id 1lrFgN-0000cO-2e; Thu, 10 Jun 2021 04:05:00 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436284|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.356439-0.00404361-0.639518;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047201; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=8; RT=7; SR=0; TI=SMTPD_---.KQMqCdN_1623312290; 
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KQMQ66w_1623312259)
- by smtp.aliyun-inc.com(10.147.41.158);
- Thu, 10 Jun 2021 16:04:19 +0800
+ fp:SMTPD_---.KQMqCdN_1623312290)
+ by smtp.aliyun-inc.com(10.147.41.137);
+ Thu, 10 Jun 2021 16:04:50 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v2 10/37] target/riscv: SIMD 8-bit Multiply Instructions
-Date: Thu, 10 Jun 2021 15:58:41 +0800
-Message-Id: <20210610075908.3305506-11-zhiwei_liu@c-sky.com>
+Subject: [PATCH v2 11/37] target/riscv: SIMD 16-bit Miscellaneous Instructions
+Date: Thu, 10 Jun 2021 15:58:42 +0800
+Message-Id: <20210610075908.3305506-12-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210610075908.3305506-1-zhiwei_liu@c-sky.com>
 References: <20210610075908.3305506-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.220; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-220.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.217; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-217.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -51,168 +52,274 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2021 08:04:36 -0000
+X-List-Received-Date: Thu, 10 Jun 2021 08:05:03 -0000
 
-There are 6 instructions, including 8-bit signed or unsigned multiply,
-8-bit signed or unsigned crossed multiply, Q7 signed or signed crossed
-saturating multiply.
+There are 11 instructions, including signed or unsigned
+minimum, maximum, clip value, absolute value, and leading
+zero, leading one count instructions.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/helper.h                   |  7 ++
- target/riscv/insn32.decode              |  7 ++
- target/riscv/insn_trans/trans_rvp.c.inc |  8 +++
- target/riscv/packed_helper.c            | 93 +++++++++++++++++++++++++
- 4 files changed, 115 insertions(+)
+ target/riscv/helper.h                   |  11 ++
+ target/riscv/insn32.decode              |  11 ++
+ target/riscv/insn_trans/trans_rvp.c.inc |  41 ++++++
+ target/riscv/packed_helper.c            | 158 ++++++++++++++++++++++++
+ 4 files changed, 221 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index d13b84f165..4d0918b9a9 100644
+index 4d0918b9a9..88035aafad 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1225,3 +1225,10 @@ DEF_HELPER_3(umul16, i64, env, tl, tl)
- DEF_HELPER_3(umulx16, i64, env, tl, tl)
- DEF_HELPER_3(khm16, tl, env, tl, tl)
- DEF_HELPER_3(khmx16, tl, env, tl, tl)
+@@ -1232,3 +1232,14 @@ DEF_HELPER_3(umul8, i64, env, tl, tl)
+ DEF_HELPER_3(umulx8, i64, env, tl, tl)
+ DEF_HELPER_3(khm8, tl, env, tl, tl)
+ DEF_HELPER_3(khmx8, tl, env, tl, tl)
 +
-+DEF_HELPER_3(smul8, i64, env, tl, tl)
-+DEF_HELPER_3(smulx8, i64, env, tl, tl)
-+DEF_HELPER_3(umul8, i64, env, tl, tl)
-+DEF_HELPER_3(umulx8, i64, env, tl, tl)
-+DEF_HELPER_3(khm8, tl, env, tl, tl)
-+DEF_HELPER_3(khmx8, tl, env, tl, tl)
++DEF_HELPER_3(smin16, tl, env, tl, tl)
++DEF_HELPER_3(umin16, tl, env, tl, tl)
++DEF_HELPER_3(smax16, tl, env, tl, tl)
++DEF_HELPER_3(umax16, tl, env, tl, tl)
++DEF_HELPER_3(sclip16, tl, env, tl, tl)
++DEF_HELPER_3(uclip16, tl, env, tl, tl)
++DEF_HELPER_2(kabs16, tl, env, tl)
++DEF_HELPER_2(clrs16, tl, env, tl)
++DEF_HELPER_2(clz16, tl, env, tl)
++DEF_HELPER_2(clo16, tl, env, tl)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index cbee995229..05c3e67477 100644
+index 05c3e67477..847c796874 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -828,3 +828,10 @@ umul16     1011000  ..... ..... 000 ..... 1110111 @r
- umulx16    1011001  ..... ..... 000 ..... 1110111 @r
- khm16      1000011  ..... ..... 000 ..... 1110111 @r
- khmx16     1001011  ..... ..... 000 ..... 1110111 @r
+@@ -835,3 +835,14 @@ umul8      1011100  ..... ..... 000 ..... 1110111 @r
+ umulx8     1011101  ..... ..... 000 ..... 1110111 @r
+ khm8       1000111  ..... ..... 000 ..... 1110111 @r
+ khmx8      1001111  ..... ..... 000 ..... 1110111 @r
 +
-+smul8      1010100  ..... ..... 000 ..... 1110111 @r
-+smulx8     1010101  ..... ..... 000 ..... 1110111 @r
-+umul8      1011100  ..... ..... 000 ..... 1110111 @r
-+umulx8     1011101  ..... ..... 000 ..... 1110111 @r
-+khm8       1000111  ..... ..... 000 ..... 1110111 @r
-+khmx8      1001111  ..... ..... 000 ..... 1110111 @r
++smin16     1000000  ..... ..... 000 ..... 1110111 @r
++umin16     1001000  ..... ..... 000 ..... 1110111 @r
++smax16     1000001  ..... ..... 000 ..... 1110111 @r
++umax16     1001001  ..... ..... 000 ..... 1110111 @r
++sclip16    1000010  0.... ..... 000 ..... 1110111 @sh4
++uclip16    1000010  1.... ..... 000 ..... 1110111 @sh4
++kabs16     1010110  10001 ..... 000 ..... 1110111 @r2
++clrs16     1010111  01000 ..... 000 ..... 1110111 @r2
++clz16      1010111  01001 ..... 000 ..... 1110111 @r2
++clo16      1010111  01011 ..... 000 ..... 1110111 @r2
 diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
-index b93ba63dd8..2188de8505 100644
+index 2188de8505..3e6307cdc3 100644
 --- a/target/riscv/insn_trans/trans_rvp.c.inc
 +++ b/target/riscv/insn_trans/trans_rvp.c.inc
-@@ -286,3 +286,11 @@ GEN_RVP_R_D64_OOL(umul16);
- GEN_RVP_R_D64_OOL(umulx16);
- GEN_RVP_R_OOL(khm16);
- GEN_RVP_R_OOL(khmx16);
+@@ -294,3 +294,44 @@ GEN_RVP_R_D64_OOL(umul8);
+ GEN_RVP_R_D64_OOL(umulx8);
+ GEN_RVP_R_OOL(khm8);
+ GEN_RVP_R_OOL(khmx8);
 +
-+/* SIMD 8-bit Multiply Instructions */
-+GEN_RVP_R_D64_OOL(smul8);
-+GEN_RVP_R_D64_OOL(smulx8);
-+GEN_RVP_R_D64_OOL(umul8);
-+GEN_RVP_R_D64_OOL(umulx8);
-+GEN_RVP_R_OOL(khm8);
-+GEN_RVP_R_OOL(khmx8);
++/* SIMD 16-bit Miscellaneous Instructions */
++GEN_RVP_R_OOL(smin16);
++GEN_RVP_R_OOL(umin16);
++GEN_RVP_R_OOL(smax16);
++GEN_RVP_R_OOL(umax16);
++GEN_RVP_SHIFTI(sclip16, NULL, gen_helper_sclip16);
++GEN_RVP_SHIFTI(uclip16, NULL, gen_helper_uclip16);
++
++/* Out of line helpers for R2 format */
++static bool
++r2_ool(DisasContext *ctx, arg_r2 *a,
++       void (* fn)(TCGv, TCGv_ptr, TCGv))
++{
++    TCGv src1, dst;
++    if (!has_ext(ctx, RVP)) {
++        return false;
++    }
++
++    src1 = tcg_temp_new();
++    dst = tcg_temp_new();
++
++    gen_get_gpr(src1, a->rs1);
++    fn(dst, cpu_env, src1);
++    gen_set_gpr(a->rd, dst);
++
++    tcg_temp_free(src1);
++    tcg_temp_free(dst);
++    return true;
++}
++
++#define GEN_RVP_R2_OOL(NAME)                           \
++static bool trans_##NAME(DisasContext *s, arg_r2 *a)   \
++{                                                      \
++    return r2_ool(s, a, gen_helper_##NAME);            \
++}
++
++GEN_RVP_R2_OOL(kabs16);
++GEN_RVP_R2_OOL(clrs16);
++GEN_RVP_R2_OOL(clz16);
++GEN_RVP_R2_OOL(clo16);
 diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
-index 13fed2c4d1..56baefeb8e 100644
+index 56baefeb8e..e4a9463135 100644
 --- a/target/riscv/packed_helper.c
 +++ b/target/riscv/packed_helper.c
-@@ -827,3 +827,96 @@ static inline void do_khmx16(CPURISCVState *env, void *vd, void *va,
+@@ -920,3 +920,161 @@ static inline void do_khmx8(CPURISCVState *env, void *vd, void *va,
  }
  
- RVPR(khmx16, 2, 2);
+ RVPR(khmx8, 2, 1);
 +
-+/* SIMD 8-bit Multiply Instructions */
-+static inline void do_smul8(CPURISCVState *env, void *vd, void *va, void *vb)
++/* SIMD 16-bit Miscellaneous Instructions */
++static inline void do_smin16(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
 +{
-+    int16_t *d = vd;
-+    int8_t *a = va, *b = vb;
-+    d[H2(0)] = (int16_t)a[H1(0)] * b[H1(0)];
-+    d[H2(1)] = (int16_t)a[H1(1)] * b[H1(1)];
-+    d[H2(2)] = (int16_t)a[H1(2)] * b[H1(2)];
-+    d[H2(3)] = (int16_t)a[H1(3)] * b[H1(3)];
++    int16_t *d = vd, *a = va, *b = vb;
++
++    d[i] = (a[i] < b[i]) ? a[i] : b[i];
 +}
 +
-+RVPR64(smul8);
++RVPR(smin16, 1, 2);
 +
-+static inline void do_smulx8(CPURISCVState *env, void *vd, void *va, void *vb)
++static inline void do_umin16(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
 +{
-+    int16_t *d = vd;
-+    int8_t *a = va, *b = vb;
-+    d[H2(0)] = (int16_t)a[H1(0)] * b[H1(1)];
-+    d[H2(1)] = (int16_t)a[H1(1)] * b[H1(0)];
-+    d[H2(2)] = (int16_t)a[H1(2)] * b[H1(3)];
-+    d[H2(3)] = (int16_t)a[H1(3)] * b[H1(2)];
++    uint16_t *d = vd, *a = va, *b = vb;
++
++    d[i] = (a[i] < b[i]) ? a[i] : b[i];
 +}
 +
-+RVPR64(smulx8);
++RVPR(umin16, 1, 2);
 +
-+static inline void do_umul8(CPURISCVState *env, void *vd, void *va, void *vb)
++static inline void do_smax16(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
 +{
-+    uint16_t *d = vd;
-+    uint8_t *a = va, *b = vb;
-+    d[H2(0)] = (uint16_t)a[H1(0)] * b[H1(0)];
-+    d[H2(1)] = (uint16_t)a[H1(1)] * b[H1(1)];
-+    d[H2(2)] = (uint16_t)a[H1(2)] * b[H1(2)];
-+    d[H2(3)] = (uint16_t)a[H1(3)] * b[H1(3)];
++    int16_t *d = vd, *a = va, *b = vb;
++
++    d[i] = (a[i] > b[i]) ? a[i] : b[i];
 +}
 +
-+RVPR64(umul8);
++RVPR(smax16, 1, 2);
 +
-+static inline void do_umulx8(CPURISCVState *env, void *vd, void *va, void *vb)
++static inline void do_umax16(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
 +{
-+    uint16_t *d = vd;
-+    uint8_t *a = va, *b = vb;
-+    d[H2(0)] = (uint16_t)a[H1(0)] * b[H1(1)];
-+    d[H2(1)] = (uint16_t)a[H1(1)] * b[H1(0)];
-+    d[H2(2)] = (uint16_t)a[H1(2)] * b[H1(3)];
-+    d[H2(3)] = (uint16_t)a[H1(3)] * b[H1(2)];
++    uint16_t *d = vd, *a = va, *b = vb;
++
++    d[i] = (a[i] > b[i]) ? a[i] : b[i];
 +}
 +
-+RVPR64(umulx8);
++RVPR(umax16, 1, 2);
 +
-+static inline void do_khm8(CPURISCVState *env, void *vd, void *va,
-+                           void *vb, uint8_t i)
++static int64_t sat64(CPURISCVState *env, int64_t a, uint8_t shift)
 +{
-+    int8_t *d = vd, *a = va, *b = vb;
++    int64_t max = shift >= 64 ? INT64_MAX : (1ull << shift) - 1;
++    int64_t min = shift >= 64 ? INT64_MIN : -(1ull << shift);
++    int64_t result;
 +
-+    if (a[i] == INT8_MIN && b[i] == INT8_MIN) {
-+        env->vxsat = 1;
-+        d[i] = INT8_MAX;
++    if (a > max) {
++        result = max;
++        env->vxsat = 0x1;
++    } else if (a < min) {
++        result = min;
++        env->vxsat = 0x1;
 +    } else {
-+        d[i] = (int16_t)a[i] * b[i] >> 7;
++        result = a;
++    }
++    return result;
++}
++
++static inline void do_sclip16(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    uint8_t shift = *(uint8_t *)vb & 0xf;
++
++    d[i] = sat64(env, a[i], shift);
++}
++
++RVPR(sclip16, 1, 2);
++
++static uint64_t satu64(CPURISCVState *env, uint64_t a, uint8_t shift)
++{
++    uint64_t max = shift >= 64 ? UINT64_MAX : (1ull << shift) - 1;
++    uint64_t result;
++
++    if (a > max) {
++        result = max;
++        env->vxsat = 0x1;
++    } else {
++        result = a;
++    }
++    return result;
++}
++
++static inline void do_uclip16(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    uint8_t shift = *(uint8_t *)vb & 0xf;
++
++    if (a[i] < 0) {
++        d[i] = 0;
++        env->vxsat = 0x1;
++    } else {
++        d[i] = satu64(env, a[i], shift);
 +    }
 +}
 +
-+RVPR(khm8, 1, 1);
++RVPR(uclip16, 1, 2);
 +
-+static inline void do_khmx8(CPURISCVState *env, void *vd, void *va,
-+                            void *vb, uint8_t i)
++typedef void PackedFn2i(CPURISCVState *, void *, void *, uint8_t);
++
++static inline target_ulong rvpr2(CPURISCVState *env, target_ulong a,
++                                 uint8_t step, uint8_t size, PackedFn2i *fn)
 +{
-+    int8_t *d = vd, *a = va, *b = vb;
-+    /*
-+     * t[x] = ra.B[x] s* rb.B[y];
-+     * rt.B[x] = SAT.Q7(t[x] s>> 7);
-+     *
-+     * (RV32: (x,y)=(3,2),(2,3),
-+     *              (1,0),(0,1),
-+     * (RV64: (x,y)=(7,6),(6,7),(5,4),(4,5),
-+     *              (3,2),(2,3),(1,0),(0,1))
-+     */
-+    if (a[H1(i)] == INT8_MIN && b[H1(i + 1)] == INT8_MIN) {
-+        env->vxsat = 1;
-+        d[H1(i)] = INT8_MAX;
-+    } else {
-+        d[H1(i)] = (int16_t)a[H1(i)] * b[H1(i + 1)] >> 7;
++    int i, passes = sizeof(target_ulong) / size;
++    target_ulong result;
++
++    for (i = 0; i < passes; i += step) {
++        fn(env, &result, &a, i);
 +    }
-+    if (a[H1(i + 1)] == INT8_MIN && b[H1(i)] == INT8_MIN) {
-+        env->vxsat = 1;
-+        d[H1(i + 1)] = INT8_MAX;
++    return result;
++}
++
++#define RVPR2(NAME, STEP, SIZE)                                  \
++target_ulong HELPER(NAME)(CPURISCVState *env, target_ulong a)    \
++{                                                                \
++    return rvpr2(env, a, STEP, SIZE, (PackedFn2i *)do_##NAME);   \
++}
++
++static inline void do_kabs16(CPURISCVState *env, void *vd, void *va, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++
++    if (a[i] == INT16_MIN) {
++        d[i] = INT16_MAX;
++        env->vxsat = 0x1;
 +    } else {
-+        d[H1(i + 1)] = (int16_t)a[H1(i + 1)] * b[H1(i)] >> 7;
++        d[i] = abs(a[i]);
 +    }
 +}
 +
-+RVPR(khmx8, 2, 1);
++RVPR2(kabs16, 1, 2);
++
++static inline void do_clrs16(CPURISCVState *env, void *vd, void *va, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    d[i] = clrsb32(a[i]) - 16;
++}
++
++RVPR2(clrs16, 1, 2);
++
++static inline void do_clz16(CPURISCVState *env, void *vd, void *va, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    d[i] = (a[i] < 0) ? 0 : (clz32(a[i]) - 16);
++}
++
++RVPR2(clz16, 1, 2);
++
++static inline void do_clo16(CPURISCVState *env, void *vd, void *va, uint8_t i)
++{
++    int16_t *d = vd, *a = va;
++    d[i] = (a[i] >= 0) ? 0 : (clo32(a[i]) - 16);
++}
++
++RVPR2(clo16, 1, 2);
 -- 
 2.25.1
 
