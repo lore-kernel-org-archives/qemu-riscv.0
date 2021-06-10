@@ -1,42 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrFsZ-0007r7-QF
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 04:17:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44542)
+	id 1lrFsp-0000C8-8G
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 04:17:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44594)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lrFsV-0007nW-BX; Thu, 10 Jun 2021 04:17:27 -0400
-Received: from mail142-26.mail.alibaba.com ([198.11.142.26]:6494)
+ id 1lrFsl-00005t-Mq; Thu, 10 Jun 2021 04:17:45 -0400
+Received: from mail142-28.mail.alibaba.com ([198.11.142.28]:22352)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lrFsP-0007rr-Dw; Thu, 10 Jun 2021 04:17:27 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1340529|-1; CH=blue; DM=|OVERLOAD|false|;
- DS=CONTINUE|ham_system_inform|0.238603-0.00565254-0.755744;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047203; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KQNWif8_1623313021; 
+ id 1lrFsj-00084f-Sz; Thu, 10 Jun 2021 04:17:43 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08967724|-1; CH=blue; DM=|OVERLOAD|false|;
+ DS=CONTINUE|ham_system_inform|0.625056-0.00864608-0.366298;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047198; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KQN5pZK_1623313052; 
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KQNWif8_1623313021)
- by smtp.aliyun-inc.com(10.147.44.145);
- Thu, 10 Jun 2021 16:17:01 +0800
+ fp:SMTPD_---.KQN5pZK_1623313052)
+ by smtp.aliyun-inc.com(10.147.41.158);
+ Thu, 10 Jun 2021 16:17:32 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v2 35/37] target/riscv: RV64 Only Non-SIMD 32-bit Shift
- Instructions
-Date: Thu, 10 Jun 2021 15:59:06 +0800
-Message-Id: <20210610075908.3305506-36-zhiwei_liu@c-sky.com>
+Subject: [PATCH v2 36/37] target/riscv: RV64 Only 32-bit Packing Instructions
+Date: Thu, 10 Jun 2021 15:59:07 +0800
+Message-Id: <20210610075908.3305506-37-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210610075908.3305506-1-zhiwei_liu@c-sky.com>
 References: <20210610075908.3305506-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=198.11.142.26; envelope-from=zhiwei_liu@c-sky.com;
- helo=mail142-26.mail.alibaba.com
-X-Spam_score_int: -25
-X-Spam_score: -2.6
-X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
+Received-SPF: none client-ip=198.11.142.28; envelope-from=zhiwei_liu@c-sky.com;
+ helo=mail142-28.mail.alibaba.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
  SPF_HELO_NONE=0.001, SPF_NONE=0.001,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -51,70 +50,107 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2021 08:17:27 -0000
+X-List-Received-Date: Thu, 10 Jun 2021 08:17:46 -0000
 
-32-bit rounding arithmetic shift right immediate.
+Concat two 32-bit elements to form a 64-bit element.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/helper.h                   |  2 ++
- target/riscv/insn32.decode              |  2 ++
- target/riscv/insn_trans/trans_rvp.c.inc |  3 +++
- target/riscv/packed_helper.c            | 13 +++++++++++++
- 4 files changed, 20 insertions(+)
+ target/riscv/helper.h                   |  5 +++
+ target/riscv/insn32.decode              |  5 +++
+ target/riscv/insn_trans/trans_rvp.c.inc |  6 ++++
+ target/riscv/packed_helper.c            | 41 +++++++++++++++++++++++++
+ 4 files changed, 57 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index aa80095e1d..b998c86abf 100644
+index b998c86abf..bfcf0ff761 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1472,3 +1472,5 @@ DEF_HELPER_4(kmsxda32, tl, env, tl, tl, tl)
- DEF_HELPER_3(smds32, i64, env, i64, i64)
- DEF_HELPER_3(smdrs32, i64, env, i64, i64)
+@@ -1474,3 +1474,8 @@ DEF_HELPER_3(smdrs32, i64, env, i64, i64)
  DEF_HELPER_3(smxds32, i64, env, i64, i64)
+ 
+ DEF_HELPER_3(sraiw_u, i64, env, i64, i64)
 +
-+DEF_HELPER_3(sraiw_u, i64, env, i64, i64)
++DEF_HELPER_3(pkbb32, i64, env, i64, i64)
++DEF_HELPER_3(pkbt32, i64, env, i64, i64)
++DEF_HELPER_3(pktt32, i64, env, i64, i64)
++DEF_HELPER_3(pktb32, i64, env, i64, i64)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index b9eeb57ca7..8e8aca4ea1 100644
+index 8e8aca4ea1..65682f70b5 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -1095,3 +1095,5 @@ kmsxda32   0100111  ..... ..... 010 ..... 1110111 @r
- smds32     0101100  ..... ..... 010 ..... 1110111 @r
- smdrs32    0110100  ..... ..... 010 ..... 1110111 @r
+@@ -1097,3 +1097,8 @@ smdrs32    0110100  ..... ..... 010 ..... 1110111 @r
  smxds32    0111100  ..... ..... 010 ..... 1110111 @r
+ 
+ sraiw_u    0011010  ..... ..... 001 ..... 1110111 @sh5
 +
-+sraiw_u    0011010  ..... ..... 001 ..... 1110111 @sh5
++pkbb32     0000111  ..... ..... 010 ..... 1110111 @r
++pkbt32     0001111  ..... ..... 010 ..... 1110111 @r
++pktt32     0010111  ..... ..... 010 ..... 1110111 @r
++pktb32     0011111  ..... ..... 010 ..... 1110111 @r
 diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
-index 48bcf37e36..68c1ef9f48 100644
+index 68c1ef9f48..7505a0f89b 100644
 --- a/target/riscv/insn_trans/trans_rvp.c.inc
 +++ b/target/riscv/insn_trans/trans_rvp.c.inc
-@@ -1144,3 +1144,6 @@ GEN_RVP64_R_ACC_OOL(kmsxda32);
- GEN_RVP64_R_OOL(smds32);
- GEN_RVP64_R_OOL(smdrs32);
- GEN_RVP64_R_OOL(smxds32);
+@@ -1147,3 +1147,9 @@ GEN_RVP64_R_OOL(smxds32);
+ 
+ /* (RV64 Only) Non-SIMD 32-bit Shift Instructions */
+ GEN_RVP64_SHIFTI(sraiw_u, gen_helper_sraiw_u);
 +
-+/* (RV64 Only) Non-SIMD 32-bit Shift Instructions */
-+GEN_RVP64_SHIFTI(sraiw_u, gen_helper_sraiw_u);
++/* (RV64 Only) 32-bit Packing Instructions */
++GEN_RVP64_R_OOL(pkbb32);
++GEN_RVP64_R_OOL(pkbt32);
++GEN_RVP64_R_OOL(pktt32);
++GEN_RVP64_R_OOL(pktb32);
 diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
-index 834e7dbebb..42f1d96fa5 100644
+index 42f1d96fa5..3f4bc593f9 100644
 --- a/target/riscv/packed_helper.c
 +++ b/target/riscv/packed_helper.c
-@@ -3795,3 +3795,16 @@ static inline void do_smxds32(CPURISCVState *env, void *vd, void *va,
+@@ -3808,3 +3808,44 @@ static inline void do_sraiw_u(CPURISCVState *env, void *vd, void *va,
  }
  
- RVPR64_64_64(smxds32, 1, 8);
+ RVPR64_64_64(sraiw_u, 1, 8);
 +
-+/* (RV64 Only) Non-SIMD 32-bit Shift Instructions */
-+static inline void do_sraiw_u(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
++/* (RV64 Only)  32-bit packing instructions here */
++static inline void do_pkbb32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
 +{
-+    int64_t *d = vd;
-+    int32_t *a = va;
-+    uint8_t shift = *(uint8_t *)vb;
-+
-+    *d = vssra32(env, 0, a[H4(i)], shift);
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = b[H4(i)];
++    d[H4(i + 1)] = a[H4(i)];
 +}
 +
-+RVPR64_64_64(sraiw_u, 1, 8);
++RVPR64_64_64(pkbb32, 2, 4);
++
++static inline void do_pkbt32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = b[H4(i + 1)];
++    d[H4(i + 1)] = a[H4(i)];
++}
++
++RVPR64_64_64(pkbt32, 2, 4);
++
++static inline void do_pktb32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = b[H4(i)];
++    d[H4(i + 1)] = a[H4(i + 1)];
++}
++
++RVPR64_64_64(pktb32, 2, 4);
++
++static inline void do_pktt32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = b[H4(i + 1)];
++    d[H4(i + 1)] = a[H4(i + 1)];
++}
++
++RVPR64_64_64(pktt32, 2, 4);
 -- 
 2.25.1
 
