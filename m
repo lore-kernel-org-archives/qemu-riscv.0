@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrTfG-0006FQ-Ip
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 19:00:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50914)
+	id 1lrTgv-0001RX-Mq
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 19:02:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51254)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lrTfE-0006Dp-SU; Thu, 10 Jun 2021 19:00:40 -0400
-Received: from mail-io1-xd2b.google.com ([2607:f8b0:4864:20::d2b]:37683)
+ id 1lrTgt-0001Iq-S4; Thu, 10 Jun 2021 19:02:23 -0400
+Received: from mail-io1-xd31.google.com ([2607:f8b0:4864:20::d31]:41732)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lrTfC-0006gJ-NF; Thu, 10 Jun 2021 19:00:40 -0400
-Received: by mail-io1-xd2b.google.com with SMTP id q7so28911608iob.4;
- Thu, 10 Jun 2021 16:00:38 -0700 (PDT)
+ id 1lrTgq-0007f0-OW; Thu, 10 Jun 2021 19:02:23 -0400
+Received: by mail-io1-xd31.google.com with SMTP id p66so27016738iod.8;
+ Thu, 10 Jun 2021 16:02:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=LLmqkM/tXXG8lfAdHxwjNh587j+q3n8Fuu3VA4KPApw=;
- b=XfbzK5fAtFDf8AT4Nfecuu0jZez17B+lWuF844Ck32RPScDIShxVCaGvaUK5ay3RWP
- zO/KvTmIPG5jtXelqJLVrNsr0xvb5A++txfXTXCzhAfmzhGufretggQBKH2VjAmchVF5
- y+C3jHHW/y8SUaMKDnT9cq4pwpgyDkAFZ0ozFLmZ0htUQT200uqqcvVnrBEaQHk+GM15
- EJbk83IaVKSUCQ0E7950TuOHlSH7DmNS03SPl7nzvy4RGbYOOUd7kiYTxuoQeAMPmffu
- MFsEqTb3InTQHKoUegWBBvIuIM/Y56efqetJ+RxrnqjOd2/U+p8v0OtpyllJTBqEzcBe
- eLng==
+ :cc; bh=P9zJD5YwLqmsTyblNNUjmeMQx9YrLvR32ru1bkms4lI=;
+ b=svaI53wgYBsbIiXWPuP3SnD8IoKfv3ruBg20Cgc5U4gXW4AUciTLGGkVdcgFNbd1la
+ u5IXmARezNDrrXYDDIB9t11SXjDr5J09UDzDWvQsaHuat7Z+YoB2MssPHzf79KTdjXLP
+ IXs1flsCHB1utkjjsDWLAt3/nCOk6houDS/xSZcox7O5GIgOj34tBv6SQnqsdGu6IjGY
+ nAr7+JdpiDNeMMyVlVMJvosoS9gWh03V+m4BBIyenobpCPqltw/Ht2rgMhSzy8ROqn0L
+ jSb6MWnmW7xns2lHwa6gEcjomehQCHIeH5ER99EVvEbm/Y5Ywo3NlkeWfdKsv+ZrVfYA
+ vAOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=LLmqkM/tXXG8lfAdHxwjNh587j+q3n8Fuu3VA4KPApw=;
- b=iAlAqfIThgX5qOXn9GxpSVk4vgDbdO+vBTRBCr/Py4bhKLyoAgYf0GZFnTIgtICQsZ
- tZ444oVFPY1ptToeuQklpqTob05/8DAqkCBKDQixXyzu67oSISp1u3h11rI5I6ODwjB7
- HNwjWxuCgzooQnbjwiqfSdT8xqJuR8jeg3wBhH/oZE52TLNXhJmp9Q1YeZ52XyQIuXjk
- X21mlcdnZdQrlS6gLDoDgSLdyWx9ecca3jq3weLoMpb2XVbH0DD3hTaf5DYQeaPmrWbE
- +4PlPwvvComWb58PMKxMUeE9yjOEJkHw7Xz7QQm8jcdEUMIKqQ6+GzL9aATtQM/NCbgN
- GL1Q==
-X-Gm-Message-State: AOAM531wLOz70AEhNModtJDKOnQ2lYQkHFvrhrj+eQQZKb+WMx9w+Sk6
- 9EMnDYkpUJeFXqJB1PWQE1KsYNyokdLK1uSqWYw=
-X-Google-Smtp-Source: ABdhPJyn/3iEMvZcfCB1t2UgaWQ13KzZtqCBiZSWyCUG2X+m7nBZjh6Ur6k7Zd/NGyDFzpZyI+nMjeVhdEOouhk0OIQ=
-X-Received: by 2002:a05:6602:140e:: with SMTP id
- t14mr722567iov.42.1623366037334; 
- Thu, 10 Jun 2021 16:00:37 -0700 (PDT)
+ bh=P9zJD5YwLqmsTyblNNUjmeMQx9YrLvR32ru1bkms4lI=;
+ b=VlugDXY+Qugz5CUrnCsaI7sbdzXdhbr1t4T4AQBcuBxJWzjiEzV0C5Pyvzh/KZKWva
+ pp1mKwAUhFSIRIQUqieu/vMiQtevkaWfhEj47fJXhTP/10bVBQR/wXjGpz+Lte3iskjH
+ 0lwPnRpGrtraXN2On+Nd9hVVtU+5uSBjS3QVfHgio1K/IumN6Ap2/PeQ7YetiEaAsKDU
+ O8rn/ODkjBavwvCdXKp6oiDsUKNaf1vVsobKq49aRpenrmlNIke5TSzMJjZdKSlzLRN5
+ njqgWx8ZhnfRMR9ku/PUpX98WFhcgeOccaSgQ7ZhvwCIKZKE5OktJmue24S4NOZL8C7O
+ UT1A==
+X-Gm-Message-State: AOAM531ZTOvcalcwzaSlXPkyTjgwBn0XVODZOGtph/DCRolN/i8ZkjM9
+ Y0YFf2y/T+qQUpk9BqqEZA/5XMMiNApY01ZJHLc=
+X-Google-Smtp-Source: ABdhPJxqzzG0o6vXSBwOn3Jy8HajhLnXrWPqM0cRQYWXUR2ue+Qgw3RJou7XTFU8peNXaddIDFQ3wOyGicfl0OOxecQ=
+X-Received: by 2002:a05:6602:29cf:: with SMTP id
+ z15mr708230ioq.176.1623366139282; 
+ Thu, 10 Jun 2021 16:02:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1623196022.git.alistair.francis@wdc.com>
  <b40ec8986ba8e7de3a3cf0ee4718b4868793be67.1623196022.git.alistair.francis@wdc.com>
- <CAEUhbmVTNB4KZ+H096gOQxptnYDkUY7A4TvsGqHf9h8xBRw-SA@mail.gmail.com>
-In-Reply-To: <CAEUhbmVTNB4KZ+H096gOQxptnYDkUY7A4TvsGqHf9h8xBRw-SA@mail.gmail.com>
+ <d3057566-0b3f-4fdc-73c6-323eb6366b8f@redhat.com>
+In-Reply-To: <d3057566-0b3f-4fdc-73c6-323eb6366b8f@redhat.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Jun 2021 09:00:10 +1000
-Message-ID: <CAKmqyKODioH-7nLup_nLV4u2M_8FtnGA6p4w-aBQYBSY8gSyCw@mail.gmail.com>
+Date: Fri, 11 Jun 2021 09:01:52 +1000
+Message-ID: <CAKmqyKNs5GwcGwRUZ8v17MJd40_STjOgqu-2vRU7ee21x79cKw@mail.gmail.com>
 Subject: Re: [PATCH v2 2/3] hw/timer: Initial commit of Ibex Timer
-To: Bin Meng <bmeng.cn@gmail.com>
+To: Paolo Bonzini <pbonzini@redhat.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2b;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd31.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,27 +74,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2021 23:00:41 -0000
+X-List-Received-Date: Thu, 10 Jun 2021 23:02:24 -0000
 
-On Wed, Jun 9, 2021 at 11:44 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Jun 9, 2021 at 5:57 PM Paolo Bonzini <pbonzini@redhat.com> wrote:
 >
-> On Wed, Jun 9, 2021 at 7:49 AM Alistair Francis
-> <alistair.francis@wdc.com> wrote:
-> >
+> On 09/06/21 01:48, Alistair Francis wrote:
 > > Add support for the Ibex timer. This is used with the RISC-V
 > > mtime/mtimecmp similar to the SiFive CLINT.
 > >
 > > We currently don't support changing the prescale or the timervalue.
 > >
 > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>
+> Any chance this could have a qtest?  It would also be nice if the CPU
+
+Yep, do you have a good example of what the qtest should look like?
+
+> had qemu_irqs for MEIP/MTIP/SEIP (possibly MSIP too but that one is
+> bidirectional), so that instead of riscv_cpu_update_mip you can just
+> connect to a GPIO pin of the CPU and do qemu_set_irq.  It could also be
+> used by the qtests via irq_intercept_in.
+
+Yeah the riscv_cpu_update_mip() is not ideal. As it is what we
+currently also use for the CLINT I don't want to fix it up here. In
+the future I'll work on changing riscv_cpu_update_mip in all the
+RISC-V timers to use GPIO lines instead.
+
+Alistair
+
+>
+> Paolo
+>
 > > ---
-> >  include/hw/timer/ibex_timer.h |  52 ++++++
-> >  hw/timer/ibex_timer.c         | 305 ++++++++++++++++++++++++++++++++++
-> >  MAINTAINERS                   |   6 +-
-> >  hw/timer/meson.build          |   1 +
-> >  4 files changed, 360 insertions(+), 4 deletions(-)
-> >  create mode 100644 include/hw/timer/ibex_timer.h
-> >  create mode 100644 hw/timer/ibex_timer.c
+> >   include/hw/timer/ibex_timer.h |  52 ++++++
+> >   hw/timer/ibex_timer.c         | 305 ++++++++++++++++++++++++++++++++++
+> >   MAINTAINERS                   |   6 +-
+> >   hw/timer/meson.build          |   1 +
+> >   4 files changed, 360 insertions(+), 4 deletions(-)
+> >   create mode 100644 include/hw/timer/ibex_timer.h
+> >   create mode 100644 hw/timer/ibex_timer.c
 > >
 > > diff --git a/include/hw/timer/ibex_timer.h b/include/hw/timer/ibex_timer.h
 > > new file mode 100644
@@ -260,22 +278,240 @@ On Wed, Jun 9, 2021 at 11:44 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 > > +    if (next < qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL)) {
 > > +        /* We overflowed the timer, just set it as large as we can */
 > > +        timer_mod(cpu->env.timer, 0x07FFFFFFFFFFFFFF);
->
-> Still not correct? should be 0x7FFFFFFFFFFFFFFF?
-
-Argh! Thanks
-
-I have actually fixed this.
-
-Alistair
-
->
 > > +    } else {
 > > +        timer_mod(cpu->env.timer, next);
 > > +    }
 > > +}
 > > +
+> > +static void ibex_timer_cb(void *opaque)
+> > +{
+> > +    IbexTimerState *s = opaque;
+> > +    CPUState *cs = qemu_get_cpu(0);
+> > +    RISCVCPU *cpu = RISCV_CPU(cs);
+> > +
+> > +    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
+> > +    if (s->timer_intr_enable & R_INTR_ENABLE_IE_0_MASK) {
+> > +        s->timer_intr_state |= R_INTR_STATE_IS_0_MASK;
+> > +        qemu_set_irq(s->irq, true);
+> > +    }
+> > +}
+> > +
+> > +static void ibex_timer_reset(DeviceState *dev)
+> > +{
+> > +    IbexTimerState *s = IBEX_TIMER(dev);
+> > +
+> > +    CPUState *cpu = qemu_get_cpu(0);
+> > +    CPURISCVState *env = cpu->env_ptr;
+> > +    env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+> > +                              &ibex_timer_cb, s);
+> > +    env->timecmp = 0;
+> > +
+> > +    s->timer_ctrl = 0x00000000;
+> > +    s->timer_cfg0 = 0x00010000;
+> > +    s->timer_compare_lower0 = 0xFFFFFFFF;
+> > +    s->timer_compare_upper0 = 0xFFFFFFFF;
+> > +    s->timer_intr_enable = 0x00000000;
+> > +    s->timer_intr_state = 0x00000000;
+> > +    s->timer_intr_test = 0x00000000;
+> > +
+> > +    ibex_timer_update_irqs(s);
+> > +}
+> > +
+> > +static uint64_t ibex_timer_read(void *opaque, hwaddr addr,
+> > +                                       unsigned int size)
+> > +{
+> > +    IbexTimerState *s = opaque;
+> > +    uint64_t now = cpu_riscv_read_rtc(s->timebase_freq);
+> > +    uint64_t retvalue = 0;
+> > +
+> > +    switch (addr >> 2) {
+> > +    case R_CTRL:
+> > +        retvalue = s->timer_ctrl;
+> > +        break;
+> > +    case R_CFG0:
+> > +        retvalue = s->timer_cfg0;
+> > +        break;
+> > +    case R_LOWER0:
+> > +        retvalue = now;
+> > +        break;
+> > +    case R_UPPER0:
+> > +        retvalue = now >> 32;
+> > +        break;
+> > +    case R_COMPARE_LOWER0:
+> > +        retvalue = s->timer_compare_lower0;
+> > +        break;
+> > +    case R_COMPARE_UPPER0:
+> > +        retvalue = s->timer_compare_upper0;
+> > +        break;
+> > +    case R_INTR_ENABLE:
+> > +        retvalue = s->timer_intr_enable;
+> > +        break;
+> > +    case R_INTR_STATE:
+> > +        retvalue = s->timer_intr_state;
+> > +        break;
+> > +    case R_INTR_TEST:
+> > +        retvalue = s->timer_intr_test;
+> > +        break;
+> > +    default:
+> > +        qemu_log_mask(LOG_GUEST_ERROR,
+> > +                      "%s: Bad offset 0x%"HWADDR_PRIx"\n", __func__, addr);
+> > +        return 0;
+> > +    }
+> > +
+> > +    return retvalue;
+> > +}
+> > +
+> > +static void ibex_timer_write(void *opaque, hwaddr addr,
+> > +                             uint64_t val64, unsigned int size)
+> > +{
+> > +    IbexTimerState *s = opaque;
+> > +    uint32_t val = val64;
+> > +
+> > +    switch (addr >> 2) {
+> > +    case R_CTRL:
+> > +        s->timer_ctrl = val;
+> > +        break;
+> > +    case R_CFG0:
+> > +        qemu_log_mask(LOG_UNIMP, "Changing prescale or step not supported");
+> > +        s->timer_cfg0 = val;
+> > +        break;
+> > +    case R_LOWER0:
+> > +        qemu_log_mask(LOG_UNIMP, "Changing timer value is not supported");
+> > +        break;
+> > +    case R_UPPER0:
+> > +        qemu_log_mask(LOG_UNIMP, "Changing timer value is not supported");
+> > +        break;
+> > +    case R_COMPARE_LOWER0:
+> > +        s->timer_compare_lower0 = val;
+> > +        ibex_timer_update_irqs(s);
+> > +        break;
+> > +    case R_COMPARE_UPPER0:
+> > +        s->timer_compare_upper0 = val;
+> > +        ibex_timer_update_irqs(s);
+> > +        break;
+> > +    case R_INTR_ENABLE:
+> > +        s->timer_intr_enable = val;
+> > +        break;
+> > +    case R_INTR_STATE:
+> > +        /* Write 1 to clear */
+> > +        s->timer_intr_state &= ~val;
+> > +        break;
+> > +    case R_INTR_TEST:
+> > +        s->timer_intr_test = val;
+> > +        if (s->timer_intr_enable &
+> > +            s->timer_intr_test &
+> > +            R_INTR_ENABLE_IE_0_MASK) {
+> > +            s->timer_intr_state |= R_INTR_STATE_IS_0_MASK;
+> > +            qemu_set_irq(s->irq, true);
+> > +        }
+> > +        break;
+> > +    default:
+> > +        qemu_log_mask(LOG_GUEST_ERROR,
+> > +                      "%s: Bad offset 0x%"HWADDR_PRIx"\n", __func__, addr);
+> > +    }
+> > +}
+> > +
+> > +static const MemoryRegionOps ibex_timer_ops = {
+> > +    .read = ibex_timer_read,
+> > +    .write = ibex_timer_write,
+> > +    .endianness = DEVICE_NATIVE_ENDIAN,
+> > +    .impl.min_access_size = 4,
+> > +    .impl.max_access_size = 4,
+> > +};
+> > +
+> > +static int ibex_timer_post_load(void *opaque, int version_id)
+> > +{
+> > +    IbexTimerState *s = opaque;
+> > +
+> > +    ibex_timer_update_irqs(s);
+> > +    return 0;
+> > +}
+> > +
+> > +static const VMStateDescription vmstate_ibex_timer = {
+> > +    .name = TYPE_IBEX_TIMER,
+> > +    .version_id = 1,
+> > +    .minimum_version_id = 1,
+> > +    .post_load = ibex_timer_post_load,
+> > +    .fields = (VMStateField[]) {
+> > +        VMSTATE_UINT32(timer_ctrl, IbexTimerState),
+> > +        VMSTATE_UINT32(timer_cfg0, IbexTimerState),
+> > +        VMSTATE_UINT32(timer_compare_lower0, IbexTimerState),
+> > +        VMSTATE_UINT32(timer_compare_upper0, IbexTimerState),
+> > +        VMSTATE_UINT32(timer_intr_enable, IbexTimerState),
+> > +        VMSTATE_UINT32(timer_intr_state, IbexTimerState),
+> > +        VMSTATE_UINT32(timer_intr_test, IbexTimerState),
+> > +        VMSTATE_END_OF_LIST()
+> > +    }
+> > +};
+> > +
+> > +static Property ibex_timer_properties[] = {
+> > +    DEFINE_PROP_UINT32("timebase-freq", IbexTimerState, timebase_freq, 10000),
+> > +    DEFINE_PROP_END_OF_LIST(),
+> > +};
+> > +
+> > +static void ibex_timer_init(Object *obj)
+> > +{
+> > +    IbexTimerState *s = IBEX_TIMER(obj);
+> > +
+> > +    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->irq);
+> > +
+> > +    memory_region_init_io(&s->mmio, obj, &ibex_timer_ops, s,
+> > +                          TYPE_IBEX_TIMER, 0x400);
+> > +    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
+> > +}
+> > +
+> > +static void ibex_timer_class_init(ObjectClass *klass, void *data)
+> > +{
+> > +    DeviceClass *dc = DEVICE_CLASS(klass);
+> > +
+> > +    dc->reset = ibex_timer_reset;
+> > +    dc->vmsd = &vmstate_ibex_timer;
+> > +    device_class_set_props(dc, ibex_timer_properties);
+> > +}
+> > +
+> > +static const TypeInfo ibex_timer_info = {
+> > +    .name          = TYPE_IBEX_TIMER,
+> > +    .parent        = TYPE_SYS_BUS_DEVICE,
+> > +    .instance_size = sizeof(IbexTimerState),
+> > +    .instance_init = ibex_timer_init,
+> > +    .class_init    = ibex_timer_class_init,
+> > +};
+> > +
+> > +static void ibex_timer_register_types(void)
+> > +{
+> > +    type_register_static(&ibex_timer_info);
+> > +}
+> > +
+> > +type_init(ibex_timer_register_types)
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index 7d9cd29042..b661c9c14e 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -1363,11 +1363,9 @@ M: Alistair Francis <Alistair.Francis@wdc.com>
+> >   L: qemu-riscv@nongnu.org
+> >   S: Supported
+> >   F: hw/riscv/opentitan.c
+> > -F: hw/char/ibex_uart.c
+> > -F: hw/intc/ibex_plic.c
+> > +F: hw/*/ibex_*.c
+> >   F: include/hw/riscv/opentitan.h
+> > -F: include/hw/char/ibex_uart.h
+> > -F: include/hw/intc/ibex_plic.h
+> > +F: include/hw/*/ibex_*.h
+> >
+> >   Microchip PolarFire SoC Icicle Kit
+> >   M: Bin Meng <bin.meng@windriver.com>
+> > diff --git a/hw/timer/meson.build b/hw/timer/meson.build
+> > index 157f540ecd..1aa3cd2284 100644
+> > --- a/hw/timer/meson.build
+> > +++ b/hw/timer/meson.build
+> > @@ -33,5 +33,6 @@ softmmu_ss.add(when: 'CONFIG_SSE_COUNTER', if_true: files('sse-counter.c'))
+> >   softmmu_ss.add(when: 'CONFIG_SSE_TIMER', if_true: files('sse-timer.c'))
+> >   softmmu_ss.add(when: 'CONFIG_STM32F2XX_TIMER', if_true: files('stm32f2xx_timer.c'))
+> >   softmmu_ss.add(when: 'CONFIG_XILINX', if_true: files('xilinx_timer.c'))
+> > +specific_ss.add(when: 'CONFIG_IBEX', if_true: files('ibex_timer.c'))
+> >
+> >   specific_ss.add(when: 'CONFIG_AVR_TIMER16', if_true: files('avr_timer16.c'))
+> >
 >
-> Regards,
-> Bin
 
