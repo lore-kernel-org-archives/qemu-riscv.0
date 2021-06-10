@@ -1,48 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrTqr-00089u-2G
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 19:12:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52314)
+	id 1lrTsn-0001J0-EF
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 19:14:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52494)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lrTqp-00089L-8a; Thu, 10 Jun 2021 19:12:39 -0400
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:34702)
+ id 1lrTsl-0001HZ-LK; Thu, 10 Jun 2021 19:14:39 -0400
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:37781)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lrTqn-0005Ll-E6; Thu, 10 Jun 2021 19:12:38 -0400
-Received: by mail-io1-xd33.google.com with SMTP id 5so28900657ioe.1;
- Thu, 10 Jun 2021 16:12:36 -0700 (PDT)
+ id 1lrTsj-0006c2-QF; Thu, 10 Jun 2021 19:14:39 -0400
+Received: by mail-io1-xd35.google.com with SMTP id q7so28944284iob.4;
+ Thu, 10 Jun 2021 16:14:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=dcGYdzIzcWOpzDZfoKpS4jbuO3gYyTExPeTaBvQ2BTQ=;
- b=XkE4VgkrIIMujm1WrqnCzmbNGC8fH7xOVwL1RYp3Ht/CsBINs4V+ZIb+lJEJe+dPxn
- B6jZaELcMqLG3Cbw+mQugVaJ8p1amG+LqmYMNtIv0iwwoFhDQTwxipD9ZzxbZsa7C4G8
- CdtpzlIPt8zQwHLhRHPr5qMV28uKxWOrrRuXGuuxuytYBAI558g2YuGTLuSnDhTgTdFi
- PqhnahgCdtwFLneKGRsXqTRzLg4Z1N5jdfp4oHB/jyb4cPW7i8BhPna7GyOK+11bTPGE
- AGfStrIs321sCbclFp5BUfizusXVJlNGejGtYWRwx7rovP3dAql5DJgefmtiolSjJrze
- 037w==
+ :cc; bh=qyGGFErAAPD49N+xwFvI+8Rw9z5OIzzxTIw7n3DcnYM=;
+ b=aaKBibn0Zcps3MyBg0Bgc5WYnM4TIB1e+8c2bTt7sXSLMpbl7RkSoNAj0TeJJm+9nA
+ bwWytXGXcqMeC+JZVEQs+R/AeCg32St1HGR45j4OTujKBuR9VqiDdlHHIPAW1S1Srbm3
+ EugA0+UdSW32t/A90MQcGK1VsknkOa0JjXICCu/l5e2YFSo18WcoI8uARFOKofB6D205
+ W3PcOgJPU/lB5rtrfLwp9My0fMyHjPqbDouYLWOgt+eOVVmTExh5LXu7WBLv8lD1fUDk
+ GaSTUqobv/iTCF9QFQtthF42iJbLaYAxAWKXxLLqGjL98OFYeSbdfKe5uCLpebKYb6sl
+ 7HWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=dcGYdzIzcWOpzDZfoKpS4jbuO3gYyTExPeTaBvQ2BTQ=;
- b=PFqRRNWCDIDpJCYibJlehIXcWZk4TQ7xgLJeEBOAx3bzq2gBxbjfnsiTll+bkBtxeO
- N3WQgJ5bUOdmor2oshj/NV9t6YIVxGPdIkkIRSSNfrxr6ols75S09kv7PshQ6Jmy3xMw
- M6dNtULfv6WkeIUNrzW9fqxHpml2VZXiv82M+HjJ13iRT55VNfnAxlS0lGMHjL3bQTYk
- G+TaSVvnt8uPn+hapFYWbOCjk4Y6H8YYrOZQOWMFQxuPqDEkrCIDugSWX9ps9Mpb6E62
- YyLk421y/0mokyLUWe1NUOkiBtZ0aNoHWBQ+rBBEgQ2A8unE871njC5oivNWLGcRwjPL
- 6cvg==
-X-Gm-Message-State: AOAM533p7xJIvuzG4PqcNxVE8cVyWCcHhle11ov2ZmXpJDWCELRvA8K1
- eSEpk+UMqpbb0RYyQnYDr/G6sAgDP4/dXrt9SWE=
-X-Google-Smtp-Source: ABdhPJx7uHgSrGcmQ+sZXRL0Z/HLZgqP4PbIe9DJa+wAekyWxxwnW7Qg6k451y//GWLguPLnv8niB4K/puqUjFY65g4=
-X-Received: by 2002:a5e:8349:: with SMTP id y9mr704140iom.105.1623366755926;
- Thu, 10 Jun 2021 16:12:35 -0700 (PDT)
+ bh=qyGGFErAAPD49N+xwFvI+8Rw9z5OIzzxTIw7n3DcnYM=;
+ b=DF1GvQtu5BWEwH0Pxh22kBTMsxPz2AnGHsW1TmAibeFFovC9QMJIfWqx0lg7tCO1W6
+ WYOk8t/bejOR8NMe0+Cbe00KyHyhCGvgJWanh7DeYqYJ01PLx3EicXt7Zro8XWUlynNI
+ 5/se4Ps88FiaqR+O/EQzyL9rSwajENQ0fwXeOT0If66y25GDlYCcCkkZB6TJfUuV4Rlr
+ hZWQbsMIpNcYackcg4CbZ1f+uFrQ7E6PVY8goT0hIJeIc4pasdsXAmOE7D9IuM5oXyhO
+ 8PHhYSaewf9ZcTjqC4F3nG+W71jI8noW9LjO+vvFMguHuL5tcCmD8B/LJ50pbppTZWGg
+ Qx5Q==
+X-Gm-Message-State: AOAM531+FqF8Kyt/Qd6+AHGdd2COU1gQxkUfkE8iGs3zV2mw3NO0sBIi
+ PBq6uyShgqBEV5xFxn+xxjx+JpH1lvgYup6uWkjR86jDbRcqJw==
+X-Google-Smtp-Source: ABdhPJyMUND0LUH0bwYuXWWOp+B8movCAkNz1K11/QupUM4+395vbwvomRqTjt7pqk7/qqNvTOgRInpARL/329y2nTg=
+X-Received: by 2002:a05:6602:140e:: with SMTP id
+ t14mr761521iov.42.1623366876356; 
+ Thu, 10 Jun 2021 16:14:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210522155902.374439-1-josemartins90@gmail.com>
-In-Reply-To: <20210522155902.374439-1-josemartins90@gmail.com>
+References: <20210602191125.525742-1-josemartins90@gmail.com>
+ <20210602191125.525742-2-josemartins90@gmail.com>
+In-Reply-To: <20210602191125.525742-2-josemartins90@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Jun 2021 09:12:09 +1000
-Message-ID: <CAKmqyKMvaLn5YUPVBngDjziud-t8P717cp-LsrOBo-VG18BMiw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: hardwire bits in hideleg and hedeleg
+Date: Fri, 11 Jun 2021 09:14:09 +1000
+Message-ID: <CAKmqyKMFi6GDcQPfHo=HcLu+oEQxULZ3E7zkUc5s-egxGQ8sGA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: fix VS interrupts forwarding to HS
 To: Jose Martins <josemartins90@gmail.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
  "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
@@ -51,8 +53,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,72 +75,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2021 23:12:39 -0000
+X-List-Received-Date: Thu, 10 Jun 2021 23:14:40 -0000
 
-On Sun, May 23, 2021 at 1:59 AM Jose Martins <josemartins90@gmail.com> wrote:
+On Thu, Jun 3, 2021 at 5:13 AM Jose Martins <josemartins90@gmail.com> wrote:
 >
-> The specification mandates for certain bits to be hardwired in the
-> hypervisor delegation registers. This was not being enforced.
+> VS interrupts (2, 6, 10) were not correctly forwarded to hs-mode when
+> not delegated in hideleg (which was not being taken into account). This
+> was mainly because hs level sie was not always considered enabled when
+> it should. The spec states that "Interrupts for higher-privilege modes,
+> y>x, are always globally enabled regardless of the setting of the global
+> yIE bit for the higher-privilege mode." and also "For purposes of
+> interrupt global enables, HS-mode is considered more privileged than
+> VS-mode, and VS-mode is considered more privileged than VU-mode". Also,
+> vs-level interrupts were not being taken into account unless V=1, but
+> should be unless delegated.
+>
+> Finally, there is no need for a special case for to handle vs interrupts
+> as the current privilege level, the state of the global ie and of the
+> delegation registers should be enough to route all interrupts to the
+> appropriate privilege level in riscv_cpu_do_interrupt.
 >
 > Signed-off-by: Jose Martins <josemartins90@gmail.com>
-> ---
->  target/riscv/csr.c | 13 +++++++++++--
->  1 file changed, 11 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d2585395bf..9b74a00cc9 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -394,6 +394,7 @@ static int read_timeh(CPURISCVState *env, int csrno, target_ulong *val)
->
->  static const target_ulong delegable_ints = S_MODE_INTERRUPTS |
->                                             VS_MODE_INTERRUPTS;
-> +static const target_ulong vs_delegable_ints = VS_MODE_INTERRUPTS;
->  static const target_ulong all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
->                                       VS_MODE_INTERRUPTS;
->  static const target_ulong delegable_excps =
-> @@ -416,6 +417,14 @@ static const target_ulong delegable_excps =
->      (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
->      (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
->      (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT));
-> +static const target_ulong vs_delegable_excps = delegable_excps &
-> +    ~((1ULL << (RISCV_EXCP_S_ECALL)) |
 
-> +    (1ULL << (RISCV_EXCP_VS_ECALL)) |
-> +    (1ULL << (RISCV_EXCP_M_ECALL)) |
-
-These two are both read only 0, shouldn't they not be included in this list?
-
-> +    (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) |
-> +    (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) |
-> +    (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) |
-> +    (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT)));
->  static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
->      SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
->      SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD;
-> @@ -963,7 +972,7 @@ static int read_hedeleg(CPURISCVState *env, int csrno, target_ulong *val)
->
->  static int write_hedeleg(CPURISCVState *env, int csrno, target_ulong val)
->  {
-> -    env->hedeleg = val;
-> +    env->hedeleg = val & vs_delegable_excps;
-
-Because we then allow a write to occur here.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->      return 0;
->  }
+> ---
+>  target/riscv/cpu_helper.c | 28 ++++++++--------------------
+>  1 file changed, 8 insertions(+), 20 deletions(-)
 >
-> @@ -975,7 +984,7 @@ static int read_hideleg(CPURISCVState *env, int csrno, target_ulong *val)
->
->  static int write_hideleg(CPURISCVState *env, int csrno, target_ulong val)
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 21c54ef561..592d4642be 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -38,36 +38,24 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+>  #ifndef CONFIG_USER_ONLY
+>  static int riscv_cpu_local_irq_pending(CPURISCVState *env)
 >  {
-> -    env->hideleg = val;
-> +    env->hideleg = val & vs_delegable_ints;
->      return 0;
->  }
+> -    target_ulong irqs;
+> +    target_ulong virt_enabled = riscv_cpu_virt_enabled(env);
 >
+>      target_ulong mstatus_mie = get_field(env->mstatus, MSTATUS_MIE);
+>      target_ulong mstatus_sie = get_field(env->mstatus, MSTATUS_SIE);
+> -    target_ulong hs_mstatus_sie = get_field(env->mstatus_hs, MSTATUS_SIE);
+>
+> -    target_ulong pending = env->mip & env->mie &
+> -                               ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> -    target_ulong vspending = (env->mip & env->mie &
+> -                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
+> +    target_ulong pending = env->mip & env->mie;
+>
+>      target_ulong mie    = env->priv < PRV_M ||
+>                            (env->priv == PRV_M && mstatus_mie);
+>      target_ulong sie    = env->priv < PRV_S ||
+>                            (env->priv == PRV_S && mstatus_sie);
+> -    target_ulong hs_sie = env->priv < PRV_S ||
+> -                          (env->priv == PRV_S && hs_mstatus_sie);
+> +    target_ulong hsie   = virt_enabled || sie;
+> +    target_ulong vsie   = virt_enabled && sie;
+>
+> -    if (riscv_cpu_virt_enabled(env)) {
+> -        target_ulong pending_hs_irq = pending & -hs_sie;
+> -
+> -        if (pending_hs_irq) {
+> -            riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
+> -            return ctz64(pending_hs_irq);
+> -        }
+> -
+> -        pending = vspending;
+> -    }
+> -
+> -    irqs = (pending & ~env->mideleg & -mie) | (pending &  env->mideleg & -sie);
+> +    target_ulong irqs =
+> +            (pending & ~env->mideleg & -mie) |
+> +            (pending &  env->mideleg & ~env->hideleg & -hsie) |
+> +            (pending &  env->mideleg &  env->hideleg & -vsie);
+>
+>      if (irqs) {
+>          return ctz64(irqs); /* since non-zero */
 > --
 > 2.30.2
 >
