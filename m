@@ -1,65 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrckV-0002l1-AE
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Jun 2021 04:42:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37270)
+	id 1lrcoD-000513-GF
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Jun 2021 04:46:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37702)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <0xc0de0125@gmail.com>)
- id 1lrckT-0002j7-Cw; Fri, 11 Jun 2021 04:42:41 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:38472)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lrcoB-0004z6-9K; Fri, 11 Jun 2021 04:46:31 -0400
+Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:34555)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <0xc0de0125@gmail.com>)
- id 1lrckP-0004VT-Fy; Fri, 11 Jun 2021 04:42:41 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id t17so1897608pga.5;
- Fri, 11 Jun 2021 01:42:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lrco6-0007TF-Gi; Fri, 11 Jun 2021 04:46:31 -0400
+Received: by mail-io1-xd32.google.com with SMTP id 5so30116787ioe.1;
+ Fri, 11 Jun 2021 01:46:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=bElCV1NyrMGrhEl4TpRXmCL58fCaxJlLD94csfkWE2w=;
- b=FoRIlXpO98pEZk334BsD6E1Wkv3gelbuHbXTJDlQye2lvASwvlJHZNnldkPolIYRqX
- V3eR5Si8X3pr+JsWmSyCathJC+FK+TlzSsDSQufVnGgkjm8Lqhewh9hM3IPRTl87wN8D
- FC4pKdJD59YxdV9bzQi29ZNzyPLKTKHcFh3JA57xnjLSjbFoPVMC/3ADjmZzWekr0LMg
- 9wN8dGXBZt+qZVphqCdm7vABv72KmU8dk3mmgPWBk+fCEavUlwqcOtT3GzhunTTT/bTT
- 5Zgof6eTCy/gk6MH7QLMJwbSG7KBcfV+n6mwiMOLYmc8xsHFtp7SQn64C3rd4s/1+fhD
- wbwg==
+ :cc:content-transfer-encoding;
+ bh=tKHp9Yj5rm3rZoyOB6+kHizc6nlyr/SfR/5+PqNyy5U=;
+ b=JAQjc3mRf59iFvCVRHQnKhMJYpsTeSEa/dmWh74lv2+TkMPHSGR8dhJCFa+D4WyULF
+ +hy6/xRFZuMLn+V11KruYfy6JobHtVqqL9+NnZ4zFdGv6Xcjb3aDuHc6X1eTqM66lxOn
+ pMR5ICdU+Su56+Z8N6y1NekPXPg9wzTu/cp2dVW4EK1GIEvcvDHgAFfja5ytAbRnmOyn
+ BRXFc9CfVN7+fSPjML/t52GjV9nfzXKkhR447A2LXmjx/t/4AE/KViizcAtxuC+xgo0B
+ eISvItorIeYLhWGgdX0JG/juXypSRb9IHGpgkSnLoZlXAvrJqRW2hxN6EuodLoaQ7PAF
+ ktZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=bElCV1NyrMGrhEl4TpRXmCL58fCaxJlLD94csfkWE2w=;
- b=sGXyxQanCjG+ZB08l6d3R/BhiWvCjy8sRmkeSUtOqqH8ZeSqPECwk3sqbHzQSJ4vTp
- cH+Bv7LoKhqSb6L2s5Rcjv/PVc5kqJovWrcxe9fWPB3W8sSF5LpDZ2oITLUcdHIcjX89
- Cv1rqsSrvFWFYzBGgyDfOevickQqvPv+Zr+dGUDBxcCazc1r9/H98G8qm4CpqbYwjrt7
- xzCLjzFqEBp14EKBqfuezoarLZdujFRZ04JLtRkFleZkhVrBioocvz7db6Fj1BuxhWpo
- TRQ3cXG1gF4wSWILYBS+vWY9F9t3vgHuoRuNVYagJtgZelrxrPdDqkk+s0C0MNmcPKcu
- CPUw==
-X-Gm-Message-State: AOAM533x21CmIrsEM0NzfR4QOOuHnxVrrNLSp7I3jAcZk4sVXze1XaIX
- 3wwC2ErqQJmRRfFJFc9fQxrV/OMWcJ0gnG7wYIM=
-X-Google-Smtp-Source: ABdhPJyJ7eGxUi5BpXPj7eoTj5ZBao1iGXsfwOlHBV0The795CvyncIOoScO1bxrUzjJInef91rcJQZQ434UVi6Zojc=
-X-Received: by 2002:a63:5b0e:: with SMTP id p14mr2541474pgb.110.1623400955543; 
- Fri, 11 Jun 2021 01:42:35 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=tKHp9Yj5rm3rZoyOB6+kHizc6nlyr/SfR/5+PqNyy5U=;
+ b=KKCRzrBWPvefZKpf15QnUbq+VqImm2PiUShyBR7UHzYtiDu8dzXvHqkeV39fvuOy9w
+ mvnhT8nzZYO7iTlU0vDrSBPM7a3NNBQeh+Nt+JHAVeE0MaLYYOzEYfsUZ0HjoeUZ+JI2
+ IkgHL8gy/K4tQigqNyewtaFmK6lxn/tLQru1Bt9uu27i/WenhYU/efXasmMshT3AwDhr
+ dEf2M2rED1VEV9bIOcTe7i4Ywvzv5LKXvSMFBayQzW9L3gMXPZVrTDr0KuhZzwn9BvLQ
+ WTSUZlG8S0d7qAMqP7TU3jjHmNNOkZcvRKhrsvYCH8UJAxmGbZP1otwog/+5VLivo7Xs
+ KUfA==
+X-Gm-Message-State: AOAM532zu+1GL/bfcukyh7+RH53jiS54Ku3o8VwO64igPOlVY9Sw991T
+ 4SZF2Cg2PM6oHLGbMlD6sKnEQHFpwtMFbfinuG8TmUqURgMQUg==
+X-Google-Smtp-Source: ABdhPJw4i+eAY9bgXjjFYWvR6R5KnQAEwzqGKq3Yy8vUqgPH6QwSWXFKgauUuWHwtkftEoaUg6EQyyYNwGdWcxQ1sbY=
+X-Received: by 2002:a6b:d609:: with SMTP id w9mr2322282ioa.118.1623401184111; 
+ Fri, 11 Jun 2021 01:46:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210409074857.166082-1-zhiwei_liu@c-sky.com>
- <20210409074857.166082-9-zhiwei_liu@c-sky.com>
- <CANzO1D1jotPbDxJj3ZxJZ7BdT0je64A9DAudEfm8=-m4DQFzoA@mail.gmail.com>
- <f3523b14-c13d-edf8-61e4-d251691130e0@c-sky.com>
-In-Reply-To: <f3523b14-c13d-edf8-61e4-d251691130e0@c-sky.com>
-From: Frank Chang <0xc0de0125@gmail.com>
-Date: Fri, 11 Jun 2021 16:42:24 +0800
-Message-ID: <CANzO1D00w9YBQC=nFaXVaR6ESpOvySEJkoeR5C9cPi=g667s8Q@mail.gmail.com>
-Subject: Re: [RFC PATCH 08/11] target/riscv: Update CSR xnxti in CLIC mode
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+References: <20210514143242.377645-1-anup.patel@wdc.com>
+ <20210514143242.377645-4-anup.patel@wdc.com>
+ <CAKmqyKOcsF32oLtfyh511JCcrwgONK1qvjwK-dMYdPPZABYOOg@mail.gmail.com>
+ <CAAhSdy1eWW6bw55O1pLHvopRVvM6DVb-kzvhTAjAoyvB0qt5bQ@mail.gmail.com>
+In-Reply-To: <CAAhSdy1eWW6bw55O1pLHvopRVvM6DVb-kzvhTAjAoyvB0qt5bQ@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 11 Jun 2021 18:45:56 +1000
+Message-ID: <CAKmqyKO_hEpGUNkH99rk2XNERHFN_iQTJEuHzGDsNerHXqna0Q@mail.gmail.com>
+Subject: Re: [PATCH 3/4] target/riscv: Implement AIA local interrupt CSRs
+To: Anup Patel <anup@brainfault.org>
+Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, wxy194768@alibaba-inc.com
-Content-Type: multipart/alternative; boundary="0000000000004884e105c4797d1a"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=0xc0de0125@gmail.com; helo=mail-pg1-x52a.google.com
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Atish Patra <atish.patra@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -74,717 +78,2098 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jun 2021 08:42:41 -0000
+X-List-Received-Date: Fri, 11 Jun 2021 08:46:31 -0000
 
---0000000000004884e105c4797d1a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Fri, Jun 11, 2021 at 3:04 PM Anup Patel <anup@brainfault.org> wrote:
+>
+> On Fri, Jun 11, 2021 at 4:49 AM Alistair Francis <alistair23@gmail.com> w=
+rote:
+> >
+> > On Sat, May 15, 2021 at 12:34 AM Anup Patel <anup.patel@wdc.com> wrote:
+> > >
+> > > We implement various AIA local interrupt CSRs for M-mode, HS-mode,
+> > > and VS-mode.
+> > >
+> > > Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> > > ---
+> > >  target/riscv/cpu.c        |   27 +-
+> > >  target/riscv/cpu.h        |   52 +-
+> > >  target/riscv/cpu_helper.c |  245 ++++++++-
+> > >  target/riscv/csr.c        | 1059 +++++++++++++++++++++++++++++++++++=
+--
+> > >  target/riscv/machine.c    |   26 +-
+> > >  5 files changed, 1309 insertions(+), 100 deletions(-)
+> >
+> > I feel this patch could be split up more :)
+>
+> This is patch is large because I did not want to break functionality.
+>
+> I try again to break this patch. At the moment, the best I can do is
+> to break in to two parts.
+> 1) AIA local interrupt CSRs without IMSIC
+> 2) Extend AIA local interrupt CSRs to support IMSIC register access
 
-LIU Zhiwei <zhiwei_liu@c-sky.com> =E6=96=BC 2021=E5=B9=B46=E6=9C=8811=E6=97=
-=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=884:30=E5=AF=AB=E9=81=93=EF=BC=9A
+As the patch is being added while AIA isn't enabled you are able to
+add the AIA in breaking stages. That is the AIA isn't fully
+functional, you still have to make sure not to break existing users.
 
 >
-> On 6/11/21 4:15 PM, Frank Chang wrote:
+> >
+> > >
+> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > index f3702111ae..795162834b 100644
+> > > --- a/target/riscv/cpu.c
+> > > +++ b/target/riscv/cpu.c
+> > > @@ -256,11 +256,11 @@ static void riscv_cpu_dump_state(CPUState *cs, =
+FILE *f, int flags)
+> > >          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ",
+> > >                       (target_ulong)env->vsstatus);
+> > >      }
+> > > -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip)=
+;
+> > > -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie)=
+;
+> > > -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mide=
+leg);
+> > > +    qemu_fprintf(f, " %s %016" PRIx64 "\n", "mip     ", env->mip);
+> > > +    qemu_fprintf(f, " %s %016" PRIx64 "\n", "mie     ", env->mie);
+> > > +    qemu_fprintf(f, " %s %016" PRIx64 "\n", "mideleg ", env->mideleg=
+);
+> > >      if (riscv_has_ext(env, RVH)) {
+> > > -        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hideleg ", env->=
+hideleg);
+> > > +        qemu_fprintf(f, " %s %016" PRIx64 "\n", "hideleg ", env->hid=
+eleg);
+> > >      }
+> > >      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->mede=
+leg);
+> > >      if (riscv_has_ext(env, RVH)) {
+> > > @@ -345,6 +345,8 @@ void restore_state_to_opc(CPURISCVState *env, Tra=
+nslationBlock *tb,
+> > >
+> > >  static void riscv_cpu_reset(DeviceState *dev)
+> > >  {
+> > > +    uint8_t iprio;
+> > > +    int i, irq, rdzero;
+> > >      CPUState *cs =3D CPU(dev);
+> > >      RISCVCPU *cpu =3D RISCV_CPU(cs);
+> > >      RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(cpu);
+> > > @@ -357,6 +359,23 @@ static void riscv_cpu_reset(DeviceState *dev)
+> > >      env->mcause =3D 0;
+> > >      env->pc =3D env->resetvec;
+> > >      env->two_stage_lookup =3D false;
+> > > +
+> > > +    /* Initialized default priorities of local interrupts. */
+> > > +    for (i =3D 0; i < ARRAY_SIZE(env->miprio); i++) {
+> > > +        iprio =3D riscv_cpu_default_priority(i);
+> > > +        env->miprio[i] =3D iprio;
+> > > +        env->siprio[i] =3D iprio;
+> > > +        env->hviprio[i] =3D IPRIO_DEFAULT_MMAXIPRIO;
+> > > +    }
+> > > +    i =3D 0;
+> > > +    while (!riscv_cpu_hviprio_index2irq(i, &irq, &rdzero)) {
+> > > +        if (rdzero) {
+> > > +            env->hviprio[irq] =3D 0;
+> > > +        } else {
+> > > +            env->hviprio[irq] =3D env->miprio[irq];
+> > > +        }
+> > > +        i++;
+> > > +    }
+> > >  #endif
+> > >      cs->exception_index =3D EXCP_NONE;
+> > >      env->load_res =3D -1;
+> > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > > index f00c60c840..780d3f9058 100644
+> > > --- a/target/riscv/cpu.h
+> > > +++ b/target/riscv/cpu.h
+> > > @@ -157,12 +157,12 @@ struct CPURISCVState {
+> > >       */
+> > >      uint64_t mstatus;
+> > >
+> > > -    target_ulong mip;
+> > > +    uint64_t mip;
+> >
+> > This isn't right. MIP is a MXLEN-1 CSR. I didn't check but I assume
+> > all the other existing target_ulong CSRs are the same.
 >
-> LIU Zhiwei <zhiwei_liu@c-sky.com> =E6=96=BC 2021=E5=B9=B44=E6=9C=889=E6=
-=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=883:52=E5=AF=AB=E9=81=93=EF=BC=9A
+> When AIA is available the number of local interrupts are 64 for
+> both RV32 and RV64.
+
+Is that going to be reflected in the priv spec?
+
 >
->> The CSR can be used by software to service the next horizontal interrupt
->> when it has greater level than the saved interrupt context
->> (held in xcause`.pil`) and greater level than the interrupt threshold of
->> the corresponding privilege mode,
->>
->> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
->> ---
->>  target/riscv/cpu_bits.h |  16 ++++++
->>  target/riscv/csr.c      | 114 ++++++++++++++++++++++++++++++++++++++++
->>  2 files changed, 130 insertions(+)
->>
->> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->> index 7922097776..494e41edc9 100644
->> --- a/target/riscv/cpu_bits.h
->> +++ b/target/riscv/cpu_bits.h
->> @@ -166,6 +166,7 @@
->>  #define CSR_MCAUSE          0x342
->>  #define CSR_MTVAL           0x343
->>  #define CSR_MIP             0x344
->> +#define CSR_MNXTI           0x345 /* clic-spec-draft */
->>  #define CSR_MINTSTATUS      0x346 /* clic-spec-draft */
->>  #define CSR_MINTTHRESH      0x347 /* clic-spec-draft */
->>
->> @@ -187,6 +188,7 @@
->>  #define CSR_SCAUSE          0x142
->>  #define CSR_STVAL           0x143
->>  #define CSR_SIP             0x144
->> +#define CSR_SNXTI           0x145 /* clic-spec-draft */
->>  #define CSR_SINTSTATUS      0x146 /* clic-spec-draft */
->>  #define CSR_SINTTHRESH      0x147 /* clic-spec-draft */
->>
->> @@ -596,10 +598,24 @@
->>  #define MINTSTATUS_SIL                     0x0000ff00 /* sil[7:0] */
->>  #define MINTSTATUS_UIL                     0x000000ff /* uil[7:0] */
->>
->> +/* mcause */
->> +#define MCAUSE_MINHV                       0x40000000 /* minhv */
->> +#define MCAUSE_MPP                         0x30000000 /* mpp[1:0] */
->> +#define MCAUSE_MPIE                        0x08000000 /* mpie */
->> +#define MCAUSE_MPIL                        0x00ff0000 /* mpil[7:0] */
->> +#define MCAUSE_EXCCODE                     0x00000fff /* exccode[11:0] =
+> The width of CSRs remain same as target_ulong but we have
+> new CSRs for RV32 (such as mipH) for the high-half.
+
+Ah! Sorry I missed that.
+
+This change should be in a seperate patch then.
+
+>
+> Also, this patch changes does not break the case when AIA
+> is not available (or disabled).
+
+Good, we need to make sure we don't.
+
+Alistair
+
+>
+> Regards,
+> Anup
+>
+> >
+> > Alistair
+> >
+> > >
+> > > -    uint32_t miclaim;
+> > > +    uint64_t miclaim;
+> > >
+> > > -    target_ulong mie;
+> > > -    target_ulong mideleg;
+> > > +    uint64_t mie;
+> > > +    uint64_t mideleg;
+> > >
+> > >      target_ulong sptbr;  /* until: priv-1.9.1 */
+> > >      target_ulong satp;   /* since: priv-1.10.0 */
+> > > @@ -179,16 +179,27 @@ struct CPURISCVState {
+> > >      target_ulong mcause;
+> > >      target_ulong mtval;  /* since: priv-1.10.0 */
+> > >
+> > > +    /* AIA CSRs */
+> > > +    target_ulong miselect;
+> > > +    target_ulong siselect;
+> > > +
+> > > +    uint8_t miprio[64];
+> > > +    uint8_t siprio[64];
+> > > +
+> > >      /* Hypervisor CSRs */
+> > >      target_ulong hstatus;
+> > >      target_ulong hedeleg;
+> > > -    target_ulong hideleg;
+> > > +    uint64_t hideleg;
+> > >      target_ulong hcounteren;
+> > >      target_ulong htval;
+> > >      target_ulong htinst;
+> > >      target_ulong hgatp;
+> > >      uint64_t htimedelta;
+> > >
+> > > +    /* AIA HS-mode CSRs */
+> > > +    uint8_t hviprio[64];
+> > > +    target_ulong hvicontrol;
+> > > +
+> > >      /* Virtual CSRs */
+> > >      /*
+> > >       * For RV32 this is 32-bit vsstatus and 32-bit vsstatush.
+> > > @@ -202,6 +213,9 @@ struct CPURISCVState {
+> > >      target_ulong vstval;
+> > >      target_ulong vsatp;
+> > >
+> > > +    /* AIA VS-mode CSRs */
+> > > +    target_ulong vsiselect;
+> > > +
+> > >      target_ulong mtval2;
+> > >      target_ulong mtinst;
+> > >
+> > > @@ -236,6 +250,18 @@ struct CPURISCVState {
+> > >      uint64_t (*rdtime_fn)(uint32_t);
+> > >      uint32_t rdtime_fn_arg;
+> > >
+> > > +    /* machine specific AIA IMSIC read-modify-write callback */
+> > > +#define IMSIC_MAKE_REG(__isel, __priv, __virt, __vgein) \
+> > > +    ((((__vgein) & 0x3f) << 24) | (((__virt) & 0x1) << 20) | \
+> > > +     (((__priv) & 0x3) << 16) | (__isel & 0xffff))
+> > > +#define IMSIC_REG_ISEL(__reg)                  ((__reg) & 0xffff)
+> > > +#define IMSIC_REG_PRIV(__reg)                  (((__reg) >> 16) & 0x=
+3)
+> > > +#define IMSIC_REG_VIRT(__reg)                  (((__reg) >> 20) & 0x=
+1)
+> > > +#define IMSIC_REG_VGEIN(__reg)                 (((__reg) >> 24) & 0x=
+3f)
+> > > +    int (*imsic_rmw_fn)(void *arg, target_ulong reg, target_ulong *v=
+al,
+> > > +                        target_ulong new_val, target_ulong write_mas=
+k);
+> > > +    void *imsic_rmw_fn_arg;
+> > > +
+> > >      /* True if in debugger mode.  */
+> > >      bool debugger;
+> > >  #endif
+> > > @@ -335,6 +361,11 @@ int riscv_cpu_write_elf32_note(WriteCoreDumpFunc=
+tion f, CPUState *cs,
+> > >                                 int cpuid, void *opaque);
+> > >  int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int =
+reg);
+> > >  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int re=
+g);
+> > > +int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rd=
+zero);
+> > > +uint8_t riscv_cpu_default_priority(int irq);
+> > > +int riscv_cpu_mirq_pending(CPURISCVState *env);
+> > > +int riscv_cpu_sirq_pending(CPURISCVState *env);
+> > > +int riscv_cpu_vsirq_pending(CPURISCVState *env);
+> > >  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
+> > >  bool riscv_cpu_fp_enabled(CPURISCVState *env);
+> > >  bool riscv_cpu_virt_enabled(CPURISCVState *env);
+> > > @@ -364,9 +395,16 @@ void riscv_cpu_list(void);
+> > >
+> > >  #ifndef CONFIG_USER_ONLY
+> > >  void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env);
+> > > -int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts);
+> > > -uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t=
+ value);
+> > > +int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts);
+> > > +uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t=
+ value);
+> > >  #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip =
+value */
+> > > +void riscv_cpu_set_imsic_rmw_fn(CPURISCVState *env,
+> > > +                                int (*rmw_fn)(void *arg,
+> > > +                                              target_ulong reg,
+> > > +                                              target_ulong *val,
+> > > +                                              target_ulong new_val,
+> > > +                                              target_ulong write_mas=
+k),
+> > > +                                void *rmw_fn_arg);
+> > >  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint=
+32_t),
+> > >                               uint32_t arg);
+> > >  #endif
+> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > > index 21c54ef561..5b06b4f995 100644
+> > > --- a/target/riscv/cpu_helper.c
+> > > +++ b/target/riscv/cpu_helper.c
+> > > @@ -36,44 +36,219 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool=
+ ifetch)
+> > >  }
+> > >
+> > >  #ifndef CONFIG_USER_ONLY
+> > > -static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+> > > +
+> > > +/*
+> > > + * The HS-mode is allowed to configure priority only for the
+> > > + * following VS-mode local interrupts:
+> > > + *
+> > > + * 0  (Reserved interrupt, reads as zero)
+> > > + * 1  Supervisor software interrupt
+> > > + * 4  (Reserved interrupt, reads as zero)
+> > > + * 5  Supervisor timer interrupt
+> > > + * 8  (Reserved interrupt, reads as zero)
+> > > + * 13 (Reserved interrupt)
+> > > + * 14 "
+> > > + * 15 "
+> > > + * 16 "
+> > > + * 18 Debug/trace interrupt
+> > > + * 20 (Reserved interrupt)
+> > > + * 22 =E2=80=9D
+> > > + * 24 =E2=80=9D
+> > > + * 26 =E2=80=9D
+> > > + * 28 "
+> > > + * 30 (Reserved for standard reporting of bus or system errors)
+> > > + */
+> > > +
+> > > +static int hviprio_index2irq[] =3D
+> > > +    { 0, 1, 4, 5, 8, 13, 14, 15, 16, 18, 20, 22, 24, 26, 28, 30 };
+> > > +static int hviprio_index2rdzero[] =3D
+> > > +    { 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+> > > +
+> > > +int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rd=
+zero)
+> > >  {
+> > > -    target_ulong irqs;
+> > > +    if (index < 0 || ARRAY_SIZE(hviprio_index2irq) <=3D index) {
+> > > +        return -EINVAL;
+> > > +    }
+> > >
+> > > -    target_ulong mstatus_mie =3D get_field(env->mstatus, MSTATUS_MIE=
+);
+> > > -    target_ulong mstatus_sie =3D get_field(env->mstatus, MSTATUS_SIE=
+);
+> > > -    target_ulong hs_mstatus_sie =3D get_field(env->mstatus_hs, MSTAT=
+US_SIE);
+> > > +    if (out_irq) {
+> > > +        *out_irq =3D hviprio_index2irq[index];
+> > > +    }
+> > > +
+> > > +    if (out_rdzero) {
+> > > +        *out_rdzero =3D hviprio_index2rdzero[index];
+> > > +    }
+> > >
+> > > -    target_ulong pending =3D env->mip & env->mie &
+> > > -                               ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> > > -    target_ulong vspending =3D (env->mip & env->mie &
+> > > -                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
+> > > +    return 0;
+> > > +}
+> > >
+> > > -    target_ulong mie    =3D env->priv < PRV_M ||
+> > > -                          (env->priv =3D=3D PRV_M && mstatus_mie);
+> > > -    target_ulong sie    =3D env->priv < PRV_S ||
+> > > -                          (env->priv =3D=3D PRV_S && mstatus_sie);
+> > > -    target_ulong hs_sie =3D env->priv < PRV_S ||
+> > > -                          (env->priv =3D=3D PRV_S && hs_mstatus_sie)=
+;
+> > > +uint8_t riscv_cpu_default_priority(int irq)
+> > > +{
+> > > +    int u, l;
+> > > +    uint8_t iprio =3D IPRIO_MMAXIPRIO;
+> > >
+> > > -    if (riscv_cpu_virt_enabled(env)) {
+> > > -        target_ulong pending_hs_irq =3D pending & -hs_sie;
+> > > +    if (irq < 0 || irq > 63) {
+> > > +        return iprio;
+> > > +    }
+> > >
+> > > -        if (pending_hs_irq) {
+> > > -            riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
+> > > -            return ctz64(pending_hs_irq);
+> > > +    /*
+> > > +     * Default priorities of local interrupts are defined in the
+> > > +     * RISC-V Advanced Interrupt Architecture specification.
+> > > +     *
+> > > +     * -------------------------------------------------------------=
+---
+> > > +     *  Default  |
+> > > +     *  Priority | Major Interrupt Numbers
+> > > +     * -------------------------------------------------------------=
+---
+> > > +     *  Highest  | 63 (3f), 62 (3e), 31 (1f), 30 (1e), 61 (3d), 60 (=
+3c),
+> > > +     *           | 59 (3b), 58 (3a), 29 (1d), 28 (1c), 57 (39), 56 (=
+38),
+> > > +     *           | 55 (37), 54 (36), 27 (1b), 26 (1a), 53 (35), 52 (=
+34),
+> > > +     *           | 51 (33), 50 (32), 25 (19), 24 (18), 49 (31), 48 (=
+30)
+> > > +     *           |
+> > > +     *           | 11 (0b),  3 (03),  7 (07)
+> > > +     *           |  9 (09),  1 (01),  5 (05)
+> > > +     *           | 12 (0c)
+> > > +     *           | 10 (0a),  2 (02),  6 (06)
+> > > +     *           |
+> > > +     *           | 47 (2f), 46 (2e), 23 (17), 22 (16), 45 (2d), 44 (=
+2c),
+> > > +     *           | 43 (2b), 42 (2a), 21 (15), 20 (14), 41 (29), 40 (=
+28),
+> > > +     *           | 39 (27), 38 (26), 19 (13), 18 (12), 37 (25), 36 (=
+24),
+> > > +     *  Lowest   | 35 (23), 34 (22), 17 (11), 16 (10), 33 (21), 32 (=
+20)
+> > > +     * -------------------------------------------------------------=
+---
+> > > +     */
+> > > +
+> > > +    u =3D IPRIO_DEFAULT_U(irq);
+> > > +    l =3D IPRIO_DEFAULT_L(irq);
+> > > +    if (u =3D=3D 0) {
+> > > +        if (irq =3D=3D IRQ_VS_EXT || irq =3D=3D IRQ_VS_TIMER ||
+> > > +            irq =3D=3D IRQ_VS_SOFT) {
+> > > +            iprio =3D IPRIO_DEFAULT_VS;
+> > > +        } else if (irq =3D=3D IRQ_S_GEXT) {
+> > > +            iprio =3D IPRIO_DEFAULT_SGEXT;
+> > > +        } else if (irq =3D=3D IRQ_S_EXT || irq =3D=3D IRQ_S_TIMER ||
+> > > +                   irq =3D=3D IRQ_S_SOFT) {
+> > > +            iprio =3D IPRIO_DEFAULT_S;
+> > > +        } else if (irq =3D=3D IRQ_M_EXT || irq =3D=3D IRQ_M_TIMER ||
+> > > +                   irq =3D=3D IRQ_M_SOFT) {
+> > > +            iprio =3D IPRIO_DEFAULT_M;
+> > > +        } else {
+> > > +            iprio =3D IPRIO_DEFAULT_VS;
+> > >          }
+> > > +    } else if (u =3D=3D 1) {
+> > > +        if (l < 8) {
+> > > +            iprio =3D IPRIO_DEFAULT_16_23(irq);
+> > > +        } else {
+> > > +            iprio =3D IPRIO_DEFAULT_24_31(irq);
+> > > +        }
+> > > +    } else if (u =3D=3D 2) {
+> > > +        iprio =3D IPRIO_DEFAULT_32_47(irq);
+> > > +    } else if (u =3D=3D 3) {
+> > > +        iprio =3D IPRIO_DEFAULT_48_63(irq);
+> > > +    }
+> > > +
+> > > +    return iprio;
+> > > +}
+> > > +
+> > > +static int riscv_cpu_pending_to_irq(CPURISCVState *env,
+> > > +                                    uint64_t pending, uint8_t *iprio=
+)
+> > > +{
+> > > +    int irq, best_irq =3D EXCP_NONE;
+> > > +    unsigned int prio, best_prio =3D UINT_MAX;
+> > >
+> > > -        pending =3D vspending;
+> > > +    if (!pending) {
+> > > +        return EXCP_NONE;
+> > >      }
+> > >
+> > > -    irqs =3D (pending & ~env->mideleg & -mie) | (pending &  env->mid=
+eleg & -sie);
+> > > +    irq =3D ctz64(pending);
+> > > +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> > > +        return irq;
+> > > +    }
+> > >
+> > > -    if (irqs) {
+> > > -        return ctz64(irqs); /* since non-zero */
+> > > +    pending =3D pending >> irq;
+> > > +    while (pending) {
+> > > +        prio =3D iprio[irq];
+> > > +        if (!prio) {
+> > > +            prio =3D (riscv_cpu_default_priority(irq) < IPRIO_DEFAUL=
+T_M) ?
+> > > +                   1 : IPRIO_MMAXIPRIO;
+> > > +        }
+> > > +        if ((pending & 0x1) && (prio < best_prio)) {
+> > > +            best_irq =3D irq;
+> > > +            best_prio =3D prio;
+> > > +        }
+> > > +        irq++;
+> > > +        pending =3D pending >> 1;
+> > > +    }
+> > > +
+> > > +    return best_irq;
+> > > +}
+> > > +
+> > > +int riscv_cpu_mirq_pending(CPURISCVState *env)
+> > > +{
+> > > +    uint64_t irqs =3D env->mip & env->mie & ~env->mideleg &
+> > > +                    ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> > > +
+> > > +    return riscv_cpu_pending_to_irq(env, irqs, env->miprio);
+> > > +}
+> > > +
+> > > +int riscv_cpu_sirq_pending(CPURISCVState *env)
+> > > +{
+> > > +    uint64_t irqs =3D env->mip & env->mie & env->mideleg &
+> > > +                    ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> > > +
+> > > +    return riscv_cpu_pending_to_irq(env, irqs, env->siprio);
+> > > +}
+> > > +
+> > > +int riscv_cpu_vsirq_pending(CPURISCVState *env)
+> > > +{
+> > > +    uint64_t irqs =3D env->mip & env->mie & env->mideleg &
+> > > +                    (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> > > +
+> > > +    return riscv_cpu_pending_to_irq(env, irqs >> 1, env->hviprio);
+> > > +}
+> > > +
+> > > +static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+> > > +{
+> > > +    int virq;
+> > > +    uint64_t irqs, mie, sie, vsie;
+> > > +    uint64_t pending, vspending;
+> > > +
+> > > +    /* Determine interrupt enable state of all privilege modes */
+> > > +    if (riscv_cpu_virt_enabled(env)) {
+> > > +        mie =3D 1;
+> > > +        sie =3D 1;
+> > > +        vsie =3D (env->priv < PRV_S) ||
+> > > +               (env->priv =3D=3D PRV_S && get_field(env->mstatus, MS=
+TATUS_SIE));
+> > >      } else {
+> > > -        return EXCP_NONE; /* indicates no pending interrupt */
+> > > +        mie =3D (env->priv < PRV_M) ||
+> > > +              (env->priv =3D=3D PRV_M && get_field(env->mstatus, MST=
+ATUS_MIE));
+> > > +        sie =3D (env->priv < PRV_S) ||
+> > > +              (env->priv =3D=3D PRV_S && get_field(env->mstatus, MST=
+ATUS_SIE));
+> > > +        vsie =3D 0;
+> > > +    }
+> > > +
+> > > +    /* Check M-mode interrupts */
+> > > +    pending =3D env->mip & env->mie &
+> > > +              ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> > > +    irqs =3D pending & ~env->mideleg & -mie;
+> > > +    if (irqs) {
+> > > +        return riscv_cpu_pending_to_irq(env, irqs, env->miprio);
+> > > +    }
+> > > +
+> > > +    /* Check HS-mode interrupts */
+> > > +    irqs =3D pending & env->mideleg & -sie;
+> > > +    if (irqs) {
+> > > +        return riscv_cpu_pending_to_irq(env, irqs, env->siprio);
+> > > +    }
+> > > +
+> > > +    /* Check VS-mode interrupts */
+> > > +    vspending =3D env->mip & env->mie &
+> > > +                (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> > > +    irqs =3D vspending & env->hideleg & -vsie;
+> > > +    if (irqs) {
+> > > +        virq =3D riscv_cpu_pending_to_irq(env, irqs >> 1, env->hvipr=
+io);
+> > > +        return (virq <=3D 0) ? virq : virq + 1;
+> > >      }
+> > > +
+> > > +    /* Indicates no pending interrupt */
+> > > +    return EXCP_NONE;
+> > >  }
+> > >  #endif
+> > >
+> > > @@ -213,7 +388,7 @@ bool riscv_cpu_two_stage_lookup(int mmu_idx)
+> > >      return mmu_idx & TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+> > >  }
+> > >
+> > > -int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
+> > > +int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts)
+> > >  {
+> > >      CPURISCVState *env =3D &cpu->env;
+> > >      if (env->miclaim & interrupts) {
+> > > @@ -224,11 +399,11 @@ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, u=
+int32_t interrupts)
+> > >      }
+> > >  }
+> > >
+> > > -uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t=
+ value)
+> > > +uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t=
+ value)
+> > >  {
+> > >      CPURISCVState *env =3D &cpu->env;
+> > >      CPUState *cs =3D CPU(cpu);
+> > > -    uint32_t old =3D env->mip;
+> > > +    uint64_t old =3D env->mip;
+> > >      bool locked =3D false;
+> > >
+> > >      if (!qemu_mutex_iothread_locked()) {
+> > > @@ -251,6 +426,18 @@ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uin=
+t32_t mask, uint32_t value)
+> > >      return old;
+> > >  }
+> > >
+> > > +void riscv_cpu_set_imsic_rmw_fn(CPURISCVState *env,
+> > > +                                int (*rmw_fn)(void *arg,
+> > > +                                              target_ulong reg,
+> > > +                                              target_ulong *val,
+> > > +                                              target_ulong new_val,
+> > > +                                              target_ulong write_mas=
+k),
+> > > +                                void *rmw_fn_arg)
+> > > +{
+> > > +    env->imsic_rmw_fn =3D rmw_fn;
+> > > +    env->imsic_rmw_fn_arg =3D rmw_fn_arg;
+> > > +}
+> > > +
+> > >  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint=
+32_t),
+> > >                               uint32_t arg)
+> > >  {
+> > > @@ -904,7 +1091,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> > >       */
+> > >      bool async =3D !!(cs->exception_index & RISCV_EXCP_INT_FLAG);
+> > >      target_ulong cause =3D cs->exception_index & RISCV_EXCP_INT_MASK=
+;
+> > > -    target_ulong deleg =3D async ? env->mideleg : env->medeleg;
+> > > +    uint64_t deleg =3D async ? env->mideleg : env->medeleg;
+> > >      bool write_tval =3D false;
+> > >      target_ulong tval =3D 0;
+> > >      target_ulong htval =3D 0;
+> > > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > > index d2585395bf..3c016d7452 100644
+> > > --- a/target/riscv/csr.c
+> > > +++ b/target/riscv/csr.c
+> > > @@ -153,11 +153,56 @@ static int any32(CPURISCVState *env, int csrno)
+> > >
+> > >  }
+> > >
+> > > +static int aia_any(CPURISCVState *env, int csrno)
+> > > +{
+> > > +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> > > +        return -RISCV_EXCP_ILLEGAL_INST;
+> > > +    }
+> > > +
+> > > +    return any(env, csrno);
+> > > +}
+> > > +
+> > > +static int aia_any32(CPURISCVState *env, int csrno)
+> > > +{
+> > > +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> > > +        return -RISCV_EXCP_ILLEGAL_INST;
+> > > +    }
+> > > +
+> > > +    return any32(env, csrno);
+> > > +}
+> > > +
+> > >  static int smode(CPURISCVState *env, int csrno)
+> > >  {
+> > >      return -!riscv_has_ext(env, RVS);
+> > >  }
+> > >
+> > > +static int smode32(CPURISCVState *env, int csrno)
+> > > +{
+> > > +    if (!riscv_cpu_is_32bit(env)) {
+> > > +        return -RISCV_EXCP_ILLEGAL_INST;
+> > > +    }
+> > > +
+> > > +    return smode(env, csrno);
+> > > +}
+> > > +
+> > > +static int aia_smode(CPURISCVState *env, int csrno)
+> > > +{
+> > > +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> > > +        return -RISCV_EXCP_ILLEGAL_INST;
+> > > +    }
+> > > +
+> > > +    return smode(env, csrno);
+> > > +}
+> > > +
+> > > +static int aia_smode32(CPURISCVState *env, int csrno)
+> > > +{
+> > > +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> > > +        return -RISCV_EXCP_ILLEGAL_INST;
+> > > +    }
+> > > +
+> > > +    return smode32(env, csrno);
+> > > +}
+> > > +
+> > >  static int hmode(CPURISCVState *env, int csrno)
+> > >  {
+> > >      if (riscv_has_ext(env, RVS) &&
+> > > @@ -177,11 +222,28 @@ static int hmode(CPURISCVState *env, int csrno)
+> > >  static int hmode32(CPURISCVState *env, int csrno)
+> > >  {
+> > >      if (!riscv_cpu_is_32bit(env)) {
+> > > -        return 0;
+> > > +        return -RISCV_EXCP_ILLEGAL_INST;
+> > > +    }
+> > > +
+> > > +    return hmode(env, csrno);
+> > > +}
+> > > +
+> > > +static int aia_hmode(CPURISCVState *env, int csrno)
+> > > +{
+> > > +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> > > +        return -RISCV_EXCP_ILLEGAL_INST;
+> > >      }
+> > >
+> > >      return hmode(env, csrno);
+> > > +}
+> > >
+> > > +static int aia_hmode32(CPURISCVState *env, int csrno)
+> > > +{
+> > > +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> > > +        return -RISCV_EXCP_ILLEGAL_INST;
+> > > +    }
+> > > +
+> > > +    return hmode32(env, csrno);
+> > >  }
+> > >
+> > >  static int pmp(CPURISCVState *env, int csrno)
+> > > @@ -388,14 +450,16 @@ static int read_timeh(CPURISCVState *env, int c=
+srno, target_ulong *val)
+> > >
+> > >  /* Machine constants */
+> > >
+> > > -#define M_MODE_INTERRUPTS  (MIP_MSIP | MIP_MTIP | MIP_MEIP)
+> > > -#define S_MODE_INTERRUPTS  (MIP_SSIP | MIP_STIP | MIP_SEIP)
+> > > -#define VS_MODE_INTERRUPTS (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)
+> > > +#define M_MODE_INTERRUPTS  ((uint64_t)(MIP_MSIP | MIP_MTIP | MIP_MEI=
+P))
+> > > +#define S_MODE_INTERRUPTS  ((uint64_t)(MIP_SSIP | MIP_STIP | MIP_SEI=
+P))
+> > > +#define VS_MODE_INTERRUPTS ((uint64_t)(MIP_VSSIP | MIP_VSTIP | MIP_V=
+SEIP))
+> > > +
+> > > +#define TLOWBITS64         ((uint64_t)((target_ulong)-1))
+> > >
+> > > -static const target_ulong delegable_ints =3D S_MODE_INTERRUPTS |
+> > > -                                           VS_MODE_INTERRUPTS;
+> > > -static const target_ulong all_ints =3D M_MODE_INTERRUPTS | S_MODE_IN=
+TERRUPTS |
+> > > -                                     VS_MODE_INTERRUPTS;
+> > > +static const uint64_t delegable_ints =3D S_MODE_INTERRUPTS |
+> > > +                                       VS_MODE_INTERRUPTS;
+> > > +static const uint64_t all_ints =3D M_MODE_INTERRUPTS | S_MODE_INTERR=
+UPTS |
+> > > +                                 VS_MODE_INTERRUPTS;
+> > >  static const target_ulong delegable_excps =3D
+> > >      (1ULL << (RISCV_EXCP_INST_ADDR_MIS)) |
+> > >      (1ULL << (RISCV_EXCP_INST_ACCESS_FAULT)) |
+> > > @@ -419,10 +483,10 @@ static const target_ulong delegable_excps =3D
+> > >  static const target_ulong sstatus_v1_10_mask =3D SSTATUS_SIE | SSTAT=
+US_SPIE |
+> > >      SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_=
+XS |
+> > >      SSTATUS_SUM | SSTATUS_MXR | SSTATUS_SD;
+> > > -static const target_ulong sip_writable_mask =3D SIP_SSIP | MIP_USIP =
+| MIP_UEIP;
+> > > -static const target_ulong hip_writable_mask =3D MIP_VSSIP;
+> > > -static const target_ulong hvip_writable_mask =3D MIP_VSSIP | MIP_VST=
+IP | MIP_VSEIP;
+> > > -static const target_ulong vsip_writable_mask =3D MIP_VSSIP;
+> > > +static const uint64_t sip_writable_mask =3D SIP_SSIP | MIP_USIP | MI=
+P_UEIP;
+> > > +static const uint64_t hip_writable_mask =3D MIP_VSSIP;
+> > > +static const uint64_t hvip_writable_mask =3D MIP_VSSIP | MIP_VSTIP |=
+ MIP_VSEIP;
+> > > +static const uint64_t vsip_writable_mask =3D MIP_VSSIP;
+> > >
+> > >  static const char valid_vm_1_10_32[16] =3D {
+> > >      [VM_1_10_MBARE] =3D 1,
+> > > @@ -596,7 +660,437 @@ static int read_mideleg(CPURISCVState *env, int=
+ csrno, target_ulong *val)
+> > >
+> > >  static int write_mideleg(CPURISCVState *env, int csrno, target_ulong=
+ val)
+> > >  {
+> > > -    env->mideleg =3D (env->mideleg & ~delegable_ints) | (val & deleg=
+able_ints);
+> > > +    uint64_t mask =3D delegable_ints & TLOWBITS64;
+> > > +
+> > > +    env->mideleg =3D (env->mideleg & ~mask) | (val & mask);
+> > > +    if (riscv_has_ext(env, RVH)) {
+> > > +        env->mideleg |=3D VS_MODE_INTERRUPTS;
+> > > +    }
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int aia_xlate_vs_csrno(CPURISCVState *env, int csrno)
+> > > +{
+> > > +    if (!riscv_cpu_virt_enabled(env)) {
+> > > +        return csrno;
+> > > +    }
+> > > +
+> > > +    switch (csrno) {
+> > > +    case CSR_SISELECT:
+> > > +        return CSR_VSISELECT;
+> > > +    case CSR_SIREG:
+> > > +        return CSR_VSIREG;
+> > > +    case CSR_STOPI:
+> > > +        return CSR_VSTOPI;
+> > > +    case CSR_SSETEIPNUM:
+> > > +        return CSR_VSSETEIPNUM;
+> > > +    case CSR_SCLREIPNUM:
+> > > +        return CSR_VSCLREIPNUM;
+> > > +    case CSR_SSETEIENUM:
+> > > +        return CSR_VSSETEIENUM;
+> > > +    case CSR_SCLREIENUM:
+> > > +        return CSR_VSCLREIENUM;
+> > > +    default:
+> > > +        return csrno;
+> > > +    };
+> > > +}
+> > > +
+> > > +static int rmw_xiselect(CPURISCVState *env, int csrno, target_ulong =
+*val,
+> > > +                        target_ulong new_val, target_ulong write_mas=
+k)
+> > > +{
+> > > +    target_ulong *iselect;
+> > > +
+> > > +    switch (csrno) {
+> > > +    case CSR_MISELECT:
+> > > +        iselect =3D &env->miselect;
+> > > +        break;
+> > > +    case CSR_SISELECT:
+> > > +        iselect =3D riscv_cpu_virt_enabled(env) ?
+> > > +                  &env->vsiselect : &env->siselect;
+> > > +        break;
+> > > +    case CSR_VSISELECT:
+> > > +        iselect =3D &env->vsiselect;
+> > > +        break;
+> > > +    default:
+> > > +         return -RISCV_EXCP_ILLEGAL_INST;
+> > > +    };
+> > > +
+> > > +    if (val) {
+> > > +        *val =3D *iselect;
+> > > +    }
+> > > +
+> > > +    if (write_mask) {
+> > > +        *iselect =3D (*iselect & ~write_mask) | (new_val & write_mas=
+k);
+> > > +    }
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int rmw_iprio(target_ulong iselect, uint8_t *iprio,
+> > > +                     target_ulong *val, target_ulong new_val,
+> > > +                     target_ulong write_mask)
+> > > +{
+> > > +    int i, firq, nirqs;
+> > > +    target_ulong old_val;
+> > > +
+> > > +    if (iselect < ISELECT_IPRIO0 || ISELECT_IPRIO15 < iselect) {
+> > > +        return -EINVAL;
+> > > +    }
+> > > +#if TARGET_LONG_BITS =3D=3D 64
+> > > +    if (iselect & 0x1) {
+> > > +        return -EINVAL;
+> > > +    }
+> > > +#endif
+> > > +
+> > > +    nirqs =3D 4 * (TARGET_LONG_BITS / 32);
+> > > +    firq =3D ((iselect - ISELECT_IPRIO0) / (TARGET_LONG_BITS / 32)) =
+* (nirqs);
+> > > +
+> > > +    old_val =3D 0;
+> > > +    for (i =3D 0; i < nirqs; i++) {
+> > > +        old_val |=3D ((target_ulong)iprio[firq + i]) << (IPRIO_IRQ_B=
+ITS * i);
+> > > +    }
+> > > +
+> > > +    if (val) {
+> > > +        *val =3D old_val;
+> > > +    }
+> > > +
+> > > +    if (write_mask) {
+> > > +        new_val =3D (old_val & ~write_mask) | (new_val & write_mask)=
+;
+> > > +        for (i =3D 0; i < nirqs; i++) {
+> > > +            iprio[firq + i] =3D (new_val >> (IPRIO_IRQ_BITS * i)) & =
+0xff;
+> > > +        }
+> > > +    }
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int rmw_xireg(CPURISCVState *env, int csrno, target_ulong *va=
+l,
+> > > +                     target_ulong new_val, target_ulong write_mask)
+> > > +{
+> > > +    bool virt;
+> > > +    uint8_t *iprio;
+> > > +    int ret =3D -EINVAL;
+> > > +    target_ulong priv, isel, vgein;
+> > > +
+> > > +    /* Translate CSR number for VS-mode */
+> > > +    csrno =3D aia_xlate_vs_csrno(env, csrno);
+> > > +
+> > > +    /* Decode register details from CSR number */
+> > > +    virt =3D false;
+> > > +    switch (csrno) {
+> > > +    case CSR_MIREG:
+> > > +        iprio =3D env->miprio;
+> > > +        isel =3D env->miselect;
+> > > +        priv =3D PRV_M;
+> > > +        break;
+> > > +    case CSR_SIREG:
+> > > +        iprio =3D env->siprio;
+> > > +        isel =3D env->siselect;
+> > > +        priv =3D PRV_S;
+> > > +        break;
+> > > +    case CSR_VSIREG:
+> > > +        iprio =3D env->hviprio;
+> > > +        isel =3D env->vsiselect;
+> > > +        priv =3D PRV_S;
+> > > +        virt =3D true;
+> > > +        break;
+> > > +    default:
+> > > +         goto done;
+> > > +    };
+> > > +
+> > > +    /* Find the selected guest interrupt file */
+> > > +    vgein =3D (virt) ? (env->hstatus & HSTATUS_VGEIN) >> HSTATUS_VGE=
+IN_SHIFT : 0;
+> > > +
+> > > +    if (ISELECT_IPRIO0 <=3D isel && isel <=3D ISELECT_IPRIO15) {
+> > > +        /* Local interrupt priority registers not available for VS-m=
+ode */
+> > > +        if (!virt) {
+> > > +            ret =3D rmw_iprio(isel, iprio, val, new_val, write_mask)=
+;
+> > > +        }
+> > > +    } else if (ISELECT_IMSIC_FIRST <=3D isel && isel <=3D ISELECT_IM=
+SIC_LAST) {
+> > > +        /* IMSIC registers only available when machine implements it=
+. */
+> > > +        if (env->imsic_rmw_fn) {
+> > > +            /* Selected guest interrupt file should not be zero */
+> > > +            if (virt && !vgein) {
+> > > +                goto done;
+> > > +            }
+> > > +            /* Call machine specific IMSIC register emulation */
+> > > +            ret =3D env->imsic_rmw_fn(env->imsic_rmw_fn_arg,
+> > > +                                    IMSIC_MAKE_REG(isel, priv, virt,=
+ vgein),
+> > > +                                    val, new_val, write_mask);
+> > > +        }
+> > > +    }
+> > > +
+> > > +done:
+> > > +    if (ret) {
+> > > +        return (riscv_cpu_virt_enabled(env) && virt) ?
+> > > +               -RISCV_EXCP_VIRT_INSTRUCTION_FAULT : -RISCV_EXCP_ILLE=
+GAL_INST;
+> > > +    }
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *v=
+al)
+> > > +{
+> > > +    int irq;
+> > > +
+> > > +    irq =3D riscv_cpu_mirq_pending(env);
+> > > +    if (irq <=3D 0 || irq > 63) {
+> > > +       *val =3D 0;
+> > > +    } else {
+> > > +       *val =3D (irq & TOPI_IID_MASK) << TOPI_IID_SHIFT;
+> > > +       *val |=3D env->miprio[irq];
+> > > +    }
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int read_xsetclreinum(CPURISCVState *env, int csrno, target_u=
+long *val)
+> > > +{
+> > > +    bool virt;
+> > > +    int ret =3D -EINVAL;
+> > > +    target_ulong vgein;
+> > > +
+> > > +    /* Translate CSR number for VS-mode */
+> > > +    csrno =3D aia_xlate_vs_csrno(env, csrno);
+> > > +
+> > > +    /* Decode register details from CSR number */
+> > > +    virt =3D false;
+> > > +    switch (csrno) {
+> > > +    case CSR_MSETEIPNUM:
+> > > +    case CSR_MCLREIPNUM:
+> > > +    case CSR_MSETEIENUM:
+> > > +    case CSR_MCLREIENUM:
+> > > +    case CSR_SSETEIPNUM:
+> > > +    case CSR_SCLREIPNUM:
+> > > +    case CSR_SSETEIENUM:
+> > > +    case CSR_SCLREIENUM:
+> > > +        break;
+> > > +    case CSR_VSSETEIPNUM:
+> > > +    case CSR_VSCLREIPNUM:
+> > > +    case CSR_VSSETEIENUM:
+> > > +    case CSR_VSCLREIENUM:
+> > > +        virt =3D true;
+> > > +        break;
+> > > +    default:
+> > > +         goto done;
+> > > +    };
+> > > +
+> > > +    /* IMSIC CSRs only available when machine implements IMSIC. */
+> > > +    if (!env->imsic_rmw_fn) {
+> > > +        goto done;
+> > > +    }
+> > > +
+> > > +    /* Find the selected guest interrupt file */
+> > > +    vgein =3D (virt) ? (env->hstatus & HSTATUS_VGEIN) >> HSTATUS_VGE=
+IN_SHIFT : 0;
+> > > +
+> > > +    /* Selected guest interrupt file should not be zero */
+> > > +    if (virt && !vgein) {
+> > > +        goto done;
+> > > +    }
+> > > +
+> > > +    /* Set/Clear CSRs always read zero */
+> > > +    ret =3D 0;
+> > > +    if (val) {
+> > > +        *val =3D 0;
+> > > +    }
+> > > +
+> > > +done:
+> > > +    if (ret) {
+> > > +        return (riscv_cpu_virt_enabled(env) && virt) ?
+> > > +               -RISCV_EXCP_VIRT_INSTRUCTION_FAULT : -RISCV_EXCP_ILLE=
+GAL_INST;
+> > > +    }
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int write_xsetclreinum(CPURISCVState *env, int csrno, target_=
+ulong val)
+> > > +{
+> > > +    int ret =3D -EINVAL;
+> > > +    bool set, pend, virt;
+> > > +    target_ulong priv, isel, vgein;
+> > > +    target_ulong new_val, write_mask;
+> > > +
+> > > +    /* Translate CSR number for VS-mode */
+> > > +    csrno =3D aia_xlate_vs_csrno(env, csrno);
+> > > +
+> > > +    /* Decode register details from CSR number */
+> > > +    virt =3D set =3D pend =3D false;
+> > > +    switch (csrno) {
+> > > +    case CSR_MSETEIPNUM:
+> > > +        priv =3D PRV_M;
+> > > +        set =3D true;
+> > > +        break;
+> > > +    case CSR_MCLREIPNUM:
+> > > +        priv =3D PRV_M;
+> > > +        pend =3D true;
+> > > +        break;
+> > > +    case CSR_MSETEIENUM:
+> > > +        priv =3D PRV_M;
+> > > +        set =3D true;
+> > > +        break;
+> > > +    case CSR_MCLREIENUM:
+> > > +        priv =3D PRV_M;
+> > > +        break;
+> > > +    case CSR_SSETEIPNUM:
+> > > +        priv =3D PRV_S;
+> > > +        set =3D true;
+> > > +        pend =3D true;
+> > > +        break;
+> > > +    case CSR_SCLREIPNUM:
+> > > +        priv =3D PRV_S;
+> > > +        pend =3D true;
+> > > +        break;
+> > > +    case CSR_SSETEIENUM:
+> > > +        priv =3D PRV_S;
+> > > +        set =3D true;
+> > > +        break;
+> > > +    case CSR_SCLREIENUM:
+> > > +        priv =3D PRV_S;
+> > > +        break;
+> > > +    case CSR_VSSETEIPNUM:
+> > > +        priv =3D PRV_S;
+> > > +        virt =3D true;
+> > > +        set =3D true;
+> > > +        pend =3D true;
+> > > +        break;
+> > > +    case CSR_VSCLREIPNUM:
+> > > +        priv =3D PRV_S;
+> > > +        virt =3D true;
+> > > +        pend =3D true;
+> > > +        break;
+> > > +    case CSR_VSSETEIENUM:
+> > > +        priv =3D PRV_S;
+> > > +        virt =3D true;
+> > > +        set =3D true;
+> > > +        break;
+> > > +    case CSR_VSCLREIENUM:
+> > > +        priv =3D PRV_S;
+> > > +        virt =3D true;
+> > > +        break;
+> > > +    default:
+> > > +         goto done;
+> > > +    };
+> > > +
+> > > +    /* IMSIC CSRs only available when machine implements IMSIC. */
+> > > +    if (!env->imsic_rmw_fn) {
+> > > +        goto done;
+> > > +    }
+> > > +
+> > > +    /* Find target interrupt pending/enable register */
+> > > +    if (pend) {
+> > > +        isel =3D ISELECT_IMSIC_EIP0;
+> > > +    } else {
+> > > +        isel =3D ISELECT_IMSIC_EIE0;
+> > > +    }
+> > > +    isel +=3D val / IMSIC_EIPx_BITS;
+> > > +
+> > > +    /* Find the interrupt bit to be set/clear */
+> > > +    write_mask =3D 1 << (val % IMSIC_EIPx_BITS);
+> > > +    new_val =3D (set) ? write_mask : 0;
+> > > +
+> > > +    /* Find the selected guest interrupt file */
+> > > +    vgein =3D (virt) ? (env->hstatus & HSTATUS_VGEIN) >> HSTATUS_VGE=
+IN_SHIFT : 0;
+> > > +
+> > > +    /* Selected guest interrupt file should not be zero */
+> > > +    if (virt && !vgein) {
+> > > +        goto done;
+> > > +    }
+> > > +
+> > > +    /* Call machine specific IMSIC register emulation */
+> > > +    ret =3D env->imsic_rmw_fn(env->imsic_rmw_fn_arg,
+> > > +                            IMSIC_MAKE_REG(isel, priv, virt, vgein),
+> > > +                            NULL, new_val, write_mask);
+> > > +
+> > > +done:
+> > > +    if (ret) {
+> > > +        return (riscv_cpu_virt_enabled(env) && virt) ?
+> > > +               -RISCV_EXCP_VIRT_INSTRUCTION_FAULT : -RISCV_EXCP_ILLE=
+GAL_INST;
+> > > +    }
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int read_xclaimei(CPURISCVState *env, int csrno, target_ulong=
+ *val)
+> > > +{
+> > > +    bool virt;
+> > > +    int ret =3D -EINVAL;
+> > > +    target_ulong priv, isel, vgein;
+> > > +    target_ulong topei, write_mask;
+> > > +
+> > > +    /* Decode register details from CSR number */
+> > > +    virt =3D false;
+> > > +    switch (csrno) {
+> > > +    case CSR_MCLAIMEI:
+> > > +        priv =3D PRV_M;
+> > > +        break;
+> > > +    case CSR_SCLAIMEI:
+> > > +        priv =3D PRV_S;
+> > > +        virt =3D riscv_cpu_virt_enabled(env);
+> > > +        break;
+> > > +    default:
+> > > +        goto done;
+> > > +    };
+> > > +
+> > > +    /* IMSIC CSRs only available when machine implements IMSIC. */
+> > > +    if (!env->imsic_rmw_fn) {
+> > > +        goto done;
+> > > +    }
+> > > +
+> > > +    /* Find the selected guest interrupt file */
+> > > +    vgein =3D (virt) ? (env->hstatus & HSTATUS_VGEIN) >> HSTATUS_VGE=
+IN_SHIFT : 0;
+> > > +
+> > > +    /* Selected guest interrupt file should not be zero */
+> > > +    if (virt && !vgein) {
+> > > +        goto done;
+> > > +    }
+> > > +
+> > > +    /* Call machine specific IMSIC register emulation for reading TO=
+PEI */
+> > > +    ret =3D env->imsic_rmw_fn(env->imsic_rmw_fn_arg,
+> > > +                            IMSIC_MAKE_REG(ISELECT_IMSIC_TOPEI, priv=
+, virt, vgein),
+> > > +                            &topei, -1, 0);
+> > > +    if (ret) {
+> > > +        goto done;
+> > > +    }
+> > > +
+> > > +    /* If no interrupt pending then we are done */
+> > > +    if (!topei) {
+> > > +        goto done;
+> > > +    }
+> > > +
+> > > +    /* Find target interrupt pending register */
+> > > +    isel =3D ISELECT_IMSIC_EIP0;
+> > > +    isel +=3D ((topei >> TOPI_IID_SHIFT) / IMSIC_EIPx_BITS);
+> > > +
+> > > +    /* Find the interrupt bit to be cleared */
+> > > +    write_mask =3D 1 << ((topei >> TOPI_IID_SHIFT) % IMSIC_EIPx_BITS=
+);
+> > > +
+> > > +    /* Call machine specific IMSIC register emulation to clear pendi=
+ng bit */
+> > > +    ret =3D env->imsic_rmw_fn(env->imsic_rmw_fn_arg,
+> > > +                            IMSIC_MAKE_REG(isel, priv, virt, vgein),
+> > > +                            NULL, 0, write_mask);
+> > > +
+> > > +    /* Update return value */
+> > > +    if (val) {
+> > > +        *val =3D topei;
+> > > +    }
+> > > +
+> > > +done:
+> > > +    if (ret) {
+> > > +        return (riscv_cpu_virt_enabled(env) && virt) ?
+> > > +               -RISCV_EXCP_VIRT_INSTRUCTION_FAULT : -RISCV_EXCP_ILLE=
+GAL_INST;
+> > > +    }
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int read_midelegh(CPURISCVState *env, int csrno, target_ulong=
+ *val)
+> > > +{
+> > > +    *val =3D (env->mideleg >> 32);
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int write_midelegh(CPURISCVState *env, int csrno, target_ulon=
+g val)
+> > > +{
+> > > +    uint64_t mask =3D delegable_ints & ~TLOWBITS64;
+> > > +    uint64_t newval =3D ((uint64_t)val) << 32;
+> > > +
+> > > +    env->mideleg =3D (env->mideleg & ~mask) | (newval & mask);
+> > >      if (riscv_has_ext(env, RVH)) {
+> > >          env->mideleg |=3D VS_MODE_INTERRUPTS;
+> > >      }
+> > > @@ -611,7 +1105,24 @@ static int read_mie(CPURISCVState *env, int csr=
+no, target_ulong *val)
+> > >
+> > >  static int write_mie(CPURISCVState *env, int csrno, target_ulong val=
+)
+> > >  {
+> > > -    env->mie =3D (env->mie & ~all_ints) | (val & all_ints);
+> > > +    uint64_t mask =3D all_ints & TLOWBITS64;
+> > > +
+> > > +    env->mie =3D (env->mie & ~mask) | (val & mask);
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int read_mieh(CPURISCVState *env, int csrno, target_ulong *va=
+l)
+> > > +{
+> > > +    *val =3D (env->mie >> 32);
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int write_mieh(CPURISCVState *env, int csrno, target_ulong va=
+l)
+> > > +{
+> > > +    uint64_t mask =3D all_ints & ~TLOWBITS64;
+> > > +    uint64_t newval =3D ((uint64_t)val) << 32;
+> > > +
+> > > +    env->mie =3D (env->mie & ~mask) | (newval & mask);
+> > >      return 0;
+> > >  }
+> > >
+> > > @@ -718,8 +1229,9 @@ static int rmw_mip(CPURISCVState *env, int csrno=
+, target_ulong *ret_value,
+> > >  {
+> > >      RISCVCPU *cpu =3D env_archcpu(env);
+> > >      /* Allow software control of delegable interrupts not claimed by=
+ hardware */
+> > > -    target_ulong mask =3D write_mask & delegable_ints & ~env->miclai=
+m;
+> > > -    uint32_t old_mip;
+> > > +    uint64_t mask =3D ((uint64_t)write_mask) & delegable_ints &
+> > > +                    ~env->miclaim & TLOWBITS64;
+> > > +    uint64_t old_mip;
+> > >
+> > >      if (mask) {
+> > >          old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value & mas=
+k));
+> > > @@ -734,6 +1246,29 @@ static int rmw_mip(CPURISCVState *env, int csrn=
+o, target_ulong *ret_value,
+> > >      return 0;
+> > >  }
+> > >
+> > > +static int rmw_miph(CPURISCVState *env, int csrno, target_ulong *ret=
+_value,
+> > > +                    target_ulong new_value, target_ulong write_mask)
+> > > +{
+> > > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > > +    /* Allow software control of delegable interrupts not claimed by=
+ hardware */
+> > > +    uint64_t mask =3D ((uint64_t)write_mask << 32) & delegable_ints =
+&
+> > > +                    ~env->miclaim & ~TLOWBITS64;
+> > > +    uint64_t new_value64 =3D (uint64_t)new_value << 32;
+> > > +    uint64_t old_mip;
+> > > +
+> > > +    if (mask) {
+> > > +        old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value64 & m=
+ask));
+> > > +    } else {
+> > > +        old_mip =3D env->mip;
+> > > +    }
+> > > +
+> > > +    if (ret_value) {
+> > > +        *ret_value =3D old_mip >> 32;
+> > > +    }
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > >  /* Supervisor Trap Setup */
+> > >  static int read_sstatus(CPURISCVState *env, int csrno, target_ulong =
+*val)
+> > >  {
+> > > @@ -751,39 +1286,103 @@ static int write_sstatus(CPURISCVState *env, =
+int csrno, target_ulong val)
+> > >
+> > >  static int read_vsie(CPURISCVState *env, int csrno, target_ulong *va=
+l)
+> > >  {
+> > > +    uint64_t mask =3D VS_MODE_INTERRUPTS & env->hideleg & TLOWBITS64=
+;
+> > > +
+> > >      /* Shift the VS bits to their S bit location in vsie */
+> > > -    *val =3D (env->mie & env->hideleg & VS_MODE_INTERRUPTS) >> 1;
+> > > +    *val =3D (env->mie & mask) >> 1;
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int read_vsieh(CPURISCVState *env, int csrno, target_ulong *v=
+al)
+> > > +{
+> > > +    uint64_t mask =3D VS_MODE_INTERRUPTS & env->hideleg & ~TLOWBITS6=
+4;
+> > > +
+> > > +    /* Shift the VS bits to their S bit location in vsieh */
+> > > +    *val =3D (env->mie & mask) >> (32 + 1);
+> > >      return 0;
+> > >  }
+> > >
+> > >  static int read_sie(CPURISCVState *env, int csrno, target_ulong *val=
+)
+> > >  {
+> > >      if (riscv_cpu_virt_enabled(env)) {
+> > > -        read_vsie(env, CSR_VSIE, val);
+> > > -    } else {
+> > > -        *val =3D env->mie & env->mideleg;
+> > > +        if (env->hvicontrol & HVICONTROL_VTI) {
+> > > +            return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> > > +        }
+> > > +        return read_vsie(env, CSR_VSIE, val);
+> > >      }
+> > > +
+> > > +    *val =3D env->mie & env->mideleg;
+> > >      return 0;
+> > >  }
+> > >
+> > >  static int write_vsie(CPURISCVState *env, int csrno, target_ulong va=
+l)
+> > >  {
+> > > +    uint64_t mask =3D VS_MODE_INTERRUPTS & env->hideleg &
+> > > +                    all_ints & TLOWBITS64;
+> > > +
+> > >      /* Shift the S bits to their VS bit location in mie */
+> > > -    target_ulong newval =3D (env->mie & ~VS_MODE_INTERRUPTS) |
+> > > -                          ((val << 1) & env->hideleg & VS_MODE_INTER=
+RUPTS);
+> > > -    return write_mie(env, CSR_MIE, newval);
+> > > +    env->mie =3D (env->mie & ~mask) | ((val << 1) & mask);
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int write_vsieh(CPURISCVState *env, int csrno, target_ulong v=
+al)
+> > > +{
+> > > +    uint64_t mask =3D VS_MODE_INTERRUPTS & env->hideleg &
+> > > +                    all_ints & ~TLOWBITS64;
+> > > +    uint64_t newval =3D (uint64_t)val << 32;
+> > > +
+> > > +    /* Shift the S bits to their VS bit location in mie */
+> > > +    env->mie =3D (env->mie & ~mask) | ((newval << 1) & mask);
+> > > +
+> > > +    return 0;
+> > >  }
+> > >
+> > >  static int write_sie(CPURISCVState *env, int csrno, target_ulong val=
+)
+> > >  {
+> > > +    uint64_t mask;
+> > > +
+> > >      if (riscv_cpu_virt_enabled(env)) {
+> > > -        write_vsie(env, CSR_VSIE, val);
+> > > -    } else {
+> > > -        target_ulong newval =3D (env->mie & ~S_MODE_INTERRUPTS) |
+> > > -                              (val & S_MODE_INTERRUPTS);
+> > > -        write_mie(env, CSR_MIE, newval);
+> > > +        if (env->hvicontrol & HVICONTROL_VTI) {
+> > > +            return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> > > +        }
+> > > +        return write_vsie(env, CSR_VSIE, val);
+> > > +    }
+> > > +
+> > > +    mask =3D S_MODE_INTERRUPTS & env->mideleg & all_ints & TLOWBITS6=
+4;
+> > > +    env->mie =3D (env->mie & ~mask) | ((uint64_t)val & mask);
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int read_sieh(CPURISCVState *env, int csrno, target_ulong *va=
+l)
+> > > +{
+> > > +    if (riscv_cpu_virt_enabled(env)) {
+> > > +        if (env->hvicontrol & HVICONTROL_VTI) {
+> > > +            return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> > > +        }
+> > > +        return read_vsieh(env, CSR_VSIEH, val);
+> > > +    }
+> > > +
+> > > +    *val =3D ((env->mie & env->mideleg) >> 32);
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int write_sieh(CPURISCVState *env, int csrno, target_ulong va=
+l)
+> > > +{
+> > > +    uint64_t mask, newval;
+> > > +
+> > > +    if (riscv_cpu_virt_enabled(env)) {
+> > > +        if (env->hvicontrol & HVICONTROL_VTI) {
+> > > +            return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> > > +        }
+> > > +        return write_vsieh(env, CSR_VSIEH, val);
+> > >      }
+> > >
+> > > +    mask =3D S_MODE_INTERRUPTS & env->mideleg & all_ints & ~TLOWBITS=
+64;
+> > > +    newval =3D (uint64_t)val << 32;
+> > > +
+> > > +    env->mie =3D (env->mie & ~mask) | (newval & mask);
+> > >      return 0;
+> > >  }
+> > >
+> > > @@ -868,29 +1467,110 @@ static int write_sbadaddr(CPURISCVState *env,=
+ int csrno, target_ulong val)
+> > >  static int rmw_vsip(CPURISCVState *env, int csrno, target_ulong *ret=
+_value,
+> > >                      target_ulong new_value, target_ulong write_mask)
+> > >  {
+> > > -    /* Shift the S bits to their VS bit location in mip */
+> > > -    int ret =3D rmw_mip(env, 0, ret_value, new_value << 1,
+> > > -                      (write_mask << 1) & vsip_writable_mask & env->=
+hideleg);
+> > > -    *ret_value &=3D VS_MODE_INTERRUPTS;
+> > > -    /* Shift the VS bits to their S bit location in vsip */
+> > > -    *ret_value >>=3D 1;
+> > > -    return ret;
+> > > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > > +    /* Allow software control of delegable interrupts not claimed by=
+ hardware */
+> > > +    uint64_t mask =3D ((uint64_t)write_mask << 1) & delegable_ints &
+> > > +                    vsip_writable_mask & env->hideleg &
+> > > +                    ~env->miclaim & TLOWBITS64;
+> > > +    uint64_t old_mip;
+> > > +
+> > > +    if (mask) {
+> > > +        old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value & mas=
+k));
+> > > +    } else {
+> > > +        old_mip =3D env->mip;
+> > > +    }
+> > > +
+> > > +    if (ret_value) {
+> > > +        *ret_value =3D old_mip & VS_MODE_INTERRUPTS;
+> > > +    }
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int rmw_vsiph(CPURISCVState *env, int csrno, target_ulong *re=
+t_value,
+> > > +                     target_ulong new_value, target_ulong write_mask=
+)
+> > > +{
+> > > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > > +    /* Allow software control of delegable interrupts not claimed by=
+ hardware */
+> > > +    uint64_t mask =3D ((uint64_t)write_mask << (32 + 1)) & delegable=
+_ints &
+> > > +                    vsip_writable_mask & env->hideleg &
+> > > +                    ~env->miclaim & ~TLOWBITS64;
+> > > +    uint64_t new_value64 =3D (uint64_t)new_value << 32;
+> > > +    uint64_t old_mip;
+> > > +
+> > > +    if (mask) {
+> > > +        old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value64 & m=
+ask));
+> > > +    } else {
+> > > +        old_mip =3D env->mip;
+> > > +    }
+> > > +
+> > > +    if (ret_value) {
+> > > +        *ret_value =3D (old_mip & VS_MODE_INTERRUPTS) >> 32;
+> > > +    }
+> > > +
+> > > +    return 0;
+> > >  }
+> > >
+> > >  static int rmw_sip(CPURISCVState *env, int csrno, target_ulong *ret_=
+value,
+> > >                     target_ulong new_value, target_ulong write_mask)
+> > >  {
+> > > -    int ret;
+> > > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > > +    uint64_t mask, old_mip;
+> > >
+> > >      if (riscv_cpu_virt_enabled(env)) {
+> > > -        ret =3D rmw_vsip(env, CSR_VSIP, ret_value, new_value, write_=
+mask);
+> > > +        if (env->hvicontrol & HVICONTROL_VTI) {
+> > > +            return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> > > +        }
+> > > +        return rmw_vsip(env, CSR_VSIP, ret_value, new_value, write_m=
+ask);
+> > > +    }
+> > > +
+> > > +    /* Allow software control of delegable interrupts not claimed by=
+ hardware */
+> > > +    mask =3D ((uint64_t)write_mask) & delegable_ints &
+> > > +           env->mideleg & sip_writable_mask &
+> > > +           ~env->miclaim & TLOWBITS64;
+> > > +    if (mask) {
+> > > +        old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value & mas=
+k));
+> > >      } else {
+> > > -        ret =3D rmw_mip(env, CSR_MSTATUS, ret_value, new_value,
+> > > -                      write_mask & env->mideleg & sip_writable_mask)=
+;
+> > > +        old_mip =3D env->mip;
+> > >      }
+> > >
+> > > -    *ret_value &=3D env->mideleg;
+> > > -    return ret;
+> > > +    if (ret_value) {
+> > > +        *ret_value =3D old_mip;
+> > > +    }
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int rmw_siph(CPURISCVState *env, int csrno, target_ulong *ret=
+_value,
+> > > +                    target_ulong new_value, target_ulong write_mask)
+> > > +{
+> > > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > > +    uint64_t mask, new_value64;
+> > > +    uint64_t old_mip;
+> > > +
+> > > +    if (riscv_cpu_virt_enabled(env)) {
+> > > +        if (env->hvicontrol & HVICONTROL_VTI) {
+> > > +            return -RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> > > +        }
+> > > +        return rmw_vsiph(env, CSR_VSIPH, ret_value, new_value, write=
+_mask);
+> > > +    }
+> > > +
+> > > +    /* Allow software control of delegable interrupts not claimed by=
+ hardware */
+> > > +    mask =3D ((uint64_t)write_mask << 32) & delegable_ints &
+> > > +           env->mideleg & sip_writable_mask &
+> > > +           ~env->miclaim & ~TLOWBITS64;
+> > > +    new_value64 =3D (uint64_t)new_value << 32;
+> > > +    if (mask) {
+> > > +        old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value64 & m=
+ask));
+> > > +    } else {
+> > > +        old_mip =3D env->mip;
+> > > +    }
+> > > +
+> > > +    if (ret_value) {
+> > > +        *ret_value =3D (old_mip & env->mideleg) >> 32;
+> > > +    }
+> > > +
+> > > +    return 0;
+> > >  }
+> > >
+> > >  /* Supervisor Protection and Translation */
+> > > @@ -930,6 +1610,51 @@ static int write_satp(CPURISCVState *env, int c=
+srno, target_ulong val)
+> > >      return 0;
+> > >  }
+> > >
+> > > +static int read_vstopi(CPURISCVState *env, int csrno, target_ulong *=
+val)
+> > > +{
+> > > +    int irq, hiid;
+> > > +    uint8_t hiprio, iprio;
+> > > +
+> > > +    irq =3D riscv_cpu_vsirq_pending(env);
+> > > +    if (irq <=3D 0 || irq > 63) {
+> > > +       *val =3D 0;
+> > > +    } else {
+> > > +       *val =3D (irq & TOPI_IID_MASK) << TOPI_IID_SHIFT;
+> > > +       iprio =3D env->hviprio[irq];
+> > > +       /* TODO: This needs to improve in specification */
+> > > +       if (!(env->hstatus & HSTATUS_VGEIN)) {
+> > > +           hiid =3D (env->hvicontrol & HVICONTROL_IID_MASK) >>
+> > > +                 HVICONTROL_IID_SHIFT;
+> > > +           hiprio =3D env->hvicontrol & HVICONTROL_IPRIO_MASK;
+> > > +           if (irq =3D=3D hiid && hiprio) {
+> > > +               iprio =3D hiprio;
+> > > +           }
+> > > +       }
+> > > +       *val |=3D iprio;
+> > > +    }
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int read_stopi(CPURISCVState *env, int csrno, target_ulong *v=
+al)
+> > > +{
+> > > +    int irq;
+> > > +
+> > > +    if (riscv_cpu_virt_enabled(env)) {
+> > > +        return read_vstopi(env, CSR_VSTOPI, val);
+> > > +    }
+> > > +
+> > > +    irq =3D riscv_cpu_sirq_pending(env);
+> > > +    if (irq <=3D 0 || irq > 63) {
+> > > +       *val =3D 0;
+> > > +    } else {
+> > > +       *val =3D (irq & TOPI_IID_MASK) << TOPI_IID_SHIFT;
+> > > +       *val |=3D env->siprio[irq];
+> > > +    }
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > >  /* Hypervisor Extensions */
+> > >  static int read_hstatus(CPURISCVState *env, int csrno, target_ulong =
+*val)
+> > >  {
+> > > @@ -979,26 +1704,90 @@ static int write_hideleg(CPURISCVState *env, i=
+nt csrno, target_ulong val)
+> > >      return 0;
+> > >  }
+> > >
+> > > +static int read_hidelegh(CPURISCVState *env, int csrno, target_ulong=
+ *val)
+> > > +{
+> > > +    *val =3D env->hideleg >> 32;
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int write_hidelegh(CPURISCVState *env, int csrno, target_ulon=
+g val)
+> > > +{
+> > > +    uint64_t mask =3D ~TLOWBITS64;
+> > > +    uint64_t newval =3D ((uint64_t)val) << 32;
+> > > +
+> > > +    env->hideleg =3D (env->hideleg & ~mask) | (newval & mask);
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > >  static int rmw_hvip(CPURISCVState *env, int csrno, target_ulong *ret=
+_value,
+> > >                     target_ulong new_value, target_ulong write_mask)
+> > >  {
+> > > -    int ret =3D rmw_mip(env, 0, ret_value, new_value,
+> > > -                      write_mask & hvip_writable_mask);
+> > > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > > +    /* Allow software control of delegable interrupts not claimed by=
+ hardware */
+> > > +    uint64_t mask =3D ((uint64_t)write_mask) & delegable_ints &
+> > > +                    hvip_writable_mask &
+> > > +                    ~env->miclaim & TLOWBITS64;
+> > > +    uint64_t old_mip;
+> > > +
+> > > +    if (mask) {
+> > > +        old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value & mas=
+k));
+> > > +    } else {
+> > > +        old_mip =3D env->mip;
+> > > +    }
+> > >
+> > > -    *ret_value &=3D hvip_writable_mask;
+> > > +    if (ret_value) {
+> > > +        *ret_value =3D old_mip & hvip_writable_mask;
+> > > +    }
+> > >
+> > > -    return ret;
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int rmw_hviph(CPURISCVState *env, int csrno, target_ulong *re=
+t_value,
+> > > +                    target_ulong new_value, target_ulong write_mask)
+> > > +{
+> > > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > > +    /* Allow software control of delegable interrupts not claimed by=
+ hardware */
+> > > +    uint64_t mask =3D ((uint64_t)write_mask << 32) & delegable_ints =
+&
+> > > +                    hvip_writable_mask &
+> > > +                    ~env->miclaim & ~TLOWBITS64;
+> > > +    uint64_t new_value64 =3D (uint64_t)new_value << 32;
+> > > +    uint64_t old_mip;
+> > > +
+> > > +    if (mask) {
+> > > +        old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value64 & m=
+ask));
+> > > +    } else {
+> > > +        old_mip =3D env->mip;
+> > > +    }
+> > > +
+> > > +    if (ret_value) {
+> > > +        *ret_value =3D (old_mip & hvip_writable_mask) >> 32;
+> > > +    }
+> > > +
+> > > +    return 0;
+> > >  }
+> > >
+> > >  static int rmw_hip(CPURISCVState *env, int csrno, target_ulong *ret_=
+value,
+> > >                     target_ulong new_value, target_ulong write_mask)
+> > >  {
+> > > -    int ret =3D rmw_mip(env, 0, ret_value, new_value,
+> > > -                      write_mask & hip_writable_mask);
+> > > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > > +    /* Allow software control of delegable interrupts not claimed by=
+ hardware */
+> > > +    uint64_t mask =3D ((uint64_t)write_mask) & delegable_ints &
+> > > +                    hip_writable_mask &
+> > > +                    ~env->miclaim & TLOWBITS64;
+> > > +    uint64_t old_mip;
+> > >
+> > > -    *ret_value &=3D hip_writable_mask;
+> > > +    if (mask) {
+> > > +        old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_value & mas=
+k));
+> > > +    } else {
+> > > +        old_mip =3D env->mip;
+> > > +    }
+> > >
+> > > -    return ret;
+> > > +    if (ret_value) {
+> > > +        *ret_value =3D old_mip & hip_writable_mask;
+> > > +    }
+> > > +
+> > > +    return 0;
+> > >  }
+> > >
+> > >  static int read_hie(CPURISCVState *env, int csrno, target_ulong *val=
+)
+> > > @@ -1009,8 +1798,9 @@ static int read_hie(CPURISCVState *env, int csr=
+no, target_ulong *val)
+> > >
+> > >  static int write_hie(CPURISCVState *env, int csrno, target_ulong val=
+)
+> > >  {
+> > > -    target_ulong newval =3D (env->mie & ~VS_MODE_INTERRUPTS) | (val =
+& VS_MODE_INTERRUPTS);
+> > > -    return write_mie(env, CSR_MIE, newval);
+> > > +    uint64_t mask =3D VS_MODE_INTERRUPTS & all_ints & TLOWBITS64;
+> > > +    env->mie =3D (env->mie & ~mask) | ((uint64_t)val & mask);
+> > > +    return 0;
+> > >  }
+> > >
+> > >  static int read_hcounteren(CPURISCVState *env, int csrno, target_ulo=
+ng *val)
+> > > @@ -1128,6 +1918,110 @@ static int write_htimedeltah(CPURISCVState *e=
+nv, int csrno, target_ulong val)
+> > >      return 0;
+> > >  }
+> > >
+> > > +static int read_hvicontrol(CPURISCVState *env, int csrno, target_ulo=
+ng *val)
+> > > +{
+> > > +    *val =3D env->hvicontrol;
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int write_hvicontrol(CPURISCVState *env, int csrno, target_ul=
+ong val)
+> > > +{
+> > > +    env->hvicontrol =3D val & HVICONTROL_VALID_MASK;
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int read_hvipriox(CPURISCVState *env, int first_index,
+> > > +                         uint8_t *iprio, target_ulong *val)
+> > > +{
+> > > +    int i, irq, rdzero, num_irqs =3D 4 * (TARGET_LONG_BITS / 32);
+> > > +
+> > > +    /* First index has to be multiple of numbe of irqs per register =
 */
->> +
->>  /* sintstatus */
->>  #define SINTSTATUS_SIL                     0x0000ff00 /* sil[7:0] */
->>  #define SINTSTATUS_UIL                     0x000000ff /* uil[7:0] */
->>
->> +/* scause */
->> +#define SCAUSE_SINHV                       0x40000000 /* sinhv */
->> +#define SCAUSE_SPP                         0x10000000 /* spp */
->> +#define SCAUSE_SPIE                        0x08000000 /* spie */
->> +#define SCAUSE_SPIL                        0x00ff0000 /* spil[7:0] */
->> +#define SCAUSE_EXCCODE                     0x00000fff /* exccode[11:0] =
+> > > +    if (first_index % num_irqs) {
+> > > +        return (riscv_cpu_virt_enabled(env)) ?
+> > > +               -RISCV_EXCP_VIRT_INSTRUCTION_FAULT : -RISCV_EXCP_ILLE=
+GAL_INST;
+> > > +    }
+> > > +
+> > > +    /* Fill-up return value */
+> > > +    *val =3D 0;
+> > > +    for (i =3D 0; i < num_irqs; i++) {
+> > > +        if (riscv_cpu_hviprio_index2irq(first_index + i, &irq, &rdze=
+ro)) {
+> > > +            continue;
+> > > +        }
+> > > +        if (rdzero) {
+> > > +            continue;
+> > > +        }
+> > > +        *val |=3D ((target_ulong)iprio[irq]) << (i * 8);
+> > > +    }
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int write_hvipriox(CPURISCVState *env, int first_index,
+> > > +                          uint8_t *iprio, target_ulong val)
+> > > +{
+> > > +    int i, irq, rdzero, num_irqs =3D 4 * (TARGET_LONG_BITS / 32);
+> > > +
+> > > +    /* First index has to be multiple of numbe of irqs per register =
 */
->> +
->>  /* MIE masks */
->>  #define MIE_SEIE                           (1 << IRQ_S_EXT)
->>  #define MIE_UEIE                           (1 << IRQ_U_EXT)
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index e12222b77f..72cba080bf 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -774,6 +774,80 @@ static int rmw_mip(CPURISCVState *env, int csrno,
->> target_ulong *ret_value,
->>      return 0;
->>  }
->>
->> +static bool get_xnxti_status(CPURISCVState *env)
->> +{
->> +    CPUState *cs =3D env_cpu(env);
->> +    int clic_irq, clic_priv, clic_il, pil;
->> +
->> +    if (!env->exccode) { /* No interrupt */
->> +        return false;
->> +    }
->> +    /* The system is not in a CLIC mode */
->> +    if (!riscv_clic_is_clic_mode(env)) {
->> +        return false;
->> +    } else {
->> +        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
->> +                                  &clic_irq);
->> +
->> +        if (env->priv =3D=3D PRV_M) {
->> +            pil =3D MAX(get_field(env->mcause, MCAUSE_MPIL),
->> env->mintthresh);
->> +        } else if (env->priv =3D=3D PRV_S) {
->> +            pil =3D MAX(get_field(env->scause, SCAUSE_SPIL),
->> env->sintthresh);
->> +        } else {
->> +            qemu_log_mask(LOG_GUEST_ERROR,
->> +                          "CSR: rmw xnxti with unsupported mode\n");
->> +            exit(1);
->> +        }
->> +
->> +        if ((clic_priv !=3D env->priv) || /* No horizontal interrupt */
->> +            (clic_il <=3D pil) || /* No higher level interrupt */
->> +            (riscv_clic_shv_interrupt(env->clic, clic_priv,
->> cs->cpu_index,
->> +                                      clic_irq))) { /* CLIC vector mode
->> */
->> +            return false;
->> +        } else {
->> +            return true;
->> +        }
->> +    }
->> +}
->> +
->> +static int rmw_mnxti(CPURISCVState *env, int csrno, target_ulong
->> *ret_value,
->> +                     target_ulong new_value, target_ulong write_mask)
->> +{
->> +    int clic_priv, clic_il, clic_irq;
->> +    bool ready;
->> +    CPUState *cs =3D env_cpu(env);
->> +    if (write_mask) {
->> +        env->mstatus |=3D new_value & (write_mask & 0b11111);
->> +    }
->> +
->> +    qemu_mutex_lock_iothread();
->>
->
-> Hi Zhiwei,
->
-> May I ask what's the purpose to request the BQL here with
-> *qemu_mutex_lock_iothread()*?
-> Is there any critical data we need to protect in *rmw_mnxti()*?
-> As far I see, *rmw_mnxti()* won't call *cpu_interrupt()* which need BQL
-> to be held before calling.
-> Am I missing anything?
->
-> In my opinion, if you read or write any  MMIO register, you need to hold
-> the BQL. As you can quickly see,
-> it calls riscv_clic_clean_pending. That's why it should hold the BQL.
->
-> Zhiwei
->
-
-Oh, I see.
-The MMIO register reads and writes should also be protected by BQL.
-Thanks for the explanation.
-
-Regards,
-Frank Chang
-
-
->
-> Regard,
-> Frank Chang
->
->
->> +    ready =3D get_xnxti_status(env);
->> +    if (ready) {
->> +        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
->> +                                  &clic_irq);
->> +        if (write_mask) {
->> +            bool edge =3D riscv_clic_edge_triggered(env->clic, clic_pri=
-v,
->> +                                                  cs->cpu_index,
->> clic_irq);
->> +            if (edge) {
->> +                riscv_clic_clean_pending(env->clic, clic_priv,
->> +                                         cs->cpu_index, clic_irq);
->> +            }
->> +            env->mintstatus =3D set_field(env->mintstatus,
->> +                                        MINTSTATUS_MIL, clic_il);
->> +            env->mcause =3D set_field(env->mcause, MCAUSE_EXCCODE,
->> clic_irq);
->> +        }
->> +        if (ret_value) {
->> +            *ret_value =3D (env->mtvt & ~0x3f) + sizeof(target_ulong) *
->> clic_irq;
->> +        }
->> +    } else {
->> +        if (ret_value) {
->> +            *ret_value =3D 0;
->> +        }
->> +    }
->> +    qemu_mutex_unlock_iothread();
->> +    return 0;
->> +}
->> +
->>  static int read_mintstatus(CPURISCVState *env, int csrno, target_ulong
->> *val)
->>  {
->>      *val =3D env->mintstatus;
->> @@ -982,6 +1056,44 @@ static int rmw_sip(CPURISCVState *env, int csrno,
->> target_ulong *ret_value,
->>      return ret;
->>  }
->>
->> +static int rmw_snxti(CPURISCVState *env, int csrno, target_ulong
->> *ret_value,
->> +                     target_ulong new_value, target_ulong write_mask)
->> +{
->> +    int clic_priv, clic_il, clic_irq;
->> +    bool ready;
->> +    CPUState *cs =3D env_cpu(env);
->> +    if (write_mask) {
->> +        env->mstatus |=3D new_value & (write_mask & 0b11111);
->> +    }
->> +
->> +    qemu_mutex_lock_iothread();
->> +    ready =3D get_xnxti_status(env);
->> +    if (ready) {
->> +        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
->> +                                  &clic_irq);
->> +        if (write_mask) {
->> +            bool edge =3D riscv_clic_edge_triggered(env->clic, clic_pri=
-v,
->> +                                                  cs->cpu_index,
->> clic_irq);
->> +            if (edge) {
->> +                riscv_clic_clean_pending(env->clic, clic_priv,
->> +                                         cs->cpu_index, clic_irq);
->> +            }
->> +            env->mintstatus =3D set_field(env->mintstatus,
->> +                                        MINTSTATUS_SIL, clic_il);
->> +            env->scause =3D set_field(env->scause, SCAUSE_EXCCODE,
->> clic_irq);
->> +        }
->> +        if (ret_value) {
->> +            *ret_value =3D (env->stvt & ~0x3f) + sizeof(target_ulong) *
->> clic_irq;
->> +        }
->> +    } else {
->> +        if (ret_value) {
->> +            *ret_value =3D 0;
->> +        }
->> +    }
->> +    qemu_mutex_unlock_iothread();
->> +    return 0;
->> +}
->> +
->>  static int read_sintstatus(CPURISCVState *env, int csrno, target_ulong
->> *val)
->>  {
->>      target_ulong mask =3D SINTSTATUS_SIL | SINTSTATUS_UIL;
->> @@ -1755,6 +1867,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
->>
->>      /* Machine Mode Core Level Interrupt Controller */
->>      [CSR_MTVT] =3D { "mtvt", clic,  read_mtvt,  write_mtvt      },
->> +    [CSR_MNXTI] =3D { "mnxti", clic,  NULL,  NULL,  rmw_mnxti   },
->>      [CSR_MINTSTATUS] =3D { "mintstatus", clic,  read_mintstatus },
->>      [CSR_MINTTHRESH] =3D { "mintthresh", clic,  read_mintthresh,
->>                           write_mintthresh },
->> @@ -1766,6 +1879,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
->>
->>      /* Supervisor Mode Core Level Interrupt Controller */
->>      [CSR_STVT] =3D { "stvt", clic,  read_stvt, write_stvt       },
->> +    [CSR_SNXTI] =3D { "snxti", clic,  NULL,  NULL,  rmw_snxti   },
->>
->>  #endif /* !CONFIG_USER_ONLY */
->>  };
->> --
->> 2.25.1
->>
->>
->>
-
---0000000000004884e105c4797d1a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_l=
-iu@c-sky.com">zhiwei_liu@c-sky.com</a>&gt; =E6=96=BC 2021=E5=B9=B46=E6=9C=
-=8811=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=884:30=E5=AF=AB=E9=81=93=
-=EF=BC=9A<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
-4);padding-left:1ex">
- =20
-   =20
- =20
-  <div>
-    <p><br>
-    </p>
-    <div>On 6/11/21 4:15 PM, Frank Chang wrote:<br>
-    </div>
-    <blockquote type=3D"cite">
-     =20
-      <div dir=3D"ltr">
-        <div dir=3D"ltr">LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@c-sky.=
-com" target=3D"_blank">zhiwei_liu@c-sky.com</a>&gt;
-          =E6=96=BC 2021=E5=B9=B44=E6=9C=889=E6=97=A5 =E9=80=B1=E4=BA=94 =
-=E4=B8=8B=E5=8D=883:52=E5=AF=AB=E9=81=93=EF=BC=9A<br>
-        </div>
-        <div class=3D"gmail_quote">
-          <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">The CSR can be =
-used by
-            software to service the next horizontal interrupt<br>
-            when it has greater level than the saved interrupt context<br>
-            (held in xcause`.pil`) and greater level than the interrupt
-            threshold of<br>
-            the corresponding privilege mode,<br>
-            <br>
-            Signed-off-by: LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@c-sk=
-y.com" target=3D"_blank">zhiwei_liu@c-sky.com</a>&gt;<br>
-            ---<br>
-            =C2=A0target/riscv/cpu_bits.h |=C2=A0 16 ++++++<br>
-            =C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 | 114
-            ++++++++++++++++++++++++++++++++++++++++<br>
-            =C2=A02 files changed, 130 insertions(+)<br>
-            <br>
-            diff --git a/target/riscv/cpu_bits.h
-            b/target/riscv/cpu_bits.h<br>
-            index 7922097776..494e41edc9 100644<br>
-            --- a/target/riscv/cpu_bits.h<br>
-            +++ b/target/riscv/cpu_bits.h<br>
-            @@ -166,6 +166,7 @@<br>
-            =C2=A0#define CSR_MCAUSE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x34=
-2<br>
-            =C2=A0#define CSR_MTVAL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A00x343<br>
-            =C2=A0#define CSR_MIP=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A00x344<br>
-            +#define CSR_MNXTI=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x34=
-5 /* clic-spec-draft */<br>
-            =C2=A0#define CSR_MINTSTATUS=C2=A0 =C2=A0 =C2=A0 0x346 /* clic-=
-spec-draft */<br>
-            =C2=A0#define CSR_MINTTHRESH=C2=A0 =C2=A0 =C2=A0 0x347 /* clic-=
-spec-draft */<br>
-            <br>
-            @@ -187,6 +188,7 @@<br>
-            =C2=A0#define CSR_SCAUSE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x14=
-2<br>
-            =C2=A0#define CSR_STVAL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A00x143<br>
-            =C2=A0#define CSR_SIP=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A00x144<br>
-            +#define CSR_SNXTI=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x14=
-5 /* clic-spec-draft */<br>
-            =C2=A0#define CSR_SINTSTATUS=C2=A0 =C2=A0 =C2=A0 0x146 /* clic-=
-spec-draft */<br>
-            =C2=A0#define CSR_SINTTHRESH=C2=A0 =C2=A0 =C2=A0 0x147 /* clic-=
-spec-draft */<br>
-            <br>
-            @@ -596,10 +598,24 @@<br>
-            =C2=A0#define MINTSTATUS_SIL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0000ff00 /*
-            sil[7:0] */<br>
-            =C2=A0#define MINTSTATUS_UIL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x000000ff /*
-            uil[7:0] */<br>
-            <br>
-            +/* mcause */<br>
-            +#define MCAUSE_MINHV=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x40000000 /*
-            minhv */<br>
-            +#define MCAUSE_MPP=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x30000000 /*
-            mpp[1:0] */<br>
-            +#define MCAUSE_MPIE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x08000000 /*
-            mpie */<br>
-            +#define MCAUSE_MPIL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x00ff0000 /*
-            mpil[7:0] */<br>
-            +#define MCAUSE_EXCCODE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x00000fff /*
-            exccode[11:0] */<br>
-            +<br>
-            =C2=A0/* sintstatus */<br>
-            =C2=A0#define SINTSTATUS_SIL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0000ff00 /*
-            sil[7:0] */<br>
-            =C2=A0#define SINTSTATUS_UIL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x000000ff /*
-            uil[7:0] */<br>
-            <br>
-            +/* scause */<br>
-            +#define SCAUSE_SINHV=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x40000000 /*
-            sinhv */<br>
-            +#define SCAUSE_SPP=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x10000000 /*
-            spp */<br>
-            +#define SCAUSE_SPIE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x08000000 /*
-            spie */<br>
-            +#define SCAUSE_SPIL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x00ff0000 /*
-            spil[7:0] */<br>
-            +#define SCAUSE_EXCCODE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x00000fff /*
-            exccode[11:0] */<br>
-            +<br>
-            =C2=A0/* MIE masks */<br>
-            =C2=A0#define MIE_SEIE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(1 &lt;&lt;
-            IRQ_S_EXT)<br>
-            =C2=A0#define MIE_UEIE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(1 &lt;&lt;
-            IRQ_U_EXT)<br>
-            diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-            index e12222b77f..72cba080bf 100644<br>
-            --- a/target/riscv/csr.c<br>
-            +++ b/target/riscv/csr.c<br>
-            @@ -774,6 +774,80 @@ static int rmw_mip(CPURISCVState *env,
-            int csrno, target_ulong *ret_value,<br>
-            =C2=A0 =C2=A0 =C2=A0return 0;<br>
-            =C2=A0}<br>
-            <br>
-            +static bool get_xnxti_status(CPURISCVState *env)<br>
-            +{<br>
-            +=C2=A0 =C2=A0 CPUState *cs =3D env_cpu(env);<br>
-            +=C2=A0 =C2=A0 int clic_irq, clic_priv, clic_il, pil;<br>
-            +<br>
-            +=C2=A0 =C2=A0 if (!env-&gt;exccode) { /* No interrupt */<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return false;<br>
-            +=C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 /* The system is not in a CLIC mode */<br>
-            +=C2=A0 =C2=A0 if (!riscv_clic_is_clic_mode(env)) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return false;<br>
-            +=C2=A0 =C2=A0 } else {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_clic_decode_exccode(env-&gt;=
-exccode,
-            &amp;clic_priv, &amp;clic_il,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;clic_irq);<br=
->
-            +<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (env-&gt;priv =3D=3D PRV_M) {<b=
-r>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pil =3D MAX(get_fiel=
-d(env-&gt;mcause,
-            MCAUSE_MPIL), env-&gt;mintthresh);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (env-&gt;priv =3D=3D PRV=
-_S) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pil =3D MAX(get_fiel=
-d(env-&gt;scause,
-            SCAUSE_SPIL), env-&gt;sintthresh);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_log_mask(LOG_GU=
-EST_ERROR,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;CSR: rmw xnxti with unsupported
-            mode\n&quot;);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 exit(1);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-            +<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if ((clic_priv !=3D env-&gt;priv) =
-|| /* No horizontal
-            interrupt */<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (clic_il &lt;=3D pil=
-) || /* No higher level
-            interrupt */<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (riscv_clic_shv_inte=
-rrupt(env-&gt;clic,
-            clic_priv, cs-&gt;cpu_index,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 clic=
-_irq))) { /* CLIC
-            vector mode */<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return false;<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return true;<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 }<br>
-            +}<br>
-            +<br>
-            +static int rmw_mnxti(CPURISCVState *env, int csrno,
-            target_ulong *ret_value,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0target_ulong new_value, target_ulong
-            write_mask)<br>
-            +{<br>
-            +=C2=A0 =C2=A0 int clic_priv, clic_il, clic_irq;<br>
-            +=C2=A0 =C2=A0 bool ready;<br>
-            +=C2=A0 =C2=A0 CPUState *cs =3D env_cpu(env);<br>
-            +=C2=A0 =C2=A0 if (write_mask) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mstatus |=3D new_value &am=
-p; (write_mask
-            &amp; 0b11111);<br>
-            +=C2=A0 =C2=A0 }<br>
-            +<br>
-            +=C2=A0 =C2=A0 qemu_mutex_lock_iothread();<br>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>Hi Zhiwei,</div>
-          <div><br>
-          </div>
-          <div>May I ask what&#39;s the purpose to request the BQL here
-            with=C2=A0<i>qemu_mutex_lock_iothread()</i>?</div>
-          <div>Is there any critical data we need to protect in=C2=A0<i>rmw=
-_mnxti()</i>?</div>
-          <div>As far I see,=C2=A0<i>rmw_mnxti()</i> won&#39;t call <i>cpu_=
-interrupt()</i>
-            which need BQL to be held before calling.</div>
-          <div>Am I missing anything?</div>
-        </div>
-      </div>
-    </blockquote>
-    <div dir=3D"ltr">
-      <div class=3D"gmail_quote">
-        <div>In my opinion, if you read or write any=C2=A0 MMIO register, y=
-ou
-          need to hold the BQL. As you can quickly see,</div>
-        <div>it calls riscv_clic_clean_pending. That&#39;s why it should
-          hold the BQL.</div>
-        <div><br>
-        </div>
-        <div>Zhiwei<br></div></div></div></div></blockquote><div><br></div>=
-<div>Oh, I see.</div><div>The MMIO register reads and writes should also be=
- protected by BQL.</div><div>Thanks for the explanation.</div><div><br></di=
-v><div>Regards,</div><div>Frank Chang</div><div>=C2=A0</div><blockquote cla=
-ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
-rgb(204,204,204);padding-left:1ex"><div><div dir=3D"ltr"><div class=3D"gmai=
-l_quote"><div>
-        </div>
-      </div>
-    </div>
-    <blockquote type=3D"cite">
-      <div dir=3D"ltr">
-        <div class=3D"gmail_quote">
-          <div><br>
-          </div>
-          <div>Regard,</div>
-          <div>Frank Chang</div>
-          <div>=C2=A0</div>
-          <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-            +=C2=A0 =C2=A0 ready =3D get_xnxti_status(env);<br>
-            +=C2=A0 =C2=A0 if (ready) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_clic_decode_exccode(env-&gt;=
-exccode,
-            &amp;clic_priv, &amp;clic_il,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;clic_irq);<br=
->
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (write_mask) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 bool edge =3D
-            riscv_clic_edge_triggered(env-&gt;clic, clic_priv,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0
-            cs-&gt;cpu_index, clic_irq);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (edge) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_=
-clic_clean_pending(env-&gt;clic,
-            clic_priv,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0cs-&gt;cpu_index,
-            clic_irq);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mintstatus =
-=3D
-            set_field(env-&gt;mintstatus,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 MINTSTATUS_MIL,
-            clic_il);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mcause =3D s=
-et_field(env-&gt;mcause,
-            MCAUSE_EXCCODE, clic_irq);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (ret_value) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *ret_value =3D (env-=
-&gt;mtvt &amp; ~0x3f) +
-            sizeof(target_ulong) * clic_irq;<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 } else {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (ret_value) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *ret_value =3D 0;<br=
->
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 qemu_mutex_unlock_iothread();<br>
-            +=C2=A0 =C2=A0 return 0;<br>
-            +}<br>
-            +<br>
-            =C2=A0static int read_mintstatus(CPURISCVState *env, int csrno,
-            target_ulong *val)<br>
-            =C2=A0{<br>
-            =C2=A0 =C2=A0 =C2=A0*val =3D env-&gt;mintstatus;<br>
-            @@ -982,6 +1056,44 @@ static int rmw_sip(CPURISCVState *env,
-            int csrno, target_ulong *ret_value,<br>
-            =C2=A0 =C2=A0 =C2=A0return ret;<br>
-            =C2=A0}<br>
-            <br>
-            +static int rmw_snxti(CPURISCVState *env, int csrno,
-            target_ulong *ret_value,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0target_ulong new_value, target_ulong
-            write_mask)<br>
-            +{<br>
-            +=C2=A0 =C2=A0 int clic_priv, clic_il, clic_irq;<br>
-            +=C2=A0 =C2=A0 bool ready;<br>
-            +=C2=A0 =C2=A0 CPUState *cs =3D env_cpu(env);<br>
-            +=C2=A0 =C2=A0 if (write_mask) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mstatus |=3D new_value &am=
-p; (write_mask
-            &amp; 0b11111);<br>
-            +=C2=A0 =C2=A0 }<br>
-            +<br>
-            +=C2=A0 =C2=A0 qemu_mutex_lock_iothread();<br>
-            +=C2=A0 =C2=A0 ready =3D get_xnxti_status(env);<br>
-            +=C2=A0 =C2=A0 if (ready) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_clic_decode_exccode(env-&gt;=
-exccode,
-            &amp;clic_priv, &amp;clic_il,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;clic_irq);<br=
->
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (write_mask) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 bool edge =3D
-            riscv_clic_edge_triggered(env-&gt;clic, clic_priv,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0
-            cs-&gt;cpu_index, clic_irq);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (edge) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_=
-clic_clean_pending(env-&gt;clic,
-            clic_priv,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0cs-&gt;cpu_index,
-            clic_irq);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mintstatus =
-=3D
-            set_field(env-&gt;mintstatus,<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 MINTSTATUS_SIL,
-            clic_il);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;scause =3D s=
-et_field(env-&gt;scause,
-            SCAUSE_EXCCODE, clic_irq);<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (ret_value) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *ret_value =3D (env-=
-&gt;stvt &amp; ~0x3f) +
-            sizeof(target_ulong) * clic_irq;<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 } else {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (ret_value) {<br>
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *ret_value =3D 0;<br=
->
-            +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 }<br>
-            +=C2=A0 =C2=A0 qemu_mutex_unlock_iothread();<br>
-            +=C2=A0 =C2=A0 return 0;<br>
-            +}<br>
-            +<br>
-            =C2=A0static int read_sintstatus(CPURISCVState *env, int csrno,
-            target_ulong *val)<br>
-            =C2=A0{<br>
-            =C2=A0 =C2=A0 =C2=A0target_ulong mask =3D SINTSTATUS_SIL | SINT=
-STATUS_UIL;<br>
-            @@ -1755,6 +1867,7 @@ riscv_csr_operations
-            csr_ops[CSR_TABLE_SIZE] =3D {<br>
-            <br>
-            =C2=A0 =C2=A0 =C2=A0/* Machine Mode Core Level Interrupt Contro=
-ller */<br>
-            =C2=A0 =C2=A0 =C2=A0[CSR_MTVT] =3D { &quot;mtvt&quot;, clic,=C2=
-=A0 read_mtvt,=C2=A0 write_mtvt=C2=A0 =C2=A0
-            =C2=A0 },<br>
-            +=C2=A0 =C2=A0 [CSR_MNXTI] =3D { &quot;mnxti&quot;, clic,=C2=A0=
- NULL,=C2=A0 NULL,=C2=A0
-            rmw_mnxti=C2=A0 =C2=A0},<br>
-            =C2=A0 =C2=A0 =C2=A0[CSR_MINTSTATUS] =3D { &quot;mintstatus&quo=
-t;, clic,=C2=A0
-            read_mintstatus },<br>
-            =C2=A0 =C2=A0 =C2=A0[CSR_MINTTHRESH] =3D { &quot;mintthresh&quo=
-t;, clic,=C2=A0
-            read_mintthresh,<br>
-            =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 write_mintthresh },<br>
-            @@ -1766,6 +1879,7 @@ riscv_csr_operations
-            csr_ops[CSR_TABLE_SIZE] =3D {<br>
-            <br>
-            =C2=A0 =C2=A0 =C2=A0/* Supervisor Mode Core Level Interrupt Con=
-troller */<br>
-            =C2=A0 =C2=A0 =C2=A0[CSR_STVT] =3D { &quot;stvt&quot;, clic,=C2=
-=A0 read_stvt, write_stvt=C2=A0 =C2=A0
-            =C2=A0 =C2=A0},<br>
-            +=C2=A0 =C2=A0 [CSR_SNXTI] =3D { &quot;snxti&quot;, clic,=C2=A0=
- NULL,=C2=A0 NULL,=C2=A0
-            rmw_snxti=C2=A0 =C2=A0},<br>
-            <br>
-            =C2=A0#endif /* !CONFIG_USER_ONLY */<br>
-            =C2=A0};<br>
-            -- <br>
-            2.25.1<br>
-            <br>
-            <br>
-          </blockquote>
-        </div>
-      </div>
-    </blockquote>
-  </div>
-
-</blockquote></div></div>
-
---0000000000004884e105c4797d1a--
+> > > +    if (first_index % num_irqs) {
+> > > +        return (riscv_cpu_virt_enabled(env)) ?
+> > > +               -RISCV_EXCP_VIRT_INSTRUCTION_FAULT : -RISCV_EXCP_ILLE=
+GAL_INST;
+> > > +    }
+> > > +
+> > > +    /* Fill-up priority arrary */
+> > > +    for (i =3D 0; i < num_irqs; i++) {
+> > > +        if (riscv_cpu_hviprio_index2irq(first_index + i, &irq, &rdze=
+ro)) {
+> > > +            continue;
+> > > +        }
+> > > +        if (rdzero) {
+> > > +            iprio[irq] =3D 0;
+> > > +        } else {
+> > > +            iprio[irq] =3D (val >> (i * 8)) & 0xff;
+> > > +        }
+> > > +    }
+> > > +
+> > > +    return 0;
+> > > +}
+> > > +
+> > > +static int read_hviprio1(CPURISCVState *env, int csrno, target_ulong=
+ *val)
+> > > +{
+> > > +    return read_hvipriox(env, 0, env->hviprio, val);
+> > > +}
+> > > +
+> > > +static int write_hviprio1(CPURISCVState *env, int csrno, target_ulon=
+g val)
+> > > +{
+> > > +    return write_hvipriox(env, 0, env->hviprio, val);
+> > > +}
+> > > +
+> > > +static int read_hviprio1h(CPURISCVState *env, int csrno, target_ulon=
+g *val)
+> > > +{
+> > > +    return read_hvipriox(env, 4, env->hviprio, val);
+> > > +}
+> > > +
+> > > +static int write_hviprio1h(CPURISCVState *env, int csrno, target_ulo=
+ng val)
+> > > +{
+> > > +    return write_hvipriox(env, 4, env->hviprio, val);
+> > > +}
+> > > +
+> > > +static int read_hviprio2(CPURISCVState *env, int csrno, target_ulong=
+ *val)
+> > > +{
+> > > +    return read_hvipriox(env, 8, env->hviprio, val);
+> > > +}
+> > > +
+> > > +static int write_hviprio2(CPURISCVState *env, int csrno, target_ulon=
+g val)
+> > > +{
+> > > +    return write_hvipriox(env, 8, env->hviprio, val);
+> > > +}
+> > > +
+> > > +static int read_hviprio2h(CPURISCVState *env, int csrno, target_ulon=
+g *val)
+> > > +{
+> > > +    return read_hvipriox(env, 12, env->hviprio, val);
+> > > +}
+> > > +
+> > > +static int write_hviprio2h(CPURISCVState *env, int csrno, target_ulo=
+ng val)
+> > > +{
+> > > +    return write_hvipriox(env, 12, env->hviprio, val);
+> > > +}
+> > > +
+> > >  /* Virtual CSR Registers */
+> > >  static int read_vsstatus(CPURISCVState *env, int csrno, target_ulong=
+ *val)
+> > >  {
+> > > @@ -1428,6 +2322,25 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
+=3D {
+> > >      [CSR_MBADADDR] =3D { "mbadaddr", any,  read_mbadaddr, write_mbad=
+addr },
+> > >      [CSR_MIP]      =3D { "mip",      any,  NULL,    NULL, rmw_mip   =
+     },
+> > >
+> > > +    /* Machine-Level Window to Indirectly Accessed Registers (AIA) *=
+/
+> > > +    [CSR_MISELECT] =3D { "miselect", aia_any,   NULL, NULL,    rmw_x=
+iselect },
+> > > +    [CSR_MIREG]    =3D { "mireg",    aia_any,   NULL, NULL,    rmw_x=
+ireg },
+> > > +
+> > > +    /* Machine-Level Interrupts (AIA) */
+> > > +    [CSR_MTOPI]    =3D { "mtopi",    aia_any,   read_mtopi },
+> > > +
+> > > +    /* Machine-Level IMSIC Interface (AIA) */
+> > > +    [CSR_MSETEIPNUM] =3D { "mseteipnum", aia_any, read_xsetclreinum,=
+ write_xsetclreinum },
+> > > +    [CSR_MCLREIPNUM] =3D { "mclreipnum", aia_any, read_xsetclreinum,=
+ write_xsetclreinum },
+> > > +    [CSR_MSETEIENUM] =3D { "mseteienum", aia_any, read_xsetclreinum,=
+ write_xsetclreinum },
+> > > +    [CSR_MCLREIENUM] =3D { "mclreienum", aia_any, read_xsetclreinum,=
+ write_xsetclreinum },
+> > > +    [CSR_MCLAIMEI]   =3D { "mclaimei",   aia_any, read_xclaimei },
+> > > +
+> > > +    /* Machine-Level High-Half CSRs (AIA) */
+> > > +    [CSR_MIDELEGH] =3D { "midelegh", aia_any32, read_midelegh, write=
+_midelegh },
+> > > +    [CSR_MIEH]     =3D { "mieh",     aia_any32, read_mieh,     write=
+_mieh     },
+> > > +    [CSR_MIPH]     =3D { "miph",     aia_any32, NULL,    NULL, rmw_m=
+iph       },
+> > > +
+> > >      /* Supervisor Trap Setup */
+> > >      [CSR_SSTATUS]    =3D { "sstatus",    smode, read_sstatus,    wri=
+te_sstatus    },
+> > >      [CSR_SIE]        =3D { "sie",        smode, read_sie,        wri=
+te_sie        },
+> > > @@ -1444,6 +2357,24 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
+=3D {
+> > >      /* Supervisor Protection and Translation */
+> > >      [CSR_SATP]     =3D { "satp",     smode, read_satp,    write_satp=
+      },
+> > >
+> > > +    /* Supervisor-Level Window to Indirectly Accessed Registers (AIA=
+) */
+> > > +    [CSR_SISELECT]   =3D { "siselect",   aia_smode, NULL, NULL, rmw_=
+xiselect },
+> > > +    [CSR_SIREG]      =3D { "sireg",      aia_smode, NULL, NULL, rmw_=
+xireg },
+> > > +
+> > > +    /* Supervisor-Level Interrupts (AIA) */
+> > > +    [CSR_STOPI]      =3D { "stopi",      aia_smode, read_stopi },
+> > > +
+> > > +    /* Supervisor-Level IMSIC Interface (AIA) */
+> > > +    [CSR_SSETEIPNUM] =3D { "sseteipnum", aia_smode, read_xsetclreinu=
+m, write_xsetclreinum },
+> > > +    [CSR_SCLREIPNUM] =3D { "sclreipnum", aia_smode, read_xsetclreinu=
+m, write_xsetclreinum },
+> > > +    [CSR_SSETEIENUM] =3D { "sseteienum", aia_smode, read_xsetclreinu=
+m, write_xsetclreinum },
+> > > +    [CSR_SCLREIENUM] =3D { "sclreienum", aia_smode, read_xsetclreinu=
+m, write_xsetclreinum },
+> > > +    [CSR_SCLAIMEI]   =3D { "sclaimei",   aia_smode, read_xclaimei },
+> > > +
+> > > +    /* Supervisor-Level High-Half CSRs (AIA) */
+> > > +    [CSR_SIEH]       =3D { "sieh",       aia_smode32, read_sieh,  wr=
+ite_sieh },
+> > > +    [CSR_SIPH]       =3D { "siph",       aia_smode32, NULL, NULL, rm=
+w_siph   },
+> > > +
+> > >      [CSR_HSTATUS]     =3D { "hstatus",     hmode,   read_hstatus,   =
+  write_hstatus     },
+> > >      [CSR_HEDELEG]     =3D { "hedeleg",     hmode,   read_hedeleg,   =
+  write_hedeleg     },
+> > >      [CSR_HIDELEG]     =3D { "hideleg",     hmode,   read_hideleg,   =
+  write_hideleg     },
+> > > @@ -1472,6 +2403,32 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
+=3D {
+> > >      [CSR_MTVAL2]      =3D { "mtval2",      hmode,   read_mtval2,    =
+  write_mtval2      },
+> > >      [CSR_MTINST]      =3D { "mtinst",      hmode,   read_mtinst,    =
+  write_mtinst      },
+> > >
+> > > +    /* Virtual Interrupts and Interrupt Priorities (H-extension with=
+ AIA) */
+> > > +    [CSR_HVICONTROL]  =3D { "hvicontrol",  aia_hmode, read_hvicontro=
+l, write_hvicontrol },
+> > > +    [CSR_HVIPRIO1]    =3D { "hviprio1",    aia_hmode, read_hviprio1,=
+   write_hviprio1 },
+> > > +    [CSR_HVIPRIO2]    =3D { "hviprio2",    aia_hmode, read_hviprio2,=
+   write_hviprio2 },
+> > > +
+> > > +    /* VS-Level Window to Indirectly Accessed Registers (H-extension=
+ with AIA) */
+> > > +    [CSR_VSISELECT]   =3D { "vsiselect",   aia_hmode, NULL, NULL,   =
+   rmw_xiselect },
+> > > +    [CSR_VSIREG]      =3D { "vsireg",      aia_hmode, NULL, NULL,   =
+   rmw_xireg },
+> > > +
+> > > +    /* VS-Level Interrupts (H-extension with AIA) */
+> > > +    [CSR_VSTOPI]      =3D { "vstopi",      aia_hmode, read_vstopi },
+> > > +
+> > > +    /* VS-Level IMSIC Interface (H-extension with AIA) */
+> > > +    [CSR_VSSETEIPNUM] =3D { "vsseteipnum", aia_hmode, read_xsetclrei=
+num, write_xsetclreinum },
+> > > +    [CSR_VSCLREIPNUM] =3D { "vsclreipnum", aia_hmode, read_xsetclrei=
+num, write_xsetclreinum },
+> > > +    [CSR_VSSETEIENUM] =3D { "vsseteienum", aia_hmode, read_xsetclrei=
+num, write_xsetclreinum },
+> > > +    [CSR_VSCLREIENUM] =3D { "vsclreienum", aia_hmode, read_xsetclrei=
+num, write_xsetclreinum },
+> > > +
+> > > +    /* Hypervisor and VS-Level High-Half CSRs (H-extension with AIA)=
+ */
+> > > +    [CSR_HIDELEGH]    =3D { "hidelegh",    aia_hmode32, read_hideleg=
+h,  write_hidelegh },
+> > > +    [CSR_HVIPH]       =3D { "hviph",       aia_hmode32, NULL, NULL, =
+    rmw_hviph },
+> > > +    [CSR_HVIPRIO1H]   =3D { "hviprio1h",   aia_hmode32, read_hviprio=
+1h, write_hviprio1h },
+> > > +    [CSR_HVIPRIO2H]   =3D { "hviprio2h",   aia_hmode32, read_hviprio=
+2h, write_hviprio2h },
+> > > +    [CSR_VSIEH]       =3D { "vsieh",       aia_hmode32, read_vsieh, =
+    write_vsieh },
+> > > +    [CSR_VSIPH]       =3D { "vsiep",       aia_hmode32, NULL, NULL, =
+    rmw_vsiph },
+> > > +
+> > >      /* Physical Memory Protection */
+> > >      [CSR_PMPCFG0]    =3D { "pmpcfg0",   pmp, read_pmpcfg,  write_pmp=
+cfg  },
+> > >      [CSR_PMPCFG1]    =3D { "pmpcfg1",   pmp, read_pmpcfg,  write_pmp=
+cfg  },
+> > > diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> > > index 44d4015bd6..f7fa48c240 100644
+> > > --- a/target/riscv/machine.c
+> > > +++ b/target/riscv/machine.c
+> > > @@ -102,19 +102,22 @@ static const VMStateDescription vmstate_vector =
+=3D {
+> > >
+> > >  static const VMStateDescription vmstate_hyper =3D {
+> > >      .name =3D "cpu/hyper",
+> > > -    .version_id =3D 1,
+> > > -    .minimum_version_id =3D 1,
+> > > +    .version_id =3D 2,
+> > > +    .minimum_version_id =3D 2,
+> > >      .needed =3D hyper_needed,
+> > >      .fields =3D (VMStateField[]) {
+> > >          VMSTATE_UINTTL(env.hstatus, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.hedeleg, RISCVCPU),
+> > > -        VMSTATE_UINTTL(env.hideleg, RISCVCPU),
+> > > +        VMSTATE_UINT64(env.hideleg, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.hcounteren, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.htval, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.htinst, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.hgatp, RISCVCPU),
+> > >          VMSTATE_UINT64(env.htimedelta, RISCVCPU),
+> > >
+> > > +        VMSTATE_UINT8_ARRAY(env.hviprio, RISCVCPU, 64),
+> > > +        VMSTATE_UINTTL(env.hvicontrol, RISCVCPU),
+> > > +
+> > >          VMSTATE_UINT64(env.vsstatus, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.vstvec, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.vsscratch, RISCVCPU),
+> > > @@ -122,6 +125,7 @@ static const VMStateDescription vmstate_hyper =3D=
+ {
+> > >          VMSTATE_UINTTL(env.vscause, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.vstval, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.vsatp, RISCVCPU),
+> > > +        VMSTATE_UINTTL(env.vsiselect, RISCVCPU),
+> > >
+> > >          VMSTATE_UINTTL(env.mtval2, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.mtinst, RISCVCPU),
+> > > @@ -140,11 +144,13 @@ static const VMStateDescription vmstate_hyper =
+=3D {
+> > >
+> > >  const VMStateDescription vmstate_riscv_cpu =3D {
+> > >      .name =3D "cpu",
+> > > -    .version_id =3D 1,
+> > > -    .minimum_version_id =3D 1,
+> > > +    .version_id =3D 2,
+> > > +    .minimum_version_id =3D 2,
+> > >      .fields =3D (VMStateField[]) {
+> > >          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+> > >          VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
+> > > +        VMSTATE_UINT8_ARRAY(env.miprio, RISCVCPU, 64),
+> > > +        VMSTATE_UINT8_ARRAY(env.siprio, RISCVCPU, 64),
+> > >          VMSTATE_UINTTL(env.pc, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.load_res, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.load_val, RISCVCPU),
+> > > @@ -161,10 +167,10 @@ const VMStateDescription vmstate_riscv_cpu =3D =
+{
+> > >          VMSTATE_UINTTL(env.resetvec, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.mhartid, RISCVCPU),
+> > >          VMSTATE_UINT64(env.mstatus, RISCVCPU),
+> > > -        VMSTATE_UINTTL(env.mip, RISCVCPU),
+> > > -        VMSTATE_UINT32(env.miclaim, RISCVCPU),
+> > > -        VMSTATE_UINTTL(env.mie, RISCVCPU),
+> > > -        VMSTATE_UINTTL(env.mideleg, RISCVCPU),
+> > > +        VMSTATE_UINT64(env.mip, RISCVCPU),
+> > > +        VMSTATE_UINT64(env.miclaim, RISCVCPU),
+> > > +        VMSTATE_UINT64(env.mie, RISCVCPU),
+> > > +        VMSTATE_UINT64(env.mideleg, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.sptbr, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.satp, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.sbadaddr, RISCVCPU),
+> > > @@ -177,6 +183,8 @@ const VMStateDescription vmstate_riscv_cpu =3D {
+> > >          VMSTATE_UINTTL(env.mepc, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.mcause, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.mtval, RISCVCPU),
+> > > +        VMSTATE_UINTTL(env.miselect, RISCVCPU),
+> > > +        VMSTATE_UINTTL(env.siselect, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.scounteren, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
+> > >          VMSTATE_UINTTL(env.sscratch, RISCVCPU),
+> > > --
+> > > 2.25.1
+> > >
+> > >
 
