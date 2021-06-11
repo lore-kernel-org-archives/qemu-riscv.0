@@ -1,51 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrcZ2-0005Ci-DP
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Jun 2021 04:30:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35820)
+	id 1lrcix-00014d-IS
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Jun 2021 04:41:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37078)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lrcZ0-0005CS-8v; Fri, 11 Jun 2021 04:30:50 -0400
-Received: from out28-101.mail.aliyun.com ([115.124.28.101]:45470)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lrcYv-0003MO-Md; Fri, 11 Jun 2021 04:30:49 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07608247|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.0283206-0.000874953-0.970805;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047212; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KQvv34U_1623400236; 
-Received: from 172.27.117.59(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KQvv34U_1623400236)
- by smtp.aliyun-inc.com(10.147.41.187);
- Fri, 11 Jun 2021 16:30:37 +0800
-Subject: Re: [RFC PATCH 08/11] target/riscv: Update CSR xnxti in CLIC mode
-To: Frank Chang <0xc0de0125@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, wxy194768@alibaba-inc.com
-References: <20210409074857.166082-1-zhiwei_liu@c-sky.com>
- <20210409074857.166082-9-zhiwei_liu@c-sky.com>
- <CANzO1D1jotPbDxJj3ZxJZ7BdT0je64A9DAudEfm8=-m4DQFzoA@mail.gmail.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <f3523b14-c13d-edf8-61e4-d251691130e0@c-sky.com>
-Date: Fri, 11 Jun 2021 16:30:36 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lrciv-00014P-3N; Fri, 11 Jun 2021 04:41:05 -0400
+Received: from mail-il1-x12b.google.com ([2607:f8b0:4864:20::12b]:34626)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1lrcir-0003Cy-Pw; Fri, 11 Jun 2021 04:41:04 -0400
+Received: by mail-il1-x12b.google.com with SMTP id w14so4410442ilv.1;
+ Fri, 11 Jun 2021 01:41:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ZIeh/cyJvV+KzG9lGeI8mCDQQqpCo2jMg6+vhmVg77g=;
+ b=decKPEkJV151C4gyyXnaMRuvA/0+rDjF52vZj16I4bRbxO6Apj9ffC/nKVHjML0UiD
+ Ldqx8FRXbvM4wIwImM+Z40oNJ5KKUjfe2m/hNbogoE+4hZ/Z6NnQNiYeltpuayVSzJPY
+ f8fKOEhGDCC1iTlp0ZBBtxtRERm+JkkpejUfxHF99SnjfGRFerxCm/Gu7zWxjT9t1uGs
+ BddHFHea5CM1PpIdUAgDEpuSfgQ+mJ3M8CfYJsKW6g/tO8+/fuXc0s74wSpH8gZHdgaf
+ /BHEw5E+okI4bHfdGwOhuMEYRH9eKS4/HD54aT48EnuZ6q4bxWktV9TwwRpuTbfEz7k9
+ 5Nvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ZIeh/cyJvV+KzG9lGeI8mCDQQqpCo2jMg6+vhmVg77g=;
+ b=UUnLMsCkdBQoPTxgVVpc1TXn5iWmX441blngDdq0jJxMZEjkKbVg0ncX+j+a+FlMBw
+ 8eJwhaJ0ZFit2I/Aj8jLhXOBDI2RYDg+C0jdNYg6o3yWBHdPHfZX6mIyxFsT+fJ7MSBh
+ oGOlIjKcBeZOTCfpkxjVA0cWFWcighCkceGhFRYkFr3WzRBBvR2FBKGhsvaoNMgg6vn1
+ raMrnfEdH7k80S/jFiQeCFt+LhE/m0DbxmkYUCRwyNITWVGUQplvdA+x7Qyeo+SFzZ1c
+ my0EGilLkODC1LtH9y01RWTrroL/1L3DgNxtSDkHJwRhnVroLQJXn2fbQyOvhPD2HT9K
+ npeQ==
+X-Gm-Message-State: AOAM532lCYdVcE5S3fTUjMsDx/vMuJHxNxnZHuF9XtH1bNkjAbL+Z3LY
+ /8vgOMJNl7Cawf2TryDW5udP2PcM66KFRI0U8Vk=
+X-Google-Smtp-Source: ABdhPJwPlP7T/+kCwt0k/rGu7ekdTMPDdwRuaGIUWSdqS7PXfS6U5UME/tsi93jOXqGvHVqXZrH3Cu50cmWoivrAyPs=
+X-Received: by 2002:a05:6e02:1447:: with SMTP id
+ p7mr2337502ilo.131.1623400860005; 
+ Fri, 11 Jun 2021 01:41:00 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CANzO1D1jotPbDxJj3ZxJZ7BdT0je64A9DAudEfm8=-m4DQFzoA@mail.gmail.com>
-Content-Type: multipart/alternative;
- boundary="------------B057772D64E9C34DEFD66AA1"
-Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.101; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-101.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20210514143242.377645-1-anup.patel@wdc.com>
+ <CAAhSdy3KmvjR8hnMz2UXomA45FcEV9fmiCXRBFGMRQus5=c6Lg@mail.gmail.com>
+In-Reply-To: <CAAhSdy3KmvjR8hnMz2UXomA45FcEV9fmiCXRBFGMRQus5=c6Lg@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 11 Jun 2021 18:40:33 +1000
+Message-ID: <CAKmqyKOHbVvM5haU-hVAUg_wB_h=Ap2rZzvutNyF7JMUvB80pw@mail.gmail.com>
+Subject: Re: [PATCH 0/4] AIA local interrupt CSR support
+To: Anup Patel <anup@brainfault.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Anup Patel <anup.patel@wdc.com>, QEMU Developers <qemu-devel@nongnu.org>, 
+ Atish Patra <atish.patra@wdc.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12b;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
- RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -58,607 +75,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jun 2021 08:30:50 -0000
+X-List-Received-Date: Fri, 11 Jun 2021 08:41:05 -0000
 
-This is a multi-part message in MIME format.
---------------B057772D64E9C34DEFD66AA1
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+On Fri, Jun 11, 2021 at 4:48 PM Anup Patel <anup@brainfault.org> wrote:
+>
+> Hi Alistair,
+>
+> On Fri, May 14, 2021 at 8:03 PM Anup Patel <anup.patel@wdc.com> wrote:
+> >
+> > The advanced interrupt architecture (AIA) extends the per-HART local
+> > interrupt support. Along with this, it also adds IMSIC (MSI contrllor)
+> > and Advanced PLIC (wired interrupt controller).
+> >
+> > The latest AIA draft specification can be found here:
+> > http://jhauser.us/private/RISCV-AIA/riscv-interrupts-021.pdf
+> >
+> > This series adds initial AIA support in QEMU which includes emulating all
+> > AIA local CSR. To enable AIA in QEMU, we just need to pass "x-aia=true"
+> > paramenter in "-cpu" QEMU command-line.
+> >
+> > To test series, we require OpenSBI and Linux with AIA support which
+> > can be found in riscv_aia_v1 branch at:
+> > https://github.com/avpatel/opensbi.git
+> > https://github.com/avpatel/linux.git
+> >
+> > Anup Patel (4):
+> >   target/riscv: Add defines for AIA local interrupt CSRs
+> >   target/riscv: Add CPU feature for AIA CSRs
+> >   target/riscv: Implement AIA local interrupt CSRs
+> >   hw/riscv: virt: Use AIA INTC compatible string when available
+>
+> The ACLINT specification will be frozen soon (probably early next
+> month). The ACLINT QEMU support patches are also ready and don't
+> depend on the AIA QEMU support patches.
+>
+> Is it okay to target ACLINT support in QEMU first ?
 
+Yeah, go for it.
 
-On 6/11/21 4:15 PM, Frank Chang wrote:
-> LIU Zhiwei <zhiwei_liu@c-sky.com <mailto:zhiwei_liu@c-sky.com>> 於 
-> 2021年4月9日 週五 下午3:52寫道：
->
->     The CSR can be used by software to service the next horizontal
->     interrupt
->     when it has greater level than the saved interrupt context
->     (held in xcause`.pil`) and greater level than the interrupt
->     threshold of
->     the corresponding privilege mode,
->
->     Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com
->     <mailto:zhiwei_liu@c-sky.com>>
->     ---
->      target/riscv/cpu_bits.h |  16 ++++++
->      target/riscv/csr.c      | 114
->     ++++++++++++++++++++++++++++++++++++++++
->      2 files changed, 130 insertions(+)
->
->     diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->     index 7922097776..494e41edc9 100644
->     --- a/target/riscv/cpu_bits.h
->     +++ b/target/riscv/cpu_bits.h
->     @@ -166,6 +166,7 @@
->      #define CSR_MCAUSE          0x342
->      #define CSR_MTVAL           0x343
->      #define CSR_MIP             0x344
->     +#define CSR_MNXTI           0x345 /* clic-spec-draft */
->      #define CSR_MINTSTATUS      0x346 /* clic-spec-draft */
->      #define CSR_MINTTHRESH      0x347 /* clic-spec-draft */
->
->     @@ -187,6 +188,7 @@
->      #define CSR_SCAUSE          0x142
->      #define CSR_STVAL           0x143
->      #define CSR_SIP             0x144
->     +#define CSR_SNXTI           0x145 /* clic-spec-draft */
->      #define CSR_SINTSTATUS      0x146 /* clic-spec-draft */
->      #define CSR_SINTTHRESH      0x147 /* clic-spec-draft */
->
->     @@ -596,10 +598,24 @@
->      #define MINTSTATUS_SIL                     0x0000ff00 /* sil[7:0] */
->      #define MINTSTATUS_UIL                     0x000000ff /* uil[7:0] */
->
->     +/* mcause */
->     +#define MCAUSE_MINHV                       0x40000000 /* minhv */
->     +#define MCAUSE_MPP                         0x30000000 /* mpp[1:0] */
->     +#define MCAUSE_MPIE                        0x08000000 /* mpie */
->     +#define MCAUSE_MPIL                        0x00ff0000 /* mpil[7:0] */
->     +#define MCAUSE_EXCCODE                     0x00000fff /*
->     exccode[11:0] */
->     +
->      /* sintstatus */
->      #define SINTSTATUS_SIL                     0x0000ff00 /* sil[7:0] */
->      #define SINTSTATUS_UIL                     0x000000ff /* uil[7:0] */
->
->     +/* scause */
->     +#define SCAUSE_SINHV                       0x40000000 /* sinhv */
->     +#define SCAUSE_SPP                         0x10000000 /* spp */
->     +#define SCAUSE_SPIE                        0x08000000 /* spie */
->     +#define SCAUSE_SPIL                        0x00ff0000 /* spil[7:0] */
->     +#define SCAUSE_EXCCODE                     0x00000fff /*
->     exccode[11:0] */
->     +
->      /* MIE masks */
->      #define MIE_SEIE                           (1 << IRQ_S_EXT)
->      #define MIE_UEIE                           (1 << IRQ_U_EXT)
->     diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->     index e12222b77f..72cba080bf 100644
->     --- a/target/riscv/csr.c
->     +++ b/target/riscv/csr.c
->     @@ -774,6 +774,80 @@ static int rmw_mip(CPURISCVState *env, int
->     csrno, target_ulong *ret_value,
->          return 0;
->      }
->
->     +static bool get_xnxti_status(CPURISCVState *env)
->     +{
->     +    CPUState *cs = env_cpu(env);
->     +    int clic_irq, clic_priv, clic_il, pil;
->     +
->     +    if (!env->exccode) { /* No interrupt */
->     +        return false;
->     +    }
->     +    /* The system is not in a CLIC mode */
->     +    if (!riscv_clic_is_clic_mode(env)) {
->     +        return false;
->     +    } else {
->     +        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
->     +                                  &clic_irq);
->     +
->     +        if (env->priv == PRV_M) {
->     +            pil = MAX(get_field(env->mcause, MCAUSE_MPIL),
->     env->mintthresh);
->     +        } else if (env->priv == PRV_S) {
->     +            pil = MAX(get_field(env->scause, SCAUSE_SPIL),
->     env->sintthresh);
->     +        } else {
->     +            qemu_log_mask(LOG_GUEST_ERROR,
->     +                          "CSR: rmw xnxti with unsupported mode\n");
->     +            exit(1);
->     +        }
->     +
->     +        if ((clic_priv != env->priv) || /* No horizontal interrupt */
->     +            (clic_il <= pil) || /* No higher level interrupt */
->     +            (riscv_clic_shv_interrupt(env->clic, clic_priv,
->     cs->cpu_index,
->     +                                      clic_irq))) { /* CLIC
->     vector mode */
->     +            return false;
->     +        } else {
->     +            return true;
->     +        }
->     +    }
->     +}
->     +
->     +static int rmw_mnxti(CPURISCVState *env, int csrno, target_ulong
->     *ret_value,
->     +                     target_ulong new_value, target_ulong write_mask)
->     +{
->     +    int clic_priv, clic_il, clic_irq;
->     +    bool ready;
->     +    CPUState *cs = env_cpu(env);
->     +    if (write_mask) {
->     +        env->mstatus |= new_value & (write_mask & 0b11111);
->     +    }
->     +
->     +    qemu_mutex_lock_iothread();
->
->
-> Hi Zhiwei,
->
-> May I ask what's the purpose to request the BQL here with 
-> /qemu_mutex_lock_iothread()/?
-> Is there any critical data we need to protect in /rmw_mnxti()/?
-> As far I see, /rmw_mnxti()/ won't call /cpu_interrupt()/ which need 
-> BQL to be held before calling.
-> Am I missing anything?
-In my opinion, if you read or write any  MMIO register, you need to hold 
-the BQL. As you can quickly see,
-it calls riscv_clic_clean_pending. That's why it should hold the BQL.
+Alistair
 
-Zhiwei
 >
-> Regard,
-> Frank Chang
+> I can rebase this series on ACLINT support patches and also include
+> more AIA emulation patches (APLIC and IMSIC) in the AIA series.
 >
->     +    ready = get_xnxti_status(env);
->     +    if (ready) {
->     +        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
->     +                                  &clic_irq);
->     +        if (write_mask) {
->     +            bool edge = riscv_clic_edge_triggered(env->clic,
->     clic_priv,
->     + cs->cpu_index, clic_irq);
->     +            if (edge) {
->     +                riscv_clic_clean_pending(env->clic, clic_priv,
->     +                                         cs->cpu_index, clic_irq);
->     +            }
->     +            env->mintstatus = set_field(env->mintstatus,
->     +                                        MINTSTATUS_MIL, clic_il);
->     +            env->mcause = set_field(env->mcause, MCAUSE_EXCCODE,
->     clic_irq);
->     +        }
->     +        if (ret_value) {
->     +            *ret_value = (env->mtvt & ~0x3f) +
->     sizeof(target_ulong) * clic_irq;
->     +        }
->     +    } else {
->     +        if (ret_value) {
->     +            *ret_value = 0;
->     +        }
->     +    }
->     +    qemu_mutex_unlock_iothread();
->     +    return 0;
->     +}
->     +
->      static int read_mintstatus(CPURISCVState *env, int csrno,
->     target_ulong *val)
->      {
->          *val = env->mintstatus;
->     @@ -982,6 +1056,44 @@ static int rmw_sip(CPURISCVState *env, int
->     csrno, target_ulong *ret_value,
->          return ret;
->      }
+> Regards,
+> Anup
 >
->     +static int rmw_snxti(CPURISCVState *env, int csrno, target_ulong
->     *ret_value,
->     +                     target_ulong new_value, target_ulong write_mask)
->     +{
->     +    int clic_priv, clic_il, clic_irq;
->     +    bool ready;
->     +    CPUState *cs = env_cpu(env);
->     +    if (write_mask) {
->     +        env->mstatus |= new_value & (write_mask & 0b11111);
->     +    }
->     +
->     +    qemu_mutex_lock_iothread();
->     +    ready = get_xnxti_status(env);
->     +    if (ready) {
->     +        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
->     +                                  &clic_irq);
->     +        if (write_mask) {
->     +            bool edge = riscv_clic_edge_triggered(env->clic,
->     clic_priv,
->     + cs->cpu_index, clic_irq);
->     +            if (edge) {
->     +                riscv_clic_clean_pending(env->clic, clic_priv,
->     +                                         cs->cpu_index, clic_irq);
->     +            }
->     +            env->mintstatus = set_field(env->mintstatus,
->     +                                        MINTSTATUS_SIL, clic_il);
->     +            env->scause = set_field(env->scause, SCAUSE_EXCCODE,
->     clic_irq);
->     +        }
->     +        if (ret_value) {
->     +            *ret_value = (env->stvt & ~0x3f) +
->     sizeof(target_ulong) * clic_irq;
->     +        }
->     +    } else {
->     +        if (ret_value) {
->     +            *ret_value = 0;
->     +        }
->     +    }
->     +    qemu_mutex_unlock_iothread();
->     +    return 0;
->     +}
->     +
->      static int read_sintstatus(CPURISCVState *env, int csrno,
->     target_ulong *val)
->      {
->          target_ulong mask = SINTSTATUS_SIL | SINTSTATUS_UIL;
->     @@ -1755,6 +1867,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+> >
+> >  hw/riscv/virt.c           |   11 +-
+> >  target/riscv/cpu.c        |   32 +-
+> >  target/riscv/cpu.h        |   56 +-
+> >  target/riscv/cpu_bits.h   |  128 +++++
+> >  target/riscv/cpu_helper.c |  245 ++++++++-
+> >  target/riscv/csr.c        | 1059 +++++++++++++++++++++++++++++++++++--
+> >  target/riscv/machine.c    |   26 +-
+> >  7 files changed, 1454 insertions(+), 103 deletions(-)
+> >
+> > --
+> > 2.25.1
+> >
 >
->          /* Machine Mode Core Level Interrupt Controller */
->          [CSR_MTVT] = { "mtvt", clic,  read_mtvt,  write_mtvt   },
->     +    [CSR_MNXTI] = { "mnxti", clic,  NULL,  NULL, rmw_mnxti   },
->          [CSR_MINTSTATUS] = { "mintstatus", clic, read_mintstatus },
->          [CSR_MINTTHRESH] = { "mintthresh", clic, read_mintthresh,
->                               write_mintthresh },
->     @@ -1766,6 +1879,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->
->          /* Supervisor Mode Core Level Interrupt Controller */
->          [CSR_STVT] = { "stvt", clic,  read_stvt, write_stvt    },
->     +    [CSR_SNXTI] = { "snxti", clic,  NULL,  NULL, rmw_snxti   },
->
->      #endif /* !CONFIG_USER_ONLY */
->      };
->     -- 
->     2.25.1
->
->
-
---------------B057772D64E9C34DEFD66AA1
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 6/11/21 4:15 PM, Frank Chang wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CANzO1D1jotPbDxJj3ZxJZ7BdT0je64A9DAudEfm8=-m4DQFzoA@mail.gmail.com">
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <div dir="ltr">
-        <div dir="ltr">LIU Zhiwei &lt;<a
-            href="mailto:zhiwei_liu@c-sky.com" moz-do-not-send="true">zhiwei_liu@c-sky.com</a>&gt;
-          於 2021年4月9日 週五 下午3:52寫道：<br>
-        </div>
-        <div class="gmail_quote">
-          <blockquote class="gmail_quote" style="margin:0px 0px 0px
-            0.8ex;border-left:1px solid
-            rgb(204,204,204);padding-left:1ex">The CSR can be used by
-            software to service the next horizontal interrupt<br>
-            when it has greater level than the saved interrupt context<br>
-            (held in xcause`.pil`) and greater level than the interrupt
-            threshold of<br>
-            the corresponding privilege mode,<br>
-            <br>
-            Signed-off-by: LIU Zhiwei &lt;<a
-              href="mailto:zhiwei_liu@c-sky.com" target="_blank"
-              moz-do-not-send="true">zhiwei_liu@c-sky.com</a>&gt;<br>
-            ---<br>
-             target/riscv/cpu_bits.h |  16 ++++++<br>
-             target/riscv/csr.c      | 114
-            ++++++++++++++++++++++++++++++++++++++++<br>
-             2 files changed, 130 insertions(+)<br>
-            <br>
-            diff --git a/target/riscv/cpu_bits.h
-            b/target/riscv/cpu_bits.h<br>
-            index 7922097776..494e41edc9 100644<br>
-            --- a/target/riscv/cpu_bits.h<br>
-            +++ b/target/riscv/cpu_bits.h<br>
-            @@ -166,6 +166,7 @@<br>
-             #define CSR_MCAUSE          0x342<br>
-             #define CSR_MTVAL           0x343<br>
-             #define CSR_MIP             0x344<br>
-            +#define CSR_MNXTI           0x345 /* clic-spec-draft */<br>
-             #define CSR_MINTSTATUS      0x346 /* clic-spec-draft */<br>
-             #define CSR_MINTTHRESH      0x347 /* clic-spec-draft */<br>
-            <br>
-            @@ -187,6 +188,7 @@<br>
-             #define CSR_SCAUSE          0x142<br>
-             #define CSR_STVAL           0x143<br>
-             #define CSR_SIP             0x144<br>
-            +#define CSR_SNXTI           0x145 /* clic-spec-draft */<br>
-             #define CSR_SINTSTATUS      0x146 /* clic-spec-draft */<br>
-             #define CSR_SINTTHRESH      0x147 /* clic-spec-draft */<br>
-            <br>
-            @@ -596,10 +598,24 @@<br>
-             #define MINTSTATUS_SIL                     0x0000ff00 /*
-            sil[7:0] */<br>
-             #define MINTSTATUS_UIL                     0x000000ff /*
-            uil[7:0] */<br>
-            <br>
-            +/* mcause */<br>
-            +#define MCAUSE_MINHV                       0x40000000 /*
-            minhv */<br>
-            +#define MCAUSE_MPP                         0x30000000 /*
-            mpp[1:0] */<br>
-            +#define MCAUSE_MPIE                        0x08000000 /*
-            mpie */<br>
-            +#define MCAUSE_MPIL                        0x00ff0000 /*
-            mpil[7:0] */<br>
-            +#define MCAUSE_EXCCODE                     0x00000fff /*
-            exccode[11:0] */<br>
-            +<br>
-             /* sintstatus */<br>
-             #define SINTSTATUS_SIL                     0x0000ff00 /*
-            sil[7:0] */<br>
-             #define SINTSTATUS_UIL                     0x000000ff /*
-            uil[7:0] */<br>
-            <br>
-            +/* scause */<br>
-            +#define SCAUSE_SINHV                       0x40000000 /*
-            sinhv */<br>
-            +#define SCAUSE_SPP                         0x10000000 /*
-            spp */<br>
-            +#define SCAUSE_SPIE                        0x08000000 /*
-            spie */<br>
-            +#define SCAUSE_SPIL                        0x00ff0000 /*
-            spil[7:0] */<br>
-            +#define SCAUSE_EXCCODE                     0x00000fff /*
-            exccode[11:0] */<br>
-            +<br>
-             /* MIE masks */<br>
-             #define MIE_SEIE                           (1 &lt;&lt;
-            IRQ_S_EXT)<br>
-             #define MIE_UEIE                           (1 &lt;&lt;
-            IRQ_U_EXT)<br>
-            diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-            index e12222b77f..72cba080bf 100644<br>
-            --- a/target/riscv/csr.c<br>
-            +++ b/target/riscv/csr.c<br>
-            @@ -774,6 +774,80 @@ static int rmw_mip(CPURISCVState *env,
-            int csrno, target_ulong *ret_value,<br>
-                 return 0;<br>
-             }<br>
-            <br>
-            +static bool get_xnxti_status(CPURISCVState *env)<br>
-            +{<br>
-            +    CPUState *cs = env_cpu(env);<br>
-            +    int clic_irq, clic_priv, clic_il, pil;<br>
-            +<br>
-            +    if (!env-&gt;exccode) { /* No interrupt */<br>
-            +        return false;<br>
-            +    }<br>
-            +    /* The system is not in a CLIC mode */<br>
-            +    if (!riscv_clic_is_clic_mode(env)) {<br>
-            +        return false;<br>
-            +    } else {<br>
-            +        riscv_clic_decode_exccode(env-&gt;exccode,
-            &amp;clic_priv, &amp;clic_il,<br>
-            +                                  &amp;clic_irq);<br>
-            +<br>
-            +        if (env-&gt;priv == PRV_M) {<br>
-            +            pil = MAX(get_field(env-&gt;mcause,
-            MCAUSE_MPIL), env-&gt;mintthresh);<br>
-            +        } else if (env-&gt;priv == PRV_S) {<br>
-            +            pil = MAX(get_field(env-&gt;scause,
-            SCAUSE_SPIL), env-&gt;sintthresh);<br>
-            +        } else {<br>
-            +            qemu_log_mask(LOG_GUEST_ERROR,<br>
-            +                          "CSR: rmw xnxti with unsupported
-            mode\n");<br>
-            +            exit(1);<br>
-            +        }<br>
-            +<br>
-            +        if ((clic_priv != env-&gt;priv) || /* No horizontal
-            interrupt */<br>
-            +            (clic_il &lt;= pil) || /* No higher level
-            interrupt */<br>
-            +            (riscv_clic_shv_interrupt(env-&gt;clic,
-            clic_priv, cs-&gt;cpu_index,<br>
-            +                                      clic_irq))) { /* CLIC
-            vector mode */<br>
-            +            return false;<br>
-            +        } else {<br>
-            +            return true;<br>
-            +        }<br>
-            +    }<br>
-            +}<br>
-            +<br>
-            +static int rmw_mnxti(CPURISCVState *env, int csrno,
-            target_ulong *ret_value,<br>
-            +                     target_ulong new_value, target_ulong
-            write_mask)<br>
-            +{<br>
-            +    int clic_priv, clic_il, clic_irq;<br>
-            +    bool ready;<br>
-            +    CPUState *cs = env_cpu(env);<br>
-            +    if (write_mask) {<br>
-            +        env-&gt;mstatus |= new_value &amp; (write_mask
-            &amp; 0b11111);<br>
-            +    }<br>
-            +<br>
-            +    qemu_mutex_lock_iothread();<br>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>Hi Zhiwei,</div>
-          <div><br>
-          </div>
-          <div>May I ask what's the purpose to request the BQL here
-            with <i>qemu_mutex_lock_iothread()</i>?</div>
-          <div>Is there any critical data we need to protect in <i>rmw_mnxti()</i>?</div>
-          <div>As far I see, <i>rmw_mnxti()</i> won't call <i>cpu_interrupt()</i>
-            which need BQL to be held before calling.</div>
-          <div>Am I missing anything?</div>
-        </div>
-      </div>
-    </blockquote>
-    <div dir="ltr">
-      <div class="gmail_quote">
-        <div>In my opinion, if you read or write any  MMIO register, you
-          need to hold the BQL. As you can quickly see,</div>
-        <div>it calls riscv_clic_clean_pending. That's why it should
-          hold the BQL.</div>
-        <div><br>
-        </div>
-        <div>Zhiwei<br>
-        </div>
-      </div>
-    </div>
-    <blockquote type="cite"
-cite="mid:CANzO1D1jotPbDxJj3ZxJZ7BdT0je64A9DAudEfm8=-m4DQFzoA@mail.gmail.com">
-      <div dir="ltr">
-        <div class="gmail_quote">
-          <div><br>
-          </div>
-          <div>Regard,</div>
-          <div>Frank Chang</div>
-          <div> </div>
-          <blockquote class="gmail_quote" style="margin:0px 0px 0px
-            0.8ex;border-left:1px solid
-            rgb(204,204,204);padding-left:1ex">
-            +    ready = get_xnxti_status(env);<br>
-            +    if (ready) {<br>
-            +        riscv_clic_decode_exccode(env-&gt;exccode,
-            &amp;clic_priv, &amp;clic_il,<br>
-            +                                  &amp;clic_irq);<br>
-            +        if (write_mask) {<br>
-            +            bool edge =
-            riscv_clic_edge_triggered(env-&gt;clic, clic_priv,<br>
-            +                                                 
-            cs-&gt;cpu_index, clic_irq);<br>
-            +            if (edge) {<br>
-            +                riscv_clic_clean_pending(env-&gt;clic,
-            clic_priv,<br>
-            +                                         cs-&gt;cpu_index,
-            clic_irq);<br>
-            +            }<br>
-            +            env-&gt;mintstatus =
-            set_field(env-&gt;mintstatus,<br>
-            +                                        MINTSTATUS_MIL,
-            clic_il);<br>
-            +            env-&gt;mcause = set_field(env-&gt;mcause,
-            MCAUSE_EXCCODE, clic_irq);<br>
-            +        }<br>
-            +        if (ret_value) {<br>
-            +            *ret_value = (env-&gt;mtvt &amp; ~0x3f) +
-            sizeof(target_ulong) * clic_irq;<br>
-            +        }<br>
-            +    } else {<br>
-            +        if (ret_value) {<br>
-            +            *ret_value = 0;<br>
-            +        }<br>
-            +    }<br>
-            +    qemu_mutex_unlock_iothread();<br>
-            +    return 0;<br>
-            +}<br>
-            +<br>
-             static int read_mintstatus(CPURISCVState *env, int csrno,
-            target_ulong *val)<br>
-             {<br>
-                 *val = env-&gt;mintstatus;<br>
-            @@ -982,6 +1056,44 @@ static int rmw_sip(CPURISCVState *env,
-            int csrno, target_ulong *ret_value,<br>
-                 return ret;<br>
-             }<br>
-            <br>
-            +static int rmw_snxti(CPURISCVState *env, int csrno,
-            target_ulong *ret_value,<br>
-            +                     target_ulong new_value, target_ulong
-            write_mask)<br>
-            +{<br>
-            +    int clic_priv, clic_il, clic_irq;<br>
-            +    bool ready;<br>
-            +    CPUState *cs = env_cpu(env);<br>
-            +    if (write_mask) {<br>
-            +        env-&gt;mstatus |= new_value &amp; (write_mask
-            &amp; 0b11111);<br>
-            +    }<br>
-            +<br>
-            +    qemu_mutex_lock_iothread();<br>
-            +    ready = get_xnxti_status(env);<br>
-            +    if (ready) {<br>
-            +        riscv_clic_decode_exccode(env-&gt;exccode,
-            &amp;clic_priv, &amp;clic_il,<br>
-            +                                  &amp;clic_irq);<br>
-            +        if (write_mask) {<br>
-            +            bool edge =
-            riscv_clic_edge_triggered(env-&gt;clic, clic_priv,<br>
-            +                                                 
-            cs-&gt;cpu_index, clic_irq);<br>
-            +            if (edge) {<br>
-            +                riscv_clic_clean_pending(env-&gt;clic,
-            clic_priv,<br>
-            +                                         cs-&gt;cpu_index,
-            clic_irq);<br>
-            +            }<br>
-            +            env-&gt;mintstatus =
-            set_field(env-&gt;mintstatus,<br>
-            +                                        MINTSTATUS_SIL,
-            clic_il);<br>
-            +            env-&gt;scause = set_field(env-&gt;scause,
-            SCAUSE_EXCCODE, clic_irq);<br>
-            +        }<br>
-            +        if (ret_value) {<br>
-            +            *ret_value = (env-&gt;stvt &amp; ~0x3f) +
-            sizeof(target_ulong) * clic_irq;<br>
-            +        }<br>
-            +    } else {<br>
-            +        if (ret_value) {<br>
-            +            *ret_value = 0;<br>
-            +        }<br>
-            +    }<br>
-            +    qemu_mutex_unlock_iothread();<br>
-            +    return 0;<br>
-            +}<br>
-            +<br>
-             static int read_sintstatus(CPURISCVState *env, int csrno,
-            target_ulong *val)<br>
-             {<br>
-                 target_ulong mask = SINTSTATUS_SIL | SINTSTATUS_UIL;<br>
-            @@ -1755,6 +1867,7 @@ riscv_csr_operations
-            csr_ops[CSR_TABLE_SIZE] = {<br>
-            <br>
-                 /* Machine Mode Core Level Interrupt Controller */<br>
-                 [CSR_MTVT] = { "mtvt", clic,  read_mtvt,  write_mtvt   
-              },<br>
-            +    [CSR_MNXTI] = { "mnxti", clic,  NULL,  NULL, 
-            rmw_mnxti   },<br>
-                 [CSR_MINTSTATUS] = { "mintstatus", clic, 
-            read_mintstatus },<br>
-                 [CSR_MINTTHRESH] = { "mintthresh", clic, 
-            read_mintthresh,<br>
-                                      write_mintthresh },<br>
-            @@ -1766,6 +1879,7 @@ riscv_csr_operations
-            csr_ops[CSR_TABLE_SIZE] = {<br>
-            <br>
-                 /* Supervisor Mode Core Level Interrupt Controller */<br>
-                 [CSR_STVT] = { "stvt", clic,  read_stvt, write_stvt   
-               },<br>
-            +    [CSR_SNXTI] = { "snxti", clic,  NULL,  NULL, 
-            rmw_snxti   },<br>
-            <br>
-             #endif /* !CONFIG_USER_ONLY */<br>
-             };<br>
-            -- <br>
-            2.25.1<br>
-            <br>
-            <br>
-          </blockquote>
-        </div>
-      </div>
-    </blockquote>
-  </body>
-</html>
-
---------------B057772D64E9C34DEFD66AA1--
 
