@@ -1,65 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lrU0V-0001Vd-1w
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 19:22:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53314)
+	id 1lrWzS-0006Xt-Pd
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Jun 2021 22:33:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46542)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lrU0T-0001Ux-04; Thu, 10 Jun 2021 19:22:37 -0400
-Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:43762)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lrU0Q-0003HO-BS; Thu, 10 Jun 2021 19:22:36 -0400
-Received: by mail-yb1-xb32.google.com with SMTP id b9so1670751ybg.10;
- Thu, 10 Jun 2021 16:22:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=J5M73s/PDH+0AeamuOPaF28gVKDEqhCMz3AOY2J7RtI=;
- b=JomCL2EOJTRsWvT/rDWvH8eYMW3olVYUzkd0JrkktoeglNR7HDXztbgap2FK4HAFVk
- Yvn666oubIoOvH8eUYiIuDPq2xSHQKLg2i/C8Z3xdQVM15UF07C4LPYBOjKKzakQvf96
- km1OYsVgADLYuTfFR+mNfP04fGDsKjYT/X4tSOWQ/ysa7ybVSklZp4DFCnTNq+R5yrzs
- e2T5X7NDvzR2fEcX4UIW+qg9dlmxENkT/7yM3D0Y3/RdCriGOTF2T4CO649r+qjW0WVx
- jGEF2FE4AMthoSVb1MM5NLimWsK/9dJHbTx6INAd/syKsXsjjDJlCOMK3StDuioje6d/
- GjLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=J5M73s/PDH+0AeamuOPaF28gVKDEqhCMz3AOY2J7RtI=;
- b=T8XIp1drnyZxNuTvAkmLINKVzDIZMU+2UqrGyeb+utr+xcifgckt94f8e74E/+JDWi
- Z5TjErXUiu89VUzRrzKBNWA+T1eRDtQFAIV1I5vHbGAsv1Bq2VJX5hwMggUIT+75MqIv
- E2H35pQiVL7GPS7He2z/3zKiEC+xGr/QPIJnRrowjhM40EvUXvP7xUyB8xXZvWzaHw7J
- WoIRtPOqMxDuFCkqoNS5Igwue+g/LejeN48CeekA1tUnv1ekaTw/hrAUdc7Gg69O/lWc
- b/W/G1qjKJ7HX0Yh4O/M8T7W1DyI+x8FaZVPoG9ZOgMBvrlw26eO8zJFcvGShfe/8X41
- lB/A==
-X-Gm-Message-State: AOAM530LbVlCosQ7tqCRy+2cyO3wo9ma1EQQ6QQNoWbpZbgAbzfOEICh
- d6uidp4oY6kjxq/VVuFm41agYqGl5VKE9v5+47E=
-X-Google-Smtp-Source: ABdhPJzRWul8SmEklfm7Cb4UJA6iuhuCuqqUuivVRB+Ms9OvkQIWRRsPfVHam6BcFmNf1StMQcZ1v4KZScxCDaVaCZE=
-X-Received: by 2002:a25:be09:: with SMTP id h9mr1794973ybk.239.1623367352668; 
- Thu, 10 Jun 2021 16:22:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1lrWzR-0006Wp-5f; Thu, 10 Jun 2021 22:33:45 -0400
+Received: from out28-1.mail.aliyun.com ([115.124.28.1]:47533)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1lrWzN-0001fD-BB; Thu, 10 Jun 2021 22:33:44 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07796431|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_regular_dialog|0.0845167-0.00297521-0.912508;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047198; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KQmAr0O_1623378811; 
+Received: from 172.27.117.59(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.KQmAr0O_1623378811)
+ by smtp.aliyun-inc.com(10.147.41.138);
+ Fri, 11 Jun 2021 10:33:31 +0800
+Subject: Re: TCG op for 32 bit only cpu on qemu-riscv64
+To: Richard Henderson <richard.henderson@linaro.org>,
+ QEMU Developers <qemu-devel@nongnu.org>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>
+References: <97935519-42c8-71c8-3d87-30aa4cafc909@c-sky.com>
+ <618e9348-c420-b560-1f67-3608023985a7@linaro.org>
+ <7ac5990e-5f87-3d96-d8b5-bd7997fac0ee@c-sky.com>
+ <eb54d2d9-db15-e2d7-e245-f61587b0ca4e@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <980660a9-0c4b-bd37-e47b-9b5e1d128aef@c-sky.com>
+Date: Fri, 11 Jun 2021 10:33:31 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-References: <20210610144424.8658-1-ruinland@andestech.com>
- <20210610144424.8658-2-ruinland@andestech.com>
-In-Reply-To: <20210610144424.8658-2-ruinland@andestech.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 11 Jun 2021 07:22:21 +0800
-Message-ID: <CAEUhbmVJCLU1EmO4taMpGbVbsdrZyH9CRd-esMj6k9nh2aFH+g@mail.gmail.com>
-Subject: Re: [RFC PATCH v3 1/2] Adding Andes AX25 CPU model
-To: Ruinland Chuan-Tzu Tsai <ruinland@andestech.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Dylan Jhong <dylan@andestech.com>, Alan Kao <alankao@andestech.com>, 
- wangjunqiang <wangjunqiang@iscas.ac.cn>, Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <eb54d2d9-db15-e2d7-e245-f61587b0ca4e@linaro.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.1; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-1.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -72,60 +59,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2021 23:22:37 -0000
+X-List-Received-Date: Fri, 11 Jun 2021 02:33:45 -0000
 
-Hi Ruinland,
 
-On Thu, Jun 10, 2021 at 10:45 PM Ruinland Chuan-Tzu Tsai
-<ruinland@andestech.com> wrote:
+On 6/10/21 9:29 PM, Richard Henderson wrote:
+> On 6/9/21 6:43 PM, LIU Zhiwei wrote:
+>> 1)First a multiply instruction, if the source value big enough, it 
+>> will return a result with some bits not zero in MSW 32-bit.
 >
-> From: Ruinaldn ChuanTzu Tsai <ruinland@andestech.com>
+> Multiply is fine.  Input bits outside the low 32 cannot appear in the 
+> low 32 of the output.  Multiply-high-part on the other hand will 
+> require sign- or zero-extension of inputs.
 >
-> Adding the skeleton of Andes Technology AX25 CPU model for the future commits,
-> which will utilize custom/vendor CSR handling mechaism.
-
-typo: mechanism
-
-> ---
->  target/riscv/cpu.c | 8 ++++++++
->  target/riscv/cpu.h | 1 +
->  2 files changed, 9 insertions(+)
+>> 2)If next instruction is a divide instruction,  the MSW 32-bit will 
+>> influence the divide instruction result.
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ddea8fbeeb..4ae21cbf9b 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -159,6 +159,13 @@ static void rv64_base_cpu_init(Object *obj)
->      set_misa(env, RV64);
->  }
+> Yes, division requires extension too.
 >
-> +static void ax25_cpu_init(Object *obj)
-> +{
-> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> +    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-> +    set_priv_version(env, PRIV_VERSION_1_10_0);
-> +}
-> +
->  static void rv64_sifive_u_cpu_init(Object *obj)
->  {
->      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> @@ -705,6 +712,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32_sifive_u_cpu_init),
->  #elif defined(TARGET_RISCV64)
->      DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           rv64_base_cpu_init),
-> +    DEFINE_CPU(TYPE_RISCV_CPU_AX25,             ax25_cpu_init),
+>> So I think use *_tl can't satisfy the need to run 32-bit program on 
+>> qemu-riscv64.
+>
+> I said some operations will require extra work -- I gave right-shift 
+> as an example.
+>
+> You just have to be careful about deciding what extra work to do. I am 
+> suggesting that truncation to *_i32 is almost always not the correct 
+> answer.
+>
+> Perhaps make it easier by changing gen_get_gpr and gen_set_gpr:
+>
+> /* Return sign-extended version of gpr. */
+> static void get_gpr_s(DisasContext *ctx, TCGv t, int reg_num)
+> {
+>     if (reg_num == 0) {
+>         tcg_gen_movi_tl(t, 0);
+>     } else if (is_32bit(ctx)) {
+>         tcg_gen_ext32s_tl(t, cpu_gpr[reg_num]);
+>     } else {
+>         tcg_gen_mov_tl(t, cpu_gpr[reg_num]);
+>     }
+> }
+>
+> /* Return zero-extended version of gpr. */
+> static void get_gpr_u(DisasContext *ctx, TCGv t, int reg_num);
+> {
+>     if (reg_num == 0) {
+>         tcg_gen_movi_tl(t, 0);
+>     } else if (is_32bit(ctx)) {
+>         tcg_gen_ext32u_tl(t, cpu_gpr[reg_num]);
+>     } else {
+>         tcg_gen_mov_tl(t, cpu_gpr[reg_num]);
+>     }
+> }
+>
+> /* Return gpr with undefined high bits (which will be ignored). */
+> static void get_gpr_x(TCGv t, int reg_num);
+> {
+>     if (reg_num == 0) {
+>         tcg_gen_movi_tl(t, 0);
+>     } else {
+>         tcg_gen_mov_tl(t, cpu_gpr[reg_num]);
+>     }
+> }
+>
+> And similarly for set.
+>
+It's very instructive. Thanks.
 
-What about the 32-bit variant of A25, and the SMP variant of A25MP/AX25MP?
+I once thought we have to split the registers in CPURISCVSTATE into two 
+parts, gpr32 or gpr64.
+Now I think we can still use most currently work with  a small 
+cost(tcg_gen_ext32s_i64 has more cost than tcg_gen_mov_i32)
 
-Also how about the latest A45 (RV32) and AX45 (RV64)?
+I will have a try later. Thanks again.
 
-How should we name these? I think we may need to name this using the
-SMP variant name, no?
+Best Regards,
+Zhiwei
 
->      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
->      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
->  #endif
-
-Regards,
-Bin
+>
+> r~
 
