@@ -1,50 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lslc9-0002gX-4e
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Jun 2021 08:22:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39594)
+	id 1lslcJ-0002lt-WE
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Jun 2021 08:23:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39614)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lslc7-0002gH-DL; Mon, 14 Jun 2021 08:22:47 -0400
-Received: from mail-yb1-xb31.google.com ([2607:f8b0:4864:20::b31]:33522)
+ id 1lslcC-0002gy-DF; Mon, 14 Jun 2021 08:22:54 -0400
+Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36]:42814)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lslc3-0000Pa-7T; Mon, 14 Jun 2021 08:22:47 -0400
-Received: by mail-yb1-xb31.google.com with SMTP id f84so15231840ybg.0;
- Mon, 14 Jun 2021 05:22:42 -0700 (PDT)
+ id 1lslc8-0000Rv-0j; Mon, 14 Jun 2021 08:22:51 -0400
+Received: by mail-yb1-xb36.google.com with SMTP id g142so15133587ybf.9;
+ Mon, 14 Jun 2021 05:22:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0K2wRWqScRXRQgly9t3Y2AjcCISPtkeI3sQt0cb50Rk=;
- b=BH01b6J9zrNzOcN+o0MQ9zf9KBdj0kY0b4Aqrn6FCTgnuajSu2PttnFU4cHP4bAE9m
- 7WmSqCMQCaapP/w3N3SC5zxWKFaiF+GOUvyNylhVphVoo7k0vqJ6dZ1Ay1pJl7oJzxf0
- bLikNNUz1UX9TtDcgkeHyfiFkacd8FzjeKZwPv/Nel+p2Nscna6KyCFrmxtv/Igu0O8D
- oIsqUaa0lxCz4gUYukldx8yo46HmBbb5Ddd2C0tKrITwhQ4DRvbNvrpT3UJ1rKgBjC3R
- 9+umzOVg8PtU6iZCumYyCfK3jMifmgeUCBSDVTlEvUxxjzqim8AY6i506hjyOjGEnsHx
- kbKQ==
+ :cc; bh=oP7umLsqnph4YuoN7Yp376Ozt1Rq0svdV4nQE87/y1s=;
+ b=E85WZ2gCcpeLE69d5xzZAU/lG4VKnthx9ZHVUjzCd02pcuUdS1+vzrN6rR4LG1pxzI
+ vcMiD3n9y9OQPm2Pn6AzaAIp7M+ia3AXddXpwyrzLh5qjSi5/oWLHJzYMkxP2pQVpsAf
+ n9P5RFKbX0lJM6ELh3n9J6F253JEa6FPSR0UCjr4fk3gv2g4zEICdBpTGpFwHdpEem5r
+ sRYj9nL/4lMc2yec0io4OafYWF2Scg+sLwKPeKvYcEJ9Iml3n1UfruEA2gaYv4IAVG2n
+ 7qTW5q1TSlTo5GsbDq3Qay1u0V0KdO7uEpPfFt5VSihTV9YdmvHNmTiXFJoEzWR/HoI8
+ JjiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=0K2wRWqScRXRQgly9t3Y2AjcCISPtkeI3sQt0cb50Rk=;
- b=T3N/+yAyC0YYTw3iYc5BWzMS6RAtOwljmEqNuCrj9JD9YyXnbD/V4o9+ajoU8Ula2h
- m4EmhJFe1k6nZISb3nXzUnsZEHSWA8Vj1+QkJqC5pDke2QOm8T71ClqgQKkq2cMdQtDX
- InhCpKqp5LPiweiESMUB0aMjGMEwMfqgghM7P9hUSQbWnEStzlPXplPc47PRYNbY+iRT
- 8RceMb1BoajUpCqSPYiDsbnBf5zgV76CWpNN6mMKdLBSHYfQV2w8INT/75ZGoF/oHV1J
- 0ITFO1u5QPiJ59KXj+PWprXyoY5ijeNctKxTJFuj/2Fj9P0ytDTVhvgIHOb57+uZdXiM
- 44CA==
-X-Gm-Message-State: AOAM531DlDVTGxhw4SwfJkse383u59cG/rwjXPyWbof0Di9yPM1xkfsG
- V1dk8PUOT1QVSxjKEOticqjhm//V3dHHdq+kIPM=
-X-Google-Smtp-Source: ABdhPJyPl0rS9L+D9lSKHmypMyWQ9GOnvsdaBuXAOjq7Ve/jxFLhtC9uis0M6GCHTeJaNJheAkM4mc48F0/BRi7/8kY=
-X-Received: by 2002:a25:b8c:: with SMTP id 134mr24542812ybl.332.1623673361133; 
- Mon, 14 Jun 2021 05:22:41 -0700 (PDT)
+ bh=oP7umLsqnph4YuoN7Yp376Ozt1Rq0svdV4nQE87/y1s=;
+ b=Rs6LNrpsqb0YGiJXxh42DBoW5FbbTGiCn7DvyjIoFdrBAFRUK4t89kkacY9pONLvjD
+ rKitdjf/EPXHDr3v35ZnNYrZCm3cXeAz8wpzgcvBs6L5FmhusJBgaVauRC18KQ/iQNby
+ 6Uh+Qw+aKnDrqkcsXQYdCREX+sMXUTzJhwT2jst/szrKlP6pWTirms1W8Fzaj8s2IaMY
+ EEZZTg3Hj/TjnQqd0F08n2zPthm/Rw7YocoF/lyuP4gkoOBcMlZDEH+zzFcGtrCOF7aT
+ nYKtW67IXJBqadVCXBFgnWuih/ZX+FJVNpQtEldqjK98HOQB6JVwKjWToAFywt/B8UGg
+ uwog==
+X-Gm-Message-State: AOAM531rFEUPnyffk90BlYd87GnEQTVrMXB4LXRhUqhkYXGE0c0TjFmE
+ New3gn0UmS6TnLOogug6XMeOpO1Kdi+S9szCPVM=
+X-Google-Smtp-Source: ABdhPJz98iIScc8W/YsWaaboSYxOP71xsNz1GMm3d91itkNpFs3wwG+Zl2k63C7DviaBd9ZYpgYuILazVZUmU7sprFs=
+X-Received: by 2002:a25:b701:: with SMTP id t1mr14434045ybj.517.1623673366437; 
+ Mon, 14 Jun 2021 05:22:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210612160615.330768-1-anup.patel@wdc.com>
- <20210612160615.330768-2-anup.patel@wdc.com>
-In-Reply-To: <20210612160615.330768-2-anup.patel@wdc.com>
+ <20210612160615.330768-3-anup.patel@wdc.com>
+In-Reply-To: <20210612160615.330768-3-anup.patel@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 14 Jun 2021 20:22:28 +0800
-Message-ID: <CAEUhbmUU2-304taNqP_h6cBA83rAJc0Ck_EdnyYaQXSW3t-EOg@mail.gmail.com>
-Subject: Re: [PATCH v1 1/3] hw/intc: Upgrade the SiFive CLINT implementation
- to RISC-V ACLINT
+Date: Mon, 14 Jun 2021 20:22:33 +0800
+Message-ID: <CAEUhbmWmFuyLVd95-Jgwqr022N82iBKfXxqvczc8i0C2SWrBuQ@mail.gmail.com>
+Subject: Re: [PATCH v1 2/3] hw/riscv: virt: Re-factor FDT generation
 To: Anup Patel <anup.patel@wdc.com>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -54,8 +53,8 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Anup Patel <anup@brainfault.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb36.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -75,1126 +74,631 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jun 2021 12:22:47 -0000
+X-List-Received-Date: Mon, 14 Jun 2021 12:22:54 -0000
 
-On Sun, Jun 13, 2021 at 12:08 AM Anup Patel <anup.patel@wdc.com> wrote:
+On Sun, Jun 13, 2021 at 12:12 AM Anup Patel <anup.patel@wdc.com> wrote:
 >
-> The RISC-V ACLINT is more modular and backward compatible with
-> original SiFive CLINT so instead of duplicating the orignal
-> SiFive CLINT implementation we upgrade the current SiFive CLINT
-> implementation to RISC-V ACLINT implementation.
+> We re-factor and break the FDT generation into smaller functions
+> so that it is easier to modify FDT generation for different
+> configurations of virt machine.
 >
 > Signed-off-by: Anup Patel <anup.patel@wdc.com>
 > ---
->  hw/intc/Kconfig                |   2 +-
->  hw/intc/meson.build            |   2 +-
->  hw/intc/riscv_aclint.c         | 374 +++++++++++++++++++++++++++++++++
->  hw/intc/sifive_clint.c         | 266 -----------------------
->  hw/riscv/Kconfig               |  10 +-
->  hw/riscv/microchip_pfsoc.c     |  12 +-
->  hw/riscv/sifive_e.c            |  12 +-
->  hw/riscv/sifive_u.c            |  14 +-
->  hw/riscv/spike.c               |  15 +-
->  hw/riscv/virt.c                |  15 +-
->  include/hw/intc/riscv_aclint.h |  73 +++++++
->  include/hw/intc/sifive_clint.h |  60 ------
->  12 files changed, 494 insertions(+), 361 deletions(-)
->  create mode 100644 hw/intc/riscv_aclint.c
->  delete mode 100644 hw/intc/sifive_clint.c
->  create mode 100644 include/hw/intc/riscv_aclint.h
->  delete mode 100644 include/hw/intc/sifive_clint.h
+>  hw/riscv/virt.c | 514 ++++++++++++++++++++++++++++++------------------
+>  1 file changed, 320 insertions(+), 194 deletions(-)
 >
-> diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
-> index f4694088a4..78aed93c45 100644
-> --- a/hw/intc/Kconfig
-> +++ b/hw/intc/Kconfig
-> @@ -62,7 +62,7 @@ config RX_ICU
->  config LOONGSON_LIOINTC
->      bool
->
-> -config SIFIVE_CLINT
-> +config RISCV_ACLINT
->      bool
->
->  config SIFIVE_PLIC
-> diff --git a/hw/intc/meson.build b/hw/intc/meson.build
-> index 1c299039f6..2482fcfaf8 100644
-> --- a/hw/intc/meson.build
-> +++ b/hw/intc/meson.build
-> @@ -48,7 +48,7 @@ specific_ss.add(when: 'CONFIG_RX_ICU', if_true: files('rx_icu.c'))
->  specific_ss.add(when: 'CONFIG_S390_FLIC', if_true: files('s390_flic.c'))
->  specific_ss.add(when: 'CONFIG_S390_FLIC_KVM', if_true: files('s390_flic_kvm.c'))
->  specific_ss.add(when: 'CONFIG_SH_INTC', if_true: files('sh_intc.c'))
-> -specific_ss.add(when: 'CONFIG_SIFIVE_CLINT', if_true: files('sifive_clint.c'))
-> +specific_ss.add(when: 'CONFIG_RISCV_ACLINT', if_true: files('riscv_aclint.c'))
->  specific_ss.add(when: 'CONFIG_SIFIVE_PLIC', if_true: files('sifive_plic.c'))
->  specific_ss.add(when: 'CONFIG_XICS', if_true: files('xics.c'))
->  specific_ss.add(when: ['CONFIG_KVM', 'CONFIG_XICS'],
-> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-> new file mode 100644
-> index 0000000000..682f95cca7
-> --- /dev/null
-> +++ b/hw/intc/riscv_aclint.c
-> @@ -0,0 +1,374 @@
-> +/*
-> + * RISC-V ACLINT (Advanced Core Local Interruptor)
-> + *
-> + * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-> + * Copyright (c) 2017 SiFive, Inc.
-> + * Copyright (c) 2021 Western Digital Corporation or its affiliates.
-> + *
-> + * This provides real-time clock, timer and interprocessor interrupts.
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "qapi/error.h"
-> +#include "qemu/error-report.h"
-> +#include "qemu/module.h"
-> +#include "hw/sysbus.h"
-> +#include "target/riscv/cpu.h"
-> +#include "hw/qdev-properties.h"
-> +#include "hw/intc/riscv_aclint.h"
-> +#include "qemu/timer.h"
-> +
-> +static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
-> +{
-> +    return muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL),
-> +        timebase_freq, NANOSECONDS_PER_SECOND);
-> +}
-> +
-> +/*
-> + * Called when timecmp is written to update the QEMU timer or immediately
-> + * trigger timer interrupt if mtimecmp <= current timer value.
-> + */
-> +static void riscv_aclint_mtimer_write_timecmp(RISCVCPU *cpu, uint64_t value,
-> +    uint32_t timebase_freq)
-> +{
-> +    uint64_t next;
-> +    uint64_t diff;
-> +
-> +    uint64_t rtc_r = cpu_riscv_read_rtc(timebase_freq);
-> +
-> +    cpu->env.timecmp = value;
-> +    if (cpu->env.timecmp <= rtc_r) {
-> +        /* if we're setting an MTIMECMP value in the "past",
-> +           immediately raise the timer interrupt */
-
-nits: please use correct multi-line comment format
-
-> +        riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> +        return;
-> +    }
-> +
-> +    /* otherwise, set up the future timer interrupt */
-> +    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
-> +    diff = cpu->env.timecmp - rtc_r;
-> +    /* back to ns (note args switched in muldiv64) */
-> +    next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> +        muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
-> +    timer_mod(cpu->env.timer, next);
-> +}
-> +
-> +/*
-> + * Callback used when the timer set using timer_mod expires.
-> + * Should raise the timer interrupt line
-> + */
-> +static void riscv_aclint_mtimer_cb(void *opaque)
-> +{
-> +    RISCVCPU *cpu = opaque;
-> +    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> +}
-> +
-> +/* CPU wants to read MTIMER register */
-
-nits: CPU read MTIMER register (for consistency with other RW routines)
-
-> +static uint64_t riscv_aclint_mtimer_read(void *opaque, hwaddr addr,
-> +    unsigned size)
-> +{
-> +    RISCVAclintMTimerState *mtimer = opaque;
-> +
-> +    if (addr < (mtimer->num_harts << 3)) {
-> +        size_t hartid = mtimer->hartid_base + (addr >> 3);
-> +        CPUState *cpu = qemu_get_cpu(hartid);
-> +        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> +        if (!env) {
-> +            error_report("aclint-mtimer: invalid hartid: %zu", hartid);
-> +        } else if ((addr & 0x7) == 0) {
-> +            /* timecmp_lo */
-> +            uint64_t timecmp = env->timecmp;
-> +            return timecmp & 0xFFFFFFFF;
-> +        } else if ((addr & 0x7) == 4) {
-> +            /* timecmp_hi */
-> +            uint64_t timecmp = env->timecmp;
-> +            return (timecmp >> 32) & 0xFFFFFFFF;
-> +        } else {
-> +            error_report("aclint-mtimer: invalid read: %08x", (uint32_t)addr);
-> +            return 0;
-> +        }
-> +    } else if (addr == (mtimer->aperture_size - 8)) {
-> +        /* time_lo */
-> +        return cpu_riscv_read_rtc(mtimer->timebase_freq) & 0xFFFFFFFF;
-> +    } else if (addr == (mtimer->aperture_size - 4)) {
-> +        /* time_hi */
-> +        return (cpu_riscv_read_rtc(mtimer->timebase_freq) >> 32) & 0xFFFFFFFF;
-> +    }
-> +
-> +    error_report("aclint-mtimer: invalid read: %08x", (uint32_t)addr);
-> +    return 0;
-> +}
-> +
-> +/* CPU wrote MTIMER register */
-
-nits: write
-
-> +static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
-> +    uint64_t value, unsigned size)
-> +{
-> +    RISCVAclintMTimerState *mtimer = opaque;
-> +
-> +    if (addr < (mtimer->num_harts << 3)) {
-> +        size_t hartid = mtimer->hartid_base + (addr >> 3);
-> +        CPUState *cpu = qemu_get_cpu(hartid);
-> +        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> +        if (!env) {
-> +            error_report("aclint-mtimer: invalid hartid: %zu", hartid);
-> +        } else if ((addr & 0x7) == 0) {
-> +            /* timecmp_lo */
-> +            uint64_t timecmp_hi = env->timecmp >> 32;
-> +            riscv_aclint_mtimer_write_timecmp(RISCV_CPU(cpu),
-> +                timecmp_hi << 32 | (value & 0xFFFFFFFF),
-> +                mtimer->timebase_freq);
-> +            return;
-> +        } else if ((addr & 0x7) == 4) {
-> +            /* timecmp_hi */
-> +            uint64_t timecmp_lo = env->timecmp;
-> +            riscv_aclint_mtimer_write_timecmp(RISCV_CPU(cpu),
-> +                value << 32 | (timecmp_lo & 0xFFFFFFFF),
-> +                mtimer->timebase_freq);
-> +        } else {
-> +            error_report("aclint-mtimer: invalid timecmp write: %08x",
-> +                         (uint32_t)addr);
-> +        }
-> +        return;
-> +    } else if (addr == (mtimer->aperture_size - 8)) {
-> +        /* time_lo */
-> +        error_report("aclint-mtimer: time_lo write not implemented");
-> +        return;
-> +    } else if (addr == (mtimer->aperture_size - 4)) {
-> +        /* time_hi */
-> +        error_report("aclint-mtimer: time_hi write not implemented");
-> +        return;
-> +    }
-> +
-> +    error_report("aclint-mtimer: invalid write: %08x", (uint32_t)addr);
-> +}
-> +
-> +static const MemoryRegionOps riscv_aclint_mtimer_ops = {
-> +    .read = riscv_aclint_mtimer_read,
-> +    .write = riscv_aclint_mtimer_write,
-> +    .endianness = DEVICE_LITTLE_ENDIAN,
-> +    .valid = {
-> +        .min_access_size = 4,
-> +        .max_access_size = 8
-> +    }
-> +};
-> +
-> +static Property riscv_aclint_mtimer_properties[] = {
-> +    DEFINE_PROP_UINT32("hartid-base", RISCVAclintMTimerState,
-> +        hartid_base, 0),
-> +    DEFINE_PROP_UINT32("num-harts", RISCVAclintMTimerState, num_harts, 0),
-
-I guess we can set the default value to 4095 according to the spec?
-
-> +    DEFINE_PROP_UINT32("aperture-size", RISCVAclintMTimerState,
-> +        aperture_size, 0),
-
-I don't think this parameter is needed given the spec clearly defines its size.
-
-> +    DEFINE_PROP_UINT32("timebase-freq", RISCVAclintMTimerState,
-> +        timebase_freq, 0),
-> +    DEFINE_PROP_END_OF_LIST(),
-> +};
-> +
-> +static void riscv_aclint_mtimer_realize(DeviceState *dev, Error **errp)
-> +{
-> +    int i;
-> +    RISCVCPU *cpu;
-> +    RISCVAclintMTimerState *s = RISCV_ACLINT_MTIMER(dev);
-> +
-> +    memory_region_init_io(&s->mmio, OBJECT(dev), &riscv_aclint_mtimer_ops, s,
-> +                          TYPE_RISCV_ACLINT_MTIMER, s->aperture_size);
-> +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-> +
-> +    /* Claim MTIP so that only MTIMER controls it. */
-
-nits: please remove the ending .
-
-> +    for (i = 0; i < s->num_harts; i++) {
-> +        cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
-> +        if (riscv_cpu_claim_interrupts(cpu, MIP_MTIP) < 0) {
-> +            error_report("MTIP already claimed");
-> +            exit(1);
-> +        }
-> +    }
-> +}
-> +
-> +static void riscv_aclint_mtimer_class_init(ObjectClass *klass, void *data)
-> +{
-> +    DeviceClass *dc = DEVICE_CLASS(klass);
-> +    dc->realize = riscv_aclint_mtimer_realize;
-> +    device_class_set_props(dc, riscv_aclint_mtimer_properties);
-> +}
-> +
-> +static const TypeInfo riscv_aclint_mtimer_info = {
-> +    .name          = TYPE_RISCV_ACLINT_MTIMER,
-> +    .parent        = TYPE_SYS_BUS_DEVICE,
-> +    .instance_size = sizeof(RISCVAclintMTimerState),
-> +    .class_init    = riscv_aclint_mtimer_class_init,
-> +};
-> +
-> +/*
-> + * Create ACLINT MTIMER device.
-> + */
-> +DeviceState *riscv_aclint_mtimer_create(hwaddr addr, hwaddr size,
-> +    uint32_t hartid_base, uint32_t num_harts, uint32_t timebase_freq,
-> +    bool provide_rdtime)
-> +{
-> +    int i;
-> +    for (i = 0; i < num_harts; i++) {
-> +        CPUState *cpu = qemu_get_cpu(hartid_base + i);
-> +        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> +        if (!env) {
-> +            continue;
-> +        }
-> +        if (provide_rdtime) {
-> +            riscv_cpu_set_rdtime_fn(env, cpu_riscv_read_rtc, timebase_freq);
-> +        }
-> +        env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> +                                  &riscv_aclint_mtimer_cb, cpu);
-> +        env->timecmp = 0;
-> +    }
-> +
-> +    DeviceState *dev = qdev_new(TYPE_RISCV_ACLINT_MTIMER);
-> +    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-> +    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-> +    qdev_prop_set_uint32(dev, "aperture-size", size);
-> +    qdev_prop_set_uint32(dev, "timebase-freq", timebase_freq);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> +    return dev;
-> +}
-> +
-> +/* CPU read [M|S]SWI register */
-> +static uint64_t riscv_aclint_swi_read(void *opaque, hwaddr addr,
-> +    unsigned size)
-> +{
-> +    RISCVAclintSwiState *swi = opaque;
-> +
-> +    if (addr < (swi->num_harts << 2)) {
-> +        size_t hartid = swi->hartid_base + (addr >> 2);
-> +        CPUState *cpu = qemu_get_cpu(hartid);
-> +        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> +        if (!env) {
-> +            error_report("aclint-swi: invalid hartid: %zu", hartid);
-> +        } else if ((addr & 0x3) == 0) {
-> +            return (env->mip & swi->sirq_mask) > 0;
-> +        } else {
-> +            error_report("aclint-swi: invalid read: %08x", (uint32_t)addr);
-> +            return 0;
-> +        }
-> +    }
-> +
-> +    error_report("aclint-swi: invalid read: %08x", (uint32_t)addr);
-> +    return 0;
-> +}
-> +
-> +/* CPU wrote [M|S]SWI register */
-
-write
-
-> +static void riscv_aclint_swi_write(void *opaque, hwaddr addr, uint64_t value,
-> +        unsigned size)
-> +{
-> +    RISCVAclintSwiState *swi = opaque;
-> +
-> +    if (addr < (swi->num_harts << 2)) {
-> +        size_t hartid = swi->hartid_base + (addr >> 2);
-> +        CPUState *cpu = qemu_get_cpu(hartid);
-> +        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> +        if (!env) {
-> +            error_report("aclint-swi: invalid hartid: %zu", hartid);
-> +        } else if ((addr & 0x3) == 0) {
-> +            riscv_cpu_update_mip(RISCV_CPU(cpu), swi->sirq_mask,
-> +                                 BOOL_TO_MASK(value));
-> +        } else {
-> +            error_report("aclint-swi: invalid [M|S]SIP write: %08x",
-> +                         (uint32_t)addr);
-> +        }
-> +        return;
-> +    }
-> +
-> +    error_report("aclint-swi: invalid write: %08x", (uint32_t)addr);
-> +}
-> +
-> +static const MemoryRegionOps riscv_aclint_swi_ops = {
-> +    .read = riscv_aclint_swi_read,
-> +    .write = riscv_aclint_swi_write,
-> +    .endianness = DEVICE_LITTLE_ENDIAN,
-> +    .valid = {
-> +        .min_access_size = 4,
-> +        .max_access_size = 4
-> +    }
-> +};
-> +
-> +static Property riscv_aclint_swi_properties[] = {
-> +    DEFINE_PROP_UINT32("hartid-base", RISCVAclintSwiState, hartid_base, 0),
-> +    DEFINE_PROP_UINT32("num-harts", RISCVAclintSwiState, num_harts, 0),
-
-ditto
-
-> +    DEFINE_PROP_UINT32("aperture-size", RISCVAclintSwiState,
-> +        aperture_size, 0),
-
-ditto
-
-> +    DEFINE_PROP_UINT32("sirq-mask", RISCVAclintSwiState, sirq_mask, 0),
-
-Could be more intuitive if we describe it as:
-
-DEFINE_PROP_BOOL("sswi", RISCVAclintSwiState, sswi, false)
-
-so we don't bother user to pass the mask of the MIP register
-
-> +    DEFINE_PROP_END_OF_LIST(),
-> +};
-> +
-> +static void riscv_aclint_swi_realize(DeviceState *dev, Error **errp)
-> +{
-> +    int i;
-> +    RISCVCPU *cpu;
-> +    RISCVAclintSwiState *s = RISCV_ACLINT_SWI(dev);
-> +
-> +    memory_region_init_io(&s->mmio, OBJECT(dev), &riscv_aclint_swi_ops, s,
-> +                          TYPE_RISCV_ACLINT_SWI, s->aperture_size);
-> +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-> +
-> +    /* Claim [M|S]SIP so that can SWI controls it. */
-> +    for (i = 0; i < s->num_harts; i++) {
-> +        cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
-> +
-> +        /* We don't claim SSIP bit of mip CSR because this bit is
-> +         * writable by software as-per RISC-V privilege specification.
-> +         */
-
-nits: please use correct multi-line comment format
-
-> +        if ((s->sirq_mask != MIP_SSIP) &&
-> +            riscv_cpu_claim_interrupts(cpu, s->sirq_mask) < 0) {
-> +            error_report("%s already claimed",
-> +                (s->sirq_mask == MIP_SSIP) ? "SSIP" : "MSIP");
-> +            exit(1);
-> +        }
-> +    }
-> +}
-> +
-> +static void riscv_aclint_swi_class_init(ObjectClass *klass, void *data)
-> +{
-> +    DeviceClass *dc = DEVICE_CLASS(klass);
-> +    dc->realize = riscv_aclint_swi_realize;
-> +    device_class_set_props(dc, riscv_aclint_swi_properties);
-> +}
-> +
-> +static const TypeInfo riscv_aclint_swi_info = {
-> +    .name          = TYPE_RISCV_ACLINT_SWI,
-> +    .parent        = TYPE_SYS_BUS_DEVICE,
-> +    .instance_size = sizeof(RISCVAclintSwiState),
-> +    .class_init    = riscv_aclint_swi_class_init,
-> +};
-> +
-> +/*
-> + * Create ACLINT [M|S]SWI device.
-> + */
-> +DeviceState *riscv_aclint_swi_create(hwaddr addr, hwaddr size,
-> +    uint32_t hartid_base, uint32_t num_harts, bool smode_swi)
-> +{
-> +    DeviceState *dev = qdev_new(TYPE_RISCV_ACLINT_SWI);
-> +    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-> +    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-> +    qdev_prop_set_uint32(dev, "aperture-size", size);
-> +    qdev_prop_set_uint32(dev, "sirq-mask", smode_swi ? MIP_SSIP : MIP_MSIP);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> +    return dev;
-> +}
-> +
-> +static void riscv_aclint_register_types(void)
-> +{
-> +    type_register_static(&riscv_aclint_mtimer_info);
-> +    type_register_static(&riscv_aclint_swi_info);
-> +}
-> +
-> +type_init(riscv_aclint_register_types)
-> diff --git a/hw/intc/sifive_clint.c b/hw/intc/sifive_clint.c
-> deleted file mode 100644
-> index 0f41e5ea1c..0000000000
-> --- a/hw/intc/sifive_clint.c
-> +++ /dev/null
-> @@ -1,266 +0,0 @@
-> -/*
-> - * SiFive CLINT (Core Local Interruptor)
-> - *
-> - * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-> - * Copyright (c) 2017 SiFive, Inc.
-> - *
-> - * This provides real-time clock, timer and interprocessor interrupts.
-> - *
-> - * This program is free software; you can redistribute it and/or modify it
-> - * under the terms and conditions of the GNU General Public License,
-> - * version 2 or later, as published by the Free Software Foundation.
-> - *
-> - * This program is distributed in the hope it will be useful, but WITHOUT
-> - * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> - * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> - * more details.
-> - *
-> - * You should have received a copy of the GNU General Public License along with
-> - * this program.  If not, see <http://www.gnu.org/licenses/>.
-> - */
-> -
-> -#include "qemu/osdep.h"
-> -#include "qapi/error.h"
-> -#include "qemu/error-report.h"
-> -#include "qemu/module.h"
-> -#include "hw/sysbus.h"
-> -#include "target/riscv/cpu.h"
-> -#include "hw/qdev-properties.h"
-> -#include "hw/intc/sifive_clint.h"
-> -#include "qemu/timer.h"
-> -
-> -static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
-> -{
-> -    return muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL),
-> -        timebase_freq, NANOSECONDS_PER_SECOND);
-> -}
-> -
-> -/*
-> - * Called when timecmp is written to update the QEMU timer or immediately
-> - * trigger timer interrupt if mtimecmp <= current timer value.
-> - */
-> -static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value,
-> -                                       uint32_t timebase_freq)
-> -{
-> -    uint64_t next;
-> -    uint64_t diff;
-> -
-> -    uint64_t rtc_r = cpu_riscv_read_rtc(timebase_freq);
-> -
-> -    cpu->env.timecmp = value;
-> -    if (cpu->env.timecmp <= rtc_r) {
-> -        /* if we're setting an MTIMECMP value in the "past",
-> -           immediately raise the timer interrupt */
-> -        riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> -        return;
-> -    }
-> -
-> -    /* otherwise, set up the future timer interrupt */
-> -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
-> -    diff = cpu->env.timecmp - rtc_r;
-> -    /* back to ns (note args switched in muldiv64) */
-> -    next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> -        muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
-> -    timer_mod(cpu->env.timer, next);
-> -}
-> -
-> -/*
-> - * Callback used when the timer set using timer_mod expires.
-> - * Should raise the timer interrupt line
-> - */
-> -static void sifive_clint_timer_cb(void *opaque)
-> -{
-> -    RISCVCPU *cpu = opaque;
-> -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> -}
-> -
-> -/* CPU wants to read rtc or timecmp register */
-> -static uint64_t sifive_clint_read(void *opaque, hwaddr addr, unsigned size)
-> -{
-> -    SiFiveCLINTState *clint = opaque;
-> -    if (addr >= clint->sip_base &&
-> -        addr < clint->sip_base + (clint->num_harts << 2)) {
-> -        size_t hartid = clint->hartid_base + ((addr - clint->sip_base) >> 2);
-> -        CPUState *cpu = qemu_get_cpu(hartid);
-> -        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> -        if (!env) {
-> -            error_report("clint: invalid timecmp hartid: %zu", hartid);
-> -        } else if ((addr & 0x3) == 0) {
-> -            return (env->mip & MIP_MSIP) > 0;
-> -        } else {
-> -            error_report("clint: invalid read: %08x", (uint32_t)addr);
-> -            return 0;
-> -        }
-> -    } else if (addr >= clint->timecmp_base &&
-> -        addr < clint->timecmp_base + (clint->num_harts << 3)) {
-> -        size_t hartid = clint->hartid_base +
-> -            ((addr - clint->timecmp_base) >> 3);
-> -        CPUState *cpu = qemu_get_cpu(hartid);
-> -        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> -        if (!env) {
-> -            error_report("clint: invalid timecmp hartid: %zu", hartid);
-> -        } else if ((addr & 0x7) == 0) {
-> -            /* timecmp_lo */
-> -            uint64_t timecmp = env->timecmp;
-> -            return timecmp & 0xFFFFFFFF;
-> -        } else if ((addr & 0x7) == 4) {
-> -            /* timecmp_hi */
-> -            uint64_t timecmp = env->timecmp;
-> -            return (timecmp >> 32) & 0xFFFFFFFF;
-> -        } else {
-> -            error_report("clint: invalid read: %08x", (uint32_t)addr);
-> -            return 0;
-> -        }
-> -    } else if (addr == clint->time_base) {
-> -        /* time_lo */
-> -        return cpu_riscv_read_rtc(clint->timebase_freq) & 0xFFFFFFFF;
-> -    } else if (addr == clint->time_base + 4) {
-> -        /* time_hi */
-> -        return (cpu_riscv_read_rtc(clint->timebase_freq) >> 32) & 0xFFFFFFFF;
-> -    }
-> -
-> -    error_report("clint: invalid read: %08x", (uint32_t)addr);
-> -    return 0;
-> -}
-> -
-> -/* CPU wrote to rtc or timecmp register */
-> -static void sifive_clint_write(void *opaque, hwaddr addr, uint64_t value,
-> -        unsigned size)
-> -{
-> -    SiFiveCLINTState *clint = opaque;
-> -
-> -    if (addr >= clint->sip_base &&
-> -        addr < clint->sip_base + (clint->num_harts << 2)) {
-> -        size_t hartid = clint->hartid_base + ((addr - clint->sip_base) >> 2);
-> -        CPUState *cpu = qemu_get_cpu(hartid);
-> -        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> -        if (!env) {
-> -            error_report("clint: invalid timecmp hartid: %zu", hartid);
-> -        } else if ((addr & 0x3) == 0) {
-> -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MSIP, BOOL_TO_MASK(value));
-> -        } else {
-> -            error_report("clint: invalid sip write: %08x", (uint32_t)addr);
-> -        }
-> -        return;
-> -    } else if (addr >= clint->timecmp_base &&
-> -        addr < clint->timecmp_base + (clint->num_harts << 3)) {
-> -        size_t hartid = clint->hartid_base +
-> -            ((addr - clint->timecmp_base) >> 3);
-> -        CPUState *cpu = qemu_get_cpu(hartid);
-> -        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> -        if (!env) {
-> -            error_report("clint: invalid timecmp hartid: %zu", hartid);
-> -        } else if ((addr & 0x7) == 0) {
-> -            /* timecmp_lo */
-> -            uint64_t timecmp_hi = env->timecmp >> 32;
-> -            sifive_clint_write_timecmp(RISCV_CPU(cpu),
-> -                timecmp_hi << 32 | (value & 0xFFFFFFFF), clint->timebase_freq);
-> -            return;
-> -        } else if ((addr & 0x7) == 4) {
-> -            /* timecmp_hi */
-> -            uint64_t timecmp_lo = env->timecmp;
-> -            sifive_clint_write_timecmp(RISCV_CPU(cpu),
-> -                value << 32 | (timecmp_lo & 0xFFFFFFFF), clint->timebase_freq);
-> -        } else {
-> -            error_report("clint: invalid timecmp write: %08x", (uint32_t)addr);
-> -        }
-> -        return;
-> -    } else if (addr == clint->time_base) {
-> -        /* time_lo */
-> -        error_report("clint: time_lo write not implemented");
-> -        return;
-> -    } else if (addr == clint->time_base + 4) {
-> -        /* time_hi */
-> -        error_report("clint: time_hi write not implemented");
-> -        return;
-> -    }
-> -
-> -    error_report("clint: invalid write: %08x", (uint32_t)addr);
-> -}
-> -
-> -static const MemoryRegionOps sifive_clint_ops = {
-> -    .read = sifive_clint_read,
-> -    .write = sifive_clint_write,
-> -    .endianness = DEVICE_LITTLE_ENDIAN,
-> -    .valid = {
-> -        .min_access_size = 4,
-> -        .max_access_size = 8
-> -    }
-> -};
-> -
-> -static Property sifive_clint_properties[] = {
-> -    DEFINE_PROP_UINT32("hartid-base", SiFiveCLINTState, hartid_base, 0),
-> -    DEFINE_PROP_UINT32("num-harts", SiFiveCLINTState, num_harts, 0),
-> -    DEFINE_PROP_UINT32("sip-base", SiFiveCLINTState, sip_base, 0),
-> -    DEFINE_PROP_UINT32("timecmp-base", SiFiveCLINTState, timecmp_base, 0),
-> -    DEFINE_PROP_UINT32("time-base", SiFiveCLINTState, time_base, 0),
-> -    DEFINE_PROP_UINT32("aperture-size", SiFiveCLINTState, aperture_size, 0),
-> -    DEFINE_PROP_UINT32("timebase-freq", SiFiveCLINTState, timebase_freq, 0),
-> -    DEFINE_PROP_END_OF_LIST(),
-> -};
-> -
-> -static void sifive_clint_realize(DeviceState *dev, Error **errp)
-> -{
-> -    SiFiveCLINTState *s = SIFIVE_CLINT(dev);
-> -    memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_clint_ops, s,
-> -                          TYPE_SIFIVE_CLINT, s->aperture_size);
-> -    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-> -}
-> -
-> -static void sifive_clint_class_init(ObjectClass *klass, void *data)
-> -{
-> -    DeviceClass *dc = DEVICE_CLASS(klass);
-> -    dc->realize = sifive_clint_realize;
-> -    device_class_set_props(dc, sifive_clint_properties);
-> -}
-> -
-> -static const TypeInfo sifive_clint_info = {
-> -    .name          = TYPE_SIFIVE_CLINT,
-> -    .parent        = TYPE_SYS_BUS_DEVICE,
-> -    .instance_size = sizeof(SiFiveCLINTState),
-> -    .class_init    = sifive_clint_class_init,
-> -};
-> -
-> -static void sifive_clint_register_types(void)
-> -{
-> -    type_register_static(&sifive_clint_info);
-> -}
-> -
-> -type_init(sifive_clint_register_types)
-> -
-> -
-> -/*
-> - * Create CLINT device.
-> - */
-> -DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
-> -    uint32_t hartid_base, uint32_t num_harts, uint32_t sip_base,
-> -    uint32_t timecmp_base, uint32_t time_base, uint32_t timebase_freq,
-> -    bool provide_rdtime)
-> -{
-> -    int i;
-> -    for (i = 0; i < num_harts; i++) {
-> -        CPUState *cpu = qemu_get_cpu(hartid_base + i);
-> -        CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> -        if (!env) {
-> -            continue;
-> -        }
-> -        if (provide_rdtime) {
-> -            riscv_cpu_set_rdtime_fn(env, cpu_riscv_read_rtc, timebase_freq);
-> -        }
-> -        env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> -                                  &sifive_clint_timer_cb, cpu);
-> -        env->timecmp = 0;
-> -    }
-> -
-> -    DeviceState *dev = qdev_new(TYPE_SIFIVE_CLINT);
-> -    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-> -    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-> -    qdev_prop_set_uint32(dev, "sip-base", sip_base);
-> -    qdev_prop_set_uint32(dev, "timecmp-base", timecmp_base);
-> -    qdev_prop_set_uint32(dev, "time-base", time_base);
-> -    qdev_prop_set_uint32(dev, "aperture-size", size);
-> -    qdev_prop_set_uint32(dev, "timebase-freq", timebase_freq);
-> -    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> -    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> -    return dev;
-> -}
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 1de18cdcf1..939cd0ef40 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -9,7 +9,7 @@ config MICROCHIP_PFSOC
->      select MCHP_PFSOC_MMUART
->      select MCHP_PFSOC_SYSREG
->      select MSI_NONBROKEN
-> -    select SIFIVE_CLINT
-> +    select RISCV_ACLINT
->      select SIFIVE_PDMA
->      select SIFIVE_PLIC
->      select UNIMP
-> @@ -29,7 +29,7 @@ config RISCV_VIRT
->      select PCI_EXPRESS_GENERIC_BRIDGE
->      select PFLASH_CFI01
->      select SERIAL
-> -    select SIFIVE_CLINT
-> +    select RISCV_ACLINT
-
-nits: please insert this by following the alphabetical order
-
->      select SIFIVE_PLIC
->      select SIFIVE_TEST
->      select VIRTIO_MMIO
-> @@ -38,7 +38,7 @@ config RISCV_VIRT
->  config SIFIVE_E
->      bool
->      select MSI_NONBROKEN
-> -    select SIFIVE_CLINT
-> +    select RISCV_ACLINT
->      select SIFIVE_GPIO
->      select SIFIVE_PLIC
->      select SIFIVE_UART
-> @@ -49,7 +49,7 @@ config SIFIVE_U
->      bool
->      select CADENCE
->      select MSI_NONBROKEN
-> -    select SIFIVE_CLINT
-> +    select RISCV_ACLINT
->      select SIFIVE_GPIO
->      select SIFIVE_PDMA
->      select SIFIVE_PLIC
-> @@ -65,5 +65,5 @@ config SPIKE
->      bool
->      select HTIF
->      select MSI_NONBROKEN
-> -    select SIFIVE_CLINT
-> +    select RISCV_ACLINT
->      select SIFIVE_PLIC
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index c4146b7a6b..e637e5c885 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -51,7 +51,7 @@
->  #include "hw/riscv/boot.h"
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/riscv/microchip_pfsoc.h"
-> -#include "hw/intc/sifive_clint.h"
-> +#include "hw/intc/riscv_aclint.h"
->  #include "hw/intc/sifive_plic.h"
->  #include "sysemu/sysemu.h"
->
-> @@ -235,10 +235,12 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
->          memmap[MICROCHIP_PFSOC_BUSERR_UNIT4].size);
->
->      /* CLINT */
-> -    sifive_clint_create(memmap[MICROCHIP_PFSOC_CLINT].base,
-> -        memmap[MICROCHIP_PFSOC_CLINT].size, 0, ms->smp.cpus,
-> -        SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
-> -        CLINT_TIMEBASE_FREQ, false);
-> +    riscv_aclint_swi_create(memmap[MICROCHIP_PFSOC_CLINT].base,
-> +        RISCV_ACLINT_SWI_SIZE, 0, ms->smp.cpus, false);
-> +    riscv_aclint_mtimer_create(
-> +        memmap[MICROCHIP_PFSOC_CLINT].base + RISCV_ACLINT_SWI_SIZE,
-> +        RISCV_ACLINT_MTIMER_SIZE, 0, ms->smp.cpus,
-> +        RISCV_ACLINT_TIMEBASE_FREQ, false);
->
->      /* L2 cache controller */
->      create_unimplemented_device("microchip.pfsoc.l2cc",
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index f939bcf9ea..ea960a5f2e 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -42,7 +42,7 @@
->  #include "hw/riscv/sifive_e.h"
->  #include "hw/riscv/boot.h"
->  #include "hw/char/sifive_uart.h"
-> -#include "hw/intc/sifive_clint.h"
-> +#include "hw/intc/riscv_aclint.h"
->  #include "hw/intc/sifive_plic.h"
->  #include "hw/misc/sifive_e_prci.h"
->  #include "chardev/char.h"
-> @@ -210,10 +210,12 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
->          SIFIVE_E_PLIC_CONTEXT_BASE,
->          SIFIVE_E_PLIC_CONTEXT_STRIDE,
->          memmap[SIFIVE_E_DEV_PLIC].size);
-> -    sifive_clint_create(memmap[SIFIVE_E_DEV_CLINT].base,
-> -        memmap[SIFIVE_E_DEV_CLINT].size, 0, ms->smp.cpus,
-> -        SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
-> -        SIFIVE_CLINT_TIMEBASE_FREQ, false);
-> +    riscv_aclint_swi_create(memmap[SIFIVE_E_DEV_CLINT].base,
-> +        RISCV_ACLINT_SWI_SIZE, 0, ms->smp.cpus, false);
-> +    riscv_aclint_mtimer_create(memmap[SIFIVE_E_DEV_CLINT].base +
-> +            RISCV_ACLINT_SWI_SIZE,
-> +        RISCV_ACLINT_MTIMER_SIZE, 0, ms->smp.cpus,
-> +        RISCV_ACLINT_TIMEBASE_FREQ, false);
->      create_unimplemented_device("riscv.sifive.e.aon",
->          memmap[SIFIVE_E_DEV_AON].base, memmap[SIFIVE_E_DEV_AON].size);
->      sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 7b59942369..e5fe681984 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -52,7 +52,7 @@
->  #include "hw/riscv/sifive_u.h"
->  #include "hw/riscv/boot.h"
->  #include "hw/char/sifive_uart.h"
-> -#include "hw/intc/sifive_clint.h"
-> +#include "hw/intc/riscv_aclint.h"
->  #include "hw/intc/sifive_plic.h"
->  #include "chardev/char.h"
->  #include "net/eth.h"
-> @@ -160,7 +160,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
->
->      qemu_fdt_add_subnode(fdt, "/cpus");
->      qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
-> -        SIFIVE_CLINT_TIMEBASE_FREQ);
-> +        RISCV_ACLINT_TIMEBASE_FREQ);
->      qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
->      qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
->
-> @@ -839,10 +839,12 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
->          serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART0_IRQ));
->      sifive_uart_create(system_memory, memmap[SIFIVE_U_DEV_UART1].base,
->          serial_hd(1), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_UART1_IRQ));
-> -    sifive_clint_create(memmap[SIFIVE_U_DEV_CLINT].base,
-> -        memmap[SIFIVE_U_DEV_CLINT].size, 0, ms->smp.cpus,
-> -        SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
-> -        SIFIVE_CLINT_TIMEBASE_FREQ, false);
-> +    riscv_aclint_swi_create(memmap[SIFIVE_U_DEV_CLINT].base,
-> +        RISCV_ACLINT_SWI_SIZE, 0, ms->smp.cpus, false);
-> +    riscv_aclint_mtimer_create(memmap[SIFIVE_U_DEV_CLINT].base +
-> +            RISCV_ACLINT_SWI_SIZE,
-> +        RISCV_ACLINT_MTIMER_SIZE, 0, ms->smp.cpus,
-> +        RISCV_ACLINT_TIMEBASE_FREQ, false);
->
->      if (!sysbus_realize(SYS_BUS_DEVICE(&s->prci), errp)) {
->          return;
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index ec7cb2f707..10681fbf99 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -36,7 +36,7 @@
->  #include "hw/riscv/boot.h"
->  #include "hw/riscv/numa.h"
->  #include "hw/char/riscv_htif.h"
-> -#include "hw/intc/sifive_clint.h"
-> +#include "hw/intc/riscv_aclint.h"
->  #include "chardev/char.h"
->  #include "sysemu/arch_init.h"
->  #include "sysemu/device_tree.h"
-> @@ -83,7 +83,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
->
->      qemu_fdt_add_subnode(fdt, "/cpus");
->      qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
-> -        SIFIVE_CLINT_TIMEBASE_FREQ);
-> +        RISCV_ACLINT_TIMEBASE_FREQ);
->      qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
->      qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
->      qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
-> @@ -225,11 +225,14 @@ static void spike_board_init(MachineState *machine)
->          sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_abort);
->
->          /* Core Local Interruptor (timer and IPI) for each socket */
-> -        sifive_clint_create(
-> +        riscv_aclint_swi_create(
->              memmap[SPIKE_CLINT].base + i * memmap[SPIKE_CLINT].size,
-> -            memmap[SPIKE_CLINT].size, base_hartid, hart_count,
-> -            SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
-> -            SIFIVE_CLINT_TIMEBASE_FREQ, false);
-> +            RISCV_ACLINT_SWI_SIZE, base_hartid, hart_count, false);
-> +        riscv_aclint_mtimer_create(
-> +            memmap[SPIKE_CLINT].base + i * memmap[SPIKE_CLINT].size +
-> +                RISCV_ACLINT_SWI_SIZE,
-> +            RISCV_ACLINT_MTIMER_SIZE, base_hartid, hart_count,
-> +            RISCV_ACLINT_TIMEBASE_FREQ, false);
->      }
->
->      /* register system main memory (actual RAM) */
 > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index c0dc69ff33..5eb63f6efd 100644
+> index 5eb63f6efd..977d699753 100644
 > --- a/hw/riscv/virt.c
 > +++ b/hw/riscv/virt.c
-> @@ -33,7 +33,7 @@
->  #include "hw/riscv/virt.h"
->  #include "hw/riscv/boot.h"
->  #include "hw/riscv/numa.h"
-> -#include "hw/intc/sifive_clint.h"
-> +#include "hw/intc/riscv_aclint.h"
->  #include "hw/intc/sifive_plic.h"
->  #include "hw/misc/sifive_test.h"
->  #include "chardev/char.h"
-> @@ -224,7 +224,7 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+> @@ -178,206 +178,253 @@ static void create_pcie_irq_map(void *fdt, char *nodename,
+>                             0x1800, 0, 0, 0x7);
+>  }
 >
->      qemu_fdt_add_subnode(fdt, "/cpus");
->      qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
-> -                          SIFIVE_CLINT_TIMEBASE_FREQ);
-> +                          RISCV_ACLINT_TIMEBASE_FREQ);
->      qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
->      qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
->      qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
-> @@ -587,11 +587,14 @@ static void virt_machine_init(MachineState *machine)
->          sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_abort);
+> -static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+> -                       uint64_t mem_size, const char *cmdline, bool is_32_bit)
+> +static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+> +                                   char *clust_name, uint32_t *phandle,
+> +                                   bool is_32_bit, uint32_t *intc_phandles)
+>  {
+> -    void *fdt;
+> -    int i, cpu, socket;
+> +    int cpu;
+> +    uint32_t cpu_phandle;
+>      MachineState *mc = MACHINE(s);
+> +    char *name, *cpu_name, *core_name, *intc_name;
+> +
+> +    for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
+> +        cpu_phandle = (*phandle)++;
+> +
+> +        cpu_name = g_strdup_printf("/cpus/cpu@%d",
+> +            s->soc[socket].hartid_base + cpu);
+> +        qemu_fdt_add_subnode(mc->fdt, cpu_name);
+> +        qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
+> +            (is_32_bit) ? "riscv,sv32" : "riscv,sv48");
+> +        name = riscv_isa_string(&s->soc[socket].harts[cpu]);
+> +        qemu_fdt_setprop_string(mc->fdt, cpu_name, "riscv,isa", name);
+> +        g_free(name);
+> +        qemu_fdt_setprop_string(mc->fdt, cpu_name, "compatible", "riscv");
+> +        qemu_fdt_setprop_string(mc->fdt, cpu_name, "status", "okay");
+> +        qemu_fdt_setprop_cell(mc->fdt, cpu_name, "reg",
+> +            s->soc[socket].hartid_base + cpu);
+> +        qemu_fdt_setprop_string(mc->fdt, cpu_name, "device_type", "cpu");
+> +        riscv_socket_fdt_write_id(mc, mc->fdt, cpu_name, socket);
+> +        qemu_fdt_setprop_cell(mc->fdt, cpu_name, "phandle", cpu_phandle);
+> +
+> +        intc_phandles[cpu] = (*phandle)++;
+> +
+> +        intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
+> +        qemu_fdt_add_subnode(mc->fdt, intc_name);
+> +        qemu_fdt_setprop_cell(mc->fdt, intc_name, "phandle",
+> +            intc_phandles[cpu]);
+> +        qemu_fdt_setprop_string(mc->fdt, intc_name, "compatible",
+> +            "riscv,cpu-intc");
+> +        qemu_fdt_setprop(mc->fdt, intc_name, "interrupt-controller", NULL, 0);
+> +        qemu_fdt_setprop_cell(mc->fdt, intc_name, "#interrupt-cells", 1);
+> +
+> +        core_name = g_strdup_printf("%s/core%d", clust_name, cpu);
+> +        qemu_fdt_add_subnode(mc->fdt, core_name);
+> +        qemu_fdt_setprop_cell(mc->fdt, core_name, "cpu", cpu_phandle);
+> +
+> +        g_free(core_name);
+> +        g_free(intc_name);
+> +        g_free(cpu_name);
+> +    }
+> +}
+> +
+> +static void create_fdt_socket_memory(RISCVVirtState *s,
+> +                                     const MemMapEntry *memmap, int socket)
+> +{
+> +    char *mem_name;
+>      uint64_t addr, size;
+> -    uint32_t *clint_cells, *plic_cells;
+> -    unsigned long clint_addr, plic_addr;
+> -    uint32_t plic_phandle[MAX_NODES];
+> -    uint32_t cpu_phandle, intc_phandle, test_phandle;
+> -    uint32_t phandle = 1, plic_mmio_phandle = 1;
+> -    uint32_t plic_pcie_phandle = 1, plic_virtio_phandle = 1;
+> -    char *mem_name, *cpu_name, *core_name, *intc_name;
+> -    char *name, *clint_name, *plic_name, *clust_name;
+> -    hwaddr flashsize = virt_memmap[VIRT_FLASH].size / 2;
+> -    hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
+> +    MachineState *mc = MACHINE(s);
 >
->          /* Per-socket CLINT */
-> -        sifive_clint_create(
-> +        riscv_aclint_swi_create(
->              memmap[VIRT_CLINT].base + i * memmap[VIRT_CLINT].size,
-> -            memmap[VIRT_CLINT].size, base_hartid, hart_count,
-> -            SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
-> -            SIFIVE_CLINT_TIMEBASE_FREQ, true);
-> +            RISCV_ACLINT_SWI_SIZE, base_hartid, hart_count, false);
-> +        riscv_aclint_mtimer_create(
-> +            memmap[VIRT_CLINT].base + i * memmap[VIRT_CLINT].size +
-> +                RISCV_ACLINT_SWI_SIZE,
-> +            RISCV_ACLINT_MTIMER_SIZE, base_hartid, hart_count,
-> +            RISCV_ACLINT_TIMEBASE_FREQ, true);
+> -    if (mc->dtb) {
+> -        fdt = mc->fdt = load_device_tree(mc->dtb, &s->fdt_size);
+> -        if (!fdt) {
+> -            error_report("load_device_tree() failed");
+> -            exit(1);
+> -        }
+> -        goto update_bootargs;
+> -    } else {
+> -        fdt = mc->fdt = create_device_tree(&s->fdt_size);
+> -        if (!fdt) {
+> -            error_report("create_device_tree() failed");
+> -            exit(1);
+> -        }
+> +    addr = memmap[VIRT_DRAM].base + riscv_socket_mem_offset(mc, socket);
+> +    size = riscv_socket_mem_size(mc, socket);
+> +    mem_name = g_strdup_printf("/memory@%lx", (long)addr);
+> +    qemu_fdt_add_subnode(mc->fdt, mem_name);
+> +    qemu_fdt_setprop_cells(mc->fdt, mem_name, "reg",
+> +        addr >> 32, addr, size >> 32, size);
+> +    qemu_fdt_setprop_string(mc->fdt, mem_name, "device_type", "memory");
+> +    riscv_socket_fdt_write_id(mc, mc->fdt, mem_name, socket);
+> +    g_free(mem_name);
+> +}
+> +
+> +static void create_fdt_socket_clint(RISCVVirtState *s,
+> +                                    const MemMapEntry *memmap, int socket,
+> +                                    uint32_t *intc_phandles)
+> +{
+> +    int cpu;
+> +    char *clint_name;
+> +    uint32_t *clint_cells;
+> +    unsigned long clint_addr;
+> +    MachineState *mc = MACHINE(s);
+> +
+> +    clint_cells = g_new0(uint32_t, s->soc[socket].num_harts * 4);
+> +
+> +    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+> +        clint_cells[cpu * 4 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> +        clint_cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_SOFT);
+> +        clint_cells[cpu * 4 + 2] = cpu_to_be32(intc_phandles[cpu]);
+> +        clint_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_M_TIMER);
+>      }
 >
->          /* Per-socket PLIC hart topology configuration string */
->          plic_hart_config_len =
-> diff --git a/include/hw/intc/riscv_aclint.h b/include/hw/intc/riscv_aclint.h
-> new file mode 100644
-> index 0000000000..471a5ffd0b
-> --- /dev/null
-> +++ b/include/hw/intc/riscv_aclint.h
-> @@ -0,0 +1,73 @@
-> +/*
-> + * RISC-V ACLINT (Advanced Core Local Interruptor) interface
-> + *
-> + * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-> + * Copyright (c) 2017 SiFive, Inc.
-> + * Copyright (c) 2021 Western Digital Corporation or its affiliates.
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
+> -    qemu_fdt_setprop_string(fdt, "/", "model", "riscv-virtio,qemu");
+> -    qemu_fdt_setprop_string(fdt, "/", "compatible", "riscv-virtio");
+> -    qemu_fdt_setprop_cell(fdt, "/", "#size-cells", 0x2);
+> -    qemu_fdt_setprop_cell(fdt, "/", "#address-cells", 0x2);
+> +    clint_addr = memmap[VIRT_CLINT].base + (memmap[VIRT_CLINT].size * socket);
+> +    clint_name = g_strdup_printf("/soc/clint@%lx", clint_addr);
+> +    qemu_fdt_add_subnode(mc->fdt, clint_name);
+> +    qemu_fdt_setprop_string(mc->fdt, clint_name, "compatible",
+> +        "riscv,clint0");
+
+This patch seems to be based on some old commit, as the latest QEMU
+head has the following commit that supports the official clint
+compatible name via:
+
+commit b387236bff95 ("hw/riscv: Support the official CLINT DT bindings")
+
+> +    qemu_fdt_setprop_cells(mc->fdt, clint_name, "reg",
+> +        0x0, clint_addr, 0x0, memmap[VIRT_CLINT].size);
+> +    qemu_fdt_setprop(mc->fdt, clint_name, "interrupts-extended",
+> +        clint_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
+> +    riscv_socket_fdt_write_id(mc, mc->fdt, clint_name, socket);
+> +    g_free(clint_name);
 > +
-> +#ifndef HW_RISCV_ACLINT_H
-> +#define HW_RISCV_ACLINT_H
+> +    g_free(clint_cells);
+> +}
 > +
-> +#include "hw/sysbus.h"
+> +static void create_fdt_socket_plic(RISCVVirtState *s,
+> +                                   const MemMapEntry *memmap, int socket,
+> +                                   uint32_t *phandle, uint32_t *intc_phandles,
+> +                                   uint32_t *plic_phandles)
+> +{
+> +    int cpu;
+> +    char *plic_name;
+> +    uint32_t *plic_cells;
+> +    unsigned long plic_addr;
+> +    MachineState *mc = MACHINE(s);
+>
+> -    qemu_fdt_add_subnode(fdt, "/soc");
+> -    qemu_fdt_setprop(fdt, "/soc", "ranges", NULL, 0);
+> -    qemu_fdt_setprop_string(fdt, "/soc", "compatible", "simple-bus");
+> -    qemu_fdt_setprop_cell(fdt, "/soc", "#size-cells", 0x2);
+> -    qemu_fdt_setprop_cell(fdt, "/soc", "#address-cells", 0x2);
+> +    plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 4);
+>
+> -    qemu_fdt_add_subnode(fdt, "/cpus");
+> -    qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
+> +    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+> +        plic_cells[cpu * 4 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> +        plic_cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
+> +        plic_cells[cpu * 4 + 2] = cpu_to_be32(intc_phandles[cpu]);
+> +        plic_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
+> +    }
 > +
-> +#define TYPE_RISCV_ACLINT_MTIMER "riscv.aclint.mtimer"
+> +    plic_phandles[socket] = (*phandle)++;
+> +    plic_addr = memmap[VIRT_PLIC].base + (memmap[VIRT_PLIC].size * socket);
+> +    plic_name = g_strdup_printf("/soc/plic@%lx", plic_addr);
+> +    qemu_fdt_add_subnode(mc->fdt, plic_name);
+> +    qemu_fdt_setprop_cell(mc->fdt, plic_name,
+> +        "#address-cells", FDT_PLIC_ADDR_CELLS);
+> +    qemu_fdt_setprop_cell(mc->fdt, plic_name,
+> +        "#interrupt-cells", FDT_PLIC_INT_CELLS);
+> +    qemu_fdt_setprop_string(mc->fdt, plic_name, "compatible", "riscv,plic0");
+> +    qemu_fdt_setprop(mc->fdt, plic_name, "interrupt-controller", NULL, 0);
+> +    qemu_fdt_setprop(mc->fdt, plic_name, "interrupts-extended",
+> +        plic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
+> +    qemu_fdt_setprop_cells(mc->fdt, plic_name, "reg",
+> +        0x0, plic_addr, 0x0, memmap[VIRT_PLIC].size);
+> +    qemu_fdt_setprop_cell(mc->fdt, plic_name, "riscv,ndev", VIRTIO_NDEV);
+> +    riscv_socket_fdt_write_id(mc, mc->fdt, plic_name, socket);
+> +    qemu_fdt_setprop_cell(mc->fdt, plic_name, "phandle",
+> +        plic_phandles[socket]);
+> +    g_free(plic_name);
 > +
-> +#define RISCV_ACLINT_MTIMER(obj) \
-> +    OBJECT_CHECK(RISCVAclintMTimerState, (obj), TYPE_RISCV_ACLINT_MTIMER)
+> +    g_free(plic_cells);
+> +}
 > +
-> +typedef struct RISCVAclintMTimerState {
-> +    /*< private >*/
-> +    SysBusDevice parent_obj;
+> +static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+> +                               bool is_32_bit, uint32_t *phandle,
+> +                               uint32_t *irq_mmio_phandle,
+> +                               uint32_t *irq_pcie_phandle,
+> +                               uint32_t *irq_virtio_phandle)
+> +{
+> +    int socket;
+> +    char *clust_name;
+> +    uint32_t *intc_phandles;
+> +    MachineState *mc = MACHINE(s);
+> +    uint32_t xplic_phandles[MAX_NODES];
 > +
-> +    /*< public >*/
-> +    MemoryRegion mmio;
-> +    uint32_t hartid_base;
-> +    uint32_t num_harts;
-> +    uint32_t aperture_size;
-> +    uint32_t timebase_freq;
-> +} RISCVAclintMTimerState;
-> +
-> +DeviceState *riscv_aclint_mtimer_create(hwaddr addr, hwaddr size,
-> +    uint32_t hartid_base, uint32_t num_harts, uint32_t timebase_freq,
-> +    bool provide_rdtime);
-> +
-> +#define TYPE_RISCV_ACLINT_SWI "riscv.aclint.swi"
-> +
-> +#define RISCV_ACLINT_SWI(obj) \
-> +    OBJECT_CHECK(RISCVAclintSwiState, (obj), TYPE_RISCV_ACLINT_SWI)
-> +
-> +typedef struct RISCVAclintSwiState {
-> +    /*< private >*/
-> +    SysBusDevice parent_obj;
-> +
-> +    /*< public >*/
-> +    MemoryRegion mmio;
-> +    uint32_t hartid_base;
-> +    uint32_t num_harts;
-> +    uint32_t aperture_size;
-> +    uint32_t sirq_mask;
-> +} RISCVAclintSwiState;
-> +
-> +DeviceState *riscv_aclint_swi_create(hwaddr addr, hwaddr size,
-> +    uint32_t hartid_base, uint32_t num_harts, bool smode_swi);
-> +
-> +enum {
-> +    RISCV_ACLINT_MTIMER_SIZE = 0x8000,
-> +    RISCV_ACLINT_TIMEBASE_FREQ = 10000000,
-> +    RISCV_ACLINT_SWI_SIZE = 0x4000
-> +};
-> +
-> +#endif
-> diff --git a/include/hw/intc/sifive_clint.h b/include/hw/intc/sifive_clint.h
-> deleted file mode 100644
-> index a30be0f3d6..0000000000
-> --- a/include/hw/intc/sifive_clint.h
-> +++ /dev/null
-> @@ -1,60 +0,0 @@
-> -/*
-> - * SiFive CLINT (Core Local Interruptor) interface
-> - *
-> - * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-> - * Copyright (c) 2017 SiFive, Inc.
-> - *
-> - * This program is free software; you can redistribute it and/or modify it
-> - * under the terms and conditions of the GNU General Public License,
-> - * version 2 or later, as published by the Free Software Foundation.
-> - *
-> - * This program is distributed in the hope it will be useful, but WITHOUT
-> - * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> - * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> - * more details.
-> - *
-> - * You should have received a copy of the GNU General Public License along with
-> - * this program.  If not, see <http://www.gnu.org/licenses/>.
-> - */
+> +    qemu_fdt_add_subnode(mc->fdt, "/cpus");
+> +    qemu_fdt_setprop_cell(mc->fdt, "/cpus", "timebase-frequency",
+>                            RISCV_ACLINT_TIMEBASE_FREQ);
+> -    qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
+> -    qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
+> -    qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
+> +    qemu_fdt_setprop_cell(mc->fdt, "/cpus", "#size-cells", 0x0);
+> +    qemu_fdt_setprop_cell(mc->fdt, "/cpus", "#address-cells", 0x1);
+> +    qemu_fdt_add_subnode(mc->fdt, "/cpus/cpu-map");
+>
+>      for (socket = (riscv_socket_count(mc) - 1); socket >= 0; socket--) {
+>          clust_name = g_strdup_printf("/cpus/cpu-map/cluster%d", socket);
+> -        qemu_fdt_add_subnode(fdt, clust_name);
+> +        qemu_fdt_add_subnode(mc->fdt, clust_name);
+>
+> -        plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 4);
+> -        clint_cells = g_new0(uint32_t, s->soc[socket].num_harts * 4);
+> +        intc_phandles = g_new0(uint32_t, s->soc[socket].num_harts);
+>
+> -        for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
+> -            cpu_phandle = phandle++;
+> +        create_fdt_socket_cpus(s, socket, clust_name, phandle,
+> +            is_32_bit, intc_phandles);
+>
+> -            cpu_name = g_strdup_printf("/cpus/cpu@%d",
+> -                s->soc[socket].hartid_base + cpu);
+> -            qemu_fdt_add_subnode(fdt, cpu_name);
+> -            if (is_32_bit) {
+> -                qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
+> -            } else {
+> -                qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv48");
+> -            }
+> -            name = riscv_isa_string(&s->soc[socket].harts[cpu]);
+> -            qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa", name);
+> -            g_free(name);
+> -            qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
+> -            qemu_fdt_setprop_string(fdt, cpu_name, "status", "okay");
+> -            qemu_fdt_setprop_cell(fdt, cpu_name, "reg",
+> -                s->soc[socket].hartid_base + cpu);
+> -            qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
+> -            riscv_socket_fdt_write_id(mc, fdt, cpu_name, socket);
+> -            qemu_fdt_setprop_cell(fdt, cpu_name, "phandle", cpu_phandle);
 > -
-> -#ifndef HW_SIFIVE_CLINT_H
-> -#define HW_SIFIVE_CLINT_H
+> -            intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
+> -            qemu_fdt_add_subnode(fdt, intc_name);
+> -            intc_phandle = phandle++;
+> -            qemu_fdt_setprop_cell(fdt, intc_name, "phandle", intc_phandle);
+> -            qemu_fdt_setprop_string(fdt, intc_name, "compatible",
+> -                "riscv,cpu-intc");
+> -            qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
+> -            qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
 > -
-> -#include "hw/sysbus.h"
+> -            clint_cells[cpu * 4 + 0] = cpu_to_be32(intc_phandle);
+> -            clint_cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_SOFT);
+> -            clint_cells[cpu * 4 + 2] = cpu_to_be32(intc_phandle);
+> -            clint_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_M_TIMER);
 > -
-> -#define TYPE_SIFIVE_CLINT "riscv.sifive.clint"
+> -            plic_cells[cpu * 4 + 0] = cpu_to_be32(intc_phandle);
+> -            plic_cells[cpu * 4 + 1] = cpu_to_be32(IRQ_M_EXT);
+> -            plic_cells[cpu * 4 + 2] = cpu_to_be32(intc_phandle);
+> -            plic_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_S_EXT);
 > -
-> -#define SIFIVE_CLINT(obj) \
-> -    OBJECT_CHECK(SiFiveCLINTState, (obj), TYPE_SIFIVE_CLINT)
+> -            core_name = g_strdup_printf("%s/core%d", clust_name, cpu);
+> -            qemu_fdt_add_subnode(fdt, core_name);
+> -            qemu_fdt_setprop_cell(fdt, core_name, "cpu", cpu_phandle);
 > -
-> -typedef struct SiFiveCLINTState {
-> -    /*< private >*/
-> -    SysBusDevice parent_obj;
+> -            g_free(core_name);
+> -            g_free(intc_name);
+> -            g_free(cpu_name);
+> -        }
+> +        create_fdt_socket_memory(s, memmap, socket);
+>
+> -        addr = memmap[VIRT_DRAM].base + riscv_socket_mem_offset(mc, socket);
+> -        size = riscv_socket_mem_size(mc, socket);
+> -        mem_name = g_strdup_printf("/memory@%lx", (long)addr);
+> -        qemu_fdt_add_subnode(fdt, mem_name);
+> -        qemu_fdt_setprop_cells(fdt, mem_name, "reg",
+> -            addr >> 32, addr, size >> 32, size);
+> -        qemu_fdt_setprop_string(fdt, mem_name, "device_type", "memory");
+> -        riscv_socket_fdt_write_id(mc, fdt, mem_name, socket);
+> -        g_free(mem_name);
 > -
-> -    /*< public >*/
-> -    MemoryRegion mmio;
-> -    uint32_t hartid_base;
-> -    uint32_t num_harts;
-> -    uint32_t sip_base;
-> -    uint32_t timecmp_base;
-> -    uint32_t time_base;
-> -    uint32_t aperture_size;
-> -    uint32_t timebase_freq;
-> -} SiFiveCLINTState;
+> -        clint_addr = memmap[VIRT_CLINT].base +
+> -            (memmap[VIRT_CLINT].size * socket);
+> -        clint_name = g_strdup_printf("/soc/clint@%lx", clint_addr);
+> -        qemu_fdt_add_subnode(fdt, clint_name);
+> -        qemu_fdt_setprop_string(fdt, clint_name, "compatible", "riscv,clint0");
+> -        qemu_fdt_setprop_cells(fdt, clint_name, "reg",
+> -            0x0, clint_addr, 0x0, memmap[VIRT_CLINT].size);
+> -        qemu_fdt_setprop(fdt, clint_name, "interrupts-extended",
+> -            clint_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
+> -        riscv_socket_fdt_write_id(mc, fdt, clint_name, socket);
+> -        g_free(clint_name);
 > -
-> -DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
-> -    uint32_t hartid_base, uint32_t num_harts, uint32_t sip_base,
-> -    uint32_t timecmp_base, uint32_t time_base, uint32_t timebase_freq,
-> -    bool provide_rdtime);
+> -        plic_phandle[socket] = phandle++;
+> -        plic_addr = memmap[VIRT_PLIC].base + (memmap[VIRT_PLIC].size * socket);
+> -        plic_name = g_strdup_printf("/soc/plic@%lx", plic_addr);
+> -        qemu_fdt_add_subnode(fdt, plic_name);
+> -        qemu_fdt_setprop_cell(fdt, plic_name,
+> -            "#address-cells", FDT_PLIC_ADDR_CELLS);
+> -        qemu_fdt_setprop_cell(fdt, plic_name,
+> -            "#interrupt-cells", FDT_PLIC_INT_CELLS);
+> -        qemu_fdt_setprop_string(fdt, plic_name, "compatible", "riscv,plic0");
+> -        qemu_fdt_setprop(fdt, plic_name, "interrupt-controller", NULL, 0);
+> -        qemu_fdt_setprop(fdt, plic_name, "interrupts-extended",
+> -            plic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
+> -        qemu_fdt_setprop_cells(fdt, plic_name, "reg",
+> -            0x0, plic_addr, 0x0, memmap[VIRT_PLIC].size);
+> -        qemu_fdt_setprop_cell(fdt, plic_name, "riscv,ndev", VIRTIO_NDEV);
+> -        riscv_socket_fdt_write_id(mc, fdt, plic_name, socket);
+> -        qemu_fdt_setprop_cell(fdt, plic_name, "phandle", plic_phandle[socket]);
+> -        g_free(plic_name);
 > -
-> -enum {
-> -    SIFIVE_SIP_BASE     = 0x0,
-> -    SIFIVE_TIMECMP_BASE = 0x4000,
-> -    SIFIVE_TIME_BASE    = 0xBFF8
-> -};
-> -
-> -enum {
-> -    SIFIVE_CLINT_TIMEBASE_FREQ = 10000000
-> -};
-> -
-> -#endif
+> -        g_free(clint_cells);
+> -        g_free(plic_cells);
+> +        create_fdt_socket_clint(s, memmap, socket, intc_phandles);
+> +
+> +        create_fdt_socket_plic(s, memmap, socket, phandle,
+> +            intc_phandles, xplic_phandles);
+> +
+> +        g_free(intc_phandles);
+>          g_free(clust_name);
+>      }
+>
+>      for (socket = 0; socket < riscv_socket_count(mc); socket++) {
+>          if (socket == 0) {
+> -            plic_mmio_phandle = plic_phandle[socket];
+> -            plic_virtio_phandle = plic_phandle[socket];
+> -            plic_pcie_phandle = plic_phandle[socket];
+> +            *irq_mmio_phandle = xplic_phandles[socket];
+> +            *irq_virtio_phandle = xplic_phandles[socket];
+> +            *irq_pcie_phandle = xplic_phandles[socket];
+>          }
+>          if (socket == 1) {
+> -            plic_virtio_phandle = plic_phandle[socket];
+> -            plic_pcie_phandle = plic_phandle[socket];
+> +            *irq_virtio_phandle = xplic_phandles[socket];
+> +            *irq_pcie_phandle = xplic_phandles[socket];
+>          }
+>          if (socket == 2) {
+> -            plic_pcie_phandle = plic_phandle[socket];
+> +            *irq_pcie_phandle = xplic_phandles[socket];
+>          }
+>      }
+>
+> -    riscv_socket_fdt_write_distance_matrix(mc, fdt);
+> +    riscv_socket_fdt_write_distance_matrix(mc, mc->fdt);
+> +}
+> +
+> +static void create_fdt_virtio(RISCVVirtState *s, const MemMapEntry *memmap,
+> +                              uint32_t irq_virtio_phandle)
+> +{
+> +    int i;
+> +    char *name;
+> +    MachineState *mc = MACHINE(s);
+>
+>      for (i = 0; i < VIRTIO_COUNT; i++) {
+>          name = g_strdup_printf("/soc/virtio_mmio@%lx",
+>              (long)(memmap[VIRT_VIRTIO].base + i * memmap[VIRT_VIRTIO].size));
+> -        qemu_fdt_add_subnode(fdt, name);
+> -        qemu_fdt_setprop_string(fdt, name, "compatible", "virtio,mmio");
+> -        qemu_fdt_setprop_cells(fdt, name, "reg",
+> +        qemu_fdt_add_subnode(mc->fdt, name);
+> +        qemu_fdt_setprop_string(mc->fdt, name, "compatible", "virtio,mmio");
+> +        qemu_fdt_setprop_cells(mc->fdt, name, "reg",
+>              0x0, memmap[VIRT_VIRTIO].base + i * memmap[VIRT_VIRTIO].size,
+>              0x0, memmap[VIRT_VIRTIO].size);
+> -        qemu_fdt_setprop_cell(fdt, name, "interrupt-parent",
+> -            plic_virtio_phandle);
+> -        qemu_fdt_setprop_cell(fdt, name, "interrupts", VIRTIO_IRQ + i);
+> +        qemu_fdt_setprop_cell(mc->fdt, name, "interrupt-parent",
+> +            irq_virtio_phandle);
+> +        qemu_fdt_setprop_cell(mc->fdt, name, "interrupts", VIRTIO_IRQ + i);
+>          g_free(name);
+>      }
+> +}
+> +
+> +static void create_fdt_pcie(RISCVVirtState *s, const MemMapEntry *memmap,
+> +                            uint32_t irq_pcie_phandle)
+> +{
+> +    char *name;
+> +    MachineState *mc = MACHINE(s);
+>
+>      name = g_strdup_printf("/soc/pci@%lx",
+>          (long) memmap[VIRT_PCIE_ECAM].base);
+> -    qemu_fdt_add_subnode(fdt, name);
+> -    qemu_fdt_setprop_cell(fdt, name, "#address-cells", FDT_PCI_ADDR_CELLS);
+> -    qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", FDT_PCI_INT_CELLS);
+> -    qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0x2);
+> -    qemu_fdt_setprop_string(fdt, name, "compatible", "pci-host-ecam-generic");
+> -    qemu_fdt_setprop_string(fdt, name, "device_type", "pci");
+> -    qemu_fdt_setprop_cell(fdt, name, "linux,pci-domain", 0);
+> -    qemu_fdt_setprop_cells(fdt, name, "bus-range", 0,
+> +    qemu_fdt_add_subnode(mc->fdt, name);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "#address-cells",
+> +        FDT_PCI_ADDR_CELLS);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "#interrupt-cells",
+> +        FDT_PCI_INT_CELLS);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "#size-cells", 0x2);
+> +    qemu_fdt_setprop_string(mc->fdt, name, "compatible",
+> +        "pci-host-ecam-generic");
+> +    qemu_fdt_setprop_string(mc->fdt, name, "device_type", "pci");
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "linux,pci-domain", 0);
+> +    qemu_fdt_setprop_cells(mc->fdt, name, "bus-range", 0,
+>          memmap[VIRT_PCIE_ECAM].size / PCIE_MMCFG_SIZE_MIN - 1);
+> -    qemu_fdt_setprop(fdt, name, "dma-coherent", NULL, 0);
+> -    qemu_fdt_setprop_cells(fdt, name, "reg", 0,
+> +    qemu_fdt_setprop(mc->fdt, name, "dma-coherent", NULL, 0);
+> +    qemu_fdt_setprop_cells(mc->fdt, name, "reg", 0,
+>          memmap[VIRT_PCIE_ECAM].base, 0, memmap[VIRT_PCIE_ECAM].size);
+> -    qemu_fdt_setprop_sized_cells(fdt, name, "ranges",
+> +    qemu_fdt_setprop_sized_cells(mc->fdt, name, "ranges",
+>          1, FDT_PCI_RANGE_IOPORT, 2, 0,
+>          2, memmap[VIRT_PCIE_PIO].base, 2, memmap[VIRT_PCIE_PIO].size,
+>          1, FDT_PCI_RANGE_MMIO,
+> @@ -387,63 +434,93 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+>          2, virt_high_pcie_memmap.base,
+>          2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
+>
+> -    create_pcie_irq_map(fdt, name, plic_pcie_phandle);
+> +    create_pcie_irq_map(mc->fdt, name, irq_pcie_phandle);
+>      g_free(name);
+> +}
+> +
+> +static void create_fdt_reset(RISCVVirtState *s, const MemMapEntry *memmap,
+> +                             uint32_t *phandle)
+> +{
+> +    char *name;
+> +    uint32_t test_phandle;
+> +    MachineState *mc = MACHINE(s);
+>
+> -    test_phandle = phandle++;
+> +    test_phandle = (*phandle)++;
+>      name = g_strdup_printf("/soc/test@%lx",
+>          (long)memmap[VIRT_TEST].base);
+> -    qemu_fdt_add_subnode(fdt, name);
+> +    qemu_fdt_add_subnode(mc->fdt, name);
+>      {
+>          const char compat[] = "sifive,test1\0sifive,test0\0syscon";
+> -        qemu_fdt_setprop(fdt, name, "compatible", compat, sizeof(compat));
+> +        qemu_fdt_setprop(mc->fdt, name, "compatible", compat, sizeof(compat));
+>      }
+> -    qemu_fdt_setprop_cells(fdt, name, "reg",
+> -        0x0, memmap[VIRT_TEST].base,
+> -        0x0, memmap[VIRT_TEST].size);
+> -    qemu_fdt_setprop_cell(fdt, name, "phandle", test_phandle);
+> -    test_phandle = qemu_fdt_get_phandle(fdt, name);
+> +    qemu_fdt_setprop_cells(mc->fdt, name, "reg",
+> +        0x0, memmap[VIRT_TEST].base, 0x0, memmap[VIRT_TEST].size);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "phandle", test_phandle);
+> +    test_phandle = qemu_fdt_get_phandle(mc->fdt, name);
+>      g_free(name);
+>
+>      name = g_strdup_printf("/soc/reboot");
+> -    qemu_fdt_add_subnode(fdt, name);
+> -    qemu_fdt_setprop_string(fdt, name, "compatible", "syscon-reboot");
+> -    qemu_fdt_setprop_cell(fdt, name, "regmap", test_phandle);
+> -    qemu_fdt_setprop_cell(fdt, name, "offset", 0x0);
+> -    qemu_fdt_setprop_cell(fdt, name, "value", FINISHER_RESET);
+> +    qemu_fdt_add_subnode(mc->fdt, name);
+> +    qemu_fdt_setprop_string(mc->fdt, name, "compatible", "syscon-reboot");
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "regmap", test_phandle);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "offset", 0x0);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "value", FINISHER_RESET);
+>      g_free(name);
+>
+>      name = g_strdup_printf("/soc/poweroff");
+> -    qemu_fdt_add_subnode(fdt, name);
+> -    qemu_fdt_setprop_string(fdt, name, "compatible", "syscon-poweroff");
+> -    qemu_fdt_setprop_cell(fdt, name, "regmap", test_phandle);
+> -    qemu_fdt_setprop_cell(fdt, name, "offset", 0x0);
+> -    qemu_fdt_setprop_cell(fdt, name, "value", FINISHER_PASS);
+> +    qemu_fdt_add_subnode(mc->fdt, name);
+> +    qemu_fdt_setprop_string(mc->fdt, name, "compatible", "syscon-poweroff");
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "regmap", test_phandle);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "offset", 0x0);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "value", FINISHER_PASS);
+>      g_free(name);
+> +}
+> +
+> +static void create_fdt_uart(RISCVVirtState *s, const MemMapEntry *memmap,
+> +                            uint32_t irq_mmio_phandle)
+> +{
+> +    char *name;
+> +    MachineState *mc = MACHINE(s);
+>
+>      name = g_strdup_printf("/soc/uart@%lx", (long)memmap[VIRT_UART0].base);
+> -    qemu_fdt_add_subnode(fdt, name);
+> -    qemu_fdt_setprop_string(fdt, name, "compatible", "ns16550a");
+> -    qemu_fdt_setprop_cells(fdt, name, "reg",
+> +    qemu_fdt_add_subnode(mc->fdt, name);
+> +    qemu_fdt_setprop_string(mc->fdt, name, "compatible", "ns16550a");
+> +    qemu_fdt_setprop_cells(mc->fdt, name, "reg",
+>          0x0, memmap[VIRT_UART0].base,
+>          0x0, memmap[VIRT_UART0].size);
+> -    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 3686400);
+> -    qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", plic_mmio_phandle);
+> -    qemu_fdt_setprop_cell(fdt, name, "interrupts", UART0_IRQ);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "clock-frequency", 3686400);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "interrupt-parent", irq_mmio_phandle);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "interrupts", UART0_IRQ);
+>
+> -    qemu_fdt_add_subnode(fdt, "/chosen");
+> -    qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", name);
+> +    qemu_fdt_add_subnode(mc->fdt, "/chosen");
+> +    qemu_fdt_setprop_string(mc->fdt, "/chosen", "stdout-path", name);
+>      g_free(name);
+> +}
+> +
+> +static void create_fdt_rtc(RISCVVirtState *s, const MemMapEntry *memmap,
+> +                           uint32_t irq_mmio_phandle)
+> +{
+> +    char *name;
+> +    MachineState *mc = MACHINE(s);
+>
+>      name = g_strdup_printf("/soc/rtc@%lx", (long)memmap[VIRT_RTC].base);
+> -    qemu_fdt_add_subnode(fdt, name);
+> -    qemu_fdt_setprop_string(fdt, name, "compatible", "google,goldfish-rtc");
+> -    qemu_fdt_setprop_cells(fdt, name, "reg",
+> -        0x0, memmap[VIRT_RTC].base,
+> -        0x0, memmap[VIRT_RTC].size);
+> -    qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", plic_mmio_phandle);
+> -    qemu_fdt_setprop_cell(fdt, name, "interrupts", RTC_IRQ);
+> +    qemu_fdt_add_subnode(mc->fdt, name);
+> +    qemu_fdt_setprop_string(mc->fdt, name, "compatible",
+> +        "google,goldfish-rtc");
+> +    qemu_fdt_setprop_cells(mc->fdt, name, "reg",
+> +        0x0, memmap[VIRT_RTC].base, 0x0, memmap[VIRT_RTC].size);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "interrupt-parent",
+> +        irq_mmio_phandle);
+> +    qemu_fdt_setprop_cell(mc->fdt, name, "interrupts", RTC_IRQ);
+>      g_free(name);
+> +}
+> +
+> +static void create_fdt_flash(RISCVVirtState *s, const MemMapEntry *memmap)
+> +{
+> +    char *name;
+> +    MachineState *mc = MACHINE(s);
+> +    hwaddr flashsize = virt_memmap[VIRT_FLASH].size / 2;
+> +    hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
+>
+>      name = g_strdup_printf("/soc/flash@%" PRIx64, flashbase);
+>      qemu_fdt_add_subnode(mc->fdt, name);
+> @@ -453,10 +530,59 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+>                                   2, flashbase + flashsize, 2, flashsize);
+>      qemu_fdt_setprop_cell(mc->fdt, name, "bank-width", 4);
+>      g_free(name);
+> +}
+> +
+> +static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+> +                       uint64_t mem_size, const char *cmdline, bool is_32_bit)
+> +{
+> +    MachineState *mc = MACHINE(s);
+> +    uint32_t phandle = 1, irq_mmio_phandle = 1;
+> +    uint32_t irq_pcie_phandle = 1, irq_virtio_phandle = 1;
+> +
+> +    if (mc->dtb) {
+> +        mc->fdt = load_device_tree(mc->dtb, &s->fdt_size);
+> +        if (!mc->fdt) {
+> +            error_report("load_device_tree() failed");
+> +            exit(1);
+> +        }
+> +        goto update_bootargs;
+> +    } else {
+> +        mc->fdt = create_device_tree(&s->fdt_size);
+> +        if (!mc->fdt) {
+> +            error_report("create_device_tree() failed");
+> +            exit(1);
+> +        }
+> +    }
+> +
+> +    qemu_fdt_setprop_string(mc->fdt, "/", "model", "riscv-virtio,qemu");
+> +    qemu_fdt_setprop_string(mc->fdt, "/", "compatible", "riscv-virtio");
+> +    qemu_fdt_setprop_cell(mc->fdt, "/", "#size-cells", 0x2);
+> +    qemu_fdt_setprop_cell(mc->fdt, "/", "#address-cells", 0x2);
+> +
+> +    qemu_fdt_add_subnode(mc->fdt, "/soc");
+> +    qemu_fdt_setprop(mc->fdt, "/soc", "ranges", NULL, 0);
+> +    qemu_fdt_setprop_string(mc->fdt, "/soc", "compatible", "simple-bus");
+> +    qemu_fdt_setprop_cell(mc->fdt, "/soc", "#size-cells", 0x2);
+> +    qemu_fdt_setprop_cell(mc->fdt, "/soc", "#address-cells", 0x2);
+> +
+> +    create_fdt_sockets(s, memmap, is_32_bit, &phandle,
+> +        &irq_mmio_phandle, &irq_pcie_phandle, &irq_virtio_phandle);
+> +
+> +    create_fdt_virtio(s, memmap, irq_virtio_phandle);
+> +
+> +    create_fdt_pcie(s, memmap, irq_pcie_phandle);
+> +
+> +    create_fdt_reset(s, memmap, &phandle);
+> +
+> +    create_fdt_uart(s, memmap, irq_mmio_phandle);
+> +
+> +    create_fdt_rtc(s, memmap, irq_mmio_phandle);
+> +
+> +    create_fdt_flash(s, memmap);
+>
+>  update_bootargs:
+>      if (cmdline) {
+> -        qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+> +        qemu_fdt_setprop_string(mc->fdt, "/chosen", "bootargs", cmdline);
+>      }
+>  }
 
 Regards,
 Bin
