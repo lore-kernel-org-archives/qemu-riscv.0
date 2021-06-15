@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lt4Ap-0005mu-AT
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Jun 2021 04:11:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40080)
+	id 1lt4Fu-0004zk-18
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Jun 2021 04:17:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40924)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lt4An-0005ib-8r; Tue, 15 Jun 2021 04:11:49 -0400
-Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:35615)
+ id 1lt4Ft-0004xH-7H; Tue, 15 Jun 2021 04:17:05 -0400
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:34517)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lt4Ak-0007bm-DF; Tue, 15 Jun 2021 04:11:49 -0400
-Received: by mail-il1-x12f.google.com with SMTP id b9so14584248ilr.2;
- Tue, 15 Jun 2021 01:11:45 -0700 (PDT)
+ id 1lt4Fi-00037U-7x; Tue, 15 Jun 2021 04:17:04 -0400
+Received: by mail-io1-xd35.google.com with SMTP id 5so42463839ioe.1;
+ Tue, 15 Jun 2021 01:16:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=DqHmY/V7cz9+ORqZsz7TqCM6eDhlT6E9EA/UbGTZ14Q=;
- b=eMtTUejUL+IxmZ5nnX1E6xTFeIZ2a5gemgA7xOn8XbbO/G/ZuQealNA5Md/oL0KQ0U
- HHSKGY7N/znDw9wUcFFmGh4MLlfogLmQRdNR/pmMW2LNAmriN2mq6xGb0Mx04FhWVJ1x
- 5iocK18Zci2pPi297Za1kXn4mgaPPruBT8pSXVv8oN6O2Y2yqd123/fseDWrjQEjE0Tq
- qRBzZ+cVX9wHlbnjxGg4NlgEnEpGdwb7oZQ0+C8vPIQbLtxcganT54fE/4v5liCl+lxl
- v5nAsOH9gG+ct88PGl6K9nMSJbtO8RL67JlDcKuZUBUD5yOCl+7LPVfqilpIjKI8gVSs
- wFLw==
+ :cc:content-transfer-encoding;
+ bh=GMHkQJVjQS1RqJt1sQDu3ctdA0qqnoMDIgTHeRoQYnU=;
+ b=YD2NXT3j5bFlF/5wJtUGBNRvuXJ8DbLufbNV7rt0IgS7/m/Agvmo5l69AlGOa74c4T
+ QSGvRmimversIuJQmXr7XesSnMFIY/svLwu5PikXCAXNI2SBSn4+8J5XBpU1SFU+Q/OQ
+ b6fQtG6gDOeeU4b5yvPS2fxQZ/Q4frTJPR1z8WsPYLtnHowtM9u4Owy6LXP6s3zEpsSB
+ J2laANbuFYjM4mZ1+DUOlr3zoxbDlKI4nudMcB0taR+vnLzdH7kmSBQp/5wiThQyQJIU
+ O10dFrZY3P1KAoC6aCPeXEsnHihVhNXc2LUY5iNpISlpYt1APhmgaNa2Ul9HjnXIyw0y
+ 9hPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=DqHmY/V7cz9+ORqZsz7TqCM6eDhlT6E9EA/UbGTZ14Q=;
- b=uQUzcBgQD5g6fY0u6XYyDZHaDjvTCrIZp5WtJAIKtoJvjoPDAmWK87ogEZZaeAN1/h
- nXdvn18wmajvkp+RLmrExdJHPJ5mZ79E+SITS7sub8vQOcQuo8t0SCz8mrpSaYkYESuw
- iuG4AcC7I0OPbR3INYHjRv0d+MMtSBK2JV5f5IeB7WrUpvoxgOUbKMLA5MwQ0jn0WZXI
- YsVgZT/Pg26BY01OuJLxQbOLcNT4yKVCScuItTzyH/kbQG0nuvb9pcUOStHYj3hMvWp0
- 8fWmx20B2K4ovjSUoT4VmeTEYqXja+ooNtyMtC+T5+sXVUzBbj+z6cHWDk/0+icpNahD
- Aeig==
-X-Gm-Message-State: AOAM5337UlpJ8YoTdWWSYuDlg7a16vQZlE2zhT34r/AtaP7jgl7jPnJ1
- Bibopxp3a7mfV7eR26bIntE5Mtwju5lYLtAZHtI=
-X-Google-Smtp-Source: ABdhPJzsjl2kkyuuNsxTy8f/BddVv4h6vx0hOa7S29TaJB7ivL2D8ukavVN7kQvQnrv5Y6rgpy0QFUYD0XkU4HkD6OY=
-X-Received: by 2002:a92:c56d:: with SMTP id b13mr17089829ilj.267.1623744704927; 
- Tue, 15 Jun 2021 01:11:44 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=GMHkQJVjQS1RqJt1sQDu3ctdA0qqnoMDIgTHeRoQYnU=;
+ b=Fx01RR2AuI9Zf/h1w+5pgiFJGxgXN0N/hF6rZkLKjvTYSAyI5q2Wn15KZXRnEN9xJ3
+ o8m8BTEAbYmjpdUnxp0d/PN7Pqg6JlEUISgiq7EkXKmM7D8Kg64x8vYo16usCK1L0tsU
+ ZNBWRftFz8uCcut5tS/jjUp+UAbHTai71BIr5fucjetKdQCIcIw+2MUe6ePDV0cLKJlS
+ ivGip0Hb1FXgzRUQqOp5W5m041+GXkOpw2U7l2m9AjspMgZHc27YTiIiREftI/nOhNfV
+ anlFx/rg4ULNsU9qCKaxcb233HAIVXSp8hz/8VZNkLXbx3Fl91RQ1oUan7D5uosj/s4A
+ aUoA==
+X-Gm-Message-State: AOAM531GptWLIBwuxBMHvjUmji5VoJPi6Eo3HQphuO94kqb0Ar24mFPf
+ FZRx1JX4h1GsgHXy/fSwZKxmRvxFrG3aR0qo1HY=
+X-Google-Smtp-Source: ABdhPJzU0eE4kVql77PtX+tc/ON055R9xMXC0b/QriCXY5Wjlx00fayck8TzOdQqTvFyUqqaiw7o8CcwX4e2HhXpLvs=
+X-Received: by 2002:a05:6638:1355:: with SMTP id
+ u21mr2126414jad.106.1623745012306; 
+ Tue, 15 Jun 2021 01:16:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210514143242.377645-1-anup.patel@wdc.com>
- <20210514143242.377645-4-anup.patel@wdc.com>
- <CAKmqyKOcsF32oLtfyh511JCcrwgONK1qvjwK-dMYdPPZABYOOg@mail.gmail.com>
- <CAAhSdy1eWW6bw55O1pLHvopRVvM6DVb-kzvhTAjAoyvB0qt5bQ@mail.gmail.com>
- <CAKmqyKO_hEpGUNkH99rk2XNERHFN_iQTJEuHzGDsNerHXqna0Q@mail.gmail.com>
- <CAAhSdy0ifGW6QJC+esbx9+V7huOrAFigJsh5LsCHh7MofT721A@mail.gmail.com>
-In-Reply-To: <CAAhSdy0ifGW6QJC+esbx9+V7huOrAFigJsh5LsCHh7MofT721A@mail.gmail.com>
+References: <20210613141222.548357-1-lukas.juenger@greensocs.com>
+ <20210613141222.548357-3-lukas.juenger@greensocs.com>
+In-Reply-To: <20210613141222.548357-3-lukas.juenger@greensocs.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 15 Jun 2021 18:11:18 +1000
-Message-ID: <CAKmqyKM12-P-2Hg+Ynopj_i6BX4s1xAj9SJ6JvUrSsTn_LPcag@mail.gmail.com>
-Subject: Re: [PATCH 3/4] target/riscv: Implement AIA local interrupt CSRs
-To: Anup Patel <anup@brainfault.org>
-Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, Atish Patra <atish.patra@wdc.com>,
+Date: Tue, 15 Jun 2021 18:16:26 +1000
+Message-ID: <CAKmqyKMLh0Ekgs__nUKisuFK0guRog32mjhim3-xgF7X31PAtQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] hw/char: sifive_uart
+To: =?UTF-8?Q?Lukas_J=C3=BCnger?= <lukas.juenger@greensocs.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+ Bin Meng <bin.meng@windriver.com>, Mark Burton <mark.burton@greensocs.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Luc Michel <luc.michel@greensocs.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -78,150 +78,214 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jun 2021 08:11:49 -0000
+X-List-Received-Date: Tue, 15 Jun 2021 08:17:05 -0000
 
-On Sat, Jun 12, 2021 at 12:04 AM Anup Patel <anup@brainfault.org> wrote:
+On Mon, Jun 14, 2021 at 12:20 AM Lukas J=C3=BCnger
+<lukas.juenger@greensocs.com> wrote:
 >
-> On Fri, Jun 11, 2021 at 2:16 PM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Fri, Jun 11, 2021 at 3:04 PM Anup Patel <anup@brainfault.org> wrote:
-> > >
-> > > On Fri, Jun 11, 2021 at 4:49 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > >
-> > > > On Sat, May 15, 2021 at 12:34 AM Anup Patel <anup.patel@wdc.com> wrote:
-> > > > >
-> > > > > We implement various AIA local interrupt CSRs for M-mode, HS-mode,
-> > > > > and VS-mode.
-> > > > >
-> > > > > Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> > > > > ---
-> > > > >  target/riscv/cpu.c        |   27 +-
-> > > > >  target/riscv/cpu.h        |   52 +-
-> > > > >  target/riscv/cpu_helper.c |  245 ++++++++-
-> > > > >  target/riscv/csr.c        | 1059 +++++++++++++++++++++++++++++++++++--
-> > > > >  target/riscv/machine.c    |   26 +-
-> > > > >  5 files changed, 1309 insertions(+), 100 deletions(-)
-> > > >
-> > > > I feel this patch could be split up more :)
-> > >
-> > > This is patch is large because I did not want to break functionality.
-> > >
-> > > I try again to break this patch. At the moment, the best I can do is
-> > > to break in to two parts.
-> > > 1) AIA local interrupt CSRs without IMSIC
-> > > 2) Extend AIA local interrupt CSRs to support IMSIC register access
-> >
-> > As the patch is being added while AIA isn't enabled you are able to
-> > add the AIA in breaking stages. That is the AIA isn't fully
-> > functional, you still have to make sure not to break existing users.
-> >
-> > >
-> > > >
-> > > > >
-> > > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > > > index f3702111ae..795162834b 100644
-> > > > > --- a/target/riscv/cpu.c
-> > > > > +++ b/target/riscv/cpu.c
-> > > > > @@ -256,11 +256,11 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-> > > > >          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ",
-> > > > >                       (target_ulong)env->vsstatus);
-> > > > >      }
-> > > > > -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip);
-> > > > > -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
-> > > > > -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
-> > > > > +    qemu_fprintf(f, " %s %016" PRIx64 "\n", "mip     ", env->mip);
-> > > > > +    qemu_fprintf(f, " %s %016" PRIx64 "\n", "mie     ", env->mie);
-> > > > > +    qemu_fprintf(f, " %s %016" PRIx64 "\n", "mideleg ", env->mideleg);
-> > > > >      if (riscv_has_ext(env, RVH)) {
-> > > > > -        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hideleg ", env->hideleg);
-> > > > > +        qemu_fprintf(f, " %s %016" PRIx64 "\n", "hideleg ", env->hideleg);
-> > > > >      }
-> > > > >      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
-> > > > >      if (riscv_has_ext(env, RVH)) {
-> > > > > @@ -345,6 +345,8 @@ void restore_state_to_opc(CPURISCVState *env, TranslationBlock *tb,
-> > > > >
-> > > > >  static void riscv_cpu_reset(DeviceState *dev)
-> > > > >  {
-> > > > > +    uint8_t iprio;
-> > > > > +    int i, irq, rdzero;
-> > > > >      CPUState *cs = CPU(dev);
-> > > > >      RISCVCPU *cpu = RISCV_CPU(cs);
-> > > > >      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
-> > > > > @@ -357,6 +359,23 @@ static void riscv_cpu_reset(DeviceState *dev)
-> > > > >      env->mcause = 0;
-> > > > >      env->pc = env->resetvec;
-> > > > >      env->two_stage_lookup = false;
-> > > > > +
-> > > > > +    /* Initialized default priorities of local interrupts. */
-> > > > > +    for (i = 0; i < ARRAY_SIZE(env->miprio); i++) {
-> > > > > +        iprio = riscv_cpu_default_priority(i);
-> > > > > +        env->miprio[i] = iprio;
-> > > > > +        env->siprio[i] = iprio;
-> > > > > +        env->hviprio[i] = IPRIO_DEFAULT_MMAXIPRIO;
-> > > > > +    }
-> > > > > +    i = 0;
-> > > > > +    while (!riscv_cpu_hviprio_index2irq(i, &irq, &rdzero)) {
-> > > > > +        if (rdzero) {
-> > > > > +            env->hviprio[irq] = 0;
-> > > > > +        } else {
-> > > > > +            env->hviprio[irq] = env->miprio[irq];
-> > > > > +        }
-> > > > > +        i++;
-> > > > > +    }
-> > > > >  #endif
-> > > > >      cs->exception_index = EXCP_NONE;
-> > > > >      env->load_res = -1;
-> > > > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > > > > index f00c60c840..780d3f9058 100644
-> > > > > --- a/target/riscv/cpu.h
-> > > > > +++ b/target/riscv/cpu.h
-> > > > > @@ -157,12 +157,12 @@ struct CPURISCVState {
-> > > > >       */
-> > > > >      uint64_t mstatus;
-> > > > >
-> > > > > -    target_ulong mip;
-> > > > > +    uint64_t mip;
-> > > >
-> > > > This isn't right. MIP is a MXLEN-1 CSR. I didn't check but I assume
-> > > > all the other existing target_ulong CSRs are the same.
-> > >
-> > > When AIA is available the number of local interrupts are 64 for
-> > > both RV32 and RV64.
-> >
-> > Is that going to be reflected in the priv spec?
+> QOMify sifive_uart model
 >
-> The AIA spec is going to be separate from priv spec since
-> it is totally optional.
->
-> This AIA local interrupt CSRs will be part of AIA spec and should
-> only be implemented if a RISC-V implementations wants to use
-> AIA.
->
-> We have four types of changes as far as CSRs go:
-> 1) RV32 CSRs to support 64 local interrupts on RV32
+> Signed-off-by: Lukas J=C3=BCnger <lukas.juenger@greensocs.com>
 
-Hmmm... This isn't ideal. So implementations without AIA will have a
-Xlen MIP while implementations with AIA will have a 64-bit MIP?
+Can you update the titles as requested by Bin?
 
-I guess we just don't expose all of MIP, so it isn't that bad. Still
-that change should be it's own patch with good justification as why we
-aren't following the priv spec.
+After that:
 
-> 2) Indirect CSRs to access local interrupt priorities
-> 3) Interrupt filtering CSRs
-> 4) IMSIC support CSRs
-
-New AIA CSRs are fine, it's just core changes that are more of a worry.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  include/hw/char/sifive_uart.h |  11 ++--
+>  hw/char/sifive_uart.c         | 114 +++++++++++++++++++++++++++++++---
+>  2 files changed, 109 insertions(+), 16 deletions(-)
 >
-> From above #3 is totally optional and not implemented by this
-> patch whereas #4 is only required when platform has RISC-V IMSIC.
+> diff --git a/include/hw/char/sifive_uart.h b/include/hw/char/sifive_uart.=
+h
+> index 3e962be659..7f6c79f8bd 100644
+> --- a/include/hw/char/sifive_uart.h
+> +++ b/include/hw/char/sifive_uart.h
+> @@ -21,6 +21,7 @@
+>  #define HW_SIFIVE_UART_H
 >
-> A platform can skip all four changes mentioned above, if the
-> platform only wants AIA APLIC to manage wired interrupts.
+>  #include "chardev/char-fe.h"
+> +#include "hw/qdev-properties.h"
+>  #include "hw/sysbus.h"
+>  #include "qom/object.h"
 >
-> Regards,
-> Anup
+> @@ -49,12 +50,10 @@ enum {
+>
+>  #define SIFIVE_UART_GET_TXCNT(txctrl)   ((txctrl >> 16) & 0x7)
+>  #define SIFIVE_UART_GET_RXCNT(rxctrl)   ((rxctrl >> 16) & 0x7)
+> +#define SIFIVE_UART_RX_FIFO_SIZE 8
+>
+>  #define TYPE_SIFIVE_UART "riscv.sifive.uart"
+> -
+> -typedef struct SiFiveUARTState SiFiveUARTState;
+> -DECLARE_INSTANCE_CHECKER(SiFiveUARTState, SIFIVE_UART,
+> -                         TYPE_SIFIVE_UART)
+> +OBJECT_DECLARE_SIMPLE_TYPE(SiFiveUARTState, SIFIVE_UART)
+>
+>  struct SiFiveUARTState {
+>      /*< private >*/
+> @@ -64,8 +63,8 @@ struct SiFiveUARTState {
+>      qemu_irq irq;
+>      MemoryRegion mmio;
+>      CharBackend chr;
+> -    uint8_t rx_fifo[8];
+> -    unsigned int rx_fifo_len;
+> +    uint8_t rx_fifo[SIFIVE_UART_RX_FIFO_SIZE];
+> +    uint8_t rx_fifo_len;
+>      uint32_t ie;
+>      uint32_t ip;
+>      uint32_t txctrl;
+> diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
+> index 5df8212961..278e21c434 100644
+> --- a/hw/char/sifive_uart.c
+> +++ b/hw/char/sifive_uart.c
+> @@ -19,10 +19,12 @@
+>  #include "qemu/osdep.h"
+>  #include "qapi/error.h"
+>  #include "qemu/log.h"
+> +#include "migration/vmstate.h"
+>  #include "chardev/char.h"
+>  #include "chardev/char-fe.h"
+>  #include "hw/irq.h"
+>  #include "hw/char/sifive_uart.h"
+> +#include "hw/qdev-properties-system.h"
+>
+>  /*
+>   * Not yet implemented:
+> @@ -175,20 +177,112 @@ static int sifive_uart_be_change(void *opaque)
+>      return 0;
+>  }
+>
+> +static Property sifive_uart_properties[] =3D {
+> +    DEFINE_PROP_CHR("chardev", SiFiveUARTState, chr),
+> +    DEFINE_PROP_END_OF_LIST(),
+> +};
+> +
+> +static void sifive_uart_init(Object *obj)
+> +{
+> +    SysBusDevice *sbd =3D SYS_BUS_DEVICE(obj);
+> +    SiFiveUARTState *s =3D SIFIVE_UART(obj);
+> +
+> +    memory_region_init_io(&s->mmio, OBJECT(s), &sifive_uart_ops, s,
+> +                          TYPE_SIFIVE_UART, SIFIVE_UART_MAX);
+> +    sysbus_init_mmio(sbd, &s->mmio);
+> +    sysbus_init_irq(sbd, &s->irq);
+> +}
+> +
+> +static void sifive_uart_realize(DeviceState *dev, Error **errp)
+> +{
+> +    SiFiveUARTState *s =3D SIFIVE_UART(dev);
+> +
+> +    qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uart_rx=
+,
+> +                             sifive_uart_event, sifive_uart_be_change, s=
+,
+> +                             NULL, true);
+> +
+> +}
+> +
+> +static void sifive_uart_reset_enter(Object *obj, ResetType type)
+> +{
+> +    SiFiveUARTState *s =3D SIFIVE_UART(obj);
+> +    s->ie =3D 0;
+> +    s->ip =3D 0;
+> +    s->txctrl =3D 0;
+> +    s->rxctrl =3D 0;
+> +    s->div =3D 0;
+> +    s->rx_fifo_len =3D 0;
+> +}
+> +
+> +static void sifive_uart_reset_hold(Object *obj)
+> +{
+> +    SiFiveUARTState *s =3D SIFIVE_UART(obj);
+> +    qemu_irq_lower(s->irq);
+> +}
+> +
+> +static const VMStateDescription vmstate_sifive_uart =3D {
+> +    .name =3D TYPE_SIFIVE_UART,
+> +    .version_id =3D 1,
+> +    .minimum_version_id =3D 1,
+> +    .fields =3D (VMStateField[]) {
+> +        VMSTATE_UINT8_ARRAY(rx_fifo, SiFiveUARTState,
+> +                            SIFIVE_UART_RX_FIFO_SIZE),
+> +        VMSTATE_UINT8(rx_fifo_len, SiFiveUARTState),
+> +        VMSTATE_UINT32(ie, SiFiveUARTState),
+> +        VMSTATE_UINT32(ip, SiFiveUARTState),
+> +        VMSTATE_UINT32(txctrl, SiFiveUARTState),
+> +        VMSTATE_UINT32(rxctrl, SiFiveUARTState),
+> +        VMSTATE_UINT32(div, SiFiveUARTState),
+> +        VMSTATE_END_OF_LIST()
+> +    },
+> +};
+> +
+> +
+> +static void sifive_uart_class_init(ObjectClass *oc, void *data)
+> +{
+> +    DeviceClass *dc =3D DEVICE_CLASS(oc);
+> +    ResettableClass *rc =3D RESETTABLE_CLASS(oc);
+> +
+> +    dc->realize =3D sifive_uart_realize;
+> +    dc->vmsd =3D &vmstate_sifive_uart;
+> +    rc->phases.enter =3D sifive_uart_reset_enter;
+> +    rc->phases.hold  =3D sifive_uart_reset_hold;
+> +    device_class_set_props(dc, sifive_uart_properties);
+> +}
+> +
+> +static const TypeInfo sifive_uart_info =3D {
+> +    .name          =3D TYPE_SIFIVE_UART,
+> +    .parent        =3D TYPE_SYS_BUS_DEVICE,
+> +    .instance_size =3D sizeof(SiFiveUARTState),
+> +    .instance_init =3D sifive_uart_init,
+> +    .class_init    =3D sifive_uart_class_init,
+> +};
+> +
+> +static void sifive_uart_register_types(void)
+> +{
+> +    type_register_static(&sifive_uart_info);
+> +}
+> +
+> +type_init(sifive_uart_register_types)
+> +
+>  /*
+>   * Create UART device.
+>   */
+>  SiFiveUARTState *sifive_uart_create(MemoryRegion *address_space, hwaddr =
+base,
+>      Chardev *chr, qemu_irq irq)
+>  {
+> -    SiFiveUARTState *s =3D g_malloc0(sizeof(SiFiveUARTState));
+> -    s->irq =3D irq;
+> -    qemu_chr_fe_init(&s->chr, chr, &error_abort);
+> -    qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uart_rx=
+,
+> -                             sifive_uart_event, sifive_uart_be_change, s=
+,
+> -                             NULL, true);
+> -    memory_region_init_io(&s->mmio, NULL, &sifive_uart_ops, s,
+> -                          TYPE_SIFIVE_UART, SIFIVE_UART_MAX);
+> -    memory_region_add_subregion(address_space, base, &s->mmio);
+> -    return s;
+> +    DeviceState *dev;
+> +    SysBusDevice *s;
+> +    SiFiveUARTState *r;
+> +
+> +    dev =3D qdev_new("riscv.sifive.uart");
+> +    s =3D SYS_BUS_DEVICE(dev);
+> +    qdev_prop_set_chr(dev, "chardev", chr);
+> +    sysbus_realize_and_unref(s, &error_fatal);
+> +    memory_region_add_subregion(address_space, base,
+> +                                sysbus_mmio_get_region(s, 0));
+> +    sysbus_connect_irq(s, 0, irq);
+> +
+> +    r =3D SIFIVE_UART(dev);
+> +    return r;
+>  }
+> --
+> 2.31.1
+>
+>
 
