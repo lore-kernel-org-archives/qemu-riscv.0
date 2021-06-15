@@ -1,66 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lt3m4-0002qv-HC
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Jun 2021 03:46:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35434)
+	id 1lt4Ap-0005mu-AT
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Jun 2021 04:11:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40080)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lt3lz-0002nz-Dq; Tue, 15 Jun 2021 03:46:12 -0400
-Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34]:33748)
+ id 1lt4An-0005ib-8r; Tue, 15 Jun 2021 04:11:49 -0400
+Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:35615)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lt3lv-0005gI-Q9; Tue, 15 Jun 2021 03:46:11 -0400
-Received: by mail-io1-xd34.google.com with SMTP id a6so42462787ioe.0;
- Tue, 15 Jun 2021 00:46:06 -0700 (PDT)
+ id 1lt4Ak-0007bm-DF; Tue, 15 Jun 2021 04:11:49 -0400
+Received: by mail-il1-x12f.google.com with SMTP id b9so14584248ilr.2;
+ Tue, 15 Jun 2021 01:11:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=r6MBq6riEs74phxAzBvGeW80X1CEh8c64y7E+2Ach3I=;
- b=WidclWP7dsmo0LkIRrW16zvwH8u2Tb65aJl9ZyJQafFb6qDWtp7Ngzx50UzVigtppK
- 4h4Mbk/1ylwMaO5isKOI/fUSaRVli3v4jGu0ysXw+uCY/eHZj/S7+qmIIRdG0WaDMn7y
- MUyluCkzpTa1z79cQx8o/FBx7sAjNnncbVWpI/e2MbyVJxQBK9vLtW68K6gTjV3J+9ZZ
- a2F0jMxRxkqCjNbrCgG31Nhx4U5jCnG7XzlRgBizfaG/oDx6QSc8g9uAxFJSgUctW2GY
- RwoxzKl4eXGBU/p3JEA57BNXSbk28mXBEJXLAJoLpmGQKw+gc7QNQMEBKJPbVa87QKFS
- 6bJg==
+ :cc; bh=DqHmY/V7cz9+ORqZsz7TqCM6eDhlT6E9EA/UbGTZ14Q=;
+ b=eMtTUejUL+IxmZ5nnX1E6xTFeIZ2a5gemgA7xOn8XbbO/G/ZuQealNA5Md/oL0KQ0U
+ HHSKGY7N/znDw9wUcFFmGh4MLlfogLmQRdNR/pmMW2LNAmriN2mq6xGb0Mx04FhWVJ1x
+ 5iocK18Zci2pPi297Za1kXn4mgaPPruBT8pSXVv8oN6O2Y2yqd123/fseDWrjQEjE0Tq
+ qRBzZ+cVX9wHlbnjxGg4NlgEnEpGdwb7oZQ0+C8vPIQbLtxcganT54fE/4v5liCl+lxl
+ v5nAsOH9gG+ct88PGl6K9nMSJbtO8RL67JlDcKuZUBUD5yOCl+7LPVfqilpIjKI8gVSs
+ wFLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=r6MBq6riEs74phxAzBvGeW80X1CEh8c64y7E+2Ach3I=;
- b=Cf2e+Xtl22c04ZgtgWHkeR4ckWEvdeYXk+ZKSiek1nBa2OO6WEVmeqYmO5HtNJaULI
- dDquwfCT9BDAhFM+1CP3vm+Ch5VKx8HUOyKIkeI0bkEd0yUsKWZh84I2kdLsXS3Bwp+Z
- CMRjT922dPgnfdG4jMZgRB2RTmtjssCWrVK1gFQW6taIosuYzrrRH01FWej5PW3KSTPF
- 9Yi9NHQE/Pxc775UZ49J8QINTFwEx1bZmHNAJrs56eNoLGUWE33hTaE2WHgf6gC1mu2+
- zjYYJlsG7CeTc01J4DyI8y9Ry6mtJNzKUiT+w8Gr9IqgRBY1Hotq16XHIz2j+5F7vt52
- gXGw==
-X-Gm-Message-State: AOAM532K4N1eujU4nWiUI25lZ63OaB0CRBNZxxgJGVr9j6wVODRnTLFS
- B/U+N7UMnzVdv6D9eQtI7kzsYxCh+2luqlYRc1o=
-X-Google-Smtp-Source: ABdhPJyqGzGm8akDzN8QPPyH4tl42fYWK219862jGUmvETeMPun+XqRHlzZt41BVKwyV7g6b/k9vtG2lnz7lAQE9wC8=
-X-Received: by 2002:a05:6602:140e:: with SMTP id
- t14mr17454176iov.42.1623743165857; 
- Tue, 15 Jun 2021 00:46:05 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=DqHmY/V7cz9+ORqZsz7TqCM6eDhlT6E9EA/UbGTZ14Q=;
+ b=uQUzcBgQD5g6fY0u6XYyDZHaDjvTCrIZp5WtJAIKtoJvjoPDAmWK87ogEZZaeAN1/h
+ nXdvn18wmajvkp+RLmrExdJHPJ5mZ79E+SITS7sub8vQOcQuo8t0SCz8mrpSaYkYESuw
+ iuG4AcC7I0OPbR3INYHjRv0d+MMtSBK2JV5f5IeB7WrUpvoxgOUbKMLA5MwQ0jn0WZXI
+ YsVgZT/Pg26BY01OuJLxQbOLcNT4yKVCScuItTzyH/kbQG0nuvb9pcUOStHYj3hMvWp0
+ 8fWmx20B2K4ovjSUoT4VmeTEYqXja+ooNtyMtC+T5+sXVUzBbj+z6cHWDk/0+icpNahD
+ Aeig==
+X-Gm-Message-State: AOAM5337UlpJ8YoTdWWSYuDlg7a16vQZlE2zhT34r/AtaP7jgl7jPnJ1
+ Bibopxp3a7mfV7eR26bIntE5Mtwju5lYLtAZHtI=
+X-Google-Smtp-Source: ABdhPJzsjl2kkyuuNsxTy8f/BddVv4h6vx0hOa7S29TaJB7ivL2D8ukavVN7kQvQnrv5Y6rgpy0QFUYD0XkU4HkD6OY=
+X-Received: by 2002:a92:c56d:: with SMTP id b13mr17089829ilj.267.1623744704927; 
+ Tue, 15 Jun 2021 01:11:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210409074857.166082-1-zhiwei_liu@c-sky.com>
- <20210409074857.166082-9-zhiwei_liu@c-sky.com>
- <CANzO1D1jotPbDxJj3ZxJZ7BdT0je64A9DAudEfm8=-m4DQFzoA@mail.gmail.com>
- <f3523b14-c13d-edf8-61e4-d251691130e0@c-sky.com>
- <CANzO1D00w9YBQC=nFaXVaR6ESpOvySEJkoeR5C9cPi=g667s8Q@mail.gmail.com>
- <b638f0ad-5b9e-60b3-5d5d-c7ea14172ef8@c-sky.com>
- <CANzO1D1tVhr--xVMCQ6WbxrrOLmXJFEmR2JkBc-=Q8R4j9YxnQ@mail.gmail.com>
-In-Reply-To: <CANzO1D1tVhr--xVMCQ6WbxrrOLmXJFEmR2JkBc-=Q8R4j9YxnQ@mail.gmail.com>
+References: <20210514143242.377645-1-anup.patel@wdc.com>
+ <20210514143242.377645-4-anup.patel@wdc.com>
+ <CAKmqyKOcsF32oLtfyh511JCcrwgONK1qvjwK-dMYdPPZABYOOg@mail.gmail.com>
+ <CAAhSdy1eWW6bw55O1pLHvopRVvM6DVb-kzvhTAjAoyvB0qt5bQ@mail.gmail.com>
+ <CAKmqyKO_hEpGUNkH99rk2XNERHFN_iQTJEuHzGDsNerHXqna0Q@mail.gmail.com>
+ <CAAhSdy0ifGW6QJC+esbx9+V7huOrAFigJsh5LsCHh7MofT721A@mail.gmail.com>
+In-Reply-To: <CAAhSdy0ifGW6QJC+esbx9+V7huOrAFigJsh5LsCHh7MofT721A@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 15 Jun 2021 17:45:39 +1000
-Message-ID: <CAKmqyKNAxu9P_oefBNvcLLcFgJmk5uKDtm=j0FcSajoz+pRf-g@mail.gmail.com>
-Subject: Re: [RFC PATCH 08/11] target/riscv: Update CSR xnxti in CLIC mode
-To: Frank Chang <0xc0de0125@gmail.com>
-Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
+Date: Tue, 15 Jun 2021 18:11:18 +1000
+Message-ID: <CAKmqyKM12-P-2Hg+Ynopj_i6BX4s1xAj9SJ6JvUrSsTn_LPcag@mail.gmail.com>
+Subject: Re: [PATCH 3/4] target/riscv: Implement AIA local interrupt CSRs
+To: Anup Patel <anup@brainfault.org>
+Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Atish Patra <atish.patra@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wxy194768@alibaba-inc.com
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -81,328 +78,150 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jun 2021 07:46:13 -0000
+X-List-Received-Date: Tue, 15 Jun 2021 08:11:49 -0000
 
-On Fri, Jun 11, 2021 at 7:08 PM Frank Chang <0xc0de0125@gmail.com> wrote:
+On Sat, Jun 12, 2021 at 12:04 AM Anup Patel <anup@brainfault.org> wrote:
 >
-> LIU Zhiwei <zhiwei_liu@c-sky.com> =E6=96=BC 2021=E5=B9=B46=E6=9C=8811=E6=
-=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=884:56=E5=AF=AB=E9=81=93=EF=BC=9A
->>
->>
->> On 6/11/21 4:42 PM, Frank Chang wrote:
->>
->> LIU Zhiwei <zhiwei_liu@c-sky.com> =E6=96=BC 2021=E5=B9=B46=E6=9C=8811=E6=
-=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=884:30=E5=AF=AB=E9=81=93=EF=BC=9A
->>>
->>>
->>> On 6/11/21 4:15 PM, Frank Chang wrote:
->>>
->>> LIU Zhiwei <zhiwei_liu@c-sky.com> =E6=96=BC 2021=E5=B9=B44=E6=9C=889=E6=
-=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=883:52=E5=AF=AB=E9=81=93=EF=BC=9A
->>>>
->>>> The CSR can be used by software to service the next horizontal interru=
-pt
->>>> when it has greater level than the saved interrupt context
->>>> (held in xcause`.pil`) and greater level than the interrupt threshold =
-of
->>>> the corresponding privilege mode,
->>>>
->>>> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
->>>> ---
->>>>  target/riscv/cpu_bits.h |  16 ++++++
->>>>  target/riscv/csr.c      | 114 +++++++++++++++++++++++++++++++++++++++=
-+
->>>>  2 files changed, 130 insertions(+)
->>>>
->>>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->>>> index 7922097776..494e41edc9 100644
->>>> --- a/target/riscv/cpu_bits.h
->>>> +++ b/target/riscv/cpu_bits.h
->>>> @@ -166,6 +166,7 @@
->>>>  #define CSR_MCAUSE          0x342
->>>>  #define CSR_MTVAL           0x343
->>>>  #define CSR_MIP             0x344
->>>> +#define CSR_MNXTI           0x345 /* clic-spec-draft */
->>>>  #define CSR_MINTSTATUS      0x346 /* clic-spec-draft */
->>>>  #define CSR_MINTTHRESH      0x347 /* clic-spec-draft */
->>>>
->>>> @@ -187,6 +188,7 @@
->>>>  #define CSR_SCAUSE          0x142
->>>>  #define CSR_STVAL           0x143
->>>>  #define CSR_SIP             0x144
->>>> +#define CSR_SNXTI           0x145 /* clic-spec-draft */
->>>>  #define CSR_SINTSTATUS      0x146 /* clic-spec-draft */
->>>>  #define CSR_SINTTHRESH      0x147 /* clic-spec-draft */
->>>>
->>>> @@ -596,10 +598,24 @@
->>>>  #define MINTSTATUS_SIL                     0x0000ff00 /* sil[7:0] */
->>>>  #define MINTSTATUS_UIL                     0x000000ff /* uil[7:0] */
->>>>
->>>> +/* mcause */
->>>> +#define MCAUSE_MINHV                       0x40000000 /* minhv */
->>>> +#define MCAUSE_MPP                         0x30000000 /* mpp[1:0] */
->>>> +#define MCAUSE_MPIE                        0x08000000 /* mpie */
->>>> +#define MCAUSE_MPIL                        0x00ff0000 /* mpil[7:0] */
->>>> +#define MCAUSE_EXCCODE                     0x00000fff /* exccode[11:0=
-] */
->>>> +
->>>>  /* sintstatus */
->>>>  #define SINTSTATUS_SIL                     0x0000ff00 /* sil[7:0] */
->>>>  #define SINTSTATUS_UIL                     0x000000ff /* uil[7:0] */
->>>>
->>>> +/* scause */
->>>> +#define SCAUSE_SINHV                       0x40000000 /* sinhv */
->>>> +#define SCAUSE_SPP                         0x10000000 /* spp */
->>>> +#define SCAUSE_SPIE                        0x08000000 /* spie */
->>>> +#define SCAUSE_SPIL                        0x00ff0000 /* spil[7:0] */
->>>> +#define SCAUSE_EXCCODE                     0x00000fff /* exccode[11:0=
-] */
->>>> +
->>>>  /* MIE masks */
->>>>  #define MIE_SEIE                           (1 << IRQ_S_EXT)
->>>>  #define MIE_UEIE                           (1 << IRQ_U_EXT)
->>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>>> index e12222b77f..72cba080bf 100644
->>>> --- a/target/riscv/csr.c
->>>> +++ b/target/riscv/csr.c
->>>> @@ -774,6 +774,80 @@ static int rmw_mip(CPURISCVState *env, int csrno,=
- target_ulong *ret_value,
->>>>      return 0;
->>>>  }
->>>>
->>>> +static bool get_xnxti_status(CPURISCVState *env)
->>>> +{
->>>> +    CPUState *cs =3D env_cpu(env);
->>>> +    int clic_irq, clic_priv, clic_il, pil;
->>>> +
->>>> +    if (!env->exccode) { /* No interrupt */
->>>> +        return false;
->>>> +    }
->>>> +    /* The system is not in a CLIC mode */
->>>> +    if (!riscv_clic_is_clic_mode(env)) {
->>>> +        return false;
->>>> +    } else {
->>>> +        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
->>>> +                                  &clic_irq);
->>>> +
->>>> +        if (env->priv =3D=3D PRV_M) {
->>>> +            pil =3D MAX(get_field(env->mcause, MCAUSE_MPIL), env->min=
-tthresh);
->>>> +        } else if (env->priv =3D=3D PRV_S) {
->>>> +            pil =3D MAX(get_field(env->scause, SCAUSE_SPIL), env->sin=
-tthresh);
->>>> +        } else {
->>>> +            qemu_log_mask(LOG_GUEST_ERROR,
->>>> +                          "CSR: rmw xnxti with unsupported mode\n");
->>>> +            exit(1);
->>>> +        }
->>>> +
->>>> +        if ((clic_priv !=3D env->priv) || /* No horizontal interrupt =
-*/
->>>> +            (clic_il <=3D pil) || /* No higher level interrupt */
->>>> +            (riscv_clic_shv_interrupt(env->clic, clic_priv, cs->cpu_i=
-ndex,
->>>> +                                      clic_irq))) { /* CLIC vector mo=
-de */
->>>> +            return false;
->>>> +        } else {
->>>> +            return true;
->>>> +        }
->>>> +    }
->>>> +}
->>>> +
->>>> +static int rmw_mnxti(CPURISCVState *env, int csrno, target_ulong *ret=
-_value,
->>>> +                     target_ulong new_value, target_ulong write_mask)
->>>> +{
->>>> +    int clic_priv, clic_il, clic_irq;
->>>> +    bool ready;
->>>> +    CPUState *cs =3D env_cpu(env);
->>>> +    if (write_mask) {
->>>> +        env->mstatus |=3D new_value & (write_mask & 0b11111);
->>>> +    }
->>>> +
->>>> +    qemu_mutex_lock_iothread();
->>>
->>>
->>> Hi Zhiwei,
->>>
->>> May I ask what's the purpose to request the BQL here with qemu_mutex_lo=
-ck_iothread()?
->>> Is there any critical data we need to protect in rmw_mnxti()?
->>> As far I see, rmw_mnxti() won't call cpu_interrupt() which need BQL to =
-be held before calling.
->>> Am I missing anything?
->>>
->>> In my opinion, if you read or write any  MMIO register, you need to hol=
-d the BQL. As you can quickly see,
->>> it calls riscv_clic_clean_pending. That's why it should hold the BQL.
->>>
->>> Zhiwei
->>
->>
->> Oh, I see.
->> The MMIO register reads and writes should also be protected by BQL.
->> Thanks for the explanation.
->>
->> I am glad to know that you are reviewing this patch set. As Sifive imple=
-ments the initial v0.7 CLIC, I think you may need this patch set for your S=
-OC.
->> If you like to, I am happy to see that you connect this patch set to you=
-r SOC, and resend it again. I can also provide the qtest of this patch set =
-if you need.
->>
->> As you may see, the v6.1 soft freeze will come in July. I am afraid I ca=
-n't upstream a new SOC in so short time.
->>
->> Zhiwei
+> On Fri, Jun 11, 2021 at 2:16 PM Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Fri, Jun 11, 2021 at 3:04 PM Anup Patel <anup@brainfault.org> wrote:
+> > >
+> > > On Fri, Jun 11, 2021 at 4:49 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > > >
+> > > > On Sat, May 15, 2021 at 12:34 AM Anup Patel <anup.patel@wdc.com> wrote:
+> > > > >
+> > > > > We implement various AIA local interrupt CSRs for M-mode, HS-mode,
+> > > > > and VS-mode.
+> > > > >
+> > > > > Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> > > > > ---
+> > > > >  target/riscv/cpu.c        |   27 +-
+> > > > >  target/riscv/cpu.h        |   52 +-
+> > > > >  target/riscv/cpu_helper.c |  245 ++++++++-
+> > > > >  target/riscv/csr.c        | 1059 +++++++++++++++++++++++++++++++++++--
+> > > > >  target/riscv/machine.c    |   26 +-
+> > > > >  5 files changed, 1309 insertions(+), 100 deletions(-)
+> > > >
+> > > > I feel this patch could be split up more :)
+> > >
+> > > This is patch is large because I did not want to break functionality.
+> > >
+> > > I try again to break this patch. At the moment, the best I can do is
+> > > to break in to two parts.
+> > > 1) AIA local interrupt CSRs without IMSIC
+> > > 2) Extend AIA local interrupt CSRs to support IMSIC register access
+> >
+> > As the patch is being added while AIA isn't enabled you are able to
+> > add the AIA in breaking stages. That is the AIA isn't fully
+> > functional, you still have to make sure not to break existing users.
+> >
+> > >
+> > > >
+> > > > >
+> > > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > > > index f3702111ae..795162834b 100644
+> > > > > --- a/target/riscv/cpu.c
+> > > > > +++ b/target/riscv/cpu.c
+> > > > > @@ -256,11 +256,11 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+> > > > >          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ",
+> > > > >                       (target_ulong)env->vsstatus);
+> > > > >      }
+> > > > > -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip);
+> > > > > -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
+> > > > > -    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
+> > > > > +    qemu_fprintf(f, " %s %016" PRIx64 "\n", "mip     ", env->mip);
+> > > > > +    qemu_fprintf(f, " %s %016" PRIx64 "\n", "mie     ", env->mie);
+> > > > > +    qemu_fprintf(f, " %s %016" PRIx64 "\n", "mideleg ", env->mideleg);
+> > > > >      if (riscv_has_ext(env, RVH)) {
+> > > > > -        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hideleg ", env->hideleg);
+> > > > > +        qemu_fprintf(f, " %s %016" PRIx64 "\n", "hideleg ", env->hideleg);
+> > > > >      }
+> > > > >      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
+> > > > >      if (riscv_has_ext(env, RVH)) {
+> > > > > @@ -345,6 +345,8 @@ void restore_state_to_opc(CPURISCVState *env, TranslationBlock *tb,
+> > > > >
+> > > > >  static void riscv_cpu_reset(DeviceState *dev)
+> > > > >  {
+> > > > > +    uint8_t iprio;
+> > > > > +    int i, irq, rdzero;
+> > > > >      CPUState *cs = CPU(dev);
+> > > > >      RISCVCPU *cpu = RISCV_CPU(cs);
+> > > > >      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+> > > > > @@ -357,6 +359,23 @@ static void riscv_cpu_reset(DeviceState *dev)
+> > > > >      env->mcause = 0;
+> > > > >      env->pc = env->resetvec;
+> > > > >      env->two_stage_lookup = false;
+> > > > > +
+> > > > > +    /* Initialized default priorities of local interrupts. */
+> > > > > +    for (i = 0; i < ARRAY_SIZE(env->miprio); i++) {
+> > > > > +        iprio = riscv_cpu_default_priority(i);
+> > > > > +        env->miprio[i] = iprio;
+> > > > > +        env->siprio[i] = iprio;
+> > > > > +        env->hviprio[i] = IPRIO_DEFAULT_MMAXIPRIO;
+> > > > > +    }
+> > > > > +    i = 0;
+> > > > > +    while (!riscv_cpu_hviprio_index2irq(i, &irq, &rdzero)) {
+> > > > > +        if (rdzero) {
+> > > > > +            env->hviprio[irq] = 0;
+> > > > > +        } else {
+> > > > > +            env->hviprio[irq] = env->miprio[irq];
+> > > > > +        }
+> > > > > +        i++;
+> > > > > +    }
+> > > > >  #endif
+> > > > >      cs->exception_index = EXCP_NONE;
+> > > > >      env->load_res = -1;
+> > > > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > > > > index f00c60c840..780d3f9058 100644
+> > > > > --- a/target/riscv/cpu.h
+> > > > > +++ b/target/riscv/cpu.h
+> > > > > @@ -157,12 +157,12 @@ struct CPURISCVState {
+> > > > >       */
+> > > > >      uint64_t mstatus;
+> > > > >
+> > > > > -    target_ulong mip;
+> > > > > +    uint64_t mip;
+> > > >
+> > > > This isn't right. MIP is a MXLEN-1 CSR. I didn't check but I assume
+> > > > all the other existing target_ulong CSRs are the same.
+> > >
+> > > When AIA is available the number of local interrupts are 64 for
+> > > both RV32 and RV64.
+> >
+> > Is that going to be reflected in the priv spec?
 >
-> Thanks, I think we will leverage the hard works you have done into our im=
-plementation.
-> However, I'm not sure I can catch up the deadline before v6.1's soft-free=
-ze.
-> But I think I can help to review the patches, at least we can speed up th=
-e review process.
+> The AIA spec is going to be separate from priv spec since
+> it is totally optional.
+>
+> This AIA local interrupt CSRs will be part of AIA spec and should
+> only be implemented if a RISC-V implementations wants to use
+> AIA.
+>
+> We have four types of changes as far as CSRs go:
+> 1) RV32 CSRs to support 64 local interrupts on RV32
 
-I just wanted to point out that in terms of *submitting* RISC-V
-patches for QEMU, don't worry about the soft-freeze dates.
+Hmmm... This isn't ideal. So implementations without AIA will have a
+Xlen MIP while implementations with AIA will have a 64-bit MIP?
 
-Feel free to send the patches during the freeze and they can be
-reviewed (but not merged, unless they fix a bug). I will even apply
-them to a local tree in preparation for the next merge window, after
-the release.
+I guess we just don't expose all of MIP, so it isn't that bad. Still
+that change should be it's own patch with good justification as why we
+aren't following the priv spec.
+
+> 2) Indirect CSRs to access local interrupt priorities
+> 3) Interrupt filtering CSRs
+> 4) IMSIC support CSRs
+
+New AIA CSRs are fine, it's just core changes that are more of a worry.
 
 Alistair
 
 >
-> Regarding qtest, I saw your head commit mentioned the repo you are using:=
- [1].
-> Is it okay to just grab the qtest from this repo?
+> From above #3 is totally optional and not implemented by this
+> patch whereas #4 is only required when platform has RISC-V IMSIC.
 >
-> [1]: https://github.com/romanheros/qemu/commit/bce1845ea9b079b4c360440292=
-dc47725d1b24ab
+> A platform can skip all four changes mentioned above, if the
+> platform only wants AIA APLIC to manage wired interrupts.
 >
-> Thanks,
-> Frank Chang
->
->>
->>
->> Regards,
->> Frank Chang
->>
->>>
->>>
->>> Regard,
->>> Frank Chang
->>>
->>>>
->>>> +    ready =3D get_xnxti_status(env);
->>>> +    if (ready) {
->>>> +        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
->>>> +                                  &clic_irq);
->>>> +        if (write_mask) {
->>>> +            bool edge =3D riscv_clic_edge_triggered(env->clic, clic_p=
-riv,
->>>> +                                                  cs->cpu_index, clic=
-_irq);
->>>> +            if (edge) {
->>>> +                riscv_clic_clean_pending(env->clic, clic_priv,
->>>> +                                         cs->cpu_index, clic_irq);
->>>> +            }
->>>> +            env->mintstatus =3D set_field(env->mintstatus,
->>>> +                                        MINTSTATUS_MIL, clic_il);
->>>> +            env->mcause =3D set_field(env->mcause, MCAUSE_EXCCODE, cl=
-ic_irq);
->>>> +        }
->>>> +        if (ret_value) {
->>>> +            *ret_value =3D (env->mtvt & ~0x3f) + sizeof(target_ulong)=
- * clic_irq;
->>>> +        }
->>>> +    } else {
->>>> +        if (ret_value) {
->>>> +            *ret_value =3D 0;
->>>> +        }
->>>> +    }
->>>> +    qemu_mutex_unlock_iothread();
->>>> +    return 0;
->>>> +}
->>>> +
->>>>  static int read_mintstatus(CPURISCVState *env, int csrno, target_ulon=
-g *val)
->>>>  {
->>>>      *val =3D env->mintstatus;
->>>> @@ -982,6 +1056,44 @@ static int rmw_sip(CPURISCVState *env, int csrno=
-, target_ulong *ret_value,
->>>>      return ret;
->>>>  }
->>>>
->>>> +static int rmw_snxti(CPURISCVState *env, int csrno, target_ulong *ret=
-_value,
->>>> +                     target_ulong new_value, target_ulong write_mask)
->>>> +{
->>>> +    int clic_priv, clic_il, clic_irq;
->>>> +    bool ready;
->>>> +    CPUState *cs =3D env_cpu(env);
->>>> +    if (write_mask) {
->>>> +        env->mstatus |=3D new_value & (write_mask & 0b11111);
->>>> +    }
->>>> +
->>>> +    qemu_mutex_lock_iothread();
->>>> +    ready =3D get_xnxti_status(env);
->>>> +    if (ready) {
->>>> +        riscv_clic_decode_exccode(env->exccode, &clic_priv, &clic_il,
->>>> +                                  &clic_irq);
->>>> +        if (write_mask) {
->>>> +            bool edge =3D riscv_clic_edge_triggered(env->clic, clic_p=
-riv,
->>>> +                                                  cs->cpu_index, clic=
-_irq);
->>>> +            if (edge) {
->>>> +                riscv_clic_clean_pending(env->clic, clic_priv,
->>>> +                                         cs->cpu_index, clic_irq);
->>>> +            }
->>>> +            env->mintstatus =3D set_field(env->mintstatus,
->>>> +                                        MINTSTATUS_SIL, clic_il);
->>>> +            env->scause =3D set_field(env->scause, SCAUSE_EXCCODE, cl=
-ic_irq);
->>>> +        }
->>>> +        if (ret_value) {
->>>> +            *ret_value =3D (env->stvt & ~0x3f) + sizeof(target_ulong)=
- * clic_irq;
->>>> +        }
->>>> +    } else {
->>>> +        if (ret_value) {
->>>> +            *ret_value =3D 0;
->>>> +        }
->>>> +    }
->>>> +    qemu_mutex_unlock_iothread();
->>>> +    return 0;
->>>> +}
->>>> +
->>>>  static int read_sintstatus(CPURISCVState *env, int csrno, target_ulon=
-g *val)
->>>>  {
->>>>      target_ulong mask =3D SINTSTATUS_SIL | SINTSTATUS_UIL;
->>>> @@ -1755,6 +1867,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
- {
->>>>
->>>>      /* Machine Mode Core Level Interrupt Controller */
->>>>      [CSR_MTVT] =3D { "mtvt", clic,  read_mtvt,  write_mtvt      },
->>>> +    [CSR_MNXTI] =3D { "mnxti", clic,  NULL,  NULL,  rmw_mnxti   },
->>>>      [CSR_MINTSTATUS] =3D { "mintstatus", clic,  read_mintstatus },
->>>>      [CSR_MINTTHRESH] =3D { "mintthresh", clic,  read_mintthresh,
->>>>                           write_mintthresh },
->>>> @@ -1766,6 +1879,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
- {
->>>>
->>>>      /* Supervisor Mode Core Level Interrupt Controller */
->>>>      [CSR_STVT] =3D { "stvt", clic,  read_stvt, write_stvt       },
->>>> +    [CSR_SNXTI] =3D { "snxti", clic,  NULL,  NULL,  rmw_snxti   },
->>>>
->>>>  #endif /* !CONFIG_USER_ONLY */
->>>>  };
->>>> --
->>>> 2.25.1
->>>>
->>>>
+> Regards,
+> Anup
 
