@@ -1,49 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lsygI-0002dm-5F
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Jun 2021 22:19:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44942)
+	id 1lsyjH-0004io-UZ
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Jun 2021 22:23:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45264)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lsygG-0002dZ-Pb; Mon, 14 Jun 2021 22:19:56 -0400
-Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:46612)
+ id 1lsyjG-0004fv-C3; Mon, 14 Jun 2021 22:23:02 -0400
+Received: from mail-yb1-xb34.google.com ([2607:f8b0:4864:20::b34]:38475)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1lsygE-0006rX-4e; Mon, 14 Jun 2021 22:19:56 -0400
-Received: by mail-yb1-xb2c.google.com with SMTP id h15so18190185ybm.13;
- Mon, 14 Jun 2021 19:19:53 -0700 (PDT)
+ id 1lsyjB-0000Pt-4I; Mon, 14 Jun 2021 22:23:02 -0400
+Received: by mail-yb1-xb34.google.com with SMTP id m9so18281209ybo.5;
+ Mon, 14 Jun 2021 19:22:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=O9uD6aWKXYltD+g34/3hmlccHRrUA5FZx/9w4qoju58=;
- b=cDySAgQjVJdwhEvP9SsxDcjJ4hVBIVwoiGGCgxLEd9xpMNQPEKPBUDtlAEcEqqEr/J
- tTHkMoMwWJlXl6dE1Y4QXPnuIttZNwnBW15UMOrGNdZo6AOYVsG0oQeXD89K1hpGp64o
- lTOAfeV4dKyHhLY03rwLHZHkLldWoJr3bbExnkGoH4vsWNmIiAUk5AdxkymLvx8zIDrj
- /CSvR0j/F9C60nN89ObY8Mp2wJZE5Zv1ptfRrxptbArUBqrYcKjdrqDPNatVenyiGpmC
- 3QCDf3JaUyu8O+tZ5aSgmlbY0hK5B3yrPLSWfcFpHn6ZxfJUSXO6GO2lgHrMToO5cjoD
- z/Ww==
+ bh=cpacIx7ph9RH78da4ilbgw/oX9NN+B0XqtZA5rt90T8=;
+ b=EGLRH2rV0zazdU6g6tulnJlKy7MBij0JNTIrRFM3FPCGfWReYio1CkBYyzXsqZN4+0
+ Nw0P8kCdzOv/hH2uWeLsr4DTdxRpRbZUFr0ZpXCHziS9BtQpnUdR7tMY7oQ9E7u1ksDI
+ VimdVmtsrv8DF5hu3HAJ6ZVzyzkXQOlS4Q3wJSoV20u4UIFtG1RvLzTx8GFv3bDBoepm
+ Cb/e92djiKgrKGnKVOgzQ/x68kn3VuDpnQkKA9k22sxxHyh+oPh/JwMNQ0yAFvILw9Q+
+ Qow0D3FKIO9zTpczyk77epNfSZ2ZKqPH+BSJHPCfiqiYW3MLvCNx0IOD4r6Sd1gnr5G0
+ F7aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=O9uD6aWKXYltD+g34/3hmlccHRrUA5FZx/9w4qoju58=;
- b=X8ZJzrzDpQ6gtQsRTnPr9dVjrg0rD/Hiv6lzfxmBNmfrDNepBU9Fig0VLwhvGPR4Ux
- Flu55eRiXCbj8joyqws2PsdFyZ1/pwAQeS8QspDyL4squFZnH1s2mRIvnw1Cf3h40qZt
- v+q1g3i4emjnQa36g4omyI30vkFoZh3pYNVJ6Jv+5oS6Z+8p7k+kjoqWNFMC/Zg8mJwK
- VGmxPtdGg8RW1LeaUvAJEnlTgepMx2RVBFdrn8qdfnmpNmoLeWL3B0Gjm3mrbqrQ0zbs
- XodRYOosKsgJxIUmFS25gZYCoFDvlMByG+TIR5kvWw451DGkayHL9L2N0/ltpG6PDpR6
- RPhw==
-X-Gm-Message-State: AOAM533L4/Mcu28gUMkker+KCai4ULYqOswIVYtEhRQ8vYzOi/7n0Zt9
- ncrtNOrpW07y1iw1UrxXFItOxsywUa1WhpUNzSA=
-X-Google-Smtp-Source: ABdhPJyV64OpUhZclVnVWcmt8JsFJrUlKSRFyekw5IJdsxPAVNzQICNOK+MxOQvhsCIo+1iQrcH1oB4j+VaDhN4b90o=
-X-Received: by 2002:a25:b8c:: with SMTP id 134mr29314849ybl.332.1623723592453; 
- Mon, 14 Jun 2021 19:19:52 -0700 (PDT)
+ bh=cpacIx7ph9RH78da4ilbgw/oX9NN+B0XqtZA5rt90T8=;
+ b=bMlTzYlvR5uRDVIwcAvRbMj+gpliHt+7MhQ1rGrBkCzcwchIjRmaNI1E998u0N1g7m
+ g2DPazLq8iEpmUrPMEbav+MyoIqRs3ifKdWs1qM/6bx63MpbxVHur1n6FeECcJmpbRPW
+ k7s2/d8vvQARjaHZEkqBgZfFPPxLoQJMkMLghf0YkqoohlZvcAdbvWnqJxnXyPjyqSzQ
+ PunkKTHg+UDTRd5rLmkp4ahUHiX3Bj52ZOcIuqrZ6u2WgQ2tNKwL+dLx+qJkwjUF3fvD
+ lOjPNvPMmdx8dMPUjKj4na7lmUhMOs/5d5wKEeNkeyPwg+e8jMnPAWjN+i1fd7Bnin6c
+ 0Z/A==
+X-Gm-Message-State: AOAM532dwFvXKE+IM3NNIO3YY3N56KKqBfzPegQbvVJcYEEUW+5B9UzY
+ +/eZAnMmcYca8vVCDroz2JJDZ7vkgnsyviAfjKM=
+X-Google-Smtp-Source: ABdhPJzSGA+Tm8IyeJBwT4Hc1ktjMdPxuMZLOWuKyLJ32FFl6X0GOO8Psxqpu6qZbmqnGgH+byuUbxWUGHj6QzQjZLI=
+X-Received: by 2002:a25:be09:: with SMTP id h9mr29949062ybk.239.1623723775814; 
+ Mon, 14 Jun 2021 19:22:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210613141222.548357-1-lukas.juenger@greensocs.com>
  <20210613141222.548357-2-lukas.juenger@greensocs.com>
-In-Reply-To: <20210613141222.548357-2-lukas.juenger@greensocs.com>
+ <CAEUhbmUXnrXM_-YhjJavG4rDxm1m28XSsQZyd27jeyrNgLELfw@mail.gmail.com>
+In-Reply-To: <CAEUhbmUXnrXM_-YhjJavG4rDxm1m28XSsQZyd27jeyrNgLELfw@mail.gmail.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 15 Jun 2021 10:19:41 +0800
-Message-ID: <CAEUhbmUXnrXM_-YhjJavG4rDxm1m28XSsQZyd27jeyrNgLELfw@mail.gmail.com>
+Date: Tue, 15 Jun 2021 10:22:44 +0800
+Message-ID: <CAEUhbmUHwnPnoaX4Pt40-JGjrPniA9a1cDzyQqSjXzuaSbBAZw@mail.gmail.com>
 Subject: Re: [PATCH v3 1/2] hw/char: sifive_uart
 To: =?UTF-8?Q?Lukas_J=C3=BCnger?= <lukas.juenger@greensocs.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -54,8 +55,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, luc.michel@greensocs.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2c;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b34;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb34.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -75,18 +76,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jun 2021 02:19:57 -0000
+X-List-Received-Date: Tue, 15 Jun 2021 02:23:02 -0000
 
-On Sun, Jun 13, 2021 at 10:12 PM Lukas J=C3=BCnger
-<lukas.juenger@greensocs.com> wrote:
+On Tue, Jun 15, 2021 at 10:19 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Make function names consistent
+> On Sun, Jun 13, 2021 at 10:12 PM Lukas J=C3=BCnger
+> <lukas.juenger@greensocs.com> wrote:
+> >
+> > Make function names consistent
+> >
+> > Signed-off-by: Lukas J=C3=BCnger <lukas.juenger@greensocs.com>
+> > ---
+> >  hw/char/sifive_uart.c | 46 ++++++++++++++++++++++---------------------
+> >  1 file changed, 24 insertions(+), 22 deletions(-)
+> >
 >
-> Signed-off-by: Lukas J=C3=BCnger <lukas.juenger@greensocs.com>
-> ---
->  hw/char/sifive_uart.c | 46 ++++++++++++++++++++++---------------------
->  1 file changed, 24 insertions(+), 22 deletions(-)
->
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Please reword the commit title to make it something meaningful. Please
+do the same for patch 2.
+
+Regards,
+Bin
 
