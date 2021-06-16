@@ -1,52 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ltRly-0000mz-LD
-	for mharc-qemu-riscv@gnu.org; Wed, 16 Jun 2021 05:23:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42940)
+	id 1ltYkE-0004zo-Ug
+	for mharc-qemu-riscv@gnu.org; Wed, 16 Jun 2021 12:50:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43800)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lukas.juenger@greensocs.com>)
- id 1ltRlw-0000kV-7z; Wed, 16 Jun 2021 05:23:44 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:33666)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lukas.juenger@greensocs.com>)
- id 1ltRlp-0001oV-RO; Wed, 16 Jun 2021 05:23:44 -0400
-Received: from fornax.fritz.box (b2b-109-90-5-113.unitymedia.biz
- [109.90.5.113])
- by beetle.greensocs.com (Postfix) with ESMTPSA id A435421C39;
- Wed, 16 Jun 2021 09:23:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1623835415;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dumAtD2jQ33cfjV7tNOTMaJOWUwYua1Ch5E+iqbW2gk=;
- b=YWnM2Zlo8ZXzL/EFQ1MRLFuyygH6mdVMaKOZd/XI9fdu7XdLvXZ312nwL3sznVi3cjFExe
- 2GpM3bhYsl1t9o3Lv8Vqs6ALrUOZ0zD/+VgeISN2qWjGkZni6RSKNgUyJODmTLlOCoF4o6
- ysYuQ+6Y6ah6innYGmD4hnoNdlnMLtc=
-From: =?UTF-8?q?Lukas=20J=C3=BCnger?= <lukas.juenger@greensocs.com>
-To: qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com,
- qemu-riscv@nongnu.org, marcandre.lureau@redhat.com, pbonzini@redhat.com,
- luc.michel@greensocs.com, mark.burton@greensocs.com,
- =?UTF-8?q?Lukas=20J=C3=BCnger?= <lukas.juenger@greensocs.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v5 2/2] hw/char: QOMify sifive_uart
-Date: Wed, 16 Jun 2021 11:23:26 +0200
-Message-Id: <20210616092326.59639-3-lukas.juenger@greensocs.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210616092326.59639-1-lukas.juenger@greensocs.com>
-References: <20210616092326.59639-1-lukas.juenger@greensocs.com>
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1ltYkA-0004v9-6q; Wed, 16 Jun 2021 12:50:22 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330]:34656)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1ltYk7-0003MT-Ks; Wed, 16 Jun 2021 12:50:21 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ u5-20020a7bc0450000b02901480e40338bso3532080wmc.1; 
+ Wed, 16 Jun 2021 09:50:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=DvH+cXjA3m55CQLql8Rhm8nZdzWIDbYaIwl2Wc0exj0=;
+ b=nZK0oWrD5D4ZgZdCwddd5KNb9On/GRtXulffxDQe42L7mfD+8kOHwTj0fjrGtfXKWb
+ O1/mGqtCnftQHiPy5cS4p8AHdqlmQNjhs9XigvNDTsnN6TtFuMB/KLZhzNb1qKkdSxMB
+ q9bwapRdWOlw4BoHOLOV0anCnSRs+V5goi2LCnWfzZxnb52JMLQFR+DXIoka3AKHVYdQ
+ I3dQX6WjS9xk0QdG0Aqzhr6tDG1EqepjrnI6oLXhptG0xAjBP/8NIjhy751bpBtQqt2h
+ Hu6kD2cayWtqwHgRB9M8b6sqbeV5E8GeGDJMsICpDW5o8kI7b4UxlMju+YjkMEKKL/yH
+ Orsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+ :date:user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=DvH+cXjA3m55CQLql8Rhm8nZdzWIDbYaIwl2Wc0exj0=;
+ b=FE2WruKMmbNHIBTOK9j2Kr6DP9pYRiKPtmd7Ejvcfcf2ieRD3bxGXludHhV5dU+BZs
+ eCux8Pzg/KZTstgffFbq7auUw3v50E28jcXU9bUF6LMt8mUTuyXibRrhSrETIzHq9Va3
+ hwipeea5+QYaawNzHiTyHxAdBwn+Xy3mF0VuiP8E2Xj86tzluua+BpRdFw1F87v+MU7R
+ tOc4HZCMMJin4/B4NFCh1oTF3sO4Q5jLsvnwDw+zE9KZm0XrcIAfwG8h0WuYCrE6ta47
+ EdkDiOvaOgINfuVFBcyMjpyi7L1LqAwnGAgCof5pypMZFiWq/9+5ZKRAJJzpEutE0Pp5
+ 0Vcw==
+X-Gm-Message-State: AOAM533tYYPnrMVwgqnqaZmg6gF9glJgLS+9+nsimymmjqkcP94nvoCA
+ gKcDhQz2tI4UHyFV5SCerjM=
+X-Google-Smtp-Source: ABdhPJz8UTBk5pBrc/eoji3NEUOKtCEir/aXQMDcqYE0ZLXhFHBA7PVOQATU/O26eKZDj04jISSY7g==
+X-Received: by 2002:a1c:f70b:: with SMTP id v11mr910021wmh.186.1623862217088; 
+ Wed, 16 Jun 2021 09:50:17 -0700 (PDT)
+Received: from [192.168.1.36] (93.red-83-35-24.dynamicip.rima-tde.net.
+ [83.35.24.93])
+ by smtp.gmail.com with ESMTPSA id n42sm5441469wms.29.2021.06.16.09.50.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 16 Jun 2021 09:50:16 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Subject: Re: [PATCH 16/21] linux-user/riscv: Implement setup_sigtramp
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alex.bennee@linaro.org, laurent@vivier.eu
+References: <20210616011209.1446045-1-richard.henderson@linaro.org>
+ <20210616011209.1446045-17-richard.henderson@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+Message-ID: <9d712d66-ad8d-e08c-e793-dbb06264e19a@amsat.org>
+Date: Wed, 16 Jun 2021 18:50:14 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20210616011209.1446045-17-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=5.135.226.135;
- envelope-from=lukas.juenger@greensocs.com; helo=beetle.greensocs.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x330.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.248,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.17,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -59,197 +83,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2021 09:23:44 -0000
+X-List-Received-Date: Wed, 16 Jun 2021 16:50:22 -0000
 
-This QOMifies the SiFive UART model. Migration and reset have been
-implemented.
+On 6/16/21 3:12 AM, Richard Henderson wrote:
+> Create and record the rt signal trampoline.
+> 
+> This fixes a bug wrt libgcc fallback unwinding.  It expects
+> the stack pointer to point to the siginfo_t, whereas we had
+> inexplicably placed our private signal trampoline at the start
+> of the signal frame instead of the end.  Now moot because we
+> have removed it from the stack frame entirely.
+> 
+> Cc: qemu-riscv@nongnu.org
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  linux-user/riscv/target_signal.h |  2 ++
+>  linux-user/riscv/signal.c        | 22 +++++++++++++---------
+>  2 files changed, 15 insertions(+), 9 deletions(-)
 
-Signed-off-by: Lukas Jünger <lukas.juenger@greensocs.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
----
- include/hw/char/sifive_uart.h |  11 ++--
- hw/char/sifive_uart.c         | 114 +++++++++++++++++++++++++++++++---
- 2 files changed, 109 insertions(+), 16 deletions(-)
-
-diff --git a/include/hw/char/sifive_uart.h b/include/hw/char/sifive_uart.h
-index 3e962be659..7f6c79f8bd 100644
---- a/include/hw/char/sifive_uart.h
-+++ b/include/hw/char/sifive_uart.h
-@@ -21,6 +21,7 @@
- #define HW_SIFIVE_UART_H
- 
- #include "chardev/char-fe.h"
-+#include "hw/qdev-properties.h"
- #include "hw/sysbus.h"
- #include "qom/object.h"
- 
-@@ -49,12 +50,10 @@ enum {
- 
- #define SIFIVE_UART_GET_TXCNT(txctrl)   ((txctrl >> 16) & 0x7)
- #define SIFIVE_UART_GET_RXCNT(rxctrl)   ((rxctrl >> 16) & 0x7)
-+#define SIFIVE_UART_RX_FIFO_SIZE 8
- 
- #define TYPE_SIFIVE_UART "riscv.sifive.uart"
--
--typedef struct SiFiveUARTState SiFiveUARTState;
--DECLARE_INSTANCE_CHECKER(SiFiveUARTState, SIFIVE_UART,
--                         TYPE_SIFIVE_UART)
-+OBJECT_DECLARE_SIMPLE_TYPE(SiFiveUARTState, SIFIVE_UART)
- 
- struct SiFiveUARTState {
-     /*< private >*/
-@@ -64,8 +63,8 @@ struct SiFiveUARTState {
-     qemu_irq irq;
-     MemoryRegion mmio;
-     CharBackend chr;
--    uint8_t rx_fifo[8];
--    unsigned int rx_fifo_len;
-+    uint8_t rx_fifo[SIFIVE_UART_RX_FIFO_SIZE];
-+    uint8_t rx_fifo_len;
-     uint32_t ie;
-     uint32_t ip;
-     uint32_t txctrl;
-diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
-index 5df8212961..278e21c434 100644
---- a/hw/char/sifive_uart.c
-+++ b/hw/char/sifive_uart.c
-@@ -19,10 +19,12 @@
- #include "qemu/osdep.h"
- #include "qapi/error.h"
- #include "qemu/log.h"
-+#include "migration/vmstate.h"
- #include "chardev/char.h"
- #include "chardev/char-fe.h"
- #include "hw/irq.h"
- #include "hw/char/sifive_uart.h"
-+#include "hw/qdev-properties-system.h"
- 
- /*
-  * Not yet implemented:
-@@ -175,20 +177,112 @@ static int sifive_uart_be_change(void *opaque)
-     return 0;
- }
- 
-+static Property sifive_uart_properties[] = {
-+    DEFINE_PROP_CHR("chardev", SiFiveUARTState, chr),
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
-+static void sifive_uart_init(Object *obj)
-+{
-+    SysBusDevice *sbd = SYS_BUS_DEVICE(obj);
-+    SiFiveUARTState *s = SIFIVE_UART(obj);
-+
-+    memory_region_init_io(&s->mmio, OBJECT(s), &sifive_uart_ops, s,
-+                          TYPE_SIFIVE_UART, SIFIVE_UART_MAX);
-+    sysbus_init_mmio(sbd, &s->mmio);
-+    sysbus_init_irq(sbd, &s->irq);
-+}
-+
-+static void sifive_uart_realize(DeviceState *dev, Error **errp)
-+{
-+    SiFiveUARTState *s = SIFIVE_UART(dev);
-+
-+    qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uart_rx,
-+                             sifive_uart_event, sifive_uart_be_change, s,
-+                             NULL, true);
-+
-+}
-+
-+static void sifive_uart_reset_enter(Object *obj, ResetType type)
-+{
-+    SiFiveUARTState *s = SIFIVE_UART(obj);
-+    s->ie = 0;
-+    s->ip = 0;
-+    s->txctrl = 0;
-+    s->rxctrl = 0;
-+    s->div = 0;
-+    s->rx_fifo_len = 0;
-+}
-+
-+static void sifive_uart_reset_hold(Object *obj)
-+{
-+    SiFiveUARTState *s = SIFIVE_UART(obj);
-+    qemu_irq_lower(s->irq);
-+}
-+
-+static const VMStateDescription vmstate_sifive_uart = {
-+    .name = TYPE_SIFIVE_UART,
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINT8_ARRAY(rx_fifo, SiFiveUARTState,
-+                            SIFIVE_UART_RX_FIFO_SIZE),
-+        VMSTATE_UINT8(rx_fifo_len, SiFiveUARTState),
-+        VMSTATE_UINT32(ie, SiFiveUARTState),
-+        VMSTATE_UINT32(ip, SiFiveUARTState),
-+        VMSTATE_UINT32(txctrl, SiFiveUARTState),
-+        VMSTATE_UINT32(rxctrl, SiFiveUARTState),
-+        VMSTATE_UINT32(div, SiFiveUARTState),
-+        VMSTATE_END_OF_LIST()
-+    },
-+};
-+
-+
-+static void sifive_uart_class_init(ObjectClass *oc, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(oc);
-+    ResettableClass *rc = RESETTABLE_CLASS(oc);
-+
-+    dc->realize = sifive_uart_realize;
-+    dc->vmsd = &vmstate_sifive_uart;
-+    rc->phases.enter = sifive_uart_reset_enter;
-+    rc->phases.hold  = sifive_uart_reset_hold;
-+    device_class_set_props(dc, sifive_uart_properties);
-+}
-+
-+static const TypeInfo sifive_uart_info = {
-+    .name          = TYPE_SIFIVE_UART,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(SiFiveUARTState),
-+    .instance_init = sifive_uart_init,
-+    .class_init    = sifive_uart_class_init,
-+};
-+
-+static void sifive_uart_register_types(void)
-+{
-+    type_register_static(&sifive_uart_info);
-+}
-+
-+type_init(sifive_uart_register_types)
-+
- /*
-  * Create UART device.
-  */
- SiFiveUARTState *sifive_uart_create(MemoryRegion *address_space, hwaddr base,
-     Chardev *chr, qemu_irq irq)
- {
--    SiFiveUARTState *s = g_malloc0(sizeof(SiFiveUARTState));
--    s->irq = irq;
--    qemu_chr_fe_init(&s->chr, chr, &error_abort);
--    qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uart_rx,
--                             sifive_uart_event, sifive_uart_be_change, s,
--                             NULL, true);
--    memory_region_init_io(&s->mmio, NULL, &sifive_uart_ops, s,
--                          TYPE_SIFIVE_UART, SIFIVE_UART_MAX);
--    memory_region_add_subregion(address_space, base, &s->mmio);
--    return s;
-+    DeviceState *dev;
-+    SysBusDevice *s;
-+    SiFiveUARTState *r;
-+
-+    dev = qdev_new("riscv.sifive.uart");
-+    s = SYS_BUS_DEVICE(dev);
-+    qdev_prop_set_chr(dev, "chardev", chr);
-+    sysbus_realize_and_unref(s, &error_fatal);
-+    memory_region_add_subregion(address_space, base,
-+                                sysbus_mmio_get_region(s, 0));
-+    sysbus_connect_irq(s, 0, irq);
-+
-+    r = SIFIVE_UART(dev);
-+    return r;
- }
--- 
-2.31.1
-
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
