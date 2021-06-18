@@ -1,62 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lu8N4-00061z-Ty
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Jun 2021 02:52:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52940)
+	id 1lu8XB-0001b5-1C
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Jun 2021 03:03:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54572)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lu8N2-00061e-Us; Fri, 18 Jun 2021 02:52:52 -0400
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:42603)
+ id 1lu8X9-0001aj-5X; Fri, 18 Jun 2021 03:03:19 -0400
+Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c]:40750)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lu8My-0003ha-Bs; Fri, 18 Jun 2021 02:52:52 -0400
-Received: by mail-io1-xd32.google.com with SMTP id v3so156385ioq.9;
- Thu, 17 Jun 2021 23:52:47 -0700 (PDT)
+ id 1lu8X6-0003tm-Qb; Fri, 18 Jun 2021 03:03:18 -0400
+Received: by mail-io1-xd2c.google.com with SMTP id l64so5954964ioa.7;
+ Fri, 18 Jun 2021 00:03:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=i94g9ARNeI7KxyUrOB8dudF9uczD0Hoa1Y7pTveH370=;
- b=SQdeuoqmCdTVNiBIK0CTQjF7nBDVxBZv+msD0C0uR+Vks3wPMDGy2mzyriWp3lBuQa
- E91jcTmXEtKtS6nEpDKsooDbtU1PIvFL6s27tW1+ZQnxQJ4j2WkvjQlgLieieRLzv2+X
- TKdfpWkmO2r1TD882XVUj1EnqfYqrHG/mJGa9maAQK8JMh3YKowqyPDeo8tUleLQ3NAg
- EWboW1OOwRXnprdespEVHYGvEQkj4PqAoQUuMbfSMgtqAOfFjMBAxP0MKPTscB2YsInd
- S+R4C+eqbkmk1dTv+fNxiQTYmwwmEGpI4RnarVDNzRrY884oxXHV1LU++zZx1c1MWLKD
- qKpQ==
+ :cc; bh=5X/4/nkzLfoBwiMVzIa5NXVjagI+mBMH8kfiOpkIoOU=;
+ b=XsHytVEpOFGi3j1l6J+oUqu6eX3MVpH6z37IVPh/wz73x5rMYqTLIyui281h+ofFuN
+ KL3nA8OyhLXByHUKNYV1jKBdLH092O0pm07KraRjqiY5DD4kLuHdWpbBZaWBZA5VLMdt
+ Pv9tpV7vHNL2O1b9po6YgYgG8YDegaYDt83JqIAdoiDDTFz5J+z6md6fwiQ1Hz4ex6Vq
+ 7J7z2jAw6vXTIvOZBGaHRh6ASoD/LDeYituWUnQdnm0R8zSSgtixYwDm3dZ8TqoZ8QLQ
+ TQwpUYAy4JJiB6IXQE33Q9EibAyLjIKRPC7VuTBE251Gx2yi+ts8RpJqZfImAr92gB9u
+ WGsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=i94g9ARNeI7KxyUrOB8dudF9uczD0Hoa1Y7pTveH370=;
- b=sdsgQb3En9YwA6gGuQ0PkFrUarR5HR1ES9dtDnut9bZb+2jta4MET7E4BnmY/KIqQ+
- we3YtI/zjDCxuV2tdmLjBo6FjOVy3ZW87Ct+/2Yao/xXXX2NQNjdVYT7qftDFOooqvsh
- LG3Lsay0osVMJELWJSKUPfQYo1YGcY0J14R9Sjh4cmaR/JkC12RvOdvCfdfAWRS4hvkz
- 8wQHwjT3NQ30t/1bYYKLAbB7hlFTegQSqMa8nqYhHDplgZtL3/o2/AkGXg9tuj/0386d
- 5LSu1BqqkPHc/hlc0YWQr/gN8EY8WVlrrfkA2rjnfDoqqNn+TTbNB1ouYkiYpj9TH7M7
- GtEA==
-X-Gm-Message-State: AOAM530HlFI5lU1X8Yi1ijJTQiYo5d2kIs91Fo874hFDZYFt4eBUHDdl
- WN8rIavlnaLOuwLdIGEz1Wvpj5BexmIhBSJcNio=
-X-Google-Smtp-Source: ABdhPJySd2XqWh48iDyE6fbi97VZyUgrwTxkMRw6geXGUAxL7AjkD4GD88OSW0zi2TPGIWKL9UlzSNoIq9lxcnzqKFY=
-X-Received: by 2002:a02:8816:: with SMTP id r22mr1935989jai.135.1623999166924; 
- Thu, 17 Jun 2021 23:52:46 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=5X/4/nkzLfoBwiMVzIa5NXVjagI+mBMH8kfiOpkIoOU=;
+ b=piRq1nqDomHmP/7h3Uvej+l9QIzT9YlVf+FHYWcCo+6VAthJjfDPereWSNLoNXNELj
+ bGPfpkxhVCQSIz2gXPGFwzIRr8VhH1ui04MsLJWs6wkCXqTpETRaz8yKqTJa4Zp6617V
+ +G4+L/r7gU4XI1DrAEBg3xdSsAQT5HDeTU+rlzGXX32z549FtZaFYanxKkkWTiwe9L5D
+ skBsdMu60G+FrVTbPDgl+CmykOU/9eWSykEodcfxvgRNBPMRIE00RBYHgtrHlUczeyf8
+ 1ldFjU8WLBzs6dxk8WEJRLD2zV3TG0cs/Cp2ziHfPcQaFgRUHefEJLrPiwJWqs0dqVZS
+ RbSA==
+X-Gm-Message-State: AOAM5334ft8aVSUyr2/2oLCN8fSrgSd/ls/kDyd19BIVtd6wW8P/rUP5
+ rehLv5bZ+Ds6guyR+o0NJGq6I4J0T5rnvTjM0e8=
+X-Google-Smtp-Source: ABdhPJxfacj8r1X5XHOKbCi4PZFL/h7QAPwnKneJ0PcGEUyIrgf6WXqCWq91L8wljrFUpSpRs4Jkcoi0K0QI/iM36mE=
+X-Received: by 2002:a02:8784:: with SMTP id t4mr1968465jai.26.1623999794720;
+ Fri, 18 Jun 2021 00:03:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210616092326.59639-1-lukas.juenger@greensocs.com>
- <20210616092326.59639-3-lukas.juenger@greensocs.com>
-In-Reply-To: <20210616092326.59639-3-lukas.juenger@greensocs.com>
+References: <cover.1623196022.git.alistair.francis@wdc.com>
+ <b40ec8986ba8e7de3a3cf0ee4718b4868793be67.1623196022.git.alistair.francis@wdc.com>
+ <d3057566-0b3f-4fdc-73c6-323eb6366b8f@redhat.com>
+ <CAKmqyKNs5GwcGwRUZ8v17MJd40_STjOgqu-2vRU7ee21x79cKw@mail.gmail.com>
+ <e2d39538-ee41-97e5-f547-793229a998b0@redhat.com>
+In-Reply-To: <e2d39538-ee41-97e5-f547-793229a998b0@redhat.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 18 Jun 2021 16:52:20 +1000
-Message-ID: <CAKmqyKPpztO=L20WZarNCh4YbUKV=dNPL1fuWBhU+0oL8Gi09A@mail.gmail.com>
-Subject: Re: [PATCH v5 2/2] hw/char: QOMify sifive_uart
-To: =?UTF-8?Q?Lukas_J=C3=BCnger?= <lukas.juenger@greensocs.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Fri, 18 Jun 2021 17:02:48 +1000
+Message-ID: <CAKmqyKM5raxUZqJwnhF9Uzb7NoksTeE+HumMywZZBO-Pn30p3A@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] hw/timer: Initial commit of Ibex Timer
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Mark Burton <mark.burton@greensocs.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Luc Michel <luc.michel@greensocs.com>
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,212 +75,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jun 2021 06:52:53 -0000
+X-List-Received-Date: Fri, 18 Jun 2021 07:03:19 -0000
 
-On Wed, Jun 16, 2021 at 7:29 PM Lukas J=C3=BCnger
-<lukas.juenger@greensocs.com> wrote:
+On Fri, Jun 11, 2021 at 9:52 PM Paolo Bonzini <pbonzini@redhat.com> wrote:
 >
-> This QOMifies the SiFive UART model. Migration and reset have been
-> implemented.
+> On 11/06/21 01:01, Alistair Francis wrote:
+> > On Wed, Jun 9, 2021 at 5:57 PM Paolo Bonzini <pbonzini@redhat.com> wrote:
+> >>
+> >> On 09/06/21 01:48, Alistair Francis wrote:
+> >>> Add support for the Ibex timer. This is used with the RISC-V
+> >>> mtime/mtimecmp similar to the SiFive CLINT.
+> >>>
+> >>> We currently don't support changing the prescale or the timervalue.
+> >>>
+> >>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> >>
+> >> Any chance this could have a qtest?  It would also be nice if the CPU
+> >
+> > Yep, do you have a good example of what the qtest should look like?
 >
-> Signed-off-by: Lukas J=C3=BCnger <lukas.juenger@greensocs.com>
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Without having access to the IRQ line it's a bit hard to write it, but
+> the qtests for various real-time clocks are probably the closest.
+>
+> >> had qemu_irqs for MEIP/MTIP/SEIP (possibly MSIP too but that one is
+> >> bidirectional), so that instead of riscv_cpu_update_mip you can just
+> >> connect to a GPIO pin of the CPU and do qemu_set_irq.  It could also be
+> >> used by the qtests via irq_intercept_in.
+> >
+> > Yeah the riscv_cpu_update_mip() is not ideal. As it is what we
+> > currently also use for the CLINT I don't want to fix it up here. In
+> > the future I'll work on changing riscv_cpu_update_mip in all the
+> > RISC-V timers to use GPIO lines instead.
+>
+> If you add GPIO output pins to the CPU, the devices can be converted
+> away from riscv_cpu_update_mip one by one.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I've added this conversion to my TODO list and hopefully soon I'll be
+able to remove riscv_cpu_update_mip(), but I don't want to block this
+series or the ACLINT one on that.
+
+Then I can look at qtests.
 
 Alistair
 
-> ---
->  include/hw/char/sifive_uart.h |  11 ++--
->  hw/char/sifive_uart.c         | 114 +++++++++++++++++++++++++++++++---
->  2 files changed, 109 insertions(+), 16 deletions(-)
 >
-> diff --git a/include/hw/char/sifive_uart.h b/include/hw/char/sifive_uart.=
-h
-> index 3e962be659..7f6c79f8bd 100644
-> --- a/include/hw/char/sifive_uart.h
-> +++ b/include/hw/char/sifive_uart.h
-> @@ -21,6 +21,7 @@
->  #define HW_SIFIVE_UART_H
->
->  #include "chardev/char-fe.h"
-> +#include "hw/qdev-properties.h"
->  #include "hw/sysbus.h"
->  #include "qom/object.h"
->
-> @@ -49,12 +50,10 @@ enum {
->
->  #define SIFIVE_UART_GET_TXCNT(txctrl)   ((txctrl >> 16) & 0x7)
->  #define SIFIVE_UART_GET_RXCNT(rxctrl)   ((rxctrl >> 16) & 0x7)
-> +#define SIFIVE_UART_RX_FIFO_SIZE 8
->
->  #define TYPE_SIFIVE_UART "riscv.sifive.uart"
-> -
-> -typedef struct SiFiveUARTState SiFiveUARTState;
-> -DECLARE_INSTANCE_CHECKER(SiFiveUARTState, SIFIVE_UART,
-> -                         TYPE_SIFIVE_UART)
-> +OBJECT_DECLARE_SIMPLE_TYPE(SiFiveUARTState, SIFIVE_UART)
->
->  struct SiFiveUARTState {
->      /*< private >*/
-> @@ -64,8 +63,8 @@ struct SiFiveUARTState {
->      qemu_irq irq;
->      MemoryRegion mmio;
->      CharBackend chr;
-> -    uint8_t rx_fifo[8];
-> -    unsigned int rx_fifo_len;
-> +    uint8_t rx_fifo[SIFIVE_UART_RX_FIFO_SIZE];
-> +    uint8_t rx_fifo_len;
->      uint32_t ie;
->      uint32_t ip;
->      uint32_t txctrl;
-> diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
-> index 5df8212961..278e21c434 100644
-> --- a/hw/char/sifive_uart.c
-> +++ b/hw/char/sifive_uart.c
-> @@ -19,10 +19,12 @@
->  #include "qemu/osdep.h"
->  #include "qapi/error.h"
->  #include "qemu/log.h"
-> +#include "migration/vmstate.h"
->  #include "chardev/char.h"
->  #include "chardev/char-fe.h"
->  #include "hw/irq.h"
->  #include "hw/char/sifive_uart.h"
-> +#include "hw/qdev-properties-system.h"
->
->  /*
->   * Not yet implemented:
-> @@ -175,20 +177,112 @@ static int sifive_uart_be_change(void *opaque)
->      return 0;
->  }
->
-> +static Property sifive_uart_properties[] =3D {
-> +    DEFINE_PROP_CHR("chardev", SiFiveUARTState, chr),
-> +    DEFINE_PROP_END_OF_LIST(),
-> +};
-> +
-> +static void sifive_uart_init(Object *obj)
-> +{
-> +    SysBusDevice *sbd =3D SYS_BUS_DEVICE(obj);
-> +    SiFiveUARTState *s =3D SIFIVE_UART(obj);
-> +
-> +    memory_region_init_io(&s->mmio, OBJECT(s), &sifive_uart_ops, s,
-> +                          TYPE_SIFIVE_UART, SIFIVE_UART_MAX);
-> +    sysbus_init_mmio(sbd, &s->mmio);
-> +    sysbus_init_irq(sbd, &s->irq);
-> +}
-> +
-> +static void sifive_uart_realize(DeviceState *dev, Error **errp)
-> +{
-> +    SiFiveUARTState *s =3D SIFIVE_UART(dev);
-> +
-> +    qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uart_rx=
-,
-> +                             sifive_uart_event, sifive_uart_be_change, s=
-,
-> +                             NULL, true);
-> +
-> +}
-> +
-> +static void sifive_uart_reset_enter(Object *obj, ResetType type)
-> +{
-> +    SiFiveUARTState *s =3D SIFIVE_UART(obj);
-> +    s->ie =3D 0;
-> +    s->ip =3D 0;
-> +    s->txctrl =3D 0;
-> +    s->rxctrl =3D 0;
-> +    s->div =3D 0;
-> +    s->rx_fifo_len =3D 0;
-> +}
-> +
-> +static void sifive_uart_reset_hold(Object *obj)
-> +{
-> +    SiFiveUARTState *s =3D SIFIVE_UART(obj);
-> +    qemu_irq_lower(s->irq);
-> +}
-> +
-> +static const VMStateDescription vmstate_sifive_uart =3D {
-> +    .name =3D TYPE_SIFIVE_UART,
-> +    .version_id =3D 1,
-> +    .minimum_version_id =3D 1,
-> +    .fields =3D (VMStateField[]) {
-> +        VMSTATE_UINT8_ARRAY(rx_fifo, SiFiveUARTState,
-> +                            SIFIVE_UART_RX_FIFO_SIZE),
-> +        VMSTATE_UINT8(rx_fifo_len, SiFiveUARTState),
-> +        VMSTATE_UINT32(ie, SiFiveUARTState),
-> +        VMSTATE_UINT32(ip, SiFiveUARTState),
-> +        VMSTATE_UINT32(txctrl, SiFiveUARTState),
-> +        VMSTATE_UINT32(rxctrl, SiFiveUARTState),
-> +        VMSTATE_UINT32(div, SiFiveUARTState),
-> +        VMSTATE_END_OF_LIST()
-> +    },
-> +};
-> +
-> +
-> +static void sifive_uart_class_init(ObjectClass *oc, void *data)
-> +{
-> +    DeviceClass *dc =3D DEVICE_CLASS(oc);
-> +    ResettableClass *rc =3D RESETTABLE_CLASS(oc);
-> +
-> +    dc->realize =3D sifive_uart_realize;
-> +    dc->vmsd =3D &vmstate_sifive_uart;
-> +    rc->phases.enter =3D sifive_uart_reset_enter;
-> +    rc->phases.hold  =3D sifive_uart_reset_hold;
-> +    device_class_set_props(dc, sifive_uart_properties);
-> +}
-> +
-> +static const TypeInfo sifive_uart_info =3D {
-> +    .name          =3D TYPE_SIFIVE_UART,
-> +    .parent        =3D TYPE_SYS_BUS_DEVICE,
-> +    .instance_size =3D sizeof(SiFiveUARTState),
-> +    .instance_init =3D sifive_uart_init,
-> +    .class_init    =3D sifive_uart_class_init,
-> +};
-> +
-> +static void sifive_uart_register_types(void)
-> +{
-> +    type_register_static(&sifive_uart_info);
-> +}
-> +
-> +type_init(sifive_uart_register_types)
-> +
->  /*
->   * Create UART device.
->   */
->  SiFiveUARTState *sifive_uart_create(MemoryRegion *address_space, hwaddr =
-base,
->      Chardev *chr, qemu_irq irq)
->  {
-> -    SiFiveUARTState *s =3D g_malloc0(sizeof(SiFiveUARTState));
-> -    s->irq =3D irq;
-> -    qemu_chr_fe_init(&s->chr, chr, &error_abort);
-> -    qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uart_rx=
-,
-> -                             sifive_uart_event, sifive_uart_be_change, s=
-,
-> -                             NULL, true);
-> -    memory_region_init_io(&s->mmio, NULL, &sifive_uart_ops, s,
-> -                          TYPE_SIFIVE_UART, SIFIVE_UART_MAX);
-> -    memory_region_add_subregion(address_space, base, &s->mmio);
-> -    return s;
-> +    DeviceState *dev;
-> +    SysBusDevice *s;
-> +    SiFiveUARTState *r;
-> +
-> +    dev =3D qdev_new("riscv.sifive.uart");
-> +    s =3D SYS_BUS_DEVICE(dev);
-> +    qdev_prop_set_chr(dev, "chardev", chr);
-> +    sysbus_realize_and_unref(s, &error_fatal);
-> +    memory_region_add_subregion(address_space, base,
-> +                                sysbus_mmio_get_region(s, 0));
-> +    sysbus_connect_irq(s, 0, irq);
-> +
-> +    r =3D SIFIVE_UART(dev);
-> +    return r;
->  }
-> --
-> 2.31.1
->
+> Paolo
 >
 
