@@ -1,56 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lvSJo-00064X-RR
-	for mharc-qemu-riscv@gnu.org; Mon, 21 Jun 2021 18:23:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34664)
+	id 1lvSZz-0005xd-51
+	for mharc-qemu-riscv@gnu.org; Mon, 21 Jun 2021 18:39:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37126)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lvSJn-00063g-1v; Mon, 21 Jun 2021 18:22:59 -0400
-Received: from mail-il1-x135.google.com ([2607:f8b0:4864:20::135]:46056)
+ id 1lvSZx-0005xP-MH; Mon, 21 Jun 2021 18:39:41 -0400
+Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:35763)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lvSJl-0004eM-4m; Mon, 21 Jun 2021 18:22:58 -0400
-Received: by mail-il1-x135.google.com with SMTP id b5so4763874ilc.12;
- Mon, 21 Jun 2021 15:22:55 -0700 (PDT)
+ id 1lvSZw-0006hs-3M; Mon, 21 Jun 2021 18:39:41 -0400
+Received: by mail-il1-x12c.google.com with SMTP id a11so9988613ilf.2;
+ Mon, 21 Jun 2021 15:39:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=IiE1VKGqWYXwFp1RDBwFB2Fjdyg+oNCDkKyRqq51QsA=;
- b=UGP0WLksAyXec5N+FZPTZLCW0ojyUbXpGYi4VAWKNyDZDtspRk8As5Q6rFPiZ0UjSH
- igbsMlJFIKwQbC0Wyc/ROnin4hEyPmmV9jQ6aDzekoGGKlTmrIcoaj+llRmERUmQ4OKV
- bso4Ip9xPWQ18vK7u0k8+CVheZK3iSPnaqGNbfCs20QoiRlIEyu1NX7DRZie3MO0/mRL
- lql9u26pz/S79yj7j1nHTYbzp4nwChpJ3kjnLSxnnMTswecP/+m1mJuKpUpMuw6SkFWj
- w0ayJFi2T6fIgeoguCqh7t8FWchMdQnUac2Sd0Y4fV4q1RYYm7kHTZ62n2r8vKAwFcmo
- UIfg==
+ :cc; bh=BCpVOd+aZQP2Np1xIhNdcbPkBUCJGXERSD47ey1TAKs=;
+ b=p+gFbD2/9jBeq+yQkZWD+GOPH66CcbMJsUlIzUEbf5xiQCbp5k5L5GsaXyMdXj1c8s
+ UsE1jtDXEOZSxZDD2Q7vlRKiSTR2ftLvSOi9uovsqDYU9q3IAURjZFb3o7nHf78rXlQg
+ SsEWr8/9mPB06+4/aJLMUfxFR9CCcPCETi3ANwbMKsFZ38GhuumjfIr1cOOW3JiG3BYS
+ KG8z8wCgIVLrQqVvd0Emwi6AJsaUNaYZ+oRjsUp3zQHrteJ+SZPCJNSPh9Q392Un6WSd
+ wx9fxez6iHexvseZRjlbnqpyxOJ8KB6BnFkwcLsltAjrj74K+of1DOZRy5P72S2lMhc/
+ dWmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=IiE1VKGqWYXwFp1RDBwFB2Fjdyg+oNCDkKyRqq51QsA=;
- b=gZmhUXaPCT9rlNLPkLxyYueqlGQ0LCq08oAoW2QhH/2lBuliNy5L0vDC0b6QHz5fFT
- 21V+18vDY+UaCyZUBRDcnbZWS8k/NgqGWEI2kd6pSX1M8GmmB2sSpMbOdpws2wsqSme1
- AahY6VxjOHiP7BpYi7GkZTon1OWqVGcv5tjAyNLR+DkKzIBdpsWvoJuI1rzX7GBzuf9Y
- llIXEJxp0GgXs539bLKo0IJAGRnt9ilSPk5seEm/AepljW1ztoyxCrC2aRs8QVhIj5mk
- yXk6AbE8Tbp4nwm1pjkN068y385j2IqTf7tT/+TKnL0PFDkPPW8ZpdXsYyN4JQHKWwG4
- fPPg==
-X-Gm-Message-State: AOAM530TmCblSlx717NZjdNEQuJMZkmPMAQR7tUJGfj0xmtQPi7dN2Xy
- pgueU843EKjyucLFL2cajX8E7DfeE3Ptnr3XKqY=
-X-Google-Smtp-Source: ABdhPJzf6avQX+i07+iU4fhjkLJrQnyFJdRcMDOgb9mTacl0jI26LqUndVhCEMCtdySPbaujZseEmA7gcuHsoE8nqNg=
-X-Received: by 2002:a05:6e02:20c3:: with SMTP id
- 3mr324673ilq.131.1624314175004; 
- Mon, 21 Jun 2021 15:22:55 -0700 (PDT)
+ bh=BCpVOd+aZQP2Np1xIhNdcbPkBUCJGXERSD47ey1TAKs=;
+ b=b1wUjVueKMMG8Pw9/GK8Osfiydybn7EWC++oH1pb44ILpc/bTejVkL8kxdEJxcVLUf
+ aFPH/Mh24I1X98IzJk9qzujIIdW3+X1yVorSo7I5D4Yv+9RIVrSn3WYDHc1yUq1lwrAB
+ upUPfL/bYT90d1ukmCjnapS7BxFs90PJel2eXNVQma8TkGi50MTbWk4RducHxnambWP1
+ V8gXqsUiXVTXvAhG2hFKBgGnM7ow9S41u6UThU5C4lE2hPfJmI04i+WnbtrhpVVNUlS2
+ 2pgD7F7hD0MsGDYEmQKoEqtAzhPgv96kN5SQzmgXZEldX5mF0rmkLjNMY5xXNore9eCe
+ vAiQ==
+X-Gm-Message-State: AOAM53167rV1iXSpqryfe7662FEQf6JtpS54plBKVqtazgQOuF9KjSSH
+ OcOwcRdtloGoe59d/WPt0E55VAVQi4e5msV4Rc4=
+X-Google-Smtp-Source: ABdhPJy2gI0N1k8BdREB8/5ETgwiNZ/eN0w/WLVLl7cB2c8YQaEY9vXrtYfvIAnJczste4WLYDYt8PpLNTCZVZ+35ew=
+X-Received: by 2002:a05:6e02:dc7:: with SMTP id l7mr406770ilj.40.1624315178653; 
+ Mon, 21 Jun 2021 15:39:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210621013439.1791385-1-richard.henderson@linaro.org>
- <20210621013439.1791385-19-richard.henderson@linaro.org>
-In-Reply-To: <20210621013439.1791385-19-richard.henderson@linaro.org>
+References: <cover.1624001156.git.alistair.francis@wdc.com>
+In-Reply-To: <cover.1624001156.git.alistair.francis@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 22 Jun 2021 08:22:29 +1000
-Message-ID: <CAKmqyKMAKGtyidZ4n3AO3WEHRsDxKCiHMVrm+Q5yQqvyfeabmA@mail.gmail.com>
-Subject: Re: [PATCH 18/26] target/riscv: Use translator_use_goto_tb
-To: Richard Henderson <richard.henderson@linaro.org>
+Date: Tue, 22 Jun 2021 08:39:12 +1000
+Message-ID: <CAKmqyKMjdfAjvWVd+V2RPFMToGmitO2CSzKTk1t+=y9pM7bZUA@mail.gmail.com>
+Subject: Re: [PATCH v3 0/3] OpenTitan: Add support for the RISC-V timer
+To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::135;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x135.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -71,62 +70,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jun 2021 22:22:59 -0000
+X-List-Received-Date: Mon, 21 Jun 2021 22:39:42 -0000
 
-On Mon, Jun 21, 2021 at 11:47 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Fri, Jun 18, 2021 at 5:27 PM Alistair Francis
+<alistair.francis@wdc.com> wrote:
 >
-> Just use translator_use_goto_tb directly at the one call site,
-> rather than maintaining a local wrapper.
+> V3:
+>  - Fix the value of the "infinite timer"
 >
-> Cc: qemu-riscv@nongnu.org
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> Alistair Francis (3):
+>   hw/char/ibex_uart: Make the register layout private
+>   hw/timer: Initial commit of Ibex Timer
+>   hw/riscv: OpenTitan: Connect the mtime and mtimecmp timer
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/translate.c | 20 +-------------------
->  1 file changed, 1 insertion(+), 19 deletions(-)
 >
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index c6e8739614..ecd3764338 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -168,29 +168,11 @@ static void gen_exception_inst_addr_mis(DisasContext *ctx)
->      generate_exception_mtval(ctx, RISCV_EXCP_INST_ADDR_MIS);
->  }
+>  include/hw/char/ibex_uart.h   |  37 -----
+>  include/hw/riscv/opentitan.h  |   5 +-
+>  include/hw/timer/ibex_timer.h |  52 ++++++
+>  hw/char/ibex_uart.c           |  37 +++++
+>  hw/riscv/opentitan.c          |  14 +-
+>  hw/timer/ibex_timer.c         | 305 ++++++++++++++++++++++++++++++++++
+>  MAINTAINERS                   |   6 +-
+>  hw/timer/meson.build          |   1 +
+>  8 files changed, 412 insertions(+), 45 deletions(-)
+>  create mode 100644 include/hw/timer/ibex_timer.h
+>  create mode 100644 hw/timer/ibex_timer.c
 >
-> -static inline bool use_goto_tb(DisasContext *ctx, target_ulong dest)
-> -{
-> -    if (unlikely(ctx->base.singlestep_enabled)) {
-> -        return false;
-> -    }
-> -
-> -#ifndef CONFIG_USER_ONLY
-> -    return (ctx->base.tb->pc & TARGET_PAGE_MASK) == (dest & TARGET_PAGE_MASK);
-> -#else
-> -    return true;
-> -#endif
-> -}
-> -
->  static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
->  {
-> -    if (use_goto_tb(ctx, dest)) {
-> -        /* chaining is only allowed when the jump is to the same page */
-> +    if (translator_use_goto_tb(&ctx->base, dest)) {
->          tcg_gen_goto_tb(n);
->          tcg_gen_movi_tl(cpu_pc, dest);
-> -
-> -        /* No need to check for single stepping here as use_goto_tb() will
-> -         * return false in case of single stepping.
-> -         */
->          tcg_gen_exit_tb(ctx->base.tb, n);
->      } else {
->          tcg_gen_movi_tl(cpu_pc, dest);
 > --
-> 2.25.1
->
+> 2.31.1
 >
 
