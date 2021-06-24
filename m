@@ -1,63 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lvSZz-0005xd-51
-	for mharc-qemu-riscv@gnu.org; Mon, 21 Jun 2021 18:39:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37126)
+	id 1lwIW4-0002B6-C5
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Jun 2021 02:07:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43202)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lvSZx-0005xP-MH; Mon, 21 Jun 2021 18:39:41 -0400
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:35763)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lvSZw-0006hs-3M; Mon, 21 Jun 2021 18:39:41 -0400
-Received: by mail-il1-x12c.google.com with SMTP id a11so9988613ilf.2;
- Mon, 21 Jun 2021 15:39:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BCpVOd+aZQP2Np1xIhNdcbPkBUCJGXERSD47ey1TAKs=;
- b=p+gFbD2/9jBeq+yQkZWD+GOPH66CcbMJsUlIzUEbf5xiQCbp5k5L5GsaXyMdXj1c8s
- UsE1jtDXEOZSxZDD2Q7vlRKiSTR2ftLvSOi9uovsqDYU9q3IAURjZFb3o7nHf78rXlQg
- SsEWr8/9mPB06+4/aJLMUfxFR9CCcPCETi3ANwbMKsFZ38GhuumjfIr1cOOW3JiG3BYS
- KG8z8wCgIVLrQqVvd0Emwi6AJsaUNaYZ+oRjsUp3zQHrteJ+SZPCJNSPh9Q392Un6WSd
- wx9fxez6iHexvseZRjlbnqpyxOJ8KB6BnFkwcLsltAjrj74K+of1DOZRy5P72S2lMhc/
- dWmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=BCpVOd+aZQP2Np1xIhNdcbPkBUCJGXERSD47ey1TAKs=;
- b=b1wUjVueKMMG8Pw9/GK8Osfiydybn7EWC++oH1pb44ILpc/bTejVkL8kxdEJxcVLUf
- aFPH/Mh24I1X98IzJk9qzujIIdW3+X1yVorSo7I5D4Yv+9RIVrSn3WYDHc1yUq1lwrAB
- upUPfL/bYT90d1ukmCjnapS7BxFs90PJel2eXNVQma8TkGi50MTbWk4RducHxnambWP1
- V8gXqsUiXVTXvAhG2hFKBgGnM7ow9S41u6UThU5C4lE2hPfJmI04i+WnbtrhpVVNUlS2
- 2pgD7F7hD0MsGDYEmQKoEqtAzhPgv96kN5SQzmgXZEldX5mF0rmkLjNMY5xXNore9eCe
- vAiQ==
-X-Gm-Message-State: AOAM53167rV1iXSpqryfe7662FEQf6JtpS54plBKVqtazgQOuF9KjSSH
- OcOwcRdtloGoe59d/WPt0E55VAVQi4e5msV4Rc4=
-X-Google-Smtp-Source: ABdhPJy2gI0N1k8BdREB8/5ETgwiNZ/eN0w/WLVLl7cB2c8YQaEY9vXrtYfvIAnJczste4WLYDYt8PpLNTCZVZ+35ew=
-X-Received: by 2002:a05:6e02:dc7:: with SMTP id l7mr406770ilj.40.1624315178653; 
- Mon, 21 Jun 2021 15:39:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1lwIW2-0002Ae-2J; Thu, 24 Jun 2021 02:07:06 -0400
+Received: from out28-170.mail.aliyun.com ([115.124.28.170]:52217)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1lwIVw-0008NT-KX; Thu, 24 Jun 2021 02:07:05 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07982182|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_social|0.118672-0.000276864-0.881051;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047213; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KXAcAyA_1624514809; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.KXAcAyA_1624514809)
+ by smtp.aliyun-inc.com(10.147.41.137);
+ Thu, 24 Jun 2021 14:06:50 +0800
+Subject: Re: [PATCH v2 04/37] target/riscv: 8-bit Addition & Subtraction
+ Instruction
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ Palmer Dabbelt <palmerdabbelt@google.com>
+References: <20210610075908.3305506-1-zhiwei_liu@c-sky.com>
+ <20210610075908.3305506-5-zhiwei_liu@c-sky.com>
+ <cdb22947-9ca7-9353-b189-a70a94d7c7ab@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <32f0b6c2-bd7b-ce7d-2aba-b36e9b89d46d@c-sky.com>
+Date: Thu, 24 Jun 2021 14:05:46 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <cover.1624001156.git.alistair.francis@wdc.com>
-In-Reply-To: <cover.1624001156.git.alistair.francis@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 22 Jun 2021 08:39:12 +1000
-Message-ID: <CAKmqyKMjdfAjvWVd+V2RPFMToGmitO2CSzKTk1t+=y9pM7bZUA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/3] OpenTitan: Add support for the RISC-V timer
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+In-Reply-To: <cdb22947-9ca7-9353-b189-a70a94d7c7ab@linaro.org>
+Content-Type: multipart/alternative;
+ boundary="------------A6A93B8149E5807FE31110C8"
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.170; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-170.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -70,39 +57,177 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jun 2021 22:39:42 -0000
+X-List-Received-Date: Thu, 24 Jun 2021 06:07:06 -0000
 
-On Fri, Jun 18, 2021 at 5:27 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
->
-> V3:
->  - Fix the value of the "infinite timer"
->
-> Alistair Francis (3):
->   hw/char/ibex_uart: Make the register layout private
->   hw/timer: Initial commit of Ibex Timer
->   hw/riscv: OpenTitan: Connect the mtime and mtimecmp timer
+This is a multi-part message in MIME format.
+--------------A6A93B8149E5807FE31110C8
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Thanks!
 
-Applied to riscv-to-apply.next
+On 2021/6/11 上午3:39, Richard Henderson wrote:
+> On 6/10/21 12:58 AM, LIU Zhiwei wrote:
+>>   include/tcg/tcg-op-gvec.h |  6 ++
+>>   tcg/tcg-op-gvec.c                       | 47 ++++++++++++++++
+>
+> Likewise, should be split from the larger patch.
+>
+>> +static void gen_addv_mask_i32(TCGv_i32 d, TCGv_i32 a, TCGv_i32 b, 
+>> TCGv_i32 m)
+>> +{
+>> +    TCGv_i32 t1 = tcg_temp_new_i32();
+>> +    TCGv_i32 t2 = tcg_temp_new_i32();
+>> +    TCGv_i32 t3 = tcg_temp_new_i32();
+>> +
+>> +    tcg_gen_andc_i32(t1, a, m);
+>> +    tcg_gen_andc_i32(t2, b, m);
+>> +    tcg_gen_xor_i32(t3, a, b);
+>> +    tcg_gen_add_i32(d, t1, t2);
+>> +    tcg_gen_and_i32(t3, t3, m);
+>> +    tcg_gen_xor_i32(d, d, t3);
+>> +
+>> +    tcg_temp_free_i32(t1);
+>> +    tcg_temp_free_i32(t2);
+>> +    tcg_temp_free_i32(t3);
+>> +}
+>> +
+>> +void tcg_gen_vec_add8_i32(TCGv_i32 d, TCGv_i32 a, TCGv_i32 b)
+>> +{
+>> +    TCGv_i32 m = tcg_constant_i32((int32_t)dup_const(MO_8, 0x80));
+>> +    gen_addv_mask_i32(d, a, b, m);
+>> +}
+>
+> There will only ever be one use; we might as well merge them.
+OK
+> The cast is unnecessary.
 
-Alistair
+I meet compiler error report without cast. So I just keep it.
+
+../tcg/tcg-op-gvec.c: In function ‘tcg_gen_vec_sub8_i32’:
+/home/roman/git/qemu/include/tcg/tcg.h:1327:5: error: overflow in implicit constant conversion [-Werror=overflow]
+      (__builtin_constant_p(VECE)                                    \
+      ^
+../tcg/tcg-op-gvec.c:1947:35: note: in expansion of macro ‘dup_const’
+      TCGv_i32 m = tcg_constant_i32(dup_const(MO_8, 0x80));
+                                    ^~~~~~~~~
+cc1: all warnings being treated as errors
+
+Thanks,
+Zhiwei
 
 >
->  include/hw/char/ibex_uart.h   |  37 -----
->  include/hw/riscv/opentitan.h  |   5 +-
->  include/hw/timer/ibex_timer.h |  52 ++++++
->  hw/char/ibex_uart.c           |  37 +++++
->  hw/riscv/opentitan.c          |  14 +-
->  hw/timer/ibex_timer.c         | 305 ++++++++++++++++++++++++++++++++++
->  MAINTAINERS                   |   6 +-
->  hw/timer/meson.build          |   1 +
->  8 files changed, 412 insertions(+), 45 deletions(-)
->  create mode 100644 include/hw/timer/ibex_timer.h
->  create mode 100644 hw/timer/ibex_timer.c
 >
-> --
-> 2.31.1
->
+> r~
+
+--------------A6A93B8149E5807FE31110C8
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2021/6/11 上午3:39, Richard Henderson
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:cdb22947-9ca7-9353-b189-a70a94d7c7ab@linaro.org">On
+      6/10/21 12:58 AM, LIU Zhiwei wrote:
+      <br>
+      <blockquote type="cite">  include/tcg/tcg-op-gvec.h              
+        |  6 ++
+        <br>
+          tcg/tcg-op-gvec.c                       | 47 ++++++++++++++++
+        <br>
+      </blockquote>
+      <br>
+      Likewise, should be split from the larger patch.
+      <br>
+      <br>
+      <blockquote type="cite">+static void gen_addv_mask_i32(TCGv_i32 d,
+        TCGv_i32 a, TCGv_i32 b, TCGv_i32 m)
+        <br>
+        +{
+        <br>
+        +    TCGv_i32 t1 = tcg_temp_new_i32();
+        <br>
+        +    TCGv_i32 t2 = tcg_temp_new_i32();
+        <br>
+        +    TCGv_i32 t3 = tcg_temp_new_i32();
+        <br>
+        +
+        <br>
+        +    tcg_gen_andc_i32(t1, a, m);
+        <br>
+        +    tcg_gen_andc_i32(t2, b, m);
+        <br>
+        +    tcg_gen_xor_i32(t3, a, b);
+        <br>
+        +    tcg_gen_add_i32(d, t1, t2);
+        <br>
+        +    tcg_gen_and_i32(t3, t3, m);
+        <br>
+        +    tcg_gen_xor_i32(d, d, t3);
+        <br>
+        +
+        <br>
+        +    tcg_temp_free_i32(t1);
+        <br>
+        +    tcg_temp_free_i32(t2);
+        <br>
+        +    tcg_temp_free_i32(t3);
+        <br>
+        +}
+        <br>
+        +
+        <br>
+        +void tcg_gen_vec_add8_i32(TCGv_i32 d, TCGv_i32 a, TCGv_i32 b)
+        <br>
+        +{
+        <br>
+        +    TCGv_i32 m = tcg_constant_i32((int32_t)dup_const(MO_8,
+        0x80));
+        <br>
+        +    gen_addv_mask_i32(d, a, b, m);
+        <br>
+        +}
+        <br>
+      </blockquote>
+      <br>
+      There will only ever be one use; we might as well merge them.
+      <br>
+    </blockquote>
+    OK<br>
+    <blockquote type="cite"
+      cite="mid:cdb22947-9ca7-9353-b189-a70a94d7c7ab@linaro.org">The
+      cast is unnecessary.
+      <br>
+    </blockquote>
+    <p>I meet compiler error report without cast. So I just keep it.</p>
+    <pre>../tcg/tcg-op-gvec.c: In function ‘tcg_gen_vec_sub8_i32’:
+/home/roman/git/qemu/include/tcg/tcg.h:1327:5: error: overflow in implicit constant conversion [-Werror=overflow]
+     (__builtin_constant_p(VECE)                                    \
+     ^
+../tcg/tcg-op-gvec.c:1947:35: note: in expansion of macro ‘dup_const’
+     TCGv_i32 m = tcg_constant_i32(dup_const(MO_8, 0x80));
+                                   ^~~~~~~~~
+cc1: all warnings being treated as errors
+</pre>
+    <p>Thanks,<br>
+      Zhiwei<br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:cdb22947-9ca7-9353-b189-a70a94d7c7ab@linaro.org">
+      <br>
+      <br>
+      r~
+      <br>
+    </blockquote>
+  </body>
+</html>
+
+--------------A6A93B8149E5807FE31110C8--
 
